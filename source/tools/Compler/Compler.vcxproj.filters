@@ -15,8 +15,79 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Compiler.cpp">
+    <ClCompile Include="Compiler.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="c.tab.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lex.yy.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="symbol.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="args\arg_cmd.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="args\arg_date.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="args\arg_dbl.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="args\arg_dstr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="args\arg_end.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="args\arg_file.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="args\arg_getopt_long.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="args\arg_hashtable.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="args\arg_int.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="args\arg_lit.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="args\arg_rem.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="args\arg_rex.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="args\arg_str.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="args\arg_utils.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="args\argtable3.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="global.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c.tab.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="args\arg_getopt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="args\argtable3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="args\argtable3_private.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

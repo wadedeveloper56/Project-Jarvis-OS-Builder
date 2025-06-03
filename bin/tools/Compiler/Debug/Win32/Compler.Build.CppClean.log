@@ -1,8 +1,8 @@
 c:\projects\projectjarvis\bin\tools\compiler\debug\win32\vc143.pdb
 c:\projects\projectjarvis\bin\tools\compiler\debug\win32\vc143.idb
 c:\projects\projectjarvis\bin\tools\compiler\debug\win32\compiler.obj
-c:\projects\projectjarvis\bin\tools\compiler\debug\${platform}\compler.exe
-c:\projects\projectjarvis\bin\tools\compiler\debug\${platform}\compler.pdb
+c:\projects\projectjarvis\bin\tools\compiler\debug\win32\compler.exe
+c:\projects\projectjarvis\bin\tools\compiler\debug\win32\compler.pdb
 c:\projects\projectjarvis\bin\tools\compiler\debug\win32\compler.ilk
 c:\projects\projectjarvis\bin\tools\compiler\debug\win32\compler.tlog\cl.command.1.tlog
 c:\projects\projectjarvis\bin\tools\compiler\debug\win32\compler.tlog\cl.items.tlog

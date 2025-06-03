@@ -1,7 +1,7 @@
 c:\projects\projectjarvis\bin\tools\compiler\release\x64\vc143.pdb
 c:\projects\projectjarvis\bin\tools\compiler\release\x64\compiler.obj
-c:\projects\projectjarvis\bin\tools\compiler\release\${platform}\compler.exe
-c:\projects\projectjarvis\bin\tools\compiler\release\${platform}\compler.pdb
+c:\projects\projectjarvis\bin\tools\compiler\release\x64\compler.exe
+c:\projects\projectjarvis\bin\tools\compiler\release\x64\compler.pdb
 c:\projects\projectjarvis\bin\tools\compiler\release\x64\compler.ipdb
 c:\projects\projectjarvis\bin\tools\compiler\release\x64\compler.iobj
 c:\projects\projectjarvis\bin\tools\compiler\release\x64\compler.tlog\cl.command.1.tlog

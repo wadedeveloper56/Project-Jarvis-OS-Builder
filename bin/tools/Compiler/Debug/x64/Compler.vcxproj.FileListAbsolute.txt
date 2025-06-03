@@ -1,1 +1,1 @@
-C:\projects\ProjectJarvis\bin\tools\Compiler\Debug\x64\Compler.exe
+C:\projects\ProjectJarvis\bin\tools\Compiler\Debug\x64\Compiler.exe

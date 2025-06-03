@@ -24,6 +24,7 @@
     <ProjectGuid>{f000ad45-87d7-499a-9901-e9c6a6c272b6}</ProjectGuid>
     <RootNamespace>Compler</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>Compiler</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -90,7 +91,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -104,7 +105,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -116,7 +117,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -130,7 +131,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -139,7 +140,32 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Compiler.cpp" />
+    <ClCompile Include="args\argtable3.c" />
+    <ClCompile Include="args\arg_cmd.c" />
+    <ClCompile Include="args\arg_date.c" />
+    <ClCompile Include="args\arg_dbl.c" />
+    <ClCompile Include="args\arg_dstr.c" />
+    <ClCompile Include="args\arg_end.c" />
+    <ClCompile Include="args\arg_file.c" />
+    <ClCompile Include="args\arg_getopt_long.c" />
+    <ClCompile Include="args\arg_hashtable.c" />
+    <ClCompile Include="args\arg_int.c" />
+    <ClCompile Include="args\arg_lit.c" />
+    <ClCompile Include="args\arg_rem.c" />
+    <ClCompile Include="args\arg_rex.c" />
+    <ClCompile Include="args\arg_str.c" />
+    <ClCompile Include="args\arg_utils.c" />
+    <ClCompile Include="c.tab.c" />
+    <ClCompile Include="Compiler.c" />
+    <ClCompile Include="lex.yy.c" />
+    <ClCompile Include="symbol.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="args\argtable3.h" />
+    <ClInclude Include="args\argtable3_private.h" />
+    <ClInclude Include="args\arg_getopt.h" />
+    <ClInclude Include="c.tab.h" />
+    <ClInclude Include="global.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
