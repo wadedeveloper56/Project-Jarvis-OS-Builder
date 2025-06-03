@@ -28,8 +28,8 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  ******************************************************************************/
 
-#ifndef ARGTABLE3
-#define ARGTABLE3
+#ifndef ARGUMENTTABLE
+#define ARGUMENTTABLE
 
 #include <stdio.h> /* FILE */
 #include <time.h>  /* struct tm */

@@ -2,3 +2,4 @@ C:\projects\ProjectJarvis\source\tools\Compiler\c.tab.c;C:\projects\ProjectJarvi
 C:\projects\ProjectJarvis\source\tools\Compiler\Compiler.c;C:\projects\ProjectJarvis\bin\tools\Compiler\Debug\x64\Compiler.obj
 C:\projects\ProjectJarvis\source\tools\Compiler\lex.yy.c;C:\projects\ProjectJarvis\bin\tools\Compiler\Debug\x64\lex.yy.obj
 C:\projects\ProjectJarvis\source\tools\Compiler\symbol.c;C:\projects\ProjectJarvis\bin\tools\Compiler\Debug\x64\symbol.obj
+C:\projects\ProjectJarvis\source\tools\Compiler\Variables.c;C:\projects\ProjectJarvis\bin\tools\Compiler\Debug\x64\Variables.obj

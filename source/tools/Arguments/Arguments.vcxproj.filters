@@ -15,13 +15,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="arg_getopt.h">
+    <ClInclude Include="ArgumentTable_GetOpt.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="argtable3.h">
+    <ClInclude Include="ArgumentTable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="argtable3_private.h">
+    <ClInclude Include="ArgumentTable_Private.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="pch.h">

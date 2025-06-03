@@ -151,9 +151,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="argtable3.h" />
-    <ClInclude Include="argtable3_private.h" />
-    <ClInclude Include="arg_getopt.h" />
+    <ClInclude Include="ArgumentTable.h" />
+    <ClInclude Include="ArgumentTable_Private.h" />
+    <ClInclude Include="ArgumentTable_GetOpt.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>

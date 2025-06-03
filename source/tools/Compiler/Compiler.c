@@ -30,13 +30,9 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  ******************************************************************************/
 #include "global.h"
-#include "argtable3.h"
+#include "ArgumentTable.h"
 
-Boolean bit16 = FALSE;
-Boolean bit32 = FALSE;
-Boolean bit64 = FALSE;
-
-int initializeLexicalAnalysis(char* fileInput) {
+int initializeLexicalAnalysis(const char* fileInput) {
 	int error;
 	yyin = fopen(fileInput, "r");
 
@@ -64,7 +60,7 @@ int endLexicalAnalysis() {
 	return error;
 }
 
-int initializeSyntacticAnalysis(char* fileOutput) {
+int initializeSyntacticAnalysis(const char* fileOutput) {
 	int error;
 
 	yyout = fopen(fileOutput, "w");
@@ -119,12 +115,26 @@ int endSyntacticAnalysis() {
 int setArguments(int bitSize, const char* outfile,int v,const char** infiles, int ninfiles) {
 	int i;
 
-	if (v > 0) printf("verbose is enabled (-v)\n");
-	printf("output is \"%s\"\n", outfile);
-	printf("bit size=%d bits\n", bitSize);
+	if (bitSize == 16) bit16 = TRUE;
+	if (bitSize == 32) bit32 = TRUE;
+	if (bitSize == 64) bit64 = TRUE;
 
-	for (i = 0; i < ninfiles; i++)
-		printf("infile[%d]=\"%s\"\n", i, infiles[i]);
+	fileLexLog = fopen("test1.log","w");
+
+	if (initializeLexicalAnalysis(infiles[0]) == EXIT_SUCCESS) {
+		if (initializeSyntacticAnalysis(outfile) == EXIT_SUCCESS) {
+			symanticAnalysis();
+			if (v > 0) fprintf(yyout, "verbose is enabled (-v)\n");
+			fprintf(yyout, "output is \"%s\"\n", outfile);
+			fprintf(yyout, "bit size=%d bits\n", bitSize);
+			for (i = 0; i < ninfiles; i++) {
+				fprintf(yyout, "infile[%d]=\"%s\"\n", i, infiles[i]);
+			}
+			endLexicalAnalysis();
+			endSyntacticAnalysis();
+		}
+	}
+
 
 	return 0;
 }

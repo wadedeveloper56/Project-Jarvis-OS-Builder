@@ -34,6 +34,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdarg.h>
+#include <errno.h>
 #include <io.h>
 
 #define YY_NO_UNISTD_H
@@ -137,5 +138,8 @@ extern int column;
 extern int num_errors;
 extern FILE* yyin;
 extern FILE* yyout;
+extern Boolean bit16;
+extern Boolean bit32;
+extern Boolean bit64;
 
 #endif

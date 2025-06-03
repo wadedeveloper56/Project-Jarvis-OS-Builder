@@ -15,10 +15,6 @@ FS	(f|F|l|L)
 IS  ((u|U)|(u|U)?(l|L|ll|LL)|(l|L|ll|LL)(u|U))
 
 %{
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <stdarg.h>
 #include "global.h"
 #include "c.tab.h"
 

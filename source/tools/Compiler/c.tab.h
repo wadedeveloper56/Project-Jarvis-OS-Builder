@@ -143,7 +143,7 @@ extern int yydebug;
 typedef union YYSTYPE
 {
 /* Line 2058 of yacc.c  */
-#line 9 "c.y"
+#line 5 "c.y"
  	   
     struct CompilerInfo {   
        char *identifier;     

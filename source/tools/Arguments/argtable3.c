@@ -30,12 +30,12 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  ******************************************************************************/
 #include "pch.h"
-#include "argtable3.h"
+#include "ArgumentTable.h"
 
 #ifndef ARG_AMALGAMATION
-#include "argtable3_private.h"
+#include "ArgumentTable_Private.h"
 #if ARG_REPLACE_GETOPT == 1
-#include "arg_getopt.h"
+#include "ArgumentTable_GetOpt.h"
 #else
 #include <getopt.h>
 #endif

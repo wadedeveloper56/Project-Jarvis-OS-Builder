@@ -30,8 +30,10 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  ******************************************************************************/
 #include "pch.h"
+#include "ArgumentTable.h"
+
 #ifndef ARG_AMALGAMATION
-#include "argtable3_private.h"
+#include "ArgumentTable_Private.h"
 #endif
 
 #include <math.h>
