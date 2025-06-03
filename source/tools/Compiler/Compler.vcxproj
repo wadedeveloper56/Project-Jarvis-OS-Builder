@@ -93,6 +93,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\projects\ProjectJarvis\source\tools\Arguments;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -107,6 +108,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\projects\ProjectJarvis\source\tools\Arguments;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -119,6 +121,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\projects\ProjectJarvis\source\tools\Arguments;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -133,6 +136,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\projects\ProjectJarvis\source\tools\Arguments;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -140,32 +144,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="args\argtable3.c" />
-    <ClCompile Include="args\arg_cmd.c" />
-    <ClCompile Include="args\arg_date.c" />
-    <ClCompile Include="args\arg_dbl.c" />
-    <ClCompile Include="args\arg_dstr.c" />
-    <ClCompile Include="args\arg_end.c" />
-    <ClCompile Include="args\arg_file.c" />
-    <ClCompile Include="args\arg_getopt_long.c" />
-    <ClCompile Include="args\arg_hashtable.c" />
-    <ClCompile Include="args\arg_int.c" />
-    <ClCompile Include="args\arg_lit.c" />
-    <ClCompile Include="args\arg_rem.c" />
-    <ClCompile Include="args\arg_rex.c" />
-    <ClCompile Include="args\arg_str.c" />
-    <ClCompile Include="args\arg_utils.c" />
     <ClCompile Include="c.tab.c" />
     <ClCompile Include="Compiler.c" />
     <ClCompile Include="lex.yy.c" />
     <ClCompile Include="symbol.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="args\argtable3.h" />
-    <ClInclude Include="args\argtable3_private.h" />
-    <ClInclude Include="args\arg_getopt.h" />
     <ClInclude Include="c.tab.h" />
     <ClInclude Include="global.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Arguments\Arguments.vcxproj">
+      <Project>{d336f6c2-22e2-4ffe-9f32-92211a55f5ce}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

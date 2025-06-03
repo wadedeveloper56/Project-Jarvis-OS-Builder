@@ -30,7 +30,7 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  ******************************************************************************/
 #include "global.h"
-#include "args/argtable3.h"
+#include "argtable3.h"
 
 Boolean bit16 = FALSE;
 Boolean bit32 = FALSE;

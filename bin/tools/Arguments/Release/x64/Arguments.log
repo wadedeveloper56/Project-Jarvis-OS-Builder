@@ -1,0 +1,17 @@
+﻿  argtable3.c
+  arg_cmd.c
+  arg_date.c
+  arg_dbl.c
+  arg_dstr.c
+  arg_end.c
+  arg_file.c
+  arg_getopt_long.c
+  arg_hashtable.c
+  arg_int.c
+  arg_lit.c
+  arg_rem.c
+  arg_rex.c
+  arg_str.c
+  arg_utils.c
+  pch.c
+  Arguments.vcxproj -> C:\projects\ProjectJarvis\bin\tools\Arguments\Release\x64\Arguments.lib

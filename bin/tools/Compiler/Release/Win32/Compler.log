@@ -1,25 +1,10 @@
 ﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(538,5): warning MSB8028: The intermediate directory (..\..\..\bin\tools\Compiler\Release\Win32\) contains files shared from another project (Compler.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  argtable3.c
-  arg_cmd.c
-  arg_date.c
-  arg_dbl.c
-  arg_dstr.c
-  arg_end.c
-  arg_file.c
-  arg_getopt_long.c
-  arg_hashtable.c
-  arg_int.c
-  arg_lit.c
-  arg_rem.c
-  arg_rex.c
-  arg_str.c
-  arg_utils.c
   c.tab.c
   Compiler.c
   lex.yy.c
   symbol.c
   Generating code
   Previous IPDB not found, fall back to full compilation.
-  All 116 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  All 77 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   Finished generating code
   Compler.vcxproj -> C:\projects\ProjectJarvis\bin\tools\Compiler\Release\Win32\Compiler.exe

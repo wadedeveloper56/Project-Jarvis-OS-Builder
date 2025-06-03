@@ -1,0 +1,16 @@
+C:\projects\ProjectJarvis\source\tools\Arguments\argtable3.c;C:\projects\ProjectJarvis\bin\tools\Arguments\Debug\Win32\argtable3.obj
+C:\projects\ProjectJarvis\source\tools\Arguments\arg_cmd.c;C:\projects\ProjectJarvis\bin\tools\Arguments\Debug\Win32\arg_cmd.obj
+C:\projects\ProjectJarvis\source\tools\Arguments\arg_date.c;C:\projects\ProjectJarvis\bin\tools\Arguments\Debug\Win32\arg_date.obj
+C:\projects\ProjectJarvis\source\tools\Arguments\arg_dbl.c;C:\projects\ProjectJarvis\bin\tools\Arguments\Debug\Win32\arg_dbl.obj
+C:\projects\ProjectJarvis\source\tools\Arguments\arg_dstr.c;C:\projects\ProjectJarvis\bin\tools\Arguments\Debug\Win32\arg_dstr.obj
+C:\projects\ProjectJarvis\source\tools\Arguments\arg_end.c;C:\projects\ProjectJarvis\bin\tools\Arguments\Debug\Win32\arg_end.obj
+C:\projects\ProjectJarvis\source\tools\Arguments\arg_file.c;C:\projects\ProjectJarvis\bin\tools\Arguments\Debug\Win32\arg_file.obj
+C:\projects\ProjectJarvis\source\tools\Arguments\arg_getopt_long.c;C:\projects\ProjectJarvis\bin\tools\Arguments\Debug\Win32\arg_getopt_long.obj
+C:\projects\ProjectJarvis\source\tools\Arguments\arg_hashtable.c;C:\projects\ProjectJarvis\bin\tools\Arguments\Debug\Win32\arg_hashtable.obj
+C:\projects\ProjectJarvis\source\tools\Arguments\arg_int.c;C:\projects\ProjectJarvis\bin\tools\Arguments\Debug\Win32\arg_int.obj
+C:\projects\ProjectJarvis\source\tools\Arguments\arg_lit.c;C:\projects\ProjectJarvis\bin\tools\Arguments\Debug\Win32\arg_lit.obj
+C:\projects\ProjectJarvis\source\tools\Arguments\arg_rem.c;C:\projects\ProjectJarvis\bin\tools\Arguments\Debug\Win32\arg_rem.obj
+C:\projects\ProjectJarvis\source\tools\Arguments\arg_rex.c;C:\projects\ProjectJarvis\bin\tools\Arguments\Debug\Win32\arg_rex.obj
+C:\projects\ProjectJarvis\source\tools\Arguments\arg_str.c;C:\projects\ProjectJarvis\bin\tools\Arguments\Debug\Win32\arg_str.obj
+C:\projects\ProjectJarvis\source\tools\Arguments\arg_utils.c;C:\projects\ProjectJarvis\bin\tools\Arguments\Debug\Win32\arg_utils.obj
+C:\projects\ProjectJarvis\source\tools\Arguments\pch.c;C:\projects\ProjectJarvis\bin\tools\Arguments\Debug\Win32\pch.obj
