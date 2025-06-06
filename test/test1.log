@@ -1,0 +1,34 @@
+4 REDUCE to type_specifier
+0 4 type_specifier REDUCE to declaration_specifiers
+'main' => IDENTIFIER REDUCE to direct_declarator
+'main' => direct_declarator OPENPAREN_OP CLOSEPAREN_OP REDUCE to direct_declarator
+'main' => direct_declarator REDUCE to declarator
+'0' CONSTANT REDUCE to primary_expression
+<EXP> primary_expression REDUCE to postfix_expression
+<EXP> postfix_expression REDUCE to unary_expression
+<EXP> unary_expression REDUCE to cast_expression
+<EXP> cast_expression REDUCE to multiplicative_expression
+<EXP> multiplicative_expression REDUCE to additive_expression
+<EXP> additive_expression REDUCE to shift_expression
+<EXP> shift_expression REDUCE to relational_expression
+<EXP> relational_expression REDUCE to equality_expression
+<EXP> equality_expression REDUCE to and_expression
+<EXP> and_expression REDUCE to exclusive_or_expression
+<EXP> exclusive_or_expression REDUCE to inclusive_or_expression
+<EXP> inclusive_or_expression REDUCE to logical_and_expression
+<EXP> logical_and_expression REDUCE to logical_or_expression
+<EXP> logical_or_expression REDUCE to conditional_expression
+<EXP> conditional_expression REDUCE to assignment_expression
+<EXP> assignment_expression REDUCE to expression
+<EXP> RETURN expression SEMI_OP REDUCE to jump_statement
+<EXP> jump_statement REDUCE to statement
+<EXP> statement REDUCE to block_item
+<EXP> block_item REDUCE to block_item_list
+<EXP> OCURLY_OP block_item_list CCURLY_OP REDUCE to compound_statement
+<EXP> declaration_specifiers declarator compound_statement REDUCE to function_definition
+'0 0 4 main' => function_definition REDUCE to external_declaration
+<EXP> external_declaration REDUCE to translation_unit
+output is "test1.asm"
+bit size=32 bits
+infile[0]="test1.c"
+log file ="test1.log"

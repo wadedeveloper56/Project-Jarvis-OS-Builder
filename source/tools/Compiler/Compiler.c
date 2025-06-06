@@ -119,17 +119,21 @@ int setArguments(int bitSize, const char* outfile,int v,const char** infiles, in
 	if (bitSize == 32) bit32 = TRUE;
 	if (bitSize == 64) bit64 = TRUE;
 
-	fileLexLog = fopen("test1.log","w");
+	_splitpath(infiles[0], drive, dir, fname, ext);
+	_makepath(logFileName, drive, dir, fname, "log");
+
+	fileLexLog = fopen(logFileName,"w");
 
 	if (initializeLexicalAnalysis(infiles[0]) == EXIT_SUCCESS) {
 		if (initializeSyntacticAnalysis(outfile) == EXIT_SUCCESS) {
 			symanticAnalysis();
-			if (v > 0) fprintf(yyout, "verbose is enabled (-v)\n");
-			fprintf(yyout, "output is \"%s\"\n", outfile);
-			fprintf(yyout, "bit size=%d bits\n", bitSize);
+			if (v > 0) fprintf(fileLexLog, "verbose is enabled (-v)\n");
+			fprintf(fileLexLog, "output is \"%s\"\n", outfile);
+			fprintf(fileLexLog, "bit size=%d bits\n", bitSize);
 			for (i = 0; i < ninfiles; i++) {
-				fprintf(yyout, "infile[%d]=\"%s\"\n", i, infiles[i]);
+				fprintf(fileLexLog, "infile[%d]=\"%s\"\n", i, infiles[i]);
 			}
+			fprintf(fileLexLog, "log file =\"%s\"\n", logFileName);
 			endLexicalAnalysis();
 			endSyntacticAnalysis();
 		}
