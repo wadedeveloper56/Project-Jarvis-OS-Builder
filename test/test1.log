@@ -1,3 +1,61 @@
+2 REDUCE to type_specifier
+0 2 type_specifier REDUCE to declaration_specifiers
+'var1' => IDENTIFIER REDUCE to direct_declarator
+'var1' => direct_declarator REDUCE to declarator
+'var1' => declarator REDUCE to init_declarator
+'var1' => init_declarator REDUCE to init_declarator_list
+'0 0 2 var1' => declaration_specifiers init_declarator_list SEMI_OP REDUCE to declaration
+'0 0 2 var1' => declaration REDUCE to external_declaration
+<EXP> external_declaration REDUCE to translation_unit
+3 REDUCE to type_specifier
+0 3 type_specifier REDUCE to declaration_specifiers
+'var2' => IDENTIFIER REDUCE to direct_declarator
+'var2' => direct_declarator REDUCE to declarator
+'var2' => declarator REDUCE to init_declarator
+'var2' => init_declarator REDUCE to init_declarator_list
+'0 0 3 var2' => declaration_specifiers init_declarator_list SEMI_OP REDUCE to declaration
+'0 0 3 var2' => declaration REDUCE to external_declaration
+<EXP> translation_unit external_declaration REDUCE to translation_unit
+4 REDUCE to type_specifier
+0 4 type_specifier REDUCE to declaration_specifiers
+'var3' => IDENTIFIER REDUCE to direct_declarator
+'var3' => direct_declarator REDUCE to declarator
+'var3' => declarator REDUCE to init_declarator
+'var3' => init_declarator REDUCE to init_declarator_list
+'0 0 4 var3' => declaration_specifiers init_declarator_list SEMI_OP REDUCE to declaration
+'0 0 4 var3' => declaration REDUCE to external_declaration
+<EXP> translation_unit external_declaration REDUCE to translation_unit
+5 REDUCE to type_specifier
+0 5 type_specifier REDUCE to declaration_specifiers
+'var4' => IDENTIFIER REDUCE to direct_declarator
+'var4' => direct_declarator REDUCE to declarator
+'var4' => declarator REDUCE to init_declarator
+'var4' => init_declarator REDUCE to init_declarator_list
+'0 0 5 var4' => declaration_specifiers init_declarator_list SEMI_OP REDUCE to declaration
+'0 0 5 var4' => declaration REDUCE to external_declaration
+<EXP> translation_unit external_declaration REDUCE to translation_unit
+6 REDUCE to type_specifier
+0 6 type_specifier REDUCE to declaration_specifiers
+'var5' => IDENTIFIER REDUCE to direct_declarator
+'var5' => direct_declarator REDUCE to declarator
+'var5' => declarator REDUCE to init_declarator
+'var5' => init_declarator REDUCE to init_declarator_list
+'0 0 6 var5' => declaration_specifiers init_declarator_list SEMI_OP REDUCE to declaration
+'0 0 6 var5' => declaration REDUCE to external_declaration
+<EXP> translation_unit external_declaration REDUCE to translation_unit
+4 REDUCE to type_specifier
+0 4 type_specifier REDUCE to declaration_specifiers
+'var6' => IDENTIFIER REDUCE to direct_declarator
+'var6' => direct_declarator REDUCE to declarator
+'var6' => declarator REDUCE to init_declarator
+'var6' => init_declarator REDUCE to init_declarator_list
+'var7' => IDENTIFIER REDUCE to direct_declarator
+'var7' => direct_declarator REDUCE to declarator
+'var7' => declarator REDUCE to init_declarator
+'var7' => init_declarator_list COMMA_OP init_declarator REDUCE to init_declarator_list
+'0 0 4 var7' => declaration_specifiers init_declarator_list SEMI_OP REDUCE to declaration
+'0 0 4 var7' => declaration REDUCE to external_declaration
+<EXP> translation_unit external_declaration REDUCE to translation_unit
 4 REDUCE to type_specifier
 0 4 type_specifier REDUCE to declaration_specifiers
 'main' => IDENTIFIER REDUCE to direct_declarator
@@ -27,7 +85,7 @@
 <EXP> OCURLY_OP block_item_list CCURLY_OP REDUCE to compound_statement
 <EXP> declaration_specifiers declarator compound_statement REDUCE to function_definition
 '0 0 4 main' => function_definition REDUCE to external_declaration
-<EXP> external_declaration REDUCE to translation_unit
+<EXP> translation_unit external_declaration REDUCE to translation_unit
 output is "test1.asm"
 bit size=32 bits
 infile[0]="test1.c"

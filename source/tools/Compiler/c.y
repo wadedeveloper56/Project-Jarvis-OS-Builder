@@ -302,7 +302,11 @@ init_declarator_list
                                                      $<CompilerInfo>$ = $<CompilerInfo>1;
 	                                                 fprintf(fileLexLog,"'%s' => init_declarator REDUCE to init_declarator_list\n",$<CompilerInfo>$.identifier);
 													}
-	| init_declarator_list COMMA_OP init_declarator {fprintf(fileLexLog,"init_declarator_list COMMA_OP init_declarator REDUCE to init_declarator_list\n");}
+	| init_declarator_list COMMA_OP init_declarator {
+	                                                 $<CompilerInfo>$ = $<CompilerInfo>3;
+	                                                 fprintf(fileLexLog,"'%s' => init_declarator_list COMMA_OP init_declarator REDUCE to init_declarator_list\n",$<CompilerInfo>$.identifier);
+													 addToSymbolTable($<CompilerInfo>3.identifier, $<CompilerInfo>3.type, $<CompilerInfo>3.sign, $<CompilerInfo>3.storage, $<CompilerInfo>3.declarationType, $<CompilerInfo>3.constant);
+	                                                }
 	;
 
 init_declarator
