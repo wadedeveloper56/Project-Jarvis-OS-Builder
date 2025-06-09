@@ -6,6 +6,6 @@
 //int var6,var7;
 //int var8[5];
 
-int main(){
+int main(int argc, char argv){
     return 0;
 }

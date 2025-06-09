@@ -122,6 +122,19 @@ typedef struct _DeclarationList {
    struct _DeclarationList *next;
 } DeclarationList,*DeclarationListPtr; 
 
+struct CompilerInfo {
+	char* identifier;
+	VariableType type;
+	VariableSignType sign;
+	StorageType storage;
+	DeclarationType declarationType;
+	Boolean constant;
+	ExpressionListPtr arrayExpression;
+	struct CompilerInfo* parameterList;
+
+	void* noDefinition;
+};
+
 int yylex();
 int yyparse();
 int yywrap();

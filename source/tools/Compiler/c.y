@@ -3,17 +3,7 @@
 %}
 
 %union { 	   
-    struct CompilerInfo {   
-       char *identifier;     
-       VariableType type;
-	   VariableSignType sign;
-	   StorageType storage;
-	   DeclarationType declarationType;
-	   Boolean constant; 
-       ExpressionListPtr arrayExpression;
-	   
-       void *noDefinition;	
-    } CompilerInfo;
+    struct CompilerInfo CompilerInfo;
 }
 
 %token<CompilerInfo> IDENTIFIER CONSTANT STRING_LITERAL
@@ -62,25 +52,25 @@ primary_expression
                                              strcpy($<CompilerInfo>$.identifier, $<CompilerInfo>1.identifier);
                                              $<CompilerInfo>$.type = TYPE_NULL;
                                              $<CompilerInfo>$.constant = FALSE;
-	                                         fprintf(fileLexLog,"IDENTIFIER REDUCE to primary_expression\n");
+	                                         fprintf(fileLexLog,"<EXP> IDENTIFIER REDUCE to primary_expression\n");
 											}
 	| CONSTANT                              {
 											 $<CompilerInfo>$.identifier = (char *) malloc(strlen($<CompilerInfo>1.identifier)+1);
                                              strcpy($<CompilerInfo>$.identifier, $<CompilerInfo>1.identifier);
                                              $<CompilerInfo>$.type = TYPE_NULL;
                                              $<CompilerInfo>$.constant = TRUE;
-	                                         fprintf(fileLexLog,"'%s' CONSTANT REDUCE to primary_expression\n",$<CompilerInfo>$.identifier);
+	                                         fprintf(fileLexLog,"<EXP> '%s' CONSTANT REDUCE to primary_expression\n",$<CompilerInfo>$.identifier);
 											}
 	| STRING_LITERAL                        {
 											 $<CompilerInfo>$.identifier = (char *) malloc(strlen($<CompilerInfo>1.identifier)+1);
                                              strcpy($<CompilerInfo>$.identifier, $<CompilerInfo>1.identifier);
                                              $<CompilerInfo>$.type = TYPE_NULL;
                                              $<CompilerInfo>$.constant = TRUE;
-	                                         fprintf(fileLexLog,"'%s' STRING_LITERAL REDUCE to primary_expression\n",$<CompilerInfo>$.identifier);
+	                                         fprintf(fileLexLog,"<EXP> '%s' STRING_LITERAL REDUCE to primary_expression\n",$<CompilerInfo>$.identifier);
 											}
 	| OPENPAREN_OP expression CLOSEPAREN_OP {
                                              $<CompilerInfo>$ = $<CompilerInfo>2;
-	                                         fprintf(fileLexLog,"OPENPAREN_OP expression CLOSEPAREN_OP REDUCE to primary_expression\n");
+	                                         fprintf(fileLexLog,"<EXP> OPENPAREN_OP expression CLOSEPAREN_OP REDUCE to primary_expression\n");
 											}
 	;
 
@@ -484,12 +474,20 @@ parameter_type_list
 	;
 
 parameter_list
-	: parameter_declaration                         {fprintf(fileLexLog,"parameter_declaration REDUCE to parameter_list\n");}
-	| parameter_list COMMA_OP parameter_declaration {fprintf(fileLexLog,"parameter_list COMMA_OP parameter_declaration REDUCE to parameter_list\n");}
+	: parameter_declaration                         {
+	                                                 $<CompilerInfo>$ = $<CompilerInfo>1;
+	                                                 fprintf(fileLexLog,"parameter_declaration REDUCE to parameter_list\n");
+													}
+	| parameter_list COMMA_OP parameter_declaration {
+	                                                 fprintf(fileLexLog,"parameter_list COMMA_OP parameter_declaration REDUCE to parameter_list\n");
+													}
 	;
 
 parameter_declaration
-	: declaration_specifiers declarator          {fprintf(fileLexLog,"declaration_specifiers declarator REDUCE to parameter_declaration\n");}
+	: declaration_specifiers declarator          {
+                                                  $<CompilerInfo>$ = $<CompilerInfo>1;
+	                                              fprintf(fileLexLog,"declaration_specifiers declarator REDUCE to parameter_declaration\n");
+												 }
 	| declaration_specifiers abstract_declarator {fprintf(fileLexLog,"declaration_specifiers abstract_declarator REDUCE to parameter_declaration\n");}
 	| declaration_specifiers                     {fprintf(fileLexLog,"declaration_specifiers REDUCE to parameter_declaration\n");}
 	;
