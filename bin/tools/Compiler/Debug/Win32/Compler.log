@@ -1,8 +1,0 @@
-﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(538,5): warning MSB8028: The intermediate directory (..\..\..\bin\tools\Compiler\Debug\Win32\) contains files shared from another project (Compler.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  c.tab.c
-  Compiler.c
-  lex.yy.c
-  symbol.c
-  Variables.c
-  Generating Code...
-  Compler.vcxproj -> C:\projects\ProjectJarvis\bin\tools\Compiler\Debug\Win32\Compiler.exe

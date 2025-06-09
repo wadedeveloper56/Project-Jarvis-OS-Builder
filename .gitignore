@@ -1,7 +1,7 @@
 /source/tools/Compler/.vs
 /source/tools/Compiler/.vs
 /source/tools/.vs
-/bin/tools/Arguments/Debug
-/bin/tools/Arguments/Release
-/bin/tools/Compiler/Debug
-/bin/tools/Compiler/Release
+/bin/tools/Arguments/Debug/*
+/bin/tools/Arguments/Release/*
+/bin/tools/Compiler/Debug/*
+/bin/tools/Compiler/Release/*
