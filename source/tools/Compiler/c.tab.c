@@ -203,7 +203,7 @@ typedef union YYSTYPE
 /* Line 387 of yacc.c  */
 #line 5 "c.y"
  	   
-    struct CompilerInfo CompilerInfo;
+    struct _CompilerInfo CompilerInfo;
 
 
 /* Line 387 of yacc.c  */

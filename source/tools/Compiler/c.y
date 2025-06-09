@@ -3,7 +3,7 @@
 %}
 
 %union { 	   
-    struct CompilerInfo CompilerInfo;
+    struct _CompilerInfo CompilerInfo;
 }
 
 %token<CompilerInfo> IDENTIFIER CONSTANT STRING_LITERAL

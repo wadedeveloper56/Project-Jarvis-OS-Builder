@@ -145,7 +145,7 @@ typedef union YYSTYPE
 /* Line 2058 of yacc.c  */
 #line 5 "c.y"
  	   
-    struct CompilerInfo CompilerInfo;
+    struct _CompilerInfo CompilerInfo;
 
 
 /* Line 2058 of yacc.c  */

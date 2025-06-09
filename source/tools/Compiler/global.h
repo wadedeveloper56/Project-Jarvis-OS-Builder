@@ -122,7 +122,7 @@ typedef struct _DeclarationList {
    struct _DeclarationList *next;
 } DeclarationList,*DeclarationListPtr; 
 
-struct CompilerInfo {
+typedef struct _CompilerInfo {
 	char* identifier;
 	VariableType type;
 	VariableSignType sign;
@@ -130,10 +130,10 @@ struct CompilerInfo {
 	DeclarationType declarationType;
 	Boolean constant;
 	ExpressionListPtr arrayExpression;
-	struct CompilerInfo* parameterList;
+	struct _CompilerInfo *parameterList;
 
 	void* noDefinition;
-};
+} CompilerInfo, *ConpilerInfoPtr;
 
 int yylex();
 int yyparse();
