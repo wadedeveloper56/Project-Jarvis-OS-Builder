@@ -31,17 +31,28 @@
  ******************************************************************************/
 #include "global.h"
 
-DeclarationPtr createDeclaration (char *identifier, VariableType type, VariableSignType sign, StorageType storage, DeclarationType declarationType){
+DeclarationPtr createDeclaration (char *identifier, VariableType type, VariableSignType sign, StorageType storage, DeclarationType declarationType, ExpressionListPtr arrayExpression){
  DeclarationPtr node = (DeclarationPtr) malloc(sizeof(Declaration));
  node->identifier = identifier;
  node->type = type;
  node->sign = sign;
  node->storage = storage;
  node->declarationType = declarationType;
+ node->arrayExpression = arrayExpression;
  return node;
 }
 
-void add(DeclarationPtr declaration){ 
+ExpressionListPtr createExpression(char* identifier, VariableType type, VariableSignType sign, Boolean constant) {
+	ExpressionListPtr listNode = (ExpressionListPtr)malloc(sizeof(ExpressionList));
+	memset(listNode, sizeof(ExpressionList), 0);
+	listNode->expression.node.identifier = identifier;
+	listNode->expression.node.type = type;
+	listNode->expression.node.sign = sign;
+	listNode->expression.node.constant =  constant;
+	return listNode;
+}
+
+void addDeclaration(DeclarationPtr declaration){
  if (symbolTable!=NULL) {
   DeclarationListPtr ptr = symbolTable;
   while(ptr->next != NULL) {
@@ -61,12 +72,60 @@ void add(DeclarationPtr declaration){
  }
 }
 
-void printDeclaration(DeclarationPtr declaration){
- printf("'%d %d %d %s' added to symboltable\n",declaration->storage,declaration->sign,declaration->type,declaration->identifier);
+void addFunction(DeclarationPtr declaration) {
+	if (functionTable != NULL) {
+		DeclarationListPtr ptr = functionTable;
+		while (ptr->next != NULL) {
+			ptr = ptr->next;
+		}
+		DeclarationListPtr node = (DeclarationListPtr)malloc(sizeof(DeclarationList));
+		memset(node, sizeof(DeclarationList), 0);
+		node->var = declaration;
+		node->next = NULL;
+
+		ptr->next = node;
+	}
+	else {
+		functionTable = (DeclarationListPtr)malloc(sizeof(DeclarationList));
+		memset(functionTable, sizeof(DeclarationList), 0);
+		functionTable->var = declaration;
+		functionTable->next = NULL;
+	}
 }
 
-void addToSymbolTable(char *identifier, VariableType type, VariableSignType sign, StorageType storage, DeclarationType declarationType, Boolean constant){
- DeclarationPtr declaration = createDeclaration (identifier, type, sign, storage, declarationType);
- if (declarationType == DECLARATION_VARIABLE) add(declaration);
- printDeclaration(declaration);
+void addToSymbolTable(char* identifier, VariableType type, VariableSignType sign, StorageType storage, DeclarationType declarationType, Boolean constant, ExpressionListPtr arrayExpression) {
+	DeclarationPtr declaration = createDeclaration(identifier, type, sign, storage, declarationType, arrayExpression);
+	if (declarationType == DECLARATION_VARIABLE) {
+		addDeclaration(declaration);
+		printDeclaration(declaration);
+	}
+}
+
+void addToFunctionTable(char* identifier, VariableType type, VariableSignType sign, StorageType storage, DeclarationType declarationType, Boolean constant, ExpressionListPtr arrayExpression) {
+	DeclarationPtr declaration = createDeclaration(identifier, type, sign, storage, declarationType, arrayExpression);
+	if (declarationType == DECLARATION_FUNCTION) {
+		addFunction(declaration);
+	    printFunction(declaration);
+	}
+}
+
+void addToExpression(ExpressionListPtrPtr expression, char* identifier, VariableType type, VariableSignType sign, Boolean constant) {
+	if (*expression == NULL) {
+		*expression = createExpression(identifier, type, sign, constant);
+	}
+	else {
+		ExpressionListPtr ptr = *expression;
+		while (ptr->next != NULL) {
+			ptr = ptr->next;
+		}
+		ptr->next = createExpression(identifier, type, sign, constant);
+	}
+}
+
+void printDeclaration(DeclarationPtr declaration){
+ printf("'%d %d %d %d %s' added to symboltable\n",declaration->storage,declaration->sign,declaration->type,declaration->declarationType,declaration->identifier);
+}
+
+void printFunction(DeclarationPtr declaration) {
+	printf("'%d %d %d %d %s' added to functiontable\n", declaration->storage, declaration->sign, declaration->type, declaration->declarationType, declaration->identifier);
 }

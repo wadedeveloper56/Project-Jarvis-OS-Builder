@@ -152,13 +152,14 @@ typedef union YYSTYPE
 	   StorageType storage;
 	   DeclarationType declarationType;
 	   Boolean constant; 
-
+       ExpressionListPtr arrayExpression;
+	   
        void *noDefinition;	
     } CompilerInfo;
 
 
 /* Line 2058 of yacc.c  */
-#line 162 "c.tab.h"
+#line 163 "c.tab.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */

@@ -49,6 +49,7 @@ typedef enum _VariableSignType{
     TYPE_SIGNED = 0,
     TYPE_UNSIGNED = 1
 } VariableSignType;
+extern char* VariableSignName[];
 
 typedef enum _VariableType{
     TYPE_NULL = 0,
@@ -66,6 +67,7 @@ typedef enum _VariableType{
 	TYPE_COMPLEX = 12,
 	TYPE_IMAGINARY = 13
 } VariableType;
+extern char* VariableTypeName[];
 
 typedef enum _StorageType {
 	STORAGE_NONE = 0,
@@ -90,21 +92,21 @@ typedef enum _FunctionalType {
 } FunctionalType; 
 
 typedef struct _ExpressionNode {
-  char *string;
+  char *identifier;
   VariableType type;
+  VariableSignType sign;
   Boolean constant;
 } ExpressionNode; 
 
 typedef struct _Expression {
    ExpressionNode node;
-   struct _Expression *left;
-   struct _Expression *right;
+   struct _Expression *next;
 } Expression,*ExpressionPtr; 
 
 typedef struct _ExpressionList {
    Expression expression;
    struct _ExpressionList *next;
-} ExpressionList,*ExpressionListPtr; 
+} ExpressionList,*ExpressionListPtr, **ExpressionListPtrPtr;
 
 typedef struct _Declaration {
    char *identifier;     
@@ -112,6 +114,7 @@ typedef struct _Declaration {
    VariableSignType sign;
    StorageType storage;
    DeclarationType declarationType;
+   ExpressionListPtr arrayExpression;
 } Declaration,*DeclarationPtr; 
 
 typedef struct _DeclarationList {
@@ -126,12 +129,21 @@ void comment();
 void count();
 int check_type();
 void yyerror(const char* s);
-int handleIndentifier();
+int handleIndentifier(int result);
 
-void addToSymbolTable(char *identifier, VariableType type, VariableSignType sign, StorageType storage, DeclarationType declarationType, Boolean constant); 
+DeclarationPtr createDeclaration(char* identifier, VariableType type, VariableSignType sign, StorageType storage, DeclarationType declarationType, ExpressionListPtr arrayExpression);
+ExpressionListPtr createExpression(char* identifier, VariableType type, VariableSignType sign, Boolean constant);
+void addDeclaration(DeclarationPtr declaration);
+void addFunction(DeclarationPtr declaration);
+void printDeclaration(DeclarationPtr declaration);
+void printFunction(DeclarationPtr declaration);
+void addToSymbolTable(char* identifier, VariableType type, VariableSignType sign, StorageType storage, DeclarationType declarationType, Boolean constant, ExpressionListPtr arrayExpression);
+void addToFunctionTable(char* identifier, VariableType type, VariableSignType sign, StorageType storage, DeclarationType declarationType, Boolean constant, ExpressionListPtr arrayExpression);
+void addToExpression(ExpressionListPtrPtr expression, char* identifier, VariableType type, VariableSignType sign, Boolean constant);
 
 extern DeclarationListPtr symbolTable;
-extern FILE * fileLexLog;
+extern DeclarationListPtr functionTable;
+extern FILE *fileLexLog;
 extern int num_errors;
 extern int yylineno;
 extern int column;
