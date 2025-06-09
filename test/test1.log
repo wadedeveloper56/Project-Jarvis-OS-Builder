@@ -16,7 +16,7 @@ parameter_list COMMA_OP parameter_declaration REDUCE to parameter_list
 parameter_list REDUCE to parameter_type_list
 direct_declarator OPENPAREN_OP parameter_type_list CLOSEPAREN_OP REDUCE to direct_declarator
 'main' => direct_declarator REDUCE to declarator
-'0' CONSTANT REDUCE to primary_expression
+<EXP> '0' CONSTANT REDUCE to primary_expression
 <EXP> primary_expression REDUCE to postfix_expression
 <EXP> postfix_expression REDUCE to unary_expression
 <EXP> unary_expression REDUCE to cast_expression

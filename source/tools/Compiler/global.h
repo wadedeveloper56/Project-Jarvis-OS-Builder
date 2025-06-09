@@ -122,6 +122,17 @@ typedef struct _DeclarationList {
    struct _DeclarationList *next;
 } DeclarationList,*DeclarationListPtr; 
 
+typedef struct _CompilerInfoNode {
+	char* identifier;
+	VariableType type;
+	VariableSignType sign;
+	StorageType storage;
+	DeclarationType declarationType;
+	Boolean constant;
+	ExpressionListPtr arrayExpression;
+	struct _CompilerInfoNode* next;
+} CompilerInfoNode, CompilerInfoNodePtr;
+
 typedef struct _CompilerInfo {
 	char* identifier;
 	VariableType type;
@@ -130,8 +141,7 @@ typedef struct _CompilerInfo {
 	DeclarationType declarationType;
 	Boolean constant;
 	ExpressionListPtr arrayExpression;
-	struct _CompilerInfo *parameterList;
-
+	CompilerInfoNodePtr*parameterList;
 	void* noDefinition;
 } CompilerInfo, *ConpilerInfoPtr;
 
