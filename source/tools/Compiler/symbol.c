@@ -1,7 +1,7 @@
 /*******************************************************************************
  * symbol.c: Provides the sub-command mechanism
  *
- * This file is part of the argtable3 library.
+ * This file is part of the ArgumentsTable library.
  *
  * Copyright (C) 2025 Christopher D. Wade
  * <wade4615@gmail.com>
@@ -31,45 +31,49 @@
  ******************************************************************************/
 #include "global.h"
 
-DeclarationPtr createDeclaration (char *identifier, VariableType type, VariableSignType sign, StorageType storage, DeclarationType declarationType, ExpressionListPtr arrayExpression){
- DeclarationPtr node = (DeclarationPtr) malloc(sizeof(Declaration));
- node->identifier = identifier;
- node->type = type;
- node->sign = sign;
- node->storage = storage;
- node->declarationType = declarationType;
- node->arrayExpression = arrayExpression;
- return node;
-}
-
 ExpressionListPtr createExpression(char* identifier, VariableType type, VariableSignType sign, Boolean constant) {
 	ExpressionListPtr listNode = (ExpressionListPtr)malloc(sizeof(ExpressionList));
 	memset(listNode, sizeof(ExpressionList), 0);
-	listNode->expression.node.identifier = identifier;
-	listNode->expression.node.type = type;
-	listNode->expression.node.sign = sign;
-	listNode->expression.node.constant =  constant;
+	listNode->expression.node.data.identifier = identifier;
+	listNode->expression.node.data.type = type;
+	listNode->expression.node.data.sign = sign;
+	listNode->expression.node.data.constant = constant;
 	return listNode;
 }
 
-void addDeclaration(DeclarationPtr declaration){
- if (symbolTable!=NULL) {
-  DeclarationListPtr ptr = symbolTable;
-  while(ptr->next != NULL) {
-   ptr = ptr->next;
-  }
-  DeclarationListPtr node = (DeclarationListPtr) malloc(sizeof(DeclarationList));
-  memset(node,sizeof(DeclarationList),0);
-  node->var = declaration;
-  node->next = NULL;
-   
-   ptr->next = node;
- } else {
-   symbolTable = (DeclarationListPtr) malloc(sizeof(DeclarationList));
-   memset(symbolTable,sizeof(DeclarationList),0);
-   symbolTable->var = declaration;
-   symbolTable->next = NULL;
- }
+DeclarationPtr createDeclaration(char* identifier, VariableType type, VariableSignType sign, StorageType storage, DeclarationType declarationType, ExpressionListPtr arrayExpression) {
+	DeclarationPtr node = (DeclarationPtr)malloc(sizeof(Declaration));
+	node->data.identifier = identifier;
+	node->data.type = type;
+	node->data.sign = sign;
+	node->data.storage = storage;
+	node->data.declarationType = declarationType;
+	node->arrayExpression = arrayExpression;
+	return node;
+}
+
+void addDeclaration(DeclarationPtr declaration) {
+	if (symbolTable != NULL) {
+		DeclarationListPtr ptr = symbolTable;
+		while (ptr->next != NULL) {
+			ptr = ptr->next;
+		}
+		DeclarationListPtr node = (DeclarationListPtr)malloc(sizeof(DeclarationList));
+		memset(node, sizeof(DeclarationList), 0);
+		if (node) {
+			node->declaration = declaration;
+			node->next = NULL;
+		}
+		ptr->next = node;
+	}
+	else {
+		symbolTable = (DeclarationListPtr)malloc(sizeof(DeclarationList));
+		memset(symbolTable, sizeof(DeclarationList), 0);
+		if (symbolTable) {
+			symbolTable->declaration = declaration;
+			symbolTable->next = NULL;
+		}
+	}
 }
 
 void addFunction(DeclarationPtr declaration) {
@@ -80,15 +84,14 @@ void addFunction(DeclarationPtr declaration) {
 		}
 		DeclarationListPtr node = (DeclarationListPtr)malloc(sizeof(DeclarationList));
 		memset(node, sizeof(DeclarationList), 0);
-		node->var = declaration;
+		node->declaration = declaration;
 		node->next = NULL;
-
 		ptr->next = node;
 	}
 	else {
 		functionTable = (DeclarationListPtr)malloc(sizeof(DeclarationList));
 		memset(functionTable, sizeof(DeclarationList), 0);
-		functionTable->var = declaration;
+		functionTable->declaration = declaration;
 		functionTable->next = NULL;
 	}
 }
@@ -105,7 +108,7 @@ void addToFunctionTable(char* identifier, VariableType type, VariableSignType si
 	DeclarationPtr declaration = createDeclaration(identifier, type, sign, storage, declarationType, arrayExpression);
 	if (declarationType == DECLARATION_FUNCTION) {
 		addFunction(declaration);
-	    printFunction(declaration);
+		printFunction(declaration);
 	}
 }
 
@@ -122,10 +125,33 @@ void addToExpression(ExpressionListPtrPtr expression, char* identifier, Variable
 	}
 }
 
-void printDeclaration(DeclarationPtr declaration){
- printf("'%d %d %d %d %s' added to symboltable\n",declaration->storage,declaration->sign,declaration->type,declaration->declarationType,declaration->identifier);
+CompilerInfoNodePtr createParameterListNode(CompilerInfoNodePtr node) {
+	CompilerInfoNodePtr listNode = (CompilerInfoNodePtr)malloc(sizeof(CompilerInfoNode));
+	memset(listNode, sizeof(CompilerInfoNode), 0);
+	listNode->data.identifier = node->data.identifier;
+	listNode->data.type = node->data.type;
+	listNode->data.sign = node->data.sign;
+	listNode->data.constant = node->data.constant;
+	return listNode;
+}
+
+void addToPrameterList(ConpilerInfoPtrPtr list, CompilerInfoNodePtr node) {
+	if ((*list)->parameterList == NULL) {
+		(*list)->parameterList = createParameterListNode(node);
+	}
+	else {
+		CompilerInfoNodePtr ptr = (*list)->parameterList;
+		while (ptr->next != NULL) {
+			ptr = ptr->next;
+		}
+		ptr->next = createParameterListNode(node);
+	}
+}
+
+void printDeclaration(DeclarationPtr declaration) {
+	printf("'%d %d %d %d %s' added to symboltable\n", declaration->data.storage, declaration->data.sign, declaration->data.type, declaration->data.declarationType, declaration->data.identifier);
 }
 
 void printFunction(DeclarationPtr declaration) {
-	printf("'%d %d %d %d %s' added to functiontable\n", declaration->storage, declaration->sign, declaration->type, declaration->declarationType, declaration->identifier);
+	printf("'%d %d %d %d %s' added to functiontable\n", declaration->data.storage, declaration->data.sign, declaration->data.type, declaration->data.declarationType, declaration->data.identifier);
 }

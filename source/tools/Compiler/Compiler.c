@@ -1,7 +1,7 @@
 /*******************************************************************************
  * compiler: Provides the sub-command mechanism
  *
- * This file is part of the argtable3 library.
+ * This file is part of the ArgumentsTable library.
  *
  * Copyright (C) 2025 Christopher D. Wade
  * <wade4615@gmail.com>

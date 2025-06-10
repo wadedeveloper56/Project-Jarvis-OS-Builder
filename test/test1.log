@@ -5,13 +5,13 @@
 'TYPE_SIGNED TYPE_INTEGER' type_specifier REDUCE to declaration_specifiers
 'argc' => IDENTIFIER REDUCE to direct_declarator
 'argc' => direct_declarator REDUCE to declarator
-declaration_specifiers declarator REDUCE to parameter_declaration
+'argc' => declaration_specifiers declarator REDUCE to parameter_declaration
 parameter_declaration REDUCE to parameter_list
 'TYPE_CHARACTER' REDUCE to type_specifier
 'TYPE_SIGNED TYPE_CHARACTER' type_specifier REDUCE to declaration_specifiers
 'argv' => IDENTIFIER REDUCE to direct_declarator
 'argv' => direct_declarator REDUCE to declarator
-declaration_specifiers declarator REDUCE to parameter_declaration
+'argv' => declaration_specifiers declarator REDUCE to parameter_declaration
 parameter_list COMMA_OP parameter_declaration REDUCE to parameter_list
 parameter_list REDUCE to parameter_type_list
 direct_declarator OPENPAREN_OP parameter_type_list CLOSEPAREN_OP REDUCE to direct_declarator

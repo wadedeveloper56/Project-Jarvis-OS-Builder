@@ -48,25 +48,25 @@
 %%
 primary_expression
 	: IDENTIFIER                            {
-											 $<CompilerInfo>$.identifier = (char *) malloc(strlen($<CompilerInfo>1.identifier)+1);
-                                             strcpy($<CompilerInfo>$.identifier, $<CompilerInfo>1.identifier);
-                                             $<CompilerInfo>$.type = TYPE_NULL;
-                                             $<CompilerInfo>$.constant = FALSE;
+											 $<CompilerInfo>$.data.identifier = (char *) malloc(strlen($<CompilerInfo>1.data.identifier)+1);
+                                             strcpy($<CompilerInfo>$.data.identifier, $<CompilerInfo>1.data.identifier);
+                                             $<CompilerInfo>$.data.type = TYPE_NULL;
+                                             $<CompilerInfo>$.data.constant = FALSE;
 	                                         fprintf(fileLexLog,"<EXP> IDENTIFIER REDUCE to primary_expression\n");
 											}
 	| CONSTANT                              {
-											 $<CompilerInfo>$.identifier = (char *) malloc(strlen($<CompilerInfo>1.identifier)+1);
-                                             strcpy($<CompilerInfo>$.identifier, $<CompilerInfo>1.identifier);
-                                             $<CompilerInfo>$.type = TYPE_NULL;
-                                             $<CompilerInfo>$.constant = TRUE;
-	                                         fprintf(fileLexLog,"<EXP> '%s' CONSTANT REDUCE to primary_expression\n",$<CompilerInfo>$.identifier);
+											 $<CompilerInfo>$.data.identifier = (char *) malloc(strlen($<CompilerInfo>1.data.identifier)+1);
+                                             strcpy($<CompilerInfo>$.data.identifier, $<CompilerInfo>1.data.identifier);
+                                             $<CompilerInfo>$.data.type = TYPE_NULL;
+                                             $<CompilerInfo>$.data.constant = TRUE;
+	                                         fprintf(fileLexLog,"<EXP> '%s' CONSTANT REDUCE to primary_expression\n",$<CompilerInfo>$.data.identifier);
 											}
 	| STRING_LITERAL                        {
-											 $<CompilerInfo>$.identifier = (char *) malloc(strlen($<CompilerInfo>1.identifier)+1);
-                                             strcpy($<CompilerInfo>$.identifier, $<CompilerInfo>1.identifier);
-                                             $<CompilerInfo>$.type = TYPE_NULL;
-                                             $<CompilerInfo>$.constant = TRUE;
-	                                         fprintf(fileLexLog,"<EXP> '%s' STRING_LITERAL REDUCE to primary_expression\n",$<CompilerInfo>$.identifier);
+											 $<CompilerInfo>$.data.identifier = (char *) malloc(strlen($<CompilerInfo>1.data.identifier)+1);
+                                             strcpy($<CompilerInfo>$.data.identifier, $<CompilerInfo>1.data.identifier);
+                                             $<CompilerInfo>$.data.type = TYPE_NULL;
+                                             $<CompilerInfo>$.data.constant = TRUE;
+	                                         fprintf(fileLexLog,"<EXP> '%s' STRING_LITERAL REDUCE to primary_expression\n",$<CompilerInfo>$.data.identifier);
 											}
 	| OPENPAREN_OP expression CLOSEPAREN_OP {
                                              $<CompilerInfo>$ = $<CompilerInfo>2;
@@ -260,14 +260,14 @@ constant_expression
 declaration
 	: declaration_specifiers SEMI_OP                        {fprintf(fileLexLog,"declaration_specifiers SEMI_OP REDUCE to declaration\n");}
 	| declaration_specifiers init_declarator_list SEMI_OP   {
-                                                             $<CompilerInfo>$.sign = $<CompilerInfo>1.sign;
-	                                                         $<CompilerInfo>$.type = $<CompilerInfo>1.type;
-	                                                         $<CompilerInfo>$.storage = $<CompilerInfo>1.storage;
-	                                                         $<CompilerInfo>$.identifier = $<CompilerInfo>2.identifier;
+                                                             $<CompilerInfo>$.data.sign = $<CompilerInfo>1.data.sign;
+	                                                         $<CompilerInfo>$.data.type = $<CompilerInfo>1.data.type;
+	                                                         $<CompilerInfo>$.data.storage = $<CompilerInfo>1.data.storage;
+	                                                         $<CompilerInfo>$.data.identifier = $<CompilerInfo>2.data.identifier;
 															 if ($<CompilerInfo>2.arrayExpression == NULL){
-															  fprintf(fileLexLog,"'%d %d %d %s' => declaration_specifiers init_declarator_list SEMI_OP REDUCE to declaration\n",$<CompilerInfo>$.storage,$<CompilerInfo>$.sign,$<CompilerInfo>$.type,$<CompilerInfo>$.identifier);
+															  fprintf(fileLexLog,"'%d %d %d %s' => declaration_specifiers init_declarator_list SEMI_OP REDUCE to declaration\n",$<CompilerInfo>$.data.storage,$<CompilerInfo>$.data.sign,$<CompilerInfo>$.data.type,$<CompilerInfo>$.data.identifier);
 															 } else {
-															  fprintf(fileLexLog,"'%d %d %d %s[]' => declaration_specifiers init_declarator_list SEMI_OP REDUCE to declaration\n",$<CompilerInfo>$.storage,$<CompilerInfo>$.sign,$<CompilerInfo>$.type,$<CompilerInfo>$.identifier);
+															  fprintf(fileLexLog,"'%d %d %d %s[]' => declaration_specifiers init_declarator_list SEMI_OP REDUCE to declaration\n",$<CompilerInfo>$.data.storage,$<CompilerInfo>$.data.sign,$<CompilerInfo>$.data.type,$<CompilerInfo>$.data.identifier);
 															 }
 															}
 	;
@@ -275,19 +275,19 @@ declaration
 declaration_specifiers
 	: storage_class_specifier                        {fprintf(fileLexLog,"storage_class_specifier REDUCE to declaration_specifiers\n");}
 	| storage_class_specifier declaration_specifiers {
-	                                                  $<CompilerInfo>$.sign = $<CompilerInfo>2.sign;
-	                                                  $<CompilerInfo>$.type = $<CompilerInfo>2.type;
-	                                                  $<CompilerInfo>$.storage = $<CompilerInfo>1.storage;
-	                                                  fprintf(fileLexLog,"%d %s %d => storage_class_specifier declaration_specifiers REDUCE to declaration_specifiers\n",$<CompilerInfo>$.storage,VariableSignName[$<CompilerInfo>$.sign],$<CompilerInfo>$.type);
+	                                                  $<CompilerInfo>$.data.sign = $<CompilerInfo>2.data.sign;
+	                                                  $<CompilerInfo>$.data.type = $<CompilerInfo>2.data.type;
+	                                                  $<CompilerInfo>$.data.storage = $<CompilerInfo>1.data.storage;
+	                                                  fprintf(fileLexLog,"%d %s %d => storage_class_specifier declaration_specifiers REDUCE to declaration_specifiers\n",$<CompilerInfo>$.data.storage,VariableSignName[$<CompilerInfo>$.data.sign],$<CompilerInfo>$.data.type);
 													 }
 	| type_specifier                                 {
 	                                                   $<CompilerInfo>$ = $<CompilerInfo>1;
-													   fprintf(fileLexLog,"'%s %s' type_specifier REDUCE to declaration_specifiers\n",VariableSignName[$<CompilerInfo>$.sign],VariableTypeName[$<CompilerInfo>$.type]);
+													   fprintf(fileLexLog,"'%s %s' type_specifier REDUCE to declaration_specifiers\n",VariableSignName[$<CompilerInfo>$.data.sign],VariableTypeName[$<CompilerInfo>$.data.type]);
 													 }
 	| type_specifier declaration_specifiers          {
-	                                                   $<CompilerInfo>$.sign = $<CompilerInfo>1.sign;
-	                                                   $<CompilerInfo>$.type = $<CompilerInfo>2.type;
-													   fprintf(fileLexLog,"%s %d => type_specifier declaration_specifiers REDUCE to declaration_specifiers\n",VariableSignName[$<CompilerInfo>$.sign],$<CompilerInfo>$.type);
+	                                                   $<CompilerInfo>$.data.sign = $<CompilerInfo>1.data.sign;
+	                                                   $<CompilerInfo>$.data.type = $<CompilerInfo>2.data.type;
+													   fprintf(fileLexLog,"%s %d => type_specifier declaration_specifiers REDUCE to declaration_specifiers\n",VariableSignName[$<CompilerInfo>$.data.sign],$<CompilerInfo>$.data.type);
 													 }
 	| type_qualifier                                 {fprintf(fileLexLog,"type_qualifier REDUCE to declaration_specifiers\n");}
 	| type_qualifier declaration_specifiers          {fprintf(fileLexLog,"type_qualifier declaration_specifiers SEMI_OP REDUCE to declaration_specifiers\n");}
@@ -299,14 +299,14 @@ init_declarator_list
 	: init_declarator                               {
                                                      $<CompilerInfo>$ = $<CompilerInfo>1;
 													 if ($<CompilerInfo>1.arrayExpression ==NULL){
-	                                                  fprintf(fileLexLog,"'%s' => init_declarator REDUCE to init_declarator_list\n",$<CompilerInfo>$.identifier);
+	                                                  fprintf(fileLexLog,"'%s' => init_declarator REDUCE to init_declarator_list\n",$<CompilerInfo>$.data.identifier);
 													 } else {
-													  fprintf(fileLexLog,"'%s[]' => init_declarator REDUCE to init_declarator_list\n",$<CompilerInfo>$.identifier);
+													  fprintf(fileLexLog,"'%s[]' => init_declarator REDUCE to init_declarator_list\n",$<CompilerInfo>$.data.identifier);
 													 }
 													}
 	| init_declarator_list COMMA_OP init_declarator {
 	                                                 $<CompilerInfo>$ = $<CompilerInfo>3;
-	                                                 fprintf(fileLexLog,"'%s' => init_declarator_list COMMA_OP init_declarator REDUCE to init_declarator_list\n",$<CompilerInfo>$.identifier);
+	                                                 fprintf(fileLexLog,"'%s' => init_declarator_list COMMA_OP init_declarator REDUCE to init_declarator_list\n",$<CompilerInfo>$.data.identifier);
 													 //addToSymbolTable($<CompilerInfo>3.identifier, $<CompilerInfo>3.type, $<CompilerInfo>3.sign, $<CompilerInfo>3.storage, $<CompilerInfo>3.declarationType, $<CompilerInfo>3.constant, $<CompilerInfo>3.arrayExpression);
 	                                                }
 	;
@@ -315,36 +315,36 @@ init_declarator
 	: declarator                      {
                                        $<CompilerInfo>$ = $<CompilerInfo>1;
 									   if ($<CompilerInfo>1.arrayExpression ==NULL){
-	                                    fprintf(fileLexLog,"'%s' => declarator REDUCE to init_declarator\n",$<CompilerInfo>$.identifier);
+	                                    fprintf(fileLexLog,"'%s' => declarator REDUCE to init_declarator\n",$<CompilerInfo>$.data.identifier);
 									   } else {
-									    fprintf(fileLexLog,"'%s[]' => declarator REDUCE to init_declarator\n",$<CompilerInfo>$.identifier);
+									    fprintf(fileLexLog,"'%s[]' => declarator REDUCE to init_declarator\n",$<CompilerInfo>$.data.identifier);
 									   }
 									  }
 	| declarator EQUAL_OP initializer {fprintf(fileLexLog,"declarator EQUAL_OP initializer REDUCE to init_declarator\n");}
 	;
 
 storage_class_specifier
-	: TYPEDEF  {$<CompilerInfo>$.storage = STORAGE_NONE;     fprintf(fileLexLog,"TYPEDEF REDUCE to storage_class_specifier\n");}
-	| EXTERN   {$<CompilerInfo>$.storage = STORAGE_EXTERN;   fprintf(fileLexLog,"EXTERN REDUCE to storage_class_specifier\n");}
-	| STATIC   {$<CompilerInfo>$.storage = STORAGE_STATIC;   fprintf(fileLexLog,"STATIC REDUCE to storage_class_specifier\n");}
-	| AUTO     {$<CompilerInfo>$.storage = STORAGE_AUTO;     fprintf(fileLexLog,"AUTO REDUCE to storage_class_specifier\n");}
-	| REGISTER {$<CompilerInfo>$.storage = STORAGE_REGISTER; fprintf(fileLexLog,"REGISTER REDUCE to storage_class_specifier\n");}
+	: TYPEDEF  {$<CompilerInfo>$.data.storage = STORAGE_NONE;     fprintf(fileLexLog,"TYPEDEF REDUCE to storage_class_specifier\n");}
+	| EXTERN   {$<CompilerInfo>$.data.storage = STORAGE_EXTERN;   fprintf(fileLexLog,"EXTERN REDUCE to storage_class_specifier\n");}
+	| STATIC   {$<CompilerInfo>$.data.storage = STORAGE_STATIC;   fprintf(fileLexLog,"STATIC REDUCE to storage_class_specifier\n");}
+	| AUTO     {$<CompilerInfo>$.data.storage = STORAGE_AUTO;     fprintf(fileLexLog,"AUTO REDUCE to storage_class_specifier\n");}
+	| REGISTER {$<CompilerInfo>$.data.storage = STORAGE_REGISTER; fprintf(fileLexLog,"REGISTER REDUCE to storage_class_specifier\n");}
 	;
 
 type_specifier
-	: VOID                      {$<CompilerInfo>$.type = TYPE_VOID;      fprintf(fileLexLog,"'%s' REDUCE to type_specifier\n",VariableTypeName[$<CompilerInfo>$.type]); }
-	| CHAR                      {$<CompilerInfo>$.type = TYPE_CHARACTER; fprintf(fileLexLog,"'%s' REDUCE to type_specifier\n",VariableTypeName[$<CompilerInfo>$.type]); }
-	| SHORT                     {$<CompilerInfo>$.type = TYPE_SHORT;     fprintf(fileLexLog,"'%s' REDUCE to type_specifier\n",VariableTypeName[$<CompilerInfo>$.type]); }
-	| INT                       {$<CompilerInfo>$.type = TYPE_INTEGER;   fprintf(fileLexLog,"'%s' REDUCE to type_specifier\n",VariableTypeName[$<CompilerInfo>$.type]); }
-	| LONG                      {$<CompilerInfo>$.type = TYPE_LONG;      fprintf(fileLexLog,"'%s' REDUCE to type_specifier\n",VariableTypeName[$<CompilerInfo>$.type]); }
-	| LONGLONG                  {$<CompilerInfo>$.type = TYPE_LONG64;    fprintf(fileLexLog,"'%s' REDUCE to type_specifier\n",VariableTypeName[$<CompilerInfo>$.type]); }
-	| FLOAT                     {$<CompilerInfo>$.type = TYPE_FLOAT;     fprintf(fileLexLog,"'%s' REDUCE to type_specifier\n",VariableTypeName[$<CompilerInfo>$.type]); }
-	| DOUBLE                    {$<CompilerInfo>$.type = TYPE_DOUBLE;    fprintf(fileLexLog,"'%s' REDUCE to type_specifier\n",VariableTypeName[$<CompilerInfo>$.type]); }
-	| SIGNED                    {$<CompilerInfo>$.sign = TYPE_SIGNED;    fprintf(fileLexLog,"'%s' REDUCE to type_specifier\n",VariableTypeName[$<CompilerInfo>$.sign]); }
-	| UNSIGNED                  {$<CompilerInfo>$.sign = TYPE_UNSIGNED;  fprintf(fileLexLog,"'%s' REDUCE to type_specifier\n",VariableTypeName[$<CompilerInfo>$.sign]); }
-	| BOOL                      {$<CompilerInfo>$.type = TYPE_INTEGER;   fprintf(fileLexLog,"'%s' REDUCE to type_specifier\n",VariableTypeName[$<CompilerInfo>$.type]); }
-	| COMPLEX                   {$<CompilerInfo>$.type = TYPE_COMPLEX;   fprintf(fileLexLog,"'%s' REDUCE to type_specifier\n",VariableTypeName[$<CompilerInfo>$.type]); }
-	| IMAGINARY                 {$<CompilerInfo>$.type = TYPE_IMAGINARY; fprintf(fileLexLog,"'%s' REDUCE to type_specifier\n",VariableTypeName[$<CompilerInfo>$.type]); }
+	: VOID                      {$<CompilerInfo>$.data.type = TYPE_VOID;      fprintf(fileLexLog,"'%s' REDUCE to type_specifier\n",VariableTypeName[$<CompilerInfo>$.data.type]); }
+	| CHAR                      {$<CompilerInfo>$.data.type = TYPE_CHARACTER; fprintf(fileLexLog,"'%s' REDUCE to type_specifier\n",VariableTypeName[$<CompilerInfo>$.data.type]); }
+	| SHORT                     {$<CompilerInfo>$.data.type = TYPE_SHORT;     fprintf(fileLexLog,"'%s' REDUCE to type_specifier\n",VariableTypeName[$<CompilerInfo>$.data.type]); }
+	| INT                       {$<CompilerInfo>$.data.type = TYPE_INTEGER;   fprintf(fileLexLog,"'%s' REDUCE to type_specifier\n",VariableTypeName[$<CompilerInfo>$.data.type]); }
+	| LONG                      {$<CompilerInfo>$.data.type = TYPE_LONG;      fprintf(fileLexLog,"'%s' REDUCE to type_specifier\n",VariableTypeName[$<CompilerInfo>$.data.type]); }
+	| LONGLONG                  {$<CompilerInfo>$.data.type = TYPE_LONG64;    fprintf(fileLexLog,"'%s' REDUCE to type_specifier\n",VariableTypeName[$<CompilerInfo>$.data.type]); }
+	| FLOAT                     {$<CompilerInfo>$.data.type = TYPE_FLOAT;     fprintf(fileLexLog,"'%s' REDUCE to type_specifier\n",VariableTypeName[$<CompilerInfo>$.data.type]); }
+	| DOUBLE                    {$<CompilerInfo>$.data.type = TYPE_DOUBLE;    fprintf(fileLexLog,"'%s' REDUCE to type_specifier\n",VariableTypeName[$<CompilerInfo>$.data.type]); }
+	| SIGNED                    {$<CompilerInfo>$.data.sign = TYPE_SIGNED;    fprintf(fileLexLog,"'%s' REDUCE to type_specifier\n",VariableTypeName[$<CompilerInfo>$.data.sign]); }
+	| UNSIGNED                  {$<CompilerInfo>$.data.sign = TYPE_UNSIGNED;  fprintf(fileLexLog,"'%s' REDUCE to type_specifier\n",VariableTypeName[$<CompilerInfo>$.data.sign]); }
+	| BOOL                      {$<CompilerInfo>$.data.type = TYPE_INTEGER;   fprintf(fileLexLog,"'%s' REDUCE to type_specifier\n",VariableTypeName[$<CompilerInfo>$.data.type]); }
+	| COMPLEX                   {$<CompilerInfo>$.data.type = TYPE_COMPLEX;   fprintf(fileLexLog,"'%s' REDUCE to type_specifier\n",VariableTypeName[$<CompilerInfo>$.data.type]); }
+	| IMAGINARY                 {$<CompilerInfo>$.data.type = TYPE_IMAGINARY; fprintf(fileLexLog,"'%s' REDUCE to type_specifier\n",VariableTypeName[$<CompilerInfo>$.data.type]); }
 	| struct_or_union_specifier {fprintf(fileLexLog,"struct_or_union_specifier REDUCE to type_specifier\n");}
 	| enum_specifier            {fprintf(fileLexLog,"enum_specifier REDUCE to type_specifier\n");}
 	| TYPE_NAME                 {fprintf(fileLexLog,"type_specifier TYPE_NAME REDUCE to type_specifier\n");}
@@ -421,9 +421,9 @@ declarator
 	| direct_declarator          {
                                   $<CompilerInfo>$ = $<CompilerInfo>1;
 								  if ($<CompilerInfo>1.arrayExpression == NULL) {
-	                                  fprintf(fileLexLog,"'%s' => direct_declarator REDUCE to declarator\n",$<CompilerInfo>$.identifier);
+	                                  fprintf(fileLexLog,"'%s' => direct_declarator REDUCE to declarator\n",$<CompilerInfo>$.data.identifier);
 								  } else {
-	                                  fprintf(fileLexLog,"'%s[]'  => direct_declarator REDUCE to declarator\n",$<CompilerInfo>$.identifier);
+	                                  fprintf(fileLexLog,"'%s[]'  => direct_declarator REDUCE to declarator\n",$<CompilerInfo>$.data.identifier);
 								  }
 								 }
 	;
@@ -432,14 +432,14 @@ declarator
 direct_declarator
 	: IDENTIFIER                                                                                      {
 	                                                                                                   $<CompilerInfo>$ = $<CompilerInfo>1;
-	                                                                                                   fprintf(fileLexLog,"'%s' => IDENTIFIER REDUCE to direct_declarator\n",$<CompilerInfo>$.identifier);
+	                                                                                                   fprintf(fileLexLog,"'%s' => IDENTIFIER REDUCE to direct_declarator\n",$<CompilerInfo>$.data.identifier);
 																									  }
 	| OPENPAREN_OP declarator CLOSEPAREN_OP                                                           {fprintf(fileLexLog,"OPENPAREN_OP declarator CLOSEPAREN_OP REDUCE to direct_declarator\n");}
 	| direct_declarator OPENBRACE_OP type_qualifier_list assignment_expression CLOSEBRACE_OP          {fprintf(fileLexLog,"direct_declarator OPENBRACE_OP type_qualifier_list assignment_expression CLOSEBRACE_OP REDUCE to direct_declarator\n");}
 	| direct_declarator OPENBRACE_OP type_qualifier_list CLOSEBRACE_OP                                {fprintf(fileLexLog,"direct_declarator OPENBRACE_OP type_qualifier_list CLOSEBRACE_OP REDUCE to direct_declarator\n");}
 	| direct_declarator OPENBRACE_OP assignment_expression CLOSEBRACE_OP                              {
 	                                                                                                   $<CompilerInfo>$ = $<CompilerInfo>1;
-																									   addToExpression(&$<CompilerInfo>$.arrayExpression,$<CompilerInfo>1.identifier,$<CompilerInfo>1.type,$<CompilerInfo>1.sign,FALSE);
+																									   addToExpression(&$<CompilerInfo>$.arrayExpression,$<CompilerInfo>1.data.identifier,$<CompilerInfo>1.data.type,$<CompilerInfo>1.data.sign,FALSE);
 	                                                                                                   fprintf(fileLexLog,"<EXP> direct_declarator OPENBRACE_OP assignment_expression CLOSEBRACE_OP REDUCE to direct_declarator\n");
 																									  }
 	| direct_declarator OPENBRACE_OP STATIC type_qualifier_list assignment_expression CLOSEBRACE_OP   {fprintf(fileLexLog,"direct_declarator OPENBRACE_OP STATIC type_qualifier_list assignment_expression CLOSEBRACE_OP REDUCE to direct_declarator\n");}
@@ -451,7 +451,7 @@ direct_declarator
 	| direct_declarator OPENPAREN_OP identifier_list CLOSEPAREN_OP                                    {fprintf(fileLexLog,"direct_declarator OPENPAREN_OP identifier_list CLOSEPAREN_OP REDUCE to direct_declarator\n");}
 	| direct_declarator OPENPAREN_OP CLOSEPAREN_OP                                                    {
 		                                                                                               $<CompilerInfo>$ = $<CompilerInfo>1;
-		                                                                                               fprintf(fileLexLog,"'%s' => direct_declarator OPENPAREN_OP CLOSEPAREN_OP REDUCE to direct_declarator\n",$<CompilerInfo>$.identifier);
+		                                                                                               fprintf(fileLexLog,"'%s' => direct_declarator OPENPAREN_OP CLOSEPAREN_OP REDUCE to direct_declarator\n",$<CompilerInfo>$.data.identifier);
 																									  }
 	;
 
@@ -486,7 +486,11 @@ parameter_list
 parameter_declaration
 	: declaration_specifiers declarator          {
                                                   $<CompilerInfo>$ = $<CompilerInfo>1;
-	                                              fprintf(fileLexLog,"declaration_specifiers declarator REDUCE to parameter_declaration\n");
+												  if ($<CompilerInfo>$.arrayExpression == NULL) {
+	                                               fprintf(fileLexLog,"'%s' => declaration_specifiers declarator REDUCE to parameter_declaration\n",$<CompilerInfo>$.data.identifier);
+								                  } else {
+	                                               fprintf(fileLexLog,"'%s[]'  => declaration_specifiers declarator REDUCE to parameter_declaration\n",$<CompilerInfo>$.data.identifier);
+								                  }
 												 }
 	| declaration_specifiers abstract_declarator {fprintf(fileLexLog,"declaration_specifiers abstract_declarator REDUCE to parameter_declaration\n");}
 	| declaration_specifiers                     {fprintf(fileLexLog,"declaration_specifiers REDUCE to parameter_declaration\n");}
@@ -625,11 +629,11 @@ jump_statement
 translation_unit
 	: external_declaration                  {
                                              $<CompilerInfo>$ = $<CompilerInfo>1;
-											 //addToSymbolTable($<CompilerInfo>1.identifier, $<CompilerInfo>1.type, $<CompilerInfo>1.sign, $<CompilerInfo>1.storage, $<CompilerInfo>1.declarationType, $<CompilerInfo>1.constant, $<CompilerInfo>1.arrayExpression);
+											 //addToSymbolTable($<CompilerInfo>1.data.identifier, $<CompilerInfo>1.data.type, $<CompilerInfo>1.data.sign, $<CompilerInfo>1.data.storage, $<CompilerInfo>1.data.declarationType, $<CompilerInfo>1.data.constant, $<CompilerInfo>1.arrayExpression);
 	                                         fprintf(fileLexLog,"<EXP> external_declaration REDUCE to translation_unit\n");
 											}
 	| translation_unit external_declaration {
-											 //addToSymbolTable($<CompilerInfo>2.identifier, $<CompilerInfo>2.type, $<CompilerInfo>2.sign, $<CompilerInfo>2.storage, $<CompilerInfo>2.declarationType, $<CompilerInfo>2.constant, $<CompilerInfo>1.arrayExpression);
+											 //addToSymbolTable($<CompilerInfo>2.data.identifier, $<CompilerInfo>2.data.type, $<CompilerInfo>2.data.sign, $<CompilerInfo>2.data.storage, $<CompilerInfo>2.data.declarationType, $<CompilerInfo>2.data.constant, $<CompilerInfo>1.arrayExpression);
 		                                     fprintf(fileLexLog,"<EXP> translation_unit external_declaration REDUCE to translation_unit\n");
 											}
 	;
@@ -637,24 +641,24 @@ translation_unit
 external_declaration
 	: function_definition {
                            $<CompilerInfo>$ = $<CompilerInfo>1;
-						   $<CompilerInfo>$.declarationType = DECLARATION_FUNCTION;
-                           addToFunctionTable($<CompilerInfo>$.identifier, $<CompilerInfo>$.type, $<CompilerInfo>$.sign, $<CompilerInfo>$.storage, $<CompilerInfo>$.declarationType, $<CompilerInfo>$.constant, $<CompilerInfo>$.arrayExpression);
-						   fprintf(fileLexLog,"'%d %d %s %s' => function_definition REDUCE to external_declaration\n",$<CompilerInfo>$.storage,$<CompilerInfo>$.sign,VariableTypeName[$<CompilerInfo>$.type],$<CompilerInfo>$.identifier);
+						   $<CompilerInfo>$.data.declarationType = DECLARATION_FUNCTION;
+                           addToFunctionTable($<CompilerInfo>$.data.identifier, $<CompilerInfo>$.data.type, $<CompilerInfo>$.data.sign, $<CompilerInfo>$.data.storage, $<CompilerInfo>$.data.declarationType, $<CompilerInfo>$.data.constant, $<CompilerInfo>$.arrayExpression);
+						   fprintf(fileLexLog,"'%d %d %s %s' => function_definition REDUCE to external_declaration\n",$<CompilerInfo>$.data.storage,$<CompilerInfo>$.data.sign,VariableTypeName[$<CompilerInfo>$.data.type],$<CompilerInfo>$.data.identifier);
 						  }
 	| declaration         {
                            $<CompilerInfo>$ = $<CompilerInfo>1;
-						   $<CompilerInfo>$.declarationType = DECLARATION_VARIABLE;
-                           $<CompilerInfo>$.sign = $<CompilerInfo>1.sign;
-                           $<CompilerInfo>$.type = $<CompilerInfo>1.type;
-                           $<CompilerInfo>$.storage = $<CompilerInfo>1.storage;
-                           $<CompilerInfo>$.identifier = $<CompilerInfo>1.identifier;
+						   $<CompilerInfo>$.data.declarationType = DECLARATION_VARIABLE;
+                           $<CompilerInfo>$.data.sign = $<CompilerInfo>1.data.sign;
+                           $<CompilerInfo>$.data.type = $<CompilerInfo>1.data.type;
+                           $<CompilerInfo>$.data.storage = $<CompilerInfo>1.data.storage;
+                           $<CompilerInfo>$.data.identifier = $<CompilerInfo>1.data.identifier;
                            if ($<CompilerInfo>$.arrayExpression==NULL){
-	                        fprintf(fileLexLog,"'%d %d %d %s' => declaration REDUCE to external_declaration\n",$<CompilerInfo>$.storage,$<CompilerInfo>$.sign,$<CompilerInfo>$.type,$<CompilerInfo>$.identifier);
+	                        fprintf(fileLexLog,"'%d %d %d %s' => declaration REDUCE to external_declaration\n",$<CompilerInfo>$.data.storage,$<CompilerInfo>$.data.sign,$<CompilerInfo>$.data.type,$<CompilerInfo>$.data.identifier);
 						   } else {
-						    fprintf(fileLexLog,"'%d %d %d %s[]' => declaration REDUCE to external_declaration\n",$<CompilerInfo>$.storage,$<CompilerInfo>$.sign,$<CompilerInfo>$.type,$<CompilerInfo>$.identifier);
+						    fprintf(fileLexLog,"'%d %d %d %s[]' => declaration REDUCE to external_declaration\n",$<CompilerInfo>$.data.storage,$<CompilerInfo>$.data.sign,$<CompilerInfo>$.data.type,$<CompilerInfo>$.data.identifier);
 						   }
-                           addToSymbolTable($<CompilerInfo>$.identifier, $<CompilerInfo>$.type, $<CompilerInfo>$.sign, $<CompilerInfo>$.storage, $<CompilerInfo>$.declarationType, $<CompilerInfo>$.constant, $<CompilerInfo>$.arrayExpression);
-						   fprintf(fileLexLog,"'%d %d %s %s' => function_definition REDUCE to external_declaration\n",$<CompilerInfo>$.storage,$<CompilerInfo>$.sign,VariableTypeName[$<CompilerInfo>$.type],$<CompilerInfo>$.identifier);
+                           addToSymbolTable($<CompilerInfo>$.data.identifier, $<CompilerInfo>$.data.type, $<CompilerInfo>$.data.sign, $<CompilerInfo>$.data.storage, $<CompilerInfo>$.data.declarationType, $<CompilerInfo>$.data.constant, $<CompilerInfo>$.arrayExpression);
+						   fprintf(fileLexLog,"'%d %d %s %s' => function_definition REDUCE to external_declaration\n",$<CompilerInfo>$.data.storage,$<CompilerInfo>$.data.sign,VariableTypeName[$<CompilerInfo>$.data.type],$<CompilerInfo>$.data.identifier);
 						  }
 	;
 
@@ -662,10 +666,10 @@ function_definition
 	: declaration_specifiers declarator declaration_list compound_statement {fprintf(fileLexLog,"declaration_specifiers declarator declaration_list compound_statement REDUCE to function_definition\n");}
 	| declaration_specifiers declarator compound_statement                  { 
 		                                                                     
-		                                                                     $<CompilerInfo>$.sign = $<CompilerInfo>1.sign;
-                                                                             $<CompilerInfo>$.type = $<CompilerInfo>1.type;
-																			 $<CompilerInfo>$.storage = $<CompilerInfo>1.storage;
-																			 $<CompilerInfo>$.identifier = $<CompilerInfo>2.identifier;	
+		                                                                     $<CompilerInfo>$.data.sign = $<CompilerInfo>1.data.sign;
+                                                                             $<CompilerInfo>$.data.type = $<CompilerInfo>1.data.type;
+																			 $<CompilerInfo>$.data.storage = $<CompilerInfo>1.data.storage;
+																			 $<CompilerInfo>$.data.identifier = $<CompilerInfo>2.data.identifier;	
 		                                                                     fprintf(fileLexLog,"<EXP> declaration_specifiers declarator compound_statement REDUCE to function_definition\n");
 																			}
 	;

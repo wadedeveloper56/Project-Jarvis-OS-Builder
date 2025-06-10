@@ -91,11 +91,17 @@ typedef enum _FunctionalType {
     FUNCTION = 4, 
 } FunctionalType; 
 
+typedef struct _IdentifierData {
+	char* identifier;
+	VariableType type;
+	VariableSignType sign;
+	StorageType storage;
+	DeclarationType declarationType;
+	Boolean constant;
+}IdentifierData,*IdentifierDataPtr,**IdentifierDataPtrPtr;
+
 typedef struct _ExpressionNode {
-  char *identifier;
-  VariableType type;
-  VariableSignType sign;
-  Boolean constant;
+	IdentifierData data;
 } ExpressionNode; 
 
 typedef struct _Expression {
@@ -109,41 +115,27 @@ typedef struct _ExpressionList {
 } ExpressionList,*ExpressionListPtr, **ExpressionListPtrPtr;
 
 typedef struct _Declaration {
-   char *identifier;     
-   VariableType type;
-   VariableSignType sign;
-   StorageType storage;
-   DeclarationType declarationType;
+   IdentifierData data;
    ExpressionListPtr arrayExpression;
 } Declaration,*DeclarationPtr; 
 
 typedef struct _DeclarationList {
-   DeclarationPtr var;
+   DeclarationPtr declaration;
    struct _DeclarationList *next;
 } DeclarationList,*DeclarationListPtr; 
 
 typedef struct _CompilerInfoNode {
-	char* identifier;
-	VariableType type;
-	VariableSignType sign;
-	StorageType storage;
-	DeclarationType declarationType;
-	Boolean constant;
+	IdentifierData data;
 	ExpressionListPtr arrayExpression;
 	struct _CompilerInfoNode* next;
-} CompilerInfoNode, CompilerInfoNodePtr;
+} CompilerInfoNode, *CompilerInfoNodePtr;
 
 typedef struct _CompilerInfo {
-	char* identifier;
-	VariableType type;
-	VariableSignType sign;
-	StorageType storage;
-	DeclarationType declarationType;
-	Boolean constant;
+	IdentifierData data;
 	ExpressionListPtr arrayExpression;
-	CompilerInfoNodePtr*parameterList;
+	CompilerInfoNodePtr parameterList;
 	void* noDefinition;
-} CompilerInfo, *ConpilerInfoPtr;
+} CompilerInfo, *ConpilerInfoPtr, **ConpilerInfoPtrPtr;
 
 int yylex();
 int yyparse();

@@ -661,14 +661,14 @@ static const yytype_uint16 yyrline[] =
      392,   393,   394,   395,   396,   400,   401,   405,   406,   410,
      411,   412,   416,   420,   421,   433,   437,   438,   439,   440,
      445,   446,   447,   448,   449,   450,   451,   452,   459,   460,
-     461,   462,   466,   467,   472,   473,   477,   481,   487,   491,
-     492,   496,   497,   501,   502,   506,   507,   508,   512,   513,
-     514,   515,   516,   517,   518,   519,   520,   521,   522,   526,
-     527,   528,   532,   533,   534,   535,   539,   543,   544,   548,
-     549,   553,   554,   555,   556,   557,   558,   565,   566,   567,
-     571,   572,   579,   583,   587,   588,   595,   596,   600,   601,
-     602,   606,   607,   608,   609,   610,   611,   615,   616,   617,
-     618,   619,   626,   631,   638,   644,   662,   663,   674,   675
+     461,   462,   466,   467,   472,   473,   477,   481,   487,   495,
+     496,   500,   501,   505,   506,   510,   511,   512,   516,   517,
+     518,   519,   520,   521,   522,   523,   524,   525,   526,   530,
+     531,   532,   536,   537,   538,   539,   543,   547,   548,   552,
+     553,   557,   558,   559,   560,   561,   562,   569,   570,   571,
+     575,   576,   583,   587,   591,   592,   599,   600,   604,   605,
+     606,   610,   611,   612,   613,   614,   615,   619,   620,   621,
+     622,   623,   630,   635,   642,   648,   666,   667,   678,   679
 };
 #endif
 
@@ -2211,10 +2211,10 @@ yyreduce:
 /* Line 1792 of yacc.c  */
 #line 50 "c.y"
     {
-											 (yyval.CompilerInfo).identifier = (char *) malloc(strlen((yyvsp[(1) - (1)].CompilerInfo).identifier)+1);
-                                             strcpy((yyval.CompilerInfo).identifier, (yyvsp[(1) - (1)].CompilerInfo).identifier);
-                                             (yyval.CompilerInfo).type = TYPE_NULL;
-                                             (yyval.CompilerInfo).constant = FALSE;
+											 (yyval.CompilerInfo).data.identifier = (char *) malloc(strlen((yyvsp[(1) - (1)].CompilerInfo).data.identifier)+1);
+                                             strcpy((yyval.CompilerInfo).data.identifier, (yyvsp[(1) - (1)].CompilerInfo).data.identifier);
+                                             (yyval.CompilerInfo).data.type = TYPE_NULL;
+                                             (yyval.CompilerInfo).data.constant = FALSE;
 	                                         fprintf(fileLexLog,"<EXP> IDENTIFIER REDUCE to primary_expression\n");
 											}
     break;
@@ -2223,11 +2223,11 @@ yyreduce:
 /* Line 1792 of yacc.c  */
 #line 57 "c.y"
     {
-											 (yyval.CompilerInfo).identifier = (char *) malloc(strlen((yyvsp[(1) - (1)].CompilerInfo).identifier)+1);
-                                             strcpy((yyval.CompilerInfo).identifier, (yyvsp[(1) - (1)].CompilerInfo).identifier);
-                                             (yyval.CompilerInfo).type = TYPE_NULL;
-                                             (yyval.CompilerInfo).constant = TRUE;
-	                                         fprintf(fileLexLog,"<EXP> '%s' CONSTANT REDUCE to primary_expression\n",(yyval.CompilerInfo).identifier);
+											 (yyval.CompilerInfo).data.identifier = (char *) malloc(strlen((yyvsp[(1) - (1)].CompilerInfo).data.identifier)+1);
+                                             strcpy((yyval.CompilerInfo).data.identifier, (yyvsp[(1) - (1)].CompilerInfo).data.identifier);
+                                             (yyval.CompilerInfo).data.type = TYPE_NULL;
+                                             (yyval.CompilerInfo).data.constant = TRUE;
+	                                         fprintf(fileLexLog,"<EXP> '%s' CONSTANT REDUCE to primary_expression\n",(yyval.CompilerInfo).data.identifier);
 											}
     break;
 
@@ -2235,11 +2235,11 @@ yyreduce:
 /* Line 1792 of yacc.c  */
 #line 64 "c.y"
     {
-											 (yyval.CompilerInfo).identifier = (char *) malloc(strlen((yyvsp[(1) - (1)].CompilerInfo).identifier)+1);
-                                             strcpy((yyval.CompilerInfo).identifier, (yyvsp[(1) - (1)].CompilerInfo).identifier);
-                                             (yyval.CompilerInfo).type = TYPE_NULL;
-                                             (yyval.CompilerInfo).constant = TRUE;
-	                                         fprintf(fileLexLog,"<EXP> '%s' STRING_LITERAL REDUCE to primary_expression\n",(yyval.CompilerInfo).identifier);
+											 (yyval.CompilerInfo).data.identifier = (char *) malloc(strlen((yyvsp[(1) - (1)].CompilerInfo).data.identifier)+1);
+                                             strcpy((yyval.CompilerInfo).data.identifier, (yyvsp[(1) - (1)].CompilerInfo).data.identifier);
+                                             (yyval.CompilerInfo).data.type = TYPE_NULL;
+                                             (yyval.CompilerInfo).data.constant = TRUE;
+	                                         fprintf(fileLexLog,"<EXP> '%s' STRING_LITERAL REDUCE to primary_expression\n",(yyval.CompilerInfo).data.identifier);
 											}
     break;
 
@@ -2745,14 +2745,14 @@ yyreduce:
 /* Line 1792 of yacc.c  */
 #line 262 "c.y"
     {
-                                                             (yyval.CompilerInfo).sign = (yyvsp[(1) - (3)].CompilerInfo).sign;
-	                                                         (yyval.CompilerInfo).type = (yyvsp[(1) - (3)].CompilerInfo).type;
-	                                                         (yyval.CompilerInfo).storage = (yyvsp[(1) - (3)].CompilerInfo).storage;
-	                                                         (yyval.CompilerInfo).identifier = (yyvsp[(2) - (3)].CompilerInfo).identifier;
+                                                             (yyval.CompilerInfo).data.sign = (yyvsp[(1) - (3)].CompilerInfo).data.sign;
+	                                                         (yyval.CompilerInfo).data.type = (yyvsp[(1) - (3)].CompilerInfo).data.type;
+	                                                         (yyval.CompilerInfo).data.storage = (yyvsp[(1) - (3)].CompilerInfo).data.storage;
+	                                                         (yyval.CompilerInfo).data.identifier = (yyvsp[(2) - (3)].CompilerInfo).data.identifier;
 															 if ((yyvsp[(2) - (3)].CompilerInfo).arrayExpression == NULL){
-															  fprintf(fileLexLog,"'%d %d %d %s' => declaration_specifiers init_declarator_list SEMI_OP REDUCE to declaration\n",(yyval.CompilerInfo).storage,(yyval.CompilerInfo).sign,(yyval.CompilerInfo).type,(yyval.CompilerInfo).identifier);
+															  fprintf(fileLexLog,"'%d %d %d %s' => declaration_specifiers init_declarator_list SEMI_OP REDUCE to declaration\n",(yyval.CompilerInfo).data.storage,(yyval.CompilerInfo).data.sign,(yyval.CompilerInfo).data.type,(yyval.CompilerInfo).data.identifier);
 															 } else {
-															  fprintf(fileLexLog,"'%d %d %d %s[]' => declaration_specifiers init_declarator_list SEMI_OP REDUCE to declaration\n",(yyval.CompilerInfo).storage,(yyval.CompilerInfo).sign,(yyval.CompilerInfo).type,(yyval.CompilerInfo).identifier);
+															  fprintf(fileLexLog,"'%d %d %d %s[]' => declaration_specifiers init_declarator_list SEMI_OP REDUCE to declaration\n",(yyval.CompilerInfo).data.storage,(yyval.CompilerInfo).data.sign,(yyval.CompilerInfo).data.type,(yyval.CompilerInfo).data.identifier);
 															 }
 															}
     break;
@@ -2767,10 +2767,10 @@ yyreduce:
 /* Line 1792 of yacc.c  */
 #line 277 "c.y"
     {
-	                                                  (yyval.CompilerInfo).sign = (yyvsp[(2) - (2)].CompilerInfo).sign;
-	                                                  (yyval.CompilerInfo).type = (yyvsp[(2) - (2)].CompilerInfo).type;
-	                                                  (yyval.CompilerInfo).storage = (yyvsp[(1) - (2)].CompilerInfo).storage;
-	                                                  fprintf(fileLexLog,"%d %s %d => storage_class_specifier declaration_specifiers REDUCE to declaration_specifiers\n",(yyval.CompilerInfo).storage,VariableSignName[(yyval.CompilerInfo).sign],(yyval.CompilerInfo).type);
+	                                                  (yyval.CompilerInfo).data.sign = (yyvsp[(2) - (2)].CompilerInfo).data.sign;
+	                                                  (yyval.CompilerInfo).data.type = (yyvsp[(2) - (2)].CompilerInfo).data.type;
+	                                                  (yyval.CompilerInfo).data.storage = (yyvsp[(1) - (2)].CompilerInfo).data.storage;
+	                                                  fprintf(fileLexLog,"%d %s %d => storage_class_specifier declaration_specifiers REDUCE to declaration_specifiers\n",(yyval.CompilerInfo).data.storage,VariableSignName[(yyval.CompilerInfo).data.sign],(yyval.CompilerInfo).data.type);
 													 }
     break;
 
@@ -2779,7 +2779,7 @@ yyreduce:
 #line 283 "c.y"
     {
 	                                                   (yyval.CompilerInfo) = (yyvsp[(1) - (1)].CompilerInfo);
-													   fprintf(fileLexLog,"'%s %s' type_specifier REDUCE to declaration_specifiers\n",VariableSignName[(yyval.CompilerInfo).sign],VariableTypeName[(yyval.CompilerInfo).type]);
+													   fprintf(fileLexLog,"'%s %s' type_specifier REDUCE to declaration_specifiers\n",VariableSignName[(yyval.CompilerInfo).data.sign],VariableTypeName[(yyval.CompilerInfo).data.type]);
 													 }
     break;
 
@@ -2787,9 +2787,9 @@ yyreduce:
 /* Line 1792 of yacc.c  */
 #line 287 "c.y"
     {
-	                                                   (yyval.CompilerInfo).sign = (yyvsp[(1) - (2)].CompilerInfo).sign;
-	                                                   (yyval.CompilerInfo).type = (yyvsp[(2) - (2)].CompilerInfo).type;
-													   fprintf(fileLexLog,"%s %d => type_specifier declaration_specifiers REDUCE to declaration_specifiers\n",VariableSignName[(yyval.CompilerInfo).sign],(yyval.CompilerInfo).type);
+	                                                   (yyval.CompilerInfo).data.sign = (yyvsp[(1) - (2)].CompilerInfo).data.sign;
+	                                                   (yyval.CompilerInfo).data.type = (yyvsp[(2) - (2)].CompilerInfo).data.type;
+													   fprintf(fileLexLog,"%s %d => type_specifier declaration_specifiers REDUCE to declaration_specifiers\n",VariableSignName[(yyval.CompilerInfo).data.sign],(yyval.CompilerInfo).data.type);
 													 }
     break;
 
@@ -2823,9 +2823,9 @@ yyreduce:
     {
                                                      (yyval.CompilerInfo) = (yyvsp[(1) - (1)].CompilerInfo);
 													 if ((yyvsp[(1) - (1)].CompilerInfo).arrayExpression ==NULL){
-	                                                  fprintf(fileLexLog,"'%s' => init_declarator REDUCE to init_declarator_list\n",(yyval.CompilerInfo).identifier);
+	                                                  fprintf(fileLexLog,"'%s' => init_declarator REDUCE to init_declarator_list\n",(yyval.CompilerInfo).data.identifier);
 													 } else {
-													  fprintf(fileLexLog,"'%s[]' => init_declarator REDUCE to init_declarator_list\n",(yyval.CompilerInfo).identifier);
+													  fprintf(fileLexLog,"'%s[]' => init_declarator REDUCE to init_declarator_list\n",(yyval.CompilerInfo).data.identifier);
 													 }
 													}
     break;
@@ -2835,7 +2835,7 @@ yyreduce:
 #line 307 "c.y"
     {
 	                                                 (yyval.CompilerInfo) = (yyvsp[(3) - (3)].CompilerInfo);
-	                                                 fprintf(fileLexLog,"'%s' => init_declarator_list COMMA_OP init_declarator REDUCE to init_declarator_list\n",(yyval.CompilerInfo).identifier);
+	                                                 fprintf(fileLexLog,"'%s' => init_declarator_list COMMA_OP init_declarator REDUCE to init_declarator_list\n",(yyval.CompilerInfo).data.identifier);
 													 //addToSymbolTable($<CompilerInfo>3.identifier, $<CompilerInfo>3.type, $<CompilerInfo>3.sign, $<CompilerInfo>3.storage, $<CompilerInfo>3.declarationType, $<CompilerInfo>3.constant, $<CompilerInfo>3.arrayExpression);
 	                                                }
     break;
@@ -2846,9 +2846,9 @@ yyreduce:
     {
                                        (yyval.CompilerInfo) = (yyvsp[(1) - (1)].CompilerInfo);
 									   if ((yyvsp[(1) - (1)].CompilerInfo).arrayExpression ==NULL){
-	                                    fprintf(fileLexLog,"'%s' => declarator REDUCE to init_declarator\n",(yyval.CompilerInfo).identifier);
+	                                    fprintf(fileLexLog,"'%s' => declarator REDUCE to init_declarator\n",(yyval.CompilerInfo).data.identifier);
 									   } else {
-									    fprintf(fileLexLog,"'%s[]' => declarator REDUCE to init_declarator\n",(yyval.CompilerInfo).identifier);
+									    fprintf(fileLexLog,"'%s[]' => declarator REDUCE to init_declarator\n",(yyval.CompilerInfo).data.identifier);
 									   }
 									  }
     break;
@@ -2862,109 +2862,109 @@ yyreduce:
   case 92:
 /* Line 1792 of yacc.c  */
 #line 327 "c.y"
-    {(yyval.CompilerInfo).storage = STORAGE_NONE;     fprintf(fileLexLog,"TYPEDEF REDUCE to storage_class_specifier\n");}
+    {(yyval.CompilerInfo).data.storage = STORAGE_NONE;     fprintf(fileLexLog,"TYPEDEF REDUCE to storage_class_specifier\n");}
     break;
 
   case 93:
 /* Line 1792 of yacc.c  */
 #line 328 "c.y"
-    {(yyval.CompilerInfo).storage = STORAGE_EXTERN;   fprintf(fileLexLog,"EXTERN REDUCE to storage_class_specifier\n");}
+    {(yyval.CompilerInfo).data.storage = STORAGE_EXTERN;   fprintf(fileLexLog,"EXTERN REDUCE to storage_class_specifier\n");}
     break;
 
   case 94:
 /* Line 1792 of yacc.c  */
 #line 329 "c.y"
-    {(yyval.CompilerInfo).storage = STORAGE_STATIC;   fprintf(fileLexLog,"STATIC REDUCE to storage_class_specifier\n");}
+    {(yyval.CompilerInfo).data.storage = STORAGE_STATIC;   fprintf(fileLexLog,"STATIC REDUCE to storage_class_specifier\n");}
     break;
 
   case 95:
 /* Line 1792 of yacc.c  */
 #line 330 "c.y"
-    {(yyval.CompilerInfo).storage = STORAGE_AUTO;     fprintf(fileLexLog,"AUTO REDUCE to storage_class_specifier\n");}
+    {(yyval.CompilerInfo).data.storage = STORAGE_AUTO;     fprintf(fileLexLog,"AUTO REDUCE to storage_class_specifier\n");}
     break;
 
   case 96:
 /* Line 1792 of yacc.c  */
 #line 331 "c.y"
-    {(yyval.CompilerInfo).storage = STORAGE_REGISTER; fprintf(fileLexLog,"REGISTER REDUCE to storage_class_specifier\n");}
+    {(yyval.CompilerInfo).data.storage = STORAGE_REGISTER; fprintf(fileLexLog,"REGISTER REDUCE to storage_class_specifier\n");}
     break;
 
   case 97:
 /* Line 1792 of yacc.c  */
 #line 335 "c.y"
-    {(yyval.CompilerInfo).type = TYPE_VOID;      fprintf(fileLexLog,"'%s' REDUCE to type_specifier\n",VariableTypeName[(yyval.CompilerInfo).type]); }
+    {(yyval.CompilerInfo).data.type = TYPE_VOID;      fprintf(fileLexLog,"'%s' REDUCE to type_specifier\n",VariableTypeName[(yyval.CompilerInfo).data.type]); }
     break;
 
   case 98:
 /* Line 1792 of yacc.c  */
 #line 336 "c.y"
-    {(yyval.CompilerInfo).type = TYPE_CHARACTER; fprintf(fileLexLog,"'%s' REDUCE to type_specifier\n",VariableTypeName[(yyval.CompilerInfo).type]); }
+    {(yyval.CompilerInfo).data.type = TYPE_CHARACTER; fprintf(fileLexLog,"'%s' REDUCE to type_specifier\n",VariableTypeName[(yyval.CompilerInfo).data.type]); }
     break;
 
   case 99:
 /* Line 1792 of yacc.c  */
 #line 337 "c.y"
-    {(yyval.CompilerInfo).type = TYPE_SHORT;     fprintf(fileLexLog,"'%s' REDUCE to type_specifier\n",VariableTypeName[(yyval.CompilerInfo).type]); }
+    {(yyval.CompilerInfo).data.type = TYPE_SHORT;     fprintf(fileLexLog,"'%s' REDUCE to type_specifier\n",VariableTypeName[(yyval.CompilerInfo).data.type]); }
     break;
 
   case 100:
 /* Line 1792 of yacc.c  */
 #line 338 "c.y"
-    {(yyval.CompilerInfo).type = TYPE_INTEGER;   fprintf(fileLexLog,"'%s' REDUCE to type_specifier\n",VariableTypeName[(yyval.CompilerInfo).type]); }
+    {(yyval.CompilerInfo).data.type = TYPE_INTEGER;   fprintf(fileLexLog,"'%s' REDUCE to type_specifier\n",VariableTypeName[(yyval.CompilerInfo).data.type]); }
     break;
 
   case 101:
 /* Line 1792 of yacc.c  */
 #line 339 "c.y"
-    {(yyval.CompilerInfo).type = TYPE_LONG;      fprintf(fileLexLog,"'%s' REDUCE to type_specifier\n",VariableTypeName[(yyval.CompilerInfo).type]); }
+    {(yyval.CompilerInfo).data.type = TYPE_LONG;      fprintf(fileLexLog,"'%s' REDUCE to type_specifier\n",VariableTypeName[(yyval.CompilerInfo).data.type]); }
     break;
 
   case 102:
 /* Line 1792 of yacc.c  */
 #line 340 "c.y"
-    {(yyval.CompilerInfo).type = TYPE_LONG64;    fprintf(fileLexLog,"'%s' REDUCE to type_specifier\n",VariableTypeName[(yyval.CompilerInfo).type]); }
+    {(yyval.CompilerInfo).data.type = TYPE_LONG64;    fprintf(fileLexLog,"'%s' REDUCE to type_specifier\n",VariableTypeName[(yyval.CompilerInfo).data.type]); }
     break;
 
   case 103:
 /* Line 1792 of yacc.c  */
 #line 341 "c.y"
-    {(yyval.CompilerInfo).type = TYPE_FLOAT;     fprintf(fileLexLog,"'%s' REDUCE to type_specifier\n",VariableTypeName[(yyval.CompilerInfo).type]); }
+    {(yyval.CompilerInfo).data.type = TYPE_FLOAT;     fprintf(fileLexLog,"'%s' REDUCE to type_specifier\n",VariableTypeName[(yyval.CompilerInfo).data.type]); }
     break;
 
   case 104:
 /* Line 1792 of yacc.c  */
 #line 342 "c.y"
-    {(yyval.CompilerInfo).type = TYPE_DOUBLE;    fprintf(fileLexLog,"'%s' REDUCE to type_specifier\n",VariableTypeName[(yyval.CompilerInfo).type]); }
+    {(yyval.CompilerInfo).data.type = TYPE_DOUBLE;    fprintf(fileLexLog,"'%s' REDUCE to type_specifier\n",VariableTypeName[(yyval.CompilerInfo).data.type]); }
     break;
 
   case 105:
 /* Line 1792 of yacc.c  */
 #line 343 "c.y"
-    {(yyval.CompilerInfo).sign = TYPE_SIGNED;    fprintf(fileLexLog,"'%s' REDUCE to type_specifier\n",VariableTypeName[(yyval.CompilerInfo).sign]); }
+    {(yyval.CompilerInfo).data.sign = TYPE_SIGNED;    fprintf(fileLexLog,"'%s' REDUCE to type_specifier\n",VariableTypeName[(yyval.CompilerInfo).data.sign]); }
     break;
 
   case 106:
 /* Line 1792 of yacc.c  */
 #line 344 "c.y"
-    {(yyval.CompilerInfo).sign = TYPE_UNSIGNED;  fprintf(fileLexLog,"'%s' REDUCE to type_specifier\n",VariableTypeName[(yyval.CompilerInfo).sign]); }
+    {(yyval.CompilerInfo).data.sign = TYPE_UNSIGNED;  fprintf(fileLexLog,"'%s' REDUCE to type_specifier\n",VariableTypeName[(yyval.CompilerInfo).data.sign]); }
     break;
 
   case 107:
 /* Line 1792 of yacc.c  */
 #line 345 "c.y"
-    {(yyval.CompilerInfo).type = TYPE_INTEGER;   fprintf(fileLexLog,"'%s' REDUCE to type_specifier\n",VariableTypeName[(yyval.CompilerInfo).type]); }
+    {(yyval.CompilerInfo).data.type = TYPE_INTEGER;   fprintf(fileLexLog,"'%s' REDUCE to type_specifier\n",VariableTypeName[(yyval.CompilerInfo).data.type]); }
     break;
 
   case 108:
 /* Line 1792 of yacc.c  */
 #line 346 "c.y"
-    {(yyval.CompilerInfo).type = TYPE_COMPLEX;   fprintf(fileLexLog,"'%s' REDUCE to type_specifier\n",VariableTypeName[(yyval.CompilerInfo).type]); }
+    {(yyval.CompilerInfo).data.type = TYPE_COMPLEX;   fprintf(fileLexLog,"'%s' REDUCE to type_specifier\n",VariableTypeName[(yyval.CompilerInfo).data.type]); }
     break;
 
   case 109:
 /* Line 1792 of yacc.c  */
 #line 347 "c.y"
-    {(yyval.CompilerInfo).type = TYPE_IMAGINARY; fprintf(fileLexLog,"'%s' REDUCE to type_specifier\n",VariableTypeName[(yyval.CompilerInfo).type]); }
+    {(yyval.CompilerInfo).data.type = TYPE_IMAGINARY; fprintf(fileLexLog,"'%s' REDUCE to type_specifier\n",VariableTypeName[(yyval.CompilerInfo).data.type]); }
     break;
 
   case 110:
@@ -3177,9 +3177,9 @@ yyreduce:
     {
                                   (yyval.CompilerInfo) = (yyvsp[(1) - (1)].CompilerInfo);
 								  if ((yyvsp[(1) - (1)].CompilerInfo).arrayExpression == NULL) {
-	                                  fprintf(fileLexLog,"'%s' => direct_declarator REDUCE to declarator\n",(yyval.CompilerInfo).identifier);
+	                                  fprintf(fileLexLog,"'%s' => direct_declarator REDUCE to declarator\n",(yyval.CompilerInfo).data.identifier);
 								  } else {
-	                                  fprintf(fileLexLog,"'%s[]'  => direct_declarator REDUCE to declarator\n",(yyval.CompilerInfo).identifier);
+	                                  fprintf(fileLexLog,"'%s[]'  => direct_declarator REDUCE to declarator\n",(yyval.CompilerInfo).data.identifier);
 								  }
 								 }
     break;
@@ -3189,7 +3189,7 @@ yyreduce:
 #line 433 "c.y"
     {
 	                                                                                                   (yyval.CompilerInfo) = (yyvsp[(1) - (1)].CompilerInfo);
-	                                                                                                   fprintf(fileLexLog,"'%s' => IDENTIFIER REDUCE to direct_declarator\n",(yyval.CompilerInfo).identifier);
+	                                                                                                   fprintf(fileLexLog,"'%s' => IDENTIFIER REDUCE to direct_declarator\n",(yyval.CompilerInfo).data.identifier);
 																									  }
     break;
 
@@ -3216,7 +3216,7 @@ yyreduce:
 #line 440 "c.y"
     {
 	                                                                                                   (yyval.CompilerInfo) = (yyvsp[(1) - (4)].CompilerInfo);
-																									   addToExpression(&(yyval.CompilerInfo).arrayExpression,(yyvsp[(1) - (4)].CompilerInfo).identifier,(yyvsp[(1) - (4)].CompilerInfo).type,(yyvsp[(1) - (4)].CompilerInfo).sign,FALSE);
+																									   addToExpression(&(yyval.CompilerInfo).arrayExpression,(yyvsp[(1) - (4)].CompilerInfo).data.identifier,(yyvsp[(1) - (4)].CompilerInfo).data.type,(yyvsp[(1) - (4)].CompilerInfo).data.sign,FALSE);
 	                                                                                                   fprintf(fileLexLog,"<EXP> direct_declarator OPENBRACE_OP assignment_expression CLOSEBRACE_OP REDUCE to direct_declarator\n");
 																									  }
     break;
@@ -3268,7 +3268,7 @@ yyreduce:
 #line 452 "c.y"
     {
 		                                                                                               (yyval.CompilerInfo) = (yyvsp[(1) - (3)].CompilerInfo);
-		                                                                                               fprintf(fileLexLog,"'%s' => direct_declarator OPENPAREN_OP CLOSEPAREN_OP REDUCE to direct_declarator\n",(yyval.CompilerInfo).identifier);
+		                                                                                               fprintf(fileLexLog,"'%s' => direct_declarator OPENPAREN_OP CLOSEPAREN_OP REDUCE to direct_declarator\n",(yyval.CompilerInfo).data.identifier);
 																									  }
     break;
 
@@ -3342,235 +3342,239 @@ yyreduce:
 #line 487 "c.y"
     {
                                                   (yyval.CompilerInfo) = (yyvsp[(1) - (2)].CompilerInfo);
-	                                              fprintf(fileLexLog,"declaration_specifiers declarator REDUCE to parameter_declaration\n");
+												  if ((yyval.CompilerInfo).arrayExpression == NULL) {
+	                                               fprintf(fileLexLog,"'%s' => declaration_specifiers declarator REDUCE to parameter_declaration\n",(yyval.CompilerInfo).data.identifier);
+								                  } else {
+	                                               fprintf(fileLexLog,"'%s[]'  => declaration_specifiers declarator REDUCE to parameter_declaration\n",(yyval.CompilerInfo).data.identifier);
+								                  }
 												 }
     break;
 
   case 169:
 /* Line 1792 of yacc.c  */
-#line 491 "c.y"
+#line 495 "c.y"
     {fprintf(fileLexLog,"declaration_specifiers abstract_declarator REDUCE to parameter_declaration\n");}
     break;
 
   case 170:
 /* Line 1792 of yacc.c  */
-#line 492 "c.y"
+#line 496 "c.y"
     {fprintf(fileLexLog,"declaration_specifiers REDUCE to parameter_declaration\n");}
     break;
 
   case 171:
 /* Line 1792 of yacc.c  */
-#line 496 "c.y"
+#line 500 "c.y"
     {fprintf(fileLexLog,"IDENTIFIER REDUCE to identifier_list\n");}
     break;
 
   case 172:
 /* Line 1792 of yacc.c  */
-#line 497 "c.y"
+#line 501 "c.y"
     {fprintf(fileLexLog,"identifier_list COMMA_OP IDENTIFIER REDUCE to identifier_list\n");}
     break;
 
   case 173:
 /* Line 1792 of yacc.c  */
-#line 501 "c.y"
+#line 505 "c.y"
     {fprintf(fileLexLog,"specifier_qualifier_list REDUCE to type_name\n");}
     break;
 
   case 174:
 /* Line 1792 of yacc.c  */
-#line 502 "c.y"
+#line 506 "c.y"
     {fprintf(fileLexLog,"specifier_qualifier_list abstract_declarator REDUCE to type_name\n");}
     break;
 
   case 175:
 /* Line 1792 of yacc.c  */
-#line 506 "c.y"
+#line 510 "c.y"
     {fprintf(fileLexLog,"pointer REDUCE to abstract_declarator\n");}
     break;
 
   case 176:
 /* Line 1792 of yacc.c  */
-#line 507 "c.y"
+#line 511 "c.y"
     {fprintf(fileLexLog,"direct_abstract_declarator REDUCE to abstract_declarator\n");}
     break;
 
   case 177:
 /* Line 1792 of yacc.c  */
-#line 508 "c.y"
+#line 512 "c.y"
     {fprintf(fileLexLog,"pointer direct_abstract_declarator REDUCE to abstract_declarator\n");}
     break;
 
   case 178:
 /* Line 1792 of yacc.c  */
-#line 512 "c.y"
+#line 516 "c.y"
     {fprintf(fileLexLog,"OPENPAREN_OP abstract_declarator CLOSEPAREN_OP REDUCE to direct_abstract_declarator\n");}
     break;
 
   case 179:
 /* Line 1792 of yacc.c  */
-#line 513 "c.y"
+#line 517 "c.y"
     {fprintf(fileLexLog,"OPENBRACE_OP CLOSEBRACE_OP REDUCE to direct_abstract_declarator\n");}
     break;
 
   case 180:
 /* Line 1792 of yacc.c  */
-#line 514 "c.y"
+#line 518 "c.y"
     {fprintf(fileLexLog,"OPENBRACE_OP assignment_expression CLOSEBRACE_OP REDUCE to direct_abstract_declarator\n");}
     break;
 
   case 181:
 /* Line 1792 of yacc.c  */
-#line 515 "c.y"
+#line 519 "c.y"
     {fprintf(fileLexLog,"direct_abstract_declarator OPENBRACE_OP CLOSEBRACE_OP REDUCE to direct_abstract_declarator\n");}
     break;
 
   case 182:
 /* Line 1792 of yacc.c  */
-#line 516 "c.y"
+#line 520 "c.y"
     {fprintf(fileLexLog,"direct_abstract_declarator OPENBRACE_OP assignment_expression CLOSEBRACE_OP REDUCE to direct_abstract_declarator\n");}
     break;
 
   case 183:
 /* Line 1792 of yacc.c  */
-#line 517 "c.y"
+#line 521 "c.y"
     {fprintf(fileLexLog,"OPENBRACE_OP TIMES_OP CLOSEBRACE_OP REDUCE to direct_abstract_declarator\n");}
     break;
 
   case 184:
 /* Line 1792 of yacc.c  */
-#line 518 "c.y"
+#line 522 "c.y"
     {fprintf(fileLexLog,"direct_abstract_declarator OPENBRACE_OP TIMES_OP CLOSEBRACE_OP REDUCE to direct_abstract_declarator\n");}
     break;
 
   case 185:
 /* Line 1792 of yacc.c  */
-#line 519 "c.y"
+#line 523 "c.y"
     {fprintf(fileLexLog,"OPENPAREN_OP CLOSEPAREN_OP REDUCE to direct_abstract_declarator\n");}
     break;
 
   case 186:
 /* Line 1792 of yacc.c  */
-#line 520 "c.y"
+#line 524 "c.y"
     {fprintf(fileLexLog,"OPENPAREN_OP parameter_type_list CLOSEPAREN_OP REDUCE to direct_abstract_declarator\n");}
     break;
 
   case 187:
 /* Line 1792 of yacc.c  */
-#line 521 "c.y"
+#line 525 "c.y"
     {fprintf(fileLexLog,"direct_abstract_declarator OPENPAREN_OP CLOSEPAREN_OP REDUCE to direct_abstract_declarator\n");}
     break;
 
   case 188:
 /* Line 1792 of yacc.c  */
-#line 522 "c.y"
+#line 526 "c.y"
     {fprintf(fileLexLog,"direct_abstract_declarator OPENPAREN_OP parameter_type_list CLOSEPAREN_OP REDUCE to direct_abstract_declarator\n");}
     break;
 
   case 189:
 /* Line 1792 of yacc.c  */
-#line 526 "c.y"
+#line 530 "c.y"
     {fprintf(fileLexLog,"assignment_expression REDUCE to initializer\n");}
     break;
 
   case 190:
 /* Line 1792 of yacc.c  */
-#line 527 "c.y"
+#line 531 "c.y"
     {fprintf(fileLexLog,"OCURLY_OP initializer_list CCURLY_OP REDUCE to initializer\n");}
     break;
 
   case 191:
 /* Line 1792 of yacc.c  */
-#line 528 "c.y"
+#line 532 "c.y"
     {fprintf(fileLexLog,"OCURLY_OP initializer_list COMMA_OP CCURLY_OP REDUCE to initializer\n");}
     break;
 
   case 192:
 /* Line 1792 of yacc.c  */
-#line 532 "c.y"
+#line 536 "c.y"
     {fprintf(fileLexLog,"initializer REDUCE to initializer_list\n");}
     break;
 
   case 193:
 /* Line 1792 of yacc.c  */
-#line 533 "c.y"
+#line 537 "c.y"
     {fprintf(fileLexLog,"designation initializer REDUCE to initializer_list\n");}
     break;
 
   case 194:
 /* Line 1792 of yacc.c  */
-#line 534 "c.y"
+#line 538 "c.y"
     {fprintf(fileLexLog,"initializer_list COMMA_OP initializer REDUCE to initializer_list\n");}
     break;
 
   case 195:
 /* Line 1792 of yacc.c  */
-#line 535 "c.y"
+#line 539 "c.y"
     {fprintf(fileLexLog,"initializer_list COMMA_OP designation initializer REDUCE to initializer_list\n");}
     break;
 
   case 196:
 /* Line 1792 of yacc.c  */
-#line 539 "c.y"
+#line 543 "c.y"
     {fprintf(fileLexLog,"designator_list EQUAL_OP REDUCE to designation\n");}
     break;
 
   case 197:
 /* Line 1792 of yacc.c  */
-#line 543 "c.y"
+#line 547 "c.y"
     {fprintf(fileLexLog,"designator REDUCE to designator_list\n");}
     break;
 
   case 198:
 /* Line 1792 of yacc.c  */
-#line 544 "c.y"
+#line 548 "c.y"
     {fprintf(fileLexLog,"designator_list designator EQUAL_OP REDUCE to designator_list\n");}
     break;
 
   case 199:
 /* Line 1792 of yacc.c  */
-#line 548 "c.y"
+#line 552 "c.y"
     {fprintf(fileLexLog,"labeled_statement REDUCE to statement\n");}
     break;
 
   case 200:
 /* Line 1792 of yacc.c  */
-#line 549 "c.y"
+#line 553 "c.y"
     {fprintf(fileLexLog,"labeled_statement REDUCE to statement\n");}
     break;
 
   case 201:
 /* Line 1792 of yacc.c  */
-#line 553 "c.y"
+#line 557 "c.y"
     {fprintf(fileLexLog,"labeled_statement REDUCE to statement\n");}
     break;
 
   case 202:
 /* Line 1792 of yacc.c  */
-#line 554 "c.y"
+#line 558 "c.y"
     {fprintf(fileLexLog,"compound_statement REDUCE to statement\n");}
     break;
 
   case 203:
 /* Line 1792 of yacc.c  */
-#line 555 "c.y"
+#line 559 "c.y"
     {fprintf(fileLexLog,"expression_statement REDUCE to statement\n");}
     break;
 
   case 204:
 /* Line 1792 of yacc.c  */
-#line 556 "c.y"
+#line 560 "c.y"
     {fprintf(fileLexLog,"selection_statement REDUCE to statement\n");}
     break;
 
   case 205:
 /* Line 1792 of yacc.c  */
-#line 557 "c.y"
+#line 561 "c.y"
     {fprintf(fileLexLog,"iteration_statement REDUCE to statement\n");}
     break;
 
   case 206:
 /* Line 1792 of yacc.c  */
-#line 558 "c.y"
+#line 562 "c.y"
     {
 		                     (yyval.CompilerInfo) = (yyvsp[(1) - (1)].CompilerInfo);
 		                     fprintf(fileLexLog,"<EXP> jump_statement REDUCE to statement\n");
@@ -3579,31 +3583,31 @@ yyreduce:
 
   case 207:
 /* Line 1792 of yacc.c  */
-#line 565 "c.y"
+#line 569 "c.y"
     {fprintf(fileLexLog,"IDENTIFIER COLON_OP statement REDUCE to labeled_statement\n");}
     break;
 
   case 208:
 /* Line 1792 of yacc.c  */
-#line 566 "c.y"
+#line 570 "c.y"
     {fprintf(fileLexLog,"CASE constant_expression COLON_OP statement REDUCE to labeled_statement\n");}
     break;
 
   case 209:
 /* Line 1792 of yacc.c  */
-#line 567 "c.y"
+#line 571 "c.y"
     {fprintf(fileLexLog,"DEFAULT COLON_OP statement REDUCE to labeled_statement\n");}
     break;
 
   case 210:
 /* Line 1792 of yacc.c  */
-#line 571 "c.y"
+#line 575 "c.y"
     {fprintf(fileLexLog,"OCURLY_OP CCURLY_OP REDUCE to compound_statement\n");}
     break;
 
   case 211:
 /* Line 1792 of yacc.c  */
-#line 572 "c.y"
+#line 576 "c.y"
     {
 		                                   (yyval.CompilerInfo) = (yyvsp[(2) - (3)].CompilerInfo);
 		                                   fprintf(fileLexLog,"<EXP> OCURLY_OP block_item_list CCURLY_OP REDUCE to compound_statement\n");
@@ -3612,7 +3616,7 @@ yyreduce:
 
   case 212:
 /* Line 1792 of yacc.c  */
-#line 579 "c.y"
+#line 583 "c.y"
     {
 		                          (yyval.CompilerInfo) = (yyvsp[(1) - (1)].CompilerInfo);
 		                          fprintf(fileLexLog,"<EXP> block_item REDUCE to block_item_list\n");
@@ -3621,19 +3625,19 @@ yyreduce:
 
   case 213:
 /* Line 1792 of yacc.c  */
-#line 583 "c.y"
+#line 587 "c.y"
     {fprintf(fileLexLog,"block_item_list block_item REDUCE to block_item_list\n");}
     break;
 
   case 214:
 /* Line 1792 of yacc.c  */
-#line 587 "c.y"
+#line 591 "c.y"
     {fprintf(fileLexLog,"declaration REDUCE to block_item\n");}
     break;
 
   case 215:
 /* Line 1792 of yacc.c  */
-#line 588 "c.y"
+#line 592 "c.y"
     {
 		            (yyval.CompilerInfo) = (yyvsp[(1) - (1)].CompilerInfo);
 		            fprintf(fileLexLog,"<EXP> statement REDUCE to block_item\n");
@@ -3642,97 +3646,97 @@ yyreduce:
 
   case 216:
 /* Line 1792 of yacc.c  */
-#line 595 "c.y"
+#line 599 "c.y"
     {fprintf(fileLexLog,"SEMI_OP REDUCE to expression_statement\n");}
     break;
 
   case 217:
 /* Line 1792 of yacc.c  */
-#line 596 "c.y"
+#line 600 "c.y"
     {fprintf(fileLexLog,"expression SEMI_OP REDUCE to expression_statement\n");}
     break;
 
   case 218:
 /* Line 1792 of yacc.c  */
-#line 600 "c.y"
+#line 604 "c.y"
     {fprintf(fileLexLog,"IF OPENPAREN_OP expression CLOSEPAREN_OP statement REDUCE to selection_statement\n");}
     break;
 
   case 219:
 /* Line 1792 of yacc.c  */
-#line 601 "c.y"
+#line 605 "c.y"
     {fprintf(fileLexLog,"IF OPENPAREN_OP expression CLOSEPAREN_OP statement ELSE statement REDUCE to selection_statement\n");}
     break;
 
   case 220:
 /* Line 1792 of yacc.c  */
-#line 602 "c.y"
+#line 606 "c.y"
     {fprintf(fileLexLog,"SWITCH OPENPAREN_OP expression CLOSEPAREN_OP statement REDUCE to selection_statement\n");}
     break;
 
   case 221:
 /* Line 1792 of yacc.c  */
-#line 606 "c.y"
+#line 610 "c.y"
     {fprintf(fileLexLog,"WHILE OPENPAREN_OP expression CLOSEPAREN_OP statement REDUCE to iteration_statement\n");}
     break;
 
   case 222:
 /* Line 1792 of yacc.c  */
-#line 607 "c.y"
+#line 611 "c.y"
     {fprintf(fileLexLog,"DO statement WHILE OPENPAREN_OP expression CLOSEPAREN_OP SEMI_OP REDUCE to iteration_statement\n");}
     break;
 
   case 223:
 /* Line 1792 of yacc.c  */
-#line 608 "c.y"
+#line 612 "c.y"
     {fprintf(fileLexLog,"FOR OPENPAREN_OP expression_statement expression_statement CLOSEPAREN_OP statement REDUCE to iteration_statement\n");}
     break;
 
   case 224:
 /* Line 1792 of yacc.c  */
-#line 609 "c.y"
+#line 613 "c.y"
     {fprintf(fileLexLog,"FOR OPENPAREN_OP expression_statement expression_statement expression CLOSEPAREN_OP statement REDUCE to iteration_statement\n");}
     break;
 
   case 225:
 /* Line 1792 of yacc.c  */
-#line 610 "c.y"
+#line 614 "c.y"
     {fprintf(fileLexLog,"FOR OPENPAREN_OP declaration expression_statement CLOSEPAREN_OP statement REDUCE to iteration_statement\n");}
     break;
 
   case 226:
 /* Line 1792 of yacc.c  */
-#line 611 "c.y"
+#line 615 "c.y"
     {fprintf(fileLexLog,"FOR OPENPAREN_OP declaration expression_statement expression CLOSEPAREN_OP statement REDUCE to iteration_statement\n");}
     break;
 
   case 227:
 /* Line 1792 of yacc.c  */
-#line 615 "c.y"
+#line 619 "c.y"
     {fprintf(fileLexLog,"GOTO IDENTIFIER SEMI_OP REDUCE to jump_statement\n");}
     break;
 
   case 228:
 /* Line 1792 of yacc.c  */
-#line 616 "c.y"
+#line 620 "c.y"
     {fprintf(fileLexLog,"CONTINUE SEMI_OP REDUCE to jump_statement\n");}
     break;
 
   case 229:
 /* Line 1792 of yacc.c  */
-#line 617 "c.y"
+#line 621 "c.y"
     {fprintf(fileLexLog,"BREAK SEMI_OP REDUCE to jump_statement\n");}
     break;
 
   case 230:
 /* Line 1792 of yacc.c  */
-#line 618 "c.y"
+#line 622 "c.y"
     {fprintf(fileLexLog,"RETURN SEMI_OP REDUCE to jump_statement\n");}
     break;
 
   case 231:
 /* Line 1792 of yacc.c  */
-#line 619 "c.y"
+#line 623 "c.y"
     {
 		                         (yyval.CompilerInfo) = (yyvsp[(2) - (3)].CompilerInfo);
 		                         fprintf(fileLexLog,"<EXP> RETURN expression SEMI_OP REDUCE to jump_statement\n");
@@ -3741,88 +3745,88 @@ yyreduce:
 
   case 232:
 /* Line 1792 of yacc.c  */
-#line 626 "c.y"
+#line 630 "c.y"
     {
                                              (yyval.CompilerInfo) = (yyvsp[(1) - (1)].CompilerInfo);
-											 //addToSymbolTable($<CompilerInfo>1.identifier, $<CompilerInfo>1.type, $<CompilerInfo>1.sign, $<CompilerInfo>1.storage, $<CompilerInfo>1.declarationType, $<CompilerInfo>1.constant, $<CompilerInfo>1.arrayExpression);
+											 //addToSymbolTable($<CompilerInfo>1.data.identifier, $<CompilerInfo>1.data.type, $<CompilerInfo>1.data.sign, $<CompilerInfo>1.data.storage, $<CompilerInfo>1.data.declarationType, $<CompilerInfo>1.data.constant, $<CompilerInfo>1.arrayExpression);
 	                                         fprintf(fileLexLog,"<EXP> external_declaration REDUCE to translation_unit\n");
 											}
     break;
 
   case 233:
 /* Line 1792 of yacc.c  */
-#line 631 "c.y"
+#line 635 "c.y"
     {
-											 //addToSymbolTable($<CompilerInfo>2.identifier, $<CompilerInfo>2.type, $<CompilerInfo>2.sign, $<CompilerInfo>2.storage, $<CompilerInfo>2.declarationType, $<CompilerInfo>2.constant, $<CompilerInfo>1.arrayExpression);
+											 //addToSymbolTable($<CompilerInfo>2.data.identifier, $<CompilerInfo>2.data.type, $<CompilerInfo>2.data.sign, $<CompilerInfo>2.data.storage, $<CompilerInfo>2.data.declarationType, $<CompilerInfo>2.data.constant, $<CompilerInfo>1.arrayExpression);
 		                                     fprintf(fileLexLog,"<EXP> translation_unit external_declaration REDUCE to translation_unit\n");
 											}
     break;
 
   case 234:
 /* Line 1792 of yacc.c  */
-#line 638 "c.y"
+#line 642 "c.y"
     {
                            (yyval.CompilerInfo) = (yyvsp[(1) - (1)].CompilerInfo);
-						   (yyval.CompilerInfo).declarationType = DECLARATION_FUNCTION;
-                           addToFunctionTable((yyval.CompilerInfo).identifier, (yyval.CompilerInfo).type, (yyval.CompilerInfo).sign, (yyval.CompilerInfo).storage, (yyval.CompilerInfo).declarationType, (yyval.CompilerInfo).constant, (yyval.CompilerInfo).arrayExpression);
-						   fprintf(fileLexLog,"'%d %d %s %s' => function_definition REDUCE to external_declaration\n",(yyval.CompilerInfo).storage,(yyval.CompilerInfo).sign,VariableTypeName[(yyval.CompilerInfo).type],(yyval.CompilerInfo).identifier);
+						   (yyval.CompilerInfo).data.declarationType = DECLARATION_FUNCTION;
+                           addToFunctionTable((yyval.CompilerInfo).data.identifier, (yyval.CompilerInfo).data.type, (yyval.CompilerInfo).data.sign, (yyval.CompilerInfo).data.storage, (yyval.CompilerInfo).data.declarationType, (yyval.CompilerInfo).data.constant, (yyval.CompilerInfo).arrayExpression);
+						   fprintf(fileLexLog,"'%d %d %s %s' => function_definition REDUCE to external_declaration\n",(yyval.CompilerInfo).data.storage,(yyval.CompilerInfo).data.sign,VariableTypeName[(yyval.CompilerInfo).data.type],(yyval.CompilerInfo).data.identifier);
 						  }
     break;
 
   case 235:
 /* Line 1792 of yacc.c  */
-#line 644 "c.y"
+#line 648 "c.y"
     {
                            (yyval.CompilerInfo) = (yyvsp[(1) - (1)].CompilerInfo);
-						   (yyval.CompilerInfo).declarationType = DECLARATION_VARIABLE;
-                           (yyval.CompilerInfo).sign = (yyvsp[(1) - (1)].CompilerInfo).sign;
-                           (yyval.CompilerInfo).type = (yyvsp[(1) - (1)].CompilerInfo).type;
-                           (yyval.CompilerInfo).storage = (yyvsp[(1) - (1)].CompilerInfo).storage;
-                           (yyval.CompilerInfo).identifier = (yyvsp[(1) - (1)].CompilerInfo).identifier;
+						   (yyval.CompilerInfo).data.declarationType = DECLARATION_VARIABLE;
+                           (yyval.CompilerInfo).data.sign = (yyvsp[(1) - (1)].CompilerInfo).data.sign;
+                           (yyval.CompilerInfo).data.type = (yyvsp[(1) - (1)].CompilerInfo).data.type;
+                           (yyval.CompilerInfo).data.storage = (yyvsp[(1) - (1)].CompilerInfo).data.storage;
+                           (yyval.CompilerInfo).data.identifier = (yyvsp[(1) - (1)].CompilerInfo).data.identifier;
                            if ((yyval.CompilerInfo).arrayExpression==NULL){
-	                        fprintf(fileLexLog,"'%d %d %d %s' => declaration REDUCE to external_declaration\n",(yyval.CompilerInfo).storage,(yyval.CompilerInfo).sign,(yyval.CompilerInfo).type,(yyval.CompilerInfo).identifier);
+	                        fprintf(fileLexLog,"'%d %d %d %s' => declaration REDUCE to external_declaration\n",(yyval.CompilerInfo).data.storage,(yyval.CompilerInfo).data.sign,(yyval.CompilerInfo).data.type,(yyval.CompilerInfo).data.identifier);
 						   } else {
-						    fprintf(fileLexLog,"'%d %d %d %s[]' => declaration REDUCE to external_declaration\n",(yyval.CompilerInfo).storage,(yyval.CompilerInfo).sign,(yyval.CompilerInfo).type,(yyval.CompilerInfo).identifier);
+						    fprintf(fileLexLog,"'%d %d %d %s[]' => declaration REDUCE to external_declaration\n",(yyval.CompilerInfo).data.storage,(yyval.CompilerInfo).data.sign,(yyval.CompilerInfo).data.type,(yyval.CompilerInfo).data.identifier);
 						   }
-                           addToSymbolTable((yyval.CompilerInfo).identifier, (yyval.CompilerInfo).type, (yyval.CompilerInfo).sign, (yyval.CompilerInfo).storage, (yyval.CompilerInfo).declarationType, (yyval.CompilerInfo).constant, (yyval.CompilerInfo).arrayExpression);
-						   fprintf(fileLexLog,"'%d %d %s %s' => function_definition REDUCE to external_declaration\n",(yyval.CompilerInfo).storage,(yyval.CompilerInfo).sign,VariableTypeName[(yyval.CompilerInfo).type],(yyval.CompilerInfo).identifier);
+                           addToSymbolTable((yyval.CompilerInfo).data.identifier, (yyval.CompilerInfo).data.type, (yyval.CompilerInfo).data.sign, (yyval.CompilerInfo).data.storage, (yyval.CompilerInfo).data.declarationType, (yyval.CompilerInfo).data.constant, (yyval.CompilerInfo).arrayExpression);
+						   fprintf(fileLexLog,"'%d %d %s %s' => function_definition REDUCE to external_declaration\n",(yyval.CompilerInfo).data.storage,(yyval.CompilerInfo).data.sign,VariableTypeName[(yyval.CompilerInfo).data.type],(yyval.CompilerInfo).data.identifier);
 						  }
     break;
 
   case 236:
 /* Line 1792 of yacc.c  */
-#line 662 "c.y"
+#line 666 "c.y"
     {fprintf(fileLexLog,"declaration_specifiers declarator declaration_list compound_statement REDUCE to function_definition\n");}
     break;
 
   case 237:
 /* Line 1792 of yacc.c  */
-#line 663 "c.y"
+#line 667 "c.y"
     { 
 		                                                                     
-		                                                                     (yyval.CompilerInfo).sign = (yyvsp[(1) - (3)].CompilerInfo).sign;
-                                                                             (yyval.CompilerInfo).type = (yyvsp[(1) - (3)].CompilerInfo).type;
-																			 (yyval.CompilerInfo).storage = (yyvsp[(1) - (3)].CompilerInfo).storage;
-																			 (yyval.CompilerInfo).identifier = (yyvsp[(2) - (3)].CompilerInfo).identifier;	
+		                                                                     (yyval.CompilerInfo).data.sign = (yyvsp[(1) - (3)].CompilerInfo).data.sign;
+                                                                             (yyval.CompilerInfo).data.type = (yyvsp[(1) - (3)].CompilerInfo).data.type;
+																			 (yyval.CompilerInfo).data.storage = (yyvsp[(1) - (3)].CompilerInfo).data.storage;
+																			 (yyval.CompilerInfo).data.identifier = (yyvsp[(2) - (3)].CompilerInfo).data.identifier;	
 		                                                                     fprintf(fileLexLog,"<EXP> declaration_specifiers declarator compound_statement REDUCE to function_definition\n");
 																			}
     break;
 
   case 238:
 /* Line 1792 of yacc.c  */
-#line 674 "c.y"
+#line 678 "c.y"
     {fprintf(fileLexLog,"declaration REDUCE to declaration_list\n");}
     break;
 
   case 239:
 /* Line 1792 of yacc.c  */
-#line 675 "c.y"
+#line 679 "c.y"
     {fprintf(fileLexLog,"declaration_list declaration REDUCE to declaration_list\n");}
     break;
 
 
 /* Line 1792 of yacc.c  */
-#line 3826 "c.tab.c"
+#line 3830 "c.tab.c"
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -4061,7 +4065,7 @@ yyreturn:
 
 
 /* Line 2055 of yacc.c  */
-#line 678 "c.y"
+#line 682 "c.y"
 
 
 void yyerror(const char* s) {

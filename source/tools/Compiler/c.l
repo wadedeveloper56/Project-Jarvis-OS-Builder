@@ -153,10 +153,10 @@ void comment(void)
 }
 
 int handleIndentifier(int result) {
- yylval.CompilerInfo.identifier = (char *) malloc((sizeof(char) * (yyleng + 1)));
- strcpy(yylval.CompilerInfo.identifier, yytext);
- yylval.CompilerInfo.constant = (result==IDENTIFIER) ? (FALSE) : (TRUE);
- yylval.CompilerInfo.type = TYPE_NULL;
+ yylval.CompilerInfo.data.identifier = (char *) malloc((sizeof(char) * (yyleng + 1)));
+ strcpy(yylval.CompilerInfo.data.identifier, yytext);
+ yylval.CompilerInfo.data.constant = (result==IDENTIFIER) ? (FALSE) : (TRUE);
+ yylval.CompilerInfo.data.type = TYPE_NULL;
  return result;
 }
 
@@ -164,7 +164,7 @@ void count(void)
 {
 	int i;
 
-	for (i = 0; yytext[i] != '\0'; i++)
+	for (i = 0; yytext[i] != '\0'; i++) 
 		if (yytext[i] == '\n')
 			column = 0;
 		else if (yytext[i] == '\t')
