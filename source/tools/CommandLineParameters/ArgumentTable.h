@@ -12,6 +12,9 @@ enum arg_hdr_flag {
 	ARG_HASVALUE = 0x2,
 	ARG_HASOPTVALUE = 0x4
 };
+enum { ARG_ERR_MINCOUNT = 1, ARG_ERR_MAXCOUNT, ARG_ERR_BADINT, ARG_ERR_OVERFLOW, ARG_ERR_BADDOUBLE, ARG_ERR_BADDATE, ARG_ERR_REGNOMATCH };
+
+typedef void(arg_panicfn)(const char* fmt, ...);
 
 #define ARG_CMD_NAME_LEN 100
 #define ARG_CMD_DESCRIPTION_LEN 256
