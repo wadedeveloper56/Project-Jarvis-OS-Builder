@@ -7,3 +7,5 @@
 /bin/tools/Compiler/Release
 /bin/tools/Assembler/Debug
 /bin/tools/Assembler/Release
+/bin/tools/CommandLineParameters/Debug
+/bin/tools/CommandLineParameters/Release
