@@ -164,6 +164,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ArgDstr.c" />
+    <ClCompile Include="ArgLit.c" />
     <ClCompile Include="Arguments.c" />
     <ClCompile Include="c.tab.c" />
     <ClCompile Include="Compiler.c" />

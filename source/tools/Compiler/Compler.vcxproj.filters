@@ -36,6 +36,12 @@
     <ClCompile Include="Arguments.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ArgLit.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ArgDstr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="global.h">

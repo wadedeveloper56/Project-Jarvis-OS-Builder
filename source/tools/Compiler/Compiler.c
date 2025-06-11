@@ -146,9 +146,9 @@ int setArguments(int bitSize, const char* outfile,int v,const char** infiles, in
 int main(int argc, char* argv[]) {
 	struct arg_int* bitsize = arg_int0("b", "bitsize", NULL, "define bit size to be 16, 32 or 64 bits (default is 32)");
 	struct arg_file* outfile = arg_file0("o", NULL, "<output>", "output file (default is \"-\")");
-	struct arg_lit* verbose = arg_lit0("v", "verbose,debug", "verbose messages");
-	struct arg_lit* help = arg_lit0(NULL, "help", "print this help and exit");
-	struct arg_lit* version = arg_lit0(NULL, "version", "print version information and exit");
+	ArgLitPtr verbose = arg_lit0("v", "verbose,debug", "verbose messages");
+	ArgLitPtr help = arg_lit0(NULL, "help", "print this help and exit");
+	ArgLitPtr version = arg_lit0(NULL, "version", "print version information and exit");
 	struct arg_file* infiles = arg_filen(NULL, NULL, NULL, 1, argc + 2, "input file(s)");
 	struct arg_end* end = arg_end(20);
 	void* argtable[] = {bitsize,outfile,verbose,help,version,infiles,end };
