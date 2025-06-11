@@ -15,63 +15,18 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ArgumentTable_GetOpt.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ArgumentTable.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ArgumentTable_Private.h">
+    <ClInclude Include="framework.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ArgumentTable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="arg_cmd.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="arg_date.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="arg_dbl.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="arg_dstr.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="arg_end.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="arg_file.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="arg_getopt_long.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="arg_hashtable.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="arg_int.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="arg_lit.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="arg_rem.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="arg_rex.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="arg_str.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="arg_utils.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="argtable3.c">
+    <ClCompile Include="Arguments.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="pch.c">

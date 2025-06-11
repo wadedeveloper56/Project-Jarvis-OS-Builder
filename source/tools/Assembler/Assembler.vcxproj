@@ -149,11 +149,6 @@
   <ItemGroup>
     <ClCompile Include="Assembler.c" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Arguments\Arguments.vcxproj">
-      <Project>{d336f6c2-22e2-4ffe-9f32-92211a55f5ce}</Project>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
