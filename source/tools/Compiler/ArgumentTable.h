@@ -12,6 +12,9 @@ extern "C" {
 #define ARG_CMD_DESCRIPTION_LEN 256
 #define START_VSNBUFF 16
 #define ARG_DSTR_SIZE 200
+#define ARG_DSTR_STATIC ((arg_dstr_freefn*)0)
+#define ARG_DSTR_VOLATILE ((arg_dstr_freefn*)1)
+#define ARG_DSTR_DYNAMIC ((arg_dstr_freefn*)3)
 
 	enum { ARG_ERR_MINCOUNT = 1, ARG_ERR_MAXCOUNT, ARG_ERR_BADINT, ARG_ERR_OVERFLOW, ARG_ERR_BADDOUBLE, ARG_ERR_BADDATE, ARG_ERR_REGNOMATCH };
 
@@ -163,6 +166,7 @@ extern "C" {
 	void arg_dstr_cat(arg_dstr_t ds, const char* str);
 	void arg_cat(char** pdest, const char* src, size_t* pndest);
 	void setup_append_buf(arg_dstr_t ds, int new_space);
+	void arg_dstr_free(arg_dstr_t ds);
 #ifdef __cplusplus
 }
 #endif

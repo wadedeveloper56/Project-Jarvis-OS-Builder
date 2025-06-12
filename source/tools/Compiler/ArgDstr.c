@@ -2,20 +2,22 @@
 #include "framework.h"
 #include "ArgumentTable.h"
 
+void arg_dstr_free(arg_dstr_t ds) {
+    if (ds->free_proc != NULL) {
+        if (ds->free_proc == ARG_DSTR_DYNAMIC) {
+            free(ds->data);
+        }
+        else {
+            (*ds->free_proc)(ds->data);
+        }
+        ds->free_proc = NULL;
+    }
+}
+
 void setup_append_buf(arg_dstr_t ds, int new_space) {
     int total_space;
 
-    /*
-     * Make the append buffer larger, if that's necessary, then copy the
-     * data into the append buffer and make the append buffer the official
-     * data.
-     */
     if (ds->data != ds->append_data) {
-        /*
-         * If the buffer is too big, then free it up so we go back to a
-         * smaller buffer. This avoids tying up memory forever after a large
-         * operation.
-         */
         if (ds->append_data_size > 500) {
             free(ds->append_data);
             ds->append_data = NULL;
@@ -24,11 +26,6 @@ void setup_append_buf(arg_dstr_t ds, int new_space) {
         ds->append_used = (int)strlen(ds->data);
     }
     else if (ds->data[ds->append_used] != 0) {
-        /*
-         * Most likely someone has modified a result created by
-         * arg_dstr_cat et al. so that it has a different size. Just
-         * recompute the size.
-         */
         ds->append_used = (int)strlen(ds->data);
     }
 
@@ -44,7 +41,7 @@ void setup_append_buf(arg_dstr_t ds, int new_space) {
         }
         newbuf = (char*)malloc((unsigned)total_space);
         memset(newbuf, 0, (size_t)total_space);
-        strncpy(newbuf, ds->data, (size_t)total_space); /* NOSONAR */
+        strncpy(newbuf, ds->data, (size_t)total_space);   
         assert(newbuf[total_space - 1] == '\0');
         if (ds->append_data != NULL) {
             free(ds->append_data);
@@ -54,7 +51,7 @@ void setup_append_buf(arg_dstr_t ds, int new_space) {
         ds->append_data_size = total_space;
     }
     else if (ds->data != ds->append_data && ds->append_data != NULL) {
-        strncpy(ds->append_data, ds->data, (size_t)ds->append_data_size); /* NOSONAR */
+        strncpy(ds->append_data, ds->data, (size_t)ds->append_data_size);   
         assert(ds->append_data[ds->append_data_size - 1] == '\0');
     }
 
@@ -85,7 +82,7 @@ void arg_dstr_catf(arg_dstr_t ds, const char* fmt, ...) {
 
     for (;;) {
         va_start(arglist, fmt);
-        r = arg_vsnprintf(buff, (size_t)(n + 1), fmt, arglist);
+        r = vsnprintf(buff, (size_t)(n + 1), fmt, arglist);
         va_end(arglist);
 
         slen = strlen(buff);
