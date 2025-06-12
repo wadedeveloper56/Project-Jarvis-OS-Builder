@@ -6,3 +6,7 @@
 /bin/tools/Compiler/Release
 /bin/tools/Assembler/Debug
 /bin/tools/Assembler/Release
+/bin/tools/IDE/Debug
+/bin/tools/IDE/Release
+/bin/tools/Linker/Debug
+/bin/tools/Linker/Release
