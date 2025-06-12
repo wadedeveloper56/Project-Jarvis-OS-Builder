@@ -14,4 +14,7 @@
 #include <stdarg.h>
 #include <assert.h>
 #include <string.h>
+#include <ctype.h>
+#include <limits.h>
+
 #endif //PCH_H

@@ -33,15 +33,6 @@
     <ClCompile Include="pch.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Arguments.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ArgLit.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ArgDstr.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="global.h">
@@ -50,13 +41,7 @@
     <ClInclude Include="c.tab.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Arguments\framework.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="pch.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ArgumentTable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

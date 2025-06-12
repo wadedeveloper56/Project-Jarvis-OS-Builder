@@ -112,7 +112,7 @@ int endSyntacticAnalysis() {
 	return error;
 }
 
-int setArguments(int bitSize, const char* outfile,int v,const char** infiles, int ninfiles) {
+int setArguments(int bitSize, const char* outfile, int v, const char** infiles, int ninfiles) {
 	int i;
 
 	if (bitSize == 16) bit16 = TRUE;
@@ -122,7 +122,7 @@ int setArguments(int bitSize, const char* outfile,int v,const char** infiles, in
 	_splitpath(infiles[0], drive, dir, fname, ext);
 	_makepath(logFileName, drive, dir, fname, "log");
 
-	fileLexLog = fopen(logFileName,"w");
+	fileLexLog = fopen(logFileName, "w");
 
 	if (initializeLexicalAnalysis(infiles[0]) == EXIT_SUCCESS) {
 		if (initializeSyntacticAnalysis(outfile) == EXIT_SUCCESS) {
@@ -144,14 +144,14 @@ int setArguments(int bitSize, const char* outfile,int v,const char** infiles, in
 }
 
 int main(int argc, char* argv[]) {
-	struct arg_int* bitsize = arg_int0("b", "bitsize", NULL, "define bit size to be 16, 32 or 64 bits (default is 32)");
+	ArgIntPtr bitsize = arg_int0("b", "bitsize", NULL, "define bit size to be 16, 32 or 64 bits (default is 32)");
 	struct arg_file* outfile = arg_file0("o", NULL, "<output>", "output file (default is \"-\")");
 	ArgLitPtr verbose = arg_lit0("v", "verbose,debug", "verbose messages");
 	ArgLitPtr help = arg_lit0(NULL, "help", "print this help and exit");
 	ArgLitPtr version = arg_lit0(NULL, "version", "print version information and exit");
 	struct arg_file* infiles = arg_filen(NULL, NULL, NULL, 1, argc + 2, "input file(s)");
 	struct arg_end* end = arg_end(20);
-	void* argtable[] = {bitsize,outfile,verbose,help,version,infiles,end };
+	void* argtable[] = { bitsize,outfile,verbose,help,version,infiles,end };
 	const char* progname = "Compiler";
 	int nerrors;
 	int exitcode = 0;
@@ -211,7 +211,7 @@ int main(int argc, char* argv[]) {
 	}
 
 	/* normal case: take the command line options at face value */
-	exitcode = setArguments(bitsize->ival[0],outfile->filename[0], verbose->count,	infiles->filename, infiles->count);
+	exitcode = setArguments(bitsize->ival[0], outfile->filename[0], verbose->count, infiles->filename, infiles->count);
 
 exit:
 	/* deallocate each non-null entry in argtable[] */
