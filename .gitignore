@@ -1,4 +1,3 @@
-/source/tools/Compler/.vs
 /source/tools/Compiler/.vs
 /source/tools/.vs
 /bin/tools/Arguments/Debug
@@ -7,6 +6,3 @@
 /bin/tools/Compiler/Release
 /bin/tools/Assembler/Debug
 /bin/tools/Assembler/Release
-/bin/tools/CommandLineParameters/Debug
-/bin/tools/CommandLineParameters/Release
-/source/tools/Arguments
