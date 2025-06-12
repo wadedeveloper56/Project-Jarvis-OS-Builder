@@ -50,5 +50,8 @@
     <ClCompile Include="ArgRex.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ArgFile.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

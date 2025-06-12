@@ -158,6 +158,7 @@
   <ItemGroup>
     <ClCompile Include="ArgDbl.c" />
     <ClCompile Include="ArgDstr.c" />
+    <ClCompile Include="ArgFile.c" />
     <ClCompile Include="ArgInt.c" />
     <ClCompile Include="ArgLit.c" />
     <ClCompile Include="ArgRex.c" />

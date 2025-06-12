@@ -21,18 +21,6 @@ ArgRemPtr arg_rem(const char* datatype, const char* glossary) {
 	return result;
 }
 
-arg_file_t* arg_filen(const char* shortopts, const char* longopts, const char* datatype, int mincount, int maxcount, const char* glossary) {
-	return NULL;
-}
-
-arg_file_t* arg_file0(const char* shortopts, const char* longopts, const char* datatype, const char* glossary) {
-	return NULL;
-}
-
-arg_file_t* arg_file1(const char* shortopts, const char* longopts, const char* datatype, const char* glossary) {
-	return NULL;
-}
-
 arg_date_t* arg_daten(const char* shortopts, const char* longopts, const char* format, const char* datatype, int mincount, int maxcount, const char* glossary) {
 	return NULL;
 }

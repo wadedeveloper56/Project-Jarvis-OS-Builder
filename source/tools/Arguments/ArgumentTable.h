@@ -67,39 +67,39 @@ extern "C" {
 	typedef struct _ArgLit {
 		struct arg_hdr hdr;
 		int count;
-	} ArgLit, * ArgLitPtr,**ArgLitPtrPtr;
+	} ArgLit, * ArgLitPtr, ** ArgLitPtrPtr;
 
 	typedef struct _ArgInt {
 		struct arg_hdr hdr;
 		int count;
 		int* ival;
-	} ArgInt,*ArgIntPtr,**ArgIntPtrPtr;
+	} ArgInt, * ArgIntPtr, ** ArgIntPtrPtr;
 
 	typedef struct _ArgDbl {
 		struct arg_hdr hdr;
 		int count;
 		double* dval;
-	} ArgDbl,*ArgDblPtr,**ArgDblPtrPtr;
+	} ArgDbl, * ArgDblPtr, ** ArgDblPtrPtr;
 
 	typedef struct _ArgStr {
 		struct arg_hdr hdr;
 		int count;
 		const char** sval;
-	} ArgStr, *ArgStrPtr,**ArgStrPtrPtr;
+	} ArgStr, * ArgStrPtr, ** ArgStrPtrPtr;
 
 	typedef struct _ArgRex {
 		struct arg_hdr hdr;
 		int count;
 		const char** sval;
-	} ArgRex,*ArgRexPtr,**ArgRexPtrPtr;
+	} ArgRex, * ArgRexPtr, ** ArgRexPtrPtr;
 
-	typedef struct arg_file {
+	typedef struct _ArgFile {
 		struct arg_hdr hdr;
 		int count;
 		const char** filename;
 		const char** basename;
 		const char** extension;
-	} arg_file_t;
+	} ArgFile,*ArgFilePtr,**ArgFilePtrPtr;
 
 	typedef struct arg_date {
 		struct arg_hdr hdr;
@@ -148,9 +148,9 @@ extern "C" {
 	ArgRexPtr arg_rexn(const char* shortopts, const char* longopts, const char* pattern, const char* datatype, int mincount, int maxcount, int flags, const char* glossary);
 	ArgRexPtr arg_rex0(const char* shortopts, const char* longopts, const char* pattern, const char* datatype, int flags, const char* glossary);
 	ArgRexPtr arg_rex1(const char* shortopts, const char* longopts, const char* pattern, const char* datatype, int flags, const char* glossary);
-	arg_file_t* arg_filen(const char* shortopts, const char* longopts, const char* datatype, int mincount, int maxcount, const char* glossary);
-	arg_file_t* arg_file0(const char* shortopts, const char* longopts, const char* datatype, const char* glossary);
-	arg_file_t* arg_file1(const char* shortopts, const char* longopts, const char* datatype, const char* glossary);
+	ArgFilePtr arg_filen(const char* shortopts, const char* longopts, const char* datatype, int mincount, int maxcount, const char* glossary);
+	ArgFilePtr arg_file0(const char* shortopts, const char* longopts, const char* datatype, const char* glossary);
+	ArgFilePtr arg_file1(const char* shortopts, const char* longopts, const char* datatype, const char* glossary);
 	arg_date_t* arg_daten(const char* shortopts, const char* longopts, const char* format, const char* datatype, int mincount, int maxcount, const char* glossary);
 	arg_date_t* arg_date0(const char* shortopts, const char* longopts, const char* format, const char* datatype, const char* glossary);
 	arg_date_t* arg_date1(const char* shortopts, const char* longopts, const char* format, const char* datatype, const char* glossary);

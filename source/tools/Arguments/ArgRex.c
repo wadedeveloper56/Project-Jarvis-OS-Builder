@@ -8,30 +8,74 @@
 #define trex_strlen strlen
 #define trex_printf printf
 
-#ifndef TREX_API
-#define TREX_API extern
-#endif
-
 #define TRex_True 1
 #define TRex_False 0
 
 #define TREX_ICASE ARG_REX_ICASE
+#define OP_GREEDY (MAX_CHAR + 1)        
+#define OP_OR (MAX_CHAR + 2)
+#define OP_EXPR (MAX_CHAR + 3)          
+#define OP_NOCAPEXPR (MAX_CHAR + 4)     
+#define OP_DOT (MAX_CHAR + 5)
+#define OP_CLASS (MAX_CHAR + 6)
+#define OP_CCLASS (MAX_CHAR + 7)
+#define OP_NCLASS (MAX_CHAR + 8)       
+#define OP_RANGE (MAX_CHAR + 9)
+#define OP_CHAR (MAX_CHAR + 10)
+#define OP_EOL (MAX_CHAR + 11)
+#define OP_BOL (MAX_CHAR + 12)
+#define OP_WB (MAX_CHAR + 13)
 
+#define TREX_SYMBOL_ANY_CHAR ('.')
+#define TREX_SYMBOL_GREEDY_ONE_OR_MORE ('+')
+#define TREX_SYMBOL_GREEDY_ZERO_OR_MORE ('*')
+#define TREX_SYMBOL_GREEDY_ZERO_OR_ONE ('?')
+#define TREX_SYMBOL_BRANCH ('|')
+#define TREX_SYMBOL_END_OF_STRING ('$')
+#define TREX_SYMBOL_BEGINNING_OF_STRING ('^')
+#define TREX_SYMBOL_ESCAPE_CHAR ('\\')
+
+typedef int TRexNodeType;
 typedef unsigned int TRexBool;
 typedef struct TRex TRex;
 
-typedef struct {
+typedef struct _TRexMatch {
     const TRexChar* begin;
     int len;
-} TRexMatch;
+} TRexMatch,*TRexMatchPtr,**TRexMatchPtrPtr;
 
-TREX_API TRex* trex_compile(const TRexChar* pattern, const TRexChar** error, int flags);
-TREX_API void trex_free(TRex* exp);
-TREX_API TRexBool trex_match(TRex* exp, const TRexChar* text);
-TREX_API TRexBool trex_search(TRex* exp, const TRexChar* text, const TRexChar** out_begin, const TRexChar** out_end);
-TREX_API TRexBool trex_searchrange(TRex* exp, const TRexChar* text_begin, const TRexChar* text_end, const TRexChar** out_begin, const TRexChar** out_end);
-TREX_API int trex_getsubexpcount(TRex* exp);
-TREX_API TRexBool trex_getsubexp(TRex* exp, int n, TRexMatch* subexp);
+typedef struct _TRexNode {
+    TRexNodeType type;
+    int left;
+    int right;
+    int next;
+} TRexNode,*TRexNodePtr,**TRexNodePtrPtr;
+
+struct TRex {
+    const TRexChar* _eol;
+    const TRexChar* _bol;
+    const TRexChar* _p;
+    int _first;
+    int _op;
+    TRexNode* _nodes;
+    int _nallocated;
+    int _nsize;
+    int _nsubexpr;
+    TRexMatchPtr _matches;
+    int _currsubexp;
+    void* _jmpbuf;
+    const TRexChar** _error;
+    int _flags;
+};
+
+int trex_list(TRex* exp);
+TRex* trex_compile(const TRexChar* pattern, const TRexChar** error, int flags);
+void trex_free(TRex* exp);
+TRexBool trex_match(TRex* exp, const TRexChar* text);
+TRexBool trex_search(TRex* exp, const TRexChar* text, const TRexChar** out_begin, const TRexChar** out_end);
+TRexBool trex_searchrange(TRex* exp, const TRexChar* text_begin, const TRexChar* text_end, const TRexChar** out_begin, const TRexChar** out_end);
+int trex_getsubexpcount(TRex* exp);
+TRexBool trex_getsubexp(TRex* exp, int n, TRexMatch* subexp);
 
 struct privhdr {
     const char* pattern;
@@ -165,79 +209,6 @@ ArgRexPtr arg_rexn(const char* shortopts, const char* longopts, const char* patt
     }
     return result;
 }
-
-/*
-#ifdef _UINCODE
-#define scisprint iswprint
-#define scstrlen wcslen
-#define scprintf wprintf
-#define _SC(x) L(x)
-#else
-#define scisprint isprint
-#define scstrlen strlen
-#define scprintf printf
-#define _SC(x) (x)
-#endif
-
-#ifdef ARG_REX_DEBUG
-#include <stdio.h>
-
-static const TRexChar* g_nnames[] = { _SC("NONE"),    _SC("OP_GREEDY"), _SC("OP_OR"),     _SC("OP_EXPR"),   _SC("OP_NOCAPEXPR"),
-                                     _SC("OP_DOT"),  _SC("OP_CLASS"),  _SC("OP_CCLASS"), _SC("OP_NCLASS"), _SC("OP_RANGE"),
-                                     _SC("OP_CHAR"), _SC("OP_EOL"),    _SC("OP_BOL"),    _SC("OP_WB") };
-
-#endif
-*/
-#define OP_GREEDY (MAX_CHAR + 1)        
-#define OP_OR (MAX_CHAR + 2)
-#define OP_EXPR (MAX_CHAR + 3)          
-#define OP_NOCAPEXPR (MAX_CHAR + 4)     
-#define OP_DOT (MAX_CHAR + 5)
-#define OP_CLASS (MAX_CHAR + 6)
-#define OP_CCLASS (MAX_CHAR + 7)
-#define OP_NCLASS (MAX_CHAR + 8)       
-#define OP_RANGE (MAX_CHAR + 9)
-#define OP_CHAR (MAX_CHAR + 10)
-#define OP_EOL (MAX_CHAR + 11)
-#define OP_BOL (MAX_CHAR + 12)
-#define OP_WB (MAX_CHAR + 13)
-
-#define TREX_SYMBOL_ANY_CHAR ('.')
-#define TREX_SYMBOL_GREEDY_ONE_OR_MORE ('+')
-#define TREX_SYMBOL_GREEDY_ZERO_OR_MORE ('*')
-#define TREX_SYMBOL_GREEDY_ZERO_OR_ONE ('?')
-#define TREX_SYMBOL_BRANCH ('|')
-#define TREX_SYMBOL_END_OF_STRING ('$')
-#define TREX_SYMBOL_BEGINNING_OF_STRING ('^')
-#define TREX_SYMBOL_ESCAPE_CHAR ('\\')
-
-typedef int TRexNodeType;
-
-typedef struct tagTRexNode {
-    TRexNodeType type;
-    int left;
-    int right;
-    int next;
-} TRexNode;
-
-struct TRex {
-    const TRexChar* _eol;
-    const TRexChar* _bol;
-    const TRexChar* _p;
-    int _first;
-    int _op;
-    TRexNode* _nodes;
-    int _nallocated;
-    int _nsize;
-    int _nsubexpr;
-    TRexMatch* _matches;
-    int _currsubexp;
-    void* _jmpbuf;
-    const TRexChar** _error;
-    int _flags;
-};
-
-int trex_list(TRex* exp);
 
 int trex_newnode(TRex* exp, TRexNodeType type) {
     TRexNode n;
