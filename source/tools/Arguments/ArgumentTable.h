@@ -8,6 +8,7 @@
 extern "C" {
 #endif
 
+#define ARG_REX_ICASE 1
 #define ARG_CMD_NAME_LEN 100
 #define ARG_CMD_DESCRIPTION_LEN 256
 #define START_VSNBUFF 16
@@ -80,17 +81,17 @@ extern "C" {
 		double* dval;
 	} ArgDbl,*ArgDblPtr,**ArgDblPtrPtr;
 
-	typedef struct arg_str {
+	typedef struct _ArgStr {
 		struct arg_hdr hdr;
 		int count;
 		const char** sval;
-	} arg_str_t;
+	} ArgStr, *ArgStrPtr,**ArgStrPtrPtr;
 
-	typedef struct arg_rex {
+	typedef struct _ArgRex {
 		struct arg_hdr hdr;
 		int count;
 		const char** sval;
-	} arg_rex_t;
+	} ArgRex,*ArgRexPtr,**ArgRexPtrPtr;
 
 	typedef struct arg_file {
 		struct arg_hdr hdr;
@@ -141,12 +142,12 @@ extern "C" {
 	ArgDblPtr arg_dbln(const char* shortopts, const char* longopts, const char* datatype, int mincount, int maxcount, const char* glossary);
 	ArgDblPtr arg_dbl0(const char* shortopts, const char* longopts, const char* datatype, const char* glossary);
 	ArgDblPtr arg_dbl1(const char* shortopts, const char* longopts, const char* datatype, const char* glossary);
-	arg_str_t* arg_strn(const char* shortopts, const char* longopts, const char* datatype, int mincount, int maxcount, const char* glossary);
-	arg_str_t* arg_str0(const char* shortopts, const char* longopts, const char* datatype, const char* glossary);
-	arg_str_t* arg_str1(const char* shortopts, const char* longopts, const char* datatype, const char* glossary);
-	arg_rex_t* arg_rexn(const char* shortopts, const char* longopts, const char* pattern, const char* datatype, int mincount, int maxcount, int flags, const char* glossary);
-	arg_rex_t* arg_rex0(const char* shortopts, const char* longopts, const char* pattern, const char* datatype, int flags, const char* glossary);
-	arg_rex_t* arg_rex1(const char* shortopts, const char* longopts, const char* pattern, const char* datatype, int flags, const char* glossary);
+	ArgStrPtr arg_strn(const char* shortopts, const char* longopts, const char* datatype, int mincount, int maxcount, const char* glossary);
+	ArgStrPtr arg_str0(const char* shortopts, const char* longopts, const char* datatype, const char* glossary);
+	ArgStrPtr arg_str1(const char* shortopts, const char* longopts, const char* datatype, const char* glossary);
+	ArgRexPtr arg_rexn(const char* shortopts, const char* longopts, const char* pattern, const char* datatype, int mincount, int maxcount, int flags, const char* glossary);
+	ArgRexPtr arg_rex0(const char* shortopts, const char* longopts, const char* pattern, const char* datatype, int flags, const char* glossary);
+	ArgRexPtr arg_rex1(const char* shortopts, const char* longopts, const char* pattern, const char* datatype, int flags, const char* glossary);
 	arg_file_t* arg_filen(const char* shortopts, const char* longopts, const char* datatype, int mincount, int maxcount, const char* glossary);
 	arg_file_t* arg_file0(const char* shortopts, const char* longopts, const char* datatype, const char* glossary);
 	arg_file_t* arg_file1(const char* shortopts, const char* longopts, const char* datatype, const char* glossary);

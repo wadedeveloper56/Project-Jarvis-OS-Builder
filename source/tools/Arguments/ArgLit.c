@@ -5,7 +5,7 @@
 void arg_lit_resetfn(void* parent_) {
 	ArgLitPtr parent = (ArgLitPtr)parent_;
 	parent->count = 0;
-}
+} 
 
 int arg_lit_scanfn(void* parent_, const char* argval) {
 	ArgLitPtr parent = parent_;

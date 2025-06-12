@@ -44,5 +44,11 @@
     <ClCompile Include="ArgDbl.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ArgStr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ArgRex.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

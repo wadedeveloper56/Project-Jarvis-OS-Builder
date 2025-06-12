@@ -4,44 +4,21 @@
 
 ArgRemPtr arg_rem(const char* datatype, const char* glossary) {
 	ArgRemPtr result = (ArgRemPtr)malloc(sizeof(ArgRem));
-
-	result->hdr.flag = 0;
-	result->hdr.shortopts = NULL;
-	result->hdr.longopts = NULL;
-	result->hdr.datatype = datatype;
-	result->hdr.glossary = glossary;
-	result->hdr.mincount = 1;
-	result->hdr.maxcount = 1;
-	result->hdr.parent = result;
-	result->hdr.resetfn = NULL;
-	result->hdr.scanfn = NULL;
-	result->hdr.checkfn = NULL;
-	result->hdr.errorfn = NULL;
+    if (result) {
+        result->hdr.flag = 0;
+        result->hdr.shortopts = NULL;
+        result->hdr.longopts = NULL;
+        result->hdr.datatype = datatype;
+        result->hdr.glossary = glossary;
+        result->hdr.mincount = 1;
+        result->hdr.maxcount = 1;
+        result->hdr.parent = result;
+        result->hdr.resetfn = NULL;
+        result->hdr.scanfn = NULL;
+        result->hdr.checkfn = NULL;
+        result->hdr.errorfn = NULL;
+    }
 	return result;
-}
-
-arg_str_t* arg_strn(const char* shortopts, const char* longopts, const char* datatype, int mincount, int maxcount, const char* glossary) {
-	return NULL;
-}
-
-arg_str_t* arg_str0(const char* shortopts, const char* longopts, const char* datatype, const char* glossary) {
-	return NULL;
-}
-
-arg_str_t* arg_str1(const char* shortopts, const char* longopts, const char* datatype, const char* glossary) {
-	return NULL;
-}
-
-arg_rex_t* arg_rexn(const char* shortopts, const char* longopts, const char* pattern, const char* datatype, int mincount, int maxcount, int flags, const char* glossary) {
-	return NULL;
-}
-
-arg_rex_t* arg_rex0(const char* shortopts, const char* longopts, const char* pattern, const char* datatype, int flags, const char* glossary) {
-	return NULL;
-}
-
-arg_rex_t* arg_rex1(const char* shortopts, const char* longopts, const char* pattern, const char* datatype, int flags, const char* glossary) {
-	return NULL;
 }
 
 arg_file_t* arg_filen(const char* shortopts, const char* longopts, const char* datatype, int mincount, int maxcount, const char* glossary) {

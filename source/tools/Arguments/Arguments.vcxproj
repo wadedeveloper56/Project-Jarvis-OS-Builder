@@ -160,6 +160,8 @@
     <ClCompile Include="ArgDstr.c" />
     <ClCompile Include="ArgInt.c" />
     <ClCompile Include="ArgLit.c" />
+    <ClCompile Include="ArgRex.c" />
+    <ClCompile Include="ArgStr.c" />
     <ClCompile Include="Arguments.c" />
     <ClCompile Include="pch.c" />
   </ItemGroup>

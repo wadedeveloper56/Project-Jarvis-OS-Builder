@@ -17,5 +17,6 @@
 #include <string.h>
 #include <ctype.h>
 #include <limits.h>
+#include <setjmp.h>
 
 #endif //PCH_H
