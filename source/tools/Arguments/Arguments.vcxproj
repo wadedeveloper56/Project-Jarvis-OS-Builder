@@ -156,8 +156,10 @@
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ArgDate.c" />
     <ClCompile Include="ArgDbl.c" />
     <ClCompile Include="ArgDstr.c" />
+    <ClCompile Include="ArgEnd.c" />
     <ClCompile Include="ArgFile.c" />
     <ClCompile Include="ArgInt.c" />
     <ClCompile Include="ArgLit.c" />

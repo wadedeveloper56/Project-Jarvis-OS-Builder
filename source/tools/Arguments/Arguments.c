@@ -21,22 +21,6 @@ ArgRemPtr arg_rem(const char* datatype, const char* glossary) {
 	return result;
 }
 
-arg_date_t* arg_daten(const char* shortopts, const char* longopts, const char* format, const char* datatype, int mincount, int maxcount, const char* glossary) {
-	return NULL;
-}
-
-arg_date_t* arg_date0(const char* shortopts, const char* longopts, const char* format, const char* datatype, const char* glossary) {
-	return NULL;
-}
-
-arg_date_t* arg_date1(const char* shortopts, const char* longopts, const char* format, const char* datatype, const char* glossary) {
-	return NULL;
-}
-
-arg_end_t* arg_end(int maxcount) {
-	return NULL;
-}
-
 int arg_nullcheck(void** argtable) {
 	return 0;
 }
@@ -49,9 +33,6 @@ void arg_print_syntax(FILE* fp, void** argtable, const char* suffix) {
 }
 
 void arg_print_glossary(FILE* fp, void** argtable, const char* format) {
-}
-
-void arg_print_errors(FILE* fp, arg_end_t* end, const char* progname) {
 }
 
 void arg_freetable(void** argtable, size_t n) {
@@ -132,7 +113,7 @@ void arg_cat_optionv(char* dest, size_t ndest, const char* shortopts, const char
     }
 }
 
-void arg_print_option_ds(arg_dstr_t ds, const char* shortopts, const char* longopts, const char* datatype, const char* suffix) {
+void arg_print_option_ds(ArgDstrPtr ds, const char* shortopts, const char* longopts, const char* datatype, const char* suffix) {
 	char syntax[200] = "";
 	suffix = suffix ? suffix : "";
 

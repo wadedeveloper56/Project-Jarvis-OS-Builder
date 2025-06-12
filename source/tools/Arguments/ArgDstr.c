@@ -2,7 +2,41 @@
 #include "framework.h"
 #include "ArgumentTable.h"
 
-void arg_dstr_free(arg_dstr_t ds) {
+char* arg_dstr_cstr(struct _ArgDstr* ds) {
+    return ds->data;
+}
+
+void arg_dstr_reset(struct _ArgDstr* ds) {
+    arg_dstr_free(ds);
+    if ((ds->append_data != NULL) && (ds->append_data_size > 0)) {
+        free(ds->append_data);
+        ds->append_data = NULL;
+        ds->append_data_size = 0;
+    }
+
+    ds->data = ds->sbuf;
+    ds->sbuf[0] = 0;
+}
+
+struct _ArgDstr* arg_dstr_create(void) {
+    struct _ArgDstr* h = (struct _ArgDstr*)malloc(sizeof(struct _ArgDstr));
+    memset(h, 0, sizeof(struct _ArgDstr));
+    h->sbuf[0] = 0;
+    h->data = h->sbuf;
+    h->free_proc = ARG_DSTR_STATIC;
+    return h;
+}
+
+void arg_dstr_destroy(struct _ArgDstr* ds) {
+    if (ds == NULL)
+        return;
+
+    arg_dstr_reset(ds);
+    free(ds);
+    return;
+}
+
+void arg_dstr_free(struct _ArgDstr* ds) {
     if (ds->free_proc != NULL) {
         if (ds->free_proc == ARG_DSTR_DYNAMIC) {
             free(ds->data);
@@ -14,7 +48,7 @@ void arg_dstr_free(arg_dstr_t ds) {
     }
 }
 
-void setup_append_buf(arg_dstr_t ds, int new_space) {
+void setup_append_buf(struct _ArgDstr* ds, int new_space) {
     int total_space;
 
     if (ds->data != ds->append_data) {
@@ -60,12 +94,12 @@ void setup_append_buf(arg_dstr_t ds, int new_space) {
     ds->data = ds->append_data;
 }
 
-void arg_dstr_cat(arg_dstr_t ds, const char* str) {
+void arg_dstr_cat(struct _ArgDstr* ds, const char* str) {
     setup_append_buf(ds, (int)strlen(str) + 1);
     memcpy(ds->data + strlen(ds->data), str, strlen(str));
 }
 
-void arg_dstr_catf(arg_dstr_t ds, const char* fmt, ...) {
+void arg_dstr_catf(struct _ArgDstr* ds, const char* fmt, ...) {
     va_list arglist;
     char* buff;
     int n, r;

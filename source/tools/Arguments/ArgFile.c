@@ -71,7 +71,7 @@ int arg_file_checkfn(void* parent_) {
 	return errorcode;
 }
 
-void arg_file_errorfn(void* parent_, arg_dstr_t ds, int errorcode, const char* argval, const char* progname) {
+void arg_file_errorfn(void* parent_, struct _ArgDstr* ds, int errorcode, const char* argval, const char* progname) {
 	ArgFilePtr parent = parent_;
 	const char* shortopts = parent->hdr.shortopts;
 	const char* longopts = parent->hdr.longopts;

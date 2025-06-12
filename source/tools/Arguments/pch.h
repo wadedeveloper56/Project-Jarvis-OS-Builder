@@ -18,5 +18,6 @@
 #include <ctype.h>
 #include <limits.h>
 #include <setjmp.h>
+#include <time.h>
 
 #endif //PCH_H

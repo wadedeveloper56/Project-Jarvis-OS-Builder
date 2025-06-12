@@ -1,9 +1,6 @@
 #ifndef ARGUMENTTABLE
 #define ARGUMENTTABLE
 
-#include <stdio.h>   
-#include <time.h>     
-
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -13,9 +10,49 @@ extern "C" {
 #define ARG_CMD_DESCRIPTION_LEN 256
 #define START_VSNBUFF 16
 #define ARG_DSTR_SIZE 200
-#define ARG_DSTR_STATIC ((arg_dstr_freefn*)0)
-#define ARG_DSTR_VOLATILE ((arg_dstr_freefn*)1)
-#define ARG_DSTR_DYNAMIC ((arg_dstr_freefn*)3)
+#define ARG_DSTR_STATIC ((ArgDstrFreeFunctionPtr)0)
+#define ARG_DSTR_VOLATILE ((ArgDstrFreeFunctionPtr)1)
+#define ARG_DSTR_DYNAMIC ((ArgDstrFreeFunctionPtr)3)
+#define ALT_E 0x01
+#define ALT_O 0x02
+#define LEGAL_ALT(x)           \
+    {                          \
+        if (alt_format & ~(x)) \
+            return (0);        \
+    }
+#define TM_YEAR_BASE (1900)
+#define TRexChar char
+#define MAX_CHAR 0xFF
+#define _TREXC(c) (c)
+#define trex_strlen strlen
+#define trex_printf printf
+
+#define TRex_True 1
+#define TRex_False 0
+
+#define TREX_ICASE ARG_REX_ICASE
+#define OP_GREEDY (MAX_CHAR + 1)        
+#define OP_OR (MAX_CHAR + 2)
+#define OP_EXPR (MAX_CHAR + 3)          
+#define OP_NOCAPEXPR (MAX_CHAR + 4)     
+#define OP_DOT (MAX_CHAR + 5)
+#define OP_CLASS (MAX_CHAR + 6)
+#define OP_CCLASS (MAX_CHAR + 7)
+#define OP_NCLASS (MAX_CHAR + 8)       
+#define OP_RANGE (MAX_CHAR + 9)
+#define OP_CHAR (MAX_CHAR + 10)
+#define OP_EOL (MAX_CHAR + 11)
+#define OP_BOL (MAX_CHAR + 12)
+#define OP_WB (MAX_CHAR + 13)
+
+#define TREX_SYMBOL_ANY_CHAR ('.')
+#define TREX_SYMBOL_GREEDY_ONE_OR_MORE ('+')
+#define TREX_SYMBOL_GREEDY_ZERO_OR_MORE ('*')
+#define TREX_SYMBOL_GREEDY_ZERO_OR_ONE ('?')
+#define TREX_SYMBOL_BRANCH ('|')
+#define TREX_SYMBOL_END_OF_STRING ('$')
+#define TREX_SYMBOL_BEGINNING_OF_STRING ('^')
+#define TREX_SYMBOL_ESCAPE_CHAR ('\\')
 
 	enum { ARG_ERR_MINCOUNT = 1, ARG_ERR_MAXCOUNT, ARG_ERR_BADINT, ARG_ERR_OVERFLOW, ARG_ERR_BADDOUBLE, ARG_ERR_BADDATE, ARG_ERR_REGNOMATCH };
 
@@ -33,18 +70,22 @@ extern "C" {
 		ARG_HASOPTVALUE = 0x4
 	};
 
-	typedef struct _internal_arg_dstr* arg_dstr_t;
-	typedef void* arg_cmd_itr_t;
+	struct _ArgDstr;
 
-	typedef void(arg_resetfn)(void* parent);
-	typedef int(arg_scanfn)(void* parent, const char* argval);
-	typedef int(arg_checkfn)(void* parent);
-	typedef void(arg_errorfn)(void* parent, arg_dstr_t ds, int error, const char* argval, const char* progname);
-	typedef void(arg_dstr_freefn)(char* buf);
-	typedef int(arg_cmdfn)(int argc, char* argv[], arg_dstr_t res, void* ctx);
-	typedef int(arg_comparefn)(const void* k1, const void* k2);
+	typedef void(*ArgResetFunctionPtr)(void* parent);
+	typedef int(*ArgScanFunctionPtr)(void* parent, const char* argval);
+	typedef int(*ArgCheckInFunctionPtr)(void* parent);
+	typedef void(*ArgErrorFunctionPtr)(void* parent, struct _ArgDstr* ds, int error, const char* argval, const char* progname);
+	typedef void(*ArgDstrFreeFunctionPtr)(char* buf);
+	typedef int(*ArgCmdFunctionPtr)(int argc, char* argv[], struct _ArgDstr* res, void* ctx);
+	typedef int(*arg_comparefn)(const void* k1, const void* k2);
 
-	typedef struct arg_hdr {
+	typedef struct _PrivHdr {
+		const char* pattern;
+		int flags;
+	}PrivHdr, * PrivHdrPtr, ** PrivHdrPtrPtr;
+
+	typedef struct _ArgHdr {
 		char flag;
 		const char* shortopts;
 		const char* longopts;
@@ -53,84 +94,120 @@ extern "C" {
 		int mincount;
 		int maxcount;
 		void* parent;
-		arg_resetfn* resetfn;
-		arg_scanfn* scanfn;
-		arg_checkfn* checkfn;
-		arg_errorfn* errorfn;
+		ArgResetFunctionPtr resetfn;
+		ArgScanFunctionPtr scanfn;
+		ArgCheckInFunctionPtr checkfn;
+		ArgErrorFunctionPtr errorfn;
 		void* priv;
-	} arg_hdr_t;
+	} ArgHdr, * ArgHdrPtr, ** ArgHdrPtrPtr;
 
 	typedef struct _ArgRem {
-		struct arg_hdr hdr;
+		ArgHdr hdr;
 	} ArgRem, * ArgRemPtr;
 
 	typedef struct _ArgLit {
-		struct arg_hdr hdr;
+		ArgHdr hdr;
 		int count;
 	} ArgLit, * ArgLitPtr, ** ArgLitPtrPtr;
 
 	typedef struct _ArgInt {
-		struct arg_hdr hdr;
+		ArgHdr hdr;
 		int count;
 		int* ival;
 	} ArgInt, * ArgIntPtr, ** ArgIntPtrPtr;
 
 	typedef struct _ArgDbl {
-		struct arg_hdr hdr;
+		ArgHdr hdr;
 		int count;
 		double* dval;
 	} ArgDbl, * ArgDblPtr, ** ArgDblPtrPtr;
 
 	typedef struct _ArgStr {
-		struct arg_hdr hdr;
+		ArgHdr hdr;
 		int count;
 		const char** sval;
 	} ArgStr, * ArgStrPtr, ** ArgStrPtrPtr;
 
 	typedef struct _ArgRex {
-		struct arg_hdr hdr;
+		ArgHdr hdr;
 		int count;
 		const char** sval;
 	} ArgRex, * ArgRexPtr, ** ArgRexPtrPtr;
 
 	typedef struct _ArgFile {
-		struct arg_hdr hdr;
+		ArgHdr hdr;
 		int count;
 		const char** filename;
 		const char** basename;
 		const char** extension;
-	} ArgFile,*ArgFilePtr,**ArgFilePtrPtr;
+	} ArgFile, * ArgFilePtr, ** ArgFilePtrPtr;
 
-	typedef struct arg_date {
-		struct arg_hdr hdr;
+	typedef struct _ArgDate {
+		ArgHdr hdr;
 		const char* format;
 		int count;
 		struct tm* tmval;
-	} arg_date_t;
+	}ArgDate, * ArgDatePtr, ** ArgDatePtrPtr;
 
-	typedef struct arg_end {
-		struct arg_hdr hdr;
+	typedef struct _ArgEnd {
+		ArgHdr hdr;
 		int count;
 		int* error;
 		void** parent;
 		const char** argval;
-	} arg_end_t;
+	} ArgEnd,*ArgEndPtr,**ArgEndPtrPtr;
 
 	typedef struct arg_cmd_info {
 		char name[ARG_CMD_NAME_LEN];
 		char description[ARG_CMD_DESCRIPTION_LEN];
-		arg_cmdfn* proc;
+		ArgCmdFunctionPtr proc;
 		void* ctx;
 	} arg_cmd_info_t;
 
-	typedef struct _internal_arg_dstr {
+	typedef struct _ArgDstr {
 		char* data;
-		arg_dstr_freefn* free_proc;
+		ArgDstrFreeFunctionPtr free_proc;
 		char sbuf[ARG_DSTR_SIZE + 1];
 		char* append_data;
 		int append_data_size;
 		int append_used;
-	} _internal_arg_dstr_t;
+	} ArgDstr, * ArgDstrPtr, ** ArgDstrPtrPtr;
+
+	//typedef struct _internal_arg_dstr* arg_dstr_t;
+	typedef void* arg_cmd_itr_t;
+
+	typedef int TRexNodeType;
+	typedef unsigned int TRexBool;
+	//typedef struct TRex TRex;
+
+	typedef struct _TRexMatch {
+		const TRexChar* begin;
+		int len;
+	} TRexMatch, * TRexMatchPtr, ** TRexMatchPtrPtr;
+
+	typedef struct _TRexNode {
+		TRexNodeType type;
+		int left;
+		int right;
+		int next;
+	} TRexNode, * TRexNodePtr, ** TRexNodePtrPtr;
+
+	typedef struct _TRex {
+		const TRexChar* _eol;
+		const TRexChar* _bol;
+		const TRexChar* _p;
+		int _first;
+		int _op;
+		TRexNode* _nodes;
+		int _nallocated;
+		int _nsize;
+		int _nsubexpr;
+		TRexMatchPtr _matches;
+		int _currsubexp;
+		void* _jmpbuf;
+		const TRexChar** _error;
+		int _flags;
+	}TRex, * TRexPtr, ** TRexPtrPtr;
 
 	ArgRemPtr arg_rem(const char* datatype, const char* glossary);
 	ArgLitPtr arg_litn(const char* shortopts, const char* longopts, int mincount, int maxcount, const char* glossary);
@@ -151,31 +228,44 @@ extern "C" {
 	ArgFilePtr arg_filen(const char* shortopts, const char* longopts, const char* datatype, int mincount, int maxcount, const char* glossary);
 	ArgFilePtr arg_file0(const char* shortopts, const char* longopts, const char* datatype, const char* glossary);
 	ArgFilePtr arg_file1(const char* shortopts, const char* longopts, const char* datatype, const char* glossary);
-	arg_date_t* arg_daten(const char* shortopts, const char* longopts, const char* format, const char* datatype, int mincount, int maxcount, const char* glossary);
-	arg_date_t* arg_date0(const char* shortopts, const char* longopts, const char* format, const char* datatype, const char* glossary);
-	arg_date_t* arg_date1(const char* shortopts, const char* longopts, const char* format, const char* datatype, const char* glossary);
-	arg_end_t* arg_end(int maxcount);
+	ArgDatePtr arg_daten(const char* shortopts, const char* longopts, const char* format, const char* datatype, int mincount, int maxcount, const char* glossary);
+	ArgDatePtr arg_date0(const char* shortopts, const char* longopts, const char* format, const char* datatype, const char* glossary);
+	ArgDatePtr arg_date1(const char* shortopts, const char* longopts, const char* format, const char* datatype, const char* glossary);
+	ArgEndPtr arg_end(int maxcount);
 	int arg_nullcheck(void** argtable);
 	int argParse(int argc, char** argv, void** argtable);
 	void arg_print_syntax(FILE* fp, void** argtable, const char* suffix);
 	void arg_print_glossary(FILE* fp, void** argtable, const char* format);
-	void arg_print_errors(FILE* fp, arg_end_t* end, const char* progname);
+	void arg_print_errors(FILE* fp, ArgEndPtr end, const char* progname);
 	void arg_freetable(void** argtable, size_t n);
-	void arg_print_option_ds(arg_dstr_t ds, const char* shortopts, const char* longopts, const char* datatype, const char* suffix);
+	void arg_print_option_ds(ArgDstrPtr ds, const char* shortopts, const char* longopts, const char* datatype, const char* suffix);
 	void arg_cat_optionv(char* dest, size_t ndest, const char* shortopts, const char* longopts, const char* datatype, int optvalue, const char* separator);
-	void arg_dstr_catf(arg_dstr_t ds, const char* fmt, ...);
-	void arg_dstr_cat(arg_dstr_t ds, const char* str);
+	void arg_dstr_catf(struct _ArgDstr* ds, const char* fmt, ...);
+	void arg_dstr_cat(struct _ArgDstr* ds, const char* str);
 	void arg_cat(char** pdest, const char* src, size_t* pndest);
-	void setup_append_buf(arg_dstr_t ds, int new_space);
-	void arg_dstr_free(arg_dstr_t ds);
+	void setup_append_buf(struct _ArgDstr* ds, int new_space);
+	void arg_dstr_free(struct _ArgDstr* ds);
 
 	void arg_int_resetfn(void* parent_);
 	long int strtol0X(const char* str, const char** endptr, char X, int base);
 	int detectsuffix(const char* str, const char* suffix);
 	int arg_int_scanfn(void* parent_, const char* argval);
 	int arg_int_checkfn(void* parent_);
-	void arg_int_errorfn(void* parent_, arg_dstr_t ds, int errorcode, const char* argval, const char* progname);
+	void arg_int_errorfn(void* parent_, struct _ArgDstr* ds, int errorcode, const char* argval, const char* progname);
 
+	int trex_list(TRex* exp);
+	TRex* trex_compile(const TRexChar* pattern, const TRexChar** error, int flags);
+	void trex_free(TRex* exp);
+	TRexBool trex_match(TRex* exp, const TRexChar* text);
+	TRexBool trex_search(TRex* exp, const TRexChar* text, const TRexChar** out_begin, const TRexChar** out_end);
+	TRexBool trex_searchrange(TRex* exp, const TRexChar* text_begin, const TRexChar* text_end, const TRexChar** out_begin, const TRexChar** out_end);
+	int trex_getsubexpcount(TRex* exp);
+	TRexBool trex_getsubexp(TRex* exp, int n, TRexMatch* subexp);
+	
+	char* arg_dstr_cstr(struct _ArgDstr* ds);
+	void arg_dstr_reset(struct _ArgDstr* ds);
+	struct _ArgDstr* arg_dstr_create(void);
+	void arg_dstr_destroy(struct _ArgDstr* ds);
 #ifdef __cplusplus
 }
 #endif

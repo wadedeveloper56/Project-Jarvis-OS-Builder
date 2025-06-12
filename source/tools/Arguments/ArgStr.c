@@ -35,7 +35,7 @@ int arg_str_checkfn(void* parent_) {
 	return errorcode;
 }
 
-void arg_str_errorfn(void* parent_, arg_dstr_t ds, int errorcode, const char* argval, const char* progname) {
+void arg_str_errorfn(void* parent_, struct _ArgDstr* ds, int errorcode, const char* argval, const char* progname) {
 	ArgStrPtr parent = (ArgStrPtr)parent_;
 	const char* shortopts = parent->hdr.shortopts;
 	const char* longopts = parent->hdr.longopts;

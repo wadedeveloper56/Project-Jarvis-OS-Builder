@@ -38,7 +38,7 @@ int arg_dbl_checkfn(void* parent_) {
 	return errorcode;
 }
 
-void arg_dbl_errorfn(void* parent_, arg_dstr_t ds, int errorcode, const char* argval, const char* progname) {
+void arg_dbl_errorfn(void* parent_, struct _ArgDstr* ds, int errorcode, const char* argval, const char* progname) {
 	ArgDblPtr parent = (ArgDblPtr)parent_;
 	const char* shortopts = parent->hdr.shortopts;
 	const char* longopts = parent->hdr.longopts;

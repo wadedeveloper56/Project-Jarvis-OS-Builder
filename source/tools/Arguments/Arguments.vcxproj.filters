@@ -53,5 +53,11 @@
     <ClCompile Include="ArgFile.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ArgDate.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ArgEnd.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

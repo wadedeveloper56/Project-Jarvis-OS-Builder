@@ -119,7 +119,7 @@ int main(int argc, char* argv[]) {
 	ArgLitPtr help = arg_lit0(NULL, "help", "print this help and exit");
 	ArgLitPtr version = arg_lit0(NULL, "version", "print version information and exit");
 	ArgFilePtr infiles = arg_filen(NULL, NULL, NULL, 1, argc + 2, "input file(s)");
-	struct arg_end* end = arg_end(20);
+	ArgEndPtr end = arg_end(20);
 	void* argtable[] = { bitsize,outfile,verbose,help,version,infiles,end };
 	const char* progname = "Compiler";
 	int nerrors;
