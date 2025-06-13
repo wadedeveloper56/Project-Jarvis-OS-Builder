@@ -53,6 +53,9 @@ extern "C" {
 #define TREX_SYMBOL_END_OF_STRING ('$')
 #define TREX_SYMBOL_BEGINNING_OF_STRING ('^')
 #define TREX_SYMBOL_ESCAPE_CHAR ('\\')
+#define no_argument        0
+#define required_argument  1
+#define optional_argument  2
 
 	enum { ARG_ERR_MINCOUNT = 1, ARG_ERR_MAXCOUNT, ARG_ERR_BADINT, ARG_ERR_OVERFLOW, ARG_ERR_BADDOUBLE, ARG_ERR_BADDATE, ARG_ERR_REGNOMATCH };
 
@@ -79,6 +82,19 @@ extern "C" {
 	typedef void(*ArgDstrFreeFunctionPtr)(char* buf);
 	typedef int(*ArgCmdFunctionPtr)(int argc, char* argv[], struct _ArgDstr* res, void* ctx);
 	typedef int(*arg_comparefn)(const void* k1, const void* k2);
+
+	struct option {
+		const char* name;
+		int has_arg;
+		int* flag;
+		int val;
+	};
+
+	struct longoptions {
+		int getoptval;
+		int noptions;
+		struct option* options;
+	};
 
 	typedef struct _PrivHdr {
 		const char* pattern;
@@ -179,6 +195,8 @@ extern "C" {
 	typedef int TRexNodeType;
 	typedef unsigned int TRexBool;
 	//typedef struct TRex TRex;
+	extern char* optarg;			/* getopt(3) external variables */
+	extern int optind, opterr, optopt;
 
 	typedef struct _TRexMatch {
 		const TRexChar* begin;
@@ -266,6 +284,17 @@ extern "C" {
 	void arg_dstr_reset(struct _ArgDstr* ds);
 	struct _ArgDstr* arg_dstr_create(void);
 	void arg_dstr_destroy(struct _ArgDstr* ds);
+
+	void warnx(const char* fmt, ...);
+	int gcd(int a, int b);
+	void permute_args(int panonopt_start, int panonopt_end, int opt_end, char* const* nargv);
+	int parse_long_options(char* const* nargv, const char* options, const struct option* long_options, int* idx, int short_too, int flags);
+	int getopt_internal(int nargc, char* const* nargv, const char* options, const struct option* long_options, int* idx, int flags);
+	int getopt(int nargc, char* const* nargv, const char* options);
+	int	getopt_long(int nargc, char* const* nargv, const char* options, const struct option* long_options, int* idx);
+	int	getopt_long_only(int nargc, char* const* nargv, const char* options, const struct option* long_options, int* idx);
+	int find_shortoption(ArgHdrPtrPtr table, char shortopt);
+
 #ifdef __cplusplus
 }
 #endif

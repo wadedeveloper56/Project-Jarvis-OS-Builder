@@ -19,5 +19,5 @@
 #include <limits.h>
 #include <setjmp.h>
 #include <time.h>
-
+#include <errno.h>
 #endif //PCH_H

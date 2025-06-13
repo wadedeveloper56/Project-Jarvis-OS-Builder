@@ -59,5 +59,8 @@
     <ClCompile Include="ArgEnd.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="arg_getopt_long.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

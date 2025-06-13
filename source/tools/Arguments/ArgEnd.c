@@ -47,25 +47,23 @@ ArgEndPtr arg_end(int maxcount) {
         + (size_t)maxcount * sizeof(char*);                           
 
     result = (ArgEndPtr)malloc(nbytes);
-
-    result->hdr.flag = ARG_TERMINATOR;
-    result->hdr.shortopts = NULL;
-    result->hdr.longopts = NULL;
-    result->hdr.datatype = NULL;
-    result->hdr.glossary = NULL;
-    result->hdr.mincount = 1;
-    result->hdr.maxcount = maxcount;
-    result->hdr.parent = result;
-    result->hdr.resetfn = arg_end_resetfn;
-    result->hdr.scanfn = NULL;
-    result->hdr.checkfn = NULL;
-    result->hdr.errorfn = arg_end_errorfn;
-
-    result->error = (int*)(result + 1);
-
-    result->parent = (void**)(result->error + maxcount);
-
-    result->argval = (const char**)(result->parent + maxcount);
+    if (result) {
+        result->hdr.flag = ARG_TERMINATOR;
+        result->hdr.shortopts = NULL;
+        result->hdr.longopts = NULL;
+        result->hdr.datatype = NULL;
+        result->hdr.glossary = NULL;
+        result->hdr.mincount = 1;
+        result->hdr.maxcount = maxcount;
+        result->hdr.parent = result;
+        result->hdr.resetfn = arg_end_resetfn;
+        result->hdr.scanfn = NULL;
+        result->hdr.checkfn = NULL;
+        result->hdr.errorfn = arg_end_errorfn;
+        result->error = (int*)(result + 1);
+        result->parent = (void**)(result->error + maxcount);
+        result->argval = (const char**)(result->parent + maxcount);
+    }
     return result;
 }
 
