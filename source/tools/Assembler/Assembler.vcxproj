@@ -155,13 +155,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Arguments.c" />
     <ClCompile Include="Assembler.c" />
     <ClCompile Include="pch.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ArgumentTable.h" />
-    <ClInclude Include="framework.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>

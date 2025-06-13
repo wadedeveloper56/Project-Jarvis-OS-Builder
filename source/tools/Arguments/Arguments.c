@@ -91,8 +91,8 @@ void arg_parse_check(ArgHdrPtrPtr table, ArgEndPtr endtable) {
 	} while (!(table[tabindex++]->flag & ARG_TERMINATOR));
 }
 
-struct longoptions* alloc_longoptions(ArgHdrPtrPtr table) {
-	struct longoptions* result;
+LongOptionsPtr alloc_longoptions(ArgHdrPtrPtr table) {
+	LongOptionsPtr result;
 	size_t nbytes;
 	int noptions = 1;
 	size_t longoptlen = 0;
@@ -109,12 +109,12 @@ struct longoptions* alloc_longoptions(ArgHdrPtrPtr table) {
 			longopts = strchr(longopts + 1, ',');
 		}
 	} while (!(table[tabindex++]->flag & ARG_TERMINATOR));
-	nbytes = sizeof(struct longoptions) + sizeof(struct option) * (size_t)noptions + longoptlen;
-	result = (struct longoptions*)malloc(nbytes);
+	nbytes = sizeof(LongOptions) + sizeof(Option) * (size_t)noptions + longoptlen;
+	result = (LongOptionsPtr)malloc(nbytes);
 
 	result->getoptval = 0;
 	result->noptions = noptions;
-	result->options = (struct option*)(result + 1);
+	result->options = (OptionPtr)(result + 1);
 	store = (char*)(result->options + noptions);
 
 	for (tabindex = 0; !(table[tabindex]->flag & ARG_TERMINATOR); tabindex++) {
@@ -244,7 +244,7 @@ void arg_parse_untagged(int argc, char** argv, ArgHdrPtrPtr table, ArgEndPtr end
 }
 
 void arg_parse_tagged(int argc, char** argv, ArgHdrPtrPtr table, ArgEndPtr endtable) {
-	struct longoptions* longoptions;
+	LongOptionsPtr longoptions;
 	char* shortoptions;
 	int copt;
 

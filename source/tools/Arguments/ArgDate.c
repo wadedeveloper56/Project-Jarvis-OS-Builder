@@ -2,9 +2,6 @@
 #include "framework.h"
 #include "ArgumentTable.h"
 
-int conv_num(const char**, int*, int, int);
-char* arg_strptime(const char* buf, const char* fmt, struct tm* tm);
-
 const char* day[7] = { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
 const char* abday[7] = { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
 const char* mon[12] = { "January", "February", "March",     "April",   "May",      "June", "July",    "August",   "September", "October", "November", "December" };
@@ -87,7 +84,7 @@ ArgDatePtr arg_date1(const char* shortopts, const char* longopts, const char* fo
 	return arg_daten(shortopts, longopts, format, datatype, 1, 1, glossary);
 }
 
-ArgDatePtr rg_daten(const char* shortopts, const char* longopts, const char* format, const char* datatype, int mincount, int maxcount, const char* glossary) {
+ArgDatePtr arg_daten(const char* shortopts, const char* longopts, const char* format, const char* datatype, int mincount, int maxcount, const char* glossary) {
 	size_t nbytes;
 	ArgDatePtr result;
 
@@ -120,7 +117,6 @@ ArgDatePtr rg_daten(const char* shortopts, const char* longopts, const char* for
 	}
 	return result;
 }
-
 
 int arg_strcasecmp(const char* s1, const char* s2) {
 	const unsigned char* us1 = (const unsigned char*)s1;

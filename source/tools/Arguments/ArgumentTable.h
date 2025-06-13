@@ -81,20 +81,20 @@ extern "C" {
 	typedef void(*ArgErrorFunctionPtr)(void* parent, struct _ArgDstr* ds, int error, const char* argval, const char* progname);
 	typedef void(*ArgDstrFreeFunctionPtr)(char* buf);
 	typedef int(*ArgCmdFunctionPtr)(int argc, char* argv[], struct _ArgDstr* res, void* ctx);
-	typedef int(*arg_comparefn)(const void* k1, const void* k2);
+	typedef int(*ArgCompareFunctionPtr)(const void* k1, const void* k2);
 
-	struct option {
+	typedef struct _Option {
 		const char* name;
 		int has_arg;
 		int* flag;
 		int val;
-	};
+	}Option, * OptionPtr, ** OptionPtrPtr;
 
-	struct longoptions {
+	typedef struct _LongOptions {
 		int getoptval;
 		int noptions;
-		struct option* options;
-	};
+		OptionPtr options;
+	}LongOptions, * LongOptionsPtr, ** LongOptionsPtrPtr;
 
 	typedef struct _PrivHdr {
 		const char* pattern;
@@ -171,14 +171,14 @@ extern "C" {
 		int* error;
 		void** parent;
 		const char** argval;
-	} ArgEnd,*ArgEndPtr,**ArgEndPtrPtr;
+	} ArgEnd, * ArgEndPtr, ** ArgEndPtrPtr;
 
-	typedef struct arg_cmd_info {
+	typedef struct _ArgCmdInfo {
 		char name[ARG_CMD_NAME_LEN];
 		char description[ARG_CMD_DESCRIPTION_LEN];
 		ArgCmdFunctionPtr proc;
 		void* ctx;
-	} arg_cmd_info_t;
+	} ArgCmdInfo, * ArgCmdInfoPtr, ** ArgCmdInfoPtrPtr;
 
 	typedef struct _ArgDstr {
 		char* data;
@@ -189,13 +189,11 @@ extern "C" {
 		int append_used;
 	} ArgDstr, * ArgDstrPtr, ** ArgDstrPtrPtr;
 
-	//typedef struct _internal_arg_dstr* arg_dstr_t;
 	typedef void* arg_cmd_itr_t;
 
 	typedef int TRexNodeType;
 	typedef unsigned int TRexBool;
-	//typedef struct TRex TRex;
-	extern char* optarg;			/* getopt(3) external variables */
+	extern char* optarg;
 	extern int optind, opterr, optopt;
 
 	typedef struct _TRexMatch {
@@ -227,42 +225,61 @@ extern "C" {
 		int _flags;
 	}TRex, * TRexPtr, ** TRexPtrPtr;
 
-	ArgRemPtr arg_rem(const char* datatype, const char* glossary);
-	ArgLitPtr arg_litn(const char* shortopts, const char* longopts, int mincount, int maxcount, const char* glossary);
-	ArgLitPtr arg_lit0(const char* shortopts, const char* longopts, const char* glossary);
-	ArgLitPtr arg_lit1(const char* shortopts, const char* longopts, const char* glossary);
-	ArgIntPtr arg_intn(const char* shortopts, const char* longopts, const char* datatype, int mincount, int maxcount, const char* glossary);
-	ArgIntPtr arg_int0(const char* shortopts, const char* longopts, const char* datatype, const char* glossary);
-	ArgIntPtr arg_int1(const char* shortopts, const char* longopts, const char* datatype, const char* glossary);
-	ArgDblPtr arg_dbln(const char* shortopts, const char* longopts, const char* datatype, int mincount, int maxcount, const char* glossary);
-	ArgDblPtr arg_dbl0(const char* shortopts, const char* longopts, const char* datatype, const char* glossary);
-	ArgDblPtr arg_dbl1(const char* shortopts, const char* longopts, const char* datatype, const char* glossary);
-	ArgStrPtr arg_strn(const char* shortopts, const char* longopts, const char* datatype, int mincount, int maxcount, const char* glossary);
-	ArgStrPtr arg_str0(const char* shortopts, const char* longopts, const char* datatype, const char* glossary);
-	ArgStrPtr arg_str1(const char* shortopts, const char* longopts, const char* datatype, const char* glossary);
-	ArgRexPtr arg_rexn(const char* shortopts, const char* longopts, const char* pattern, const char* datatype, int mincount, int maxcount, int flags, const char* glossary);
-	ArgRexPtr arg_rex0(const char* shortopts, const char* longopts, const char* pattern, const char* datatype, int flags, const char* glossary);
-	ArgRexPtr arg_rex1(const char* shortopts, const char* longopts, const char* pattern, const char* datatype, int flags, const char* glossary);
-	ArgFilePtr arg_filen(const char* shortopts, const char* longopts, const char* datatype, int mincount, int maxcount, const char* glossary);
-	ArgFilePtr arg_file0(const char* shortopts, const char* longopts, const char* datatype, const char* glossary);
-	ArgFilePtr arg_file1(const char* shortopts, const char* longopts, const char* datatype, const char* glossary);
-	ArgDatePtr arg_daten(const char* shortopts, const char* longopts, const char* format, const char* datatype, int mincount, int maxcount, const char* glossary);
+	void warnx(const char* fmt, ...);
+	void permute_args(int panonopt_start, int panonopt_end, int opt_end, char* const* nargv);
+	int parse_long_options(char* const* nargv, const char* options, const OptionPtr long_options, int* idx, int short_too, int flags);
+	int getopt_internal(int nargc, char* const* nargv, const char* options, const OptionPtr long_options, int* idx, int flags);
+	int getopt(int nargc, char* const* nargv, const char* options);
+	int getopt_long(int nargc, char* const* nargv, const char* options, const OptionPtr long_options, int* idx);
+	int getopt_long_only(int nargc, char* const* nargv, const char* options, const OptionPtr long_options, int* idx);
+	void arg_cat(char** pdest, const char* src, size_t* pndest);
+	void arg_cat_optionv(char* dest, size_t ndest, const char* shortopts, const char* longopts, const char* datatype, int optvalue, const char* separator);
+	void arg_print_option_ds(ArgDstrPtr ds, const char* shortopts, const char* longopts, const char* datatype, const char* suffix);
+
+	void arg_date_resetfn(void* parent_);
+	int arg_date_scanfn(void* parent_, const char* argval);
+	int arg_date_checkfn(void* parent_);
+	void arg_date_errorfn(void* parent_, struct _ArgDstr* ds, int errorcode, const char* argval, const char* progname);
 	ArgDatePtr arg_date0(const char* shortopts, const char* longopts, const char* format, const char* datatype, const char* glossary);
 	ArgDatePtr arg_date1(const char* shortopts, const char* longopts, const char* format, const char* datatype, const char* glossary);
-	ArgEndPtr arg_end(int maxcount);
-	int arg_nullcheck(void** argtable);
-	int argParse(int argc, char** argv, void** argtable);
-	void arg_print_syntax(FILE* fp, void** argtable, const char* suffix);
-	void arg_print_glossary(FILE* fp, void** argtable, const char* format);
-	void arg_print_errors(FILE* fp, ArgEndPtr end, const char* progname);
-	void arg_freetable(void** argtable, size_t n);
-	void arg_print_option_ds(ArgDstrPtr ds, const char* shortopts, const char* longopts, const char* datatype, const char* suffix);
-	void arg_cat_optionv(char* dest, size_t ndest, const char* shortopts, const char* longopts, const char* datatype, int optvalue, const char* separator);
-	void arg_dstr_catf(struct _ArgDstr* ds, const char* fmt, ...);
-	void arg_dstr_cat(struct _ArgDstr* ds, const char* str);
-	void arg_cat(char** pdest, const char* src, size_t* pndest);
-	void setup_append_buf(struct _ArgDstr* ds, int new_space);
+	ArgDatePtr arg_daten(const char* shortopts, const char* longopts, const char* format, const char* datatype, int mincount, int maxcount, const char* glossary);;;
+	int arg_strcasecmp(const char* s1, const char* s2);
+	int arg_strncasecmp(const char* s1, const char* s2, size_t n);
+	char* arg_strptime(const char* buf, const char* fmt, struct tm* tm);
+	int conv_num(const char** buf, int* dest, int llim, int ulim);
+
+	void arg_dbl_resetfn(void* parent_);
+	int arg_dbl_scanfn(void* parent_, const char* argval);
+	int arg_dbl_checkfn(void* parent_);
+	void arg_dbl_errorfn(void* parent_, struct _ArgDstr* ds, int errorcode, const char* argval, const char* progname);
+	ArgDblPtr arg_dbl0(const char* shortopts, const char* longopts, const char* datatype, const char* glossary);
+	ArgDblPtr arg_dbl1(const char* shortopts, const char* longopts, const char* datatype, const char* glossary);
+	ArgDblPtr arg_dbln(const char* shortopts, const char* longopts, const char* datatype, int mincount, int maxcount, const char* glossary);
+
+	char* arg_dstr_cstr(struct _ArgDstr* ds);
+	void arg_dstr_reset(struct _ArgDstr* ds);
+	struct _ArgDstr* arg_dstr_create(void);
+	void arg_dstr_destroy(struct _ArgDstr* ds);
 	void arg_dstr_free(struct _ArgDstr* ds);
+	void setup_append_buf(struct _ArgDstr* ds, int new_space);
+	void arg_dstr_cat(struct _ArgDstr* ds, const char* str);
+	void arg_dstr_catf(struct _ArgDstr* ds, const char* fmt, ...);
+
+	void arg_end_resetfn(void* parent_);
+	void arg_end_errorfn(void* parent, struct _ArgDstr* ds, int error, const char* argval, const char* progname);
+	ArgEndPtr arg_end(int maxcount);
+	void arg_print_errors_ds(struct _ArgDstr* ds, ArgEndPtr end, const char* progname);
+	void arg_print_errors(FILE* fp, ArgEndPtr end, const char* progname);
+
+	void arg_file_resetfn(void* parent_);
+	const char* arg_basename(const char* filename);
+	const char* arg_extension(const char* basename);
+	int arg_file_scanfn(void* parent_, const char* argval);
+	int arg_file_checkfn(void* parent_);
+	void arg_file_errorfn(void* parent_, struct _ArgDstr* ds, int errorcode, const char* argval, const char* progname);
+	ArgFilePtr arg_file0(const char* shortopts, const char* longopts, const char* datatype, const char* glossary);
+	ArgFilePtr arg_file1(const char* shortopts, const char* longopts, const char* datatype, const char* glossary);
+	ArgFilePtr arg_filen(const char* shortopts, const char* longopts, const char* datatype, int mincount, int maxcount, const char* glossary);
 
 	void arg_int_resetfn(void* parent_);
 	long int strtol0X(const char* str, const char** endptr, char X, int base);
@@ -270,30 +287,73 @@ extern "C" {
 	int arg_int_scanfn(void* parent_, const char* argval);
 	int arg_int_checkfn(void* parent_);
 	void arg_int_errorfn(void* parent_, struct _ArgDstr* ds, int errorcode, const char* argval, const char* progname);
+	ArgIntPtr arg_intn(const char* shortopts, const char* longopts, const char* datatype, int mincount, int maxcount, const char* glossary);
+	ArgIntPtr arg_int0(const char* shortopts, const char* longopts, const char* datatype, const char* glossary);
+	ArgIntPtr arg_int1(const char* shortopts, const char* longopts, const char* datatype, const char* glossary);
 
+	void arg_lit_resetfn(void* parent_);
+	int arg_lit_scanfn(void* parent_, const char* argval);
+	int arg_lit_checkfn(void* parent_);
+	void arg_lit_errorfn(void* parent_, struct _ArgDstr* ds, int errorcode, const char* argval, const char* progname);
+	ArgLitPtr arg_litn(const char* shortopts, const char* longopts, int mincount, int maxcount, const char* glossary);
+	ArgLitPtr arg_lit0(const char* shortopts, const char* longopts, const char* glossary);
+	ArgLitPtr arg_lit1(const char* shortopts, const char* longopts, const char* glossary);
+
+	void arg_rex_resetfn(void* parent_);
+	int arg_rex_scanfn(void* parent_, const char* argval);
+	int arg_rex_checkfn(void* parent_);
+	void arg_rex_errorfn(void* parent_, struct _ArgDstr* ds, int errorcode, const char* argval, const char* progname);
+	ArgRexPtr arg_rex0(const char* shortopts, const char* longopts, const char* pattern, const char* datatype, int flags, const char* glossary);
+	ArgRexPtr arg_rex1(const char* shortopts, const char* longopts, const char* pattern, const char* datatype, int flags, const char* glossary);
+	ArgRexPtr arg_rexn(const char* shortopts, const char* longopts, const char* pattern, const char* datatype, int mincount, int maxcount, int flags, const char* glossary);
+	int trex_newnode(TRex* exp, TRexNodeType type);
+	void trex_error(TRex* exp, const TRexChar* error);
+	void trex_expect(TRex* exp, int n);
+	TRexChar trex_escapechar(TRex* exp);
+	int trex_charclass(TRex* exp, int classid);
+	int trex_charnode(TRex* exp, TRexBool isclass);
+	int trex_class(TRex* exp);
+	int trex_parsenumber(TRex* exp);
+	int trex_element(TRex* exp);
 	int trex_list(TRex* exp);
+	TRexBool trex_matchcclass(int cclass, TRexChar c);
+	TRexBool trex_matchclass(TRex* exp, TRexNode* node, TRexChar c);
+	const TRexChar* trex_matchnode(TRex* exp, TRexNode* node, const TRexChar* str, TRexNode* next);
 	TRex* trex_compile(const TRexChar* pattern, const TRexChar** error, int flags);
 	void trex_free(TRex* exp);
 	TRexBool trex_match(TRex* exp, const TRexChar* text);
-	TRexBool trex_search(TRex* exp, const TRexChar* text, const TRexChar** out_begin, const TRexChar** out_end);
 	TRexBool trex_searchrange(TRex* exp, const TRexChar* text_begin, const TRexChar* text_end, const TRexChar** out_begin, const TRexChar** out_end);
+	TRexBool trex_search(TRex* exp, const TRexChar* text, const TRexChar** out_begin, const TRexChar** out_end);
 	int trex_getsubexpcount(TRex* exp);
 	TRexBool trex_getsubexp(TRex* exp, int n, TRexMatch* subexp);
-	
-	char* arg_dstr_cstr(struct _ArgDstr* ds);
-	void arg_dstr_reset(struct _ArgDstr* ds);
-	struct _ArgDstr* arg_dstr_create(void);
-	void arg_dstr_destroy(struct _ArgDstr* ds);
 
-	void warnx(const char* fmt, ...);
-	int gcd(int a, int b);
-	void permute_args(int panonopt_start, int panonopt_end, int opt_end, char* const* nargv);
-	int parse_long_options(char* const* nargv, const char* options, const struct option* long_options, int* idx, int short_too, int flags);
-	int getopt_internal(int nargc, char* const* nargv, const char* options, const struct option* long_options, int* idx, int flags);
-	int getopt(int nargc, char* const* nargv, const char* options);
-	int	getopt_long(int nargc, char* const* nargv, const char* options, const struct option* long_options, int* idx);
-	int	getopt_long_only(int nargc, char* const* nargv, const char* options, const struct option* long_options, int* idx);
+	void arg_str_resetfn(void* parent_);
+	int arg_str_scanfn(void* parent_, const char* argval);
+	int arg_str_checkfn(void* parent_);
+	void arg_str_errorfn(void* parent_, struct _ArgDstr* ds, int errorcode, const char* argval, const char* progname);
+	ArgStrPtr arg_str0(const char* shortopts, const char* longopts, const char* datatype, const char* glossary);
+	ArgStrPtr arg_str1(const char* shortopts, const char* longopts, const char* datatype, const char* glossary);
+	ArgStrPtr arg_strn(const char* shortopts, const char* longopts, const char* datatype, int mincount, int maxcount, const char* glossary);
+
+	void arg_freetable(void** argtable, size_t n);
+	ArgRemPtr arg_rem(const char* datatype, const char* glossary);
+	int arg_nullcheck(void** argtable);
+	void arg_reset(void** argtable);
+	int arg_endindex(ArgHdrPtrPtr table);
+	void arg_register_error(ArgEndPtr end, void* parent, int error, const char* argval);
+	void arg_parse_check(ArgHdrPtrPtr table, ArgEndPtr endtable);
+	LongOptionsPtr alloc_longoptions(ArgHdrPtrPtr table);
+	char* alloc_shortoptions(ArgHdrPtrPtr table);
 	int find_shortoption(ArgHdrPtrPtr table, char shortopt);
+	void arg_parse_untagged(int argc, char** argv, ArgHdrPtrPtr table, ArgEndPtr endtable);
+	void arg_parse_tagged(int argc, char** argv, ArgHdrPtrPtr table, ArgEndPtr endtable);
+	int argParse(int argc, char** argv, void** argtable);
+	void arg_print_gnuswitch_ds(ArgDstrPtr ds, ArgHdrPtrPtr table);
+	void arg_cat_option(char* dest, size_t ndest, const char* shortopts, const char* longopts, const char* datatype, int optvalue);
+	void arg_print_syntax_ds(ArgDstrPtr ds, void** argtable, const char* suffix);
+	void arg_print_syntax(FILE* fp, void** argtable, const char* suffix);
+	void arg_print_glossary_ds(ArgDstrPtr ds, void** argtable, const char* format);
+	void arg_print_glossary(FILE* fp, void** argtable, const char* format);
 
 #ifdef __cplusplus
 }
