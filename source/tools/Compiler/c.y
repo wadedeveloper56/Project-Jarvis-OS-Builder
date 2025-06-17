@@ -4,6 +4,7 @@
 
 %union { 	   
     struct _CompilerInfo CompilerInfo;
+	struct _ParameterListNode *ParameterList;
 }
 
 %token<CompilerInfo> IDENTIFIER CONSTANT STRING_LITERAL
@@ -35,7 +36,8 @@
 %type<CompilerInfo> storage_class_specifier type_specifier struct_or_union_specifier struct_declaration_list
 %type<CompilerInfo> struct_declaration struct_declarator_list struct_declarator enum_specifier
 %type<CompilerInfo> enumerator_list enumerator type_qualifier function_specifier declarator direct_declarator pointer
-%type<CompilerInfo> type_qualifier_list parameter_type_list parameter_list parameter_declaration identifier_list
+%type<CompilerInfo> type_qualifier_list parameter_type_list identifier_list
+%type<ParameterList> parameter_list parameter_declaration 
 %type<CompilerInfo> abstract_declarator direct_abstract_declarator initializer initializer_list designation designator_list
 %type<CompilerInfo> designator statement compound_statement block_item_list block_item 
 %type<CompilerInfo> selection_statement
@@ -447,7 +449,12 @@ direct_declarator
 	| direct_declarator OPENBRACE_OP type_qualifier_list TIMES_OP CLOSEBRACE_OP                       {fprintf(fileLexLog,"direct_declarator OPENBRACE_OP type_qualifier_list TIMES_OP CLOSEBRACE_OP REDUCE to direct_declarator\n");}
 	| direct_declarator OPENBRACE_OP TIMES_OP CLOSEBRACE_OP                                           {fprintf(fileLexLog,"direct_declarator OPENBRACE_OP TIMES_OP CLOSEBRACE_OP REDUCE to direct_declarator\n");}
 	| direct_declarator OPENBRACE_OP CLOSEBRACE_OP                                                    {fprintf(fileLexLog,"direct_declarator OPENBRACE_OP CLOSEBRACE_OP REDUCE to direct_declarator\n");}
-	| direct_declarator OPENPAREN_OP parameter_type_list CLOSEPAREN_OP                                {fprintf(fileLexLog,"direct_declarator OPENPAREN_OP parameter_type_list CLOSEPAREN_OP REDUCE to direct_declarator\n");}
+	| direct_declarator OPENPAREN_OP parameter_type_list CLOSEPAREN_OP                                {
+	                                                                                                   $<CompilerInfo>$ = $<CompilerInfo>1;
+																									   $<CompilerInfo>$.parameterList = $<ParameterList>3;
+																									   printSize($<CompilerInfo>$.parameterList);
+	                                                                                                   fprintf(fileLexLog,"<EXP> direct_declarator OPENPAREN_OP parameter_type_list CLOSEPAREN_OP REDUCE to direct_declarator\n");
+																									  }
 	| direct_declarator OPENPAREN_OP identifier_list CLOSEPAREN_OP                                    {fprintf(fileLexLog,"direct_declarator OPENPAREN_OP identifier_list CLOSEPAREN_OP REDUCE to direct_declarator\n");}
 	| direct_declarator OPENPAREN_OP CLOSEPAREN_OP                                                    {
 		                                                                                               $<CompilerInfo>$ = $<CompilerInfo>1;
@@ -469,23 +476,30 @@ type_qualifier_list
 
 
 parameter_type_list
-	: parameter_list                   {fprintf(fileLexLog,"parameter_list REDUCE to parameter_type_list\n");}
-	| parameter_list COMMA_OP ELLIPSIS {fprintf(fileLexLog,"parameter_list COMMA_OP ELLIPSIS REDUCE to parameter_type_list\n");}
+	: parameter_list                   {
+	                                    $<ParameterList>$ = $<ParameterList>1;
+	                                    fprintf(fileLexLog,"<EXP> parameter_list REDUCE to parameter_type_list\n");
+									   }
+	| parameter_list COMMA_OP ELLIPSIS {
+	                                    $<ParameterList>$ = $<ParameterList>1;
+	                                    fprintf(fileLexLog,"<EXP> parameter_list COMMA_OP ELLIPSIS REDUCE to parameter_type_list\n");
+									   }
 	;
 
 parameter_list
 	: parameter_declaration                         {
-	                                                 $<CompilerInfo>$ = $<CompilerInfo>1;
-	                                                 fprintf(fileLexLog,"parameter_declaration REDUCE to parameter_list\n");
+	                                                 $<ParameterList>$ = createParameterListNode(&$<CompilerInfo>1);
+	                                                 fprintf(fileLexLog,"'%s' => parameter_declaration REDUCE to parameter_list\n",$<CompilerInfo>1.data.identifier);
 													}
 	| parameter_list COMMA_OP parameter_declaration {
-	                                                 fprintf(fileLexLog,"parameter_list COMMA_OP parameter_declaration REDUCE to parameter_list\n");
+	                                                 //addToParameterList(&$<ParameterList>1, $<ParameterList>3);
+	                                                 fprintf(fileLexLog,"'%s' => parameter_list COMMA_OP parameter_declaration REDUCE to parameter_list\n",$<CompilerInfo>3.data.identifier);
 													}
 	;
 
 parameter_declaration
 	: declaration_specifiers declarator          {
-                                                  $<CompilerInfo>$ = $<CompilerInfo>1;
+                                                  $<CompilerInfo>$ = $<CompilerInfo>2;
 												  if ($<CompilerInfo>$.arrayExpression == NULL) {
 	                                               fprintf(fileLexLog,"'%s' => declaration_specifiers declarator REDUCE to parameter_declaration\n",$<CompilerInfo>$.data.identifier);
 								                  } else {

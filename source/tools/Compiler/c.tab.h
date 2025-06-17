@@ -146,10 +146,11 @@ typedef union YYSTYPE
 #line 5 "c.y"
  	   
     struct _CompilerInfo CompilerInfo;
+	struct _ParameterListNode *ParameterList;
 
 
 /* Line 2058 of yacc.c  */
-#line 153 "c.tab.h"
+#line 154 "c.tab.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */

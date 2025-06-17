@@ -33,22 +33,26 @@
 
 ExpressionListPtr createExpression(char* identifier, VariableType type, VariableSignType sign, Boolean constant) {
 	ExpressionListPtr listNode = (ExpressionListPtr)malloc(sizeof(ExpressionList));
-	memset(listNode, sizeof(ExpressionList), 0);
-	listNode->expression.node.data.identifier = identifier;
-	listNode->expression.node.data.type = type;
-	listNode->expression.node.data.sign = sign;
-	listNode->expression.node.data.constant = constant;
+	if (listNode) {
+		memset(listNode, sizeof(ExpressionList), 0);
+		listNode->expression.node.data.identifier = identifier;
+		listNode->expression.node.data.type = type;
+		listNode->expression.node.data.sign = sign;
+		listNode->expression.node.data.constant = constant;
+	}
 	return listNode;
 }
 
 DeclarationPtr createDeclaration(char* identifier, VariableType type, VariableSignType sign, StorageType storage, DeclarationType declarationType, ExpressionListPtr arrayExpression) {
 	DeclarationPtr node = (DeclarationPtr)malloc(sizeof(Declaration));
-	node->data.identifier = identifier;
-	node->data.type = type;
-	node->data.sign = sign;
-	node->data.storage = storage;
-	node->data.declarationType = declarationType;
-	node->arrayExpression = arrayExpression;
+	if (node) {
+		node->data.identifier = identifier;
+		node->data.type = type;
+		node->data.sign = sign;
+		node->data.storage = storage;
+		node->data.declarationType = declarationType;
+		node->arrayExpression = arrayExpression;
+	}
 	return node;
 }
 
@@ -83,16 +87,20 @@ void addFunction(DeclarationPtr declaration) {
 			ptr = ptr->next;
 		}
 		DeclarationListPtr node = (DeclarationListPtr)malloc(sizeof(DeclarationList));
-		memset(node, sizeof(DeclarationList), 0);
-		node->declaration = declaration;
-		node->next = NULL;
-		ptr->next = node;
+		if (node) {
+			memset(node, sizeof(DeclarationList), 0);
+			node->declaration = declaration;
+			node->next = NULL;
+			ptr->next = node;
+		}
 	}
 	else {
 		functionTable = (DeclarationListPtr)malloc(sizeof(DeclarationList));
-		memset(functionTable, sizeof(DeclarationList), 0);
-		functionTable->declaration = declaration;
-		functionTable->next = NULL;
+		if (functionTable) {
+			memset(functionTable, sizeof(DeclarationList), 0);
+			functionTable->declaration = declaration;
+			functionTable->next = NULL;
+		}
 	}
 }
 
@@ -125,27 +133,57 @@ void addToExpression(ExpressionListPtrPtr expression, char* identifier, Variable
 	}
 }
 
-CompilerInfoNodePtr createParameterListNode(CompilerInfoNodePtr node) {
-	CompilerInfoNodePtr listNode = (CompilerInfoNodePtr)malloc(sizeof(CompilerInfoNode));
-	memset(listNode, sizeof(CompilerInfoNode), 0);
-	listNode->data.identifier = node->data.identifier;
-	listNode->data.type = node->data.type;
-	listNode->data.sign = node->data.sign;
-	listNode->data.constant = node->data.constant;
+ParameterListNodePtr createParameterListNode(CompilerInfoPtr node) {
+	ParameterListNodePtr listNode = (ParameterListNodePtr)malloc(sizeof(ParameterListNode));
+	if (listNode) {
+		memset(listNode, sizeof(ParameterListNode), 0);
+		listNode->data.identifier = node->data.identifier;
+		listNode->data.type = node->data.type;
+		listNode->data.sign = node->data.sign;
+		listNode->data.constant = node->data.constant;
+		listNode->next = NULL;
+		printSize(listNode);
+
+	}
 	return listNode;
 }
 
-void addToPrameterList(ConpilerInfoPtrPtr list, CompilerInfoNodePtr node) {
-	if ((*list)->parameterList == NULL) {
-		(*list)->parameterList = createParameterListNode(node);
+void printSize(ParameterListNodePtr list) {
+	int size = 0;
+	ParameterListNodePtr ptr = list;
+	while (ptr != NULL) {
+		ptr = ptr->next;
+		size++;
+	}
+	fprintf(fileLexLog, "%d items\n", size);
+}
+
+void addToParameterList(ParameterListNodePtrPtr list, ParameterListNodePtr node) {
+	if (*list == NULL) {
+		*list = node;
 	}
 	else {
-		CompilerInfoNodePtr ptr = (*list)->parameterList;
+		ParameterListNodePtr ptr = *list;
+		while (ptr->next != NULL) {
+			ptr = ptr->next;
+		}
+		ptr->next = node;
+	}
+	printSize(*list);
+}
+
+void addToParameterList2(ParameterListNodePtrPtr list, CompilerInfoPtr node) {
+	if (*list == NULL) {
+		*list = createParameterListNode(node);
+	}
+	else {
+		ParameterListNodePtr ptr = *list;
 		while (ptr->next != NULL) {
 			ptr = ptr->next;
 		}
 		ptr->next = createParameterListNode(node);
 	}
+	printSize(*list);
 }
 
 void printDeclaration(DeclarationPtr declaration) {
