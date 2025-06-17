@@ -77,6 +77,7 @@ typedef enum _StorageType {
 	STORAGE_AUTO = 4,
 	STORAGE_REGISTER = 5
 } StorageType;
+extern char* VariableStorageName[];
 
 typedef enum _DeclarationType {
 	DECLARATION_NONE = 0,
@@ -92,43 +93,45 @@ typedef enum _FunctionalType {
 } FunctionalType;
 
 typedef struct _IdentifierData {
-	char* identifier;
+	char identifier[256];
 	VariableType type;
 	VariableSignType sign;
 	StorageType storage;
 	DeclarationType declarationType;
 	Boolean constant;
+	int pointerLevel;
 }IdentifierData, * IdentifierDataPtr, ** IdentifierDataPtrPtr;
 
 typedef struct _ExpressionNode {
 	IdentifierData data;
-} ExpressionNode;
+} ExpressionNode, * ExpressionBodePtr, ** ExprressionNodePtrPtr;
 
 typedef struct _Expression {
 	ExpressionNode node;
 	struct _Expression* next;
-} Expression, * ExpressionPtr;
+} Expression, * ExpressionPtr, ** ExprressionPtrPtr;
 
 typedef struct _ExpressionList {
 	Expression expression;
 	struct _ExpressionList* next;
 } ExpressionList, * ExpressionListPtr, ** ExpressionListPtrPtr;
 
-typedef struct _Declaration {
-	IdentifierData data;
-	ExpressionListPtr arrayExpression;
-} Declaration, * DeclarationPtr;
-
-typedef struct _DeclarationList {
-	DeclarationPtr declaration;
-	struct _DeclarationList* next;
-} DeclarationList, * DeclarationListPtr;
-
 typedef struct _ParameterListNode {
 	IdentifierData data;
 	ExpressionListPtr arrayExpression;
 	struct _ParameterListNode* next;
 }ParameterListNode, * ParameterListNodePtr, ** ParameterListNodePtrPtr;
+
+typedef struct _Declaration {
+	IdentifierData data;
+	ExpressionListPtr arrayExpression;
+	struct _ParameterListNode* parameterList;
+} Declaration, * DeclarationPtr;
+
+typedef struct _DeclarationList {
+	Declaration declaration;
+	struct _DeclarationList* next;
+} DeclarationList, * DeclarationListPtr;
 
 typedef struct _CompilerInfo {
 	IdentifierData data;
@@ -147,12 +150,12 @@ void yyerror(const char* s);
 int handleIndentifier(int result);
 
 ExpressionListPtr createExpression(char* identifier, VariableType type, VariableSignType sign, Boolean constant);
-DeclarationPtr createDeclaration(char* identifier, VariableType type, VariableSignType sign, StorageType storage, DeclarationType declarationType, ExpressionListPtr arrayExpression);
+DeclarationPtr createDeclaration(char* identifier, VariableType type, VariableSignType sign, StorageType storage, DeclarationType declarationType, ExpressionListPtr arrayExpression, ParameterListNodePtr parameterList);
 void addDeclaration(DeclarationPtr declaration);
 void addFunction(DeclarationPtr declaration);
 void addToSymbolTable(char* identifier, VariableType type, VariableSignType sign, StorageType storage, DeclarationType declarationType, Boolean constant, ExpressionListPtr arrayExpression);
-void addToFunctionTable(char* identifier, VariableType type, VariableSignType sign, StorageType storage, DeclarationType declarationType, Boolean constant, ExpressionListPtr arrayExpression);
-void printSize(ParameterListNodePtr list);
+void addToFunctionTable(char* identifier, VariableType type, VariableSignType sign, StorageType storage, DeclarationType declarationType, Boolean constant, ExpressionListPtr arrayExpression, ParameterListNodePtr parameterList);
+int printSize(ParameterListNodePtr list);
 void addToExpression(ExpressionListPtrPtr expression, char* identifier, VariableType type, VariableSignType sign, Boolean constant);
 ParameterListNodePtr createParameterListNode(CompilerInfoPtr node);
 void addToParameterList(ParameterListNodePtrPtr list, ParameterListNodePtr node);

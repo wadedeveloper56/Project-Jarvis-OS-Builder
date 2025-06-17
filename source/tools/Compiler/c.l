@@ -153,7 +153,7 @@ void comment(void)
 }
 
 int handleIndentifier(int result) {
- yylval.CompilerInfo.data.identifier = (char *) malloc((sizeof(char) * (yyleng + 1)));
+ memset(yylval.CompilerInfo.data.identifier,sizeof(yylval.CompilerInfo.data.identifier),0);
  strcpy(yylval.CompilerInfo.data.identifier, yytext);
  yylval.CompilerInfo.data.constant = (result==IDENTIFIER) ? (FALSE) : (TRUE);
  yylval.CompilerInfo.data.type = TYPE_NULL;

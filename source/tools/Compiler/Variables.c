@@ -32,3 +32,13 @@ char* VariableTypeName[] = {
 	"TYPE_COMPLEX",
 	"TYPE_IMAGINARY"
 };
+
+char* VariableStorageName[] = {
+	"STORAGE_NONE",
+	"STORAGE_TYPEDEF",
+	"STORAGE_EXTERN",
+	"STORAGE_STATIC",
+	"STORAGE_AUTO",
+	"STORAGE_REGISTER"
+};
+
