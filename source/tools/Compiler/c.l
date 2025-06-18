@@ -36,6 +36,7 @@ int num_errors;
 "default"		 { count(); return(DEFAULT); }
 "do"			 { count(); return(DO); }
 "double"		 { count(); return(DOUBLE); }
+"long double"    { count(); return(LONGDOUBLE); }
 "else"			 { count(); return(ELSE); }
 "enum"			 { count(); return(ENUM); }
 "extern"		 { count(); return(EXTERN); }
@@ -62,9 +63,9 @@ int num_errors;
 "void"			 { count(); return(VOID); }
 "volatile"		 { count(); return(VOLATILE); }
 "while"			 { count(); return(WHILE); }
-"_Bool"          { count(); return BOOL; }
-"_Complex"       { count(); return COMPLEX; }
-"_Imaginary"     { count(); return IMAGINARY; }
+"bool"           { count(); return BOOL; }
+"complex"        { count(); return COMPLEX; }
+"imaginary"      { count(); return IMAGINARY; }
 
 {L}({L}|{D})*		      { count(); return(handleIndentifier(IDENTIFIER)); }
 0[xX]{H}+{IS}?		      { count(); return(handleIndentifier(CONSTANT)); }

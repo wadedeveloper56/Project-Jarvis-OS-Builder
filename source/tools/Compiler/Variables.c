@@ -26,6 +26,7 @@ char* VariableTypeName[] = {
 	"TYPE_LONG64",
 	"TYPE_FLOAT",
 	"TYPE_DOUBLE",
+	"TYPE_LONGDOUBLE",
 	"TYPE_STRING",
 	"TYPE_STRUCT",
 	"TYPE_BOOLEAN",

@@ -1,23 +1,51 @@
-EXTERN REDUCE to storage_class_specifier
-'TYPE_VOID' REDUCE to type_specifier
-'TYPE_INTEGER' REDUCE to type_specifier
-'TYPE_SIGNED TYPE_INTEGER' type_specifier REDUCE to declaration_specifiers
-TYPE_UNSIGNED 4 => type_specifier declaration_specifiers REDUCE to declaration_specifiers
-2 TYPE_UNSIGNED 4 => storage_class_specifier declaration_specifiers REDUCE to declaration_specifiers
-'main' => IDENTIFIER REDUCE to direct_declarator
-'TYPE_INTEGER' REDUCE to type_specifier
-'TYPE_SIGNED TYPE_INTEGER' type_specifier REDUCE to declaration_specifiers
-'argc' => IDENTIFIER REDUCE to direct_declarator
-'argc' 0 parameters => direct_declarator REDUCE to declarator
-'argc' => declaration_specifiers declarator REDUCE to parameter_declaration
-'argc' => parameter_declaration REDUCE to parameter_list
-<EXP> parameter_list REDUCE to parameter_type_list
-1 parameters direct_declarator OPENPAREN_OP parameter_type_list CLOSEPAREN_OP REDUCE to direct_declarator
-'main' 1 parameters => direct_declarator REDUCE to declarator
-OCURLY_OP CCURLY_OP REDUCE to compound_statement
-'STORAGE_EXTERN TYPE_UNSIGNED TYPE_INTEGER main' => declaration_specifiers declarator compound_statement REDUCE to function_definition
-'STORAGE_EXTERN TYPE_UNSIGNED TYPE_INTEGER main' 1 parameters => function_definition REDUCE to external_declaration
-<EXP> external_declaration REDUCE to translation_unit
+TYPE_CHARACTER REDUCE to type_specifier
+'STORAGE_NONE TYPE_SIGNED TYPE_CHARACTER '' PL=0' => type_specifier REDUCE to declaration_specifiers
+'STORAGE_NONE TYPE_SIGNED TYPE_NULL '' PL=1' => TIMES_OP REDUCE to pointer
+'STORAGE_NONE TYPE_SIGNED TYPE_NULL '' PL=2' => TIMES_OP pointer REDUCE to pointer
+'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'var12' PL=0' => IDENTIFIER REDUCE to direct_declarator
+'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'var12' PL=2' => pointer direct_declarator REDUCE to declarator
+'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'var12' PL=2' => declarator REDUCE to init_declarator
+'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'var12' PL=2' => init_declarator REDUCE to init_declarator_list
+'STORAGE_NONE TYPE_SIGNED TYPE_CHARACTER 'var12' PL=2' => declaration_specifiers init_declarator_list SEMI_OP REDUCE to declaration
+'STORAGE_NONE TYPE_SIGNED TYPE_CHARACTER 'var12' PL=2' => declaration REDUCE to external_declaration
+'STORAGE_NONE TYPE_SIGNED TYPE_CHARACTER 'var12' PL=2' => external_declaration REDUCE to translation_unit
+TYPE_INTEGER REDUCE to type_specifier
+'STORAGE_NONE TYPE_SIGNED TYPE_INTEGER 'var12' PL=0' => type_specifier REDUCE to declaration_specifiers
+'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'main' PL=0' => IDENTIFIER REDUCE to direct_declarator
+TYPE_INTEGER REDUCE to type_specifier
+'STORAGE_NONE TYPE_SIGNED TYPE_INTEGER 'main' PL=0' => type_specifier REDUCE to declaration_specifiers
+'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'argc' PL=0' => IDENTIFIER REDUCE to direct_declarator
+'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'argc' PL=0' => direct_declarator REDUCE to declarator
+'STORAGE_NONE TYPE_SIGNED TYPE_INTEGER 'argc' PL=0' => declaration_specifiers declarator REDUCE to parameter_declaration
+'STORAGE_NONE TYPE_SIGNED TYPE_INTEGER 'argc'' => parameter_declaration REDUCE to parameter_list
+'STORAGE_NONE TYPE_SIGNED TYPE_INTEGER ' h' PL=0' => <EXP> parameter_list REDUCE to parameter_type_list
+'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'main' PL=0' => direct_declarator OPENPAREN_OP parameter_type_list CLOSEPAREN_OP REDUCE to direct_declarator
+'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'main' PL=0' => direct_declarator REDUCE to declarator
+'STORAGE_NONE TYPE_SIGNED TYPE_NULL '0' PL=0' => <EXP> CONSTANT REDUCE to primary_expression
+<EXP> primary_expression REDUCE to postfix_expression
+<EXP> postfix_expression REDUCE to unary_expression
+<EXP> unary_expression REDUCE to cast_expression
+<EXP> cast_expression REDUCE to multiplicative_expression
+<EXP> multiplicative_expression REDUCE to additive_expression
+<EXP> additive_expression REDUCE to shift_expression
+<EXP> shift_expression REDUCE to relational_expression
+<EXP> relational_expression REDUCE to equality_expression
+<EXP> equality_expression REDUCE to and_expression
+<EXP> and_expression REDUCE to exclusive_or_expression
+<EXP> exclusive_or_expression REDUCE to inclusive_or_expression
+<EXP> inclusive_or_expression REDUCE to logical_and_expression
+<EXP> logical_and_expression REDUCE to logical_or_expression
+<EXP> logical_or_expression REDUCE to conditional_expression
+<EXP> conditional_expression REDUCE to assignment_expression
+<EXP> assignment_expression REDUCE to expression
+<EXP> RETURN expression SEMI_OP REDUCE to jump_statement
+<EXP> jump_statement REDUCE to statement
+<EXP> statement REDUCE to block_item
+<EXP> block_item REDUCE to block_item_list
+<EXP> OCURLY_OP block_item_list CCURLY_OP REDUCE to compound_statement
+'STORAGE_NONE TYPE_SIGNED TYPE_INTEGER 'main' PL=0' => declaration_specifiers declarator compound_statement REDUCE to function_definition
+'STORAGE_NONE TYPE_SIGNED TYPE_INTEGER 'main' PL=0' => function_definition REDUCE to external_declaration
+'STORAGE_NONE TYPE_SIGNED TYPE_CHARACTER 'var12' PL=2' => translation_unit external_declaration REDUCE to translation_unit
 output is "test1.asm"
 bit size=32 bits
 infile[0]="test1.c"

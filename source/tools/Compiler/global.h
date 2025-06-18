@@ -61,11 +61,12 @@ typedef enum _VariableType {
 	TYPE_LONG64 = 6,
 	TYPE_FLOAT = 7,
 	TYPE_DOUBLE = 8,
-	TYPE_STRING = 9,
-	TYPE_STRUCT = 10,
-	TYPE_BOOLEAN = 11,
-	TYPE_COMPLEX = 12,
-	TYPE_IMAGINARY = 13
+	TYPE_LONGDOUBLE = 9,
+	TYPE_STRING = 10,
+	TYPE_STRUCT = 11,
+	TYPE_BOOLEAN = 12,
+	TYPE_COMPLEX = 13,
+	TYPE_IMAGINARY = 14
 } VariableType;
 extern char* VariableTypeName[];
 
@@ -150,10 +151,10 @@ void yyerror(const char* s);
 int handleIndentifier(int result);
 
 ExpressionListPtr createExpression(char* identifier, VariableType type, VariableSignType sign, Boolean constant);
-DeclarationPtr createDeclaration(char* identifier, VariableType type, VariableSignType sign, StorageType storage, DeclarationType declarationType, ExpressionListPtr arrayExpression, ParameterListNodePtr parameterList);
+DeclarationPtr createDeclaration(int pointerLevel, char* identifier, VariableType type, VariableSignType sign, StorageType storage, DeclarationType declarationType, ExpressionListPtr arrayExpression, ParameterListNodePtr parameterList);
 void addDeclaration(DeclarationPtr declaration);
 void addFunction(DeclarationPtr declaration);
-void addToSymbolTable(char* identifier, VariableType type, VariableSignType sign, StorageType storage, DeclarationType declarationType, Boolean constant, ExpressionListPtr arrayExpression);
+void addToSymbolTable(int pointerLevel, char* identifier, VariableType type, VariableSignType sign, StorageType storage, DeclarationType declarationType, Boolean constant, ExpressionListPtr arrayExpression);
 void addToFunctionTable(char* identifier, VariableType type, VariableSignType sign, StorageType storage, DeclarationType declarationType, Boolean constant, ExpressionListPtr arrayExpression, ParameterListNodePtr parameterList);
 int printSize(ParameterListNodePtr list);
 void addToExpression(ExpressionListPtrPtr expression, char* identifier, VariableType type, VariableSignType sign, Boolean constant);
@@ -162,6 +163,8 @@ void addToParameterList(ParameterListNodePtrPtr list, ParameterListNodePtr node)
 void addToParameterList2(ParameterListNodePtrPtr list, CompilerInfoPtr node);
 void printDeclaration(DeclarationPtr declaration);
 void printFunction(DeclarationPtr declaration);
+void printParameterListNode(char* message, ParameterListNodePtr list);
+void printCompilerInfoNode(char* message, CompilerInfoPtr list);
 
 extern DeclarationListPtr symbolTable;
 extern DeclarationListPtr functionTable;

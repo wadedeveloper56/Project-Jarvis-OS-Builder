@@ -111,30 +111,31 @@ extern int yydebug;
      UNSIGNED = 320,
      FLOAT = 321,
      DOUBLE = 322,
-     CONST = 323,
-     VOLATILE = 324,
-     VOID = 325,
-     SIZEOF = 326,
-     BOOL = 327,
-     COMPLEX = 328,
-     IMAGINARY = 329,
-     STRUCT = 330,
-     UNION = 331,
-     ENUM = 332,
-     ELLIPSIS = 333,
-     INCLUDE = 334,
-     CASE = 335,
-     DEFAULT = 336,
-     IF = 337,
-     ELSE = 338,
-     SWITCH = 339,
-     WHILE = 340,
-     DO = 341,
-     FOR = 342,
-     GOTO = 343,
-     CONTINUE = 344,
-     BREAK = 345,
-     RETURN = 346
+     LONGDOUBLE = 323,
+     CONST = 324,
+     VOLATILE = 325,
+     VOID = 326,
+     SIZEOF = 327,
+     BOOL = 328,
+     COMPLEX = 329,
+     IMAGINARY = 330,
+     STRUCT = 331,
+     UNION = 332,
+     ENUM = 333,
+     ELLIPSIS = 334,
+     INCLUDE = 335,
+     CASE = 336,
+     DEFAULT = 337,
+     IF = 338,
+     ELSE = 339,
+     SWITCH = 340,
+     WHILE = 341,
+     DO = 342,
+     FOR = 343,
+     GOTO = 344,
+     CONTINUE = 345,
+     BREAK = 346,
+     RETURN = 347
    };
 #endif
 
@@ -150,7 +151,7 @@ typedef union YYSTYPE
 
 
 /* Line 2058 of yacc.c  */
-#line 154 "c.tab.h"
+#line 155 "c.tab.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
