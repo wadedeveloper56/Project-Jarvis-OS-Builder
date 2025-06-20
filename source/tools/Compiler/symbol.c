@@ -31,7 +31,7 @@
  ******************************************************************************/
 #include "global.h"
 
-ExpressionListPtr createExpression(char* identifier, VariableType type, VariableSignType sign, Boolean constant) {
+ExpressionListPtr createExpression(char* identifier, VariableType type, VariableSignType sign, Boolean constant, Boolean emptyArray) {
 	ExpressionListPtr listNode = (ExpressionListPtr)malloc(sizeof(ExpressionList));
 	if (listNode) {
 		memset(listNode, sizeof(ExpressionList), 0);
@@ -40,12 +40,13 @@ ExpressionListPtr createExpression(char* identifier, VariableType type, Variable
 		listNode->expression.node.data.sign = sign;
 		listNode->expression.node.data.constant = constant;
 		listNode->expression.node.data.pointerLevel = 0;
+		listNode->expression.node.data.emptyArray = emptyArray;
 		listNode->next = NULL;
 	}
 	return listNode;
 }
 
-DeclarationPtr createDeclaration(int pointerLevel, char* identifier, VariableType type, VariableSignType sign, StorageType storage, DeclarationType declarationType, ExpressionListPtr arrayExpression, ParameterListNodePtr parameterList) {
+DeclarationPtr createDeclaration(int pointerLevel, char* identifier, VariableType type, VariableSignType sign, StorageType storage, DeclarationType declarationType, ExpressionListPtr arrayExpression, ParameterListNodePtr parameterList, Boolean emptyArray) {
 	DeclarationPtr node = (DeclarationPtr)malloc(sizeof(Declaration));
 	if (node) {
 		memset(node, sizeof(Declaration), 0);
@@ -57,6 +58,7 @@ DeclarationPtr createDeclaration(int pointerLevel, char* identifier, VariableTyp
 		node->arrayExpression = arrayExpression;
 		node->data.pointerLevel = pointerLevel;
 		node->parameterList = parameterList;
+		node->data.emptyArray = emptyArray;
 	}
 	return node;
 }
@@ -109,8 +111,8 @@ void addFunction(DeclarationPtr declaration) {
 	}
 }
 
-void addToSymbolTable(int pointerLevel,char* identifier, VariableType type, VariableSignType sign, StorageType storage, DeclarationType declarationType, Boolean constant, ExpressionListPtr arrayExpression) {
-	DeclarationPtr declaration = createDeclaration(pointerLevel,identifier, type, sign, storage, declarationType, arrayExpression, NULL);
+void addToSymbolTable(int pointerLevel, char* identifier, VariableType type, VariableSignType sign, StorageType storage, DeclarationType declarationType, Boolean constant, Boolean emptyArray, ExpressionListPtr arrayExpression) {
+	DeclarationPtr declaration = createDeclaration(pointerLevel, identifier, type, sign, storage, declarationType, arrayExpression, NULL, emptyArray);
 	if (declarationType == DECLARATION_VARIABLE) {
 		addDeclaration(declaration);
 		printDeclaration(declaration);
@@ -118,7 +120,7 @@ void addToSymbolTable(int pointerLevel,char* identifier, VariableType type, Vari
 }
 
 void addToFunctionTable(char* identifier, VariableType type, VariableSignType sign, StorageType storage, DeclarationType declarationType, Boolean constant, ExpressionListPtr arrayExpression, ParameterListNodePtr parameterList) {
-	DeclarationPtr declaration = createDeclaration(0,identifier, type, sign, storage, declarationType, arrayExpression, parameterList);
+	DeclarationPtr declaration = createDeclaration(0, identifier, type, sign, storage, declarationType, arrayExpression, parameterList, FALSE);
 	if (declarationType == DECLARATION_FUNCTION) {
 		addFunction(declaration);
 		printFunction(declaration);
@@ -127,14 +129,27 @@ void addToFunctionTable(char* identifier, VariableType type, VariableSignType si
 
 void addToExpression(ExpressionListPtrPtr expression, char* identifier, VariableType type, VariableSignType sign, Boolean constant) {
 	if (*expression == NULL) {
-		*expression = createExpression(identifier, type, sign, constant);
+		*expression = createExpression(identifier, type, sign, constant, FALSE);
 	}
 	else {
 		ExpressionListPtr ptr = *expression;
 		while (ptr->next != NULL) {
 			ptr = ptr->next;
 		}
-		ptr->next = createExpression(identifier, type, sign, constant);
+		ptr->next = createExpression(identifier, type, sign, constant, FALSE);
+	}
+}
+
+void addToExpression2(ExpressionListPtrPtr expression, char* identifier, VariableType type, VariableSignType sign, Boolean constant) {
+	if (*expression == NULL) {
+		*expression = createExpression(identifier, type, sign, constant, TRUE);
+	}
+	else {
+		ExpressionListPtr ptr = *expression;
+		while (ptr->next != NULL) {
+			ptr = ptr->next;
+		}
+		ptr->next = createExpression(identifier, type, sign, constant, TRUE);
 	}
 }
 
@@ -188,18 +203,18 @@ void addToParameterList2(ParameterListNodePtrPtr list, CompilerInfoPtr node) {
 
 void printDeclaration(DeclarationPtr declaration) {
 	if (declaration != NULL && declaration->arrayExpression == NULL) {
-		printf("'%s %s %s '%s' PL=%d' added to symbol table\n", VariableStorageName[declaration->data.storage], VariableSignName[declaration->data.sign], VariableTypeName[declaration->data.type], declaration->data.identifier,declaration->data.pointerLevel);
+		printf("'%s %s %s '%s' PL=%d EA=%d' added to symbol table\n", VariableStorageName[declaration->data.storage], VariableSignName[declaration->data.sign], VariableTypeName[declaration->data.type], declaration->data.identifier, declaration->data.pointerLevel, declaration->data.emptyArray);
 	}
-	else if(declaration != NULL && declaration->arrayExpression != NULL) {
-		printf("'%s %s %s '%s[]' PL=%d' added to symbol table\n", VariableStorageName[declaration->data.storage], VariableSignName[declaration->data.sign], VariableTypeName[declaration->data.type], declaration->data.identifier, declaration->data.pointerLevel);
+	else if (declaration != NULL && declaration->arrayExpression != NULL) {
+		printf("'%s %s %s '%s[]' PL=%d EA=%d' added to symbol table\n", VariableStorageName[declaration->data.storage], VariableSignName[declaration->data.sign], VariableTypeName[declaration->data.type], declaration->data.identifier, declaration->data.pointerLevel,declaration->data.emptyArray);
 	}
 }
 
 void printFunction(DeclarationPtr declaration) {
-	printf("'%s %s %s '%s'' added to function table\n", VariableStorageName[declaration->data.storage], VariableSignName[declaration->data.sign], VariableTypeName[declaration->data.type], declaration->data.identifier);
+	printf("'%s %s %s '%s' PL=%d EA=%d' added to functiom table\n", VariableStorageName[declaration->data.storage], VariableSignName[declaration->data.sign], VariableTypeName[declaration->data.type], declaration->data.identifier, declaration->data.pointerLevel, declaration->data.emptyArray);
 	ParameterListNodePtr ptr = declaration->parameterList;
 	while (ptr != NULL) {
-		printf("      '%s %s %s '%s'' parameter\n", VariableStorageName[ptr->data.storage], VariableSignName[ptr->data.sign], VariableTypeName[ptr->data.type], ptr->data.identifier);
+		printf("      '%s %s %s '%s' PL=%d EA=%d' parameter\n", VariableStorageName[ptr->data.storage], VariableSignName[ptr->data.sign], VariableTypeName[ptr->data.type], ptr->data.identifier,ptr->data.pointerLevel,ptr->data.emptyArray);
 		ptr = ptr->next;
 	}
 }
@@ -210,8 +225,9 @@ void printParameterListNode(char* message, ParameterListNodePtr list) {
 
 void printCompilerInfoNode(char* message, CompilerInfoPtr list) {
 	if (list != NULL) {
-		fprintf(fileLexLog, "'%s %s %s '%s' PL=%d' => %s\n", VariableStorageName[list->data.storage], VariableSignName[list->data.sign], VariableTypeName[list->data.type], list->data.identifier, list->data.pointerLevel, message);
-	} else {
+		fprintf(fileLexLog, "'%s %s %s '%s' PL=%d' EA=%d => %s\n", VariableStorageName[list->data.storage], VariableSignName[list->data.sign], VariableTypeName[list->data.type], list->data.identifier, list->data.pointerLevel, list->data.emptyArray, message);
+	}
+	else {
 		fprintf(fileLexLog, "%s\n", message);
 	}
 }

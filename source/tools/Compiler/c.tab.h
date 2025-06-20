@@ -145,9 +145,9 @@ typedef union YYSTYPE
 {
 /* Line 2058 of yacc.c  */
 #line 5 "c.y"
- 	   
+       
     struct _CompilerInfo CompilerInfo;
-	struct _ParameterListNode *ParameterList;
+    struct _ParameterListNode *ParameterList;
 
 
 /* Line 2058 of yacc.c  */

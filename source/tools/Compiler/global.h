@@ -43,7 +43,7 @@
 
 #define TRUE 1
 #define FALSE 0
-#define Boolean unsigned char
+#define Boolean unsigned int
 
 typedef enum _VariableSignType {
 	TYPE_SIGNED = 0,
@@ -100,6 +100,7 @@ typedef struct _IdentifierData {
 	StorageType storage;
 	DeclarationType declarationType;
 	Boolean constant;
+	Boolean emptyArray;
 	int pointerLevel;
 }IdentifierData, * IdentifierDataPtr, ** IdentifierDataPtrPtr;
 
@@ -150,14 +151,15 @@ int check_type();
 void yyerror(const char* s);
 int handleIndentifier(int result);
 
-ExpressionListPtr createExpression(char* identifier, VariableType type, VariableSignType sign, Boolean constant);
-DeclarationPtr createDeclaration(int pointerLevel, char* identifier, VariableType type, VariableSignType sign, StorageType storage, DeclarationType declarationType, ExpressionListPtr arrayExpression, ParameterListNodePtr parameterList);
+ExpressionListPtr createExpression(char* identifier, VariableType type, VariableSignType sign, Boolean constant, Boolean emptyArray);
+DeclarationPtr createDeclaration(int pointerLevel, char* identifier, VariableType type, VariableSignType sign, StorageType storage, DeclarationType declarationType, ExpressionListPtr arrayExpression, ParameterListNodePtr parameterList, Boolean emptyArray);
 void addDeclaration(DeclarationPtr declaration);
 void addFunction(DeclarationPtr declaration);
-void addToSymbolTable(int pointerLevel, char* identifier, VariableType type, VariableSignType sign, StorageType storage, DeclarationType declarationType, Boolean constant, ExpressionListPtr arrayExpression);
+void addToSymbolTable(int pointerLevel, char* identifier, VariableType type, VariableSignType sign, StorageType storage, DeclarationType declarationType, Boolean constant, Boolean emptyArray, ExpressionListPtr arrayExpression);
 void addToFunctionTable(char* identifier, VariableType type, VariableSignType sign, StorageType storage, DeclarationType declarationType, Boolean constant, ExpressionListPtr arrayExpression, ParameterListNodePtr parameterList);
 int printSize(ParameterListNodePtr list);
 void addToExpression(ExpressionListPtrPtr expression, char* identifier, VariableType type, VariableSignType sign, Boolean constant);
+void addToExpression2(ExpressionListPtrPtr expression, char* identifier, VariableType type, VariableSignType sign, Boolean constant);
 ParameterListNodePtr createParameterListNode(CompilerInfoPtr node);
 void addToParameterList(ParameterListNodePtrPtr list, ParameterListNodePtr node);
 void addToParameterList2(ParameterListNodePtrPtr list, CompilerInfoPtr node);
