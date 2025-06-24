@@ -287,6 +287,7 @@ declaration_specifiers
                                                        $<CompilerInfo>$.data.storage = $<CompilerInfo>1.data.storage;
                                                        $<CompilerInfo>$.data.pointerLevel = $<CompilerInfo>1.data.pointerLevel;
                                                        $<CompilerInfo>$.data.emptyArray = $<CompilerInfo>1.data.emptyArray;
+                                                       strcpy($<CompilerInfo>$.data.identifier,"");
                                                        printCompilerInfoNode("type_specifier REDUCE to declaration_specifiers",&$<CompilerInfo>$);
                                                      }
     | type_specifier declaration_specifiers          {
@@ -463,8 +464,15 @@ direct_declarator
     ;
 
 pointer
-    : TIMES_OP                             {$<CompilerInfo>$.data.pointerLevel++; printCompilerInfoNode("TIMES_OP REDUCE to pointer",&$<CompilerInfo>$);}
-    | TIMES_OP type_qualifier_list         {printCompilerInfoNode("TIMES_OP type_qualifier_list REDUCE to pointer",NULL);}
+    : TIMES_OP                             {
+                                             memset(&$<CompilerInfo>$,sizeof($<CompilerInfo>$),0);
+                                             strcpy($<CompilerInfo>$.data.identifier,"");
+                                             $<CompilerInfo>$.data.pointerLevel++;                                              
+                                             printCompilerInfoNode("TIMES_OP REDUCE to pointer",&$<CompilerInfo>$);
+                                           }
+    | TIMES_OP type_qualifier_list         {
+                                             printCompilerInfoNode("TIMES_OP type_qualifier_list REDUCE to pointer",NULL);
+                                             }
     | TIMES_OP pointer                     {
                                             $<CompilerInfo>$.data.pointerLevel = $<CompilerInfo>2.data.pointerLevel; 
                                             $<CompilerInfo>$.data.pointerLevel++; 
@@ -482,11 +490,11 @@ type_qualifier_list
 parameter_type_list
     : parameter_list                   {
                                         $<CompilerInfo>$.parameterList = $<ParameterList>1;
-                                        printCompilerInfoNode("<EXP> parameter_list REDUCE to parameter_type_list",&$<CompilerInfo>$);
+                                        printParameterListNode("<EXP> parameter_list REDUCE to parameter_type_list",NULL);
                                        }
     | parameter_list COMMA_OP ELLIPSIS {
                                         $<CompilerInfo>$.parameterList = $<ParameterList>1;
-                                        printCompilerInfoNode("<EXP> parameter_list COMMA_OP ELLIPSIS REDUCE to parameter_type_list",&$<CompilerInfo>$);
+                                        printParameterListNode("<EXP> parameter_list COMMA_OP ELLIPSIS REDUCE to parameter_type_list",NULL);
                                        }
     ;
 
@@ -498,7 +506,7 @@ parameter_list
     | parameter_list COMMA_OP parameter_declaration {
                                                      addToParameterList2(&$<ParameterList>1, &$<CompilerInfo>3);
                                                      $<ParameterList>$ = $<ParameterList>1;
-                                                     printParameterListNode("parameter_list COMMA_OP parameter_declaration REDUCE to parameter_list",$<ParameterList>$);
+                                                     printParameterListNode("<EXP> parameter_list COMMA_OP parameter_declaration REDUCE to parameter_list",NULL);
                                                     }
     ;
 

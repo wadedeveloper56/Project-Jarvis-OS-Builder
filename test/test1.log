@@ -1,131 +1,21 @@
-TYPE_CHARACTER REDUCE to type_specifier
-'STORAGE_NONE TYPE_SIGNED TYPE_CHARACTER '' PL=0' EA=0 => type_specifier REDUCE to declaration_specifiers
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'var1' PL=0' EA=0 => IDENTIFIER REDUCE to direct_declarator
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'var1' PL=0' EA=0 => direct_declarator REDUCE to declarator
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'var1' PL=0' EA=0 => declarator REDUCE to init_declarator
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'var1' PL=0' EA=0 => init_declarator REDUCE to init_declarator_list
-'STORAGE_NONE TYPE_SIGNED TYPE_CHARACTER 'var1' PL=0' EA=0 => declaration_specifiers init_declarator_list SEMI_OP REDUCE to declaration
-'STORAGE_NONE TYPE_SIGNED TYPE_CHARACTER 'var1' PL=0' EA=0 => declaration REDUCE to external_declaration
-'STORAGE_NONE TYPE_SIGNED TYPE_CHARACTER 'var1' PL=0' EA=0 => external_declaration REDUCE to translation_unit
-TYPE_SHORT REDUCE to type_specifier
-'STORAGE_NONE TYPE_SIGNED TYPE_SHORT 'var1' PL=0' EA=0 => type_specifier REDUCE to declaration_specifiers
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'var2' PL=0' EA=0 => IDENTIFIER REDUCE to direct_declarator
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'var2' PL=0' EA=0 => direct_declarator REDUCE to declarator
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'var2' PL=0' EA=0 => declarator REDUCE to init_declarator
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'var2' PL=0' EA=0 => init_declarator REDUCE to init_declarator_list
-'STORAGE_NONE TYPE_SIGNED TYPE_SHORT 'var2' PL=0' EA=0 => declaration_specifiers init_declarator_list SEMI_OP REDUCE to declaration
-'STORAGE_NONE TYPE_SIGNED TYPE_SHORT 'var2' PL=0' EA=0 => declaration REDUCE to external_declaration
-'STORAGE_NONE TYPE_SIGNED TYPE_SHORT 'var2' PL=0' EA=0 => translation_unit external_declaration REDUCE to translation_unit
 TYPE_INTEGER REDUCE to type_specifier
-'STORAGE_NONE TYPE_SIGNED TYPE_INTEGER 'var2' PL=0' EA=0 => type_specifier REDUCE to declaration_specifiers
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'var3' PL=0' EA=0 => IDENTIFIER REDUCE to direct_declarator
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'var3' PL=0' EA=0 => direct_declarator REDUCE to declarator
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'var3' PL=0' EA=0 => declarator REDUCE to init_declarator
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'var3' PL=0' EA=0 => init_declarator REDUCE to init_declarator_list
-'STORAGE_NONE TYPE_SIGNED TYPE_INTEGER 'var3' PL=0' EA=0 => declaration_specifiers init_declarator_list SEMI_OP REDUCE to declaration
-'STORAGE_NONE TYPE_SIGNED TYPE_INTEGER 'var3' PL=0' EA=0 => declaration REDUCE to external_declaration
-'STORAGE_NONE TYPE_SIGNED TYPE_INTEGER 'var3' PL=0' EA=0 => translation_unit external_declaration REDUCE to translation_unit
-TYPE_LONG REDUCE to type_specifier
-'STORAGE_NONE TYPE_SIGNED TYPE_LONG 'var3' PL=0' EA=0 => type_specifier REDUCE to declaration_specifiers
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'var4' PL=0' EA=0 => IDENTIFIER REDUCE to direct_declarator
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'var4' PL=0' EA=0 => direct_declarator REDUCE to declarator
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'var4' PL=0' EA=0 => declarator REDUCE to init_declarator
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'var4' PL=0' EA=0 => init_declarator REDUCE to init_declarator_list
-'STORAGE_NONE TYPE_SIGNED TYPE_LONG 'var4' PL=0' EA=0 => declaration_specifiers init_declarator_list SEMI_OP REDUCE to declaration
-'STORAGE_NONE TYPE_SIGNED TYPE_LONG 'var4' PL=0' EA=0 => declaration REDUCE to external_declaration
-'STORAGE_NONE TYPE_SIGNED TYPE_LONG 'var4' PL=0' EA=0 => translation_unit external_declaration REDUCE to translation_unit
-TYPE_LONG64 REDUCE to type_specifier
-'STORAGE_NONE TYPE_SIGNED TYPE_LONG64 'var4' PL=0' EA=0 => type_specifier REDUCE to declaration_specifiers
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'var5' PL=0' EA=0 => IDENTIFIER REDUCE to direct_declarator
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'var5' PL=0' EA=0 => direct_declarator REDUCE to declarator
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'var5' PL=0' EA=0 => declarator REDUCE to init_declarator
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'var5' PL=0' EA=0 => init_declarator REDUCE to init_declarator_list
-'STORAGE_NONE TYPE_SIGNED TYPE_LONG64 'var5' PL=0' EA=0 => declaration_specifiers init_declarator_list SEMI_OP REDUCE to declaration
-'STORAGE_NONE TYPE_SIGNED TYPE_LONG64 'var5' PL=0' EA=0 => declaration REDUCE to external_declaration
-'STORAGE_NONE TYPE_SIGNED TYPE_LONG64 'var5' PL=0' EA=0 => translation_unit external_declaration REDUCE to translation_unit
-TYPE_FLOAT REDUCE to type_specifier
-'STORAGE_NONE TYPE_SIGNED TYPE_FLOAT 'var5' PL=0' EA=0 => type_specifier REDUCE to declaration_specifiers
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'var6' PL=0' EA=0 => IDENTIFIER REDUCE to direct_declarator
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'var6' PL=0' EA=0 => direct_declarator REDUCE to declarator
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'var6' PL=0' EA=0 => declarator REDUCE to init_declarator
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'var6' PL=0' EA=0 => init_declarator REDUCE to init_declarator_list
-'STORAGE_NONE TYPE_SIGNED TYPE_FLOAT 'var6' PL=0' EA=0 => declaration_specifiers init_declarator_list SEMI_OP REDUCE to declaration
-'STORAGE_NONE TYPE_SIGNED TYPE_FLOAT 'var6' PL=0' EA=0 => declaration REDUCE to external_declaration
-'STORAGE_NONE TYPE_SIGNED TYPE_FLOAT 'var6' PL=0' EA=0 => translation_unit external_declaration REDUCE to translation_unit
-TYPE_DOUBLE REDUCE to type_specifier
-'STORAGE_NONE TYPE_SIGNED TYPE_DOUBLE 'var6' PL=0' EA=0 => type_specifier REDUCE to declaration_specifiers
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'var7' PL=0' EA=0 => IDENTIFIER REDUCE to direct_declarator
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'var7' PL=0' EA=0 => direct_declarator REDUCE to declarator
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'var7' PL=0' EA=0 => declarator REDUCE to init_declarator
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'var7' PL=0' EA=0 => init_declarator REDUCE to init_declarator_list
-'STORAGE_NONE TYPE_SIGNED TYPE_DOUBLE 'var7' PL=0' EA=0 => declaration_specifiers init_declarator_list SEMI_OP REDUCE to declaration
-'STORAGE_NONE TYPE_SIGNED TYPE_DOUBLE 'var7' PL=0' EA=0 => declaration REDUCE to external_declaration
-'STORAGE_NONE TYPE_SIGNED TYPE_DOUBLE 'var7' PL=0' EA=0 => translation_unit external_declaration REDUCE to translation_unit
-TYPE_LONGDOUBLE REDUCE to type_specifier
-'STORAGE_NONE TYPE_SIGNED TYPE_LONGDOUBLE 'var7' PL=0' EA=0 => type_specifier REDUCE to declaration_specifiers
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'var8' PL=0' EA=0 => IDENTIFIER REDUCE to direct_declarator
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'var8' PL=0' EA=0 => direct_declarator REDUCE to declarator
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'var8' PL=0' EA=0 => declarator REDUCE to init_declarator
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'var8' PL=0' EA=0 => init_declarator REDUCE to init_declarator_list
-'STORAGE_NONE TYPE_SIGNED TYPE_LONGDOUBLE 'var8' PL=0' EA=0 => declaration_specifiers init_declarator_list SEMI_OP REDUCE to declaration
-'STORAGE_NONE TYPE_SIGNED TYPE_LONGDOUBLE 'var8' PL=0' EA=0 => declaration REDUCE to external_declaration
-'STORAGE_NONE TYPE_SIGNED TYPE_LONGDOUBLE 'var8' PL=0' EA=0 => translation_unit external_declaration REDUCE to translation_unit
-TYPE_BOOLEAN REDUCE to type_specifier
-'STORAGE_NONE TYPE_SIGNED TYPE_BOOLEAN 'var8' PL=0' EA=0 => type_specifier REDUCE to declaration_specifiers
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'var9' PL=0' EA=0 => IDENTIFIER REDUCE to direct_declarator
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'var9' PL=0' EA=0 => direct_declarator REDUCE to declarator
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'var9' PL=0' EA=0 => declarator REDUCE to init_declarator
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'var9' PL=0' EA=0 => init_declarator REDUCE to init_declarator_list
-'STORAGE_NONE TYPE_SIGNED TYPE_BOOLEAN 'var9' PL=0' EA=0 => declaration_specifiers init_declarator_list SEMI_OP REDUCE to declaration
-'STORAGE_NONE TYPE_SIGNED TYPE_BOOLEAN 'var9' PL=0' EA=0 => declaration REDUCE to external_declaration
-'STORAGE_NONE TYPE_SIGNED TYPE_BOOLEAN 'var9' PL=0' EA=0 => translation_unit external_declaration REDUCE to translation_unit
-TYPE_COMPLEX REDUCE to type_specifier
-'STORAGE_NONE TYPE_SIGNED TYPE_COMPLEX 'var9' PL=0' EA=0 => type_specifier REDUCE to declaration_specifiers
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'var10' PL=0' EA=0 => IDENTIFIER REDUCE to direct_declarator
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'var10' PL=0' EA=0 => direct_declarator REDUCE to declarator
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'var10' PL=0' EA=0 => declarator REDUCE to init_declarator
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'var10' PL=0' EA=0 => init_declarator REDUCE to init_declarator_list
-'STORAGE_NONE TYPE_SIGNED TYPE_COMPLEX 'var10' PL=0' EA=0 => declaration_specifiers init_declarator_list SEMI_OP REDUCE to declaration
-'STORAGE_NONE TYPE_SIGNED TYPE_COMPLEX 'var10' PL=0' EA=0 => declaration REDUCE to external_declaration
-'STORAGE_NONE TYPE_SIGNED TYPE_COMPLEX 'var10' PL=0' EA=0 => translation_unit external_declaration REDUCE to translation_unit
-TYPE_IMAGINARY REDUCE to type_specifier
-'STORAGE_NONE TYPE_SIGNED TYPE_IMAGINARY 'var10' PL=0' EA=0 => type_specifier REDUCE to declaration_specifiers
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'var11' PL=0' EA=0 => IDENTIFIER REDUCE to direct_declarator
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'var11' PL=0' EA=0 => direct_declarator REDUCE to declarator
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'var11' PL=0' EA=0 => declarator REDUCE to init_declarator
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'var11' PL=0' EA=0 => init_declarator REDUCE to init_declarator_list
-'STORAGE_NONE TYPE_SIGNED TYPE_IMAGINARY 'var11' PL=0' EA=0 => declaration_specifiers init_declarator_list SEMI_OP REDUCE to declaration
-'STORAGE_NONE TYPE_SIGNED TYPE_IMAGINARY 'var11' PL=0' EA=0 => declaration REDUCE to external_declaration
-'STORAGE_NONE TYPE_SIGNED TYPE_IMAGINARY 'var11' PL=0' EA=0 => translation_unit external_declaration REDUCE to translation_unit
-TYPE_CHARACTER REDUCE to type_specifier
-'STORAGE_NONE TYPE_SIGNED TYPE_CHARACTER 'var11' PL=0' EA=0 => type_specifier REDUCE to declaration_specifiers
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'var11' PL=1' EA=0 => TIMES_OP REDUCE to pointer
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'var12' PL=0' EA=0 => IDENTIFIER REDUCE to direct_declarator
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'var12' PL=0' EA=1 => direct_declarator OPENBRACE_OP CLOSEBRACE_OP REDUCE to direct_declarator
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'var12' PL=1' EA=1 => pointer direct_declarator REDUCE to declarator
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'var12' PL=1' EA=1 => declarator REDUCE to init_declarator
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'var12' PL=1' EA=1 => init_declarator REDUCE to init_declarator_list
-'STORAGE_NONE TYPE_SIGNED TYPE_CHARACTER 'var12' PL=1' EA=1 => declaration_specifiers init_declarator_list SEMI_OP REDUCE to declaration
-'STORAGE_NONE TYPE_SIGNED TYPE_CHARACTER 'var12' PL=1' EA=1 => declaration REDUCE to external_declaration
-'STORAGE_NONE TYPE_SIGNED TYPE_CHARACTER 'var12' PL=1' EA=1 => translation_unit external_declaration REDUCE to translation_unit
-TYPE_INTEGER REDUCE to type_specifier
-'STORAGE_NONE TYPE_SIGNED TYPE_INTEGER 'var12' PL=0' EA=0 => type_specifier REDUCE to declaration_specifiers
+'STORAGE_NONE TYPE_SIGNED TYPE_INTEGER '' PL=0' EA=0 => type_specifier REDUCE to declaration_specifiers
 'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'main' PL=0' EA=0 => IDENTIFIER REDUCE to direct_declarator
 TYPE_INTEGER REDUCE to type_specifier
-'STORAGE_NONE TYPE_SIGNED TYPE_INTEGER 'main' PL=0' EA=0 => type_specifier REDUCE to declaration_specifiers
+'STORAGE_NONE TYPE_SIGNED TYPE_INTEGER '' PL=0' EA=0 => type_specifier REDUCE to declaration_specifiers
 'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'argc' PL=0' EA=0 => IDENTIFIER REDUCE to direct_declarator
 'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'argc' PL=0' EA=0 => direct_declarator REDUCE to declarator
 'STORAGE_NONE TYPE_SIGNED TYPE_INTEGER 'argc' PL=0' EA=0 => declaration_specifiers declarator REDUCE to parameter_declaration
 'STORAGE_NONE TYPE_SIGNED TYPE_INTEGER 'argc'' => parameter_declaration REDUCE to parameter_list
 TYPE_CHARACTER REDUCE to type_specifier
-'STORAGE_NONE TYPE_SIGNED TYPE_CHARACTER 'argc' PL=0' EA=0 => type_specifier REDUCE to declaration_specifiers
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'argc' PL=1' EA=0 => TIMES_OP REDUCE to pointer
+'STORAGE_NONE TYPE_SIGNED TYPE_CHARACTER '' PL=0' EA=0 => type_specifier REDUCE to declaration_specifiers
+'STORAGE_NONE TYPE_SIGNED TYPE_NULL '' PL=1' EA=0 => TIMES_OP REDUCE to pointer
 'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'argv' PL=0' EA=0 => IDENTIFIER REDUCE to direct_declarator
 'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'argv' PL=0' EA=1 => direct_declarator OPENBRACE_OP CLOSEBRACE_OP REDUCE to direct_declarator
 'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'argv' PL=1' EA=1 => pointer direct_declarator REDUCE to declarator
 'STORAGE_NONE TYPE_SIGNED TYPE_CHARACTER 'argv' PL=1' EA=1 => declaration_specifiers declarator REDUCE to parameter_declaration
-'STORAGE_NONE TYPE_SIGNED TYPE_INTEGER 'argc'' => parameter_list COMMA_OP parameter_declaration REDUCE to parameter_list
-'STORAGE_NONE TYPE_SIGNED TYPE_INTEGER '²§' PL=0' EA=0 => <EXP> parameter_list REDUCE to parameter_type_list
+parameter_list COMMA_OP parameter_declaration REDUCE to parameter_list
+<EXP> parameter_list REDUCE to parameter_type_list
 'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'main' PL=0' EA=0 => direct_declarator OPENPAREN_OP parameter_type_list CLOSEPAREN_OP REDUCE to direct_declarator
 'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'main' PL=0' EA=0 => direct_declarator REDUCE to declarator
 'STORAGE_NONE TYPE_SIGNED TYPE_NULL '0' PL=0' EA=0 => <EXP> CONSTANT REDUCE to primary_expression
@@ -152,7 +42,16 @@ TYPE_CHARACTER REDUCE to type_specifier
 <EXP> OCURLY_OP block_item_list CCURLY_OP REDUCE to compound_statement
 'STORAGE_NONE TYPE_SIGNED TYPE_INTEGER 'main' PL=0' EA=0 => declaration_specifiers declarator compound_statement REDUCE to function_definition
 'STORAGE_NONE TYPE_SIGNED TYPE_INTEGER 'main' PL=0' EA=0 => function_definition REDUCE to external_declaration
-'STORAGE_NONE TYPE_SIGNED TYPE_INTEGER 'main' PL=0' EA=0 => translation_unit external_declaration REDUCE to translation_unit
+'STORAGE_NONE TYPE_SIGNED TYPE_INTEGER 'main' PL=0' EA=0 => external_declaration REDUCE to translation_unit
+TYPE_VOID REDUCE to type_specifier
+'STORAGE_NONE TYPE_SIGNED TYPE_VOID '' PL=0' EA=0 => type_specifier REDUCE to declaration_specifiers
+'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'function1' PL=0' EA=0 => IDENTIFIER REDUCE to direct_declarator
+'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'function1' PL=0' EA=0 => direct_declarator OPENPAREN_OP CLOSEPAREN_OP REDUCE to direct_declarator
+'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'function1' PL=0' EA=0 => direct_declarator REDUCE to declarator
+OCURLY_OP CCURLY_OP REDUCE to compound_statement
+'STORAGE_NONE TYPE_SIGNED TYPE_VOID 'function1' PL=0' EA=0 => declaration_specifiers declarator compound_statement REDUCE to function_definition
+'STORAGE_NONE TYPE_SIGNED TYPE_VOID 'function1' PL=0' EA=0 => function_definition REDUCE to external_declaration
+'STORAGE_NONE TYPE_SIGNED TYPE_VOID 'function1' PL=0' EA=0 => translation_unit external_declaration REDUCE to translation_unit
 output is "test1.asm"
 bit size=32 bits
 infile[0]="test1.c"

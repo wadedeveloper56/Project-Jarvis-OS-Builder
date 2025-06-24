@@ -220,7 +220,12 @@ void printFunction(DeclarationPtr declaration) {
 }
 
 void printParameterListNode(char* message, ParameterListNodePtr list) {
-	fprintf(fileLexLog, "'%s %s %s '%s'' => %s\n", VariableStorageName[list->data.storage], VariableSignName[list->data.sign], VariableTypeName[list->data.type], list->data.identifier, message);
+	if (list != NULL) {
+		fprintf(fileLexLog, "'%s %s %s '%s'' => %s\n", VariableStorageName[list->data.storage], VariableSignName[list->data.sign], VariableTypeName[list->data.type], list->data.identifier, message);
+	}
+	else {
+		fprintf(fileLexLog, "%s\n", message);
+	}
 }
 
 void printCompilerInfoNode(char* message, CompilerInfoPtr list) {
