@@ -10,3 +10,7 @@
 /bin/tools/IDE/Release
 /bin/tools/Linker/Debug
 /bin/tools/Linker/Release
+/compiletest/Debug
+/compiletest/Release
+/compiletest/.vs/compiletest/FileContentIndex
+/compiletest/.vs/compiletest/v17

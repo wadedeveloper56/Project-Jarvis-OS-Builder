@@ -1,0 +1,146 @@
+Grammar
+
+    0 $accept: program "end of file"
+
+    1 program: %empty
+    2        | program command
+    3        | program "semicolon"
+
+    4 command: "string" "leftpar" "rightpar"
+    5        | "string" "leftpar" arguments "rightpar"
+
+    6 arguments: "number"
+    7          | arguments "comma" "number"
+
+
+Terminals, with rules where they appear
+
+    "end of file" (0) 0
+    error (256)
+    "string" <std::string> (258) 4 5
+    "number" <uint64_t> (259) 6 7
+    "leftpar" (260) 4 5
+    "rightpar" (261) 4 5
+    "semicolon" (262) 3
+    "comma" (263) 7
+
+
+Nonterminals, with rules where they appear
+
+    $accept (9)
+        on left: 0
+    program (10)
+        on left: 1 2 3
+        on right: 0 2 3
+    command < EzAquarii::Command > (11)
+        on left: 4 5
+        on right: 2
+    arguments < std::vector<uint64_t> > (12)
+        on left: 6 7
+        on right: 5 7
+
+
+State 0
+
+    0 $accept: . program "end of file"
+
+    $default  reduce using rule 1 (program)
+
+    program  go to state 1
+
+
+State 1
+
+    0 $accept: program . "end of file"
+    2 program: program . command
+    3        | program . "semicolon"
+
+    "end of file"  shift, and go to state 2
+    "string"       shift, and go to state 3
+    "semicolon"    shift, and go to state 4
+
+    command  go to state 5
+
+
+State 2
+
+    0 $accept: program "end of file" .
+
+    $default  accept
+
+
+State 3
+
+    4 command: "string" . "leftpar" "rightpar"
+    5        | "string" . "leftpar" arguments "rightpar"
+
+    "leftpar"  shift, and go to state 6
+
+
+State 4
+
+    3 program: program "semicolon" .
+
+    $default  reduce using rule 3 (program)
+
+
+State 5
+
+    2 program: program command .
+
+    $default  reduce using rule 2 (program)
+
+
+State 6
+
+    4 command: "string" "leftpar" . "rightpar"
+    5        | "string" "leftpar" . arguments "rightpar"
+
+    "number"    shift, and go to state 7
+    "rightpar"  shift, and go to state 8
+
+    arguments  go to state 9
+
+
+State 7
+
+    6 arguments: "number" .
+
+    $default  reduce using rule 6 (arguments)
+
+
+State 8
+
+    4 command: "string" "leftpar" "rightpar" .
+
+    $default  reduce using rule 4 (command)
+
+
+State 9
+
+    5 command: "string" "leftpar" arguments . "rightpar"
+    7 arguments: arguments . "comma" "number"
+
+    "rightpar"  shift, and go to state 10
+    "comma"     shift, and go to state 11
+
+
+State 10
+
+    5 command: "string" "leftpar" arguments "rightpar" .
+
+    $default  reduce using rule 5 (command)
+
+
+State 11
+
+    7 arguments: arguments "comma" . "number"
+
+    "number"  shift, and go to state 12
+
+
+State 12
+
+    7 arguments: arguments "comma" "number" .
+
+    $default  reduce using rule 7 (arguments)
