@@ -35,16 +35,17 @@
 // private implementation details that can be changed or removed.
 
 // "%code top" blocks.
-#line 60 "parser.y"
+#line 33 "parser.y"
 
     #include <iostream>
+    #include <stdlib.h>
     #include "scanner.h"
     #include "parser.hpp"
     #include "interpreter.h"
     #include "location.hh"
     
     // yylex() arguments are defined in parser.y
-    static EzAquarii::Parser::symbol_type yylex(EzAquarii::Scanner &scanner, EzAquarii::Interpreter &driver) {
+    static WadeSpace::Parser::symbol_type yylex(WadeSpace::Scanner &scanner, WadeSpace::Interpreter &driver) {
         return scanner.get_next_token();
     }
     
@@ -52,9 +53,9 @@
     // x and y are same as in above static function
     // #define yylex(x, y) scanner.get_next_token()
     
-    using namespace EzAquarii;
+    using namespace WadeSpace;
 
-#line 58 "parser.cpp"
+#line 59 "parser.cpp"
 
 
 
@@ -152,12 +153,12 @@
 #define YYERROR         goto yyerrorlab
 #define YYRECOVERING()  (!!yyerrstatus_)
 
-#line 37 "parser.y"
-namespace  EzAquarii  {
-#line 158 "parser.cpp"
+#line 9 "parser.y"
+namespace  WadeSpace  {
+#line 159 "parser.cpp"
 
   /// Build a parser object.
-   Parser :: Parser  (EzAquarii::Scanner &scanner_yyarg, EzAquarii::Interpreter &driver_yyarg)
+   Parser :: Parser  (WadeSpace::Scanner &scanner_yyarg, WadeSpace::Interpreter &driver_yyarg)
 #if YYDEBUG
     : yydebug_ (false),
       yycdebug_ (&std::cerr),
@@ -224,18 +225,23 @@ namespace  EzAquarii  {
     switch (that.kind ())
     {
       case symbol_kind::S_command: // command
-        value.YY_MOVE_OR_COPY<  EzAquarii::Command  > (YY_MOVE (that.value));
+        value.YY_MOVE_OR_COPY<  WadeSpace::Command  > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_arguments: // arguments
         value.YY_MOVE_OR_COPY<  std::vector<uint64_t>  > (YY_MOVE (that.value));
         break;
 
-      case symbol_kind::S_STRING: // "string"
+      case symbol_kind::S_F_CONST: // "f_const"
+        value.YY_MOVE_OR_COPY< long double > (YY_MOVE (that.value));
+        break;
+
+      case symbol_kind::S_IDENTIFIER: // "identifier"
+      case symbol_kind::S_STRING_LITERAL: // "sting_literal"
         value.YY_MOVE_OR_COPY< std::string > (YY_MOVE (that.value));
         break;
 
-      case symbol_kind::S_NUMBER: // "number"
+      case symbol_kind::S_I_CONST: // "i_const"
         value.YY_MOVE_OR_COPY< uint64_t > (YY_MOVE (that.value));
         break;
 
@@ -255,18 +261,23 @@ namespace  EzAquarii  {
     switch (that.kind ())
     {
       case symbol_kind::S_command: // command
-        value.move<  EzAquarii::Command  > (YY_MOVE (that.value));
+        value.move<  WadeSpace::Command  > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_arguments: // arguments
         value.move<  std::vector<uint64_t>  > (YY_MOVE (that.value));
         break;
 
-      case symbol_kind::S_STRING: // "string"
+      case symbol_kind::S_F_CONST: // "f_const"
+        value.move< long double > (YY_MOVE (that.value));
+        break;
+
+      case symbol_kind::S_IDENTIFIER: // "identifier"
+      case symbol_kind::S_STRING_LITERAL: // "sting_literal"
         value.move< std::string > (YY_MOVE (that.value));
         break;
 
-      case symbol_kind::S_NUMBER: // "number"
+      case symbol_kind::S_I_CONST: // "i_const"
         value.move< uint64_t > (YY_MOVE (that.value));
         break;
 
@@ -286,18 +297,23 @@ namespace  EzAquarii  {
     switch (that.kind ())
     {
       case symbol_kind::S_command: // command
-        value.copy<  EzAquarii::Command  > (that.value);
+        value.copy<  WadeSpace::Command  > (that.value);
         break;
 
       case symbol_kind::S_arguments: // arguments
         value.copy<  std::vector<uint64_t>  > (that.value);
         break;
 
-      case symbol_kind::S_STRING: // "string"
+      case symbol_kind::S_F_CONST: // "f_const"
+        value.copy< long double > (that.value);
+        break;
+
+      case symbol_kind::S_IDENTIFIER: // "identifier"
+      case symbol_kind::S_STRING_LITERAL: // "sting_literal"
         value.copy< std::string > (that.value);
         break;
 
-      case symbol_kind::S_NUMBER: // "number"
+      case symbol_kind::S_I_CONST: // "i_const"
         value.copy< uint64_t > (that.value);
         break;
 
@@ -316,18 +332,23 @@ namespace  EzAquarii  {
     switch (that.kind ())
     {
       case symbol_kind::S_command: // command
-        value.move<  EzAquarii::Command  > (that.value);
+        value.move<  WadeSpace::Command  > (that.value);
         break;
 
       case symbol_kind::S_arguments: // arguments
         value.move<  std::vector<uint64_t>  > (that.value);
         break;
 
-      case symbol_kind::S_STRING: // "string"
+      case symbol_kind::S_F_CONST: // "f_const"
+        value.move< long double > (that.value);
+        break;
+
+      case symbol_kind::S_IDENTIFIER: // "identifier"
+      case symbol_kind::S_STRING_LITERAL: // "sting_literal"
         value.move< std::string > (that.value);
         break;
 
-      case symbol_kind::S_NUMBER: // "number"
+      case symbol_kind::S_I_CONST: // "i_const"
         value.move< uint64_t > (that.value);
         break;
 
@@ -591,18 +612,23 @@ namespace  EzAquarii  {
       switch (yyr1_[yyn])
     {
       case symbol_kind::S_command: // command
-        yylhs.value.emplace<  EzAquarii::Command  > ();
+        yylhs.value.emplace<  WadeSpace::Command  > ();
         break;
 
       case symbol_kind::S_arguments: // arguments
         yylhs.value.emplace<  std::vector<uint64_t>  > ();
         break;
 
-      case symbol_kind::S_STRING: // "string"
+      case symbol_kind::S_F_CONST: // "f_const"
+        yylhs.value.emplace< long double > ();
+        break;
+
+      case symbol_kind::S_IDENTIFIER: // "identifier"
+      case symbol_kind::S_STRING_LITERAL: // "sting_literal"
         yylhs.value.emplace< std::string > ();
         break;
 
-      case symbol_kind::S_NUMBER: // "number"
+      case symbol_kind::S_I_CONST: // "i_const"
         yylhs.value.emplace< uint64_t > ();
         break;
 
@@ -627,7 +653,7 @@ namespace  EzAquarii  {
           switch (yyn)
             {
   case 2: // program: %empty
-#line 104 "parser.y"
+#line 80 "parser.y"
             {
                 cout << "*** RUN ***" << endl;
                 cout << "Type function with list of parmeters. Parameter list can be empty" << endl
@@ -641,63 +667,63 @@ namespace  EzAquarii  {
                 
                 driver.clear();
             }
-#line 645 "parser.cpp"
+#line 671 "parser.cpp"
     break;
 
   case 3: // program: program command
-#line 118 "parser.y"
+#line 94 "parser.y"
             {
-                const Command &cmd = yystack_[0].value.as <  EzAquarii::Command  > ();
+                const Command &cmd = yystack_[0].value.as <  WadeSpace::Command  > ();
                 cout << "command parsed, updating AST" << endl;
                 driver.addCommand(cmd);
                 cout << endl << "prompt> ";
             }
-#line 656 "parser.cpp"
+#line 682 "parser.cpp"
     break;
 
   case 4: // program: program "semicolon"
-#line 125 "parser.y"
+#line 101 "parser.y"
             {
                 cout << "*** STOP RUN ***" << endl;
                 cout << driver.str() << endl;
             }
-#line 665 "parser.cpp"
+#line 691 "parser.cpp"
     break;
 
-  case 5: // command: "string" "leftpar" "rightpar"
-#line 133 "parser.y"
+  case 5: // command: "identifier" "leftpar" "rightpar"
+#line 109 "parser.y"
         {
             string &id = yystack_[2].value.as < std::string > ();
             cout << "ID: " << id << endl;
-            yylhs.value.as <  EzAquarii::Command  > () = Command(id);
+            yylhs.value.as <  WadeSpace::Command  > () = Command(id);
         }
-#line 675 "parser.cpp"
+#line 701 "parser.cpp"
     break;
 
-  case 6: // command: "string" "leftpar" arguments "rightpar"
-#line 139 "parser.y"
+  case 6: // command: "identifier" "leftpar" arguments "rightpar"
+#line 115 "parser.y"
         {
             string &id = yystack_[3].value.as < std::string > ();
             const std::vector<uint64_t> &args = yystack_[1].value.as <  std::vector<uint64_t>  > ();
             cout << "function: " << id << ", " << args.size() << endl;
-            yylhs.value.as <  EzAquarii::Command  > () = Command(id, args);
+            yylhs.value.as <  WadeSpace::Command  > () = Command(id, args);
         }
-#line 686 "parser.cpp"
+#line 712 "parser.cpp"
     break;
 
-  case 7: // arguments: "number"
-#line 148 "parser.y"
+  case 7: // arguments: "i_const"
+#line 125 "parser.y"
         {
             uint64_t number = yystack_[0].value.as < uint64_t > ();
             yylhs.value.as <  std::vector<uint64_t>  > () = std::vector<uint64_t>();
             yylhs.value.as <  std::vector<uint64_t>  > ().push_back(number);
             cout << "first argument: " << number << endl;
         }
-#line 697 "parser.cpp"
+#line 723 "parser.cpp"
     break;
 
-  case 8: // arguments: arguments "comma" "number"
-#line 155 "parser.y"
+  case 8: // arguments: arguments "comma" "i_const"
+#line 132 "parser.y"
         {
             uint64_t number = yystack_[0].value.as < uint64_t > ();
             std::vector<uint64_t> &args = yystack_[2].value.as <  std::vector<uint64_t>  > ();
@@ -705,11 +731,11 @@ namespace  EzAquarii  {
             yylhs.value.as <  std::vector<uint64_t>  > () = args;
             cout << "next argument: " << number << ", arg list size = " << args.size() << endl;
         }
-#line 709 "parser.cpp"
+#line 735 "parser.cpp"
     break;
 
 
-#line 713 "parser.cpp"
+#line 739 "parser.cpp"
 
             default:
               break;
@@ -1061,15 +1087,15 @@ namespace  EzAquarii  {
   }
 
 
-  const signed char  Parser ::yypact_ninf_ = -5;
+  const signed char  Parser ::yypact_ninf_ = -7;
 
   const signed char  Parser ::yytable_ninf_ = -1;
 
   const signed char
    Parser ::yypact_[] =
   {
-      -5,     0,    -5,    -4,    -5,    -5,    -2,    -5,    -5,     2,
-      -5,     1,    -5
+      -7,     0,    -7,    -1,    -7,    -7,    -3,    -7,    -7,    -6,
+      -7,     3,    -7
   };
 
   const signed char
@@ -1082,7 +1108,7 @@ namespace  EzAquarii  {
   const signed char
    Parser ::yypgoto_[] =
   {
-      -5,    -5,    -5,    -5
+      -7,    -7,    -7,    -7
   };
 
   const signed char
@@ -1094,28 +1120,26 @@ namespace  EzAquarii  {
   const signed char
    Parser ::yytable_[] =
   {
-       2,     6,     7,     3,     8,    12,     0,     4,    10,     0,
-      11
+       2,     7,    10,     3,    11,     8,     6,    12,     0,     4
   };
 
   const signed char
    Parser ::yycheck_[] =
   {
-       0,     5,     4,     3,     6,     4,    -1,     7,     6,    -1,
-       8
+       0,     4,     8,     3,    10,     8,     7,     4,    -1,     9
   };
 
   const signed char
    Parser ::yystos_[] =
   {
-       0,    10,     0,     3,     7,    11,     5,     4,     6,    12,
-       6,     8,     4
+       0,    12,     0,     3,     9,    13,     7,     4,     8,    14,
+       8,    10,     4
   };
 
   const signed char
    Parser ::yyr1_[] =
   {
-       0,     9,    10,    10,    10,    11,    11,    12,    12
+       0,    11,    12,    12,    12,    13,    13,    14,    14
   };
 
   const signed char
@@ -1131,9 +1155,10 @@ namespace  EzAquarii  {
   const char*
   const  Parser ::yytname_[] =
   {
-  "\"end of file\"", "error", "\"invalid token\"", "\"string\"",
-  "\"number\"", "\"leftpar\"", "\"rightpar\"", "\"semicolon\"",
-  "\"comma\"", "$accept", "program", "command", "arguments", YY_NULLPTR
+  "\"end of file\"", "error", "\"invalid token\"", "\"identifier\"",
+  "\"i_const\"", "\"f_const\"", "\"sting_literal\"", "\"leftpar\"",
+  "\"rightpar\"", "\"semicolon\"", "\"comma\"", "$accept", "program",
+  "command", "arguments", YY_NULLPTR
   };
 #endif
 
@@ -1142,7 +1167,7 @@ namespace  EzAquarii  {
   const unsigned char
    Parser ::yyrline_[] =
   {
-       0,   104,   104,   117,   124,   132,   138,   147,   154
+       0,    80,    80,    93,   100,   108,   114,   124,   131
   };
 
   void
@@ -1173,19 +1198,19 @@ namespace  EzAquarii  {
 #endif // YYDEBUG
 
 
-#line 37 "parser.y"
-} //  EzAquarii 
-#line 1179 "parser.cpp"
+#line 9 "parser.y"
+} //  WadeSpace 
+#line 1204 "parser.cpp"
 
-#line 164 "parser.y"
+#line 141 "parser.y"
 
 
 // Bison expects us to provide implementation - otherwise linker complains
-void EzAquarii::Parser::error(const location &loc , const std::string &message) {
+void WadeSpace::Parser::error(const location &loc , const std::string &message) {
         
         // Location should be initialized inside scanner action, but is not in this example.
         // Let's grab location directly from driver class.
-	// cout << "Error: " << message << endl << "Location: " << loc << endl;
-	
+    // cout << "Error: " << message << endl << "Location: " << loc << endl;
+    
         cout << "Error: " << message << endl << "Error location: " << driver.location() << endl;
 }

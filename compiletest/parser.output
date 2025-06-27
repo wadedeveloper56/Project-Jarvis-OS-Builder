@@ -1,3 +1,9 @@
+Terminals unused in grammar
+
+    "f_const"
+    "sting_literal"
+
+
 Grammar
 
     0 $accept: program "end of file"
@@ -6,36 +12,38 @@ Grammar
     2        | program command
     3        | program "semicolon"
 
-    4 command: "string" "leftpar" "rightpar"
-    5        | "string" "leftpar" arguments "rightpar"
+    4 command: "identifier" "leftpar" "rightpar"
+    5        | "identifier" "leftpar" arguments "rightpar"
 
-    6 arguments: "number"
-    7          | arguments "comma" "number"
+    6 arguments: "i_const"
+    7          | arguments "comma" "i_const"
 
 
 Terminals, with rules where they appear
 
     "end of file" (0) 0
     error (256)
-    "string" <std::string> (258) 4 5
-    "number" <uint64_t> (259) 6 7
-    "leftpar" (260) 4 5
-    "rightpar" (261) 4 5
-    "semicolon" (262) 3
-    "comma" (263) 7
+    "identifier" <std::string> (258) 4 5
+    "i_const" <uint64_t> (259) 6 7
+    "f_const" <long double> (260)
+    "sting_literal" <std::string> (261)
+    "leftpar" (262) 4 5
+    "rightpar" (263) 4 5
+    "semicolon" (264) 3
+    "comma" (265) 7
 
 
 Nonterminals, with rules where they appear
 
-    $accept (9)
+    $accept (11)
         on left: 0
-    program (10)
+    program (12)
         on left: 1 2 3
         on right: 0 2 3
-    command < EzAquarii::Command > (11)
+    command < WadeSpace::Command > (13)
         on left: 4 5
         on right: 2
-    arguments < std::vector<uint64_t> > (12)
+    arguments < std::vector<uint64_t> > (14)
         on left: 6 7
         on right: 5 7
 
@@ -56,7 +64,7 @@ State 1
     3        | program . "semicolon"
 
     "end of file"  shift, and go to state 2
-    "string"       shift, and go to state 3
+    "identifier"   shift, and go to state 3
     "semicolon"    shift, and go to state 4
 
     command  go to state 5
@@ -71,8 +79,8 @@ State 2
 
 State 3
 
-    4 command: "string" . "leftpar" "rightpar"
-    5        | "string" . "leftpar" arguments "rightpar"
+    4 command: "identifier" . "leftpar" "rightpar"
+    5        | "identifier" . "leftpar" arguments "rightpar"
 
     "leftpar"  shift, and go to state 6
 
@@ -93,10 +101,10 @@ State 5
 
 State 6
 
-    4 command: "string" "leftpar" . "rightpar"
-    5        | "string" "leftpar" . arguments "rightpar"
+    4 command: "identifier" "leftpar" . "rightpar"
+    5        | "identifier" "leftpar" . arguments "rightpar"
 
-    "number"    shift, and go to state 7
+    "i_const"   shift, and go to state 7
     "rightpar"  shift, and go to state 8
 
     arguments  go to state 9
@@ -104,22 +112,22 @@ State 6
 
 State 7
 
-    6 arguments: "number" .
+    6 arguments: "i_const" .
 
     $default  reduce using rule 6 (arguments)
 
 
 State 8
 
-    4 command: "string" "leftpar" "rightpar" .
+    4 command: "identifier" "leftpar" "rightpar" .
 
     $default  reduce using rule 4 (command)
 
 
 State 9
 
-    5 command: "string" "leftpar" arguments . "rightpar"
-    7 arguments: arguments . "comma" "number"
+    5 command: "identifier" "leftpar" arguments . "rightpar"
+    7 arguments: arguments . "comma" "i_const"
 
     "rightpar"  shift, and go to state 10
     "comma"     shift, and go to state 11
@@ -127,20 +135,20 @@ State 9
 
 State 10
 
-    5 command: "string" "leftpar" arguments "rightpar" .
+    5 command: "identifier" "leftpar" arguments "rightpar" .
 
     $default  reduce using rule 5 (command)
 
 
 State 11
 
-    7 arguments: arguments "comma" . "number"
+    7 arguments: arguments "comma" . "i_const"
 
-    "number"  shift, and go to state 12
+    "i_const"  shift, and go to state 12
 
 
 State 12
 
-    7 arguments: arguments "comma" "number" .
+    7 arguments: arguments "comma" "i_const" .
 
     $default  reduce using rule 7 (arguments)

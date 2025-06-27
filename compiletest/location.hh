@@ -32,7 +32,7 @@
 
 /**
  ** \file location.hh
- ** Define the  EzAquarii ::location class.
+ ** Define the  WadeSpace ::location class.
  */
 
 #ifndef YY_YY_LOCATION_HH_INCLUDED
@@ -53,8 +53,8 @@
 #  endif
 # endif
 
-#line 37 "parser.y"
-namespace  EzAquarii  {
+#line 9 "parser.y"
+namespace  WadeSpace  {
 #line 59 "location.hh"
 
   /// A point in a source file.
@@ -299,8 +299,8 @@ namespace  EzAquarii  {
     return ostr;
   }
 
-#line 37 "parser.y"
-} //  EzAquarii 
+#line 9 "parser.y"
+} //  WadeSpace 
 #line 305 "location.hh"
 
 #endif // !YY_YY_LOCATION_HH_INCLUDED

@@ -33,7 +33,7 @@
 
 /**
  ** \file parser.hpp
- ** Define the  EzAquarii ::parser class.
+ ** Define the  WadeSpace ::parser class.
  */
 
 // C++ LALR(1) parser skeleton written by Akim Demaille.
@@ -45,22 +45,23 @@
 #ifndef YY_YY_PARSER_HPP_INCLUDED
 # define YY_YY_PARSER_HPP_INCLUDED
 // "%code requires" blocks.
-#line 39 "parser.y"
+#line 11 "parser.y"
 
     #include <iostream>
     #include <string>
     #include <vector>
     #include <stdint.h>
+    #include <stdlib.h>
     #include "command.h"
 
     using namespace std;
 
-    namespace EzAquarii {
+    namespace WadeSpace {
         class Scanner;
         class Interpreter;
     }
 
-#line 64 "parser.hpp"
+#line 65 "parser.hpp"
 
 # include <cassert>
 # include <cstdlib> // std::abort
@@ -199,9 +200,9 @@
 # define YYDEBUG 1
 #endif
 
-#line 37 "parser.y"
-namespace  EzAquarii  {
-#line 205 "parser.hpp"
+#line 9 "parser.y"
+namespace  WadeSpace  {
+#line 206 "parser.hpp"
 
 
 
@@ -421,16 +422,20 @@ namespace  EzAquarii  {
     union union_type
     {
       // command
-      char dummy1[sizeof ( EzAquarii::Command )];
+      char dummy1[sizeof ( WadeSpace::Command )];
 
       // arguments
       char dummy2[sizeof ( std::vector<uint64_t> )];
 
-      // "string"
-      char dummy3[sizeof (std::string)];
+      // "f_const"
+      char dummy3[sizeof (long double)];
 
-      // "number"
-      char dummy4[sizeof (uint64_t)];
+      // "identifier"
+      // "sting_literal"
+      char dummy4[sizeof (std::string)];
+
+      // "i_const"
+      char dummy5[sizeof (uint64_t)];
     };
 
     /// The size of the largest semantic type.
@@ -483,12 +488,14 @@ namespace  EzAquarii  {
     TOKEN_END = 0,                 // "end of file"
     TOKEN_YYerror = 256,           // error
     TOKEN_YYUNDEF = 257,           // "invalid token"
-    TOKEN_STRING = 258,            // "string"
-    TOKEN_NUMBER = 259,            // "number"
-    TOKEN_LEFTPAR = 260,           // "leftpar"
-    TOKEN_RIGHTPAR = 261,          // "rightpar"
-    TOKEN_SEMICOLON = 262,         // "semicolon"
-    TOKEN_COMMA = 263              // "comma"
+    TOKEN_IDENTIFIER = 258,        // "identifier"
+    TOKEN_I_CONST = 259,           // "i_const"
+    TOKEN_F_CONST = 260,           // "f_const"
+    TOKEN_STRING_LITERAL = 261,    // "sting_literal"
+    TOKEN_LEFTPAR = 262,           // "leftpar"
+    TOKEN_RIGHTPAR = 263,          // "rightpar"
+    TOKEN_SEMICOLON = 264,         // "semicolon"
+    TOKEN_COMMA = 265              // "comma"
       };
       /// Backward compatibility alias (Bison 3.6).
       typedef token_kind_type yytokentype;
@@ -505,21 +512,23 @@ namespace  EzAquarii  {
     {
       enum symbol_kind_type
       {
-        YYNTOKENS = 9, ///< Number of tokens.
+        YYNTOKENS = 11, ///< Number of tokens.
         S_YYEMPTY = -2,
         S_YYEOF = 0,                             // "end of file"
         S_YYerror = 1,                           // error
         S_YYUNDEF = 2,                           // "invalid token"
-        S_STRING = 3,                            // "string"
-        S_NUMBER = 4,                            // "number"
-        S_LEFTPAR = 5,                           // "leftpar"
-        S_RIGHTPAR = 6,                          // "rightpar"
-        S_SEMICOLON = 7,                         // "semicolon"
-        S_COMMA = 8,                             // "comma"
-        S_YYACCEPT = 9,                          // $accept
-        S_program = 10,                          // program
-        S_command = 11,                          // command
-        S_arguments = 12                         // arguments
+        S_IDENTIFIER = 3,                        // "identifier"
+        S_I_CONST = 4,                           // "i_const"
+        S_F_CONST = 5,                           // "f_const"
+        S_STRING_LITERAL = 6,                    // "sting_literal"
+        S_LEFTPAR = 7,                           // "leftpar"
+        S_RIGHTPAR = 8,                          // "rightpar"
+        S_SEMICOLON = 9,                         // "semicolon"
+        S_COMMA = 10,                            // "comma"
+        S_YYACCEPT = 11,                         // $accept
+        S_program = 12,                          // program
+        S_command = 13,                          // command
+        S_arguments = 14                         // arguments
       };
     };
 
@@ -557,18 +566,23 @@ namespace  EzAquarii  {
         switch (this->kind ())
     {
       case symbol_kind::S_command: // command
-        value.move<  EzAquarii::Command  > (std::move (that.value));
+        value.move<  WadeSpace::Command  > (std::move (that.value));
         break;
 
       case symbol_kind::S_arguments: // arguments
         value.move<  std::vector<uint64_t>  > (std::move (that.value));
         break;
 
-      case symbol_kind::S_STRING: // "string"
+      case symbol_kind::S_F_CONST: // "f_const"
+        value.move< long double > (std::move (that.value));
+        break;
+
+      case symbol_kind::S_IDENTIFIER: // "identifier"
+      case symbol_kind::S_STRING_LITERAL: // "sting_literal"
         value.move< std::string > (std::move (that.value));
         break;
 
-      case symbol_kind::S_NUMBER: // "number"
+      case symbol_kind::S_I_CONST: // "i_const"
         value.move< uint64_t > (std::move (that.value));
         break;
 
@@ -596,13 +610,13 @@ namespace  EzAquarii  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t,  EzAquarii::Command && v, location_type&& l)
+      basic_symbol (typename Base::kind_type t,  WadeSpace::Command && v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const  EzAquarii::Command & v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const  WadeSpace::Command & v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -617,6 +631,20 @@ namespace  EzAquarii  {
       {}
 #else
       basic_symbol (typename Base::kind_type t, const  std::vector<uint64_t> & v, const location_type& l)
+        : Base (t)
+        , value (v)
+        , location (l)
+      {}
+#endif
+
+#if 201103L <= YY_CPLUSPLUS
+      basic_symbol (typename Base::kind_type t, long double&& v, location_type&& l)
+        : Base (t)
+        , value (std::move (v))
+        , location (std::move (l))
+      {}
+#else
+      basic_symbol (typename Base::kind_type t, const long double& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -676,18 +704,23 @@ namespace  EzAquarii  {
 switch (yykind)
     {
       case symbol_kind::S_command: // command
-        value.template destroy<  EzAquarii::Command  > ();
+        value.template destroy<  WadeSpace::Command  > ();
         break;
 
       case symbol_kind::S_arguments: // arguments
         value.template destroy<  std::vector<uint64_t>  > ();
         break;
 
-      case symbol_kind::S_STRING: // "string"
+      case symbol_kind::S_F_CONST: // "f_const"
+        value.template destroy< long double > ();
+        break;
+
+      case symbol_kind::S_IDENTIFIER: // "identifier"
+      case symbol_kind::S_STRING_LITERAL: // "sting_literal"
         value.template destroy< std::string > ();
         break;
 
-      case symbol_kind::S_NUMBER: // "number"
+      case symbol_kind::S_I_CONST: // "i_const"
         value.template destroy< uint64_t > ();
         break;
 
@@ -794,6 +827,18 @@ switch (yykind)
 #endif
       }
 #if 201103L <= YY_CPLUSPLUS
+      symbol_type (int tok, long double v, location_type l)
+        : super_type (token_kind_type (tok), std::move (v), std::move (l))
+#else
+      symbol_type (int tok, const long double& v, const location_type& l)
+        : super_type (token_kind_type (tok), v, l)
+#endif
+      {
+#if !defined _MSC_VER || defined __clang__
+        YY_ASSERT (tok == token::TOKEN_F_CONST);
+#endif
+      }
+#if 201103L <= YY_CPLUSPLUS
       symbol_type (int tok, std::string v, location_type l)
         : super_type (token_kind_type (tok), std::move (v), std::move (l))
 #else
@@ -802,7 +847,8 @@ switch (yykind)
 #endif
       {
 #if !defined _MSC_VER || defined __clang__
-        YY_ASSERT (tok == token::TOKEN_STRING);
+        YY_ASSERT (tok == token::TOKEN_IDENTIFIER
+                   || tok == token::TOKEN_STRING_LITERAL);
 #endif
       }
 #if 201103L <= YY_CPLUSPLUS
@@ -814,13 +860,13 @@ switch (yykind)
 #endif
       {
 #if !defined _MSC_VER || defined __clang__
-        YY_ASSERT (tok == token::TOKEN_NUMBER);
+        YY_ASSERT (tok == token::TOKEN_I_CONST);
 #endif
       }
     };
 
     /// Build a parser object.
-     Parser  (EzAquarii::Scanner &scanner_yyarg, EzAquarii::Interpreter &driver_yyarg);
+     Parser  (WadeSpace::Scanner &scanner_yyarg, WadeSpace::Interpreter &driver_yyarg);
     virtual ~ Parser  ();
 
 #if 201103L <= YY_CPLUSPLUS
@@ -913,31 +959,61 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_STRING (std::string v, location_type l)
+      make_IDENTIFIER (std::string v, location_type l)
       {
-        return symbol_type (token::TOKEN_STRING, std::move (v), std::move (l));
+        return symbol_type (token::TOKEN_IDENTIFIER, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_STRING (const std::string& v, const location_type& l)
+      make_IDENTIFIER (const std::string& v, const location_type& l)
       {
-        return symbol_type (token::TOKEN_STRING, v, l);
+        return symbol_type (token::TOKEN_IDENTIFIER, v, l);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_NUMBER (uint64_t v, location_type l)
+      make_I_CONST (uint64_t v, location_type l)
       {
-        return symbol_type (token::TOKEN_NUMBER, std::move (v), std::move (l));
+        return symbol_type (token::TOKEN_I_CONST, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_NUMBER (const uint64_t& v, const location_type& l)
+      make_I_CONST (const uint64_t& v, const location_type& l)
       {
-        return symbol_type (token::TOKEN_NUMBER, v, l);
+        return symbol_type (token::TOKEN_I_CONST, v, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
+      make_F_CONST (long double v, location_type l)
+      {
+        return symbol_type (token::TOKEN_F_CONST, std::move (v), std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_F_CONST (const long double& v, const location_type& l)
+      {
+        return symbol_type (token::TOKEN_F_CONST, v, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
+      make_STRING_LITERAL (std::string v, location_type l)
+      {
+        return symbol_type (token::TOKEN_STRING_LITERAL, std::move (v), std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_STRING_LITERAL (const std::string& v, const location_type& l)
+      {
+        return symbol_type (token::TOKEN_STRING_LITERAL, v, l);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
@@ -1330,15 +1406,15 @@ switch (yykind)
     /// Constants.
     enum
     {
-      yylast_ = 10,     ///< Last index in yytable_.
+      yylast_ = 9,     ///< Last index in yytable_.
       yynnts_ = 4,  ///< Number of nonterminal symbols.
       yyfinal_ = 2 ///< Termination state number.
     };
 
 
     // User arguments.
-    EzAquarii::Scanner &scanner;
-    EzAquarii::Interpreter &driver;
+    WadeSpace::Scanner &scanner;
+    WadeSpace::Interpreter &driver;
 
   };
 
@@ -1378,10 +1454,10 @@ switch (yykind)
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
-       5,     6,     7,     8
+       5,     6,     7,     8,     9,    10
     };
     // Last valid token kind.
-    const int code_max = 263;
+    const int code_max = 265;
 
     if (t <= 0)
       return symbol_kind::S_YYEOF;
@@ -1401,18 +1477,23 @@ switch (yykind)
     switch (this->kind ())
     {
       case symbol_kind::S_command: // command
-        value.copy<  EzAquarii::Command  > (YY_MOVE (that.value));
+        value.copy<  WadeSpace::Command  > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_arguments: // arguments
         value.copy<  std::vector<uint64_t>  > (YY_MOVE (that.value));
         break;
 
-      case symbol_kind::S_STRING: // "string"
+      case symbol_kind::S_F_CONST: // "f_const"
+        value.copy< long double > (YY_MOVE (that.value));
+        break;
+
+      case symbol_kind::S_IDENTIFIER: // "identifier"
+      case symbol_kind::S_STRING_LITERAL: // "sting_literal"
         value.copy< std::string > (YY_MOVE (that.value));
         break;
 
-      case symbol_kind::S_NUMBER: // "number"
+      case symbol_kind::S_I_CONST: // "i_const"
         value.copy< uint64_t > (YY_MOVE (that.value));
         break;
 
@@ -1448,18 +1529,23 @@ switch (yykind)
     switch (this->kind ())
     {
       case symbol_kind::S_command: // command
-        value.move<  EzAquarii::Command  > (YY_MOVE (s.value));
+        value.move<  WadeSpace::Command  > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_arguments: // arguments
         value.move<  std::vector<uint64_t>  > (YY_MOVE (s.value));
         break;
 
-      case symbol_kind::S_STRING: // "string"
+      case symbol_kind::S_F_CONST: // "f_const"
+        value.move< long double > (YY_MOVE (s.value));
+        break;
+
+      case symbol_kind::S_IDENTIFIER: // "identifier"
+      case symbol_kind::S_STRING_LITERAL: // "sting_literal"
         value.move< std::string > (YY_MOVE (s.value));
         break;
 
-      case symbol_kind::S_NUMBER: // "number"
+      case symbol_kind::S_I_CONST: // "i_const"
         value.move< uint64_t > (YY_MOVE (s.value));
         break;
 
@@ -1528,9 +1614,9 @@ switch (yykind)
   }
 
 
-#line 37 "parser.y"
-} //  EzAquarii 
-#line 1534 "parser.hpp"
+#line 9 "parser.y"
+} //  WadeSpace 
+#line 1620 "parser.hpp"
 
 
 

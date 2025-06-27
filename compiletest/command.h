@@ -33,7 +33,7 @@
 #include <vector>
 #include <stdint.h>
 
-namespace EzAquarii {
+namespace WadeSpace {
 
 /**
  * AST node. If you can call it AST at all...
