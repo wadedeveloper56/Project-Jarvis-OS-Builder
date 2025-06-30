@@ -244,6 +244,32 @@ namespace  WadeSpace  {
       case symbol_kind::S_ELSE: // "else"
       case symbol_kind::S_ENUM: // "enum"
       case symbol_kind::S_EXTERN: // "extern"
+      case symbol_kind::S_FLOAT: // "float"
+      case symbol_kind::S_FOR: // "for"
+      case symbol_kind::S_GOTO: // "goto"
+      case symbol_kind::S_IF: // "if"
+      case symbol_kind::S_INLINE: // "inline"
+      case symbol_kind::S_INT: // "int"
+      case symbol_kind::S_LONG: // "long"
+      case symbol_kind::S_LONG_LONG: // "long long"
+      case symbol_kind::S_REGISTER: // "register"
+      case symbol_kind::S_RESTRICT: // "restrict"
+      case symbol_kind::S_RETURN: // "return"
+      case symbol_kind::S_SHORT: // "short"
+      case symbol_kind::S_SIGNED: // "signed"
+      case symbol_kind::S_SIZEOF: // "sizeof"
+      case symbol_kind::S_STATIC: // "static"
+      case symbol_kind::S_STRUCT: // "struct"
+      case symbol_kind::S_SWITCH: // "switch"
+      case symbol_kind::S_TYPEDEF: // "typedef"
+      case symbol_kind::S_UNION: // "union"
+      case symbol_kind::S_UNSIGNED: // "unsigned"
+      case symbol_kind::S_VOID: // "void"
+      case symbol_kind::S_VOLATILE: // "volatile"
+      case symbol_kind::S_WHILE: // "while"
+      case symbol_kind::S_BOOL: // "bool"
+      case symbol_kind::S_COMPLEX: // "complex"
+      case symbol_kind::S_IMAGINARY: // "imaginary"
         value.YY_MOVE_OR_COPY< std::string > (YY_MOVE (that.value));
         break;
 
@@ -286,6 +312,32 @@ namespace  WadeSpace  {
       case symbol_kind::S_ELSE: // "else"
       case symbol_kind::S_ENUM: // "enum"
       case symbol_kind::S_EXTERN: // "extern"
+      case symbol_kind::S_FLOAT: // "float"
+      case symbol_kind::S_FOR: // "for"
+      case symbol_kind::S_GOTO: // "goto"
+      case symbol_kind::S_IF: // "if"
+      case symbol_kind::S_INLINE: // "inline"
+      case symbol_kind::S_INT: // "int"
+      case symbol_kind::S_LONG: // "long"
+      case symbol_kind::S_LONG_LONG: // "long long"
+      case symbol_kind::S_REGISTER: // "register"
+      case symbol_kind::S_RESTRICT: // "restrict"
+      case symbol_kind::S_RETURN: // "return"
+      case symbol_kind::S_SHORT: // "short"
+      case symbol_kind::S_SIGNED: // "signed"
+      case symbol_kind::S_SIZEOF: // "sizeof"
+      case symbol_kind::S_STATIC: // "static"
+      case symbol_kind::S_STRUCT: // "struct"
+      case symbol_kind::S_SWITCH: // "switch"
+      case symbol_kind::S_TYPEDEF: // "typedef"
+      case symbol_kind::S_UNION: // "union"
+      case symbol_kind::S_UNSIGNED: // "unsigned"
+      case symbol_kind::S_VOID: // "void"
+      case symbol_kind::S_VOLATILE: // "volatile"
+      case symbol_kind::S_WHILE: // "while"
+      case symbol_kind::S_BOOL: // "bool"
+      case symbol_kind::S_COMPLEX: // "complex"
+      case symbol_kind::S_IMAGINARY: // "imaginary"
         value.move< std::string > (YY_MOVE (that.value));
         break;
 
@@ -328,6 +380,32 @@ namespace  WadeSpace  {
       case symbol_kind::S_ELSE: // "else"
       case symbol_kind::S_ENUM: // "enum"
       case symbol_kind::S_EXTERN: // "extern"
+      case symbol_kind::S_FLOAT: // "float"
+      case symbol_kind::S_FOR: // "for"
+      case symbol_kind::S_GOTO: // "goto"
+      case symbol_kind::S_IF: // "if"
+      case symbol_kind::S_INLINE: // "inline"
+      case symbol_kind::S_INT: // "int"
+      case symbol_kind::S_LONG: // "long"
+      case symbol_kind::S_LONG_LONG: // "long long"
+      case symbol_kind::S_REGISTER: // "register"
+      case symbol_kind::S_RESTRICT: // "restrict"
+      case symbol_kind::S_RETURN: // "return"
+      case symbol_kind::S_SHORT: // "short"
+      case symbol_kind::S_SIGNED: // "signed"
+      case symbol_kind::S_SIZEOF: // "sizeof"
+      case symbol_kind::S_STATIC: // "static"
+      case symbol_kind::S_STRUCT: // "struct"
+      case symbol_kind::S_SWITCH: // "switch"
+      case symbol_kind::S_TYPEDEF: // "typedef"
+      case symbol_kind::S_UNION: // "union"
+      case symbol_kind::S_UNSIGNED: // "unsigned"
+      case symbol_kind::S_VOID: // "void"
+      case symbol_kind::S_VOLATILE: // "volatile"
+      case symbol_kind::S_WHILE: // "while"
+      case symbol_kind::S_BOOL: // "bool"
+      case symbol_kind::S_COMPLEX: // "complex"
+      case symbol_kind::S_IMAGINARY: // "imaginary"
         value.copy< std::string > (that.value);
         break;
 
@@ -369,6 +447,32 @@ namespace  WadeSpace  {
       case symbol_kind::S_ELSE: // "else"
       case symbol_kind::S_ENUM: // "enum"
       case symbol_kind::S_EXTERN: // "extern"
+      case symbol_kind::S_FLOAT: // "float"
+      case symbol_kind::S_FOR: // "for"
+      case symbol_kind::S_GOTO: // "goto"
+      case symbol_kind::S_IF: // "if"
+      case symbol_kind::S_INLINE: // "inline"
+      case symbol_kind::S_INT: // "int"
+      case symbol_kind::S_LONG: // "long"
+      case symbol_kind::S_LONG_LONG: // "long long"
+      case symbol_kind::S_REGISTER: // "register"
+      case symbol_kind::S_RESTRICT: // "restrict"
+      case symbol_kind::S_RETURN: // "return"
+      case symbol_kind::S_SHORT: // "short"
+      case symbol_kind::S_SIGNED: // "signed"
+      case symbol_kind::S_SIZEOF: // "sizeof"
+      case symbol_kind::S_STATIC: // "static"
+      case symbol_kind::S_STRUCT: // "struct"
+      case symbol_kind::S_SWITCH: // "switch"
+      case symbol_kind::S_TYPEDEF: // "typedef"
+      case symbol_kind::S_UNION: // "union"
+      case symbol_kind::S_UNSIGNED: // "unsigned"
+      case symbol_kind::S_VOID: // "void"
+      case symbol_kind::S_VOLATILE: // "volatile"
+      case symbol_kind::S_WHILE: // "while"
+      case symbol_kind::S_BOOL: // "bool"
+      case symbol_kind::S_COMPLEX: // "complex"
+      case symbol_kind::S_IMAGINARY: // "imaginary"
         value.move< std::string > (that.value);
         break;
 
@@ -655,6 +759,32 @@ namespace  WadeSpace  {
       case symbol_kind::S_ELSE: // "else"
       case symbol_kind::S_ENUM: // "enum"
       case symbol_kind::S_EXTERN: // "extern"
+      case symbol_kind::S_FLOAT: // "float"
+      case symbol_kind::S_FOR: // "for"
+      case symbol_kind::S_GOTO: // "goto"
+      case symbol_kind::S_IF: // "if"
+      case symbol_kind::S_INLINE: // "inline"
+      case symbol_kind::S_INT: // "int"
+      case symbol_kind::S_LONG: // "long"
+      case symbol_kind::S_LONG_LONG: // "long long"
+      case symbol_kind::S_REGISTER: // "register"
+      case symbol_kind::S_RESTRICT: // "restrict"
+      case symbol_kind::S_RETURN: // "return"
+      case symbol_kind::S_SHORT: // "short"
+      case symbol_kind::S_SIGNED: // "signed"
+      case symbol_kind::S_SIZEOF: // "sizeof"
+      case symbol_kind::S_STATIC: // "static"
+      case symbol_kind::S_STRUCT: // "struct"
+      case symbol_kind::S_SWITCH: // "switch"
+      case symbol_kind::S_TYPEDEF: // "typedef"
+      case symbol_kind::S_UNION: // "union"
+      case symbol_kind::S_UNSIGNED: // "unsigned"
+      case symbol_kind::S_VOID: // "void"
+      case symbol_kind::S_VOLATILE: // "volatile"
+      case symbol_kind::S_WHILE: // "while"
+      case symbol_kind::S_BOOL: // "bool"
+      case symbol_kind::S_COMPLEX: // "complex"
+      case symbol_kind::S_IMAGINARY: // "imaginary"
         yylhs.value.emplace< std::string > ();
         break;
 
@@ -683,31 +813,31 @@ namespace  WadeSpace  {
           switch (yyn)
             {
   case 2: // translation_unit: %empty
-#line 119 "parser.y"
+#line 118 "parser.y"
             {}
-#line 689 "parser.cpp"
+#line 819 "parser.cpp"
     break;
 
   case 3: // translation_unit: translation_unit command
-#line 120 "parser.y"
+#line 119 "parser.y"
                                      {}
-#line 695 "parser.cpp"
+#line 825 "parser.cpp"
     break;
 
   case 4: // translation_unit: translation_unit "semicolon"
-#line 121 "parser.y"
+#line 120 "parser.y"
                                        {}
-#line 701 "parser.cpp"
+#line 831 "parser.cpp"
     break;
 
   case 5: // command: "identifier" "leftpar" "rightpar"
-#line 125 "parser.y"
+#line 124 "parser.y"
                                       {}
-#line 707 "parser.cpp"
+#line 837 "parser.cpp"
     break;
 
 
-#line 711 "parser.cpp"
+#line 841 "parser.cpp"
 
             default:
               break;
@@ -1102,13 +1232,13 @@ namespace  WadeSpace  {
   const signed char
    Parser ::yystos_[] =
   {
-       0,    24,     0,     3,     9,    25,     7,     8
+       0,    50,     0,     3,     9,    51,     7,     8
   };
 
   const signed char
    Parser ::yyr1_[] =
   {
-       0,    23,    24,    24,    24,    25
+       0,    49,    50,    50,    50,    51
   };
 
   const signed char
@@ -1129,7 +1259,12 @@ namespace  WadeSpace  {
   "\"rightpar\"", "\"semicolon\"", "\"auto\"", "\"break\"", "\"case\"",
   "\"char\"", "\"const\"", "\"continue\"", "\"default\"", "\"do\"",
   "\"double\"", "\"long double\"", "\"else\"", "\"enum\"", "\"extern\"",
-  "$accept", "translation_unit", "command", YY_NULLPTR
+  "\"float\"", "\"for\"", "\"goto\"", "\"if\"", "\"inline\"", "\"int\"",
+  "\"long\"", "\"long long\"", "\"register\"", "\"restrict\"",
+  "\"return\"", "\"short\"", "\"signed\"", "\"sizeof\"", "\"static\"",
+  "\"struct\"", "\"switch\"", "\"typedef\"", "\"union\"", "\"unsigned\"",
+  "\"void\"", "\"volatile\"", "\"while\"", "\"bool\"", "\"complex\"",
+  "\"imaginary\"", "$accept", "translation_unit", "command", YY_NULLPTR
   };
 #endif
 
@@ -1138,7 +1273,7 @@ namespace  WadeSpace  {
   const signed char
    Parser ::yyrline_[] =
   {
-       0,   119,   119,   120,   121,   125
+       0,   118,   118,   119,   120,   124
   };
 
   void
@@ -1171,9 +1306,9 @@ namespace  WadeSpace  {
 
 #line 9 "parser.y"
 } //  WadeSpace 
-#line 1175 "parser.cpp"
+#line 1310 "parser.cpp"
 
-#line 128 "parser.y"
+#line 127 "parser.y"
 
 
 // Bison expects us to provide implementation - otherwise linker complains

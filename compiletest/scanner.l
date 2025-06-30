@@ -180,6 +180,110 @@ WS  [ \t\v\n\f]
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_EXTERN(yytext, WadeSpace::location()); 
                }
+"float"        { 
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_FLOAT(yytext, WadeSpace::location()); 
+               }
+"for"          { 
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_FOR(yytext, WadeSpace::location()); 
+               }
+"goto"         { 
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_GOTO(yytext, WadeSpace::location()); 
+               }
+"if"           { 
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_IF(yytext, WadeSpace::location()); 
+               }
+"inline"       { 
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_INLINE(yytext, WadeSpace::location()); 
+               }
+"int"          { 
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_INT(yytext, WadeSpace::location()); 
+               }
+"long"         { 
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_LONG(yytext, WadeSpace::location()); 
+               }
+"long long"    { 
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_LONG_LONG(yytext, WadeSpace::location()); 
+               }
+"register"     { 
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_REGISTER(yytext, WadeSpace::location()); 
+               }
+"restrict"     { 
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_RESTRICT(yytext, WadeSpace::location()); 
+               }
+"return"       { 
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_RETURN(yytext, WadeSpace::location()); 
+               }
+"short"        { 
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_SHORT(yytext, WadeSpace::location()); 
+               }
+"signed"       { 
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_SIGNED(yytext, WadeSpace::location()); 
+               }
+"sizeof"       { 
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_SIZEOF(yytext, WadeSpace::location()); 
+               }
+"static"       { 
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_STATIC(yytext, WadeSpace::location()); 
+               }
+"struct"       { 
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_STRUCT(yytext, WadeSpace::location()); 
+               }
+"switch"       { 
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_SWITCH(yytext, WadeSpace::location()); 
+               }
+"typedef"      { 
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_TYPEDEF(yytext, WadeSpace::location()); 
+               }
+"union"        { 
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_UNION(yytext, WadeSpace::location()); 
+               }
+"unsigned"     { 
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_UNSIGNED(yytext, WadeSpace::location()); 
+               }
+"void"         { 
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_VOID(yytext, WadeSpace::location()); 
+               }
+"volatile"     { 
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_VOLATILE(yytext, WadeSpace::location()); 
+               }
+"while"        { 
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_WHILE(yytext, WadeSpace::location()); 
+               }
+"bool"         { 
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_BOOL(yytext, WadeSpace::location()); 
+               }
+"complex"      { 
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_COMPLEX(yytext, WadeSpace::location()); 
+               }
+"imaginary"    { 
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_IMAGINARY(yytext, WadeSpace::location()); 
+               }
 
 {L}{A}*        { 
                 cout << "Scanner: identifier [" << yytext << "]" << endl;

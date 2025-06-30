@@ -16,6 +16,32 @@ Terminals unused in grammar
     "else"
     "enum"
     "extern"
+    "float"
+    "for"
+    "goto"
+    "if"
+    "inline"
+    "int"
+    "long"
+    "long long"
+    "register"
+    "restrict"
+    "return"
+    "short"
+    "signed"
+    "sizeof"
+    "static"
+    "struct"
+    "switch"
+    "typedef"
+    "union"
+    "unsigned"
+    "void"
+    "volatile"
+    "while"
+    "bool"
+    "complex"
+    "imaginary"
 
 
 Grammar
@@ -53,16 +79,42 @@ Terminals, with rules where they appear
     "else" <std::string> (275)
     "enum" <std::string> (276)
     "extern" <std::string> (277)
+    "float" <std::string> (278)
+    "for" <std::string> (279)
+    "goto" <std::string> (280)
+    "if" <std::string> (281)
+    "inline" <std::string> (282)
+    "int" <std::string> (283)
+    "long" <std::string> (284)
+    "long long" <std::string> (285)
+    "register" <std::string> (286)
+    "restrict" <std::string> (287)
+    "return" <std::string> (288)
+    "short" <std::string> (289)
+    "signed" <std::string> (290)
+    "sizeof" <std::string> (291)
+    "static" <std::string> (292)
+    "struct" <std::string> (293)
+    "switch" <std::string> (294)
+    "typedef" <std::string> (295)
+    "union" <std::string> (296)
+    "unsigned" <std::string> (297)
+    "void" <std::string> (298)
+    "volatile" <std::string> (299)
+    "while" <std::string> (300)
+    "bool" <std::string> (301)
+    "complex" <std::string> (302)
+    "imaginary" <std::string> (303)
 
 
 Nonterminals, with rules where they appear
 
-    $accept (23)
+    $accept (49)
         on left: 0
-    translation_unit (24)
+    translation_unit (50)
         on left: 1 2 3
         on right: 0 2 3
-    command (25)
+    command (51)
         on left: 4
         on right: 2
 

@@ -83,34 +83,33 @@
 %token <std::string> ELSE "else"
 %token <std::string> ENUM "enum"
 %token <std::string> EXTERN "extern"
-/*
-"float"          { count(); return(FLOAT); }
-"for"            { count(); return(FOR); }
-"goto"           { count(); return(GOTO); }
-"if"             { count(); return(IF); }
-"inline"         { count(); return(INLINE); }
-"int"            { count(); return(INT); }
-"long"           { count(); return(LONG); }
-"long long"      { count(); return(LONGLONG); }
-"register"       { count(); return(REGISTER); }
-"restrict"       { count(); return(RESTRICT); }
-"return"         { count(); return(RETURN); }
-"short"          { count(); return(SHORT); }
-"signed"         { count(); return(SIGNED); }
-"sizeof"         { count(); return(SIZEOF); }
-"static"         { count(); return(STATIC); }
-"struct"         { count(); return(STRUCT); }
-"switch"         { count(); return(SWITCH); }
-"typedef"        { count(); return(TYPEDEF); }
-"union"          { count(); return(UNION); }
-"unsigned"       { count(); return(UNSIGNED); }
-"void"           { count(); return(VOID); }
-"volatile"       { count(); return(VOLATILE); }
-"while"          { count(); return(WHILE); }
-"bool"           { count(); return BOOL; }
-"complex"        { count(); return COMPLEX; }
-"imaginary"      { count(); return IMAGINARY; }
-*/
+%token <std::string> FLOAT "float"
+%token <std::string> FOR "for"
+%token <std::string> GOTO "goto"
+%token <std::string> IF "if"
+%token <std::string> INLINE "inline"
+%token <std::string> INT "int"
+%token <std::string> LONG "long"
+%token <std::string> LONG_LONG "long long"
+%token <std::string> REGISTER "register"
+%token <std::string> RESTRICT "restrict"
+%token <std::string> RETURN "return"
+%token <std::string> SHORT "short"
+%token <std::string> SIGNED "signed"
+%token <std::string> SIZEOF "sizeof"
+%token <std::string> STATIC "static"
+%token <std::string> STRUCT "struct"
+%token <std::string> SWITCH "switch"
+%token <std::string> TYPEDEF "typedef"
+%token <std::string> UNION "union"
+%token <std::string> UNSIGNED "unsigned"
+%token <std::string> VOID "void"
+%token <std::string> VOLATILE "volatile"
+%token <std::string> WHILE "while"
+%token <std::string> BOOL "bool"
+%token <std::string> COMPLEX "complex"
+%token <std::string> IMAGINARY "imaginary"
+
 %start translation_unit
 
 %%
