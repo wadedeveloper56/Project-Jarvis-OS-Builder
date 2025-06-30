@@ -224,20 +224,26 @@ namespace  WadeSpace  {
   {
     switch (that.kind ())
     {
-      case symbol_kind::S_command: // command
-        value.YY_MOVE_OR_COPY<  WadeSpace::Command  > (YY_MOVE (that.value));
-        break;
-
-      case symbol_kind::S_arguments: // arguments
-        value.YY_MOVE_OR_COPY<  std::vector<uint64_t>  > (YY_MOVE (that.value));
-        break;
-
       case symbol_kind::S_F_CONST: // "f_const"
         value.YY_MOVE_OR_COPY< long double > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_IDENTIFIER: // "identifier"
       case symbol_kind::S_STRING_LITERAL: // "sting_literal"
+      case symbol_kind::S_SEMICOLON: // "semicolon"
+      case symbol_kind::S_AUTO: // "auto"
+      case symbol_kind::S_BREAK: // "break"
+      case symbol_kind::S_CASE: // "case"
+      case symbol_kind::S_CHAR: // "char"
+      case symbol_kind::S_CONST: // "const"
+      case symbol_kind::S_CONTINUE: // "continue"
+      case symbol_kind::S_DEFAULT: // "default"
+      case symbol_kind::S_DO: // "do"
+      case symbol_kind::S_DOUBLE: // "double"
+      case symbol_kind::S_LONG_DOUBLE: // "long double"
+      case symbol_kind::S_ELSE: // "else"
+      case symbol_kind::S_ENUM: // "enum"
+      case symbol_kind::S_EXTERN: // "extern"
         value.YY_MOVE_OR_COPY< std::string > (YY_MOVE (that.value));
         break;
 
@@ -260,20 +266,26 @@ namespace  WadeSpace  {
   {
     switch (that.kind ())
     {
-      case symbol_kind::S_command: // command
-        value.move<  WadeSpace::Command  > (YY_MOVE (that.value));
-        break;
-
-      case symbol_kind::S_arguments: // arguments
-        value.move<  std::vector<uint64_t>  > (YY_MOVE (that.value));
-        break;
-
       case symbol_kind::S_F_CONST: // "f_const"
         value.move< long double > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_IDENTIFIER: // "identifier"
       case symbol_kind::S_STRING_LITERAL: // "sting_literal"
+      case symbol_kind::S_SEMICOLON: // "semicolon"
+      case symbol_kind::S_AUTO: // "auto"
+      case symbol_kind::S_BREAK: // "break"
+      case symbol_kind::S_CASE: // "case"
+      case symbol_kind::S_CHAR: // "char"
+      case symbol_kind::S_CONST: // "const"
+      case symbol_kind::S_CONTINUE: // "continue"
+      case symbol_kind::S_DEFAULT: // "default"
+      case symbol_kind::S_DO: // "do"
+      case symbol_kind::S_DOUBLE: // "double"
+      case symbol_kind::S_LONG_DOUBLE: // "long double"
+      case symbol_kind::S_ELSE: // "else"
+      case symbol_kind::S_ENUM: // "enum"
+      case symbol_kind::S_EXTERN: // "extern"
         value.move< std::string > (YY_MOVE (that.value));
         break;
 
@@ -296,20 +308,26 @@ namespace  WadeSpace  {
     state = that.state;
     switch (that.kind ())
     {
-      case symbol_kind::S_command: // command
-        value.copy<  WadeSpace::Command  > (that.value);
-        break;
-
-      case symbol_kind::S_arguments: // arguments
-        value.copy<  std::vector<uint64_t>  > (that.value);
-        break;
-
       case symbol_kind::S_F_CONST: // "f_const"
         value.copy< long double > (that.value);
         break;
 
       case symbol_kind::S_IDENTIFIER: // "identifier"
       case symbol_kind::S_STRING_LITERAL: // "sting_literal"
+      case symbol_kind::S_SEMICOLON: // "semicolon"
+      case symbol_kind::S_AUTO: // "auto"
+      case symbol_kind::S_BREAK: // "break"
+      case symbol_kind::S_CASE: // "case"
+      case symbol_kind::S_CHAR: // "char"
+      case symbol_kind::S_CONST: // "const"
+      case symbol_kind::S_CONTINUE: // "continue"
+      case symbol_kind::S_DEFAULT: // "default"
+      case symbol_kind::S_DO: // "do"
+      case symbol_kind::S_DOUBLE: // "double"
+      case symbol_kind::S_LONG_DOUBLE: // "long double"
+      case symbol_kind::S_ELSE: // "else"
+      case symbol_kind::S_ENUM: // "enum"
+      case symbol_kind::S_EXTERN: // "extern"
         value.copy< std::string > (that.value);
         break;
 
@@ -331,20 +349,26 @@ namespace  WadeSpace  {
     state = that.state;
     switch (that.kind ())
     {
-      case symbol_kind::S_command: // command
-        value.move<  WadeSpace::Command  > (that.value);
-        break;
-
-      case symbol_kind::S_arguments: // arguments
-        value.move<  std::vector<uint64_t>  > (that.value);
-        break;
-
       case symbol_kind::S_F_CONST: // "f_const"
         value.move< long double > (that.value);
         break;
 
       case symbol_kind::S_IDENTIFIER: // "identifier"
       case symbol_kind::S_STRING_LITERAL: // "sting_literal"
+      case symbol_kind::S_SEMICOLON: // "semicolon"
+      case symbol_kind::S_AUTO: // "auto"
+      case symbol_kind::S_BREAK: // "break"
+      case symbol_kind::S_CASE: // "case"
+      case symbol_kind::S_CHAR: // "char"
+      case symbol_kind::S_CONST: // "const"
+      case symbol_kind::S_CONTINUE: // "continue"
+      case symbol_kind::S_DEFAULT: // "default"
+      case symbol_kind::S_DO: // "do"
+      case symbol_kind::S_DOUBLE: // "double"
+      case symbol_kind::S_LONG_DOUBLE: // "long double"
+      case symbol_kind::S_ELSE: // "else"
+      case symbol_kind::S_ENUM: // "enum"
+      case symbol_kind::S_EXTERN: // "extern"
         value.move< std::string > (that.value);
         break;
 
@@ -611,20 +635,26 @@ namespace  WadeSpace  {
          when using variants.  */
       switch (yyr1_[yyn])
     {
-      case symbol_kind::S_command: // command
-        yylhs.value.emplace<  WadeSpace::Command  > ();
-        break;
-
-      case symbol_kind::S_arguments: // arguments
-        yylhs.value.emplace<  std::vector<uint64_t>  > ();
-        break;
-
       case symbol_kind::S_F_CONST: // "f_const"
         yylhs.value.emplace< long double > ();
         break;
 
       case symbol_kind::S_IDENTIFIER: // "identifier"
       case symbol_kind::S_STRING_LITERAL: // "sting_literal"
+      case symbol_kind::S_SEMICOLON: // "semicolon"
+      case symbol_kind::S_AUTO: // "auto"
+      case symbol_kind::S_BREAK: // "break"
+      case symbol_kind::S_CASE: // "case"
+      case symbol_kind::S_CHAR: // "char"
+      case symbol_kind::S_CONST: // "const"
+      case symbol_kind::S_CONTINUE: // "continue"
+      case symbol_kind::S_DEFAULT: // "default"
+      case symbol_kind::S_DO: // "do"
+      case symbol_kind::S_DOUBLE: // "double"
+      case symbol_kind::S_LONG_DOUBLE: // "long double"
+      case symbol_kind::S_ELSE: // "else"
+      case symbol_kind::S_ENUM: // "enum"
+      case symbol_kind::S_EXTERN: // "extern"
         yylhs.value.emplace< std::string > ();
         break;
 
@@ -652,90 +682,32 @@ namespace  WadeSpace  {
         {
           switch (yyn)
             {
-  case 2: // program: %empty
-#line 80 "parser.y"
-            {
-                cout << "*** RUN ***" << endl;
-                cout << "Type function with list of parmeters. Parameter list can be empty" << endl
-                     << "or contain positive integers only. Examples: " << endl
-                     << " * function()" << endl
-                     << " * function(1,2,3)" << endl
-                     << "Terminate listing with ; to see parsed AST" << endl
-                     << "Terminate parser with Ctrl-D" << endl;
-                
-                cout << endl << "prompt> ";
-                
-                driver.clear();
-            }
-#line 671 "parser.cpp"
+  case 2: // translation_unit: %empty
+#line 119 "parser.y"
+            {}
+#line 689 "parser.cpp"
     break;
 
-  case 3: // program: program command
-#line 94 "parser.y"
-            {
-                const Command &cmd = yystack_[0].value.as <  WadeSpace::Command  > ();
-                cout << "command parsed, updating AST" << endl;
-                driver.addCommand(cmd);
-                cout << endl << "prompt> ";
-            }
-#line 682 "parser.cpp"
+  case 3: // translation_unit: translation_unit command
+#line 120 "parser.y"
+                                     {}
+#line 695 "parser.cpp"
     break;
 
-  case 4: // program: program "semicolon"
-#line 101 "parser.y"
-            {
-                cout << "*** STOP RUN ***" << endl;
-                cout << driver.str() << endl;
-            }
-#line 691 "parser.cpp"
-    break;
-
-  case 5: // command: "identifier" "leftpar" "rightpar"
-#line 109 "parser.y"
-        {
-            string &id = yystack_[2].value.as < std::string > ();
-            cout << "ID: " << id << endl;
-            yylhs.value.as <  WadeSpace::Command  > () = Command(id);
-        }
+  case 4: // translation_unit: translation_unit "semicolon"
+#line 121 "parser.y"
+                                       {}
 #line 701 "parser.cpp"
     break;
 
-  case 6: // command: "identifier" "leftpar" arguments "rightpar"
-#line 115 "parser.y"
-        {
-            string &id = yystack_[3].value.as < std::string > ();
-            const std::vector<uint64_t> &args = yystack_[1].value.as <  std::vector<uint64_t>  > ();
-            cout << "function: " << id << ", " << args.size() << endl;
-            yylhs.value.as <  WadeSpace::Command  > () = Command(id, args);
-        }
-#line 712 "parser.cpp"
-    break;
-
-  case 7: // arguments: "i_const"
+  case 5: // command: "identifier" "leftpar" "rightpar"
 #line 125 "parser.y"
-        {
-            uint64_t number = yystack_[0].value.as < uint64_t > ();
-            yylhs.value.as <  std::vector<uint64_t>  > () = std::vector<uint64_t>();
-            yylhs.value.as <  std::vector<uint64_t>  > ().push_back(number);
-            cout << "first argument: " << number << endl;
-        }
-#line 723 "parser.cpp"
-    break;
-
-  case 8: // arguments: arguments "comma" "i_const"
-#line 132 "parser.y"
-        {
-            uint64_t number = yystack_[0].value.as < uint64_t > ();
-            std::vector<uint64_t> &args = yystack_[2].value.as <  std::vector<uint64_t>  > ();
-            args.push_back(number);
-            yylhs.value.as <  std::vector<uint64_t>  > () = args;
-            cout << "next argument: " << number << ", arg list size = " << args.size() << endl;
-        }
-#line 735 "parser.cpp"
+                                      {}
+#line 707 "parser.cpp"
     break;
 
 
-#line 739 "parser.cpp"
+#line 711 "parser.cpp"
 
             default:
               break;
@@ -1094,58 +1066,55 @@ namespace  WadeSpace  {
   const signed char
    Parser ::yypact_[] =
   {
-      -7,     0,    -7,    -1,    -7,    -7,    -3,    -7,    -7,    -6,
-      -7,     3,    -7
+      -7,     0,    -7,    -6,    -7,    -7,    -4,    -7
   };
 
   const signed char
    Parser ::yydefact_[] =
   {
-       2,     0,     1,     0,     4,     3,     0,     7,     5,     0,
-       6,     0,     8
+       2,     0,     1,     0,     4,     3,     0,     5
   };
 
   const signed char
    Parser ::yypgoto_[] =
   {
-      -7,    -7,    -7,    -7
+      -7,    -7,    -7
   };
 
   const signed char
    Parser ::yydefgoto_[] =
   {
-       0,     1,     5,     9
+       0,     1,     5
   };
 
   const signed char
    Parser ::yytable_[] =
   {
-       2,     7,    10,     3,    11,     8,     6,    12,     0,     4
+       2,     6,     0,     3,     7,     0,     0,     0,     0,     4
   };
 
   const signed char
    Parser ::yycheck_[] =
   {
-       0,     4,     8,     3,    10,     8,     7,     4,    -1,     9
+       0,     7,    -1,     3,     8,    -1,    -1,    -1,    -1,     9
   };
 
   const signed char
    Parser ::yystos_[] =
   {
-       0,    12,     0,     3,     9,    13,     7,     4,     8,    14,
-       8,    10,     4
+       0,    24,     0,     3,     9,    25,     7,     8
   };
 
   const signed char
    Parser ::yyr1_[] =
   {
-       0,    11,    12,    12,    12,    13,    13,    14,    14
+       0,    23,    24,    24,    24,    25
   };
 
   const signed char
    Parser ::yyr2_[] =
   {
-       0,     2,     0,     2,     2,     3,     4,     1,     3
+       0,     2,     0,     2,     2,     3
   };
 
 
@@ -1157,17 +1126,19 @@ namespace  WadeSpace  {
   {
   "\"end of file\"", "error", "\"invalid token\"", "\"identifier\"",
   "\"i_const\"", "\"f_const\"", "\"sting_literal\"", "\"leftpar\"",
-  "\"rightpar\"", "\"semicolon\"", "\"comma\"", "$accept", "program",
-  "command", "arguments", YY_NULLPTR
+  "\"rightpar\"", "\"semicolon\"", "\"auto\"", "\"break\"", "\"case\"",
+  "\"char\"", "\"const\"", "\"continue\"", "\"default\"", "\"do\"",
+  "\"double\"", "\"long double\"", "\"else\"", "\"enum\"", "\"extern\"",
+  "$accept", "translation_unit", "command", YY_NULLPTR
   };
 #endif
 
 
 #if YYDEBUG
-  const unsigned char
+  const signed char
    Parser ::yyrline_[] =
   {
-       0,    80,    80,    93,   100,   108,   114,   124,   131
+       0,   119,   119,   120,   121,   125
   };
 
   void
@@ -1200,9 +1171,9 @@ namespace  WadeSpace  {
 
 #line 9 "parser.y"
 } //  WadeSpace 
-#line 1204 "parser.cpp"
+#line 1175 "parser.cpp"
 
-#line 141 "parser.y"
+#line 128 "parser.y"
 
 
 // Bison expects us to provide implementation - otherwise linker complains

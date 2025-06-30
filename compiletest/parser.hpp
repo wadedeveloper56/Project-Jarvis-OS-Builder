@@ -421,21 +421,29 @@ namespace  WadeSpace  {
     /// An auxiliary type to compute the largest semantic type.
     union union_type
     {
-      // command
-      char dummy1[sizeof ( WadeSpace::Command )];
-
-      // arguments
-      char dummy2[sizeof ( std::vector<uint64_t> )];
-
       // "f_const"
-      char dummy3[sizeof (long double)];
+      char dummy1[sizeof (long double)];
 
       // "identifier"
       // "sting_literal"
-      char dummy4[sizeof (std::string)];
+      // "semicolon"
+      // "auto"
+      // "break"
+      // "case"
+      // "char"
+      // "const"
+      // "continue"
+      // "default"
+      // "do"
+      // "double"
+      // "long double"
+      // "else"
+      // "enum"
+      // "extern"
+      char dummy2[sizeof (std::string)];
 
       // "i_const"
-      char dummy5[sizeof (uint64_t)];
+      char dummy3[sizeof (uint64_t)];
     };
 
     /// The size of the largest semantic type.
@@ -495,7 +503,19 @@ namespace  WadeSpace  {
     TOKEN_LEFTPAR = 262,           // "leftpar"
     TOKEN_RIGHTPAR = 263,          // "rightpar"
     TOKEN_SEMICOLON = 264,         // "semicolon"
-    TOKEN_COMMA = 265              // "comma"
+    TOKEN_AUTO = 265,              // "auto"
+    TOKEN_BREAK = 266,             // "break"
+    TOKEN_CASE = 267,              // "case"
+    TOKEN_CHAR = 268,              // "char"
+    TOKEN_CONST = 269,             // "const"
+    TOKEN_CONTINUE = 270,          // "continue"
+    TOKEN_DEFAULT = 271,           // "default"
+    TOKEN_DO = 272,                // "do"
+    TOKEN_DOUBLE = 273,            // "double"
+    TOKEN_LONG_DOUBLE = 274,       // "long double"
+    TOKEN_ELSE = 275,              // "else"
+    TOKEN_ENUM = 276,              // "enum"
+    TOKEN_EXTERN = 277             // "extern"
       };
       /// Backward compatibility alias (Bison 3.6).
       typedef token_kind_type yytokentype;
@@ -512,7 +532,7 @@ namespace  WadeSpace  {
     {
       enum symbol_kind_type
       {
-        YYNTOKENS = 11, ///< Number of tokens.
+        YYNTOKENS = 23, ///< Number of tokens.
         S_YYEMPTY = -2,
         S_YYEOF = 0,                             // "end of file"
         S_YYerror = 1,                           // error
@@ -524,11 +544,22 @@ namespace  WadeSpace  {
         S_LEFTPAR = 7,                           // "leftpar"
         S_RIGHTPAR = 8,                          // "rightpar"
         S_SEMICOLON = 9,                         // "semicolon"
-        S_COMMA = 10,                            // "comma"
-        S_YYACCEPT = 11,                         // $accept
-        S_program = 12,                          // program
-        S_command = 13,                          // command
-        S_arguments = 14                         // arguments
+        S_AUTO = 10,                             // "auto"
+        S_BREAK = 11,                            // "break"
+        S_CASE = 12,                             // "case"
+        S_CHAR = 13,                             // "char"
+        S_CONST = 14,                            // "const"
+        S_CONTINUE = 15,                         // "continue"
+        S_DEFAULT = 16,                          // "default"
+        S_DO = 17,                               // "do"
+        S_DOUBLE = 18,                           // "double"
+        S_LONG_DOUBLE = 19,                      // "long double"
+        S_ELSE = 20,                             // "else"
+        S_ENUM = 21,                             // "enum"
+        S_EXTERN = 22,                           // "extern"
+        S_YYACCEPT = 23,                         // $accept
+        S_translation_unit = 24,                 // translation_unit
+        S_command = 25                           // command
       };
     };
 
@@ -565,20 +596,26 @@ namespace  WadeSpace  {
       {
         switch (this->kind ())
     {
-      case symbol_kind::S_command: // command
-        value.move<  WadeSpace::Command  > (std::move (that.value));
-        break;
-
-      case symbol_kind::S_arguments: // arguments
-        value.move<  std::vector<uint64_t>  > (std::move (that.value));
-        break;
-
       case symbol_kind::S_F_CONST: // "f_const"
         value.move< long double > (std::move (that.value));
         break;
 
       case symbol_kind::S_IDENTIFIER: // "identifier"
       case symbol_kind::S_STRING_LITERAL: // "sting_literal"
+      case symbol_kind::S_SEMICOLON: // "semicolon"
+      case symbol_kind::S_AUTO: // "auto"
+      case symbol_kind::S_BREAK: // "break"
+      case symbol_kind::S_CASE: // "case"
+      case symbol_kind::S_CHAR: // "char"
+      case symbol_kind::S_CONST: // "const"
+      case symbol_kind::S_CONTINUE: // "continue"
+      case symbol_kind::S_DEFAULT: // "default"
+      case symbol_kind::S_DO: // "do"
+      case symbol_kind::S_DOUBLE: // "double"
+      case symbol_kind::S_LONG_DOUBLE: // "long double"
+      case symbol_kind::S_ELSE: // "else"
+      case symbol_kind::S_ENUM: // "enum"
+      case symbol_kind::S_EXTERN: // "extern"
         value.move< std::string > (std::move (that.value));
         break;
 
@@ -605,34 +642,6 @@ namespace  WadeSpace  {
 #else
       basic_symbol (typename Base::kind_type t, const location_type& l)
         : Base (t)
-        , location (l)
-      {}
-#endif
-
-#if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t,  WadeSpace::Command && v, location_type&& l)
-        : Base (t)
-        , value (std::move (v))
-        , location (std::move (l))
-      {}
-#else
-      basic_symbol (typename Base::kind_type t, const  WadeSpace::Command & v, const location_type& l)
-        : Base (t)
-        , value (v)
-        , location (l)
-      {}
-#endif
-
-#if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t,  std::vector<uint64_t> && v, location_type&& l)
-        : Base (t)
-        , value (std::move (v))
-        , location (std::move (l))
-      {}
-#else
-      basic_symbol (typename Base::kind_type t, const  std::vector<uint64_t> & v, const location_type& l)
-        : Base (t)
-        , value (v)
         , location (l)
       {}
 #endif
@@ -703,20 +712,26 @@ namespace  WadeSpace  {
         // Value type destructor.
 switch (yykind)
     {
-      case symbol_kind::S_command: // command
-        value.template destroy<  WadeSpace::Command  > ();
-        break;
-
-      case symbol_kind::S_arguments: // arguments
-        value.template destroy<  std::vector<uint64_t>  > ();
-        break;
-
       case symbol_kind::S_F_CONST: // "f_const"
         value.template destroy< long double > ();
         break;
 
       case symbol_kind::S_IDENTIFIER: // "identifier"
       case symbol_kind::S_STRING_LITERAL: // "sting_literal"
+      case symbol_kind::S_SEMICOLON: // "semicolon"
+      case symbol_kind::S_AUTO: // "auto"
+      case symbol_kind::S_BREAK: // "break"
+      case symbol_kind::S_CASE: // "case"
+      case symbol_kind::S_CHAR: // "char"
+      case symbol_kind::S_CONST: // "const"
+      case symbol_kind::S_CONTINUE: // "continue"
+      case symbol_kind::S_DEFAULT: // "default"
+      case symbol_kind::S_DO: // "do"
+      case symbol_kind::S_DOUBLE: // "double"
+      case symbol_kind::S_LONG_DOUBLE: // "long double"
+      case symbol_kind::S_ELSE: // "else"
+      case symbol_kind::S_ENUM: // "enum"
+      case symbol_kind::S_EXTERN: // "extern"
         value.template destroy< std::string > ();
         break;
 
@@ -823,7 +838,7 @@ switch (yykind)
 #if !defined _MSC_VER || defined __clang__
         YY_ASSERT (tok == token::TOKEN_END
                    || (token::TOKEN_YYerror <= tok && tok <= token::TOKEN_YYUNDEF)
-                   || (token::TOKEN_LEFTPAR <= tok && tok <= token::TOKEN_COMMA));
+                   || (token::TOKEN_LEFTPAR <= tok && tok <= token::TOKEN_RIGHTPAR));
 #endif
       }
 #if 201103L <= YY_CPLUSPLUS
@@ -848,7 +863,8 @@ switch (yykind)
       {
 #if !defined _MSC_VER || defined __clang__
         YY_ASSERT (tok == token::TOKEN_IDENTIFIER
-                   || tok == token::TOKEN_STRING_LITERAL);
+                   || tok == token::TOKEN_STRING_LITERAL
+                   || (token::TOKEN_SEMICOLON <= tok && tok <= token::TOKEN_EXTERN));
 #endif
       }
 #if 201103L <= YY_CPLUSPLUS
@@ -1049,31 +1065,211 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_SEMICOLON (location_type l)
+      make_SEMICOLON (std::string v, location_type l)
       {
-        return symbol_type (token::TOKEN_SEMICOLON, std::move (l));
+        return symbol_type (token::TOKEN_SEMICOLON, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_SEMICOLON (const location_type& l)
+      make_SEMICOLON (const std::string& v, const location_type& l)
       {
-        return symbol_type (token::TOKEN_SEMICOLON, l);
+        return symbol_type (token::TOKEN_SEMICOLON, v, l);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_COMMA (location_type l)
+      make_AUTO (std::string v, location_type l)
       {
-        return symbol_type (token::TOKEN_COMMA, std::move (l));
+        return symbol_type (token::TOKEN_AUTO, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_COMMA (const location_type& l)
+      make_AUTO (const std::string& v, const location_type& l)
       {
-        return symbol_type (token::TOKEN_COMMA, l);
+        return symbol_type (token::TOKEN_AUTO, v, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
+      make_BREAK (std::string v, location_type l)
+      {
+        return symbol_type (token::TOKEN_BREAK, std::move (v), std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_BREAK (const std::string& v, const location_type& l)
+      {
+        return symbol_type (token::TOKEN_BREAK, v, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
+      make_CASE (std::string v, location_type l)
+      {
+        return symbol_type (token::TOKEN_CASE, std::move (v), std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_CASE (const std::string& v, const location_type& l)
+      {
+        return symbol_type (token::TOKEN_CASE, v, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
+      make_CHAR (std::string v, location_type l)
+      {
+        return symbol_type (token::TOKEN_CHAR, std::move (v), std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_CHAR (const std::string& v, const location_type& l)
+      {
+        return symbol_type (token::TOKEN_CHAR, v, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
+      make_CONST (std::string v, location_type l)
+      {
+        return symbol_type (token::TOKEN_CONST, std::move (v), std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_CONST (const std::string& v, const location_type& l)
+      {
+        return symbol_type (token::TOKEN_CONST, v, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
+      make_CONTINUE (std::string v, location_type l)
+      {
+        return symbol_type (token::TOKEN_CONTINUE, std::move (v), std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_CONTINUE (const std::string& v, const location_type& l)
+      {
+        return symbol_type (token::TOKEN_CONTINUE, v, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
+      make_DEFAULT (std::string v, location_type l)
+      {
+        return symbol_type (token::TOKEN_DEFAULT, std::move (v), std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_DEFAULT (const std::string& v, const location_type& l)
+      {
+        return symbol_type (token::TOKEN_DEFAULT, v, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
+      make_DO (std::string v, location_type l)
+      {
+        return symbol_type (token::TOKEN_DO, std::move (v), std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_DO (const std::string& v, const location_type& l)
+      {
+        return symbol_type (token::TOKEN_DO, v, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
+      make_DOUBLE (std::string v, location_type l)
+      {
+        return symbol_type (token::TOKEN_DOUBLE, std::move (v), std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_DOUBLE (const std::string& v, const location_type& l)
+      {
+        return symbol_type (token::TOKEN_DOUBLE, v, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
+      make_LONG_DOUBLE (std::string v, location_type l)
+      {
+        return symbol_type (token::TOKEN_LONG_DOUBLE, std::move (v), std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_LONG_DOUBLE (const std::string& v, const location_type& l)
+      {
+        return symbol_type (token::TOKEN_LONG_DOUBLE, v, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
+      make_ELSE (std::string v, location_type l)
+      {
+        return symbol_type (token::TOKEN_ELSE, std::move (v), std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_ELSE (const std::string& v, const location_type& l)
+      {
+        return symbol_type (token::TOKEN_ELSE, v, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
+      make_ENUM (std::string v, location_type l)
+      {
+        return symbol_type (token::TOKEN_ENUM, std::move (v), std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_ENUM (const std::string& v, const location_type& l)
+      {
+        return symbol_type (token::TOKEN_ENUM, v, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
+      make_EXTERN (std::string v, location_type l)
+      {
+        return symbol_type (token::TOKEN_EXTERN, std::move (v), std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_EXTERN (const std::string& v, const location_type& l)
+      {
+        return symbol_type (token::TOKEN_EXTERN, v, l);
       }
 #endif
 
@@ -1179,7 +1375,7 @@ switch (yykind)
 
 #if YYDEBUG
     // YYRLINE[YYN] -- Source line where rule number YYN was defined.
-    static const unsigned char yyrline_[];
+    static const signed char yyrline_[];
     /// Report on the debug stream that the rule \a r is going to be reduced.
     virtual void yy_reduce_print_ (int r) const;
     /// Print the state stack on the debug stream.
@@ -1407,7 +1603,7 @@ switch (yykind)
     enum
     {
       yylast_ = 9,     ///< Last index in yytable_.
-      yynnts_ = 4,  ///< Number of nonterminal symbols.
+      yynnts_ = 3,  ///< Number of nonterminal symbols.
       yyfinal_ = 2 ///< Termination state number.
     };
 
@@ -1454,10 +1650,11 @@ switch (yykind)
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
-       5,     6,     7,     8,     9,    10
+       5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
+      15,    16,    17,    18,    19,    20,    21,    22
     };
     // Last valid token kind.
-    const int code_max = 265;
+    const int code_max = 277;
 
     if (t <= 0)
       return symbol_kind::S_YYEOF;
@@ -1476,20 +1673,26 @@ switch (yykind)
   {
     switch (this->kind ())
     {
-      case symbol_kind::S_command: // command
-        value.copy<  WadeSpace::Command  > (YY_MOVE (that.value));
-        break;
-
-      case symbol_kind::S_arguments: // arguments
-        value.copy<  std::vector<uint64_t>  > (YY_MOVE (that.value));
-        break;
-
       case symbol_kind::S_F_CONST: // "f_const"
         value.copy< long double > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_IDENTIFIER: // "identifier"
       case symbol_kind::S_STRING_LITERAL: // "sting_literal"
+      case symbol_kind::S_SEMICOLON: // "semicolon"
+      case symbol_kind::S_AUTO: // "auto"
+      case symbol_kind::S_BREAK: // "break"
+      case symbol_kind::S_CASE: // "case"
+      case symbol_kind::S_CHAR: // "char"
+      case symbol_kind::S_CONST: // "const"
+      case symbol_kind::S_CONTINUE: // "continue"
+      case symbol_kind::S_DEFAULT: // "default"
+      case symbol_kind::S_DO: // "do"
+      case symbol_kind::S_DOUBLE: // "double"
+      case symbol_kind::S_LONG_DOUBLE: // "long double"
+      case symbol_kind::S_ELSE: // "else"
+      case symbol_kind::S_ENUM: // "enum"
+      case symbol_kind::S_EXTERN: // "extern"
         value.copy< std::string > (YY_MOVE (that.value));
         break;
 
@@ -1528,20 +1731,26 @@ switch (yykind)
     super_type::move (s);
     switch (this->kind ())
     {
-      case symbol_kind::S_command: // command
-        value.move<  WadeSpace::Command  > (YY_MOVE (s.value));
-        break;
-
-      case symbol_kind::S_arguments: // arguments
-        value.move<  std::vector<uint64_t>  > (YY_MOVE (s.value));
-        break;
-
       case symbol_kind::S_F_CONST: // "f_const"
         value.move< long double > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_IDENTIFIER: // "identifier"
       case symbol_kind::S_STRING_LITERAL: // "sting_literal"
+      case symbol_kind::S_SEMICOLON: // "semicolon"
+      case symbol_kind::S_AUTO: // "auto"
+      case symbol_kind::S_BREAK: // "break"
+      case symbol_kind::S_CASE: // "case"
+      case symbol_kind::S_CHAR: // "char"
+      case symbol_kind::S_CONST: // "const"
+      case symbol_kind::S_CONTINUE: // "continue"
+      case symbol_kind::S_DEFAULT: // "default"
+      case symbol_kind::S_DO: // "do"
+      case symbol_kind::S_DOUBLE: // "double"
+      case symbol_kind::S_LONG_DOUBLE: // "long double"
+      case symbol_kind::S_ELSE: // "else"
+      case symbol_kind::S_ENUM: // "enum"
+      case symbol_kind::S_EXTERN: // "extern"
         value.move< std::string > (YY_MOVE (s.value));
         break;
 
@@ -1616,7 +1825,7 @@ switch (yykind)
 
 #line 9 "parser.y"
 } //  WadeSpace 
-#line 1620 "parser.hpp"
+#line 1829 "parser.hpp"
 
 
 

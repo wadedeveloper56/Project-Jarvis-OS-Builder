@@ -77,6 +77,46 @@ WS  [ \t\v\n\f]
     //
     // Location class can be found in location.hh and posistion.hh files. It's just a bit too much
     // boilerplate for this small example. Bummer.
+    /*
+    "case"           { count(); return(CASE); }
+"char"           { count(); return(CHAR); }
+"const"          { count(); return(CONST); }
+"continue"       { count(); return(CONTINUE); }
+"default"        { count(); return(DEFAULT); }
+"do"             { count(); return(DO); }
+"double"         { count(); return(DOUBLE); }
+"long double"    { count(); return(LONGDOUBLE); }
+"else"           { count(); return(ELSE); }
+"enum"           { count(); return(ENUM); }
+"extern"         { count(); return(EXTERN); }
+"float"          { count(); return(FLOAT); }
+"for"            { count(); return(FOR); }
+"goto"           { count(); return(GOTO); }
+"if"             { count(); return(IF); }
+"inline"         { count(); return(INLINE); }
+"int"            { count(); return(INT); }
+"long"           { count(); return(LONG); }
+"long long"      { count(); return(LONGLONG); }
+"register"       { count(); return(REGISTER); }
+"restrict"       { count(); return(RESTRICT); }
+"return"         { count(); return(RETURN); }
+"short"          { count(); return(SHORT); }
+"signed"         { count(); return(SIGNED); }
+"sizeof"         { count(); return(SIZEOF); }
+"static"         { count(); return(STATIC); }
+"struct"         { count(); return(STRUCT); }
+"switch"         { count(); return(SWITCH); }
+"typedef"        { count(); return(TYPEDEF); }
+"union"          { count(); return(UNION); }
+"unsigned"       { count(); return(UNSIGNED); }
+"void"           { count(); return(VOID); }
+"volatile"       { count(); return(VOLATILE); }
+"while"          { count(); return(WHILE); }
+"bool"           { count(); return BOOL; }
+"complex"        { count(); return COMPLEX; }
+"imaginary"      { count(); return IMAGINARY; }
+*/
+
 %}
 
 %option nodefault
@@ -88,9 +128,62 @@ WS  [ \t\v\n\f]
 %%
 
 
+"auto"         { 
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_AUTO(yytext, WadeSpace::location()); 
+               }               
+"break"        { 
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_BREAK(yytext, WadeSpace::location()); 
+               }
+"case"         { 
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_CASE(yytext, WadeSpace::location()); 
+               }
+"char"         { 
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_CHAR(yytext, WadeSpace::location()); 
+               }
+"const"        { 
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_CONST(yytext, WadeSpace::location()); 
+               }
+"continue"     { 
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_CONTINUE(yytext, WadeSpace::location()); 
+               }
+"default"      { 
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_DEFAULT(yytext, WadeSpace::location()); 
+               }
+"do"           { 
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_DO(yytext, WadeSpace::location()); 
+               }
+"double"       { 
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_DOUBLE(yytext, WadeSpace::location()); 
+               }
+"long double"  { 
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_LONG_DOUBLE(yytext, WadeSpace::location()); 
+               }
+"else"         { 
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_ELSE(yytext, WadeSpace::location()); 
+               }
+"enum"         { 
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_ENUM(yytext, WadeSpace::location()); 
+               }
+"extern"       { 
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_EXTERN(yytext, WadeSpace::location()); 
+               }
+
 {L}{A}*        { 
                 cout << "Scanner: identifier [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_IDENTIFIER(yytext, WadeSpace::location( /* put location data here if you want */ )); 
+                return WadeSpace::Parser::make_IDENTIFIER(yytext, WadeSpace::location()); 
                }
 {HP}{H}+{IS}?  {
                 cout << "Scanner: decimal number: " << yytext << endl;
@@ -145,7 +238,7 @@ WS  [ \t\v\n\f]
 
 ({SP}?\"([^"\\\n]|{ES})*\"{WS}*)+   { 
                 cout << "Scanner: string literal [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_STRING_LITERAL(yytext, WadeSpace::location( /* put location data here if you want */ )); 
+                return WadeSpace::Parser::make_STRING_LITERAL(yytext, WadeSpace::location()); 
                }               
 
 \(          {
@@ -157,19 +250,10 @@ WS  [ \t\v\n\f]
                 cout << "Scanner: ')'" << endl;
                 return WadeSpace::Parser::make_RIGHTPAR(WadeSpace::location());
             }
-            
+
 ;           {
                 cout << "Scanner: ';'" << endl;
-                return WadeSpace::Parser::make_SEMICOLON(WadeSpace::location());
-            }
-            
-,           {
-                cout << "Scanner: ','" << endl;
-                return WadeSpace::Parser::make_COMMA(WadeSpace::location());
-            }
-            
-[\n\t ]     {
-                //cout << "Scanner: whitechar (ignored)" << endl;
+                return WadeSpace::Parser::make_SEMICOLON(";",WadeSpace::location());
             }
 
 .           { 
@@ -177,6 +261,5 @@ WS  [ \t\v\n\f]
             }
             
 <<EOF>>     { return yyterminate(); }
-
 
 %%

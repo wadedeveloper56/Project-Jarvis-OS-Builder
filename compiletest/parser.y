@@ -65,78 +65,65 @@
 %token <uint64_t> I_CONST "i_const";
 %token <long double> F_CONST "f_const";
 %token <std::string> STRING_LITERAL  "sting_literal";
+
 %token LEFTPAR "leftpar";
 %token RIGHTPAR "rightpar";
-%token SEMICOLON "semicolon";
-%token COMMA "comma";
 
-%type< WadeSpace::Command > command;
-%type< std::vector<uint64_t> > arguments;
-
-%start program
+%token <std::string> SEMICOLON "semicolon";
+%token <std::string> AUTO "auto";
+%token <std::string> BREAK "break";
+%token <std::string> CASE "case";
+%token <std::string> CHAR "char";
+%token <std::string> CONST "const"
+%token <std::string> CONTINUE "continue"
+%token <std::string> DEFAULT "default"
+%token <std::string> DO "do"
+%token <std::string> DOUBLE "double"
+%token <std::string> LONG_DOUBLE "long double"
+%token <std::string> ELSE "else"
+%token <std::string> ENUM "enum"
+%token <std::string> EXTERN "extern"
+/*
+"float"          { count(); return(FLOAT); }
+"for"            { count(); return(FOR); }
+"goto"           { count(); return(GOTO); }
+"if"             { count(); return(IF); }
+"inline"         { count(); return(INLINE); }
+"int"            { count(); return(INT); }
+"long"           { count(); return(LONG); }
+"long long"      { count(); return(LONGLONG); }
+"register"       { count(); return(REGISTER); }
+"restrict"       { count(); return(RESTRICT); }
+"return"         { count(); return(RETURN); }
+"short"          { count(); return(SHORT); }
+"signed"         { count(); return(SIGNED); }
+"sizeof"         { count(); return(SIZEOF); }
+"static"         { count(); return(STATIC); }
+"struct"         { count(); return(STRUCT); }
+"switch"         { count(); return(SWITCH); }
+"typedef"        { count(); return(TYPEDEF); }
+"union"          { count(); return(UNION); }
+"unsigned"       { count(); return(UNSIGNED); }
+"void"           { count(); return(VOID); }
+"volatile"       { count(); return(VOLATILE); }
+"while"          { count(); return(WHILE); }
+"bool"           { count(); return BOOL; }
+"complex"        { count(); return COMPLEX; }
+"imaginary"      { count(); return IMAGINARY; }
+*/
+%start translation_unit
 
 %%
 
-program :   {
-                cout << "*** RUN ***" << endl;
-                cout << "Type function with list of parmeters. Parameter list can be empty" << endl
-                     << "or contain positive integers only. Examples: " << endl
-                     << " * function()" << endl
-                     << " * function(1,2,3)" << endl
-                     << "Terminate listing with ; to see parsed AST" << endl
-                     << "Terminate parser with Ctrl-D" << endl;
-                
-                cout << endl << "prompt> ";
-                
-                driver.clear();
-            }
-        | program command
-            {
-                const Command &cmd = $2;
-                cout << "command parsed, updating AST" << endl;
-                driver.addCommand(cmd);
-                cout << endl << "prompt> ";
-            }
-        | program SEMICOLON
-            {
-                cout << "*** STOP RUN ***" << endl;
-                cout << driver.str() << endl;
-            }
+translation_unit 
+        :   {}
+        |   translation_unit command {}
+        |   translation_unit SEMICOLON {}
         ;
 
-
-command : IDENTIFIER LEFTPAR RIGHTPAR
-        {
-            string &id = $1;
-            cout << "ID: " << id << endl;
-            $$ = Command(id);
-        }
-    | IDENTIFIER LEFTPAR arguments RIGHTPAR
-        {
-            string &id = $1;
-            const std::vector<uint64_t> &args = $3;
-            cout << "function: " << id << ", " << args.size() << endl;
-            $$ = Command(id, args);
-        }
-    ;
-
-
-arguments : I_CONST
-        {
-            uint64_t number = $1;
-            $$ = std::vector<uint64_t>();
-            $$.push_back(number);
-            cout << "first argument: " << number << endl;
-        }
-    | arguments COMMA I_CONST
-        {
-            uint64_t number = $3;
-            std::vector<uint64_t> &args = $1;
-            args.push_back(number);
-            $$ = args;
-            cout << "next argument: " << number << ", arg list size = " << args.size() << endl;
-        }
-    ;
+command 
+        : IDENTIFIER LEFTPAR RIGHTPAR {}
+        ;
     
 %%
 
