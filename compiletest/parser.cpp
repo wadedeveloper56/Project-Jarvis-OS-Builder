@@ -230,7 +230,7 @@ namespace  WadeSpace  {
 
       case symbol_kind::S_IDENTIFIER: // "identifier"
       case symbol_kind::S_STRING_LITERAL: // "sting_literal"
-      case symbol_kind::S_SEMICOLON: // "semicolon"
+      case symbol_kind::S_TYPE_NAME: // "type name"
       case symbol_kind::S_AUTO: // "auto"
       case symbol_kind::S_BREAK: // "break"
       case symbol_kind::S_CASE: // "case"
@@ -270,6 +270,52 @@ namespace  WadeSpace  {
       case symbol_kind::S_BOOL: // "bool"
       case symbol_kind::S_COMPLEX: // "complex"
       case symbol_kind::S_IMAGINARY: // "imaginary"
+      case symbol_kind::S_ELLIPSIS: // "ellipsis"
+      case symbol_kind::S_QUESTION: // "question"
+      case symbol_kind::S_SEMICOLON: // "semicolon"
+      case symbol_kind::S_OCURLY: // "ocurly"
+      case symbol_kind::S_CCURLY: // "ccurly"
+      case symbol_kind::S_COMMA: // "comma"
+      case symbol_kind::S_COLON: // "colon"
+      case symbol_kind::S_OPAREN: // "oparen"
+      case symbol_kind::S_CPAREN: // "cparen"
+      case symbol_kind::S_OBRACE: // "obrace"
+      case symbol_kind::S_CBRACE: // "cbrace"
+      case symbol_kind::S_PERIOD: // "period"
+      case symbol_kind::S_TILDE: // "tilde"
+      case symbol_kind::S_EQUAL_OP: // "equal op"
+      case symbol_kind::S_RIGHT_ASSIGN: // "right assign"
+      case symbol_kind::S_LEFT_ASSIGN: // "left assign"
+      case symbol_kind::S_ADD_ASSIGN: // "add assign"
+      case symbol_kind::S_SUB_ASSIGN: // "sub assign"
+      case symbol_kind::S_MUL_ASSIGN: // "mul assign"
+      case symbol_kind::S_DIV_ASSIGN: // "div assign"
+      case symbol_kind::S_MOD_ASSIGN: // "mod assign"
+      case symbol_kind::S_AND_ASSIGN: // "and assign"
+      case symbol_kind::S_XOR_ASSIGN: // "xor assign"
+      case symbol_kind::S_OR_ASSIGN: // "or assign"
+      case symbol_kind::S_RIGHT_OP: // "right op"
+      case symbol_kind::S_LEFT_OP: // "left op"
+      case symbol_kind::S_INC_OP: // "inc op"
+      case symbol_kind::S_DEC_OP: // "dec op"
+      case symbol_kind::S_PTR_OP: // "ptr op"
+      case symbol_kind::S_AND_OP: // "and op"
+      case symbol_kind::S_OR_OP: // "or op"
+      case symbol_kind::S_GE_OP: // "ge op"
+      case symbol_kind::S_LE_OP: // "le op"
+      case symbol_kind::S_GREATER_OP: // "greater op"
+      case symbol_kind::S_LESS_OP: // "less op"
+      case symbol_kind::S_EQ_OP: // "eq op"
+      case symbol_kind::S_NE_OP: // "ne op"
+      case symbol_kind::S_NOT_OP: // "not op"
+      case symbol_kind::S_XOR_OP: // "xor op"
+      case symbol_kind::S_BIT_AND: // "bit and"
+      case symbol_kind::S_BIT_OR: // "bit or"
+      case symbol_kind::S_MINUS_OP: // "minus op"
+      case symbol_kind::S_PLUS_OP: // "plus op"
+      case symbol_kind::S_TIMES_OP: // "times op"
+      case symbol_kind::S_DIV_OP: // "div op"
+      case symbol_kind::S_MOD_OP: // "mod op"
         value.YY_MOVE_OR_COPY< std::string > (YY_MOVE (that.value));
         break;
 
@@ -298,7 +344,7 @@ namespace  WadeSpace  {
 
       case symbol_kind::S_IDENTIFIER: // "identifier"
       case symbol_kind::S_STRING_LITERAL: // "sting_literal"
-      case symbol_kind::S_SEMICOLON: // "semicolon"
+      case symbol_kind::S_TYPE_NAME: // "type name"
       case symbol_kind::S_AUTO: // "auto"
       case symbol_kind::S_BREAK: // "break"
       case symbol_kind::S_CASE: // "case"
@@ -338,6 +384,52 @@ namespace  WadeSpace  {
       case symbol_kind::S_BOOL: // "bool"
       case symbol_kind::S_COMPLEX: // "complex"
       case symbol_kind::S_IMAGINARY: // "imaginary"
+      case symbol_kind::S_ELLIPSIS: // "ellipsis"
+      case symbol_kind::S_QUESTION: // "question"
+      case symbol_kind::S_SEMICOLON: // "semicolon"
+      case symbol_kind::S_OCURLY: // "ocurly"
+      case symbol_kind::S_CCURLY: // "ccurly"
+      case symbol_kind::S_COMMA: // "comma"
+      case symbol_kind::S_COLON: // "colon"
+      case symbol_kind::S_OPAREN: // "oparen"
+      case symbol_kind::S_CPAREN: // "cparen"
+      case symbol_kind::S_OBRACE: // "obrace"
+      case symbol_kind::S_CBRACE: // "cbrace"
+      case symbol_kind::S_PERIOD: // "period"
+      case symbol_kind::S_TILDE: // "tilde"
+      case symbol_kind::S_EQUAL_OP: // "equal op"
+      case symbol_kind::S_RIGHT_ASSIGN: // "right assign"
+      case symbol_kind::S_LEFT_ASSIGN: // "left assign"
+      case symbol_kind::S_ADD_ASSIGN: // "add assign"
+      case symbol_kind::S_SUB_ASSIGN: // "sub assign"
+      case symbol_kind::S_MUL_ASSIGN: // "mul assign"
+      case symbol_kind::S_DIV_ASSIGN: // "div assign"
+      case symbol_kind::S_MOD_ASSIGN: // "mod assign"
+      case symbol_kind::S_AND_ASSIGN: // "and assign"
+      case symbol_kind::S_XOR_ASSIGN: // "xor assign"
+      case symbol_kind::S_OR_ASSIGN: // "or assign"
+      case symbol_kind::S_RIGHT_OP: // "right op"
+      case symbol_kind::S_LEFT_OP: // "left op"
+      case symbol_kind::S_INC_OP: // "inc op"
+      case symbol_kind::S_DEC_OP: // "dec op"
+      case symbol_kind::S_PTR_OP: // "ptr op"
+      case symbol_kind::S_AND_OP: // "and op"
+      case symbol_kind::S_OR_OP: // "or op"
+      case symbol_kind::S_GE_OP: // "ge op"
+      case symbol_kind::S_LE_OP: // "le op"
+      case symbol_kind::S_GREATER_OP: // "greater op"
+      case symbol_kind::S_LESS_OP: // "less op"
+      case symbol_kind::S_EQ_OP: // "eq op"
+      case symbol_kind::S_NE_OP: // "ne op"
+      case symbol_kind::S_NOT_OP: // "not op"
+      case symbol_kind::S_XOR_OP: // "xor op"
+      case symbol_kind::S_BIT_AND: // "bit and"
+      case symbol_kind::S_BIT_OR: // "bit or"
+      case symbol_kind::S_MINUS_OP: // "minus op"
+      case symbol_kind::S_PLUS_OP: // "plus op"
+      case symbol_kind::S_TIMES_OP: // "times op"
+      case symbol_kind::S_DIV_OP: // "div op"
+      case symbol_kind::S_MOD_OP: // "mod op"
         value.move< std::string > (YY_MOVE (that.value));
         break;
 
@@ -366,7 +458,7 @@ namespace  WadeSpace  {
 
       case symbol_kind::S_IDENTIFIER: // "identifier"
       case symbol_kind::S_STRING_LITERAL: // "sting_literal"
-      case symbol_kind::S_SEMICOLON: // "semicolon"
+      case symbol_kind::S_TYPE_NAME: // "type name"
       case symbol_kind::S_AUTO: // "auto"
       case symbol_kind::S_BREAK: // "break"
       case symbol_kind::S_CASE: // "case"
@@ -406,6 +498,52 @@ namespace  WadeSpace  {
       case symbol_kind::S_BOOL: // "bool"
       case symbol_kind::S_COMPLEX: // "complex"
       case symbol_kind::S_IMAGINARY: // "imaginary"
+      case symbol_kind::S_ELLIPSIS: // "ellipsis"
+      case symbol_kind::S_QUESTION: // "question"
+      case symbol_kind::S_SEMICOLON: // "semicolon"
+      case symbol_kind::S_OCURLY: // "ocurly"
+      case symbol_kind::S_CCURLY: // "ccurly"
+      case symbol_kind::S_COMMA: // "comma"
+      case symbol_kind::S_COLON: // "colon"
+      case symbol_kind::S_OPAREN: // "oparen"
+      case symbol_kind::S_CPAREN: // "cparen"
+      case symbol_kind::S_OBRACE: // "obrace"
+      case symbol_kind::S_CBRACE: // "cbrace"
+      case symbol_kind::S_PERIOD: // "period"
+      case symbol_kind::S_TILDE: // "tilde"
+      case symbol_kind::S_EQUAL_OP: // "equal op"
+      case symbol_kind::S_RIGHT_ASSIGN: // "right assign"
+      case symbol_kind::S_LEFT_ASSIGN: // "left assign"
+      case symbol_kind::S_ADD_ASSIGN: // "add assign"
+      case symbol_kind::S_SUB_ASSIGN: // "sub assign"
+      case symbol_kind::S_MUL_ASSIGN: // "mul assign"
+      case symbol_kind::S_DIV_ASSIGN: // "div assign"
+      case symbol_kind::S_MOD_ASSIGN: // "mod assign"
+      case symbol_kind::S_AND_ASSIGN: // "and assign"
+      case symbol_kind::S_XOR_ASSIGN: // "xor assign"
+      case symbol_kind::S_OR_ASSIGN: // "or assign"
+      case symbol_kind::S_RIGHT_OP: // "right op"
+      case symbol_kind::S_LEFT_OP: // "left op"
+      case symbol_kind::S_INC_OP: // "inc op"
+      case symbol_kind::S_DEC_OP: // "dec op"
+      case symbol_kind::S_PTR_OP: // "ptr op"
+      case symbol_kind::S_AND_OP: // "and op"
+      case symbol_kind::S_OR_OP: // "or op"
+      case symbol_kind::S_GE_OP: // "ge op"
+      case symbol_kind::S_LE_OP: // "le op"
+      case symbol_kind::S_GREATER_OP: // "greater op"
+      case symbol_kind::S_LESS_OP: // "less op"
+      case symbol_kind::S_EQ_OP: // "eq op"
+      case symbol_kind::S_NE_OP: // "ne op"
+      case symbol_kind::S_NOT_OP: // "not op"
+      case symbol_kind::S_XOR_OP: // "xor op"
+      case symbol_kind::S_BIT_AND: // "bit and"
+      case symbol_kind::S_BIT_OR: // "bit or"
+      case symbol_kind::S_MINUS_OP: // "minus op"
+      case symbol_kind::S_PLUS_OP: // "plus op"
+      case symbol_kind::S_TIMES_OP: // "times op"
+      case symbol_kind::S_DIV_OP: // "div op"
+      case symbol_kind::S_MOD_OP: // "mod op"
         value.copy< std::string > (that.value);
         break;
 
@@ -433,7 +571,7 @@ namespace  WadeSpace  {
 
       case symbol_kind::S_IDENTIFIER: // "identifier"
       case symbol_kind::S_STRING_LITERAL: // "sting_literal"
-      case symbol_kind::S_SEMICOLON: // "semicolon"
+      case symbol_kind::S_TYPE_NAME: // "type name"
       case symbol_kind::S_AUTO: // "auto"
       case symbol_kind::S_BREAK: // "break"
       case symbol_kind::S_CASE: // "case"
@@ -473,6 +611,52 @@ namespace  WadeSpace  {
       case symbol_kind::S_BOOL: // "bool"
       case symbol_kind::S_COMPLEX: // "complex"
       case symbol_kind::S_IMAGINARY: // "imaginary"
+      case symbol_kind::S_ELLIPSIS: // "ellipsis"
+      case symbol_kind::S_QUESTION: // "question"
+      case symbol_kind::S_SEMICOLON: // "semicolon"
+      case symbol_kind::S_OCURLY: // "ocurly"
+      case symbol_kind::S_CCURLY: // "ccurly"
+      case symbol_kind::S_COMMA: // "comma"
+      case symbol_kind::S_COLON: // "colon"
+      case symbol_kind::S_OPAREN: // "oparen"
+      case symbol_kind::S_CPAREN: // "cparen"
+      case symbol_kind::S_OBRACE: // "obrace"
+      case symbol_kind::S_CBRACE: // "cbrace"
+      case symbol_kind::S_PERIOD: // "period"
+      case symbol_kind::S_TILDE: // "tilde"
+      case symbol_kind::S_EQUAL_OP: // "equal op"
+      case symbol_kind::S_RIGHT_ASSIGN: // "right assign"
+      case symbol_kind::S_LEFT_ASSIGN: // "left assign"
+      case symbol_kind::S_ADD_ASSIGN: // "add assign"
+      case symbol_kind::S_SUB_ASSIGN: // "sub assign"
+      case symbol_kind::S_MUL_ASSIGN: // "mul assign"
+      case symbol_kind::S_DIV_ASSIGN: // "div assign"
+      case symbol_kind::S_MOD_ASSIGN: // "mod assign"
+      case symbol_kind::S_AND_ASSIGN: // "and assign"
+      case symbol_kind::S_XOR_ASSIGN: // "xor assign"
+      case symbol_kind::S_OR_ASSIGN: // "or assign"
+      case symbol_kind::S_RIGHT_OP: // "right op"
+      case symbol_kind::S_LEFT_OP: // "left op"
+      case symbol_kind::S_INC_OP: // "inc op"
+      case symbol_kind::S_DEC_OP: // "dec op"
+      case symbol_kind::S_PTR_OP: // "ptr op"
+      case symbol_kind::S_AND_OP: // "and op"
+      case symbol_kind::S_OR_OP: // "or op"
+      case symbol_kind::S_GE_OP: // "ge op"
+      case symbol_kind::S_LE_OP: // "le op"
+      case symbol_kind::S_GREATER_OP: // "greater op"
+      case symbol_kind::S_LESS_OP: // "less op"
+      case symbol_kind::S_EQ_OP: // "eq op"
+      case symbol_kind::S_NE_OP: // "ne op"
+      case symbol_kind::S_NOT_OP: // "not op"
+      case symbol_kind::S_XOR_OP: // "xor op"
+      case symbol_kind::S_BIT_AND: // "bit and"
+      case symbol_kind::S_BIT_OR: // "bit or"
+      case symbol_kind::S_MINUS_OP: // "minus op"
+      case symbol_kind::S_PLUS_OP: // "plus op"
+      case symbol_kind::S_TIMES_OP: // "times op"
+      case symbol_kind::S_DIV_OP: // "div op"
+      case symbol_kind::S_MOD_OP: // "mod op"
         value.move< std::string > (that.value);
         break;
 
@@ -745,7 +929,7 @@ namespace  WadeSpace  {
 
       case symbol_kind::S_IDENTIFIER: // "identifier"
       case symbol_kind::S_STRING_LITERAL: // "sting_literal"
-      case symbol_kind::S_SEMICOLON: // "semicolon"
+      case symbol_kind::S_TYPE_NAME: // "type name"
       case symbol_kind::S_AUTO: // "auto"
       case symbol_kind::S_BREAK: // "break"
       case symbol_kind::S_CASE: // "case"
@@ -785,6 +969,52 @@ namespace  WadeSpace  {
       case symbol_kind::S_BOOL: // "bool"
       case symbol_kind::S_COMPLEX: // "complex"
       case symbol_kind::S_IMAGINARY: // "imaginary"
+      case symbol_kind::S_ELLIPSIS: // "ellipsis"
+      case symbol_kind::S_QUESTION: // "question"
+      case symbol_kind::S_SEMICOLON: // "semicolon"
+      case symbol_kind::S_OCURLY: // "ocurly"
+      case symbol_kind::S_CCURLY: // "ccurly"
+      case symbol_kind::S_COMMA: // "comma"
+      case symbol_kind::S_COLON: // "colon"
+      case symbol_kind::S_OPAREN: // "oparen"
+      case symbol_kind::S_CPAREN: // "cparen"
+      case symbol_kind::S_OBRACE: // "obrace"
+      case symbol_kind::S_CBRACE: // "cbrace"
+      case symbol_kind::S_PERIOD: // "period"
+      case symbol_kind::S_TILDE: // "tilde"
+      case symbol_kind::S_EQUAL_OP: // "equal op"
+      case symbol_kind::S_RIGHT_ASSIGN: // "right assign"
+      case symbol_kind::S_LEFT_ASSIGN: // "left assign"
+      case symbol_kind::S_ADD_ASSIGN: // "add assign"
+      case symbol_kind::S_SUB_ASSIGN: // "sub assign"
+      case symbol_kind::S_MUL_ASSIGN: // "mul assign"
+      case symbol_kind::S_DIV_ASSIGN: // "div assign"
+      case symbol_kind::S_MOD_ASSIGN: // "mod assign"
+      case symbol_kind::S_AND_ASSIGN: // "and assign"
+      case symbol_kind::S_XOR_ASSIGN: // "xor assign"
+      case symbol_kind::S_OR_ASSIGN: // "or assign"
+      case symbol_kind::S_RIGHT_OP: // "right op"
+      case symbol_kind::S_LEFT_OP: // "left op"
+      case symbol_kind::S_INC_OP: // "inc op"
+      case symbol_kind::S_DEC_OP: // "dec op"
+      case symbol_kind::S_PTR_OP: // "ptr op"
+      case symbol_kind::S_AND_OP: // "and op"
+      case symbol_kind::S_OR_OP: // "or op"
+      case symbol_kind::S_GE_OP: // "ge op"
+      case symbol_kind::S_LE_OP: // "le op"
+      case symbol_kind::S_GREATER_OP: // "greater op"
+      case symbol_kind::S_LESS_OP: // "less op"
+      case symbol_kind::S_EQ_OP: // "eq op"
+      case symbol_kind::S_NE_OP: // "ne op"
+      case symbol_kind::S_NOT_OP: // "not op"
+      case symbol_kind::S_XOR_OP: // "xor op"
+      case symbol_kind::S_BIT_AND: // "bit and"
+      case symbol_kind::S_BIT_OR: // "bit or"
+      case symbol_kind::S_MINUS_OP: // "minus op"
+      case symbol_kind::S_PLUS_OP: // "plus op"
+      case symbol_kind::S_TIMES_OP: // "times op"
+      case symbol_kind::S_DIV_OP: // "div op"
+      case symbol_kind::S_MOD_OP: // "mod op"
         yylhs.value.emplace< std::string > ();
         break;
 
@@ -812,32 +1042,8 @@ namespace  WadeSpace  {
         {
           switch (yyn)
             {
-  case 2: // translation_unit: %empty
-#line 118 "parser.y"
-            {}
-#line 819 "parser.cpp"
-    break;
 
-  case 3: // translation_unit: translation_unit command
-#line 119 "parser.y"
-                                     {}
-#line 825 "parser.cpp"
-    break;
-
-  case 4: // translation_unit: translation_unit "semicolon"
-#line 120 "parser.y"
-                                       {}
-#line 831 "parser.cpp"
-    break;
-
-  case 5: // command: "identifier" "leftpar" "rightpar"
-#line 124 "parser.y"
-                                      {}
-#line 837 "parser.cpp"
-    break;
-
-
-#line 841 "parser.cpp"
+#line 1047 "parser.cpp"
 
             default:
               break;
@@ -1189,62 +1395,521 @@ namespace  WadeSpace  {
   }
 
 
-  const signed char  Parser ::yypact_ninf_ = -7;
+  const short  Parser ::yypact_ninf_ = -218;
 
   const signed char  Parser ::yytable_ninf_ = -1;
 
-  const signed char
+  const short
    Parser ::yypact_[] =
   {
-      -7,     0,    -7,    -6,    -7,    -7,    -4,    -7
+    1295,  -218,  -218,  -218,  -218,  -218,  -218,     8,  -218,  -218,
+    -218,  -218,  -218,  -218,  -218,  -218,  -218,  -218,  -218,  -218,
+    -218,  -218,     3,    38,  -218,    36,  1445,  1445,  -218,    11,
+    -218,  1445,   930,    53,     4,  1213,  -218,  -218,   -92,    35,
+     -44,  -218,  -218,    38,  -218,   -20,  -218,   894,  -218,  -218,
+     -24,   272,  -218,   314,  -218,    36,  -218,   930,   949,  1372,
+      53,  -218,  -218,    35,   -58,   -34,  -218,  -218,  -218,  -218,
+       3,  -218,   716,  -218,   930,   272,   272,   358,  -218,    21,
+     272,   -10,  -218,  -218,  -218,    10,  1066,    33,    39,   673,
+      82,   187,   100,   657,  1098,   134,   163,  1066,  1108,  1108,
+     272,  -218,  -218,  -218,  -218,  -218,  -218,  -218,  -218,  -218,
+    -218,   107,     7,  1066,  -218,   -52,    12,   136,   -45,   164,
+     126,   151,   162,   197,   -32,  -218,  -218,    13,  -218,  -218,
+    -218,   428,   481,  -218,  -218,  -218,  -218,   165,  -218,  -218,
+    -218,  -218,  -218,  -218,   180,  -218,  -218,    44,   179,   178,
+    -218,    89,    -9,  1066,    35,  -218,  -218,   716,  -218,  -218,
+    -218,   858,  -218,  -218,  -218,  1066,    74,  -218,   168,  -218,
+     673,  -218,   169,  -218,   673,   234,   759,   171,  1066,  -218,
+      85,   272,  -218,  1066,  1066,   -37,  -218,  -218,   127,   186,
+    -218,  -218,   283,  1066,   981,   286,  -218,  -218,  -218,  -218,
+    -218,  -218,  -218,  -218,  -218,  -218,  -218,  1066,  -218,  1066,
+    1066,  1066,  1066,  1066,  1066,  1066,  1066,  1066,  1066,  1066,
+    1066,  1066,  1066,  1066,  1066,  1066,  1066,  1066,  1066,  -218,
+    -218,   555,  -218,  -218,  -218,   992,  1253,  -218,    17,  -218,
+     101,  -218,   605,  -218,   287,  -218,  -218,  -218,  -218,    27,
+    -218,  -218,    21,  -218,  1066,  -218,   673,  -218,   199,   759,
+    -218,   118,  -218,   196,   121,   130,  -218,  1331,   137,  -218,
+    1066,  -218,    -8,  -218,   143,  -218,  -218,  -218,  -218,  -218,
+    -218,   -52,   -52,    12,    12,   136,   136,   136,   136,   -45,
+     -45,   164,   126,   151,   162,   197,    94,  -218,  -218,  -218,
+     201,  -218,   204,   206,   101,  1024,  1409,  -218,  -218,  -218,
+     599,  -218,  -218,  -218,  -218,  1066,  1034,   673,  -218,   673,
+     673,  -218,  -218,  -218,  1066,  1066,  -218,  -218,  -218,  -218,
+     203,  -218,   207,  -218,  -218,   147,   673,   161,   289,  -218,
+    -218,  -218,  -218,  -218,  -218,   195,  -218,   673,   673,  -218,
+    -218,  -218
   };
 
-  const signed char
+  const unsigned char
    Parser ::yydefact_[] =
   {
-       2,     0,     1,     0,     4,     3,     0,     5
+       0,   135,   106,    93,    96,   131,   101,     0,    91,   100,
+      98,    99,    94,    97,   102,    92,   110,    90,   111,   103,
+      95,   132,     0,   142,   210,     0,    80,    82,   104,     0,
+     105,    84,     0,   134,     0,     0,   207,   209,   126,     0,
+       0,   146,   144,   143,    78,     0,    86,    88,    81,    83,
+     109,     0,    85,     0,   189,     0,   214,     0,     0,     0,
+     133,     1,   208,     0,   129,     0,   127,   136,   147,   145,
+       0,    79,     0,   212,     0,     0,   116,     0,   112,     0,
+     118,     2,     7,     6,     4,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,    24,    25,    26,    27,    28,    29,   193,   185,     8,
+       3,    18,    30,     0,    32,    36,    39,    42,    47,    50,
+      52,    54,    56,    58,    60,    62,    75,     0,   191,   176,
+     177,     0,     0,   178,   179,   180,   181,    88,   190,   213,
+       2,   138,    30,    77,     0,   155,   141,   154,     0,   148,
+     150,     0,     0,     0,     0,   124,    87,     0,   171,    89,
+     211,     0,   115,   108,   113,     0,     0,   119,   121,   117,
+       0,   204,     0,   203,     0,     0,     0,     0,     0,   205,
+       0,     0,    22,     0,     0,     0,    19,    20,   157,     0,
+      14,    15,     0,     0,     0,     0,    71,    70,    68,    69,
+      65,    66,    67,    72,    73,    74,    64,     0,    21,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,   194,
+     187,     0,   186,   192,   137,     0,     0,   152,   159,   153,
+     160,   139,     0,   140,     0,   125,   130,   128,   174,     0,
+     107,   122,     0,   114,     0,   182,     0,   184,     0,     0,
+     202,     0,   206,     0,     0,     0,     5,     0,   159,   158,
+       0,    13,     0,    10,     0,    16,    12,    63,    33,    34,
+      35,    37,    38,    41,    40,    46,    45,    43,    44,    48,
+      49,    51,    53,    55,    57,    59,     0,    76,   188,   163,
+       0,   167,     0,     0,   161,     0,     0,   149,   151,   156,
+       0,   172,   120,   123,   183,     0,     0,     0,    23,     0,
+       0,    31,     9,    11,     0,     0,   164,   168,   162,   165,
+       0,   169,     0,   173,   175,     0,     0,     0,   195,   197,
+     198,    17,    61,   166,   170,     0,   200,     0,     0,   199,
+     201,   196
   };
 
-  const signed char
+  const short
    Parser ::yypgoto_[] =
   {
-      -7,    -7,    -7
+    -218,  -218,  -218,  -218,  -218,   -57,  -218,   -81,    51,    56,
+      37,    45,    88,    92,   108,   106,   113,  -218,   -56,   -23,
+    -218,   -78,   -61,     9,     0,  -218,   274,  -218,   135,  -218,
+    -218,   267,   -60,   -40,  -218,   109,  -218,   295,   205,    42,
+     -12,   -29,   -15,  -218,   -55,  -218,   120,  -218,   182,  -131,
+    -217,  -135,  -218,   -86,  -218,   144,    34,   229,  -164,  -218,
+    -218,  -218,  -218,   329,  -218
   };
 
-  const signed char
+  const short
    Parser ::yydefgoto_[] =
   {
-       0,     1,     5
+       0,   109,   110,   111,   274,   112,   113,   114,   115,   116,
+     117,   118,   119,   120,   121,   122,   123,   124,   125,   126,
+     207,   127,   144,    54,    55,    45,    46,    26,    27,    28,
+      29,    77,    78,    79,   166,   167,    30,    65,    66,    31,
+      32,    33,    34,    43,   302,   149,   150,   151,   189,   303,
+     240,   159,   249,   128,   129,   130,    57,   132,   133,   134,
+     135,   136,    35,    36,    37
   };
 
-  const signed char
+  const short
    Parser ::yytable_[] =
   {
-       2,     6,     0,     3,     7,     0,     0,     0,     0,     4
+      25,   142,   143,   175,   148,    60,     1,     1,    42,    24,
+      40,    38,   259,    47,    50,   180,   239,   164,   266,   185,
+       1,   304,   248,    63,     1,   172,    48,    49,    69,   142,
+     143,    52,   208,   216,   217,    25,   162,   182,    64,     1,
+     169,   186,   187,   137,    24,   226,   233,     1,   209,   158,
+       5,   304,    67,   210,   211,   153,   142,   269,   137,   147,
+     188,   228,   218,   219,   154,    41,   138,   168,   196,   197,
+     198,   199,   200,   201,   202,   203,   204,   205,    70,   227,
+      21,    74,   155,   138,   255,    68,   322,   131,   257,   154,
+     228,    75,   246,    80,    71,   316,   142,   143,    22,    22,
+     261,   164,   170,    23,   251,   264,   265,   245,   142,   143,
+     235,   228,   236,   212,   213,   272,    22,    80,    80,    80,
+     206,    23,    80,    39,   171,   310,    51,   229,   278,   279,
+     280,    22,   238,   165,   158,   237,    23,   235,    23,   236,
+     138,   188,    80,   311,    23,   233,    58,   173,    59,   296,
+      44,   174,   142,   142,   142,   142,   142,   142,   142,   142,
+     142,   142,   142,   142,   142,   142,   142,   142,   142,   142,
+     314,   275,   252,   268,   300,   334,    56,   176,   142,   143,
+     190,   191,   192,   228,   277,   243,    76,   244,   253,   321,
+     177,    73,   228,   313,   305,   178,   306,   142,   143,   262,
+     193,   139,   194,    80,   195,   297,   325,   214,   215,    60,
+      76,    76,    76,   142,   317,    76,   228,   319,   160,   228,
+     235,   238,   267,    80,    40,   222,   320,    23,   228,   183,
+     235,   338,   267,   339,   340,    76,   147,   335,   337,   323,
+     168,   324,   147,   345,   330,   228,   220,   221,   142,   143,
+     346,   332,   268,   285,   286,   287,   288,   347,   184,   228,
+     223,   350,   351,   281,   282,   289,   290,   147,   142,   342,
+     283,   284,   224,   225,   234,   241,   242,   258,    72,     2,
+     254,   256,   270,     4,     5,   260,   271,   158,     6,   276,
+     309,     7,   318,     9,   315,   326,    76,   343,    10,    11,
+     327,   341,   328,   344,    13,    14,   147,   348,    16,   349,
+     291,    18,    19,    20,    21,   292,    76,    81,    82,    83,
+      84,     2,     3,    85,    86,     4,     5,    87,    88,    89,
+       6,   294,   293,     7,     8,     9,    90,    91,    92,   295,
+      10,    11,   161,    12,   156,    93,    13,    14,    94,    15,
+      16,    95,    17,    18,    19,    20,    21,    96,   152,   247,
+     231,   312,   308,   263,    62,     2,     0,     0,    97,     4,
+       5,     0,     0,     0,     6,     0,     0,     7,     0,     9,
+       0,     0,     0,     0,    10,    11,     0,    98,    99,     0,
+      13,    14,     0,     0,    16,     0,     0,    18,    19,    20,
+      21,     0,     0,     0,     0,     0,     0,     0,     0,   100,
+       0,     0,     0,   101,   102,   103,   104,   105,   106,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,   107,    53,
+     108,    81,    82,    83,    84,     2,     3,    85,    86,     4,
+       5,    87,    88,    89,     6,     0,     0,     7,     8,     9,
+      90,    91,    92,     0,    10,    11,     0,    12,     0,    93,
+      13,    14,    94,    15,    16,    95,    17,    18,    19,    20,
+      21,    96,     0,     0,   163,     0,     0,     0,     0,     0,
+       0,     0,    97,     0,    81,    82,    83,    84,     0,     0,
+      85,    86,     0,     0,    87,    88,    89,     0,     0,     0,
+       0,    98,    99,    90,    91,    92,     0,     0,     0,     0,
+       0,     0,    93,     0,     0,    94,     0,     0,    95,     0,
+       0,     0,     0,   100,    96,     0,     0,   101,   102,   103,
+     104,   105,   106,     0,     0,    97,     0,     0,     0,     0,
+       0,     0,   107,    53,   230,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,    98,    99,     0,     0,    81,    82,
+      83,    84,     0,     0,    85,    86,     0,     0,    87,    88,
+      89,     0,     0,     0,     0,     0,   100,    90,    91,    92,
+     101,   102,   103,   104,   105,   106,    93,     0,     0,    94,
+       0,     0,    95,     0,     0,   107,    53,   232,    96,     0,
+       0,     0,   140,    82,    83,    84,     0,     0,     0,    97,
+       0,     0,     2,     3,     0,     0,     4,     5,     0,     0,
+       0,     6,     0,     0,     7,     8,     9,     0,    98,    99,
+       0,    10,    11,    94,    12,     0,     0,    13,    14,     0,
+      15,    16,     0,    17,    18,    19,    20,    21,     0,     0,
+     100,     0,   307,    97,   101,   102,   103,   104,   105,   106,
+     140,    82,    83,    84,     0,     0,     0,     0,     0,   107,
+      53,   298,    98,    99,     0,     0,    81,    82,    83,    84,
+       0,     0,    85,    86,     0,     0,    87,    88,    89,     0,
+       0,    94,     0,     0,   100,    90,    91,    92,   101,   102,
+     103,   104,   105,   106,    93,     0,     0,    94,     0,     0,
+      95,    97,     0,     0,   157,   333,    96,     0,     0,   140,
+      82,    83,    84,     0,     0,     0,     0,    97,     0,     0,
+      98,    99,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,    98,    99,     0,     0,
+      94,     0,   100,     0,     0,     0,   101,   102,   103,   104,
+     105,   106,   140,    82,    83,    84,     0,     0,   100,     0,
+      97,   179,   101,   102,   103,   104,   105,   106,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,   107,    53,    98,
+      99,     0,     0,    94,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,   100,     0,    97,     0,   101,   102,   103,   104,   105,
+     106,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,   157,    98,    99,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,   100,     0,     0,     0,   101,   102,
+     103,   104,   105,   106,     0,     2,     0,     0,     0,     4,
+       5,     0,     0,   107,     6,     0,     0,     7,     0,     9,
+       0,     0,     0,     0,    10,    11,     0,     0,     0,     0,
+      13,    14,     0,     0,    16,     0,     0,    18,    19,    20,
+      21,     2,     3,     0,     0,     4,     5,     0,     0,     0,
+       6,     0,     0,     7,     8,     9,     0,     0,     0,     0,
+      10,    11,     0,    12,     0,     0,    13,    14,     0,    15,
+      16,     0,    17,    18,    19,    20,    21,     2,     3,     0,
+       0,     4,     5,     0,     0,     0,     6,     0,     0,     7,
+       8,     9,   140,    82,    83,    84,    10,    11,     0,    12,
+       0,     0,    13,    14,     0,    15,    16,     0,    17,    18,
+      19,    20,    21,     0,   250,     0,     0,     0,     0,     0,
+       0,     0,     0,    94,   140,    82,    83,    84,     0,     0,
+       0,     0,     0,     0,     0,   140,    82,    83,    84,     0,
+       0,     0,     0,    97,     0,     0,     0,    72,     0,    53,
+       0,     0,     0,     0,     0,    94,     0,     0,     0,     0,
+       0,     0,    98,    99,     0,     0,    94,   140,    82,    83,
+      84,     0,     0,     0,     0,    97,     0,   140,    82,    83,
+      84,     0,     0,   141,   100,    53,    97,     0,   101,   102,
+     103,   104,   105,   106,    98,    99,     0,     0,    94,     0,
+       0,     0,     0,     0,     0,    98,    99,     0,    94,   140,
+      82,    83,    84,     0,     0,     0,   100,   273,    97,     0,
+     101,   102,   103,   104,   105,   106,   299,   100,    97,     0,
+       0,   101,   102,   103,   104,   105,   106,    98,    99,     0,
+      94,   140,    82,    83,    84,     0,     0,    98,    99,     0,
+       0,   140,    82,    83,    84,     0,     0,     0,   329,   100,
+      97,     0,     0,   101,   102,   103,   104,   105,   106,   100,
+     336,     0,    94,   101,   102,   103,   104,   105,   106,    98,
+      99,     0,    94,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,    97,     0,     0,     0,     0,     0,     0,     0,
+       0,   100,    97,     0,     0,   101,   102,   103,   104,   105,
+     106,    98,    99,     0,     0,     0,     0,     0,     0,     0,
+       0,    98,    99,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,   181,     0,     0,     0,   101,   102,   103,
+     104,   105,   106,     0,     0,     0,     0,   101,   102,   103,
+     104,   105,   106,    61,     0,     0,     1,     0,     0,     0,
+       2,     3,     0,     0,     4,     5,     0,     0,     0,     6,
+       0,     0,     7,     8,     9,     0,     0,     0,     0,    10,
+      11,     0,    12,     0,     0,    13,    14,     0,    15,    16,
+       0,    17,    18,    19,    20,    21,     1,     0,     0,     0,
+       2,     3,     0,     0,     4,     5,     0,     0,     0,     6,
+       0,     0,     7,     8,     9,     0,     0,     0,     0,    10,
+      11,     0,    12,     0,     0,    13,    14,     0,    15,    16,
+       0,    17,    18,    19,    20,    21,     0,     0,     1,     0,
+       0,     0,     2,     3,     0,     0,     4,     5,    22,     0,
+       0,     6,     0,    23,     7,     8,     9,     0,     0,     0,
+       0,    10,    11,     0,    12,     0,     0,    13,    14,     0,
+      15,    16,     0,    17,    18,    19,    20,    21,     2,     3,
+       0,     0,     4,     5,     0,     0,   235,     6,   236,   301,
+       7,     8,     9,    23,     0,     0,     0,    10,    11,     0,
+      12,     0,     0,    13,    14,     0,    15,    16,     0,    17,
+      18,    19,    20,    21,     0,   145,     0,     0,     0,     2,
+       3,     0,     0,     4,     5,     0,     0,     0,     6,     0,
+      22,     7,     8,     9,     0,    23,     0,     0,    10,    11,
+       0,    12,     0,     0,    13,    14,     0,    15,    16,     0,
+      17,    18,    19,    20,    21,     0,     2,     3,     0,     0,
+       4,     5,     0,     0,   235,     6,   267,   301,     7,     8,
+       9,    23,     0,     0,     0,    10,    11,     0,    12,     0,
+       0,    13,    14,     0,    15,    16,     0,    17,    18,    19,
+      20,    21,     2,     3,     0,     0,     4,     5,     0,     0,
+       0,     6,     0,     0,     7,     8,     9,     0,   146,     0,
+       0,    10,    11,     0,    12,     0,     0,    13,    14,     0,
+      15,    16,     0,    17,    18,    19,    20,    21,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,   331
   };
 
-  const signed char
+  const short
    Parser ::yycheck_[] =
   {
-       0,     7,    -1,     3,     8,    -1,    -1,    -1,    -1,     9
+       0,    58,    58,    89,    59,    34,     3,     3,    23,     0,
+      22,     3,   176,    25,     3,    93,   147,    77,    55,    97,
+       3,   238,   157,   115,     3,    86,    26,    27,    43,    86,
+      86,    31,   113,    78,    79,    35,    76,    94,     3,     3,
+      80,    98,    99,    55,    35,    77,   132,     3,   100,    72,
+      12,   268,    96,   105,   106,   113,   113,   188,    70,    59,
+     100,    98,   107,   108,    98,    23,    57,    79,    61,    62,
+      63,    64,    65,    66,    67,    68,    69,    70,    98,   111,
+      42,    47,   116,    74,   170,    43,    94,    53,   174,    98,
+      98,   115,   153,    51,   114,   259,   153,   153,    95,    95,
+     178,   161,   112,   100,   165,   183,   184,   116,   165,   165,
+      93,    98,    95,   101,   102,   193,    95,    75,    76,    77,
+     113,   100,    80,   115,   114,    98,   115,   114,   209,   210,
+     211,    95,   147,   112,   157,   147,   100,    93,   100,    95,
+     131,   181,   100,   116,   100,   231,    93,   114,    95,   227,
+     114,   112,   209,   210,   211,   212,   213,   214,   215,   216,
+     217,   218,   219,   220,   221,   222,   223,   224,   225,   226,
+     256,   194,    98,   188,   235,   310,    32,    95,   235,   235,
+      73,    74,    75,    98,   207,    96,    51,    98,   114,   270,
+       3,    47,    98,   254,    93,    95,    95,   254,   254,   114,
+      93,    57,    95,   161,    97,   228,   112,    71,    72,   238,
+      75,    76,    77,   270,    96,    80,    98,    96,    74,    98,
+      93,   236,    95,   181,   236,    99,    96,   100,    98,    95,
+      93,   317,    95,   319,   320,   100,   236,   315,   316,    96,
+     252,    98,   242,    96,   305,    98,    82,    83,   305,   305,
+     336,   306,   267,   216,   217,   218,   219,    96,    95,    98,
+     109,   347,   348,   212,   213,   220,   221,   267,   325,   325,
+     214,   215,   110,    76,    94,    96,    98,    43,   113,     7,
+     112,   112,    96,    11,    12,   114,     3,   310,    16,     3,
+       3,    19,    96,    21,    95,    94,   161,    94,    26,    27,
+      96,   324,    96,    96,    32,    33,   306,    18,    36,   114,
+     222,    39,    40,    41,    42,   223,   181,     3,     4,     5,
+       6,     7,     8,     9,    10,    11,    12,    13,    14,    15,
+      16,   225,   224,    19,    20,    21,    22,    23,    24,   226,
+      26,    27,    75,    29,    70,    31,    32,    33,    34,    35,
+      36,    37,    38,    39,    40,    41,    42,    43,    63,   154,
+     131,   252,   242,   181,    35,     7,    -1,    -1,    54,    11,
+      12,    -1,    -1,    -1,    16,    -1,    -1,    19,    -1,    21,
+      -1,    -1,    -1,    -1,    26,    27,    -1,    73,    74,    -1,
+      32,    33,    -1,    -1,    36,    -1,    -1,    39,    40,    41,
+      42,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    95,
+      -1,    -1,    -1,    99,   100,   101,   102,   103,   104,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,   114,   115,
+     116,     3,     4,     5,     6,     7,     8,     9,    10,    11,
+      12,    13,    14,    15,    16,    -1,    -1,    19,    20,    21,
+      22,    23,    24,    -1,    26,    27,    -1,    29,    -1,    31,
+      32,    33,    34,    35,    36,    37,    38,    39,    40,    41,
+      42,    43,    -1,    -1,   116,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    54,    -1,     3,     4,     5,     6,    -1,    -1,
+       9,    10,    -1,    -1,    13,    14,    15,    -1,    -1,    -1,
+      -1,    73,    74,    22,    23,    24,    -1,    -1,    -1,    -1,
+      -1,    -1,    31,    -1,    -1,    34,    -1,    -1,    37,    -1,
+      -1,    -1,    -1,    95,    43,    -1,    -1,    99,   100,   101,
+     102,   103,   104,    -1,    -1,    54,    -1,    -1,    -1,    -1,
+      -1,    -1,   114,   115,   116,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    73,    74,    -1,    -1,     3,     4,
+       5,     6,    -1,    -1,     9,    10,    -1,    -1,    13,    14,
+      15,    -1,    -1,    -1,    -1,    -1,    95,    22,    23,    24,
+      99,   100,   101,   102,   103,   104,    31,    -1,    -1,    34,
+      -1,    -1,    37,    -1,    -1,   114,   115,   116,    43,    -1,
+      -1,    -1,     3,     4,     5,     6,    -1,    -1,    -1,    54,
+      -1,    -1,     7,     8,    -1,    -1,    11,    12,    -1,    -1,
+      -1,    16,    -1,    -1,    19,    20,    21,    -1,    73,    74,
+      -1,    26,    27,    34,    29,    -1,    -1,    32,    33,    -1,
+      35,    36,    -1,    38,    39,    40,    41,    42,    -1,    -1,
+      95,    -1,    47,    54,    99,   100,   101,   102,   103,   104,
+       3,     4,     5,     6,    -1,    -1,    -1,    -1,    -1,   114,
+     115,   116,    73,    74,    -1,    -1,     3,     4,     5,     6,
+      -1,    -1,     9,    10,    -1,    -1,    13,    14,    15,    -1,
+      -1,    34,    -1,    -1,    95,    22,    23,    24,    99,   100,
+     101,   102,   103,   104,    31,    -1,    -1,    34,    -1,    -1,
+      37,    54,    -1,    -1,   115,   116,    43,    -1,    -1,     3,
+       4,     5,     6,    -1,    -1,    -1,    -1,    54,    -1,    -1,
+      73,    74,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    73,    74,    -1,    -1,
+      34,    -1,    95,    -1,    -1,    -1,    99,   100,   101,   102,
+     103,   104,     3,     4,     5,     6,    -1,    -1,    95,    -1,
+      54,   114,    99,   100,   101,   102,   103,   104,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,   114,   115,    73,
+      74,    -1,    -1,    34,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    95,    -1,    54,    -1,    99,   100,   101,   102,   103,
+     104,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,   115,    73,    74,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    95,    -1,    -1,    -1,    99,   100,
+     101,   102,   103,   104,    -1,     7,    -1,    -1,    -1,    11,
+      12,    -1,    -1,   114,    16,    -1,    -1,    19,    -1,    21,
+      -1,    -1,    -1,    -1,    26,    27,    -1,    -1,    -1,    -1,
+      32,    33,    -1,    -1,    36,    -1,    -1,    39,    40,    41,
+      42,     7,     8,    -1,    -1,    11,    12,    -1,    -1,    -1,
+      16,    -1,    -1,    19,    20,    21,    -1,    -1,    -1,    -1,
+      26,    27,    -1,    29,    -1,    -1,    32,    33,    -1,    35,
+      36,    -1,    38,    39,    40,    41,    42,     7,     8,    -1,
+      -1,    11,    12,    -1,    -1,    -1,    16,    -1,    -1,    19,
+      20,    21,     3,     4,     5,     6,    26,    27,    -1,    29,
+      -1,    -1,    32,    33,    -1,    35,    36,    -1,    38,    39,
+      40,    41,    42,    -1,   116,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    34,     3,     4,     5,     6,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,     3,     4,     5,     6,    -1,
+      -1,    -1,    -1,    54,    -1,    -1,    -1,   113,    -1,   115,
+      -1,    -1,    -1,    -1,    -1,    34,    -1,    -1,    -1,    -1,
+      -1,    -1,    73,    74,    -1,    -1,    34,     3,     4,     5,
+       6,    -1,    -1,    -1,    -1,    54,    -1,     3,     4,     5,
+       6,    -1,    -1,    94,    95,   115,    54,    -1,    99,   100,
+     101,   102,   103,   104,    73,    74,    -1,    -1,    34,    -1,
+      -1,    -1,    -1,    -1,    -1,    73,    74,    -1,    34,     3,
+       4,     5,     6,    -1,    -1,    -1,    95,    96,    54,    -1,
+      99,   100,   101,   102,   103,   104,    94,    95,    54,    -1,
+      -1,    99,   100,   101,   102,   103,   104,    73,    74,    -1,
+      34,     3,     4,     5,     6,    -1,    -1,    73,    74,    -1,
+      -1,     3,     4,     5,     6,    -1,    -1,    -1,    94,    95,
+      54,    -1,    -1,    99,   100,   101,   102,   103,   104,    95,
+      96,    -1,    34,    99,   100,   101,   102,   103,   104,    73,
+      74,    -1,    34,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    54,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    95,    54,    -1,    -1,    99,   100,   101,   102,   103,
+     104,    73,    74,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    73,    74,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    95,    -1,    -1,    -1,    99,   100,   101,
+     102,   103,   104,    -1,    -1,    -1,    -1,    99,   100,   101,
+     102,   103,   104,     0,    -1,    -1,     3,    -1,    -1,    -1,
+       7,     8,    -1,    -1,    11,    12,    -1,    -1,    -1,    16,
+      -1,    -1,    19,    20,    21,    -1,    -1,    -1,    -1,    26,
+      27,    -1,    29,    -1,    -1,    32,    33,    -1,    35,    36,
+      -1,    38,    39,    40,    41,    42,     3,    -1,    -1,    -1,
+       7,     8,    -1,    -1,    11,    12,    -1,    -1,    -1,    16,
+      -1,    -1,    19,    20,    21,    -1,    -1,    -1,    -1,    26,
+      27,    -1,    29,    -1,    -1,    32,    33,    -1,    35,    36,
+      -1,    38,    39,    40,    41,    42,    -1,    -1,     3,    -1,
+      -1,    -1,     7,     8,    -1,    -1,    11,    12,    95,    -1,
+      -1,    16,    -1,   100,    19,    20,    21,    -1,    -1,    -1,
+      -1,    26,    27,    -1,    29,    -1,    -1,    32,    33,    -1,
+      35,    36,    -1,    38,    39,    40,    41,    42,     7,     8,
+      -1,    -1,    11,    12,    -1,    -1,    93,    16,    95,    96,
+      19,    20,    21,   100,    -1,    -1,    -1,    26,    27,    -1,
+      29,    -1,    -1,    32,    33,    -1,    35,    36,    -1,    38,
+      39,    40,    41,    42,    -1,     3,    -1,    -1,    -1,     7,
+       8,    -1,    -1,    11,    12,    -1,    -1,    -1,    16,    -1,
+      95,    19,    20,    21,    -1,   100,    -1,    -1,    26,    27,
+      -1,    29,    -1,    -1,    32,    33,    -1,    35,    36,    -1,
+      38,    39,    40,    41,    42,    -1,     7,     8,    -1,    -1,
+      11,    12,    -1,    -1,    93,    16,    95,    96,    19,    20,
+      21,   100,    -1,    -1,    -1,    26,    27,    -1,    29,    -1,
+      -1,    32,    33,    -1,    35,    36,    -1,    38,    39,    40,
+      41,    42,     7,     8,    -1,    -1,    11,    12,    -1,    -1,
+      -1,    16,    -1,    -1,    19,    20,    21,    -1,    96,    -1,
+      -1,    26,    27,    -1,    29,    -1,    -1,    32,    33,    -1,
+      35,    36,    -1,    38,    39,    40,    41,    42,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    96
   };
 
-  const signed char
+  const unsigned char
    Parser ::yystos_[] =
   {
-       0,    50,     0,     3,     9,    51,     7,     8
+       0,     3,     7,     8,    11,    12,    16,    19,    20,    21,
+      26,    27,    29,    32,    33,    35,    36,    38,    39,    40,
+      41,    42,    95,   100,   140,   141,   144,   145,   146,   147,
+     153,   156,   157,   158,   159,   179,   180,   181,     3,   115,
+     157,   156,   159,   160,   114,   142,   143,   157,   141,   141,
+       3,   115,   141,   115,   140,   141,   172,   173,    93,    95,
+     158,     0,   180,   115,     3,   154,   155,    96,   156,   159,
+      98,   114,   113,   172,   173,   115,   145,   148,   149,   150,
+     156,     3,     4,     5,     6,     9,    10,    13,    14,    15,
+      22,    23,    24,    31,    34,    37,    43,    54,    73,    74,
+      95,    99,   100,   101,   102,   103,   104,   114,   116,   118,
+     119,   120,   122,   123,   124,   125,   126,   127,   128,   129,
+     130,   131,   132,   133,   134,   135,   136,   138,   170,   171,
+     172,   173,   174,   175,   176,   177,   178,   157,   140,   172,
+       3,    94,   122,   135,   139,     3,    96,   141,   161,   162,
+     163,   164,   154,   113,    98,   116,   143,   115,   136,   168,
+     172,   148,   150,   116,   149,   112,   151,   152,   157,   150,
+     112,   114,   139,   114,   112,   170,    95,     3,    95,   114,
+     138,    95,   122,    95,    95,   138,   122,   122,   150,   165,
+      73,    74,    75,    93,    95,    97,    61,    62,    63,    64,
+      65,    66,    67,    68,    69,    70,   113,   137,   124,   100,
+     105,   106,   101,   102,    71,    72,    78,    79,   107,   108,
+      82,    83,    99,   109,   110,    76,    77,   111,    98,   114,
+     116,   174,   116,   170,    94,    93,    95,   157,   159,   166,
+     167,    96,    98,    96,    98,   116,   139,   155,   168,   169,
+     116,   139,    98,   114,   112,   170,   112,   170,    43,   175,
+     114,   138,   114,   165,   138,   138,    55,    95,   159,   166,
+      96,     3,   138,    96,   121,   136,     3,   136,   124,   124,
+     124,   125,   125,   126,   126,   127,   127,   127,   127,   128,
+     128,   129,   130,   131,   132,   133,   138,   136,   116,    94,
+     139,    96,   161,   166,   167,    93,    95,    47,   163,     3,
+      98,   116,   152,   139,   170,    95,   175,    96,    96,    96,
+      96,   124,    94,    96,    98,   112,    94,    96,    96,    94,
+     139,    96,   161,   116,   168,   138,    96,   138,   170,   170,
+     170,   136,   135,    94,    96,    96,   170,    96,    18,   114,
+     170,   170
   };
 
-  const signed char
+  const unsigned char
    Parser ::yyr1_[] =
   {
-       0,    49,    50,    50,    50,    51
+       0,   117,   118,   118,   118,   118,   119,   119,   120,   120,
+     120,   120,   120,   120,   120,   120,   121,   121,   122,   122,
+     122,   122,   122,   122,   123,   123,   123,   123,   123,   123,
+     124,   124,   125,   125,   125,   125,   126,   126,   126,   127,
+     127,   127,   128,   128,   128,   128,   128,   129,   129,   129,
+     130,   130,   131,   131,   132,   132,   133,   133,   134,   134,
+     135,   135,   136,   136,   137,   137,   137,   137,   137,   137,
+     137,   137,   137,   137,   137,   138,   138,   139,   140,   140,
+     141,   141,   141,   141,   141,   141,   142,   142,   143,   143,
+     144,   144,   144,   144,   144,   145,   145,   145,   145,   145,
+     145,   145,   145,   145,   145,   145,   145,   146,   146,   146,
+     147,   147,   148,   148,   149,   150,   150,   150,   150,   151,
+     151,   152,   152,   152,   153,   153,   153,   154,   154,   155,
+     155,   156,   156,   157,   157,   158,   158,   158,   158,   158,
+     158,   158,   159,   159,   159,   159,   160,   160,   161,   161,
+     162,   162,   163,   163,   163,   164,   164,   165,   165,   166,
+     166,   166,   167,   167,   167,   167,   167,   167,   167,   167,
+     167,   168,   168,   168,   169,   169,   170,   170,   170,   170,
+     170,   170,   171,   171,   171,   172,   172,   172,   172,   173,
+     173,   174,   174,   175,   175,   176,   176,   176,   177,   177,
+     177,   177,   178,   178,   178,   178,   178,   179,   179,   180,
+     180,   181,   181,   181,   181
   };
 
   const signed char
    Parser ::yyr2_[] =
   {
-       0,     2,     0,     2,     2,     3
+       0,     2,     1,     1,     1,     3,     1,     1,     1,     4,
+       3,     4,     3,     3,     2,     2,     1,     3,     1,     2,
+       2,     2,     2,     4,     1,     1,     1,     1,     1,     1,
+       1,     4,     1,     3,     3,     3,     1,     3,     3,     1,
+       3,     3,     1,     3,     3,     3,     3,     1,     3,     3,
+       1,     3,     1,     3,     1,     3,     1,     3,     1,     3,
+       1,     5,     1,     3,     1,     1,     1,     1,     1,     1,
+       1,     1,     1,     1,     1,     1,     3,     1,     2,     3,
+       1,     2,     1,     2,     1,     2,     1,     3,     1,     3,
+       1,     1,     1,     1,     1,     1,     1,     1,     1,     1,
+       1,     1,     1,     1,     1,     1,     1,     5,     4,     2,
+       1,     1,     1,     2,     3,     2,     1,     2,     1,     1,
+       3,     1,     2,     3,     4,     5,     2,     1,     3,     1,
+       3,     1,     1,     2,     1,     1,     3,     4,     3,     4,
+       4,     3,     1,     2,     2,     3,     1,     2,     1,     3,
+       1,     3,     2,     2,     1,     1,     3,     1,     2,     1,
+       1,     2,     3,     2,     3,     3,     4,     2,     3,     3,
+       4,     1,     3,     4,     1,     3,     1,     1,     1,     1,
+       1,     1,     3,     4,     3,     2,     3,     3,     4,     1,
+       2,     1,     2,     1,     2,     5,     7,     5,     5,     7,
+       6,     7,     3,     2,     2,     2,     3,     1,     2,     1,
+       1,     4,     3,     3,     2
   };
 
 
@@ -1255,25 +1920,80 @@ namespace  WadeSpace  {
   const  Parser ::yytname_[] =
   {
   "\"end of file\"", "error", "\"invalid token\"", "\"identifier\"",
-  "\"i_const\"", "\"f_const\"", "\"sting_literal\"", "\"leftpar\"",
-  "\"rightpar\"", "\"semicolon\"", "\"auto\"", "\"break\"", "\"case\"",
-  "\"char\"", "\"const\"", "\"continue\"", "\"default\"", "\"do\"",
-  "\"double\"", "\"long double\"", "\"else\"", "\"enum\"", "\"extern\"",
-  "\"float\"", "\"for\"", "\"goto\"", "\"if\"", "\"inline\"", "\"int\"",
-  "\"long\"", "\"long long\"", "\"register\"", "\"restrict\"",
-  "\"return\"", "\"short\"", "\"signed\"", "\"sizeof\"", "\"static\"",
-  "\"struct\"", "\"switch\"", "\"typedef\"", "\"union\"", "\"unsigned\"",
-  "\"void\"", "\"volatile\"", "\"while\"", "\"bool\"", "\"complex\"",
-  "\"imaginary\"", "$accept", "translation_unit", "command", YY_NULLPTR
+  "\"i_const\"", "\"f_const\"", "\"sting_literal\"", "\"type name\"",
+  "\"auto\"", "\"break\"", "\"case\"", "\"char\"", "\"const\"",
+  "\"continue\"", "\"default\"", "\"do\"", "\"double\"", "\"long double\"",
+  "\"else\"", "\"enum\"", "\"extern\"", "\"float\"", "\"for\"", "\"goto\"",
+  "\"if\"", "\"inline\"", "\"int\"", "\"long\"", "\"long long\"",
+  "\"register\"", "\"restrict\"", "\"return\"", "\"short\"", "\"signed\"",
+  "\"sizeof\"", "\"static\"", "\"struct\"", "\"switch\"", "\"typedef\"",
+  "\"union\"", "\"unsigned\"", "\"void\"", "\"volatile\"", "\"while\"",
+  "\"bool\"", "\"complex\"", "\"imaginary\"", "\"ellipsis\"",
+  "\"question\"", "\"semicolon\"", "\"ocurly\"", "\"ccurly\"", "\"comma\"",
+  "\"colon\"", "\"oparen\"", "\"cparen\"", "\"obrace\"", "\"cbrace\"",
+  "\"period\"", "\"tilde\"", "\"equal op\"", "\"right assign\"",
+  "\"left assign\"", "\"add assign\"", "\"sub assign\"", "\"mul assign\"",
+  "\"div assign\"", "\"mod assign\"", "\"and assign\"", "\"xor assign\"",
+  "\"or assign\"", "\"right op\"", "\"left op\"", "\"inc op\"",
+  "\"dec op\"", "\"ptr op\"", "\"and op\"", "\"or op\"", "\"ge op\"",
+  "\"le op\"", "\"greater op\"", "\"less op\"", "\"eq op\"", "\"ne op\"",
+  "\"not op\"", "\"xor op\"", "\"bit and\"", "\"bit or\"", "\"minus op\"",
+  "\"plus op\"", "\"times op\"", "\"div op\"", "\"mod op\"", "'['", "']'",
+  "'('", "')'", "'.'", "','", "'&'", "'*'", "'+'", "'-'", "'~'", "'!'",
+  "'/'", "'%'", "'<'", "'>'", "'^'", "'|'", "'?'", "':'", "'='", "';'",
+  "'{'", "'}'", "$accept", "primary_expression", "constant",
+  "postfix_expression", "argument_expression_list", "unary_expression",
+  "unary_operator", "cast_expression", "multiplicative_expression",
+  "additive_expression", "shift_expression", "relational_expression",
+  "equality_expression", "and_expression", "exclusive_or_expression",
+  "inclusive_or_expression", "logical_and_expression",
+  "logical_or_expression", "conditional_expression",
+  "assignment_expression", "assignment_operator", "expression",
+  "constant_expression", "declaration", "declaration_specifiers",
+  "init_declarator_list", "init_declarator", "storage_class_specifier",
+  "type_specifier", "struct_or_union_specifier", "struct_or_union",
+  "struct_declaration_list", "struct_declaration",
+  "specifier_qualifier_list", "struct_declarator_list",
+  "struct_declarator", "enum_specifier", "enumerator_list", "enumerator",
+  "type_qualifier", "declarator", "direct_declarator", "pointer",
+  "type_qualifier_list", "parameter_type_list", "parameter_list",
+  "parameter_declaration", "identifier_list", "type_name",
+  "abstract_declarator", "direct_abstract_declarator", "initializer",
+  "initializer_list", "statement", "labeled_statement",
+  "compound_statement", "declaration_list", "statement_list",
+  "expression_statement", "selection_statement", "iteration_statement",
+  "jump_statement", "translation_unit", "external_declaration",
+  "function_definition", YY_NULLPTR
   };
 #endif
 
 
 #if YYDEBUG
-  const signed char
+  const short
    Parser ::yyrline_[] =
   {
-       0,   118,   118,   119,   120,   124
+       0,   160,   160,   161,   162,   163,   167,   168,   171,   172,
+     173,   174,   175,   176,   177,   178,   182,   183,   187,   188,
+     189,   190,   191,   192,   196,   197,   198,   199,   200,   201,
+     205,   206,   210,   211,   212,   213,   217,   218,   219,   223,
+     224,   225,   229,   230,   231,   232,   233,   237,   238,   239,
+     243,   244,   248,   249,   253,   254,   258,   259,   263,   264,
+     268,   269,   273,   274,   278,   279,   280,   281,   282,   283,
+     284,   285,   286,   287,   288,   292,   293,   297,   301,   302,
+     306,   307,   308,   309,   310,   311,   315,   316,   320,   321,
+     325,   326,   327,   328,   329,   333,   334,   335,   336,   337,
+     338,   339,   340,   341,   342,   343,   344,   348,   349,   350,
+     354,   355,   359,   360,   364,   368,   369,   370,   371,   375,
+     376,   380,   381,   382,   386,   387,   388,   392,   393,   397,
+     398,   402,   403,   407,   408,   412,   413,   414,   415,   416,
+     417,   418,   422,   423,   424,   425,   429,   430,   435,   436,
+     440,   441,   445,   446,   447,   451,   452,   456,   457,   461,
+     462,   463,   467,   468,   469,   470,   471,   472,   473,   474,
+     475,   479,   480,   481,   485,   486,   490,   491,   492,   493,
+     494,   495,   499,   500,   501,   505,   506,   507,   508,   512,
+     513,   517,   518,   522,   523,   527,   528,   529,   533,   534,
+     535,   536,   540,   541,   542,   543,   544,   548,   549,   553,
+     554,   558,   559,   560,   561
   };
 
   void
@@ -1306,9 +2026,9 @@ namespace  WadeSpace  {
 
 #line 9 "parser.y"
 } //  WadeSpace 
-#line 1310 "parser.cpp"
+#line 2030 "parser.cpp"
 
-#line 127 "parser.y"
+#line 564 "parser.y"
 
 
 // Bison expects us to provide implementation - otherwise linker complains

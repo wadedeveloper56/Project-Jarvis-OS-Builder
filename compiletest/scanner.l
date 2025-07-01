@@ -345,25 +345,195 @@ WS  [ \t\v\n\f]
                 return WadeSpace::Parser::make_STRING_LITERAL(yytext, WadeSpace::location()); 
                }               
 
-\(          {
-                cout << "Scanner: '('" << endl;
-                return WadeSpace::Parser::make_LEFTPAR(WadeSpace::location());
-            }
-            
-\)          { 
-                cout << "Scanner: ')'" << endl;
-                return WadeSpace::Parser::make_RIGHTPAR(WadeSpace::location());
-            }
-
-;           {
+"..."          {
+                cout << "Scanner: '...'" << endl;
+                return WadeSpace::Parser::make_ELLIPSIS("...",WadeSpace::location());
+               }
+"?"            {
+                cout << "Scanner: '?'" << endl;
+                return WadeSpace::Parser::make_QUESTION("?",WadeSpace::location());
+               }
+";"            {
                 cout << "Scanner: ';'" << endl;
                 return WadeSpace::Parser::make_SEMICOLON(";",WadeSpace::location());
-            }
+               }
+"{"            {
+                cout << "Scanner: '{'" << endl;
+                return WadeSpace::Parser::make_OCURLY("{",WadeSpace::location());
+               }
+"}"            {
+                cout << "Scanner: '}'" << endl;
+                return WadeSpace::Parser::make_CCURLY("}",WadeSpace::location());
+               }
+","            {
+                cout << "Scanner: ','" << endl;
+                return WadeSpace::Parser::make_COMMA(",",WadeSpace::location());
+               }
+":"            {
+                cout << "Scanner: ','" << endl;
+                return WadeSpace::Parser::make_COLON(":",WadeSpace::location());
+               }
+"("            {
+                cout << "Scanner: '('" << endl;
+                return WadeSpace::Parser::make_OPAREN("(",WadeSpace::location());
+               }
+")"            {
+                cout << "Scanner: ')'" << endl;
+                return WadeSpace::Parser::make_OPAREN(")",WadeSpace::location());
+               }
+"["            {
+                cout << "Scanner: '['" << endl;
+                return WadeSpace::Parser::make_OBRACE("[",WadeSpace::location());
+               }
+"]"            {
+                cout << "Scanner: ']'" << endl;
+                return WadeSpace::Parser::make_CBRACE("]",WadeSpace::location());
+               }
+"."            {
+                cout << "Scanner: '.'" << endl;
+                return WadeSpace::Parser::make_PERIOD(".",WadeSpace::location());
+               }
+"~"            {
+                cout << "Scanner: '~'" << endl;
+                return WadeSpace::Parser::make_TILDE("`",WadeSpace::location());
+               }
 
-.           { 
+"="            {
+                cout << "Scanner: '='" << endl;
+                return WadeSpace::Parser::make_EQUAL_OP("=",WadeSpace::location());
+               }
+">>="          {
+                cout << "Scanner: '>>='" << endl;
+                return WadeSpace::Parser::make_RIGHT_ASSIGN(">>=",WadeSpace::location());
+               }
+"<<="          {
+                cout << "Scanner: '<<='" << endl;
+                return WadeSpace::Parser::make_LEFT_ASSIGN("<<=",WadeSpace::location());
+               }
+"+="           {
+                cout << "Scanner: '+='" << endl;
+                return WadeSpace::Parser::make_ADD_ASSIGN("+=",WadeSpace::location());
+               }
+"-="           {
+                cout << "Scanner: '-='" << endl;
+                return WadeSpace::Parser::make_SUB_ASSIGN("-=",WadeSpace::location());
+               }
+"*="           {
+                cout << "Scanner: '*='" << endl;
+                return WadeSpace::Parser::make_MUL_ASSIGN("*=",WadeSpace::location());
+               }
+"/="           {
+                cout << "Scanner: '/='" << endl;
+                return WadeSpace::Parser::make_DIV_ASSIGN("/=",WadeSpace::location());
+               }
+"%="           {
+                cout << "Scanner: '%='" << endl;
+                return WadeSpace::Parser::make_MOD_ASSIGN("%=",WadeSpace::location());
+               }
+"&="           {
+                cout << "Scanner: '&='" << endl;
+                return WadeSpace::Parser::make_AND_ASSIGN("&=",WadeSpace::location());
+               }
+"^="           {
+                cout << "Scanner: '^='" << endl;
+                return WadeSpace::Parser::make_XOR_ASSIGN("^=",WadeSpace::location());
+               }
+"|="           {
+                cout << "Scanner: '|='" << endl;
+                return WadeSpace::Parser::make_OR_ASSIGN("|=",WadeSpace::location());
+               }
+">>"           {
+                cout << "Scanner: '>>'" << endl;
+                return WadeSpace::Parser::make_RIGHT_OP(">>",WadeSpace::location());
+               }
+"<<"           {
+                cout << "Scanner: '<<'" << endl;
+                return WadeSpace::Parser::make_LEFT_OP("<<",WadeSpace::location());
+               }
+"++"           {
+                cout << "Scanner: '++'" << endl;
+                return WadeSpace::Parser::make_INC_OP("++",WadeSpace::location());
+               }
+"--"           {
+                cout << "Scanner: '--'" << endl;
+                return WadeSpace::Parser::make_DEC_OP("--",WadeSpace::location());
+               }
+"->"           {
+                cout << "Scanner: '->'" << endl;
+                return WadeSpace::Parser::make_PTR_OP("->",WadeSpace::location());
+               }
+"&&"           {
+                cout << "Scanner: '&&'" << endl;
+                return WadeSpace::Parser::make_AND_OP("->",WadeSpace::location());
+               }
+"||"           {
+                cout << "Scanner: '||'" << endl;
+                return WadeSpace::Parser::make_OR_OP("||",WadeSpace::location());
+               }
+"<"            {
+                cout << "Scanner: '<'" << endl;
+                return WadeSpace::Parser::make_LESS_OP("<",WadeSpace::location());
+               }
+">"            {
+                cout << "Scanner: '>'" << endl;
+                return WadeSpace::Parser::make_GREATER_OP(">",WadeSpace::location());
+               }
+"<="           {
+                cout << "Scanner: '<='" << endl;
+                return WadeSpace::Parser::make_LE_OP("<=",WadeSpace::location());
+               }
+">="           {
+                cout << "Scanner: '>='" << endl;
+                return WadeSpace::Parser::make_GE_OP(">=",WadeSpace::location());
+               }
+"=="           {
+                cout << "Scanner: '=='" << endl;
+                return WadeSpace::Parser::make_EQ_OP("==",WadeSpace::location());
+               }
+"!="           {
+                cout << "Scanner: '!='" << endl;
+                return WadeSpace::Parser::make_NE_OP("!=",WadeSpace::location());
+               }
+"!"            {
+                cout << "Scanner: '!'" << endl;
+                return WadeSpace::Parser::make_NOT_OP("!",WadeSpace::location());
+               }
+"^"            {
+                cout << "Scanner: '!='" << endl;
+                return WadeSpace::Parser::make_XOR_OP("!=",WadeSpace::location());
+               }
+"&"            {
+                cout << "Scanner: '&'" << endl;
+                return WadeSpace::Parser::make_BIT_AND("&",WadeSpace::location());
+               }
+"|"            {
+                cout << "Scanner: '|'" << endl;
+                return WadeSpace::Parser::make_BIT_OR("|",WadeSpace::location());
+               }
+"-"            {
+                cout << "Scanner: '-'" << endl;
+                return WadeSpace::Parser::make_MINUS_OP("-",WadeSpace::location());
+               }
+"+"            {
+                cout << "Scanner: '+'" << endl;
+                return WadeSpace::Parser::make_PLUS_OP("+",WadeSpace::location());
+               }
+"*"            {
+                cout << "Scanner: '*'" << endl;
+                return WadeSpace::Parser::make_TIMES_OP("*",WadeSpace::location());
+               }
+"/"            {
+                cout << "Scanner: '/'" << endl;
+                return WadeSpace::Parser::make_DIV_OP("/",WadeSpace::location());
+               }
+"%"            {
+                cout << "Scanner: '%'" << endl;
+                return WadeSpace::Parser::make_TIMES_OP("%",WadeSpace::location());
+               }
+[ \t\v\n\f]    { }
+.              { 
                 cout << "Scanner: unknown character [" << yytext << "]" << endl; 
-            }
-            
+               }           
 <<EOF>>     { return yyterminate(); }
 
 %%
