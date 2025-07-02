@@ -52,7 +52,8 @@
     #include <vector>
     #include <stdint.h>
     #include <stdlib.h>
-    #include "constant.h"
+    #include "Constant.h"
+    #include "Expression.h"
 
     using namespace std;
 
@@ -61,7 +62,7 @@
         class Interpreter;
     }
 
-#line 65 "parser.hpp"
+#line 66 "parser.hpp"
 
 # include <cassert>
 # include <cstdlib> // std::abort
@@ -202,7 +203,7 @@
 
 #line 9 "parser.y"
 namespace  WadeSpace  {
-#line 206 "parser.hpp"
+#line 207 "parser.hpp"
 
 
 
@@ -424,8 +425,28 @@ namespace  WadeSpace  {
       // constant
       char dummy1[sizeof (Constant)];
 
+      // primary_expression
+      // postfix_expression
+      // unary_expression
+      // cast_expression
+      // multiplicative_expression
+      // additive_expression
+      // shift_expression
+      // relational_expression
+      // equality_expression
+      // and_expression
+      // exclusive_or_expression
+      // inclusive_or_expression
+      // logical_and_expression
+      // logical_or_expression
+      // conditional_expression
+      // assignment_expression
+      // expression
+      // constant_expression
+      char dummy2[sizeof (Expression)];
+
       // "f_const"
-      char dummy2[sizeof (long double)];
+      char dummy3[sizeof (long double)];
 
       // "identifier"
       // "sting_literal"
@@ -471,54 +492,58 @@ namespace  WadeSpace  {
       // "imaginary"
       // "ellipsis"
       // "question"
-      // "semicolon"
-      // "ocurly"
-      // "ccurly"
-      // "comma"
-      // "colon"
-      // "oparen"
-      // "cparen"
-      // "obrace"
-      // "cbrace"
-      // "period"
-      // "tilde"
-      // "equal op"
-      // "right assign"
-      // "left assign"
-      // "add assign"
-      // "sub assign"
-      // "mul assign"
-      // "div assign"
-      // "mod assign"
-      // "and assign"
-      // "xor assign"
-      // "or assign"
-      // "right op"
-      // "left op"
-      // "inc op"
-      // "dec op"
-      // "ptr op"
-      // "and op"
-      // "or op"
-      // "ge op"
-      // "le op"
-      // "greater op"
-      // "less op"
-      // "eq op"
-      // "ne op"
-      // "not op"
-      // "xor op"
-      // "bit and"
-      // "bit or"
-      // "minus op"
-      // "plus op"
-      // "times op"
-      // "div op"
-      // "mod op"
-      char dummy3[sizeof (std::string)];
+      // ";"
+      // "{"
+      // "}"
+      // ","
+      // ":"
+      // "("
+      // ")"
+      // "["
+      // "]"
+      // "."
+      // "~"
+      // "="
+      // ">>="
+      // "<<="
+      // "+="
+      // "-="
+      // "*="
+      // "/="
+      // "%="
+      // "&="
+      // "^="
+      // "|="
+      // ">>"
+      // "<<"
+      // "++"
+      // "--"
+      // "->"
+      // "&&"
+      // "||"
+      // ">="
+      // "<="
+      // ">"
+      // "<"
+      // "=="
+      // "!="
+      // "!"
+      // "^"
+      // "&"
+      // "|"
+      // "-"
+      // "+"
+      // "*"
+      // "/"
+      // "%"
+      // unary_operator
+      char dummy4[sizeof (std::string)];
+
+      // argument_expression_list
+      char dummy5[sizeof (std::vector<Expression>)];
 
       // "i_const"
-      char dummy4[sizeof (uint64_t)];
+      char dummy6[sizeof (uint64_t)];
     };
 
     /// The size of the largest semantic type.
@@ -617,50 +642,50 @@ namespace  WadeSpace  {
     TOKEN_IMAGINARY = 301,         // "imaginary"
     TOKEN_ELLIPSIS = 302,          // "ellipsis"
     TOKEN_QUESTION = 303,          // "question"
-    TOKEN_SEMICOLON = 304,         // "semicolon"
-    TOKEN_OCURLY = 305,            // "ocurly"
-    TOKEN_CCURLY = 306,            // "ccurly"
-    TOKEN_COMMA = 307,             // "comma"
-    TOKEN_COLON = 308,             // "colon"
-    TOKEN_OPAREN = 309,            // "oparen"
-    TOKEN_CPAREN = 310,            // "cparen"
-    TOKEN_OBRACE = 311,            // "obrace"
-    TOKEN_CBRACE = 312,            // "cbrace"
-    TOKEN_PERIOD = 313,            // "period"
-    TOKEN_TILDE = 314,             // "tilde"
-    TOKEN_EQUAL_OP = 315,          // "equal op"
-    TOKEN_RIGHT_ASSIGN = 316,      // "right assign"
-    TOKEN_LEFT_ASSIGN = 317,       // "left assign"
-    TOKEN_ADD_ASSIGN = 318,        // "add assign"
-    TOKEN_SUB_ASSIGN = 319,        // "sub assign"
-    TOKEN_MUL_ASSIGN = 320,        // "mul assign"
-    TOKEN_DIV_ASSIGN = 321,        // "div assign"
-    TOKEN_MOD_ASSIGN = 322,        // "mod assign"
-    TOKEN_AND_ASSIGN = 323,        // "and assign"
-    TOKEN_XOR_ASSIGN = 324,        // "xor assign"
-    TOKEN_OR_ASSIGN = 325,         // "or assign"
-    TOKEN_RIGHT_OP = 326,          // "right op"
-    TOKEN_LEFT_OP = 327,           // "left op"
-    TOKEN_INC_OP = 328,            // "inc op"
-    TOKEN_DEC_OP = 329,            // "dec op"
-    TOKEN_PTR_OP = 330,            // "ptr op"
-    TOKEN_AND_OP = 331,            // "and op"
-    TOKEN_OR_OP = 332,             // "or op"
-    TOKEN_GE_OP = 333,             // "ge op"
-    TOKEN_LE_OP = 334,             // "le op"
-    TOKEN_GREATER_OP = 335,        // "greater op"
-    TOKEN_LESS_OP = 336,           // "less op"
-    TOKEN_EQ_OP = 337,             // "eq op"
-    TOKEN_NE_OP = 338,             // "ne op"
-    TOKEN_NOT_OP = 339,            // "not op"
-    TOKEN_XOR_OP = 340,            // "xor op"
-    TOKEN_BIT_AND = 341,           // "bit and"
-    TOKEN_BIT_OR = 342,            // "bit or"
-    TOKEN_MINUS_OP = 343,          // "minus op"
-    TOKEN_PLUS_OP = 344,           // "plus op"
-    TOKEN_TIMES_OP = 345,          // "times op"
-    TOKEN_DIV_OP = 346,            // "div op"
-    TOKEN_MOD_OP = 347             // "mod op"
+    TOKEN_SEMICOLON = 304,         // ";"
+    TOKEN_OCURLY = 305,            // "{"
+    TOKEN_CCURLY = 306,            // "}"
+    TOKEN_COMMA = 307,             // ","
+    TOKEN_COLON = 308,             // ":"
+    TOKEN_OPAREN = 309,            // "("
+    TOKEN_CPAREN = 310,            // ")"
+    TOKEN_OBRACE = 311,            // "["
+    TOKEN_CBRACE = 312,            // "]"
+    TOKEN_PERIOD = 313,            // "."
+    TOKEN_TILDE = 314,             // "~"
+    TOKEN_EQUAL_OP = 315,          // "="
+    TOKEN_RIGHT_ASSIGN = 316,      // ">>="
+    TOKEN_LEFT_ASSIGN = 317,       // "<<="
+    TOKEN_ADD_ASSIGN = 318,        // "+="
+    TOKEN_SUB_ASSIGN = 319,        // "-="
+    TOKEN_MUL_ASSIGN = 320,        // "*="
+    TOKEN_DIV_ASSIGN = 321,        // "/="
+    TOKEN_MOD_ASSIGN = 322,        // "%="
+    TOKEN_AND_ASSIGN = 323,        // "&="
+    TOKEN_XOR_ASSIGN = 324,        // "^="
+    TOKEN_OR_ASSIGN = 325,         // "|="
+    TOKEN_RIGHT_OP = 326,          // ">>"
+    TOKEN_LEFT_OP = 327,           // "<<"
+    TOKEN_INC_OP = 328,            // "++"
+    TOKEN_DEC_OP = 329,            // "--"
+    TOKEN_PTR_OP = 330,            // "->"
+    TOKEN_AND_OP = 331,            // "&&"
+    TOKEN_OR_OP = 332,             // "||"
+    TOKEN_GREATER_EQUAL_OP = 333,  // ">="
+    TOKEN_LESS_EQUAL_OP = 334,     // "<="
+    TOKEN_GREATER_OP = 335,        // ">"
+    TOKEN_LESS_OP = 336,           // "<"
+    TOKEN_EQUAL_EQUAL_OP = 337,    // "=="
+    TOKEN_NOT_EQUAL_OP = 338,      // "!="
+    TOKEN_NOT_OP = 339,            // "!"
+    TOKEN_XOR_OP = 340,            // "^"
+    TOKEN_BIT_AND = 341,           // "&"
+    TOKEN_BIT_OR = 342,            // "|"
+    TOKEN_MINUS_OP = 343,          // "-"
+    TOKEN_PLUS_OP = 344,           // "+"
+    TOKEN_TIMES_OP = 345,          // "*"
+    TOKEN_DIV_OP = 346,            // "/"
+    TOKEN_MOD_OP = 347             // "%"
       };
       /// Backward compatibility alias (Bison 3.6).
       typedef token_kind_type yytokentype;
@@ -677,7 +702,7 @@ namespace  WadeSpace  {
     {
       enum symbol_kind_type
       {
-        YYNTOKENS = 116, ///< Number of tokens.
+        YYNTOKENS = 104, ///< Number of tokens.
         S_YYEMPTY = -2,
         S_YYEOF = 0,                             // "end of file"
         S_YYerror = 1,                           // error
@@ -728,138 +753,126 @@ namespace  WadeSpace  {
         S_IMAGINARY = 46,                        // "imaginary"
         S_ELLIPSIS = 47,                         // "ellipsis"
         S_QUESTION = 48,                         // "question"
-        S_SEMICOLON = 49,                        // "semicolon"
-        S_OCURLY = 50,                           // "ocurly"
-        S_CCURLY = 51,                           // "ccurly"
-        S_COMMA = 52,                            // "comma"
-        S_COLON = 53,                            // "colon"
-        S_OPAREN = 54,                           // "oparen"
-        S_CPAREN = 55,                           // "cparen"
-        S_OBRACE = 56,                           // "obrace"
-        S_CBRACE = 57,                           // "cbrace"
-        S_PERIOD = 58,                           // "period"
-        S_TILDE = 59,                            // "tilde"
-        S_EQUAL_OP = 60,                         // "equal op"
-        S_RIGHT_ASSIGN = 61,                     // "right assign"
-        S_LEFT_ASSIGN = 62,                      // "left assign"
-        S_ADD_ASSIGN = 63,                       // "add assign"
-        S_SUB_ASSIGN = 64,                       // "sub assign"
-        S_MUL_ASSIGN = 65,                       // "mul assign"
-        S_DIV_ASSIGN = 66,                       // "div assign"
-        S_MOD_ASSIGN = 67,                       // "mod assign"
-        S_AND_ASSIGN = 68,                       // "and assign"
-        S_XOR_ASSIGN = 69,                       // "xor assign"
-        S_OR_ASSIGN = 70,                        // "or assign"
-        S_RIGHT_OP = 71,                         // "right op"
-        S_LEFT_OP = 72,                          // "left op"
-        S_INC_OP = 73,                           // "inc op"
-        S_DEC_OP = 74,                           // "dec op"
-        S_PTR_OP = 75,                           // "ptr op"
-        S_AND_OP = 76,                           // "and op"
-        S_OR_OP = 77,                            // "or op"
-        S_GE_OP = 78,                            // "ge op"
-        S_LE_OP = 79,                            // "le op"
-        S_GREATER_OP = 80,                       // "greater op"
-        S_LESS_OP = 81,                          // "less op"
-        S_EQ_OP = 82,                            // "eq op"
-        S_NE_OP = 83,                            // "ne op"
-        S_NOT_OP = 84,                           // "not op"
-        S_XOR_OP = 85,                           // "xor op"
-        S_BIT_AND = 86,                          // "bit and"
-        S_BIT_OR = 87,                           // "bit or"
-        S_MINUS_OP = 88,                         // "minus op"
-        S_PLUS_OP = 89,                          // "plus op"
-        S_TIMES_OP = 90,                         // "times op"
-        S_DIV_OP = 91,                           // "div op"
-        S_MOD_OP = 92,                           // "mod op"
-        S_93_ = 93,                              // ','
-        S_94_ = 94,                              // '('
-        S_95_ = 95,                              // ')'
-        S_96_ = 96,                              // '&'
-        S_97_ = 97,                              // '*'
-        S_98_ = 98,                              // '+'
-        S_99_ = 99,                              // '-'
-        S_100_ = 100,                            // '~'
-        S_101_ = 101,                            // '!'
-        S_102_ = 102,                            // '/'
-        S_103_ = 103,                            // '%'
-        S_104_ = 104,                            // '<'
-        S_105_ = 105,                            // '>'
-        S_106_ = 106,                            // '^'
-        S_107_ = 107,                            // '|'
-        S_108_ = 108,                            // '?'
-        S_109_ = 109,                            // ':'
-        S_110_ = 110,                            // '='
-        S_111_ = 111,                            // ';'
-        S_112_ = 112,                            // '{'
-        S_113_ = 113,                            // '}'
-        S_114_ = 114,                            // '['
-        S_115_ = 115,                            // ']'
-        S_YYACCEPT = 116,                        // $accept
-        S_primary_expression = 117,              // primary_expression
-        S_constant = 118,                        // constant
-        S_postfix_expression = 119,              // postfix_expression
-        S_argument_expression_list = 120,        // argument_expression_list
-        S_unary_expression = 121,                // unary_expression
-        S_unary_operator = 122,                  // unary_operator
-        S_cast_expression = 123,                 // cast_expression
-        S_multiplicative_expression = 124,       // multiplicative_expression
-        S_additive_expression = 125,             // additive_expression
-        S_shift_expression = 126,                // shift_expression
-        S_relational_expression = 127,           // relational_expression
-        S_equality_expression = 128,             // equality_expression
-        S_and_expression = 129,                  // and_expression
-        S_exclusive_or_expression = 130,         // exclusive_or_expression
-        S_inclusive_or_expression = 131,         // inclusive_or_expression
-        S_logical_and_expression = 132,          // logical_and_expression
-        S_logical_or_expression = 133,           // logical_or_expression
-        S_conditional_expression = 134,          // conditional_expression
-        S_assignment_expression = 135,           // assignment_expression
-        S_assignment_operator = 136,             // assignment_operator
-        S_expression = 137,                      // expression
-        S_constant_expression = 138,             // constant_expression
-        S_declaration = 139,                     // declaration
-        S_declaration_specifiers = 140,          // declaration_specifiers
-        S_init_declarator_list = 141,            // init_declarator_list
-        S_init_declarator = 142,                 // init_declarator
-        S_storage_class_specifier = 143,         // storage_class_specifier
-        S_type_specifier = 144,                  // type_specifier
-        S_struct_or_union_specifier = 145,       // struct_or_union_specifier
-        S_struct_or_union = 146,                 // struct_or_union
-        S_struct_declaration_list = 147,         // struct_declaration_list
-        S_struct_declaration = 148,              // struct_declaration
-        S_specifier_qualifier_list = 149,        // specifier_qualifier_list
-        S_struct_declarator_list = 150,          // struct_declarator_list
-        S_struct_declarator = 151,               // struct_declarator
-        S_enum_specifier = 152,                  // enum_specifier
-        S_enumerator_list = 153,                 // enumerator_list
-        S_enumerator = 154,                      // enumerator
-        S_type_qualifier = 155,                  // type_qualifier
-        S_declarator = 156,                      // declarator
-        S_direct_declarator = 157,               // direct_declarator
-        S_pointer = 158,                         // pointer
-        S_type_qualifier_list = 159,             // type_qualifier_list
-        S_parameter_type_list = 160,             // parameter_type_list
-        S_parameter_list = 161,                  // parameter_list
-        S_parameter_declaration = 162,           // parameter_declaration
-        S_identifier_list = 163,                 // identifier_list
-        S_type_name = 164,                       // type_name
-        S_abstract_declarator = 165,             // abstract_declarator
-        S_direct_abstract_declarator = 166,      // direct_abstract_declarator
-        S_initializer = 167,                     // initializer
-        S_initializer_list = 168,                // initializer_list
-        S_statement = 169,                       // statement
-        S_labeled_statement = 170,               // labeled_statement
-        S_compound_statement = 171,              // compound_statement
-        S_declaration_list = 172,                // declaration_list
-        S_statement_list = 173,                  // statement_list
-        S_expression_statement = 174,            // expression_statement
-        S_selection_statement = 175,             // selection_statement
-        S_iteration_statement = 176,             // iteration_statement
-        S_jump_statement = 177,                  // jump_statement
-        S_translation_unit = 178,                // translation_unit
-        S_external_declaration = 179,            // external_declaration
-        S_function_definition = 180              // function_definition
+        S_SEMICOLON = 49,                        // ";"
+        S_OCURLY = 50,                           // "{"
+        S_CCURLY = 51,                           // "}"
+        S_COMMA = 52,                            // ","
+        S_COLON = 53,                            // ":"
+        S_OPAREN = 54,                           // "("
+        S_CPAREN = 55,                           // ")"
+        S_OBRACE = 56,                           // "["
+        S_CBRACE = 57,                           // "]"
+        S_PERIOD = 58,                           // "."
+        S_TILDE = 59,                            // "~"
+        S_EQUAL_OP = 60,                         // "="
+        S_RIGHT_ASSIGN = 61,                     // ">>="
+        S_LEFT_ASSIGN = 62,                      // "<<="
+        S_ADD_ASSIGN = 63,                       // "+="
+        S_SUB_ASSIGN = 64,                       // "-="
+        S_MUL_ASSIGN = 65,                       // "*="
+        S_DIV_ASSIGN = 66,                       // "/="
+        S_MOD_ASSIGN = 67,                       // "%="
+        S_AND_ASSIGN = 68,                       // "&="
+        S_XOR_ASSIGN = 69,                       // "^="
+        S_OR_ASSIGN = 70,                        // "|="
+        S_RIGHT_OP = 71,                         // ">>"
+        S_LEFT_OP = 72,                          // "<<"
+        S_INC_OP = 73,                           // "++"
+        S_DEC_OP = 74,                           // "--"
+        S_PTR_OP = 75,                           // "->"
+        S_AND_OP = 76,                           // "&&"
+        S_OR_OP = 77,                            // "||"
+        S_GREATER_EQUAL_OP = 78,                 // ">="
+        S_LESS_EQUAL_OP = 79,                    // "<="
+        S_GREATER_OP = 80,                       // ">"
+        S_LESS_OP = 81,                          // "<"
+        S_EQUAL_EQUAL_OP = 82,                   // "=="
+        S_NOT_EQUAL_OP = 83,                     // "!="
+        S_NOT_OP = 84,                           // "!"
+        S_XOR_OP = 85,                           // "^"
+        S_BIT_AND = 86,                          // "&"
+        S_BIT_OR = 87,                           // "|"
+        S_MINUS_OP = 88,                         // "-"
+        S_PLUS_OP = 89,                          // "+"
+        S_TIMES_OP = 90,                         // "*"
+        S_DIV_OP = 91,                           // "/"
+        S_MOD_OP = 92,                           // "%"
+        S_93_ = 93,                              // '+'
+        S_94_ = 94,                              // '-'
+        S_95_ = 95,                              // '&'
+        S_96_ = 96,                              // '^'
+        S_97_ = 97,                              // '|'
+        S_98_ = 98,                              // '?'
+        S_99_ = 99,                              // ':'
+        S_100_ = 100,                            // '='
+        S_101_ = 101,                            // '['
+        S_102_ = 102,                            // ']'
+        S_103_ = 103,                            // '*'
+        S_YYACCEPT = 104,                        // $accept
+        S_primary_expression = 105,              // primary_expression
+        S_constant = 106,                        // constant
+        S_postfix_expression = 107,              // postfix_expression
+        S_argument_expression_list = 108,        // argument_expression_list
+        S_unary_expression = 109,                // unary_expression
+        S_unary_operator = 110,                  // unary_operator
+        S_cast_expression = 111,                 // cast_expression
+        S_multiplicative_expression = 112,       // multiplicative_expression
+        S_additive_expression = 113,             // additive_expression
+        S_shift_expression = 114,                // shift_expression
+        S_relational_expression = 115,           // relational_expression
+        S_equality_expression = 116,             // equality_expression
+        S_and_expression = 117,                  // and_expression
+        S_exclusive_or_expression = 118,         // exclusive_or_expression
+        S_inclusive_or_expression = 119,         // inclusive_or_expression
+        S_logical_and_expression = 120,          // logical_and_expression
+        S_logical_or_expression = 121,           // logical_or_expression
+        S_conditional_expression = 122,          // conditional_expression
+        S_assignment_expression = 123,           // assignment_expression
+        S_assignment_operator = 124,             // assignment_operator
+        S_expression = 125,                      // expression
+        S_constant_expression = 126,             // constant_expression
+        S_declaration = 127,                     // declaration
+        S_declaration_specifiers = 128,          // declaration_specifiers
+        S_init_declarator_list = 129,            // init_declarator_list
+        S_init_declarator = 130,                 // init_declarator
+        S_storage_class_specifier = 131,         // storage_class_specifier
+        S_type_specifier = 132,                  // type_specifier
+        S_struct_or_union_specifier = 133,       // struct_or_union_specifier
+        S_struct_or_union = 134,                 // struct_or_union
+        S_struct_declaration_list = 135,         // struct_declaration_list
+        S_struct_declaration = 136,              // struct_declaration
+        S_specifier_qualifier_list = 137,        // specifier_qualifier_list
+        S_struct_declarator_list = 138,          // struct_declarator_list
+        S_struct_declarator = 139,               // struct_declarator
+        S_enum_specifier = 140,                  // enum_specifier
+        S_enumerator_list = 141,                 // enumerator_list
+        S_enumerator = 142,                      // enumerator
+        S_type_qualifier = 143,                  // type_qualifier
+        S_declarator = 144,                      // declarator
+        S_direct_declarator = 145,               // direct_declarator
+        S_pointer = 146,                         // pointer
+        S_type_qualifier_list = 147,             // type_qualifier_list
+        S_parameter_type_list = 148,             // parameter_type_list
+        S_parameter_list = 149,                  // parameter_list
+        S_parameter_declaration = 150,           // parameter_declaration
+        S_identifier_list = 151,                 // identifier_list
+        S_type_name = 152,                       // type_name
+        S_abstract_declarator = 153,             // abstract_declarator
+        S_direct_abstract_declarator = 154,      // direct_abstract_declarator
+        S_initializer = 155,                     // initializer
+        S_initializer_list = 156,                // initializer_list
+        S_statement = 157,                       // statement
+        S_labeled_statement = 158,               // labeled_statement
+        S_compound_statement = 159,              // compound_statement
+        S_declaration_list = 160,                // declaration_list
+        S_statement_list = 161,                  // statement_list
+        S_expression_statement = 162,            // expression_statement
+        S_selection_statement = 163,             // selection_statement
+        S_iteration_statement = 164,             // iteration_statement
+        S_jump_statement = 165,                  // jump_statement
+        S_translation_unit = 166,                // translation_unit
+        S_external_declaration = 167,            // external_declaration
+        S_function_definition = 168              // function_definition
       };
     };
 
@@ -898,6 +911,27 @@ namespace  WadeSpace  {
     {
       case symbol_kind::S_constant: // constant
         value.move< Constant > (std::move (that.value));
+        break;
+
+      case symbol_kind::S_primary_expression: // primary_expression
+      case symbol_kind::S_postfix_expression: // postfix_expression
+      case symbol_kind::S_unary_expression: // unary_expression
+      case symbol_kind::S_cast_expression: // cast_expression
+      case symbol_kind::S_multiplicative_expression: // multiplicative_expression
+      case symbol_kind::S_additive_expression: // additive_expression
+      case symbol_kind::S_shift_expression: // shift_expression
+      case symbol_kind::S_relational_expression: // relational_expression
+      case symbol_kind::S_equality_expression: // equality_expression
+      case symbol_kind::S_and_expression: // and_expression
+      case symbol_kind::S_exclusive_or_expression: // exclusive_or_expression
+      case symbol_kind::S_inclusive_or_expression: // inclusive_or_expression
+      case symbol_kind::S_logical_and_expression: // logical_and_expression
+      case symbol_kind::S_logical_or_expression: // logical_or_expression
+      case symbol_kind::S_conditional_expression: // conditional_expression
+      case symbol_kind::S_assignment_expression: // assignment_expression
+      case symbol_kind::S_expression: // expression
+      case symbol_kind::S_constant_expression: // constant_expression
+        value.move< Expression > (std::move (that.value));
         break;
 
       case symbol_kind::S_F_CONST: // "f_const"
@@ -948,51 +982,56 @@ namespace  WadeSpace  {
       case symbol_kind::S_IMAGINARY: // "imaginary"
       case symbol_kind::S_ELLIPSIS: // "ellipsis"
       case symbol_kind::S_QUESTION: // "question"
-      case symbol_kind::S_SEMICOLON: // "semicolon"
-      case symbol_kind::S_OCURLY: // "ocurly"
-      case symbol_kind::S_CCURLY: // "ccurly"
-      case symbol_kind::S_COMMA: // "comma"
-      case symbol_kind::S_COLON: // "colon"
-      case symbol_kind::S_OPAREN: // "oparen"
-      case symbol_kind::S_CPAREN: // "cparen"
-      case symbol_kind::S_OBRACE: // "obrace"
-      case symbol_kind::S_CBRACE: // "cbrace"
-      case symbol_kind::S_PERIOD: // "period"
-      case symbol_kind::S_TILDE: // "tilde"
-      case symbol_kind::S_EQUAL_OP: // "equal op"
-      case symbol_kind::S_RIGHT_ASSIGN: // "right assign"
-      case symbol_kind::S_LEFT_ASSIGN: // "left assign"
-      case symbol_kind::S_ADD_ASSIGN: // "add assign"
-      case symbol_kind::S_SUB_ASSIGN: // "sub assign"
-      case symbol_kind::S_MUL_ASSIGN: // "mul assign"
-      case symbol_kind::S_DIV_ASSIGN: // "div assign"
-      case symbol_kind::S_MOD_ASSIGN: // "mod assign"
-      case symbol_kind::S_AND_ASSIGN: // "and assign"
-      case symbol_kind::S_XOR_ASSIGN: // "xor assign"
-      case symbol_kind::S_OR_ASSIGN: // "or assign"
-      case symbol_kind::S_RIGHT_OP: // "right op"
-      case symbol_kind::S_LEFT_OP: // "left op"
-      case symbol_kind::S_INC_OP: // "inc op"
-      case symbol_kind::S_DEC_OP: // "dec op"
-      case symbol_kind::S_PTR_OP: // "ptr op"
-      case symbol_kind::S_AND_OP: // "and op"
-      case symbol_kind::S_OR_OP: // "or op"
-      case symbol_kind::S_GE_OP: // "ge op"
-      case symbol_kind::S_LE_OP: // "le op"
-      case symbol_kind::S_GREATER_OP: // "greater op"
-      case symbol_kind::S_LESS_OP: // "less op"
-      case symbol_kind::S_EQ_OP: // "eq op"
-      case symbol_kind::S_NE_OP: // "ne op"
-      case symbol_kind::S_NOT_OP: // "not op"
-      case symbol_kind::S_XOR_OP: // "xor op"
-      case symbol_kind::S_BIT_AND: // "bit and"
-      case symbol_kind::S_BIT_OR: // "bit or"
-      case symbol_kind::S_MINUS_OP: // "minus op"
-      case symbol_kind::S_PLUS_OP: // "plus op"
-      case symbol_kind::S_TIMES_OP: // "times op"
-      case symbol_kind::S_DIV_OP: // "div op"
-      case symbol_kind::S_MOD_OP: // "mod op"
+      case symbol_kind::S_SEMICOLON: // ";"
+      case symbol_kind::S_OCURLY: // "{"
+      case symbol_kind::S_CCURLY: // "}"
+      case symbol_kind::S_COMMA: // ","
+      case symbol_kind::S_COLON: // ":"
+      case symbol_kind::S_OPAREN: // "("
+      case symbol_kind::S_CPAREN: // ")"
+      case symbol_kind::S_OBRACE: // "["
+      case symbol_kind::S_CBRACE: // "]"
+      case symbol_kind::S_PERIOD: // "."
+      case symbol_kind::S_TILDE: // "~"
+      case symbol_kind::S_EQUAL_OP: // "="
+      case symbol_kind::S_RIGHT_ASSIGN: // ">>="
+      case symbol_kind::S_LEFT_ASSIGN: // "<<="
+      case symbol_kind::S_ADD_ASSIGN: // "+="
+      case symbol_kind::S_SUB_ASSIGN: // "-="
+      case symbol_kind::S_MUL_ASSIGN: // "*="
+      case symbol_kind::S_DIV_ASSIGN: // "/="
+      case symbol_kind::S_MOD_ASSIGN: // "%="
+      case symbol_kind::S_AND_ASSIGN: // "&="
+      case symbol_kind::S_XOR_ASSIGN: // "^="
+      case symbol_kind::S_OR_ASSIGN: // "|="
+      case symbol_kind::S_RIGHT_OP: // ">>"
+      case symbol_kind::S_LEFT_OP: // "<<"
+      case symbol_kind::S_INC_OP: // "++"
+      case symbol_kind::S_DEC_OP: // "--"
+      case symbol_kind::S_PTR_OP: // "->"
+      case symbol_kind::S_AND_OP: // "&&"
+      case symbol_kind::S_OR_OP: // "||"
+      case symbol_kind::S_GREATER_EQUAL_OP: // ">="
+      case symbol_kind::S_LESS_EQUAL_OP: // "<="
+      case symbol_kind::S_GREATER_OP: // ">"
+      case symbol_kind::S_LESS_OP: // "<"
+      case symbol_kind::S_EQUAL_EQUAL_OP: // "=="
+      case symbol_kind::S_NOT_EQUAL_OP: // "!="
+      case symbol_kind::S_NOT_OP: // "!"
+      case symbol_kind::S_XOR_OP: // "^"
+      case symbol_kind::S_BIT_AND: // "&"
+      case symbol_kind::S_BIT_OR: // "|"
+      case symbol_kind::S_MINUS_OP: // "-"
+      case symbol_kind::S_PLUS_OP: // "+"
+      case symbol_kind::S_TIMES_OP: // "*"
+      case symbol_kind::S_DIV_OP: // "/"
+      case symbol_kind::S_MOD_OP: // "%"
+      case symbol_kind::S_unary_operator: // unary_operator
         value.move< std::string > (std::move (that.value));
+        break;
+
+      case symbol_kind::S_argument_expression_list: // argument_expression_list
+        value.move< std::vector<Expression> > (std::move (that.value));
         break;
 
       case symbol_kind::S_I_CONST: // "i_const"
@@ -1037,6 +1076,20 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
+      basic_symbol (typename Base::kind_type t, Expression&& v, location_type&& l)
+        : Base (t)
+        , value (std::move (v))
+        , location (std::move (l))
+      {}
+#else
+      basic_symbol (typename Base::kind_type t, const Expression& v, const location_type& l)
+        : Base (t)
+        , value (v)
+        , location (l)
+      {}
+#endif
+
+#if 201103L <= YY_CPLUSPLUS
       basic_symbol (typename Base::kind_type t, long double&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
@@ -1058,6 +1111,20 @@ namespace  WadeSpace  {
       {}
 #else
       basic_symbol (typename Base::kind_type t, const std::string& v, const location_type& l)
+        : Base (t)
+        , value (v)
+        , location (l)
+      {}
+#endif
+
+#if 201103L <= YY_CPLUSPLUS
+      basic_symbol (typename Base::kind_type t, std::vector<Expression>&& v, location_type&& l)
+        : Base (t)
+        , value (std::move (v))
+        , location (std::move (l))
+      {}
+#else
+      basic_symbol (typename Base::kind_type t, const std::vector<Expression>& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1104,6 +1171,27 @@ switch (yykind)
     {
       case symbol_kind::S_constant: // constant
         value.template destroy< Constant > ();
+        break;
+
+      case symbol_kind::S_primary_expression: // primary_expression
+      case symbol_kind::S_postfix_expression: // postfix_expression
+      case symbol_kind::S_unary_expression: // unary_expression
+      case symbol_kind::S_cast_expression: // cast_expression
+      case symbol_kind::S_multiplicative_expression: // multiplicative_expression
+      case symbol_kind::S_additive_expression: // additive_expression
+      case symbol_kind::S_shift_expression: // shift_expression
+      case symbol_kind::S_relational_expression: // relational_expression
+      case symbol_kind::S_equality_expression: // equality_expression
+      case symbol_kind::S_and_expression: // and_expression
+      case symbol_kind::S_exclusive_or_expression: // exclusive_or_expression
+      case symbol_kind::S_inclusive_or_expression: // inclusive_or_expression
+      case symbol_kind::S_logical_and_expression: // logical_and_expression
+      case symbol_kind::S_logical_or_expression: // logical_or_expression
+      case symbol_kind::S_conditional_expression: // conditional_expression
+      case symbol_kind::S_assignment_expression: // assignment_expression
+      case symbol_kind::S_expression: // expression
+      case symbol_kind::S_constant_expression: // constant_expression
+        value.template destroy< Expression > ();
         break;
 
       case symbol_kind::S_F_CONST: // "f_const"
@@ -1154,51 +1242,56 @@ switch (yykind)
       case symbol_kind::S_IMAGINARY: // "imaginary"
       case symbol_kind::S_ELLIPSIS: // "ellipsis"
       case symbol_kind::S_QUESTION: // "question"
-      case symbol_kind::S_SEMICOLON: // "semicolon"
-      case symbol_kind::S_OCURLY: // "ocurly"
-      case symbol_kind::S_CCURLY: // "ccurly"
-      case symbol_kind::S_COMMA: // "comma"
-      case symbol_kind::S_COLON: // "colon"
-      case symbol_kind::S_OPAREN: // "oparen"
-      case symbol_kind::S_CPAREN: // "cparen"
-      case symbol_kind::S_OBRACE: // "obrace"
-      case symbol_kind::S_CBRACE: // "cbrace"
-      case symbol_kind::S_PERIOD: // "period"
-      case symbol_kind::S_TILDE: // "tilde"
-      case symbol_kind::S_EQUAL_OP: // "equal op"
-      case symbol_kind::S_RIGHT_ASSIGN: // "right assign"
-      case symbol_kind::S_LEFT_ASSIGN: // "left assign"
-      case symbol_kind::S_ADD_ASSIGN: // "add assign"
-      case symbol_kind::S_SUB_ASSIGN: // "sub assign"
-      case symbol_kind::S_MUL_ASSIGN: // "mul assign"
-      case symbol_kind::S_DIV_ASSIGN: // "div assign"
-      case symbol_kind::S_MOD_ASSIGN: // "mod assign"
-      case symbol_kind::S_AND_ASSIGN: // "and assign"
-      case symbol_kind::S_XOR_ASSIGN: // "xor assign"
-      case symbol_kind::S_OR_ASSIGN: // "or assign"
-      case symbol_kind::S_RIGHT_OP: // "right op"
-      case symbol_kind::S_LEFT_OP: // "left op"
-      case symbol_kind::S_INC_OP: // "inc op"
-      case symbol_kind::S_DEC_OP: // "dec op"
-      case symbol_kind::S_PTR_OP: // "ptr op"
-      case symbol_kind::S_AND_OP: // "and op"
-      case symbol_kind::S_OR_OP: // "or op"
-      case symbol_kind::S_GE_OP: // "ge op"
-      case symbol_kind::S_LE_OP: // "le op"
-      case symbol_kind::S_GREATER_OP: // "greater op"
-      case symbol_kind::S_LESS_OP: // "less op"
-      case symbol_kind::S_EQ_OP: // "eq op"
-      case symbol_kind::S_NE_OP: // "ne op"
-      case symbol_kind::S_NOT_OP: // "not op"
-      case symbol_kind::S_XOR_OP: // "xor op"
-      case symbol_kind::S_BIT_AND: // "bit and"
-      case symbol_kind::S_BIT_OR: // "bit or"
-      case symbol_kind::S_MINUS_OP: // "minus op"
-      case symbol_kind::S_PLUS_OP: // "plus op"
-      case symbol_kind::S_TIMES_OP: // "times op"
-      case symbol_kind::S_DIV_OP: // "div op"
-      case symbol_kind::S_MOD_OP: // "mod op"
+      case symbol_kind::S_SEMICOLON: // ";"
+      case symbol_kind::S_OCURLY: // "{"
+      case symbol_kind::S_CCURLY: // "}"
+      case symbol_kind::S_COMMA: // ","
+      case symbol_kind::S_COLON: // ":"
+      case symbol_kind::S_OPAREN: // "("
+      case symbol_kind::S_CPAREN: // ")"
+      case symbol_kind::S_OBRACE: // "["
+      case symbol_kind::S_CBRACE: // "]"
+      case symbol_kind::S_PERIOD: // "."
+      case symbol_kind::S_TILDE: // "~"
+      case symbol_kind::S_EQUAL_OP: // "="
+      case symbol_kind::S_RIGHT_ASSIGN: // ">>="
+      case symbol_kind::S_LEFT_ASSIGN: // "<<="
+      case symbol_kind::S_ADD_ASSIGN: // "+="
+      case symbol_kind::S_SUB_ASSIGN: // "-="
+      case symbol_kind::S_MUL_ASSIGN: // "*="
+      case symbol_kind::S_DIV_ASSIGN: // "/="
+      case symbol_kind::S_MOD_ASSIGN: // "%="
+      case symbol_kind::S_AND_ASSIGN: // "&="
+      case symbol_kind::S_XOR_ASSIGN: // "^="
+      case symbol_kind::S_OR_ASSIGN: // "|="
+      case symbol_kind::S_RIGHT_OP: // ">>"
+      case symbol_kind::S_LEFT_OP: // "<<"
+      case symbol_kind::S_INC_OP: // "++"
+      case symbol_kind::S_DEC_OP: // "--"
+      case symbol_kind::S_PTR_OP: // "->"
+      case symbol_kind::S_AND_OP: // "&&"
+      case symbol_kind::S_OR_OP: // "||"
+      case symbol_kind::S_GREATER_EQUAL_OP: // ">="
+      case symbol_kind::S_LESS_EQUAL_OP: // "<="
+      case symbol_kind::S_GREATER_OP: // ">"
+      case symbol_kind::S_LESS_OP: // "<"
+      case symbol_kind::S_EQUAL_EQUAL_OP: // "=="
+      case symbol_kind::S_NOT_EQUAL_OP: // "!="
+      case symbol_kind::S_NOT_OP: // "!"
+      case symbol_kind::S_XOR_OP: // "^"
+      case symbol_kind::S_BIT_AND: // "&"
+      case symbol_kind::S_BIT_OR: // "|"
+      case symbol_kind::S_MINUS_OP: // "-"
+      case symbol_kind::S_PLUS_OP: // "+"
+      case symbol_kind::S_TIMES_OP: // "*"
+      case symbol_kind::S_DIV_OP: // "/"
+      case symbol_kind::S_MOD_OP: // "%"
+      case symbol_kind::S_unary_operator: // unary_operator
         value.template destroy< std::string > ();
+        break;
+
+      case symbol_kind::S_argument_expression_list: // argument_expression_list
+        value.template destroy< std::vector<Expression> > ();
         break;
 
       case symbol_kind::S_I_CONST: // "i_const"
@@ -1304,27 +1397,17 @@ switch (yykind)
 #if !defined _MSC_VER || defined __clang__
         YY_ASSERT (tok == token::TOKEN_END
                    || (token::TOKEN_YYerror <= tok && tok <= token::TOKEN_YYUNDEF)
-                   || tok == 44
-                   || (40 <= tok && tok <= 41)
-                   || tok == 38
-                   || (42 <= tok && tok <= 43)
+                   || tok == 43
                    || tok == 45
-                   || tok == 126
-                   || tok == 33
-                   || tok == 47
-                   || tok == 37
-                   || tok == 60
-                   || tok == 62
+                   || tok == 38
                    || tok == 94
                    || tok == 124
                    || tok == 63
                    || tok == 58
                    || tok == 61
-                   || tok == 59
-                   || tok == 123
-                   || tok == 125
                    || tok == 91
-                   || tok == 93);
+                   || tok == 93
+                   || tok == 42);
 #endif
       }
 #if 201103L <= YY_CPLUSPLUS
@@ -2585,31 +2668,31 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_GE_OP (std::string v, location_type l)
+      make_GREATER_EQUAL_OP (std::string v, location_type l)
       {
-        return symbol_type (token::TOKEN_GE_OP, std::move (v), std::move (l));
+        return symbol_type (token::TOKEN_GREATER_EQUAL_OP, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_GE_OP (const std::string& v, const location_type& l)
+      make_GREATER_EQUAL_OP (const std::string& v, const location_type& l)
       {
-        return symbol_type (token::TOKEN_GE_OP, v, l);
+        return symbol_type (token::TOKEN_GREATER_EQUAL_OP, v, l);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_LE_OP (std::string v, location_type l)
+      make_LESS_EQUAL_OP (std::string v, location_type l)
       {
-        return symbol_type (token::TOKEN_LE_OP, std::move (v), std::move (l));
+        return symbol_type (token::TOKEN_LESS_EQUAL_OP, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_LE_OP (const std::string& v, const location_type& l)
+      make_LESS_EQUAL_OP (const std::string& v, const location_type& l)
       {
-        return symbol_type (token::TOKEN_LE_OP, v, l);
+        return symbol_type (token::TOKEN_LESS_EQUAL_OP, v, l);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
@@ -2645,31 +2728,31 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_EQ_OP (std::string v, location_type l)
+      make_EQUAL_EQUAL_OP (std::string v, location_type l)
       {
-        return symbol_type (token::TOKEN_EQ_OP, std::move (v), std::move (l));
+        return symbol_type (token::TOKEN_EQUAL_EQUAL_OP, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_EQ_OP (const std::string& v, const location_type& l)
+      make_EQUAL_EQUAL_OP (const std::string& v, const location_type& l)
       {
-        return symbol_type (token::TOKEN_EQ_OP, v, l);
+        return symbol_type (token::TOKEN_EQUAL_EQUAL_OP, v, l);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_NE_OP (std::string v, location_type l)
+      make_NOT_EQUAL_OP (std::string v, location_type l)
       {
-        return symbol_type (token::TOKEN_NE_OP, std::move (v), std::move (l));
+        return symbol_type (token::TOKEN_NOT_EQUAL_OP, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_NE_OP (const std::string& v, const location_type& l)
+      make_NOT_EQUAL_OP (const std::string& v, const location_type& l)
       {
-        return symbol_type (token::TOKEN_NE_OP, v, l);
+        return symbol_type (token::TOKEN_NOT_EQUAL_OP, v, l);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
@@ -3137,7 +3220,7 @@ switch (yykind)
     /// Constants.
     enum
     {
-      yylast_ = 1703,     ///< Last index in yytable_.
+      yylast_ = 1682,     ///< Last index in yytable_.
       yynnts_ = 65,  ///< Number of nonterminal symbols.
       yyfinal_ = 61 ///< Termination state number.
     };
@@ -3162,16 +3245,16 @@ switch (yykind)
        0,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,   101,     2,     2,     2,   103,    96,     2,
-      94,    95,    97,    98,    93,    99,     2,   102,     2,     2,
-       2,     2,     2,     2,     2,     2,     2,     2,   109,   111,
-     104,   110,   105,   108,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,    95,     2,
+       2,     2,   103,    93,     2,    94,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,    99,     2,
+       2,   100,     2,    98,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,   114,     2,   115,   106,     2,     2,     2,     2,     2,
+       2,   101,     2,   102,    96,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,   112,   107,   113,   100,     2,     2,     2,
+       2,     2,     2,     2,    97,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
@@ -3217,6 +3300,27 @@ switch (yykind)
     {
       case symbol_kind::S_constant: // constant
         value.copy< Constant > (YY_MOVE (that.value));
+        break;
+
+      case symbol_kind::S_primary_expression: // primary_expression
+      case symbol_kind::S_postfix_expression: // postfix_expression
+      case symbol_kind::S_unary_expression: // unary_expression
+      case symbol_kind::S_cast_expression: // cast_expression
+      case symbol_kind::S_multiplicative_expression: // multiplicative_expression
+      case symbol_kind::S_additive_expression: // additive_expression
+      case symbol_kind::S_shift_expression: // shift_expression
+      case symbol_kind::S_relational_expression: // relational_expression
+      case symbol_kind::S_equality_expression: // equality_expression
+      case symbol_kind::S_and_expression: // and_expression
+      case symbol_kind::S_exclusive_or_expression: // exclusive_or_expression
+      case symbol_kind::S_inclusive_or_expression: // inclusive_or_expression
+      case symbol_kind::S_logical_and_expression: // logical_and_expression
+      case symbol_kind::S_logical_or_expression: // logical_or_expression
+      case symbol_kind::S_conditional_expression: // conditional_expression
+      case symbol_kind::S_assignment_expression: // assignment_expression
+      case symbol_kind::S_expression: // expression
+      case symbol_kind::S_constant_expression: // constant_expression
+        value.copy< Expression > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_F_CONST: // "f_const"
@@ -3267,51 +3371,56 @@ switch (yykind)
       case symbol_kind::S_IMAGINARY: // "imaginary"
       case symbol_kind::S_ELLIPSIS: // "ellipsis"
       case symbol_kind::S_QUESTION: // "question"
-      case symbol_kind::S_SEMICOLON: // "semicolon"
-      case symbol_kind::S_OCURLY: // "ocurly"
-      case symbol_kind::S_CCURLY: // "ccurly"
-      case symbol_kind::S_COMMA: // "comma"
-      case symbol_kind::S_COLON: // "colon"
-      case symbol_kind::S_OPAREN: // "oparen"
-      case symbol_kind::S_CPAREN: // "cparen"
-      case symbol_kind::S_OBRACE: // "obrace"
-      case symbol_kind::S_CBRACE: // "cbrace"
-      case symbol_kind::S_PERIOD: // "period"
-      case symbol_kind::S_TILDE: // "tilde"
-      case symbol_kind::S_EQUAL_OP: // "equal op"
-      case symbol_kind::S_RIGHT_ASSIGN: // "right assign"
-      case symbol_kind::S_LEFT_ASSIGN: // "left assign"
-      case symbol_kind::S_ADD_ASSIGN: // "add assign"
-      case symbol_kind::S_SUB_ASSIGN: // "sub assign"
-      case symbol_kind::S_MUL_ASSIGN: // "mul assign"
-      case symbol_kind::S_DIV_ASSIGN: // "div assign"
-      case symbol_kind::S_MOD_ASSIGN: // "mod assign"
-      case symbol_kind::S_AND_ASSIGN: // "and assign"
-      case symbol_kind::S_XOR_ASSIGN: // "xor assign"
-      case symbol_kind::S_OR_ASSIGN: // "or assign"
-      case symbol_kind::S_RIGHT_OP: // "right op"
-      case symbol_kind::S_LEFT_OP: // "left op"
-      case symbol_kind::S_INC_OP: // "inc op"
-      case symbol_kind::S_DEC_OP: // "dec op"
-      case symbol_kind::S_PTR_OP: // "ptr op"
-      case symbol_kind::S_AND_OP: // "and op"
-      case symbol_kind::S_OR_OP: // "or op"
-      case symbol_kind::S_GE_OP: // "ge op"
-      case symbol_kind::S_LE_OP: // "le op"
-      case symbol_kind::S_GREATER_OP: // "greater op"
-      case symbol_kind::S_LESS_OP: // "less op"
-      case symbol_kind::S_EQ_OP: // "eq op"
-      case symbol_kind::S_NE_OP: // "ne op"
-      case symbol_kind::S_NOT_OP: // "not op"
-      case symbol_kind::S_XOR_OP: // "xor op"
-      case symbol_kind::S_BIT_AND: // "bit and"
-      case symbol_kind::S_BIT_OR: // "bit or"
-      case symbol_kind::S_MINUS_OP: // "minus op"
-      case symbol_kind::S_PLUS_OP: // "plus op"
-      case symbol_kind::S_TIMES_OP: // "times op"
-      case symbol_kind::S_DIV_OP: // "div op"
-      case symbol_kind::S_MOD_OP: // "mod op"
+      case symbol_kind::S_SEMICOLON: // ";"
+      case symbol_kind::S_OCURLY: // "{"
+      case symbol_kind::S_CCURLY: // "}"
+      case symbol_kind::S_COMMA: // ","
+      case symbol_kind::S_COLON: // ":"
+      case symbol_kind::S_OPAREN: // "("
+      case symbol_kind::S_CPAREN: // ")"
+      case symbol_kind::S_OBRACE: // "["
+      case symbol_kind::S_CBRACE: // "]"
+      case symbol_kind::S_PERIOD: // "."
+      case symbol_kind::S_TILDE: // "~"
+      case symbol_kind::S_EQUAL_OP: // "="
+      case symbol_kind::S_RIGHT_ASSIGN: // ">>="
+      case symbol_kind::S_LEFT_ASSIGN: // "<<="
+      case symbol_kind::S_ADD_ASSIGN: // "+="
+      case symbol_kind::S_SUB_ASSIGN: // "-="
+      case symbol_kind::S_MUL_ASSIGN: // "*="
+      case symbol_kind::S_DIV_ASSIGN: // "/="
+      case symbol_kind::S_MOD_ASSIGN: // "%="
+      case symbol_kind::S_AND_ASSIGN: // "&="
+      case symbol_kind::S_XOR_ASSIGN: // "^="
+      case symbol_kind::S_OR_ASSIGN: // "|="
+      case symbol_kind::S_RIGHT_OP: // ">>"
+      case symbol_kind::S_LEFT_OP: // "<<"
+      case symbol_kind::S_INC_OP: // "++"
+      case symbol_kind::S_DEC_OP: // "--"
+      case symbol_kind::S_PTR_OP: // "->"
+      case symbol_kind::S_AND_OP: // "&&"
+      case symbol_kind::S_OR_OP: // "||"
+      case symbol_kind::S_GREATER_EQUAL_OP: // ">="
+      case symbol_kind::S_LESS_EQUAL_OP: // "<="
+      case symbol_kind::S_GREATER_OP: // ">"
+      case symbol_kind::S_LESS_OP: // "<"
+      case symbol_kind::S_EQUAL_EQUAL_OP: // "=="
+      case symbol_kind::S_NOT_EQUAL_OP: // "!="
+      case symbol_kind::S_NOT_OP: // "!"
+      case symbol_kind::S_XOR_OP: // "^"
+      case symbol_kind::S_BIT_AND: // "&"
+      case symbol_kind::S_BIT_OR: // "|"
+      case symbol_kind::S_MINUS_OP: // "-"
+      case symbol_kind::S_PLUS_OP: // "+"
+      case symbol_kind::S_TIMES_OP: // "*"
+      case symbol_kind::S_DIV_OP: // "/"
+      case symbol_kind::S_MOD_OP: // "%"
+      case symbol_kind::S_unary_operator: // unary_operator
         value.copy< std::string > (YY_MOVE (that.value));
+        break;
+
+      case symbol_kind::S_argument_expression_list: // argument_expression_list
+        value.copy< std::vector<Expression> > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_I_CONST: // "i_const"
@@ -3351,6 +3460,27 @@ switch (yykind)
     {
       case symbol_kind::S_constant: // constant
         value.move< Constant > (YY_MOVE (s.value));
+        break;
+
+      case symbol_kind::S_primary_expression: // primary_expression
+      case symbol_kind::S_postfix_expression: // postfix_expression
+      case symbol_kind::S_unary_expression: // unary_expression
+      case symbol_kind::S_cast_expression: // cast_expression
+      case symbol_kind::S_multiplicative_expression: // multiplicative_expression
+      case symbol_kind::S_additive_expression: // additive_expression
+      case symbol_kind::S_shift_expression: // shift_expression
+      case symbol_kind::S_relational_expression: // relational_expression
+      case symbol_kind::S_equality_expression: // equality_expression
+      case symbol_kind::S_and_expression: // and_expression
+      case symbol_kind::S_exclusive_or_expression: // exclusive_or_expression
+      case symbol_kind::S_inclusive_or_expression: // inclusive_or_expression
+      case symbol_kind::S_logical_and_expression: // logical_and_expression
+      case symbol_kind::S_logical_or_expression: // logical_or_expression
+      case symbol_kind::S_conditional_expression: // conditional_expression
+      case symbol_kind::S_assignment_expression: // assignment_expression
+      case symbol_kind::S_expression: // expression
+      case symbol_kind::S_constant_expression: // constant_expression
+        value.move< Expression > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_F_CONST: // "f_const"
@@ -3401,51 +3531,56 @@ switch (yykind)
       case symbol_kind::S_IMAGINARY: // "imaginary"
       case symbol_kind::S_ELLIPSIS: // "ellipsis"
       case symbol_kind::S_QUESTION: // "question"
-      case symbol_kind::S_SEMICOLON: // "semicolon"
-      case symbol_kind::S_OCURLY: // "ocurly"
-      case symbol_kind::S_CCURLY: // "ccurly"
-      case symbol_kind::S_COMMA: // "comma"
-      case symbol_kind::S_COLON: // "colon"
-      case symbol_kind::S_OPAREN: // "oparen"
-      case symbol_kind::S_CPAREN: // "cparen"
-      case symbol_kind::S_OBRACE: // "obrace"
-      case symbol_kind::S_CBRACE: // "cbrace"
-      case symbol_kind::S_PERIOD: // "period"
-      case symbol_kind::S_TILDE: // "tilde"
-      case symbol_kind::S_EQUAL_OP: // "equal op"
-      case symbol_kind::S_RIGHT_ASSIGN: // "right assign"
-      case symbol_kind::S_LEFT_ASSIGN: // "left assign"
-      case symbol_kind::S_ADD_ASSIGN: // "add assign"
-      case symbol_kind::S_SUB_ASSIGN: // "sub assign"
-      case symbol_kind::S_MUL_ASSIGN: // "mul assign"
-      case symbol_kind::S_DIV_ASSIGN: // "div assign"
-      case symbol_kind::S_MOD_ASSIGN: // "mod assign"
-      case symbol_kind::S_AND_ASSIGN: // "and assign"
-      case symbol_kind::S_XOR_ASSIGN: // "xor assign"
-      case symbol_kind::S_OR_ASSIGN: // "or assign"
-      case symbol_kind::S_RIGHT_OP: // "right op"
-      case symbol_kind::S_LEFT_OP: // "left op"
-      case symbol_kind::S_INC_OP: // "inc op"
-      case symbol_kind::S_DEC_OP: // "dec op"
-      case symbol_kind::S_PTR_OP: // "ptr op"
-      case symbol_kind::S_AND_OP: // "and op"
-      case symbol_kind::S_OR_OP: // "or op"
-      case symbol_kind::S_GE_OP: // "ge op"
-      case symbol_kind::S_LE_OP: // "le op"
-      case symbol_kind::S_GREATER_OP: // "greater op"
-      case symbol_kind::S_LESS_OP: // "less op"
-      case symbol_kind::S_EQ_OP: // "eq op"
-      case symbol_kind::S_NE_OP: // "ne op"
-      case symbol_kind::S_NOT_OP: // "not op"
-      case symbol_kind::S_XOR_OP: // "xor op"
-      case symbol_kind::S_BIT_AND: // "bit and"
-      case symbol_kind::S_BIT_OR: // "bit or"
-      case symbol_kind::S_MINUS_OP: // "minus op"
-      case symbol_kind::S_PLUS_OP: // "plus op"
-      case symbol_kind::S_TIMES_OP: // "times op"
-      case symbol_kind::S_DIV_OP: // "div op"
-      case symbol_kind::S_MOD_OP: // "mod op"
+      case symbol_kind::S_SEMICOLON: // ";"
+      case symbol_kind::S_OCURLY: // "{"
+      case symbol_kind::S_CCURLY: // "}"
+      case symbol_kind::S_COMMA: // ","
+      case symbol_kind::S_COLON: // ":"
+      case symbol_kind::S_OPAREN: // "("
+      case symbol_kind::S_CPAREN: // ")"
+      case symbol_kind::S_OBRACE: // "["
+      case symbol_kind::S_CBRACE: // "]"
+      case symbol_kind::S_PERIOD: // "."
+      case symbol_kind::S_TILDE: // "~"
+      case symbol_kind::S_EQUAL_OP: // "="
+      case symbol_kind::S_RIGHT_ASSIGN: // ">>="
+      case symbol_kind::S_LEFT_ASSIGN: // "<<="
+      case symbol_kind::S_ADD_ASSIGN: // "+="
+      case symbol_kind::S_SUB_ASSIGN: // "-="
+      case symbol_kind::S_MUL_ASSIGN: // "*="
+      case symbol_kind::S_DIV_ASSIGN: // "/="
+      case symbol_kind::S_MOD_ASSIGN: // "%="
+      case symbol_kind::S_AND_ASSIGN: // "&="
+      case symbol_kind::S_XOR_ASSIGN: // "^="
+      case symbol_kind::S_OR_ASSIGN: // "|="
+      case symbol_kind::S_RIGHT_OP: // ">>"
+      case symbol_kind::S_LEFT_OP: // "<<"
+      case symbol_kind::S_INC_OP: // "++"
+      case symbol_kind::S_DEC_OP: // "--"
+      case symbol_kind::S_PTR_OP: // "->"
+      case symbol_kind::S_AND_OP: // "&&"
+      case symbol_kind::S_OR_OP: // "||"
+      case symbol_kind::S_GREATER_EQUAL_OP: // ">="
+      case symbol_kind::S_LESS_EQUAL_OP: // "<="
+      case symbol_kind::S_GREATER_OP: // ">"
+      case symbol_kind::S_LESS_OP: // "<"
+      case symbol_kind::S_EQUAL_EQUAL_OP: // "=="
+      case symbol_kind::S_NOT_EQUAL_OP: // "!="
+      case symbol_kind::S_NOT_OP: // "!"
+      case symbol_kind::S_XOR_OP: // "^"
+      case symbol_kind::S_BIT_AND: // "&"
+      case symbol_kind::S_BIT_OR: // "|"
+      case symbol_kind::S_MINUS_OP: // "-"
+      case symbol_kind::S_PLUS_OP: // "+"
+      case symbol_kind::S_TIMES_OP: // "*"
+      case symbol_kind::S_DIV_OP: // "/"
+      case symbol_kind::S_MOD_OP: // "%"
+      case symbol_kind::S_unary_operator: // unary_operator
         value.move< std::string > (YY_MOVE (s.value));
+        break;
+
+      case symbol_kind::S_argument_expression_list: // argument_expression_list
+        value.move< std::vector<Expression> > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_I_CONST: // "i_const"
@@ -3519,7 +3654,7 @@ switch (yykind)
 
 #line 9 "parser.y"
 } //  WadeSpace 
-#line 3523 "parser.hpp"
+#line 3658 "parser.hpp"
 
 
 

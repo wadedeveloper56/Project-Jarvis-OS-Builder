@@ -727,48 +727,8 @@ static const flex_int16_t yy_chk[661] =
     //
     // Location class can be found in location.hh and posistion.hh files. It's just a bit too much
     // boilerplate for this small example. Bummer.
-    /*
-    "case"           { count(); return(CASE); }
-"char"           { count(); return(CHAR); }
-"const"          { count(); return(CONST); }
-"continue"       { count(); return(CONTINUE); }
-"default"        { count(); return(DEFAULT); }
-"do"             { count(); return(DO); }
-"double"         { count(); return(DOUBLE); }
-"long double"    { count(); return(LONGDOUBLE); }
-"else"           { count(); return(ELSE); }
-"enum"           { count(); return(ENUM); }
-"extern"         { count(); return(EXTERN); }
-"float"          { count(); return(FLOAT); }
-"for"            { count(); return(FOR); }
-"goto"           { count(); return(GOTO); }
-"if"             { count(); return(IF); }
-"inline"         { count(); return(INLINE); }
-"int"            { count(); return(INT); }
-"long"           { count(); return(LONG); }
-"long long"      { count(); return(LONGLONG); }
-"register"       { count(); return(REGISTER); }
-"restrict"       { count(); return(RESTRICT); }
-"return"         { count(); return(RETURN); }
-"short"          { count(); return(SHORT); }
-"signed"         { count(); return(SIGNED); }
-"sizeof"         { count(); return(SIZEOF); }
-"static"         { count(); return(STATIC); }
-"struct"         { count(); return(STRUCT); }
-"switch"         { count(); return(SWITCH); }
-"typedef"        { count(); return(TYPEDEF); }
-"union"          { count(); return(UNION); }
-"unsigned"       { count(); return(UNSIGNED); }
-"void"           { count(); return(VOID); }
-"volatile"       { count(); return(VOLATILE); }
-"while"          { count(); return(WHILE); }
-"bool"           { count(); return BOOL; }
-"complex"        { count(); return COMPLEX; }
-"imaginary"      { count(); return IMAGINARY; }
-*/
-
-#line 770 "scanner.cpp"
-#line 771 "scanner.cpp"
+#line 730 "scanner.cpp"
+#line 731 "scanner.cpp"
 
 #define INITIAL 0
 
@@ -900,11 +860,11 @@ YY_DECL
 		}
 
 	{
-#line 128 "scanner.l"
+#line 88 "scanner.l"
 
 
 
-#line 907 "scanner.cpp"
+#line 867 "scanner.cpp"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -963,7 +923,7 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 131 "scanner.l"
+#line 91 "scanner.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_AUTO(yytext, WadeSpace::location()); 
@@ -971,7 +931,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 135 "scanner.l"
+#line 95 "scanner.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_BREAK(yytext, WadeSpace::location()); 
@@ -979,7 +939,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 139 "scanner.l"
+#line 99 "scanner.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_CASE(yytext, WadeSpace::location()); 
@@ -987,7 +947,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 143 "scanner.l"
+#line 103 "scanner.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_CHAR(yytext, WadeSpace::location()); 
@@ -995,7 +955,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 147 "scanner.l"
+#line 107 "scanner.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_CONST(yytext, WadeSpace::location()); 
@@ -1003,7 +963,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 151 "scanner.l"
+#line 111 "scanner.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_CONTINUE(yytext, WadeSpace::location()); 
@@ -1011,7 +971,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 155 "scanner.l"
+#line 115 "scanner.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_DEFAULT(yytext, WadeSpace::location()); 
@@ -1019,7 +979,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 159 "scanner.l"
+#line 119 "scanner.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_DO(yytext, WadeSpace::location()); 
@@ -1027,7 +987,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 163 "scanner.l"
+#line 123 "scanner.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_DOUBLE(yytext, WadeSpace::location()); 
@@ -1035,7 +995,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 167 "scanner.l"
+#line 127 "scanner.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_LONG_DOUBLE(yytext, WadeSpace::location()); 
@@ -1043,7 +1003,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 171 "scanner.l"
+#line 131 "scanner.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_ELSE(yytext, WadeSpace::location()); 
@@ -1051,7 +1011,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 175 "scanner.l"
+#line 135 "scanner.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_ENUM(yytext, WadeSpace::location()); 
@@ -1059,7 +1019,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 179 "scanner.l"
+#line 139 "scanner.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_EXTERN(yytext, WadeSpace::location()); 
@@ -1067,7 +1027,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 183 "scanner.l"
+#line 143 "scanner.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_FLOAT(yytext, WadeSpace::location()); 
@@ -1075,7 +1035,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 187 "scanner.l"
+#line 147 "scanner.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_FOR(yytext, WadeSpace::location()); 
@@ -1083,7 +1043,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 191 "scanner.l"
+#line 151 "scanner.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_GOTO(yytext, WadeSpace::location()); 
@@ -1091,7 +1051,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 195 "scanner.l"
+#line 155 "scanner.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_IF(yytext, WadeSpace::location()); 
@@ -1099,7 +1059,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 199 "scanner.l"
+#line 159 "scanner.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_INLINE(yytext, WadeSpace::location()); 
@@ -1107,7 +1067,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 203 "scanner.l"
+#line 163 "scanner.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_INT(yytext, WadeSpace::location()); 
@@ -1115,7 +1075,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 207 "scanner.l"
+#line 167 "scanner.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_LONG(yytext, WadeSpace::location()); 
@@ -1123,7 +1083,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 211 "scanner.l"
+#line 171 "scanner.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_LONG_LONG(yytext, WadeSpace::location()); 
@@ -1131,7 +1091,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 215 "scanner.l"
+#line 175 "scanner.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_REGISTER(yytext, WadeSpace::location()); 
@@ -1139,7 +1099,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 219 "scanner.l"
+#line 179 "scanner.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_RESTRICT(yytext, WadeSpace::location()); 
@@ -1147,7 +1107,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 223 "scanner.l"
+#line 183 "scanner.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_RETURN(yytext, WadeSpace::location()); 
@@ -1155,7 +1115,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 227 "scanner.l"
+#line 187 "scanner.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_SHORT(yytext, WadeSpace::location()); 
@@ -1163,7 +1123,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 231 "scanner.l"
+#line 191 "scanner.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_SIGNED(yytext, WadeSpace::location()); 
@@ -1171,7 +1131,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 235 "scanner.l"
+#line 195 "scanner.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_SIZEOF(yytext, WadeSpace::location()); 
@@ -1179,7 +1139,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 239 "scanner.l"
+#line 199 "scanner.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_STATIC(yytext, WadeSpace::location()); 
@@ -1187,7 +1147,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 243 "scanner.l"
+#line 203 "scanner.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_STRUCT(yytext, WadeSpace::location()); 
@@ -1195,7 +1155,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 247 "scanner.l"
+#line 207 "scanner.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_SWITCH(yytext, WadeSpace::location()); 
@@ -1203,7 +1163,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 251 "scanner.l"
+#line 211 "scanner.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_TYPEDEF(yytext, WadeSpace::location()); 
@@ -1211,7 +1171,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 255 "scanner.l"
+#line 215 "scanner.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_UNION(yytext, WadeSpace::location()); 
@@ -1219,7 +1179,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 259 "scanner.l"
+#line 219 "scanner.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_UNSIGNED(yytext, WadeSpace::location()); 
@@ -1227,7 +1187,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 263 "scanner.l"
+#line 223 "scanner.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_VOID(yytext, WadeSpace::location()); 
@@ -1235,7 +1195,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 267 "scanner.l"
+#line 227 "scanner.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_VOLATILE(yytext, WadeSpace::location()); 
@@ -1243,7 +1203,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 271 "scanner.l"
+#line 231 "scanner.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_WHILE(yytext, WadeSpace::location()); 
@@ -1251,7 +1211,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 275 "scanner.l"
+#line 235 "scanner.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_BOOL(yytext, WadeSpace::location()); 
@@ -1259,7 +1219,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 279 "scanner.l"
+#line 239 "scanner.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_COMPLEX(yytext, WadeSpace::location()); 
@@ -1267,7 +1227,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 283 "scanner.l"
+#line 243 "scanner.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_IMAGINARY(yytext, WadeSpace::location()); 
@@ -1275,7 +1235,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 288 "scanner.l"
+#line 248 "scanner.l"
 { 
                 cout << "Scanner: identifier [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_IDENTIFIER(yytext, WadeSpace::location()); 
@@ -1283,7 +1243,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 292 "scanner.l"
+#line 252 "scanner.l"
 {
                 cout << "Scanner: decimal number: " << yytext << endl;
                 uint64_t number = strtoull(yytext, 0, 10);
@@ -1292,7 +1252,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 297 "scanner.l"
+#line 257 "scanner.l"
 {
                 cout << "Scanner: decimal number: " << yytext << endl;
                 uint64_t number = strtoull(yytext, 0, 10);
@@ -1301,7 +1261,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 302 "scanner.l"
+#line 262 "scanner.l"
 {
                 cout << "Scanner: decimal number: " << yytext << endl;
                 uint64_t number = strtoull(yytext, 0, 10);
@@ -1310,7 +1270,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 307 "scanner.l"
+#line 267 "scanner.l"
 {
                 cout << "Scanner: decimal number: " << yytext << endl;
                 uint64_t number = strtoull(yytext, 0, 10);
@@ -1319,7 +1279,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 312 "scanner.l"
+#line 272 "scanner.l"
 {              
                 cout << "Scanner: decimal number: " << yytext << endl;
                 long double number = strtold(yytext, NULL);
@@ -1328,7 +1288,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 317 "scanner.l"
+#line 277 "scanner.l"
 {              
                 cout << "Scanner: decimal number: " << yytext << endl;
                 long double number = strtold(yytext, NULL);
@@ -1337,7 +1297,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 322 "scanner.l"
+#line 282 "scanner.l"
 {              
                 cout << "Scanner: decimal number: " << yytext << endl;
                 long double number = strtold(yytext, NULL);
@@ -1346,7 +1306,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 327 "scanner.l"
+#line 287 "scanner.l"
 {              
                 cout << "Scanner: decimal number: " << yytext << endl;
                 long double number = strtold(yytext, NULL);
@@ -1355,7 +1315,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 332 "scanner.l"
+#line 292 "scanner.l"
 {              
                 cout << "Scanner: decimal number: " << yytext << endl;
                 long double number = strtold(yytext, NULL);
@@ -1364,7 +1324,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 337 "scanner.l"
+#line 297 "scanner.l"
 {              
                 cout << "Scanner: decimal number: " << yytext << endl;
                 long double number = strtold(yytext, NULL);
@@ -1374,7 +1334,7 @@ YY_RULE_SETUP
 case 51:
 /* rule 51 can match eol */
 YY_RULE_SETUP
-#line 343 "scanner.l"
+#line 303 "scanner.l"
 { 
                 cout << "Scanner: string literal [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_STRING_LITERAL(yytext, WadeSpace::location()); 
@@ -1382,395 +1342,395 @@ YY_RULE_SETUP
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 348 "scanner.l"
+#line 308 "scanner.l"
 {
-                cout << "Scanner: '...'" << endl;
-                return WadeSpace::Parser::make_ELLIPSIS("...",WadeSpace::location());
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_ELLIPSIS(yytext,WadeSpace::location());
                }
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
-#line 352 "scanner.l"
+#line 312 "scanner.l"
 {
-                cout << "Scanner: '?'" << endl;
-                return WadeSpace::Parser::make_QUESTION("?",WadeSpace::location());
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_QUESTION(yytext,WadeSpace::location());
                }
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
-#line 356 "scanner.l"
+#line 316 "scanner.l"
 {
-                cout << "Scanner: ';'" << endl;
-                return WadeSpace::Parser::make_SEMICOLON(";",WadeSpace::location());
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_SEMICOLON(yytext,WadeSpace::location());
                }
 	YY_BREAK
 case 55:
 YY_RULE_SETUP
-#line 360 "scanner.l"
+#line 320 "scanner.l"
 {
-                cout << "Scanner: '{'" << endl;
-                return WadeSpace::Parser::make_OCURLY("{",WadeSpace::location());
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_OCURLY(yytext,WadeSpace::location());
                }
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
-#line 364 "scanner.l"
+#line 324 "scanner.l"
 {
-                cout << "Scanner: '}'" << endl;
-                return WadeSpace::Parser::make_CCURLY("}",WadeSpace::location());
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_CCURLY(yytext,WadeSpace::location());
                }
 	YY_BREAK
 case 57:
 YY_RULE_SETUP
-#line 368 "scanner.l"
+#line 328 "scanner.l"
 {
-                cout << "Scanner: ','" << endl;
-                return WadeSpace::Parser::make_COMMA(",",WadeSpace::location());
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_COMMA(yytext,WadeSpace::location());
                }
 	YY_BREAK
 case 58:
 YY_RULE_SETUP
-#line 372 "scanner.l"
+#line 332 "scanner.l"
 {
-                cout << "Scanner: ','" << endl;
-                return WadeSpace::Parser::make_COLON(":",WadeSpace::location());
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_COLON(yytext,WadeSpace::location());
                }
 	YY_BREAK
 case 59:
 YY_RULE_SETUP
-#line 376 "scanner.l"
+#line 336 "scanner.l"
 {
-                cout << "Scanner: '('" << endl;
-                return WadeSpace::Parser::make_OPAREN("(",WadeSpace::location());
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_OPAREN(yytext,WadeSpace::location());
                }
 	YY_BREAK
 case 60:
 YY_RULE_SETUP
-#line 380 "scanner.l"
+#line 340 "scanner.l"
 {
-                cout << "Scanner: ')'" << endl;
-                return WadeSpace::Parser::make_OPAREN(")",WadeSpace::location());
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_CPAREN(yytext,WadeSpace::location());
                }
 	YY_BREAK
 case 61:
 YY_RULE_SETUP
-#line 384 "scanner.l"
+#line 344 "scanner.l"
 {
-                cout << "Scanner: '['" << endl;
-                return WadeSpace::Parser::make_OBRACE("[",WadeSpace::location());
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_OBRACE(yytext,WadeSpace::location());
                }
 	YY_BREAK
 case 62:
 YY_RULE_SETUP
-#line 388 "scanner.l"
+#line 348 "scanner.l"
 {
-                cout << "Scanner: ']'" << endl;
-                return WadeSpace::Parser::make_CBRACE("]",WadeSpace::location());
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_CBRACE(yytext,WadeSpace::location());
                }
 	YY_BREAK
 case 63:
 YY_RULE_SETUP
-#line 392 "scanner.l"
+#line 352 "scanner.l"
 {
-                cout << "Scanner: '.'" << endl;
-                return WadeSpace::Parser::make_PERIOD(".",WadeSpace::location());
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_PERIOD(yytext,WadeSpace::location());
                }
 	YY_BREAK
 case 64:
 YY_RULE_SETUP
-#line 396 "scanner.l"
+#line 356 "scanner.l"
 {
-                cout << "Scanner: '~'" << endl;
-                return WadeSpace::Parser::make_TILDE("`",WadeSpace::location());
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_TILDE(yytext,WadeSpace::location());
                }
 	YY_BREAK
 case 65:
 YY_RULE_SETUP
-#line 401 "scanner.l"
+#line 360 "scanner.l"
 {
-                cout << "Scanner: '='" << endl;
-                return WadeSpace::Parser::make_EQUAL_OP("=",WadeSpace::location());
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_EQUAL_OP(yytext,WadeSpace::location());
                }
 	YY_BREAK
 case 66:
 YY_RULE_SETUP
-#line 405 "scanner.l"
+#line 364 "scanner.l"
 {
-                cout << "Scanner: '>>='" << endl;
-                return WadeSpace::Parser::make_RIGHT_ASSIGN(">>=",WadeSpace::location());
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_RIGHT_ASSIGN(yytext,WadeSpace::location());
                }
 	YY_BREAK
 case 67:
 YY_RULE_SETUP
-#line 409 "scanner.l"
+#line 368 "scanner.l"
 {
-                cout << "Scanner: '<<='" << endl;
-                return WadeSpace::Parser::make_LEFT_ASSIGN("<<=",WadeSpace::location());
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_LEFT_ASSIGN(yytext,WadeSpace::location());
                }
 	YY_BREAK
 case 68:
 YY_RULE_SETUP
-#line 413 "scanner.l"
+#line 372 "scanner.l"
 {
-                cout << "Scanner: '+='" << endl;
-                return WadeSpace::Parser::make_ADD_ASSIGN("+=",WadeSpace::location());
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_ADD_ASSIGN(yytext,WadeSpace::location());
                }
 	YY_BREAK
 case 69:
 YY_RULE_SETUP
-#line 417 "scanner.l"
+#line 376 "scanner.l"
 {
-                cout << "Scanner: '-='" << endl;
-                return WadeSpace::Parser::make_SUB_ASSIGN("-=",WadeSpace::location());
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_SUB_ASSIGN(yytext,WadeSpace::location());
                }
 	YY_BREAK
 case 70:
 YY_RULE_SETUP
-#line 421 "scanner.l"
+#line 380 "scanner.l"
 {
-                cout << "Scanner: '*='" << endl;
-                return WadeSpace::Parser::make_MUL_ASSIGN("*=",WadeSpace::location());
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_MUL_ASSIGN(yytext,WadeSpace::location());
                }
 	YY_BREAK
 case 71:
 YY_RULE_SETUP
-#line 425 "scanner.l"
+#line 384 "scanner.l"
 {
-                cout << "Scanner: '/='" << endl;
-                return WadeSpace::Parser::make_DIV_ASSIGN("/=",WadeSpace::location());
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_DIV_ASSIGN(yytext,WadeSpace::location());
                }
 	YY_BREAK
 case 72:
 YY_RULE_SETUP
-#line 429 "scanner.l"
+#line 388 "scanner.l"
 {
-                cout << "Scanner: '%='" << endl;
-                return WadeSpace::Parser::make_MOD_ASSIGN("%=",WadeSpace::location());
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_MOD_ASSIGN(yytext,WadeSpace::location());
                }
 	YY_BREAK
 case 73:
 YY_RULE_SETUP
-#line 433 "scanner.l"
+#line 392 "scanner.l"
 {
-                cout << "Scanner: '&='" << endl;
-                return WadeSpace::Parser::make_AND_ASSIGN("&=",WadeSpace::location());
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_AND_ASSIGN(yytext,WadeSpace::location());
                }
 	YY_BREAK
 case 74:
 YY_RULE_SETUP
-#line 437 "scanner.l"
+#line 396 "scanner.l"
 {
-                cout << "Scanner: '^='" << endl;
-                return WadeSpace::Parser::make_XOR_ASSIGN("^=",WadeSpace::location());
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_XOR_ASSIGN(yytext,WadeSpace::location());
                }
 	YY_BREAK
 case 75:
 YY_RULE_SETUP
-#line 441 "scanner.l"
+#line 400 "scanner.l"
 {
-                cout << "Scanner: '|='" << endl;
-                return WadeSpace::Parser::make_OR_ASSIGN("|=",WadeSpace::location());
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_OR_ASSIGN(yytext,WadeSpace::location());
                }
 	YY_BREAK
 case 76:
 YY_RULE_SETUP
-#line 445 "scanner.l"
+#line 404 "scanner.l"
 {
-                cout << "Scanner: '>>'" << endl;
-                return WadeSpace::Parser::make_RIGHT_OP(">>",WadeSpace::location());
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_RIGHT_OP(yytext,WadeSpace::location());
                }
 	YY_BREAK
 case 77:
 YY_RULE_SETUP
-#line 449 "scanner.l"
+#line 408 "scanner.l"
 {
-                cout << "Scanner: '<<'" << endl;
-                return WadeSpace::Parser::make_LEFT_OP("<<",WadeSpace::location());
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_LEFT_OP(yytext,WadeSpace::location());
                }
 	YY_BREAK
 case 78:
 YY_RULE_SETUP
-#line 453 "scanner.l"
+#line 412 "scanner.l"
 {
-                cout << "Scanner: '++'" << endl;
-                return WadeSpace::Parser::make_INC_OP("++",WadeSpace::location());
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_INC_OP(yytext,WadeSpace::location());
                }
 	YY_BREAK
 case 79:
 YY_RULE_SETUP
-#line 457 "scanner.l"
+#line 416 "scanner.l"
 {
-                cout << "Scanner: '--'" << endl;
-                return WadeSpace::Parser::make_DEC_OP("--",WadeSpace::location());
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_DEC_OP(yytext,WadeSpace::location());
                }
 	YY_BREAK
 case 80:
 YY_RULE_SETUP
-#line 461 "scanner.l"
+#line 420 "scanner.l"
 {
-                cout << "Scanner: '->'" << endl;
-                return WadeSpace::Parser::make_PTR_OP("->",WadeSpace::location());
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_PTR_OP(yytext,WadeSpace::location());
                }
 	YY_BREAK
 case 81:
 YY_RULE_SETUP
-#line 465 "scanner.l"
+#line 424 "scanner.l"
 {
-                cout << "Scanner: '&&'" << endl;
-                return WadeSpace::Parser::make_AND_OP("->",WadeSpace::location());
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_AND_OP(yytext,WadeSpace::location());
                }
 	YY_BREAK
 case 82:
 YY_RULE_SETUP
-#line 469 "scanner.l"
+#line 428 "scanner.l"
 {
-                cout << "Scanner: '||'" << endl;
-                return WadeSpace::Parser::make_OR_OP("||",WadeSpace::location());
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_OR_OP(yytext,WadeSpace::location());
                }
 	YY_BREAK
 case 83:
 YY_RULE_SETUP
-#line 473 "scanner.l"
+#line 432 "scanner.l"
 {
-                cout << "Scanner: '<'" << endl;
-                return WadeSpace::Parser::make_LESS_OP("<",WadeSpace::location());
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_LESS_OP(yytext,WadeSpace::location());
                }
 	YY_BREAK
 case 84:
 YY_RULE_SETUP
-#line 477 "scanner.l"
+#line 436 "scanner.l"
 {
-                cout << "Scanner: '>'" << endl;
-                return WadeSpace::Parser::make_GREATER_OP(">",WadeSpace::location());
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_GREATER_OP(yytext,WadeSpace::location());
                }
 	YY_BREAK
 case 85:
 YY_RULE_SETUP
-#line 481 "scanner.l"
+#line 440 "scanner.l"
 {
-                cout << "Scanner: '<='" << endl;
-                return WadeSpace::Parser::make_LE_OP("<=",WadeSpace::location());
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_LESS_EQUAL_OP(yytext,WadeSpace::location());
                }
 	YY_BREAK
 case 86:
 YY_RULE_SETUP
-#line 485 "scanner.l"
+#line 444 "scanner.l"
 {
-                cout << "Scanner: '>='" << endl;
-                return WadeSpace::Parser::make_GE_OP(">=",WadeSpace::location());
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_GREATER_EQUAL_OP(yytext,WadeSpace::location());
                }
 	YY_BREAK
 case 87:
 YY_RULE_SETUP
-#line 489 "scanner.l"
+#line 448 "scanner.l"
 {
-                cout << "Scanner: '=='" << endl;
-                return WadeSpace::Parser::make_EQ_OP("==",WadeSpace::location());
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_EQUAL_EQUAL_OP(yytext,WadeSpace::location());
                }
 	YY_BREAK
 case 88:
 YY_RULE_SETUP
-#line 493 "scanner.l"
+#line 452 "scanner.l"
 {
-                cout << "Scanner: '!='" << endl;
-                return WadeSpace::Parser::make_NE_OP("!=",WadeSpace::location());
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_NOT_EQUAL_OP(yytext,WadeSpace::location());
                }
 	YY_BREAK
 case 89:
 YY_RULE_SETUP
-#line 497 "scanner.l"
+#line 456 "scanner.l"
 {
-                cout << "Scanner: '!'" << endl;
-                return WadeSpace::Parser::make_NOT_OP("!",WadeSpace::location());
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_NOT_OP(yytext,WadeSpace::location());
                }
 	YY_BREAK
 case 90:
 YY_RULE_SETUP
-#line 501 "scanner.l"
+#line 460 "scanner.l"
 {
-                cout << "Scanner: '!='" << endl;
-                return WadeSpace::Parser::make_XOR_OP("!=",WadeSpace::location());
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_XOR_OP(yytext,WadeSpace::location());
                }
 	YY_BREAK
 case 91:
 YY_RULE_SETUP
-#line 505 "scanner.l"
+#line 464 "scanner.l"
 {
-                cout << "Scanner: '&'" << endl;
-                return WadeSpace::Parser::make_BIT_AND("&",WadeSpace::location());
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_BIT_AND(yytext,WadeSpace::location());
                }
 	YY_BREAK
 case 92:
 YY_RULE_SETUP
-#line 509 "scanner.l"
+#line 468 "scanner.l"
 {
-                cout << "Scanner: '|'" << endl;
-                return WadeSpace::Parser::make_BIT_OR("|",WadeSpace::location());
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_BIT_OR(yytext,WadeSpace::location());
                }
 	YY_BREAK
 case 93:
 YY_RULE_SETUP
-#line 513 "scanner.l"
+#line 472 "scanner.l"
 {
-                cout << "Scanner: '-'" << endl;
-                return WadeSpace::Parser::make_MINUS_OP("-",WadeSpace::location());
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_MINUS_OP(yytext,WadeSpace::location());
                }
 	YY_BREAK
 case 94:
 YY_RULE_SETUP
-#line 517 "scanner.l"
+#line 476 "scanner.l"
 {
-                cout << "Scanner: '+'" << endl;
-                return WadeSpace::Parser::make_PLUS_OP("+",WadeSpace::location());
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_PLUS_OP(yytext,WadeSpace::location());
                }
 	YY_BREAK
 case 95:
 YY_RULE_SETUP
-#line 521 "scanner.l"
+#line 480 "scanner.l"
 {
-                cout << "Scanner: '*'" << endl;
-                return WadeSpace::Parser::make_TIMES_OP("*",WadeSpace::location());
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_TIMES_OP(yytext,WadeSpace::location());
                }
 	YY_BREAK
 case 96:
 YY_RULE_SETUP
-#line 525 "scanner.l"
+#line 484 "scanner.l"
 {
-                cout << "Scanner: '/'" << endl;
-                return WadeSpace::Parser::make_DIV_OP("/",WadeSpace::location());
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_DIV_OP(yytext,WadeSpace::location());
                }
 	YY_BREAK
 case 97:
 YY_RULE_SETUP
-#line 529 "scanner.l"
+#line 488 "scanner.l"
 {
-                cout << "Scanner: '%'" << endl;
-                return WadeSpace::Parser::make_TIMES_OP("%",WadeSpace::location());
+                cout << "Scanner: token [" << yytext << "]" << endl;
+                return WadeSpace::Parser::make_MOD_OP(yytext,WadeSpace::location());
                }
 	YY_BREAK
 case 98:
 /* rule 98 can match eol */
 YY_RULE_SETUP
-#line 533 "scanner.l"
+#line 492 "scanner.l"
 { }
 	YY_BREAK
 case 99:
 YY_RULE_SETUP
-#line 534 "scanner.l"
+#line 493 "scanner.l"
 { 
                 cout << "Scanner: unknown character [" << yytext << "]" << endl; 
                }           
 	YY_BREAK
 case YY_STATE_EOF(INITIAL):
-#line 537 "scanner.l"
+#line 496 "scanner.l"
 { return yyterminate(); }
 	YY_BREAK
 case 100:
 YY_RULE_SETUP
-#line 539 "scanner.l"
+#line 498 "scanner.l"
 YY_FATAL_ERROR( "flex scanner jammed" );
 	YY_BREAK
-#line 1773 "scanner.cpp"
+#line 1733 "scanner.cpp"
 
 	case YY_END_OF_BUFFER:
 		{
@@ -2731,5 +2691,5 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 539 "scanner.l"
+#line 498 "scanner.l"
 

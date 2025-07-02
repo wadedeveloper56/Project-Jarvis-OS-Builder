@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Constant.h" />
+    <ClInclude Include="Expression.h" />
     <ClInclude Include="interpreter.h" />
     <ClInclude Include="location.hh" />
     <ClInclude Include="parser.hpp" />
@@ -29,6 +30,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Constant.cpp" />
+    <ClCompile Include="Expression.cpp" />
     <ClCompile Include="interpreter.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="parser.cpp" />

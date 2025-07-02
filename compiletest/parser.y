@@ -14,7 +14,8 @@
     #include <vector>
     #include <stdint.h>
     #include <stdlib.h>
-    #include "constant.h"
+    #include "Constant.h"
+    #include "Expression.h"
 
     using namespace std;
 
@@ -107,61 +108,82 @@
 %token <std::string> IMAGINARY "imaginary"
 %token <std::string> ELLIPSIS "ellipsis"
 %token <std::string> QUESTION "question"
-%token <std::string> SEMICOLON "semicolon"
-%token <std::string> OCURLY "ocurly"
-%token <std::string> CCURLY "ccurly"
-%token <std::string> COMMA "comma"
-%token <std::string> COLON "colon"
-%token <std::string> OPAREN "oparen"
-%token <std::string> CPAREN "cparen"
-%token <std::string> OBRACE "obrace"
-%token <std::string> CBRACE "cbrace"
-%token <std::string> PERIOD "period"
-%token <std::string> TILDE "tilde"
-%token <std::string> EQUAL_OP "equal op"
-%token <std::string> RIGHT_ASSIGN "right assign"
-%token <std::string> LEFT_ASSIGN "left assign"
-%token <std::string> ADD_ASSIGN "add assign"
-%token <std::string> SUB_ASSIGN "sub assign"
-%token <std::string> MUL_ASSIGN "mul assign"
-%token <std::string> DIV_ASSIGN "div assign"
-%token <std::string> MOD_ASSIGN "mod assign"
-%token <std::string> AND_ASSIGN "and assign"
-%token <std::string> XOR_ASSIGN "xor assign"
-%token <std::string> OR_ASSIGN "or assign"
-%token <std::string> RIGHT_OP "right op"
-%token <std::string> LEFT_OP "left op"
-%token <std::string> INC_OP "inc op"
-%token <std::string> DEC_OP "dec op"
-%token <std::string> PTR_OP "ptr op"
-%token <std::string> AND_OP "and op"
-%token <std::string> OR_OP "or op"
-%token <std::string> GE_OP "ge op"
-%token <std::string> LE_OP "le op"
-%token <std::string> GREATER_OP "greater op"
-%token <std::string> LESS_OP "less op"
-%token <std::string> EQ_OP "eq op"
-%token <std::string> NE_OP "ne op"
-%token <std::string> NOT_OP "not op"
-%token <std::string> XOR_OP "xor op"
-%token <std::string> BIT_AND "bit and"
-%token <std::string> BIT_OR "bit or"
-%token <std::string> MINUS_OP "minus op"
-%token <std::string> PLUS_OP "plus op"
-%token <std::string> TIMES_OP "times op"
-%token <std::string> DIV_OP "div op"
-%token <std::string> MOD_OP "mod op"
+%token <std::string> SEMICOLON ";"
+%token <std::string> OCURLY "{"
+%token <std::string> CCURLY "}"
+%token <std::string> COMMA ","
+%token <std::string> COLON ":"
+%token <std::string> OPAREN "("
+%token <std::string> CPAREN ")"
+%token <std::string> OBRACE "["
+%token <std::string> CBRACE "]"
+%token <std::string> PERIOD "."
+%token <std::string> TILDE "~"
+%token <std::string> EQUAL_OP "="
+%token <std::string> RIGHT_ASSIGN ">>="
+%token <std::string> LEFT_ASSIGN "<<="
+%token <std::string> ADD_ASSIGN "+="
+%token <std::string> SUB_ASSIGN "-="
+%token <std::string> MUL_ASSIGN "*="
+%token <std::string> DIV_ASSIGN "/="
+%token <std::string> MOD_ASSIGN "%="
+%token <std::string> AND_ASSIGN "&="
+%token <std::string> XOR_ASSIGN "^="
+%token <std::string> OR_ASSIGN "|="
+%token <std::string> RIGHT_OP ">>"
+%token <std::string> LEFT_OP "<<"
+%token <std::string> INC_OP "++"
+%token <std::string> DEC_OP "--"
+%token <std::string> PTR_OP "->"
+%token <std::string> AND_OP "&&"
+%token <std::string> OR_OP "||"
+%token <std::string> GREATER_EQUAL_OP ">="
+%token <std::string> LESS_EQUAL_OP "<="
+%token <std::string> GREATER_OP ">"
+%token <std::string> LESS_OP "<"
+%token <std::string> EQUAL_EQUAL_OP "=="
+%token <std::string> NOT_EQUAL_OP "!="
+%token <std::string> NOT_OP "!"
+%token <std::string> XOR_OP "^"
+%token <std::string> BIT_AND "&"
+%token <std::string> BIT_OR "|"
+%token <std::string> MINUS_OP "-"
+%token <std::string> PLUS_OP "+"
+%token <std::string> TIMES_OP "*"
+%token <std::string> DIV_OP "/"
+%token <std::string> MOD_OP "%"
 
 %type<Constant> constant
+%type<std::vector<Expression>> argument_expression_list
+%type<Expression> primary_expression
+%type<Expression> expression
+%type<Expression> postfix_expression
+%type<Expression> unary_expression
+%type<Expression> cast_expression
+%type<Expression> multiplicative_expression
+%type<Expression> additive_expression
+%type<Expression> shift_expression
+%type<Expression> relational_expression
+%type<Expression> equality_expression
+%type<Expression> and_expression
+%type<Expression> exclusive_or_expression
+%type<Expression> inclusive_or_expression
+%type<Expression> logical_and_expression
+%type<Expression> logical_or_expression
+%type<Expression> conditional_expression
+%type<Expression> assignment_expression
+%type<Expression> constant_expression
+%type<std::string> unary_operator
+
 
 %start translation_unit
 
 %%
 
 primary_expression
-    : IDENTIFIER { cout << "IDENTIFIER REDUCE to primary_expression" << endl; }
-    | constant { cout << "constant REDUCE to primary_expression" << endl; }
-    | OPAREN expression CPAREN  { cout << "(expression) REDUCE to primary_expression" << endl; }
+    : IDENTIFIER { $<Expression>$ = Expression($1); cout << "<EXP> IDENTIFIER REDUCE to primary_expression" << endl; }
+    | constant { $<Expression>$ = Expression(&$1); cout << "<EXP> constant REDUCE to primary_expression" << endl; }
+    | OPAREN expression CPAREN  { $<Expression>$ = $2; cout << "<EXP> (expression) REDUCE to primary_expression" << endl; }
     ;
 
 constant
@@ -182,7 +204,7 @@ constant
               }
 
 postfix_expression
-    : primary_expression                                           { cout << "primary_expression REDUCE to postfix_expression" << endl; }
+    : primary_expression                                           { $<Expression>$ = $1; cout << "primary_expression REDUCE to postfix_expression" << endl; }
     | postfix_expression OBRACE expression CBRACE                  { cout << "postfix_expression OBRACE expression CBRACE REDUCE to postfix_expression" << endl; }
     | postfix_expression OPAREN CPAREN                             { cout << "postfix_expression OPAREN CPAREN REDUCE to postfix_expression" << endl; }
     | postfix_expression OPAREN argument_expression_list CPAREN    { cout << "postfix_expression OPAREN argument_expression_list CPAREN REDUCE to postfix_expression" << endl; }
@@ -195,38 +217,49 @@ postfix_expression
 
 
 argument_expression_list
-    : assignment_expression
-    | argument_expression_list ',' assignment_expression
+    : assignment_expression {
+                             Expression exp = $1;
+                             $$ = std::vector<Expression>();
+                             $$.push_back(exp);
+                             cout << "<EXP> assignment_expression REDUCE argument_expression_list" << endl;
+                            }
+    | argument_expression_list COMMA assignment_expression {
+            Expression value1 = $3;
+            std::vector<Expression> &value2 = $1;
+            value2.push_back(value1);
+            $$ = value2;
+            cout << "<EXP> argument_expression_list COMMA assignment_expression REDUCE argument_expression_list" << endl;
+        }
     ;
 
 unary_expression
-    : postfix_expression
-    | INC_OP unary_expression
-    | DEC_OP unary_expression
-    | unary_operator cast_expression
-    | SIZEOF unary_expression
-    | SIZEOF '(' type_name ')'
+    : postfix_expression { $<Expression>$ = $1; cout << "postfix_expression REDUCE unary_expression" << endl;}
+    | INC_OP unary_expression { $<Expression>$ = Expression($1,&$2); cout << "INC_OP unary_expression REDUCE unary_expression" << endl;}
+    | DEC_OP unary_expression { $<Expression>$ = Expression($1,&$2); cout << "DEC_OP unary_expression REDUCE unary_expression" << endl;}
+    | unary_operator cast_expression { $<Expression>$ = Expression($1,&$2); cout << "unary_operator cast_expression REDUCE unary_expression" << endl;}
+    | SIZEOF unary_expression { $<Expression>$ = Expression(); cout << "SIZEOF unary_expression REDUCE unary_expression" << endl;}
+    | SIZEOF OPAREN type_name CPAREN { $<Expression>$ = Expression(); cout << "SIZEOF OPAREN type_name CPAREN REDUCE unary_expression" << endl;}
     ;
 
 unary_operator
-    : '&'
-    | '*'
-    | '+'
-    | '-'
-    | '~'
-    | '!'
+    : BIT_AND   {$<std::string>$ = $1; cout << "BIT_AND REDUCE to unary_operator" << endl;}
+    | TIMES_OP  {$<std::string>$ = $1; cout << "TIMES_OP REDUCE to unary_operator" << endl;}
+    | PLUS_OP   {$<std::string>$ = $1; cout << "PLUS_OP REDUCE to unary_operator" << endl;}
+    | MINUS_OP  {$<std::string>$ = $1; cout << "MINUS_OP REDUCE to unary_operator" << endl;}
+    | TILDE     {$<std::string>$ = $1; cout << "TILDE REDUCE to unary_operator" << endl;}
+    | NOT_OP    {$<std::string>$ = $1; cout << "NOT_OP REDUCE to unary_operator" << endl;}
     ;
 
 cast_expression
-    : unary_expression
-    | '(' type_name ')' cast_expression
+    : unary_expression  { $<Expression>$ = $1; }
+    | OPAREN type_name CPAREN cast_expression  { $<Expression>$ = Expression(); }
     ;
 
 multiplicative_expression
-    : cast_expression
-    | multiplicative_expression '*' cast_expression
-    | multiplicative_expression '/' cast_expression
-    | multiplicative_expression '%' cast_expression
+    : cast_expression  { $<Expression>$ = $1; }
+    | multiplicative_expression TIMES_OP cast_expression
+    | multiplicative_expression DIV_OP cast_expression
+    | multiplicative_expression MOD_OP cast_expression
     ;
 
 additive_expression
@@ -243,16 +276,16 @@ shift_expression
 
 relational_expression
     : shift_expression
-    | relational_expression '<' shift_expression
-    | relational_expression '>' shift_expression
-    | relational_expression LE_OP shift_expression
-    | relational_expression GE_OP shift_expression
+    | relational_expression LESS_OP shift_expression
+    | relational_expression GREATER_OP shift_expression
+    | relational_expression LESS_EQUAL_OP shift_expression
+    | relational_expression GREATER_EQUAL_OP shift_expression
     ;
 
 equality_expression
     : relational_expression
-    | equality_expression EQ_OP relational_expression
-    | equality_expression NE_OP relational_expression
+    | equality_expression EQUAL_EQUAL_OP relational_expression
+    | equality_expression NOT_EQUAL_OP relational_expression
     ;
 
 and_expression
@@ -306,7 +339,7 @@ assignment_operator
 
 expression
     : assignment_expression
-    | expression ',' assignment_expression
+    | expression COMMA assignment_expression
     ;
 
 constant_expression
@@ -314,8 +347,8 @@ constant_expression
     ;
 
 declaration
-    : declaration_specifiers ';'
-    | declaration_specifiers init_declarator_list ';'
+    : declaration_specifiers SEMICOLON
+    | declaration_specifiers init_declarator_list SEMICOLON
     ;
 
 declaration_specifiers
@@ -329,7 +362,7 @@ declaration_specifiers
 
 init_declarator_list
     : init_declarator
-    | init_declarator_list ',' init_declarator
+    | init_declarator_list COMMA init_declarator
     ;
 
 init_declarator
@@ -361,8 +394,8 @@ type_specifier
     ;
 
 struct_or_union_specifier
-    : struct_or_union IDENTIFIER '{' struct_declaration_list '}'
-    | struct_or_union '{' struct_declaration_list '}'
+    : struct_or_union IDENTIFIER OCURLY struct_declaration_list CCURLY
+    | struct_or_union OCURLY struct_declaration_list CCURLY
     | struct_or_union IDENTIFIER
     ;
 
@@ -377,7 +410,7 @@ struct_declaration_list
     ;
 
 struct_declaration
-    : specifier_qualifier_list struct_declarator_list ';'
+    : specifier_qualifier_list struct_declarator_list SEMICOLON
     ;
 
 specifier_qualifier_list
@@ -389,7 +422,7 @@ specifier_qualifier_list
 
 struct_declarator_list
     : struct_declarator
-    | struct_declarator_list ',' struct_declarator
+    | struct_declarator_list COMMA struct_declarator
     ;
 
 struct_declarator
@@ -399,14 +432,14 @@ struct_declarator
     ;
 
 enum_specifier
-    : ENUM '{' enumerator_list '}'
-    | ENUM IDENTIFIER '{' enumerator_list '}'
+    : ENUM OCURLY enumerator_list CCURLY
+    | ENUM IDENTIFIER OCURLY enumerator_list CCURLY
     | ENUM IDENTIFIER
     ;
 
 enumerator_list
     : enumerator
-    | enumerator_list ',' enumerator
+    | enumerator_list COMMA enumerator
     ;
 
 enumerator
@@ -426,12 +459,12 @@ declarator
 
 direct_declarator
     : IDENTIFIER
-    | '(' declarator ')'
+    | OPAREN declarator CPAREN
     | direct_declarator '[' constant_expression ']'
     | direct_declarator '[' ']'
-    | direct_declarator '(' parameter_type_list ')'
-    | direct_declarator '(' identifier_list ')'
-    | direct_declarator '(' ')'
+    | direct_declarator OPAREN parameter_type_list CPAREN
+    | direct_declarator OPAREN identifier_list CPAREN
+    | direct_declarator OPAREN CPAREN
     ;
 
 pointer
@@ -449,12 +482,12 @@ type_qualifier_list
 
 parameter_type_list
     : parameter_list
-    | parameter_list ',' ELLIPSIS
+    | parameter_list COMMA ELLIPSIS
     ;
 
 parameter_list
     : parameter_declaration
-    | parameter_list ',' parameter_declaration
+    | parameter_list COMMA parameter_declaration
     ;
 
 parameter_declaration
@@ -465,7 +498,7 @@ parameter_declaration
 
 identifier_list
     : IDENTIFIER
-    | identifier_list ',' IDENTIFIER
+    | identifier_list COMMA IDENTIFIER
     ;
 
 type_name
@@ -480,26 +513,26 @@ abstract_declarator
     ;
 
 direct_abstract_declarator
-    : '(' abstract_declarator ')'
+    : OPAREN abstract_declarator CPAREN
     | '[' ']'
     | '[' constant_expression ']'
     | direct_abstract_declarator '[' ']'
     | direct_abstract_declarator '[' constant_expression ']'
-    | '(' ')'
-    | '(' parameter_type_list ')'
-    | direct_abstract_declarator '(' ')'
-    | direct_abstract_declarator '(' parameter_type_list ')'
+    | OPAREN CPAREN
+    | OPAREN parameter_type_list CPAREN
+    | direct_abstract_declarator OPAREN CPAREN
+    | direct_abstract_declarator OPAREN parameter_type_list CPAREN
     ;
 
 initializer
     : assignment_expression
-    | '{' initializer_list '}'
-    | '{' initializer_list ',' '}'
+    | OCURLY initializer_list CCURLY
+    | OCURLY initializer_list COMMA CCURLY
     ;
 
 initializer_list
     : initializer
-    | initializer_list ',' initializer
+    | initializer_list COMMA initializer
     ;
 
 statement
@@ -518,10 +551,10 @@ labeled_statement
     ;
 
 compound_statement
-    : '{' '}'
-    | '{' statement_list '}'
-    | '{' declaration_list '}'
-    | '{' declaration_list statement_list '}'
+    : OCURLY CCURLY
+    | OCURLY statement_list CCURLY
+    | OCURLY declaration_list CCURLY
+    | OCURLY declaration_list statement_list CCURLY
     ;
 
 declaration_list
@@ -535,39 +568,39 @@ statement_list
     ;
 
 expression_statement
-    : ';'
-    | expression ';'
+    : SEMICOLON
+    | expression SEMICOLON
     ;
 
 selection_statement
-    : IF '(' expression ')' statement
-    | IF '(' expression ')' statement ELSE statement
-    | SWITCH '(' expression ')' statement
+    : IF OPAREN expression CPAREN statement
+    | IF OPAREN expression CPAREN statement ELSE statement
+    | SWITCH OPAREN expression CPAREN statement
     ;
 
 iteration_statement
-    : WHILE '(' expression ')' statement
-    | DO statement WHILE '(' expression ')' ';'
-    | FOR '(' expression_statement expression_statement ')' statement
-    | FOR '(' expression_statement expression_statement expression ')' statement
+    : WHILE OPAREN expression CPAREN statement
+    | DO statement WHILE OPAREN expression CPAREN SEMICOLON
+    | FOR OPAREN expression_statement expression_statement CPAREN statement
+    | FOR OPAREN expression_statement expression_statement expression CPAREN statement
     ;
 
 jump_statement
-    : GOTO IDENTIFIER ';'
-    | CONTINUE ';'
-    | BREAK ';'
-    | RETURN ';'
-    | RETURN expression ';'
+    : GOTO IDENTIFIER SEMICOLON
+    | CONTINUE SEMICOLON
+    | BREAK SEMICOLON
+    | RETURN SEMICOLON
+    | RETURN expression SEMICOLON
     ;
 
 translation_unit
-    : external_declaration
-    | translation_unit external_declaration
+    : external_declaration                  { cout << "external_declaration REDUCE to translation_unit" << endl; }
+    | translation_unit external_declaration { cout << "translation_unit external_declaration REDUCE to translation_unit" << endl; }
     ;
 
 external_declaration
-    : function_definition
-    | declaration
+    : function_definition  { cout << "function_definition REDUCE to external_declaration" << endl; }
+    | declaration          { cout << "declaration REDUCE to external_declaration" << endl; }
     ;
 
 function_definition
