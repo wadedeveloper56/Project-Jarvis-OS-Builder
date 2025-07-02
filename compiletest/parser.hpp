@@ -52,7 +52,7 @@
     #include <vector>
     #include <stdint.h>
     #include <stdlib.h>
-    #include "command.h"
+    #include "constant.h"
 
     using namespace std;
 
@@ -421,8 +421,11 @@ namespace  WadeSpace  {
     /// An auxiliary type to compute the largest semantic type.
     union union_type
     {
+      // constant
+      char dummy1[sizeof (Constant)];
+
       // "f_const"
-      char dummy1[sizeof (long double)];
+      char dummy2[sizeof (long double)];
 
       // "identifier"
       // "sting_literal"
@@ -512,10 +515,10 @@ namespace  WadeSpace  {
       // "times op"
       // "div op"
       // "mod op"
-      char dummy2[sizeof (std::string)];
+      char dummy3[sizeof (std::string)];
 
       // "i_const"
-      char dummy3[sizeof (uint64_t)];
+      char dummy4[sizeof (uint64_t)];
     };
 
     /// The size of the largest semantic type.
@@ -894,6 +897,10 @@ namespace  WadeSpace  {
       {
         switch (this->kind ())
     {
+      case symbol_kind::S_constant: // constant
+        value.move< Constant > (std::move (that.value));
+        break;
+
       case symbol_kind::S_F_CONST: // "f_const"
         value.move< long double > (std::move (that.value));
         break;
@@ -1017,6 +1024,20 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
+      basic_symbol (typename Base::kind_type t, Constant&& v, location_type&& l)
+        : Base (t)
+        , value (std::move (v))
+        , location (std::move (l))
+      {}
+#else
+      basic_symbol (typename Base::kind_type t, const Constant& v, const location_type& l)
+        : Base (t)
+        , value (v)
+        , location (l)
+      {}
+#endif
+
+#if 201103L <= YY_CPLUSPLUS
       basic_symbol (typename Base::kind_type t, long double&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
@@ -1082,6 +1103,10 @@ namespace  WadeSpace  {
         // Value type destructor.
 switch (yykind)
     {
+      case symbol_kind::S_constant: // constant
+        value.template destroy< Constant > ();
+        break;
+
       case symbol_kind::S_F_CONST: // "f_const"
         value.template destroy< long double > ();
         break;
@@ -3192,6 +3217,10 @@ switch (yykind)
   {
     switch (this->kind ())
     {
+      case symbol_kind::S_constant: // constant
+        value.copy< Constant > (YY_MOVE (that.value));
+        break;
+
       case symbol_kind::S_F_CONST: // "f_const"
         value.copy< long double > (YY_MOVE (that.value));
         break;
@@ -3322,6 +3351,10 @@ switch (yykind)
     super_type::move (s);
     switch (this->kind ())
     {
+      case symbol_kind::S_constant: // constant
+        value.move< Constant > (YY_MOVE (s.value));
+        break;
+
       case symbol_kind::S_F_CONST: // "f_const"
         value.move< long double > (YY_MOVE (s.value));
         break;
@@ -3488,7 +3521,7 @@ switch (yykind)
 
 #line 9 "parser.y"
 } //  WadeSpace 
-#line 3492 "parser.hpp"
+#line 3525 "parser.hpp"
 
 
 

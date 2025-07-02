@@ -14,7 +14,7 @@
     #include <vector>
     #include <stdint.h>
     #include <stdlib.h>
-    #include "command.h"
+    #include "constant.h"
 
     using namespace std;
 
@@ -152,6 +152,8 @@
 %token <std::string> DIV_OP "div op"
 %token <std::string> MOD_OP "mod op"
 
+%type<Constant> constant
+
 %start translation_unit
 
 %%
@@ -159,13 +161,25 @@
 primary_expression
     : IDENTIFIER
     | constant
-    | STRING_LITERAL
     | OPAREN expression CPAREN
     ;
 
 constant
-    : F_CONST
-    | I_CONST
+    : F_CONST {
+                 long double &id = $1;
+                 cout << "CONSTANT: " << id << endl;
+                 $<Constant>$ = Constant(id);
+              }
+    | I_CONST {
+                 std::uint64_t &id = $1;
+                 cout << "CONSTANT: " << id << endl;
+                 $<Constant>$ = Constant(id);
+              }
+    | STRING_LITERAL  {
+                 std::string &id = $1;
+                 cout << "CONSTANT: " << id << endl;
+                 $<Constant>$ = Constant(id);
+              }
 
 postfix_expression
     : primary_expression

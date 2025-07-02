@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="command.h" />
+    <ClInclude Include="Constant.h" />
     <ClInclude Include="interpreter.h" />
     <ClInclude Include="location.hh" />
     <ClInclude Include="parser.hpp" />
@@ -28,7 +28,7 @@
     <ClInclude Include="stack.hh" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="command.cpp" />
+    <ClCompile Include="Constant.cpp" />
     <ClCompile Include="interpreter.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="parser.cpp" />

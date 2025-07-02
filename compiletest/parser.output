@@ -40,11 +40,11 @@ Grammar
 
     1 primary_expression: "identifier"
     2                   | constant
-    3                   | "sting_literal"
-    4                   | "oparen" expression "cparen"
+    3                   | "oparen" expression "cparen"
 
-    5 constant: "f_const"
-    6         | "i_const"
+    4 constant: "f_const"
+    5         | "i_const"
+    6         | "sting_literal"
 
     7 postfix_expression: primary_expression
     8                   | postfix_expression '[' expression ']'
@@ -345,9 +345,9 @@ Terminals, with rules where they appear
     '~' (126) 27
     error (256)
     "identifier" <std::string> (258) 1 11 12 106 108 124 125 128 129 134 154 155 181 201
-    "i_const" <uint64_t> (259) 6
-    "f_const" <long double> (260) 5
-    "sting_literal" <std::string> (261) 3
+    "i_const" <uint64_t> (259) 5
+    "f_const" <long double> (260) 4
+    "sting_literal" <std::string> (261) 6
     "type name" <std::string> (262) 105
     "auto" <std::string> (263) 92
     "break" <std::string> (264) 203
@@ -395,8 +395,8 @@ Terminals, with rules where they appear
     "ccurly" <std::string> (306)
     "comma" <std::string> (307)
     "colon" <std::string> (308)
-    "oparen" <std::string> (309) 4
-    "cparen" <std::string> (310) 4
+    "oparen" <std::string> (309) 3
+    "cparen" <std::string> (310) 3
     "obrace" <std::string> (311)
     "cbrace" <std::string> (312)
     "period" <std::string> (313)
@@ -441,10 +441,10 @@ Nonterminals, with rules where they appear
     $accept (117)
         on left: 0
     primary_expression (118)
-        on left: 1 2 3 4
+        on left: 1 2 3
         on right: 7
-    constant (119)
-        on left: 5 6
+    constant <Constant> (119)
+        on left: 4 5 6
         on right: 2
     postfix_expression (120)
         on left: 7 8 9 10 11 12 13 14
@@ -502,7 +502,7 @@ Nonterminals, with rules where they appear
         on right: 62
     expression (138)
         on left: 74 75
-        on right: 4 8 60 75 193 194 195 196 197 198 200 205
+        on right: 3 8 60 75 193 194 195 196 197 198 200 205
     constant_expression (139)
         on left: 76
         on right: 121 122 129 136 163 165 182
@@ -1928,23 +1928,23 @@ State 81
 
 State 82
 
-    6 constant: "i_const" .
-
-    $default  reduce using rule 6 (constant)
-
-
-State 83
-
-    5 constant: "f_const" .
+    5 constant: "i_const" .
 
     $default  reduce using rule 5 (constant)
 
 
+State 83
+
+    4 constant: "f_const" .
+
+    $default  reduce using rule 4 (constant)
+
+
 State 84
 
-    3 primary_expression: "sting_literal" .
+    6 constant: "sting_literal" .
 
-    $default  reduce using rule 3 (primary_expression)
+    $default  reduce using rule 6 (constant)
 
 
 State 85
@@ -2179,7 +2179,7 @@ State 96
 
 State 97
 
-    4 primary_expression: "oparen" . expression "cparen"
+    3 primary_expression: "oparen" . expression "cparen"
 
     "identifier"     shift, and go to state 140
     "i_const"        shift, and go to state 82
@@ -3561,7 +3561,7 @@ State 184
 
 State 185
 
-    4 primary_expression: "oparen" expression . "cparen"
+    3 primary_expression: "oparen" expression . "cparen"
    75 expression: expression . ',' assignment_expression
 
     "cparen"  shift, and go to state 266
@@ -5070,9 +5070,9 @@ State 265
 
 State 266
 
-    4 primary_expression: "oparen" expression "cparen" .
+    3 primary_expression: "oparen" expression "cparen" .
 
-    $default  reduce using rule 4 (primary_expression)
+    $default  reduce using rule 3 (primary_expression)
 
 
 State 267

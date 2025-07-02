@@ -224,6 +224,10 @@ namespace  WadeSpace  {
   {
     switch (that.kind ())
     {
+      case symbol_kind::S_constant: // constant
+        value.YY_MOVE_OR_COPY< Constant > (YY_MOVE (that.value));
+        break;
+
       case symbol_kind::S_F_CONST: // "f_const"
         value.YY_MOVE_OR_COPY< long double > (YY_MOVE (that.value));
         break;
@@ -338,6 +342,10 @@ namespace  WadeSpace  {
   {
     switch (that.kind ())
     {
+      case symbol_kind::S_constant: // constant
+        value.move< Constant > (YY_MOVE (that.value));
+        break;
+
       case symbol_kind::S_F_CONST: // "f_const"
         value.move< long double > (YY_MOVE (that.value));
         break;
@@ -452,6 +460,10 @@ namespace  WadeSpace  {
     state = that.state;
     switch (that.kind ())
     {
+      case symbol_kind::S_constant: // constant
+        value.copy< Constant > (that.value);
+        break;
+
       case symbol_kind::S_F_CONST: // "f_const"
         value.copy< long double > (that.value);
         break;
@@ -565,6 +577,10 @@ namespace  WadeSpace  {
     state = that.state;
     switch (that.kind ())
     {
+      case symbol_kind::S_constant: // constant
+        value.move< Constant > (that.value);
+        break;
+
       case symbol_kind::S_F_CONST: // "f_const"
         value.move< long double > (that.value);
         break;
@@ -923,6 +939,10 @@ namespace  WadeSpace  {
          when using variants.  */
       switch (yyr1_[yyn])
     {
+      case symbol_kind::S_constant: // constant
+        yylhs.value.emplace< Constant > ();
+        break;
+
       case symbol_kind::S_F_CONST: // "f_const"
         yylhs.value.emplace< long double > ();
         break;
@@ -1042,8 +1062,38 @@ namespace  WadeSpace  {
         {
           switch (yyn)
             {
+  case 5: // constant: "f_const"
+#line 168 "parser.y"
+              {
+                 long double &id = yystack_[0].value.as < long double > ();
+                 cout << "CONSTANT: " << id << endl;
+                 yylhs.value.as< Constant > () = Constant(id);
+              }
+#line 1073 "parser.cpp"
+    break;
 
-#line 1047 "parser.cpp"
+  case 6: // constant: "i_const"
+#line 173 "parser.y"
+              {
+                 std::uint64_t &id = yystack_[0].value.as < uint64_t > ();
+                 cout << "CONSTANT: " << id << endl;
+                 yylhs.value.as< Constant > () = Constant(id);
+              }
+#line 1083 "parser.cpp"
+    break;
+
+  case 7: // constant: "sting_literal"
+#line 178 "parser.y"
+                      {
+                 std::string &id = yystack_[0].value.as < std::string > ();
+                 cout << "CONSTANT: " << id << endl;
+                 yylhs.value.as< Constant > () = Constant(id);
+              }
+#line 1093 "parser.cpp"
+    break;
+
+
+#line 1097 "parser.cpp"
 
             default:
               break;
@@ -1451,7 +1501,7 @@ namespace  WadeSpace  {
      109,     0,    85,     0,   189,     0,   214,     0,     0,     0,
      133,     1,   208,     0,   129,     0,   127,   136,   147,   145,
        0,    79,     0,   212,     0,     0,   116,     0,   112,     0,
-     118,     2,     7,     6,     4,     0,     0,     0,     0,     0,
+     118,     2,     6,     5,     7,     0,     0,     0,     0,     0,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
        0,    24,    25,    26,    27,    28,    29,   193,   185,     8,
        3,    18,    30,     0,    32,    36,    39,    42,    47,    50,
@@ -1469,7 +1519,7 @@ namespace  WadeSpace  {
      187,     0,   186,   192,   137,     0,     0,   152,   159,   153,
      160,   139,     0,   140,     0,   125,   130,   128,   174,     0,
      107,   122,     0,   114,     0,   182,     0,   184,     0,     0,
-     202,     0,   206,     0,     0,     0,     5,     0,   159,   158,
+     202,     0,   206,     0,     0,     0,     4,     0,   159,   158,
        0,    13,     0,    10,     0,    16,    12,    63,    33,    34,
       35,    37,    38,    41,    40,    46,    45,    43,    44,    48,
       49,    51,    53,    55,    57,    59,     0,    76,   188,   163,
@@ -1861,7 +1911,7 @@ namespace  WadeSpace  {
   const unsigned char
    Parser ::yyr1_[] =
   {
-       0,   117,   118,   118,   118,   118,   119,   119,   120,   120,
+       0,   117,   118,   118,   118,   119,   119,   119,   120,   120,
      120,   120,   120,   120,   120,   120,   121,   121,   122,   122,
      122,   122,   122,   122,   123,   123,   123,   123,   123,   123,
      124,   124,   125,   125,   125,   125,   126,   126,   126,   127,
@@ -1888,7 +1938,7 @@ namespace  WadeSpace  {
   const signed char
    Parser ::yyr2_[] =
   {
-       0,     2,     1,     1,     1,     3,     1,     1,     1,     4,
+       0,     2,     1,     1,     3,     1,     1,     1,     1,     4,
        3,     4,     3,     3,     2,     2,     1,     3,     1,     2,
        2,     2,     2,     4,     1,     1,     1,     1,     1,     1,
        1,     4,     1,     3,     3,     3,     1,     3,     3,     1,
@@ -1972,28 +2022,28 @@ namespace  WadeSpace  {
   const short
    Parser ::yyrline_[] =
   {
-       0,   160,   160,   161,   162,   163,   167,   168,   171,   172,
-     173,   174,   175,   176,   177,   178,   182,   183,   187,   188,
-     189,   190,   191,   192,   196,   197,   198,   199,   200,   201,
-     205,   206,   210,   211,   212,   213,   217,   218,   219,   223,
-     224,   225,   229,   230,   231,   232,   233,   237,   238,   239,
-     243,   244,   248,   249,   253,   254,   258,   259,   263,   264,
-     268,   269,   273,   274,   278,   279,   280,   281,   282,   283,
-     284,   285,   286,   287,   288,   292,   293,   297,   301,   302,
-     306,   307,   308,   309,   310,   311,   315,   316,   320,   321,
-     325,   326,   327,   328,   329,   333,   334,   335,   336,   337,
-     338,   339,   340,   341,   342,   343,   344,   348,   349,   350,
-     354,   355,   359,   360,   364,   368,   369,   370,   371,   375,
-     376,   380,   381,   382,   386,   387,   388,   392,   393,   397,
-     398,   402,   403,   407,   408,   412,   413,   414,   415,   416,
-     417,   418,   422,   423,   424,   425,   429,   430,   435,   436,
-     440,   441,   445,   446,   447,   451,   452,   456,   457,   461,
-     462,   463,   467,   468,   469,   470,   471,   472,   473,   474,
-     475,   479,   480,   481,   485,   486,   490,   491,   492,   493,
-     494,   495,   499,   500,   501,   505,   506,   507,   508,   512,
-     513,   517,   518,   522,   523,   527,   528,   529,   533,   534,
-     535,   536,   540,   541,   542,   543,   544,   548,   549,   553,
-     554,   558,   559,   560,   561
+       0,   162,   162,   163,   164,   168,   173,   178,   185,   186,
+     187,   188,   189,   190,   191,   192,   196,   197,   201,   202,
+     203,   204,   205,   206,   210,   211,   212,   213,   214,   215,
+     219,   220,   224,   225,   226,   227,   231,   232,   233,   237,
+     238,   239,   243,   244,   245,   246,   247,   251,   252,   253,
+     257,   258,   262,   263,   267,   268,   272,   273,   277,   278,
+     282,   283,   287,   288,   292,   293,   294,   295,   296,   297,
+     298,   299,   300,   301,   302,   306,   307,   311,   315,   316,
+     320,   321,   322,   323,   324,   325,   329,   330,   334,   335,
+     339,   340,   341,   342,   343,   347,   348,   349,   350,   351,
+     352,   353,   354,   355,   356,   357,   358,   362,   363,   364,
+     368,   369,   373,   374,   378,   382,   383,   384,   385,   389,
+     390,   394,   395,   396,   400,   401,   402,   406,   407,   411,
+     412,   416,   417,   421,   422,   426,   427,   428,   429,   430,
+     431,   432,   436,   437,   438,   439,   443,   444,   449,   450,
+     454,   455,   459,   460,   461,   465,   466,   470,   471,   475,
+     476,   477,   481,   482,   483,   484,   485,   486,   487,   488,
+     489,   493,   494,   495,   499,   500,   504,   505,   506,   507,
+     508,   509,   513,   514,   515,   519,   520,   521,   522,   526,
+     527,   531,   532,   536,   537,   541,   542,   543,   547,   548,
+     549,   550,   554,   555,   556,   557,   558,   562,   563,   567,
+     568,   572,   573,   574,   575
   };
 
   void
@@ -2026,9 +2076,9 @@ namespace  WadeSpace  {
 
 #line 9 "parser.y"
 } //  WadeSpace 
-#line 2030 "parser.cpp"
+#line 2080 "parser.cpp"
 
-#line 564 "parser.y"
+#line 578 "parser.y"
 
 
 // Bison expects us to provide implementation - otherwise linker complains
