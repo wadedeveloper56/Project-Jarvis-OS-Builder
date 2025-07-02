@@ -677,7 +677,7 @@ namespace  WadeSpace  {
     {
       enum symbol_kind_type
       {
-        YYNTOKENS = 117, ///< Number of tokens.
+        YYNTOKENS = 116, ///< Number of tokens.
         S_YYEMPTY = -2,
         S_YYEOF = 0,                             // "end of file"
         S_YYerror = 1,                           // error
@@ -772,95 +772,94 @@ namespace  WadeSpace  {
         S_TIMES_OP = 90,                         // "times op"
         S_DIV_OP = 91,                           // "div op"
         S_MOD_OP = 92,                           // "mod op"
-        S_93_ = 93,                              // '['
-        S_94_ = 94,                              // ']'
-        S_95_ = 95,                              // '('
-        S_96_ = 96,                              // ')'
-        S_97_ = 97,                              // '.'
-        S_98_ = 98,                              // ','
-        S_99_ = 99,                              // '&'
-        S_100_ = 100,                            // '*'
-        S_101_ = 101,                            // '+'
-        S_102_ = 102,                            // '-'
-        S_103_ = 103,                            // '~'
-        S_104_ = 104,                            // '!'
-        S_105_ = 105,                            // '/'
-        S_106_ = 106,                            // '%'
-        S_107_ = 107,                            // '<'
-        S_108_ = 108,                            // '>'
-        S_109_ = 109,                            // '^'
-        S_110_ = 110,                            // '|'
-        S_111_ = 111,                            // '?'
-        S_112_ = 112,                            // ':'
-        S_113_ = 113,                            // '='
-        S_114_ = 114,                            // ';'
-        S_115_ = 115,                            // '{'
-        S_116_ = 116,                            // '}'
-        S_YYACCEPT = 117,                        // $accept
-        S_primary_expression = 118,              // primary_expression
-        S_constant = 119,                        // constant
-        S_postfix_expression = 120,              // postfix_expression
-        S_argument_expression_list = 121,        // argument_expression_list
-        S_unary_expression = 122,                // unary_expression
-        S_unary_operator = 123,                  // unary_operator
-        S_cast_expression = 124,                 // cast_expression
-        S_multiplicative_expression = 125,       // multiplicative_expression
-        S_additive_expression = 126,             // additive_expression
-        S_shift_expression = 127,                // shift_expression
-        S_relational_expression = 128,           // relational_expression
-        S_equality_expression = 129,             // equality_expression
-        S_and_expression = 130,                  // and_expression
-        S_exclusive_or_expression = 131,         // exclusive_or_expression
-        S_inclusive_or_expression = 132,         // inclusive_or_expression
-        S_logical_and_expression = 133,          // logical_and_expression
-        S_logical_or_expression = 134,           // logical_or_expression
-        S_conditional_expression = 135,          // conditional_expression
-        S_assignment_expression = 136,           // assignment_expression
-        S_assignment_operator = 137,             // assignment_operator
-        S_expression = 138,                      // expression
-        S_constant_expression = 139,             // constant_expression
-        S_declaration = 140,                     // declaration
-        S_declaration_specifiers = 141,          // declaration_specifiers
-        S_init_declarator_list = 142,            // init_declarator_list
-        S_init_declarator = 143,                 // init_declarator
-        S_storage_class_specifier = 144,         // storage_class_specifier
-        S_type_specifier = 145,                  // type_specifier
-        S_struct_or_union_specifier = 146,       // struct_or_union_specifier
-        S_struct_or_union = 147,                 // struct_or_union
-        S_struct_declaration_list = 148,         // struct_declaration_list
-        S_struct_declaration = 149,              // struct_declaration
-        S_specifier_qualifier_list = 150,        // specifier_qualifier_list
-        S_struct_declarator_list = 151,          // struct_declarator_list
-        S_struct_declarator = 152,               // struct_declarator
-        S_enum_specifier = 153,                  // enum_specifier
-        S_enumerator_list = 154,                 // enumerator_list
-        S_enumerator = 155,                      // enumerator
-        S_type_qualifier = 156,                  // type_qualifier
-        S_declarator = 157,                      // declarator
-        S_direct_declarator = 158,               // direct_declarator
-        S_pointer = 159,                         // pointer
-        S_type_qualifier_list = 160,             // type_qualifier_list
-        S_parameter_type_list = 161,             // parameter_type_list
-        S_parameter_list = 162,                  // parameter_list
-        S_parameter_declaration = 163,           // parameter_declaration
-        S_identifier_list = 164,                 // identifier_list
-        S_type_name = 165,                       // type_name
-        S_abstract_declarator = 166,             // abstract_declarator
-        S_direct_abstract_declarator = 167,      // direct_abstract_declarator
-        S_initializer = 168,                     // initializer
-        S_initializer_list = 169,                // initializer_list
-        S_statement = 170,                       // statement
-        S_labeled_statement = 171,               // labeled_statement
-        S_compound_statement = 172,              // compound_statement
-        S_declaration_list = 173,                // declaration_list
-        S_statement_list = 174,                  // statement_list
-        S_expression_statement = 175,            // expression_statement
-        S_selection_statement = 176,             // selection_statement
-        S_iteration_statement = 177,             // iteration_statement
-        S_jump_statement = 178,                  // jump_statement
-        S_translation_unit = 179,                // translation_unit
-        S_external_declaration = 180,            // external_declaration
-        S_function_definition = 181              // function_definition
+        S_93_ = 93,                              // ','
+        S_94_ = 94,                              // '('
+        S_95_ = 95,                              // ')'
+        S_96_ = 96,                              // '&'
+        S_97_ = 97,                              // '*'
+        S_98_ = 98,                              // '+'
+        S_99_ = 99,                              // '-'
+        S_100_ = 100,                            // '~'
+        S_101_ = 101,                            // '!'
+        S_102_ = 102,                            // '/'
+        S_103_ = 103,                            // '%'
+        S_104_ = 104,                            // '<'
+        S_105_ = 105,                            // '>'
+        S_106_ = 106,                            // '^'
+        S_107_ = 107,                            // '|'
+        S_108_ = 108,                            // '?'
+        S_109_ = 109,                            // ':'
+        S_110_ = 110,                            // '='
+        S_111_ = 111,                            // ';'
+        S_112_ = 112,                            // '{'
+        S_113_ = 113,                            // '}'
+        S_114_ = 114,                            // '['
+        S_115_ = 115,                            // ']'
+        S_YYACCEPT = 116,                        // $accept
+        S_primary_expression = 117,              // primary_expression
+        S_constant = 118,                        // constant
+        S_postfix_expression = 119,              // postfix_expression
+        S_argument_expression_list = 120,        // argument_expression_list
+        S_unary_expression = 121,                // unary_expression
+        S_unary_operator = 122,                  // unary_operator
+        S_cast_expression = 123,                 // cast_expression
+        S_multiplicative_expression = 124,       // multiplicative_expression
+        S_additive_expression = 125,             // additive_expression
+        S_shift_expression = 126,                // shift_expression
+        S_relational_expression = 127,           // relational_expression
+        S_equality_expression = 128,             // equality_expression
+        S_and_expression = 129,                  // and_expression
+        S_exclusive_or_expression = 130,         // exclusive_or_expression
+        S_inclusive_or_expression = 131,         // inclusive_or_expression
+        S_logical_and_expression = 132,          // logical_and_expression
+        S_logical_or_expression = 133,           // logical_or_expression
+        S_conditional_expression = 134,          // conditional_expression
+        S_assignment_expression = 135,           // assignment_expression
+        S_assignment_operator = 136,             // assignment_operator
+        S_expression = 137,                      // expression
+        S_constant_expression = 138,             // constant_expression
+        S_declaration = 139,                     // declaration
+        S_declaration_specifiers = 140,          // declaration_specifiers
+        S_init_declarator_list = 141,            // init_declarator_list
+        S_init_declarator = 142,                 // init_declarator
+        S_storage_class_specifier = 143,         // storage_class_specifier
+        S_type_specifier = 144,                  // type_specifier
+        S_struct_or_union_specifier = 145,       // struct_or_union_specifier
+        S_struct_or_union = 146,                 // struct_or_union
+        S_struct_declaration_list = 147,         // struct_declaration_list
+        S_struct_declaration = 148,              // struct_declaration
+        S_specifier_qualifier_list = 149,        // specifier_qualifier_list
+        S_struct_declarator_list = 150,          // struct_declarator_list
+        S_struct_declarator = 151,               // struct_declarator
+        S_enum_specifier = 152,                  // enum_specifier
+        S_enumerator_list = 153,                 // enumerator_list
+        S_enumerator = 154,                      // enumerator
+        S_type_qualifier = 155,                  // type_qualifier
+        S_declarator = 156,                      // declarator
+        S_direct_declarator = 157,               // direct_declarator
+        S_pointer = 158,                         // pointer
+        S_type_qualifier_list = 159,             // type_qualifier_list
+        S_parameter_type_list = 160,             // parameter_type_list
+        S_parameter_list = 161,                  // parameter_list
+        S_parameter_declaration = 162,           // parameter_declaration
+        S_identifier_list = 163,                 // identifier_list
+        S_type_name = 164,                       // type_name
+        S_abstract_declarator = 165,             // abstract_declarator
+        S_direct_abstract_declarator = 166,      // direct_abstract_declarator
+        S_initializer = 167,                     // initializer
+        S_initializer_list = 168,                // initializer_list
+        S_statement = 169,                       // statement
+        S_labeled_statement = 170,               // labeled_statement
+        S_compound_statement = 171,              // compound_statement
+        S_declaration_list = 172,                // declaration_list
+        S_statement_list = 173,                  // statement_list
+        S_expression_statement = 174,            // expression_statement
+        S_selection_statement = 175,             // selection_statement
+        S_iteration_statement = 176,             // iteration_statement
+        S_jump_statement = 177,                  // jump_statement
+        S_translation_unit = 178,                // translation_unit
+        S_external_declaration = 179,            // external_declaration
+        S_function_definition = 180              // function_definition
       };
     };
 
@@ -1305,11 +1304,8 @@ switch (yykind)
 #if !defined _MSC_VER || defined __clang__
         YY_ASSERT (tok == token::TOKEN_END
                    || (token::TOKEN_YYerror <= tok && tok <= token::TOKEN_YYUNDEF)
-                   || tok == 91
-                   || tok == 93
-                   || (40 <= tok && tok <= 41)
-                   || tok == 46
                    || tok == 44
+                   || (40 <= tok && tok <= 41)
                    || tok == 38
                    || (42 <= tok && tok <= 43)
                    || tok == 45
@@ -1326,7 +1322,9 @@ switch (yykind)
                    || tok == 61
                    || tok == 59
                    || tok == 123
-                   || tok == 125);
+                   || tok == 125
+                   || tok == 91
+                   || tok == 93);
 #endif
       }
 #if 201103L <= YY_CPLUSPLUS
@@ -3139,7 +3137,7 @@ switch (yykind)
     /// Constants.
     enum
     {
-      yylast_ = 1505,     ///< Last index in yytable_.
+      yylast_ = 1703,     ///< Last index in yytable_.
       yynnts_ = 65,  ///< Number of nonterminal symbols.
       yyfinal_ = 61 ///< Termination state number.
     };
@@ -3164,16 +3162,16 @@ switch (yykind)
        0,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,   104,     2,     2,     2,   106,    99,     2,
-      95,    96,   100,   101,    98,   102,    97,   105,     2,     2,
-       2,     2,     2,     2,     2,     2,     2,     2,   112,   114,
-     107,   113,   108,   111,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,   101,     2,     2,     2,   103,    96,     2,
+      94,    95,    97,    98,    93,    99,     2,   102,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,   109,   111,
+     104,   110,   105,   108,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,    93,     2,    94,   109,     2,     2,     2,     2,     2,
+       2,   114,     2,   115,   106,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,   115,   110,   116,   103,     2,     2,     2,
+       2,     2,     2,   112,   107,   113,   100,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
@@ -3521,7 +3519,7 @@ switch (yykind)
 
 #line 9 "parser.y"
 } //  WadeSpace 
-#line 3525 "parser.hpp"
+#line 3523 "parser.hpp"
 
 
 

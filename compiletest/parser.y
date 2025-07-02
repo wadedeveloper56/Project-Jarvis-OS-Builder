@@ -159,38 +159,40 @@
 %%
 
 primary_expression
-    : IDENTIFIER
-    | constant
-    | OPAREN expression CPAREN
+    : IDENTIFIER { cout << "IDENTIFIER REDUCE to primary_expression" << endl; }
+    | constant { cout << "constant REDUCE to primary_expression" << endl; }
+    | OPAREN expression CPAREN  { cout << "(expression) REDUCE to primary_expression" << endl; }
     ;
 
 constant
     : F_CONST {
                  long double &id = $1;
-                 cout << "CONSTANT: " << id << endl;
+                 cout << "<EXP> F_CONST REDUCE to constant " << id << endl;
                  $<Constant>$ = Constant(id);
               }
     | I_CONST {
                  std::uint64_t &id = $1;
-                 cout << "CONSTANT: " << id << endl;
+                 cout << "<EXP> I_CONST REDUCE to constant " << id << endl;
                  $<Constant>$ = Constant(id);
               }
     | STRING_LITERAL  {
                  std::string &id = $1;
-                 cout << "CONSTANT: " << id << endl;
+                 cout << "<EXP> STRING_LITERAL REDUCE to constant  " << id << endl;
                  $<Constant>$ = Constant(id);
               }
 
 postfix_expression
-    : primary_expression
-    | postfix_expression '[' expression ']'
-    | postfix_expression '(' ')'
-    | postfix_expression '(' argument_expression_list ')'
-    | postfix_expression '.' IDENTIFIER
-    | postfix_expression PTR_OP IDENTIFIER
-    | postfix_expression INC_OP
-    | postfix_expression DEC_OP
-    ;
+    : primary_expression                                           { cout << "primary_expression REDUCE to postfix_expression" << endl; }
+    | postfix_expression OBRACE expression CBRACE                  { cout << "postfix_expression OBRACE expression CBRACE REDUCE to postfix_expression" << endl; }
+    | postfix_expression OPAREN CPAREN                             { cout << "postfix_expression OPAREN CPAREN REDUCE to postfix_expression" << endl; }
+    | postfix_expression OPAREN argument_expression_list CPAREN    { cout << "postfix_expression OPAREN argument_expression_list CPAREN REDUCE to postfix_expression" << endl; }
+    | postfix_expression PERIOD IDENTIFIER                         { cout << "postfix_expression PERIOD_OP IDENTIFIER REDUCE to postfix_expression" << endl; }
+    | postfix_expression PTR_OP IDENTIFIER                         { cout << "postfix_expression PTR_OP IDENTIFIER REDUCE to postfix_expression" << endl; }
+    | postfix_expression INC_OP                                    { cout << "postfix_expression INC_OP REDUCE to postfix_expression" << endl; }
+    | postfix_expression DEC_OP                                    { cout << "postfix_expression DEC_OP REDUCE to postfix_expression" << endl; }
+    | OPAREN type_name CPAREN OCURLY initializer_list CCURLY       { cout << "OPAREN type_name CPAREN_OP OCURLY_OP initializer_list CCURLY REDUCE to postfix_expression" << endl; }
+    | OPAREN type_name CPAREN OCURLY initializer_list COMMA CCURLY { cout << "OPAREN type_name CPAREN_OP OCURLY_OP initializer_list COMMA CCURLY REDUCE to postfix_expression" << endl; }
+
 
 argument_expression_list
     : assignment_expression
