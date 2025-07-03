@@ -184,7 +184,7 @@
 %type<TypeSpecifier> type_specifier
 %type<Enumerator> enumerator
 %type<std::vector<Enumerator>> enumerator_list
-//%type<EnumSpecifier> enum_specifier
+%type<EnumSpecifier> enum_specifier
 
 %start translation_unit
 
@@ -442,9 +442,9 @@ struct_declarator
     ;
 
 enum_specifier
-    : ENUM OCURLY enumerator_list CCURLY             //{ $<EnumSpecifier>$ = EnumSpecifier("",$3); cout << "ENUM OCURLY enumerator_list CCURLY REDUCE to enum_specifier" << endl;}
-    | ENUM IDENTIFIER OCURLY enumerator_list CCURLY  //{ $<EnumSpecifier>$ = EnumSpecifier($2,$4); cout << "ENUM IDENTIFIER OCURLY enumerator_list CCURLY REDUCE to enum_specifier" << endl;}
-    | ENUM IDENTIFIER                                //{ $<EnumSpecifier>$ = EnumSpecifier($2,std::vector<Enumerator>()); cout << "ENUM IDENTIFIER REDUCE to enum_specifier" << endl;}
+    : ENUM OCURLY enumerator_list CCURLY             { $<EnumSpecifier>$ = EnumSpecifier("",&$3); cout << "ENUM OCURLY enumerator_list CCURLY REDUCE to enum_specifier" << endl;}
+    | ENUM IDENTIFIER OCURLY enumerator_list CCURLY  { $<EnumSpecifier>$ = EnumSpecifier($2,&$4); cout << "ENUM IDENTIFIER OCURLY enumerator_list CCURLY REDUCE to enum_specifier" << endl;}
+    | ENUM IDENTIFIER                                { $<EnumSpecifier>$ = EnumSpecifier($2,NULL); cout << "ENUM IDENTIFIER REDUCE to enum_specifier" << endl;}
     ;
 
 enumerator_list

@@ -8,15 +8,16 @@
 
 namespace WadeSpace {
 	class EnumSpecifier {
-		EnumSpecifier(std::string value, std::vector<Enumerator>& list);
+	public:
+		EnumSpecifier(std::string value, std::vector<Enumerator>* list);
 		EnumSpecifier();
 		~EnumSpecifier();
 
 		std::string getNameStr() const;
-		std::vector<Enumerator> getList() const;
+		std::vector<Enumerator>* getList() const;
 	private:
 		std::string nameStr;
-		std::vector<Enumerator> list;
+		std::vector<Enumerator>* list;
 	};
 }
 
