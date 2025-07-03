@@ -398,47 +398,47 @@ type_specifier
     | DOUBLE                    { $<TypeSpecifier>$ = TypeSpecifier($1,DOUBLE); cout << "DOUBLE REDUCE to type_specifier" << endl;}
     | SIGNED                    { $<TypeSpecifier>$ = TypeSpecifier($1,SIGNED); cout << "SIGNED REDUCE to type_specifier" << endl;}
     | UNSIGNED                  { $<TypeSpecifier>$ = TypeSpecifier($1,UNSIGNED); cout << "UNIGNED REDUCE to type_specifier" << endl;}
-    | struct_or_union_specifier { $<TypeSpecifier>$ = TypeSpecifier(); cout << "struct_or_union_specifier REDUCE to type_specifier" << endl;}
-    | enum_specifier            { $<TypeSpecifier>$ = TypeSpecifier();/*"enum_specifier",&$1);*/ cout << "enum_specifier REDUCE to type_specifier" << endl;}
+    | struct_or_union_specifier { $<TypeSpecifier>$ = TypeSpecifier("struct_or_union_specifier",struct_or_union_specifier); cout << "struct_or_union_specifier REDUCE to type_specifier" << endl;}
+    | enum_specifier            { $<TypeSpecifier>$ = TypeSpecifier("enum_specifier",&$1); cout << "enum_specifier REDUCE to type_specifier" << endl;}
     | TYPE_NAME                 { $<TypeSpecifier>$ = TypeSpecifier($1,TYPE_NAME); cout << "TYPE_NAME REDUCE to type_specifier" << endl;}
     ;
 
 struct_or_union_specifier
-    : struct_or_union IDENTIFIER OCURLY struct_declaration_list CCURLY
-    | struct_or_union OCURLY struct_declaration_list CCURLY
-    | struct_or_union IDENTIFIER
+    : struct_or_union IDENTIFIER OCURLY struct_declaration_list CCURLY   { cout << "struct_or_union IDENTIFIER OCURLY struct_declaration_list CCURLY REDUCE to struct_or_union_specifier" << endl;}
+    | struct_or_union OCURLY struct_declaration_list CCURLY              { cout << "struct_or_union OCURLY struct_declaration_list CCURLY REDUCE to struct_or_union_specifier" << endl;}
+    | struct_or_union IDENTIFIER                                         { cout << "struct_or_union IDENTIFIER REDUCE to struct_or_union_specifier" << endl;}
     ;
 
 struct_or_union
-    : STRUCT
-    | UNION
+    : STRUCT   { cout << "STRUCT REDUCE to struct_or_union" << endl;}
+    | UNION    { cout << "UNION REDUCE to struct_or_union" << endl;}
     ;
 
 struct_declaration_list
-    : struct_declaration
-    | struct_declaration_list struct_declaration
+    : struct_declaration                         { cout << "struct_declaration REDUCE to struct_declaration_list" << endl;}
+    | struct_declaration_list struct_declaration { cout << "struct_declaration_list struct_declaration REDUCE to struct_declaration_list" << endl;}
     ;
 
 struct_declaration
-    : specifier_qualifier_list struct_declarator_list SEMICOLON
+    : specifier_qualifier_list struct_declarator_list SEMICOLON { cout << "specifier_qualifier_list struct_declarator_list SEMICOLON REDUCE to struct_declaration" << endl;}
     ;
 
 specifier_qualifier_list
-    : type_specifier specifier_qualifier_list
-    | type_specifier
-    | type_qualifier specifier_qualifier_list
-    | type_qualifier
+    : type_specifier specifier_qualifier_list { cout << "type_specifier specifier_qualifier_list REDUCE to specifier_qualifier_list" << endl;}
+    | type_specifier                          { cout << "type_specifier REDUCE to specifier_qualifier_list" << endl;}
+    | type_qualifier specifier_qualifier_list { cout << "type_qualifier specifier_qualifier_list REDUCE to specifier_qualifier_list" << endl;}
+    | type_qualifier                          { cout << "type_qualifier REDUCE to specifier_qualifier_list" << endl;}
     ;
 
 struct_declarator_list
-    : struct_declarator
-    | struct_declarator_list COMMA struct_declarator
+    : struct_declarator                              { cout << "struct_declarator REDUCE to struct_declarator_list" << endl;}
+    | struct_declarator_list COMMA struct_declarator { cout << "struct_declarator_list COMMA struct_declarator REDUCE to struct_declarator_list" << endl;}
     ;
 
 struct_declarator
-    : declarator
-    | COLON constant_expression
-    | declarator COLON constant_expression
+    : declarator                           { cout << "declarator REDUCE to struct_declarator" << endl;}
+    | COLON constant_expression            { cout << "COLON constant_expression REDUCE to struct_declarator" << endl;}
+    | declarator COLON constant_expression { cout << "declarator COLON constant_expression REDUCE to struct_declarator" << endl;}
     ;
 
 enum_specifier
