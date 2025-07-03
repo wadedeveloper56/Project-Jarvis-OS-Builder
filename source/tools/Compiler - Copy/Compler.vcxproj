@@ -75,25 +75,21 @@
     <OutDir>..\..\..\bin\tools\Compiler\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\bin\tools\Compiler\$(Configuration)\$(Platform)\</IntDir>
     <LibraryPath>$(LibraryPath)</LibraryPath>
-    <IncludePath>C:\flex-bison;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>..\..\..\bin\tools\Compiler\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\bin\tools\Compiler\$(Configuration)\$(Platform)\</IntDir>
     <LibraryPath>$(LibraryPath)</LibraryPath>
-    <IncludePath>C:\flex-bison;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>..\..\..\bin\tools\Compiler\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\bin\tools\Compiler\$(Configuration)\$(Platform)\</IntDir>
     <LibraryPath>$(LibraryPath)</LibraryPath>
-    <IncludePath>C:\flex-bison;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>..\..\..\bin\tools\Compiler\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\bin\tools\Compiler\$(Configuration)\$(Platform)\</IntDir>
     <LibraryPath>$(LibraryPath)</LibraryPath>
-    <IncludePath>C:\flex-bison;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -172,37 +168,31 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="c.tab.c" />
+    <ClCompile Include="Compiler.c" />
+    <ClCompile Include="lex.yy.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="pch.c" />
+    <ClCompile Include="symbol.c" />
+    <ClCompile Include="Variables.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="c.tab.h" />
+    <ClInclude Include="global.h" />
+    <ClInclude Include="pch.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="c.l" />
+    <None Include="c.y" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Arguments\Arguments.vcxproj">
       <Project>{fe883520-0f4b-494d-bf5e-714adb7881a3}</Project>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="AssignmentOperator.h" />
-    <ClInclude Include="Constant.h" />
-    <ClInclude Include="Enumerator.h" />
-    <ClInclude Include="EnumSpecifier.h" />
-    <ClInclude Include="Expression.h" />
-    <ClInclude Include="interpreter.h" />
-    <ClInclude Include="location.hh" />
-    <ClInclude Include="parser.hpp" />
-    <ClInclude Include="position.hh" />
-    <ClInclude Include="scanner.h" />
-    <ClInclude Include="stack.hh" />
-    <ClInclude Include="StorageClassSpecifier.h" />
-    <ClInclude Include="TypeSpecifier.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="AssignmentOperator.cpp" />
-    <ClCompile Include="Constant.cpp" />
-    <ClCompile Include="Enumerator.cpp" />
-    <ClCompile Include="EnumSpecifier.cpp" />
-    <ClCompile Include="Expression.cpp" />
-    <ClCompile Include="interpreter.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="parser.cpp" />
-    <ClCompile Include="scanner.cpp" />
-    <ClCompile Include="StorageClassSpecifier.cpp" />
-    <ClCompile Include="TypeSpecifier.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
