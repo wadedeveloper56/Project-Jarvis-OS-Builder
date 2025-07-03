@@ -53,6 +53,7 @@
     #include <stdint.h>
     #include <stdlib.h>
     #include "Constant.h"
+    #include "AssignmentOperator.h"
     #include "Expression.h"
 
     using namespace std;
@@ -62,7 +63,7 @@
         class Interpreter;
     }
 
-#line 66 "parser.hpp"
+#line 67 "parser.hpp"
 
 # include <cassert>
 # include <cstdlib> // std::abort
@@ -203,7 +204,7 @@
 
 #line 9 "parser.y"
 namespace  WadeSpace  {
-#line 207 "parser.hpp"
+#line 208 "parser.hpp"
 
 
 
@@ -422,8 +423,11 @@ namespace  WadeSpace  {
     /// An auxiliary type to compute the largest semantic type.
     union union_type
     {
+      // assignment_operator
+      char dummy1[sizeof (AssignmentOperator)];
+
       // constant
-      char dummy1[sizeof (Constant)];
+      char dummy2[sizeof (Constant)];
 
       // primary_expression
       // postfix_expression
@@ -443,10 +447,10 @@ namespace  WadeSpace  {
       // assignment_expression
       // expression
       // constant_expression
-      char dummy2[sizeof (Expression)];
+      char dummy3[sizeof (Expression)];
 
       // "f_const"
-      char dummy3[sizeof (long double)];
+      char dummy4[sizeof (long double)];
 
       // "identifier"
       // "sting_literal"
@@ -537,13 +541,13 @@ namespace  WadeSpace  {
       // "/"
       // "%"
       // unary_operator
-      char dummy4[sizeof (std::string)];
+      char dummy5[sizeof (std::string)];
 
       // argument_expression_list
-      char dummy5[sizeof (std::vector<Expression>)];
+      char dummy6[sizeof (std::vector<Expression>)];
 
       // "i_const"
-      char dummy6[sizeof (uint64_t)];
+      char dummy7[sizeof (uint64_t)];
     };
 
     /// The size of the largest semantic type.
@@ -702,7 +706,7 @@ namespace  WadeSpace  {
     {
       enum symbol_kind_type
       {
-        YYNTOKENS = 104, ///< Number of tokens.
+        YYNTOKENS = 96, ///< Number of tokens.
         S_YYEMPTY = -2,
         S_YYEOF = 0,                             // "end of file"
         S_YYerror = 1,                           // error
@@ -797,82 +801,74 @@ namespace  WadeSpace  {
         S_TIMES_OP = 90,                         // "*"
         S_DIV_OP = 91,                           // "/"
         S_MOD_OP = 92,                           // "%"
-        S_93_ = 93,                              // '+'
-        S_94_ = 94,                              // '-'
-        S_95_ = 95,                              // '&'
-        S_96_ = 96,                              // '^'
-        S_97_ = 97,                              // '|'
-        S_98_ = 98,                              // '?'
-        S_99_ = 99,                              // ':'
-        S_100_ = 100,                            // '='
-        S_101_ = 101,                            // '['
-        S_102_ = 102,                            // ']'
-        S_103_ = 103,                            // '*'
-        S_YYACCEPT = 104,                        // $accept
-        S_primary_expression = 105,              // primary_expression
-        S_constant = 106,                        // constant
-        S_postfix_expression = 107,              // postfix_expression
-        S_argument_expression_list = 108,        // argument_expression_list
-        S_unary_expression = 109,                // unary_expression
-        S_unary_operator = 110,                  // unary_operator
-        S_cast_expression = 111,                 // cast_expression
-        S_multiplicative_expression = 112,       // multiplicative_expression
-        S_additive_expression = 113,             // additive_expression
-        S_shift_expression = 114,                // shift_expression
-        S_relational_expression = 115,           // relational_expression
-        S_equality_expression = 116,             // equality_expression
-        S_and_expression = 117,                  // and_expression
-        S_exclusive_or_expression = 118,         // exclusive_or_expression
-        S_inclusive_or_expression = 119,         // inclusive_or_expression
-        S_logical_and_expression = 120,          // logical_and_expression
-        S_logical_or_expression = 121,           // logical_or_expression
-        S_conditional_expression = 122,          // conditional_expression
-        S_assignment_expression = 123,           // assignment_expression
-        S_assignment_operator = 124,             // assignment_operator
-        S_expression = 125,                      // expression
-        S_constant_expression = 126,             // constant_expression
-        S_declaration = 127,                     // declaration
-        S_declaration_specifiers = 128,          // declaration_specifiers
-        S_init_declarator_list = 129,            // init_declarator_list
-        S_init_declarator = 130,                 // init_declarator
-        S_storage_class_specifier = 131,         // storage_class_specifier
-        S_type_specifier = 132,                  // type_specifier
-        S_struct_or_union_specifier = 133,       // struct_or_union_specifier
-        S_struct_or_union = 134,                 // struct_or_union
-        S_struct_declaration_list = 135,         // struct_declaration_list
-        S_struct_declaration = 136,              // struct_declaration
-        S_specifier_qualifier_list = 137,        // specifier_qualifier_list
-        S_struct_declarator_list = 138,          // struct_declarator_list
-        S_struct_declarator = 139,               // struct_declarator
-        S_enum_specifier = 140,                  // enum_specifier
-        S_enumerator_list = 141,                 // enumerator_list
-        S_enumerator = 142,                      // enumerator
-        S_type_qualifier = 143,                  // type_qualifier
-        S_declarator = 144,                      // declarator
-        S_direct_declarator = 145,               // direct_declarator
-        S_pointer = 146,                         // pointer
-        S_type_qualifier_list = 147,             // type_qualifier_list
-        S_parameter_type_list = 148,             // parameter_type_list
-        S_parameter_list = 149,                  // parameter_list
-        S_parameter_declaration = 150,           // parameter_declaration
-        S_identifier_list = 151,                 // identifier_list
-        S_type_name = 152,                       // type_name
-        S_abstract_declarator = 153,             // abstract_declarator
-        S_direct_abstract_declarator = 154,      // direct_abstract_declarator
-        S_initializer = 155,                     // initializer
-        S_initializer_list = 156,                // initializer_list
-        S_statement = 157,                       // statement
-        S_labeled_statement = 158,               // labeled_statement
-        S_compound_statement = 159,              // compound_statement
-        S_declaration_list = 160,                // declaration_list
-        S_statement_list = 161,                  // statement_list
-        S_expression_statement = 162,            // expression_statement
-        S_selection_statement = 163,             // selection_statement
-        S_iteration_statement = 164,             // iteration_statement
-        S_jump_statement = 165,                  // jump_statement
-        S_translation_unit = 166,                // translation_unit
-        S_external_declaration = 167,            // external_declaration
-        S_function_definition = 168              // function_definition
+        S_93_ = 93,                              // '['
+        S_94_ = 94,                              // ']'
+        S_95_ = 95,                              // '*'
+        S_YYACCEPT = 96,                         // $accept
+        S_primary_expression = 97,               // primary_expression
+        S_constant = 98,                         // constant
+        S_postfix_expression = 99,               // postfix_expression
+        S_argument_expression_list = 100,        // argument_expression_list
+        S_unary_expression = 101,                // unary_expression
+        S_unary_operator = 102,                  // unary_operator
+        S_cast_expression = 103,                 // cast_expression
+        S_multiplicative_expression = 104,       // multiplicative_expression
+        S_additive_expression = 105,             // additive_expression
+        S_shift_expression = 106,                // shift_expression
+        S_relational_expression = 107,           // relational_expression
+        S_equality_expression = 108,             // equality_expression
+        S_and_expression = 109,                  // and_expression
+        S_exclusive_or_expression = 110,         // exclusive_or_expression
+        S_inclusive_or_expression = 111,         // inclusive_or_expression
+        S_logical_and_expression = 112,          // logical_and_expression
+        S_logical_or_expression = 113,           // logical_or_expression
+        S_conditional_expression = 114,          // conditional_expression
+        S_assignment_expression = 115,           // assignment_expression
+        S_assignment_operator = 116,             // assignment_operator
+        S_expression = 117,                      // expression
+        S_constant_expression = 118,             // constant_expression
+        S_declaration = 119,                     // declaration
+        S_declaration_specifiers = 120,          // declaration_specifiers
+        S_init_declarator_list = 121,            // init_declarator_list
+        S_init_declarator = 122,                 // init_declarator
+        S_storage_class_specifier = 123,         // storage_class_specifier
+        S_type_specifier = 124,                  // type_specifier
+        S_struct_or_union_specifier = 125,       // struct_or_union_specifier
+        S_struct_or_union = 126,                 // struct_or_union
+        S_struct_declaration_list = 127,         // struct_declaration_list
+        S_struct_declaration = 128,              // struct_declaration
+        S_specifier_qualifier_list = 129,        // specifier_qualifier_list
+        S_struct_declarator_list = 130,          // struct_declarator_list
+        S_struct_declarator = 131,               // struct_declarator
+        S_enum_specifier = 132,                  // enum_specifier
+        S_enumerator_list = 133,                 // enumerator_list
+        S_enumerator = 134,                      // enumerator
+        S_type_qualifier = 135,                  // type_qualifier
+        S_declarator = 136,                      // declarator
+        S_direct_declarator = 137,               // direct_declarator
+        S_pointer = 138,                         // pointer
+        S_type_qualifier_list = 139,             // type_qualifier_list
+        S_parameter_type_list = 140,             // parameter_type_list
+        S_parameter_list = 141,                  // parameter_list
+        S_parameter_declaration = 142,           // parameter_declaration
+        S_identifier_list = 143,                 // identifier_list
+        S_type_name = 144,                       // type_name
+        S_abstract_declarator = 145,             // abstract_declarator
+        S_direct_abstract_declarator = 146,      // direct_abstract_declarator
+        S_initializer = 147,                     // initializer
+        S_initializer_list = 148,                // initializer_list
+        S_statement = 149,                       // statement
+        S_labeled_statement = 150,               // labeled_statement
+        S_compound_statement = 151,              // compound_statement
+        S_declaration_list = 152,                // declaration_list
+        S_statement_list = 153,                  // statement_list
+        S_expression_statement = 154,            // expression_statement
+        S_selection_statement = 155,             // selection_statement
+        S_iteration_statement = 156,             // iteration_statement
+        S_jump_statement = 157,                  // jump_statement
+        S_translation_unit = 158,                // translation_unit
+        S_external_declaration = 159,            // external_declaration
+        S_function_definition = 160              // function_definition
       };
     };
 
@@ -909,6 +905,10 @@ namespace  WadeSpace  {
       {
         switch (this->kind ())
     {
+      case symbol_kind::S_assignment_operator: // assignment_operator
+        value.move< AssignmentOperator > (std::move (that.value));
+        break;
+
       case symbol_kind::S_constant: // constant
         value.move< Constant > (std::move (that.value));
         break;
@@ -1062,6 +1062,20 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
+      basic_symbol (typename Base::kind_type t, AssignmentOperator&& v, location_type&& l)
+        : Base (t)
+        , value (std::move (v))
+        , location (std::move (l))
+      {}
+#else
+      basic_symbol (typename Base::kind_type t, const AssignmentOperator& v, const location_type& l)
+        : Base (t)
+        , value (v)
+        , location (l)
+      {}
+#endif
+
+#if 201103L <= YY_CPLUSPLUS
       basic_symbol (typename Base::kind_type t, Constant&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
@@ -1169,6 +1183,10 @@ namespace  WadeSpace  {
         // Value type destructor.
 switch (yykind)
     {
+      case symbol_kind::S_assignment_operator: // assignment_operator
+        value.template destroy< AssignmentOperator > ();
+        break;
+
       case symbol_kind::S_constant: // constant
         value.template destroy< Constant > ();
         break;
@@ -1397,14 +1415,6 @@ switch (yykind)
 #if !defined _MSC_VER || defined __clang__
         YY_ASSERT (tok == token::TOKEN_END
                    || (token::TOKEN_YYerror <= tok && tok <= token::TOKEN_YYUNDEF)
-                   || tok == 43
-                   || tok == 45
-                   || tok == 38
-                   || tok == 94
-                   || tok == 124
-                   || tok == 63
-                   || tok == 58
-                   || tok == 61
                    || tok == 91
                    || tok == 93
                    || tok == 42);
@@ -3220,7 +3230,7 @@ switch (yykind)
     /// Constants.
     enum
     {
-      yylast_ = 1682,     ///< Last index in yytable_.
+      yylast_ = 1697,     ///< Last index in yytable_.
       yynnts_ = 65,  ///< Number of nonterminal symbols.
       yyfinal_ = 61 ///< Termination state number.
     };
@@ -3245,16 +3255,16 @@ switch (yykind)
        0,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,     2,     2,     2,     2,     2,    95,     2,
-       2,     2,   103,    93,     2,    94,     2,     2,     2,     2,
-       2,     2,     2,     2,     2,     2,     2,     2,    99,     2,
-       2,   100,     2,    98,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,    95,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,   101,     2,   102,    96,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,     2,    97,     2,     2,     2,     2,     2,
+       2,    93,     2,    94,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
@@ -3298,6 +3308,10 @@ switch (yykind)
   {
     switch (this->kind ())
     {
+      case symbol_kind::S_assignment_operator: // assignment_operator
+        value.copy< AssignmentOperator > (YY_MOVE (that.value));
+        break;
+
       case symbol_kind::S_constant: // constant
         value.copy< Constant > (YY_MOVE (that.value));
         break;
@@ -3458,6 +3472,10 @@ switch (yykind)
     super_type::move (s);
     switch (this->kind ())
     {
+      case symbol_kind::S_assignment_operator: // assignment_operator
+        value.move< AssignmentOperator > (YY_MOVE (s.value));
+        break;
+
       case symbol_kind::S_constant: // constant
         value.move< Constant > (YY_MOVE (s.value));
         break;
@@ -3654,7 +3672,7 @@ switch (yykind)
 
 #line 9 "parser.y"
 } //  WadeSpace 
-#line 3658 "parser.hpp"
+#line 3676 "parser.hpp"
 
 
 

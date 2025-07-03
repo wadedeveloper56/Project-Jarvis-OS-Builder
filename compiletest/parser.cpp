@@ -35,7 +35,7 @@
 // private implementation details that can be changed or removed.
 
 // "%code top" blocks.
-#line 34 "parser.y"
+#line 35 "parser.y"
 
     #include <iostream>
     #include <stdlib.h>
@@ -224,6 +224,10 @@ namespace  WadeSpace  {
   {
     switch (that.kind ())
     {
+      case symbol_kind::S_assignment_operator: // assignment_operator
+        value.YY_MOVE_OR_COPY< AssignmentOperator > (YY_MOVE (that.value));
+        break;
+
       case symbol_kind::S_constant: // constant
         value.YY_MOVE_OR_COPY< Constant > (YY_MOVE (that.value));
         break;
@@ -368,6 +372,10 @@ namespace  WadeSpace  {
   {
     switch (that.kind ())
     {
+      case symbol_kind::S_assignment_operator: // assignment_operator
+        value.move< AssignmentOperator > (YY_MOVE (that.value));
+        break;
+
       case symbol_kind::S_constant: // constant
         value.move< Constant > (YY_MOVE (that.value));
         break;
@@ -512,6 +520,10 @@ namespace  WadeSpace  {
     state = that.state;
     switch (that.kind ())
     {
+      case symbol_kind::S_assignment_operator: // assignment_operator
+        value.copy< AssignmentOperator > (that.value);
+        break;
+
       case symbol_kind::S_constant: // constant
         value.copy< Constant > (that.value);
         break;
@@ -655,6 +667,10 @@ namespace  WadeSpace  {
     state = that.state;
     switch (that.kind ())
     {
+      case symbol_kind::S_assignment_operator: // assignment_operator
+        value.move< AssignmentOperator > (that.value);
+        break;
+
       case symbol_kind::S_constant: // constant
         value.move< Constant > (that.value);
         break;
@@ -1043,6 +1059,10 @@ namespace  WadeSpace  {
          when using variants.  */
       switch (yyr1_[yyn])
     {
+      case symbol_kind::S_assignment_operator: // assignment_operator
+        yylhs.value.emplace< AssignmentOperator > ();
+        break;
+
       case symbol_kind::S_constant: // constant
         yylhs.value.emplace< Constant > ();
         break;
@@ -1193,456 +1213,522 @@ namespace  WadeSpace  {
           switch (yyn)
             {
   case 2: // primary_expression: "identifier"
-#line 184 "parser.y"
-                 { yylhs.value.as< Expression > () = Expression(yystack_[0].value.as < std::string > ()); cout << "<EXP> IDENTIFIER REDUCE to primary_expression" << endl; }
-#line 1199 "parser.cpp"
+#line 185 "parser.y"
+                 { yylhs.value.as< Expression > () = Expression(yystack_[0].value.as < std::string > ()); cout << "IDENTIFIER REDUCE to primary_expression" << endl; }
+#line 1219 "parser.cpp"
     break;
 
   case 3: // primary_expression: constant
-#line 185 "parser.y"
-               { yylhs.value.as< Expression > () = Expression(&yystack_[0].value.as < Constant > ()); cout << "<EXP> constant REDUCE to primary_expression" << endl; }
-#line 1205 "parser.cpp"
+#line 186 "parser.y"
+               { yylhs.value.as< Expression > () = Expression(&yystack_[0].value.as < Constant > ()); cout << "constant REDUCE to primary_expression" << endl; }
+#line 1225 "parser.cpp"
     break;
 
   case 4: // primary_expression: "(" expression ")"
-#line 186 "parser.y"
-                                { yylhs.value.as< Expression > () = yystack_[1].value.as < Expression > (); cout << "<EXP> (expression) REDUCE to primary_expression" << endl; }
-#line 1211 "parser.cpp"
-    break;
-
-  case 5: // constant: "f_const"
-#line 190 "parser.y"
-              {
-                 long double &id = yystack_[0].value.as < long double > ();
-                 cout << "<EXP> F_CONST REDUCE to constant " << id << endl;
-                 yylhs.value.as< Constant > () = Constant(id);
-              }
-#line 1221 "parser.cpp"
-    break;
-
-  case 6: // constant: "i_const"
-#line 195 "parser.y"
-              {
-                 std::uint64_t &id = yystack_[0].value.as < uint64_t > ();
-                 cout << "<EXP> I_CONST REDUCE to constant " << id << endl;
-                 yylhs.value.as< Constant > () = Constant(id);
-              }
+#line 187 "parser.y"
+                                { yylhs.value.as< Expression > () = yystack_[1].value.as < Expression > (); cout << "(expression) REDUCE to primary_expression" << endl; }
 #line 1231 "parser.cpp"
     break;
 
-  case 7: // constant: "sting_literal"
-#line 200 "parser.y"
-                      {
-                 std::string &id = yystack_[0].value.as < std::string > ();
-                 cout << "<EXP> STRING_LITERAL REDUCE to constant  " << id << endl;
+  case 5: // constant: "f_const"
+#line 191 "parser.y"
+              {
+                 long double &id = yystack_[0].value.as < long double > ();
+                 cout << "F_CONST REDUCE to constant " << id << endl;
                  yylhs.value.as< Constant > () = Constant(id);
               }
 #line 1241 "parser.cpp"
     break;
 
+  case 6: // constant: "i_const"
+#line 196 "parser.y"
+              {
+                 std::uint64_t &id = yystack_[0].value.as < uint64_t > ();
+                 cout << "I_CONST REDUCE to constant " << id << endl;
+                 yylhs.value.as< Constant > () = Constant(id);
+              }
+#line 1251 "parser.cpp"
+    break;
+
+  case 7: // constant: "sting_literal"
+#line 201 "parser.y"
+                      {
+                 std::string &id = yystack_[0].value.as < std::string > ();
+                 cout << "STRING_LITERAL REDUCE to constant  " << id << endl;
+                 yylhs.value.as< Constant > () = Constant(id);
+              }
+#line 1261 "parser.cpp"
+    break;
+
   case 8: // postfix_expression: primary_expression
-#line 207 "parser.y"
+#line 208 "parser.y"
                                                                    { yylhs.value.as< Expression > () = yystack_[0].value.as < Expression > (); cout << "primary_expression REDUCE to postfix_expression" << endl; }
-#line 1247 "parser.cpp"
+#line 1267 "parser.cpp"
     break;
 
   case 9: // postfix_expression: postfix_expression "[" expression "]"
-#line 208 "parser.y"
+#line 209 "parser.y"
                                                                    { cout << "postfix_expression OBRACE expression CBRACE REDUCE to postfix_expression" << endl; }
-#line 1253 "parser.cpp"
+#line 1273 "parser.cpp"
     break;
 
   case 10: // postfix_expression: postfix_expression "(" ")"
-#line 209 "parser.y"
+#line 210 "parser.y"
                                                                    { cout << "postfix_expression OPAREN CPAREN REDUCE to postfix_expression" << endl; }
-#line 1259 "parser.cpp"
+#line 1279 "parser.cpp"
     break;
 
   case 11: // postfix_expression: postfix_expression "(" argument_expression_list ")"
-#line 210 "parser.y"
+#line 211 "parser.y"
                                                                    { cout << "postfix_expression OPAREN argument_expression_list CPAREN REDUCE to postfix_expression" << endl; }
-#line 1265 "parser.cpp"
+#line 1285 "parser.cpp"
     break;
 
   case 12: // postfix_expression: postfix_expression "." "identifier"
-#line 211 "parser.y"
+#line 212 "parser.y"
                                                                    { cout << "postfix_expression PERIOD_OP IDENTIFIER REDUCE to postfix_expression" << endl; }
-#line 1271 "parser.cpp"
+#line 1291 "parser.cpp"
     break;
 
   case 13: // postfix_expression: postfix_expression "->" "identifier"
-#line 212 "parser.y"
+#line 213 "parser.y"
                                                                    { cout << "postfix_expression PTR_OP IDENTIFIER REDUCE to postfix_expression" << endl; }
-#line 1277 "parser.cpp"
+#line 1297 "parser.cpp"
     break;
 
   case 14: // postfix_expression: postfix_expression "++"
-#line 213 "parser.y"
+#line 214 "parser.y"
                                                                    { cout << "postfix_expression INC_OP REDUCE to postfix_expression" << endl; }
-#line 1283 "parser.cpp"
+#line 1303 "parser.cpp"
     break;
 
   case 15: // postfix_expression: postfix_expression "--"
-#line 214 "parser.y"
+#line 215 "parser.y"
                                                                    { cout << "postfix_expression DEC_OP REDUCE to postfix_expression" << endl; }
-#line 1289 "parser.cpp"
+#line 1309 "parser.cpp"
     break;
 
   case 16: // postfix_expression: "(" type_name ")" "{" initializer_list "}"
-#line 215 "parser.y"
+#line 216 "parser.y"
                                                                    { cout << "OPAREN type_name CPAREN_OP OCURLY_OP initializer_list CCURLY REDUCE to postfix_expression" << endl; }
-#line 1295 "parser.cpp"
+#line 1315 "parser.cpp"
     break;
 
   case 17: // postfix_expression: "(" type_name ")" "{" initializer_list "," "}"
-#line 216 "parser.y"
+#line 217 "parser.y"
                                                                    { cout << "OPAREN type_name CPAREN_OP OCURLY_OP initializer_list COMMA CCURLY REDUCE to postfix_expression" << endl; }
-#line 1301 "parser.cpp"
+#line 1321 "parser.cpp"
     break;
 
   case 18: // argument_expression_list: assignment_expression
-#line 220 "parser.y"
+#line 221 "parser.y"
                             {
                              Expression exp = yystack_[0].value.as < Expression > ();
                              yylhs.value.as < std::vector<Expression> > () = std::vector<Expression>();
                              yylhs.value.as < std::vector<Expression> > ().push_back(exp);
-                             cout << "<EXP> assignment_expression REDUCE argument_expression_list" << endl;
+                             cout << "assignment_expression REDUCE argument_expression_list" << endl;
                             }
-#line 1312 "parser.cpp"
+#line 1332 "parser.cpp"
     break;
 
   case 19: // argument_expression_list: argument_expression_list "," assignment_expression
-#line 226 "parser.y"
+#line 227 "parser.y"
                                                            {
             Expression value1 = yystack_[0].value.as < Expression > ();
             std::vector<Expression> &value2 = yystack_[2].value.as < std::vector<Expression> > ();
             value2.push_back(value1);
             yylhs.value.as < std::vector<Expression> > () = value2;
-            cout << "<EXP> argument_expression_list COMMA assignment_expression REDUCE argument_expression_list" << endl;
+            cout << "argument_expression_list COMMA assignment_expression REDUCE argument_expression_list" << endl;
         }
-#line 1324 "parser.cpp"
+#line 1344 "parser.cpp"
     break;
 
   case 20: // unary_expression: postfix_expression
-#line 236 "parser.y"
+#line 237 "parser.y"
                          { yylhs.value.as< Expression > () = yystack_[0].value.as < Expression > (); cout << "postfix_expression REDUCE unary_expression" << endl;}
-#line 1330 "parser.cpp"
+#line 1350 "parser.cpp"
     break;
 
   case 21: // unary_expression: "++" unary_expression
-#line 237 "parser.y"
+#line 238 "parser.y"
                               { yylhs.value.as< Expression > () = Expression(yystack_[1].value.as < std::string > (),&yystack_[0].value.as < Expression > ()); cout << "INC_OP unary_expression REDUCE unary_expression" << endl;}
-#line 1336 "parser.cpp"
+#line 1356 "parser.cpp"
     break;
 
   case 22: // unary_expression: "--" unary_expression
-#line 238 "parser.y"
+#line 239 "parser.y"
                               { yylhs.value.as< Expression > () = Expression(yystack_[1].value.as < std::string > (),&yystack_[0].value.as < Expression > ()); cout << "DEC_OP unary_expression REDUCE unary_expression" << endl;}
-#line 1342 "parser.cpp"
+#line 1362 "parser.cpp"
     break;
 
   case 23: // unary_expression: unary_operator cast_expression
-#line 239 "parser.y"
+#line 240 "parser.y"
                                      { yylhs.value.as< Expression > () = Expression(yystack_[1].value.as < std::string > (),&yystack_[0].value.as < Expression > ()); cout << "unary_operator cast_expression REDUCE unary_expression" << endl;}
-#line 1348 "parser.cpp"
+#line 1368 "parser.cpp"
     break;
 
   case 24: // unary_expression: "sizeof" unary_expression
-#line 240 "parser.y"
+#line 241 "parser.y"
                               { yylhs.value.as< Expression > () = Expression(); cout << "SIZEOF unary_expression REDUCE unary_expression" << endl;}
-#line 1354 "parser.cpp"
+#line 1374 "parser.cpp"
     break;
 
   case 25: // unary_expression: "sizeof" "(" type_name ")"
-#line 241 "parser.y"
+#line 242 "parser.y"
                                      { yylhs.value.as< Expression > () = Expression(); cout << "SIZEOF OPAREN type_name CPAREN REDUCE unary_expression" << endl;}
-#line 1360 "parser.cpp"
+#line 1380 "parser.cpp"
     break;
 
   case 26: // unary_operator: "&"
-#line 245 "parser.y"
+#line 246 "parser.y"
                 {yylhs.value.as< std::string > () = yystack_[0].value.as < std::string > (); cout << "BIT_AND REDUCE to unary_operator" << endl;}
-#line 1366 "parser.cpp"
+#line 1386 "parser.cpp"
     break;
 
   case 27: // unary_operator: "*"
-#line 246 "parser.y"
+#line 247 "parser.y"
                 {yylhs.value.as< std::string > () = yystack_[0].value.as < std::string > (); cout << "TIMES_OP REDUCE to unary_operator" << endl;}
-#line 1372 "parser.cpp"
+#line 1392 "parser.cpp"
     break;
 
   case 28: // unary_operator: "+"
-#line 247 "parser.y"
+#line 248 "parser.y"
                 {yylhs.value.as< std::string > () = yystack_[0].value.as < std::string > (); cout << "PLUS_OP REDUCE to unary_operator" << endl;}
-#line 1378 "parser.cpp"
+#line 1398 "parser.cpp"
     break;
 
   case 29: // unary_operator: "-"
-#line 248 "parser.y"
+#line 249 "parser.y"
                 {yylhs.value.as< std::string > () = yystack_[0].value.as < std::string > (); cout << "MINUS_OP REDUCE to unary_operator" << endl;}
-#line 1384 "parser.cpp"
+#line 1404 "parser.cpp"
     break;
 
   case 30: // unary_operator: "~"
-#line 249 "parser.y"
+#line 250 "parser.y"
                 {yylhs.value.as< std::string > () = yystack_[0].value.as < std::string > (); cout << "TILDE REDUCE to unary_operator" << endl;}
-#line 1390 "parser.cpp"
+#line 1410 "parser.cpp"
     break;
 
   case 31: // unary_operator: "!"
-#line 250 "parser.y"
+#line 251 "parser.y"
                 {yylhs.value.as< std::string > () = yystack_[0].value.as < std::string > (); cout << "NOT_OP REDUCE to unary_operator" << endl;}
-#line 1396 "parser.cpp"
+#line 1416 "parser.cpp"
     break;
 
   case 32: // cast_expression: unary_expression
-#line 254 "parser.y"
-                        { yylhs.value.as< Expression > () = yystack_[0].value.as < Expression > (); }
-#line 1402 "parser.cpp"
+#line 255 "parser.y"
+                        { yylhs.value.as< Expression > () = yystack_[0].value.as < Expression > ();  cout << "unary_expression REDUCE to cast_expression" << endl;}
+#line 1422 "parser.cpp"
     break;
 
   case 33: // cast_expression: "(" type_name ")" cast_expression
-#line 255 "parser.y"
-                                               { yylhs.value.as< Expression > () = Expression(); }
-#line 1408 "parser.cpp"
+#line 256 "parser.y"
+                                               { yylhs.value.as< Expression > () = yystack_[0].value.as < Expression > ();  cout << "unary_expression REDUCE to cast_expression" << endl;}
+#line 1428 "parser.cpp"
     break;
 
   case 34: // multiplicative_expression: cast_expression
-#line 259 "parser.y"
-                       { yylhs.value.as< Expression > () = yystack_[0].value.as < Expression > (); }
-#line 1414 "parser.cpp"
+#line 260 "parser.y"
+                       { yylhs.value.as< Expression > () = yystack_[0].value.as < Expression > ();  cout << "cast_expression REDUCE to multiplicative_expression" << endl;}
+#line 1434 "parser.cpp"
     break;
 
   case 35: // multiplicative_expression: multiplicative_expression "*" cast_expression
-#line 260 "parser.y"
-      { yylhs.value.as < Expression > () = yystack_[2].value.as < Expression > (); }
-#line 1420 "parser.cpp"
+#line 261 "parser.y"
+                                                         { cout << "multiplicative_expression TIMES_OP cast_expression REDUCE to multiplicative_expression" << endl;}
+#line 1440 "parser.cpp"
     break;
 
   case 36: // multiplicative_expression: multiplicative_expression "/" cast_expression
-#line 261 "parser.y"
-      { yylhs.value.as < Expression > () = yystack_[2].value.as < Expression > (); }
-#line 1426 "parser.cpp"
+#line 262 "parser.y"
+                                                      { cout << "multiplicative_expression DIV_OP cast_expression REDUCE to multiplicative_expression" << endl;}
+#line 1446 "parser.cpp"
     break;
 
   case 37: // multiplicative_expression: multiplicative_expression "%" cast_expression
-#line 262 "parser.y"
-      { yylhs.value.as < Expression > () = yystack_[2].value.as < Expression > (); }
-#line 1432 "parser.cpp"
+#line 263 "parser.y"
+                                                      { cout << "multiplicative_expression MOD_OP cast_expression REDUCE to multiplicative_expression" << endl;}
+#line 1452 "parser.cpp"
     break;
 
   case 38: // additive_expression: multiplicative_expression
-#line 266 "parser.y"
-      { yylhs.value.as < Expression > () = yystack_[0].value.as < Expression > (); }
-#line 1438 "parser.cpp"
-    break;
-
-  case 39: // additive_expression: additive_expression '+' multiplicative_expression
 #line 267 "parser.y"
-      { yylhs.value.as < Expression > () = yystack_[2].value.as < Expression > (); }
-#line 1444 "parser.cpp"
+                                 { yylhs.value.as< Expression > () = yystack_[0].value.as < Expression > ();  cout << "multiplicative_expression REDUCE to additive_expression" << endl;}
+#line 1458 "parser.cpp"
     break;
 
-  case 40: // additive_expression: additive_expression '-' multiplicative_expression
+  case 39: // additive_expression: additive_expression "+" multiplicative_expression
 #line 268 "parser.y"
-      { yylhs.value.as < Expression > () = yystack_[2].value.as < Expression > (); }
-#line 1450 "parser.cpp"
+                                                             { cout << "additive_expression REDUCE to multiplicative_expression" << endl;}
+#line 1464 "parser.cpp"
+    break;
+
+  case 40: // additive_expression: additive_expression "-" multiplicative_expression
+#line 269 "parser.y"
+                                                              { cout << "additive_expression REDUCE to multiplicative_expression" << endl;}
+#line 1470 "parser.cpp"
     break;
 
   case 41: // shift_expression: additive_expression
-#line 272 "parser.y"
-      { yylhs.value.as < Expression > () = yystack_[0].value.as < Expression > (); }
-#line 1456 "parser.cpp"
+#line 273 "parser.y"
+                           { yylhs.value.as< Expression > () = yystack_[0].value.as < Expression > ();  cout << "additive_expression REDUCE to shift_expression" << endl;}
+#line 1476 "parser.cpp"
     break;
 
   case 42: // shift_expression: shift_expression "<<" additive_expression
-#line 273 "parser.y"
-      { yylhs.value.as < Expression > () = yystack_[2].value.as < Expression > (); }
-#line 1462 "parser.cpp"
+#line 274 "parser.y"
+                                                  { cout << "shift_expression LEFT_OP additive_expression REDUCE to shift_expression" << endl;}
+#line 1482 "parser.cpp"
     break;
 
   case 43: // shift_expression: shift_expression ">>" additive_expression
-#line 274 "parser.y"
-      { yylhs.value.as < Expression > () = yystack_[2].value.as < Expression > (); }
-#line 1468 "parser.cpp"
+#line 275 "parser.y"
+                                                   { cout << "shift_expression RIGHT_OP additive_expression REDUCE to shift_expression" << endl;}
+#line 1488 "parser.cpp"
     break;
 
   case 44: // relational_expression: shift_expression
-#line 278 "parser.y"
-      { yylhs.value.as < Expression > () = yystack_[0].value.as < Expression > (); }
-#line 1474 "parser.cpp"
+#line 279 "parser.y"
+                        { yylhs.value.as< Expression > () = yystack_[0].value.as < Expression > ();  cout << "shift_expression REDUCE to relational_expression" << endl;}
+#line 1494 "parser.cpp"
     break;
 
   case 45: // relational_expression: relational_expression "<" shift_expression
-#line 279 "parser.y"
-      { yylhs.value.as < Expression > () = yystack_[2].value.as < Expression > (); }
-#line 1480 "parser.cpp"
+#line 280 "parser.y"
+                                                       { cout << "relational_expression LESS_OP shift_expression REDUCE to shift_expression" << endl;}
+#line 1500 "parser.cpp"
     break;
 
   case 46: // relational_expression: relational_expression ">" shift_expression
-#line 280 "parser.y"
-      { yylhs.value.as < Expression > () = yystack_[2].value.as < Expression > (); }
-#line 1486 "parser.cpp"
+#line 281 "parser.y"
+                                                           { cout << "relational_expression GREATER_OP shift_expression REDUCE to shift_expression" << endl;}
+#line 1506 "parser.cpp"
     break;
 
   case 47: // relational_expression: relational_expression "<=" shift_expression
-#line 281 "parser.y"
-      { yylhs.value.as < Expression > () = yystack_[2].value.as < Expression > (); }
-#line 1492 "parser.cpp"
+#line 282 "parser.y"
+                                                             { cout << "relational_expression LESS_EQUAL_OP shift_expression REDUCE to shift_expression" << endl;}
+#line 1512 "parser.cpp"
     break;
 
   case 48: // relational_expression: relational_expression ">=" shift_expression
-#line 282 "parser.y"
-      { yylhs.value.as < Expression > () = yystack_[2].value.as < Expression > (); }
-#line 1498 "parser.cpp"
+#line 283 "parser.y"
+                                                                { cout << "relational_expression GREATER_EQUAL_OP shift_expression REDUCE to shift_expression" << endl;}
+#line 1518 "parser.cpp"
     break;
 
   case 49: // equality_expression: relational_expression
-#line 286 "parser.y"
-      { yylhs.value.as < Expression > () = yystack_[0].value.as < Expression > (); }
-#line 1504 "parser.cpp"
+#line 287 "parser.y"
+                             { yylhs.value.as< Expression > () = yystack_[0].value.as < Expression > ();  cout << "relational_expression REDUCE to equality_expression" << endl;}
+#line 1524 "parser.cpp"
     break;
 
   case 50: // equality_expression: equality_expression "==" relational_expression
-#line 287 "parser.y"
-      { yylhs.value.as < Expression > () = yystack_[2].value.as < Expression > (); }
-#line 1510 "parser.cpp"
+#line 288 "parser.y"
+                                                                { cout << "equality_expression EQUAL_EQUAL_OP relational_expression REDUCE to equality_expression" << endl;}
+#line 1530 "parser.cpp"
     break;
 
   case 51: // equality_expression: equality_expression "!=" relational_expression
-#line 288 "parser.y"
-      { yylhs.value.as < Expression > () = yystack_[2].value.as < Expression > (); }
-#line 1516 "parser.cpp"
+#line 289 "parser.y"
+                                                              { cout << "equality_expression NOT_EQUAL_OP relational_expression REDUCE to equality_expression" << endl;}
+#line 1536 "parser.cpp"
     break;
 
   case 52: // and_expression: equality_expression
-#line 292 "parser.y"
-      { yylhs.value.as < Expression > () = yystack_[0].value.as < Expression > (); }
-#line 1522 "parser.cpp"
+#line 293 "parser.y"
+                           { yylhs.value.as< Expression > () = yystack_[0].value.as < Expression > ();  cout << "equality_expression REDUCE to and_expression" << endl;}
+#line 1542 "parser.cpp"
     break;
 
-  case 53: // and_expression: and_expression '&' equality_expression
-#line 293 "parser.y"
-      { yylhs.value.as < Expression > () = yystack_[2].value.as < Expression > (); }
-#line 1528 "parser.cpp"
+  case 53: // and_expression: and_expression "&" equality_expression
+#line 294 "parser.y"
+                                                  { cout << "and_expression BIT_AND equality_expression REDUCE to and_expression" << endl;}
+#line 1548 "parser.cpp"
     break;
 
   case 54: // exclusive_or_expression: and_expression
-#line 297 "parser.y"
-      { yylhs.value.as < Expression > () = yystack_[0].value.as < Expression > (); }
-#line 1534 "parser.cpp"
+#line 298 "parser.y"
+                      { yylhs.value.as< Expression > () = yystack_[0].value.as < Expression > ();  cout << "and_expression REDUCE to exclusive_or_expression" << endl;}
+#line 1554 "parser.cpp"
     break;
 
-  case 55: // exclusive_or_expression: exclusive_or_expression '^' and_expression
-#line 298 "parser.y"
-      { yylhs.value.as < Expression > () = yystack_[2].value.as < Expression > (); }
-#line 1540 "parser.cpp"
+  case 55: // exclusive_or_expression: exclusive_or_expression "^" and_expression
+#line 299 "parser.y"
+                                                     { cout << "exclusive_or_expression XOR_OP and_expression REDUCE to exclusive_or_expression" << endl;}
+#line 1560 "parser.cpp"
     break;
 
   case 56: // inclusive_or_expression: exclusive_or_expression
-#line 302 "parser.y"
-      { yylhs.value.as < Expression > () = yystack_[0].value.as < Expression > (); }
-#line 1546 "parser.cpp"
+#line 303 "parser.y"
+                               { yylhs.value.as< Expression > () = yystack_[0].value.as < Expression > ();  cout << "exclusive_or_expression REDUCE to inclusive_or_expression" << endl;}
+#line 1566 "parser.cpp"
     break;
 
-  case 57: // inclusive_or_expression: inclusive_or_expression '|' exclusive_or_expression
-#line 303 "parser.y"
-      { yylhs.value.as < Expression > () = yystack_[2].value.as < Expression > (); }
-#line 1552 "parser.cpp"
+  case 57: // inclusive_or_expression: inclusive_or_expression "|" exclusive_or_expression
+#line 304 "parser.y"
+                                                             { cout << "inclusive_or_expression BIT_OR exclusive_or_expression REDUCE to inclusive_or_expression" << endl;}
+#line 1572 "parser.cpp"
     break;
 
   case 58: // logical_and_expression: inclusive_or_expression
-#line 307 "parser.y"
-      { yylhs.value.as < Expression > () = yystack_[0].value.as < Expression > (); }
-#line 1558 "parser.cpp"
+#line 308 "parser.y"
+                               { yylhs.value.as< Expression > () = yystack_[0].value.as < Expression > ();  cout << "inclusive_or_expression REDUCE to logical_and_expression" << endl;}
+#line 1578 "parser.cpp"
     break;
 
   case 59: // logical_and_expression: logical_and_expression "&&" inclusive_or_expression
-#line 308 "parser.y"
-      { yylhs.value.as < Expression > () = yystack_[2].value.as < Expression > (); }
-#line 1564 "parser.cpp"
+#line 309 "parser.y"
+                                                             { cout << "inclusive_or_expression REDUCE to logical_and_expression" << endl;}
+#line 1584 "parser.cpp"
     break;
 
   case 60: // logical_or_expression: logical_and_expression
-#line 312 "parser.y"
-      { yylhs.value.as < Expression > () = yystack_[0].value.as < Expression > (); }
-#line 1570 "parser.cpp"
+#line 313 "parser.y"
+                              { yylhs.value.as< Expression > () = yystack_[0].value.as < Expression > ();  cout << "inclusive_and_expression REDUCE to logical_or_expression" << endl;}
+#line 1590 "parser.cpp"
     break;
 
   case 61: // logical_or_expression: logical_or_expression "||" logical_and_expression
-#line 313 "parser.y"
-      { yylhs.value.as < Expression > () = yystack_[2].value.as < Expression > (); }
-#line 1576 "parser.cpp"
+#line 314 "parser.y"
+                                                          { cout << "logical_or_expression OR_OP logical_and_expression REDUCE to logical_or_expression" << endl;}
+#line 1596 "parser.cpp"
     break;
 
   case 62: // conditional_expression: logical_or_expression
-#line 317 "parser.y"
-      { yylhs.value.as < Expression > () = yystack_[0].value.as < Expression > (); }
-#line 1582 "parser.cpp"
+#line 318 "parser.y"
+                             { yylhs.value.as< Expression > () = yystack_[0].value.as < Expression > ();  cout << "logical_or_expression REDUCE to conditional_expression" << endl;}
+#line 1602 "parser.cpp"
     break;
 
-  case 63: // conditional_expression: logical_or_expression '?' expression ':' conditional_expression
-#line 318 "parser.y"
-      { yylhs.value.as < Expression > () = yystack_[4].value.as < Expression > (); }
-#line 1588 "parser.cpp"
+  case 63: // conditional_expression: logical_or_expression "question" expression ":" conditional_expression
+#line 319 "parser.y"
+                                                                              { cout << "logical_or_expression QUESTION expression COLON conditional_expression REDUCE to conditional_expression" << endl;}
+#line 1608 "parser.cpp"
     break;
 
   case 64: // assignment_expression: conditional_expression
-#line 322 "parser.y"
-      { yylhs.value.as < Expression > () = yystack_[0].value.as < Expression > (); }
-#line 1594 "parser.cpp"
+#line 323 "parser.y"
+                              { yylhs.value.as< Expression > () = yystack_[0].value.as < Expression > ();  cout << "conditional_expression REDUCE to assignment_expression" << endl;}
+#line 1614 "parser.cpp"
     break;
 
   case 65: // assignment_expression: unary_expression assignment_operator assignment_expression
-#line 323 "parser.y"
-      { yylhs.value.as < Expression > () = yystack_[2].value.as < Expression > (); }
-#line 1600 "parser.cpp"
+#line 324 "parser.y"
+                                                                  { cout << "unary_expression assignment_operator assignment_expression REDUCE to assignment_expression" << endl;}
+#line 1620 "parser.cpp"
+    break;
+
+  case 66: // assignment_operator: "="
+#line 328 "parser.y"
+                     { yylhs.value.as< AssignmentOperator > () = AssignmentOperator(yystack_[0].value.as < std::string > (),EQUAL_OP);  cout << "EQUAL_OP REDUCE to assignment_operator" << endl;}
+#line 1626 "parser.cpp"
+    break;
+
+  case 67: // assignment_operator: "*="
+#line 329 "parser.y"
+                     { yylhs.value.as< AssignmentOperator > () = AssignmentOperator(yystack_[0].value.as < std::string > (),MUL_ASSIGN);  cout << "MUL_ASSIGN REDUCE to assignment_operator" << endl;}
+#line 1632 "parser.cpp"
+    break;
+
+  case 68: // assignment_operator: "/="
+#line 330 "parser.y"
+                     { yylhs.value.as< AssignmentOperator > () = AssignmentOperator(yystack_[0].value.as < std::string > (),DIV_ASSIGN);  cout << "DIV_ASSIGN REDUCE to assignment_operator" << endl;}
+#line 1638 "parser.cpp"
+    break;
+
+  case 69: // assignment_operator: "%="
+#line 331 "parser.y"
+                     { yylhs.value.as< AssignmentOperator > () = AssignmentOperator(yystack_[0].value.as < std::string > (),MOD_ASSIGN);  cout << "MOG_ASSIGN REDUCE to assignment_operator" << endl;}
+#line 1644 "parser.cpp"
+    break;
+
+  case 70: // assignment_operator: "+="
+#line 332 "parser.y"
+                     { yylhs.value.as< AssignmentOperator > () = AssignmentOperator(yystack_[0].value.as < std::string > (),ADD_ASSIGN);  cout << "ADD_ASSIGN REDUCE to assignment_operator" << endl;}
+#line 1650 "parser.cpp"
+    break;
+
+  case 71: // assignment_operator: "-="
+#line 333 "parser.y"
+                     { yylhs.value.as< AssignmentOperator > () = AssignmentOperator(yystack_[0].value.as < std::string > (),SUB_ASSIGN);  cout << "SUB_ASSIGN REDUCE to assignment_operator" << endl;}
+#line 1656 "parser.cpp"
+    break;
+
+  case 72: // assignment_operator: "<<="
+#line 334 "parser.y"
+                     { yylhs.value.as< AssignmentOperator > () = AssignmentOperator(yystack_[0].value.as < std::string > (),LEFT_ASSIGN);  cout << "LEFT_ASSIGN REDUCE to assignment_operator" << endl;}
+#line 1662 "parser.cpp"
+    break;
+
+  case 73: // assignment_operator: ">>="
+#line 335 "parser.y"
+                     { yylhs.value.as< AssignmentOperator > () = AssignmentOperator(yystack_[0].value.as < std::string > (),RIGHT_ASSIGN);  cout << "RIGHT_ASSIGN REDUCE to assignment_operator" << endl;}
+#line 1668 "parser.cpp"
+    break;
+
+  case 74: // assignment_operator: "&="
+#line 336 "parser.y"
+                     { yylhs.value.as< AssignmentOperator > () = AssignmentOperator(yystack_[0].value.as < std::string > (),AND_ASSIGN);  cout << "AND_ASSIGN REDUCE to assignment_operator" << endl;}
+#line 1674 "parser.cpp"
+    break;
+
+  case 75: // assignment_operator: "^="
+#line 337 "parser.y"
+                     { yylhs.value.as< AssignmentOperator > () = AssignmentOperator(yystack_[0].value.as < std::string > (),XOR_ASSIGN);  cout << "XOR_ASSIGN REDUCE to assignment_operator" << endl;}
+#line 1680 "parser.cpp"
+    break;
+
+  case 76: // assignment_operator: "|="
+#line 338 "parser.y"
+                     { yylhs.value.as< AssignmentOperator > () = AssignmentOperator(yystack_[0].value.as < std::string > (),OR_ASSIGN);  cout << "OR_ASSIGN REDUCE to assignment_operator" << endl;}
+#line 1686 "parser.cpp"
     break;
 
   case 77: // expression: assignment_expression
-#line 341 "parser.y"
-      { yylhs.value.as < Expression > () = yystack_[0].value.as < Expression > (); }
-#line 1606 "parser.cpp"
+#line 342 "parser.y"
+                             { yylhs.value.as< Expression > () = yystack_[0].value.as < Expression > ();  cout << "asignment_expression REDUCE to expression" << endl;}
+#line 1692 "parser.cpp"
     break;
 
   case 78: // expression: expression "," assignment_expression
-#line 342 "parser.y"
-      { yylhs.value.as < Expression > () = yystack_[2].value.as < Expression > (); }
-#line 1612 "parser.cpp"
+#line 343 "parser.y"
+                                              { cout << "expression COMMA assignment_expression COMMA  REDUCE to expression" << endl;}
+#line 1698 "parser.cpp"
     break;
 
   case 79: // constant_expression: conditional_expression
-#line 346 "parser.y"
-      { yylhs.value.as < Expression > () = yystack_[0].value.as < Expression > (); }
-#line 1618 "parser.cpp"
+#line 347 "parser.y"
+                              { yylhs.value.as< Expression > () = yystack_[0].value.as < Expression > ();  cout << "conditional_expression REDUCE to constant_expression" << endl;}
+#line 1704 "parser.cpp"
     break;
 
   case 209: // translation_unit: external_declaration
-#line 597 "parser.y"
+#line 598 "parser.y"
                                             { cout << "external_declaration REDUCE to translation_unit" << endl; }
-#line 1624 "parser.cpp"
+#line 1710 "parser.cpp"
     break;
 
   case 210: // translation_unit: translation_unit external_declaration
-#line 598 "parser.y"
+#line 599 "parser.y"
                                             { cout << "translation_unit external_declaration REDUCE to translation_unit" << endl; }
-#line 1630 "parser.cpp"
+#line 1716 "parser.cpp"
     break;
 
   case 211: // external_declaration: function_definition
-#line 602 "parser.y"
+#line 603 "parser.y"
                            { cout << "function_definition REDUCE to external_declaration" << endl; }
-#line 1636 "parser.cpp"
+#line 1722 "parser.cpp"
     break;
 
   case 212: // external_declaration: declaration
-#line 603 "parser.y"
+#line 604 "parser.y"
                            { cout << "declaration REDUCE to external_declaration" << endl; }
-#line 1642 "parser.cpp"
+#line 1728 "parser.cpp"
     break;
 
 
-#line 1646 "parser.cpp"
+#line 1732 "parser.cpp"
 
             default:
               break;
@@ -1994,49 +2080,49 @@ namespace  WadeSpace  {
   }
 
 
-  const short  Parser ::yypact_ninf_ = -215;
+  const short  Parser ::yypact_ninf_ = -196;
 
   const signed char  Parser ::yytable_ninf_ = -1;
 
   const short
    Parser ::yypact_[] =
   {
-     363,  -215,  -215,  -215,  -215,  -215,  -215,    37,  -215,  -215,
-    -215,  -215,  -215,  -215,  -215,  -215,  -215,  -215,  -215,  -215,
-    -215,  -215,    16,    -3,  -215,    15,  1604,  1604,  -215,    38,
-    -215,  1604,  1531,   -12,    19,   283,  -215,  -215,    21,    65,
-      23,  -215,  -215,    -3,  -215,   -38,  -215,   557,  -215,  -215,
-      34,  1640,  -215,   627,  -215,    15,  -215,  1531,  1385,   403,
-     -12,  -215,  -215,    65,   -24,    88,  -215,  -215,  -215,  -215,
-    -215,    16,  1167,  -215,  1531,  1640,  1640,  1459,  -215,    18,
-    1640,     3,  -215,  -215,  -215,    43,  1259,   107,    59,  1067,
-      71,   191,   148,   779,  1292,   150,   157,  -215,  -215,   803,
-    -215,  1301,  1301,  -215,  -215,  -215,  -215,  -215,  -215,  -215,
-     141,    85,  1259,  -215,   178,   -45,   108,    64,   174,   131,
-     143,   153,   186,   -17,  -215,  -215,    81,  -215,  -215,  -215,
-     715,   891,  -215,  -215,  -215,  -215,   173,  -215,  -215,  -215,
-    -215,    26,   227,   237,  -215,   146,  -215,  -215,  -215,  -215,
-     190,   172,  1259,  -215,    65,  -215,  1167,  -215,  -215,  -215,
-    1495,  -215,  -215,  -215,  1259,   144,  -215,   201,  -215,  1067,
-    -215,   202,  -215,  1067,   255,  1185,   256,  1259,  -215,   168,
-     803,  -215,  1259,  1259,   170,   -42,   252,   803,  -215,  -215,
-     953,  1259,   305,  -215,  -215,   308,  -215,  -215,  -215,  -215,
-    -215,  -215,  -215,  -215,  -215,  -215,  -215,  1259,  -215,  1259,
-    1259,  1259,  1259,  1259,  1259,  1259,  1259,  1259,  1259,  1259,
-    1259,  1259,  1259,  1259,  1259,  1259,  1259,  1259,  -215,  1259,
-    -215,   979,  -215,  -215,   323,   410,  -215,    31,  -215,    -8,
-    -215,  1567,   311,  -215,  -215,  -215,  -215,  -215,  -215,   220,
-    -215,  -215,  -215,    18,  1259,  -215,  1067,  -215,   263,  1185,
-    -215,   181,  -215,   272,   183,   185,  -215,   520,    13,  -215,
-    1226,   273,  -215,   199,  -215,    54,  -215,  -215,  -215,  -215,
-    -215,  -215,   178,   178,   -45,   -45,   108,   108,   108,   108,
-      64,    64,   174,   131,   143,   153,   186,    27,  -215,  -215,
-    -215,   274,   277,  -215,   231,    -8,  1422,   436,  -215,  -215,
-    -215,  -215,  1108,  -215,  -215,  -215,  1259,  1283,  1067,   286,
-    1067,  1067,  1167,  -215,   286,  1259,  -215,  -215,  1259,  -215,
-    -215,  -215,  -215,   285,  -215,   236,  -215,  -215,   209,  1067,
-     211,   327,  -215,  -215,   224,  -215,  -215,  -215,  -215,   292,
-    -215,  1067,  1067,  -215,  1126,  -215,  -215,  -215,  -215
+     372,  -196,  -196,  -196,  -196,  -196,  -196,    26,  -196,  -196,
+    -196,  -196,  -196,  -196,  -196,  -196,  -196,  -196,  -196,  -196,
+    -196,  -196,     6,     7,  -196,     5,  1619,  1619,  -196,    38,
+    -196,  1619,  1546,   -42,     8,   283,  -196,  -196,   -26,    43,
+       1,  -196,  -196,     7,  -196,    55,  -196,  1355,  -196,  -196,
+      22,  1655,  -196,   597,  -196,     5,  -196,  1546,  1400,   391,
+     -42,  -196,  -196,    43,    23,    41,  -196,  -196,  -196,  -196,
+    -196,     6,  1137,  -196,  1546,  1655,  1655,  1474,  -196,    14,
+    1655,    24,  -196,  -196,  -196,    36,  1229,    49,    85,  1037,
+      65,   125,   100,   749,  1262,   127,   129,  -196,  -196,   773,
+    -196,  1271,  1271,  -196,  -196,  -196,  -196,  -196,  -196,  -196,
+      60,   371,  1229,  -196,   145,   -24,   185,    61,   148,    99,
+     102,    59,   117,   -34,  -196,  -196,    75,  -196,  -196,  -196,
+     685,   861,  -196,  -196,  -196,  -196,   140,  -196,  -196,  -196,
+    -196,    17,   147,   173,  -196,    92,  -196,  -196,  -196,  -196,
+     123,   208,  1229,  -196,    43,  -196,  1137,  -196,  -196,  -196,
+    1510,  -196,  -196,  -196,  1229,   104,  -196,   175,  -196,  1037,
+    -196,   187,  -196,  1037,   205,  1155,   201,  1229,  -196,   106,
+     773,  -196,  1229,  1229,   136,   -15,   199,   773,  -196,  -196,
+     923,  1229,   258,  -196,  -196,   260,  -196,  -196,  -196,  -196,
+    -196,  -196,  -196,  -196,  -196,  -196,  -196,  1229,  -196,  1229,
+    1229,  1229,  1229,  1229,  1229,  1229,  1229,  1229,  1229,  1229,
+    1229,  1229,  1229,  1229,  1229,  1229,  1229,  1229,  -196,  1229,
+    -196,   949,  -196,  -196,   327,   424,  -196,    20,  -196,   -38,
+    -196,  1582,   263,  -196,  -196,  -196,  -196,  -196,  -196,   217,
+    -196,  -196,  -196,    14,  1229,  -196,  1037,  -196,   228,  1155,
+    -196,   149,  -196,   234,   159,   163,  -196,   532,   -32,  -196,
+    1196,   237,  -196,   164,  -196,    27,  -196,  -196,  -196,  -196,
+    -196,  -196,   145,   145,   -24,   -24,   185,   185,   185,   185,
+      61,    61,   148,    99,   102,    59,   219,   117,  -196,  -196,
+    -196,   241,   242,  -196,   204,   -38,  1437,   448,  -196,  -196,
+    -196,  -196,  1078,  -196,  -196,  -196,  1229,  1253,  1037,   250,
+    1037,  1037,  1137,  -196,   250,  1229,  -196,  -196,  1229,  -196,
+    -196,  -196,  -196,   246,  -196,   211,  -196,  -196,   168,  1037,
+     172,   289,  -196,  -196,   222,  -196,  -196,  -196,  -196,   259,
+    -196,  1037,  1037,  -196,  1096,  -196,  -196,  -196,  -196
   };
 
   const unsigned char
@@ -2061,8 +2147,8 @@ namespace  WadeSpace  {
        0,   117,   110,   115,     0,     0,   121,   123,   119,     0,
      206,     0,   205,     0,     0,     0,     0,     0,   207,     0,
        0,    24,     0,     0,     0,   159,     0,     0,    21,    22,
-       0,     0,     0,    14,    15,     0,    73,    72,    70,    71,
-      67,    68,    69,    74,    75,    76,    66,     0,    23,     0,
+       0,     0,     0,    14,    15,     0,    66,    73,    72,    70,
+      71,    67,    68,    69,    74,    75,    76,     0,    23,     0,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
        0,     0,     0,     0,     0,     0,     0,     0,   196,     0,
      189,     0,   188,   194,     0,     0,   154,   161,   155,   162,
@@ -2070,8 +2156,8 @@ namespace  WadeSpace  {
      109,   124,   116,     0,     0,   184,     0,   186,     0,     0,
      204,     0,   208,     0,     0,     0,     4,     0,   161,   160,
        0,     0,    10,     0,    18,     0,    12,    13,    65,    35,
-      36,    37,    39,    40,    43,    42,    48,    47,    46,    45,
-      50,    51,    53,    55,    57,    59,    61,     0,    78,   190,
+      36,    37,    40,    39,    43,    42,    48,    47,    46,    45,
+      50,    51,    53,    55,    57,    59,     0,    61,    78,   190,
      169,     0,     0,   165,     0,   163,     0,     0,   151,   153,
      158,   174,     0,   122,   125,   185,     0,     0,     0,    25,
        0,     0,     0,    33,     0,     0,    11,     9,     0,   170,
@@ -2083,13 +2169,13 @@ namespace  WadeSpace  {
   const short
    Parser ::yypgoto_[] =
   {
-    -215,  -215,  -215,  -215,  -215,   -49,  -215,   -87,    68,    73,
-     -28,    76,   124,   125,   123,   126,   127,  -215,   -54,   -70,
-    -215,   -86,   -48,     8,     0,  -215,   289,  -215,   133,  -215,
-    -215,   279,   -47,   -52,  -215,   104,  -215,   304,   214,    32,
-      -5,   -30,    -7,  -215,   -57,  -215,   128,  -215,  -136,  -108,
-    -214,   -69,    50,   -74,  -215,   171,     9,   243,  -169,  -215,
-    -215,  -215,  -215,   341,  -215
+    -196,  -196,  -196,  -196,  -196,   -49,  -196,   -80,    63,    66,
+     -68,    67,    89,    91,    93,   101,   105,  -196,   -58,   -70,
+    -196,    12,   -56,    13,     0,  -196,   256,  -196,   133,  -196,
+    -196,   261,   -43,   -55,  -196,    78,  -196,   270,   186,    46,
+      11,   -30,    -5,  -196,   -53,  -196,   103,  -196,  -140,  -135,
+    -195,   -69,    19,   -74,  -196,   165,    28,   212,  -168,  -196,
+    -196,  -196,  -196,   310,  -196
   };
 
   const short
@@ -2107,72 +2193,69 @@ namespace  WadeSpace  {
   const short
    Parser ::yytable_[] =
   {
-      25,   142,   157,   158,    60,   149,   259,   179,    24,     5,
-     148,    70,   267,   184,    71,   174,    42,    40,     1,     1,
-      47,     1,     1,   305,   161,   208,    48,    49,   168,     1,
-     163,    52,   149,   238,     1,    25,    69,   148,   171,    21,
-      38,    50,    58,    24,   263,   181,   306,   185,   212,   213,
-     136,   271,   188,   189,   305,    41,    74,   233,   141,   235,
-     226,    23,   130,   148,    44,   137,   136,   267,    64,    22,
-      22,    63,    22,    22,   167,    68,   152,   269,    67,   229,
-     234,   227,   137,    80,    75,   234,   157,    39,    51,    59,
-     317,   261,   170,   307,   184,   255,   264,   265,   149,   257,
-      23,   184,   169,   148,   246,   275,   229,    80,    80,    80,
-     149,   327,    80,   163,   235,   148,   251,   164,    23,    23,
-     274,    23,   279,   280,   281,   175,   328,   235,   185,    23,
-     228,    80,   235,   229,   237,   185,   236,   278,   137,   153,
-     154,   297,   216,   217,   218,   219,   196,   197,   198,   199,
-     200,   201,   202,   203,   204,   205,   172,   233,   173,   298,
+      25,   149,   157,   158,    60,   142,   238,   259,     1,     1,
+     148,     1,    58,    24,   226,   174,   306,     1,    42,     5,
+       1,   161,   267,     1,    63,   168,    48,    49,   149,    38,
+     171,    52,   208,    40,   163,    25,    47,   148,    69,   267,
+     263,    50,   305,   227,   185,   181,    64,   271,    24,    21,
+     269,    59,   188,   189,    44,   307,    67,   233,   141,    22,
+      22,   235,    22,   148,   212,   213,   136,   164,    22,    41,
+     137,   234,    75,   305,   234,    74,    39,   169,   235,   229,
+      23,   130,   136,   152,   327,   170,   157,   137,    51,    68,
+     167,   317,   153,   154,   149,   255,   246,    80,   172,   257,
+      23,    23,    23,   148,    70,   179,   149,    71,   251,    23,
+     235,   184,    23,   235,   190,   148,   191,   163,   192,   175,
+     274,    80,    80,    80,   228,   185,    80,   229,   176,   279,
+     280,   281,   185,   193,   194,   195,   237,   278,   173,   216,
+     217,   218,   219,   137,   242,    80,   224,   243,   286,   287,
+     288,   289,   236,   252,   177,   262,   253,   233,   229,   298,
      148,   148,   148,   148,   148,   148,   148,   148,   148,   148,
-     148,   148,   148,   148,   148,   148,   148,   148,   268,   214,
-     215,   149,   315,   323,    76,   206,   148,   304,   286,   287,
-     288,   289,    80,   252,   176,   190,   253,   191,   242,   192,
-     149,   243,   177,    56,   182,   148,   314,    60,    76,    76,
-      76,   183,    80,    76,   193,   194,   195,   262,    73,    80,
-     229,   148,   229,   245,   154,   266,   222,   237,   138,    40,
-     338,   340,    76,   229,   141,   229,   318,   229,   320,   223,
-     321,   141,   157,   337,   341,   159,   342,   343,   167,   333,
-     224,   325,   157,   149,   326,   345,   220,   221,   148,   335,
-     268,   229,   225,   229,   349,   350,   351,   141,   209,   210,
-     211,   311,   312,    72,   346,   353,   354,   356,   357,   148,
-     282,   283,   240,    61,   157,   337,     1,   284,   285,   241,
-       2,     3,   244,    76,     4,     5,   290,   291,   258,     6,
-     254,   256,     7,     8,     9,   260,   141,   270,   276,    10,
-      11,   277,    12,    76,   310,    13,    14,   316,    15,    16,
-      76,    17,    18,    19,    20,    21,     1,   319,   324,   329,
-       2,     3,   330,   331,     4,     5,   322,    22,   348,     6,
-     347,   355,     7,     8,     9,   352,   292,   294,   293,    10,
-      11,   295,    12,   296,   160,    13,    14,   313,    15,    16,
-     155,    17,    18,    19,    20,    21,     1,   151,   247,   309,
-       2,     3,   344,   231,     4,     5,    62,   234,   300,     6,
-       0,     0,     7,     8,     9,     0,    23,     0,     0,    10,
-      11,     0,    12,     0,     0,    13,    14,     0,    15,    16,
-       0,    17,    18,    19,    20,    21,   146,    82,    83,    84,
-       0,     0,     0,   146,    82,    83,    84,    22,     0,     0,
-       0,     0,     0,     0,   235,     0,    23,     0,     0,     0,
-       0,     0,     0,     0,     0,     0,     0,    94,     0,   146,
-      82,    83,    84,     0,    94,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,     0,     0,     0,    99,     0,     0,
-       0,     0,   100,     0,    99,     0,    23,     0,     0,   100,
-      94,     0,     0,     0,     0,     0,   101,   102,     0,     0,
-       0,     0,     0,   101,   102,     0,     0,   103,     0,   104,
-      99,   105,   106,   107,   103,   100,   104,     0,   105,   106,
-     107,     0,     0,     0,     0,   147,     0,     0,     0,   101,
-     102,     0,   303,     0,     0,     0,     0,     0,     0,     0,
-     103,     0,   104,     0,   105,   106,   107,     2,     3,     0,
-       0,     4,     5,     0,     0,     0,     6,     0,   334,     7,
-       8,     9,     0,     0,     0,     0,    10,    11,     0,    12,
-       0,     0,    13,    14,     0,    15,    16,     0,    17,    18,
-      19,    20,    21,     0,     2,     3,     0,     0,     4,     5,
-       0,     0,     0,     6,   267,   300,     7,     8,     9,     0,
+     148,   148,   148,   148,   148,   148,   148,   149,   148,   304,
+     268,   182,   315,   183,    76,   222,   148,   223,   229,   261,
+     323,   266,   184,   225,   264,   265,   149,    56,   314,   184,
+      72,   229,   240,   275,   318,   148,    80,    60,    76,    76,
+      76,   229,    73,    76,   320,   229,   325,   244,   321,   326,
+     229,   148,   138,   349,   229,   241,    80,   351,   254,   237,
+     220,   221,    76,    80,   141,   209,   210,   211,   296,   159,
+     256,   141,   157,   337,   341,    40,   342,   343,   258,   149,
+     260,   335,   157,   333,   270,   345,   214,   215,   148,   245,
+     154,   276,   268,   277,   167,   350,   310,   141,   311,   312,
+     346,   229,   328,   353,   354,   282,   283,   356,   357,   148,
+     284,   285,   316,    61,   157,   337,     1,   290,   291,   319,
+       2,     3,   324,    76,     4,     5,   329,   330,   331,     6,
+     322,   347,     7,     8,     9,   348,   141,   352,   355,    10,
+      11,   292,    12,    76,   293,    13,    14,   294,    15,    16,
+      76,    17,    18,    19,    20,    21,   295,   155,   338,   340,
+       1,   313,   297,   151,     2,     3,   160,    22,     4,     5,
+     247,   344,   231,     6,   309,    62,     7,     8,     9,     0,
        0,     0,     0,    10,    11,     0,    12,     0,     0,    13,
       14,     0,    15,    16,     0,    17,    18,    19,    20,    21,
-       0,     0,     0,     0,     0,     0,     0,    53,     0,     0,
+       0,     0,     0,     0,     0,     1,     0,     0,    23,     2,
+       3,   234,   300,     4,     5,     0,     0,     0,     6,     0,
+       0,     7,     8,     9,   146,    82,    83,    84,    10,    11,
+       0,    12,     0,     0,    13,    14,     0,    15,    16,     0,
+      17,    18,    19,    20,    21,     0,     0,     0,     0,     0,
+     235,     0,    23,     0,     0,    94,    22,   146,    82,    83,
+      84,   196,   197,   198,   199,   200,   201,   202,   203,   204,
+     205,   206,     0,     0,     0,    99,     0,     0,     0,     0,
+     100,   146,    82,    83,    84,     0,     0,     0,    94,     0,
+       0,     0,     0,     0,   101,   102,     0,    23,     0,     0,
+       0,     0,     0,     0,     0,   103,     0,   104,    99,   105,
+     106,   107,    94,   100,     0,   147,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,   101,   102,     0,
+       0,     0,    99,     0,     0,     0,     0,   100,   103,     0,
+     104,     0,   105,   106,   107,     0,     0,     0,   303,     0,
+       0,   101,   102,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,   103,     0,   104,     0,   105,   106,   107,     2,
+       3,     0,   334,     4,     5,     0,     0,     0,     6,     0,
+       0,     7,     8,     9,     0,     0,     0,     0,    10,    11,
+       0,    12,     0,     0,    13,    14,     0,    15,    16,     0,
+      17,    18,    19,    20,    21,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,   267,   300,     0,     0,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,   235,     0,    23,     0,     0,     0,     0,     0,     0,
       81,    82,    83,    84,     2,     3,    85,    86,     4,     5,
       87,    88,    89,     6,     0,     0,     7,     8,     9,    90,
-      91,    92,     0,    10,    11,     0,    12,    72,    93,    13,
+      91,    92,     0,    10,    11,   235,    12,    23,    93,    13,
       14,    94,    15,    16,    95,    17,    18,    19,    20,    21,
       96,     0,     0,     0,     0,     0,    97,    53,    98,     0,
        0,    99,     0,     0,     0,     0,   100,     0,     0,     0,
@@ -2245,108 +2328,109 @@ namespace  WadeSpace  {
        0,   100,     0,     0,     0,   187,   101,   102,     0,     0,
      100,     0,     0,     0,     0,   101,   102,   103,     0,   104,
        0,   105,   106,   107,   101,   102,   103,     0,   104,     0,
-     105,   106,   107,     0,     0,   103,     0,   104,   139,   105,
+     105,   106,   107,     0,     0,   103,     0,   104,     0,   105,
      106,   107,     2,     3,     0,     0,     4,     5,     0,     0,
        0,     6,     0,     0,     7,     8,     9,     0,     0,     0,
        0,    10,    11,     0,    12,     0,     0,    13,    14,     0,
-      15,    16,     0,    17,    18,    19,    20,    21,     0,     2,
-       3,     0,     0,     4,     5,     0,     0,     0,     6,     0,
-     140,     7,     8,     9,     0,     0,     0,     0,    10,    11,
-       0,    12,     0,     0,    13,    14,     0,    15,    16,     0,
-      17,    18,    19,    20,    21,     0,     2,     0,     0,     0,
-       4,     5,     0,     0,     0,     6,     0,   332,     7,     0,
-       9,     0,     0,     0,     0,    10,    11,     0,     0,     0,
-       0,    13,    14,     0,     0,    16,     0,     0,    18,    19,
-      20,    21,     2,     0,     0,     0,     4,     5,     0,     0,
-     162,     6,     0,     0,     7,     0,     9,     0,     0,     0,
-       0,    10,    11,     0,     0,     0,     0,    13,    14,     0,
-       0,    16,     0,     0,    18,    19,    20,    21,     2,     3,
-       0,     0,     4,     5,     0,     0,   250,     6,     0,     0,
-       7,     8,     9,     0,     0,     0,     0,    10,    11,     0,
-      12,     0,     0,    13,    14,     0,    15,    16,     0,    17,
-      18,    19,    20,    21,     2,     3,     0,     0,     4,     5,
-       0,    53,     0,     6,     0,     0,     7,     8,     9,     0,
+      15,    16,     0,    17,    18,    19,    20,    21,     0,     0,
+       0,     0,     0,   139,     0,    53,     0,     2,     3,     0,
+       0,     4,     5,     0,     0,    72,     6,     0,     0,     7,
+       8,     9,     0,     0,     0,     0,    10,    11,     0,    12,
+       0,     0,    13,    14,     0,    15,    16,     0,    17,    18,
+      19,    20,    21,     0,     2,     3,     0,     0,     4,     5,
+       0,     0,     0,     6,     0,   140,     7,     8,     9,     0,
        0,     0,     0,    10,    11,     0,    12,     0,     0,    13,
       14,     0,    15,    16,     0,    17,    18,    19,    20,    21,
-       0,     2,     3,     0,   308,     4,     5,     0,     0,     0,
-       6,     0,     0,     7,     8,     9,     0,     0,     0,     0,
-      10,    11,     0,    12,     0,     0,    13,    14,     0,    15,
-      16,     0,    17,    18,    19,    20,    21,     2,     0,     0,
-       0,     4,     5,     0,     0,     0,     6,     0,     0,     7,
+       0,     2,     0,     0,     0,     4,     5,     0,     0,     0,
+       6,     0,   332,     7,     0,     9,     0,     0,     0,     0,
+      10,    11,     0,     0,     0,     0,    13,    14,     0,     0,
+      16,     0,     0,    18,    19,    20,    21,     2,     0,     0,
+       0,     4,     5,     0,     0,   162,     6,     0,     0,     7,
        0,     9,     0,     0,     0,     0,    10,    11,     0,     0,
        0,     0,    13,    14,     0,     0,    16,     0,     0,    18,
-      19,    20,    21
+      19,    20,    21,     2,     3,     0,     0,     4,     5,     0,
+       0,   250,     6,     0,     0,     7,     8,     9,     0,     0,
+       0,     0,    10,    11,     0,    12,     0,     0,    13,    14,
+       0,    15,    16,     0,    17,    18,    19,    20,    21,     2,
+       3,     0,     0,     4,     5,     0,    53,     0,     6,     0,
+       0,     7,     8,     9,     0,     0,     0,     0,    10,    11,
+       0,    12,     0,     0,    13,    14,     0,    15,    16,     0,
+      17,    18,    19,    20,    21,     0,     2,     3,     0,   308,
+       4,     5,     0,     0,     0,     6,     0,     0,     7,     8,
+       9,     0,     0,     0,     0,    10,    11,     0,    12,     0,
+       0,    13,    14,     0,    15,    16,     0,    17,    18,    19,
+      20,    21,     2,     0,     0,     0,     4,     5,     0,     0,
+       0,     6,     0,     0,     7,     0,     9,     0,     0,     0,
+       0,    10,    11,     0,     0,     0,     0,    13,    14,     0,
+       0,    16,     0,     0,    18,    19,    20,    21
   };
 
   const short
    Parser ::yycheck_[] =
   {
-       0,    58,    72,    72,    34,    59,   175,    93,     0,    12,
-      59,    49,    54,    99,    52,    89,    23,    22,     3,     3,
-      25,     3,     3,   237,    76,   112,    26,    27,    80,     3,
-      77,    31,    86,   141,     3,    35,    43,    86,    86,    42,
-       3,     3,    54,    35,   180,    94,    54,    99,    93,    94,
-      55,   187,   101,   102,   268,    23,    47,   131,    58,   101,
-      77,   103,    53,   112,    49,    57,    71,    54,     3,    54,
-      54,    50,    54,    54,    79,    43,   100,   185,    55,    52,
-      54,    98,    74,    51,    50,    54,   156,    50,    50,   101,
-     259,   177,    49,   101,   180,   169,   182,   183,   152,   173,
-     103,   187,    99,   152,   152,   191,    52,    75,    76,    77,
-     164,    57,    80,   160,   101,   164,   164,    99,   103,   103,
-     190,   103,   209,   210,   211,    54,    99,   101,   180,   103,
-      49,    99,   101,    52,   141,   187,   141,   207,   130,    51,
-      52,   227,    78,    79,    80,    81,    61,    62,    63,    64,
-      65,    66,    67,    68,    69,    70,    49,   231,    99,   229,
+       0,    59,    72,    72,    34,    58,   141,   175,     3,     3,
+      59,     3,    54,     0,    48,    89,    54,     3,    23,    12,
+       3,    76,    54,     3,    50,    80,    26,    27,    86,     3,
+      86,    31,   112,    22,    77,    35,    25,    86,    43,    54,
+     180,     3,   237,    77,    99,    94,     3,   187,    35,    42,
+     185,    93,   101,   102,    49,    93,    55,   131,    58,    54,
+      54,    93,    54,   112,    88,    89,    55,    53,    54,    23,
+      57,    54,    50,   268,    54,    47,    50,    53,    93,    52,
+      95,    53,    71,    60,    57,    49,   156,    74,    50,    43,
+      79,   259,    51,    52,   152,   169,   152,    51,    49,   173,
+      95,    95,    95,   152,    49,    93,   164,    52,   164,    95,
+      93,    99,    95,    93,    54,   164,    56,   160,    58,    54,
+     190,    75,    76,    77,    49,   180,    80,    52,     3,   209,
+     210,   211,   187,    73,    74,    75,   141,   207,    53,    78,
+      79,    80,    81,   130,    52,    99,    87,    55,   216,   217,
+     218,   219,   141,    49,    54,    49,    52,   231,    52,   229,
      209,   210,   211,   212,   213,   214,   215,   216,   217,   218,
-     219,   220,   221,   222,   223,   224,   225,   226,   185,    71,
-      72,   235,   256,   270,    51,   100,   235,   235,   216,   217,
-     218,   219,   160,    49,     3,    54,    52,    56,    52,    58,
-     254,    55,    54,    32,    54,   254,   254,   237,    75,    76,
-      77,    54,   180,    80,    73,    74,    75,    49,    47,   187,
-      52,   270,    52,    51,    52,    55,    95,   234,    57,   234,
-     316,   317,    99,    52,   234,    52,    55,    52,    55,    96,
-      55,   241,   312,   312,   318,    74,   320,   321,   253,   306,
-      97,    52,   322,   307,    55,   325,    82,    83,   307,   307,
-     267,    52,    76,    52,    55,   339,    55,   267,    90,    91,
-      92,    51,    52,   100,   328,    51,    52,   351,   352,   328,
-     212,   213,    55,     0,   354,   354,     3,   214,   215,    52,
-       7,     8,   102,   160,    11,    12,   220,   221,    43,    16,
-      99,    99,    19,    20,    21,    49,   306,    55,     3,    26,
-      27,     3,    29,   180,     3,    32,    33,    54,    35,    36,
-     187,    38,    39,    40,    41,    42,     3,    55,    55,    55,
-       7,     8,    55,   102,    11,    12,    50,    54,   102,    16,
-      55,    49,    19,    20,    21,    18,   222,   224,   223,    26,
-      27,   225,    29,   226,    75,    32,    33,   253,    35,    36,
-      71,    38,    39,    40,    41,    42,     3,    63,   154,   241,
-       7,     8,   322,   130,    11,    12,    35,    54,    55,    16,
-      -1,    -1,    19,    20,    21,    -1,   103,    -1,    -1,    26,
-      27,    -1,    29,    -1,    -1,    32,    33,    -1,    35,    36,
-      -1,    38,    39,    40,    41,    42,     3,     4,     5,     6,
-      -1,    -1,    -1,     3,     4,     5,     6,    54,    -1,    -1,
-      -1,    -1,    -1,    -1,   101,    -1,   103,    -1,    -1,    -1,
-      -1,    -1,    -1,    -1,    -1,    -1,    -1,    34,    -1,     3,
-       4,     5,     6,    -1,    34,    -1,    -1,    -1,    -1,    -1,
-      -1,    -1,    -1,    -1,    -1,    -1,    -1,    54,    -1,    -1,
-      -1,    -1,    59,    -1,    54,    -1,   103,    -1,    -1,    59,
-      34,    -1,    -1,    -1,    -1,    -1,    73,    74,    -1,    -1,
-      -1,    -1,    -1,    73,    74,    -1,    -1,    84,    -1,    86,
-      54,    88,    89,    90,    84,    59,    86,    -1,    88,    89,
-      90,    -1,    -1,    -1,    -1,   102,    -1,    -1,    -1,    73,
-      74,    -1,   102,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
-      84,    -1,    86,    -1,    88,    89,    90,     7,     8,    -1,
-      -1,    11,    12,    -1,    -1,    -1,    16,    -1,   102,    19,
-      20,    21,    -1,    -1,    -1,    -1,    26,    27,    -1,    29,
-      -1,    -1,    32,    33,    -1,    35,    36,    -1,    38,    39,
-      40,    41,    42,    -1,     7,     8,    -1,    -1,    11,    12,
-      -1,    -1,    -1,    16,    54,    55,    19,    20,    21,    -1,
+     219,   220,   221,   222,   223,   224,   225,   235,   227,   235,
+     185,    54,   256,    54,    51,    86,   235,    85,    52,   177,
+     270,    55,   180,    76,   182,   183,   254,    32,   254,   187,
+      60,    52,    55,   191,    55,   254,   160,   237,    75,    76,
+      77,    52,    47,    80,    55,    52,    52,    94,    55,    55,
+      52,   270,    57,    55,    52,    52,   180,    55,    53,   234,
+      82,    83,    99,   187,   234,    90,    91,    92,   226,    74,
+      53,   241,   312,   312,   318,   234,   320,   321,    43,   307,
+      49,   307,   322,   306,    55,   325,    71,    72,   307,    51,
+      52,     3,   267,     3,   253,   339,     3,   267,    51,    52,
+     328,    52,    53,    51,    52,   212,   213,   351,   352,   328,
+     214,   215,    54,     0,   354,   354,     3,   220,   221,    55,
+       7,     8,    55,   160,    11,    12,    55,    55,    94,    16,
+      50,    55,    19,    20,    21,    94,   306,    18,    49,    26,
+      27,   222,    29,   180,   223,    32,    33,   224,    35,    36,
+     187,    38,    39,    40,    41,    42,   225,    71,   316,   317,
+       3,   253,   227,    63,     7,     8,    75,    54,    11,    12,
+     154,   322,   130,    16,   241,    35,    19,    20,    21,    -1,
       -1,    -1,    -1,    26,    27,    -1,    29,    -1,    -1,    32,
       33,    -1,    35,    36,    -1,    38,    39,    40,    41,    42,
-      -1,    -1,    -1,    -1,    -1,    -1,    -1,    50,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,     3,    -1,    -1,    95,     7,
+       8,    54,    55,    11,    12,    -1,    -1,    -1,    16,    -1,
+      -1,    19,    20,    21,     3,     4,     5,     6,    26,    27,
+      -1,    29,    -1,    -1,    32,    33,    -1,    35,    36,    -1,
+      38,    39,    40,    41,    42,    -1,    -1,    -1,    -1,    -1,
+      93,    -1,    95,    -1,    -1,    34,    54,     3,     4,     5,
+       6,    60,    61,    62,    63,    64,    65,    66,    67,    68,
+      69,    70,    -1,    -1,    -1,    54,    -1,    -1,    -1,    -1,
+      59,     3,     4,     5,     6,    -1,    -1,    -1,    34,    -1,
+      -1,    -1,    -1,    -1,    73,    74,    -1,    95,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    84,    -1,    86,    54,    88,
+      89,    90,    34,    59,    -1,    94,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    73,    74,    -1,
+      -1,    -1,    54,    -1,    -1,    -1,    -1,    59,    84,    -1,
+      86,    -1,    88,    89,    90,    -1,    -1,    -1,    94,    -1,
+      -1,    73,    74,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    84,    -1,    86,    -1,    88,    89,    90,     7,
+       8,    -1,    94,    11,    12,    -1,    -1,    -1,    16,    -1,
+      -1,    19,    20,    21,    -1,    -1,    -1,    -1,    26,    27,
+      -1,    29,    -1,    -1,    32,    33,    -1,    35,    36,    -1,
+      38,    39,    40,    41,    42,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    54,    55,    -1,    -1,
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
-      -1,   101,    -1,   103,    -1,    -1,    -1,    -1,    -1,    -1,
        3,     4,     5,     6,     7,     8,     9,    10,    11,    12,
       13,    14,    15,    16,    -1,    -1,    19,    20,    21,    22,
-      23,    24,    -1,    26,    27,    -1,    29,   100,    31,    32,
+      23,    24,    -1,    26,    27,    93,    29,    95,    31,    32,
       33,    34,    35,    36,    37,    38,    39,    40,    41,    42,
       43,    -1,    -1,    -1,    -1,    -1,    49,    50,    51,    -1,
       -1,    54,    -1,    -1,    -1,    -1,    59,    -1,    -1,    -1,
@@ -2419,37 +2503,41 @@ namespace  WadeSpace  {
       -1,    59,    -1,    -1,    -1,    54,    73,    74,    -1,    -1,
       59,    -1,    -1,    -1,    -1,    73,    74,    84,    -1,    86,
       -1,    88,    89,    90,    73,    74,    84,    -1,    86,    -1,
-      88,    89,    90,    -1,    -1,    84,    -1,    86,     3,    88,
+      88,    89,    90,    -1,    -1,    84,    -1,    86,    -1,    88,
       89,    90,     7,     8,    -1,    -1,    11,    12,    -1,    -1,
       -1,    16,    -1,    -1,    19,    20,    21,    -1,    -1,    -1,
       -1,    26,    27,    -1,    29,    -1,    -1,    32,    33,    -1,
-      35,    36,    -1,    38,    39,    40,    41,    42,    -1,     7,
-       8,    -1,    -1,    11,    12,    -1,    -1,    -1,    16,    -1,
-      55,    19,    20,    21,    -1,    -1,    -1,    -1,    26,    27,
-      -1,    29,    -1,    -1,    32,    33,    -1,    35,    36,    -1,
-      38,    39,    40,    41,    42,    -1,     7,    -1,    -1,    -1,
-      11,    12,    -1,    -1,    -1,    16,    -1,    55,    19,    -1,
-      21,    -1,    -1,    -1,    -1,    26,    27,    -1,    -1,    -1,
-      -1,    32,    33,    -1,    -1,    36,    -1,    -1,    39,    40,
-      41,    42,     7,    -1,    -1,    -1,    11,    12,    -1,    -1,
-      51,    16,    -1,    -1,    19,    -1,    21,    -1,    -1,    -1,
-      -1,    26,    27,    -1,    -1,    -1,    -1,    32,    33,    -1,
-      -1,    36,    -1,    -1,    39,    40,    41,    42,     7,     8,
-      -1,    -1,    11,    12,    -1,    -1,    51,    16,    -1,    -1,
-      19,    20,    21,    -1,    -1,    -1,    -1,    26,    27,    -1,
-      29,    -1,    -1,    32,    33,    -1,    35,    36,    -1,    38,
-      39,    40,    41,    42,     7,     8,    -1,    -1,    11,    12,
-      -1,    50,    -1,    16,    -1,    -1,    19,    20,    21,    -1,
+      35,    36,    -1,    38,    39,    40,    41,    42,    -1,    -1,
+      -1,    -1,    -1,     3,    -1,    50,    -1,     7,     8,    -1,
+      -1,    11,    12,    -1,    -1,    60,    16,    -1,    -1,    19,
+      20,    21,    -1,    -1,    -1,    -1,    26,    27,    -1,    29,
+      -1,    -1,    32,    33,    -1,    35,    36,    -1,    38,    39,
+      40,    41,    42,    -1,     7,     8,    -1,    -1,    11,    12,
+      -1,    -1,    -1,    16,    -1,    55,    19,    20,    21,    -1,
       -1,    -1,    -1,    26,    27,    -1,    29,    -1,    -1,    32,
       33,    -1,    35,    36,    -1,    38,    39,    40,    41,    42,
-      -1,     7,     8,    -1,    47,    11,    12,    -1,    -1,    -1,
-      16,    -1,    -1,    19,    20,    21,    -1,    -1,    -1,    -1,
-      26,    27,    -1,    29,    -1,    -1,    32,    33,    -1,    35,
-      36,    -1,    38,    39,    40,    41,    42,     7,    -1,    -1,
-      -1,    11,    12,    -1,    -1,    -1,    16,    -1,    -1,    19,
+      -1,     7,    -1,    -1,    -1,    11,    12,    -1,    -1,    -1,
+      16,    -1,    55,    19,    -1,    21,    -1,    -1,    -1,    -1,
+      26,    27,    -1,    -1,    -1,    -1,    32,    33,    -1,    -1,
+      36,    -1,    -1,    39,    40,    41,    42,     7,    -1,    -1,
+      -1,    11,    12,    -1,    -1,    51,    16,    -1,    -1,    19,
       -1,    21,    -1,    -1,    -1,    -1,    26,    27,    -1,    -1,
       -1,    -1,    32,    33,    -1,    -1,    36,    -1,    -1,    39,
-      40,    41,    42
+      40,    41,    42,     7,     8,    -1,    -1,    11,    12,    -1,
+      -1,    51,    16,    -1,    -1,    19,    20,    21,    -1,    -1,
+      -1,    -1,    26,    27,    -1,    29,    -1,    -1,    32,    33,
+      -1,    35,    36,    -1,    38,    39,    40,    41,    42,     7,
+       8,    -1,    -1,    11,    12,    -1,    50,    -1,    16,    -1,
+      -1,    19,    20,    21,    -1,    -1,    -1,    -1,    26,    27,
+      -1,    29,    -1,    -1,    32,    33,    -1,    35,    36,    -1,
+      38,    39,    40,    41,    42,    -1,     7,     8,    -1,    47,
+      11,    12,    -1,    -1,    -1,    16,    -1,    -1,    19,    20,
+      21,    -1,    -1,    -1,    -1,    26,    27,    -1,    29,    -1,
+      -1,    32,    33,    -1,    35,    36,    -1,    38,    39,    40,
+      41,    42,     7,    -1,    -1,    -1,    11,    12,    -1,    -1,
+      -1,    16,    -1,    -1,    19,    -1,    21,    -1,    -1,    -1,
+      -1,    26,    27,    -1,    -1,    -1,    -1,    32,    33,    -1,
+      -1,    36,    -1,    -1,    39,    40,    41,    42
   };
 
   const unsigned char
@@ -2457,67 +2545,67 @@ namespace  WadeSpace  {
   {
        0,     3,     7,     8,    11,    12,    16,    19,    20,    21,
       26,    27,    29,    32,    33,    35,    36,    38,    39,    40,
-      41,    42,    54,   103,   127,   128,   131,   132,   133,   134,
-     140,   143,   144,   145,   146,   166,   167,   168,     3,    50,
-     144,   143,   146,   147,    49,   129,   130,   144,   128,   128,
-       3,    50,   128,    50,   127,   128,   159,   160,    54,   101,
-     145,     0,   167,    50,     3,   141,   142,    55,   143,   146,
-      49,    52,   100,   159,   160,    50,   132,   135,   136,   137,
-     143,     3,     4,     5,     6,     9,    10,    13,    14,    15,
+      41,    42,    54,    95,   119,   120,   123,   124,   125,   126,
+     132,   135,   136,   137,   138,   158,   159,   160,     3,    50,
+     136,   135,   138,   139,    49,   121,   122,   136,   120,   120,
+       3,    50,   120,    50,   119,   120,   151,   152,    54,    93,
+     137,     0,   159,    50,     3,   133,   134,    55,   135,   138,
+      49,    52,    60,   151,   152,    50,   124,   127,   128,   129,
+     135,     3,     4,     5,     6,     9,    10,    13,    14,    15,
       22,    23,    24,    31,    34,    37,    43,    49,    51,    54,
-      59,    73,    74,    84,    86,    88,    89,    90,   105,   106,
-     107,   109,   110,   111,   112,   113,   114,   115,   116,   117,
-     118,   119,   120,   121,   122,   123,   125,   157,   158,   159,
-     160,   161,   162,   163,   164,   165,   144,   127,   159,     3,
-      55,   128,   148,   149,   150,   151,     3,   102,   109,   122,
-     126,   141,   100,    51,    52,   130,    50,   123,   155,   159,
-     135,   137,    51,   136,    99,   138,   139,   144,   137,    99,
-      49,   126,    49,    99,   157,    54,     3,    54,    49,   125,
-      54,   109,    54,    54,   125,   137,   152,    54,   109,   109,
-      54,    56,    58,    73,    74,    75,    61,    62,    63,    64,
-      65,    66,    67,    68,    69,    70,   100,   124,   111,    90,
-      91,    92,    93,    94,    71,    72,    78,    79,    80,    81,
-      82,    83,    95,    96,    97,    76,    77,    98,    49,    52,
-      51,   161,    51,   157,    54,   101,   144,   146,   153,   154,
-      55,    52,    52,    55,   102,    51,   126,   142,   155,   156,
-      51,   126,    49,    52,    99,   157,    99,   157,    43,   162,
-      49,   125,    49,   152,   125,   125,    55,    54,   146,   153,
-      55,   152,    55,   108,   123,   125,     3,     3,   123,   111,
-     111,   111,   112,   112,   113,   113,   114,   114,   114,   114,
-     115,   115,   116,   117,   118,   119,   120,   125,   123,    51,
-      55,   148,   153,   102,   126,   154,    54,   101,    47,   150,
-       3,    51,    52,   139,   126,   157,    54,   162,    55,    55,
-      55,    55,    50,   111,    55,    52,    55,    57,    99,    55,
-      55,   102,    55,   148,   102,   126,    51,   155,   125,    55,
-     125,   157,   157,   157,   156,   123,   122,    55,   102,    55,
-     157,    55,    18,    51,    52,    49,   157,   157,    51
+      59,    73,    74,    84,    86,    88,    89,    90,    97,    98,
+      99,   101,   102,   103,   104,   105,   106,   107,   108,   109,
+     110,   111,   112,   113,   114,   115,   117,   149,   150,   151,
+     152,   153,   154,   155,   156,   157,   136,   119,   151,     3,
+      55,   120,   140,   141,   142,   143,     3,    94,   101,   114,
+     118,   133,    60,    51,    52,   122,    50,   115,   147,   151,
+     127,   129,    51,   128,    53,   130,   131,   136,   129,    53,
+      49,   118,    49,    53,   149,    54,     3,    54,    49,   117,
+      54,   101,    54,    54,   117,   129,   144,    54,   101,   101,
+      54,    56,    58,    73,    74,    75,    60,    61,    62,    63,
+      64,    65,    66,    67,    68,    69,    70,   116,   103,    90,
+      91,    92,    88,    89,    71,    72,    78,    79,    80,    81,
+      82,    83,    86,    85,    87,    76,    48,    77,    49,    52,
+      51,   153,    51,   149,    54,    93,   136,   138,   145,   146,
+      55,    52,    52,    55,    94,    51,   118,   134,   147,   148,
+      51,   118,    49,    52,    53,   149,    53,   149,    43,   154,
+      49,   117,    49,   144,   117,   117,    55,    54,   138,   145,
+      55,   144,    55,   100,   115,   117,     3,     3,   115,   103,
+     103,   103,   104,   104,   105,   105,   106,   106,   106,   106,
+     107,   107,   108,   109,   110,   111,   117,   112,   115,    51,
+      55,   140,   145,    94,   118,   146,    54,    93,    47,   142,
+       3,    51,    52,   131,   118,   149,    54,   154,    55,    55,
+      55,    55,    50,   103,    55,    52,    55,    57,    53,    55,
+      55,    94,    55,   140,    94,   118,    51,   147,   117,    55,
+     117,   149,   149,   149,   148,   115,   114,    55,    94,    55,
+     149,    55,    18,    51,    52,    49,   149,   149,    51
   };
 
   const unsigned char
    Parser ::yyr1_[] =
   {
-       0,   104,   105,   105,   105,   106,   106,   106,   107,   107,
-     107,   107,   107,   107,   107,   107,   107,   107,   108,   108,
-     109,   109,   109,   109,   109,   109,   110,   110,   110,   110,
-     110,   110,   111,   111,   112,   112,   112,   112,   113,   113,
-     113,   114,   114,   114,   115,   115,   115,   115,   115,   116,
-     116,   116,   117,   117,   118,   118,   119,   119,   120,   120,
-     121,   121,   122,   122,   123,   123,   124,   124,   124,   124,
-     124,   124,   124,   124,   124,   124,   124,   125,   125,   126,
-     127,   127,   128,   128,   128,   128,   128,   128,   129,   129,
-     130,   130,   131,   131,   131,   131,   131,   132,   132,   132,
-     132,   132,   132,   132,   132,   132,   132,   132,   132,   133,
-     133,   133,   134,   134,   135,   135,   136,   137,   137,   137,
-     137,   138,   138,   139,   139,   139,   140,   140,   140,   141,
-     141,   142,   142,   143,   143,   144,   144,   145,   145,   145,
-     145,   145,   145,   145,   146,   146,   146,   146,   147,   147,
-     148,   148,   149,   149,   150,   150,   150,   151,   151,   152,
-     152,   153,   153,   153,   154,   154,   154,   154,   154,   154,
-     154,   154,   154,   155,   155,   155,   156,   156,   157,   157,
-     157,   157,   157,   157,   158,   158,   158,   159,   159,   159,
-     159,   160,   160,   161,   161,   162,   162,   163,   163,   163,
-     164,   164,   164,   164,   165,   165,   165,   165,   165,   166,
-     166,   167,   167,   168,   168,   168,   168
+       0,    96,    97,    97,    97,    98,    98,    98,    99,    99,
+      99,    99,    99,    99,    99,    99,    99,    99,   100,   100,
+     101,   101,   101,   101,   101,   101,   102,   102,   102,   102,
+     102,   102,   103,   103,   104,   104,   104,   104,   105,   105,
+     105,   106,   106,   106,   107,   107,   107,   107,   107,   108,
+     108,   108,   109,   109,   110,   110,   111,   111,   112,   112,
+     113,   113,   114,   114,   115,   115,   116,   116,   116,   116,
+     116,   116,   116,   116,   116,   116,   116,   117,   117,   118,
+     119,   119,   120,   120,   120,   120,   120,   120,   121,   121,
+     122,   122,   123,   123,   123,   123,   123,   124,   124,   124,
+     124,   124,   124,   124,   124,   124,   124,   124,   124,   125,
+     125,   125,   126,   126,   127,   127,   128,   129,   129,   129,
+     129,   130,   130,   131,   131,   131,   132,   132,   132,   133,
+     133,   134,   134,   135,   135,   136,   136,   137,   137,   137,
+     137,   137,   137,   137,   138,   138,   138,   138,   139,   139,
+     140,   140,   141,   141,   142,   142,   142,   143,   143,   144,
+     144,   145,   145,   145,   146,   146,   146,   146,   146,   146,
+     146,   146,   146,   147,   147,   147,   148,   148,   149,   149,
+     149,   149,   149,   149,   150,   150,   150,   151,   151,   151,
+     151,   152,   152,   153,   153,   154,   154,   155,   155,   155,
+     156,   156,   156,   156,   157,   157,   157,   157,   157,   158,
+     158,   159,   159,   160,   160,   160,   160
   };
 
   const signed char
@@ -2570,19 +2658,18 @@ namespace  WadeSpace  {
   "\"^=\"", "\"|=\"", "\">>\"", "\"<<\"", "\"++\"", "\"--\"", "\"->\"",
   "\"&&\"", "\"||\"", "\">=\"", "\"<=\"", "\">\"", "\"<\"", "\"==\"",
   "\"!=\"", "\"!\"", "\"^\"", "\"&\"", "\"|\"", "\"-\"", "\"+\"", "\"*\"",
-  "\"/\"", "\"%\"", "'+'", "'-'", "'&'", "'^'", "'|'", "'?'", "':'", "'='",
-  "'['", "']'", "'*'", "$accept", "primary_expression", "constant",
-  "postfix_expression", "argument_expression_list", "unary_expression",
-  "unary_operator", "cast_expression", "multiplicative_expression",
-  "additive_expression", "shift_expression", "relational_expression",
-  "equality_expression", "and_expression", "exclusive_or_expression",
-  "inclusive_or_expression", "logical_and_expression",
-  "logical_or_expression", "conditional_expression",
-  "assignment_expression", "assignment_operator", "expression",
-  "constant_expression", "declaration", "declaration_specifiers",
-  "init_declarator_list", "init_declarator", "storage_class_specifier",
-  "type_specifier", "struct_or_union_specifier", "struct_or_union",
-  "struct_declaration_list", "struct_declaration",
+  "\"/\"", "\"%\"", "'['", "']'", "'*'", "$accept", "primary_expression",
+  "constant", "postfix_expression", "argument_expression_list",
+  "unary_expression", "unary_operator", "cast_expression",
+  "multiplicative_expression", "additive_expression", "shift_expression",
+  "relational_expression", "equality_expression", "and_expression",
+  "exclusive_or_expression", "inclusive_or_expression",
+  "logical_and_expression", "logical_or_expression",
+  "conditional_expression", "assignment_expression", "assignment_operator",
+  "expression", "constant_expression", "declaration",
+  "declaration_specifiers", "init_declarator_list", "init_declarator",
+  "storage_class_specifier", "type_specifier", "struct_or_union_specifier",
+  "struct_or_union", "struct_declaration_list", "struct_declaration",
   "specifier_qualifier_list", "struct_declarator_list",
   "struct_declarator", "enum_specifier", "enumerator_list", "enumerator",
   "type_qualifier", "declarator", "direct_declarator", "pointer",
@@ -2602,28 +2689,28 @@ namespace  WadeSpace  {
   const short
    Parser ::yyrline_[] =
   {
-       0,   184,   184,   185,   186,   190,   195,   200,   207,   208,
-     209,   210,   211,   212,   213,   214,   215,   216,   220,   226,
-     236,   237,   238,   239,   240,   241,   245,   246,   247,   248,
-     249,   250,   254,   255,   259,   260,   261,   262,   266,   267,
-     268,   272,   273,   274,   278,   279,   280,   281,   282,   286,
-     287,   288,   292,   293,   297,   298,   302,   303,   307,   308,
-     312,   313,   317,   318,   322,   323,   327,   328,   329,   330,
-     331,   332,   333,   334,   335,   336,   337,   341,   342,   346,
-     350,   351,   355,   356,   357,   358,   359,   360,   364,   365,
-     369,   370,   374,   375,   376,   377,   378,   382,   383,   384,
-     385,   386,   387,   388,   389,   390,   391,   392,   393,   397,
-     398,   399,   403,   404,   408,   409,   413,   417,   418,   419,
-     420,   424,   425,   429,   430,   431,   435,   436,   437,   441,
-     442,   446,   447,   451,   452,   456,   457,   461,   462,   463,
-     464,   465,   466,   467,   471,   472,   473,   474,   478,   479,
-     484,   485,   489,   490,   494,   495,   496,   500,   501,   505,
-     506,   510,   511,   512,   516,   517,   518,   519,   520,   521,
-     522,   523,   524,   528,   529,   530,   534,   535,   539,   540,
-     541,   542,   543,   544,   548,   549,   550,   554,   555,   556,
-     557,   561,   562,   566,   567,   571,   572,   576,   577,   578,
-     582,   583,   584,   585,   589,   590,   591,   592,   593,   597,
-     598,   602,   603,   607,   608,   609,   610
+       0,   185,   185,   186,   187,   191,   196,   201,   208,   209,
+     210,   211,   212,   213,   214,   215,   216,   217,   221,   227,
+     237,   238,   239,   240,   241,   242,   246,   247,   248,   249,
+     250,   251,   255,   256,   260,   261,   262,   263,   267,   268,
+     269,   273,   274,   275,   279,   280,   281,   282,   283,   287,
+     288,   289,   293,   294,   298,   299,   303,   304,   308,   309,
+     313,   314,   318,   319,   323,   324,   328,   329,   330,   331,
+     332,   333,   334,   335,   336,   337,   338,   342,   343,   347,
+     351,   352,   356,   357,   358,   359,   360,   361,   365,   366,
+     370,   371,   375,   376,   377,   378,   379,   383,   384,   385,
+     386,   387,   388,   389,   390,   391,   392,   393,   394,   398,
+     399,   400,   404,   405,   409,   410,   414,   418,   419,   420,
+     421,   425,   426,   430,   431,   432,   436,   437,   438,   442,
+     443,   447,   448,   452,   453,   457,   458,   462,   463,   464,
+     465,   466,   467,   468,   472,   473,   474,   475,   479,   480,
+     485,   486,   490,   491,   495,   496,   497,   501,   502,   506,
+     507,   511,   512,   513,   517,   518,   519,   520,   521,   522,
+     523,   524,   525,   529,   530,   531,   535,   536,   540,   541,
+     542,   543,   544,   545,   549,   550,   551,   555,   556,   557,
+     558,   562,   563,   567,   568,   572,   573,   577,   578,   579,
+     583,   584,   585,   586,   590,   591,   592,   593,   594,   598,
+     599,   603,   604,   608,   609,   610,   611
   };
 
   void
@@ -2656,9 +2743,9 @@ namespace  WadeSpace  {
 
 #line 9 "parser.y"
 } //  WadeSpace 
-#line 2660 "parser.cpp"
+#line 2747 "parser.cpp"
 
-#line 613 "parser.y"
+#line 614 "parser.y"
 
 
 // Bison expects us to provide implementation - otherwise linker complains

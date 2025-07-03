@@ -15,6 +15,7 @@
     #include <stdint.h>
     #include <stdlib.h>
     #include "Constant.h"
+    #include "AssignmentOperator.h"
     #include "Expression.h"
 
     using namespace std;
@@ -174,32 +175,32 @@
 %type<Expression> assignment_expression
 %type<Expression> constant_expression
 %type<std::string> unary_operator
-
+%type<AssignmentOperator> assignment_operator
 
 %start translation_unit
 
 %%
 
 primary_expression
-    : IDENTIFIER { $<Expression>$ = Expression($1); cout << "<EXP> IDENTIFIER REDUCE to primary_expression" << endl; }
-    | constant { $<Expression>$ = Expression(&$1); cout << "<EXP> constant REDUCE to primary_expression" << endl; }
-    | OPAREN expression CPAREN  { $<Expression>$ = $2; cout << "<EXP> (expression) REDUCE to primary_expression" << endl; }
+    : IDENTIFIER { $<Expression>$ = Expression($1); cout << "IDENTIFIER REDUCE to primary_expression" << endl; }
+    | constant { $<Expression>$ = Expression(&$1); cout << "constant REDUCE to primary_expression" << endl; }
+    | OPAREN expression CPAREN  { $<Expression>$ = $2; cout << "(expression) REDUCE to primary_expression" << endl; }
     ;
 
 constant
     : F_CONST {
                  long double &id = $1;
-                 cout << "<EXP> F_CONST REDUCE to constant " << id << endl;
+                 cout << "F_CONST REDUCE to constant " << id << endl;
                  $<Constant>$ = Constant(id);
               }
     | I_CONST {
                  std::uint64_t &id = $1;
-                 cout << "<EXP> I_CONST REDUCE to constant " << id << endl;
+                 cout << "I_CONST REDUCE to constant " << id << endl;
                  $<Constant>$ = Constant(id);
               }
     | STRING_LITERAL  {
                  std::string &id = $1;
-                 cout << "<EXP> STRING_LITERAL REDUCE to constant  " << id << endl;
+                 cout << "STRING_LITERAL REDUCE to constant  " << id << endl;
                  $<Constant>$ = Constant(id);
               }
 
@@ -221,14 +222,14 @@ argument_expression_list
                              Expression exp = $1;
                              $$ = std::vector<Expression>();
                              $$.push_back(exp);
-                             cout << "<EXP> assignment_expression REDUCE argument_expression_list" << endl;
+                             cout << "assignment_expression REDUCE argument_expression_list" << endl;
                             }
     | argument_expression_list COMMA assignment_expression {
             Expression value1 = $3;
             std::vector<Expression> &value2 = $1;
             value2.push_back(value1);
             $$ = value2;
-            cout << "<EXP> argument_expression_list COMMA assignment_expression REDUCE argument_expression_list" << endl;
+            cout << "argument_expression_list COMMA assignment_expression REDUCE argument_expression_list" << endl;
         }
     ;
 
@@ -251,99 +252,99 @@ unary_operator
     ;
 
 cast_expression
-    : unary_expression  { $<Expression>$ = $1; }
-    | OPAREN type_name CPAREN cast_expression  { $<Expression>$ = Expression(); }
+    : unary_expression  { $<Expression>$ = $1;  cout << "unary_expression REDUCE to cast_expression" << endl;}
+    | OPAREN type_name CPAREN cast_expression  { $<Expression>$ = $4;  cout << "unary_expression REDUCE to cast_expression" << endl;}
     ;
 
 multiplicative_expression
-    : cast_expression  { $<Expression>$ = $1; }
-    | multiplicative_expression TIMES_OP cast_expression
-    | multiplicative_expression DIV_OP cast_expression
-    | multiplicative_expression MOD_OP cast_expression
+    : cast_expression  { $<Expression>$ = $1;  cout << "cast_expression REDUCE to multiplicative_expression" << endl;}
+    | multiplicative_expression TIMES_OP cast_expression { cout << "multiplicative_expression TIMES_OP cast_expression REDUCE to multiplicative_expression" << endl;}
+    | multiplicative_expression DIV_OP cast_expression{ cout << "multiplicative_expression DIV_OP cast_expression REDUCE to multiplicative_expression" << endl;}
+    | multiplicative_expression MOD_OP cast_expression{ cout << "multiplicative_expression MOD_OP cast_expression REDUCE to multiplicative_expression" << endl;}
     ;
 
 additive_expression
-    : multiplicative_expression
-    | additive_expression '+' multiplicative_expression
-    | additive_expression '-' multiplicative_expression
+    : multiplicative_expression  { $<Expression>$ = $1;  cout << "multiplicative_expression REDUCE to additive_expression" << endl;}
+    | additive_expression PLUS_OP multiplicative_expression  { cout << "additive_expression REDUCE to multiplicative_expression" << endl;}
+    | additive_expression MINUS_OP multiplicative_expression  { cout << "additive_expression REDUCE to multiplicative_expression" << endl;}
     ;
 
 shift_expression
-    : additive_expression
-    | shift_expression LEFT_OP additive_expression
-    | shift_expression RIGHT_OP additive_expression
+    : additive_expression  { $<Expression>$ = $1;  cout << "additive_expression REDUCE to shift_expression" << endl;}
+    | shift_expression LEFT_OP additive_expression{ cout << "shift_expression LEFT_OP additive_expression REDUCE to shift_expression" << endl;}
+    | shift_expression RIGHT_OP additive_expression{ cout << "shift_expression RIGHT_OP additive_expression REDUCE to shift_expression" << endl;}
     ;
 
 relational_expression
-    : shift_expression
-    | relational_expression LESS_OP shift_expression
-    | relational_expression GREATER_OP shift_expression
-    | relational_expression LESS_EQUAL_OP shift_expression
-    | relational_expression GREATER_EQUAL_OP shift_expression
+    : shift_expression  { $<Expression>$ = $1;  cout << "shift_expression REDUCE to relational_expression" << endl;}
+    | relational_expression LESS_OP shift_expression   { cout << "relational_expression LESS_OP shift_expression REDUCE to shift_expression" << endl;}
+    | relational_expression GREATER_OP shift_expression    { cout << "relational_expression GREATER_OP shift_expression REDUCE to shift_expression" << endl;}
+    | relational_expression LESS_EQUAL_OP shift_expression   { cout << "relational_expression LESS_EQUAL_OP shift_expression REDUCE to shift_expression" << endl;}
+    | relational_expression GREATER_EQUAL_OP shift_expression   { cout << "relational_expression GREATER_EQUAL_OP shift_expression REDUCE to shift_expression" << endl;}
     ;
 
 equality_expression
-    : relational_expression
-    | equality_expression EQUAL_EQUAL_OP relational_expression
-    | equality_expression NOT_EQUAL_OP relational_expression
+    : relational_expression  { $<Expression>$ = $1;  cout << "relational_expression REDUCE to equality_expression" << endl;}
+    | equality_expression EQUAL_EQUAL_OP relational_expression  { cout << "equality_expression EQUAL_EQUAL_OP relational_expression REDUCE to equality_expression" << endl;}
+    | equality_expression NOT_EQUAL_OP relational_expression  { cout << "equality_expression NOT_EQUAL_OP relational_expression REDUCE to equality_expression" << endl;}
     ;
 
 and_expression
-    : equality_expression
-    | and_expression '&' equality_expression
+    : equality_expression  { $<Expression>$ = $1;  cout << "equality_expression REDUCE to and_expression" << endl;}
+    | and_expression BIT_AND equality_expression  { cout << "and_expression BIT_AND equality_expression REDUCE to and_expression" << endl;}
     ;
 
 exclusive_or_expression
-    : and_expression
-    | exclusive_or_expression '^' and_expression
+    : and_expression  { $<Expression>$ = $1;  cout << "and_expression REDUCE to exclusive_or_expression" << endl;}
+    | exclusive_or_expression XOR_OP and_expression  { cout << "exclusive_or_expression XOR_OP and_expression REDUCE to exclusive_or_expression" << endl;}
     ;
 
 inclusive_or_expression
-    : exclusive_or_expression
-    | inclusive_or_expression '|' exclusive_or_expression
+    : exclusive_or_expression  { $<Expression>$ = $1;  cout << "exclusive_or_expression REDUCE to inclusive_or_expression" << endl;}
+    | inclusive_or_expression BIT_OR exclusive_or_expression { cout << "inclusive_or_expression BIT_OR exclusive_or_expression REDUCE to inclusive_or_expression" << endl;}
     ;
 
 logical_and_expression
-    : inclusive_or_expression
-    | logical_and_expression AND_OP inclusive_or_expression
+    : inclusive_or_expression  { $<Expression>$ = $1;  cout << "inclusive_or_expression REDUCE to logical_and_expression" << endl;}
+    | logical_and_expression AND_OP inclusive_or_expression  { cout << "inclusive_or_expression REDUCE to logical_and_expression" << endl;}
     ;
 
 logical_or_expression
-    : logical_and_expression
-    | logical_or_expression OR_OP logical_and_expression
+    : logical_and_expression  { $<Expression>$ = $1;  cout << "inclusive_and_expression REDUCE to logical_or_expression" << endl;}
+    | logical_or_expression OR_OP logical_and_expression  { cout << "logical_or_expression OR_OP logical_and_expression REDUCE to logical_or_expression" << endl;}
     ;
 
 conditional_expression
-    : logical_or_expression
-    | logical_or_expression '?' expression ':' conditional_expression
+    : logical_or_expression  { $<Expression>$ = $1;  cout << "logical_or_expression REDUCE to conditional_expression" << endl;}
+    | logical_or_expression QUESTION expression COLON conditional_expression  { cout << "logical_or_expression QUESTION expression COLON conditional_expression REDUCE to conditional_expression" << endl;}
     ;
 
 assignment_expression
-    : conditional_expression
-    | unary_expression assignment_operator assignment_expression
+    : conditional_expression  { $<Expression>$ = $1;  cout << "conditional_expression REDUCE to assignment_expression" << endl;}
+    | unary_expression assignment_operator assignment_expression  { cout << "unary_expression assignment_operator assignment_expression REDUCE to assignment_expression" << endl;}
     ;
 
 assignment_operator
-    : '='
-    | MUL_ASSIGN
-    | DIV_ASSIGN
-    | MOD_ASSIGN
-    | ADD_ASSIGN
-    | SUB_ASSIGN
-    | LEFT_ASSIGN
-    | RIGHT_ASSIGN
-    | AND_ASSIGN
-    | XOR_ASSIGN
-    | OR_ASSIGN
+    : EQUAL_OP       { $<AssignmentOperator>$ = AssignmentOperator($1,EQUAL_OP);  cout << "EQUAL_OP REDUCE to assignment_operator" << endl;}
+    | MUL_ASSIGN     { $<AssignmentOperator>$ = AssignmentOperator($1,MUL_ASSIGN);  cout << "MUL_ASSIGN REDUCE to assignment_operator" << endl;}
+    | DIV_ASSIGN     { $<AssignmentOperator>$ = AssignmentOperator($1,DIV_ASSIGN);  cout << "DIV_ASSIGN REDUCE to assignment_operator" << endl;}
+    | MOD_ASSIGN     { $<AssignmentOperator>$ = AssignmentOperator($1,MOD_ASSIGN);  cout << "MOG_ASSIGN REDUCE to assignment_operator" << endl;}
+    | ADD_ASSIGN     { $<AssignmentOperator>$ = AssignmentOperator($1,ADD_ASSIGN);  cout << "ADD_ASSIGN REDUCE to assignment_operator" << endl;}
+    | SUB_ASSIGN     { $<AssignmentOperator>$ = AssignmentOperator($1,SUB_ASSIGN);  cout << "SUB_ASSIGN REDUCE to assignment_operator" << endl;}
+    | LEFT_ASSIGN    { $<AssignmentOperator>$ = AssignmentOperator($1,LEFT_ASSIGN);  cout << "LEFT_ASSIGN REDUCE to assignment_operator" << endl;}
+    | RIGHT_ASSIGN   { $<AssignmentOperator>$ = AssignmentOperator($1,RIGHT_ASSIGN);  cout << "RIGHT_ASSIGN REDUCE to assignment_operator" << endl;}
+    | AND_ASSIGN     { $<AssignmentOperator>$ = AssignmentOperator($1,AND_ASSIGN);  cout << "AND_ASSIGN REDUCE to assignment_operator" << endl;}
+    | XOR_ASSIGN     { $<AssignmentOperator>$ = AssignmentOperator($1,XOR_ASSIGN);  cout << "XOR_ASSIGN REDUCE to assignment_operator" << endl;}
+    | OR_ASSIGN      { $<AssignmentOperator>$ = AssignmentOperator($1,OR_ASSIGN);  cout << "OR_ASSIGN REDUCE to assignment_operator" << endl;}
     ;
 
 expression
-    : assignment_expression
-    | expression COMMA assignment_expression
+    : assignment_expression  { $<Expression>$ = $1;  cout << "asignment_expression REDUCE to expression" << endl;}
+    | expression COMMA assignment_expression  { cout << "expression COMMA assignment_expression COMMA  REDUCE to expression" << endl;}
     ;
 
 constant_expression
-    : conditional_expression
+    : conditional_expression  { $<Expression>$ = $1;  cout << "conditional_expression REDUCE to constant_expression" << endl;}
     ;
 
 declaration
@@ -367,7 +368,7 @@ init_declarator_list
 
 init_declarator
     : declarator
-    | declarator '=' initializer
+    | declarator EQUAL_OP initializer
     ;
 
 storage_class_specifier
@@ -427,8 +428,8 @@ struct_declarator_list
 
 struct_declarator
     : declarator
-    | ':' constant_expression
-    | declarator ':' constant_expression
+    | COLON constant_expression
+    | declarator COLON constant_expression
     ;
 
 enum_specifier
@@ -444,7 +445,7 @@ enumerator_list
 
 enumerator
     : IDENTIFIER
-    | IDENTIFIER '=' constant_expression
+    | IDENTIFIER EQUAL_OP constant_expression
     ;
 
 type_qualifier
@@ -545,9 +546,9 @@ statement
     ;
 
 labeled_statement
-    : IDENTIFIER ':' statement
-    | CASE constant_expression ':' statement
-    | DEFAULT ':' statement
+    : IDENTIFIER COLON statement
+    | CASE constant_expression COLON statement
+    | DEFAULT COLON statement
     ;
 
 compound_statement
