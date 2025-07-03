@@ -16,6 +16,10 @@
     #include <stdlib.h>
     #include "Constant.h"
     #include "AssignmentOperator.h"
+    #include "StorageClassSpecifier.h"
+    #include "TypeSpecifier.h"
+    #include "Enumerator.h"
+    #include "EnumSpecifier.h"
     #include "Expression.h"
 
     using namespace std;
@@ -176,6 +180,11 @@
 %type<Expression> constant_expression
 %type<std::string> unary_operator
 %type<AssignmentOperator> assignment_operator
+%type<StorageClassSpecifier> storage_class_specifier
+%type<TypeSpecifier> type_specifier
+%type<Enumerator> enumerator
+//%type<std::vector<Enumerator>> enumerator_list
+//%type<EnumSpecifier> enum_specifier
 
 %start translation_unit
 
@@ -348,50 +357,50 @@ constant_expression
     ;
 
 declaration
-    : declaration_specifiers SEMICOLON
-    | declaration_specifiers init_declarator_list SEMICOLON
+    : declaration_specifiers SEMICOLON  { cout << "declaration_specifiers SEMICOLON REDUCE to declaration" << endl;}
+    | declaration_specifiers init_declarator_list SEMICOLON  { cout << "declaration_specifiers init_declarator_list SEMICOLON REDUCE to declaration" << endl;}
     ;
 
 declaration_specifiers
-    : storage_class_specifier
-    | storage_class_specifier declaration_specifiers
-    | type_specifier
-    | type_specifier declaration_specifiers
-    | type_qualifier
-    | type_qualifier declaration_specifiers
+    : storage_class_specifier                         { cout << "storage_class_specifier REDUCE to declaration_specifiers" << endl;}
+    | storage_class_specifier declaration_specifiers  { cout << "storage_class_specifier declaration_specifiers REDUCE to declaration_specifiers" << endl;}
+    | type_specifier                                  { cout << "type_specifier REDUCE to declaration_specifiers" << endl;}
+    | type_specifier declaration_specifiers           { cout << "type_specifier declaration_specifiers REDUCE to declaration_specifiers" << endl;}
+    | type_qualifier                                  { cout << "type_qualifier REDUCE to declaration_specifiers" << endl;}
+    | type_qualifier declaration_specifiers           { cout << "type_qualifier declaration_specifiers REDUCE to declaration_specifiers" << endl;}
     ;
 
 init_declarator_list
-    : init_declarator
-    | init_declarator_list COMMA init_declarator
+    : init_declarator                            { cout << "init_declarator REDUCE to init_declarator_list" << endl;}
+    | init_declarator_list COMMA init_declarator { cout << "init_declarator_list COMMA init_declarator REDUCE to init_declarator_list" << endl;}
     ;
 
 init_declarator
-    : declarator
-    | declarator EQUAL_OP initializer
+    : declarator                       { cout << "declarator REDUCE to init_declarator" << endl;}
+    | declarator EQUAL_OP initializer  { cout << "declarator EQUAL_OP initializer REDUCE to init_declarator" << endl;}
     ;
 
 storage_class_specifier
-    : TYPEDEF
-    | EXTERN
-    | STATIC
-    | AUTO
-    | REGISTER
+    : TYPEDEF   { $<StorageClassSpecifier>$ = StorageClassSpecifier($1,TYPEDEF); cout << "TYPEDEF REDUCE to storage_class_specifier" << endl;}
+    | EXTERN    { $<StorageClassSpecifier>$ = StorageClassSpecifier($1,EXTERN); cout << "EXTERN REDUCE to storage_class_specifier" << endl;}
+    | STATIC    { $<StorageClassSpecifier>$ = StorageClassSpecifier($1,STATIC); cout << "STATIC REDUCE to storage_class_specifier" << endl;}
+    | AUTO      { $<StorageClassSpecifier>$ = StorageClassSpecifier($1,AUTO); cout << "AUTO REDUCE to storage_class_specifier" << endl;}
+    | REGISTER  { $<StorageClassSpecifier>$ = StorageClassSpecifier($1,REGISTER); cout << "REGISTER REDUCE to storage_class_specifier" << endl;}
     ;
 
 type_specifier
-    : VOID
-    | CHAR
-    | SHORT
-    | INT
-    | LONG
-    | FLOAT
-    | DOUBLE
-    | SIGNED
-    | UNSIGNED
-    | struct_or_union_specifier
-    | enum_specifier
-    | TYPE_NAME
+    : VOID                      { $<TypeSpecifier>$ = TypeSpecifier($1,VOID); cout << "VOID REDUCE to type_specifier" << endl;}
+    | CHAR                      { $<TypeSpecifier>$ = TypeSpecifier($1,CHAR); cout << "CHAR REDUCE to type_specifier" << endl;}
+    | SHORT                     { $<TypeSpecifier>$ = TypeSpecifier($1,SHORT); cout << "SHORT REDUCE to type_specifier" << endl;}
+    | INT                       { $<TypeSpecifier>$ = TypeSpecifier($1,INT); cout << "INT REDUCE to type_specifier" << endl;}
+    | LONG                      { $<TypeSpecifier>$ = TypeSpecifier($1,LONG); cout << "LONG REDUCE to type_specifier" << endl;}
+    | FLOAT                     { $<TypeSpecifier>$ = TypeSpecifier($1,FLOAT); cout << "FLOAT REDUCE to type_specifier" << endl;}
+    | DOUBLE                    { $<TypeSpecifier>$ = TypeSpecifier($1,DOUBLE); cout << "DOUBLE REDUCE to type_specifier" << endl;}
+    | SIGNED                    { $<TypeSpecifier>$ = TypeSpecifier($1,SIGNED); cout << "SIGNED REDUCE to type_specifier" << endl;}
+    | UNSIGNED                  { $<TypeSpecifier>$ = TypeSpecifier($1,UNSIGNED); cout << "UNIGNED REDUCE to type_specifier" << endl;}
+    | struct_or_union_specifier { $<TypeSpecifier>$ = TypeSpecifier(); cout << "struct_or_union_specifier REDUCE to type_specifier" << endl;}
+    | enum_specifier            { $<TypeSpecifier>$ = TypeSpecifier();/*"enum_specifier",&$1);*/ cout << "enum_specifier REDUCE to type_specifier" << endl;}
+    | TYPE_NAME                 { $<TypeSpecifier>$ = TypeSpecifier($1,TYPE_NAME); cout << "TYPE_NAME REDUCE to type_specifier" << endl;}
     ;
 
 struct_or_union_specifier
@@ -433,19 +442,30 @@ struct_declarator
     ;
 
 enum_specifier
-    : ENUM OCURLY enumerator_list CCURLY
-    | ENUM IDENTIFIER OCURLY enumerator_list CCURLY
-    | ENUM IDENTIFIER
+    : ENUM OCURLY enumerator_list CCURLY             //{ $<EnumSpecifier>$ = EnumSpecifier("",$3); cout << "ENUM OCURLY enumerator_list CCURLY REDUCE to enum_specifier" << endl;}
+    | ENUM IDENTIFIER OCURLY enumerator_list CCURLY  //{ $<EnumSpecifier>$ = EnumSpecifier($2,$4); cout << "ENUM IDENTIFIER OCURLY enumerator_list CCURLY REDUCE to enum_specifier" << endl;}
+    | ENUM IDENTIFIER                                //{ $<EnumSpecifier>$ = EnumSpecifier($2,std::vector<Enumerator>()); cout << "ENUM IDENTIFIER REDUCE to enum_specifier" << endl;}
     ;
 
 enumerator_list
-    : enumerator
-    | enumerator_list COMMA enumerator
+    : enumerator                        //{
+                                        //  Enumerator exp = $1;
+                                        //  $$ = std::vector<Enumerator>();
+                                        //  $$.push_back(exp);
+                                        //  cout << "enumerator REDUCE enumerator_list" << endl;
+                                        //}
+    | enumerator_list COMMA enumerator  /*{
+                                          Enumerator value1 = $3;
+                                          std::vector<Expression> &value2 = $1;
+                                          value2.push_back(value1);
+                                          $$ = value2;
+                                          cout << "enumerator_list COMMA enumerator REDUCE enumerator_list" << endl;
+                                        }*/
     ;
 
 enumerator
-    : IDENTIFIER
-    | IDENTIFIER EQUAL_OP constant_expression
+    : IDENTIFIER                              { $<Enumerator>$ = Enumerator($1,NULL); cout << "IDENTIFIER REDUCE to ENUMERATOR" << endl;}
+    | IDENTIFIER EQUAL_OP constant_expression { $<Enumerator>$ = Enumerator($1,&$3); cout << "IDENTIFIER EQUAL_OP constant_expression REDUCE to ENUMERATOR" << endl;}
     ;
 
 type_qualifier

@@ -21,6 +21,8 @@
   <ItemGroup>
     <ClInclude Include="AssignmentOperator.h" />
     <ClInclude Include="Constant.h" />
+    <ClInclude Include="Enumerator.h" />
+    <ClInclude Include="EnumSpecifier.h" />
     <ClInclude Include="Expression.h" />
     <ClInclude Include="interpreter.h" />
     <ClInclude Include="location.hh" />
@@ -28,15 +30,21 @@
     <ClInclude Include="position.hh" />
     <ClInclude Include="scanner.h" />
     <ClInclude Include="stack.hh" />
+    <ClInclude Include="StorageClassSpecifier.h" />
+    <ClInclude Include="TypeSpecifier.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssignmentOperator.cpp" />
     <ClCompile Include="Constant.cpp" />
+    <ClCompile Include="Enumerator.cpp" />
+    <ClCompile Include="EnumSpecifier.cpp" />
     <ClCompile Include="Expression.cpp" />
     <ClCompile Include="interpreter.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="parser.cpp" />
     <ClCompile Include="scanner.cpp" />
+    <ClCompile Include="StorageClassSpecifier.cpp" />
+    <ClCompile Include="TypeSpecifier.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="parser.y" />

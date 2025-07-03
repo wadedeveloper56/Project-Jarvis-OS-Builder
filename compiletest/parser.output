@@ -477,10 +477,10 @@ Nonterminals, with rules where they appear
     init_declarator (122)
         on left: 89 90
         on right: 87 88
-    storage_class_specifier (123)
+    storage_class_specifier <StorageClassSpecifier> (123)
         on left: 91 92 93 94 95
         on right: 81 82
-    type_specifier (124)
+    type_specifier <TypeSpecifier> (124)
         on left: 96 97 98 99 100 101 102 103 104 105 106 107
         on right: 83 84 116 117
     struct_or_union_specifier (125)
@@ -510,7 +510,7 @@ Nonterminals, with rules where they appear
     enumerator_list (133)
         on left: 128 129
         on right: 125 126 129
-    enumerator (134)
+    enumerator <Enumerator> (134)
         on left: 130 131
         on right: 128 129
     type_qualifier (135)
