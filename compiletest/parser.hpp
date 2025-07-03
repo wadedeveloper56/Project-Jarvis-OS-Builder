@@ -556,11 +556,14 @@ namespace  WadeSpace  {
       // unary_operator
       char dummy8[sizeof (std::string)];
 
+      // enumerator_list
+      char dummy9[sizeof (std::vector<Enumerator>)];
+
       // argument_expression_list
-      char dummy9[sizeof (std::vector<Expression>)];
+      char dummy10[sizeof (std::vector<Expression>)];
 
       // "i_const"
-      char dummy10[sizeof (uint64_t)];
+      char dummy11[sizeof (uint64_t)];
     };
 
     /// The size of the largest semantic type.
@@ -1055,6 +1058,10 @@ namespace  WadeSpace  {
         value.move< std::string > (std::move (that.value));
         break;
 
+      case symbol_kind::S_enumerator_list: // enumerator_list
+        value.move< std::vector<Enumerator> > (std::move (that.value));
+        break;
+
       case symbol_kind::S_argument_expression_list: // argument_expression_list
         value.move< std::vector<Expression> > (std::move (that.value));
         break;
@@ -1192,6 +1199,20 @@ namespace  WadeSpace  {
       {}
 #else
       basic_symbol (typename Base::kind_type t, const std::string& v, const location_type& l)
+        : Base (t)
+        , value (v)
+        , location (l)
+      {}
+#endif
+
+#if 201103L <= YY_CPLUSPLUS
+      basic_symbol (typename Base::kind_type t, std::vector<Enumerator>&& v, location_type&& l)
+        : Base (t)
+        , value (std::move (v))
+        , location (std::move (l))
+      {}
+#else
+      basic_symbol (typename Base::kind_type t, const std::vector<Enumerator>& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1385,6 +1406,10 @@ switch (yykind)
       case symbol_kind::S_MOD_OP: // "%"
       case symbol_kind::S_unary_operator: // unary_operator
         value.template destroy< std::string > ();
+        break;
+
+      case symbol_kind::S_enumerator_list: // enumerator_list
+        value.template destroy< std::vector<Enumerator> > ();
         break;
 
       case symbol_kind::S_argument_expression_list: // argument_expression_list
@@ -3524,6 +3549,10 @@ switch (yykind)
         value.copy< std::string > (YY_MOVE (that.value));
         break;
 
+      case symbol_kind::S_enumerator_list: // enumerator_list
+        value.copy< std::vector<Enumerator> > (YY_MOVE (that.value));
+        break;
+
       case symbol_kind::S_argument_expression_list: // argument_expression_list
         value.copy< std::vector<Expression> > (YY_MOVE (that.value));
         break;
@@ -3700,6 +3729,10 @@ switch (yykind)
         value.move< std::string > (YY_MOVE (s.value));
         break;
 
+      case symbol_kind::S_enumerator_list: // enumerator_list
+        value.move< std::vector<Enumerator> > (YY_MOVE (s.value));
+        break;
+
       case symbol_kind::S_argument_expression_list: // argument_expression_list
         value.move< std::vector<Expression> > (YY_MOVE (s.value));
         break;
@@ -3775,7 +3808,7 @@ switch (yykind)
 
 #line 9 "parser.y"
 } //  WadeSpace 
-#line 3779 "parser.hpp"
+#line 3812 "parser.hpp"
 
 
 

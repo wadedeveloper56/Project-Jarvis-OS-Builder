@@ -507,7 +507,7 @@ Nonterminals, with rules where they appear
     enum_specifier (132)
         on left: 125 126 127
         on right: 106
-    enumerator_list (133)
+    enumerator_list <std::vector<Enumerator>> (133)
         on left: 128 129
         on right: 125 126 129
     enumerator <Enumerator> (134)

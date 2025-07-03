@@ -183,7 +183,7 @@
 %type<StorageClassSpecifier> storage_class_specifier
 %type<TypeSpecifier> type_specifier
 %type<Enumerator> enumerator
-//%type<std::vector<Enumerator>> enumerator_list
+%type<std::vector<Enumerator>> enumerator_list
 //%type<EnumSpecifier> enum_specifier
 
 %start translation_unit
@@ -448,19 +448,19 @@ enum_specifier
     ;
 
 enumerator_list
-    : enumerator                        //{
-                                        //  Enumerator exp = $1;
-                                        //  $$ = std::vector<Enumerator>();
-                                        //  $$.push_back(exp);
-                                        //  cout << "enumerator REDUCE enumerator_list" << endl;
-                                        //}
-    | enumerator_list COMMA enumerator  /*{
+    : enumerator                        {
+                                          Enumerator exp = $1;
+                                          $$ = std::vector<Enumerator>();
+                                          $$.push_back(exp);
+                                          cout << "enumerator REDUCE enumerator_list" << endl;
+                                        }
+    | enumerator_list COMMA enumerator  {
                                           Enumerator value1 = $3;
-                                          std::vector<Expression> &value2 = $1;
+                                          std::vector<Enumerator> &value2 = $1;
                                           value2.push_back(value1);
                                           $$ = value2;
                                           cout << "enumerator_list COMMA enumerator REDUCE enumerator_list" << endl;
-                                        }*/
+                                        }
     ;
 
 enumerator
