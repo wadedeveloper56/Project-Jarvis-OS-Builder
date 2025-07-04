@@ -3,11 +3,26 @@
 #include "parser.hpp"
 #include "interpreter.h"
 #include "ArgumentTable.h"
+
+#define TRUE 1
+#define FALSE 0
+#define Boolean unsigned int
+
 using namespace WadeSpace;
 using namespace std;
 
+Boolean bit16 = FALSE;
+Boolean bit32 = FALSE;
+Boolean bit64 = FALSE;
+char logFileName[_MAX_PATH];
+char drive[_MAX_DRIVE];
+char dir[_MAX_DIR];
+char fname[_MAX_FNAME];
+char ext[_MAX_EXT];
+
 int main(int argc, char* argv[]) {
-	ifstream rfile;
+	ifstream in;
+	ofstream out;
 	ArgIntPtr bitsize = arg_int0("b", "bitsize", NULL, "define bit size to be 16, 32 or 64 bits (default is 32)");
 	ArgFilePtr outfile = arg_file0("o", NULL, "<output>", "output file (default is \"-\")");
 	ArgLitPtr verbose = arg_lit0("v", "verbose,debug", "verbose messages");
@@ -63,20 +78,25 @@ int main(int argc, char* argv[]) {
 		goto exit;
 	}
 
-	rfile.open(argv[1], ifstream::in);
+	_splitpath(infiles->filename[0], drive, dir, fname, ext);
+	_makepath(logFileName, drive, dir, fname, "asm");
 
-	if (rfile.is_open()) {
+	in.open(infiles->filename[0], ifstream::in);
+	out.open(logFileName, ofstream::out);
+
+	if (in.is_open()) {
 		Interpreter i;
-		i.switchInputStream(&rfile);
+		i.setStreams(&in,&out);
 		exitcode = i.parse();
 		cout << "Parse complete. Result = " << exitcode << endl;
 	}
 	else {
-		cerr << "Error opening file " << argv[1] << endl;
+		cerr << "Error opening file " << infiles->filename[0] << endl;
 		exitcode = -1;
 	}
 exit:
 	arg_freetable(argtable, sizeof(argtable) / sizeof(argtable[0]));
-	rfile.close();
+	in.close();
+	out.close();
 	return exitcode;
 }

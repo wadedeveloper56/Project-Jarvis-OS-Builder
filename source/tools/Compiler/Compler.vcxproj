@@ -179,6 +179,7 @@
   <ItemGroup>
     <ClInclude Include="AssignmentOperator.h" />
     <ClInclude Include="Constant.h" />
+    <ClInclude Include="DeclarationSpecifiers.h" />
     <ClInclude Include="Enumerator.h" />
     <ClInclude Include="EnumSpecifier.h" />
     <ClInclude Include="Expression.h" />
@@ -196,6 +197,7 @@
   <ItemGroup>
     <ClCompile Include="AssignmentOperator.cpp" />
     <ClCompile Include="Constant.cpp" />
+    <ClCompile Include="DeclarationSpecifiers.cpp" />
     <ClCompile Include="Enumerator.cpp" />
     <ClCompile Include="EnumSpecifier.cpp" />
     <ClCompile Include="Expression.cpp" />

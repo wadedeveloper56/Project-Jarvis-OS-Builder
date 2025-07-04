@@ -1,0 +1,35 @@
+INT REDUCE to type_specifier
+type_specifier REDUCE to declaration_specifiers
+IDENTIFIER REDUCE to direct_declarator
+direct_declarator REDUCE to declarator
+declarator REDUCE to init_declarator
+init_declarator REDUCE to init_declarator_list
+declaration_specifiers init_declarator_list SEMICOLON REDUCE to declaration
+declaration REDUCE to external_declaration
+external_declaration REDUCE to translation_unit
+INT REDUCE to type_specifier
+type_specifier REDUCE to declaration_specifiers
+IDENTIFIER REDUCE to direct_declarator
+direct_declarator OPAREN CPAREN REDUCE to direct_declarator
+direct_declarator REDUCE to declarator
+I_CONST REDUCE to constant 0
+constant REDUCE to primary_expression
+primary_expression REDUCE to postfix_expression
+postfix_expression REDUCE unary_expression
+unary_expression REDUCE to cast_expression
+cast_expression REDUCE to multiplicative_expression
+multiplicative_expression REDUCE to additive_expression
+additive_expression REDUCE to shift_expression
+shift_expression REDUCE to relational_expression
+relational_expression REDUCE to equality_expression
+equality_expression REDUCE to and_expression
+and_expression REDUCE to exclusive_or_expression
+exclusive_or_expression REDUCE to inclusive_or_expression
+inclusive_or_expression REDUCE to logical_and_expression
+inclusive_and_expression REDUCE to logical_or_expression
+logical_or_expression REDUCE to conditional_expression
+conditional_expression REDUCE to assignment_expression
+asignment_expression REDUCE to expression
+function_definition REDUCE to external_declaration
+translation_unit external_declaration REDUCE to translation_unit
+Parse complete. Result = 0

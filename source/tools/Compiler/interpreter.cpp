@@ -21,8 +21,8 @@ void Interpreter::clear() {
 	m_location = 0;
 }
 
-void Interpreter::switchInputStream(std::istream* is) {
-	m_scanner.switch_streams(is, NULL);
+void Interpreter::setStreams(std::istream* is, std::ostream* os) {
+	m_scanner.switch_streams(is, os);
 }
 
 void Interpreter::increaseLocation(unsigned int loc) {

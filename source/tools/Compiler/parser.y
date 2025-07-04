@@ -17,6 +17,7 @@
     #include "Constant.h"
     #include "AssignmentOperator.h"
     #include "StorageClassSpecifier.h"
+    #include "DeclarationSpecifiers.h"
     #include "TypeSpecifier.h"
     #include "TypeQualifier.h"
     #include "Enumerator.h"
@@ -190,6 +191,7 @@
 %type<TypeQualifier> type_qualifier
 %type<std::vector<TypeQualifier>> type_qualifier_list
 %type<Pointer> pointer 
+%type<DeclarationSpecifiers> declaration_specifiers
 
 %start translation_unit
 
@@ -367,12 +369,12 @@ declaration
     ;
 
 declaration_specifiers
-    : storage_class_specifier                         { cout << "storage_class_specifier REDUCE to declaration_specifiers" << endl;}
-    | storage_class_specifier declaration_specifiers  { cout << "storage_class_specifier declaration_specifiers REDUCE to declaration_specifiers" << endl;}
-    | type_specifier                                  { cout << "type_specifier REDUCE to declaration_specifiers" << endl;}
-    | type_specifier declaration_specifiers           { cout << "type_specifier declaration_specifiers REDUCE to declaration_specifiers" << endl;}
-    | type_qualifier                                  { cout << "type_qualifier REDUCE to declaration_specifiers" << endl;}
-    | type_qualifier declaration_specifiers           { cout << "type_qualifier declaration_specifiers REDUCE to declaration_specifiers" << endl;}
+    : storage_class_specifier                         { $<DeclarationSpecifiers>$ = DeclarationSpecifiers("",&$1,NULL,NULL,NULL); cout << "storage_class_specifier REDUCE to declaration_specifiers" << endl;}
+    | storage_class_specifier declaration_specifiers  { $<DeclarationSpecifiers>$ = DeclarationSpecifiers("",&$1,NULL,&$2,NULL); cout << "storage_class_specifier declaration_specifiers REDUCE to declaration_specifiers" << endl;}
+    | type_specifier                                  { $<DeclarationSpecifiers>$ = DeclarationSpecifiers("",NULL,&$1,NULL,NULL); cout << "type_specifier REDUCE to declaration_specifiers" << endl;}
+    | type_specifier declaration_specifiers           { $<DeclarationSpecifiers>$ = DeclarationSpecifiers("",NULL,&$1,&$2,NULL); cout << "type_specifier declaration_specifiers REDUCE to declaration_specifiers" << endl;}
+    | type_qualifier                                  { $<DeclarationSpecifiers>$ = DeclarationSpecifiers("",NULL,NULL,NULL,&$1); cout << "type_qualifier REDUCE to declaration_specifiers" << endl;}
+    | type_qualifier declaration_specifiers           { $<DeclarationSpecifiers>$ = DeclarationSpecifiers("",NULL,NULL,&$2,&$1); cout << "type_qualifier declaration_specifiers REDUCE to declaration_specifiers" << endl;}
     ;
 
 init_declarator_list
@@ -479,18 +481,18 @@ type_qualifier
     ;
 
 declarator
-    : pointer direct_declarator
-    | direct_declarator
+    : pointer direct_declarator { cout << "pointer direct_declarator REDUCE to declarator" << endl;}
+    | direct_declarator         { cout << "direct_declarator REDUCE to declarator" << endl;}
     ;
 
 direct_declarator
-    : IDENTIFIER
-    | OPAREN declarator CPAREN
-    | direct_declarator OBRACE constant_expression CBRACE
-    | direct_declarator OBRACE CBRACE
-    | direct_declarator OPAREN parameter_type_list CPAREN
-    | direct_declarator OPAREN identifier_list CPAREN
-    | direct_declarator OPAREN CPAREN
+    : IDENTIFIER                                            { cout << "IDENTIFIER REDUCE to direct_declarator" << endl;}
+    | OPAREN declarator CPAREN                              { cout << "OPAREN declarator CPAREN REDUCE to direct_declarator" << endl;}
+    | direct_declarator OBRACE constant_expression CBRACE   { cout << "direct_declarator OBRACE constant_expression CBRACE REDUCE to direct_declarator" << endl;}
+    | direct_declarator OBRACE CBRACE                       { cout << "direct_declarator OBRACE CBRACE REDUCE to direct_declarator" << endl;}
+    | direct_declarator OPAREN parameter_type_list CPAREN   { cout << "direct_declarator OPAREN parameter_type_list CPAREN to direct_declarator" << endl;}
+    | direct_declarator OPAREN identifier_list CPAREN       { cout << "direct_declarator OPAREN identifier_list CPAREN REDUCE to direct_declarator" << endl;}
+    | direct_declarator OPAREN CPAREN                       { cout << "direct_declarator OPAREN CPAREN REDUCE to direct_declarator" << endl;}
     ;
 
 pointer
