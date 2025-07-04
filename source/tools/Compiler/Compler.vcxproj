@@ -189,6 +189,7 @@
     <ClInclude Include="scanner.h" />
     <ClInclude Include="stack.hh" />
     <ClInclude Include="StorageClassSpecifier.h" />
+    <ClInclude Include="TypeQualifier.h" />
     <ClInclude Include="TypeSpecifier.h" />
   </ItemGroup>
   <ItemGroup>
@@ -202,6 +203,7 @@
     <ClCompile Include="parser.cpp" />
     <ClCompile Include="scanner.cpp" />
     <ClCompile Include="StorageClassSpecifier.cpp" />
+    <ClCompile Include="TypeQualifier.cpp" />
     <ClCompile Include="TypeSpecifier.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

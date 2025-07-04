@@ -56,6 +56,7 @@
     #include "AssignmentOperator.h"
     #include "StorageClassSpecifier.h"
     #include "TypeSpecifier.h"
+    #include "TypeQualifier.h"
     #include "Enumerator.h"
     #include "EnumSpecifier.h"
     #include "Expression.h"
@@ -67,7 +68,7 @@
         class Interpreter;
     }
 
-#line 71 "parser.hpp"
+#line 72 "parser.hpp"
 
 # include <cassert>
 # include <cstdlib> // std::abort
@@ -208,7 +209,7 @@
 
 #line 9 "parser.y"
 namespace  WadeSpace  {
-#line 212 "parser.hpp"
+#line 213 "parser.hpp"
 
 
 
@@ -462,11 +463,14 @@ namespace  WadeSpace  {
       // storage_class_specifier
       char dummy6[sizeof (StorageClassSpecifier)];
 
+      // type_qualifier
+      char dummy7[sizeof (TypeQualifier)];
+
       // type_specifier
-      char dummy7[sizeof (TypeSpecifier)];
+      char dummy8[sizeof (TypeSpecifier)];
 
       // "f_const"
-      char dummy8[sizeof (long double)];
+      char dummy9[sizeof (long double)];
 
       // "identifier"
       // "sting_literal"
@@ -557,16 +561,16 @@ namespace  WadeSpace  {
       // "/"
       // "%"
       // unary_operator
-      char dummy9[sizeof (std::string)];
+      char dummy10[sizeof (std::string)];
 
       // enumerator_list
-      char dummy10[sizeof (std::vector<Enumerator>)];
+      char dummy11[sizeof (std::vector<Enumerator>)];
 
       // argument_expression_list
-      char dummy11[sizeof (std::vector<Expression>)];
+      char dummy12[sizeof (std::vector<Expression>)];
 
       // "i_const"
-      char dummy12[sizeof (uint64_t)];
+      char dummy13[sizeof (uint64_t)];
     };
 
     /// The size of the largest semantic type.
@@ -965,6 +969,10 @@ namespace  WadeSpace  {
         value.move< StorageClassSpecifier > (std::move (that.value));
         break;
 
+      case symbol_kind::S_type_qualifier: // type_qualifier
+        value.move< TypeQualifier > (std::move (that.value));
+        break;
+
       case symbol_kind::S_type_specifier: // type_specifier
         value.move< TypeSpecifier > (std::move (that.value));
         break;
@@ -1185,6 +1193,20 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
+      basic_symbol (typename Base::kind_type t, TypeQualifier&& v, location_type&& l)
+        : Base (t)
+        , value (std::move (v))
+        , location (std::move (l))
+      {}
+#else
+      basic_symbol (typename Base::kind_type t, const TypeQualifier& v, const location_type& l)
+        : Base (t)
+        , value (v)
+        , location (l)
+      {}
+#endif
+
+#if 201103L <= YY_CPLUSPLUS
       basic_symbol (typename Base::kind_type t, TypeSpecifier&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
@@ -1331,6 +1353,10 @@ switch (yykind)
 
       case symbol_kind::S_storage_class_specifier: // storage_class_specifier
         value.template destroy< StorageClassSpecifier > ();
+        break;
+
+      case symbol_kind::S_type_qualifier: // type_qualifier
+        value.template destroy< TypeQualifier > ();
         break;
 
       case symbol_kind::S_type_specifier: // type_specifier
@@ -3478,6 +3504,10 @@ switch (yykind)
         value.copy< StorageClassSpecifier > (YY_MOVE (that.value));
         break;
 
+      case symbol_kind::S_type_qualifier: // type_qualifier
+        value.copy< TypeQualifier > (YY_MOVE (that.value));
+        break;
+
       case symbol_kind::S_type_specifier: // type_specifier
         value.copy< TypeSpecifier > (YY_MOVE (that.value));
         break;
@@ -3662,6 +3692,10 @@ switch (yykind)
         value.move< StorageClassSpecifier > (YY_MOVE (s.value));
         break;
 
+      case symbol_kind::S_type_qualifier: // type_qualifier
+        value.move< TypeQualifier > (YY_MOVE (s.value));
+        break;
+
       case symbol_kind::S_type_specifier: // type_specifier
         value.move< TypeSpecifier > (YY_MOVE (s.value));
         break;
@@ -3841,7 +3875,7 @@ switch (yykind)
 
 #line 9 "parser.y"
 } //  WadeSpace 
-#line 3845 "parser.hpp"
+#line 3879 "parser.hpp"
 
 
 

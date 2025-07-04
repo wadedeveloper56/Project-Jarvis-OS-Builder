@@ -18,6 +18,7 @@
     #include "AssignmentOperator.h"
     #include "StorageClassSpecifier.h"
     #include "TypeSpecifier.h"
+    #include "TypeQualifier.h"
     #include "Enumerator.h"
     #include "EnumSpecifier.h"
     #include "Expression.h"
@@ -185,6 +186,7 @@
 %type<Enumerator> enumerator
 %type<std::vector<Enumerator>> enumerator_list
 %type<EnumSpecifier> enum_specifier
+%type<TypeQualifier> type_qualifier
 
 %start translation_unit
 
@@ -469,8 +471,8 @@ enumerator
     ;
 
 type_qualifier
-    : CONST
-    | VOLATILE
+    : CONST    { $<TypeQualifier>$ = TypeQualifier($1,CONST); cout << "CONST REDUCE to type_qualifier" << endl;}
+    | VOLATILE { $<TypeQualifier>$ = TypeQualifier($1,VOLATILE); cout << "VOLATILE REDUCE to type_qualifier" << endl;}
     ;
 
 declarator

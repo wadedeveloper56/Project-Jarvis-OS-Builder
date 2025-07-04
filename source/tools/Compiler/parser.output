@@ -513,7 +513,7 @@ Nonterminals, with rules where they appear
     enumerator <Enumerator> (134)
         on left: 130 131
         on right: 128 129
-    type_qualifier (135)
+    type_qualifier <TypeQualifier> (135)
         on left: 132 133
         on right: 85 86 118 119 147 148
     declarator (136)
