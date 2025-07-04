@@ -332,7 +332,7 @@ WS  [ \t\v\n\f]
                }
 "="            {
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_EQUAL_OP(yytext,WadeSpace::location());
+                return WadeSpace::Parser::make_EQUAL(yytext,WadeSpace::location());
                }
 ">>="          {
                 //cout << "Scanner: token [" << yytext << "]" << endl;
@@ -404,27 +404,27 @@ WS  [ \t\v\n\f]
                }
 "<"            {
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_LESS_OP(yytext,WadeSpace::location());
+                return WadeSpace::Parser::make_LESS(yytext,WadeSpace::location());
                }
 ">"            {
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_GREATER_OP(yytext,WadeSpace::location());
+                return WadeSpace::Parser::make_GREATER(yytext,WadeSpace::location());
                }
 "<="           {
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_LESS_EQUAL_OP(yytext,WadeSpace::location());
+                return WadeSpace::Parser::make_LESS_EQUAL(yytext,WadeSpace::location());
                }
 ">="           {
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_GREATER_EQUAL_OP(yytext,WadeSpace::location());
+                return WadeSpace::Parser::make_GREATER_EQUAL(yytext,WadeSpace::location());
                }
 "=="           {
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_EQUAL_EQUAL_OP(yytext,WadeSpace::location());
+                return WadeSpace::Parser::make_EQUAL_EQUAL(yytext,WadeSpace::location());
                }
 "!="           {
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_NOT_EQUAL_OP(yytext,WadeSpace::location());
+                return WadeSpace::Parser::make_NOT_EQUAL(yytext,WadeSpace::location());
                }
 "!"            {
                 //cout << "Scanner: token [" << yytext << "]" << endl;

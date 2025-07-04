@@ -1422,7 +1422,7 @@ YY_RULE_SETUP
 #line 333 "scanner.l"
 {
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_EQUAL_OP(yytext,WadeSpace::location());
+                return WadeSpace::Parser::make_EQUAL(yytext,WadeSpace::location());
                }
 	YY_BREAK
 case 66:
@@ -1566,7 +1566,7 @@ YY_RULE_SETUP
 #line 405 "scanner.l"
 {
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_LESS_OP(yytext,WadeSpace::location());
+                return WadeSpace::Parser::make_LESS(yytext,WadeSpace::location());
                }
 	YY_BREAK
 case 84:
@@ -1574,7 +1574,7 @@ YY_RULE_SETUP
 #line 409 "scanner.l"
 {
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_GREATER_OP(yytext,WadeSpace::location());
+                return WadeSpace::Parser::make_GREATER(yytext,WadeSpace::location());
                }
 	YY_BREAK
 case 85:
@@ -1582,7 +1582,7 @@ YY_RULE_SETUP
 #line 413 "scanner.l"
 {
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_LESS_EQUAL_OP(yytext,WadeSpace::location());
+                return WadeSpace::Parser::make_LESS_EQUAL(yytext,WadeSpace::location());
                }
 	YY_BREAK
 case 86:
@@ -1590,7 +1590,7 @@ YY_RULE_SETUP
 #line 417 "scanner.l"
 {
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_GREATER_EQUAL_OP(yytext,WadeSpace::location());
+                return WadeSpace::Parser::make_GREATER_EQUAL(yytext,WadeSpace::location());
                }
 	YY_BREAK
 case 87:
@@ -1598,7 +1598,7 @@ YY_RULE_SETUP
 #line 421 "scanner.l"
 {
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_EQUAL_EQUAL_OP(yytext,WadeSpace::location());
+                return WadeSpace::Parser::make_EQUAL_EQUAL(yytext,WadeSpace::location());
                }
 	YY_BREAK
 case 88:
@@ -1606,7 +1606,7 @@ YY_RULE_SETUP
 #line 425 "scanner.l"
 {
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_NOT_EQUAL_OP(yytext,WadeSpace::location());
+                return WadeSpace::Parser::make_NOT_EQUAL(yytext,WadeSpace::location());
                }
 	YY_BREAK
 case 89:

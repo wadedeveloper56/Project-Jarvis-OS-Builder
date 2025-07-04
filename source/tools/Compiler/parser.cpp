@@ -340,7 +340,7 @@ namespace  WadeSpace  {
       case symbol_kind::S_CBRACE: // "]"
       case symbol_kind::S_PERIOD: // "."
       case symbol_kind::S_TILDE: // "~"
-      case symbol_kind::S_EQUAL_OP: // "="
+      case symbol_kind::S_EQUAL: // "="
       case symbol_kind::S_RIGHT_ASSIGN: // ">>="
       case symbol_kind::S_LEFT_ASSIGN: // "<<="
       case symbol_kind::S_ADD_ASSIGN: // "+="
@@ -358,12 +358,12 @@ namespace  WadeSpace  {
       case symbol_kind::S_PTR_OP: // "->"
       case symbol_kind::S_AND_OP: // "&&"
       case symbol_kind::S_OR_OP: // "||"
-      case symbol_kind::S_GREATER_EQUAL_OP: // ">="
-      case symbol_kind::S_LESS_EQUAL_OP: // "<="
-      case symbol_kind::S_GREATER_OP: // ">"
-      case symbol_kind::S_LESS_OP: // "<"
-      case symbol_kind::S_EQUAL_EQUAL_OP: // "=="
-      case symbol_kind::S_NOT_EQUAL_OP: // "!="
+      case symbol_kind::S_GREATER_EQUAL: // ">="
+      case symbol_kind::S_LESS_EQUAL: // "<="
+      case symbol_kind::S_GREATER: // ">"
+      case symbol_kind::S_LESS: // "<"
+      case symbol_kind::S_EQUAL_EQUAL: // "=="
+      case symbol_kind::S_NOT_EQUAL: // "!="
       case symbol_kind::S_NOT_OP: // "!"
       case symbol_kind::S_XOR_OP: // "^"
       case symbol_kind::S_BIT_AND: // "&"
@@ -524,7 +524,7 @@ namespace  WadeSpace  {
       case symbol_kind::S_CBRACE: // "]"
       case symbol_kind::S_PERIOD: // "."
       case symbol_kind::S_TILDE: // "~"
-      case symbol_kind::S_EQUAL_OP: // "="
+      case symbol_kind::S_EQUAL: // "="
       case symbol_kind::S_RIGHT_ASSIGN: // ">>="
       case symbol_kind::S_LEFT_ASSIGN: // "<<="
       case symbol_kind::S_ADD_ASSIGN: // "+="
@@ -542,12 +542,12 @@ namespace  WadeSpace  {
       case symbol_kind::S_PTR_OP: // "->"
       case symbol_kind::S_AND_OP: // "&&"
       case symbol_kind::S_OR_OP: // "||"
-      case symbol_kind::S_GREATER_EQUAL_OP: // ">="
-      case symbol_kind::S_LESS_EQUAL_OP: // "<="
-      case symbol_kind::S_GREATER_OP: // ">"
-      case symbol_kind::S_LESS_OP: // "<"
-      case symbol_kind::S_EQUAL_EQUAL_OP: // "=="
-      case symbol_kind::S_NOT_EQUAL_OP: // "!="
+      case symbol_kind::S_GREATER_EQUAL: // ">="
+      case symbol_kind::S_LESS_EQUAL: // "<="
+      case symbol_kind::S_GREATER: // ">"
+      case symbol_kind::S_LESS: // "<"
+      case symbol_kind::S_EQUAL_EQUAL: // "=="
+      case symbol_kind::S_NOT_EQUAL: // "!="
       case symbol_kind::S_NOT_OP: // "!"
       case symbol_kind::S_XOR_OP: // "^"
       case symbol_kind::S_BIT_AND: // "&"
@@ -708,7 +708,7 @@ namespace  WadeSpace  {
       case symbol_kind::S_CBRACE: // "]"
       case symbol_kind::S_PERIOD: // "."
       case symbol_kind::S_TILDE: // "~"
-      case symbol_kind::S_EQUAL_OP: // "="
+      case symbol_kind::S_EQUAL: // "="
       case symbol_kind::S_RIGHT_ASSIGN: // ">>="
       case symbol_kind::S_LEFT_ASSIGN: // "<<="
       case symbol_kind::S_ADD_ASSIGN: // "+="
@@ -726,12 +726,12 @@ namespace  WadeSpace  {
       case symbol_kind::S_PTR_OP: // "->"
       case symbol_kind::S_AND_OP: // "&&"
       case symbol_kind::S_OR_OP: // "||"
-      case symbol_kind::S_GREATER_EQUAL_OP: // ">="
-      case symbol_kind::S_LESS_EQUAL_OP: // "<="
-      case symbol_kind::S_GREATER_OP: // ">"
-      case symbol_kind::S_LESS_OP: // "<"
-      case symbol_kind::S_EQUAL_EQUAL_OP: // "=="
-      case symbol_kind::S_NOT_EQUAL_OP: // "!="
+      case symbol_kind::S_GREATER_EQUAL: // ">="
+      case symbol_kind::S_LESS_EQUAL: // "<="
+      case symbol_kind::S_GREATER: // ">"
+      case symbol_kind::S_LESS: // "<"
+      case symbol_kind::S_EQUAL_EQUAL: // "=="
+      case symbol_kind::S_NOT_EQUAL: // "!="
       case symbol_kind::S_NOT_OP: // "!"
       case symbol_kind::S_XOR_OP: // "^"
       case symbol_kind::S_BIT_AND: // "&"
@@ -891,7 +891,7 @@ namespace  WadeSpace  {
       case symbol_kind::S_CBRACE: // "]"
       case symbol_kind::S_PERIOD: // "."
       case symbol_kind::S_TILDE: // "~"
-      case symbol_kind::S_EQUAL_OP: // "="
+      case symbol_kind::S_EQUAL: // "="
       case symbol_kind::S_RIGHT_ASSIGN: // ">>="
       case symbol_kind::S_LEFT_ASSIGN: // "<<="
       case symbol_kind::S_ADD_ASSIGN: // "+="
@@ -909,12 +909,12 @@ namespace  WadeSpace  {
       case symbol_kind::S_PTR_OP: // "->"
       case symbol_kind::S_AND_OP: // "&&"
       case symbol_kind::S_OR_OP: // "||"
-      case symbol_kind::S_GREATER_EQUAL_OP: // ">="
-      case symbol_kind::S_LESS_EQUAL_OP: // "<="
-      case symbol_kind::S_GREATER_OP: // ">"
-      case symbol_kind::S_LESS_OP: // "<"
-      case symbol_kind::S_EQUAL_EQUAL_OP: // "=="
-      case symbol_kind::S_NOT_EQUAL_OP: // "!="
+      case symbol_kind::S_GREATER_EQUAL: // ">="
+      case symbol_kind::S_LESS_EQUAL: // "<="
+      case symbol_kind::S_GREATER: // ">"
+      case symbol_kind::S_LESS: // "<"
+      case symbol_kind::S_EQUAL_EQUAL: // "=="
+      case symbol_kind::S_NOT_EQUAL: // "!="
       case symbol_kind::S_NOT_OP: // "!"
       case symbol_kind::S_XOR_OP: // "^"
       case symbol_kind::S_BIT_AND: // "&"
@@ -1319,7 +1319,7 @@ namespace  WadeSpace  {
       case symbol_kind::S_CBRACE: // "]"
       case symbol_kind::S_PERIOD: // "."
       case symbol_kind::S_TILDE: // "~"
-      case symbol_kind::S_EQUAL_OP: // "="
+      case symbol_kind::S_EQUAL: // "="
       case symbol_kind::S_RIGHT_ASSIGN: // ">>="
       case symbol_kind::S_LEFT_ASSIGN: // "<<="
       case symbol_kind::S_ADD_ASSIGN: // "+="
@@ -1337,12 +1337,12 @@ namespace  WadeSpace  {
       case symbol_kind::S_PTR_OP: // "->"
       case symbol_kind::S_AND_OP: // "&&"
       case symbol_kind::S_OR_OP: // "||"
-      case symbol_kind::S_GREATER_EQUAL_OP: // ">="
-      case symbol_kind::S_LESS_EQUAL_OP: // "<="
-      case symbol_kind::S_GREATER_OP: // ">"
-      case symbol_kind::S_LESS_OP: // "<"
-      case symbol_kind::S_EQUAL_EQUAL_OP: // "=="
-      case symbol_kind::S_NOT_EQUAL_OP: // "!="
+      case symbol_kind::S_GREATER_EQUAL: // ">="
+      case symbol_kind::S_LESS_EQUAL: // "<="
+      case symbol_kind::S_GREATER: // ">"
+      case symbol_kind::S_LESS: // "<"
+      case symbol_kind::S_EQUAL_EQUAL: // "=="
+      case symbol_kind::S_NOT_EQUAL: // "!="
       case symbol_kind::S_NOT_OP: // "!"
       case symbol_kind::S_XOR_OP: // "^"
       case symbol_kind::S_BIT_AND: // "&"
@@ -1675,25 +1675,25 @@ namespace  WadeSpace  {
 
   case 45: // relational_expression: relational_expression "<" shift_expression
 #line 296 "parser.y"
-                                                       { cout << "relational_expression LESS_OP shift_expression REDUCE to shift_expression" << endl;}
+                                                    { cout << "relational_expression LESS shift_expression REDUCE to shift_expression" << endl;}
 #line 1680 "parser.cpp"
     break;
 
   case 46: // relational_expression: relational_expression ">" shift_expression
 #line 297 "parser.y"
-                                                           { cout << "relational_expression GREATER_OP shift_expression REDUCE to shift_expression" << endl;}
+                                                        { cout << "relational_expression GREATER shift_expression REDUCE to shift_expression" << endl;}
 #line 1686 "parser.cpp"
     break;
 
   case 47: // relational_expression: relational_expression "<=" shift_expression
 #line 298 "parser.y"
-                                                             { cout << "relational_expression LESS_EQUAL_OP shift_expression REDUCE to shift_expression" << endl;}
+                                                          { cout << "relational_expression LESS_EQUAL shift_expression REDUCE to shift_expression" << endl;}
 #line 1692 "parser.cpp"
     break;
 
   case 48: // relational_expression: relational_expression ">=" shift_expression
 #line 299 "parser.y"
-                                                                { cout << "relational_expression GREATER_EQUAL_OP shift_expression REDUCE to shift_expression" << endl;}
+                                                             { cout << "relational_expression GREATER_EQUAL shift_expression REDUCE to shift_expression" << endl;}
 #line 1698 "parser.cpp"
     break;
 
@@ -1705,13 +1705,13 @@ namespace  WadeSpace  {
 
   case 50: // equality_expression: equality_expression "==" relational_expression
 #line 304 "parser.y"
-                                                                { cout << "equality_expression EQUAL_EQUAL_OP relational_expression REDUCE to equality_expression" << endl;}
+                                                             { cout << "equality_expression EQUAL_EQUAL relational_expression REDUCE to equality_expression" << endl;}
 #line 1710 "parser.cpp"
     break;
 
   case 51: // equality_expression: equality_expression "!=" relational_expression
 #line 305 "parser.y"
-                                                              { cout << "equality_expression NOT_EQUAL_OP relational_expression REDUCE to equality_expression" << endl;}
+                                                           { cout << "equality_expression NOT_EQUAL relational_expression REDUCE to equality_expression" << endl;}
 #line 1716 "parser.cpp"
     break;
 
@@ -1801,7 +1801,7 @@ namespace  WadeSpace  {
 
   case 66: // assignment_operator: "="
 #line 344 "parser.y"
-                     { yylhs.value.as< AssignmentOperator > () = AssignmentOperator(yystack_[0].value.as < std::string > (),EQUAL_OP);  cout << "EQUAL_OP REDUCE to assignment_operator" << endl;}
+                  { yylhs.value.as< AssignmentOperator > () = AssignmentOperator(yystack_[0].value.as < std::string > (),EQUAL_OP);  cout << "EQUAL_OP REDUCE to assignment_operator" << endl;}
 #line 1806 "parser.cpp"
     break;
 
@@ -1951,7 +1951,7 @@ namespace  WadeSpace  {
 
   case 91: // init_declarator: declarator "=" initializer
 #line 387 "parser.y"
-                                       { cout << "declarator EQUAL_OP initializer REDUCE to init_declarator" << endl;}
+                                    { cout << "declarator EQUAL initializer REDUCE to init_declarator" << endl;}
 #line 1956 "parser.cpp"
     break;
 
@@ -2208,7 +2208,7 @@ namespace  WadeSpace  {
 
   case 132: // enumerator: "identifier" "=" constant_expression
 #line 475 "parser.y"
-                                              { yylhs.value.as< Enumerator > () = Enumerator(yystack_[2].value.as < std::string > (),&yystack_[0].value.as < Expression > ()); cout << "IDENTIFIER EQUAL_OP constant_expression REDUCE to ENUMERATOR" << endl;}
+                                           { yylhs.value.as< Enumerator > () = Enumerator(yystack_[2].value.as < std::string > (),&yystack_[0].value.as < Expression > ()); cout << "IDENTIFIER EQUAL constant_expression REDUCE to ENUMERATOR" << endl;}
 #line 2213 "parser.cpp"
     break;
 

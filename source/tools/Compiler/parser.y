@@ -127,7 +127,7 @@
 %token <std::string> CBRACE "]"
 %token <std::string> PERIOD "."
 %token <std::string> TILDE "~"
-%token <std::string> EQUAL_OP "="
+%token <std::string> EQUAL "="
 %token <std::string> RIGHT_ASSIGN ">>="
 %token <std::string> LEFT_ASSIGN "<<="
 %token <std::string> ADD_ASSIGN "+="
@@ -145,12 +145,12 @@
 %token <std::string> PTR_OP "->"
 %token <std::string> AND_OP "&&"
 %token <std::string> OR_OP "||"
-%token <std::string> GREATER_EQUAL_OP ">="
-%token <std::string> LESS_EQUAL_OP "<="
-%token <std::string> GREATER_OP ">"
-%token <std::string> LESS_OP "<"
-%token <std::string> EQUAL_EQUAL_OP "=="
-%token <std::string> NOT_EQUAL_OP "!="
+%token <std::string> GREATER_EQUAL ">="
+%token <std::string> LESS_EQUAL "<="
+%token <std::string> GREATER ">"
+%token <std::string> LESS "<"
+%token <std::string> EQUAL_EQUAL "=="
+%token <std::string> NOT_EQUAL "!="
 %token <std::string> NOT_OP "!"
 %token <std::string> XOR_OP "^"
 %token <std::string> BIT_AND "&"
@@ -293,16 +293,16 @@ shift_expression
 
 relational_expression
     : shift_expression  { $<Expression>$ = $1;  cout << "shift_expression REDUCE to relational_expression" << endl;}
-    | relational_expression LESS_OP shift_expression   { cout << "relational_expression LESS_OP shift_expression REDUCE to shift_expression" << endl;}
-    | relational_expression GREATER_OP shift_expression    { cout << "relational_expression GREATER_OP shift_expression REDUCE to shift_expression" << endl;}
-    | relational_expression LESS_EQUAL_OP shift_expression   { cout << "relational_expression LESS_EQUAL_OP shift_expression REDUCE to shift_expression" << endl;}
-    | relational_expression GREATER_EQUAL_OP shift_expression   { cout << "relational_expression GREATER_EQUAL_OP shift_expression REDUCE to shift_expression" << endl;}
+    | relational_expression LESS shift_expression   { cout << "relational_expression LESS shift_expression REDUCE to shift_expression" << endl;}
+    | relational_expression GREATER shift_expression    { cout << "relational_expression GREATER shift_expression REDUCE to shift_expression" << endl;}
+    | relational_expression LESS_EQUAL shift_expression   { cout << "relational_expression LESS_EQUAL shift_expression REDUCE to shift_expression" << endl;}
+    | relational_expression GREATER_EQUAL shift_expression   { cout << "relational_expression GREATER_EQUAL shift_expression REDUCE to shift_expression" << endl;}
     ;
 
 equality_expression
     : relational_expression  { $<Expression>$ = $1;  cout << "relational_expression REDUCE to equality_expression" << endl;}
-    | equality_expression EQUAL_EQUAL_OP relational_expression  { cout << "equality_expression EQUAL_EQUAL_OP relational_expression REDUCE to equality_expression" << endl;}
-    | equality_expression NOT_EQUAL_OP relational_expression  { cout << "equality_expression NOT_EQUAL_OP relational_expression REDUCE to equality_expression" << endl;}
+    | equality_expression EQUAL_EQUAL relational_expression  { cout << "equality_expression EQUAL_EQUAL relational_expression REDUCE to equality_expression" << endl;}
+    | equality_expression NOT_EQUAL relational_expression  { cout << "equality_expression NOT_EQUAL relational_expression REDUCE to equality_expression" << endl;}
     ;
 
 and_expression
@@ -341,7 +341,7 @@ assignment_expression
     ;
 
 assignment_operator
-    : EQUAL_OP       { $<AssignmentOperator>$ = AssignmentOperator($1,EQUAL_OP);  cout << "EQUAL_OP REDUCE to assignment_operator" << endl;}
+    : EQUAL       { $<AssignmentOperator>$ = AssignmentOperator($1,EQUAL_OP);  cout << "EQUAL_OP REDUCE to assignment_operator" << endl;}
     | MUL_ASSIGN     { $<AssignmentOperator>$ = AssignmentOperator($1,MUL_ASSIGN);  cout << "MUL_ASSIGN REDUCE to assignment_operator" << endl;}
     | DIV_ASSIGN     { $<AssignmentOperator>$ = AssignmentOperator($1,DIV_ASSIGN);  cout << "DIV_ASSIGN REDUCE to assignment_operator" << endl;}
     | MOD_ASSIGN     { $<AssignmentOperator>$ = AssignmentOperator($1,MOD_ASSIGN);  cout << "MOG_ASSIGN REDUCE to assignment_operator" << endl;}
@@ -384,7 +384,7 @@ init_declarator_list
 
 init_declarator
     : declarator                       { cout << "declarator REDUCE to init_declarator" << endl;}
-    | declarator EQUAL_OP initializer  { cout << "declarator EQUAL_OP initializer REDUCE to init_declarator" << endl;}
+    | declarator EQUAL initializer  { cout << "declarator EQUAL initializer REDUCE to init_declarator" << endl;}
     ;
 
 storage_class_specifier
@@ -472,7 +472,7 @@ enumerator_list
 
 enumerator
     : IDENTIFIER                              { $<Enumerator>$ = Enumerator($1,NULL); cout << "IDENTIFIER REDUCE to ENUMERATOR" << endl;}
-    | IDENTIFIER EQUAL_OP constant_expression { $<Enumerator>$ = Enumerator($1,&$3); cout << "IDENTIFIER EQUAL_OP constant_expression REDUCE to ENUMERATOR" << endl;}
+    | IDENTIFIER EQUAL constant_expression { $<Enumerator>$ = Enumerator($1,&$3); cout << "IDENTIFIER EQUAL constant_expression REDUCE to ENUMERATOR" << endl;}
     ;
 
 type_qualifier

@@ -691,7 +691,7 @@ namespace  WadeSpace  {
     TOKEN_CBRACE = 312,            // "]"
     TOKEN_PERIOD = 313,            // "."
     TOKEN_TILDE = 314,             // "~"
-    TOKEN_EQUAL_OP = 315,          // "="
+    TOKEN_EQUAL = 315,             // "="
     TOKEN_RIGHT_ASSIGN = 316,      // ">>="
     TOKEN_LEFT_ASSIGN = 317,       // "<<="
     TOKEN_ADD_ASSIGN = 318,        // "+="
@@ -709,12 +709,12 @@ namespace  WadeSpace  {
     TOKEN_PTR_OP = 330,            // "->"
     TOKEN_AND_OP = 331,            // "&&"
     TOKEN_OR_OP = 332,             // "||"
-    TOKEN_GREATER_EQUAL_OP = 333,  // ">="
-    TOKEN_LESS_EQUAL_OP = 334,     // "<="
-    TOKEN_GREATER_OP = 335,        // ">"
-    TOKEN_LESS_OP = 336,           // "<"
-    TOKEN_EQUAL_EQUAL_OP = 337,    // "=="
-    TOKEN_NOT_EQUAL_OP = 338,      // "!="
+    TOKEN_GREATER_EQUAL = 333,     // ">="
+    TOKEN_LESS_EQUAL = 334,        // "<="
+    TOKEN_GREATER = 335,           // ">"
+    TOKEN_LESS = 336,              // "<"
+    TOKEN_EQUAL_EQUAL = 337,       // "=="
+    TOKEN_NOT_EQUAL = 338,         // "!="
     TOKEN_NOT_OP = 339,            // "!"
     TOKEN_XOR_OP = 340,            // "^"
     TOKEN_BIT_AND = 341,           // "&"
@@ -802,7 +802,7 @@ namespace  WadeSpace  {
         S_CBRACE = 57,                           // "]"
         S_PERIOD = 58,                           // "."
         S_TILDE = 59,                            // "~"
-        S_EQUAL_OP = 60,                         // "="
+        S_EQUAL = 60,                            // "="
         S_RIGHT_ASSIGN = 61,                     // ">>="
         S_LEFT_ASSIGN = 62,                      // "<<="
         S_ADD_ASSIGN = 63,                       // "+="
@@ -820,12 +820,12 @@ namespace  WadeSpace  {
         S_PTR_OP = 75,                           // "->"
         S_AND_OP = 76,                           // "&&"
         S_OR_OP = 77,                            // "||"
-        S_GREATER_EQUAL_OP = 78,                 // ">="
-        S_LESS_EQUAL_OP = 79,                    // "<="
-        S_GREATER_OP = 80,                       // ">"
-        S_LESS_OP = 81,                          // "<"
-        S_EQUAL_EQUAL_OP = 82,                   // "=="
-        S_NOT_EQUAL_OP = 83,                     // "!="
+        S_GREATER_EQUAL = 78,                    // ">="
+        S_LESS_EQUAL = 79,                       // "<="
+        S_GREATER = 80,                          // ">"
+        S_LESS = 81,                             // "<"
+        S_EQUAL_EQUAL = 82,                      // "=="
+        S_NOT_EQUAL = 83,                        // "!="
         S_NOT_OP = 84,                           // "!"
         S_XOR_OP = 85,                           // "^"
         S_BIT_AND = 86,                          // "&"
@@ -1052,7 +1052,7 @@ namespace  WadeSpace  {
       case symbol_kind::S_CBRACE: // "]"
       case symbol_kind::S_PERIOD: // "."
       case symbol_kind::S_TILDE: // "~"
-      case symbol_kind::S_EQUAL_OP: // "="
+      case symbol_kind::S_EQUAL: // "="
       case symbol_kind::S_RIGHT_ASSIGN: // ">>="
       case symbol_kind::S_LEFT_ASSIGN: // "<<="
       case symbol_kind::S_ADD_ASSIGN: // "+="
@@ -1070,12 +1070,12 @@ namespace  WadeSpace  {
       case symbol_kind::S_PTR_OP: // "->"
       case symbol_kind::S_AND_OP: // "&&"
       case symbol_kind::S_OR_OP: // "||"
-      case symbol_kind::S_GREATER_EQUAL_OP: // ">="
-      case symbol_kind::S_LESS_EQUAL_OP: // "<="
-      case symbol_kind::S_GREATER_OP: // ">"
-      case symbol_kind::S_LESS_OP: // "<"
-      case symbol_kind::S_EQUAL_EQUAL_OP: // "=="
-      case symbol_kind::S_NOT_EQUAL_OP: // "!="
+      case symbol_kind::S_GREATER_EQUAL: // ">="
+      case symbol_kind::S_LESS_EQUAL: // "<="
+      case symbol_kind::S_GREATER: // ">"
+      case symbol_kind::S_LESS: // "<"
+      case symbol_kind::S_EQUAL_EQUAL: // "=="
+      case symbol_kind::S_NOT_EQUAL: // "!="
       case symbol_kind::S_NOT_OP: // "!"
       case symbol_kind::S_XOR_OP: // "^"
       case symbol_kind::S_BIT_AND: // "&"
@@ -1492,7 +1492,7 @@ switch (yykind)
       case symbol_kind::S_CBRACE: // "]"
       case symbol_kind::S_PERIOD: // "."
       case symbol_kind::S_TILDE: // "~"
-      case symbol_kind::S_EQUAL_OP: // "="
+      case symbol_kind::S_EQUAL: // "="
       case symbol_kind::S_RIGHT_ASSIGN: // ">>="
       case symbol_kind::S_LEFT_ASSIGN: // "<<="
       case symbol_kind::S_ADD_ASSIGN: // "+="
@@ -1510,12 +1510,12 @@ switch (yykind)
       case symbol_kind::S_PTR_OP: // "->"
       case symbol_kind::S_AND_OP: // "&&"
       case symbol_kind::S_OR_OP: // "||"
-      case symbol_kind::S_GREATER_EQUAL_OP: // ">="
-      case symbol_kind::S_LESS_EQUAL_OP: // "<="
-      case symbol_kind::S_GREATER_OP: // ">"
-      case symbol_kind::S_LESS_OP: // "<"
-      case symbol_kind::S_EQUAL_EQUAL_OP: // "=="
-      case symbol_kind::S_NOT_EQUAL_OP: // "!="
+      case symbol_kind::S_GREATER_EQUAL: // ">="
+      case symbol_kind::S_LESS_EQUAL: // "<="
+      case symbol_kind::S_GREATER: // ">"
+      case symbol_kind::S_LESS: // "<"
+      case symbol_kind::S_EQUAL_EQUAL: // "=="
+      case symbol_kind::S_NOT_EQUAL: // "!="
       case symbol_kind::S_NOT_OP: // "!"
       case symbol_kind::S_XOR_OP: // "^"
       case symbol_kind::S_BIT_AND: // "&"
@@ -2634,16 +2634,16 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_EQUAL_OP (std::string v, location_type l)
+      make_EQUAL (std::string v, location_type l)
       {
-        return symbol_type (token::TOKEN_EQUAL_OP, std::move (v), std::move (l));
+        return symbol_type (token::TOKEN_EQUAL, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_EQUAL_OP (const std::string& v, const location_type& l)
+      make_EQUAL (const std::string& v, const location_type& l)
       {
-        return symbol_type (token::TOKEN_EQUAL_OP, v, l);
+        return symbol_type (token::TOKEN_EQUAL, v, l);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
@@ -2904,91 +2904,91 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_GREATER_EQUAL_OP (std::string v, location_type l)
+      make_GREATER_EQUAL (std::string v, location_type l)
       {
-        return symbol_type (token::TOKEN_GREATER_EQUAL_OP, std::move (v), std::move (l));
+        return symbol_type (token::TOKEN_GREATER_EQUAL, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_GREATER_EQUAL_OP (const std::string& v, const location_type& l)
+      make_GREATER_EQUAL (const std::string& v, const location_type& l)
       {
-        return symbol_type (token::TOKEN_GREATER_EQUAL_OP, v, l);
+        return symbol_type (token::TOKEN_GREATER_EQUAL, v, l);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_LESS_EQUAL_OP (std::string v, location_type l)
+      make_LESS_EQUAL (std::string v, location_type l)
       {
-        return symbol_type (token::TOKEN_LESS_EQUAL_OP, std::move (v), std::move (l));
+        return symbol_type (token::TOKEN_LESS_EQUAL, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_LESS_EQUAL_OP (const std::string& v, const location_type& l)
+      make_LESS_EQUAL (const std::string& v, const location_type& l)
       {
-        return symbol_type (token::TOKEN_LESS_EQUAL_OP, v, l);
+        return symbol_type (token::TOKEN_LESS_EQUAL, v, l);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_GREATER_OP (std::string v, location_type l)
+      make_GREATER (std::string v, location_type l)
       {
-        return symbol_type (token::TOKEN_GREATER_OP, std::move (v), std::move (l));
+        return symbol_type (token::TOKEN_GREATER, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_GREATER_OP (const std::string& v, const location_type& l)
+      make_GREATER (const std::string& v, const location_type& l)
       {
-        return symbol_type (token::TOKEN_GREATER_OP, v, l);
+        return symbol_type (token::TOKEN_GREATER, v, l);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_LESS_OP (std::string v, location_type l)
+      make_LESS (std::string v, location_type l)
       {
-        return symbol_type (token::TOKEN_LESS_OP, std::move (v), std::move (l));
+        return symbol_type (token::TOKEN_LESS, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_LESS_OP (const std::string& v, const location_type& l)
+      make_LESS (const std::string& v, const location_type& l)
       {
-        return symbol_type (token::TOKEN_LESS_OP, v, l);
+        return symbol_type (token::TOKEN_LESS, v, l);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_EQUAL_EQUAL_OP (std::string v, location_type l)
+      make_EQUAL_EQUAL (std::string v, location_type l)
       {
-        return symbol_type (token::TOKEN_EQUAL_EQUAL_OP, std::move (v), std::move (l));
+        return symbol_type (token::TOKEN_EQUAL_EQUAL, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_EQUAL_EQUAL_OP (const std::string& v, const location_type& l)
+      make_EQUAL_EQUAL (const std::string& v, const location_type& l)
       {
-        return symbol_type (token::TOKEN_EQUAL_EQUAL_OP, v, l);
+        return symbol_type (token::TOKEN_EQUAL_EQUAL, v, l);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_NOT_EQUAL_OP (std::string v, location_type l)
+      make_NOT_EQUAL (std::string v, location_type l)
       {
-        return symbol_type (token::TOKEN_NOT_EQUAL_OP, std::move (v), std::move (l));
+        return symbol_type (token::TOKEN_NOT_EQUAL, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_NOT_EQUAL_OP (const std::string& v, const location_type& l)
+      make_NOT_EQUAL (const std::string& v, const location_type& l)
       {
-        return symbol_type (token::TOKEN_NOT_EQUAL_OP, v, l);
+        return symbol_type (token::TOKEN_NOT_EQUAL, v, l);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
@@ -3650,7 +3650,7 @@ switch (yykind)
       case symbol_kind::S_CBRACE: // "]"
       case symbol_kind::S_PERIOD: // "."
       case symbol_kind::S_TILDE: // "~"
-      case symbol_kind::S_EQUAL_OP: // "="
+      case symbol_kind::S_EQUAL: // "="
       case symbol_kind::S_RIGHT_ASSIGN: // ">>="
       case symbol_kind::S_LEFT_ASSIGN: // "<<="
       case symbol_kind::S_ADD_ASSIGN: // "+="
@@ -3668,12 +3668,12 @@ switch (yykind)
       case symbol_kind::S_PTR_OP: // "->"
       case symbol_kind::S_AND_OP: // "&&"
       case symbol_kind::S_OR_OP: // "||"
-      case symbol_kind::S_GREATER_EQUAL_OP: // ">="
-      case symbol_kind::S_LESS_EQUAL_OP: // "<="
-      case symbol_kind::S_GREATER_OP: // ">"
-      case symbol_kind::S_LESS_OP: // "<"
-      case symbol_kind::S_EQUAL_EQUAL_OP: // "=="
-      case symbol_kind::S_NOT_EQUAL_OP: // "!="
+      case symbol_kind::S_GREATER_EQUAL: // ">="
+      case symbol_kind::S_LESS_EQUAL: // "<="
+      case symbol_kind::S_GREATER: // ">"
+      case symbol_kind::S_LESS: // "<"
+      case symbol_kind::S_EQUAL_EQUAL: // "=="
+      case symbol_kind::S_NOT_EQUAL: // "!="
       case symbol_kind::S_NOT_OP: // "!"
       case symbol_kind::S_XOR_OP: // "^"
       case symbol_kind::S_BIT_AND: // "&"
@@ -3850,7 +3850,7 @@ switch (yykind)
       case symbol_kind::S_CBRACE: // "]"
       case symbol_kind::S_PERIOD: // "."
       case symbol_kind::S_TILDE: // "~"
-      case symbol_kind::S_EQUAL_OP: // "="
+      case symbol_kind::S_EQUAL: // "="
       case symbol_kind::S_RIGHT_ASSIGN: // ">>="
       case symbol_kind::S_LEFT_ASSIGN: // "<<="
       case symbol_kind::S_ADD_ASSIGN: // "+="
@@ -3868,12 +3868,12 @@ switch (yykind)
       case symbol_kind::S_PTR_OP: // "->"
       case symbol_kind::S_AND_OP: // "&&"
       case symbol_kind::S_OR_OP: // "||"
-      case symbol_kind::S_GREATER_EQUAL_OP: // ">="
-      case symbol_kind::S_LESS_EQUAL_OP: // "<="
-      case symbol_kind::S_GREATER_OP: // ">"
-      case symbol_kind::S_LESS_OP: // "<"
-      case symbol_kind::S_EQUAL_EQUAL_OP: // "=="
-      case symbol_kind::S_NOT_EQUAL_OP: // "!="
+      case symbol_kind::S_GREATER_EQUAL: // ">="
+      case symbol_kind::S_LESS_EQUAL: // "<="
+      case symbol_kind::S_GREATER: // ">"
+      case symbol_kind::S_LESS: // "<"
+      case symbol_kind::S_EQUAL_EQUAL: // "=="
+      case symbol_kind::S_NOT_EQUAL: // "!="
       case symbol_kind::S_NOT_OP: // "!"
       case symbol_kind::S_XOR_OP: // "^"
       case symbol_kind::S_BIT_AND: // "&"
