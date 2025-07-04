@@ -57,6 +57,9 @@
     <ClInclude Include="TypeQualifier.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Pointer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="parser.cpp">
@@ -93,6 +96,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TypeQualifier.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Pointer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

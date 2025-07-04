@@ -60,6 +60,7 @@
     #include "Enumerator.h"
     #include "EnumSpecifier.h"
     #include "Expression.h"
+    #include "Pointer.h"
 
     using namespace std;
 
@@ -68,7 +69,7 @@
         class Interpreter;
     }
 
-#line 72 "parser.hpp"
+#line 73 "parser.hpp"
 
 # include <cassert>
 # include <cstdlib> // std::abort
@@ -209,7 +210,7 @@
 
 #line 9 "parser.y"
 namespace  WadeSpace  {
-#line 213 "parser.hpp"
+#line 214 "parser.hpp"
 
 
 
@@ -460,17 +461,20 @@ namespace  WadeSpace  {
       // constant_expression
       char dummy5[sizeof (Expression)];
 
+      // pointer
+      char dummy6[sizeof (Pointer)];
+
       // storage_class_specifier
-      char dummy6[sizeof (StorageClassSpecifier)];
+      char dummy7[sizeof (StorageClassSpecifier)];
 
       // type_qualifier
-      char dummy7[sizeof (TypeQualifier)];
+      char dummy8[sizeof (TypeQualifier)];
 
       // type_specifier
-      char dummy8[sizeof (TypeSpecifier)];
+      char dummy9[sizeof (TypeSpecifier)];
 
       // "f_const"
-      char dummy9[sizeof (long double)];
+      char dummy10[sizeof (long double)];
 
       // "identifier"
       // "sting_literal"
@@ -561,16 +565,19 @@ namespace  WadeSpace  {
       // "/"
       // "%"
       // unary_operator
-      char dummy10[sizeof (std::string)];
+      char dummy11[sizeof (std::string)];
 
       // enumerator_list
-      char dummy11[sizeof (std::vector<Enumerator>)];
+      char dummy12[sizeof (std::vector<Enumerator>)];
 
       // argument_expression_list
-      char dummy12[sizeof (std::vector<Expression>)];
+      char dummy13[sizeof (std::vector<Expression>)];
+
+      // type_qualifier_list
+      char dummy14[sizeof (std::vector<TypeQualifier>)];
 
       // "i_const"
-      char dummy13[sizeof (uint64_t)];
+      char dummy15[sizeof (uint64_t)];
     };
 
     /// The size of the largest semantic type.
@@ -729,7 +736,7 @@ namespace  WadeSpace  {
     {
       enum symbol_kind_type
       {
-        YYNTOKENS = 96, ///< Number of tokens.
+        YYNTOKENS = 93, ///< Number of tokens.
         S_YYEMPTY = -2,
         S_YYEOF = 0,                             // "end of file"
         S_YYerror = 1,                           // error
@@ -824,74 +831,71 @@ namespace  WadeSpace  {
         S_TIMES_OP = 90,                         // "*"
         S_DIV_OP = 91,                           // "/"
         S_MOD_OP = 92,                           // "%"
-        S_93_ = 93,                              // '['
-        S_94_ = 94,                              // ']'
-        S_95_ = 95,                              // '*'
-        S_YYACCEPT = 96,                         // $accept
-        S_primary_expression = 97,               // primary_expression
-        S_constant = 98,                         // constant
-        S_postfix_expression = 99,               // postfix_expression
-        S_argument_expression_list = 100,        // argument_expression_list
-        S_unary_expression = 101,                // unary_expression
-        S_unary_operator = 102,                  // unary_operator
-        S_cast_expression = 103,                 // cast_expression
-        S_multiplicative_expression = 104,       // multiplicative_expression
-        S_additive_expression = 105,             // additive_expression
-        S_shift_expression = 106,                // shift_expression
-        S_relational_expression = 107,           // relational_expression
-        S_equality_expression = 108,             // equality_expression
-        S_and_expression = 109,                  // and_expression
-        S_exclusive_or_expression = 110,         // exclusive_or_expression
-        S_inclusive_or_expression = 111,         // inclusive_or_expression
-        S_logical_and_expression = 112,          // logical_and_expression
-        S_logical_or_expression = 113,           // logical_or_expression
-        S_conditional_expression = 114,          // conditional_expression
-        S_assignment_expression = 115,           // assignment_expression
-        S_assignment_operator = 116,             // assignment_operator
-        S_expression = 117,                      // expression
-        S_constant_expression = 118,             // constant_expression
-        S_declaration = 119,                     // declaration
-        S_declaration_specifiers = 120,          // declaration_specifiers
-        S_init_declarator_list = 121,            // init_declarator_list
-        S_init_declarator = 122,                 // init_declarator
-        S_storage_class_specifier = 123,         // storage_class_specifier
-        S_type_specifier = 124,                  // type_specifier
-        S_struct_or_union_specifier = 125,       // struct_or_union_specifier
-        S_struct_or_union = 126,                 // struct_or_union
-        S_struct_declaration_list = 127,         // struct_declaration_list
-        S_struct_declaration = 128,              // struct_declaration
-        S_specifier_qualifier_list = 129,        // specifier_qualifier_list
-        S_struct_declarator_list = 130,          // struct_declarator_list
-        S_struct_declarator = 131,               // struct_declarator
-        S_enum_specifier = 132,                  // enum_specifier
-        S_enumerator_list = 133,                 // enumerator_list
-        S_enumerator = 134,                      // enumerator
-        S_type_qualifier = 135,                  // type_qualifier
-        S_declarator = 136,                      // declarator
-        S_direct_declarator = 137,               // direct_declarator
-        S_pointer = 138,                         // pointer
-        S_type_qualifier_list = 139,             // type_qualifier_list
-        S_parameter_type_list = 140,             // parameter_type_list
-        S_parameter_list = 141,                  // parameter_list
-        S_parameter_declaration = 142,           // parameter_declaration
-        S_identifier_list = 143,                 // identifier_list
-        S_type_name = 144,                       // type_name
-        S_abstract_declarator = 145,             // abstract_declarator
-        S_direct_abstract_declarator = 146,      // direct_abstract_declarator
-        S_initializer = 147,                     // initializer
-        S_initializer_list = 148,                // initializer_list
-        S_statement = 149,                       // statement
-        S_labeled_statement = 150,               // labeled_statement
-        S_compound_statement = 151,              // compound_statement
-        S_declaration_list = 152,                // declaration_list
-        S_statement_list = 153,                  // statement_list
-        S_expression_statement = 154,            // expression_statement
-        S_selection_statement = 155,             // selection_statement
-        S_iteration_statement = 156,             // iteration_statement
-        S_jump_statement = 157,                  // jump_statement
-        S_translation_unit = 158,                // translation_unit
-        S_external_declaration = 159,            // external_declaration
-        S_function_definition = 160              // function_definition
+        S_YYACCEPT = 93,                         // $accept
+        S_primary_expression = 94,               // primary_expression
+        S_constant = 95,                         // constant
+        S_postfix_expression = 96,               // postfix_expression
+        S_argument_expression_list = 97,         // argument_expression_list
+        S_unary_expression = 98,                 // unary_expression
+        S_unary_operator = 99,                   // unary_operator
+        S_cast_expression = 100,                 // cast_expression
+        S_multiplicative_expression = 101,       // multiplicative_expression
+        S_additive_expression = 102,             // additive_expression
+        S_shift_expression = 103,                // shift_expression
+        S_relational_expression = 104,           // relational_expression
+        S_equality_expression = 105,             // equality_expression
+        S_and_expression = 106,                  // and_expression
+        S_exclusive_or_expression = 107,         // exclusive_or_expression
+        S_inclusive_or_expression = 108,         // inclusive_or_expression
+        S_logical_and_expression = 109,          // logical_and_expression
+        S_logical_or_expression = 110,           // logical_or_expression
+        S_conditional_expression = 111,          // conditional_expression
+        S_assignment_expression = 112,           // assignment_expression
+        S_assignment_operator = 113,             // assignment_operator
+        S_expression = 114,                      // expression
+        S_constant_expression = 115,             // constant_expression
+        S_declaration = 116,                     // declaration
+        S_declaration_specifiers = 117,          // declaration_specifiers
+        S_init_declarator_list = 118,            // init_declarator_list
+        S_init_declarator = 119,                 // init_declarator
+        S_storage_class_specifier = 120,         // storage_class_specifier
+        S_type_specifier = 121,                  // type_specifier
+        S_struct_or_union_specifier = 122,       // struct_or_union_specifier
+        S_struct_or_union = 123,                 // struct_or_union
+        S_struct_declaration_list = 124,         // struct_declaration_list
+        S_struct_declaration = 125,              // struct_declaration
+        S_specifier_qualifier_list = 126,        // specifier_qualifier_list
+        S_struct_declarator_list = 127,          // struct_declarator_list
+        S_struct_declarator = 128,               // struct_declarator
+        S_enum_specifier = 129,                  // enum_specifier
+        S_enumerator_list = 130,                 // enumerator_list
+        S_enumerator = 131,                      // enumerator
+        S_type_qualifier = 132,                  // type_qualifier
+        S_declarator = 133,                      // declarator
+        S_direct_declarator = 134,               // direct_declarator
+        S_pointer = 135,                         // pointer
+        S_type_qualifier_list = 136,             // type_qualifier_list
+        S_parameter_type_list = 137,             // parameter_type_list
+        S_parameter_list = 138,                  // parameter_list
+        S_parameter_declaration = 139,           // parameter_declaration
+        S_identifier_list = 140,                 // identifier_list
+        S_type_name = 141,                       // type_name
+        S_abstract_declarator = 142,             // abstract_declarator
+        S_direct_abstract_declarator = 143,      // direct_abstract_declarator
+        S_initializer = 144,                     // initializer
+        S_initializer_list = 145,                // initializer_list
+        S_statement = 146,                       // statement
+        S_labeled_statement = 147,               // labeled_statement
+        S_compound_statement = 148,              // compound_statement
+        S_declaration_list = 149,                // declaration_list
+        S_statement_list = 150,                  // statement_list
+        S_expression_statement = 151,            // expression_statement
+        S_selection_statement = 152,             // selection_statement
+        S_iteration_statement = 153,             // iteration_statement
+        S_jump_statement = 154,                  // jump_statement
+        S_translation_unit = 155,                // translation_unit
+        S_external_declaration = 156,            // external_declaration
+        S_function_definition = 157              // function_definition
       };
     };
 
@@ -963,6 +967,10 @@ namespace  WadeSpace  {
       case symbol_kind::S_expression: // expression
       case symbol_kind::S_constant_expression: // constant_expression
         value.move< Expression > (std::move (that.value));
+        break;
+
+      case symbol_kind::S_pointer: // pointer
+        value.move< Pointer > (std::move (that.value));
         break;
 
       case symbol_kind::S_storage_class_specifier: // storage_class_specifier
@@ -1081,6 +1089,10 @@ namespace  WadeSpace  {
         value.move< std::vector<Expression> > (std::move (that.value));
         break;
 
+      case symbol_kind::S_type_qualifier_list: // type_qualifier_list
+        value.move< std::vector<TypeQualifier> > (std::move (that.value));
+        break;
+
       case symbol_kind::S_I_CONST: // "i_const"
         value.move< uint64_t > (std::move (that.value));
         break;
@@ -1172,6 +1184,20 @@ namespace  WadeSpace  {
       {}
 #else
       basic_symbol (typename Base::kind_type t, const Expression& v, const location_type& l)
+        : Base (t)
+        , value (v)
+        , location (l)
+      {}
+#endif
+
+#if 201103L <= YY_CPLUSPLUS
+      basic_symbol (typename Base::kind_type t, Pointer&& v, location_type&& l)
+        : Base (t)
+        , value (std::move (v))
+        , location (std::move (l))
+      {}
+#else
+      basic_symbol (typename Base::kind_type t, const Pointer& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1277,6 +1303,20 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
+      basic_symbol (typename Base::kind_type t, std::vector<TypeQualifier>&& v, location_type&& l)
+        : Base (t)
+        , value (std::move (v))
+        , location (std::move (l))
+      {}
+#else
+      basic_symbol (typename Base::kind_type t, const std::vector<TypeQualifier>& v, const location_type& l)
+        : Base (t)
+        , value (v)
+        , location (l)
+      {}
+#endif
+
+#if 201103L <= YY_CPLUSPLUS
       basic_symbol (typename Base::kind_type t, uint64_t&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
@@ -1349,6 +1389,10 @@ switch (yykind)
       case symbol_kind::S_expression: // expression
       case symbol_kind::S_constant_expression: // constant_expression
         value.template destroy< Expression > ();
+        break;
+
+      case symbol_kind::S_pointer: // pointer
+        value.template destroy< Pointer > ();
         break;
 
       case symbol_kind::S_storage_class_specifier: // storage_class_specifier
@@ -1467,6 +1511,10 @@ switch (yykind)
         value.template destroy< std::vector<Expression> > ();
         break;
 
+      case symbol_kind::S_type_qualifier_list: // type_qualifier_list
+        value.template destroy< std::vector<TypeQualifier> > ();
+        break;
+
       case symbol_kind::S_I_CONST: // "i_const"
         value.template destroy< uint64_t > ();
         break;
@@ -1569,10 +1617,7 @@ switch (yykind)
       {
 #if !defined _MSC_VER || defined __clang__
         YY_ASSERT (tok == token::TOKEN_END
-                   || (token::TOKEN_YYerror <= tok && tok <= token::TOKEN_YYUNDEF)
-                   || tok == 91
-                   || tok == 93
-                   || tok == 42);
+                   || (token::TOKEN_YYerror <= tok && tok <= token::TOKEN_YYUNDEF));
 #endif
       }
 #if 201103L <= YY_CPLUSPLUS
@@ -3385,7 +3430,7 @@ switch (yykind)
     /// Constants.
     enum
     {
-      yylast_ = 1697,     ///< Last index in yytable_.
+      yylast_ = 1667,     ///< Last index in yytable_.
       yynnts_ = 65,  ///< Number of nonterminal symbols.
       yyfinal_ = 61 ///< Termination state number.
     };
@@ -3411,12 +3456,12 @@ switch (yykind)
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,    95,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,    93,     2,    94,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
@@ -3498,6 +3543,10 @@ switch (yykind)
       case symbol_kind::S_expression: // expression
       case symbol_kind::S_constant_expression: // constant_expression
         value.copy< Expression > (YY_MOVE (that.value));
+        break;
+
+      case symbol_kind::S_pointer: // pointer
+        value.copy< Pointer > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_storage_class_specifier: // storage_class_specifier
@@ -3616,6 +3665,10 @@ switch (yykind)
         value.copy< std::vector<Expression> > (YY_MOVE (that.value));
         break;
 
+      case symbol_kind::S_type_qualifier_list: // type_qualifier_list
+        value.copy< std::vector<TypeQualifier> > (YY_MOVE (that.value));
+        break;
+
       case symbol_kind::S_I_CONST: // "i_const"
         value.copy< uint64_t > (YY_MOVE (that.value));
         break;
@@ -3686,6 +3739,10 @@ switch (yykind)
       case symbol_kind::S_expression: // expression
       case symbol_kind::S_constant_expression: // constant_expression
         value.move< Expression > (YY_MOVE (s.value));
+        break;
+
+      case symbol_kind::S_pointer: // pointer
+        value.move< Pointer > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_storage_class_specifier: // storage_class_specifier
@@ -3804,6 +3861,10 @@ switch (yykind)
         value.move< std::vector<Expression> > (YY_MOVE (s.value));
         break;
 
+      case symbol_kind::S_type_qualifier_list: // type_qualifier_list
+        value.move< std::vector<TypeQualifier> > (YY_MOVE (s.value));
+        break;
+
       case symbol_kind::S_I_CONST: // "i_const"
         value.move< uint64_t > (YY_MOVE (s.value));
         break;
@@ -3875,7 +3936,7 @@ switch (yykind)
 
 #line 9 "parser.y"
 } //  WadeSpace 
-#line 3879 "parser.hpp"
+#line 3940 "parser.hpp"
 
 
 

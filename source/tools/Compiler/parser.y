@@ -22,6 +22,7 @@
     #include "Enumerator.h"
     #include "EnumSpecifier.h"
     #include "Expression.h"
+    #include "Pointer.h"
 
     using namespace std;
 
@@ -187,6 +188,8 @@
 %type<std::vector<Enumerator>> enumerator_list
 %type<EnumSpecifier> enum_specifier
 %type<TypeQualifier> type_qualifier
+%type<std::vector<TypeQualifier>> type_qualifier_list
+%type<Pointer> pointer 
 
 %start translation_unit
 
@@ -483,23 +486,34 @@ declarator
 direct_declarator
     : IDENTIFIER
     | OPAREN declarator CPAREN
-    | direct_declarator '[' constant_expression ']'
-    | direct_declarator '[' ']'
+    | direct_declarator OBRACE constant_expression CBRACE
+    | direct_declarator OBRACE CBRACE
     | direct_declarator OPAREN parameter_type_list CPAREN
     | direct_declarator OPAREN identifier_list CPAREN
     | direct_declarator OPAREN CPAREN
     ;
 
 pointer
-    : '*'
-    | '*' type_qualifier_list
-    | '*' pointer
-    | '*' type_qualifier_list pointer
+    : TIMES_OP                              {$<Pointer>$ = Pointer($1); cout << "TIMES_OP REDUCE to POINTER" << endl;}
+    | TIMES_OP type_qualifier_list          {$<Pointer>$ = Pointer($1,&$2); cout << "TIMES_OP type_qualifier_list REDUCE to POINTER" << endl;}
+    | TIMES_OP pointer                      {$<Pointer>$ = Pointer($1,&$2); $<Pointer>$.inc(); cout << "TIMES_OP pointer REDUCE to POINTER" << endl;}
+    | TIMES_OP type_qualifier_list pointer  {$<Pointer>$ = Pointer($1,&$2,&$3); $<Pointer>$.inc(); cout << "TIMES_OP type_qualifier_list pointer REDUCE to POINTER" << endl;}
     ;
 
 type_qualifier_list
-    : type_qualifier
-    | type_qualifier_list type_qualifier
+    : type_qualifier        {
+                             TypeQualifier exp = $1;
+                             $$ = std::vector<TypeQualifier>();
+                             $$.push_back(exp);
+                             cout << "type_qualifier REDUCE type_qualifier_list" << endl;
+                            }
+    | type_qualifier_list type_qualifier {
+                                          TypeQualifier value1 = $2;
+                                          std::vector<TypeQualifier> &value2 = $1;
+                                          value2.push_back(value1);
+                                          $$ = value2;
+                                          cout << "type_qualifier_list type_qualifier REDUCE type_qualifier_list" << endl;
+                                        }
     ;
 
 
@@ -537,10 +551,10 @@ abstract_declarator
 
 direct_abstract_declarator
     : OPAREN abstract_declarator CPAREN
-    | '[' ']'
-    | '[' constant_expression ']'
-    | direct_abstract_declarator '[' ']'
-    | direct_abstract_declarator '[' constant_expression ']'
+    | OBRACE CBRACE
+    | OBRACE constant_expression CBRACE
+    | direct_abstract_declarator OBRACE CBRACE
+    | direct_abstract_declarator OBRACE constant_expression CBRACE
     | OPAREN CPAREN
     | OPAREN parameter_type_list CPAREN
     | direct_abstract_declarator OPAREN CPAREN

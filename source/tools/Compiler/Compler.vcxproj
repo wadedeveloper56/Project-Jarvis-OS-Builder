@@ -185,6 +185,7 @@
     <ClInclude Include="interpreter.h" />
     <ClInclude Include="location.hh" />
     <ClInclude Include="parser.hpp" />
+    <ClInclude Include="Pointer.h" />
     <ClInclude Include="position.hh" />
     <ClInclude Include="scanner.h" />
     <ClInclude Include="stack.hh" />
@@ -201,6 +202,7 @@
     <ClCompile Include="interpreter.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="parser.cpp" />
+    <ClCompile Include="Pointer.cpp" />
     <ClCompile Include="scanner.cpp" />
     <ClCompile Include="StorageClassSpecifier.cpp" />
     <ClCompile Include="TypeQualifier.cpp" />
