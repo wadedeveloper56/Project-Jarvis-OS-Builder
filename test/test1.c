@@ -11,9 +11,6 @@
 //imaginary var11;
 //char *var12[];
 
-int main(int argc,char *argv[]){
+int main(){
     return 0;
-}
-
-void function1(){    
 }

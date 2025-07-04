@@ -287,8 +287,8 @@ additive_expression
 
 shift_expression
     : additive_expression  { $<Expression>$ = $1;  cout << "additive_expression REDUCE to shift_expression" << endl;}
-    | shift_expression LEFT_OP additive_expression{ cout << "shift_expression LEFT_OP additive_expression REDUCE to shift_expression" << endl;}
-    | shift_expression RIGHT_OP additive_expression{ cout << "shift_expression RIGHT_OP additive_expression REDUCE to shift_expression" << endl;}
+    | shift_expression LEFT_OP additive_expression { cout << "shift_expression LEFT_OP additive_expression REDUCE to shift_expression" << endl;}
+    | shift_expression RIGHT_OP additive_expression { cout << "shift_expression RIGHT_OP additive_expression REDUCE to shift_expression" << endl;}
     ;
 
 relational_expression
@@ -612,27 +612,27 @@ expression_statement
     ;
 
 selection_statement
-    : IF OPAREN expression CPAREN statement
-    | IF OPAREN expression CPAREN statement ELSE statement
-    | SWITCH OPAREN expression CPAREN statement
+    : IF OPAREN expression CPAREN statement                { cout << "IF OPAREN expression CPAREN statement REDUCE to selection_statement" << endl; }
+    | IF OPAREN expression CPAREN statement ELSE statement { cout << "IF OPAREN expression CPAREN statement ELSE statement REDUCE to selection_statement" << endl; }
+    | SWITCH OPAREN expression CPAREN statement            { cout << "SWITCH OPAREN expression CPAREN statement REDUCE to selection_statement" << endl; }
     ;
 
 iteration_statement
-    : WHILE OPAREN expression CPAREN statement
-    | DO statement WHILE OPAREN expression CPAREN SEMICOLON
-    | FOR OPAREN expression_statement expression_statement CPAREN statement
-    | FOR OPAREN expression_statement expression_statement expression CPAREN statement
+    : WHILE OPAREN expression CPAREN statement                                         { cout << "WHILE OPAREN expression CPAREN statement REDUCE to iteration_statement" << endl; }
+    | DO statement WHILE OPAREN expression CPAREN SEMICOLON                            { cout << "DO statement WHILE OPAREN expression CPAREN SEMICOLON REDUCE to iteration_statement" << endl; }
+    | FOR OPAREN expression_statement expression_statement CPAREN statement            { cout << "FOR OPAREN expression_statement expression_statement CPAREN statement REDUCE to iteration_statement" << endl; }
+    | FOR OPAREN expression_statement expression_statement expression CPAREN statement { cout << "FOR OPAREN expression_statement expression_statement expression CPAREN statement REDUCE to iteration_statement" << endl; }
     ;
 
 jump_statement
-    : GOTO IDENTIFIER SEMICOLON
-    | CONTINUE SEMICOLON
-    | BREAK SEMICOLON
-    | RETURN SEMICOLON
-    | RETURN expression SEMICOLON
+    : GOTO IDENTIFIER SEMICOLON   { cout << "GOTO IDENTIFIER SEMICOLON REDUCE to jump_statement" << endl; }
+    | CONTINUE SEMICOLON          { cout << "CONTINUE SEMICOLON REDUCE to jump_statement" << endl; }
+    | BREAK SEMICOLON             { cout << "BREAK SEMICOLON REDUCE to jump_statement" << endl; }
+    | RETURN SEMICOLON            { cout << "RETURN SEMICOLON REDUCE to jump_statement" << endl; }
+    | RETURN expression SEMICOLON { cout << "RETURN expression SEMICOLON REDUCE to jump_statement" << endl; }
     ;
 
-translation_unit
+translation_unit 
     : external_declaration                  { cout << "external_declaration REDUCE to translation_unit" << endl; }
     | translation_unit external_declaration { cout << "translation_unit external_declaration REDUCE to translation_unit" << endl; }
     ;
@@ -643,10 +643,10 @@ external_declaration
     ;
 
 function_definition
-    : declaration_specifiers declarator declaration_list compound_statement
-    | declaration_specifiers declarator compound_statement
-    | declarator declaration_list compound_statement
-    | declarator compound_statement
+    : declaration_specifiers declarator declaration_list compound_statement { cout << "declaration_specifiers declarator declaration_list compound_statement REDUCE to function_definition" << endl; }
+    | declaration_specifiers declarator compound_statement                  { cout << "declaration_specifiers declarator compound_statement REDUCE to function_definition" << endl; }
+    | declarator declaration_list compound_statement                        { cout << "declarator declaration_list compound_statement REDUCE to function_definition" << endl; }
+    | declarator compound_statement                                         { cout << "declarator compound_statement REDUCE to function_definition" << endl; }
     ;
     
 %%

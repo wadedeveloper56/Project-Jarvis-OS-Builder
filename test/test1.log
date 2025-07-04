@@ -1,58 +1,49 @@
-TYPE_INTEGER REDUCE to type_specifier
-'STORAGE_NONE TYPE_SIGNED TYPE_INTEGER '' PL=0' EA=0 => type_specifier REDUCE to declaration_specifiers
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'main' PL=0' EA=0 => IDENTIFIER REDUCE to direct_declarator
-TYPE_INTEGER REDUCE to type_specifier
-'STORAGE_NONE TYPE_SIGNED TYPE_INTEGER '' PL=0' EA=0 => type_specifier REDUCE to declaration_specifiers
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'argc' PL=0' EA=0 => IDENTIFIER REDUCE to direct_declarator
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'argc' PL=0' EA=0 => direct_declarator REDUCE to declarator
-'STORAGE_NONE TYPE_SIGNED TYPE_INTEGER 'argc' PL=0' EA=0 => declaration_specifiers declarator REDUCE to parameter_declaration
-'STORAGE_NONE TYPE_SIGNED TYPE_INTEGER 'argc'' => parameter_declaration REDUCE to parameter_list
-TYPE_CHARACTER REDUCE to type_specifier
-'STORAGE_NONE TYPE_SIGNED TYPE_CHARACTER '' PL=0' EA=0 => type_specifier REDUCE to declaration_specifiers
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL '' PL=1' EA=0 => TIMES_OP REDUCE to pointer
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'argv' PL=0' EA=0 => IDENTIFIER REDUCE to direct_declarator
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'argv' PL=0' EA=1 => direct_declarator OPENBRACE_OP CLOSEBRACE_OP REDUCE to direct_declarator
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'argv' PL=1' EA=1 => pointer direct_declarator REDUCE to declarator
-'STORAGE_NONE TYPE_SIGNED TYPE_CHARACTER 'argv' PL=1' EA=1 => declaration_specifiers declarator REDUCE to parameter_declaration
-parameter_list COMMA_OP parameter_declaration REDUCE to parameter_list
-<EXP> parameter_list REDUCE to parameter_type_list
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'main' PL=0' EA=0 => direct_declarator OPENPAREN_OP parameter_type_list CLOSEPAREN_OP REDUCE to direct_declarator
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'main' PL=0' EA=0 => direct_declarator REDUCE to declarator
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL '0' PL=0' EA=0 => <EXP> CONSTANT REDUCE to primary_expression
-<EXP> primary_expression REDUCE to postfix_expression
-<EXP> postfix_expression REDUCE to unary_expression
-<EXP> unary_expression REDUCE to cast_expression
-<EXP> cast_expression REDUCE to multiplicative_expression
-<EXP> multiplicative_expression REDUCE to additive_expression
-<EXP> additive_expression REDUCE to shift_expression
-<EXP> shift_expression REDUCE to relational_expression
-<EXP> relational_expression REDUCE to equality_expression
-<EXP> equality_expression REDUCE to and_expression
-<EXP> and_expression REDUCE to exclusive_or_expression
-<EXP> exclusive_or_expression REDUCE to inclusive_or_expression
-<EXP> inclusive_or_expression REDUCE to logical_and_expression
-<EXP> logical_and_expression REDUCE to logical_or_expression
-<EXP> logical_or_expression REDUCE to conditional_expression
-<EXP> conditional_expression REDUCE to assignment_expression
-<EXP> assignment_expression REDUCE to expression
-<EXP> RETURN expression SEMI_OP REDUCE to jump_statement
-<EXP> jump_statement REDUCE to statement
-<EXP> statement REDUCE to block_item
-<EXP> block_item REDUCE to block_item_list
-<EXP> OCURLY_OP block_item_list CCURLY_OP REDUCE to compound_statement
-'STORAGE_NONE TYPE_SIGNED TYPE_INTEGER 'main' PL=0' EA=0 => declaration_specifiers declarator compound_statement REDUCE to function_definition
-'STORAGE_NONE TYPE_SIGNED TYPE_INTEGER 'main' PL=0' EA=0 => function_definition REDUCE to external_declaration
-'STORAGE_NONE TYPE_SIGNED TYPE_INTEGER 'main' PL=0' EA=0 => external_declaration REDUCE to translation_unit
-TYPE_VOID REDUCE to type_specifier
-'STORAGE_NONE TYPE_SIGNED TYPE_VOID '' PL=0' EA=0 => type_specifier REDUCE to declaration_specifiers
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'function1' PL=0' EA=0 => IDENTIFIER REDUCE to direct_declarator
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'function1' PL=0' EA=0 => direct_declarator OPENPAREN_OP CLOSEPAREN_OP REDUCE to direct_declarator
-'STORAGE_NONE TYPE_SIGNED TYPE_NULL 'function1' PL=0' EA=0 => direct_declarator REDUCE to declarator
-OCURLY_OP CCURLY_OP REDUCE to compound_statement
-'STORAGE_NONE TYPE_SIGNED TYPE_VOID 'function1' PL=0' EA=0 => declaration_specifiers declarator compound_statement REDUCE to function_definition
-'STORAGE_NONE TYPE_SIGNED TYPE_VOID 'function1' PL=0' EA=0 => function_definition REDUCE to external_declaration
-'STORAGE_NONE TYPE_SIGNED TYPE_VOID 'function1' PL=0' EA=0 => translation_unit external_declaration REDUCE to translation_unit
-output is "test1.asm"
-bit size=32 bits
-infile[0]="test1.c"
-log file ="test1.log"
+Scanner: single line comment [//char var1;]
+Scanner: single line comment [//short var2;]
+Scanner: single line comment [//int var3;]
+Scanner: single line comment [//long var4;]
+Scanner: single line comment [//long long var5;]
+Scanner: single line comment [//float var6;]
+Scanner: single line comment [//double var7;]
+Scanner: single line comment [//long double var8;]
+Scanner: single line comment [//bool var9;]
+Scanner: single line comment [//complex var10;]
+Scanner: single line comment [//imaginary var11;]
+Scanner: single line comment [//char *var12[];]
+Scanner: token [int]
+INT REDUCE to type_specifier
+Scanner: identifier [main]
+type_specifier REDUCE to declaration_specifiers
+IDENTIFIER REDUCE to direct_declarator
+Scanner: token [(]
+Scanner: token [)]
+direct_declarator OPAREN CPAREN REDUCE to direct_declarator
+Scanner: token [{]
+direct_declarator REDUCE to declarator
+Scanner: token [return]
+Scanner: decimal number: 0
+I_CONST REDUCE to constant 0
+constant REDUCE to primary_expression
+primary_expression REDUCE to postfix_expression
+Scanner: token [;]
+postfix_expression REDUCE unary_expression
+unary_expression REDUCE to cast_expression
+cast_expression REDUCE to multiplicative_expression
+multiplicative_expression REDUCE to additive_expression
+additive_expression REDUCE to shift_expression
+shift_expression REDUCE to relational_expression
+relational_expression REDUCE to equality_expression
+equality_expression REDUCE to and_expression
+and_expression REDUCE to exclusive_or_expression
+exclusive_or_expression REDUCE to inclusive_or_expression
+inclusive_or_expression REDUCE to logical_and_expression
+inclusive_and_expression REDUCE to logical_or_expression
+logical_or_expression REDUCE to conditional_expression
+conditional_expression REDUCE to assignment_expression
+asignment_expression REDUCE to expression
+RETURN expression SEMICOLON REDUCE to jump_statement
+Scanner: token [}]
+declaration_specifiers declarator compound_statement REDUCE to function_definition
+function_definition REDUCE to external_declaration
+external_declaration REDUCE to translation_unit
+Parse complete. Result = 0

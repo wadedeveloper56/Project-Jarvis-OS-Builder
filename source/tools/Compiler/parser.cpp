@@ -1657,13 +1657,13 @@ namespace  WadeSpace  {
 
   case 42: // shift_expression: shift_expression "<<" additive_expression
 #line 290 "parser.y"
-                                                  { cout << "shift_expression LEFT_OP additive_expression REDUCE to shift_expression" << endl;}
+                                                   { cout << "shift_expression LEFT_OP additive_expression REDUCE to shift_expression" << endl;}
 #line 1662 "parser.cpp"
     break;
 
   case 43: // shift_expression: shift_expression ">>" additive_expression
 #line 291 "parser.y"
-                                                   { cout << "shift_expression RIGHT_OP additive_expression REDUCE to shift_expression" << endl;}
+                                                    { cout << "shift_expression RIGHT_OP additive_expression REDUCE to shift_expression" << endl;}
 #line 1668 "parser.cpp"
     break;
 
@@ -2325,32 +2325,128 @@ namespace  WadeSpace  {
 #line 2326 "parser.cpp"
     break;
 
+  case 197: // selection_statement: "if" "(" expression ")" statement
+#line 615 "parser.y"
+                                                           { cout << "IF OPAREN expression CPAREN statement REDUCE to selection_statement" << endl; }
+#line 2332 "parser.cpp"
+    break;
+
+  case 198: // selection_statement: "if" "(" expression ")" statement "else" statement
+#line 616 "parser.y"
+                                                           { cout << "IF OPAREN expression CPAREN statement ELSE statement REDUCE to selection_statement" << endl; }
+#line 2338 "parser.cpp"
+    break;
+
+  case 199: // selection_statement: "switch" "(" expression ")" statement
+#line 617 "parser.y"
+                                                           { cout << "SWITCH OPAREN expression CPAREN statement REDUCE to selection_statement" << endl; }
+#line 2344 "parser.cpp"
+    break;
+
+  case 200: // iteration_statement: "while" "(" expression ")" statement
+#line 621 "parser.y"
+                                                                                       { cout << "WHILE OPAREN expression CPAREN statement REDUCE to iteration_statement" << endl; }
+#line 2350 "parser.cpp"
+    break;
+
+  case 201: // iteration_statement: "do" statement "while" "(" expression ")" ";"
+#line 622 "parser.y"
+                                                                                       { cout << "DO statement WHILE OPAREN expression CPAREN SEMICOLON REDUCE to iteration_statement" << endl; }
+#line 2356 "parser.cpp"
+    break;
+
+  case 202: // iteration_statement: "for" "(" expression_statement expression_statement ")" statement
+#line 623 "parser.y"
+                                                                                       { cout << "FOR OPAREN expression_statement expression_statement CPAREN statement REDUCE to iteration_statement" << endl; }
+#line 2362 "parser.cpp"
+    break;
+
+  case 203: // iteration_statement: "for" "(" expression_statement expression_statement expression ")" statement
+#line 624 "parser.y"
+                                                                                       { cout << "FOR OPAREN expression_statement expression_statement expression CPAREN statement REDUCE to iteration_statement" << endl; }
+#line 2368 "parser.cpp"
+    break;
+
+  case 204: // jump_statement: "goto" "identifier" ";"
+#line 628 "parser.y"
+                                  { cout << "GOTO IDENTIFIER SEMICOLON REDUCE to jump_statement" << endl; }
+#line 2374 "parser.cpp"
+    break;
+
+  case 205: // jump_statement: "continue" ";"
+#line 629 "parser.y"
+                                  { cout << "CONTINUE SEMICOLON REDUCE to jump_statement" << endl; }
+#line 2380 "parser.cpp"
+    break;
+
+  case 206: // jump_statement: "break" ";"
+#line 630 "parser.y"
+                                  { cout << "BREAK SEMICOLON REDUCE to jump_statement" << endl; }
+#line 2386 "parser.cpp"
+    break;
+
+  case 207: // jump_statement: "return" ";"
+#line 631 "parser.y"
+                                  { cout << "RETURN SEMICOLON REDUCE to jump_statement" << endl; }
+#line 2392 "parser.cpp"
+    break;
+
+  case 208: // jump_statement: "return" expression ";"
+#line 632 "parser.y"
+                                  { cout << "RETURN expression SEMICOLON REDUCE to jump_statement" << endl; }
+#line 2398 "parser.cpp"
+    break;
+
   case 209: // translation_unit: external_declaration
 #line 636 "parser.y"
                                             { cout << "external_declaration REDUCE to translation_unit" << endl; }
-#line 2332 "parser.cpp"
+#line 2404 "parser.cpp"
     break;
 
   case 210: // translation_unit: translation_unit external_declaration
 #line 637 "parser.y"
                                             { cout << "translation_unit external_declaration REDUCE to translation_unit" << endl; }
-#line 2338 "parser.cpp"
+#line 2410 "parser.cpp"
     break;
 
   case 211: // external_declaration: function_definition
 #line 641 "parser.y"
                            { cout << "function_definition REDUCE to external_declaration" << endl; }
-#line 2344 "parser.cpp"
+#line 2416 "parser.cpp"
     break;
 
   case 212: // external_declaration: declaration
 #line 642 "parser.y"
                            { cout << "declaration REDUCE to external_declaration" << endl; }
-#line 2350 "parser.cpp"
+#line 2422 "parser.cpp"
+    break;
+
+  case 213: // function_definition: declaration_specifiers declarator declaration_list compound_statement
+#line 646 "parser.y"
+                                                                            { cout << "declaration_specifiers declarator declaration_list compound_statement REDUCE to function_definition" << endl; }
+#line 2428 "parser.cpp"
+    break;
+
+  case 214: // function_definition: declaration_specifiers declarator compound_statement
+#line 647 "parser.y"
+                                                                            { cout << "declaration_specifiers declarator compound_statement REDUCE to function_definition" << endl; }
+#line 2434 "parser.cpp"
+    break;
+
+  case 215: // function_definition: declarator declaration_list compound_statement
+#line 648 "parser.y"
+                                                                            { cout << "declarator declaration_list compound_statement REDUCE to function_definition" << endl; }
+#line 2440 "parser.cpp"
+    break;
+
+  case 216: // function_definition: declarator compound_statement
+#line 649 "parser.y"
+                                                                            { cout << "declarator compound_statement REDUCE to function_definition" << endl; }
+#line 2446 "parser.cpp"
     break;
 
 
-#line 2354 "parser.cpp"
+#line 2450 "parser.cpp"
 
             default:
               break;
@@ -3359,7 +3455,7 @@ namespace  WadeSpace  {
 
 #line 9 "parser.y"
 } //  WadeSpace 
-#line 3363 "parser.cpp"
+#line 3459 "parser.cpp"
 
 #line 652 "parser.y"
 
