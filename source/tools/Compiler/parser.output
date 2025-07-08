@@ -495,10 +495,10 @@ Nonterminals, with rules where they appear
     specifier_qualifier_list <SpecifierQualifierList> (126)
         on left: 116 117 118 119
         on right: 115 116 118 158 159
-    struct_declarator_list (127)
+    struct_declarator_list <std::vector<StructDeclarator>> (127)
         on left: 120 121
         on right: 115 121
-    struct_declarator (128)
+    struct_declarator <StructDeclarator> (128)
         on left: 122 123 124
         on right: 120 121
     enum_specifier <EnumSpecifier> (129)
@@ -534,7 +534,7 @@ Nonterminals, with rules where they appear
     parameter_declaration (139)
         on left: 153 154 155
         on right: 151 152
-    identifier_list (140)
+    identifier_list <std::vector<std::string>> (140)
         on left: 156 157
         on right: 141 157
     type_name <TypeName> (141)

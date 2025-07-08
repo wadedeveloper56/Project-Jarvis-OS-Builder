@@ -69,6 +69,7 @@
     #include "AbstractDeclarator.h"
     #include "TypeName.h"
     #include "SpecifierQualifierList.h"
+    #include "StructDeclarator.h"
 
     using namespace std;
 
@@ -77,7 +78,7 @@
         class Interpreter;
     }
 
-#line 81 "parser.hpp"
+#line 82 "parser.hpp"
 
 # include <cassert>
 # include <cstdlib> // std::abort
@@ -218,7 +219,7 @@
 
 #line 9 "parser.y"
 namespace  WadeSpace  {
-#line 222 "parser.hpp"
+#line 223 "parser.hpp"
 
 
 
@@ -493,17 +494,20 @@ namespace  WadeSpace  {
       // storage_class_specifier
       char dummy13[sizeof (StorageClassSpecifier)];
 
+      // struct_declarator
+      char dummy14[sizeof (StructDeclarator)];
+
       // type_name
-      char dummy14[sizeof (TypeName)];
+      char dummy15[sizeof (TypeName)];
 
       // type_qualifier
-      char dummy15[sizeof (TypeQualifier)];
+      char dummy16[sizeof (TypeQualifier)];
 
       // type_specifier
-      char dummy16[sizeof (TypeSpecifier)];
+      char dummy17[sizeof (TypeSpecifier)];
 
       // "f_const"
-      char dummy17[sizeof (long double)];
+      char dummy18[sizeof (long double)];
 
       // "identifier"
       // "sting_literal"
@@ -594,19 +598,25 @@ namespace  WadeSpace  {
       // "/"
       // "%"
       // unary_operator
-      char dummy18[sizeof (std::string)];
+      char dummy19[sizeof (std::string)];
 
       // enumerator_list
-      char dummy19[sizeof (std::vector<Enumerator>)];
+      char dummy20[sizeof (std::vector<Enumerator>)];
 
       // argument_expression_list
-      char dummy20[sizeof (std::vector<Expression>)];
+      char dummy21[sizeof (std::vector<Expression>)];
+
+      // struct_declarator_list
+      char dummy22[sizeof (std::vector<StructDeclarator>)];
 
       // type_qualifier_list
-      char dummy21[sizeof (std::vector<TypeQualifier>)];
+      char dummy23[sizeof (std::vector<TypeQualifier>)];
+
+      // identifier_list
+      char dummy24[sizeof (std::vector<std::string>)];
 
       // "i_const"
-      char dummy22[sizeof (uint64_t)];
+      char dummy25[sizeof (uint64_t)];
     };
 
     /// The size of the largest semantic type.
@@ -1030,6 +1040,10 @@ namespace  WadeSpace  {
         value.move< StorageClassSpecifier > (std::move (that.value));
         break;
 
+      case symbol_kind::S_struct_declarator: // struct_declarator
+        value.move< StructDeclarator > (std::move (that.value));
+        break;
+
       case symbol_kind::S_type_name: // type_name
         value.move< TypeName > (std::move (that.value));
         break;
@@ -1146,8 +1160,16 @@ namespace  WadeSpace  {
         value.move< std::vector<Expression> > (std::move (that.value));
         break;
 
+      case symbol_kind::S_struct_declarator_list: // struct_declarator_list
+        value.move< std::vector<StructDeclarator> > (std::move (that.value));
+        break;
+
       case symbol_kind::S_type_qualifier_list: // type_qualifier_list
         value.move< std::vector<TypeQualifier> > (std::move (that.value));
+        break;
+
+      case symbol_kind::S_identifier_list: // identifier_list
+        value.move< std::vector<std::string> > (std::move (that.value));
         break;
 
       case symbol_kind::S_I_CONST: // "i_const"
@@ -1360,6 +1382,20 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
+      basic_symbol (typename Base::kind_type t, StructDeclarator&& v, location_type&& l)
+        : Base (t)
+        , value (std::move (v))
+        , location (std::move (l))
+      {}
+#else
+      basic_symbol (typename Base::kind_type t, const StructDeclarator& v, const location_type& l)
+        : Base (t)
+        , value (v)
+        , location (l)
+      {}
+#endif
+
+#if 201103L <= YY_CPLUSPLUS
       basic_symbol (typename Base::kind_type t, TypeName&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
@@ -1458,6 +1494,20 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
+      basic_symbol (typename Base::kind_type t, std::vector<StructDeclarator>&& v, location_type&& l)
+        : Base (t)
+        , value (std::move (v))
+        , location (std::move (l))
+      {}
+#else
+      basic_symbol (typename Base::kind_type t, const std::vector<StructDeclarator>& v, const location_type& l)
+        : Base (t)
+        , value (v)
+        , location (l)
+      {}
+#endif
+
+#if 201103L <= YY_CPLUSPLUS
       basic_symbol (typename Base::kind_type t, std::vector<TypeQualifier>&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
@@ -1465,6 +1515,20 @@ namespace  WadeSpace  {
       {}
 #else
       basic_symbol (typename Base::kind_type t, const std::vector<TypeQualifier>& v, const location_type& l)
+        : Base (t)
+        , value (v)
+        , location (l)
+      {}
+#endif
+
+#if 201103L <= YY_CPLUSPLUS
+      basic_symbol (typename Base::kind_type t, std::vector<std::string>&& v, location_type&& l)
+        : Base (t)
+        , value (std::move (v))
+        , location (std::move (l))
+      {}
+#else
+      basic_symbol (typename Base::kind_type t, const std::vector<std::string>& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1576,6 +1640,10 @@ switch (yykind)
 
       case symbol_kind::S_storage_class_specifier: // storage_class_specifier
         value.template destroy< StorageClassSpecifier > ();
+        break;
+
+      case symbol_kind::S_struct_declarator: // struct_declarator
+        value.template destroy< StructDeclarator > ();
         break;
 
       case symbol_kind::S_type_name: // type_name
@@ -1694,8 +1762,16 @@ switch (yykind)
         value.template destroy< std::vector<Expression> > ();
         break;
 
+      case symbol_kind::S_struct_declarator_list: // struct_declarator_list
+        value.template destroy< std::vector<StructDeclarator> > ();
+        break;
+
       case symbol_kind::S_type_qualifier_list: // type_qualifier_list
         value.template destroy< std::vector<TypeQualifier> > ();
+        break;
+
+      case symbol_kind::S_identifier_list: // identifier_list
+        value.template destroy< std::vector<std::string> > ();
         break;
 
       case symbol_kind::S_I_CONST: // "i_const"
@@ -3760,6 +3836,10 @@ switch (yykind)
         value.copy< StorageClassSpecifier > (YY_MOVE (that.value));
         break;
 
+      case symbol_kind::S_struct_declarator: // struct_declarator
+        value.copy< StructDeclarator > (YY_MOVE (that.value));
+        break;
+
       case symbol_kind::S_type_name: // type_name
         value.copy< TypeName > (YY_MOVE (that.value));
         break;
@@ -3876,8 +3956,16 @@ switch (yykind)
         value.copy< std::vector<Expression> > (YY_MOVE (that.value));
         break;
 
+      case symbol_kind::S_struct_declarator_list: // struct_declarator_list
+        value.copy< std::vector<StructDeclarator> > (YY_MOVE (that.value));
+        break;
+
       case symbol_kind::S_type_qualifier_list: // type_qualifier_list
         value.copy< std::vector<TypeQualifier> > (YY_MOVE (that.value));
+        break;
+
+      case symbol_kind::S_identifier_list: // identifier_list
+        value.copy< std::vector<std::string> > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_I_CONST: // "i_const"
@@ -3982,6 +4070,10 @@ switch (yykind)
 
       case symbol_kind::S_storage_class_specifier: // storage_class_specifier
         value.move< StorageClassSpecifier > (YY_MOVE (s.value));
+        break;
+
+      case symbol_kind::S_struct_declarator: // struct_declarator
+        value.move< StructDeclarator > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_type_name: // type_name
@@ -4100,8 +4192,16 @@ switch (yykind)
         value.move< std::vector<Expression> > (YY_MOVE (s.value));
         break;
 
+      case symbol_kind::S_struct_declarator_list: // struct_declarator_list
+        value.move< std::vector<StructDeclarator> > (YY_MOVE (s.value));
+        break;
+
       case symbol_kind::S_type_qualifier_list: // type_qualifier_list
         value.move< std::vector<TypeQualifier> > (YY_MOVE (s.value));
+        break;
+
+      case symbol_kind::S_identifier_list: // identifier_list
+        value.move< std::vector<std::string> > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_I_CONST: // "i_const"
@@ -4175,7 +4275,7 @@ switch (yykind)
 
 #line 9 "parser.y"
 } //  WadeSpace 
-#line 4179 "parser.hpp"
+#line 4279 "parser.hpp"
 
 
 

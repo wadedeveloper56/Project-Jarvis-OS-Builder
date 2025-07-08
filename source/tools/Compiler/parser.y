@@ -31,6 +31,7 @@
     #include "AbstractDeclarator.h"
     #include "TypeName.h"
     #include "SpecifierQualifierList.h"
+    #include "StructDeclarator.h"
 
     using namespace std;
 
@@ -205,6 +206,9 @@
 %type<AbstractDeclarator> abstract_declarator
 %type<TypeName> type_name
 %type<SpecifierQualifierList> specifier_qualifier_list
+%type<std::vector<std::string>> identifier_list
+%type<StructDeclarator> struct_declarator
+%type<std::vector<StructDeclarator>> struct_declarator_list
 
 %start translation_unit
 
@@ -451,14 +455,25 @@ specifier_qualifier_list
     ;
 
 struct_declarator_list
-    : struct_declarator                              { cout << "struct_declarator REDUCE to struct_declarator_list" << endl;}
-    | struct_declarator_list COMMA struct_declarator { cout << "struct_declarator_list COMMA struct_declarator REDUCE to struct_declarator_list" << endl;}
+    : struct_declarator                              {
+                                                       StructDeclarator exp = $1;
+                                                       $$ = std::vector<StructDeclarator>();
+                                                       $$.push_back(exp);
+                                                       cout << "struct_declarator REDUCE to struct_declarator_list" << endl;
+                                                     }
+    | struct_declarator_list COMMA struct_declarator {
+                                                       StructDeclarator value1 = $3;
+                                                       std::vector<StructDeclarator> &value2 = $1;
+                                                       value2.push_back(value1);
+                                                       $$ = value2;
+                                                       cout << "struct_declarator_list COMMA struct_declarator REDUCE to struct_declarator_list" << endl;
+                                                     }
     ;
 
 struct_declarator
-    : declarator                           { cout << "declarator REDUCE to struct_declarator" << endl;}
-    | COLON constant_expression            { cout << "COLON constant_expression REDUCE to struct_declarator" << endl;}
-    | declarator COLON constant_expression { cout << "declarator COLON constant_expression REDUCE to struct_declarator" << endl;}
+    : declarator                           { $<StructDeclarator>$ = StructDeclarator($1); cout << "declarator REDUCE to struct_declarator" << endl;}
+    | COLON constant_expression            { $<StructDeclarator>$ = StructDeclarator($2); cout << "COLON constant_expression REDUCE to struct_declarator" << endl;}
+    | declarator COLON constant_expression { $<StructDeclarator>$ = StructDeclarator($1,$3); cout << "declarator COLON constant_expression REDUCE to struct_declarator" << endl;}
     ;
 
 enum_specifier
@@ -549,8 +564,19 @@ parameter_declaration
     ;
 
 identifier_list
-    : IDENTIFIER                       { cout << "specifier_qualifier_list REDUCE to identifier_list" << endl; }
-    | identifier_list COMMA IDENTIFIER { cout << "identifier_list COMMA IDENTIFIER REDUCE to identifier_list" << endl; }
+    : IDENTIFIER   {
+                             std::string exp = $1;
+                             $$ = std::vector<std::string>();
+                             $$.push_back(exp);
+                             cout << "specifier_qualifier_list REDUCE to identifier_list" << endl;
+                            }
+    | identifier_list COMMA IDENTIFIER {
+                                          std::string value1 = $3;
+                                          std::vector<std::string> &value2 = $1;
+                                          value2.push_back(value1);
+                                          $$ = value2;
+                                          cout << "identifier_list COMMA IDENTIFIER REDUCE to identifier_list" << endl; 
+                                        }
     ;
 
 type_name

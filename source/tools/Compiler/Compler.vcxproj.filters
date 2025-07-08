@@ -81,6 +81,9 @@
     <ClInclude Include="SpecifierQualifierList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="StructDeclarator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="parser.cpp">
@@ -141,6 +144,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SpecifierQualifierList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StructDeclarator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
