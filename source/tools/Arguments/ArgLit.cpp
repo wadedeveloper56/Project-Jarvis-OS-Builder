@@ -8,7 +8,7 @@ void arg_lit_resetfn(void* parent_) {
 } 
 
 int arg_lit_scanfn(void* parent_, const char* argval) {
-	ArgLitPtr parent = parent_;
+	ArgLitPtr parent = (ArgLitPtr)parent_;
 	int errorcode = 0;
 	if (parent->count < parent->hdr.maxcount)
 		parent->count++;
@@ -18,13 +18,13 @@ int arg_lit_scanfn(void* parent_, const char* argval) {
 }
 
 int arg_lit_checkfn(void* parent_) {
-	ArgLitPtr parent = parent_;
+	ArgLitPtr parent = (ArgLitPtr)parent_;
 	int errorcode = (parent->count < parent->hdr.mincount) ? ARG_ERR_MINCOUNT : 0;
 	return errorcode;
 }
 
 void arg_lit_errorfn(void* parent_, struct _ArgDstr* ds, int errorcode, const char* argval, const char* progname) {
-	ArgLitPtr parent = parent_;
+	ArgLitPtr parent = (ArgLitPtr)parent_;
 	const char* shortopts = parent->hdr.shortopts;
 	const char* longopts = parent->hdr.longopts;
 	const char* datatype = parent->hdr.datatype;

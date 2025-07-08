@@ -6,7 +6,7 @@
 #define FILESEPARATOR2 '/'
 
 void arg_file_resetfn(void* parent_) {
-	ArgFilePtr parent = parent_;
+	ArgFilePtr parent = (ArgFilePtr)parent_;
 	if (parent) parent->count = 0;
 }
 
@@ -47,7 +47,7 @@ const char* arg_extension(const char* basename) {
 }
 
 int arg_file_scanfn(void* parent_, const char* argval) {
-	ArgFilePtr parent = parent_;
+	ArgFilePtr parent = (ArgFilePtr)parent_;
 	int errorcode = 0;
 
 	if (parent->count == parent->hdr.maxcount) {
@@ -66,13 +66,13 @@ int arg_file_scanfn(void* parent_, const char* argval) {
 }
 
 int arg_file_checkfn(void* parent_) {
-	ArgFilePtr parent = parent_;
+	ArgFilePtr parent = (ArgFilePtr)parent_;
 	int errorcode = (parent->count < parent->hdr.mincount) ? ARG_ERR_MINCOUNT : 0;
 	return errorcode;
 }
 
 void arg_file_errorfn(void* parent_, struct _ArgDstr* ds, int errorcode, const char* argval, const char* progname) {
-	ArgFilePtr parent = parent_;
+	ArgFilePtr parent = (ArgFilePtr)parent_;
 	const char* shortopts = parent->hdr.shortopts;
 	const char* longopts = parent->hdr.longopts;
 	const char* datatype = parent->hdr.datatype;

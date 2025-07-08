@@ -2,8 +2,8 @@
 #include "framework.h"
 #include "ArgumentTable.h"
 
-char* optarg;
-int optind, opterr, optopt;
+extern char* optarg;
+extern int optind, opterr, optopt;
 
 void arg_freetable(void** argtable, size_t n) {
 	ArgHdrPtrPtr table = (ArgHdrPtrPtr)argtable;
@@ -160,7 +160,7 @@ char* alloc_shortoptions(ArgHdrPtrPtr table) {
 		len += 3 * (hdr->shortopts ? strlen(hdr->shortopts) : 0);
 	}
 
-	result = malloc(len);
+	result = (char *)malloc(len);
 
 	res = result;
 

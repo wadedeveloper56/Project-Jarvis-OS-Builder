@@ -3,12 +3,12 @@
 #include "ArgumentTable.h"
 
 void arg_rex_resetfn(void* parent_) {
-	ArgRexPtr parent = parent_;
+	ArgRexPtr parent = (ArgRexPtr)parent_;
 	parent->count = 0;
 }
 
 int arg_rex_scanfn(void* parent_, const char* argval) {
-	ArgRexPtr parent = parent_;
+	ArgRexPtr parent = (ArgRexPtr)parent_;
 	int errorcode = 0;
 	const TRexChar* error = NULL;
 	TRex* rex = NULL;
@@ -37,13 +37,13 @@ int arg_rex_scanfn(void* parent_, const char* argval) {
 }
 
 int arg_rex_checkfn(void* parent_) {
-	ArgRexPtr parent = parent_;
+	ArgRexPtr parent = (ArgRexPtr)parent_;
 	int errorcode = (parent->count < parent->hdr.mincount) ? ARG_ERR_MINCOUNT : 0;
 	return errorcode;
 }
 
 void arg_rex_errorfn(void* parent_, struct _ArgDstr* ds, int errorcode, const char* argval, const char* progname) {
-	ArgRexPtr parent = parent_;
+	ArgRexPtr parent = (ArgRexPtr)parent_;
 	const char* shortopts = parent->hdr.shortopts;
 	const char* longopts = parent->hdr.longopts;
 	const char* datatype = parent->hdr.datatype;

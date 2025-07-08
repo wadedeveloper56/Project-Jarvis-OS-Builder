@@ -30,7 +30,7 @@ char* optarg;
 #endif
 
 
-char* place = EMSG;
+char* place = (char *)EMSG;
 int nonopt_start = -1;
 int nonopt_end = -1;
 const char recargchar[] = "option requires an argument -- %c";
@@ -116,16 +116,16 @@ int parse_long_options(char* const* nargv, const char* options, const OptionPtr 
 #ifdef GNU_COMPATIBLE
 	switch (dash_prefix) {
 		case D_PREFIX:
-			current_dash = "-";
+			current_dash = (char *)"-";
 			break;
 		case DD_PREFIX:
-			current_dash = "--";
+			current_dash = (char*)"--";
 			break;
 		case W_PREFIX:
-			current_dash = "-W ";
+			current_dash = (char*)"-W ";
 			break;
 		default:
-			current_dash = "";
+			current_dash = (char*)"";
 			break;
 	}
 #endif
@@ -275,7 +275,7 @@ start:
 	if (optreset || !*place) {
 		optreset = 0;
 		if (optind >= nargc) {
-			place = EMSG;
+			place = (char*)EMSG;
 			if (nonopt_end != -1) {
 				permute_args(nonopt_start, nonopt_end,
 					optind, nargv);
@@ -293,7 +293,7 @@ start:
 #else
 			(place[1] == '\0' && strchr(options, '-') == NULL)) {
 #endif
-			place = EMSG;
+			place = (char*)EMSG;
 			if (flags & FLAG_ALLARGS) {
 				optarg = nargv[optind++];
 				return (INORDER);
@@ -318,7 +318,7 @@ start:
 
 		if (place[1] != '\0' && *++place == '-' && place[1] == '\0') {
 			optind++;
-			place = EMSG;
+			place = (char*)EMSG;
 			if (nonopt_end != -1) {
 				permute_args(nonopt_start, nonopt_end,
 					optind, nargv);
@@ -349,14 +349,14 @@ start:
 		optchar = parse_long_options(nargv, options, long_options,
 			idx, short_too, flags);
 		if (optchar != -1) {
-			place = EMSG;
+			place = (char*)EMSG;
 			return (optchar);
 		}
 	}
 
 	if ((optchar = (int)*place++) == (int)':' ||
 		(optchar == (int)'-' && *place != '\0') ||
-		(oli = strchr(options, optchar)) == NULL) {
+		(oli = strchr((char*)options, optchar)) == NULL) {
 		if (optchar == (int)'-' && *place == '\0')
 			return (-1);
 		if (!*place)
@@ -376,7 +376,7 @@ start:
 		if (*place)
 			;
 		else if (++optind >= nargc) {
-			place = EMSG;
+			place = (char*)EMSG;
 			if (PRINT_ERROR)
 				warnx(recargchar, optchar);
 			optopt = optchar;
@@ -389,7 +389,7 @@ start:
 #endif
 		optchar = parse_long_options(nargv, options, long_options,
 			idx, 0, flags);
-		place = EMSG;
+		place = (char*)EMSG;
 		return (optchar);
 	}
 	if (*++oli != ':') {
@@ -402,7 +402,7 @@ start:
 			optarg = place;
 		else if (oli[1] != ':') {
 			if (++optind >= nargc) {
-				place = EMSG;
+				place = (char*)EMSG;
 				if (PRINT_ERROR)
 					warnx(recargchar, optchar);
 				optopt = optchar;
@@ -411,7 +411,7 @@ start:
 			else
 				optarg = nargv[optind];
 		}
-		place = EMSG;
+		place = (char*)EMSG;
 		++optind;
 	}
 	return (optchar);

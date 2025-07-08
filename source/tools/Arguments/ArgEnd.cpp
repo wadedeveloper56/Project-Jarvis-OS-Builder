@@ -3,7 +3,7 @@
 #include "ArgumentTable.h"
 
 void arg_end_resetfn(void* parent_) {
-    ArgEndPtr parent = parent_;
+    ArgEndPtr parent = (ArgEndPtr)parent_;
     parent->count = 0;
 }
 

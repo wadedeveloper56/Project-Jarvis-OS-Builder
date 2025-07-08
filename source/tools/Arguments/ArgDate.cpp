@@ -9,12 +9,12 @@ const char* abmon[12] = { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"
 const char* am_pm[2] = { "AM", "PM" };
 
 void arg_date_resetfn(void* parent_) {
-	ArgDatePtr parent = parent_;
+	ArgDatePtr parent = (ArgDatePtr)parent_;
 	parent->count = 0;
 }
 
 int arg_date_scanfn(void* parent_, const char* argval) {
-	ArgDatePtr parent = parent_;
+	ArgDatePtr parent = (ArgDatePtr)parent_;
 	int errorcode = 0;
 
 	if (parent->count == parent->hdr.maxcount) {
@@ -37,13 +37,13 @@ int arg_date_scanfn(void* parent_, const char* argval) {
 }
 
 int arg_date_checkfn(void* parent_) {
-	ArgDatePtr parent = parent_;
+	ArgDatePtr parent = (ArgDatePtr)parent_;
 	int errorcode = (parent->count < parent->hdr.mincount) ? ARG_ERR_MINCOUNT : 0;
 	return errorcode;
 }
 
 void arg_date_errorfn(void* parent_, struct _ArgDstr* ds, int errorcode, const char* argval, const char* progname) {
-	ArgDatePtr parent = parent_;
+	ArgDatePtr parent = (ArgDatePtr)parent_;
 	const char* shortopts = parent->hdr.shortopts;
 	const char* longopts = parent->hdr.longopts;
 	const char* datatype = parent->hdr.datatype;
