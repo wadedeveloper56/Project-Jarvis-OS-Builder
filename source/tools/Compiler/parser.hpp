@@ -52,6 +52,7 @@
     #include <vector>
     #include <stdint.h>
     #include <stdlib.h>
+    #include <optional>
     #include "Constant.h"
     #include "AssignmentOperator.h"
     #include "StorageClassSpecifier.h"
@@ -70,7 +71,7 @@
         class Interpreter;
     }
 
-#line 74 "parser.hpp"
+#line 75 "parser.hpp"
 
 # include <cassert>
 # include <cstdlib> // std::abort
@@ -211,7 +212,7 @@
 
 #line 9 "parser.y"
 namespace  WadeSpace  {
-#line 215 "parser.hpp"
+#line 216 "parser.hpp"
 
 
 
@@ -3970,7 +3971,7 @@ switch (yykind)
 
 #line 9 "parser.y"
 } //  WadeSpace 
-#line 3974 "parser.hpp"
+#line 3975 "parser.hpp"
 
 
 

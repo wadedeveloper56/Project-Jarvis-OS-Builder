@@ -14,6 +14,7 @@
     #include <vector>
     #include <stdint.h>
     #include <stdlib.h>
+    #include <optional>
     #include "Constant.h"
     #include "AssignmentOperator.h"
     #include "StorageClassSpecifier.h"
@@ -369,12 +370,12 @@ declaration
     ;
 
 declaration_specifiers
-    : storage_class_specifier                         { $<DeclarationSpecifiers>$ = DeclarationSpecifiers("",&$1,NULL,NULL,NULL); cout << "storage_class_specifier REDUCE to declaration_specifiers" << endl;}
-    | storage_class_specifier declaration_specifiers  { $<DeclarationSpecifiers>$ = DeclarationSpecifiers("",&$1,NULL,&$2,NULL); cout << "storage_class_specifier declaration_specifiers REDUCE to declaration_specifiers" << endl;}
-    | type_specifier                                  { $<DeclarationSpecifiers>$ = DeclarationSpecifiers("",NULL,&$1,NULL,NULL); cout << "type_specifier REDUCE to declaration_specifiers" << endl;}
-    | type_specifier declaration_specifiers           { $<DeclarationSpecifiers>$ = DeclarationSpecifiers("",NULL,&$1,&$2,NULL); cout << "type_specifier declaration_specifiers REDUCE to declaration_specifiers" << endl;}
-    | type_qualifier                                  { $<DeclarationSpecifiers>$ = DeclarationSpecifiers("",NULL,NULL,NULL,&$1); cout << "type_qualifier REDUCE to declaration_specifiers" << endl;}
-    | type_qualifier declaration_specifiers           { $<DeclarationSpecifiers>$ = DeclarationSpecifiers("",NULL,NULL,&$2,&$1); cout << "type_qualifier declaration_specifiers REDUCE to declaration_specifiers" << endl;}
+    : storage_class_specifier                         { $<DeclarationSpecifiers>$ = DeclarationSpecifiers($1); cout << "storage_class_specifier REDUCE to declaration_specifiers" << endl;}
+    | storage_class_specifier declaration_specifiers  { $<DeclarationSpecifiers>$ = DeclarationSpecifiers($1,$2); cout << "storage_class_specifier declaration_specifiers REDUCE to declaration_specifiers" << endl;}
+    | type_specifier                                  { $<DeclarationSpecifiers>$ = DeclarationSpecifiers($1); cout << "type_specifier REDUCE to declaration_specifiers" << endl;}
+    | type_specifier declaration_specifiers           { $<DeclarationSpecifiers>$ = DeclarationSpecifiers($1,$2); cout << "type_specifier declaration_specifiers REDUCE to declaration_specifiers" << endl;}
+    | type_qualifier                                  { $<DeclarationSpecifiers>$ = DeclarationSpecifiers($1); cout << "type_qualifier REDUCE to declaration_specifiers" << endl;}
+    | type_qualifier declaration_specifiers           { $<DeclarationSpecifiers>$ = DeclarationSpecifiers($1,$2); cout << "type_qualifier declaration_specifiers REDUCE to declaration_specifiers" << endl;}
     ;
 
 init_declarator_list
@@ -449,9 +450,9 @@ struct_declarator
     ;
 
 enum_specifier
-    : ENUM OCURLY enumerator_list CCURLY             { $<EnumSpecifier>$ = EnumSpecifier("",&$3); cout << "ENUM OCURLY enumerator_list CCURLY REDUCE to enum_specifier" << endl;}
-    | ENUM IDENTIFIER OCURLY enumerator_list CCURLY  { $<EnumSpecifier>$ = EnumSpecifier($2,&$4); cout << "ENUM IDENTIFIER OCURLY enumerator_list CCURLY REDUCE to enum_specifier" << endl;}
-    | ENUM IDENTIFIER                                { $<EnumSpecifier>$ = EnumSpecifier($2,NULL); cout << "ENUM IDENTIFIER REDUCE to enum_specifier" << endl;}
+    : ENUM OCURLY enumerator_list CCURLY             { $<EnumSpecifier>$ = EnumSpecifier($3); cout << "ENUM OCURLY enumerator_list CCURLY REDUCE to enum_specifier" << endl;}
+    | ENUM IDENTIFIER OCURLY enumerator_list CCURLY  { $<EnumSpecifier>$ = EnumSpecifier($2,$4); cout << "ENUM IDENTIFIER OCURLY enumerator_list CCURLY REDUCE to enum_specifier" << endl;}
+    | ENUM IDENTIFIER                                { $<EnumSpecifier>$ = EnumSpecifier($2); cout << "ENUM IDENTIFIER REDUCE to enum_specifier" << endl;}
     ;
 
 enumerator_list
@@ -471,8 +472,8 @@ enumerator_list
     ;
 
 enumerator
-    : IDENTIFIER                              { $<Enumerator>$ = Enumerator($1,NULL); cout << "IDENTIFIER REDUCE to ENUMERATOR" << endl;}
-    | IDENTIFIER EQUAL constant_expression { $<Enumerator>$ = Enumerator($1,&$3); cout << "IDENTIFIER EQUAL constant_expression REDUCE to ENUMERATOR" << endl;}
+    : IDENTIFIER                           { $<Enumerator>$ = Enumerator($1); cout << "IDENTIFIER REDUCE to ENUMERATOR" << endl;}
+    | IDENTIFIER EQUAL constant_expression { $<Enumerator>$ = Enumerator($1,$3); cout << "IDENTIFIER EQUAL constant_expression REDUCE to ENUMERATOR" << endl;}
     ;
 
 type_qualifier
