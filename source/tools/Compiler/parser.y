@@ -27,6 +27,10 @@
     #include "Pointer.h"
     #include "DirectDeclarator.h"
     #include "Declarator.h"
+    #include "DirectAbstractDeclarator.h"
+    #include "AbstractDeclarator.h"
+    #include "TypeName.h"
+    #include "SpecifierQualifierList.h"
 
     using namespace std;
 
@@ -197,6 +201,10 @@
 %type<DeclarationSpecifiers> declaration_specifiers
 %type<DirectDeclarator> direct_declarator
 %type<Declarator> declarator
+%type<DirectAbstractDeclarator> direct_abstract_declarator
+%type<AbstractDeclarator> abstract_declarator
+%type<TypeName> type_name
+%type<SpecifierQualifierList> specifier_qualifier_list
 
 %start translation_unit
 
@@ -436,10 +444,10 @@ struct_declaration
     ;
 
 specifier_qualifier_list
-    : type_specifier specifier_qualifier_list { cout << "type_specifier specifier_qualifier_list REDUCE to specifier_qualifier_list" << endl;}
-    | type_specifier                          { cout << "type_specifier REDUCE to specifier_qualifier_list" << endl;}
-    | type_qualifier specifier_qualifier_list { cout << "type_qualifier specifier_qualifier_list REDUCE to specifier_qualifier_list" << endl;}
-    | type_qualifier                          { cout << "type_qualifier REDUCE to specifier_qualifier_list" << endl;}
+    : type_specifier specifier_qualifier_list { $<SpecifierQualifierList>$ = SpecifierQualifierList($2,$1); cout << "type_specifier specifier_qualifier_list REDUCE to specifier_qualifier_list" << endl;}
+    | type_specifier                          { $<SpecifierQualifierList>$ = SpecifierQualifierList($1); cout << "type_specifier REDUCE to specifier_qualifier_list" << endl;}
+    | type_qualifier specifier_qualifier_list { $<SpecifierQualifierList>$ = SpecifierQualifierList($2,$1); cout << "type_qualifier specifier_qualifier_list REDUCE to specifier_qualifier_list" << endl;}
+    | type_qualifier                          { $<SpecifierQualifierList>$ = SpecifierQualifierList($1); cout << "type_qualifier REDUCE to specifier_qualifier_list" << endl;}
     ;
 
 struct_declarator_list
@@ -546,26 +554,26 @@ identifier_list
     ;
 
 type_name
-    : specifier_qualifier_list                     { cout << "specifier_qualifier_list REDUCE to type_name" << endl; }
-    | specifier_qualifier_list abstract_declarator { cout << "specifier_qualifier_list abstract_declarator REDUCE to type_name" << endl; }
+    : specifier_qualifier_list                     { $<TypeName>$ = TypeName($1); cout << "specifier_qualifier_list REDUCE to type_name" << endl; }
+    | specifier_qualifier_list abstract_declarator { $<TypeName>$ = TypeName($1,$2); cout << "specifier_qualifier_list abstract_declarator REDUCE to type_name" << endl; }
     ;
 
 abstract_declarator
-    : pointer                             { cout << "pointer REDUCE to abstract_declarator" << endl; }
-    | direct_abstract_declarator          { cout << "direct_abstract_declarator REDUCE to abstract_declarator" << endl; }
-    | pointer direct_abstract_declarator  { cout << "pointer direct_abstract_declarator REDUCE to abstract_declarator" << endl; }
+    : pointer                             { $<AbstractDeclarator>$ = AbstractDeclarator($1); cout << "pointer REDUCE to abstract_declarator" << endl; }
+    | direct_abstract_declarator          { $<AbstractDeclarator>$ = AbstractDeclarator($1); cout << "direct_abstract_declarator REDUCE to abstract_declarator" << endl; }
+    | pointer direct_abstract_declarator  { $<AbstractDeclarator>$ = AbstractDeclarator($1,$2); cout << "pointer direct_abstract_declarator REDUCE to abstract_declarator" << endl; }
     ;
 
 direct_abstract_declarator
-    : OPAREN abstract_declarator CPAREN                            { cout << "OPAREN abstract_declarator CPAREN REDUCE to direct_abstract_declarator" << endl; }
-    | OBRACE CBRACE                                                { cout << "OBRACE CBRACE REDUCE to direct_abstract_declarator" << endl; }
-    | OBRACE constant_expression CBRACE                            { cout << "OBRACE constant_expression CBRACE REDUCE to direct_abstract_declarator" << endl; }
-    | direct_abstract_declarator OBRACE CBRACE                     { cout << "direct_abstract_declarator OBRACE CBRACE REDUCE to direct_abstract_declarator" << endl; }
-    | direct_abstract_declarator OBRACE constant_expression CBRACE { cout << "direct_abstract_declarator OBRACE constant_expression CBRACE REDUCE to direct_abstract_declarator" << endl; }
-    | OPAREN CPAREN                                                { cout << "OPAREN CPAREN REDUCE to direct_abstract_declarator" << endl; }
-    | OPAREN parameter_type_list CPAREN                            { cout << "OPAREN parameter_type_list CPAREN REDUCE to direct_abstract_declarator" << endl; }
-    | direct_abstract_declarator OPAREN CPAREN                     { cout << "direct_abstract_declarator OPAREN CPAREN REDUCE to direct_abstract_declarator" << endl; }
-    | direct_abstract_declarator OPAREN parameter_type_list CPAREN { cout << "direct_abstract_declarator OPAREN parameter_type_list CPAREN REDUCE to direct_abstract_declarator" << endl; }
+    : OPAREN abstract_declarator CPAREN                            { $<DirectAbstractDeclarator>$ = DirectAbstractDeclarator($2); cout << "OPAREN abstract_declarator CPAREN REDUCE to direct_abstract_declarator" << endl; }
+    | OBRACE CBRACE                                                { $<DirectAbstractDeclarator>$ = DirectAbstractDeclarator(); cout << "OBRACE CBRACE REDUCE to direct_abstract_declarator" << endl; }
+    | OBRACE constant_expression CBRACE                            { $<DirectAbstractDeclarator>$ = DirectAbstractDeclarator(); cout << "OBRACE constant_expression CBRACE REDUCE to direct_abstract_declarator" << endl; }
+    | direct_abstract_declarator OBRACE CBRACE                     { $<DirectAbstractDeclarator>$ = DirectAbstractDeclarator(); cout << "direct_abstract_declarator OBRACE CBRACE REDUCE to direct_abstract_declarator" << endl; }
+    | direct_abstract_declarator OBRACE constant_expression CBRACE { $<DirectAbstractDeclarator>$ = DirectAbstractDeclarator(); cout << "direct_abstract_declarator OBRACE constant_expression CBRACE REDUCE to direct_abstract_declarator" << endl; }
+    | OPAREN CPAREN                                                { $<DirectAbstractDeclarator>$ = DirectAbstractDeclarator(); cout << "OPAREN CPAREN REDUCE to direct_abstract_declarator" << endl; }
+    | OPAREN parameter_type_list CPAREN                            { $<DirectAbstractDeclarator>$ = DirectAbstractDeclarator(); cout << "OPAREN parameter_type_list CPAREN REDUCE to direct_abstract_declarator" << endl; }
+    | direct_abstract_declarator OPAREN CPAREN                     { $<DirectAbstractDeclarator>$ = DirectAbstractDeclarator(); cout << "direct_abstract_declarator OPAREN CPAREN REDUCE to direct_abstract_declarator" << endl; }
+    | direct_abstract_declarator OPAREN parameter_type_list CPAREN { $<DirectAbstractDeclarator>$ = DirectAbstractDeclarator(); cout << "direct_abstract_declarator OPAREN parameter_type_list CPAREN REDUCE to direct_abstract_declarator" << endl; }
     ;
 
 initializer

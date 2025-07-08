@@ -65,6 +65,10 @@
     #include "Pointer.h"
     #include "DirectDeclarator.h"
     #include "Declarator.h"
+    #include "DirectAbstractDeclarator.h"
+    #include "AbstractDeclarator.h"
+    #include "TypeName.h"
+    #include "SpecifierQualifierList.h"
 
     using namespace std;
 
@@ -73,7 +77,7 @@
         class Interpreter;
     }
 
-#line 77 "parser.hpp"
+#line 81 "parser.hpp"
 
 # include <cassert>
 # include <cstdlib> // std::abort
@@ -214,7 +218,7 @@
 
 #line 9 "parser.y"
 namespace  WadeSpace  {
-#line 218 "parser.hpp"
+#line 222 "parser.hpp"
 
 
 
@@ -433,26 +437,32 @@ namespace  WadeSpace  {
     /// An auxiliary type to compute the largest semantic type.
     union union_type
     {
+      // abstract_declarator
+      char dummy1[sizeof (AbstractDeclarator)];
+
       // assignment_operator
-      char dummy1[sizeof (AssignmentOperator)];
+      char dummy2[sizeof (AssignmentOperator)];
 
       // constant
-      char dummy2[sizeof (Constant)];
+      char dummy3[sizeof (Constant)];
 
       // declaration_specifiers
-      char dummy3[sizeof (DeclarationSpecifiers)];
+      char dummy4[sizeof (DeclarationSpecifiers)];
 
       // declarator
-      char dummy4[sizeof (Declarator)];
+      char dummy5[sizeof (Declarator)];
+
+      // direct_abstract_declarator
+      char dummy6[sizeof (DirectAbstractDeclarator)];
 
       // direct_declarator
-      char dummy5[sizeof (DirectDeclarator)];
+      char dummy7[sizeof (DirectDeclarator)];
 
       // enum_specifier
-      char dummy6[sizeof (EnumSpecifier)];
+      char dummy8[sizeof (EnumSpecifier)];
 
       // enumerator
-      char dummy7[sizeof (Enumerator)];
+      char dummy9[sizeof (Enumerator)];
 
       // primary_expression
       // postfix_expression
@@ -472,22 +482,28 @@ namespace  WadeSpace  {
       // assignment_expression
       // expression
       // constant_expression
-      char dummy8[sizeof (Expression)];
+      char dummy10[sizeof (Expression)];
 
       // pointer
-      char dummy9[sizeof (Pointer)];
+      char dummy11[sizeof (Pointer)];
+
+      // specifier_qualifier_list
+      char dummy12[sizeof (SpecifierQualifierList)];
 
       // storage_class_specifier
-      char dummy10[sizeof (StorageClassSpecifier)];
+      char dummy13[sizeof (StorageClassSpecifier)];
+
+      // type_name
+      char dummy14[sizeof (TypeName)];
 
       // type_qualifier
-      char dummy11[sizeof (TypeQualifier)];
+      char dummy15[sizeof (TypeQualifier)];
 
       // type_specifier
-      char dummy12[sizeof (TypeSpecifier)];
+      char dummy16[sizeof (TypeSpecifier)];
 
       // "f_const"
-      char dummy13[sizeof (long double)];
+      char dummy17[sizeof (long double)];
 
       // "identifier"
       // "sting_literal"
@@ -578,19 +594,19 @@ namespace  WadeSpace  {
       // "/"
       // "%"
       // unary_operator
-      char dummy14[sizeof (std::string)];
+      char dummy18[sizeof (std::string)];
 
       // enumerator_list
-      char dummy15[sizeof (std::vector<Enumerator>)];
+      char dummy19[sizeof (std::vector<Enumerator>)];
 
       // argument_expression_list
-      char dummy16[sizeof (std::vector<Expression>)];
+      char dummy20[sizeof (std::vector<Expression>)];
 
       // type_qualifier_list
-      char dummy17[sizeof (std::vector<TypeQualifier>)];
+      char dummy21[sizeof (std::vector<TypeQualifier>)];
 
       // "i_const"
-      char dummy18[sizeof (uint64_t)];
+      char dummy22[sizeof (uint64_t)];
     };
 
     /// The size of the largest semantic type.
@@ -945,6 +961,10 @@ namespace  WadeSpace  {
       {
         switch (this->kind ())
     {
+      case symbol_kind::S_abstract_declarator: // abstract_declarator
+        value.move< AbstractDeclarator > (std::move (that.value));
+        break;
+
       case symbol_kind::S_assignment_operator: // assignment_operator
         value.move< AssignmentOperator > (std::move (that.value));
         break;
@@ -959,6 +979,10 @@ namespace  WadeSpace  {
 
       case symbol_kind::S_declarator: // declarator
         value.move< Declarator > (std::move (that.value));
+        break;
+
+      case symbol_kind::S_direct_abstract_declarator: // direct_abstract_declarator
+        value.move< DirectAbstractDeclarator > (std::move (that.value));
         break;
 
       case symbol_kind::S_direct_declarator: // direct_declarator
@@ -998,8 +1022,16 @@ namespace  WadeSpace  {
         value.move< Pointer > (std::move (that.value));
         break;
 
+      case symbol_kind::S_specifier_qualifier_list: // specifier_qualifier_list
+        value.move< SpecifierQualifierList > (std::move (that.value));
+        break;
+
       case symbol_kind::S_storage_class_specifier: // storage_class_specifier
         value.move< StorageClassSpecifier > (std::move (that.value));
+        break;
+
+      case symbol_kind::S_type_name: // type_name
+        value.move< TypeName > (std::move (that.value));
         break;
 
       case symbol_kind::S_type_qualifier: // type_qualifier
@@ -1146,6 +1178,20 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
+      basic_symbol (typename Base::kind_type t, AbstractDeclarator&& v, location_type&& l)
+        : Base (t)
+        , value (std::move (v))
+        , location (std::move (l))
+      {}
+#else
+      basic_symbol (typename Base::kind_type t, const AbstractDeclarator& v, const location_type& l)
+        : Base (t)
+        , value (v)
+        , location (l)
+      {}
+#endif
+
+#if 201103L <= YY_CPLUSPLUS
       basic_symbol (typename Base::kind_type t, AssignmentOperator&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
@@ -1195,6 +1241,20 @@ namespace  WadeSpace  {
       {}
 #else
       basic_symbol (typename Base::kind_type t, const Declarator& v, const location_type& l)
+        : Base (t)
+        , value (v)
+        , location (l)
+      {}
+#endif
+
+#if 201103L <= YY_CPLUSPLUS
+      basic_symbol (typename Base::kind_type t, DirectAbstractDeclarator&& v, location_type&& l)
+        : Base (t)
+        , value (std::move (v))
+        , location (std::move (l))
+      {}
+#else
+      basic_symbol (typename Base::kind_type t, const DirectAbstractDeclarator& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1272,6 +1332,20 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
+      basic_symbol (typename Base::kind_type t, SpecifierQualifierList&& v, location_type&& l)
+        : Base (t)
+        , value (std::move (v))
+        , location (std::move (l))
+      {}
+#else
+      basic_symbol (typename Base::kind_type t, const SpecifierQualifierList& v, const location_type& l)
+        : Base (t)
+        , value (v)
+        , location (l)
+      {}
+#endif
+
+#if 201103L <= YY_CPLUSPLUS
       basic_symbol (typename Base::kind_type t, StorageClassSpecifier&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
@@ -1279,6 +1353,20 @@ namespace  WadeSpace  {
       {}
 #else
       basic_symbol (typename Base::kind_type t, const StorageClassSpecifier& v, const location_type& l)
+        : Base (t)
+        , value (v)
+        , location (l)
+      {}
+#endif
+
+#if 201103L <= YY_CPLUSPLUS
+      basic_symbol (typename Base::kind_type t, TypeName&& v, location_type&& l)
+        : Base (t)
+        , value (std::move (v))
+        , location (std::move (l))
+      {}
+#else
+      basic_symbol (typename Base::kind_type t, const TypeName& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1421,6 +1509,10 @@ namespace  WadeSpace  {
         // Value type destructor.
 switch (yykind)
     {
+      case symbol_kind::S_abstract_declarator: // abstract_declarator
+        value.template destroy< AbstractDeclarator > ();
+        break;
+
       case symbol_kind::S_assignment_operator: // assignment_operator
         value.template destroy< AssignmentOperator > ();
         break;
@@ -1435,6 +1527,10 @@ switch (yykind)
 
       case symbol_kind::S_declarator: // declarator
         value.template destroy< Declarator > ();
+        break;
+
+      case symbol_kind::S_direct_abstract_declarator: // direct_abstract_declarator
+        value.template destroy< DirectAbstractDeclarator > ();
         break;
 
       case symbol_kind::S_direct_declarator: // direct_declarator
@@ -1474,8 +1570,16 @@ switch (yykind)
         value.template destroy< Pointer > ();
         break;
 
+      case symbol_kind::S_specifier_qualifier_list: // specifier_qualifier_list
+        value.template destroy< SpecifierQualifierList > ();
+        break;
+
       case symbol_kind::S_storage_class_specifier: // storage_class_specifier
         value.template destroy< StorageClassSpecifier > ();
+        break;
+
+      case symbol_kind::S_type_name: // type_name
+        value.template destroy< TypeName > ();
         break;
 
       case symbol_kind::S_type_qualifier: // type_qualifier
@@ -3587,6 +3691,10 @@ switch (yykind)
   {
     switch (this->kind ())
     {
+      case symbol_kind::S_abstract_declarator: // abstract_declarator
+        value.copy< AbstractDeclarator > (YY_MOVE (that.value));
+        break;
+
       case symbol_kind::S_assignment_operator: // assignment_operator
         value.copy< AssignmentOperator > (YY_MOVE (that.value));
         break;
@@ -3601,6 +3709,10 @@ switch (yykind)
 
       case symbol_kind::S_declarator: // declarator
         value.copy< Declarator > (YY_MOVE (that.value));
+        break;
+
+      case symbol_kind::S_direct_abstract_declarator: // direct_abstract_declarator
+        value.copy< DirectAbstractDeclarator > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_direct_declarator: // direct_declarator
@@ -3640,8 +3752,16 @@ switch (yykind)
         value.copy< Pointer > (YY_MOVE (that.value));
         break;
 
+      case symbol_kind::S_specifier_qualifier_list: // specifier_qualifier_list
+        value.copy< SpecifierQualifierList > (YY_MOVE (that.value));
+        break;
+
       case symbol_kind::S_storage_class_specifier: // storage_class_specifier
         value.copy< StorageClassSpecifier > (YY_MOVE (that.value));
+        break;
+
+      case symbol_kind::S_type_name: // type_name
+        value.copy< TypeName > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_type_qualifier: // type_qualifier
@@ -3795,6 +3915,10 @@ switch (yykind)
     super_type::move (s);
     switch (this->kind ())
     {
+      case symbol_kind::S_abstract_declarator: // abstract_declarator
+        value.move< AbstractDeclarator > (YY_MOVE (s.value));
+        break;
+
       case symbol_kind::S_assignment_operator: // assignment_operator
         value.move< AssignmentOperator > (YY_MOVE (s.value));
         break;
@@ -3809,6 +3933,10 @@ switch (yykind)
 
       case symbol_kind::S_declarator: // declarator
         value.move< Declarator > (YY_MOVE (s.value));
+        break;
+
+      case symbol_kind::S_direct_abstract_declarator: // direct_abstract_declarator
+        value.move< DirectAbstractDeclarator > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_direct_declarator: // direct_declarator
@@ -3848,8 +3976,16 @@ switch (yykind)
         value.move< Pointer > (YY_MOVE (s.value));
         break;
 
+      case symbol_kind::S_specifier_qualifier_list: // specifier_qualifier_list
+        value.move< SpecifierQualifierList > (YY_MOVE (s.value));
+        break;
+
       case symbol_kind::S_storage_class_specifier: // storage_class_specifier
         value.move< StorageClassSpecifier > (YY_MOVE (s.value));
+        break;
+
+      case symbol_kind::S_type_name: // type_name
+        value.move< TypeName > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_type_qualifier: // type_qualifier
@@ -4039,7 +4175,7 @@ switch (yykind)
 
 #line 9 "parser.y"
 } //  WadeSpace 
-#line 4043 "parser.hpp"
+#line 4179 "parser.hpp"
 
 
 

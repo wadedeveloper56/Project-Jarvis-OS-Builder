@@ -492,7 +492,7 @@ Nonterminals, with rules where they appear
     struct_declaration (125)
         on left: 115
         on right: 113 114
-    specifier_qualifier_list (126)
+    specifier_qualifier_list <SpecifierQualifierList> (126)
         on left: 116 117 118 119
         on right: 115 116 118 158 159
     struct_declarator_list (127)
@@ -537,13 +537,13 @@ Nonterminals, with rules where they appear
     identifier_list (140)
         on left: 156 157
         on right: 141 157
-    type_name (141)
+    type_name <TypeName> (141)
         on left: 158 159
         on right: 15 16 24 32
-    abstract_declarator (142)
+    abstract_declarator <AbstractDeclarator> (142)
         on left: 160 161 162
         on right: 154 159 163
-    direct_abstract_declarator (143)
+    direct_abstract_declarator <DirectAbstractDeclarator> (143)
         on left: 163 164 165 166 167 168 169 170 171
         on right: 161 162 166 167 170 171
     initializer (144)
