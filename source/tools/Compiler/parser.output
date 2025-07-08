@@ -513,10 +513,10 @@ Nonterminals, with rules where they appear
     type_qualifier <TypeQualifier> (132)
         on left: 132 133
         on right: 85 86 118 119 147 148
-    declarator (133)
+    declarator <Declarator> (133)
         on left: 134 135
         on right: 89 90 122 124 137 153 212 213 214 215
-    direct_declarator (134)
+    direct_declarator <DirectDeclarator> (134)
         on left: 136 137 138 139 140 141 142
         on right: 134 135 138 139 140 141 142
     pointer <Pointer> (135)

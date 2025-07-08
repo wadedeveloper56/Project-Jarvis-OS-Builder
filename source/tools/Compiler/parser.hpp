@@ -63,6 +63,8 @@
     #include "EnumSpecifier.h"
     #include "Expression.h"
     #include "Pointer.h"
+    #include "DirectDeclarator.h"
+    #include "Declarator.h"
 
     using namespace std;
 
@@ -71,7 +73,7 @@
         class Interpreter;
     }
 
-#line 75 "parser.hpp"
+#line 77 "parser.hpp"
 
 # include <cassert>
 # include <cstdlib> // std::abort
@@ -212,7 +214,7 @@
 
 #line 9 "parser.y"
 namespace  WadeSpace  {
-#line 216 "parser.hpp"
+#line 218 "parser.hpp"
 
 
 
@@ -440,11 +442,17 @@ namespace  WadeSpace  {
       // declaration_specifiers
       char dummy3[sizeof (DeclarationSpecifiers)];
 
+      // declarator
+      char dummy4[sizeof (Declarator)];
+
+      // direct_declarator
+      char dummy5[sizeof (DirectDeclarator)];
+
       // enum_specifier
-      char dummy4[sizeof (EnumSpecifier)];
+      char dummy6[sizeof (EnumSpecifier)];
 
       // enumerator
-      char dummy5[sizeof (Enumerator)];
+      char dummy7[sizeof (Enumerator)];
 
       // primary_expression
       // postfix_expression
@@ -464,22 +472,22 @@ namespace  WadeSpace  {
       // assignment_expression
       // expression
       // constant_expression
-      char dummy6[sizeof (Expression)];
+      char dummy8[sizeof (Expression)];
 
       // pointer
-      char dummy7[sizeof (Pointer)];
+      char dummy9[sizeof (Pointer)];
 
       // storage_class_specifier
-      char dummy8[sizeof (StorageClassSpecifier)];
+      char dummy10[sizeof (StorageClassSpecifier)];
 
       // type_qualifier
-      char dummy9[sizeof (TypeQualifier)];
+      char dummy11[sizeof (TypeQualifier)];
 
       // type_specifier
-      char dummy10[sizeof (TypeSpecifier)];
+      char dummy12[sizeof (TypeSpecifier)];
 
       // "f_const"
-      char dummy11[sizeof (long double)];
+      char dummy13[sizeof (long double)];
 
       // "identifier"
       // "sting_literal"
@@ -570,19 +578,19 @@ namespace  WadeSpace  {
       // "/"
       // "%"
       // unary_operator
-      char dummy12[sizeof (std::string)];
+      char dummy14[sizeof (std::string)];
 
       // enumerator_list
-      char dummy13[sizeof (std::vector<Enumerator>)];
+      char dummy15[sizeof (std::vector<Enumerator>)];
 
       // argument_expression_list
-      char dummy14[sizeof (std::vector<Expression>)];
+      char dummy16[sizeof (std::vector<Expression>)];
 
       // type_qualifier_list
-      char dummy15[sizeof (std::vector<TypeQualifier>)];
+      char dummy17[sizeof (std::vector<TypeQualifier>)];
 
       // "i_const"
-      char dummy16[sizeof (uint64_t)];
+      char dummy18[sizeof (uint64_t)];
     };
 
     /// The size of the largest semantic type.
@@ -949,6 +957,14 @@ namespace  WadeSpace  {
         value.move< DeclarationSpecifiers > (std::move (that.value));
         break;
 
+      case symbol_kind::S_declarator: // declarator
+        value.move< Declarator > (std::move (that.value));
+        break;
+
+      case symbol_kind::S_direct_declarator: // direct_declarator
+        value.move< DirectDeclarator > (std::move (that.value));
+        break;
+
       case symbol_kind::S_enum_specifier: // enum_specifier
         value.move< EnumSpecifier > (std::move (that.value));
         break;
@@ -1172,6 +1188,34 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
+      basic_symbol (typename Base::kind_type t, Declarator&& v, location_type&& l)
+        : Base (t)
+        , value (std::move (v))
+        , location (std::move (l))
+      {}
+#else
+      basic_symbol (typename Base::kind_type t, const Declarator& v, const location_type& l)
+        : Base (t)
+        , value (v)
+        , location (l)
+      {}
+#endif
+
+#if 201103L <= YY_CPLUSPLUS
+      basic_symbol (typename Base::kind_type t, DirectDeclarator&& v, location_type&& l)
+        : Base (t)
+        , value (std::move (v))
+        , location (std::move (l))
+      {}
+#else
+      basic_symbol (typename Base::kind_type t, const DirectDeclarator& v, const location_type& l)
+        : Base (t)
+        , value (v)
+        , location (l)
+      {}
+#endif
+
+#if 201103L <= YY_CPLUSPLUS
       basic_symbol (typename Base::kind_type t, EnumSpecifier&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
@@ -1387,6 +1431,14 @@ switch (yykind)
 
       case symbol_kind::S_declaration_specifiers: // declaration_specifiers
         value.template destroy< DeclarationSpecifiers > ();
+        break;
+
+      case symbol_kind::S_declarator: // declarator
+        value.template destroy< Declarator > ();
+        break;
+
+      case symbol_kind::S_direct_declarator: // direct_declarator
+        value.template destroy< DirectDeclarator > ();
         break;
 
       case symbol_kind::S_enum_specifier: // enum_specifier
@@ -3547,6 +3599,14 @@ switch (yykind)
         value.copy< DeclarationSpecifiers > (YY_MOVE (that.value));
         break;
 
+      case symbol_kind::S_declarator: // declarator
+        value.copy< Declarator > (YY_MOVE (that.value));
+        break;
+
+      case symbol_kind::S_direct_declarator: // direct_declarator
+        value.copy< DirectDeclarator > (YY_MOVE (that.value));
+        break;
+
       case symbol_kind::S_enum_specifier: // enum_specifier
         value.copy< EnumSpecifier > (YY_MOVE (that.value));
         break;
@@ -3745,6 +3805,14 @@ switch (yykind)
 
       case symbol_kind::S_declaration_specifiers: // declaration_specifiers
         value.move< DeclarationSpecifiers > (YY_MOVE (s.value));
+        break;
+
+      case symbol_kind::S_declarator: // declarator
+        value.move< Declarator > (YY_MOVE (s.value));
+        break;
+
+      case symbol_kind::S_direct_declarator: // direct_declarator
+        value.move< DirectDeclarator > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_enum_specifier: // enum_specifier
@@ -3971,7 +4039,7 @@ switch (yykind)
 
 #line 9 "parser.y"
 } //  WadeSpace 
-#line 3975 "parser.hpp"
+#line 4043 "parser.hpp"
 
 
 

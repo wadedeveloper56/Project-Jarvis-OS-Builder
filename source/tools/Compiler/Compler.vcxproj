@@ -184,6 +184,8 @@
     <ClInclude Include="AssignmentOperator.h" />
     <ClInclude Include="Constant.h" />
     <ClInclude Include="DeclarationSpecifiers.h" />
+    <ClInclude Include="Declarator.h" />
+    <ClInclude Include="DirectDeclarator.h" />
     <ClInclude Include="Enumerator.h" />
     <ClInclude Include="EnumSpecifier.h" />
     <ClInclude Include="Expression.h" />
@@ -202,6 +204,8 @@
     <ClCompile Include="AssignmentOperator.cpp" />
     <ClCompile Include="Constant.cpp" />
     <ClCompile Include="DeclarationSpecifiers.cpp" />
+    <ClCompile Include="Declarator.cpp" />
+    <ClCompile Include="DirectDeclarator.cpp" />
     <ClCompile Include="Enumerator.cpp" />
     <ClCompile Include="EnumSpecifier.cpp" />
     <ClCompile Include="Expression.cpp" />

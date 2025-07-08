@@ -25,6 +25,8 @@
     #include "EnumSpecifier.h"
     #include "Expression.h"
     #include "Pointer.h"
+    #include "DirectDeclarator.h"
+    #include "Declarator.h"
 
     using namespace std;
 
@@ -193,6 +195,8 @@
 %type<std::vector<TypeQualifier>> type_qualifier_list
 %type<Pointer> pointer 
 %type<DeclarationSpecifiers> declaration_specifiers
+%type<DirectDeclarator> direct_declarator
+%type<Declarator> declarator
 
 %start translation_unit
 
@@ -482,18 +486,18 @@ type_qualifier
     ;
 
 declarator
-    : pointer direct_declarator { cout << "pointer direct_declarator REDUCE to declarator" << endl;}
-    | direct_declarator         { cout << "direct_declarator REDUCE to declarator" << endl;}
+    : pointer direct_declarator { $<Declarator>$ = Declarator($1,$2); cout << "pointer direct_declarator REDUCE to declarator" << endl;}
+    | direct_declarator         { $<Declarator>$ = Declarator($1); cout << "direct_declarator REDUCE to declarator" << endl;}
     ;
 
 direct_declarator
-    : IDENTIFIER                                            { cout << "IDENTIFIER REDUCE to direct_declarator" << endl;}
-    | OPAREN declarator CPAREN                              { cout << "OPAREN declarator CPAREN REDUCE to direct_declarator" << endl;}
-    | direct_declarator OBRACE constant_expression CBRACE   { cout << "direct_declarator OBRACE constant_expression CBRACE REDUCE to direct_declarator" << endl;}
-    | direct_declarator OBRACE CBRACE                       { cout << "direct_declarator OBRACE CBRACE REDUCE to direct_declarator" << endl;}
-    | direct_declarator OPAREN parameter_type_list CPAREN   { cout << "direct_declarator OPAREN parameter_type_list CPAREN to direct_declarator" << endl;}
-    | direct_declarator OPAREN identifier_list CPAREN       { cout << "direct_declarator OPAREN identifier_list CPAREN REDUCE to direct_declarator" << endl;}
-    | direct_declarator OPAREN CPAREN                       { cout << "direct_declarator OPAREN CPAREN REDUCE to direct_declarator" << endl;}
+    : IDENTIFIER                                            { $<DirectDeclarator>$ = DirectDeclarator($1); cout << "IDENTIFIER REDUCE to direct_declarator" << endl;}
+    | OPAREN declarator CPAREN                              { $<DirectDeclarator>$ = DirectDeclarator(); cout << "OPAREN declarator CPAREN REDUCE to direct_declarator" << endl;}
+    | direct_declarator OBRACE constant_expression CBRACE   { $<DirectDeclarator>$ = DirectDeclarator(); cout << "direct_declarator OBRACE constant_expression CBRACE REDUCE to direct_declarator" << endl;}
+    | direct_declarator OBRACE CBRACE                       { $<DirectDeclarator>$ = DirectDeclarator(); cout << "direct_declarator OBRACE CBRACE REDUCE to direct_declarator" << endl;}
+    | direct_declarator OPAREN parameter_type_list CPAREN   { $<DirectDeclarator>$ = DirectDeclarator(); cout << "direct_declarator OPAREN parameter_type_list CPAREN to direct_declarator" << endl;}
+    | direct_declarator OPAREN identifier_list CPAREN       { $<DirectDeclarator>$ = DirectDeclarator(); cout << "direct_declarator OPAREN identifier_list CPAREN REDUCE to direct_declarator" << endl;}
+    | direct_declarator OPAREN CPAREN                       { $<DirectDeclarator>$ = DirectDeclarator(); cout << "direct_declarator OPAREN CPAREN REDUCE to direct_declarator" << endl;}
     ;
 
 pointer
