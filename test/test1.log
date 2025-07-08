@@ -42,7 +42,10 @@ logical_or_expression REDUCE to conditional_expression
 conditional_expression REDUCE to assignment_expression
 asignment_expression REDUCE to expression
 RETURN expression SEMICOLON REDUCE to jump_statement
+jump_statement REDUCE to statement
+statement REDUCE to statement_list
 Scanner: token [}]
+OCURLY statement_list CCURLY REDUCE to compound_statement
 declaration_specifiers declarator compound_statement REDUCE to function_definition
 function_definition REDUCE to external_declaration
 external_declaration REDUCE to translation_unit

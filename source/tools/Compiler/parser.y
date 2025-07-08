@@ -520,95 +520,95 @@ type_qualifier_list
 
 
 parameter_type_list
-    : parameter_list
-    | parameter_list COMMA ELLIPSIS
+    : parameter_list                  { cout << "parameter_list REDUCE to parameter_type_list" << endl; }
+    | parameter_list COMMA ELLIPSIS   { cout << "parameter_list COMMA ELLIPSIS REDUCE to parameter_type_list" << endl; }
     ;
 
 parameter_list
-    : parameter_declaration
-    | parameter_list COMMA parameter_declaration
+    : parameter_declaration                       { cout << "parameter_declaration REDUCE to parameter_list" << endl; }
+    | parameter_list COMMA parameter_declaration  { cout << "parameter_list COMMA parameter_declaration REDUCE to parameter_list" << endl; }
     ;
 
 parameter_declaration
-    : declaration_specifiers declarator
-    | declaration_specifiers abstract_declarator
-    | declaration_specifiers
+    : declaration_specifiers declarator           { cout << "declaration_specifiers declarator REDUCE to parameter_declaration" << endl; }
+    | declaration_specifiers abstract_declarator  { cout << "declaration_specifiers abstract_declarator REDUCE to parameter_declaration" << endl; }
+    | declaration_specifiers                      { cout << "declaration_specifiers REDUCE to parameter_declaration" << endl; }
     ;
 
 identifier_list
-    : IDENTIFIER
-    | identifier_list COMMA IDENTIFIER
+    : IDENTIFIER                       { cout << "specifier_qualifier_list REDUCE to identifier_list" << endl; }
+    | identifier_list COMMA IDENTIFIER { cout << "identifier_list COMMA IDENTIFIER REDUCE to identifier_list" << endl; }
     ;
 
 type_name
-    : specifier_qualifier_list
-    | specifier_qualifier_list abstract_declarator
+    : specifier_qualifier_list                     { cout << "specifier_qualifier_list REDUCE to type_name" << endl; }
+    | specifier_qualifier_list abstract_declarator { cout << "specifier_qualifier_list abstract_declarator REDUCE to type_name" << endl; }
     ;
 
 abstract_declarator
-    : pointer
-    | direct_abstract_declarator
-    | pointer direct_abstract_declarator
+    : pointer                             { cout << "pointer REDUCE to abstract_declarator" << endl; }
+    | direct_abstract_declarator          { cout << "direct_abstract_declarator REDUCE to abstract_declarator" << endl; }
+    | pointer direct_abstract_declarator  { cout << "pointer direct_abstract_declarator REDUCE to abstract_declarator" << endl; }
     ;
 
 direct_abstract_declarator
-    : OPAREN abstract_declarator CPAREN
-    | OBRACE CBRACE
-    | OBRACE constant_expression CBRACE
-    | direct_abstract_declarator OBRACE CBRACE
-    | direct_abstract_declarator OBRACE constant_expression CBRACE
-    | OPAREN CPAREN
-    | OPAREN parameter_type_list CPAREN
-    | direct_abstract_declarator OPAREN CPAREN
-    | direct_abstract_declarator OPAREN parameter_type_list CPAREN
+    : OPAREN abstract_declarator CPAREN                            { cout << "OPAREN abstract_declarator CPAREN REDUCE to direct_abstract_declarator" << endl; }
+    | OBRACE CBRACE                                                { cout << "OBRACE CBRACE REDUCE to direct_abstract_declarator" << endl; }
+    | OBRACE constant_expression CBRACE                            { cout << "OBRACE constant_expression CBRACE REDUCE to direct_abstract_declarator" << endl; }
+    | direct_abstract_declarator OBRACE CBRACE                     { cout << "direct_abstract_declarator OBRACE CBRACE REDUCE to direct_abstract_declarator" << endl; }
+    | direct_abstract_declarator OBRACE constant_expression CBRACE { cout << "direct_abstract_declarator OBRACE constant_expression CBRACE REDUCE to direct_abstract_declarator" << endl; }
+    | OPAREN CPAREN                                                { cout << "OPAREN CPAREN REDUCE to direct_abstract_declarator" << endl; }
+    | OPAREN parameter_type_list CPAREN                            { cout << "OPAREN parameter_type_list CPAREN REDUCE to direct_abstract_declarator" << endl; }
+    | direct_abstract_declarator OPAREN CPAREN                     { cout << "direct_abstract_declarator OPAREN CPAREN REDUCE to direct_abstract_declarator" << endl; }
+    | direct_abstract_declarator OPAREN parameter_type_list CPAREN { cout << "direct_abstract_declarator OPAREN parameter_type_list CPAREN REDUCE to direct_abstract_declarator" << endl; }
     ;
 
 initializer
-    : assignment_expression
-    | OCURLY initializer_list CCURLY
-    | OCURLY initializer_list COMMA CCURLY
+    : assignment_expression                { cout << "assignment_expression REDUCE to initializer" << endl; }
+    | OCURLY initializer_list CCURLY       { cout << "OCURLY initializer_list CCURLY REDUCE to initializer" << endl; }
+    | OCURLY initializer_list COMMA CCURLY { cout << "OCURLY initializer_list COMMA CCURLY REDUCE to initializer" << endl; }
     ;
 
 initializer_list
-    : initializer
-    | initializer_list COMMA initializer
+    : initializer                        { cout << "initializer REDUCE to initializer_list" << endl; }
+    | initializer_list COMMA initializer { cout << "initializer_list COMMA initializer REDUCE to initializer_list" << endl; }
     ;
 
 statement
-    : labeled_statement
-    | compound_statement
-    | expression_statement
-    | selection_statement
-    | iteration_statement
-    | jump_statement
+    : labeled_statement    { cout << "labeled_statement REDUCE to statement" << endl; }
+    | compound_statement   { cout << "compound_statement REDUCE to statement" << endl; }
+    | expression_statement { cout << "expression_statement REDUCE to statement" << endl; }
+    | selection_statement  { cout << "selection_statement REDUCE to statement" << endl; }
+    | iteration_statement  { cout << "iteration_statement REDUCE to statement" << endl; }
+    | jump_statement       { cout << "jump_statement REDUCE to statement" << endl; }
     ;
 
 labeled_statement
-    : IDENTIFIER COLON statement
-    | CASE constant_expression COLON statement
-    | DEFAULT COLON statement
+    : IDENTIFIER COLON statement               { cout << "IDENTIFIER COLON statement REDUCE to label_statement" << endl; }
+    | CASE constant_expression COLON statement { cout << "CASE constant_expression COLON statement REDUCE to label_statement" << endl; }
+    | DEFAULT COLON statement                  { cout << "DEFAULT COLON statement REDUCE to label_statement" << endl; }
     ;
 
 compound_statement
-    : OCURLY CCURLY
-    | OCURLY statement_list CCURLY
-    | OCURLY declaration_list CCURLY
-    | OCURLY declaration_list statement_list CCURLY
+    : OCURLY CCURLY                                 { cout << "OCURLY CCURLY REDUCE to compound_statement" << endl; }
+    | OCURLY statement_list CCURLY                  { cout << "OCURLY statement_list CCURLY REDUCE to compound_statement" << endl; }
+    | OCURLY declaration_list CCURLY                { cout << "OCURLY declaration_list CCURLY REDUCE to compound_statement" << endl; }
+    | OCURLY declaration_list statement_list CCURLY { cout << "OCURLY declaration_list statement_list CCURLY REDUCE to compound_statement" << endl; }
     ;
 
 declaration_list
-    : declaration
-    | declaration_list declaration
+    : declaration                   { cout << "declaration REDUCE to declaration_list" << endl; }
+    | declaration_list declaration  { cout << "declaration_list declaration REDUCE to declaration_list" << endl; }
     ;
 
 statement_list
-    : statement
-    | statement_list statement
+    : statement                { cout << "statement REDUCE to statement_list" << endl; }
+    | statement_list statement { cout << "statement_list statement REDUCE to statement_list" << endl; }
     ;
 
 expression_statement
-    : SEMICOLON
-    | expression SEMICOLON
+    : SEMICOLON             { cout << "SEMICOLON REDUCE to expression_statement" << endl; }
+    | expression SEMICOLON  { cout << "expression SEMICOLON REDUCE to expression_statement" << endl; }
     ;
 
 selection_statement

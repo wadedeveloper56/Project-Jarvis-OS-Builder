@@ -2325,128 +2325,410 @@ namespace  WadeSpace  {
 #line 2326 "parser.cpp"
     break;
 
+  case 150: // parameter_type_list: parameter_list
+#line 523 "parser.y"
+                                      { cout << "parameter_list REDUCE to parameter_type_list" << endl; }
+#line 2332 "parser.cpp"
+    break;
+
+  case 151: // parameter_type_list: parameter_list "," "ellipsis"
+#line 524 "parser.y"
+                                      { cout << "parameter_list COMMA ELLIPSIS REDUCE to parameter_type_list" << endl; }
+#line 2338 "parser.cpp"
+    break;
+
+  case 152: // parameter_list: parameter_declaration
+#line 528 "parser.y"
+                                                  { cout << "parameter_declaration REDUCE to parameter_list" << endl; }
+#line 2344 "parser.cpp"
+    break;
+
+  case 153: // parameter_list: parameter_list "," parameter_declaration
+#line 529 "parser.y"
+                                                  { cout << "parameter_list COMMA parameter_declaration REDUCE to parameter_list" << endl; }
+#line 2350 "parser.cpp"
+    break;
+
+  case 154: // parameter_declaration: declaration_specifiers declarator
+#line 533 "parser.y"
+                                                  { cout << "declaration_specifiers declarator REDUCE to parameter_declaration" << endl; }
+#line 2356 "parser.cpp"
+    break;
+
+  case 155: // parameter_declaration: declaration_specifiers abstract_declarator
+#line 534 "parser.y"
+                                                  { cout << "declaration_specifiers abstract_declarator REDUCE to parameter_declaration" << endl; }
+#line 2362 "parser.cpp"
+    break;
+
+  case 156: // parameter_declaration: declaration_specifiers
+#line 535 "parser.y"
+                                                  { cout << "declaration_specifiers REDUCE to parameter_declaration" << endl; }
+#line 2368 "parser.cpp"
+    break;
+
+  case 157: // identifier_list: "identifier"
+#line 539 "parser.y"
+                                       { cout << "specifier_qualifier_list REDUCE to identifier_list" << endl; }
+#line 2374 "parser.cpp"
+    break;
+
+  case 158: // identifier_list: identifier_list "," "identifier"
+#line 540 "parser.y"
+                                       { cout << "identifier_list COMMA IDENTIFIER REDUCE to identifier_list" << endl; }
+#line 2380 "parser.cpp"
+    break;
+
+  case 159: // type_name: specifier_qualifier_list
+#line 544 "parser.y"
+                                                   { cout << "specifier_qualifier_list REDUCE to type_name" << endl; }
+#line 2386 "parser.cpp"
+    break;
+
+  case 160: // type_name: specifier_qualifier_list abstract_declarator
+#line 545 "parser.y"
+                                                   { cout << "specifier_qualifier_list abstract_declarator REDUCE to type_name" << endl; }
+#line 2392 "parser.cpp"
+    break;
+
+  case 161: // abstract_declarator: pointer
+#line 549 "parser.y"
+                                          { cout << "pointer REDUCE to abstract_declarator" << endl; }
+#line 2398 "parser.cpp"
+    break;
+
+  case 162: // abstract_declarator: direct_abstract_declarator
+#line 550 "parser.y"
+                                          { cout << "direct_abstract_declarator REDUCE to abstract_declarator" << endl; }
+#line 2404 "parser.cpp"
+    break;
+
+  case 163: // abstract_declarator: pointer direct_abstract_declarator
+#line 551 "parser.y"
+                                          { cout << "pointer direct_abstract_declarator REDUCE to abstract_declarator" << endl; }
+#line 2410 "parser.cpp"
+    break;
+
+  case 164: // direct_abstract_declarator: "(" abstract_declarator ")"
+#line 555 "parser.y"
+                                                                   { cout << "OPAREN abstract_declarator CPAREN REDUCE to direct_abstract_declarator" << endl; }
+#line 2416 "parser.cpp"
+    break;
+
+  case 165: // direct_abstract_declarator: "[" "]"
+#line 556 "parser.y"
+                                                                   { cout << "OBRACE CBRACE REDUCE to direct_abstract_declarator" << endl; }
+#line 2422 "parser.cpp"
+    break;
+
+  case 166: // direct_abstract_declarator: "[" constant_expression "]"
+#line 557 "parser.y"
+                                                                   { cout << "OBRACE constant_expression CBRACE REDUCE to direct_abstract_declarator" << endl; }
+#line 2428 "parser.cpp"
+    break;
+
+  case 167: // direct_abstract_declarator: direct_abstract_declarator "[" "]"
+#line 558 "parser.y"
+                                                                   { cout << "direct_abstract_declarator OBRACE CBRACE REDUCE to direct_abstract_declarator" << endl; }
+#line 2434 "parser.cpp"
+    break;
+
+  case 168: // direct_abstract_declarator: direct_abstract_declarator "[" constant_expression "]"
+#line 559 "parser.y"
+                                                                   { cout << "direct_abstract_declarator OBRACE constant_expression CBRACE REDUCE to direct_abstract_declarator" << endl; }
+#line 2440 "parser.cpp"
+    break;
+
+  case 169: // direct_abstract_declarator: "(" ")"
+#line 560 "parser.y"
+                                                                   { cout << "OPAREN CPAREN REDUCE to direct_abstract_declarator" << endl; }
+#line 2446 "parser.cpp"
+    break;
+
+  case 170: // direct_abstract_declarator: "(" parameter_type_list ")"
+#line 561 "parser.y"
+                                                                   { cout << "OPAREN parameter_type_list CPAREN REDUCE to direct_abstract_declarator" << endl; }
+#line 2452 "parser.cpp"
+    break;
+
+  case 171: // direct_abstract_declarator: direct_abstract_declarator "(" ")"
+#line 562 "parser.y"
+                                                                   { cout << "direct_abstract_declarator OPAREN CPAREN REDUCE to direct_abstract_declarator" << endl; }
+#line 2458 "parser.cpp"
+    break;
+
+  case 172: // direct_abstract_declarator: direct_abstract_declarator "(" parameter_type_list ")"
+#line 563 "parser.y"
+                                                                   { cout << "direct_abstract_declarator OPAREN parameter_type_list CPAREN REDUCE to direct_abstract_declarator" << endl; }
+#line 2464 "parser.cpp"
+    break;
+
+  case 173: // initializer: assignment_expression
+#line 567 "parser.y"
+                                           { cout << "assignment_expression REDUCE to initializer" << endl; }
+#line 2470 "parser.cpp"
+    break;
+
+  case 174: // initializer: "{" initializer_list "}"
+#line 568 "parser.y"
+                                           { cout << "OCURLY initializer_list CCURLY REDUCE to initializer" << endl; }
+#line 2476 "parser.cpp"
+    break;
+
+  case 175: // initializer: "{" initializer_list "," "}"
+#line 569 "parser.y"
+                                           { cout << "OCURLY initializer_list COMMA CCURLY REDUCE to initializer" << endl; }
+#line 2482 "parser.cpp"
+    break;
+
+  case 176: // initializer_list: initializer
+#line 573 "parser.y"
+                                         { cout << "initializer REDUCE to initializer_list" << endl; }
+#line 2488 "parser.cpp"
+    break;
+
+  case 177: // initializer_list: initializer_list "," initializer
+#line 574 "parser.y"
+                                         { cout << "initializer_list COMMA initializer REDUCE to initializer_list" << endl; }
+#line 2494 "parser.cpp"
+    break;
+
+  case 178: // statement: labeled_statement
+#line 578 "parser.y"
+                           { cout << "labeled_statement REDUCE to statement" << endl; }
+#line 2500 "parser.cpp"
+    break;
+
+  case 179: // statement: compound_statement
+#line 579 "parser.y"
+                           { cout << "compound_statement REDUCE to statement" << endl; }
+#line 2506 "parser.cpp"
+    break;
+
+  case 180: // statement: expression_statement
+#line 580 "parser.y"
+                           { cout << "expression_statement REDUCE to statement" << endl; }
+#line 2512 "parser.cpp"
+    break;
+
+  case 181: // statement: selection_statement
+#line 581 "parser.y"
+                           { cout << "selection_statement REDUCE to statement" << endl; }
+#line 2518 "parser.cpp"
+    break;
+
+  case 182: // statement: iteration_statement
+#line 582 "parser.y"
+                           { cout << "iteration_statement REDUCE to statement" << endl; }
+#line 2524 "parser.cpp"
+    break;
+
+  case 183: // statement: jump_statement
+#line 583 "parser.y"
+                           { cout << "jump_statement REDUCE to statement" << endl; }
+#line 2530 "parser.cpp"
+    break;
+
+  case 184: // labeled_statement: "identifier" ":" statement
+#line 587 "parser.y"
+                                               { cout << "IDENTIFIER COLON statement REDUCE to label_statement" << endl; }
+#line 2536 "parser.cpp"
+    break;
+
+  case 185: // labeled_statement: "case" constant_expression ":" statement
+#line 588 "parser.y"
+                                               { cout << "CASE constant_expression COLON statement REDUCE to label_statement" << endl; }
+#line 2542 "parser.cpp"
+    break;
+
+  case 186: // labeled_statement: "default" ":" statement
+#line 589 "parser.y"
+                                               { cout << "DEFAULT COLON statement REDUCE to label_statement" << endl; }
+#line 2548 "parser.cpp"
+    break;
+
+  case 187: // compound_statement: "{" "}"
+#line 593 "parser.y"
+                                                    { cout << "OCURLY CCURLY REDUCE to compound_statement" << endl; }
+#line 2554 "parser.cpp"
+    break;
+
+  case 188: // compound_statement: "{" statement_list "}"
+#line 594 "parser.y"
+                                                    { cout << "OCURLY statement_list CCURLY REDUCE to compound_statement" << endl; }
+#line 2560 "parser.cpp"
+    break;
+
+  case 189: // compound_statement: "{" declaration_list "}"
+#line 595 "parser.y"
+                                                    { cout << "OCURLY declaration_list CCURLY REDUCE to compound_statement" << endl; }
+#line 2566 "parser.cpp"
+    break;
+
+  case 190: // compound_statement: "{" declaration_list statement_list "}"
+#line 596 "parser.y"
+                                                    { cout << "OCURLY declaration_list statement_list CCURLY REDUCE to compound_statement" << endl; }
+#line 2572 "parser.cpp"
+    break;
+
+  case 191: // declaration_list: declaration
+#line 600 "parser.y"
+                                    { cout << "declaration REDUCE to declaration_list" << endl; }
+#line 2578 "parser.cpp"
+    break;
+
+  case 192: // declaration_list: declaration_list declaration
+#line 601 "parser.y"
+                                    { cout << "declaration_list declaration REDUCE to declaration_list" << endl; }
+#line 2584 "parser.cpp"
+    break;
+
+  case 193: // statement_list: statement
+#line 605 "parser.y"
+                               { cout << "statement REDUCE to statement_list" << endl; }
+#line 2590 "parser.cpp"
+    break;
+
+  case 194: // statement_list: statement_list statement
+#line 606 "parser.y"
+                               { cout << "statement_list statement REDUCE to statement_list" << endl; }
+#line 2596 "parser.cpp"
+    break;
+
+  case 195: // expression_statement: ";"
+#line 610 "parser.y"
+                            { cout << "SEMICOLON REDUCE to expression_statement" << endl; }
+#line 2602 "parser.cpp"
+    break;
+
+  case 196: // expression_statement: expression ";"
+#line 611 "parser.y"
+                            { cout << "expression SEMICOLON REDUCE to expression_statement" << endl; }
+#line 2608 "parser.cpp"
+    break;
+
   case 197: // selection_statement: "if" "(" expression ")" statement
 #line 615 "parser.y"
                                                            { cout << "IF OPAREN expression CPAREN statement REDUCE to selection_statement" << endl; }
-#line 2332 "parser.cpp"
+#line 2614 "parser.cpp"
     break;
 
   case 198: // selection_statement: "if" "(" expression ")" statement "else" statement
 #line 616 "parser.y"
                                                            { cout << "IF OPAREN expression CPAREN statement ELSE statement REDUCE to selection_statement" << endl; }
-#line 2338 "parser.cpp"
+#line 2620 "parser.cpp"
     break;
 
   case 199: // selection_statement: "switch" "(" expression ")" statement
 #line 617 "parser.y"
                                                            { cout << "SWITCH OPAREN expression CPAREN statement REDUCE to selection_statement" << endl; }
-#line 2344 "parser.cpp"
+#line 2626 "parser.cpp"
     break;
 
   case 200: // iteration_statement: "while" "(" expression ")" statement
 #line 621 "parser.y"
                                                                                        { cout << "WHILE OPAREN expression CPAREN statement REDUCE to iteration_statement" << endl; }
-#line 2350 "parser.cpp"
+#line 2632 "parser.cpp"
     break;
 
   case 201: // iteration_statement: "do" statement "while" "(" expression ")" ";"
 #line 622 "parser.y"
                                                                                        { cout << "DO statement WHILE OPAREN expression CPAREN SEMICOLON REDUCE to iteration_statement" << endl; }
-#line 2356 "parser.cpp"
+#line 2638 "parser.cpp"
     break;
 
   case 202: // iteration_statement: "for" "(" expression_statement expression_statement ")" statement
 #line 623 "parser.y"
                                                                                        { cout << "FOR OPAREN expression_statement expression_statement CPAREN statement REDUCE to iteration_statement" << endl; }
-#line 2362 "parser.cpp"
+#line 2644 "parser.cpp"
     break;
 
   case 203: // iteration_statement: "for" "(" expression_statement expression_statement expression ")" statement
 #line 624 "parser.y"
                                                                                        { cout << "FOR OPAREN expression_statement expression_statement expression CPAREN statement REDUCE to iteration_statement" << endl; }
-#line 2368 "parser.cpp"
+#line 2650 "parser.cpp"
     break;
 
   case 204: // jump_statement: "goto" "identifier" ";"
 #line 628 "parser.y"
                                   { cout << "GOTO IDENTIFIER SEMICOLON REDUCE to jump_statement" << endl; }
-#line 2374 "parser.cpp"
+#line 2656 "parser.cpp"
     break;
 
   case 205: // jump_statement: "continue" ";"
 #line 629 "parser.y"
                                   { cout << "CONTINUE SEMICOLON REDUCE to jump_statement" << endl; }
-#line 2380 "parser.cpp"
+#line 2662 "parser.cpp"
     break;
 
   case 206: // jump_statement: "break" ";"
 #line 630 "parser.y"
                                   { cout << "BREAK SEMICOLON REDUCE to jump_statement" << endl; }
-#line 2386 "parser.cpp"
+#line 2668 "parser.cpp"
     break;
 
   case 207: // jump_statement: "return" ";"
 #line 631 "parser.y"
                                   { cout << "RETURN SEMICOLON REDUCE to jump_statement" << endl; }
-#line 2392 "parser.cpp"
+#line 2674 "parser.cpp"
     break;
 
   case 208: // jump_statement: "return" expression ";"
 #line 632 "parser.y"
                                   { cout << "RETURN expression SEMICOLON REDUCE to jump_statement" << endl; }
-#line 2398 "parser.cpp"
+#line 2680 "parser.cpp"
     break;
 
   case 209: // translation_unit: external_declaration
 #line 636 "parser.y"
                                             { cout << "external_declaration REDUCE to translation_unit" << endl; }
-#line 2404 "parser.cpp"
+#line 2686 "parser.cpp"
     break;
 
   case 210: // translation_unit: translation_unit external_declaration
 #line 637 "parser.y"
                                             { cout << "translation_unit external_declaration REDUCE to translation_unit" << endl; }
-#line 2410 "parser.cpp"
+#line 2692 "parser.cpp"
     break;
 
   case 211: // external_declaration: function_definition
 #line 641 "parser.y"
                            { cout << "function_definition REDUCE to external_declaration" << endl; }
-#line 2416 "parser.cpp"
+#line 2698 "parser.cpp"
     break;
 
   case 212: // external_declaration: declaration
 #line 642 "parser.y"
                            { cout << "declaration REDUCE to external_declaration" << endl; }
-#line 2422 "parser.cpp"
+#line 2704 "parser.cpp"
     break;
 
   case 213: // function_definition: declaration_specifiers declarator declaration_list compound_statement
 #line 646 "parser.y"
                                                                             { cout << "declaration_specifiers declarator declaration_list compound_statement REDUCE to function_definition" << endl; }
-#line 2428 "parser.cpp"
+#line 2710 "parser.cpp"
     break;
 
   case 214: // function_definition: declaration_specifiers declarator compound_statement
 #line 647 "parser.y"
                                                                             { cout << "declaration_specifiers declarator compound_statement REDUCE to function_definition" << endl; }
-#line 2434 "parser.cpp"
+#line 2716 "parser.cpp"
     break;
 
   case 215: // function_definition: declarator declaration_list compound_statement
 #line 648 "parser.y"
                                                                             { cout << "declarator declaration_list compound_statement REDUCE to function_definition" << endl; }
-#line 2440 "parser.cpp"
+#line 2722 "parser.cpp"
     break;
 
   case 216: // function_definition: declarator compound_statement
 #line 649 "parser.y"
                                                                             { cout << "declarator compound_statement REDUCE to function_definition" << endl; }
-#line 2446 "parser.cpp"
+#line 2728 "parser.cpp"
     break;
 
 
-#line 2450 "parser.cpp"
+#line 2732 "parser.cpp"
 
             default:
               break;
@@ -3455,7 +3737,7 @@ namespace  WadeSpace  {
 
 #line 9 "parser.y"
 } //  WadeSpace 
-#line 3459 "parser.cpp"
+#line 3741 "parser.cpp"
 
 #line 652 "parser.y"
 
