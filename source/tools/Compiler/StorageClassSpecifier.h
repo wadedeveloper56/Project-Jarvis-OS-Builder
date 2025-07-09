@@ -3,20 +3,18 @@
 #include <string>
 #include <vector>
 #include <stdint.h>
+#include <optional>
+#include "TokenType.h"
 
 namespace WadeSpace {
-	typedef enum { NONE2, TYPEDEF, EXTERN, STATIC, AUTO, REGISTER } StorageClassSpecifierType;
-
 	class StorageClassSpecifier
 	{
 	public:
-		StorageClassSpecifier(std::string value, StorageClassSpecifierType type);
+		StorageClassSpecifier(std::string value, TokenType type);
 		StorageClassSpecifier();
 		~StorageClassSpecifier();
-		std::string getoperator() const;
-		StorageClassSpecifierType getType() const;
 	private:
 		std::string operatorStr;
-		StorageClassSpecifierType type;
+		TokenType type;
 	};
 }

@@ -35,6 +35,7 @@
     #include "StructDeclaration.h"
     #include "StructOrUnion.h"
     #include "StructOrUnionSpecifier.h"
+    #include "Initializer.h"
 
     using namespace std;
 
@@ -216,6 +217,8 @@
 %type<std::vector<StructDeclaration>> struct_declaration_list
 %type<StructOrUnion> struct_or_union
 %type<StructOrUnionSpecifier> struct_or_union_specifier
+%type<Initializer> initializer
+%type<std::vector<Initializer>> initializer_list
 
 %start translation_unit
 
@@ -365,7 +368,7 @@ assignment_expression
     ;
 
 assignment_operator
-    : EQUAL          { $<AssignmentOperator>$ = AssignmentOperator($1,EQUAL_OP);  cout << "EQUAL_OP REDUCE to assignment_operator" << endl;}
+    : EQUAL          { $<AssignmentOperator>$ = AssignmentOperator($1,EQUAL);  cout << "EQUAL_OP REDUCE to assignment_operator" << endl;}
     | MUL_ASSIGN     { $<AssignmentOperator>$ = AssignmentOperator($1,MUL_ASSIGN);  cout << "MUL_ASSIGN REDUCE to assignment_operator" << endl;}
     | DIV_ASSIGN     { $<AssignmentOperator>$ = AssignmentOperator($1,DIV_ASSIGN);  cout << "DIV_ASSIGN REDUCE to assignment_operator" << endl;}
     | MOD_ASSIGN     { $<AssignmentOperator>$ = AssignmentOperator($1,MOD_ASSIGN);  cout << "MOG_ASSIGN REDUCE to assignment_operator" << endl;}
@@ -407,7 +410,7 @@ init_declarator_list
     ;
 
 init_declarator
-    : declarator                       { cout << "declarator REDUCE to init_declarator" << endl;}
+    : declarator                    { cout << "declarator REDUCE to init_declarator" << endl;}
     | declarator EQUAL initializer  { cout << "declarator EQUAL initializer REDUCE to init_declarator" << endl;}
     ;
 
@@ -429,8 +432,8 @@ type_specifier
     | DOUBLE                    { $<TypeSpecifier>$ = TypeSpecifier($1,DOUBLE); cout << "DOUBLE REDUCE to type_specifier" << endl;}
     | SIGNED                    { $<TypeSpecifier>$ = TypeSpecifier($1,SIGNED); cout << "SIGNED REDUCE to type_specifier" << endl;}
     | UNSIGNED                  { $<TypeSpecifier>$ = TypeSpecifier($1,UNSIGNED); cout << "UNIGNED REDUCE to type_specifier" << endl;}
-    | struct_or_union_specifier { $<TypeSpecifier>$ = TypeSpecifier("struct_or_union_specifier",struct_or_union_specifier); cout << "struct_or_union_specifier REDUCE to type_specifier" << endl;}
-    | enum_specifier            { $<TypeSpecifier>$ = TypeSpecifier("enum_specifier",&$1); cout << "enum_specifier REDUCE to type_specifier" << endl;}
+    | struct_or_union_specifier { $<TypeSpecifier>$ = TypeSpecifier("struct_or_union_specifier",NONE); cout << "struct_or_union_specifier REDUCE to type_specifier" << endl;}
+    | enum_specifier            { $<TypeSpecifier>$ = TypeSpecifier("enum_specifier",$1); cout << "enum_specifier REDUCE to type_specifier" << endl;}
     | TYPE_NAME                 { $<TypeSpecifier>$ = TypeSpecifier($1,TYPE_NAME); cout << "TYPE_NAME REDUCE to type_specifier" << endl;}
     ;
 
@@ -543,9 +546,9 @@ direct_declarator
 
 pointer
     : TIMES_OP                              {$<Pointer>$ = Pointer($1); cout << "TIMES_OP REDUCE to POINTER" << endl;}
-    | TIMES_OP type_qualifier_list          {$<Pointer>$ = Pointer($1,&$2); cout << "TIMES_OP type_qualifier_list REDUCE to POINTER" << endl;}
-    | TIMES_OP pointer                      {$<Pointer>$ = Pointer($1,&$2); $<Pointer>$.inc(); cout << "TIMES_OP pointer REDUCE to POINTER" << endl;}
-    | TIMES_OP type_qualifier_list pointer  {$<Pointer>$ = Pointer($1,&$2,&$3); $<Pointer>$.inc(); cout << "TIMES_OP type_qualifier_list pointer REDUCE to POINTER" << endl;}
+    | TIMES_OP type_qualifier_list          {$<Pointer>$ = Pointer($1,$2); cout << "TIMES_OP type_qualifier_list REDUCE to POINTER" << endl;}
+    | TIMES_OP pointer                      {$<Pointer>$ = Pointer($1,$2); $<Pointer>$.inc(); cout << "TIMES_OP pointer REDUCE to POINTER" << endl;}
+    | TIMES_OP type_qualifier_list pointer  {$<Pointer>$ = Pointer($1,$2,$3); $<Pointer>$.inc(); cout << "TIMES_OP type_qualifier_list pointer REDUCE to POINTER" << endl;}
     ;
 
 type_qualifier_list
@@ -621,14 +624,25 @@ direct_abstract_declarator
     ;
 
 initializer
-    : assignment_expression                { cout << "assignment_expression REDUCE to initializer" << endl; }
-    | OCURLY initializer_list CCURLY       { cout << "OCURLY initializer_list CCURLY REDUCE to initializer" << endl; }
-    | OCURLY initializer_list COMMA CCURLY { cout << "OCURLY initializer_list COMMA CCURLY REDUCE to initializer" << endl; }
+    : assignment_expression                { $<Initializer>$ = Initializer($1); cout << "assignment_expression REDUCE to initializer" << endl; }
+    | OCURLY initializer_list CCURLY       { $<Initializer>$ = Initializer($2); cout << "OCURLY initializer_list CCURLY REDUCE to initializer" << endl; }
+    | OCURLY initializer_list COMMA CCURLY { $<Initializer>$ = Initializer($2); cout << "OCURLY initializer_list COMMA CCURLY REDUCE to initializer" << endl; }
     ;
 
 initializer_list
-    : initializer                        { cout << "initializer REDUCE to initializer_list" << endl; }
-    | initializer_list COMMA initializer { cout << "initializer_list COMMA initializer REDUCE to initializer_list" << endl; }
+    : initializer                         {
+                                           Initializer exp = $1;
+                                           $$ = std::vector<Initializer>();
+                                           $$.push_back(exp);
+                                           cout << "initializer REDUCE to initializer_list" << endl;
+                                          }
+    | initializer_list COMMA initializer  {
+                                           Initializer value1 = $3;
+                                           std::vector<Initializer> &value2 = $1;
+                                           value2.push_back(value1);
+                                           $$ = value2;
+                                           cout << "initializer_list COMMA initializer REDUCE to initializer_list" << endl;
+                                         }
     ;
 
 statement

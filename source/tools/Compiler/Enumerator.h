@@ -14,9 +14,6 @@ namespace WadeSpace {
 		Enumerator(std::string value);
 		Enumerator();
 		~Enumerator();
-
-		std::string getoperator() const;
-		Expression& getExpression() const;
 	private:
 		std::string operatorStr;
 		std::optional<std::reference_wrapper < Expression>> expression;

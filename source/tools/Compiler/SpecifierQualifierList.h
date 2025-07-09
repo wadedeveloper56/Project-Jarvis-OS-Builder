@@ -17,9 +17,6 @@ namespace WadeSpace {
 		SpecifierQualifierList(TypeQualifier& ts);
 		SpecifierQualifierList();
 		~SpecifierQualifierList();
-		SpecifierQualifierList& getSql() const;
-		TypeSpecifier& getTs() const;
-		TypeQualifier& getTq() const;
 	private:
 		std::optional < std::reference_wrapper < SpecifierQualifierList>> sql;
 		std::optional < std::reference_wrapper < TypeSpecifier>> ts;

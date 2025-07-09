@@ -93,6 +93,12 @@
     <ClInclude Include="StructOrUnionSpecifier.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Initializer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TokenType.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="parser.cpp">
@@ -165,6 +171,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="StructOrUnionSpecifier.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Initializer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

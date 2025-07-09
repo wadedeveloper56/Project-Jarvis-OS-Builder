@@ -7,5 +7,3 @@ AbstractDeclarator::AbstractDeclarator(DirectAbstractDeclarator& dad) :ptr(std::
 AbstractDeclarator::AbstractDeclarator(Pointer& ptr, DirectAbstractDeclarator& dad) :ptr(ptr), dad(dad) {}
 AbstractDeclarator::AbstractDeclarator() :ptr(std::nullopt), dad(std::nullopt) {}
 AbstractDeclarator::~AbstractDeclarator() {}
-Pointer& AbstractDeclarator::getPointer() const { return ptr->get(); }
-DirectAbstractDeclarator& AbstractDeclarator::getDad() const { return dad->get(); }

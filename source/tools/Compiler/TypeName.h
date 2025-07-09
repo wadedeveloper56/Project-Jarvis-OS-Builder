@@ -15,8 +15,6 @@ namespace WadeSpace {
 		TypeName(SpecifierQualifierList& sql, AbstractDeclarator& ad);
 		TypeName();
 		~TypeName();
-		SpecifierQualifierList& getSql() const;
-		AbstractDeclarator& getTs() const;
 	private:
 		std::optional < std::reference_wrapper < SpecifierQualifierList>> sql;
 		std::optional < std::reference_wrapper < AbstractDeclarator>> ad;

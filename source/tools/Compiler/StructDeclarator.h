@@ -16,8 +16,6 @@ namespace WadeSpace {
 		StructDeclarator(Declarator& dec, Expression& exp);
 		StructDeclarator();
 		~StructDeclarator();
-		Declarator& getDec() const;
-		Expression& getExp() const;
 	private:
 		std::optional < std::reference_wrapper < Declarator>> dec;
 		std::optional < std::reference_wrapper < Expression>> exp;

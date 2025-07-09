@@ -546,10 +546,10 @@ Nonterminals, with rules where they appear
     direct_abstract_declarator <DirectAbstractDeclarator> (143)
         on left: 163 164 165 166 167 168 169 170 171
         on right: 161 162 166 167 170 171
-    initializer (144)
+    initializer <Initializer> (144)
         on left: 172 173 174
         on right: 90 175 176
-    initializer_list (145)
+    initializer_list <std::vector<Initializer>> (145)
         on left: 175 176
         on right: 15 16 173 174 176
     statement (146)

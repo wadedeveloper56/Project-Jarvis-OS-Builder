@@ -15,8 +15,6 @@ namespace WadeSpace {
 		Declarator(DirectDeclarator& dd);
 		Declarator();
 		~Declarator();
-		DirectDeclarator& getDirectDeclarator() const;
-		Pointer& getPointer() const;
 	private:
 		std::optional<std::reference_wrapper < DirectDeclarator>> dd;
 		std::optional<std::reference_wrapper < Pointer>> ptr;

@@ -16,9 +16,6 @@ namespace WadeSpace {
 		StructOrUnionSpecifier(StructOrUnion& su, std::string name);
 		StructOrUnionSpecifier();
 		~StructOrUnionSpecifier();
-		std::string getName() const;
-		StructOrUnion& getSu() const;
-		std::vector<StructDeclaration>& getList() const;
 	private:
 		std::string name;
 		std::optional < std::reference_wrapper < StructOrUnion>> su;

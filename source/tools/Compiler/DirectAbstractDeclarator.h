@@ -15,7 +15,6 @@ namespace WadeSpace {
 		DirectAbstractDeclarator(AbstractDeclarator& ad);
 		DirectAbstractDeclarator();
 		~DirectAbstractDeclarator();
-		AbstractDeclarator& getAd() const;
 	private:
 		std::optional < std::reference_wrapper < AbstractDeclarator>> ad;
 	};

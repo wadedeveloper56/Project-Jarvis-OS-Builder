@@ -3,21 +3,18 @@
 #include <string>
 #include <vector>
 #include <stdint.h>
+#include <optional>
+#include "TokenType.h"
 
 namespace WadeSpace {
-	typedef enum { NONE4, CONST, VOLATILE } TypeQualifierType;
-
 	class TypeQualifier
 	{
 	public:
-		TypeQualifier(std::string value, TypeQualifierType type);
+		TypeQualifier(std::string value, TokenType type);
 		TypeQualifier();
 		~TypeQualifier();
-
-		std::string getoperator() const;
-		TypeQualifierType getType() const;
 	private:
 		std::string operatorStr;
-		TypeQualifierType type;
+		TokenType type;
 	};
 }

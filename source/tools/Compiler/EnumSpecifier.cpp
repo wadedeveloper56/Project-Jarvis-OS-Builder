@@ -7,5 +7,3 @@ EnumSpecifier::EnumSpecifier(std::string value, std::vector<Enumerator>& list) :
 EnumSpecifier::EnumSpecifier(std::string value) :nameStr(value), list(std::nullopt) {}
 EnumSpecifier::EnumSpecifier() :nameStr(""), list(std::nullopt) {}
 EnumSpecifier::~EnumSpecifier() {}
-std::string EnumSpecifier::getNameStr() const { return nameStr; }
-std::vector<Enumerator>&  EnumSpecifier::getList() const { return list->get(); }

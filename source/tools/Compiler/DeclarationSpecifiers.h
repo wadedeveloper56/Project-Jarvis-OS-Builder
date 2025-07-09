@@ -20,11 +20,6 @@ namespace WadeSpace {
 		DeclarationSpecifiers(StorageClassSpecifier& scs, DeclarationSpecifiers& ds);
 		DeclarationSpecifiers();
 		~DeclarationSpecifiers();
-
-		StorageClassSpecifier& getScs() const;
-		TypeSpecifier& getTs() const;
-		DeclarationSpecifiers& getDs() const;
-		TypeQualifier& getTq() const;
 	private:
 		std::optional < std::reference_wrapper < StorageClassSpecifier>> scs;
 		std::optional < std::reference_wrapper < TypeSpecifier>> ts;

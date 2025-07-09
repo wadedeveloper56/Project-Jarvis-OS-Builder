@@ -2,10 +2,7 @@
 
 using namespace WadeSpace;
 
-TypeSpecifier::TypeSpecifier(std::string value, TypeSpecifierType type) :operatorStr(value), type(type), enumSpec(NULL) {}
-TypeSpecifier::TypeSpecifier(std::string value, EnumSpecifier* spec) :operatorStr(value), type(enum_specifier), enumSpec(spec) {}
-TypeSpecifier::TypeSpecifier() :operatorStr(""), type(NONE3), enumSpec(NULL) {}
+TypeSpecifier::TypeSpecifier(std::string value, TokenType type) :operatorStr(value), type(type), enumSpec(std::nullopt) {}
+TypeSpecifier::TypeSpecifier(std::string value, EnumSpecifier& spec) :operatorStr(value), type(NONE), enumSpec(spec) {}
+TypeSpecifier::TypeSpecifier() :operatorStr(""), type(NONE), enumSpec(std::nullopt) {}
 TypeSpecifier::~TypeSpecifier() {}
-std::string TypeSpecifier::getoperator() const { return operatorStr; }
-TypeSpecifierType TypeSpecifier::getType() const { return type; }
-EnumSpecifier* TypeSpecifier::getEnumSpecifier() const { return enumSpec; }

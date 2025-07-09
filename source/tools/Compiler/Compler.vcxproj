@@ -191,6 +191,7 @@
     <ClInclude Include="Enumerator.h" />
     <ClInclude Include="EnumSpecifier.h" />
     <ClInclude Include="Expression.h" />
+    <ClInclude Include="Initializer.h" />
     <ClInclude Include="interpreter.h" />
     <ClInclude Include="location.hh" />
     <ClInclude Include="parser.hpp" />
@@ -204,6 +205,7 @@
     <ClInclude Include="StructDeclarator.h" />
     <ClInclude Include="StructOrUnion.h" />
     <ClInclude Include="StructOrUnionSpecifier.h" />
+    <ClInclude Include="TokenType.h" />
     <ClInclude Include="TypeName.h" />
     <ClInclude Include="TypeQualifier.h" />
     <ClInclude Include="TypeSpecifier.h" />
@@ -219,6 +221,7 @@
     <ClCompile Include="Enumerator.cpp" />
     <ClCompile Include="EnumSpecifier.cpp" />
     <ClCompile Include="Expression.cpp" />
+    <ClCompile Include="Initializer.cpp" />
     <ClCompile Include="interpreter.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="parser.cpp" />

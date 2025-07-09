@@ -15,11 +15,6 @@ namespace WadeSpace {
 		Constant(std::string value);
 		Constant();
 		~Constant();
-
-		std::uint64_t integerConstant() const;
-		long double floatConstant() const;
-		std::string stringConstant() const;
-
 	private:
 		std::uint64_t iConst;
 		long double fConst;

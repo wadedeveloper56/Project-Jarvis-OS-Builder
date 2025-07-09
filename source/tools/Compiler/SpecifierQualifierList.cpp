@@ -8,6 +8,3 @@ SpecifierQualifierList::SpecifierQualifierList(SpecifierQualifierList& sql, Type
 SpecifierQualifierList::SpecifierQualifierList(TypeQualifier& ts) :sql(std::nullopt), ts(std::nullopt), tq(tq) {}
 SpecifierQualifierList::SpecifierQualifierList() :sql(std::nullopt), ts(std::nullopt), tq(std::nullopt) {}
 SpecifierQualifierList::~SpecifierQualifierList() {}
-SpecifierQualifierList& SpecifierQualifierList::getSql() const { return sql->get(); }
-TypeSpecifier& SpecifierQualifierList::getTs() const { return ts->get(); }
-TypeQualifier& SpecifierQualifierList::getTq() const { return tq->get(); }

@@ -16,8 +16,6 @@ namespace WadeSpace {
 		AbstractDeclarator(Pointer& ptr, DirectAbstractDeclarator& dad);
 		AbstractDeclarator();
 		~AbstractDeclarator();
-		Pointer& getPointer() const;
-		DirectAbstractDeclarator& getDad() const;
 	private:
 		std::optional<std::reference_wrapper < Pointer>> ptr;
 		std::optional < std::reference_wrapper < DirectAbstractDeclarator>> dad;
