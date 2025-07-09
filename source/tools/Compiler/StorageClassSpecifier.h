@@ -13,7 +13,6 @@ namespace WadeSpace {
 		StorageClassSpecifier(std::string value, StorageClassSpecifierType type);
 		StorageClassSpecifier();
 		~StorageClassSpecifier();
-
 		std::string getoperator() const;
 		StorageClassSpecifierType getType() const;
 	private:

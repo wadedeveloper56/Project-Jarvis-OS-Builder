@@ -480,7 +480,7 @@ Nonterminals, with rules where they appear
     type_specifier <TypeSpecifier> (121)
         on left: 96 97 98 99 100 101 102 103 104 105 106 107
         on right: 83 84 116 117
-    struct_or_union_specifier (122)
+    struct_or_union_specifier <StructOrUnionSpecifier> (122)
         on left: 108 109 110
         on right: 105
     struct_or_union <StructOrUnion> (123)

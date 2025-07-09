@@ -14,6 +14,8 @@ namespace WadeSpace {
 		StructDeclaration(SpecifierQualifierList& sql, std::vector<StructDeclarator>& list);
 		StructDeclaration();
 		~StructDeclaration();
+		SpecifierQualifierList& getSql() const;
+		std::vector<StructDeclarator>& getList() const;
 	private:
 		std::optional < std::reference_wrapper < SpecifierQualifierList>> sql;
 		std::optional < std::reference_wrapper < std::vector<StructDeclarator>>> list;

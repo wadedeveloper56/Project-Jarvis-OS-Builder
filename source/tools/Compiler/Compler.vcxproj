@@ -203,6 +203,7 @@
     <ClInclude Include="StructDeclaration.h" />
     <ClInclude Include="StructDeclarator.h" />
     <ClInclude Include="StructOrUnion.h" />
+    <ClInclude Include="StructOrUnionSpecifier.h" />
     <ClInclude Include="TypeName.h" />
     <ClInclude Include="TypeQualifier.h" />
     <ClInclude Include="TypeSpecifier.h" />
@@ -228,6 +229,7 @@
     <ClCompile Include="StructDeclaration.cpp" />
     <ClCompile Include="StructDeclarator.cpp" />
     <ClCompile Include="StructOrUnion.cpp" />
+    <ClCompile Include="StructOrUnionSpecifier.cpp" />
     <ClCompile Include="TypeName.cpp" />
     <ClCompile Include="TypeQualifier.cpp" />
     <ClCompile Include="TypeSpecifier.cpp" />

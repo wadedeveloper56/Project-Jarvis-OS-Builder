@@ -90,6 +90,9 @@
     <ClInclude Include="StructOrUnion.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="StructOrUnionSpecifier.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="parser.cpp">
@@ -159,6 +162,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="StructOrUnion.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StructOrUnionSpecifier.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -72,6 +72,7 @@
     #include "StructDeclarator.h"
     #include "StructDeclaration.h"
     #include "StructOrUnion.h"
+    #include "StructOrUnionSpecifier.h"
 
     using namespace std;
 
@@ -80,7 +81,7 @@
         class Interpreter;
     }
 
-#line 84 "parser.hpp"
+#line 85 "parser.hpp"
 
 # include <cassert>
 # include <cstdlib> // std::abort
@@ -221,7 +222,7 @@
 
 #line 9 "parser.y"
 namespace  WadeSpace  {
-#line 225 "parser.hpp"
+#line 226 "parser.hpp"
 
 
 
@@ -505,17 +506,20 @@ namespace  WadeSpace  {
       // struct_or_union
       char dummy16[sizeof (StructOrUnion)];
 
+      // struct_or_union_specifier
+      char dummy17[sizeof (StructOrUnionSpecifier)];
+
       // type_name
-      char dummy17[sizeof (TypeName)];
+      char dummy18[sizeof (TypeName)];
 
       // type_qualifier
-      char dummy18[sizeof (TypeQualifier)];
+      char dummy19[sizeof (TypeQualifier)];
 
       // type_specifier
-      char dummy19[sizeof (TypeSpecifier)];
+      char dummy20[sizeof (TypeSpecifier)];
 
       // "f_const"
-      char dummy20[sizeof (long double)];
+      char dummy21[sizeof (long double)];
 
       // "identifier"
       // "sting_literal"
@@ -606,28 +610,28 @@ namespace  WadeSpace  {
       // "/"
       // "%"
       // unary_operator
-      char dummy21[sizeof (std::string)];
+      char dummy22[sizeof (std::string)];
 
       // enumerator_list
-      char dummy22[sizeof (std::vector<Enumerator>)];
+      char dummy23[sizeof (std::vector<Enumerator>)];
 
       // argument_expression_list
-      char dummy23[sizeof (std::vector<Expression>)];
+      char dummy24[sizeof (std::vector<Expression>)];
 
       // struct_declaration_list
-      char dummy24[sizeof (std::vector<StructDeclaration>)];
+      char dummy25[sizeof (std::vector<StructDeclaration>)];
 
       // struct_declarator_list
-      char dummy25[sizeof (std::vector<StructDeclarator>)];
+      char dummy26[sizeof (std::vector<StructDeclarator>)];
 
       // type_qualifier_list
-      char dummy26[sizeof (std::vector<TypeQualifier>)];
+      char dummy27[sizeof (std::vector<TypeQualifier>)];
 
       // identifier_list
-      char dummy27[sizeof (std::vector<std::string>)];
+      char dummy28[sizeof (std::vector<std::string>)];
 
       // "i_const"
-      char dummy28[sizeof (uint64_t)];
+      char dummy29[sizeof (uint64_t)];
     };
 
     /// The size of the largest semantic type.
@@ -1063,6 +1067,10 @@ namespace  WadeSpace  {
         value.move< StructOrUnion > (std::move (that.value));
         break;
 
+      case symbol_kind::S_struct_or_union_specifier: // struct_or_union_specifier
+        value.move< StructOrUnionSpecifier > (std::move (that.value));
+        break;
+
       case symbol_kind::S_type_name: // type_name
         value.move< TypeName > (std::move (that.value));
         break;
@@ -1447,6 +1455,20 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
+      basic_symbol (typename Base::kind_type t, StructOrUnionSpecifier&& v, location_type&& l)
+        : Base (t)
+        , value (std::move (v))
+        , location (std::move (l))
+      {}
+#else
+      basic_symbol (typename Base::kind_type t, const StructOrUnionSpecifier& v, const location_type& l)
+        : Base (t)
+        , value (v)
+        , location (l)
+      {}
+#endif
+
+#if 201103L <= YY_CPLUSPLUS
       basic_symbol (typename Base::kind_type t, TypeName&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
@@ -1717,6 +1739,10 @@ switch (yykind)
 
       case symbol_kind::S_struct_or_union: // struct_or_union
         value.template destroy< StructOrUnion > ();
+        break;
+
+      case symbol_kind::S_struct_or_union_specifier: // struct_or_union_specifier
+        value.template destroy< StructOrUnionSpecifier > ();
         break;
 
       case symbol_kind::S_type_name: // type_name
@@ -3925,6 +3951,10 @@ switch (yykind)
         value.copy< StructOrUnion > (YY_MOVE (that.value));
         break;
 
+      case symbol_kind::S_struct_or_union_specifier: // struct_or_union_specifier
+        value.copy< StructOrUnionSpecifier > (YY_MOVE (that.value));
+        break;
+
       case symbol_kind::S_type_name: // type_name
         value.copy< TypeName > (YY_MOVE (that.value));
         break;
@@ -4173,6 +4203,10 @@ switch (yykind)
         value.move< StructOrUnion > (YY_MOVE (s.value));
         break;
 
+      case symbol_kind::S_struct_or_union_specifier: // struct_or_union_specifier
+        value.move< StructOrUnionSpecifier > (YY_MOVE (s.value));
+        break;
+
       case symbol_kind::S_type_name: // type_name
         value.move< TypeName > (YY_MOVE (s.value));
         break;
@@ -4376,7 +4410,7 @@ switch (yykind)
 
 #line 9 "parser.y"
 } //  WadeSpace 
-#line 4380 "parser.hpp"
+#line 4414 "parser.hpp"
 
 
 

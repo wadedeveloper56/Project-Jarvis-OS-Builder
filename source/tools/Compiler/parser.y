@@ -34,6 +34,7 @@
     #include "StructDeclarator.h"
     #include "StructDeclaration.h"
     #include "StructOrUnion.h"
+    #include "StructOrUnionSpecifier.h"
 
     using namespace std;
 
@@ -214,6 +215,7 @@
 %type<StructDeclaration> struct_declaration
 %type<std::vector<StructDeclaration>> struct_declaration_list
 %type<StructOrUnion> struct_or_union
+%type<StructOrUnionSpecifier> struct_or_union_specifier
 
 %start translation_unit
 
@@ -433,9 +435,9 @@ type_specifier
     ;
 
 struct_or_union_specifier
-    : struct_or_union IDENTIFIER OCURLY struct_declaration_list CCURLY   { cout << "struct_or_union IDENTIFIER OCURLY struct_declaration_list CCURLY REDUCE to struct_or_union_specifier" << endl;}
-    | struct_or_union OCURLY struct_declaration_list CCURLY              { cout << "struct_or_union OCURLY struct_declaration_list CCURLY REDUCE to struct_or_union_specifier" << endl;}
-    | struct_or_union IDENTIFIER                                         { cout << "struct_or_union IDENTIFIER REDUCE to struct_or_union_specifier" << endl;}
+    : struct_or_union IDENTIFIER OCURLY struct_declaration_list CCURLY   { $<StructOrUnionSpecifier>$ = StructOrUnionSpecifier($1,$2,$4); cout << "struct_or_union IDENTIFIER OCURLY struct_declaration_list CCURLY REDUCE to struct_or_union_specifier" << endl;}
+    | struct_or_union OCURLY struct_declaration_list CCURLY              { $<StructOrUnionSpecifier>$ = StructOrUnionSpecifier($1,$3); cout << "struct_or_union OCURLY struct_declaration_list CCURLY REDUCE to struct_or_union_specifier" << endl;}
+    | struct_or_union IDENTIFIER                                         { $<StructOrUnionSpecifier>$ = StructOrUnionSpecifier($1,$2); cout << "struct_or_union IDENTIFIER REDUCE to struct_or_union_specifier" << endl;}
     ;
 
 struct_or_union
