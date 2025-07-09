@@ -483,13 +483,13 @@ Nonterminals, with rules where they appear
     struct_or_union_specifier (122)
         on left: 108 109 110
         on right: 105
-    struct_or_union (123)
+    struct_or_union <StructOrUnion> (123)
         on left: 111 112
         on right: 108 109 110
-    struct_declaration_list (124)
+    struct_declaration_list <std::vector<StructDeclaration>> (124)
         on left: 113 114
         on right: 108 109 114
-    struct_declaration (125)
+    struct_declaration <StructDeclaration> (125)
         on left: 115
         on right: 113 114
     specifier_qualifier_list <SpecifierQualifierList> (126)

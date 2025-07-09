@@ -32,6 +32,8 @@
     #include "TypeName.h"
     #include "SpecifierQualifierList.h"
     #include "StructDeclarator.h"
+    #include "StructDeclaration.h"
+    #include "StructOrUnion.h"
 
     using namespace std;
 
@@ -209,6 +211,9 @@
 %type<std::vector<std::string>> identifier_list
 %type<StructDeclarator> struct_declarator
 %type<std::vector<StructDeclarator>> struct_declarator_list
+%type<StructDeclaration> struct_declaration
+%type<std::vector<StructDeclaration>> struct_declaration_list
+%type<StructOrUnion> struct_or_union
 
 %start translation_unit
 
@@ -358,7 +363,7 @@ assignment_expression
     ;
 
 assignment_operator
-    : EQUAL       { $<AssignmentOperator>$ = AssignmentOperator($1,EQUAL_OP);  cout << "EQUAL_OP REDUCE to assignment_operator" << endl;}
+    : EQUAL          { $<AssignmentOperator>$ = AssignmentOperator($1,EQUAL_OP);  cout << "EQUAL_OP REDUCE to assignment_operator" << endl;}
     | MUL_ASSIGN     { $<AssignmentOperator>$ = AssignmentOperator($1,MUL_ASSIGN);  cout << "MUL_ASSIGN REDUCE to assignment_operator" << endl;}
     | DIV_ASSIGN     { $<AssignmentOperator>$ = AssignmentOperator($1,DIV_ASSIGN);  cout << "DIV_ASSIGN REDUCE to assignment_operator" << endl;}
     | MOD_ASSIGN     { $<AssignmentOperator>$ = AssignmentOperator($1,MOD_ASSIGN);  cout << "MOG_ASSIGN REDUCE to assignment_operator" << endl;}
@@ -434,17 +439,28 @@ struct_or_union_specifier
     ;
 
 struct_or_union
-    : STRUCT   { cout << "STRUCT REDUCE to struct_or_union" << endl;}
-    | UNION    { cout << "UNION REDUCE to struct_or_union" << endl;}
+    : STRUCT   { $<StructOrUnion>$ = StructOrUnion(STRUCT1); cout << "STRUCT REDUCE to struct_or_union" << endl;}
+    | UNION    { $<StructOrUnion>$ = StructOrUnion(UNION1); cout << "UNION REDUCE to struct_or_union" << endl;}
     ;
 
 struct_declaration_list
-    : struct_declaration                         { cout << "struct_declaration REDUCE to struct_declaration_list" << endl;}
-    | struct_declaration_list struct_declaration { cout << "struct_declaration_list struct_declaration REDUCE to struct_declaration_list" << endl;}
+    : struct_declaration    {
+                             StructDeclaration exp = $1;
+                             $$ = std::vector<StructDeclaration>();
+                             $$.push_back(exp);
+                             cout << "struct_declaration REDUCE to struct_declaration_list" << endl;
+                            }
+    | struct_declaration_list struct_declaration     {
+                                                       StructDeclaration value1 = $2;
+                                                       std::vector<StructDeclaration> &value2 = $1;
+                                                       value2.push_back(value1);
+                                                       $$ = value2;
+                                                       cout << "struct_declaration_list struct_declaration REDUCE to struct_declaration_list" << endl;
+                                                     }
     ;
 
 struct_declaration
-    : specifier_qualifier_list struct_declarator_list SEMICOLON { cout << "specifier_qualifier_list struct_declarator_list SEMICOLON REDUCE to struct_declaration" << endl;}
+    : specifier_qualifier_list struct_declarator_list SEMICOLON { $<StructDeclaration>$ = StructDeclaration($1,$2); cout << "specifier_qualifier_list struct_declarator_list SEMICOLON REDUCE to struct_declaration" << endl;}
     ;
 
 specifier_qualifier_list

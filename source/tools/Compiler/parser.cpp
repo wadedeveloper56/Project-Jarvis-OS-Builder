@@ -35,7 +35,7 @@
 // private implementation details that can be changed or removed.
 
 // "%code top" blocks.
-#line 50 "parser.y"
+#line 52 "parser.y"
 
     #include <iostream>
     #include <stdlib.h>
@@ -293,8 +293,16 @@ namespace  WadeSpace  {
         value.YY_MOVE_OR_COPY< StorageClassSpecifier > (YY_MOVE (that.value));
         break;
 
+      case symbol_kind::S_struct_declaration: // struct_declaration
+        value.YY_MOVE_OR_COPY< StructDeclaration > (YY_MOVE (that.value));
+        break;
+
       case symbol_kind::S_struct_declarator: // struct_declarator
         value.YY_MOVE_OR_COPY< StructDeclarator > (YY_MOVE (that.value));
+        break;
+
+      case symbol_kind::S_struct_or_union: // struct_or_union
+        value.YY_MOVE_OR_COPY< StructOrUnion > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_type_name: // type_name
@@ -413,6 +421,10 @@ namespace  WadeSpace  {
         value.YY_MOVE_OR_COPY< std::vector<Expression> > (YY_MOVE (that.value));
         break;
 
+      case symbol_kind::S_struct_declaration_list: // struct_declaration_list
+        value.YY_MOVE_OR_COPY< std::vector<StructDeclaration> > (YY_MOVE (that.value));
+        break;
+
       case symbol_kind::S_struct_declarator_list: // struct_declarator_list
         value.YY_MOVE_OR_COPY< std::vector<StructDeclarator> > (YY_MOVE (that.value));
         break;
@@ -513,8 +525,16 @@ namespace  WadeSpace  {
         value.move< StorageClassSpecifier > (YY_MOVE (that.value));
         break;
 
+      case symbol_kind::S_struct_declaration: // struct_declaration
+        value.move< StructDeclaration > (YY_MOVE (that.value));
+        break;
+
       case symbol_kind::S_struct_declarator: // struct_declarator
         value.move< StructDeclarator > (YY_MOVE (that.value));
+        break;
+
+      case symbol_kind::S_struct_or_union: // struct_or_union
+        value.move< StructOrUnion > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_type_name: // type_name
@@ -633,6 +653,10 @@ namespace  WadeSpace  {
         value.move< std::vector<Expression> > (YY_MOVE (that.value));
         break;
 
+      case symbol_kind::S_struct_declaration_list: // struct_declaration_list
+        value.move< std::vector<StructDeclaration> > (YY_MOVE (that.value));
+        break;
+
       case symbol_kind::S_struct_declarator_list: // struct_declarator_list
         value.move< std::vector<StructDeclarator> > (YY_MOVE (that.value));
         break;
@@ -733,8 +757,16 @@ namespace  WadeSpace  {
         value.copy< StorageClassSpecifier > (that.value);
         break;
 
+      case symbol_kind::S_struct_declaration: // struct_declaration
+        value.copy< StructDeclaration > (that.value);
+        break;
+
       case symbol_kind::S_struct_declarator: // struct_declarator
         value.copy< StructDeclarator > (that.value);
+        break;
+
+      case symbol_kind::S_struct_or_union: // struct_or_union
+        value.copy< StructOrUnion > (that.value);
         break;
 
       case symbol_kind::S_type_name: // type_name
@@ -853,6 +885,10 @@ namespace  WadeSpace  {
         value.copy< std::vector<Expression> > (that.value);
         break;
 
+      case symbol_kind::S_struct_declaration_list: // struct_declaration_list
+        value.copy< std::vector<StructDeclaration> > (that.value);
+        break;
+
       case symbol_kind::S_struct_declarator_list: // struct_declarator_list
         value.copy< std::vector<StructDeclarator> > (that.value);
         break;
@@ -952,8 +988,16 @@ namespace  WadeSpace  {
         value.move< StorageClassSpecifier > (that.value);
         break;
 
+      case symbol_kind::S_struct_declaration: // struct_declaration
+        value.move< StructDeclaration > (that.value);
+        break;
+
       case symbol_kind::S_struct_declarator: // struct_declarator
         value.move< StructDeclarator > (that.value);
+        break;
+
+      case symbol_kind::S_struct_or_union: // struct_or_union
+        value.move< StructOrUnion > (that.value);
         break;
 
       case symbol_kind::S_type_name: // type_name
@@ -1070,6 +1114,10 @@ namespace  WadeSpace  {
 
       case symbol_kind::S_argument_expression_list: // argument_expression_list
         value.move< std::vector<Expression> > (that.value);
+        break;
+
+      case symbol_kind::S_struct_declaration_list: // struct_declaration_list
+        value.move< std::vector<StructDeclaration> > (that.value);
         break;
 
       case symbol_kind::S_struct_declarator_list: // struct_declarator_list
@@ -1416,8 +1464,16 @@ namespace  WadeSpace  {
         yylhs.value.emplace< StorageClassSpecifier > ();
         break;
 
+      case symbol_kind::S_struct_declaration: // struct_declaration
+        yylhs.value.emplace< StructDeclaration > ();
+        break;
+
       case symbol_kind::S_struct_declarator: // struct_declarator
         yylhs.value.emplace< StructDeclarator > ();
+        break;
+
+      case symbol_kind::S_struct_or_union: // struct_or_union
+        yylhs.value.emplace< StructOrUnion > ();
         break;
 
       case symbol_kind::S_type_name: // type_name
@@ -1536,6 +1592,10 @@ namespace  WadeSpace  {
         yylhs.value.emplace< std::vector<Expression> > ();
         break;
 
+      case symbol_kind::S_struct_declaration_list: // struct_declaration_list
+        yylhs.value.emplace< std::vector<StructDeclaration> > ();
+        break;
+
       case symbol_kind::S_struct_declarator_list: // struct_declarator_list
         yylhs.value.emplace< std::vector<StructDeclarator> > ();
         break;
@@ -1573,126 +1633,126 @@ namespace  WadeSpace  {
           switch (yyn)
             {
   case 2: // primary_expression: "identifier"
-#line 218 "parser.y"
+#line 223 "parser.y"
                  { yylhs.value.as< Expression > () = Expression(yystack_[0].value.as < std::string > ()); cout << "IDENTIFIER REDUCE to primary_expression" << endl; }
-#line 1579 "parser.cpp"
+#line 1639 "parser.cpp"
     break;
 
   case 3: // primary_expression: constant
-#line 219 "parser.y"
+#line 224 "parser.y"
                { yylhs.value.as< Expression > () = Expression(&yystack_[0].value.as < Constant > ()); cout << "constant REDUCE to primary_expression" << endl; }
-#line 1585 "parser.cpp"
+#line 1645 "parser.cpp"
     break;
 
   case 4: // primary_expression: "(" expression ")"
-#line 220 "parser.y"
+#line 225 "parser.y"
                                 { yylhs.value.as< Expression > () = yystack_[1].value.as < Expression > (); cout << "(expression) REDUCE to primary_expression" << endl; }
-#line 1591 "parser.cpp"
+#line 1651 "parser.cpp"
     break;
 
   case 5: // constant: "f_const"
-#line 224 "parser.y"
+#line 229 "parser.y"
               {
                  long double &id = yystack_[0].value.as < long double > ();
                  cout << "F_CONST REDUCE to constant " << id << endl;
                  yylhs.value.as< Constant > () = Constant(id);
               }
-#line 1601 "parser.cpp"
+#line 1661 "parser.cpp"
     break;
 
   case 6: // constant: "i_const"
-#line 229 "parser.y"
+#line 234 "parser.y"
               {
                  std::uint64_t &id = yystack_[0].value.as < uint64_t > ();
                  cout << "I_CONST REDUCE to constant " << id << endl;
                  yylhs.value.as< Constant > () = Constant(id);
               }
-#line 1611 "parser.cpp"
+#line 1671 "parser.cpp"
     break;
 
   case 7: // constant: "sting_literal"
-#line 234 "parser.y"
+#line 239 "parser.y"
                       {
                  std::string &id = yystack_[0].value.as < std::string > ();
                  cout << "STRING_LITERAL REDUCE to constant  " << id << endl;
                  yylhs.value.as< Constant > () = Constant(id);
               }
-#line 1621 "parser.cpp"
-    break;
-
-  case 8: // postfix_expression: primary_expression
-#line 241 "parser.y"
-                                                                   { yylhs.value.as< Expression > () = yystack_[0].value.as < Expression > (); cout << "primary_expression REDUCE to postfix_expression" << endl; }
-#line 1627 "parser.cpp"
-    break;
-
-  case 9: // postfix_expression: postfix_expression "[" expression "]"
-#line 242 "parser.y"
-                                                                   { cout << "postfix_expression OBRACE expression CBRACE REDUCE to postfix_expression" << endl; }
-#line 1633 "parser.cpp"
-    break;
-
-  case 10: // postfix_expression: postfix_expression "(" ")"
-#line 243 "parser.y"
-                                                                   { cout << "postfix_expression OPAREN CPAREN REDUCE to postfix_expression" << endl; }
-#line 1639 "parser.cpp"
-    break;
-
-  case 11: // postfix_expression: postfix_expression "(" argument_expression_list ")"
-#line 244 "parser.y"
-                                                                   { cout << "postfix_expression OPAREN argument_expression_list CPAREN REDUCE to postfix_expression" << endl; }
-#line 1645 "parser.cpp"
-    break;
-
-  case 12: // postfix_expression: postfix_expression "." "identifier"
-#line 245 "parser.y"
-                                                                   { cout << "postfix_expression PERIOD_OP IDENTIFIER REDUCE to postfix_expression" << endl; }
-#line 1651 "parser.cpp"
-    break;
-
-  case 13: // postfix_expression: postfix_expression "->" "identifier"
-#line 246 "parser.y"
-                                                                   { cout << "postfix_expression PTR_OP IDENTIFIER REDUCE to postfix_expression" << endl; }
-#line 1657 "parser.cpp"
-    break;
-
-  case 14: // postfix_expression: postfix_expression "++"
-#line 247 "parser.y"
-                                                                   { cout << "postfix_expression INC_OP REDUCE to postfix_expression" << endl; }
-#line 1663 "parser.cpp"
-    break;
-
-  case 15: // postfix_expression: postfix_expression "--"
-#line 248 "parser.y"
-                                                                   { cout << "postfix_expression DEC_OP REDUCE to postfix_expression" << endl; }
-#line 1669 "parser.cpp"
-    break;
-
-  case 16: // postfix_expression: "(" type_name ")" "{" initializer_list "}"
-#line 249 "parser.y"
-                                                                   { cout << "OPAREN type_name CPAREN_OP OCURLY_OP initializer_list CCURLY REDUCE to postfix_expression" << endl; }
-#line 1675 "parser.cpp"
-    break;
-
-  case 17: // postfix_expression: "(" type_name ")" "{" initializer_list "," "}"
-#line 250 "parser.y"
-                                                                   { cout << "OPAREN type_name CPAREN_OP OCURLY_OP initializer_list COMMA CCURLY REDUCE to postfix_expression" << endl; }
 #line 1681 "parser.cpp"
     break;
 
-  case 18: // argument_expression_list: assignment_expression
+  case 8: // postfix_expression: primary_expression
+#line 246 "parser.y"
+                                                                   { yylhs.value.as< Expression > () = yystack_[0].value.as < Expression > (); cout << "primary_expression REDUCE to postfix_expression" << endl; }
+#line 1687 "parser.cpp"
+    break;
+
+  case 9: // postfix_expression: postfix_expression "[" expression "]"
+#line 247 "parser.y"
+                                                                   { cout << "postfix_expression OBRACE expression CBRACE REDUCE to postfix_expression" << endl; }
+#line 1693 "parser.cpp"
+    break;
+
+  case 10: // postfix_expression: postfix_expression "(" ")"
+#line 248 "parser.y"
+                                                                   { cout << "postfix_expression OPAREN CPAREN REDUCE to postfix_expression" << endl; }
+#line 1699 "parser.cpp"
+    break;
+
+  case 11: // postfix_expression: postfix_expression "(" argument_expression_list ")"
+#line 249 "parser.y"
+                                                                   { cout << "postfix_expression OPAREN argument_expression_list CPAREN REDUCE to postfix_expression" << endl; }
+#line 1705 "parser.cpp"
+    break;
+
+  case 12: // postfix_expression: postfix_expression "." "identifier"
+#line 250 "parser.y"
+                                                                   { cout << "postfix_expression PERIOD_OP IDENTIFIER REDUCE to postfix_expression" << endl; }
+#line 1711 "parser.cpp"
+    break;
+
+  case 13: // postfix_expression: postfix_expression "->" "identifier"
+#line 251 "parser.y"
+                                                                   { cout << "postfix_expression PTR_OP IDENTIFIER REDUCE to postfix_expression" << endl; }
+#line 1717 "parser.cpp"
+    break;
+
+  case 14: // postfix_expression: postfix_expression "++"
+#line 252 "parser.y"
+                                                                   { cout << "postfix_expression INC_OP REDUCE to postfix_expression" << endl; }
+#line 1723 "parser.cpp"
+    break;
+
+  case 15: // postfix_expression: postfix_expression "--"
+#line 253 "parser.y"
+                                                                   { cout << "postfix_expression DEC_OP REDUCE to postfix_expression" << endl; }
+#line 1729 "parser.cpp"
+    break;
+
+  case 16: // postfix_expression: "(" type_name ")" "{" initializer_list "}"
 #line 254 "parser.y"
+                                                                   { cout << "OPAREN type_name CPAREN_OP OCURLY_OP initializer_list CCURLY REDUCE to postfix_expression" << endl; }
+#line 1735 "parser.cpp"
+    break;
+
+  case 17: // postfix_expression: "(" type_name ")" "{" initializer_list "," "}"
+#line 255 "parser.y"
+                                                                   { cout << "OPAREN type_name CPAREN_OP OCURLY_OP initializer_list COMMA CCURLY REDUCE to postfix_expression" << endl; }
+#line 1741 "parser.cpp"
+    break;
+
+  case 18: // argument_expression_list: assignment_expression
+#line 259 "parser.y"
                             {
                              Expression exp = yystack_[0].value.as < Expression > ();
                              yylhs.value.as < std::vector<Expression> > () = std::vector<Expression>();
                              yylhs.value.as < std::vector<Expression> > ().push_back(exp);
                              cout << "assignment_expression REDUCE argument_expression_list" << endl;
                             }
-#line 1692 "parser.cpp"
+#line 1752 "parser.cpp"
     break;
 
   case 19: // argument_expression_list: argument_expression_list "," assignment_expression
-#line 260 "parser.y"
+#line 265 "parser.y"
                                                            {
             Expression value1 = yystack_[0].value.as < Expression > ();
             std::vector<Expression> &value2 = yystack_[2].value.as < std::vector<Expression> > ();
@@ -1700,628 +1760,639 @@ namespace  WadeSpace  {
             yylhs.value.as < std::vector<Expression> > () = value2;
             cout << "argument_expression_list COMMA assignment_expression REDUCE argument_expression_list" << endl;
         }
-#line 1704 "parser.cpp"
-    break;
-
-  case 20: // unary_expression: postfix_expression
-#line 270 "parser.y"
-                         { yylhs.value.as< Expression > () = yystack_[0].value.as < Expression > (); cout << "postfix_expression REDUCE unary_expression" << endl;}
-#line 1710 "parser.cpp"
-    break;
-
-  case 21: // unary_expression: "++" unary_expression
-#line 271 "parser.y"
-                              { yylhs.value.as< Expression > () = Expression(yystack_[1].value.as < std::string > (),&yystack_[0].value.as < Expression > ()); cout << "INC_OP unary_expression REDUCE unary_expression" << endl;}
-#line 1716 "parser.cpp"
-    break;
-
-  case 22: // unary_expression: "--" unary_expression
-#line 272 "parser.y"
-                              { yylhs.value.as< Expression > () = Expression(yystack_[1].value.as < std::string > (),&yystack_[0].value.as < Expression > ()); cout << "DEC_OP unary_expression REDUCE unary_expression" << endl;}
-#line 1722 "parser.cpp"
-    break;
-
-  case 23: // unary_expression: unary_operator cast_expression
-#line 273 "parser.y"
-                                     { yylhs.value.as< Expression > () = Expression(yystack_[1].value.as < std::string > (),&yystack_[0].value.as < Expression > ()); cout << "unary_operator cast_expression REDUCE unary_expression" << endl;}
-#line 1728 "parser.cpp"
-    break;
-
-  case 24: // unary_expression: "sizeof" unary_expression
-#line 274 "parser.y"
-                              { yylhs.value.as< Expression > () = Expression(); cout << "SIZEOF unary_expression REDUCE unary_expression" << endl;}
-#line 1734 "parser.cpp"
-    break;
-
-  case 25: // unary_expression: "sizeof" "(" type_name ")"
-#line 275 "parser.y"
-                                     { yylhs.value.as< Expression > () = Expression(); cout << "SIZEOF OPAREN type_name CPAREN REDUCE unary_expression" << endl;}
-#line 1740 "parser.cpp"
-    break;
-
-  case 26: // unary_operator: "&"
-#line 279 "parser.y"
-                {yylhs.value.as< std::string > () = yystack_[0].value.as < std::string > (); cout << "BIT_AND REDUCE to unary_operator" << endl;}
-#line 1746 "parser.cpp"
-    break;
-
-  case 27: // unary_operator: "*"
-#line 280 "parser.y"
-                {yylhs.value.as< std::string > () = yystack_[0].value.as < std::string > (); cout << "TIMES_OP REDUCE to unary_operator" << endl;}
-#line 1752 "parser.cpp"
-    break;
-
-  case 28: // unary_operator: "+"
-#line 281 "parser.y"
-                {yylhs.value.as< std::string > () = yystack_[0].value.as < std::string > (); cout << "PLUS_OP REDUCE to unary_operator" << endl;}
-#line 1758 "parser.cpp"
-    break;
-
-  case 29: // unary_operator: "-"
-#line 282 "parser.y"
-                {yylhs.value.as< std::string > () = yystack_[0].value.as < std::string > (); cout << "MINUS_OP REDUCE to unary_operator" << endl;}
 #line 1764 "parser.cpp"
     break;
 
-  case 30: // unary_operator: "~"
-#line 283 "parser.y"
-                {yylhs.value.as< std::string > () = yystack_[0].value.as < std::string > (); cout << "TILDE REDUCE to unary_operator" << endl;}
+  case 20: // unary_expression: postfix_expression
+#line 275 "parser.y"
+                         { yylhs.value.as< Expression > () = yystack_[0].value.as < Expression > (); cout << "postfix_expression REDUCE unary_expression" << endl;}
 #line 1770 "parser.cpp"
     break;
 
-  case 31: // unary_operator: "!"
-#line 284 "parser.y"
-                {yylhs.value.as< std::string > () = yystack_[0].value.as < std::string > (); cout << "NOT_OP REDUCE to unary_operator" << endl;}
+  case 21: // unary_expression: "++" unary_expression
+#line 276 "parser.y"
+                              { yylhs.value.as< Expression > () = Expression(yystack_[1].value.as < std::string > (),&yystack_[0].value.as < Expression > ()); cout << "INC_OP unary_expression REDUCE unary_expression" << endl;}
 #line 1776 "parser.cpp"
     break;
 
-  case 32: // cast_expression: unary_expression
-#line 288 "parser.y"
-                        { yylhs.value.as< Expression > () = yystack_[0].value.as < Expression > ();  cout << "unary_expression REDUCE to cast_expression" << endl;}
+  case 22: // unary_expression: "--" unary_expression
+#line 277 "parser.y"
+                              { yylhs.value.as< Expression > () = Expression(yystack_[1].value.as < std::string > (),&yystack_[0].value.as < Expression > ()); cout << "DEC_OP unary_expression REDUCE unary_expression" << endl;}
 #line 1782 "parser.cpp"
     break;
 
-  case 33: // cast_expression: "(" type_name ")" cast_expression
-#line 289 "parser.y"
-                                               { yylhs.value.as< Expression > () = yystack_[0].value.as < Expression > ();  cout << "unary_expression REDUCE to cast_expression" << endl;}
+  case 23: // unary_expression: unary_operator cast_expression
+#line 278 "parser.y"
+                                     { yylhs.value.as< Expression > () = Expression(yystack_[1].value.as < std::string > (),&yystack_[0].value.as < Expression > ()); cout << "unary_operator cast_expression REDUCE unary_expression" << endl;}
 #line 1788 "parser.cpp"
     break;
 
-  case 34: // multiplicative_expression: cast_expression
-#line 293 "parser.y"
-                       { yylhs.value.as< Expression > () = yystack_[0].value.as < Expression > ();  cout << "cast_expression REDUCE to multiplicative_expression" << endl;}
+  case 24: // unary_expression: "sizeof" unary_expression
+#line 279 "parser.y"
+                              { yylhs.value.as< Expression > () = Expression(); cout << "SIZEOF unary_expression REDUCE unary_expression" << endl;}
 #line 1794 "parser.cpp"
     break;
 
-  case 35: // multiplicative_expression: multiplicative_expression "*" cast_expression
-#line 294 "parser.y"
-                                                         { cout << "multiplicative_expression TIMES_OP cast_expression REDUCE to multiplicative_expression" << endl;}
+  case 25: // unary_expression: "sizeof" "(" type_name ")"
+#line 280 "parser.y"
+                                     { yylhs.value.as< Expression > () = Expression(); cout << "SIZEOF OPAREN type_name CPAREN REDUCE unary_expression" << endl;}
 #line 1800 "parser.cpp"
     break;
 
-  case 36: // multiplicative_expression: multiplicative_expression "/" cast_expression
-#line 295 "parser.y"
-                                                      { cout << "multiplicative_expression DIV_OP cast_expression REDUCE to multiplicative_expression" << endl;}
+  case 26: // unary_operator: "&"
+#line 284 "parser.y"
+                {yylhs.value.as< std::string > () = yystack_[0].value.as < std::string > (); cout << "BIT_AND REDUCE to unary_operator" << endl;}
 #line 1806 "parser.cpp"
     break;
 
-  case 37: // multiplicative_expression: multiplicative_expression "%" cast_expression
-#line 296 "parser.y"
-                                                      { cout << "multiplicative_expression MOD_OP cast_expression REDUCE to multiplicative_expression" << endl;}
+  case 27: // unary_operator: "*"
+#line 285 "parser.y"
+                {yylhs.value.as< std::string > () = yystack_[0].value.as < std::string > (); cout << "TIMES_OP REDUCE to unary_operator" << endl;}
 #line 1812 "parser.cpp"
     break;
 
-  case 38: // additive_expression: multiplicative_expression
-#line 300 "parser.y"
-                                 { yylhs.value.as< Expression > () = yystack_[0].value.as < Expression > ();  cout << "multiplicative_expression REDUCE to additive_expression" << endl;}
+  case 28: // unary_operator: "+"
+#line 286 "parser.y"
+                {yylhs.value.as< std::string > () = yystack_[0].value.as < std::string > (); cout << "PLUS_OP REDUCE to unary_operator" << endl;}
 #line 1818 "parser.cpp"
     break;
 
-  case 39: // additive_expression: additive_expression "+" multiplicative_expression
-#line 301 "parser.y"
-                                                             { cout << "additive_expression REDUCE to multiplicative_expression" << endl;}
+  case 29: // unary_operator: "-"
+#line 287 "parser.y"
+                {yylhs.value.as< std::string > () = yystack_[0].value.as < std::string > (); cout << "MINUS_OP REDUCE to unary_operator" << endl;}
 #line 1824 "parser.cpp"
     break;
 
-  case 40: // additive_expression: additive_expression "-" multiplicative_expression
-#line 302 "parser.y"
-                                                              { cout << "additive_expression REDUCE to multiplicative_expression" << endl;}
+  case 30: // unary_operator: "~"
+#line 288 "parser.y"
+                {yylhs.value.as< std::string > () = yystack_[0].value.as < std::string > (); cout << "TILDE REDUCE to unary_operator" << endl;}
 #line 1830 "parser.cpp"
     break;
 
-  case 41: // shift_expression: additive_expression
-#line 306 "parser.y"
-                           { yylhs.value.as< Expression > () = yystack_[0].value.as < Expression > ();  cout << "additive_expression REDUCE to shift_expression" << endl;}
+  case 31: // unary_operator: "!"
+#line 289 "parser.y"
+                {yylhs.value.as< std::string > () = yystack_[0].value.as < std::string > (); cout << "NOT_OP REDUCE to unary_operator" << endl;}
 #line 1836 "parser.cpp"
     break;
 
-  case 42: // shift_expression: shift_expression "<<" additive_expression
-#line 307 "parser.y"
-                                                   { cout << "shift_expression LEFT_OP additive_expression REDUCE to shift_expression" << endl;}
+  case 32: // cast_expression: unary_expression
+#line 293 "parser.y"
+                        { yylhs.value.as< Expression > () = yystack_[0].value.as < Expression > ();  cout << "unary_expression REDUCE to cast_expression" << endl;}
 #line 1842 "parser.cpp"
     break;
 
-  case 43: // shift_expression: shift_expression ">>" additive_expression
-#line 308 "parser.y"
-                                                    { cout << "shift_expression RIGHT_OP additive_expression REDUCE to shift_expression" << endl;}
+  case 33: // cast_expression: "(" type_name ")" cast_expression
+#line 294 "parser.y"
+                                               { yylhs.value.as< Expression > () = yystack_[0].value.as < Expression > ();  cout << "unary_expression REDUCE to cast_expression" << endl;}
 #line 1848 "parser.cpp"
     break;
 
-  case 44: // relational_expression: shift_expression
-#line 312 "parser.y"
-                        { yylhs.value.as< Expression > () = yystack_[0].value.as < Expression > ();  cout << "shift_expression REDUCE to relational_expression" << endl;}
+  case 34: // multiplicative_expression: cast_expression
+#line 298 "parser.y"
+                       { yylhs.value.as< Expression > () = yystack_[0].value.as < Expression > ();  cout << "cast_expression REDUCE to multiplicative_expression" << endl;}
 #line 1854 "parser.cpp"
     break;
 
-  case 45: // relational_expression: relational_expression "<" shift_expression
-#line 313 "parser.y"
-                                                    { cout << "relational_expression LESS shift_expression REDUCE to shift_expression" << endl;}
+  case 35: // multiplicative_expression: multiplicative_expression "*" cast_expression
+#line 299 "parser.y"
+                                                         { cout << "multiplicative_expression TIMES_OP cast_expression REDUCE to multiplicative_expression" << endl;}
 #line 1860 "parser.cpp"
     break;
 
-  case 46: // relational_expression: relational_expression ">" shift_expression
-#line 314 "parser.y"
-                                                        { cout << "relational_expression GREATER shift_expression REDUCE to shift_expression" << endl;}
+  case 36: // multiplicative_expression: multiplicative_expression "/" cast_expression
+#line 300 "parser.y"
+                                                      { cout << "multiplicative_expression DIV_OP cast_expression REDUCE to multiplicative_expression" << endl;}
 #line 1866 "parser.cpp"
     break;
 
-  case 47: // relational_expression: relational_expression "<=" shift_expression
-#line 315 "parser.y"
-                                                          { cout << "relational_expression LESS_EQUAL shift_expression REDUCE to shift_expression" << endl;}
+  case 37: // multiplicative_expression: multiplicative_expression "%" cast_expression
+#line 301 "parser.y"
+                                                      { cout << "multiplicative_expression MOD_OP cast_expression REDUCE to multiplicative_expression" << endl;}
 #line 1872 "parser.cpp"
     break;
 
-  case 48: // relational_expression: relational_expression ">=" shift_expression
-#line 316 "parser.y"
-                                                             { cout << "relational_expression GREATER_EQUAL shift_expression REDUCE to shift_expression" << endl;}
+  case 38: // additive_expression: multiplicative_expression
+#line 305 "parser.y"
+                                 { yylhs.value.as< Expression > () = yystack_[0].value.as < Expression > ();  cout << "multiplicative_expression REDUCE to additive_expression" << endl;}
 #line 1878 "parser.cpp"
     break;
 
-  case 49: // equality_expression: relational_expression
-#line 320 "parser.y"
-                             { yylhs.value.as< Expression > () = yystack_[0].value.as < Expression > ();  cout << "relational_expression REDUCE to equality_expression" << endl;}
+  case 39: // additive_expression: additive_expression "+" multiplicative_expression
+#line 306 "parser.y"
+                                                             { cout << "additive_expression REDUCE to multiplicative_expression" << endl;}
 #line 1884 "parser.cpp"
     break;
 
-  case 50: // equality_expression: equality_expression "==" relational_expression
-#line 321 "parser.y"
-                                                             { cout << "equality_expression EQUAL_EQUAL relational_expression REDUCE to equality_expression" << endl;}
+  case 40: // additive_expression: additive_expression "-" multiplicative_expression
+#line 307 "parser.y"
+                                                              { cout << "additive_expression REDUCE to multiplicative_expression" << endl;}
 #line 1890 "parser.cpp"
     break;
 
-  case 51: // equality_expression: equality_expression "!=" relational_expression
-#line 322 "parser.y"
-                                                           { cout << "equality_expression NOT_EQUAL relational_expression REDUCE to equality_expression" << endl;}
+  case 41: // shift_expression: additive_expression
+#line 311 "parser.y"
+                           { yylhs.value.as< Expression > () = yystack_[0].value.as < Expression > ();  cout << "additive_expression REDUCE to shift_expression" << endl;}
 #line 1896 "parser.cpp"
     break;
 
-  case 52: // and_expression: equality_expression
-#line 326 "parser.y"
-                           { yylhs.value.as< Expression > () = yystack_[0].value.as < Expression > ();  cout << "equality_expression REDUCE to and_expression" << endl;}
+  case 42: // shift_expression: shift_expression "<<" additive_expression
+#line 312 "parser.y"
+                                                   { cout << "shift_expression LEFT_OP additive_expression REDUCE to shift_expression" << endl;}
 #line 1902 "parser.cpp"
     break;
 
-  case 53: // and_expression: and_expression "&" equality_expression
-#line 327 "parser.y"
-                                                  { cout << "and_expression BIT_AND equality_expression REDUCE to and_expression" << endl;}
+  case 43: // shift_expression: shift_expression ">>" additive_expression
+#line 313 "parser.y"
+                                                    { cout << "shift_expression RIGHT_OP additive_expression REDUCE to shift_expression" << endl;}
 #line 1908 "parser.cpp"
     break;
 
-  case 54: // exclusive_or_expression: and_expression
-#line 331 "parser.y"
-                      { yylhs.value.as< Expression > () = yystack_[0].value.as < Expression > ();  cout << "and_expression REDUCE to exclusive_or_expression" << endl;}
+  case 44: // relational_expression: shift_expression
+#line 317 "parser.y"
+                        { yylhs.value.as< Expression > () = yystack_[0].value.as < Expression > ();  cout << "shift_expression REDUCE to relational_expression" << endl;}
 #line 1914 "parser.cpp"
     break;
 
-  case 55: // exclusive_or_expression: exclusive_or_expression "^" and_expression
-#line 332 "parser.y"
-                                                     { cout << "exclusive_or_expression XOR_OP and_expression REDUCE to exclusive_or_expression" << endl;}
+  case 45: // relational_expression: relational_expression "<" shift_expression
+#line 318 "parser.y"
+                                                    { cout << "relational_expression LESS shift_expression REDUCE to shift_expression" << endl;}
 #line 1920 "parser.cpp"
     break;
 
-  case 56: // inclusive_or_expression: exclusive_or_expression
-#line 336 "parser.y"
-                               { yylhs.value.as< Expression > () = yystack_[0].value.as < Expression > ();  cout << "exclusive_or_expression REDUCE to inclusive_or_expression" << endl;}
+  case 46: // relational_expression: relational_expression ">" shift_expression
+#line 319 "parser.y"
+                                                        { cout << "relational_expression GREATER shift_expression REDUCE to shift_expression" << endl;}
 #line 1926 "parser.cpp"
     break;
 
-  case 57: // inclusive_or_expression: inclusive_or_expression "|" exclusive_or_expression
-#line 337 "parser.y"
-                                                             { cout << "inclusive_or_expression BIT_OR exclusive_or_expression REDUCE to inclusive_or_expression" << endl;}
+  case 47: // relational_expression: relational_expression "<=" shift_expression
+#line 320 "parser.y"
+                                                          { cout << "relational_expression LESS_EQUAL shift_expression REDUCE to shift_expression" << endl;}
 #line 1932 "parser.cpp"
     break;
 
-  case 58: // logical_and_expression: inclusive_or_expression
-#line 341 "parser.y"
-                               { yylhs.value.as< Expression > () = yystack_[0].value.as < Expression > ();  cout << "inclusive_or_expression REDUCE to logical_and_expression" << endl;}
+  case 48: // relational_expression: relational_expression ">=" shift_expression
+#line 321 "parser.y"
+                                                             { cout << "relational_expression GREATER_EQUAL shift_expression REDUCE to shift_expression" << endl;}
 #line 1938 "parser.cpp"
     break;
 
-  case 59: // logical_and_expression: logical_and_expression "&&" inclusive_or_expression
-#line 342 "parser.y"
-                                                             { cout << "inclusive_or_expression REDUCE to logical_and_expression" << endl;}
+  case 49: // equality_expression: relational_expression
+#line 325 "parser.y"
+                             { yylhs.value.as< Expression > () = yystack_[0].value.as < Expression > ();  cout << "relational_expression REDUCE to equality_expression" << endl;}
 #line 1944 "parser.cpp"
     break;
 
-  case 60: // logical_or_expression: logical_and_expression
-#line 346 "parser.y"
-                              { yylhs.value.as< Expression > () = yystack_[0].value.as < Expression > ();  cout << "inclusive_and_expression REDUCE to logical_or_expression" << endl;}
+  case 50: // equality_expression: equality_expression "==" relational_expression
+#line 326 "parser.y"
+                                                             { cout << "equality_expression EQUAL_EQUAL relational_expression REDUCE to equality_expression" << endl;}
 #line 1950 "parser.cpp"
     break;
 
-  case 61: // logical_or_expression: logical_or_expression "||" logical_and_expression
-#line 347 "parser.y"
-                                                          { cout << "logical_or_expression OR_OP logical_and_expression REDUCE to logical_or_expression" << endl;}
+  case 51: // equality_expression: equality_expression "!=" relational_expression
+#line 327 "parser.y"
+                                                           { cout << "equality_expression NOT_EQUAL relational_expression REDUCE to equality_expression" << endl;}
 #line 1956 "parser.cpp"
     break;
 
-  case 62: // conditional_expression: logical_or_expression
-#line 351 "parser.y"
-                             { yylhs.value.as< Expression > () = yystack_[0].value.as < Expression > ();  cout << "logical_or_expression REDUCE to conditional_expression" << endl;}
+  case 52: // and_expression: equality_expression
+#line 331 "parser.y"
+                           { yylhs.value.as< Expression > () = yystack_[0].value.as < Expression > ();  cout << "equality_expression REDUCE to and_expression" << endl;}
 #line 1962 "parser.cpp"
     break;
 
-  case 63: // conditional_expression: logical_or_expression "question" expression ":" conditional_expression
-#line 352 "parser.y"
-                                                                              { cout << "logical_or_expression QUESTION expression COLON conditional_expression REDUCE to conditional_expression" << endl;}
+  case 53: // and_expression: and_expression "&" equality_expression
+#line 332 "parser.y"
+                                                  { cout << "and_expression BIT_AND equality_expression REDUCE to and_expression" << endl;}
 #line 1968 "parser.cpp"
     break;
 
-  case 64: // assignment_expression: conditional_expression
-#line 356 "parser.y"
-                              { yylhs.value.as< Expression > () = yystack_[0].value.as < Expression > ();  cout << "conditional_expression REDUCE to assignment_expression" << endl;}
+  case 54: // exclusive_or_expression: and_expression
+#line 336 "parser.y"
+                      { yylhs.value.as< Expression > () = yystack_[0].value.as < Expression > ();  cout << "and_expression REDUCE to exclusive_or_expression" << endl;}
 #line 1974 "parser.cpp"
     break;
 
-  case 65: // assignment_expression: unary_expression assignment_operator assignment_expression
-#line 357 "parser.y"
-                                                                  { cout << "unary_expression assignment_operator assignment_expression REDUCE to assignment_expression" << endl;}
+  case 55: // exclusive_or_expression: exclusive_or_expression "^" and_expression
+#line 337 "parser.y"
+                                                     { cout << "exclusive_or_expression XOR_OP and_expression REDUCE to exclusive_or_expression" << endl;}
 #line 1980 "parser.cpp"
     break;
 
-  case 66: // assignment_operator: "="
-#line 361 "parser.y"
-                  { yylhs.value.as< AssignmentOperator > () = AssignmentOperator(yystack_[0].value.as < std::string > (),EQUAL_OP);  cout << "EQUAL_OP REDUCE to assignment_operator" << endl;}
+  case 56: // inclusive_or_expression: exclusive_or_expression
+#line 341 "parser.y"
+                               { yylhs.value.as< Expression > () = yystack_[0].value.as < Expression > ();  cout << "exclusive_or_expression REDUCE to inclusive_or_expression" << endl;}
 #line 1986 "parser.cpp"
     break;
 
-  case 67: // assignment_operator: "*="
-#line 362 "parser.y"
-                     { yylhs.value.as< AssignmentOperator > () = AssignmentOperator(yystack_[0].value.as < std::string > (),MUL_ASSIGN);  cout << "MUL_ASSIGN REDUCE to assignment_operator" << endl;}
+  case 57: // inclusive_or_expression: inclusive_or_expression "|" exclusive_or_expression
+#line 342 "parser.y"
+                                                             { cout << "inclusive_or_expression BIT_OR exclusive_or_expression REDUCE to inclusive_or_expression" << endl;}
 #line 1992 "parser.cpp"
     break;
 
-  case 68: // assignment_operator: "/="
-#line 363 "parser.y"
-                     { yylhs.value.as< AssignmentOperator > () = AssignmentOperator(yystack_[0].value.as < std::string > (),DIV_ASSIGN);  cout << "DIV_ASSIGN REDUCE to assignment_operator" << endl;}
+  case 58: // logical_and_expression: inclusive_or_expression
+#line 346 "parser.y"
+                               { yylhs.value.as< Expression > () = yystack_[0].value.as < Expression > ();  cout << "inclusive_or_expression REDUCE to logical_and_expression" << endl;}
 #line 1998 "parser.cpp"
     break;
 
-  case 69: // assignment_operator: "%="
-#line 364 "parser.y"
-                     { yylhs.value.as< AssignmentOperator > () = AssignmentOperator(yystack_[0].value.as < std::string > (),MOD_ASSIGN);  cout << "MOG_ASSIGN REDUCE to assignment_operator" << endl;}
+  case 59: // logical_and_expression: logical_and_expression "&&" inclusive_or_expression
+#line 347 "parser.y"
+                                                             { cout << "inclusive_or_expression REDUCE to logical_and_expression" << endl;}
 #line 2004 "parser.cpp"
     break;
 
-  case 70: // assignment_operator: "+="
-#line 365 "parser.y"
-                     { yylhs.value.as< AssignmentOperator > () = AssignmentOperator(yystack_[0].value.as < std::string > (),ADD_ASSIGN);  cout << "ADD_ASSIGN REDUCE to assignment_operator" << endl;}
+  case 60: // logical_or_expression: logical_and_expression
+#line 351 "parser.y"
+                              { yylhs.value.as< Expression > () = yystack_[0].value.as < Expression > ();  cout << "inclusive_and_expression REDUCE to logical_or_expression" << endl;}
 #line 2010 "parser.cpp"
     break;
 
-  case 71: // assignment_operator: "-="
-#line 366 "parser.y"
-                     { yylhs.value.as< AssignmentOperator > () = AssignmentOperator(yystack_[0].value.as < std::string > (),SUB_ASSIGN);  cout << "SUB_ASSIGN REDUCE to assignment_operator" << endl;}
+  case 61: // logical_or_expression: logical_or_expression "||" logical_and_expression
+#line 352 "parser.y"
+                                                          { cout << "logical_or_expression OR_OP logical_and_expression REDUCE to logical_or_expression" << endl;}
 #line 2016 "parser.cpp"
     break;
 
-  case 72: // assignment_operator: "<<="
-#line 367 "parser.y"
-                     { yylhs.value.as< AssignmentOperator > () = AssignmentOperator(yystack_[0].value.as < std::string > (),LEFT_ASSIGN);  cout << "LEFT_ASSIGN REDUCE to assignment_operator" << endl;}
+  case 62: // conditional_expression: logical_or_expression
+#line 356 "parser.y"
+                             { yylhs.value.as< Expression > () = yystack_[0].value.as < Expression > ();  cout << "logical_or_expression REDUCE to conditional_expression" << endl;}
 #line 2022 "parser.cpp"
     break;
 
-  case 73: // assignment_operator: ">>="
-#line 368 "parser.y"
-                     { yylhs.value.as< AssignmentOperator > () = AssignmentOperator(yystack_[0].value.as < std::string > (),RIGHT_ASSIGN);  cout << "RIGHT_ASSIGN REDUCE to assignment_operator" << endl;}
+  case 63: // conditional_expression: logical_or_expression "question" expression ":" conditional_expression
+#line 357 "parser.y"
+                                                                              { cout << "logical_or_expression QUESTION expression COLON conditional_expression REDUCE to conditional_expression" << endl;}
 #line 2028 "parser.cpp"
     break;
 
-  case 74: // assignment_operator: "&="
-#line 369 "parser.y"
-                     { yylhs.value.as< AssignmentOperator > () = AssignmentOperator(yystack_[0].value.as < std::string > (),AND_ASSIGN);  cout << "AND_ASSIGN REDUCE to assignment_operator" << endl;}
+  case 64: // assignment_expression: conditional_expression
+#line 361 "parser.y"
+                              { yylhs.value.as< Expression > () = yystack_[0].value.as < Expression > ();  cout << "conditional_expression REDUCE to assignment_expression" << endl;}
 #line 2034 "parser.cpp"
     break;
 
-  case 75: // assignment_operator: "^="
-#line 370 "parser.y"
-                     { yylhs.value.as< AssignmentOperator > () = AssignmentOperator(yystack_[0].value.as < std::string > (),XOR_ASSIGN);  cout << "XOR_ASSIGN REDUCE to assignment_operator" << endl;}
+  case 65: // assignment_expression: unary_expression assignment_operator assignment_expression
+#line 362 "parser.y"
+                                                                  { cout << "unary_expression assignment_operator assignment_expression REDUCE to assignment_expression" << endl;}
 #line 2040 "parser.cpp"
     break;
 
-  case 76: // assignment_operator: "|="
-#line 371 "parser.y"
-                     { yylhs.value.as< AssignmentOperator > () = AssignmentOperator(yystack_[0].value.as < std::string > (),OR_ASSIGN);  cout << "OR_ASSIGN REDUCE to assignment_operator" << endl;}
+  case 66: // assignment_operator: "="
+#line 366 "parser.y"
+                     { yylhs.value.as< AssignmentOperator > () = AssignmentOperator(yystack_[0].value.as < std::string > (),EQUAL_OP);  cout << "EQUAL_OP REDUCE to assignment_operator" << endl;}
 #line 2046 "parser.cpp"
     break;
 
-  case 77: // expression: assignment_expression
-#line 375 "parser.y"
-                             { yylhs.value.as< Expression > () = yystack_[0].value.as < Expression > ();  cout << "asignment_expression REDUCE to expression" << endl;}
+  case 67: // assignment_operator: "*="
+#line 367 "parser.y"
+                     { yylhs.value.as< AssignmentOperator > () = AssignmentOperator(yystack_[0].value.as < std::string > (),MUL_ASSIGN);  cout << "MUL_ASSIGN REDUCE to assignment_operator" << endl;}
 #line 2052 "parser.cpp"
     break;
 
-  case 78: // expression: expression "," assignment_expression
-#line 376 "parser.y"
-                                              { cout << "expression COMMA assignment_expression COMMA  REDUCE to expression" << endl;}
+  case 68: // assignment_operator: "/="
+#line 368 "parser.y"
+                     { yylhs.value.as< AssignmentOperator > () = AssignmentOperator(yystack_[0].value.as < std::string > (),DIV_ASSIGN);  cout << "DIV_ASSIGN REDUCE to assignment_operator" << endl;}
 #line 2058 "parser.cpp"
     break;
 
-  case 79: // constant_expression: conditional_expression
-#line 380 "parser.y"
-                              { yylhs.value.as< Expression > () = yystack_[0].value.as < Expression > ();  cout << "conditional_expression REDUCE to constant_expression" << endl;}
+  case 69: // assignment_operator: "%="
+#line 369 "parser.y"
+                     { yylhs.value.as< AssignmentOperator > () = AssignmentOperator(yystack_[0].value.as < std::string > (),MOD_ASSIGN);  cout << "MOG_ASSIGN REDUCE to assignment_operator" << endl;}
 #line 2064 "parser.cpp"
     break;
 
-  case 80: // declaration: declaration_specifiers ";"
-#line 384 "parser.y"
-                                        { cout << "declaration_specifiers SEMICOLON REDUCE to declaration" << endl;}
+  case 70: // assignment_operator: "+="
+#line 370 "parser.y"
+                     { yylhs.value.as< AssignmentOperator > () = AssignmentOperator(yystack_[0].value.as < std::string > (),ADD_ASSIGN);  cout << "ADD_ASSIGN REDUCE to assignment_operator" << endl;}
 #line 2070 "parser.cpp"
     break;
 
-  case 81: // declaration: declaration_specifiers init_declarator_list ";"
-#line 385 "parser.y"
-                                                             { cout << "declaration_specifiers init_declarator_list SEMICOLON REDUCE to declaration" << endl;}
+  case 71: // assignment_operator: "-="
+#line 371 "parser.y"
+                     { yylhs.value.as< AssignmentOperator > () = AssignmentOperator(yystack_[0].value.as < std::string > (),SUB_ASSIGN);  cout << "SUB_ASSIGN REDUCE to assignment_operator" << endl;}
 #line 2076 "parser.cpp"
     break;
 
-  case 82: // declaration_specifiers: storage_class_specifier
-#line 389 "parser.y"
-                                                      { yylhs.value.as< DeclarationSpecifiers > () = DeclarationSpecifiers(yystack_[0].value.as < StorageClassSpecifier > ()); cout << "storage_class_specifier REDUCE to declaration_specifiers" << endl;}
+  case 72: // assignment_operator: "<<="
+#line 372 "parser.y"
+                     { yylhs.value.as< AssignmentOperator > () = AssignmentOperator(yystack_[0].value.as < std::string > (),LEFT_ASSIGN);  cout << "LEFT_ASSIGN REDUCE to assignment_operator" << endl;}
 #line 2082 "parser.cpp"
     break;
 
-  case 83: // declaration_specifiers: storage_class_specifier declaration_specifiers
-#line 390 "parser.y"
-                                                      { yylhs.value.as< DeclarationSpecifiers > () = DeclarationSpecifiers(yystack_[1].value.as < StorageClassSpecifier > (),yystack_[0].value.as < DeclarationSpecifiers > ()); cout << "storage_class_specifier declaration_specifiers REDUCE to declaration_specifiers" << endl;}
+  case 73: // assignment_operator: ">>="
+#line 373 "parser.y"
+                     { yylhs.value.as< AssignmentOperator > () = AssignmentOperator(yystack_[0].value.as < std::string > (),RIGHT_ASSIGN);  cout << "RIGHT_ASSIGN REDUCE to assignment_operator" << endl;}
 #line 2088 "parser.cpp"
     break;
 
-  case 84: // declaration_specifiers: type_specifier
-#line 391 "parser.y"
-                                                      { yylhs.value.as< DeclarationSpecifiers > () = DeclarationSpecifiers(yystack_[0].value.as < TypeSpecifier > ()); cout << "type_specifier REDUCE to declaration_specifiers" << endl;}
+  case 74: // assignment_operator: "&="
+#line 374 "parser.y"
+                     { yylhs.value.as< AssignmentOperator > () = AssignmentOperator(yystack_[0].value.as < std::string > (),AND_ASSIGN);  cout << "AND_ASSIGN REDUCE to assignment_operator" << endl;}
 #line 2094 "parser.cpp"
     break;
 
-  case 85: // declaration_specifiers: type_specifier declaration_specifiers
-#line 392 "parser.y"
-                                                      { yylhs.value.as< DeclarationSpecifiers > () = DeclarationSpecifiers(yystack_[1].value.as < TypeSpecifier > (),yystack_[0].value.as < DeclarationSpecifiers > ()); cout << "type_specifier declaration_specifiers REDUCE to declaration_specifiers" << endl;}
+  case 75: // assignment_operator: "^="
+#line 375 "parser.y"
+                     { yylhs.value.as< AssignmentOperator > () = AssignmentOperator(yystack_[0].value.as < std::string > (),XOR_ASSIGN);  cout << "XOR_ASSIGN REDUCE to assignment_operator" << endl;}
 #line 2100 "parser.cpp"
     break;
 
-  case 86: // declaration_specifiers: type_qualifier
-#line 393 "parser.y"
-                                                      { yylhs.value.as< DeclarationSpecifiers > () = DeclarationSpecifiers(yystack_[0].value.as < TypeQualifier > ()); cout << "type_qualifier REDUCE to declaration_specifiers" << endl;}
+  case 76: // assignment_operator: "|="
+#line 376 "parser.y"
+                     { yylhs.value.as< AssignmentOperator > () = AssignmentOperator(yystack_[0].value.as < std::string > (),OR_ASSIGN);  cout << "OR_ASSIGN REDUCE to assignment_operator" << endl;}
 #line 2106 "parser.cpp"
     break;
 
-  case 87: // declaration_specifiers: type_qualifier declaration_specifiers
-#line 394 "parser.y"
-                                                      { yylhs.value.as< DeclarationSpecifiers > () = DeclarationSpecifiers(yystack_[1].value.as < TypeQualifier > (),yystack_[0].value.as < DeclarationSpecifiers > ()); cout << "type_qualifier declaration_specifiers REDUCE to declaration_specifiers" << endl;}
+  case 77: // expression: assignment_expression
+#line 380 "parser.y"
+                             { yylhs.value.as< Expression > () = yystack_[0].value.as < Expression > ();  cout << "asignment_expression REDUCE to expression" << endl;}
 #line 2112 "parser.cpp"
     break;
 
-  case 88: // init_declarator_list: init_declarator
-#line 398 "parser.y"
-                                                 { cout << "init_declarator REDUCE to init_declarator_list" << endl;}
+  case 78: // expression: expression "," assignment_expression
+#line 381 "parser.y"
+                                              { cout << "expression COMMA assignment_expression COMMA  REDUCE to expression" << endl;}
 #line 2118 "parser.cpp"
     break;
 
-  case 89: // init_declarator_list: init_declarator_list "," init_declarator
-#line 399 "parser.y"
-                                                 { cout << "init_declarator_list COMMA init_declarator REDUCE to init_declarator_list" << endl;}
+  case 79: // constant_expression: conditional_expression
+#line 385 "parser.y"
+                              { yylhs.value.as< Expression > () = yystack_[0].value.as < Expression > ();  cout << "conditional_expression REDUCE to constant_expression" << endl;}
 #line 2124 "parser.cpp"
     break;
 
-  case 90: // init_declarator: declarator
-#line 403 "parser.y"
-                                       { cout << "declarator REDUCE to init_declarator" << endl;}
+  case 80: // declaration: declaration_specifiers ";"
+#line 389 "parser.y"
+                                        { cout << "declaration_specifiers SEMICOLON REDUCE to declaration" << endl;}
 #line 2130 "parser.cpp"
     break;
 
-  case 91: // init_declarator: declarator "=" initializer
-#line 404 "parser.y"
-                                    { cout << "declarator EQUAL initializer REDUCE to init_declarator" << endl;}
+  case 81: // declaration: declaration_specifiers init_declarator_list ";"
+#line 390 "parser.y"
+                                                             { cout << "declaration_specifiers init_declarator_list SEMICOLON REDUCE to declaration" << endl;}
 #line 2136 "parser.cpp"
     break;
 
-  case 92: // storage_class_specifier: "typedef"
-#line 408 "parser.y"
-                { yylhs.value.as< StorageClassSpecifier > () = StorageClassSpecifier(yystack_[0].value.as < std::string > (),TYPEDEF); cout << "TYPEDEF REDUCE to storage_class_specifier" << endl;}
+  case 82: // declaration_specifiers: storage_class_specifier
+#line 394 "parser.y"
+                                                      { yylhs.value.as< DeclarationSpecifiers > () = DeclarationSpecifiers(yystack_[0].value.as < StorageClassSpecifier > ()); cout << "storage_class_specifier REDUCE to declaration_specifiers" << endl;}
 #line 2142 "parser.cpp"
     break;
 
-  case 93: // storage_class_specifier: "extern"
-#line 409 "parser.y"
-                { yylhs.value.as< StorageClassSpecifier > () = StorageClassSpecifier(yystack_[0].value.as < std::string > (),EXTERN); cout << "EXTERN REDUCE to storage_class_specifier" << endl;}
+  case 83: // declaration_specifiers: storage_class_specifier declaration_specifiers
+#line 395 "parser.y"
+                                                      { yylhs.value.as< DeclarationSpecifiers > () = DeclarationSpecifiers(yystack_[1].value.as < StorageClassSpecifier > (),yystack_[0].value.as < DeclarationSpecifiers > ()); cout << "storage_class_specifier declaration_specifiers REDUCE to declaration_specifiers" << endl;}
 #line 2148 "parser.cpp"
     break;
 
-  case 94: // storage_class_specifier: "static"
-#line 410 "parser.y"
-                { yylhs.value.as< StorageClassSpecifier > () = StorageClassSpecifier(yystack_[0].value.as < std::string > (),STATIC); cout << "STATIC REDUCE to storage_class_specifier" << endl;}
+  case 84: // declaration_specifiers: type_specifier
+#line 396 "parser.y"
+                                                      { yylhs.value.as< DeclarationSpecifiers > () = DeclarationSpecifiers(yystack_[0].value.as < TypeSpecifier > ()); cout << "type_specifier REDUCE to declaration_specifiers" << endl;}
 #line 2154 "parser.cpp"
     break;
 
-  case 95: // storage_class_specifier: "auto"
-#line 411 "parser.y"
-                { yylhs.value.as< StorageClassSpecifier > () = StorageClassSpecifier(yystack_[0].value.as < std::string > (),AUTO); cout << "AUTO REDUCE to storage_class_specifier" << endl;}
+  case 85: // declaration_specifiers: type_specifier declaration_specifiers
+#line 397 "parser.y"
+                                                      { yylhs.value.as< DeclarationSpecifiers > () = DeclarationSpecifiers(yystack_[1].value.as < TypeSpecifier > (),yystack_[0].value.as < DeclarationSpecifiers > ()); cout << "type_specifier declaration_specifiers REDUCE to declaration_specifiers" << endl;}
 #line 2160 "parser.cpp"
     break;
 
-  case 96: // storage_class_specifier: "register"
-#line 412 "parser.y"
-                { yylhs.value.as< StorageClassSpecifier > () = StorageClassSpecifier(yystack_[0].value.as < std::string > (),REGISTER); cout << "REGISTER REDUCE to storage_class_specifier" << endl;}
+  case 86: // declaration_specifiers: type_qualifier
+#line 398 "parser.y"
+                                                      { yylhs.value.as< DeclarationSpecifiers > () = DeclarationSpecifiers(yystack_[0].value.as < TypeQualifier > ()); cout << "type_qualifier REDUCE to declaration_specifiers" << endl;}
 #line 2166 "parser.cpp"
     break;
 
-  case 97: // type_specifier: "void"
-#line 416 "parser.y"
-                                { yylhs.value.as< TypeSpecifier > () = TypeSpecifier(yystack_[0].value.as < std::string > (),VOID); cout << "VOID REDUCE to type_specifier" << endl;}
+  case 87: // declaration_specifiers: type_qualifier declaration_specifiers
+#line 399 "parser.y"
+                                                      { yylhs.value.as< DeclarationSpecifiers > () = DeclarationSpecifiers(yystack_[1].value.as < TypeQualifier > (),yystack_[0].value.as < DeclarationSpecifiers > ()); cout << "type_qualifier declaration_specifiers REDUCE to declaration_specifiers" << endl;}
 #line 2172 "parser.cpp"
     break;
 
-  case 98: // type_specifier: "char"
-#line 417 "parser.y"
-                                { yylhs.value.as< TypeSpecifier > () = TypeSpecifier(yystack_[0].value.as < std::string > (),CHAR); cout << "CHAR REDUCE to type_specifier" << endl;}
+  case 88: // init_declarator_list: init_declarator
+#line 403 "parser.y"
+                                                 { cout << "init_declarator REDUCE to init_declarator_list" << endl;}
 #line 2178 "parser.cpp"
     break;
 
-  case 99: // type_specifier: "short"
-#line 418 "parser.y"
-                                { yylhs.value.as< TypeSpecifier > () = TypeSpecifier(yystack_[0].value.as < std::string > (),SHORT); cout << "SHORT REDUCE to type_specifier" << endl;}
+  case 89: // init_declarator_list: init_declarator_list "," init_declarator
+#line 404 "parser.y"
+                                                 { cout << "init_declarator_list COMMA init_declarator REDUCE to init_declarator_list" << endl;}
 #line 2184 "parser.cpp"
     break;
 
-  case 100: // type_specifier: "int"
-#line 419 "parser.y"
-                                { yylhs.value.as< TypeSpecifier > () = TypeSpecifier(yystack_[0].value.as < std::string > (),INT); cout << "INT REDUCE to type_specifier" << endl;}
+  case 90: // init_declarator: declarator
+#line 408 "parser.y"
+                                       { cout << "declarator REDUCE to init_declarator" << endl;}
 #line 2190 "parser.cpp"
     break;
 
-  case 101: // type_specifier: "long"
-#line 420 "parser.y"
-                                { yylhs.value.as< TypeSpecifier > () = TypeSpecifier(yystack_[0].value.as < std::string > (),LONG); cout << "LONG REDUCE to type_specifier" << endl;}
+  case 91: // init_declarator: declarator "=" initializer
+#line 409 "parser.y"
+                                    { cout << "declarator EQUAL initializer REDUCE to init_declarator" << endl;}
 #line 2196 "parser.cpp"
     break;
 
-  case 102: // type_specifier: "float"
-#line 421 "parser.y"
-                                { yylhs.value.as< TypeSpecifier > () = TypeSpecifier(yystack_[0].value.as < std::string > (),FLOAT); cout << "FLOAT REDUCE to type_specifier" << endl;}
+  case 92: // storage_class_specifier: "typedef"
+#line 413 "parser.y"
+                { yylhs.value.as< StorageClassSpecifier > () = StorageClassSpecifier(yystack_[0].value.as < std::string > (),TYPEDEF); cout << "TYPEDEF REDUCE to storage_class_specifier" << endl;}
 #line 2202 "parser.cpp"
     break;
 
-  case 103: // type_specifier: "double"
-#line 422 "parser.y"
-                                { yylhs.value.as< TypeSpecifier > () = TypeSpecifier(yystack_[0].value.as < std::string > (),DOUBLE); cout << "DOUBLE REDUCE to type_specifier" << endl;}
+  case 93: // storage_class_specifier: "extern"
+#line 414 "parser.y"
+                { yylhs.value.as< StorageClassSpecifier > () = StorageClassSpecifier(yystack_[0].value.as < std::string > (),EXTERN); cout << "EXTERN REDUCE to storage_class_specifier" << endl;}
 #line 2208 "parser.cpp"
     break;
 
-  case 104: // type_specifier: "signed"
-#line 423 "parser.y"
-                                { yylhs.value.as< TypeSpecifier > () = TypeSpecifier(yystack_[0].value.as < std::string > (),SIGNED); cout << "SIGNED REDUCE to type_specifier" << endl;}
+  case 94: // storage_class_specifier: "static"
+#line 415 "parser.y"
+                { yylhs.value.as< StorageClassSpecifier > () = StorageClassSpecifier(yystack_[0].value.as < std::string > (),STATIC); cout << "STATIC REDUCE to storage_class_specifier" << endl;}
 #line 2214 "parser.cpp"
     break;
 
-  case 105: // type_specifier: "unsigned"
-#line 424 "parser.y"
-                                { yylhs.value.as< TypeSpecifier > () = TypeSpecifier(yystack_[0].value.as < std::string > (),UNSIGNED); cout << "UNIGNED REDUCE to type_specifier" << endl;}
+  case 95: // storage_class_specifier: "auto"
+#line 416 "parser.y"
+                { yylhs.value.as< StorageClassSpecifier > () = StorageClassSpecifier(yystack_[0].value.as < std::string > (),AUTO); cout << "AUTO REDUCE to storage_class_specifier" << endl;}
 #line 2220 "parser.cpp"
     break;
 
-  case 106: // type_specifier: struct_or_union_specifier
-#line 425 "parser.y"
-                                { yylhs.value.as< TypeSpecifier > () = TypeSpecifier("struct_or_union_specifier",struct_or_union_specifier); cout << "struct_or_union_specifier REDUCE to type_specifier" << endl;}
+  case 96: // storage_class_specifier: "register"
+#line 417 "parser.y"
+                { yylhs.value.as< StorageClassSpecifier > () = StorageClassSpecifier(yystack_[0].value.as < std::string > (),REGISTER); cout << "REGISTER REDUCE to storage_class_specifier" << endl;}
 #line 2226 "parser.cpp"
     break;
 
-  case 107: // type_specifier: enum_specifier
-#line 426 "parser.y"
-                                { yylhs.value.as< TypeSpecifier > () = TypeSpecifier("enum_specifier",&yystack_[0].value.as < EnumSpecifier > ()); cout << "enum_specifier REDUCE to type_specifier" << endl;}
+  case 97: // type_specifier: "void"
+#line 421 "parser.y"
+                                { yylhs.value.as< TypeSpecifier > () = TypeSpecifier(yystack_[0].value.as < std::string > (),VOID); cout << "VOID REDUCE to type_specifier" << endl;}
 #line 2232 "parser.cpp"
     break;
 
-  case 108: // type_specifier: "type name"
-#line 427 "parser.y"
-                                { yylhs.value.as< TypeSpecifier > () = TypeSpecifier(yystack_[0].value.as < std::string > (),TYPE_NAME); cout << "TYPE_NAME REDUCE to type_specifier" << endl;}
+  case 98: // type_specifier: "char"
+#line 422 "parser.y"
+                                { yylhs.value.as< TypeSpecifier > () = TypeSpecifier(yystack_[0].value.as < std::string > (),CHAR); cout << "CHAR REDUCE to type_specifier" << endl;}
 #line 2238 "parser.cpp"
     break;
 
-  case 109: // struct_or_union_specifier: struct_or_union "identifier" "{" struct_declaration_list "}"
-#line 431 "parser.y"
-                                                                         { cout << "struct_or_union IDENTIFIER OCURLY struct_declaration_list CCURLY REDUCE to struct_or_union_specifier" << endl;}
+  case 99: // type_specifier: "short"
+#line 423 "parser.y"
+                                { yylhs.value.as< TypeSpecifier > () = TypeSpecifier(yystack_[0].value.as < std::string > (),SHORT); cout << "SHORT REDUCE to type_specifier" << endl;}
 #line 2244 "parser.cpp"
     break;
 
-  case 110: // struct_or_union_specifier: struct_or_union "{" struct_declaration_list "}"
-#line 432 "parser.y"
-                                                                         { cout << "struct_or_union OCURLY struct_declaration_list CCURLY REDUCE to struct_or_union_specifier" << endl;}
+  case 100: // type_specifier: "int"
+#line 424 "parser.y"
+                                { yylhs.value.as< TypeSpecifier > () = TypeSpecifier(yystack_[0].value.as < std::string > (),INT); cout << "INT REDUCE to type_specifier" << endl;}
 #line 2250 "parser.cpp"
     break;
 
-  case 111: // struct_or_union_specifier: struct_or_union "identifier"
-#line 433 "parser.y"
-                                                                         { cout << "struct_or_union IDENTIFIER REDUCE to struct_or_union_specifier" << endl;}
+  case 101: // type_specifier: "long"
+#line 425 "parser.y"
+                                { yylhs.value.as< TypeSpecifier > () = TypeSpecifier(yystack_[0].value.as < std::string > (),LONG); cout << "LONG REDUCE to type_specifier" << endl;}
 #line 2256 "parser.cpp"
     break;
 
-  case 112: // struct_or_union: "struct"
-#line 437 "parser.y"
-               { cout << "STRUCT REDUCE to struct_or_union" << endl;}
+  case 102: // type_specifier: "float"
+#line 426 "parser.y"
+                                { yylhs.value.as< TypeSpecifier > () = TypeSpecifier(yystack_[0].value.as < std::string > (),FLOAT); cout << "FLOAT REDUCE to type_specifier" << endl;}
 #line 2262 "parser.cpp"
     break;
 
-  case 113: // struct_or_union: "union"
-#line 438 "parser.y"
-               { cout << "UNION REDUCE to struct_or_union" << endl;}
+  case 103: // type_specifier: "double"
+#line 427 "parser.y"
+                                { yylhs.value.as< TypeSpecifier > () = TypeSpecifier(yystack_[0].value.as < std::string > (),DOUBLE); cout << "DOUBLE REDUCE to type_specifier" << endl;}
 #line 2268 "parser.cpp"
     break;
 
-  case 114: // struct_declaration_list: struct_declaration
-#line 442 "parser.y"
-                                                 { cout << "struct_declaration REDUCE to struct_declaration_list" << endl;}
+  case 104: // type_specifier: "signed"
+#line 428 "parser.y"
+                                { yylhs.value.as< TypeSpecifier > () = TypeSpecifier(yystack_[0].value.as < std::string > (),SIGNED); cout << "SIGNED REDUCE to type_specifier" << endl;}
 #line 2274 "parser.cpp"
     break;
 
-  case 115: // struct_declaration_list: struct_declaration_list struct_declaration
-#line 443 "parser.y"
-                                                 { cout << "struct_declaration_list struct_declaration REDUCE to struct_declaration_list" << endl;}
+  case 105: // type_specifier: "unsigned"
+#line 429 "parser.y"
+                                { yylhs.value.as< TypeSpecifier > () = TypeSpecifier(yystack_[0].value.as < std::string > (),UNSIGNED); cout << "UNIGNED REDUCE to type_specifier" << endl;}
 #line 2280 "parser.cpp"
     break;
 
-  case 116: // struct_declaration: specifier_qualifier_list struct_declarator_list ";"
-#line 447 "parser.y"
-                                                                { cout << "specifier_qualifier_list struct_declarator_list SEMICOLON REDUCE to struct_declaration" << endl;}
+  case 106: // type_specifier: struct_or_union_specifier
+#line 430 "parser.y"
+                                { yylhs.value.as< TypeSpecifier > () = TypeSpecifier("struct_or_union_specifier",struct_or_union_specifier); cout << "struct_or_union_specifier REDUCE to type_specifier" << endl;}
 #line 2286 "parser.cpp"
     break;
 
-  case 117: // specifier_qualifier_list: type_specifier specifier_qualifier_list
-#line 451 "parser.y"
-                                              { yylhs.value.as< SpecifierQualifierList > () = SpecifierQualifierList(yystack_[0].value.as < SpecifierQualifierList > (),yystack_[1].value.as < TypeSpecifier > ()); cout << "type_specifier specifier_qualifier_list REDUCE to specifier_qualifier_list" << endl;}
+  case 107: // type_specifier: enum_specifier
+#line 431 "parser.y"
+                                { yylhs.value.as< TypeSpecifier > () = TypeSpecifier("enum_specifier",&yystack_[0].value.as < EnumSpecifier > ()); cout << "enum_specifier REDUCE to type_specifier" << endl;}
 #line 2292 "parser.cpp"
     break;
 
-  case 118: // specifier_qualifier_list: type_specifier
-#line 452 "parser.y"
-                                              { yylhs.value.as< SpecifierQualifierList > () = SpecifierQualifierList(yystack_[0].value.as < TypeSpecifier > ()); cout << "type_specifier REDUCE to specifier_qualifier_list" << endl;}
+  case 108: // type_specifier: "type name"
+#line 432 "parser.y"
+                                { yylhs.value.as< TypeSpecifier > () = TypeSpecifier(yystack_[0].value.as < std::string > (),TYPE_NAME); cout << "TYPE_NAME REDUCE to type_specifier" << endl;}
 #line 2298 "parser.cpp"
     break;
 
-  case 119: // specifier_qualifier_list: type_qualifier specifier_qualifier_list
-#line 453 "parser.y"
-                                              { yylhs.value.as< SpecifierQualifierList > () = SpecifierQualifierList(yystack_[0].value.as < SpecifierQualifierList > (),yystack_[1].value.as < TypeQualifier > ()); cout << "type_qualifier specifier_qualifier_list REDUCE to specifier_qualifier_list" << endl;}
+  case 109: // struct_or_union_specifier: struct_or_union "identifier" "{" struct_declaration_list "}"
+#line 436 "parser.y"
+                                                                         { cout << "struct_or_union IDENTIFIER OCURLY struct_declaration_list CCURLY REDUCE to struct_or_union_specifier" << endl;}
 #line 2304 "parser.cpp"
     break;
 
-  case 120: // specifier_qualifier_list: type_qualifier
-#line 454 "parser.y"
-                                              { yylhs.value.as< SpecifierQualifierList > () = SpecifierQualifierList(yystack_[0].value.as < TypeQualifier > ()); cout << "type_qualifier REDUCE to specifier_qualifier_list" << endl;}
+  case 110: // struct_or_union_specifier: struct_or_union "{" struct_declaration_list "}"
+#line 437 "parser.y"
+                                                                         { cout << "struct_or_union OCURLY struct_declaration_list CCURLY REDUCE to struct_or_union_specifier" << endl;}
 #line 2310 "parser.cpp"
     break;
 
+  case 111: // struct_or_union_specifier: struct_or_union "identifier"
+#line 438 "parser.y"
+                                                                         { cout << "struct_or_union IDENTIFIER REDUCE to struct_or_union_specifier" << endl;}
+#line 2316 "parser.cpp"
+    break;
+
+  case 112: // struct_or_union: "struct"
+#line 442 "parser.y"
+               { yylhs.value.as< StructOrUnion > () = StructOrUnion(STRUCT1); cout << "STRUCT REDUCE to struct_or_union" << endl;}
+#line 2322 "parser.cpp"
+    break;
+
+  case 113: // struct_or_union: "union"
+#line 443 "parser.y"
+               { yylhs.value.as< StructOrUnion > () = StructOrUnion(UNION1); cout << "UNION REDUCE to struct_or_union" << endl;}
+#line 2328 "parser.cpp"
+    break;
+
+  case 114: // struct_declaration_list: struct_declaration
+#line 447 "parser.y"
+                            {
+                             StructDeclaration exp = yystack_[0].value.as < StructDeclaration > ();
+                             yylhs.value.as < std::vector<StructDeclaration> > () = std::vector<StructDeclaration>();
+                             yylhs.value.as < std::vector<StructDeclaration> > ().push_back(exp);
+                             cout << "struct_declaration REDUCE to struct_declaration_list" << endl;
+                            }
+#line 2339 "parser.cpp"
+    break;
+
+  case 115: // struct_declaration_list: struct_declaration_list struct_declaration
+#line 453 "parser.y"
+                                                     {
+                                                       StructDeclaration value1 = yystack_[0].value.as < StructDeclaration > ();
+                                                       std::vector<StructDeclaration> &value2 = yystack_[1].value.as < std::vector<StructDeclaration> > ();
+                                                       value2.push_back(value1);
+                                                       yylhs.value.as < std::vector<StructDeclaration> > () = value2;
+                                                       cout << "struct_declaration_list struct_declaration REDUCE to struct_declaration_list" << endl;
+                                                     }
+#line 2351 "parser.cpp"
+    break;
+
+  case 116: // struct_declaration: specifier_qualifier_list struct_declarator_list ";"
+#line 463 "parser.y"
+                                                                { yylhs.value.as< StructDeclaration > () = StructDeclaration(yystack_[2].value.as < SpecifierQualifierList > (),yystack_[1].value.as < std::vector<StructDeclarator> > ()); cout << "specifier_qualifier_list struct_declarator_list SEMICOLON REDUCE to struct_declaration" << endl;}
+#line 2357 "parser.cpp"
+    break;
+
+  case 117: // specifier_qualifier_list: type_specifier specifier_qualifier_list
+#line 467 "parser.y"
+                                              { yylhs.value.as< SpecifierQualifierList > () = SpecifierQualifierList(yystack_[0].value.as < SpecifierQualifierList > (),yystack_[1].value.as < TypeSpecifier > ()); cout << "type_specifier specifier_qualifier_list REDUCE to specifier_qualifier_list" << endl;}
+#line 2363 "parser.cpp"
+    break;
+
+  case 118: // specifier_qualifier_list: type_specifier
+#line 468 "parser.y"
+                                              { yylhs.value.as< SpecifierQualifierList > () = SpecifierQualifierList(yystack_[0].value.as < TypeSpecifier > ()); cout << "type_specifier REDUCE to specifier_qualifier_list" << endl;}
+#line 2369 "parser.cpp"
+    break;
+
+  case 119: // specifier_qualifier_list: type_qualifier specifier_qualifier_list
+#line 469 "parser.y"
+                                              { yylhs.value.as< SpecifierQualifierList > () = SpecifierQualifierList(yystack_[0].value.as < SpecifierQualifierList > (),yystack_[1].value.as < TypeQualifier > ()); cout << "type_qualifier specifier_qualifier_list REDUCE to specifier_qualifier_list" << endl;}
+#line 2375 "parser.cpp"
+    break;
+
+  case 120: // specifier_qualifier_list: type_qualifier
+#line 470 "parser.y"
+                                              { yylhs.value.as< SpecifierQualifierList > () = SpecifierQualifierList(yystack_[0].value.as < TypeQualifier > ()); cout << "type_qualifier REDUCE to specifier_qualifier_list" << endl;}
+#line 2381 "parser.cpp"
+    break;
+
   case 121: // struct_declarator_list: struct_declarator
-#line 458 "parser.y"
+#line 474 "parser.y"
                                                      {
                                                        StructDeclarator exp = yystack_[0].value.as < StructDeclarator > ();
                                                        yylhs.value.as < std::vector<StructDeclarator> > () = std::vector<StructDeclarator>();
                                                        yylhs.value.as < std::vector<StructDeclarator> > ().push_back(exp);
                                                        cout << "struct_declarator REDUCE to struct_declarator_list" << endl;
                                                      }
-#line 2321 "parser.cpp"
+#line 2392 "parser.cpp"
     break;
 
   case 122: // struct_declarator_list: struct_declarator_list "," struct_declarator
-#line 464 "parser.y"
+#line 480 "parser.y"
                                                      {
                                                        StructDeclarator value1 = yystack_[0].value.as < StructDeclarator > ();
                                                        std::vector<StructDeclarator> &value2 = yystack_[2].value.as < std::vector<StructDeclarator> > ();
@@ -2329,58 +2400,58 @@ namespace  WadeSpace  {
                                                        yylhs.value.as < std::vector<StructDeclarator> > () = value2;
                                                        cout << "struct_declarator_list COMMA struct_declarator REDUCE to struct_declarator_list" << endl;
                                                      }
-#line 2333 "parser.cpp"
+#line 2404 "parser.cpp"
     break;
 
   case 123: // struct_declarator: declarator
-#line 474 "parser.y"
+#line 490 "parser.y"
                                            { yylhs.value.as< StructDeclarator > () = StructDeclarator(yystack_[0].value.as < Declarator > ()); cout << "declarator REDUCE to struct_declarator" << endl;}
-#line 2339 "parser.cpp"
+#line 2410 "parser.cpp"
     break;
 
   case 124: // struct_declarator: ":" constant_expression
-#line 475 "parser.y"
+#line 491 "parser.y"
                                            { yylhs.value.as< StructDeclarator > () = StructDeclarator(yystack_[0].value.as < Expression > ()); cout << "COLON constant_expression REDUCE to struct_declarator" << endl;}
-#line 2345 "parser.cpp"
+#line 2416 "parser.cpp"
     break;
 
   case 125: // struct_declarator: declarator ":" constant_expression
-#line 476 "parser.y"
+#line 492 "parser.y"
                                            { yylhs.value.as< StructDeclarator > () = StructDeclarator(yystack_[2].value.as < Declarator > (),yystack_[0].value.as < Expression > ()); cout << "declarator COLON constant_expression REDUCE to struct_declarator" << endl;}
-#line 2351 "parser.cpp"
+#line 2422 "parser.cpp"
     break;
 
   case 126: // enum_specifier: "enum" "{" enumerator_list "}"
-#line 480 "parser.y"
+#line 496 "parser.y"
                                                      { yylhs.value.as< EnumSpecifier > () = EnumSpecifier(yystack_[1].value.as < std::vector<Enumerator> > ()); cout << "ENUM OCURLY enumerator_list CCURLY REDUCE to enum_specifier" << endl;}
-#line 2357 "parser.cpp"
+#line 2428 "parser.cpp"
     break;
 
   case 127: // enum_specifier: "enum" "identifier" "{" enumerator_list "}"
-#line 481 "parser.y"
+#line 497 "parser.y"
                                                      { yylhs.value.as< EnumSpecifier > () = EnumSpecifier(yystack_[3].value.as < std::string > (),yystack_[1].value.as < std::vector<Enumerator> > ()); cout << "ENUM IDENTIFIER OCURLY enumerator_list CCURLY REDUCE to enum_specifier" << endl;}
-#line 2363 "parser.cpp"
+#line 2434 "parser.cpp"
     break;
 
   case 128: // enum_specifier: "enum" "identifier"
-#line 482 "parser.y"
+#line 498 "parser.y"
                                                      { yylhs.value.as< EnumSpecifier > () = EnumSpecifier(yystack_[0].value.as < std::string > ()); cout << "ENUM IDENTIFIER REDUCE to enum_specifier" << endl;}
-#line 2369 "parser.cpp"
+#line 2440 "parser.cpp"
     break;
 
   case 129: // enumerator_list: enumerator
-#line 486 "parser.y"
+#line 502 "parser.y"
                                         {
                                           Enumerator exp = yystack_[0].value.as < Enumerator > ();
                                           yylhs.value.as < std::vector<Enumerator> > () = std::vector<Enumerator>();
                                           yylhs.value.as < std::vector<Enumerator> > ().push_back(exp);
                                           cout << "enumerator REDUCE enumerator_list" << endl;
                                         }
-#line 2380 "parser.cpp"
+#line 2451 "parser.cpp"
     break;
 
   case 130: // enumerator_list: enumerator_list "," enumerator
-#line 492 "parser.y"
+#line 508 "parser.y"
                                         {
                                           Enumerator value1 = yystack_[0].value.as < Enumerator > ();
                                           std::vector<Enumerator> &value2 = yystack_[2].value.as < std::vector<Enumerator> > ();
@@ -2388,124 +2459,124 @@ namespace  WadeSpace  {
                                           yylhs.value.as < std::vector<Enumerator> > () = value2;
                                           cout << "enumerator_list COMMA enumerator REDUCE enumerator_list" << endl;
                                         }
-#line 2392 "parser.cpp"
+#line 2463 "parser.cpp"
     break;
 
   case 131: // enumerator: "identifier"
-#line 502 "parser.y"
+#line 518 "parser.y"
                                            { yylhs.value.as< Enumerator > () = Enumerator(yystack_[0].value.as < std::string > ()); cout << "IDENTIFIER REDUCE to ENUMERATOR" << endl;}
-#line 2398 "parser.cpp"
+#line 2469 "parser.cpp"
     break;
 
   case 132: // enumerator: "identifier" "=" constant_expression
-#line 503 "parser.y"
+#line 519 "parser.y"
                                            { yylhs.value.as< Enumerator > () = Enumerator(yystack_[2].value.as < std::string > (),yystack_[0].value.as < Expression > ()); cout << "IDENTIFIER EQUAL constant_expression REDUCE to ENUMERATOR" << endl;}
-#line 2404 "parser.cpp"
+#line 2475 "parser.cpp"
     break;
 
   case 133: // type_qualifier: "const"
-#line 507 "parser.y"
+#line 523 "parser.y"
                { yylhs.value.as< TypeQualifier > () = TypeQualifier(yystack_[0].value.as < std::string > (),CONST); cout << "CONST REDUCE to type_qualifier" << endl;}
-#line 2410 "parser.cpp"
+#line 2481 "parser.cpp"
     break;
 
   case 134: // type_qualifier: "volatile"
-#line 508 "parser.y"
+#line 524 "parser.y"
                { yylhs.value.as< TypeQualifier > () = TypeQualifier(yystack_[0].value.as < std::string > (),VOLATILE); cout << "VOLATILE REDUCE to type_qualifier" << endl;}
-#line 2416 "parser.cpp"
+#line 2487 "parser.cpp"
     break;
 
   case 135: // declarator: pointer direct_declarator
-#line 512 "parser.y"
+#line 528 "parser.y"
                                 { yylhs.value.as< Declarator > () = Declarator(yystack_[1].value.as < Pointer > (),yystack_[0].value.as < DirectDeclarator > ()); cout << "pointer direct_declarator REDUCE to declarator" << endl;}
-#line 2422 "parser.cpp"
+#line 2493 "parser.cpp"
     break;
 
   case 136: // declarator: direct_declarator
-#line 513 "parser.y"
+#line 529 "parser.y"
                                 { yylhs.value.as< Declarator > () = Declarator(yystack_[0].value.as < DirectDeclarator > ()); cout << "direct_declarator REDUCE to declarator" << endl;}
-#line 2428 "parser.cpp"
+#line 2499 "parser.cpp"
     break;
 
   case 137: // direct_declarator: "identifier"
-#line 517 "parser.y"
+#line 533 "parser.y"
                                                             { yylhs.value.as< DirectDeclarator > () = DirectDeclarator(yystack_[0].value.as < std::string > ()); cout << "IDENTIFIER REDUCE to direct_declarator" << endl;}
-#line 2434 "parser.cpp"
+#line 2505 "parser.cpp"
     break;
 
   case 138: // direct_declarator: "(" declarator ")"
-#line 518 "parser.y"
+#line 534 "parser.y"
                                                             { yylhs.value.as< DirectDeclarator > () = DirectDeclarator(); cout << "OPAREN declarator CPAREN REDUCE to direct_declarator" << endl;}
-#line 2440 "parser.cpp"
+#line 2511 "parser.cpp"
     break;
 
   case 139: // direct_declarator: direct_declarator "[" constant_expression "]"
-#line 519 "parser.y"
+#line 535 "parser.y"
                                                             { yylhs.value.as< DirectDeclarator > () = DirectDeclarator(); cout << "direct_declarator OBRACE constant_expression CBRACE REDUCE to direct_declarator" << endl;}
-#line 2446 "parser.cpp"
+#line 2517 "parser.cpp"
     break;
 
   case 140: // direct_declarator: direct_declarator "[" "]"
-#line 520 "parser.y"
+#line 536 "parser.y"
                                                             { yylhs.value.as< DirectDeclarator > () = DirectDeclarator(); cout << "direct_declarator OBRACE CBRACE REDUCE to direct_declarator" << endl;}
-#line 2452 "parser.cpp"
+#line 2523 "parser.cpp"
     break;
 
   case 141: // direct_declarator: direct_declarator "(" parameter_type_list ")"
-#line 521 "parser.y"
+#line 537 "parser.y"
                                                             { yylhs.value.as< DirectDeclarator > () = DirectDeclarator(); cout << "direct_declarator OPAREN parameter_type_list CPAREN to direct_declarator" << endl;}
-#line 2458 "parser.cpp"
+#line 2529 "parser.cpp"
     break;
 
   case 142: // direct_declarator: direct_declarator "(" identifier_list ")"
-#line 522 "parser.y"
+#line 538 "parser.y"
                                                             { yylhs.value.as< DirectDeclarator > () = DirectDeclarator(); cout << "direct_declarator OPAREN identifier_list CPAREN REDUCE to direct_declarator" << endl;}
-#line 2464 "parser.cpp"
+#line 2535 "parser.cpp"
     break;
 
   case 143: // direct_declarator: direct_declarator "(" ")"
-#line 523 "parser.y"
+#line 539 "parser.y"
                                                             { yylhs.value.as< DirectDeclarator > () = DirectDeclarator(); cout << "direct_declarator OPAREN CPAREN REDUCE to direct_declarator" << endl;}
-#line 2470 "parser.cpp"
+#line 2541 "parser.cpp"
     break;
 
   case 144: // pointer: "*"
-#line 527 "parser.y"
+#line 543 "parser.y"
                                             {yylhs.value.as< Pointer > () = Pointer(yystack_[0].value.as < std::string > ()); cout << "TIMES_OP REDUCE to POINTER" << endl;}
-#line 2476 "parser.cpp"
+#line 2547 "parser.cpp"
     break;
 
   case 145: // pointer: "*" type_qualifier_list
-#line 528 "parser.y"
+#line 544 "parser.y"
                                             {yylhs.value.as< Pointer > () = Pointer(yystack_[1].value.as < std::string > (),&yystack_[0].value.as < std::vector<TypeQualifier> > ()); cout << "TIMES_OP type_qualifier_list REDUCE to POINTER" << endl;}
-#line 2482 "parser.cpp"
+#line 2553 "parser.cpp"
     break;
 
   case 146: // pointer: "*" pointer
-#line 529 "parser.y"
+#line 545 "parser.y"
                                             {yylhs.value.as< Pointer > () = Pointer(yystack_[1].value.as < std::string > (),&yystack_[0].value.as < Pointer > ()); yylhs.value.as< Pointer > ().inc(); cout << "TIMES_OP pointer REDUCE to POINTER" << endl;}
-#line 2488 "parser.cpp"
+#line 2559 "parser.cpp"
     break;
 
   case 147: // pointer: "*" type_qualifier_list pointer
-#line 530 "parser.y"
+#line 546 "parser.y"
                                             {yylhs.value.as< Pointer > () = Pointer(yystack_[2].value.as < std::string > (),&yystack_[1].value.as < std::vector<TypeQualifier> > (),&yystack_[0].value.as < Pointer > ()); yylhs.value.as< Pointer > ().inc(); cout << "TIMES_OP type_qualifier_list pointer REDUCE to POINTER" << endl;}
-#line 2494 "parser.cpp"
+#line 2565 "parser.cpp"
     break;
 
   case 148: // type_qualifier_list: type_qualifier
-#line 534 "parser.y"
+#line 550 "parser.y"
                             {
                              TypeQualifier exp = yystack_[0].value.as < TypeQualifier > ();
                              yylhs.value.as < std::vector<TypeQualifier> > () = std::vector<TypeQualifier>();
                              yylhs.value.as < std::vector<TypeQualifier> > ().push_back(exp);
                              cout << "type_qualifier REDUCE type_qualifier_list" << endl;
                             }
-#line 2505 "parser.cpp"
+#line 2576 "parser.cpp"
     break;
 
   case 149: // type_qualifier_list: type_qualifier_list type_qualifier
-#line 540 "parser.y"
+#line 556 "parser.y"
                                          {
                                           TypeQualifier value1 = yystack_[0].value.as < TypeQualifier > ();
                                           std::vector<TypeQualifier> &value2 = yystack_[1].value.as < std::vector<TypeQualifier> > ();
@@ -2513,64 +2584,64 @@ namespace  WadeSpace  {
                                           yylhs.value.as < std::vector<TypeQualifier> > () = value2;
                                           cout << "type_qualifier_list type_qualifier REDUCE type_qualifier_list" << endl;
                                         }
-#line 2517 "parser.cpp"
+#line 2588 "parser.cpp"
     break;
 
   case 150: // parameter_type_list: parameter_list
-#line 551 "parser.y"
+#line 567 "parser.y"
                                       { cout << "parameter_list REDUCE to parameter_type_list" << endl; }
-#line 2523 "parser.cpp"
+#line 2594 "parser.cpp"
     break;
 
   case 151: // parameter_type_list: parameter_list "," "ellipsis"
-#line 552 "parser.y"
+#line 568 "parser.y"
                                       { cout << "parameter_list COMMA ELLIPSIS REDUCE to parameter_type_list" << endl; }
-#line 2529 "parser.cpp"
+#line 2600 "parser.cpp"
     break;
 
   case 152: // parameter_list: parameter_declaration
-#line 556 "parser.y"
+#line 572 "parser.y"
                                                   { cout << "parameter_declaration REDUCE to parameter_list" << endl; }
-#line 2535 "parser.cpp"
+#line 2606 "parser.cpp"
     break;
 
   case 153: // parameter_list: parameter_list "," parameter_declaration
-#line 557 "parser.y"
+#line 573 "parser.y"
                                                   { cout << "parameter_list COMMA parameter_declaration REDUCE to parameter_list" << endl; }
-#line 2541 "parser.cpp"
+#line 2612 "parser.cpp"
     break;
 
   case 154: // parameter_declaration: declaration_specifiers declarator
-#line 561 "parser.y"
+#line 577 "parser.y"
                                                   { cout << "declaration_specifiers declarator REDUCE to parameter_declaration" << endl; }
-#line 2547 "parser.cpp"
+#line 2618 "parser.cpp"
     break;
 
   case 155: // parameter_declaration: declaration_specifiers abstract_declarator
-#line 562 "parser.y"
+#line 578 "parser.y"
                                                   { cout << "declaration_specifiers abstract_declarator REDUCE to parameter_declaration" << endl; }
-#line 2553 "parser.cpp"
+#line 2624 "parser.cpp"
     break;
 
   case 156: // parameter_declaration: declaration_specifiers
-#line 563 "parser.y"
+#line 579 "parser.y"
                                                   { cout << "declaration_specifiers REDUCE to parameter_declaration" << endl; }
-#line 2559 "parser.cpp"
+#line 2630 "parser.cpp"
     break;
 
   case 157: // identifier_list: "identifier"
-#line 567 "parser.y"
+#line 583 "parser.y"
                    {
                              std::string exp = yystack_[0].value.as < std::string > ();
                              yylhs.value.as < std::vector<std::string> > () = std::vector<std::string>();
                              yylhs.value.as < std::vector<std::string> > ().push_back(exp);
                              cout << "specifier_qualifier_list REDUCE to identifier_list" << endl;
                             }
-#line 2570 "parser.cpp"
+#line 2641 "parser.cpp"
     break;
 
   case 158: // identifier_list: identifier_list "," "identifier"
-#line 573 "parser.y"
+#line 589 "parser.y"
                                        {
                                           std::string value1 = yystack_[0].value.as < std::string > ();
                                           std::vector<std::string> &value2 = yystack_[2].value.as < std::vector<std::string> > ();
@@ -2578,359 +2649,359 @@ namespace  WadeSpace  {
                                           yylhs.value.as < std::vector<std::string> > () = value2;
                                           cout << "identifier_list COMMA IDENTIFIER REDUCE to identifier_list" << endl; 
                                         }
-#line 2582 "parser.cpp"
+#line 2653 "parser.cpp"
     break;
 
   case 159: // type_name: specifier_qualifier_list
-#line 583 "parser.y"
+#line 599 "parser.y"
                                                    { yylhs.value.as< TypeName > () = TypeName(yystack_[0].value.as < SpecifierQualifierList > ()); cout << "specifier_qualifier_list REDUCE to type_name" << endl; }
-#line 2588 "parser.cpp"
+#line 2659 "parser.cpp"
     break;
 
   case 160: // type_name: specifier_qualifier_list abstract_declarator
-#line 584 "parser.y"
+#line 600 "parser.y"
                                                    { yylhs.value.as< TypeName > () = TypeName(yystack_[1].value.as < SpecifierQualifierList > (),yystack_[0].value.as < AbstractDeclarator > ()); cout << "specifier_qualifier_list abstract_declarator REDUCE to type_name" << endl; }
-#line 2594 "parser.cpp"
+#line 2665 "parser.cpp"
     break;
 
   case 161: // abstract_declarator: pointer
-#line 588 "parser.y"
+#line 604 "parser.y"
                                           { yylhs.value.as< AbstractDeclarator > () = AbstractDeclarator(yystack_[0].value.as < Pointer > ()); cout << "pointer REDUCE to abstract_declarator" << endl; }
-#line 2600 "parser.cpp"
+#line 2671 "parser.cpp"
     break;
 
   case 162: // abstract_declarator: direct_abstract_declarator
-#line 589 "parser.y"
+#line 605 "parser.y"
                                           { yylhs.value.as< AbstractDeclarator > () = AbstractDeclarator(yystack_[0].value.as < DirectAbstractDeclarator > ()); cout << "direct_abstract_declarator REDUCE to abstract_declarator" << endl; }
-#line 2606 "parser.cpp"
+#line 2677 "parser.cpp"
     break;
 
   case 163: // abstract_declarator: pointer direct_abstract_declarator
-#line 590 "parser.y"
+#line 606 "parser.y"
                                           { yylhs.value.as< AbstractDeclarator > () = AbstractDeclarator(yystack_[1].value.as < Pointer > (),yystack_[0].value.as < DirectAbstractDeclarator > ()); cout << "pointer direct_abstract_declarator REDUCE to abstract_declarator" << endl; }
-#line 2612 "parser.cpp"
+#line 2683 "parser.cpp"
     break;
 
   case 164: // direct_abstract_declarator: "(" abstract_declarator ")"
-#line 594 "parser.y"
+#line 610 "parser.y"
                                                                    { yylhs.value.as< DirectAbstractDeclarator > () = DirectAbstractDeclarator(yystack_[1].value.as < AbstractDeclarator > ()); cout << "OPAREN abstract_declarator CPAREN REDUCE to direct_abstract_declarator" << endl; }
-#line 2618 "parser.cpp"
+#line 2689 "parser.cpp"
     break;
 
   case 165: // direct_abstract_declarator: "[" "]"
-#line 595 "parser.y"
+#line 611 "parser.y"
                                                                    { yylhs.value.as< DirectAbstractDeclarator > () = DirectAbstractDeclarator(); cout << "OBRACE CBRACE REDUCE to direct_abstract_declarator" << endl; }
-#line 2624 "parser.cpp"
+#line 2695 "parser.cpp"
     break;
 
   case 166: // direct_abstract_declarator: "[" constant_expression "]"
-#line 596 "parser.y"
+#line 612 "parser.y"
                                                                    { yylhs.value.as< DirectAbstractDeclarator > () = DirectAbstractDeclarator(); cout << "OBRACE constant_expression CBRACE REDUCE to direct_abstract_declarator" << endl; }
-#line 2630 "parser.cpp"
+#line 2701 "parser.cpp"
     break;
 
   case 167: // direct_abstract_declarator: direct_abstract_declarator "[" "]"
-#line 597 "parser.y"
+#line 613 "parser.y"
                                                                    { yylhs.value.as< DirectAbstractDeclarator > () = DirectAbstractDeclarator(); cout << "direct_abstract_declarator OBRACE CBRACE REDUCE to direct_abstract_declarator" << endl; }
-#line 2636 "parser.cpp"
+#line 2707 "parser.cpp"
     break;
 
   case 168: // direct_abstract_declarator: direct_abstract_declarator "[" constant_expression "]"
-#line 598 "parser.y"
+#line 614 "parser.y"
                                                                    { yylhs.value.as< DirectAbstractDeclarator > () = DirectAbstractDeclarator(); cout << "direct_abstract_declarator OBRACE constant_expression CBRACE REDUCE to direct_abstract_declarator" << endl; }
-#line 2642 "parser.cpp"
+#line 2713 "parser.cpp"
     break;
 
   case 169: // direct_abstract_declarator: "(" ")"
-#line 599 "parser.y"
+#line 615 "parser.y"
                                                                    { yylhs.value.as< DirectAbstractDeclarator > () = DirectAbstractDeclarator(); cout << "OPAREN CPAREN REDUCE to direct_abstract_declarator" << endl; }
-#line 2648 "parser.cpp"
+#line 2719 "parser.cpp"
     break;
 
   case 170: // direct_abstract_declarator: "(" parameter_type_list ")"
-#line 600 "parser.y"
+#line 616 "parser.y"
                                                                    { yylhs.value.as< DirectAbstractDeclarator > () = DirectAbstractDeclarator(); cout << "OPAREN parameter_type_list CPAREN REDUCE to direct_abstract_declarator" << endl; }
-#line 2654 "parser.cpp"
+#line 2725 "parser.cpp"
     break;
 
   case 171: // direct_abstract_declarator: direct_abstract_declarator "(" ")"
-#line 601 "parser.y"
+#line 617 "parser.y"
                                                                    { yylhs.value.as< DirectAbstractDeclarator > () = DirectAbstractDeclarator(); cout << "direct_abstract_declarator OPAREN CPAREN REDUCE to direct_abstract_declarator" << endl; }
-#line 2660 "parser.cpp"
+#line 2731 "parser.cpp"
     break;
 
   case 172: // direct_abstract_declarator: direct_abstract_declarator "(" parameter_type_list ")"
-#line 602 "parser.y"
+#line 618 "parser.y"
                                                                    { yylhs.value.as< DirectAbstractDeclarator > () = DirectAbstractDeclarator(); cout << "direct_abstract_declarator OPAREN parameter_type_list CPAREN REDUCE to direct_abstract_declarator" << endl; }
-#line 2666 "parser.cpp"
+#line 2737 "parser.cpp"
     break;
 
   case 173: // initializer: assignment_expression
-#line 606 "parser.y"
+#line 622 "parser.y"
                                            { cout << "assignment_expression REDUCE to initializer" << endl; }
-#line 2672 "parser.cpp"
+#line 2743 "parser.cpp"
     break;
 
   case 174: // initializer: "{" initializer_list "}"
-#line 607 "parser.y"
+#line 623 "parser.y"
                                            { cout << "OCURLY initializer_list CCURLY REDUCE to initializer" << endl; }
-#line 2678 "parser.cpp"
+#line 2749 "parser.cpp"
     break;
 
   case 175: // initializer: "{" initializer_list "," "}"
-#line 608 "parser.y"
+#line 624 "parser.y"
                                            { cout << "OCURLY initializer_list COMMA CCURLY REDUCE to initializer" << endl; }
-#line 2684 "parser.cpp"
+#line 2755 "parser.cpp"
     break;
 
   case 176: // initializer_list: initializer
-#line 612 "parser.y"
+#line 628 "parser.y"
                                          { cout << "initializer REDUCE to initializer_list" << endl; }
-#line 2690 "parser.cpp"
+#line 2761 "parser.cpp"
     break;
 
   case 177: // initializer_list: initializer_list "," initializer
-#line 613 "parser.y"
+#line 629 "parser.y"
                                          { cout << "initializer_list COMMA initializer REDUCE to initializer_list" << endl; }
-#line 2696 "parser.cpp"
+#line 2767 "parser.cpp"
     break;
 
   case 178: // statement: labeled_statement
-#line 617 "parser.y"
+#line 633 "parser.y"
                            { cout << "labeled_statement REDUCE to statement" << endl; }
-#line 2702 "parser.cpp"
+#line 2773 "parser.cpp"
     break;
 
   case 179: // statement: compound_statement
-#line 618 "parser.y"
+#line 634 "parser.y"
                            { cout << "compound_statement REDUCE to statement" << endl; }
-#line 2708 "parser.cpp"
+#line 2779 "parser.cpp"
     break;
 
   case 180: // statement: expression_statement
-#line 619 "parser.y"
+#line 635 "parser.y"
                            { cout << "expression_statement REDUCE to statement" << endl; }
-#line 2714 "parser.cpp"
+#line 2785 "parser.cpp"
     break;
 
   case 181: // statement: selection_statement
-#line 620 "parser.y"
+#line 636 "parser.y"
                            { cout << "selection_statement REDUCE to statement" << endl; }
-#line 2720 "parser.cpp"
+#line 2791 "parser.cpp"
     break;
 
   case 182: // statement: iteration_statement
-#line 621 "parser.y"
+#line 637 "parser.y"
                            { cout << "iteration_statement REDUCE to statement" << endl; }
-#line 2726 "parser.cpp"
+#line 2797 "parser.cpp"
     break;
 
   case 183: // statement: jump_statement
-#line 622 "parser.y"
+#line 638 "parser.y"
                            { cout << "jump_statement REDUCE to statement" << endl; }
-#line 2732 "parser.cpp"
+#line 2803 "parser.cpp"
     break;
 
   case 184: // labeled_statement: "identifier" ":" statement
-#line 626 "parser.y"
+#line 642 "parser.y"
                                                { cout << "IDENTIFIER COLON statement REDUCE to label_statement" << endl; }
-#line 2738 "parser.cpp"
+#line 2809 "parser.cpp"
     break;
 
   case 185: // labeled_statement: "case" constant_expression ":" statement
-#line 627 "parser.y"
+#line 643 "parser.y"
                                                { cout << "CASE constant_expression COLON statement REDUCE to label_statement" << endl; }
-#line 2744 "parser.cpp"
+#line 2815 "parser.cpp"
     break;
 
   case 186: // labeled_statement: "default" ":" statement
-#line 628 "parser.y"
+#line 644 "parser.y"
                                                { cout << "DEFAULT COLON statement REDUCE to label_statement" << endl; }
-#line 2750 "parser.cpp"
+#line 2821 "parser.cpp"
     break;
 
   case 187: // compound_statement: "{" "}"
-#line 632 "parser.y"
+#line 648 "parser.y"
                                                     { cout << "OCURLY CCURLY REDUCE to compound_statement" << endl; }
-#line 2756 "parser.cpp"
+#line 2827 "parser.cpp"
     break;
 
   case 188: // compound_statement: "{" statement_list "}"
-#line 633 "parser.y"
+#line 649 "parser.y"
                                                     { cout << "OCURLY statement_list CCURLY REDUCE to compound_statement" << endl; }
-#line 2762 "parser.cpp"
+#line 2833 "parser.cpp"
     break;
 
   case 189: // compound_statement: "{" declaration_list "}"
-#line 634 "parser.y"
+#line 650 "parser.y"
                                                     { cout << "OCURLY declaration_list CCURLY REDUCE to compound_statement" << endl; }
-#line 2768 "parser.cpp"
+#line 2839 "parser.cpp"
     break;
 
   case 190: // compound_statement: "{" declaration_list statement_list "}"
-#line 635 "parser.y"
+#line 651 "parser.y"
                                                     { cout << "OCURLY declaration_list statement_list CCURLY REDUCE to compound_statement" << endl; }
-#line 2774 "parser.cpp"
+#line 2845 "parser.cpp"
     break;
 
   case 191: // declaration_list: declaration
-#line 639 "parser.y"
+#line 655 "parser.y"
                                     { cout << "declaration REDUCE to declaration_list" << endl; }
-#line 2780 "parser.cpp"
+#line 2851 "parser.cpp"
     break;
 
   case 192: // declaration_list: declaration_list declaration
-#line 640 "parser.y"
+#line 656 "parser.y"
                                     { cout << "declaration_list declaration REDUCE to declaration_list" << endl; }
-#line 2786 "parser.cpp"
+#line 2857 "parser.cpp"
     break;
 
   case 193: // statement_list: statement
-#line 644 "parser.y"
+#line 660 "parser.y"
                                { cout << "statement REDUCE to statement_list" << endl; }
-#line 2792 "parser.cpp"
+#line 2863 "parser.cpp"
     break;
 
   case 194: // statement_list: statement_list statement
-#line 645 "parser.y"
+#line 661 "parser.y"
                                { cout << "statement_list statement REDUCE to statement_list" << endl; }
-#line 2798 "parser.cpp"
+#line 2869 "parser.cpp"
     break;
 
   case 195: // expression_statement: ";"
-#line 649 "parser.y"
+#line 665 "parser.y"
                             { cout << "SEMICOLON REDUCE to expression_statement" << endl; }
-#line 2804 "parser.cpp"
+#line 2875 "parser.cpp"
     break;
 
   case 196: // expression_statement: expression ";"
-#line 650 "parser.y"
+#line 666 "parser.y"
                             { cout << "expression SEMICOLON REDUCE to expression_statement" << endl; }
-#line 2810 "parser.cpp"
+#line 2881 "parser.cpp"
     break;
 
   case 197: // selection_statement: "if" "(" expression ")" statement
-#line 654 "parser.y"
+#line 670 "parser.y"
                                                            { cout << "IF OPAREN expression CPAREN statement REDUCE to selection_statement" << endl; }
-#line 2816 "parser.cpp"
+#line 2887 "parser.cpp"
     break;
 
   case 198: // selection_statement: "if" "(" expression ")" statement "else" statement
-#line 655 "parser.y"
+#line 671 "parser.y"
                                                            { cout << "IF OPAREN expression CPAREN statement ELSE statement REDUCE to selection_statement" << endl; }
-#line 2822 "parser.cpp"
+#line 2893 "parser.cpp"
     break;
 
   case 199: // selection_statement: "switch" "(" expression ")" statement
-#line 656 "parser.y"
+#line 672 "parser.y"
                                                            { cout << "SWITCH OPAREN expression CPAREN statement REDUCE to selection_statement" << endl; }
-#line 2828 "parser.cpp"
+#line 2899 "parser.cpp"
     break;
 
   case 200: // iteration_statement: "while" "(" expression ")" statement
-#line 660 "parser.y"
+#line 676 "parser.y"
                                                                                        { cout << "WHILE OPAREN expression CPAREN statement REDUCE to iteration_statement" << endl; }
-#line 2834 "parser.cpp"
+#line 2905 "parser.cpp"
     break;
 
   case 201: // iteration_statement: "do" statement "while" "(" expression ")" ";"
-#line 661 "parser.y"
+#line 677 "parser.y"
                                                                                        { cout << "DO statement WHILE OPAREN expression CPAREN SEMICOLON REDUCE to iteration_statement" << endl; }
-#line 2840 "parser.cpp"
+#line 2911 "parser.cpp"
     break;
 
   case 202: // iteration_statement: "for" "(" expression_statement expression_statement ")" statement
-#line 662 "parser.y"
+#line 678 "parser.y"
                                                                                        { cout << "FOR OPAREN expression_statement expression_statement CPAREN statement REDUCE to iteration_statement" << endl; }
-#line 2846 "parser.cpp"
+#line 2917 "parser.cpp"
     break;
 
   case 203: // iteration_statement: "for" "(" expression_statement expression_statement expression ")" statement
-#line 663 "parser.y"
+#line 679 "parser.y"
                                                                                        { cout << "FOR OPAREN expression_statement expression_statement expression CPAREN statement REDUCE to iteration_statement" << endl; }
-#line 2852 "parser.cpp"
+#line 2923 "parser.cpp"
     break;
 
   case 204: // jump_statement: "goto" "identifier" ";"
-#line 667 "parser.y"
+#line 683 "parser.y"
                                   { cout << "GOTO IDENTIFIER SEMICOLON REDUCE to jump_statement" << endl; }
-#line 2858 "parser.cpp"
+#line 2929 "parser.cpp"
     break;
 
   case 205: // jump_statement: "continue" ";"
-#line 668 "parser.y"
+#line 684 "parser.y"
                                   { cout << "CONTINUE SEMICOLON REDUCE to jump_statement" << endl; }
-#line 2864 "parser.cpp"
+#line 2935 "parser.cpp"
     break;
 
   case 206: // jump_statement: "break" ";"
-#line 669 "parser.y"
+#line 685 "parser.y"
                                   { cout << "BREAK SEMICOLON REDUCE to jump_statement" << endl; }
-#line 2870 "parser.cpp"
+#line 2941 "parser.cpp"
     break;
 
   case 207: // jump_statement: "return" ";"
-#line 670 "parser.y"
+#line 686 "parser.y"
                                   { cout << "RETURN SEMICOLON REDUCE to jump_statement" << endl; }
-#line 2876 "parser.cpp"
+#line 2947 "parser.cpp"
     break;
 
   case 208: // jump_statement: "return" expression ";"
-#line 671 "parser.y"
+#line 687 "parser.y"
                                   { cout << "RETURN expression SEMICOLON REDUCE to jump_statement" << endl; }
-#line 2882 "parser.cpp"
+#line 2953 "parser.cpp"
     break;
 
   case 209: // translation_unit: external_declaration
-#line 675 "parser.y"
+#line 691 "parser.y"
                                             { cout << "external_declaration REDUCE to translation_unit" << endl; }
-#line 2888 "parser.cpp"
+#line 2959 "parser.cpp"
     break;
 
   case 210: // translation_unit: translation_unit external_declaration
-#line 676 "parser.y"
+#line 692 "parser.y"
                                             { cout << "translation_unit external_declaration REDUCE to translation_unit" << endl; }
-#line 2894 "parser.cpp"
+#line 2965 "parser.cpp"
     break;
 
   case 211: // external_declaration: function_definition
-#line 680 "parser.y"
+#line 696 "parser.y"
                            { cout << "function_definition REDUCE to external_declaration" << endl; }
-#line 2900 "parser.cpp"
+#line 2971 "parser.cpp"
     break;
 
   case 212: // external_declaration: declaration
-#line 681 "parser.y"
+#line 697 "parser.y"
                            { cout << "declaration REDUCE to external_declaration" << endl; }
-#line 2906 "parser.cpp"
+#line 2977 "parser.cpp"
     break;
 
   case 213: // function_definition: declaration_specifiers declarator declaration_list compound_statement
-#line 685 "parser.y"
+#line 701 "parser.y"
                                                                             { cout << "declaration_specifiers declarator declaration_list compound_statement REDUCE to function_definition" << endl; }
-#line 2912 "parser.cpp"
+#line 2983 "parser.cpp"
     break;
 
   case 214: // function_definition: declaration_specifiers declarator compound_statement
-#line 686 "parser.y"
+#line 702 "parser.y"
                                                                             { cout << "declaration_specifiers declarator compound_statement REDUCE to function_definition" << endl; }
-#line 2918 "parser.cpp"
+#line 2989 "parser.cpp"
     break;
 
   case 215: // function_definition: declarator declaration_list compound_statement
-#line 687 "parser.y"
+#line 703 "parser.y"
                                                                             { cout << "declarator declaration_list compound_statement REDUCE to function_definition" << endl; }
-#line 2924 "parser.cpp"
+#line 2995 "parser.cpp"
     break;
 
   case 216: // function_definition: declarator compound_statement
-#line 688 "parser.y"
+#line 704 "parser.y"
                                                                             { cout << "declarator compound_statement REDUCE to function_definition" << endl; }
-#line 2930 "parser.cpp"
+#line 3001 "parser.cpp"
     break;
 
 
-#line 2934 "parser.cpp"
+#line 3005 "parser.cpp"
 
             default:
               break;
@@ -3885,28 +3956,28 @@ namespace  WadeSpace  {
   const short
    Parser ::yyrline_[] =
   {
-       0,   218,   218,   219,   220,   224,   229,   234,   241,   242,
-     243,   244,   245,   246,   247,   248,   249,   250,   254,   260,
-     270,   271,   272,   273,   274,   275,   279,   280,   281,   282,
-     283,   284,   288,   289,   293,   294,   295,   296,   300,   301,
-     302,   306,   307,   308,   312,   313,   314,   315,   316,   320,
-     321,   322,   326,   327,   331,   332,   336,   337,   341,   342,
-     346,   347,   351,   352,   356,   357,   361,   362,   363,   364,
-     365,   366,   367,   368,   369,   370,   371,   375,   376,   380,
-     384,   385,   389,   390,   391,   392,   393,   394,   398,   399,
-     403,   404,   408,   409,   410,   411,   412,   416,   417,   418,
-     419,   420,   421,   422,   423,   424,   425,   426,   427,   431,
-     432,   433,   437,   438,   442,   443,   447,   451,   452,   453,
-     454,   458,   464,   474,   475,   476,   480,   481,   482,   486,
-     492,   502,   503,   507,   508,   512,   513,   517,   518,   519,
-     520,   521,   522,   523,   527,   528,   529,   530,   534,   540,
-     551,   552,   556,   557,   561,   562,   563,   567,   573,   583,
-     584,   588,   589,   590,   594,   595,   596,   597,   598,   599,
-     600,   601,   602,   606,   607,   608,   612,   613,   617,   618,
-     619,   620,   621,   622,   626,   627,   628,   632,   633,   634,
-     635,   639,   640,   644,   645,   649,   650,   654,   655,   656,
-     660,   661,   662,   663,   667,   668,   669,   670,   671,   675,
-     676,   680,   681,   685,   686,   687,   688
+       0,   223,   223,   224,   225,   229,   234,   239,   246,   247,
+     248,   249,   250,   251,   252,   253,   254,   255,   259,   265,
+     275,   276,   277,   278,   279,   280,   284,   285,   286,   287,
+     288,   289,   293,   294,   298,   299,   300,   301,   305,   306,
+     307,   311,   312,   313,   317,   318,   319,   320,   321,   325,
+     326,   327,   331,   332,   336,   337,   341,   342,   346,   347,
+     351,   352,   356,   357,   361,   362,   366,   367,   368,   369,
+     370,   371,   372,   373,   374,   375,   376,   380,   381,   385,
+     389,   390,   394,   395,   396,   397,   398,   399,   403,   404,
+     408,   409,   413,   414,   415,   416,   417,   421,   422,   423,
+     424,   425,   426,   427,   428,   429,   430,   431,   432,   436,
+     437,   438,   442,   443,   447,   453,   463,   467,   468,   469,
+     470,   474,   480,   490,   491,   492,   496,   497,   498,   502,
+     508,   518,   519,   523,   524,   528,   529,   533,   534,   535,
+     536,   537,   538,   539,   543,   544,   545,   546,   550,   556,
+     567,   568,   572,   573,   577,   578,   579,   583,   589,   599,
+     600,   604,   605,   606,   610,   611,   612,   613,   614,   615,
+     616,   617,   618,   622,   623,   624,   628,   629,   633,   634,
+     635,   636,   637,   638,   642,   643,   644,   648,   649,   650,
+     651,   655,   656,   660,   661,   665,   666,   670,   671,   672,
+     676,   677,   678,   679,   683,   684,   685,   686,   687,   691,
+     692,   696,   697,   701,   702,   703,   704
   };
 
   void
@@ -3939,9 +4010,9 @@ namespace  WadeSpace  {
 
 #line 9 "parser.y"
 } //  WadeSpace 
-#line 3943 "parser.cpp"
+#line 4014 "parser.cpp"
 
-#line 691 "parser.y"
+#line 707 "parser.y"
 
 
 // Bison expects us to provide implementation - otherwise linker complains

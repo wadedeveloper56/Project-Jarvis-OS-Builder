@@ -200,7 +200,9 @@
     <ClInclude Include="SpecifierQualifierList.h" />
     <ClInclude Include="stack.hh" />
     <ClInclude Include="StorageClassSpecifier.h" />
+    <ClInclude Include="StructDeclaration.h" />
     <ClInclude Include="StructDeclarator.h" />
+    <ClInclude Include="StructOrUnion.h" />
     <ClInclude Include="TypeName.h" />
     <ClInclude Include="TypeQualifier.h" />
     <ClInclude Include="TypeSpecifier.h" />
@@ -223,7 +225,9 @@
     <ClCompile Include="scanner.cpp" />
     <ClCompile Include="SpecifierQualifierList.cpp" />
     <ClCompile Include="StorageClassSpecifier.cpp" />
+    <ClCompile Include="StructDeclaration.cpp" />
     <ClCompile Include="StructDeclarator.cpp" />
+    <ClCompile Include="StructOrUnion.cpp" />
     <ClCompile Include="TypeName.cpp" />
     <ClCompile Include="TypeQualifier.cpp" />
     <ClCompile Include="TypeSpecifier.cpp" />
