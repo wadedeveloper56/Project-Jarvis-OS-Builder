@@ -450,7 +450,7 @@ Nonterminals, with rules where they appear
     conditional_expression <Expression> (111)
         on left: 61 62
         on right: 62 63 78
-    assignment_expression <Expression> (112)
+    assignment_expression <AssignmentExpression> (112)
         on left: 63 64
         on right: 17 18 64 76 77 172
     assignment_operator <AssignmentOperator> (113)
@@ -462,16 +462,16 @@ Nonterminals, with rules where they appear
     constant_expression <Expression> (115)
         on left: 78
         on right: 123 124 131 138 165 167 184
-    declaration (116)
+    declaration <Declaration> (116)
         on left: 79 80
         on right: 190 191 211
     declaration_specifiers <DeclarationSpecifiers> (117)
         on left: 81 82 83 84 85 86
         on right: 79 80 82 84 86 153 154 155 212 213
-    init_declarator_list (118)
+    init_declarator_list <std::vector<InitDeclarator>> (118)
         on left: 87 88
         on right: 80 88
-    init_declarator (119)
+    init_declarator <InitDeclarator> (119)
         on left: 89 90
         on right: 87 88
     storage_class_specifier <StorageClassSpecifier> (120)

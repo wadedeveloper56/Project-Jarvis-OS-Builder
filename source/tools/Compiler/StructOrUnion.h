@@ -4,17 +4,16 @@
 #include <vector>
 #include <stdint.h>
 #include <optional>
+#include "TokenType.h"
 
 namespace WadeSpace {
-	typedef enum {NONE5,STRUCT1,UNION1} StuctureType;
-
 	class StructOrUnion
 	{
 	public:
-		StructOrUnion(StuctureType type);
+		StructOrUnion(TokenType type);
 		StructOrUnion();
 		~StructOrUnion();
 	private:
-		StuctureType type;
+		TokenType type;
 	};
 }

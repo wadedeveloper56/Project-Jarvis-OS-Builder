@@ -74,6 +74,9 @@
     #include "StructOrUnion.h"
     #include "StructOrUnionSpecifier.h"
     #include "Initializer.h"
+    #include "InitDeclarator.h"
+    #include "AssignmentExpression.h"
+    #include "Declaration.h"
 
     using namespace std;
 
@@ -82,7 +85,7 @@
         class Interpreter;
     }
 
-#line 86 "parser.hpp"
+#line 89 "parser.hpp"
 
 # include <cassert>
 # include <cstdlib> // std::abort
@@ -223,7 +226,7 @@
 
 #line 9 "parser.y"
 namespace  WadeSpace  {
-#line 227 "parser.hpp"
+#line 230 "parser.hpp"
 
 
 
@@ -445,29 +448,35 @@ namespace  WadeSpace  {
       // abstract_declarator
       char dummy1[sizeof (AbstractDeclarator)];
 
+      // assignment_expression
+      char dummy2[sizeof (AssignmentExpression)];
+
       // assignment_operator
-      char dummy2[sizeof (AssignmentOperator)];
+      char dummy3[sizeof (AssignmentOperator)];
 
       // constant
-      char dummy3[sizeof (Constant)];
+      char dummy4[sizeof (Constant)];
+
+      // declaration
+      char dummy5[sizeof (Declaration)];
 
       // declaration_specifiers
-      char dummy4[sizeof (DeclarationSpecifiers)];
+      char dummy6[sizeof (DeclarationSpecifiers)];
 
       // declarator
-      char dummy5[sizeof (Declarator)];
+      char dummy7[sizeof (Declarator)];
 
       // direct_abstract_declarator
-      char dummy6[sizeof (DirectAbstractDeclarator)];
+      char dummy8[sizeof (DirectAbstractDeclarator)];
 
       // direct_declarator
-      char dummy7[sizeof (DirectDeclarator)];
+      char dummy9[sizeof (DirectDeclarator)];
 
       // enum_specifier
-      char dummy8[sizeof (EnumSpecifier)];
+      char dummy10[sizeof (EnumSpecifier)];
 
       // enumerator
-      char dummy9[sizeof (Enumerator)];
+      char dummy11[sizeof (Enumerator)];
 
       // primary_expression
       // postfix_expression
@@ -484,46 +493,48 @@ namespace  WadeSpace  {
       // logical_and_expression
       // logical_or_expression
       // conditional_expression
-      // assignment_expression
       // expression
       // constant_expression
-      char dummy10[sizeof (Expression)];
+      char dummy12[sizeof (Expression)];
+
+      // init_declarator
+      char dummy13[sizeof (InitDeclarator)];
 
       // initializer
-      char dummy11[sizeof (Initializer)];
+      char dummy14[sizeof (Initializer)];
 
       // pointer
-      char dummy12[sizeof (Pointer)];
+      char dummy15[sizeof (Pointer)];
 
       // specifier_qualifier_list
-      char dummy13[sizeof (SpecifierQualifierList)];
+      char dummy16[sizeof (SpecifierQualifierList)];
 
       // storage_class_specifier
-      char dummy14[sizeof (StorageClassSpecifier)];
+      char dummy17[sizeof (StorageClassSpecifier)];
 
       // struct_declaration
-      char dummy15[sizeof (StructDeclaration)];
+      char dummy18[sizeof (StructDeclaration)];
 
       // struct_declarator
-      char dummy16[sizeof (StructDeclarator)];
+      char dummy19[sizeof (StructDeclarator)];
 
       // struct_or_union
-      char dummy17[sizeof (StructOrUnion)];
+      char dummy20[sizeof (StructOrUnion)];
 
       // struct_or_union_specifier
-      char dummy18[sizeof (StructOrUnionSpecifier)];
+      char dummy21[sizeof (StructOrUnionSpecifier)];
 
       // type_name
-      char dummy19[sizeof (TypeName)];
+      char dummy22[sizeof (TypeName)];
 
       // type_qualifier
-      char dummy20[sizeof (TypeQualifier)];
+      char dummy23[sizeof (TypeQualifier)];
 
       // type_specifier
-      char dummy21[sizeof (TypeSpecifier)];
+      char dummy24[sizeof (TypeSpecifier)];
 
       // "f_const"
-      char dummy22[sizeof (long double)];
+      char dummy25[sizeof (long double)];
 
       // "identifier"
       // "sting_literal"
@@ -614,31 +625,34 @@ namespace  WadeSpace  {
       // "/"
       // "%"
       // unary_operator
-      char dummy23[sizeof (std::string)];
+      char dummy26[sizeof (std::string)];
 
       // enumerator_list
-      char dummy24[sizeof (std::vector<Enumerator>)];
+      char dummy27[sizeof (std::vector<Enumerator>)];
 
       // argument_expression_list
-      char dummy25[sizeof (std::vector<Expression>)];
+      char dummy28[sizeof (std::vector<Expression>)];
+
+      // init_declarator_list
+      char dummy29[sizeof (std::vector<InitDeclarator>)];
 
       // initializer_list
-      char dummy26[sizeof (std::vector<Initializer>)];
+      char dummy30[sizeof (std::vector<Initializer>)];
 
       // struct_declaration_list
-      char dummy27[sizeof (std::vector<StructDeclaration>)];
+      char dummy31[sizeof (std::vector<StructDeclaration>)];
 
       // struct_declarator_list
-      char dummy28[sizeof (std::vector<StructDeclarator>)];
+      char dummy32[sizeof (std::vector<StructDeclarator>)];
 
       // type_qualifier_list
-      char dummy29[sizeof (std::vector<TypeQualifier>)];
+      char dummy33[sizeof (std::vector<TypeQualifier>)];
 
       // identifier_list
-      char dummy30[sizeof (std::vector<std::string>)];
+      char dummy34[sizeof (std::vector<std::string>)];
 
       // "i_const"
-      char dummy31[sizeof (uint64_t)];
+      char dummy35[sizeof (uint64_t)];
     };
 
     /// The size of the largest semantic type.
@@ -997,12 +1011,20 @@ namespace  WadeSpace  {
         value.move< AbstractDeclarator > (std::move (that.value));
         break;
 
+      case symbol_kind::S_assignment_expression: // assignment_expression
+        value.move< AssignmentExpression > (std::move (that.value));
+        break;
+
       case symbol_kind::S_assignment_operator: // assignment_operator
         value.move< AssignmentOperator > (std::move (that.value));
         break;
 
       case symbol_kind::S_constant: // constant
         value.move< Constant > (std::move (that.value));
+        break;
+
+      case symbol_kind::S_declaration: // declaration
+        value.move< Declaration > (std::move (that.value));
         break;
 
       case symbol_kind::S_declaration_specifiers: // declaration_specifiers
@@ -1044,10 +1066,13 @@ namespace  WadeSpace  {
       case symbol_kind::S_logical_and_expression: // logical_and_expression
       case symbol_kind::S_logical_or_expression: // logical_or_expression
       case symbol_kind::S_conditional_expression: // conditional_expression
-      case symbol_kind::S_assignment_expression: // assignment_expression
       case symbol_kind::S_expression: // expression
       case symbol_kind::S_constant_expression: // constant_expression
         value.move< Expression > (std::move (that.value));
+        break;
+
+      case symbol_kind::S_init_declarator: // init_declarator
+        value.move< InitDeclarator > (std::move (that.value));
         break;
 
       case symbol_kind::S_initializer: // initializer
@@ -1198,6 +1223,10 @@ namespace  WadeSpace  {
         value.move< std::vector<Expression> > (std::move (that.value));
         break;
 
+      case symbol_kind::S_init_declarator_list: // init_declarator_list
+        value.move< std::vector<InitDeclarator> > (std::move (that.value));
+        break;
+
       case symbol_kind::S_initializer_list: // initializer_list
         value.move< std::vector<Initializer> > (std::move (that.value));
         break;
@@ -1260,6 +1289,20 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
+      basic_symbol (typename Base::kind_type t, AssignmentExpression&& v, location_type&& l)
+        : Base (t)
+        , value (std::move (v))
+        , location (std::move (l))
+      {}
+#else
+      basic_symbol (typename Base::kind_type t, const AssignmentExpression& v, const location_type& l)
+        : Base (t)
+        , value (v)
+        , location (l)
+      {}
+#endif
+
+#if 201103L <= YY_CPLUSPLUS
       basic_symbol (typename Base::kind_type t, AssignmentOperator&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
@@ -1281,6 +1324,20 @@ namespace  WadeSpace  {
       {}
 #else
       basic_symbol (typename Base::kind_type t, const Constant& v, const location_type& l)
+        : Base (t)
+        , value (v)
+        , location (l)
+      {}
+#endif
+
+#if 201103L <= YY_CPLUSPLUS
+      basic_symbol (typename Base::kind_type t, Declaration&& v, location_type&& l)
+        : Base (t)
+        , value (std::move (v))
+        , location (std::move (l))
+      {}
+#else
+      basic_symbol (typename Base::kind_type t, const Declaration& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1379,6 +1436,20 @@ namespace  WadeSpace  {
       {}
 #else
       basic_symbol (typename Base::kind_type t, const Expression& v, const location_type& l)
+        : Base (t)
+        , value (v)
+        , location (l)
+      {}
+#endif
+
+#if 201103L <= YY_CPLUSPLUS
+      basic_symbol (typename Base::kind_type t, InitDeclarator&& v, location_type&& l)
+        : Base (t)
+        , value (std::move (v))
+        , location (std::move (l))
+      {}
+#else
+      basic_symbol (typename Base::kind_type t, const InitDeclarator& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1596,6 +1667,20 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
+      basic_symbol (typename Base::kind_type t, std::vector<InitDeclarator>&& v, location_type&& l)
+        : Base (t)
+        , value (std::move (v))
+        , location (std::move (l))
+      {}
+#else
+      basic_symbol (typename Base::kind_type t, const std::vector<InitDeclarator>& v, const location_type& l)
+        : Base (t)
+        , value (v)
+        , location (l)
+      {}
+#endif
+
+#if 201103L <= YY_CPLUSPLUS
       basic_symbol (typename Base::kind_type t, std::vector<Initializer>&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
@@ -1707,12 +1792,20 @@ switch (yykind)
         value.template destroy< AbstractDeclarator > ();
         break;
 
+      case symbol_kind::S_assignment_expression: // assignment_expression
+        value.template destroy< AssignmentExpression > ();
+        break;
+
       case symbol_kind::S_assignment_operator: // assignment_operator
         value.template destroy< AssignmentOperator > ();
         break;
 
       case symbol_kind::S_constant: // constant
         value.template destroy< Constant > ();
+        break;
+
+      case symbol_kind::S_declaration: // declaration
+        value.template destroy< Declaration > ();
         break;
 
       case symbol_kind::S_declaration_specifiers: // declaration_specifiers
@@ -1754,10 +1847,13 @@ switch (yykind)
       case symbol_kind::S_logical_and_expression: // logical_and_expression
       case symbol_kind::S_logical_or_expression: // logical_or_expression
       case symbol_kind::S_conditional_expression: // conditional_expression
-      case symbol_kind::S_assignment_expression: // assignment_expression
       case symbol_kind::S_expression: // expression
       case symbol_kind::S_constant_expression: // constant_expression
         value.template destroy< Expression > ();
+        break;
+
+      case symbol_kind::S_init_declarator: // init_declarator
+        value.template destroy< InitDeclarator > ();
         break;
 
       case symbol_kind::S_initializer: // initializer
@@ -1906,6 +2002,10 @@ switch (yykind)
 
       case symbol_kind::S_argument_expression_list: // argument_expression_list
         value.template destroy< std::vector<Expression> > ();
+        break;
+
+      case symbol_kind::S_init_declarator_list: // init_declarator_list
+        value.template destroy< std::vector<InitDeclarator> > ();
         break;
 
       case symbol_kind::S_initializer_list: // initializer_list
@@ -3925,12 +4025,20 @@ switch (yykind)
         value.copy< AbstractDeclarator > (YY_MOVE (that.value));
         break;
 
+      case symbol_kind::S_assignment_expression: // assignment_expression
+        value.copy< AssignmentExpression > (YY_MOVE (that.value));
+        break;
+
       case symbol_kind::S_assignment_operator: // assignment_operator
         value.copy< AssignmentOperator > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_constant: // constant
         value.copy< Constant > (YY_MOVE (that.value));
+        break;
+
+      case symbol_kind::S_declaration: // declaration
+        value.copy< Declaration > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_declaration_specifiers: // declaration_specifiers
@@ -3972,10 +4080,13 @@ switch (yykind)
       case symbol_kind::S_logical_and_expression: // logical_and_expression
       case symbol_kind::S_logical_or_expression: // logical_or_expression
       case symbol_kind::S_conditional_expression: // conditional_expression
-      case symbol_kind::S_assignment_expression: // assignment_expression
       case symbol_kind::S_expression: // expression
       case symbol_kind::S_constant_expression: // constant_expression
         value.copy< Expression > (YY_MOVE (that.value));
+        break;
+
+      case symbol_kind::S_init_declarator: // init_declarator
+        value.copy< InitDeclarator > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_initializer: // initializer
@@ -4126,6 +4237,10 @@ switch (yykind)
         value.copy< std::vector<Expression> > (YY_MOVE (that.value));
         break;
 
+      case symbol_kind::S_init_declarator_list: // init_declarator_list
+        value.copy< std::vector<InitDeclarator> > (YY_MOVE (that.value));
+        break;
+
       case symbol_kind::S_initializer_list: // initializer_list
         value.copy< std::vector<Initializer> > (YY_MOVE (that.value));
         break;
@@ -4185,12 +4300,20 @@ switch (yykind)
         value.move< AbstractDeclarator > (YY_MOVE (s.value));
         break;
 
+      case symbol_kind::S_assignment_expression: // assignment_expression
+        value.move< AssignmentExpression > (YY_MOVE (s.value));
+        break;
+
       case symbol_kind::S_assignment_operator: // assignment_operator
         value.move< AssignmentOperator > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_constant: // constant
         value.move< Constant > (YY_MOVE (s.value));
+        break;
+
+      case symbol_kind::S_declaration: // declaration
+        value.move< Declaration > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_declaration_specifiers: // declaration_specifiers
@@ -4232,10 +4355,13 @@ switch (yykind)
       case symbol_kind::S_logical_and_expression: // logical_and_expression
       case symbol_kind::S_logical_or_expression: // logical_or_expression
       case symbol_kind::S_conditional_expression: // conditional_expression
-      case symbol_kind::S_assignment_expression: // assignment_expression
       case symbol_kind::S_expression: // expression
       case symbol_kind::S_constant_expression: // constant_expression
         value.move< Expression > (YY_MOVE (s.value));
+        break;
+
+      case symbol_kind::S_init_declarator: // init_declarator
+        value.move< InitDeclarator > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_initializer: // initializer
@@ -4386,6 +4512,10 @@ switch (yykind)
         value.move< std::vector<Expression> > (YY_MOVE (s.value));
         break;
 
+      case symbol_kind::S_init_declarator_list: // init_declarator_list
+        value.move< std::vector<InitDeclarator> > (YY_MOVE (s.value));
+        break;
+
       case symbol_kind::S_initializer_list: // initializer_list
         value.move< std::vector<Initializer> > (YY_MOVE (s.value));
         break;
@@ -4477,7 +4607,7 @@ switch (yykind)
 
 #line 9 "parser.y"
 } //  WadeSpace 
-#line 4481 "parser.hpp"
+#line 4611 "parser.hpp"
 
 
 

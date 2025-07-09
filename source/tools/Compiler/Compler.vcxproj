@@ -182,8 +182,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AbstractDeclarator.h" />
+    <ClInclude Include="AssignmentExpression.h" />
     <ClInclude Include="AssignmentOperator.h" />
     <ClInclude Include="Constant.h" />
+    <ClInclude Include="Declaration.h" />
     <ClInclude Include="DeclarationSpecifiers.h" />
     <ClInclude Include="Declarator.h" />
     <ClInclude Include="DirectAbstractDeclarator.h" />
@@ -191,6 +193,7 @@
     <ClInclude Include="Enumerator.h" />
     <ClInclude Include="EnumSpecifier.h" />
     <ClInclude Include="Expression.h" />
+    <ClInclude Include="InitDeclarator.h" />
     <ClInclude Include="Initializer.h" />
     <ClInclude Include="interpreter.h" />
     <ClInclude Include="location.hh" />
@@ -212,8 +215,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AbstractDeclarator.cpp" />
+    <ClCompile Include="AssignmentExpression.cpp" />
     <ClCompile Include="AssignmentOperator.cpp" />
     <ClCompile Include="Constant.cpp" />
+    <ClCompile Include="Declaration.cpp" />
     <ClCompile Include="DeclarationSpecifiers.cpp" />
     <ClCompile Include="Declarator.cpp" />
     <ClCompile Include="DirectAbstractDeclarator.cpp" />
@@ -221,6 +226,7 @@
     <ClCompile Include="Enumerator.cpp" />
     <ClCompile Include="EnumSpecifier.cpp" />
     <ClCompile Include="Expression.cpp" />
+    <ClCompile Include="InitDeclarator.cpp" />
     <ClCompile Include="Initializer.cpp" />
     <ClCompile Include="interpreter.cpp" />
     <ClCompile Include="main.cpp" />

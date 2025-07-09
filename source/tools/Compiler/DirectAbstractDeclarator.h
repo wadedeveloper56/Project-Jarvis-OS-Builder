@@ -5,7 +5,6 @@
 #include <stdint.h>
 #include <optional>
 
-
 namespace WadeSpace {
     class AbstractDeclarator;
 

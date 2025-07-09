@@ -8,16 +8,19 @@
 #include "EnumSpecifier.h"
 
 namespace WadeSpace {
+	class StructOrUnionSpecifier;
+
 	class TypeSpecifier
 	{
 	public:
-		TypeSpecifier(std::string value, TokenType type);
-		TypeSpecifier(std::string value, EnumSpecifier& type);
+		TypeSpecifier(TokenType type);
+		TypeSpecifier(EnumSpecifier& type);
+		TypeSpecifier(StructOrUnionSpecifier& type);
 		TypeSpecifier();
 		~TypeSpecifier();
 	private:
-		std::string operatorStr;
 		std::optional < std::reference_wrapper < EnumSpecifier>> enumSpec;
 		TokenType type;
+		std::optional < std::reference_wrapper < StructOrUnionSpecifier>> suSpec;
 	};
 }
