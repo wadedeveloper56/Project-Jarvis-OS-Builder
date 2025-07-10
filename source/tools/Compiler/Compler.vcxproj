@@ -183,6 +183,7 @@
   <ItemGroup>
     <ClInclude Include="AbstractDeclarator.h" />
     <ClInclude Include="AssignmentOperator.h" />
+    <ClInclude Include="CastExpression.h" />
     <ClInclude Include="Constant.h" />
     <ClInclude Include="Declaration.h" />
     <ClInclude Include="DeclarationSpecifiers.h" />
@@ -220,6 +221,7 @@
   <ItemGroup>
     <ClCompile Include="AbstractDeclarator.cpp" />
     <ClCompile Include="AssignmentOperator.cpp" />
+    <ClCompile Include="CastExpression.cpp" />
     <ClCompile Include="Constant.cpp" />
     <ClCompile Include="Declaration.cpp" />
     <ClCompile Include="DeclarationSpecifiers.cpp" />

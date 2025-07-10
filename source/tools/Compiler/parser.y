@@ -43,7 +43,8 @@
     #include "ParameterTypeList.h"
     #include "PostfixExpression.h"
     #include "UnaryExpression.h"
-    
+    #include "CastExpression.h"    
+
     using namespace std;
 
     namespace WadeSpace {
@@ -186,7 +187,7 @@
 %type<Expression> expression
 %type<PostfixExpression> postfix_expression
 %type<UnaryExpression> unary_expression
-%type<Expression> cast_expression
+%type<CastExpression> cast_expression
 %type<Expression> multiplicative_expression
 %type<Expression> additive_expression
 %type<Expression> shift_expression
@@ -308,8 +309,8 @@ unary_operator
     ;
 
 cast_expression
-    : unary_expression                         { $<Expression>$ = Expression();  cout << "unary_expression REDUCE to cast_expression" << endl;}
-    | OPAREN type_name CPAREN cast_expression  { $<Expression>$ = Expression();  cout << "unary_expression REDUCE to cast_expression" << endl;}
+    : unary_expression                         { $<CastExpression>$ = CastExpression();  cout << "unary_expression REDUCE to cast_expression" << endl;}
+    | OPAREN type_name CPAREN cast_expression  { $<CastExpression>$ = CastExpression();  cout << "unary_expression REDUCE to cast_expression" << endl;}
     ;
 
 multiplicative_expression
@@ -320,19 +321,19 @@ multiplicative_expression
     ;
 
 additive_expression
-    : multiplicative_expression                               { $<Expression>$ = Expression();  cout << "multiplicative_expression REDUCE to additive_expression" << endl;}
+    : multiplicative_expression                               { $<Expression>$ = $1;  cout << "multiplicative_expression REDUCE to additive_expression" << endl;}
     | additive_expression PLUS_OP multiplicative_expression   { $<Expression>$ = Expression(); cout << "additive_expression REDUCE to multiplicative_expression" << endl;}
     | additive_expression MINUS_OP multiplicative_expression  { $<Expression>$ = Expression(); cout << "additive_expression REDUCE to multiplicative_expression" << endl;}
     ;
 
 shift_expression
-    : additive_expression                           { $<Expression>$ = Expression();  cout << "additive_expression REDUCE to shift_expression" << endl;}
+    : additive_expression                           { $<Expression>$ = $1;  cout << "additive_expression REDUCE to shift_expression" << endl;}
     | shift_expression LEFT_OP additive_expression  { $<Expression>$ = Expression(); cout << "shift_expression LEFT_OP additive_expression REDUCE to shift_expression" << endl;}
     | shift_expression RIGHT_OP additive_expression { $<Expression>$ = Expression(); cout << "shift_expression RIGHT_OP additive_expression REDUCE to shift_expression" << endl;}
     ;
 
 relational_expression
-    : shift_expression                                       { $<Expression>$ = Expression();  cout << "shift_expression REDUCE to relational_expression" << endl;}
+    : shift_expression                                       { $<Expression>$ = $1;  cout << "shift_expression REDUCE to relational_expression" << endl;}
     | relational_expression LESS shift_expression            { $<Expression>$ = Expression(); cout << "relational_expression LESS shift_expression REDUCE to shift_expression" << endl;}
     | relational_expression GREATER shift_expression         { $<Expression>$ = Expression(); cout << "relational_expression GREATER shift_expression REDUCE to shift_expression" << endl;}
     | relational_expression LESS_EQUAL shift_expression      { $<Expression>$ = Expression(); cout << "relational_expression LESS_EQUAL shift_expression REDUCE to shift_expression" << endl;}
@@ -340,7 +341,7 @@ relational_expression
     ;
 
 equality_expression
-    : relational_expression                                  { $<Expression>$ = Expression();  cout << "relational_expression REDUCE to equality_expression" << endl;}
+    : relational_expression                                  { $<Expression>$ = $1;  cout << "relational_expression REDUCE to equality_expression" << endl;}
     | equality_expression EQUAL_EQUAL relational_expression  { $<Expression>$ = Expression(); cout << "equality_expression EQUAL_EQUAL relational_expression REDUCE to equality_expression" << endl;}
     | equality_expression NOT_EQUAL relational_expression    { $<Expression>$ = Expression(); cout << "equality_expression NOT_EQUAL relational_expression REDUCE to equality_expression" << endl;}
     ;

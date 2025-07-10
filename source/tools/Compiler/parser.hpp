@@ -81,7 +81,8 @@
     #include "ParameterTypeList.h"
     #include "PostfixExpression.h"
     #include "UnaryExpression.h"
-    
+    #include "CastExpression.h"    
+
     using namespace std;
 
     namespace WadeSpace {
@@ -89,7 +90,7 @@
         class Interpreter;
     }
 
-#line 93 "parser.hpp"
+#line 94 "parser.hpp"
 
 # include <cassert>
 # include <cstdlib> // std::abort
@@ -230,7 +231,7 @@
 
 #line 9 "parser.y"
 namespace  WadeSpace  {
-#line 234 "parser.hpp"
+#line 235 "parser.hpp"
 
 
 
@@ -455,31 +456,33 @@ namespace  WadeSpace  {
       // assignment_operator
       char dummy2[sizeof (AssignmentOperator)];
 
+      // cast_expression
+      char dummy3[sizeof (CastExpression)];
+
       // constant
-      char dummy3[sizeof (Constant)];
+      char dummy4[sizeof (Constant)];
 
       // declaration
-      char dummy4[sizeof (Declaration)];
+      char dummy5[sizeof (Declaration)];
 
       // declaration_specifiers
-      char dummy5[sizeof (DeclarationSpecifiers)];
+      char dummy6[sizeof (DeclarationSpecifiers)];
 
       // declarator
-      char dummy6[sizeof (Declarator)];
+      char dummy7[sizeof (Declarator)];
 
       // direct_abstract_declarator
-      char dummy7[sizeof (DirectAbstractDeclarator)];
+      char dummy8[sizeof (DirectAbstractDeclarator)];
 
       // direct_declarator
-      char dummy8[sizeof (DirectDeclarator)];
+      char dummy9[sizeof (DirectDeclarator)];
 
       // enum_specifier
-      char dummy9[sizeof (EnumSpecifier)];
+      char dummy10[sizeof (EnumSpecifier)];
 
       // enumerator
-      char dummy10[sizeof (Enumerator)];
+      char dummy11[sizeof (Enumerator)];
 
-      // cast_expression
       // multiplicative_expression
       // additive_expression
       // shift_expression
@@ -494,61 +497,61 @@ namespace  WadeSpace  {
       // assignment_expression
       // expression
       // constant_expression
-      char dummy11[sizeof (Expression)];
+      char dummy12[sizeof (Expression)];
 
       // init_declarator
-      char dummy12[sizeof (InitDeclarator)];
+      char dummy13[sizeof (InitDeclarator)];
 
       // initializer
-      char dummy13[sizeof (Initializer)];
+      char dummy14[sizeof (Initializer)];
 
       // parameter_declaration
-      char dummy14[sizeof (ParameterDeclaration)];
+      char dummy15[sizeof (ParameterDeclaration)];
 
       // parameter_type_list
-      char dummy15[sizeof (ParameterTypeList)];
+      char dummy16[sizeof (ParameterTypeList)];
 
       // pointer
-      char dummy16[sizeof (Pointer)];
+      char dummy17[sizeof (Pointer)];
 
       // postfix_expression
-      char dummy17[sizeof (PostfixExpression)];
+      char dummy18[sizeof (PostfixExpression)];
 
       // primary_expression
-      char dummy18[sizeof (PrimaryExpression)];
+      char dummy19[sizeof (PrimaryExpression)];
 
       // specifier_qualifier_list
-      char dummy19[sizeof (SpecifierQualifierList)];
+      char dummy20[sizeof (SpecifierQualifierList)];
 
       // storage_class_specifier
-      char dummy20[sizeof (StorageClassSpecifier)];
+      char dummy21[sizeof (StorageClassSpecifier)];
 
       // struct_declaration
-      char dummy21[sizeof (StructDeclaration)];
+      char dummy22[sizeof (StructDeclaration)];
 
       // struct_declarator
-      char dummy22[sizeof (StructDeclarator)];
+      char dummy23[sizeof (StructDeclarator)];
 
       // struct_or_union
-      char dummy23[sizeof (StructOrUnion)];
+      char dummy24[sizeof (StructOrUnion)];
 
       // struct_or_union_specifier
-      char dummy24[sizeof (StructOrUnionSpecifier)];
+      char dummy25[sizeof (StructOrUnionSpecifier)];
 
       // type_name
-      char dummy25[sizeof (TypeName)];
+      char dummy26[sizeof (TypeName)];
 
       // type_qualifier
-      char dummy26[sizeof (TypeQualifier)];
+      char dummy27[sizeof (TypeQualifier)];
 
       // type_specifier
-      char dummy27[sizeof (TypeSpecifier)];
+      char dummy28[sizeof (TypeSpecifier)];
 
       // unary_expression
-      char dummy28[sizeof (UnaryExpression)];
+      char dummy29[sizeof (UnaryExpression)];
 
       // "f_const"
-      char dummy29[sizeof (long double)];
+      char dummy30[sizeof (long double)];
 
       // "identifier"
       // "sting_literal"
@@ -639,37 +642,37 @@ namespace  WadeSpace  {
       // "/"
       // "%"
       // unary_operator
-      char dummy30[sizeof (std::string)];
+      char dummy31[sizeof (std::string)];
 
       // enumerator_list
-      char dummy31[sizeof (std::vector<Enumerator>)];
+      char dummy32[sizeof (std::vector<Enumerator>)];
 
       // argument_expression_list
-      char dummy32[sizeof (std::vector<Expression>)];
+      char dummy33[sizeof (std::vector<Expression>)];
 
       // init_declarator_list
-      char dummy33[sizeof (std::vector<InitDeclarator>)];
+      char dummy34[sizeof (std::vector<InitDeclarator>)];
 
       // initializer_list
-      char dummy34[sizeof (std::vector<Initializer>)];
+      char dummy35[sizeof (std::vector<Initializer>)];
 
       // parameter_list
-      char dummy35[sizeof (std::vector<ParameterDeclaration>)];
+      char dummy36[sizeof (std::vector<ParameterDeclaration>)];
 
       // struct_declaration_list
-      char dummy36[sizeof (std::vector<StructDeclaration>)];
+      char dummy37[sizeof (std::vector<StructDeclaration>)];
 
       // struct_declarator_list
-      char dummy37[sizeof (std::vector<StructDeclarator>)];
+      char dummy38[sizeof (std::vector<StructDeclarator>)];
 
       // type_qualifier_list
-      char dummy38[sizeof (std::vector<TypeQualifier>)];
+      char dummy39[sizeof (std::vector<TypeQualifier>)];
 
       // identifier_list
-      char dummy39[sizeof (std::vector<std::string>)];
+      char dummy40[sizeof (std::vector<std::string>)];
 
       // "i_const"
-      char dummy40[sizeof (uint64_t)];
+      char dummy41[sizeof (uint64_t)];
     };
 
     /// The size of the largest semantic type.
@@ -1032,6 +1035,10 @@ namespace  WadeSpace  {
         value.move< AssignmentOperator > (std::move (that.value));
         break;
 
+      case symbol_kind::S_cast_expression: // cast_expression
+        value.move< CastExpression > (std::move (that.value));
+        break;
+
       case symbol_kind::S_constant: // constant
         value.move< Constant > (std::move (that.value));
         break;
@@ -1064,7 +1071,6 @@ namespace  WadeSpace  {
         value.move< Enumerator > (std::move (that.value));
         break;
 
-      case symbol_kind::S_cast_expression: // cast_expression
       case symbol_kind::S_multiplicative_expression: // multiplicative_expression
       case symbol_kind::S_additive_expression: // additive_expression
       case symbol_kind::S_shift_expression: // shift_expression
@@ -1331,6 +1337,20 @@ namespace  WadeSpace  {
       {}
 #else
       basic_symbol (typename Base::kind_type t, const AssignmentOperator& v, const location_type& l)
+        : Base (t)
+        , value (v)
+        , location (l)
+      {}
+#endif
+
+#if 201103L <= YY_CPLUSPLUS
+      basic_symbol (typename Base::kind_type t, CastExpression&& v, location_type&& l)
+        : Base (t)
+        , value (std::move (v))
+        , location (std::move (l))
+      {}
+#else
+      basic_symbol (typename Base::kind_type t, const CastExpression& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1901,6 +1921,10 @@ switch (yykind)
         value.template destroy< AssignmentOperator > ();
         break;
 
+      case symbol_kind::S_cast_expression: // cast_expression
+        value.template destroy< CastExpression > ();
+        break;
+
       case symbol_kind::S_constant: // constant
         value.template destroy< Constant > ();
         break;
@@ -1933,7 +1957,6 @@ switch (yykind)
         value.template destroy< Enumerator > ();
         break;
 
-      case symbol_kind::S_cast_expression: // cast_expression
       case symbol_kind::S_multiplicative_expression: // multiplicative_expression
       case symbol_kind::S_additive_expression: // additive_expression
       case symbol_kind::S_shift_expression: // shift_expression
@@ -4152,6 +4175,10 @@ switch (yykind)
         value.copy< AssignmentOperator > (YY_MOVE (that.value));
         break;
 
+      case symbol_kind::S_cast_expression: // cast_expression
+        value.copy< CastExpression > (YY_MOVE (that.value));
+        break;
+
       case symbol_kind::S_constant: // constant
         value.copy< Constant > (YY_MOVE (that.value));
         break;
@@ -4184,7 +4211,6 @@ switch (yykind)
         value.copy< Enumerator > (YY_MOVE (that.value));
         break;
 
-      case symbol_kind::S_cast_expression: // cast_expression
       case symbol_kind::S_multiplicative_expression: // multiplicative_expression
       case symbol_kind::S_additive_expression: // additive_expression
       case symbol_kind::S_shift_expression: // shift_expression
@@ -4445,6 +4471,10 @@ switch (yykind)
         value.move< AssignmentOperator > (YY_MOVE (s.value));
         break;
 
+      case symbol_kind::S_cast_expression: // cast_expression
+        value.move< CastExpression > (YY_MOVE (s.value));
+        break;
+
       case symbol_kind::S_constant: // constant
         value.move< Constant > (YY_MOVE (s.value));
         break;
@@ -4477,7 +4507,6 @@ switch (yykind)
         value.move< Enumerator > (YY_MOVE (s.value));
         break;
 
-      case symbol_kind::S_cast_expression: // cast_expression
       case symbol_kind::S_multiplicative_expression: // multiplicative_expression
       case symbol_kind::S_additive_expression: // additive_expression
       case symbol_kind::S_shift_expression: // shift_expression
@@ -4766,7 +4795,7 @@ switch (yykind)
 
 #line 9 "parser.y"
 } //  WadeSpace 
-#line 4770 "parser.hpp"
+#line 4799 "parser.hpp"
 
 
 
