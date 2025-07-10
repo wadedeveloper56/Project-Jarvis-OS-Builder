@@ -525,13 +525,13 @@ Nonterminals, with rules where they appear
     type_qualifier_list <std::vector<TypeQualifier>> (136)
         on left: 147 148
         on right: 144 146 148
-    parameter_type_list (137)
+    parameter_type_list <ParameterTypeList> (137)
         on left: 149 150
         on right: 140 169 171
-    parameter_list (138)
+    parameter_list <std::vector<ParameterDeclaration>> (138)
         on left: 151 152
         on right: 149 150 152
-    parameter_declaration (139)
+    parameter_declaration <ParameterDeclaration> (139)
         on left: 153 154 155
         on right: 151 152
     identifier_list <std::vector<std::string>> (140)

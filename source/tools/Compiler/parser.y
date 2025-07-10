@@ -39,6 +39,8 @@
     #include "InitDeclarator.h"
     #include "AssignmentExpression.h"
     #include "Declaration.h"
+    #include "ParameterDeclaration.h"
+    #include "ParameterTypeList.h"
 
     using namespace std;
 
@@ -225,6 +227,9 @@
 %type<InitDeclarator> init_declarator
 %type<std::vector<InitDeclarator>> init_declarator_list
 %type<Declaration> declaration
+%type<ParameterDeclaration> parameter_declaration
+%type<ParameterTypeList> parameter_type_list
+%type<std::vector<ParameterDeclaration>> parameter_list
 
 %start translation_unit
 
@@ -233,7 +238,7 @@
 primary_expression
     : IDENTIFIER                { $<Expression>$ = Expression($1); cout << "IDENTIFIER REDUCE to primary_expression" << endl; }
     | constant                  { $<Expression>$ = Expression($1); cout << "constant REDUCE to primary_expression" << endl; }
-    | OPAREN expression CPAREN  { $<Expression>$ = $2; cout << "(expression) REDUCE to primary_expression" << endl; }
+    | OPAREN expression CPAREN  { $<Expression>$ = $2; cout << "OPAREN expression CPAREN REDUCE to primary_expression" << endl; }
     ;
 
 constant
@@ -586,19 +591,30 @@ type_qualifier_list
 
 
 parameter_type_list
-    : parameter_list                  { cout << "parameter_list REDUCE to parameter_type_list" << endl; }
-    | parameter_list COMMA ELLIPSIS   { cout << "parameter_list COMMA ELLIPSIS REDUCE to parameter_type_list" << endl; }
+    : parameter_list                  { $<ParameterTypeList>$ = ParameterTypeList($1,""); cout << "parameter_list REDUCE to parameter_type_list" << endl; }
+    | parameter_list COMMA ELLIPSIS   { $<ParameterTypeList>$ = ParameterTypeList($1,$2); cout << "parameter_list COMMA ELLIPSIS REDUCE to parameter_type_list" << endl; }
     ;
 
 parameter_list
-    : parameter_declaration                       { cout << "parameter_declaration REDUCE to parameter_list" << endl; }
-    | parameter_list COMMA parameter_declaration  { cout << "parameter_list COMMA parameter_declaration REDUCE to parameter_list" << endl; }
+    : parameter_declaration                       {
+                                                    ParameterDeclaration exp = $1;
+                                                    $$ = std::vector<ParameterDeclaration>();
+                                                    $$.push_back(exp);
+                                                    cout << "parameter_declaration REDUCE to parameter_list" << endl;
+                                                  }
+    | parameter_list COMMA parameter_declaration  {
+                                                    ParameterDeclaration value1 = $3;
+                                                    std::vector<ParameterDeclaration> &value2 = $1;
+                                                    value2.push_back(value1);
+                                                    $$ = value2;
+                                                    cout << "parameter_list COMMA parameter_declaration REDUCE to parameter_list" << endl;
+                                                  }
     ;
 
 parameter_declaration
-    : declaration_specifiers declarator           { cout << "declaration_specifiers declarator REDUCE to parameter_declaration" << endl; }
-    | declaration_specifiers abstract_declarator  { cout << "declaration_specifiers abstract_declarator REDUCE to parameter_declaration" << endl; }
-    | declaration_specifiers                      { cout << "declaration_specifiers REDUCE to parameter_declaration" << endl; }
+    : declaration_specifiers declarator           { $<ParameterDeclaration>$ = ParameterDeclaration($1,$2); cout << "declaration_specifiers declarator REDUCE to parameter_declaration" << endl; }
+    | declaration_specifiers abstract_declarator  { $<ParameterDeclaration>$ = ParameterDeclaration($1,$2); cout << "declaration_specifiers abstract_declarator REDUCE to parameter_declaration" << endl; }
+    | declaration_specifiers                      { $<ParameterDeclaration>$ = ParameterDeclaration($1); cout << "declaration_specifiers REDUCE to parameter_declaration" << endl; }
     ;
 
 identifier_list

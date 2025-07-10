@@ -197,6 +197,8 @@
     <ClInclude Include="Initializer.h" />
     <ClInclude Include="interpreter.h" />
     <ClInclude Include="location.hh" />
+    <ClInclude Include="ParameterDeclaration.h" />
+    <ClInclude Include="ParameterTypeList.h" />
     <ClInclude Include="parser.hpp" />
     <ClInclude Include="Pointer.h" />
     <ClInclude Include="position.hh" />
@@ -230,6 +232,8 @@
     <ClCompile Include="Initializer.cpp" />
     <ClCompile Include="interpreter.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="ParameterDeclaration.cpp" />
+    <ClCompile Include="ParameterTypeList.cpp" />
     <ClCompile Include="parser.cpp" />
     <ClCompile Include="Pointer.cpp" />
     <ClCompile Include="scanner.cpp" />

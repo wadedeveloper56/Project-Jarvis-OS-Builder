@@ -108,6 +108,12 @@
     <ClInclude Include="Declaration.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ParameterDeclaration.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ParameterTypeList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="parser.cpp">
@@ -192,6 +198,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Declaration.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ParameterDeclaration.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ParameterTypeList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

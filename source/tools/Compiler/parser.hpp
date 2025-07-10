@@ -77,6 +77,8 @@
     #include "InitDeclarator.h"
     #include "AssignmentExpression.h"
     #include "Declaration.h"
+    #include "ParameterDeclaration.h"
+    #include "ParameterTypeList.h"
 
     using namespace std;
 
@@ -85,7 +87,7 @@
         class Interpreter;
     }
 
-#line 89 "parser.hpp"
+#line 91 "parser.hpp"
 
 # include <cassert>
 # include <cstdlib> // std::abort
@@ -226,7 +228,7 @@
 
 #line 9 "parser.y"
 namespace  WadeSpace  {
-#line 230 "parser.hpp"
+#line 232 "parser.hpp"
 
 
 
@@ -503,38 +505,44 @@ namespace  WadeSpace  {
       // initializer
       char dummy14[sizeof (Initializer)];
 
+      // parameter_declaration
+      char dummy15[sizeof (ParameterDeclaration)];
+
+      // parameter_type_list
+      char dummy16[sizeof (ParameterTypeList)];
+
       // pointer
-      char dummy15[sizeof (Pointer)];
+      char dummy17[sizeof (Pointer)];
 
       // specifier_qualifier_list
-      char dummy16[sizeof (SpecifierQualifierList)];
+      char dummy18[sizeof (SpecifierQualifierList)];
 
       // storage_class_specifier
-      char dummy17[sizeof (StorageClassSpecifier)];
+      char dummy19[sizeof (StorageClassSpecifier)];
 
       // struct_declaration
-      char dummy18[sizeof (StructDeclaration)];
+      char dummy20[sizeof (StructDeclaration)];
 
       // struct_declarator
-      char dummy19[sizeof (StructDeclarator)];
+      char dummy21[sizeof (StructDeclarator)];
 
       // struct_or_union
-      char dummy20[sizeof (StructOrUnion)];
+      char dummy22[sizeof (StructOrUnion)];
 
       // struct_or_union_specifier
-      char dummy21[sizeof (StructOrUnionSpecifier)];
+      char dummy23[sizeof (StructOrUnionSpecifier)];
 
       // type_name
-      char dummy22[sizeof (TypeName)];
+      char dummy24[sizeof (TypeName)];
 
       // type_qualifier
-      char dummy23[sizeof (TypeQualifier)];
+      char dummy25[sizeof (TypeQualifier)];
 
       // type_specifier
-      char dummy24[sizeof (TypeSpecifier)];
+      char dummy26[sizeof (TypeSpecifier)];
 
       // "f_const"
-      char dummy25[sizeof (long double)];
+      char dummy27[sizeof (long double)];
 
       // "identifier"
       // "sting_literal"
@@ -625,34 +633,37 @@ namespace  WadeSpace  {
       // "/"
       // "%"
       // unary_operator
-      char dummy26[sizeof (std::string)];
+      char dummy28[sizeof (std::string)];
 
       // enumerator_list
-      char dummy27[sizeof (std::vector<Enumerator>)];
+      char dummy29[sizeof (std::vector<Enumerator>)];
 
       // argument_expression_list
-      char dummy28[sizeof (std::vector<Expression>)];
+      char dummy30[sizeof (std::vector<Expression>)];
 
       // init_declarator_list
-      char dummy29[sizeof (std::vector<InitDeclarator>)];
+      char dummy31[sizeof (std::vector<InitDeclarator>)];
 
       // initializer_list
-      char dummy30[sizeof (std::vector<Initializer>)];
+      char dummy32[sizeof (std::vector<Initializer>)];
+
+      // parameter_list
+      char dummy33[sizeof (std::vector<ParameterDeclaration>)];
 
       // struct_declaration_list
-      char dummy31[sizeof (std::vector<StructDeclaration>)];
+      char dummy34[sizeof (std::vector<StructDeclaration>)];
 
       // struct_declarator_list
-      char dummy32[sizeof (std::vector<StructDeclarator>)];
+      char dummy35[sizeof (std::vector<StructDeclarator>)];
 
       // type_qualifier_list
-      char dummy33[sizeof (std::vector<TypeQualifier>)];
+      char dummy36[sizeof (std::vector<TypeQualifier>)];
 
       // identifier_list
-      char dummy34[sizeof (std::vector<std::string>)];
+      char dummy37[sizeof (std::vector<std::string>)];
 
       // "i_const"
-      char dummy35[sizeof (uint64_t)];
+      char dummy38[sizeof (uint64_t)];
     };
 
     /// The size of the largest semantic type.
@@ -1079,6 +1090,14 @@ namespace  WadeSpace  {
         value.move< Initializer > (std::move (that.value));
         break;
 
+      case symbol_kind::S_parameter_declaration: // parameter_declaration
+        value.move< ParameterDeclaration > (std::move (that.value));
+        break;
+
+      case symbol_kind::S_parameter_type_list: // parameter_type_list
+        value.move< ParameterTypeList > (std::move (that.value));
+        break;
+
       case symbol_kind::S_pointer: // pointer
         value.move< Pointer > (std::move (that.value));
         break;
@@ -1229,6 +1248,10 @@ namespace  WadeSpace  {
 
       case symbol_kind::S_initializer_list: // initializer_list
         value.move< std::vector<Initializer> > (std::move (that.value));
+        break;
+
+      case symbol_kind::S_parameter_list: // parameter_list
+        value.move< std::vector<ParameterDeclaration> > (std::move (that.value));
         break;
 
       case symbol_kind::S_struct_declaration_list: // struct_declaration_list
@@ -1471,6 +1494,34 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
+      basic_symbol (typename Base::kind_type t, ParameterDeclaration&& v, location_type&& l)
+        : Base (t)
+        , value (std::move (v))
+        , location (std::move (l))
+      {}
+#else
+      basic_symbol (typename Base::kind_type t, const ParameterDeclaration& v, const location_type& l)
+        : Base (t)
+        , value (v)
+        , location (l)
+      {}
+#endif
+
+#if 201103L <= YY_CPLUSPLUS
+      basic_symbol (typename Base::kind_type t, ParameterTypeList&& v, location_type&& l)
+        : Base (t)
+        , value (std::move (v))
+        , location (std::move (l))
+      {}
+#else
+      basic_symbol (typename Base::kind_type t, const ParameterTypeList& v, const location_type& l)
+        : Base (t)
+        , value (v)
+        , location (l)
+      {}
+#endif
+
+#if 201103L <= YY_CPLUSPLUS
       basic_symbol (typename Base::kind_type t, Pointer&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
@@ -1695,6 +1746,20 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
+      basic_symbol (typename Base::kind_type t, std::vector<ParameterDeclaration>&& v, location_type&& l)
+        : Base (t)
+        , value (std::move (v))
+        , location (std::move (l))
+      {}
+#else
+      basic_symbol (typename Base::kind_type t, const std::vector<ParameterDeclaration>& v, const location_type& l)
+        : Base (t)
+        , value (v)
+        , location (l)
+      {}
+#endif
+
+#if 201103L <= YY_CPLUSPLUS
       basic_symbol (typename Base::kind_type t, std::vector<StructDeclaration>&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
@@ -1860,6 +1925,14 @@ switch (yykind)
         value.template destroy< Initializer > ();
         break;
 
+      case symbol_kind::S_parameter_declaration: // parameter_declaration
+        value.template destroy< ParameterDeclaration > ();
+        break;
+
+      case symbol_kind::S_parameter_type_list: // parameter_type_list
+        value.template destroy< ParameterTypeList > ();
+        break;
+
       case symbol_kind::S_pointer: // pointer
         value.template destroy< Pointer > ();
         break;
@@ -2010,6 +2083,10 @@ switch (yykind)
 
       case symbol_kind::S_initializer_list: // initializer_list
         value.template destroy< std::vector<Initializer> > ();
+        break;
+
+      case symbol_kind::S_parameter_list: // parameter_list
+        value.template destroy< std::vector<ParameterDeclaration> > ();
         break;
 
       case symbol_kind::S_struct_declaration_list: // struct_declaration_list
@@ -4093,6 +4170,14 @@ switch (yykind)
         value.copy< Initializer > (YY_MOVE (that.value));
         break;
 
+      case symbol_kind::S_parameter_declaration: // parameter_declaration
+        value.copy< ParameterDeclaration > (YY_MOVE (that.value));
+        break;
+
+      case symbol_kind::S_parameter_type_list: // parameter_type_list
+        value.copy< ParameterTypeList > (YY_MOVE (that.value));
+        break;
+
       case symbol_kind::S_pointer: // pointer
         value.copy< Pointer > (YY_MOVE (that.value));
         break;
@@ -4245,6 +4330,10 @@ switch (yykind)
         value.copy< std::vector<Initializer> > (YY_MOVE (that.value));
         break;
 
+      case symbol_kind::S_parameter_list: // parameter_list
+        value.copy< std::vector<ParameterDeclaration> > (YY_MOVE (that.value));
+        break;
+
       case symbol_kind::S_struct_declaration_list: // struct_declaration_list
         value.copy< std::vector<StructDeclaration> > (YY_MOVE (that.value));
         break;
@@ -4366,6 +4455,14 @@ switch (yykind)
 
       case symbol_kind::S_initializer: // initializer
         value.move< Initializer > (YY_MOVE (s.value));
+        break;
+
+      case symbol_kind::S_parameter_declaration: // parameter_declaration
+        value.move< ParameterDeclaration > (YY_MOVE (s.value));
+        break;
+
+      case symbol_kind::S_parameter_type_list: // parameter_type_list
+        value.move< ParameterTypeList > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_pointer: // pointer
@@ -4520,6 +4617,10 @@ switch (yykind)
         value.move< std::vector<Initializer> > (YY_MOVE (s.value));
         break;
 
+      case symbol_kind::S_parameter_list: // parameter_list
+        value.move< std::vector<ParameterDeclaration> > (YY_MOVE (s.value));
+        break;
+
       case symbol_kind::S_struct_declaration_list: // struct_declaration_list
         value.move< std::vector<StructDeclaration> > (YY_MOVE (s.value));
         break;
@@ -4607,7 +4708,7 @@ switch (yykind)
 
 #line 9 "parser.y"
 } //  WadeSpace 
-#line 4611 "parser.hpp"
+#line 4712 "parser.hpp"
 
 
 
