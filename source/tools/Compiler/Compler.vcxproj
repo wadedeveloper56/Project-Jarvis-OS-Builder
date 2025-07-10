@@ -182,6 +182,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AbstractDeclarator.h" />
+    <ClInclude Include="AdditiveExpression.h" />
     <ClInclude Include="AssignmentOperator.h" />
     <ClInclude Include="CastExpression.h" />
     <ClInclude Include="Constant.h" />
@@ -197,6 +198,7 @@
     <ClInclude Include="Initializer.h" />
     <ClInclude Include="interpreter.h" />
     <ClInclude Include="location.hh" />
+    <ClInclude Include="MultiplicativeExpression.h" />
     <ClInclude Include="ParameterDeclaration.h" />
     <ClInclude Include="ParameterTypeList.h" />
     <ClInclude Include="parser.hpp" />
@@ -205,6 +207,7 @@
     <ClInclude Include="PostfixExpression.h" />
     <ClInclude Include="PrimaryExpression.h" />
     <ClInclude Include="scanner.h" />
+    <ClInclude Include="ShiftExpression.h" />
     <ClInclude Include="SpecifierQualifierList.h" />
     <ClInclude Include="stack.hh" />
     <ClInclude Include="StorageClassSpecifier.h" />
@@ -220,6 +223,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AbstractDeclarator.cpp" />
+    <ClCompile Include="AdditiveExpression.cpp" />
     <ClCompile Include="AssignmentOperator.cpp" />
     <ClCompile Include="CastExpression.cpp" />
     <ClCompile Include="Constant.cpp" />
@@ -235,6 +239,7 @@
     <ClCompile Include="Initializer.cpp" />
     <ClCompile Include="interpreter.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MultiplicativeExpression.cpp" />
     <ClCompile Include="ParameterDeclaration.cpp" />
     <ClCompile Include="ParameterTypeList.cpp" />
     <ClCompile Include="parser.cpp" />
@@ -242,6 +247,7 @@
     <ClCompile Include="PostfixExpression.cpp" />
     <ClCompile Include="PrimaryExpression.cpp" />
     <ClCompile Include="scanner.cpp" />
+    <ClCompile Include="ShiftExpression.cpp" />
     <ClCompile Include="SpecifierQualifierList.cpp" />
     <ClCompile Include="StorageClassSpecifier.cpp" />
     <ClCompile Include="StructDeclaration.cpp" />

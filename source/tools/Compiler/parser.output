@@ -417,13 +417,13 @@ Nonterminals, with rules where they appear
     cast_expression <CastExpression> (100)
         on left: 31 32
         on right: 22 32 33 34 35 36
-    multiplicative_expression <Expression> (101)
+    multiplicative_expression <MultiplicativeExpression> (101)
         on left: 33 34 35 36
         on right: 34 35 36 37 38 39
-    additive_expression <Expression> (102)
+    additive_expression <AdditiveExpression> (102)
         on left: 37 38 39
         on right: 38 39 40 41 42
-    shift_expression <Expression> (103)
+    shift_expression <ShiftExpression> (103)
         on left: 40 41 42
         on right: 41 42 43 44 45 46 47
     relational_expression <Expression> (104)

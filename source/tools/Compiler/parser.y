@@ -44,6 +44,9 @@
     #include "PostfixExpression.h"
     #include "UnaryExpression.h"
     #include "CastExpression.h"    
+    #include "MultiplicativeExpression.h"
+    #include "AdditiveExpression.h"
+    #include "ShiftExpression.h"
 
     using namespace std;
 
@@ -188,9 +191,9 @@
 %type<PostfixExpression> postfix_expression
 %type<UnaryExpression> unary_expression
 %type<CastExpression> cast_expression
-%type<Expression> multiplicative_expression
-%type<Expression> additive_expression
-%type<Expression> shift_expression
+%type<MultiplicativeExpression> multiplicative_expression
+%type<AdditiveExpression> additive_expression
+%type<ShiftExpression> shift_expression
 %type<Expression> relational_expression
 %type<Expression> equality_expression
 %type<Expression> and_expression
@@ -314,26 +317,26 @@ cast_expression
     ;
 
 multiplicative_expression
-    : cast_expression                                    { $<Expression>$ = Expression();  cout << "cast_expression REDUCE to multiplicative_expression" << endl;}
-    | multiplicative_expression TIMES_OP cast_expression { $<Expression>$ = Expression(); cout << "multiplicative_expression TIMES_OP cast_expression REDUCE to multiplicative_expression" << endl;}
-    | multiplicative_expression DIV_OP cast_expression   { $<Expression>$ = Expression(); cout << "multiplicative_expression DIV_OP cast_expression REDUCE to multiplicative_expression" << endl;}
-    | multiplicative_expression MOD_OP cast_expression   { $<Expression>$ = Expression(); cout << "multiplicative_expression MOD_OP cast_expression REDUCE to multiplicative_expression" << endl;}
+    : cast_expression                                    { $<MultiplicativeExpression>$ = MultiplicativeExpression();  cout << "cast_expression REDUCE to multiplicative_expression" << endl;}
+    | multiplicative_expression TIMES_OP cast_expression { $<MultiplicativeExpression>$ = MultiplicativeExpression(); cout << "multiplicative_expression TIMES_OP cast_expression REDUCE to multiplicative_expression" << endl;}
+    | multiplicative_expression DIV_OP cast_expression   { $<MultiplicativeExpression>$ = MultiplicativeExpression(); cout << "multiplicative_expression DIV_OP cast_expression REDUCE to multiplicative_expression" << endl;}
+    | multiplicative_expression MOD_OP cast_expression   { $<MultiplicativeExpression>$ = MultiplicativeExpression(); cout << "multiplicative_expression MOD_OP cast_expression REDUCE to multiplicative_expression" << endl;}
     ;
 
 additive_expression
-    : multiplicative_expression                               { $<Expression>$ = $1;  cout << "multiplicative_expression REDUCE to additive_expression" << endl;}
-    | additive_expression PLUS_OP multiplicative_expression   { $<Expression>$ = Expression(); cout << "additive_expression REDUCE to multiplicative_expression" << endl;}
-    | additive_expression MINUS_OP multiplicative_expression  { $<Expression>$ = Expression(); cout << "additive_expression REDUCE to multiplicative_expression" << endl;}
+    : multiplicative_expression                               { $<AdditiveExpression>$ = AdditiveExpression();  cout << "multiplicative_expression REDUCE to additive_expression" << endl;}
+    | additive_expression PLUS_OP multiplicative_expression   { $<AdditiveExpression>$ = AdditiveExpression(); cout << "additive_expression REDUCE to multiplicative_expression" << endl;}
+    | additive_expression MINUS_OP multiplicative_expression  { $<AdditiveExpression>$ = AdditiveExpression(); cout << "additive_expression REDUCE to multiplicative_expression" << endl;}
     ;
 
 shift_expression
-    : additive_expression                           { $<Expression>$ = $1;  cout << "additive_expression REDUCE to shift_expression" << endl;}
-    | shift_expression LEFT_OP additive_expression  { $<Expression>$ = Expression(); cout << "shift_expression LEFT_OP additive_expression REDUCE to shift_expression" << endl;}
-    | shift_expression RIGHT_OP additive_expression { $<Expression>$ = Expression(); cout << "shift_expression RIGHT_OP additive_expression REDUCE to shift_expression" << endl;}
+    : additive_expression                           { $<ShiftExpression>$ = ShiftExpression();  cout << "additive_expression REDUCE to shift_expression" << endl;}
+    | shift_expression LEFT_OP additive_expression  { $<ShiftExpression>$ = ShiftExpression(); cout << "shift_expression LEFT_OP additive_expression REDUCE to shift_expression" << endl;}
+    | shift_expression RIGHT_OP additive_expression { $<ShiftExpression>$ = ShiftExpression(); cout << "shift_expression RIGHT_OP additive_expression REDUCE to shift_expression" << endl;}
     ;
 
 relational_expression
-    : shift_expression                                       { $<Expression>$ = $1;  cout << "shift_expression REDUCE to relational_expression" << endl;}
+    : shift_expression                                       { $<Expression>$ = Expression();  cout << "shift_expression REDUCE to relational_expression" << endl;}
     | relational_expression LESS shift_expression            { $<Expression>$ = Expression(); cout << "relational_expression LESS shift_expression REDUCE to shift_expression" << endl;}
     | relational_expression GREATER shift_expression         { $<Expression>$ = Expression(); cout << "relational_expression GREATER shift_expression REDUCE to shift_expression" << endl;}
     | relational_expression LESS_EQUAL shift_expression      { $<Expression>$ = Expression(); cout << "relational_expression LESS_EQUAL shift_expression REDUCE to shift_expression" << endl;}
