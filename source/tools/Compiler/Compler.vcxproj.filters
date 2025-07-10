@@ -102,9 +102,6 @@
     <ClInclude Include="InitDeclarator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AssignmentExpression.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Declaration.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -112,6 +109,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ParameterTypeList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PrimaryExpression.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PostfixExpression.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UnaryExpression.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -194,9 +200,6 @@
     <ClCompile Include="InitDeclarator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AssignmentExpression.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Declaration.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -204,6 +207,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ParameterTypeList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PrimaryExpression.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PostfixExpression.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UnaryExpression.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

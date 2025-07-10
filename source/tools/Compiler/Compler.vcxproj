@@ -182,7 +182,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AbstractDeclarator.h" />
-    <ClInclude Include="AssignmentExpression.h" />
     <ClInclude Include="AssignmentOperator.h" />
     <ClInclude Include="Constant.h" />
     <ClInclude Include="Declaration.h" />
@@ -202,6 +201,8 @@
     <ClInclude Include="parser.hpp" />
     <ClInclude Include="Pointer.h" />
     <ClInclude Include="position.hh" />
+    <ClInclude Include="PostfixExpression.h" />
+    <ClInclude Include="PrimaryExpression.h" />
     <ClInclude Include="scanner.h" />
     <ClInclude Include="SpecifierQualifierList.h" />
     <ClInclude Include="stack.hh" />
@@ -214,10 +215,10 @@
     <ClInclude Include="TypeName.h" />
     <ClInclude Include="TypeQualifier.h" />
     <ClInclude Include="TypeSpecifier.h" />
+    <ClInclude Include="UnaryExpression.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AbstractDeclarator.cpp" />
-    <ClCompile Include="AssignmentExpression.cpp" />
     <ClCompile Include="AssignmentOperator.cpp" />
     <ClCompile Include="Constant.cpp" />
     <ClCompile Include="Declaration.cpp" />
@@ -236,6 +237,8 @@
     <ClCompile Include="ParameterTypeList.cpp" />
     <ClCompile Include="parser.cpp" />
     <ClCompile Include="Pointer.cpp" />
+    <ClCompile Include="PostfixExpression.cpp" />
+    <ClCompile Include="PrimaryExpression.cpp" />
     <ClCompile Include="scanner.cpp" />
     <ClCompile Include="SpecifierQualifierList.cpp" />
     <ClCompile Include="StorageClassSpecifier.cpp" />
@@ -246,6 +249,7 @@
     <ClCompile Include="TypeName.cpp" />
     <ClCompile Include="TypeQualifier.cpp" />
     <ClCompile Include="TypeSpecifier.cpp" />
+    <ClCompile Include="UnaryExpression.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

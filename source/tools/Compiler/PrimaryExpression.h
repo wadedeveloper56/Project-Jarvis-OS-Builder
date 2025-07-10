@@ -6,11 +6,10 @@
 #include <optional>
 
 namespace WadeSpace {
-	class Expression
+	class PrimaryExpression
 	{
 	public:
-		Expression();
-		~Expression();
+		PrimaryExpression();
+		~PrimaryExpression();
 	};
 }
-

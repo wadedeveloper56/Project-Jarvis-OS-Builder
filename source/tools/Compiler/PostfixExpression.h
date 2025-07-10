@@ -6,11 +6,10 @@
 #include <optional>
 
 namespace WadeSpace {
-	class Expression
+	class PostfixExpression
 	{
 	public:
-		Expression();
-		~Expression();
+		PostfixExpression();
+		~PostfixExpression();
 	};
 }
-
