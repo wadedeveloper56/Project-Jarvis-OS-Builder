@@ -426,16 +426,16 @@ Nonterminals, with rules where they appear
     shift_expression <ShiftExpression> (103)
         on left: 40 41 42
         on right: 41 42 43 44 45 46 47
-    relational_expression <Expression> (104)
+    relational_expression <RelationalExpression> (104)
         on left: 43 44 45 46 47
         on right: 44 45 46 47 48 49 50
-    equality_expression <Expression> (105)
+    equality_expression <EqualityExpression> (105)
         on left: 48 49 50
         on right: 49 50 51 52
-    and_expression <Expression> (106)
+    and_expression <AndExpression> (106)
         on left: 51 52
         on right: 52 53 54
-    exclusive_or_expression <Expression> (107)
+    exclusive_or_expression <ExclusiveOrExpression> (107)
         on left: 53 54
         on right: 54 55 56
     inclusive_or_expression <Expression> (108)

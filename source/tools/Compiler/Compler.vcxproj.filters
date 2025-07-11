@@ -132,6 +132,18 @@
     <ClInclude Include="ShiftExpression.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="RelationalExpression.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EqualityExpression.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AndExpression.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ExclusiveOrExpression.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="parser.cpp">
@@ -240,6 +252,18 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ShiftExpression.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RelationalExpression.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EqualityExpression.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AndExpression.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ExclusiveOrExpression.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

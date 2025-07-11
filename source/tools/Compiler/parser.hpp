@@ -85,6 +85,10 @@
     #include "MultiplicativeExpression.h"
     #include "AdditiveExpression.h"
     #include "ShiftExpression.h"
+    #include "RelationalExpression.h"
+    #include "EqualityExpression.h"
+    #include "AndExpression.h"
+    #include "ExclusiveOrExpression.h"
 
     using namespace std;
 
@@ -93,7 +97,7 @@
         class Interpreter;
     }
 
-#line 97 "parser.hpp"
+#line 101 "parser.hpp"
 
 # include <cassert>
 # include <cstdlib> // std::abort
@@ -234,7 +238,7 @@
 
 #line 9 "parser.y"
 namespace  WadeSpace  {
-#line 238 "parser.hpp"
+#line 242 "parser.hpp"
 
 
 
@@ -459,40 +463,45 @@ namespace  WadeSpace  {
       // additive_expression
       char dummy2[sizeof (AdditiveExpression)];
 
+      // and_expression
+      char dummy3[sizeof (AndExpression)];
+
       // assignment_operator
-      char dummy3[sizeof (AssignmentOperator)];
+      char dummy4[sizeof (AssignmentOperator)];
 
       // cast_expression
-      char dummy4[sizeof (CastExpression)];
+      char dummy5[sizeof (CastExpression)];
 
       // constant
-      char dummy5[sizeof (Constant)];
+      char dummy6[sizeof (Constant)];
 
       // declaration
-      char dummy6[sizeof (Declaration)];
+      char dummy7[sizeof (Declaration)];
 
       // declaration_specifiers
-      char dummy7[sizeof (DeclarationSpecifiers)];
+      char dummy8[sizeof (DeclarationSpecifiers)];
 
       // declarator
-      char dummy8[sizeof (Declarator)];
+      char dummy9[sizeof (Declarator)];
 
       // direct_abstract_declarator
-      char dummy9[sizeof (DirectAbstractDeclarator)];
+      char dummy10[sizeof (DirectAbstractDeclarator)];
 
       // direct_declarator
-      char dummy10[sizeof (DirectDeclarator)];
+      char dummy11[sizeof (DirectDeclarator)];
 
       // enum_specifier
-      char dummy11[sizeof (EnumSpecifier)];
+      char dummy12[sizeof (EnumSpecifier)];
 
       // enumerator
-      char dummy12[sizeof (Enumerator)];
+      char dummy13[sizeof (Enumerator)];
 
-      // relational_expression
       // equality_expression
-      // and_expression
+      char dummy14[sizeof (EqualityExpression)];
+
       // exclusive_or_expression
+      char dummy15[sizeof (ExclusiveOrExpression)];
+
       // inclusive_or_expression
       // logical_and_expression
       // logical_or_expression
@@ -500,67 +509,70 @@ namespace  WadeSpace  {
       // assignment_expression
       // expression
       // constant_expression
-      char dummy13[sizeof (Expression)];
+      char dummy16[sizeof (Expression)];
 
       // init_declarator
-      char dummy14[sizeof (InitDeclarator)];
+      char dummy17[sizeof (InitDeclarator)];
 
       // initializer
-      char dummy15[sizeof (Initializer)];
+      char dummy18[sizeof (Initializer)];
 
       // multiplicative_expression
-      char dummy16[sizeof (MultiplicativeExpression)];
+      char dummy19[sizeof (MultiplicativeExpression)];
 
       // parameter_declaration
-      char dummy17[sizeof (ParameterDeclaration)];
+      char dummy20[sizeof (ParameterDeclaration)];
 
       // parameter_type_list
-      char dummy18[sizeof (ParameterTypeList)];
+      char dummy21[sizeof (ParameterTypeList)];
 
       // pointer
-      char dummy19[sizeof (Pointer)];
+      char dummy22[sizeof (Pointer)];
 
       // postfix_expression
-      char dummy20[sizeof (PostfixExpression)];
+      char dummy23[sizeof (PostfixExpression)];
 
       // primary_expression
-      char dummy21[sizeof (PrimaryExpression)];
+      char dummy24[sizeof (PrimaryExpression)];
+
+      // relational_expression
+      char dummy25[sizeof (RelationalExpression)];
 
       // shift_expression
-      char dummy22[sizeof (ShiftExpression)];
+      char dummy26[sizeof (ShiftExpression)];
 
       // specifier_qualifier_list
-      char dummy23[sizeof (SpecifierQualifierList)];
+      char dummy27[sizeof (SpecifierQualifierList)];
 
       // storage_class_specifier
-      char dummy24[sizeof (StorageClassSpecifier)];
+      char dummy28[sizeof (StorageClassSpecifier)];
 
       // struct_declaration
-      char dummy25[sizeof (StructDeclaration)];
+      char dummy29[sizeof (StructDeclaration)];
 
       // struct_declarator
-      char dummy26[sizeof (StructDeclarator)];
+      char dummy30[sizeof (StructDeclarator)];
 
       // struct_or_union
-      char dummy27[sizeof (StructOrUnion)];
+      char dummy31[sizeof (StructOrUnion)];
 
       // struct_or_union_specifier
-      char dummy28[sizeof (StructOrUnionSpecifier)];
+      char dummy32[sizeof (StructOrUnionSpecifier)];
 
       // type_name
-      char dummy29[sizeof (TypeName)];
+      char dummy33[sizeof (TypeName)];
 
       // type_qualifier
-      char dummy30[sizeof (TypeQualifier)];
+      char dummy34[sizeof (TypeQualifier)];
 
       // type_specifier
-      char dummy31[sizeof (TypeSpecifier)];
+      char dummy35[sizeof (TypeSpecifier)];
 
       // unary_expression
-      char dummy32[sizeof (UnaryExpression)];
+      char dummy36[sizeof (UnaryExpression)];
 
       // "f_const"
-      char dummy33[sizeof (long double)];
+      char dummy37[sizeof (long double)];
 
       // "identifier"
       // "sting_literal"
@@ -651,37 +663,37 @@ namespace  WadeSpace  {
       // "/"
       // "%"
       // unary_operator
-      char dummy34[sizeof (std::string)];
+      char dummy38[sizeof (std::string)];
 
       // enumerator_list
-      char dummy35[sizeof (std::vector<Enumerator>)];
+      char dummy39[sizeof (std::vector<Enumerator>)];
 
       // argument_expression_list
-      char dummy36[sizeof (std::vector<Expression>)];
+      char dummy40[sizeof (std::vector<Expression>)];
 
       // init_declarator_list
-      char dummy37[sizeof (std::vector<InitDeclarator>)];
+      char dummy41[sizeof (std::vector<InitDeclarator>)];
 
       // initializer_list
-      char dummy38[sizeof (std::vector<Initializer>)];
+      char dummy42[sizeof (std::vector<Initializer>)];
 
       // parameter_list
-      char dummy39[sizeof (std::vector<ParameterDeclaration>)];
+      char dummy43[sizeof (std::vector<ParameterDeclaration>)];
 
       // struct_declaration_list
-      char dummy40[sizeof (std::vector<StructDeclaration>)];
+      char dummy44[sizeof (std::vector<StructDeclaration>)];
 
       // struct_declarator_list
-      char dummy41[sizeof (std::vector<StructDeclarator>)];
+      char dummy45[sizeof (std::vector<StructDeclarator>)];
 
       // type_qualifier_list
-      char dummy42[sizeof (std::vector<TypeQualifier>)];
+      char dummy46[sizeof (std::vector<TypeQualifier>)];
 
       // identifier_list
-      char dummy43[sizeof (std::vector<std::string>)];
+      char dummy47[sizeof (std::vector<std::string>)];
 
       // "i_const"
-      char dummy44[sizeof (uint64_t)];
+      char dummy48[sizeof (uint64_t)];
     };
 
     /// The size of the largest semantic type.
@@ -1044,6 +1056,10 @@ namespace  WadeSpace  {
         value.move< AdditiveExpression > (std::move (that.value));
         break;
 
+      case symbol_kind::S_and_expression: // and_expression
+        value.move< AndExpression > (std::move (that.value));
+        break;
+
       case symbol_kind::S_assignment_operator: // assignment_operator
         value.move< AssignmentOperator > (std::move (that.value));
         break;
@@ -1084,10 +1100,14 @@ namespace  WadeSpace  {
         value.move< Enumerator > (std::move (that.value));
         break;
 
-      case symbol_kind::S_relational_expression: // relational_expression
       case symbol_kind::S_equality_expression: // equality_expression
-      case symbol_kind::S_and_expression: // and_expression
+        value.move< EqualityExpression > (std::move (that.value));
+        break;
+
       case symbol_kind::S_exclusive_or_expression: // exclusive_or_expression
+        value.move< ExclusiveOrExpression > (std::move (that.value));
+        break;
+
       case symbol_kind::S_inclusive_or_expression: // inclusive_or_expression
       case symbol_kind::S_logical_and_expression: // logical_and_expression
       case symbol_kind::S_logical_or_expression: // logical_or_expression
@@ -1128,6 +1148,10 @@ namespace  WadeSpace  {
 
       case symbol_kind::S_primary_expression: // primary_expression
         value.move< PrimaryExpression > (std::move (that.value));
+        break;
+
+      case symbol_kind::S_relational_expression: // relational_expression
+        value.move< RelationalExpression > (std::move (that.value));
         break;
 
       case symbol_kind::S_shift_expression: // shift_expression
@@ -1362,6 +1386,20 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
+      basic_symbol (typename Base::kind_type t, AndExpression&& v, location_type&& l)
+        : Base (t)
+        , value (std::move (v))
+        , location (std::move (l))
+      {}
+#else
+      basic_symbol (typename Base::kind_type t, const AndExpression& v, const location_type& l)
+        : Base (t)
+        , value (v)
+        , location (l)
+      {}
+#endif
+
+#if 201103L <= YY_CPLUSPLUS
       basic_symbol (typename Base::kind_type t, AssignmentOperator&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
@@ -1502,6 +1540,34 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
+      basic_symbol (typename Base::kind_type t, EqualityExpression&& v, location_type&& l)
+        : Base (t)
+        , value (std::move (v))
+        , location (std::move (l))
+      {}
+#else
+      basic_symbol (typename Base::kind_type t, const EqualityExpression& v, const location_type& l)
+        : Base (t)
+        , value (v)
+        , location (l)
+      {}
+#endif
+
+#if 201103L <= YY_CPLUSPLUS
+      basic_symbol (typename Base::kind_type t, ExclusiveOrExpression&& v, location_type&& l)
+        : Base (t)
+        , value (std::move (v))
+        , location (std::move (l))
+      {}
+#else
+      basic_symbol (typename Base::kind_type t, const ExclusiveOrExpression& v, const location_type& l)
+        : Base (t)
+        , value (v)
+        , location (l)
+      {}
+#endif
+
+#if 201103L <= YY_CPLUSPLUS
       basic_symbol (typename Base::kind_type t, Expression&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
@@ -1621,6 +1687,20 @@ namespace  WadeSpace  {
       {}
 #else
       basic_symbol (typename Base::kind_type t, const PrimaryExpression& v, const location_type& l)
+        : Base (t)
+        , value (v)
+        , location (l)
+      {}
+#endif
+
+#if 201103L <= YY_CPLUSPLUS
+      basic_symbol (typename Base::kind_type t, RelationalExpression&& v, location_type&& l)
+        : Base (t)
+        , value (std::move (v))
+        , location (std::move (l))
+      {}
+#else
+      basic_symbol (typename Base::kind_type t, const RelationalExpression& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1981,6 +2061,10 @@ switch (yykind)
         value.template destroy< AdditiveExpression > ();
         break;
 
+      case symbol_kind::S_and_expression: // and_expression
+        value.template destroy< AndExpression > ();
+        break;
+
       case symbol_kind::S_assignment_operator: // assignment_operator
         value.template destroy< AssignmentOperator > ();
         break;
@@ -2021,10 +2105,14 @@ switch (yykind)
         value.template destroy< Enumerator > ();
         break;
 
-      case symbol_kind::S_relational_expression: // relational_expression
       case symbol_kind::S_equality_expression: // equality_expression
-      case symbol_kind::S_and_expression: // and_expression
+        value.template destroy< EqualityExpression > ();
+        break;
+
       case symbol_kind::S_exclusive_or_expression: // exclusive_or_expression
+        value.template destroy< ExclusiveOrExpression > ();
+        break;
+
       case symbol_kind::S_inclusive_or_expression: // inclusive_or_expression
       case symbol_kind::S_logical_and_expression: // logical_and_expression
       case symbol_kind::S_logical_or_expression: // logical_or_expression
@@ -2065,6 +2153,10 @@ switch (yykind)
 
       case symbol_kind::S_primary_expression: // primary_expression
         value.template destroy< PrimaryExpression > ();
+        break;
+
+      case symbol_kind::S_relational_expression: // relational_expression
+        value.template destroy< RelationalExpression > ();
         break;
 
       case symbol_kind::S_shift_expression: // shift_expression
@@ -4244,6 +4336,10 @@ switch (yykind)
         value.copy< AdditiveExpression > (YY_MOVE (that.value));
         break;
 
+      case symbol_kind::S_and_expression: // and_expression
+        value.copy< AndExpression > (YY_MOVE (that.value));
+        break;
+
       case symbol_kind::S_assignment_operator: // assignment_operator
         value.copy< AssignmentOperator > (YY_MOVE (that.value));
         break;
@@ -4284,10 +4380,14 @@ switch (yykind)
         value.copy< Enumerator > (YY_MOVE (that.value));
         break;
 
-      case symbol_kind::S_relational_expression: // relational_expression
       case symbol_kind::S_equality_expression: // equality_expression
-      case symbol_kind::S_and_expression: // and_expression
+        value.copy< EqualityExpression > (YY_MOVE (that.value));
+        break;
+
       case symbol_kind::S_exclusive_or_expression: // exclusive_or_expression
+        value.copy< ExclusiveOrExpression > (YY_MOVE (that.value));
+        break;
+
       case symbol_kind::S_inclusive_or_expression: // inclusive_or_expression
       case symbol_kind::S_logical_and_expression: // logical_and_expression
       case symbol_kind::S_logical_or_expression: // logical_or_expression
@@ -4328,6 +4428,10 @@ switch (yykind)
 
       case symbol_kind::S_primary_expression: // primary_expression
         value.copy< PrimaryExpression > (YY_MOVE (that.value));
+        break;
+
+      case symbol_kind::S_relational_expression: // relational_expression
+        value.copy< RelationalExpression > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_shift_expression: // shift_expression
@@ -4549,6 +4653,10 @@ switch (yykind)
         value.move< AdditiveExpression > (YY_MOVE (s.value));
         break;
 
+      case symbol_kind::S_and_expression: // and_expression
+        value.move< AndExpression > (YY_MOVE (s.value));
+        break;
+
       case symbol_kind::S_assignment_operator: // assignment_operator
         value.move< AssignmentOperator > (YY_MOVE (s.value));
         break;
@@ -4589,10 +4697,14 @@ switch (yykind)
         value.move< Enumerator > (YY_MOVE (s.value));
         break;
 
-      case symbol_kind::S_relational_expression: // relational_expression
       case symbol_kind::S_equality_expression: // equality_expression
-      case symbol_kind::S_and_expression: // and_expression
+        value.move< EqualityExpression > (YY_MOVE (s.value));
+        break;
+
       case symbol_kind::S_exclusive_or_expression: // exclusive_or_expression
+        value.move< ExclusiveOrExpression > (YY_MOVE (s.value));
+        break;
+
       case symbol_kind::S_inclusive_or_expression: // inclusive_or_expression
       case symbol_kind::S_logical_and_expression: // logical_and_expression
       case symbol_kind::S_logical_or_expression: // logical_or_expression
@@ -4633,6 +4745,10 @@ switch (yykind)
 
       case symbol_kind::S_primary_expression: // primary_expression
         value.move< PrimaryExpression > (YY_MOVE (s.value));
+        break;
+
+      case symbol_kind::S_relational_expression: // relational_expression
+        value.move< RelationalExpression > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_shift_expression: // shift_expression
@@ -4882,7 +4998,7 @@ switch (yykind)
 
 #line 9 "parser.y"
 } //  WadeSpace 
-#line 4886 "parser.hpp"
+#line 5002 "parser.hpp"
 
 
 

@@ -183,6 +183,7 @@
   <ItemGroup>
     <ClInclude Include="AbstractDeclarator.h" />
     <ClInclude Include="AdditiveExpression.h" />
+    <ClInclude Include="AndExpression.h" />
     <ClInclude Include="AssignmentOperator.h" />
     <ClInclude Include="CastExpression.h" />
     <ClInclude Include="Constant.h" />
@@ -193,6 +194,8 @@
     <ClInclude Include="DirectDeclarator.h" />
     <ClInclude Include="Enumerator.h" />
     <ClInclude Include="EnumSpecifier.h" />
+    <ClInclude Include="EqualityExpression.h" />
+    <ClInclude Include="ExclusiveOrExpression.h" />
     <ClInclude Include="Expression.h" />
     <ClInclude Include="InitDeclarator.h" />
     <ClInclude Include="Initializer.h" />
@@ -206,6 +209,7 @@
     <ClInclude Include="position.hh" />
     <ClInclude Include="PostfixExpression.h" />
     <ClInclude Include="PrimaryExpression.h" />
+    <ClInclude Include="RelationalExpression.h" />
     <ClInclude Include="scanner.h" />
     <ClInclude Include="ShiftExpression.h" />
     <ClInclude Include="SpecifierQualifierList.h" />
@@ -224,6 +228,7 @@
   <ItemGroup>
     <ClCompile Include="AbstractDeclarator.cpp" />
     <ClCompile Include="AdditiveExpression.cpp" />
+    <ClCompile Include="AndExpression.cpp" />
     <ClCompile Include="AssignmentOperator.cpp" />
     <ClCompile Include="CastExpression.cpp" />
     <ClCompile Include="Constant.cpp" />
@@ -234,6 +239,8 @@
     <ClCompile Include="DirectDeclarator.cpp" />
     <ClCompile Include="Enumerator.cpp" />
     <ClCompile Include="EnumSpecifier.cpp" />
+    <ClCompile Include="EqualityExpression.cpp" />
+    <ClCompile Include="ExclusiveOrExpression.cpp" />
     <ClCompile Include="Expression.cpp" />
     <ClCompile Include="InitDeclarator.cpp" />
     <ClCompile Include="Initializer.cpp" />
@@ -246,6 +253,7 @@
     <ClCompile Include="Pointer.cpp" />
     <ClCompile Include="PostfixExpression.cpp" />
     <ClCompile Include="PrimaryExpression.cpp" />
+    <ClCompile Include="RelationalExpression.cpp" />
     <ClCompile Include="scanner.cpp" />
     <ClCompile Include="ShiftExpression.cpp" />
     <ClCompile Include="SpecifierQualifierList.cpp" />
