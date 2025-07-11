@@ -89,6 +89,7 @@
     #include "EqualityExpression.h"
     #include "AndExpression.h"
     #include "ExclusiveOrExpression.h"
+    #include "InclusiveOrExpression.h"
 
     using namespace std;
 
@@ -97,7 +98,7 @@
         class Interpreter;
     }
 
-#line 101 "parser.hpp"
+#line 102 "parser.hpp"
 
 # include <cassert>
 # include <cstdlib> // std::abort
@@ -238,7 +239,7 @@
 
 #line 9 "parser.y"
 namespace  WadeSpace  {
-#line 242 "parser.hpp"
+#line 243 "parser.hpp"
 
 
 
@@ -502,7 +503,6 @@ namespace  WadeSpace  {
       // exclusive_or_expression
       char dummy15[sizeof (ExclusiveOrExpression)];
 
-      // inclusive_or_expression
       // logical_and_expression
       // logical_or_expression
       // conditional_expression
@@ -511,68 +511,71 @@ namespace  WadeSpace  {
       // constant_expression
       char dummy16[sizeof (Expression)];
 
+      // inclusive_or_expression
+      char dummy17[sizeof (InclusiveOrExpression)];
+
       // init_declarator
-      char dummy17[sizeof (InitDeclarator)];
+      char dummy18[sizeof (InitDeclarator)];
 
       // initializer
-      char dummy18[sizeof (Initializer)];
+      char dummy19[sizeof (Initializer)];
 
       // multiplicative_expression
-      char dummy19[sizeof (MultiplicativeExpression)];
+      char dummy20[sizeof (MultiplicativeExpression)];
 
       // parameter_declaration
-      char dummy20[sizeof (ParameterDeclaration)];
+      char dummy21[sizeof (ParameterDeclaration)];
 
       // parameter_type_list
-      char dummy21[sizeof (ParameterTypeList)];
+      char dummy22[sizeof (ParameterTypeList)];
 
       // pointer
-      char dummy22[sizeof (Pointer)];
+      char dummy23[sizeof (Pointer)];
 
       // postfix_expression
-      char dummy23[sizeof (PostfixExpression)];
+      char dummy24[sizeof (PostfixExpression)];
 
       // primary_expression
-      char dummy24[sizeof (PrimaryExpression)];
+      char dummy25[sizeof (PrimaryExpression)];
 
       // relational_expression
-      char dummy25[sizeof (RelationalExpression)];
+      char dummy26[sizeof (RelationalExpression)];
 
       // shift_expression
-      char dummy26[sizeof (ShiftExpression)];
+      char dummy27[sizeof (ShiftExpression)];
 
       // specifier_qualifier_list
-      char dummy27[sizeof (SpecifierQualifierList)];
+      char dummy28[sizeof (SpecifierQualifierList)];
 
       // storage_class_specifier
-      char dummy28[sizeof (StorageClassSpecifier)];
+      char dummy29[sizeof (StorageClassSpecifier)];
 
       // struct_declaration
-      char dummy29[sizeof (StructDeclaration)];
+      char dummy30[sizeof (StructDeclaration)];
 
       // struct_declarator
-      char dummy30[sizeof (StructDeclarator)];
+      char dummy31[sizeof (StructDeclarator)];
 
       // struct_or_union
-      char dummy31[sizeof (StructOrUnion)];
+      char dummy32[sizeof (StructOrUnion)];
 
       // struct_or_union_specifier
-      char dummy32[sizeof (StructOrUnionSpecifier)];
+      char dummy33[sizeof (StructOrUnionSpecifier)];
 
       // type_name
-      char dummy33[sizeof (TypeName)];
+      char dummy34[sizeof (TypeName)];
 
       // type_qualifier
-      char dummy34[sizeof (TypeQualifier)];
+      char dummy35[sizeof (TypeQualifier)];
 
       // type_specifier
-      char dummy35[sizeof (TypeSpecifier)];
+      char dummy36[sizeof (TypeSpecifier)];
 
       // unary_expression
-      char dummy36[sizeof (UnaryExpression)];
+      char dummy37[sizeof (UnaryExpression)];
 
       // "f_const"
-      char dummy37[sizeof (long double)];
+      char dummy38[sizeof (long double)];
 
       // "identifier"
       // "sting_literal"
@@ -663,37 +666,37 @@ namespace  WadeSpace  {
       // "/"
       // "%"
       // unary_operator
-      char dummy38[sizeof (std::string)];
+      char dummy39[sizeof (std::string)];
 
       // enumerator_list
-      char dummy39[sizeof (std::vector<Enumerator>)];
+      char dummy40[sizeof (std::vector<Enumerator>)];
 
       // argument_expression_list
-      char dummy40[sizeof (std::vector<Expression>)];
+      char dummy41[sizeof (std::vector<Expression>)];
 
       // init_declarator_list
-      char dummy41[sizeof (std::vector<InitDeclarator>)];
+      char dummy42[sizeof (std::vector<InitDeclarator>)];
 
       // initializer_list
-      char dummy42[sizeof (std::vector<Initializer>)];
+      char dummy43[sizeof (std::vector<Initializer>)];
 
       // parameter_list
-      char dummy43[sizeof (std::vector<ParameterDeclaration>)];
+      char dummy44[sizeof (std::vector<ParameterDeclaration>)];
 
       // struct_declaration_list
-      char dummy44[sizeof (std::vector<StructDeclaration>)];
+      char dummy45[sizeof (std::vector<StructDeclaration>)];
 
       // struct_declarator_list
-      char dummy45[sizeof (std::vector<StructDeclarator>)];
+      char dummy46[sizeof (std::vector<StructDeclarator>)];
 
       // type_qualifier_list
-      char dummy46[sizeof (std::vector<TypeQualifier>)];
+      char dummy47[sizeof (std::vector<TypeQualifier>)];
 
       // identifier_list
-      char dummy47[sizeof (std::vector<std::string>)];
+      char dummy48[sizeof (std::vector<std::string>)];
 
       // "i_const"
-      char dummy48[sizeof (uint64_t)];
+      char dummy49[sizeof (uint64_t)];
     };
 
     /// The size of the largest semantic type.
@@ -1108,7 +1111,6 @@ namespace  WadeSpace  {
         value.move< ExclusiveOrExpression > (std::move (that.value));
         break;
 
-      case symbol_kind::S_inclusive_or_expression: // inclusive_or_expression
       case symbol_kind::S_logical_and_expression: // logical_and_expression
       case symbol_kind::S_logical_or_expression: // logical_or_expression
       case symbol_kind::S_conditional_expression: // conditional_expression
@@ -1116,6 +1118,10 @@ namespace  WadeSpace  {
       case symbol_kind::S_expression: // expression
       case symbol_kind::S_constant_expression: // constant_expression
         value.move< Expression > (std::move (that.value));
+        break;
+
+      case symbol_kind::S_inclusive_or_expression: // inclusive_or_expression
+        value.move< InclusiveOrExpression > (std::move (that.value));
         break;
 
       case symbol_kind::S_init_declarator: // init_declarator
@@ -1575,6 +1581,20 @@ namespace  WadeSpace  {
       {}
 #else
       basic_symbol (typename Base::kind_type t, const Expression& v, const location_type& l)
+        : Base (t)
+        , value (v)
+        , location (l)
+      {}
+#endif
+
+#if 201103L <= YY_CPLUSPLUS
+      basic_symbol (typename Base::kind_type t, InclusiveOrExpression&& v, location_type&& l)
+        : Base (t)
+        , value (std::move (v))
+        , location (std::move (l))
+      {}
+#else
+      basic_symbol (typename Base::kind_type t, const InclusiveOrExpression& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -2113,7 +2133,6 @@ switch (yykind)
         value.template destroy< ExclusiveOrExpression > ();
         break;
 
-      case symbol_kind::S_inclusive_or_expression: // inclusive_or_expression
       case symbol_kind::S_logical_and_expression: // logical_and_expression
       case symbol_kind::S_logical_or_expression: // logical_or_expression
       case symbol_kind::S_conditional_expression: // conditional_expression
@@ -2121,6 +2140,10 @@ switch (yykind)
       case symbol_kind::S_expression: // expression
       case symbol_kind::S_constant_expression: // constant_expression
         value.template destroy< Expression > ();
+        break;
+
+      case symbol_kind::S_inclusive_or_expression: // inclusive_or_expression
+        value.template destroy< InclusiveOrExpression > ();
         break;
 
       case symbol_kind::S_init_declarator: // init_declarator
@@ -4388,7 +4411,6 @@ switch (yykind)
         value.copy< ExclusiveOrExpression > (YY_MOVE (that.value));
         break;
 
-      case symbol_kind::S_inclusive_or_expression: // inclusive_or_expression
       case symbol_kind::S_logical_and_expression: // logical_and_expression
       case symbol_kind::S_logical_or_expression: // logical_or_expression
       case symbol_kind::S_conditional_expression: // conditional_expression
@@ -4396,6 +4418,10 @@ switch (yykind)
       case symbol_kind::S_expression: // expression
       case symbol_kind::S_constant_expression: // constant_expression
         value.copy< Expression > (YY_MOVE (that.value));
+        break;
+
+      case symbol_kind::S_inclusive_or_expression: // inclusive_or_expression
+        value.copy< InclusiveOrExpression > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_init_declarator: // init_declarator
@@ -4705,7 +4731,6 @@ switch (yykind)
         value.move< ExclusiveOrExpression > (YY_MOVE (s.value));
         break;
 
-      case symbol_kind::S_inclusive_or_expression: // inclusive_or_expression
       case symbol_kind::S_logical_and_expression: // logical_and_expression
       case symbol_kind::S_logical_or_expression: // logical_or_expression
       case symbol_kind::S_conditional_expression: // conditional_expression
@@ -4713,6 +4738,10 @@ switch (yykind)
       case symbol_kind::S_expression: // expression
       case symbol_kind::S_constant_expression: // constant_expression
         value.move< Expression > (YY_MOVE (s.value));
+        break;
+
+      case symbol_kind::S_inclusive_or_expression: // inclusive_or_expression
+        value.move< InclusiveOrExpression > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_init_declarator: // init_declarator
@@ -4998,7 +5027,7 @@ switch (yykind)
 
 #line 9 "parser.y"
 } //  WadeSpace 
-#line 5002 "parser.hpp"
+#line 5031 "parser.hpp"
 
 
 

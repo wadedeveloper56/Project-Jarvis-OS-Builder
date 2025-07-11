@@ -51,6 +51,7 @@
     #include "EqualityExpression.h"
     #include "AndExpression.h"
     #include "ExclusiveOrExpression.h"
+    #include "InclusiveOrExpression.h"
 
     using namespace std;
 
@@ -203,7 +204,7 @@
 %type<EqualityExpression> equality_expression
 %type<AndExpression> and_expression
 %type<ExclusiveOrExpression> exclusive_or_expression
-%type<Expression> inclusive_or_expression
+%type<InclusiveOrExpression> inclusive_or_expression
 %type<Expression> logical_and_expression
 %type<Expression> logical_or_expression
 %type<Expression> conditional_expression
@@ -366,12 +367,12 @@ exclusive_or_expression
     ;
 
 inclusive_or_expression
-    : exclusive_or_expression                                { $<Expression>$ = Expression();  cout << "exclusive_or_expression REDUCE to inclusive_or_expression" << endl;}
-    | inclusive_or_expression BIT_OR exclusive_or_expression { $<Expression>$ = Expression(); cout << "inclusive_or_expression BIT_OR exclusive_or_expression REDUCE to inclusive_or_expression" << endl;}
+    : exclusive_or_expression                                { $<InclusiveOrExpression>$ = InclusiveOrExpression();  cout << "exclusive_or_expression REDUCE to inclusive_or_expression" << endl;}
+    | inclusive_or_expression BIT_OR exclusive_or_expression { $<InclusiveOrExpression>$ = InclusiveOrExpression(); cout << "inclusive_or_expression BIT_OR exclusive_or_expression REDUCE to inclusive_or_expression" << endl;}
     ;
 
 logical_and_expression
-    : inclusive_or_expression                                { $<Expression>$ = $1;  cout << "inclusive_or_expression REDUCE to logical_and_expression" << endl;}
+    : inclusive_or_expression                                { $<Expression>$ = Expression();  cout << "inclusive_or_expression REDUCE to logical_and_expression" << endl;}
     | logical_and_expression AND_OP inclusive_or_expression  { $<Expression>$ = Expression(); cout << "inclusive_or_expression REDUCE to logical_and_expression" << endl;}
     ;
 

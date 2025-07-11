@@ -438,7 +438,7 @@ Nonterminals, with rules where they appear
     exclusive_or_expression <ExclusiveOrExpression> (107)
         on left: 53 54
         on right: 54 55 56
-    inclusive_or_expression <Expression> (108)
+    inclusive_or_expression <InclusiveOrExpression> (108)
         on left: 55 56
         on right: 56 57 58
     logical_and_expression <Expression> (109)

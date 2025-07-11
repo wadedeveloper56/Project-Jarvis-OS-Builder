@@ -197,6 +197,7 @@
     <ClInclude Include="EqualityExpression.h" />
     <ClInclude Include="ExclusiveOrExpression.h" />
     <ClInclude Include="Expression.h" />
+    <ClInclude Include="InclusiveOrExpression.h" />
     <ClInclude Include="InitDeclarator.h" />
     <ClInclude Include="Initializer.h" />
     <ClInclude Include="interpreter.h" />
@@ -242,6 +243,7 @@
     <ClCompile Include="EqualityExpression.cpp" />
     <ClCompile Include="ExclusiveOrExpression.cpp" />
     <ClCompile Include="Expression.cpp" />
+    <ClCompile Include="InclusiveOrExpression.cpp" />
     <ClCompile Include="InitDeclarator.cpp" />
     <ClCompile Include="Initializer.cpp" />
     <ClCompile Include="interpreter.cpp" />
