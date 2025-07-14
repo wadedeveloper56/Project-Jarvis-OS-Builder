@@ -9,11 +9,10 @@ namespace WadeSpace {
 	class AssignmentOperator
 	{
 	public:
-		AssignmentOperator(std::string value, TokenType type);
+		AssignmentOperator(TokenType type);
 		AssignmentOperator();
 		~AssignmentOperator();
 	private:
-		std::string operatorStr;
 		TokenType type;
 	};
 }

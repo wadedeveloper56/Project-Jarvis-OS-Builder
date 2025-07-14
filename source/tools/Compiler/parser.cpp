@@ -2464,79 +2464,79 @@ namespace  WadeSpace  {
 
   case 64: // assignment_expression: conditional_expression
 #line 395 "parser.y"
-                                                                  { yylhs.value.as< AssignmentExpression > () = AssignmentExpression();  cout << "conditional_expression REDUCE to assignment_expression" << endl;}
+                                                                  { yylhs.value.as< AssignmentExpression > () = AssignmentExpression(yystack_[0].value.as < ConditionalExpression > ());  cout << "conditional_expression REDUCE to assignment_expression" << endl;}
 #line 2469 "parser.cpp"
     break;
 
   case 65: // assignment_expression: unary_expression assignment_operator assignment_expression
 #line 396 "parser.y"
-                                                                  { yylhs.value.as< AssignmentExpression > () = AssignmentExpression(); cout << "unary_expression assignment_operator assignment_expression REDUCE to assignment_expression" << endl;}
+                                                                  { yylhs.value.as< AssignmentExpression > () = AssignmentExpression(yystack_[2].value.as < UnaryExpression > (),yystack_[1].value.as < AssignmentOperator > (),yystack_[0].value.as < AssignmentExpression > ()); cout << "unary_expression assignment_operator assignment_expression REDUCE to assignment_expression" << endl;}
 #line 2475 "parser.cpp"
     break;
 
   case 66: // assignment_operator: "="
 #line 400 "parser.y"
-                     { yylhs.value.as< AssignmentOperator > () = AssignmentOperator(yystack_[0].value.as < std::string > (),EQUAL);  cout << "EQUAL_OP REDUCE to assignment_operator" << endl;}
+                     { yylhs.value.as< AssignmentOperator > () = AssignmentOperator(EQUAL);  cout << "EQUAL_OP REDUCE to assignment_operator" << endl;}
 #line 2481 "parser.cpp"
     break;
 
   case 67: // assignment_operator: "*="
 #line 401 "parser.y"
-                     { yylhs.value.as< AssignmentOperator > () = AssignmentOperator(yystack_[0].value.as < std::string > (),MUL_ASSIGN);  cout << "MUL_ASSIGN REDUCE to assignment_operator" << endl;}
+                     { yylhs.value.as< AssignmentOperator > () = AssignmentOperator(MUL_ASSIGN);  cout << "MUL_ASSIGN REDUCE to assignment_operator" << endl;}
 #line 2487 "parser.cpp"
     break;
 
   case 68: // assignment_operator: "/="
 #line 402 "parser.y"
-                     { yylhs.value.as< AssignmentOperator > () = AssignmentOperator(yystack_[0].value.as < std::string > (),DIV_ASSIGN);  cout << "DIV_ASSIGN REDUCE to assignment_operator" << endl;}
+                     { yylhs.value.as< AssignmentOperator > () = AssignmentOperator(DIV_ASSIGN);  cout << "DIV_ASSIGN REDUCE to assignment_operator" << endl;}
 #line 2493 "parser.cpp"
     break;
 
   case 69: // assignment_operator: "%="
 #line 403 "parser.y"
-                     { yylhs.value.as< AssignmentOperator > () = AssignmentOperator(yystack_[0].value.as < std::string > (),MOD_ASSIGN);  cout << "MOG_ASSIGN REDUCE to assignment_operator" << endl;}
+                     { yylhs.value.as< AssignmentOperator > () = AssignmentOperator(MOD_ASSIGN);  cout << "MOG_ASSIGN REDUCE to assignment_operator" << endl;}
 #line 2499 "parser.cpp"
     break;
 
   case 70: // assignment_operator: "+="
 #line 404 "parser.y"
-                     { yylhs.value.as< AssignmentOperator > () = AssignmentOperator(yystack_[0].value.as < std::string > (),ADD_ASSIGN);  cout << "ADD_ASSIGN REDUCE to assignment_operator" << endl;}
+                     { yylhs.value.as< AssignmentOperator > () = AssignmentOperator(ADD_ASSIGN);  cout << "ADD_ASSIGN REDUCE to assignment_operator" << endl;}
 #line 2505 "parser.cpp"
     break;
 
   case 71: // assignment_operator: "-="
 #line 405 "parser.y"
-                     { yylhs.value.as< AssignmentOperator > () = AssignmentOperator(yystack_[0].value.as < std::string > (),SUB_ASSIGN);  cout << "SUB_ASSIGN REDUCE to assignment_operator" << endl;}
+                     { yylhs.value.as< AssignmentOperator > () = AssignmentOperator(SUB_ASSIGN);  cout << "SUB_ASSIGN REDUCE to assignment_operator" << endl;}
 #line 2511 "parser.cpp"
     break;
 
   case 72: // assignment_operator: "<<="
 #line 406 "parser.y"
-                     { yylhs.value.as< AssignmentOperator > () = AssignmentOperator(yystack_[0].value.as < std::string > (),LEFT_ASSIGN);  cout << "LEFT_ASSIGN REDUCE to assignment_operator" << endl;}
+                     { yylhs.value.as< AssignmentOperator > () = AssignmentOperator(LEFT_ASSIGN);  cout << "LEFT_ASSIGN REDUCE to assignment_operator" << endl;}
 #line 2517 "parser.cpp"
     break;
 
   case 73: // assignment_operator: ">>="
 #line 407 "parser.y"
-                     { yylhs.value.as< AssignmentOperator > () = AssignmentOperator(yystack_[0].value.as < std::string > (),RIGHT_ASSIGN);  cout << "RIGHT_ASSIGN REDUCE to assignment_operator" << endl;}
+                     { yylhs.value.as< AssignmentOperator > () = AssignmentOperator(RIGHT_ASSIGN);  cout << "RIGHT_ASSIGN REDUCE to assignment_operator" << endl;}
 #line 2523 "parser.cpp"
     break;
 
   case 74: // assignment_operator: "&="
 #line 408 "parser.y"
-                     { yylhs.value.as< AssignmentOperator > () = AssignmentOperator(yystack_[0].value.as < std::string > (),AND_ASSIGN);  cout << "AND_ASSIGN REDUCE to assignment_operator" << endl;}
+                     { yylhs.value.as< AssignmentOperator > () = AssignmentOperator(AND_ASSIGN);  cout << "AND_ASSIGN REDUCE to assignment_operator" << endl;}
 #line 2529 "parser.cpp"
     break;
 
   case 75: // assignment_operator: "^="
 #line 409 "parser.y"
-                     { yylhs.value.as< AssignmentOperator > () = AssignmentOperator(yystack_[0].value.as < std::string > (),XOR_ASSIGN);  cout << "XOR_ASSIGN REDUCE to assignment_operator" << endl;}
+                     { yylhs.value.as< AssignmentOperator > () = AssignmentOperator(XOR_ASSIGN);  cout << "XOR_ASSIGN REDUCE to assignment_operator" << endl;}
 #line 2535 "parser.cpp"
     break;
 
   case 76: // assignment_operator: "|="
 #line 410 "parser.y"
-                     { yylhs.value.as< AssignmentOperator > () = AssignmentOperator(yystack_[0].value.as < std::string > (),OR_ASSIGN);  cout << "OR_ASSIGN REDUCE to assignment_operator" << endl;}
+                     { yylhs.value.as< AssignmentOperator > () = AssignmentOperator(OR_ASSIGN);  cout << "OR_ASSIGN REDUCE to assignment_operator" << endl;}
 #line 2541 "parser.cpp"
     break;
 

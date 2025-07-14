@@ -392,22 +392,22 @@ conditional_expression
     ;
 
 assignment_expression
-    : conditional_expression                                      { $<AssignmentExpression>$ = AssignmentExpression();  cout << "conditional_expression REDUCE to assignment_expression" << endl;}
-    | unary_expression assignment_operator assignment_expression  { $<AssignmentExpression>$ = AssignmentExpression(); cout << "unary_expression assignment_operator assignment_expression REDUCE to assignment_expression" << endl;}
+    : conditional_expression                                      { $<AssignmentExpression>$ = AssignmentExpression($1);  cout << "conditional_expression REDUCE to assignment_expression" << endl;}
+    | unary_expression assignment_operator assignment_expression  { $<AssignmentExpression>$ = AssignmentExpression($1,$2,$3); cout << "unary_expression assignment_operator assignment_expression REDUCE to assignment_expression" << endl;}
     ;
 
 assignment_operator
-    : EQUAL          { $<AssignmentOperator>$ = AssignmentOperator($1,EQUAL);  cout << "EQUAL_OP REDUCE to assignment_operator" << endl;}
-    | MUL_ASSIGN     { $<AssignmentOperator>$ = AssignmentOperator($1,MUL_ASSIGN);  cout << "MUL_ASSIGN REDUCE to assignment_operator" << endl;}
-    | DIV_ASSIGN     { $<AssignmentOperator>$ = AssignmentOperator($1,DIV_ASSIGN);  cout << "DIV_ASSIGN REDUCE to assignment_operator" << endl;}
-    | MOD_ASSIGN     { $<AssignmentOperator>$ = AssignmentOperator($1,MOD_ASSIGN);  cout << "MOG_ASSIGN REDUCE to assignment_operator" << endl;}
-    | ADD_ASSIGN     { $<AssignmentOperator>$ = AssignmentOperator($1,ADD_ASSIGN);  cout << "ADD_ASSIGN REDUCE to assignment_operator" << endl;}
-    | SUB_ASSIGN     { $<AssignmentOperator>$ = AssignmentOperator($1,SUB_ASSIGN);  cout << "SUB_ASSIGN REDUCE to assignment_operator" << endl;}
-    | LEFT_ASSIGN    { $<AssignmentOperator>$ = AssignmentOperator($1,LEFT_ASSIGN);  cout << "LEFT_ASSIGN REDUCE to assignment_operator" << endl;}
-    | RIGHT_ASSIGN   { $<AssignmentOperator>$ = AssignmentOperator($1,RIGHT_ASSIGN);  cout << "RIGHT_ASSIGN REDUCE to assignment_operator" << endl;}
-    | AND_ASSIGN     { $<AssignmentOperator>$ = AssignmentOperator($1,AND_ASSIGN);  cout << "AND_ASSIGN REDUCE to assignment_operator" << endl;}
-    | XOR_ASSIGN     { $<AssignmentOperator>$ = AssignmentOperator($1,XOR_ASSIGN);  cout << "XOR_ASSIGN REDUCE to assignment_operator" << endl;}
-    | OR_ASSIGN      { $<AssignmentOperator>$ = AssignmentOperator($1,OR_ASSIGN);  cout << "OR_ASSIGN REDUCE to assignment_operator" << endl;}
+    : EQUAL          { $<AssignmentOperator>$ = AssignmentOperator(EQUAL);  cout << "EQUAL_OP REDUCE to assignment_operator" << endl;}
+    | MUL_ASSIGN     { $<AssignmentOperator>$ = AssignmentOperator(MUL_ASSIGN);  cout << "MUL_ASSIGN REDUCE to assignment_operator" << endl;}
+    | DIV_ASSIGN     { $<AssignmentOperator>$ = AssignmentOperator(DIV_ASSIGN);  cout << "DIV_ASSIGN REDUCE to assignment_operator" << endl;}
+    | MOD_ASSIGN     { $<AssignmentOperator>$ = AssignmentOperator(MOD_ASSIGN);  cout << "MOG_ASSIGN REDUCE to assignment_operator" << endl;}
+    | ADD_ASSIGN     { $<AssignmentOperator>$ = AssignmentOperator(ADD_ASSIGN);  cout << "ADD_ASSIGN REDUCE to assignment_operator" << endl;}
+    | SUB_ASSIGN     { $<AssignmentOperator>$ = AssignmentOperator(SUB_ASSIGN);  cout << "SUB_ASSIGN REDUCE to assignment_operator" << endl;}
+    | LEFT_ASSIGN    { $<AssignmentOperator>$ = AssignmentOperator(LEFT_ASSIGN);  cout << "LEFT_ASSIGN REDUCE to assignment_operator" << endl;}
+    | RIGHT_ASSIGN   { $<AssignmentOperator>$ = AssignmentOperator(RIGHT_ASSIGN);  cout << "RIGHT_ASSIGN REDUCE to assignment_operator" << endl;}
+    | AND_ASSIGN     { $<AssignmentOperator>$ = AssignmentOperator(AND_ASSIGN);  cout << "AND_ASSIGN REDUCE to assignment_operator" << endl;}
+    | XOR_ASSIGN     { $<AssignmentOperator>$ = AssignmentOperator(XOR_ASSIGN);  cout << "XOR_ASSIGN REDUCE to assignment_operator" << endl;}
+    | OR_ASSIGN      { $<AssignmentOperator>$ = AssignmentOperator(OR_ASSIGN);  cout << "OR_ASSIGN REDUCE to assignment_operator" << endl;}
     ;
 
 expression

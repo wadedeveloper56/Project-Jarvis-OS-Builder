@@ -2,14 +2,6 @@
 
 using namespace WadeSpace;
 
-AssignmentOperator::AssignmentOperator(std::string value, TokenType type):operatorStr(value),type(type) {
-
-}
-
-AssignmentOperator::AssignmentOperator() :operatorStr(""), type(NONE) {
-
-}
-
-AssignmentOperator::~AssignmentOperator() {
-
-}
+AssignmentOperator::AssignmentOperator(TokenType type):type(type) {}
+AssignmentOperator::AssignmentOperator():type(NONE) {}
+AssignmentOperator::~AssignmentOperator() {}
