@@ -2452,13 +2452,13 @@ namespace  WadeSpace  {
 
   case 62: // conditional_expression: logical_or_expression
 #line 390 "parser.y"
-                                                                              { yylhs.value.as< ConditionalExpression > () = ConditionalExpression();  cout << "logical_or_expression REDUCE to conditional_expression" << endl;}
+                                                                              { yylhs.value.as< ConditionalExpression > () = ConditionalExpression(yystack_[0].value.as < LogicalOrExpression > ());  cout << "logical_or_expression REDUCE to conditional_expression" << endl;}
 #line 2457 "parser.cpp"
     break;
 
   case 63: // conditional_expression: logical_or_expression "question" expression ":" conditional_expression
 #line 391 "parser.y"
-                                                                              { yylhs.value.as< ConditionalExpression > () = ConditionalExpression(); cout << "logical_or_expression QUESTION expression COLON conditional_expression REDUCE to conditional_expression" << endl;}
+                                                                              { yylhs.value.as< ConditionalExpression > () = ConditionalExpression(yystack_[4].value.as < LogicalOrExpression > (),yystack_[2].value.as < Expression > (),yystack_[0].value.as < ConditionalExpression > ()); cout << "logical_or_expression QUESTION expression COLON conditional_expression REDUCE to conditional_expression" << endl;}
 #line 2463 "parser.cpp"
     break;
 

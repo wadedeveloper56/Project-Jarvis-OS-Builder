@@ -387,8 +387,8 @@ logical_or_expression
     ;
 
 conditional_expression
-    : logical_or_expression                                                   { $<ConditionalExpression>$ = ConditionalExpression();  cout << "logical_or_expression REDUCE to conditional_expression" << endl;}
-    | logical_or_expression QUESTION expression COLON conditional_expression  { $<ConditionalExpression>$ = ConditionalExpression(); cout << "logical_or_expression QUESTION expression COLON conditional_expression REDUCE to conditional_expression" << endl;}
+    : logical_or_expression                                                   { $<ConditionalExpression>$ = ConditionalExpression($1);  cout << "logical_or_expression REDUCE to conditional_expression" << endl;}
+    | logical_or_expression QUESTION expression COLON conditional_expression  { $<ConditionalExpression>$ = ConditionalExpression($1,$3,$5); cout << "logical_or_expression QUESTION expression COLON conditional_expression REDUCE to conditional_expression" << endl;}
     ;
 
 assignment_expression
