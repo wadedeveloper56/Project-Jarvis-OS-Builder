@@ -2440,13 +2440,13 @@ namespace  WadeSpace  {
 
   case 60: // logical_or_expression: logical_and_expression
 #line 385 "parser.y"
-                                                          { yylhs.value.as< LogicalOrExpression > () = LogicalOrExpression();  cout << "inclusive_and_expression REDUCE to logical_or_expression" << endl;}
+                                                          { yylhs.value.as< LogicalOrExpression > () = LogicalOrExpression(yystack_[0].value.as < LogicalAndExpression > ());  cout << "inclusive_and_expression REDUCE to logical_or_expression" << endl;}
 #line 2445 "parser.cpp"
     break;
 
   case 61: // logical_or_expression: logical_or_expression "||" logical_and_expression
 #line 386 "parser.y"
-                                                          { yylhs.value.as< LogicalOrExpression > () = LogicalOrExpression(); cout << "logical_or_expression OR_OP logical_and_expression REDUCE to logical_or_expression" << endl;}
+                                                          { yylhs.value.as< LogicalOrExpression > () = LogicalOrExpression(yystack_[2].value.as < LogicalOrExpression > (),yystack_[0].value.as < LogicalAndExpression > ()); cout << "logical_or_expression OR_OP logical_and_expression REDUCE to logical_or_expression" << endl;}
 #line 2451 "parser.cpp"
     break;
 

@@ -382,8 +382,8 @@ logical_and_expression
     ;
 
 logical_or_expression
-    : logical_and_expression                              { $<LogicalOrExpression>$ = LogicalOrExpression();  cout << "inclusive_and_expression REDUCE to logical_or_expression" << endl;}
-    | logical_or_expression OR_OP logical_and_expression  { $<LogicalOrExpression>$ = LogicalOrExpression(); cout << "logical_or_expression OR_OP logical_and_expression REDUCE to logical_or_expression" << endl;}
+    : logical_and_expression                              { $<LogicalOrExpression>$ = LogicalOrExpression($1);  cout << "inclusive_and_expression REDUCE to logical_or_expression" << endl;}
+    | logical_or_expression OR_OP logical_and_expression  { $<LogicalOrExpression>$ = LogicalOrExpression($1,$3); cout << "logical_or_expression OR_OP logical_and_expression REDUCE to logical_or_expression" << endl;}
     ;
 
 conditional_expression
