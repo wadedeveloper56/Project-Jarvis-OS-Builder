@@ -250,7 +250,7 @@
 %type<ParameterDeclaration> parameter_declaration
 %type<ParameterTypeList> parameter_type_list
 %type<std::vector<ParameterDeclaration>> parameter_list
-%type<JumpStatement> jump_statement
+%type<BaseStatement> jump_statement
 %type<std::vector<BaseStatement>> statement_list
 
 %start translation_unit
@@ -751,11 +751,11 @@ iteration_statement
     ;
 
 jump_statement
-    : GOTO IDENTIFIER SEMICOLON   { $<JumpStatement>$ = JumpStatement(); cout << "GOTO IDENTIFIER SEMICOLON REDUCE to jump_statement" << endl; }
-    | CONTINUE SEMICOLON          { $<JumpStatement>$ = JumpStatement(); cout << "CONTINUE SEMICOLON REDUCE to jump_statement" << endl; }
-    | BREAK SEMICOLON             { $<JumpStatement>$ = JumpStatement(); cout << "BREAK SEMICOLON REDUCE to jump_statement" << endl; }
-    | RETURN SEMICOLON            { $<JumpStatement>$ = JumpStatement(); cout << "RETURN SEMICOLON REDUCE to jump_statement" << endl; }
-    | RETURN expression SEMICOLON { $<JumpStatement>$ = JumpStatement(); cout << "RETURN expression SEMICOLON REDUCE to jump_statement" << endl; }
+    : GOTO IDENTIFIER SEMICOLON   { $<BaseStatement>$ = JumpStatement(); cout << "GOTO IDENTIFIER SEMICOLON REDUCE to jump_statement" << endl; }
+    | CONTINUE SEMICOLON          { $<BaseStatement>$ = JumpStatement(); cout << "CONTINUE SEMICOLON REDUCE to jump_statement" << endl; }
+    | BREAK SEMICOLON             { $<BaseStatement>$ = JumpStatement(); cout << "BREAK SEMICOLON REDUCE to jump_statement" << endl; }
+    | RETURN SEMICOLON            { $<BaseStatement>$ = JumpStatement(); cout << "RETURN SEMICOLON REDUCE to jump_statement" << endl; }
+    | RETURN expression SEMICOLON { $<BaseStatement>$ = JumpStatement(); cout << "RETURN expression SEMICOLON REDUCE to jump_statement" << endl; }
     ;
 
 translation_unit 

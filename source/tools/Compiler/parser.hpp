@@ -480,59 +480,59 @@ namespace  WadeSpace  {
       // assignment_operator
       char dummy5[sizeof (AssignmentOperator)];
 
+      // jump_statement
+      char dummy6[sizeof (BaseStatement)];
+
       // cast_expression
-      char dummy6[sizeof (CastExpression)];
+      char dummy7[sizeof (CastExpression)];
 
       // conditional_expression
-      char dummy7[sizeof (ConditionalExpression)];
+      char dummy8[sizeof (ConditionalExpression)];
 
       // constant
-      char dummy8[sizeof (Constant)];
+      char dummy9[sizeof (Constant)];
 
       // constant_expression
-      char dummy9[sizeof (ConstantExpression)];
+      char dummy10[sizeof (ConstantExpression)];
 
       // declaration
-      char dummy10[sizeof (Declaration)];
+      char dummy11[sizeof (Declaration)];
 
       // declaration_specifiers
-      char dummy11[sizeof (DeclarationSpecifiers)];
+      char dummy12[sizeof (DeclarationSpecifiers)];
 
       // declarator
-      char dummy12[sizeof (Declarator)];
+      char dummy13[sizeof (Declarator)];
 
       // direct_abstract_declarator
-      char dummy13[sizeof (DirectAbstractDeclarator)];
+      char dummy14[sizeof (DirectAbstractDeclarator)];
 
       // direct_declarator
-      char dummy14[sizeof (DirectDeclarator)];
+      char dummy15[sizeof (DirectDeclarator)];
 
       // enum_specifier
-      char dummy15[sizeof (EnumSpecifier)];
+      char dummy16[sizeof (EnumSpecifier)];
 
       // enumerator
-      char dummy16[sizeof (Enumerator)];
+      char dummy17[sizeof (Enumerator)];
 
       // equality_expression
-      char dummy17[sizeof (EqualityExpression)];
+      char dummy18[sizeof (EqualityExpression)];
 
       // exclusive_or_expression
-      char dummy18[sizeof (ExclusiveOrExpression)];
+      char dummy19[sizeof (ExclusiveOrExpression)];
 
       // expression
-      char dummy19[sizeof (Expression)];
+      char dummy20[sizeof (Expression)];
 
       // inclusive_or_expression
-      char dummy20[sizeof (InclusiveOrExpression)];
+      char dummy21[sizeof (InclusiveOrExpression)];
 
       // init_declarator
-      char dummy21[sizeof (InitDeclarator)];
+      char dummy22[sizeof (InitDeclarator)];
 
       // initializer
-      char dummy22[sizeof (Initializer)];
-
-      // jump_statement
-      char dummy23[sizeof (JumpStatement)];
+      char dummy23[sizeof (Initializer)];
 
       // logical_and_expression
       char dummy24[sizeof (LogicalAndExpression)];
@@ -1094,6 +1094,10 @@ namespace  WadeSpace  {
         value.move< AssignmentOperator > (std::move (that.value));
         break;
 
+      case symbol_kind::S_jump_statement: // jump_statement
+        value.move< BaseStatement > (std::move (that.value));
+        break;
+
       case symbol_kind::S_cast_expression: // cast_expression
         value.move< CastExpression > (std::move (that.value));
         break;
@@ -1160,10 +1164,6 @@ namespace  WadeSpace  {
 
       case symbol_kind::S_initializer: // initializer
         value.move< Initializer > (std::move (that.value));
-        break;
-
-      case symbol_kind::S_jump_statement: // jump_statement
-        value.move< JumpStatement > (std::move (that.value));
         break;
 
       case symbol_kind::S_logical_and_expression: // logical_and_expression
@@ -1480,6 +1480,20 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
+      basic_symbol (typename Base::kind_type t, BaseStatement&& v, location_type&& l)
+        : Base (t)
+        , value (std::move (v))
+        , location (std::move (l))
+      {}
+#else
+      basic_symbol (typename Base::kind_type t, const BaseStatement& v, const location_type& l)
+        : Base (t)
+        , value (v)
+        , location (l)
+      {}
+#endif
+
+#if 201103L <= YY_CPLUSPLUS
       basic_symbol (typename Base::kind_type t, CastExpression&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
@@ -1711,20 +1725,6 @@ namespace  WadeSpace  {
       {}
 #else
       basic_symbol (typename Base::kind_type t, const Initializer& v, const location_type& l)
-        : Base (t)
-        , value (v)
-        , location (l)
-      {}
-#endif
-
-#if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, JumpStatement&& v, location_type&& l)
-        : Base (t)
-        , value (std::move (v))
-        , location (std::move (l))
-      {}
-#else
-      basic_symbol (typename Base::kind_type t, const JumpStatement& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -2237,6 +2237,10 @@ switch (yykind)
         value.template destroy< AssignmentOperator > ();
         break;
 
+      case symbol_kind::S_jump_statement: // jump_statement
+        value.template destroy< BaseStatement > ();
+        break;
+
       case symbol_kind::S_cast_expression: // cast_expression
         value.template destroy< CastExpression > ();
         break;
@@ -2303,10 +2307,6 @@ switch (yykind)
 
       case symbol_kind::S_initializer: // initializer
         value.template destroy< Initializer > ();
-        break;
-
-      case symbol_kind::S_jump_statement: // jump_statement
-        value.template destroy< JumpStatement > ();
         break;
 
       case symbol_kind::S_logical_and_expression: // logical_and_expression
@@ -4538,6 +4538,10 @@ switch (yykind)
         value.copy< AssignmentOperator > (YY_MOVE (that.value));
         break;
 
+      case symbol_kind::S_jump_statement: // jump_statement
+        value.copy< BaseStatement > (YY_MOVE (that.value));
+        break;
+
       case symbol_kind::S_cast_expression: // cast_expression
         value.copy< CastExpression > (YY_MOVE (that.value));
         break;
@@ -4604,10 +4608,6 @@ switch (yykind)
 
       case symbol_kind::S_initializer: // initializer
         value.copy< Initializer > (YY_MOVE (that.value));
-        break;
-
-      case symbol_kind::S_jump_statement: // jump_statement
-        value.copy< JumpStatement > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_logical_and_expression: // logical_and_expression
@@ -4881,6 +4881,10 @@ switch (yykind)
         value.move< AssignmentOperator > (YY_MOVE (s.value));
         break;
 
+      case symbol_kind::S_jump_statement: // jump_statement
+        value.move< BaseStatement > (YY_MOVE (s.value));
+        break;
+
       case symbol_kind::S_cast_expression: // cast_expression
         value.move< CastExpression > (YY_MOVE (s.value));
         break;
@@ -4947,10 +4951,6 @@ switch (yykind)
 
       case symbol_kind::S_initializer: // initializer
         value.move< Initializer > (YY_MOVE (s.value));
-        break;
-
-      case symbol_kind::S_jump_statement: // jump_statement
-        value.move< JumpStatement > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_logical_and_expression: // logical_and_expression

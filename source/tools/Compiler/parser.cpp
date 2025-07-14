@@ -244,6 +244,10 @@ namespace  WadeSpace  {
         value.YY_MOVE_OR_COPY< AssignmentOperator > (YY_MOVE (that.value));
         break;
 
+      case symbol_kind::S_jump_statement: // jump_statement
+        value.YY_MOVE_OR_COPY< BaseStatement > (YY_MOVE (that.value));
+        break;
+
       case symbol_kind::S_cast_expression: // cast_expression
         value.YY_MOVE_OR_COPY< CastExpression > (YY_MOVE (that.value));
         break;
@@ -310,10 +314,6 @@ namespace  WadeSpace  {
 
       case symbol_kind::S_initializer: // initializer
         value.YY_MOVE_OR_COPY< Initializer > (YY_MOVE (that.value));
-        break;
-
-      case symbol_kind::S_jump_statement: // jump_statement
-        value.YY_MOVE_OR_COPY< JumpStatement > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_logical_and_expression: // logical_and_expression
@@ -571,6 +571,10 @@ namespace  WadeSpace  {
         value.move< AssignmentOperator > (YY_MOVE (that.value));
         break;
 
+      case symbol_kind::S_jump_statement: // jump_statement
+        value.move< BaseStatement > (YY_MOVE (that.value));
+        break;
+
       case symbol_kind::S_cast_expression: // cast_expression
         value.move< CastExpression > (YY_MOVE (that.value));
         break;
@@ -637,10 +641,6 @@ namespace  WadeSpace  {
 
       case symbol_kind::S_initializer: // initializer
         value.move< Initializer > (YY_MOVE (that.value));
-        break;
-
-      case symbol_kind::S_jump_statement: // jump_statement
-        value.move< JumpStatement > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_logical_and_expression: // logical_and_expression
@@ -898,6 +898,10 @@ namespace  WadeSpace  {
         value.copy< AssignmentOperator > (that.value);
         break;
 
+      case symbol_kind::S_jump_statement: // jump_statement
+        value.copy< BaseStatement > (that.value);
+        break;
+
       case symbol_kind::S_cast_expression: // cast_expression
         value.copy< CastExpression > (that.value);
         break;
@@ -964,10 +968,6 @@ namespace  WadeSpace  {
 
       case symbol_kind::S_initializer: // initializer
         value.copy< Initializer > (that.value);
-        break;
-
-      case symbol_kind::S_jump_statement: // jump_statement
-        value.copy< JumpStatement > (that.value);
         break;
 
       case symbol_kind::S_logical_and_expression: // logical_and_expression
@@ -1224,6 +1224,10 @@ namespace  WadeSpace  {
         value.move< AssignmentOperator > (that.value);
         break;
 
+      case symbol_kind::S_jump_statement: // jump_statement
+        value.move< BaseStatement > (that.value);
+        break;
+
       case symbol_kind::S_cast_expression: // cast_expression
         value.move< CastExpression > (that.value);
         break;
@@ -1290,10 +1294,6 @@ namespace  WadeSpace  {
 
       case symbol_kind::S_initializer: // initializer
         value.move< Initializer > (that.value);
-        break;
-
-      case symbol_kind::S_jump_statement: // jump_statement
-        value.move< JumpStatement > (that.value);
         break;
 
       case symbol_kind::S_logical_and_expression: // logical_and_expression
@@ -1795,6 +1795,10 @@ namespace  WadeSpace  {
         yylhs.value.emplace< AssignmentOperator > ();
         break;
 
+      case symbol_kind::S_jump_statement: // jump_statement
+        yylhs.value.emplace< BaseStatement > ();
+        break;
+
       case symbol_kind::S_cast_expression: // cast_expression
         yylhs.value.emplace< CastExpression > ();
         break;
@@ -1861,10 +1865,6 @@ namespace  WadeSpace  {
 
       case symbol_kind::S_initializer: // initializer
         yylhs.value.emplace< Initializer > ();
-        break;
-
-      case symbol_kind::S_jump_statement: // jump_statement
-        yylhs.value.emplace< JumpStatement > ();
         break;
 
       case symbol_kind::S_logical_and_expression: // logical_and_expression
@@ -3432,31 +3432,31 @@ namespace  WadeSpace  {
 
   case 204: // jump_statement: "goto" "identifier" ";"
 #line 754 "parser.y"
-                                  { yylhs.value.as< JumpStatement > () = JumpStatement(); cout << "GOTO IDENTIFIER SEMICOLON REDUCE to jump_statement" << endl; }
+                                  { yylhs.value.as< BaseStatement > () = JumpStatement(); cout << "GOTO IDENTIFIER SEMICOLON REDUCE to jump_statement" << endl; }
 #line 3437 "parser.cpp"
     break;
 
   case 205: // jump_statement: "continue" ";"
 #line 755 "parser.y"
-                                  { yylhs.value.as< JumpStatement > () = JumpStatement(); cout << "CONTINUE SEMICOLON REDUCE to jump_statement" << endl; }
+                                  { yylhs.value.as< BaseStatement > () = JumpStatement(); cout << "CONTINUE SEMICOLON REDUCE to jump_statement" << endl; }
 #line 3443 "parser.cpp"
     break;
 
   case 206: // jump_statement: "break" ";"
 #line 756 "parser.y"
-                                  { yylhs.value.as< JumpStatement > () = JumpStatement(); cout << "BREAK SEMICOLON REDUCE to jump_statement" << endl; }
+                                  { yylhs.value.as< BaseStatement > () = JumpStatement(); cout << "BREAK SEMICOLON REDUCE to jump_statement" << endl; }
 #line 3449 "parser.cpp"
     break;
 
   case 207: // jump_statement: "return" ";"
 #line 757 "parser.y"
-                                  { yylhs.value.as< JumpStatement > () = JumpStatement(); cout << "RETURN SEMICOLON REDUCE to jump_statement" << endl; }
+                                  { yylhs.value.as< BaseStatement > () = JumpStatement(); cout << "RETURN SEMICOLON REDUCE to jump_statement" << endl; }
 #line 3455 "parser.cpp"
     break;
 
   case 208: // jump_statement: "return" expression ";"
 #line 758 "parser.y"
-                                  { yylhs.value.as< JumpStatement > () = JumpStatement(); cout << "RETURN expression SEMICOLON REDUCE to jump_statement" << endl; }
+                                  { yylhs.value.as< BaseStatement > () = JumpStatement(); cout << "RETURN expression SEMICOLON REDUCE to jump_statement" << endl; }
 #line 3461 "parser.cpp"
     break;
 
