@@ -405,7 +405,7 @@ Nonterminals, with rules where they appear
     postfix_expression <PostfixExpression> (96)
         on left: 7 8 9 10 11 12 13 14 15 16
         on right: 8 9 10 11 12 13 14 19
-    argument_expression_list <std::vector<Expression>> (97)
+    argument_expression_list <std::vector<AssignmentExpression>> (97)
         on left: 17 18
         on right: 10 18
     unary_expression <UnaryExpression> (98)
@@ -441,16 +441,16 @@ Nonterminals, with rules where they appear
     inclusive_or_expression <InclusiveOrExpression> (108)
         on left: 55 56
         on right: 56 57 58
-    logical_and_expression <Expression> (109)
+    logical_and_expression <LogicalAndExpression> (109)
         on left: 57 58
         on right: 58 59 60
-    logical_or_expression <Expression> (110)
+    logical_or_expression <LogicalOrExpression> (110)
         on left: 59 60
         on right: 60 61 62
-    conditional_expression <Expression> (111)
+    conditional_expression <ConditionalExpression> (111)
         on left: 61 62
         on right: 62 63 78
-    assignment_expression <Expression> (112)
+    assignment_expression <AssignmentExpression> (112)
         on left: 63 64
         on right: 17 18 64 76 77 172
     assignment_operator <AssignmentOperator> (113)
@@ -459,7 +459,7 @@ Nonterminals, with rules where they appear
     expression <Expression> (114)
         on left: 76 77
         on right: 3 8 62 77 195 196 197 198 199 200 202 207
-    constant_expression <Expression> (115)
+    constant_expression <ConstantExpression> (115)
         on left: 78
         on right: 123 124 131 138 165 167 184
     declaration <Declaration> (116)

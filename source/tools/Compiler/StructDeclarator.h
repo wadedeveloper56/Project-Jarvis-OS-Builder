@@ -5,19 +5,19 @@
 #include <stdint.h>
 #include <optional>
 #include "Declarator.h"
-#include "Expression.h"
+#include "ConstantExpression.h"
 
 namespace WadeSpace {
 	class StructDeclarator
 	{
 	public:
 		StructDeclarator(Declarator& dec);
-		StructDeclarator(Expression& exp);
-		StructDeclarator(Declarator& dec, Expression& exp);
+		StructDeclarator(ConstantExpression& exp);
+		StructDeclarator(Declarator& dec, ConstantExpression& exp);
 		StructDeclarator();
 		~StructDeclarator();
 	private:
 		std::optional < std::reference_wrapper < Declarator>> dec;
-		std::optional < std::reference_wrapper < Expression>> exp;
+		std::optional < std::reference_wrapper < ConstantExpression>> exp;
 	};
 }

@@ -52,6 +52,11 @@
     #include "AndExpression.h"
     #include "ExclusiveOrExpression.h"
     #include "InclusiveOrExpression.h"
+    #include "LogicalAndExpression.h"
+    #include "LogicalOrExpression.h"
+    #include "ConditionalExpression.h"
+    #include "AssignmentExpression.h"
+    #include "ConstantExpression.h"
 
     using namespace std;
 
@@ -190,7 +195,7 @@
 %token <std::string> MOD_OP "%"
 
 %type<Constant> constant
-%type<std::vector<Expression>> argument_expression_list
+%type<std::vector<AssignmentExpression>> argument_expression_list
 
 %type<PrimaryExpression> primary_expression
 %type<Expression> expression
@@ -205,11 +210,11 @@
 %type<AndExpression> and_expression
 %type<ExclusiveOrExpression> exclusive_or_expression
 %type<InclusiveOrExpression> inclusive_or_expression
-%type<Expression> logical_and_expression
-%type<Expression> logical_or_expression
-%type<Expression> conditional_expression
-%type<Expression> assignment_expression
-%type<Expression> constant_expression
+%type<LogicalAndExpression> logical_and_expression
+%type<LogicalOrExpression> logical_or_expression
+%type<ConditionalExpression> conditional_expression
+%type<AssignmentExpression> assignment_expression
+%type<ConstantExpression> constant_expression
 
 %type<std::string> unary_operator
 %type<AssignmentOperator> assignment_operator
@@ -286,14 +291,14 @@ postfix_expression
 
 argument_expression_list
     : assignment_expression {
-                             Expression exp = $1;
-                             $$ = std::vector<Expression>();
+                             AssignmentExpression exp = $1;
+                             $$ = std::vector<AssignmentExpression>();
                              $$.push_back(exp);
                              cout << "assignment_expression REDUCE argument_expression_list" << endl;
                             }
     | argument_expression_list COMMA assignment_expression {
-            Expression value1 = $3;
-            std::vector<Expression> &value2 = $1;
+            AssignmentExpression value1 = $3;
+            std::vector<AssignmentExpression> &value2 = $1;
             value2.push_back(value1);
             $$ = value2;
             cout << "argument_expression_list COMMA assignment_expression REDUCE argument_expression_list" << endl;
@@ -372,23 +377,23 @@ inclusive_or_expression
     ;
 
 logical_and_expression
-    : inclusive_or_expression                                { $<Expression>$ = Expression();  cout << "inclusive_or_expression REDUCE to logical_and_expression" << endl;}
-    | logical_and_expression AND_OP inclusive_or_expression  { $<Expression>$ = Expression(); cout << "inclusive_or_expression REDUCE to logical_and_expression" << endl;}
+    : inclusive_or_expression                                { $<LogicalAndExpression>$ = LogicalAndExpression();  cout << "inclusive_or_expression REDUCE to logical_and_expression" << endl;}
+    | logical_and_expression AND_OP inclusive_or_expression  { $<LogicalAndExpression>$ = LogicalAndExpression(); cout << "inclusive_or_expression REDUCE to logical_and_expression" << endl;}
     ;
 
 logical_or_expression
-    : logical_and_expression                              { $<Expression>$ = $1;  cout << "inclusive_and_expression REDUCE to logical_or_expression" << endl;}
-    | logical_or_expression OR_OP logical_and_expression  { $<Expression>$ = Expression(); cout << "logical_or_expression OR_OP logical_and_expression REDUCE to logical_or_expression" << endl;}
+    : logical_and_expression                              { $<LogicalOrExpression>$ = LogicalOrExpression();  cout << "inclusive_and_expression REDUCE to logical_or_expression" << endl;}
+    | logical_or_expression OR_OP logical_and_expression  { $<LogicalOrExpression>$ = LogicalOrExpression(); cout << "logical_or_expression OR_OP logical_and_expression REDUCE to logical_or_expression" << endl;}
     ;
 
 conditional_expression
-    : logical_or_expression                                                   { $<Expression>$ = $1;  cout << "logical_or_expression REDUCE to conditional_expression" << endl;}
-    | logical_or_expression QUESTION expression COLON conditional_expression  { $<Expression>$ = Expression(); cout << "logical_or_expression QUESTION expression COLON conditional_expression REDUCE to conditional_expression" << endl;}
+    : logical_or_expression                                                   { $<ConditionalExpression>$ = ConditionalExpression();  cout << "logical_or_expression REDUCE to conditional_expression" << endl;}
+    | logical_or_expression QUESTION expression COLON conditional_expression  { $<ConditionalExpression>$ = ConditionalExpression(); cout << "logical_or_expression QUESTION expression COLON conditional_expression REDUCE to conditional_expression" << endl;}
     ;
 
 assignment_expression
-    : conditional_expression                                      { $<Expression>$ = Expression();  cout << "conditional_expression REDUCE to assignment_expression" << endl;}
-    | unary_expression assignment_operator assignment_expression  { $<Expression>$ = Expression(); cout << "unary_expression assignment_operator assignment_expression REDUCE to assignment_expression" << endl;}
+    : conditional_expression                                      { $<AssignmentExpression>$ = AssignmentExpression();  cout << "conditional_expression REDUCE to assignment_expression" << endl;}
+    | unary_expression assignment_operator assignment_expression  { $<AssignmentExpression>$ = AssignmentExpression(); cout << "unary_expression assignment_operator assignment_expression REDUCE to assignment_expression" << endl;}
     ;
 
 assignment_operator
@@ -406,12 +411,12 @@ assignment_operator
     ;
 
 expression
-    : assignment_expression                   { $<Expression>$ = $1;  cout << "asignment_expression REDUCE to expression" << endl;}
+    : assignment_expression                   { $<Expression>$ = Expression();  cout << "asignment_expression REDUCE to expression" << endl;}
     | expression COMMA assignment_expression  { $<Expression>$ = Expression(); cout << "expression COMMA assignment_expression COMMA  REDUCE to expression" << endl;}
     ;
 
 constant_expression
-    : conditional_expression  { $<Expression>$ = $1;  cout << "conditional_expression REDUCE to constant_expression" << endl;}
+    : conditional_expression  { $<ConstantExpression>$ = ConstantExpression($1);  cout << "conditional_expression REDUCE to constant_expression" << endl;}
     ;
 
 declaration

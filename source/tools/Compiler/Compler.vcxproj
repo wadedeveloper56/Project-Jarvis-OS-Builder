@@ -184,9 +184,12 @@
     <ClInclude Include="AbstractDeclarator.h" />
     <ClInclude Include="AdditiveExpression.h" />
     <ClInclude Include="AndExpression.h" />
+    <ClInclude Include="AssignmentExpression.h" />
     <ClInclude Include="AssignmentOperator.h" />
     <ClInclude Include="CastExpression.h" />
+    <ClInclude Include="ConditionalExpression.h" />
     <ClInclude Include="Constant.h" />
+    <ClInclude Include="ConstantExpression.h" />
     <ClInclude Include="Declaration.h" />
     <ClInclude Include="DeclarationSpecifiers.h" />
     <ClInclude Include="Declarator.h" />
@@ -202,6 +205,8 @@
     <ClInclude Include="Initializer.h" />
     <ClInclude Include="interpreter.h" />
     <ClInclude Include="location.hh" />
+    <ClInclude Include="LogicalAndExpression.h" />
+    <ClInclude Include="LogicalOrExpression.h" />
     <ClInclude Include="MultiplicativeExpression.h" />
     <ClInclude Include="ParameterDeclaration.h" />
     <ClInclude Include="ParameterTypeList.h" />
@@ -230,9 +235,12 @@
     <ClCompile Include="AbstractDeclarator.cpp" />
     <ClCompile Include="AdditiveExpression.cpp" />
     <ClCompile Include="AndExpression.cpp" />
+    <ClCompile Include="AssignmentExpression.cpp" />
     <ClCompile Include="AssignmentOperator.cpp" />
     <ClCompile Include="CastExpression.cpp" />
+    <ClCompile Include="ConditionalExpression.cpp" />
     <ClCompile Include="Constant.cpp" />
+    <ClCompile Include="ConstantExpression.cpp" />
     <ClCompile Include="Declaration.cpp" />
     <ClCompile Include="DeclarationSpecifiers.cpp" />
     <ClCompile Include="Declarator.cpp" />
@@ -247,6 +255,8 @@
     <ClCompile Include="InitDeclarator.cpp" />
     <ClCompile Include="Initializer.cpp" />
     <ClCompile Include="interpreter.cpp" />
+    <ClCompile Include="LogicalAndExpression.cpp" />
+    <ClCompile Include="LogicalOrExpression.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MultiplicativeExpression.cpp" />
     <ClCompile Include="ParameterDeclaration.cpp" />
