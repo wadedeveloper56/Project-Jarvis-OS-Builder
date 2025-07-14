@@ -186,6 +186,7 @@
     <ClInclude Include="AndExpression.h" />
     <ClInclude Include="AssignmentExpression.h" />
     <ClInclude Include="AssignmentOperator.h" />
+    <ClInclude Include="BaseStatement.h" />
     <ClInclude Include="CastExpression.h" />
     <ClInclude Include="ConditionalExpression.h" />
     <ClInclude Include="Constant.h" />
@@ -204,6 +205,7 @@
     <ClInclude Include="InitDeclarator.h" />
     <ClInclude Include="Initializer.h" />
     <ClInclude Include="interpreter.h" />
+    <ClInclude Include="JumpStatement.h" />
     <ClInclude Include="location.hh" />
     <ClInclude Include="LogicalAndExpression.h" />
     <ClInclude Include="LogicalOrExpression.h" />
@@ -237,6 +239,7 @@
     <ClCompile Include="AndExpression.cpp" />
     <ClCompile Include="AssignmentExpression.cpp" />
     <ClCompile Include="AssignmentOperator.cpp" />
+    <ClCompile Include="BaseStatement.cpp" />
     <ClCompile Include="CastExpression.cpp" />
     <ClCompile Include="ConditionalExpression.cpp" />
     <ClCompile Include="Constant.cpp" />
@@ -255,6 +258,7 @@
     <ClCompile Include="InitDeclarator.cpp" />
     <ClCompile Include="Initializer.cpp" />
     <ClCompile Include="interpreter.cpp" />
+    <ClCompile Include="JumpStatement.cpp" />
     <ClCompile Include="LogicalAndExpression.cpp" />
     <ClCompile Include="LogicalOrExpression.cpp" />
     <ClCompile Include="main.cpp" />

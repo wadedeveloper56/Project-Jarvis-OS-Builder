@@ -162,6 +162,12 @@
     <ClInclude Include="ConstantExpression.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BaseStatement.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="JumpStatement.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="parser.cpp">
@@ -300,6 +306,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ConstantExpression.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseStatement.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="JumpStatement.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

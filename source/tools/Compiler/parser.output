@@ -564,7 +564,7 @@ Nonterminals, with rules where they appear
     declaration_list (149)
         on left: 190 191
         on right: 188 189 191 212 214
-    statement_list (150)
+    statement_list <std::vector<BaseStatement>> (150)
         on left: 192 193
         on right: 187 189 193
     expression_statement (151)
@@ -576,7 +576,7 @@ Nonterminals, with rules where they appear
     iteration_statement (153)
         on left: 199 200 201 202
         on right: 181
-    jump_statement (154)
+    jump_statement <JumpStatement> (154)
         on left: 203 204 205 206 207
         on right: 182
     translation_unit (155)

@@ -57,6 +57,8 @@
     #include "ConditionalExpression.h"
     #include "AssignmentExpression.h"
     #include "ConstantExpression.h"
+    #include "BaseStatement.h"
+    #include "JumpStatement.h"
 
     using namespace std;
 
@@ -248,15 +250,17 @@
 %type<ParameterDeclaration> parameter_declaration
 %type<ParameterTypeList> parameter_type_list
 %type<std::vector<ParameterDeclaration>> parameter_list
+%type<JumpStatement> jump_statement
+%type<std::vector<BaseStatement>> statement_list
 
 %start translation_unit
 
 %%
 
 primary_expression
-    : IDENTIFIER                { $<PrimaryExpression>$ = PrimaryExpression(); cout << "IDENTIFIER REDUCE to primary_expression" << endl; }
-    | constant                  { $<PrimaryExpression>$ = PrimaryExpression(); cout << "constant REDUCE to primary_expression" << endl; }
-    | OPAREN expression CPAREN  { $<PrimaryExpression>$ = PrimaryExpression(); cout << "OPAREN expression CPAREN REDUCE to primary_expression" << endl; }
+    : IDENTIFIER                { $<PrimaryExpression>$ = PrimaryExpression($1); cout << "IDENTIFIER REDUCE to primary_expression" << endl; }
+    | constant                  { $<PrimaryExpression>$ = PrimaryExpression($1); cout << "constant REDUCE to primary_expression" << endl; }
+    | OPAREN expression CPAREN  { $<PrimaryExpression>$ = PrimaryExpression($2); cout << "OPAREN expression CPAREN REDUCE to primary_expression" << endl; }
     ;
 
 constant
@@ -277,16 +281,16 @@ constant
                       }
 
 postfix_expression
-    : primary_expression                                           { $<PostfixExpression>$ = PostfixExpression(); cout << "primary_expression REDUCE to postfix_expression" << endl; }
-    | postfix_expression OBRACE expression CBRACE                  { $<PostfixExpression>$ = PostfixExpression(); cout << "postfix_expression OBRACE expression CBRACE REDUCE to postfix_expression" << endl; }
-    | postfix_expression OPAREN CPAREN                             { $<PostfixExpression>$ = PostfixExpression(); cout << "postfix_expression OPAREN CPAREN REDUCE to postfix_expression" << endl; }
-    | postfix_expression OPAREN argument_expression_list CPAREN    { $<PostfixExpression>$ = PostfixExpression(); cout << "postfix_expression OPAREN argument_expression_list CPAREN REDUCE to postfix_expression" << endl; }
-    | postfix_expression PERIOD IDENTIFIER                         { $<PostfixExpression>$ = PostfixExpression(); cout << "postfix_expression PERIOD_OP IDENTIFIER REDUCE to postfix_expression" << endl; }
-    | postfix_expression PTR_OP IDENTIFIER                         { $<PostfixExpression>$ = PostfixExpression(); cout << "postfix_expression PTR_OP IDENTIFIER REDUCE to postfix_expression" << endl; }
-    | postfix_expression INC_OP                                    { $<PostfixExpression>$ = PostfixExpression(); cout << "postfix_expression INC_OP REDUCE to postfix_expression" << endl; }
-    | postfix_expression DEC_OP                                    { $<PostfixExpression>$ = PostfixExpression(); cout << "postfix_expression DEC_OP REDUCE to postfix_expression" << endl; }
-    | OPAREN type_name CPAREN OCURLY initializer_list CCURLY       { $<PostfixExpression>$ = PostfixExpression(); cout << "OPAREN type_name CPAREN_OP OCURLY_OP initializer_list CCURLY REDUCE to postfix_expression" << endl; }
-    | OPAREN type_name CPAREN OCURLY initializer_list COMMA CCURLY { $<PostfixExpression>$ = PostfixExpression(); cout << "OPAREN type_name CPAREN_OP OCURLY_OP initializer_list COMMA CCURLY REDUCE to postfix_expression" << endl; }
+    : primary_expression                                           { $<PostfixExpression>$ = PostfixExpression($1); cout << "primary_expression REDUCE to postfix_expression" << endl; }
+    | postfix_expression OBRACE expression CBRACE                  { $<PostfixExpression>$ = PostfixExpression($1,$3); cout << "postfix_expression OBRACE expression CBRACE REDUCE to postfix_expression" << endl; }
+    | postfix_expression OPAREN CPAREN                             { $<PostfixExpression>$ = PostfixExpression($1,$2,$3); cout << "postfix_expression OPAREN CPAREN REDUCE to postfix_expression" << endl; }
+    | postfix_expression OPAREN argument_expression_list CPAREN    { $<PostfixExpression>$ = PostfixExpression($1,$3); cout << "postfix_expression OPAREN argument_expression_list CPAREN REDUCE to postfix_expression" << endl; }
+    | postfix_expression PERIOD IDENTIFIER                         { $<PostfixExpression>$ = PostfixExpression($1,$2,$3); cout << "postfix_expression PERIOD_OP IDENTIFIER REDUCE to postfix_expression" << endl; }
+    | postfix_expression PTR_OP IDENTIFIER                         { $<PostfixExpression>$ = PostfixExpression($1,$2,$3); cout << "postfix_expression PTR_OP IDENTIFIER REDUCE to postfix_expression" << endl; }
+    | postfix_expression INC_OP                                    { $<PostfixExpression>$ = PostfixExpression($1,$2,""); cout << "postfix_expression INC_OP REDUCE to postfix_expression" << endl; }
+    | postfix_expression DEC_OP                                    { $<PostfixExpression>$ = PostfixExpression($1,$2,""); cout << "postfix_expression DEC_OP REDUCE to postfix_expression" << endl; }
+    | OPAREN type_name CPAREN OCURLY initializer_list CCURLY       { $<PostfixExpression>$ = PostfixExpression($2,$5); cout << "OPAREN type_name CPAREN_OP OCURLY_OP initializer_list CCURLY REDUCE to postfix_expression" << endl; }
+    | OPAREN type_name CPAREN OCURLY initializer_list COMMA CCURLY { $<PostfixExpression>$ = PostfixExpression($2,$5); cout << "OPAREN type_name CPAREN_OP OCURLY_OP initializer_list COMMA CCURLY REDUCE to postfix_expression" << endl; }
 
 
 argument_expression_list
@@ -306,12 +310,12 @@ argument_expression_list
     ;
 
 unary_expression
-    : postfix_expression             { $<UnaryExpression>$ = UnaryExpression(); cout << "postfix_expression REDUCE unary_expression" << endl;}
-    | INC_OP unary_expression        { $<UnaryExpression>$ = UnaryExpression(); cout << "INC_OP unary_expression REDUCE unary_expression" << endl;}
-    | DEC_OP unary_expression        { $<UnaryExpression>$ = UnaryExpression(); cout << "DEC_OP unary_expression REDUCE unary_expression" << endl;}
-    | unary_operator cast_expression { $<UnaryExpression>$ = UnaryExpression(); cout << "unary_operator cast_expression REDUCE unary_expression" << endl;}
-    | SIZEOF unary_expression        { $<UnaryExpression>$ = UnaryExpression(); cout << "SIZEOF unary_expression REDUCE unary_expression" << endl;}
-    | SIZEOF OPAREN type_name CPAREN { $<UnaryExpression>$ = UnaryExpression(); cout << "SIZEOF OPAREN type_name CPAREN REDUCE unary_expression" << endl;}
+    : postfix_expression             { $<UnaryExpression>$ = UnaryExpression($1); cout << "postfix_expression REDUCE unary_expression" << endl;}
+    | INC_OP unary_expression        { $<UnaryExpression>$ = UnaryExpression($1,$2); cout << "INC_OP unary_expression REDUCE unary_expression" << endl;}
+    | DEC_OP unary_expression        { $<UnaryExpression>$ = UnaryExpression($1,$2); cout << "DEC_OP unary_expression REDUCE unary_expression" << endl;}
+    | unary_operator cast_expression { $<UnaryExpression>$ = UnaryExpression($1,$2); cout << "unary_operator cast_expression REDUCE unary_expression" << endl;}
+    | SIZEOF unary_expression        { $<UnaryExpression>$ = UnaryExpression($1,$2); cout << "SIZEOF unary_expression REDUCE unary_expression" << endl;}
+    | SIZEOF OPAREN type_name CPAREN { $<UnaryExpression>$ = UnaryExpression($1,$3); cout << "SIZEOF OPAREN type_name CPAREN REDUCE unary_expression" << endl;}
     ;
 
 unary_operator
@@ -324,8 +328,8 @@ unary_operator
     ;
 
 cast_expression
-    : unary_expression                         { $<CastExpression>$ = CastExpression();  cout << "unary_expression REDUCE to cast_expression" << endl;}
-    | OPAREN type_name CPAREN cast_expression  { $<CastExpression>$ = CastExpression();  cout << "unary_expression REDUCE to cast_expression" << endl;}
+    : unary_expression                         { $<CastExpression>$ = CastExpression($1);  cout << "unary_expression REDUCE to cast_expression" << endl;}
+    | OPAREN type_name CPAREN cast_expression  { $<CastExpression>$ = CastExpression($2,$4);  cout << "unary_expression REDUCE to cast_expression" << endl;}
     ;
 
 multiplicative_expression
@@ -747,11 +751,11 @@ iteration_statement
     ;
 
 jump_statement
-    : GOTO IDENTIFIER SEMICOLON   { cout << "GOTO IDENTIFIER SEMICOLON REDUCE to jump_statement" << endl; }
-    | CONTINUE SEMICOLON          { cout << "CONTINUE SEMICOLON REDUCE to jump_statement" << endl; }
-    | BREAK SEMICOLON             { cout << "BREAK SEMICOLON REDUCE to jump_statement" << endl; }
-    | RETURN SEMICOLON            { cout << "RETURN SEMICOLON REDUCE to jump_statement" << endl; }
-    | RETURN expression SEMICOLON { cout << "RETURN expression SEMICOLON REDUCE to jump_statement" << endl; }
+    : GOTO IDENTIFIER SEMICOLON   { $<JumpStatement>$ = JumpStatement(); cout << "GOTO IDENTIFIER SEMICOLON REDUCE to jump_statement" << endl; }
+    | CONTINUE SEMICOLON          { $<JumpStatement>$ = JumpStatement(); cout << "CONTINUE SEMICOLON REDUCE to jump_statement" << endl; }
+    | BREAK SEMICOLON             { $<JumpStatement>$ = JumpStatement(); cout << "BREAK SEMICOLON REDUCE to jump_statement" << endl; }
+    | RETURN SEMICOLON            { $<JumpStatement>$ = JumpStatement(); cout << "RETURN SEMICOLON REDUCE to jump_statement" << endl; }
+    | RETURN expression SEMICOLON { $<JumpStatement>$ = JumpStatement(); cout << "RETURN expression SEMICOLON REDUCE to jump_statement" << endl; }
     ;
 
 translation_unit 

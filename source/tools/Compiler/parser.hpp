@@ -95,6 +95,8 @@
     #include "ConditionalExpression.h"
     #include "AssignmentExpression.h"
     #include "ConstantExpression.h"
+    #include "BaseStatement.h"
+    #include "JumpStatement.h"
 
     using namespace std;
 
@@ -103,7 +105,7 @@
         class Interpreter;
     }
 
-#line 107 "parser.hpp"
+#line 109 "parser.hpp"
 
 # include <cassert>
 # include <cstdlib> // std::abort
@@ -244,7 +246,7 @@
 
 #line 9 "parser.y"
 namespace  WadeSpace  {
-#line 248 "parser.hpp"
+#line 250 "parser.hpp"
 
 
 
@@ -529,68 +531,71 @@ namespace  WadeSpace  {
       // initializer
       char dummy22[sizeof (Initializer)];
 
+      // jump_statement
+      char dummy23[sizeof (JumpStatement)];
+
       // logical_and_expression
-      char dummy23[sizeof (LogicalAndExpression)];
+      char dummy24[sizeof (LogicalAndExpression)];
 
       // logical_or_expression
-      char dummy24[sizeof (LogicalOrExpression)];
+      char dummy25[sizeof (LogicalOrExpression)];
 
       // multiplicative_expression
-      char dummy25[sizeof (MultiplicativeExpression)];
+      char dummy26[sizeof (MultiplicativeExpression)];
 
       // parameter_declaration
-      char dummy26[sizeof (ParameterDeclaration)];
+      char dummy27[sizeof (ParameterDeclaration)];
 
       // parameter_type_list
-      char dummy27[sizeof (ParameterTypeList)];
+      char dummy28[sizeof (ParameterTypeList)];
 
       // pointer
-      char dummy28[sizeof (Pointer)];
+      char dummy29[sizeof (Pointer)];
 
       // postfix_expression
-      char dummy29[sizeof (PostfixExpression)];
+      char dummy30[sizeof (PostfixExpression)];
 
       // primary_expression
-      char dummy30[sizeof (PrimaryExpression)];
+      char dummy31[sizeof (PrimaryExpression)];
 
       // relational_expression
-      char dummy31[sizeof (RelationalExpression)];
+      char dummy32[sizeof (RelationalExpression)];
 
       // shift_expression
-      char dummy32[sizeof (ShiftExpression)];
+      char dummy33[sizeof (ShiftExpression)];
 
       // specifier_qualifier_list
-      char dummy33[sizeof (SpecifierQualifierList)];
+      char dummy34[sizeof (SpecifierQualifierList)];
 
       // storage_class_specifier
-      char dummy34[sizeof (StorageClassSpecifier)];
+      char dummy35[sizeof (StorageClassSpecifier)];
 
       // struct_declaration
-      char dummy35[sizeof (StructDeclaration)];
+      char dummy36[sizeof (StructDeclaration)];
 
       // struct_declarator
-      char dummy36[sizeof (StructDeclarator)];
+      char dummy37[sizeof (StructDeclarator)];
 
       // struct_or_union
-      char dummy37[sizeof (StructOrUnion)];
+      char dummy38[sizeof (StructOrUnion)];
 
       // struct_or_union_specifier
-      char dummy38[sizeof (StructOrUnionSpecifier)];
+      char dummy39[sizeof (StructOrUnionSpecifier)];
 
       // type_name
-      char dummy39[sizeof (TypeName)];
+      char dummy40[sizeof (TypeName)];
 
       // type_qualifier
-      char dummy40[sizeof (TypeQualifier)];
+      char dummy41[sizeof (TypeQualifier)];
 
       // type_specifier
-      char dummy41[sizeof (TypeSpecifier)];
+      char dummy42[sizeof (TypeSpecifier)];
 
       // unary_expression
-      char dummy42[sizeof (UnaryExpression)];
+      char dummy43[sizeof (UnaryExpression)];
 
       // "f_const"
-      char dummy43[sizeof (long double)];
+      char dummy44[sizeof (long double)];
 
       // "identifier"
       // "sting_literal"
@@ -681,37 +686,40 @@ namespace  WadeSpace  {
       // "/"
       // "%"
       // unary_operator
-      char dummy44[sizeof (std::string)];
+      char dummy45[sizeof (std::string)];
 
       // argument_expression_list
-      char dummy45[sizeof (std::vector<AssignmentExpression>)];
+      char dummy46[sizeof (std::vector<AssignmentExpression>)];
+
+      // statement_list
+      char dummy47[sizeof (std::vector<BaseStatement>)];
 
       // enumerator_list
-      char dummy46[sizeof (std::vector<Enumerator>)];
+      char dummy48[sizeof (std::vector<Enumerator>)];
 
       // init_declarator_list
-      char dummy47[sizeof (std::vector<InitDeclarator>)];
+      char dummy49[sizeof (std::vector<InitDeclarator>)];
 
       // initializer_list
-      char dummy48[sizeof (std::vector<Initializer>)];
+      char dummy50[sizeof (std::vector<Initializer>)];
 
       // parameter_list
-      char dummy49[sizeof (std::vector<ParameterDeclaration>)];
+      char dummy51[sizeof (std::vector<ParameterDeclaration>)];
 
       // struct_declaration_list
-      char dummy50[sizeof (std::vector<StructDeclaration>)];
+      char dummy52[sizeof (std::vector<StructDeclaration>)];
 
       // struct_declarator_list
-      char dummy51[sizeof (std::vector<StructDeclarator>)];
+      char dummy53[sizeof (std::vector<StructDeclarator>)];
 
       // type_qualifier_list
-      char dummy52[sizeof (std::vector<TypeQualifier>)];
+      char dummy54[sizeof (std::vector<TypeQualifier>)];
 
       // identifier_list
-      char dummy53[sizeof (std::vector<std::string>)];
+      char dummy55[sizeof (std::vector<std::string>)];
 
       // "i_const"
-      char dummy54[sizeof (uint64_t)];
+      char dummy56[sizeof (uint64_t)];
     };
 
     /// The size of the largest semantic type.
@@ -1154,6 +1162,10 @@ namespace  WadeSpace  {
         value.move< Initializer > (std::move (that.value));
         break;
 
+      case symbol_kind::S_jump_statement: // jump_statement
+        value.move< JumpStatement > (std::move (that.value));
+        break;
+
       case symbol_kind::S_logical_and_expression: // logical_and_expression
         value.move< LogicalAndExpression > (std::move (that.value));
         break;
@@ -1332,6 +1344,10 @@ namespace  WadeSpace  {
 
       case symbol_kind::S_argument_expression_list: // argument_expression_list
         value.move< std::vector<AssignmentExpression> > (std::move (that.value));
+        break;
+
+      case symbol_kind::S_statement_list: // statement_list
+        value.move< std::vector<BaseStatement> > (std::move (that.value));
         break;
 
       case symbol_kind::S_enumerator_list: // enumerator_list
@@ -1702,6 +1718,20 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
+      basic_symbol (typename Base::kind_type t, JumpStatement&& v, location_type&& l)
+        : Base (t)
+        , value (std::move (v))
+        , location (std::move (l))
+      {}
+#else
+      basic_symbol (typename Base::kind_type t, const JumpStatement& v, const location_type& l)
+        : Base (t)
+        , value (v)
+        , location (l)
+      {}
+#endif
+
+#if 201103L <= YY_CPLUSPLUS
       basic_symbol (typename Base::kind_type t, LogicalAndExpression&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
@@ -2024,6 +2054,20 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
+      basic_symbol (typename Base::kind_type t, std::vector<BaseStatement>&& v, location_type&& l)
+        : Base (t)
+        , value (std::move (v))
+        , location (std::move (l))
+      {}
+#else
+      basic_symbol (typename Base::kind_type t, const std::vector<BaseStatement>& v, const location_type& l)
+        : Base (t)
+        , value (v)
+        , location (l)
+      {}
+#endif
+
+#if 201103L <= YY_CPLUSPLUS
       basic_symbol (typename Base::kind_type t, std::vector<Enumerator>&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
@@ -2261,6 +2305,10 @@ switch (yykind)
         value.template destroy< Initializer > ();
         break;
 
+      case symbol_kind::S_jump_statement: // jump_statement
+        value.template destroy< JumpStatement > ();
+        break;
+
       case symbol_kind::S_logical_and_expression: // logical_and_expression
         value.template destroy< LogicalAndExpression > ();
         break;
@@ -2439,6 +2487,10 @@ switch (yykind)
 
       case symbol_kind::S_argument_expression_list: // argument_expression_list
         value.template destroy< std::vector<AssignmentExpression> > ();
+        break;
+
+      case symbol_kind::S_statement_list: // statement_list
+        value.template destroy< std::vector<BaseStatement> > ();
         break;
 
       case symbol_kind::S_enumerator_list: // enumerator_list
@@ -4554,6 +4606,10 @@ switch (yykind)
         value.copy< Initializer > (YY_MOVE (that.value));
         break;
 
+      case symbol_kind::S_jump_statement: // jump_statement
+        value.copy< JumpStatement > (YY_MOVE (that.value));
+        break;
+
       case symbol_kind::S_logical_and_expression: // logical_and_expression
         value.copy< LogicalAndExpression > (YY_MOVE (that.value));
         break;
@@ -4734,6 +4790,10 @@ switch (yykind)
         value.copy< std::vector<AssignmentExpression> > (YY_MOVE (that.value));
         break;
 
+      case symbol_kind::S_statement_list: // statement_list
+        value.copy< std::vector<BaseStatement> > (YY_MOVE (that.value));
+        break;
+
       case symbol_kind::S_enumerator_list: // enumerator_list
         value.copy< std::vector<Enumerator> > (YY_MOVE (that.value));
         break;
@@ -4887,6 +4947,10 @@ switch (yykind)
 
       case symbol_kind::S_initializer: // initializer
         value.move< Initializer > (YY_MOVE (s.value));
+        break;
+
+      case symbol_kind::S_jump_statement: // jump_statement
+        value.move< JumpStatement > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_logical_and_expression: // logical_and_expression
@@ -5069,6 +5133,10 @@ switch (yykind)
         value.move< std::vector<AssignmentExpression> > (YY_MOVE (s.value));
         break;
 
+      case symbol_kind::S_statement_list: // statement_list
+        value.move< std::vector<BaseStatement> > (YY_MOVE (s.value));
+        break;
+
       case symbol_kind::S_enumerator_list: // enumerator_list
         value.move< std::vector<Enumerator> > (YY_MOVE (s.value));
         break;
@@ -5172,7 +5240,7 @@ switch (yykind)
 
 #line 9 "parser.y"
 } //  WadeSpace 
-#line 5176 "parser.hpp"
+#line 5244 "parser.hpp"
 
 
 
