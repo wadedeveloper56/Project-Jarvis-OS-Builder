@@ -342,28 +342,28 @@ additive_expression
     ;
 
 shift_expression
-    : additive_expression                           { $<ShiftExpression>$ = ShiftExpression();  cout << "additive_expression REDUCE to shift_expression" << endl;}
-    | shift_expression LEFT_OP additive_expression  { $<ShiftExpression>$ = ShiftExpression(); cout << "shift_expression LEFT_OP additive_expression REDUCE to shift_expression" << endl;}
-    | shift_expression RIGHT_OP additive_expression { $<ShiftExpression>$ = ShiftExpression(); cout << "shift_expression RIGHT_OP additive_expression REDUCE to shift_expression" << endl;}
+    : additive_expression                           { $<ShiftExpression>$ = ShiftExpression($1);  cout << "additive_expression REDUCE to shift_expression" << endl;}
+    | shift_expression LEFT_OP additive_expression  { $<ShiftExpression>$ = ShiftExpression($1,$2,$3); cout << "shift_expression LEFT_OP additive_expression REDUCE to shift_expression" << endl;}
+    | shift_expression RIGHT_OP additive_expression { $<ShiftExpression>$ = ShiftExpression($1,$2,$3); cout << "shift_expression RIGHT_OP additive_expression REDUCE to shift_expression" << endl;}
     ;
 
 relational_expression
-    : shift_expression                                       { $<RelationalExpression>$ = RelationalExpression();  cout << "shift_expression REDUCE to relational_expression" << endl;}
-    | relational_expression LESS shift_expression            { $<RelationalExpression>$ = RelationalExpression(); cout << "relational_expression LESS shift_expression REDUCE to shift_expression" << endl;}
-    | relational_expression GREATER shift_expression         { $<RelationalExpression>$ = RelationalExpression(); cout << "relational_expression GREATER shift_expression REDUCE to shift_expression" << endl;}
-    | relational_expression LESS_EQUAL shift_expression      { $<RelationalExpression>$ = RelationalExpression(); cout << "relational_expression LESS_EQUAL shift_expression REDUCE to shift_expression" << endl;}
-    | relational_expression GREATER_EQUAL shift_expression   { $<RelationalExpression>$ = RelationalExpression(); cout << "relational_expression GREATER_EQUAL shift_expression REDUCE to shift_expression" << endl;}
+    : shift_expression                                       { $<RelationalExpression>$ = RelationalExpression($1);  cout << "shift_expression REDUCE to relational_expression" << endl;}
+    | relational_expression LESS shift_expression            { $<RelationalExpression>$ = RelationalExpression($1,$2,$3); cout << "relational_expression LESS shift_expression REDUCE to shift_expression" << endl;}
+    | relational_expression GREATER shift_expression         { $<RelationalExpression>$ = RelationalExpression($1,$2,$3); cout << "relational_expression GREATER shift_expression REDUCE to shift_expression" << endl;}
+    | relational_expression LESS_EQUAL shift_expression      { $<RelationalExpression>$ = RelationalExpression($1,$2,$3); cout << "relational_expression LESS_EQUAL shift_expression REDUCE to shift_expression" << endl;}
+    | relational_expression GREATER_EQUAL shift_expression   { $<RelationalExpression>$ = RelationalExpression($1,$2,$3); cout << "relational_expression GREATER_EQUAL shift_expression REDUCE to shift_expression" << endl;}
     ;
 
 equality_expression
-    : relational_expression                                  { $<EqualityExpression>$ = EqualityExpression();  cout << "relational_expression REDUCE to equality_expression" << endl;}
-    | equality_expression EQUAL_EQUAL relational_expression  { $<EqualityExpression>$ = EqualityExpression(); cout << "equality_expression EQUAL_EQUAL relational_expression REDUCE to equality_expression" << endl;}
-    | equality_expression NOT_EQUAL relational_expression    { $<EqualityExpression>$ = EqualityExpression(); cout << "equality_expression NOT_EQUAL relational_expression REDUCE to equality_expression" << endl;}
+    : relational_expression                                  { $<EqualityExpression>$ = EqualityExpression($1);  cout << "relational_expression REDUCE to equality_expression" << endl;}
+    | equality_expression EQUAL_EQUAL relational_expression  { $<EqualityExpression>$ = EqualityExpression($1,$2,$3); cout << "equality_expression EQUAL_EQUAL relational_expression REDUCE to equality_expression" << endl;}
+    | equality_expression NOT_EQUAL relational_expression    { $<EqualityExpression>$ = EqualityExpression($1,$2,$3); cout << "equality_expression NOT_EQUAL relational_expression REDUCE to equality_expression" << endl;}
     ;
 
 and_expression
-    : equality_expression                         { $<AndExpression>$ = AndExpression();  cout << "equality_expression REDUCE to and_expression" << endl;}
-    | and_expression BIT_AND equality_expression  { $<AndExpression>$ = AndExpression(); cout << "and_expression BIT_AND equality_expression REDUCE to and_expression" << endl;}
+    : equality_expression                         { $<AndExpression>$ = AndExpression($1);  cout << "equality_expression REDUCE to and_expression" << endl;}
+    | and_expression BIT_AND equality_expression  { $<AndExpression>$ = AndExpression($1,$3); cout << "and_expression BIT_AND equality_expression REDUCE to and_expression" << endl;}
     ;
 
 exclusive_or_expression

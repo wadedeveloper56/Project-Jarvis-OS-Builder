@@ -2326,79 +2326,79 @@ namespace  WadeSpace  {
 
   case 41: // shift_expression: additive_expression
 #line 345 "parser.y"
-                                                    { yylhs.value.as< ShiftExpression > () = ShiftExpression();  cout << "additive_expression REDUCE to shift_expression" << endl;}
+                                                    { yylhs.value.as< ShiftExpression > () = ShiftExpression(yystack_[0].value.as < AdditiveExpression > ());  cout << "additive_expression REDUCE to shift_expression" << endl;}
 #line 2331 "parser.cpp"
     break;
 
   case 42: // shift_expression: shift_expression "<<" additive_expression
 #line 346 "parser.y"
-                                                    { yylhs.value.as< ShiftExpression > () = ShiftExpression(); cout << "shift_expression LEFT_OP additive_expression REDUCE to shift_expression" << endl;}
+                                                    { yylhs.value.as< ShiftExpression > () = ShiftExpression(yystack_[2].value.as < ShiftExpression > (),yystack_[1].value.as < std::string > (),yystack_[0].value.as < AdditiveExpression > ()); cout << "shift_expression LEFT_OP additive_expression REDUCE to shift_expression" << endl;}
 #line 2337 "parser.cpp"
     break;
 
   case 43: // shift_expression: shift_expression ">>" additive_expression
 #line 347 "parser.y"
-                                                    { yylhs.value.as< ShiftExpression > () = ShiftExpression(); cout << "shift_expression RIGHT_OP additive_expression REDUCE to shift_expression" << endl;}
+                                                    { yylhs.value.as< ShiftExpression > () = ShiftExpression(yystack_[2].value.as < ShiftExpression > (),yystack_[1].value.as < std::string > (),yystack_[0].value.as < AdditiveExpression > ()); cout << "shift_expression RIGHT_OP additive_expression REDUCE to shift_expression" << endl;}
 #line 2343 "parser.cpp"
     break;
 
   case 44: // relational_expression: shift_expression
 #line 351 "parser.y"
-                                                             { yylhs.value.as< RelationalExpression > () = RelationalExpression();  cout << "shift_expression REDUCE to relational_expression" << endl;}
+                                                             { yylhs.value.as< RelationalExpression > () = RelationalExpression(yystack_[0].value.as < ShiftExpression > ());  cout << "shift_expression REDUCE to relational_expression" << endl;}
 #line 2349 "parser.cpp"
     break;
 
   case 45: // relational_expression: relational_expression "<" shift_expression
 #line 352 "parser.y"
-                                                             { yylhs.value.as< RelationalExpression > () = RelationalExpression(); cout << "relational_expression LESS shift_expression REDUCE to shift_expression" << endl;}
+                                                             { yylhs.value.as< RelationalExpression > () = RelationalExpression(yystack_[2].value.as < RelationalExpression > (),yystack_[1].value.as < std::string > (),yystack_[0].value.as < ShiftExpression > ()); cout << "relational_expression LESS shift_expression REDUCE to shift_expression" << endl;}
 #line 2355 "parser.cpp"
     break;
 
   case 46: // relational_expression: relational_expression ">" shift_expression
 #line 353 "parser.y"
-                                                             { yylhs.value.as< RelationalExpression > () = RelationalExpression(); cout << "relational_expression GREATER shift_expression REDUCE to shift_expression" << endl;}
+                                                             { yylhs.value.as< RelationalExpression > () = RelationalExpression(yystack_[2].value.as < RelationalExpression > (),yystack_[1].value.as < std::string > (),yystack_[0].value.as < ShiftExpression > ()); cout << "relational_expression GREATER shift_expression REDUCE to shift_expression" << endl;}
 #line 2361 "parser.cpp"
     break;
 
   case 47: // relational_expression: relational_expression "<=" shift_expression
 #line 354 "parser.y"
-                                                             { yylhs.value.as< RelationalExpression > () = RelationalExpression(); cout << "relational_expression LESS_EQUAL shift_expression REDUCE to shift_expression" << endl;}
+                                                             { yylhs.value.as< RelationalExpression > () = RelationalExpression(yystack_[2].value.as < RelationalExpression > (),yystack_[1].value.as < std::string > (),yystack_[0].value.as < ShiftExpression > ()); cout << "relational_expression LESS_EQUAL shift_expression REDUCE to shift_expression" << endl;}
 #line 2367 "parser.cpp"
     break;
 
   case 48: // relational_expression: relational_expression ">=" shift_expression
 #line 355 "parser.y"
-                                                             { yylhs.value.as< RelationalExpression > () = RelationalExpression(); cout << "relational_expression GREATER_EQUAL shift_expression REDUCE to shift_expression" << endl;}
+                                                             { yylhs.value.as< RelationalExpression > () = RelationalExpression(yystack_[2].value.as < RelationalExpression > (),yystack_[1].value.as < std::string > (),yystack_[0].value.as < ShiftExpression > ()); cout << "relational_expression GREATER_EQUAL shift_expression REDUCE to shift_expression" << endl;}
 #line 2373 "parser.cpp"
     break;
 
   case 49: // equality_expression: relational_expression
 #line 359 "parser.y"
-                                                             { yylhs.value.as< EqualityExpression > () = EqualityExpression();  cout << "relational_expression REDUCE to equality_expression" << endl;}
+                                                             { yylhs.value.as< EqualityExpression > () = EqualityExpression(yystack_[0].value.as < RelationalExpression > ());  cout << "relational_expression REDUCE to equality_expression" << endl;}
 #line 2379 "parser.cpp"
     break;
 
   case 50: // equality_expression: equality_expression "==" relational_expression
 #line 360 "parser.y"
-                                                             { yylhs.value.as< EqualityExpression > () = EqualityExpression(); cout << "equality_expression EQUAL_EQUAL relational_expression REDUCE to equality_expression" << endl;}
+                                                             { yylhs.value.as< EqualityExpression > () = EqualityExpression(yystack_[2].value.as < EqualityExpression > (),yystack_[1].value.as < std::string > (),yystack_[0].value.as < RelationalExpression > ()); cout << "equality_expression EQUAL_EQUAL relational_expression REDUCE to equality_expression" << endl;}
 #line 2385 "parser.cpp"
     break;
 
   case 51: // equality_expression: equality_expression "!=" relational_expression
 #line 361 "parser.y"
-                                                             { yylhs.value.as< EqualityExpression > () = EqualityExpression(); cout << "equality_expression NOT_EQUAL relational_expression REDUCE to equality_expression" << endl;}
+                                                             { yylhs.value.as< EqualityExpression > () = EqualityExpression(yystack_[2].value.as < EqualityExpression > (),yystack_[1].value.as < std::string > (),yystack_[0].value.as < RelationalExpression > ()); cout << "equality_expression NOT_EQUAL relational_expression REDUCE to equality_expression" << endl;}
 #line 2391 "parser.cpp"
     break;
 
   case 52: // and_expression: equality_expression
 #line 365 "parser.y"
-                                                  { yylhs.value.as< AndExpression > () = AndExpression();  cout << "equality_expression REDUCE to and_expression" << endl;}
+                                                  { yylhs.value.as< AndExpression > () = AndExpression(yystack_[0].value.as < EqualityExpression > ());  cout << "equality_expression REDUCE to and_expression" << endl;}
 #line 2397 "parser.cpp"
     break;
 
   case 53: // and_expression: and_expression "&" equality_expression
 #line 366 "parser.y"
-                                                  { yylhs.value.as< AndExpression > () = AndExpression(); cout << "and_expression BIT_AND equality_expression REDUCE to and_expression" << endl;}
+                                                  { yylhs.value.as< AndExpression > () = AndExpression(yystack_[2].value.as < AndExpression > (),yystack_[0].value.as < EqualityExpression > ()); cout << "and_expression BIT_AND equality_expression REDUCE to and_expression" << endl;}
 #line 2403 "parser.cpp"
     break;
 
