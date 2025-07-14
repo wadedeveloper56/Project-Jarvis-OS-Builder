@@ -372,13 +372,13 @@ exclusive_or_expression
     ;
 
 inclusive_or_expression
-    : exclusive_or_expression                                { $<InclusiveOrExpression>$ = InclusiveOrExpression();  cout << "exclusive_or_expression REDUCE to inclusive_or_expression" << endl;}
-    | inclusive_or_expression BIT_OR exclusive_or_expression { $<InclusiveOrExpression>$ = InclusiveOrExpression(); cout << "inclusive_or_expression BIT_OR exclusive_or_expression REDUCE to inclusive_or_expression" << endl;}
+    : exclusive_or_expression                                { $<InclusiveOrExpression>$ = InclusiveOrExpression($1);  cout << "exclusive_or_expression REDUCE to inclusive_or_expression" << endl;}
+    | inclusive_or_expression BIT_OR exclusive_or_expression { $<InclusiveOrExpression>$ = InclusiveOrExpression($1,$3); cout << "inclusive_or_expression BIT_OR exclusive_or_expression REDUCE to inclusive_or_expression" << endl;}
     ;
 
 logical_and_expression
-    : inclusive_or_expression                                { $<LogicalAndExpression>$ = LogicalAndExpression();  cout << "inclusive_or_expression REDUCE to logical_and_expression" << endl;}
-    | logical_and_expression AND_OP inclusive_or_expression  { $<LogicalAndExpression>$ = LogicalAndExpression(); cout << "inclusive_or_expression REDUCE to logical_and_expression" << endl;}
+    : inclusive_or_expression                                { $<LogicalAndExpression>$ = LogicalAndExpression($1);  cout << "inclusive_or_expression REDUCE to logical_and_expression" << endl;}
+    | logical_and_expression AND_OP inclusive_or_expression  { $<LogicalAndExpression>$ = LogicalAndExpression($1,$3); cout << "inclusive_or_expression REDUCE to logical_and_expression" << endl;}
     ;
 
 logical_or_expression

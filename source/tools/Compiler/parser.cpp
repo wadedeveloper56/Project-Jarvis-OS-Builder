@@ -2416,25 +2416,25 @@ namespace  WadeSpace  {
 
   case 56: // inclusive_or_expression: exclusive_or_expression
 #line 375 "parser.y"
-                                                             { yylhs.value.as< InclusiveOrExpression > () = InclusiveOrExpression();  cout << "exclusive_or_expression REDUCE to inclusive_or_expression" << endl;}
+                                                             { yylhs.value.as< InclusiveOrExpression > () = InclusiveOrExpression(yystack_[0].value.as < ExclusiveOrExpression > ());  cout << "exclusive_or_expression REDUCE to inclusive_or_expression" << endl;}
 #line 2421 "parser.cpp"
     break;
 
   case 57: // inclusive_or_expression: inclusive_or_expression "|" exclusive_or_expression
 #line 376 "parser.y"
-                                                             { yylhs.value.as< InclusiveOrExpression > () = InclusiveOrExpression(); cout << "inclusive_or_expression BIT_OR exclusive_or_expression REDUCE to inclusive_or_expression" << endl;}
+                                                             { yylhs.value.as< InclusiveOrExpression > () = InclusiveOrExpression(yystack_[2].value.as < InclusiveOrExpression > (),yystack_[0].value.as < ExclusiveOrExpression > ()); cout << "inclusive_or_expression BIT_OR exclusive_or_expression REDUCE to inclusive_or_expression" << endl;}
 #line 2427 "parser.cpp"
     break;
 
   case 58: // logical_and_expression: inclusive_or_expression
 #line 380 "parser.y"
-                                                             { yylhs.value.as< LogicalAndExpression > () = LogicalAndExpression();  cout << "inclusive_or_expression REDUCE to logical_and_expression" << endl;}
+                                                             { yylhs.value.as< LogicalAndExpression > () = LogicalAndExpression(yystack_[0].value.as < InclusiveOrExpression > ());  cout << "inclusive_or_expression REDUCE to logical_and_expression" << endl;}
 #line 2433 "parser.cpp"
     break;
 
   case 59: // logical_and_expression: logical_and_expression "&&" inclusive_or_expression
 #line 381 "parser.y"
-                                                             { yylhs.value.as< LogicalAndExpression > () = LogicalAndExpression(); cout << "inclusive_or_expression REDUCE to logical_and_expression" << endl;}
+                                                             { yylhs.value.as< LogicalAndExpression > () = LogicalAndExpression(yystack_[2].value.as < LogicalAndExpression > (),yystack_[0].value.as < InclusiveOrExpression > ()); cout << "inclusive_or_expression REDUCE to logical_and_expression" << endl;}
 #line 2439 "parser.cpp"
     break;
 
