@@ -2542,13 +2542,13 @@ namespace  WadeSpace  {
 
   case 77: // expression: assignment_expression
 #line 414 "parser.y"
-                                              { yylhs.value.as< Expression > () = Expression();  cout << "asignment_expression REDUCE to expression" << endl;}
+                                              { yylhs.value.as< Expression > () = Expression(yystack_[0].value.as < AssignmentExpression > ());  cout << "asignment_expression REDUCE to expression" << endl;}
 #line 2547 "parser.cpp"
     break;
 
   case 78: // expression: expression "," assignment_expression
 #line 415 "parser.y"
-                                              { yylhs.value.as< Expression > () = Expression(); cout << "expression COMMA assignment_expression COMMA  REDUCE to expression" << endl;}
+                                              { yylhs.value.as< Expression > () = Expression(yystack_[2].value.as < Expression > (),yystack_[1].value.as < std::string > (),yystack_[0].value.as < AssignmentExpression > ()); cout << "expression COMMA assignment_expression COMMA  REDUCE to expression" << endl;}
 #line 2553 "parser.cpp"
     break;
 

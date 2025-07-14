@@ -411,8 +411,8 @@ assignment_operator
     ;
 
 expression
-    : assignment_expression                   { $<Expression>$ = Expression();  cout << "asignment_expression REDUCE to expression" << endl;}
-    | expression COMMA assignment_expression  { $<Expression>$ = Expression(); cout << "expression COMMA assignment_expression COMMA  REDUCE to expression" << endl;}
+    : assignment_expression                   { $<Expression>$ = Expression($1);  cout << "asignment_expression REDUCE to expression" << endl;}
+    | expression COMMA assignment_expression  { $<Expression>$ = Expression($1,$2,$3); cout << "expression COMMA assignment_expression COMMA  REDUCE to expression" << endl;}
     ;
 
 constant_expression
