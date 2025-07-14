@@ -367,8 +367,8 @@ and_expression
     ;
 
 exclusive_or_expression
-    : and_expression                                 { $<ExclusiveOrExpression>$ = ExclusiveOrExpression();  cout << "and_expression REDUCE to exclusive_or_expression" << endl;}
-    | exclusive_or_expression XOR_OP and_expression  { $<ExclusiveOrExpression>$ = ExclusiveOrExpression(); cout << "exclusive_or_expression XOR_OP and_expression REDUCE to exclusive_or_expression" << endl;}
+    : and_expression                                 { $<ExclusiveOrExpression>$ = ExclusiveOrExpression($1);  cout << "and_expression REDUCE to exclusive_or_expression" << endl;}
+    | exclusive_or_expression XOR_OP and_expression  { $<ExclusiveOrExpression>$ = ExclusiveOrExpression($1,$3); cout << "exclusive_or_expression XOR_OP and_expression REDUCE to exclusive_or_expression" << endl;}
     ;
 
 inclusive_or_expression

@@ -2404,13 +2404,13 @@ namespace  WadeSpace  {
 
   case 54: // exclusive_or_expression: and_expression
 #line 370 "parser.y"
-                                                     { yylhs.value.as< ExclusiveOrExpression > () = ExclusiveOrExpression();  cout << "and_expression REDUCE to exclusive_or_expression" << endl;}
+                                                     { yylhs.value.as< ExclusiveOrExpression > () = ExclusiveOrExpression(yystack_[0].value.as < AndExpression > ());  cout << "and_expression REDUCE to exclusive_or_expression" << endl;}
 #line 2409 "parser.cpp"
     break;
 
   case 55: // exclusive_or_expression: exclusive_or_expression "^" and_expression
 #line 371 "parser.y"
-                                                     { yylhs.value.as< ExclusiveOrExpression > () = ExclusiveOrExpression(); cout << "exclusive_or_expression XOR_OP and_expression REDUCE to exclusive_or_expression" << endl;}
+                                                     { yylhs.value.as< ExclusiveOrExpression > () = ExclusiveOrExpression(yystack_[2].value.as < ExclusiveOrExpression > (),yystack_[0].value.as < AndExpression > ()); cout << "exclusive_or_expression XOR_OP and_expression REDUCE to exclusive_or_expression" << endl;}
 #line 2415 "parser.cpp"
     break;
 
