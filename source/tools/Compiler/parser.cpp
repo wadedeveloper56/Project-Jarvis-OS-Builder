@@ -3432,31 +3432,31 @@ namespace  WadeSpace  {
 
   case 204: // jump_statement: "goto" "identifier" ";"
 #line 754 "parser.y"
-                                  { yylhs.value.as< BaseStatement > () = JumpStatement(); cout << "GOTO IDENTIFIER SEMICOLON REDUCE to jump_statement" << endl; }
+                                  { yylhs.value.as< BaseStatement > () = JumpStatement(GOTO,yystack_[1].value.as < std::string > ()); cout << "GOTO IDENTIFIER SEMICOLON REDUCE to jump_statement" << endl; }
 #line 3437 "parser.cpp"
     break;
 
   case 205: // jump_statement: "continue" ";"
 #line 755 "parser.y"
-                                  { yylhs.value.as< BaseStatement > () = JumpStatement(); cout << "CONTINUE SEMICOLON REDUCE to jump_statement" << endl; }
+                                  { yylhs.value.as< BaseStatement > () = JumpStatement(CONTINUE); cout << "CONTINUE SEMICOLON REDUCE to jump_statement" << endl; }
 #line 3443 "parser.cpp"
     break;
 
   case 206: // jump_statement: "break" ";"
 #line 756 "parser.y"
-                                  { yylhs.value.as< BaseStatement > () = JumpStatement(); cout << "BREAK SEMICOLON REDUCE to jump_statement" << endl; }
+                                  { yylhs.value.as< BaseStatement > () = JumpStatement(BREAK); cout << "BREAK SEMICOLON REDUCE to jump_statement" << endl; }
 #line 3449 "parser.cpp"
     break;
 
   case 207: // jump_statement: "return" ";"
 #line 757 "parser.y"
-                                  { yylhs.value.as< BaseStatement > () = JumpStatement(); cout << "RETURN SEMICOLON REDUCE to jump_statement" << endl; }
+                                  { yylhs.value.as< BaseStatement > () = JumpStatement(RETURN); cout << "RETURN SEMICOLON REDUCE to jump_statement" << endl; }
 #line 3455 "parser.cpp"
     break;
 
   case 208: // jump_statement: "return" expression ";"
 #line 758 "parser.y"
-                                  { yylhs.value.as< BaseStatement > () = JumpStatement(); cout << "RETURN expression SEMICOLON REDUCE to jump_statement" << endl; }
+                                  { yylhs.value.as< BaseStatement > () = JumpStatement(RETURN,yystack_[1].value.as < Expression > ()); cout << "RETURN expression SEMICOLON REDUCE to jump_statement" << endl; }
 #line 3461 "parser.cpp"
     break;
 

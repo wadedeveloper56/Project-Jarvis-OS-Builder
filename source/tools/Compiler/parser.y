@@ -751,11 +751,11 @@ iteration_statement
     ;
 
 jump_statement
-    : GOTO IDENTIFIER SEMICOLON   { $<BaseStatement>$ = JumpStatement(); cout << "GOTO IDENTIFIER SEMICOLON REDUCE to jump_statement" << endl; }
-    | CONTINUE SEMICOLON          { $<BaseStatement>$ = JumpStatement(); cout << "CONTINUE SEMICOLON REDUCE to jump_statement" << endl; }
-    | BREAK SEMICOLON             { $<BaseStatement>$ = JumpStatement(); cout << "BREAK SEMICOLON REDUCE to jump_statement" << endl; }
-    | RETURN SEMICOLON            { $<BaseStatement>$ = JumpStatement(); cout << "RETURN SEMICOLON REDUCE to jump_statement" << endl; }
-    | RETURN expression SEMICOLON { $<BaseStatement>$ = JumpStatement(); cout << "RETURN expression SEMICOLON REDUCE to jump_statement" << endl; }
+    : GOTO IDENTIFIER SEMICOLON   { $<BaseStatement>$ = JumpStatement(GOTO,$2); cout << "GOTO IDENTIFIER SEMICOLON REDUCE to jump_statement" << endl; }
+    | CONTINUE SEMICOLON          { $<BaseStatement>$ = JumpStatement(CONTINUE); cout << "CONTINUE SEMICOLON REDUCE to jump_statement" << endl; }
+    | BREAK SEMICOLON             { $<BaseStatement>$ = JumpStatement(BREAK); cout << "BREAK SEMICOLON REDUCE to jump_statement" << endl; }
+    | RETURN SEMICOLON            { $<BaseStatement>$ = JumpStatement(RETURN); cout << "RETURN SEMICOLON REDUCE to jump_statement" << endl; }
+    | RETURN expression SEMICOLON { $<BaseStatement>$ = JumpStatement(RETURN,$2); cout << "RETURN expression SEMICOLON REDUCE to jump_statement" << endl; }
     ;
 
 translation_unit 
