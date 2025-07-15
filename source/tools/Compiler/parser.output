@@ -552,7 +552,7 @@ Nonterminals, with rules where they appear
     initializer_list <std::vector<Initializer>> (145)
         on left: 175 176
         on right: 15 16 173 174 176
-    statement (146)
+    statement <BaseStatement> (146)
         on left: 177 178 179 180 181 182
         on right: 183 184 185 192 193 196 197 198 199 200 201 202
     labeled_statement (147)

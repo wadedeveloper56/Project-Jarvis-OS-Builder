@@ -97,6 +97,7 @@
     #include "ConstantExpression.h"
     #include "BaseStatement.h"
     #include "JumpStatement.h"
+    #include "Statement.h"
 
     using namespace std;
 
@@ -105,7 +106,7 @@
         class Interpreter;
     }
 
-#line 109 "parser.hpp"
+#line 110 "parser.hpp"
 
 # include <cassert>
 # include <cstdlib> // std::abort
@@ -246,7 +247,7 @@
 
 #line 9 "parser.y"
 namespace  WadeSpace  {
-#line 250 "parser.hpp"
+#line 251 "parser.hpp"
 
 
 
@@ -480,6 +481,7 @@ namespace  WadeSpace  {
       // assignment_operator
       char dummy5[sizeof (AssignmentOperator)];
 
+      // statement
       // jump_statement
       char dummy6[sizeof (BaseStatement)];
 
@@ -1094,6 +1096,7 @@ namespace  WadeSpace  {
         value.move< AssignmentOperator > (std::move (that.value));
         break;
 
+      case symbol_kind::S_statement: // statement
       case symbol_kind::S_jump_statement: // jump_statement
         value.move< BaseStatement > (std::move (that.value));
         break;
@@ -2237,6 +2240,7 @@ switch (yykind)
         value.template destroy< AssignmentOperator > ();
         break;
 
+      case symbol_kind::S_statement: // statement
       case symbol_kind::S_jump_statement: // jump_statement
         value.template destroy< BaseStatement > ();
         break;
@@ -4538,6 +4542,7 @@ switch (yykind)
         value.copy< AssignmentOperator > (YY_MOVE (that.value));
         break;
 
+      case symbol_kind::S_statement: // statement
       case symbol_kind::S_jump_statement: // jump_statement
         value.copy< BaseStatement > (YY_MOVE (that.value));
         break;
@@ -4881,6 +4886,7 @@ switch (yykind)
         value.move< AssignmentOperator > (YY_MOVE (s.value));
         break;
 
+      case symbol_kind::S_statement: // statement
       case symbol_kind::S_jump_statement: // jump_statement
         value.move< BaseStatement > (YY_MOVE (s.value));
         break;
@@ -5240,7 +5246,7 @@ switch (yykind)
 
 #line 9 "parser.y"
 } //  WadeSpace 
-#line 5244 "parser.hpp"
+#line 5250 "parser.hpp"
 
 
 

@@ -59,6 +59,7 @@
     #include "ConstantExpression.h"
     #include "BaseStatement.h"
     #include "JumpStatement.h"
+    #include "Statement.h"
 
     using namespace std;
 
@@ -252,6 +253,7 @@
 %type<std::vector<ParameterDeclaration>> parameter_list
 %type<BaseStatement> jump_statement
 %type<std::vector<BaseStatement>> statement_list
+%type<BaseStatement> statement
 
 %start translation_unit
 
@@ -701,12 +703,12 @@ initializer_list
     ;
 
 statement
-    : labeled_statement    { cout << "labeled_statement REDUCE to statement" << endl; }
-    | compound_statement   { cout << "compound_statement REDUCE to statement" << endl; }
-    | expression_statement { cout << "expression_statement REDUCE to statement" << endl; }
-    | selection_statement  { cout << "selection_statement REDUCE to statement" << endl; }
-    | iteration_statement  { cout << "iteration_statement REDUCE to statement" << endl; }
-    | jump_statement       { cout << "jump_statement REDUCE to statement" << endl; }
+    : labeled_statement    { $<BaseStatement>$ = Statement(); cout << "labeled_statement REDUCE to statement" << endl; }
+    | compound_statement   { $<BaseStatement>$ = Statement(); cout << "compound_statement REDUCE to statement" << endl; }
+    | expression_statement { $<BaseStatement>$ = Statement(); cout << "expression_statement REDUCE to statement" << endl; }
+    | selection_statement  { $<BaseStatement>$ = Statement(); cout << "selection_statement REDUCE to statement" << endl; }
+    | iteration_statement  { $<BaseStatement>$ = Statement(); cout << "iteration_statement REDUCE to statement" << endl; }
+    | jump_statement       { $<BaseStatement>$ = Statement(); cout << "jump_statement REDUCE to statement" << endl; }
     ;
 
 labeled_statement
@@ -728,8 +730,19 @@ declaration_list
     ;
 
 statement_list
-    : statement                { cout << "statement REDUCE to statement_list" << endl; }
-    | statement_list statement { cout << "statement_list statement REDUCE to statement_list" << endl; }
+    : statement                   {
+                                    BaseStatement exp = $1;
+                                    $$ = std::vector<BaseStatement>();
+                                    $$.push_back(exp);
+                                    cout << "statement REDUCE to statement_list" << endl;
+                                  }
+    | statement_list statement    {
+                                    BaseStatement value1 = $2;
+                                    std::vector<BaseStatement> &value2 = $1;
+                                    value2.push_back(value1);
+                                    $$ = value2;
+                                    cout << "statement_list statement REDUCE to statement_list" << endl;
+                                  }
     ;
 
 expression_statement

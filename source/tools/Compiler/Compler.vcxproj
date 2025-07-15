@@ -222,6 +222,7 @@
     <ClInclude Include="ShiftExpression.h" />
     <ClInclude Include="SpecifierQualifierList.h" />
     <ClInclude Include="stack.hh" />
+    <ClInclude Include="Statement.h" />
     <ClInclude Include="StorageClassSpecifier.h" />
     <ClInclude Include="StructDeclaration.h" />
     <ClInclude Include="StructDeclarator.h" />
@@ -273,6 +274,7 @@
     <ClCompile Include="scanner.cpp" />
     <ClCompile Include="ShiftExpression.cpp" />
     <ClCompile Include="SpecifierQualifierList.cpp" />
+    <ClCompile Include="Statement.cpp" />
     <ClCompile Include="StorageClassSpecifier.cpp" />
     <ClCompile Include="StructDeclaration.cpp" />
     <ClCompile Include="StructDeclarator.cpp" />
