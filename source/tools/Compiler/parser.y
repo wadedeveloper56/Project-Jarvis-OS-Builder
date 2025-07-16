@@ -770,13 +770,13 @@ statement_list
 
 expression_statement
     : SEMICOLON             { $<BaseStatement>$ = ExpressionStatement(); cout << "SEMICOLON REDUCE to expression_statement" << endl; }
-    | expression SEMICOLON  { $<BaseStatement>$ = ExpressionStatement(); cout << "expression SEMICOLON REDUCE to expression_statement" << endl; }
+    | expression SEMICOLON  { $<BaseStatement>$ = ExpressionStatement($1); cout << "expression SEMICOLON REDUCE to expression_statement" << endl; }
     ;
 
 selection_statement
-    : IF OPAREN expression CPAREN statement                { $<BaseStatement>$ = SelectionStatement(); cout << "IF OPAREN expression CPAREN statement REDUCE to selection_statement" << endl; }
-    | IF OPAREN expression CPAREN statement ELSE statement { $<BaseStatement>$ = SelectionStatement(); cout << "IF OPAREN expression CPAREN statement ELSE statement REDUCE to selection_statement" << endl; }
-    | SWITCH OPAREN expression CPAREN statement            { $<BaseStatement>$ = SelectionStatement(); cout << "SWITCH OPAREN expression CPAREN statement REDUCE to selection_statement" << endl; }
+    : IF OPAREN expression CPAREN statement                { $<BaseStatement>$ = SelectionStatement(IF,$3,$5); cout << "IF OPAREN expression CPAREN statement REDUCE to selection_statement" << endl; }
+    | IF OPAREN expression CPAREN statement ELSE statement { $<BaseStatement>$ = SelectionStatement(IF,$3,$5,$7); cout << "IF OPAREN expression CPAREN statement ELSE statement REDUCE to selection_statement" << endl; }
+    | SWITCH OPAREN expression CPAREN statement            { $<BaseStatement>$ = SelectionStatement(SWITCH,$3,$5); cout << "SWITCH OPAREN expression CPAREN statement REDUCE to selection_statement" << endl; }
     ;
 
 iteration_statement

@@ -18,6 +18,7 @@ namespace WadeSpace {
 		BaseStatement(TokenType op, string identifier);
 		BaseStatement(TokenType op, Expression& exp);
 		BaseStatement(TokenType op, Expression& exp, BaseStatement& statement);
+		BaseStatement(TokenType op, Expression& exp, BaseStatement& ifSstatement, BaseStatement& elseStatement);
 		BaseStatement(TokenType op, BaseStatement& es1, BaseStatement& es2, BaseStatement& statement);
 		BaseStatement(TokenType op, BaseStatement& es1, BaseStatement& es2, Expression& exp, BaseStatement& statement);
 		BaseStatement();
@@ -29,5 +30,6 @@ namespace WadeSpace {
 		optional < reference_wrapper < BaseStatement>> statement;
 		optional < reference_wrapper < BaseStatement>> es1;
 		optional < reference_wrapper < BaseStatement>> es2;
+		optional < reference_wrapper < BaseStatement>> statement2;
 	};
 }

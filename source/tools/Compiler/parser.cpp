@@ -3486,25 +3486,25 @@ namespace  WadeSpace  {
 
   case 196: // expression_statement: expression ";"
 #line 773 "parser.y"
-                            { yylhs.value.as< BaseStatement > () = ExpressionStatement(); cout << "expression SEMICOLON REDUCE to expression_statement" << endl; }
+                            { yylhs.value.as< BaseStatement > () = ExpressionStatement(yystack_[1].value.as < Expression > ()); cout << "expression SEMICOLON REDUCE to expression_statement" << endl; }
 #line 3491 "parser.cpp"
     break;
 
   case 197: // selection_statement: "if" "(" expression ")" statement
 #line 777 "parser.y"
-                                                           { yylhs.value.as< BaseStatement > () = SelectionStatement(); cout << "IF OPAREN expression CPAREN statement REDUCE to selection_statement" << endl; }
+                                                           { yylhs.value.as< BaseStatement > () = SelectionStatement(IF,yystack_[2].value.as < Expression > (),yystack_[0].value.as < BaseStatement > ()); cout << "IF OPAREN expression CPAREN statement REDUCE to selection_statement" << endl; }
 #line 3497 "parser.cpp"
     break;
 
   case 198: // selection_statement: "if" "(" expression ")" statement "else" statement
 #line 778 "parser.y"
-                                                           { yylhs.value.as< BaseStatement > () = SelectionStatement(); cout << "IF OPAREN expression CPAREN statement ELSE statement REDUCE to selection_statement" << endl; }
+                                                           { yylhs.value.as< BaseStatement > () = SelectionStatement(IF,yystack_[4].value.as < Expression > (),yystack_[2].value.as < BaseStatement > (),yystack_[0].value.as < BaseStatement > ()); cout << "IF OPAREN expression CPAREN statement ELSE statement REDUCE to selection_statement" << endl; }
 #line 3503 "parser.cpp"
     break;
 
   case 199: // selection_statement: "switch" "(" expression ")" statement
 #line 779 "parser.y"
-                                                           { yylhs.value.as< BaseStatement > () = SelectionStatement(); cout << "SWITCH OPAREN expression CPAREN statement REDUCE to selection_statement" << endl; }
+                                                           { yylhs.value.as< BaseStatement > () = SelectionStatement(SWITCH,yystack_[2].value.as < Expression > (),yystack_[0].value.as < BaseStatement > ()); cout << "SWITCH OPAREN expression CPAREN statement REDUCE to selection_statement" << endl; }
 #line 3509 "parser.cpp"
     break;
 
