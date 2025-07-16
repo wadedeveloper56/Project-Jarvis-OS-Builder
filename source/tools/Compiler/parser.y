@@ -256,6 +256,7 @@
 %type<ParameterDeclaration> parameter_declaration
 %type<ParameterTypeList> parameter_type_list
 %type<std::vector<ParameterDeclaration>> parameter_list
+
 %type<BaseStatement> jump_statement
 %type<std::vector<BaseStatement>> statement_list
 %type<BaseStatement> statement
@@ -779,10 +780,10 @@ selection_statement
     ;
 
 iteration_statement
-    : WHILE OPAREN expression CPAREN statement                                         { $<BaseStatement>$ = IterationStatement(); cout << "WHILE OPAREN expression CPAREN statement REDUCE to iteration_statement" << endl; }
-    | DO statement WHILE OPAREN expression CPAREN SEMICOLON                            { $<BaseStatement>$ = IterationStatement(); cout << "DO statement WHILE OPAREN expression CPAREN SEMICOLON REDUCE to iteration_statement" << endl; }
-    | FOR OPAREN expression_statement expression_statement CPAREN statement            { $<BaseStatement>$ = IterationStatement(); cout << "FOR OPAREN expression_statement expression_statement CPAREN statement REDUCE to iteration_statement" << endl; }
-    | FOR OPAREN expression_statement expression_statement expression CPAREN statement { $<BaseStatement>$ = IterationStatement(); cout << "FOR OPAREN expression_statement expression_statement expression CPAREN statement REDUCE to iteration_statement" << endl; }
+    : WHILE OPAREN expression CPAREN statement                                         { $<BaseStatement>$ = IterationStatement(WHILE,$3,$5); cout << "WHILE OPAREN expression CPAREN statement REDUCE to iteration_statement" << endl; }
+    | DO statement WHILE OPAREN expression CPAREN SEMICOLON                            { $<BaseStatement>$ = IterationStatement(DO,$5,$2); cout << "DO statement WHILE OPAREN expression CPAREN SEMICOLON REDUCE to iteration_statement" << endl; }
+    | FOR OPAREN expression_statement expression_statement CPAREN statement            { $<BaseStatement>$ = IterationStatement(FOR,$3,$4,$6); cout << "FOR OPAREN expression_statement expression_statement CPAREN statement REDUCE to iteration_statement" << endl; }
+    | FOR OPAREN expression_statement expression_statement expression CPAREN statement { $<BaseStatement>$ = IterationStatement(FOR,$3,$4,$5,$7); cout << "FOR OPAREN expression_statement expression_statement expression CPAREN statement REDUCE to iteration_statement" << endl; }
     ;
 
 jump_statement
