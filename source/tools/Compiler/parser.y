@@ -65,7 +65,8 @@
     #include "CompoundStatement.h"
     #include "LabeledStatement.h"
     #include "Statement.h"
-   
+    #include "FunctionDefinition.h"
+
     using namespace std;
 
     namespace WadeSpace {
@@ -204,7 +205,6 @@
 
 %type<Constant> constant
 %type<std::vector<AssignmentExpression>> argument_expression_list
-
 %type<PrimaryExpression> primary_expression
 %type<Expression> expression
 %type<PostfixExpression> postfix_expression
@@ -223,7 +223,6 @@
 %type<ConditionalExpression> conditional_expression
 %type<AssignmentExpression> assignment_expression
 %type<ConstantExpression> constant_expression
-
 %type<std::string> unary_operator
 %type<AssignmentOperator> assignment_operator
 %type<StorageClassSpecifier> storage_class_specifier
@@ -256,7 +255,6 @@
 %type<ParameterDeclaration> parameter_declaration
 %type<ParameterTypeList> parameter_type_list
 %type<std::vector<ParameterDeclaration>> parameter_list
-
 %type<BaseStatement> jump_statement
 %type<std::vector<BaseStatement>> statement_list
 %type<BaseStatement> statement
@@ -266,6 +264,7 @@
 %type<std::vector<Declaration>> declaration_list
 %type<CompoundStatement> compound_statement
 %type<LabeledStatement> labeled_statement
+%type<FunctionDefinition> function_definition
 
 %start translation_unit
 
@@ -805,10 +804,10 @@ external_declaration
     ;
 
 function_definition
-    : declaration_specifiers declarator declaration_list compound_statement { cout << "declaration_specifiers declarator declaration_list compound_statement REDUCE to function_definition" << endl; }
-    | declaration_specifiers declarator compound_statement                  { cout << "declaration_specifiers declarator compound_statement REDUCE to function_definition" << endl; }
-    | declarator declaration_list compound_statement                        { cout << "declarator declaration_list compound_statement REDUCE to function_definition" << endl; }
-    | declarator compound_statement                                         { cout << "declarator compound_statement REDUCE to function_definition" << endl; }
+    : declaration_specifiers declarator declaration_list compound_statement { $<FunctionDefinition>$ = FunctionDefinition($1,$2,$3,$4); cout << "declaration_specifiers declarator declaration_list compound_statement REDUCE to function_definition" << endl; }
+    | declaration_specifiers declarator compound_statement                  { $<FunctionDefinition>$ = FunctionDefinition($1,$2,$3); cout << "declaration_specifiers declarator compound_statement REDUCE to function_definition" << endl; }
+    | declarator declaration_list compound_statement                        { $<FunctionDefinition>$ = FunctionDefinition($1,$2,$3); cout << "declarator declaration_list compound_statement REDUCE to function_definition" << endl; }
+    | declarator compound_statement                                         { $<FunctionDefinition>$ = FunctionDefinition($1,$2); cout << "declarator compound_statement REDUCE to function_definition" << endl; }
     ;
     
 %%

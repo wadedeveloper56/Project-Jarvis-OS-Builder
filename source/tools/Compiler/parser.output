@@ -585,7 +585,7 @@ Nonterminals, with rules where they appear
     external_declaration (156)
         on left: 210 211
         on right: 208 209
-    function_definition (157)
+    function_definition <FunctionDefinition> (157)
         on left: 212 213 214 215
         on right: 210
 
