@@ -3416,19 +3416,19 @@ namespace  WadeSpace  {
 
   case 188: // compound_statement: "{" statement_list "}"
 #line 734 "parser.y"
-                                                    { yylhs.value.as< BaseStatement > () = CompoundStatement(); cout << "OCURLY statement_list CCURLY REDUCE to compound_statement" << endl; }
+                                                    { yylhs.value.as< BaseStatement > () = CompoundStatement(yystack_[1].value.as < std::vector<BaseStatement> > ()); cout << "OCURLY statement_list CCURLY REDUCE to compound_statement" << endl; }
 #line 3421 "parser.cpp"
     break;
 
   case 189: // compound_statement: "{" declaration_list "}"
 #line 735 "parser.y"
-                                                    { yylhs.value.as< BaseStatement > () = CompoundStatement(); cout << "OCURLY declaration_list CCURLY REDUCE to compound_statement" << endl; }
+                                                    { yylhs.value.as< BaseStatement > () = CompoundStatement(yystack_[1].value.as < std::vector<Declaration> > ()); cout << "OCURLY declaration_list CCURLY REDUCE to compound_statement" << endl; }
 #line 3427 "parser.cpp"
     break;
 
   case 190: // compound_statement: "{" declaration_list statement_list "}"
 #line 736 "parser.y"
-                                                    { yylhs.value.as< BaseStatement > () = CompoundStatement(); cout << "OCURLY declaration_list statement_list CCURLY REDUCE to compound_statement" << endl; }
+                                                    { yylhs.value.as< BaseStatement > () = CompoundStatement(yystack_[1].value.as < std::vector<BaseStatement> > (),yystack_[2].value.as < std::vector<Declaration> > ()); cout << "OCURLY declaration_list statement_list CCURLY REDUCE to compound_statement" << endl; }
 #line 3433 "parser.cpp"
     break;
 

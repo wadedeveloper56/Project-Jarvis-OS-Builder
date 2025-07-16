@@ -5,6 +5,7 @@
 #include <stdint.h>
 #include <optional>
 #include "TokenType.h"
+#include "Declaration.h"
 
 using namespace std;
 
@@ -21,6 +22,10 @@ namespace WadeSpace {
 		BaseStatement(TokenType op, Expression& exp, BaseStatement& ifSstatement, BaseStatement& elseStatement);
 		BaseStatement(TokenType op, BaseStatement& es1, BaseStatement& es2, BaseStatement& statement);
 		BaseStatement(TokenType op, BaseStatement& es1, BaseStatement& es2, Expression& exp, BaseStatement& statement);
+		BaseStatement(vector<BaseStatement>& statementList);
+		BaseStatement(vector<Declaration>& declarationList); 
+		BaseStatement(vector<BaseStatement>& statementList, vector<Declaration> declarationList);
+
 		BaseStatement();
 		~BaseStatement();
 	protected:
@@ -31,5 +36,7 @@ namespace WadeSpace {
 		optional < reference_wrapper < BaseStatement>> es1;
 		optional < reference_wrapper < BaseStatement>> es2;
 		optional < reference_wrapper < BaseStatement>> statement2;
+		optional < reference_wrapper < vector<BaseStatement>>> statementList;
+		optional < reference_wrapper < vector<Declaration>>> declarationList;
 	};
 }

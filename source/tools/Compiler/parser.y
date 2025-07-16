@@ -731,9 +731,9 @@ labeled_statement
 
 compound_statement
     : OCURLY CCURLY                                 { $<BaseStatement>$ = CompoundStatement(); cout << "OCURLY CCURLY REDUCE to compound_statement" << endl; }
-    | OCURLY statement_list CCURLY                  { $<BaseStatement>$ = CompoundStatement(); cout << "OCURLY statement_list CCURLY REDUCE to compound_statement" << endl; }
-    | OCURLY declaration_list CCURLY                { $<BaseStatement>$ = CompoundStatement(); cout << "OCURLY declaration_list CCURLY REDUCE to compound_statement" << endl; }
-    | OCURLY declaration_list statement_list CCURLY { $<BaseStatement>$ = CompoundStatement(); cout << "OCURLY declaration_list statement_list CCURLY REDUCE to compound_statement" << endl; }
+    | OCURLY statement_list CCURLY                  { $<BaseStatement>$ = CompoundStatement($2); cout << "OCURLY statement_list CCURLY REDUCE to compound_statement" << endl; }
+    | OCURLY declaration_list CCURLY                { $<BaseStatement>$ = CompoundStatement($2); cout << "OCURLY declaration_list CCURLY REDUCE to compound_statement" << endl; }
+    | OCURLY declaration_list statement_list CCURLY { $<BaseStatement>$ = CompoundStatement($3,$2); cout << "OCURLY declaration_list statement_list CCURLY REDUCE to compound_statement" << endl; }
     ;
 
 declaration_list
