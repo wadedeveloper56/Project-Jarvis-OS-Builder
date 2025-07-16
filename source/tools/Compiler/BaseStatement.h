@@ -25,6 +25,9 @@ namespace WadeSpace {
 		BaseStatement(vector<BaseStatement>& statementList);
 		BaseStatement(vector<Declaration>& declarationList); 
 		BaseStatement(vector<BaseStatement>& statementList, vector<Declaration> declarationList);
+		BaseStatement(string identifier, BaseStatement& statement);
+		BaseStatement(TokenType op, ConstantExpression& exp, BaseStatement& statement);
+		BaseStatement(TokenType op, BaseStatement& statement);
 
 		BaseStatement();
 		~BaseStatement();
@@ -32,6 +35,7 @@ namespace WadeSpace {
 		TokenType op;
 		string identifier;
 		optional < reference_wrapper < Expression>> exp;
+		optional < reference_wrapper < ConstantExpression>> contExp;
 		optional < reference_wrapper < BaseStatement>> statement;
 		optional < reference_wrapper < BaseStatement>> es1;
 		optional < reference_wrapper < BaseStatement>> es2;

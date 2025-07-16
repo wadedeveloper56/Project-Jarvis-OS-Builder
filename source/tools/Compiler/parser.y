@@ -724,9 +724,9 @@ statement
     ;
 
 labeled_statement
-    : IDENTIFIER COLON statement               { $<BaseStatement>$ = LabeledStatement(); cout << "IDENTIFIER COLON statement REDUCE to label_statement" << endl; }
-    | CASE constant_expression COLON statement { $<BaseStatement>$ = LabeledStatement(); cout << "CASE constant_expression COLON statement REDUCE to label_statement" << endl; }
-    | DEFAULT COLON statement                  { $<BaseStatement>$ = LabeledStatement(); cout << "DEFAULT COLON statement REDUCE to label_statement" << endl; }
+    : IDENTIFIER COLON statement               { $<BaseStatement>$ = LabeledStatement($1,$3); cout << "IDENTIFIER COLON statement REDUCE to label_statement" << endl; }
+    | CASE constant_expression COLON statement { $<BaseStatement>$ = LabeledStatement(CASE,$2,$4); cout << "CASE constant_expression COLON statement REDUCE to label_statement" << endl; }
+    | DEFAULT COLON statement                  { $<BaseStatement>$ = LabeledStatement(DEFAULT,$3); cout << "DEFAULT COLON statement REDUCE to label_statement" << endl; }
     ;
 
 compound_statement

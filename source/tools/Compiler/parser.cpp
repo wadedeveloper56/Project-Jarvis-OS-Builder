@@ -3392,19 +3392,19 @@ namespace  WadeSpace  {
 
   case 184: // labeled_statement: "identifier" ":" statement
 #line 727 "parser.y"
-                                               { yylhs.value.as< BaseStatement > () = LabeledStatement(); cout << "IDENTIFIER COLON statement REDUCE to label_statement" << endl; }
+                                               { yylhs.value.as< BaseStatement > () = LabeledStatement(yystack_[2].value.as < std::string > (),yystack_[0].value.as < BaseStatement > ()); cout << "IDENTIFIER COLON statement REDUCE to label_statement" << endl; }
 #line 3397 "parser.cpp"
     break;
 
   case 185: // labeled_statement: "case" constant_expression ":" statement
 #line 728 "parser.y"
-                                               { yylhs.value.as< BaseStatement > () = LabeledStatement(); cout << "CASE constant_expression COLON statement REDUCE to label_statement" << endl; }
+                                               { yylhs.value.as< BaseStatement > () = LabeledStatement(CASE,yystack_[2].value.as < ConstantExpression > (),yystack_[0].value.as < BaseStatement > ()); cout << "CASE constant_expression COLON statement REDUCE to label_statement" << endl; }
 #line 3403 "parser.cpp"
     break;
 
   case 186: // labeled_statement: "default" ":" statement
 #line 729 "parser.y"
-                                               { yylhs.value.as< BaseStatement > () = LabeledStatement(); cout << "DEFAULT COLON statement REDUCE to label_statement" << endl; }
+                                               { yylhs.value.as< BaseStatement > () = LabeledStatement(DEFAULT,yystack_[0].value.as < BaseStatement > ()); cout << "DEFAULT COLON statement REDUCE to label_statement" << endl; }
 #line 3409 "parser.cpp"
     break;
 
