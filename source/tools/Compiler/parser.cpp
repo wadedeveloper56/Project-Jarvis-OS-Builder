@@ -2841,91 +2841,121 @@ namespace  WadeSpace  {
 #line 2842 "parser.cpp"
     break;
 
-  case 102: // type_specifier: "float"
+  case 102: // type_specifier: "long long"
 #line 488 "parser.y"
-                                { yylhs.value.as< TypeSpecifier > () = TypeSpecifier(FLOAT); cout << "FLOAT REDUCE to type_specifier" << endl;}
+                                { yylhs.value.as< TypeSpecifier > () = TypeSpecifier(LONG_LONG); cout << "LONG_LONG REDUCE to type_specifier" << endl;}
 #line 2848 "parser.cpp"
     break;
 
-  case 103: // type_specifier: "double"
+  case 103: // type_specifier: "float"
 #line 489 "parser.y"
-                                { yylhs.value.as< TypeSpecifier > () = TypeSpecifier(DOUBLE); cout << "DOUBLE REDUCE to type_specifier" << endl;}
+                                { yylhs.value.as< TypeSpecifier > () = TypeSpecifier(FLOAT); cout << "FLOAT REDUCE to type_specifier" << endl;}
 #line 2854 "parser.cpp"
     break;
 
-  case 104: // type_specifier: "signed"
+  case 104: // type_specifier: "double"
 #line 490 "parser.y"
-                                { yylhs.value.as< TypeSpecifier > () = TypeSpecifier(SIGNED); cout << "SIGNED REDUCE to type_specifier" << endl;}
+                                { yylhs.value.as< TypeSpecifier > () = TypeSpecifier(DOUBLE); cout << "DOUBLE REDUCE to type_specifier" << endl;}
 #line 2860 "parser.cpp"
     break;
 
-  case 105: // type_specifier: "unsigned"
+  case 105: // type_specifier: "long double"
 #line 491 "parser.y"
-                                { yylhs.value.as< TypeSpecifier > () = TypeSpecifier(UNSIGNED); cout << "UNIGNED REDUCE to type_specifier" << endl;}
+                                { yylhs.value.as< TypeSpecifier > () = TypeSpecifier(LONG_DOUBLE); cout << "LONG_DOUBLE REDUCE to type_specifier" << endl;}
 #line 2866 "parser.cpp"
     break;
 
-  case 106: // type_specifier: struct_or_union_specifier
+  case 106: // type_specifier: "bool"
 #line 492 "parser.y"
-                                { yylhs.value.as< TypeSpecifier > () = TypeSpecifier(yystack_[0].value.as < StructOrUnionSpecifier > ()); cout << "struct_or_union_specifier REDUCE to type_specifier" << endl;}
+                                { yylhs.value.as< TypeSpecifier > () = TypeSpecifier(BOOL); cout << "BOOL REDUCE to type_specifier" << endl;}
 #line 2872 "parser.cpp"
     break;
 
-  case 107: // type_specifier: enum_specifier
+  case 107: // type_specifier: "imaginary"
 #line 493 "parser.y"
-                                { yylhs.value.as< TypeSpecifier > () = TypeSpecifier(yystack_[0].value.as < EnumSpecifier > ()); cout << "enum_specifier REDUCE to type_specifier" << endl;}
+                                { yylhs.value.as< TypeSpecifier > () = TypeSpecifier(IMAGINARY); cout << "IMAGINARY REDUCE to type_specifier" << endl;}
 #line 2878 "parser.cpp"
     break;
 
-  case 108: // type_specifier: "type name"
+  case 108: // type_specifier: "complex"
 #line 494 "parser.y"
-                                { yylhs.value.as< TypeSpecifier > () = TypeSpecifier(TYPE_NAME); cout << "TYPE_NAME REDUCE to type_specifier" << endl;}
+                                { yylhs.value.as< TypeSpecifier > () = TypeSpecifier(COMPLEX); cout << "COMPLEX REDUCE to type_specifier" << endl;}
 #line 2884 "parser.cpp"
     break;
 
-  case 109: // struct_or_union_specifier: struct_or_union "identifier" "{" struct_declaration_list "}"
-#line 498 "parser.y"
-                                                                         { yylhs.value.as< StructOrUnionSpecifier > () = StructOrUnionSpecifier(yystack_[4].value.as < StructOrUnion > (),yystack_[3].value.as < std::string > (),yystack_[1].value.as < std::vector<StructDeclaration> > ()); cout << "struct_or_union IDENTIFIER OCURLY struct_declaration_list CCURLY REDUCE to struct_or_union_specifier" << endl;}
+  case 109: // type_specifier: "signed"
+#line 495 "parser.y"
+                                { yylhs.value.as< TypeSpecifier > () = TypeSpecifier(SIGNED); cout << "SIGNED REDUCE to type_specifier" << endl;}
 #line 2890 "parser.cpp"
     break;
 
-  case 110: // struct_or_union_specifier: struct_or_union "{" struct_declaration_list "}"
-#line 499 "parser.y"
-                                                                         { yylhs.value.as< StructOrUnionSpecifier > () = StructOrUnionSpecifier(yystack_[3].value.as < StructOrUnion > (),yystack_[1].value.as < std::vector<StructDeclaration> > ()); cout << "struct_or_union OCURLY struct_declaration_list CCURLY REDUCE to struct_or_union_specifier" << endl;}
+  case 110: // type_specifier: "unsigned"
+#line 496 "parser.y"
+                                { yylhs.value.as< TypeSpecifier > () = TypeSpecifier(UNSIGNED); cout << "UNIGNED REDUCE to type_specifier" << endl;}
 #line 2896 "parser.cpp"
     break;
 
-  case 111: // struct_or_union_specifier: struct_or_union "identifier"
-#line 500 "parser.y"
-                                                                         { yylhs.value.as< StructOrUnionSpecifier > () = StructOrUnionSpecifier(yystack_[1].value.as < StructOrUnion > (),yystack_[0].value.as < std::string > ()); cout << "struct_or_union IDENTIFIER REDUCE to struct_or_union_specifier" << endl;}
+  case 111: // type_specifier: struct_or_union_specifier
+#line 497 "parser.y"
+                                { yylhs.value.as< TypeSpecifier > () = TypeSpecifier(yystack_[0].value.as < StructOrUnionSpecifier > ()); cout << "struct_or_union_specifier REDUCE to type_specifier" << endl;}
 #line 2902 "parser.cpp"
     break;
 
-  case 112: // struct_or_union: "struct"
-#line 504 "parser.y"
-               { yylhs.value.as< StructOrUnion > () = StructOrUnion(STRUCT); cout << "STRUCT REDUCE to struct_or_union" << endl;}
+  case 112: // type_specifier: enum_specifier
+#line 498 "parser.y"
+                                { yylhs.value.as< TypeSpecifier > () = TypeSpecifier(yystack_[0].value.as < EnumSpecifier > ()); cout << "enum_specifier REDUCE to type_specifier" << endl;}
 #line 2908 "parser.cpp"
     break;
 
-  case 113: // struct_or_union: "union"
-#line 505 "parser.y"
-               { yylhs.value.as< StructOrUnion > () = StructOrUnion(UNION); cout << "UNION REDUCE to struct_or_union" << endl;}
+  case 113: // type_specifier: "type name"
+#line 499 "parser.y"
+                                { yylhs.value.as< TypeSpecifier > () = TypeSpecifier(TYPE_NAME); cout << "TYPE_NAME REDUCE to type_specifier" << endl;}
 #line 2914 "parser.cpp"
     break;
 
-  case 114: // struct_declaration_list: struct_declaration
+  case 114: // struct_or_union_specifier: struct_or_union "identifier" "{" struct_declaration_list "}"
+#line 503 "parser.y"
+                                                                         { yylhs.value.as< StructOrUnionSpecifier > () = StructOrUnionSpecifier(yystack_[4].value.as < StructOrUnion > (),yystack_[3].value.as < std::string > (),yystack_[1].value.as < std::vector<StructDeclaration> > ()); cout << "struct_or_union IDENTIFIER OCURLY struct_declaration_list CCURLY REDUCE to struct_or_union_specifier" << endl;}
+#line 2920 "parser.cpp"
+    break;
+
+  case 115: // struct_or_union_specifier: struct_or_union "{" struct_declaration_list "}"
+#line 504 "parser.y"
+                                                                         { yylhs.value.as< StructOrUnionSpecifier > () = StructOrUnionSpecifier(yystack_[3].value.as < StructOrUnion > (),yystack_[1].value.as < std::vector<StructDeclaration> > ()); cout << "struct_or_union OCURLY struct_declaration_list CCURLY REDUCE to struct_or_union_specifier" << endl;}
+#line 2926 "parser.cpp"
+    break;
+
+  case 116: // struct_or_union_specifier: struct_or_union "identifier"
+#line 505 "parser.y"
+                                                                         { yylhs.value.as< StructOrUnionSpecifier > () = StructOrUnionSpecifier(yystack_[1].value.as < StructOrUnion > (),yystack_[0].value.as < std::string > ()); cout << "struct_or_union IDENTIFIER REDUCE to struct_or_union_specifier" << endl;}
+#line 2932 "parser.cpp"
+    break;
+
+  case 117: // struct_or_union: "struct"
 #line 509 "parser.y"
+               { yylhs.value.as< StructOrUnion > () = StructOrUnion(STRUCT); cout << "STRUCT REDUCE to struct_or_union" << endl;}
+#line 2938 "parser.cpp"
+    break;
+
+  case 118: // struct_or_union: "union"
+#line 510 "parser.y"
+               { yylhs.value.as< StructOrUnion > () = StructOrUnion(UNION); cout << "UNION REDUCE to struct_or_union" << endl;}
+#line 2944 "parser.cpp"
+    break;
+
+  case 119: // struct_declaration_list: struct_declaration
+#line 514 "parser.y"
                             {
                              StructDeclaration exp = yystack_[0].value.as < StructDeclaration > ();
                              yylhs.value.as < std::vector<StructDeclaration> > () = std::vector<StructDeclaration>();
                              yylhs.value.as < std::vector<StructDeclaration> > ().push_back(exp);
                              cout << "struct_declaration REDUCE to struct_declaration_list" << endl;
                             }
-#line 2925 "parser.cpp"
+#line 2955 "parser.cpp"
     break;
 
-  case 115: // struct_declaration_list: struct_declaration_list struct_declaration
-#line 515 "parser.y"
+  case 120: // struct_declaration_list: struct_declaration_list struct_declaration
+#line 520 "parser.y"
                                                      {
                                                        StructDeclaration value1 = yystack_[0].value.as < StructDeclaration > ();
                                                        std::vector<StructDeclaration> &value2 = yystack_[1].value.as < std::vector<StructDeclaration> > ();
@@ -2933,52 +2963,52 @@ namespace  WadeSpace  {
                                                        yylhs.value.as < std::vector<StructDeclaration> > () = value2;
                                                        cout << "struct_declaration_list struct_declaration REDUCE to struct_declaration_list" << endl;
                                                      }
-#line 2937 "parser.cpp"
-    break;
-
-  case 116: // struct_declaration: specifier_qualifier_list struct_declarator_list ";"
-#line 525 "parser.y"
-                                                                { yylhs.value.as< StructDeclaration > () = StructDeclaration(yystack_[2].value.as < SpecifierQualifierList > (),yystack_[1].value.as < std::vector<StructDeclarator> > ()); cout << "specifier_qualifier_list struct_declarator_list SEMICOLON REDUCE to struct_declaration" << endl;}
-#line 2943 "parser.cpp"
-    break;
-
-  case 117: // specifier_qualifier_list: type_specifier specifier_qualifier_list
-#line 529 "parser.y"
-                                              { yylhs.value.as< SpecifierQualifierList > () = SpecifierQualifierList(yystack_[0].value.as < SpecifierQualifierList > (),yystack_[1].value.as < TypeSpecifier > ()); cout << "type_specifier specifier_qualifier_list REDUCE to specifier_qualifier_list" << endl;}
-#line 2949 "parser.cpp"
-    break;
-
-  case 118: // specifier_qualifier_list: type_specifier
-#line 530 "parser.y"
-                                              { yylhs.value.as< SpecifierQualifierList > () = SpecifierQualifierList(yystack_[0].value.as < TypeSpecifier > ()); cout << "type_specifier REDUCE to specifier_qualifier_list" << endl;}
-#line 2955 "parser.cpp"
-    break;
-
-  case 119: // specifier_qualifier_list: type_qualifier specifier_qualifier_list
-#line 531 "parser.y"
-                                              { yylhs.value.as< SpecifierQualifierList > () = SpecifierQualifierList(yystack_[0].value.as < SpecifierQualifierList > (),yystack_[1].value.as < TypeQualifier > ()); cout << "type_qualifier specifier_qualifier_list REDUCE to specifier_qualifier_list" << endl;}
-#line 2961 "parser.cpp"
-    break;
-
-  case 120: // specifier_qualifier_list: type_qualifier
-#line 532 "parser.y"
-                                              { yylhs.value.as< SpecifierQualifierList > () = SpecifierQualifierList(yystack_[0].value.as < TypeQualifier > ()); cout << "type_qualifier REDUCE to specifier_qualifier_list" << endl;}
 #line 2967 "parser.cpp"
     break;
 
-  case 121: // struct_declarator_list: struct_declarator
+  case 121: // struct_declaration: specifier_qualifier_list struct_declarator_list ";"
+#line 530 "parser.y"
+                                                                { yylhs.value.as< StructDeclaration > () = StructDeclaration(yystack_[2].value.as < SpecifierQualifierList > (),yystack_[1].value.as < std::vector<StructDeclarator> > ()); cout << "specifier_qualifier_list struct_declarator_list SEMICOLON REDUCE to struct_declaration" << endl;}
+#line 2973 "parser.cpp"
+    break;
+
+  case 122: // specifier_qualifier_list: type_specifier specifier_qualifier_list
+#line 534 "parser.y"
+                                              { yylhs.value.as< SpecifierQualifierList > () = SpecifierQualifierList(yystack_[0].value.as < SpecifierQualifierList > (),yystack_[1].value.as < TypeSpecifier > ()); cout << "type_specifier specifier_qualifier_list REDUCE to specifier_qualifier_list" << endl;}
+#line 2979 "parser.cpp"
+    break;
+
+  case 123: // specifier_qualifier_list: type_specifier
+#line 535 "parser.y"
+                                              { yylhs.value.as< SpecifierQualifierList > () = SpecifierQualifierList(yystack_[0].value.as < TypeSpecifier > ()); cout << "type_specifier REDUCE to specifier_qualifier_list" << endl;}
+#line 2985 "parser.cpp"
+    break;
+
+  case 124: // specifier_qualifier_list: type_qualifier specifier_qualifier_list
 #line 536 "parser.y"
+                                              { yylhs.value.as< SpecifierQualifierList > () = SpecifierQualifierList(yystack_[0].value.as < SpecifierQualifierList > (),yystack_[1].value.as < TypeQualifier > ()); cout << "type_qualifier specifier_qualifier_list REDUCE to specifier_qualifier_list" << endl;}
+#line 2991 "parser.cpp"
+    break;
+
+  case 125: // specifier_qualifier_list: type_qualifier
+#line 537 "parser.y"
+                                              { yylhs.value.as< SpecifierQualifierList > () = SpecifierQualifierList(yystack_[0].value.as < TypeQualifier > ()); cout << "type_qualifier REDUCE to specifier_qualifier_list" << endl;}
+#line 2997 "parser.cpp"
+    break;
+
+  case 126: // struct_declarator_list: struct_declarator
+#line 541 "parser.y"
                                                      {
                                                        StructDeclarator exp = yystack_[0].value.as < StructDeclarator > ();
                                                        yylhs.value.as < std::vector<StructDeclarator> > () = std::vector<StructDeclarator>();
                                                        yylhs.value.as < std::vector<StructDeclarator> > ().push_back(exp);
                                                        cout << "struct_declarator REDUCE to struct_declarator_list" << endl;
                                                      }
-#line 2978 "parser.cpp"
+#line 3008 "parser.cpp"
     break;
 
-  case 122: // struct_declarator_list: struct_declarator_list "," struct_declarator
-#line 542 "parser.y"
+  case 127: // struct_declarator_list: struct_declarator_list "," struct_declarator
+#line 547 "parser.y"
                                                      {
                                                        StructDeclarator value1 = yystack_[0].value.as < StructDeclarator > ();
                                                        std::vector<StructDeclarator> &value2 = yystack_[2].value.as < std::vector<StructDeclarator> > ();
@@ -2986,58 +3016,58 @@ namespace  WadeSpace  {
                                                        yylhs.value.as < std::vector<StructDeclarator> > () = value2;
                                                        cout << "struct_declarator_list COMMA struct_declarator REDUCE to struct_declarator_list" << endl;
                                                      }
-#line 2990 "parser.cpp"
-    break;
-
-  case 123: // struct_declarator: declarator
-#line 552 "parser.y"
-                                           { yylhs.value.as< StructDeclarator > () = StructDeclarator(yystack_[0].value.as < Declarator > ()); cout << "declarator REDUCE to struct_declarator" << endl;}
-#line 2996 "parser.cpp"
-    break;
-
-  case 124: // struct_declarator: ":" constant_expression
-#line 553 "parser.y"
-                                           { yylhs.value.as< StructDeclarator > () = StructDeclarator(yystack_[0].value.as < ConstantExpression > ()); cout << "COLON constant_expression REDUCE to struct_declarator" << endl;}
-#line 3002 "parser.cpp"
-    break;
-
-  case 125: // struct_declarator: declarator ":" constant_expression
-#line 554 "parser.y"
-                                           { yylhs.value.as< StructDeclarator > () = StructDeclarator(yystack_[2].value.as < Declarator > (),yystack_[0].value.as < ConstantExpression > ()); cout << "declarator COLON constant_expression REDUCE to struct_declarator" << endl;}
-#line 3008 "parser.cpp"
-    break;
-
-  case 126: // enum_specifier: "enum" "{" enumerator_list "}"
-#line 558 "parser.y"
-                                                     { yylhs.value.as< EnumSpecifier > () = EnumSpecifier(yystack_[1].value.as < std::vector<Enumerator> > ()); cout << "ENUM OCURLY enumerator_list CCURLY REDUCE to enum_specifier" << endl;}
-#line 3014 "parser.cpp"
-    break;
-
-  case 127: // enum_specifier: "enum" "identifier" "{" enumerator_list "}"
-#line 559 "parser.y"
-                                                     { yylhs.value.as< EnumSpecifier > () = EnumSpecifier(yystack_[3].value.as < std::string > (),yystack_[1].value.as < std::vector<Enumerator> > ()); cout << "ENUM IDENTIFIER OCURLY enumerator_list CCURLY REDUCE to enum_specifier" << endl;}
 #line 3020 "parser.cpp"
     break;
 
-  case 128: // enum_specifier: "enum" "identifier"
-#line 560 "parser.y"
-                                                     { yylhs.value.as< EnumSpecifier > () = EnumSpecifier(yystack_[0].value.as < std::string > ()); cout << "ENUM IDENTIFIER REDUCE to enum_specifier" << endl;}
+  case 128: // struct_declarator: declarator
+#line 557 "parser.y"
+                                           { yylhs.value.as< StructDeclarator > () = StructDeclarator(yystack_[0].value.as < Declarator > ()); cout << "declarator REDUCE to struct_declarator" << endl;}
 #line 3026 "parser.cpp"
     break;
 
-  case 129: // enumerator_list: enumerator
+  case 129: // struct_declarator: ":" constant_expression
+#line 558 "parser.y"
+                                           { yylhs.value.as< StructDeclarator > () = StructDeclarator(yystack_[0].value.as < ConstantExpression > ()); cout << "COLON constant_expression REDUCE to struct_declarator" << endl;}
+#line 3032 "parser.cpp"
+    break;
+
+  case 130: // struct_declarator: declarator ":" constant_expression
+#line 559 "parser.y"
+                                           { yylhs.value.as< StructDeclarator > () = StructDeclarator(yystack_[2].value.as < Declarator > (),yystack_[0].value.as < ConstantExpression > ()); cout << "declarator COLON constant_expression REDUCE to struct_declarator" << endl;}
+#line 3038 "parser.cpp"
+    break;
+
+  case 131: // enum_specifier: "enum" "{" enumerator_list "}"
+#line 563 "parser.y"
+                                                     { yylhs.value.as< EnumSpecifier > () = EnumSpecifier(yystack_[1].value.as < std::vector<Enumerator> > ()); cout << "ENUM OCURLY enumerator_list CCURLY REDUCE to enum_specifier" << endl;}
+#line 3044 "parser.cpp"
+    break;
+
+  case 132: // enum_specifier: "enum" "identifier" "{" enumerator_list "}"
 #line 564 "parser.y"
+                                                     { yylhs.value.as< EnumSpecifier > () = EnumSpecifier(yystack_[3].value.as < std::string > (),yystack_[1].value.as < std::vector<Enumerator> > ()); cout << "ENUM IDENTIFIER OCURLY enumerator_list CCURLY REDUCE to enum_specifier" << endl;}
+#line 3050 "parser.cpp"
+    break;
+
+  case 133: // enum_specifier: "enum" "identifier"
+#line 565 "parser.y"
+                                                     { yylhs.value.as< EnumSpecifier > () = EnumSpecifier(yystack_[0].value.as < std::string > ()); cout << "ENUM IDENTIFIER REDUCE to enum_specifier" << endl;}
+#line 3056 "parser.cpp"
+    break;
+
+  case 134: // enumerator_list: enumerator
+#line 569 "parser.y"
                                         {
                                           Enumerator exp = yystack_[0].value.as < Enumerator > ();
                                           yylhs.value.as < std::vector<Enumerator> > () = std::vector<Enumerator>();
                                           yylhs.value.as < std::vector<Enumerator> > ().push_back(exp);
                                           cout << "enumerator REDUCE enumerator_list" << endl;
                                         }
-#line 3037 "parser.cpp"
+#line 3067 "parser.cpp"
     break;
 
-  case 130: // enumerator_list: enumerator_list "," enumerator
-#line 570 "parser.y"
+  case 135: // enumerator_list: enumerator_list "," enumerator
+#line 575 "parser.y"
                                         {
                                           Enumerator value1 = yystack_[0].value.as < Enumerator > ();
                                           std::vector<Enumerator> &value2 = yystack_[2].value.as < std::vector<Enumerator> > ();
@@ -3045,124 +3075,124 @@ namespace  WadeSpace  {
                                           yylhs.value.as < std::vector<Enumerator> > () = value2;
                                           cout << "enumerator_list COMMA enumerator REDUCE enumerator_list" << endl;
                                         }
-#line 3049 "parser.cpp"
-    break;
-
-  case 131: // enumerator: "identifier"
-#line 580 "parser.y"
-                                           { yylhs.value.as< Enumerator > () = Enumerator(yystack_[0].value.as < std::string > ()); cout << "IDENTIFIER REDUCE to ENUMERATOR" << endl;}
-#line 3055 "parser.cpp"
-    break;
-
-  case 132: // enumerator: "identifier" "=" constant_expression
-#line 581 "parser.y"
-                                           { yylhs.value.as< Enumerator > () = Enumerator(yystack_[2].value.as < std::string > (),yystack_[0].value.as < ConstantExpression > ()); cout << "IDENTIFIER EQUAL constant_expression REDUCE to ENUMERATOR" << endl;}
-#line 3061 "parser.cpp"
-    break;
-
-  case 133: // type_qualifier: "const"
-#line 585 "parser.y"
-               { yylhs.value.as< TypeQualifier > () = TypeQualifier(yystack_[0].value.as < std::string > (),CONST); cout << "CONST REDUCE to type_qualifier" << endl;}
-#line 3067 "parser.cpp"
-    break;
-
-  case 134: // type_qualifier: "volatile"
-#line 586 "parser.y"
-               { yylhs.value.as< TypeQualifier > () = TypeQualifier(yystack_[0].value.as < std::string > (),VOLATILE); cout << "VOLATILE REDUCE to type_qualifier" << endl;}
-#line 3073 "parser.cpp"
-    break;
-
-  case 135: // declarator: pointer direct_declarator
-#line 590 "parser.y"
-                                { yylhs.value.as< Declarator > () = Declarator(yystack_[1].value.as < Pointer > (),yystack_[0].value.as < DirectDeclarator > ()); cout << "pointer direct_declarator REDUCE to declarator" << endl;}
 #line 3079 "parser.cpp"
     break;
 
-  case 136: // declarator: direct_declarator
-#line 591 "parser.y"
-                                { yylhs.value.as< Declarator > () = Declarator(yystack_[0].value.as < DirectDeclarator > ()); cout << "direct_declarator REDUCE to declarator" << endl;}
+  case 136: // enumerator: "identifier"
+#line 585 "parser.y"
+                                           { yylhs.value.as< Enumerator > () = Enumerator(yystack_[0].value.as < std::string > ()); cout << "IDENTIFIER REDUCE to ENUMERATOR" << endl;}
 #line 3085 "parser.cpp"
     break;
 
-  case 137: // direct_declarator: "identifier"
-#line 595 "parser.y"
-                                                            { yylhs.value.as< DirectDeclarator > () = DirectDeclarator(yystack_[0].value.as < std::string > ()); cout << "IDENTIFIER REDUCE to direct_declarator" << endl;}
+  case 137: // enumerator: "identifier" "=" constant_expression
+#line 586 "parser.y"
+                                           { yylhs.value.as< Enumerator > () = Enumerator(yystack_[2].value.as < std::string > (),yystack_[0].value.as < ConstantExpression > ()); cout << "IDENTIFIER EQUAL constant_expression REDUCE to ENUMERATOR" << endl;}
 #line 3091 "parser.cpp"
     break;
 
-  case 138: // direct_declarator: "(" declarator ")"
-#line 596 "parser.y"
-                                                            { yylhs.value.as< DirectDeclarator > () = DirectDeclarator(); cout << "OPAREN declarator CPAREN REDUCE to direct_declarator" << endl;}
+  case 138: // type_qualifier: "const"
+#line 590 "parser.y"
+               { yylhs.value.as< TypeQualifier > () = TypeQualifier(yystack_[0].value.as < std::string > (),CONST); cout << "CONST REDUCE to type_qualifier" << endl;}
 #line 3097 "parser.cpp"
     break;
 
-  case 139: // direct_declarator: direct_declarator "[" constant_expression "]"
-#line 597 "parser.y"
-                                                            { yylhs.value.as< DirectDeclarator > () = DirectDeclarator(); cout << "direct_declarator OBRACE constant_expression CBRACE REDUCE to direct_declarator" << endl;}
+  case 139: // type_qualifier: "volatile"
+#line 591 "parser.y"
+               { yylhs.value.as< TypeQualifier > () = TypeQualifier(yystack_[0].value.as < std::string > (),VOLATILE); cout << "VOLATILE REDUCE to type_qualifier" << endl;}
 #line 3103 "parser.cpp"
     break;
 
-  case 140: // direct_declarator: direct_declarator "[" "]"
-#line 598 "parser.y"
-                                                            { yylhs.value.as< DirectDeclarator > () = DirectDeclarator(); cout << "direct_declarator OBRACE CBRACE REDUCE to direct_declarator" << endl;}
+  case 140: // declarator: pointer direct_declarator
+#line 595 "parser.y"
+                                { yylhs.value.as< Declarator > () = Declarator(yystack_[1].value.as < Pointer > (),yystack_[0].value.as < DirectDeclarator > ()); cout << "pointer direct_declarator REDUCE to declarator" << endl;}
 #line 3109 "parser.cpp"
     break;
 
-  case 141: // direct_declarator: direct_declarator "(" parameter_type_list ")"
-#line 599 "parser.y"
-                                                            { yylhs.value.as< DirectDeclarator > () = DirectDeclarator(); cout << "direct_declarator OPAREN parameter_type_list CPAREN to direct_declarator" << endl;}
+  case 141: // declarator: direct_declarator
+#line 596 "parser.y"
+                                { yylhs.value.as< Declarator > () = Declarator(yystack_[0].value.as < DirectDeclarator > ()); cout << "direct_declarator REDUCE to declarator" << endl;}
 #line 3115 "parser.cpp"
     break;
 
-  case 142: // direct_declarator: direct_declarator "(" identifier_list ")"
+  case 142: // direct_declarator: "identifier"
 #line 600 "parser.y"
-                                                            { yylhs.value.as< DirectDeclarator > () = DirectDeclarator(); cout << "direct_declarator OPAREN identifier_list CPAREN REDUCE to direct_declarator" << endl;}
+                                                            { yylhs.value.as< DirectDeclarator > () = DirectDeclarator(yystack_[0].value.as < std::string > ()); cout << "IDENTIFIER REDUCE to direct_declarator" << endl;}
 #line 3121 "parser.cpp"
     break;
 
-  case 143: // direct_declarator: direct_declarator "(" ")"
+  case 143: // direct_declarator: "(" declarator ")"
 #line 601 "parser.y"
-                                                            { yylhs.value.as< DirectDeclarator > () = DirectDeclarator(); cout << "direct_declarator OPAREN CPAREN REDUCE to direct_declarator" << endl;}
+                                                            { yylhs.value.as< DirectDeclarator > () = DirectDeclarator(); cout << "OPAREN declarator CPAREN REDUCE to direct_declarator" << endl;}
 #line 3127 "parser.cpp"
     break;
 
-  case 144: // pointer: "*"
-#line 605 "parser.y"
-                                            {yylhs.value.as< Pointer > () = Pointer(yystack_[0].value.as < std::string > ()); cout << "TIMES_OP REDUCE to POINTER" << endl;}
+  case 144: // direct_declarator: direct_declarator "[" constant_expression "]"
+#line 602 "parser.y"
+                                                            { yylhs.value.as< DirectDeclarator > () = DirectDeclarator(); cout << "direct_declarator OBRACE constant_expression CBRACE REDUCE to direct_declarator" << endl;}
 #line 3133 "parser.cpp"
     break;
 
-  case 145: // pointer: "*" type_qualifier_list
-#line 606 "parser.y"
-                                            {yylhs.value.as< Pointer > () = Pointer(yystack_[1].value.as < std::string > (),yystack_[0].value.as < std::vector<TypeQualifier> > ()); cout << "TIMES_OP type_qualifier_list REDUCE to POINTER" << endl;}
+  case 145: // direct_declarator: direct_declarator "[" "]"
+#line 603 "parser.y"
+                                                            { yylhs.value.as< DirectDeclarator > () = DirectDeclarator(); cout << "direct_declarator OBRACE CBRACE REDUCE to direct_declarator" << endl;}
 #line 3139 "parser.cpp"
     break;
 
-  case 146: // pointer: "*" pointer
-#line 607 "parser.y"
-                                            {yylhs.value.as< Pointer > () = Pointer(yystack_[1].value.as < std::string > (),yystack_[0].value.as < Pointer > ()); yylhs.value.as< Pointer > ().inc(); cout << "TIMES_OP pointer REDUCE to POINTER" << endl;}
+  case 146: // direct_declarator: direct_declarator "(" parameter_type_list ")"
+#line 604 "parser.y"
+                                                            { yylhs.value.as< DirectDeclarator > () = DirectDeclarator(); cout << "direct_declarator OPAREN parameter_type_list CPAREN to direct_declarator" << endl;}
 #line 3145 "parser.cpp"
     break;
 
-  case 147: // pointer: "*" type_qualifier_list pointer
-#line 608 "parser.y"
-                                            {yylhs.value.as< Pointer > () = Pointer(yystack_[2].value.as < std::string > (),yystack_[1].value.as < std::vector<TypeQualifier> > (),yystack_[0].value.as < Pointer > ()); yylhs.value.as< Pointer > ().inc(); cout << "TIMES_OP type_qualifier_list pointer REDUCE to POINTER" << endl;}
+  case 147: // direct_declarator: direct_declarator "(" identifier_list ")"
+#line 605 "parser.y"
+                                                            { yylhs.value.as< DirectDeclarator > () = DirectDeclarator(); cout << "direct_declarator OPAREN identifier_list CPAREN REDUCE to direct_declarator" << endl;}
 #line 3151 "parser.cpp"
     break;
 
-  case 148: // type_qualifier_list: type_qualifier
+  case 148: // direct_declarator: direct_declarator "(" ")"
+#line 606 "parser.y"
+                                                            { yylhs.value.as< DirectDeclarator > () = DirectDeclarator(); cout << "direct_declarator OPAREN CPAREN REDUCE to direct_declarator" << endl;}
+#line 3157 "parser.cpp"
+    break;
+
+  case 149: // pointer: "*"
+#line 610 "parser.y"
+                                            {yylhs.value.as< Pointer > () = Pointer(yystack_[0].value.as < std::string > ()); cout << "TIMES_OP REDUCE to POINTER" << endl;}
+#line 3163 "parser.cpp"
+    break;
+
+  case 150: // pointer: "*" type_qualifier_list
+#line 611 "parser.y"
+                                            {yylhs.value.as< Pointer > () = Pointer(yystack_[1].value.as < std::string > (),yystack_[0].value.as < std::vector<TypeQualifier> > ()); cout << "TIMES_OP type_qualifier_list REDUCE to POINTER" << endl;}
+#line 3169 "parser.cpp"
+    break;
+
+  case 151: // pointer: "*" pointer
 #line 612 "parser.y"
+                                            {yylhs.value.as< Pointer > () = Pointer(yystack_[1].value.as < std::string > (),yystack_[0].value.as < Pointer > ()); yylhs.value.as< Pointer > ().inc(); cout << "TIMES_OP pointer REDUCE to POINTER" << endl;}
+#line 3175 "parser.cpp"
+    break;
+
+  case 152: // pointer: "*" type_qualifier_list pointer
+#line 613 "parser.y"
+                                            {yylhs.value.as< Pointer > () = Pointer(yystack_[2].value.as < std::string > (),yystack_[1].value.as < std::vector<TypeQualifier> > (),yystack_[0].value.as < Pointer > ()); yylhs.value.as< Pointer > ().inc(); cout << "TIMES_OP type_qualifier_list pointer REDUCE to POINTER" << endl;}
+#line 3181 "parser.cpp"
+    break;
+
+  case 153: // type_qualifier_list: type_qualifier
+#line 617 "parser.y"
                             {
                              TypeQualifier exp = yystack_[0].value.as < TypeQualifier > ();
                              yylhs.value.as < std::vector<TypeQualifier> > () = std::vector<TypeQualifier>();
                              yylhs.value.as < std::vector<TypeQualifier> > ().push_back(exp);
                              cout << "type_qualifier REDUCE type_qualifier_list" << endl;
                             }
-#line 3162 "parser.cpp"
+#line 3192 "parser.cpp"
     break;
 
-  case 149: // type_qualifier_list: type_qualifier_list type_qualifier
-#line 618 "parser.y"
+  case 154: // type_qualifier_list: type_qualifier_list type_qualifier
+#line 623 "parser.y"
                                          {
                                           TypeQualifier value1 = yystack_[0].value.as < TypeQualifier > ();
                                           std::vector<TypeQualifier> &value2 = yystack_[1].value.as < std::vector<TypeQualifier> > ();
@@ -3170,34 +3200,34 @@ namespace  WadeSpace  {
                                           yylhs.value.as < std::vector<TypeQualifier> > () = value2;
                                           cout << "type_qualifier_list type_qualifier REDUCE type_qualifier_list" << endl;
                                         }
-#line 3174 "parser.cpp"
+#line 3204 "parser.cpp"
     break;
 
-  case 150: // parameter_type_list: parameter_list
-#line 629 "parser.y"
-                                      { yylhs.value.as< ParameterTypeList > () = ParameterTypeList(yystack_[0].value.as < std::vector<ParameterDeclaration> > (),""); cout << "parameter_list REDUCE to parameter_type_list" << endl; }
-#line 3180 "parser.cpp"
-    break;
-
-  case 151: // parameter_type_list: parameter_list "," "ellipsis"
-#line 630 "parser.y"
-                                      { yylhs.value.as< ParameterTypeList > () = ParameterTypeList(yystack_[2].value.as < std::vector<ParameterDeclaration> > (),yystack_[1].value.as < std::string > ()); cout << "parameter_list COMMA ELLIPSIS REDUCE to parameter_type_list" << endl; }
-#line 3186 "parser.cpp"
-    break;
-
-  case 152: // parameter_list: parameter_declaration
+  case 155: // parameter_type_list: parameter_list
 #line 634 "parser.y"
+                                      { yylhs.value.as< ParameterTypeList > () = ParameterTypeList(yystack_[0].value.as < std::vector<ParameterDeclaration> > (),""); cout << "parameter_list REDUCE to parameter_type_list" << endl; }
+#line 3210 "parser.cpp"
+    break;
+
+  case 156: // parameter_type_list: parameter_list "," "ellipsis"
+#line 635 "parser.y"
+                                      { yylhs.value.as< ParameterTypeList > () = ParameterTypeList(yystack_[2].value.as < std::vector<ParameterDeclaration> > (),yystack_[1].value.as < std::string > ()); cout << "parameter_list COMMA ELLIPSIS REDUCE to parameter_type_list" << endl; }
+#line 3216 "parser.cpp"
+    break;
+
+  case 157: // parameter_list: parameter_declaration
+#line 639 "parser.y"
                                                   {
                                                     ParameterDeclaration exp = yystack_[0].value.as < ParameterDeclaration > ();
                                                     yylhs.value.as < std::vector<ParameterDeclaration> > () = std::vector<ParameterDeclaration>();
                                                     yylhs.value.as < std::vector<ParameterDeclaration> > ().push_back(exp);
                                                     cout << "parameter_declaration REDUCE to parameter_list" << endl;
                                                   }
-#line 3197 "parser.cpp"
+#line 3227 "parser.cpp"
     break;
 
-  case 153: // parameter_list: parameter_list "," parameter_declaration
-#line 640 "parser.y"
+  case 158: // parameter_list: parameter_list "," parameter_declaration
+#line 645 "parser.y"
                                                   {
                                                     ParameterDeclaration value1 = yystack_[0].value.as < ParameterDeclaration > ();
                                                     std::vector<ParameterDeclaration> &value2 = yystack_[2].value.as < std::vector<ParameterDeclaration> > ();
@@ -3205,40 +3235,40 @@ namespace  WadeSpace  {
                                                     yylhs.value.as < std::vector<ParameterDeclaration> > () = value2;
                                                     cout << "parameter_list COMMA parameter_declaration REDUCE to parameter_list" << endl;
                                                   }
-#line 3209 "parser.cpp"
+#line 3239 "parser.cpp"
     break;
 
-  case 154: // parameter_declaration: declaration_specifiers declarator
-#line 650 "parser.y"
+  case 159: // parameter_declaration: declaration_specifiers declarator
+#line 655 "parser.y"
                                                   { yylhs.value.as< ParameterDeclaration > () = ParameterDeclaration(yystack_[1].value.as < DeclarationSpecifiers > (),yystack_[0].value.as < Declarator > ()); cout << "declaration_specifiers declarator REDUCE to parameter_declaration" << endl; }
-#line 3215 "parser.cpp"
+#line 3245 "parser.cpp"
     break;
 
-  case 155: // parameter_declaration: declaration_specifiers abstract_declarator
-#line 651 "parser.y"
-                                                  { yylhs.value.as< ParameterDeclaration > () = ParameterDeclaration(yystack_[1].value.as < DeclarationSpecifiers > (),yystack_[0].value.as < AbstractDeclarator > ()); cout << "declaration_specifiers abstract_declarator REDUCE to parameter_declaration" << endl; }
-#line 3221 "parser.cpp"
-    break;
-
-  case 156: // parameter_declaration: declaration_specifiers
-#line 652 "parser.y"
-                                                  { yylhs.value.as< ParameterDeclaration > () = ParameterDeclaration(yystack_[0].value.as < DeclarationSpecifiers > ()); cout << "declaration_specifiers REDUCE to parameter_declaration" << endl; }
-#line 3227 "parser.cpp"
-    break;
-
-  case 157: // identifier_list: "identifier"
+  case 160: // parameter_declaration: declaration_specifiers abstract_declarator
 #line 656 "parser.y"
+                                                  { yylhs.value.as< ParameterDeclaration > () = ParameterDeclaration(yystack_[1].value.as < DeclarationSpecifiers > (),yystack_[0].value.as < AbstractDeclarator > ()); cout << "declaration_specifiers abstract_declarator REDUCE to parameter_declaration" << endl; }
+#line 3251 "parser.cpp"
+    break;
+
+  case 161: // parameter_declaration: declaration_specifiers
+#line 657 "parser.y"
+                                                  { yylhs.value.as< ParameterDeclaration > () = ParameterDeclaration(yystack_[0].value.as < DeclarationSpecifiers > ()); cout << "declaration_specifiers REDUCE to parameter_declaration" << endl; }
+#line 3257 "parser.cpp"
+    break;
+
+  case 162: // identifier_list: "identifier"
+#line 661 "parser.y"
                                        {
                                           std::string exp = yystack_[0].value.as < std::string > ();
                                           yylhs.value.as < std::vector<std::string> > () = std::vector<std::string>();
                                           yylhs.value.as < std::vector<std::string> > ().push_back(exp);
                                           cout << "IDENTIFIER REDUCE to identifier_list" << endl;
                                        }
-#line 3238 "parser.cpp"
+#line 3268 "parser.cpp"
     break;
 
-  case 158: // identifier_list: identifier_list "," "identifier"
-#line 662 "parser.y"
+  case 163: // identifier_list: identifier_list "," "identifier"
+#line 667 "parser.y"
                                        {
                                           std::string value1 = yystack_[0].value.as < std::string > ();
                                           std::vector<std::string> &value2 = yystack_[2].value.as < std::vector<std::string> > ();
@@ -3246,124 +3276,124 @@ namespace  WadeSpace  {
                                           yylhs.value.as < std::vector<std::string> > () = value2;
                                           cout << "identifier_list COMMA IDENTIFIER REDUCE to identifier_list" << endl; 
                                         }
-#line 3250 "parser.cpp"
-    break;
-
-  case 159: // type_name: specifier_qualifier_list
-#line 672 "parser.y"
-                                                   { yylhs.value.as< TypeName > () = TypeName(yystack_[0].value.as < SpecifierQualifierList > ()); cout << "specifier_qualifier_list REDUCE to type_name" << endl; }
-#line 3256 "parser.cpp"
-    break;
-
-  case 160: // type_name: specifier_qualifier_list abstract_declarator
-#line 673 "parser.y"
-                                                   { yylhs.value.as< TypeName > () = TypeName(yystack_[1].value.as < SpecifierQualifierList > (),yystack_[0].value.as < AbstractDeclarator > ()); cout << "specifier_qualifier_list abstract_declarator REDUCE to type_name" << endl; }
-#line 3262 "parser.cpp"
-    break;
-
-  case 161: // abstract_declarator: pointer
-#line 677 "parser.y"
-                                          { yylhs.value.as< AbstractDeclarator > () = AbstractDeclarator(yystack_[0].value.as < Pointer > ()); cout << "pointer REDUCE to abstract_declarator" << endl; }
-#line 3268 "parser.cpp"
-    break;
-
-  case 162: // abstract_declarator: direct_abstract_declarator
-#line 678 "parser.y"
-                                          { yylhs.value.as< AbstractDeclarator > () = AbstractDeclarator(yystack_[0].value.as < DirectAbstractDeclarator > ()); cout << "direct_abstract_declarator REDUCE to abstract_declarator" << endl; }
-#line 3274 "parser.cpp"
-    break;
-
-  case 163: // abstract_declarator: pointer direct_abstract_declarator
-#line 679 "parser.y"
-                                          { yylhs.value.as< AbstractDeclarator > () = AbstractDeclarator(yystack_[1].value.as < Pointer > (),yystack_[0].value.as < DirectAbstractDeclarator > ()); cout << "pointer direct_abstract_declarator REDUCE to abstract_declarator" << endl; }
 #line 3280 "parser.cpp"
     break;
 
-  case 164: // direct_abstract_declarator: "(" abstract_declarator ")"
-#line 683 "parser.y"
-                                                                   { yylhs.value.as< DirectAbstractDeclarator > () = DirectAbstractDeclarator(yystack_[1].value.as < AbstractDeclarator > ()); cout << "OPAREN abstract_declarator CPAREN REDUCE to direct_abstract_declarator" << endl; }
+  case 164: // type_name: specifier_qualifier_list
+#line 677 "parser.y"
+                                                   { yylhs.value.as< TypeName > () = TypeName(yystack_[0].value.as < SpecifierQualifierList > ()); cout << "specifier_qualifier_list REDUCE to type_name" << endl; }
 #line 3286 "parser.cpp"
     break;
 
-  case 165: // direct_abstract_declarator: "[" "]"
-#line 684 "parser.y"
-                                                                   { yylhs.value.as< DirectAbstractDeclarator > () = DirectAbstractDeclarator(); cout << "OBRACE CBRACE REDUCE to direct_abstract_declarator" << endl; }
+  case 165: // type_name: specifier_qualifier_list abstract_declarator
+#line 678 "parser.y"
+                                                   { yylhs.value.as< TypeName > () = TypeName(yystack_[1].value.as < SpecifierQualifierList > (),yystack_[0].value.as < AbstractDeclarator > ()); cout << "specifier_qualifier_list abstract_declarator REDUCE to type_name" << endl; }
 #line 3292 "parser.cpp"
     break;
 
-  case 166: // direct_abstract_declarator: "[" constant_expression "]"
-#line 685 "parser.y"
-                                                                   { yylhs.value.as< DirectAbstractDeclarator > () = DirectAbstractDeclarator(); cout << "OBRACE constant_expression CBRACE REDUCE to direct_abstract_declarator" << endl; }
+  case 166: // abstract_declarator: pointer
+#line 682 "parser.y"
+                                          { yylhs.value.as< AbstractDeclarator > () = AbstractDeclarator(yystack_[0].value.as < Pointer > ()); cout << "pointer REDUCE to abstract_declarator" << endl; }
 #line 3298 "parser.cpp"
     break;
 
-  case 167: // direct_abstract_declarator: direct_abstract_declarator "[" "]"
-#line 686 "parser.y"
-                                                                   { yylhs.value.as< DirectAbstractDeclarator > () = DirectAbstractDeclarator(); cout << "direct_abstract_declarator OBRACE CBRACE REDUCE to direct_abstract_declarator" << endl; }
+  case 167: // abstract_declarator: direct_abstract_declarator
+#line 683 "parser.y"
+                                          { yylhs.value.as< AbstractDeclarator > () = AbstractDeclarator(yystack_[0].value.as < DirectAbstractDeclarator > ()); cout << "direct_abstract_declarator REDUCE to abstract_declarator" << endl; }
 #line 3304 "parser.cpp"
     break;
 
-  case 168: // direct_abstract_declarator: direct_abstract_declarator "[" constant_expression "]"
-#line 687 "parser.y"
-                                                                   { yylhs.value.as< DirectAbstractDeclarator > () = DirectAbstractDeclarator(); cout << "direct_abstract_declarator OBRACE constant_expression CBRACE REDUCE to direct_abstract_declarator" << endl; }
+  case 168: // abstract_declarator: pointer direct_abstract_declarator
+#line 684 "parser.y"
+                                          { yylhs.value.as< AbstractDeclarator > () = AbstractDeclarator(yystack_[1].value.as < Pointer > (),yystack_[0].value.as < DirectAbstractDeclarator > ()); cout << "pointer direct_abstract_declarator REDUCE to abstract_declarator" << endl; }
 #line 3310 "parser.cpp"
     break;
 
-  case 169: // direct_abstract_declarator: "(" ")"
+  case 169: // direct_abstract_declarator: "(" abstract_declarator ")"
 #line 688 "parser.y"
-                                                                   { yylhs.value.as< DirectAbstractDeclarator > () = DirectAbstractDeclarator(); cout << "OPAREN CPAREN REDUCE to direct_abstract_declarator" << endl; }
+                                                                   { yylhs.value.as< DirectAbstractDeclarator > () = DirectAbstractDeclarator(yystack_[1].value.as < AbstractDeclarator > ()); cout << "OPAREN abstract_declarator CPAREN REDUCE to direct_abstract_declarator" << endl; }
 #line 3316 "parser.cpp"
     break;
 
-  case 170: // direct_abstract_declarator: "(" parameter_type_list ")"
+  case 170: // direct_abstract_declarator: "[" "]"
 #line 689 "parser.y"
-                                                                   { yylhs.value.as< DirectAbstractDeclarator > () = DirectAbstractDeclarator(); cout << "OPAREN parameter_type_list CPAREN REDUCE to direct_abstract_declarator" << endl; }
+                                                                   { yylhs.value.as< DirectAbstractDeclarator > () = DirectAbstractDeclarator(); cout << "OBRACE CBRACE REDUCE to direct_abstract_declarator" << endl; }
 #line 3322 "parser.cpp"
     break;
 
-  case 171: // direct_abstract_declarator: direct_abstract_declarator "(" ")"
+  case 171: // direct_abstract_declarator: "[" constant_expression "]"
 #line 690 "parser.y"
-                                                                   { yylhs.value.as< DirectAbstractDeclarator > () = DirectAbstractDeclarator(); cout << "direct_abstract_declarator OPAREN CPAREN REDUCE to direct_abstract_declarator" << endl; }
+                                                                   { yylhs.value.as< DirectAbstractDeclarator > () = DirectAbstractDeclarator(); cout << "OBRACE constant_expression CBRACE REDUCE to direct_abstract_declarator" << endl; }
 #line 3328 "parser.cpp"
     break;
 
-  case 172: // direct_abstract_declarator: direct_abstract_declarator "(" parameter_type_list ")"
+  case 172: // direct_abstract_declarator: direct_abstract_declarator "[" "]"
 #line 691 "parser.y"
-                                                                   { yylhs.value.as< DirectAbstractDeclarator > () = DirectAbstractDeclarator(); cout << "direct_abstract_declarator OPAREN parameter_type_list CPAREN REDUCE to direct_abstract_declarator" << endl; }
+                                                                   { yylhs.value.as< DirectAbstractDeclarator > () = DirectAbstractDeclarator(); cout << "direct_abstract_declarator OBRACE CBRACE REDUCE to direct_abstract_declarator" << endl; }
 #line 3334 "parser.cpp"
     break;
 
-  case 173: // initializer: assignment_expression
-#line 695 "parser.y"
-                                           { yylhs.value.as< Initializer > () = Initializer(yystack_[0].value.as < AssignmentExpression > ()); cout << "assignment_expression REDUCE to initializer" << endl; }
+  case 173: // direct_abstract_declarator: direct_abstract_declarator "[" constant_expression "]"
+#line 692 "parser.y"
+                                                                   { yylhs.value.as< DirectAbstractDeclarator > () = DirectAbstractDeclarator(); cout << "direct_abstract_declarator OBRACE constant_expression CBRACE REDUCE to direct_abstract_declarator" << endl; }
 #line 3340 "parser.cpp"
     break;
 
-  case 174: // initializer: "{" initializer_list "}"
-#line 696 "parser.y"
-                                           { yylhs.value.as< Initializer > () = Initializer(yystack_[1].value.as < std::vector<Initializer> > ()); cout << "OCURLY initializer_list CCURLY REDUCE to initializer" << endl; }
+  case 174: // direct_abstract_declarator: "(" ")"
+#line 693 "parser.y"
+                                                                   { yylhs.value.as< DirectAbstractDeclarator > () = DirectAbstractDeclarator(); cout << "OPAREN CPAREN REDUCE to direct_abstract_declarator" << endl; }
 #line 3346 "parser.cpp"
     break;
 
-  case 175: // initializer: "{" initializer_list "," "}"
-#line 697 "parser.y"
-                                           { yylhs.value.as< Initializer > () = Initializer(yystack_[2].value.as < std::vector<Initializer> > ()); cout << "OCURLY initializer_list COMMA CCURLY REDUCE to initializer" << endl; }
+  case 175: // direct_abstract_declarator: "(" parameter_type_list ")"
+#line 694 "parser.y"
+                                                                   { yylhs.value.as< DirectAbstractDeclarator > () = DirectAbstractDeclarator(); cout << "OPAREN parameter_type_list CPAREN REDUCE to direct_abstract_declarator" << endl; }
 #line 3352 "parser.cpp"
     break;
 
-  case 176: // initializer_list: initializer
+  case 176: // direct_abstract_declarator: direct_abstract_declarator "(" ")"
+#line 695 "parser.y"
+                                                                   { yylhs.value.as< DirectAbstractDeclarator > () = DirectAbstractDeclarator(); cout << "direct_abstract_declarator OPAREN CPAREN REDUCE to direct_abstract_declarator" << endl; }
+#line 3358 "parser.cpp"
+    break;
+
+  case 177: // direct_abstract_declarator: direct_abstract_declarator "(" parameter_type_list ")"
+#line 696 "parser.y"
+                                                                   { yylhs.value.as< DirectAbstractDeclarator > () = DirectAbstractDeclarator(); cout << "direct_abstract_declarator OPAREN parameter_type_list CPAREN REDUCE to direct_abstract_declarator" << endl; }
+#line 3364 "parser.cpp"
+    break;
+
+  case 178: // initializer: assignment_expression
+#line 700 "parser.y"
+                                           { yylhs.value.as< Initializer > () = Initializer(yystack_[0].value.as < AssignmentExpression > ()); cout << "assignment_expression REDUCE to initializer" << endl; }
+#line 3370 "parser.cpp"
+    break;
+
+  case 179: // initializer: "{" initializer_list "}"
 #line 701 "parser.y"
+                                           { yylhs.value.as< Initializer > () = Initializer(yystack_[1].value.as < std::vector<Initializer> > ()); cout << "OCURLY initializer_list CCURLY REDUCE to initializer" << endl; }
+#line 3376 "parser.cpp"
+    break;
+
+  case 180: // initializer: "{" initializer_list "," "}"
+#line 702 "parser.y"
+                                           { yylhs.value.as< Initializer > () = Initializer(yystack_[2].value.as < std::vector<Initializer> > ()); cout << "OCURLY initializer_list COMMA CCURLY REDUCE to initializer" << endl; }
+#line 3382 "parser.cpp"
+    break;
+
+  case 181: // initializer_list: initializer
+#line 706 "parser.y"
                                           {
                                            Initializer exp = yystack_[0].value.as < Initializer > ();
                                            yylhs.value.as < std::vector<Initializer> > () = std::vector<Initializer>();
                                            yylhs.value.as < std::vector<Initializer> > ().push_back(exp);
                                            cout << "initializer REDUCE to initializer_list" << endl;
                                           }
-#line 3363 "parser.cpp"
+#line 3393 "parser.cpp"
     break;
 
-  case 177: // initializer_list: initializer_list "," initializer
-#line 707 "parser.y"
+  case 182: // initializer_list: initializer_list "," initializer
+#line 712 "parser.y"
                                           {
                                            Initializer value1 = yystack_[0].value.as < Initializer > ();
                                            std::vector<Initializer> &value2 = yystack_[2].value.as < std::vector<Initializer> > ();
@@ -3371,100 +3401,100 @@ namespace  WadeSpace  {
                                            yylhs.value.as < std::vector<Initializer> > () = value2;
                                            cout << "initializer_list COMMA initializer REDUCE to initializer_list" << endl;
                                           }
-#line 3375 "parser.cpp"
-    break;
-
-  case 178: // statement: labeled_statement
-#line 717 "parser.y"
-                           { yylhs.value.as< BaseStatement > () = Statement(NONE,yystack_[0].value.as < LabeledStatement > ()); cout << "labeled_statement REDUCE to statement" << endl; }
-#line 3381 "parser.cpp"
-    break;
-
-  case 179: // statement: compound_statement
-#line 718 "parser.y"
-                           { yylhs.value.as< BaseStatement > () = Statement(NONE,yystack_[0].value.as < CompoundStatement > ()); cout << "compound_statement REDUCE to statement" << endl; }
-#line 3387 "parser.cpp"
-    break;
-
-  case 180: // statement: expression_statement
-#line 719 "parser.y"
-                           { yylhs.value.as< BaseStatement > () = Statement(NONE,yystack_[0].value.as < BaseStatement > ()); cout << "expression_statement REDUCE to statement" << endl; }
-#line 3393 "parser.cpp"
-    break;
-
-  case 181: // statement: selection_statement
-#line 720 "parser.y"
-                           { yylhs.value.as< BaseStatement > () = Statement(NONE,yystack_[0].value.as < BaseStatement > ()); cout << "selection_statement REDUCE to statement" << endl; }
-#line 3399 "parser.cpp"
-    break;
-
-  case 182: // statement: iteration_statement
-#line 721 "parser.y"
-                           { yylhs.value.as< BaseStatement > () = Statement(NONE,yystack_[0].value.as < BaseStatement > ()); cout << "iteration_statement REDUCE to statement" << endl; }
 #line 3405 "parser.cpp"
     break;
 
-  case 183: // statement: jump_statement
+  case 183: // statement: labeled_statement
 #line 722 "parser.y"
-                           { yylhs.value.as< BaseStatement > () = Statement(NONE,yystack_[0].value.as < BaseStatement > ()); cout << "jump_statement REDUCE to statement" << endl; }
+                           { yylhs.value.as< BaseStatement > () = Statement(NONE,yystack_[0].value.as < LabeledStatement > ()); cout << "labeled_statement REDUCE to statement" << endl; }
 #line 3411 "parser.cpp"
     break;
 
-  case 184: // labeled_statement: "identifier" ":" statement
-#line 726 "parser.y"
-                                               { yylhs.value.as< BaseStatement > () = LabeledStatement(yystack_[2].value.as < std::string > (),yystack_[0].value.as < BaseStatement > ()); cout << "IDENTIFIER COLON statement REDUCE to label_statement" << endl; }
+  case 184: // statement: compound_statement
+#line 723 "parser.y"
+                           { yylhs.value.as< BaseStatement > () = Statement(NONE,yystack_[0].value.as < CompoundStatement > ()); cout << "compound_statement REDUCE to statement" << endl; }
 #line 3417 "parser.cpp"
     break;
 
-  case 185: // labeled_statement: "case" constant_expression ":" statement
-#line 727 "parser.y"
-                                               { yylhs.value.as< BaseStatement > () = LabeledStatement(CASE,yystack_[2].value.as < ConstantExpression > (),yystack_[0].value.as < BaseStatement > ()); cout << "CASE constant_expression COLON statement REDUCE to label_statement" << endl; }
+  case 185: // statement: expression_statement
+#line 724 "parser.y"
+                           { yylhs.value.as< BaseStatement > () = Statement(NONE,yystack_[0].value.as < BaseStatement > ()); cout << "expression_statement REDUCE to statement" << endl; }
 #line 3423 "parser.cpp"
     break;
 
-  case 186: // labeled_statement: "default" ":" statement
-#line 728 "parser.y"
-                                               { yylhs.value.as< BaseStatement > () = LabeledStatement(DEFAULT,yystack_[0].value.as < BaseStatement > ()); cout << "DEFAULT COLON statement REDUCE to label_statement" << endl; }
+  case 186: // statement: selection_statement
+#line 725 "parser.y"
+                           { yylhs.value.as< BaseStatement > () = Statement(NONE,yystack_[0].value.as < BaseStatement > ()); cout << "selection_statement REDUCE to statement" << endl; }
 #line 3429 "parser.cpp"
     break;
 
-  case 187: // compound_statement: "{" "}"
-#line 732 "parser.y"
-                                                    { yylhs.value.as< BaseStatement > () = CompoundStatement(); cout << "OCURLY CCURLY REDUCE to compound_statement" << endl; }
+  case 187: // statement: iteration_statement
+#line 726 "parser.y"
+                           { yylhs.value.as< BaseStatement > () = Statement(NONE,yystack_[0].value.as < BaseStatement > ()); cout << "iteration_statement REDUCE to statement" << endl; }
 #line 3435 "parser.cpp"
     break;
 
-  case 188: // compound_statement: "{" statement_list "}"
-#line 733 "parser.y"
-                                                    { yylhs.value.as< BaseStatement > () = CompoundStatement(yystack_[1].value.as < std::vector<BaseStatement> > ()); cout << "OCURLY statement_list CCURLY REDUCE to compound_statement" << endl; }
+  case 188: // statement: jump_statement
+#line 727 "parser.y"
+                           { yylhs.value.as< BaseStatement > () = Statement(NONE,yystack_[0].value.as < BaseStatement > ()); cout << "jump_statement REDUCE to statement" << endl; }
 #line 3441 "parser.cpp"
     break;
 
-  case 189: // compound_statement: "{" declaration_list "}"
-#line 734 "parser.y"
-                                                    { yylhs.value.as< BaseStatement > () = CompoundStatement(yystack_[1].value.as < std::vector<Declaration> > ()); cout << "OCURLY declaration_list CCURLY REDUCE to compound_statement" << endl; }
+  case 189: // labeled_statement: "identifier" ":" statement
+#line 731 "parser.y"
+                                               { yylhs.value.as< BaseStatement > () = LabeledStatement(yystack_[2].value.as < std::string > (),yystack_[0].value.as < BaseStatement > ()); cout << "IDENTIFIER COLON statement REDUCE to label_statement" << endl; }
 #line 3447 "parser.cpp"
     break;
 
-  case 190: // compound_statement: "{" declaration_list statement_list "}"
-#line 735 "parser.y"
-                                                    { yylhs.value.as< BaseStatement > () = CompoundStatement(yystack_[1].value.as < std::vector<BaseStatement> > (),yystack_[2].value.as < std::vector<Declaration> > ()); cout << "OCURLY declaration_list statement_list CCURLY REDUCE to compound_statement" << endl; }
+  case 190: // labeled_statement: "case" constant_expression ":" statement
+#line 732 "parser.y"
+                                               { yylhs.value.as< BaseStatement > () = LabeledStatement(CASE,yystack_[2].value.as < ConstantExpression > (),yystack_[0].value.as < BaseStatement > ()); cout << "CASE constant_expression COLON statement REDUCE to label_statement" << endl; }
 #line 3453 "parser.cpp"
     break;
 
-  case 191: // declaration_list: declaration
+  case 191: // labeled_statement: "default" ":" statement
+#line 733 "parser.y"
+                                               { yylhs.value.as< BaseStatement > () = LabeledStatement(DEFAULT,yystack_[0].value.as < BaseStatement > ()); cout << "DEFAULT COLON statement REDUCE to label_statement" << endl; }
+#line 3459 "parser.cpp"
+    break;
+
+  case 192: // compound_statement: "{" "}"
+#line 737 "parser.y"
+                                                    { yylhs.value.as< BaseStatement > () = CompoundStatement(); cout << "OCURLY CCURLY REDUCE to compound_statement" << endl; }
+#line 3465 "parser.cpp"
+    break;
+
+  case 193: // compound_statement: "{" statement_list "}"
+#line 738 "parser.y"
+                                                    { yylhs.value.as< BaseStatement > () = CompoundStatement(yystack_[1].value.as < std::vector<BaseStatement> > ()); cout << "OCURLY statement_list CCURLY REDUCE to compound_statement" << endl; }
+#line 3471 "parser.cpp"
+    break;
+
+  case 194: // compound_statement: "{" declaration_list "}"
 #line 739 "parser.y"
+                                                    { yylhs.value.as< BaseStatement > () = CompoundStatement(yystack_[1].value.as < std::vector<Declaration> > ()); cout << "OCURLY declaration_list CCURLY REDUCE to compound_statement" << endl; }
+#line 3477 "parser.cpp"
+    break;
+
+  case 195: // compound_statement: "{" declaration_list statement_list "}"
+#line 740 "parser.y"
+                                                    { yylhs.value.as< BaseStatement > () = CompoundStatement(yystack_[1].value.as < std::vector<BaseStatement> > (),yystack_[2].value.as < std::vector<Declaration> > ()); cout << "OCURLY declaration_list statement_list CCURLY REDUCE to compound_statement" << endl; }
+#line 3483 "parser.cpp"
+    break;
+
+  case 196: // declaration_list: declaration
+#line 744 "parser.y"
                                     {
                                      Declaration exp = yystack_[0].value.as < Declaration > ();
                                      yylhs.value.as < std::vector<Declaration> > () = std::vector<Declaration>();
                                      yylhs.value.as < std::vector<Declaration> > ().push_back(exp);
                                      cout << "declaration REDUCE to declaration_list" << endl;
                                     }
-#line 3464 "parser.cpp"
+#line 3494 "parser.cpp"
     break;
 
-  case 192: // declaration_list: declaration_list declaration
-#line 745 "parser.y"
+  case 197: // declaration_list: declaration_list declaration
+#line 750 "parser.y"
                                     {
                                      Declaration value1 = yystack_[0].value.as < Declaration > ();
                                      std::vector<Declaration> &value2 = yystack_[1].value.as < std::vector<Declaration> > ();
@@ -3472,22 +3502,22 @@ namespace  WadeSpace  {
                                      yylhs.value.as < std::vector<Declaration> > () = value2;
                                      cout << "declaration_list declaration REDUCE to declaration_list" << endl;
                                     }
-#line 3476 "parser.cpp"
+#line 3506 "parser.cpp"
     break;
 
-  case 193: // statement_list: statement
-#line 755 "parser.y"
+  case 198: // statement_list: statement
+#line 760 "parser.y"
                                   {
                                     BaseStatement exp = yystack_[0].value.as < BaseStatement > ();
                                     yylhs.value.as < std::vector<BaseStatement> > () = std::vector<BaseStatement>();
                                     yylhs.value.as < std::vector<BaseStatement> > ().push_back(exp);
                                     cout << "statement REDUCE to statement_list" << endl;
                                   }
-#line 3487 "parser.cpp"
+#line 3517 "parser.cpp"
     break;
 
-  case 194: // statement_list: statement_list statement
-#line 761 "parser.y"
+  case 199: // statement_list: statement_list statement
+#line 766 "parser.y"
                                   {
                                     BaseStatement value1 = yystack_[0].value.as < BaseStatement > ();
                                     std::vector<BaseStatement> &value2 = yystack_[1].value.as < std::vector<BaseStatement> > ();
@@ -3495,143 +3525,143 @@ namespace  WadeSpace  {
                                     yylhs.value.as < std::vector<BaseStatement> > () = value2;
                                     cout << "statement_list statement REDUCE to statement_list" << endl;
                                   }
-#line 3499 "parser.cpp"
-    break;
-
-  case 195: // expression_statement: ";"
-#line 771 "parser.y"
-                            { yylhs.value.as< BaseStatement > () = ExpressionStatement(); cout << "SEMICOLON REDUCE to expression_statement" << endl; }
-#line 3505 "parser.cpp"
-    break;
-
-  case 196: // expression_statement: expression ";"
-#line 772 "parser.y"
-                            { yylhs.value.as< BaseStatement > () = ExpressionStatement(yystack_[1].value.as < Expression > ()); cout << "expression SEMICOLON REDUCE to expression_statement" << endl; }
-#line 3511 "parser.cpp"
-    break;
-
-  case 197: // selection_statement: "if" "(" expression ")" statement
-#line 776 "parser.y"
-                                                           { yylhs.value.as< BaseStatement > () = SelectionStatement(IF,yystack_[2].value.as < Expression > (),yystack_[0].value.as < BaseStatement > ()); cout << "IF OPAREN expression CPAREN statement REDUCE to selection_statement" << endl; }
-#line 3517 "parser.cpp"
-    break;
-
-  case 198: // selection_statement: "if" "(" expression ")" statement "else" statement
-#line 777 "parser.y"
-                                                           { yylhs.value.as< BaseStatement > () = SelectionStatement(IF,yystack_[4].value.as < Expression > (),yystack_[2].value.as < BaseStatement > (),yystack_[0].value.as < BaseStatement > ()); cout << "IF OPAREN expression CPAREN statement ELSE statement REDUCE to selection_statement" << endl; }
-#line 3523 "parser.cpp"
-    break;
-
-  case 199: // selection_statement: "switch" "(" expression ")" statement
-#line 778 "parser.y"
-                                                           { yylhs.value.as< BaseStatement > () = SelectionStatement(SWITCH,yystack_[2].value.as < Expression > (),yystack_[0].value.as < BaseStatement > ()); cout << "SWITCH OPAREN expression CPAREN statement REDUCE to selection_statement" << endl; }
 #line 3529 "parser.cpp"
     break;
 
-  case 200: // iteration_statement: "while" "(" expression ")" statement
-#line 782 "parser.y"
-                                                                                       { yylhs.value.as< BaseStatement > () = IterationStatement(WHILE,yystack_[2].value.as < Expression > (),yystack_[0].value.as < BaseStatement > ()); cout << "WHILE OPAREN expression CPAREN statement REDUCE to iteration_statement" << endl; }
+  case 200: // expression_statement: ";"
+#line 776 "parser.y"
+                            { yylhs.value.as< BaseStatement > () = ExpressionStatement(); cout << "SEMICOLON REDUCE to expression_statement" << endl; }
 #line 3535 "parser.cpp"
     break;
 
-  case 201: // iteration_statement: "do" statement "while" "(" expression ")" ";"
-#line 783 "parser.y"
-                                                                                       { yylhs.value.as< BaseStatement > () = IterationStatement(DO,yystack_[2].value.as < Expression > (),yystack_[5].value.as < BaseStatement > ()); cout << "DO statement WHILE OPAREN expression CPAREN SEMICOLON REDUCE to iteration_statement" << endl; }
+  case 201: // expression_statement: expression ";"
+#line 777 "parser.y"
+                            { yylhs.value.as< BaseStatement > () = ExpressionStatement(yystack_[1].value.as < Expression > ()); cout << "expression SEMICOLON REDUCE to expression_statement" << endl; }
 #line 3541 "parser.cpp"
     break;
 
-  case 202: // iteration_statement: "for" "(" expression_statement expression_statement ")" statement
-#line 784 "parser.y"
-                                                                                       { yylhs.value.as< BaseStatement > () = IterationStatement(FOR,yystack_[3].value.as < BaseStatement > (),yystack_[2].value.as < BaseStatement > (),yystack_[0].value.as < BaseStatement > ()); cout << "FOR OPAREN expression_statement expression_statement CPAREN statement REDUCE to iteration_statement" << endl; }
+  case 202: // selection_statement: "if" "(" expression ")" statement
+#line 781 "parser.y"
+                                                           { yylhs.value.as< BaseStatement > () = SelectionStatement(IF,yystack_[2].value.as < Expression > (),yystack_[0].value.as < BaseStatement > ()); cout << "IF OPAREN expression CPAREN statement REDUCE to selection_statement" << endl; }
 #line 3547 "parser.cpp"
     break;
 
-  case 203: // iteration_statement: "for" "(" expression_statement expression_statement expression ")" statement
-#line 785 "parser.y"
-                                                                                       { yylhs.value.as< BaseStatement > () = IterationStatement(FOR,yystack_[4].value.as < BaseStatement > (),yystack_[3].value.as < BaseStatement > (),yystack_[2].value.as < Expression > (),yystack_[0].value.as < BaseStatement > ()); cout << "FOR OPAREN expression_statement expression_statement expression CPAREN statement REDUCE to iteration_statement" << endl; }
+  case 203: // selection_statement: "if" "(" expression ")" statement "else" statement
+#line 782 "parser.y"
+                                                           { yylhs.value.as< BaseStatement > () = SelectionStatement(IF,yystack_[4].value.as < Expression > (),yystack_[2].value.as < BaseStatement > (),yystack_[0].value.as < BaseStatement > ()); cout << "IF OPAREN expression CPAREN statement ELSE statement REDUCE to selection_statement" << endl; }
 #line 3553 "parser.cpp"
     break;
 
-  case 204: // jump_statement: "goto" "identifier" ";"
-#line 789 "parser.y"
-                                  { yylhs.value.as< BaseStatement > () = JumpStatement(GOTO,yystack_[1].value.as < std::string > ()); cout << "GOTO IDENTIFIER SEMICOLON REDUCE to jump_statement" << endl; }
+  case 204: // selection_statement: "switch" "(" expression ")" statement
+#line 783 "parser.y"
+                                                           { yylhs.value.as< BaseStatement > () = SelectionStatement(SWITCH,yystack_[2].value.as < Expression > (),yystack_[0].value.as < BaseStatement > ()); cout << "SWITCH OPAREN expression CPAREN statement REDUCE to selection_statement" << endl; }
 #line 3559 "parser.cpp"
     break;
 
-  case 205: // jump_statement: "continue" ";"
-#line 790 "parser.y"
-                                  { yylhs.value.as< BaseStatement > () = JumpStatement(CONTINUE); cout << "CONTINUE SEMICOLON REDUCE to jump_statement" << endl; }
+  case 205: // iteration_statement: "while" "(" expression ")" statement
+#line 787 "parser.y"
+                                                                                       { yylhs.value.as< BaseStatement > () = IterationStatement(WHILE,yystack_[2].value.as < Expression > (),yystack_[0].value.as < BaseStatement > ()); cout << "WHILE OPAREN expression CPAREN statement REDUCE to iteration_statement" << endl; }
 #line 3565 "parser.cpp"
     break;
 
-  case 206: // jump_statement: "break" ";"
-#line 791 "parser.y"
-                                  { yylhs.value.as< BaseStatement > () = JumpStatement(BREAK); cout << "BREAK SEMICOLON REDUCE to jump_statement" << endl; }
+  case 206: // iteration_statement: "do" statement "while" "(" expression ")" ";"
+#line 788 "parser.y"
+                                                                                       { yylhs.value.as< BaseStatement > () = IterationStatement(DO,yystack_[2].value.as < Expression > (),yystack_[5].value.as < BaseStatement > ()); cout << "DO statement WHILE OPAREN expression CPAREN SEMICOLON REDUCE to iteration_statement" << endl; }
 #line 3571 "parser.cpp"
     break;
 
-  case 207: // jump_statement: "return" ";"
-#line 792 "parser.y"
-                                  { yylhs.value.as< BaseStatement > () = JumpStatement(RETURN); cout << "RETURN SEMICOLON REDUCE to jump_statement" << endl; }
+  case 207: // iteration_statement: "for" "(" expression_statement expression_statement ")" statement
+#line 789 "parser.y"
+                                                                                       { yylhs.value.as< BaseStatement > () = IterationStatement(FOR,yystack_[3].value.as < BaseStatement > (),yystack_[2].value.as < BaseStatement > (),yystack_[0].value.as < BaseStatement > ()); cout << "FOR OPAREN expression_statement expression_statement CPAREN statement REDUCE to iteration_statement" << endl; }
 #line 3577 "parser.cpp"
     break;
 
-  case 208: // jump_statement: "return" expression ";"
-#line 793 "parser.y"
-                                  { yylhs.value.as< BaseStatement > () = JumpStatement(RETURN,yystack_[1].value.as < Expression > ()); cout << "RETURN expression SEMICOLON REDUCE to jump_statement" << endl; }
+  case 208: // iteration_statement: "for" "(" expression_statement expression_statement expression ")" statement
+#line 790 "parser.y"
+                                                                                       { yylhs.value.as< BaseStatement > () = IterationStatement(FOR,yystack_[4].value.as < BaseStatement > (),yystack_[3].value.as < BaseStatement > (),yystack_[2].value.as < Expression > (),yystack_[0].value.as < BaseStatement > ()); cout << "FOR OPAREN expression_statement expression_statement expression CPAREN statement REDUCE to iteration_statement" << endl; }
 #line 3583 "parser.cpp"
     break;
 
-  case 209: // translation_unit: external_declaration
-#line 797 "parser.y"
-                                            { cout << "external_declaration REDUCE to translation_unit" << endl; }
+  case 209: // jump_statement: "goto" "identifier" ";"
+#line 794 "parser.y"
+                                  { yylhs.value.as< BaseStatement > () = JumpStatement(GOTO,yystack_[1].value.as < std::string > ()); cout << "GOTO IDENTIFIER SEMICOLON REDUCE to jump_statement" << endl; }
 #line 3589 "parser.cpp"
     break;
 
-  case 210: // translation_unit: translation_unit external_declaration
-#line 798 "parser.y"
-                                            { cout << "translation_unit external_declaration REDUCE to translation_unit" << endl; }
+  case 210: // jump_statement: "continue" ";"
+#line 795 "parser.y"
+                                  { yylhs.value.as< BaseStatement > () = JumpStatement(CONTINUE); cout << "CONTINUE SEMICOLON REDUCE to jump_statement" << endl; }
 #line 3595 "parser.cpp"
     break;
 
-  case 211: // external_declaration: function_definition
-#line 802 "parser.y"
-                           { cout << "function_definition REDUCE to external_declaration" << endl; }
+  case 211: // jump_statement: "break" ";"
+#line 796 "parser.y"
+                                  { yylhs.value.as< BaseStatement > () = JumpStatement(BREAK); cout << "BREAK SEMICOLON REDUCE to jump_statement" << endl; }
 #line 3601 "parser.cpp"
     break;
 
-  case 212: // external_declaration: declaration
-#line 803 "parser.y"
-                           { cout << "declaration REDUCE to external_declaration" << endl; }
+  case 212: // jump_statement: "return" ";"
+#line 797 "parser.y"
+                                  { yylhs.value.as< BaseStatement > () = JumpStatement(RETURN); cout << "RETURN SEMICOLON REDUCE to jump_statement" << endl; }
 #line 3607 "parser.cpp"
     break;
 
-  case 213: // function_definition: declaration_specifiers declarator declaration_list compound_statement
-#line 807 "parser.y"
-                                                                            { yylhs.value.as< FunctionDefinition > () = FunctionDefinition(yystack_[3].value.as < DeclarationSpecifiers > (),yystack_[2].value.as < Declarator > (),yystack_[1].value.as < std::vector<Declaration> > (),yystack_[0].value.as < CompoundStatement > ()); cout << "declaration_specifiers declarator declaration_list compound_statement REDUCE to function_definition" << endl; }
+  case 213: // jump_statement: "return" expression ";"
+#line 798 "parser.y"
+                                  { yylhs.value.as< BaseStatement > () = JumpStatement(RETURN,yystack_[1].value.as < Expression > ()); cout << "RETURN expression SEMICOLON REDUCE to jump_statement" << endl; }
 #line 3613 "parser.cpp"
     break;
 
-  case 214: // function_definition: declaration_specifiers declarator compound_statement
-#line 808 "parser.y"
-                                                                            { yylhs.value.as< FunctionDefinition > () = FunctionDefinition(yystack_[2].value.as < DeclarationSpecifiers > (),yystack_[1].value.as < Declarator > (),yystack_[0].value.as < CompoundStatement > ()); cout << "declaration_specifiers declarator compound_statement REDUCE to function_definition" << endl; }
+  case 214: // translation_unit: external_declaration
+#line 802 "parser.y"
+                                            { cout << "external_declaration REDUCE to translation_unit" << endl; }
 #line 3619 "parser.cpp"
     break;
 
-  case 215: // function_definition: declarator declaration_list compound_statement
-#line 809 "parser.y"
-                                                                            { yylhs.value.as< FunctionDefinition > () = FunctionDefinition(yystack_[2].value.as < Declarator > (),yystack_[1].value.as < std::vector<Declaration> > (),yystack_[0].value.as < CompoundStatement > ()); cout << "declarator declaration_list compound_statement REDUCE to function_definition" << endl; }
+  case 215: // translation_unit: translation_unit external_declaration
+#line 803 "parser.y"
+                                            { cout << "translation_unit external_declaration REDUCE to translation_unit" << endl; }
 #line 3625 "parser.cpp"
     break;
 
-  case 216: // function_definition: declarator compound_statement
-#line 810 "parser.y"
-                                                                            { yylhs.value.as< FunctionDefinition > () = FunctionDefinition(yystack_[1].value.as < Declarator > (),yystack_[0].value.as < CompoundStatement > ()); cout << "declarator compound_statement REDUCE to function_definition" << endl; }
+  case 216: // external_declaration: function_definition
+#line 807 "parser.y"
+                           { cout << "function_definition REDUCE to external_declaration" << endl; }
 #line 3631 "parser.cpp"
     break;
 
+  case 217: // external_declaration: declaration
+#line 808 "parser.y"
+                           { cout << "declaration REDUCE to external_declaration" << endl; }
+#line 3637 "parser.cpp"
+    break;
 
-#line 3635 "parser.cpp"
+  case 218: // function_definition: declaration_specifiers declarator declaration_list compound_statement
+#line 812 "parser.y"
+                                                                            { yylhs.value.as< FunctionDefinition > () = FunctionDefinition(yystack_[3].value.as < DeclarationSpecifiers > (),yystack_[2].value.as < Declarator > (),yystack_[1].value.as < std::vector<Declaration> > (),yystack_[0].value.as < CompoundStatement > ()); cout << "declaration_specifiers declarator declaration_list compound_statement REDUCE to function_definition" << endl; }
+#line 3643 "parser.cpp"
+    break;
+
+  case 219: // function_definition: declaration_specifiers declarator compound_statement
+#line 813 "parser.y"
+                                                                            { yylhs.value.as< FunctionDefinition > () = FunctionDefinition(yystack_[2].value.as < DeclarationSpecifiers > (),yystack_[1].value.as < Declarator > (),yystack_[0].value.as < CompoundStatement > ()); cout << "declaration_specifiers declarator compound_statement REDUCE to function_definition" << endl; }
+#line 3649 "parser.cpp"
+    break;
+
+  case 220: // function_definition: declarator declaration_list compound_statement
+#line 814 "parser.y"
+                                                                            { yylhs.value.as< FunctionDefinition > () = FunctionDefinition(yystack_[2].value.as < Declarator > (),yystack_[1].value.as < std::vector<Declaration> > (),yystack_[0].value.as < CompoundStatement > ()); cout << "declarator declaration_list compound_statement REDUCE to function_definition" << endl; }
+#line 3655 "parser.cpp"
+    break;
+
+  case 221: // function_definition: declarator compound_statement
+#line 815 "parser.y"
+                                                                            { yylhs.value.as< FunctionDefinition > () = FunctionDefinition(yystack_[1].value.as < Declarator > (),yystack_[0].value.as < CompoundStatement > ()); cout << "declarator compound_statement REDUCE to function_definition" << endl; }
+#line 3661 "parser.cpp"
+    break;
+
+
+#line 3665 "parser.cpp"
 
             default:
               break;
@@ -3983,499 +4013,516 @@ namespace  WadeSpace  {
   }
 
 
-  const short  Parser ::yypact_ninf_ = -226;
+  const short  Parser ::yypact_ninf_ = -230;
 
   const signed char  Parser ::yytable_ninf_ = -1;
 
   const short
    Parser ::yypact_[] =
   {
-     908,  -226,  -226,  -226,  -226,  -226,  -226,    38,  -226,  -226,
-    -226,  -226,  -226,  -226,  -226,  -226,  -226,  -226,  -226,  -226,
-    -226,  -226,    17,    22,  -226,    19,  1589,  1589,  -226,    43,
-    -226,  1589,  1516,   -14,     5,   283,  -226,  -226,    15,    14,
-      26,  -226,  -226,    22,  -226,   -33,  -226,  1325,  -226,  -226,
-      35,  1625,  -226,   343,  -226,    19,  -226,  1516,  1370,   950,
-     -14,  -226,  -226,    14,    40,   166,  -226,  -226,  -226,  -226,
-    -226,    17,  1025,  -226,  1516,  1625,  1625,  1444,  -226,     8,
-    1625,    49,  -226,  -226,  -226,    64,  1159,    79,    85,   783,
-     104,   147,   131,   495,  1182,   139,   171,  -226,  -226,   519,
-    -226,  1200,  1200,  -226,  -226,  -226,  -226,  -226,  -226,  -226,
-      60,   344,  1159,  -226,   132,   -34,   156,    61,   148,   101,
-     117,   150,   144,     3,  -226,  -226,    52,  -226,  -226,  -226,
-     431,   607,  -226,  -226,  -226,  -226,   190,  -226,  -226,  -226,
-    -226,    20,   193,   202,  -226,    72,  -226,  -226,  -226,  -226,
-     206,   184,  1159,  -226,    14,  -226,  1025,  -226,  -226,  -226,
-    1480,  -226,  -226,  -226,  1159,    95,  -226,   213,  -226,   783,
-    -226,   222,  -226,   783,   218,  1043,   227,  1159,  -226,    97,
-     519,  -226,  1159,  1159,    96,    -7,   225,   519,  -226,  -226,
-     669,  1159,   278,  -226,  -226,   279,  -226,  -226,  -226,  -226,
-    -226,  -226,  -226,  -226,  -226,  -226,  -226,  1159,  -226,  1159,
-    1159,  1159,  1159,  1159,  1159,  1159,  1159,  1159,  1159,  1159,
-    1159,  1159,  1159,  1159,  1159,  1159,  1159,  1159,  -226,  1159,
-    -226,   695,  -226,  -226,   867,  1066,  -226,    21,  -226,    63,
-    -226,  1552,   284,  -226,  -226,  -226,  -226,  -226,  -226,   188,
-    -226,  -226,  -226,     8,  1159,  -226,   783,  -226,   234,  1043,
-    -226,   136,  -226,   237,   145,   149,  -226,  1284,   127,  -226,
-    1084,   241,  -226,   159,  -226,    27,  -226,  -226,  -226,  -226,
-    -226,  -226,   132,   132,   -34,   -34,   156,   156,   156,   156,
-      61,    61,   148,   101,   117,   150,   204,   144,  -226,  -226,
-    -226,   242,   243,  -226,   232,    63,  1407,  1141,  -226,  -226,
-    -226,  -226,   927,  -226,  -226,  -226,  1159,   757,   783,   250,
-     783,   783,  1025,  -226,   250,  1159,  -226,  -226,  1159,  -226,
-    -226,  -226,  -226,   246,  -226,   248,  -226,  -226,   160,   783,
-     164,   289,  -226,  -226,   208,  -226,  -226,  -226,  -226,   259,
-    -226,   783,   783,  -226,   968,  -226,  -226,  -226,  -226
+     682,  -230,  -230,  -230,  -230,  -230,  -230,  -230,    15,  -230,
+    -230,  -230,  -230,  -230,  -230,  -230,  -230,  -230,  -230,  -230,
+    -230,  -230,  -230,  -230,  -230,  -230,  -230,    24,    17,  -230,
+      21,  1653,  1653,  -230,    30,  -230,  1653,  1572,     4,    13,
+     306,  -230,  -230,   -41,    14,   -14,  -230,  -230,    17,  -230,
+      71,  -230,  1370,  -230,  -230,     1,  1689,  -230,   366,  -230,
+      21,  -230,  1572,  1415,  1004,     4,  -230,  -230,    14,    -5,
+      31,  -230,  -230,  -230,  -230,  -230,    24,  1022,  -230,  1572,
+    1689,  1689,  1495,  -230,     3,  1689,     9,  -230,  -230,  -230,
+      27,  1155,    50,    20,   904,    54,   122,    76,   518,  1227,
+     106,   126,  -230,  -230,   542,  -230,  1245,  1245,  -230,  -230,
+    -230,  -230,  -230,  -230,  -230,   138,   233,  1155,  -230,   137,
+     101,   176,    70,   167,   109,   114,   128,   161,    69,  -230,
+    -230,    90,  -230,  -230,  -230,   454,   728,  -230,  -230,  -230,
+    -230,   165,  -230,  -230,  -230,  -230,    23,   166,   188,  -230,
+      66,  -230,  -230,  -230,  -230,   187,   205,  1155,  -230,    14,
+    -230,  1022,  -230,  -230,  -230,  1531,  -230,  -230,  -230,  1155,
+      91,  -230,   200,  -230,   904,  -230,   217,  -230,   904,   219,
+    1064,   226,  1155,  -230,    95,   542,  -230,  1155,  1155,   130,
+      34,   224,   542,  -230,  -230,   790,  1155,   282,  -230,  -230,
+     283,  -230,  -230,  -230,  -230,  -230,  -230,  -230,  -230,  -230,
+    -230,  -230,  1155,  -230,  1155,  1155,  1155,  1155,  1155,  1155,
+    1155,  1155,  1155,  1155,  1155,  1155,  1155,  1155,  1155,  1155,
+    1155,  1155,  1155,  -230,  1155,  -230,   816,  -230,  -230,   626,
+    1111,  -230,    40,  -230,   179,  -230,  1612,   284,  -230,  -230,
+    -230,  -230,  -230,  -230,   209,  -230,  -230,  -230,     3,  1155,
+    -230,   904,  -230,   234,  1064,  -230,   145,  -230,   235,   149,
+     155,  -230,  1329,   180,  -230,  1129,   236,  -230,   162,  -230,
+     -32,  -230,  -230,  -230,  -230,  -230,  -230,   137,   137,   101,
+     101,   176,   176,   176,   176,    70,    70,   167,   109,   114,
+     128,   212,   161,  -230,  -230,  -230,   252,   253,  -230,   232,
+     179,  1455,  1137,  -230,  -230,  -230,  -230,   945,  -230,  -230,
+    -230,  1155,  1201,   904,   260,   904,   904,  1022,  -230,   260,
+    1155,  -230,  -230,  1155,  -230,  -230,  -230,  -230,   257,  -230,
+     258,  -230,  -230,   164,   904,   171,   298,  -230,  -230,   215,
+    -230,  -230,  -230,  -230,   270,  -230,   904,   904,  -230,   963,
+    -230,  -230,  -230,  -230
   };
 
   const unsigned char
    Parser ::yydefact_[] =
   {
-       0,   137,   108,    95,    98,   133,   103,     0,    93,   102,
-     100,   101,    96,    99,   104,    94,   112,    92,   113,   105,
-      97,   134,     0,   144,   212,     0,    82,    84,   106,     0,
-     107,    86,     0,   136,     0,     0,   209,   211,   128,     0,
-       0,   148,   146,   145,    80,     0,    88,    90,    83,    85,
-     111,     0,    87,     0,   191,     0,   216,     0,     0,     0,
-     135,     1,   210,     0,   131,     0,   129,   138,   149,   147,
-      81,     0,     0,   214,     0,     0,   118,     0,   114,     0,
-     120,     2,     6,     5,     7,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,     0,     0,     0,   195,   187,     0,
-      30,     0,     0,    31,    26,    29,    28,    27,     8,     3,
-      20,    32,     0,    34,    38,    41,    44,    49,    52,    54,
-      56,    58,    60,    62,    64,    77,     0,   193,   178,   179,
-       0,     0,   180,   181,   182,   183,    90,   192,   215,   157,
-     143,   156,     0,   150,   152,     0,     2,   140,    32,    79,
-       0,     0,     0,   126,     0,    89,     0,   173,    91,   213,
-       0,   117,   110,   115,     0,     0,   121,   123,   119,     0,
-     206,     0,   205,     0,     0,     0,     0,     0,   207,     0,
-       0,    24,     0,     0,     0,   159,     0,     0,    21,    22,
-       0,     0,     0,    14,    15,     0,    66,    73,    72,    70,
-      71,    67,    68,    69,    74,    75,    76,     0,    23,     0,
+       0,   142,   113,    95,    98,   138,   104,   105,     0,    93,
+     103,   100,   101,   102,    96,    99,   109,    94,   117,    92,
+     118,   110,    97,   139,   106,   108,   107,     0,   149,   217,
+       0,    82,    84,   111,     0,   112,    86,     0,   141,     0,
+       0,   214,   216,   133,     0,     0,   153,   151,   150,    80,
+       0,    88,    90,    83,    85,   116,     0,    87,     0,   196,
+       0,   221,     0,     0,     0,   140,     1,   215,     0,   136,
+       0,   134,   143,   154,   152,    81,     0,     0,   219,     0,
+       0,   123,     0,   119,     0,   125,     2,     6,     5,     7,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,     0,     0,     0,     0,   196,     0,
-     189,     0,   188,   194,     0,     0,   154,   161,   155,   162,
-     141,     0,     0,   142,   139,   127,   132,   130,   176,     0,
-     109,   124,   116,     0,     0,   184,     0,   186,     0,     0,
-     204,     0,   208,     0,     0,     0,     4,     0,   161,   160,
-       0,     0,    10,     0,    18,     0,    12,    13,    65,    35,
-      36,    37,    40,    39,    43,    42,    48,    47,    46,    45,
-      50,    51,    53,    55,    57,    59,     0,    61,    78,   190,
-     169,     0,     0,   165,     0,   163,     0,     0,   151,   153,
-     158,   174,     0,   122,   125,   185,     0,     0,     0,    25,
-       0,     0,     0,    33,     0,     0,    11,     9,     0,   170,
-     164,   166,   171,     0,   167,     0,   175,   177,     0,     0,
-       0,   197,   199,   200,     0,    19,    63,   172,   168,     0,
-     202,     0,     0,    16,     0,   201,   203,   198,    17
+       0,     0,   200,   192,     0,    30,     0,     0,    31,    26,
+      29,    28,    27,     8,     3,    20,    32,     0,    34,    38,
+      41,    44,    49,    52,    54,    56,    58,    60,    62,    64,
+      77,     0,   198,   183,   184,     0,     0,   185,   186,   187,
+     188,    90,   197,   220,   162,   148,   161,     0,   155,   157,
+       0,     2,   145,    32,    79,     0,     0,     0,   131,     0,
+      89,     0,   178,    91,   218,     0,   122,   115,   120,     0,
+       0,   126,   128,   124,     0,   211,     0,   210,     0,     0,
+       0,     0,     0,   212,     0,     0,    24,     0,     0,     0,
+     164,     0,     0,    21,    22,     0,     0,     0,    14,    15,
+       0,    66,    73,    72,    70,    71,    67,    68,    69,    74,
+      75,    76,     0,    23,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,   201,     0,   194,     0,   193,   199,     0,
+       0,   159,   166,   160,   167,   146,     0,     0,   147,   144,
+     132,   137,   135,   181,     0,   114,   129,   121,     0,     0,
+     189,     0,   191,     0,     0,   209,     0,   213,     0,     0,
+       0,     4,     0,   166,   165,     0,     0,    10,     0,    18,
+       0,    12,    13,    65,    35,    36,    37,    40,    39,    43,
+      42,    48,    47,    46,    45,    50,    51,    53,    55,    57,
+      59,     0,    61,    78,   195,   174,     0,     0,   170,     0,
+     168,     0,     0,   156,   158,   163,   179,     0,   127,   130,
+     190,     0,     0,     0,    25,     0,     0,     0,    33,     0,
+       0,    11,     9,     0,   175,   169,   171,   176,     0,   172,
+       0,   180,   182,     0,     0,     0,   202,   204,   205,     0,
+      19,    63,   177,   173,     0,   207,     0,     0,    16,     0,
+     206,   208,   203,    17
   };
 
   const short
    Parser ::yypgoto_[] =
   {
-    -226,  -226,  -226,  -226,  -226,   -49,  -226,   -80,    56,    57,
-     -63,    53,    89,    91,    93,   102,    99,  -226,   -58,   -70,
-    -226,    12,   -56,    13,     0,  -226,   260,  -226,   133,  -226,
-    -226,   255,   -68,   -55,  -226,    80,  -226,   269,   180,    46,
-      11,   -30,    -5,  -226,   -53,  -226,    94,  -226,  -120,  -135,
-    -225,   -69,    16,   -74,  -226,   -18,    25,   209,  -168,  -226,
-    -226,  -226,  -226,   301,  -226
+    -230,  -230,  -230,  -230,  -230,   -53,  -230,   -87,    51,    58,
+     -68,    56,    93,    96,    92,    98,    97,  -230,   -57,   -76,
+    -230,   -90,   -54,    10,     0,  -230,   254,  -230,   -33,  -230,
+    -230,   251,   -79,     6,  -230,    78,  -230,   269,   181,    53,
+     -15,   -34,    -9,  -230,   -59,  -230,   103,  -230,  -157,  -124,
+    -229,   -75,    26,   -52,  -230,   141,    16,   208,  -159,  -230,
+    -230,  -230,  -230,   314,  -230
   };
 
   const short
    Parser ::yydefgoto_[] =
   {
-       0,   108,   109,   110,   273,   111,   112,   113,   114,   115,
-     116,   117,   118,   119,   120,   121,   122,   123,   124,   125,
-     207,   126,   150,    54,    55,    45,    46,    26,    27,    28,
-      29,    77,    78,    79,   165,   166,    30,    65,    66,    31,
-      32,    33,    34,    43,   301,   143,   144,   145,   186,   302,
-     239,   248,   249,   127,   128,   129,    57,   131,   132,   133,
-     134,   135,    35,    36,    37
+       0,   113,   114,   115,   278,   116,   117,   118,   119,   120,
+     121,   122,   123,   124,   125,   126,   127,   128,   129,   130,
+     212,   131,   155,    59,    60,    50,    51,    31,    32,    33,
+      34,    82,    83,    84,   170,   171,    35,    70,    71,    36,
+      37,    38,    39,    48,   306,   148,   149,   150,   191,   307,
+     244,   253,   254,   132,   133,   134,    62,   136,   137,   138,
+     139,   140,    40,    41,    42
   };
 
   const short
    Parser ::yytable_[] =
   {
-      25,   149,   157,   158,    60,   142,   238,   259,     1,   163,
-     148,     1,   305,    24,    56,   174,    70,    64,    42,    71,
-       1,   161,     1,     1,     1,   168,    48,    49,   149,    73,
-     171,    52,   208,    40,     5,    25,    47,   148,    69,   138,
-      58,    38,    59,   305,   185,   181,    50,   267,    24,   235,
-     269,   226,   188,   189,   212,   213,   159,   233,   141,    22,
-     263,   164,    22,   148,    21,    63,   136,   271,    44,    41,
-     137,    22,    74,    22,   234,   234,   235,   235,   130,   229,
-     227,    67,   136,    23,   327,    75,   157,   137,    39,    68,
-     167,   317,   163,    51,   149,   255,   246,    80,    23,   257,
-     152,   228,   169,   148,   229,   179,   149,    23,   251,    23,
-      23,   184,    23,   170,   190,   148,   191,   306,   192,   307,
-     274,    80,    80,    80,   242,   185,    80,   243,   172,   279,
-     280,   281,   185,   193,   194,   195,   237,   278,   173,   216,
-     217,   218,   219,   137,   252,    80,   262,   253,   229,   229,
-     176,   266,   236,   286,   287,   288,   289,   233,   175,   298,
-     148,   148,   148,   148,   148,   148,   148,   148,   148,   148,
-     148,   148,   148,   148,   148,   148,   148,   149,   148,   304,
-     268,   267,   315,   235,    76,   177,   148,   222,   229,   261,
-     323,   318,   184,   182,   264,   265,   149,   229,   314,   184,
-     320,   229,   223,   275,   321,   148,    80,    60,    76,    76,
-      76,   325,   229,    76,   326,   349,   229,   153,   154,   351,
-     225,   148,   209,   210,   211,   183,    80,   214,   215,   237,
-     220,   221,    76,    80,   141,   245,   154,   224,   296,   311,
-     312,   141,   157,   337,   341,    40,   342,   343,   240,   149,
-      72,   335,   157,   333,   241,   345,   229,   328,   148,   353,
-     354,   258,   268,   244,   167,   350,   254,   141,   282,   283,
-     346,   284,   285,   290,   291,   256,   260,   356,   357,   148,
-     270,   276,   277,    61,   157,   337,     1,   310,   316,   331,
-       2,     3,   319,    76,     4,     5,   324,   329,   330,     6,
-     322,   347,     7,     8,     9,   348,   141,   352,   355,    10,
-      11,   292,    12,    76,   293,    13,    14,   294,    15,    16,
-      76,    17,    18,    19,    20,    21,   297,   295,   338,   340,
-     160,   155,   151,   313,   247,   309,    62,    22,   344,   231,
-       0,     0,     0,     0,     0,     0,    81,    82,    83,    84,
-       2,     3,    85,    86,     4,     5,    87,    88,    89,     6,
-       0,     0,     7,     8,     9,    90,    91,    92,     0,    10,
-      11,     0,    12,    23,    93,    13,    14,    94,    15,    16,
-      95,    17,    18,    19,    20,    21,    96,     0,     0,     0,
-       0,     0,    97,    53,    98,     0,     0,    99,     0,     0,
-       0,     0,   100,     0,   196,   197,   198,   199,   200,   201,
-     202,   203,   204,   205,   206,     0,   101,   102,     0,     0,
-       0,     0,     0,     0,     0,     0,     0,   103,     0,   104,
-       0,   105,   106,   107,    81,    82,    83,    84,     2,     3,
-      85,    86,     4,     5,    87,    88,    89,     6,     0,     0,
-       7,     8,     9,    90,    91,    92,     0,    10,    11,     0,
-      12,     0,    93,    13,    14,    94,    15,    16,    95,    17,
-      18,    19,    20,    21,    96,     0,     0,     0,     0,     0,
-      97,    53,   230,     0,     0,    99,     0,     0,     0,     0,
-     100,     0,     0,     0,     0,     0,     0,     0,   146,    82,
-      83,    84,     0,     0,   101,   102,     0,     0,     0,     0,
-       0,     0,     0,     0,     0,   103,     0,   104,     0,   105,
-     106,   107,   146,    82,    83,    84,     2,     0,     0,    94,
-       4,     5,     0,     0,     0,     6,     0,     0,     7,     0,
-       9,     0,     0,     0,   178,    10,    11,     0,     0,    99,
-       0,    13,    14,    94,   100,    16,     0,     0,    18,    19,
-      20,    21,     0,     0,     0,     0,     0,     0,   101,   102,
-       0,     0,     0,    99,     0,     0,     0,     0,   100,   103,
-       0,   104,     0,   105,   106,   107,     0,     0,     0,     0,
-       0,     0,   101,   102,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,   103,     0,   104,     0,   105,   106,   107,
-      81,    82,    83,    84,     0,     0,    85,    86,     0,     0,
-      87,    88,    89,     0,     0,     0,     0,     0,     0,    90,
-      91,    92,     0,     0,     0,     0,     0,     0,    93,     0,
-       0,    94,     0,     0,    95,     0,     0,     0,     0,     0,
-      96,     0,     0,     0,     0,     0,    97,    53,   232,     0,
-       0,    99,     0,     0,     0,     0,   100,     0,     0,     0,
-       0,     0,   146,    82,    83,    84,     0,     0,     0,     0,
-     101,   102,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,   103,     0,   104,     0,   105,   106,   107,    81,    82,
-      83,    84,     0,    94,    85,    86,     0,     0,    87,    88,
-      89,     0,     0,     0,     0,     0,     0,    90,    91,    92,
-       0,     0,     0,    99,   272,     0,    93,     0,   100,    94,
-       0,     0,    95,     0,     0,     0,     0,     0,    96,     0,
-       0,     0,   101,   102,    97,    53,   299,     0,     0,    99,
-       0,     0,     0,   103,   100,   104,     0,   105,   106,   107,
-     146,    82,    83,    84,     0,     0,     0,     0,   101,   102,
-       0,     0,     0,     0,     0,     0,     0,     0,     0,   103,
-       0,   104,     0,   105,   106,   107,    81,    82,    83,    84,
-       0,    94,    85,    86,     0,     0,    87,    88,    89,     0,
-       0,     0,     0,     0,     0,    90,    91,    92,     0,     0,
-       0,    99,   339,     0,    93,     0,   100,    94,     0,     0,
-      95,     0,     0,     0,     0,     0,    96,     0,     0,     0,
-     101,   102,    97,    53,     0,     0,     0,    99,     0,     0,
-       0,   103,   100,   104,     0,   105,   106,   107,     0,     0,
-       0,     0,     0,     0,     0,     0,   101,   102,     0,     0,
-       0,     0,     0,     0,     0,     0,     0,   103,     0,   104,
-       1,   105,   106,   107,     2,     3,     0,     0,     4,     5,
-       0,     0,     0,     6,     0,     0,     7,     8,     9,     0,
-       0,     0,     0,    10,    11,     0,    12,     0,     0,    13,
-      14,     0,    15,    16,     0,    17,    18,    19,    20,    21,
-       0,     1,     0,     0,     0,     2,     3,     0,     0,     4,
-       5,   234,   300,   235,     6,     0,     0,     7,     8,     9,
-     146,    82,    83,    84,    10,    11,     0,    12,     0,     0,
-      13,    14,     0,    15,    16,     0,    17,    18,    19,    20,
-      21,     0,     0,   146,    82,    83,    84,    23,     0,     0,
-       0,    94,    22,     0,     0,     0,     0,     0,     0,     0,
-       0,   146,    82,    83,    84,     0,     0,   156,   336,     0,
-       0,    99,     0,     0,    94,     0,   100,     0,     0,     0,
-       0,     0,     0,     0,     0,     0,     0,     0,    23,     0,
-     101,   102,    94,     0,    99,     0,     0,   147,     0,   100,
-       0,   103,     0,   104,     0,   105,   106,   107,   156,   358,
-       0,     0,    99,   101,   102,     0,     0,   100,   146,    82,
-      83,    84,     0,     0,   103,     0,   104,     0,   105,   106,
-     107,   101,   102,     0,     0,     0,   146,    82,    83,    84,
-       0,     0,   103,     0,   104,     0,   105,   106,   107,    94,
-       0,     0,     0,     0,     0,     0,     0,     0,     0,   146,
-      82,    83,    84,     0,     0,   156,     0,    94,     0,    99,
-       0,     0,     0,     0,   100,     0,     0,   146,    82,    83,
-      84,     0,    97,     0,     0,     0,     0,    99,   101,   102,
-      94,     0,   100,     0,     0,     0,     0,     0,     0,   103,
-       0,   104,     0,   105,   106,   107,   101,   102,    94,     0,
-      99,     0,     0,   303,     0,   100,     0,   103,     0,   104,
-       0,   105,   106,   107,   322,     0,     0,     0,    99,   101,
-     102,     0,     0,   100,   146,    82,    83,    84,     0,     0,
-     103,     0,   104,     0,   105,   106,   107,   101,   102,     0,
-       0,     0,   146,    82,    83,    84,     0,     0,   103,     0,
-     104,     0,   105,   106,   107,    94,     0,     0,     0,     0,
-       0,     0,     0,     0,     0,   146,    82,    83,    84,     0,
-       0,     0,     0,    94,     0,    99,     0,     0,   334,     0,
-     100,     0,     0,   146,    82,    83,    84,     0,     0,     0,
-       0,     0,     0,    99,   101,   102,    94,     0,   100,     0,
-       0,     0,     0,     0,     0,   103,     0,   104,     0,   105,
-     106,   107,   101,   102,    94,     0,   180,     0,     0,     0,
-       0,   100,     0,   103,     0,   104,     0,   105,   106,   107,
-       0,     0,     0,     0,   187,   101,   102,     0,     0,   100,
-       0,     0,     0,     0,     0,     0,   103,     0,   104,     0,
-     105,   106,   107,   101,   102,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,   103,     0,   104,     0,   105,   106,
-     107,     2,     3,     0,     0,     4,     5,     0,     0,     0,
-       6,     0,     0,     7,     8,     9,     0,     0,     0,     0,
-      10,    11,     0,    12,     0,     0,    13,    14,     0,    15,
-      16,     0,    17,    18,    19,    20,    21,     0,     0,     0,
-       0,     0,     2,     3,     0,     0,     4,     5,   267,   300,
-     235,     6,     0,     0,     7,     8,     9,     0,     0,     0,
-       0,    10,    11,     0,    12,     0,     0,    13,    14,     0,
-      15,    16,     0,    17,    18,    19,    20,    21,     0,     0,
-       0,     0,     0,   139,    23,    53,     0,     2,     3,     0,
-       0,     4,     5,     0,     0,    72,     6,     0,     0,     7,
-       8,     9,     0,     0,     0,     0,    10,    11,     0,    12,
-       0,     0,    13,    14,     0,    15,    16,     0,    17,    18,
-      19,    20,    21,     0,     2,     3,     0,     0,     4,     5,
-       0,     0,     0,     6,     0,   140,     7,     8,     9,     0,
-       0,     0,     0,    10,    11,     0,    12,     0,     0,    13,
-      14,     0,    15,    16,     0,    17,    18,    19,    20,    21,
-       0,     2,     0,     0,     0,     4,     5,     0,     0,     0,
-       6,     0,   332,     7,     0,     9,     0,     0,     0,     0,
-      10,    11,     0,     0,     0,     0,    13,    14,     0,     0,
-      16,     0,     0,    18,    19,    20,    21,     2,     0,     0,
-       0,     4,     5,     0,     0,   162,     6,     0,     0,     7,
-       0,     9,     0,     0,     0,     0,    10,    11,     0,     0,
-       0,     0,    13,    14,     0,     0,    16,     0,     0,    18,
-      19,    20,    21,     2,     3,     0,     0,     4,     5,     0,
-       0,   250,     6,     0,     0,     7,     8,     9,     0,     0,
-       0,     0,    10,    11,     0,    12,     0,     0,    13,    14,
-       0,    15,    16,     0,    17,    18,    19,    20,    21,     2,
-       3,     0,     0,     4,     5,     0,    53,     0,     6,     0,
-       0,     7,     8,     9,     0,     0,     0,     0,    10,    11,
-       0,    12,     0,     0,    13,    14,     0,    15,    16,     0,
-      17,    18,    19,    20,    21,     0,     2,     3,     0,   308,
-       4,     5,     0,     0,     0,     6,     0,     0,     7,     8,
-       9,     0,     0,     0,     0,    10,    11,     0,    12,     0,
-       0,    13,    14,     0,    15,    16,     0,    17,    18,    19,
-      20,    21,     2,     0,     0,     0,     4,     5,     0,     0,
-       0,     6,     0,     0,     7,     0,     9,     0,     0,     0,
-       0,    10,    11,     0,     0,     0,     0,    13,    14,     0,
-       0,    16,     0,     0,    18,    19,    20,    21
+      30,   162,   163,   168,   147,    65,     1,   154,   184,    68,
+      29,   153,    45,   310,   189,    52,     1,    69,    43,    47,
+     234,   264,   243,    81,     1,   332,     1,     1,   268,     5,
+     213,    53,    54,    55,   154,   276,    57,   176,   153,    74,
+      30,    72,   179,     1,   310,   141,   186,    81,    81,    81,
+      29,    80,    81,   193,   194,   157,   169,    27,    63,    23,
+      64,   141,   174,   146,   153,    44,   274,    27,    79,   172,
+      49,    81,   142,   178,   135,    27,   175,   239,    27,   240,
+      56,    46,   158,   159,   238,   162,   168,   166,   272,   142,
+     240,   173,   266,    28,   239,   189,   240,   269,   270,   177,
+     154,    73,   189,   251,   153,   322,   280,    28,   180,    85,
+     190,    28,   154,    28,    28,   256,   153,   231,   247,   279,
+      75,   248,   260,    76,    28,   181,   262,   284,   285,   286,
+     182,   241,    81,    85,    85,    85,   283,   242,    85,   233,
+     257,   301,   234,   258,   267,   142,   232,   234,   221,   222,
+     223,   224,    81,   291,   292,   293,   294,    85,   303,    81,
+     187,   153,   153,   153,   153,   153,   153,   153,   153,   153,
+     153,   153,   153,   153,   153,   153,   153,   153,    61,   153,
+     188,   273,   234,   154,   238,   271,   309,   153,   328,   217,
+     218,   190,   195,    78,   196,   227,   197,   234,   190,   228,
+     323,   234,   154,   143,   325,   319,   153,   234,    65,   320,
+     326,   198,   199,   200,   330,   229,   234,   331,    85,   354,
+     164,   245,   153,   234,    45,    77,   356,   214,   215,   216,
+     242,   343,   345,   311,   272,   312,   240,   230,    85,   146,
+     246,   162,   342,   172,   249,    85,   146,   219,   220,   225,
+     226,   162,   338,   259,   350,   154,   250,   159,   340,   153,
+     316,   317,   263,   273,   234,   333,   358,   359,   287,   288,
+     261,   346,   146,   347,   348,   265,   351,   289,   290,   275,
+     153,   295,   296,   162,   342,   281,   282,   315,   321,   336,
+     324,   329,   355,   201,   202,   203,   204,   205,   206,   207,
+     208,   209,   210,   211,   361,   362,    66,   334,   335,     1,
+     327,   146,   352,     2,     3,   353,   357,     4,     5,   360,
+     297,   299,     6,     7,   298,     8,     9,    10,   300,   302,
+     160,   165,    11,    12,    13,    14,   318,   156,    15,    16,
+     252,    17,    18,   236,    19,    20,    21,    22,    23,   314,
+      24,    25,    26,   349,    67,     0,     0,     0,     0,     0,
+      27,     0,     0,     0,     0,     0,     0,     0,     0,    86,
+      87,    88,    89,     2,     3,    90,    91,     4,     5,    92,
+      93,    94,     6,     7,     0,     8,     9,    10,    95,    96,
+      97,     0,    11,    12,    13,    14,    28,    98,    15,    16,
+      99,    17,    18,   100,    19,    20,    21,    22,    23,   101,
+      24,    25,    26,     0,     0,   102,    58,   103,     0,     0,
+     104,     0,     0,     0,     0,   105,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,   106,
+     107,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+     108,     0,   109,     0,   110,   111,   112,    86,    87,    88,
+      89,     2,     3,    90,    91,     4,     5,    92,    93,    94,
+       6,     7,     0,     8,     9,    10,    95,    96,    97,     0,
+      11,    12,    13,    14,     0,    98,    15,    16,    99,    17,
+      18,   100,    19,    20,    21,    22,    23,   101,    24,    25,
+      26,     0,     0,   102,    58,   235,     0,     0,   104,     0,
+       0,     0,     0,   105,     0,     0,     0,     0,     0,     0,
+       0,   151,    87,    88,    89,     0,     0,   106,   107,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,   108,     0,
+     109,     0,   110,   111,   112,   151,    87,    88,    89,     2,
+       0,     0,    99,     4,     5,     0,     0,     0,     6,     7,
+       0,     8,     0,    10,     0,     0,     0,   183,    11,    12,
+      13,     0,   104,     0,    15,    16,    99,   105,    18,     0,
+       0,    20,    21,    22,    23,     0,    24,    25,    26,     0,
+       0,   106,   107,     0,     0,     0,   104,     0,     0,     0,
+       0,   105,   108,     0,   109,     0,   110,   111,   112,     0,
+       0,     0,     0,     0,     0,   106,   107,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,   108,     0,   109,     1,
+     110,   111,   112,     2,     3,     0,     0,     4,     5,     0,
+       0,     0,     6,     7,     0,     8,     9,    10,     0,     0,
+       0,     0,    11,    12,    13,    14,     0,     0,    15,    16,
+       0,    17,    18,     0,    19,    20,    21,    22,    23,     0,
+      24,    25,    26,     0,     0,     0,     0,     0,     0,     0,
+     239,   305,   240,     0,     0,     1,     0,     0,     0,     2,
+       3,     0,     0,     4,     5,     0,     0,     0,     6,     7,
+       0,     8,     9,    10,     0,     0,     0,     0,    11,    12,
+      13,    14,     0,     0,    15,    16,    28,    17,    18,     0,
+      19,    20,    21,    22,    23,     0,    24,    25,    26,     0,
+       0,    86,    87,    88,    89,     0,    27,    90,    91,     0,
+       0,    92,    93,    94,     0,     0,     0,     0,     0,     0,
+      95,    96,    97,     0,     0,     0,     0,     0,     0,    98,
+       0,     0,    99,     0,     0,   100,     0,     0,     0,     0,
+       0,   101,    28,     0,     0,     0,     0,   102,    58,   237,
+       0,     0,   104,     0,     0,     0,     0,   105,     0,     0,
+       0,     0,     0,   151,    87,    88,    89,     0,     0,     0,
+       0,   106,   107,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,   108,     0,   109,     0,   110,   111,   112,    86,
+      87,    88,    89,     0,    99,    90,    91,     0,     0,    92,
+      93,    94,     0,     0,     0,     0,     0,     0,    95,    96,
+      97,     0,     0,     0,   104,   277,     0,    98,     0,   105,
+      99,     0,     0,   100,     0,     0,     0,     0,     0,   101,
+       0,     0,     0,   106,   107,   102,    58,   304,     0,     0,
+     104,     0,     0,     0,   108,   105,   109,     0,   110,   111,
+     112,     0,     0,     0,     0,     0,     0,     0,     0,   106,
+     107,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+     108,     0,   109,     0,   110,   111,   112,    86,    87,    88,
+      89,     0,     0,    90,    91,     0,     0,    92,    93,    94,
+       0,     0,     0,     0,     0,     0,    95,    96,    97,     0,
+       0,     0,     0,     0,     0,    98,     0,     0,    99,     0,
+       0,   100,     0,     0,     0,     0,     0,   101,   151,    87,
+      88,    89,     0,   102,    58,     0,     0,     0,   104,     0,
+       0,     0,     0,   105,     0,     0,   151,    87,    88,    89,
+       0,     0,     0,     0,     0,     0,     0,   106,   107,    99,
+       0,     0,     0,     0,     0,     0,     0,     0,   108,     0,
+     109,     0,   110,   111,   112,   161,   341,    99,     0,   104,
+       0,     0,     0,     0,   105,     0,     0,   151,    87,    88,
+      89,     0,     0,   161,   363,     0,     0,   104,   106,   107,
+       0,     0,   105,     0,     0,   151,    87,    88,    89,   108,
+       0,   109,     0,   110,   111,   112,   106,   107,    99,     0,
+       0,     0,     0,     0,     0,     0,     0,   108,     0,   109,
+       0,   110,   111,   112,     0,     0,    99,     0,   104,     0,
+       0,   152,     0,   105,     0,     0,     0,   151,    87,    88,
+      89,     0,   161,     0,     0,     0,   104,   106,   107,     0,
+       0,   105,     0,     0,     0,     0,     0,     0,   108,     0,
+     109,     0,   110,   111,   112,   106,   107,     0,    99,     0,
+       0,     0,     0,     0,     0,     0,   108,     0,   109,     0,
+     110,   111,   112,   102,   151,    87,    88,    89,   104,     0,
+       0,     0,     0,   105,     0,     0,     0,     0,     0,     0,
+       0,     0,   151,    87,    88,    89,     0,   106,   107,     0,
+     151,    87,    88,    89,     0,    99,     0,     0,   108,     0,
+     109,     0,   110,   111,   112,     0,     0,     0,   151,    87,
+      88,    89,     0,    99,     0,   104,     0,     0,   308,     0,
+     105,    99,     0,     0,     0,     0,     0,     0,     0,   327,
+       0,     0,     0,   104,   106,   107,     0,     0,   105,    99,
+       0,   104,     0,     0,   339,   108,   105,   109,     0,   110,
+     111,   112,   106,   107,   151,    87,    88,    89,     0,   104,
+     106,   107,     0,   108,   105,   109,     0,   110,   111,   112,
+       0,   108,     0,   109,     0,   110,   111,   112,   106,   107,
+     151,    87,    88,    89,     0,    99,     0,     0,     0,   108,
+       0,   109,     0,   110,   111,   112,     0,     0,   151,    87,
+      88,    89,     0,     0,     0,   104,   344,     0,     0,     0,
+     105,    99,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,   106,   107,     0,     0,     0,    99,
+       0,   185,     0,     0,     0,   108,   105,   109,     0,   110,
+     111,   112,     0,     0,     0,     0,     0,     0,     0,   192,
+     106,   107,     0,     0,   105,     0,     0,     0,     0,     0,
+       0,   108,     0,   109,     0,   110,   111,   112,   106,   107,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,   108,
+       0,   109,     0,   110,   111,   112,     2,     3,     0,     0,
+       4,     5,     0,     0,     0,     6,     7,     0,     8,     9,
+      10,     0,     0,     0,     0,    11,    12,    13,    14,     0,
+       0,    15,    16,     0,    17,    18,     0,    19,    20,    21,
+      22,    23,     0,    24,    25,    26,     0,     2,     3,     0,
+       0,     4,     5,   272,   305,   240,     6,     7,     0,     8,
+       9,    10,     0,     0,     0,     0,    11,    12,    13,    14,
+       0,     0,    15,    16,     0,    17,    18,     0,    19,    20,
+      21,    22,    23,     0,    24,    25,    26,     0,   144,    28,
+      58,     0,     2,     3,     0,     0,     4,     5,     0,     0,
+      77,     6,     7,     0,     8,     9,    10,     0,     0,     0,
+       0,    11,    12,    13,    14,     0,     0,    15,    16,     0,
+      17,    18,     0,    19,    20,    21,    22,    23,     0,    24,
+      25,    26,     2,     3,     0,     0,     4,     5,     0,     0,
+     145,     6,     7,     0,     8,     9,    10,     0,     0,     0,
+       0,    11,    12,    13,    14,     0,     0,    15,    16,     0,
+      17,    18,     0,    19,    20,    21,    22,    23,     0,    24,
+      25,    26,     2,     0,     0,     0,     4,     5,     0,     0,
+     337,     6,     7,     0,     8,     0,    10,     0,     0,     0,
+       0,    11,    12,    13,     0,     0,     0,    15,    16,     0,
+       0,    18,     0,     0,    20,    21,    22,    23,     2,    24,
+      25,    26,     4,     5,     0,     0,   167,     6,     7,     0,
+       8,     0,    10,     0,     0,     0,     0,    11,    12,    13,
+       0,     0,     0,    15,    16,     0,     0,    18,     0,     0,
+      20,    21,    22,    23,     0,    24,    25,    26,     0,     2,
+       3,     0,   255,     4,     5,     0,     0,     0,     6,     7,
+       0,     8,     9,    10,     0,     0,     0,     0,    11,    12,
+      13,    14,     0,     0,    15,    16,     0,    17,    18,     0,
+      19,    20,    21,    22,    23,     0,    24,    25,    26,     2,
+       3,     0,    58,     4,     5,     0,     0,     0,     6,     7,
+       0,     8,     9,    10,     0,     0,     0,     0,    11,    12,
+      13,    14,     0,     0,    15,    16,     0,    17,    18,     0,
+      19,    20,    21,    22,    23,     0,    24,    25,    26,   313,
+       2,     3,     0,     0,     4,     5,     0,     0,     0,     6,
+       7,     0,     8,     9,    10,     0,     0,     0,     0,    11,
+      12,    13,    14,     0,     0,    15,    16,     0,    17,    18,
+       0,    19,    20,    21,    22,    23,     2,    24,    25,    26,
+       4,     5,     0,     0,     0,     6,     7,     0,     8,     0,
+      10,     0,     0,     0,     0,    11,    12,    13,     0,     0,
+       0,    15,    16,     0,     0,    18,     0,     0,    20,    21,
+      22,    23,     0,    24,    25,    26
   };
 
   const short
    Parser ::yycheck_[] =
   {
-       0,    59,    72,    72,    34,    58,   141,   175,     3,    77,
-      59,     3,   237,     0,    32,    89,    49,     3,    23,    52,
-       3,    76,     3,     3,     3,    80,    26,    27,    86,    47,
-      86,    31,   112,    22,    12,    35,    25,    86,    43,    57,
-      54,     3,    56,   268,    99,    94,     3,    54,    35,    56,
-     185,    48,   101,   102,    88,    89,    74,   131,    58,    54,
-     180,    53,    54,   112,    42,    50,    55,   187,    49,    23,
-      57,    54,    47,    54,    54,    54,    56,    56,    53,    52,
-      77,    55,    71,    90,    57,    50,   156,    74,    50,    43,
-      79,   259,   160,    50,   152,   169,   152,    51,    90,   173,
-      60,    49,    53,   152,    52,    93,   164,    90,   164,    90,
-      90,    99,    90,    49,    54,   164,    56,    54,    58,    56,
-     190,    75,    76,    77,    52,   180,    80,    55,    49,   209,
-     210,   211,   187,    73,    74,    75,   141,   207,    53,    78,
-      79,    80,    81,   130,    49,    99,    49,    52,    52,    52,
-       3,    55,   141,   216,   217,   218,   219,   231,    54,   229,
-     209,   210,   211,   212,   213,   214,   215,   216,   217,   218,
-     219,   220,   221,   222,   223,   224,   225,   235,   227,   235,
-     185,    54,   256,    56,    51,    54,   235,    86,    52,   177,
-     270,    55,   180,    54,   182,   183,   254,    52,   254,   187,
-      55,    52,    85,   191,    55,   254,   160,   237,    75,    76,
-      77,    52,    52,    80,    55,    55,    52,    51,    52,    55,
-      76,   270,    90,    91,    92,    54,   180,    71,    72,   234,
-      82,    83,    99,   187,   234,    51,    52,    87,   226,    51,
-      52,   241,   312,   312,   318,   234,   320,   321,    55,   307,
-      60,   307,   322,   306,    52,   325,    52,    53,   307,    51,
-      52,    43,   267,    57,   253,   339,    53,   267,   212,   213,
-     328,   214,   215,   220,   221,    53,    49,   351,   352,   328,
-      55,     3,     3,     0,   354,   354,     3,     3,    54,    57,
-       7,     8,    55,   160,    11,    12,    55,    55,    55,    16,
-      50,    55,    19,    20,    21,    57,   306,    18,    49,    26,
-      27,   222,    29,   180,   223,    32,    33,   224,    35,    36,
-     187,    38,    39,    40,    41,    42,   227,   225,   316,   317,
-      75,    71,    63,   253,   154,   241,    35,    54,   322,   130,
-      -1,    -1,    -1,    -1,    -1,    -1,     3,     4,     5,     6,
-       7,     8,     9,    10,    11,    12,    13,    14,    15,    16,
-      -1,    -1,    19,    20,    21,    22,    23,    24,    -1,    26,
-      27,    -1,    29,    90,    31,    32,    33,    34,    35,    36,
-      37,    38,    39,    40,    41,    42,    43,    -1,    -1,    -1,
-      -1,    -1,    49,    50,    51,    -1,    -1,    54,    -1,    -1,
-      -1,    -1,    59,    -1,    60,    61,    62,    63,    64,    65,
-      66,    67,    68,    69,    70,    -1,    73,    74,    -1,    -1,
-      -1,    -1,    -1,    -1,    -1,    -1,    -1,    84,    -1,    86,
-      -1,    88,    89,    90,     3,     4,     5,     6,     7,     8,
-       9,    10,    11,    12,    13,    14,    15,    16,    -1,    -1,
-      19,    20,    21,    22,    23,    24,    -1,    26,    27,    -1,
-      29,    -1,    31,    32,    33,    34,    35,    36,    37,    38,
-      39,    40,    41,    42,    43,    -1,    -1,    -1,    -1,    -1,
-      49,    50,    51,    -1,    -1,    54,    -1,    -1,    -1,    -1,
-      59,    -1,    -1,    -1,    -1,    -1,    -1,    -1,     3,     4,
-       5,     6,    -1,    -1,    73,    74,    -1,    -1,    -1,    -1,
-      -1,    -1,    -1,    -1,    -1,    84,    -1,    86,    -1,    88,
-      89,    90,     3,     4,     5,     6,     7,    -1,    -1,    34,
-      11,    12,    -1,    -1,    -1,    16,    -1,    -1,    19,    -1,
-      21,    -1,    -1,    -1,    49,    26,    27,    -1,    -1,    54,
-      -1,    32,    33,    34,    59,    36,    -1,    -1,    39,    40,
-      41,    42,    -1,    -1,    -1,    -1,    -1,    -1,    73,    74,
-      -1,    -1,    -1,    54,    -1,    -1,    -1,    -1,    59,    84,
-      -1,    86,    -1,    88,    89,    90,    -1,    -1,    -1,    -1,
-      -1,    -1,    73,    74,    -1,    -1,    -1,    -1,    -1,    -1,
-      -1,    -1,    -1,    84,    -1,    86,    -1,    88,    89,    90,
-       3,     4,     5,     6,    -1,    -1,     9,    10,    -1,    -1,
-      13,    14,    15,    -1,    -1,    -1,    -1,    -1,    -1,    22,
-      23,    24,    -1,    -1,    -1,    -1,    -1,    -1,    31,    -1,
-      -1,    34,    -1,    -1,    37,    -1,    -1,    -1,    -1,    -1,
-      43,    -1,    -1,    -1,    -1,    -1,    49,    50,    51,    -1,
-      -1,    54,    -1,    -1,    -1,    -1,    59,    -1,    -1,    -1,
-      -1,    -1,     3,     4,     5,     6,    -1,    -1,    -1,    -1,
-      73,    74,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
-      -1,    84,    -1,    86,    -1,    88,    89,    90,     3,     4,
-       5,     6,    -1,    34,     9,    10,    -1,    -1,    13,    14,
-      15,    -1,    -1,    -1,    -1,    -1,    -1,    22,    23,    24,
-      -1,    -1,    -1,    54,    55,    -1,    31,    -1,    59,    34,
-      -1,    -1,    37,    -1,    -1,    -1,    -1,    -1,    43,    -1,
-      -1,    -1,    73,    74,    49,    50,    51,    -1,    -1,    54,
-      -1,    -1,    -1,    84,    59,    86,    -1,    88,    89,    90,
-       3,     4,     5,     6,    -1,    -1,    -1,    -1,    73,    74,
-      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    84,
-      -1,    86,    -1,    88,    89,    90,     3,     4,     5,     6,
-      -1,    34,     9,    10,    -1,    -1,    13,    14,    15,    -1,
-      -1,    -1,    -1,    -1,    -1,    22,    23,    24,    -1,    -1,
-      -1,    54,    55,    -1,    31,    -1,    59,    34,    -1,    -1,
-      37,    -1,    -1,    -1,    -1,    -1,    43,    -1,    -1,    -1,
-      73,    74,    49,    50,    -1,    -1,    -1,    54,    -1,    -1,
-      -1,    84,    59,    86,    -1,    88,    89,    90,    -1,    -1,
-      -1,    -1,    -1,    -1,    -1,    -1,    73,    74,    -1,    -1,
-      -1,    -1,    -1,    -1,    -1,    -1,    -1,    84,    -1,    86,
-       3,    88,    89,    90,     7,     8,    -1,    -1,    11,    12,
-      -1,    -1,    -1,    16,    -1,    -1,    19,    20,    21,    -1,
-      -1,    -1,    -1,    26,    27,    -1,    29,    -1,    -1,    32,
-      33,    -1,    35,    36,    -1,    38,    39,    40,    41,    42,
-      -1,     3,    -1,    -1,    -1,     7,     8,    -1,    -1,    11,
-      12,    54,    55,    56,    16,    -1,    -1,    19,    20,    21,
-       3,     4,     5,     6,    26,    27,    -1,    29,    -1,    -1,
-      32,    33,    -1,    35,    36,    -1,    38,    39,    40,    41,
-      42,    -1,    -1,     3,     4,     5,     6,    90,    -1,    -1,
-      -1,    34,    54,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
-      -1,     3,     4,     5,     6,    -1,    -1,    50,    51,    -1,
-      -1,    54,    -1,    -1,    34,    -1,    59,    -1,    -1,    -1,
-      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    90,    -1,
-      73,    74,    34,    -1,    54,    -1,    -1,    57,    -1,    59,
-      -1,    84,    -1,    86,    -1,    88,    89,    90,    50,    51,
-      -1,    -1,    54,    73,    74,    -1,    -1,    59,     3,     4,
-       5,     6,    -1,    -1,    84,    -1,    86,    -1,    88,    89,
-      90,    73,    74,    -1,    -1,    -1,     3,     4,     5,     6,
-      -1,    -1,    84,    -1,    86,    -1,    88,    89,    90,    34,
-      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,     3,
-       4,     5,     6,    -1,    -1,    50,    -1,    34,    -1,    54,
-      -1,    -1,    -1,    -1,    59,    -1,    -1,     3,     4,     5,
-       6,    -1,    49,    -1,    -1,    -1,    -1,    54,    73,    74,
-      34,    -1,    59,    -1,    -1,    -1,    -1,    -1,    -1,    84,
-      -1,    86,    -1,    88,    89,    90,    73,    74,    34,    -1,
-      54,    -1,    -1,    57,    -1,    59,    -1,    84,    -1,    86,
-      -1,    88,    89,    90,    50,    -1,    -1,    -1,    54,    73,
-      74,    -1,    -1,    59,     3,     4,     5,     6,    -1,    -1,
-      84,    -1,    86,    -1,    88,    89,    90,    73,    74,    -1,
-      -1,    -1,     3,     4,     5,     6,    -1,    -1,    84,    -1,
-      86,    -1,    88,    89,    90,    34,    -1,    -1,    -1,    -1,
-      -1,    -1,    -1,    -1,    -1,     3,     4,     5,     6,    -1,
-      -1,    -1,    -1,    34,    -1,    54,    -1,    -1,    57,    -1,
-      59,    -1,    -1,     3,     4,     5,     6,    -1,    -1,    -1,
-      -1,    -1,    -1,    54,    73,    74,    34,    -1,    59,    -1,
-      -1,    -1,    -1,    -1,    -1,    84,    -1,    86,    -1,    88,
-      89,    90,    73,    74,    34,    -1,    54,    -1,    -1,    -1,
-      -1,    59,    -1,    84,    -1,    86,    -1,    88,    89,    90,
-      -1,    -1,    -1,    -1,    54,    73,    74,    -1,    -1,    59,
-      -1,    -1,    -1,    -1,    -1,    -1,    84,    -1,    86,    -1,
-      88,    89,    90,    73,    74,    -1,    -1,    -1,    -1,    -1,
-      -1,    -1,    -1,    -1,    84,    -1,    86,    -1,    88,    89,
-      90,     7,     8,    -1,    -1,    11,    12,    -1,    -1,    -1,
-      16,    -1,    -1,    19,    20,    21,    -1,    -1,    -1,    -1,
-      26,    27,    -1,    29,    -1,    -1,    32,    33,    -1,    35,
-      36,    -1,    38,    39,    40,    41,    42,    -1,    -1,    -1,
-      -1,    -1,     7,     8,    -1,    -1,    11,    12,    54,    55,
-      56,    16,    -1,    -1,    19,    20,    21,    -1,    -1,    -1,
-      -1,    26,    27,    -1,    29,    -1,    -1,    32,    33,    -1,
-      35,    36,    -1,    38,    39,    40,    41,    42,    -1,    -1,
-      -1,    -1,    -1,     3,    90,    50,    -1,     7,     8,    -1,
-      -1,    11,    12,    -1,    -1,    60,    16,    -1,    -1,    19,
-      20,    21,    -1,    -1,    -1,    -1,    26,    27,    -1,    29,
-      -1,    -1,    32,    33,    -1,    35,    36,    -1,    38,    39,
-      40,    41,    42,    -1,     7,     8,    -1,    -1,    11,    12,
-      -1,    -1,    -1,    16,    -1,    55,    19,    20,    21,    -1,
-      -1,    -1,    -1,    26,    27,    -1,    29,    -1,    -1,    32,
-      33,    -1,    35,    36,    -1,    38,    39,    40,    41,    42,
-      -1,     7,    -1,    -1,    -1,    11,    12,    -1,    -1,    -1,
-      16,    -1,    55,    19,    -1,    21,    -1,    -1,    -1,    -1,
-      26,    27,    -1,    -1,    -1,    -1,    32,    33,    -1,    -1,
-      36,    -1,    -1,    39,    40,    41,    42,     7,    -1,    -1,
-      -1,    11,    12,    -1,    -1,    51,    16,    -1,    -1,    19,
-      -1,    21,    -1,    -1,    -1,    -1,    26,    27,    -1,    -1,
-      -1,    -1,    32,    33,    -1,    -1,    36,    -1,    -1,    39,
-      40,    41,    42,     7,     8,    -1,    -1,    11,    12,    -1,
-      -1,    51,    16,    -1,    -1,    19,    20,    21,    -1,    -1,
-      -1,    -1,    26,    27,    -1,    29,    -1,    -1,    32,    33,
-      -1,    35,    36,    -1,    38,    39,    40,    41,    42,     7,
-       8,    -1,    -1,    11,    12,    -1,    50,    -1,    16,    -1,
+       0,    77,    77,    82,    63,    39,     3,    64,    98,    50,
+       0,    64,    27,   242,   104,    30,     3,     3,     3,    28,
+      52,   180,   146,    56,     3,    57,     3,     3,   185,    12,
+     117,    31,    32,     3,    91,   192,    36,    91,    91,    48,
+      40,    55,    94,     3,   273,    60,    99,    80,    81,    82,
+      40,    50,    85,   106,   107,    60,    53,    54,    54,    42,
+      56,    76,    53,    63,   117,    50,   190,    54,    52,    84,
+      49,   104,    62,    53,    58,    54,    49,    54,    54,    56,
+      50,    28,    51,    52,   136,   161,   165,    81,    54,    79,
+      56,    85,   182,    90,    54,   185,    56,   187,   188,    49,
+     157,    48,   192,   157,   157,   264,   196,    90,    54,    56,
+     104,    90,   169,    90,    90,   169,   169,    48,    52,   195,
+      49,    55,   174,    52,    90,     3,   178,   214,   215,   216,
+      54,   146,   165,    80,    81,    82,   212,   146,    85,    49,
+      49,   231,    52,    52,    49,   135,    77,    52,    78,    79,
+      80,    81,   185,   221,   222,   223,   224,   104,   234,   192,
+      54,   214,   215,   216,   217,   218,   219,   220,   221,   222,
+     223,   224,   225,   226,   227,   228,   229,   230,    37,   232,
+      54,   190,    52,   240,   236,    55,   240,   240,   275,    88,
+      89,   185,    54,    52,    56,    86,    58,    52,   192,    85,
+      55,    52,   259,    62,    55,   259,   259,    52,   242,   261,
+      55,    73,    74,    75,    52,    87,    52,    55,   165,    55,
+      79,    55,   275,    52,   239,    60,    55,    90,    91,    92,
+     239,   321,   322,    54,    54,    56,    56,    76,   185,   239,
+      52,   317,   317,   258,    57,   192,   246,    71,    72,    82,
+      83,   327,   311,    53,   330,   312,    51,    52,   312,   312,
+      51,    52,    43,   272,    52,    53,    51,    52,   217,   218,
+      53,   323,   272,   325,   326,    49,   333,   219,   220,    55,
+     333,   225,   226,   359,   359,     3,     3,     3,    54,    57,
+      55,    55,   344,    60,    61,    62,    63,    64,    65,    66,
+      67,    68,    69,    70,   356,   357,     0,    55,    55,     3,
+      50,   311,    55,     7,     8,    57,    18,    11,    12,    49,
+     227,   229,    16,    17,   228,    19,    20,    21,   230,   232,
+      76,    80,    26,    27,    28,    29,   258,    68,    32,    33,
+     159,    35,    36,   135,    38,    39,    40,    41,    42,   246,
+      44,    45,    46,   327,    40,    -1,    -1,    -1,    -1,    -1,
+      54,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,     3,
+       4,     5,     6,     7,     8,     9,    10,    11,    12,    13,
+      14,    15,    16,    17,    -1,    19,    20,    21,    22,    23,
+      24,    -1,    26,    27,    28,    29,    90,    31,    32,    33,
+      34,    35,    36,    37,    38,    39,    40,    41,    42,    43,
+      44,    45,    46,    -1,    -1,    49,    50,    51,    -1,    -1,
+      54,    -1,    -1,    -1,    -1,    59,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    73,
+      74,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      84,    -1,    86,    -1,    88,    89,    90,     3,     4,     5,
+       6,     7,     8,     9,    10,    11,    12,    13,    14,    15,
+      16,    17,    -1,    19,    20,    21,    22,    23,    24,    -1,
+      26,    27,    28,    29,    -1,    31,    32,    33,    34,    35,
+      36,    37,    38,    39,    40,    41,    42,    43,    44,    45,
+      46,    -1,    -1,    49,    50,    51,    -1,    -1,    54,    -1,
+      -1,    -1,    -1,    59,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,     3,     4,     5,     6,    -1,    -1,    73,    74,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    84,    -1,
+      86,    -1,    88,    89,    90,     3,     4,     5,     6,     7,
+      -1,    -1,    34,    11,    12,    -1,    -1,    -1,    16,    17,
+      -1,    19,    -1,    21,    -1,    -1,    -1,    49,    26,    27,
+      28,    -1,    54,    -1,    32,    33,    34,    59,    36,    -1,
+      -1,    39,    40,    41,    42,    -1,    44,    45,    46,    -1,
+      -1,    73,    74,    -1,    -1,    -1,    54,    -1,    -1,    -1,
+      -1,    59,    84,    -1,    86,    -1,    88,    89,    90,    -1,
+      -1,    -1,    -1,    -1,    -1,    73,    74,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    84,    -1,    86,     3,
+      88,    89,    90,     7,     8,    -1,    -1,    11,    12,    -1,
+      -1,    -1,    16,    17,    -1,    19,    20,    21,    -1,    -1,
+      -1,    -1,    26,    27,    28,    29,    -1,    -1,    32,    33,
+      -1,    35,    36,    -1,    38,    39,    40,    41,    42,    -1,
+      44,    45,    46,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      54,    55,    56,    -1,    -1,     3,    -1,    -1,    -1,     7,
+       8,    -1,    -1,    11,    12,    -1,    -1,    -1,    16,    17,
       -1,    19,    20,    21,    -1,    -1,    -1,    -1,    26,    27,
-      -1,    29,    -1,    -1,    32,    33,    -1,    35,    36,    -1,
-      38,    39,    40,    41,    42,    -1,     7,     8,    -1,    47,
-      11,    12,    -1,    -1,    -1,    16,    -1,    -1,    19,    20,
-      21,    -1,    -1,    -1,    -1,    26,    27,    -1,    29,    -1,
+      28,    29,    -1,    -1,    32,    33,    90,    35,    36,    -1,
+      38,    39,    40,    41,    42,    -1,    44,    45,    46,    -1,
+      -1,     3,     4,     5,     6,    -1,    54,     9,    10,    -1,
+      -1,    13,    14,    15,    -1,    -1,    -1,    -1,    -1,    -1,
+      22,    23,    24,    -1,    -1,    -1,    -1,    -1,    -1,    31,
+      -1,    -1,    34,    -1,    -1,    37,    -1,    -1,    -1,    -1,
+      -1,    43,    90,    -1,    -1,    -1,    -1,    49,    50,    51,
+      -1,    -1,    54,    -1,    -1,    -1,    -1,    59,    -1,    -1,
+      -1,    -1,    -1,     3,     4,     5,     6,    -1,    -1,    -1,
+      -1,    73,    74,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    84,    -1,    86,    -1,    88,    89,    90,     3,
+       4,     5,     6,    -1,    34,     9,    10,    -1,    -1,    13,
+      14,    15,    -1,    -1,    -1,    -1,    -1,    -1,    22,    23,
+      24,    -1,    -1,    -1,    54,    55,    -1,    31,    -1,    59,
+      34,    -1,    -1,    37,    -1,    -1,    -1,    -1,    -1,    43,
+      -1,    -1,    -1,    73,    74,    49,    50,    51,    -1,    -1,
+      54,    -1,    -1,    -1,    84,    59,    86,    -1,    88,    89,
+      90,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    73,
+      74,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      84,    -1,    86,    -1,    88,    89,    90,     3,     4,     5,
+       6,    -1,    -1,     9,    10,    -1,    -1,    13,    14,    15,
+      -1,    -1,    -1,    -1,    -1,    -1,    22,    23,    24,    -1,
+      -1,    -1,    -1,    -1,    -1,    31,    -1,    -1,    34,    -1,
+      -1,    37,    -1,    -1,    -1,    -1,    -1,    43,     3,     4,
+       5,     6,    -1,    49,    50,    -1,    -1,    -1,    54,    -1,
+      -1,    -1,    -1,    59,    -1,    -1,     3,     4,     5,     6,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    73,    74,    34,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    84,    -1,
+      86,    -1,    88,    89,    90,    50,    51,    34,    -1,    54,
+      -1,    -1,    -1,    -1,    59,    -1,    -1,     3,     4,     5,
+       6,    -1,    -1,    50,    51,    -1,    -1,    54,    73,    74,
+      -1,    -1,    59,    -1,    -1,     3,     4,     5,     6,    84,
+      -1,    86,    -1,    88,    89,    90,    73,    74,    34,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    84,    -1,    86,
+      -1,    88,    89,    90,    -1,    -1,    34,    -1,    54,    -1,
+      -1,    57,    -1,    59,    -1,    -1,    -1,     3,     4,     5,
+       6,    -1,    50,    -1,    -1,    -1,    54,    73,    74,    -1,
+      -1,    59,    -1,    -1,    -1,    -1,    -1,    -1,    84,    -1,
+      86,    -1,    88,    89,    90,    73,    74,    -1,    34,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    84,    -1,    86,    -1,
+      88,    89,    90,    49,     3,     4,     5,     6,    54,    -1,
+      -1,    -1,    -1,    59,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,     3,     4,     5,     6,    -1,    73,    74,    -1,
+       3,     4,     5,     6,    -1,    34,    -1,    -1,    84,    -1,
+      86,    -1,    88,    89,    90,    -1,    -1,    -1,     3,     4,
+       5,     6,    -1,    34,    -1,    54,    -1,    -1,    57,    -1,
+      59,    34,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    50,
+      -1,    -1,    -1,    54,    73,    74,    -1,    -1,    59,    34,
+      -1,    54,    -1,    -1,    57,    84,    59,    86,    -1,    88,
+      89,    90,    73,    74,     3,     4,     5,     6,    -1,    54,
+      73,    74,    -1,    84,    59,    86,    -1,    88,    89,    90,
+      -1,    84,    -1,    86,    -1,    88,    89,    90,    73,    74,
+       3,     4,     5,     6,    -1,    34,    -1,    -1,    -1,    84,
+      -1,    86,    -1,    88,    89,    90,    -1,    -1,     3,     4,
+       5,     6,    -1,    -1,    -1,    54,    55,    -1,    -1,    -1,
+      59,    34,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    73,    74,    -1,    -1,    -1,    34,
+      -1,    54,    -1,    -1,    -1,    84,    59,    86,    -1,    88,
+      89,    90,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    54,
+      73,    74,    -1,    -1,    59,    -1,    -1,    -1,    -1,    -1,
+      -1,    84,    -1,    86,    -1,    88,    89,    90,    73,    74,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    84,
+      -1,    86,    -1,    88,    89,    90,     7,     8,    -1,    -1,
+      11,    12,    -1,    -1,    -1,    16,    17,    -1,    19,    20,
+      21,    -1,    -1,    -1,    -1,    26,    27,    28,    29,    -1,
       -1,    32,    33,    -1,    35,    36,    -1,    38,    39,    40,
-      41,    42,     7,    -1,    -1,    -1,    11,    12,    -1,    -1,
-      -1,    16,    -1,    -1,    19,    -1,    21,    -1,    -1,    -1,
-      -1,    26,    27,    -1,    -1,    -1,    -1,    32,    33,    -1,
-      -1,    36,    -1,    -1,    39,    40,    41,    42
+      41,    42,    -1,    44,    45,    46,    -1,     7,     8,    -1,
+      -1,    11,    12,    54,    55,    56,    16,    17,    -1,    19,
+      20,    21,    -1,    -1,    -1,    -1,    26,    27,    28,    29,
+      -1,    -1,    32,    33,    -1,    35,    36,    -1,    38,    39,
+      40,    41,    42,    -1,    44,    45,    46,    -1,     3,    90,
+      50,    -1,     7,     8,    -1,    -1,    11,    12,    -1,    -1,
+      60,    16,    17,    -1,    19,    20,    21,    -1,    -1,    -1,
+      -1,    26,    27,    28,    29,    -1,    -1,    32,    33,    -1,
+      35,    36,    -1,    38,    39,    40,    41,    42,    -1,    44,
+      45,    46,     7,     8,    -1,    -1,    11,    12,    -1,    -1,
+      55,    16,    17,    -1,    19,    20,    21,    -1,    -1,    -1,
+      -1,    26,    27,    28,    29,    -1,    -1,    32,    33,    -1,
+      35,    36,    -1,    38,    39,    40,    41,    42,    -1,    44,
+      45,    46,     7,    -1,    -1,    -1,    11,    12,    -1,    -1,
+      55,    16,    17,    -1,    19,    -1,    21,    -1,    -1,    -1,
+      -1,    26,    27,    28,    -1,    -1,    -1,    32,    33,    -1,
+      -1,    36,    -1,    -1,    39,    40,    41,    42,     7,    44,
+      45,    46,    11,    12,    -1,    -1,    51,    16,    17,    -1,
+      19,    -1,    21,    -1,    -1,    -1,    -1,    26,    27,    28,
+      -1,    -1,    -1,    32,    33,    -1,    -1,    36,    -1,    -1,
+      39,    40,    41,    42,    -1,    44,    45,    46,    -1,     7,
+       8,    -1,    51,    11,    12,    -1,    -1,    -1,    16,    17,
+      -1,    19,    20,    21,    -1,    -1,    -1,    -1,    26,    27,
+      28,    29,    -1,    -1,    32,    33,    -1,    35,    36,    -1,
+      38,    39,    40,    41,    42,    -1,    44,    45,    46,     7,
+       8,    -1,    50,    11,    12,    -1,    -1,    -1,    16,    17,
+      -1,    19,    20,    21,    -1,    -1,    -1,    -1,    26,    27,
+      28,    29,    -1,    -1,    32,    33,    -1,    35,    36,    -1,
+      38,    39,    40,    41,    42,    -1,    44,    45,    46,    47,
+       7,     8,    -1,    -1,    11,    12,    -1,    -1,    -1,    16,
+      17,    -1,    19,    20,    21,    -1,    -1,    -1,    -1,    26,
+      27,    28,    29,    -1,    -1,    32,    33,    -1,    35,    36,
+      -1,    38,    39,    40,    41,    42,     7,    44,    45,    46,
+      11,    12,    -1,    -1,    -1,    16,    17,    -1,    19,    -1,
+      21,    -1,    -1,    -1,    -1,    26,    27,    28,    -1,    -1,
+      -1,    32,    33,    -1,    -1,    36,    -1,    -1,    39,    40,
+      41,    42,    -1,    44,    45,    46
   };
 
   const unsigned char
    Parser ::yystos_[] =
   {
-       0,     3,     7,     8,    11,    12,    16,    19,    20,    21,
-      26,    27,    29,    32,    33,    35,    36,    38,    39,    40,
-      41,    42,    54,    90,   116,   117,   120,   121,   122,   123,
-     129,   132,   133,   134,   135,   155,   156,   157,     3,    50,
-     133,   132,   135,   136,    49,   118,   119,   133,   117,   117,
-       3,    50,   117,    50,   116,   117,   148,   149,    54,    56,
-     134,     0,   156,    50,     3,   130,   131,    55,   132,   135,
-      49,    52,    60,   148,   149,    50,   121,   124,   125,   126,
-     132,     3,     4,     5,     6,     9,    10,    13,    14,    15,
-      22,    23,    24,    31,    34,    37,    43,    49,    51,    54,
-      59,    73,    74,    84,    86,    88,    89,    90,    94,    95,
-      96,    98,    99,   100,   101,   102,   103,   104,   105,   106,
-     107,   108,   109,   110,   111,   112,   114,   146,   147,   148,
-     149,   150,   151,   152,   153,   154,   133,   116,   148,     3,
-      55,   117,   137,   138,   139,   140,     3,    57,    98,   111,
-     115,   130,    60,    51,    52,   119,    50,   112,   144,   148,
-     124,   126,    51,   125,    53,   127,   128,   133,   126,    53,
-      49,   115,    49,    53,   146,    54,     3,    54,    49,   114,
-      54,    98,    54,    54,   114,   126,   141,    54,    98,    98,
-      54,    56,    58,    73,    74,    75,    60,    61,    62,    63,
-      64,    65,    66,    67,    68,    69,    70,   113,   100,    90,
-      91,    92,    88,    89,    71,    72,    78,    79,    80,    81,
-      82,    83,    86,    85,    87,    76,    48,    77,    49,    52,
-      51,   150,    51,   146,    54,    56,   133,   135,   142,   143,
-      55,    52,    52,    55,    57,    51,   115,   131,   144,   145,
-      51,   115,    49,    52,    53,   146,    53,   146,    43,   151,
-      49,   114,    49,   141,   114,   114,    55,    54,   135,   142,
-      55,   141,    55,    97,   112,   114,     3,     3,   112,   100,
-     100,   100,   101,   101,   102,   102,   103,   103,   103,   103,
-     104,   104,   105,   106,   107,   108,   114,   109,   112,    51,
-      55,   137,   142,    57,   115,   143,    54,    56,    47,   139,
-       3,    51,    52,   128,   115,   146,    54,   151,    55,    55,
-      55,    55,    50,   100,    55,    52,    55,    57,    53,    55,
-      55,    57,    55,   137,    57,   115,    51,   144,   114,    55,
-     114,   146,   146,   146,   145,   112,   111,    55,    57,    55,
-     146,    55,    18,    51,    52,    49,   146,   146,    51
+       0,     3,     7,     8,    11,    12,    16,    17,    19,    20,
+      21,    26,    27,    28,    29,    32,    33,    35,    36,    38,
+      39,    40,    41,    42,    44,    45,    46,    54,    90,   116,
+     117,   120,   121,   122,   123,   129,   132,   133,   134,   135,
+     155,   156,   157,     3,    50,   133,   132,   135,   136,    49,
+     118,   119,   133,   117,   117,     3,    50,   117,    50,   116,
+     117,   148,   149,    54,    56,   134,     0,   156,    50,     3,
+     130,   131,    55,   132,   135,    49,    52,    60,   148,   149,
+      50,   121,   124,   125,   126,   132,     3,     4,     5,     6,
+       9,    10,    13,    14,    15,    22,    23,    24,    31,    34,
+      37,    43,    49,    51,    54,    59,    73,    74,    84,    86,
+      88,    89,    90,    94,    95,    96,    98,    99,   100,   101,
+     102,   103,   104,   105,   106,   107,   108,   109,   110,   111,
+     112,   114,   146,   147,   148,   149,   150,   151,   152,   153,
+     154,   133,   116,   148,     3,    55,   117,   137,   138,   139,
+     140,     3,    57,    98,   111,   115,   130,    60,    51,    52,
+     119,    50,   112,   144,   148,   124,   126,    51,   125,    53,
+     127,   128,   133,   126,    53,    49,   115,    49,    53,   146,
+      54,     3,    54,    49,   114,    54,    98,    54,    54,   114,
+     126,   141,    54,    98,    98,    54,    56,    58,    73,    74,
+      75,    60,    61,    62,    63,    64,    65,    66,    67,    68,
+      69,    70,   113,   100,    90,    91,    92,    88,    89,    71,
+      72,    78,    79,    80,    81,    82,    83,    86,    85,    87,
+      76,    48,    77,    49,    52,    51,   150,    51,   146,    54,
+      56,   133,   135,   142,   143,    55,    52,    52,    55,    57,
+      51,   115,   131,   144,   145,    51,   115,    49,    52,    53,
+     146,    53,   146,    43,   151,    49,   114,    49,   141,   114,
+     114,    55,    54,   135,   142,    55,   141,    55,    97,   112,
+     114,     3,     3,   112,   100,   100,   100,   101,   101,   102,
+     102,   103,   103,   103,   103,   104,   104,   105,   106,   107,
+     108,   114,   109,   112,    51,    55,   137,   142,    57,   115,
+     143,    54,    56,    47,   139,     3,    51,    52,   128,   115,
+     146,    54,   151,    55,    55,    55,    55,    50,   100,    55,
+      52,    55,    57,    53,    55,    55,    57,    55,   137,    57,
+     115,    51,   144,   114,    55,   114,   146,   146,   146,   145,
+     112,   111,    55,    57,    55,   146,    55,    18,    51,    52,
+      49,   146,   146,    51
   };
 
   const unsigned char
@@ -4491,18 +4538,19 @@ namespace  WadeSpace  {
      113,   113,   113,   113,   113,   113,   113,   114,   114,   115,
      116,   116,   117,   117,   117,   117,   117,   117,   118,   118,
      119,   119,   120,   120,   120,   120,   120,   121,   121,   121,
-     121,   121,   121,   121,   121,   121,   121,   121,   121,   122,
-     122,   122,   123,   123,   124,   124,   125,   126,   126,   126,
-     126,   127,   127,   128,   128,   128,   129,   129,   129,   130,
-     130,   131,   131,   132,   132,   133,   133,   134,   134,   134,
-     134,   134,   134,   134,   135,   135,   135,   135,   136,   136,
-     137,   137,   138,   138,   139,   139,   139,   140,   140,   141,
-     141,   142,   142,   142,   143,   143,   143,   143,   143,   143,
-     143,   143,   143,   144,   144,   144,   145,   145,   146,   146,
-     146,   146,   146,   146,   147,   147,   147,   148,   148,   148,
-     148,   149,   149,   150,   150,   151,   151,   152,   152,   152,
-     153,   153,   153,   153,   154,   154,   154,   154,   154,   155,
-     155,   156,   156,   157,   157,   157,   157
+     121,   121,   121,   121,   121,   121,   121,   121,   121,   121,
+     121,   121,   121,   121,   122,   122,   122,   123,   123,   124,
+     124,   125,   126,   126,   126,   126,   127,   127,   128,   128,
+     128,   129,   129,   129,   130,   130,   131,   131,   132,   132,
+     133,   133,   134,   134,   134,   134,   134,   134,   134,   135,
+     135,   135,   135,   136,   136,   137,   137,   138,   138,   139,
+     139,   139,   140,   140,   141,   141,   142,   142,   142,   143,
+     143,   143,   143,   143,   143,   143,   143,   143,   144,   144,
+     144,   145,   145,   146,   146,   146,   146,   146,   146,   147,
+     147,   147,   148,   148,   148,   148,   149,   149,   150,   150,
+     151,   151,   152,   152,   152,   153,   153,   153,   153,   154,
+     154,   154,   154,   154,   155,   155,   156,   156,   157,   157,
+     157,   157
   };
 
   const signed char
@@ -4518,18 +4566,19 @@ namespace  WadeSpace  {
        1,     1,     1,     1,     1,     1,     1,     1,     3,     1,
        2,     3,     1,     2,     1,     2,     1,     2,     1,     3,
        1,     3,     1,     1,     1,     1,     1,     1,     1,     1,
-       1,     1,     1,     1,     1,     1,     1,     1,     1,     5,
-       4,     2,     1,     1,     1,     2,     3,     2,     1,     2,
-       1,     1,     3,     1,     2,     3,     4,     5,     2,     1,
-       3,     1,     3,     1,     1,     2,     1,     1,     3,     4,
-       3,     4,     4,     3,     1,     2,     2,     3,     1,     2,
-       1,     3,     1,     3,     2,     2,     1,     1,     3,     1,
-       2,     1,     1,     2,     3,     2,     3,     3,     4,     2,
-       3,     3,     4,     1,     3,     4,     1,     3,     1,     1,
-       1,     1,     1,     1,     3,     4,     3,     2,     3,     3,
-       4,     1,     2,     1,     2,     1,     2,     5,     7,     5,
-       5,     7,     6,     7,     3,     2,     2,     2,     3,     1,
-       2,     1,     1,     4,     3,     3,     2
+       1,     1,     1,     1,     1,     1,     1,     1,     1,     1,
+       1,     1,     1,     1,     5,     4,     2,     1,     1,     1,
+       2,     3,     2,     1,     2,     1,     1,     3,     1,     2,
+       3,     4,     5,     2,     1,     3,     1,     3,     1,     1,
+       2,     1,     1,     3,     4,     3,     4,     4,     3,     1,
+       2,     2,     3,     1,     2,     1,     3,     1,     3,     2,
+       2,     1,     1,     3,     1,     2,     1,     1,     2,     3,
+       2,     3,     3,     4,     2,     3,     3,     4,     1,     3,
+       4,     1,     3,     1,     1,     1,     1,     1,     1,     3,
+       4,     3,     2,     3,     3,     4,     1,     2,     1,     2,
+       1,     2,     5,     7,     5,     5,     7,     6,     7,     3,
+       2,     2,     2,     3,     1,     2,     1,     1,     4,     3,
+       3,     2
   };
 
 
@@ -4596,18 +4645,19 @@ namespace  WadeSpace  {
      421,   422,   423,   424,   425,   426,   427,   431,   432,   436,
      440,   441,   445,   446,   447,   448,   449,   450,   454,   460,
      470,   471,   475,   476,   477,   478,   479,   483,   484,   485,
-     486,   487,   488,   489,   490,   491,   492,   493,   494,   498,
-     499,   500,   504,   505,   509,   515,   525,   529,   530,   531,
-     532,   536,   542,   552,   553,   554,   558,   559,   560,   564,
-     570,   580,   581,   585,   586,   590,   591,   595,   596,   597,
-     598,   599,   600,   601,   605,   606,   607,   608,   612,   618,
-     629,   630,   634,   640,   650,   651,   652,   656,   662,   672,
-     673,   677,   678,   679,   683,   684,   685,   686,   687,   688,
-     689,   690,   691,   695,   696,   697,   701,   707,   717,   718,
-     719,   720,   721,   722,   726,   727,   728,   732,   733,   734,
-     735,   739,   745,   755,   761,   771,   772,   776,   777,   778,
-     782,   783,   784,   785,   789,   790,   791,   792,   793,   797,
-     798,   802,   803,   807,   808,   809,   810
+     486,   487,   488,   489,   490,   491,   492,   493,   494,   495,
+     496,   497,   498,   499,   503,   504,   505,   509,   510,   514,
+     520,   530,   534,   535,   536,   537,   541,   547,   557,   558,
+     559,   563,   564,   565,   569,   575,   585,   586,   590,   591,
+     595,   596,   600,   601,   602,   603,   604,   605,   606,   610,
+     611,   612,   613,   617,   623,   634,   635,   639,   645,   655,
+     656,   657,   661,   667,   677,   678,   682,   683,   684,   688,
+     689,   690,   691,   692,   693,   694,   695,   696,   700,   701,
+     702,   706,   712,   722,   723,   724,   725,   726,   727,   731,
+     732,   733,   737,   738,   739,   740,   744,   750,   760,   766,
+     776,   777,   781,   782,   783,   787,   788,   789,   790,   794,
+     795,   796,   797,   798,   802,   803,   807,   808,   812,   813,
+     814,   815
   };
 
   void
@@ -4640,9 +4690,9 @@ namespace  WadeSpace  {
 
 #line 9 "parser.y"
 } //  WadeSpace 
-#line 4644 "parser.cpp"
+#line 4694 "parser.cpp"
 
-#line 813 "parser.y"
+#line 818 "parser.y"
 
 
 // Bison expects us to provide implementation - otherwise linker complains

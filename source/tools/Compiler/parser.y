@@ -485,8 +485,13 @@ type_specifier
     | SHORT                     { $<TypeSpecifier>$ = TypeSpecifier(SHORT); cout << "SHORT REDUCE to type_specifier" << endl;}
     | INT                       { $<TypeSpecifier>$ = TypeSpecifier(INT); cout << "INT REDUCE to type_specifier" << endl;}
     | LONG                      { $<TypeSpecifier>$ = TypeSpecifier(LONG); cout << "LONG REDUCE to type_specifier" << endl;}
+    | LONG_LONG                 { $<TypeSpecifier>$ = TypeSpecifier(LONG_LONG); cout << "LONG_LONG REDUCE to type_specifier" << endl;}
     | FLOAT                     { $<TypeSpecifier>$ = TypeSpecifier(FLOAT); cout << "FLOAT REDUCE to type_specifier" << endl;}
     | DOUBLE                    { $<TypeSpecifier>$ = TypeSpecifier(DOUBLE); cout << "DOUBLE REDUCE to type_specifier" << endl;}
+    | LONG_DOUBLE               { $<TypeSpecifier>$ = TypeSpecifier(LONG_DOUBLE); cout << "LONG_DOUBLE REDUCE to type_specifier" << endl;}
+    | BOOL                      { $<TypeSpecifier>$ = TypeSpecifier(BOOL); cout << "BOOL REDUCE to type_specifier" << endl;}
+    | IMAGINARY                 { $<TypeSpecifier>$ = TypeSpecifier(IMAGINARY); cout << "IMAGINARY REDUCE to type_specifier" << endl;}
+    | COMPLEX                   { $<TypeSpecifier>$ = TypeSpecifier(COMPLEX); cout << "COMPLEX REDUCE to type_specifier" << endl;}
     | SIGNED                    { $<TypeSpecifier>$ = TypeSpecifier(SIGNED); cout << "SIGNED REDUCE to type_specifier" << endl;}
     | UNSIGNED                  { $<TypeSpecifier>$ = TypeSpecifier(UNSIGNED); cout << "UNIGNED REDUCE to type_specifier" << endl;}
     | struct_or_union_specifier { $<TypeSpecifier>$ = TypeSpecifier($1); cout << "struct_or_union_specifier REDUCE to type_specifier" << endl;}
