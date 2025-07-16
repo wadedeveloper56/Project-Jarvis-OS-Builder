@@ -715,12 +715,12 @@ initializer_list
     ;
 
 statement
-    : labeled_statement    { $<BaseStatement>$ = Statement(); cout << "labeled_statement REDUCE to statement" << endl; }
-    | compound_statement   { $<BaseStatement>$ = Statement(); cout << "compound_statement REDUCE to statement" << endl; }
-    | expression_statement { $<BaseStatement>$ = Statement(); cout << "expression_statement REDUCE to statement" << endl; }
-    | selection_statement  { $<BaseStatement>$ = Statement(); cout << "selection_statement REDUCE to statement" << endl; }
-    | iteration_statement  { $<BaseStatement>$ = Statement(); cout << "iteration_statement REDUCE to statement" << endl; }
-    | jump_statement       { $<BaseStatement>$ = Statement(); cout << "jump_statement REDUCE to statement" << endl; }
+    : labeled_statement    { $<BaseStatement>$ = Statement(NONE,$1); cout << "labeled_statement REDUCE to statement" << endl; }
+    | compound_statement   { $<BaseStatement>$ = Statement(NONE,$1); cout << "compound_statement REDUCE to statement" << endl; }
+    | expression_statement { $<BaseStatement>$ = Statement(NONE,$1); cout << "expression_statement REDUCE to statement" << endl; }
+    | selection_statement  { $<BaseStatement>$ = Statement(NONE,$1); cout << "selection_statement REDUCE to statement" << endl; }
+    | iteration_statement  { $<BaseStatement>$ = Statement(NONE,$1); cout << "iteration_statement REDUCE to statement" << endl; }
+    | jump_statement       { $<BaseStatement>$ = Statement(NONE,$1); cout << "jump_statement REDUCE to statement" << endl; }
     ;
 
 labeled_statement

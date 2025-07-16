@@ -3356,37 +3356,37 @@ namespace  WadeSpace  {
 
   case 178: // statement: labeled_statement
 #line 718 "parser.y"
-                           { yylhs.value.as< BaseStatement > () = Statement(); cout << "labeled_statement REDUCE to statement" << endl; }
+                           { yylhs.value.as< BaseStatement > () = Statement(NONE,yystack_[0].value.as < LabeledStatement > ()); cout << "labeled_statement REDUCE to statement" << endl; }
 #line 3361 "parser.cpp"
     break;
 
   case 179: // statement: compound_statement
 #line 719 "parser.y"
-                           { yylhs.value.as< BaseStatement > () = Statement(); cout << "compound_statement REDUCE to statement" << endl; }
+                           { yylhs.value.as< BaseStatement > () = Statement(NONE,yystack_[0].value.as < CompoundStatement > ()); cout << "compound_statement REDUCE to statement" << endl; }
 #line 3367 "parser.cpp"
     break;
 
   case 180: // statement: expression_statement
 #line 720 "parser.y"
-                           { yylhs.value.as< BaseStatement > () = Statement(); cout << "expression_statement REDUCE to statement" << endl; }
+                           { yylhs.value.as< BaseStatement > () = Statement(NONE,yystack_[0].value.as < BaseStatement > ()); cout << "expression_statement REDUCE to statement" << endl; }
 #line 3373 "parser.cpp"
     break;
 
   case 181: // statement: selection_statement
 #line 721 "parser.y"
-                           { yylhs.value.as< BaseStatement > () = Statement(); cout << "selection_statement REDUCE to statement" << endl; }
+                           { yylhs.value.as< BaseStatement > () = Statement(NONE,yystack_[0].value.as < BaseStatement > ()); cout << "selection_statement REDUCE to statement" << endl; }
 #line 3379 "parser.cpp"
     break;
 
   case 182: // statement: iteration_statement
 #line 722 "parser.y"
-                           { yylhs.value.as< BaseStatement > () = Statement(); cout << "iteration_statement REDUCE to statement" << endl; }
+                           { yylhs.value.as< BaseStatement > () = Statement(NONE,yystack_[0].value.as < BaseStatement > ()); cout << "iteration_statement REDUCE to statement" << endl; }
 #line 3385 "parser.cpp"
     break;
 
   case 183: // statement: jump_statement
 #line 723 "parser.y"
-                           { yylhs.value.as< BaseStatement > () = Statement(); cout << "jump_statement REDUCE to statement" << endl; }
+                           { yylhs.value.as< BaseStatement > () = Statement(NONE,yystack_[0].value.as < BaseStatement > ()); cout << "jump_statement REDUCE to statement" << endl; }
 #line 3391 "parser.cpp"
     break;
 
