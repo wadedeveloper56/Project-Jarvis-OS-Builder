@@ -93,6 +93,9 @@ int main(int argc, char* argv[]) {
 		i.setStreams(&in,&out);
 		exitcode = i.parse();
 		cout << "Number of entries : " << globalVars.size() << endl;
+		for (size_t i = 0; i < globalVars.size(); i++) {
+			std::cout << "index[" << i << "] = " << globalVars[i].toString() << endl;
+		}
 		cout << "Parse complete. Result = " << exitcode << endl;
 	}
 	else {

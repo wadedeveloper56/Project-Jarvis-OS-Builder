@@ -809,8 +809,8 @@ translation_unit
     ;
 
 external_declaration
-    : function_definition  { $<ExternalDeclaration>$ = ExternalDeclaration(); cout << "function_definition REDUCE to external_declaration" << endl; }
-    | declaration          { $<ExternalDeclaration>$ = ExternalDeclaration(); cout << "declaration REDUCE to external_declaration" << endl; }
+    : function_definition  { $<ExternalDeclaration>$ = ExternalDeclaration($1); cout << "function_definition REDUCE to external_declaration" << endl; }
+    | declaration          { $<ExternalDeclaration>$ = ExternalDeclaration($1); cout << "declaration REDUCE to external_declaration" << endl; }
     ;
 
 function_definition

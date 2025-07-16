@@ -3646,13 +3646,13 @@ namespace  WadeSpace  {
 
   case 216: // external_declaration: function_definition
 #line 812 "parser.y"
-                           { yylhs.value.as< ExternalDeclaration > () = ExternalDeclaration(); cout << "function_definition REDUCE to external_declaration" << endl; }
+                           { yylhs.value.as< ExternalDeclaration > () = ExternalDeclaration(yystack_[0].value.as < FunctionDefinition > ()); cout << "function_definition REDUCE to external_declaration" << endl; }
 #line 3651 "parser.cpp"
     break;
 
   case 217: // external_declaration: declaration
 #line 813 "parser.y"
-                           { yylhs.value.as< ExternalDeclaration > () = ExternalDeclaration(); cout << "declaration REDUCE to external_declaration" << endl; }
+                           { yylhs.value.as< ExternalDeclaration > () = ExternalDeclaration(yystack_[0].value.as < Declaration > ()); cout << "declaration REDUCE to external_declaration" << endl; }
 #line 3657 "parser.cpp"
     break;
 

@@ -211,4 +211,18 @@ declaration_specifiers declarator compound_statement REDUCE to function_definiti
 function_definition REDUCE to external_declaration
 translation_unit external_declaration REDUCE to translation_unit
 Number of entries : 14
+index[0] = Declaration
+index[1] = Declaration
+index[2] = Declaration
+index[3] = Declaration
+index[4] = Declaration
+index[5] = Declaration
+index[6] = Declaration
+index[7] = Declaration
+index[8] = Declaration
+index[9] = Declaration
+index[10] = Declaration
+index[11] = Declaration
+index[12] = Function
+index[13] = Function
 Parse complete. Result = 0

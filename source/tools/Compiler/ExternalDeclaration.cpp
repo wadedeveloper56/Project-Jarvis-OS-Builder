@@ -7,3 +7,8 @@ ExternalDeclaration::ExternalDeclaration(FunctionDefinition& fd) :fd(fd), dec(nu
 ExternalDeclaration::ExternalDeclaration(Declaration& dec) :fd(nullopt), dec(dec) {}
 ExternalDeclaration::ExternalDeclaration():fd(nullopt),dec(nullopt) {}
 ExternalDeclaration::~ExternalDeclaration() {}
+string ExternalDeclaration::toString() {
+	if (fd.has_value()) return "Function"; else return "Declaration";
+}
+bool ExternalDeclaration::isFunction() { return fd.has_value(); }
+bool ExternalDeclaration::isDeclaration() { return dec.has_value(); }
