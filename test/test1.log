@@ -210,4 +210,5 @@ OCURLY CCURLY REDUCE to compound_statement
 declaration_specifiers declarator compound_statement REDUCE to function_definition
 function_definition REDUCE to external_declaration
 translation_unit external_declaration REDUCE to translation_unit
+Number of entries : 14
 Parse complete. Result = 0

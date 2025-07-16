@@ -582,7 +582,7 @@ Nonterminals, with rules where they appear
     translation_unit (155)
         on left: 213 214
         on right: 0 214
-    external_declaration (156)
+    external_declaration <ExternalDeclaration> (156)
         on left: 215 216
         on right: 213 214
     function_definition <FunctionDefinition> (157)

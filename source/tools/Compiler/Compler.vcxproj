@@ -203,6 +203,7 @@
     <ClInclude Include="ExclusiveOrExpression.h" />
     <ClInclude Include="Expression.h" />
     <ClInclude Include="ExpressionStatement.h" />
+    <ClInclude Include="ExternalDeclaration.h" />
     <ClInclude Include="FunctionDefinition.h" />
     <ClInclude Include="InclusiveOrExpression.h" />
     <ClInclude Include="InitDeclarator.h" />
@@ -263,7 +264,9 @@
     <ClCompile Include="ExclusiveOrExpression.cpp" />
     <ClCompile Include="Expression.cpp" />
     <ClCompile Include="ExpressionStatement.cpp" />
+    <ClCompile Include="ExternalDeclaration.cpp" />
     <ClCompile Include="FunctionDefinition.cpp" />
+    <ClCompile Include="GlobalVars.cpp" />
     <ClCompile Include="InclusiveOrExpression.cpp" />
     <ClCompile Include="InitDeclarator.cpp" />
     <ClCompile Include="Initializer.cpp" />

@@ -11,6 +11,10 @@
 using namespace WadeSpace;
 using namespace std;
 
+namespace WadeSpace {
+	extern vector<ExternalDeclaration> globalVars;
+}
+
 Boolean bit16 = FALSE;
 Boolean bit32 = FALSE;
 Boolean bit64 = FALSE;
@@ -88,6 +92,7 @@ int main(int argc, char* argv[]) {
 		Interpreter i;
 		i.setStreams(&in,&out);
 		exitcode = i.parse();
+		cout << "Number of entries : " << globalVars.size() << endl;
 		cout << "Parse complete. Result = " << exitcode << endl;
 	}
 	else {

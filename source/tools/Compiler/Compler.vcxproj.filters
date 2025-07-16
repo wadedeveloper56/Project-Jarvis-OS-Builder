@@ -189,6 +189,9 @@
     <ClInclude Include="FunctionDefinition.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ExternalDeclaration.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="parser.cpp">
@@ -354,6 +357,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="FunctionDefinition.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ExternalDeclaration.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GlobalVars.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

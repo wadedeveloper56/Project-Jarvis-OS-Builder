@@ -66,10 +66,14 @@
     #include "LabeledStatement.h"
     #include "Statement.h"
     #include "FunctionDefinition.h"
-
+    #include "ExternalDeclaration.h"
+    
     using namespace std;
 
+
     namespace WadeSpace {
+        extern std::vector<ExternalDeclaration> globalVars;
+
         class Scanner;
         class Interpreter;
     }
@@ -265,6 +269,7 @@
 %type<CompoundStatement> compound_statement
 %type<LabeledStatement> labeled_statement
 %type<FunctionDefinition> function_definition
+%type<ExternalDeclaration> external_declaration
 
 %start translation_unit
 
@@ -799,13 +804,13 @@ jump_statement
     ;
 
 translation_unit 
-    : external_declaration                  { cout << "external_declaration REDUCE to translation_unit" << endl; }
-    | translation_unit external_declaration { cout << "translation_unit external_declaration REDUCE to translation_unit" << endl; }
+    : external_declaration                  { globalVars = std::vector<ExternalDeclaration>(); globalVars.push_back($1); cout << "external_declaration REDUCE to translation_unit" << endl; }
+    | translation_unit external_declaration { globalVars.push_back($2); cout << "translation_unit external_declaration REDUCE to translation_unit" << endl; }
     ;
 
 external_declaration
-    : function_definition  { cout << "function_definition REDUCE to external_declaration" << endl; }
-    | declaration          { cout << "declaration REDUCE to external_declaration" << endl; }
+    : function_definition  { $<ExternalDeclaration>$ = ExternalDeclaration(); cout << "function_definition REDUCE to external_declaration" << endl; }
+    | declaration          { $<ExternalDeclaration>$ = ExternalDeclaration(); cout << "declaration REDUCE to external_declaration" << endl; }
     ;
 
 function_definition
