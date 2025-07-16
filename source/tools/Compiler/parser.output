@@ -555,25 +555,25 @@ Nonterminals, with rules where they appear
     statement <BaseStatement> (146)
         on left: 177 178 179 180 181 182
         on right: 183 184 185 192 193 196 197 198 199 200 201 202
-    labeled_statement (147)
+    labeled_statement <LabeledStatement> (147)
         on left: 183 184 185
         on right: 177
-    compound_statement (148)
+    compound_statement <CompoundStatement> (148)
         on left: 186 187 188 189
         on right: 178 212 213 214 215
-    declaration_list (149)
+    declaration_list <std::vector<Declaration>> (149)
         on left: 190 191
         on right: 188 189 191 212 214
     statement_list <std::vector<BaseStatement>> (150)
         on left: 192 193
         on right: 187 189 193
-    expression_statement (151)
+    expression_statement <BaseStatement> (151)
         on left: 194 195
         on right: 179 201 202
-    selection_statement (152)
+    selection_statement <BaseStatement> (152)
         on left: 196 197 198
         on right: 180
-    iteration_statement (153)
+    iteration_statement <BaseStatement> (153)
         on left: 199 200 201 202
         on right: 181
     jump_statement <BaseStatement> (154)

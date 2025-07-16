@@ -19,7 +19,7 @@ namespace WadeSpace {
 		BaseStatement(TokenType op, Expression& identifier);
 		BaseStatement();
 		~BaseStatement();
-	private:
+	protected:
 		TokenType op;
 		string identifier;
 		optional < reference_wrapper < Expression>> exp;

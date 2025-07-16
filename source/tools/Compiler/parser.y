@@ -59,8 +59,13 @@
     #include "ConstantExpression.h"
     #include "BaseStatement.h"
     #include "JumpStatement.h"
+    #include "IterationStatement.h"
+    #include "SelectionStatement.h"
+    #include "ExpressionStatement.h"
+    #include "CompoundStatement.h"
+    #include "LabeledStatement.h"
     #include "Statement.h"
-
+   
     using namespace std;
 
     namespace WadeSpace {
@@ -254,6 +259,12 @@
 %type<BaseStatement> jump_statement
 %type<std::vector<BaseStatement>> statement_list
 %type<BaseStatement> statement
+%type<BaseStatement> iteration_statement
+%type<BaseStatement> selection_statement
+%type<BaseStatement> expression_statement
+%type<std::vector<Declaration>> declaration_list
+%type<CompoundStatement> compound_statement
+%type<LabeledStatement> labeled_statement
 
 %start translation_unit
 
@@ -699,7 +710,7 @@ initializer_list
                                            value2.push_back(value1);
                                            $$ = value2;
                                            cout << "initializer_list COMMA initializer REDUCE to initializer_list" << endl;
-                                         }
+                                          }
     ;
 
 statement
@@ -712,21 +723,32 @@ statement
     ;
 
 labeled_statement
-    : IDENTIFIER COLON statement               { cout << "IDENTIFIER COLON statement REDUCE to label_statement" << endl; }
-    | CASE constant_expression COLON statement { cout << "CASE constant_expression COLON statement REDUCE to label_statement" << endl; }
-    | DEFAULT COLON statement                  { cout << "DEFAULT COLON statement REDUCE to label_statement" << endl; }
+    : IDENTIFIER COLON statement               { $<BaseStatement>$ = LabeledStatement(); cout << "IDENTIFIER COLON statement REDUCE to label_statement" << endl; }
+    | CASE constant_expression COLON statement { $<BaseStatement>$ = LabeledStatement(); cout << "CASE constant_expression COLON statement REDUCE to label_statement" << endl; }
+    | DEFAULT COLON statement                  { $<BaseStatement>$ = LabeledStatement(); cout << "DEFAULT COLON statement REDUCE to label_statement" << endl; }
     ;
 
 compound_statement
-    : OCURLY CCURLY                                 { cout << "OCURLY CCURLY REDUCE to compound_statement" << endl; }
-    | OCURLY statement_list CCURLY                  { cout << "OCURLY statement_list CCURLY REDUCE to compound_statement" << endl; }
-    | OCURLY declaration_list CCURLY                { cout << "OCURLY declaration_list CCURLY REDUCE to compound_statement" << endl; }
-    | OCURLY declaration_list statement_list CCURLY { cout << "OCURLY declaration_list statement_list CCURLY REDUCE to compound_statement" << endl; }
+    : OCURLY CCURLY                                 { $<BaseStatement>$ = CompoundStatement(); cout << "OCURLY CCURLY REDUCE to compound_statement" << endl; }
+    | OCURLY statement_list CCURLY                  { $<BaseStatement>$ = CompoundStatement(); cout << "OCURLY statement_list CCURLY REDUCE to compound_statement" << endl; }
+    | OCURLY declaration_list CCURLY                { $<BaseStatement>$ = CompoundStatement(); cout << "OCURLY declaration_list CCURLY REDUCE to compound_statement" << endl; }
+    | OCURLY declaration_list statement_list CCURLY { $<BaseStatement>$ = CompoundStatement(); cout << "OCURLY declaration_list statement_list CCURLY REDUCE to compound_statement" << endl; }
     ;
 
 declaration_list
-    : declaration                   { cout << "declaration REDUCE to declaration_list" << endl; }
-    | declaration_list declaration  { cout << "declaration_list declaration REDUCE to declaration_list" << endl; }
+    : declaration                   {
+                                     Declaration exp = $1;
+                                     $$ = std::vector<Declaration>();
+                                     $$.push_back(exp);
+                                     cout << "declaration REDUCE to declaration_list" << endl;
+                                    }
+    | declaration_list declaration  {
+                                     Declaration value1 = $2;
+                                     std::vector<Declaration> &value2 = $1;
+                                     value2.push_back(value1);
+                                     $$ = value2;
+                                     cout << "declaration_list declaration REDUCE to declaration_list" << endl;
+                                    }
     ;
 
 statement_list
@@ -746,21 +768,21 @@ statement_list
     ;
 
 expression_statement
-    : SEMICOLON             { cout << "SEMICOLON REDUCE to expression_statement" << endl; }
-    | expression SEMICOLON  { cout << "expression SEMICOLON REDUCE to expression_statement" << endl; }
+    : SEMICOLON             { $<BaseStatement>$ = ExpressionStatement(); cout << "SEMICOLON REDUCE to expression_statement" << endl; }
+    | expression SEMICOLON  { $<BaseStatement>$ = ExpressionStatement(); cout << "expression SEMICOLON REDUCE to expression_statement" << endl; }
     ;
 
 selection_statement
-    : IF OPAREN expression CPAREN statement                { cout << "IF OPAREN expression CPAREN statement REDUCE to selection_statement" << endl; }
-    | IF OPAREN expression CPAREN statement ELSE statement { cout << "IF OPAREN expression CPAREN statement ELSE statement REDUCE to selection_statement" << endl; }
-    | SWITCH OPAREN expression CPAREN statement            { cout << "SWITCH OPAREN expression CPAREN statement REDUCE to selection_statement" << endl; }
+    : IF OPAREN expression CPAREN statement                { $<BaseStatement>$ = SelectionStatement(); cout << "IF OPAREN expression CPAREN statement REDUCE to selection_statement" << endl; }
+    | IF OPAREN expression CPAREN statement ELSE statement { $<BaseStatement>$ = SelectionStatement(); cout << "IF OPAREN expression CPAREN statement ELSE statement REDUCE to selection_statement" << endl; }
+    | SWITCH OPAREN expression CPAREN statement            { $<BaseStatement>$ = SelectionStatement(); cout << "SWITCH OPAREN expression CPAREN statement REDUCE to selection_statement" << endl; }
     ;
 
 iteration_statement
-    : WHILE OPAREN expression CPAREN statement                                         { cout << "WHILE OPAREN expression CPAREN statement REDUCE to iteration_statement" << endl; }
-    | DO statement WHILE OPAREN expression CPAREN SEMICOLON                            { cout << "DO statement WHILE OPAREN expression CPAREN SEMICOLON REDUCE to iteration_statement" << endl; }
-    | FOR OPAREN expression_statement expression_statement CPAREN statement            { cout << "FOR OPAREN expression_statement expression_statement CPAREN statement REDUCE to iteration_statement" << endl; }
-    | FOR OPAREN expression_statement expression_statement expression CPAREN statement { cout << "FOR OPAREN expression_statement expression_statement expression CPAREN statement REDUCE to iteration_statement" << endl; }
+    : WHILE OPAREN expression CPAREN statement                                         { $<BaseStatement>$ = IterationStatement(); cout << "WHILE OPAREN expression CPAREN statement REDUCE to iteration_statement" << endl; }
+    | DO statement WHILE OPAREN expression CPAREN SEMICOLON                            { $<BaseStatement>$ = IterationStatement(); cout << "DO statement WHILE OPAREN expression CPAREN SEMICOLON REDUCE to iteration_statement" << endl; }
+    | FOR OPAREN expression_statement expression_statement CPAREN statement            { $<BaseStatement>$ = IterationStatement(); cout << "FOR OPAREN expression_statement expression_statement CPAREN statement REDUCE to iteration_statement" << endl; }
+    | FOR OPAREN expression_statement expression_statement expression CPAREN statement { $<BaseStatement>$ = IterationStatement(); cout << "FOR OPAREN expression_statement expression_statement expression CPAREN statement REDUCE to iteration_statement" << endl; }
     ;
 
 jump_statement
