@@ -205,6 +205,7 @@
     <ClInclude Include="ExpressionStatement.h" />
     <ClInclude Include="ExternalDeclaration.h" />
     <ClInclude Include="FunctionDefinition.h" />
+    <ClInclude Include="GlobalVars.h" />
     <ClInclude Include="InclusiveOrExpression.h" />
     <ClInclude Include="InitDeclarator.h" />
     <ClInclude Include="Initializer.h" />
@@ -223,6 +224,7 @@
     <ClInclude Include="position.hh" />
     <ClInclude Include="PostfixExpression.h" />
     <ClInclude Include="PrimaryExpression.h" />
+    <ClInclude Include="ProgramData.h" />
     <ClInclude Include="RelationalExpression.h" />
     <ClInclude Include="scanner.h" />
     <ClInclude Include="SelectionStatement.h" />
@@ -284,6 +286,7 @@
     <ClCompile Include="Pointer.cpp" />
     <ClCompile Include="PostfixExpression.cpp" />
     <ClCompile Include="PrimaryExpression.cpp" />
+    <ClCompile Include="ProgramData.cpp" />
     <ClCompile Include="RelationalExpression.cpp" />
     <ClCompile Include="scanner.cpp" />
     <ClCompile Include="SelectionStatement.cpp" />

@@ -3,36 +3,20 @@
 #include "parser.hpp"
 #include "interpreter.h"
 #include "ArgumentTable.h"
-
-#define TRUE 1
-#define FALSE 0
-#define Boolean unsigned int
+#include "GlobalVars.h"
 
 using namespace WadeSpace;
 using namespace std;
-
-namespace WadeSpace {
-	extern vector<ExternalDeclaration> globalVars;
-}
-
-Boolean bit16 = FALSE;
-Boolean bit32 = FALSE;
-Boolean bit64 = FALSE;
-char logFileName[_MAX_PATH];
-char drive[_MAX_DRIVE];
-char dir[_MAX_DIR];
-char fname[_MAX_FNAME];
-char ext[_MAX_EXT];
 
 int main(int argc, char* argv[]) {
 	ifstream in;
 	ofstream out;
 	ArgIntPtr bitsize = arg_int0("b", "bitsize", NULL, "define bit size to be 16, 32 or 64 bits (default is 32)");
-	ArgFilePtr outfile = arg_file0("o", NULL, "<output>", "output file (default is \"-\")");
+	ArgFilePtr outfile = argFile0("o", NULL, "<output>", "output file (default is \"-\")");
 	ArgLitPtr verbose = arg_lit0("v", "verbose,debug", "verbose messages");
 	ArgLitPtr help = arg_lit0(NULL, "help", "print this help and exit");
 	ArgLitPtr version = arg_lit0(NULL, "version", "print version information and exit");
-	ArgFilePtr infiles = arg_filen(NULL, NULL, NULL, 1, argc + 2, "input file(s)");
+	ArgFilePtr infiles = argFileN(NULL, NULL, NULL, 1, argc + 2, "input file(s)");
 	ArgEndPtr end = arg_end(20);
 	void* argtable[] = { bitsize,outfile,verbose,help,version,infiles,end };
 	const char* progname = "Compiler";
@@ -92,10 +76,8 @@ int main(int argc, char* argv[]) {
 		Interpreter i;
 		i.setStreams(&in,&out);
 		exitcode = i.parse();
-		cout << "Number of entries : " << globalVars.size() << endl;
-		for (size_t i = 0; i < globalVars.size(); i++) {
-			std::cout << "index[" << i << "] = " << globalVars[i].toString() << endl;
-		}
+		programData.processGlobalVariables();
+		programData.test();
 		cout << "Parse complete. Result = " << exitcode << endl;
 	}
 	else {

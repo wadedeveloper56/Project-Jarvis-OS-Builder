@@ -271,15 +271,15 @@ extern "C" {
 	void arg_print_errors_ds(struct _ArgDstr* ds, ArgEndPtr end, const char* progname);
 	void arg_print_errors(FILE* fp, ArgEndPtr end, const char* progname);
 
-	void arg_file_resetfn(void* parent_);
-	const char* arg_basename(const char* filename);
-	const char* arg_extension(const char* basename);
-	int arg_file_scanfn(void* parent_, const char* argval);
-	int arg_file_checkfn(void* parent_);
-	void arg_file_errorfn(void* parent_, struct _ArgDstr* ds, int errorcode, const char* argval, const char* progname);
-	ArgFilePtr arg_file0(const char* shortopts, const char* longopts, const char* datatype, const char* glossary);
-	ArgFilePtr arg_file1(const char* shortopts, const char* longopts, const char* datatype, const char* glossary);
-	ArgFilePtr arg_filen(const char* shortopts, const char* longopts, const char* datatype, int mincount, int maxcount, const char* glossary);
+	void argFileResetFn(void* parent_);
+	const char* argBasename(const char* filename);
+	const char* argExtension(const char* basename);
+	int argFileScanFn(void* parent_, const char* argval);
+	int argFileCheckFn(void* parent_);
+	void argFileErrorFn(void* parent_, struct _ArgDstr* ds, int errorcode, const char* argval, const char* progname);
+	ArgFilePtr argFile0(const char* shortopts, const char* longopts, const char* datatype, const char* glossary);
+	ArgFilePtr argFile1(const char* shortopts, const char* longopts, const char* datatype, const char* glossary);
+	ArgFilePtr argFileN(const char* shortopts, const char* longopts, const char* datatype, int mincount, int maxcount, const char* glossary);
 
 	void arg_int_resetfn(void* parent_);
 	long int strtol0X(const char* str, const char** endptr, char X, int base);

@@ -19,8 +19,10 @@ namespace WadeSpace {
 		ExternalDeclaration();
 		~ExternalDeclaration();
 		string toString();
-		bool isFunction();
-		bool isDeclaration();
+		bool isFunction() const;
+		bool isDeclaration() const;
+		FunctionDefinition getFunction() const;
+		Declaration getDeclaration() const;
 	private:
 		optional < reference_wrapper < FunctionDefinition>> fd;
 		optional < reference_wrapper < Declaration>> dec;

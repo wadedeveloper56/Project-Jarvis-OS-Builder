@@ -3634,13 +3634,13 @@ namespace  WadeSpace  {
 
   case 214: // translation_unit: external_declaration
 #line 807 "parser.y"
-                                            { globalVars = std::vector<ExternalDeclaration>(); globalVars.push_back(yystack_[0].value.as < ExternalDeclaration > ()); cout << "external_declaration REDUCE to translation_unit" << endl; }
+                                            { programData = ProgramData(); programData.add(yystack_[0].value.as < ExternalDeclaration > ()); cout << "external_declaration REDUCE to translation_unit" << endl; }
 #line 3639 "parser.cpp"
     break;
 
   case 215: // translation_unit: translation_unit external_declaration
 #line 808 "parser.y"
-                                            { globalVars.push_back(yystack_[0].value.as < ExternalDeclaration > ()); cout << "translation_unit external_declaration REDUCE to translation_unit" << endl; }
+                                            { programData.add(yystack_[0].value.as < ExternalDeclaration > ()); cout << "translation_unit external_declaration REDUCE to translation_unit" << endl; }
 #line 3645 "parser.cpp"
     break;
 
@@ -4715,12 +4715,7 @@ namespace  WadeSpace  {
 #line 823 "parser.y"
 
 
-// Bison expects us to provide implementation - otherwise linker complains
 void WadeSpace::Parser::error(const location &loc , const std::string &message) {
-        
-        // Location should be initialized inside scanner action, but is not in this example.
-        // Let's grab location directly from driver class.
-    // cout << "Error: " << message << endl << "Location: " << loc << endl;
-    
-        cout << "Error: " << message << endl << "Error location: " << driver.location() << endl;
+    // cout << "Error: " << message << endl << "Location: " << loc << endl;  
+    cout << "Error: " << message << endl << "Error location: " << driver.location() << endl;
 }

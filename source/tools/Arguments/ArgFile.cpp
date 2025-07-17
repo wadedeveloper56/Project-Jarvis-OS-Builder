@@ -5,12 +5,12 @@
 #define FILESEPARATOR1 '/'
 #define FILESEPARATOR2 '/'
 
-void arg_file_resetfn(void* parent_) {
+void argFileResetFn(void* parent_) {
 	ArgFilePtr parent = (ArgFilePtr)parent_;
 	if (parent) parent->count = 0;
 }
 
-const char* arg_basename(const char* filename) {
+const char* argBasename(const char* filename) {
 	const char* result = NULL, * result1, * result2;
 
 	result1 = (filename ? strrchr(filename, FILESEPARATOR1) : NULL);
@@ -31,7 +31,7 @@ const char* arg_basename(const char* filename) {
 	return result;
 }
 
-const char* arg_extension(const char* basename) {
+const char* argExtension(const char* basename) {
 	const char* result = (basename ? strrchr(basename, '.') : NULL);
 
 	if (basename && !result)
@@ -46,7 +46,7 @@ const char* arg_extension(const char* basename) {
 	return result;
 }
 
-int arg_file_scanfn(void* parent_, const char* argval) {
+int argFileScanFn(void* parent_, const char* argval) {
 	ArgFilePtr parent = (ArgFilePtr)parent_;
 	int errorcode = 0;
 
@@ -58,20 +58,20 @@ int arg_file_scanfn(void* parent_, const char* argval) {
 	}
 	else {
 		parent->filename[parent->count] = argval;
-		parent->basename[parent->count] = arg_basename(argval);
-		parent->extension[parent->count] = arg_extension(parent->basename[parent->count]);
+		parent->basename[parent->count] = argBasename(argval);
+		parent->extension[parent->count] = argExtension(parent->basename[parent->count]);
 		parent->count++;
 	}
 	return errorcode;
 }
 
-int arg_file_checkfn(void* parent_) {
+int argFileCheckFn(void* parent_) {
 	ArgFilePtr parent = (ArgFilePtr)parent_;
 	int errorcode = (parent->count < parent->hdr.mincount) ? ARG_ERR_MINCOUNT : 0;
 	return errorcode;
 }
 
-void arg_file_errorfn(void* parent_, struct _ArgDstr* ds, int errorcode, const char* argval, const char* progname) {
+void argFileErrorFn(void* parent_, struct _ArgDstr* ds, int errorcode, const char* argval, const char* progname) {
 	ArgFilePtr parent = (ArgFilePtr)parent_;
 	const char* shortopts = parent->hdr.shortopts;
 	const char* longopts = parent->hdr.longopts;
@@ -96,15 +96,15 @@ void arg_file_errorfn(void* parent_, struct _ArgDstr* ds, int errorcode, const c
 	}
 }
 
-ArgFilePtr arg_file0(const char* shortopts, const char* longopts, const char* datatype, const char* glossary) {
-	return arg_filen(shortopts, longopts, datatype, 0, 1, glossary);
+ArgFilePtr argFile0(const char* shortopts, const char* longopts, const char* datatype, const char* glossary) {
+	return argFileN(shortopts, longopts, datatype, 0, 1, glossary);
 }
 
-ArgFilePtr arg_file1(const char* shortopts, const char* longopts, const char* datatype, const char* glossary) {
-	return arg_filen(shortopts, longopts, datatype, 1, 1, glossary);
+ArgFilePtr argFile1(const char* shortopts, const char* longopts, const char* datatype, const char* glossary) {
+	return argFileN(shortopts, longopts, datatype, 1, 1, glossary);
 }
 
-ArgFilePtr arg_filen(const char* shortopts, const char* longopts, const char* datatype, int mincount, int maxcount, const char* glossary) {
+ArgFilePtr argFileN(const char* shortopts, const char* longopts, const char* datatype, int mincount, int maxcount, const char* glossary) {
 	size_t nbytes;
 	ArgFilePtr result;
 	int i;
@@ -126,10 +126,10 @@ ArgFilePtr arg_filen(const char* shortopts, const char* longopts, const char* da
 		result->hdr.mincount = mincount;
 		result->hdr.maxcount = maxcount;
 		result->hdr.parent = result;
-		result->hdr.resetfn = arg_file_resetfn;
-		result->hdr.scanfn = arg_file_scanfn;
-		result->hdr.checkfn = arg_file_checkfn;
-		result->hdr.errorfn = arg_file_errorfn;
+		result->hdr.resetfn = argFileResetFn;
+		result->hdr.scanfn = argFileScanFn;
+		result->hdr.checkfn = argFileCheckFn;
+		result->hdr.errorfn = argFileErrorFn;
 
 		result->filename = (const char**)(result + 1);
 		result->basename = result->filename + maxcount;

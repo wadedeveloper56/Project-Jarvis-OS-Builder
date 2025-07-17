@@ -105,12 +105,12 @@
     #include "Statement.h"
     #include "FunctionDefinition.h"
     #include "ExternalDeclaration.h"
-    
+    #include "ProgramData.h"
+
     using namespace std;
 
-
     namespace WadeSpace {
-        extern std::vector<ExternalDeclaration> globalVars;
+        extern ProgramData programData;
 
         class Scanner;
         class Interpreter;
