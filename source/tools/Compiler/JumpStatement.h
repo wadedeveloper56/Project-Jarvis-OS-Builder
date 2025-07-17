@@ -17,7 +17,7 @@ namespace WadeSpace {
 	public:
 		JumpStatement(TokenType op);
 		JumpStatement(TokenType op, string identifier);
-		JumpStatement(TokenType op, Expression& identifier);
+		JumpStatement(TokenType op, Expression* identifier);
 		JumpStatement();
 		~JumpStatement();
 	};

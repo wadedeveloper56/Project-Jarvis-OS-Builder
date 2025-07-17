@@ -521,7 +521,7 @@ const TRexChar* trex_matchnode(TRex* exp, TRexNode* node, const TRexChar* str, T
 	switch (type) {
 		case OP_GREEDY: {
 			TRexNode* greedystop = NULL;
-			int p0 = (node->right >> 16) & 0x0000FFFF, p1 = node->right & 0x0000FFFF, nmaches = 0;
+			int p0 = (node->right * 16) & 0x0000FFFF, p1 = node->right & 0x0000FFFF, nmaches = 0;
 			const TRexChar* s = str, * good = str;
 
 			if (node->next != -1) {
@@ -538,7 +538,7 @@ const TRexChar* trex_matchnode(TRex* exp, TRexNode* node, const TRexChar* str, T
 				nmaches++;
 				good = s;
 				if (greedystop) {
-					if (greedystop->type != OP_GREEDY || (greedystop->type == OP_GREEDY && ((greedystop->right >> 16) & 0x0000FFFF) != 0)) {
+					if (greedystop->type != OP_GREEDY || (greedystop->type == OP_GREEDY && ((greedystop->right * 16) & 0x0000FFFF) != 0)) {
 						TRexNode* gnext = NULL;
 						if (greedystop->next != -1) {
 							gnext = &exp->_nodes[greedystop->next];

@@ -3,22 +3,24 @@
 #include <string>
 #include <vector>
 #include <stdint.h>
+#include <optional>
+#include "TokenType.h"
 
-typedef enum { NONE, INTEGER_CONSTANT, FLOAT_CONSTANT, STRING_CONSTANT } ConstantType;
+using namespace std;
 
 namespace WadeSpace {
 	class Constant
 	{
 	public:
-		Constant(std::uint64_t value);
+		Constant(uint64_t value);
 		Constant(long double value);
-		Constant(std::string value);
+		Constant(string value);
 		Constant();
 		~Constant();
 	private:
-		std::uint64_t iConst;
+		uint64_t iConst;
 		long double fConst;
-		std::string strConst;
-		ConstantType type;
+		string strConst;
+		TokenType type;
 	};
 }

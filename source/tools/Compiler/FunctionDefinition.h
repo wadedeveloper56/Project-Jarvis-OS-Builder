@@ -16,16 +16,24 @@ namespace WadeSpace {
 	class FunctionDefinition
 	{
 	public:
-		FunctionDefinition(DeclarationSpecifiers& ds,Declarator& dec,vector<Declaration>& dl,BaseStatement& bs);
-		FunctionDefinition(DeclarationSpecifiers& ds, Declarator& dec, BaseStatement& bs);
-		FunctionDefinition(Declarator& dec, vector<Declaration>& dl, BaseStatement& bs);
-		FunctionDefinition(Declarator& dec, BaseStatement& bs);
+		FunctionDefinition(DeclarationSpecifiers* ds, Declarator* dec, vector<Declaration*>* dl, BaseStatement* bs);
+		FunctionDefinition(DeclarationSpecifiers* ds, Declarator* dec, BaseStatement* bs);
+		FunctionDefinition(Declarator* dec, vector<Declaration*>* dl, BaseStatement* bs);
+		FunctionDefinition(Declarator* dec, BaseStatement* bs);
 		FunctionDefinition();
 		~FunctionDefinition();
+		bool hasDeclarationSpecifiers() const;
+		bool hasDeclarator() const;
+		bool hasVectorDeclaration() const;
+		bool hasBaseStatement() const;
+		DeclarationSpecifiers* getDeclarationSpecifiers() const;
+		Declarator* getDeclarator() const;
+		vector<Declaration*>* getVectorDeclaration() const;
+		BaseStatement* getBaseStatement() const;
 	private:
-		optional < reference_wrapper < DeclarationSpecifiers>> ds;
-		optional < reference_wrapper < Declarator>> dec;
-		optional < reference_wrapper < vector<Declaration>>> dl;
-		optional < reference_wrapper < BaseStatement>> bs;
+		DeclarationSpecifiers* ds;
+		Declarator* dec;
+		vector<Declaration*>* dl;
+		BaseStatement* bs;
 	};
 }

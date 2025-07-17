@@ -13,12 +13,12 @@ namespace WadeSpace {
 	class AndExpression
 	{
 	public:
-		AndExpression(EqualityExpression& ee);
-		AndExpression(AndExpression& ae, EqualityExpression& ee);
+		AndExpression(EqualityExpression* ee);
+		AndExpression(AndExpression* ae, EqualityExpression* ee);
 		AndExpression();
 		~AndExpression();
 	private:
-		optional < reference_wrapper < AndExpression>> ae;
-		optional < reference_wrapper < EqualityExpression>> ee;
+		AndExpression* ae;
+		EqualityExpression* ee;
 	};
 }

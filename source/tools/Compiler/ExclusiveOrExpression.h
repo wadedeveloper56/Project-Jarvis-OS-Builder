@@ -13,12 +13,12 @@ namespace WadeSpace {
 	class ExclusiveOrExpression
 	{
 	public:
-		ExclusiveOrExpression(AndExpression& ae);
-		ExclusiveOrExpression(ExclusiveOrExpression& eoe,AndExpression& ae);
+		ExclusiveOrExpression(AndExpression* ae);
+		ExclusiveOrExpression(ExclusiveOrExpression* eoe,AndExpression* ae);
 		ExclusiveOrExpression();
 		~ExclusiveOrExpression();
 	private:
-		optional < reference_wrapper < AndExpression>> ae;
-		optional < reference_wrapper < ExclusiveOrExpression>> eoe;
+		AndExpression* ae;
+		ExclusiveOrExpression* eoe;
 	};
 }

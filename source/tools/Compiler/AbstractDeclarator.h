@@ -11,14 +11,14 @@ namespace WadeSpace {
 	class AbstractDeclarator
 	{
 	public:
-		AbstractDeclarator(Pointer& ptr);
-		AbstractDeclarator(DirectAbstractDeclarator& dad);
-		AbstractDeclarator(Pointer& ptr, DirectAbstractDeclarator& dad);
+		AbstractDeclarator(Pointer* ptr);
+		AbstractDeclarator(DirectAbstractDeclarator* dad);
+		AbstractDeclarator(Pointer* ptr, DirectAbstractDeclarator* dad);
 		AbstractDeclarator();
 		~AbstractDeclarator();
 	private:
-		std::optional<std::reference_wrapper < Pointer>> ptr;
-		std::optional < std::reference_wrapper < DirectAbstractDeclarator>> dad;
+		Pointer* ptr;
+		DirectAbstractDeclarator* dad;
 	};
 }
 

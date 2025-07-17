@@ -2,7 +2,7 @@
 #include "framework.h"
 #include "ArgumentTable.h"
 
-void arg_int_resetfn(void* parent_) {
+void argIntResetFn(void* parent_) {
 	ArgIntPtr parent = (ArgIntPtr)parent_;
 	parent->count = 0;
 }
@@ -61,7 +61,7 @@ int detectsuffix(const char* str, const char* suffix) {
 	return (*str == '\0') ? 1 : 0;
 }
 
-int arg_int_scanfn(void* parent_, const char* argval) {
+int argIntScanFn(void* parent_, const char* argval) {
 	ArgIntPtr parent = (ArgIntPtr)parent_;
 	int errorcode = 0;
 
@@ -123,13 +123,13 @@ int arg_int_scanfn(void* parent_, const char* argval) {
 	return errorcode;
 }
 
-int arg_int_checkfn(void* parent_) {
+int argIntCheckFn(void* parent_) {
 	ArgIntPtr parent = (ArgIntPtr)parent_;
 	int errorcode = (parent->count < parent->hdr.mincount) ? ARG_ERR_MINCOUNT : 0;
 	return errorcode;
 }
 
-void arg_int_errorfn(void* parent_, struct _ArgDstr* ds, int errorcode, const char* argval, const char* progname) {
+void argIntErrorFn(void* parent_, struct _ArgDstr* ds, int errorcode, const char* argval, const char* progname) {
 	ArgIntPtr parent = (ArgIntPtr)parent_;
 	const char* shortopts = parent->hdr.shortopts;
 	const char* longopts = parent->hdr.longopts;
@@ -162,7 +162,7 @@ void arg_int_errorfn(void* parent_, struct _ArgDstr* ds, int errorcode, const ch
 	}
 }
 
-ArgIntPtr arg_intn(const char* shortopts, const char* longopts, const char* datatype, int mincount, int maxcount, const char* glossary) {
+ArgIntPtr argIntN(const char* shortopts, const char* longopts, const char* datatype, int mincount, int maxcount, const char* glossary) {
 	size_t nbytes;
 	ArgIntPtr result;
 
@@ -180,20 +180,20 @@ ArgIntPtr arg_intn(const char* shortopts, const char* longopts, const char* data
 		result->hdr.mincount = mincount;
 		result->hdr.maxcount = maxcount;
 		result->hdr.parent = result;
-		result->hdr.resetfn = arg_int_resetfn;
-		result->hdr.scanfn = arg_int_scanfn;
-		result->hdr.checkfn = arg_int_checkfn;
-		result->hdr.errorfn = arg_int_errorfn;
+		result->hdr.resetfn = argIntResetFn;
+		result->hdr.scanfn = argIntScanFn;
+		result->hdr.checkfn = argIntCheckFn;
+		result->hdr.errorfn = argIntErrorFn;
 		result->ival = (int*)(result + 1);
 		result->count = 0;
 	}
 	return result;
 }
 
-ArgIntPtr arg_int0(const char* shortopts, const char* longopts, const char* datatype, const char* glossary) {
-	return arg_intn(shortopts, longopts, datatype, 0, 1, glossary);
+ArgIntPtr argInt0(const char* shortopts, const char* longopts, const char* datatype, const char* glossary) {
+	return argIntN(shortopts, longopts, datatype, 0, 1, glossary);
 }
 
-ArgIntPtr arg_int1(const char* shortopts, const char* longopts, const char* datatype, const char* glossary) {
-	return arg_intn(shortopts, longopts, datatype, 1, 1, glossary);
+ArgIntPtr argInt1(const char* shortopts, const char* longopts, const char* datatype, const char* glossary) {
+	return argIntN(shortopts, longopts, datatype, 1, 1, glossary);
 }

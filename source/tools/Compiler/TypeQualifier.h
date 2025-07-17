@@ -6,15 +6,17 @@
 #include <optional>
 #include "TokenType.h"
 
+using namespace std;
+
 namespace WadeSpace {
 	class TypeQualifier
 	{
 	public:
-		TypeQualifier(std::string value, TokenType type);
+		TypeQualifier(string value, TokenType type);
 		TypeQualifier();
 		~TypeQualifier();
 	private:
-		std::string operatorStr;
+		string operatorStr;
 		TokenType type;
 	};
 }

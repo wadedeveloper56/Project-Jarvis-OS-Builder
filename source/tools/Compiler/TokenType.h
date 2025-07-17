@@ -3,6 +3,9 @@
 namespace WadeSpace {
 	typedef enum {
 		NONE,
+		INTEGER_CONSTANT,
+		FLOAT_CONSTANT,
+		STRING_CONSTANT,
 		END,
 		IDENTIFIER,
 		I_CONST,

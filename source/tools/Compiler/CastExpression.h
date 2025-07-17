@@ -15,13 +15,13 @@ namespace WadeSpace {
 	class CastExpression
 	{
 	public:
-		CastExpression(UnaryExpression& ue);
-		CastExpression(TypeName& type, CastExpression& ce);
+		CastExpression(UnaryExpression* ue);
+		CastExpression(TypeName* type, CastExpression* ce);
 		CastExpression();
 		~CastExpression();
 	private:
-		optional < reference_wrapper < UnaryExpression>> ue;
-		optional < reference_wrapper < TypeName>> type;
-		optional < reference_wrapper < CastExpression>> ce;
+		UnaryExpression* ue;
+		TypeName* type;
+		CastExpression* ce;
 	};
 }

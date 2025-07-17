@@ -13,13 +13,13 @@ namespace WadeSpace {
 	class EqualityExpression
 	{
 	public:
-		EqualityExpression(RelationalExpression& re);
-		EqualityExpression(EqualityExpression& eq,string op,RelationalExpression& re);
+		EqualityExpression(RelationalExpression* re);
+		EqualityExpression(EqualityExpression* eq, string op, RelationalExpression* re);
 		EqualityExpression();
 		~EqualityExpression();
 	private:
-		optional < reference_wrapper < RelationalExpression>> re;
+		RelationalExpression* re;
 		string op;
-		optional < reference_wrapper < EqualityExpression>> ee;
+		EqualityExpression* ee;
 	};
 }

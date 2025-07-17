@@ -13,13 +13,13 @@ namespace WadeSpace {
 	class RelationalExpression
 	{
 	public:
-		RelationalExpression(ShiftExpression& se);
-		RelationalExpression(RelationalExpression& re, string op, ShiftExpression& se);
+		RelationalExpression(ShiftExpression* se);
+		RelationalExpression(RelationalExpression* re, string op, ShiftExpression* se);
 		RelationalExpression();
 		~RelationalExpression();
 	private:
-		optional < reference_wrapper < RelationalExpression>> re;
+		RelationalExpression* re;
 		string op;
-		optional < reference_wrapper < ShiftExpression>> se;
+		ShiftExpression* se;
 	};
 }

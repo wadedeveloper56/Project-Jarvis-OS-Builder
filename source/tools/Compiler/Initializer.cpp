@@ -2,7 +2,7 @@
 
 using namespace WadeSpace;
 
-Initializer::Initializer(AssignmentExpression& exp) :exp(exp), list(std::nullopt) {}
-Initializer::Initializer(std::vector<Initializer>& list) :exp(std::nullopt), list(list) {}
-Initializer::Initializer() :exp(std::nullopt), list(std::nullopt) {}
+Initializer::Initializer(AssignmentExpression* exp) :exp(exp), list(NULL) {}
+Initializer::Initializer(vector<Initializer*>* list) :exp(NULL), list(list) {}
+Initializer::Initializer() :exp(NULL), list(NULL) {}
 Initializer::~Initializer() {}

@@ -12,7 +12,7 @@ namespace WadeSpace {
 		Interpreter();
 		int parse();
 		void clear();
-		std::string str() const;
+		string str() const;
 		void setStreams(std::istream* is, std::ostream* os);
 		friend class Parser;
 		friend class Scanner;

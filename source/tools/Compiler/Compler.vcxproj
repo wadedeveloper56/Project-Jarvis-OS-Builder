@@ -197,6 +197,7 @@
     <ClInclude Include="Declarator.h" />
     <ClInclude Include="DirectAbstractDeclarator.h" />
     <ClInclude Include="DirectDeclarator.h" />
+    <ClInclude Include="DirectDeclaratorProxy.h" />
     <ClInclude Include="Enumerator.h" />
     <ClInclude Include="EnumSpecifier.h" />
     <ClInclude Include="EqualityExpression.h" />
@@ -260,6 +261,7 @@
     <ClCompile Include="Declarator.cpp" />
     <ClCompile Include="DirectAbstractDeclarator.cpp" />
     <ClCompile Include="DirectDeclarator.cpp" />
+    <ClCompile Include="DirectDeclaratorProxy.cpp" />
     <ClCompile Include="Enumerator.cpp" />
     <ClCompile Include="EnumSpecifier.cpp" />
     <ClCompile Include="EqualityExpression.cpp" />

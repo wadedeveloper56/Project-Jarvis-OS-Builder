@@ -18,17 +18,17 @@ namespace WadeSpace {
 	class UnaryExpression
 	{
 	public:
-		UnaryExpression(PostfixExpression& pe);
-		UnaryExpression(string op, UnaryExpression& ue);
-		UnaryExpression(string op, CastExpression& ce);
-		UnaryExpression(string op, TypeName& tn);
+		UnaryExpression(PostfixExpression* pe);
+		UnaryExpression(string op, UnaryExpression* ue);
+		UnaryExpression(string op, CastExpression* ce);
+		UnaryExpression(string op, TypeName* tn);
 		UnaryExpression();
 		~UnaryExpression();
 	private:
-		optional < reference_wrapper < PostfixExpression>> pe;
-		optional < reference_wrapper < TypeName>> tn;
-		optional < reference_wrapper < UnaryExpression>> ue;
-		optional < reference_wrapper < CastExpression>> ce;
+		PostfixExpression* pe;
+		TypeName* tn;
+		UnaryExpression* ue;
+		CastExpression* ce;
 		string op;
 	};
 }

@@ -2,12 +2,12 @@
 #include "framework.h"
 #include "ArgumentTable.h"
 
-void arg_lit_resetfn(void* parent_) {
+void argLitResetFn(void* parent_) {
 	ArgLitPtr parent = (ArgLitPtr)parent_;
 	parent->count = 0;
 } 
 
-int arg_lit_scanfn(void* parent_, const char* argval) {
+int argLitScanFn(void* parent_, const char* argval) {
 	ArgLitPtr parent = (ArgLitPtr)parent_;
 	int errorcode = 0;
 	if (parent->count < parent->hdr.maxcount)
@@ -17,13 +17,13 @@ int arg_lit_scanfn(void* parent_, const char* argval) {
 	return errorcode;
 }
 
-int arg_lit_checkfn(void* parent_) {
+int argLitCheckFn(void* parent_) {
 	ArgLitPtr parent = (ArgLitPtr)parent_;
 	int errorcode = (parent->count < parent->hdr.mincount) ? ARG_ERR_MINCOUNT : 0;
 	return errorcode;
 }
 
-void arg_lit_errorfn(void* parent_, struct _ArgDstr* ds, int errorcode, const char* argval, const char* progname) {
+void argLitErrorFn(void* parent_, struct _ArgDstr* ds, int errorcode, const char* argval, const char* progname) {
 	ArgLitPtr parent = (ArgLitPtr)parent_;
 	const char* shortopts = parent->hdr.shortopts;
 	const char* longopts = parent->hdr.longopts;
@@ -43,7 +43,7 @@ void arg_lit_errorfn(void* parent_, struct _ArgDstr* ds, int errorcode, const ch
 	}
 }
 
-ArgLitPtr arg_litn(const char* shortopts, const char* longopts, int mincount, int maxcount, const char* glossary) {
+ArgLitPtr argLitN(const char* shortopts, const char* longopts, int mincount, int maxcount, const char* glossary) {
 	ArgLitPtr result;
 
 	maxcount = (maxcount < mincount) ? mincount : maxcount;
@@ -58,19 +58,19 @@ ArgLitPtr arg_litn(const char* shortopts, const char* longopts, int mincount, in
 		result->hdr.mincount = mincount;
 		result->hdr.maxcount = maxcount;
 		result->hdr.parent = result;
-		result->hdr.resetfn = arg_lit_resetfn;
-		result->hdr.scanfn = arg_lit_scanfn;
-		result->hdr.checkfn = arg_lit_checkfn;
-		result->hdr.errorfn = arg_lit_errorfn;
+		result->hdr.resetfn = argLitResetFn;
+		result->hdr.scanfn = argLitScanFn;
+		result->hdr.checkfn = argLitCheckFn;
+		result->hdr.errorfn = argLitErrorFn;
 		result->count = 0;
 	}
 	return result;
 }
 
-ArgLitPtr arg_lit0(const char* shortopts, const char* longopts, const char* glossary) {
-	return arg_litn(shortopts, longopts, 0, 1, glossary);
+ArgLitPtr argLit0(const char* shortopts, const char* longopts, const char* glossary) {
+	return argLitN(shortopts, longopts, 0, 1, glossary);
 }
 
-ArgLitPtr arg_lit1(const char* shortopts, const char* longopts, const char* glossary) {
-	return arg_litn(shortopts, longopts, 1, 1, glossary);
+ArgLitPtr argLit1(const char* shortopts, const char* longopts, const char* glossary) {
+	return argLitN(shortopts, longopts, 1, 1, glossary);
 }

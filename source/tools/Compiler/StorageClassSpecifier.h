@@ -6,15 +6,17 @@
 #include <optional>
 #include "TokenType.h"
 
+using namespace std;
+
 namespace WadeSpace {
 	class StorageClassSpecifier
 	{
 	public:
-		StorageClassSpecifier(std::string value, TokenType type);
+		StorageClassSpecifier(string value, TokenType type);
 		StorageClassSpecifier();
 		~StorageClassSpecifier();
 	private:
-		std::string operatorStr;
+		string operatorStr;
 		TokenType type;
 	};
 }

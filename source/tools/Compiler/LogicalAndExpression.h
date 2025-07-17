@@ -13,12 +13,12 @@ namespace WadeSpace {
 	class LogicalAndExpression
 	{
 	public:
-		LogicalAndExpression(InclusiveOrExpression& eoe);
-		LogicalAndExpression(LogicalAndExpression& loe, InclusiveOrExpression& eoe);
+		LogicalAndExpression(InclusiveOrExpression* eoe);
+		LogicalAndExpression(LogicalAndExpression* loe, InclusiveOrExpression* eoe);
 		LogicalAndExpression();
 		~LogicalAndExpression();
 	private:
-		optional < reference_wrapper < InclusiveOrExpression>> ioe;
-		optional < reference_wrapper < LogicalAndExpression>> lae;
+		InclusiveOrExpression* ioe;
+		LogicalAndExpression* lae;
 	};
 }

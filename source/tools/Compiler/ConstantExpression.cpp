@@ -2,6 +2,6 @@
 
 using namespace WadeSpace;
 
-ConstantExpression::ConstantExpression(ConditionalExpression& ce):ce(ce) {}
-ConstantExpression::ConstantExpression():ce(std::nullopt) {}
+ConstantExpression::ConstantExpression(ConditionalExpression* ce):ce(ce) {}
+ConstantExpression::ConstantExpression():ce(NULL) {}
 ConstantExpression::~ConstantExpression() {}

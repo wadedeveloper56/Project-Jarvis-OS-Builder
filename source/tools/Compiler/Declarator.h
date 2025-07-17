@@ -4,19 +4,20 @@
 #include <vector>
 #include <stdint.h>
 #include <optional>
-#include "DirectDeclarator.h"
 #include "Pointer.h"
+#include "DirectDeclarator.h"
+
+using namespace std;
 
 namespace WadeSpace {
 	class Declarator
 	{
 	public:
-		Declarator(Pointer& ptr,DirectDeclarator& dd);
-		Declarator(DirectDeclarator& dd);
+		Declarator(Pointer* pointer, DirectDeclarator* directDeclarator);
+		Declarator(DirectDeclarator* directDeclarator);
 		Declarator();
 		~Declarator();
-	private:
-		std::optional<std::reference_wrapper < DirectDeclarator>> dd;
-		std::optional<std::reference_wrapper < Pointer>> ptr;
+		DirectDeclarator* directDeclarator;
+		Pointer* pointer;
 	};
 }

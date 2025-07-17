@@ -6,16 +6,18 @@
 #include <optional>
 #include "ConstantExpression.h"
 
+using namespace std;
+
 namespace WadeSpace {
 	class Enumerator
 	{
 	public:
-		Enumerator(std::string value, ConstantExpression&type);
-		Enumerator(std::string value);
+		Enumerator(string value, ConstantExpression* type);
+		Enumerator(string value);
 		Enumerator();
 		~Enumerator();
 	private:
-		std::string operatorStr;
-		std::optional<std::reference_wrapper < ConstantExpression>> expression;
+		string operatorStr;
+		ConstantExpression* expression;
 	};
 }

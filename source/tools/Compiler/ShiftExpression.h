@@ -13,13 +13,13 @@ namespace WadeSpace {
 	class ShiftExpression
 	{
 	public:
-		ShiftExpression(AdditiveExpression& ae);
-		ShiftExpression(ShiftExpression& se, string op, AdditiveExpression& ae);
+		ShiftExpression(AdditiveExpression* ae);
+		ShiftExpression(ShiftExpression* se, string op, AdditiveExpression* ae);
 		ShiftExpression();
 		~ShiftExpression();
 	private:
-		optional < reference_wrapper < AdditiveExpression>> ae;
+		AdditiveExpression* ae;
 		string op;
-		optional < reference_wrapper < ShiftExpression>> se;
+		ShiftExpression* se;
 	};
 }

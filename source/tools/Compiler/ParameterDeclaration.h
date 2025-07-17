@@ -12,14 +12,14 @@ namespace WadeSpace {
 	class ParameterDeclaration
 	{
 	public:
-		ParameterDeclaration(DeclarationSpecifiers& pdl);
-		ParameterDeclaration(DeclarationSpecifiers& pdl, AbstractDeclarator& ad);
-		ParameterDeclaration(DeclarationSpecifiers& pdl, Declarator& dec);
+		ParameterDeclaration(DeclarationSpecifiers* pdl);
+		ParameterDeclaration(DeclarationSpecifiers* pdl, AbstractDeclarator* ad);
+		ParameterDeclaration(DeclarationSpecifiers* pdl, Declarator* dec);
 		ParameterDeclaration();
 		~ParameterDeclaration();
 	private:
-		std::optional < std::reference_wrapper < DeclarationSpecifiers>> pdl;
-		std::optional < std::reference_wrapper < Declarator>> dec;
-		std::optional < std::reference_wrapper < AbstractDeclarator>> ad;
+		DeclarationSpecifiers* pdl;
+		Declarator* dec;
+		AbstractDeclarator* ad;
 	};
 }

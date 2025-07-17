@@ -11,13 +11,13 @@ namespace WadeSpace {
 	class StructDeclarator
 	{
 	public:
-		StructDeclarator(Declarator& dec);
-		StructDeclarator(ConstantExpression& exp);
-		StructDeclarator(Declarator& dec, ConstantExpression& exp);
+		StructDeclarator(Declarator* dec);
+		StructDeclarator(ConstantExpression* exp);
+		StructDeclarator(Declarator* dec, ConstantExpression* exp);
 		StructDeclarator();
 		~StructDeclarator();
 	private:
-		std::optional < std::reference_wrapper < Declarator>> dec;
-		std::optional < std::reference_wrapper < ConstantExpression>> exp;
+		Declarator* dec;
+		ConstantExpression* exp;
 	};
 }

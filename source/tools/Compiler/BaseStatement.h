@@ -17,30 +17,30 @@ namespace WadeSpace {
 	public:
 		BaseStatement(TokenType op);
 		BaseStatement(TokenType op, string identifier);
-		BaseStatement(TokenType op, Expression& exp);
-		BaseStatement(TokenType op, Expression& exp, BaseStatement& statement);
-		BaseStatement(TokenType op, Expression& exp, BaseStatement& ifSstatement, BaseStatement& elseStatement);
-		BaseStatement(TokenType op, BaseStatement& es1, BaseStatement& es2, BaseStatement& statement);
-		BaseStatement(TokenType op, BaseStatement& es1, BaseStatement& es2, Expression& exp, BaseStatement& statement);
-		BaseStatement(vector<BaseStatement>& statementList);
-		BaseStatement(vector<Declaration>& declarationList); 
-		BaseStatement(vector<BaseStatement>& statementList, vector<Declaration> declarationList);
-		BaseStatement(string identifier, BaseStatement& statement);
-		BaseStatement(TokenType op, ConstantExpression& exp, BaseStatement& statement);
-		BaseStatement(TokenType op, BaseStatement& statement);
+		BaseStatement(TokenType op, Expression* exp);
+		BaseStatement(TokenType op, Expression* exp, BaseStatement* statement);
+		BaseStatement(TokenType op, Expression* exp, BaseStatement* ifSstatement, BaseStatement* elseStatement);
+		BaseStatement(TokenType op, BaseStatement* es1, BaseStatement* es2, BaseStatement* statement);
+		BaseStatement(TokenType op, BaseStatement* es1, BaseStatement* es2, Expression* exp, BaseStatement* statement);
+		BaseStatement(vector<BaseStatement*>* statementList);
+		BaseStatement(vector<Declaration*>* declarationList); 
+		BaseStatement(vector<BaseStatement*>* statementList, vector<Declaration*>* declarationList);
+		BaseStatement(string identifier, BaseStatement* statement);
+		BaseStatement(TokenType op, ConstantExpression* exp, BaseStatement* statement);
+		BaseStatement(TokenType op, BaseStatement* statement);
 
 		BaseStatement();
 		~BaseStatement();
 	protected:
 		TokenType op;
 		string identifier;
-		optional < reference_wrapper < Expression>> exp;
-		optional < reference_wrapper < ConstantExpression>> contExp;
-		optional < reference_wrapper < BaseStatement>> statement;
-		optional < reference_wrapper < BaseStatement>> es1;
-		optional < reference_wrapper < BaseStatement>> es2;
-		optional < reference_wrapper < BaseStatement>> statement2;
-		optional < reference_wrapper < vector<BaseStatement>>> statementList;
-		optional < reference_wrapper < vector<Declaration>>> declarationList;
+		Expression* exp;
+		ConstantExpression* contExp;
+		BaseStatement* statement;
+		BaseStatement* es1;
+		BaseStatement* es2;
+		BaseStatement* statement2;
+		vector<BaseStatement*>* statementList;
+		vector<Declaration*>* declarationList;
 	};
 }

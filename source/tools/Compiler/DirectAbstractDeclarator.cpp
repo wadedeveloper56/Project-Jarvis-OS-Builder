@@ -2,7 +2,7 @@
 
 using namespace WadeSpace;
 
-DirectAbstractDeclarator::DirectAbstractDeclarator(AbstractDeclarator& ad) :ad(ad) {}
-DirectAbstractDeclarator::DirectAbstractDeclarator() :ad(std::nullopt) {}
+DirectAbstractDeclarator::DirectAbstractDeclarator(AbstractDeclarator* ad) :ad(ad) {}
+DirectAbstractDeclarator::DirectAbstractDeclarator() :ad(NULL) {}
 DirectAbstractDeclarator::~DirectAbstractDeclarator() {}
 

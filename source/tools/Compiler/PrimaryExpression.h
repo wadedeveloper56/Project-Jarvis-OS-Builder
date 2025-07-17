@@ -16,13 +16,13 @@ namespace WadeSpace {
 	{
 	public:
 		PrimaryExpression(string identifier);
-		PrimaryExpression(Constant& c);
-		PrimaryExpression(Expression& exp);
+		PrimaryExpression(Constant* c);
+		PrimaryExpression(Expression* exp);
 		PrimaryExpression();
 		~PrimaryExpression();
 	private:
 		string identifier;
-		optional < reference_wrapper < Constant>> c;
-		optional < reference_wrapper < Expression>> exp;
+		Constant* c;
+		Expression* exp;
 	};
 }

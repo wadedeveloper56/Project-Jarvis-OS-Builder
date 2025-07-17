@@ -13,12 +13,12 @@ namespace WadeSpace {
 	class InclusiveOrExpression
 	{
 	public:
-		InclusiveOrExpression(ExclusiveOrExpression& eoe);
-		InclusiveOrExpression(InclusiveOrExpression& ioe, ExclusiveOrExpression& eoe);
+		InclusiveOrExpression(ExclusiveOrExpression* eoe);
+		InclusiveOrExpression(InclusiveOrExpression* ioe, ExclusiveOrExpression* eoe);
 		InclusiveOrExpression();
 		~InclusiveOrExpression();
 	private:
-		optional < reference_wrapper < InclusiveOrExpression>> ioe;
-		optional < reference_wrapper < ExclusiveOrExpression>> eoe;
+		InclusiveOrExpression* ioe;
+		ExclusiveOrExpression* eoe;
 	};
 }

@@ -3,7 +3,7 @@
 using namespace WadeSpace;
 using namespace std;
 
-MultiplicativeExpression::MultiplicativeExpression(CastExpression& ce) :ce(nullopt), op(""), me(nullopt) {}
-MultiplicativeExpression::MultiplicativeExpression(MultiplicativeExpression& me, string op, CastExpression& ce): me(me), op(op), ce(ce) {}
-MultiplicativeExpression::MultiplicativeExpression() :me(nullopt), op(""), ce(nullopt) {}
+MultiplicativeExpression::MultiplicativeExpression(CastExpression* ce) :ce(NULL), op(""), me(NULL) {}
+MultiplicativeExpression::MultiplicativeExpression(MultiplicativeExpression* me, string op, CastExpression* ce): me(me), op(op), ce(ce) {}
+MultiplicativeExpression::MultiplicativeExpression() :me(NULL), op(""), ce(NULL) {}
 MultiplicativeExpression::~MultiplicativeExpression() {}

@@ -2,8 +2,8 @@
 
 using namespace WadeSpace;
 
-EnumSpecifier::EnumSpecifier(std::vector<Enumerator>& list) :nameStr(""), list(list) {}
-EnumSpecifier::EnumSpecifier(std::string value, std::vector<Enumerator>& list) :nameStr(value), list(list) {}
-EnumSpecifier::EnumSpecifier(std::string value) :nameStr(value), list(std::nullopt) {}
-EnumSpecifier::EnumSpecifier() :nameStr(""), list(std::nullopt) {}
+EnumSpecifier::EnumSpecifier(vector<Enumerator *>* list) :nameStr(""), list(list) {}
+EnumSpecifier::EnumSpecifier(string value, vector<Enumerator *>* list) :nameStr(value), list(list) {}
+EnumSpecifier::EnumSpecifier(string value) :nameStr(value), list(NULL) {}
+EnumSpecifier::EnumSpecifier() :nameStr(""), list(NULL) {}
 EnumSpecifier::~EnumSpecifier() {}

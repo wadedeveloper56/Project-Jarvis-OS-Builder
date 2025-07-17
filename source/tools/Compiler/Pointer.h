@@ -6,21 +6,23 @@
 #include <optional>
 #include "TypeQualifier.h"
 
+using namespace std;
+
 namespace WadeSpace {
 	class Pointer
 	{
 	public:
-		Pointer(std::string value, std::vector<TypeQualifier>& list);
-		Pointer(std::string value, std::vector<TypeQualifier>& list, Pointer& ptr);
-		Pointer(std::string value, Pointer& ptr);
-		Pointer(std::string value);
+		Pointer(string value, vector<TypeQualifier *>* list);
+		Pointer(string value, vector<TypeQualifier *>* list, Pointer* ptr);
+		Pointer(string value, Pointer* ptr);
+		Pointer(string value);
 		Pointer();
 		~Pointer();
 		void inc();
 	private:
-		std::string nameStr;
-		std::optional < std::reference_wrapper < std::vector<TypeQualifier>>> list;
+		string nameStr;
+		vector<TypeQualifier *>* list;
 		int level;
-		std::optional<std::reference_wrapper < Pointer>> ptr;
+		Pointer* ptr;
 	};
 }

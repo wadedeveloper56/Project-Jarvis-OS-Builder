@@ -6,15 +6,17 @@
 #include <optional>
 #include "ParameterDeclaration.h"
 
+using namespace std;
+
 namespace WadeSpace {
 	class ParameterTypeList
 	{
 	public:
-		ParameterTypeList(std::vector<ParameterDeclaration> pdl, std::string ellipsis);
+		ParameterTypeList(vector<ParameterDeclaration*>* pdl, string ellipsis);
 		ParameterTypeList();
 		~ParameterTypeList();
 	private:
-		std::optional < std::reference_wrapper < std::vector<ParameterDeclaration>>> pdl;
-		std::string ellipsis;
+		vector<ParameterDeclaration*>* pdl;
+		string ellipsis;
 	};
 }

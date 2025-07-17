@@ -14,17 +14,17 @@ namespace WadeSpace {
 	class ExternalDeclaration
 	{
 	public:
-		ExternalDeclaration(FunctionDefinition& fd);
-		ExternalDeclaration(Declaration& dec);
+		ExternalDeclaration(FunctionDefinition* fd);
+		ExternalDeclaration(Declaration* dec);
 		ExternalDeclaration();
 		~ExternalDeclaration();
 		string toString();
 		bool isFunction() const;
 		bool isDeclaration() const;
-		FunctionDefinition getFunction() const;
-		Declaration getDeclaration() const;
+		FunctionDefinition* getFunction() const;
+		Declaration* getDeclaration() const;
 	private:
-		optional < reference_wrapper < FunctionDefinition>> fd;
-		optional < reference_wrapper < Declaration>> dec;
+		FunctionDefinition* fd;
+		Declaration* dec;
 	};
 }

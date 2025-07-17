@@ -16,12 +16,12 @@ namespace WadeSpace {
 	public:
 		ProgramData();
 		~ProgramData();
-		void add(ExternalDeclaration& data);
+		void add(ExternalDeclaration* data);
 		void processGlobalVariables();
 		void test();
 	private:
-		vector<ExternalDeclaration> programData;
-		vector<FunctionDefinition> functionTable;
-		vector<Declaration> variableTable;
+		vector<ExternalDeclaration *>* programData;
+		vector<FunctionDefinition *>* functionTable;
+		vector<Declaration *>* variableTable;
 	};
 }

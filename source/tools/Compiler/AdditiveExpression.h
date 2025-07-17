@@ -13,13 +13,13 @@ namespace WadeSpace {
 	class AdditiveExpression
 	{
 	public:
-		AdditiveExpression(MultiplicativeExpression& me);
-		AdditiveExpression(AdditiveExpression& ae, string op, MultiplicativeExpression& me);
+		AdditiveExpression(MultiplicativeExpression* me);
+		AdditiveExpression(AdditiveExpression* ae, string op, MultiplicativeExpression* me);
 		AdditiveExpression();
 		~AdditiveExpression();
 	private:
-		optional < reference_wrapper < MultiplicativeExpression>> me;
+		MultiplicativeExpression* me;
 		string op;
-		optional < reference_wrapper < AdditiveExpression>> ae;
+		AdditiveExpression* ae;
 	};
 }

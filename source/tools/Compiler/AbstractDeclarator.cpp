@@ -2,8 +2,8 @@
 
 using namespace WadeSpace;
 
-AbstractDeclarator::AbstractDeclarator(Pointer& ptr) :ptr(ptr), dad(std::nullopt) {}
-AbstractDeclarator::AbstractDeclarator(DirectAbstractDeclarator& dad) :ptr(std::nullopt), dad(dad) {}
-AbstractDeclarator::AbstractDeclarator(Pointer& ptr, DirectAbstractDeclarator& dad) :ptr(ptr), dad(dad) {}
-AbstractDeclarator::AbstractDeclarator() :ptr(std::nullopt), dad(std::nullopt) {}
+AbstractDeclarator::AbstractDeclarator(Pointer* ptr) :ptr(ptr), dad(NULL) {}
+AbstractDeclarator::AbstractDeclarator(DirectAbstractDeclarator* dad) :ptr(NULL), dad(dad) {}
+AbstractDeclarator::AbstractDeclarator(Pointer* ptr, DirectAbstractDeclarator* dad) :ptr(ptr), dad(dad) {}
+AbstractDeclarator::AbstractDeclarator() :ptr(NULL), dad(NULL) {}
 AbstractDeclarator::~AbstractDeclarator() {}

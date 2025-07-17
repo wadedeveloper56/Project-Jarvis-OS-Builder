@@ -11,15 +11,15 @@ namespace WadeSpace {
 	class SpecifierQualifierList
 	{
 	public:
-		SpecifierQualifierList(SpecifierQualifierList& sql, TypeSpecifier& ts);
-		SpecifierQualifierList(TypeSpecifier& ts);
-		SpecifierQualifierList(SpecifierQualifierList& sql, TypeQualifier& ts);
-		SpecifierQualifierList(TypeQualifier& ts);
+		SpecifierQualifierList(SpecifierQualifierList* sql, TypeSpecifier* ts);
+		SpecifierQualifierList(TypeSpecifier* ts);
+		SpecifierQualifierList(SpecifierQualifierList* sql, TypeQualifier* ts);
+		SpecifierQualifierList(TypeQualifier* ts);
 		SpecifierQualifierList();
 		~SpecifierQualifierList();
 	private:
-		std::optional < std::reference_wrapper < SpecifierQualifierList>> sql;
-		std::optional < std::reference_wrapper < TypeSpecifier>> ts;
-		std::optional < std::reference_wrapper < TypeQualifier>> tq;
+		SpecifierQualifierList* sql;
+		TypeSpecifier* ts;
+		TypeQualifier* tq;
 	};
 }

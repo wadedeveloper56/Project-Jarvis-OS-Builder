@@ -106,6 +106,7 @@
     #include "FunctionDefinition.h"
     #include "ExternalDeclaration.h"
     #include "ProgramData.h"
+    #include "DirectDeclaratorProxy.h"
 
     using namespace std;
 
@@ -116,7 +117,7 @@
         class Interpreter;
     }
 
-#line 120 "parser.hpp"
+#line 121 "parser.hpp"
 
 # include <cassert>
 # include <cstdlib> // std::abort
@@ -257,7 +258,7 @@
 
 #line 9 "parser.y"
 namespace  WadeSpace  {
-#line 261 "parser.hpp"
+#line 262 "parser.hpp"
 
 
 
@@ -477,149 +478,149 @@ namespace  WadeSpace  {
     union union_type
     {
       // abstract_declarator
-      char dummy1[sizeof (AbstractDeclarator)];
+      char dummy1[sizeof (AbstractDeclarator *)];
 
       // additive_expression
-      char dummy2[sizeof (AdditiveExpression)];
+      char dummy2[sizeof (AdditiveExpression *)];
 
       // and_expression
-      char dummy3[sizeof (AndExpression)];
+      char dummy3[sizeof (AndExpression *)];
 
       // assignment_expression
-      char dummy4[sizeof (AssignmentExpression)];
+      char dummy4[sizeof (AssignmentExpression *)];
 
       // assignment_operator
-      char dummy5[sizeof (AssignmentOperator)];
+      char dummy5[sizeof (AssignmentOperator *)];
 
       // statement
       // expression_statement
       // selection_statement
       // iteration_statement
       // jump_statement
-      char dummy6[sizeof (BaseStatement)];
+      char dummy6[sizeof (BaseStatement *)];
 
       // cast_expression
-      char dummy7[sizeof (CastExpression)];
+      char dummy7[sizeof (CastExpression *)];
 
       // compound_statement
-      char dummy8[sizeof (CompoundStatement)];
+      char dummy8[sizeof (CompoundStatement *)];
 
       // conditional_expression
-      char dummy9[sizeof (ConditionalExpression)];
+      char dummy9[sizeof (ConditionalExpression *)];
 
       // constant
-      char dummy10[sizeof (Constant)];
+      char dummy10[sizeof (Constant *)];
 
       // constant_expression
-      char dummy11[sizeof (ConstantExpression)];
+      char dummy11[sizeof (ConstantExpression *)];
 
       // declaration
-      char dummy12[sizeof (Declaration)];
+      char dummy12[sizeof (Declaration *)];
 
       // declaration_specifiers
-      char dummy13[sizeof (DeclarationSpecifiers)];
+      char dummy13[sizeof (DeclarationSpecifiers *)];
 
       // declarator
-      char dummy14[sizeof (Declarator)];
+      char dummy14[sizeof (Declarator *)];
 
       // direct_abstract_declarator
-      char dummy15[sizeof (DirectAbstractDeclarator)];
+      char dummy15[sizeof (DirectAbstractDeclarator *)];
 
       // direct_declarator
-      char dummy16[sizeof (DirectDeclarator)];
+      char dummy16[sizeof (DirectDeclarator *)];
 
       // enum_specifier
-      char dummy17[sizeof (EnumSpecifier)];
+      char dummy17[sizeof (EnumSpecifier *)];
 
       // enumerator
-      char dummy18[sizeof (Enumerator)];
+      char dummy18[sizeof (Enumerator *)];
 
       // equality_expression
-      char dummy19[sizeof (EqualityExpression)];
+      char dummy19[sizeof (EqualityExpression *)];
 
       // exclusive_or_expression
-      char dummy20[sizeof (ExclusiveOrExpression)];
+      char dummy20[sizeof (ExclusiveOrExpression *)];
 
       // expression
-      char dummy21[sizeof (Expression)];
+      char dummy21[sizeof (Expression *)];
 
       // external_declaration
-      char dummy22[sizeof (ExternalDeclaration)];
+      char dummy22[sizeof (ExternalDeclaration *)];
 
       // function_definition
-      char dummy23[sizeof (FunctionDefinition)];
+      char dummy23[sizeof (FunctionDefinition *)];
 
       // inclusive_or_expression
-      char dummy24[sizeof (InclusiveOrExpression)];
+      char dummy24[sizeof (InclusiveOrExpression *)];
 
       // init_declarator
-      char dummy25[sizeof (InitDeclarator)];
+      char dummy25[sizeof (InitDeclarator *)];
 
       // initializer
-      char dummy26[sizeof (Initializer)];
+      char dummy26[sizeof (Initializer *)];
 
       // labeled_statement
-      char dummy27[sizeof (LabeledStatement)];
+      char dummy27[sizeof (LabeledStatement *)];
 
       // logical_and_expression
-      char dummy28[sizeof (LogicalAndExpression)];
+      char dummy28[sizeof (LogicalAndExpression *)];
 
       // logical_or_expression
-      char dummy29[sizeof (LogicalOrExpression)];
+      char dummy29[sizeof (LogicalOrExpression *)];
 
       // multiplicative_expression
-      char dummy30[sizeof (MultiplicativeExpression)];
+      char dummy30[sizeof (MultiplicativeExpression *)];
 
       // parameter_declaration
-      char dummy31[sizeof (ParameterDeclaration)];
+      char dummy31[sizeof (ParameterDeclaration *)];
 
       // parameter_type_list
-      char dummy32[sizeof (ParameterTypeList)];
+      char dummy32[sizeof (ParameterTypeList *)];
 
       // pointer
-      char dummy33[sizeof (Pointer)];
+      char dummy33[sizeof (Pointer *)];
 
       // postfix_expression
-      char dummy34[sizeof (PostfixExpression)];
+      char dummy34[sizeof (PostfixExpression *)];
 
       // primary_expression
-      char dummy35[sizeof (PrimaryExpression)];
+      char dummy35[sizeof (PrimaryExpression *)];
 
       // relational_expression
-      char dummy36[sizeof (RelationalExpression)];
+      char dummy36[sizeof (RelationalExpression *)];
 
       // shift_expression
-      char dummy37[sizeof (ShiftExpression)];
+      char dummy37[sizeof (ShiftExpression *)];
 
       // specifier_qualifier_list
-      char dummy38[sizeof (SpecifierQualifierList)];
+      char dummy38[sizeof (SpecifierQualifierList *)];
 
       // storage_class_specifier
-      char dummy39[sizeof (StorageClassSpecifier)];
+      char dummy39[sizeof (StorageClassSpecifier *)];
 
       // struct_declaration
-      char dummy40[sizeof (StructDeclaration)];
+      char dummy40[sizeof (StructDeclaration *)];
 
       // struct_declarator
-      char dummy41[sizeof (StructDeclarator)];
+      char dummy41[sizeof (StructDeclarator *)];
 
       // struct_or_union
-      char dummy42[sizeof (StructOrUnion)];
+      char dummy42[sizeof (StructOrUnion *)];
 
       // struct_or_union_specifier
-      char dummy43[sizeof (StructOrUnionSpecifier)];
+      char dummy43[sizeof (StructOrUnionSpecifier *)];
 
       // type_name
-      char dummy44[sizeof (TypeName)];
+      char dummy44[sizeof (TypeName *)];
 
       // type_qualifier
-      char dummy45[sizeof (TypeQualifier)];
+      char dummy45[sizeof (TypeQualifier *)];
 
       // type_specifier
-      char dummy46[sizeof (TypeSpecifier)];
+      char dummy46[sizeof (TypeSpecifier *)];
 
       // unary_expression
-      char dummy47[sizeof (UnaryExpression)];
+      char dummy47[sizeof (UnaryExpression *)];
 
       // "f_const"
       char dummy48[sizeof (long double)];
@@ -716,37 +717,37 @@ namespace  WadeSpace  {
       char dummy49[sizeof (std::string)];
 
       // argument_expression_list
-      char dummy50[sizeof (std::vector<AssignmentExpression>)];
+      char dummy50[sizeof (std::vector<AssignmentExpression *> *)];
 
       // statement_list
-      char dummy51[sizeof (std::vector<BaseStatement>)];
+      char dummy51[sizeof (std::vector<BaseStatement *> *)];
 
       // declaration_list
-      char dummy52[sizeof (std::vector<Declaration>)];
+      char dummy52[sizeof (std::vector<Declaration *> *)];
 
       // enumerator_list
-      char dummy53[sizeof (std::vector<Enumerator>)];
+      char dummy53[sizeof (std::vector<Enumerator *> *)];
 
       // init_declarator_list
-      char dummy54[sizeof (std::vector<InitDeclarator>)];
+      char dummy54[sizeof (std::vector<InitDeclarator *> *)];
 
       // initializer_list
-      char dummy55[sizeof (std::vector<Initializer>)];
+      char dummy55[sizeof (std::vector<Initializer *> *)];
 
       // parameter_list
-      char dummy56[sizeof (std::vector<ParameterDeclaration>)];
+      char dummy56[sizeof (std::vector<ParameterDeclaration *> *)];
 
       // struct_declaration_list
-      char dummy57[sizeof (std::vector<StructDeclaration>)];
+      char dummy57[sizeof (std::vector<StructDeclaration *> *)];
 
       // struct_declarator_list
-      char dummy58[sizeof (std::vector<StructDeclarator>)];
+      char dummy58[sizeof (std::vector<StructDeclarator *> *)];
 
       // type_qualifier_list
-      char dummy59[sizeof (std::vector<TypeQualifier>)];
+      char dummy59[sizeof (std::vector<TypeQualifier *> *)];
 
       // identifier_list
-      char dummy60[sizeof (std::vector<std::string>)];
+      char dummy60[sizeof (std::vector<std::string> *)];
 
       // "i_const"
       char dummy61[sizeof (uint64_t)];
@@ -1105,23 +1106,23 @@ namespace  WadeSpace  {
         switch (this->kind ())
     {
       case symbol_kind::S_abstract_declarator: // abstract_declarator
-        value.move< AbstractDeclarator > (std::move (that.value));
+        value.move< AbstractDeclarator * > (std::move (that.value));
         break;
 
       case symbol_kind::S_additive_expression: // additive_expression
-        value.move< AdditiveExpression > (std::move (that.value));
+        value.move< AdditiveExpression * > (std::move (that.value));
         break;
 
       case symbol_kind::S_and_expression: // and_expression
-        value.move< AndExpression > (std::move (that.value));
+        value.move< AndExpression * > (std::move (that.value));
         break;
 
       case symbol_kind::S_assignment_expression: // assignment_expression
-        value.move< AssignmentExpression > (std::move (that.value));
+        value.move< AssignmentExpression * > (std::move (that.value));
         break;
 
       case symbol_kind::S_assignment_operator: // assignment_operator
-        value.move< AssignmentOperator > (std::move (that.value));
+        value.move< AssignmentOperator * > (std::move (that.value));
         break;
 
       case symbol_kind::S_statement: // statement
@@ -1129,171 +1130,171 @@ namespace  WadeSpace  {
       case symbol_kind::S_selection_statement: // selection_statement
       case symbol_kind::S_iteration_statement: // iteration_statement
       case symbol_kind::S_jump_statement: // jump_statement
-        value.move< BaseStatement > (std::move (that.value));
+        value.move< BaseStatement * > (std::move (that.value));
         break;
 
       case symbol_kind::S_cast_expression: // cast_expression
-        value.move< CastExpression > (std::move (that.value));
+        value.move< CastExpression * > (std::move (that.value));
         break;
 
       case symbol_kind::S_compound_statement: // compound_statement
-        value.move< CompoundStatement > (std::move (that.value));
+        value.move< CompoundStatement * > (std::move (that.value));
         break;
 
       case symbol_kind::S_conditional_expression: // conditional_expression
-        value.move< ConditionalExpression > (std::move (that.value));
+        value.move< ConditionalExpression * > (std::move (that.value));
         break;
 
       case symbol_kind::S_constant: // constant
-        value.move< Constant > (std::move (that.value));
+        value.move< Constant * > (std::move (that.value));
         break;
 
       case symbol_kind::S_constant_expression: // constant_expression
-        value.move< ConstantExpression > (std::move (that.value));
+        value.move< ConstantExpression * > (std::move (that.value));
         break;
 
       case symbol_kind::S_declaration: // declaration
-        value.move< Declaration > (std::move (that.value));
+        value.move< Declaration * > (std::move (that.value));
         break;
 
       case symbol_kind::S_declaration_specifiers: // declaration_specifiers
-        value.move< DeclarationSpecifiers > (std::move (that.value));
+        value.move< DeclarationSpecifiers * > (std::move (that.value));
         break;
 
       case symbol_kind::S_declarator: // declarator
-        value.move< Declarator > (std::move (that.value));
+        value.move< Declarator * > (std::move (that.value));
         break;
 
       case symbol_kind::S_direct_abstract_declarator: // direct_abstract_declarator
-        value.move< DirectAbstractDeclarator > (std::move (that.value));
+        value.move< DirectAbstractDeclarator * > (std::move (that.value));
         break;
 
       case symbol_kind::S_direct_declarator: // direct_declarator
-        value.move< DirectDeclarator > (std::move (that.value));
+        value.move< DirectDeclarator * > (std::move (that.value));
         break;
 
       case symbol_kind::S_enum_specifier: // enum_specifier
-        value.move< EnumSpecifier > (std::move (that.value));
+        value.move< EnumSpecifier * > (std::move (that.value));
         break;
 
       case symbol_kind::S_enumerator: // enumerator
-        value.move< Enumerator > (std::move (that.value));
+        value.move< Enumerator * > (std::move (that.value));
         break;
 
       case symbol_kind::S_equality_expression: // equality_expression
-        value.move< EqualityExpression > (std::move (that.value));
+        value.move< EqualityExpression * > (std::move (that.value));
         break;
 
       case symbol_kind::S_exclusive_or_expression: // exclusive_or_expression
-        value.move< ExclusiveOrExpression > (std::move (that.value));
+        value.move< ExclusiveOrExpression * > (std::move (that.value));
         break;
 
       case symbol_kind::S_expression: // expression
-        value.move< Expression > (std::move (that.value));
+        value.move< Expression * > (std::move (that.value));
         break;
 
       case symbol_kind::S_external_declaration: // external_declaration
-        value.move< ExternalDeclaration > (std::move (that.value));
+        value.move< ExternalDeclaration * > (std::move (that.value));
         break;
 
       case symbol_kind::S_function_definition: // function_definition
-        value.move< FunctionDefinition > (std::move (that.value));
+        value.move< FunctionDefinition * > (std::move (that.value));
         break;
 
       case symbol_kind::S_inclusive_or_expression: // inclusive_or_expression
-        value.move< InclusiveOrExpression > (std::move (that.value));
+        value.move< InclusiveOrExpression * > (std::move (that.value));
         break;
 
       case symbol_kind::S_init_declarator: // init_declarator
-        value.move< InitDeclarator > (std::move (that.value));
+        value.move< InitDeclarator * > (std::move (that.value));
         break;
 
       case symbol_kind::S_initializer: // initializer
-        value.move< Initializer > (std::move (that.value));
+        value.move< Initializer * > (std::move (that.value));
         break;
 
       case symbol_kind::S_labeled_statement: // labeled_statement
-        value.move< LabeledStatement > (std::move (that.value));
+        value.move< LabeledStatement * > (std::move (that.value));
         break;
 
       case symbol_kind::S_logical_and_expression: // logical_and_expression
-        value.move< LogicalAndExpression > (std::move (that.value));
+        value.move< LogicalAndExpression * > (std::move (that.value));
         break;
 
       case symbol_kind::S_logical_or_expression: // logical_or_expression
-        value.move< LogicalOrExpression > (std::move (that.value));
+        value.move< LogicalOrExpression * > (std::move (that.value));
         break;
 
       case symbol_kind::S_multiplicative_expression: // multiplicative_expression
-        value.move< MultiplicativeExpression > (std::move (that.value));
+        value.move< MultiplicativeExpression * > (std::move (that.value));
         break;
 
       case symbol_kind::S_parameter_declaration: // parameter_declaration
-        value.move< ParameterDeclaration > (std::move (that.value));
+        value.move< ParameterDeclaration * > (std::move (that.value));
         break;
 
       case symbol_kind::S_parameter_type_list: // parameter_type_list
-        value.move< ParameterTypeList > (std::move (that.value));
+        value.move< ParameterTypeList * > (std::move (that.value));
         break;
 
       case symbol_kind::S_pointer: // pointer
-        value.move< Pointer > (std::move (that.value));
+        value.move< Pointer * > (std::move (that.value));
         break;
 
       case symbol_kind::S_postfix_expression: // postfix_expression
-        value.move< PostfixExpression > (std::move (that.value));
+        value.move< PostfixExpression * > (std::move (that.value));
         break;
 
       case symbol_kind::S_primary_expression: // primary_expression
-        value.move< PrimaryExpression > (std::move (that.value));
+        value.move< PrimaryExpression * > (std::move (that.value));
         break;
 
       case symbol_kind::S_relational_expression: // relational_expression
-        value.move< RelationalExpression > (std::move (that.value));
+        value.move< RelationalExpression * > (std::move (that.value));
         break;
 
       case symbol_kind::S_shift_expression: // shift_expression
-        value.move< ShiftExpression > (std::move (that.value));
+        value.move< ShiftExpression * > (std::move (that.value));
         break;
 
       case symbol_kind::S_specifier_qualifier_list: // specifier_qualifier_list
-        value.move< SpecifierQualifierList > (std::move (that.value));
+        value.move< SpecifierQualifierList * > (std::move (that.value));
         break;
 
       case symbol_kind::S_storage_class_specifier: // storage_class_specifier
-        value.move< StorageClassSpecifier > (std::move (that.value));
+        value.move< StorageClassSpecifier * > (std::move (that.value));
         break;
 
       case symbol_kind::S_struct_declaration: // struct_declaration
-        value.move< StructDeclaration > (std::move (that.value));
+        value.move< StructDeclaration * > (std::move (that.value));
         break;
 
       case symbol_kind::S_struct_declarator: // struct_declarator
-        value.move< StructDeclarator > (std::move (that.value));
+        value.move< StructDeclarator * > (std::move (that.value));
         break;
 
       case symbol_kind::S_struct_or_union: // struct_or_union
-        value.move< StructOrUnion > (std::move (that.value));
+        value.move< StructOrUnion * > (std::move (that.value));
         break;
 
       case symbol_kind::S_struct_or_union_specifier: // struct_or_union_specifier
-        value.move< StructOrUnionSpecifier > (std::move (that.value));
+        value.move< StructOrUnionSpecifier * > (std::move (that.value));
         break;
 
       case symbol_kind::S_type_name: // type_name
-        value.move< TypeName > (std::move (that.value));
+        value.move< TypeName * > (std::move (that.value));
         break;
 
       case symbol_kind::S_type_qualifier: // type_qualifier
-        value.move< TypeQualifier > (std::move (that.value));
+        value.move< TypeQualifier * > (std::move (that.value));
         break;
 
       case symbol_kind::S_type_specifier: // type_specifier
-        value.move< TypeSpecifier > (std::move (that.value));
+        value.move< TypeSpecifier * > (std::move (that.value));
         break;
 
       case symbol_kind::S_unary_expression: // unary_expression
-        value.move< UnaryExpression > (std::move (that.value));
+        value.move< UnaryExpression * > (std::move (that.value));
         break;
 
       case symbol_kind::S_F_CONST: // "f_const"
@@ -1393,47 +1394,47 @@ namespace  WadeSpace  {
         break;
 
       case symbol_kind::S_argument_expression_list: // argument_expression_list
-        value.move< std::vector<AssignmentExpression> > (std::move (that.value));
+        value.move< std::vector<AssignmentExpression *> * > (std::move (that.value));
         break;
 
       case symbol_kind::S_statement_list: // statement_list
-        value.move< std::vector<BaseStatement> > (std::move (that.value));
+        value.move< std::vector<BaseStatement *> * > (std::move (that.value));
         break;
 
       case symbol_kind::S_declaration_list: // declaration_list
-        value.move< std::vector<Declaration> > (std::move (that.value));
+        value.move< std::vector<Declaration *> * > (std::move (that.value));
         break;
 
       case symbol_kind::S_enumerator_list: // enumerator_list
-        value.move< std::vector<Enumerator> > (std::move (that.value));
+        value.move< std::vector<Enumerator *> * > (std::move (that.value));
         break;
 
       case symbol_kind::S_init_declarator_list: // init_declarator_list
-        value.move< std::vector<InitDeclarator> > (std::move (that.value));
+        value.move< std::vector<InitDeclarator *> * > (std::move (that.value));
         break;
 
       case symbol_kind::S_initializer_list: // initializer_list
-        value.move< std::vector<Initializer> > (std::move (that.value));
+        value.move< std::vector<Initializer *> * > (std::move (that.value));
         break;
 
       case symbol_kind::S_parameter_list: // parameter_list
-        value.move< std::vector<ParameterDeclaration> > (std::move (that.value));
+        value.move< std::vector<ParameterDeclaration *> * > (std::move (that.value));
         break;
 
       case symbol_kind::S_struct_declaration_list: // struct_declaration_list
-        value.move< std::vector<StructDeclaration> > (std::move (that.value));
+        value.move< std::vector<StructDeclaration *> * > (std::move (that.value));
         break;
 
       case symbol_kind::S_struct_declarator_list: // struct_declarator_list
-        value.move< std::vector<StructDeclarator> > (std::move (that.value));
+        value.move< std::vector<StructDeclarator *> * > (std::move (that.value));
         break;
 
       case symbol_kind::S_type_qualifier_list: // type_qualifier_list
-        value.move< std::vector<TypeQualifier> > (std::move (that.value));
+        value.move< std::vector<TypeQualifier *> * > (std::move (that.value));
         break;
 
       case symbol_kind::S_identifier_list: // identifier_list
-        value.move< std::vector<std::string> > (std::move (that.value));
+        value.move< std::vector<std::string> * > (std::move (that.value));
         break;
 
       case symbol_kind::S_I_CONST: // "i_const"
@@ -1464,13 +1465,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, AbstractDeclarator&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, AbstractDeclarator *&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const AbstractDeclarator& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const AbstractDeclarator *& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1478,13 +1479,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, AdditiveExpression&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, AdditiveExpression *&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const AdditiveExpression& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const AdditiveExpression *& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1492,13 +1493,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, AndExpression&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, AndExpression *&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const AndExpression& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const AndExpression *& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1506,13 +1507,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, AssignmentExpression&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, AssignmentExpression *&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const AssignmentExpression& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const AssignmentExpression *& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1520,13 +1521,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, AssignmentOperator&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, AssignmentOperator *&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const AssignmentOperator& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const AssignmentOperator *& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1534,13 +1535,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, BaseStatement&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, BaseStatement *&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const BaseStatement& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const BaseStatement *& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1548,13 +1549,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, CastExpression&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, CastExpression *&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const CastExpression& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const CastExpression *& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1562,13 +1563,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, CompoundStatement&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, CompoundStatement *&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const CompoundStatement& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const CompoundStatement *& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1576,13 +1577,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, ConditionalExpression&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, ConditionalExpression *&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const ConditionalExpression& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const ConditionalExpression *& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1590,13 +1591,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, Constant&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, Constant *&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const Constant& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const Constant *& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1604,13 +1605,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, ConstantExpression&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, ConstantExpression *&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const ConstantExpression& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const ConstantExpression *& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1618,13 +1619,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, Declaration&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, Declaration *&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const Declaration& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const Declaration *& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1632,13 +1633,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, DeclarationSpecifiers&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, DeclarationSpecifiers *&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const DeclarationSpecifiers& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const DeclarationSpecifiers *& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1646,13 +1647,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, Declarator&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, Declarator *&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const Declarator& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const Declarator *& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1660,13 +1661,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, DirectAbstractDeclarator&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, DirectAbstractDeclarator *&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const DirectAbstractDeclarator& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const DirectAbstractDeclarator *& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1674,13 +1675,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, DirectDeclarator&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, DirectDeclarator *&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const DirectDeclarator& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const DirectDeclarator *& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1688,13 +1689,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, EnumSpecifier&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, EnumSpecifier *&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const EnumSpecifier& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const EnumSpecifier *& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1702,13 +1703,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, Enumerator&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, Enumerator *&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const Enumerator& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const Enumerator *& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1716,13 +1717,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, EqualityExpression&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, EqualityExpression *&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const EqualityExpression& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const EqualityExpression *& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1730,13 +1731,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, ExclusiveOrExpression&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, ExclusiveOrExpression *&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const ExclusiveOrExpression& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const ExclusiveOrExpression *& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1744,13 +1745,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, Expression&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, Expression *&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const Expression& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const Expression *& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1758,13 +1759,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, ExternalDeclaration&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, ExternalDeclaration *&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const ExternalDeclaration& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const ExternalDeclaration *& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1772,13 +1773,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, FunctionDefinition&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, FunctionDefinition *&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const FunctionDefinition& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const FunctionDefinition *& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1786,13 +1787,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, InclusiveOrExpression&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, InclusiveOrExpression *&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const InclusiveOrExpression& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const InclusiveOrExpression *& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1800,13 +1801,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, InitDeclarator&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, InitDeclarator *&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const InitDeclarator& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const InitDeclarator *& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1814,13 +1815,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, Initializer&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, Initializer *&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const Initializer& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const Initializer *& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1828,13 +1829,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, LabeledStatement&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, LabeledStatement *&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const LabeledStatement& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const LabeledStatement *& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1842,13 +1843,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, LogicalAndExpression&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, LogicalAndExpression *&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const LogicalAndExpression& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const LogicalAndExpression *& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1856,13 +1857,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, LogicalOrExpression&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, LogicalOrExpression *&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const LogicalOrExpression& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const LogicalOrExpression *& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1870,13 +1871,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, MultiplicativeExpression&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, MultiplicativeExpression *&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const MultiplicativeExpression& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const MultiplicativeExpression *& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1884,13 +1885,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, ParameterDeclaration&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, ParameterDeclaration *&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const ParameterDeclaration& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const ParameterDeclaration *& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1898,13 +1899,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, ParameterTypeList&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, ParameterTypeList *&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const ParameterTypeList& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const ParameterTypeList *& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1912,13 +1913,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, Pointer&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, Pointer *&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const Pointer& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const Pointer *& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1926,13 +1927,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, PostfixExpression&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, PostfixExpression *&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const PostfixExpression& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const PostfixExpression *& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1940,13 +1941,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, PrimaryExpression&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, PrimaryExpression *&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const PrimaryExpression& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const PrimaryExpression *& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1954,13 +1955,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, RelationalExpression&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, RelationalExpression *&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const RelationalExpression& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const RelationalExpression *& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1968,13 +1969,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, ShiftExpression&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, ShiftExpression *&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const ShiftExpression& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const ShiftExpression *& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1982,13 +1983,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, SpecifierQualifierList&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, SpecifierQualifierList *&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const SpecifierQualifierList& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const SpecifierQualifierList *& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1996,13 +1997,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, StorageClassSpecifier&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, StorageClassSpecifier *&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const StorageClassSpecifier& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const StorageClassSpecifier *& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -2010,13 +2011,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, StructDeclaration&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, StructDeclaration *&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const StructDeclaration& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const StructDeclaration *& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -2024,13 +2025,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, StructDeclarator&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, StructDeclarator *&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const StructDeclarator& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const StructDeclarator *& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -2038,13 +2039,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, StructOrUnion&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, StructOrUnion *&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const StructOrUnion& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const StructOrUnion *& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -2052,13 +2053,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, StructOrUnionSpecifier&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, StructOrUnionSpecifier *&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const StructOrUnionSpecifier& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const StructOrUnionSpecifier *& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -2066,13 +2067,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, TypeName&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, TypeName *&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const TypeName& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const TypeName *& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -2080,13 +2081,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, TypeQualifier&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, TypeQualifier *&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const TypeQualifier& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const TypeQualifier *& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -2094,13 +2095,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, TypeSpecifier&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, TypeSpecifier *&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const TypeSpecifier& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const TypeSpecifier *& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -2108,13 +2109,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, UnaryExpression&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, UnaryExpression *&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const UnaryExpression& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const UnaryExpression *& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -2150,13 +2151,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, std::vector<AssignmentExpression>&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, std::vector<AssignmentExpression *> *&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const std::vector<AssignmentExpression>& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const std::vector<AssignmentExpression *> *& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -2164,13 +2165,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, std::vector<BaseStatement>&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, std::vector<BaseStatement *> *&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const std::vector<BaseStatement>& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const std::vector<BaseStatement *> *& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -2178,13 +2179,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, std::vector<Declaration>&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, std::vector<Declaration *> *&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const std::vector<Declaration>& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const std::vector<Declaration *> *& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -2192,13 +2193,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, std::vector<Enumerator>&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, std::vector<Enumerator *> *&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const std::vector<Enumerator>& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const std::vector<Enumerator *> *& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -2206,13 +2207,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, std::vector<InitDeclarator>&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, std::vector<InitDeclarator *> *&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const std::vector<InitDeclarator>& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const std::vector<InitDeclarator *> *& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -2220,13 +2221,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, std::vector<Initializer>&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, std::vector<Initializer *> *&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const std::vector<Initializer>& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const std::vector<Initializer *> *& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -2234,13 +2235,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, std::vector<ParameterDeclaration>&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, std::vector<ParameterDeclaration *> *&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const std::vector<ParameterDeclaration>& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const std::vector<ParameterDeclaration *> *& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -2248,13 +2249,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, std::vector<StructDeclaration>&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, std::vector<StructDeclaration *> *&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const std::vector<StructDeclaration>& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const std::vector<StructDeclaration *> *& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -2262,13 +2263,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, std::vector<StructDeclarator>&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, std::vector<StructDeclarator *> *&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const std::vector<StructDeclarator>& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const std::vector<StructDeclarator *> *& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -2276,13 +2277,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, std::vector<TypeQualifier>&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, std::vector<TypeQualifier *> *&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const std::vector<TypeQualifier>& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const std::vector<TypeQualifier *> *& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -2290,13 +2291,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, std::vector<std::string>&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, std::vector<std::string> *&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const std::vector<std::string>& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const std::vector<std::string> *& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -2342,23 +2343,23 @@ namespace  WadeSpace  {
 switch (yykind)
     {
       case symbol_kind::S_abstract_declarator: // abstract_declarator
-        value.template destroy< AbstractDeclarator > ();
+        value.template destroy< AbstractDeclarator * > ();
         break;
 
       case symbol_kind::S_additive_expression: // additive_expression
-        value.template destroy< AdditiveExpression > ();
+        value.template destroy< AdditiveExpression * > ();
         break;
 
       case symbol_kind::S_and_expression: // and_expression
-        value.template destroy< AndExpression > ();
+        value.template destroy< AndExpression * > ();
         break;
 
       case symbol_kind::S_assignment_expression: // assignment_expression
-        value.template destroy< AssignmentExpression > ();
+        value.template destroy< AssignmentExpression * > ();
         break;
 
       case symbol_kind::S_assignment_operator: // assignment_operator
-        value.template destroy< AssignmentOperator > ();
+        value.template destroy< AssignmentOperator * > ();
         break;
 
       case symbol_kind::S_statement: // statement
@@ -2366,171 +2367,171 @@ switch (yykind)
       case symbol_kind::S_selection_statement: // selection_statement
       case symbol_kind::S_iteration_statement: // iteration_statement
       case symbol_kind::S_jump_statement: // jump_statement
-        value.template destroy< BaseStatement > ();
+        value.template destroy< BaseStatement * > ();
         break;
 
       case symbol_kind::S_cast_expression: // cast_expression
-        value.template destroy< CastExpression > ();
+        value.template destroy< CastExpression * > ();
         break;
 
       case symbol_kind::S_compound_statement: // compound_statement
-        value.template destroy< CompoundStatement > ();
+        value.template destroy< CompoundStatement * > ();
         break;
 
       case symbol_kind::S_conditional_expression: // conditional_expression
-        value.template destroy< ConditionalExpression > ();
+        value.template destroy< ConditionalExpression * > ();
         break;
 
       case symbol_kind::S_constant: // constant
-        value.template destroy< Constant > ();
+        value.template destroy< Constant * > ();
         break;
 
       case symbol_kind::S_constant_expression: // constant_expression
-        value.template destroy< ConstantExpression > ();
+        value.template destroy< ConstantExpression * > ();
         break;
 
       case symbol_kind::S_declaration: // declaration
-        value.template destroy< Declaration > ();
+        value.template destroy< Declaration * > ();
         break;
 
       case symbol_kind::S_declaration_specifiers: // declaration_specifiers
-        value.template destroy< DeclarationSpecifiers > ();
+        value.template destroy< DeclarationSpecifiers * > ();
         break;
 
       case symbol_kind::S_declarator: // declarator
-        value.template destroy< Declarator > ();
+        value.template destroy< Declarator * > ();
         break;
 
       case symbol_kind::S_direct_abstract_declarator: // direct_abstract_declarator
-        value.template destroy< DirectAbstractDeclarator > ();
+        value.template destroy< DirectAbstractDeclarator * > ();
         break;
 
       case symbol_kind::S_direct_declarator: // direct_declarator
-        value.template destroy< DirectDeclarator > ();
+        value.template destroy< DirectDeclarator * > ();
         break;
 
       case symbol_kind::S_enum_specifier: // enum_specifier
-        value.template destroy< EnumSpecifier > ();
+        value.template destroy< EnumSpecifier * > ();
         break;
 
       case symbol_kind::S_enumerator: // enumerator
-        value.template destroy< Enumerator > ();
+        value.template destroy< Enumerator * > ();
         break;
 
       case symbol_kind::S_equality_expression: // equality_expression
-        value.template destroy< EqualityExpression > ();
+        value.template destroy< EqualityExpression * > ();
         break;
 
       case symbol_kind::S_exclusive_or_expression: // exclusive_or_expression
-        value.template destroy< ExclusiveOrExpression > ();
+        value.template destroy< ExclusiveOrExpression * > ();
         break;
 
       case symbol_kind::S_expression: // expression
-        value.template destroy< Expression > ();
+        value.template destroy< Expression * > ();
         break;
 
       case symbol_kind::S_external_declaration: // external_declaration
-        value.template destroy< ExternalDeclaration > ();
+        value.template destroy< ExternalDeclaration * > ();
         break;
 
       case symbol_kind::S_function_definition: // function_definition
-        value.template destroy< FunctionDefinition > ();
+        value.template destroy< FunctionDefinition * > ();
         break;
 
       case symbol_kind::S_inclusive_or_expression: // inclusive_or_expression
-        value.template destroy< InclusiveOrExpression > ();
+        value.template destroy< InclusiveOrExpression * > ();
         break;
 
       case symbol_kind::S_init_declarator: // init_declarator
-        value.template destroy< InitDeclarator > ();
+        value.template destroy< InitDeclarator * > ();
         break;
 
       case symbol_kind::S_initializer: // initializer
-        value.template destroy< Initializer > ();
+        value.template destroy< Initializer * > ();
         break;
 
       case symbol_kind::S_labeled_statement: // labeled_statement
-        value.template destroy< LabeledStatement > ();
+        value.template destroy< LabeledStatement * > ();
         break;
 
       case symbol_kind::S_logical_and_expression: // logical_and_expression
-        value.template destroy< LogicalAndExpression > ();
+        value.template destroy< LogicalAndExpression * > ();
         break;
 
       case symbol_kind::S_logical_or_expression: // logical_or_expression
-        value.template destroy< LogicalOrExpression > ();
+        value.template destroy< LogicalOrExpression * > ();
         break;
 
       case symbol_kind::S_multiplicative_expression: // multiplicative_expression
-        value.template destroy< MultiplicativeExpression > ();
+        value.template destroy< MultiplicativeExpression * > ();
         break;
 
       case symbol_kind::S_parameter_declaration: // parameter_declaration
-        value.template destroy< ParameterDeclaration > ();
+        value.template destroy< ParameterDeclaration * > ();
         break;
 
       case symbol_kind::S_parameter_type_list: // parameter_type_list
-        value.template destroy< ParameterTypeList > ();
+        value.template destroy< ParameterTypeList * > ();
         break;
 
       case symbol_kind::S_pointer: // pointer
-        value.template destroy< Pointer > ();
+        value.template destroy< Pointer * > ();
         break;
 
       case symbol_kind::S_postfix_expression: // postfix_expression
-        value.template destroy< PostfixExpression > ();
+        value.template destroy< PostfixExpression * > ();
         break;
 
       case symbol_kind::S_primary_expression: // primary_expression
-        value.template destroy< PrimaryExpression > ();
+        value.template destroy< PrimaryExpression * > ();
         break;
 
       case symbol_kind::S_relational_expression: // relational_expression
-        value.template destroy< RelationalExpression > ();
+        value.template destroy< RelationalExpression * > ();
         break;
 
       case symbol_kind::S_shift_expression: // shift_expression
-        value.template destroy< ShiftExpression > ();
+        value.template destroy< ShiftExpression * > ();
         break;
 
       case symbol_kind::S_specifier_qualifier_list: // specifier_qualifier_list
-        value.template destroy< SpecifierQualifierList > ();
+        value.template destroy< SpecifierQualifierList * > ();
         break;
 
       case symbol_kind::S_storage_class_specifier: // storage_class_specifier
-        value.template destroy< StorageClassSpecifier > ();
+        value.template destroy< StorageClassSpecifier * > ();
         break;
 
       case symbol_kind::S_struct_declaration: // struct_declaration
-        value.template destroy< StructDeclaration > ();
+        value.template destroy< StructDeclaration * > ();
         break;
 
       case symbol_kind::S_struct_declarator: // struct_declarator
-        value.template destroy< StructDeclarator > ();
+        value.template destroy< StructDeclarator * > ();
         break;
 
       case symbol_kind::S_struct_or_union: // struct_or_union
-        value.template destroy< StructOrUnion > ();
+        value.template destroy< StructOrUnion * > ();
         break;
 
       case symbol_kind::S_struct_or_union_specifier: // struct_or_union_specifier
-        value.template destroy< StructOrUnionSpecifier > ();
+        value.template destroy< StructOrUnionSpecifier * > ();
         break;
 
       case symbol_kind::S_type_name: // type_name
-        value.template destroy< TypeName > ();
+        value.template destroy< TypeName * > ();
         break;
 
       case symbol_kind::S_type_qualifier: // type_qualifier
-        value.template destroy< TypeQualifier > ();
+        value.template destroy< TypeQualifier * > ();
         break;
 
       case symbol_kind::S_type_specifier: // type_specifier
-        value.template destroy< TypeSpecifier > ();
+        value.template destroy< TypeSpecifier * > ();
         break;
 
       case symbol_kind::S_unary_expression: // unary_expression
-        value.template destroy< UnaryExpression > ();
+        value.template destroy< UnaryExpression * > ();
         break;
 
       case symbol_kind::S_F_CONST: // "f_const"
@@ -2630,47 +2631,47 @@ switch (yykind)
         break;
 
       case symbol_kind::S_argument_expression_list: // argument_expression_list
-        value.template destroy< std::vector<AssignmentExpression> > ();
+        value.template destroy< std::vector<AssignmentExpression *> * > ();
         break;
 
       case symbol_kind::S_statement_list: // statement_list
-        value.template destroy< std::vector<BaseStatement> > ();
+        value.template destroy< std::vector<BaseStatement *> * > ();
         break;
 
       case symbol_kind::S_declaration_list: // declaration_list
-        value.template destroy< std::vector<Declaration> > ();
+        value.template destroy< std::vector<Declaration *> * > ();
         break;
 
       case symbol_kind::S_enumerator_list: // enumerator_list
-        value.template destroy< std::vector<Enumerator> > ();
+        value.template destroy< std::vector<Enumerator *> * > ();
         break;
 
       case symbol_kind::S_init_declarator_list: // init_declarator_list
-        value.template destroy< std::vector<InitDeclarator> > ();
+        value.template destroy< std::vector<InitDeclarator *> * > ();
         break;
 
       case symbol_kind::S_initializer_list: // initializer_list
-        value.template destroy< std::vector<Initializer> > ();
+        value.template destroy< std::vector<Initializer *> * > ();
         break;
 
       case symbol_kind::S_parameter_list: // parameter_list
-        value.template destroy< std::vector<ParameterDeclaration> > ();
+        value.template destroy< std::vector<ParameterDeclaration *> * > ();
         break;
 
       case symbol_kind::S_struct_declaration_list: // struct_declaration_list
-        value.template destroy< std::vector<StructDeclaration> > ();
+        value.template destroy< std::vector<StructDeclaration *> * > ();
         break;
 
       case symbol_kind::S_struct_declarator_list: // struct_declarator_list
-        value.template destroy< std::vector<StructDeclarator> > ();
+        value.template destroy< std::vector<StructDeclarator *> * > ();
         break;
 
       case symbol_kind::S_type_qualifier_list: // type_qualifier_list
-        value.template destroy< std::vector<TypeQualifier> > ();
+        value.template destroy< std::vector<TypeQualifier *> * > ();
         break;
 
       case symbol_kind::S_identifier_list: // identifier_list
-        value.template destroy< std::vector<std::string> > ();
+        value.template destroy< std::vector<std::string> * > ();
         break;
 
       case symbol_kind::S_I_CONST: // "i_const"
@@ -4667,23 +4668,23 @@ switch (yykind)
     switch (this->kind ())
     {
       case symbol_kind::S_abstract_declarator: // abstract_declarator
-        value.copy< AbstractDeclarator > (YY_MOVE (that.value));
+        value.copy< AbstractDeclarator * > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_additive_expression: // additive_expression
-        value.copy< AdditiveExpression > (YY_MOVE (that.value));
+        value.copy< AdditiveExpression * > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_and_expression: // and_expression
-        value.copy< AndExpression > (YY_MOVE (that.value));
+        value.copy< AndExpression * > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_assignment_expression: // assignment_expression
-        value.copy< AssignmentExpression > (YY_MOVE (that.value));
+        value.copy< AssignmentExpression * > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_assignment_operator: // assignment_operator
-        value.copy< AssignmentOperator > (YY_MOVE (that.value));
+        value.copy< AssignmentOperator * > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_statement: // statement
@@ -4691,171 +4692,171 @@ switch (yykind)
       case symbol_kind::S_selection_statement: // selection_statement
       case symbol_kind::S_iteration_statement: // iteration_statement
       case symbol_kind::S_jump_statement: // jump_statement
-        value.copy< BaseStatement > (YY_MOVE (that.value));
+        value.copy< BaseStatement * > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_cast_expression: // cast_expression
-        value.copy< CastExpression > (YY_MOVE (that.value));
+        value.copy< CastExpression * > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_compound_statement: // compound_statement
-        value.copy< CompoundStatement > (YY_MOVE (that.value));
+        value.copy< CompoundStatement * > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_conditional_expression: // conditional_expression
-        value.copy< ConditionalExpression > (YY_MOVE (that.value));
+        value.copy< ConditionalExpression * > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_constant: // constant
-        value.copy< Constant > (YY_MOVE (that.value));
+        value.copy< Constant * > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_constant_expression: // constant_expression
-        value.copy< ConstantExpression > (YY_MOVE (that.value));
+        value.copy< ConstantExpression * > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_declaration: // declaration
-        value.copy< Declaration > (YY_MOVE (that.value));
+        value.copy< Declaration * > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_declaration_specifiers: // declaration_specifiers
-        value.copy< DeclarationSpecifiers > (YY_MOVE (that.value));
+        value.copy< DeclarationSpecifiers * > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_declarator: // declarator
-        value.copy< Declarator > (YY_MOVE (that.value));
+        value.copy< Declarator * > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_direct_abstract_declarator: // direct_abstract_declarator
-        value.copy< DirectAbstractDeclarator > (YY_MOVE (that.value));
+        value.copy< DirectAbstractDeclarator * > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_direct_declarator: // direct_declarator
-        value.copy< DirectDeclarator > (YY_MOVE (that.value));
+        value.copy< DirectDeclarator * > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_enum_specifier: // enum_specifier
-        value.copy< EnumSpecifier > (YY_MOVE (that.value));
+        value.copy< EnumSpecifier * > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_enumerator: // enumerator
-        value.copy< Enumerator > (YY_MOVE (that.value));
+        value.copy< Enumerator * > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_equality_expression: // equality_expression
-        value.copy< EqualityExpression > (YY_MOVE (that.value));
+        value.copy< EqualityExpression * > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_exclusive_or_expression: // exclusive_or_expression
-        value.copy< ExclusiveOrExpression > (YY_MOVE (that.value));
+        value.copy< ExclusiveOrExpression * > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_expression: // expression
-        value.copy< Expression > (YY_MOVE (that.value));
+        value.copy< Expression * > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_external_declaration: // external_declaration
-        value.copy< ExternalDeclaration > (YY_MOVE (that.value));
+        value.copy< ExternalDeclaration * > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_function_definition: // function_definition
-        value.copy< FunctionDefinition > (YY_MOVE (that.value));
+        value.copy< FunctionDefinition * > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_inclusive_or_expression: // inclusive_or_expression
-        value.copy< InclusiveOrExpression > (YY_MOVE (that.value));
+        value.copy< InclusiveOrExpression * > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_init_declarator: // init_declarator
-        value.copy< InitDeclarator > (YY_MOVE (that.value));
+        value.copy< InitDeclarator * > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_initializer: // initializer
-        value.copy< Initializer > (YY_MOVE (that.value));
+        value.copy< Initializer * > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_labeled_statement: // labeled_statement
-        value.copy< LabeledStatement > (YY_MOVE (that.value));
+        value.copy< LabeledStatement * > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_logical_and_expression: // logical_and_expression
-        value.copy< LogicalAndExpression > (YY_MOVE (that.value));
+        value.copy< LogicalAndExpression * > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_logical_or_expression: // logical_or_expression
-        value.copy< LogicalOrExpression > (YY_MOVE (that.value));
+        value.copy< LogicalOrExpression * > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_multiplicative_expression: // multiplicative_expression
-        value.copy< MultiplicativeExpression > (YY_MOVE (that.value));
+        value.copy< MultiplicativeExpression * > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_parameter_declaration: // parameter_declaration
-        value.copy< ParameterDeclaration > (YY_MOVE (that.value));
+        value.copy< ParameterDeclaration * > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_parameter_type_list: // parameter_type_list
-        value.copy< ParameterTypeList > (YY_MOVE (that.value));
+        value.copy< ParameterTypeList * > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_pointer: // pointer
-        value.copy< Pointer > (YY_MOVE (that.value));
+        value.copy< Pointer * > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_postfix_expression: // postfix_expression
-        value.copy< PostfixExpression > (YY_MOVE (that.value));
+        value.copy< PostfixExpression * > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_primary_expression: // primary_expression
-        value.copy< PrimaryExpression > (YY_MOVE (that.value));
+        value.copy< PrimaryExpression * > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_relational_expression: // relational_expression
-        value.copy< RelationalExpression > (YY_MOVE (that.value));
+        value.copy< RelationalExpression * > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_shift_expression: // shift_expression
-        value.copy< ShiftExpression > (YY_MOVE (that.value));
+        value.copy< ShiftExpression * > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_specifier_qualifier_list: // specifier_qualifier_list
-        value.copy< SpecifierQualifierList > (YY_MOVE (that.value));
+        value.copy< SpecifierQualifierList * > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_storage_class_specifier: // storage_class_specifier
-        value.copy< StorageClassSpecifier > (YY_MOVE (that.value));
+        value.copy< StorageClassSpecifier * > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_struct_declaration: // struct_declaration
-        value.copy< StructDeclaration > (YY_MOVE (that.value));
+        value.copy< StructDeclaration * > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_struct_declarator: // struct_declarator
-        value.copy< StructDeclarator > (YY_MOVE (that.value));
+        value.copy< StructDeclarator * > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_struct_or_union: // struct_or_union
-        value.copy< StructOrUnion > (YY_MOVE (that.value));
+        value.copy< StructOrUnion * > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_struct_or_union_specifier: // struct_or_union_specifier
-        value.copy< StructOrUnionSpecifier > (YY_MOVE (that.value));
+        value.copy< StructOrUnionSpecifier * > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_type_name: // type_name
-        value.copy< TypeName > (YY_MOVE (that.value));
+        value.copy< TypeName * > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_type_qualifier: // type_qualifier
-        value.copy< TypeQualifier > (YY_MOVE (that.value));
+        value.copy< TypeQualifier * > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_type_specifier: // type_specifier
-        value.copy< TypeSpecifier > (YY_MOVE (that.value));
+        value.copy< TypeSpecifier * > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_unary_expression: // unary_expression
-        value.copy< UnaryExpression > (YY_MOVE (that.value));
+        value.copy< UnaryExpression * > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_F_CONST: // "f_const"
@@ -4955,47 +4956,47 @@ switch (yykind)
         break;
 
       case symbol_kind::S_argument_expression_list: // argument_expression_list
-        value.copy< std::vector<AssignmentExpression> > (YY_MOVE (that.value));
+        value.copy< std::vector<AssignmentExpression *> * > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_statement_list: // statement_list
-        value.copy< std::vector<BaseStatement> > (YY_MOVE (that.value));
+        value.copy< std::vector<BaseStatement *> * > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_declaration_list: // declaration_list
-        value.copy< std::vector<Declaration> > (YY_MOVE (that.value));
+        value.copy< std::vector<Declaration *> * > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_enumerator_list: // enumerator_list
-        value.copy< std::vector<Enumerator> > (YY_MOVE (that.value));
+        value.copy< std::vector<Enumerator *> * > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_init_declarator_list: // init_declarator_list
-        value.copy< std::vector<InitDeclarator> > (YY_MOVE (that.value));
+        value.copy< std::vector<InitDeclarator *> * > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_initializer_list: // initializer_list
-        value.copy< std::vector<Initializer> > (YY_MOVE (that.value));
+        value.copy< std::vector<Initializer *> * > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_parameter_list: // parameter_list
-        value.copy< std::vector<ParameterDeclaration> > (YY_MOVE (that.value));
+        value.copy< std::vector<ParameterDeclaration *> * > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_struct_declaration_list: // struct_declaration_list
-        value.copy< std::vector<StructDeclaration> > (YY_MOVE (that.value));
+        value.copy< std::vector<StructDeclaration *> * > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_struct_declarator_list: // struct_declarator_list
-        value.copy< std::vector<StructDeclarator> > (YY_MOVE (that.value));
+        value.copy< std::vector<StructDeclarator *> * > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_type_qualifier_list: // type_qualifier_list
-        value.copy< std::vector<TypeQualifier> > (YY_MOVE (that.value));
+        value.copy< std::vector<TypeQualifier *> * > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_identifier_list: // identifier_list
-        value.copy< std::vector<std::string> > (YY_MOVE (that.value));
+        value.copy< std::vector<std::string> * > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_I_CONST: // "i_const"
@@ -5034,23 +5035,23 @@ switch (yykind)
     switch (this->kind ())
     {
       case symbol_kind::S_abstract_declarator: // abstract_declarator
-        value.move< AbstractDeclarator > (YY_MOVE (s.value));
+        value.move< AbstractDeclarator * > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_additive_expression: // additive_expression
-        value.move< AdditiveExpression > (YY_MOVE (s.value));
+        value.move< AdditiveExpression * > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_and_expression: // and_expression
-        value.move< AndExpression > (YY_MOVE (s.value));
+        value.move< AndExpression * > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_assignment_expression: // assignment_expression
-        value.move< AssignmentExpression > (YY_MOVE (s.value));
+        value.move< AssignmentExpression * > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_assignment_operator: // assignment_operator
-        value.move< AssignmentOperator > (YY_MOVE (s.value));
+        value.move< AssignmentOperator * > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_statement: // statement
@@ -5058,171 +5059,171 @@ switch (yykind)
       case symbol_kind::S_selection_statement: // selection_statement
       case symbol_kind::S_iteration_statement: // iteration_statement
       case symbol_kind::S_jump_statement: // jump_statement
-        value.move< BaseStatement > (YY_MOVE (s.value));
+        value.move< BaseStatement * > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_cast_expression: // cast_expression
-        value.move< CastExpression > (YY_MOVE (s.value));
+        value.move< CastExpression * > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_compound_statement: // compound_statement
-        value.move< CompoundStatement > (YY_MOVE (s.value));
+        value.move< CompoundStatement * > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_conditional_expression: // conditional_expression
-        value.move< ConditionalExpression > (YY_MOVE (s.value));
+        value.move< ConditionalExpression * > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_constant: // constant
-        value.move< Constant > (YY_MOVE (s.value));
+        value.move< Constant * > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_constant_expression: // constant_expression
-        value.move< ConstantExpression > (YY_MOVE (s.value));
+        value.move< ConstantExpression * > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_declaration: // declaration
-        value.move< Declaration > (YY_MOVE (s.value));
+        value.move< Declaration * > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_declaration_specifiers: // declaration_specifiers
-        value.move< DeclarationSpecifiers > (YY_MOVE (s.value));
+        value.move< DeclarationSpecifiers * > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_declarator: // declarator
-        value.move< Declarator > (YY_MOVE (s.value));
+        value.move< Declarator * > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_direct_abstract_declarator: // direct_abstract_declarator
-        value.move< DirectAbstractDeclarator > (YY_MOVE (s.value));
+        value.move< DirectAbstractDeclarator * > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_direct_declarator: // direct_declarator
-        value.move< DirectDeclarator > (YY_MOVE (s.value));
+        value.move< DirectDeclarator * > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_enum_specifier: // enum_specifier
-        value.move< EnumSpecifier > (YY_MOVE (s.value));
+        value.move< EnumSpecifier * > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_enumerator: // enumerator
-        value.move< Enumerator > (YY_MOVE (s.value));
+        value.move< Enumerator * > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_equality_expression: // equality_expression
-        value.move< EqualityExpression > (YY_MOVE (s.value));
+        value.move< EqualityExpression * > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_exclusive_or_expression: // exclusive_or_expression
-        value.move< ExclusiveOrExpression > (YY_MOVE (s.value));
+        value.move< ExclusiveOrExpression * > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_expression: // expression
-        value.move< Expression > (YY_MOVE (s.value));
+        value.move< Expression * > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_external_declaration: // external_declaration
-        value.move< ExternalDeclaration > (YY_MOVE (s.value));
+        value.move< ExternalDeclaration * > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_function_definition: // function_definition
-        value.move< FunctionDefinition > (YY_MOVE (s.value));
+        value.move< FunctionDefinition * > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_inclusive_or_expression: // inclusive_or_expression
-        value.move< InclusiveOrExpression > (YY_MOVE (s.value));
+        value.move< InclusiveOrExpression * > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_init_declarator: // init_declarator
-        value.move< InitDeclarator > (YY_MOVE (s.value));
+        value.move< InitDeclarator * > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_initializer: // initializer
-        value.move< Initializer > (YY_MOVE (s.value));
+        value.move< Initializer * > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_labeled_statement: // labeled_statement
-        value.move< LabeledStatement > (YY_MOVE (s.value));
+        value.move< LabeledStatement * > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_logical_and_expression: // logical_and_expression
-        value.move< LogicalAndExpression > (YY_MOVE (s.value));
+        value.move< LogicalAndExpression * > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_logical_or_expression: // logical_or_expression
-        value.move< LogicalOrExpression > (YY_MOVE (s.value));
+        value.move< LogicalOrExpression * > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_multiplicative_expression: // multiplicative_expression
-        value.move< MultiplicativeExpression > (YY_MOVE (s.value));
+        value.move< MultiplicativeExpression * > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_parameter_declaration: // parameter_declaration
-        value.move< ParameterDeclaration > (YY_MOVE (s.value));
+        value.move< ParameterDeclaration * > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_parameter_type_list: // parameter_type_list
-        value.move< ParameterTypeList > (YY_MOVE (s.value));
+        value.move< ParameterTypeList * > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_pointer: // pointer
-        value.move< Pointer > (YY_MOVE (s.value));
+        value.move< Pointer * > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_postfix_expression: // postfix_expression
-        value.move< PostfixExpression > (YY_MOVE (s.value));
+        value.move< PostfixExpression * > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_primary_expression: // primary_expression
-        value.move< PrimaryExpression > (YY_MOVE (s.value));
+        value.move< PrimaryExpression * > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_relational_expression: // relational_expression
-        value.move< RelationalExpression > (YY_MOVE (s.value));
+        value.move< RelationalExpression * > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_shift_expression: // shift_expression
-        value.move< ShiftExpression > (YY_MOVE (s.value));
+        value.move< ShiftExpression * > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_specifier_qualifier_list: // specifier_qualifier_list
-        value.move< SpecifierQualifierList > (YY_MOVE (s.value));
+        value.move< SpecifierQualifierList * > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_storage_class_specifier: // storage_class_specifier
-        value.move< StorageClassSpecifier > (YY_MOVE (s.value));
+        value.move< StorageClassSpecifier * > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_struct_declaration: // struct_declaration
-        value.move< StructDeclaration > (YY_MOVE (s.value));
+        value.move< StructDeclaration * > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_struct_declarator: // struct_declarator
-        value.move< StructDeclarator > (YY_MOVE (s.value));
+        value.move< StructDeclarator * > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_struct_or_union: // struct_or_union
-        value.move< StructOrUnion > (YY_MOVE (s.value));
+        value.move< StructOrUnion * > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_struct_or_union_specifier: // struct_or_union_specifier
-        value.move< StructOrUnionSpecifier > (YY_MOVE (s.value));
+        value.move< StructOrUnionSpecifier * > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_type_name: // type_name
-        value.move< TypeName > (YY_MOVE (s.value));
+        value.move< TypeName * > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_type_qualifier: // type_qualifier
-        value.move< TypeQualifier > (YY_MOVE (s.value));
+        value.move< TypeQualifier * > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_type_specifier: // type_specifier
-        value.move< TypeSpecifier > (YY_MOVE (s.value));
+        value.move< TypeSpecifier * > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_unary_expression: // unary_expression
-        value.move< UnaryExpression > (YY_MOVE (s.value));
+        value.move< UnaryExpression * > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_F_CONST: // "f_const"
@@ -5322,47 +5323,47 @@ switch (yykind)
         break;
 
       case symbol_kind::S_argument_expression_list: // argument_expression_list
-        value.move< std::vector<AssignmentExpression> > (YY_MOVE (s.value));
+        value.move< std::vector<AssignmentExpression *> * > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_statement_list: // statement_list
-        value.move< std::vector<BaseStatement> > (YY_MOVE (s.value));
+        value.move< std::vector<BaseStatement *> * > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_declaration_list: // declaration_list
-        value.move< std::vector<Declaration> > (YY_MOVE (s.value));
+        value.move< std::vector<Declaration *> * > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_enumerator_list: // enumerator_list
-        value.move< std::vector<Enumerator> > (YY_MOVE (s.value));
+        value.move< std::vector<Enumerator *> * > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_init_declarator_list: // init_declarator_list
-        value.move< std::vector<InitDeclarator> > (YY_MOVE (s.value));
+        value.move< std::vector<InitDeclarator *> * > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_initializer_list: // initializer_list
-        value.move< std::vector<Initializer> > (YY_MOVE (s.value));
+        value.move< std::vector<Initializer *> * > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_parameter_list: // parameter_list
-        value.move< std::vector<ParameterDeclaration> > (YY_MOVE (s.value));
+        value.move< std::vector<ParameterDeclaration *> * > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_struct_declaration_list: // struct_declaration_list
-        value.move< std::vector<StructDeclaration> > (YY_MOVE (s.value));
+        value.move< std::vector<StructDeclaration *> * > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_struct_declarator_list: // struct_declarator_list
-        value.move< std::vector<StructDeclarator> > (YY_MOVE (s.value));
+        value.move< std::vector<StructDeclarator *> * > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_type_qualifier_list: // type_qualifier_list
-        value.move< std::vector<TypeQualifier> > (YY_MOVE (s.value));
+        value.move< std::vector<TypeQualifier *> * > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_identifier_list: // identifier_list
-        value.move< std::vector<std::string> > (YY_MOVE (s.value));
+        value.move< std::vector<std::string> * > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_I_CONST: // "i_const"
@@ -5436,7 +5437,7 @@ switch (yykind)
 
 #line 9 "parser.y"
 } //  WadeSpace 
-#line 5440 "parser.hpp"
+#line 5441 "parser.hpp"
 
 
 

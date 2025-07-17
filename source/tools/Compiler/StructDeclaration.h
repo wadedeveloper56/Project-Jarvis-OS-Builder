@@ -7,15 +7,17 @@
 #include "SpecifierQualifierList.h"
 #include "StructDeclarator.h"
 
+using namespace std;
+
 namespace WadeSpace {
 	class StructDeclaration
 	{
 	public:
-		StructDeclaration(SpecifierQualifierList& sql, std::vector<StructDeclarator>& list);
+		StructDeclaration(SpecifierQualifierList* sql, vector<StructDeclarator *>* list);
 		StructDeclaration();
 		~StructDeclaration();
 	private:
-		std::optional < std::reference_wrapper < SpecifierQualifierList>> sql;
-		std::optional < std::reference_wrapper < std::vector<StructDeclarator>>> list;
+		SpecifierQualifierList* sql;
+		vector<StructDeclarator*>* list;
 	};
 }

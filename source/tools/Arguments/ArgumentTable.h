@@ -281,23 +281,23 @@ extern "C" {
 	ArgFilePtr argFile1(const char* shortopts, const char* longopts, const char* datatype, const char* glossary);
 	ArgFilePtr argFileN(const char* shortopts, const char* longopts, const char* datatype, int mincount, int maxcount, const char* glossary);
 
-	void arg_int_resetfn(void* parent_);
+	void argIntResetFn(void* parent_);
 	long int strtol0X(const char* str, const char** endptr, char X, int base);
 	int detectsuffix(const char* str, const char* suffix);
-	int arg_int_scanfn(void* parent_, const char* argval);
-	int arg_int_checkfn(void* parent_);
-	void arg_int_errorfn(void* parent_, struct _ArgDstr* ds, int errorcode, const char* argval, const char* progname);
-	ArgIntPtr arg_intn(const char* shortopts, const char* longopts, const char* datatype, int mincount, int maxcount, const char* glossary);
-	ArgIntPtr arg_int0(const char* shortopts, const char* longopts, const char* datatype, const char* glossary);
-	ArgIntPtr arg_int1(const char* shortopts, const char* longopts, const char* datatype, const char* glossary);
+	int argIntScanFn(void* parent_, const char* argval);
+	int argIntCheckFn(void* parent_);
+	void argIntErrorFn(void* parent_, struct _ArgDstr* ds, int errorcode, const char* argval, const char* progname);
+	ArgIntPtr argIntN(const char* shortopts, const char* longopts, const char* datatype, int mincount, int maxcount, const char* glossary);
+	ArgIntPtr argInt0(const char* shortopts, const char* longopts, const char* datatype, const char* glossary);
+	ArgIntPtr argInt1(const char* shortopts, const char* longopts, const char* datatype, const char* glossary);
 
-	void arg_lit_resetfn(void* parent_);
-	int arg_lit_scanfn(void* parent_, const char* argval);
-	int arg_lit_checkfn(void* parent_);
-	void arg_lit_errorfn(void* parent_, struct _ArgDstr* ds, int errorcode, const char* argval, const char* progname);
-	ArgLitPtr arg_litn(const char* shortopts, const char* longopts, int mincount, int maxcount, const char* glossary);
-	ArgLitPtr arg_lit0(const char* shortopts, const char* longopts, const char* glossary);
-	ArgLitPtr arg_lit1(const char* shortopts, const char* longopts, const char* glossary);
+	void argLitResetFn(void* parent_);
+	int argLitScanFn(void* parent_, const char* argval);
+	int argLitCheckFn(void* parent_);
+	void argLitErrorFn(void* parent_, struct _ArgDstr* ds, int errorcode, const char* argval, const char* progname);
+	ArgLitPtr argLitN(const char* shortopts, const char* longopts, int mincount, int maxcount, const char* glossary);
+	ArgLitPtr argLit0(const char* shortopts, const char* longopts, const char* glossary);
+	ArgLitPtr argLit1(const char* shortopts, const char* longopts, const char* glossary);
 
 	void arg_rex_resetfn(void* parent_);
 	int arg_rex_scanfn(void* parent_, const char* argval);

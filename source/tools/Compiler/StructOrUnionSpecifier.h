@@ -7,18 +7,20 @@
 #include "StructOrUnion.h"
 #include "StructDeclaration.h"
 
+using namespace std;
+
 namespace WadeSpace {
 	class StructOrUnionSpecifier
 	{
 	public:
-		StructOrUnionSpecifier(StructOrUnion& su, std::string name, std::vector<StructDeclaration>& list);
-		StructOrUnionSpecifier(StructOrUnion& su, std::vector<StructDeclaration>& list);
-		StructOrUnionSpecifier(StructOrUnion& su, std::string name);
+		StructOrUnionSpecifier(StructOrUnion* su, string name, vector<StructDeclaration *>* list);
+		StructOrUnionSpecifier(StructOrUnion* su, vector<StructDeclaration *>* list);
+		StructOrUnionSpecifier(StructOrUnion* su, string name);
 		StructOrUnionSpecifier();
 		~StructOrUnionSpecifier();
 	private:
-		std::string name;
-		std::optional < std::reference_wrapper < StructOrUnion>> su;
-		std::optional < std::reference_wrapper < std::vector<StructDeclaration>>> list;
+		string name;
+		StructOrUnion* su;
+		vector<StructDeclaration *>* list;
 	};
 }

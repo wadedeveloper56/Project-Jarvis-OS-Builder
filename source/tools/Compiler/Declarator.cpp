@@ -1,8 +1,9 @@
 #include "Declarator.h"
 
 using namespace WadeSpace;
+using namespace std;
 
-Declarator::Declarator(Pointer& ptr, DirectDeclarator& dd) :dd(dd), ptr(ptr) {}
-Declarator::Declarator(DirectDeclarator& dd) :dd(dd), ptr(std::nullopt) {}
-Declarator::Declarator() :dd(std::nullopt), ptr(std::nullopt) {}
+Declarator::Declarator(Pointer* ptr, DirectDeclarator* directDeclarator) :directDeclarator(directDeclarator), pointer(ptr) {}
+Declarator::Declarator(DirectDeclarator* directDeclarator) :directDeclarator(directDeclarator), pointer(NULL) {}
+Declarator::Declarator() :directDeclarator(NULL), pointer(NULL) {}
 Declarator::~Declarator() {}

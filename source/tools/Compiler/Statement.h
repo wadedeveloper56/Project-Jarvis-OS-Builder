@@ -13,7 +13,7 @@ namespace WadeSpace {
 	class Statement : public BaseStatement
 	{
 	public:
-		Statement(TokenType op, BaseStatement& statement);
+		Statement(TokenType op, BaseStatement* statement);
 		Statement();
 		~Statement();
 	};

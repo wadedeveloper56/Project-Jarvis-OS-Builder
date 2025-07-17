@@ -11,10 +11,10 @@ namespace WadeSpace {
 	class DirectAbstractDeclarator
 	{
 	public:
-		DirectAbstractDeclarator(AbstractDeclarator& ad);
+		DirectAbstractDeclarator(AbstractDeclarator* ad);
 		DirectAbstractDeclarator();
 		~DirectAbstractDeclarator();
 	private:
-		std::optional < std::reference_wrapper < AbstractDeclarator>> ad;
+		AbstractDeclarator* ad;
 	};
 }

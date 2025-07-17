@@ -7,17 +7,19 @@
 #include "Expression.h"
 #include "Enumerator.h"
 
+using namespace std;
+
 namespace WadeSpace {
 	class EnumSpecifier {
 	public:
-		EnumSpecifier(std::vector<Enumerator>& list);
-		EnumSpecifier(std::string value, std::vector<Enumerator>& list);
-		EnumSpecifier(std::string value);
+		EnumSpecifier(vector<Enumerator *>* list);
+		EnumSpecifier(string value, vector<Enumerator *>* list);
+		EnumSpecifier(string value);
 		EnumSpecifier();
 		~EnumSpecifier();
 	private:
-		std::string nameStr;
-		std::optional <std::reference_wrapper <std::vector<Enumerator>>> list;
+		string nameStr;
+		vector<Enumerator *>* list;
 	};
 }
 

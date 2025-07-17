@@ -14,13 +14,13 @@ namespace WadeSpace {
 	{
 	public:
 		TypeSpecifier(TokenType type);
-		TypeSpecifier(EnumSpecifier& type);
-		TypeSpecifier(StructOrUnionSpecifier& type);
+		TypeSpecifier(EnumSpecifier* type);
+		TypeSpecifier(StructOrUnionSpecifier* type);
 		TypeSpecifier();
 		~TypeSpecifier();
 	private:
-		std::optional < std::reference_wrapper < EnumSpecifier>> enumSpec;
+		EnumSpecifier* enumSpec;
 		TokenType type;
-		std::optional < std::reference_wrapper < StructOrUnionSpecifier>> suSpec;
+		StructOrUnionSpecifier* suSpec;
 	};
 }

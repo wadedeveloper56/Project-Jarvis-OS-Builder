@@ -7,16 +7,22 @@
 #include "DeclarationSpecifiers.h"
 #include "InitDeclarator.h"
 
+using namespace std;
+
 namespace WadeSpace {
 	class Declaration
 	{
 	public:
-		Declaration(DeclarationSpecifiers& ds);
-		Declaration(DeclarationSpecifiers& ds,std::vector<InitDeclarator> idl);
+		Declaration(DeclarationSpecifiers* ds);
+		Declaration(DeclarationSpecifiers* ds, vector<InitDeclarator *>* idl);
 		Declaration();
 		~Declaration();
+		bool hasDeclarationSpecifiers() const;
+		bool hasVectorInitDeclarator() const;
+		DeclarationSpecifiers* getDeclarationSpecifiers() const;
+		vector<InitDeclarator*>* getVectorInitDeclarator() const;
 	private:
-		std::optional < std::reference_wrapper < DeclarationSpecifiers>> ds;
-		std::optional < std::reference_wrapper < std::vector<InitDeclarator>>> idl;
+		DeclarationSpecifiers* ds;
+		vector<InitDeclarator*>* idl;
 	};
 }

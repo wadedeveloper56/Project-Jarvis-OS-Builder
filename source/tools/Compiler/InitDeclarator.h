@@ -11,12 +11,12 @@ namespace WadeSpace {
 	class InitDeclarator
 	{
 	public:
-		InitDeclarator(Declarator& dec);
-		InitDeclarator(Declarator& dec,Initializer& init);
+		InitDeclarator(Declarator* dec);
+		InitDeclarator(Declarator* dec, Initializer* init);
 		InitDeclarator();
 		~InitDeclarator();
 	private:
-		std::optional < std::reference_wrapper < Declarator>> dec;
-		std::optional < std::reference_wrapper < Initializer>> init;
+		Declarator* dec;
+		Initializer* init;
 	};
 }
