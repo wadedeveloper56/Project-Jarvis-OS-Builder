@@ -3,6 +3,8 @@
 namespace WadeSpace {
 	typedef enum {
 		NONE,
+		ARRAY,
+		FUNCTION,
 		INTEGER_CONSTANT,
 		FLOAT_CONSTANT,
 		STRING_CONSTANT,

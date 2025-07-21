@@ -17,6 +17,7 @@ namespace WadeSpace {
 		Declarator(DirectDeclarator* directDeclarator);
 		Declarator();
 		~Declarator();
+	private:
 		DirectDeclarator* directDeclarator;
 		Pointer* pointer;
 	};
