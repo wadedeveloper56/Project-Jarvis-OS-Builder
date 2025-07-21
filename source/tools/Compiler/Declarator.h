@@ -16,7 +16,11 @@ namespace WadeSpace {
 		Declarator(Pointer* pointer, DirectDeclarator* directDeclarator);
 		Declarator(DirectDeclarator* directDeclarator);
 		Declarator();
-		~Declarator();
+		virtual ~Declarator();
+		bool hasDirectDeclarator() const;
+		bool hasPointer() const;
+		DirectDeclarator* getDirectDeclarator() const;
+		Pointer* getPointer() const;
 	private:
 		DirectDeclarator* directDeclarator;
 		Pointer* pointer;

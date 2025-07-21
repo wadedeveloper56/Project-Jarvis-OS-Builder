@@ -15,7 +15,7 @@ namespace WadeSpace {
 		StructDeclarator(ConstantExpression* exp);
 		StructDeclarator(Declarator* dec, ConstantExpression* exp);
 		StructDeclarator();
-		~StructDeclarator();
+		virtual ~StructDeclarator();
 	private:
 		Declarator* dec;
 		ConstantExpression* exp;

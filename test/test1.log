@@ -213,4 +213,28 @@ translation_unit external_declaration REDUCE to translation_unit
 Number of entries in programData table: 14
 Number of entries in variable table: 12
 Number of entries in function table: 2
+ptr->getVectorInitDeclarator() = 000002B638BE9650
+  ptr2->getDeclarator()->getDirectDeclarator()->id = var1
+ptr->getVectorInitDeclarator() = 000002B638BF8DA0
+  ptr2->getDeclarator()->getDirectDeclarator()->id = var2
+ptr->getVectorInitDeclarator() = 000002B638BF8AA0
+  ptr2->getDeclarator()->getDirectDeclarator()->id = var3
+ptr->getVectorInitDeclarator() = 000002B638BF8CE0
+  ptr2->getDeclarator()->getDirectDeclarator()->id = var4
+ptr->getVectorInitDeclarator() = 000002B638BF8D40
+  ptr2->getDeclarator()->getDirectDeclarator()->id = var5
+ptr->getVectorInitDeclarator() = 000002B638BF8860
+  ptr2->getDeclarator()->getDirectDeclarator()->id = var6
+ptr->getVectorInitDeclarator() = 000002B638BF8C40
+  ptr2->getDeclarator()->getDirectDeclarator()->id = var7
+ptr->getVectorInitDeclarator() = 000002B638BF8E80
+  ptr2->getDeclarator()->getDirectDeclarator()->id = var8
+ptr->getVectorInitDeclarator() = 000002B638BF8E40
+  ptr2->getDeclarator()->getDirectDeclarator()->id = var9
+ptr->getVectorInitDeclarator() = 000002B638BF88A0
+  ptr2->getDeclarator()->getDirectDeclarator()->id = var10
+ptr->getVectorInitDeclarator() = 000002B638BF8CA0
+  ptr2->getDeclarator()->getDirectDeclarator()->id = var11
+ptr->getVectorInitDeclarator() = 000002B638BF8920
+  ptr2->getDeclarator()->getDirectDeclarator()->id = 
 Parse complete. Result = 0

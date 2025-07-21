@@ -17,4 +17,21 @@ BaseStatement::BaseStatement(TokenType op, Expression* exp) :op(op), identifier(
 BaseStatement::BaseStatement(TokenType op) :op(op), identifier(""), contExp(NULL), exp(NULL), statement(NULL), es1(NULL), es2(NULL), statement2(NULL), statementList(NULL), declarationList(NULL) {}
 BaseStatement::BaseStatement(TokenType op, string identifier) :op(op), identifier(""), contExp(NULL), exp(NULL), statement(NULL), es1(NULL), es2(NULL), statement2(NULL), statementList(NULL), declarationList(NULL) {}
 BaseStatement::BaseStatement() :op(NONE), identifier(""), contExp(NULL), exp(NULL), statement(NULL), es1(NULL), es2(NULL), statement2(NULL), statementList(NULL), declarationList(NULL) {}
-BaseStatement::~BaseStatement() {}
+BaseStatement::~BaseStatement() {
+	if (exp) delete exp;
+	if (contExp) delete contExp;
+	if (statement) delete statement;
+	if (es1) delete es1;
+	if (es2) delete es2;
+	if (statement2) delete statement2;
+	for (BaseStatement* obj : *statementList) {
+		delete obj;
+	}
+	statementList->clear();
+	delete statementList;
+	for (Declaration* obj : *declarationList) {
+		delete obj;
+	}
+	declarationList->clear();
+	delete declarationList;
+}

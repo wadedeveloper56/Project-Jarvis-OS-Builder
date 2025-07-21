@@ -16,7 +16,7 @@ namespace WadeSpace {
 		Declaration(DeclarationSpecifiers* ds);
 		Declaration(DeclarationSpecifiers* ds, vector<InitDeclarator *>* idl);
 		Declaration();
-		~Declaration();
+		virtual ~Declaration();
 		bool hasDeclarationSpecifiers() const;
 		bool hasVectorInitDeclarator() const;
 		DeclarationSpecifiers* getDeclarationSpecifiers() const;

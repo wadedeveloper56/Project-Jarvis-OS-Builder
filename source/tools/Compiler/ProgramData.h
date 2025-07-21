@@ -15,7 +15,7 @@ namespace WadeSpace {
 	{
 	public:
 		ProgramData();
-		~ProgramData();
+		virtual ~ProgramData();
 		void add(ExternalDeclaration* data);
 		void processGlobalVariables();
 		void test();

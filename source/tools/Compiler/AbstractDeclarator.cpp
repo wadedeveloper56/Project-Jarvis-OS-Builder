@@ -10,3 +10,7 @@ AbstractDeclarator::~AbstractDeclarator() {
 	if (ptr) delete ptr;
 	if (dad) delete dad;
 }
+bool AbstractDeclarator::hasPointer() const { return ptr != NULL; }
+bool AbstractDeclarator::hasDirectAbstractDeclarator() const { return dad != NULL; }
+Pointer* AbstractDeclarator::getPointer() const {return ptr;}
+DirectAbstractDeclarator* AbstractDeclarator::getDirectAbstractDeclarator() const { return dad; }

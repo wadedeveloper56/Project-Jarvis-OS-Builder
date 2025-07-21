@@ -14,7 +14,7 @@ namespace WadeSpace {
 	public:
 		TypeQualifier(string value, TokenType type);
 		TypeQualifier();
-		~TypeQualifier();
+		virtual ~TypeQualifier();
 	private:
 		string operatorStr;
 		TokenType type;

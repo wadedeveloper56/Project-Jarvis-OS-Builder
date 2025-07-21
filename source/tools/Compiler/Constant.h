@@ -16,7 +16,7 @@ namespace WadeSpace {
 		Constant(long double value);
 		Constant(string value);
 		Constant();
-		~Constant();
+		virtual ~Constant();
 	private:
 		uint64_t iConst;
 		long double fConst;

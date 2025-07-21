@@ -15,6 +15,6 @@ namespace WadeSpace {
 	public:
 		Statement(TokenType op, BaseStatement* statement);
 		Statement();
-		~Statement();
+		virtual ~Statement();
 	};
 }

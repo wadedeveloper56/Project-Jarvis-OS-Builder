@@ -17,7 +17,7 @@ namespace WadeSpace {
 		ExternalDeclaration(FunctionDefinition* fd);
 		ExternalDeclaration(Declaration* dec);
 		ExternalDeclaration();
-		~ExternalDeclaration();
+		virtual ~ExternalDeclaration();
 		string toString();
 		bool isFunction() const;
 		bool isDeclaration() const;

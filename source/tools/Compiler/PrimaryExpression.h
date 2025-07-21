@@ -19,7 +19,7 @@ namespace WadeSpace {
 		PrimaryExpression(Constant* c);
 		PrimaryExpression(Expression* exp);
 		PrimaryExpression();
-		~PrimaryExpression();
+		virtual ~PrimaryExpression();
 	private:
 		string identifier;
 		Constant* c;

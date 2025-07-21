@@ -16,7 +16,7 @@ namespace WadeSpace {
 		ExclusiveOrExpression(AndExpression* ae);
 		ExclusiveOrExpression(ExclusiveOrExpression* eoe,AndExpression* ae);
 		ExclusiveOrExpression();
-		~ExclusiveOrExpression();
+		virtual ~ExclusiveOrExpression();
 	private:
 		AndExpression* ae;
 		ExclusiveOrExpression* eoe;

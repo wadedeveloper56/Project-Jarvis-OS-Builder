@@ -13,7 +13,7 @@ namespace WadeSpace {
 	public:
 		ConstantExpression(ConditionalExpression* ce);
 		ConstantExpression();
-		~ConstantExpression();
+		virtual ~ConstantExpression();
 	private:
 		ConditionalExpression* ce;
 	};

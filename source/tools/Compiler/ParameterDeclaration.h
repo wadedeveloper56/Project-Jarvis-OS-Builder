@@ -16,7 +16,7 @@ namespace WadeSpace {
 		ParameterDeclaration(DeclarationSpecifiers* pdl, AbstractDeclarator* ad);
 		ParameterDeclaration(DeclarationSpecifiers* pdl, Declarator* dec);
 		ParameterDeclaration();
-		~ParameterDeclaration();
+		virtual ~ParameterDeclaration();
 	private:
 		DeclarationSpecifiers* pdl;
 		Declarator* dec;

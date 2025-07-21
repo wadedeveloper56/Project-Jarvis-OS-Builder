@@ -12,7 +12,7 @@ namespace WadeSpace {
 	public:
 		StructOrUnion(TokenType type);
 		StructOrUnion();
-		~StructOrUnion();
+		virtual ~StructOrUnion();
 	private:
 		TokenType type;
 	};

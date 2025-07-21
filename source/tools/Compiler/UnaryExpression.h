@@ -23,7 +23,7 @@ namespace WadeSpace {
 		UnaryExpression(string op, CastExpression* ce);
 		UnaryExpression(string op, TypeName* tn);
 		UnaryExpression();
-		~UnaryExpression();
+		virtual ~UnaryExpression();
 	private:
 		PostfixExpression* pe;
 		TypeName* tn;

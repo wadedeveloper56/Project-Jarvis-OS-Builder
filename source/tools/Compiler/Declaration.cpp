@@ -3,7 +3,7 @@
 using namespace WadeSpace;
 using namespace std;
 
-Declaration::Declaration(DeclarationSpecifiers* ds) :ds(ds) {}
+Declaration::Declaration(DeclarationSpecifiers* ds) :ds(ds), idl(NULL) {}
 Declaration::Declaration(DeclarationSpecifiers* ds, vector<InitDeclarator *>* idl) :ds(ds), idl(idl) {}
 Declaration::Declaration() :ds(NULL), idl(NULL) {}
 Declaration::~Declaration() {}

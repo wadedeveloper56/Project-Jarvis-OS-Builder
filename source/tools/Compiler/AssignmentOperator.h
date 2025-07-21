@@ -11,7 +11,7 @@ namespace WadeSpace {
 	public:
 		AssignmentOperator(TokenType type);
 		AssignmentOperator();
-		~AssignmentOperator();
+		virtual ~AssignmentOperator();
 	private:
 		TokenType type;
 	};

@@ -19,7 +19,7 @@ namespace WadeSpace {
 		ConditionalExpression(LogicalOrExpression* ce);
 		ConditionalExpression(LogicalOrExpression* loe, Expression* exp, ConditionalExpression* ce);
 		ConditionalExpression();
-		~ConditionalExpression();
+		virtual ~ConditionalExpression();
 	private:
 		LogicalOrExpression* loe;
 		Expression* exp;

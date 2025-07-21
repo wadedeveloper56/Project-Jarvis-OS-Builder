@@ -22,7 +22,7 @@ namespace WadeSpace {
 		DirectAbstractDeclarator(ConstantExpression* ce);
 		DirectAbstractDeclarator(TokenType type);
 		DirectAbstractDeclarator();
-		~DirectAbstractDeclarator();
+		virtual ~DirectAbstractDeclarator();
 	private:
 		ParameterTypeList* ptl;
 		DirectAbstractDeclarator* dad;

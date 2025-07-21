@@ -16,7 +16,7 @@ namespace WadeSpace {
 		LogicalOrExpression(LogicalAndExpression* lae);
 		LogicalOrExpression(LogicalOrExpression* loe, LogicalAndExpression* lae);
 		LogicalOrExpression();
-		~LogicalOrExpression();
+		virtual ~LogicalOrExpression();
 	private:
 		LogicalOrExpression* loe;
 		LogicalAndExpression* lae;

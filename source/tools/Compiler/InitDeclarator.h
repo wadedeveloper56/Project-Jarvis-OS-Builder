@@ -14,7 +14,11 @@ namespace WadeSpace {
 		InitDeclarator(Declarator* dec);
 		InitDeclarator(Declarator* dec, Initializer* init);
 		InitDeclarator();
-		~InitDeclarator();
+		virtual ~InitDeclarator();
+		bool hasDeclarator() const;
+		bool hasInitializer() const;
+		Declarator* getDeclarator() const;
+		Initializer* getInitializer() const;
 	private:
 		Declarator* dec;
 		Initializer* init;

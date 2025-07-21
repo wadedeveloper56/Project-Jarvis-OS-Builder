@@ -15,7 +15,7 @@ namespace WadeSpace {
 		Enumerator(string value, ConstantExpression* type);
 		Enumerator(string value);
 		Enumerator();
-		~Enumerator();
+		virtual ~Enumerator();
 	private:
 		string operatorStr;
 		ConstantExpression* expression;

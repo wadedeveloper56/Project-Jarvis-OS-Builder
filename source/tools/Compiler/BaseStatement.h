@@ -28,9 +28,8 @@ namespace WadeSpace {
 		BaseStatement(string identifier, BaseStatement* statement);
 		BaseStatement(TokenType op, ConstantExpression* exp, BaseStatement* statement);
 		BaseStatement(TokenType op, BaseStatement* statement);
-
 		BaseStatement();
-		~BaseStatement();
+		virtual ~BaseStatement();
 	protected:
 		TokenType op;
 		string identifier;

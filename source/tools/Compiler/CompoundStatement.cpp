@@ -7,4 +7,4 @@ CompoundStatement::CompoundStatement(vector<BaseStatement*>* statementList) :Bas
 CompoundStatement::CompoundStatement(vector<Declaration*>* declarationList) :BaseStatement(declarationList) {}
 CompoundStatement::CompoundStatement(vector<BaseStatement*>* statementList, vector<Declaration*>* declarationList) :BaseStatement(statementList, declarationList) {}
 CompoundStatement::CompoundStatement() :BaseStatement() {}
-CompoundStatement::~CompoundStatement() {}
+CompoundStatement::~CompoundStatement()  {}

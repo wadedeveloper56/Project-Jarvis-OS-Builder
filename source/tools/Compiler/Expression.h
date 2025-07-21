@@ -16,7 +16,7 @@ namespace WadeSpace {
 		Expression(AssignmentExpression* ae);
 		Expression(Expression* exp, string operation, AssignmentExpression* ae);
 		Expression();
-		~Expression();
+		virtual ~Expression();
 	private:
 		Expression* exp;
 		string oper;

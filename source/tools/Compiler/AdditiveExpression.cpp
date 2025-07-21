@@ -10,3 +10,8 @@ AdditiveExpression::~AdditiveExpression() {
 	if (ae) delete ae;
 	if (me) delete me;
 }
+bool AdditiveExpression::hasMultiplicativeExpression() const { return me != NULL; }
+bool AdditiveExpression::hasAdditiveExpression() const { return ae != NULL; }
+MultiplicativeExpression* AdditiveExpression::getMultiplicativeExpression() const { return me; }
+AdditiveExpression* AdditiveExpression::getAdditiveExpression() const { return ae; }
+string AdditiveExpression::getOperation() const { return op; }

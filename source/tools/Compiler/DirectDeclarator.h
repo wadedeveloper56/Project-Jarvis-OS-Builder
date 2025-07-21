@@ -23,10 +23,10 @@ namespace WadeSpace {
 		DirectDeclarator(DirectDeclarator* directDeclarator, ParameterTypeList* parameterTypeList);
 		DirectDeclarator(DirectDeclarator* directDeclarator, vector<string>* vs);
 		DirectDeclarator();
-		~DirectDeclarator();
+		virtual ~DirectDeclarator();
 		bool hasDeclarator() const;
 		Declarator* getDeclarator() const;
-	private:
+	public:
 		string id;
 		string str1;
 		string str2;

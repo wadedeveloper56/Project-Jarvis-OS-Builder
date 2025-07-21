@@ -16,7 +16,7 @@ namespace WadeSpace {
 		AndExpression(EqualityExpression* ee);
 		AndExpression(AndExpression* ae, EqualityExpression* ee);
 		AndExpression();
-		~AndExpression();
+		virtual ~AndExpression();
 	private:
 		AndExpression* ae;
 		EqualityExpression* ee;

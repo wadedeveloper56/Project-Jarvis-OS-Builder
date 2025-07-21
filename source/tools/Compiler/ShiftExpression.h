@@ -16,7 +16,7 @@ namespace WadeSpace {
 		ShiftExpression(AdditiveExpression* ae);
 		ShiftExpression(ShiftExpression* se, string op, AdditiveExpression* ae);
 		ShiftExpression();
-		~ShiftExpression();
+		virtual ~ShiftExpression();
 	private:
 		AdditiveExpression* ae;
 		string op;

@@ -14,7 +14,7 @@ namespace WadeSpace {
 		TypeName(SpecifierQualifierList* sql);
 		TypeName(SpecifierQualifierList* sql, AbstractDeclarator* ad);
 		TypeName();
-		~TypeName();
+		virtual ~TypeName();
 	private:
 		SpecifierQualifierList* sql;
 		AbstractDeclarator* ad;

@@ -21,7 +21,7 @@ namespace WadeSpace {
 		FunctionDefinition(Declarator* dec, vector<Declaration*>* dl, BaseStatement* bs);
 		FunctionDefinition(Declarator* dec, BaseStatement* bs);
 		FunctionDefinition();
-		~FunctionDefinition();
+		virtual ~FunctionDefinition();
 		bool hasDeclarationSpecifiers() const;
 		bool hasDeclarator() const;
 		bool hasVectorDeclaration() const;

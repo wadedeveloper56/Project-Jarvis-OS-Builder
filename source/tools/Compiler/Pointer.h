@@ -17,7 +17,7 @@ namespace WadeSpace {
 		Pointer(string value, Pointer* ptr);
 		Pointer(string value);
 		Pointer();
-		~Pointer();
+		virtual ~Pointer();
 		void inc();
 	private:
 		string nameStr;

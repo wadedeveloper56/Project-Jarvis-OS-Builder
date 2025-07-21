@@ -16,7 +16,7 @@ namespace WadeSpace {
 		SpecifierQualifierList(SpecifierQualifierList* sql, TypeQualifier* ts);
 		SpecifierQualifierList(TypeQualifier* ts);
 		SpecifierQualifierList();
-		~SpecifierQualifierList();
+		virtual ~SpecifierQualifierList();
 	private:
 		SpecifierQualifierList* sql;
 		TypeSpecifier* ts;

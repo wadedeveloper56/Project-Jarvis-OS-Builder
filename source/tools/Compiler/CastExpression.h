@@ -18,7 +18,7 @@ namespace WadeSpace {
 		CastExpression(UnaryExpression* ue);
 		CastExpression(TypeName* type, CastExpression* ce);
 		CastExpression();
-		~CastExpression();
+		virtual ~CastExpression();
 	private:
 		UnaryExpression* ue;
 		TypeName* type;

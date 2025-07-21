@@ -15,7 +15,7 @@ namespace WadeSpace {
 	public:
 		StructDeclaration(SpecifierQualifierList* sql, vector<StructDeclarator *>* list);
 		StructDeclaration();
-		~StructDeclaration();
+		virtual ~StructDeclaration();
 	private:
 		SpecifierQualifierList* sql;
 		vector<StructDeclarator*>* list;

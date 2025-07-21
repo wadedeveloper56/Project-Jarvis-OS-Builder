@@ -17,6 +17,6 @@ namespace WadeSpace {
 		IterationStatement(TokenType op, BaseStatement* es1, BaseStatement* es2, BaseStatement* statement);
 		IterationStatement(TokenType op, Expression* identifier, BaseStatement* statement);
 		IterationStatement();
-		~IterationStatement();
+		virtual ~IterationStatement();
 	};
 }

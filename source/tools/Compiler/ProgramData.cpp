@@ -28,4 +28,10 @@ void ProgramData::test() {
 	cout << "Number of entries in programData table: " << programData->size() << endl;
 	cout << "Number of entries in variable table: " << variableTable->size() << endl;
 	cout << "Number of entries in function table: " << functionTable->size() << endl;
+	for (Declaration* ptr : *variableTable) {
+		cout << "ptr->getVectorInitDeclarator() = " << showbase << hex << ptr->getVectorInitDeclarator() << endl;
+		for (InitDeclarator* ptr2 : *ptr->getVectorInitDeclarator()) {
+			cout << "  ptr2->getDeclarator()->getDirectDeclarator()->id = " << ptr2->getDeclarator()->getDirectDeclarator()->id << endl;
+		}
+	}
 }

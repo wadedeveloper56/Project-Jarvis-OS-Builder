@@ -16,7 +16,7 @@ namespace WadeSpace {
 		EnumSpecifier(string value, vector<Enumerator *>* list);
 		EnumSpecifier(string value);
 		EnumSpecifier();
-		~EnumSpecifier();
+		virtual ~EnumSpecifier();
 	private:
 		string nameStr;
 		vector<Enumerator *>* list;

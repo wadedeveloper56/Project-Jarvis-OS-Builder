@@ -14,7 +14,7 @@ namespace WadeSpace {
 	{
 	public:
 		DirectDeclaratorProxy(DirectDeclarator* directDeclarator);
-		~DirectDeclaratorProxy();
+		virtual ~DirectDeclaratorProxy();
 		bool hasDirectDeclarator() const;
 		DirectDeclarator* getDirectDeclarator() const;
 	private:

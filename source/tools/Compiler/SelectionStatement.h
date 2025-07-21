@@ -16,6 +16,6 @@ namespace WadeSpace {
 		SelectionStatement(TokenType op, Expression* exp, BaseStatement* statement);
 		SelectionStatement(TokenType op, Expression* exp, BaseStatement* ifStatement, BaseStatement* elseStatement);
 		SelectionStatement();
-		~SelectionStatement();
+		virtual ~SelectionStatement();
 	};
 }

@@ -16,7 +16,7 @@ namespace WadeSpace {
 		LogicalAndExpression(InclusiveOrExpression* eoe);
 		LogicalAndExpression(LogicalAndExpression* loe, InclusiveOrExpression* eoe);
 		LogicalAndExpression();
-		~LogicalAndExpression();
+		virtual ~LogicalAndExpression();
 	private:
 		InclusiveOrExpression* ioe;
 		LogicalAndExpression* lae;

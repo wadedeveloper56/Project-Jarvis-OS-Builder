@@ -24,7 +24,7 @@ namespace WadeSpace {
 		PostfixExpression(PostfixExpression* pfe, vector<AssignmentExpression *>* aev);
 		PostfixExpression(TypeName* tn, vector<Initializer *>* iv);
 		PostfixExpression();
-		~PostfixExpression();
+		virtual ~PostfixExpression();
 	private:
 		PrimaryExpression* pe;
 		PostfixExpression* pfe;

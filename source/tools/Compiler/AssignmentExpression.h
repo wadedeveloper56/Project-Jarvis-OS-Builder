@@ -18,7 +18,7 @@ namespace WadeSpace {
 		AssignmentExpression(ConditionalExpression* ce);
 		AssignmentExpression(UnaryExpression* ue, AssignmentOperator* oper, AssignmentExpression* ae);
 		AssignmentExpression();
-		~AssignmentExpression();
+		virtual ~AssignmentExpression();
 	private:
 		ConditionalExpression* ce;
 		UnaryExpression* ue;

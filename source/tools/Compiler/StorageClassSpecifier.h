@@ -14,7 +14,7 @@ namespace WadeSpace {
 	public:
 		StorageClassSpecifier(string value, TokenType type);
 		StorageClassSpecifier();
-		~StorageClassSpecifier();
+		virtual ~StorageClassSpecifier();
 	private:
 		string operatorStr;
 		TokenType type;

@@ -16,7 +16,7 @@ namespace WadeSpace {
 		RelationalExpression(ShiftExpression* se);
 		RelationalExpression(RelationalExpression* re, string op, ShiftExpression* se);
 		RelationalExpression();
-		~RelationalExpression();
+		virtual ~RelationalExpression();
 	private:
 		RelationalExpression* re;
 		string op;

@@ -16,7 +16,7 @@ namespace WadeSpace {
 		EqualityExpression(RelationalExpression* re);
 		EqualityExpression(EqualityExpression* eq, string op, RelationalExpression* re);
 		EqualityExpression();
-		~EqualityExpression();
+		virtual ~EqualityExpression();
 	private:
 		RelationalExpression* re;
 		string op;

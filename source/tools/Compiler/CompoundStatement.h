@@ -17,6 +17,6 @@ namespace WadeSpace {
 		CompoundStatement(vector<Declaration*>* declarationList);
 		CompoundStatement(vector<BaseStatement*>* statementList, vector<Declaration*>* declarationList);
 		CompoundStatement();
-		~CompoundStatement();
+		virtual ~CompoundStatement();
 	};
 }

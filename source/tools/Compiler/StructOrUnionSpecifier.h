@@ -17,7 +17,7 @@ namespace WadeSpace {
 		StructOrUnionSpecifier(StructOrUnion* su, vector<StructDeclaration *>* list);
 		StructOrUnionSpecifier(StructOrUnion* su, string name);
 		StructOrUnionSpecifier();
-		~StructOrUnionSpecifier();
+		virtual ~StructOrUnionSpecifier();
 	private:
 		string name;
 		StructOrUnion* su;

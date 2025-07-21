@@ -15,7 +15,7 @@ namespace WadeSpace {
 		Initializer(AssignmentExpression* exp);
 		Initializer(vector<Initializer*>* list);
 		Initializer();
-		~Initializer();
+		virtual ~Initializer();
 	private:
 		AssignmentExpression* exp;
 		vector<Initializer*>* list;
