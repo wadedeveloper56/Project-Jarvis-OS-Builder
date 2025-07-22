@@ -7,7 +7,8 @@
 #include "TokenType.h"
 #include "EnumSpecifier.h"
 
-namespace WadeSpace {
+namespace WadeSpace
+{
 	class StructOrUnionSpecifier;
 
 	class TypeSpecifier
@@ -21,6 +22,7 @@ namespace WadeSpace {
 		EnumSpecifier* getEnumSpec() const;
 		TokenType getType() const;
 		StructOrUnionSpecifier* getSuSpec() const;
+
 	private:
 		EnumSpecifier* enumSpec;
 		TokenType type;

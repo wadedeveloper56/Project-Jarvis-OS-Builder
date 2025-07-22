@@ -9,7 +9,8 @@
 
 using namespace std;
 
-namespace WadeSpace {
+namespace WadeSpace
+{
 	class RelationalExpression
 	{
 	public:
@@ -17,6 +18,7 @@ namespace WadeSpace {
 		RelationalExpression(RelationalExpression* re, string op, ShiftExpression* se);
 		RelationalExpression();
 		virtual ~RelationalExpression();
+
 	private:
 		RelationalExpression* re;
 		string op;

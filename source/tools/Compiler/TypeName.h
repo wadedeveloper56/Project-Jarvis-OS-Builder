@@ -7,7 +7,8 @@
 #include "SpecifierQualifierList.h"
 #include "AbstractDeclarator.h"
 
-namespace WadeSpace {
+namespace WadeSpace
+{
 	class TypeName
 	{
 	public:
@@ -15,6 +16,7 @@ namespace WadeSpace {
 		TypeName(SpecifierQualifierList* sql, AbstractDeclarator* ad);
 		TypeName();
 		virtual ~TypeName();
+
 	private:
 		SpecifierQualifierList* sql;
 		AbstractDeclarator* ad;

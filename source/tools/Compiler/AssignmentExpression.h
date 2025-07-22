@@ -11,7 +11,8 @@
 
 using namespace std;
 
-namespace WadeSpace {
+namespace WadeSpace
+{
 	class AssignmentExpression
 	{
 	public:
@@ -19,11 +20,14 @@ namespace WadeSpace {
 		AssignmentExpression(UnaryExpression* ue, AssignmentOperator* oper, AssignmentExpression* ae);
 		AssignmentExpression();
 		virtual ~AssignmentExpression();
+		ConditionalExpression* getConditionalExpression() const;
+		UnaryExpression* getUnaryExpression() const;
+		AssignmentOperator* getAssignmentOperator() const;
+		AssignmentExpression* getAssignmentExpression() const;
 	private:
 		ConditionalExpression* ce;
 		UnaryExpression* ue;
 		AssignmentOperator* oper;
 		AssignmentExpression* ae;
-
 	};
 }

@@ -3,7 +3,19 @@
 using namespace WadeSpace;
 using namespace std;
 
-InclusiveOrExpression::InclusiveOrExpression(ExclusiveOrExpression* eoe) :eoe(NULL), ioe(NULL) {}
-InclusiveOrExpression::InclusiveOrExpression(InclusiveOrExpression* ioe, ExclusiveOrExpression* eoe) :eoe(NULL), ioe(NULL) {}
-InclusiveOrExpression::InclusiveOrExpression() :eoe(NULL), ioe(NULL) {}
-InclusiveOrExpression::~InclusiveOrExpression() {}
+InclusiveOrExpression::InclusiveOrExpression(ExclusiveOrExpression* eoe) : eoe(nullptr), ioe(nullptr)
+{
+}
+
+InclusiveOrExpression::InclusiveOrExpression(InclusiveOrExpression* ioe, ExclusiveOrExpression* eoe) : eoe(nullptr),
+	ioe(nullptr)
+{
+}
+
+InclusiveOrExpression::InclusiveOrExpression() : eoe(nullptr), ioe(nullptr)
+{
+}
+
+InclusiveOrExpression::~InclusiveOrExpression()
+{
+}

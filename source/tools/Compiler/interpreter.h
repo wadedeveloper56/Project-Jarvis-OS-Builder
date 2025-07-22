@@ -5,7 +5,8 @@
 #include "scanner.h"
 #include "parser.hpp"
 
-namespace WadeSpace {
+namespace WadeSpace
+{
 	class Interpreter
 	{
 	public:
@@ -16,15 +17,16 @@ namespace WadeSpace {
 		void setStreams(std::istream* is, std::ostream* os);
 		friend class Parser;
 		friend class Scanner;
+
 	private:
 		void increaseLocation(unsigned int loc);
 		unsigned int location() const;
+
 	private:
 		Scanner m_scanner;
 		Parser m_parser;
-		unsigned int m_location;             
+		unsigned int m_location;
 	};
-
 }
 
-#endif  
+#endif

@@ -9,14 +9,16 @@
 
 using namespace std;
 
-namespace WadeSpace {
+namespace WadeSpace
+{
 	class ExclusiveOrExpression
 	{
 	public:
 		ExclusiveOrExpression(AndExpression* ae);
-		ExclusiveOrExpression(ExclusiveOrExpression* eoe,AndExpression* ae);
+		ExclusiveOrExpression(ExclusiveOrExpression* eoe, AndExpression* ae);
 		ExclusiveOrExpression();
 		virtual ~ExclusiveOrExpression();
+
 	private:
 		AndExpression* ae;
 		ExclusiveOrExpression* eoe;

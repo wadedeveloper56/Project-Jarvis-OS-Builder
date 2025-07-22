@@ -7,13 +7,15 @@
 #include "TokenType.h"
 #include "ConditionalExpression.h"
 
-namespace WadeSpace {
+namespace WadeSpace
+{
 	class ConstantExpression
 	{
 	public:
 		ConstantExpression(ConditionalExpression* ce);
 		ConstantExpression();
 		virtual ~ConstantExpression();
+
 	private:
 		ConditionalExpression* ce;
 	};

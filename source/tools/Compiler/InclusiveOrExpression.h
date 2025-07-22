@@ -9,7 +9,8 @@
 
 using namespace std;
 
-namespace WadeSpace {
+namespace WadeSpace
+{
 	class InclusiveOrExpression
 	{
 	public:
@@ -17,6 +18,7 @@ namespace WadeSpace {
 		InclusiveOrExpression(InclusiveOrExpression* ioe, ExclusiveOrExpression* eoe);
 		InclusiveOrExpression();
 		virtual ~InclusiveOrExpression();
+
 	private:
 		InclusiveOrExpression* ioe;
 		ExclusiveOrExpression* eoe;

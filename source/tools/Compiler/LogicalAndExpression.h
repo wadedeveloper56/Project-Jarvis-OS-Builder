@@ -9,7 +9,8 @@
 
 using namespace std;
 
-namespace WadeSpace {
+namespace WadeSpace
+{
 	class LogicalAndExpression
 	{
 	public:
@@ -17,6 +18,7 @@ namespace WadeSpace {
 		LogicalAndExpression(LogicalAndExpression* loe, InclusiveOrExpression* eoe);
 		LogicalAndExpression();
 		virtual ~LogicalAndExpression();
+
 	private:
 		InclusiveOrExpression* ioe;
 		LogicalAndExpression* lae;

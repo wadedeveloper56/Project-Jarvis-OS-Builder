@@ -12,7 +12,8 @@
 
 using namespace std;
 
-namespace WadeSpace {
+namespace WadeSpace
+{
 	class FunctionDefinition
 	{
 	public:
@@ -30,6 +31,7 @@ namespace WadeSpace {
 		Declarator* getDeclarator() const;
 		vector<Declaration*>* getVectorDeclaration() const;
 		BaseStatement* getBaseStatement() const;
+
 	private:
 		DeclarationSpecifiers* ds;
 		Declarator* dec;

@@ -9,7 +9,8 @@
 
 using namespace std;
 
-namespace WadeSpace {
+namespace WadeSpace
+{
 	class Expression
 	{
 	public:
@@ -17,11 +18,10 @@ namespace WadeSpace {
 		Expression(Expression* exp, string operation, AssignmentExpression* ae);
 		Expression();
 		virtual ~Expression();
+
 	private:
 		Expression* exp;
 		string oper;
 		AssignmentExpression* ae;
-
 	};
 }
-

@@ -2,15 +2,29 @@
 
 using namespace WadeSpace;
 
-AbstractDeclarator::AbstractDeclarator(Pointer* ptr) :ptr(ptr), dad(NULL) {}
-AbstractDeclarator::AbstractDeclarator(DirectAbstractDeclarator* dad) :ptr(NULL), dad(dad) {}
-AbstractDeclarator::AbstractDeclarator(Pointer* ptr, DirectAbstractDeclarator* dad) :ptr(ptr), dad(dad) {}
-AbstractDeclarator::AbstractDeclarator() :ptr(NULL), dad(NULL) {}
-AbstractDeclarator::~AbstractDeclarator() {
-	if (ptr) delete ptr;
-	if (dad) delete dad;
+AbstractDeclarator::AbstractDeclarator(Pointer* pointer) : pointer(pointer), directAbstractDeclarator(nullptr)
+{
 }
-bool AbstractDeclarator::hasPointer() const { return ptr != NULL; }
-bool AbstractDeclarator::hasDirectAbstractDeclarator() const { return dad != NULL; }
-Pointer* AbstractDeclarator::getPointer() const {return ptr;}
-DirectAbstractDeclarator* AbstractDeclarator::getDirectAbstractDeclarator() const { return dad; }
+
+AbstractDeclarator::AbstractDeclarator(DirectAbstractDeclarator* directAbstractDeclarator) : pointer(nullptr),
+	directAbstractDeclarator(directAbstractDeclarator)
+{
+}
+
+AbstractDeclarator::AbstractDeclarator(Pointer* ptr, DirectAbstractDeclarator* directAbstractDeclarator) : pointer(ptr),
+	directAbstractDeclarator(directAbstractDeclarator)
+{
+}
+
+AbstractDeclarator::AbstractDeclarator() : pointer(nullptr), directAbstractDeclarator(nullptr)
+{
+}
+
+AbstractDeclarator::~AbstractDeclarator()
+{
+	if (pointer != nullptr) delete pointer;
+	if (directAbstractDeclarator != nullptr) delete directAbstractDeclarator;
+}
+
+Pointer* AbstractDeclarator::getPointer() const { return pointer; }
+DirectAbstractDeclarator* AbstractDeclarator::getDirectAbstractDeclarator() const { return directAbstractDeclarator; }

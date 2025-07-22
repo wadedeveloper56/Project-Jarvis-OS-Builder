@@ -8,7 +8,8 @@
 
 using namespace std;
 
-namespace WadeSpace {
+namespace WadeSpace
+{
 	class Enumerator
 	{
 	public:
@@ -16,6 +17,7 @@ namespace WadeSpace {
 		Enumerator(string value);
 		Enumerator();
 		virtual ~Enumerator();
+
 	private:
 		string operatorStr;
 		ConstantExpression* expression;

@@ -8,7 +8,8 @@
 #include "Declarator.h"
 #include "AbstractDeclarator.h"
 
-namespace WadeSpace {
+namespace WadeSpace
+{
 	class ParameterDeclaration
 	{
 	public:
@@ -17,6 +18,7 @@ namespace WadeSpace {
 		ParameterDeclaration(DeclarationSpecifiers* pdl, Declarator* dec);
 		ParameterDeclaration();
 		virtual ~ParameterDeclaration();
+
 	private:
 		DeclarationSpecifiers* pdl;
 		Declarator* dec;

@@ -9,7 +9,8 @@
 
 using namespace std;
 
-namespace WadeSpace {
+namespace WadeSpace
+{
 	class DirectDeclaratorProxy
 	{
 	public:
@@ -17,6 +18,7 @@ namespace WadeSpace {
 		virtual ~DirectDeclaratorProxy();
 		bool hasDirectDeclarator() const;
 		DirectDeclarator* getDirectDeclarator() const;
+
 	private:
 		DirectDeclarator* directDeclarator;
 	};

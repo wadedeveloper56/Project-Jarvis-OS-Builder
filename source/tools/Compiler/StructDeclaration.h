@@ -9,13 +9,15 @@
 
 using namespace std;
 
-namespace WadeSpace {
+namespace WadeSpace
+{
 	class StructDeclaration
 	{
 	public:
-		StructDeclaration(SpecifierQualifierList* sql, vector<StructDeclarator *>* list);
+		StructDeclaration(SpecifierQualifierList* sql, vector<StructDeclarator*>* list);
 		StructDeclaration();
 		virtual ~StructDeclaration();
+
 	private:
 		SpecifierQualifierList* sql;
 		vector<StructDeclarator*>* list;

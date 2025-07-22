@@ -12,7 +12,8 @@
 
 using namespace std;
 
-namespace WadeSpace {
+namespace WadeSpace
+{
 	class Expression;
 
 	class PostfixExpression
@@ -21,10 +22,11 @@ namespace WadeSpace {
 		PostfixExpression(PrimaryExpression* pe);
 		PostfixExpression(PostfixExpression* pfe, string str, string str2);
 		PostfixExpression(PostfixExpression* pfe, Expression* exp);
-		PostfixExpression(PostfixExpression* pfe, vector<AssignmentExpression *>* aev);
-		PostfixExpression(TypeName* tn, vector<Initializer *>* iv);
+		PostfixExpression(PostfixExpression* pfe, vector<AssignmentExpression*>* aev);
+		PostfixExpression(TypeName* tn, vector<Initializer*>* iv);
 		PostfixExpression();
 		virtual ~PostfixExpression();
+
 	private:
 		PrimaryExpression* pe;
 		PostfixExpression* pfe;

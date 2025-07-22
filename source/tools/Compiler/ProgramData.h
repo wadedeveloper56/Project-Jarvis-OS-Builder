@@ -10,8 +10,10 @@
 
 using namespace std;
 
-namespace WadeSpace {
-	typedef struct {
+namespace WadeSpace
+{
+	typedef struct
+	{
 		string name;
 		TokenType type;
 	} VariableData;
@@ -24,8 +26,9 @@ namespace WadeSpace {
 		void add(ExternalDeclaration* data);
 		void processGlobalVariables();
 		void test();
+
 	private:
-		vector<ExternalDeclaration *>* programData;
-		vector<VariableData *>* variableTable;
+		vector<ExternalDeclaration*>* programData;
+		vector<VariableData*>* variableTable;
 	};
 }

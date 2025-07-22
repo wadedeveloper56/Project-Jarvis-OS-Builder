@@ -89,7 +89,7 @@ ArgRexPtr arg_rexn(const char* shortopts, const char* longopts, const char* patt
 	TRex* rex = NULL;
 
 	if (!pattern) {
-		printf("argtable: ERROR - illegal regular expression pattern \"(NULL)\"\n");
+		printf("argtable: ERROR - illegal regular expression pattern \"(nullptr)\"\n");
 		printf("argtable: Bad argument table.\n");
 		return NULL;
 	}

@@ -6,7 +6,8 @@
 #include <optional>
 #include "TokenType.h"
 
-namespace WadeSpace {
+namespace WadeSpace
+{
 	class AbstractDeclarator;
 	class ConstantExpression;
 	class ParameterTypeList;
@@ -23,6 +24,7 @@ namespace WadeSpace {
 		DirectAbstractDeclarator(TokenType type);
 		DirectAbstractDeclarator();
 		virtual ~DirectAbstractDeclarator();
+
 	private:
 		ParameterTypeList* ptl;
 		DirectAbstractDeclarator* dad;

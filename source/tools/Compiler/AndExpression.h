@@ -9,7 +9,8 @@
 
 using namespace std;
 
-namespace WadeSpace {
+namespace WadeSpace
+{
 	class AndExpression
 	{
 	public:
@@ -17,6 +18,8 @@ namespace WadeSpace {
 		AndExpression(AndExpression* ae, EqualityExpression* ee);
 		AndExpression();
 		virtual ~AndExpression();
+		AndExpression* getAndExpression() const;
+		EqualityExpression* getEqualityExpression() const;
 	private:
 		AndExpression* ae;
 		EqualityExpression* ee;

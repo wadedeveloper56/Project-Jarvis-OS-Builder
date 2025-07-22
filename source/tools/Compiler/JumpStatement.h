@@ -9,7 +9,8 @@
 
 using namespace std;
 
-namespace WadeSpace {
+namespace WadeSpace
+{
 	class Expression;
 
 	class JumpStatement : public BaseStatement
@@ -22,4 +23,3 @@ namespace WadeSpace {
 		virtual ~JumpStatement();
 	};
 }
-

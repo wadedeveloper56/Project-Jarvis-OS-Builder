@@ -9,7 +9,8 @@
 
 using namespace std;
 
-namespace WadeSpace {
+namespace WadeSpace
+{
 	class TypeName;
 
 	class CastExpression
@@ -19,6 +20,7 @@ namespace WadeSpace {
 		CastExpression(TypeName* type, CastExpression* ce);
 		CastExpression();
 		virtual ~CastExpression();
+
 	private:
 		UnaryExpression* ue;
 		TypeName* type;

@@ -9,7 +9,8 @@
 
 using namespace std;
 
-namespace WadeSpace {
+namespace WadeSpace
+{
 	class ShiftExpression
 	{
 	public:
@@ -17,6 +18,7 @@ namespace WadeSpace {
 		ShiftExpression(ShiftExpression* se, string op, AdditiveExpression* ae);
 		ShiftExpression();
 		virtual ~ShiftExpression();
+
 	private:
 		AdditiveExpression* ae;
 		string op;

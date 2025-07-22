@@ -9,8 +9,9 @@
 
 using namespace std;
 
-namespace WadeSpace {
-    class ExpressionStatement : public BaseStatement
+namespace WadeSpace
+{
+	class ExpressionStatement : public BaseStatement
 	{
 	public:
 		ExpressionStatement(Expression* exp);

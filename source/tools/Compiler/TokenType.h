@@ -1,7 +1,9 @@
 #pragma once
 
-namespace WadeSpace {
-	typedef enum {
+namespace WadeSpace
+{
+	typedef enum
+	{
 		NONE,
 		ARRAY,
 		FUNCTION,

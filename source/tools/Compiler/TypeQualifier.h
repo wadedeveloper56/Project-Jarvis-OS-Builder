@@ -8,13 +8,15 @@
 
 using namespace std;
 
-namespace WadeSpace {
+namespace WadeSpace
+{
 	class TypeQualifier
 	{
 	public:
 		TypeQualifier(string value, TokenType type);
 		TypeQualifier();
 		virtual ~TypeQualifier();
+
 	private:
 		string operatorStr;
 		TokenType type;

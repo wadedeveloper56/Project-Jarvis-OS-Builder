@@ -5,13 +5,15 @@
 #include <stdint.h>
 #include "TokenType.h"
 
-namespace WadeSpace {
+namespace WadeSpace
+{
 	class AssignmentOperator
 	{
 	public:
 		AssignmentOperator(TokenType type);
 		AssignmentOperator();
-		virtual ~AssignmentOperator();
+		virtual ~AssignmentOperator() = default;
+		TokenType getTokenType() const;
 	private:
 		TokenType type;
 	};

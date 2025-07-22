@@ -8,20 +8,22 @@
 
 using namespace std;
 
-namespace WadeSpace {
+namespace WadeSpace
+{
 	class Pointer
 	{
 	public:
-		Pointer(string value, vector<TypeQualifier *>* list);
-		Pointer(string value, vector<TypeQualifier *>* list, Pointer* ptr);
+		Pointer(string value, vector<TypeQualifier*>* list);
+		Pointer(string value, vector<TypeQualifier*>* list, Pointer* ptr);
 		Pointer(string value, Pointer* ptr);
 		Pointer(string value);
 		Pointer();
 		virtual ~Pointer();
 		void inc();
+
 	private:
 		string nameStr;
-		vector<TypeQualifier *>* list;
+		vector<TypeQualifier*>* list;
 		int level;
 		Pointer* ptr;
 	};

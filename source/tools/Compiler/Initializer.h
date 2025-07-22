@@ -8,7 +8,8 @@
 
 using namespace std;
 
-namespace WadeSpace {
+namespace WadeSpace
+{
 	class Initializer
 	{
 	public:
@@ -16,6 +17,7 @@ namespace WadeSpace {
 		Initializer(vector<Initializer*>* list);
 		Initializer();
 		virtual ~Initializer();
+
 	private:
 		AssignmentExpression* exp;
 		vector<Initializer*>* list;

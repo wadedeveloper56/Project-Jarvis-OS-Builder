@@ -9,7 +9,8 @@
 
 using namespace std;
 
-namespace WadeSpace {
+namespace WadeSpace
+{
 	class CompoundStatement : public BaseStatement
 	{
 	public:

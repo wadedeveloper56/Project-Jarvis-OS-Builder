@@ -2,8 +2,15 @@
 
 using namespace WadeSpace;
 
-ConstantExpression::ConstantExpression(ConditionalExpression* ce):ce(ce) {}
-ConstantExpression::ConstantExpression():ce(NULL) {}
-ConstantExpression::~ConstantExpression() {
+ConstantExpression::ConstantExpression(ConditionalExpression* ce): ce(ce)
+{
+}
+
+ConstantExpression::ConstantExpression(): ce(nullptr)
+{
+}
+
+ConstantExpression::~ConstantExpression()
+{
 	if (ce) delete ce;
 }

@@ -10,7 +10,8 @@
 
 using namespace std;
 
-namespace WadeSpace {
+namespace WadeSpace
+{
 	class ExternalDeclaration
 	{
 	public:
@@ -23,6 +24,7 @@ namespace WadeSpace {
 		bool isDeclaration() const;
 		FunctionDefinition* getFunction() const;
 		Declaration* getDeclaration() const;
+
 	private:
 		FunctionDefinition* fd;
 		Declaration* dec;

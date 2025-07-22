@@ -8,7 +8,8 @@
 
 using namespace std;
 
-namespace WadeSpace {
+namespace WadeSpace
+{
 	class Constant
 	{
 	public:
@@ -17,6 +18,7 @@ namespace WadeSpace {
 		Constant(string value);
 		Constant();
 		virtual ~Constant();
+
 	private:
 		uint64_t iConst;
 		long double fConst;

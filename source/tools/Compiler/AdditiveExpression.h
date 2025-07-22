@@ -9,7 +9,8 @@
 
 using namespace std;
 
-namespace WadeSpace {
+namespace WadeSpace
+{
 	class AdditiveExpression
 	{
 	public:
@@ -17,8 +18,6 @@ namespace WadeSpace {
 		AdditiveExpression(AdditiveExpression* ae, string op, MultiplicativeExpression* me);
 		AdditiveExpression();
 		virtual ~AdditiveExpression();
-		bool hasMultiplicativeExpression() const;
-		bool hasAdditiveExpression() const;
 		MultiplicativeExpression* getMultiplicativeExpression() const;
 		AdditiveExpression* getAdditiveExpression() const;
 		string getOperation() const;

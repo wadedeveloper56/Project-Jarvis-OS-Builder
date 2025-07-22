@@ -8,7 +8,8 @@
 
 using namespace std;
 
-namespace WadeSpace {
+namespace WadeSpace
+{
 	class ConstantExpression;
 	class ParameterTypeList;
 	class Declarator;
@@ -32,6 +33,7 @@ namespace WadeSpace {
 		ConstantExpression* getConstantExpression() const;
 		ParameterTypeList* getParameterTypeList() const;
 		vector<string>* getVectorOfStrings() const;
+
 	private:
 		string id;
 		string str1;

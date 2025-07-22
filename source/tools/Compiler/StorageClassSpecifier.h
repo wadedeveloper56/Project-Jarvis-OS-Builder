@@ -8,13 +8,15 @@
 
 using namespace std;
 
-namespace WadeSpace {
+namespace WadeSpace
+{
 	class StorageClassSpecifier
 	{
 	public:
 		StorageClassSpecifier(string value, TokenType type);
 		StorageClassSpecifier();
 		virtual ~StorageClassSpecifier();
+
 	private:
 		string operatorStr;
 		TokenType type;

@@ -10,7 +10,8 @@
 
 using namespace std;
 
-namespace WadeSpace {
+namespace WadeSpace
+{
 	class TypeName;
 	class CastExpression;
 	class PostfixExpression;
@@ -24,6 +25,7 @@ namespace WadeSpace {
 		UnaryExpression(string op, TypeName* tn);
 		UnaryExpression();
 		virtual ~UnaryExpression();
+
 	private:
 		PostfixExpression* pe;
 		TypeName* tn;

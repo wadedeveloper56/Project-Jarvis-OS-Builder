@@ -9,8 +9,9 @@
 
 using namespace std;
 
-namespace WadeSpace {
-    class LabeledStatement : public BaseStatement
+namespace WadeSpace
+{
+	class LabeledStatement : public BaseStatement
 	{
 	public:
 		LabeledStatement(string identifier, BaseStatement* statement);

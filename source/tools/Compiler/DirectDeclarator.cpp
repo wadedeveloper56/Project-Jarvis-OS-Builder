@@ -3,14 +3,53 @@
 using namespace WadeSpace;
 using namespace std;
 
-DirectDeclarator::DirectDeclarator(string id) :id(id), str1(""), str2(""), directDeclarator(NULL), constantExpression(NULL), parameterTypeList(NULL), vectorOfStrings(NULL), declarator(NULL) {}
-DirectDeclarator::DirectDeclarator() :id(""), str1(""), str2(""), directDeclarator(NULL), constantExpression(NULL), parameterTypeList(NULL), vectorOfStrings(NULL), declarator(NULL) {}
-DirectDeclarator::~DirectDeclarator() {}
-DirectDeclarator::DirectDeclarator(string id, Declarator* d) :id(""), str1(""), str2(""), directDeclarator(directDeclarator), constantExpression(NULL), parameterTypeList(NULL), vectorOfStrings(NULL), declarator(d) {}
-DirectDeclarator::DirectDeclarator(DirectDeclarator* directDeclarator, ConstantExpression* constantExpression) :id(""), str1(""), str2(""), directDeclarator(directDeclarator), constantExpression(constantExpression), parameterTypeList(NULL), vectorOfStrings(NULL), declarator(NULL) {}
-DirectDeclarator::DirectDeclarator(DirectDeclarator* directDeclarator, string str1, string str2) :id(""), str1(str1), str2(str2), directDeclarator(directDeclarator), constantExpression(NULL), parameterTypeList(NULL), vectorOfStrings(NULL), declarator(NULL) {}
-DirectDeclarator::DirectDeclarator(DirectDeclarator* directDeclarator, ParameterTypeList* parameterTypeList) :id(""), str1(""), str2(""), directDeclarator(directDeclarator), constantExpression(NULL), parameterTypeList(parameterTypeList), vectorOfStrings(NULL), declarator(NULL) {}
-DirectDeclarator::DirectDeclarator(DirectDeclarator* directDeclarator, vector<string>* vs) :id(""), str1(""), str2(""), directDeclarator(directDeclarator), constantExpression(NULL), parameterTypeList(NULL), vectorOfStrings(vs), declarator(NULL) {}
+DirectDeclarator::DirectDeclarator(string id) : id(id), str1(""), str2(""), directDeclarator(nullptr),
+                                                constantExpression(nullptr), parameterTypeList(nullptr),
+                                                vectorOfStrings(nullptr), declarator(nullptr)
+{
+}
+
+DirectDeclarator::DirectDeclarator() : id(""), str1(""), str2(""), directDeclarator(nullptr),
+                                       constantExpression(nullptr), parameterTypeList(nullptr),
+                                       vectorOfStrings(nullptr), declarator(nullptr)
+{
+}
+
+DirectDeclarator::~DirectDeclarator()
+{
+}
+
+DirectDeclarator::DirectDeclarator(string id, Declarator* d) : id(""), str1(""), str2(""),
+                                                               directDeclarator(directDeclarator),
+                                                               constantExpression(nullptr), parameterTypeList(nullptr),
+                                                               vectorOfStrings(nullptr), declarator(d)
+{
+}
+
+DirectDeclarator::DirectDeclarator(DirectDeclarator* directDeclarator, ConstantExpression* constantExpression) :
+	id(""), str1(""), str2(""), directDeclarator(directDeclarator), constantExpression(constantExpression),
+	parameterTypeList(nullptr), vectorOfStrings(nullptr), declarator(nullptr)
+{
+}
+
+DirectDeclarator::DirectDeclarator(DirectDeclarator* directDeclarator, string str1, string str2) : id(""), str1(str1),
+	str2(str2), directDeclarator(directDeclarator), constantExpression(nullptr), parameterTypeList(nullptr),
+	vectorOfStrings(nullptr), declarator(nullptr)
+{
+}
+
+DirectDeclarator::DirectDeclarator(DirectDeclarator* directDeclarator, ParameterTypeList* parameterTypeList) :
+	id(""), str1(""), str2(""), directDeclarator(directDeclarator), constantExpression(nullptr),
+	parameterTypeList(parameterTypeList), vectorOfStrings(nullptr), declarator(nullptr)
+{
+}
+
+DirectDeclarator::DirectDeclarator(DirectDeclarator* directDeclarator, vector<string>* vs) : id(""), str1(""), str2(""),
+	directDeclarator(directDeclarator), constantExpression(nullptr), parameterTypeList(nullptr), vectorOfStrings(vs),
+	declarator(nullptr)
+{
+}
+
 string DirectDeclarator::getId() const { return id; }
 string DirectDeclarator::getStr1() const { return str1; }
 string DirectDeclarator::getStr2() const { return str2; }

@@ -7,7 +7,8 @@
 #include "Declarator.h"
 #include "ConstantExpression.h"
 
-namespace WadeSpace {
+namespace WadeSpace
+{
 	class StructDeclarator
 	{
 	public:
@@ -16,6 +17,7 @@ namespace WadeSpace {
 		StructDeclarator(Declarator* dec, ConstantExpression* exp);
 		StructDeclarator();
 		virtual ~StructDeclarator();
+
 	private:
 		Declarator* dec;
 		ConstantExpression* exp;

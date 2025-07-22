@@ -9,17 +9,19 @@
 
 using namespace std;
 
-namespace WadeSpace {
-	class EnumSpecifier {
+namespace WadeSpace
+{
+	class EnumSpecifier
+	{
 	public:
-		EnumSpecifier(vector<Enumerator *>* list);
-		EnumSpecifier(string value, vector<Enumerator *>* list);
+		EnumSpecifier(vector<Enumerator*>* list);
+		EnumSpecifier(string value, vector<Enumerator*>* list);
 		EnumSpecifier(string value);
 		EnumSpecifier();
 		virtual ~EnumSpecifier();
+
 	private:
 		string nameStr;
-		vector<Enumerator *>* list;
+		vector<Enumerator*>* list;
 	};
 }
-

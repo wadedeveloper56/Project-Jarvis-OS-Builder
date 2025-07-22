@@ -7,7 +7,8 @@
 #include "Declarator.h"
 #include "Initializer.h"
 
-namespace WadeSpace {
+namespace WadeSpace
+{
 	class InitDeclarator
 	{
 	public:
@@ -20,6 +21,7 @@ namespace WadeSpace {
 		Declarator* getDeclarator() const;
 		Initializer* getInitializer() const;
 		string getVariableName();
+
 	private:
 		Declarator* dec;
 		Initializer* init;

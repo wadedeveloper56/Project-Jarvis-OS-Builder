@@ -9,7 +9,8 @@
 
 using namespace std;
 
-namespace WadeSpace {
+namespace WadeSpace
+{
 	class EqualityExpression
 	{
 	public:
@@ -17,6 +18,7 @@ namespace WadeSpace {
 		EqualityExpression(EqualityExpression* eq, string op, RelationalExpression* re);
 		EqualityExpression();
 		virtual ~EqualityExpression();
+
 	private:
 		RelationalExpression* re;
 		string op;

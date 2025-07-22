@@ -9,7 +9,8 @@
 
 using namespace std;
 
-namespace WadeSpace {
+namespace WadeSpace
+{
 	class Declarator
 	{
 	public:
@@ -21,6 +22,7 @@ namespace WadeSpace {
 		bool hasPointer() const;
 		DirectDeclarator* getDirectDeclarator() const;
 		Pointer* getPointer() const;
+
 	private:
 		DirectDeclarator* directDeclarator;
 		Pointer* pointer;

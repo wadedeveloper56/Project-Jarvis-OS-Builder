@@ -9,7 +9,8 @@
 
 using namespace std;
 
-namespace WadeSpace {
+namespace WadeSpace
+{
 	class Expression;
 
 	class PrimaryExpression
@@ -20,6 +21,7 @@ namespace WadeSpace {
 		PrimaryExpression(Expression* exp);
 		PrimaryExpression();
 		virtual ~PrimaryExpression();
+
 	private:
 		string identifier;
 		Constant* c;

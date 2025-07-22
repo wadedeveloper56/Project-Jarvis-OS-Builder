@@ -8,13 +8,15 @@
 
 using namespace std;
 
-namespace WadeSpace {
+namespace WadeSpace
+{
 	class ParameterTypeList
 	{
 	public:
 		ParameterTypeList(vector<ParameterDeclaration*>* pdl, string ellipsis);
 		ParameterTypeList();
 		virtual ~ParameterTypeList();
+
 	private:
 		vector<ParameterDeclaration*>* pdl;
 		string ellipsis;

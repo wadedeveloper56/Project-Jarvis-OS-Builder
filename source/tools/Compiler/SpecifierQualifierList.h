@@ -7,7 +7,8 @@
 #include "TypeSpecifier.h"
 #include "TypeQualifier.h"
 
-namespace WadeSpace {
+namespace WadeSpace
+{
 	class SpecifierQualifierList
 	{
 	public:
@@ -17,6 +18,7 @@ namespace WadeSpace {
 		SpecifierQualifierList(TypeQualifier* ts);
 		SpecifierQualifierList();
 		virtual ~SpecifierQualifierList();
+
 	private:
 		SpecifierQualifierList* sql;
 		TypeSpecifier* ts;

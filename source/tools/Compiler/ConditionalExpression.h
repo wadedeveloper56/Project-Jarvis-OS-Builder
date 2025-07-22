@@ -10,7 +10,8 @@
 
 using namespace std;
 
-namespace WadeSpace {
+namespace WadeSpace
+{
 	class Expression;
 
 	class ConditionalExpression
@@ -20,6 +21,7 @@ namespace WadeSpace {
 		ConditionalExpression(LogicalOrExpression* loe, Expression* exp, ConditionalExpression* ce);
 		ConditionalExpression();
 		virtual ~ConditionalExpression();
+
 	private:
 		LogicalOrExpression* loe;
 		Expression* exp;

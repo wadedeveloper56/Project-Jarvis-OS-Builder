@@ -9,7 +9,8 @@
 
 using namespace std;
 
-namespace WadeSpace {
+namespace WadeSpace
+{
 	class MultiplicativeExpression
 	{
 	public:
@@ -17,6 +18,7 @@ namespace WadeSpace {
 		MultiplicativeExpression(MultiplicativeExpression* me, string op, CastExpression* ce);
 		MultiplicativeExpression();
 		virtual ~MultiplicativeExpression();
+
 	private:
 		MultiplicativeExpression* me;
 		string op;

@@ -7,23 +7,21 @@
 #include "Pointer.h"
 #include "DirectAbstractDeclarator.h"
 
-namespace WadeSpace {
+namespace WadeSpace
+{
 	class AbstractDeclarator
 	{
 	public:
-		AbstractDeclarator(Pointer* ptr);
-		AbstractDeclarator(DirectAbstractDeclarator* dad);
-		AbstractDeclarator(Pointer* ptr, DirectAbstractDeclarator* dad);
+		AbstractDeclarator(Pointer* pointer);
+		AbstractDeclarator(DirectAbstractDeclarator* directAbstractDeclarator);
+		AbstractDeclarator(Pointer* ptr, DirectAbstractDeclarator* directAbstractDeclarator);
 		AbstractDeclarator();
 		virtual ~AbstractDeclarator();
-		bool hasPointer() const;
-		bool hasDirectAbstractDeclarator() const;
 		Pointer* getPointer() const;
 		DirectAbstractDeclarator* getDirectAbstractDeclarator() const;
+
 	private:
-		Pointer* ptr;
-		DirectAbstractDeclarator* dad;
+		Pointer* pointer;
+		DirectAbstractDeclarator* directAbstractDeclarator;
 	};
 }
-
-

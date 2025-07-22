@@ -9,18 +9,20 @@
 
 using namespace std;
 
-namespace WadeSpace {
+namespace WadeSpace
+{
 	class StructOrUnionSpecifier
 	{
 	public:
-		StructOrUnionSpecifier(StructOrUnion* su, string name, vector<StructDeclaration *>* list);
-		StructOrUnionSpecifier(StructOrUnion* su, vector<StructDeclaration *>* list);
+		StructOrUnionSpecifier(StructOrUnion* su, string name, vector<StructDeclaration*>* list);
+		StructOrUnionSpecifier(StructOrUnion* su, vector<StructDeclaration*>* list);
 		StructOrUnionSpecifier(StructOrUnion* su, string name);
 		StructOrUnionSpecifier();
 		virtual ~StructOrUnionSpecifier();
+
 	private:
 		string name;
 		StructOrUnion* su;
-		vector<StructDeclaration *>* list;
+		vector<StructDeclaration*>* list;
 	};
 }

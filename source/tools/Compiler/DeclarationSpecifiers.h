@@ -8,7 +8,8 @@
 #include "TypeSpecifier.h"
 #include "TypeQualifier.h"
 
-namespace WadeSpace {
+namespace WadeSpace
+{
 	class DeclarationSpecifiers
 	{
 	public:
@@ -24,6 +25,7 @@ namespace WadeSpace {
 		TypeSpecifier* getTypeSpecifier() const;
 		TypeQualifier* getTypeQualifier() const;
 		DeclarationSpecifiers* getDeclarationSpecifiers() const;
+
 	private:
 		StorageClassSpecifier* scs;
 		TypeSpecifier* ts;

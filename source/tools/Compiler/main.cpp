@@ -8,7 +8,8 @@
 using namespace WadeSpace;
 using namespace std;
 
-int main(int argc, char* argv[]) {
+int main(int argc, char* argv[])
+{
 	ifstream in;
 	ofstream out;
 	ArgIntPtr bitsize = argInt0("b", "bitsize", NULL, "define bit size to be 16, 32 or 64 bits (default is 32)");
@@ -18,7 +19,7 @@ int main(int argc, char* argv[]) {
 	ArgLitPtr version = argLit0(NULL, "version", "print version information and exit");
 	ArgFilePtr infiles = argFileN(NULL, NULL, NULL, 1, argc + 2, "input file(s)");
 	ArgEndPtr end = arg_end(20);
-	void* argtable[] = { bitsize,outfile,verbose,help,version,infiles,end };
+	void* argtable[] = {bitsize, outfile, verbose, help, version, infiles, end};
 	const char* progname = "Compiler";
 	int exitcode = 0, nerrors = 0;
 
@@ -72,7 +73,8 @@ int main(int argc, char* argv[]) {
 	in.open(infiles->filename[0], ifstream::in);
 	out.open(logFileName, ofstream::out);
 
-	if (in.is_open()) {
+	if (in.is_open())
+	{
 		Interpreter i;
 		i.setStreams(&in, &out);
 		exitcode = i.parse();
@@ -80,7 +82,8 @@ int main(int argc, char* argv[]) {
 		programData.test();
 		cout << "Parse complete. Result = " << exitcode << endl;
 	}
-	else {
+	else
+	{
 		cerr << "Error opening file " << infiles->filename[0] << endl;
 		exitcode = -1;
 	}
