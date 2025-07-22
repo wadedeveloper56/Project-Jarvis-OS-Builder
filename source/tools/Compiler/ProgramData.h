@@ -11,6 +11,10 @@
 using namespace std;
 
 namespace WadeSpace {
+	typedef struct {
+		string name;
+	} VariableData;
+
 	class ProgramData
 	{
 	public:
@@ -21,7 +25,6 @@ namespace WadeSpace {
 		void test();
 	private:
 		vector<ExternalDeclaration *>* programData;
-		vector<FunctionDefinition *>* functionTable;
-		vector<Declaration *>* variableTable;
+		vector<VariableData *>* variableTable;
 	};
 }

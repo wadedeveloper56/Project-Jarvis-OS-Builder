@@ -25,8 +25,19 @@ namespace WadeSpace {
 		DirectDeclarator();
 		virtual ~DirectDeclarator();
 		bool hasDeclarator() const;
+		bool hasDirectDeclarator() const;
+		bool hasConstantExpression() const;
+		bool hasParameterTypeList() const;
+		bool hasVectorOfStrings() const;
+		string getId() const;
+		string getStr1() const;
+		string getStr2() const;
 		Declarator* getDeclarator() const;
-	public:
+		DirectDeclarator* getDirectDeclarator() const;
+		ConstantExpression* getConstantExpression() const;
+		ParameterTypeList* getParameterTypeList() const;
+		vector<string>* getVectorOfStrings() const;
+	private:
 		string id;
 		string str1;
 		string str2;
@@ -34,6 +45,6 @@ namespace WadeSpace {
 		DirectDeclarator* directDeclarator;
 		ConstantExpression* constantExpression;
 		ParameterTypeList* parameterTypeList;
-		vector<string>* vs;
+		vector<string>* vectorOfStrings;
 	};
 }
