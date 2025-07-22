@@ -9,12 +9,12 @@ long double var8;
 bool var9;
 complex var10;
 imaginary var11;
-char *var12;
+char *var12[];
 
-int main(int argc){
-    return 0;
-}
+//int main(int argc){
+//    return 0;
+//}
 
-void function2(){
-    
-}
+//void function2(){
+  //  
+//}

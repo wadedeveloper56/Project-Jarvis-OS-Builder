@@ -24,11 +24,6 @@ namespace WadeSpace {
 		DirectDeclarator(DirectDeclarator* directDeclarator, vector<string>* vs);
 		DirectDeclarator();
 		virtual ~DirectDeclarator();
-		bool hasDeclarator() const;
-		bool hasDirectDeclarator() const;
-		bool hasConstantExpression() const;
-		bool hasParameterTypeList() const;
-		bool hasVectorOfStrings() const;
 		string getId() const;
 		string getStr1() const;
 		string getStr2() const;

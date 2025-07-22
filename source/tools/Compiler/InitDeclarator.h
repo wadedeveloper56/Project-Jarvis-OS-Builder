@@ -19,6 +19,7 @@ namespace WadeSpace {
 		bool hasInitializer() const;
 		Declarator* getDeclarator() const;
 		Initializer* getInitializer() const;
+		string getVariableName();
 	private:
 		Declarator* dec;
 		Initializer* init;

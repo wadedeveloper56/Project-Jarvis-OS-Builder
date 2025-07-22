@@ -21,7 +21,7 @@ void ProgramData::processGlobalVariables() {
 			Declaration* declaration = ptr->getDeclaration();
 			for (InitDeclarator* initDecl : *declaration->getVectorInitDeclarator()) {
 				VariableData* data = new VariableData();
-				data->name = initDecl->getDeclarator()->getDirectDeclarator()->getId();
+				data->name = initDecl->getVariableName();
 				variableTable->push_back(data);
 			}
 		}
@@ -35,12 +35,4 @@ void ProgramData::test() {
 	for (VariableData* ptr : *variableTable) {
 		cout << "  variable = " << ptr->name << endl;
 	}
-	/*
-	for (Declaration* ptr : *variableTable) {
-		cout << "ptr->getVectorInitDeclarator() = " << showbase << hex << ptr->getVectorInitDeclarator() << endl;
-		for (InitDeclarator* ptr2 : *ptr->getVectorInitDeclarator()) {
-			cout << "  ptr2->getDeclarator()->getDirectDeclarator()->id = " << ptr2->getDeclarator()->getDirectDeclarator()->getId() << endl;
-		}
-	}
-	*/
 }

@@ -11,11 +11,6 @@ DirectDeclarator::DirectDeclarator(DirectDeclarator* directDeclarator, ConstantE
 DirectDeclarator::DirectDeclarator(DirectDeclarator* directDeclarator, string str1, string str2) :id(""), str1(str1), str2(str2), directDeclarator(directDeclarator), constantExpression(NULL), parameterTypeList(NULL), vectorOfStrings(NULL), declarator(NULL) {}
 DirectDeclarator::DirectDeclarator(DirectDeclarator* directDeclarator, ParameterTypeList* parameterTypeList) :id(""), str1(""), str2(""), directDeclarator(directDeclarator), constantExpression(NULL), parameterTypeList(parameterTypeList), vectorOfStrings(NULL), declarator(NULL) {}
 DirectDeclarator::DirectDeclarator(DirectDeclarator* directDeclarator, vector<string>* vs) :id(""), str1(""), str2(""), directDeclarator(directDeclarator), constantExpression(NULL), parameterTypeList(NULL), vectorOfStrings(vs), declarator(NULL) {}
-bool DirectDeclarator::hasDeclarator() const { return declarator; }
-bool DirectDeclarator::hasDirectDeclarator() const { return directDeclarator; }
-bool DirectDeclarator::hasConstantExpression() const { return constantExpression; }
-bool DirectDeclarator::hasParameterTypeList() const { return parameterTypeList; }
-bool DirectDeclarator::hasVectorOfStrings() const { return vectorOfStrings; }
 string DirectDeclarator::getId() const { return id; }
 string DirectDeclarator::getStr1() const { return str1; }
 string DirectDeclarator::getStr2() const { return str2; }
