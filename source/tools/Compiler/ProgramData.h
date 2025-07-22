@@ -13,6 +13,7 @@ using namespace std;
 namespace WadeSpace {
 	typedef struct {
 		string name;
+		TokenType type;
 	} VariableData;
 
 	class ProgramData

@@ -10,3 +10,7 @@ DeclarationSpecifiers::DeclarationSpecifiers(StorageClassSpecifier* scs, Declara
 DeclarationSpecifiers::DeclarationSpecifiers(StorageClassSpecifier* scs) :scs(scs), ts(NULL), ds(NULL), tq(NULL) {}
 DeclarationSpecifiers::DeclarationSpecifiers() :scs(NULL), ts(NULL), ds(NULL), tq(NULL) {}
 DeclarationSpecifiers::~DeclarationSpecifiers() {}
+StorageClassSpecifier* DeclarationSpecifiers::getStorageClassSpecifier() const { return scs; }
+TypeSpecifier* DeclarationSpecifiers::getTypeSpecifier() const { return ts; }
+TypeQualifier* DeclarationSpecifiers::getTypeQualifier() const { return tq; }
+DeclarationSpecifiers* DeclarationSpecifiers::getDeclarationSpecifiers() const { return ds; }

@@ -18,6 +18,9 @@ namespace WadeSpace {
 		TypeSpecifier(StructOrUnionSpecifier* type);
 		TypeSpecifier();
 		virtual ~TypeSpecifier();
+		EnumSpecifier* getEnumSpec() const;
+		TokenType getType() const;
+		StructOrUnionSpecifier* getSuSpec() const;
 	private:
 		EnumSpecifier* enumSpec;
 		TokenType type;

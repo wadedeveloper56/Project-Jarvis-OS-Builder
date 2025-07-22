@@ -20,6 +20,10 @@ namespace WadeSpace {
 		DeclarationSpecifiers(StorageClassSpecifier* scs, DeclarationSpecifiers* ds);
 		DeclarationSpecifiers();
 		virtual ~DeclarationSpecifiers();
+		StorageClassSpecifier* getStorageClassSpecifier() const;
+		TypeSpecifier* getTypeSpecifier() const;
+		TypeQualifier* getTypeQualifier() const;
+		DeclarationSpecifiers* getDeclarationSpecifiers() const;
 	private:
 		StorageClassSpecifier* scs;
 		TypeSpecifier* ts;

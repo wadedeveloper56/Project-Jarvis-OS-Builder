@@ -154,16 +154,16 @@ Scanner: single line comment [//void function2(){]
 Scanner: single line comment [//  ]
 Scanner: single line comment [//}]
 Number of entries in programData table: 12
-  variable = var1
-  variable = var2
-  variable = var3
-  variable = var4
-  variable = var5
-  variable = var6
-  variable = var7
-  variable = var8
-  variable = var9
-  variable = var10
-  variable = var11
-  variable = var12
+  variable = var1 15
+  variable = var2 36
+  variable = var3 30
+  variable = var4 31
+  variable = var5 32
+  variable = var6 25
+  variable = var7 20
+  variable = var8 21
+  variable = var9 48
+  variable = var10 49
+  variable = var11 50
+  variable = var12 15
 Parse complete. Result = 0
