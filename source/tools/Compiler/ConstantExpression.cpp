@@ -12,5 +12,5 @@ ConstantExpression::ConstantExpression(): ce(nullptr)
 
 ConstantExpression::~ConstantExpression()
 {
-	if (ce) delete ce;
+	delete ce;
 }

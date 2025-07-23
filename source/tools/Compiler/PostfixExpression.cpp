@@ -36,4 +36,10 @@ PostfixExpression::PostfixExpression() : pe(nullptr), pfe(nullptr), exp(nullptr)
 
 PostfixExpression::~PostfixExpression()
 {
+    delete pe;
+    delete pfe;
+    delete exp;
+    delete aev;
+    delete iv;
+    delete tn;
 }

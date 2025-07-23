@@ -16,4 +16,10 @@ Initializer::Initializer() : exp(nullptr), list(nullptr)
 
 Initializer::~Initializer()
 {
+	delete exp;
+	for (Initializer* ptr : *list)
+	{
+		delete ptr;
+	}
+	delete list;
 }

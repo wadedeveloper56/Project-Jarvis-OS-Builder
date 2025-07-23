@@ -22,8 +22,8 @@ AbstractDeclarator::AbstractDeclarator() : pointer(nullptr), directAbstractDecla
 
 AbstractDeclarator::~AbstractDeclarator()
 {
-	if (pointer != nullptr) delete pointer;
-	if (directAbstractDeclarator != nullptr) delete directAbstractDeclarator;
+	delete pointer;
+	delete directAbstractDeclarator;
 }
 
 Pointer* AbstractDeclarator::getPointer() const { return pointer; }

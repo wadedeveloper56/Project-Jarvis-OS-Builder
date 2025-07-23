@@ -12,4 +12,5 @@ ParameterTypeList::ParameterTypeList() : pdl(nullptr), ellipsis("")
 
 ParameterTypeList::~ParameterTypeList()
 {
+	delete pdl;
 }

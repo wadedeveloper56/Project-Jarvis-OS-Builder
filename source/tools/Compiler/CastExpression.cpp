@@ -18,9 +18,9 @@ CastExpression::CastExpression() : unaryExpression(nullptr), type(nullptr), cast
 
 CastExpression::~CastExpression()
 {
-	if (unaryExpression != nullptr) delete unaryExpression;
-	if (castExpression != nullptr) delete castExpression;
-	if (type != nullptr) delete type;
+	delete unaryExpression;
+	delete castExpression;
+	delete type;
 }
 
 UnaryExpression* CastExpression::getUnaryExpression() const

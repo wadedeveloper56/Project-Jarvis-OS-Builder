@@ -68,7 +68,6 @@
     #include "FunctionDefinition.h"
     #include "ExternalDeclaration.h"
     #include "ProgramData.h"
-    #include "DirectDeclaratorProxy.h"
 
     using namespace std;
 

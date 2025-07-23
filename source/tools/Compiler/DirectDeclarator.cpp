@@ -1,4 +1,7 @@
 #include "DirectDeclarator.h"
+#include "ConstantExpression.h"
+#include "ParameterTypeList.h"
+#include "Declarator.h"
 
 using namespace WadeSpace;
 using namespace std;
@@ -17,6 +20,12 @@ DirectDeclarator::DirectDeclarator() : id(""), str1(""), str2(""), directDeclara
 
 DirectDeclarator::~DirectDeclarator()
 {
+	delete declarator;
+	delete directDeclarator;
+	delete constantExpression;
+	delete parameterTypeList;
+	delete vectorOfStrings;
+
 }
 
 DirectDeclarator::DirectDeclarator(string id, Declarator* d) : id(""), str1(""), str2(""),

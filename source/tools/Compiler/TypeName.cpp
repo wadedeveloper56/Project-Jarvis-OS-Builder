@@ -16,4 +16,6 @@ TypeName::TypeName() : sql(nullptr), ad(nullptr)
 
 TypeName::~TypeName()
 {
+	delete sql;
+	delete ad;
 }

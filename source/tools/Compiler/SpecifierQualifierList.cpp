@@ -11,8 +11,7 @@ SpecifierQualifierList::SpecifierQualifierList(TypeSpecifier* ts) : sql(nullptr)
 {
 }
 
-SpecifierQualifierList::SpecifierQualifierList(SpecifierQualifierList* sql, TypeQualifier* tq) : sql(sql), ts(nullptr),
-	tq(tq)
+SpecifierQualifierList::SpecifierQualifierList(SpecifierQualifierList* sql, TypeQualifier* tq) : sql(sql), ts(nullptr),	tq(tq)
 {
 }
 
@@ -26,4 +25,7 @@ SpecifierQualifierList::SpecifierQualifierList() : sql(nullptr), ts(nullptr), tq
 
 SpecifierQualifierList::~SpecifierQualifierList()
 {
+	delete sql;
+	delete ts;
+	delete tq;
 }

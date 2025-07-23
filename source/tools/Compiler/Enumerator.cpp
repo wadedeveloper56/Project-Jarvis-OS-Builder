@@ -16,4 +16,5 @@ Enumerator::Enumerator() : operatorStr(""), expression(nullptr)
 
 Enumerator::~Enumerator()
 {
+	delete expression;
 }

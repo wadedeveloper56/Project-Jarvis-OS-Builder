@@ -1,4 +1,6 @@
 #include "UnaryExpression.h"
+#include "PostfixExpression.h"
+#include "CastExpression.h"
 
 using namespace WadeSpace;
 using namespace std;
@@ -25,4 +27,8 @@ UnaryExpression::UnaryExpression() : pe(nullptr), ce(nullptr), ue(nullptr), tn(n
 
 UnaryExpression::~UnaryExpression()
 {
+	delete pe;
+	delete ce;
+	delete ue;
+	delete tn;
 }

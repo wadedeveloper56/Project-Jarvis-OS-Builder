@@ -17,4 +17,6 @@ ShiftExpression::ShiftExpression() : ae(nullptr), op(""), se(nullptr)
 
 ShiftExpression::~ShiftExpression()
 {
+	delete ae;
+	delete se;
 }

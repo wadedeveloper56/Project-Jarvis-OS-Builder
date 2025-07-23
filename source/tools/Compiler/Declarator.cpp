@@ -3,8 +3,7 @@
 using namespace WadeSpace;
 using namespace std;
 
-Declarator::Declarator(Pointer* ptr, DirectDeclarator* directDeclarator) : directDeclarator(directDeclarator),
-                                                                           pointer(ptr)
+Declarator::Declarator(Pointer* ptr, DirectDeclarator* directDeclarator) : directDeclarator(directDeclarator), pointer(ptr)
 {
 }
 
@@ -18,6 +17,8 @@ Declarator::Declarator() : directDeclarator(nullptr), pointer(nullptr)
 
 Declarator::~Declarator()
 {
+    delete directDeclarator;
+    delete pointer;
 }
 
 bool Declarator::hasDirectDeclarator() const { return directDeclarator != NULL; }

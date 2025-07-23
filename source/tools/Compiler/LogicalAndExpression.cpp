@@ -16,4 +16,6 @@ LogicalAndExpression::LogicalAndExpression() : ioe(nullptr), lae(nullptr)
 
 LogicalAndExpression::~LogicalAndExpression()
 {
+	delete ioe;
+	delete lae;
 }

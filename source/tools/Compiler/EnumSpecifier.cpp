@@ -20,4 +20,9 @@ EnumSpecifier::EnumSpecifier() : nameStr(""), list(nullptr)
 
 EnumSpecifier::~EnumSpecifier()
 {
+	for (Enumerator* ptr : *list)
+	{
+		delete ptr;
+	}
+	delete list;
 }

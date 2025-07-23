@@ -106,7 +106,6 @@
     #include "FunctionDefinition.h"
     #include "ExternalDeclaration.h"
     #include "ProgramData.h"
-    #include "DirectDeclaratorProxy.h"
 
     using namespace std;
 
@@ -117,7 +116,7 @@
         class Interpreter;
     }
 
-#line 121 "parser.hpp"
+#line 120 "parser.hpp"
 
 # include <cassert>
 # include <cstdlib> // std::abort
@@ -258,7 +257,7 @@
 
 #line 9 "parser.y"
 namespace  WadeSpace  {
-#line 262 "parser.hpp"
+#line 261 "parser.hpp"
 
 
 
@@ -5437,7 +5436,7 @@ switch (yykind)
 
 #line 9 "parser.y"
 } //  WadeSpace 
-#line 5441 "parser.hpp"
+#line 5440 "parser.hpp"
 
 
 

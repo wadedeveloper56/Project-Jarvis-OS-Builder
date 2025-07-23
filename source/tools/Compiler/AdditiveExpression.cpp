@@ -3,25 +3,24 @@
 using namespace WadeSpace;
 using namespace std;
 
-AdditiveExpression::AdditiveExpression(MultiplicativeExpression* me) : additiveExpression(nullptr), oper(""), multiplicativeExpression(nullptr)
+AdditiveExpression::AdditiveExpression(MultiplicativeExpression* me) : additiveExpression(nullptr), oper(nullopt), multiplicativeExpression(me)
 {
 }
 
-AdditiveExpression::AdditiveExpression(AdditiveExpression* ae, string op,
-                                       MultiplicativeExpression* me) : additiveExpression(ae), oper(op), multiplicativeExpression(me)
+AdditiveExpression::AdditiveExpression(AdditiveExpression* ae, const string& op, MultiplicativeExpression* me) : additiveExpression(ae), oper(op), multiplicativeExpression(me)
 {
 }
 
-AdditiveExpression::AdditiveExpression() : additiveExpression(nullptr), oper(""), multiplicativeExpression(nullptr)
+AdditiveExpression::AdditiveExpression() : additiveExpression(nullptr), oper(nullopt), multiplicativeExpression(nullptr)
 {
 }
 
 AdditiveExpression::~AdditiveExpression()
 {
-	if (additiveExpression) delete additiveExpression;
-	if (multiplicativeExpression) delete multiplicativeExpression;
+	delete additiveExpression;
+	delete multiplicativeExpression;
 }
 
 MultiplicativeExpression* AdditiveExpression::getMultiplicativeExpression() const { return multiplicativeExpression; }
 AdditiveExpression* AdditiveExpression::getAdditiveExpression() const { return additiveExpression; }
-string AdditiveExpression::getOperation() const { return oper; }
+optional<string> AdditiveExpression::getOperation() const { return oper; }

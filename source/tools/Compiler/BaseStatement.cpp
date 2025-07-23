@@ -100,23 +100,21 @@ BaseStatement::BaseStatement() : op(NONE), identifier(""), contExp(nullptr), exp
 
 BaseStatement::~BaseStatement()
 {
-	if (exp!=nullptr) delete exp;
-	if (contExp != nullptr) delete contExp;
-	if (statement != nullptr) delete statement;
-	if (es1 != nullptr) delete es1;
-	if (es2 != nullptr) delete es2;
-	if (statement2 != nullptr) delete statement2;
+	delete exp;
+	delete contExp;
+	delete statement;
+	delete es1;
+	delete es2;
+	delete statement2;
 	for (BaseStatement* obj : *statementList)
 	{
 		delete obj;
 	}
-	statementList->clear();
 	delete statementList;
 	for (Declaration* obj : *declarationList)
 	{
 		delete obj;
 	}
-	declarationList->clear();
 	delete declarationList;
 }
 

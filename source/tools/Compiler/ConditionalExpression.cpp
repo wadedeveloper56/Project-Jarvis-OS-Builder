@@ -18,7 +18,7 @@ ConditionalExpression::ConditionalExpression() : loe(nullptr), exp(nullptr), ce(
 
 ConditionalExpression::~ConditionalExpression()
 {
-	if (loe) delete loe;
-	if (exp) delete exp;
-	if (ce) delete ce;
+	delete loe;
+	delete exp;
+	delete ce;
 }

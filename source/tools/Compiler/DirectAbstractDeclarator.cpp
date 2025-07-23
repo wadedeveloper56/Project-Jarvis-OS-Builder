@@ -1,4 +1,7 @@
 #include "DirectAbstractDeclarator.h"
+#include "AbstractDeclarator.h"
+#include "ConstantExpression.h"
+#include "ParameterTypeList.h"
 
 using namespace WadeSpace;
 
@@ -45,4 +48,8 @@ DirectAbstractDeclarator::DirectAbstractDeclarator() : ad(nullptr), ce(nullptr),
 
 DirectAbstractDeclarator::~DirectAbstractDeclarator()
 {
+    delete ad;
+    delete ce;
+    delete dad;
+    delete ptl;
 }

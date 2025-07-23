@@ -7,8 +7,7 @@ AssignmentExpression::AssignmentExpression(ConditionalExpression* conditionalExp
 {
 }
 
-AssignmentExpression::AssignmentExpression(UnaryExpression* unaryExpression, AssignmentOperator* oper,
-                                           AssignmentExpression* assignmentExpression) : conditionalExpression(nullptr), unaryExpression(unaryExpression), oper(oper), assignmentExpression(assignmentExpression)
+AssignmentExpression::AssignmentExpression(UnaryExpression* unaryExpression, AssignmentOperator* oper, AssignmentExpression* assignmentExpression) : conditionalExpression(nullptr), unaryExpression(unaryExpression), oper(oper), assignmentExpression(assignmentExpression)
 {
 }
 
@@ -18,10 +17,10 @@ AssignmentExpression::AssignmentExpression() : conditionalExpression(nullptr), u
 
 AssignmentExpression::~AssignmentExpression()
 {
-	if (conditionalExpression != nullptr) delete conditionalExpression;
-	if (unaryExpression != nullptr) delete unaryExpression;
-	if (oper != nullptr) delete oper;
-	if (assignmentExpression != nullptr) delete assignmentExpression;
+	delete conditionalExpression;
+	delete unaryExpression;
+	delete oper;
+	delete assignmentExpression;
 }
 
 ConditionalExpression* AssignmentExpression::getConditionalExpression() const

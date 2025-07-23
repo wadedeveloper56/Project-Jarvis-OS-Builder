@@ -16,6 +16,8 @@ InitDeclarator::InitDeclarator() : dec(nullptr), init(nullptr)
 
 InitDeclarator::~InitDeclarator()
 {
+	delete dec;
+	delete init;
 }
 
 bool InitDeclarator::hasDeclarator() const { return dec != NULL; }

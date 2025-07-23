@@ -17,8 +17,8 @@ AndExpression::AndExpression() : andExpression(nullptr), equalityExpression(null
 
 AndExpression::~AndExpression()
 {
-	if (andExpression != nullptr) delete andExpression;
-	if (equalityExpression != nullptr) delete equalityExpression;
+	delete andExpression;
+	delete equalityExpression;
 }
 
 AndExpression* AndExpression::getAndExpression() const { return andExpression; }

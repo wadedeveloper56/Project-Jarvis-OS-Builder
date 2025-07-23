@@ -17,4 +17,6 @@ LogicalOrExpression::LogicalOrExpression(): loe(nullptr), lae(nullptr)
 
 LogicalOrExpression::~LogicalOrExpression()
 {
+	delete loe;
+	delete lae;
 }

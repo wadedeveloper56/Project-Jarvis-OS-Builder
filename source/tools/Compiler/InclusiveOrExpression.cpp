@@ -18,4 +18,6 @@ InclusiveOrExpression::InclusiveOrExpression() : eoe(nullptr), ioe(nullptr)
 
 InclusiveOrExpression::~InclusiveOrExpression()
 {
+	delete eoe;
+	delete ioe;
 }

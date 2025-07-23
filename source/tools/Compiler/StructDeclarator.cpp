@@ -20,4 +20,6 @@ StructDeclarator::StructDeclarator() : dec(nullptr), exp(nullptr)
 
 StructDeclarator::~StructDeclarator()
 {
+	delete dec;
+	delete exp;
 }

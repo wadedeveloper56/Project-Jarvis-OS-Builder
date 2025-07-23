@@ -7,8 +7,7 @@ MultiplicativeExpression::MultiplicativeExpression(CastExpression* ce) : ce(null
 {
 }
 
-MultiplicativeExpression::MultiplicativeExpression(MultiplicativeExpression* me, string op,
-                                                   CastExpression* ce): me(me), op(op), ce(ce)
+MultiplicativeExpression::MultiplicativeExpression(MultiplicativeExpression* me, string op, CastExpression* ce): me(me), op(op), ce(ce)
 {
 }
 
@@ -18,4 +17,6 @@ MultiplicativeExpression::MultiplicativeExpression() : me(nullptr), op(""), ce(n
 
 MultiplicativeExpression::~MultiplicativeExpression()
 {
+    delete me;
+    delete ce;
 }

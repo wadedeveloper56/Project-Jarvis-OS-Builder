@@ -15,16 +15,16 @@ namespace WadeSpace
 	{
 	public:
 		AdditiveExpression(MultiplicativeExpression* me);
-		AdditiveExpression(AdditiveExpression* ae, string op, MultiplicativeExpression* me);
+		AdditiveExpression(AdditiveExpression* ae, const string& op, MultiplicativeExpression* me);
 		AdditiveExpression();
 		virtual ~AdditiveExpression();
 		MultiplicativeExpression* getMultiplicativeExpression() const;
 		AdditiveExpression* getAdditiveExpression() const;
-		string getOperation() const;
+		optional<string> getOperation() const;
 
 	private:
 		MultiplicativeExpression* multiplicativeExpression;
-		string oper;
+		optional<string> oper;
 		AdditiveExpression* additiveExpression;
 	};
 }

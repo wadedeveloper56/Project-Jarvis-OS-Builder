@@ -17,4 +17,6 @@ Expression::Expression() : ae(nullptr), oper(""), exp(nullptr)
 
 Expression::~Expression()
 {
+	delete ae;
+	delete exp;
 }

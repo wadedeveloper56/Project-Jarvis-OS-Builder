@@ -2,8 +2,7 @@
 
 using namespace WadeSpace;
 
-DeclarationSpecifiers::DeclarationSpecifiers(TypeQualifier* tq, DeclarationSpecifiers* ds) : scs(nullptr), ts(nullptr),
-	ds(ds), tq(tq)
+DeclarationSpecifiers::DeclarationSpecifiers(TypeQualifier* tq, DeclarationSpecifiers* ds) : scs(nullptr), ts(nullptr), ds(ds), tq(tq)
 {
 }
 
@@ -11,8 +10,7 @@ DeclarationSpecifiers::DeclarationSpecifiers(TypeQualifier* tq) : scs(nullptr), 
 {
 }
 
-DeclarationSpecifiers::DeclarationSpecifiers(TypeSpecifier* ts, DeclarationSpecifiers* ds) : scs(nullptr), ts(ts),
-	ds(ds), tq(nullptr)
+DeclarationSpecifiers::DeclarationSpecifiers(TypeSpecifier* ts, DeclarationSpecifiers* ds) : scs(nullptr), ts(ts), ds(ds), tq(nullptr)
 {
 }
 
@@ -20,13 +18,11 @@ DeclarationSpecifiers::DeclarationSpecifiers(TypeSpecifier* ts) : scs(nullptr), 
 {
 }
 
-DeclarationSpecifiers::DeclarationSpecifiers(StorageClassSpecifier* scs,
-                                             DeclarationSpecifiers* ds) : scs(scs), ts(nullptr), ds(ds), tq(nullptr)
+DeclarationSpecifiers::DeclarationSpecifiers(StorageClassSpecifier* scs, DeclarationSpecifiers* ds) : scs(scs), ts(nullptr), ds(ds), tq(nullptr)
 {
 }
 
-DeclarationSpecifiers::DeclarationSpecifiers(StorageClassSpecifier* scs) : scs(scs), ts(nullptr), ds(nullptr),
-                                                                           tq(nullptr)
+DeclarationSpecifiers::DeclarationSpecifiers(StorageClassSpecifier* scs) : scs(scs), ts(nullptr), ds(nullptr), tq(nullptr)
 {
 }
 
@@ -36,6 +32,10 @@ DeclarationSpecifiers::DeclarationSpecifiers() : scs(nullptr), ts(nullptr), ds(n
 
 DeclarationSpecifiers::~DeclarationSpecifiers()
 {
+	delete scs;
+	delete ts;
+	delete tq;
+	delete ds;
 }
 
 StorageClassSpecifier* DeclarationSpecifiers::getStorageClassSpecifier() const { return scs; }

@@ -20,6 +20,8 @@ TypeSpecifier::TypeSpecifier() : type(NONE), enumSpec(nullptr), suSpec(nullptr)
 
 TypeSpecifier::~TypeSpecifier()
 {
+	delete enumSpec;
+	delete suSpec;
 }
 
 EnumSpecifier* TypeSpecifier::getEnumSpec() const { return enumSpec; }
