@@ -2,27 +2,42 @@
 
 using namespace WadeSpace;
 
-EnumSpecifier::EnumSpecifier(vector<Enumerator*>* list) : nameStr(""), list(list)
+EnumSpecifier::EnumSpecifier(vector<Enumerator*>* vectorEnumerator) : nameStr(nullopt), vectorEnumerator(vectorEnumerator)
 {
 }
 
-EnumSpecifier::EnumSpecifier(const string&  value, vector<Enumerator*>* list) : nameStr(value), list(list)
+EnumSpecifier::EnumSpecifier(string&  nameStr, vector<Enumerator*>* vectorEnumerator) : nameStr(nameStr), vectorEnumerator(vectorEnumerator)
 {
 }
 
-EnumSpecifier::EnumSpecifier(const string&  value) : nameStr(value), list(nullptr)
+EnumSpecifier::EnumSpecifier(string&  nameStr) : nameStr(nameStr), vectorEnumerator(nullptr)
 {
 }
 
-EnumSpecifier::EnumSpecifier() : nameStr(""), list(nullptr)
+EnumSpecifier::EnumSpecifier() : nameStr(nullopt), vectorEnumerator(nullptr)
 {
 }
 
 EnumSpecifier::~EnumSpecifier()
 {
-	for (Enumerator* ptr : *list)
+	for (Enumerator* ptr : *vectorEnumerator)
 	{
 		delete ptr;
 	}
-	delete list;
+	delete vectorEnumerator;
+}
+
+bool EnumSpecifier::hasNameStr() const
+{
+	return nameStr.has_value();
+}
+
+string EnumSpecifier::getNameStr() const
+{
+	return nameStr.value();
+}
+
+vector<Enumerator*>* EnumSpecifier::getVectorEnumerator() const
+{
+	return vectorEnumerator;
 }

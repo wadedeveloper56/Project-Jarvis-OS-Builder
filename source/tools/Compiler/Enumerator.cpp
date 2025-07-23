@@ -2,19 +2,34 @@
 
 using namespace WadeSpace;
 
-Enumerator::Enumerator(const string&  value, ConstantExpression* type) : operatorStr(value), expression(type)
+Enumerator::Enumerator(string&  operatorStr, ConstantExpression* constantExpression) : operatorStr(operatorStr), constantExpression(constantExpression)
 {
 }
 
-Enumerator::Enumerator(const string&  value) : operatorStr(value), expression(nullptr)
+Enumerator::Enumerator(string&  operatorStr) : operatorStr(operatorStr), constantExpression(nullptr)
 {
 }
 
-Enumerator::Enumerator() : operatorStr(""), expression(nullptr)
+Enumerator::Enumerator() : operatorStr(nullopt), constantExpression(nullptr)
 {
 }
 
 Enumerator::~Enumerator()
 {
-	delete expression;
+	delete constantExpression;
+}
+
+bool Enumerator::hasOperatorStr() const
+{
+	return operatorStr.has_value();
+}
+
+string Enumerator::getOperatorStr() const
+{
+	return operatorStr.value();
+}
+
+ConstantExpression* Enumerator::getConstantExpression() const
+{
+	return constantExpression;
 }

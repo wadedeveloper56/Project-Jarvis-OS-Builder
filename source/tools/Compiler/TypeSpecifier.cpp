@@ -1,4 +1,5 @@
 #include "TypeSpecifier.h"
+#include "StructOrUnionSpecifier.h"
 
 using namespace WadeSpace;
 

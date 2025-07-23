@@ -17,14 +17,17 @@ namespace WadeSpace
 	class DirectDeclarator
 	{
 	public:
-		DirectDeclarator(const string&  id);
-		DirectDeclarator(const string&  id, Declarator* declarator);
-		DirectDeclarator(DirectDeclarator* directDeclarator, const string& str1, const string& str2);
+		DirectDeclarator(string& id);
+		DirectDeclarator(string id, Declarator* declarator);
+		DirectDeclarator(DirectDeclarator* directDeclarator, string& str1, string& str2);
 		DirectDeclarator(DirectDeclarator* directDeclarator, ConstantExpression* constantExpression);
 		DirectDeclarator(DirectDeclarator* directDeclarator, ParameterTypeList* parameterTypeList);
-		DirectDeclarator(DirectDeclarator* directDeclarator, vector<string>* vs);
+		DirectDeclarator(DirectDeclarator* directDeclarator, vector<string>* vectorOfStrings);
 		DirectDeclarator();
 		virtual ~DirectDeclarator();
+		bool hasId() const;
+		bool hasStr1() const;
+		bool hasStr2() const;
 		string getId() const;
 		string getStr1() const;
 		string getStr2() const;
@@ -35,9 +38,9 @@ namespace WadeSpace
 		vector<string>* getVectorOfStrings() const;
 
 	private:
-		string id;
-		string str1;
-		string str2;
+		optional<reference_wrapper<string>> id;
+		optional<reference_wrapper<string>> str1;
+		optional<reference_wrapper<string>> str2;
 		Declarator* declarator;
 		DirectDeclarator* directDeclarator;
 		ConstantExpression* constantExpression;

@@ -14,14 +14,17 @@ namespace WadeSpace
 	class EnumSpecifier
 	{
 	public:
-		EnumSpecifier(vector<Enumerator*>* list);
-		EnumSpecifier(const string&  value, vector<Enumerator*>* list);
-		EnumSpecifier(const string&  value);
+		EnumSpecifier(vector<Enumerator*>* vectorEnumerator);
+		EnumSpecifier(string&  nameStr, vector<Enumerator*>* vectorEnumerator);
+		EnumSpecifier(string&  nameStr);
 		EnumSpecifier();
 		virtual ~EnumSpecifier();
+		bool hasNameStr() const;
+		string getNameStr() const;
+		vector<Enumerator*>* getVectorEnumerator() const;
 
 	private:
-		string nameStr;
-		vector<Enumerator*>* list;
+		optional<reference_wrapper<string>>  nameStr;
+		vector<Enumerator*>* vectorEnumerator;
 	};
 }

@@ -13,13 +13,16 @@ namespace WadeSpace
 	class Enumerator
 	{
 	public:
-		Enumerator(const string&  value, ConstantExpression* type);
-		Enumerator(const string&  value);
+		Enumerator(string&  operatorStr, ConstantExpression* constantExpression);
+		Enumerator(string&  operatorStr);
 		Enumerator();
 		virtual ~Enumerator();
+		bool hasOperatorStr() const;
+		string getOperatorStr() const;
+		ConstantExpression* getConstantExpression() const;
 
 	private:
-		string operatorStr;
-		ConstantExpression* expression;
+		optional<reference_wrapper<string>> operatorStr;
+		ConstantExpression* constantExpression;
 	};
 }
