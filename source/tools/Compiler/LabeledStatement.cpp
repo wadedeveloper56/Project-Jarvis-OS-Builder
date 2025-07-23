@@ -3,7 +3,7 @@
 using namespace WadeSpace;
 using namespace std;
 
-LabeledStatement::LabeledStatement(string identifier, BaseStatement* statement) : BaseStatement(identifier, statement)
+LabeledStatement::LabeledStatement(const string&  identifier, BaseStatement* statement) : BaseStatement(identifier, statement)
 {
 }
 

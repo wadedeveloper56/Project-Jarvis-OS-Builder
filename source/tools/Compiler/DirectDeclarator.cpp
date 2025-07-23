@@ -6,7 +6,7 @@
 using namespace WadeSpace;
 using namespace std;
 
-DirectDeclarator::DirectDeclarator(string id) : id(id), str1(""), str2(""), directDeclarator(nullptr),
+DirectDeclarator::DirectDeclarator(const string&  id) : id(id), str1(""), str2(""), directDeclarator(nullptr),
                                                 constantExpression(nullptr), parameterTypeList(nullptr),
                                                 vectorOfStrings(nullptr), declarator(nullptr)
 {
@@ -28,7 +28,7 @@ DirectDeclarator::~DirectDeclarator()
 
 }
 
-DirectDeclarator::DirectDeclarator(string id, Declarator* d) : id(""), str1(""), str2(""),
+DirectDeclarator::DirectDeclarator(const string&  id, Declarator* d) : id(""), str1(""), str2(""),
                                                                directDeclarator(directDeclarator),
                                                                constantExpression(nullptr), parameterTypeList(nullptr),
                                                                vectorOfStrings(nullptr), declarator(d)
@@ -41,7 +41,7 @@ DirectDeclarator::DirectDeclarator(DirectDeclarator* directDeclarator, ConstantE
 {
 }
 
-DirectDeclarator::DirectDeclarator(DirectDeclarator* directDeclarator, string str1, string str2) : id(""), str1(str1),
+DirectDeclarator::DirectDeclarator(DirectDeclarator* directDeclarator, const string& str1, const string& str2) : id(""), str1(str1),
 	str2(str2), directDeclarator(directDeclarator), constantExpression(nullptr), parameterTypeList(nullptr),
 	vectorOfStrings(nullptr), declarator(nullptr)
 {

@@ -13,8 +13,8 @@ namespace WadeSpace
 	class Enumerator
 	{
 	public:
-		Enumerator(string value, ConstantExpression* type);
-		Enumerator(string value);
+		Enumerator(const string&  value, ConstantExpression* type);
+		Enumerator(const string&  value);
 		Enumerator();
 		virtual ~Enumerator();
 

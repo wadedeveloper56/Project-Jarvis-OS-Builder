@@ -17,7 +17,7 @@ namespace WadeSpace
 	{
 	public:
 		BaseStatement(TokenType op);
-		BaseStatement(TokenType op, string identifier);
+		BaseStatement(TokenType op, const string& identifier);
 		BaseStatement(TokenType op, Expression* exp);
 		BaseStatement(TokenType op, Expression* exp, BaseStatement* statement);
 		BaseStatement(TokenType op, Expression* exp, BaseStatement* ifStatement, BaseStatement* elseStatement);
@@ -26,7 +26,7 @@ namespace WadeSpace
 		BaseStatement(vector<BaseStatement*>* statementList);
 		BaseStatement(vector<Declaration*>* declarationList);
 		BaseStatement(vector<BaseStatement*>* statementList, vector<Declaration*>* declarationList);
-		BaseStatement(string identifier, BaseStatement* statement);
+		BaseStatement(const string&  identifier, BaseStatement* statement);
 		BaseStatement(TokenType op, ConstantExpression* exp, BaseStatement* statement);
 		BaseStatement(TokenType op, BaseStatement* statement);
 		BaseStatement();

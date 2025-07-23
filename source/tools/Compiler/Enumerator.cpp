@@ -2,11 +2,11 @@
 
 using namespace WadeSpace;
 
-Enumerator::Enumerator(string value, ConstantExpression* type) : operatorStr(value), expression(type)
+Enumerator::Enumerator(const string&  value, ConstantExpression* type) : operatorStr(value), expression(type)
 {
 }
 
-Enumerator::Enumerator(string value) : operatorStr(value), expression(nullptr)
+Enumerator::Enumerator(const string&  value) : operatorStr(value), expression(nullptr)
 {
 }
 

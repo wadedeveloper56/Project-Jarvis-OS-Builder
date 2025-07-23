@@ -7,7 +7,7 @@ ShiftExpression::ShiftExpression(AdditiveExpression* ae) : ae(nullptr), op(""), 
 {
 }
 
-ShiftExpression::ShiftExpression(ShiftExpression* se, string op, AdditiveExpression* ae) : ae(ae), op(op), se(se)
+ShiftExpression::ShiftExpression(ShiftExpression* se, const string& op, AdditiveExpression* ae) : ae(ae), op(op), se(se)
 {
 }
 

@@ -7,7 +7,7 @@ MultiplicativeExpression::MultiplicativeExpression(CastExpression* ce) : ce(null
 {
 }
 
-MultiplicativeExpression::MultiplicativeExpression(MultiplicativeExpression* me, string op, CastExpression* ce): me(me), op(op), ce(ce)
+MultiplicativeExpression::MultiplicativeExpression(MultiplicativeExpression* me, const string& op, CastExpression* ce): me(me), op(op), ce(ce)
 {
 }
 

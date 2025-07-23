@@ -20,9 +20,9 @@ namespace WadeSpace
 	{
 	public:
 		UnaryExpression(PostfixExpression* pe);
-		UnaryExpression(string op, UnaryExpression* ue);
-		UnaryExpression(string op, CastExpression* ce);
-		UnaryExpression(string op, TypeName* tn);
+		UnaryExpression(const string&  op, UnaryExpression* ue);
+		UnaryExpression(const string&  op, CastExpression* ce);
+		UnaryExpression(const string&  op, TypeName* tn);
 		UnaryExpression();
 		virtual ~UnaryExpression();
 

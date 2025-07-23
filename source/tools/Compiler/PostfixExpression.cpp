@@ -8,7 +8,7 @@ PostfixExpression::PostfixExpression(PrimaryExpression* pe) : pe(pe), pfe(nullpt
 {
 }
 
-PostfixExpression::PostfixExpression(PostfixExpression* fpe, string str, string str2) : pe(nullptr), pfe(pfe),
+PostfixExpression::PostfixExpression(PostfixExpression* fpe, const string& str, const string& str2) : pe(nullptr), pfe(pfe),
 	aev(nullptr), exp(nullptr), iv(nullptr), tn(nullptr), str1(str1), str2(str2)
 {
 }

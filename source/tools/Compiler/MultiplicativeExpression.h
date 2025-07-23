@@ -15,7 +15,7 @@ namespace WadeSpace
 	{
 	public:
 		MultiplicativeExpression(CastExpression* ce);
-		MultiplicativeExpression(MultiplicativeExpression* me, string op, CastExpression* ce);
+		MultiplicativeExpression(MultiplicativeExpression* me, const string& op, CastExpression* ce);
 		MultiplicativeExpression();
 		virtual ~MultiplicativeExpression();
 

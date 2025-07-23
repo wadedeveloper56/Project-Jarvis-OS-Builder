@@ -2,7 +2,7 @@
 
 using namespace WadeSpace;
 
-StructOrUnionSpecifier::StructOrUnionSpecifier(StructOrUnion* su, string name, vector<StructDeclaration*>* list) : su(su), name(name), list(list)
+StructOrUnionSpecifier::StructOrUnionSpecifier(StructOrUnion* su, const string& name, vector<StructDeclaration*>* list) : su(su), name(name), list(list)
 {
 }
 
@@ -10,7 +10,7 @@ StructOrUnionSpecifier::StructOrUnionSpecifier(StructOrUnion* su, vector<StructD
 {
 }
 
-StructOrUnionSpecifier::StructOrUnionSpecifier(StructOrUnion* su, string name) : su(su), name(name), list(nullptr)
+StructOrUnionSpecifier::StructOrUnionSpecifier(StructOrUnion* su, const string& name) : su(su), name(name), list(nullptr)
 {
 }
 

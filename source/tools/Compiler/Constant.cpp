@@ -10,7 +10,7 @@ Constant::Constant(long double value) : iConst(0), fConst(value), strConst(""), 
 {
 }
 
-Constant::Constant(string value) : iConst(0), fConst(0.0), strConst(value), type(STRING_CONSTANT)
+Constant::Constant(const string&  value) : iConst(0), fConst(0.0), strConst(value), type(STRING_CONSTANT)
 {
 }
 

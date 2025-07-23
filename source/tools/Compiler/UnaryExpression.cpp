@@ -9,15 +9,15 @@ UnaryExpression::UnaryExpression(PostfixExpression* pe) : pe(pe), ce(nullptr), u
 {
 }
 
-UnaryExpression::UnaryExpression(string op, UnaryExpression* ue) : pe(nullptr), ce(nullptr), ue(ue), tn(nullptr), op(op)
+UnaryExpression::UnaryExpression(const string&  op, UnaryExpression* ue) : pe(nullptr), ce(nullptr), ue(ue), tn(nullptr), op(op)
 {
 }
 
-UnaryExpression::UnaryExpression(string op, CastExpression* ce) : pe(nullptr), ce(ce), ue(nullptr), tn(nullptr), op(op)
+UnaryExpression::UnaryExpression(const string&  op, CastExpression* ce) : pe(nullptr), ce(ce), ue(nullptr), tn(nullptr), op(op)
 {
 }
 
-UnaryExpression::UnaryExpression(string op, TypeName* tn) : pe(nullptr), ce(nullptr), ue(nullptr), tn(tn), op(op)
+UnaryExpression::UnaryExpression(const string&  op, TypeName* tn) : pe(nullptr), ce(nullptr), ue(nullptr), tn(tn), op(op)
 {
 }
 

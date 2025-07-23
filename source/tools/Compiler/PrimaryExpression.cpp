@@ -4,7 +4,7 @@
 using namespace WadeSpace;
 using namespace std;
 
-PrimaryExpression::PrimaryExpression(string identifier) : identifier(identifier), c(nullptr), exp(nullptr)
+PrimaryExpression::PrimaryExpression(const string&  identifier) : identifier(identifier), c(nullptr), exp(nullptr)
 {
 }
 

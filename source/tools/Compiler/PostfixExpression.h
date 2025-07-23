@@ -20,7 +20,7 @@ namespace WadeSpace
 	{
 	public:
 		PostfixExpression(PrimaryExpression* pe);
-		PostfixExpression(PostfixExpression* pfe, string str, string str2);
+		PostfixExpression(PostfixExpression* pfe, const string& str, const string& str2);
 		PostfixExpression(PostfixExpression* pfe, Expression* exp);
 		PostfixExpression(PostfixExpression* pfe, vector<AssignmentExpression*>* aev);
 		PostfixExpression(TypeName* tn, vector<Initializer*>* iv);

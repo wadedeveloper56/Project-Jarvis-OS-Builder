@@ -6,11 +6,11 @@ EnumSpecifier::EnumSpecifier(vector<Enumerator*>* list) : nameStr(""), list(list
 {
 }
 
-EnumSpecifier::EnumSpecifier(string value, vector<Enumerator*>* list) : nameStr(value), list(list)
+EnumSpecifier::EnumSpecifier(const string&  value, vector<Enumerator*>* list) : nameStr(value), list(list)
 {
 }
 
-EnumSpecifier::EnumSpecifier(string value) : nameStr(value), list(nullptr)
+EnumSpecifier::EnumSpecifier(const string&  value) : nameStr(value), list(nullptr)
 {
 }
 

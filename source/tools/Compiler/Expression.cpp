@@ -7,7 +7,7 @@ Expression::Expression(AssignmentExpression* ae) : ae(ae), oper(""), exp(nullptr
 {
 }
 
-Expression::Expression(Expression* exp, string oper, AssignmentExpression* ae) : ae(ae), oper(oper), exp(exp)
+Expression::Expression(Expression* exp, const string& oper, AssignmentExpression* ae) : ae(ae), oper(oper), exp(exp)
 {
 }
 

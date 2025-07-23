@@ -13,7 +13,7 @@ namespace WadeSpace
 	class StorageClassSpecifier
 	{
 	public:
-		StorageClassSpecifier(string value, TokenType type);
+		StorageClassSpecifier(const string&  value, TokenType type);
 		StorageClassSpecifier();
 		virtual ~StorageClassSpecifier();
 

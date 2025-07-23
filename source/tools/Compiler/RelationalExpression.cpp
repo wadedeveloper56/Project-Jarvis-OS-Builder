@@ -7,7 +7,7 @@ RelationalExpression::RelationalExpression(ShiftExpression* se) : re(nullptr), o
 {
 }
 
-RelationalExpression::RelationalExpression(RelationalExpression* re, string op, ShiftExpression* se) : re(re), op(op), se(se)
+RelationalExpression::RelationalExpression(RelationalExpression* re, const string& op, ShiftExpression* se) : re(re), op(op), se(se)
 {
 }
 

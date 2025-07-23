@@ -14,7 +14,7 @@ namespace WadeSpace
 	class LabeledStatement : public BaseStatement
 	{
 	public:
-		LabeledStatement(string identifier, BaseStatement* statement);
+		LabeledStatement(const string&  identifier, BaseStatement* statement);
 		LabeledStatement(TokenType op, ConstantExpression* exp, BaseStatement* statement);
 		LabeledStatement(TokenType op, BaseStatement* statement);
 		LabeledStatement();

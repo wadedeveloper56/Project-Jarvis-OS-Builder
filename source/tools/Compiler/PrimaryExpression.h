@@ -16,7 +16,7 @@ namespace WadeSpace
 	class PrimaryExpression
 	{
 	public:
-		PrimaryExpression(string identifier);
+		PrimaryExpression(const string&  identifier);
 		PrimaryExpression(Constant* c);
 		PrimaryExpression(Expression* exp);
 		PrimaryExpression();

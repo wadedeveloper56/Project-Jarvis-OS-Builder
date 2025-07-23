@@ -13,7 +13,7 @@ namespace WadeSpace
 	class TypeQualifier
 	{
 	public:
-		TypeQualifier(string value, TokenType type);
+		TypeQualifier(const string&  value, TokenType type);
 		TypeQualifier();
 		virtual ~TypeQualifier();
 

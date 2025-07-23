@@ -7,7 +7,7 @@ EqualityExpression::EqualityExpression(RelationalExpression* re) : re(nullptr), 
 {
 }
 
-EqualityExpression::EqualityExpression(EqualityExpression* eq, string op, RelationalExpression* re) : re(re), op(op), ee(ee)
+EqualityExpression::EqualityExpression(EqualityExpression* eq, const string& op, RelationalExpression* re) : re(re), op(op), ee(ee)
 {
 }
 
