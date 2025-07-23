@@ -17,10 +17,10 @@ namespace WadeSpace
 	class FunctionDefinition
 	{
 	public:
-		FunctionDefinition(DeclarationSpecifiers* ds, Declarator* dec, vector<Declaration*>* dl, BaseStatement* bs);
-		FunctionDefinition(DeclarationSpecifiers* ds, Declarator* dec, BaseStatement* bs);
-		FunctionDefinition(Declarator* dec, vector<Declaration*>* dl, BaseStatement* bs);
-		FunctionDefinition(Declarator* dec, BaseStatement* bs);
+		FunctionDefinition(DeclarationSpecifiers* declarationSpecifiers, Declarator* declarator, vector<Declaration*>* vectorDeclaration, BaseStatement* baseStatement);
+		FunctionDefinition(DeclarationSpecifiers* declarationSpecifiers, Declarator* declarator, BaseStatement* baseStatement);
+		FunctionDefinition(Declarator* declarator, vector<Declaration*>* vectorDeclaration, BaseStatement* baseStatement);
+		FunctionDefinition(Declarator* declarator, BaseStatement* baseStatement);
 		FunctionDefinition();
 		virtual ~FunctionDefinition();
 		bool hasDeclarationSpecifiers() const;
@@ -33,9 +33,9 @@ namespace WadeSpace
 		BaseStatement* getBaseStatement() const;
 
 	private:
-		DeclarationSpecifiers* ds;
-		Declarator* dec;
-		vector<Declaration*>* dl;
-		BaseStatement* bs;
+		DeclarationSpecifiers* declarationSpecifiers;
+		Declarator* declarator;
+		vector<Declaration*>* vectorDeclaration;
+		BaseStatement* baseStatement;
 	};
 }

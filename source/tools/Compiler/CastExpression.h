@@ -20,10 +20,13 @@ namespace WadeSpace
 		CastExpression(TypeName* type, CastExpression* ce);
 		CastExpression();
 		virtual ~CastExpression();
+		UnaryExpression* getUnaryExpression() const;
+		TypeName* getType() const;
+		CastExpression* getCastExpression() const;
 
 	private:
-		UnaryExpression* ue;
+		UnaryExpression* unaryExpression;
 		TypeName* type;
-		CastExpression* ce;
+		CastExpression* castExpression;
 	};
 }

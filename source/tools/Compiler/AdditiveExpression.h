@@ -21,9 +21,10 @@ namespace WadeSpace
 		MultiplicativeExpression* getMultiplicativeExpression() const;
 		AdditiveExpression* getAdditiveExpression() const;
 		string getOperation() const;
+
 	private:
-		MultiplicativeExpression* me;
-		string op;
-		AdditiveExpression* ae;
+		MultiplicativeExpression* multiplicativeExpression;
+		string oper;
+		AdditiveExpression* additiveExpression;
 	};
 }

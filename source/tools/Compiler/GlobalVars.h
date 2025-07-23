@@ -2,12 +2,11 @@
 
 #include "ProgramData.h"
 
-using namespace WadeSpace;
 using namespace std;
 
 namespace WadeSpace
 {
-	extern ProgramData programData;
+	extern ProgramData *programData;
 	extern bool bit16;
 	extern bool bit32;
 	extern bool bit64;

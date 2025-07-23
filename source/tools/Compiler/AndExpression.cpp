@@ -3,23 +3,23 @@
 using namespace WadeSpace;
 using namespace std;
 
-AndExpression::AndExpression(EqualityExpression* ee) : ae(nullptr), ee(ee)
+AndExpression::AndExpression(EqualityExpression* equalityExpression) :andExpression(nullptr), equalityExpression(equalityExpression)
 {
 }
 
-AndExpression::AndExpression(AndExpression* ae, EqualityExpression* ee) : ae(ae), ee(ee)
+AndExpression::AndExpression(AndExpression* andExpression, EqualityExpression* equalityExpression) :andExpression(andExpression), equalityExpression(equalityExpression)
 {
 }
 
-AndExpression::AndExpression() : ae(nullptr), ee(nullptr)
+AndExpression::AndExpression() : andExpression(nullptr), equalityExpression(nullptr)
 {
 }
 
 AndExpression::~AndExpression()
 {
-	if (ae != nullptr) delete ae;
-	if (ae != nullptr) delete ee;
+	if (andExpression != nullptr) delete andExpression;
+	if (equalityExpression != nullptr) delete equalityExpression;
 }
 
-AndExpression* AndExpression::getAndExpression() const { return ae; }
-EqualityExpression* AndExpression::getEqualityExpression() const { return ee; }
+AndExpression* AndExpression::getAndExpression() const { return andExpression; }
+EqualityExpression* AndExpression::getEqualityExpression() const { return equalityExpression; }

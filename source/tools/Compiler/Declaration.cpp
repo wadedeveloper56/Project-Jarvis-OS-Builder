@@ -3,23 +3,29 @@
 using namespace WadeSpace;
 using namespace std;
 
-Declaration::Declaration(DeclarationSpecifiers* ds) : ds(ds), idl(nullptr)
+Declaration::Declaration(DeclarationSpecifiers* declarationSpecifiers) : declarationSpecifiers(declarationSpecifiers), vectorInitDeclarator(nullptr)
 {
 }
 
-Declaration::Declaration(DeclarationSpecifiers* ds, vector<InitDeclarator*>* idl) : ds(ds), idl(idl)
+Declaration::Declaration(DeclarationSpecifiers* declarationSpecifiers, vector<InitDeclarator*>* vectorInitDeclarator) : declarationSpecifiers(declarationSpecifiers), vectorInitDeclarator(vectorInitDeclarator)
 {
 }
 
-Declaration::Declaration() : ds(nullptr), idl(nullptr)
+Declaration::Declaration() : declarationSpecifiers(nullptr), vectorInitDeclarator(nullptr)
 {
 }
 
 Declaration::~Declaration()
 {
+	delete declarationSpecifiers;
+	for (InitDeclarator* ptr : *vectorInitDeclarator)
+	{
+		delete ptr;
+	}
+	delete vectorInitDeclarator;
 }
 
-bool Declaration::hasDeclarationSpecifiers() const { return ds; }
-bool Declaration::hasVectorInitDeclarator() const { return idl; }
-DeclarationSpecifiers* Declaration::getDeclarationSpecifiers() const { return ds; }
-vector<InitDeclarator*>* Declaration::getVectorInitDeclarator() const { return idl; }
+bool Declaration::hasDeclarationSpecifiers() const { return declarationSpecifiers; }
+bool Declaration::hasVectorInitDeclarator() const { return vectorInitDeclarator; }
+DeclarationSpecifiers* Declaration::getDeclarationSpecifiers() const { return declarationSpecifiers; }
+vector<InitDeclarator*>* Declaration::getVectorInitDeclarator() const { return vectorInitDeclarator; }

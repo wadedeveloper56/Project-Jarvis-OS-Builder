@@ -1,31 +1,34 @@
 #include "ExternalDeclaration.h"
+#include <iostream>
 
 using namespace WadeSpace;
 using namespace std;
 
-ExternalDeclaration::ExternalDeclaration(FunctionDefinition* fd) : fd(fd), dec(nullptr)
+ExternalDeclaration::ExternalDeclaration(FunctionDefinition* functionDefinition) : functionDefinition(functionDefinition), declaration(nullptr)
 {
 }
 
-ExternalDeclaration::ExternalDeclaration(Declaration* dec) : fd(nullptr), dec(dec)
+ExternalDeclaration::ExternalDeclaration(Declaration* declaration) : functionDefinition(nullptr), declaration(declaration)
 {
 }
 
-ExternalDeclaration::ExternalDeclaration() : fd(nullptr), dec(nullptr)
+ExternalDeclaration::ExternalDeclaration() : functionDefinition(nullptr), declaration(nullptr)
 {
 }
 
 ExternalDeclaration::~ExternalDeclaration()
 {
+	delete functionDefinition;
+	delete declaration;
 }
 
 string ExternalDeclaration::toString()
 {
-	if (fd != NULL) return "Function";
+	if (functionDefinition != NULL) return "Function";
 	else return "Declaration";
 }
 
-bool ExternalDeclaration::isFunction() const { return fd != NULL; }
-bool ExternalDeclaration::isDeclaration() const { return dec != NULL; }
-FunctionDefinition* ExternalDeclaration::getFunction() const { return fd; }
-Declaration* ExternalDeclaration::getDeclaration() const { return dec; }
+bool ExternalDeclaration::isFunction() const { return functionDefinition != NULL; }
+bool ExternalDeclaration::isDeclaration() const { return declaration != NULL; }
+FunctionDefinition* ExternalDeclaration::getFunction() const { return functionDefinition; }
+Declaration* ExternalDeclaration::getDeclaration() const { return declaration; }

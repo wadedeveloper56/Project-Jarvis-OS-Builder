@@ -34,6 +34,13 @@ int main(int argc, char* argv[])
 
 	nerrors = argParse(argc, argv, argtable);
 
+	if (bitsize->ival[0] == 16)
+		bit16 = true;
+	else if (bitsize->ival[0] == 32)
+		bit32 = true;
+	else
+		bit64 = true;
+
 	if (help->count > 0)
 	{
 		printf("Usage: %s", progname);
@@ -73,13 +80,14 @@ int main(int argc, char* argv[])
 	in.open(infiles->filename[0], ifstream::in);
 	out.open(logFileName, ofstream::out);
 
-	if (in.is_open())
+	if (in.is_open() && out.is_open())
 	{
 		Interpreter i;
 		i.setStreams(&in, &out);
 		exitcode = i.parse();
-		programData.processGlobalVariables();
-		programData.test();
+		programData->processGlobalVariables();
+		programData->test();
+		programData->generateCode(out);
 		cout << "Parse complete. Result = " << exitcode << endl;
 	}
 	else
@@ -91,5 +99,6 @@ exit:
 	arg_freetable(argtable, sizeof(argtable) / sizeof(argtable[0]));
 	in.close();
 	out.close();
+	delete programData;
 	return exitcode;
 }

@@ -16,18 +16,19 @@ namespace WadeSpace
 	class AssignmentExpression
 	{
 	public:
-		AssignmentExpression(ConditionalExpression* ce);
-		AssignmentExpression(UnaryExpression* ue, AssignmentOperator* oper, AssignmentExpression* ae);
+		AssignmentExpression(ConditionalExpression* conditionalExpression);
+		AssignmentExpression(UnaryExpression* unaryExpression, AssignmentOperator* oper, AssignmentExpression* assignmentExpression);
 		AssignmentExpression();
 		virtual ~AssignmentExpression();
 		ConditionalExpression* getConditionalExpression() const;
 		UnaryExpression* getUnaryExpression() const;
 		AssignmentOperator* getAssignmentOperator() const;
 		AssignmentExpression* getAssignmentExpression() const;
+
 	private:
-		ConditionalExpression* ce;
-		UnaryExpression* ue;
+		ConditionalExpression* conditionalExpression;
+		UnaryExpression* unaryExpression;
 		AssignmentOperator* oper;
-		AssignmentExpression* ae;
+		AssignmentExpression* assignmentExpression;
 	};
 }

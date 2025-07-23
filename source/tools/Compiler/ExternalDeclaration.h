@@ -15,8 +15,8 @@ namespace WadeSpace
 	class ExternalDeclaration
 	{
 	public:
-		ExternalDeclaration(FunctionDefinition* fd);
-		ExternalDeclaration(Declaration* dec);
+		ExternalDeclaration(FunctionDefinition* functionDefinition);
+		ExternalDeclaration(Declaration* declaration);
 		ExternalDeclaration();
 		virtual ~ExternalDeclaration();
 		string toString();
@@ -26,7 +26,7 @@ namespace WadeSpace
 		Declaration* getDeclaration() const;
 
 	private:
-		FunctionDefinition* fd;
-		Declaration* dec;
+		FunctionDefinition* functionDefinition;
+		Declaration* declaration;
 	};
 }

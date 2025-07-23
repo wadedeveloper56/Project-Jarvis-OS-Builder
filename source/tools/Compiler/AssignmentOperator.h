@@ -14,6 +14,7 @@ namespace WadeSpace
 		AssignmentOperator();
 		virtual ~AssignmentOperator() = default;
 		TokenType getTokenType() const;
+
 	private:
 		TokenType type;
 	};

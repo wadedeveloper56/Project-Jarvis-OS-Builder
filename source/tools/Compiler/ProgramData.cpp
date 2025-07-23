@@ -1,22 +1,45 @@
+#include <iostream>
 #include "ProgramData.h"
 #include "ExternalDeclaration.h"
+#include "GlobalVars.h"
 
 using namespace WadeSpace;
 using namespace std;
 
 ProgramData::ProgramData()
 {
-	programData = new vector<ExternalDeclaration*>();
-	variableTable = new vector<VariableData*>();
+	programData = make_unique<vector<ExternalDeclaration*>>();
+	variableTable = make_unique<vector<VariableData*>>();
 }
 
 ProgramData::~ProgramData()
 {
+	for (VariableData* ptr : *variableTable)
+	{
+		delete ptr;
+	}
+	for (ExternalDeclaration* ptr : *programData)
+	{
+		delete ptr;
+	}
 }
 
 void ProgramData::add(ExternalDeclaration* data)
 {
 	programData->push_back(data);
+}
+
+void ProgramData::generateCode(ofstream& out)
+{
+	if (bit16)
+		out << "BITS 16" << endl;
+	else if (bit32)
+		out << "BITS 32" << endl;
+	else
+		out << "BITS 64" << endl;
+	out << "SECTION .data" << endl;
+	out << "SECTION .bss" << endl;
+	out << "SECTION .text" << endl;
 }
 
 void ProgramData::processGlobalVariables()

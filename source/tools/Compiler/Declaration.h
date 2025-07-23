@@ -14,8 +14,8 @@ namespace WadeSpace
 	class Declaration
 	{
 	public:
-		Declaration(DeclarationSpecifiers* ds);
-		Declaration(DeclarationSpecifiers* ds, vector<InitDeclarator*>* idl);
+		Declaration(DeclarationSpecifiers* declarationSpecifiers);
+		Declaration(DeclarationSpecifiers* declarationSpecifiers, vector<InitDeclarator*>* vectorInitDeclarator);
 		Declaration();
 		virtual ~Declaration();
 		bool hasDeclarationSpecifiers() const;
@@ -24,7 +24,7 @@ namespace WadeSpace
 		vector<InitDeclarator*>* getVectorInitDeclarator() const;
 
 	private:
-		DeclarationSpecifiers* ds;
-		vector<InitDeclarator*>* idl;
+		DeclarationSpecifiers* declarationSpecifiers;
+		vector<InitDeclarator*>* vectorInitDeclarator;
 	};
 }

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <iostream>
+#include <fstream>
 #include <string>
 #include <vector>
 #include <stdint.h>
@@ -25,10 +25,11 @@ namespace WadeSpace
 		virtual ~ProgramData();
 		void add(ExternalDeclaration* data);
 		void processGlobalVariables();
+		void generateCode(ofstream& out);
 		void test();
 
 	private:
-		vector<ExternalDeclaration*>* programData;
-		vector<VariableData*>* variableTable;
+		unique_ptr < vector<ExternalDeclaration*>> programData;
+		unique_ptr < vector<VariableData*>> variableTable;
 	};
 }

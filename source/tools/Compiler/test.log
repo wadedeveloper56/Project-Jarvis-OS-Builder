@@ -1,20 +1,31 @@
+Scanner: token [int]
 INT REDUCE to type_specifier
+Scanner: identifier [var1]
 type_specifier REDUCE to declaration_specifiers
 IDENTIFIER REDUCE to direct_declarator
+Scanner: token [;]
 direct_declarator REDUCE to declarator
 declarator REDUCE to init_declarator
 init_declarator REDUCE to init_declarator_list
 declaration_specifiers init_declarator_list SEMICOLON REDUCE to declaration
 declaration REDUCE to external_declaration
 external_declaration REDUCE to translation_unit
+Scanner: token [int]
 INT REDUCE to type_specifier
+Scanner: identifier [main]
 type_specifier REDUCE to declaration_specifiers
 IDENTIFIER REDUCE to direct_declarator
+Scanner: token [(]
+Scanner: token [)]
 direct_declarator OPAREN CPAREN REDUCE to direct_declarator
+Scanner: token [{]
 direct_declarator REDUCE to declarator
+Scanner: token [return]
+Scanner: decimal number: 0
 I_CONST REDUCE to constant 0
 constant REDUCE to primary_expression
 primary_expression REDUCE to postfix_expression
+Scanner: token [;]
 postfix_expression REDUCE unary_expression
 unary_expression REDUCE to cast_expression
 cast_expression REDUCE to multiplicative_expression
@@ -30,6 +41,14 @@ inclusive_and_expression REDUCE to logical_or_expression
 logical_or_expression REDUCE to conditional_expression
 conditional_expression REDUCE to assignment_expression
 asignment_expression REDUCE to expression
+RETURN expression SEMICOLON REDUCE to jump_statement
+jump_statement REDUCE to statement
+statement REDUCE to statement_list
+Scanner: token [}]
+OCURLY statement_list CCURLY REDUCE to compound_statement
+declaration_specifiers declarator compound_statement REDUCE to function_definition
 function_definition REDUCE to external_declaration
 translation_unit external_declaration REDUCE to translation_unit
+Number of entries in programData table: 2
+  variable = var1 30
 Parse complete. Result = 0

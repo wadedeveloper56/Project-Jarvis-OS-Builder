@@ -14,14 +14,15 @@ namespace WadeSpace
 	class AndExpression
 	{
 	public:
-		AndExpression(EqualityExpression* ee);
-		AndExpression(AndExpression* ae, EqualityExpression* ee);
+		AndExpression(EqualityExpression* equalityExpression);
+		AndExpression(AndExpression* andExpression, EqualityExpression* equalityExpression);
 		AndExpression();
 		virtual ~AndExpression();
 		AndExpression* getAndExpression() const;
 		EqualityExpression* getEqualityExpression() const;
+
 	private:
-		AndExpression* ae;
-		EqualityExpression* ee;
+		AndExpression* andExpression;
+		EqualityExpression* equalityExpression;
 	};
 }

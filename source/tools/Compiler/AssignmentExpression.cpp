@@ -3,35 +3,35 @@
 using namespace WadeSpace;
 using namespace std;
 
-AssignmentExpression::AssignmentExpression(ConditionalExpression* ce) : ce(ce), ue(nullptr), oper(nullptr), ae(nullptr)
+AssignmentExpression::AssignmentExpression(ConditionalExpression* conditionalExpression) : conditionalExpression(conditionalExpression), unaryExpression(nullptr), oper(nullptr), assignmentExpression(nullptr)
 {
 }
 
-AssignmentExpression::AssignmentExpression(UnaryExpression* ue, AssignmentOperator* oper,
-                                           AssignmentExpression* ae) : ce(nullptr), ue(ue), oper(oper), ae(ae)
+AssignmentExpression::AssignmentExpression(UnaryExpression* unaryExpression, AssignmentOperator* oper,
+                                           AssignmentExpression* assignmentExpression) : conditionalExpression(nullptr), unaryExpression(unaryExpression), oper(oper), assignmentExpression(assignmentExpression)
 {
 }
 
-AssignmentExpression::AssignmentExpression() : ce(nullptr), ue(nullptr), oper(nullptr), ae(nullptr)
+AssignmentExpression::AssignmentExpression() : conditionalExpression(nullptr), unaryExpression(nullptr), oper(nullptr), assignmentExpression(nullptr)
 {
 }
 
 AssignmentExpression::~AssignmentExpression()
 {
-	if (ce != nullptr) delete ce;
-	if (ue != nullptr) delete ue;
+	if (conditionalExpression != nullptr) delete conditionalExpression;
+	if (unaryExpression != nullptr) delete unaryExpression;
 	if (oper != nullptr) delete oper;
-	if (ae != nullptr) delete ae;
+	if (assignmentExpression != nullptr) delete assignmentExpression;
 }
 
 ConditionalExpression* AssignmentExpression::getConditionalExpression() const
 {
-	return ce;
+	return conditionalExpression;
 }
 
 UnaryExpression* AssignmentExpression::getUnaryExpression() const
 {
-	return ue;
+	return unaryExpression;
 }
 
 AssignmentOperator* AssignmentExpression::getAssignmentOperator() const
@@ -41,5 +41,5 @@ AssignmentOperator* AssignmentExpression::getAssignmentOperator() const
 
 AssignmentExpression* AssignmentExpression::getAssignmentExpression() const
 {
-	return ae;
+	return assignmentExpression;
 }

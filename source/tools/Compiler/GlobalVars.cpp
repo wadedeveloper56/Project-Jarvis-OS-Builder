@@ -4,7 +4,7 @@ using namespace std;
 
 namespace WadeSpace
 {
-	ProgramData programData;
+	ProgramData *programData;
 	bool bit16 = false;
 	bool bit32 = false;
 	bool bit64 = false;
