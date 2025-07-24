@@ -99,7 +99,7 @@ BOOL CIDEApp::InitInstance()
 	// TODO: You should modify this string to be something appropriate
 	// such as the name of your company or organization
 	SetRegistryKey(_T("Local AppWizard-Generated Applications"));
-	LoadStdProfileSettings(4);  // Load standard INI file options (including MRU)
+	LoadStdProfileSettings(16);  // Load standard INI file options (including MRU)
 
 
 	InitContextMenuManager();
@@ -152,7 +152,7 @@ BOOL CIDEApp::InitInstance()
 	if (!ProcessShellCommand(cmdInfo))
 		return FALSE;
 	// The main window has been initialized, so show and update it
-	pMainFrame->ShowWindow(SW_SHOWMAXIMIZED);
+	pMainFrame->ShowWindow(m_nCmdShow);
 	pMainFrame->UpdateWindow();
 
 	return TRUE;
