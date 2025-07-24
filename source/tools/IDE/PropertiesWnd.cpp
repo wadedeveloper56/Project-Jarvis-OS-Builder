@@ -252,7 +252,7 @@ void CPropertiesWnd::OnSettingChange(UINT uFlags, LPCTSTR lpszSection)
 
 void CPropertiesWnd::SetPropListFont()
 {
-	::DeleteObject(m_fntPropList.Detach());
+	::deleteObject(m_fntPropList.Detach());
 
 	LOGFONT lf;
 	afxGlobalData.fontRegular.GetLogFont(&lf);

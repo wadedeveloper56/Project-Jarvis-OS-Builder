@@ -14,13 +14,15 @@ namespace WadeSpace
 	class ExclusiveOrExpression
 	{
 	public:
-		ExclusiveOrExpression(AndExpression* ae);
-		ExclusiveOrExpression(ExclusiveOrExpression* eoe, AndExpression* ae);
+		ExclusiveOrExpression(AndExpression* andExpression);
+		ExclusiveOrExpression(ExclusiveOrExpression* exclusiveOrExpression, AndExpression* andExpression);
 		ExclusiveOrExpression();
 		virtual ~ExclusiveOrExpression();
+		AndExpression* getAndExpression() const;
+		ExclusiveOrExpression* getExclusiveOrExpression() const;
 
 	private:
-		AndExpression* ae;
-		ExclusiveOrExpression* eoe;
+		AndExpression* andExpression;
+		ExclusiveOrExpression* exclusiveOrExpression;
 	};
 }

@@ -294,7 +294,7 @@ void CClassView::OnSetFocus(CWnd* pOldWnd)
 
 void CClassView::OnChangeVisualStyle()
 {
-	m_ClassViewImages.DeleteImageList();
+	m_ClassViewImages.deleteImageList();
 
 	UINT uiBmpId = theApp.m_bHiColorIcons ? IDB_CLASS_VIEW_24 : IDB_CLASS_VIEW;
 

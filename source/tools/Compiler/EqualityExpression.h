@@ -14,14 +14,18 @@ namespace WadeSpace
 	class EqualityExpression
 	{
 	public:
-		EqualityExpression(RelationalExpression* re);
-		EqualityExpression(EqualityExpression* eq, const string& op, RelationalExpression* re);
+		EqualityExpression(RelationalExpression* relationalExpression);
+		EqualityExpression(EqualityExpression* equalityExpression, string& op, RelationalExpression* relationalExpression);
 		EqualityExpression();
 		virtual ~EqualityExpression();
+		RelationalExpression* getRelationalExpression() const;
+		bool hasOp() const;
+		string getOp() const;
+		EqualityExpression* getEqualityExpression() const;
 
 	private:
-		RelationalExpression* re;
-		string op;
-		EqualityExpression* ee;
+		RelationalExpression* relationalExpression;
+		optional<reference_wrapper<string>> op;
+		EqualityExpression* equalityExpression;
 	};
 }

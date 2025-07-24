@@ -11,7 +11,7 @@ JumpStatement::JumpStatement(TokenType op) : BaseStatement(op)
 {
 }
 
-JumpStatement::JumpStatement(TokenType op, const string& identifier) : BaseStatement(op, identifier)
+JumpStatement::JumpStatement(TokenType op, string& identifier) : BaseStatement(op, identifier)
 {
 }
 

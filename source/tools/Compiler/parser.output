@@ -558,7 +558,7 @@ Nonterminals, with rules where they appear
     labeled_statement <LabeledStatement *> (147)
         on left: 188 189 190
         on right: 182
-    compound_statement <CompoundStatement *> (148)
+    compound_statement <BaseStatement *> (148)
         on left: 191 192 193 194
         on right: 183 217 218 219 220
     declaration_list <std::vector<Declaration *> *> (149)

@@ -16,6 +16,7 @@ namespace WadeSpace
 	{
 		string name;
 		TokenType type;
+		int size;
 	} VariableData;
 
 	class ProgramData
@@ -29,7 +30,7 @@ namespace WadeSpace
 		void test();
 
 	private:
-		unique_ptr < vector<ExternalDeclaration*>> programData;
-		unique_ptr < vector<VariableData*>> variableTable;
+		vector<ExternalDeclaration*> *programData;
+		vector<VariableData*> *variableTable;
 	};
 }

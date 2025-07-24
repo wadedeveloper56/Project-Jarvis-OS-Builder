@@ -266,7 +266,7 @@
 %type<BaseStatement *> selection_statement
 %type<BaseStatement *> expression_statement
 %type<std::vector<Declaration *> *> declaration_list
-%type<CompoundStatement *> compound_statement
+%type<BaseStatement *> compound_statement
 %type<LabeledStatement *> labeled_statement
 %type<FunctionDefinition *> function_definition
 %type<ExternalDeclaration *> external_declaration

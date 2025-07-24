@@ -62,12 +62,9 @@ DirectDeclarator::DirectDeclarator(DirectDeclarator* directDeclarator, vector<st
 {
 }
 
-bool DirectDeclarator::hasId() const { return id.has_value(); }
-bool DirectDeclarator::hasStr1() const { return str1.has_value(); }
-bool DirectDeclarator::hasStr2() const { return str2.has_value(); }
-string DirectDeclarator::getId() const { return id.value(); }
-string DirectDeclarator::getStr1() const { return str1.value(); }
-string DirectDeclarator::getStr2() const { return str2.value(); }
+optional<reference_wrapper<string>> DirectDeclarator::getId() const { return id; }
+optional<reference_wrapper<string>> DirectDeclarator::getStr1() const { return str1; }
+optional<reference_wrapper<string>> DirectDeclarator::getStr2() const { return str2; }
 Declarator* DirectDeclarator::getDeclarator() const { return declarator; }
 DirectDeclarator* DirectDeclarator::getDirectDeclarator() const { return directDeclarator; }
 ConstantExpression* DirectDeclarator::getConstantExpression() const { return constantExpression; }

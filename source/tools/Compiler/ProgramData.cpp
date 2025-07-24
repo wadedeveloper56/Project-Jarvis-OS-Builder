@@ -8,8 +8,8 @@ using namespace std;
 
 ProgramData::ProgramData()
 {
-	programData = make_unique<vector<ExternalDeclaration*>>();
-	variableTable = make_unique<vector<VariableData*>>();
+	programData = new vector<ExternalDeclaration*>();
+	variableTable = new vector<VariableData*>();
 }
 
 ProgramData::~ProgramData()
@@ -39,6 +39,14 @@ void ProgramData::generateCode(ofstream& out)
 		out << "BITS 64" << endl;
 	out << "SECTION .data" << endl;
 	out << "SECTION .bss" << endl;
+	for (VariableData* ptr : *variableTable)
+	{
+		if (ptr->size == 1) out << ptr->name << ":  resb 1" << endl;
+		if (ptr->size == 2) out << ptr->name << ":  resw 1" << endl;
+		if (ptr->size == 4) out << ptr->name << ":  resd 1" << endl;
+		if (ptr->size == 8) out << ptr->name << ":  resq 1" << endl;
+		if (ptr->size == 10) out << ptr->name << ":  rest 1" << endl;
+	}
 	out << "SECTION .text" << endl;
 }
 
@@ -55,6 +63,14 @@ void ProgramData::processGlobalVariables()
 				VariableData* data = new VariableData();
 				data->name = initDecl->getVariableName();
 				data->type = type;
+				if (type == CHAR) data->size = 1;
+				if (type == SHORT) data->size = 2;
+				if (type == INT) data->size = 4;
+				if (type == LONG) data->size = 4;
+				if (type == LONG_LONG) data->size = 8;
+				if (type == FLOAT) data->size = 4;
+				if (type == DOUBLE) data->size = 8;
+				if (type == LONG_DOUBLE) data->size = 10;
 				variableTable->push_back(data);
 			}
 		}

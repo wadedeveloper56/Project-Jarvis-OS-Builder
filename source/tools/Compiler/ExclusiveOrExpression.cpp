@@ -3,20 +3,30 @@
 using namespace WadeSpace;
 using namespace std;
 
-ExclusiveOrExpression::ExclusiveOrExpression(AndExpression* ae) : ae(ae), eoe(nullptr)
+ExclusiveOrExpression::ExclusiveOrExpression(AndExpression* andExpression) : andExpression(andExpression), exclusiveOrExpression(nullptr)
 {
 }
 
-ExclusiveOrExpression::ExclusiveOrExpression(ExclusiveOrExpression* eoe, AndExpression* ae) : ae(ae), eoe(eoe)
+ExclusiveOrExpression::ExclusiveOrExpression(ExclusiveOrExpression* exclusiveOrExpression, AndExpression* andExpression) : andExpression(andExpression), exclusiveOrExpression(exclusiveOrExpression)
 {
 }
 
-ExclusiveOrExpression::ExclusiveOrExpression() : ae(nullptr), eoe(nullptr)
+ExclusiveOrExpression::ExclusiveOrExpression() : andExpression(nullptr), exclusiveOrExpression(nullptr)
 {
 }
 
 ExclusiveOrExpression::~ExclusiveOrExpression()
 {
-	delete ae;
-	delete eoe;
+	delete andExpression;
+	delete exclusiveOrExpression;
+}
+
+AndExpression* ExclusiveOrExpression::getAndExpression() const
+{
+	return andExpression;
+}
+
+ExclusiveOrExpression* ExclusiveOrExpression::getExclusiveOrExpression() const
+{
+	return exclusiveOrExpression;
 }

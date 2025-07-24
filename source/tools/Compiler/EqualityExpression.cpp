@@ -3,20 +3,40 @@
 using namespace WadeSpace;
 using namespace std;
 
-EqualityExpression::EqualityExpression(RelationalExpression* re) : re(nullptr), op(""), ee(nullptr)
+EqualityExpression::EqualityExpression(RelationalExpression* relationalExpression) : relationalExpression(nullptr), op(nullopt), equalityExpression(nullptr)
 {
 }
 
-EqualityExpression::EqualityExpression(EqualityExpression* eq, const string& op, RelationalExpression* re) : re(re), op(op), ee(ee)
+EqualityExpression::EqualityExpression(EqualityExpression* equalityExpression, string& op, RelationalExpression* relationalExpression) : relationalExpression(relationalExpression), op(op), equalityExpression(equalityExpression)
 {
 }
 
-EqualityExpression::EqualityExpression() : re(nullptr), op(""), ee(nullptr)
+EqualityExpression::EqualityExpression() : relationalExpression(nullptr), op(nullopt), equalityExpression(nullptr)
 {
 }
 
 EqualityExpression::~EqualityExpression()
 {
-	delete re;
-	delete ee;
+	delete relationalExpression;
+	delete equalityExpression;
+}
+
+RelationalExpression* EqualityExpression::getRelationalExpression() const
+{
+	return relationalExpression;
+}
+
+bool EqualityExpression::hasOp() const
+{
+	return op.has_value();
+}
+
+string EqualityExpression::getOp() const
+{
+	return op.value();
+}
+
+EqualityExpression* EqualityExpression::getEqualityExpression() const
+{
+	return equalityExpression;
 }

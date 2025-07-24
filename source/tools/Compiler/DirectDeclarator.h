@@ -25,12 +25,9 @@ namespace WadeSpace
 		DirectDeclarator(DirectDeclarator* directDeclarator, vector<string>* vectorOfStrings);
 		DirectDeclarator();
 		virtual ~DirectDeclarator();
-		bool hasId() const;
-		bool hasStr1() const;
-		bool hasStr2() const;
-		string getId() const;
-		string getStr1() const;
-		string getStr2() const;
+		optional<reference_wrapper<string>> getId() const;
+		optional<reference_wrapper<string>> getStr1() const;
+		optional<reference_wrapper<string>> getStr2() const;
 		Declarator* getDeclarator() const;
 		DirectDeclarator* getDirectDeclarator() const;
 		ConstantExpression* getConstantExpression() const;
