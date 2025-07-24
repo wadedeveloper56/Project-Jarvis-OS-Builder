@@ -10,23 +10,13 @@ Enumerator::Enumerator(string&  operatorStr) : operatorStr(operatorStr), constan
 {
 }
 
-Enumerator::Enumerator() : operatorStr(nullopt), constantExpression(nullptr)
+Enumerator::Enumerator() : operatorStr(""), constantExpression(nullptr)
 {
 }
 
 Enumerator::~Enumerator()
 {
 	delete constantExpression;
-}
-
-bool Enumerator::hasOperatorStr() const
-{
-	return operatorStr.has_value();
-}
-
-string Enumerator::getOperatorStr() const
-{
-	return operatorStr.value();
 }
 
 ConstantExpression* Enumerator::getConstantExpression() const

@@ -211,16 +211,16 @@ declaration_specifiers declarator compound_statement REDUCE to function_definiti
 function_definition REDUCE to external_declaration
 translation_unit external_declaration REDUCE to translation_unit
 Number of entries in programData table: 14
-  variable =  15
-  variable =  36
-  variable =  30
-  variable =  31
-  variable =  32
-  variable =  25
-  variable =  20
-  variable =  21
-  variable =  48
-  variable =  49
-  variable =  50
-  variable =  15
+  variable = var1 15
+  variable = var2 36
+  variable = var3 30
+  variable = var4 31
+  variable = var5 32
+  variable = var6 25
+  variable = var7 20
+  variable = var8 21
+  variable = var9 48
+  variable = var10 49
+  variable = var11 50
+  variable = var12 15
 Parse complete. Result = 0

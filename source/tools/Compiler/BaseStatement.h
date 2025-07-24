@@ -32,7 +32,7 @@ namespace WadeSpace
 		virtual ~BaseStatement();
 	protected:
 		TokenType op;
-		optional<reference_wrapper<string>> identifier;
+		string identifier;
 		Expression* exp;
 		ConstantExpression* contExp;
 		BaseStatement* statement;

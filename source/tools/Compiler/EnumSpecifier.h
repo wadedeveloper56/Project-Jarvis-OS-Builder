@@ -24,7 +24,7 @@ namespace WadeSpace
 		vector<Enumerator*>* getVectorEnumerator() const;
 
 	private:
-		optional<reference_wrapper<string>>  nameStr;
+		string  nameStr;
 		vector<Enumerator*>* vectorEnumerator;
 	};
 }

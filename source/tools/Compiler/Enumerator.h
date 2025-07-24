@@ -22,7 +22,7 @@ namespace WadeSpace
 		ConstantExpression* getConstantExpression() const;
 
 	private:
-		optional<reference_wrapper<string>> operatorStr;
+		string operatorStr;
 		ConstantExpression* constantExpression;
 	};
 }

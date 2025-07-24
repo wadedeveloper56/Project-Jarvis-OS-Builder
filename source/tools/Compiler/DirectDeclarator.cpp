@@ -1,3 +1,4 @@
+#include <iostream>
 #include "DirectDeclarator.h"
 #include "ConstantExpression.h"
 #include "ParameterTypeList.h"
@@ -6,13 +7,13 @@
 using namespace WadeSpace;
 using namespace std;
 
-DirectDeclarator::DirectDeclarator(string& id) : id(id), str1(nullopt), str2(nullopt), directDeclarator(nullptr),
+DirectDeclarator::DirectDeclarator(string& id) : id(id), str1(""), str2(""), directDeclarator(nullptr),
                                                  constantExpression(nullptr), parameterTypeList(nullptr),
                                                  vectorOfStrings(nullptr), declarator(nullptr)
 {
 }
 
-DirectDeclarator::DirectDeclarator() : id(nullopt), str1(nullopt), str2(nullopt), directDeclarator(nullptr),
+DirectDeclarator::DirectDeclarator() : id(""), str1(""), str2(""), directDeclarator(nullptr),
                                        constantExpression(nullptr), parameterTypeList(nullptr),
                                        vectorOfStrings(nullptr), declarator(nullptr)
 {
@@ -27,7 +28,7 @@ DirectDeclarator::~DirectDeclarator()
 	delete vectorOfStrings;
 }
 
-DirectDeclarator::DirectDeclarator(string id, Declarator* d) : id(id), str1(nullopt), str2(nullopt),
+DirectDeclarator::DirectDeclarator(string id, Declarator* d) : id(id), str1(""), str2(""),
                                                                directDeclarator(nullptr),
                                                                constantExpression(nullptr), parameterTypeList(nullptr),
                                                                vectorOfStrings(nullptr), declarator(d)
@@ -35,13 +36,13 @@ DirectDeclarator::DirectDeclarator(string id, Declarator* d) : id(id), str1(null
 }
 
 DirectDeclarator::DirectDeclarator(DirectDeclarator* directDeclarator, ConstantExpression* constantExpression) :
-	id(nullopt), str1(nullopt), str2(nullopt), directDeclarator(directDeclarator),
+	id(""), str1(""), str2(""), directDeclarator(directDeclarator),
 	constantExpression(constantExpression),
 	parameterTypeList(nullptr), vectorOfStrings(nullptr), declarator(nullptr)
 {
 }
 
-DirectDeclarator::DirectDeclarator(DirectDeclarator* directDeclarator, string& str1, string& str2) : id(nullopt),
+DirectDeclarator::DirectDeclarator(DirectDeclarator* directDeclarator, string& str1, string& str2) : id(""),
 	str1(str1),
 	str2(str2), directDeclarator(directDeclarator), constantExpression(nullptr), parameterTypeList(nullptr),
 	vectorOfStrings(nullptr), declarator(nullptr)
@@ -49,22 +50,22 @@ DirectDeclarator::DirectDeclarator(DirectDeclarator* directDeclarator, string& s
 }
 
 DirectDeclarator::DirectDeclarator(DirectDeclarator* directDeclarator, ParameterTypeList* parameterTypeList) :
-	id(nullopt), str1(nullopt), str2(nullopt), directDeclarator(directDeclarator), constantExpression(nullptr),
+	id(""), str1(""), str2(""), directDeclarator(directDeclarator), constantExpression(nullptr),
 	parameterTypeList(parameterTypeList), vectorOfStrings(nullptr), declarator(nullptr)
 {
 }
 
-DirectDeclarator::DirectDeclarator(DirectDeclarator* directDeclarator, vector<string>* vectorOfStrings) : id(nullopt),
-	str1(nullopt), str2(nullopt),
+DirectDeclarator::DirectDeclarator(DirectDeclarator* directDeclarator, vector<string>* vectorOfStrings) : id(""),
+	str1(""), str2(""),
 	directDeclarator(directDeclarator), constantExpression(nullptr), parameterTypeList(nullptr),
 	vectorOfStrings(vectorOfStrings),
 	declarator(nullptr)
 {
 }
 
-optional<reference_wrapper<string>> DirectDeclarator::getId() const { return id; }
-optional<reference_wrapper<string>> DirectDeclarator::getStr1() const { return str1; }
-optional<reference_wrapper<string>> DirectDeclarator::getStr2() const { return str2; }
+string DirectDeclarator::getId() const { return id; }
+string DirectDeclarator::getStr1() const { return str1; }
+string DirectDeclarator::getStr2() const { return str2; }
 Declarator* DirectDeclarator::getDeclarator() const { return declarator; }
 DirectDeclarator* DirectDeclarator::getDirectDeclarator() const { return directDeclarator; }
 ConstantExpression* DirectDeclarator::getConstantExpression() const { return constantExpression; }

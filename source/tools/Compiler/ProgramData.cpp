@@ -18,10 +18,12 @@ ProgramData::~ProgramData()
 	{
 		delete ptr;
 	}
+	delete variableTable;
 	for (ExternalDeclaration* ptr : *programData)
 	{
 		delete ptr;
 	}
+	delete programData;
 }
 
 void ProgramData::add(ExternalDeclaration* data)
@@ -46,6 +48,7 @@ void ProgramData::generateCode(ofstream& out)
 		if (ptr->size == 4) out << ptr->name << ":  resd 1" << endl;
 		if (ptr->size == 8) out << ptr->name << ":  resq 1" << endl;
 		if (ptr->size == 10) out << ptr->name << ":  rest 1" << endl;
+		if (ptr->size == 16) out << ptr->name << ":  resb 16" << endl;
 	}
 	out << "SECTION .text" << endl;
 }
@@ -63,7 +66,7 @@ void ProgramData::processGlobalVariables()
 				VariableData* data = new VariableData();
 				data->name = initDecl->getVariableName();
 				data->type = type;
-				if (type == CHAR) data->size = 1;
+				if (type == CHAR || type==BOOL) data->size = 1;
 				if (type == SHORT) data->size = 2;
 				if (type == INT) data->size = 4;
 				if (type == LONG) data->size = 4;
@@ -71,6 +74,8 @@ void ProgramData::processGlobalVariables()
 				if (type == FLOAT) data->size = 4;
 				if (type == DOUBLE) data->size = 8;
 				if (type == LONG_DOUBLE) data->size = 10;
+				if (type == IMAGINARY) data->size = 8;
+				if (type == COMPLEX) data->size = 16;
 				variableTable->push_back(data);
 			}
 		}

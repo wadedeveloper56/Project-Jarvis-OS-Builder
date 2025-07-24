@@ -27,7 +27,7 @@ Initializer* InitDeclarator::getInitializer() const { return init; }
 
 string InitDeclarator::getVariableName()
 {
-	optional<reference_wrapper<string>> name = getDeclarator()->getDirectDeclarator()->getId();
-	if (!name.has_value()) name = getDeclarator()->getDirectDeclarator()->getDirectDeclarator()->getId();
-	return (name.has_value()) ? name.value() : string();
+	string name = getDeclarator()->getDirectDeclarator()->getId();
+	if (name=="") name = getDeclarator()->getDirectDeclarator()->getDirectDeclarator()->getId();
+	return name;
 }

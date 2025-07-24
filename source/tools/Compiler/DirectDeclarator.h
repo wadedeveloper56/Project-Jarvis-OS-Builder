@@ -25,9 +25,9 @@ namespace WadeSpace
 		DirectDeclarator(DirectDeclarator* directDeclarator, vector<string>* vectorOfStrings);
 		DirectDeclarator();
 		virtual ~DirectDeclarator();
-		optional<reference_wrapper<string>> getId() const;
-		optional<reference_wrapper<string>> getStr1() const;
-		optional<reference_wrapper<string>> getStr2() const;
+		string getId() const;
+		string getStr1() const;
+		string getStr2() const;
 		Declarator* getDeclarator() const;
 		DirectDeclarator* getDirectDeclarator() const;
 		ConstantExpression* getConstantExpression() const;
@@ -35,9 +35,9 @@ namespace WadeSpace
 		vector<string>* getVectorOfStrings() const;
 
 	private:
-		optional<reference_wrapper<string>> id;
-		optional<reference_wrapper<string>> str1;
-		optional<reference_wrapper<string>> str2;
+		string id;
+		string str1;
+		string str2;
 		Declarator* declarator;
 		DirectDeclarator* directDeclarator;
 		ConstantExpression* constantExpression;

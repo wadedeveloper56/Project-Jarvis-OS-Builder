@@ -1,5 +1,9 @@
 #include "Declarator.h"
 
+#include <iostream>
+
+#include "GlobalVars.h"
+
 using namespace WadeSpace;
 using namespace std;
 

@@ -25,7 +25,7 @@ namespace WadeSpace
 
 	private:
 		RelationalExpression* relationalExpression;
-		optional<reference_wrapper<string>> op;
+		string op;
 		EqualityExpression* equalityExpression;
 	};
 }

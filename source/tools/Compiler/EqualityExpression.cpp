@@ -3,7 +3,7 @@
 using namespace WadeSpace;
 using namespace std;
 
-EqualityExpression::EqualityExpression(RelationalExpression* relationalExpression) : relationalExpression(nullptr), op(nullopt), equalityExpression(nullptr)
+EqualityExpression::EqualityExpression(RelationalExpression* relationalExpression) : relationalExpression(nullptr), op(""), equalityExpression(nullptr)
 {
 }
 
@@ -11,7 +11,7 @@ EqualityExpression::EqualityExpression(EqualityExpression* equalityExpression, s
 {
 }
 
-EqualityExpression::EqualityExpression() : relationalExpression(nullptr), op(nullopt), equalityExpression(nullptr)
+EqualityExpression::EqualityExpression() : relationalExpression(nullptr), op(""), equalityExpression(nullptr)
 {
 }
 
@@ -26,14 +26,9 @@ RelationalExpression* EqualityExpression::getRelationalExpression() const
 	return relationalExpression;
 }
 
-bool EqualityExpression::hasOp() const
-{
-	return op.has_value();
-}
-
 string EqualityExpression::getOp() const
 {
-	return op.value();
+	return op;
 }
 
 EqualityExpression* EqualityExpression::getEqualityExpression() const
