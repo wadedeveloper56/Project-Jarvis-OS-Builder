@@ -1,17 +1,3 @@
-/source/tools/Compiler/.vs
+/bin/intermediate
 /source/tools/.vs
-/bin/tools/Arguments/Debug
-/bin/tools/Arguments/Release
-/bin/tools/Compiler/Debug
-/bin/tools/Compiler/Release
-/bin/tools/Assembler/Debug
-/bin/tools/Assembler/Release
-/bin/tools/IDE/Debug
-/bin/tools/IDE/Release
-/bin/tools/Linker/Debug
-/bin/tools/Linker/Release
-/compiletest/Debug
-/compiletest/Release
-/compiletest/.vs/compiletest/FileContentIndex
-/compiletest/.vs/compiletest/v17
-/source/tools/Compiler - Copy/.vs
+/source/tools/Compiler/.vs
