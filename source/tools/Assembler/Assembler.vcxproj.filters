@@ -18,6 +18,33 @@
     <ClCompile Include="nasm.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="outbin.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="outaout.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="outcoff.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="outelf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="outas86.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="outobj.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="outieee.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="outmacho.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="outdbg.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="warnings.h.time" />
