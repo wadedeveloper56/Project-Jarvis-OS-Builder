@@ -45,6 +45,57 @@
     <ClCompile Include="outdbg.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="alloc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="asprintf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="error.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="string.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="readnum.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="filename.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="file.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="strlist.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="zerobuf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="strrchrnul.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rlimit.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nctype.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="preproc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="saa.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="raa.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="quote.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="srcfile.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="warnings.h.time" />
@@ -216,6 +267,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="stabs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="alloc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="file.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -30,6 +30,7 @@
  *     EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  * ----------------------------------------------------------------------- */
+#pragma once
 
 /*
  * nasmlib.h    header file for nasmlib.c
@@ -199,7 +200,7 @@ const char *invalid_enum_str(int);
 #if defined(HAVE_STRCASECMP)
 #define nasm_stricmp strcasecmp
 #elif defined(HAVE_STRICMP)
-#define nasm_stricmp stricmp
+#define nasm_stricmp _stricmp
 #else
 int pure_func nasm_stricmp(const char *, const char *);
 #endif
@@ -207,7 +208,7 @@ int pure_func nasm_stricmp(const char *, const char *);
 #if defined(HAVE_STRNCASECMP)
 #define nasm_strnicmp strncasecmp
 #elif defined(HAVE_STRNICMP)
-#define nasm_strnicmp strnicmp
+#define nasm_strnicmp _strnicmp
 #else
 int pure_func nasm_strnicmp(const char *, const char *, size_t);
 #endif
