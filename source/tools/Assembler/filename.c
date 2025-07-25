@@ -31,23 +31,23 @@
  *
  * ----------------------------------------------------------------------- */
 
- /*
-  * nasmlib.c	library routines for the Netwide Assembler
-  */
+/*
+ * nasmlib.c	library routines for the Netwide Assembler
+ */
 
 #include "compiler.h"
 #include "nasmlib.h"
 #include "error.h"
 
-  /*
-   * Add/modify a filename extension, assumed to be a period-delimited
-   * field at the very end of the filename.  Returns a newly allocated
-   * string buffer.
-   */
-const char* filename_set_extension(const char* inname, const char* extension)
+/*
+ * Add/modify a filename extension, assumed to be a period-delimited
+ * field at the very end of the filename.  Returns a newly allocated
+ * string buffer.
+ */
+const char *filename_set_extension(const char *inname, const char *extension)
 {
-    const char* q = inname;
-    char* p;
+    const char *q = inname;
+    char *p;
     size_t elen = strlen(extension);
     size_t baselen;
 
@@ -57,7 +57,7 @@ const char* filename_set_extension(const char* inname, const char* extension)
     p = nasm_malloc(baselen + elen + 1);
 
     memcpy(p, inname, baselen);
-    memcpy(p + baselen, extension, elen + 1);
+    memcpy(p+baselen, extension, elen+1);
 
     return p;
 }

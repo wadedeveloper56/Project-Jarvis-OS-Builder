@@ -169,11 +169,30 @@
   <ItemGroup>
     <ClCompile Include="alloc.c" />
     <ClCompile Include="asprintf.c" />
+    <ClCompile Include="assemble.c" />
+    <ClCompile Include="badenum.c" />
+    <ClCompile Include="bsi.c" />
+    <ClCompile Include="crc32.c" />
+    <ClCompile Include="crc64.c" />
+    <ClCompile Include="directbl.c" />
+    <ClCompile Include="directiv.c" />
+    <ClCompile Include="errfile.c" />
     <ClCompile Include="error.c" />
+    <ClCompile Include="eval.c" />
+    <ClCompile Include="exprdump.c" />
+    <ClCompile Include="exprlib.c" />
     <ClCompile Include="file.c" />
     <ClCompile Include="filename.c" />
+    <ClCompile Include="floats.c" />
+    <ClCompile Include="hashtbl.c" />
+    <ClCompile Include="ilog2.c" />
+    <ClCompile Include="labels.c" />
+    <ClCompile Include="listing.c" />
+    <ClCompile Include="md5c.c" />
+    <ClCompile Include="mmap.c" />
     <ClCompile Include="nasm.c" />
     <ClCompile Include="nctype.c" />
+    <ClCompile Include="numstr.c" />
     <ClCompile Include="outaout.c" />
     <ClCompile Include="outas86.c" />
     <ClCompile Include="outbin.c" />
@@ -183,16 +202,30 @@
     <ClCompile Include="outieee.c" />
     <ClCompile Include="outmacho.c" />
     <ClCompile Include="outobj.c" />
+    <ClCompile Include="parser.c" />
+    <ClCompile Include="path.c" />
+    <ClCompile Include="perfhash.c" />
+    <ClCompile Include="pptok.c" />
+    <ClCompile Include="pragma.c" />
     <ClCompile Include="preproc.c" />
     <ClCompile Include="quote.c" />
     <ClCompile Include="raa.c" />
+    <ClCompile Include="rbtree.c" />
+    <ClCompile Include="rdstrnum.c" />
     <ClCompile Include="readnum.c" />
+    <ClCompile Include="realpath.c" />
     <ClCompile Include="rlimit.c" />
     <ClCompile Include="saa.c" />
+    <ClCompile Include="segalloc.c" />
     <ClCompile Include="srcfile.c" />
+    <ClCompile Include="stdscan.c" />
+    <ClCompile Include="strfunc.c" />
     <ClCompile Include="string.c" />
     <ClCompile Include="strlist.c" />
     <ClCompile Include="strrchrnul.c" />
+    <ClCompile Include="tokhash.c" />
+    <ClCompile Include="ver.c" />
+    <ClCompile Include="warnings.c" />
     <ClCompile Include="zerobuf.c" />
   </ItemGroup>
   <ItemGroup>
@@ -255,6 +288,7 @@
     <ClInclude Include="tables.h" />
     <ClInclude Include="tokens.h" />
     <ClInclude Include="ver.h" />
+    <ClInclude Include="version.h" />
     <ClInclude Include="warnings.h" />
     <ClInclude Include="warnings_c.h" />
   </ItemGroup>

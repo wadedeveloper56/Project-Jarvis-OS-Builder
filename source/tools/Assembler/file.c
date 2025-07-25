@@ -30,76 +30,74 @@
  *     EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  * ----------------------------------------------------------------------- */
-#include <stdio.h>
-#include <stdlib.h>
+
 #include "file.h"
 
-void nasm_read(void* ptr, size_t size, FILE* f)
+void nasm_read(void *ptr, size_t size, FILE *f)
 {
     size_t n = fread(ptr, 1, size, f);
     if (ferror(f)) {
         nasm_fatal("unable to read input: %s", strerror(errno));
-    }
-    else if (n != size || feof(f)) {
+    } else if (n != size || feof(f)) {
         nasm_fatal("fatal short read on input");
     }
 }
 
-void nasm_write(const void* ptr, size_t size, FILE* f)
+void nasm_write(const void *ptr, size_t size, FILE *f)
 {
     size_t n = fwrite(ptr, 1, size, f);
     if (n != size || ferror(f) || feof(f))
         nasm_fatal("unable to write output: %s", strerror(errno));
 }
 
-void fwriteint16_t(uint16_t data, FILE* fp)
+void fwriteint16_t(uint16_t data, FILE * fp)
 {
     data = cpu_to_le16(data);
     nasm_write(&data, 2, fp);
 }
 
-void fwriteint32_t(uint32_t data, FILE* fp)
+void fwriteint32_t(uint32_t data, FILE * fp)
 {
     data = cpu_to_le32(data);
     nasm_write(&data, 4, fp);
 }
 
-void fwriteint64_t(uint64_t data, FILE* fp)
+void fwriteint64_t(uint64_t data, FILE * fp)
 {
     data = cpu_to_le64(data);
     nasm_write(&data, 8, fp);
 }
 
-void fwriteaddr(uint64_t data, int size, FILE* fp)
+void fwriteaddr(uint64_t data, int size, FILE * fp)
 {
     data = cpu_to_le64(data);
     nasm_write(&data, size, fp);
 }
 
-void fwritezero(off_t bytes, FILE* fp)
+void fwritezero(off_t bytes, FILE *fp)
 {
     size_t blksize;
 
 #ifdef os_ftruncate
     if (bytes >= BUFSIZ && !ferror(fp) && !feof(fp)) {
-        off_t pos = ftello(fp);
-        if (pos != (off_t)-1) {
+	off_t pos = ftello(fp);
+	if (pos != (off_t)-1) {
             off_t end = pos + bytes;
-            if (!fflush(fp) && !os_ftruncate(_fileno(fp), end)) {
+	    if (!fflush(fp) && !os_ftruncate(fileno(fp), end)) {
                 fseeko(fp, 0, SEEK_END);
                 pos = ftello(fp);
                 if (pos != (off_t)-1)
                     bytes = end - pos; /* This SHOULD be zero */
             }
-        }
+	}
     }
 #endif
 
     while (bytes > 0) {
-        blksize = (bytes < ZERO_BUF_SIZE) ? bytes : ZERO_BUF_SIZE;
+	blksize = (bytes < ZERO_BUF_SIZE) ? bytes : ZERO_BUF_SIZE;
 
-        nasm_write(zero_buffer, blksize, fp);
-        bytes -= blksize;
+	nasm_write(zero_buffer, blksize, fp);
+	bytes -= blksize;
     }
 }
 
@@ -117,12 +115,12 @@ void fwritezero(off_t bytes, FILE* fp)
  * characters so we can use the standard file API even on this OS.
  */
 
-os_filename os_mangle_filename(const char* filename)
+os_filename os_mangle_filename(const char *filename)
 {
     mbstate_t ps;
     size_t wclen;
-    wchar_t* buf;
-    const char* p;
+    wchar_t *buf;
+    const char *p;
 
     /*
      * Note: mbsrtowcs() return (size_t)-1 on error, otherwise
@@ -150,14 +148,14 @@ os_filename os_mangle_filename(const char* filename)
 
 #endif
 
-void nasm_set_binary_mode(FILE* f)
+void nasm_set_binary_mode(FILE *f)
 {
-    os_set_binary_mode(f);
+	os_set_binary_mode(f);
 }
 
-FILE* nasm_open_read(const char* filename, enum file_flags flags)
+FILE *nasm_open_read(const char *filename, enum file_flags flags)
 {
-    FILE* f = NULL;
+    FILE *f = NULL;
     os_filename osfname;
 
     osfname = os_mangle_filename(filename);
@@ -191,14 +189,14 @@ FILE* nasm_open_read(const char* filename, enum file_flags flags)
 
     if (!f && (flags & NF_FATAL))
         nasm_fatalf(ERR_NOFILE, "unable to open input file: `%s': %s",
-            filename, strerror(errno));
+                    filename, strerror(errno));
 
     return f;
 }
 
-FILE* nasm_open_write(const char* filename, enum file_flags flags)
+FILE *nasm_open_write(const char *filename, enum file_flags flags)
 {
-    FILE* f = NULL;
+    FILE *f = NULL;
     os_filename osfname;
 
     osfname = os_mangle_filename(filename);
@@ -215,20 +213,20 @@ FILE* nasm_open_write(const char* filename, enum file_flags flags)
 
     if (!f && (flags & NF_FATAL))
         nasm_fatalf(ERR_NOFILE, "unable to open output file: `%s': %s",
-            filename, strerror(errno));
+                    filename, strerror(errno));
 
     switch (flags & NF_BUF_MASK) {
-        case NF_IONBF:
-            setvbuf(f, NULL, _IONBF, 0);
-            break;
-        case NF_IOLBF:
-            setvbuf(f, NULL, _IOLBF, 0);
-            break;
-        case NF_IOFBF:
-            setvbuf(f, NULL, _IOFBF, 0);
-            break;
-        default:
-            break;
+    case NF_IONBF:
+        setvbuf(f, NULL, _IONBF, 0);
+        break;
+    case NF_IOLBF:
+        setvbuf(f, NULL, _IOLBF, 0);
+        break;
+    case NF_IOFBF:
+        setvbuf(f, NULL, _IOFBF, 0);
+        break;
+    default:
+        break;
     }
 
     return f;
@@ -240,10 +238,10 @@ static const os_fopenflag fopenflags_rb[3] = { 'r', 'b', 0 };
 /*
  * Report the existence of a file
  */
-bool nasm_file_exists(const char* filename)
+bool nasm_file_exists(const char *filename)
 {
 #ifndef os_access
-    FILE* f;
+    FILE *f;
 #endif
     os_filename osfname;
     bool exists;
@@ -268,12 +266,12 @@ bool nasm_file_exists(const char* filename)
 /*
  * Report the file size of an open file.  This MAY move the file pointer.
  */
-off_t nasm_file_size(FILE* f)
+off_t nasm_file_size(FILE *f)
 {
     off_t where, end;
     os_struct_stat st;
 
-    if (!os_fstat(_fileno(f), &st) && S_ISREG(st.st_mode))
+    if (!os_fstat(fileno(f), &st) && S_ISREG(st.st_mode))
         return st.st_size;
 
     /* Do it the hard way... this tests for seekability */
@@ -308,12 +306,12 @@ fail:
 /*
  * Report file size given pathname
  */
-off_t nasm_file_size_by_path(const char* pathname)
+off_t nasm_file_size_by_path(const char *pathname)
 {
     os_filename osfname;
     off_t len = -1;
     os_struct_stat st;
-    FILE* fp;
+    FILE *fp;
 
     osfname = os_mangle_filename(pathname);
 
@@ -332,7 +330,7 @@ off_t nasm_file_size_by_path(const char* pathname)
 /*
  * Report the timestamp on a file, returns true if successful
  */
-bool nasm_file_time(time_t* t, const char* pathname)
+bool nasm_file_time(time_t *t, const char *pathname)
 {
 #ifdef os_stat
     os_filename osfname;

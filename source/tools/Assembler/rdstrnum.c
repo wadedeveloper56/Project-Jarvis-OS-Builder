@@ -1,6 +1,6 @@
- /* ----------------------------------------------------------------------- *
+/* ----------------------------------------------------------------------- *
  *
- *   Copyright 2020 The NASM Authors - All Rights Reserved
+ *   Copyright 1996-2016 The NASM Authors - All Rights Reserved
  *   See the file AUTHORS included with the NASM distribution for
  *   the specific copyright holders.
  *
@@ -31,48 +31,31 @@
  *
  * ----------------------------------------------------------------------- */
 
+/*
+ * rdstrnum.c
+ *
+ * This converts a NASM string to an integer, used when a string
+ * is used in an integer constant context.  This is a binary conversion,
+ * not a conversion from a numeric constant in text form.
+ */
+
 #include "compiler.h"
 #include "nasmlib.h"
+#include "nasm.h"
 
-#ifdef HAVE_SYS_RESOURCE_H
-# include <sys/resource.h>
-#endif
-
-#if defined(HAVE_GETRLIMIT) && defined(RLIMIT_STACK)
-
-size_t nasm_get_stack_size_limit(void)
+int64_t readstrnum(char *str, int length, bool *warn)
 {
-    struct rlimit rl;
+    int64_t charconst = 0;
+    int i;
 
-    if (getrlimit(RLIMIT_STACK, &rl))
-        return SIZE_MAX;
+    *warn = false;
+    if (length > 8) {
+        *warn = true;
+        length = 8;
+    }
 
-# ifdef RLIM_SAVED_MAX
-    if (rl.rlim_cur == RLIM_SAVED_MAX)
-        rl.rlim_cur = rl.rlim_max;
-# endif
+    for (i = 0; i < length; i++)
+        charconst += (uint64_t)((uint8_t)(*str++)) << (i*8);
 
-    if (
-# ifdef RLIM_INFINITY
-        rl.rlim_cur >= RLIM_INFINITY ||
-# endif
-# ifdef RLIM_SAVED_CUR
-        rl.rlim_cur == RLIM_SAVED_CUR ||
-# endif
-# ifdef RLIM_SAVED_MAX
-        rl.rlim_cur == RLIM_SAVED_MAX ||
-# endif
-        (size_t)rl.rlim_cur != rl.rlim_cur)
-        return SIZE_MAX;
-
-    return rl.rlim_cur;
+    return charconst;
 }
-
-#else
-
-size_t nasm_get_stack_size_limit(void)
-{
-    return SIZE_MAX;
-}
-
-#endif

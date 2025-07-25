@@ -1,6 +1,6 @@
- /* ----------------------------------------------------------------------- *
- *
- *   Copyright 2020 The NASM Authors - All Rights Reserved
+/* ----------------------------------------------------------------------- *
+ *   
+ *   Copyright 1996-2020 The NASM Authors - All Rights Reserved
  *   See the file AUTHORS included with the NASM distribution for
  *   the specific copyright holders.
  *
@@ -14,7 +14,7 @@
  *     copyright notice, this list of conditions and the following
  *     disclaimer in the documentation and/or other materials provided
  *     with the distribution.
- *
+ *     
  *     THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND
  *     CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
  *     INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
@@ -31,48 +31,50 @@
  *
  * ----------------------------------------------------------------------- */
 
-#include "compiler.h"
-#include "nasmlib.h"
+#include "ver.h"
+#include "version.h"
 
-#ifdef HAVE_SYS_RESOURCE_H
-# include <sys/resource.h>
+/* This is printed when entering nasm -v */
+const char nasm_version[] = NASM_VER;
+const char nasm_date[] = __DATE__;
+const char nasm_compile_options[] = ""
+#ifdef DEBUG
+    " with -DDEBUG"
 #endif
+    ;
 
-#if defined(HAVE_GETRLIMIT) && defined(RLIMIT_STACK)
+bool reproducible;              /* Reproducible output */
 
-size_t nasm_get_stack_size_limit(void)
+/* These are used by some backends. For a reproducible build,
+ * these cannot contain version numbers.
+ */
+static const char * const _nasm_comment[2] =
 {
-    struct rlimit rl;
+    "The Netwide Assembler " NASM_VER,
+    "The Netwide Assembler"
+};
 
-    if (getrlimit(RLIMIT_STACK, &rl))
-        return SIZE_MAX;
+static const char * const _nasm_signature[2] = {
+    "NASM " NASM_VER,
+    "NASM"
+};
 
-# ifdef RLIM_SAVED_MAX
-    if (rl.rlim_cur == RLIM_SAVED_MAX)
-        rl.rlim_cur = rl.rlim_max;
-# endif
-
-    if (
-# ifdef RLIM_INFINITY
-        rl.rlim_cur >= RLIM_INFINITY ||
-# endif
-# ifdef RLIM_SAVED_CUR
-        rl.rlim_cur == RLIM_SAVED_CUR ||
-# endif
-# ifdef RLIM_SAVED_MAX
-        rl.rlim_cur == RLIM_SAVED_MAX ||
-# endif
-        (size_t)rl.rlim_cur != rl.rlim_cur)
-        return SIZE_MAX;
-
-    return rl.rlim_cur;
+const char *nasm_comment(void)
+{
+    return _nasm_comment[reproducible];
 }
 
-#else
-
-size_t nasm_get_stack_size_limit(void)
+size_t nasm_comment_len(void)
 {
-    return SIZE_MAX;
+    return strlen(nasm_comment());
 }
 
-#endif
+const char *nasm_signature(void)
+{
+    return _nasm_signature[reproducible];
+}
+
+size_t nasm_signature_len(void)
+{
+    return strlen(nasm_signature());
+}

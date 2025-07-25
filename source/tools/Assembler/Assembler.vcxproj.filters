@@ -96,6 +96,105 @@
     <ClCompile Include="srcfile.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="assemble.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="badenum.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="bsi.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="crc32.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="crc64.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="directbl.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="directiv.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="errfile.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eval.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="exprdump.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="exprlib.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="floats.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="hashtbl.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ilog2.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="labels.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="listing.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="md5c.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mmap.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="numstr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="parser.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="path.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="perfhash.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pptok.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pragma.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rbtree.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rdstrnum.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="realpath.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="segalloc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="stdscan.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="strfunc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tokhash.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ver.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="warnings.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="warnings.h.time" />
@@ -273,6 +372,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="file.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="version.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

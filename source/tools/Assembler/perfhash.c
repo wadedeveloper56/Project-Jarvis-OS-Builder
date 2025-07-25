@@ -1,6 +1,6 @@
- /* ----------------------------------------------------------------------- *
+/* ----------------------------------------------------------------------- *
  *
- *   Copyright 2020 The NASM Authors - All Rights Reserved
+ *   Copyright 2017 The NASM Authors - All Rights Reserved
  *   See the file AUTHORS included with the NASM distribution for
  *   the specific copyright holders.
  *
@@ -31,48 +31,25 @@
  *
  * ----------------------------------------------------------------------- */
 
-#include "compiler.h"
-#include "nasmlib.h"
+#include "perfhash.h"
+#include "hashtbl.h"            /* For crc64i() */
 
-#ifdef HAVE_SYS_RESOURCE_H
-# include <sys/resource.h>
-#endif
-
-#if defined(HAVE_GETRLIMIT) && defined(RLIMIT_STACK)
-
-size_t nasm_get_stack_size_limit(void)
+int perfhash_find(const struct perfect_hash *hash, const char *str)
 {
-    struct rlimit rl;
+    uint32_t k1, k2;
+    uint64_t crc;
+    uint16_t ix;
 
-    if (getrlimit(RLIMIT_STACK, &rl))
-        return SIZE_MAX;
+    crc = crc64i(hash->crcinit, str);
+    k1 = (uint32_t)crc & hash->hashmask;
+    k2 = ((uint32_t)(crc >> 32) & hash->hashmask) + 1;
 
-# ifdef RLIM_SAVED_MAX
-    if (rl.rlim_cur == RLIM_SAVED_MAX)
-        rl.rlim_cur = rl.rlim_max;
-# endif
+    ix = hash->hashvals[k1] + hash->hashvals[k2];
 
-    if (
-# ifdef RLIM_INFINITY
-        rl.rlim_cur >= RLIM_INFINITY ||
-# endif
-# ifdef RLIM_SAVED_CUR
-        rl.rlim_cur == RLIM_SAVED_CUR ||
-# endif
-# ifdef RLIM_SAVED_MAX
-        rl.rlim_cur == RLIM_SAVED_MAX ||
-# endif
-        (size_t)rl.rlim_cur != rl.rlim_cur)
-        return SIZE_MAX;
+    if (ix >= hash->tbllen ||
+        !hash->strings[ix] ||
+        nasm_stricmp(str, hash->strings[ix]))
+        return hash->errval;
 
-    return rl.rlim_cur;
+    return hash->tbloffs + ix;
 }
-
-#else
-
-size_t nasm_get_stack_size_limit(void)
-{
-    return SIZE_MAX;
-}
-
-#endif

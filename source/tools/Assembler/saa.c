@@ -30,20 +30,19 @@
  *     EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  * ----------------------------------------------------------------------- */
-#include <stdlib.h>
-#include <stdio.h>
+
 #include "compiler.h"
 #include "nasmlib.h"
 #include "saa.h"
 
- /* Aggregate SAA components smaller than this */
+/* Aggregate SAA components smaller than this */
 #define SAA_BLKSHIFT	16
 #define SAA_BLKLEN	((size_t)1 << SAA_BLKSHIFT)
 
-struct SAA* saa_init(size_t elem_len)
+struct SAA *saa_init(size_t elem_len)
 {
-    struct SAA* s;
-    char* data;
+    struct SAA *s;
+    char *data;
 
     s = nasm_zalloc(sizeof(struct SAA));
 
@@ -56,16 +55,16 @@ struct SAA* saa_init(size_t elem_len)
     s->length = s->blk_len;
     data = nasm_malloc(s->blk_len);
     s->nblkptrs = s->nblks = 1;
-    s->blk_ptrs = nasm_malloc(sizeof(char*));
+    s->blk_ptrs = nasm_malloc(sizeof(char *));
     s->blk_ptrs[0] = data;
     s->wblk = s->rblk = &s->blk_ptrs[0];
 
     return s;
 }
 
-void saa_free(struct SAA* s)
+void saa_free(struct SAA *s)
 {
-    char** p;
+    char **p;
     size_t n;
 
     for (p = s->blk_ptrs, n = s->nblks; n; p++, n--)
@@ -76,7 +75,7 @@ void saa_free(struct SAA* s)
 }
 
 /* Add one allocation block to an SAA */
-static void saa_extend(struct SAA* s)
+static void saa_extend(struct SAA *s)
 {
     size_t blkn = s->nblks++;
 
@@ -86,7 +85,7 @@ static void saa_extend(struct SAA* s)
 
         s->nblkptrs <<= 1;
         s->blk_ptrs =
-            nasm_realloc(s->blk_ptrs, s->nblkptrs * sizeof(char*));
+            nasm_realloc(s->blk_ptrs, s->nblkptrs * sizeof(char *));
 
         s->rblk = s->blk_ptrs + rindex;
         s->wblk = s->blk_ptrs + windex;
@@ -96,9 +95,9 @@ static void saa_extend(struct SAA* s)
     s->length += s->blk_len;
 }
 
-void* saa_wstruct(struct SAA* s)
+void *saa_wstruct(struct SAA *s)
 {
-    void* p;
+    void *p;
 
     nasm_assert((s->wpos % s->elem_len) == 0);
 
@@ -120,9 +119,9 @@ void* saa_wstruct(struct SAA* s)
     return p;
 }
 
-void saa_wbytes(struct SAA* s, const void* data, size_t len)
+void saa_wbytes(struct SAA *s, const void *data, size_t len)
 {
-    const char* d = data;
+    const char *d = data;
 
     while (len) {
         size_t l = s->blk_len - s->wpos;
@@ -132,8 +131,7 @@ void saa_wbytes(struct SAA* s, const void* data, size_t len)
             if (d) {
                 memcpy(*s->wblk + s->wpos, d, l);
                 d += l;
-            }
-            else
+            } else
                 memset(*s->wblk + s->wpos, 0, l);
             s->wpos += l;
             s->wptr += l;
@@ -155,7 +153,7 @@ void saa_wbytes(struct SAA* s, const void* data, size_t len)
  * Writes a string, *including* the final null, to the specified SAA,
  * and return the number of bytes written.
  */
-size_t saa_wcstring(struct SAA* s, const char* str)
+size_t saa_wcstring(struct SAA *s, const char *str)
 {
     size_t bytes = strlen(str) + 1;
 
@@ -164,15 +162,15 @@ size_t saa_wcstring(struct SAA* s, const char* str)
     return bytes;
 }
 
-void saa_rewind(struct SAA* s)
+void saa_rewind(struct SAA *s)
 {
     s->rblk = s->blk_ptrs;
     s->rpos = s->rptr = 0;
 }
 
-void* saa_rstruct(struct SAA* s)
+void *saa_rstruct(struct SAA *s)
 {
-    void* p;
+    void *p;
 
     if (s->rptr + s->elem_len > s->datalen)
         return NULL;
@@ -191,9 +189,9 @@ void* saa_rstruct(struct SAA* s)
     return p;
 }
 
-const void* saa_rbytes(struct SAA* s, size_t* lenp)
+const void *saa_rbytes(struct SAA *s, size_t * lenp)
 {
-    const void* p;
+    const void *p;
     size_t len;
 
     if (s->rptr >= s->datalen) {
@@ -221,15 +219,15 @@ const void* saa_rbytes(struct SAA* s, size_t* lenp)
     return p;
 }
 
-void saa_rnbytes(struct SAA* s, void* data, size_t len)
+void saa_rnbytes(struct SAA *s, void *data, size_t len)
 {
-    char* d = data;
+    char *d = data;
 
     nasm_assert(s->rptr + len <= s->datalen);
 
     while (len) {
         size_t l;
-        const void* p;
+        const void *p;
 
         l = len;
         p = saa_rbytes(s, &l);
@@ -241,7 +239,7 @@ void saa_rnbytes(struct SAA* s, void* data, size_t len)
 }
 
 /* Same as saa_rnbytes, except position the counter first */
-void saa_fread(struct SAA* s, size_t posn, void* data, size_t len)
+void saa_fread(struct SAA *s, size_t posn, void *data, size_t len)
 {
     size_t ix;
 
@@ -250,8 +248,7 @@ void saa_fread(struct SAA* s, size_t posn, void* data, size_t len)
     if (likely(s->blk_len == SAA_BLKLEN)) {
         ix = posn >> SAA_BLKSHIFT;
         s->rpos = posn & (SAA_BLKLEN - 1);
-    }
-    else {
+    } else {
         ix = posn / s->blk_len;
         s->rpos = posn % s->blk_len;
     }
@@ -262,7 +259,7 @@ void saa_fread(struct SAA* s, size_t posn, void* data, size_t len)
 }
 
 /* Same as saa_wbytes, except position the counter first */
-void saa_fwrite(struct SAA* s, size_t posn, const void* data, size_t len)
+void saa_fwrite(struct SAA *s, size_t posn, const void *data, size_t len)
 {
     size_t ix;
     size_t padding = 0;
@@ -275,8 +272,7 @@ void saa_fwrite(struct SAA* s, size_t posn, const void* data, size_t len)
     if (likely(s->blk_len == SAA_BLKLEN)) {
         ix = posn >> SAA_BLKSHIFT;
         s->wpos = posn & (SAA_BLKLEN - 1);
-    }
-    else {
+    } else {
         ix = posn / s->blk_len;
         s->wpos = posn % s->blk_len;
     }
@@ -294,9 +290,9 @@ void saa_fwrite(struct SAA* s, size_t posn, const void* data, size_t len)
     saa_wbytes(s, data, len);
 }
 
-void saa_fpwrite(struct SAA* s, FILE* fp)
+void saa_fpwrite(struct SAA *s, FILE * fp)
 {
-    const char* data;
+    const char *data;
     size_t len;
 
     saa_rewind(s);
@@ -304,39 +300,39 @@ void saa_fpwrite(struct SAA* s, FILE* fp)
         nasm_write(data, len, fp);
 }
 
-void saa_write8(struct SAA* s, uint8_t v)
+void saa_write8(struct SAA *s, uint8_t v)
 {
     saa_wbytes(s, &v, 1);
 }
 
-void saa_write16(struct SAA* s, uint16_t v)
+void saa_write16(struct SAA *s, uint16_t v)
 {
     v = cpu_to_le16(v);
     saa_wbytes(s, &v, 2);
 }
 
-void saa_write32(struct SAA* s, uint32_t v)
+void saa_write32(struct SAA *s, uint32_t v)
 {
     v = cpu_to_le32(v);
     saa_wbytes(s, &v, 4);
 }
 
-void saa_write64(struct SAA* s, uint64_t v)
+void saa_write64(struct SAA *s, uint64_t v)
 {
     v = cpu_to_le64(v);
     saa_wbytes(s, &v, 8);
 }
 
-void saa_writeaddr(struct SAA* s, uint64_t v, size_t len)
+void saa_writeaddr(struct SAA *s, uint64_t v, size_t len)
 {
     v = cpu_to_le64(v);
     saa_wbytes(s, &v, len);
 }
 
 /* write unsigned LEB128 value to SAA */
-void saa_wleb128u(struct SAA* psaa, int value)
+void saa_wleb128u(struct SAA *psaa, int value)
 {
-    char temp[64], * ptemp;
+    char temp[64], *ptemp;
     uint8_t byte;
     int len;
 
@@ -355,9 +351,9 @@ void saa_wleb128u(struct SAA* psaa, int value)
 }
 
 /* write signed LEB128 value to SAA */
-void saa_wleb128s(struct SAA* psaa, int value)
+void saa_wleb128s(struct SAA *psaa, int value)
 {
-    char temp[64], * ptemp;
+    char temp[64], *ptemp;
     uint8_t byte;
     bool more, negative;
     int size, len;

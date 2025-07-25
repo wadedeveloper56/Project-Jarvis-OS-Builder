@@ -30,27 +30,26 @@
  *     EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  * ----------------------------------------------------------------------- */
-#include <stdlib.h>
-#include <stdio.h>
+
 #include "compiler.h"
 #include "nasmlib.h"
 #include "alloc.h"
 
- /*
-  * nasm_[v]asprintf() are variants of the semi-standard [v]asprintf()
-  * functions, except that we return the pointer instead of a count.
-  * The length of the string (with or without the final NUL) is available
-  * by calling nasm_last_string_{len,size}() afterwards.
-  *
-  * nasm_[v]axprintf() are similar, but allocates a user-defined amount
-  * of storage before the string, and returns a pointer to the
-  * allocated buffer. The size of that area is not included in the value
-  * returned by nasm_last_string_size().
-  */
+/*
+ * nasm_[v]asprintf() are variants of the semi-standard [v]asprintf()
+ * functions, except that we return the pointer instead of a count.
+ * The length of the string (with or without the final NUL) is available
+ * by calling nasm_last_string_{len,size}() afterwards.
+ *
+ * nasm_[v]axprintf() are similar, but allocates a user-defined amount
+ * of storage before the string, and returns a pointer to the
+ * allocated buffer. The size of that area is not included in the value
+ * returned by nasm_last_string_size().
+ */
 
-void* nasm_vaxprintf(size_t extra, const char* fmt, va_list ap)
+void *nasm_vaxprintf(size_t extra, const char *fmt, va_list ap)
 {
-    char* strp;
+    char *strp;
     va_list xap;
     size_t bytes;
 
@@ -59,21 +58,21 @@ void* nasm_vaxprintf(size_t extra, const char* fmt, va_list ap)
     _nasm_last_string_size = bytes;
     va_end(xap);
 
-    strp = nasm_malloc(extra + bytes);
+    strp = nasm_malloc(extra+bytes);
     memset(strp, 0, extra);
-    vsnprintf(strp + extra, bytes, fmt, ap);
+    vsnprintf(strp+extra, bytes, fmt, ap);
     return strp;
 }
 
-char* nasm_vasprintf(const char* fmt, va_list ap)
+char *nasm_vasprintf(const char *fmt, va_list ap)
 {
     return nasm_vaxprintf(0, fmt, ap);
 }
 
-void* nasm_axprintf(size_t extra, const char* fmt, ...)
+void *nasm_axprintf(size_t extra, const char *fmt, ...)
 {
     va_list ap;
-    void* strp;
+    void *strp;
 
     va_start(ap, fmt);
     strp = nasm_vaxprintf(extra, fmt, ap);
@@ -82,10 +81,10 @@ void* nasm_axprintf(size_t extra, const char* fmt, ...)
     return strp;
 }
 
-char* nasm_asprintf(const char* fmt, ...)
+char *nasm_asprintf(const char *fmt, ...)
 {
     va_list ap;
-    char* strp;
+    char *strp;
 
     va_start(ap, fmt);
     strp = nasm_vaxprintf(0, fmt, ap);

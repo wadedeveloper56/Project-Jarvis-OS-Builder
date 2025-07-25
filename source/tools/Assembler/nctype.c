@@ -30,15 +30,14 @@
  *     EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  * ----------------------------------------------------------------------- */
-#include <stdlib.h>
-#include <stdio.h>
+
 #include "nctype.h"
 #include <ctype.h>
 
- /*
-  * Table of tolower() results.  This avoids function calls
-  * on some platforms.
-  */
+/*
+ * Table of tolower() results.  This avoids function calls
+ * on some platforms.
+ */
 unsigned char nasm_tolower_tab[256];
 
 static void tolower_tab_init(void)
@@ -46,7 +45,7 @@ static void tolower_tab_init(void)
     int i;
 
     for (i = 0; i < 256; i++)
-        nasm_tolower_tab[i] = tolower(i);
+	nasm_tolower_tab[i] = tolower(i);
 }
 
 /*
@@ -81,33 +80,33 @@ static void ctype_tab_init(void)
 
         if (isalpha(i)) {
             ct |= (nasm_tolower(i) == i) ? NCT_LOWER : NCT_UPPER;
-            ct |= NCT_ID | NCT_IDSTART;
+            ct |= NCT_ID|NCT_IDSTART;
         }
 
         if (isdigit(i))
-            ct |= NCT_DIGIT | NCT_ID;
+            ct |= NCT_DIGIT|NCT_ID;
 
         if (isxdigit(i))
             ct |= NCT_HEX;
 
         /* Non-ASCII character, but no ctype returned (e.g. Unicode) */
         if (!ct && !ispunct(i))
-            ct |= NCT_ID | NCT_IDSTART;
+            ct |= NCT_ID|NCT_IDSTART;
 
         nasm_ctype_tab[i] = ct;
     }
 
-    nasm_ctype_tab['-'] |= NCT_MINUS;
-    nasm_ctype_tab['$'] |= NCT_DOLLAR | NCT_ID;
-    nasm_ctype_tab['_'] |= NCT_UNDER | NCT_ID | NCT_IDSTART;
-    nasm_ctype_tab['.'] |= NCT_ID | NCT_IDSTART;
-    nasm_ctype_tab['@'] |= NCT_ID | NCT_IDSTART;
-    nasm_ctype_tab['?'] |= NCT_ID | NCT_IDSTART;
-    nasm_ctype_tab['#'] |= NCT_ID;
-    nasm_ctype_tab['~'] |= NCT_ID;
+    nasm_ctype_tab['-']  |= NCT_MINUS;
+    nasm_ctype_tab['$']  |= NCT_DOLLAR|NCT_ID;
+    nasm_ctype_tab['_']  |= NCT_UNDER|NCT_ID|NCT_IDSTART;
+    nasm_ctype_tab['.']  |= NCT_ID|NCT_IDSTART;
+    nasm_ctype_tab['@']  |= NCT_ID|NCT_IDSTART;
+    nasm_ctype_tab['?']  |= NCT_ID|NCT_IDSTART;
+    nasm_ctype_tab['#']  |= NCT_ID;
+    nasm_ctype_tab['~']  |= NCT_ID;
     nasm_ctype_tab['\''] |= NCT_QUOTE;
     nasm_ctype_tab['\"'] |= NCT_QUOTE;
-    nasm_ctype_tab['`'] |= NCT_QUOTE;
+    nasm_ctype_tab['`']  |= NCT_QUOTE;
 }
 
 void nasm_ctype_init(void)

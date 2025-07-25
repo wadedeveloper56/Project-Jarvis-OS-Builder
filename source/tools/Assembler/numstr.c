@@ -1,6 +1,6 @@
- /* ----------------------------------------------------------------------- *
+/* ----------------------------------------------------------------------- *
  *
- *   Copyright 2020 The NASM Authors - All Rights Reserved
+ *   Copyright 2023 The NASM Authors - All Rights Reserved
  *   See the file AUTHORS included with the NASM distribution for
  *   the specific copyright holders.
  *
@@ -31,48 +31,51 @@
  *
  * ----------------------------------------------------------------------- */
 
-#include "compiler.h"
 #include "nasmlib.h"
 
-#ifdef HAVE_SYS_RESOURCE_H
-# include <sys/resource.h>
-#endif
-
-#if defined(HAVE_GETRLIMIT) && defined(RLIMIT_STACK)
-
-size_t nasm_get_stack_size_limit(void)
+/*
+ * Produce an unsigned integer string from a number with a specified
+ * base, digits and signedness.
+ */
+int numstr(char *buf, size_t buflen, uint64_t n,
+           int digits, unsigned int base, bool ucase)
 {
-    struct rlimit rl;
+    static const char digit_chars[2][NUMSTR_MAXBASE+1] =
+    {
+        /* Lower case version */
+        "0123456789"
+        "abcdefghijklmnopqrstuvwxyz"
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        "@_",
 
-    if (getrlimit(RLIMIT_STACK, &rl))
-        return SIZE_MAX;
+        /* Upper case version */
+        "0123456789"
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        "abcdefghijklmnopqrstuvwxyz"
+        "@_"
+    };
+    const char * const dchars = digit_chars[ucase];
+    bool moredigits = digits <= 0;
+    char *p;
+    int len;
 
-# ifdef RLIM_SAVED_MAX
-    if (rl.rlim_cur == RLIM_SAVED_MAX)
-        rl.rlim_cur = rl.rlim_max;
-# endif
+    if (base < 2 || base > NUMSTR_MAXBASE)
+        return -1;
 
-    if (
-# ifdef RLIM_INFINITY
-        rl.rlim_cur >= RLIM_INFINITY ||
-# endif
-# ifdef RLIM_SAVED_CUR
-        rl.rlim_cur == RLIM_SAVED_CUR ||
-# endif
-# ifdef RLIM_SAVED_MAX
-        rl.rlim_cur == RLIM_SAVED_MAX ||
-# endif
-        (size_t)rl.rlim_cur != rl.rlim_cur)
-        return SIZE_MAX;
+    if (moredigits)
+        digits = -digits;
 
-    return rl.rlim_cur;
+    p = buf + buflen;
+    *--p = '\0';
+
+    while (p > buf && (digits-- > 0 || (moredigits && n))) {
+        *--p = dchars[n % base];
+        n /= base;
+    }
+
+    len = buflen - (p - buf);   /* Including final null */
+    if (p != buf)
+        memmove(buf, p, len);
+
+    return len - 1;
 }
-
-#else
-
-size_t nasm_get_stack_size_limit(void)
-{
-    return SIZE_MAX;
-}
-
-#endif

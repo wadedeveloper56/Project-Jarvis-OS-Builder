@@ -1,6 +1,6 @@
- /* ----------------------------------------------------------------------- *
+/* ----------------------------------------------------------------------- *
  *
- *   Copyright 2020 The NASM Authors - All Rights Reserved
+ *   Copyright 1996-2017 The NASM Authors - All Rights Reserved
  *   See the file AUTHORS included with the NASM distribution for
  *   the specific copyright holders.
  *
@@ -31,48 +31,49 @@
  *
  * ----------------------------------------------------------------------- */
 
-#include "compiler.h"
-#include "nasmlib.h"
+/*
+ * exprdump.c
+ *
+ * Debugging code to dump the contents of an expression vector to stdout
+ */
 
-#ifdef HAVE_SYS_RESOURCE_H
-# include <sys/resource.h>
-#endif
+#include "nasm.h"
 
-#if defined(HAVE_GETRLIMIT) && defined(RLIMIT_STACK)
-
-size_t nasm_get_stack_size_limit(void)
+static const char *expr_type(int32_t type)
 {
-    struct rlimit rl;
+    static char seg_str[64];
 
-    if (getrlimit(RLIMIT_STACK, &rl))
-        return SIZE_MAX;
+    switch (type) {
+    case 0:
+        return "null";
+    case EXPR_UNKNOWN:
+        return "unknown";
+    case EXPR_SIMPLE:
+        return "simple";
+    case EXPR_WRT:
+        return "wrt";
+    case EXPR_RDSAE:
+        return "sae";
+    default:
+        break;
+    }
 
-# ifdef RLIM_SAVED_MAX
-    if (rl.rlim_cur == RLIM_SAVED_MAX)
-        rl.rlim_cur = rl.rlim_max;
-# endif
-
-    if (
-# ifdef RLIM_INFINITY
-        rl.rlim_cur >= RLIM_INFINITY ||
-# endif
-# ifdef RLIM_SAVED_CUR
-        rl.rlim_cur == RLIM_SAVED_CUR ||
-# endif
-# ifdef RLIM_SAVED_MAX
-        rl.rlim_cur == RLIM_SAVED_MAX ||
-# endif
-        (size_t)rl.rlim_cur != rl.rlim_cur)
-        return SIZE_MAX;
-
-    return rl.rlim_cur;
+    if (type >= EXPR_REG_START && type <= EXPR_REG_END) {
+        return nasm_reg_names[type - EXPR_REG_START];
+    } else if (type >= EXPR_SEGBASE) {
+        snprintf(seg_str, sizeof seg_str, "%sseg %d",
+                 (type - EXPR_SEGBASE) == location.segment ? "this " : "",
+                 type - EXPR_SEGBASE);
+        return seg_str;
+    } else {
+        return "ERR";
+    }
 }
 
-#else
-
-size_t nasm_get_stack_size_limit(void)
+void dump_expr(const expr *e)
 {
-    return SIZE_MAX;
+    printf("[");
+    for (; e->type; e++)
+        printf("<%s(%d),%"PRId64">", expr_type(e->type), e->type, e->value);
+    printf("]\n");
 }
-
-#endif

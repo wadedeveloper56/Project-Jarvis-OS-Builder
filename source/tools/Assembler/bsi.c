@@ -1,6 +1,6 @@
- /* ----------------------------------------------------------------------- *
- *
- *   Copyright 2020 The NASM Authors - All Rights Reserved
+/* ----------------------------------------------------------------------- *
+ *   
+ *   Copyright 1996-2016 The NASM Authors - All Rights Reserved
  *   See the file AUTHORS included with the NASM distribution for
  *   the specific copyright holders.
  *
@@ -14,7 +14,7 @@
  *     copyright notice, this list of conditions and the following
  *     disclaimer in the documentation and/or other materials provided
  *     with the distribution.
- *
+ *     
  *     THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND
  *     CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
  *     INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
@@ -31,48 +31,46 @@
  *
  * ----------------------------------------------------------------------- */
 
+/*
+ * nasmlib.c	library routines for the Netwide Assembler
+ */
+
 #include "compiler.h"
+
+
 #include "nasmlib.h"
 
-#ifdef HAVE_SYS_RESOURCE_H
-# include <sys/resource.h>
-#endif
-
-#if defined(HAVE_GETRLIMIT) && defined(RLIMIT_STACK)
-
-size_t nasm_get_stack_size_limit(void)
+/*
+ * Binary search.
+ */
+int bsi(const char *string, const char **array, int size)
 {
-    struct rlimit rl;
-
-    if (getrlimit(RLIMIT_STACK, &rl))
-        return SIZE_MAX;
-
-# ifdef RLIM_SAVED_MAX
-    if (rl.rlim_cur == RLIM_SAVED_MAX)
-        rl.rlim_cur = rl.rlim_max;
-# endif
-
-    if (
-# ifdef RLIM_INFINITY
-        rl.rlim_cur >= RLIM_INFINITY ||
-# endif
-# ifdef RLIM_SAVED_CUR
-        rl.rlim_cur == RLIM_SAVED_CUR ||
-# endif
-# ifdef RLIM_SAVED_MAX
-        rl.rlim_cur == RLIM_SAVED_MAX ||
-# endif
-        (size_t)rl.rlim_cur != rl.rlim_cur)
-        return SIZE_MAX;
-
-    return rl.rlim_cur;
+    int i = -1, j = size;       /* always, i < index < j */
+    while (j - i >= 2) {
+        int k = (i + j) / 2;
+        int l = strcmp(string, array[k]);
+        if (l < 0)              /* it's in the first half */
+            j = k;
+        else if (l > 0)         /* it's in the second half */
+            i = k;
+        else                    /* we've got it :) */
+            return k;
+    }
+    return -1;                  /* we haven't got it :( */
 }
 
-#else
-
-size_t nasm_get_stack_size_limit(void)
+int bsii(const char *string, const char **array, int size)
 {
-    return SIZE_MAX;
+    int i = -1, j = size;       /* always, i < index < j */
+    while (j - i >= 2) {
+        int k = (i + j) / 2;
+        int l = nasm_stricmp(string, array[k]);
+        if (l < 0)              /* it's in the first half */
+            j = k;
+        else if (l > 0)         /* it's in the second half */
+            i = k;
+        else                    /* we've got it :) */
+            return k;
+    }
+    return -1;                  /* we haven't got it :( */
 }
-
-#endif

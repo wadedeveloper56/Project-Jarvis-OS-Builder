@@ -31,21 +31,23 @@
  *
  * ----------------------------------------------------------------------- */
 
- /*
-  * nasmlib.c	library routines for the Netwide Assembler
-  */
+/*
+ * nasmlib.c	library routines for the Netwide Assembler
+ */
 
 #include "compiler.h"
+
 #include "nctype.h"
+
 #include "nasmlib.h"
 #include "error.h"
 #include "nasm.h"               /* For globalbits */
 
 #define lib_isnumchar(c)    (nasm_isalnum(c) || (c) == '$' || (c) == '_')
 
-int64_t readnum(const char* str, bool* error)
+int64_t readnum(const char *str, bool *error)
 {
-    const char* r = str, * q;
+    const char *r = str, *q;
     int32_t pradix, sradix, radix;
     int plen, slen, len;
     uint64_t result, checklimit;
@@ -73,9 +75,9 @@ int64_t readnum(const char* str, bool* error)
     while (lib_isnumchar(*q))
         q++;                    /* find end of number */
 
-    len = q - r;
+    len = q-r;
     if (!len) {
-        /* Not numeric */
+	/* Not numeric */
         return 0;
     }
 
@@ -90,25 +92,23 @@ int64_t readnum(const char* str, bool* error)
     plen = slen = 0;
 
     if (len > 2 && *r == '0' && (pradix = radix_letter(r[1])) != 0)
-        plen = 2;
+	plen = 2;
     else if (len > 1 && *r == '$')
-        pradix = 16, plen = 1;
+	pradix = 16, plen = 1;
 
     if (len > 1 && (sradix = radix_letter(q[-1])) != 0)
-        slen = 1;
+	slen = 1;
 
     if (pradix > sradix) {
-        radix = pradix;
-        r += plen;
-    }
-    else if (sradix > pradix) {
-        radix = sradix;
-        q -= slen;
-    }
-    else {
-        /* Either decimal, or invalid -- if invalid, we'll trip up
-           further down. */
-        radix = 10;
+	radix = pradix;
+	r += plen;
+    } else if (sradix > pradix) {
+	radix = sradix;
+	q -= slen;
+    } else {
+	/* Either decimal, or invalid -- if invalid, we'll trip up
+	   further down. */
+	radix = 10;
     }
 
     /*
@@ -127,18 +127,18 @@ int64_t readnum(const char* str, bool* error)
 
     result = 0;
     while (*r && r < q) {
-        if (*r != '_') {
-            if (*r < '0' || (*r > '9' && *r < 'A')
-                || (digit = numvalue(*r)) >= radix) {
+	if (*r != '_') {
+	    if (*r < '0' || (*r > '9' && *r < 'A')
+		|| (digit = numvalue(*r)) >= radix) {
                 return 0;
-            }
-            if (result > checklimit ||
-                (result == checklimit && digit >= last)) {
-                warn = true;
-            }
+	    }
+	    if (result > checklimit ||
+		(result == checklimit && digit >= last)) {
+		warn = true;
+	    }
 
-            result = radix * result + digit;
-        }
+	    result = radix * result + digit;
+	}
         r++;
     }
 
@@ -149,8 +149,8 @@ int64_t readnum(const char* str, bool* error)
          *!    don't fit in 64 bits.
          */
         nasm_warn(WARN_NUMBER_OVERFLOW,
-            "numeric constant %s does not fit in 64 bits",
-            str);
+		   "numeric constant %s does not fit in 64 bits",
+		   str);
     }
 
     if (error)

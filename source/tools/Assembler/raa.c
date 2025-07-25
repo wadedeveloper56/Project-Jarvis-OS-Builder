@@ -30,17 +30,16 @@
  *     EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  * ----------------------------------------------------------------------- */
-#include <stdlib.h>
-#include <stdio.h>
+
 #include "nasmlib.h"
 #include "raa.h"
 #include "ilog2.h"
 
- /*
-  * Routines to manage a dynamic random access array of int64_ts which
-  * may grow in size to be more than the largest single malloc'able
-  * chunk.
-  */
+/*
+ * Routines to manage a dynamic random access array of int64_ts which
+ * may grow in size to be more than the largest single malloc'able
+ * chunk.
+ */
 
 #define RAA_LAYERSHIFT	11      /* 2^this many items per layer */
 #define RAA_LAYERSIZE	((size_t)1 << RAA_LAYERSHIFT)
@@ -80,7 +79,7 @@ struct RAA {
             union intorptr data[RAA_LAYERSIZE];
         } l;
         struct RAA_BRANCH {
-            struct RAA* data[RAA_LAYERSIZE];
+            struct RAA *data[RAA_LAYERSIZE];
         } b;
     } u;
 };
@@ -88,26 +87,26 @@ struct RAA {
 #define LEAFSIZ (sizeof(RAA)-sizeof(RAA_UNION)+sizeof(RAA_LEAF))
 #define BRANCHSIZ (sizeof(RAA)-sizeof(RAA_UNION)+sizeof(RAA_BRANCH))
 
-static struct RAA* raa_init_layer(raaindex posn, unsigned int layers)
+static struct RAA *raa_init_layer(raaindex posn, unsigned int layers)
 {
-    struct RAA* r;
+    struct RAA *r;
     raaindex posmask;
 
     r = nasm_zalloc((layers == 0) ? LEAFSIZ : BRANCHSIZ);
     r->shift = layers * RAA_LAYERSHIFT;
-    r->layers = layers;
+    r->layers    = layers;
     posmask = ((raaindex)RAA_LAYERSIZE << r->shift) - 1;
-    r->endposn = posn | posmask;
+    r->endposn   = posn | posmask;
     return r;
 }
 
-void raa_free(struct RAA* r)
+void raa_free(struct RAA *r)
 {
     if (!r)
         return;
 
     if (r->layers) {
-        struct RAA** p = r->u.b.data;
+        struct RAA **p = r->u.b.data;
         size_t i;
         for (i = 0; i < RAA_LAYERSIZE; i++)
             raa_free(*p++);
@@ -115,7 +114,7 @@ void raa_free(struct RAA* r)
     nasm_free(r);
 }
 
-static const union intorptr* real_raa_read(struct RAA* r, raaindex posn)
+static const union intorptr *real_raa_read(struct RAA *r, raaindex posn)
 {
     nasm_assert(posn <= (~(raaindex)0 >> 1));
 
@@ -131,38 +130,37 @@ static const union intorptr* real_raa_read(struct RAA* r, raaindex posn)
     return &r->u.l.data[posn & RAA_LAYERMASK];
 }
 
-int64_t raa_read(struct RAA* r, raaindex pos)
+int64_t raa_read(struct RAA *r, raaindex pos)
 {
-    const union intorptr* ip;
+    const union intorptr *ip;
 
     ip = real_raa_read(r, pos);
     return ip ? ip->i : 0;
 }
 
-void* raa_read_ptr(struct RAA* r, raaindex pos)
+void *raa_read_ptr(struct RAA *r, raaindex pos)
 {
-    const union intorptr* ip;
+    const union intorptr *ip;
 
     ip = real_raa_read(r, pos);
     return ip ? ip->p : NULL;
 }
 
 
-static struct RAA*
-real_raa_write(struct RAA* r, raaindex posn, union intorptr value)
+static struct RAA *
+real_raa_write(struct RAA *r, raaindex posn, union intorptr value)
 {
-    struct RAA* result;
+    struct RAA *result;
 
     nasm_assert(posn <= (~(raaindex)0 >> 1));
 
     if (unlikely(!r)) {
         /* Create a new top-level RAA */
-        r = raa_init_layer(posn, ilog2_64(posn) / RAA_LAYERSHIFT);
-    }
-    else {
+        r = raa_init_layer(posn, ilog2_64(posn)/RAA_LAYERSHIFT);
+    } else {
         while (unlikely(r->endposn < posn)) {
             /* We need to add layers to an existing RAA */
-            struct RAA* s = raa_init_layer(r->endposn, r->layers + 1);
+            struct RAA *s = raa_init_layer(r->endposn, r->layers + 1);
             s->u.b.data[0] = r;
             r = s;
         }
@@ -171,7 +169,7 @@ real_raa_write(struct RAA* r, raaindex posn, union intorptr value)
     result = r;
 
     while (r->layers) {
-        struct RAA** s;
+        struct RAA **s;
         size_t l = (posn >> r->shift) & RAA_LAYERMASK;
         s = &r->u.b.data[l];
         if (unlikely(!*s))
@@ -183,7 +181,7 @@ real_raa_write(struct RAA* r, raaindex posn, union intorptr value)
     return result;
 }
 
-struct RAA* raa_write(struct RAA* r, raaindex posn, int64_t value)
+struct RAA *raa_write(struct RAA *r, raaindex posn, int64_t value)
 {
     union intorptr ip;
 
@@ -191,7 +189,7 @@ struct RAA* raa_write(struct RAA* r, raaindex posn, int64_t value)
     return real_raa_write(r, posn, ip);
 }
 
-struct RAA* raa_write_ptr(struct RAA* r, raaindex posn, void* value)
+struct RAA *raa_write_ptr(struct RAA *r, raaindex posn, void *value)
 {
     union intorptr ip;
 
