@@ -60,7 +60,6 @@ extern int const_func alignlog2_64(uint64_t v);
         }                                               \
     } while (0)
 
-
 #if defined(HAVE___BUILTIN_CLZ) && INT_MAX == 2147483647
 
 extern_inline unsigned int const_func ilog2_32(uint32_t v)
@@ -111,20 +110,20 @@ extern_inline unsigned int const_func ilog2_32(uint32_t v)
 }
 
 #else
-
+/*
 extern_inline unsigned int const_func ilog2_32(uint32_t v)
 {
     unsigned int p = 0;
 
     ROUND(v, p, 16);
-    ROUND(v, p,  8);
-    ROUND(v, p,  4);
-    ROUND(v, p,  2);
-    ROUND(v, p,  1);
+    ROUND(v, p, 8);
+    ROUND(v, p, 4);
+    ROUND(v, p, 2);
+    ROUND(v, p, 1);
 
     return p;
 }
-
+*/
 #endif
 
 #if defined(HAVE__BUILTIN_CLZLL) && LLONG_MAX == 9223372036854775807LL
@@ -144,8 +143,8 @@ extern_inline unsigned int const_func ilog2_64(uint64_t v)
     uint64_t n;
 
     __asm__("bsrq %1,%0"
-            : "=r" (n)
-            : "rm" (v), "0" (UINT64_C(0)));
+        : "=r" (n)
+        : "rm" (v), "0" (UINT64_C(0)));
     return n;
 }
 
@@ -180,7 +179,7 @@ extern_inline unsigned int const_func ilog2_64(uint64_t vv)
  */
 extern_inline int const_func alignlog2_32(uint32_t v)
 {
-    if (unlikely(v & (v-1)))
+    if (unlikely(v & (v - 1)))
         return -1;              /* invalid alignment */
 
     return ilog2_32(v);
@@ -188,7 +187,7 @@ extern_inline int const_func alignlog2_32(uint32_t v)
 
 extern_inline int const_func alignlog2_64(uint64_t v)
 {
-    if (unlikely(v & (v-1)))
+    if (unlikely(v & (v - 1)))
         return -1;              /* invalid alignment */
 
     return ilog2_64(v);

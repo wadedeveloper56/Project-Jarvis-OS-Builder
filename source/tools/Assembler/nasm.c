@@ -34,10 +34,9 @@
 /*
  * The Netwide Assembler main program module
  */
-
+#include <stdio.h>
+#include <stdlib.h>
 #include "compiler.h"
-
-
 #include "nasm.h"
 #include "nasmlib.h"
 #include "nctype.h"
@@ -985,7 +984,7 @@ static void show_version(void)
 static bool stopoptions = false;
 static bool process_arg(char *p, char *q, int pass)
 {
-    char *param;
+    char *param="";
     bool advance = false;
 
     if (!p || !p[0])

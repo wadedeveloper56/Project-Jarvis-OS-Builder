@@ -135,9 +135,6 @@
     <ClCompile Include="hashtbl.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ilog2.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="labels.c">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -193,6 +190,24 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="warnings.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="codeview.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="legacy.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nulldbg.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nullout.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="outform.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="outlib.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

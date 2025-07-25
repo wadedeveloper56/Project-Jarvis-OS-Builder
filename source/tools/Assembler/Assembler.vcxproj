@@ -100,7 +100,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <LanguageStandard_C>Default</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -120,7 +120,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <LanguageStandard_C>Default</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -138,7 +138,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <LanguageStandard_C>Default</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -158,7 +158,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <LanguageStandard_C>Default</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -172,6 +172,7 @@
     <ClCompile Include="assemble.c" />
     <ClCompile Include="badenum.c" />
     <ClCompile Include="bsi.c" />
+    <ClCompile Include="codeview.c" />
     <ClCompile Include="crc32.c" />
     <ClCompile Include="crc64.c" />
     <ClCompile Include="directbl.c" />
@@ -185,13 +186,15 @@
     <ClCompile Include="filename.c" />
     <ClCompile Include="floats.c" />
     <ClCompile Include="hashtbl.c" />
-    <ClCompile Include="ilog2.c" />
     <ClCompile Include="labels.c" />
+    <ClCompile Include="legacy.c" />
     <ClCompile Include="listing.c" />
     <ClCompile Include="md5c.c" />
     <ClCompile Include="mmap.c" />
     <ClCompile Include="nasm.c" />
     <ClCompile Include="nctype.c" />
+    <ClCompile Include="nulldbg.c" />
+    <ClCompile Include="nullout.c" />
     <ClCompile Include="numstr.c" />
     <ClCompile Include="outaout.c" />
     <ClCompile Include="outas86.c" />
@@ -199,7 +202,9 @@
     <ClCompile Include="outcoff.c" />
     <ClCompile Include="outdbg.c" />
     <ClCompile Include="outelf.c" />
+    <ClCompile Include="outform.c" />
     <ClCompile Include="outieee.c" />
+    <ClCompile Include="outlib.c" />
     <ClCompile Include="outmacho.c" />
     <ClCompile Include="outobj.c" />
     <ClCompile Include="parser.c" />

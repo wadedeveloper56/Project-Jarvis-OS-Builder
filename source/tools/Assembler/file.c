@@ -30,7 +30,8 @@
  *     EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  * ----------------------------------------------------------------------- */
-
+#include <stdio.h>
+#include <stdlib.h>
 #include "file.h"
 
 void nasm_read(void *ptr, size_t size, FILE *f)
@@ -83,7 +84,7 @@ void fwritezero(off_t bytes, FILE *fp)
 	off_t pos = ftello(fp);
 	if (pos != (off_t)-1) {
             off_t end = pos + bytes;
-	    if (!fflush(fp) && !os_ftruncate(fileno(fp), end)) {
+	    if (!fflush(fp) && !os_ftruncate(_fileno(fp), end)) {
                 fseeko(fp, 0, SEEK_END);
                 pos = ftello(fp);
                 if (pos != (off_t)-1)
@@ -271,7 +272,7 @@ off_t nasm_file_size(FILE *f)
     off_t where, end;
     os_struct_stat st;
 
-    if (!os_fstat(fileno(f), &st) && S_ISREG(st.st_mode))
+    if (!os_fstat(_fileno(f), &st) && S_ISREG(st.st_mode))
         return st.st_size;
 
     /* Do it the hard way... this tests for seekability */
