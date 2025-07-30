@@ -210,6 +210,57 @@
     <ClCompile Include="outlib.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="common.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="disp8.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="iflag.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="insnsa.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="insnsb.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="insnsd.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="insnsn.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="regdis.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="regflags.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="regs.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="regvals.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="macros.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ilog2.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="snprintf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="strlcpy.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="strnlen.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="vsnprintf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="warnings.h.time" />

@@ -110,7 +110,7 @@ extern_inline unsigned int const_func ilog2_32(uint32_t v)
 }
 
 #else
-/*
+
 extern_inline unsigned int const_func ilog2_32(uint32_t v)
 {
     unsigned int p = 0;
@@ -123,7 +123,7 @@ extern_inline unsigned int const_func ilog2_32(uint32_t v)
 
     return p;
 }
-*/
+
 #endif
 
 #if defined(HAVE__BUILTIN_CLZLL) && LLONG_MAX == 9223372036854775807LL
