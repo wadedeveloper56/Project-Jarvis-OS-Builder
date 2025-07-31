@@ -17,7 +17,7 @@ namespace WadeSpace
 	class DirectDeclarator
 	{
 	public:
-		DirectDeclarator(string& id);
+		DirectDeclarator(string id);
 		DirectDeclarator(string id, Declarator* declarator);
 		DirectDeclarator(DirectDeclarator* directDeclarator, string& str1, string& str2);
 		DirectDeclarator(DirectDeclarator* directDeclarator, ConstantExpression* constantExpression);

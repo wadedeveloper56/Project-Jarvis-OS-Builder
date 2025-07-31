@@ -12,11 +12,11 @@ namespace WadeSpace
 	class ConstantExpression
 	{
 	public:
-		ConstantExpression(ConditionalExpression* ce);
+		ConstantExpression(ConditionalExpression* conditionalExpression);
 		ConstantExpression();
 		virtual ~ConstantExpression();
 
 	private:
-		ConditionalExpression* ce;
+		ConditionalExpression* conditionalExpression;
 	};
 }

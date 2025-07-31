@@ -14,8 +14,8 @@ namespace WadeSpace
 	class AdditiveExpression
 	{
 	public:
-		AdditiveExpression(MultiplicativeExpression* me);
-		AdditiveExpression(AdditiveExpression* ae, const string& op, MultiplicativeExpression* me);
+		AdditiveExpression(MultiplicativeExpression* multiplicativeExpression);
+		AdditiveExpression(AdditiveExpression* additiveExpression, const string& op, MultiplicativeExpression* multiplicativeExpression);
 		AdditiveExpression();
 		virtual ~AdditiveExpression();
 		MultiplicativeExpression* getMultiplicativeExpression() const;

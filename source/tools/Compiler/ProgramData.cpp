@@ -10,10 +10,16 @@ ProgramData::ProgramData()
 {
 	programData = new vector<ExternalDeclaration*>();
 	variableTable = new vector<VariableData*>();
+	functionTable = new vector<FunctionData*>();
 }
 
 ProgramData::~ProgramData()
 {
+	for (FunctionData* ptr : *functionTable)
+	{
+		delete ptr;
+	}
+	delete functionTable;
 	for (VariableData* ptr : *variableTable)
 	{
 		delete ptr;
@@ -39,8 +45,8 @@ void ProgramData::generateCode(ofstream& out)
 		out << "BITS 32" << endl;
 	else
 		out << "BITS 64" << endl;
-	out << "SECTION .data" << endl;
-	out << "SECTION .bss" << endl;
+	out << "\t" << "SECTION .data" << endl;
+	out << "\t" << "SECTION .bss" << endl;
 	for (VariableData* ptr : *variableTable)
 	{
 		if (ptr->size == 1) out << ptr->name << ":  resb 1" << endl;
@@ -50,7 +56,13 @@ void ProgramData::generateCode(ofstream& out)
 		if (ptr->size == 10) out << ptr->name << ":  rest 1" << endl;
 		if (ptr->size == 16) out << ptr->name << ":  resb 16" << endl;
 	}
-	out << "SECTION .text" << endl;
+	out << "\t" << "SECTION .text" << endl;
+	for (FunctionData* ptr : *functionTable)
+	{
+		out << "\t global " << ptr->name << endl;
+		out << ptr->name << ":" << endl;
+		out << "\tret" << endl << endl;
+	}
 }
 
 void ProgramData::processGlobalVariables()
@@ -81,6 +93,11 @@ void ProgramData::processGlobalVariables()
 		}
 		else if (ptr->isFunction())
 		{
+			FunctionDefinition* declaration = ptr->getFunction();
+			FunctionData* data = new FunctionData();
+			data->type = declaration->getDeclarationSpecifiers()->getTypeSpecifier()->getType();
+			data->name = declaration->getDeclarator()->getDirectDeclarator()->getDirectDeclarator()->getId();
+			functionTable->push_back(data);
 		}
 	}
 }

@@ -3,20 +3,20 @@
 using namespace WadeSpace;
 using namespace std;
 
-Expression::Expression(AssignmentExpression* ae) : ae(ae), oper(""), exp(nullptr)
+Expression::Expression(AssignmentExpression* assignmentExpression) : assignmentExpression(assignmentExpression), oper(nullopt), expression(nullptr)
 {
 }
 
-Expression::Expression(Expression* exp, const string& oper, AssignmentExpression* ae) : ae(ae), oper(oper), exp(exp)
+Expression::Expression(Expression* expression, const string& oper, AssignmentExpression* assignmentExpression) : assignmentExpression(assignmentExpression), oper(oper), expression(expression)
 {
 }
 
-Expression::Expression() : ae(nullptr), oper(""), exp(nullptr)
+Expression::Expression() : assignmentExpression(nullptr), oper(nullopt), expression(nullptr)
 {
 }
 
 Expression::~Expression()
 {
-	delete ae;
-	delete exp;
+	delete assignmentExpression;
+	delete expression;
 }

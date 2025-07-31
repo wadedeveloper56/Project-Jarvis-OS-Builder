@@ -5,51 +5,42 @@
 
 using namespace WadeSpace;
 
-DirectAbstractDeclarator::DirectAbstractDeclarator(DirectAbstractDeclarator* dad, ParameterTypeList* ptl,
-                                                   TokenType type) : ad(nullptr), ce(nullptr), type(type), dad(dad),
-                                                                     ptl(ptl)
+DirectAbstractDeclarator::DirectAbstractDeclarator(DirectAbstractDeclarator* directAbstractDeclarator, ParameterTypeList* parameterTypeList, TokenType type) : abstractDeclarator(nullptr), constantExpression(nullptr), type(type), directAbstractDeclarator(directAbstractDeclarator), parameterTypeList(parameterTypeList)
 {
 }
 
-DirectAbstractDeclarator::DirectAbstractDeclarator(ParameterTypeList* ptl, TokenType type) : ad(nullptr), ce(nullptr),
-	type(type), dad(nullptr), ptl(ptl)
+DirectAbstractDeclarator::DirectAbstractDeclarator(ParameterTypeList* parameterTypeList, TokenType type) : abstractDeclarator(nullptr), constantExpression(nullptr), type(type), directAbstractDeclarator(nullptr), parameterTypeList(parameterTypeList)
 {
 }
 
-DirectAbstractDeclarator::DirectAbstractDeclarator(DirectAbstractDeclarator* dad, ConstantExpression* ce,
-                                                   TokenType type) : ad(nullptr), ce(ce), type(type), dad(dad),
-                                                                     ptl(nullptr)
+DirectAbstractDeclarator::DirectAbstractDeclarator(DirectAbstractDeclarator* directAbstractDeclarator, ConstantExpression* constantExpression, TokenType type) : abstractDeclarator(nullptr), constantExpression(constantExpression), type(type), directAbstractDeclarator(directAbstractDeclarator), parameterTypeList(nullptr)
 {
 }
 
-DirectAbstractDeclarator::DirectAbstractDeclarator(DirectAbstractDeclarator* dad, TokenType type) : ad(nullptr),
-	ce(nullptr), type(type), dad(dad), ptl(nullptr)
+DirectAbstractDeclarator::DirectAbstractDeclarator(DirectAbstractDeclarator* directAbstractDeclarator, TokenType type) : abstractDeclarator(nullptr), constantExpression(nullptr), type(type), directAbstractDeclarator(directAbstractDeclarator), parameterTypeList(nullptr)
 {
 }
 
-DirectAbstractDeclarator::DirectAbstractDeclarator(TokenType type) : ad(nullptr), ce(nullptr), type(type), dad(nullptr),
-                                                                     ptl(nullptr)
+DirectAbstractDeclarator::DirectAbstractDeclarator(TokenType type) : abstractDeclarator(nullptr), constantExpression(nullptr), type(type), directAbstractDeclarator(nullptr), parameterTypeList(nullptr)
 {
 }
 
-DirectAbstractDeclarator::DirectAbstractDeclarator(ConstantExpression* ce) : ad(nullptr), ce(ce), type(NONE),
-                                                                             dad(nullptr), ptl(nullptr)
+DirectAbstractDeclarator::DirectAbstractDeclarator(ConstantExpression* constantExpression) : abstractDeclarator(nullptr), constantExpression(constantExpression), type(NONE), directAbstractDeclarator(nullptr), parameterTypeList(nullptr)
 {
 }
 
-DirectAbstractDeclarator::DirectAbstractDeclarator(AbstractDeclarator* ad) : ad(ad), ce(nullptr), type(NONE),
-                                                                             dad(nullptr), ptl(nullptr)
+DirectAbstractDeclarator::DirectAbstractDeclarator(AbstractDeclarator* abstractDeclarator) : abstractDeclarator(abstractDeclarator), constantExpression(nullptr), type(NONE), directAbstractDeclarator(nullptr), parameterTypeList(nullptr)
 {
 }
 
-DirectAbstractDeclarator::DirectAbstractDeclarator() : ad(nullptr), ce(nullptr), type(NONE), dad(nullptr), ptl(nullptr)
+DirectAbstractDeclarator::DirectAbstractDeclarator() : abstractDeclarator(nullptr), constantExpression(nullptr), type(NONE), directAbstractDeclarator(nullptr), parameterTypeList(nullptr)
 {
 }
 
 DirectAbstractDeclarator::~DirectAbstractDeclarator()
 {
-    delete ad;
-    delete ce;
-    delete dad;
-    delete ptl;
+	delete abstractDeclarator;
+	delete constantExpression;
+	delete directAbstractDeclarator;
+	delete parameterTypeList;
 }

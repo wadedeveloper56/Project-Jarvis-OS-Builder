@@ -18,8 +18,6 @@ namespace WadeSpace
 		Declaration(DeclarationSpecifiers* declarationSpecifiers, vector<InitDeclarator*>* vectorInitDeclarator);
 		Declaration();
 		virtual ~Declaration();
-		bool hasDeclarationSpecifiers() const;
-		bool hasVectorInitDeclarator() const;
 		DeclarationSpecifiers* getDeclarationSpecifiers() const;
 		vector<InitDeclarator*>* getVectorInitDeclarator() const;
 

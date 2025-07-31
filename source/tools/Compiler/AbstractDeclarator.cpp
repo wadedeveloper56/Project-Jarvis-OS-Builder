@@ -6,13 +6,11 @@ AbstractDeclarator::AbstractDeclarator(Pointer* pointer) : pointer(pointer), dir
 {
 }
 
-AbstractDeclarator::AbstractDeclarator(DirectAbstractDeclarator* directAbstractDeclarator) : pointer(nullptr),
-	directAbstractDeclarator(directAbstractDeclarator)
+AbstractDeclarator::AbstractDeclarator(DirectAbstractDeclarator* directAbstractDeclarator) : pointer(nullptr), directAbstractDeclarator(directAbstractDeclarator)
 {
 }
 
-AbstractDeclarator::AbstractDeclarator(Pointer* ptr, DirectAbstractDeclarator* directAbstractDeclarator) : pointer(ptr),
-	directAbstractDeclarator(directAbstractDeclarator)
+AbstractDeclarator::AbstractDeclarator(Pointer* ptr, DirectAbstractDeclarator* directAbstractDeclarator) : pointer(ptr), directAbstractDeclarator(directAbstractDeclarator)
 {
 }
 

@@ -2,15 +2,15 @@
 
 using namespace WadeSpace;
 
-ConstantExpression::ConstantExpression(ConditionalExpression* ce): ce(ce)
+ConstantExpression::ConstantExpression(ConditionalExpression* conditionalExpression): conditionalExpression(conditionalExpression)
 {
 }
 
-ConstantExpression::ConstantExpression(): ce(nullptr)
+ConstantExpression::ConstantExpression(): conditionalExpression(nullptr)
 {
 }
 
 ConstantExpression::~ConstantExpression()
 {
-	delete ce;
+	delete conditionalExpression;
 }

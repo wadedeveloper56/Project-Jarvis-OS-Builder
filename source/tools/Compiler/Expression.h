@@ -14,14 +14,14 @@ namespace WadeSpace
 	class Expression
 	{
 	public:
-		Expression(AssignmentExpression* ae);
-		Expression(Expression* exp, const string& operation, AssignmentExpression* ae);
+		Expression(AssignmentExpression* assignmentExpression);
+		Expression(Expression* expression, const string& operation, AssignmentExpression* assignmentExpression);
 		Expression();
 		virtual ~Expression();
 
 	private:
-		Expression* exp;
-		string oper;
-		AssignmentExpression* ae;
+		Expression* expression;
+		optional<string> oper;
+		AssignmentExpression* assignmentExpression;
 	};
 }

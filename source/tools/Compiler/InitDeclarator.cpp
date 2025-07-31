@@ -2,28 +2,26 @@
 
 using namespace WadeSpace;
 
-InitDeclarator::InitDeclarator(Declarator* dec) : dec(dec), init(nullptr)
+InitDeclarator::InitDeclarator(Declarator* declarator) : declarator(declarator), initializer(nullptr)
 {
 }
 
-InitDeclarator::InitDeclarator(Declarator* dec, Initializer* init) : dec(dec), init(init)
+InitDeclarator::InitDeclarator(Declarator* declarator, Initializer* initializer) : declarator(declarator), initializer(initializer)
 {
 }
 
-InitDeclarator::InitDeclarator() : dec(nullptr), init(nullptr)
+InitDeclarator::InitDeclarator() : declarator(nullptr), initializer(nullptr)
 {
 }
 
 InitDeclarator::~InitDeclarator()
 {
-	delete dec;
-	delete init;
+	delete declarator;
+	delete initializer;
 }
 
-bool InitDeclarator::hasDeclarator() const { return dec != NULL; }
-bool InitDeclarator::hasInitializer() const { return init != NULL; }
-Declarator* InitDeclarator::getDeclarator() const { return dec; }
-Initializer* InitDeclarator::getInitializer() const { return init; }
+Declarator* InitDeclarator::getDeclarator() const { return declarator; }
+Initializer* InitDeclarator::getInitializer() const { return initializer; }
 
 string InitDeclarator::getVariableName()
 {

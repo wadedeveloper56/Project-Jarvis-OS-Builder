@@ -2,43 +2,43 @@
 
 using namespace WadeSpace;
 
-DeclarationSpecifiers::DeclarationSpecifiers(TypeQualifier* tq, DeclarationSpecifiers* ds) : scs(nullptr), ts(nullptr), ds(ds), tq(tq)
+DeclarationSpecifiers::DeclarationSpecifiers(TypeQualifier* typeQualifier, DeclarationSpecifiers* declarationSpecifiers) : storageClassSpecifier(nullptr), typeSpecifier(nullptr), declarationSpecifiers(declarationSpecifiers), typeQualifier(typeQualifier)
 {
 }
 
-DeclarationSpecifiers::DeclarationSpecifiers(TypeQualifier* tq) : scs(nullptr), ts(nullptr), ds(nullptr), tq(tq)
+DeclarationSpecifiers::DeclarationSpecifiers(TypeQualifier* typeQualifier) : storageClassSpecifier(nullptr), typeSpecifier(nullptr), declarationSpecifiers(nullptr), typeQualifier(typeQualifier)
 {
 }
 
-DeclarationSpecifiers::DeclarationSpecifiers(TypeSpecifier* ts, DeclarationSpecifiers* ds) : scs(nullptr), ts(ts), ds(ds), tq(nullptr)
+DeclarationSpecifiers::DeclarationSpecifiers(TypeSpecifier* typeSpecifier, DeclarationSpecifiers* declarationSpecifiers) : storageClassSpecifier(nullptr), typeSpecifier(typeSpecifier), declarationSpecifiers(declarationSpecifiers), typeQualifier(nullptr)
 {
 }
 
-DeclarationSpecifiers::DeclarationSpecifiers(TypeSpecifier* ts) : scs(nullptr), ts(ts), ds(nullptr), tq(nullptr)
+DeclarationSpecifiers::DeclarationSpecifiers(TypeSpecifier* typeSpecifier) : storageClassSpecifier(nullptr), typeSpecifier(typeSpecifier), declarationSpecifiers(nullptr), typeQualifier(nullptr)
 {
 }
 
-DeclarationSpecifiers::DeclarationSpecifiers(StorageClassSpecifier* scs, DeclarationSpecifiers* ds) : scs(scs), ts(nullptr), ds(ds), tq(nullptr)
+DeclarationSpecifiers::DeclarationSpecifiers(StorageClassSpecifier* storageClassSpecifier, DeclarationSpecifiers* declarationSpecifiers) : storageClassSpecifier(storageClassSpecifier), typeSpecifier(nullptr), declarationSpecifiers(declarationSpecifiers), typeQualifier(nullptr)
 {
 }
 
-DeclarationSpecifiers::DeclarationSpecifiers(StorageClassSpecifier* scs) : scs(scs), ts(nullptr), ds(nullptr), tq(nullptr)
+DeclarationSpecifiers::DeclarationSpecifiers(StorageClassSpecifier* storageClassSpecifier) : storageClassSpecifier(storageClassSpecifier), typeSpecifier(nullptr), declarationSpecifiers(nullptr), typeQualifier(nullptr)
 {
 }
 
-DeclarationSpecifiers::DeclarationSpecifiers() : scs(nullptr), ts(nullptr), ds(nullptr), tq(nullptr)
+DeclarationSpecifiers::DeclarationSpecifiers() : storageClassSpecifier(nullptr), typeSpecifier(nullptr), declarationSpecifiers(nullptr), typeQualifier(nullptr)
 {
 }
 
 DeclarationSpecifiers::~DeclarationSpecifiers()
 {
-	delete scs;
-	delete ts;
-	delete tq;
-	delete ds;
+	delete storageClassSpecifier;
+	delete typeSpecifier;
+	delete typeQualifier;
+	delete declarationSpecifiers;
 }
 
-StorageClassSpecifier* DeclarationSpecifiers::getStorageClassSpecifier() const { return scs; }
-TypeSpecifier* DeclarationSpecifiers::getTypeSpecifier() const { return ts; }
-TypeQualifier* DeclarationSpecifiers::getTypeQualifier() const { return tq; }
-DeclarationSpecifiers* DeclarationSpecifiers::getDeclarationSpecifiers() const { return ds; }
+StorageClassSpecifier* DeclarationSpecifiers::getStorageClassSpecifier() const { return storageClassSpecifier; }
+TypeSpecifier* DeclarationSpecifiers::getTypeSpecifier() const { return typeSpecifier; }
+TypeQualifier* DeclarationSpecifiers::getTypeQualifier() const { return typeQualifier; }
+DeclarationSpecifiers* DeclarationSpecifiers::getDeclarationSpecifiers() const { return declarationSpecifiers; }

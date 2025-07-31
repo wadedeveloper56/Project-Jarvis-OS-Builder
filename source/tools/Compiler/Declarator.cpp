@@ -25,7 +25,5 @@ Declarator::~Declarator()
     delete pointer;
 }
 
-bool Declarator::hasDirectDeclarator() const { return directDeclarator != NULL; }
-bool Declarator::hasPointer() const { return pointer != NULL; }
 DirectDeclarator* Declarator::getDirectDeclarator() const { return directDeclarator; }
 Pointer* Declarator::getPointer() const { return pointer; }

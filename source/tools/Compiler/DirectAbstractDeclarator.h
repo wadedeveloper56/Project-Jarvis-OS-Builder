@@ -15,21 +15,21 @@ namespace WadeSpace
 	class DirectAbstractDeclarator
 	{
 	public:
-		DirectAbstractDeclarator(DirectAbstractDeclarator* dad, ParameterTypeList* ce, TokenType type);
-		DirectAbstractDeclarator(ParameterTypeList* ce, TokenType type);
-		DirectAbstractDeclarator(DirectAbstractDeclarator* dad, ConstantExpression* ce, TokenType type);
-		DirectAbstractDeclarator(DirectAbstractDeclarator* dad, TokenType type);
-		DirectAbstractDeclarator(AbstractDeclarator* ad);
-		DirectAbstractDeclarator(ConstantExpression* ce);
+		DirectAbstractDeclarator(DirectAbstractDeclarator* directAbstractDeclarator, ParameterTypeList* parameterTypeList, TokenType type);
+		DirectAbstractDeclarator(ParameterTypeList* parameterTypeList, TokenType type);
+		DirectAbstractDeclarator(DirectAbstractDeclarator* directAbstractDeclarator, ConstantExpression* constantExpression, TokenType type);
+		DirectAbstractDeclarator(DirectAbstractDeclarator* directAbstractDeclarator, TokenType type);
+		DirectAbstractDeclarator(AbstractDeclarator* abstractDeclarator);
+		DirectAbstractDeclarator(ConstantExpression* constantExpression);
 		DirectAbstractDeclarator(TokenType type);
 		DirectAbstractDeclarator();
 		virtual ~DirectAbstractDeclarator();
 
 	private:
-		ParameterTypeList* ptl;
-		DirectAbstractDeclarator* dad;
-		AbstractDeclarator* ad;
-		ConstantExpression* ce;
+		ParameterTypeList* parameterTypeList;
+		DirectAbstractDeclarator* directAbstractDeclarator;
+		AbstractDeclarator* abstractDeclarator;
+		ConstantExpression* constantExpression;
 		TokenType type;
 	};
 }

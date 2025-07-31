@@ -7,7 +7,7 @@
 using namespace WadeSpace;
 using namespace std;
 
-DirectDeclarator::DirectDeclarator(string& id) : id(id), str1(""), str2(""), directDeclarator(nullptr),
+DirectDeclarator::DirectDeclarator(string id) : id(id), str1(""), str2(""), directDeclarator(nullptr),
                                                  constantExpression(nullptr), parameterTypeList(nullptr),
                                                  vectorOfStrings(nullptr), declarator(nullptr)
 {

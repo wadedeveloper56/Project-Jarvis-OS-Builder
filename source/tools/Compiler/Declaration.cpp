@@ -25,7 +25,5 @@ Declaration::~Declaration()
 	delete vectorInitDeclarator;
 }
 
-bool Declaration::hasDeclarationSpecifiers() const { return declarationSpecifiers; }
-bool Declaration::hasVectorInitDeclarator() const { return vectorInitDeclarator; }
 DeclarationSpecifiers* Declaration::getDeclarationSpecifiers() const { return declarationSpecifiers; }
 vector<InitDeclarator*>* Declaration::getVectorInitDeclarator() const { return vectorInitDeclarator; }

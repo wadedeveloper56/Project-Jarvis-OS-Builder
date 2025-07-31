@@ -19,6 +19,13 @@ namespace WadeSpace
 		int size;
 	} VariableData;
 
+	typedef struct
+	{
+		string name;
+		TokenType type;
+		int size;
+	} FunctionData;
+
 	class ProgramData
 	{
 	public:
@@ -32,5 +39,6 @@ namespace WadeSpace
 	private:
 		vector<ExternalDeclaration*> *programData;
 		vector<VariableData*> *variableTable;
+		vector<FunctionData*>* functionTable;
 	};
 }

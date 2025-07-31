@@ -6,7 +6,6 @@
 #include <optional>
 #include "TokenType.h"
 #include "LogicalOrExpression.h"
-#include "ConditionalExpression.h"
 
 using namespace std;
 
@@ -17,14 +16,14 @@ namespace WadeSpace
 	class ConditionalExpression
 	{
 	public:
-		ConditionalExpression(LogicalOrExpression* ce);
-		ConditionalExpression(LogicalOrExpression* loe, Expression* exp, ConditionalExpression* ce);
+		ConditionalExpression(LogicalOrExpression* logicalOrExpression);
+		ConditionalExpression(LogicalOrExpression* logicalOrExpression, Expression* expression, ConditionalExpression* conditionalExpression);
 		ConditionalExpression();
 		virtual ~ConditionalExpression();
 
 	private:
-		LogicalOrExpression* loe;
-		Expression* exp;
-		ConditionalExpression* ce;
+		LogicalOrExpression* logicalOrExpression;
+		Expression* expression;
+		ConditionalExpression* conditionalExpression;
 	};
 }

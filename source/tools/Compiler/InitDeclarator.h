@@ -12,18 +12,16 @@ namespace WadeSpace
 	class InitDeclarator
 	{
 	public:
-		InitDeclarator(Declarator* dec);
-		InitDeclarator(Declarator* dec, Initializer* init);
+		InitDeclarator(Declarator* declarator);
+		InitDeclarator(Declarator* declarator, Initializer* initializer);
 		InitDeclarator();
 		virtual ~InitDeclarator();
-		bool hasDeclarator() const;
-		bool hasInitializer() const;
 		Declarator* getDeclarator() const;
 		Initializer* getInitializer() const;
 		string getVariableName();
 
 	private:
-		Declarator* dec;
-		Initializer* init;
+		Declarator* declarator;
+		Initializer* initializer;
 	};
 }

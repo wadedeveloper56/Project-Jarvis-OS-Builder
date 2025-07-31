@@ -13,12 +13,12 @@ namespace WadeSpace
 	class DeclarationSpecifiers
 	{
 	public:
-		DeclarationSpecifiers(TypeQualifier* tq, DeclarationSpecifiers* ds);
-		DeclarationSpecifiers(TypeQualifier* tq);
-		DeclarationSpecifiers(TypeSpecifier* ts, DeclarationSpecifiers* ds);
-		DeclarationSpecifiers(TypeSpecifier* ts);
-		DeclarationSpecifiers(StorageClassSpecifier* scs);
-		DeclarationSpecifiers(StorageClassSpecifier* scs, DeclarationSpecifiers* ds);
+		DeclarationSpecifiers(TypeQualifier* typeQualifier, DeclarationSpecifiers* declarationSpecifiers);
+		DeclarationSpecifiers(TypeQualifier* typeQualifier);
+		DeclarationSpecifiers(TypeSpecifier* typeSpecifier, DeclarationSpecifiers* declarationSpecifiers);
+		DeclarationSpecifiers(TypeSpecifier* typeSpecifier);
+		DeclarationSpecifiers(StorageClassSpecifier* storageClassSpecifier);
+		DeclarationSpecifiers(StorageClassSpecifier* storageClassSpecifier, DeclarationSpecifiers* declarationSpecifiers);
 		DeclarationSpecifiers();
 		virtual ~DeclarationSpecifiers();
 		StorageClassSpecifier* getStorageClassSpecifier() const;
@@ -27,9 +27,9 @@ namespace WadeSpace
 		DeclarationSpecifiers* getDeclarationSpecifiers() const;
 
 	private:
-		StorageClassSpecifier* scs;
-		TypeSpecifier* ts;
-		TypeQualifier* tq;
-		DeclarationSpecifiers* ds;
+		StorageClassSpecifier* storageClassSpecifier;
+		TypeSpecifier* typeSpecifier;
+		TypeQualifier* typeQualifier;
+		DeclarationSpecifiers* declarationSpecifiers;
 	};
 }

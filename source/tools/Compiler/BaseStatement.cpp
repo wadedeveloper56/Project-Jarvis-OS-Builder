@@ -85,7 +85,7 @@ declarationList(nullptr)
 {
 }
 
-BaseStatement::BaseStatement(TokenType op, string& identifier) : op(op), identifier(""), contExp(nullptr), exp(nullptr),
+BaseStatement::BaseStatement(TokenType op, string& identifier) : op(op), identifier(identifier), contExp(nullptr), exp(nullptr),
 statement(nullptr), es1(nullptr), es2(nullptr),
 statement2(nullptr), statementList(nullptr),
 declarationList(nullptr)

@@ -3,11 +3,11 @@
 using namespace WadeSpace;
 using namespace std;
 
-AdditiveExpression::AdditiveExpression(MultiplicativeExpression* me) : additiveExpression(nullptr), oper(""), multiplicativeExpression(me)
+AdditiveExpression::AdditiveExpression(MultiplicativeExpression* multiplicativeExpression) : additiveExpression(nullptr), oper(""), multiplicativeExpression(multiplicativeExpression)
 {
 }
 
-AdditiveExpression::AdditiveExpression(AdditiveExpression* ae, const string& op, MultiplicativeExpression* me) : additiveExpression(ae), oper(op), multiplicativeExpression(me)
+AdditiveExpression::AdditiveExpression(AdditiveExpression* additiveExpression, const string& op, MultiplicativeExpression* multiplicativeExpression) : additiveExpression(additiveExpression), oper(op), multiplicativeExpression(multiplicativeExpression)
 {
 }
 

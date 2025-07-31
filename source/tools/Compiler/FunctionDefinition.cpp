@@ -35,10 +35,6 @@ FunctionDefinition::~FunctionDefinition()
     delete baseStatement;
 }
 
-bool FunctionDefinition::hasDeclarationSpecifiers() const { return declarationSpecifiers != NULL; }
-bool FunctionDefinition::hasDeclarator() const { return declarator != NULL; }
-bool FunctionDefinition::hasVectorDeclaration() const { return vectorDeclaration != NULL; }
-bool FunctionDefinition::hasBaseStatement() const { return baseStatement != NULL; }
 DeclarationSpecifiers* FunctionDefinition::getDeclarationSpecifiers() const { return declarationSpecifiers; }
 Declarator* FunctionDefinition::getDeclarator() const { return declarator; }
 vector<Declaration*>* FunctionDefinition::getVectorDeclaration() const { return vectorDeclaration; }

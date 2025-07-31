@@ -4,21 +4,21 @@
 using namespace WadeSpace;
 using namespace std;
 
-ConditionalExpression::ConditionalExpression(LogicalOrExpression* loe) : loe(loe), exp(nullptr), ce(nullptr)
+ConditionalExpression::ConditionalExpression(LogicalOrExpression* logicalOrExpression) : logicalOrExpression(logicalOrExpression), expression(nullptr), conditionalExpression(nullptr)
 {
 }
 
-ConditionalExpression::ConditionalExpression(LogicalOrExpression* loe, Expression* exp, ConditionalExpression* ce) : loe(loe), exp(exp), ce(ce)
+ConditionalExpression::ConditionalExpression(LogicalOrExpression* logicalOrExpression, Expression* expression, ConditionalExpression* conditionalExpression) : logicalOrExpression(logicalOrExpression), expression(expression), conditionalExpression(conditionalExpression)
 {
 }
 
-ConditionalExpression::ConditionalExpression() : loe(nullptr), exp(nullptr), ce(nullptr)
+ConditionalExpression::ConditionalExpression() : logicalOrExpression(nullptr), expression(nullptr), conditionalExpression(nullptr)
 {
 }
 
 ConditionalExpression::~ConditionalExpression()
 {
-	delete loe;
-	delete exp;
-	delete ce;
+	delete logicalOrExpression;
+	delete expression;
+	delete conditionalExpression;
 }

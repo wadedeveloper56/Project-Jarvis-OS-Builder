@@ -1,8 +1,9 @@
 #include "Constant.h"
 
 using namespace WadeSpace;
+using namespace std;
 
-Constant::Constant(std::uint64_t value) : iConst(value), fConst(0.0), strConst(""), type(INTEGER_CONSTANT)
+Constant::Constant(uint64_t value) : iConst(value), fConst(0.0), strConst(""), type(INTEGER_CONSTANT)
 {
 }
 
