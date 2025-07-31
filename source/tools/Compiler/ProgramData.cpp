@@ -12,17 +12,31 @@ ProgramData::ProgramData()
 	programData = new vector<ExternalDeclaration*>();
 	variableTable = new vector<VariableData*>();
 	functionTable = new vector<FunctionData*>();
+	functionPrototypeTable = new vector<FunctionData*>();
 }
 
 ProgramData::~ProgramData()
 {
-	/*
+	for (FunctionData* ptr : *functionPrototypeTable)
+	{
+		for (VariableData* data : *ptr->parameters)
+		{
+			delete data;
+		}
+		delete ptr->parameters;
+		delete ptr;
+	}
+	delete functionPrototypeTable;
 	for (FunctionData* ptr : *functionTable)
 	{
+		for (VariableData* data : *ptr->parameters)
+		{
+			delete data;
+		}
+		delete ptr->parameters;
 		delete ptr;
 	}
 	delete functionTable;
-	*/
 	for (VariableData* ptr : *variableTable)
 	{
 		delete ptr;
@@ -62,10 +76,25 @@ void ProgramData::generateCode(ofstream& out)
 	out << "\t" << "SECTION .text" << endl;
 	for (FunctionData* ptr : *functionTable)
 	{
-		out << "\t global " << ptr->name << endl;
-		out << ptr->name << ":" << endl;
+		out << "\t global _" << ptr->name << endl;
+		out << "_" << ptr->name << ":" << endl;
 		out << "\tret" << endl << endl;
 	}
+}
+
+int ProgramData::getSize(TokenType type)
+{
+	if (type == CHAR || type == BOOL) return 1;
+	if (type == SHORT) return 2;
+	if (type == INT) return 4;
+	if (type == LONG) return 4;
+	if (type == LONG_LONG) return 8;
+	if (type == FLOAT) return 4;
+	if (type == DOUBLE) return 8;
+	if (type == LONG_DOUBLE) return 10;
+	if (type == IMAGINARY) return 8;
+	if (type == COMPLEX) return 16;
+	return 0;
 }
 
 void ProgramData::processGlobalVariables()
@@ -79,19 +108,22 @@ void ProgramData::processGlobalVariables()
 			for (InitDeclarator* initDecl : *declaration->getVectorInitDeclarator())
 			{
 				VariableData* data = new VariableData();
-				data->name = initDecl->getVariableName();
-				data->type = type;
-				if (type == CHAR || type==BOOL) data->size = 1;
-				if (type == SHORT) data->size = 2;
-				if (type == INT) data->size = 4;
-				if (type == LONG) data->size = 4;
-				if (type == LONG_LONG) data->size = 8;
-				if (type == FLOAT) data->size = 4;
-				if (type == DOUBLE) data->size = 8;
-				if (type == LONG_DOUBLE) data->size = 10;
-				if (type == IMAGINARY) data->size = 8;
-				if (type == COMPLEX) data->size = 16;
-				variableTable->push_back(data);
+				DirectDeclarator* dd = initDecl->getDeclarator()->getDirectDeclarator();
+				if ((dd->getStr1() == "(" && dd->getStr2() == ")") || (dd->getParameterTypeList() != nullptr))
+				{
+					string name = dd->getDirectDeclarator()->getId();
+					FunctionData* data = new FunctionData();
+					data->type = type;
+					data->name = dd->getDirectDeclarator()->getId();
+					data->size = getSize(type);
+					functionPrototypeTable->push_back(data);
+				}
+				else {
+					data->name = initDecl->getVariableName();
+					data->type = type;
+					data->size = getSize(type);
+					variableTable->push_back(data);
+				}
 			}
 		}
 		else if (ptr->isFunction())
@@ -100,8 +132,8 @@ void ProgramData::processGlobalVariables()
 			FunctionData* data = new FunctionData();
 			data->type = declaration->getDeclarationSpecifiers()->getTypeSpecifier()->getType();
 			data->name = declaration->getDeclarator()->getDirectDeclarator()->getDirectDeclarator()->getId();
-			ParameterTypeList *parameters = declaration->getDeclarator()->getDirectDeclarator()->getParameterTypeList();
-			if (parameters!=NULL && !parameters->getVectorParameterDeclaration()->empty())
+			ParameterTypeList* parameters = declaration->getDeclarator()->getDirectDeclarator()->getParameterTypeList();
+			if (parameters != nullptr && !parameters->getVectorParameterDeclaration()->empty())
 			{
 				data->parameters = new vector<VariableData*>();
 				for (ParameterDeclaration* parameterDeclaration : *parameters->getVectorParameterDeclaration())
@@ -110,16 +142,7 @@ void ProgramData::processGlobalVariables()
 					functionData->name = parameterDeclaration->getDeclarator()->getDirectDeclarator()->getId();
 					TokenType type = parameterDeclaration->getDeclarationSpecifiers()->getTypeSpecifier()->getType();
 					functionData->type = type;
-					if (type == CHAR || type == BOOL) functionData->size = 1;
-					if (type == SHORT) functionData->size = 2;
-					if (type == INT) functionData->size = 4;
-					if (type == LONG) functionData->size = 4;
-					if (type == LONG_LONG) functionData->size = 8;
-					if (type == FLOAT) functionData->size = 4;
-					if (type == DOUBLE) functionData->size = 8;
-					if (type == LONG_DOUBLE) functionData->size = 10;
-					if (type == IMAGINARY) functionData->size = 8;
-					if (type == COMPLEX) functionData->size = 16;
+					functionData->size = getSize(type);
 					data->parameters->push_back(functionData);
 				}
 			}

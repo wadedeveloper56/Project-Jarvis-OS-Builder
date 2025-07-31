@@ -35,11 +35,13 @@ namespace WadeSpace
 		void add(ExternalDeclaration* data);
 		void processGlobalVariables();
 		void generateCode(ofstream& out);
+		int getSize(TokenType type);
 		void test();
 
 	private:
 		vector<ExternalDeclaration*> *programData;
 		vector<VariableData*> *variableTable;
 		vector<FunctionData*>* functionTable;
+		vector<FunctionData*>* functionPrototypeTable;
 	};
 }
