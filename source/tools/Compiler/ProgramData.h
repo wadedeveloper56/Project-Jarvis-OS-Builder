@@ -24,6 +24,7 @@ namespace WadeSpace
 		string name;
 		TokenType type;
 		int size;
+		vector<VariableData*>* parameters;
 	} FunctionData;
 
 	class ProgramData

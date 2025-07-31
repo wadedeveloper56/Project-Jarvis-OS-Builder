@@ -2,15 +2,25 @@
 
 using namespace WadeSpace;
 
-ParameterTypeList::ParameterTypeList(vector<ParameterDeclaration*>* pdl, const string& ellipsis) : pdl(pdl), ellipsis(ellipsis)
+ParameterTypeList::ParameterTypeList(vector<ParameterDeclaration*>* vectorParameterDeclaration, const string& ellipsis) : vectorParameterDeclaration(vectorParameterDeclaration), ellipsis(ellipsis)
 {
 }
 
-ParameterTypeList::ParameterTypeList() : pdl(nullptr), ellipsis("")
+ParameterTypeList::ParameterTypeList() : vectorParameterDeclaration(nullptr), ellipsis(nullopt)
 {
 }
 
 ParameterTypeList::~ParameterTypeList()
 {
-	delete pdl;
+	delete vectorParameterDeclaration;
+}
+
+vector<ParameterDeclaration*>* ParameterTypeList::getVectorParameterDeclaration() const
+{
+	return vectorParameterDeclaration;
+}
+
+optional<string> ParameterTypeList::getEllipsis() const
+{
+	return ellipsis;
 }

@@ -2,25 +2,40 @@
 
 using namespace WadeSpace;
 
-ParameterDeclaration::ParameterDeclaration(DeclarationSpecifiers* pdl) : pdl(pdl), ad(nullptr), dec(nullptr)
+ParameterDeclaration::ParameterDeclaration(DeclarationSpecifiers* declarationSpecifiers) : declarationSpecifiers(declarationSpecifiers), abstractDeclarator(nullptr), declarator(nullptr)
 {
 }
 
-ParameterDeclaration::ParameterDeclaration(DeclarationSpecifiers* pdl, AbstractDeclarator* ad) : pdl(pdl), ad(ad), dec(nullptr)
+ParameterDeclaration::ParameterDeclaration(DeclarationSpecifiers* declarationSpecifiers, AbstractDeclarator* abstractDeclarator) : declarationSpecifiers(declarationSpecifiers), abstractDeclarator(abstractDeclarator), declarator(nullptr)
 {
 }
 
-ParameterDeclaration::ParameterDeclaration(DeclarationSpecifiers* pdl, Declarator* dec) : pdl(pdl), ad(nullptr), dec(dec)
+ParameterDeclaration::ParameterDeclaration(DeclarationSpecifiers* declarationSpecifiers, Declarator* declarator) : declarationSpecifiers(declarationSpecifiers), abstractDeclarator(nullptr), declarator(declarator)
 {
 }
 
-ParameterDeclaration::ParameterDeclaration(): pdl(nullptr), ad(nullptr), dec(nullptr)
+ParameterDeclaration::ParameterDeclaration(): declarationSpecifiers(nullptr), abstractDeclarator(nullptr), declarator(nullptr)
 {
 }
 
 ParameterDeclaration::~ParameterDeclaration()
 {
-	delete pdl;
-	delete ad;
-	delete dec;
+	delete declarationSpecifiers;
+	delete abstractDeclarator;
+	delete declarator;
+}
+
+DeclarationSpecifiers* ParameterDeclaration::getDeclarationSpecifiers() const
+{
+	return declarationSpecifiers;
+}
+
+Declarator* ParameterDeclaration::getDeclarator() const
+{
+	return declarator;
+}
+
+AbstractDeclarator* ParameterDeclaration::getAbstractDeclarator() const
+{
+	return abstractDeclarator;
 }

@@ -13,12 +13,14 @@ namespace WadeSpace
 	class ParameterTypeList
 	{
 	public:
-		ParameterTypeList(vector<ParameterDeclaration*>* pdl, const string& ellipsis);
+		ParameterTypeList(vector<ParameterDeclaration*>* vectorParameterDeclaration, const string& ellipsis);
 		ParameterTypeList();
 		virtual ~ParameterTypeList();
+		vector<ParameterDeclaration*>* getVectorParameterDeclaration() const;
+		optional<string> getEllipsis() const;
 
 	private:
-		vector<ParameterDeclaration*>* pdl;
-		string ellipsis;
+		vector<ParameterDeclaration*>* vectorParameterDeclaration;
+		optional<string> ellipsis;
 	};
 }

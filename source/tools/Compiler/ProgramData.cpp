@@ -2,6 +2,7 @@
 #include "ProgramData.h"
 #include "ExternalDeclaration.h"
 #include "GlobalVars.h"
+#include "ParameterTypeList.h"
 
 using namespace WadeSpace;
 using namespace std;
@@ -15,11 +16,13 @@ ProgramData::ProgramData()
 
 ProgramData::~ProgramData()
 {
+	/*
 	for (FunctionData* ptr : *functionTable)
 	{
 		delete ptr;
 	}
 	delete functionTable;
+	*/
 	for (VariableData* ptr : *variableTable)
 	{
 		delete ptr;
@@ -97,6 +100,29 @@ void ProgramData::processGlobalVariables()
 			FunctionData* data = new FunctionData();
 			data->type = declaration->getDeclarationSpecifiers()->getTypeSpecifier()->getType();
 			data->name = declaration->getDeclarator()->getDirectDeclarator()->getDirectDeclarator()->getId();
+			ParameterTypeList *parameters = declaration->getDeclarator()->getDirectDeclarator()->getParameterTypeList();
+			if (parameters!=NULL && !parameters->getVectorParameterDeclaration()->empty())
+			{
+				data->parameters = new vector<VariableData*>();
+				for (ParameterDeclaration* parameterDeclaration : *parameters->getVectorParameterDeclaration())
+				{
+					VariableData* functionData = new VariableData();
+					functionData->name = parameterDeclaration->getDeclarator()->getDirectDeclarator()->getId();
+					TokenType type = parameterDeclaration->getDeclarationSpecifiers()->getTypeSpecifier()->getType();
+					functionData->type = type;
+					if (type == CHAR || type == BOOL) functionData->size = 1;
+					if (type == SHORT) functionData->size = 2;
+					if (type == INT) functionData->size = 4;
+					if (type == LONG) functionData->size = 4;
+					if (type == LONG_LONG) functionData->size = 8;
+					if (type == FLOAT) functionData->size = 4;
+					if (type == DOUBLE) functionData->size = 8;
+					if (type == LONG_DOUBLE) functionData->size = 10;
+					if (type == IMAGINARY) functionData->size = 8;
+					if (type == COMPLEX) functionData->size = 16;
+					data->parameters->push_back(functionData);
+				}
+			}
 			functionTable->push_back(data);
 		}
 	}
