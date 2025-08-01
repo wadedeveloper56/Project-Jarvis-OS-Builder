@@ -15,8 +15,8 @@ namespace WadeSpace
 	{
 	public:
 		EnumSpecifier(vector<Enumerator*>* vectorEnumerator);
-		EnumSpecifier(string&  nameStr, vector<Enumerator*>* vectorEnumerator);
-		EnumSpecifier(string&  nameStr);
+		EnumSpecifier(string& nameStr, vector<Enumerator*>* vectorEnumerator);
+		EnumSpecifier(string& nameStr);
 		EnumSpecifier();
 		virtual ~EnumSpecifier();
 		bool hasNameStr() const;
@@ -24,7 +24,7 @@ namespace WadeSpace
 		vector<Enumerator*>* getVectorEnumerator() const;
 
 	private:
-		string  nameStr;
+		optional<string>  nameStr;
 		vector<Enumerator*>* vectorEnumerator;
 	};
 }

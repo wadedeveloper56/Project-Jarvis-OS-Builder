@@ -12,13 +12,15 @@ namespace WadeSpace
 	class TypeName
 	{
 	public:
-		TypeName(SpecifierQualifierList* sql);
-		TypeName(SpecifierQualifierList* sql, AbstractDeclarator* ad);
+		TypeName(SpecifierQualifierList* specifierQualifierList);
+		TypeName(SpecifierQualifierList* specifierQualifierList, AbstractDeclarator* abstractDeclarator);
 		TypeName();
 		virtual ~TypeName();
+		SpecifierQualifierList* getSpecifierQualifierList() const;
+		AbstractDeclarator* getAbstractDeclarator() const;
 
 	private:
-		SpecifierQualifierList* sql;
-		AbstractDeclarator* ad;
+		SpecifierQualifierList* specifierQualifierList;
+		AbstractDeclarator* abstractDeclarator;
 	};
 }

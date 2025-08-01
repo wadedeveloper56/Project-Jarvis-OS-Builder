@@ -111,10 +111,10 @@ void ProgramData::processGlobalVariables()
 				DirectDeclarator* dd = initDecl->getDeclarator()->getDirectDeclarator();
 				if ((dd->getStr1() == "(" && dd->getStr2() == ")") || (dd->getParameterTypeList() != nullptr))
 				{
-					string name = dd->getDirectDeclarator()->getId();
+					optional<string> name = dd->getDirectDeclarator()->getIdentifier();
 					FunctionData* data = new FunctionData();
 					data->type = type;
-					data->name = dd->getDirectDeclarator()->getId();
+					data->name = name.value();
 					data->size = getSize(type);
 					functionPrototypeTable->push_back(data);
 				}
@@ -131,7 +131,7 @@ void ProgramData::processGlobalVariables()
 			FunctionDefinition* declaration = ptr->getFunction();
 			FunctionData* data = new FunctionData();
 			data->type = declaration->getDeclarationSpecifiers()->getTypeSpecifier()->getType();
-			data->name = declaration->getDeclarator()->getDirectDeclarator()->getDirectDeclarator()->getId();
+			data->name = declaration->getDeclarator()->getDirectDeclarator()->getDirectDeclarator()->getIdentifier().value();
 			ParameterTypeList* parameters = declaration->getDeclarator()->getDirectDeclarator()->getParameterTypeList();
 			if (parameters != nullptr && !parameters->getVectorParameterDeclaration()->empty())
 			{
@@ -139,7 +139,7 @@ void ProgramData::processGlobalVariables()
 				for (ParameterDeclaration* parameterDeclaration : *parameters->getVectorParameterDeclaration())
 				{
 					VariableData* functionData = new VariableData();
-					functionData->name = parameterDeclaration->getDeclarator()->getDirectDeclarator()->getId();
+					functionData->name = parameterDeclaration->getDeclarator()->getDirectDeclarator()->getIdentifier().value();
 					TokenType type = parameterDeclaration->getDeclarationSpecifiers()->getTypeSpecifier()->getType();
 					functionData->type = type;
 					functionData->size = getSize(type);
@@ -154,8 +154,7 @@ void ProgramData::processGlobalVariables()
 void ProgramData::test()
 {
 	cout << "Number of entries in programData table: " << programData->size() << endl;
-	for (VariableData* ptr : *variableTable)
-	{
-		cout << "  variable = " << ptr->name << " " << ptr->type << endl;
-	}
+	cout << "Number of entries in variable table: " << variableTable->size() << endl;
+	cout << "Number of entries in function table: " << functionTable->size() << endl;
+	cout << "Number of entries in function prototype table: " << functionPrototypeTable->size() << endl;
 }

@@ -19,22 +19,30 @@ namespace WadeSpace
 	class PostfixExpression
 	{
 	public:
-		PostfixExpression(PrimaryExpression* pe);
-		PostfixExpression(PostfixExpression* pfe, const string& str, const string& str2);
-		PostfixExpression(PostfixExpression* pfe, Expression* exp);
-		PostfixExpression(PostfixExpression* pfe, vector<AssignmentExpression*>* aev);
-		PostfixExpression(TypeName* tn, vector<Initializer*>* iv);
+		PostfixExpression(PrimaryExpression* primaryExpression);
+		PostfixExpression(PostfixExpression* postfixExpression, const string& str, const string& str2);
+		PostfixExpression(PostfixExpression* postfixExpression, Expression* expression);
+		PostfixExpression(PostfixExpression* postfixExpression, vector<AssignmentExpression*>* vectorAssignmentExpression);
+		PostfixExpression(TypeName* typeName, vector<Initializer*>* vectorInitializer);
 		PostfixExpression();
 		virtual ~PostfixExpression();
+		PrimaryExpression* getPrimaryExpression() const;
+		PostfixExpression* getPostfixExpression() const;
+		Expression* getExpression() const;
+		vector<AssignmentExpression*>* getVectorAssignmentExpression() const;
+		vector<Initializer*>* getVectorInitializer() const;
+		TypeName* getTypeName() const;
+		optional<string> getStr1() const;
+		optional<string> getStr2() const;
 
 	private:
-		PrimaryExpression* pe;
-		PostfixExpression* pfe;
-		Expression* exp;
-		vector<AssignmentExpression*>* aev;
-		vector<Initializer*>* iv;
-		TypeName* tn;
-		string str1;
-		string str2;
+		PrimaryExpression* primaryExpression;
+		PostfixExpression* postfixExpression;
+		Expression* expression;
+		vector<AssignmentExpression*>* vectorAssignmentExpression;
+		vector<Initializer*>* vectorInitializer;
+		TypeName* typeName;
+		optional<string> str1;
+		optional<string> str2;
 	};
 }

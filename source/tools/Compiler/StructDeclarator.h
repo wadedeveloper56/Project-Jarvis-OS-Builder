@@ -12,14 +12,16 @@ namespace WadeSpace
 	class StructDeclarator
 	{
 	public:
-		StructDeclarator(Declarator* dec);
-		StructDeclarator(ConstantExpression* exp);
-		StructDeclarator(Declarator* dec, ConstantExpression* exp);
+		StructDeclarator(Declarator* declarator);
+		StructDeclarator(ConstantExpression* constantExpression);
+		StructDeclarator(Declarator* declarator, ConstantExpression* constantExpression);
 		StructDeclarator();
 		virtual ~StructDeclarator();
+		Declarator* getDeclarator() const;
+		ConstantExpression* getConstantExpression() const;
 
 	private:
-		Declarator* dec;
-		ConstantExpression* exp;
+		Declarator* declarator;
+		ConstantExpression* constantExpression;
 	};
 }

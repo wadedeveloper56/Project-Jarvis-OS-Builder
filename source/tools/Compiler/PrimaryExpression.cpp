@@ -4,24 +4,39 @@
 using namespace WadeSpace;
 using namespace std;
 
-PrimaryExpression::PrimaryExpression(const string&  identifier) : identifier(identifier), c(nullptr), exp(nullptr)
+PrimaryExpression::PrimaryExpression(const string& identifier) : identifier(identifier), constant(nullptr), expression(nullptr)
 {
 }
 
-PrimaryExpression::PrimaryExpression(Constant* c) : identifier(""), c(c), exp(nullptr)
+PrimaryExpression::PrimaryExpression(Constant* constant) : identifier(nullopt), constant(constant), expression(nullptr)
 {
 }
 
-PrimaryExpression::PrimaryExpression(Expression* exp) : identifier(""), c(nullptr), exp(exp)
+PrimaryExpression::PrimaryExpression(Expression* expression) : identifier(nullopt), constant(nullptr), expression(expression)
 {
 }
 
-PrimaryExpression::PrimaryExpression() : identifier(""), c(nullptr), exp(nullptr)
+PrimaryExpression::PrimaryExpression() : identifier(nullopt), constant(nullptr), expression(nullptr)
 {
 }
 
 PrimaryExpression::~PrimaryExpression()
 {
-	delete c;
-	delete exp;
+	delete constant;
+	delete expression;
+}
+
+optional<string> PrimaryExpression::getIdentifier() const
+{
+	return identifier;
+}
+
+Constant* PrimaryExpression::getConstant() const
+{
+	return constant;
+}
+
+Expression* PrimaryExpression::getExpression() const
+{
+	return expression;
 }

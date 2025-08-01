@@ -14,14 +14,17 @@ namespace WadeSpace
 	class MultiplicativeExpression
 	{
 	public:
-		MultiplicativeExpression(CastExpression* ce);
-		MultiplicativeExpression(MultiplicativeExpression* me, const string& op, CastExpression* ce);
+		MultiplicativeExpression(CastExpression* castExpression);
+		MultiplicativeExpression(MultiplicativeExpression* multiplicativeExpression, const string& op, CastExpression* castExpression);
 		MultiplicativeExpression();
 		virtual ~MultiplicativeExpression();
+		MultiplicativeExpression* getMultiplicativeExpression() const;
+		optional<string> getOp() const;
+		CastExpression* getCastExpression() const;
 
 	private:
-		MultiplicativeExpression* me;
-		string op;
-		CastExpression* ce;
+		MultiplicativeExpression* multiplicativeExpression;
+		optional<string> op;
+		CastExpression* castExpression;
 	};
 }

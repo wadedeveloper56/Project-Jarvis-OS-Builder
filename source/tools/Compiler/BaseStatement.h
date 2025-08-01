@@ -30,9 +30,19 @@ namespace WadeSpace
 		BaseStatement(TokenType op, BaseStatement* statement);
 		BaseStatement();
 		virtual ~BaseStatement();
+		optional<string> getIdentifier() const;
+		Expression* getExp() const;
+		ConstantExpression* getContExp() const;
+		BaseStatement* getStatement() const;
+		BaseStatement* getEs1() const;
+		BaseStatement* getEs2() const;
+		BaseStatement* getStatement2() const;
+		vector<BaseStatement*>* getStatementList() const;
+		vector<Declaration*>* getDeclarationList() const;
+
 	protected:
 		TokenType op;
-		string identifier;
+		optional<string> identifier;
 		Expression* exp;
 		ConstantExpression* contExp;
 		BaseStatement* statement;

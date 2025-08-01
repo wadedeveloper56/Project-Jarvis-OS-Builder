@@ -14,12 +14,14 @@ namespace WadeSpace
 	class StructDeclaration
 	{
 	public:
-		StructDeclaration(SpecifierQualifierList* sql, vector<StructDeclarator*>* list);
+		StructDeclaration(SpecifierQualifierList* specifierQualifierList, vector<StructDeclarator*>* vectorStructDeclarator);
 		StructDeclaration();
 		virtual ~StructDeclaration();
+		SpecifierQualifierList* getSpecifierQualifierList() const;
+		vector<StructDeclarator*>* getVectorStructDeclarator() const;
 
 	private:
-		SpecifierQualifierList* sql;
-		vector<StructDeclarator*>* list;
+		SpecifierQualifierList* specifierQualifierList;
+		vector<StructDeclarator*>* vectorStructDeclarator;
 	};
 }

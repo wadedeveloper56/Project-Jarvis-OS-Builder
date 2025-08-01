@@ -14,15 +14,18 @@ namespace WadeSpace
 	class StructOrUnionSpecifier
 	{
 	public:
-		StructOrUnionSpecifier(StructOrUnion* su, const string& name, vector<StructDeclaration*>* list);
-		StructOrUnionSpecifier(StructOrUnion* su, vector<StructDeclaration*>* list);
-		StructOrUnionSpecifier(StructOrUnion* su, const string& name);
+		StructOrUnionSpecifier(StructOrUnion* structOrUnion, const string& name, vector<StructDeclaration*>* vectorStructDeclaration);
+		StructOrUnionSpecifier(StructOrUnion* structOrUnion, vector<StructDeclaration*>* vectorStructDeclaration);
+		StructOrUnionSpecifier(StructOrUnion* structOrUnion, const string& name);
 		StructOrUnionSpecifier();
 		virtual ~StructOrUnionSpecifier();
+		optional<string> getName() const;
+		StructOrUnion* getStructOrUnion() const;
+		vector<StructDeclaration*>* getVectorStructDeclaration() const;
 
 	private:
-		string name;
-		StructOrUnion* su;
-		vector<StructDeclaration*>* list;
+		optional<string> name;
+		StructOrUnion* structOrUnion;
+		vector<StructDeclaration*>* vectorStructDeclaration;
 	};
 }

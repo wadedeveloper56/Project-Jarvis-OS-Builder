@@ -24,11 +24,11 @@ ExternalDeclaration::~ExternalDeclaration()
 
 string ExternalDeclaration::toString()
 {
-	if (functionDefinition != NULL) return "Function";
+	if (functionDefinition != nullptr) return "Function";
 	else return "Declaration";
 }
 
-bool ExternalDeclaration::isFunction() const { return functionDefinition != NULL; }
-bool ExternalDeclaration::isDeclaration() const { return declaration != NULL; }
+bool ExternalDeclaration::isFunction() const { return functionDefinition != nullptr; }
+bool ExternalDeclaration::isDeclaration() const { return declaration != nullptr; }
 FunctionDefinition* ExternalDeclaration::getFunction() const { return functionDefinition; }
 Declaration* ExternalDeclaration::getDeclaration() const { return declaration; }

@@ -2,24 +2,34 @@
 
 using namespace WadeSpace;
 
-StructDeclarator::StructDeclarator(Declarator* dec) : dec(dec), exp(nullptr)
+StructDeclarator::StructDeclarator(Declarator* declarator) : declarator(declarator), constantExpression(nullptr)
 {
 }
 
-StructDeclarator::StructDeclarator(ConstantExpression* exp) : dec(nullptr), exp(exp)
+StructDeclarator::StructDeclarator(ConstantExpression* constantExpression) : declarator(nullptr), constantExpression(constantExpression)
 {
 }
 
-StructDeclarator::StructDeclarator(Declarator* dec, ConstantExpression* exp) : dec(dec), exp(exp)
+StructDeclarator::StructDeclarator(Declarator* declarator, ConstantExpression* constantExpression) : declarator(declarator), constantExpression(constantExpression)
 {
 }
 
-StructDeclarator::StructDeclarator() : dec(nullptr), exp(nullptr)
+StructDeclarator::StructDeclarator() : declarator(nullptr), constantExpression(nullptr)
 {
 }
 
 StructDeclarator::~StructDeclarator()
 {
-	delete dec;
-	delete exp;
+	delete declarator;
+	delete constantExpression;
+}
+
+Declarator* StructDeclarator::getDeclarator() const
+{
+	return declarator;
+}
+
+ConstantExpression* StructDeclarator::getConstantExpression() const
+{
+	return constantExpression;
 }

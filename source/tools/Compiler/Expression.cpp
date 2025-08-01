@@ -20,3 +20,18 @@ Expression::~Expression()
 	delete assignmentExpression;
 	delete expression;
 }
+
+Expression* Expression::getExpression() const
+{
+	return expression;
+}
+
+optional<string> Expression::getOper() const
+{
+	return oper;
+}
+
+AssignmentExpression* Expression::getAssignmentExpression() const
+{
+	return assignmentExpression;
+}

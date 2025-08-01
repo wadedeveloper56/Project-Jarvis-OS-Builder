@@ -1,12 +1,24 @@
      1                                  BITS 32
      2                                  	SECTION .data
      3                                  	SECTION .bss
-     4                                  	SECTION .text
-     5                                  	 global _main
-     6                                  _main:
-     7 00000000 C3                      	ret
-     8                                  
-     9                                  	 global _function2
-    10                                  _function2:
-    11 00000001 C3                      	ret
-    12                                  
+     4 00000000 ??                      var1:  resb 1
+     5 00000001 ????                    var2:  resw 1
+     6 00000003 ????????                var3:  resd 1
+     7 00000007 ????????                var4:  resd 1
+     8 0000000B ????????????????        var5:  resq 1
+     9 00000013 ????????                var6:  resd 1
+    10 00000017 ????????????????        var7:  resq 1
+    11 0000001F <res Ah>                var8:  rest 1
+    12 00000029 ??                      var9:  resb 1
+    13 0000002A <res 10h>               var10:  resb 16
+    14 0000003A ????????????????        var11:  resq 1
+    15 00000042 ??                      var12:  resb 1
+    16                                  	SECTION .text
+    17                                  	 global _main
+    18                                  _main:
+    19 00000000 C3                      	ret
+    20                                  
+    21                                  	 global _function2
+    22                                  _function2:
+    23 00000001 C3                      	ret
+    24                                  

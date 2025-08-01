@@ -19,13 +19,12 @@ namespace WadeSpace
 		EqualityExpression();
 		virtual ~EqualityExpression();
 		RelationalExpression* getRelationalExpression() const;
-		bool hasOp() const;
-		string getOp() const;
+		optional<string> getOp() const;
 		EqualityExpression* getEqualityExpression() const;
 
 	private:
 		RelationalExpression* relationalExpression;
-		string op;
+		optional<string> op;
 		EqualityExpression* equalityExpression;
 	};
 }

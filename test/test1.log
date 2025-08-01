@@ -1,15 +1,152 @@
-Scanner: single line comment [//char var1;]
-Scanner: single line comment [//short var2;]
-Scanner: single line comment [//int var3;]
-Scanner: single line comment [//long var4;]
-Scanner: single line comment [//long long var5;]
-Scanner: single line comment [//float var6;]
-Scanner: single line comment [//double var7;]
-Scanner: single line comment [//long double var8;]
-Scanner: single line comment [//bool var9;]
-Scanner: single line comment [//complex var10;]
-Scanner: single line comment [//imaginary var11;]
-Scanner: single line comment [//char *var12[];]
+Scanner: token [char]
+CHAR REDUCE to type_specifier
+Scanner: identifier [var1]
+type_specifier REDUCE to declaration_specifiers
+IDENTIFIER REDUCE to direct_declarator
+Scanner: token [;]
+direct_declarator REDUCE to declarator
+declarator REDUCE to init_declarator
+init_declarator REDUCE to init_declarator_list
+declaration_specifiers init_declarator_list SEMICOLON REDUCE to declaration
+declaration REDUCE to external_declaration
+external_declaration REDUCE to translation_unit
+Scanner: token [short]
+SHORT REDUCE to type_specifier
+Scanner: identifier [var2]
+type_specifier REDUCE to declaration_specifiers
+IDENTIFIER REDUCE to direct_declarator
+Scanner: token [;]
+direct_declarator REDUCE to declarator
+declarator REDUCE to init_declarator
+init_declarator REDUCE to init_declarator_list
+declaration_specifiers init_declarator_list SEMICOLON REDUCE to declaration
+declaration REDUCE to external_declaration
+translation_unit external_declaration REDUCE to translation_unit
+Scanner: token [int]
+INT REDUCE to type_specifier
+Scanner: identifier [var3]
+type_specifier REDUCE to declaration_specifiers
+IDENTIFIER REDUCE to direct_declarator
+Scanner: token [;]
+direct_declarator REDUCE to declarator
+declarator REDUCE to init_declarator
+init_declarator REDUCE to init_declarator_list
+declaration_specifiers init_declarator_list SEMICOLON REDUCE to declaration
+declaration REDUCE to external_declaration
+translation_unit external_declaration REDUCE to translation_unit
+Scanner: token [long]
+LONG REDUCE to type_specifier
+Scanner: identifier [var4]
+type_specifier REDUCE to declaration_specifiers
+IDENTIFIER REDUCE to direct_declarator
+Scanner: token [;]
+direct_declarator REDUCE to declarator
+declarator REDUCE to init_declarator
+init_declarator REDUCE to init_declarator_list
+declaration_specifiers init_declarator_list SEMICOLON REDUCE to declaration
+declaration REDUCE to external_declaration
+translation_unit external_declaration REDUCE to translation_unit
+Scanner: token [long long]
+LONG_LONG REDUCE to type_specifier
+Scanner: identifier [var5]
+type_specifier REDUCE to declaration_specifiers
+IDENTIFIER REDUCE to direct_declarator
+Scanner: token [;]
+direct_declarator REDUCE to declarator
+declarator REDUCE to init_declarator
+init_declarator REDUCE to init_declarator_list
+declaration_specifiers init_declarator_list SEMICOLON REDUCE to declaration
+declaration REDUCE to external_declaration
+translation_unit external_declaration REDUCE to translation_unit
+Scanner: token [float]
+FLOAT REDUCE to type_specifier
+Scanner: identifier [var6]
+type_specifier REDUCE to declaration_specifiers
+IDENTIFIER REDUCE to direct_declarator
+Scanner: token [;]
+direct_declarator REDUCE to declarator
+declarator REDUCE to init_declarator
+init_declarator REDUCE to init_declarator_list
+declaration_specifiers init_declarator_list SEMICOLON REDUCE to declaration
+declaration REDUCE to external_declaration
+translation_unit external_declaration REDUCE to translation_unit
+Scanner: token [double]
+DOUBLE REDUCE to type_specifier
+Scanner: identifier [var7]
+type_specifier REDUCE to declaration_specifiers
+IDENTIFIER REDUCE to direct_declarator
+Scanner: token [;]
+direct_declarator REDUCE to declarator
+declarator REDUCE to init_declarator
+init_declarator REDUCE to init_declarator_list
+declaration_specifiers init_declarator_list SEMICOLON REDUCE to declaration
+declaration REDUCE to external_declaration
+translation_unit external_declaration REDUCE to translation_unit
+Scanner: token [long double]
+LONG_DOUBLE REDUCE to type_specifier
+Scanner: identifier [var8]
+type_specifier REDUCE to declaration_specifiers
+IDENTIFIER REDUCE to direct_declarator
+Scanner: token [;]
+direct_declarator REDUCE to declarator
+declarator REDUCE to init_declarator
+init_declarator REDUCE to init_declarator_list
+declaration_specifiers init_declarator_list SEMICOLON REDUCE to declaration
+declaration REDUCE to external_declaration
+translation_unit external_declaration REDUCE to translation_unit
+Scanner: token [bool]
+BOOL REDUCE to type_specifier
+Scanner: identifier [var9]
+type_specifier REDUCE to declaration_specifiers
+IDENTIFIER REDUCE to direct_declarator
+Scanner: token [;]
+direct_declarator REDUCE to declarator
+declarator REDUCE to init_declarator
+init_declarator REDUCE to init_declarator_list
+declaration_specifiers init_declarator_list SEMICOLON REDUCE to declaration
+declaration REDUCE to external_declaration
+translation_unit external_declaration REDUCE to translation_unit
+Scanner: token [complex]
+COMPLEX REDUCE to type_specifier
+Scanner: identifier [var10]
+type_specifier REDUCE to declaration_specifiers
+IDENTIFIER REDUCE to direct_declarator
+Scanner: token [;]
+direct_declarator REDUCE to declarator
+declarator REDUCE to init_declarator
+init_declarator REDUCE to init_declarator_list
+declaration_specifiers init_declarator_list SEMICOLON REDUCE to declaration
+declaration REDUCE to external_declaration
+translation_unit external_declaration REDUCE to translation_unit
+Scanner: token [imaginary]
+IMAGINARY REDUCE to type_specifier
+Scanner: identifier [var11]
+type_specifier REDUCE to declaration_specifiers
+IDENTIFIER REDUCE to direct_declarator
+Scanner: token [;]
+direct_declarator REDUCE to declarator
+declarator REDUCE to init_declarator
+init_declarator REDUCE to init_declarator_list
+declaration_specifiers init_declarator_list SEMICOLON REDUCE to declaration
+declaration REDUCE to external_declaration
+translation_unit external_declaration REDUCE to translation_unit
+Scanner: token [char]
+CHAR REDUCE to type_specifier
+Scanner: token [*]
+type_specifier REDUCE to declaration_specifiers
+Scanner: identifier [var12]
+TIMES_OP REDUCE to POINTER
+IDENTIFIER REDUCE to direct_declarator
+Scanner: token [[]
+Scanner: token []]
+direct_declarator OBRACE CBRACE REDUCE to direct_declarator
+Scanner: token [;]
+pointer direct_declarator REDUCE to declarator
+declarator REDUCE to init_declarator
+init_declarator REDUCE to init_declarator_list
+declaration_specifiers init_declarator_list SEMICOLON REDUCE to declaration
+declaration REDUCE to external_declaration
+translation_unit external_declaration REDUCE to translation_unit
 Scanner: token [void]
 VOID REDUCE to type_specifier
 Scanner: identifier [function2]
@@ -33,7 +170,7 @@ declarator REDUCE to init_declarator
 init_declarator REDUCE to init_declarator_list
 declaration_specifiers init_declarator_list SEMICOLON REDUCE to declaration
 declaration REDUCE to external_declaration
-external_declaration REDUCE to translation_unit
+translation_unit external_declaration REDUCE to translation_unit
 Scanner: token [int]
 INT REDUCE to type_specifier
 Scanner: identifier [main]
@@ -141,5 +278,8 @@ OCURLY CCURLY REDUCE to compound_statement
 declaration_specifiers declarator compound_statement REDUCE to function_definition
 function_definition REDUCE to external_declaration
 translation_unit external_declaration REDUCE to translation_unit
-Number of entries in programData table: 3
+Number of entries in programData table: 15
+Number of entries in variable table: 12
+Number of entries in function table: 2
+Number of entries in function prototype table: 1
 Parse complete. Result = 0

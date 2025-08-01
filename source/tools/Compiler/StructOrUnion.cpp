@@ -13,3 +13,8 @@ StructOrUnion::StructOrUnion(): type(NONE)
 StructOrUnion::~StructOrUnion()
 {
 }
+
+TokenType StructOrUnion::getType() const
+{
+	return type;
+}

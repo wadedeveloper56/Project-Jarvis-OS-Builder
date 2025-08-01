@@ -18,6 +18,8 @@ namespace WadeSpace
 		InclusiveOrExpression(InclusiveOrExpression* inclusiveOrExpression, ExclusiveOrExpression* exclusiveOrExpression);
 		InclusiveOrExpression();
 		virtual ~InclusiveOrExpression();
+		InclusiveOrExpression* getInclusiveOrExpression() const;
+		ExclusiveOrExpression* getExclusiveOrExpression() const;
 
 	private:
 		InclusiveOrExpression* inclusiveOrExpression;

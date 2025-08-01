@@ -2,14 +2,24 @@
 
 using namespace WadeSpace;
 
-StorageClassSpecifier::StorageClassSpecifier(const string&  value, TokenType type) : operatorStr(value), type(type)
+StorageClassSpecifier::StorageClassSpecifier(const string& value, TokenType type) : operatorStr(value), type(type)
 {
 }
 
-StorageClassSpecifier::StorageClassSpecifier() : operatorStr(""), type(NONE)
+StorageClassSpecifier::StorageClassSpecifier() : operatorStr(nullopt), type(NONE)
 {
 }
 
 StorageClassSpecifier::~StorageClassSpecifier()
 {
+}
+
+optional<string> StorageClassSpecifier::getOperatorStr() const
+{
+	return operatorStr;
+}
+
+TokenType StorageClassSpecifier::getType() const
+{
+	return type;
 }

@@ -3,20 +3,20 @@
 using namespace WadeSpace;
 using namespace std;
 
-ShiftExpression::ShiftExpression(AdditiveExpression* ae) : ae(nullptr), op(""), se(nullptr)
+ShiftExpression::ShiftExpression(AdditiveExpression* additiveExpression) : additiveExpression(additiveExpression), op(nullopt), shiftExpression(nullptr)
 {
 }
 
-ShiftExpression::ShiftExpression(ShiftExpression* se, const string& op, AdditiveExpression* ae) : ae(ae), op(op), se(se)
+ShiftExpression::ShiftExpression(ShiftExpression* shiftExpression, const string& op, AdditiveExpression* additiveExpression) : additiveExpression(additiveExpression), op(op), shiftExpression(shiftExpression)
 {
 }
 
-ShiftExpression::ShiftExpression() : ae(nullptr), op(""), se(nullptr)
+ShiftExpression::ShiftExpression() : additiveExpression(nullptr), op(nullopt), shiftExpression(nullptr)
 {
 }
 
 ShiftExpression::~ShiftExpression()
 {
-	delete ae;
-	delete se;
+	delete additiveExpression;
+	delete shiftExpression;
 }

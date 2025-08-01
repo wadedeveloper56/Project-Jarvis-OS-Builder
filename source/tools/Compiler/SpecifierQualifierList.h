@@ -12,16 +12,19 @@ namespace WadeSpace
 	class SpecifierQualifierList
 	{
 	public:
-		SpecifierQualifierList(SpecifierQualifierList* sql, TypeSpecifier* ts);
-		SpecifierQualifierList(TypeSpecifier* ts);
-		SpecifierQualifierList(SpecifierQualifierList* sql, TypeQualifier* ts);
-		SpecifierQualifierList(TypeQualifier* ts);
+		SpecifierQualifierList(SpecifierQualifierList* specifierQualifierList, TypeSpecifier* typeSpecifier);
+		SpecifierQualifierList(TypeSpecifier* typeSpecifier);
+		SpecifierQualifierList(SpecifierQualifierList* specifierQualifierList, TypeQualifier* typeQualifier);
+		SpecifierQualifierList(TypeQualifier* typeQualifier);
 		SpecifierQualifierList();
 		virtual ~SpecifierQualifierList();
+		SpecifierQualifierList* getSpecifierQualifierList() const;
+		TypeSpecifier* getTypeSpecifier() const;
+		TypeQualifier* getTypeQualifier() const;
 
 	private:
-		SpecifierQualifierList* sql;
-		TypeSpecifier* ts;
-		TypeQualifier* tq;
+		SpecifierQualifierList* specifierQualifierList;
+		TypeSpecifier* typeSpecifier;
+		TypeQualifier* typeQualifier;
 	};
 }

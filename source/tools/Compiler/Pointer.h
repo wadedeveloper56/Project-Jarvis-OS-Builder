@@ -13,18 +13,18 @@ namespace WadeSpace
 	class Pointer
 	{
 	public:
-		Pointer(const string&  value, vector<TypeQualifier*>* list);
-		Pointer(const string&  value, vector<TypeQualifier*>* list, Pointer* ptr);
-		Pointer(const string&  value, Pointer* ptr);
-		Pointer(const string&  value);
+		Pointer(const string& name, vector<TypeQualifier*>* typeQualifierList);
+		Pointer(const string& name, vector<TypeQualifier*>* typeQualifierList, Pointer* pointer);
+		Pointer(const string& name, Pointer* pointer);
+		Pointer(const string& name);
 		Pointer();
 		virtual ~Pointer();
 		void inc();
 
 	private:
-		string nameStr;
-		vector<TypeQualifier*>* list;
+		optional<string> name;
+		vector<TypeQualifier*>* typeQualifierList;
 		int level;
-		Pointer* ptr;
+		Pointer* pointer;
 	};
 }

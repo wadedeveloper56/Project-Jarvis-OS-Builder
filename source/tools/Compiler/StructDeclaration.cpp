@@ -2,20 +2,30 @@
 
 using namespace WadeSpace;
 
-StructDeclaration::StructDeclaration(SpecifierQualifierList* sql, vector<StructDeclarator*>* list) : sql(sql), list(list)
+StructDeclaration::StructDeclaration(SpecifierQualifierList* specifierQualifierList, vector<StructDeclarator*>* vectorStructDeclarator) : specifierQualifierList(specifierQualifierList), vectorStructDeclarator(vectorStructDeclarator)
 {
 }
 
-StructDeclaration::StructDeclaration() : sql(nullptr), list(nullptr)
+StructDeclaration::StructDeclaration() : specifierQualifierList(nullptr), vectorStructDeclarator(nullptr)
 {
 }
 
 StructDeclaration::~StructDeclaration()
 {
-    delete sql;
-    for (StructDeclarator* ptr : *list)
+    delete specifierQualifierList;
+    for (StructDeclarator* ptr : *vectorStructDeclarator)
     {
         delete ptr;
     }
-    delete list;
+    delete vectorStructDeclarator;
+}
+
+SpecifierQualifierList* StructDeclaration::getSpecifierQualifierList() const
+{
+	return specifierQualifierList;
+}
+
+vector<StructDeclarator*>* StructDeclaration::getVectorStructDeclarator() const
+{
+	return vectorStructDeclarator;
 }

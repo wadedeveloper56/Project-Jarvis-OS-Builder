@@ -5,30 +5,55 @@
 using namespace WadeSpace;
 using namespace std;
 
-UnaryExpression::UnaryExpression(PostfixExpression* pe) : pe(pe), ce(nullptr), ue(nullptr), tn(nullptr), op("")
+UnaryExpression::UnaryExpression(PostfixExpression* postfixExpression) : postfixExpression(postfixExpression), castExpression(nullptr), unaryExpression(nullptr), typeName(nullptr), op(nullopt)
 {
 }
 
-UnaryExpression::UnaryExpression(const string&  op, UnaryExpression* ue) : pe(nullptr), ce(nullptr), ue(ue), tn(nullptr), op(op)
+UnaryExpression::UnaryExpression(const string& op, UnaryExpression* unaryExpression) : postfixExpression(nullptr), castExpression(nullptr), unaryExpression(unaryExpression), typeName(nullptr), op(op)
 {
 }
 
-UnaryExpression::UnaryExpression(const string&  op, CastExpression* ce) : pe(nullptr), ce(ce), ue(nullptr), tn(nullptr), op(op)
+UnaryExpression::UnaryExpression(const string& op, CastExpression* castExpression) : postfixExpression(nullptr), castExpression(castExpression), unaryExpression(nullptr), typeName(nullptr), op(op)
 {
 }
 
-UnaryExpression::UnaryExpression(const string&  op, TypeName* tn) : pe(nullptr), ce(nullptr), ue(nullptr), tn(tn), op(op)
+UnaryExpression::UnaryExpression(const string& op, TypeName* typeName) : postfixExpression(nullptr), castExpression(nullptr), unaryExpression(nullptr), typeName(typeName), op(op)
 {
 }
 
-UnaryExpression::UnaryExpression() : pe(nullptr), ce(nullptr), ue(nullptr), tn(nullptr), op("")
+UnaryExpression::UnaryExpression() : postfixExpression(nullptr), castExpression(nullptr), unaryExpression(nullptr), typeName(nullptr), op(nullopt)
 {
 }
 
 UnaryExpression::~UnaryExpression()
 {
-	delete pe;
-	delete ce;
-	delete ue;
-	delete tn;
+	delete postfixExpression;
+	delete castExpression;
+	delete unaryExpression;
+	delete typeName;
+}
+
+PostfixExpression* UnaryExpression::getPostfixExpression() const
+{
+	return postfixExpression;
+}
+
+TypeName* UnaryExpression::getTypeName() const
+{
+	return typeName;
+}
+
+UnaryExpression* UnaryExpression::getUnaryExpression() const
+{
+	return unaryExpression;
+}
+
+CastExpression* UnaryExpression::getCastExpression() const
+{
+	return castExpression;
+}
+
+optional<string> UnaryExpression::getOp() const
+{
+	return op;
 }

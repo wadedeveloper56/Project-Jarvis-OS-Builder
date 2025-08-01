@@ -14,14 +14,14 @@ namespace WadeSpace
 	class ShiftExpression
 	{
 	public:
-		ShiftExpression(AdditiveExpression* ae);
-		ShiftExpression(ShiftExpression* se, const string& op, AdditiveExpression* ae);
+		ShiftExpression(AdditiveExpression* additiveExpression);
+		ShiftExpression(ShiftExpression* shiftExpression, const string& op, AdditiveExpression* additiveExpression);
 		ShiftExpression();
 		virtual ~ShiftExpression();
 
 	private:
-		AdditiveExpression* ae;
-		string op;
-		ShiftExpression* se;
+		AdditiveExpression* additiveExpression;
+		optional<string> op;
+		ShiftExpression* shiftExpression;
 	};
 }

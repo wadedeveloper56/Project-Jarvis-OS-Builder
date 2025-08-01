@@ -5,8 +5,6 @@
 #include <stdint.h>
 #include <optional>
 #include "TokenType.h"
-//#include "PostfixExpression.h"
-//#include "CastExpression.h"
 
 using namespace std;
 
@@ -19,18 +17,23 @@ namespace WadeSpace
 	class UnaryExpression
 	{
 	public:
-		UnaryExpression(PostfixExpression* pe);
-		UnaryExpression(const string&  op, UnaryExpression* ue);
-		UnaryExpression(const string&  op, CastExpression* ce);
-		UnaryExpression(const string&  op, TypeName* tn);
+		UnaryExpression(PostfixExpression* postfixExpression);
+		UnaryExpression(const string& op, UnaryExpression* unaryExpression);
+		UnaryExpression(const string& op, CastExpression* castExpression);
+		UnaryExpression(const string& op, TypeName* typeName);
 		UnaryExpression();
 		virtual ~UnaryExpression();
+		PostfixExpression* getPostfixExpression() const;
+		TypeName* getTypeName() const;
+		UnaryExpression* getUnaryExpression() const;
+		CastExpression* getCastExpression() const;
+		optional<string> getOp() const;
 
 	private:
-		PostfixExpression* pe;
-		TypeName* tn;
-		UnaryExpression* ue;
-		CastExpression* ce;
-		string op;
+		PostfixExpression* postfixExpression;
+		TypeName* typeName;
+		UnaryExpression* unaryExpression;
+		CastExpression* castExpression;
+		optional<string> op;
 	};
 }

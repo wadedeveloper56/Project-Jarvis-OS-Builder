@@ -16,15 +16,18 @@ namespace WadeSpace
 	class PrimaryExpression
 	{
 	public:
-		PrimaryExpression(const string&  identifier);
-		PrimaryExpression(Constant* c);
-		PrimaryExpression(Expression* exp);
+		PrimaryExpression(const string& identifier);
+		PrimaryExpression(Constant* constant);
+		PrimaryExpression(Expression* expression);
 		PrimaryExpression();
 		virtual ~PrimaryExpression();
+		optional<string> getIdentifier() const;
+		Constant* getConstant() const;
+		Expression* getExpression() const;
 
 	private:
-		string identifier;
-		Constant* c;
-		Expression* exp;
+		optional<string> identifier;
+		Constant* constant;
+		Expression* expression;
 	};
 }

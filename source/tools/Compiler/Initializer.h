@@ -13,13 +13,15 @@ namespace WadeSpace
 	class Initializer
 	{
 	public:
-		Initializer(AssignmentExpression* exp);
-		Initializer(vector<Initializer*>* list);
+		Initializer(AssignmentExpression* assignmentExpression);
+		Initializer(vector<Initializer*>* initializerList);
 		Initializer();
 		virtual ~Initializer();
+		AssignmentExpression* getAssignmentExpression() const;
+		vector<Initializer*>* getInitializerList() const;
 
 	private:
-		AssignmentExpression* exp;
-		vector<Initializer*>* list;
+		AssignmentExpression* assignmentExpression;
+		vector<Initializer*>* initializerList;
 	};
 }

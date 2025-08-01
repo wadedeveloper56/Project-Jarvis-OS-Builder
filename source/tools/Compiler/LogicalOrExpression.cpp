@@ -3,20 +3,30 @@
 using namespace WadeSpace;
 using namespace std;
 
-LogicalOrExpression::LogicalOrExpression(LogicalAndExpression* lae) : loe(nullptr), lae(lae)
+LogicalOrExpression::LogicalOrExpression(LogicalAndExpression* logicalAndExpression) : logicalOrExpression(nullptr), logicalAndExpression(logicalAndExpression)
 {
 }
 
-LogicalOrExpression::LogicalOrExpression(LogicalOrExpression* loe, LogicalAndExpression* lae) : loe(loe), lae(lae)
+LogicalOrExpression::LogicalOrExpression(LogicalOrExpression* logicalOrExpression, LogicalAndExpression* logicalAndExpression) : logicalOrExpression(logicalOrExpression), logicalAndExpression(logicalAndExpression)
 {
 }
 
-LogicalOrExpression::LogicalOrExpression(): loe(nullptr), lae(nullptr)
+LogicalOrExpression::LogicalOrExpression(): logicalOrExpression(nullptr), logicalAndExpression(nullptr)
 {
 }
 
 LogicalOrExpression::~LogicalOrExpression()
 {
-	delete loe;
-	delete lae;
+	delete logicalOrExpression;
+	delete logicalAndExpression;
+}
+
+LogicalOrExpression* LogicalOrExpression::getLogicalOrExpression() const
+{
+	return logicalOrExpression;
+}
+
+LogicalAndExpression* LogicalOrExpression::getLogicalAndExpression() const
+{
+	return logicalAndExpression;
 }

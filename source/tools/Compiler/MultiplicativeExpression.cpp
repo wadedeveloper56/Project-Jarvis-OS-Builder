@@ -3,20 +3,35 @@
 using namespace WadeSpace;
 using namespace std;
 
-MultiplicativeExpression::MultiplicativeExpression(CastExpression* ce) : ce(nullptr), op(""), me(nullptr)
+MultiplicativeExpression::MultiplicativeExpression(CastExpression* castExpression) : castExpression(castExpression), op(nullopt), multiplicativeExpression(nullptr)
 {
 }
 
-MultiplicativeExpression::MultiplicativeExpression(MultiplicativeExpression* me, const string& op, CastExpression* ce): me(me), op(op), ce(ce)
+MultiplicativeExpression::MultiplicativeExpression(MultiplicativeExpression* multiplicativeExpression, const string& op, CastExpression* castExpression): multiplicativeExpression(multiplicativeExpression), op(op), castExpression(castExpression)
 {
 }
 
-MultiplicativeExpression::MultiplicativeExpression() : me(nullptr), op(""), ce(nullptr)
+MultiplicativeExpression::MultiplicativeExpression() : multiplicativeExpression(nullptr), op(nullopt), castExpression(nullptr)
 {
 }
 
 MultiplicativeExpression::~MultiplicativeExpression()
 {
-    delete me;
-    delete ce;
+    delete multiplicativeExpression;
+    delete castExpression;
+}
+
+MultiplicativeExpression* MultiplicativeExpression::getMultiplicativeExpression() const
+{
+	return multiplicativeExpression;
+}
+
+optional<string> MultiplicativeExpression::getOp() const
+{
+	return op;
+}
+
+CastExpression* MultiplicativeExpression::getCastExpression() const
+{
+	return castExpression;
 }

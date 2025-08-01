@@ -2,24 +2,34 @@
 
 using namespace WadeSpace;
 
-Initializer::Initializer(AssignmentExpression* exp) : exp(exp), list(nullptr)
+Initializer::Initializer(AssignmentExpression* assignmentExpression) : assignmentExpression(assignmentExpression), initializerList(nullptr)
 {
 }
 
-Initializer::Initializer(vector<Initializer*>* list) : exp(nullptr), list(list)
+Initializer::Initializer(vector<Initializer*>* initializerList) : assignmentExpression(nullptr), initializerList(initializerList)
 {
 }
 
-Initializer::Initializer() : exp(nullptr), list(nullptr)
+Initializer::Initializer() : assignmentExpression(nullptr), initializerList(nullptr)
 {
 }
 
 Initializer::~Initializer()
 {
-	delete exp;
-	for (Initializer* ptr : *list)
+	delete assignmentExpression;
+	for (Initializer* ptr : *initializerList)
 	{
 		delete ptr;
 	}
-	delete list;
+	delete initializerList;
+}
+
+AssignmentExpression* Initializer::getAssignmentExpression() const
+{
+	return assignmentExpression;
+}
+
+vector<Initializer*>* Initializer::getInitializerList() const
+{
+	return initializerList;
 }

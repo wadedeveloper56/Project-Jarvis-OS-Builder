@@ -2,28 +2,43 @@
 
 using namespace WadeSpace;
 
-StructOrUnionSpecifier::StructOrUnionSpecifier(StructOrUnion* su, const string& name, vector<StructDeclaration*>* list) : su(su), name(name), list(list)
+StructOrUnionSpecifier::StructOrUnionSpecifier(StructOrUnion* structOrUnion, const string& name, vector<StructDeclaration*>* vectorStructDeclaration) : structOrUnion(structOrUnion), name(name), vectorStructDeclaration(vectorStructDeclaration)
 {
 }
 
-StructOrUnionSpecifier::StructOrUnionSpecifier(StructOrUnion* su, vector<StructDeclaration*>* list) : su(su), name(""),	list(list)
+StructOrUnionSpecifier::StructOrUnionSpecifier(StructOrUnion* structOrUnion, vector<StructDeclaration*>* vectorStructDeclaration) : structOrUnion(structOrUnion), name(nullopt),	vectorStructDeclaration(vectorStructDeclaration)
 {
 }
 
-StructOrUnionSpecifier::StructOrUnionSpecifier(StructOrUnion* su, const string& name) : su(su), name(name), list(nullptr)
+StructOrUnionSpecifier::StructOrUnionSpecifier(StructOrUnion* structOrUnion, const string& name) : structOrUnion(structOrUnion), name(name), vectorStructDeclaration(nullptr)
 {
 }
 
-StructOrUnionSpecifier::StructOrUnionSpecifier() : su(nullptr), name(""), list(nullptr)
+StructOrUnionSpecifier::StructOrUnionSpecifier() : structOrUnion(nullptr), name(nullopt), vectorStructDeclaration(nullptr)
 {
 }
 
 StructOrUnionSpecifier::~StructOrUnionSpecifier()
 {
-	delete su;
-	for (StructDeclaration* ptr : *list)
+	delete structOrUnion;
+	for (StructDeclaration* ptr : *vectorStructDeclaration)
 	{
 		delete ptr;
 	}
-	delete list;
+	delete vectorStructDeclaration;
+}
+
+optional<string> StructOrUnionSpecifier::getName() const
+{
+	return name;
+}
+
+StructOrUnion* StructOrUnionSpecifier::getStructOrUnion() const
+{
+	return structOrUnion;
+}
+
+vector<StructDeclaration*>* StructOrUnionSpecifier::getVectorStructDeclaration() const
+{
+	return vectorStructDeclaration;
 }

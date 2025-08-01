@@ -2,20 +2,30 @@
 
 using namespace WadeSpace;
 
-LogicalAndExpression::LogicalAndExpression(InclusiveOrExpression* ioe) : ioe(ioe), lae(nullptr)
+LogicalAndExpression::LogicalAndExpression(InclusiveOrExpression* inclusiveOrExpression) : inclusiveOrExpression(inclusiveOrExpression), logicalAndExpression(nullptr)
 {
 }
 
-LogicalAndExpression::LogicalAndExpression(LogicalAndExpression* lae, InclusiveOrExpression* ioe) : ioe(ioe), lae(lae)
+LogicalAndExpression::LogicalAndExpression(LogicalAndExpression* logicalAndExpression, InclusiveOrExpression* inclusiveOrExpression) : inclusiveOrExpression(inclusiveOrExpression), logicalAndExpression(logicalAndExpression)
 {
 }
 
-LogicalAndExpression::LogicalAndExpression() : ioe(nullptr), lae(nullptr)
+LogicalAndExpression::LogicalAndExpression() : inclusiveOrExpression(nullptr), logicalAndExpression(nullptr)
 {
 }
 
 LogicalAndExpression::~LogicalAndExpression()
 {
-	delete ioe;
-	delete lae;
+	delete inclusiveOrExpression;
+	delete logicalAndExpression;
+}
+
+InclusiveOrExpression* LogicalAndExpression::getInclusiveOrExpression() const
+{
+	return inclusiveOrExpression;
+}
+
+LogicalAndExpression* LogicalAndExpression::getLogicalAndExpression() const
+{
+	return logicalAndExpression;
 }

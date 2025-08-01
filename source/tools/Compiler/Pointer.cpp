@@ -2,34 +2,34 @@
 
 using namespace WadeSpace;
 
-Pointer::Pointer(const string&  value, vector<TypeQualifier*>* list) : nameStr(value), list(list), level(1), ptr(nullptr)
+Pointer::Pointer(const string& name, vector<TypeQualifier*>* typeQualifierList) : name(name), typeQualifierList(typeQualifierList), level(1), pointer(nullptr)
 {
 }
 
-Pointer::Pointer(const string&  value, vector<TypeQualifier*>* list, Pointer* ptr) : nameStr(value), list(list), level(1), ptr(ptr)
+Pointer::Pointer(const string& name, vector<TypeQualifier*>* typeQualifierList, Pointer* pointer) : name(name), typeQualifierList(typeQualifierList), level(1), pointer(pointer)
 {
 }
 
-Pointer::Pointer(const string&  value, Pointer* ptr) : nameStr(value), list(nullptr), level(1), ptr(ptr)
+Pointer::Pointer(const string& name, Pointer* pointer) : name(name), typeQualifierList(nullptr), level(1), pointer(pointer)
 {
 }
 
-Pointer::Pointer(const string&  value) : nameStr(value), list(nullptr), level(1), ptr(nullptr)
+Pointer::Pointer(const string& name) : name(name), typeQualifierList(nullptr), level(1), pointer(nullptr)
 {
 }
 
-Pointer::Pointer() : nameStr(""), list(nullptr), level(1), ptr(nullptr)
+Pointer::Pointer() : name(nullopt), typeQualifierList(nullptr), level(0), pointer(nullptr)
 {
 }
 
 Pointer::~Pointer()
 {
-    for (TypeQualifier* ptr : *list)
-    {
-        delete ptr;
-    }
-    delete list;
-    delete ptr;
+	for (TypeQualifier* ptr : *typeQualifierList)
+	{
+		delete ptr;
+	}
+	delete typeQualifierList;
+	delete pointer;
 }
 
 void Pointer::inc() { level++; }

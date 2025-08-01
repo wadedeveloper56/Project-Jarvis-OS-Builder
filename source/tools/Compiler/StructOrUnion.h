@@ -14,6 +14,7 @@ namespace WadeSpace
 		StructOrUnion(TokenType type);
 		StructOrUnion();
 		virtual ~StructOrUnion();
+		TokenType getType() const;
 
 	private:
 		TokenType type;

@@ -17,12 +17,11 @@ namespace WadeSpace
 		Enumerator(string&  operatorStr);
 		Enumerator();
 		virtual ~Enumerator();
-		bool hasOperatorStr() const;
-		string getOperatorStr() const;
+		optional<string> getOperatorStr() const;
 		ConstantExpression* getConstantExpression() const;
 
 	private:
-		string operatorStr;
+		optional<string> operatorStr;
 		ConstantExpression* constantExpression;
 	};
 }

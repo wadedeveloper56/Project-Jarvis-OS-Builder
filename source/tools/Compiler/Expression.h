@@ -18,6 +18,9 @@ namespace WadeSpace
 		Expression(Expression* expression, const string& operation, AssignmentExpression* assignmentExpression);
 		Expression();
 		virtual ~Expression();
+		Expression* getExpression() const;
+		optional<string> getOper() const;
+		AssignmentExpression* getAssignmentExpression() const;
 
 	private:
 		Expression* expression;

@@ -14,13 +14,15 @@ namespace WadeSpace
 	class LogicalAndExpression
 	{
 	public:
-		LogicalAndExpression(InclusiveOrExpression* eoe);
-		LogicalAndExpression(LogicalAndExpression* loe, InclusiveOrExpression* eoe);
+		LogicalAndExpression(InclusiveOrExpression* inclusiveOrExpression);
+		LogicalAndExpression(LogicalAndExpression* logicalAndExpression, InclusiveOrExpression* inclusiveOrExpression);
 		LogicalAndExpression();
 		virtual ~LogicalAndExpression();
+		InclusiveOrExpression* getInclusiveOrExpression() const;
+		LogicalAndExpression* getLogicalAndExpression() const;
 
 	private:
-		InclusiveOrExpression* ioe;
-		LogicalAndExpression* lae;
+		InclusiveOrExpression* inclusiveOrExpression;
+		LogicalAndExpression* logicalAndExpression;
 	};
 }

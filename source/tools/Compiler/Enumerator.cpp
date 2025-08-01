@@ -10,7 +10,7 @@ Enumerator::Enumerator(string&  operatorStr) : operatorStr(operatorStr), constan
 {
 }
 
-Enumerator::Enumerator() : operatorStr(""), constantExpression(nullptr)
+Enumerator::Enumerator() : operatorStr(nullopt), constantExpression(nullptr)
 {
 }
 
@@ -22,4 +22,9 @@ Enumerator::~Enumerator()
 ConstantExpression* Enumerator::getConstantExpression() const
 {
 	return constantExpression;
+}
+
+optional<string> Enumerator::getOperatorStr() const
+{
+	return operatorStr;
 }

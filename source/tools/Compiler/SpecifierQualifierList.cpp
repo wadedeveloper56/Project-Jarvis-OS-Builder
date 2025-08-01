@@ -2,30 +2,45 @@
 
 using namespace WadeSpace;
 
-SpecifierQualifierList::SpecifierQualifierList(SpecifierQualifierList* sql, TypeSpecifier* ts) : sql(sql), ts(ts),
-	tq(nullptr)
+SpecifierQualifierList::SpecifierQualifierList(SpecifierQualifierList* specifierQualifierList, TypeSpecifier* typeSpecifier) : specifierQualifierList(specifierQualifierList), typeSpecifier(typeSpecifier),
+typeQualifier(nullptr)
 {
 }
 
-SpecifierQualifierList::SpecifierQualifierList(TypeSpecifier* ts) : sql(nullptr), ts(ts), tq(nullptr)
+SpecifierQualifierList::SpecifierQualifierList(TypeSpecifier* typeSpecifier) : specifierQualifierList(nullptr), typeSpecifier(typeSpecifier), typeQualifier(nullptr)
 {
 }
 
-SpecifierQualifierList::SpecifierQualifierList(SpecifierQualifierList* sql, TypeQualifier* tq) : sql(sql), ts(nullptr),	tq(tq)
+SpecifierQualifierList::SpecifierQualifierList(SpecifierQualifierList* specifierQualifierList, TypeQualifier* typeQualifier) : specifierQualifierList(specifierQualifierList), typeSpecifier(nullptr), typeQualifier(typeQualifier)
 {
 }
 
-SpecifierQualifierList::SpecifierQualifierList(TypeQualifier* ts) : sql(nullptr), ts(nullptr), tq(tq)
+SpecifierQualifierList::SpecifierQualifierList(TypeQualifier* typeQualifier) : specifierQualifierList(nullptr), typeSpecifier(nullptr), typeQualifier(typeQualifier)
 {
 }
 
-SpecifierQualifierList::SpecifierQualifierList() : sql(nullptr), ts(nullptr), tq(nullptr)
+SpecifierQualifierList::SpecifierQualifierList() : specifierQualifierList(nullptr), typeSpecifier(nullptr), typeQualifier(nullptr)
 {
 }
 
 SpecifierQualifierList::~SpecifierQualifierList()
 {
-	delete sql;
-	delete ts;
-	delete tq;
+	delete specifierQualifierList;
+	delete typeSpecifier;
+	delete typeQualifier;
+}
+
+SpecifierQualifierList* SpecifierQualifierList::getSpecifierQualifierList() const
+{
+	return specifierQualifierList;
+}
+
+TypeSpecifier* SpecifierQualifierList::getTypeSpecifier() const
+{
+	return typeSpecifier;
+}
+
+TypeQualifier* SpecifierQualifierList::getTypeQualifier() const
+{
+	return typeQualifier;
 }
