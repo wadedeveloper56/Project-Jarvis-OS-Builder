@@ -15,16 +15,16 @@ namespace WadeSpace
 	{
 	public:
 		Expression(AssignmentExpression* assignmentExpression);
-		Expression(Expression* expression, const string& operation, AssignmentExpression* assignmentExpression);
+		Expression(Expression* expression, const int& operation, AssignmentExpression* assignmentExpression);
 		Expression();
 		virtual ~Expression();
 		Expression* getExpression() const;
-		optional<string> getOper() const;
+		optional<int> getOper() const;
 		AssignmentExpression* getAssignmentExpression() const;
 
 	private:
 		Expression* expression;
-		optional<string> oper;
+		optional<int> oper;
 		AssignmentExpression* assignmentExpression;
 	};
 }

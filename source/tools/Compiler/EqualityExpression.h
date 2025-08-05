@@ -15,16 +15,16 @@ namespace WadeSpace
 	{
 	public:
 		EqualityExpression(RelationalExpression* relationalExpression);
-		EqualityExpression(EqualityExpression* equalityExpression, string& op, RelationalExpression* relationalExpression);
+		EqualityExpression(EqualityExpression* equalityExpression, int& op, RelationalExpression* relationalExpression);
 		EqualityExpression();
 		virtual ~EqualityExpression();
 		RelationalExpression* getRelationalExpression() const;
-		optional<string> getOp() const;
+		optional<int> getOp() const;
 		EqualityExpression* getEqualityExpression() const;
 
 	private:
 		RelationalExpression* relationalExpression;
-		optional<string> op;
+		optional<int> op;
 		EqualityExpression* equalityExpression;
 	};
 }

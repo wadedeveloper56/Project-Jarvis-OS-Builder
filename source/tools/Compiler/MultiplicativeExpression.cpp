@@ -7,7 +7,7 @@ MultiplicativeExpression::MultiplicativeExpression(CastExpression* castExpressio
 {
 }
 
-MultiplicativeExpression::MultiplicativeExpression(MultiplicativeExpression* multiplicativeExpression, const string& op, CastExpression* castExpression): multiplicativeExpression(multiplicativeExpression), op(op), castExpression(castExpression)
+MultiplicativeExpression::MultiplicativeExpression(MultiplicativeExpression* multiplicativeExpression, const int& op, CastExpression* castExpression): multiplicativeExpression(multiplicativeExpression), op(op), castExpression(castExpression)
 {
 }
 
@@ -26,7 +26,7 @@ MultiplicativeExpression* MultiplicativeExpression::getMultiplicativeExpression(
 	return multiplicativeExpression;
 }
 
-optional<string> MultiplicativeExpression::getOp() const
+optional<int> MultiplicativeExpression::getOp() const
 {
 	return op;
 }

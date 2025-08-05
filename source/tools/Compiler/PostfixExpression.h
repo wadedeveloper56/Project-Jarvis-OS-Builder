@@ -19,8 +19,9 @@ namespace WadeSpace
 	typedef struct _PostfixExpression
 	{
 		Expression* expression;
-		optional<string> str1;
+		optional<int> str1;
 		optional<string> str2;
+		optional<int> str3;
 		vector<AssignmentExpression*>* vectorAssignmentExpression;
 	} PostfixExpressionNode, * PostfixExpressionNodePtr;
 
@@ -32,7 +33,8 @@ namespace WadeSpace
 		PostfixExpression();
 		virtual ~PostfixExpression();
 
-		void add(const string& str, const string& str2);
+		void add(int str, int str2);
+		void add(int str, string& str2);
 		void add(Expression* expression);
 		void add(vector<AssignmentExpression*>* vectorAssignmentExpression);
 

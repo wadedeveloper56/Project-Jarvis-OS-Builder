@@ -7,7 +7,7 @@ ShiftExpression::ShiftExpression(AdditiveExpression* additiveExpression) : addit
 {
 }
 
-ShiftExpression::ShiftExpression(ShiftExpression* shiftExpression, const string& op, AdditiveExpression* additiveExpression) : additiveExpression(additiveExpression), op(op), shiftExpression(shiftExpression)
+ShiftExpression::ShiftExpression(ShiftExpression* shiftExpression, const int& op, AdditiveExpression* additiveExpression) : additiveExpression(additiveExpression), op(op), shiftExpression(shiftExpression)
 {
 }
 

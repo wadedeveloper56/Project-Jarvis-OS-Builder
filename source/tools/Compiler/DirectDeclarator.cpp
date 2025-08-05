@@ -33,7 +33,7 @@ DirectDeclarator::DirectDeclarator(DirectDeclarator* directDeclarator, ConstantE
 {
 }
 
-DirectDeclarator::DirectDeclarator(DirectDeclarator* directDeclarator, string& str1, string& str2) : identifier(nullopt),
+DirectDeclarator::DirectDeclarator(DirectDeclarator* directDeclarator, int& str1, int& str2) : identifier(nullopt),
 str1(str1),
 str2(str2), directDeclarator(directDeclarator), constantExpression(nullptr), parameterTypeList(nullptr),
 vectorOfStrings(nullptr), declarator(nullptr)
@@ -64,8 +64,8 @@ DirectDeclarator::~DirectDeclarator()
 }
 
 optional<string> DirectDeclarator::getIdentifier() const { return identifier; }
-optional<string> DirectDeclarator::getStr1() const { return str1; }
-optional<string> DirectDeclarator::getStr2() const { return str2; }
+optional<int> DirectDeclarator::getStr1() const { return str1; }
+optional<int> DirectDeclarator::getStr2() const { return str2; }
 Declarator* DirectDeclarator::getDeclarator() const { return declarator; }
 DirectDeclarator* DirectDeclarator::getDirectDeclarator() const { return directDeclarator; }
 ConstantExpression* DirectDeclarator::getConstantExpression() const { return constantExpression; }

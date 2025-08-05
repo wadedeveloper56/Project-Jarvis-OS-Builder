@@ -16,30 +16,29 @@ namespace WadeSpace
 
 	typedef struct _UnaryExpressionNode
 	{
-		optional<string> str;
+		optional<int> str;
 	} UnaryExpressionNode, * UnaryExpressionNodePtr;
 
 	class UnaryExpression
 	{
 	public:
 		UnaryExpression(PostfixExpression* postfixExpression);
-		void add(const string& op);
-		UnaryExpression(const string& op, CastExpression* castExpression);
-		UnaryExpression(const string& op, TypeName* typeName);
+		void add(const int& op);
+		UnaryExpression(const int& op, CastExpression* castExpression);
+		UnaryExpression(const int& op, TypeName* typeName);
 		UnaryExpression();
 		virtual ~UnaryExpression();
 		PostfixExpression* getPostfixExpression() const;
 		TypeName* getTypeName() const;
 		vector<UnaryExpressionNode*>* getVectorUnaryExpressionNode() const;
 		CastExpression* getCastExpression() const;
-		optional<string> getOp() const;
+		optional<int> getOp() const;
 
 	private:
 		PostfixExpression* postfixExpression;
 		TypeName* typeName;
-		//UnaryExpression* unaryExpression;
 		CastExpression* castExpression;
-		optional<string> op;
+		optional<int> op;
 		vector<UnaryExpressionNode*>* vectorUnaryExpressionNode;
 	};
 }

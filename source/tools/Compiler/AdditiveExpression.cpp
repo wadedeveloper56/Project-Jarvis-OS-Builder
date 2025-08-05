@@ -7,7 +7,7 @@ AdditiveExpression::AdditiveExpression(MultiplicativeExpression* multiplicativeE
 {
 }
 
-AdditiveExpression::AdditiveExpression(AdditiveExpression* additiveExpression, const string& op, MultiplicativeExpression* multiplicativeExpression) : additiveExpression(additiveExpression), oper(op), multiplicativeExpression(multiplicativeExpression)
+AdditiveExpression::AdditiveExpression(AdditiveExpression* additiveExpression, const int& op, MultiplicativeExpression* multiplicativeExpression) : additiveExpression(additiveExpression), oper(op), multiplicativeExpression(multiplicativeExpression)
 {
 }
 
@@ -23,4 +23,4 @@ AdditiveExpression::~AdditiveExpression()
 
 MultiplicativeExpression* AdditiveExpression::getMultiplicativeExpression() const { return multiplicativeExpression; }
 AdditiveExpression* AdditiveExpression::getAdditiveExpression() const { return additiveExpression; }
-optional<string> AdditiveExpression::getOperation() const { return oper; }
+optional<int> AdditiveExpression::getOperation() const { return oper; }

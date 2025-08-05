@@ -15,16 +15,16 @@ namespace WadeSpace
 	{
 	public:
 		RelationalExpression(ShiftExpression* shiftExpression);
-		RelationalExpression(RelationalExpression* relationalExpression, const string& op, ShiftExpression* shiftExpression);
+		RelationalExpression(RelationalExpression* relationalExpression, const int& op, ShiftExpression* shiftExpression);
 		RelationalExpression();
 		virtual ~RelationalExpression();
 		RelationalExpression* getRelationalExpression() const;
-		optional<string> getOp() const;
+		optional<int> getOp() const;
 		ShiftExpression* getShiftExpression() const;
 
 	private:
 		RelationalExpression* relationalExpression;
-		optional<string> op;
+		optional<int> op;
 		ShiftExpression* shiftExpression;
 	};
 }

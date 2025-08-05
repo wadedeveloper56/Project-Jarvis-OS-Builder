@@ -120,92 +120,92 @@
 %token <uint64_t> I_CONST "i_const"
 %token <long double> F_CONST "f_const"
 %token <std::string> STRING_LITERAL  "sting_literal"
-%token <std::string> TYPE_NAME "type name"
-%token <std::string> AUTO "auto"
-%token <std::string> BREAK "break"
-%token <std::string> CASE "case"
-%token <std::string> CHAR "char"
-%token <std::string> CONST "const"
-%token <std::string> CONTINUE "continue"
-%token <std::string> DEFAULT "default"
-%token <std::string> DO "do"
-%token <std::string> DOUBLE "double"
-%token <std::string> LONG_DOUBLE "long double"
-%token <std::string> ELSE "else"
-%token <std::string> ENUM "enum"
-%token <std::string> EXTERN "extern"
-%token <std::string> FLOAT "float"
-%token <std::string> FOR "for"
-%token <std::string> GOTO "goto"
-%token <std::string> IF "if"
-%token <std::string> INLINE "inline"
-%token <std::string> INT "int"
-%token <std::string> LONG "long"
-%token <std::string> LONG_LONG "long long"
-%token <std::string> REGISTER "register"
-%token <std::string> RESTRICT "restrict"
-%token <std::string> RETURN "return"
-%token <std::string> SHORT "short"
-%token <std::string> SIGNED "signed"
-%token <std::string> SIZEOF "sizeof"
-%token <std::string> STATIC "static"
-%token <std::string> STRUCT "struct"
-%token <std::string> SWITCH "switch"
-%token <std::string> TYPEDEF "typedef"
-%token <std::string> UNION "union"
-%token <std::string> UNSIGNED "unsigned"
-%token <std::string> VOID "void"
-%token <std::string> VOLATILE "volatile"
-%token <std::string> WHILE "while"
-%token <std::string> BOOL "bool"
-%token <std::string> COMPLEX "complex"
-%token <std::string> IMAGINARY "imaginary"
-%token <std::string> ELLIPSIS "ellipsis"
-%token <std::string> QUESTION "question"
-%token <std::string> SEMICOLON ";"
-%token <std::string> OCURLY "{"
-%token <std::string> CCURLY "}"
-%token <std::string> COMMA ","
-%token <std::string> COLON ":"
-%token <std::string> OPAREN "("
-%token <std::string> CPAREN ")"
-%token <std::string> OBRACE "["
-%token <std::string> CBRACE "]"
-%token <std::string> PERIOD "."
-%token <std::string> TILDE "~"
-%token <std::string> EQUAL "="
-%token <std::string> RIGHT_ASSIGN ">>="
-%token <std::string> LEFT_ASSIGN "<<="
-%token <std::string> ADD_ASSIGN "+="
-%token <std::string> SUB_ASSIGN "-="
-%token <std::string> MUL_ASSIGN "*="
-%token <std::string> DIV_ASSIGN "/="
-%token <std::string> MOD_ASSIGN "%="
-%token <std::string> AND_ASSIGN "&="
-%token <std::string> XOR_ASSIGN "^="
-%token <std::string> OR_ASSIGN "|="
-%token <std::string> RIGHT_OP ">>"
-%token <std::string> LEFT_OP "<<"
-%token <std::string> INC_OP "++"
-%token <std::string> DEC_OP "--"
-%token <std::string> PTR_OP "->"
-%token <std::string> AND_OP "&&"
-%token <std::string> OR_OP "||"
-%token <std::string> GREATER_EQUAL ">="
-%token <std::string> LESS_EQUAL "<="
-%token <std::string> GREATER ">"
-%token <std::string> LESS "<"
-%token <std::string> EQUAL_EQUAL "=="
-%token <std::string> NOT_EQUAL "!="
-%token <std::string> NOT_OP "!"
-%token <std::string> XOR_OP "^"
-%token <std::string> BIT_AND "&"
-%token <std::string> BIT_OR "|"
-%token <std::string> MINUS_OP "-"
-%token <std::string> PLUS_OP "+"
-%token <std::string> TIMES_OP "*"
-%token <std::string> DIV_OP "/"
-%token <std::string> MOD_OP "%"
+%token <int> TYPE_NAME "type name"
+%token <int> AUTO "auto"
+%token <int> BREAK "break"
+%token <int> CASE "case"
+%token <int> CHAR "char"
+%token <int> CONST "const"
+%token <int> CONTINUE "continue"
+%token <int> DEFAULT "default"
+%token <int> DO "do"
+%token <int> DOUBLE "double"
+%token <int> LONG_DOUBLE "long double"
+%token <int> ELSE "else"
+%token <int> ENUM "enum"
+%token <int> EXTERN "extern"
+%token <int> FLOAT "float"
+%token <int> FOR "for"
+%token <int> GOTO "goto"
+%token <int> IF "if"
+%token <int> INLINE "inline"
+%token <int> INT
+%token <int> LONG "long"
+%token <int> LONG_LONG "long long"
+%token <int> REGISTER "register"
+%token <int> RESTRICT "restrict"
+%token <int> RETURN "return"
+%token <int> SHORT "short"
+%token <int> SIGNED "signed"
+%token <int> SIZEOF "sizeof"
+%token <int> STATIC "static"
+%token <int> STRUCT "struct"
+%token <int> SWITCH "switch"
+%token <int> TYPEDEF "typedef"
+%token <int> UNION "union"
+%token <int> UNSIGNED "unsigned"
+%token <int> VOID "void"
+%token <int> VOLATILE "volatile"
+%token <int> WHILE "while"
+%token <int> BOOL "bool"
+%token <int> COMPLEX "complex"
+%token <int> IMAGINARY "imaginary"
+%token <int> ELLIPSIS "ellipsis"
+%token <int> QUESTION "question"
+%token <int> SEMICOLON ";"
+%token <int> OCURLY "{"
+%token <int> CCURLY "}"
+%token <int> COMMA ","
+%token <int> COLON ":"
+%token <int> OPAREN "("
+%token <int> CPAREN ")"
+%token <int> OBRACE "["
+%token <int> CBRACE "]"
+%token <int> PERIOD "."
+%token <int> TILDE "~"
+%token <int> EQUAL "="
+%token <int> RIGHT_ASSIGN ">>="
+%token <int> LEFT_ASSIGN "<<="
+%token <int> ADD_ASSIGN "+="
+%token <int> SUB_ASSIGN "-="
+%token <int> MUL_ASSIGN "*="
+%token <int> DIV_ASSIGN "/="
+%token <int> MOD_ASSIGN "%="
+%token <int> AND_ASSIGN "&="
+%token <int> XOR_ASSIGN "^="
+%token <int> OR_ASSIGN "|="
+%token <int> RIGHT_OP ">>"
+%token <int> LEFT_OP "<<"
+%token <int> INC_OP "++"
+%token <int> DEC_OP "--"
+%token <int> PTR_OP "->"
+%token <int> AND_OP "&&"
+%token <int> OR_OP "||"
+%token <int> GREATER_EQUAL ">="
+%token <int> LESS_EQUAL "<="
+%token <int> GREATER ">"
+%token <int> LESS "<"
+%token <int> EQUAL_EQUAL "=="
+%token <int> NOT_EQUAL "!="
+%token <int> NOT_OP "!"
+%token <int> XOR_OP "^"
+%token <int> BIT_AND "&"
+%token <int> BIT_OR "|"
+%token <int> MINUS_OP "-"
+%token <int> PLUS_OP "+"
+%token <int> TIMES_OP "*"
+%token <int> DIV_OP "/"
+%token <int> MOD_OP "%"
 
 %type<Constant *> constant
 %type<std::vector<AssignmentExpression *> *> argument_expression_list
@@ -227,7 +227,7 @@
 %type<ConditionalExpression *> conditional_expression
 %type<AssignmentExpression *> assignment_expression
 %type<ConstantExpression *> constant_expression
-%type<std::string> unary_operator
+%type<int> unary_operator
 %type<AssignmentOperator *> assignment_operator
 %type<StorageClassSpecifier *> storage_class_specifier
 %type<TypeSpecifier *> type_specifier
@@ -283,17 +283,17 @@ primary_expression
 
 constant
     : F_CONST         {
-                        long double &id = $1;
+                        long double id = $1;
                         $<Constant *>$ = new Constant(id);
                         cout << "F_CONST REDUCE to constant " << id << endl;
                       }
     | I_CONST         {
-                        std::uint64_t &id = $1;
+                        std::uint64_t id = $1;
                         $<Constant *>$ = new Constant(id);
                         cout << "I_CONST REDUCE to constant " << id << endl;
                       }
     | STRING_LITERAL  {
-                        std::string &id = $1;
+                        std::string id = $1;
                         $<Constant *>$ = new Constant(id);
                         cout << "STRING_LITERAL REDUCE to constant  " << id << endl;
                       }
@@ -305,8 +305,8 @@ postfix_expression
     | postfix_expression OPAREN argument_expression_list CPAREN    { $1->add($3); $<PostfixExpression *>$ = $1; cout << "postfix_expression OPAREN argument_expression_list CPAREN REDUCE to postfix_expression" << endl; }
     | postfix_expression PERIOD IDENTIFIER                         { $1->add($2,$3); $<PostfixExpression *>$ = $1; cout << "postfix_expression PERIOD_OP IDENTIFIER REDUCE to postfix_expression" << endl; }
     | postfix_expression PTR_OP IDENTIFIER                         { $1->add($2,$3); $<PostfixExpression *>$ = $1; cout << "postfix_expression PTR_OP IDENTIFIER REDUCE to postfix_expression" << endl; }
-    | postfix_expression INC_OP                                    { $1->add($2,""); $<PostfixExpression *>$ = $1; cout << "postfix_expression INC_OP REDUCE to postfix_expression" << endl; }
-    | postfix_expression DEC_OP                                    { $1->add($2,""); $<PostfixExpression *>$ = $1; cout << "postfix_expression DEC_OP REDUCE to postfix_expression" << endl; }
+    | postfix_expression INC_OP                                    { $1->add($2,NONE); $<PostfixExpression *>$ = $1; cout << "postfix_expression INC_OP REDUCE to postfix_expression" << endl; }
+    | postfix_expression DEC_OP                                    { $1->add($2,NONE); $<PostfixExpression *>$ = $1; cout << "postfix_expression DEC_OP REDUCE to postfix_expression" << endl; }
     | OPAREN type_name CPAREN OCURLY initializer_list CCURLY       { $<PostfixExpression *>$ = new PostfixExpression($2,$5); cout << "OPAREN type_name CPAREN_OP OCURLY_OP initializer_list CCURLY REDUCE to postfix_expression" << endl; }
     | OPAREN type_name CPAREN OCURLY initializer_list COMMA CCURLY { $<PostfixExpression *>$ = new PostfixExpression($2,$5); cout << "OPAREN type_name CPAREN_OP OCURLY_OP initializer_list COMMA CCURLY REDUCE to postfix_expression" << endl; }
 
@@ -337,12 +337,12 @@ unary_expression
     ;
 
 unary_operator
-    : BIT_AND   {$<std::string>$ = $1; cout << "BIT_AND REDUCE to unary_operator" << endl;}
-    | TIMES_OP  {$<std::string>$ = $1; cout << "TIMES_OP REDUCE to unary_operator" << endl;}
-    | PLUS_OP   {$<std::string>$ = $1; cout << "PLUS_OP REDUCE to unary_operator" << endl;}
-    | MINUS_OP  {$<std::string>$ = $1; cout << "MINUS_OP REDUCE to unary_operator" << endl;}
-    | TILDE     {$<std::string>$ = $1; cout << "TILDE REDUCE to unary_operator" << endl;}
-    | NOT_OP    {$<std::string>$ = $1; cout << "NOT_OP REDUCE to unary_operator" << endl;}
+    : BIT_AND   {$<int>$ = $1; cout << "BIT_AND REDUCE to unary_operator" << endl;}
+    | TIMES_OP  {$<int>$ = $1; cout << "TIMES_OP REDUCE to unary_operator" << endl;}
+    | PLUS_OP   {$<int>$ = $1; cout << "PLUS_OP REDUCE to unary_operator" << endl;}
+    | MINUS_OP  {$<int>$ = $1; cout << "MINUS_OP REDUCE to unary_operator" << endl;}
+    | TILDE     {$<int>$ = $1; cout << "TILDE REDUCE to unary_operator" << endl;}
+    | NOT_OP    {$<int>$ = $1; cout << "NOT_OP REDUCE to unary_operator" << endl;}
     ;
 
 cast_expression
@@ -636,7 +636,7 @@ type_qualifier_list
 
 
 parameter_type_list
-    : parameter_list                  { $<ParameterTypeList *>$ = new ParameterTypeList($1,""); cout << "parameter_list REDUCE to parameter_type_list" << endl; }
+    : parameter_list                  { $<ParameterTypeList *>$ = new ParameterTypeList($1,NONE); cout << "parameter_list REDUCE to parameter_type_list" << endl; }
     | parameter_list COMMA ELLIPSIS   { $<ParameterTypeList *>$ = new ParameterTypeList($1,$2); cout << "parameter_list COMMA ELLIPSIS REDUCE to parameter_type_list" << endl; }
     ;
 
@@ -822,7 +822,7 @@ function_definition
     
 %%
 
-void WadeSpace::Parser::error(const location &loc , const std::string &message) {
+void WadeSpace::Parser::error(const location &loc , const string &message) {
     // cout << "Error: " << message << endl << "Location: " << loc << endl;  
     cout << "Error: " << message << endl << "Error location: " << driver.location() << endl;
 }

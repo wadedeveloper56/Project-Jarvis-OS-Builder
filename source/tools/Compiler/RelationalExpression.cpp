@@ -8,7 +8,7 @@ shiftExpression(shiftExpression)
 {
 }
 
-RelationalExpression::RelationalExpression(RelationalExpression* relationalExpression, const string& op,
+RelationalExpression::RelationalExpression(RelationalExpression* relationalExpression, const int& op,
 	ShiftExpression* shiftExpression) :
 	relationalExpression(relationalExpression), op(op), shiftExpression(shiftExpression)
 {
@@ -29,7 +29,7 @@ RelationalExpression* RelationalExpression::getRelationalExpression() const
 	return relationalExpression;
 }
 
-optional<string> RelationalExpression::getOp() const
+optional<int> RelationalExpression::getOp() const
 {
 	return op;
 }

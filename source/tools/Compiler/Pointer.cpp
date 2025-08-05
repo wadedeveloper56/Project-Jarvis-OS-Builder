@@ -2,19 +2,19 @@
 
 using namespace WadeSpace;
 
-Pointer::Pointer(const string& name, vector<TypeQualifier*>* typeQualifierList) : name(name), typeQualifierList(typeQualifierList), level(1), pointer(nullptr)
+Pointer::Pointer(const int& name, vector<TypeQualifier*>* typeQualifierList) : name(name), typeQualifierList(typeQualifierList), level(1), pointer(nullptr)
 {
 }
 
-Pointer::Pointer(const string& name, vector<TypeQualifier*>* typeQualifierList, Pointer* pointer) : name(name), typeQualifierList(typeQualifierList), level(1), pointer(pointer)
+Pointer::Pointer(const int& name, vector<TypeQualifier*>* typeQualifierList, Pointer* pointer) : name(name), typeQualifierList(typeQualifierList), level(1), pointer(pointer)
 {
 }
 
-Pointer::Pointer(const string& name, Pointer* pointer) : name(name), typeQualifierList(nullptr), level(1), pointer(pointer)
+Pointer::Pointer(const int& name, Pointer* pointer) : name(name), typeQualifierList(nullptr), level(1), pointer(pointer)
 {
 }
 
-Pointer::Pointer(const string& name) : name(name), typeQualifierList(nullptr), level(1), pointer(nullptr)
+Pointer::Pointer(const int& name) : name(name), typeQualifierList(nullptr), level(1), pointer(nullptr)
 {
 }
 

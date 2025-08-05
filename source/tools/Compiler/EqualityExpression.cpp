@@ -7,7 +7,7 @@ EqualityExpression::EqualityExpression(RelationalExpression* relationalExpressio
 {
 }
 
-EqualityExpression::EqualityExpression(EqualityExpression* equalityExpression, string& op, RelationalExpression* relationalExpression) : relationalExpression(relationalExpression), op(op), equalityExpression(equalityExpression)
+EqualityExpression::EqualityExpression(EqualityExpression* equalityExpression, int& op, RelationalExpression* relationalExpression) : relationalExpression(relationalExpression), op(op), equalityExpression(equalityExpression)
 {
 }
 
@@ -26,7 +26,7 @@ RelationalExpression* EqualityExpression::getRelationalExpression() const
 	return relationalExpression;
 }
 
-optional<string> EqualityExpression::getOp() const
+optional<int> EqualityExpression::getOp() const
 {
 	return op;
 }

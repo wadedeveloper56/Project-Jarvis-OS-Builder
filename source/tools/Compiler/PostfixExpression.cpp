@@ -42,12 +42,25 @@ PostfixExpression::~PostfixExpression()
 	delete typeName;
 }
 
-void PostfixExpression::add(const string& str, const string& str2)
+void PostfixExpression::add(int str, int str2)
+{
+	PostfixExpressionNodePtr temp = new PostfixExpressionNode;
+	temp->expression = nullptr;
+	temp->str1 = str;
+	temp->str2 = nullopt;
+	temp->str3 = str2;
+	temp->vectorAssignmentExpression = nullptr;
+	if (vectorPostfixExpressionNode == nullptr)  vectorPostfixExpressionNode = new vector<PostfixExpressionNode*>();
+	vectorPostfixExpressionNode->push_back(temp);
+}
+
+void PostfixExpression::add(int str, string& str2)
 {
 	PostfixExpressionNodePtr temp = new PostfixExpressionNode;
 	temp->expression = nullptr;
 	temp->str1 = str;
 	temp->str2 = str2;
+	temp->str3 = nullopt;
 	temp->vectorAssignmentExpression = nullptr;
 	if (vectorPostfixExpressionNode == nullptr)  vectorPostfixExpressionNode = new vector<PostfixExpressionNode*>();
 	vectorPostfixExpressionNode->push_back(temp);
@@ -59,6 +72,7 @@ void PostfixExpression::add(Expression* expression)
 	temp->expression = nullptr;
 	temp->str1 = nullopt;
 	temp->str2 = nullopt;
+	temp->str3 = nullopt;
 	temp->vectorAssignmentExpression = nullptr;
 	if (vectorPostfixExpressionNode == nullptr)  vectorPostfixExpressionNode = new vector<PostfixExpressionNode*>();
 	vectorPostfixExpressionNode->push_back(temp);
@@ -70,6 +84,7 @@ void PostfixExpression::add(vector<AssignmentExpression*>* vectorAssignmentExpre
 	temp->expression = nullptr;
 	temp->str1 = nullopt;
 	temp->str2 = nullopt;
+	temp->str3 = nullopt;
 	temp->vectorAssignmentExpression = vectorAssignmentExpression;
 	if (vectorPostfixExpressionNode == nullptr)  vectorPostfixExpressionNode = new vector<PostfixExpressionNode*>();
 	vectorPostfixExpressionNode->push_back(temp);

@@ -7,7 +7,7 @@ Expression::Expression(AssignmentExpression* assignmentExpression) : assignmentE
 {
 }
 
-Expression::Expression(Expression* expression, const string& oper, AssignmentExpression* assignmentExpression) : assignmentExpression(assignmentExpression), oper(oper), expression(expression)
+Expression::Expression(Expression* expression, const int& oper, AssignmentExpression* assignmentExpression) : assignmentExpression(assignmentExpression), oper(oper), expression(expression)
 {
 }
 
@@ -26,7 +26,7 @@ Expression* Expression::getExpression() const
 	return expression;
 }
 
-optional<string> Expression::getOper() const
+optional<int> Expression::getOper() const
 {
 	return oper;
 }

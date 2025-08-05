@@ -109,7 +109,7 @@ void ProgramData::processGlobalVariables()
 			{
 				VariableData* data = new VariableData();
 				DirectDeclarator* dd = initDecl->getDeclarator()->getDirectDeclarator();
-				if ((dd->getStr1() == "(" && dd->getStr2() == ")") || (dd->getParameterTypeList() != nullptr))
+				if ((dd->getStr1() == OPAREN && dd->getStr2() == CPAREN) || (dd->getParameterTypeList() != nullptr))
 				{
 					optional<string> name = dd->getDirectDeclarator()->getIdentifier();
 					FunctionData* data = new FunctionData();

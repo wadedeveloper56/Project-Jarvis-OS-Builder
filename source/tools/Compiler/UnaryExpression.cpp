@@ -9,7 +9,7 @@ UnaryExpression::UnaryExpression(PostfixExpression* postfixExpression) : postfix
 {
 }
 
-void UnaryExpression::add(const string& str)
+void UnaryExpression::add(const int& str)
 {
 	UnaryExpressionNodePtr temp = new UnaryExpressionNode;
 	temp->str = str;
@@ -18,11 +18,11 @@ void UnaryExpression::add(const string& str)
 
 }
 
-UnaryExpression::UnaryExpression(const string& op, CastExpression* castExpression) : postfixExpression(nullptr), castExpression(castExpression), vectorUnaryExpressionNode(nullptr), typeName(nullptr), op(op)
+UnaryExpression::UnaryExpression(const int& op, CastExpression* castExpression) : postfixExpression(nullptr), castExpression(castExpression), vectorUnaryExpressionNode(nullptr), typeName(nullptr), op(op)
 {
 }
 
-UnaryExpression::UnaryExpression(const string& op, TypeName* typeName) : postfixExpression(nullptr), castExpression(nullptr), vectorUnaryExpressionNode(nullptr), typeName(typeName), op(op)
+UnaryExpression::UnaryExpression(const int& op, TypeName* typeName) : postfixExpression(nullptr), castExpression(nullptr), vectorUnaryExpressionNode(nullptr), typeName(typeName), op(op)
 {
 }
 
@@ -65,7 +65,7 @@ CastExpression* UnaryExpression::getCastExpression() const
 	return castExpression;
 }
 
-optional<string> UnaryExpression::getOp() const
+optional<int> UnaryExpression::getOp() const
 {
 	return op;
 }

@@ -13,14 +13,14 @@ namespace WadeSpace
 	class TypeQualifier
 	{
 	public:
-		TypeQualifier(const string& value, TokenType type);
+		TypeQualifier(const int& value, TokenType type);
 		TypeQualifier();
 		virtual ~TypeQualifier();
-		optional<string> getOperatorStr() const;
+		optional<int> getOperatorStr() const;
 		TokenType getType() const;
 
 	private:
-		optional<string> operatorStr;
+		optional<int> operatorStr;
 		TokenType type;
 	};
 }
