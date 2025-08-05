@@ -14,26 +14,32 @@ namespace WadeSpace
 	class CastExpression;
 	class PostfixExpression;
 
+	typedef struct _UnaryExpressionNode
+	{
+		optional<string> str;
+	} UnaryExpressionNode, * UnaryExpressionNodePtr;
+
 	class UnaryExpression
 	{
 	public:
 		UnaryExpression(PostfixExpression* postfixExpression);
-		UnaryExpression(const string& op, UnaryExpression* unaryExpression);
+		void add(const string& op);
 		UnaryExpression(const string& op, CastExpression* castExpression);
 		UnaryExpression(const string& op, TypeName* typeName);
 		UnaryExpression();
 		virtual ~UnaryExpression();
 		PostfixExpression* getPostfixExpression() const;
 		TypeName* getTypeName() const;
-		UnaryExpression* getUnaryExpression() const;
+		vector<UnaryExpressionNode*>* getVectorUnaryExpressionNode() const;
 		CastExpression* getCastExpression() const;
 		optional<string> getOp() const;
 
 	private:
 		PostfixExpression* postfixExpression;
 		TypeName* typeName;
-		UnaryExpression* unaryExpression;
+		//UnaryExpression* unaryExpression;
 		CastExpression* castExpression;
 		optional<string> op;
+		vector<UnaryExpressionNode*>* vectorUnaryExpressionNode;
 	};
 }

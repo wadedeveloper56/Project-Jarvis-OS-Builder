@@ -5,23 +5,28 @@
 using namespace WadeSpace;
 using namespace std;
 
-UnaryExpression::UnaryExpression(PostfixExpression* postfixExpression) : postfixExpression(postfixExpression), castExpression(nullptr), unaryExpression(nullptr), typeName(nullptr), op(nullopt)
+UnaryExpression::UnaryExpression(PostfixExpression* postfixExpression) : postfixExpression(postfixExpression), castExpression(nullptr), vectorUnaryExpressionNode(nullptr), typeName(nullptr), op(nullopt)
 {
 }
 
-UnaryExpression::UnaryExpression(const string& op, UnaryExpression* unaryExpression) : postfixExpression(nullptr), castExpression(nullptr), unaryExpression(unaryExpression), typeName(nullptr), op(op)
+void UnaryExpression::add(const string& str)
+{
+	UnaryExpressionNodePtr temp = new UnaryExpressionNode;
+	temp->str = str;
+	if (vectorUnaryExpressionNode == nullptr)  vectorUnaryExpressionNode = new vector<UnaryExpressionNode*>();
+	vectorUnaryExpressionNode->push_back(temp);
+
+}
+
+UnaryExpression::UnaryExpression(const string& op, CastExpression* castExpression) : postfixExpression(nullptr), castExpression(castExpression), vectorUnaryExpressionNode(nullptr), typeName(nullptr), op(op)
 {
 }
 
-UnaryExpression::UnaryExpression(const string& op, CastExpression* castExpression) : postfixExpression(nullptr), castExpression(castExpression), unaryExpression(nullptr), typeName(nullptr), op(op)
+UnaryExpression::UnaryExpression(const string& op, TypeName* typeName) : postfixExpression(nullptr), castExpression(nullptr), vectorUnaryExpressionNode(nullptr), typeName(typeName), op(op)
 {
 }
 
-UnaryExpression::UnaryExpression(const string& op, TypeName* typeName) : postfixExpression(nullptr), castExpression(nullptr), unaryExpression(nullptr), typeName(typeName), op(op)
-{
-}
-
-UnaryExpression::UnaryExpression() : postfixExpression(nullptr), castExpression(nullptr), unaryExpression(nullptr), typeName(nullptr), op(nullopt)
+UnaryExpression::UnaryExpression() : postfixExpression(nullptr), castExpression(nullptr), vectorUnaryExpressionNode(nullptr), typeName(nullptr), op(nullopt)
 {
 }
 
@@ -29,7 +34,14 @@ UnaryExpression::~UnaryExpression()
 {
 	delete postfixExpression;
 	delete castExpression;
-	delete unaryExpression;
+	if (vectorUnaryExpressionNode!=nullptr)
+	{
+		for (UnaryExpressionNode* ptr :*vectorUnaryExpressionNode)
+		{
+			delete ptr;
+		}
+	}
+	delete vectorUnaryExpressionNode;
 	delete typeName;
 }
 
@@ -43,9 +55,9 @@ TypeName* UnaryExpression::getTypeName() const
 	return typeName;
 }
 
-UnaryExpression* UnaryExpression::getUnaryExpression() const
+vector<UnaryExpressionNode*>* UnaryExpression::getVectorUnaryExpressionNode() const
 {
-	return unaryExpression;
+	return vectorUnaryExpressionNode;
 }
 
 CastExpression* UnaryExpression::getCastExpression() const

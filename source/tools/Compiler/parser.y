@@ -329,10 +329,10 @@ argument_expression_list
 
 unary_expression
     : postfix_expression             { $<UnaryExpression *>$ = new UnaryExpression($1); cout << "postfix_expression REDUCE unary_expression" << endl;}
-    | INC_OP unary_expression        { $<UnaryExpression *>$ = new UnaryExpression($1,$2); cout << "INC_OP unary_expression REDUCE unary_expression" << endl;}
-    | DEC_OP unary_expression        { $<UnaryExpression *>$ = new UnaryExpression($1,$2); cout << "DEC_OP unary_expression REDUCE unary_expression" << endl;}
+    | INC_OP unary_expression        { $2->add($1); $<UnaryExpression *>$ = $2; cout << "INC_OP unary_expression REDUCE unary_expression" << endl;}
+    | DEC_OP unary_expression        { $2->add($1); $<UnaryExpression *>$ = $2; cout << "DEC_OP unary_expression REDUCE unary_expression" << endl;}
     | unary_operator cast_expression { $<UnaryExpression *>$ = new UnaryExpression($1,$2); cout << "unary_operator cast_expression REDUCE unary_expression" << endl;}
-    | SIZEOF unary_expression        { $<UnaryExpression *>$ = new UnaryExpression($1,$2); cout << "SIZEOF unary_expression REDUCE unary_expression" << endl;}
+    | SIZEOF unary_expression        { $2->add($1); $<UnaryExpression *>$ = $2; cout << "SIZEOF unary_expression REDUCE unary_expression" << endl;}
     | SIZEOF OPAREN type_name CPAREN { $<UnaryExpression *>$ = new UnaryExpression($1,$3); cout << "SIZEOF OPAREN type_name CPAREN REDUCE unary_expression" << endl;}
     ;
 

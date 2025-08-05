@@ -2351,13 +2351,13 @@ namespace  WadeSpace  {
 
   case 21: // unary_expression: "++" unary_expression
 #line 332 "parser.y"
-                                     { yylhs.value.as< UnaryExpression * > () = new UnaryExpression(yystack_[1].value.as < std::string > (),yystack_[0].value.as < UnaryExpression * > ()); cout << "INC_OP unary_expression REDUCE unary_expression" << endl;}
+                                     { yystack_[0].value.as < UnaryExpression * > ()->add(yystack_[1].value.as < std::string > ()); yylhs.value.as< UnaryExpression * > () = yystack_[0].value.as < UnaryExpression * > (); cout << "INC_OP unary_expression REDUCE unary_expression" << endl;}
 #line 2356 "parser.cpp"
     break;
 
   case 22: // unary_expression: "--" unary_expression
 #line 333 "parser.y"
-                                     { yylhs.value.as< UnaryExpression * > () = new UnaryExpression(yystack_[1].value.as < std::string > (),yystack_[0].value.as < UnaryExpression * > ()); cout << "DEC_OP unary_expression REDUCE unary_expression" << endl;}
+                                     { yystack_[0].value.as < UnaryExpression * > ()->add(yystack_[1].value.as < std::string > ()); yylhs.value.as< UnaryExpression * > () = yystack_[0].value.as < UnaryExpression * > (); cout << "DEC_OP unary_expression REDUCE unary_expression" << endl;}
 #line 2362 "parser.cpp"
     break;
 
@@ -2369,7 +2369,7 @@ namespace  WadeSpace  {
 
   case 24: // unary_expression: "sizeof" unary_expression
 #line 335 "parser.y"
-                                     { yylhs.value.as< UnaryExpression * > () = new UnaryExpression(yystack_[1].value.as < std::string > (),yystack_[0].value.as < UnaryExpression * > ()); cout << "SIZEOF unary_expression REDUCE unary_expression" << endl;}
+                                     { yystack_[0].value.as < UnaryExpression * > ()->add(yystack_[1].value.as < std::string > ()); yylhs.value.as< UnaryExpression * > () = yystack_[0].value.as < UnaryExpression * > (); cout << "SIZEOF unary_expression REDUCE unary_expression" << endl;}
 #line 2374 "parser.cpp"
     break;
 
