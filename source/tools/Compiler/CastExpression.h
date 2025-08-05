@@ -13,20 +13,23 @@ namespace WadeSpace
 {
 	class TypeName;
 
+	typedef struct _CastExpressionNode
+	{
+		TypeName* type;
+	} CastExpressionNode, * CastExpressionNodePtr;
+
 	class CastExpression
 	{
 	public:
 		CastExpression(UnaryExpression* ue);
-		CastExpression(TypeName* type, CastExpression* ce);
+		void add(TypeName* type);
 		CastExpression();
 		virtual ~CastExpression();
 		UnaryExpression* getUnaryExpression() const;
-		TypeName* getType() const;
-		CastExpression* getCastExpression() const;
+		vector<CastExpressionNode*>* getVectorCastExpressionNode() const;
 
 	private:
 		UnaryExpression* unaryExpression;
-		TypeName* type;
-		CastExpression* castExpression;
+		vector<CastExpressionNode*>* vectorCastExpressionNode;
 	};
 }

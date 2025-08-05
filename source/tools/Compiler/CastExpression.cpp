@@ -4,23 +4,34 @@
 using namespace WadeSpace;
 using namespace std;
 
-CastExpression::CastExpression(UnaryExpression* ue) : unaryExpression(ue), type(nullptr), castExpression(nullptr)
+CastExpression::CastExpression(UnaryExpression* ue) : unaryExpression(ue), vectorCastExpressionNode(nullptr)
 {
 }
 
-CastExpression::CastExpression(TypeName* type, CastExpression* ce) : unaryExpression(nullptr), type(type), castExpression(ce)
+void CastExpression::add(TypeName* type)
 {
+	CastExpressionNodePtr temp = new CastExpressionNode;
+	temp->type = type;
+	if (vectorCastExpressionNode == nullptr)  vectorCastExpressionNode = new vector<CastExpressionNode*>();
+	vectorCastExpressionNode->push_back(temp);
+
 }
 
-CastExpression::CastExpression() : unaryExpression(nullptr), type(nullptr), castExpression(nullptr)
+CastExpression::CastExpression() : unaryExpression(nullptr), vectorCastExpressionNode(nullptr)
 {
 }
 
 CastExpression::~CastExpression()
 {
 	delete unaryExpression;
-	delete castExpression;
-	delete type;
+	if (vectorCastExpressionNode != nullptr)
+	{
+		for (CastExpressionNode* ptr : *vectorCastExpressionNode)
+		{
+			delete ptr;
+		}
+	}
+	delete vectorCastExpressionNode;
 }
 
 UnaryExpression* CastExpression::getUnaryExpression() const
@@ -28,12 +39,7 @@ UnaryExpression* CastExpression::getUnaryExpression() const
 	return unaryExpression;
 }
 
-TypeName* CastExpression::getType() const
+vector<CastExpressionNode*>* CastExpression::getVectorCastExpressionNode() const
 {
-	return type;
-}
-
-CastExpression* CastExpression::getCastExpression() const
-{
-	return castExpression;
+	return vectorCastExpressionNode;
 }

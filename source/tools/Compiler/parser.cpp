@@ -2438,7 +2438,7 @@ namespace  WadeSpace  {
 
   case 33: // cast_expression: "(" type_name ")" cast_expression
 #line 350 "parser.y"
-                                               { yylhs.value.as< CastExpression * > () = new CastExpression(yystack_[2].value.as < TypeName * > (),yystack_[0].value.as < CastExpression * > ());  cout << "unary_expression REDUCE to cast_expression" << endl;}
+                                               { yystack_[0].value.as < CastExpression * > ()->add(yystack_[2].value.as < TypeName * > ()); yylhs.value.as< CastExpression * > () = yystack_[0].value.as < CastExpression * > ();  cout << "unary_expression REDUCE to cast_expression" << endl;}
 #line 2443 "parser.cpp"
     break;
 
@@ -2450,19 +2450,19 @@ namespace  WadeSpace  {
 
   case 35: // multiplicative_expression: multiplicative_expression "*" cast_expression
 #line 355 "parser.y"
-                                                         { yylhs.value.as< MultiplicativeExpression * > () = new MultiplicativeExpression(yystack_[2].value.as < MultiplicativeExpression * > (),yystack_[1].value.as < int > (),yystack_[0].value.as < CastExpression * > ()); cout << "multiplicative_expression TIMES_OP cast_expression REDUCE to multiplicative_expression" << endl;}
+                                                         { yystack_[2].value.as < MultiplicativeExpression * > ()->add(yystack_[1].value.as < int > (),yystack_[0].value.as < CastExpression * > ()); yylhs.value.as< MultiplicativeExpression * > () = yystack_[2].value.as < MultiplicativeExpression * > (); cout << "multiplicative_expression TIMES_OP cast_expression REDUCE to multiplicative_expression" << endl;}
 #line 2455 "parser.cpp"
     break;
 
   case 36: // multiplicative_expression: multiplicative_expression "/" cast_expression
 #line 356 "parser.y"
-                                                         { yylhs.value.as< MultiplicativeExpression * > () = new MultiplicativeExpression(yystack_[2].value.as < MultiplicativeExpression * > (),yystack_[1].value.as < int > (),yystack_[0].value.as < CastExpression * > ()); cout << "multiplicative_expression DIV_OP cast_expression REDUCE to multiplicative_expression" << endl;}
+                                                         { yystack_[2].value.as < MultiplicativeExpression * > ()->add(yystack_[1].value.as < int > (),yystack_[0].value.as < CastExpression * > ()); yylhs.value.as< MultiplicativeExpression * > () = yystack_[2].value.as < MultiplicativeExpression * > (); cout << "multiplicative_expression DIV_OP cast_expression REDUCE to multiplicative_expression" << endl;}
 #line 2461 "parser.cpp"
     break;
 
   case 37: // multiplicative_expression: multiplicative_expression "%" cast_expression
 #line 357 "parser.y"
-                                                         { yylhs.value.as< MultiplicativeExpression * > () = new MultiplicativeExpression(yystack_[2].value.as < MultiplicativeExpression * > (),yystack_[1].value.as < int > (),yystack_[0].value.as < CastExpression * > ()); cout << "multiplicative_expression MOD_OP cast_expression REDUCE to multiplicative_expression" << endl;}
+                                                         { yystack_[2].value.as < MultiplicativeExpression * > ()->add(yystack_[1].value.as < int > (),yystack_[0].value.as < CastExpression * > ()); yylhs.value.as< MultiplicativeExpression * > () = yystack_[2].value.as < MultiplicativeExpression * > (); cout << "multiplicative_expression MOD_OP cast_expression REDUCE to multiplicative_expression" << endl;}
 #line 2467 "parser.cpp"
     break;
 

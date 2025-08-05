@@ -3,32 +3,34 @@
 using namespace WadeSpace;
 using namespace std;
 
-MultiplicativeExpression::MultiplicativeExpression(CastExpression* castExpression) : castExpression(castExpression), op(nullopt), multiplicativeExpression(nullptr)
+MultiplicativeExpression::MultiplicativeExpression(CastExpression* castExpression) : castExpression(castExpression), vectorMultiplicativeExpressionNode(nullptr)
 {
 }
 
-MultiplicativeExpression::MultiplicativeExpression(MultiplicativeExpression* multiplicativeExpression, const int& op, CastExpression* castExpression): multiplicativeExpression(multiplicativeExpression), op(op), castExpression(castExpression)
+void MultiplicativeExpression::add(const int& op, CastExpression* castExpression)
 {
+	MultiplicativeExpressionNodePtr temp = new MultiplicativeExpressionNode;
+	temp->expression = castExpression;
+	temp->op = op;
+	if (vectorMultiplicativeExpressionNode == nullptr)  vectorMultiplicativeExpressionNode = new vector<MultiplicativeExpressionNode*>();
+	vectorMultiplicativeExpressionNode->push_back(temp);
+
 }
 
-MultiplicativeExpression::MultiplicativeExpression() : multiplicativeExpression(nullptr), op(nullopt), castExpression(nullptr)
+MultiplicativeExpression::MultiplicativeExpression() :vectorMultiplicativeExpressionNode(nullptr), castExpression(nullptr)
 {
 }
 
 MultiplicativeExpression::~MultiplicativeExpression()
 {
-    delete multiplicativeExpression;
+	if (vectorMultiplicativeExpressionNode != nullptr) {
+		for (MultiplicativeExpressionNode* ptr : *vectorMultiplicativeExpressionNode)
+		{
+			delete ptr;
+		}
+	}
+    delete vectorMultiplicativeExpressionNode;
     delete castExpression;
-}
-
-MultiplicativeExpression* MultiplicativeExpression::getMultiplicativeExpression() const
-{
-	return multiplicativeExpression;
-}
-
-optional<int> MultiplicativeExpression::getOp() const
-{
-	return op;
 }
 
 CastExpression* MultiplicativeExpression::getCastExpression() const

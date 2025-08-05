@@ -347,14 +347,14 @@ unary_operator
 
 cast_expression
     : unary_expression                         { $<CastExpression *>$ = new CastExpression($1);  cout << "unary_expression REDUCE to cast_expression" << endl;}
-    | OPAREN type_name CPAREN cast_expression  { $<CastExpression *>$ = new CastExpression($2,$4);  cout << "unary_expression REDUCE to cast_expression" << endl;}
+    | OPAREN type_name CPAREN cast_expression  { $4->add($2); $<CastExpression *>$ = $4;  cout << "unary_expression REDUCE to cast_expression" << endl;}
     ;
 
 multiplicative_expression
     : cast_expression                                    { $<MultiplicativeExpression *>$ = new MultiplicativeExpression($1);  cout << "cast_expression REDUCE to multiplicative_expression" << endl;}
-    | multiplicative_expression TIMES_OP cast_expression { $<MultiplicativeExpression *>$ = new MultiplicativeExpression($1,$2,$3); cout << "multiplicative_expression TIMES_OP cast_expression REDUCE to multiplicative_expression" << endl;}
-    | multiplicative_expression DIV_OP cast_expression   { $<MultiplicativeExpression *>$ = new MultiplicativeExpression($1,$2,$3); cout << "multiplicative_expression DIV_OP cast_expression REDUCE to multiplicative_expression" << endl;}
-    | multiplicative_expression MOD_OP cast_expression   { $<MultiplicativeExpression *>$ = new MultiplicativeExpression($1,$2,$3); cout << "multiplicative_expression MOD_OP cast_expression REDUCE to multiplicative_expression" << endl;}
+    | multiplicative_expression TIMES_OP cast_expression { $1->add($2,$3); $<MultiplicativeExpression *>$ = $1; cout << "multiplicative_expression TIMES_OP cast_expression REDUCE to multiplicative_expression" << endl;}
+    | multiplicative_expression DIV_OP cast_expression   { $1->add($2,$3); $<MultiplicativeExpression *>$ = $1; cout << "multiplicative_expression DIV_OP cast_expression REDUCE to multiplicative_expression" << endl;}
+    | multiplicative_expression MOD_OP cast_expression   { $1->add($2,$3); $<MultiplicativeExpression *>$ = $1; cout << "multiplicative_expression MOD_OP cast_expression REDUCE to multiplicative_expression" << endl;}
     ;
 
 additive_expression

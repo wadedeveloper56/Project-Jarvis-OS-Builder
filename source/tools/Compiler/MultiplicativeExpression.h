@@ -11,20 +11,25 @@ using namespace std;
 
 namespace WadeSpace
 {
+	typedef struct _MultiplicativeExpressionNode
+	{
+		CastExpression* expression;
+		optional<int> op;
+	} MultiplicativeExpressionNode, * MultiplicativeExpressionNodePtr;
+
+
 	class MultiplicativeExpression
 	{
 	public:
 		MultiplicativeExpression(CastExpression* castExpression);
-		MultiplicativeExpression(MultiplicativeExpression* multiplicativeExpression, const int& op, CastExpression* castExpression);
+		void add(const int& op, CastExpression* castExpression);
 		MultiplicativeExpression();
 		virtual ~MultiplicativeExpression();
-		MultiplicativeExpression* getMultiplicativeExpression() const;
 		optional<int> getOp() const;
 		CastExpression* getCastExpression() const;
 
 	private:
-		MultiplicativeExpression* multiplicativeExpression;
-		optional<int> op;
+		vector<MultiplicativeExpressionNode*> * vectorMultiplicativeExpressionNode;
 		CastExpression* castExpression;
 	};
 }
