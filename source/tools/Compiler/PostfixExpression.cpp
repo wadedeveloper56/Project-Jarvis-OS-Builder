@@ -3,83 +3,84 @@
 using namespace WadeSpace;
 using namespace std;
 
-PostfixExpression::PostfixExpression(PrimaryExpression* primaryExpression) : primaryExpression(primaryExpression), postfixExpression(nullptr), expression(nullptr), vectorAssignmentExpression(nullptr),
-vectorInitializer(nullptr), typeName(nullptr), str1(nullopt), str2(nullopt)
+PostfixExpression::PostfixExpression(PrimaryExpression* primaryExpression) : primaryExpression(primaryExpression),
+                                                                             vectorInitializer(nullptr),
+                                                                             vectorPostfixExpressionNode(nullptr),
+                                                                             typeName(nullptr)
 {
 }
 
-PostfixExpression::PostfixExpression(PostfixExpression* postfixExpression, const string& str, const string& str2) : primaryExpression(nullptr), postfixExpression(postfixExpression),
-vectorAssignmentExpression(nullptr), expression(nullptr), vectorInitializer(nullptr), typeName(nullptr), str1(str1), str2(str2)
+PostfixExpression::PostfixExpression(TypeName* typeName, vector<Initializer*>* vectorInitializer) :
+	primaryExpression(nullptr), vectorInitializer(vectorInitializer), vectorPostfixExpressionNode(nullptr),
+	typeName(typeName)
 {
 }
 
-PostfixExpression::PostfixExpression(PostfixExpression* postfixExpression, Expression* expression) : primaryExpression(nullptr), postfixExpression(postfixExpression), expression(expression),
-vectorAssignmentExpression(nullptr), vectorInitializer(nullptr), typeName(nullptr), str1(nullopt), str2(nullopt)
-{
-}
-
-PostfixExpression::PostfixExpression(PostfixExpression* postfixExpression, vector<AssignmentExpression*>* vectorAssignmentExpression) : primaryExpression(nullptr),
-postfixExpression(postfixExpression), expression(nullptr), vectorAssignmentExpression(vectorAssignmentExpression), vectorInitializer(nullptr), typeName(nullptr), str1(nullopt), str2(nullopt)
-{
-}
-
-PostfixExpression::PostfixExpression(TypeName* typeName, vector<Initializer*>* vectorInitializer) : primaryExpression(nullptr), postfixExpression(nullptr), expression(nullptr),
-vectorAssignmentExpression(nullptr), vectorInitializer(vectorInitializer), typeName(typeName), str1(nullopt),
-str2(nullopt)
-{
-}
-
-PostfixExpression::PostfixExpression() : primaryExpression(nullptr), postfixExpression(nullptr), expression(nullptr), vectorAssignmentExpression(nullptr), vectorInitializer(nullptr),
-typeName(nullptr), str1(nullopt), str2(nullopt)
+PostfixExpression::PostfixExpression() : primaryExpression(nullptr), vectorInitializer(nullptr),
+                                         vectorPostfixExpressionNode(nullptr), typeName(nullptr)
 {
 }
 
 PostfixExpression::~PostfixExpression()
 {
+
 	delete primaryExpression;
-	delete postfixExpression;
-	delete expression;
-	delete vectorAssignmentExpression;
+	if (vectorInitializer != nullptr) {
+		for (Initializer* ptr : *vectorInitializer)
+		{
+			delete ptr;
+		}
+	}
 	delete vectorInitializer;
+	if (vectorPostfixExpressionNode != nullptr) {
+		for (PostfixExpressionNode* ptr : *vectorPostfixExpressionNode)
+		{
+			delete ptr;
+		}
+	}
+	delete vectorPostfixExpressionNode;
 	delete typeName;
 }
 
-PrimaryExpression* PostfixExpression::getPrimaryExpression() const
+void PostfixExpression::add(const string& str, const string& str2)
 {
-	return primaryExpression;
+	PostfixExpressionNodePtr temp = new PostfixExpressionNode;
+	temp->expression = nullptr;
+	temp->str1 = str;
+	temp->str2 = str2;
+	temp->vectorAssignmentExpression = nullptr;
+	if (vectorPostfixExpressionNode == nullptr)  vectorPostfixExpressionNode = new vector<PostfixExpressionNode*>();
+	vectorPostfixExpressionNode->push_back(temp);
 }
 
-PostfixExpression* PostfixExpression::getPostfixExpression() const
+void PostfixExpression::add(Expression* expression)
 {
-	return postfixExpression;
+	PostfixExpressionNodePtr temp = new PostfixExpressionNode;
+	temp->expression = nullptr;
+	temp->str1 = nullopt;
+	temp->str2 = nullopt;
+	temp->vectorAssignmentExpression = nullptr;
+	if (vectorPostfixExpressionNode == nullptr)  vectorPostfixExpressionNode = new vector<PostfixExpressionNode*>();
+	vectorPostfixExpressionNode->push_back(temp);
 }
 
-Expression* PostfixExpression::getExpression() const
+void PostfixExpression::add(vector<AssignmentExpression*>* vectorAssignmentExpression)
 {
-	return expression;
+	PostfixExpressionNodePtr temp = new PostfixExpressionNode;
+	temp->expression = nullptr;
+	temp->str1 = nullopt;
+	temp->str2 = nullopt;
+	temp->vectorAssignmentExpression = vectorAssignmentExpression;
+	if (vectorPostfixExpressionNode == nullptr)  vectorPostfixExpressionNode = new vector<PostfixExpressionNode*>();
+	vectorPostfixExpressionNode->push_back(temp);
 }
 
-vector<AssignmentExpression*>* PostfixExpression::getVectorAssignmentExpression() const
+PrimaryExpression* PostfixExpression::getPrimaryExpression() const { return primaryExpression; }
+vector<Initializer*>* PostfixExpression::getVectorInitializer() const { return vectorInitializer; }
+
+vector<PostfixExpressionNode*>* PostfixExpression::getVectorPostfixExpressionNode() const
 {
-	return vectorAssignmentExpression;
+	return vectorPostfixExpressionNode;
 }
 
-vector<Initializer*>* PostfixExpression::getVectorInitializer() const
-{
-	return vectorInitializer;
-}
-
-TypeName* PostfixExpression::getTypeName() const
-{
-	return typeName;
-}
-
-optional<string> PostfixExpression::getStr1() const
-{
-	return str1;
-}
-
-optional<string> PostfixExpression::getStr2() const
-{
-	return str2;
-}
+TypeName* PostfixExpression::getTypeName() const { return typeName; }

@@ -2268,43 +2268,43 @@ namespace  WadeSpace  {
 
   case 9: // postfix_expression: postfix_expression "[" expression "]"
 #line 303 "parser.y"
-                                                                   { yylhs.value.as< PostfixExpression * > () = new PostfixExpression(yystack_[3].value.as < PostfixExpression * > (),yystack_[1].value.as < Expression * > ()); cout << "postfix_expression OBRACE expression CBRACE REDUCE to postfix_expression" << endl; }
+                                                                   { yystack_[3].value.as < PostfixExpression * > ()->add(yystack_[1].value.as < Expression * > ()); yylhs.value.as< PostfixExpression * > () = yystack_[3].value.as < PostfixExpression * > (); cout << "postfix_expression OBRACE expression CBRACE REDUCE to postfix_expression" << endl; }
 #line 2273 "parser.cpp"
     break;
 
   case 10: // postfix_expression: postfix_expression "(" ")"
 #line 304 "parser.y"
-                                                                   { yylhs.value.as< PostfixExpression * > () = new PostfixExpression(yystack_[2].value.as < PostfixExpression * > (),yystack_[1].value.as < std::string > (),yystack_[0].value.as < std::string > ()); cout << "postfix_expression OPAREN CPAREN REDUCE to postfix_expression" << endl; }
+                                                                   { yystack_[2].value.as < PostfixExpression * > ()->add(yystack_[1].value.as < std::string > (),yystack_[0].value.as < std::string > ()); yylhs.value.as< PostfixExpression * > () = yystack_[2].value.as < PostfixExpression * > (); cout << "postfix_expression OPAREN CPAREN REDUCE to postfix_expression" << endl; }
 #line 2279 "parser.cpp"
     break;
 
   case 11: // postfix_expression: postfix_expression "(" argument_expression_list ")"
 #line 305 "parser.y"
-                                                                   { yylhs.value.as< PostfixExpression * > () = new PostfixExpression(yystack_[3].value.as < PostfixExpression * > (),yystack_[1].value.as < std::vector<AssignmentExpression *> * > ()); cout << "postfix_expression OPAREN argument_expression_list CPAREN REDUCE to postfix_expression" << endl; }
+                                                                   { yystack_[3].value.as < PostfixExpression * > ()->add(yystack_[1].value.as < std::vector<AssignmentExpression *> * > ()); yylhs.value.as< PostfixExpression * > () = yystack_[3].value.as < PostfixExpression * > (); cout << "postfix_expression OPAREN argument_expression_list CPAREN REDUCE to postfix_expression" << endl; }
 #line 2285 "parser.cpp"
     break;
 
   case 12: // postfix_expression: postfix_expression "." "identifier"
 #line 306 "parser.y"
-                                                                   { yylhs.value.as< PostfixExpression * > () = new PostfixExpression(yystack_[2].value.as < PostfixExpression * > (),yystack_[1].value.as < std::string > (),yystack_[0].value.as < std::string > ()); cout << "postfix_expression PERIOD_OP IDENTIFIER REDUCE to postfix_expression" << endl; }
+                                                                   { yystack_[2].value.as < PostfixExpression * > ()->add(yystack_[1].value.as < std::string > (),yystack_[0].value.as < std::string > ()); yylhs.value.as< PostfixExpression * > () = yystack_[2].value.as < PostfixExpression * > (); cout << "postfix_expression PERIOD_OP IDENTIFIER REDUCE to postfix_expression" << endl; }
 #line 2291 "parser.cpp"
     break;
 
   case 13: // postfix_expression: postfix_expression "->" "identifier"
 #line 307 "parser.y"
-                                                                   { yylhs.value.as< PostfixExpression * > () = new PostfixExpression(yystack_[2].value.as < PostfixExpression * > (),yystack_[1].value.as < std::string > (),yystack_[0].value.as < std::string > ()); cout << "postfix_expression PTR_OP IDENTIFIER REDUCE to postfix_expression" << endl; }
+                                                                   { yystack_[2].value.as < PostfixExpression * > ()->add(yystack_[1].value.as < std::string > (),yystack_[0].value.as < std::string > ()); yylhs.value.as< PostfixExpression * > () = yystack_[2].value.as < PostfixExpression * > (); cout << "postfix_expression PTR_OP IDENTIFIER REDUCE to postfix_expression" << endl; }
 #line 2297 "parser.cpp"
     break;
 
   case 14: // postfix_expression: postfix_expression "++"
 #line 308 "parser.y"
-                                                                   { yylhs.value.as< PostfixExpression * > () = new PostfixExpression(yystack_[1].value.as < PostfixExpression * > (),yystack_[0].value.as < std::string > (),""); cout << "postfix_expression INC_OP REDUCE to postfix_expression" << endl; }
+                                                                   { yystack_[1].value.as < PostfixExpression * > ()->add(yystack_[0].value.as < std::string > (),""); yylhs.value.as< PostfixExpression * > () = yystack_[1].value.as < PostfixExpression * > (); cout << "postfix_expression INC_OP REDUCE to postfix_expression" << endl; }
 #line 2303 "parser.cpp"
     break;
 
   case 15: // postfix_expression: postfix_expression "--"
 #line 309 "parser.y"
-                                                                   { yylhs.value.as< PostfixExpression * > () = new PostfixExpression(yystack_[1].value.as < PostfixExpression * > (),yystack_[0].value.as < std::string > (),""); cout << "postfix_expression DEC_OP REDUCE to postfix_expression" << endl; }
+                                                                   { yystack_[1].value.as < PostfixExpression * > ()->add(yystack_[0].value.as < std::string > (),""); yylhs.value.as< PostfixExpression * > () = yystack_[1].value.as < PostfixExpression * > (); cout << "postfix_expression DEC_OP REDUCE to postfix_expression" << endl; }
 #line 2309 "parser.cpp"
     break;
 

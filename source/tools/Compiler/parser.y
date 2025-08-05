@@ -300,13 +300,13 @@ constant
 
 postfix_expression
     : primary_expression                                           { $<PostfixExpression *>$ = new PostfixExpression($1); cout << "primary_expression REDUCE to postfix_expression" << endl; }
-    | postfix_expression OBRACE expression CBRACE                  { $<PostfixExpression *>$ = new PostfixExpression($1,$3); cout << "postfix_expression OBRACE expression CBRACE REDUCE to postfix_expression" << endl; }
-    | postfix_expression OPAREN CPAREN                             { $<PostfixExpression *>$ = new PostfixExpression($1,$2,$3); cout << "postfix_expression OPAREN CPAREN REDUCE to postfix_expression" << endl; }
-    | postfix_expression OPAREN argument_expression_list CPAREN    { $<PostfixExpression *>$ = new PostfixExpression($1,$3); cout << "postfix_expression OPAREN argument_expression_list CPAREN REDUCE to postfix_expression" << endl; }
-    | postfix_expression PERIOD IDENTIFIER                         { $<PostfixExpression *>$ = new PostfixExpression($1,$2,$3); cout << "postfix_expression PERIOD_OP IDENTIFIER REDUCE to postfix_expression" << endl; }
-    | postfix_expression PTR_OP IDENTIFIER                         { $<PostfixExpression *>$ = new PostfixExpression($1,$2,$3); cout << "postfix_expression PTR_OP IDENTIFIER REDUCE to postfix_expression" << endl; }
-    | postfix_expression INC_OP                                    { $<PostfixExpression *>$ = new PostfixExpression($1,$2,""); cout << "postfix_expression INC_OP REDUCE to postfix_expression" << endl; }
-    | postfix_expression DEC_OP                                    { $<PostfixExpression *>$ = new PostfixExpression($1,$2,""); cout << "postfix_expression DEC_OP REDUCE to postfix_expression" << endl; }
+    | postfix_expression OBRACE expression CBRACE                  { $1->add($3); $<PostfixExpression *>$ = $1; cout << "postfix_expression OBRACE expression CBRACE REDUCE to postfix_expression" << endl; }
+    | postfix_expression OPAREN CPAREN                             { $1->add($2,$3); $<PostfixExpression *>$ = $1; cout << "postfix_expression OPAREN CPAREN REDUCE to postfix_expression" << endl; }
+    | postfix_expression OPAREN argument_expression_list CPAREN    { $1->add($3); $<PostfixExpression *>$ = $1; cout << "postfix_expression OPAREN argument_expression_list CPAREN REDUCE to postfix_expression" << endl; }
+    | postfix_expression PERIOD IDENTIFIER                         { $1->add($2,$3); $<PostfixExpression *>$ = $1; cout << "postfix_expression PERIOD_OP IDENTIFIER REDUCE to postfix_expression" << endl; }
+    | postfix_expression PTR_OP IDENTIFIER                         { $1->add($2,$3); $<PostfixExpression *>$ = $1; cout << "postfix_expression PTR_OP IDENTIFIER REDUCE to postfix_expression" << endl; }
+    | postfix_expression INC_OP                                    { $1->add($2,""); $<PostfixExpression *>$ = $1; cout << "postfix_expression INC_OP REDUCE to postfix_expression" << endl; }
+    | postfix_expression DEC_OP                                    { $1->add($2,""); $<PostfixExpression *>$ = $1; cout << "postfix_expression DEC_OP REDUCE to postfix_expression" << endl; }
     | OPAREN type_name CPAREN OCURLY initializer_list CCURLY       { $<PostfixExpression *>$ = new PostfixExpression($2,$5); cout << "OPAREN type_name CPAREN_OP OCURLY_OP initializer_list CCURLY REDUCE to postfix_expression" << endl; }
     | OPAREN type_name CPAREN OCURLY initializer_list COMMA CCURLY { $<PostfixExpression *>$ = new PostfixExpression($2,$5); cout << "OPAREN type_name CPAREN_OP OCURLY_OP initializer_list COMMA CCURLY REDUCE to postfix_expression" << endl; }
 
