@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{67531ce1-b69a-4957-a5fc-b5f1e8c2125a}</ProjectGuid>
+    <RootNamespace>Watcom2MSVC</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>..\..\..\bin\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>..\..\..\bin\intermediate\Watcom2MSVC\$(Configuration)\$(Platform)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>..\..\..\bin\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>..\..\..\bin\intermediate\Watcom2MSVC\$(Configuration)\$(Platform)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>..\..\..\bin\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>..\..\..\bin\intermediate\Watcom2MSVC\$(Configuration)\$(Platform)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>..\..\..\bin\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>..\..\..\bin\intermediate\Watcom2MSVC\$(Configuration)\$(Platform)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="align.h" />
+    <ClInclude Include="ar.h" />
+    <ClInclude Include="asmbytes.h" />
+    <ClInclude Include="autodep.h" />
+    <ClInclude Include="autodept.h" />
+    <ClInclude Include="autoenv.h" />
+    <ClInclude Include="axpencod.h" />
+    <ClInclude Include="banner.h" />
+    <ClInclude Include="bool.h" />
+    <ClInclude Include="brkptcpu.h" />
+    <ClInclude Include="cgblip.h" />
+    <ClInclude Include="clibext.h" />
+    <ClInclude Include="clibint.h" />
+    <ClInclude Include="cmdlhelp.h" />
+    <ClInclude Include="coff.h" />
+    <ClInclude Include="coffimpc.h" />
+    <ClInclude Include="cp932uni.h" />
+    <ClInclude Include="cpuid.h" />
+    <ClInclude Include="cv4.h" />
+    <ClInclude Include="cv4axp.h" />
+    <ClInclude Include="cv4f.h" />
+    <ClInclude Include="cv4intl.h" />
+    <ClInclude Include="cv4nums.h" />
+    <ClInclude Include="cv4pads.h" />
+    <ClInclude Include="cv4syms.h" />
+    <ClInclude Include="cv4types.h" />
+    <ClInclude Include="cv4w.h" />
+    <ClInclude Include="cvttable.h" />
+    <ClInclude Include="dbg386.h" />
+    <ClInclude Include="dbgmod.h" />
+    <ClInclude Include="descript.h" />
+    <ClInclude Include="di386cli.h" />
+    <ClInclude Include="di386dll.h" />
+    <ClInclude Include="dilproto.h" />
+    <ClInclude Include="diskos.h" />
+    <ClInclude Include="dllmain.h" />
+    <ClInclude Include="doschk.h" />
+    <ClInclude Include="dosemu.h" />
+    <ClInclude Include="dosfcb.h" />
+    <ClInclude Include="dosftwnt.h" />
+    <ClInclude Include="dosfuncx.h" />
+    <ClInclude Include="dosmem.h" />
+    <ClInclude Include="dospsp.h" />
+    <ClInclude Include="dostimet.h" />
+    <ClInclude Include="dpmi.h" />
+    <ClInclude Include="dumpwv.h" />
+    <ClInclude Include="dwarf.h" />
+    <ClInclude Include="dwati.h" />
+    <ClInclude Include="dwformi.h" />
+    <ClInclude Include="dwloccl.h" />
+    <ClInclude Include="dwlocinf.h" />
+    <ClInclude Include="dwlocop.h" />
+    <ClInclude Include="dwregaxp.h" />
+    <ClInclude Include="dwregmps.h" />
+    <ClInclude Include="dwregppc.h" />
+    <ClInclude Include="dwregspc.h" />
+    <ClInclude Include="dwregx86.h" />
+    <ClInclude Include="dwtagi.h" />
+    <ClInclude Include="dxproto.h" />
+    <ClInclude Include="ecsproto.h" />
+    <ClInclude Include="elfspec.h" />
+    <ClInclude Include="enterdb.h" />
+    <ClInclude Include="exe16m.h" />
+    <ClInclude Include="exedos.h" />
+    <ClInclude Include="exeelf.h" />
+    <ClInclude Include="exeflat.h" />
+    <ClInclude Include="exenov.h" />
+    <ClInclude Include="exeobj.h" />
+    <ClInclude Include="exeos2.h" />
+    <ClInclude Include="exepe.h" />
+    <ClInclude Include="exephar.h" />
+    <ClInclude Include="exeqnx.h" />
+    <ClInclude Include="exerdos.h" />
+    <ClInclude Include="exeseg.h" />
+    <ClInclude Include="exesigns.h" />
+    <ClInclude Include="exezdos.h" />
+    <ClInclude Include="extender.h" />
+    <ClInclude Include="felang.h" />
+    <ClInclude Include="filedll.h" />
+    <ClInclude Include="fppatch.h" />
+    <ClInclude Include="fppatche.h" />
+    <ClInclude Include="framework.h" />
+    <ClInclude Include="hll.h" />
+    <ClInclude Include="hlltypes.h" />
+    <ClInclude Include="i64.h" />
+    <ClInclude Include="idecfg.h" />
+    <ClInclude Include="idedll.h" />
+    <ClInclude Include="idedrv.h" />
+    <ClInclude Include="implcoff.h" />
+    <ClInclude Include="initmode.h" />
+    <ClInclude Include="int10.h" />
+    <ClInclude Include="int16.h" />
+    <ClInclude Include="int33.h" />
+    <ClInclude Include="iopath.h" />
+    <ClInclude Include="jit.h" />
+    <ClInclude Include="jmpbuf.h" />
+    <ClInclude Include="leb128rd.h" />
+    <ClInclude Include="leb128wr.h" />
+    <ClInclude Include="lib.h" />
+    <ClInclude Include="libmain.h" />
+    <ClInclude Include="macho.h" />
+    <ClInclude Include="machtype.h" />
+    <ClInclude Include="mapper.h" />
+    <ClInclude Include="mapsym.h" />
+    <ClInclude Include="mathcode.h" />
+    <ClInclude Include="metaconv.h" />
+    <ClInclude Include="mipsenco.h" />
+    <ClInclude Include="namelen.h" />
+    <ClInclude Include="ntattrib.h" />
+    <ClInclude Include="ntext.h" />
+    <ClInclude Include="ntinfo.h" />
+    <ClInclude Include="objautod.h" />
+    <ClInclude Include="omfhash.h" />
+    <ClInclude Include="os21632.h" />
+    <ClInclude Include="os2dbg.h" />
+    <ClInclude Include="osidle.h" />
+    <ClInclude Include="ostype.h" />
+    <ClInclude Include="oswincls.h" />
+    <ClInclude Include="ovldbg.h" />
+    <ClInclude Include="ovltab.h" />
+    <ClInclude Include="owcomp.h" />
+    <ClInclude Include="owflat.h" />
+    <ClInclude Include="p5prof.h" />
+    <ClInclude Include="patchsig.h" />
+    <ClInclude Include="pathgrp2.h" />
+    <ClInclude Include="pathlist.h" />
+    <ClInclude Include="pathmac.h" />
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="pcobj.h" />
+    <ClInclude Include="penwin.h" />
+    <ClInclude Include="pm1632.h" />
+    <ClInclude Include="poppck.h" />
+    <ClInclude Include="posixfp.h" />
+    <ClInclude Include="ppcencod.h" />
+    <ClInclude Include="ppfmttm.h" />
+    <ClInclude Include="proc386.h" />
+    <ClInclude Include="pushpck1.h" />
+    <ClInclude Include="pushpck2.h" />
+    <ClInclude Include="pushpck4.h" />
+    <ClInclude Include="pushpck8.h" />
+    <ClInclude Include="rdk.h" />
+    <ClInclude Include="rdos.h" />
+    <ClInclude Include="rdosdev.h" />
+    <ClInclude Include="rdoshdr.h" />
+    <ClInclude Include="rdu.h" />
+    <ClInclude Include="realmod.h" />
+    <ClInclude Include="roundmac.h" />
+    <ClInclude Include="rsiproto.h" />
+    <ClInclude Include="rtinit.h" />
+    <ClInclude Include="rtprior.h" />
+    <ClInclude Include="secure.h" />
+    <ClInclude Include="setevent.h" />
+    <ClInclude Include="sopen.h" />
+    <ClInclude Include="sortlist.h" />
+    <ClInclude Include="sparcenc.h" />
+    <ClInclude Include="srcmgt.h" />
+    <ClInclude Include="sslops.h" />
+    <ClInclude Include="swchar.h" />
+    <ClInclude Include="symtab.h" />
+    <ClInclude Include="timetwnt.h" />
+    <ClInclude Include="tinyio.h" />
+    <ClInclude Include="tistrail.h" />
+    <ClInclude Include="unistd.h" />
+    <ClInclude Include="utf8supp.h" />
+    <ClInclude Include="variety.h" />
+    <ClInclude Include="vdmdbg.h" />
+    <ClInclude Include="vxd_ddb.h" />
+    <ClInclude Include="walloca.h" />
+    <ClInclude Include="watcom.h" />
+    <ClInclude Include="watdbreg.h" />
+    <ClInclude Include="watlimit.h" />
+    <ClInclude Include="wclbdde.h" />
+    <ClInclude Include="wclbhelp.h" />
+    <ClInclude Include="wclbproc.h" />
+    <ClInclude Include="wclbtool.h" />
+    <ClInclude Include="wdbginfo.h" />
+    <ClInclude Include="wdebug.h" />
+    <ClInclude Include="wdfunc.h" />
+    <ClInclude Include="wdglb.h" />
+    <ClInclude Include="wdirent.h" />
+    <ClInclude Include="wendian.h" />
+    <ClInclude Include="wi163264.h" />
+    <ClInclude Include="wibhelp.h" />
+    <ClInclude Include="widechar.h" />
+    <ClInclude Include="windebug.h" />
+    <ClInclude Include="winexprt.h" />
+    <ClInclude Include="winintrf.h" />
+    <ClInclude Include="winmem32.h" />
+    <ClInclude Include="wio.h" />
+    <ClInclude Include="wnoret.h" />
+    <ClInclude Include="wos2.h" />
+    <ClInclude Include="wresdefn.h" />
+    <ClInclude Include="wresid.h" />
+    <ClInclude Include="wreslang.h" />
+    <ClInclude Include="wresmem.h" />
+    <ClInclude Include="wresset2.h" />
+    <ClInclude Include="wressetr.h" />
+    <ClInclude Include="wspawn.h" />
+    <ClInclude Include="wwindows.h" />
+    <ClInclude Include="xfloat.h" />
+    <ClInclude Include="_comdef.h" />
+    <ClInclude Include="_di386.h" />
+    <ClInclude Include="_doserr.h" />
+    <ClInclude Include="_dtaxxx.h" />
+    <ClInclude Include="_mathfun.h" />
+    <ClInclude Include="_pathgr2.h" />
+    <ClInclude Include="_pathgrp.h" />
+    <ClInclude Include="_pmdlg.h" />
+    <ClInclude Include="_windlg.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="getopt.c" />
+    <ClCompile Include="leb128rd.c" />
+    <ClCompile Include="pch.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="split2.c" />
+    <ClCompile Include="Watcom2MSVC.c" />
+    <ClCompile Include="wline.c" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
