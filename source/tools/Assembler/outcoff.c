@@ -53,6 +53,13 @@
 #include "outlib.h"
 #include "pecoff.h"
 
+#if defined(_MSC_VER)
+#  pragma warning(push)
+ // suppress warnings about "conversion from 'type1' to 'type2', possible loss of data"
+#  pragma warning(disable : 4267)
+#  pragma warning(disable : 4244)
+#endif
+
 #if defined(OF_COFF) || defined(OF_WIN32) || defined(OF_WIN64)
 
 /*

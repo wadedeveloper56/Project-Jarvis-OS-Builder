@@ -48,6 +48,13 @@
 #include "floats.h"
 #include "assemble.h"
 
+#if defined(_MSC_VER)
+#  pragma warning(push)
+ // suppress warnings about "conversion from 'type1' to 'type2', possible loss of data"
+#  pragma warning(disable : 4267)
+#  pragma warning(disable : 4244)
+#endif
+
 #define TEMPEXPRS_DELTA 128
 #define TEMPEXPR_DELTA 8
 

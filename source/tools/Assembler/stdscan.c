@@ -42,6 +42,13 @@
 #include "stdscan.h"
 #include "insns.h"
 
+#if defined(_MSC_VER)
+#  pragma warning(push)
+ // suppress warnings about "conversion from 'type1' to 'type2', possible loss of data"
+#  pragma warning(disable : 4267)
+#  pragma warning(disable : 4244)
+#endif
+
 /*
  * Standard scanner routine used by parser.c and some output
  * formats. It keeps a succession of temporary-storage strings in

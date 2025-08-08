@@ -43,6 +43,13 @@
 #include "error.h"
 #include "nasm.h"               /* For globalbits */
 
+#if defined(_MSC_VER)
+#  pragma warning(push)
+ // suppress warnings about "conversion from 'type1' to 'type2', possible loss of data"
+#  pragma warning(disable : 4267)
+#  pragma warning(disable : 4244)
+#endif
+
 #define lib_isnumchar(c)    (nasm_isalnum(c) || (c) == '$' || (c) == '_')
 
 int64_t readnum(const char *str, bool *error)

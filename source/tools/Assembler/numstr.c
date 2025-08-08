@@ -33,6 +33,13 @@
 
 #include "nasmlib.h"
 
+#if defined(_MSC_VER)
+#  pragma warning(push)
+ // suppress warnings about "conversion from 'type1' to 'type2', possible loss of data"
+#  pragma warning(disable : 4267)
+#  pragma warning(disable : 4244)
+#endif
+
 /*
  * Produce an unsigned integer string from a number with a specified
  * base, digits and signedness.

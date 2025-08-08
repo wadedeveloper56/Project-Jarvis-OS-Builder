@@ -39,6 +39,13 @@
 
 #include "nasm.h"
 
+#if defined(_MSC_VER)
+#  pragma warning(push)
+ // suppress warnings about "conversion from 'type1' to 'type2', possible loss of data"
+#  pragma warning(disable : 4267)
+#  pragma warning(disable : 4244)
+#endif
+
 /*
  * Return true if the argument is a simple scalar. (Or a far-
  * absolute, which counts.)

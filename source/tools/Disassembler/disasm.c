@@ -40,7 +40,6 @@
 #include <stdlib.h>
 #include "compiler.h"
 
-
 #include "nasm.h"
 #include "disasm.h"
 #include "sync.h"
@@ -48,6 +47,14 @@
 #include "tables.h"
 #include "regdis.h"
 #include "disp8.h"
+
+#if defined(_MSC_VER)
+#  pragma warning(push)
+ // suppress warnings about "conversion from 'type1' to 'type2', possible loss of data"
+#  pragma warning(disable : 4267)
+#  pragma warning(disable : 4244)
+#endif
+
 #define fetch_safe(_start, _ptr, _size, _need, _op)         \
     do {                                                    \
         if (((_ptr) - (_start)) >= ((_size) - (_need)))     \
@@ -1591,7 +1598,7 @@ int32_t disasm(uint8_t *data, int32_t data_size, char *output, int outbufsize, i
                     }
                     slen +=
                         snprintf(output + slen, outbufsize - slen, "%s0x%"PRIx32"",
-                                prefix, offset);
+                                prefix, (uint32_t)offset);
                 } else {
                     const char *prefix;
                     uint8_t offset = offs;
@@ -1641,7 +1648,7 @@ int32_t disasm(uint8_t *data, int32_t data_size, char *output, int outbufsize, i
                     }
                     slen +=
                         snprintf(output + slen, outbufsize - slen,
-                                "%s0x%"PRIx32"", prefix, offset);
+                                "%s0x%"PRIx32"", prefix, (uint32_t)offset);
                 }
             }
 

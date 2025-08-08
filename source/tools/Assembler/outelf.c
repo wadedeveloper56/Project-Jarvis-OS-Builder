@@ -56,6 +56,13 @@
 #include "outelf.h"
 #include "elf.h"
 
+#if defined(_MSC_VER)
+#  pragma warning(push)
+ // suppress warnings about "conversion from 'type1' to 'type2', possible loss of data"
+#  pragma warning(disable : 4267)
+#  pragma warning(disable : 4244)
+#endif
+
 #if defined(OF_ELF32) || defined(OF_ELF64) || defined(OF_ELFX32)
 
 #define SECT_DELTA 32

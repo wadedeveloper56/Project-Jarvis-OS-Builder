@@ -36,6 +36,13 @@
 
 #include "compiler.h"
 
+#if defined(_MSC_VER)
+#  pragma warning(push)
+ // suppress warnings about "conversion from 'type1' to 'type2', possible loss of data"
+#  pragma warning(disable : 4267)
+#  pragma warning(disable : 4244)
+#endif
+
 #ifdef ILOG2_C                  /* For generating the out-of-line functions */
 # undef extern_inline
 # define extern_inline

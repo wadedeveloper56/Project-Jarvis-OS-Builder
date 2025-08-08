@@ -42,6 +42,13 @@
 #include "srcfile.h"
 #include "rbtree.h"
 
+#if defined(_MSC_VER)
+#  pragma warning(push)
+ // suppress warnings about "conversion from 'type1' to 'type2', possible loss of data"
+#  pragma warning(disable : 4267)
+#  pragma warning(disable : 4244)
+#endif
+
 struct debug_macro_def;         /* Definition */
 struct debug_macro_inv;         /* Invocation */
 struct debug_macro_addr;        /* Address range */

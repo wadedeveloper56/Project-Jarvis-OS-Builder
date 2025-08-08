@@ -50,6 +50,13 @@
 #include "sync.h"
 #include "disasm.h"
 
+#if defined(_MSC_VER)
+#  pragma warning(push)
+ // suppress warnings about "conversion from 'type1' to 'type2', possible loss of data"
+#  pragma warning(disable : 4267)
+#  pragma warning(disable : 4244)
+#endif
+
 #define BPL 8                   /* bytes per line of hex dump */
 
 static const char *help =

@@ -56,6 +56,13 @@
 #include "macho.h"
 #include "ilog2.h"
 
+#if defined(_MSC_VER)
+#  pragma warning(push)
+ // suppress warnings about "conversion from 'type1' to 'type2', possible loss of data"
+#  pragma warning(disable : 4267)
+#  pragma warning(disable : 4244)
+#endif
+
 #if defined(OF_MACHO) || defined(OF_MACHO64)
 
 /* Mach-O in-file header structure sizes */

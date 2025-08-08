@@ -57,6 +57,13 @@
 #include "quote.h"
 #include "ver.h"
 
+#if defined(_MSC_VER)
+#  pragma warning(push)
+ // suppress warnings about "conversion from 'type1' to 'type2', possible loss of data"
+#  pragma warning(disable : 4267)
+#  pragma warning(disable : 4244)
+#endif
+
 /*
  * This is the maximum number of optimization passes to do.  If we ever
  * find a case where the optimizer doesn't naturally converge, we might

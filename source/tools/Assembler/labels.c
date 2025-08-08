@@ -44,6 +44,13 @@
 #include "hashtbl.h"
 #include "labels.h"
 
+#if defined(_MSC_VER)
+#  pragma warning(push)
+ // suppress warnings about "conversion from 'type1' to 'type2', possible loss of data"
+#  pragma warning(disable : 4267)
+#  pragma warning(disable : 4244)
+#endif
+
 /*
  * A dot-local label is one that begins with exactly one period. Things
  * that begin with _two_ periods are NASM-specific things.
