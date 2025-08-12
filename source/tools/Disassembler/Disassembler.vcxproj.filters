@@ -15,17 +15,171 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Disassembler.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="pch.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Globals.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
+    <ClInclude Include="alloc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="assemble.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="bytesex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="compiler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbginfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="directiv.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="disp8.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dwarf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="elf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="error.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eval.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="file.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="floats.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hashtbl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="iflag.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="iflaggen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ilog2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="insns.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="insnsi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="labels.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="listing.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="macho.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="md5.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nasm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nasmint.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nasmlib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nctype.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="opflags.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="outelf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="outform.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="outlib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="parser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pecoff.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="perfhash.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pptok.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="preproc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="quote.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="raa.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rbtree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rdoff.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="regdis.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="regs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="saa.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="srcfile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="stabs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="stdscan.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="strlist.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tables.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tokens.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="version.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="warnings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="warnings_c.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="disasm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sync.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="autoconf\attribute.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -44,14 +198,139 @@
     <ClInclude Include="config\watcom.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="framework.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Globals.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="pch.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="disasm.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ndisasm.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sync.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="disp8.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="iflag.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="insnsa.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="insnsb.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="insnsd.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="insnsn.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="regdis.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="regflags.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="regs.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="regvals.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="common.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="alloc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="asprintf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="badenum.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="bsi.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="crc32.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="crc64.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="errfile.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="file.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="filename.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="hashtbl.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ilog2.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="md5c.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mmap.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nctype.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="numstr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="path.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="perfhash.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="raa.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rbtree.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="readnum.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="realpath.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rlimit.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="saa.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="string.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="strlist.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ver.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="zerobuf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="error.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="warnings.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="strrchrnul.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
