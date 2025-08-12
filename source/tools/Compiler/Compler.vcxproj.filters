@@ -21,9 +21,6 @@
     <ClInclude Include="parser.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="position.hh">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="stack.hh">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -196,6 +193,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GlobalVars.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="simplecpp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -191,6 +191,9 @@
     <ProjectReference Include="..\Arguments\Arguments.vcxproj">
       <Project>{fe883520-0f4b-494d-bf5e-714adb7881a3}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\Preproc\Preproc.vcxproj">
+      <Project>{a5a44a87-a249-4fd2-bc57-b4ead929f244}</Project>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AbstractDeclarator.h" />
@@ -233,7 +236,6 @@
     <ClInclude Include="ParameterTypeList.h" />
     <ClInclude Include="parser.hpp" />
     <ClInclude Include="Pointer.h" />
-    <ClInclude Include="position.hh" />
     <ClInclude Include="PostfixExpression.h" />
     <ClInclude Include="PrimaryExpression.h" />
     <ClInclude Include="ProgramData.h" />
@@ -241,6 +243,7 @@
     <ClInclude Include="scanner.h" />
     <ClInclude Include="SelectionStatement.h" />
     <ClInclude Include="ShiftExpression.h" />
+    <ClInclude Include="simplecpp.h" />
     <ClInclude Include="SpecifierQualifierList.h" />
     <ClInclude Include="stack.hh" />
     <ClInclude Include="Statement.h" />

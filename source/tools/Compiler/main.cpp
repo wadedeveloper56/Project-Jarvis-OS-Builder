@@ -1,12 +1,15 @@
 #include <fstream>
+#include <sstream>
 #include "scanner.h"
 #include "parser.hpp"
 #include "interpreter.h"
 #include "ArgumentTable.h"
 #include "GlobalVars.h"
+#include "simplecpp.h"
 
 using namespace WadeSpace;
 using namespace std;
+using namespace simplecpp;
 
 int main(int argc, char* argv[])
 {
@@ -82,12 +85,28 @@ int main(int argc, char* argv[])
 
 	if (in.is_open() && out.is_open())
 	{
+		DUI dui;
+		OutputList outputList;
+		vector<string> files;
+		TokenList* rawtokens;
+
+		rawtokens = new TokenList(in, files, infiles->filename[0], &outputList);
+		rawtokens->removeComments();
+		TokenList outputTokens(files);
+		FileDataCache filedata;
+		preprocess(outputTokens, *rawtokens, files, filedata, dui, &outputList);
+		cleanup(filedata);
+		delete rawtokens;
+		rawtokens = nullptr;
+		cout << outputTokens.stringify() << endl;
+		istringstream inStr(outputTokens.stringify());
+
 		Interpreter i;
-		i.setStreams(&in, &out);
+		i.setStreams(&inStr, &out);
 		exitcode = i.parse();
-		programData->processGlobalVariables();
-		programData->test();
-		programData->generateCode(out);
+		program->processGlobalVariables();
+		program->test();
+		program->generateCode(out);
 		cout << "Parse complete. Result = " << exitcode << endl;
 	}
 	else
@@ -99,6 +118,6 @@ exit:
 	arg_freetable(argtable, sizeof(argtable) / sizeof(argtable[0]));
 	in.close();
 	out.close();
-	delete programData;
+	delete program;
 	return exitcode;
 }

@@ -110,7 +110,7 @@
     using namespace std;
 
     namespace WadeSpace {
-        extern ProgramData *programData;
+        extern ProgramData *program;
 
         class Scanner;
         class Interpreter;

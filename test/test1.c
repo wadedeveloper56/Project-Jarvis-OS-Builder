@@ -1,3 +1,4 @@
+#define value(x) (x+2)
 char var1;
 short var2;
 int var3;
@@ -14,7 +15,7 @@ char *var12[];
 void function2(int var);
 
 int main(){
-    function2(7);
+    function2(value(7));
     return 0;
 }
 

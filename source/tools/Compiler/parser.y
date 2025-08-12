@@ -72,7 +72,7 @@
     using namespace std;
 
     namespace WadeSpace {
-        extern ProgramData *programData;
+        extern ProgramData *program;
 
         class Scanner;
         class Interpreter;
@@ -804,8 +804,8 @@ jump_statement
     ;
 
 translation_unit 
-    : external_declaration                  { programData = new ProgramData(); programData->add($1); cout << "external_declaration REDUCE to translation_unit" << endl; }
-    | translation_unit external_declaration { programData->add($2); cout << "translation_unit external_declaration REDUCE to translation_unit" << endl; }
+    : external_declaration                  { program = new ProgramData(); program->add($1); cout << "external_declaration REDUCE to translation_unit" << endl; }
+    | translation_unit external_declaration { program->add($2); cout << "translation_unit external_declaration REDUCE to translation_unit" << endl; }
     ;
 
 external_declaration

@@ -3634,13 +3634,13 @@ namespace  WadeSpace  {
 
   case 214: // translation_unit: external_declaration
 #line 807 "parser.y"
-                                            { programData = new ProgramData(); programData->add(yystack_[0].value.as < ExternalDeclaration * > ()); cout << "external_declaration REDUCE to translation_unit" << endl; }
+                                            { program = new ProgramData(); program->add(yystack_[0].value.as < ExternalDeclaration * > ()); cout << "external_declaration REDUCE to translation_unit" << endl; }
 #line 3639 "parser.cpp"
     break;
 
   case 215: // translation_unit: translation_unit external_declaration
 #line 808 "parser.y"
-                                            { programData->add(yystack_[0].value.as < ExternalDeclaration * > ()); cout << "translation_unit external_declaration REDUCE to translation_unit" << endl; }
+                                            { program->add(yystack_[0].value.as < ExternalDeclaration * > ()); cout << "translation_unit external_declaration REDUCE to translation_unit" << endl; }
 #line 3645 "parser.cpp"
     break;
 
