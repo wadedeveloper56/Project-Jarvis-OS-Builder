@@ -54,15 +54,12 @@
     #include <stdlib.h>
     #include <optional>
     #include "Constant.h"
-    #include "AssignmentOperator.h"
     #include "StorageClassSpecifier.h"
     #include "DeclarationSpecifiers.h"
     #include "TypeSpecifier.h"
     #include "TypeQualifier.h"
     #include "Enumerator.h"
     #include "EnumSpecifier.h"
-    #include "Expression.h"
-    #include "PrimaryExpression.h"
     #include "Pointer.h"
     #include "DirectDeclarator.h"
     #include "Declarator.h"
@@ -79,22 +76,6 @@
     #include "Declaration.h"
     #include "ParameterDeclaration.h"
     #include "ParameterTypeList.h"
-    #include "PostfixExpression.h"
-    #include "UnaryExpression.h"
-    #include "CastExpression.h"    
-    #include "MultiplicativeExpression.h"
-    #include "AdditiveExpression.h"
-    #include "ShiftExpression.h"
-    #include "RelationalExpression.h"
-    #include "EqualityExpression.h"
-    #include "AndExpression.h"
-    #include "ExclusiveOrExpression.h"
-    #include "InclusiveOrExpression.h"
-    #include "LogicalAndExpression.h"
-    #include "LogicalOrExpression.h"
-    #include "ConditionalExpression.h"
-    #include "AssignmentExpression.h"
-    #include "ConstantExpression.h"
     #include "BaseStatement.h"
     #include "JumpStatement.h"
     #include "IterationStatement.h"
@@ -117,7 +98,7 @@
         class Interpreter;
     }
 
-#line 121 "parser.hpp"
+#line 102 "parser.hpp"
 
 # include <cassert>
 # include <cstdlib> // std::abort
@@ -258,7 +239,7 @@
 
 #line 9 "parser.y"
 namespace  WadeSpace  {
-#line 262 "parser.hpp"
+#line 243 "parser.hpp"
 
 
 
@@ -4945,7 +4926,7 @@ switch (yykind)
 
 #line 9 "parser.y"
 } //  WadeSpace 
-#line 4949 "parser.hpp"
+#line 4930 "parser.hpp"
 
 
 

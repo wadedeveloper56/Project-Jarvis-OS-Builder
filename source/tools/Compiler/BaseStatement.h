@@ -5,7 +5,6 @@
 #include <stdint.h>
 #include <optional>
 #include "TokenType.h"
-#include "Expression.h"
 #include "Declaration.h"
 
 using namespace std;

@@ -4,7 +4,6 @@
 #include <vector>
 #include <stdint.h>
 #include <optional>
-#include "Expression.h"
 #include "Enumerator.h"
 
 using namespace std;
@@ -19,8 +18,6 @@ namespace WadeSpace
 		EnumSpecifier(string& nameStr);
 		EnumSpecifier();
 		virtual ~EnumSpecifier();
-		bool hasNameStr() const;
-		string getNameStr() const;
 		vector<Enumerator*>* getVectorEnumerator() const;
 
 	private:

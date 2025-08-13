@@ -5,7 +5,6 @@
 #include <stdint.h>
 #include <optional>
 #include "Declarator.h"
-#include "ConstantExpression.h"
 
 namespace WadeSpace
 {
