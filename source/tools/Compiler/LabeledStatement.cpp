@@ -7,7 +7,7 @@ LabeledStatement::LabeledStatement(string&  identifier, BaseStatement* statement
 {
 }
 
-LabeledStatement::LabeledStatement(TokenType op, ConstantExpression* exp, BaseStatement* statement) : BaseStatement(op, exp, statement)
+LabeledStatement::LabeledStatement(TokenType op, ExpressionNode* exp, BaseStatement* statement) : BaseStatement(op, exp, statement)
 {
 }
 

@@ -14,7 +14,7 @@ namespace WadeSpace
 	class ExpressionStatement : public BaseStatement
 	{
 	public:
-		ExpressionStatement(Expression* exp);
+		ExpressionStatement(ExpressionNode* exp);
 		ExpressionStatement();
 		virtual ~ExpressionStatement();
 	};

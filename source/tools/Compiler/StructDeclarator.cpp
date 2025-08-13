@@ -1,4 +1,5 @@
 #include "StructDeclarator.h"
+#include "ExpressionNode.h"
 
 using namespace WadeSpace;
 
@@ -6,11 +7,11 @@ StructDeclarator::StructDeclarator(Declarator* declarator) : declarator(declarat
 {
 }
 
-StructDeclarator::StructDeclarator(ConstantExpression* constantExpression) : declarator(nullptr), constantExpression(constantExpression)
+StructDeclarator::StructDeclarator(ExpressionNode* constantExpression) : declarator(nullptr), constantExpression(constantExpression)
 {
 }
 
-StructDeclarator::StructDeclarator(Declarator* declarator, ConstantExpression* constantExpression) : declarator(declarator), constantExpression(constantExpression)
+StructDeclarator::StructDeclarator(Declarator* declarator, ExpressionNode* constantExpression) : declarator(declarator), constantExpression(constantExpression)
 {
 }
 
@@ -29,7 +30,7 @@ Declarator* StructDeclarator::getDeclarator() const
 	return declarator;
 }
 
-ConstantExpression* StructDeclarator::getConstantExpression() const
+ExpressionNode* StructDeclarator::getConstantExpression() const
 {
 	return constantExpression;
 }

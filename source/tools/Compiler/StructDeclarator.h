@@ -9,19 +9,21 @@
 
 namespace WadeSpace
 {
+	class ExpressionNode;
+
 	class StructDeclarator
 	{
 	public:
 		StructDeclarator(Declarator* declarator);
-		StructDeclarator(ConstantExpression* constantExpression);
-		StructDeclarator(Declarator* declarator, ConstantExpression* constantExpression);
+		StructDeclarator(ExpressionNode* constantExpression);
+		StructDeclarator(Declarator* declarator, ExpressionNode* constantExpression);
 		StructDeclarator();
 		virtual ~StructDeclarator();
 		Declarator* getDeclarator() const;
-		ConstantExpression* getConstantExpression() const;
+		ExpressionNode* getConstantExpression() const;
 
 	private:
 		Declarator* declarator;
-		ConstantExpression* constantExpression;
+		ExpressionNode* constantExpression;
 	};
 }

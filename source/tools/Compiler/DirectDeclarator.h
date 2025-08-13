@@ -13,6 +13,7 @@ namespace WadeSpace
 	class ConstantExpression;
 	class ParameterTypeList;
 	class Declarator;
+	class ExpressionNode;
 
 	class DirectDeclarator
 	{
@@ -20,7 +21,7 @@ namespace WadeSpace
 		DirectDeclarator(string id);
 		DirectDeclarator(string id, Declarator* declarator);
 		DirectDeclarator(DirectDeclarator* directDeclarator, int& str1, int& str2);
-		DirectDeclarator(DirectDeclarator* directDeclarator, ConstantExpression* constantExpression);
+		DirectDeclarator(DirectDeclarator* directDeclarator, ExpressionNode* constantExpression);
 		DirectDeclarator(DirectDeclarator* directDeclarator, ParameterTypeList* parameterTypeList);
 		DirectDeclarator(DirectDeclarator* directDeclarator, vector<string>* vectorOfStrings);
 		DirectDeclarator();
@@ -30,7 +31,7 @@ namespace WadeSpace
 		optional<int> getStr2() const;
 		Declarator* getDeclarator() const;
 		DirectDeclarator* getDirectDeclarator() const;
-		ConstantExpression* getConstantExpression() const;
+		ExpressionNode* getConstantExpression() const;
 		ParameterTypeList* getParameterTypeList() const;
 		vector<string>* getVectorOfStrings() const;
 
@@ -40,7 +41,7 @@ namespace WadeSpace
 		optional<int> str2;
 		Declarator* declarator;
 		DirectDeclarator* directDeclarator;
-		ConstantExpression* constantExpression;
+		ExpressionNode* constantExpression;
 		ParameterTypeList* parameterTypeList;
 		vector<string>* vectorOfStrings;
 	};

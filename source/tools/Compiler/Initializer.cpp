@@ -1,8 +1,9 @@
 #include "Initializer.h"
+#include "ExpressionNode.h"
 
 using namespace WadeSpace;
 
-Initializer::Initializer(AssignmentExpression* assignmentExpression) : assignmentExpression(assignmentExpression), initializerList(nullptr)
+Initializer::Initializer(ExpressionNode* assignmentExpression) : assignmentExpression(assignmentExpression), initializerList(nullptr)
 {
 }
 
@@ -24,7 +25,7 @@ Initializer::~Initializer()
 	delete initializerList;
 }
 
-AssignmentExpression* Initializer::getAssignmentExpression() const
+ExpressionNode* Initializer::getAssignmentExpression() const
 {
 	return assignmentExpression;
 }

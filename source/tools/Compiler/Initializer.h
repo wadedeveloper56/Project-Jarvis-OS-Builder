@@ -10,18 +10,20 @@ using namespace std;
 
 namespace WadeSpace
 {
+	class ExpressionNode;
+
 	class Initializer
 	{
 	public:
-		Initializer(AssignmentExpression* assignmentExpression);
+		Initializer(ExpressionNode* assignmentExpression);
 		Initializer(vector<Initializer*>* initializerList);
 		Initializer();
 		virtual ~Initializer();
-		AssignmentExpression* getAssignmentExpression() const;
+		ExpressionNode* getAssignmentExpression() const;
 		vector<Initializer*>* getInitializerList() const;
 
 	private:
-		AssignmentExpression* assignmentExpression;
+		ExpressionNode* assignmentExpression;
 		vector<Initializer*>* initializerList;
 	};
 }

@@ -15,7 +15,7 @@ namespace WadeSpace
 	{
 	public:
 		LabeledStatement(string&  identifier, BaseStatement* statement);
-		LabeledStatement(TokenType op, ConstantExpression* exp, BaseStatement* statement);
+		LabeledStatement(TokenType op, ExpressionNode* exp, BaseStatement* statement);
 		LabeledStatement(TokenType op, BaseStatement* statement);
 		LabeledStatement();
 		virtual ~LabeledStatement();

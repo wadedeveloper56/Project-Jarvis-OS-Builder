@@ -1,8 +1,9 @@
 #include "Enumerator.h"
+#include "ExpressionNode.h"
 
 using namespace WadeSpace;
 
-Enumerator::Enumerator(string&  operatorStr, ConstantExpression* constantExpression) : operatorStr(operatorStr), constantExpression(constantExpression)
+Enumerator::Enumerator(string&  operatorStr, ExpressionNode* constantExpression) : operatorStr(operatorStr), constantExpression(constantExpression)
 {
 }
 
@@ -19,7 +20,7 @@ Enumerator::~Enumerator()
 	delete constantExpression;
 }
 
-ConstantExpression* Enumerator::getConstantExpression() const
+ExpressionNode* Enumerator::getConstantExpression() const
 {
 	return constantExpression;
 }

@@ -3,6 +3,7 @@
 #include "ConstantExpression.h"
 #include "ParameterTypeList.h"
 #include "Declarator.h"
+#include "ExpressionNode.h"
 
 using namespace WadeSpace;
 using namespace std;
@@ -26,7 +27,7 @@ vectorOfStrings(nullptr), declarator(d)
 {
 }
 
-DirectDeclarator::DirectDeclarator(DirectDeclarator* directDeclarator, ConstantExpression* constantExpression) :
+DirectDeclarator::DirectDeclarator(DirectDeclarator* directDeclarator, ExpressionNode* constantExpression) :
 	identifier(nullopt), str1(nullopt), str2(nullopt), directDeclarator(directDeclarator),
 	constantExpression(constantExpression),
 	parameterTypeList(nullptr), vectorOfStrings(nullptr), declarator(nullptr)
@@ -68,6 +69,6 @@ optional<int> DirectDeclarator::getStr1() const { return str1; }
 optional<int> DirectDeclarator::getStr2() const { return str2; }
 Declarator* DirectDeclarator::getDeclarator() const { return declarator; }
 DirectDeclarator* DirectDeclarator::getDirectDeclarator() const { return directDeclarator; }
-ConstantExpression* DirectDeclarator::getConstantExpression() const { return constantExpression; }
+ExpressionNode* DirectDeclarator::getConstantExpression() const { return constantExpression; }
 ParameterTypeList* DirectDeclarator::getParameterTypeList() const { return parameterTypeList; }
 vector<string>* DirectDeclarator::getVectorOfStrings() const { return vectorOfStrings; }

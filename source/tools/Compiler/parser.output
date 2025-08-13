@@ -396,70 +396,70 @@ Nonterminals, with rules where they appear
 
     $accept (93)
         on left: 0
-    primary_expression <PrimaryExpression *> (94)
+    primary_expression <ExpressionNode *> (94)
         on left: 1 2 3
         on right: 7
     constant <Constant *> (95)
         on left: 4 5 6
         on right: 2
-    postfix_expression <PostfixExpression *> (96)
+    postfix_expression <ExpressionNode *> (96)
         on left: 7 8 9 10 11 12 13 14 15 16
         on right: 8 9 10 11 12 13 14 19
-    argument_expression_list <std::vector<AssignmentExpression *> *> (97)
+    argument_expression_list <vector<ExpressionNode *> *> (97)
         on left: 17 18
         on right: 10 18
-    unary_expression <UnaryExpression *> (98)
+    unary_expression <ExpressionNode *> (98)
         on left: 19 20 21 22 23 24
         on right: 20 21 23 31 64
     unary_operator <int> (99)
         on left: 25 26 27 28 29 30
         on right: 22
-    cast_expression <CastExpression *> (100)
+    cast_expression <ExpressionNode *> (100)
         on left: 31 32
         on right: 22 32 33 34 35 36
-    multiplicative_expression <MultiplicativeExpression *> (101)
+    multiplicative_expression <ExpressionNode *> (101)
         on left: 33 34 35 36
         on right: 34 35 36 37 38 39
-    additive_expression <AdditiveExpression *> (102)
+    additive_expression <ExpressionNode *> (102)
         on left: 37 38 39
         on right: 38 39 40 41 42
-    shift_expression <ShiftExpression *> (103)
+    shift_expression <ExpressionNode *> (103)
         on left: 40 41 42
         on right: 41 42 43 44 45 46 47
-    relational_expression <RelationalExpression *> (104)
+    relational_expression <ExpressionNode *> (104)
         on left: 43 44 45 46 47
         on right: 44 45 46 47 48 49 50
-    equality_expression <EqualityExpression *> (105)
+    equality_expression <ExpressionNode *> (105)
         on left: 48 49 50
         on right: 49 50 51 52
-    and_expression <AndExpression *> (106)
+    and_expression <ExpressionNode *> (106)
         on left: 51 52
         on right: 52 53 54
-    exclusive_or_expression <ExclusiveOrExpression *> (107)
+    exclusive_or_expression <ExpressionNode *> (107)
         on left: 53 54
         on right: 54 55 56
-    inclusive_or_expression <InclusiveOrExpression *> (108)
+    inclusive_or_expression <ExpressionNode *> (108)
         on left: 55 56
         on right: 56 57 58
-    logical_and_expression <LogicalAndExpression *> (109)
+    logical_and_expression <ExpressionNode *> (109)
         on left: 57 58
         on right: 58 59 60
-    logical_or_expression <LogicalOrExpression *> (110)
+    logical_or_expression <ExpressionNode *> (110)
         on left: 59 60
         on right: 60 61 62
-    conditional_expression <ConditionalExpression *> (111)
+    conditional_expression <ExpressionNode *> (111)
         on left: 61 62
         on right: 62 63 78
-    assignment_expression <AssignmentExpression *> (112)
+    assignment_expression <ExpressionNode *> (112)
         on left: 63 64
         on right: 17 18 64 76 77 177
-    assignment_operator <AssignmentOperator *> (113)
+    assignment_operator <int> (113)
         on left: 65 66 67 68 69 70 71 72 73 74 75
         on right: 64
-    expression <Expression *> (114)
+    expression <ExpressionNode *> (114)
         on left: 76 77
         on right: 3 8 62 77 200 201 202 203 204 205 207 212
-    constant_expression <ConstantExpression *> (115)
+    constant_expression <ExpressionNode *> (115)
         on left: 78
         on right: 128 129 136 143 170 172 189
     declaration <Declaration *> (116)

@@ -1,9 +1,10 @@
 #include "JumpStatement.h"
+#include "ExpressionNode.h"
 
 using namespace WadeSpace;
 using namespace std;
 
-JumpStatement::JumpStatement(TokenType op, Expression* exp) : BaseStatement(op, exp)
+JumpStatement::JumpStatement(TokenType op, ExpressionNode* exp) : BaseStatement(op, exp)
 {
 }
 

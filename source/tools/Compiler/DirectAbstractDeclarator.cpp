@@ -2,6 +2,7 @@
 #include "AbstractDeclarator.h"
 #include "ConstantExpression.h"
 #include "ParameterTypeList.h"
+#include "ExpressionNode.h"
 
 using namespace WadeSpace;
 
@@ -13,7 +14,7 @@ DirectAbstractDeclarator::DirectAbstractDeclarator(ParameterTypeList* parameterT
 {
 }
 
-DirectAbstractDeclarator::DirectAbstractDeclarator(DirectAbstractDeclarator* directAbstractDeclarator, ConstantExpression* constantExpression, TokenType type) : abstractDeclarator(nullptr), constantExpression(constantExpression), type(type), directAbstractDeclarator(directAbstractDeclarator), parameterTypeList(nullptr)
+DirectAbstractDeclarator::DirectAbstractDeclarator(DirectAbstractDeclarator* directAbstractDeclarator, ExpressionNode* constantExpression, TokenType type) : abstractDeclarator(nullptr), constantExpression(constantExpression), type(type), directAbstractDeclarator(directAbstractDeclarator), parameterTypeList(nullptr)
 {
 }
 
@@ -25,7 +26,7 @@ DirectAbstractDeclarator::DirectAbstractDeclarator(TokenType type) : abstractDec
 {
 }
 
-DirectAbstractDeclarator::DirectAbstractDeclarator(ConstantExpression* constantExpression) : abstractDeclarator(nullptr), constantExpression(constantExpression), type(NONE), directAbstractDeclarator(nullptr), parameterTypeList(nullptr)
+DirectAbstractDeclarator::DirectAbstractDeclarator(ExpressionNode* constantExpression) : abstractDeclarator(nullptr), constantExpression(constantExpression), type(NONE), directAbstractDeclarator(nullptr), parameterTypeList(nullptr)
 {
 }
 

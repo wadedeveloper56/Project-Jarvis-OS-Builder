@@ -217,6 +217,7 @@
     <ClInclude Include="EqualityExpression.h" />
     <ClInclude Include="ExclusiveOrExpression.h" />
     <ClInclude Include="Expression.h" />
+    <ClInclude Include="ExpressionNode.h" />
     <ClInclude Include="ExpressionStatement.h" />
     <ClInclude Include="ExternalDeclaration.h" />
     <ClInclude Include="FunctionDefinition.h" />
@@ -280,6 +281,7 @@
     <ClCompile Include="EqualityExpression.cpp" />
     <ClCompile Include="ExclusiveOrExpression.cpp" />
     <ClCompile Include="Expression.cpp" />
+    <ClCompile Include="ExpressionNode.cpp" />
     <ClCompile Include="ExpressionStatement.cpp" />
     <ClCompile Include="ExternalDeclaration.cpp" />
     <ClCompile Include="FunctionDefinition.cpp" />
