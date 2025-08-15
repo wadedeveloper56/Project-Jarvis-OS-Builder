@@ -1,0 +1,29 @@
+Dos Header Information:
+e_magic   : 0x5a4d.
+e_cblp    : 0x0090.
+e_cp      : 0x0003.
+e_crlc    : 000000.
+e_cparhdr : 0x0004.
+e_minalloc: 000000.
+e_maxalloc: 0xffff.
+e_ss      : 000000.
+e_sp      : 0x00b8.
+e_csum    : 000000.
+e_ip      : 000000.
+e_cs      : 000000.
+e_lfarlc  : 0X0040.
+e_ovno    : 000000.
+e_res[4]  : 0x0000000000000000.
+e_oemid   : 000000.
+e_oeminfo : 000000.
+e_res2[10]: 0x0000000000000000000000000000000000000000.
+e_lfanew  : 0x000000f0.
+
+File Header Information:
+Machine              : 0x8664, AMD64 (K8).
+NumberOfSections     : 10.
+TimeDateStamp        : 1755268879 (0x689f470f), 2025-08-15 09:41:19.
+PointerToSymbolTable : 0000000000.
+NumberOfSymbols      : 0000000000.
+SizeOfOptionalHeader : 240.
+Characteristics      : 0x0022, (EXECUTABLE_IMAGE LARGE_ADDRESS_AWARE ).
