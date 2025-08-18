@@ -1,178 +1,28 @@
 Dos Header Information:
-e_magic   : 0x5a4d
-e_cblp    : 0x0090
-e_cp      : 0x0003
-e_crlc    : 000000
-e_cparhdr : 0x0004
-e_minalloc: 000000
-e_maxalloc: 0xffff
-e_ss      : 000000
-e_sp      : 0x00b8
-e_csum    : 000000
-e_ip      : 000000
-e_cs      : 000000
-e_lfarlc  : 0X0040
-e_ovno    : 000000
-e_res[4]  : 0x0000000000000000
-e_oemid   : 000000
-e_oeminfo : 000000
-e_res2[10]: 0x0000000000000000000000000000000000000000
-e_lfanew  : 0x000000f0
+e_magic    : 0x5a4d.
+e_cblp     : 0x0090.
+e_cp       : 0x0003.
+e_crlc     : 000000.
+e_cparhdr  : 0x0004.
+e_minalloc : 000000.
+e_maxalloc : 0xffff.
+e_ss       : 000000.
+e_sp       : 0x00b8.
+e_csum     : 000000.
+e_ip       : 000000.
+e_cs       : 000000.
+e_lfarlc   : 0x0040.
+e_ovno     : 000000.
+e_res[4]   : 0x0000000000000000.
+e_oemid    : 000000.
+e_oeminfo  : 000000.
+e_res2[10] : 0x0000000000000000000000000000000000000000.
+e_lfanew   : 0x00000100.
 
-File Header Information:
-Machine              : 0x8664, AMD64 (K8)
-NumberOfSections     : 10
-TimeDateStamp        : 1755275503 (0x689f60ef), 2025-08-15 11:31:43
-PointerToSymbolTable : 0000000000
-NumberOfSymbols      : 0000000000
-SizeOfOptionalHeader : 240
-Characteristics      : 0x0022, (EXECUTABLE_IMAGE LARGE_ADDRESS_AWARE )
-
-Optional Header Information:
-Magic                   : 0x020b
-LinkerVersion           : 14.44
-SizeOfCode              : 0x0000b800
-SizeOfInitializedData   : 39936
-SizeOfUninitializedData : 0
-AddressOfEntryPoint     : 0x000112c1
-BaseOfCode              : 0x00001000
-ImageBase               : 0x140000000
-SectionAlignment        : 0x00001000
-FileAlignment           : 0x00000200
-OperatingSystemVersion:6.0
-ImageVersion:0.0
-SubsystemVersion:6.0
-Win32VersionValue:0000000000
-SizeOfImage:0X0002C000
-SizeOfHeaders:0X00000400
-CheckSum:0000000000
-Subsystem:0X0003(WINDOWS_CUI)
-DllCharacteristics:0X8160( HIGH_ENTROPY_VA DYNAMIC_BASE NX_COMPAT TERMINAL_SERVER_AWARE )
-SizeOfStackReserve:0X100000
-SizeOfStackCommit:0X1000
-SizeOfHeapReserve:0X100000
-SizeOfHeapCommit:0X1000
-LoaderFlags:0000000000
-NumberOfRvaAndSizes:0X00000010
-
-Section Header Information:
-index                : 1.
-Name                 : .textbss.
-VirtualSize          : 65536.
-VirtualAddress       : 0x00001000.
-SizeOfRawData        : 0.
-PointerToRawData     : 0000000000.
-PointerToRelocations : 0000000000.
-PointerToLinenumbers : 0000000000.
-NumberOfRelocations  : 0.
-NumberOfLinenumbers  : 0.
-Characteristics      : 0xe00000a0 ( CNT_CODE CNT_UNINITIALIZED_DATA MEM_EXECUTE MEM_READ MEM_WRITE ).
-
-index                : 2.
-Name                 : .text.
-VirtualSize          : 46863.
-VirtualAddress       : 0x00011000.
-SizeOfRawData        : 47104.
-PointerToRawData     : 0x00000400.
-PointerToRelocations : 0000000000.
-PointerToLinenumbers : 0000000000.
-NumberOfRelocations  : 0.
-NumberOfLinenumbers  : 0.
-Characteristics      : 0x60000020 ( CNT_CODE MEM_EXECUTE MEM_READ ).
-
-index                : 3.
-Name                 : .rdata.
-VirtualSize          : 19037.
-VirtualAddress       : 0x0001d000.
-SizeOfRawData        : 19456.
-PointerToRawData     : 0x0000bc00.
-PointerToRelocations : 0000000000.
-PointerToLinenumbers : 0000000000.
-NumberOfRelocations  : 0.
-NumberOfLinenumbers  : 0.
-Characteristics      : 0x40000040 ( INITIALIZED_DATA MEM_READ ).
-
-index                : 4.
-Name                 : .data.
-VirtualSize          : 2456.
-VirtualAddress       : 0x00022000.
-SizeOfRawData        : 512.
-PointerToRawData     : 0x00010800.
-PointerToRelocations : 0000000000.
-PointerToLinenumbers : 0000000000.
-NumberOfRelocations  : 0.
-NumberOfLinenumbers  : 0.
-Characteristics      : 0xc0000040 ( INITIALIZED_DATA MEM_READ MEM_WRITE ).
-
-index                : 5.
-Name                 : .pdata.
-VirtualSize          : 8796.
-VirtualAddress       : 0x00023000.
-SizeOfRawData        : 9216.
-PointerToRawData     : 0x00010a00.
-PointerToRelocations : 0000000000.
-PointerToLinenumbers : 0000000000.
-NumberOfRelocations  : 0.
-NumberOfLinenumbers  : 0.
-Characteristics      : 0x40000040 ( INITIALIZED_DATA MEM_READ ).
-
-index                : 6.
-Name                 : .idata.
-VirtualSize          : 4637.
-VirtualAddress       : 0x00026000.
-SizeOfRawData        : 5120.
-PointerToRawData     : 0x00012e00.
-PointerToRelocations : 0000000000.
-PointerToLinenumbers : 0000000000.
-NumberOfRelocations  : 0.
-NumberOfLinenumbers  : 0.
-Characteristics      : 0x40000040 ( INITIALIZED_DATA MEM_READ ).
-
-index                : 7.
-Name                 : .msvcjmcÌ.
-VirtualSize          : 460.
-VirtualAddress       : 0x00028000.
-SizeOfRawData        : 512.
-PointerToRawData     : 0x00014200.
-PointerToRelocations : 0000000000.
-PointerToLinenumbers : 0000000000.
-NumberOfRelocations  : 0.
-NumberOfLinenumbers  : 0.
-Characteristics      : 0xc0000040 ( INITIALIZED_DATA MEM_READ MEM_WRITE ).
-
-index                : 8.
-Name                 : .00cfg.
-VirtualSize          : 373.
-VirtualAddress       : 0x00029000.
-SizeOfRawData        : 512.
-PointerToRawData     : 0x00014400.
-PointerToRelocations : 0000000000.
-PointerToLinenumbers : 0000000000.
-NumberOfRelocations  : 0.
-NumberOfLinenumbers  : 0.
-Characteristics      : 0x40000040 ( INITIALIZED_DATA MEM_READ ).
-
-index                : 9.
-Name                 : .rsrc.
-VirtualSize          : 1084.
-VirtualAddress       : 0x0002a000.
-SizeOfRawData        : 1536.
-PointerToRawData     : 0x00014600.
-PointerToRelocations : 0000000000.
-PointerToLinenumbers : 0000000000.
-NumberOfRelocations  : 0.
-NumberOfLinenumbers  : 0.
-Characteristics      : 0x40000040 ( INITIALIZED_DATA MEM_READ ).
-
-index                : 10.
-Name                 : .reloc.
-VirtualSize          : 728.
-VirtualAddress       : 0x0002b000.
-SizeOfRawData        : 1024.
-PointerToRawData     : 0x00014c00.
-PointerToRelocations : 0000000000.
-PointerToLinenumbers : 0000000000.
-NumberOfRelocations  : 0.
-NumberOfLinenumbers  : 0.
-Characteristics      : 0x42000040 ( INITIALIZED_DATA MEM_DISCARDABLE MEM_READ ).
-
+File Header Information : 
+Machine               : 0x8664 (AMD64 (K8))
+NumberOfSections      : 11.
+TimeDateStamp         : 1755557365 (0x68a3adf5), 2025-08-18 17:49:25.
+PointerToSymbolTable  : 0000000000.
+NumberOfSymbols       : 0.
+SizeOfOptionalHeader  : 240.
