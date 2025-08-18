@@ -22,7 +22,8 @@ e_lfanew   : 0x00000100.
 File Header Information : 
 Machine               : 0x8664 (AMD64 (K8))
 NumberOfSections      : 11.
-TimeDateStamp         : 1755557365 (0x68a3adf5), 2025-08-18 17:49:25.
+TimeDateStamp         : 1755557904 (0x68a3b010), 2025-08-18 17:58:24.
 PointerToSymbolTable  : 0000000000.
 NumberOfSymbols       : 0.
 SizeOfOptionalHeader  : 240.
+Characteristics       : 0x0022, ( EXECUTABLE_IMAGE LARGE_ADDRESS_AWARE ).

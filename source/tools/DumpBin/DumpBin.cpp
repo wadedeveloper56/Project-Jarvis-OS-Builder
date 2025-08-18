@@ -3,7 +3,74 @@
 #include <stdlib.h>
 #include <iostream>
 #include <DbgHelp.h>
+#include <strsafe.h>
 #pragma comment (lib,"DbgHelp.lib")
+
+void GetCharacteristics(WORD Characteristics,PCHAR String, size_t cchDest)
+{
+	_ASSERTE(String);
+	//String[0] = 0;
+
+	if (Characteristics & IMAGE_FILE_RELOCS_STRIPPED) {
+		StringCchCatA(String, cchDest, "RELOCS_STRIPPED ");
+	}
+
+	if (Characteristics & IMAGE_FILE_EXECUTABLE_IMAGE) {
+		StringCchCatA(String, cchDest, "EXECUTABLE_IMAGE ");
+	}
+
+	if (Characteristics & IMAGE_FILE_LINE_NUMS_STRIPPED) {
+		StringCchCatA(String, cchDest, "LINE_NUMS_STRIPPED ");
+	}
+
+	if (Characteristics & IMAGE_FILE_LOCAL_SYMS_STRIPPED) {
+		StringCchCatA(String, cchDest, "LOCAL_SYMS_STRIPPED ");
+	}
+
+	if (Characteristics & IMAGE_FILE_AGGRESIVE_WS_TRIM) {
+		StringCchCatA(String, cchDest, "AGGRESIVE_WS_TRIM ");
+	}
+
+	if (Characteristics & IMAGE_FILE_LARGE_ADDRESS_AWARE) {
+		StringCchCatA(String, cchDest, "LARGE_ADDRESS_AWARE ");
+	}
+
+	if (Characteristics & IMAGE_FILE_BYTES_REVERSED_LO) {
+		StringCchCatA(String, cchDest, "BYTES_REVERSED_LO ");
+	}
+
+	if (Characteristics & IMAGE_FILE_32BIT_MACHINE) {
+		StringCchCatA(String, cchDest, "32BIT_MACHINE ");
+	}
+
+	if (Characteristics & IMAGE_FILE_DEBUG_STRIPPED) {
+		StringCchCatA(String, cchDest, "DEBUG_STRIPPED ");
+	}
+
+	if (Characteristics & IMAGE_FILE_REMOVABLE_RUN_FROM_SWAP) {
+		StringCchCatA(String, cchDest, "REMOVABLE_RUN_FROM_SWAP ");
+	}
+
+	if (Characteristics & IMAGE_FILE_NET_RUN_FROM_SWAP) {
+		StringCchCatA(String, cchDest, "NET_RUN_FROM_SWAP ");
+	}
+
+	if (Characteristics & IMAGE_FILE_SYSTEM) {
+		StringCchCatA(String, cchDest, "SYSTEM ");
+	}
+
+	if (Characteristics & IMAGE_FILE_DLL) {
+		StringCchCatA(String, cchDest, "DLL ");
+	}
+
+	if (Characteristics & IMAGE_FILE_UP_SYSTEM_ONLY) {
+		StringCchCatA(String, cchDest, "UP_SYSTEM_ONLY ");
+	}
+
+	if (Characteristics & IMAGE_FILE_BYTES_REVERSED_HI) {
+		StringCchCatA(String, cchDest, "BYTES_REVERSED_HI ");
+	}
+}
 
 void TimeStampToFileTime(INT64 timeStamp, FILETIME& fileTime)
 {
@@ -196,6 +263,10 @@ void Dump(PBYTE Data, LARGE_INTEGER Size)
 	printf("PointerToSymbolTable  : %#010x.\n", FileHeader->PointerToSymbolTable);
 	printf("NumberOfSymbols       : %d.\n", FileHeader->NumberOfSymbols);
 	printf("SizeOfOptionalHeader  : %d.\n", FileHeader->SizeOfOptionalHeader);
+	CHAR Characteristics[MAX_PATH] = { 0 };
+	GetCharacteristics(FileHeader->Characteristics, Characteristics, _countof(Characteristics));
+	printf("Characteristics       : %#06x, ( %s).\n", FileHeader->Characteristics, Characteristics);
+
 }
 
 int main(int argc, char* argv[])
