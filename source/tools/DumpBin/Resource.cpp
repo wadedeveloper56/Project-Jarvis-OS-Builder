@@ -102,7 +102,7 @@ void PrintNameString(PIMAGE_RESOURCE_DIRECTORY ResourceDirectory,PIMAGE_RESOURCE
 }
 
 
-DWORD Resource(PBYTE Data, DWORD Size)
+DWORD Resource(PBYTE Data, LONGLONG Size)
 {
     DWORD ret = ERROR_SUCCESS;
 

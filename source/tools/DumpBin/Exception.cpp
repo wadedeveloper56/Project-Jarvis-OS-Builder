@@ -136,7 +136,7 @@ const char* GetRegister(unsigned char FrameRegister)
     return c;
 }
 
-DWORD Exception(PBYTE Data, DWORD Size)
+DWORD Exception(PBYTE Data, LONGLONG Size)
 {
     DWORD ret = ERROR_SUCCESS;
 

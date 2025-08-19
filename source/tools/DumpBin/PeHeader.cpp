@@ -2,7 +2,7 @@
 #include "PeHeader.h"
 #include "Public.h"
 
-DWORD DosHeader(PBYTE Data, DWORD Size)
+DWORD DosHeader(PBYTE Data, LONGLONG Size)
 {
     DWORD ret = ERROR_SUCCESS;
 
@@ -51,7 +51,7 @@ DWORD DosHeader(PBYTE Data, DWORD Size)
     return ret;
 }
 
-DWORD FileHeader(PBYTE Data, DWORD Size)
+DWORD FileHeader(PBYTE Data, LONGLONG Size)
 {
     DWORD ret = ERROR_SUCCESS;
 
@@ -87,7 +87,7 @@ DWORD FileHeader(PBYTE Data, DWORD Size)
     return ret;
 }
 
-DWORD OptionlHeader(PBYTE Data, DWORD Size)
+DWORD OptionlHeader(PBYTE Data, LONGLONG Size)
 {
     DWORD ret = ERROR_SUCCESS;
 
@@ -186,7 +186,7 @@ DWORD OptionlHeader(PBYTE Data, DWORD Size)
     return ret;
 }
 
-DWORD DataDirectory(PBYTE Data, DWORD Size)
+DWORD DataDirectory(PBYTE Data, LONGLONG Size)
 {
     DWORD ret = ERROR_SUCCESS;
 
@@ -285,7 +285,7 @@ DWORD DataDirectory(PBYTE Data, DWORD Size)
     return ret;
 }
 
-DWORD SectionHeader(PBYTE Data, DWORD Size)
+DWORD SectionHeader(PBYTE Data, LONGLONG Size)
 {
     DWORD ret = ERROR_SUCCESS;
 

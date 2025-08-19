@@ -1,4 +1,4 @@
 #pragma once
 
-void PrintImport(PBYTE Data, DWORD Size, PIMAGE_IMPORT_DESCRIPTOR ImportDirectory);
-DWORD Import(PBYTE Data, DWORD Size);
+void PrintImport(PBYTE Data, LONGLONG Size, PIMAGE_IMPORT_DESCRIPTOR ImportDirectory);
+DWORD Import(PBYTE Data, LONGLONG Size);

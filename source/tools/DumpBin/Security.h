@@ -1,3 +1,3 @@
 #pragma once
 
-DWORD Security(PBYTE Data, DWORD Size);
+DWORD Security(PBYTE Data, LONGLONG Size);

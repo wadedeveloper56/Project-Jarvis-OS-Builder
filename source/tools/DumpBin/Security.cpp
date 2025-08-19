@@ -2,7 +2,7 @@
 #include "Security.h"
 #include "Public.h"
 
-DWORD Security(PBYTE Data, DWORD Size)
+DWORD Security(PBYTE Data, LONGLONG Size)
 {
     DWORD ret = ERROR_SUCCESS;
 

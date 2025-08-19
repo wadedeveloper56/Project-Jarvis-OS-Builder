@@ -2,7 +2,7 @@
 #include "Export.h"
 #include "Public.h"
 
-DWORD Export(PBYTE Data, DWORD Size)
+DWORD Export(PBYTE Data, LONGLONG Size)
 {
     DWORD ret = ERROR_SUCCESS;
 

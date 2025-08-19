@@ -7,6 +7,11 @@
 #include "Exception.h"
 #include "Security.h"
 #include "BaseReloc.h"
+#include "Debug.h"
+#include "Architecture.h"
+#include "GlobalPtr.h"
+#include "TLS.h"
+#include "LoadConfig.h"
 
 int main(int argc, char* argv[])
 {
@@ -52,22 +57,22 @@ int main(int argc, char* argv[])
             }
         }
     }
-    LastError = DosHeader(FileContent, FileSize.LowPart);
-    LastError = FileHeader(FileContent, FileSize.LowPart);
-    LastError = OptionlHeader(FileContent, FileSize.LowPart);
-    LastError = DataDirectory(FileContent, FileSize.LowPart);
-    LastError = SectionHeader(FileContent, FileSize.LowPart);
-    LastError = Export(FileContent, FileSize.LowPart);
-    LastError = Import(FileContent, FileSize.LowPart);
-    LastError = Resource(FileContent, FileSize.LowPart);
-    LastError = Exception(FileContent, FileSize.LowPart);
-    LastError = Security(FileContent, FileSize.LowPart);
-    LastError = BaseReloc(FileContent, FileSize.LowPart);
-	//ret = Debug(argv[2]);
-	//ret = Architecture(argv[2]);
-	//ret = Globalptr(argv[2]);
-	//ret = TLS(argv[2]);
-	//ret = LoadConfig(argv[2]);
+    LastError = DosHeader(FileContent, FileSize.QuadPart);
+    LastError = FileHeader(FileContent, FileSize.QuadPart);
+    LastError = OptionlHeader(FileContent, FileSize.QuadPart);
+    LastError = DataDirectory(FileContent, FileSize.QuadPart);
+    LastError = SectionHeader(FileContent, FileSize.QuadPart);
+    LastError = Export(FileContent, FileSize.QuadPart);
+    LastError = Import(FileContent, FileSize.QuadPart);
+    LastError = Resource(FileContent, FileSize.QuadPart);
+    LastError = Exception(FileContent, FileSize.QuadPart);
+    LastError = Security(FileContent, FileSize.QuadPart);
+    LastError = BaseReloc(FileContent, FileSize.QuadPart);
+    LastError = Debug(FileContent, FileSize.QuadPart);
+    LastError = Architecture(FileContent, FileSize.QuadPart);
+    LastError = Globalptr(FileContent, FileSize.QuadPart);
+    LastError = TLS(FileContent, FileSize.QuadPart);
+    LastError = LoadConfig(FileContent, FileSize.QuadPart);
 	//ret = BoundImport(argv[2]);
 	//ret = IAT(argv[2]);
 	//ret = DelayImport(argv[2]);

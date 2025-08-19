@@ -2,4 +2,4 @@
 
 #include <Windows.h>
 
-DWORD Export(PBYTE Data, DWORD Size);
+DWORD Export(PBYTE Data, LONGLONG Size);

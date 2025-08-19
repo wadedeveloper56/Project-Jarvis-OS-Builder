@@ -151,26 +151,36 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Architecture.cpp" />
     <ClCompile Include="BaseReloc.cpp" />
+    <ClCompile Include="Debug.cpp" />
     <ClCompile Include="DumpBin.cpp" />
     <ClCompile Include="Exception.cpp" />
     <ClCompile Include="Export.cpp" />
+    <ClCompile Include="GlobalPtr.cpp" />
     <ClCompile Include="Import.cpp" />
+    <ClCompile Include="LoadConfig.cpp" />
     <ClCompile Include="PeHeader.cpp" />
     <ClCompile Include="Public.cpp" />
     <ClCompile Include="Resource.cpp" />
     <ClCompile Include="Security.cpp" />
+    <ClCompile Include="TLS.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Architecture.h" />
     <ClInclude Include="BaseReloc.h" />
+    <ClInclude Include="Debug.h" />
     <ClInclude Include="Exception.h" />
     <ClInclude Include="Export.h" />
+    <ClInclude Include="GlobalPtr.h" />
     <ClInclude Include="Import.h" />
+    <ClInclude Include="LoadConfig.h" />
     <ClInclude Include="PeHeader.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Public.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Security.h" />
+    <ClInclude Include="TLS.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

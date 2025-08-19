@@ -2,7 +2,7 @@
 #include "Import.h"
 #include "Public.h"
 
-void PrintImport(PBYTE Data, DWORD Size, PIMAGE_IMPORT_DESCRIPTOR ImportDirectory)
+void PrintImport(PBYTE Data, LONGLONG Size, PIMAGE_IMPORT_DESCRIPTOR ImportDirectory)
 {
     PIMAGE_NT_HEADERS NtHeaders = ImageNtHeader(Data);
     _ASSERTE(NtHeaders);
@@ -74,7 +74,7 @@ void PrintImport(PBYTE Data, DWORD Size, PIMAGE_IMPORT_DESCRIPTOR ImportDirector
     printf("\n");
 }
 
-DWORD Import(PBYTE Data, DWORD Size)
+DWORD Import(PBYTE Data, LONGLONG Size)
 {
     DWORD ret = ERROR_SUCCESS;
 

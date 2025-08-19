@@ -6,4 +6,4 @@ typedef struct _BaseRelocBit {
 } BaseRelocBit, * PBaseRelocBit;
 
 PCSTR GetBaseRelocType(WORD Type);
-DWORD BaseReloc(PBYTE Data, DWORD Size);
+DWORD BaseReloc(PBYTE Data, LONGLONG Size);

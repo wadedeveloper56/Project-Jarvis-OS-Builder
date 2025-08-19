@@ -1,10 +1,7 @@
 #include "pch.h"
 #include "Public.h"
 
-void GetDataDirectory(_In_ PBYTE Data,
-    _In_ DWORD Size,
-    _In_ BYTE index,
-    _Out_ PIMAGE_DATA_DIRECTORY DataDirectory)
+void GetDataDirectory(PBYTE Data,LONGLONG Size,BYTE index,PIMAGE_DATA_DIRECTORY DataDirectory)
 {
     DataDirectory->VirtualAddress = 0;
     DataDirectory->Size = 0;
@@ -600,7 +597,7 @@ BOOL IsWow64()
 }
 
 
-bool IsValidPE(_In_ PBYTE Data, _In_ DWORD Size)
+bool IsValidPE(PBYTE Data, LONGLONG Size)
 {
     bool ret = false;
 
@@ -635,7 +632,7 @@ bool IsValidPE(_In_ PBYTE Data, _In_ DWORD Size)
 }
 
 
-bool IsPE32Ex(_In_ PBYTE Data, _In_ DWORD Size)
+bool IsPE32Ex(PBYTE Data, LONGLONG Size)
 {
     bool ret = false;
 

@@ -49,7 +49,7 @@ PCSTR GetBaseRelocType(WORD Type)
 	return TypeString;
 }
 
-DWORD BaseReloc(PBYTE Data, DWORD Size)
+DWORD BaseReloc(PBYTE Data, LONGLONG Size)
 {
 	DWORD ret = ERROR_SUCCESS;
 

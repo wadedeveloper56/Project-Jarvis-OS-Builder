@@ -78,4 +78,4 @@ typedef struct _RUNTIME_FUNCTION {
 PCSTR GetUnwFlag(BYTE Flags);
 PCSTR GetUnwOpCodes(BYTE UnwindOp);
 const char* GetRegister(unsigned char FrameRegister);
-DWORD Exception(PBYTE Data, DWORD Size);
+DWORD Exception(PBYTE Data, LONGLONG Size);
