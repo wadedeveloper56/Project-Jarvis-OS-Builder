@@ -6,6 +6,7 @@
 #include "Resource.h"
 #include "Exception.h"
 #include "Security.h"
+#include "BaseReloc.h"
 
 int main(int argc, char* argv[])
 {
@@ -61,7 +62,7 @@ int main(int argc, char* argv[])
     LastError = Resource(FileContent, FileSize.LowPart);
     LastError = Exception(FileContent, FileSize.LowPart);
     LastError = Security(FileContent, FileSize.LowPart);
-	//ret = BaseReloc(argv[2]);
+    LastError = BaseReloc(FileContent, FileSize.LowPart);
 	//ret = Debug(argv[2]);
 	//ret = Architecture(argv[2]);
 	//ret = Globalptr(argv[2]);

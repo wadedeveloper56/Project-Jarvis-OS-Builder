@@ -151,6 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BaseReloc.cpp" />
     <ClCompile Include="DumpBin.cpp" />
     <ClCompile Include="Exception.cpp" />
     <ClCompile Include="Export.cpp" />
@@ -161,6 +162,7 @@
     <ClCompile Include="Security.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BaseReloc.h" />
     <ClInclude Include="Exception.h" />
     <ClInclude Include="Export.h" />
     <ClInclude Include="Import.h" />
