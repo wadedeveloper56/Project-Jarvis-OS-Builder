@@ -1,6 +1,11 @@
 #include "pch.h"
 #include "Public.h"
 #include "PeHeader.h"
+#include "Export.h"
+#include "Import.h"
+#include "Resource.h"
+#include "Exception.h"
+#include "Security.h"
 
 int main(int argc, char* argv[])
 {
@@ -51,11 +56,11 @@ int main(int argc, char* argv[])
     LastError = OptionlHeader(FileContent, FileSize.LowPart);
     LastError = DataDirectory(FileContent, FileSize.LowPart);
     LastError = SectionHeader(FileContent, FileSize.LowPart);
-	//ret = Export(argv[2]);
-	//ret = Import(argv[2]);
-	//ret = Resource(argv[2]);
-	//ret = Exception(argv[2]);
-	//ret = Security(argv[2]);
+    LastError = Export(FileContent, FileSize.LowPart);
+    LastError = Import(FileContent, FileSize.LowPart);
+    LastError = Resource(FileContent, FileSize.LowPart);
+    LastError = Exception(FileContent, FileSize.LowPart);
+    LastError = Security(FileContent, FileSize.LowPart);
 	//ret = BaseReloc(argv[2]);
 	//ret = Debug(argv[2]);
 	//ret = Architecture(argv[2]);
