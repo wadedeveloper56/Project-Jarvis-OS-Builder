@@ -152,9 +152,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DumpBin.cpp" />
+    <ClCompile Include="PeHeader.cpp" />
     <ClCompile Include="Public.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="PeHeader.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Public.h" />
   </ItemGroup>

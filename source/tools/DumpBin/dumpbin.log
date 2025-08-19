@@ -1,181 +1,205 @@
 Dos Header Information:
-e_magic    : 0x5a4d.
-e_cblp     : 0x0090.
-e_cp       : 0x0003.
-e_crlc     : 000000.
-e_cparhdr  : 0x0004.
-e_minalloc : 000000.
-e_maxalloc : 0xffff.
-e_ss       : 000000.
-e_sp       : 0x00b8.
-e_csum     : 000000.
-e_ip       : 000000.
-e_cs       : 000000.
-e_lfarlc   : 0x0040.
-e_ovno     : 000000.
-e_res[4]   : 0x0000000000000000.
-e_oemid    : 000000.
-e_oeminfo  : 000000.
-e_res2[10] : 0x0000000000000000000000000000000000000000.
-e_lfanew   : 0x000000f8.
+e_magic:0X5A4D.
+e_cblp:0X0090.
+e_cp:0X0003.
+e_crlc:000000.
+e_cparhdr:0X0004.
+e_minalloc:000000.
+e_maxalloc:0XFFFF.
+e_ss:000000.
+e_sp:0X00B8.
+e_csum:000000.
+e_ip:000000.
+e_cs:000000.
+e_lfarlc:0X0040.
+e_ovno:000000.
+e_res[4]:0X0000000000000000.
+e_oemid:000000.
+e_oeminfo:000000.
+e_res2[10]:0X0000000000000000000000000000000000000000.
+e_lfanew:0X000000F8.
+File Header Information:
+Machine:0X8664, AMD64 (K8).
+NumberOfSections:0X000B.
+TimeDateStamp:1755614849(0X68A48E81), 2025-08-19 09:47:29.
+PointerToSymbolTable:0000000000.
+NumberOfSymbols:0000000000.
+SizeOfOptionalHeader:0X00F0.
+Characteristics:0X0022, ( EXECUTABLE_IMAGE LARGE_ADDRESS_AWARE ).
 
-File Header Information : 
-Machine               : 0x8664 (AMD64 (K8))
-NumberOfSections      : 11.
-TimeDateStamp         : 1755609581 (0x68a479ed), 2025-08-19 08:19:41.
-PointerToSymbolTable  : 0000000000.
-NumberOfSymbols       : 0.
-SizeOfOptionalHeader  : 240.
-Characteristics       : 0x0022, ( EXECUTABLE_IMAGE LARGE_ADDRESS_AWARE ).
-
+File Header Information:
+Magic:0X020B.
+LinkerVersion:14.44.
+SizeOfCode:0X000EF200.
+SizeOfInitializedData:0X00046800.
+SizeOfUninitializedData:0000000000.
+AddressOfEntryPoint:0X0007412A.
+BaseOfCode:0X00001000.
+ImageBase:0X140000000.
+SectionAlignment:0X00001000.
+FileAlignment:0X00000200.
+OperatingSystemVersion:6.0.
+ImageVersion:0.0.
+SubsystemVersion:6.0.
+Win32VersionValue:0000000000.
+SizeOfImage:0X001AE000.
+SizeOfHeaders:0X00000400.
+CheckSum:0000000000.
+Subsystem:0X0003(WINDOWS_CUI).
+DllCharacteristics:0X8160( HIGH_ENTROPY_VA DYNAMIC_BASE NX_COMPAT TERMINAL_SERVER_AWARE ).
+SizeOfStackReserve:0X100000.
+SizeOfStackCommit:0X1000.
+SizeOfHeapReserve:0X100000.
+SizeOfHeapCommit:0X1000.
+LoaderFlags:0000000000.
+NumberOfRvaAndSizes:0X00000010.
 Data Directory Information:
-EXPORT         : VirtualAddress: 0000000000, 	Size:         0.
-IMPORT         : VirtualAddress: 0x001a24e8, 	Size:        80.
-RESOURCE       : VirtualAddress: 0x001a7000, 	Size:      1084.
-EXCEPTION      : VirtualAddress: 0x00197000, 	Size:     40512.
-SECURITY       : VirtualAddress: 0000000000, 	Size:         0.
-BASERELOC      : VirtualAddress: 0x001a8000, 	Size:      2276.
-DEBUG          : VirtualAddress: 0x00188440, 	Size:        56.
-ARCHITECTURE   : VirtualAddress: 0000000000, 	Size:         0.
-GLOBALPTR      : VirtualAddress: 0000000000, 	Size:         0.
-TLS            : VirtualAddress: 0000000000, 	Size:         0.
-LOAD_CONFIG    : VirtualAddress: 0x001882c0, 	Size:       320.
-BOUND_IMPORT   : VirtualAddress: 0000000000, 	Size:         0.
-IAT            : VirtualAddress: 0x001a2000, 	Size:      1256.
-DELAY_IMPORT   : VirtualAddress: 0000000000, 	Size:         0.
-COM_DESCRIPTOR : VirtualAddress: 0000000000, 	Size:         0.
-
+EXPORT: 		VirtualAddress:0000000000, 	Size:0000000000.
+IMPORT: 		VirtualAddress:0X001A64E8, 	Size:0X00000050.
+RESOURCE: 		VirtualAddress:0X001AB000, 	Size:0X0000043C.
+EXCEPTION: 		VirtualAddress:0X0019B000, 	Size:0X00009EAC.
+SECURITY: 		VirtualAddress:0000000000, 	Size:0000000000.
+BASERELOC: 		VirtualAddress:0X001AC000, 	Size:0X000008CC.
+DEBUG: 			VirtualAddress:0X0018BAD0, 	Size:0X00000038.
+ARCHITECTURE: 		VirtualAddress:0000000000, 	Size:0000000000.
+GLOBALPTR: 		VirtualAddress:0000000000, 	Size:0000000000.
+TLS: 			VirtualAddress:0000000000, 	Size:0000000000.
+LOAD_CONFIG: 		VirtualAddress:0X0018B950, 	Size:0X00000140.
+BOUND_IMPORT: 		VirtualAddress:0000000000, 	Size:0000000000.
+IAT: 			VirtualAddress:0X001A6000, 	Size:0X000004E8.
+DELAY_IMPORT: 		VirtualAddress:0000000000, 	Size:0000000000.
+COM_DESCRIPTOR: 	VirtualAddress:0000000000, 	Size:0000000000.
 Section Header Information:
 
-index                : 1.
-Name                 : .textbss6û.
-VirtualSize          : 457526.
-VirtualAddress       : 0x00001000.
-SizeOfRawData        : 0.
-PointerToRawData     : 0000000000.
-PointerToRelocations : 0000000000.
-PointerToLinenumbers : 0000000000.
-NumberOfRelocations  : 0.
-NumberOfLinenumbers  : 0.
-Characteristics      : 0xe00000a0  ( CNT_CODE CNT_UNINITIALIZED_DATA MEM_EXECUTE MEM_READ MEM_WRITE ).
+index:1.
+Name:.textbssÞ.
+VirtualSize:0X000705DE.
+VirtualAddress:0X00001000.
+SizeOfRawData:0000000000.
+PointerToRawData:0000000000.
+PointerToRelocations:0000000000.
+PointerToLinenumbers:0000000000.
+NumberOfRelocations:000000.
+NumberOfLinenumbers:000000.
+Characteristics:0XE00000A0( CNT_CODE CNT_UNINITIALIZED_DATA MEM_EXECUTE MEM_READ MEM_WRITE ).
 
-index                : 2.
-Name                 : .text.
-VirtualSize          : 973557.
-VirtualAddress       : 0x00071000.
-SizeOfRawData        : 973824.
-PointerToRawData     : 0x00000400.
-PointerToRelocations : 0000000000.
-PointerToLinenumbers : 0000000000.
-NumberOfRelocations  : 0.
-NumberOfLinenumbers  : 0.
-Characteristics      : 0x60000020  ( CNT_CODE MEM_EXECUTE MEM_READ ).
+index:2.
+Name:.text.
+VirtualSize:0X000EF0C9.
+VirtualAddress:0X00072000.
+SizeOfRawData:0X000EF200.
+PointerToRawData:0X00000400.
+PointerToRelocations:0000000000.
+PointerToLinenumbers:0000000000.
+NumberOfRelocations:000000.
+NumberOfLinenumbers:000000.
+Characteristics:0X60000020( CNT_CODE MEM_EXECUTE MEM_READ ).
 
-index                : 3.
-Name                 : .rdata.
-VirtualSize          : 211086.
-VirtualAddress       : 0x0015f000.
-SizeOfRawData        : 211456.
-PointerToRawData     : 0x000ee000.
-PointerToRelocations : 0000000000.
-PointerToLinenumbers : 0000000000.
-NumberOfRelocations  : 0.
-NumberOfLinenumbers  : 0.
-Characteristics      : 0x40000040  ( INITIALIZED_DATA MEM_READ ).
+index:3.
+Name:.rdata.
+VirtualSize:0X000340A6.
+VirtualAddress:0X00162000.
+SizeOfRawData:0X00034200.
+PointerToRawData:0X000EF600.
+PointerToRelocations:0000000000.
+PointerToLinenumbers:0000000000.
+NumberOfRelocations:000000.
+NumberOfLinenumbers:000000.
+Characteristics:0X40000040( INITIALIZED_DATA MEM_READ ).
 
-index                : 4.
-Name                 : .data.
-VirtualSize          : 12848.
-VirtualAddress       : 0x00193000.
-SizeOfRawData        : 5120.
-PointerToRawData     : 0x00121a00.
-PointerToRelocations : 0000000000.
-PointerToLinenumbers : 0000000000.
-NumberOfRelocations  : 0.
-NumberOfLinenumbers  : 0.
-Characteristics      : 0xc0000040  ( INITIALIZED_DATA MEM_READ MEM_WRITE ).
+index:4.
+Name:.data.
+VirtualSize:0X00003230.
+VirtualAddress:0X00197000.
+SizeOfRawData:0X00001400.
+PointerToRawData:0X00123800.
+PointerToRelocations:0000000000.
+PointerToLinenumbers:0000000000.
+NumberOfRelocations:000000.
+NumberOfLinenumbers:000000.
+Characteristics:0XC0000040( INITIALIZED_DATA MEM_READ MEM_WRITE ).
 
-index                : 5.
-Name                 : .pdata.
-VirtualSize          : 44796.
-VirtualAddress       : 0x00197000.
-SizeOfRawData        : 45056.
-PointerToRawData     : 0x00122e00.
-PointerToRelocations : 0000000000.
-PointerToLinenumbers : 0000000000.
-NumberOfRelocations  : 0.
-NumberOfLinenumbers  : 0.
-Characteristics      : 0x40000040  ( INITIALIZED_DATA MEM_READ ).
+index:5.
+Name:.pdata.
+VirtualSize:0X0000AF80.
+VirtualAddress:0X0019B000.
+SizeOfRawData:0X0000B000.
+PointerToRawData:0X00124C00.
+PointerToRelocations:0000000000.
+PointerToLinenumbers:0000000000.
+NumberOfRelocations:000000.
+NumberOfLinenumbers:000000.
+Characteristics:0X40000040( INITIALIZED_DATA MEM_READ ).
 
-index                : 6.
-Name                 : .idata.
-VirtualSize          : 5021.
-VirtualAddress       : 0x001a2000.
-SizeOfRawData        : 5120.
-PointerToRawData     : 0x0012de00.
-PointerToRelocations : 0000000000.
-PointerToLinenumbers : 0000000000.
-NumberOfRelocations  : 0.
-NumberOfLinenumbers  : 0.
-Characteristics      : 0x40000040  ( INITIALIZED_DATA MEM_READ ).
+index:6.
+Name:.idata.
+VirtualSize:0X0000139D.
+VirtualAddress:0X001A6000.
+SizeOfRawData:0X00001400.
+PointerToRawData:0X0012FC00.
+PointerToRelocations:0000000000.
+PointerToLinenumbers:0000000000.
+NumberOfRelocations:000000.
+NumberOfLinenumbers:000000.
+Characteristics:0X40000040( INITIALIZED_DATA MEM_READ ).
 
-index                : 7.
-Name                 : .msvcjmc….
-VirtualSize          : 901.
-VirtualAddress       : 0x001a4000.
-SizeOfRawData        : 1024.
-PointerToRawData     : 0x0012f200.
-PointerToRelocations : 0000000000.
-PointerToLinenumbers : 0000000000.
-NumberOfRelocations  : 0.
-NumberOfLinenumbers  : 0.
-Characteristics      : 0xc0000040  ( INITIALIZED_DATA MEM_READ MEM_WRITE ).
+index:7.
+Name:.msvcjmcÊ.
+VirtualSize:0X000004CA.
+VirtualAddress:0X001A8000.
+SizeOfRawData:0X00000600.
+PointerToRawData:0X00131000.
+PointerToRelocations:0000000000.
+PointerToLinenumbers:0000000000.
+NumberOfRelocations:000000.
+NumberOfLinenumbers:000000.
+Characteristics:0XC0000040( INITIALIZED_DATA MEM_READ MEM_WRITE ).
 
-index                : 8.
-Name                 : .00cfg.
-VirtualSize          : 373.
-VirtualAddress       : 0x001a5000.
-SizeOfRawData        : 512.
-PointerToRawData     : 0x0012f600.
-PointerToRelocations : 0000000000.
-PointerToLinenumbers : 0000000000.
-NumberOfRelocations  : 0.
-NumberOfLinenumbers  : 0.
-Characteristics      : 0x40000040  ( INITIALIZED_DATA MEM_READ ).
+index:8.
+Name:.00cfg.
+VirtualSize:0X00000175.
+VirtualAddress:0X001A9000.
+SizeOfRawData:0X00000200.
+PointerToRawData:0X00131600.
+PointerToRelocations:0000000000.
+PointerToLinenumbers:0000000000.
+NumberOfRelocations:000000.
+NumberOfLinenumbers:000000.
+Characteristics:0X40000040( INITIALIZED_DATA MEM_READ ).
 
-index                : 9.
-Name                 : .fptable3.
-VirtualSize          : 563.
-VirtualAddress       : 0x001a6000.
-SizeOfRawData        : 1024.
-PointerToRawData     : 0x0012f800.
-PointerToRelocations : 0000000000.
-PointerToLinenumbers : 0000000000.
-NumberOfRelocations  : 0.
-NumberOfLinenumbers  : 0.
-Characteristics      : 0xc0000040  ( INITIALIZED_DATA MEM_READ MEM_WRITE ).
+index:9.
+Name:.fptable3.
+VirtualSize:0X00000233.
+VirtualAddress:0X001AA000.
+SizeOfRawData:0X00000400.
+PointerToRawData:0X00131800.
+PointerToRelocations:0000000000.
+PointerToLinenumbers:0000000000.
+NumberOfRelocations:000000.
+NumberOfLinenumbers:000000.
+Characteristics:0XC0000040( INITIALIZED_DATA MEM_READ MEM_WRITE ).
 
-index                : 10.
-Name                 : .rsrc.
-VirtualSize          : 1084.
-VirtualAddress       : 0x001a7000.
-SizeOfRawData        : 1536.
-PointerToRawData     : 0x0012fc00.
-PointerToRelocations : 0000000000.
-PointerToLinenumbers : 0000000000.
-NumberOfRelocations  : 0.
-NumberOfLinenumbers  : 0.
-Characteristics      : 0x40000040  ( INITIALIZED_DATA MEM_READ ).
+index:10.
+Name:.rsrc.
+VirtualSize:0X0000043C.
+VirtualAddress:0X001AB000.
+SizeOfRawData:0X00000600.
+PointerToRawData:0X00131C00.
+PointerToRelocations:0000000000.
+PointerToLinenumbers:0000000000.
+NumberOfRelocations:000000.
+NumberOfLinenumbers:000000.
+Characteristics:0X40000040( INITIALIZED_DATA MEM_READ ).
 
-index                : 11.
-Name                 : .reloc.
-VirtualSize          : 7047.
-VirtualAddress       : 0x001a8000.
-SizeOfRawData        : 7168.
-PointerToRawData     : 0x00130200.
-PointerToRelocations : 0000000000.
-PointerToLinenumbers : 0000000000.
-NumberOfRelocations  : 0.
-NumberOfLinenumbers  : 0.
-Characteristics      : 0x42000040  ( INITIALIZED_DATA MEM_DISCARDABLE MEM_READ ).
+index:11.
+Name:.reloc.
+VirtualSize:0X00001BC0.
+VirtualAddress:0X001AC000.
+SizeOfRawData:0X00001C00.
+PointerToRawData:0X00132200.
+PointerToRelocations:0000000000.
+PointerToLinenumbers:0000000000.
+NumberOfRelocations:000000.
+NumberOfLinenumbers:000000.
+Characteristics:0X42000040( INITIALIZED_DATA MEM_DISCARDABLE MEM_READ ).
 
