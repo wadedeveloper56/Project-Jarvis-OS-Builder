@@ -18,5 +18,16 @@
     <ClCompile Include="DumpBin.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Public.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Public.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

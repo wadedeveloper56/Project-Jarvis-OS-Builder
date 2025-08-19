@@ -17,13 +17,30 @@ e_res[4]   : 0x0000000000000000.
 e_oemid    : 000000.
 e_oeminfo  : 000000.
 e_res2[10] : 0x0000000000000000000000000000000000000000.
-e_lfanew   : 0x00000100.
+e_lfanew   : 0x000000f8.
 
 File Header Information : 
 Machine               : 0x8664 (AMD64 (K8))
 NumberOfSections      : 11.
-TimeDateStamp         : 1755557904 (0x68a3b010), 2025-08-18 17:58:24.
+TimeDateStamp         : 1755608799 (0x68a476df), 2025-08-19 08:06:39.
 PointerToSymbolTable  : 0000000000.
 NumberOfSymbols       : 0.
 SizeOfOptionalHeader  : 240.
 Characteristics       : 0x0022, ( EXECUTABLE_IMAGE LARGE_ADDRESS_AWARE ).
+
+Data Directory Information:
+EXPORT         : VirtualAddress: 0000000000, 	Size:         0.
+IMPORT         : VirtualAddress: 0x001a24e8, 	Size:        80.
+RESOURCE       : VirtualAddress: 0x001a7000, 	Size:      1084.
+EXCEPTION      : VirtualAddress: 0x00197000, 	Size:     40500.
+SECURITY       : VirtualAddress: 0000000000, 	Size:         0.
+BASERELOC      : VirtualAddress: 0x001a8000, 	Size:      2276.
+DEBUG          : VirtualAddress: 0x00188440, 	Size:        56.
+ARCHITECTURE   : VirtualAddress: 0000000000, 	Size:         0.
+GLOBALPTR      : VirtualAddress: 0000000000, 	Size:         0.
+TLS            : VirtualAddress: 0000000000, 	Size:         0.
+LOAD_CONFIG    : VirtualAddress: 0x001882c0, 	Size:       320.
+BOUND_IMPORT   : VirtualAddress: 0000000000, 	Size:         0.
+IAT            : VirtualAddress: 0x001a2000, 	Size:      1256.
+DELAY_IMPORT   : VirtualAddress: 0000000000, 	Size:         0.
+COM_DESCRIPTOR : VirtualAddress: 0000000000, 	Size:         0.

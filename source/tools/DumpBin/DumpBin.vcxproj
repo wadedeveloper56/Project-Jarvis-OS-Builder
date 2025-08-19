@@ -152,6 +152,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DumpBin.cpp" />
+    <ClCompile Include="Public.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="Public.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
