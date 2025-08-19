@@ -9,3 +9,4 @@ void GetTimeDateStamp(DWORD TimeDateStamp, PCHAR String);
 PCSTR GetMachine(WORD Machine);
 bool IsValidPE(PBYTE Data, LARGE_INTEGER Size);
 bool IsPE32Ex(PBYTE Data, LARGE_INTEGER Size);
+void GetSectionCharacteristics(DWORD Characteristics, PCHAR String, size_t cchDest);

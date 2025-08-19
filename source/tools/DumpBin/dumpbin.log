@@ -22,7 +22,7 @@ e_lfanew   : 0x000000f8.
 File Header Information : 
 Machine               : 0x8664 (AMD64 (K8))
 NumberOfSections      : 11.
-TimeDateStamp         : 1755608799 (0x68a476df), 2025-08-19 08:06:39.
+TimeDateStamp         : 1755609581 (0x68a479ed), 2025-08-19 08:19:41.
 PointerToSymbolTable  : 0000000000.
 NumberOfSymbols       : 0.
 SizeOfOptionalHeader  : 240.
@@ -32,7 +32,7 @@ Data Directory Information:
 EXPORT         : VirtualAddress: 0000000000, 	Size:         0.
 IMPORT         : VirtualAddress: 0x001a24e8, 	Size:        80.
 RESOURCE       : VirtualAddress: 0x001a7000, 	Size:      1084.
-EXCEPTION      : VirtualAddress: 0x00197000, 	Size:     40500.
+EXCEPTION      : VirtualAddress: 0x00197000, 	Size:     40512.
 SECURITY       : VirtualAddress: 0000000000, 	Size:         0.
 BASERELOC      : VirtualAddress: 0x001a8000, 	Size:      2276.
 DEBUG          : VirtualAddress: 0x00188440, 	Size:        56.
@@ -44,3 +44,138 @@ BOUND_IMPORT   : VirtualAddress: 0000000000, 	Size:         0.
 IAT            : VirtualAddress: 0x001a2000, 	Size:      1256.
 DELAY_IMPORT   : VirtualAddress: 0000000000, 	Size:         0.
 COM_DESCRIPTOR : VirtualAddress: 0000000000, 	Size:         0.
+
+Section Header Information:
+
+index                : 1.
+Name                 : .textbss6û.
+VirtualSize          : 457526.
+VirtualAddress       : 0x00001000.
+SizeOfRawData        : 0.
+PointerToRawData     : 0000000000.
+PointerToRelocations : 0000000000.
+PointerToLinenumbers : 0000000000.
+NumberOfRelocations  : 0.
+NumberOfLinenumbers  : 0.
+Characteristics      : 0xe00000a0  ( CNT_CODE CNT_UNINITIALIZED_DATA MEM_EXECUTE MEM_READ MEM_WRITE ).
+
+index                : 2.
+Name                 : .text.
+VirtualSize          : 973557.
+VirtualAddress       : 0x00071000.
+SizeOfRawData        : 973824.
+PointerToRawData     : 0x00000400.
+PointerToRelocations : 0000000000.
+PointerToLinenumbers : 0000000000.
+NumberOfRelocations  : 0.
+NumberOfLinenumbers  : 0.
+Characteristics      : 0x60000020  ( CNT_CODE MEM_EXECUTE MEM_READ ).
+
+index                : 3.
+Name                 : .rdata.
+VirtualSize          : 211086.
+VirtualAddress       : 0x0015f000.
+SizeOfRawData        : 211456.
+PointerToRawData     : 0x000ee000.
+PointerToRelocations : 0000000000.
+PointerToLinenumbers : 0000000000.
+NumberOfRelocations  : 0.
+NumberOfLinenumbers  : 0.
+Characteristics      : 0x40000040  ( INITIALIZED_DATA MEM_READ ).
+
+index                : 4.
+Name                 : .data.
+VirtualSize          : 12848.
+VirtualAddress       : 0x00193000.
+SizeOfRawData        : 5120.
+PointerToRawData     : 0x00121a00.
+PointerToRelocations : 0000000000.
+PointerToLinenumbers : 0000000000.
+NumberOfRelocations  : 0.
+NumberOfLinenumbers  : 0.
+Characteristics      : 0xc0000040  ( INITIALIZED_DATA MEM_READ MEM_WRITE ).
+
+index                : 5.
+Name                 : .pdata.
+VirtualSize          : 44796.
+VirtualAddress       : 0x00197000.
+SizeOfRawData        : 45056.
+PointerToRawData     : 0x00122e00.
+PointerToRelocations : 0000000000.
+PointerToLinenumbers : 0000000000.
+NumberOfRelocations  : 0.
+NumberOfLinenumbers  : 0.
+Characteristics      : 0x40000040  ( INITIALIZED_DATA MEM_READ ).
+
+index                : 6.
+Name                 : .idata.
+VirtualSize          : 5021.
+VirtualAddress       : 0x001a2000.
+SizeOfRawData        : 5120.
+PointerToRawData     : 0x0012de00.
+PointerToRelocations : 0000000000.
+PointerToLinenumbers : 0000000000.
+NumberOfRelocations  : 0.
+NumberOfLinenumbers  : 0.
+Characteristics      : 0x40000040  ( INITIALIZED_DATA MEM_READ ).
+
+index                : 7.
+Name                 : .msvcjmc….
+VirtualSize          : 901.
+VirtualAddress       : 0x001a4000.
+SizeOfRawData        : 1024.
+PointerToRawData     : 0x0012f200.
+PointerToRelocations : 0000000000.
+PointerToLinenumbers : 0000000000.
+NumberOfRelocations  : 0.
+NumberOfLinenumbers  : 0.
+Characteristics      : 0xc0000040  ( INITIALIZED_DATA MEM_READ MEM_WRITE ).
+
+index                : 8.
+Name                 : .00cfg.
+VirtualSize          : 373.
+VirtualAddress       : 0x001a5000.
+SizeOfRawData        : 512.
+PointerToRawData     : 0x0012f600.
+PointerToRelocations : 0000000000.
+PointerToLinenumbers : 0000000000.
+NumberOfRelocations  : 0.
+NumberOfLinenumbers  : 0.
+Characteristics      : 0x40000040  ( INITIALIZED_DATA MEM_READ ).
+
+index                : 9.
+Name                 : .fptable3.
+VirtualSize          : 563.
+VirtualAddress       : 0x001a6000.
+SizeOfRawData        : 1024.
+PointerToRawData     : 0x0012f800.
+PointerToRelocations : 0000000000.
+PointerToLinenumbers : 0000000000.
+NumberOfRelocations  : 0.
+NumberOfLinenumbers  : 0.
+Characteristics      : 0xc0000040  ( INITIALIZED_DATA MEM_READ MEM_WRITE ).
+
+index                : 10.
+Name                 : .rsrc.
+VirtualSize          : 1084.
+VirtualAddress       : 0x001a7000.
+SizeOfRawData        : 1536.
+PointerToRawData     : 0x0012fc00.
+PointerToRelocations : 0000000000.
+PointerToLinenumbers : 0000000000.
+NumberOfRelocations  : 0.
+NumberOfLinenumbers  : 0.
+Characteristics      : 0x40000040  ( INITIALIZED_DATA MEM_READ ).
+
+index                : 11.
+Name                 : .reloc.
+VirtualSize          : 7047.
+VirtualAddress       : 0x001a8000.
+SizeOfRawData        : 7168.
+PointerToRawData     : 0x00130200.
+PointerToRelocations : 0000000000.
+PointerToLinenumbers : 0000000000.
+NumberOfRelocations  : 0.
+NumberOfLinenumbers  : 0.
+Characteristics      : 0x42000040  ( INITIALIZED_DATA MEM_DISCARDABLE MEM_READ ).
+

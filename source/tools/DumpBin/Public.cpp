@@ -1,6 +1,165 @@
 #include "pch.h"
 #include "Public.h"
 
+void GetSectionCharacteristics(DWORD Characteristics,PCHAR String,size_t cchDest)
+{
+	if (Characteristics & IMAGE_SCN_SCALE_INDEX) {
+		StringCchCatA(String, cchDest, "SCALE_INDEX ");
+	}
+
+	if (Characteristics & IMAGE_SCN_TYPE_NO_PAD) {
+		StringCchCatA(String, cchDest, "TYPE_NO_PAD ");
+	}
+
+	if (Characteristics & IMAGE_SCN_CNT_CODE) {
+		StringCchCatA(String, cchDest, "CNT_CODE ");
+	}
+
+	if (Characteristics & IMAGE_SCN_CNT_INITIALIZED_DATA) {
+		StringCchCatA(String, cchDest, "INITIALIZED_DATA ");
+	}
+
+	if (Characteristics & IMAGE_SCN_CNT_UNINITIALIZED_DATA) {
+		StringCchCatA(String, cchDest, "CNT_UNINITIALIZED_DATA ");
+	}
+
+	if (Characteristics & IMAGE_SCN_LNK_OTHER) {
+		StringCchCatA(String, cchDest, "LNK_OTHER ");
+	}
+
+	if (Characteristics & IMAGE_SCN_LNK_INFO) {
+		StringCchCatA(String, cchDest, "LNK_INFO ");
+	}
+
+	if (Characteristics & IMAGE_SCN_LNK_REMOVE) {
+		StringCchCatA(String, cchDest, "LNK_REMOVE ");
+	}
+
+	if (Characteristics & IMAGE_SCN_LNK_COMDAT) {
+		StringCchCatA(String, cchDest, "LNK_COMDAT ");
+	}
+
+	if (Characteristics & IMAGE_SCN_NO_DEFER_SPEC_EXC) {
+		StringCchCatA(String, cchDest, "NO_DEFER_SPEC_EXC ");
+	}
+
+	if (Characteristics & IMAGE_SCN_GPREL) {
+		StringCchCatA(String, cchDest, "GPREL ");
+	}
+
+	if (Characteristics & IMAGE_SCN_MEM_FARDATA) {
+		StringCchCatA(String, cchDest, "MEM_FARDATA ");
+	}
+
+	if (Characteristics & IMAGE_SCN_MEM_PURGEABLE) {
+		StringCchCatA(String, cchDest, "MEM_PURGEABLE ");
+	}
+
+	if (Characteristics & IMAGE_SCN_MEM_16BIT) {
+		StringCchCatA(String, cchDest, "MEM_16BIT ");
+	}
+
+	if (Characteristics & IMAGE_SCN_MEM_LOCKED) {
+		StringCchCatA(String, cchDest, "MEM_LOCKED ");
+	}
+
+	if (Characteristics & IMAGE_SCN_MEM_PRELOAD) {
+		StringCchCatA(String, cchDest, "MEM_PRELOAD ");
+	}
+
+	if (Characteristics & IMAGE_SCN_ALIGN_1BYTES) {
+		StringCchCatA(String, cchDest, "ALIGN_1BYTES ");
+	}
+
+	if (Characteristics & IMAGE_SCN_ALIGN_2BYTES) {
+		StringCchCatA(String, cchDest, "ALIGN_2BYTES ");
+	}
+
+	if (Characteristics & IMAGE_SCN_ALIGN_4BYTES) {
+		StringCchCatA(String, cchDest, "ALIGN_4BYTES ");
+	}
+
+	if (Characteristics & IMAGE_SCN_ALIGN_8BYTES) {
+		StringCchCatA(String, cchDest, "ALIGN_8BYTES ");
+	}
+
+	if (Characteristics & IMAGE_SCN_ALIGN_16BYTES) {
+		StringCchCatA(String, cchDest, "ALIGN_16BYTES ");
+	}
+
+	if (Characteristics & IMAGE_SCN_ALIGN_32BYTES) {
+		StringCchCatA(String, cchDest, "ALIGN_32BYTES ");
+	}
+
+	if (Characteristics & IMAGE_SCN_ALIGN_64BYTES) {
+		StringCchCatA(String, cchDest, "ALIGN_64BYTES ");
+	}
+
+	if (Characteristics & IMAGE_SCN_ALIGN_128BYTES) {
+		StringCchCatA(String, cchDest, "ALIGN_128BYTES ");
+	}
+
+	if (Characteristics & IMAGE_SCN_ALIGN_256BYTES) {
+		StringCchCatA(String, cchDest, "ALIGN_256BYTES ");
+	}
+
+	if (Characteristics & IMAGE_SCN_ALIGN_512BYTES) {
+		StringCchCatA(String, cchDest, "ALIGN_512BYTES ");
+	}
+
+	if (Characteristics & IMAGE_SCN_ALIGN_1024BYTES) {
+		StringCchCatA(String, cchDest, "ALIGN_1024BYTES ");
+	}
+
+	if (Characteristics & IMAGE_SCN_ALIGN_2048BYTES) {
+		StringCchCatA(String, cchDest, "ALIGN_2048BYTES ");
+	}
+
+	if (Characteristics & IMAGE_SCN_ALIGN_4096BYTES) {
+		StringCchCatA(String, cchDest, "ALIGN_4096BYTES ");
+	}
+
+	if (Characteristics & IMAGE_SCN_ALIGN_8192BYTES) {
+		StringCchCatA(String, cchDest, "ALIGN_8192BYTES ");
+	}
+
+	if (Characteristics & IMAGE_SCN_ALIGN_MASK) {
+		StringCchCatA(String, cchDest, "ALIGN_MASK ");
+	}
+
+	if (Characteristics & IMAGE_SCN_LNK_NRELOC_OVFL) {
+		StringCchCatA(String, cchDest, "LNK_NRELOC_OVFL ");
+	}
+
+	if (Characteristics & IMAGE_SCN_MEM_DISCARDABLE) {
+		StringCchCatA(String, cchDest, "MEM_DISCARDABLE ");
+	}
+
+	if (Characteristics & IMAGE_SCN_MEM_NOT_CACHED) {
+		StringCchCatA(String, cchDest, "MEM_NOT_CACHED ");
+	}
+
+	if (Characteristics & IMAGE_SCN_MEM_NOT_PAGED) {
+		StringCchCatA(String, cchDest, "MEM_NOT_PAGED ");
+	}
+
+	if (Characteristics & IMAGE_SCN_MEM_SHARED) {
+		StringCchCatA(String, cchDest, "MEM_SHARED ");
+	}
+
+	if (Characteristics & IMAGE_SCN_MEM_EXECUTE) {
+		StringCchCatA(String, cchDest, "MEM_EXECUTE ");
+	}
+
+	if (Characteristics & IMAGE_SCN_MEM_READ) {
+		StringCchCatA(String, cchDest, "MEM_READ ");
+	}
+
+	if (Characteristics & IMAGE_SCN_MEM_WRITE) {
+		StringCchCatA(String, cchDest, "MEM_WRITE ");
+	}
+}
+
 bool IsValidPE(PBYTE Data, LARGE_INTEGER Size)
 {
 	bool ret = false;

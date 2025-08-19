@@ -16,6 +16,8 @@ void Dump(PBYTE Data, LARGE_INTEGER Size)
 		PIMAGE_OPTIONAL_HEADER32 OptionalHeader = (PIMAGE_OPTIONAL_HEADER32)&NtHeader->OptionalHeader;
 		data_directory = &OptionalHeader->DataDirectory[0];
 	}
+	PIMAGE_OPTIONAL_HEADER OptionalHeader = (PIMAGE_OPTIONAL_HEADER)&NtHeader->OptionalHeader;
+	PIMAGE_SECTION_HEADER SectionHeader = (PIMAGE_SECTION_HEADER)((PBYTE)OptionalHeader + FileHeader->SizeOfOptionalHeader);
 
 	printf("Dos Header Information:\n");
 	printf("e_magic    : %#06x.\n", DosHeader->e_magic);
@@ -78,6 +80,27 @@ void Dump(PBYTE Data, LARGE_INTEGER Size)
 	printf("IAT            : VirtualAddress: %#010x, \tSize:%10d.\n",data_directory[IMAGE_DIRECTORY_ENTRY_IAT].VirtualAddress,data_directory[IMAGE_DIRECTORY_ENTRY_IAT].Size);
 	printf("DELAY_IMPORT   : VirtualAddress: %#010x, \tSize:%10d.\n",data_directory[IMAGE_DIRECTORY_ENTRY_DELAY_IMPORT].VirtualAddress,data_directory[IMAGE_DIRECTORY_ENTRY_DELAY_IMPORT].Size);
 	printf("COM_DESCRIPTOR : VirtualAddress: %#010x, \tSize:%10d.\n",data_directory[IMAGE_DIRECTORY_ENTRY_COM_DESCRIPTOR].VirtualAddress,data_directory[IMAGE_DIRECTORY_ENTRY_COM_DESCRIPTOR].Size);
+	//---------------------------------------------------------------
+	printf("\nSection Header Information:\n");
+	printf("\n");
+	for (int i = 0; i < FileHeader->NumberOfSections; i++) {
+		CHAR SectionCharacteristics[MAX_PATH] = { 0 };
+
+		printf("index                : %d.\n", i + 1);
+		printf("Name                 : %s.\n", SectionHeader[i].Name);
+		printf("VirtualSize          : %ld.\n", SectionHeader[i].Misc.VirtualSize);
+		printf("VirtualAddress       : %#010x.\n", SectionHeader[i].VirtualAddress);
+		printf("SizeOfRawData        : %ld.\n", SectionHeader[i].SizeOfRawData);
+		printf("PointerToRawData     : %#010x.\n", SectionHeader[i].PointerToRawData);
+		printf("PointerToRelocations : %#010x.\n", SectionHeader[i].PointerToRelocations);
+		printf("PointerToLinenumbers : %#010x.\n", SectionHeader[i].PointerToLinenumbers);
+		printf("NumberOfRelocations  : %d.\n", SectionHeader[i].NumberOfRelocations);
+		printf("NumberOfLinenumbers  : %d.\n", SectionHeader[i].NumberOfLinenumbers);
+		GetSectionCharacteristics(SectionHeader[i].Characteristics, SectionCharacteristics, _countof(SectionCharacteristics));
+		printf("Characteristics      : %#010x  ( %s).\n", SectionHeader[i].Characteristics, SectionCharacteristics);
+
+		printf("\n");
+	}
 
 }
 
