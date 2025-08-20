@@ -522,6 +522,9 @@ static void timestamp(void)
 
 int main(int argc, char **argv)
 {
+    printf("Assebler (x86/x64) v1.0 (C) Copyright 2025 Christopher D. Wade.\n");
+    printf("All Rights Reserved\n");
+
     /* Do these as early as possible */
     error_file = stderr;
     _progname = argv[0];

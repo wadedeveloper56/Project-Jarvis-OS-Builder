@@ -26,6 +26,9 @@ int main(int argc, char* argv[])
 	const char* progname = "Compiler";
 	int exitcode = 0, nerrors = 0;
 
+	printf("Compiler (x86/x64) v1.0 (C) Copyright 2025 Christopher D. Wade.\n");
+	printf("All Rights Reserved\n"); 
+	
 	if (arg_nullcheck(argtable) != 0)
 	{
 		printf("%s: insufficient memory\n", progname);

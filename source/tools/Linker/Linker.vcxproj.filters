@@ -18,6 +18,24 @@
     <ClCompile Include="Linker.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Coff.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CoffLib.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Combine..c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjLoad.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Output.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Util.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
