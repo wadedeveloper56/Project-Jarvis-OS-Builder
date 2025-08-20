@@ -2,43 +2,43 @@
 #include "framework.h"
 #include "ArgumentTable.h"
 
-void arg_end_resetfn(void* parent_) {
+void argEndResetFn(void* parent_) {
     ArgEndPtr parent = (ArgEndPtr)parent_;
     parent->count = 0;
 }
 
-void arg_end_errorfn(void* parent, struct _ArgDstr* ds, int error, const char* argval, const char* progname) {
+void argEndErrorFn(void* parent, ArgDstrPtr ds, int error, const char* argval, const char* progname) {
     (void)parent;
 
     progname = progname ? progname : "";
     argval = argval ? argval : "";
 
-    arg_dstr_catf(ds, "%s: ", progname);
+    argDstrCatF(ds, "%s: ", progname);
     switch (error) {
         case ARG_ELIMIT:
-            arg_dstr_cat(ds, "too many errors to display");
+            argDstrCat(ds, "too many errors to display");
             break;
         case ARG_EMALLOC:
-            arg_dstr_cat(ds, "insufficient memory");
+            argDstrCat(ds, "insufficient memory");
             break;
         case ARG_ENOMATCH:
-            arg_dstr_catf(ds, "unexpected argument \"%s\"", argval);
+            argDstrCatF(ds, "unexpected argument \"%s\"", argval);
             break;
         case ARG_EMISSARG:
-            arg_dstr_catf(ds, "option \"%s\" requires an argument", argval);
+            argDstrCatF(ds, "option \"%s\" requires an argument", argval);
             break;
         case ARG_ELONGOPT:
-            arg_dstr_catf(ds, "invalid option \"%s\"", argval);
+            argDstrCatF(ds, "invalid option \"%s\"", argval);
             break;
         default:
-            arg_dstr_catf(ds, "invalid option \"-%c\"", error);
+            argDstrCatF(ds, "invalid option \"-%c\"", error);
             break;
     }
 
-    arg_dstr_cat(ds, "\n");
+    argDstrCat(ds, "\n");
 }
 
-ArgEndPtr arg_end(int maxcount) {
+ArgEndPtr argEnd(int maxcount) {
     size_t nbytes;
     ArgEndPtr result;
 
@@ -56,10 +56,10 @@ ArgEndPtr arg_end(int maxcount) {
         result->hdr.mincount = 1;
         result->hdr.maxcount = maxcount;
         result->hdr.parent = result;
-        result->hdr.resetfn = arg_end_resetfn;
+        result->hdr.resetfn = argEndResetFn;
         result->hdr.scanfn = NULL;
         result->hdr.checkfn = NULL;
-        result->hdr.errorfn = arg_end_errorfn;
+        result->hdr.errorfn = argEndErrorFn;
         result->error = (int*)(result + 1);
         result->parent = (void**)(result->error + maxcount);
         result->argval = (const char**)(result->parent + maxcount);
@@ -67,7 +67,7 @@ ArgEndPtr arg_end(int maxcount) {
     return result;
 }
 
-void arg_print_errors_ds(struct _ArgDstr* ds, ArgEndPtr end, const char* progname) {
+void argPrintErrorsDs(ArgDstrPtr ds, ArgEndPtr end, const char* progname) {
     int i;
     for (i = 0; i < end->count; i++) {
         ArgHdrPtr errorparent = (ArgHdrPtr)(end->parent[i]);
@@ -76,9 +76,9 @@ void arg_print_errors_ds(struct _ArgDstr* ds, ArgEndPtr end, const char* prognam
     }
 }
 
-void arg_print_errors(FILE* fp, ArgEndPtr end, const char* progname) {
-    struct _ArgDstr* ds = arg_dstr_create();
-    arg_print_errors_ds(ds, end, progname);
-    fputs(arg_dstr_cstr(ds), fp);
-    arg_dstr_destroy(ds);
+void argPrintErrors(FILE* fp, ArgEndPtr end, const char* progname) {
+    ArgDstrPtr ds = argDstrCreate();
+    argPrintErrorsDs(ds, end, progname);
+    fputs(argDstrCStr(ds), fp);
+    argDstrDestroy(ds);
 }

@@ -254,7 +254,7 @@ void arg_parse_tagged(int argc, char** argv, ArgHdrPtrPtr table, ArgEndPtr endta
 	optind = 0;
 	opterr = 0;
 
-	while ((copt = getopt_long(argc, argv, shortoptions, longoptions->options, NULL)) != -1) {
+	while ((copt = getOptLong(argc, argv, shortoptions, longoptions->options, NULL)) != -1) {
 		switch (copt) {
 			case 0: {
 				int tabindex = longoptions->getoptval;
@@ -348,7 +348,7 @@ void arg_print_gnuswitch_ds(ArgDstrPtr ds, ArgHdrPtrPtr table) {
 		if (table[tabindex]->flag & ARG_HASVALUE)
 			continue;
 
-		arg_dstr_catf(ds, format1, table[tabindex]->shortopts[0]);
+		argDstrCatF(ds, format1, table[tabindex]->shortopts[0]);
 		format1 = "%c";
 		format2 = "[%c";
 	}
@@ -363,12 +363,12 @@ void arg_print_gnuswitch_ds(ArgDstrPtr ds, ArgHdrPtrPtr table) {
 		if (table[tabindex]->flag & ARG_HASVALUE)
 			continue;
 
-		arg_dstr_catf(ds, format2, table[tabindex]->shortopts[0]);
+		argDstrCatF(ds, format2, table[tabindex]->shortopts[0]);
 		format2 = "%c";
 		suffix = "]";
 	}
 
-	arg_dstr_catf(ds, "%s", suffix);
+	argDstrCatF(ds, "%s", suffix);
 }
 
 void arg_cat_option(char* dest, size_t ndest, const char* shortopts, const char* longopts, const char* datatype, int optvalue) {
@@ -379,22 +379,22 @@ void arg_cat_option(char* dest, size_t ndest, const char* shortopts, const char*
 		option[1] = shortopts[0];
 		option[2] = 0;
 
-		arg_cat(&dest, option, &ndest);
+		argCat(&dest, option, &ndest);
 		if (datatype) {
-			arg_cat(&dest, " ", &ndest);
+			argCat(&dest, " ", &ndest);
 			if (optvalue) {
-				arg_cat(&dest, "[", &ndest);
-				arg_cat(&dest, datatype, &ndest);
-				arg_cat(&dest, "]", &ndest);
+				argCat(&dest, "[", &ndest);
+				argCat(&dest, datatype, &ndest);
+				argCat(&dest, "]", &ndest);
 			}
 			else
-				arg_cat(&dest, datatype, &ndest);
+				argCat(&dest, datatype, &ndest);
 		}
 	}
 	else if (longopts) {
 		size_t ncspn;
 
-		arg_cat(&dest, "--", &ndest);
+		argCat(&dest, "--", &ndest);
 
 		ncspn = strcspn(longopts, ",");
 #if (defined(__STDC_LIB_EXT1__) && defined(__STDC_WANT_LIB_EXT1__)) || (defined(__STDC_SECURE_LIB__) && defined(__STDC_WANT_SECURE_LIB__))
@@ -404,24 +404,24 @@ void arg_cat_option(char* dest, size_t ndest, const char* shortopts, const char*
 #endif
 
 		if (datatype) {
-			arg_cat(&dest, "=", &ndest);
+			argCat(&dest, "=", &ndest);
 			if (optvalue) {
-				arg_cat(&dest, "[", &ndest);
-				arg_cat(&dest, datatype, &ndest);
-				arg_cat(&dest, "]", &ndest);
+				argCat(&dest, "[", &ndest);
+				argCat(&dest, datatype, &ndest);
+				argCat(&dest, "]", &ndest);
 			}
 			else
-				arg_cat(&dest, datatype, &ndest);
+				argCat(&dest, datatype, &ndest);
 		}
 	}
 	else if (datatype) {
 		if (optvalue) {
-			arg_cat(&dest, "[", &ndest);
-			arg_cat(&dest, datatype, &ndest);
-			arg_cat(&dest, "]", &ndest);
+			argCat(&dest, "[", &ndest);
+			argCat(&dest, datatype, &ndest);
+			argCat(&dest, "]", &ndest);
 		}
 		else
-			arg_cat(&dest, datatype, &ndest);
+			argCat(&dest, datatype, &ndest);
 	}
 }
 
@@ -446,45 +446,45 @@ void arg_print_syntax_ds(ArgDstrPtr ds, void** argtable, const char* suffix) {
 
 		if (strlen(syntax) > 0) {
 			for (i = 0; i < table[tabindex]->mincount; i++) {
-				arg_dstr_cat(ds, " ");
-				arg_dstr_cat(ds, syntax);
+				argDstrCat(ds, " ");
+				argDstrCat(ds, syntax);
 			}
 
 			switch (table[tabindex]->maxcount - table[tabindex]->mincount) {
 				case 0:
 					break;
 				case 1:
-					arg_dstr_cat(ds, " [");
-					arg_dstr_cat(ds, syntax);
-					arg_dstr_cat(ds, "]");
+					argDstrCat(ds, " [");
+					argDstrCat(ds, syntax);
+					argDstrCat(ds, "]");
 					break;
 				case 2:
-					arg_dstr_cat(ds, " [");
-					arg_dstr_cat(ds, syntax);
-					arg_dstr_cat(ds, "]");
-					arg_dstr_cat(ds, " [");
-					arg_dstr_cat(ds, syntax);
-					arg_dstr_cat(ds, "]");
+					argDstrCat(ds, " [");
+					argDstrCat(ds, syntax);
+					argDstrCat(ds, "]");
+					argDstrCat(ds, " [");
+					argDstrCat(ds, syntax);
+					argDstrCat(ds, "]");
 					break;
 				default:
-					arg_dstr_cat(ds, " [");
-					arg_dstr_cat(ds, syntax);
-					arg_dstr_cat(ds, "]...");
+					argDstrCat(ds, " [");
+					argDstrCat(ds, syntax);
+					argDstrCat(ds, "]...");
 					break;
 			}
 		}
 	}
 
 	if (suffix) {
-		arg_dstr_cat(ds, (char*)suffix);
+		argDstrCat(ds, (char*)suffix);
 	}
 }
 
 void arg_print_syntax(FILE* fp, void** argtable, const char* suffix) {
-	ArgDstrPtr ds = arg_dstr_create();
+	ArgDstrPtr ds = argDstrCreate();
 	arg_print_syntax_ds(ds, argtable, suffix);
-	fputs(arg_dstr_cstr(ds), fp);
-	arg_dstr_destroy(ds);
+	fputs(argDstrCStr(ds), fp);
+	argDstrDestroy(ds);
 }
 
 void arg_print_glossary_ds(ArgDstrPtr ds, void** argtable, const char* format) {
@@ -499,16 +499,16 @@ void arg_print_glossary_ds(ArgDstrPtr ds, void** argtable, const char* format) {
 			const char* longopts = table[tabindex]->longopts;
 			const char* datatype = table[tabindex]->datatype;
 			const char* glossary = table[tabindex]->glossary;
-			arg_cat_optionv(syntax, sizeof(syntax) - 1, shortopts, longopts, datatype, table[tabindex]->flag & ARG_HASOPTVALUE, ", ");
-			arg_dstr_catf(ds, format, syntax, glossary);
+			argCatOptionV(syntax, sizeof(syntax) - 1, shortopts, longopts, datatype, table[tabindex]->flag & ARG_HASOPTVALUE, ", ");
+			argDstrCatF(ds, format, syntax, glossary);
 		}
 	}
 }
 
 void arg_print_glossary(FILE* fp, void** argtable, const char* format) {
-	ArgDstrPtr ds = arg_dstr_create();
+	ArgDstrPtr ds = argDstrCreate();
 	arg_print_glossary_ds(ds, argtable, format);
-	fputs(arg_dstr_cstr(ds), fp);
-	arg_dstr_destroy(ds);
+	fputs(argDstrCStr(ds), fp);
+	argDstrDestroy(ds);
 }
 

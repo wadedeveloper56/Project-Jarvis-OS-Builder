@@ -21,7 +21,7 @@ int main(int argc, char* argv[])
 	ArgLitPtr help = argLit0(NULL, "help", "print this help and exit");
 	ArgLitPtr version = argLit0(NULL, "version", "print version information and exit");
 	ArgFilePtr infiles = argFileN(NULL, NULL, NULL, 1, argc + 2, "input file(s)");
-	ArgEndPtr end = arg_end(20);
+	ArgEndPtr end = argEnd(20);
 	void* argtable[] = {bitsize, outfile, verbose, help, version, infiles, end};
 	const char* progname = "Compiler";
 	int exitcode = 0, nerrors = 0;
@@ -67,7 +67,7 @@ int main(int argc, char* argv[])
 
 	if (nerrors > 0)
 	{
-		arg_print_errors(stdout, end, progname);
+		argPrintErrors(stdout, end, progname);
 		printf("Try '%s --help' for more information.\n", progname);
 		exitcode = 1;
 		goto exit;

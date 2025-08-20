@@ -5,6 +5,7 @@
 #pragma warning(disable : 4018)
 #pragma warning(disable : 4333)
 #define _CRT_SECURE_NO_WARNINGS
+#include <Windows.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <memory.h>

@@ -8,12 +8,12 @@ const char* mon[12] = { "January", "February", "March",     "April",   "May",   
 const char* abmon[12] = { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
 const char* am_pm[2] = { "AM", "PM" };
 
-void arg_date_resetfn(void* parent_) {
+void argDateResetFn(void* parent_) {
 	ArgDatePtr parent = (ArgDatePtr)parent_;
 	parent->count = 0;
 }
 
-int arg_date_scanfn(void* parent_, const char* argval) {
+int argDateScanFn(void* parent_, const char* argval) {
 	ArgDatePtr parent = (ArgDatePtr)parent_;
 	int errorcode = 0;
 
@@ -27,7 +27,7 @@ int arg_date_scanfn(void* parent_, const char* argval) {
 		const char* pend;
 		struct tm tm = parent->tmval[parent->count];
 
-		pend = arg_strptime(argval, parent->format, &tm);
+		pend = argStrPTime(argval, parent->format, &tm);
 		if (pend && pend[0] == '\0')
 			parent->tmval[parent->count++] = tm;
 		else
@@ -36,55 +36,55 @@ int arg_date_scanfn(void* parent_, const char* argval) {
 	return errorcode;
 }
 
-int arg_date_checkfn(void* parent_) {
+int argDateCheckFn(void* parent_) {
 	ArgDatePtr parent = (ArgDatePtr)parent_;
 	int errorcode = (parent->count < parent->hdr.mincount) ? ARG_ERR_MINCOUNT : 0;
 	return errorcode;
 }
 
-void arg_date_errorfn(void* parent_, struct _ArgDstr* ds, int errorcode, const char* argval, const char* progname) {
-	ArgDatePtr parent = (ArgDatePtr)parent_;
-	const char* shortopts = parent->hdr.shortopts;
-	const char* longopts = parent->hdr.longopts;
-	const char* datatype = parent->hdr.datatype;
+void argDateErrorFn(void* parent, ArgDstrPtr ds, int errorcode, const char* argval, const char* progname) {
+	ArgDatePtr p = (ArgDatePtr)parent;
+	const char* shortopts = p->hdr.shortopts;
+	const char* longopts = p->hdr.longopts;
+	const char* datatype = p->hdr.datatype;
 
 	argval = argval ? argval : "";
 
-	arg_dstr_catf(ds, "%s: ", progname);
+	argDstrCatF(ds, "%s: ", progname);
 	switch (errorcode) {
 		case ARG_ERR_MINCOUNT:
-			arg_dstr_cat(ds, "missing option ");
-			arg_print_option_ds(ds, shortopts, longopts, datatype, "\n");
+			argDstrCat(ds, "missing option ");
+			argPrintOptionDs(ds, shortopts, longopts, datatype, "\n");
 			break;
 
 		case ARG_ERR_MAXCOUNT:
-			arg_dstr_cat(ds, "excess option ");
-			arg_print_option_ds(ds, shortopts, longopts, argval, "\n");
+			argDstrCat(ds, "excess option ");
+			argPrintOptionDs(ds, shortopts, longopts, argval, "\n");
 			break;
 
 		case ARG_ERR_BADDATE: {
 			struct tm tm;
 			char buff[200];
 
-			arg_dstr_catf(ds, "illegal timestamp format \"%s\"\n", argval);
+			argDstrCatF(ds, "illegal timestamp format \"%s\"\n", argval);
 			memset(&tm, 0, sizeof(tm));
-			arg_strptime("1999-12-31 23:59:59", "%F %H:%M:%S", &tm);
-			strftime(buff, sizeof(buff), parent->format, &tm);
-			arg_dstr_catf(ds, "correct format is \"%s\"\n", buff);
+			argStrPTime("1999-12-31 23:59:59", "%F %H:%M:%S", &tm);
+			strftime(buff, sizeof(buff), p->format, &tm);
+			argDstrCatF(ds, "correct format is \"%s\"\n", buff);
 			break;
 		}
 	}
 }
 
-ArgDatePtr arg_date0(const char* shortopts, const char* longopts, const char* format, const char* datatype, const char* glossary) {
-	return arg_daten(shortopts, longopts, format, datatype, 0, 1, glossary);
+ArgDatePtr argDate0(const char* shortopts, const char* longopts, const char* format, const char* datatype, const char* glossary) {
+	return argDateN(shortopts, longopts, format, datatype, 0, 1, glossary);
 }
 
-ArgDatePtr arg_date1(const char* shortopts, const char* longopts, const char* format, const char* datatype, const char* glossary) {
-	return arg_daten(shortopts, longopts, format, datatype, 1, 1, glossary);
+ArgDatePtr argDate1(const char* shortopts, const char* longopts, const char* format, const char* datatype, const char* glossary) {
+	return argDateN(shortopts, longopts, format, datatype, 1, 1, glossary);
 }
 
-ArgDatePtr arg_daten(const char* shortopts, const char* longopts, const char* format, const char* datatype, int mincount, int maxcount, const char* glossary) {
+ArgDatePtr argDateN(const char* shortopts, const char* longopts, const char* format, const char* datatype, int mincount, int maxcount, const char* glossary) {
 	size_t nbytes;
 	ArgDatePtr result;
 
@@ -105,10 +105,10 @@ ArgDatePtr arg_daten(const char* shortopts, const char* longopts, const char* fo
 		result->hdr.mincount = mincount;
 		result->hdr.maxcount = maxcount;
 		result->hdr.parent = result;
-		result->hdr.resetfn = arg_date_resetfn;
-		result->hdr.scanfn = arg_date_scanfn;
-		result->hdr.checkfn = arg_date_checkfn;
-		result->hdr.errorfn = arg_date_errorfn;
+		result->hdr.resetfn = argDateResetFn;
+		result->hdr.scanfn = argDateScanFn;
+		result->hdr.checkfn = argDateCheckFn;
+		result->hdr.errorfn = argDateErrorFn;
 
 		result->tmval = (struct tm*)(result + 1);
 
@@ -118,7 +118,7 @@ ArgDatePtr arg_daten(const char* shortopts, const char* longopts, const char* fo
 	return result;
 }
 
-int arg_strcasecmp(const char* s1, const char* s2) {
+int argStrCaseCmp(const char* s1, const char* s2) {
 	const unsigned char* us1 = (const unsigned char*)s1;
 	const unsigned char* us2 = (const unsigned char*)s2;
 	while (tolower(*us1) == tolower(*us2++))
@@ -128,7 +128,7 @@ int arg_strcasecmp(const char* s1, const char* s2) {
 	return tolower(*us1) - tolower(*--us2);
 }
 
-int arg_strncasecmp(const char* s1, const char* s2, size_t n) {
+int argStrNCaseCmp(const char* s1, const char* s2, size_t n) {
 	if (n != 0) {
 		const unsigned char* us1 = (const unsigned char*)s1;
 		const unsigned char* us2 = (const unsigned char*)s2;
@@ -144,7 +144,7 @@ int arg_strncasecmp(const char* s1, const char* s2, size_t n) {
 	return 0;
 }
 
-char* arg_strptime(const char* buf, const char* fmt, struct tm* tm) {
+char* argStrPTime(const char* buf, const char* fmt, struct tm* tm) {
 	char c;
 	const char* bp;
 	size_t len = 0;
@@ -186,49 +186,49 @@ char* arg_strptime(const char* buf, const char* fmt, struct tm* tm) {
 
 			case 'c':
 				LEGAL_ALT(ALT_E);
-				bp = arg_strptime(bp, "%x %X", tm);
+				bp = argStrPTime(bp, "%x %X", tm);
 				if (!bp)
 					return (0);
 				break;
 
 			case 'D':
 				LEGAL_ALT(0);
-				bp = arg_strptime(bp, "%m/%d/%y", tm);
+				bp = argStrPTime(bp, "%m/%d/%y", tm);
 				if (!bp)
 					return (0);
 				break;
 
 			case 'R':
 				LEGAL_ALT(0);
-				bp = arg_strptime(bp, "%H:%M", tm);
+				bp = argStrPTime(bp, "%H:%M", tm);
 				if (!bp)
 					return (0);
 				break;
 
 			case 'r':
 				LEGAL_ALT(0);
-				bp = arg_strptime(bp, "%I:%M:%S %p", tm);
+				bp = argStrPTime(bp, "%I:%M:%S %p", tm);
 				if (!bp)
 					return (0);
 				break;
 
 			case 'T':
 				LEGAL_ALT(0);
-				bp = arg_strptime(bp, "%H:%M:%S", tm);
+				bp = argStrPTime(bp, "%H:%M:%S", tm);
 				if (!bp)
 					return (0);
 				break;
 
 			case 'X':
 				LEGAL_ALT(ALT_E);
-				bp = arg_strptime(bp, "%H:%M:%S", tm);
+				bp = argStrPTime(bp, "%H:%M:%S", tm);
 				if (!bp)
 					return (0);
 				break;
 
 			case 'x':
 				LEGAL_ALT(ALT_E);
-				bp = arg_strptime(bp, "%m/%d/%y", tm);
+				bp = argStrPTime(bp, "%m/%d/%y", tm);
 				if (!bp)
 					return (0);
 				break;
@@ -238,11 +238,11 @@ char* arg_strptime(const char* buf, const char* fmt, struct tm* tm) {
 				LEGAL_ALT(0);
 				for (i = 0; i < 7; i++) {
 					len = strlen(day[i]);
-					if (arg_strncasecmp(day[i], bp, len) == 0)
+					if (argStrNCaseCmp(day[i], bp, len) == 0)
 						break;
 
 					len = strlen(abday[i]);
-					if (arg_strncasecmp(abday[i], bp, len) == 0)
+					if (argStrNCaseCmp(abday[i], bp, len) == 0)
 						break;
 				}
 
@@ -259,11 +259,11 @@ char* arg_strptime(const char* buf, const char* fmt, struct tm* tm) {
 				LEGAL_ALT(0);
 				for (i = 0; i < 12; i++) {
 					len = strlen(mon[i]);
-					if (arg_strncasecmp(mon[i], bp, len) == 0)
+					if (argStrNCaseCmp(mon[i], bp, len) == 0)
 						break;
 
 					len = strlen(abmon[i]);
-					if (arg_strncasecmp(abmon[i], bp, len) == 0)
+					if (argStrNCaseCmp(abmon[i], bp, len) == 0)
 						break;
 				}
 
@@ -276,7 +276,7 @@ char* arg_strptime(const char* buf, const char* fmt, struct tm* tm) {
 
 			case 'C':
 				LEGAL_ALT(ALT_E);
-				if (!(conv_num(&bp, &i, 0, 99)))
+				if (!(convNum(&bp, &i, 0, 99)))
 					return (0);
 
 				if (split_year) {
@@ -291,7 +291,7 @@ char* arg_strptime(const char* buf, const char* fmt, struct tm* tm) {
 			case 'd':
 			case 'e':
 				LEGAL_ALT(ALT_O);
-				if (!(conv_num(&bp, &tm->tm_mday, 1, 31)))
+				if (!(convNum(&bp, &tm->tm_mday, 1, 31)))
 					return (0);
 				break;
 
@@ -299,7 +299,7 @@ char* arg_strptime(const char* buf, const char* fmt, struct tm* tm) {
 				LEGAL_ALT(0);
 			case 'H':
 				LEGAL_ALT(ALT_O);
-				if (!(conv_num(&bp, &tm->tm_hour, 0, 23)))
+				if (!(convNum(&bp, &tm->tm_hour, 0, 23)))
 					return (0);
 				break;
 
@@ -307,7 +307,7 @@ char* arg_strptime(const char* buf, const char* fmt, struct tm* tm) {
 				LEGAL_ALT(0);
 			case 'I':
 				LEGAL_ALT(ALT_O);
-				if (!(conv_num(&bp, &tm->tm_hour, 1, 12)))
+				if (!(convNum(&bp, &tm->tm_hour, 1, 12)))
 					return (0);
 				if (tm->tm_hour == 12)
 					tm->tm_hour = 0;
@@ -315,34 +315,34 @@ char* arg_strptime(const char* buf, const char* fmt, struct tm* tm) {
 
 			case 'j':
 				LEGAL_ALT(0);
-				if (!(conv_num(&bp, &i, 1, 366)))
+				if (!(convNum(&bp, &i, 1, 366)))
 					return (0);
 				tm->tm_yday = i - 1;
 				break;
 
 			case 'M':
 				LEGAL_ALT(ALT_O);
-				if (!(conv_num(&bp, &tm->tm_min, 0, 59)))
+				if (!(convNum(&bp, &tm->tm_min, 0, 59)))
 					return (0);
 				break;
 
 			case 'm':
 				LEGAL_ALT(ALT_O);
-				if (!(conv_num(&bp, &i, 1, 12)))
+				if (!(convNum(&bp, &i, 1, 12)))
 					return (0);
 				tm->tm_mon = i - 1;
 				break;
 
 			case 'p':
 				LEGAL_ALT(0);
-				if (arg_strcasecmp(am_pm[0], bp) == 0) {
+				if (argStrCaseCmp(am_pm[0], bp) == 0) {
 					if (tm->tm_hour > 11)
 						return (0);
 
 					bp += strlen(am_pm[0]);
 					break;
 				}
-				else if (arg_strcasecmp(am_pm[1], bp) == 0) {
+				else if (argStrCaseCmp(am_pm[1], bp) == 0) {
 					if (tm->tm_hour > 11)
 						return (0);
 
@@ -355,26 +355,26 @@ char* arg_strptime(const char* buf, const char* fmt, struct tm* tm) {
 
 			case 'S':
 				LEGAL_ALT(ALT_O);
-				if (!(conv_num(&bp, &tm->tm_sec, 0, 61)))
+				if (!(convNum(&bp, &tm->tm_sec, 0, 61)))
 					return (0);
 				break;
 
 			case 'U':
 			case 'W':
 				LEGAL_ALT(ALT_O);
-				if (!(conv_num(&bp, &i, 0, 53)))
+				if (!(convNum(&bp, &i, 0, 53)))
 					return (0);
 				break;
 
 			case 'w':
 				LEGAL_ALT(ALT_O);
-				if (!(conv_num(&bp, &tm->tm_wday, 0, 6)))
+				if (!(convNum(&bp, &tm->tm_wday, 0, 6)))
 					return (0);
 				break;
 
 			case 'Y':
 				LEGAL_ALT(ALT_E);
-				if (!(conv_num(&bp, &i, 0, 9999)))
+				if (!(convNum(&bp, &i, 0, 9999)))
 					return (0);
 
 				tm->tm_year = i - TM_YEAR_BASE;
@@ -382,7 +382,7 @@ char* arg_strptime(const char* buf, const char* fmt, struct tm* tm) {
 
 			case 'y':
 				LEGAL_ALT(ALT_E | ALT_O);
-				if (!(conv_num(&bp, &i, 0, 99)))
+				if (!(convNum(&bp, &i, 0, 99)))
 					return (0);
 
 				if (split_year) {
@@ -411,7 +411,7 @@ char* arg_strptime(const char* buf, const char* fmt, struct tm* tm) {
 	return ((char*)bp);
 }
 
-int conv_num(const char** buf, int* dest, int llim, int ulim) {
+int convNum(const char** buf, int* dest, int llim, int ulim) {
 	int result = 0;
 
 	int rulim = ulim;

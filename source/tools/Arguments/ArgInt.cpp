@@ -129,7 +129,7 @@ int argIntCheckFn(void* parent_) {
 	return errorcode;
 }
 
-void argIntErrorFn(void* parent_, struct _ArgDstr* ds, int errorcode, const char* argval, const char* progname) {
+void argIntErrorFn(void* parent_, ArgDstrPtr ds, int errorcode, const char* argval, const char* progname) {
 	ArgIntPtr parent = (ArgIntPtr)parent_;
 	const char* shortopts = parent->hdr.shortopts;
 	const char* longopts = parent->hdr.longopts;
@@ -137,27 +137,27 @@ void argIntErrorFn(void* parent_, struct _ArgDstr* ds, int errorcode, const char
 
 	argval = argval ? argval : "";
 
-	arg_dstr_catf(ds, "%s: ", progname);
+	argDstrCatF(ds, "%s: ", progname);
 	switch (errorcode) {
 	case ARG_ERR_MINCOUNT:
-		arg_dstr_cat(ds, "missing option ");
-		arg_print_option_ds(ds, shortopts, longopts, datatype, "\n");
+		argDstrCat(ds, "missing option ");
+		argPrintOptionDs(ds, shortopts, longopts, datatype, "\n");
 		break;
 
 	case ARG_ERR_MAXCOUNT:
-		arg_dstr_cat(ds, "excess option ");
-		arg_print_option_ds(ds, shortopts, longopts, argval, "\n");
+		argDstrCat(ds, "excess option ");
+		argPrintOptionDs(ds, shortopts, longopts, argval, "\n");
 		break;
 
 	case ARG_ERR_BADINT:
-		arg_dstr_catf(ds, "invalid argument \"%s\" to option ", argval);
-		arg_print_option_ds(ds, shortopts, longopts, datatype, "\n");
+		argDstrCatF(ds, "invalid argument \"%s\" to option ", argval);
+		argPrintOptionDs(ds, shortopts, longopts, datatype, "\n");
 		break;
 
 	case ARG_ERR_OVERFLOW:
-		arg_dstr_cat(ds, "integer overflow at option ");
-		arg_print_option_ds(ds, shortopts, longopts, datatype, " ");
-		arg_dstr_catf(ds, "(%s is too large)\n", argval);
+		argDstrCat(ds, "integer overflow at option ");
+		argPrintOptionDs(ds, shortopts, longopts, datatype, " ");
+		argDstrCatF(ds, "(%s is too large)\n", argval);
 		break;
 	}
 }

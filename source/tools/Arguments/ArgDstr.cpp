@@ -2,12 +2,12 @@
 #include "framework.h"
 #include "ArgumentTable.h"
 
-char* arg_dstr_cstr(struct _ArgDstr* ds) {
+char* argDstrCStr(ArgDstrPtr ds) {
     return ds->data;
 }
 
-void arg_dstr_reset(struct _ArgDstr* ds) {
-    arg_dstr_free(ds);
+void argDstrReset(ArgDstrPtr ds) {
+    argDstrFree(ds);
     if ((ds->append_data != NULL) && (ds->append_data_size > 0)) {
         free(ds->append_data);
         ds->append_data = NULL;
@@ -18,8 +18,8 @@ void arg_dstr_reset(struct _ArgDstr* ds) {
     ds->sbuf[0] = 0;
 }
 
-struct _ArgDstr* arg_dstr_create(void) {
-    struct _ArgDstr* h = (struct _ArgDstr*)malloc(sizeof(struct _ArgDstr));
+ArgDstrPtr argDstrCreate(void) {
+    ArgDstrPtr h = (struct _ArgDstr*)malloc(sizeof(struct _ArgDstr));
     memset(h, 0, sizeof(struct _ArgDstr));
     h->sbuf[0] = 0;
     h->data = h->sbuf;
@@ -27,16 +27,16 @@ struct _ArgDstr* arg_dstr_create(void) {
     return h;
 }
 
-void arg_dstr_destroy(struct _ArgDstr* ds) {
+void argDstrDestroy(ArgDstrPtr ds) {
     if (ds == NULL)
         return;
 
-    arg_dstr_reset(ds);
+    argDstrReset(ds);
     free(ds);
     return;
 }
 
-void arg_dstr_free(struct _ArgDstr* ds) {
+void argDstrFree(ArgDstrPtr ds) {
     if (ds->free_proc != NULL) {
         if (ds->free_proc == ARG_DSTR_DYNAMIC) {
             free(ds->data);
@@ -48,7 +48,7 @@ void arg_dstr_free(struct _ArgDstr* ds) {
     }
 }
 
-void setup_append_buf(struct _ArgDstr* ds, int new_space) {
+void setupAppendBuf(ArgDstrPtr ds, int new_space) {
     int total_space;
 
     if (ds->data != ds->append_data) {
@@ -90,16 +90,16 @@ void setup_append_buf(struct _ArgDstr* ds, int new_space) {
     }
 
     assert(ds->append_data != NULL);
-    arg_dstr_free(ds);
+    argDstrFree(ds);
     ds->data = ds->append_data;
 }
 
-void arg_dstr_cat(struct _ArgDstr* ds, const char* str) {
-    setup_append_buf(ds, (int)strlen(str) + 1);
+void argDstrCat(ArgDstrPtr ds, const char* str) {
+    setupAppendBuf(ds, (int)strlen(str) + 1);
     memcpy(ds->data + strlen(ds->data), str, strlen(str));
 }
 
-void arg_dstr_catf(struct _ArgDstr* ds, const char* fmt, ...) {
+void argDstrCatF(ArgDstrPtr ds, const char* fmt, ...) {
     va_list arglist;
     char* buff;
     int n, r;
@@ -133,6 +133,6 @@ void arg_dstr_catf(struct _ArgDstr* ds, const char* fmt, ...) {
         memset(buff, 0, (size_t)(n + 2));
     }
 
-    arg_dstr_cat(ds, buff);
+    argDstrCat(ds, buff);
     free(buff);
 }

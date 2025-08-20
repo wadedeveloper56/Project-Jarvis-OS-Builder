@@ -23,7 +23,7 @@ int argLitCheckFn(void* parent_) {
 	return errorcode;
 }
 
-void argLitErrorFn(void* parent_, struct _ArgDstr* ds, int errorcode, const char* argval, const char* progname) {
+void argLitErrorFn(void* parent_, ArgDstrPtr ds, int errorcode, const char* argval, const char* progname) {
 	ArgLitPtr parent = (ArgLitPtr)parent_;
 	const char* shortopts = parent->hdr.shortopts;
 	const char* longopts = parent->hdr.longopts;
@@ -31,14 +31,14 @@ void argLitErrorFn(void* parent_, struct _ArgDstr* ds, int errorcode, const char
 
 	switch (errorcode) {
 	case ARG_ERR_MINCOUNT:
-		arg_dstr_catf(ds, "%s: missing option ", progname);
-		arg_print_option_ds(ds, shortopts, longopts, datatype, "\n");
-		arg_dstr_cat(ds, "\n");
+		argDstrCatF(ds, "%s: missing option ", progname);
+		argPrintOptionDs(ds, shortopts, longopts, datatype, "\n");
+		argDstrCat(ds, "\n");
 		break;
 
 	case ARG_ERR_MAXCOUNT:
-		arg_dstr_catf(ds, "%s: extraneous option ", progname);
-		arg_print_option_ds(ds, shortopts, longopts, datatype, "\n");
+		argDstrCatF(ds, "%s: extraneous option ", progname);
+		argPrintOptionDs(ds, shortopts, longopts, datatype, "\n");
 		break;
 	}
 }

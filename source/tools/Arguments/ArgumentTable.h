@@ -225,87 +225,96 @@ extern "C" {
 		int _flags;
 	}TRex, * TRexPtr, ** TRexPtrPtr;
 
+	// ArgGetOpt.cpp
 	void warnx(const char* fmt, ...);
-	void permute_args(int panonopt_start, int panonopt_end, int opt_end, char* const* nargv);
-	int parse_long_options(char* const* nargv, const char* options, const OptionPtr long_options, int* idx, int short_too, int flags);
-	int getopt_internal(int nargc, char* const* nargv, const char* options, const OptionPtr long_options, int* idx, int flags);
-	int getopt(int nargc, char* const* nargv, const char* options);
-	int getopt_long(int nargc, char* const* nargv, const char* options, const OptionPtr long_options, int* idx);
-	int getopt_long_only(int nargc, char* const* nargv, const char* options, const OptionPtr long_options, int* idx);
-	void arg_cat(char** pdest, const char* src, size_t* pndest);
-	void arg_cat_optionv(char* dest, size_t ndest, const char* shortopts, const char* longopts, const char* datatype, int optvalue, const char* separator);
-	void arg_print_option_ds(ArgDstrPtr ds, const char* shortopts, const char* longopts, const char* datatype, const char* suffix);
+	void permuteArgs(int panonopt_start, int panonopt_end, int opt_end, char* const* nargv);
+	int parseLongOptions(char* const* nargv, const char* options, const OptionPtr long_options, int* idx, int short_too, int flags);
+	int getOptInternal(int nargc, char* const* nargv, const char* options, const OptionPtr long_options, int* idx, int flags);
+	int getOpt(int nargc, char* const* nargv, const char* options);
+	int getOptLong(int nargc, char* const* nargv, const char* options, const OptionPtr long_options, int* idx);
+	int getOptLongOnly(int nargc, char* const* nargv, const char* options, const OptionPtr long_options, int* idx);
+	void argCat(char** pdest, const char* src, size_t* pndest);
+	void argCatOptionV(char* dest, size_t ndest, const char* shortopts, const char* longopts, const char* datatype, int optvalue, const char* separator);
+	void argPrintOptionDs(ArgDstrPtr ds, const char* shortopts, const char* longopts, const char* datatype, const char* suffix);
+	
+	//ArdDate.cpp
+	void argDateResetFn(void* parent_);
+	int argDateScanFn(void* parent_, const char* argval);
+	int argDateCheckFn(void* parent_);
+	void argDateErrorFn(void* parent_, ArgDstrPtr ds, int errorcode, const char* argval, const char* progname);
+	ArgDatePtr argDate0(const char* shortopts, const char* longopts, const char* format, const char* datatype, const char* glossary);
+	ArgDatePtr argDate1(const char* shortopts, const char* longopts, const char* format, const char* datatype, const char* glossary);
+	ArgDatePtr argDateN(const char* shortopts, const char* longopts, const char* format, const char* datatype, int mincount, int maxcount, const char* glossary);;
+	int argStrCaseCmp(const char* s1, const char* s2);
+	int argStrNCaseCmp(const char* s1, const char* s2, size_t n);
+	char* argStrPTime(const char* buf, const char* fmt, struct tm* tm);
+	int convNum(const char** buf, int* dest, int llim, int ulim);
 
-	void arg_date_resetfn(void* parent_);
-	int arg_date_scanfn(void* parent_, const char* argval);
-	int arg_date_checkfn(void* parent_);
-	void arg_date_errorfn(void* parent_, struct _ArgDstr* ds, int errorcode, const char* argval, const char* progname);
-	ArgDatePtr arg_date0(const char* shortopts, const char* longopts, const char* format, const char* datatype, const char* glossary);
-	ArgDatePtr arg_date1(const char* shortopts, const char* longopts, const char* format, const char* datatype, const char* glossary);
-	ArgDatePtr arg_daten(const char* shortopts, const char* longopts, const char* format, const char* datatype, int mincount, int maxcount, const char* glossary);;;
-	int arg_strcasecmp(const char* s1, const char* s2);
-	int arg_strncasecmp(const char* s1, const char* s2, size_t n);
-	char* arg_strptime(const char* buf, const char* fmt, struct tm* tm);
-	int conv_num(const char** buf, int* dest, int llim, int ulim);
+	//ArgDbl.cpp
+	void argDblResetFn(void* parent_);
+	int argDblScanFn(void* parent_, const char* argval);
+	int argDblCheckFn(void* parent_);
+	void argDblErrorFn(void* parent_, ArgDstrPtr ds, int errorcode, const char* argval, const char* progname);
+	ArgDblPtr argDbl0(const char* shortopts, const char* longopts, const char* datatype, const char* glossary);
+	ArgDblPtr argDbl1(const char* shortopts, const char* longopts, const char* datatype, const char* glossary);
+	ArgDblPtr argDblN(const char* shortopts, const char* longopts, const char* datatype, int mincount, int maxcount, const char* glossary);
 
-	void arg_dbl_resetfn(void* parent_);
-	int arg_dbl_scanfn(void* parent_, const char* argval);
-	int arg_dbl_checkfn(void* parent_);
-	void arg_dbl_errorfn(void* parent_, struct _ArgDstr* ds, int errorcode, const char* argval, const char* progname);
-	ArgDblPtr arg_dbl0(const char* shortopts, const char* longopts, const char* datatype, const char* glossary);
-	ArgDblPtr arg_dbl1(const char* shortopts, const char* longopts, const char* datatype, const char* glossary);
-	ArgDblPtr arg_dbln(const char* shortopts, const char* longopts, const char* datatype, int mincount, int maxcount, const char* glossary);
+	//ArgDstr.cpp
+	char* argDstrCStr(ArgDstrPtr ds);
+	void argDstrReset(ArgDstrPtr ds);
+	ArgDstrPtr argDstrCreate(void);
+	void argDstrDestroy(ArgDstrPtr ds);
+	void argDstrFree(ArgDstrPtr ds);
+	void setupAppendBuf(ArgDstrPtr ds, int new_space);
+	void argDstrCat(ArgDstrPtr ds, const char* str);
+	void argDstrCatF(ArgDstrPtr ds, const char* fmt, ...);
 
-	char* arg_dstr_cstr(struct _ArgDstr* ds);
-	void arg_dstr_reset(struct _ArgDstr* ds);
-	struct _ArgDstr* arg_dstr_create(void);
-	void arg_dstr_destroy(struct _ArgDstr* ds);
-	void arg_dstr_free(struct _ArgDstr* ds);
-	void setup_append_buf(struct _ArgDstr* ds, int new_space);
-	void arg_dstr_cat(struct _ArgDstr* ds, const char* str);
-	void arg_dstr_catf(struct _ArgDstr* ds, const char* fmt, ...);
+	//ArgEnd.cpp
+	void argEndResetFn(void* parent_);
+	void argEndErrorFn(void* parent, ArgDstrPtr ds, int error, const char* argval, const char* progname);
+	ArgEndPtr argEnd(int maxcount);
+	void argPrintErrorsDs(ArgDstrPtr ds, ArgEndPtr end, const char* progname);
+	void argPrintErrors(FILE* fp, ArgEndPtr end, const char* progname);
 
-	void arg_end_resetfn(void* parent_);
-	void arg_end_errorfn(void* parent, struct _ArgDstr* ds, int error, const char* argval, const char* progname);
-	ArgEndPtr arg_end(int maxcount);
-	void arg_print_errors_ds(struct _ArgDstr* ds, ArgEndPtr end, const char* progname);
-	void arg_print_errors(FILE* fp, ArgEndPtr end, const char* progname);
-
+	//ArgFile.cpp
 	void argFileResetFn(void* parent_);
 	const char* argBasename(const char* filename);
 	const char* argExtension(const char* basename);
 	int argFileScanFn(void* parent_, const char* argval);
 	int argFileCheckFn(void* parent_);
-	void argFileErrorFn(void* parent_, struct _ArgDstr* ds, int errorcode, const char* argval, const char* progname);
+	void argFileErrorFn(void* parent_, ArgDstrPtr ds, int errorcode, const char* argval, const char* progname);
 	ArgFilePtr argFile0(const char* shortopts, const char* longopts, const char* datatype, const char* glossary);
 	ArgFilePtr argFile1(const char* shortopts, const char* longopts, const char* datatype, const char* glossary);
 	ArgFilePtr argFileN(const char* shortopts, const char* longopts, const char* datatype, int mincount, int maxcount, const char* glossary);
 
+	//ArgInt.cpp
 	void argIntResetFn(void* parent_);
 	long int strtol0X(const char* str, const char** endptr, char X, int base);
 	int detectsuffix(const char* str, const char* suffix);
 	int argIntScanFn(void* parent_, const char* argval);
 	int argIntCheckFn(void* parent_);
-	void argIntErrorFn(void* parent_, struct _ArgDstr* ds, int errorcode, const char* argval, const char* progname);
+	void argIntErrorFn(void* parent_, ArgDstrPtr ds, int errorcode, const char* argval, const char* progname);
 	ArgIntPtr argIntN(const char* shortopts, const char* longopts, const char* datatype, int mincount, int maxcount, const char* glossary);
 	ArgIntPtr argInt0(const char* shortopts, const char* longopts, const char* datatype, const char* glossary);
 	ArgIntPtr argInt1(const char* shortopts, const char* longopts, const char* datatype, const char* glossary);
 
+	//ArgLit.cpp
 	void argLitResetFn(void* parent_);
 	int argLitScanFn(void* parent_, const char* argval);
 	int argLitCheckFn(void* parent_);
-	void argLitErrorFn(void* parent_, struct _ArgDstr* ds, int errorcode, const char* argval, const char* progname);
+	void argLitErrorFn(void* parent_, ArgDstrPtr ds, int errorcode, const char* argval, const char* progname);
 	ArgLitPtr argLitN(const char* shortopts, const char* longopts, int mincount, int maxcount, const char* glossary);
 	ArgLitPtr argLit0(const char* shortopts, const char* longopts, const char* glossary);
 	ArgLitPtr argLit1(const char* shortopts, const char* longopts, const char* glossary);
 
-	void arg_rex_resetfn(void* parent_);
-	int arg_rex_scanfn(void* parent_, const char* argval);
-	int arg_rex_checkfn(void* parent_);
-	void arg_rex_errorfn(void* parent_, struct _ArgDstr* ds, int errorcode, const char* argval, const char* progname);
-	ArgRexPtr arg_rex0(const char* shortopts, const char* longopts, const char* pattern, const char* datatype, int flags, const char* glossary);
-	ArgRexPtr arg_rex1(const char* shortopts, const char* longopts, const char* pattern, const char* datatype, int flags, const char* glossary);
-	ArgRexPtr arg_rexn(const char* shortopts, const char* longopts, const char* pattern, const char* datatype, int mincount, int maxcount, int flags, const char* glossary);
+	//ArgRex.cpp
+	void argRexResetFn(void* parent_);
+	int argRexScanFn(void* parent_, const char* argval);
+	int argRexCheckFn(void* parent_);
+	void argRexErrorFn(void* parent_, ArgDstrPtr ds, int errorcode, const char* argval, const char* progname);
+	ArgRexPtr argRex0(const char* shortopts, const char* longopts, const char* pattern, const char* datatype, int flags, const char* glossary);
+	ArgRexPtr argRex1(const char* shortopts, const char* longopts, const char* pattern, const char* datatype, int flags, const char* glossary);
+	ArgRexPtr argRexN(const char* shortopts, const char* longopts, const char* pattern, const char* datatype, int mincount, int maxcount, int flags, const char* glossary);
 	int trex_newnode(TRex* exp, TRexNodeType type);
 	void trex_error(TRex* exp, const TRexChar* error);
 	void trex_expect(TRex* exp, int n);
@@ -330,7 +339,7 @@ extern "C" {
 	void arg_str_resetfn(void* parent_);
 	int arg_str_scanfn(void* parent_, const char* argval);
 	int arg_str_checkfn(void* parent_);
-	void arg_str_errorfn(void* parent_, struct _ArgDstr* ds, int errorcode, const char* argval, const char* progname);
+	void arg_str_errorfn(void* parent_, ArgDstrPtr ds, int errorcode, const char* argval, const char* progname);
 	ArgStrPtr arg_str0(const char* shortopts, const char* longopts, const char* datatype, const char* glossary);
 	ArgStrPtr arg_str1(const char* shortopts, const char* longopts, const char* datatype, const char* glossary);
 	ArgStrPtr arg_strn(const char* shortopts, const char* longopts, const char* datatype, int mincount, int maxcount, const char* glossary);

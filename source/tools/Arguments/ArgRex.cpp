@@ -2,12 +2,12 @@
 #include "framework.h"
 #include "ArgumentTable.h"
 
-void arg_rex_resetfn(void* parent_) {
+void argRexResetFn(void* parent_) {
 	ArgRexPtr parent = (ArgRexPtr)parent_;
 	parent->count = 0;
 }
 
-int arg_rex_scanfn(void* parent_, const char* argval) {
+int argRexScanFn(void* parent_, const char* argval) {
 	ArgRexPtr parent = (ArgRexPtr)parent_;
 	int errorcode = 0;
 	const TRexChar* error = NULL;
@@ -36,13 +36,13 @@ int arg_rex_scanfn(void* parent_, const char* argval) {
 	return errorcode;
 }
 
-int arg_rex_checkfn(void* parent_) {
+int argRexCheckFn(void* parent_) {
 	ArgRexPtr parent = (ArgRexPtr)parent_;
 	int errorcode = (parent->count < parent->hdr.mincount) ? ARG_ERR_MINCOUNT : 0;
 	return errorcode;
 }
 
-void arg_rex_errorfn(void* parent_, struct _ArgDstr* ds, int errorcode, const char* argval, const char* progname) {
+void argRexErrorFn(void* parent_, ArgDstrPtr ds, int errorcode, const char* argval, const char* progname) {
 	ArgRexPtr parent = (ArgRexPtr)parent_;
 	const char* shortopts = parent->hdr.shortopts;
 	const char* longopts = parent->hdr.longopts;
@@ -50,21 +50,21 @@ void arg_rex_errorfn(void* parent_, struct _ArgDstr* ds, int errorcode, const ch
 
 	argval = argval ? argval : "";
 
-	arg_dstr_catf(ds, "%s: ", progname);
+	argDstrCatF(ds, "%s: ", progname);
 	switch (errorcode) {
 		case ARG_ERR_MINCOUNT:
-			arg_dstr_cat(ds, "missing option ");
-			arg_print_option_ds(ds, shortopts, longopts, datatype, "\n");
+			argDstrCat(ds, "missing option ");
+			argPrintOptionDs(ds, shortopts, longopts, datatype, "\n");
 			break;
 
 		case ARG_ERR_MAXCOUNT:
-			arg_dstr_cat(ds, "excess option ");
-			arg_print_option_ds(ds, shortopts, longopts, argval, "\n");
+			argDstrCat(ds, "excess option ");
+			argPrintOptionDs(ds, shortopts, longopts, argval, "\n");
 			break;
 
 		case ARG_ERR_REGNOMATCH:
-			arg_dstr_cat(ds, "illegal value  ");
-			arg_print_option_ds(ds, shortopts, longopts, argval, "\n");
+			argDstrCat(ds, "illegal value  ");
+			argPrintOptionDs(ds, shortopts, longopts, argval, "\n");
 			break;
 
 		default:
@@ -72,15 +72,15 @@ void arg_rex_errorfn(void* parent_, struct _ArgDstr* ds, int errorcode, const ch
 	}
 }
 
-ArgRexPtr arg_rex0(const char* shortopts, const char* longopts, const char* pattern, const char* datatype, int flags, const char* glossary) {
-	return arg_rexn(shortopts, longopts, pattern, datatype, 0, 1, flags, glossary);
+ArgRexPtr argRex0(const char* shortopts, const char* longopts, const char* pattern, const char* datatype, int flags, const char* glossary) {
+	return argRexN(shortopts, longopts, pattern, datatype, 0, 1, flags, glossary);
 }
 
-ArgRexPtr arg_rex1(const char* shortopts, const char* longopts, const char* pattern, const char* datatype, int flags, const char* glossary) {
-	return arg_rexn(shortopts, longopts, pattern, datatype, 1, 1, flags, glossary);
+ArgRexPtr argRex1(const char* shortopts, const char* longopts, const char* pattern, const char* datatype, int flags, const char* glossary) {
+	return argRexN(shortopts, longopts, pattern, datatype, 1, 1, flags, glossary);
 }
 
-ArgRexPtr arg_rexn(const char* shortopts, const char* longopts, const char* pattern, const char* datatype, int mincount, int maxcount, int flags, const char* glossary) {
+ArgRexPtr argRexN(const char* shortopts, const char* longopts, const char* pattern, const char* datatype, int mincount, int maxcount, int flags, const char* glossary) {
 	size_t nbytes;
 	ArgRexPtr result;
 	PrivHdrPtr priv;
@@ -108,10 +108,10 @@ ArgRexPtr arg_rexn(const char* shortopts, const char* longopts, const char* patt
 		result->hdr.mincount = mincount;
 		result->hdr.maxcount = maxcount;
 		result->hdr.parent = result;
-		result->hdr.resetfn = arg_rex_resetfn;
-		result->hdr.scanfn = arg_rex_scanfn;
-		result->hdr.checkfn = arg_rex_checkfn;
-		result->hdr.errorfn = arg_rex_errorfn;
+		result->hdr.resetfn = argRexResetFn;
+		result->hdr.scanfn = argRexScanFn;
+		result->hdr.checkfn = argRexCheckFn;
+		result->hdr.errorfn = argRexErrorFn;
 
 		result->hdr.priv = result + 1;
 		priv = (PrivHdrPtr)(result->hdr.priv);

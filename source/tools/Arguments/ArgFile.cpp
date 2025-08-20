@@ -71,7 +71,7 @@ int argFileCheckFn(void* parent_) {
 	return errorcode;
 }
 
-void argFileErrorFn(void* parent_, struct _ArgDstr* ds, int errorcode, const char* argval, const char* progname) {
+void argFileErrorFn(void* parent_, ArgDstrPtr ds, int errorcode, const char* argval, const char* progname) {
 	ArgFilePtr parent = (ArgFilePtr)parent_;
 	const char* shortopts = parent->hdr.shortopts;
 	const char* longopts = parent->hdr.longopts;
@@ -79,20 +79,20 @@ void argFileErrorFn(void* parent_, struct _ArgDstr* ds, int errorcode, const cha
 
 	argval = argval ? argval : "";
 
-	arg_dstr_catf(ds, "%s: ", progname);
+	argDstrCatF(ds, "%s: ", progname);
 	switch (errorcode) {
 		case ARG_ERR_MINCOUNT:
-			arg_dstr_cat(ds, "missing option ");
-			arg_print_option_ds(ds, shortopts, longopts, datatype, "\n");
+			argDstrCat(ds, "missing option ");
+			argPrintOptionDs(ds, shortopts, longopts, datatype, "\n");
 			break;
 
 		case ARG_ERR_MAXCOUNT:
-			arg_dstr_cat(ds, "excess option ");
-			arg_print_option_ds(ds, shortopts, longopts, argval, "\n");
+			argDstrCat(ds, "excess option ");
+			argPrintOptionDs(ds, shortopts, longopts, argval, "\n");
 			break;
 
 		default:
-			arg_dstr_catf(ds, "unknown error at \"%s\"\n", argval);
+			argDstrCatF(ds, "unknown error at \"%s\"\n", argval);
 	}
 }
 

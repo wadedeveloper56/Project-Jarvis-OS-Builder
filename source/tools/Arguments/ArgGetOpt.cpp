@@ -3,32 +3,26 @@
 #include "ArgumentTable.h"
 
 #define GNU_COMPATIBLE		       
-
 int	opterr = 1;
 int	optind = 1;
 int	optopt = '?';
 int	optreset;
 char* optarg;
-
 #define PRINT_ERROR	((opterr) && (*options != ':'))
-
 #define FLAG_PERMUTE	0x01	        
 #define FLAG_ALLARGS	0x02	        
 #define FLAG_LONGONLY	0x04	    
-
 #define	BADCH		(int)'?'
 #define	BADARG		((*options == ':') ? (int)':' : (int)'?')
 #define	INORDER 	(int)1
-
 #define	EMSG		""
-
 #ifdef GNU_COMPATIBLE
 #define NO_PREFIX	(-1)
 #define D_PREFIX	0
 #define DD_PREFIX	1
 #define W_PREFIX	2
 #endif
-
+#define MAX_OPTERRMSG_SIZE 128
 
 char* place = (char *)EMSG;
 int nonopt_start = -1;
@@ -41,11 +35,9 @@ const char recargstring[] = "option `%s%s' requires an argument";
 const char ambig[] = "option `%s%.*s' is ambiguous";
 const char noarg[] = "option `%s%.*s' doesn't allow an argument";
 const char illoptstring[] = "unrecognized option `%s%s'";
-
-#define MAX_OPTERRMSG_SIZE 128
-
 extern char opterrmsg[MAX_OPTERRMSG_SIZE];
 char opterrmsg[MAX_OPTERRMSG_SIZE];
+
 
 void warnx(const char* fmt, ...) {
 	va_list ap;
@@ -53,17 +45,10 @@ void warnx(const char* fmt, ...) {
 
 	memset(opterrmsg, 0, sizeof(opterrmsg));
 	if (fmt != NULL)
-#if (defined(__STDC_LIB_EXT1__) && defined(__STDC_WANT_LIB_EXT1__)) || (defined(__STDC_SECURE_LIB__) && defined(__STDC_WANT_SECURE_LIB__))
-		_vsnprintf_s(opterrmsg, sizeof(opterrmsg), sizeof(opterrmsg) - 1, fmt, ap);
-#else
+	{
 		_vsnprintf(opterrmsg, sizeof(opterrmsg) - 1, fmt, ap);
-#endif
-
+	}
 	va_end(ap);
-
-#ifdef _MSC_VER
-#pragma warning(suppress : 6053)
-#endif
 	fprintf(stderr, "%s\n", opterrmsg);
 }
 
@@ -80,7 +65,8 @@ int gcd(int a, int b) {
 	return (b);
 }
 
-void permute_args(int panonopt_start, int panonopt_end, int opt_end, char* const* nargv) {
+void permuteArgs(int panonopt_start, int panonopt_end, int opt_end, char* const* nargv)
+{
 	int cstart, cyclelen, i, j, ncycle, nnonopts, nopts, pos;
 	char* swap;
 
@@ -104,16 +90,13 @@ void permute_args(int panonopt_start, int panonopt_end, int opt_end, char* const
 	}
 }
 
-int parse_long_options(char* const* nargv, const char* options, const OptionPtr long_options, int* idx, int short_too, int flags) {
+int parseLongOptions(char* const* nargv, const char* options, const OptionPtr long_options, int* idx, int short_too, int flags) {
 	char* current_argv, * has_equal;
-#ifdef GNU_COMPATIBLE
 	char* current_dash;
-#endif
 	size_t current_argv_len;
 	int i, match, exact_match, second_partial_match;
 
 	current_argv = place;
-#ifdef GNU_COMPATIBLE
 	switch (dash_prefix) {
 		case D_PREFIX:
 			current_dash = (char *)"-";
@@ -128,7 +111,6 @@ int parse_long_options(char* const* nargv, const char* options, const OptionPtr 
 			current_dash = (char*)"";
 			break;
 	}
-#endif
 	match = -1;
 	exact_match = 0;
 	second_partial_match = 0;
@@ -244,7 +226,7 @@ int parse_long_options(char* const* nargv, const char* options, const OptionPtr 
 		return (long_options[match].val);
 }
 
-int getopt_internal(int nargc, char* const* nargv, const char* options, const OptionPtr long_options, int* idx, int flags) {
+int getOptInternal(int nargc, char* const* nargv, const char* options, const OptionPtr long_options, int* idx, int flags) {
 	char* oli;
 	int optchar, short_too;
 	int posixly_correct = -1;
@@ -277,8 +259,7 @@ start:
 		if (optind >= nargc) {
 			place = (char*)EMSG;
 			if (nonopt_end != -1) {
-				permute_args(nonopt_start, nonopt_end,
-					optind, nargv);
+				permuteArgs(nonopt_start, nonopt_end,optind, nargv);
 				optind -= nonopt_end - nonopt_start;
 			}
 			else if (nonopt_start != -1) {
@@ -304,7 +285,7 @@ start:
 			if (nonopt_start == -1)
 				nonopt_start = optind;
 			else if (nonopt_end != -1) {
-				permute_args(nonopt_start, nonopt_end,
+				permuteArgs(nonopt_start, nonopt_end,
 					optind, nargv);
 				nonopt_start = optind -
 					(nonopt_end - nonopt_start);
@@ -320,7 +301,7 @@ start:
 			optind++;
 			place = (char*)EMSG;
 			if (nonopt_end != -1) {
-				permute_args(nonopt_start, nonopt_end,
+				permuteArgs(nonopt_start, nonopt_end,
 					optind, nargv);
 				optind -= nonopt_end - nonopt_start;
 			}
@@ -346,7 +327,7 @@ start:
 		else if (*place != ':' && strchr(options, *place) != NULL)
 			short_too = 1;
 
-		optchar = parse_long_options(nargv, options, long_options,
+		optchar = parseLongOptions(nargv, options, long_options,
 			idx, short_too, flags);
 		if (optchar != -1) {
 			place = (char*)EMSG;
@@ -387,7 +368,7 @@ start:
 #ifdef GNU_COMPATIBLE
 		dash_prefix = W_PREFIX;
 #endif
-		optchar = parse_long_options(nargv, options, long_options,
+		optchar = parseLongOptions(nargv, options, long_options,
 			idx, 0, flags);
 		place = (char*)EMSG;
 		return (optchar);
@@ -417,19 +398,19 @@ start:
 	return (optchar);
 }
 
-int getopt(int nargc, char* const* nargv, const char* options) {
-	return (getopt_internal(nargc, nargv, options, NULL, NULL, 0));
+int getOpt(int nargc, char* const* nargv, const char* options) {
+	return (getOptInternal(nargc, nargv, options, NULL, NULL, 0));
 }
 
-int getopt_long(int nargc, char* const* nargv, const char* options, const OptionPtr long_options, int* idx) {
-	return (getopt_internal(nargc, nargv, options, long_options, idx, FLAG_PERMUTE));
+int getOptLong(int nargc, char* const* nargv, const char* options, const OptionPtr long_options, int* idx) {
+	return (getOptInternal(nargc, nargv, options, long_options, idx, FLAG_PERMUTE));
 }
 
-int getopt_long_only(int nargc, char* const* nargv, const char* options, const OptionPtr long_options, int* idx) {
-	return (getopt_internal(nargc, nargv, options, long_options, idx, FLAG_PERMUTE | FLAG_LONGONLY));
+int getOptLongOnly(int nargc, char* const* nargv, const char* options, const OptionPtr long_options, int* idx) {
+	return (getOptInternal(nargc, nargv, options, long_options, idx, FLAG_PERMUTE | FLAG_LONGONLY));
 }
 
-void arg_cat(char** pdest, const char* src, size_t* pndest) {
+void argCat(char** pdest, const char* src, size_t* pndest) {
 	char* dest = *pdest;
 	char* end = dest + *pndest;
 
@@ -445,7 +426,7 @@ void arg_cat(char** pdest, const char* src, size_t* pndest) {
 	*pdest = dest;
 }
 
-void arg_cat_optionv(char* dest, size_t ndest, const char* shortopts, const char* longopts, const char* datatype, int optvalue, const char* separator) {
+void argCatOptionV(char* dest, size_t ndest, const char* shortopts, const char* longopts, const char* datatype, int optvalue, const char* separator) {
 	separator = separator ? separator : "";
 
 	if (shortopts) {
@@ -457,21 +438,21 @@ void arg_cat_optionv(char* dest, size_t ndest, const char* shortopts, const char
 			shortopt[1] = *c;
 			shortopt[2] = 0;
 
-			arg_cat(&dest, shortopt, &ndest);
+			argCat(&dest, shortopt, &ndest);
 			if (*++c)
-				arg_cat(&dest, separator, &ndest);
+				argCat(&dest, separator, &ndest);
 		}
 	}
 
 	if (shortopts && longopts)
-		arg_cat(&dest, separator, &ndest);
+		argCat(&dest, separator, &ndest);
 
 	if (longopts) {
 		const char* c = longopts;
 		while (*c) {
 			size_t ncspn;
 
-			arg_cat(&dest, "--", &ndest);
+			argCat(&dest, "--", &ndest);
 
 			ncspn = strcspn(c, ",");
 #if (defined(__STDC_LIB_EXT1__) && defined(__STDC_WANT_LIB_EXT1__)) || (defined(__STDC_SECURE_LIB__) && defined(__STDC_WANT_SECURE_LIB__))
@@ -482,7 +463,7 @@ void arg_cat_optionv(char* dest, size_t ndest, const char* shortopts, const char
 			c += ncspn;
 
 			if (*c == ',') {
-				arg_cat(&dest, separator, &ndest);
+				argCat(&dest, separator, &ndest);
 				c++;
 			}
 		}
@@ -490,24 +471,24 @@ void arg_cat_optionv(char* dest, size_t ndest, const char* shortopts, const char
 
 	if (datatype) {
 		if (longopts)
-			arg_cat(&dest, "=", &ndest);
+			argCat(&dest, "=", &ndest);
 		else if (shortopts)
-			arg_cat(&dest, " ", &ndest);
+			argCat(&dest, " ", &ndest);
 
 		if (optvalue) {
-			arg_cat(&dest, "[", &ndest);
-			arg_cat(&dest, datatype, &ndest);
-			arg_cat(&dest, "]", &ndest);
+			argCat(&dest, "[", &ndest);
+			argCat(&dest, datatype, &ndest);
+			argCat(&dest, "]", &ndest);
 		}
 		else
-			arg_cat(&dest, datatype, &ndest);
+			argCat(&dest, datatype, &ndest);
 	}
 }
 
-void arg_print_option_ds(ArgDstrPtr ds, const char* shortopts, const char* longopts, const char* datatype, const char* suffix) {
+void argPrintOptionDs(ArgDstrPtr ds, const char* shortopts, const char* longopts, const char* datatype, const char* suffix) {
 	char syntax[200] = "";
 	suffix = suffix ? suffix : "";
-	arg_cat_optionv(syntax, sizeof(syntax) - 1, shortopts, longopts, datatype, 0, "|");
-	arg_dstr_cat(ds, syntax);
-	arg_dstr_cat(ds, (char*)suffix);
+	argCatOptionV(syntax, sizeof(syntax) - 1, shortopts, longopts, datatype, 0, "|");
+	argDstrCat(ds, syntax);
+	argDstrCat(ds, (char*)suffix);
 }
