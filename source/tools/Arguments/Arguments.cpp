@@ -35,7 +35,7 @@ ArgRemPtr arg_rem(const char* datatype, const char* glossary) {
 	return result;
 }
 
-int arg_nullcheck(void** argtable) {
+int argNullCheck(void** argtable) {
 	ArgHdrPtrPtr table = (ArgHdrPtrPtr)argtable;
 	int tabindex;
 	if (!table)
@@ -480,7 +480,7 @@ void arg_print_syntax_ds(ArgDstrPtr ds, void** argtable, const char* suffix) {
 	}
 }
 
-void arg_print_syntax(FILE* fp, void** argtable, const char* suffix) {
+void argPrintSyntax(FILE* fp, void** argtable, const char* suffix) {
 	ArgDstrPtr ds = argDstrCreate();
 	arg_print_syntax_ds(ds, argtable, suffix);
 	fputs(argDstrCStr(ds), fp);
@@ -505,7 +505,7 @@ void arg_print_glossary_ds(ArgDstrPtr ds, void** argtable, const char* format) {
 	}
 }
 
-void arg_print_glossary(FILE* fp, void** argtable, const char* format) {
+void argPrintGlossary(FILE* fp, void** argtable, const char* format) {
 	ArgDstrPtr ds = argDstrCreate();
 	arg_print_glossary_ds(ds, argtable, format);
 	fputs(argDstrCStr(ds), fp);

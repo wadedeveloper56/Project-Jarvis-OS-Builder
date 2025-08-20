@@ -2,7 +2,7 @@
 #include "framework.h"
 #include "ArgumentTable.h"
 
-void arg_str_resetfn(void* parent_) {
+void argStrResetFn(void* parent_) {
 	ArgStrPtr parent = (ArgStrPtr)parent_;
 	int i;
 
@@ -12,7 +12,7 @@ void arg_str_resetfn(void* parent_) {
 	parent->count = 0;
 }
 
-int arg_str_scanfn(void* parent_, const char* argval) {
+int argStrScanFn(void* parent_, const char* argval) {
 	ArgStrPtr parent = (ArgStrPtr)parent_;
 	int errorcode = 0;
 
@@ -29,13 +29,13 @@ int arg_str_scanfn(void* parent_, const char* argval) {
 	return errorcode;
 }
 
-int arg_str_checkfn(void* parent_) {
+int argStrCheckFn(void* parent_) {
 	ArgStrPtr parent = (ArgStrPtr)parent_;
 	int errorcode = (parent->count < parent->hdr.mincount) ? ARG_ERR_MINCOUNT : 0;
 	return errorcode;
 }
 
-void arg_str_errorfn(void* parent_, ArgDstrPtr ds, int errorcode, const char* argval, const char* progname) {
+void argStrErrorFn(void* parent_, ArgDstrPtr ds, int errorcode, const char* argval, const char* progname) {
 	ArgStrPtr parent = (ArgStrPtr)parent_;
 	const char* shortopts = parent->hdr.shortopts;
 	const char* longopts = parent->hdr.longopts;
@@ -57,15 +57,15 @@ void arg_str_errorfn(void* parent_, ArgDstrPtr ds, int errorcode, const char* ar
 	}
 }
 
-ArgStrPtr arg_str0(const char* shortopts, const char* longopts, const char* datatype, const char* glossary) {
-	return arg_strn(shortopts, longopts, datatype, 0, 1, glossary);
+ArgStrPtr argStr0(const char* shortopts, const char* longopts, const char* datatype, const char* glossary) {
+	return argStrN(shortopts, longopts, datatype, 0, 1, glossary);
 }
 
-ArgStrPtr arg_str1(const char* shortopts, const char* longopts, const char* datatype, const char* glossary) {
-	return arg_strn(shortopts, longopts, datatype, 1, 1, glossary);
+ArgStrPtr argStr1(const char* shortopts, const char* longopts, const char* datatype, const char* glossary) {
+	return argStrN(shortopts, longopts, datatype, 1, 1, glossary);
 }
 
-ArgStrPtr arg_strn(const char* shortopts, const char* longopts, const char* datatype, int mincount, int maxcount, const char* glossary) {
+ArgStrPtr argStrN(const char* shortopts, const char* longopts, const char* datatype, int mincount, int maxcount, const char* glossary) {
 	size_t nbytes;
 	ArgStrPtr result;
 	int i;
@@ -84,10 +84,10 @@ ArgStrPtr arg_strn(const char* shortopts, const char* longopts, const char* data
 		result->hdr.mincount = mincount;
 		result->hdr.maxcount = maxcount;
 		result->hdr.parent = result;
-		result->hdr.resetfn = arg_str_resetfn;
-		result->hdr.scanfn = arg_str_scanfn;
-		result->hdr.checkfn = arg_str_checkfn;
-		result->hdr.errorfn = arg_str_errorfn;
+		result->hdr.resetfn = argStrResetFn;
+		result->hdr.scanfn = argStrScanFn;
+		result->hdr.checkfn = argStrCheckFn;
+		result->hdr.errorfn = argStrErrorFn;
 
 		result->sval = (const char**)(result + 1);
 		result->count = 0;

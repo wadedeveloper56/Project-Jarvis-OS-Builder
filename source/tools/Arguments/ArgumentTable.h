@@ -336,17 +336,17 @@ extern "C" {
 	int trex_getsubexpcount(TRex* exp);
 	TRexBool trex_getsubexp(TRex* exp, int n, TRexMatch* subexp);
 
-	void arg_str_resetfn(void* parent_);
-	int arg_str_scanfn(void* parent_, const char* argval);
-	int arg_str_checkfn(void* parent_);
-	void arg_str_errorfn(void* parent_, ArgDstrPtr ds, int errorcode, const char* argval, const char* progname);
-	ArgStrPtr arg_str0(const char* shortopts, const char* longopts, const char* datatype, const char* glossary);
-	ArgStrPtr arg_str1(const char* shortopts, const char* longopts, const char* datatype, const char* glossary);
-	ArgStrPtr arg_strn(const char* shortopts, const char* longopts, const char* datatype, int mincount, int maxcount, const char* glossary);
+	void argStrResetFn(void* parent_);
+	int argStrScanFn(void* parent_, const char* argval);
+	int argStrCheckFn(void* parent_);
+	void argStrErrorFn(void* parent_, ArgDstrPtr ds, int errorcode, const char* argval, const char* progname);
+	ArgStrPtr argStr0(const char* shortopts, const char* longopts, const char* datatype, const char* glossary);
+	ArgStrPtr argStr1(const char* shortopts, const char* longopts, const char* datatype, const char* glossary);
+	ArgStrPtr argStrN(const char* shortopts, const char* longopts, const char* datatype, int mincount, int maxcount, const char* glossary);
 
 	void arg_freetable(void** argtable, size_t n);
 	ArgRemPtr arg_rem(const char* datatype, const char* glossary);
-	int arg_nullcheck(void** argtable);
+	int argNullCheck(void** argtable);
 	void arg_reset(void** argtable);
 	int arg_endindex(ArgHdrPtrPtr table);
 	void arg_register_error(ArgEndPtr end, void* parent, int error, const char* argval);
@@ -360,9 +360,9 @@ extern "C" {
 	void arg_print_gnuswitch_ds(ArgDstrPtr ds, ArgHdrPtrPtr table);
 	void arg_cat_option(char* dest, size_t ndest, const char* shortopts, const char* longopts, const char* datatype, int optvalue);
 	void arg_print_syntax_ds(ArgDstrPtr ds, void** argtable, const char* suffix);
-	void arg_print_syntax(FILE* fp, void** argtable, const char* suffix);
+	void argPrintSyntax(FILE* fp, void** argtable, const char* suffix);
 	void arg_print_glossary_ds(ArgDstrPtr ds, void** argtable, const char* format);
-	void arg_print_glossary(FILE* fp, void** argtable, const char* format);
+	void argPrintGlossary(FILE* fp, void** argtable, const char* format);
 
 #ifdef __cplusplus
 }

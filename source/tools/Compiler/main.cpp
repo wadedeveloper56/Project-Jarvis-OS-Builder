@@ -15,21 +15,20 @@ int main(int argc, char* argv[])
 {
 	ifstream in;
 	ofstream out;
-	ArgIntPtr bitsize = argInt0("b", "bitsize", NULL, "define bit size to be 16, 32 or 64 bits (default is 32)");
-	ArgFilePtr outfile = argFile0("o", NULL, "<output>", "output file (default is \"-\")");
-	ArgLitPtr verbose = argLit0("v", "verbose,debug", "verbose messages");
-	ArgLitPtr help = argLit0(NULL, "help", "print this help and exit");
-	ArgLitPtr version = argLit0(NULL, "version", "print version information and exit");
+	ArgIntPtr bitsize = argInt0("bB", "bitsize", NULL, "define bit size to be 16, 32 or 64 bits (default is 32)");
+	ArgFilePtr outfile = argFile0("Oo", "output", "<file>", "output file (default is \"-\")");
+	ArgLitPtr help = argLit0("hH", "help", "print this help and exit");
+	ArgLitPtr version = argLit0("vV", "version", "print version information and exit");
 	ArgFilePtr infiles = argFileN(NULL, NULL, NULL, 1, argc + 2, "input file(s)");
 	ArgEndPtr end = argEnd(20);
-	void* argtable[] = {bitsize, outfile, verbose, help, version, infiles, end};
+	void* argtable[] = {bitsize, outfile, help, version, infiles, end};
 	const char* progname = "Compiler";
 	int exitcode = 0, nerrors = 0;
 
 	printf("Compiler (x86/x64) v1.0 (C) Copyright 2025 Christopher D. Wade.\n");
 	printf("All Rights Reserved\n"); 
 	
-	if (arg_nullcheck(argtable) != 0)
+	if (argNullCheck(argtable) != 0)
 	{
 		printf("%s: insufficient memory\n", progname);
 		exitcode = 1;
@@ -50,9 +49,9 @@ int main(int argc, char* argv[])
 	if (help->count > 0)
 	{
 		printf("Usage: %s", progname);
-		arg_print_syntax(stdout, argtable, "\n");
+		argPrintSyntax(stdout, argtable, "\n");
 		printf("Compiler that coverts c code to 16,32 or 64 bit assembler\n");
-		arg_print_glossary(stdout, argtable, "  %-25s %s\n");
+		argPrintGlossary(stdout, argtable, "  %-25s %s\n");
 		exitcode = 0;
 		goto exit;
 	}
