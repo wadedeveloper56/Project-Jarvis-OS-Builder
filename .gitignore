@@ -2,3 +2,8 @@
 /source/tools/.vs
 /source/tools/Compiler/.vs
 
+/source/tools/Debug
+/source/tools/ObjDump/Debug
+/source/tools/ObjDump/Release
+/source/tools/ObjDump/x64
+/source/tools/x64
