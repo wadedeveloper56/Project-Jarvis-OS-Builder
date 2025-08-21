@@ -156,6 +156,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Linker.cpp" />
+    <ClCompile Include="ObjLoad.cpp" />
+    <ClCompile Include="Util.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Arguments\Arguments.vcxproj">
@@ -164,7 +166,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Linker.h" />
+    <ClInclude Include="ObjLoad.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="Util.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

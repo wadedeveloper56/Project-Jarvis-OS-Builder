@@ -338,7 +338,7 @@ typedef struct _SortEntry
 	char* id;
 	void** object;
 	unsigned int count;
-} SortEntry, * SortEntryPtr;
+} SortEntry, * SortEntryPtr, **SortEntryPtrPtr;
 
 typedef struct _Seg {
 	long nameindex;
@@ -474,3 +474,63 @@ typedef struct _ComDatRec
 	unsigned int linkwith;
 } ComDatRec, * ComDatRecPtr, ** ComDatRecPtrPtr;
 
+extern char** libPath;
+extern char case_sensitive;
+extern char padsegments;
+extern char mapfile;
+extern char * mapname;
+extern unsigned short maxalloc;
+extern int output_type;
+extern char * outname;
+extern FILE* afile;
+extern unsigned int filepos;
+extern long reclength;
+extern unsigned char rectype;
+extern char li_le;
+extern unsigned int prevofs;
+extern long prevseg;
+extern long gotstart;
+extern Reloc startaddr;
+extern unsigned int imageBase;
+extern unsigned int fileAlign;
+extern unsigned int objectAlign;
+extern unsigned int stackSize;
+extern unsigned int stackCommitSize;
+extern unsigned int heapSize;
+extern unsigned int heapCommitSize;
+extern unsigned char osMajor, osMinor;
+extern unsigned char subsysMajor, subsysMinor;
+extern unsigned int subSystem;
+extern long errcount;
+extern unsigned char buf[65536];
+extern DataBlockPtr lidata;
+extern char ** namelist;
+extern SegPtrPtr seglist;
+extern SegPtrPtr outlist;
+extern GrpPtrPtr grplist;
+extern SortEntryPtr publics;
+extern ExtRecPtr externs;
+extern ComRecPtrPtr comdefs;
+extern RelocPtrPtr relocs;
+extern ImpRecPtr impdefs;
+extern ExpRecPtr expdefs;
+extern LibFilePtr libfiles;
+extern ResourcePtr resource;
+extern char** modname;
+extern char** filename;
+extern SortEntryPtr comdats;
+extern unsigned int namecount, namemin,
+pubcount, pubmin,
+segcount, segmin, outcount,
+grpcount, grpmin,
+extcount, extmin,
+comcount, commin,
+fixcount, fixmin,
+impcount, impmin, impsreq,
+expcount, expmin,
+nummods,
+filecount,
+libcount,
+rescount;
+extern int buildDll;
+extern char * stubName;
