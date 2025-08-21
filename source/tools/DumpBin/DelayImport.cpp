@@ -2,7 +2,7 @@
 #include "DelayImport.h"
 #include "Public.h"
 
-void PrintOneDelayImport(PBYTE Data, DWORD Size, PIMAGE_DELAYLOAD_DESCRIPTOR DelayImportDirectory)
+void PrintOneDelayImport(PBYTE Data, LONGLONG Size, PIMAGE_DELAYLOAD_DESCRIPTOR DelayImportDirectory)
 {
     PIMAGE_NT_HEADERS NtHeaders = ImageNtHeader(Data);
     _ASSERTE(NtHeaders);
@@ -123,7 +123,7 @@ void PrintOneDelayImport(PBYTE Data, DWORD Size, PIMAGE_DELAYLOAD_DESCRIPTOR Del
 }
 
 
-DWORD DelayImport(PBYTE Data, DWORD Size)
+DWORD DelayImport(PBYTE Data, LONGLONG Size)
 {
     DWORD ret = ERROR_SUCCESS;
 

@@ -3,6 +3,7 @@
 #include "ArgumentTable.h"
 #include "ObjLoad.h"
 #include "Util.h"
+#include "Coff.h"
 
 void loadFiles(ArgFilePtr infiles)
 {
@@ -23,12 +24,12 @@ void loadFiles(ArgFilePtr infiles)
 				loadmod(afile);
 				break;
 			case 0:
-				//loadres(afile);
+				loadres(afile);
 				break;
 			case 0x4c:
 			case 0x4d:
 			case 0x4e:
-				//loadcoff(afile);
+				loadcoff(afile);
 				break;
 			case 0x21:
 				//loadCoffLib(afile, filename[i]);
@@ -67,11 +68,13 @@ int main(int argc, char* argv[])
 	if (argNullCheck(argtable) != 0)
 	{
 		printf("%s: insufficient memory\n", progname);
+		arg_freetable(argtable, sizeof(argtable) / sizeof(argtable[0]));
 		exit(1);
 	}
 	if (argc == 1)
 	{
 		printf("Try '%s --help' for more information.\n", progname);
+		arg_freetable(argtable, sizeof(argtable) / sizeof(argtable[0]));
 		exit(0);
 	}
 
@@ -92,6 +95,7 @@ int main(int argc, char* argv[])
 		printf("    Options and files may be listed in any order, all mixed together.\n");
 		printf("\n");
 		argPrintGlossary(stdout, argtable, "  %-25s %s\n");
+		arg_freetable(argtable, sizeof(argtable) / sizeof(argtable[0]));
 		exit(0);
 	}
 
@@ -99,6 +103,7 @@ int main(int argc, char* argv[])
 	{
 		printf("LINKER (x86/x64) v1.0 (C) Copyright 2025 Christopher D. Wade.\n");
 		printf("All Rights Reserved\n");
+		arg_freetable(argtable, sizeof(argtable) / sizeof(argtable[0]));
 		exit(0);
 	}
 
@@ -106,18 +111,21 @@ int main(int argc, char* argv[])
 	{
 		argPrintErrors(stdout, end, progname);
 		printf("Try '%s --help' for more information.\n", progname);
+		arg_freetable(argtable, sizeof(argtable) / sizeof(argtable[0]));
 		exit(1);
 	}
 
 	if (infiles->count == 0)
 	{
 		printf("No input files specified\n");
+		arg_freetable(argtable, sizeof(argtable) / sizeof(argtable[0]));
 		exit(1);
 	}
 
 	if (outfile->count == 0)
 	{
 		printf("No ouput file specified\n");
+		arg_freetable(argtable, sizeof(argtable) / sizeof(argtable[0]));
 		exit(1);
 	}
 
@@ -131,7 +139,8 @@ int main(int argc, char* argv[])
 			{
 				if (i - j)
 				{
-					libPath = (char **)checkRealloc(libPath, (size_t)((libPathCount + 1) * sizeof(char *)));
+					unsigned long long temp = ((unsigned long long)libPathCount + 1) * sizeof(char*);
+					libPath = (char **)checkRealloc(libPath, (size_t)temp);
 					libList[i] = 0;
 					if (libList[i - 1] == PATH_CHAR)
 					{
@@ -151,7 +160,6 @@ int main(int argc, char* argv[])
 			if (isend) break;
 		}
 	}
-
 	loadFiles(infiles);
 	arg_freetable(argtable, sizeof(argtable) / sizeof(argtable[0]));
 	return 0;

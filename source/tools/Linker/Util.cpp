@@ -239,13 +239,16 @@ void* checkMalloc(size_t x)
 	return p;
 }
 
-void* checkRealloc(void* p, size_t x)
+void* checkRealloc(void* ptr, size_t x)
 {
-	p = realloc(p, x);
-	if (!p)
-	{
-		fprintf(stderr, "Error, Insufficient memory in call to realloc\n");
-		exit(1);
+	void* p = NULL;
+	if (ptr != NULL) {
+		p = realloc(ptr, x);
+		if (p != NULL)
+		{
+			fprintf(stderr, "Error, Insufficient memory in call to realloc\n");
+			exit(1);
+		}
 	}
 	return p;
 }

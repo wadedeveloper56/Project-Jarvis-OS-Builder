@@ -8,6 +8,129 @@ char f_thred[4];
 int t_thredindex[4];
 int f_thredindex[4];
 
+void loadres(FILE* f)
+{
+	unsigned char buf[32];
+	static unsigned char buf2[32] = { 0,0,0,0,0x20,0,0,0,0xff,0xff,0,0,0xff,0xff,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
+	unsigned int i, j;
+	unsigned int hdrsize, datsize;
+	char *data;
+	char *hdr;
+
+	if (fread(buf, 1, 32, f) != 32)
+	{
+		printf("Invalid resource file\n");
+		exit(1);
+	}
+	if (memcmp(buf, buf2, 32))
+	{
+		printf("Invalid resource file\n");
+		exit(1);
+	}
+	printf("Loading Win32 Resource File\n");
+	while (!feof(f))
+	{
+		i = ftell(f);
+		if (i & 3)
+		{
+			fseek(f, 4 - (i & 3), SEEK_CUR);
+		}
+		i = fread(buf, 1, 8, f);
+		if (i == 0 && feof(f)) return;
+		if (i != 8)
+		{
+			printf("Invalid resource file, no header\n");
+			exit(1);
+		}
+		datsize = buf[0] + (buf[1] << 8) + (buf[2] << 16) + (buf[3] << 24);
+		hdrsize = buf[4] + (buf[5] << 8) + (buf[6] << 16) + (buf[7] << 24);
+		if (hdrsize < 16)
+		{
+			printf("Invalid resource file, bad header\n");
+			exit(1);
+		}
+		hdr = (char *)checkMalloc(hdrsize);
+		if (fread(hdr, 1, hdrsize - 8, f) != (hdrsize - 8))
+		{
+			printf("Invalid resource file, missing header\n");
+			exit(1);
+		}
+		/* if this is a NULL resource, then skip */
+		if (!datsize && (hdrsize == 32) && !memcmp(buf2 + 8, hdr, 24))
+		{
+			free(hdr);
+			continue;
+		}
+		if (datsize)
+		{
+			data = (char *)checkMalloc(datsize);
+			if (fread(data, 1, datsize, f) != datsize)
+			{
+				printf("Invalid resource file, no data\n");
+				exit(1);
+			}
+		}
+		else data = NULL;
+		resource = (ResourcePtr)checkRealloc(resource, (rescount + 1) * sizeof(Resource));
+		resource[rescount].data = (char *)data;
+		resource[rescount].length = datsize;
+		i = 0;
+		hdrsize -= 8;
+		if ((hdr[i] == 0xff) && (hdr[i + 1] == 0xff))
+		{
+			resource[rescount].typeName0 = NULL;
+			resource[rescount].typeId0 = hdr[i + 2] + 256 * hdr[i + 3];
+			i += 4;
+		}
+		else
+		{
+			for (j = i; (j < (hdrsize - 1)) && (hdr[j] | hdr[j + 1]); j += 2);
+			if (hdr[j] | hdr[j + 1])
+			{
+				printf("Invalid resource file, bad name\n");
+				exit(1);
+			}
+			resource[rescount].typeName0 = (char *)checkMalloc(j - i + 2);
+			memcpy(resource[rescount].typeName0, hdr + i, j - i + 2);
+			i = j + 5;
+			i &= 0xfffffffc;
+		}
+		if (i > hdrsize)
+		{
+			printf("Invalid resource file, overflow\n");
+			exit(1);
+		}
+		if ((hdr[i] == 0xff) && (hdr[i + 1] == 0xff))
+		{
+			resource[rescount].name = NULL;
+			resource[rescount].id = hdr[i + 2] + 256 * hdr[i + 3];
+			i += 4;
+		}
+		else
+		{
+			for (j = i; (j < (hdrsize - 1)) && (hdr[j] | hdr[j + 1]); j += 2);
+			if (hdr[j] | hdr[j + 1])
+			{
+				printf("Invalid resource file,bad name (2)\n");
+				exit(1);
+			}
+			resource[rescount].name = (char *)checkMalloc(j - i + 2);
+			memcpy(resource[rescount].name, hdr + i, j - i + 2);
+			i = j + 5;
+			i &= 0xfffffffc;
+		}
+		i += 6; /* point to Language ID */
+		if (i > hdrsize)
+		{
+			printf("Invalid resource file, overflow(2)\n");
+			exit(1);
+		}
+		resource[rescount].languageid = hdr[i] + 256 * hdr[i + 1];
+		rescount++;
+		free(hdr);
+	}
+}
+
 void RelocLIDATA(DataBlockPtr p, long* ofs, RelocPtr r)
 {
 	long i, j;
@@ -368,7 +491,7 @@ long loadmod(FILE* objfile)
 	RelocPtr r;
 	PublicPtr pubdef;
 	char* name;
-	char *aliasName;
+	char* aliasName;
 	SortEntryPtr listnode;
 
 	modpos = 0;
@@ -1124,7 +1247,7 @@ long loadmod(FILE* objfile)
 					{
 						_strupr(externs[extcount].name);
 					}
-					externs[extcount].typenum = GetIndex((char *)buf, &j);
+					externs[extcount].typenum = GetIndex((char*)buf, &j);
 					externs[extcount].pubdef = NULL;
 					externs[extcount].flags = EXT_NOMATCH;
 					externs[extcount].modnum = 0;
@@ -1216,7 +1339,7 @@ long loadmod(FILE* objfile)
 			case ALIAS:
 				printf("ALIAS record\n");
 				j = 0;
-				name = (char *)checkMalloc(buf[j] + 1);
+				name = (char*)checkMalloc(buf[j] + 1);
 				k = buf[j];
 				j++;
 				for (i = 0; i < k; i++)
@@ -1230,7 +1353,7 @@ long loadmod(FILE* objfile)
 					_strupr(name);
 				}
 				printf("ALIAS name:%s\n", name);
-				aliasName = (char *)checkMalloc(buf[j] + 1);
+				aliasName = (char*)checkMalloc(buf[j] + 1);
 				k = buf[j];
 				j++;
 				for (i = 0; i < k; i++)
