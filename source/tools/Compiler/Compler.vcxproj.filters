@@ -144,6 +144,12 @@
     <ClInclude Include="ExpressionNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BaseCodeGenerator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NasmCodeGenerator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="parser.cpp">
@@ -264,6 +270,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ExpressionNode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseCodeGenerator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NasmCodeGenerator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

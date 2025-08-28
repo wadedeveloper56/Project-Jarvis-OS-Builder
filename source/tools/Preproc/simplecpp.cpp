@@ -175,7 +175,7 @@ const std::string simplecpp::Location::emptyFileName;
 void simplecpp::Location::adjust(const std::string &str)
 {
     if (strpbrk(str.c_str(), "\r\n") == nullptr) {
-        col += str.size();
+        col += (unsigned int)str.size();
         return;
     }
 
@@ -337,9 +337,9 @@ private:
         return 0;
     }
 
-    unsigned short bom;
+    unsigned short bom = 0;
 protected:
-    bool isUtf16;
+    bool isUtf16 = false;
 };
 
 class StdIStream : public simplecpp::TokenList::Stream {
@@ -496,7 +496,7 @@ simplecpp::TokenList::TokenList(const TokenList &other) : frontToken(nullptr), b
     *this = other;
 }
 
-simplecpp::TokenList::TokenList(TokenList &&other) : frontToken(nullptr), backToken(nullptr), files(other.files)
+simplecpp::TokenList::TokenList(TokenList &&other) noexcept : frontToken(nullptr), backToken(nullptr), files(other.files)
 {
     *this = std::move(other);
 }
@@ -865,9 +865,9 @@ void simplecpp::TokenList::readfile(Stream &stream, const std::string &filename,
                 back()->setstr(currentToken);
                 location.adjust(currentToken);
                 if (currentToken.find_first_of("\r\n") == std::string::npos)
-                    location.col += 2 + 2 * delim.size();
+                    location.col += (unsigned int)(2 + 2 * delim.size());
                 else
-                    location.col += 1 + delim.size();
+                    location.col += (unsigned int)(1 + delim.size());
 
                 continue;
             }
@@ -919,7 +919,7 @@ void simplecpp::TokenList::readfile(Stream &stream, const std::string &filename,
         push_back(new Token(currentToken, location, !!std::isspace(stream.peekChar())));
 
         if (multiline)
-            location.col += currentToken.size();
+            location.col += (unsigned int)currentToken.size();
         else
             location.adjust(currentToken);
     }
@@ -1462,7 +1462,7 @@ unsigned int simplecpp::TokenList::fileIndex(const std::string &filename)
             return i;
     }
     files.push_back(filename);
-    return files.size() - 1U;
+    return (unsigned int)(files.size() - 1U);
 }
 
 

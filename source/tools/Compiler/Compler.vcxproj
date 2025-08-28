@@ -197,6 +197,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AbstractDeclarator.h" />
+    <ClInclude Include="BaseCodeGenerator.h" />
     <ClInclude Include="BaseStatement.h" />
     <ClInclude Include="CompoundStatement.h" />
     <ClInclude Include="Constant.h" />
@@ -219,6 +220,7 @@
     <ClInclude Include="JumpStatement.h" />
     <ClInclude Include="LabeledStatement.h" />
     <ClInclude Include="location.hh" />
+    <ClInclude Include="NasmCodeGenerator.h" />
     <ClInclude Include="ParameterDeclaration.h" />
     <ClInclude Include="ParameterTypeList.h" />
     <ClInclude Include="parser.hpp" />
@@ -242,6 +244,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AbstractDeclarator.cpp" />
+    <ClCompile Include="BaseCodeGenerator.cpp" />
     <ClCompile Include="BaseStatement.cpp" />
     <ClCompile Include="CompoundStatement.cpp" />
     <ClCompile Include="Constant.cpp" />
@@ -264,6 +267,7 @@
     <ClCompile Include="JumpStatement.cpp" />
     <ClCompile Include="LabeledStatement.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="NasmCodeGenerator.cpp" />
     <ClCompile Include="ParameterDeclaration.cpp" />
     <ClCompile Include="ParameterTypeList.cpp" />
     <ClCompile Include="parser.cpp" />

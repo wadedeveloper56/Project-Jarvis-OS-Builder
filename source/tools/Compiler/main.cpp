@@ -6,6 +6,8 @@
 #include "ArgumentTable.h"
 #include "GlobalVars.h"
 #include "simplecpp.h"
+#include "BaseCodeGenerator.h"
+#include "NasmCodeGenerator.h"
 
 using namespace WadeSpace;
 using namespace std;
@@ -91,11 +93,11 @@ int main(int argc, char* argv[])
 		OutputList outputList;
 		vector<string> files;
 		TokenList* rawtokens;
+		FileDataCache filedata;
 
 		rawtokens = new TokenList(in, files, infiles->filename[0], &outputList);
 		rawtokens->removeComments();
 		TokenList outputTokens(files);
-		FileDataCache filedata;
 		preprocess(outputTokens, *rawtokens, files, filedata, dui, &outputList);
 		cleanup(filedata);
 		delete rawtokens;
@@ -106,9 +108,8 @@ int main(int argc, char* argv[])
 		Interpreter i;
 		i.setStreams(&inStr, &out);
 		exitcode = i.parse();
-		program->processGlobalVariables();
-		program->test();
-		program->generateCode(out);
+		BaseCodeGenerator* generator = program->processGlobalVariables();
+		generator->generateCode(out);
 		cout << "Parse complete. Result = " << exitcode << endl;
 	}
 	else

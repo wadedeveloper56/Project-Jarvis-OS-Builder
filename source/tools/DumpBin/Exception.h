@@ -33,7 +33,7 @@ typedef union _UNWIND_CODE {
 #define UNW_FLAG_CHAININFO 0x04
 #endif
 
-typedef struct _UNWIND_INFO {//SDK里没有定义，WDK有定义。
+typedef struct _UNWIND_INFO {
     UBYTE Version : 3;
     UBYTE Flags : 5;
     UBYTE SizeOfProlog;

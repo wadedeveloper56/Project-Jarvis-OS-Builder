@@ -3,6 +3,7 @@
 #include "ExternalDeclaration.h"
 #include "GlobalVars.h"
 #include "ParameterTypeList.h"
+#include "NasmCodeGenerator.h"
 
 using namespace WadeSpace;
 using namespace std;
@@ -10,38 +11,10 @@ using namespace std;
 ProgramData::ProgramData()
 {
 	programData = new vector<ExternalDeclaration*>();
-	variableTable = new vector<VariableData*>();
-	functionTable = new vector<FunctionData*>();
-	functionPrototypeTable = new vector<FunctionData*>();
 }
 
 ProgramData::~ProgramData()
 {
-	for (FunctionData* ptr : *functionPrototypeTable)
-	{
-		for (VariableData* data : *ptr->parameters)
-		{
-			delete data;
-		}
-		delete ptr->parameters;
-		delete ptr;
-	}
-	delete functionPrototypeTable;
-	for (FunctionData* ptr : *functionTable)
-	{
-		for (VariableData* data : *ptr->parameters)
-		{
-			delete data;
-		}
-		delete ptr->parameters;
-		delete ptr;
-	}
-	delete functionTable;
-	for (VariableData* ptr : *variableTable)
-	{
-		delete ptr;
-	}
-	delete variableTable;
 	for (ExternalDeclaration* ptr : *programData)
 	{
 		delete ptr;
@@ -52,34 +25,6 @@ ProgramData::~ProgramData()
 void ProgramData::add(ExternalDeclaration* data)
 {
 	programData->push_back(data);
-}
-
-void ProgramData::generateCode(ofstream& out)
-{
-	if (bit16)
-		out << "BITS 16" << endl;
-	else if (bit32)
-		out << "BITS 32" << endl;
-	else
-		out << "BITS 64" << endl;
-	out << "\t" << "SECTION .data" << endl;
-	out << "\t" << "SECTION .bss" << endl;
-	for (VariableData* ptr : *variableTable)
-	{
-		if (ptr->size == 1) out << ptr->name << ":  resb 1" << endl;
-		if (ptr->size == 2) out << ptr->name << ":  resw 1" << endl;
-		if (ptr->size == 4) out << ptr->name << ":  resd 1" << endl;
-		if (ptr->size == 8) out << ptr->name << ":  resq 1" << endl;
-		if (ptr->size == 10) out << ptr->name << ":  rest 1" << endl;
-		if (ptr->size == 16) out << ptr->name << ":  resb 16" << endl;
-	}
-	out << "\t" << "SECTION .text" << endl;
-	for (FunctionData* ptr : *functionTable)
-	{
-		out << "\t global _" << ptr->name << endl;
-		out << "_" << ptr->name << ":" << endl;
-		out << "\tret" << endl << endl;
-	}
 }
 
 int ProgramData::getSize(TokenType type)
@@ -97,8 +42,12 @@ int ProgramData::getSize(TokenType type)
 	return 0;
 }
 
-void ProgramData::processGlobalVariables()
+BaseCodeGenerator* ProgramData::processGlobalVariables()
 {
+	vector<VariableData*>* variableTable = new vector<VariableData*>();
+	vector<FunctionData*>* functionTable = new vector<FunctionData*>();
+	vector<FunctionData*>* functionPrototypeTable = new vector<FunctionData*>();
+
 	for (ExternalDeclaration* ptr : *programData)
 	{
 		if (ptr->isDeclaration())
@@ -149,12 +98,6 @@ void ProgramData::processGlobalVariables()
 			functionTable->push_back(data);
 		}
 	}
-}
-
-void ProgramData::test()
-{
-	cout << "Number of entries in programData table: " << programData->size() << endl;
-	cout << "Number of entries in variable table: " << variableTable->size() << endl;
-	cout << "Number of entries in function table: " << functionTable->size() << endl;
-	cout << "Number of entries in function prototype table: " << functionPrototypeTable->size() << endl;
+	generator = new NasmCodeGenerator(variableTable, functionTable, functionPrototypeTable);
+	return generator;
 }

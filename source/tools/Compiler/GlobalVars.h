@@ -6,6 +6,8 @@ using namespace std;
 
 namespace WadeSpace
 {
+	class ProgramData;
+
 	extern ProgramData *program;
 	extern bool bit16;
 	extern bool bit32;

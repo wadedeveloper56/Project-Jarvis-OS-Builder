@@ -7,25 +7,13 @@
 #include <optional>
 #include "TokenType.h"
 #include "ExternalDeclaration.h"
+#include "BaseCodeGenerator.h"
 
 using namespace std;
 
 namespace WadeSpace
 {
-	typedef struct
-	{
-		string name;
-		TokenType type;
-		int size;
-	} VariableData;
-
-	typedef struct
-	{
-		string name;
-		TokenType type;
-		int size;
-		vector<VariableData*>* parameters;
-	} FunctionData;
+	class BaseCodeGenerator;
 
 	class ProgramData
 	{
@@ -33,15 +21,12 @@ namespace WadeSpace
 		ProgramData();
 		virtual ~ProgramData();
 		void add(ExternalDeclaration* data);
-		void processGlobalVariables();
-		void generateCode(ofstream& out);
+		BaseCodeGenerator* processGlobalVariables();
 		int getSize(TokenType type);
 		void test();
 
 	private:
 		vector<ExternalDeclaration*> *programData;
-		vector<VariableData*> *variableTable;
-		vector<FunctionData*>* functionTable;
-		vector<FunctionData*>* functionPrototypeTable;
+		BaseCodeGenerator* generator;
 	};
 }
