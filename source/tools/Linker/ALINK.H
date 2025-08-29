@@ -58,7 +58,7 @@
 #define LPUBDEF32 0xb7
 #define LCOMDEF 0xb8
 #define CEXTDEF 0xbc
-#define COMDAT 0xc2
+#define ComDat 0xc2
 #define COMDAT32 0xc3
 #define LINSYM 0xc4
 #define LINSYM32 0xc5
@@ -396,23 +396,23 @@ typedef struct _ImpRec {
 	unsigned int  ofs;
 } ImpRec, * ImpRecPtr, ** ImpRecPtrPtr;
 
-typedef struct __exprec {
+typedef struct _ExpRec {
 	char* int_name;
 	char* exp_name;
 	unsigned int  ordinal;
 	char flags;
 	PublicPtr pubdef;
 	unsigned int  modnum;
-} EXPREC, * PEXPREC, ** PPEXPREC;
+} ExpRec, * ExpRecPtr, ** ExpRecPtrPtr;
 
-typedef struct __comdef {
+typedef struct _ComRec {
 	char* name;
 	unsigned int  length;
 	int isFar;
 	unsigned int  modnum;
-} COMREC, * PCOMREC, ** PPCOMREC;
+} ComRec, * ComRecPtr, ** ComRecPtrPtr;
 
-typedef struct __reloc {
+typedef struct _Reloc {
 	unsigned int  ofs;
 	long segnum;
 	unsigned char ftype, ttype;
@@ -421,16 +421,16 @@ typedef struct __reloc {
 	unsigned int  disp;
 	long frame;
 	unsigned int  outputPos;
-} RELOC, * PRELOC, ** PPRELOC;
+} Reloc, * RelocPtr, ** RelocPtrPtr;
 
-typedef struct __grp {
+typedef struct _Grp {
 	long nameindex;
 	long numsegs;
 	long segindex[256];
 	long segnum;
-} GRP, * PGRP, ** PPGRP;
+} Grp, * GrpPtr, ** GrpPtrPtr;
 
-typedef struct __libfile {
+typedef struct _LibFile {
 	char* filename;
 	unsigned short blocksize;
 	unsigned short numdicpages;
@@ -442,14 +442,14 @@ typedef struct __libfile {
 	unsigned char* longnames;
 	SortEntryPtr symbols;
 	unsigned int  numsyms;
-} LIBFILE, * PLIBFILE, ** PPLIBFILE;
+} LibFile, * LibFilePtr, ** LibFilePtrPtr;
 
-typedef struct __libentry {
+typedef struct _LibEntry {
 	unsigned int  libfile;
 	unsigned int  modpage;
-} LIBENTRY, * PLIBENTRY, ** PPLIBENTRY;
+} LibEntry, * LibEntryPtr, ** LibEntryPtrPtr;
 
-typedef struct __resource {
+typedef struct _Resource {
 	unsigned char* typename1;
 	unsigned char* name;
 	unsigned char* data;
@@ -457,9 +457,9 @@ typedef struct __resource {
 	unsigned short typeid1;
 	unsigned short id;
 	unsigned short languageid;
-} RESOURCE, * PRESOURCE;
+} Resource, * ResourcePtr, ** ResourcePtrPtr;
 
-typedef struct __coffsym {
+typedef struct _CoffSym {
 	unsigned char* name;
 	unsigned int  value;
 	short section;
@@ -469,14 +469,14 @@ typedef struct __coffsym {
 	unsigned int  numAuxRecs;
 	unsigned char* auxRecs;
 	int isComDat;
-} COFFSYM, * PCOFFSYM;
+} CoffSym, * CoffSymPtr, ** CoffSymPtrPtr;
 
-typedef struct __comdatrec
+typedef struct _ComDat
 {
 	unsigned int  segnum;
 	unsigned int  combineType;
 	unsigned int  linkwith;
-} COMDATREC, * PCOMDAT;
+} COMDATREC, * ComDatPtr, ** ComDatPtrPtr;
 
 int sortCompare(const void* x1, const void* x2);
 void processArgs(int argc, char* argv[]);
@@ -487,17 +487,17 @@ void combineBlocks();
 void OutputWin32file(char* outname);
 void OutputEXEfile(char* outname);
 void OutputCOMfile(char* outname);
-void GetFixupTarget(PRELOC r, long* tseg, unsigned int* tofs, int isFlat);
+void GetFixupTarget(RelocPtr r, long* tseg, unsigned int* tofs, int isFlat);
 void loadlibmod(unsigned int  libnum, unsigned int  modpage);
 void loadlib(FILE* libfile, char* libname);
 void loadCoffLib(FILE* libfile, char* libname);
-void loadcofflibmod(PLIBFILE p, FILE* libfile);
+void loadcofflibmod(LibFilePtr p, FILE* libfile);
 long loadmod(FILE* objfile);
 void loadres(FILE* resfile);
 void loadcoff(FILE* objfile);
 void loadCoffImport(FILE* objfile);
-void LoadFIXUP(PRELOC r, unsigned char* buf, long* p);
-void RelocLIDATA(DataBlockPtr p, long* ofs, PRELOC r);
+void LoadFIXUP(RelocPtr r, unsigned char* buf, long* p);
+void RelocLIDATA(DataBlockPtr p, long* ofs, RelocPtr r);
 void EmitLiData(DataBlockPtr p, long segnum, long* ofs);
 DataBlockPtr BuildLiData(long* bufofs);
 void DestroyLIDATA(DataBlockPtr p);
@@ -533,7 +533,7 @@ extern char li_le;
 extern unsigned int  prevofs;
 extern long prevseg;
 extern long gotstart;
-extern RELOC startaddr;
+extern Reloc startaddr;
 extern unsigned int  imageBase;
 extern unsigned int  fileAlign;
 extern unsigned int  objectAlign;
@@ -553,15 +553,15 @@ extern DataBlockPtr lidata;
 extern char** namelist;
 extern SegPtrPtr seglist;
 extern SegPtrPtr outlist;
-extern PPGRP grplist;
+extern GrpPtrPtr grplist;
 extern SortEntryPtr publics;
 extern ExtRecPtr externs;
-extern PPCOMREC comdefs;
-extern PPRELOC relocs;
+extern ComRecPtrPtr comdefs;
+extern RelocPtrPtr relocs;
 extern ImpRecPtr impdefs;
-extern PEXPREC expdefs;
-extern PLIBFILE libfiles;
-extern PRESOURCE resource;
+extern ExpRecPtr expdefs;
+extern LibFilePtr libfiles;
+extern ResourcePtr resource;
 extern char** modname;
 extern char** filename;
 extern SortEntryPtr comdats;

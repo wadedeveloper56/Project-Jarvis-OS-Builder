@@ -8,13 +8,13 @@ void loadCoffLib(FILE* libfile, char * libname)
 	unsigned int  memberSize;
 	unsigned int  startPoint;
 	unsigned char * endptr;
-	PLIBFILE p;
+	LibFilePtr p;
 	char * name;
 	unsigned char * modbuf;
 	SortEntryPtr symlist;
 	int x;
 
-	libfiles = (PLIBFILE)checkRealloc(libfiles, (libcount + 1) * sizeof(LIBFILE));
+	libfiles = (LibFilePtr)checkRealloc(libfiles, (libcount + 1) * sizeof(LibFile));
 	p = &libfiles[libcount];
 	p->filename = (char *)checkMalloc(strlen(libname) + 1);
 	strcpy(p->filename, libname);
@@ -280,7 +280,7 @@ void loadCoffLib(FILE* libfile, char * libname)
 	libcount++;
 }
 
-void loadcofflibmod(PLIBFILE p, FILE* libfile)
+void loadcofflibmod(LibFilePtr p, FILE* libfile)
 {
 	char* name;
 	unsigned int  ofs;

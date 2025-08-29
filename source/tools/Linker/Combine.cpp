@@ -429,7 +429,7 @@ void combineBlocks()
 	{
 		if (seglist[i] && ((seglist[i]->attr & SEG_ALIGN) != SEG_ABS))
 		{
-			if (seglist[i]->winFlags & WINF_COMDAT) continue; /* don't combine COMDAT segments */
+			if (seglist[i]->winFlags & WINF_COMDAT) continue; /* don't combine ComDat segments */
 			name = namelist[seglist[i]->nameindex];
 			attr = seglist[i]->attr & (SEG_COMBINE | SEG_USE32);
 			switch (attr & SEG_COMBINE)

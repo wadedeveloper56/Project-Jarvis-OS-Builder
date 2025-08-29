@@ -19,7 +19,7 @@ static unsigned char defaultStub[] = {
 
 static unsigned int  defaultStubSize = sizeof(defaultStub);
 
-void GetFixupTarget(PRELOC r, long* bseg, unsigned int * tofs, int isFlat)
+void GetFixupTarget(RelocPtr r, long* bseg, unsigned int * tofs, int isFlat)
 {
 	long baseseg;
 	long targseg;
@@ -1145,7 +1145,7 @@ void BuildPEImports(long impsectNum, unsigned char * objectTable)
 void BuildPERelocs(long relocSectNum, unsigned char * objectTable)
 {
 	int i, j;
-	PRELOC r;
+	RelocPtr r;
 	SegPtr relocSect;
 	unsigned int  curStartPos;
 	unsigned int  curBlockPos;
@@ -1517,8 +1517,8 @@ void BuildPEExports(long SectNum, unsigned char * objectTable, unsigned char * n
 	unsigned int  minOrd;
 	unsigned int  maxOrd;
 	unsigned int  numOrds;
-	PPEXPREC nameList;
-	PEXPREC curName;
+	ExpRecPtrPtr nameList;
+	ExpRecPtr curName;
 
 	if (!expcount || (SectNum < 0)) return; /* return if no exports */
 	expSect = outlist[SectNum];
@@ -1738,7 +1738,7 @@ void BuildPEExports(long SectNum, unsigned char * objectTable, unsigned char * n
 
 	if (numNames) /* sort name table if present */
 	{
-		nameList = (PPEXPREC)checkMalloc(numNames * sizeof(PEXPREC));
+		nameList = (ExpRecPtrPtr)checkMalloc(numNames * sizeof(ExpRecPtr));
 		j = 0; /* no entries yet */
 		for (i = 0; i < expcount; i++)
 		{
@@ -1819,7 +1819,7 @@ void BuildPEResources(long sectNum, unsigned char * objectTable)
 	unsigned long i, j;
 	unsigned int  k;
 	SegPtr ressect;
-	RESOURCE curres;
+	Resource curres;
 	int numtypes, numnamedtypes;
 	int numPairs, numnames, numids;
 	unsigned int  nameSize, dataSize;

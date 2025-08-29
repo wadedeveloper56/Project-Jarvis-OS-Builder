@@ -93,7 +93,7 @@ void EmitLiData(DataBlockPtr p, long segnum, long* ofs)
 	}
 }
 
-void RelocLIDATA(DataBlockPtr p, long* ofs, PRELOC r)
+void RelocLIDATA(DataBlockPtr p, long* ofs, RelocPtr r)
 {
 	long i, j;
 
@@ -115,9 +115,9 @@ void RelocLIDATA(DataBlockPtr p, long* ofs, PRELOC r)
 				{
 					ReportError(ERR_BAD_FIXUP);
 				}
-				relocs = (PPRELOC)checkRealloc(relocs, (fixcount + 1) * sizeof(PRELOC));
-				relocs[fixcount] = (PRELOC)checkMalloc(sizeof(RELOC));
-				memcpy(relocs[fixcount], r, sizeof(RELOC));
+				relocs = (RelocPtrPtr)checkRealloc(relocs, (fixcount + 1) * sizeof(RelocPtr));
+				relocs[fixcount] = (RelocPtr)checkMalloc(sizeof(Reloc));
+				memcpy(relocs[fixcount], r, sizeof(Reloc));
 				relocs[fixcount]->ofs = *ofs + j;
 				fixcount++;
 				*ofs += ((unsigned char *)p->data)[0];
@@ -126,7 +126,7 @@ void RelocLIDATA(DataBlockPtr p, long* ofs, PRELOC r)
 	}
 }
 
-void LoadFIXUP(PRELOC r, unsigned char * buf, long* p)
+void LoadFIXUP(RelocPtr r, unsigned char * buf, long* p)
 {
 	long j;
 	int thrednum;
@@ -362,7 +362,7 @@ long loadmod(FILE* objfile)
 	long done;
 	long i, j, k;
 	long segnum, grpnum;
-	PRELOC r;
+	RelocPtr r;
 	PublicPtr pubdef;
 	char * name, * aliasName;
 	SortEntryPtr listnode;
@@ -517,7 +517,7 @@ long loadmod(FILE* objfile)
 									impcount++;
 									break;
 								case EXT_EXPDEF:
-									expdefs = (PEXPREC)checkRealloc(expdefs, (expcount + 1) * sizeof(EXPREC));
+									expdefs = (ExpRecPtr)checkRealloc(expdefs, (expcount + 1) * sizeof(ExpRec));
 									j = 4;
 									expdefs[expcount].flags = buf[3];
 									expdefs[expcount].pubdef = NULL;
@@ -917,8 +917,8 @@ long loadmod(FILE* objfile)
 				}
 				break;
 			case GRPDEF:
-				grplist = (PPGRP)checkRealloc(grplist, (grpcount + 1) * sizeof(PGRP));
-				grplist[grpcount] = (PGRP)checkMalloc(sizeof(GRP));
+				grplist = (GrpPtrPtr)checkRealloc(grplist, (grpcount + 1) * sizeof(GrpPtr));
+				grplist[grpcount] = (GrpPtr)checkMalloc(sizeof(Grp));
 				j = 0;
 				grplist[grpcount]->nameindex = GetIndex(buf, &j) - 1 + namemin;
 				if (grplist[grpcount]->nameindex < namemin)
@@ -958,7 +958,7 @@ long loadmod(FILE* objfile)
 						{
 							ReportError(ERR_BAD_FIXUP);
 						}
-						r = (PRELOC)checkMalloc(sizeof(RELOC));
+						r = (RelocPtr)checkMalloc(sizeof(Reloc));
 						r->rtype = (buf[j] >> 2);
 						r->ofs = buf[j] * 256 + buf[j + 1];
 						j += 2;
@@ -991,7 +991,7 @@ long loadmod(FILE* objfile)
 						{
 							r->ofs += prevofs;
 							r->segnum = prevseg;
-							relocs = (PPRELOC)checkRealloc(relocs, (fixcount + 1) * sizeof(PRELOC));
+							relocs = (RelocPtrPtr)checkRealloc(relocs, (fixcount + 1) * sizeof(RelocPtr));
 							relocs[fixcount] = r;
 							fixcount++;
 						}
@@ -1039,8 +1039,8 @@ long loadmod(FILE* objfile)
 				}
 				while (j < reclength)
 				{
-					relocs = (PPRELOC)checkRealloc(relocs, (fixcount + 1) * sizeof(PRELOC));
-					relocs[fixcount] = (PRELOC)checkMalloc(sizeof(RELOC));
+					relocs = (RelocPtrPtr)checkRealloc(relocs, (fixcount + 1) * sizeof(RelocPtr));
+					relocs[fixcount] = (RelocPtr)checkMalloc(sizeof(Reloc));
 					switch (k)
 					{
 						case 0: relocs[fixcount]->rtype = FIX_SELF_LBYTE; break;
@@ -1192,8 +1192,8 @@ long loadmod(FILE* objfile)
 						printf("Unknown COMDEF data type %02X\n", buf[j]);
 						exit(1);
 					}
-					comdefs = (PPCOMREC)checkRealloc(comdefs, (comcount + 1) * sizeof(PCOMREC));
-					comdefs[comcount] = (PCOMREC)checkMalloc(sizeof(COMREC));
+					comdefs = (ComRecPtrPtr)checkRealloc(comdefs, (comcount + 1) * sizeof(ComRecPtr));
+					comdefs[comcount] = (ComRecPtr)checkMalloc(sizeof(ComRec));
 					comdefs[comcount]->length = i;
 					comdefs[comcount]->isFar = k;
 					comdefs[comcount]->modnum = 0;
@@ -1203,9 +1203,9 @@ long loadmod(FILE* objfile)
 				}
 
 				break;
-			case COMDAT:
+			case ComDat:
 			case COMDAT32:
-				printf("COMDAT section\n");
+				printf("ComDat section\n");
 				exit(1);
 
 				break;
@@ -1298,11 +1298,11 @@ void loadlib(FILE* libfile, char * libname)
 	unsigned int i, j, k, n;
 	char * name;
 	unsigned short modpage;
-	PLIBFILE p;
+	LibFilePtr p;
 	unsigned int  numsyms;
 	SortEntryPtr symlist;
 
-	libfiles = (PLIBFILE)checkRealloc(libfiles, (libcount + 1) * sizeof(LIBFILE));
+	libfiles = (LibFilePtr)checkRealloc(libfiles, (libcount + 1) * sizeof(LibFile));
 	p = &libfiles[libcount];
 
 	p->filename = (char *)checkMalloc(strlen(libname) + 1);
@@ -1378,7 +1378,7 @@ void loadlib(FILE* libfile, char * libname)
 
 void loadlibmod(unsigned int  libnum, unsigned int  modpage)
 {
-	PLIBFILE p;
+	LibFilePtr p;
 	FILE* libfile;
 	unsigned int  i;
 
@@ -1479,7 +1479,7 @@ void loadres(FILE* f)
 			}
 		}
 		else data = NULL;
-		resource = (PRESOURCE)checkRealloc(resource, (rescount + 1) * sizeof(RESOURCE));
+		resource = (ResourcePtr)checkRealloc(resource, (rescount + 1) * sizeof(Resource));
 		resource[rescount].data = data;
 		resource[rescount].length = datsize;
 		i = 0;
