@@ -1,8 +1,5 @@
 #include "pch.h"
 
-//#define TRUE  (1==1)
-//#define FALSE (1==0)
-
 #define SWITCHCHAR '-'
 #define PATH_CHAR '\\'
 #define DEFAULT_EXTENSION ".obj"
@@ -340,12 +337,12 @@ typedef char *PCHAR,**PPCHAR;
 typedef unsigned char *PUCHAR;
 //typedef unsigned long UINT;
 
-typedef struct __sortentry
+typedef struct _SortEntry
 {
     char *id;
     void **object;
     UINT count;
-} SORTENTRY, *PSORTENTRY;
+} SortEntry, * SortEntryPtr;
 
 typedef struct __seg {
  long nameindex;
@@ -452,11 +449,11 @@ typedef struct __libentry {
 } LIBENTRY, *PLIBENTRY, **PPLIBENTRY;
 
 typedef struct __resource {
- PUCHAR typename;
+ PUCHAR typename1;
  PUCHAR name;
  PUCHAR data;
  UINT length;
- unsigned short typeid;
+ unsigned short typeid1;
  unsigned short id;
  unsigned short languageid; 
 } RESOURCE, *PRESOURCE;
@@ -466,7 +463,7 @@ typedef struct __coffsym {
     UINT value;
     short section;
     unsigned short type;
-    unsigned char class;
+    unsigned char clazz;
     long extnum;
     UINT numAuxRecs;
     PUCHAR auxRecs;

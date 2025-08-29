@@ -251,7 +251,7 @@ void processArgs(int argc, char** argv)
 								i++;
 								if (!outname)
 								{
-									outname = checkMalloc(strlen(argv[i]) + 1 + 4); /* space for added .EXT if none given */
+									outname = (PCHAR)checkMalloc(strlen(argv[i]) + 1 + 4); /* space for added .EXT if none given */
 									strcpy(outname, argv[i]);
 								}
 								else
@@ -588,7 +588,7 @@ void processArgs(int argc, char** argv)
 						if (i < (argc - 1))
 						{
 							i++;
-							stubName = argv[i];
+							stubName = (PUCHAR)argv[i];
 						}
 						else
 						{
@@ -674,8 +674,8 @@ void processArgs(int argc, char** argv)
 		}
 		else
 		{
-			filename = checkRealloc(filename, (filecount + 1) * sizeof(PCHAR));
-			filename[filecount] = checkMalloc(strlen(argv[i]) + 1);
+			filename = (PPCHAR)checkRealloc(filename, (filecount + 1) * sizeof(PCHAR));
+			filename[filecount] = (CHAR *)checkMalloc(strlen(argv[i]) + 1);
 			memcpy(filename[filecount], argv[i], strlen(argv[i]) + 1);
 			for (j = strlen(filename[filecount]);
 				j && (filename[filecount][j] != '.') &&
@@ -685,7 +685,7 @@ void processArgs(int argc, char** argv)
 			{
 				j = strlen(filename[filecount]);
 				/* add default extension if none specified */
-				filename[filecount] = checkRealloc(filename[filecount], strlen(argv[i]) + 5);
+				filename[filecount] = (CHAR *)checkRealloc(filename[filecount], strlen(argv[i]) + 5);
 				strcpy(filename[filecount] + j, DEFAULT_EXTENSION);
 			}
 			filecount++;
@@ -1239,7 +1239,7 @@ void sortSegments()
 
 	outcount = 0;
 	base = 0;
-	outlist = checkMalloc(sizeof(PSEG) * segcount);
+	outlist = (PPSEG)checkMalloc(sizeof(PSEG) * segcount);
 	for (i = 0; i < grpcount; i++)
 	{
 		if (grplist[i])
@@ -1662,7 +1662,7 @@ int main(int argc, char* argv[])
 
 	if (!outname)
 	{
-		outname = checkMalloc(strlen(filename[0]) + 1 + 4);
+		outname = (PCHAR)checkMalloc(strlen(filename[0]) + 1 + 4);
 		strcpy(outname, filename[0]);
 		i = strlen(outname);
 		while ((i >= 0) && (outname[i] != '.') && (outname[i] != PATH_CHAR) && (outname[i] != ':'))
@@ -1706,7 +1706,7 @@ int main(int argc, char* argv[])
 	{
 		if (!mapname)
 		{
-			mapname = checkMalloc(strlen(outname) + 1 + 4);
+			mapname = (PCHAR)checkMalloc(strlen(outname) + 1 + 4);
 			strcpy(mapname, outname);
 			i = strlen(mapname);
 			while ((i >= 0) && (mapname[i] != '.') && (mapname[i] != PATH_CHAR) && (mapname[i] != ':'))
@@ -1755,7 +1755,7 @@ int main(int argc, char* argv[])
 			printf("Warning, overriding entry point from Command Line\n");
 		}
 		/* define an external reference for entry point */
-		externs = checkRealloc(externs, (extcount + 1) * sizeof(EXTREC));
+		externs = (PEXTREC)checkRealloc(externs, (extcount + 1) * sizeof(EXTREC));
 		externs[extcount].name = entryPoint;
 		externs[extcount].typenum = -1;
 		externs[extcount].pubdef = NULL;

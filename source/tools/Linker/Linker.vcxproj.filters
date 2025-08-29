@@ -18,30 +18,30 @@
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ALINK.H">
+    <ClInclude Include="ALink.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ALINK.C">
+    <ClCompile Include="ALink.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="COFF.C">
+    <ClCompile Include="Coff.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="COFFLIB.C">
+    <ClCompile Include="CoffLib.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="COMBINE.C">
+    <ClCompile Include="Combine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="OBJLOAD.C">
+    <ClCompile Include="ObjLoad.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="OUTPUT.C">
+    <ClCompile Include="Output.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="UTIL.C">
+    <ClCompile Include="Util.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

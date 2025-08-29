@@ -495,7 +495,7 @@ void OutputEXEfile(PCHAR outname)
 
 	errcount = 0;
 	gotstack = 0;
-	headbuf = checkMalloc(0x40 + 4 * fixcount);
+	headbuf = (PUCHAR)checkMalloc(0x40 + 4 * fixcount);
 	relcount = 0;
 
 	for (i = 0; i < 0x40; i++)
@@ -1049,7 +1049,7 @@ void BuildPEImports(long impsectNum, PUCHAR objectTable)
 		impsect->data[j + 18] = ((thunk2Pos - imageBase) >> 16) & 0xff;
 		impsect->data[j + 19] = ((thunk2Pos - imageBase) >> 24) & 0xff;
 		/* add name to table */
-		strcpy(impsect->data + namePos - impsect->base, dllNames[i]);
+		strcpy((char *)(impsect->data + namePos - impsect->base), dllNames[i]);
 		namePos += strlen(dllNames[i]) + 1;
 		if (namePos & 1)
 		{
@@ -1078,7 +1078,7 @@ void BuildPEImports(long impsectNum, PUCHAR objectTable)
 				impsect->data[impNamePos - impsect->base + 1] = 0;
 				impNamePos += 2;
 				/* store name */
-				strcpy(impsect->data + impNamePos - impsect->base,
+				strcpy((char *)(impsect->data + impNamePos - impsect->base),
 					impdefs[reqimps[k]].imp_name);
 				impNamePos += strlen(impdefs[reqimps[k]].imp_name) + 1;
 				if (impNamePos & 1)
@@ -1525,7 +1525,7 @@ void BuildPEExports(long SectNum, PUCHAR objectTable, PUCHAR name)
 
 	if (name)
 	{
-		namelen = strlen(name);
+		namelen = strlen((char *)name);
 		/* search backwards for path separator */
 		for (i = namelen - 1; (i >= 0) && (name[i] != PATH_CHAR); i--);
 		if (i >= 0) /* if found path separator */
@@ -1877,17 +1877,17 @@ void BuildPEResources(long sectNum, PUCHAR objectTable)
 		curres = resource[i];
 		for (j = i - 1; j >= 0; j--)
 		{
-			if (resource[j].typename)
+			if (resource[j].typename1)
 			{
-				if (!curres.typename) break;
-				if (wstricmp(curres.typename, resource[j].typename) > 0) break;
-				if (wstricmp(curres.typename, resource[j].typename) == 0)
+				if (!curres.typename1) break;
+				if (wstricmp((char *)curres.typename1, (char*)resource[j].typename1) > 0) break;
+				if (wstricmp((char*)curres.typename1, (char*)resource[j].typename1) == 0)
 				{
 					if (resource[j].name)
 					{
 						if (!curres.name) break;
-						if (wstricmp(curres.name, resource[j].name) > 0) break;
-						if (wstricmp(curres.name, resource[j].name) == 0)
+						if (wstricmp((char*)curres.name, (char*)resource[j].name) > 0) break;
+						if (wstricmp((char*)curres.name, (char*)resource[j].name) == 0)
 						{
 							if (resource[j].languageid > curres.languageid)
 								break;
@@ -1919,16 +1919,16 @@ void BuildPEResources(long sectNum, PUCHAR objectTable)
 			}
 			else
 			{
-				if (!curres.typename)
+				if (!curres.typename1)
 				{
-					if (curres.typeid > resource[j].typeid) break;
-					if (curres.typeid == resource[j].typeid)
+					if (curres.typeid1 > resource[j].typeid1) break;
+					if (curres.typeid1 == resource[j].typeid1)
 					{
 						if (resource[j].name)
 						{
 							if (!curres.name) break;
-							if (wstricmp(curres.name, resource[j].name) > 0) break;
-							if (wstricmp(curres.name, resource[j].name) == 0)
+							if (wstricmp((char *)curres.name, (char*)resource[j].name) > 0) break;
+							if (wstricmp((char*)curres.name, (char*)resource[j].name) == 0)
 							{
 								if (resource[j].languageid > curres.languageid)
 									break;
@@ -1969,13 +1969,13 @@ void BuildPEResources(long sectNum, PUCHAR objectTable)
 	dataSize = 0;
 	for (i = 0; i < rescount; i++)
 	{
-		if (resource[i].typename)
+		if (resource[i].typename1)
 		{
-			nameSize += 2 + 2 * wstrlen(resource[i].typename);
+			nameSize += 2 + 2 * wstrlen((char*)resource[i].typename1);
 		}
 		if (resource[i].name)
 		{
-			nameSize += 2 + 2 * wstrlen(resource[i].name);
+			nameSize += 2 + 2 * wstrlen((char*)resource[i].name);
 		}
 		dataSize += resource[i].length + 3;
 		dataSize &= 0xfffffffc;
@@ -1986,12 +1986,12 @@ void BuildPEResources(long sectNum, PUCHAR objectTable)
 	numPairs = rescount;
 	for (i = 0; i < rescount; i++)
 	{
-		if (!resource[i].typename) break;
-		if ((i > 0) && !wstricmp(resource[i].typename, resource[i - 1].typename))
+		if (!resource[i].typename1) break;
+		if ((i > 0) && !wstricmp((char*)resource[i].typename1, (char*)resource[i - 1].typename1))
 		{
 			if (resource[i].name)
 			{
-				if (wstricmp(resource[i].name, resource[i - 1].name) == 0)
+				if (wstricmp((char*)resource[i].name, (char*)resource[i - 1].name) == 0)
 					numPairs--;
 			}
 			else
@@ -2006,11 +2006,11 @@ void BuildPEResources(long sectNum, PUCHAR objectTable)
 	numtypes = numnamedtypes;
 	for (; i < rescount; i++)
 	{
-		if ((i > 0) && !resource[i - 1].typename && (resource[i].typeid == resource[i - 1].typeid))
+		if ((i > 0) && !resource[i - 1].typename1 && (resource[i].typeid1 == resource[i - 1].typeid1))
 		{
 			if (resource[i].name)
 			{
-				if (wstricmp(resource[i].name, resource[i - 1].name) == 0)
+				if (wstricmp((char*)resource[i].name, (char*)resource[i - 1].name) == 0)
 					numPairs--;
 			}
 			else
@@ -2062,17 +2062,17 @@ void BuildPEResources(long sectNum, PUCHAR objectTable)
 	curTypeId = -1;
 	for (i = 0; i < rescount; i++)
 	{
-		if (!(resource[i].typename && curTypeName &&
-			!wstricmp(resource[i].typename, curTypeName))
-			&& !(!resource[i].typename && !curTypeName && curTypeId == resource[i].typeid))
+		if (!(resource[i].typename1 && curTypeName &&
+			!wstricmp((char*)resource[i].typename1, curTypeName))
+			&& !(!resource[i].typename1 && !curTypeName && curTypeId == resource[i].typeid1))
 		{
-			if (resource[i].typename)
+			if (resource[i].typename1)
 			{
 				ressect->data[curTypePos] = (namePos) & 0xff;
 				ressect->data[curTypePos + 1] = ((namePos) >> 8) & 0xff;
 				ressect->data[curTypePos + 2] = ((namePos) >> 16) & 0xff;
 				ressect->data[curTypePos + 3] = (((namePos) >> 24) & 0xff) | 0x80;
-				curTypeName = resource[i].typename;
+				curTypeName = (char*)resource[i].typename1;
 				k = wstrlen(curTypeName);
 				ressect->data[namePos] = k & 0xff;
 				ressect->data[namePos + 1] = (k >> 8) & 0xff;
@@ -2084,7 +2084,7 @@ void BuildPEResources(long sectNum, PUCHAR objectTable)
 			else
 			{
 				curTypeName = NULL;
-				curTypeId = resource[i].typeid;
+				curTypeId = resource[i].typeid1;
 				ressect->data[curTypePos] = curTypeId & 0xff;
 				ressect->data[curTypePos + 1] = (curTypeId >> 8) & 0xff;
 				ressect->data[curTypePos + 2] = (curTypeId >> 16) & 0xff;
@@ -2098,18 +2098,18 @@ void BuildPEResources(long sectNum, PUCHAR objectTable)
 			numnames = numids = 0;
 			for (j = i; j < rescount; j++)
 			{
-				if (resource[i].typename)
+				if (resource[i].typename1)
 				{
-					if (!resource[j].typename) break;
-					if (wstricmp(resource[i].typename, resource[j].typename) != 0) break;
+					if (!resource[j].typename1) break;
+					if (wstricmp((char*)resource[i].typename1, (char*)resource[j].typename1) != 0) break;
 				}
 				else
 				{
-					if (resource[j].typeid != resource[i].typeid) break;
+					if (resource[j].typeid1 != resource[i].typeid1) break;
 				}
 				if (resource[j].name)
 				{
-					if (((j > i) && (wstricmp(resource[j].name, resource[j - 1].name) != 0))
+					if (((j > i) && (wstricmp((char*)resource[j].name, (char*)resource[j - 1].name) != 0))
 						|| (j == i))
 						numnames++;
 				}
@@ -2139,7 +2139,7 @@ void BuildPEResources(long sectNum, PUCHAR objectTable)
 			curTypePos += PE_RESENTRY_SIZE;
 		}
 		if (!(resource[i].name && curName &&
-			!wstricmp(resource[i].name, curName))
+			!wstricmp((char*)resource[i].name, curName))
 			&& !(!resource[i].name && !curName && curId == resource[i].id))
 		{
 			if (resource[i].name)
@@ -2148,7 +2148,7 @@ void BuildPEResources(long sectNum, PUCHAR objectTable)
 				ressect->data[curNamePos + 1] = ((namePos) >> 8) & 0xff;
 				ressect->data[curNamePos + 2] = ((namePos) >> 16) & 0xff;
 				ressect->data[curNamePos + 3] = (((namePos) >> 24) & 0xff) | 0x80;
-				curName = resource[i].name;
+				curName = (char*)resource[i].name;
 				k = wstrlen(curName);
 				ressect->data[namePos] = k & 0xff;
 				ressect->data[namePos + 1] = (k >> 8) & 0xff;
@@ -2174,19 +2174,19 @@ void BuildPEResources(long sectNum, PUCHAR objectTable)
 			numids = 0;
 			for (j = i; j < rescount; j++)
 			{
-				if (resource[i].typename)
+				if (resource[i].typename1)
 				{
-					if (!resource[j].typename) break;
-					if (wstricmp(resource[i].typename, resource[j].typename) != 0) break;
+					if (!resource[j].typename1) break;
+					if (wstricmp((char*)resource[i].typename1, (char*)resource[j].typename1) != 0) break;
 				}
 				else
 				{
-					if (resource[j].typeid != resource[i].typeid) break;
+					if (resource[j].typeid1 != resource[i].typeid1) break;
 				}
 				if (resource[i].name)
 				{
 					if (!resource[j].name) break;
-					if (wstricmp(resource[j].name, resource[i].name) != 0) break;
+					if (wstricmp((char*)resource[j].name, (char*)resource[i].name) != 0) break;
 				}
 				else
 				{
@@ -2275,7 +2275,7 @@ void getStub(PUCHAR* pstubData, UINT* pstubSize)
 
 	if (stubName)
 	{
-		f = fopen(stubName, "rb");
+		f = fopen((char*)stubName, "rb");
 		if (!f)
 		{
 			printf("Unable to open stub file %s\n", stubName);
@@ -2381,7 +2381,7 @@ void OutputWin32file(PCHAR outname)
 	/* allocate section entries for imports, exports and relocs if required */
 	if (impsreq)
 	{
-		importSectNum = createOutputSection("imports",
+		importSectNum = createOutputSection((char*)"imports",
 			WINF_INITDATA | WINF_SHARED | WINF_READABLE);
 	}
 	else
@@ -2391,7 +2391,7 @@ void OutputWin32file(PCHAR outname)
 
 	if (expcount)
 	{
-		exportSectNum = createOutputSection("exports",
+		exportSectNum = createOutputSection((char*)"exports",
 			WINF_INITDATA | WINF_SHARED | WINF_READABLE);
 	}
 	else
@@ -2401,12 +2401,12 @@ void OutputWin32file(PCHAR outname)
 
 	/* Windows NT requires a reloc section to relocate image files, even */
 	/* if it contains no actual fixups */
-	relocSectNum = createOutputSection("relocs",
+	relocSectNum = createOutputSection((char*)"relocs",
 		WINF_INITDATA | WINF_SHARED | WINF_DISCARDABLE | WINF_READABLE);
 
 	if (rescount)
 	{
-		resourceSectNum = createOutputSection("resource",
+		resourceSectNum = createOutputSection((char*)"resource",
 			WINF_INITDATA | WINF_SHARED | WINF_READABLE);
 	}
 	else
@@ -2428,7 +2428,7 @@ void OutputWin32file(PCHAR outname)
 	headerSize &= (0xffffffff - (fileAlign - 1));
 
 
-	headbuf = checkMalloc(headerSize);
+	headbuf = (PUCHAR)checkMalloc(headerSize);
 
 	for (i = 0; i < headerSize; i++)
 	{
@@ -2582,7 +2582,7 @@ void OutputWin32file(PCHAR outname)
 	/* build import, export and relocation sections */
 
 	BuildPEImports(importSectNum, headbuf + headerStart + PE_HEADBUF_SIZE);
-	BuildPEExports(exportSectNum, headbuf + headerStart + PE_HEADBUF_SIZE, outname);
+	BuildPEExports(exportSectNum, headbuf + headerStart + PE_HEADBUF_SIZE, (PUCHAR)outname);
 	BuildPERelocs(relocSectNum, headbuf + headerStart + PE_HEADBUF_SIZE);
 	BuildPEResources(resourceSectNum, headbuf + headerStart + PE_HEADBUF_SIZE);
 

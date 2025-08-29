@@ -126,7 +126,7 @@ void loadcoff(FILE* objfile)
 			if (buf[0] | buf[1] | buf[2] | buf[3])
 			{
 				sym[i].name = (PUCHAR)checkMalloc(9);
-				strncpy(sym[i].name, buf, 8);
+				strncpy((char*)sym[i].name, (char*)buf, 8);
 				sym[i].name[8] = 0;
 			}
 			else
@@ -143,22 +143,22 @@ void loadcoff(FILE* objfile)
 					printf("Invalid COFF object file bad symbol location\n");
 					exit(1);
 				}
-				sym[i].name = checkStrdup(stringList + stringOfs);
+				sym[i].name = (PUCHAR)checkStrdup((char *)(stringList + stringOfs));
 			}
 			if (!case_sensitive)
 			{
-				_strupr(sym[i].name);
+				_strupr((char *)sym[i].name);
 			}
 
 			sym[i].value = buf[8] + (buf[9] << 8) + (buf[10] << 16) + (buf[11] << 24);
 			sym[i].section = buf[12] + (buf[13] << 8);
 			sym[i].type = buf[14] + (buf[15] << 8);
-			sym[i].class = buf[16];
+			sym[i].clazz = buf[16];
 			sym[i].extnum = -1;
 			sym[i].numAuxRecs = buf[17];
 			sym[i].isComDat = FALSE;
 
-			switch (sym[i].class)
+			switch (sym[i].clazz)
 			{
 				case COFF_SYM_SECTION: /* section symbol */
 					if (sym[i].section < -1)
@@ -168,7 +168,7 @@ void loadcoff(FILE* objfile)
 					/* section symbols declare an extern always, so can use in relocs */
 					/* they may also include a PUBDEF */
 					externs = (PEXTREC)checkRealloc(externs, (extcount + 1) * sizeof(EXTREC));
-					externs[extcount].name = sym[i].name;
+					externs[extcount].name = (PCHAR)sym[i].name;
 					externs[extcount].pubdef = NULL;
 					externs[extcount].modnum = 0;
 					externs[extcount].flags = EXT_NOMATCH;
@@ -191,7 +191,7 @@ void loadcoff(FILE* objfile)
 						{
 							pubdef->segnum = minseg + sym[i].section - 1;
 						}
-						if (listnode = binarySearch(publics, pubcount, sym[i].name))
+						if (listnode = binarySearch(publics, pubcount, (char *)sym[i].name))
 						{
 							for (j = 0; j < listnode->count; ++j)
 							{
@@ -211,7 +211,7 @@ void loadcoff(FILE* objfile)
 						}
 						if (pubdef)
 						{
-							sortedInsert(&publics, &pubcount, sym[i].name, pubdef);
+							sortedInsert(&publics, &pubcount, (char *)sym[i].name, pubdef);
 						}
 					}
 				case COFF_SYM_STATIC: /* allowed, but ignored for now as we only want to process if required */
@@ -221,7 +221,7 @@ void loadcoff(FILE* objfile)
 				case COFF_SYM_EXTERNAL:
 					break;
 				default:
-					printf("unsupported symbol class %02X for symbol %s\n", sym[i].class, sym[i].name);
+					printf("unsupported symbol class %02X for symbol %s\n", sym[i].clazz, sym[i].name);
 					exit(1);
 			}
 			if (sym[i].numAuxRecs)
@@ -247,7 +247,7 @@ void loadcoff(FILE* objfile)
 				sym[i + j + 1].value = 0;
 				sym[i + j + 1].section = -1;
 				sym[i + j + 1].type = 0;
-				sym[i + j + 1].class = 0;
+				sym[i + j + 1].clazz = 0;
 				sym[i + j + 1].extnum = -1;
 			}
 			i += j;
@@ -278,7 +278,7 @@ void loadcoff(FILE* objfile)
 
 		if (buf[0] == '/')
 		{
-			sectname = strtoul(buf + 1, (char**)&bigbuf, 10);
+			sectname = strtoul((char *)(buf + 1), (char**)&bigbuf, 10);
 			if (*bigbuf)
 			{
 				printf("Invalid COFF object file, invalid number %s\n", buf + 1);
@@ -296,14 +296,14 @@ void loadcoff(FILE* objfile)
 				exit(1);
 			}
 			namelist = (PPCHAR)checkRealloc(namelist, (namecount + 1) * sizeof(PCHAR));
-			namelist[namecount] = checkStrdup(stringList + sectname);
+			namelist[namecount] = checkStrdup((char *)(stringList + sectname));
 			sectname = namecount;
 			namecount++;
 		}
 		else
 		{
 			namelist = (PPCHAR)checkRealloc(namelist, (namecount + 1) * sizeof(PCHAR));
-			namelist[namecount] = checkStrdup(buf);
+			namelist[namecount] = (PCHAR)checkStrdup((char *)buf);
 
 			sectname = namecount;
 			namecount++;
@@ -433,7 +433,7 @@ void loadcoff(FILE* objfile)
 					}
 
 					printf("COMDAT Symbol %s\n", sym[j].name);
-					comdatsym = sym[j].name;
+					comdatsym = (PCHAR)sym[j].name;
 					sym[j].isComDat = TRUE;
 					break;
 				}
@@ -450,7 +450,7 @@ void loadcoff(FILE* objfile)
 				{
 					printf("\n");
 				}
-				comdatsym = ""; /* dummy name */
+				comdatsym = (char *)""; /* dummy name */
 			}
 			comdat->segnum = segcount;
 			comdat->combineType = combineType;
@@ -520,12 +520,12 @@ void loadcoff(FILE* objfile)
 			relocs[fixcount]->ttype = REL_EXTONLY; /* assume external reloc */
 			if (sym[k].extnum < 0)
 			{
-				switch (sym[k].class)
+				switch (sym[k].clazz)
 				{
 					case COFF_SYM_EXTERNAL:
 						/* global symbols declare an extern when used in relocs */
 						externs = (PEXTREC)checkRealloc(externs, (extcount + 1) * sizeof(EXTREC));
-						externs[extcount].name = sym[k].name;
+						externs[extcount].name = (PCHAR)sym[k].name;
 						externs[extcount].pubdef = NULL;
 						externs[extcount].modnum = 0;
 						externs[extcount].flags = EXT_NOMATCH;
@@ -547,7 +547,7 @@ void loadcoff(FILE* objfile)
 							if (sym[k].value)
 							{
 								externs = (PEXTREC)checkRealloc(externs, (extcount + 1) * sizeof(EXTREC));
-								externs[extcount].name = sym[k].name;
+								externs[extcount].name = (PCHAR)sym[k].name;
 								externs[extcount].pubdef = NULL;
 								externs[extcount].modnum = nummods;
 								externs[extcount].flags = EXT_NOMATCH;
@@ -558,7 +558,7 @@ void loadcoff(FILE* objfile)
 								comdefs[comcount] = (PCOMREC)checkMalloc(sizeof(COMREC));
 								comdefs[comcount]->length = sym[k].value;
 								comdefs[comcount]->isFar = FALSE;
-								comdefs[comcount]->name = sym[k].name;
+								comdefs[comcount]->name = (PCHAR)sym[k].name;
 								comdefs[comcount]->modnum = nummods;
 								comcount++;
 							}
@@ -586,7 +586,7 @@ void loadcoff(FILE* objfile)
 						}
 						break;
 					default:
-						printf("undefined symbol class 0x%02X for symbol %s\n", sym[k].class, sym[k].name);
+						printf("undefined symbol class 0x%02X for symbol %s\n", sym[k].clazz, sym[k].name);
 						exit(1);
 				}
 			}
@@ -629,7 +629,7 @@ void loadcoff(FILE* objfile)
 	/* build PUBDEFs or COMDEFs for external symbols defined here that aren't COMDAT symbols. */
 	for (i = 0; i < numSymbols; i++)
 	{
-		if (sym[i].class != COFF_SYM_EXTERNAL) continue;
+		if (sym[i].clazz != COFF_SYM_EXTERNAL) continue;
 		if (sym[i].isComDat) continue;
 		if (sym[i].section < -1)
 		{
@@ -643,7 +643,7 @@ void loadcoff(FILE* objfile)
 				comdefs[comcount] = (PCOMREC)checkMalloc(sizeof(COMREC));
 				comdefs[comcount]->length = sym[i].value;
 				comdefs[comcount]->isFar = FALSE;
-				comdefs[comcount]->name = sym[i].name;
+				comdefs[comcount]->name = (PCHAR)sym[i].name;
 				comdefs[comcount]->modnum = 0;
 				comcount++;
 			}
@@ -665,7 +665,7 @@ void loadcoff(FILE* objfile)
 			{
 				pubdef->segnum = minseg + sym[i].section - 1;
 			}
-			if (listnode = binarySearch(publics, pubcount, sym[i].name))
+			if (listnode = binarySearch(publics, pubcount, (char *)sym[i].name))
 			{
 				for (j = 0; j < listnode->count; ++j)
 				{
@@ -685,7 +685,7 @@ void loadcoff(FILE* objfile)
 			}
 			if (pubdef)
 			{
-				sortedInsert(&publics, &pubcount, sym[i].name, pubdef);
+				sortedInsert(&publics, &pubcount, (char *)sym[i].name, pubdef);
 			}
 		}
 	}
