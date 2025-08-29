@@ -1,2 +1,2 @@
 #define ILOG2_C
-#include "ilog2.h"
+//#include "ilog2.h"

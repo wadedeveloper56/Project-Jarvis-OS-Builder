@@ -75,25 +75,25 @@
     <OutDir>..\..\..\bin\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\bin\intermediate\Compiler\$(Configuration)\$(Platform)\</IntDir>
     <LibraryPath>$(LibraryPath)</LibraryPath>
-    <IncludePath>C:\flex-bison;$(IncludePath)</IncludePath>
+    <IncludePath>C:\projects\ProjectJarvis\source\tools\Arguments;C:\projects\ProjectJarvis\source\tools\Preproc;C:\flex-bison;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>..\..\..\bin\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\bin\intermediate\Compiler\$(Configuration)\$(Platform)\</IntDir>
     <LibraryPath>$(LibraryPath)</LibraryPath>
-    <IncludePath>C:\flex-bison;$(IncludePath)</IncludePath>
+    <IncludePath>C:\projects\ProjectJarvis\source\tools\Arguments;C:\projects\ProjectJarvis\source\tools\Preproc;C:\flex-bison;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>..\..\..\bin\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\bin\intermediate\Compiler\$(Configuration)\$(Platform)\</IntDir>
     <LibraryPath>$(LibraryPath)</LibraryPath>
-    <IncludePath>C:\flex-bison;$(IncludePath)</IncludePath>
+    <IncludePath>C:\projects\ProjectJarvis\source\tools\Arguments;C:\projects\ProjectJarvis\source\tools\Preproc;C:\flex-bison;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>..\..\..\bin\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\bin\intermediate\Compiler\$(Configuration)\$(Platform)\</IntDir>
     <LibraryPath>$(LibraryPath)</LibraryPath>
-    <IncludePath>C:\flex-bison;$(IncludePath)</IncludePath>
+    <IncludePath>C:\projects\ProjectJarvis\source\tools\Arguments;C:\projects\ProjectJarvis\source\tools\Preproc;C:\flex-bison;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -109,6 +109,7 @@
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <DisableSpecificWarnings>4065;4005</DisableSpecificWarnings>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -133,6 +134,7 @@
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <DisableSpecificWarnings>4065;4005</DisableSpecificWarnings>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -155,6 +157,7 @@
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <DisableSpecificWarnings>4065;4005</DisableSpecificWarnings>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -179,6 +182,7 @@
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <DisableSpecificWarnings>4065;4005</DisableSpecificWarnings>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
