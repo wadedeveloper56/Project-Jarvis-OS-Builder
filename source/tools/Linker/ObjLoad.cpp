@@ -467,7 +467,7 @@ long loadmod(FILE* objfile)
 									{
 										ReportError(ERR_INVALID_COMENT);
 									}
-									impdefs = (PIMPREC)checkRealloc(impdefs, (impcount + 1) * sizeof(IMPREC));
+									impdefs = (ImpRecPtr)checkRealloc(impdefs, (impcount + 1) * sizeof(ImpRec));
 									impdefs[impcount].flags = buf[3];
 									impdefs[impcount].int_name = (char *)checkMalloc(buf[j] + 1);
 									for (i = 0; i < buf[j]; i++)

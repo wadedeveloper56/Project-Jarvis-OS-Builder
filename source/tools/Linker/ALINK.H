@@ -386,7 +386,7 @@ typedef struct _ExtRec {
 	unsigned int  modnum;
 } ExtRec, * ExtRecPtr, ** ExtRecPtrPtr;
 
-typedef struct __imprec {
+typedef struct _ImpRec {
 	char* int_name;
 	char* mod_name;
 	char* imp_name;
@@ -394,7 +394,7 @@ typedef struct __imprec {
 	char flags;
 	long segnum;
 	unsigned int  ofs;
-} IMPREC, * PIMPREC, ** PPIMPREC;
+} ImpRec, * ImpRecPtr, ** ImpRecPtrPtr;
 
 typedef struct __exprec {
 	char* int_name;
@@ -558,7 +558,7 @@ extern SortEntryPtr publics;
 extern ExtRecPtr externs;
 extern PPCOMREC comdefs;
 extern PPRELOC relocs;
-extern PIMPREC impdefs;
+extern ImpRecPtr impdefs;
 extern PEXPREC expdefs;
 extern PLIBFILE libfiles;
 extern PRESOURCE resource;
