@@ -39,7 +39,7 @@ PPCHAR namelist = NULL;
 PPSEG seglist = NULL;
 PPSEG outlist = NULL;
 PPGRP grplist = NULL;
-PSORTENTRY publics = NULL;
+SortEntryPtr publics = NULL;
 PEXTREC externs = NULL;
 PPCOMREC comdefs = NULL;
 PPRELOC relocs = NULL;
@@ -47,7 +47,7 @@ PIMPREC impdefs = NULL;
 PEXPREC expdefs = NULL;
 PLIBFILE libfiles = NULL;
 PRESOURCE resource = NULL;
-PSORTENTRY comdats = NULL;
+SortEntryPtr comdats = NULL;
 PPCHAR modname;
 PPCHAR filename;
 UINT namecount = 0, namemin = 0,
@@ -819,7 +819,7 @@ void matchExterns()
 {
 	long i, j, k, old_nummods;
 	//int n;
-	PSORTENTRY listnode;
+	SortEntryPtr listnode;
 	PCHAR name;
 	PPUBLIC pubdef;
 
@@ -982,7 +982,7 @@ void matchComDefs()
 	int i, j;// , k;
 	int comseg;
 	int comfarseg;
-	PSORTENTRY listnode;
+	SortEntryPtr listnode;
 	PPUBLIC pubdef;
 
 	if (!comcount) return;

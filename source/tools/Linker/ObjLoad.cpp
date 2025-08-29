@@ -365,7 +365,7 @@ long loadmod(FILE* objfile)
 	PRELOC r;
 	PPUBLIC pubdef;
 	PCHAR name, aliasName;
-	PSORTENTRY listnode;
+	SortEntryPtr listnode;
 
 	modpos = 0;
 	done = 0;
@@ -1300,7 +1300,7 @@ void loadlib(FILE* libfile, PCHAR libname)
 	unsigned short modpage;
 	PLIBFILE p;
 	UINT numsyms;
-	PSORTENTRY symlist;
+	SortEntryPtr symlist;
 
 	libfiles = (PLIBFILE)checkRealloc(libfiles, (libcount + 1) * sizeof(LIBFILE));
 	p = &libfiles[libcount];
@@ -1327,7 +1327,7 @@ void loadlib(FILE* libfile, PCHAR libname)
 
 	fseek(libfile, p->dicstart, SEEK_SET);
 
-	symlist = (PSORTENTRY)checkMalloc(p->numdicpages * 37 * sizeof(SORTENTRY));
+	symlist = (SortEntryPtr)checkMalloc(p->numdicpages * 37 * sizeof(SortEntry));
 
 	numsyms = 0;
 	for (i = 0; i < p->numdicpages; i++)
@@ -1368,7 +1368,7 @@ void loadlib(FILE* libfile, PCHAR libname)
 		}
 	}
 
-	qsort(symlist, numsyms, sizeof(SORTENTRY), sortCompare);
+	qsort(symlist, numsyms, sizeof(SortEntry), sortCompare);
 	p->symbols = symlist;
 	p->numsyms = numsyms;
 	p->modsloaded = 0;

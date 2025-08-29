@@ -160,7 +160,7 @@ int wstrlen(const char *s)
 
 int sortCompare(const void *x1,const void *x2)
 {
-    return strcmp(((PSORTENTRY) x1)->id,((PSORTENTRY)x2)->id);
+    return strcmp(((SortEntryPtr) x1)->id,((SortEntryPtr)x2)->id);
 }
 
 void *checkMalloc(size_t x)
@@ -206,7 +206,7 @@ char *checkStrdup(const char *s)
 }
 
 
-PSORTENTRY binarySearch(PSORTENTRY list,UINT count,char *key)
+SortEntryPtr binarySearch(SortEntryPtr list,UINT count,char *key)
 {
     UINT i;
     int j;
@@ -234,9 +234,9 @@ PSORTENTRY binarySearch(PSORTENTRY list,UINT count,char *key)
     return NULL; /* return NULL if no match (count=0) */
 }
 
-void sortedInsert(PSORTENTRY *plist,UINT *pcount,char *key,void *object)
+void sortedInsert(SortEntryPtr *plist,UINT *pcount,char *key,void *object)
 {
-    PSORTENTRY list,node;
+    SortEntryPtr list,node;
     UINT count,index,i;
     int j;
    
@@ -281,12 +281,12 @@ void sortedInsert(PSORTENTRY *plist,UINT *pcount,char *key,void *object)
     /* grow list */
     count=*pcount+1;
     
-    list=(PSORTENTRY)checkRealloc(list,sizeof(SORTENTRY)*count);
+    list=(SortEntryPtr)checkRealloc(list,sizeof(SortEntry)*count);
 
     j=count-index-1; /* get number of entries after insertion index */
     if(j) /* move them up 1 entry if some */
     {
-	memmove(list+index+1,list+index,j*sizeof(SORTENTRY));
+	memmove(list+index+1,list+index,j*sizeof(SortEntry));
     }
 
     /* put new node in position */

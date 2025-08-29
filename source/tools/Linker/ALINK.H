@@ -439,7 +439,7 @@ typedef struct __libfile {
     int modsloaded;
     UINT *modlist;
     PUCHAR longnames;
-    PSORTENTRY symbols;
+    SortEntryPtr symbols;
     UINT numsyms;
 } LIBFILE, *PLIBFILE, **PPLIBFILE;
 
@@ -512,8 +512,8 @@ int getBitCount(UINT a);
 void *checkMalloc(size_t x);
 void *checkRealloc(void *p,size_t x);
 char *checkStrdup(const char *s);
-PSORTENTRY binarySearch(PSORTENTRY list,UINT count,char *key);
-void sortedInsert(PSORTENTRY *plist,UINT *pcount,char *key,void *object);
+SortEntryPtr binarySearch(SortEntryPtr list,UINT count,char *key);
+void sortedInsert(SortEntryPtr *plist,UINT *pcount,char *key,void *object);
 #define strdup _strdup
 
 extern char case_sensitive;
@@ -553,7 +553,7 @@ extern PPCHAR namelist;
 extern PPSEG seglist;
 extern PPSEG outlist;
 extern PPGRP grplist;
-extern PSORTENTRY publics;
+extern SortEntryPtr publics;
 extern PEXTREC externs;
 extern PPCOMREC comdefs;
 extern PPRELOC relocs;
@@ -563,7 +563,7 @@ extern PLIBFILE libfiles;
 extern PRESOURCE resource;
 extern PPCHAR modname;
 extern PPCHAR filename;
-extern PSORTENTRY comdats;
+extern SortEntryPtr comdats;
 extern UINT namecount,namemin,
     pubcount,pubmin,
 	segcount,segmin,outcount,

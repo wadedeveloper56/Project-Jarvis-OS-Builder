@@ -11,7 +11,7 @@ void loadCoffLib(FILE* libfile, PCHAR libname)
 	PLIBFILE p;
 	PCHAR name;
 	PUCHAR modbuf;
-	PSORTENTRY symlist;
+	SortEntryPtr symlist;
 	int x;
 
 	libfiles = (PLIBFILE)checkRealloc(libfiles, (libcount + 1) * sizeof(LIBFILE));
@@ -98,7 +98,7 @@ void loadCoffLib(FILE* libfile, PCHAR libname)
 			printf("Error reading from file\n");
 			exit(1);
 		}
-		symlist = (PSORTENTRY)checkMalloc(sizeof(SORTENTRY) * numsyms);
+		symlist = (SortEntryPtr)checkMalloc(sizeof(SortEntry) * numsyms);
 	}
 
 	for (i = 0; i < numsyms; i++)
@@ -134,7 +134,7 @@ void loadCoffLib(FILE* libfile, PCHAR libname)
 
 	if (numsyms)
 	{
-		qsort(symlist, numsyms, sizeof(SORTENTRY), sortCompare);
+		qsort(symlist, numsyms, sizeof(SortEntry), sortCompare);
 		p->symbols = symlist;
 		p->numsyms = numsyms;
 

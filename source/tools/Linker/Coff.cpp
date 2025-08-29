@@ -27,7 +27,7 @@ void loadcoff(FILE* objfile)
 	PPUBLIC pubdef;
 	PCOMDAT comdat;
 	PCHAR comdatsym;
-	PSORTENTRY listnode;
+	SortEntryPtr listnode;
 
 	nummods++;
 	minseg = segcount;
