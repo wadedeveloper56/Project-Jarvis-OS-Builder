@@ -9,21 +9,21 @@ int output_type = OUTPUT_EXE;
 PCHAR outname = 0;
 
 FILE* afile = 0;
-UINT filepos = 0;
+unsigned int  filepos = 0;
 long reclength = 0;
 unsigned char rectype = 0;
 char li_le = 0;
-UINT prevofs = 0;
+unsigned int  prevofs = 0;
 long prevseg = 0;
 long gotstart = 0;
 RELOC startaddr;
-UINT imageBase = 0;
-UINT fileAlign = 1;
-UINT objectAlign = 1;
-UINT stackSize;
-UINT stackCommitSize;
-UINT heapSize;
-UINT heapCommitSize;
+unsigned int  imageBase = 0;
+unsigned int  fileAlign = 1;
+unsigned int  objectAlign = 1;
+unsigned int  stackSize;
+unsigned int  stackCommitSize;
+unsigned int  heapSize;
+unsigned int  heapCommitSize;
 unsigned char osMajor, osMinor;
 unsigned char subsysMajor, subsysMinor;
 unsigned int subSystem;
@@ -50,7 +50,7 @@ PRESOURCE resource = NULL;
 SortEntryPtr comdats = NULL;
 PPCHAR modname;
 PPCHAR filename;
-UINT namecount = 0, namemin = 0,
+unsigned int  namecount = 0, namemin = 0,
 pubcount = 0, pubmin = 0,
 segcount = 0, segmin = 0, outcount = 0,
 grpcount = 0, grpmin = 0,
@@ -63,7 +63,7 @@ nummods = 0,
 filecount = 0,
 libcount = 0,
 rescount = 0;
-UINT libPathCount = 0;
+unsigned int  libPathCount = 0;
 PCHAR* libPath = NULL;
 char* entryPoint = NULL;
 
@@ -71,8 +71,8 @@ void processArgs(int argc, char** argv)
 {
 	long i, j;
 	int helpRequested = FALSE;
-	UINT setbase, setfalign, setoalign;
-	UINT setstack, setstackcommit, setheap, setheapcommit;
+	unsigned int  setbase, setfalign, setoalign;
+	unsigned int  setstack, setstackcommit, setheap, setheapcommit;
 	int setsubsysmajor, setsubsysminor, setosmajor, setosminor;
 	unsigned char setsubsys;
 	int gotbase = FALSE, gotfalign = FALSE, gotoalign = FALSE, gotsubsys = FALSE;
@@ -1223,7 +1223,7 @@ void matchComDefs()
 void sortSegments()
 {
 	long i, j, k;
-	UINT base, align;
+	unsigned int  base, align;
 	long baseSeg;
 
 	for (i = 0; i < segcount; i++)

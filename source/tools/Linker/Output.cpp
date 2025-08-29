@@ -17,13 +17,13 @@ static unsigned char defaultStub[] = {
 	0x32,0x0D,0x0A,0x24
 };
 
-static UINT defaultStubSize = sizeof(defaultStub);
+static unsigned int  defaultStubSize = sizeof(defaultStub);
 
-void GetFixupTarget(PRELOC r, long* bseg, UINT* tofs, int isFlat)
+void GetFixupTarget(PRELOC r, long* bseg, unsigned int * tofs, int isFlat)
 {
 	long baseseg;
 	long targseg;
-	UINT targofs;
+	unsigned int  targofs;
 
 	r->outputPos = seglist[r->segnum]->base + r->ofs;
 	switch (r->ftype)
@@ -211,10 +211,10 @@ void GetFixupTarget(PRELOC r, long* bseg, UINT* tofs, int isFlat)
 void OutputCOMfile(PCHAR outname)
 {
 	long i, j;
-	UINT started;
-	UINT lastout;
+	unsigned int  started;
+	unsigned int  lastout;
 	long targseg;
-	UINT targofs;
+	unsigned int  targofs;
 	FILE* outfile;
 	unsigned short temps;
 	unsigned long templ;
@@ -477,14 +477,14 @@ void OutputCOMfile(PCHAR outname)
 void OutputEXEfile(PCHAR outname)
 {
 	long i, j;
-	UINT started, lastout;
+	unsigned int  started, lastout;
 	long targseg;
-	UINT targofs;
+	unsigned int  targofs;
 	FILE* outfile;
 	PUCHAR headbuf;
 	long relcount;
 	int gotstack;
-	UINT totlength;
+	unsigned int  totlength;
 	unsigned short temps;
 	unsigned long templ;
 
@@ -873,9 +873,9 @@ void OutputEXEfile(PCHAR outname)
 	fclose(outfile);
 }
 
-long createOutputSection(char* name, UINT winFlags)
+long createOutputSection(char* name, unsigned int  winFlags)
 {
-	UINT j;
+	unsigned int  j;
 
 	outlist = (PPSEG)checkRealloc(outlist, sizeof(PSEG) * (outcount + 1));
 	outlist[outcount] = (PSEG)checkMalloc(sizeof(SEG));
@@ -905,14 +905,14 @@ long createOutputSection(char* name, UINT winFlags)
 void BuildPEImports(long impsectNum, PUCHAR objectTable)
 {
 	long i, j, k;
-	UINT* reqimps = NULL, reqcount = 0;
+	unsigned int * reqimps = NULL, reqcount = 0;
 	char** dllNames = NULL;
 	int* dllNumImps = NULL;
 	int* dllImpsDone = NULL;
 	int* dllImpNameSize = NULL;
-	UINT dllCount = 0, dllNameSize = 0, namePos;
+	unsigned int  dllCount = 0, dllNameSize = 0, namePos;
 	SEG* impsect;
-	UINT thunkPos, thunk2Pos, impNamePos;
+	unsigned int  thunkPos, thunk2Pos, impNamePos;
 
 	if (impsectNum < 0) return;
 	for (i = 0; i < extcount; i++)
@@ -923,7 +923,7 @@ void BuildPEImports(long impsectNum, PUCHAR objectTable)
 			if (reqimps[j] == externs[i].impnum) break;
 		}
 		if (j != reqcount) continue;
-		reqimps = (UINT*)checkRealloc(reqimps, (reqcount + 1) * sizeof(UINT));
+		reqimps = (unsigned int *)checkRealloc(reqimps, (reqcount + 1) * sizeof(unsigned int ));
 		reqimps[reqcount] = externs[i].impnum;
 		reqcount++;
 		for (j = 0; j < dllCount; j++)
@@ -1147,11 +1147,11 @@ void BuildPERelocs(long relocSectNum, PUCHAR objectTable)
 	int i, j;
 	PRELOC r;
 	PSEG relocSect;
-	UINT curStartPos;
-	UINT curBlockPos;
-	UINT k;
+	unsigned int  curStartPos;
+	unsigned int  curBlockPos;
+	unsigned int  k;
 	long targseg;
-	UINT targofs;
+	unsigned int  targofs;
 	unsigned long templ;
 	unsigned short temps;
 
@@ -1506,17 +1506,17 @@ void BuildPERelocs(long relocSectNum, PUCHAR objectTable)
 void BuildPEExports(long SectNum, PUCHAR objectTable, PUCHAR name)
 {
 	long i, j;
-	UINT k;
+	unsigned int  k;
 	PSEG expSect;
-	UINT namelen;
-	UINT numNames = 0;
-	UINT RVAStart;
-	UINT nameRVAStart;
-	UINT ordinalStart;
-	UINT nameSpaceStart;
-	UINT minOrd;
-	UINT maxOrd;
-	UINT numOrds;
+	unsigned int  namelen;
+	unsigned int  numNames = 0;
+	unsigned int  RVAStart;
+	unsigned int  nameRVAStart;
+	unsigned int  ordinalStart;
+	unsigned int  nameSpaceStart;
+	unsigned int  minOrd;
+	unsigned int  maxOrd;
+	unsigned int  numOrds;
 	PPEXPREC nameList;
 	PEXPREC curName;
 
@@ -1636,7 +1636,7 @@ void BuildPEExports(long SectNum, PUCHAR objectTable, PUCHAR name)
 	for (i = 0; i < expSect->length; i++) expSect->data[i] = 0;
 
 	/* store creation time of export data */
-	k = (UINT)time(NULL);
+	k = (unsigned int )time(NULL);
 	expSect->data[4] = k & 0xff;
 	expSect->data[5] = (k >> 8) & 0xff;
 	expSect->data[6] = (k >> 16) & 0xff;
@@ -1817,15 +1817,15 @@ void BuildPEExports(long SectNum, PUCHAR objectTable, PUCHAR name)
 void BuildPEResources(long sectNum, PUCHAR objectTable)
 {
 	unsigned long i, j;
-	UINT k;
+	unsigned int  k;
 	SEG* ressect;
 	RESOURCE curres;
 	int numtypes, numnamedtypes;
 	int numPairs, numnames, numids;
-	UINT nameSize, dataSize;
-	UINT tableSize, dataListSize;
-	UINT namePos, dataPos, tablePos, dataListPos;
-	UINT curTypePos, curNamePos, curLangPos;
+	unsigned int  nameSize, dataSize;
+	unsigned int  tableSize, dataListSize;
+	unsigned int  namePos, dataPos, tablePos, dataListPos;
+	unsigned int  curTypePos, curNamePos, curLangPos;
 	char* curTypeName, * curName;
 	int curTypeId, curId;
 
@@ -2045,7 +2045,7 @@ void BuildPEResources(long sectNum, PUCHAR objectTable)
 
 	/* build master directory */
 	/* store time/date of creation */
-	k = (UINT)time(NULL);
+	k = (unsigned int )time(NULL);
 	ressect->data[4] = k & 0xff;
 	ressect->data[5] = (k >> 8) & 0xff;
 	ressect->data[6] = (k >> 16) & 0xff;
@@ -2121,7 +2121,7 @@ void BuildPEResources(long sectNum, PUCHAR objectTable)
 				}
 			}
 			/* store time/date of creation */
-			k = (UINT)time(NULL);
+			k = (unsigned int )time(NULL);
 			ressect->data[tablePos + 4] = k & 0xff;
 			ressect->data[tablePos + 5] = (k >> 8) & 0xff;
 			ressect->data[tablePos + 6] = (k >> 16) & 0xff;
@@ -2196,7 +2196,7 @@ void BuildPEResources(long sectNum, PUCHAR objectTable)
 			}
 			numnames = 0; /* no names for languages */
 			/* store time/date of creation */
-			k = (UINT)time(NULL);
+			k = (unsigned int )time(NULL);
 			ressect->data[tablePos + 4] = k & 0xff;
 			ressect->data[tablePos + 5] = (k >> 8) & 0xff;
 			ressect->data[tablePos + 6] = (k >> 16) & 0xff;
@@ -2262,15 +2262,15 @@ void BuildPEResources(long sectNum, PUCHAR objectTable)
 	return;
 }
 
-void getStub(PUCHAR* pstubData, UINT* pstubSize)
+void getStub(PUCHAR* pstubData, unsigned int * pstubSize)
 {
 	FILE* f;
 	unsigned char headbuf[0x1c];
 	PUCHAR buf;
-	UINT imageSize;
-	UINT headerSize;
-	UINT relocSize;
-	UINT relocStart;
+	unsigned int  imageSize;
+	unsigned int  headerSize;
+	unsigned int  relocSize;
+	unsigned int  relocStart;
 	int i;
 
 	if (stubName)
@@ -2357,22 +2357,22 @@ void getStub(PUCHAR* pstubData, UINT* pstubSize)
 void OutputWin32file(PCHAR outname)
 {
 	unsigned long i, j, k;
-	UINT started;
-	UINT lastout;
+	unsigned int  started;
+	unsigned int  lastout;
 	PUCHAR headbuf;
 	PUCHAR stubData;
 	FILE* outfile;
-	UINT headerSize;
-	UINT headerVirtSize;
-	UINT stubSize;
+	unsigned int  headerSize;
+	unsigned int  headerVirtSize;
+	unsigned int  stubSize;
 	long nameIndex;
-	UINT sectionStart;
-	UINT headerStart;
+	unsigned int  sectionStart;
+	unsigned int  headerStart;
 	long relocSectNum, importSectNum, exportSectNum, resourceSectNum;
-	UINT codeBase = 0;
-	UINT dataBase = 0;
-	UINT codeSize = 0;
-	UINT dataSize = 0;
+	unsigned int  codeBase = 0;
+	unsigned int  dataBase = 0;
+	unsigned int  codeSize = 0;
+	unsigned int  dataSize = 0;
 
 	printf("Generating PE file %s\n", outname);
 
@@ -2450,7 +2450,7 @@ void OutputWin32file(PCHAR outname)
 	headbuf[headerStart + PE_MACHINEID] = PE_INTEL386 & 0xff;
 	headbuf[headerStart + PE_MACHINEID + 1] = (PE_INTEL386 >> 8) & 0xff;
 	/* store time/date of creation */
-	k = (UINT)time(NULL);
+	k = (unsigned int )time(NULL);
 	headbuf[headerStart + PE_DATESTAMP] = k & 0xff;
 	headbuf[headerStart + PE_DATESTAMP + 1] = (k >> 8) & 0xff;
 	headbuf[headerStart + PE_DATESTAMP + 2] = (k >> 16) & 0xff;

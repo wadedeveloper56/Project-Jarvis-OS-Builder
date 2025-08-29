@@ -1299,7 +1299,7 @@ void loadlib(FILE* libfile, PCHAR libname)
 	PCHAR name;
 	unsigned short modpage;
 	PLIBFILE p;
-	UINT numsyms;
+	unsigned int  numsyms;
 	SortEntryPtr symlist;
 
 	libfiles = (PLIBFILE)checkRealloc(libfiles, (libcount + 1) * sizeof(LIBFILE));
@@ -1372,15 +1372,15 @@ void loadlib(FILE* libfile, PCHAR libname)
 	p->symbols = symlist;
 	p->numsyms = numsyms;
 	p->modsloaded = 0;
-	p->modlist = (UINT *)checkMalloc(sizeof(unsigned short) * numsyms);
+	p->modlist = (unsigned int  *)checkMalloc(sizeof(unsigned short) * numsyms);
 	libcount++;
 }
 
-void loadlibmod(UINT libnum, UINT modpage)
+void loadlibmod(unsigned int  libnum, unsigned int  modpage)
 {
 	PLIBFILE p;
 	FILE* libfile;
-	UINT i;
+	unsigned int  i;
 
 	p = &libfiles[libnum];
 
@@ -1420,8 +1420,8 @@ void loadres(FILE* f)
 	unsigned char buf[32];
 	static unsigned char buf2[32] = { 0,0,0,0,0x20,0,0,0,0xff,0xff,0,0,0xff,0xff,0,0,
 				   0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
-	UINT i, j;
-	UINT hdrsize, datsize;
+	unsigned int  i, j;
+	unsigned int  hdrsize, datsize;
 	PUCHAR data;
 	PUCHAR hdr;
 

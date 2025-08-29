@@ -6,24 +6,24 @@ void loadcoff(FILE* objfile)
 	unsigned char buf[100];
 	PUCHAR bigbuf;
 	PUCHAR stringList;
-	UINT thiscpu;
-	UINT numSect;
-	UINT headerSize;
-	UINT symbolPtr;
-	UINT numSymbols;
-	UINT stringPtr;
-	UINT stringSize;
-	UINT stringOfs;
-	UINT i, j, k;// , l;
-	UINT fileStart;
-	UINT minseg;
-	UINT numrel;
-	UINT relofs;
-	UINT relshift;
-	UINT sectname;
+	unsigned int  thiscpu;
+	unsigned int  numSect;
+	unsigned int  headerSize;
+	unsigned int  symbolPtr;
+	unsigned int  numSymbols;
+	unsigned int  stringPtr;
+	unsigned int  stringSize;
+	unsigned int  stringOfs;
+	unsigned int  i, j, k;// , l;
+	unsigned int  fileStart;
+	unsigned int  minseg;
+	unsigned int  numrel;
+	unsigned int  relofs;
+	unsigned int  relshift;
+	unsigned int  sectname;
 	long sectorder;
 	PCOFFSYM sym;
-	UINT combineType;
+	unsigned int  combineType;
 	PPUBLIC pubdef;
 	PCOMDAT comdat;
 	PCHAR comdatsym;
@@ -696,8 +696,8 @@ void loadcoff(FILE* objfile)
 
 void loadCoffImport(FILE* objfile)
 {
-	UINT fileStart;
-	UINT thiscpu;
+	unsigned int  fileStart;
+	unsigned int  thiscpu;
 
 	fileStart = ftell(objfile);
 

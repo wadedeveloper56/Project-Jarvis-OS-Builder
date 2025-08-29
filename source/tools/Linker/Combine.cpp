@@ -1,8 +1,8 @@
 #include "alink.h"
 
-void fixpubsegs(int src, int dest, UINT shift)
+void fixpubsegs(int src, int dest, unsigned int  shift)
 {
-	UINT i, j;
+	unsigned int  i, j;
 	PPUBLIC q;
 
 	for (i = 0; i < pubcount; ++i)
@@ -21,7 +21,7 @@ void fixpubsegs(int src, int dest, UINT shift)
 
 void fixpubgrps(int src, int dest)
 {
-	UINT i, j;
+	unsigned int  i, j;
 	PPUBLIC q;
 
 	for (i = 0; i < pubcount; ++i)
@@ -39,7 +39,7 @@ void fixpubgrps(int src, int dest)
 
 void combine_segments(long dest, long src)
 {
-	UINT k, n;
+	unsigned int  k, n;
 	PUCHAR p, q;
 	long a1, a2;
 
@@ -238,7 +238,7 @@ void combine_segments(long dest, long src)
 
 void combine_common(long i, long j)
 {
-	UINT k, n;
+	unsigned int  k, n;
 	PUCHAR p, q;
 
 	if (seglist[j]->length > seglist[i]->length)
@@ -421,9 +421,9 @@ void combineBlocks()
 	long i, j, k;
 	char* name;
 	long attr;
-	UINT count;
-	UINT* slist;
-	UINT curseg;
+	unsigned int  count;
+	unsigned int * slist;
+	unsigned int  curseg;
 
 	for (i = 0; i < segcount; i++)
 	{
@@ -447,7 +447,7 @@ void combineBlocks()
 				case SEG_PUBLIC:
 				case SEG_PUBLIC2:
 				case SEG_PUBLIC3:
-					slist = (UINT*)checkMalloc(sizeof(UINT));
+					slist = (unsigned int *)checkMalloc(sizeof(unsigned int ));
 					slist[0] = i;
 					/* get list of segments to combine */
 					for (j = i + 1, count = 1; j < segcount; j++)
@@ -457,7 +457,7 @@ void combineBlocks()
 						if ((seglist[j]->attr & SEG_ALIGN) == SEG_ABS) continue;
 						if (attr != (seglist[j]->attr & (SEG_COMBINE | SEG_USE32))) continue;
 						if (strcmp(name, namelist[seglist[j]->nameindex]) != 0) continue;
-						slist = (UINT*)checkRealloc(slist, (count + 1) * sizeof(UINT));
+						slist = (unsigned int *)checkRealloc(slist, (count + 1) * sizeof(unsigned int ));
 						slist[count] = j;
 						count++;
 					}

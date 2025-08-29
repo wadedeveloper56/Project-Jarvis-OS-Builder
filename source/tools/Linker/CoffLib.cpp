@@ -2,11 +2,11 @@
 
 void loadCoffLib(FILE* libfile, PCHAR libname)
 {
-	UINT i, j;
-	UINT numsyms;
-	UINT modpage;
-	UINT memberSize;
-	UINT startPoint;
+	unsigned int  i, j;
+	unsigned int  numsyms;
+	unsigned int  modpage;
+	unsigned int  memberSize;
+	unsigned int  startPoint;
 	PUCHAR endptr;
 	PLIBFILE p;
 	PCHAR name;
@@ -273,7 +273,7 @@ void loadCoffLib(FILE* libfile, PCHAR libname)
 
 
 	p->modsloaded = 0;
-	p->modlist = (UINT *)checkMalloc(sizeof(unsigned short) * numsyms);
+	p->modlist = (unsigned int  *)checkMalloc(sizeof(unsigned short) * numsyms);
 	p->libtype = 'C';
 	p->blocksize = 1;
 	p->flags = LIBF_CASESENSITIVE;
@@ -283,7 +283,7 @@ void loadCoffLib(FILE* libfile, PCHAR libname)
 void loadcofflibmod(PLIBFILE p, FILE* libfile)
 {
 	char* name;
-	UINT ofs;
+	unsigned int  ofs;
 
 	if (fread(buf, 1, 60, libfile) != 60)
 	{
