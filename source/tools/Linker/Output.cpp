@@ -877,10 +877,10 @@ long createOutputSection(char* name, unsigned int  winFlags)
 {
 	unsigned int  j;
 
-	outlist = (PPSEG)checkRealloc(outlist, sizeof(PSEG) * (outcount + 1));
-	outlist[outcount] = (PSEG)checkMalloc(sizeof(SEG));
-	seglist = (PPSEG)checkRealloc(seglist, sizeof(PSEG) * (segcount + 1));
-	seglist = (PPSEG)checkRealloc(seglist, (segcount + 1) * sizeof(PSEG));
+	outlist = (SegPtrPtr)checkRealloc(outlist, sizeof(SegPtr) * (outcount + 1));
+	outlist[outcount] = (SegPtr)checkMalloc(sizeof(Seg));
+	seglist = (SegPtrPtr)checkRealloc(seglist, sizeof(SegPtr) * (segcount + 1));
+	seglist = (SegPtrPtr)checkRealloc(seglist, (segcount + 1) * sizeof(SegPtr));
 	seglist[segcount] = outlist[outcount];
 	namelist = (char **)checkRealloc(namelist, (namecount + 1) * sizeof(char *));
 	namelist[namecount] = checkStrdup(name);
@@ -911,7 +911,7 @@ void BuildPEImports(long impsectNum, unsigned char * objectTable)
 	int* dllImpsDone = NULL;
 	int* dllImpNameSize = NULL;
 	unsigned int  dllCount = 0, dllNameSize = 0, namePos;
-	SEG* impsect;
+	SegPtr impsect;
 	unsigned int  thunkPos, thunk2Pos, impNamePos;
 
 	if (impsectNum < 0) return;
@@ -1146,7 +1146,7 @@ void BuildPERelocs(long relocSectNum, unsigned char * objectTable)
 {
 	int i, j;
 	PRELOC r;
-	PSEG relocSect;
+	SegPtr relocSect;
 	unsigned int  curStartPos;
 	unsigned int  curBlockPos;
 	unsigned int  k;
@@ -1507,7 +1507,7 @@ void BuildPEExports(long SectNum, unsigned char * objectTable, unsigned char * n
 {
 	long i, j;
 	unsigned int  k;
-	PSEG expSect;
+	SegPtr expSect;
 	unsigned int  namelen;
 	unsigned int  numNames = 0;
 	unsigned int  RVAStart;
@@ -1818,7 +1818,7 @@ void BuildPEResources(long sectNum, unsigned char * objectTable)
 {
 	unsigned long i, j;
 	unsigned int  k;
-	SEG* ressect;
+	SegPtr ressect;
 	RESOURCE curres;
 	int numtypes, numnamedtypes;
 	int numPairs, numnames, numids;

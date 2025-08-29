@@ -328,8 +328,8 @@ void loadcoff(FILE* objfile)
 		relofs = buf[PE_OBJECT_RELPTR] + (buf[PE_OBJECT_RELPTR + 1] << 8) +
 			(buf[PE_OBJECT_RELPTR + 2] << 16) + (buf[PE_OBJECT_RELPTR + 3] << 24);
 
-		seglist = (PPSEG)checkRealloc(seglist, (segcount + 1) * sizeof(PSEG));
-		seglist[segcount] = (PSEG)checkMalloc(sizeof(SEG));
+		seglist = (SegPtrPtr)checkRealloc(seglist, (segcount + 1) * sizeof(SegPtr));
+		seglist[segcount] = (SegPtr)checkMalloc(sizeof(Seg));
 
 		seglist[segcount]->nameindex = sectname;
 		seglist[segcount]->orderindex = sectorder;

@@ -5,26 +5,26 @@ char f_thred[4];
 int t_thredindex[4];
 int f_thredindex[4];
 
-void DestroyLIDATA(PDATABLOCK p)
+void DestroyLIDATA(DataBlockPtr p)
 {
 	long i;
 	if (p->blocks)
 	{
 		for (i = 0; i < p->blocks; i++)
 		{
-			DestroyLIDATA(((PPDATABLOCK)(p->data))[i]);
+			DestroyLIDATA(((DataBlockPtrPtr)(p->data))[i]);
 		}
 	}
 	free(p->data);
 	free(p);
 }
 
-PDATABLOCK BuildLiData(long* bufofs)
+DataBlockPtr BuildLiData(long* bufofs)
 {
-	PDATABLOCK p;
+	DataBlockPtr p;
 	long i, j;
 
-	p = (PDATABLOCK)checkMalloc(sizeof(DATABLOCK));
+	p = (DataBlockPtr)checkMalloc(sizeof(DataBlock));
 	i = *bufofs;
 	p->dataofs = i - lidata->dataofs;
 	p->count = buf[i] + 256 * buf[i + 1];
@@ -38,10 +38,10 @@ PDATABLOCK BuildLiData(long* bufofs)
 	i += 2;
 	if (p->blocks)
 	{
-		p->data = checkMalloc(p->blocks * sizeof(PDATABLOCK));
+		p->data = checkMalloc(p->blocks * sizeof(DataBlockPtr));
 		for (j = 0; j < p->blocks; j++)
 		{
-			((PPDATABLOCK)p->data)[j] = BuildLiData(&i);
+			((DataBlockPtrPtr)p->data)[j] = BuildLiData(&i);
 		}
 	}
 	else
@@ -58,7 +58,7 @@ PDATABLOCK BuildLiData(long* bufofs)
 	return p;
 }
 
-void EmitLiData(PDATABLOCK p, long segnum, long* ofs)
+void EmitLiData(DataBlockPtr p, long segnum, long* ofs)
 {
 	long i, j;
 
@@ -68,7 +68,7 @@ void EmitLiData(PDATABLOCK p, long segnum, long* ofs)
 		{
 			for (j = 0; j < p->blocks; j++)
 			{
-				EmitLiData(((PPDATABLOCK)p->data)[j], segnum, ofs);
+				EmitLiData(((DataBlockPtrPtr)p->data)[j], segnum, ofs);
 			}
 		}
 		else
@@ -93,7 +93,7 @@ void EmitLiData(PDATABLOCK p, long segnum, long* ofs)
 	}
 }
 
-void RelocLIDATA(PDATABLOCK p, long* ofs, PRELOC r)
+void RelocLIDATA(DataBlockPtr p, long* ofs, PRELOC r)
 {
 	long i, j;
 
@@ -103,7 +103,7 @@ void RelocLIDATA(PDATABLOCK p, long* ofs, PRELOC r)
 		{
 			for (j = 0; j < p->blocks; j++)
 			{
-				RelocLIDATA(((PPDATABLOCK)p->data)[j], ofs, r);
+				RelocLIDATA(((DataBlockPtrPtr)p->data)[j], ofs, r);
 			}
 		}
 		else
@@ -626,8 +626,8 @@ long loadmod(FILE* objfile)
 				break;
 			case SEGDEF:
 			case SEGDEF32:
-				seglist = (PPSEG)checkRealloc(seglist, (segcount + 1) * sizeof(PSEG));
-				seglist[segcount] = (PSEG)checkMalloc(sizeof(SEG));
+				seglist = (SegPtrPtr)checkRealloc(seglist, (segcount + 1) * sizeof(SegPtr));
+				seglist[segcount] = (SegPtr)checkMalloc(sizeof(Seg));
 				seglist[segcount]->attr = buf[0];
 				j = 1;
 				if ((seglist[segcount]->attr & SEG_ALIGN) == SEG_ABS)
@@ -790,13 +790,13 @@ long loadmod(FILE* objfile)
 					prevofs += (buf[j] + (buf[j + 1] << 8)) << 16;
 					j += 2;
 				}
-				lidata = (PDATABLOCK)checkMalloc(sizeof(DATABLOCK));
-				lidata->data = checkMalloc(sizeof(PDATABLOCK) * (1024 / sizeof(DATABLOCK) + 1));
+				lidata = (DataBlockPtr)checkMalloc(sizeof(DataBlock));
+				lidata->data = checkMalloc(sizeof(DataBlockPtr) * (1024 / sizeof(DataBlock) + 1));
 				lidata->blocks = 0;
 				lidata->dataofs = j;
 				for (i = 0; j < reclength; i++)
 				{
-					((PPDATABLOCK)lidata->data)[i] = BuildLiData(&j);
+					((DataBlockPtrPtr)lidata->data)[i] = BuildLiData(&j);
 				}
 				lidata->blocks = i;
 				lidata->count = 1;
