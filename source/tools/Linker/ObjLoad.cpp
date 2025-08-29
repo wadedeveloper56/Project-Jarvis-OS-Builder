@@ -889,7 +889,7 @@ long loadmod(FILE* objfile)
 			case EXTDEF:
 				for (j = 0; j < reclength;)
 				{
-					externs = (PEXTREC)checkRealloc(externs, (extcount + 1) * sizeof(EXTREC));
+					externs = (ExtRecPtr)checkRealloc(externs, (extcount + 1) * sizeof(ExtRec));
 					externs[extcount].name = (char *)checkMalloc(buf[j] + 1);
 					k = buf[j];
 					j++;
@@ -1107,7 +1107,7 @@ long loadmod(FILE* objfile)
 			case COMDEF:
 				for (j = 0; j < reclength;)
 				{
-					externs = (PEXTREC)checkRealloc(externs, (extcount + 1) * sizeof(EXTREC));
+					externs = (ExtRecPtr)checkRealloc(externs, (extcount + 1) * sizeof(ExtRec));
 					externs[extcount].name = (char *)checkMalloc(buf[j] + 1);
 					k = buf[j];
 					j++;

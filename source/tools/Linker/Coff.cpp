@@ -167,7 +167,7 @@ void loadcoff(FILE* objfile)
 					}
 					/* section symbols declare an extern always, so can use in relocs */
 					/* they may also include a PUBDEF */
-					externs = (PEXTREC)checkRealloc(externs, (extcount + 1) * sizeof(EXTREC));
+					externs = (ExtRecPtr)checkRealloc(externs, (extcount + 1) * sizeof(ExtRec));
 					externs[extcount].name = (char *)sym[i].name;
 					externs[extcount].pubdef = NULL;
 					externs[extcount].modnum = 0;
@@ -524,7 +524,7 @@ void loadcoff(FILE* objfile)
 				{
 					case COFF_SYM_EXTERNAL:
 						/* global symbols declare an extern when used in relocs */
-						externs = (PEXTREC)checkRealloc(externs, (extcount + 1) * sizeof(EXTREC));
+						externs = (ExtRecPtr)checkRealloc(externs, (extcount + 1) * sizeof(ExtRec));
 						externs[extcount].name = (char *)sym[k].name;
 						externs[extcount].pubdef = NULL;
 						externs[extcount].modnum = 0;
@@ -546,7 +546,7 @@ void loadcoff(FILE* objfile)
 						{
 							if (sym[k].value)
 							{
-								externs = (PEXTREC)checkRealloc(externs, (extcount + 1) * sizeof(EXTREC));
+								externs = (ExtRecPtr)checkRealloc(externs, (extcount + 1) * sizeof(ExtRec));
 								externs[extcount].name = (char *)sym[k].name;
 								externs[extcount].pubdef = NULL;
 								externs[extcount].modnum = nummods;

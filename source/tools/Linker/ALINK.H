@@ -377,14 +377,14 @@ typedef struct _Public {
 	char* aliasName;
 } Public, * PublicPtr, ** PublicPtrPtr;
 
-typedef struct __extdef {
+typedef struct _ExtRec {
 	char* name;
 	long typenum;
 	PublicPtr pubdef;
 	long impnum;
 	long flags;
 	unsigned int  modnum;
-} EXTREC, * PEXTREC, ** PPEXTREC;
+} ExtRec, * ExtRecPtr, ** ExtRecPtrPtr;
 
 typedef struct __imprec {
 	char* int_name;
@@ -555,7 +555,7 @@ extern SegPtrPtr seglist;
 extern SegPtrPtr outlist;
 extern PPGRP grplist;
 extern SortEntryPtr publics;
-extern PEXTREC externs;
+extern ExtRecPtr externs;
 extern PPCOMREC comdefs;
 extern PPRELOC relocs;
 extern PIMPREC impdefs;

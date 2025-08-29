@@ -40,7 +40,7 @@ SegPtrPtr seglist = NULL;
 SegPtrPtr outlist = NULL;
 PPGRP grplist = NULL;
 SortEntryPtr publics = NULL;
-PEXTREC externs = NULL;
+ExtRecPtr externs = NULL;
 PPCOMREC comdefs = NULL;
 PPRELOC relocs = NULL;
 PIMPREC impdefs = NULL;
@@ -1755,7 +1755,7 @@ int main(int argc, char* argv[])
 			printf("Warning, overriding entry point from Command Line\n");
 		}
 		/* define an external reference for entry point */
-		externs = (PEXTREC)checkRealloc(externs, (extcount + 1) * sizeof(EXTREC));
+		externs = (ExtRecPtr)checkRealloc(externs, (extcount + 1) * sizeof(ExtRec));
 		externs[extcount].name = entryPoint;
 		externs[extcount].typenum = -1;
 		externs[extcount].pubdef = NULL;
