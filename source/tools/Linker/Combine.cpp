@@ -40,7 +40,7 @@ void fixpubgrps(int src, int dest)
 void combine_segments(long dest, long src)
 {
 	unsigned int  k, n;
-	PUCHAR p, q;
+	unsigned char * p, *q;
 	long a1, a2;
 
 	k = seglist[dest]->length;
@@ -113,8 +113,8 @@ void combine_segments(long dest, long src)
 			break;
 	}
 	seglist[src]->base = k;
-	p = (PUCHAR)checkMalloc(k + seglist[src]->length);
-	q = (PUCHAR)checkMalloc((k + seglist[src]->length + 7) / 8);
+	p = (unsigned char *)checkMalloc(k + seglist[src]->length);
+	q = (unsigned char *)checkMalloc((k + seglist[src]->length + 7) / 8);
 	for (k = 0; k < seglist[dest]->length; k++)
 	{
 		if (GetNbit(seglist[dest]->datmask, k))
@@ -239,7 +239,7 @@ void combine_segments(long dest, long src)
 void combine_common(long i, long j)
 {
 	unsigned int  k, n;
-	PUCHAR p, q;
+	unsigned char * p, *q;
 
 	if (seglist[j]->length > seglist[i]->length)
 	{

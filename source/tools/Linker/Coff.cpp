@@ -4,8 +4,8 @@ void loadcoff(FILE* objfile)
 {
 	unsigned char headbuf[20];
 	unsigned char buf[100];
-	PUCHAR bigbuf;
-	PUCHAR stringList;
+	unsigned char * bigbuf;
+	unsigned char * stringList;
 	unsigned int  thiscpu;
 	unsigned int  numSect;
 	unsigned int  headerSize;
@@ -95,7 +95,7 @@ void loadcoff(FILE* objfile)
 	}
 	if (stringSize)
 	{
-		stringList = (PUCHAR)checkMalloc(stringSize);
+		stringList = (unsigned char *)checkMalloc(stringSize);
 		if (fread(stringList, 1, stringSize, objfile) != stringSize)
 		{
 			printf("Invalid COFF object file, unable to read string table\n");
@@ -125,7 +125,7 @@ void loadcoff(FILE* objfile)
 			}
 			if (buf[0] | buf[1] | buf[2] | buf[3])
 			{
-				sym[i].name = (PUCHAR)checkMalloc(9);
+				sym[i].name = (unsigned char *)checkMalloc(9);
 				strncpy((char*)sym[i].name, (char*)buf, 8);
 				sym[i].name[8] = 0;
 			}
@@ -143,7 +143,7 @@ void loadcoff(FILE* objfile)
 					printf("Invalid COFF object file bad symbol location\n");
 					exit(1);
 				}
-				sym[i].name = (PUCHAR)checkStrdup((char *)(stringList + stringOfs));
+				sym[i].name = (unsigned char *)checkStrdup((char *)(stringList + stringOfs));
 			}
 			if (!case_sensitive)
 			{
@@ -226,7 +226,7 @@ void loadcoff(FILE* objfile)
 			}
 			if (sym[i].numAuxRecs)
 			{
-				sym[i].auxRecs = (PUCHAR)checkMalloc(sym[i].numAuxRecs * PE_SYMBOL_SIZE);
+				sym[i].auxRecs = (unsigned char *)checkMalloc(sym[i].numAuxRecs * PE_SYMBOL_SIZE);
 			}
 			else
 			{
@@ -464,9 +464,9 @@ void loadcoff(FILE* objfile)
 
 		if (seglist[segcount]->length)
 		{
-			seglist[segcount]->data = (PUCHAR)checkMalloc(seglist[segcount]->length);
+			seglist[segcount]->data = (unsigned char *)checkMalloc(seglist[segcount]->length);
 
-			seglist[segcount]->datmask = (PUCHAR)checkMalloc((seglist[segcount]->length + 7) / 8);
+			seglist[segcount]->datmask = (unsigned char *)checkMalloc((seglist[segcount]->length + 7) / 8);
 
 			if (seglist[segcount]->base)
 			{

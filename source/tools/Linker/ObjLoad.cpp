@@ -49,9 +49,9 @@ PDATABLOCK BuildLiData(long* bufofs)
 		p->data = checkMalloc(buf[i] + 1);
 		((char*)p->data)[0] = buf[i];
 		i++;
-		for (j = 0; j < ((PUCHAR)p->data)[0]; j++, i++)
+		for (j = 0; j < ((unsigned char *)p->data)[0]; j++, i++)
 		{
-			((PUCHAR)p->data)[j + 1] = buf[i];
+			((unsigned char *)p->data)[j + 1] = buf[i];
 		}
 	}
 	*bufofs = i;
@@ -73,7 +73,7 @@ void EmitLiData(PDATABLOCK p, long segnum, long* ofs)
 		}
 		else
 		{
-			for (j = 0; j < ((PUCHAR)p->data)[0]; j++, (*ofs)++)
+			for (j = 0; j < ((unsigned char *)p->data)[0]; j++, (*ofs)++)
 			{
 				if ((*ofs) >= seglist[segnum]->length)
 				{
@@ -81,12 +81,12 @@ void EmitLiData(PDATABLOCK p, long segnum, long* ofs)
 				}
 				if (GetNbit(seglist[segnum]->datmask, *ofs))
 				{
-					if (seglist[segnum]->data[*ofs] != ((PUCHAR)p->data)[j + 1])
+					if (seglist[segnum]->data[*ofs] != ((unsigned char *)p->data)[j + 1])
 					{
 						ReportError(ERR_OVERWRITE);
 					}
 				}
-				seglist[segnum]->data[*ofs] = ((PUCHAR)p->data)[j + 1];
+				seglist[segnum]->data[*ofs] = ((unsigned char *)p->data)[j + 1];
 				SetNbit(seglist[segnum]->datmask, *ofs);
 			}
 		}
@@ -120,13 +120,13 @@ void RelocLIDATA(PDATABLOCK p, long* ofs, PRELOC r)
 				memcpy(relocs[fixcount], r, sizeof(RELOC));
 				relocs[fixcount]->ofs = *ofs + j;
 				fixcount++;
-				*ofs += ((PUCHAR)p->data)[0];
+				*ofs += ((unsigned char *)p->data)[0];
 			}
 		}
 	}
 }
 
-void LoadFIXUP(PRELOC r, PUCHAR buf, long* p)
+void LoadFIXUP(PRELOC r, unsigned char * buf, long* p)
 {
 	long j;
 	int thrednum;
@@ -675,8 +675,8 @@ long loadmod(FILE* objfile)
 				}
 				if ((seglist[segcount]->attr & SEG_ALIGN) != SEG_ABS)
 				{
-					seglist[segcount]->data = (PUCHAR)checkMalloc(seglist[segcount]->length);
-					seglist[segcount]->datmask = (PUCHAR)checkMalloc((seglist[segcount]->length + 7) / 8);
+					seglist[segcount]->data = (unsigned char *)checkMalloc(seglist[segcount]->length);
+					seglist[segcount]->datmask = (unsigned char *)checkMalloc((seglist[segcount]->length + 7) / 8);
 					for (i = 0; i < (seglist[segcount]->length + 7) / 8; i++)
 					{
 						seglist[segcount]->datmask[i] = 0;
@@ -1422,8 +1422,8 @@ void loadres(FILE* f)
 				   0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
 	unsigned int  i, j;
 	unsigned int  hdrsize, datsize;
-	PUCHAR data;
-	PUCHAR hdr;
+	unsigned char * data;
+	unsigned char * hdr;
 
 	if (fread(buf, 1, 32, f) != 32)
 	{
@@ -1457,7 +1457,7 @@ void loadres(FILE* f)
 			printf("Invalid resource file, bad header\n");
 			exit(1);
 		}
-		hdr = (PUCHAR)checkMalloc(hdrsize);
+		hdr = (unsigned char *)checkMalloc(hdrsize);
 		if (fread(hdr, 1, hdrsize - 8, f) != (hdrsize - 8))
 		{
 			printf("Invalid resource file, missing header\n");
@@ -1471,7 +1471,7 @@ void loadres(FILE* f)
 		}
 		if (datsize)
 		{
-			data = (PUCHAR)checkMalloc(datsize);
+			data = (unsigned char *)checkMalloc(datsize);
 			if (fread(data, 1, datsize, f) != datsize)
 			{
 				printf("Invalid resource file, no data\n");
@@ -1498,7 +1498,7 @@ void loadres(FILE* f)
 				printf("Invalid resource file, bad name\n");
 				exit(1);
 			}
-			resource[rescount].typename1 = (PUCHAR)checkMalloc(j - i + 2);
+			resource[rescount].typename1 = (unsigned char *)checkMalloc(j - i + 2);
 			memcpy(resource[rescount].typename1, hdr + i, j - i + 2);
 			i = j + 5;
 			i &= 0xfffffffc;
@@ -1522,7 +1522,7 @@ void loadres(FILE* f)
 				printf("Invalid resource file,bad name (2)\n");
 				exit(1);
 			}
-			resource[rescount].name = (PUCHAR)checkMalloc(j - i + 2);
+			resource[rescount].name = (unsigned char *)checkMalloc(j - i + 2);
 			memcpy(resource[rescount].name, hdr + i, j - i + 2);
 			i = j + 5;
 			i &= 0xfffffffc;

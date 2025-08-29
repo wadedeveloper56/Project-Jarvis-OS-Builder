@@ -481,7 +481,7 @@ void OutputEXEfile(char * outname)
 	long targseg;
 	unsigned int  targofs;
 	FILE* outfile;
-	PUCHAR headbuf;
+	unsigned char * headbuf;
 	long relcount;
 	int gotstack;
 	unsigned int  totlength;
@@ -495,7 +495,7 @@ void OutputEXEfile(char * outname)
 
 	errcount = 0;
 	gotstack = 0;
-	headbuf = (PUCHAR)checkMalloc(0x40 + 4 * fixcount);
+	headbuf = (unsigned char *)checkMalloc(0x40 + 4 * fixcount);
 	relcount = 0;
 
 	for (i = 0; i < 0x40; i++)
@@ -902,7 +902,7 @@ long createOutputSection(char* name, unsigned int  winFlags)
 	return outcount - 1;
 }
 
-void BuildPEImports(long impsectNum, PUCHAR objectTable)
+void BuildPEImports(long impsectNum, unsigned char * objectTable)
 {
 	long i, j, k;
 	unsigned int * reqimps = NULL, reqcount = 0;
@@ -1014,8 +1014,8 @@ void BuildPEImports(long impsectNum, PUCHAR objectTable)
 
 	impsect->length += i;
 
-	impsect->data = (PUCHAR)checkMalloc(impsect->length);
-	impsect->datmask = (PUCHAR)checkMalloc((impsect->length + 7) / 8);
+	impsect->data = (unsigned char *)checkMalloc(impsect->length);
+	impsect->datmask = (unsigned char *)checkMalloc((impsect->length + 7) / 8);
 	for (i = 0; i < (impsect->length + 7) / 8; i++)
 	{
 		impsect->datmask[i] = 0xff;
@@ -1142,7 +1142,7 @@ void BuildPEImports(long impsectNum, PUCHAR objectTable)
 	return;
 }
 
-void BuildPERelocs(long relocSectNum, PUCHAR objectTable)
+void BuildPERelocs(long relocSectNum, unsigned char * objectTable)
 {
 	int i, j;
 	PRELOC r;
@@ -1363,7 +1363,7 @@ void BuildPERelocs(long relocSectNum, PUCHAR objectTable)
 			{
 				relocSect->length += 4 - j; /* update length to align block */
 				/* and block memory */
-				relocSect->data = (PUCHAR)checkRealloc(relocSect->data, relocSect->length);
+				relocSect->data = (unsigned char *)checkRealloc(relocSect->data, relocSect->length);
 				/* update size of current reloc block */
 				k = relocSect->data[curBlockPos + 4];
 				k += relocSect->data[curBlockPos + 5] << 8;
@@ -1382,7 +1382,7 @@ void BuildPERelocs(long relocSectNum, PUCHAR objectTable)
 			curBlockPos = relocSect->length; /* get address in section of current block */
 			relocSect->length += 8; /* 8 bytes block header */
 			/* increase size of block */
-			relocSect->data = (PUCHAR)checkRealloc(relocSect->data, relocSect->length);
+			relocSect->data = (unsigned char *)checkRealloc(relocSect->data, relocSect->length);
 			/* store reloc base address, and block size */
 			curStartPos = relocs[i]->outputPos & 0xfffff000; /* start of mem page */
 
@@ -1397,7 +1397,7 @@ void BuildPERelocs(long relocSectNum, PUCHAR objectTable)
 			relocSect->data[curBlockPos + 6] = 0;
 			relocSect->data[curBlockPos + 7] = 0;
 		}
-		relocSect->data = (PUCHAR)checkRealloc(relocSect->data, relocSect->length + 2);
+		relocSect->data = (unsigned char *)checkRealloc(relocSect->data, relocSect->length + 2);
 
 		j = relocs[i]->outputPos - curStartPos; /* low 12 bits of address */
 		switch (relocs[i]->rtype)
@@ -1434,13 +1434,13 @@ void BuildPERelocs(long relocSectNum, PUCHAR objectTable)
 	{
 		/* 12 bytes for dummy section */
 		relocSect->length = 12;
-		relocSect->data = (PUCHAR)checkMalloc(12);
+		relocSect->data = (unsigned char *)checkMalloc(12);
 		/* zero it out for now */
 		for (i = 0; i < 12; i++) relocSect->data[i] = 0;
 		relocSect->data[4] = 12; /* size of block */
 	}
 
-	relocSect->datmask = (PUCHAR)checkMalloc((relocSect->length + 7) / 8);
+	relocSect->datmask = (unsigned char *)checkMalloc((relocSect->length + 7) / 8);
 	for (i = 0; i < (relocSect->length + 7) / 8; i++)
 	{
 		relocSect->datmask[i] = 0xff;
@@ -1503,7 +1503,7 @@ void BuildPERelocs(long relocSectNum, PUCHAR objectTable)
 	return;
 }
 
-void BuildPEExports(long SectNum, PUCHAR objectTable, PUCHAR name)
+void BuildPEExports(long SectNum, unsigned char * objectTable, unsigned char * name)
 {
 	long i, j;
 	unsigned int  k;
@@ -1576,7 +1576,7 @@ void BuildPEExports(long SectNum, PUCHAR objectTable, PUCHAR name)
 		minOrd = 1; /* if none defined, min is set to 1 */
 	}
 
-	expSect->data = (PUCHAR)checkMalloc(expSect->length);
+	expSect->data = (unsigned char *)checkMalloc(expSect->length);
 
 	objectTable += PE_OBJECTENTRY_SIZE * SectNum; /* point to reloc object entry */
 	k = expSect->length;
@@ -1805,7 +1805,7 @@ void BuildPEExports(long SectNum, PUCHAR objectTable, PUCHAR name)
 		expSect->data[15] = ((nameSpaceStart + expSect->base - imageBase) >> 24) & 0xff;
 	}
 
-	expSect->datmask = (PUCHAR)checkMalloc((expSect->length + 7) / 8);
+	expSect->datmask = (unsigned char *)checkMalloc((expSect->length + 7) / 8);
 	for (i = 0; i < (expSect->length + 7) / 8; i++)
 	{
 		expSect->datmask[i] = 0xff;
@@ -1814,7 +1814,7 @@ void BuildPEExports(long SectNum, PUCHAR objectTable, PUCHAR name)
 	return;
 }
 
-void BuildPEResources(long sectNum, PUCHAR objectTable)
+void BuildPEResources(long sectNum, unsigned char * objectTable)
 {
 	unsigned long i, j;
 	unsigned int  k;
@@ -2035,9 +2035,9 @@ void BuildPEResources(long sectNum, PUCHAR objectTable)
 
 	ressect->length = dataPos + dataSize;
 
-	ressect->data = (PUCHAR)checkMalloc(ressect->length);
+	ressect->data = (unsigned char *)checkMalloc(ressect->length);
 
-	ressect->datmask = (PUCHAR)checkMalloc((ressect->length + 7) / 8);
+	ressect->datmask = (unsigned char *)checkMalloc((ressect->length + 7) / 8);
 
 	/* empty section to start with */
 	for (i = 0; i < ressect->length; i++)
@@ -2262,11 +2262,11 @@ void BuildPEResources(long sectNum, PUCHAR objectTable)
 	return;
 }
 
-void getStub(PUCHAR* pstubData, unsigned int * pstubSize)
+void getStub(unsigned char ** pstubData, unsigned int * pstubSize)
 {
 	FILE* f;
 	unsigned char headbuf[0x1c];
-	PUCHAR buf;
+	unsigned char * buf;
 	unsigned int  imageSize;
 	unsigned int  headerSize;
 	unsigned int  relocSize;
@@ -2302,7 +2302,7 @@ void getStub(PUCHAR* pstubData, unsigned int * pstubSize)
 		printf("reloc=%i\n", relocSize);
 
 		/* allocate buffer for load image */
-		buf = (PUCHAR)checkMalloc(imageSize + 0x40 + ((relocSize + 0xf) & 0xfffffff0));
+		buf = (unsigned char *)checkMalloc(imageSize + 0x40 + ((relocSize + 0xf) & 0xfffffff0));
 		/* copy header */
 		for (i = 0; i < 0x1c; i++) buf[i] = headbuf[i];
 
@@ -2359,8 +2359,8 @@ void OutputWin32file(char * outname)
 	unsigned long i, j, k;
 	unsigned int  started;
 	unsigned int  lastout;
-	PUCHAR headbuf;
-	PUCHAR stubData;
+	unsigned char * headbuf;
+	unsigned char * stubData;
 	FILE* outfile;
 	unsigned int  headerSize;
 	unsigned int  headerVirtSize;
@@ -2428,7 +2428,7 @@ void OutputWin32file(char * outname)
 	headerSize &= (0xffffffff - (fileAlign - 1));
 
 
-	headbuf = (PUCHAR)checkMalloc(headerSize);
+	headbuf = (unsigned char *)checkMalloc(headerSize);
 
 	for (i = 0; i < headerSize; i++)
 	{
@@ -2582,7 +2582,7 @@ void OutputWin32file(char * outname)
 	/* build import, export and relocation sections */
 
 	BuildPEImports(importSectNum, headbuf + headerStart + PE_HEADBUF_SIZE);
-	BuildPEExports(exportSectNum, headbuf + headerStart + PE_HEADBUF_SIZE, (PUCHAR)outname);
+	BuildPEExports(exportSectNum, headbuf + headerStart + PE_HEADBUF_SIZE, (unsigned char *)outname);
 	BuildPERelocs(relocSectNum, headbuf + headerStart + PE_HEADBUF_SIZE);
 	BuildPEResources(resourceSectNum, headbuf + headerStart + PE_HEADBUF_SIZE);
 

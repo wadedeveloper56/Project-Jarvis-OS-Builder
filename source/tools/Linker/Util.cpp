@@ -12,22 +12,22 @@ int getBitCount(unsigned int  a)
     return count;
 }
 
-void ClearNbit(PUCHAR mask,long i)
+void ClearNbit(unsigned char * mask,long i)
 {
     mask[i/8]&=0xff-(1<<(i%8));
 }
 
-void SetNbit(PUCHAR mask,long i)
+void SetNbit(unsigned char * mask,long i)
 {
     mask[i/8]|=(1<<(i%8));
 }
 
-char GetNbit(PUCHAR mask,long i)
+char GetNbit(unsigned char * mask,long i)
 {
     return (mask[i/8]>>(i%8))&1;
 }
 
-long GetIndex(PUCHAR buf,long *index)
+long GetIndex(unsigned char * buf,long *index)
 {
     long i;
     if(buf[*index]&0x80)

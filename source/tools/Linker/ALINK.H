@@ -335,7 +335,7 @@
 
 //typedef char* char *;
 //typedef char** char **;
-typedef unsigned char *PUCHAR;
+//typedef unsigned char *unsigned char *;
 //typedef unsigned long unsigned int ;
 
 typedef struct _SortEntry
@@ -357,8 +357,8 @@ typedef struct __seg {
  unsigned int  base;
  unsigned int  winFlags;
  unsigned short attr;
- PUCHAR data;
- PUCHAR datmask;
+ unsigned char * data;
+ unsigned char * datmask;
 } SEG, *PSEG, **PPSEG;
 
 typedef struct __datablock {
@@ -439,7 +439,7 @@ typedef struct __libfile {
     char libtype;
     int modsloaded;
     unsigned int  *modlist;
-    PUCHAR longnames;
+    unsigned char * longnames;
     SortEntryPtr symbols;
     unsigned int  numsyms;
 } LIBFILE, *PLIBFILE, **PPLIBFILE;
@@ -450,9 +450,9 @@ typedef struct __libentry {
 } LIBENTRY, *PLIBENTRY, **PPLIBENTRY;
 
 typedef struct __resource {
- PUCHAR typename1;
- PUCHAR name;
- PUCHAR data;
+ unsigned char * typename1;
+ unsigned char * name;
+ unsigned char * data;
  unsigned int  length;
  unsigned short typeid1;
  unsigned short id;
@@ -460,14 +460,14 @@ typedef struct __resource {
 } RESOURCE, *PRESOURCE;
 
 typedef struct __coffsym {
-    PUCHAR name;
+    unsigned char * name;
     unsigned int  value;
     short section;
     unsigned short type;
     unsigned char clazz;
     long extnum;
     unsigned int  numAuxRecs;
-    PUCHAR auxRecs;
+    unsigned char * auxRecs;
     int isComDat;
 } COFFSYM, *PCOFFSYM;
 
@@ -496,16 +496,16 @@ long loadmod(FILE *objfile);
 void loadres(FILE *resfile);
 void loadcoff(FILE *objfile);
 void loadCoffImport(FILE *objfile);
-void LoadFIXUP(PRELOC r,PUCHAR buf,long *p);
+void LoadFIXUP(PRELOC r,unsigned char * buf,long *p);
 void RelocLIDATA(PDATABLOCK p,long *ofs,PRELOC r);
 void EmitLiData(PDATABLOCK p,long segnum,long *ofs);
 PDATABLOCK BuildLiData(long *bufofs);
 void DestroyLIDATA(PDATABLOCK p);
 void ReportError(long errnum);
-long GetIndex(PUCHAR buf,long *index);
-void ClearNbit(PUCHAR mask,long i);
-void SetNbit(PUCHAR mask,long i);
-char GetNbit(PUCHAR mask,long i);
+long GetIndex(unsigned char * buf,long *index);
+void ClearNbit(unsigned char * mask,long i);
+void SetNbit(unsigned char * mask,long i);
+char GetNbit(unsigned char * mask,long i);
 int wstricmp(const char *s1,const char*s2);
 int wstrlen(const char *s);
 unsigned short wtoupper(unsigned short a);
@@ -580,4 +580,4 @@ extern unsigned int  namecount,namemin,
 	rescount;
 
 extern int buildDll;
-extern PUCHAR stubName;
+extern unsigned char * stubName;

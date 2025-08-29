@@ -28,7 +28,7 @@ unsigned char osMajor, osMinor;
 unsigned char subsysMajor, subsysMinor;
 unsigned int subSystem;
 int buildDll = FALSE;
-PUCHAR stubName = NULL;
+unsigned char * stubName = NULL;
 
 long errcount = 0;
 
@@ -588,7 +588,7 @@ void processArgs(int argc, char** argv)
 						if (i < (argc - 1))
 						{
 							i++;
-							stubName = (PUCHAR)argv[i];
+							stubName = (unsigned char *)argv[i];
 						}
 						else
 						{
@@ -1098,7 +1098,7 @@ void matchComDefs()
 				seglist[segcount]->length = comdefs[i]->length;
 				seglist[segcount]->data = NULL;
 				seglist[segcount]->datmask =
-					(PUCHAR)checkMalloc((comdefs[i]->length + 7) / 8);
+					(unsigned char *)checkMalloc((comdefs[i]->length + 7) / 8);
 				for (j = 0; j < (comdefs[i]->length + 7) / 8; j++)
 					seglist[segcount]->datmask[j] = 0;
 				seglist[segcount]->attr = SEG_PRIVATE | SEG_PARA;
@@ -1111,7 +1111,7 @@ void matchComDefs()
 			else if ((comdefs[i]->length + seglist[comfarseg]->length) > 65536)
 			{
 				seglist[comfarseg]->datmask =
-					(PUCHAR)checkMalloc((seglist[comfarseg]->length + 7) / 8);
+					(unsigned char *)checkMalloc((seglist[comfarseg]->length + 7) / 8);
 				for (j = 0; j < (seglist[comfarseg]->length + 7) / 8; j++)
 					seglist[comfarseg]->datmask[j] = 0;
 
@@ -1174,13 +1174,13 @@ void matchComDefs()
 		}
 	}
 	seglist[comfarseg]->datmask =
-		(PUCHAR)checkMalloc((seglist[comfarseg]->length + 7) / 8);
+		(unsigned char *)checkMalloc((seglist[comfarseg]->length + 7) / 8);
 	for (j = 0; j < (seglist[comfarseg]->length + 7) / 8; j++)
 		seglist[comfarseg]->datmask[j] = 0;
 
 
 	seglist[comseg]->datmask =
-		(PUCHAR)checkMalloc((seglist[comseg]->length + 7) / 8);
+		(unsigned char *)checkMalloc((seglist[comseg]->length + 7) / 8);
 	for (j = 0; j < (seglist[comseg]->length + 7) / 8; j++)
 		seglist[comseg]->datmask[j] = 0;
 

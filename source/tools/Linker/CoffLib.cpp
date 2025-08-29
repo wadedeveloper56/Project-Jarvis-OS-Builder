@@ -7,10 +7,10 @@ void loadCoffLib(FILE* libfile, char * libname)
 	unsigned int  modpage;
 	unsigned int  memberSize;
 	unsigned int  startPoint;
-	PUCHAR endptr;
+	unsigned char * endptr;
 	PLIBFILE p;
 	char * name;
-	PUCHAR modbuf;
+	unsigned char * modbuf;
 	SortEntryPtr symlist;
 	int x;
 
@@ -89,7 +89,7 @@ void loadCoffLib(FILE* libfile, char * libname)
 		numsyms = buf[3] + (buf[2] << 8) + (buf[1] << 16) + (buf[0] << 24);
 	}
 	printf("%u symbols\n", numsyms);
-	modbuf = (PUCHAR)checkMalloc(numsyms * 4);
+	modbuf = (unsigned char *)checkMalloc(numsyms * 4);
 
 	if (numsyms)
 	{
@@ -257,7 +257,7 @@ void loadCoffLib(FILE* libfile, char * libname)
 		}
 		if (memberSize)
 		{
-			p->longnames = (PUCHAR)checkMalloc(memberSize);
+			p->longnames = (unsigned char *)checkMalloc(memberSize);
 			if (fread(p->longnames, 1, memberSize, libfile) != memberSize)
 			{
 				printf("Error reading from file\n");
