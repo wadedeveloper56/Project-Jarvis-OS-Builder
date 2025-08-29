@@ -64,7 +64,7 @@ void loadCoffLib(FILE* libfile, PCHAR libname)
 
 	/* get size */
 	errno = 0;
-	memberSize = strtoul((char *)(buf + 48), (PPCHAR)&endptr, 10);
+	memberSize = strtoul((char *)(buf + 48), (char **)&endptr, 10);
 	if (errno || (*endptr))
 	{
 		printf("Invalid library file format - bad member size\n");
@@ -192,7 +192,7 @@ void loadCoffLib(FILE* libfile, PCHAR libname)
 
 		/* get size */
 		errno = 0;
-		memberSize = strtoul((char *)(buf + 48), (PPCHAR)&endptr, 10);
+		memberSize = strtoul((char *)(buf + 48), (char **)&endptr, 10);
 		if (errno || (*endptr))
 		{
 			printf("Invalid library file format - bad member size\n");
@@ -249,7 +249,7 @@ void loadCoffLib(FILE* libfile, PCHAR libname)
 
 		/* get size */
 		errno = 0;
-		memberSize = strtoul((PCHAR)(buf + 48), (PPCHAR)&endptr, 10);
+		memberSize = strtoul((PCHAR)(buf + 48), (char **)&endptr, 10);
 		if (errno || (*endptr))
 		{
 			printf("Invalid library file format - bad member size\n");

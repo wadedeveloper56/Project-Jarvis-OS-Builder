@@ -397,7 +397,7 @@ long loadmod(FILE* objfile)
 				{
 					ReportError(ERR_EXTRA_HEADER);
 				}
-				modname = (PPCHAR)checkRealloc(modname, (nummods + 1) * sizeof(PCHAR));
+				modname = (char **)checkRealloc(modname, (nummods + 1) * sizeof(PCHAR));
 				modname[nummods] = (PCHAR)checkMalloc(buf[0] + 1);
 				for (i = 0; i < buf[0]; i++)
 				{
@@ -433,7 +433,7 @@ long loadmod(FILE* objfile)
 					{
 						case COMENT_LIB_SPEC:
 						case COMENT_DEFLIB:
-							filename = (PPCHAR)checkRealloc(filename, (filecount + 1) * sizeof(PCHAR));
+							filename = (char **)checkRealloc(filename, (filecount + 1) * sizeof(PCHAR));
 							filename[filecount] = (PCHAR)checkMalloc(reclength - 1 + 4);
 							/* get filename */
 							for (i = 0; i < reclength - 2; i++)
@@ -609,7 +609,7 @@ long loadmod(FILE* objfile)
 				j = 0;
 				while (j < reclength)
 				{
-					namelist = (PPCHAR)checkRealloc(namelist, (namecount + 1) * sizeof(PCHAR));
+					namelist = (char **)checkRealloc(namelist, (namecount + 1) * sizeof(PCHAR));
 					namelist[namecount] = (PCHAR)checkMalloc(buf[j] + 1);
 					for (i = 0; i < buf[j]; i++)
 					{

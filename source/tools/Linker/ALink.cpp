@@ -35,7 +35,7 @@ long errcount = 0;
 unsigned char buf[65536];
 PDATABLOCK lidata;
 
-PPCHAR namelist = NULL;
+char ** namelist = NULL;
 PPSEG seglist = NULL;
 PPSEG outlist = NULL;
 PPGRP grplist = NULL;
@@ -48,8 +48,8 @@ PEXPREC expdefs = NULL;
 PLIBFILE libfiles = NULL;
 PRESOURCE resource = NULL;
 SortEntryPtr comdats = NULL;
-PPCHAR modname;
-PPCHAR filename;
+char ** modname;
+char ** filename;
 unsigned int  namecount = 0, namemin = 0,
 pubcount = 0, pubmin = 0,
 segcount = 0, segmin = 0, outcount = 0,
@@ -674,7 +674,7 @@ void processArgs(int argc, char** argv)
 		}
 		else
 		{
-			filename = (PPCHAR)checkRealloc(filename, (filecount + 1) * sizeof(PCHAR));
+			filename = (char **)checkRealloc(filename, (filecount + 1) * sizeof(PCHAR));
 			filename[filecount] = (CHAR *)checkMalloc(strlen(argv[i]) + 1);
 			memcpy(filename[filecount], argv[i], strlen(argv[i]) + 1);
 			for (j = strlen(filename[filecount]);
@@ -1034,7 +1034,7 @@ void matchComDefs()
 
 	seglist = (PPSEG)checkRealloc(seglist, (segcount + 1) * sizeof(PSEG));
 	seglist[segcount] = (PSEG)checkMalloc(sizeof(SEG));
-	namelist = (PPCHAR)checkRealloc(namelist, (namecount + 1) * sizeof(PCHAR));
+	namelist = (char **)checkRealloc(namelist, (namecount + 1) * sizeof(PCHAR));
 	namelist[namecount] = checkStrdup("COMDEFS");
 	seglist[segcount]->nameindex = namecount;
 	seglist[segcount]->classindex = -1;
@@ -1066,7 +1066,7 @@ void matchComDefs()
 
 	seglist = (PPSEG)checkRealloc(seglist, (segcount + 1) * sizeof(PSEG));
 	seglist[segcount] = (PSEG)checkMalloc(sizeof(SEG));
-	namelist = (PPCHAR)checkRealloc(namelist, (namecount + 1) * sizeof(PCHAR));
+	namelist = (char **)checkRealloc(namelist, (namecount + 1) * sizeof(PCHAR));
 	namelist[namecount] = checkStrdup("FARCOMDEFS");
 	seglist[segcount]->nameindex = namecount;
 	seglist[segcount]->classindex = -1;
@@ -1090,7 +1090,7 @@ void matchComDefs()
 			{
 				seglist = (PPSEG)checkRealloc(seglist, (segcount + 1) * sizeof(PSEG));
 				seglist[segcount] = (PSEG)checkMalloc(sizeof(SEG));
-				namelist = (PPCHAR)checkRealloc(namelist, (namecount + 1) * sizeof(PCHAR));
+				namelist = (char **)checkRealloc(namelist, (namecount + 1) * sizeof(PCHAR));
 				namelist[namecount] = checkStrdup("FARCOMDEFS");
 				seglist[segcount]->nameindex = namecount;
 				seglist[segcount]->classindex = -1;
@@ -1117,7 +1117,7 @@ void matchComDefs()
 
 				seglist = (PPSEG)checkRealloc(seglist, (segcount + 1) * sizeof(PSEG));
 				seglist[segcount] = (PSEG)checkMalloc(sizeof(SEG));
-				namelist = (PPCHAR)checkRealloc(namelist, (namecount + 1) * sizeof(PCHAR));
+				namelist = (char **)checkRealloc(namelist, (namecount + 1) * sizeof(PCHAR));
 				namelist[namecount] = checkStrdup("FARCOMDEFS");
 				seglist[segcount]->nameindex = namecount;
 				seglist[segcount]->classindex = -1;

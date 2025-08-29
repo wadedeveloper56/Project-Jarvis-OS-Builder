@@ -295,14 +295,14 @@ void loadcoff(FILE* objfile)
 				printf("Invalid COFF object file\n");
 				exit(1);
 			}
-			namelist = (PPCHAR)checkRealloc(namelist, (namecount + 1) * sizeof(PCHAR));
+			namelist = (char **)checkRealloc(namelist, (namecount + 1) * sizeof(PCHAR));
 			namelist[namecount] = checkStrdup((char *)(stringList + sectname));
 			sectname = namecount;
 			namecount++;
 		}
 		else
 		{
-			namelist = (PPCHAR)checkRealloc(namelist, (namecount + 1) * sizeof(PCHAR));
+			namelist = (char **)checkRealloc(namelist, (namecount + 1) * sizeof(PCHAR));
 			namelist[namecount] = (PCHAR)checkStrdup((char *)buf);
 
 			sectname = namecount;
@@ -313,7 +313,7 @@ void loadcoff(FILE* objfile)
 			/* if we have a grouped segment, sort by original name */
 			sectorder = sectname;
 			/* and get real name, without $ sort section */
-			namelist = (PPCHAR)checkRealloc(namelist, (namecount + 1) * sizeof(PCHAR));
+			namelist = (char **)checkRealloc(namelist, (namecount + 1) * sizeof(PCHAR));
 			namelist[namecount] = checkStrdup(namelist[sectname]);
 			*(strchr(namelist[namecount], '$')) = 0;
 			sectname = namecount;

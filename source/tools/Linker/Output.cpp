@@ -882,7 +882,7 @@ long createOutputSection(char* name, unsigned int  winFlags)
 	seglist = (PPSEG)checkRealloc(seglist, sizeof(PSEG) * (segcount + 1));
 	seglist = (PPSEG)checkRealloc(seglist, (segcount + 1) * sizeof(PSEG));
 	seglist[segcount] = outlist[outcount];
-	namelist = (PPCHAR)checkRealloc(namelist, (namecount + 1) * sizeof(PCHAR));
+	namelist = (char **)checkRealloc(namelist, (namecount + 1) * sizeof(PCHAR));
 	namelist[namecount] = checkStrdup(name);
 	outlist[outcount]->nameindex = namecount;
 	outlist[outcount]->classindex = -1;

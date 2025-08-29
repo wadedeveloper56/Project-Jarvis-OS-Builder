@@ -333,7 +333,8 @@
 
 #define EXP_ORD 0x80
 
-typedef char *PCHAR,**PPCHAR;
+typedef char* PCHAR;
+//typedef char** char **;
 typedef unsigned char *PUCHAR;
 //typedef unsigned long unsigned int ;
 
@@ -549,7 +550,7 @@ extern long errcount;
 extern unsigned char buf[65536];
 extern PDATABLOCK lidata;
 
-extern PPCHAR namelist;
+extern char ** namelist;
 extern PPSEG seglist;
 extern PPSEG outlist;
 extern PPGRP grplist;
@@ -561,8 +562,8 @@ extern PIMPREC impdefs;
 extern PEXPREC expdefs;
 extern PLIBFILE libfiles;
 extern PRESOURCE resource;
-extern PPCHAR modname;
-extern PPCHAR filename;
+extern char ** modname;
+extern char ** filename;
 extern SortEntryPtr comdats;
 extern unsigned int  namecount,namemin,
     pubcount,pubmin,
