@@ -368,19 +368,19 @@ typedef struct _DataBlock {
 	void* data;
 } DataBlock, * DataBlockPtr, ** DataBlockPtrPtr;
 
-typedef struct __pubdef {
+typedef struct _Public {
 	long segnum;
 	long grpnum;
 	long typenum;
 	unsigned int  ofs;
 	unsigned int  modnum;
 	char* aliasName;
-} PUBLIC, * PPUBLIC, ** PPPUBLIC;
+} Public, * PublicPtr, ** PublicPtrPtr;
 
 typedef struct __extdef {
 	char* name;
 	long typenum;
-	PPUBLIC pubdef;
+	PublicPtr pubdef;
 	long impnum;
 	long flags;
 	unsigned int  modnum;
@@ -401,7 +401,7 @@ typedef struct __exprec {
 	char* exp_name;
 	unsigned int  ordinal;
 	char flags;
-	PPUBLIC pubdef;
+	PublicPtr pubdef;
 	unsigned int  modnum;
 } EXPREC, * PEXPREC, ** PPEXPREC;
 

@@ -24,7 +24,7 @@ void loadcoff(FILE* objfile)
 	long sectorder;
 	PCOFFSYM sym;
 	unsigned int  combineType;
-	PPUBLIC pubdef;
+	PublicPtr pubdef;
 	PCOMDAT comdat;
 	char * comdatsym;
 	SortEntryPtr listnode;
@@ -176,7 +176,7 @@ void loadcoff(FILE* objfile)
 					extcount++;
 					if (sym[i].section != 0) /* if the section is defined here, make public */
 					{
-						pubdef = (PPUBLIC)checkMalloc(sizeof(PUBLIC));
+						pubdef = (PublicPtr)checkMalloc(sizeof(Public));
 						pubdef->grpnum = -1;
 						pubdef->typenum = 0;
 						pubdef->modnum = 0;
@@ -195,15 +195,15 @@ void loadcoff(FILE* objfile)
 						{
 							for (j = 0; j < listnode->count; ++j)
 							{
-								if (((PPUBLIC)listnode->object[j])->modnum == pubdef->modnum)
+								if (((PublicPtr)listnode->object[j])->modnum == pubdef->modnum)
 								{
-									if (!((PPUBLIC)listnode->object[j])->aliasName)
+									if (!((PublicPtr)listnode->object[j])->aliasName)
 									{
 										printf("Duplicate public symbol %s\n", sym[i].name);
 										exit(1);
 									}
-									free(((PPUBLIC)listnode->object[j])->aliasName);
-									(*((PPUBLIC)listnode->object[j])) = (*pubdef);
+									free(((PublicPtr)listnode->object[j])->aliasName);
+									(*((PublicPtr)listnode->object[j])) = (*pubdef);
 									pubdef = NULL;
 									break;
 								}
@@ -650,7 +650,7 @@ void loadcoff(FILE* objfile)
 		}
 		else
 		{
-			pubdef = (PPUBLIC)checkMalloc(sizeof(PUBLIC));
+			pubdef = (PublicPtr)checkMalloc(sizeof(Public));
 			pubdef->grpnum = -1;
 			pubdef->typenum = 0;
 			pubdef->modnum = 0;
@@ -669,15 +669,15 @@ void loadcoff(FILE* objfile)
 			{
 				for (j = 0; j < listnode->count; ++j)
 				{
-					if (((PPUBLIC)listnode->object[j])->modnum == pubdef->modnum)
+					if (((PublicPtr)listnode->object[j])->modnum == pubdef->modnum)
 					{
-						if (!((PPUBLIC)listnode->object[j])->aliasName)
+						if (!((PublicPtr)listnode->object[j])->aliasName)
 						{
 							printf("Duplicate public symbol %s\n", sym[i].name);
 							exit(1);
 						}
-						free(((PPUBLIC)listnode->object[j])->aliasName);
-						(*((PPUBLIC)listnode->object[j])) = (*pubdef);
+						free(((PublicPtr)listnode->object[j])->aliasName);
+						(*((PublicPtr)listnode->object[j])) = (*pubdef);
 						pubdef = NULL;
 						break;
 					}

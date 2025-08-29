@@ -3,13 +3,13 @@
 void fixpubsegs(int src, int dest, unsigned int  shift)
 {
 	unsigned int  i, j;
-	PPUBLIC q;
+	PublicPtr q;
 
 	for (i = 0; i < pubcount; ++i)
 	{
 		for (j = 0; j < publics[i].count; ++j)
 		{
-			q = (PPUBLIC)publics[i].object[j];
+			q = (PublicPtr)publics[i].object[j];
 			if (q->segnum == src)
 			{
 				q->segnum = dest;
@@ -22,13 +22,13 @@ void fixpubsegs(int src, int dest, unsigned int  shift)
 void fixpubgrps(int src, int dest)
 {
 	unsigned int  i, j;
-	PPUBLIC q;
+	PublicPtr q;
 
 	for (i = 0; i < pubcount; ++i)
 	{
 		for (j = 0; j < publics[i].count; ++j)
 		{
-			q = (PPUBLIC)publics[i].object[j];
+			q = (PublicPtr)publics[i].object[j];
 			if (q->grpnum == src)
 			{
 				q->grpnum = dest;

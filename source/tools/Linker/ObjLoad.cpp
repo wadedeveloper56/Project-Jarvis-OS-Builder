@@ -363,7 +363,7 @@ long loadmod(FILE* objfile)
 	long i, j, k;
 	long segnum, grpnum;
 	PRELOC r;
-	PPUBLIC pubdef;
+	PublicPtr pubdef;
 	char * name, * aliasName;
 	SortEntryPtr listnode;
 
@@ -826,7 +826,7 @@ long loadmod(FILE* objfile)
 				}
 				for (; j < reclength;)
 				{
-					pubdef = (PPUBLIC)checkMalloc(sizeof(PUBLIC));
+					pubdef = (PublicPtr)checkMalloc(sizeof(Public));
 					pubdef->aliasName = NULL;
 					pubdef->grpnum = grpnum;
 					pubdef->segnum = segnum;
@@ -863,15 +863,15 @@ long loadmod(FILE* objfile)
 					{
 						for (i = 0; i < listnode->count; i++)
 						{
-							if (((PPUBLIC)listnode->object[i])->modnum == pubdef->modnum)
+							if (((PublicPtr)listnode->object[i])->modnum == pubdef->modnum)
 							{
-								if (!((PPUBLIC)listnode->object[i])->aliasName)
+								if (!((PublicPtr)listnode->object[i])->aliasName)
 								{
 									printf("Duplicate public symbol %s\n", name);
 									exit(1);
 								}
-								free(((PPUBLIC)listnode->object[i])->aliasName);
-								(*((PPUBLIC)listnode->object[i])) = (*pubdef);
+								free(((PublicPtr)listnode->object[i])->aliasName);
+								(*((PublicPtr)listnode->object[i])) = (*pubdef);
 								pubdef = NULL;
 								break;
 							}
@@ -1250,7 +1250,7 @@ long loadmod(FILE* objfile)
 					printf("No Alias name specified for %s\n", name);
 					exit(1);
 				}
-				pubdef = (PPUBLIC)checkMalloc(sizeof(PUBLIC));
+				pubdef = (PublicPtr)checkMalloc(sizeof(Public));
 				pubdef->segnum = -1;
 				pubdef->grpnum = -1;
 				pubdef->typenum = -1;
@@ -1261,11 +1261,11 @@ long loadmod(FILE* objfile)
 				{
 					for (i = 0; i < listnode->count; i++)
 					{
-						if (((PPUBLIC)listnode->object[i])->modnum == pubdef->modnum)
+						if (((PublicPtr)listnode->object[i])->modnum == pubdef->modnum)
 						{
-							if (((PPUBLIC)listnode->object[i])->aliasName)
+							if (((PublicPtr)listnode->object[i])->aliasName)
 							{
-								printf("Warning, two aliases for %s, using %s\n", name, ((PPUBLIC)listnode->object[i])->aliasName);
+								printf("Warning, two aliases for %s, using %s\n", name, ((PublicPtr)listnode->object[i])->aliasName);
 							}
 							free(pubdef->aliasName);
 							free(pubdef);
