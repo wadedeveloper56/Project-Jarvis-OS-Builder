@@ -159,22 +159,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Coff.cpp" />
-    <ClCompile Include="Linker.cpp" />
-    <ClCompile Include="ObjLoad.cpp" />
-    <ClCompile Include="Util.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Arguments\Arguments.vcxproj">
       <Project>{fe883520-0f4b-494d-bf5e-714adb7881a3}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Coff.h" />
-    <ClInclude Include="Linker.h" />
-    <ClInclude Include="ObjLoad.h" />
+    <ClInclude Include="ALINK.H" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="Util.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ALINK.C" />
+    <ClCompile Include="COFF.C" />
+    <ClCompile Include="COFFLIB.C" />
+    <ClCompile Include="COMBINE.C" />
+    <ClCompile Include="OBJLOAD.C" />
+    <ClCompile Include="OUTPUT.C" />
+    <ClCompile Include="UTIL.C" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,4 +1,7 @@
-#pragma once
+#include "pch.h"
+
+//#define TRUE  (1==1)
+//#define FALSE (1==0)
 
 #define SWITCHCHAR '-'
 #define PATH_CHAR '\\'
@@ -333,204 +336,250 @@
 
 #define EXP_ORD 0x80
 
-typedef struct _SortEntry
+typedef char *PCHAR,**PPCHAR;
+typedef unsigned char *PUCHAR;
+//typedef unsigned long UINT;
+
+typedef struct __sortentry
 {
-	char* id;
-	void** object;
-	unsigned int count;
-} SortEntry, * SortEntryPtr, **SortEntryPtrPtr;
+    char *id;
+    void **object;
+    UINT count;
+} SORTENTRY, *PSORTENTRY;
 
-typedef struct _Seg {
-	long nameindex;
-	long classindex;
-	long overlayindex;
-	long orderindex;
-	unsigned int length;
-	unsigned int virtualSize;
-	unsigned int absframe;
-	unsigned int absofs;
-	unsigned int base;
-	unsigned int winFlags;
-	unsigned short attr;
-	char* data;
-	char* datmask;
-} Seg, * SegPtr, ** SegPtrPtr;
+typedef struct __seg {
+ long nameindex;
+ long classindex;
+ long overlayindex;
+ long orderindex;
+ UINT length;
+ UINT virtualSize;
+ UINT absframe;
+ UINT absofs;
+ UINT base;
+ UINT winFlags;
+ unsigned short attr;
+ PUCHAR data;
+ PUCHAR datmask;
+} SEG, *PSEG, **PPSEG;
 
-typedef struct _DataBlock {
-	long count;
-	long blocks;
-	long dataofs;
-	void* data;
-} DataBlock, * DataBlockPtr, ** DataBlockPtrPtr;
+typedef struct __datablock {
+ long count;
+ long blocks;
+ long dataofs;
+ void *data;
+} DATABLOCK, *PDATABLOCK, **PPDATABLOCK;
 
-typedef struct _Public {
-	long segnum;
-	long grpnum;
-	long typenum;
-	unsigned int ofs;
-	unsigned int modnum;
-	char* aliasName;
-} Public, * PublicPtr, ** PublicPtrPtr;
+typedef struct __pubdef {
+    long segnum;
+    long grpnum;
+    long typenum;
+    UINT ofs;
+    UINT modnum;
+    PCHAR aliasName;
+} PUBLIC, *PPUBLIC,**PPPUBLIC;
 
-typedef struct _ExtRec {
-	char* name;
-	long typenum;
-	PublicPtr pubdef;
-	long impnum;
-	long flags;
-	unsigned int modnum;
-} ExtRec, * ExtRecPtr, ** ExtRecPtrPtr;
+typedef struct __extdef {
+ PCHAR name;
+ long typenum;
+ PPUBLIC pubdef;
+ long impnum;
+ long flags;
+ UINT modnum;
+} EXTREC, *PEXTREC,**PPEXTREC;
 
-typedef struct _ImpRec {
-	char* int_name;
-	char* mod_name;
-	char* imp_name;
-	unsigned short ordinal;
-	char flags;
-	long segnum;
-	unsigned int ofs;
-} ImpRec, * ImpRecPtr, ** ImpRecPtrPtr;
+typedef struct __imprec {
+ PCHAR int_name;
+ PCHAR mod_name;
+ PCHAR imp_name;
+ unsigned short ordinal;
+ char flags;
+ long segnum;
+ UINT ofs;
+} IMPREC, *PIMPREC, **PPIMPREC;
 
-typedef struct _ExpRec {
-	char* int_name;
-	char* exp_name;
-	unsigned int ordinal;
-	char flags;
-	PublicPtr pubdef;
-	unsigned int modnum;
-} ExpRec, * ExpRecPtr, ** ExpRecPtrPtr;
+typedef struct __exprec {
+ PCHAR int_name;
+ PCHAR exp_name;
+ UINT ordinal;
+ char flags;
+ PPUBLIC pubdef;
+ UINT modnum;
+} EXPREC, *PEXPREC, **PPEXPREC;
 
-typedef struct _ComRec {
-	char* name;
-	unsigned int length;
-	int isFar;
-	unsigned int modnum;
-} ComRec, * ComRecPtr, ** ComRecPtrPtr;
+typedef struct __comdef {
+ PCHAR name;
+ UINT length;
+ int isFar;
+ UINT modnum;
+} COMREC, *PCOMREC, **PPCOMREC;
 
-typedef struct _Reloc {
-	unsigned int ofs;
-	long segnum;
-	unsigned char ftype;
-	unsigned char ttype;
-	unsigned short rtype;
-	long target;
-	unsigned int disp;
-	long frame;
-	unsigned int outputPos;
-} Reloc, * RelocPtr, ** RelocPtrPtr;
+typedef struct __reloc {
+ UINT ofs;
+ long segnum;
+ unsigned char ftype,ttype;
+ unsigned short rtype;
+ long target;
+ UINT disp;
+ long frame;
+ UINT outputPos;
+} RELOC, *PRELOC,**PPRELOC;
 
-typedef struct _Grp {
-	long nameindex;
-	long numsegs;
-	long segindex[256];
-	long segnum;
-} Grp, * GrpPtr, ** GrpPtrPtr;
+typedef struct __grp {
+ long nameindex;
+ long numsegs;
+ long segindex[256];
+ long segnum;
+} GRP, *PGRP, **PPGRP;
 
-typedef struct _LibFile {
-	char* filename;
-	unsigned short blocksize;
-	unsigned short numdicpages;
-	unsigned int dicstart;
-	char flags;
-	char libtype;
-	int modsloaded;
-	unsigned int* modlist;
-	char* longnames;
-	SortEntryPtr symbols;
-	unsigned int numsyms;
-} LibFile, * LibFilePtr, ** LibFilePtrPtr;
+typedef struct __libfile {
+    PCHAR filename;
+    unsigned short blocksize;
+    unsigned short numdicpages;
+    UINT dicstart;
+    char flags;
+    char libtype;
+    int modsloaded;
+    UINT *modlist;
+    PUCHAR longnames;
+    PSORTENTRY symbols;
+    UINT numsyms;
+} LIBFILE, *PLIBFILE, **PPLIBFILE;
 
-typedef struct _LibEntry {
-	unsigned int libfile;
-	unsigned int modpage;
-} LibEntry, * LibEntryPtr, ** LibEntryPtrPtr;
+typedef struct __libentry {
+    UINT libfile;
+    UINT modpage; 
+} LIBENTRY, *PLIBENTRY, **PPLIBENTRY;
 
-typedef struct _Resource {
-	char* typeName0;
-	char* name;
-	char* data;
-	unsigned int length;
-	unsigned short typeId0;
-	unsigned short id;
-	unsigned short languageid;
-} Resource, * ResourcePtr, ** ResourcePtrPtr;
+typedef struct __resource {
+ PUCHAR typename;
+ PUCHAR name;
+ PUCHAR data;
+ UINT length;
+ unsigned short typeid;
+ unsigned short id;
+ unsigned short languageid; 
+} RESOURCE, *PRESOURCE;
 
-typedef struct _CoffSym {
-	char* name;
-	unsigned int value;
-	short section;
-	unsigned short type;
-	unsigned char clazz;
-	long extnum;
-	unsigned int numAuxRecs;
-	char* auxRecs;
-	int isComDat;
-} CoffSym, * CoffSymPtr, ** CoffSymPtrPtr;
+typedef struct __coffsym {
+    PUCHAR name;
+    UINT value;
+    short section;
+    unsigned short type;
+    unsigned char class;
+    long extnum;
+    UINT numAuxRecs;
+    PUCHAR auxRecs;
+    int isComDat;
+} COFFSYM, *PCOFFSYM;
 
-typedef struct _ComDatRec
+typedef struct __comdatrec 
 {
-	unsigned int segnum;
-	unsigned int combineType;
-	unsigned int linkwith;
-} ComDatRec, * ComDatRecPtr, ** ComDatRecPtrPtr;
+    UINT segnum;
+    UINT combineType;
+    UINT linkwith;
+} COMDATREC, *PCOMDAT;
 
-extern char** libPath;
+int sortCompare(const void *x1,const void *x2);
+void processArgs(int argc,char *argv[]);
+void combine_groups(long i,long j);
+void combine_common(long i,long j);
+void combine_segments(long i,long j);
+void combineBlocks();
+void OutputWin32file(PCHAR outname);
+void OutputEXEfile(PCHAR outname);
+void OutputCOMfile(PCHAR outname);
+void GetFixupTarget(PRELOC r,long *tseg,UINT *tofs,int isFlat);
+void loadlibmod(UINT libnum,UINT modpage);
+void loadlib(FILE *libfile,PCHAR libname);
+void loadCoffLib(FILE *libfile,PCHAR libname);
+void loadcofflibmod(PLIBFILE p,FILE *libfile);
+long loadmod(FILE *objfile);
+void loadres(FILE *resfile);
+void loadcoff(FILE *objfile);
+void loadCoffImport(FILE *objfile);
+void LoadFIXUP(PRELOC r,PUCHAR buf,long *p);
+void RelocLIDATA(PDATABLOCK p,long *ofs,PRELOC r);
+void EmitLiData(PDATABLOCK p,long segnum,long *ofs);
+PDATABLOCK BuildLiData(long *bufofs);
+void DestroyLIDATA(PDATABLOCK p);
+void ReportError(long errnum);
+long GetIndex(PUCHAR buf,long *index);
+void ClearNbit(PUCHAR mask,long i);
+void SetNbit(PUCHAR mask,long i);
+char GetNbit(PUCHAR mask,long i);
+int wstricmp(const char *s1,const char*s2);
+int wstrlen(const char *s);
+unsigned short wtoupper(unsigned short a);
+int getBitCount(UINT a);
+void *checkMalloc(size_t x);
+void *checkRealloc(void *p,size_t x);
+char *checkStrdup(const char *s);
+PSORTENTRY binarySearch(PSORTENTRY list,UINT count,char *key);
+void sortedInsert(PSORTENTRY *plist,UINT *pcount,char *key,void *object);
+#define strdup _strdup
+
 extern char case_sensitive;
 extern char padsegments;
 extern char mapfile;
-extern char * mapname;
+extern PCHAR mapname;
 extern unsigned short maxalloc;
 extern int output_type;
-extern char * outname;
-extern FILE* afile;
-extern unsigned int filepos;
+extern PCHAR outname;
+
+extern FILE *afile;
+extern UINT filepos;
 extern long reclength;
 extern unsigned char rectype;
 extern char li_le;
-extern unsigned int prevofs;
+extern UINT prevofs;
 extern long prevseg;
 extern long gotstart;
-extern Reloc startaddr;
-extern unsigned int imageBase;
-extern unsigned int fileAlign;
-extern unsigned int objectAlign;
-extern unsigned int stackSize;
-extern unsigned int stackCommitSize;
-extern unsigned int heapSize;
-extern unsigned int heapCommitSize;
-extern unsigned char osMajor, osMinor;
-extern unsigned char subsysMajor, subsysMinor;
+extern RELOC startaddr;
+extern UINT imageBase;
+extern UINT fileAlign;
+extern UINT objectAlign;
+extern UINT stackSize;
+extern UINT stackCommitSize;
+extern UINT heapSize;
+extern UINT heapCommitSize;
+extern unsigned char osMajor,osMinor;
+extern unsigned char subsysMajor,subsysMinor;
 extern unsigned int subSystem;
+
 extern long errcount;
+
 extern unsigned char buf[65536];
-extern DataBlockPtr lidata;
-extern char ** namelist;
-extern SegPtrPtr seglist;
-extern SegPtrPtr outlist;
-extern GrpPtrPtr grplist;
-extern SortEntryPtr publics;
-extern ExtRecPtr externs;
-extern ComRecPtrPtr comdefs;
-extern RelocPtrPtr relocs;
-extern ImpRecPtr impdefs;
-extern ExpRecPtr expdefs;
-extern LibFilePtr libfiles;
-extern ResourcePtr resource;
-extern char** modname;
-extern char** filename;
-extern SortEntryPtr comdats;
-extern unsigned int namecount, namemin,
-pubcount, pubmin,
-segcount, segmin, outcount,
-grpcount, grpmin,
-extcount, extmin,
-comcount, commin,
-fixcount, fixmin,
-impcount, impmin, impsreq,
-expcount, expmin,
-nummods,
-filecount,
-libcount,
-rescount;
+extern PDATABLOCK lidata;
+
+extern PPCHAR namelist;
+extern PPSEG seglist;
+extern PPSEG outlist;
+extern PPGRP grplist;
+extern PSORTENTRY publics;
+extern PEXTREC externs;
+extern PPCOMREC comdefs;
+extern PPRELOC relocs;
+extern PIMPREC impdefs;
+extern PEXPREC expdefs;
+extern PLIBFILE libfiles;
+extern PRESOURCE resource;
+extern PPCHAR modname;
+extern PPCHAR filename;
+extern PSORTENTRY comdats;
+extern UINT namecount,namemin,
+    pubcount,pubmin,
+	segcount,segmin,outcount,
+	grpcount,grpmin,
+	extcount,extmin,
+	comcount,commin,
+	fixcount,fixmin,
+	impcount,impmin,impsreq,
+	expcount,expmin,
+	nummods,
+	filecount,
+	libcount,
+	rescount;
+
 extern int buildDll;
-extern char * stubName;
+extern PUCHAR stubName;

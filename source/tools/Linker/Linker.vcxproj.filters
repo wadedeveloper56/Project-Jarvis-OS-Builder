@@ -15,34 +15,34 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Linker.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjLoad.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Util.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Coff.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Linker.h">
+    <ClInclude Include="ALINK.H">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ObjLoad.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Util.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Coff.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ALINK.C">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="COFF.C">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="COFFLIB.C">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="COMBINE.C">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OBJLOAD.C">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OUTPUT.C">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UTIL.C">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
