@@ -3,10 +3,10 @@
 char case_sensitive = 1;
 char padsegments = 0;
 char mapfile = 0;
-PCHAR mapname = 0;
+char * mapname = 0;
 unsigned short maxalloc = 0xffff;
 int output_type = OUTPUT_EXE;
-PCHAR outname = 0;
+char * outname = 0;
 
 FILE* afile = 0;
 unsigned int  filepos = 0;
@@ -64,7 +64,7 @@ filecount = 0,
 libcount = 0,
 rescount = 0;
 unsigned int  libPathCount = 0;
-PCHAR* libPath = NULL;
+char ** libPath = NULL;
 char* entryPoint = NULL;
 
 void processArgs(int argc, char** argv)
@@ -251,7 +251,7 @@ void processArgs(int argc, char** argv)
 								i++;
 								if (!outname)
 								{
-									outname = (PCHAR)checkMalloc(strlen(argv[i]) + 1 + 4); /* space for added .EXT if none given */
+									outname = (char *)checkMalloc(strlen(argv[i]) + 1 + 4); /* space for added .EXT if none given */
 									strcpy(outname, argv[i]);
 								}
 								else
@@ -370,7 +370,7 @@ void processArgs(int argc, char** argv)
 						{
 							i++;
 							libPathCount++;
-							libPath = (PCHAR*)checkRealloc(libPath, libPathCount * sizeof(PCHAR));
+							libPath = (char **)checkRealloc(libPath, libPathCount * sizeof(char *));
 							j = strlen(argv[i]);
 							if (argv[i][j - 1] != PATH_CHAR)
 							{
@@ -674,7 +674,7 @@ void processArgs(int argc, char** argv)
 		}
 		else
 		{
-			filename = (char **)checkRealloc(filename, (filecount + 1) * sizeof(PCHAR));
+			filename = (char **)checkRealloc(filename, (filecount + 1) * sizeof(char *));
 			filename[filecount] = (CHAR *)checkMalloc(strlen(argv[i]) + 1);
 			memcpy(filename[filecount], argv[i], strlen(argv[i]) + 1);
 			for (j = strlen(filename[filecount]);
@@ -820,7 +820,7 @@ void matchExterns()
 	long i, j, k, old_nummods;
 	//int n;
 	SortEntryPtr listnode;
-	PCHAR name;
+	char * name;
 	PPUBLIC pubdef;
 
 	do
@@ -1034,7 +1034,7 @@ void matchComDefs()
 
 	seglist = (PPSEG)checkRealloc(seglist, (segcount + 1) * sizeof(PSEG));
 	seglist[segcount] = (PSEG)checkMalloc(sizeof(SEG));
-	namelist = (char **)checkRealloc(namelist, (namecount + 1) * sizeof(PCHAR));
+	namelist = (char **)checkRealloc(namelist, (namecount + 1) * sizeof(char *));
 	namelist[namecount] = checkStrdup("COMDEFS");
 	seglist[segcount]->nameindex = namecount;
 	seglist[segcount]->classindex = -1;
@@ -1066,7 +1066,7 @@ void matchComDefs()
 
 	seglist = (PPSEG)checkRealloc(seglist, (segcount + 1) * sizeof(PSEG));
 	seglist[segcount] = (PSEG)checkMalloc(sizeof(SEG));
-	namelist = (char **)checkRealloc(namelist, (namecount + 1) * sizeof(PCHAR));
+	namelist = (char **)checkRealloc(namelist, (namecount + 1) * sizeof(char *));
 	namelist[namecount] = checkStrdup("FARCOMDEFS");
 	seglist[segcount]->nameindex = namecount;
 	seglist[segcount]->classindex = -1;
@@ -1090,7 +1090,7 @@ void matchComDefs()
 			{
 				seglist = (PPSEG)checkRealloc(seglist, (segcount + 1) * sizeof(PSEG));
 				seglist[segcount] = (PSEG)checkMalloc(sizeof(SEG));
-				namelist = (char **)checkRealloc(namelist, (namecount + 1) * sizeof(PCHAR));
+				namelist = (char **)checkRealloc(namelist, (namecount + 1) * sizeof(char *));
 				namelist[namecount] = checkStrdup("FARCOMDEFS");
 				seglist[segcount]->nameindex = namecount;
 				seglist[segcount]->classindex = -1;
@@ -1117,7 +1117,7 @@ void matchComDefs()
 
 				seglist = (PPSEG)checkRealloc(seglist, (segcount + 1) * sizeof(PSEG));
 				seglist[segcount] = (PSEG)checkMalloc(sizeof(SEG));
-				namelist = (char **)checkRealloc(namelist, (namecount + 1) * sizeof(PCHAR));
+				namelist = (char **)checkRealloc(namelist, (namecount + 1) * sizeof(char *));
 				namelist[namecount] = checkStrdup("FARCOMDEFS");
 				seglist[segcount]->nameindex = namecount;
 				seglist[segcount]->classindex = -1;
@@ -1631,7 +1631,7 @@ int main(int argc, char* argv[])
 			{
 				if (i - j)
 				{
-					libPath = (PCHAR*)checkRealloc(libPath, (libPathCount + 1) * sizeof(PCHAR));
+					libPath = (char **)checkRealloc(libPath, (libPathCount + 1) * sizeof(char *));
 					libList[i] = 0;
 					if (libList[i - 1] == PATH_CHAR)
 					{
@@ -1639,7 +1639,7 @@ int main(int argc, char* argv[])
 					}
 					else
 					{
-						libPath[libPathCount] = (PCHAR)checkMalloc(i - j + 2);
+						libPath[libPathCount] = (char *)checkMalloc(i - j + 2);
 						strcpy(libPath[libPathCount], libList + j);
 						libPath[libPathCount][i - j] = PATH_CHAR;
 						libPath[libPathCount][i - j + 1] = 0;
@@ -1662,7 +1662,7 @@ int main(int argc, char* argv[])
 
 	if (!outname)
 	{
-		outname = (PCHAR)checkMalloc(strlen(filename[0]) + 1 + 4);
+		outname = (char *)checkMalloc(strlen(filename[0]) + 1 + 4);
 		strcpy(outname, filename[0]);
 		i = strlen(outname);
 		while ((i >= 0) && (outname[i] != '.') && (outname[i] != PATH_CHAR) && (outname[i] != ':'))
@@ -1706,7 +1706,7 @@ int main(int argc, char* argv[])
 	{
 		if (!mapname)
 		{
-			mapname = (PCHAR)checkMalloc(strlen(outname) + 1 + 4);
+			mapname = (char *)checkMalloc(strlen(outname) + 1 + 4);
 			strcpy(mapname, outname);
 			i = strlen(mapname);
 			while ((i >= 0) && (mapname[i] != '.') && (mapname[i] != PATH_CHAR) && (mapname[i] != ':'))

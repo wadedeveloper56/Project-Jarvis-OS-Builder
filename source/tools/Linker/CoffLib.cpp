@@ -1,6 +1,6 @@
 #include "alink.h"
 
-void loadCoffLib(FILE* libfile, PCHAR libname)
+void loadCoffLib(FILE* libfile, char * libname)
 {
 	unsigned int  i, j;
 	unsigned int  numsyms;
@@ -9,14 +9,14 @@ void loadCoffLib(FILE* libfile, PCHAR libname)
 	unsigned int  startPoint;
 	PUCHAR endptr;
 	PLIBFILE p;
-	PCHAR name;
+	char * name;
 	PUCHAR modbuf;
 	SortEntryPtr symlist;
 	int x;
 
 	libfiles = (PLIBFILE)checkRealloc(libfiles, (libcount + 1) * sizeof(LIBFILE));
 	p = &libfiles[libcount];
-	p->filename = (PCHAR)checkMalloc(strlen(libname) + 1);
+	p->filename = (char *)checkMalloc(strlen(libname) + 1);
 	strcpy(p->filename, libname);
 	startPoint = ftell(libfile);
 
@@ -249,7 +249,7 @@ void loadCoffLib(FILE* libfile, PCHAR libname)
 
 		/* get size */
 		errno = 0;
-		memberSize = strtoul((PCHAR)(buf + 48), (char **)&endptr, 10);
+		memberSize = strtoul((char *)(buf + 48), (char **)&endptr, 10);
 		if (errno || (*endptr))
 		{
 			printf("Invalid library file format - bad member size\n");

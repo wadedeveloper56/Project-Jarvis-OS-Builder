@@ -333,7 +333,7 @@
 
 #define EXP_ORD 0x80
 
-typedef char* PCHAR;
+//typedef char* char *;
 //typedef char** char **;
 typedef unsigned char *PUCHAR;
 //typedef unsigned long unsigned int ;
@@ -374,11 +374,11 @@ typedef struct __pubdef {
     long typenum;
     unsigned int  ofs;
     unsigned int  modnum;
-    PCHAR aliasName;
+    char * aliasName;
 } PUBLIC, *PPUBLIC,**PPPUBLIC;
 
 typedef struct __extdef {
- PCHAR name;
+ char * name;
  long typenum;
  PPUBLIC pubdef;
  long impnum;
@@ -387,9 +387,9 @@ typedef struct __extdef {
 } EXTREC, *PEXTREC,**PPEXTREC;
 
 typedef struct __imprec {
- PCHAR int_name;
- PCHAR mod_name;
- PCHAR imp_name;
+ char * int_name;
+ char * mod_name;
+ char * imp_name;
  unsigned short ordinal;
  char flags;
  long segnum;
@@ -397,8 +397,8 @@ typedef struct __imprec {
 } IMPREC, *PIMPREC, **PPIMPREC;
 
 typedef struct __exprec {
- PCHAR int_name;
- PCHAR exp_name;
+ char * int_name;
+ char * exp_name;
  unsigned int  ordinal;
  char flags;
  PPUBLIC pubdef;
@@ -406,7 +406,7 @@ typedef struct __exprec {
 } EXPREC, *PEXPREC, **PPEXPREC;
 
 typedef struct __comdef {
- PCHAR name;
+ char * name;
  unsigned int  length;
  int isFar;
  unsigned int  modnum;
@@ -431,7 +431,7 @@ typedef struct __grp {
 } GRP, *PGRP, **PPGRP;
 
 typedef struct __libfile {
-    PCHAR filename;
+    char * filename;
     unsigned short blocksize;
     unsigned short numdicpages;
     unsigned int  dicstart;
@@ -484,13 +484,13 @@ void combine_groups(long i,long j);
 void combine_common(long i,long j);
 void combine_segments(long i,long j);
 void combineBlocks();
-void OutputWin32file(PCHAR outname);
-void OutputEXEfile(PCHAR outname);
-void OutputCOMfile(PCHAR outname);
+void OutputWin32file(char * outname);
+void OutputEXEfile(char * outname);
+void OutputCOMfile(char * outname);
 void GetFixupTarget(PRELOC r,long *tseg,unsigned int  *tofs,int isFlat);
 void loadlibmod(unsigned int  libnum,unsigned int  modpage);
-void loadlib(FILE *libfile,PCHAR libname);
-void loadCoffLib(FILE *libfile,PCHAR libname);
+void loadlib(FILE *libfile,char * libname);
+void loadCoffLib(FILE *libfile,char * libname);
 void loadcofflibmod(PLIBFILE p,FILE *libfile);
 long loadmod(FILE *objfile);
 void loadres(FILE *resfile);
@@ -520,10 +520,10 @@ void sortedInsert(SortEntryPtr *plist,unsigned int  *pcount,char *key,void *obje
 extern char case_sensitive;
 extern char padsegments;
 extern char mapfile;
-extern PCHAR mapname;
+extern char * mapname;
 extern unsigned short maxalloc;
 extern int output_type;
-extern PCHAR outname;
+extern char * outname;
 
 extern FILE *afile;
 extern unsigned int  filepos;

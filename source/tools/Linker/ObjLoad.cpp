@@ -364,7 +364,7 @@ long loadmod(FILE* objfile)
 	long segnum, grpnum;
 	PRELOC r;
 	PPUBLIC pubdef;
-	PCHAR name, aliasName;
+	char * name, * aliasName;
 	SortEntryPtr listnode;
 
 	modpos = 0;
@@ -397,8 +397,8 @@ long loadmod(FILE* objfile)
 				{
 					ReportError(ERR_EXTRA_HEADER);
 				}
-				modname = (char **)checkRealloc(modname, (nummods + 1) * sizeof(PCHAR));
-				modname[nummods] = (PCHAR)checkMalloc(buf[0] + 1);
+				modname = (char **)checkRealloc(modname, (nummods + 1) * sizeof(char *));
+				modname[nummods] = (char *)checkMalloc(buf[0] + 1);
 				for (i = 0; i < buf[0]; i++)
 				{
 					modname[nummods][i] = buf[i + 1];
@@ -433,8 +433,8 @@ long loadmod(FILE* objfile)
 					{
 						case COMENT_LIB_SPEC:
 						case COMENT_DEFLIB:
-							filename = (char **)checkRealloc(filename, (filecount + 1) * sizeof(PCHAR));
-							filename[filecount] = (PCHAR)checkMalloc(reclength - 1 + 4);
+							filename = (char **)checkRealloc(filename, (filecount + 1) * sizeof(char *));
+							filename[filecount] = (char *)checkMalloc(reclength - 1 + 4);
 							/* get filename */
 							for (i = 0; i < reclength - 2; i++)
 							{
@@ -469,7 +469,7 @@ long loadmod(FILE* objfile)
 									}
 									impdefs = (PIMPREC)checkRealloc(impdefs, (impcount + 1) * sizeof(IMPREC));
 									impdefs[impcount].flags = buf[3];
-									impdefs[impcount].int_name = (PCHAR)checkMalloc(buf[j] + 1);
+									impdefs[impcount].int_name = (char *)checkMalloc(buf[j] + 1);
 									for (i = 0; i < buf[j]; i++)
 									{
 										impdefs[impcount].int_name[i] = buf[j + i + 1];
@@ -480,7 +480,7 @@ long loadmod(FILE* objfile)
 									{
 										_strupr(impdefs[impcount].int_name);
 									}
-									impdefs[impcount].mod_name = (PCHAR)checkMalloc(buf[j] + 1);
+									impdefs[impcount].mod_name = (char *)checkMalloc(buf[j] + 1);
 									for (i = 0; i < buf[j]; i++)
 									{
 										impdefs[impcount].mod_name[i] = buf[j + i + 1];
@@ -500,7 +500,7 @@ long loadmod(FILE* objfile)
 									{
 										if (buf[j])
 										{
-											impdefs[impcount].imp_name = (PCHAR)checkMalloc(buf[j] + 1);
+											impdefs[impcount].imp_name = (char *)checkMalloc(buf[j] + 1);
 											for (i = 0; i < buf[j]; i++)
 											{
 												impdefs[impcount].imp_name[i] = buf[j + i + 1];
@@ -510,7 +510,7 @@ long loadmod(FILE* objfile)
 										}
 										else
 										{
-											impdefs[impcount].imp_name = (PCHAR)checkMalloc(strlen(impdefs[impcount].int_name) + 1);
+											impdefs[impcount].imp_name = (char *)checkMalloc(strlen(impdefs[impcount].int_name) + 1);
 											strcpy(impdefs[impcount].imp_name, impdefs[impcount].int_name);
 										}
 									}
@@ -521,7 +521,7 @@ long loadmod(FILE* objfile)
 									j = 4;
 									expdefs[expcount].flags = buf[3];
 									expdefs[expcount].pubdef = NULL;
-									expdefs[expcount].exp_name = (PCHAR)checkMalloc(buf[j] + 1);
+									expdefs[expcount].exp_name = (char *)checkMalloc(buf[j] + 1);
 									for (i = 0; i < buf[j]; i++)
 									{
 										expdefs[expcount].exp_name[i] = buf[j + i + 1];
@@ -534,7 +534,7 @@ long loadmod(FILE* objfile)
 									j += buf[j] + 1;
 									if (buf[j])
 									{
-										expdefs[expcount].int_name = (PCHAR)checkMalloc(buf[j] + 1);
+										expdefs[expcount].int_name = (char *)checkMalloc(buf[j] + 1);
 										for (i = 0; i < buf[j]; i++)
 										{
 											expdefs[expcount].int_name[i] = buf[j + i + 1];
@@ -547,7 +547,7 @@ long loadmod(FILE* objfile)
 									}
 									else
 									{
-										expdefs[expcount].int_name = (PCHAR)checkMalloc(strlen(expdefs[expcount].exp_name) + 1);
+										expdefs[expcount].int_name = (char *)checkMalloc(strlen(expdefs[expcount].exp_name) + 1);
 										strcpy(expdefs[expcount].int_name, expdefs[expcount].exp_name);
 									}
 									j += buf[j] + 1;
@@ -609,8 +609,8 @@ long loadmod(FILE* objfile)
 				j = 0;
 				while (j < reclength)
 				{
-					namelist = (char **)checkRealloc(namelist, (namecount + 1) * sizeof(PCHAR));
-					namelist[namecount] = (PCHAR)checkMalloc(buf[j] + 1);
+					namelist = (char **)checkRealloc(namelist, (namecount + 1) * sizeof(char *));
+					namelist[namecount] = (char *)checkMalloc(buf[j] + 1);
 					for (i = 0; i < buf[j]; i++)
 					{
 						namelist[namecount][i] = buf[j + i + 1];
@@ -830,7 +830,7 @@ long loadmod(FILE* objfile)
 					pubdef->aliasName = NULL;
 					pubdef->grpnum = grpnum;
 					pubdef->segnum = segnum;
-					name = (PCHAR)checkMalloc(buf[j] + 1);
+					name = (char *)checkMalloc(buf[j] + 1);
 					k = buf[j];
 					j++;
 					for (i = 0; i < k; i++)
@@ -890,7 +890,7 @@ long loadmod(FILE* objfile)
 				for (j = 0; j < reclength;)
 				{
 					externs = (PEXTREC)checkRealloc(externs, (extcount + 1) * sizeof(EXTREC));
-					externs[extcount].name = (PCHAR)checkMalloc(buf[j] + 1);
+					externs[extcount].name = (char *)checkMalloc(buf[j] + 1);
 					k = buf[j];
 					j++;
 					for (i = 0; i < k; i++, j++)
@@ -1108,7 +1108,7 @@ long loadmod(FILE* objfile)
 				for (j = 0; j < reclength;)
 				{
 					externs = (PEXTREC)checkRealloc(externs, (extcount + 1) * sizeof(EXTREC));
-					externs[extcount].name = (PCHAR)checkMalloc(buf[j] + 1);
+					externs[extcount].name = (char *)checkMalloc(buf[j] + 1);
 					k = buf[j];
 					j++;
 					for (i = 0; i < k; i++, j++)
@@ -1212,7 +1212,7 @@ long loadmod(FILE* objfile)
 			case ALIAS:
 				printf("ALIAS record\n");
 				j = 0;
-				name = (PCHAR)checkMalloc(buf[j] + 1);
+				name = (char *)checkMalloc(buf[j] + 1);
 				k = buf[j];
 				j++;
 				for (i = 0; i < k; i++)
@@ -1226,7 +1226,7 @@ long loadmod(FILE* objfile)
 					_strupr(name);
 				}
 				printf("ALIAS name:%s\n", name);
-				aliasName = (PCHAR)checkMalloc(buf[j] + 1);
+				aliasName = (char *)checkMalloc(buf[j] + 1);
 				k = buf[j];
 				j++;
 				for (i = 0; i < k; i++)
@@ -1293,10 +1293,10 @@ long loadmod(FILE* objfile)
 	return 0;
 }
 
-void loadlib(FILE* libfile, PCHAR libname)
+void loadlib(FILE* libfile, char * libname)
 {
 	unsigned int i, j, k, n;
-	PCHAR name;
+	char * name;
 	unsigned short modpage;
 	PLIBFILE p;
 	unsigned int  numsyms;
@@ -1305,7 +1305,7 @@ void loadlib(FILE* libfile, PCHAR libname)
 	libfiles = (PLIBFILE)checkRealloc(libfiles, (libcount + 1) * sizeof(LIBFILE));
 	p = &libfiles[libcount];
 
-	p->filename = (PCHAR)checkMalloc(strlen(libname) + 1);
+	p->filename = (char *)checkMalloc(strlen(libname) + 1);
 	strcpy(p->filename, libname);
 
 	if (fread(buf, 1, 3, libfile) != 3)
@@ -1342,7 +1342,7 @@ void loadlib(FILE* libfile, PCHAR libname)
 			k = buf[j] * 2;
 			if (k)
 			{
-				name = (PCHAR)checkMalloc(buf[k] + 1);
+				name = (char *)checkMalloc(buf[k] + 1);
 				for (n = 0; n < buf[k]; n++)
 				{
 					name[n] = buf[n + k + 1];

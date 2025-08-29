@@ -208,7 +208,7 @@ void GetFixupTarget(PRELOC r, long* bseg, unsigned int * tofs, int isFlat)
 }
 
 
-void OutputCOMfile(PCHAR outname)
+void OutputCOMfile(char * outname)
 {
 	long i, j;
 	unsigned int  started;
@@ -474,7 +474,7 @@ void OutputCOMfile(PCHAR outname)
 	fclose(outfile);
 }
 
-void OutputEXEfile(PCHAR outname)
+void OutputEXEfile(char * outname)
 {
 	long i, j;
 	unsigned int  started, lastout;
@@ -882,7 +882,7 @@ long createOutputSection(char* name, unsigned int  winFlags)
 	seglist = (PPSEG)checkRealloc(seglist, sizeof(PSEG) * (segcount + 1));
 	seglist = (PPSEG)checkRealloc(seglist, (segcount + 1) * sizeof(PSEG));
 	seglist[segcount] = outlist[outcount];
-	namelist = (char **)checkRealloc(namelist, (namecount + 1) * sizeof(PCHAR));
+	namelist = (char **)checkRealloc(namelist, (namecount + 1) * sizeof(char *));
 	namelist[namecount] = checkStrdup(name);
 	outlist[outcount]->nameindex = namecount;
 	outlist[outcount]->classindex = -1;
@@ -2354,7 +2354,7 @@ void getStub(PUCHAR* pstubData, unsigned int * pstubSize)
 	}
 }
 
-void OutputWin32file(PCHAR outname)
+void OutputWin32file(char * outname)
 {
 	unsigned long i, j, k;
 	unsigned int  started;
