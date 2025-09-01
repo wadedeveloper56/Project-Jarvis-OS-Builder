@@ -5,7 +5,7 @@
 void argLitResetFn(void* parent_) {
 	ArgLitPtr parent = (ArgLitPtr)parent_;
 	parent->count = 0;
-} 
+}
 
 int argLitScanFn(void* parent_, const char* argval) {
 	ArgLitPtr parent = (ArgLitPtr)parent_;
@@ -30,25 +30,22 @@ void argLitErrorFn(void* parent_, ArgDstrPtr ds, int errorcode, const char* argv
 	const char* datatype = parent->hdr.datatype;
 
 	switch (errorcode) {
-	case ARG_ERR_MINCOUNT:
-		argDstrCatF(ds, "%s: missing option ", progname);
-		argPrintOptionDs(ds, shortopts, longopts, datatype, "\n");
-		argDstrCat(ds, "\n");
-		break;
+		case ARG_ERR_MINCOUNT:
+			argDstrCatF(ds, "%s: missing option ", progname);
+			argPrintOptionDs(ds, shortopts, longopts, datatype, "\n");
+			argDstrCat(ds, "\n");
+			break;
 
-	case ARG_ERR_MAXCOUNT:
-		argDstrCatF(ds, "%s: extraneous option ", progname);
-		argPrintOptionDs(ds, shortopts, longopts, datatype, "\n");
-		break;
+		case ARG_ERR_MAXCOUNT:
+			argDstrCatF(ds, "%s: extraneous option ", progname);
+			argPrintOptionDs(ds, shortopts, longopts, datatype, "\n");
+			break;
 	}
 }
 
 ArgLitPtr argLitN(const char* shortopts, const char* longopts, int mincount, int maxcount, const char* glossary) {
-	ArgLitPtr result;
-
 	maxcount = (maxcount < mincount) ? mincount : maxcount;
-
-	result = (ArgLitPtr)malloc(sizeof(ArgLit));
+	ArgLitPtr result = new ArgLit;
 	if (result) {
 		result->hdr.flag = 0;
 		result->hdr.shortopts = shortopts;

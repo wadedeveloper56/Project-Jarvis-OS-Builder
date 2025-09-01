@@ -74,16 +74,8 @@ ArgDblPtr argDbl1(const char* shortopts, const char* longopts, const char* datat
 }
 
 ArgDblPtr argDblN(const char* shortopts, const char* longopts, const char* datatype, int mincount, int maxcount, const char* glossary) {
-	size_t nbytes;
-	ArgDblPtr result;
-	size_t addr;
-	size_t rem;
-
 	maxcount = (maxcount < mincount) ? mincount : maxcount;
-
-	nbytes = sizeof(ArgDbl)	+ (size_t)(maxcount + 1) * sizeof(double);
-
-	result = (ArgDblPtr)malloc(nbytes);
+	ArgDblPtr result = new ArgDbl;
 	if (result) {
 		result->hdr.flag = ARG_HASVALUE;
 		result->hdr.shortopts = shortopts;
@@ -97,10 +89,7 @@ ArgDblPtr argDblN(const char* shortopts, const char* longopts, const char* datat
 		result->hdr.scanfn = argDblScanFn;
 		result->hdr.checkfn = argDblCheckFn;
 		result->hdr.errorfn = argDblErrorFn;
-
-		addr = (size_t)(result + 1);
-		rem = addr % sizeof(double);
-		result->dval = (double*)(addr + sizeof(double) - rem);
+		result->dval = new double[maxcount];
 		result->count = 0;
 	}
 	return result;

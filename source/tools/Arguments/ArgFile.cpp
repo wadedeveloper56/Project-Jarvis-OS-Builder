@@ -105,18 +105,8 @@ ArgFilePtr argFile1(const char* shortopts, const char* longopts, const char* dat
 }
 
 ArgFilePtr argFileN(const char* shortopts, const char* longopts, const char* datatype, int mincount, int maxcount, const char* glossary) {
-	size_t nbytes;
-	ArgFilePtr result;
-	int i;
-
 	maxcount = (maxcount < mincount) ? mincount : maxcount;
-
-	nbytes = sizeof(ArgFile)
-		+ sizeof(char*) * (size_t)maxcount
-		+ sizeof(char*) * (size_t)maxcount
-		+ sizeof(char*) * (size_t)maxcount;
-
-	result = (ArgFilePtr)malloc(nbytes);
+	ArgFilePtr result = new ArgFile;
 	if (result) {
 		result->hdr.flag = ARG_HASVALUE;
 		result->hdr.shortopts = shortopts;
@@ -131,12 +121,12 @@ ArgFilePtr argFileN(const char* shortopts, const char* longopts, const char* dat
 		result->hdr.checkfn = argFileCheckFn;
 		result->hdr.errorfn = argFileErrorFn;
 
-		result->filename = (const char**)(result + 1);
-		result->basename = result->filename + maxcount;
-		result->extension = result->basename + maxcount;
+		result->filename = new const char* [maxcount];
+		result->basename = new const char* [maxcount];
+		result->extension = new const char* [maxcount];
 		result->count = 0;
 
-		for (i = 0; i < maxcount; i++) {
+		for (int i = 0; i < maxcount; i++) {
 			result->filename[i] = "";
 			result->basename[i] = "";
 			result->extension[i] = "";

@@ -163,14 +163,8 @@ void argIntErrorFn(void* parent_, ArgDstrPtr ds, int errorcode, const char* argv
 }
 
 ArgIntPtr argIntN(const char* shortopts, const char* longopts, const char* datatype, int mincount, int maxcount, const char* glossary) {
-	size_t nbytes;
-	ArgIntPtr result;
-
 	maxcount = (maxcount < mincount) ? mincount : maxcount;
-
-	nbytes = sizeof(ArgInt) + (size_t)maxcount * sizeof(int);
-
-	result = (ArgIntPtr)malloc(nbytes);
+	ArgIntPtr result = new ArgInt;
 	if (result) {
 		result->hdr.flag = ARG_HASVALUE;
 		result->hdr.shortopts = shortopts;
@@ -184,7 +178,7 @@ ArgIntPtr argIntN(const char* shortopts, const char* longopts, const char* datat
 		result->hdr.scanfn = argIntScanFn;
 		result->hdr.checkfn = argIntCheckFn;
 		result->hdr.errorfn = argIntErrorFn;
-		result->ival = (int*)(result + 1);
+		result->ival = new int[maxcount];
 		result->count = 0;
 	}
 	return result;

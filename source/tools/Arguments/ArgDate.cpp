@@ -85,17 +85,9 @@ ArgDatePtr argDate1(const char* shortopts, const char* longopts, const char* for
 }
 
 ArgDatePtr argDateN(const char* shortopts, const char* longopts, const char* format, const char* datatype, int mincount, int maxcount, const char* glossary) {
-	size_t nbytes;
-	ArgDatePtr result;
-
 	maxcount = (maxcount < mincount) ? mincount : maxcount;
-
-	if (!format)
-		format = "%x";
-
-	nbytes = sizeof(ArgDate) + (size_t)maxcount * sizeof(struct tm);
-
-	result = (ArgDatePtr)calloc(1, nbytes);
+	if (!format) format = "%x";
+	ArgDatePtr result = new ArgDate;
 	if (result) {
 		result->hdr.flag = ARG_HASVALUE;
 		result->hdr.shortopts = shortopts;
@@ -109,9 +101,7 @@ ArgDatePtr argDateN(const char* shortopts, const char* longopts, const char* for
 		result->hdr.scanfn = argDateScanFn;
 		result->hdr.checkfn = argDateCheckFn;
 		result->hdr.errorfn = argDateErrorFn;
-
-		result->tmval = (struct tm*)(result + 1);
-
+		result->tmval = new struct tm[maxcount];
 		result->count = 0;
 		result->format = format;
 	}
