@@ -172,6 +172,7 @@
     <ClCompile Include="Coff.cpp" />
     <ClCompile Include="CoffLib.cpp" />
     <ClCompile Include="Combine.cpp" />
+    <ClCompile Include="Global.cpp" />
     <ClCompile Include="ObjLoad.cpp" />
     <ClCompile Include="Output.cpp" />
     <ClCompile Include="Util.cpp" />

@@ -316,7 +316,8 @@
 
 #define OUTPUT_COM 1
 #define OUTPUT_EXE 2
-#define OUTPUT_PE  3
+#define OUTPUT_PE32  3
+#define OUTPUT_PE64  4
 
 #define WIN32_DEFAULT_BASE              0x00400000
 #define WIN32_DEFAULT_FILEALIGN         0x00000200
@@ -578,6 +579,8 @@ nummods,
 filecount,
 libcount,
 rescount;
-
 extern int buildDll;
 extern unsigned char* stubName;
+extern unsigned int  libPathCount;
+extern char** libPath;
+extern char* entryPoint;
