@@ -1,1 +1,0 @@
-C:\projects\ProjectJarvis\bin\Release\x64\DumpBin C:\projects\ProjectJarvis\test\test1.obj > dumpbin.log

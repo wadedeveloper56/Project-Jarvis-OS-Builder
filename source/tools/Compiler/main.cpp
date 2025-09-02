@@ -118,7 +118,7 @@ int main(int argc, char* argv[])
 		exitcode = -1;
 	}
 exit:
-	arg_freetable(argtable, sizeof(argtable) / sizeof(argtable[0]));
+	argFreeTable(argtable, sizeof(argtable) / sizeof(argtable[0]));
 	in.close();
 	out.close();
 	delete program;

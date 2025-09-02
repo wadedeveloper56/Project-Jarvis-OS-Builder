@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{5b54a160-ab9c-471a-b0ec-2863d0303794}</ProjectGuid>
-    <RootNamespace>Linker</RootNamespace>
+    <ProjectGuid>{79a2b0bd-332d-4cfa-ada9-5bf48b48bcf7}</ProjectGuid>
+    <RootNamespace>PEDump</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -72,23 +72,19 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>..\..\..\bin\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>..\..\..\bin\intermediate\Linker\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>C:\projects\ProjectJarvis\source\tools\Arguments;$(IncludePath)</IncludePath>
+    <IntDir>..\..\..\bin\intermediate\PEDump\$(Configuration)\$(Platform)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>..\..\..\bin\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>..\..\..\bin\intermediate\Linker\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>C:\projects\ProjectJarvis\source\tools\Arguments;$(IncludePath)</IncludePath>
+    <IntDir>..\..\..\bin\intermediate\PEDump\$(Configuration)\$(Platform)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>..\..\..\bin\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>..\..\..\bin\intermediate\Linker\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>C:\projects\ProjectJarvis\source\tools\Arguments;$(IncludePath)</IncludePath>
+    <IntDir>..\..\..\bin\intermediate\PEDump\$(Configuration)\$(Platform)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>..\..\..\bin\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>..\..\..\bin\intermediate\Linker\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>C:\projects\ProjectJarvis\source\tools\Arguments;$(IncludePath)</IncludePath>
+    <IntDir>..\..\..\bin\intermediate\PEDump\$(Configuration)\$(Platform)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -96,10 +92,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <BufferSecurityCheck>false</BufferSecurityCheck>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -114,10 +108,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <BufferSecurityCheck>false</BufferSecurityCheck>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -130,10 +122,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <BufferSecurityCheck>false</BufferSecurityCheck>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -148,10 +138,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <BufferSecurityCheck>false</BufferSecurityCheck>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -159,23 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Arguments\Arguments.vcxproj">
-      <Project>{fe883520-0f4b-494d-bf5e-714adb7881a3}</Project>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="ALink.h" />
-    <ClInclude Include="pch.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="ALink.cpp" />
-    <ClCompile Include="Coff.cpp" />
-    <ClCompile Include="CoffLib.cpp" />
-    <ClCompile Include="Combine.cpp" />
-    <ClCompile Include="Global.cpp" />
-    <ClCompile Include="ObjLoad.cpp" />
-    <ClCompile Include="Output.cpp" />
-    <ClCompile Include="Util.cpp" />
+    <ClCompile Include="PEDump.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

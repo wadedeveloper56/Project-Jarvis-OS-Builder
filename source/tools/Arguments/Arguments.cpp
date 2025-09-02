@@ -5,7 +5,7 @@
 extern char* optarg;
 extern int optind, opterr, optopt;
 
-void arg_freetable(void** argtable, size_t n) {
+void argFreeTable(void** argtable, size_t n) {
 	ArgHdrPtrPtr table = (ArgHdrPtrPtr)argtable;
 	size_t tabindex = 0;
 	for (tabindex = 0; tabindex < n; tabindex++) {

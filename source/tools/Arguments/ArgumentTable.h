@@ -344,7 +344,7 @@ extern "C" {
 	ArgStrPtr argStr1(const char* shortopts, const char* longopts, const char* datatype, const char* glossary);
 	ArgStrPtr argStrN(const char* shortopts, const char* longopts, const char* datatype, int mincount, int maxcount, const char* glossary);
 
-	void arg_freetable(void** argtable, size_t n);
+	void argFreeTable(void** argtable, size_t n);
 	ArgRemPtr arg_rem(const char* datatype, const char* glossary);
 	int argNullCheck(void** argtable);
 	void arg_reset(void** argtable);
