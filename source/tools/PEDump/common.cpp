@@ -1,9 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS
-#include <windows.h>
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <time.h>
+#include "pch.h"
 #include "common.h"
 #include "symboltablesupport.h"
 #include "extrnvar.h"
@@ -69,7 +64,7 @@ void show_dll_list()  // FIX20171017
     size_t ii, len, sz;
     std::string s;
     if (max) {
-        SPRTF("Total imports: %d, in case insensitive alphabetic order...\n", (int)max);
+        printf("Total imports: %d, in case insensitive alphabetic order...\n", (int)max);
         std::sort(vDllList.begin(), vDllList.end(), stringCompare);
     }
     len = 0;
@@ -79,26 +74,26 @@ void show_dll_list()  // FIX20171017
         sz = s.size();
         if (sz > mwid) {
             if (len)
-                SPRTF("\n"); // close and previous
-            SPRTF("%s\n", s.c_str()); // and this
+                printf("\n"); // close and previous
+            printf("%s\n", s.c_str()); // and this
             len = 0;
         }
         else if ((len + sz) > mwid) {
             if (len)
-                SPRTF("\n");  // close and previous
-            SPRTF("%s ", s.c_str()); // out this
+                printf("\n");  // close and previous
+            printf("%s ", s.c_str()); // out this
             len = sz;   // and start size counter
         }
         else {
-            SPRTF("%s ", s.c_str()); // add this
+            printf("%s ", s.c_str()); // add this
             len += sz;  // and add to width
         }
     }
     if (max) {
         if (len)
-            SPRTF("\n\n"); // close current
+            printf("\n\n"); // close current
         else
-            SPRTF("\n");
+            printf("\n");
     }
     kill_dll_list();
 }
@@ -192,9 +187,9 @@ void DumpHeader(PIMAGE_FILE_HEADER pImageFileHeader)
     UINT i;
     
     if (!fShowMachineType)
-        SPRTF("File Header:\n");
+        printf("File Header:\n");
     if (!IsAddressInRange((BYTE *)pImageFileHeader, (int)sizeof(IMAGE_FILE_HEADER))) {
-        SPRTF("TODO: PIMAGE_FILE_HEADER out of range - %p\n", pImageFileHeader);
+        printf("TODO: PIMAGE_FILE_HEADER out of range - %p\n", pImageFileHeader);
         return;
     }
 
@@ -213,21 +208,21 @@ void DumpHeader(PIMAGE_FILE_HEADER pImageFileHeader)
     if (fShowMachineType)
         return; // all done
 
-    SPRTF("  %-*s%04X (%s)\n", headerFieldWidth, "Machine:", 
+    printf("  %-*s%04X (%s)\n", headerFieldWidth, "Machine:", 
                 pImageFileHeader->Machine,
                 mt );
-    SPRTF("  %-*s%04X\n", headerFieldWidth, "Number of Sections:", nSects); // pImageFileHeader->NumberOfSections);
-    SPRTF("  %-*s%08X -> %s\n", headerFieldWidth, "TimeDateStamp:",
+    printf("  %-*s%04X\n", headerFieldWidth, "Number of Sections:", nSects); // pImageFileHeader->NumberOfSections);
+    printf("  %-*s%08X -> %s\n", headerFieldWidth, "TimeDateStamp:",
                 pImageFileHeader->TimeDateStamp,
                 get_ctime_stg((time_t *)&pImageFileHeader->TimeDateStamp));
-    SPRTF("  %-*s%08X\n", headerFieldWidth, "PointerToSymbolTable:",
+    printf("  %-*s%08X\n", headerFieldWidth, "PointerToSymbolTable:",
                 pImageFileHeader->PointerToSymbolTable);
-    SPRTF("  %-*s%08X\n", headerFieldWidth, "NumberOfSymbols:",
+    printf("  %-*s%08X\n", headerFieldWidth, "NumberOfSymbols:",
                 pImageFileHeader->NumberOfSymbols);
-    SPRTF("  %-*s%04X\n", headerFieldWidth, "SizeOfOptionalHeader:",
+    printf("  %-*s%04X\n", headerFieldWidth, "SizeOfOptionalHeader:",
                 pImageFileHeader->SizeOfOptionalHeader);
     WORD Chars = pImageFileHeader->Characteristics;
-    SPRTF("  %-*s%04X\n", headerFieldWidth, "Characteristics:",
+    printf("  %-*s%04X\n", headerFieldWidth, "Characteristics:",
                 Chars);
     for ( i=0; i < NUMBER_IMAGE_HEADER_FLAGS; i++ )
     {
@@ -235,14 +230,14 @@ void DumpHeader(PIMAGE_FILE_HEADER pImageFileHeader)
         //if ( pImageFileHeader->Characteristics & 
         //     ImageFileHeaderCharacteristics[i].flag )
         if (Chars & flag) {
-            SPRTF("    %s\n", ImageFileHeaderCharacteristics[i].name);
+            printf("    %s\n", ImageFileHeaderCharacteristics[i].name);
             Chars &= ~flag;
             if (Chars == 0)
                 break;
         }
     }
     if (Chars) {
-        SPRTF("    Unknown bits %u\n", Chars);
+        printf("    Unknown bits %u\n", Chars);
     }
 }
 
@@ -403,41 +398,41 @@ void DumpOptionalHeader32(PIMAGE_OPTIONAL_HEADER32 optionalHeader)
     const char *s;
     UINT i;
     
-    SPRTF("Optional Header - 32-bit\n");
+    printf("Optional Header - 32-bit\n");
     
-    SPRTF("  %-*s%04X\n", width, "Magic", optionalHeader->Magic);
-    SPRTF("  %-*s%u.%02u\n", width, "linker version",
+    printf("  %-*s%04X\n", width, "Magic", optionalHeader->Magic);
+    printf("  %-*s%u.%02u\n", width, "linker version",
         optionalHeader->MajorLinkerVersion,
         optionalHeader->MinorLinkerVersion);
-    SPRTF("  %-*s%X\n", width, "size of code", optionalHeader->SizeOfCode);
-    SPRTF("  %-*s%X\n", width, "size of initialized data",
+    printf("  %-*s%X\n", width, "size of code", optionalHeader->SizeOfCode);
+    printf("  %-*s%X\n", width, "size of initialized data",
         optionalHeader->SizeOfInitializedData);
-    SPRTF("  %-*s%X\n", width, "size of uninitialized data",
+    printf("  %-*s%X\n", width, "size of uninitialized data",
         optionalHeader->SizeOfUninitializedData);
-    SPRTF("  %-*s%X\n", width, "entrypoint RVA",
+    printf("  %-*s%X\n", width, "entrypoint RVA",
         optionalHeader->AddressOfEntryPoint);
-    SPRTF("  %-*s%X\n", width, "base of code", optionalHeader->BaseOfCode);
-    SPRTF("  %-*s%X\n", width, "base of data", optionalHeader->BaseOfData);
-    SPRTF("  %-*s%X\n", width, "image base", optionalHeader->ImageBase);
+    printf("  %-*s%X\n", width, "base of code", optionalHeader->BaseOfCode);
+    printf("  %-*s%X\n", width, "base of data", optionalHeader->BaseOfData);
+    printf("  %-*s%X\n", width, "image base", optionalHeader->ImageBase);
 
-    SPRTF("  %-*s%X\n", width, "section align",
+    printf("  %-*s%X\n", width, "section align",
         optionalHeader->SectionAlignment);
-    SPRTF("  %-*s%X\n", width, "file align", optionalHeader->FileAlignment);
-    SPRTF("  %-*s%u.%02u\n", width, "required OS version",
+    printf("  %-*s%X\n", width, "file align", optionalHeader->FileAlignment);
+    printf("  %-*s%u.%02u\n", width, "required OS version",
         optionalHeader->MajorOperatingSystemVersion,
         optionalHeader->MinorOperatingSystemVersion);
-    SPRTF("  %-*s%u.%02u\n", width, "image version",
+    printf("  %-*s%u.%02u\n", width, "image version",
         optionalHeader->MajorImageVersion,
         optionalHeader->MinorImageVersion);
-    SPRTF("  %-*s%u.%02u\n", width, "subsystem version",
+    printf("  %-*s%u.%02u\n", width, "subsystem version",
         optionalHeader->MajorSubsystemVersion,
         optionalHeader->MinorSubsystemVersion);
-    SPRTF("  %-*s%X\n", width, "Win32 Version",
+    printf("  %-*s%X\n", width, "Win32 Version",
     	optionalHeader->Win32VersionValue);
-    SPRTF("  %-*s%X\n", width, "size of image", optionalHeader->SizeOfImage);
-    SPRTF("  %-*s%X\n", width, "size of headers",
+    printf("  %-*s%X\n", width, "size of image", optionalHeader->SizeOfImage);
+    printf("  %-*s%X\n", width, "size of headers",
             optionalHeader->SizeOfHeaders);
-    SPRTF("  %-*s%X\n", width, "checksum", optionalHeader->CheckSum);
+    printf("  %-*s%X\n", width, "checksum", optionalHeader->CheckSum);
     switch( optionalHeader->Subsystem )
     {
         case IMAGE_SUBSYSTEM_NATIVE: s = "Native"; break;
@@ -447,49 +442,49 @@ void DumpOptionalHeader32(PIMAGE_OPTIONAL_HEADER32 optionalHeader)
         case IMAGE_SUBSYSTEM_POSIX_CUI: s = "Posix character"; break;
         default: s = "unknown";
     }
-    SPRTF("  %-*s%04X (%s)\n", width, "Subsystem",
+    printf("  %-*s%04X (%s)\n", width, "Subsystem",
             optionalHeader->Subsystem, s);
 
 // Marked as obsolete in MSDN CD 9
-    SPRTF("  %-*s%04X\n", width, "DLL flags",
+    printf("  %-*s%04X\n", width, "DLL flags",
             optionalHeader->DllCharacteristics);
     for ( i=0; i < NUMBER_DLL_CHARACTERISTICS; i++ )
     {
         if ( optionalHeader->DllCharacteristics & 
              DllCharacteristics[i].flag )
-            SPRTF( "  %-*s%s", width, " ", DllCharacteristics[i].name );
+            printf( "  %-*s%s", width, " ", DllCharacteristics[i].name );
     }
     if ( optionalHeader->DllCharacteristics )
-        SPRTF("\n");
+        printf("\n");
 
-    SPRTF("  %-*s%X\n", width, "stack reserve size",
+    printf("  %-*s%X\n", width, "stack reserve size",
         optionalHeader->SizeOfStackReserve);
-    SPRTF("  %-*s%X\n", width, "stack commit size",
+    printf("  %-*s%X\n", width, "stack commit size",
         optionalHeader->SizeOfStackCommit);
-    SPRTF("  %-*s%X\n", width, "heap reserve size",
+    printf("  %-*s%X\n", width, "heap reserve size",
         optionalHeader->SizeOfHeapReserve);
-    SPRTF("  %-*s%X\n", width, "heap commit size",
+    printf("  %-*s%X\n", width, "heap commit size",
         optionalHeader->SizeOfHeapCommit);
 
 #if 0
 // Marked as obsolete in MSDN CD 9
-    SPRTF("  %-*s%08X\n", width, "loader flags",
+    printf("  %-*s%08X\n", width, "loader flags",
         optionalHeader->LoaderFlags);
 
     for ( i=0; i < NUMBER_LOADER_FLAGS; i++ )
     {
         if ( optionalHeader->LoaderFlags & 
              LoaderFlags[i].flag )
-            SPRTF( "  %s", LoaderFlags[i].name );
+            printf( "  %s", LoaderFlags[i].name );
     }
     if ( optionalHeader->LoaderFlags )
-        SPRTF("\n");
+        printf("\n");
 #endif
 
-    SPRTF("  %-*s%X\n", width, "RVAs & sizes",
+    printf("  %-*s%X\n", width, "RVAs & sizes",
         optionalHeader->NumberOfRvaAndSizes);
 
-    SPRTF("\nData Directory - 32-bit\n");
+    printf("\nData Directory - 32-bit\n");
     for ( i=0; i < optionalHeader->NumberOfRvaAndSizes; i++)
     {
         DWORD dwVA = optionalHeader->DataDirectory[i].VirtualAddress;
@@ -497,7 +492,7 @@ void DumpOptionalHeader32(PIMAGE_OPTIONAL_HEADER32 optionalHeader)
         const char *name = (i >= NUMBER_IMAGE_DIRECTORY_ENTRYS) ? "unused" : ImageDirectoryNames[i].name;
         const char *var = (i >= NUMBER_IMAGE_DIRECTORY_ENTRYS) ? "none" : 
             (dwVA && dwSZ) ? ImageDirectoryNames[i].var : "N/A";
-        SPRTF("  %-12s rva: %08X  size: %08X - %s\n",
+        printf("  %-12s rva: %08X  size: %08X - %s\n",
             name,
             dwVA, // optionalHeader->DataDirectory[i].VirtualAddress,
             dwSZ, // optionalHeader->DataDirectory[i].Size,
@@ -551,42 +546,42 @@ void DumpOptionalHeader64(PIMAGE_OPTIONAL_HEADER64 optionalHeader)
     const char *s;
     UINT i;
 
-    SPRTF("Optional Header 64-bit\n");
+    printf("Optional Header 64-bit\n");
 
-    SPRTF("  %-*s%04X\n", width, "Magic", optionalHeader->Magic);
-    SPRTF("  %-*s%u.%02u\n", width, "linker version",
+    printf("  %-*s%04X\n", width, "Magic", optionalHeader->Magic);
+    printf("  %-*s%u.%02u\n", width, "linker version",
         optionalHeader->MajorLinkerVersion,
         optionalHeader->MinorLinkerVersion);
-    SPRTF("  %-*s%X\n", width, "size of code", optionalHeader->SizeOfCode);
-    SPRTF("  %-*s%X\n", width, "size of initialized data",
+    printf("  %-*s%X\n", width, "size of code", optionalHeader->SizeOfCode);
+    printf("  %-*s%X\n", width, "size of initialized data",
         optionalHeader->SizeOfInitializedData);
-    SPRTF("  %-*s%X\n", width, "size of uninitialized data",
+    printf("  %-*s%X\n", width, "size of uninitialized data",
         optionalHeader->SizeOfUninitializedData);
-    SPRTF("  %-*s%X\n", width, "entrypoint RVA",
+    printf("  %-*s%X\n", width, "entrypoint RVA",
         optionalHeader->AddressOfEntryPoint);
-    SPRTF("  %-*s%X\n", width, "base of code", optionalHeader->BaseOfCode);
+    printf("  %-*s%X\n", width, "base of code", optionalHeader->BaseOfCode);
 
-    // SPRTF("  %-*s%X\n", width, "base of data", optionalHeader->BaseOfData);
-    SPRTF("  %-*s%X\n", width, "image base", optionalHeader->ImageBase);
+    // printf("  %-*s%X\n", width, "base of data", optionalHeader->BaseOfData);
+    printf("  %-*s%llX\n", width, "image base", optionalHeader->ImageBase);
 
-    SPRTF("  %-*s%X\n", width, "section align",
+    printf("  %-*s%X\n", width, "section align",
         optionalHeader->SectionAlignment);
-    SPRTF("  %-*s%X\n", width, "file align", optionalHeader->FileAlignment);
-    SPRTF("  %-*s%u.%02u\n", width, "required OS version",
+    printf("  %-*s%X\n", width, "file align", optionalHeader->FileAlignment);
+    printf("  %-*s%u.%02u\n", width, "required OS version",
         optionalHeader->MajorOperatingSystemVersion,
         optionalHeader->MinorOperatingSystemVersion);
-    SPRTF("  %-*s%u.%02u\n", width, "image version",
+    printf("  %-*s%u.%02u\n", width, "image version",
         optionalHeader->MajorImageVersion,
         optionalHeader->MinorImageVersion);
-    SPRTF("  %-*s%u.%02u\n", width, "subsystem version",
+    printf("  %-*s%u.%02u\n", width, "subsystem version",
         optionalHeader->MajorSubsystemVersion,
         optionalHeader->MinorSubsystemVersion);
-    SPRTF("  %-*s%X\n", width, "Win32 Version",
+    printf("  %-*s%X\n", width, "Win32 Version",
         optionalHeader->Win32VersionValue);
-    SPRTF("  %-*s%X\n", width, "size of image", optionalHeader->SizeOfImage);
-    SPRTF("  %-*s%X\n", width, "size of headers",
+    printf("  %-*s%X\n", width, "size of image", optionalHeader->SizeOfImage);
+    printf("  %-*s%X\n", width, "size of headers",
         optionalHeader->SizeOfHeaders);
-    SPRTF("  %-*s%X\n", width, "checksum", optionalHeader->CheckSum);
+    printf("  %-*s%X\n", width, "checksum", optionalHeader->CheckSum);
     switch (optionalHeader->Subsystem)
     {
     case IMAGE_SUBSYSTEM_NATIVE: s = "Native"; break;
@@ -596,49 +591,49 @@ void DumpOptionalHeader64(PIMAGE_OPTIONAL_HEADER64 optionalHeader)
     case IMAGE_SUBSYSTEM_POSIX_CUI: s = "Posix character"; break;
     default: s = "unknown";
     }
-    SPRTF("  %-*s%04X (%s)\n", width, "Subsystem",
+    printf("  %-*s%04X (%s)\n", width, "Subsystem",
         optionalHeader->Subsystem, s);
 
     // Marked as obsolete in MSDN CD 9
-    SPRTF("  %-*s%04X\n", width, "DLL flags",
+    printf("  %-*s%04X\n", width, "DLL flags",
         optionalHeader->DllCharacteristics);
     for (i = 0; i < NUMBER_DLL_CHARACTERISTICS; i++)
     {
         if (optionalHeader->DllCharacteristics &
             DllCharacteristics[i].flag)
-            SPRTF("  %-*s%s", width, " ", DllCharacteristics[i].name);
+            printf("  %-*s%s", width, " ", DllCharacteristics[i].name);
     }
     if (optionalHeader->DllCharacteristics)
-        SPRTF("\n");
+        printf("\n");
 
-    SPRTF("  %-*s%X\n", width, "stack reserve size",
+    printf("  %-*s%llX\n", width, "stack reserve size",
         optionalHeader->SizeOfStackReserve);
-    SPRTF("  %-*s%X\n", width, "stack commit size",
+    printf("  %-*s%llX\n", width, "stack commit size",
         optionalHeader->SizeOfStackCommit);
-    SPRTF("  %-*s%X\n", width, "heap reserve size",
+    printf("  %-*s%llX\n", width, "heap reserve size",
         optionalHeader->SizeOfHeapReserve);
-    SPRTF("  %-*s%X\n", width, "heap commit size",
+    printf("  %-*s%llX\n", width, "heap commit size",
         optionalHeader->SizeOfHeapCommit);
 
 #if 0
     // Marked as obsolete in MSDN CD 9
-    SPRTF("  %-*s%08X\n", width, "loader flags",
+    printf("  %-*s%08X\n", width, "loader flags",
         optionalHeader->LoaderFlags);
 
     for (i = 0; i < NUMBER_LOADER_FLAGS; i++)
     {
         if (optionalHeader->LoaderFlags &
             LoaderFlags[i].flag)
-            SPRTF("  %s", LoaderFlags[i].name);
+            printf("  %s", LoaderFlags[i].name);
     }
     if (optionalHeader->LoaderFlags)
-        SPRTF("\n");
+        printf("\n");
 #endif
 
-    SPRTF("  %-*s%X\n", width, "RVAs & sizes",
+    printf("  %-*s%X\n", width, "RVAs & sizes",
         optionalHeader->NumberOfRvaAndSizes);
 
-    SPRTF("\nData Directory - 64-bit\n");
+    printf("\nData Directory - 64-bit\n");
     for (i = 0; i < optionalHeader->NumberOfRvaAndSizes; i++)
     {
         DWORD dwVA = optionalHeader->DataDirectory[i].VirtualAddress;
@@ -646,7 +641,7 @@ void DumpOptionalHeader64(PIMAGE_OPTIONAL_HEADER64 optionalHeader)
         const char *name = (i >= NUMBER_IMAGE_DIRECTORY_ENTRYS) ? "unused" : ImageDirectoryNames[i].name;
         const char *var = (i >= NUMBER_IMAGE_DIRECTORY_ENTRYS) ? "none" :
             (dwVA && dwSZ) ? ImageDirectoryNames[i].var : "N/A";
-        SPRTF("  %-12s rva: %08X  size: %08X - %s\n",
+        printf("  %-12s rva: %08X  size: %08X - %s\n",
             name,
             dwVA, // optionalHeader->DataDirectory[i].VirtualAddress,
             dwSZ, // optionalHeader->DataDirectory[i].Size,
@@ -800,7 +795,7 @@ void DumpSectionTable(PIMAGE_SECTION_HEADER section, unsigned cSections, BOOL Is
     unsigned i, j;
 	const char *pszAlign;
 
-    SPRTF("Section Table - %u sections...\n", cSections);
+    printf("Section Table - %u sections...\n", cSections);
     if (cSections) {
         if (IsAddressInRange((BYTE *)section, (int)sizeof(IMAGE_SECTION_HEADER))) {
             PIMAGE_SECTION_HEADER last = section + (cSections - 1);
@@ -808,30 +803,30 @@ void DumpSectionTable(PIMAGE_SECTION_HEADER section, unsigned cSections, BOOL Is
                 for (i = 1; i <= cSections; i++, section++)
                 {
                     if (!IsAddressInRange((BYTE *)section, (int)sizeof(IMAGE_SECTION_HEADER))) {
-                        SPRTF("TODO: DumpSectionTable by %s - PIMAGE_SECTION_HEADER %u of %u out of range - %p\n", caller, i, cSections, section);
+                        printf("TODO: DumpSectionTable by %s - PIMAGE_SECTION_HEADER %u of %u out of range - %p\n", caller, i, cSections, section);
                         return;
                     }
-                    SPRTF("  %02X %-8.8s  %s: %08X  VirtAddr:  %08X\n",
+                    printf("  %02X %-8.8s  %s: %08X  VirtAddr:  %08X\n",
                         i, section->Name,
                         IsEXE ? "VirtSize" : "PhysAddr",
                         section->Misc.VirtualSize, section->VirtualAddress);
-                    SPRTF("    raw data offs:   %08X  raw data size: %08X\n",
+                    printf("    raw data offs:   %08X  raw data size: %08X\n",
                         section->PointerToRawData, section->SizeOfRawData);
-                    SPRTF("    relocation offs: %08X  relocations:   %08X\n",
+                    printf("    relocation offs: %08X  relocations:   %08X\n",
                         section->PointerToRelocations, section->NumberOfRelocations);
-                    SPRTF("    line # offs:     %08X  line #'s:      %08X\n",
+                    printf("    line # offs:     %08X  line #'s:      %08X\n",
                         section->PointerToLinenumbers, section->NumberOfLinenumbers);
                     DWORD Chars = section->Characteristics;
-                    SPRTF("    characteristics: %08X\n", Chars);
+                    printf("    characteristics: %08X\n", Chars);
 
-                    SPRTF("    ");
+                    printf("    ");
                     for (j = 0; j < NUMBER_SECTION_CHARACTERISTICS; j++)
                     {
                         DWORD flag = SectionCharacteristics[j].flag;
                         //if ( section->Characteristics & 
                         //    SectionCharacteristics[j].flag )
                         if (Chars & flag) {
-                            SPRTF("  %s", SectionCharacteristics[j].name);
+                            printf("  %s", SectionCharacteristics[j].name);
                             Chars &= ~flag;
                             if (Chars == 0)
                                 break;
@@ -872,21 +867,21 @@ void DumpSectionTable(PIMAGE_SECTION_HEADER section, unsigned cSections, BOOL Is
                                                                                          // Unused                                    0x00F00000
                     default: pszAlign = "ALIGN_DEFAULT(16)"; break;
                     }
-                    SPRTF("  %s", pszAlign);
+                    printf("  %s", pszAlign);
                     Chars &= ~IMAGE_SCN_ALIGN_MASK;
                     if (Chars) {
-                        SPRTF(" Unk(%u)", Chars);
+                        printf(" Unk(%u)", Chars);
                     }
 
-                    SPRTF("\n\n");
+                    printf("\n\n");
                 }
             }
             else {
-                SPRTF("TODO: DumpSectionTable - last PIMAGE_SECTION_HEADER out of range - %p\n", last);
+                printf("TODO: DumpSectionTable - last PIMAGE_SECTION_HEADER out of range - %p\n", last);
             }
         }
         else {
-            SPRTF("TODO: DumpSectionTable - first PIMAGE_SECTION_HEADER out of range - %p\n", section);
+            printf("TODO: DumpSectionTable - first PIMAGE_SECTION_HEADER out of range - %p\n", section);
         }
     }
 }
@@ -983,7 +978,7 @@ void DumpDebugDirectory(PIMAGE_DEBUG_DIRECTORY debugDir, DWORD size, BYTE *base)
     if ( cDebugFormats == 0 )
         return;
     
-    SPRTF(
+    printf(
     "Debug Formats in File\n"
     "  Type            Size     Address  FilePtr  Charactr TimeDate Version\n"
     "  --------------- -------- -------- -------- -------- -------- --------\n"
@@ -994,7 +989,7 @@ void DumpDebugDirectory(PIMAGE_DEBUG_DIRECTORY debugDir, DWORD size, BYTE *base)
         szDebugFormat = (debugDir->Type <= IMAGE_DEBUG_TYPE_OMAP_FROM_SRC )
                         ? SzDebugFormats[debugDir->Type] : (char *)"???";
 
-        SPRTF("  %-15s %08X %08X %08X %08X %08X %u.%02u\n",
+        printf("  %-15s %08X %08X %08X %08X %08X %u.%02u\n",
             szDebugFormat, debugDir->SizeOfData, debugDir->AddressOfRawData,
             debugDir->PointerToRawData, debugDir->Characteristics,
             debugDir->TimeDateStamp, debugDir->MajorVersion,
@@ -1039,7 +1034,7 @@ void DumpRawSectionData(PIMAGE_SECTION_HEADER section,
     unsigned i;
     char name[IMAGE_SIZEOF_SHORT_NAME + 1];
 
-    SPRTF("Section Hex Dumps - %u sections\n\n", cSections);
+    printf("Section Hex Dumps - %u sections\n\n", cSections);
     
     //for (i = 1; i <= cSections; i++, section++)
     for ( i=0; i < cSections; i++, section++ )
@@ -1050,12 +1045,12 @@ void DumpRawSectionData(PIMAGE_SECTION_HEADER section,
             memcpy(name, section->Name, IMAGE_SIZEOF_SHORT_NAME);
             name[IMAGE_SIZEOF_SHORT_NAME] = 0;
 
-            SPRTF("section %02X (%s)  size: %08X  file offs: %08X\n",
+            printf("section %02X (%s)  size: %08X  file offs: %08X\n",
                 (i + 1), name, section->SizeOfRawData, section->PointerToRawData);
 
             // Don't dump sections that don't exist in the file!
             if ((section->PointerToRawData == 0) || (section->SizeOfRawData == 0)) {
-                SPRTF("\n");
+                printf("\n");
                 continue;
             }
 
@@ -1066,14 +1061,14 @@ void DumpRawSectionData(PIMAGE_SECTION_HEADER section,
                 HexDump(pb, dwSz);
             }
             else {
-                SPRTF("TODO: Skipped Hex Dump %u of %u - PBYTE out of range - %p\n", (i+1), cSections, pb);
+                printf("TODO: Skipped Hex Dump %u of %u - PBYTE out of range - %p\n", (i+1), cSections, pb);
                 // break;
             }
-            SPRTF("\n");
+            printf("\n");
 
         }
         else {
-            SPRTF("TODO: Abandon Hex Dump %u of %u - PIMAGE_SECTION_HEADER out of range - %p\n\n", (i+1), cSections, section);
+            printf("TODO: Abandon Hex Dump %u of %u - PIMAGE_SECTION_HEADER out of range - %p\n\n", (i+1), cSections, section);
             break;
         }
     }
@@ -1142,7 +1137,7 @@ void HexDump(PBYTE ptr, DWORD length, PBYTE pb)
         }
 
         *buffPtr2 = 0;  // Null terminate it.
-        // Can't use SPRTF(), since there may be a '%'
+        // Can't use printf(), since there may be a '%'
         // in the string.
         strcat(buffer, "\n");
         direct_out_it(buffer);

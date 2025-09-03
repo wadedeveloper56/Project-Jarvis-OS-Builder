@@ -1,13 +1,4 @@
-//==================================
-// PEDUMP - Matt Pietrek 1997
-// FILE: LIBDUMP.C
-//==================================
-#define _CRT_SECURE_NO_WARNINGS
-#include <windows.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <ctype.h>
-#include <time.h>
+#include "pch.h"
 #include "common.h"
 #include "objdump.h"
 #include "libdump.h"
@@ -19,22 +10,22 @@ DWORD ConvertBigEndian(DWORD bigEndian);
 
 void DisplayArchiveMemberHeader( PIMAGE_ARCHIVE_MEMBER_HEADER pArchHeader, DWORD fileOffset )
 {
-    SPRTF("Archive Member Header (offset %08X):\n", fileOffset);
+    printf("Archive Member Header (offset %08X):\n", fileOffset);
 
-    SPRTF("  Name:     %.16s", pArchHeader->Name);
+    printf("  Name:     %.16s", pArchHeader->Name);
     if ( pArchHeader->Name[0] == '/' && isdigit(pArchHeader->Name[1]) )
-        SPRTF( "  (%s)\n", PszLongnames + atoi((char *)pArchHeader->Name+1) );
-    SPRTF("\n");
+        printf( "  (%s)\n", PszLongnames + atoi((char *)pArchHeader->Name+1) );
+    printf("\n");
 
 	char szDateAsLong[64];
 	sprintf( szDateAsLong, "%.12s", pArchHeader->Date );
 	time_t dateAsLong = atol(szDateAsLong);
 	
-    SPRTF("  Date:     %.12s %s\n", pArchHeader->Date, get_ctime_stg(&dateAsLong) );
-    SPRTF("  UserID:   %.6s\n", pArchHeader->UserID);
-    SPRTF("  GroupID:  %.6s\n", pArchHeader->GroupID);
-    SPRTF("  Mode:     %.8s\n", pArchHeader->Mode);
-    SPRTF("  Size:     %.10s\n", pArchHeader->Size);
+    printf("  Date:     %.12s %s\n", pArchHeader->Date, get_ctime_stg(&dateAsLong) );
+    printf("  UserID:   %.6s\n", pArchHeader->UserID);
+    printf("  GroupID:  %.6s\n", pArchHeader->GroupID);
+    printf("  Mode:     %.8s\n", pArchHeader->Mode);
+    printf("  Size:     %.10s\n", pArchHeader->Size);
 }
 
 void DumpFirstLinkerMember(PVOID p)
@@ -47,9 +38,9 @@ void DumpFirstLinkerMember(PVOID p)
     cSymbols = ConvertBigEndian(cSymbols);
     pSymbolName = MakePtr( PSTR, pMemberOffsets, 4 * cSymbols );
     
-    SPRTF("First Linker Member:\n");
-    SPRTF( "  Symbols:         %08X\n", cSymbols );
-    SPRTF( "  MbrOffs   Name\n  --------  ----\n" );
+    printf("First Linker Member:\n");
+    printf( "  Symbols:         %08X\n", cSymbols );
+    printf( "  MbrOffs   Name\n  --------  ----\n" );
         
     for ( i = 0; i < cSymbols; i++ )
     {
@@ -57,7 +48,7 @@ void DumpFirstLinkerMember(PVOID p)
         
         offset = ConvertBigEndian( *pMemberOffsets );
         
-        SPRTF("  %08X  %s\n", offset, pSymbolName);
+        printf("  %08X  %s\n", offset, pSymbolName);
         
         pMemberOffsets++;
         pSymbolName += strlen(pSymbolName) + 1;
@@ -75,23 +66,21 @@ void DumpSecondLinkerMember(PVOID p)
 
     cArchiveMembers = cArchiveMembers;
 
-    // The number of symbols is in the DWORD right past the end of the
-    // member offset array.
     cSymbols = pMemberOffsets[cArchiveMembers];
 
     pIndices = MakePtr( PWORD, p, 4 + cArchiveMembers * sizeof(DWORD) + 4 );
 
     pSymbolName = MakePtr( PSTR, pIndices, cSymbols * sizeof(WORD) );
     
-    SPRTF("Second Linker Member:\n");
+    printf("Second Linker Member:\n");
     
-    SPRTF( "  Archive Members: %08X\n", cArchiveMembers );
-    SPRTF( "  Symbols:         %08X\n", cSymbols );
-    SPRTF( "  MbrOffs   Name\n  --------  ----\n" );
+    printf( "  Archive Members: %08X\n", cArchiveMembers );
+    printf( "  Symbols:         %08X\n", cSymbols );
+    printf( "  MbrOffs   Name\n  --------  ----\n" );
 
     for ( i = 0; i < cSymbols; i++ )
     {
-        SPRTF("  %08X  %s\n", pMemberOffsets[pIndices[i] - 1], pSymbolName);
+        printf("  %08X  %s\n", pMemberOffsets[pIndices[i] - 1], pSymbolName);
         pSymbolName += strlen(pSymbolName) + 1;
     }
 }
@@ -101,18 +90,14 @@ void DumpLongnamesMember(PVOID p, DWORD len)
     PSTR pszName = (PSTR)p;
     DWORD offset = 0;
 
-    PszLongnames = (PSTR)p;     // Save off pointer for use when dumping
-                                // out OBJ member names
-
-    SPRTF("Longnames:\n");
+    PszLongnames = (PSTR)p;            
+    printf("Longnames:\n");
     
-    // The longnames member is a series of null-terminated string.  Print
-    // out the offset of each string (in decimal), followed by the string.
     while ( offset < len )
     {
         unsigned cbString = lstrlenA( pszName )+1;
 
-        SPRTF("  %05u: %s\n", offset, pszName);
+        printf("  %05u: %s\n", offset, pszName);
         offset += cbString;
         pszName += cbString;
     }
@@ -128,7 +113,7 @@ void DumpLibFile( LPVOID lpFileBase )
     if ( strncmp((char *)lpFileBase,IMAGE_ARCHIVE_START,
                             		IMAGE_ARCHIVE_START_SIZE ) )
     {
-        SPRTF("Not a valid .LIB file - signature not found\n");
+        printf("Not a valid .LIB file - signature not found\n");
         return;
     }
     
@@ -141,7 +126,7 @@ void DumpLibFile( LPVOID lpFileBase )
         DWORD fileOffset = (DWORD)((PBYTE)pArchHeader - (PBYTE)lpFileBase);
         if (!fShowMachineType) {
             DisplayArchiveMemberHeader(pArchHeader, fileOffset);
-            SPRTF("\n");
+            printf("\n");
         }
 
         if ( !strncmp( 	(char *)pArchHeader->Name,
@@ -151,7 +136,7 @@ void DumpLibFile( LPVOID lpFileBase )
             {
                 if (!fShowMachineType) {
                     DumpFirstLinkerMember((PVOID)(pArchHeader + 1));
-                    SPRTF("\n");
+                    printf("\n");
                 }
                 fSawFirstLinkerMember = TRUE;
             }
@@ -159,7 +144,7 @@ void DumpLibFile( LPVOID lpFileBase )
             {
                 if (!fShowMachineType) {
                     DumpSecondLinkerMember((PVOID)(pArchHeader + 1));
-                    SPRTF("\n");
+                    printf("\n");
                 }
                 fSawSecondLinkerMember = TRUE;
             }
@@ -170,15 +155,11 @@ void DumpLibFile( LPVOID lpFileBase )
             if (!fShowMachineType) {
                 DumpLongnamesMember((PVOID)(pArchHeader + 1),
                     atoi((char *)pArchHeader->Size));
-                SPRTF("\n");
+                printf("\n");
             }
         }
-        else    // It's an OBJ file
+        else        
         {
-            // from : https://msdn.microsoft.com/en-us/library/windows/desktop/ms680313(v=vs.85).aspx
-            // NumberOfSections - Note that the Windows loader limits the number of sections to 96.
-            // 20171021 avoid dumping INVALID headers, especially section count out-of-range
-
             PIMAGE_FILE_HEADER pifh = (PIMAGE_FILE_HEADER)(pArchHeader + 1);
             WORD nSects = pifh->NumberOfSections;
             WORD nSzOpt = pifh->SizeOfOptionalHeader;
@@ -193,44 +174,37 @@ void DumpLibFile( LPVOID lpFileBase )
                     return;
             }
             else {
-                SPRTF("TODO: section count %u! last PIMAGE_SECTION_HEADER out of range - %p\n", nSects, last);
-                SPRTF("\n");
+                printf("TODO: section count %u! last PIMAGE_SECTION_HEADER out of range - %p\n", nSects, last);
+                printf("\n");
             }
         }
 
-        // Calculate how big this member is (it's originally stored as 
-        // as ASCII string.
         thisMemberSize = atoi((char *)pArchHeader->Size)
                         + IMAGE_SIZEOF_ARCHIVE_MEMBER_HDR;
 
-        thisMemberSize = (thisMemberSize+1) & ~1;   // Round up
+        thisMemberSize = (thisMemberSize+1) & ~1;     
 
-        // Get a pointer to the next archive member
         pArchHeader = MakePtr(PIMAGE_ARCHIVE_MEMBER_HEADER, pArchHeader,
                                 thisMemberSize);
 
-        // Bail out if we don't see the EndHeader signature in the next record
         __try
         {
             if (strncmp( (char *)pArchHeader->EndHeader, IMAGE_ARCHIVE_END, 2))
                 break;
         }
-        __except( TRUE )    // Should only get here if pArchHeader is bogus
+        __except( TRUE )            
         {
-            fBreak = TRUE;  // Ideally, we could just put a "break;" here,
-        }                   // but BC++ doesn't like it.
+            fBreak = TRUE;          
+        }                        
         
-        if ( fBreak )   // work around BC++ problem.
+        if ( fBreak )       
             break;
     }
 }
 
-// Routine to convert from big endian to little endian
 DWORD ConvertBigEndian(DWORD bigEndian)
 {
 	DWORD temp = 0;
-
-	// SPRTF( "bigEndian: %08X\n", bigEndian );
 
 	temp |= bigEndian >> 24;
 	temp |= ((bigEndian & 0x00FF0000) >> 8);

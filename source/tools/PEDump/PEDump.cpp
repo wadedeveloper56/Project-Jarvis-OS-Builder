@@ -1,6 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS
-#include <windows.h>
-#include <stdio.h>
+#include "pch.h"
 #include "common.h"
 #include "objdump.h"
 #include "exedump.h"
@@ -28,32 +26,32 @@ BOOL fShowMachineType = FALSE;
 
 void show_version()
 {
-    SPRTF("PEDUMP2 - Win32/Win64 COFF EXE/OBJ/LIB file dumper.\n");
+    printf("PEDUMP - Win32/Win64 COFF EXE/OBJ/LIB file dumper.\n");
 }
 
 void show_help()
 {
     show_version();
-    SPRTF("Syntax: pedump [switches] filename\n\n");
-    SPRTF("  /A    include everything in dump\n");
-    SPRTF("  /B    show base relocations (def=%s)\n", fShowRelocations ? "on" : "off");
-    SPRTF("  /H    include hex dump of sections (def=%s)\n", fShowRawSectionData ? "on" : "off");
-    SPRTF("  /I    include Import Address Table thunk addresses (def=%s)\n", fShowIATentries ? "on" : "off");
-    SPRTF("  /L    include line number information (def=%s)\n", fShowLineNumbers ? "on" : "off");
-    SPRTF("  /P    include PDATA (runtime functions) (def=%s)\n", fShowPDATA ? "on" : "off");
-    SPRTF("  /R    include detailed resources (stringtables and dialogs) (def=%s)\n", fShowResources ? "on" : "off");
-    SPRTF("  /M    Show ONLY machine type. (def=%s)\n", fShowMachineType ? "on" : "off");
-    SPRTF("  /S    show symbol table (def=%s)\n", fShowSymbolTable ? "on" : "off");
-    SPRTF("  /?    show this help, and exit(0)\n\n");
-    SPRTF(" Note machine type is always shown, but with the /M switch, only that will be shown.\n");
-    SPRTF(" Switches must be space separated, and may optionally be followed by +|-,\n");
-    SPRTF(" denoting ON or OFF. Switch alone will be assumed ON. Switches may also use '-'\n");
-    SPRTF(" instead of '/', and may be in lower case.\n\n");
+    printf("Syntax: pedump [switches] filename\n\n");
+    printf("  /A    include everything in dump\n");
+    printf("  /B    show base relocations (def=%s)\n", fShowRelocations ? "on" : "off");
+    printf("  /H    include hex dump of sections (def=%s)\n", fShowRawSectionData ? "on" : "off");
+    printf("  /I    include Import Address Table thunk addresses (def=%s)\n", fShowIATentries ? "on" : "off");
+    printf("  /L    include line number information (def=%s)\n", fShowLineNumbers ? "on" : "off");
+    printf("  /P    include PDATA (runtime functions) (def=%s)\n", fShowPDATA ? "on" : "off");
+    printf("  /R    include detailed resources (stringtables and dialogs) (def=%s)\n", fShowResources ? "on" : "off");
+    printf("  /M    Show ONLY machine type. (def=%s)\n", fShowMachineType ? "on" : "off");
+    printf("  /S    show symbol table (def=%s)\n", fShowSymbolTable ? "on" : "off");
+    printf("  /?    show this help, and exit(0)\n\n");
+    printf(" Note machine type is always shown, but with the /M switch, only that will be shown.\n");
+    printf(" Switches must be space separated, and may optionally be followed by +|-,\n");
+    printf(" denoting ON or OFF. Switch alone will be assumed ON. Switches may also use '-'\n");
+    printf(" instead of '/', and may be in lower case.\n\n");
 }
 
 BYTE *fileBgn = 0;
 BYTE *fileEnd = 0;
-size_t fileSize = 0;
+__int64 fileSize = 0;
 int OutOfRange = 0;
 // 1 = SUCCESS
 // 0 = FAILED
@@ -115,13 +113,13 @@ int DumpMemMap(LPVOID lpFileBase)
     }
 #endif // #ifdef ADD_PDB_DUMP
     else {
-        SPRTF("Unknown e_magic or machine value %u\n", eMagic);
+        printf("Unknown e_magic or machine value %u\n", eMagic);
         DWORD hlen = 32;
         if (fileSize < hlen)
             hlen = (DWORD)fileSize;
-        SPRTF("HexDump of first %u bytes of file...\n", hlen);
+        printf("HexDump of first %u bytes of file...\n", hlen);
         HexDump((BYTE *)lpFileBase, hlen);
-        SPRTF("Error: unrecognized file format\n");
+        printf("Error: unrecognized file format\n");
         iret = 2;   // specific EXIT for unknown format
     }
 
@@ -139,12 +137,12 @@ int DumpFile(LPSTR filename)
     LPVOID lpFileBase;
     DiskType dt = is_file_or_directory64(filename);
     if (dt != MDT_FILE) {
-        SPRTF("Error: Unable to 'stat' file '%s'!\n", filename);
+        printf("Error: Unable to 'stat' file '%s'!\n", filename);
         return 1;
     }
     fileSize = get_last_file_size64();
     if (fileSize < sizeof(IMAGE_FILE_HEADER)) {
-        SPRTF("Warning: File '%s' appears too small at %I64u bytes...\n", filename, fileSize);
+        printf("Warning: File '%s' appears too small at %I64u bytes...\n", filename, fileSize);
     }
 
     hFile = CreateFileA(filename, GENERIC_READ, FILE_SHARE_READ, NULL,
@@ -152,7 +150,7 @@ int DumpFile(LPSTR filename)
                     
     if ( hFile == INVALID_HANDLE_VALUE )
     {
-        SPRTF("Error: Couldn't open file '%s' with CreateFile()\n", filename);
+        printf("Error: Couldn't open file '%s' with CreateFile()\n", filename);
         return 1;
     }
 
@@ -160,7 +158,7 @@ int DumpFile(LPSTR filename)
     if ( hFileMapping == 0 )
     {
         CloseHandle(hFile);
-        SPRTF("Error: Couldn't open file mapping with CreateFileMapping()\n");
+        printf("Error: Couldn't open file mapping with CreateFileMapping()\n");
         return 1;
     }
 
@@ -169,12 +167,12 @@ int DumpFile(LPSTR filename)
     {
         CloseHandle(hFileMapping);
         CloseHandle(hFile);
-        SPRTF("Error: Couldn't map view of file with MapViewOfFile()\n");
+        printf("Error: Couldn't map view of file with MapViewOfFile()\n");
         return 1;
     }
 
     if (!fShowMachineType)
-        SPRTF("Dump of file %s, %s bytes...\n\n", filename, get_nice_number64u(fileSize));
+        printf("Dump of file %s, %s bytes...\n\n", filename, get_nice_number64u(fileSize));
     
     fileBgn = (BYTE *)lpFileBase;
     fileEnd = fileBgn + fileSize;
@@ -232,7 +230,7 @@ int ProcessCommandLine(int argc, char *argv[])
                     else if (c2 == '-')
                         sw = FALSE;
                     else {
-                        SPRTF("Error: Switches can only be followed by '+' or '-', not %c!\n", c2);
+                        printf("Error: Switches can only be followed by '+' or '-', not %c!\n", c2);
                         return 1;
                     }
                 }
@@ -285,14 +283,14 @@ int ProcessCommandLine(int argc, char *argv[])
                 show_help();
                 return 2;
             default:
-                SPRTF("Error: Unknown command '%s'\n", arg);
+                printf("Error: Unknown command '%s'\n", arg);
                 return 1;
             }
         }
         else    // Not a switch character.  Must be the filename
         {
             if (filename) {
-                SPRTF("Error: Already have file '%s'! What is this '%s'\n", filename, arg);
+                printf("Error: Already have file '%s'! What is this '%s'\n", filename, arg);
                 return 1;
             }
             filename = _strdup(arg);
@@ -322,20 +320,20 @@ int main(int argc, char *argv[])
     }
     else {
         show_help();
-        SPRTF("Error: No file name found in command!\n");
+        printf("Error: No file name found in command!\n");
         iret = 1;
     }
 
     if (OutOfRange)
-        SPRTF("TODO: Note had %d out-of-range addresses!\n", OutOfRange);
+        printf("TODO: Note had %d out-of-range addresses!\n", OutOfRange);
 
     show_dll_list();  // FIX20171017
 
     if (cMachineType[0])
-        SPRTF("%s\n", cMachineType);
+        printf("%s\n", cMachineType);
 
     if (!fShowMachineType)
-        SPRTF("\n");
+        printf("\n");
 
     return iret;
 }

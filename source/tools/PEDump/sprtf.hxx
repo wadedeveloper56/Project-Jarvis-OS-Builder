@@ -54,9 +54,9 @@ EXPORT_FUNC int gettimeofday(struct timeval *tp, void *tzp);
 
 EXPORT_FUNC char *get_ctime_stg(time_t *pt);
 
-#ifndef SPRTF
-#define SPRTF sprtf
-#endif
+//#ifndef printf
+//#define printf sprtf
+//#endif
 
 #ifdef   __cplusplus
 }

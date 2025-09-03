@@ -1,6 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS
-#include <windows.h>
-#include <stdio.h>
+#include "pch.h"
 #include "common.h"
 #include "symboltablesupport.h"
 #include "coffsymboltable.h"
@@ -55,11 +53,11 @@ int DumpObjRelocations(PIMAGE_RELOCATION pRelocs, DWORD count)
     for ( i=0; i < count; i++ )
     {
         if (!IsAddressInRange((BYTE *)pRelocs, (int)sizeof(IMAGE_RELOCATION))) {
-            SPRTF("TODO: DumpObjRelocations %u of %u PIMAGE_RELOCATION out of range - %p\n", i, count, pRelocs);
+            printf("TODO: DumpObjRelocations %u of %u PIMAGE_RELOCATION out of range - %p\n", i, count, pRelocs);
             return 1;
         }
         GetObjRelocationName(pRelocs->Type, szTypeName, sizeof(szTypeName));
-        SPRTF("  Address: %08X  SymIndex: %08X  Type: %s\n",
+        printf("  Address: %08X  SymIndex: %08X  Type: %s\n",
                 pRelocs->VirtualAddress, pRelocs->SymbolTableIndex,
                 szTypeName);
         pRelocs++;
@@ -81,18 +79,18 @@ void DumpObjFile( PIMAGE_FILE_HEADER pImageFileHeader )
     if (fShowMachineType)
         return;
 
-    SPRTF("\n");
+    printf("\n");
 
     pSections = MakePtr(PIMAGE_SECTION_HEADER, (pImageFileHeader+1),
                             pImageFileHeader->SizeOfOptionalHeader);
 
     DumpSectionTable(pSections, pImageFileHeader->NumberOfSections, FALSE, "objdump");
-    SPRTF("\n");
+    printf("\n");
 
     if ( fShowRelocations )
     {
         unsigned max = pImageFileHeader->NumberOfSections;
-        SPRTF("Show Relocations: count %u\n", max);
+        printf("Show Relocations: count %u\n", max);
         if (max) {
             PIMAGE_SECTION_HEADER last = pSections + (max - 1);
             if (IsAddressInRange((BYTE *)last, (int)sizeof(IMAGE_SECTION_HEADER))) {
@@ -103,26 +101,26 @@ void DumpObjFile( PIMAGE_FILE_HEADER pImageFileHeader )
                     PIMAGE_RELOCATION pir = MakePtr(PIMAGE_RELOCATION, pImageFileHeader, pSections[i].PointerToRelocations);
                     WORD num = pSections[i].NumberOfRelocations;
                     if (IsAddressInRange((BYTE *)pir, (int)sizeof(IMAGE_RELOCATION))) {
-                        SPRTF("Section %02X (%.8s) relocations\n", i, pSections[i].Name);
+                        printf("Section %02X (%.8s) relocations\n", i, pSections[i].Name);
                         //iret = DumpObjRelocations( MakePtr(PIMAGE_RELOCATION, pImageFileHeader,
                         //                        pSections[i].PointerToRelocations),
                         //                    pSections[i].NumberOfRelocations );
                         iret = DumpObjRelocations(pir, num);
                         if (iret) {
-                            SPRTF("TODO: Abandoned DumpObjRelocations() at %u of %u iterations...\n", i, max);
+                            printf("TODO: Abandoned DumpObjRelocations() at %u of %u iterations...\n", i, max);
                             break;
                         }
-                        SPRTF("\n");
+                        printf("\n");
                     }
                     else {
-                        SPRTF("TODO: DUmpObjFile - Abandoned ShowRelocations at %u of %u iterations... PIMAGE_RELOCATION out of range - %p\n", i, max, pir);
+                        printf("TODO: DUmpObjFile - Abandoned ShowRelocations at %u of %u iterations... PIMAGE_RELOCATION out of range - %p\n", i, max, pir);
                         break;
 
                     }
                 }
             }
             else {
-                SPRTF("TODO: last PIMAGE_SECTION_HEADER out of range - %p\n", last);
+                printf("TODO: last PIMAGE_SECTION_HEADER out of range - %p\n", last);
             }
         }
     }
@@ -147,20 +145,20 @@ void DumpObjFile( PIMAGE_FILE_HEADER pImageFileHeader )
                 DumpSymbolTable(g_pCOFFSymbolTable);
             }
             else {
-                SPRTF("TODO: DumpSymbolTable PSTR out of range - %p\n", ps);
+                printf("TODO: DumpSymbolTable PSTR out of range - %p\n", ps);
             }
         }
         else {
-            SPRTF("TODO: DumpSymbolTable PIMAGE_SYMBOL out of range - %p\n", pv);
+            printf("TODO: DumpSymbolTable PIMAGE_SYMBOL out of range - %p\n", pv);
         }
-        SPRTF("\n");
+        printf("\n");
     }
 
     if ( fShowLineNumbers )
     {
         WORD wcnt = pImageFileHeader->NumberOfSections;
         // Walk through the section table...
-        SPRTF("Show Line Numbers: %u sections\n", wcnt);
+        printf("Show Line Numbers: %u sections\n", wcnt);
         if (wcnt) {
             PIMAGE_SECTION_HEADER last = pSections + (wcnt - 1);
             if (IsAddressInRange((BYTE *)last, (int)sizeof(IMAGE_SECTION_HEADER))) {
@@ -173,10 +171,10 @@ void DumpObjFile( PIMAGE_FILE_HEADER pImageFileHeader )
                         WORD num = pSections->NumberOfLinenumbers;
                         if (IsAddressInRange((BYTE *)pln, (int)sizeof(IMAGE_LINENUMBER))) {
                             DumpLineNumbers(pln, num);
-                            SPRTF("\n");
+                            printf("\n");
                         }
                         else {
-                            SPRTF("TODO: Abandon ShowLineNumbers %u of %u - PIMAGE_LINENUMBER out of range - %p\n", i, wcnt, pln);
+                            printf("TODO: Abandon ShowLineNumbers %u of %u - PIMAGE_LINENUMBER out of range - %p\n", i, wcnt, pln);
                             break;
                         }
                     }
@@ -184,7 +182,7 @@ void DumpObjFile( PIMAGE_FILE_HEADER pImageFileHeader )
                 }
             }
             else {
-                SPRTF("TODO: last  PIMAGE_SECTION_HEADER out of range - %p\n", last);
+                printf("TODO: last  PIMAGE_SECTION_HEADER out of range - %p\n", last);
             }
         }
     }
@@ -193,7 +191,7 @@ void DumpObjFile( PIMAGE_FILE_HEADER pImageFileHeader )
     {
         PIMAGE_SECTION_HEADER psh = (PIMAGE_SECTION_HEADER)(pImageFileHeader + 1);
         WORD nSects = pImageFileHeader->NumberOfSections;
-        SPRTF("Show Raw Section Data: %u sections\n", nSects);
+        printf("Show Raw Section Data: %u sections\n", nSects);
         if (IsAddressInRange((BYTE *)psh, (int)sizeof(IMAGE_SECTION_HEADER))) {
             if (nSects) {
                 PIMAGE_SECTION_HEADER last = psh + (nSects - 1);
@@ -201,12 +199,12 @@ void DumpObjFile( PIMAGE_FILE_HEADER pImageFileHeader )
                     DumpRawSectionData(psh, pImageFileHeader, nSects);
                 }
                 else {
-                    SPRTF("TODO: last PIMAGE_SECTION_HEADER out of range - %p\n", last);
+                    printf("TODO: last PIMAGE_SECTION_HEADER out of range - %p\n", last);
                 }
             }
         }
         else {
-            SPRTF("TODO: first PIMAGE_SECTION_HEADER out of range - %p\n", psh);
+            printf("TODO: first PIMAGE_SECTION_HEADER out of range - %p\n", psh);
         }
     }
 

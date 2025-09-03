@@ -170,6 +170,7 @@
     <ClInclude Include="extrnvar.h" />
     <ClInclude Include="libdump.h" />
     <ClInclude Include="objdump.h" />
+    <ClInclude Include="pch.h" />
     <ClInclude Include="pdbdump.h" />
     <ClInclude Include="resdump.h" />
     <ClInclude Include="romimage.h" />

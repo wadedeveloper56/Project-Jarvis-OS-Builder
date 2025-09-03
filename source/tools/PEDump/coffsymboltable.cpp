@@ -1,7 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS
-#include <windows.h>
-#include <malloc.h>
-#include <stdio.h>
+#include "pch.h"
 #include "coffsymboltable.h"
 
 COFFSymbol::COFFSymbol(

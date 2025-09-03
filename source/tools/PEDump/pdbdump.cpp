@@ -1,29 +1,11 @@
-#define _CRT_SECURE_NO_WARNINGS
-#include <windows.h>
-#include <stdio.h>
-#include <time.h>
-#include <Dbghelp.h>
-#include <stdint.h> // for uint32_t, ...
-#include <guiddef.h > // for GUID
-#include <math.h> // for ceil, ...
-
+#include "pch.h"
 #include "common.h"
 #include "pdbdump.h"
 
 
-/* from : https://llvm.org/docs/PDB/index.html#:~:text=PDB%20(Program%20Database)%20is%20a,by%20debuggers%20and%20other%20tools. 
-    A PDB file is an MSF (Multi-Stream Format) file. An MSF file is a “file system within a file”. It contains multiple 
-    streams (aka files) which can represent arbitrary data, and these streams are divided into blocks which may not 
-    necessarily be contiguously laid out within the MSF container file. Additionally, the MSF contains a stream directory 
-    (aka MFT) which describes how the streams (files) are laid out within the MSF.
-
-*/
-/* from : https://llvm.org/docs/PDB/MsfFile.html */
-/* FileMagic - Must be equal to "Microsoft C / C++ MSF 7.00\\r\\n" followed by the bytes 1A 44 53 00 00 00. */
 static char MagicStg[] = "Microsoft C/C++ MSF 7.00\r\n";
 static unsigned char MagicTail[] = { 0x1a, 0x44, 0x53, 0x00, 0x00, 0x00 };
 
-// from : microsoft-pdb repo - msf.cpp(
 static const char szBigHdrMagic[0x1e] = "Microsoft C/C++ MSF 7.00\r\n\x1a\x44\x53";
 
 static char Magic[] = { "Microsoft C/C++ MSF 7.00\r\n\x1a\x44\x53\x00\x00\x00" };
@@ -51,15 +33,7 @@ typedef struct tagSuperBlock {
 
 typedef struct tagStreamDirectory {
     ulittle32_t NumStreams;
-    //ulittle32_t StreamSizes[NumStreams];
-    //ulittle32_t StreamBlocks[NumStreams][];
 }StreamDirectory, *PSD;
-
-/* And this structure occupies exactly SuperBlock->NumDirectoryBytes bytes. Note
-   that each of the last two arrays is of variable length, and in particular
-   that the second array is jagged. */
-
-/* from : https://llvm.org/docs/PDB/PdbStream.html */
 
 typedef struct tagPdbStreamHeader {
     ulittle32_t Version;
@@ -80,8 +54,6 @@ enum class PdbStreamVersion : uint32_t {
     VC110 = 20091201,
     VC140 = 20140508,
 };
-
-/* from : https://llvm.org/docs/PDB/TpiStream.html  */
 
 typedef struct tagTpiStreamHeader {
     uint32_t Version;
@@ -105,8 +77,6 @@ typedef struct tagTpiStreamHeader {
     uint32_t HashAdjBufferLength;
 }TpiStreamHeader, *PTPI;
 
-/* Version - A value from the following enum. */
-
 enum class TpiStreamVersion : uint32_t {
   V40 = 19950410,
   V41 = 19951122,
@@ -114,9 +84,6 @@ enum class TpiStreamVersion : uint32_t {
   V70 = 19990903,
   V80 = 20040203,
 };
-
-/* The PDB DBI (Debug Info) Stream
-   https://llvm.org/docs/PDB/DbiStream.html */
 
 typedef struct tagDbiStreamHeader {
     int32_t VersionSignature;
@@ -149,25 +116,10 @@ enum class DbiStreamVersion : uint32_t {
     V110 = 20091201
 };
 
-/* The Module Information Stream 
-   https://llvm.org/docs/PDB/ModiStream.html */
-
 struct ModiStream {
     uint32_t Signature;
-    //uint8_t Symbols[SymbolSize - 4];
-    //uint8_t C11LineInfo[C11Size];
-    //uint8_t C13LineInfo[C13Size];
-
     uint32_t GlobalRefsSize;
-    //uint8_t GlobalRefs[GlobalRefsSize];
 };
-
-/* https://llvm.org/docs/PDB/PublicStream.html IS A BLANK */
-
-/* https://llvm.org/docs/PDB/GlobalStream.html IS A BLANK */
-
-/* https://llvm.org/docs/PDB/HashTable.html 
-   The PDB Serialized Hash Table Format  */
 
 void show_stream_header(char* cp)
 {
@@ -186,7 +138,6 @@ void show_stream_header(char* cp)
     v = psh->Version;
     s = psh->Signature;
      a = psh->Age;
-    //GUID UniqueId;
     sprintf(pb, "\nStream Header: ver %u, sig %u, age %u\n", v, s, a);
     direct_out_it(pb);
     HexDump((PBYTE)&psh->UniqueId, sizeof(GUID), (PBYTE)pbgn);
@@ -206,38 +157,35 @@ int add_2_seen(ulittle32_t val, vU32& seen)
     return 1;
 }
 
-int IsPdbFile( char *in_cp, size_t len )
+int IsPdbFile( char *in_cp, unsigned long long len )
 {
     char* pb = sbuf;
     char* lpe = errbuf;
     ulittle32_t bma, ndb, num, bs, val, cnt, nos, blks, tot, j, k;
     __int64 off;
     ulittle32_t* arr;
-    if (len < 4096 ) { // sizeof(SuperBlock))
+    if (len < 4096 ) {  
         sprintf(lpe, "Error: Lenght %llu given less than 1 block of 4096!\n", len);
         return 0;
     }
     pbgn = in_cp;
     pSuperBlock psb = (pSuperBlock)in_cp;
-    size_t i, max = MagicLen; // not sizeof(Magic);
+    unsigned long long i, max = MagicLen;
     char c1, c2;
     char* cp = &psb->FileMagic[0];
     for (i = 0; i < max; i++) {
-        c1 = cp[i]; // psb->FileMagic[i];
+        c1 = cp[i];  
         c2 = Magic[i];
         if (c1 != c2) {
             sprintf(lpe, "Error: Offset %llu Magic chars do not mactch - %c vs %c!\n", i, c1, c2);
             return 0;
         }
     }
-    // header looks ok
-    // *****************************************************
     strcpy(pb, "Offset 000000 - Got Magic PDB header\n");
     direct_out_it(pb);
     HexDump((PBYTE)cp, 64, (PBYTE)in_cp);
 
     bs = psb->BlockSize;
-    /* BlockSize - The block size of the internal file system. Valid values are 512, 1024, 2048, and 4096 bytes. */
     if (bs != 4096) {
         sprintf(lpe, "Error: Only support Block size of 4096, got %u!\n", bs);
         return 0;
@@ -246,17 +194,13 @@ int IsPdbFile( char *in_cp, size_t len )
     direct_out_it(pb);
     cp += (bs - 32);
     HexDump((PBYTE)cp, 32, (PBYTE)in_cp);
-    // *****************************************************
-
-    // ================================
     sprintf(pb, "psb->BlockSize         = % 10u (%08x)\n", bs, bs);
     direct_out_it(pb);
 
-    val = psb->FreeBlockMapBlock; // should be 1 or 2???
+    val = psb->FreeBlockMapBlock;      
     sprintf(pb, "psb->FreeBlockMapBlock = % 10u (%08x)\n", val,val);
     direct_out_it(pb);
 
-    /* NumBlocks - The total number of blocks in the file. NumBlocks * BlockSize should equal the size of the file on disk. */
     num = psb->NumBlocks;
     sprintf(pb, "psb->NumBlocks         = % 10u (%08x)\n", num, num);
     direct_out_it(pb);
@@ -264,37 +208,31 @@ int IsPdbFile( char *in_cp, size_t len )
         sprintf(lpe, "Error: Number of blocks, %u, times block size %u, NOT equal file size %llu\n", num, bs, len);
         return 0;
     }
-     /* NumDirectoryBytes - The size of the stream directory, in bytes. */
     ndb = psb->NumDirectoryBytes;
     sprintf(pb, "psb->NumDirectoryBytes = % 10u (%08x)\n", ndb, ndb);
     direct_out_it(pb);
 
-    /* BlockMapAddr - The index of a block within the MSF file. At this block is an array of 
-                     ulittle32_t’s listing the blocks that the stream directory resides on.  */
     arr = &psb->BlockMapAddr;
-    //    bma = arr[val];
-    bma = psb->BlockMapAddr;    // TODO: Note this CAN be an ARRAY, not yet handled
+    bma = psb->BlockMapAddr;              
     if ((bma == 0) || (bma >= num)) {
         sprintf(lpe, "Error: BlockMapAddr %u, is zero or GTE number of block %u!\n", bma, num);
         return 0;
     }
     sprintf(pb, "psb->BlockMapAddr      = % 10u (%08x)\n", bma, bma);
     direct_out_it(pb);
-    HexDump((PBYTE)arr, 32, (PBYTE)in_cp); // DEBUG: See what follows
+    HexDump((PBYTE)arr, 32, (PBYTE)in_cp);     
 
-    // get to the StreamDirectory block
-    cp = in_cp + (bs * (bma - 1));  // NOTE: index MINUS 1!!!!
-    PSD psd = (PSD)cp;  // begin of stream directory
+    cp = in_cp + (bs * (bma - 1));      
+    PSD psd = (PSD)cp;      
     arr = (ulittle32_t*)cp;
     nos = psd->NumStreams;
     sprintf(pb, "\npsd->NumStreams        = % 10u (%08x)\n", nos, nos);
     direct_out_it(pb);
-    arr++; // bump to first stream sizes
+    arr++;      
     vU32 v;
     vU32 b;
     vU32 seen;
     tot = 0;
-    //ulittle32_t StreamSizes[NumStreams];
     for (cnt = 0; cnt < nos; cnt++) {
         val = *arr;
         v.push_back(val);
@@ -307,8 +245,6 @@ int IsPdbFile( char *in_cp, size_t len )
     }
     sprintf(pb, "Total Stream Blocks: % 10u (%08x)\n", tot, tot);
     direct_out_it(pb);
-    //ulittle32_t StreamBlocks[NumStreams][];
-    // TODO: Each BLOCK index, should appear ONLY ONCE!
     for (cnt = 0; cnt < nos; cnt++) {
         blks = b[cnt];
         sprintf(pb, "  Stream % 3u:% 3u: {", (cnt + 1), blks);
@@ -338,11 +274,8 @@ int IsPdbFile( char *in_cp, size_t len )
     direct_out_it(pb);
     HexDump((PBYTE)arr, 32, (PBYTE)in_cp);
 
-    /* output part of each block, except the first */
     for (cnt = 1; cnt < num; cnt++) {
-        cp = in_cp + (bs * cnt);    // pointer to head of blcok
-        //psd = (PSD)cp;
-        //val = psd->NumStreams;
+        cp = in_cp + (bs * cnt);         
         off = cp - in_cp;
         sprintf(pb, "\nOffset %08llX - block %u\n", off, (cnt + 1));
         direct_out_it(pb);
@@ -352,8 +285,7 @@ int IsPdbFile( char *in_cp, size_t len )
         cp += (bs - 32);
         HexDump((PBYTE)cp, 32, (PBYTE)in_cp);
     }
-    /* TODO: This should be in the above indicated ORDER */
-    sprintf(pb, "\nListing %llu Blocks, in the ORDER indicated...\n", seen.size());
+    sprintf(pb, "\nListing %llu Blocks, in the ORDER indicated...\n", (unsigned long long)seen.size());
     direct_out_it(pb);
 
     cnt = 0;
@@ -363,7 +295,7 @@ int IsPdbFile( char *in_cp, size_t len )
     for (auto bi : seen) {
         k++;
         off = bs * bi;
-        cp = in_cp + off;    // pointer to head of block
+        cp = in_cp + off;         
         if (k == 1) {
             show_stream_header(cp);
         }
@@ -386,7 +318,7 @@ int IsPdbFile( char *in_cp, size_t len )
 
     }
 
-    sprintf(pb, "\nDone Listing of %llu Blocks, in the ORDER indicated...\n", seen.size());
+    sprintf(pb, "\nDone Listing of %llu Blocks, in the ORDER indicated...\n", (unsigned long long)seen.size());
     direct_out_it(pb);
 
     return 0;
@@ -399,4 +331,3 @@ int DumpPdbFile( char *cp, size_t len )
     return 0;
 }
 
-/* eof */

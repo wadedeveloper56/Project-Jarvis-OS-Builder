@@ -1,15 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <stdio.h>
-#include <string.h> // for strlen(), ...
-#ifdef _MSC_VER
-#include <WinSock2.h>
-#include <sys/timeb.h>
-#else
-#include <sys/time.h> // gettimeofday(), ...
-#endif
-
+#include "pch.h"
 #include "sprtf.hxx"
 #include "utils.hxx"
 

@@ -1,44 +1,10 @@
-/* sprtf.cxx
- * SPRTF - Log output utility - part of the project
- *
- * Copyright (c) 2017 - Geoff R. McLane
- *
- * Licence: GNU GPL version 2
- *
- */
-
-#ifdef _MSC_VER
-#  pragma warning( disable : 4995 )
-#endif
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <stdio.h>  /* fopen()... */
-#include <string.h> /* strcpy */
-#include <stdarg.h> /* va_start, va_end, ... */
-
-#ifdef _MSC_VER
-#  include <WinSock2.h>
-#  include <sys/timeb.h>
-#  if (defined(UNICODE) || defined(_UNICODE))
-#    include <Strsafe.h>
-#  endif
-#include <direct.h> // for _mkdir, ...
-#else /* !_MSC_VER */
-#  include <sys/time.h> /* gettimeoday(), struct timeval,... */
-#endif /* _MSC_VER y/n */
-
-#include <time.h>
-#include <stdlib.h> /* for exit() in unix */
-#ifdef _WIN32
-#include <fcntl.h>
-#include <io.h> // for setmode, ...
-#endif // _WIN32
+#include "pch.h"
 #include "sprtf.hxx"
 
 #ifdef _MSC_VER
 #ifndef _CRT_SECURE_NO_DEPRECATE
 #define _CRT_SECURE_NO_DEPRECATE
-#endif /* #ifndef _CRT_SECURE_NO_DEPRECATE */
+#endif    
 #pragma warning( disable:4996 )
 #else
 #define strcmpi strcasecmp
@@ -71,7 +37,6 @@ char *GetNxtBuf()
 }
 
 #define  MXIO     512
-/* use local log */
 static char def_log[] = "tempped.txt";
 static char logfile[264] = "\0";
 static FILE * outfile = NULL;
@@ -133,7 +98,7 @@ int   add_append_log( int val )
 
 
 #ifdef _MSC_VER
-static const char *mode = "wb"; /* in window sprtf looks after the line endings */
+static const char *mode = "wb";          
 #else
 static const char *mode = "w";
 #endif
@@ -142,7 +107,7 @@ static const char *mode = "w";
 #define M_IS_DIR _S_IFDIR
 #define mkdir _mkdir
 
-#else // !_MSC_VER
+#else  
 #define M_IS_DIR S_IFDIR
 #endif
 
@@ -199,10 +164,10 @@ int create_dir(const char* pd)
                         if (is_file_or_directory(tmp) != MDT_DIR) {
                             res = mkdir(tmp);
                             if (res != 0) {
-                                return 0; // FAILED
+                                return 0;  
                             }
                             if (is_file_or_directory(tmp) != MDT_DIR) {
-                                return 0; // FAILED
+                                return 0;  
                             }
                         }
                         tmp[j++] = ch;
@@ -214,25 +179,25 @@ int create_dir(const char* pd)
                     tmp[j] = 0;
                 }
                 pc = ch;
-            } // for lenght of path
+            }     
         if ((pc == '\\') || (pc == '/')) {
-            iret = 1; // success
+            iret = 1;  
         }
         else {
             if (j && pc) {
                 tmp[j] = 0;
                 if (is_file_or_directory(tmp) == MDT_DIR) {
-                    iret = 1; // success
+                    iret = 1;  
                 }
                 else {
                     res = mkdir(tmp);
                     if (res != 0) {
-                        return 0; // FAILED
+                        return 0;  
                     }
                     if (is_file_or_directory(tmp) != MDT_DIR) {
-                        return 0; // FAILED
+                        return 0;  
                     }
-                    iret = 1; // success
+                    iret = 1;  
                 }
             }
         }
@@ -258,10 +223,6 @@ void GetAppData(PTSTR lpini)
 {
     char* pd;
     if (!gszAppData[0]) {
-        //pd = getenv("PROGRAMDATA"); // UGH - do not have permissions -  how to GET permissions
-        //if (!pd) {
-        //	pd = getenv("ALLUSERSPROFILE");
-        //}
         pd = getenv("APPDATA");
         if (!pd) {
             pd = getenv("LOCALAPPDATA");
@@ -284,7 +245,7 @@ void GetAppData(PTSTR lpini)
     }
     else {
 #ifdef _WIN32
-        GetModulePath(lpini);    // does GetModuleFileName( NULL, lpini, 256 );
+        GetModulePath(lpini);          
 #else
         strcpy(lpini, "./");
 #endif
@@ -301,7 +262,7 @@ int   open_log_file( void )
     }
    if (append_to_log) {
 #ifdef _MSC_VER
-        mode = "ab"; /* in window sprtf looks after the line endings */
+        mode = "ab";          
 #else
         mode = "a";
 #endif
@@ -310,15 +271,14 @@ int   open_log_file( void )
    if( outfile == 0 ) {
       outfile = (FILE *)-1;
       sprtf("ERROR: Failed to open log file [%s] ...\n", logfile);
-      /* exit(1); failed */
-      return 0;   /* failed */
+      return 0;     
    }
    else {
 #ifdef _WIN32
        setmode(fileno(stdout), O_BINARY);
-#endif // _WIN32
+#endif  
    }
-   return 1; /* success */
+   return 1;   
 }
 
 void close_log_file( void )
@@ -333,7 +293,7 @@ char * get_log_file( void )
 {
    if (logfile[0] == 0)
       strcpy(logfile,def_log);
-   if (outfile == (FILE *)-1) /* disable the log file */
+   if (outfile == (FILE *)-1)      
        return (char *)"none";
    return logfile;
 }
@@ -343,14 +303,14 @@ void   set_log_file( char * nf, int open )
    if (logfile[0] == 0)
       strcpy(logfile,def_log);
    if ( nf && *nf && strcmpi(nf,logfile) ) {
-      close_log_file(); /* remove any previous */
-      strcpy(logfile,nf); /* set new name */
-      if (strcmp(logfile,"none") == 0) { /* if equal 'none' */
-          outfile = (FILE *)-1; /* disable the log file */
+      close_log_file();     
+      strcpy(logfile,nf);     
+      if (strcmp(logfile,"none") == 0) {     
+          outfile = (FILE *)-1;      
       } else if (open) {
-          open_log_file();  /* and open it ... anything previous written is 'lost' */
+          open_log_file();            
       } else
-          outfile = 0; /* else set 0 to open on first write */
+          outfile = 0;          
    }
 }
 
@@ -369,7 +329,7 @@ int gettimeofday(struct timeval *tp, void *tzp)
     return 0;
 }
 
-#endif /* _MSC_VER */
+#endif   
 
 void add_date_stg( char *ps, struct timeval *ptv )
 {
@@ -465,24 +425,22 @@ static void oi( char * psin )
       }
 
       if( addstdout ) {
-         // fwrite( ps, 1, len, stderr );  /* 20170917 - Switch to using 'stderr' in place of 'stdout' */
-         fwrite(ps, 1, len, stdout);  /* 20180117 - Switch back to using 'stdout' in place of 'stderr' */
+         fwrite(ps, 1, len, stdout);              
       }
 #ifdef ADD_LISTVIEW
        if (add2listview) {
            LVInsertItem(ps);
        } 
-#endif /* ADD_LISTVIEW */
+#endif   
 #ifdef ADD_SCREENOUT
        if (add2screen) {
-          Add_String(ps);    /* add string to screen list */
+          Add_String(ps);          
        }
-#endif /* #ifdef ADD_SCREENOUT */
+#endif    
    }
 }
 
 #ifdef _MSC_VER
-/* service to ensure line endings in windows only */
 static void prt( char * ps )
 {
     static char _s_buf[1024];
@@ -519,14 +477,14 @@ static void prt( char * ps )
                 oi(pb);
                 k = 0;
             }
-        }   /* for length of string */
+        }        
         if( k ) {
             pb[k] = 0;
             oi( pb );
         }
     }
 }
-#endif /* #ifdef _MSC_VER */
+#endif    
 
 int direct_out_it( char *cp )
 {
@@ -538,8 +496,6 @@ int direct_out_it( char *cp )
     return (int)strlen(cp);
 }
 
-/* STDAPI StringCchVPrintf( OUT LPTSTR  pszDest,
- *   IN  size_t  cchDest, IN  LPCTSTR pszFormat, IN  va_list argList ); */
 int MCDECL sprtf( const char *pf, ... )
 {
    static char _s_sprtfbuf[M_MAX_SPRTF+4];
@@ -550,7 +506,7 @@ int MCDECL sprtf( const char *pf, ... )
    i = vsnprintf( pb, M_MAX_SPRTF, pf, arglist );
    va_end(arglist);
 #ifdef _MSC_VER
-   prt(pb); /* ensure CR/LF */
+   prt(pb);    
 #else
    oi(pb);
 #endif
@@ -558,22 +514,20 @@ int MCDECL sprtf( const char *pf, ... )
 }
 
 #ifdef UNICODE
-/* WIDE VARIETY */
 static void wprt( PTSTR ps )
 {
    static char _s_woibuf[1024];
    char * cp = _s_woibuf;
    int len = (int)lstrlen(ps);
    if(len) {
-      int ret = WideCharToMultiByte( CP_ACP, /* UINT CodePage, // code page */
-         0, /* DWORD dwFlags,            // performance and mapping flags */
-         ps,   /* LPCWSTR lpWideCharStr,    // wide-character string */
-         len,     /* int cchWideChar,          // number of chars in string. */
-         cp,      /* LPSTR lpMultiByteStr,     // buffer for new string */
-         1024,    /* int cbMultiByte,          // size of buffer */
-         NULL,    /* LPCSTR lpDefaultChar,     // default for unmappable chars */
-         NULL );  /* LPBOOL lpUsedDefaultChar  // set when default char used */
-      /* oi(cp); */
+      int ret = WideCharToMultiByte( CP_ACP,       
+         0,                    
+         ps,            
+         len,                       
+         cp,                  
+         1024,                    
+         NULL,                
+         NULL );            
       prt(cp);
    }
 }
@@ -592,7 +546,7 @@ int MCDECL wsprtf( PTSTR pf, ... )
    return i;
 }
 
-#endif /* #ifdef UNICODE */
+#endif    
 
 char *get_ctime_stg(time_t *pt)
 {
@@ -614,4 +568,3 @@ char *get_ctime_stg(time_t *pt)
     return nb;
 }
 
-/* eof - sprtf.c */
