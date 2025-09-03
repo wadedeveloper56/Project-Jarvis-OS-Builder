@@ -18,5 +18,85 @@
     <ClCompile Include="PEDump.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="coffsymboltable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="common.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbgdump.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="exedump.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="libdump.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="objdump.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pdbdump.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="resdump.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="romimage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="symboltablesupport.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sprtf.cxx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="utils.cxx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="coffsymboltable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="common.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cv_dbg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbgdump.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="exedump.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="extrnvar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="libdump.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="objdump.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pdbdump.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resdump.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="romimage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="symboltablesupport.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sprtf.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="utils.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

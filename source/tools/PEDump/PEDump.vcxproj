@@ -147,7 +147,35 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="coffsymboltable.cpp" />
+    <ClCompile Include="common.cpp" />
+    <ClCompile Include="dbgdump.cpp" />
+    <ClCompile Include="exedump.cpp" />
+    <ClCompile Include="libdump.cpp" />
+    <ClCompile Include="objdump.cpp" />
+    <ClCompile Include="pdbdump.cpp" />
     <ClCompile Include="PEDump.cpp" />
+    <ClCompile Include="resdump.cpp" />
+    <ClCompile Include="romimage.cpp" />
+    <ClCompile Include="sprtf.cxx" />
+    <ClCompile Include="symboltablesupport.cpp" />
+    <ClCompile Include="utils.cxx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="coffsymboltable.h" />
+    <ClInclude Include="common.h" />
+    <ClInclude Include="cv_dbg.h" />
+    <ClInclude Include="dbgdump.h" />
+    <ClInclude Include="exedump.h" />
+    <ClInclude Include="extrnvar.h" />
+    <ClInclude Include="libdump.h" />
+    <ClInclude Include="objdump.h" />
+    <ClInclude Include="pdbdump.h" />
+    <ClInclude Include="resdump.h" />
+    <ClInclude Include="romimage.h" />
+    <ClInclude Include="sprtf.hxx" />
+    <ClInclude Include="symboltablesupport.h" />
+    <ClInclude Include="utils.hxx" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
