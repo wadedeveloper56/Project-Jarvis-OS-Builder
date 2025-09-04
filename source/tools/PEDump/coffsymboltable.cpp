@@ -18,6 +18,42 @@ COFFSymbol::~COFFSymbol()
     CleanUp();
 }
 
+DWORD
+COFFSymbol::GetIndex()
+{
+    return m_index;
+}
+
+DWORD
+COFFSymbol::GetValue()
+{
+    return m_pSymbolData ? m_pSymbolData->Value : 0;
+}
+
+SHORT
+COFFSymbol::GetSectionNumber()
+{
+    return m_pSymbolData ? m_pSymbolData->SectionNumber : 0;
+}
+
+WORD
+COFFSymbol::GetType()
+{
+    return m_pSymbolData ? m_pSymbolData->Type : 0;
+}
+
+BYTE
+COFFSymbol::GetStorageClass()
+{
+    return m_pSymbolData ? m_pSymbolData->StorageClass : 0;
+}
+
+BOOL
+COFFSymbol::GetNumberOfAuxSymbols()
+{
+    return m_pSymbolData ? m_pSymbolData->NumberOfAuxSymbols : 0;
+}
+
 void
 COFFSymbol::CleanUp(void)
 {

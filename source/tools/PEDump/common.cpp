@@ -1360,7 +1360,9 @@ DumpSectionTable(
                         case IMAGE_SCN_ALIGN_1024BYTES: pszAlign = "ALIGN_1024BYTES"; break; // 0x00B00000  //
                         case IMAGE_SCN_ALIGN_2048BYTES: pszAlign = "ALIGN_2048BYTES"; break; // 0x00C00000  //
                         case IMAGE_SCN_ALIGN_4096BYTES: pszAlign = "ALIGN_4096BYTES"; break; // 0x00D00000  //
-                        case IMAGE_SCN_ALIGN_8192BYTES: pszAlign = "ALIGN_8192BYTES"; break; // 0x00E00000  //
+                        case IMAGE_SCN_ALIGN_8192BYTES:
+                            pszAlign = "ALIGN_8192BYTES";
+                            break; // 0x00E00000  //
                         // Unused                                    0x00F00000
                         default: pszAlign = "ALIGN_DEFAULT(16)"; break;
                     }
@@ -1557,9 +1559,7 @@ DumpDebugDirectory(
 
     for (i = 0; i < cDebugFormats; i++)
     {
-        szDebugFormat = (debugDir->Type <= IMAGE_DEBUG_TYPE_OMAP_FROM_SRC) ?
-            SzDebugFormats[debugDir->Type] :
-            (char*) "???";
+        szDebugFormat = (debugDir->Type <= IMAGE_DEBUG_TYPE_OMAP_FROM_SRC) ? SzDebugFormats[debugDir->Type] : (char*) "???";
 
         printf(
             "  %-15s %08X %08X %08X %08X %08X %u.%02u\n",

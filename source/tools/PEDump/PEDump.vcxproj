@@ -159,15 +159,15 @@
     <ClCompile Include="Common.cpp" />
     <ClCompile Include="DbgDump.cpp" />
     <ClCompile Include="EXEDump.cpp" />
-    <ClCompile Include="libdump.cpp" />
-    <ClCompile Include="objdump.cpp" />
-    <ClCompile Include="pdbdump.cpp" />
+    <ClCompile Include="LibDump.cpp" />
+    <ClCompile Include="ObjDump.cpp" />
+    <ClCompile Include="PDBDump.cpp" />
     <ClCompile Include="PEDump.cpp" />
-    <ClCompile Include="resdump.cpp" />
-    <ClCompile Include="romimage.cpp" />
-    <ClCompile Include="sprtf.cxx" />
-    <ClCompile Include="symboltablesupport.cpp" />
-    <ClCompile Include="utils.cxx" />
+    <ClCompile Include="ResDump.cpp" />
+    <ClCompile Include="ROMImage.cpp" />
+    <ClCompile Include="SPrintf.cxx" />
+    <ClCompile Include="SymbolTableSupport.cpp" />
+    <ClCompile Include="Utilities.cxx" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="coffsymboltable.h" />

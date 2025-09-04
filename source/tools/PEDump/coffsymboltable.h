@@ -17,27 +17,16 @@ public:
 
 	COFFSymbol(PIMAGE_SYMBOL pSymbolData, PSTR pStringTable, DWORD index);
 	~COFFSymbol();
-
-	DWORD GetIndex() { return m_index; }
+	DWORD GetIndex();
 	PSTR  GetName();
-	DWORD GetValue() { return m_pSymbolData ? m_pSymbolData->Value : 0; }
-	SHORT GetSectionNumber()
-	{
-		return m_pSymbolData ? m_pSymbolData->SectionNumber : 0;
-	}
-	WORD  GetType() { return m_pSymbolData ? m_pSymbolData->Type : 0; }
+	DWORD GetValue();
+	SHORT GetSectionNumber();
+	WORD  GetType();
 	PSTR  GetTypeName();
-	BYTE  GetStorageClass()
-	{
-		return m_pSymbolData ? m_pSymbolData->StorageClass : 0;
-	}
+	BYTE  GetStorageClass();
 	PSTR  GetStorageClassName();
-	BOOL  GetNumberOfAuxSymbols()
-	{
-		return m_pSymbolData ? m_pSymbolData->NumberOfAuxSymbols : 0;
-	}
+	BOOL  GetNumberOfAuxSymbols();
 	BOOL  GetAuxSymbolAsString(PSTR pszBuffer, unsigned cbBuffer);
-
 	friend class COFFSymbolTable;
 };
 
