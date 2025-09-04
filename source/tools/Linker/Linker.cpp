@@ -1,6 +1,11 @@
 #define _CRT_SECURE_NO_WARNINGS
+#include <string>
+#include <vector>
+#include <sstream>
 #include <iostream>
 #include "ArgumentTable.h"
+
+using namespace std;
 
 #define OUTPUT_COM 1
 #define OUTPUT_EXE 2
@@ -42,10 +47,19 @@ unsigned char subsysMajor, subsysMinor;
 unsigned int subSystem;
 bool buildDll = false;
 unsigned char* stubName = NULL;
+vector<string> libList;
 
 void ProcessEnvironmentVariable()
 {
-	char* libList = getenv("LIB");
+	char* libListStr = getenv("LIB");
+	if (libListStr)
+	{
+		stringstream ss(libListStr);
+		string token;
+		while (getline(ss, token, ';')) {
+			libList.push_back(token);
+		}
+	}
 }
 
 void processArgs(int argc, char* argv[])
@@ -219,6 +233,7 @@ void processArgs(int argc, char* argv[])
 		osMajor = setosmajor;
 		osMinor = setosminor;
 	}
+	argFreeTable(argtable, sizeof(argtable) / sizeof(argtable[0]));
 }
 
 int main(int argc, char* argv[])

@@ -6,8 +6,8 @@
 PIMAGE_DEBUG_MISC g_pMiscDebugInfo       = 0;
 PDWORD g_pCVHeader                       = 0;
 PIMAGE_COFF_SYMBOLS_HEADER g_pCOFFHeader = 0;
-COFFSymbolTable* g_pCOFFSymbolTable      = 0; // 0 == does not exit
-vSTR vDllList;                                // FIX20171017
+COFFSymbolTable* g_pCOFFSymbolTable      = 0;      
+vSTR vDllList;                                 
 char cMachineType[256] = {0};
 
 void
@@ -22,7 +22,7 @@ str_to_upper(std::string& data)
 }
 
 bool
-in_dll_list(std::string sDll) // FIX20171017
+in_dll_list(std::string sDll)  
 {
     size_t max = vDllList.size();
     size_t ii;
@@ -45,7 +45,7 @@ in_dll_list(std::string sDll) // FIX20171017
 }
 
 void
-add_2_dll_list(char* pDLL) // FIX20171017
+add_2_dll_list(char* pDLL)  
 {
     std::string s(pDLL);
 
@@ -56,7 +56,7 @@ add_2_dll_list(char* pDLL) // FIX20171017
 }
 
 void
-kill_dll_list() // FIX20171017
+kill_dll_list()  
 {
     vDllList.clear();
 }
@@ -92,7 +92,7 @@ stringCompare(
 }
 
 void
-show_dll_list() // FIX20171017
+show_dll_list()  
 {
     size_t max  = vDllList.size();
     size_t mwid = 100;
@@ -123,35 +123,35 @@ show_dll_list() // FIX20171017
         {
             if (len)
             {
-                printf("\n"); // close and previous
+                printf("\n");    
             }
 
             printf(
                 "%s\n",
                 s.c_str()
-                ); // and this
+                );   
             len = 0;
         }
         else if ((len + sz) > mwid)
         {
             if (len)
             {
-                printf("\n"); // close and previous
+                printf("\n");    
             }
 
             printf(
                 "%s ",
                 s.c_str()
-                );    // out this
-            len = sz; // and start size counter
+                );      
+            len = sz;     
         }
         else
         {
             printf(
                 "%s ",
                 s.c_str()
-                );     // add this
-            len += sz; // and add to width
+                );       
+            len += sz;     
         }
     }
 
@@ -159,7 +159,7 @@ show_dll_list() // FIX20171017
     {
         if (len)
         {
-            printf("\n\n"); // close current
+            printf("\n\n");   
         }
         else
         {
@@ -169,12 +169,6 @@ show_dll_list() // FIX20171017
 
     kill_dll_list();
 }
-
-/*----------------------------------------------------------------------------*/
-//
-// Header related stuff
-//
-/*----------------------------------------------------------------------------*/
 
 typedef struct
 {
@@ -188,8 +182,7 @@ typedef struct
     const char* name;
 } DWORD_FLAG_DESCRIPTIONS;
 
-// Bitfield values and names for the IMAGE_FILE_HEADER flags
-#if 0  // 0000000000000000000000000000000000000000000000000000000000
+#if 0   
 WORD_FLAG_DESCRIPTIONS ImageFileHeaderCharacteristics[] =
 {
     {IMAGE_FILE_RELOCS_STRIPPED, "RELOCS_STRIPPED"},
@@ -197,13 +190,9 @@ WORD_FLAG_DESCRIPTIONS ImageFileHeaderCharacteristics[] =
     {IMAGE_FILE_LINE_NUMS_STRIPPED, "LINE_NUMS_STRIPPED"},
     {IMAGE_FILE_LOCAL_SYMS_STRIPPED, "LOCAL_SYMS_STRIPPED"},
     {IMAGE_FILE_AGGRESIVE_WS_TRIM, "AGGRESIVE_WS_TRIM"},
-// { IMAGE_FILE_MINIMAL_OBJECT, "MINIMAL_OBJECT" }, // Removed in NT 3.5
-// { IMAGE_FILE_UPDATE_OBJECT, "UPDATE_OBJECT" },   // Removed in NT 3.5
-// { IMAGE_FILE_16BIT_MACHINE, "16BIT_MACHINE" },   // Removed in NT 3.5
     {IMAGE_FILE_BYTES_REVERSED_LO, "BYTES_REVERSED_LO"},
     {IMAGE_FILE_32BIT_MACHINE, "32BIT_MACHINE"},
     {IMAGE_FILE_DEBUG_STRIPPED, "DEBUG_STRIPPED"},
-// { IMAGE_FILE_PATCH, "PATCH" },
     {IMAGE_FILE_REMOVABLE_RUN_FROM_SWAP, "REMOVABLE_RUN_FROM_SWAP"},
     {IMAGE_FILE_NET_RUN_FROM_SWAP, "NET_RUN_FROM_SWAP"},
     {IMAGE_FILE_SYSTEM, "SYSTEM"},
@@ -211,47 +200,29 @@ WORD_FLAG_DESCRIPTIONS ImageFileHeaderCharacteristics[] =
     {IMAGE_FILE_UP_SYSTEM_ONLY, "UP_SYSTEM_ONLY"},
     {IMAGE_FILE_BYTES_REVERSED_HI, "BYTES_REVERSED_HI"}
 };
-#endif // 00000000000000000000000000000000000000000000000000000000000
-// 20171019 - 20140719 UPDATE
-// Bitfield values and names for the IMAGE_FILE_HEADER flags
+#endif  
 WORD_FLAG_DESCRIPTIONS ImageFileHeaderCharacteristics[] =
 {
-    {IMAGE_FILE_RELOCS_STRIPPED, "RELOCS_STRIPPED"},                 // 0x0001  // Relocation info stripped from file.
-    {IMAGE_FILE_EXECUTABLE_IMAGE, "EXECUTABLE_IMAGE"},               // 0x0002  // File is executable  (i.e. no unresolved externel references).
-    {IMAGE_FILE_LINE_NUMS_STRIPPED, "LINE_NUMS_STRIPPED"},           // 0x0004  // Line nunbers stripped from file.
-    {IMAGE_FILE_LOCAL_SYMS_STRIPPED, "LOCAL_SYMS_STRIPPED"},         // 0x0008  // Local symbols stripped from file.
-    {IMAGE_FILE_AGGRESIVE_WS_TRIM, "AGGRESIVE_WS_TRIM"},             // 0x0010  // Agressively trim working set
-    {IMAGE_FILE_LARGE_ADDRESS_AWARE, "LARGE_ADDRESS_AWARE"},         // 0x0020  // App can handle >2gb addresses
-    {IMAGE_FILE_BYTES_REVERSED_LO, "BYTES_REVERSED_LO"},             //  0x0080  // Bytes of machine word are reversed.
-    {IMAGE_FILE_32BIT_MACHINE, "32BIT_MACHINE"},                     // 0x0100  // 32 bit word machine.
-    {IMAGE_FILE_DEBUG_STRIPPED, "DEBUG_STRIPPED"},                   // 0x0200  // Debugging info stripped from file in .DBG file
-    {IMAGE_FILE_REMOVABLE_RUN_FROM_SWAP, "REMOVABLE_RUN_FROM_SWAP"}, // 0x0400  // If Image is on removable media, copy and run from the swap file.
-    {IMAGE_FILE_NET_RUN_FROM_SWAP, "NET_RUN_FROM_SWAP"},             // 0x0800  // If Image is on Net, copy and run from the swap file.
-    {IMAGE_FILE_SYSTEM, "SYSTEM"},                                   //                    0x1000  // System File.
-    {IMAGE_FILE_DLL, "DLL"},                                         //                       0x2000  // File is a DLL.
-    {IMAGE_FILE_UP_SYSTEM_ONLY, "UP_SYSTEM_ONLY"},                   //            0x4000  // File should only be run on a UP machine
-    {IMAGE_FILE_BYTES_REVERSED_HI, "BYTES_REVERSED_HI"} //       0x8000  // Bytes of machine word are reversed.
+    {IMAGE_FILE_RELOCS_STRIPPED, "RELOCS_STRIPPED"},                         
+    {IMAGE_FILE_EXECUTABLE_IMAGE, "EXECUTABLE_IMAGE"},                           
+    {IMAGE_FILE_LINE_NUMS_STRIPPED, "LINE_NUMS_STRIPPED"},                   
+    {IMAGE_FILE_LOCAL_SYMS_STRIPPED, "LOCAL_SYMS_STRIPPED"},                 
+    {IMAGE_FILE_AGGRESIVE_WS_TRIM, "AGGRESIVE_WS_TRIM"},                    
+    {IMAGE_FILE_LARGE_ADDRESS_AWARE, "LARGE_ADDRESS_AWARE"},                 
+    {IMAGE_FILE_BYTES_REVERSED_LO, "BYTES_REVERSED_LO"},                       
+    {IMAGE_FILE_32BIT_MACHINE, "32BIT_MACHINE"},                            
+    {IMAGE_FILE_DEBUG_STRIPPED, "DEBUG_STRIPPED"},                              
+    {IMAGE_FILE_REMOVABLE_RUN_FROM_SWAP, "REMOVABLE_RUN_FROM_SWAP"},                 
+    {IMAGE_FILE_NET_RUN_FROM_SWAP, "NET_RUN_FROM_SWAP"},                            
+    {IMAGE_FILE_SYSTEM, "SYSTEM"},                                                           
+    {IMAGE_FILE_DLL, "DLL"},                                                                      
+    {IMAGE_FILE_UP_SYSTEM_ONLY, "UP_SYSTEM_ONLY"},                                          
+    {IMAGE_FILE_BYTES_REVERSED_HI, "BYTES_REVERSED_HI"}                
 };
 
 #define NUMBER_IMAGE_HEADER_FLAGS \
     (sizeof(ImageFileHeaderCharacteristics) / sizeof(WORD_FLAG_DESCRIPTIONS))
 
-//
-// Dump the IMAGE_FILE_HEADER for a PE file or an OBJ or LIB?
-//
-
-/*
-typedef struct _IMAGE_FILE_HEADER {
-WORD  Machine;
-WORD  NumberOfSections;
-DWORD TimeDateStamp;
-DWORD PointerToSymbolTable;
-DWORD NumberOfSymbols;
-WORD  SizeOfOptionalHeader;
-WORD  Characteristics;
-} IMAGE_FILE_HEADER, *PIMAGE_FILE_HEADER;
-
-*/
 void
 DumpHeader(PIMAGE_FILE_HEADER pImageFileHeader)
 {
@@ -278,17 +249,10 @@ DumpHeader(PIMAGE_FILE_HEADER pImageFileHeader)
         return;
     }
 
-    // musing - TODO: seems if Machine is 0, date bad, and number of section = 0xFFFF, should be considered INVALID
-    // from: https://msdn.microsoft.com/en-us/library/windows/desktop/ms680313(v=vs.85).aspx
-    // NumberOfSections
-    // The number of sections.This indicates the size of the section table, which immediately follows the headers.
-    // Note that the Windows loader limits the number of sections to 96. !!!!!!!!!!!!!!!!!!!!
-    // *****************************************************************
-
     WORD nSects = pImageFileHeader->NumberOfSections;
     PSTR mt     = GetMachineTypeName(pImageFileHeader->Machine);
 
-    if (pImageFileHeader->Machine && (cMachineType[0] == 0)) // FIX20171021 - Only collect/show the FIRST instance of this, and ONLY if NOT 0
+    if (pImageFileHeader->Machine && (cMachineType[0] == 0))               
     {
         sprintf(
             cMachineType,
@@ -300,7 +264,7 @@ DumpHeader(PIMAGE_FILE_HEADER pImageFileHeader)
 
     if (fShowMachineType)
     {
-        return; // all done
+        return;   
     }
 
     printf(
@@ -315,7 +279,7 @@ DumpHeader(PIMAGE_FILE_HEADER pImageFileHeader)
         headerFieldWidth,
         "Number of Sections:",
         nSects
-        ); // pImageFileHeader->NumberOfSections);
+        );  
     printf(
         "  %-*s%08X -> %s\n",
         headerFieldWidth,
@@ -353,7 +317,6 @@ DumpHeader(PIMAGE_FILE_HEADER pImageFileHeader)
     {
         WORD flag = ImageFileHeaderCharacteristics[i].flag;
 
-        // if (pImageFileHeader->Characteristics & // ImageFileHeaderCharacteristics[i].flag)
         if (Chars & flag)
         {
             printf(
@@ -379,11 +342,9 @@ DumpHeader(PIMAGE_FILE_HEADER pImageFileHeader)
 }
 
 #ifndef IMAGE_DLLCHARACTERISTICS_WDM_DRIVER
-#define IMAGE_DLLCHARACTERISTICS_WDM_DRIVER 0x2000 // Driver uses WDM model
+#define IMAGE_DLLCHARACTERISTICS_WDM_DRIVER 0x2000     
 #endif
 
-// Marked as obsolete in MSDN CD 9
-// Bitfield values and names for the DllCharacteritics flags
 WORD_FLAG_DESCRIPTIONS DllCharacteristics[] =
 {
     {IMAGE_DLLCHARACTERISTICS_WDM_DRIVER, "WDM_DRIVER"},
@@ -392,8 +353,6 @@ WORD_FLAG_DESCRIPTIONS DllCharacteristics[] =
     (sizeof(DllCharacteristics) / sizeof(WORD_FLAG_DESCRIPTIONS))
 
 #if 0
-// Marked as obsolete in MSDN CD 9
-// Bitfield values and names for the LoaderFlags flags
 DWORD_FLAG_DESCRIPTIONS LoaderFlags[] =
 {
     {IMAGE_LOADER_FLAGS_BREAK_ON_LOAD, "BREAK_ON_LOAD"},
@@ -411,56 +370,23 @@ typedef struct tagIDNAMES
     const char* var;
 } IDNAMES, *PIDNAME;
 
-// Names of the data directory elements that are defined
-/*
-char *ImageDirectoryNames[] = {
-    "EXPORT", "IMPORT", "RESOURCE", "EXCEPTION", "SECURITY", "BASERELOC",
-    "DEBUG", "COPYRIGHT", "GLOBALPTR", "TLS", "LOAD_CONFIG",
-    "BOUND_IMPORT", "IAT",  // These two entries added for NT 3.51
-    "DELAY_IMPORT" };		// This entry added in NT 5
-
-#define NUMBER_IMAGE_DIRECTORY_ENTRYS \
-    (sizeof(ImageDirectoryNames)/sizeof(char *))
-    */
-/*
-    Extract from winnt.h
-    // Directory Entries
-
-    #define IMAGE_DIRECTORY_ENTRY_EXPORT          0   // Export Directory
-    #define IMAGE_DIRECTORY_ENTRY_IMPORT          1   // Import Directory
-    #define IMAGE_DIRECTORY_ENTRY_RESOURCE        2   // Resource Directory
-    #define IMAGE_DIRECTORY_ENTRY_EXCEPTION       3   // Exception Directory
-    #define IMAGE_DIRECTORY_ENTRY_SECURITY        4   // Security Directory
-    #define IMAGE_DIRECTORY_ENTRY_BASERELOC       5   // Base Relocation Table
-    #define IMAGE_DIRECTORY_ENTRY_DEBUG           6   // Debug Directory
-    //      IMAGE_DIRECTORY_ENTRY_COPYRIGHT       7   // (X86 usage)
-    #define IMAGE_DIRECTORY_ENTRY_ARCHITECTURE    7   // Architecture Specific Data
-    #define IMAGE_DIRECTORY_ENTRY_GLOBALPTR       8   // RVA of GP
-    #define IMAGE_DIRECTORY_ENTRY_TLS             9   // TLS Directory
-    #define IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG    10   // Load Configuration Directory
-    #define IMAGE_DIRECTORY_ENTRY_BOUND_IMPORT   11   // Bound Import Directory in headers
-    #define IMAGE_DIRECTORY_ENTRY_IAT            12   // Import Address Table
-    #define IMAGE_DIRECTORY_ENTRY_DELAY_IMPORT   13   // Delay Load Import Descriptors
-    #define IMAGE_DIRECTORY_ENTRY_COM_DESCRIPTOR 14   // COM Runtime descriptor
-
-*/
 IDNAMES ImageDirectoryNames[] =
 {
-    {"EXPORT", 0, 0, "IMAGE_DIRECTORY_ENTRY_EXPORT(0)"},              //  0 Export Directory
-    {"IMPORT", 0, 0, "IMAGE_DIRECTORY_ENTRY_IMPORT(1)"},              //  1 Import Directory
-    {"RESOURCE", 0, 0, "IMAGE_DIRECTORY_ENTRY_RESOURCE(2)"},          //  2 Resource Directory
-    {"EXCEPTION", 0, 0, "IMAGE_DIRECTORY_ENTRY_EXCEPTION(3)"},        //  3 Exception Directory
-    {"SECURITY", 0, 0, "IMAGE_DIRECTORY_ENTRY_SECURITY(4)"},          //  4 Security Directory
-    {"BASERELOC", 0, 0, "IMAGE_DIRECTORY_ENTRY_BASERELOC(5)"},        //  5 Base Relocation Table
-    {"DEBUG", 0, 0, "IMAGE_DIRECTORY_ENTRY_DEBUG (6)"},               //  6 Debug Directory
-    {"COPYRIGHT", 0, 0, "IMAGE_DIRECTORY_ENTRY_ARCHITECTURE(7)"},     //  7 Architecture Specific Data
-    {"GLOBALPTR", 0, 0, "IMAGE_DIRECTORY_ENTRY_GLOBALPTR(8)"},        //  8 RVA of GP
-    {"TLS", 0, 0, "IMAGE_DIRECTORY_ENTRY_TLS(9)"},                    //  9 TLS Directory
-    {"LOAD_CONFIG", 0, 0, "IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG(10)"},   // 10 Load Configuration Directory
-    {"BOUND_IMPORT", 0, 0, "IMAGE_DIRECTORY_ENTRY_BOUND_IMPORT(11)"}, // 11 Bound Import Directory in headers
-    {"IAT", 0, 0, "IMAGE_DIRECTORY_ENTRY_IAT(12)"},                   // 12 Import Address Table // These two entries added for NT 3.51
-    {"DELAY_IMPORT", 0, 0, "IMAGE_DIRECTORY_ENTRY_DELAY_IMPORT(13)"}, // 13 Delay Load Import Descriptors // This entry added in NT 5
-    {"COM_RUNTIME", 0, 0, "IMAGE_DIRECTORY_ENTRY_COM_DESCRIPTOR(14)"} // 14 COM Runtime descriptor
+    {"EXPORT", 0, 0, "IMAGE_DIRECTORY_ENTRY_EXPORT(0)"},                  
+    {"IMPORT", 0, 0, "IMAGE_DIRECTORY_ENTRY_IMPORT(1)"},                  
+    {"RESOURCE", 0, 0, "IMAGE_DIRECTORY_ENTRY_RESOURCE(2)"},              
+    {"EXCEPTION", 0, 0, "IMAGE_DIRECTORY_ENTRY_EXCEPTION(3)"},            
+    {"SECURITY", 0, 0, "IMAGE_DIRECTORY_ENTRY_SECURITY(4)"},              
+    {"BASERELOC", 0, 0, "IMAGE_DIRECTORY_ENTRY_BASERELOC(5)"},             
+    {"DEBUG", 0, 0, "IMAGE_DIRECTORY_ENTRY_DEBUG (6)"},                   
+    {"COPYRIGHT", 0, 0, "IMAGE_DIRECTORY_ENTRY_ARCHITECTURE(7)"},          
+    {"GLOBALPTR", 0, 0, "IMAGE_DIRECTORY_ENTRY_GLOBALPTR(8)"},             
+    {"TLS", 0, 0, "IMAGE_DIRECTORY_ENTRY_TLS(9)"},                        
+    {"LOAD_CONFIG", 0, 0, "IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG(10)"},       
+    {"BOUND_IMPORT", 0, 0, "IMAGE_DIRECTORY_ENTRY_BOUND_IMPORT(11)"},       
+    {"IAT", 0, 0, "IMAGE_DIRECTORY_ENTRY_IAT(12)"},                               
+    {"DELAY_IMPORT", 0, 0, "IMAGE_DIRECTORY_ENTRY_DELAY_IMPORT(13)"},             
+    {"COM_RUNTIME", 0, 0, "IMAGE_DIRECTORY_ENTRY_COM_DESCRIPTOR(14)"}     
 };
 
 #define NUMBER_IMAGE_DIRECTORY_ENTRYS \
@@ -494,55 +420,6 @@ DoesSectionExist(const char* sect)
     return FALSE;
 }
 
-//
-// Dump the IMAGE_OPTIONAL_HEADER from a PE file
-//
-// void DumpOptionalHeader(PIMAGE_OPTIONAL_HEADER optionalHeader)
-/*
-typedef struct _IMAGE_OPTIONAL_HEADER {
-//
-// Standard fields.
-//
-
-WORD    Magic;
-BYTE    MajorLinkerVersion;
-BYTE    MinorLinkerVersion;
-DWORD   SizeOfCode;
-DWORD   SizeOfInitializedData;
-DWORD   SizeOfUninitializedData;
-DWORD   AddressOfEntryPoint;
-DWORD   BaseOfCode;
-DWORD   BaseOfData;
-
-//
-// NT additional fields.
-//
-
-DWORD   ImageBase;
-DWORD   SectionAlignment;
-DWORD   FileAlignment;
-WORD    MajorOperatingSystemVersion;
-WORD    MinorOperatingSystemVersion;
-WORD    MajorImageVersion;
-WORD    MinorImageVersion;
-WORD    MajorSubsystemVersion;
-WORD    MinorSubsystemVersion;
-DWORD   Win32VersionValue;
-DWORD   SizeOfImage;
-DWORD   SizeOfHeaders;
-DWORD   CheckSum;
-WORD    Subsystem;
-WORD    DllCharacteristics;
-DWORD   SizeOfStackReserve;
-DWORD   SizeOfStackCommit;
-DWORD   SizeOfHeapReserve;
-DWORD   SizeOfHeapCommit;
-DWORD   LoaderFlags;
-DWORD   NumberOfRvaAndSizes;
-IMAGE_DATA_DIRECTORY DataDirectory[IMAGE_NUMBEROF_DIRECTORY_ENTRIES];
-} IMAGE_OPTIONAL_HEADER32, *PIMAGE_OPTIONAL_HEADER32;
-
-*/
 void
 DumpOptionalHeader32(PIMAGE_OPTIONAL_HEADER32 optionalHeader)
 {
@@ -684,7 +561,6 @@ DumpOptionalHeader32(PIMAGE_OPTIONAL_HEADER32 optionalHeader)
         s
         );
 
-    // Marked as obsolete in MSDN CD 9
     printf(
         "  %-*s%04X\n",
         width,
@@ -736,7 +612,6 @@ DumpOptionalHeader32(PIMAGE_OPTIONAL_HEADER32 optionalHeader)
         );
 
 #if 0
-// Marked as obsolete in MSDN CD 9
     printf(
         "  %-*s%08X\n",
         width,
@@ -776,8 +651,8 @@ DumpOptionalHeader32(PIMAGE_OPTIONAL_HEADER32 optionalHeader)
         printf(
             "  %-12s rva: %08X  size: %08X - %s\n",
             name,
-            dwVA, // optionalHeader->DataDirectory[i].VirtualAddress,
-            dwSZ, // optionalHeader->DataDirectory[i].Size,
+            dwVA,  
+            dwSZ,  
             var
             );
 
@@ -788,42 +663,6 @@ DumpOptionalHeader32(PIMAGE_OPTIONAL_HEADER32 optionalHeader)
         }
     }
 }
-
-/*
-typedef struct _IMAGE_OPTIONAL_HEADER64 {
-WORD        Magic;
-BYTE        MajorLinkerVersion;
-BYTE        MinorLinkerVersion;
-DWORD       SizeOfCode;
-DWORD       SizeOfInitializedData;
-DWORD       SizeOfUninitializedData;
-DWORD       AddressOfEntryPoint;
-DWORD       BaseOfCode;
-ULONGLONG   ImageBase;
-DWORD       SectionAlignment;
-DWORD       FileAlignment;
-WORD        MajorOperatingSystemVersion;
-WORD        MinorOperatingSystemVersion;
-WORD        MajorImageVersion;
-WORD        MinorImageVersion;
-WORD        MajorSubsystemVersion;
-WORD        MinorSubsystemVersion;
-DWORD       Win32VersionValue;
-DWORD       SizeOfImage;
-DWORD       SizeOfHeaders;
-DWORD       CheckSum;
-WORD        Subsystem;
-WORD        DllCharacteristics;
-ULONGLONG   SizeOfStackReserve;
-ULONGLONG   SizeOfStackCommit;
-ULONGLONG   SizeOfHeapReserve;
-ULONGLONG   SizeOfHeapCommit;
-DWORD       LoaderFlags;
-DWORD       NumberOfRvaAndSizes;
-IMAGE_DATA_DIRECTORY DataDirectory[IMAGE_NUMBEROF_DIRECTORY_ENTRIES];
-} IMAGE_OPTIONAL_HEADER64, *PIMAGE_OPTIONAL_HEADER64;
-
-*/
 
 void
 DumpOptionalHeader64(PIMAGE_OPTIONAL_HEADER64 optionalHeader)
@@ -878,7 +717,6 @@ DumpOptionalHeader64(PIMAGE_OPTIONAL_HEADER64 optionalHeader)
         optionalHeader->BaseOfCode
         );
 
-    // printf("  %-*s%X\n", width, "base of data", optionalHeader->BaseOfData);
     printf(
         "  %-*s%llX\n",
         width,
@@ -962,7 +800,6 @@ DumpOptionalHeader64(PIMAGE_OPTIONAL_HEADER64 optionalHeader)
         s
         );
 
-    // Marked as obsolete in MSDN CD 9
     printf(
         "  %-*s%04X\n",
         width,
@@ -1014,7 +851,6 @@ DumpOptionalHeader64(PIMAGE_OPTIONAL_HEADER64 optionalHeader)
         );
 
 #if 0
-    // Marked as obsolete in MSDN CD 9
     printf(
         "  %-*s%08X\n",
         width,
@@ -1054,8 +890,8 @@ DumpOptionalHeader64(PIMAGE_OPTIONAL_HEADER64 optionalHeader)
         printf(
             "  %-12s rva: %08X  size: %08X - %s\n",
             name,
-            dwVA, // optionalHeader->DataDirectory[i].VirtualAddress,
-            dwSZ, // optionalHeader->DataDirectory[i].Size,
+            dwVA,  
+            dwSZ,  
             var
             );
 
@@ -1067,15 +903,13 @@ DumpOptionalHeader64(PIMAGE_OPTIONAL_HEADER64 optionalHeader)
     }
 }
 
-#if 0  // 00000000000000000000000000000000000000000000000000000000000
-// Original 1998 short list
+#if 0   
 PSTR
 GetMachineTypeName(WORD wMachineType)
 {
     switch (wMachineType)
     {
         case IMAGE_FILE_MACHINE_I386:   return "i386";
-        // case IMAGE_FILE_MACHINE_I860:return "i860";
         case IMAGE_FILE_MACHINE_R3000:  return "R3000";
         case 160:                       return "R3000 big endian";
         case IMAGE_FILE_MACHINE_R4000:  return "R4000";
@@ -1085,43 +919,41 @@ GetMachineTypeName(WORD wMachineType)
         default:                        return "unknown";
     }
 }
-#endif // 00000000000000000000000000000000000000000000000000000000000
-// 20140614: Increase Machine Type Names - from WinNT.h
-PSTR
-GetMachineTypeName(WORD wMachineType)
+#endif  
+
+PSTR GetMachineTypeName(WORD wMachineType)
 {
     switch (wMachineType)
     {
-        case IMAGE_FILE_MACHINE_UNKNOWN: return (char*) "Unknown";       // 0
-        case IMAGE_FILE_MACHINE_I386: return (char*) "Intel 386";        // 0x014C  // Intel 386.
-        case IMAGE_FILE_MACHINE_R3000: return (char*) "MIPS-LE";         // 0x0162  // MIPS little-endian, 0x160 big-endian
-        case IMAGE_FILE_MACHINE_R4000: return (char*) "MIPS-LE";         // 0x0166  // MIPS little-endian
-        case IMAGE_FILE_MACHINE_R10000: return (char*) "MIPS-LE";        // 0x0168  // MIPS little-endian
-        case IMAGE_FILE_MACHINE_WCEMIPSV2: return (char*) "MIPS-LE_WCE"; // 0x0169  // MIPS little-endian WCE v2
-        case IMAGE_FILE_MACHINE_ALPHA: return (char*) "Alpha_AXP";       // 0x0184  // Alpha_AXP
-        case IMAGE_FILE_MACHINE_SH3: return (char*) "SH3-LE";            // 0x01A2  // SH3 little-endian
-        case IMAGE_FILE_MACHINE_SH3DSP: return (char*) "SH3DSP";         // 0x01A3
-        case IMAGE_FILE_MACHINE_SH3E: return (char*) "SH3E-LE";          // 0x01A4  // SH3E little-endian
-        case IMAGE_FILE_MACHINE_SH4: return (char*) "SH4-LE";            // 0x01A6  // SH4 little-endian
-        case IMAGE_FILE_MACHINE_SH5: return (char*) "SH5";               // 0x01A8  // SH5
-        case IMAGE_FILE_MACHINE_ARM: return (char*) "ARM-LE";            // 0x01C0  // ARM Little-Endian
-        case IMAGE_FILE_MACHINE_THUMB: return (char*) "Thumb";           // 0x01C2
-        case IMAGE_FILE_MACHINE_AM33: return (char*) "ARM33";            // 0x01D3
-        case IMAGE_FILE_MACHINE_POWERPC: return (char*) "PowerPC-LE";    // 0x01F0  // IBM PowerPC Little-Endian
-        case IMAGE_FILE_MACHINE_POWERPCFP: return (char*) "PowerPCFP";   // 0x01F1
-        case IMAGE_FILE_MACHINE_IA64: return (char*) "Intel 64";         // 0x0200  // Intel 64
-        case IMAGE_FILE_MACHINE_MIPS16: return (char*) "MIPS16";         // 0x0266  // MIPS
-        case IMAGE_FILE_MACHINE_ALPHA64: return (char*) "Alpha64";       // 0x0284  // ALPHA64
-        case IMAGE_FILE_MACHINE_MIPSFPU: return (char*) "MIPSFPU";       // 0x0366  // MIPS
+        case IMAGE_FILE_MACHINE_UNKNOWN: return (char*) "Unknown";        
+        case IMAGE_FILE_MACHINE_I386: return (char*) "Intel 386";             
+        case IMAGE_FILE_MACHINE_R3000: return (char*) "MIPS-LE";                
+        case IMAGE_FILE_MACHINE_R4000: return (char*) "MIPS-LE";              
+        case IMAGE_FILE_MACHINE_R10000: return (char*) "MIPS-LE";             
+        case IMAGE_FILE_MACHINE_WCEMIPSV2: return (char*) "MIPS-LE_WCE";        
+        case IMAGE_FILE_MACHINE_ALPHA: return (char*) "Alpha_AXP";           
+        case IMAGE_FILE_MACHINE_SH3: return (char*) "SH3-LE";                 
+        case IMAGE_FILE_MACHINE_SH3DSP: return (char*) "SH3DSP";          
+        case IMAGE_FILE_MACHINE_SH3E: return (char*) "SH3E-LE";               
+        case IMAGE_FILE_MACHINE_SH4: return (char*) "SH4-LE";                 
+        case IMAGE_FILE_MACHINE_SH5: return (char*) "SH5";                   
+        case IMAGE_FILE_MACHINE_ARM: return (char*) "ARM-LE";                 
+        case IMAGE_FILE_MACHINE_THUMB: return (char*) "Thumb";            
+        case IMAGE_FILE_MACHINE_AM33: return (char*) "ARM33";             
+        case IMAGE_FILE_MACHINE_POWERPC: return (char*) "PowerPC-LE";          
+        case IMAGE_FILE_MACHINE_POWERPCFP: return (char*) "PowerPCFP";    
+        case IMAGE_FILE_MACHINE_IA64: return (char*) "Intel 64";              
+        case IMAGE_FILE_MACHINE_MIPS16: return (char*) "MIPS16";             
+        case IMAGE_FILE_MACHINE_ALPHA64: return (char*) "Alpha64";           
+        case IMAGE_FILE_MACHINE_MIPSFPU: return (char*) "MIPSFPU";           
         case IMAGE_FILE_MACHINE_MIPSFPU16:
-        return (char*) "MIPSFPU16"; // 0x0466  // MIPS
-        // case IMAGE_FILE_MACHINE_AXP64             IMAGE_FILE_MACHINE_ALPHA64
-        case IMAGE_FILE_MACHINE_TRICORE: return (char*) "infineon"; // 0x0520  // Infineon
-        case IMAGE_FILE_MACHINE_CEF: return (char*) "CEF";          // 0x0CEF
-        case IMAGE_FILE_MACHINE_EBC: return (char*) "EFI-BC";       // 0x0EBC  // EFI Byte Code
-        case IMAGE_FILE_MACHINE_AMD64: return (char*) "AMD64-K8";   // 0x8664  // AMD64 (K8)
-        case IMAGE_FILE_MACHINE_M32R: return (char*) "M32R-LE";     // 0x9041  // M32R little-endian
-        case IMAGE_FILE_MACHINE_CEE: return (char*) "CCE";          // 0xC0EE
+        return (char*) "MIPSFPU16";     
+        case IMAGE_FILE_MACHINE_TRICORE: return (char*) "infineon";     
+        case IMAGE_FILE_MACHINE_CEF: return (char*) "CEF";           
+        case IMAGE_FILE_MACHINE_EBC: return (char*) "EFI-BC";             
+        case IMAGE_FILE_MACHINE_AMD64: return (char*) "AMD64-K8";        
+        case IMAGE_FILE_MACHINE_M32R: return (char*) "M32R-LE";          
+        case IMAGE_FILE_MACHINE_CEE: return (char*) "CCE";           
     }
 
     return (char*) "UNLISTED";
@@ -1132,22 +964,12 @@ is_listed_machine_type(WORD wMachineType)
 {
     PSTR ps = GetMachineTypeName(wMachineType);
 
-    if (
-        strcmp(
-            ps,
-            "UNLISTED"
-            ) == 0
-        )
+    if (strcmp(ps,"UNLISTED") == 0)
     {
         return 0;
     }
 
-    if (
-        strcmp(
-            ps,
-            "Unknown"
-            ) == 0
-        )
+    if (strcmp(ps,"Unknown") == 0)
     {
         return 0;
     }
@@ -1155,29 +977,20 @@ is_listed_machine_type(WORD wMachineType)
     return 1;
 }
 
-/*----------------------------------------------------------------------------*/
-//
-// Section related stuff
-//
-/*----------------------------------------------------------------------------*/
-
-//
-// These aren't defined in the NT 4.0 WINNT.H, so we'll define them here
-//
 #ifndef IMAGE_SCN_TYPE_DSECT
-#define IMAGE_SCN_TYPE_DSECT 0x00000001 // Reserved.
+#define IMAGE_SCN_TYPE_DSECT 0x00000001  
 #endif
 #ifndef IMAGE_SCN_TYPE_NOLOAD
-#define IMAGE_SCN_TYPE_NOLOAD 0x00000002 // Reserved.
+#define IMAGE_SCN_TYPE_NOLOAD 0x00000002  
 #endif
 #ifndef IMAGE_SCN_TYPE_GROUP
-#define IMAGE_SCN_TYPE_GROUP 0x00000004 // Reserved.
+#define IMAGE_SCN_TYPE_GROUP 0x00000004  
 #endif
 #ifndef IMAGE_SCN_TYPE_COPY
-#define IMAGE_SCN_TYPE_COPY 0x00000010 // Reserved.
+#define IMAGE_SCN_TYPE_COPY 0x00000010  
 #endif
 #ifndef IMAGE_SCN_TYPE_OVER
-#define IMAGE_SCN_TYPE_OVER 0x00000400 // Reserved.
+#define IMAGE_SCN_TYPE_OVER 0x00000400  
 #endif
 #ifndef IMAGE_SCN_MEM_PROTECTED
 #define IMAGE_SCN_MEM_PROTECTED 0x00004000
@@ -1186,7 +999,6 @@ is_listed_machine_type(WORD wMachineType)
 #define IMAGE_SCN_MEM_SYSHEAP 0x00010000
 #endif
 
-// Bitfield values and names for the IMAGE_SECTION_HEADER flags
 DWORD_FLAG_DESCRIPTIONS SectionCharacteristics[] =
 {
     {IMAGE_SCN_TYPE_DSECT, "DSECT"},
@@ -1221,9 +1033,6 @@ DWORD_FLAG_DESCRIPTIONS SectionCharacteristics[] =
 #define NUMBER_SECTION_CHARACTERISTICS \
     (sizeof(SectionCharacteristics) / sizeof(DWORD_FLAG_DESCRIPTIONS))
 
-//
-// Dump the section table from a PE file or an OBJ
-//
 void
 DumpSectionTable(
     PIMAGE_SECTION_HEADER section,
@@ -1313,7 +1122,6 @@ DumpSectionTable(
                     {
                         DWORD flag = SectionCharacteristics[j].flag;
 
-                        // if (section->Characteristics & // SectionCharacteristics[j].flag)
                         if (Chars & flag)
                         {
                             printf(
@@ -1329,7 +1137,7 @@ DumpSectionTable(
                         }
                     }
 
-#if 0  // 00000000000000000000000000000000000000000000000000000000
+#if 0   
                     switch (section->Characteristics & IMAGE_SCN_ALIGN_64BYTES)
                     {
                         case IMAGE_SCN_ALIGN_1BYTES: pszAlign  = "ALIGN_1BYTES"; break;
@@ -1341,29 +1149,26 @@ DumpSectionTable(
                         case IMAGE_SCN_ALIGN_64BYTES: pszAlign = "ALIGN_64BYTES"; break;
                         default: pszAlign                      = "ALIGN_DEFAULT(16)"; break;
                     }
-#endif // 00000000000000000000000000000000000000000000000000000000
+#endif  
 
-                    // updated 20171019
-                    // #define IMAGE_SCN_ALIGN_MASK                 0x00F00000
                     switch (section->Characteristics & IMAGE_SCN_ALIGN_MASK)
                     {
-                        case IMAGE_SCN_ALIGN_1BYTES: pszAlign    = "ALIGN_1BYTES"; break;    // 0x00100000  //
-                        case IMAGE_SCN_ALIGN_2BYTES: pszAlign    = "ALIGN_2BYTES"; break;    // 0x00200000  //
-                        case IMAGE_SCN_ALIGN_4BYTES: pszAlign    = "ALIGN_4BYTES"; break;    // 0x00300000  //
-                        case IMAGE_SCN_ALIGN_8BYTES: pszAlign    = "ALIGN_8BYTES"; break;    // 0x00400000  //
-                        case IMAGE_SCN_ALIGN_16BYTES: pszAlign   = "ALIGN_16BYTES"; break;   // 0x00500000  // Default alignment if no others are specified.
-                        case IMAGE_SCN_ALIGN_32BYTES: pszAlign   = "ALIGN_32BYTES"; break;   // 0x00600000  //
-                        case IMAGE_SCN_ALIGN_64BYTES: pszAlign   = "ALIGN_64BYTES"; break;   // 0x00700000  //
-                        case IMAGE_SCN_ALIGN_128BYTES: pszAlign  = "ALIGN_128BYTES"; break;  // 0x00800000  //
-                        case IMAGE_SCN_ALIGN_256BYTES: pszAlign  = "ALIGN_256BYTES"; break;  // 0x00900000  //
-                        case IMAGE_SCN_ALIGN_512BYTES: pszAlign  = "ALIGN_512BYTES"; break;  // 0x00A00000  //
-                        case IMAGE_SCN_ALIGN_1024BYTES: pszAlign = "ALIGN_1024BYTES"; break; // 0x00B00000  //
-                        case IMAGE_SCN_ALIGN_2048BYTES: pszAlign = "ALIGN_2048BYTES"; break; // 0x00C00000  //
-                        case IMAGE_SCN_ALIGN_4096BYTES: pszAlign = "ALIGN_4096BYTES"; break; // 0x00D00000  //
+                        case IMAGE_SCN_ALIGN_1BYTES: pszAlign    = "ALIGN_1BYTES"; break;       
+                        case IMAGE_SCN_ALIGN_2BYTES: pszAlign    = "ALIGN_2BYTES"; break;       
+                        case IMAGE_SCN_ALIGN_4BYTES: pszAlign    = "ALIGN_4BYTES"; break;       
+                        case IMAGE_SCN_ALIGN_8BYTES: pszAlign    = "ALIGN_8BYTES"; break;       
+                        case IMAGE_SCN_ALIGN_16BYTES: pszAlign   = "ALIGN_16BYTES"; break;             
+                        case IMAGE_SCN_ALIGN_32BYTES: pszAlign   = "ALIGN_32BYTES"; break;      
+                        case IMAGE_SCN_ALIGN_64BYTES: pszAlign   = "ALIGN_64BYTES"; break;      
+                        case IMAGE_SCN_ALIGN_128BYTES: pszAlign  = "ALIGN_128BYTES"; break;     
+                        case IMAGE_SCN_ALIGN_256BYTES: pszAlign  = "ALIGN_256BYTES"; break;     
+                        case IMAGE_SCN_ALIGN_512BYTES: pszAlign  = "ALIGN_512BYTES"; break;     
+                        case IMAGE_SCN_ALIGN_1024BYTES: pszAlign = "ALIGN_1024BYTES"; break;    
+                        case IMAGE_SCN_ALIGN_2048BYTES: pszAlign = "ALIGN_2048BYTES"; break;    
+                        case IMAGE_SCN_ALIGN_4096BYTES: pszAlign = "ALIGN_4096BYTES"; break;    
                         case IMAGE_SCN_ALIGN_8192BYTES:
                             pszAlign = "ALIGN_8192BYTES";
-                            break; // 0x00E00000  //
-                        // Unused                                    0x00F00000
+                            break;    
                         default: pszAlign = "ALIGN_DEFAULT(16)"; break;
                     }
 
@@ -1402,11 +1207,6 @@ DumpSectionTable(
     }
 }
 
-//
-// Given a section name, look it up in the section table and return a
-// pointer to the start of its raw data area.
-//
-// LPVOID GetSectionPtr(PSTR name, PIMAGE_NT_HEADERS pNTHeader, DWORD imageBase)
 LPVOID
 GetSectionPtr(
     PSTR name,
@@ -1430,13 +1230,11 @@ GetSectionPtr(
             return (LPVOID) ((BYTE*) imageBase + section->PointerToRawData);
         }
 
-        // return (LPVOID)(section->PointerToRawData + imageBase);
     }
 
     return 0;
 }
 
-// LPVOID GetPtrFromRVA(DWORD rva, PIMAGE_NT_HEADERS pNTHeader, DWORD imageBase)
 LPVOID
 GetPtrFromRVA(
     DWORD rva,
@@ -1462,10 +1260,6 @@ GetPtrFromRVA(
     return (PVOID) ((BYTE*) imageBase + rva - delta);
 }
 
-//
-// Given a section name, look it up in the section table and return a
-// pointer to its IMAGE_SECTION_HEADER
-//
 PIMAGE_SECTION_HEADER
 GetSectionHeader(
     PSTR name,
@@ -1492,10 +1286,6 @@ GetSectionHeader(
     return 0;
 }
 
-//
-// Given an RVA, look up the section header that encloses it and return a
-// pointer to its IMAGE_SECTION_HEADER
-//
 PIMAGE_SECTION_HEADER
 GetEnclosingSectionHeader(
     DWORD rva,
@@ -1507,7 +1297,6 @@ GetEnclosingSectionHeader(
 
     for (i = 0; i < pNTHeader->FileHeader.NumberOfSections; i++, section++)
     {
-        // Is the RVA within this section?
         if (
             (rva >= section->VirtualAddress) &&
             (rva < (section->VirtualAddress + section->Misc.VirtualSize))
@@ -1535,10 +1324,6 @@ const char* SzDebugFormats[] =
     "OMAP_FROM_SRC"
 };
 
-//
-// Dump the debug directory array
-//
-// void DumpDebugDirectory(PIMAGE_DEBUG_DIRECTORY debugDir, DWORD size, DWORD base)
 void
 DumpDebugDirectory(
     PIMAGE_DEBUG_DIRECTORY debugDir,
@@ -1594,17 +1379,6 @@ DumpDebugDirectory(
     }
 }
 
-/*----------------------------------------------------------------------------*/
-//
-// Other assorted stuff
-//
-/*----------------------------------------------------------------------------*/
-
-//
-// Do a hexadecimal dump of the raw data for all the sections.  You
-// could just dump one section by adjusting the PIMAGE_SECTION_HEADER
-// and cSections parameters
-//
 void
 DumpRawSectionData(
     PIMAGE_SECTION_HEADER section,
@@ -1620,7 +1394,6 @@ DumpRawSectionData(
         cSections
         );
 
-    // for (i = 1; i <= cSections; i++, section++)
     for (i = 0; i < cSections; i++, section++)
     {
         if (
@@ -1630,8 +1403,6 @@ DumpRawSectionData(
                 )
             )
         {
-            // Make a copy of the section name so that we can ensure that
-            // it's null-terminated
             memcpy(
                 name,
                 section->Name,
@@ -1647,7 +1418,6 @@ DumpRawSectionData(
                 section->PointerToRawData
                 );
 
-            // Don't dump sections that don't exist in the file!
             if ((section->PointerToRawData == 0) || (section->SizeOfRawData == 0))
             {
                 printf("\n");
@@ -1682,7 +1452,6 @@ DumpRawSectionData(
                     cSections,
                     pb
                     );
-                // break;
             }
 
             printf("\n");
@@ -1700,12 +1469,8 @@ DumpRawSectionData(
     }
 }
 
-// Number of hex values displayed per line
 #define HEX_DUMP_WIDTH 16
 
-//
-// Dump a region of memory in a hexadecimal format
-//
 void
 HexDump(
     PBYTE ptr,
@@ -1751,7 +1516,6 @@ HexDump(
 
             if (i >= cOutput)
             {
-                // On last line.  Pad with spaces
                 *buffPtr++ = ' ';
                 *buffPtr++ = ' ';
                 *buffPtr++ = ' ';
@@ -1781,23 +1545,18 @@ HexDump(
                 *buffPtr2++ = isprint(value) ? value : '.';
             }
 
-            // Put an extra space between the 1st and 2nd half of the bytes
-            // on each line.
             if (i == (HEX_DUMP_WIDTH / 2) - 1)
             {
                 *buffPtr++ = ' ';
             }
         }
 
-        *buffPtr2 = 0; // Null terminate it.
-        // Can't use printf(), since there may be a '%'
-        // in the string.
+        *buffPtr2 = 0;    
         strcat(
             buffer,
             "\n"
             );
         direct_out_it(buffer);
-        // puts(buffer);
         bytesToGo -= cOutput;
         ptr       += HEX_DUMP_WIDTH;
     }
@@ -1847,4 +1606,3 @@ GetImgDirEntrySize(
     return size;
 }
 
-/* eof */
