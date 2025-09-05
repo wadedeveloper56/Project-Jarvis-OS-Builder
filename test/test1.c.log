@@ -1,3 +1,5 @@
+Compiler (x86/x64) v1.0 (C) Copyright 2025 Christopher D. Wade.
+All Rights Reserved
 
 char var1 ;
 short var2 ;
@@ -329,8 +331,4 @@ OCURLY CCURLY REDUCE to compound_statement
 declaration_specifiers declarator compound_statement REDUCE to function_definition
 function_definition REDUCE to external_declaration
 translation_unit external_declaration REDUCE to translation_unit
-Number of entries in programData table: 15
-Number of entries in variable table: 12
-Number of entries in function table: 2
-Number of entries in function prototype table: 1
 Parse complete. Result = 0
