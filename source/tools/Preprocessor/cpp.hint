@@ -1,0 +1,2 @@
+#define PREPROCESSOR_API __declspec(dllexport)
+#define PREPROCESSOR_API __declspec(dllimport)

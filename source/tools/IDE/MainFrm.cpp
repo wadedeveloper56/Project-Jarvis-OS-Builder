@@ -30,14 +30,6 @@ BEGIN_MESSAGE_MAP(CMainFrame, CMDIFrameWndEx)
 	ON_COMMAND(ID_VIEW_CAPTION_BAR, &CMainFrame::OnViewCaptionBar)
 	ON_UPDATE_COMMAND_UI(ID_VIEW_CAPTION_BAR, &CMainFrame::OnUpdateViewCaptionBar)
 	ON_COMMAND(ID_TOOLS_OPTIONS, &CMainFrame::OnOptions)
-	ON_COMMAND(ID_VIEW_FILEVIEW, &CMainFrame::OnViewFileView)
-	ON_UPDATE_COMMAND_UI(ID_VIEW_FILEVIEW, &CMainFrame::OnUpdateViewFileView)
-	ON_COMMAND(ID_VIEW_CLASSVIEW, &CMainFrame::OnViewClassView)
-	ON_UPDATE_COMMAND_UI(ID_VIEW_CLASSVIEW, &CMainFrame::OnUpdateViewClassView)
-	ON_COMMAND(ID_VIEW_OUTPUTWND, &CMainFrame::OnViewOutputWindow)
-	ON_UPDATE_COMMAND_UI(ID_VIEW_OUTPUTWND, &CMainFrame::OnUpdateViewOutputWindow)
-	ON_COMMAND(ID_VIEW_PROPERTIESWND, &CMainFrame::OnViewPropertiesWindow)
-	ON_UPDATE_COMMAND_UI(ID_VIEW_PROPERTIESWND, &CMainFrame::OnUpdateViewPropertiesWindow)
 	ON_WM_SETTINGCHANGE()
 END_MESSAGE_MAP()
 
@@ -127,26 +119,12 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	// enable Visual Studio 2005 style docking window auto-hide behavior
 	EnableAutoHidePanes(CBRS_ALIGN_ANY);
 
-	// Navigation pane will be created at left, so temporary disable docking at the left side:
-	EnableDocking(CBRS_ALIGN_TOP | CBRS_ALIGN_BOTTOM | CBRS_ALIGN_RIGHT);
-
-	// Create and setup "Outlook" navigation bar:
-	if (!CreateOutlookBar(m_wndNavigationBar, ID_VIEW_NAVIGATION, m_wndTree, m_wndCalendar, 250))
-	{
-		TRACE0("Failed to create navigation pane\n");
-		return -1;      // fail to create
-	}
-
 	// Create a caption bar:
 	if (!CreateCaptionBar())
 	{
 		TRACE0("Failed to create caption bar\n");
 		return -1;      // fail to create
 	}
-
-	// Outlook bar is created and docking on the left side should be allowed.
-	EnableDocking(CBRS_ALIGN_LEFT);
-	EnableAutoHidePanes(CBRS_ALIGN_RIGHT);
 
 	// Load menu item image (not placed on any standard toolbars):
 	CMFCToolBar::AddToolBarForImageCollection(IDR_MENU_IMAGES, theApp.m_bHiColorIcons ? IDB_MENU_IMAGES_24 : 0);
@@ -298,61 +276,6 @@ void CMainFrame::SetDockingWindowIcons(BOOL bHiColorIcons)
 	m_wndProperties.SetIcon(hPropertiesBarIcon, FALSE);
 
 	UpdateMDITabbedBarsIcons();
-}
-
-BOOL CMainFrame::CreateOutlookBar(CMFCOutlookBar& bar, UINT uiID, CMFCShellTreeCtrl& tree, CCalendarBar& calendar, int nInitialWidth)
-{
-	bar.SetMode2003();
-
-	BOOL bNameValid;
-	CString strTemp;
-	bNameValid = strTemp.LoadString(IDS_SHORTCUTS);
-	ASSERT(bNameValid);
-	if (!bar.Create(strTemp, this, CRect(0, 0, nInitialWidth, 32000), uiID, WS_CHILD | WS_VISIBLE | CBRS_LEFT))
-	{
-		return FALSE; // fail to create
-	}
-
-	CMFCOutlookBarTabCtrl* pOutlookBar = (CMFCOutlookBarTabCtrl*)bar.GetUnderlyingWindow();
-
-	if (pOutlookBar == nullptr)
-	{
-		ASSERT(FALSE);
-		return FALSE;
-	}
-
-	pOutlookBar->EnableInPlaceEdit(TRUE);
-
-	static UINT uiPageID = 1;
-
-	// can float, can autohide, can resize, CAN NOT CLOSE
-	DWORD dwStyle = AFX_CBRS_FLOAT | AFX_CBRS_AUTOHIDE | AFX_CBRS_RESIZE;
-
-	CRect rectDummy(0, 0, 0, 0);
-	const DWORD dwTreeStyle = WS_CHILD | WS_VISIBLE | TVS_HASLINES | TVS_LINESATROOT | TVS_HASBUTTONS;
-
-	tree.Create(dwTreeStyle, rectDummy, &bar, 1200);
-	bNameValid = strTemp.LoadString(IDS_FOLDERS);
-	ASSERT(bNameValid);
-	pOutlookBar->AddControl(&tree, strTemp, 2, TRUE, dwStyle);
-
-	calendar.Create(rectDummy, &bar, 1201);
-	bNameValid = strTemp.LoadString(IDS_CALENDAR);
-	ASSERT(bNameValid);
-	pOutlookBar->AddControl(&calendar, strTemp, 3, TRUE, dwStyle);
-
-	bar.SetPaneStyle(bar.GetPaneStyle() | CBRS_TOOLTIPS | CBRS_FLYBY | CBRS_SIZE_DYNAMIC);
-
-	pOutlookBar->SetImageList(theApp.m_bHiColorIcons ? IDB_PAGES_HC : IDB_PAGES, 24);
-	pOutlookBar->SetToolbarImageList(theApp.m_bHiColorIcons ? IDB_PAGES_SMALL_HC : IDB_PAGES_SMALL, 16);
-	pOutlookBar->RecalcLayout();
-
-	BOOL bAnimation = theApp.GetInt(_T("OutlookAnimation"), TRUE);
-	CMFCOutlookBarTabCtrl::EnableAnimation(bAnimation);
-
-	bar.SetButtonsFont(&afxGlobalData.fontBold);
-
-	return TRUE;
 }
 
 BOOL CMainFrame::CreateCaptionBar()
@@ -525,58 +448,6 @@ void CMainFrame::OnUpdateViewCaptionBar(CCmdUI* pCmdUI)
 
 void CMainFrame::OnOptions()
 {
-}
-
-void CMainFrame::OnViewFileView()
-{
-	// Show or activate the pane, depending on current state.  The
-	// pane can only be closed via the [x] button on the pane frame.
-	m_wndFileView.ShowPane(TRUE, FALSE, TRUE);
-	m_wndFileView.SetFocus();
-}
-
-void CMainFrame::OnUpdateViewFileView(CCmdUI* pCmdUI)
-{
-	pCmdUI->Enable(TRUE);
-}
-
-void CMainFrame::OnViewClassView()
-{
-	// Show or activate the pane, depending on current state.  The
-	// pane can only be closed via the [x] button on the pane frame.
-	m_wndClassView.ShowPane(TRUE, FALSE, TRUE);
-	m_wndClassView.SetFocus();
-}
-
-void CMainFrame::OnUpdateViewClassView(CCmdUI* pCmdUI)
-{
-	pCmdUI->Enable(TRUE);
-}
-
-void CMainFrame::OnViewOutputWindow()
-{
-	// Show or activate the pane, depending on current state.  The
-	// pane can only be closed via the [x] button on the pane frame.
-	m_wndOutput.ShowPane(TRUE, FALSE, TRUE);
-	m_wndOutput.SetFocus();
-}
-
-void CMainFrame::OnUpdateViewOutputWindow(CCmdUI* pCmdUI)
-{
-	pCmdUI->Enable(TRUE);
-}
-
-void CMainFrame::OnViewPropertiesWindow()
-{
-	// Show or activate the pane, depending on current state.  The
-	// pane can only be closed via the [x] button on the pane frame.
-	m_wndProperties.ShowPane(TRUE, FALSE, TRUE);
-	m_wndProperties.SetFocus();
-}
-
-void CMainFrame::OnUpdateViewPropertiesWindow(CCmdUI* pCmdUI)
-{
-	pCmdUI->Enable(TRUE);
 }
 
 

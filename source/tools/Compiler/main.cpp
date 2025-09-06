@@ -5,7 +5,7 @@
 #include "interpreter.h"
 #include "ArgumentTable.h"
 #include "GlobalVars.h"
-#include "simplecpp.h"
+#include "Preprocessor.h"
 #include "BaseCodeGenerator.h"
 #include "NasmCodeGenerator.h"
 

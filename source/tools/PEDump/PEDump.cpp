@@ -242,20 +242,6 @@ const char* RecNumberToName(byte code)
 	}
 }
 
-byte checkSumBuff(unsigned char* RecBuff, unsigned int RecLen)
-{
-	byte        cksum;
-	unsigned char* p;
-
-	cksum = 0;
-	p = RecBuff + RecLen;
-	while (p > RecBuff) {
-		--p;
-		cksum += *p;
-	}
-	return(cksum);
-}
-
 int DumpMemMap(LPVOID lpFileBase)
 {
 	int iret = 0;
@@ -304,6 +290,7 @@ int DumpMemMap(LPVOID lpFileBase)
 		unsigned char cksum = 0;
 		unsigned int RecLen = 0, RecNum = 0, offset = 0;
 		unsigned char* RecBuff = (unsigned char*)lpFileBase;
+		int index;
 
 		while (true)
 		{
@@ -314,46 +301,59 @@ int DumpMemMap(LPVOID lpFileBase)
 			RecLen = RecBuff[offset + 1] | (RecBuff[offset + 2] << 8);
 			cksum = RecBuff[offset + RecLen + 2];
 			printf("\n%s%s(%02x) recnum:%u, offset:0x%08x, len:0x%04x, chksum:0x%02x\n", recname, tmp, RecBuff[offset], ++RecNum, offset, RecLen, cksum);
-			char* name = NULL;
+			//char* name = NULL;
 			int nameLength = 0;
 			byte        c_bits;
 			byte        c_class;
+			unsigned int start = 0;
 			switch (type)
 			{
-				case CMD_THEADR:
+				case CMD_THEADR: {
 					nameLength = RecBuff[offset + 3];
-					name = new char[nameLength + 1];
+					char* name = new char[nameLength + 1];
 					for (int i = 0; i <= nameLength; i++) name[i] = RecBuff[offset + i + 3];
 					printf("source file name : \"%s\"\n", name);
 					break;
-				case CMD_COMENT:
+				}
+				case CMD_COMENT: {
 					c_bits = RecBuff[offset + 3];
 					c_class = RecBuff[offset + 4];
 					nameLength = RecBuff[offset + 5];
-					if (name != NULL) delete[] name;
-					name = new char[nameLength + 1];
+					char* name = new char[nameLength + 1];
 					for (int i = 0; i < nameLength; i++) name[i] = RecBuff[offset + i + 6];
-					printf("bits 0x%02x, class 0x%02x, language translator : \"%s\"\n", c_bits, c_class,name);
+					printf("bits 0x%02x, class 0x%02x, language translator : \"%s\"\n", c_bits, c_class, name);
 					break;
+				}
+				case CMD_LNAMES: {
+					index = 1;
+					start = offset + 3;
+					while ((start - offset + 3) <= RecLen) {
+						nameLength = RecBuff[start];
+						char* name1 = new char[nameLength + 1];
+						for (int i = 0; i < nameLength; i++) name1[i] = RecBuff[start + i + 1];
+						printf("%d - \"%s\"\n", index, name1);
+						start += nameLength + 1;
+						index++;
+					}
+					break;
+				case CMD_SEGDEF: {
+					start = offset + 3;
+					byte acbp = RecBuff[start];
+					byte align = acbp >> 5;
+					break;
+				}
 				default:
 					//printf("Unknown : %d (0x%02x)\n", type, type);
 					break;
+				}
 			}
 			HexDump(&RecBuff[offset + 3], RecLen - 1);
 			offset += RecLen + 3;
 			if (!strcmp(recname, "MODEND")) break;
+			iret = 2;
 		}
-
-		DWORD hlen = 12800;
-		if (fileSize < hlen)
-		{
-			hlen = (DWORD)fileSize;
-		}
-		printf("\nHexDump of first %u bytes of file...\n", hlen);
-		HexDump((BYTE*)lpFileBase, hlen);
-		printf("Error: unrecognized file format\n");
-		iret = 2;
 	}
+	HexDump((BYTE*)lpFileBase, (DWORD)fileSize);
 	return iret;
 }
 

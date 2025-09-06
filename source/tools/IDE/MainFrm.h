@@ -7,14 +7,6 @@
 #include "ClassView.h"
 #include "OutputWnd.h"
 #include "PropertiesWnd.h"
-#include "CalendarBar.h"
-#include "Resource.h"
-
-class COutlookBar : public CMFCOutlookBar
-{
-	virtual BOOL AllowShowOnPaneMenu() const { return TRUE; }
-	virtual void GetPaneName(CString& strName) const { BOOL bNameValid = strName.LoadString(IDS_OUTLOOKBAR); ASSERT(bNameValid); if (!bNameValid) strName.Empty(); }
-};
 
 class CMainFrame : public CMDIFrameWndEx
 {
@@ -50,9 +42,6 @@ protected:  // control bar embedded members
 	CClassView        m_wndClassView;
 	COutputWnd        m_wndOutput;
 	CPropertiesWnd    m_wndProperties;
-	COutlookBar       m_wndNavigationBar;
-	CMFCShellTreeCtrl m_wndTree;
-	CCalendarBar      m_wndCalendar;
 	CMFCCaptionBar    m_wndCaptionBar;
 
 // Generated message map functions
@@ -63,14 +52,6 @@ protected:
 	afx_msg LRESULT OnToolbarCreateNew(WPARAM wp, LPARAM lp);
 	afx_msg void OnApplicationLook(UINT id);
 	afx_msg void OnUpdateApplicationLook(CCmdUI* pCmdUI);
-	afx_msg void OnViewFileView();
-	afx_msg void OnUpdateViewFileView(CCmdUI* pCmdUI);
-	afx_msg void OnViewClassView();
-	afx_msg void OnUpdateViewClassView(CCmdUI* pCmdUI);
-	afx_msg void OnViewOutputWindow();
-	afx_msg void OnUpdateViewOutputWindow(CCmdUI* pCmdUI);
-	afx_msg void OnViewPropertiesWindow();
-	afx_msg void OnUpdateViewPropertiesWindow(CCmdUI* pCmdUI);
 	afx_msg void OnViewCaptionBar();
 	afx_msg void OnUpdateViewCaptionBar(CCmdUI* pCmdUI);
 	afx_msg void OnOptions();
@@ -79,14 +60,7 @@ protected:
 
 	BOOL CreateDockingWindows();
 	void SetDockingWindowIcons(BOOL bHiColorIcons);
-	BOOL CreateOutlookBar(CMFCOutlookBar& bar, UINT uiID, CMFCShellTreeCtrl& tree, CCalendarBar& calendar, int nInitialWidth);
 	BOOL CreateCaptionBar();
-
-	int FindFocusedOutlookWnd(CMFCOutlookBarTabCtrl** ppOutlookWnd);
-
-	CMFCOutlookBarTabCtrl* FindOutlookParent(CWnd* pWnd);
-	CMFCOutlookBarTabCtrl* m_pCurrOutlookWnd;
-	CMFCOutlookBarPane*    m_pCurrOutlookPage;
 };
 
 

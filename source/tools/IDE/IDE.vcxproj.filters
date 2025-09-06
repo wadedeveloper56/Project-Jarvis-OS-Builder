@@ -54,9 +54,6 @@
     <ClInclude Include="PropertiesWnd.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="calendarbar.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -90,9 +87,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PropertiesWnd.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="calendarbar.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="pch.cpp">
@@ -169,24 +163,6 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="res\properties_hc.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\nav_large.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\nav_large_hc.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\pages.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\pages_hc.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\pages_small.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\pages_small_hc.bmp">
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="res\info.bmp">
