@@ -104,12 +104,14 @@
       <AdditionalIncludeDirectories>C:\projects\ProjectJarvis\source\tools\Arguments;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <DisableSpecificWarnings>4065;4005</DisableSpecificWarnings>
       <BufferSecurityCheck>true</BufferSecurityCheck>
+      <EnableParallelCodeGeneration>
+      </EnableParallelCodeGeneration>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -129,13 +131,15 @@
       <AdditionalIncludeDirectories>C:\projects\ProjectJarvis\source\tools\Arguments;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <DisableSpecificWarnings>4065;4005</DisableSpecificWarnings>
       <BufferSecurityCheck>true</BufferSecurityCheck>
       <WholeProgramOptimization>false</WholeProgramOptimization>
+      <EnableParallelCodeGeneration>
+      </EnableParallelCodeGeneration>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -153,12 +157,14 @@
       <AdditionalIncludeDirectories>C:\projects\ProjectJarvis\source\tools\Arguments;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <DisableSpecificWarnings>4065;4005</DisableSpecificWarnings>
       <BufferSecurityCheck>true</BufferSecurityCheck>
+      <EnableParallelCodeGeneration>
+      </EnableParallelCodeGeneration>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -178,13 +184,15 @@
       <AdditionalIncludeDirectories>C:\projects\ProjectJarvis\source\tools\Arguments;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <DisableSpecificWarnings>4065;4005</DisableSpecificWarnings>
       <BufferSecurityCheck>true</BufferSecurityCheck>
       <WholeProgramOptimization>false</WholeProgramOptimization>
+      <EnableParallelCodeGeneration>
+      </EnableParallelCodeGeneration>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -193,11 +201,6 @@
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Arguments\Arguments.vcxproj">
-      <Project>{fe883520-0f4b-494d-bf5e-714adb7881a3}</Project>
-    </ProjectReference>
-  </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AbstractDeclarator.h" />
     <ClInclude Include="BaseCodeGenerator.h" />
@@ -288,6 +291,14 @@
     <ClCompile Include="TypeName.cpp" />
     <ClCompile Include="TypeQualifier.cpp" />
     <ClCompile Include="TypeSpecifier.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Arguments\Arguments.vcxproj">
+      <Project>{fe883520-0f4b-494d-bf5e-714adb7881a3}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\PreProcessor\PreProcessor.vcxproj">
+      <Project>{3b55590c-3e30-413c-b121-c80fbe2d2c77}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

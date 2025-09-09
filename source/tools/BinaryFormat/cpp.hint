@@ -1,2 +1,0 @@
-#define BINARYFORMAT_API __declspec(dllexport)
-#define BINARYFORMAT_API __declspec(dllimport)

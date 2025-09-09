@@ -1,15 +1,10 @@
+// BinaryFormat.cpp : Defines the functions for the static library.
+//
+
 #include "pch.h"
 #include "framework.h"
-#include "BinaryFormat.h"
 
-BINARYFORMAT_API int nBinaryFormat = 0;
-
-BINARYFORMAT_API int fnBinaryFormat(void)
+// TODO: This is an example of a library function
+void fnBinaryFormat()
 {
-    return 0;
-}
-
-CBinaryFormat::CBinaryFormat()
-{
-    return;
 }
