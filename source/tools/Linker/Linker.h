@@ -11,6 +11,10 @@
 #include <time.h>
 #include <ctype.h>
 #include <errno.h>
+#include <iostream>
+#include <string>
+#include <sstream>
+#include <vector>
 #define stricmp _stricmp
 #define strupr _strupr
 
@@ -333,7 +337,8 @@
 
 #define OUTPUT_COM 1
 #define OUTPUT_EXE 2
-#define OUTPUT_PE  3
+#define OUTPUT_PE32  3
+#define OUTPUT_PE64  4
 
 #define WIN32_DEFAULT_BASE              0x00400000
 #define WIN32_DEFAULT_FILEALIGN         0x00000200
@@ -349,11 +354,6 @@
 #define WIN32_DEFAULT_OSMINOR           0
 
 #define EXP_ORD 0x80
-
-//typedef char* char *;
-//typedef char** char **;
-//typedef unsigned char* unsigned char *;
-//typedef unsigned long unsigned long;
 
 typedef struct _SortEntry
 {
