@@ -19,7 +19,7 @@ static unsigned char defaultStub[] = {
 
 static unsigned long defaultStubSize = sizeof(defaultStub);
 
-void GetFixupTarget(PRELOC r, long* bseg, unsigned long* tofs, int isFlat)
+void GetFixupTarget(RelocPtr r, long* bseg, unsigned long* tofs, int isFlat)
 {
 	long baseseg;
 	long targseg;
@@ -877,10 +877,10 @@ long createOutputSection(char* name, unsigned long winFlags)
 {
 	unsigned long j;
 
-	outlist = (PPSEG)checkRealloc(outlist, sizeof(PSEG) * (outcount + 1));
-	outlist[outcount] = (PSEG)checkMalloc(sizeof(SEG));
-	seglist = (PPSEG)checkRealloc(seglist, sizeof(PSEG) * (segcount + 1));
-	seglist = (PPSEG)checkRealloc(seglist, (segcount + 1) * sizeof(PSEG));
+	outlist = (SegPtrPtr)checkRealloc(outlist, sizeof(SegPtr) * (outcount + 1));
+	outlist[outcount] = (SegPtr)checkMalloc(sizeof(Seg));
+	seglist = (SegPtrPtr)checkRealloc(seglist, sizeof(SegPtr) * (segcount + 1));
+	seglist = (SegPtrPtr)checkRealloc(seglist, (segcount + 1) * sizeof(SegPtr));
 	seglist[segcount] = outlist[outcount];
 	namelist = (char **)checkRealloc(namelist, (namecount + 1) * sizeof(char *));
 	namelist[namecount] = checkStrdup(name);
@@ -911,7 +911,7 @@ void BuildPEImports(long impsectNum, unsigned char * objectTable)
 	int* dllImpsDone = NULL;
 	int* dllImpNameSize = NULL;
 	unsigned long dllCount = 0, dllNameSize = 0, namePos;
-	SEG* impsect;
+	Seg* impsect;
 	unsigned long thunkPos, thunk2Pos, impNamePos;
 
 	if (impsectNum < 0) return;
@@ -1144,8 +1144,8 @@ void BuildPEImports(long impsectNum, unsigned char * objectTable)
 void BuildPERelocs(long relocSectNum, unsigned char * objectTable)
 {
 	int i, j;
-	PRELOC r;
-	PSEG relocSect;
+	RelocPtr r;
+	SegPtr relocSect;
 	unsigned long curStartPos;
 	unsigned long curBlockPos;
 	unsigned long k;
@@ -1506,7 +1506,7 @@ void BuildPEExports(long SectNum, unsigned char * objectTable, unsigned char * n
 {
 	long i, j;
 	unsigned long k;
-	PSEG expSect;
+	SegPtr expSect;
 	unsigned long namelen;
 	unsigned long numNames = 0;
 	unsigned long RVAStart;
@@ -1516,8 +1516,8 @@ void BuildPEExports(long SectNum, unsigned char * objectTable, unsigned char * n
 	unsigned long minOrd;
 	unsigned long maxOrd;
 	unsigned long numOrds;
-	PPEXPREC nameList;
-	PEXPREC curName;
+	ExpRecPtrPtr nameList;
+	ExpRecPtr curName;
 
 	if (!expcount || (SectNum < 0)) return; /* return if no exports */
 	expSect = outlist[SectNum];
@@ -1737,7 +1737,7 @@ void BuildPEExports(long SectNum, unsigned char * objectTable, unsigned char * n
 
 	if (numNames) /* sort name table if present */
 	{
-		nameList = (PPEXPREC)checkMalloc(numNames * sizeof(PEXPREC));
+		nameList = (ExpRecPtrPtr)checkMalloc(numNames * sizeof(ExpRecPtr));
 		j = 0; /* no entries yet */
 		for (i = 0; i < expcount; i++)
 		{
@@ -1817,8 +1817,8 @@ void BuildPEResources(long sectNum, unsigned char * objectTable)
 {
 	long i, j;
 	unsigned long k;
-	SEG* ressect;
-	RESOURCE curres;
+	Seg* ressect;
+	Resource curres;
 	int numtypes, numnamedtypes;
 	int numPairs, numnames, numids;
 	unsigned long nameSize, dataSize;
