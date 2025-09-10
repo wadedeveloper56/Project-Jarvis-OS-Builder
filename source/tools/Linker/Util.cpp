@@ -1,6 +1,6 @@
 #include "linker.h"
 
-int getBitCount(UINT a)
+int getBitCount(unsigned long a)
 {
     int count=0;
 
@@ -12,22 +12,22 @@ int getBitCount(UINT a)
     return count;
 }
 
-void ClearNbit(PUCHAR mask,long i)
+void ClearNbit(unsigned char * mask,long i)
 {
     mask[i/8]&=0xff-(1<<(i%8));
 }
 
-void SetNbit(PUCHAR mask,long i)
+void SetNbit(unsigned char * mask,long i)
 {
     mask[i/8]|=(1<<(i%8));
 }
 
-char GetNbit(PUCHAR mask,long i)
+char GetNbit(unsigned char * mask,long i)
 {
     return (mask[i/8]>>(i%8))&1;
 }
 
-long GetIndex(PUCHAR buf,long *index)
+long GetIndex(unsigned char * buf,long *index)
 {
     long i;
     if(buf[*index]&0x80)
@@ -44,7 +44,7 @@ long GetIndex(PUCHAR buf,long *index)
 
 void ReportError(long errnum)
 {
-    UINT tot,i;
+    unsigned long tot,i;
     
     printf("\nError in file at %08lX",filepos);
     switch(errnum)
@@ -160,7 +160,7 @@ int wstrlen(const char *s)
 
 int sortCompare(const void *x1,const void *x2)
 {
-    return strcmp(((PSORTENTRY) x1)->id,((PSORTENTRY)x2)->id);
+    return strcmp(((SortEntryPtr) x1)->id,((SortEntryPtr)x2)->id);
 }
 
 void *checkMalloc(size_t x)
@@ -206,9 +206,9 @@ char *checkStrdup(const char *s)
 }
 
 
-PSORTENTRY binarySearch(PSORTENTRY list,UINT count,char *key)
+SortEntryPtr binarySearch(SortEntryPtr list,unsigned long count,char *key)
 {
-    UINT i;
+    unsigned long i;
     int j;
     
     if(!list) return NULL;
@@ -234,10 +234,10 @@ PSORTENTRY binarySearch(PSORTENTRY list,UINT count,char *key)
     return NULL; /* return NULL if no match (count=0) */
 }
 
-void sortedInsert(PSORTENTRY *plist,UINT *pcount,char *key,void *object)
+void sortedInsert(SortEntryPtr *plist,unsigned long *pcount,char *key,void *object)
 {
-    PSORTENTRY list,node;
-    UINT count,index,i;
+    SortEntryPtr list,node;
+    unsigned long count,index,i;
     int j;
    
     if(!plist || !pcount) return;
@@ -281,12 +281,12 @@ void sortedInsert(PSORTENTRY *plist,UINT *pcount,char *key,void *object)
     /* grow list */
     count=*pcount+1;
     
-    list=(PSORTENTRY)checkRealloc(list,sizeof(SORTENTRY)*count);
+    list=(SortEntryPtr)checkRealloc(list,sizeof(SortEntry)*count);
 
     j=count-index-1; /* get number of entries after insertion index */
     if(j) /* move them up 1 entry if some */
     {
-	memmove(list+index+1,list+index,j*sizeof(SORTENTRY));
+	memmove(list+index+1,list+index,j*sizeof(SortEntry));
     }
 
     /* put new node in position */

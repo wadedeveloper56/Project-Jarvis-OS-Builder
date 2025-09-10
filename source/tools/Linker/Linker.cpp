@@ -3,43 +3,43 @@
 char case_sensitive = 1;
 char padsegments = 0;
 char mapfile = 0;
-PCHAR mapname = 0;
+char * mapname = 0;
 unsigned short maxalloc = 0xffff;
 int output_type = OUTPUT_EXE;
-PCHAR outname = 0;
+char * outname = 0;
 
 FILE* afile = 0;
-UINT filepos = 0;
+unsigned long filepos = 0;
 long reclength = 0;
 unsigned char rectype = 0;
 char li_le = 0;
-UINT prevofs = 0;
+unsigned long prevofs = 0;
 long prevseg = 0;
 long gotstart = 0;
 RELOC startaddr;
-UINT imageBase = 0;
-UINT fileAlign = 1;
-UINT objectAlign = 1;
-UINT stackSize;
-UINT stackCommitSize;
-UINT heapSize;
-UINT heapCommitSize;
+unsigned long imageBase = 0;
+unsigned long fileAlign = 1;
+unsigned long objectAlign = 1;
+unsigned long stackSize;
+unsigned long stackCommitSize;
+unsigned long heapSize;
+unsigned long heapCommitSize;
 unsigned char osMajor, osMinor;
 unsigned char subsysMajor, subsysMinor;
 unsigned int subSystem;
 int buildDll = FALSE;
-PUCHAR stubName = NULL;
+unsigned char * stubName = NULL;
 
 long errcount = 0;
 
 unsigned char buf[65536];
 PDATABLOCK lidata;
 
-PPCHAR namelist = NULL;
+char ** namelist = NULL;
 PPSEG seglist = NULL;
 PPSEG outlist = NULL;
 PPGRP grplist = NULL;
-PSORTENTRY publics = NULL;
+SortEntryPtr publics = NULL;
 PEXTREC externs = NULL;
 PPCOMREC comdefs = NULL;
 PPRELOC relocs = NULL;
@@ -47,10 +47,10 @@ PIMPREC impdefs = NULL;
 PEXPREC expdefs = NULL;
 PLIBFILE libfiles = NULL;
 PRESOURCE resource = NULL;
-PSORTENTRY comdats = NULL;
-PPCHAR modname;
-PPCHAR filename;
-UINT namecount = 0, namemin = 0,
+SortEntryPtr comdats = NULL;
+char ** modname;
+char ** filename;
+unsigned long namecount = 0, namemin = 0,
 pubcount = 0, pubmin = 0,
 segcount = 0, segmin = 0, outcount = 0,
 grpcount = 0, grpmin = 0,
@@ -63,16 +63,16 @@ nummods = 0,
 filecount = 0,
 libcount = 0,
 rescount = 0;
-UINT libPathCount = 0;
-PCHAR* libPath = NULL;
+unsigned long libPathCount = 0;
+char ** libPath = NULL;
 char* entryPoint = NULL;
 
 void processArgs(int argc, char** argv)
 {
 	long i, j;
 	int helpRequested = FALSE;
-	UINT setbase, setfalign, setoalign;
-	UINT setstack, setstackcommit, setheap, setheapcommit;
+	unsigned long setbase, setfalign, setoalign;
+	unsigned long setstack, setstackcommit, setheap, setheapcommit;
 	int setsubsysmajor, setsubsysminor, setosmajor, setosminor;
 	unsigned char setsubsys;
 	int gotbase = FALSE, gotfalign = FALSE, gotoalign = FALSE, gotsubsys = FALSE;
@@ -251,7 +251,7 @@ void processArgs(int argc, char** argv)
 								i++;
 								if (!outname)
 								{
-									outname = (PCHAR)checkMalloc(strlen(argv[i]) + 1 + 4); /* space for added .EXT if none given */
+									outname = (char *)checkMalloc(strlen(argv[i]) + 1 + 4); /* space for added .EXT if none given */
 									strcpy(outname, argv[i]);
 								}
 								else
@@ -370,7 +370,7 @@ void processArgs(int argc, char** argv)
 						{
 							i++;
 							libPathCount++;
-							libPath = (PCHAR*)checkRealloc(libPath, libPathCount * sizeof(PCHAR));
+							libPath = (char **)checkRealloc(libPath, libPathCount * sizeof(char *));
 							j = strlen(argv[i]);
 							if (argv[i][j - 1] != PATH_CHAR)
 							{
@@ -588,7 +588,7 @@ void processArgs(int argc, char** argv)
 						if (i < (argc - 1))
 						{
 							i++;
-							stubName = (PUCHAR)argv[i];
+							stubName = (unsigned char *)argv[i];
 						}
 						else
 						{
@@ -674,8 +674,8 @@ void processArgs(int argc, char** argv)
 		}
 		else
 		{
-			filename = (PPCHAR)checkRealloc(filename, (filecount + 1) * sizeof(PCHAR));
-			filename[filecount] = (char *)checkMalloc(strlen(argv[i]) + 1);
+			filename = (char **)checkRealloc(filename, (filecount + 1) * sizeof(char *));
+			filename[filecount] = (char*)checkMalloc(strlen(argv[i]) + 1);
 			memcpy(filename[filecount], argv[i], strlen(argv[i]) + 1);
 			for (j = strlen(filename[filecount]);
 				j && (filename[filecount][j] != '.') &&
@@ -685,7 +685,7 @@ void processArgs(int argc, char** argv)
 			{
 				j = strlen(filename[filecount]);
 				/* add default extension if none specified */
-				filename[filecount] = (char *)checkRealloc(filename[filecount], strlen(argv[i]) + 5);
+				filename[filecount] = (char*)checkRealloc(filename[filecount], strlen(argv[i]) + 5);
 				strcpy(filename[filecount] + j, DEFAULT_EXTENSION);
 			}
 			filecount++;
@@ -819,8 +819,8 @@ void matchExterns()
 {
 	long i, j, k, old_nummods;
 	//int n;
-	PSORTENTRY listnode;
-	PCHAR name;
+	SortEntryPtr listnode;
+	char * name;
 	PPUBLIC pubdef;
 
 	do
@@ -982,7 +982,7 @@ void matchComDefs()
 	int i, j;// , k;
 	int comseg;
 	int comfarseg;
-	PSORTENTRY listnode;
+	SortEntryPtr listnode;
 	PPUBLIC pubdef;
 
 	if (!comcount) return;
@@ -1034,7 +1034,7 @@ void matchComDefs()
 
 	seglist = (PPSEG)checkRealloc(seglist, (segcount + 1) * sizeof(PSEG));
 	seglist[segcount] = (PSEG)checkMalloc(sizeof(SEG));
-	namelist = (PPCHAR)checkRealloc(namelist, (namecount + 1) * sizeof(PCHAR));
+	namelist = (char **)checkRealloc(namelist, (namecount + 1) * sizeof(char *));
 	namelist[namecount] = checkStrdup("COMDEFS");
 	seglist[segcount]->nameindex = namecount;
 	seglist[segcount]->classindex = -1;
@@ -1066,7 +1066,7 @@ void matchComDefs()
 
 	seglist = (PPSEG)checkRealloc(seglist, (segcount + 1) * sizeof(PSEG));
 	seglist[segcount] = (PSEG)checkMalloc(sizeof(SEG));
-	namelist = (PPCHAR)checkRealloc(namelist, (namecount + 1) * sizeof(PCHAR));
+	namelist = (char **)checkRealloc(namelist, (namecount + 1) * sizeof(char *));
 	namelist[namecount] = checkStrdup("FARCOMDEFS");
 	seglist[segcount]->nameindex = namecount;
 	seglist[segcount]->classindex = -1;
@@ -1090,7 +1090,7 @@ void matchComDefs()
 			{
 				seglist = (PPSEG)checkRealloc(seglist, (segcount + 1) * sizeof(PSEG));
 				seglist[segcount] = (PSEG)checkMalloc(sizeof(SEG));
-				namelist = (PPCHAR)checkRealloc(namelist, (namecount + 1) * sizeof(PCHAR));
+				namelist = (char **)checkRealloc(namelist, (namecount + 1) * sizeof(char *));
 				namelist[namecount] = checkStrdup("FARCOMDEFS");
 				seglist[segcount]->nameindex = namecount;
 				seglist[segcount]->classindex = -1;
@@ -1098,7 +1098,7 @@ void matchComDefs()
 				seglist[segcount]->length = comdefs[i]->length;
 				seglist[segcount]->data = NULL;
 				seglist[segcount]->datmask =
-					(PUCHAR)checkMalloc((comdefs[i]->length + 7) / 8);
+					(unsigned char *)checkMalloc((comdefs[i]->length + 7) / 8);
 				for (j = 0; j < (comdefs[i]->length + 7) / 8; j++)
 					seglist[segcount]->datmask[j] = 0;
 				seglist[segcount]->attr = SEG_PRIVATE | SEG_PARA;
@@ -1111,13 +1111,13 @@ void matchComDefs()
 			else if ((comdefs[i]->length + seglist[comfarseg]->length) > 65536)
 			{
 				seglist[comfarseg]->datmask =
-					(PUCHAR)checkMalloc((seglist[comfarseg]->length + 7) / 8);
+					(unsigned char *)checkMalloc((seglist[comfarseg]->length + 7) / 8);
 				for (j = 0; j < (seglist[comfarseg]->length + 7) / 8; j++)
 					seglist[comfarseg]->datmask[j] = 0;
 
 				seglist = (PPSEG)checkRealloc(seglist, (segcount + 1) * sizeof(PSEG));
 				seglist[segcount] = (PSEG)checkMalloc(sizeof(SEG));
-				namelist = (PPCHAR)checkRealloc(namelist, (namecount + 1) * sizeof(PCHAR));
+				namelist = (char **)checkRealloc(namelist, (namecount + 1) * sizeof(char *));
 				namelist[namecount] = checkStrdup("FARCOMDEFS");
 				seglist[segcount]->nameindex = namecount;
 				seglist[segcount]->classindex = -1;
@@ -1174,13 +1174,13 @@ void matchComDefs()
 		}
 	}
 	seglist[comfarseg]->datmask =
-		(PUCHAR)checkMalloc((seglist[comfarseg]->length + 7) / 8);
+		(unsigned char *)checkMalloc((seglist[comfarseg]->length + 7) / 8);
 	for (j = 0; j < (seglist[comfarseg]->length + 7) / 8; j++)
 		seglist[comfarseg]->datmask[j] = 0;
 
 
 	seglist[comseg]->datmask =
-		(PUCHAR)checkMalloc((seglist[comseg]->length + 7) / 8);
+		(unsigned char *)checkMalloc((seglist[comseg]->length + 7) / 8);
 	for (j = 0; j < (seglist[comseg]->length + 7) / 8; j++)
 		seglist[comseg]->datmask[j] = 0;
 
@@ -1223,7 +1223,7 @@ void matchComDefs()
 void sortSegments()
 {
 	long i, j, k;
-	UINT base, align;
+	unsigned long base, align;
 	long baseSeg;
 
 	for (i = 0; i < segcount; i++)
@@ -1631,7 +1631,7 @@ int main(int argc, char* argv[])
 			{
 				if (i - j)
 				{
-					libPath = (PCHAR*)checkRealloc(libPath, (libPathCount + 1) * sizeof(PCHAR));
+					libPath = (char **)checkRealloc(libPath, (libPathCount + 1) * sizeof(char *));
 					libList[i] = 0;
 					if (libList[i - 1] == PATH_CHAR)
 					{
@@ -1639,7 +1639,7 @@ int main(int argc, char* argv[])
 					}
 					else
 					{
-						libPath[libPathCount] = (PCHAR)checkMalloc(i - j + 2);
+						libPath[libPathCount] = (char *)checkMalloc(i - j + 2);
 						strcpy(libPath[libPathCount], libList + j);
 						libPath[libPathCount][i - j] = PATH_CHAR;
 						libPath[libPathCount][i - j + 1] = 0;
@@ -1662,7 +1662,7 @@ int main(int argc, char* argv[])
 
 	if (!outname)
 	{
-		outname = (PCHAR)checkMalloc(strlen(filename[0]) + 1 + 4);
+		outname = (char *)checkMalloc(strlen(filename[0]) + 1 + 4);
 		strcpy(outname, filename[0]);
 		i = strlen(outname);
 		while ((i >= 0) && (outname[i] != '.') && (outname[i] != PATH_CHAR) && (outname[i] != ':'))
@@ -1706,7 +1706,7 @@ int main(int argc, char* argv[])
 	{
 		if (!mapname)
 		{
-			mapname = (PCHAR)checkMalloc(strlen(outname) + 1 + 4);
+			mapname = (char *)checkMalloc(strlen(outname) + 1 + 4);
 			strcpy(mapname, outname);
 			i = strlen(mapname);
 			while ((i >= 0) && (mapname[i] != '.') && (mapname[i] != PATH_CHAR) && (mapname[i] != ':'))
