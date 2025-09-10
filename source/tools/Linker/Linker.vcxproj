@@ -175,13 +175,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Global.cpp" />
     <ClCompile Include="Linker.cpp" />
-    <ClCompile Include="Coff.cpp" />
-    <ClCompile Include="CoffLib.cpp" />
-    <ClCompile Include="Combine.cpp" />
-    <ClCompile Include="ObjLoad.cpp" />
-    <ClCompile Include="Output.cpp" />
-    <ClCompile Include="Util.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Arguments\Arguments.vcxproj">

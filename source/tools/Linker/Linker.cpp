@@ -3,75 +3,6 @@
 
 using namespace std;
 
-char case_sensitive = 1;
-char padsegments = 0;
-char mapfile = 0;
-char * mapname = 0;
-unsigned short maxalloc = 0xffff;
-int output_type = OUTPUT_EXE;
-char * outname = 0;
-
-FILE* afile = 0;
-unsigned long filepos = 0;
-long reclength = 0;
-unsigned char rectype = 0;
-char li_le = 0;
-unsigned long prevofs = 0;
-long prevseg = 0;
-long gotstart = 0;
-Reloc startaddr;
-unsigned long imageBase = 0;
-unsigned long fileAlign = 1;
-unsigned long objectAlign = 1;
-unsigned long stackSize;
-unsigned long stackCommitSize;
-unsigned long heapSize;
-unsigned long heapCommitSize;
-unsigned char osMajor, osMinor;
-unsigned char subsysMajor, subsysMinor;
-unsigned int subSystem;
-int buildDll = FALSE;
-unsigned char * stubName = NULL;
-
-long errcount = 0;
-
-unsigned char buf[65536];
-DataBlockPtr lidata;
-
-char ** namelist = NULL;
-SegPtrPtr seglist = NULL;
-SegPtrPtr outlist = NULL;
-GrpPtrPtr grplist = NULL;
-SortEntryPtr publics = NULL;
-ExtRecPtr externs = NULL;
-ComRecPtrPtr comdefs = NULL;
-RelocPtrPtr relocs = NULL;
-ImpRecPtr impdefs = NULL;
-ExpRecPtr expdefs = NULL;
-LibFilePtr libfiles = NULL;
-ResourcePtr resource = NULL;
-SortEntryPtr comdats = NULL;
-char ** modname;
-char ** filename;
-unsigned long namecount = 0, namemin = 0,
-pubcount = 0, pubmin = 0,
-segcount = 0, segmin = 0, outcount = 0,
-grpcount = 0, grpmin = 0,
-extcount = 0, extmin = 0,
-comcount = 0, commin = 0,
-fixcount = 0, fixmin = 0,
-impcount = 0, impmin = 0, impsreq = 0,
-expcount = 0, expmin = 0,
-nummods = 0,
-filecount = 0,
-libcount = 0,
-rescount = 0;
-unsigned long libPathCount = 0;
-char ** libPath = NULL;
-char* entryPoint = NULL;
-
-vector<string> libraryPath;
-
 void processArgs(int argc, char* argv[])
 {
 	ArgLitPtr caseSensitive = argLit0("c", NULL, "Enable case sensitivity (default is off)");
@@ -138,6 +69,11 @@ void processArgs(int argc, char* argv[])
 	padsegments = segmentPadding->count;
 	mapfile = map->count;
 	outname = (char*)outfile->filename[0];
+	for (int i = 0; i < infiles->count; i++)
+	{
+		inputFiles.push_back(infiles->filename[i]);
+	}
+	inputFilesCount = inputFiles.size();
 	if (strcmp(format->sval[0], "COM"))
 	{
 		output_type = OUTPUT_COM;
@@ -245,7 +181,7 @@ void processArgs(int argc, char* argv[])
 	}
 }
 
-void ProcessEnvironmentVariable()
+void processEnvironmentVariable()
 {
 	string segment;
 
@@ -256,13 +192,14 @@ void ProcessEnvironmentVariable()
 		while (getline(ss, segment, ';')) {
 			libraryPath.push_back(segment);
 		}
+		libPathCount = libraryPath.size();
 	}
 
 }
 
 int main(int argc, char* argv[])
 {
-	ProcessEnvironmentVariable();
+	processEnvironmentVariable();
 	processArgs(argc, argv);
 	return 0;
 }

@@ -15,6 +15,9 @@
 #include <string>
 #include <sstream>
 #include <vector>
+
+using namespace std;
+
 #define stricmp _stricmp
 #define strupr _strupr
 
@@ -181,7 +184,6 @@
 #define FIX_OFS32 9
 #define FIX_PTR1632 11
 #define FIX_OFS32_2 13
-/* RVA32 fixups are not supported by OMF, so has an out-of-range number */
 #define FIX_RVA32 256
 
 #define FIX_SELF_LBYTE (FIX_LBYTE+FIX_SELFREL)
@@ -495,62 +497,16 @@ typedef struct _ComDatRec
 	unsigned long linkwith;
 } ComDatRec, * ComDatRecPtr, ** ComDatRecPtrPtr;
 
-int sortCompare(const void* x1, const void* x2);
 void processArgs(int argc, char* argv[]);
-void combine_groups(long i, long j);
-void combine_common(long i, long j);
-void combine_segments(long i, long j);
-void combineBlocks();
-void OutputWin32file(char * outname);
-void OutputEXEfile(char * outname);
-void OutputCOMfile(char * outname);
-void GetFixupTarget(RelocPtr r, long* tseg, unsigned long* tofs, int isFlat);
-void loadlibmod(unsigned long libnum, unsigned long modpage);
-void loadlib(FILE* libfile, char * libname);
-void loadCoffLib(FILE* libfile, char * libname);
-void loadcofflibmod(LibFilePtr p, FILE* libfile);
-long loadmod(FILE* objfile);
-void loadres(FILE* resfile);
-void loadcoff(FILE* objfile);
-void loadCoffImport(FILE* objfile);
-void LoadFIXUP(RelocPtr r, unsigned char * buf, long* p);
-void RelocLIDATA(DataBlockPtr p, long* ofs, RelocPtr r);
-void EmitLiData(DataBlockPtr p, long segnum, long* ofs);
-DataBlockPtr BuildLiData(long* bufofs);
-void DestroyLIDATA(DataBlockPtr p);
-void ReportError(long errnum);
-long GetIndex(unsigned char * buf, long* index);
-void ClearNbit(unsigned char * mask, long i);
-void SetNbit(unsigned char * mask, long i);
-char GetNbit(unsigned char * mask, long i);
-int wstricmp(const char* s1, const char* s2);
-int wstrlen(const char* s);
-unsigned short wtoupper(unsigned short a);
-int getBitCount(unsigned long a);
-void* checkMalloc(size_t x);
-void* checkRealloc(void* p, size_t x);
-char* checkStrdup(const char* s);
-SortEntryPtr binarySearch(SortEntryPtr list, unsigned long count, char* key);
-void sortedInsert(SortEntryPtr* plist, unsigned long* pcount, char* key, void* object);
+void processEnvironmentVariable();
+
 #define strdup _strdup
 
 extern char case_sensitive;
 extern char padsegments;
 extern char mapfile;
-extern char * mapname;
-extern unsigned short maxalloc;
 extern int output_type;
 extern char * outname;
-
-extern FILE* afile;
-extern unsigned long filepos;
-extern long reclength;
-extern unsigned char rectype;
-extern char li_le;
-extern unsigned long prevofs;
-extern long prevseg;
-extern long gotstart;
-extern Reloc startaddr;
 extern unsigned long imageBase;
 extern unsigned long fileAlign;
 extern unsigned long objectAlign;
@@ -561,40 +517,8 @@ extern unsigned long heapCommitSize;
 extern unsigned char osMajor, osMinor;
 extern unsigned char subsysMajor, subsysMinor;
 extern unsigned int subSystem;
-
-extern long errcount;
-
-extern unsigned char buf[65536];
-extern DataBlockPtr lidata;
-
-extern char ** namelist;
-extern SegPtrPtr seglist;
-extern SegPtrPtr outlist;
-extern GrpPtrPtr grplist;
-extern SortEntryPtr publics;
-extern ExtRecPtr externs;
-extern ComRecPtrPtr comdefs;
-extern RelocPtrPtr relocs;
-extern ImpRecPtr impdefs;
-extern ExpRecPtr expdefs;
-extern LibFilePtr libfiles;
-extern ResourcePtr resource;
-extern char ** modname;
-extern char ** filename;
-extern SortEntryPtr comdats;
-extern unsigned long namecount, namemin,
-pubcount, pubmin,
-segcount, segmin, outcount,
-grpcount, grpmin,
-extcount, extmin,
-comcount, commin,
-fixcount, fixmin,
-impcount, impmin, impsreq,
-expcount, expmin,
-nummods,
-filecount,
-libcount,
-rescount;
-
-extern int buildDll;
 extern unsigned char * stubName;
+extern vector<string> libraryPath;
+extern unsigned long libPathCount;
+extern vector<string> inputFiles;
+extern unsigned long inputFilesCount;
