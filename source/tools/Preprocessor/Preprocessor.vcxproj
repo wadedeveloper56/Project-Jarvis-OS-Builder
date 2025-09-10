@@ -22,7 +22,6 @@
     <ClCompile Include="simplecpp.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="pch.h" />
     <ClInclude Include="simplecpp.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

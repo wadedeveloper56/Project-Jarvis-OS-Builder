@@ -1,7 +1,11 @@
+/* -*- C++ -*-
+ * simplecpp - A simple and high-fidelity C/C++ preprocessor library
+ * Copyright (C) 2016-2023 simplecpp team
+ */
+
 #ifndef simplecppH
 #define simplecppH
 
-#define _CRT_SECURE_NO_WARNINGS
 #if defined(_WIN32) || defined(__CYGWIN__) || defined(__MINGW32__)
 #  define SIMPLECPP_WINDOWS
 #endif
@@ -16,25 +20,46 @@
 #include <string>
 #include <unordered_map>
 #include <vector>
-#define SIMPLECPP_LIB
-#include <cstdint>
-#include <sys/stat.h>
+
+#ifdef _WIN32
+#  ifdef SIMPLECPP_EXPORT
+#    define SIMPLECPP_LIB __declspec(dllexport)
+#  elif defined(SIMPLECPP_IMPORT)
+#    define SIMPLECPP_LIB __declspec(dllimport)
+#  else
+#    define SIMPLECPP_LIB
+#  endif
+#else
+#  define SIMPLECPP_LIB
+#endif
+
+#ifdef SIMPLECPP_WINDOWS
+#  include <cstdint>
+#else
+#  include <sys/stat.h>
+#endif
 
 #if defined(_MSC_VER)
 #  pragma warning(push)
+// suppress warnings about "conversion from 'type1' to 'type2', possible loss of data"
 #  pragma warning(disable : 4267)
 #  pragma warning(disable : 4244)
 #endif
 
 namespace simplecpp {
+    /** C code standard */
     enum cstd_t { CUnknown=-1, C89, C99, C11, C17, C23 };
 
+    /** C++ code standard */
     enum cppstd_t { CPPUnknown=-1, CPP03, CPP11, CPP14, CPP17, CPP20, CPP23, CPP26 };
 
     typedef std::string TokenString;
     class Macro;
     class FileDataCache;
 
+    /**
+     * Location in source code
+     */
     class SIMPLECPP_LIB Location {
     public:
         explicit Location(const std::vector<std::string> &f) : files(f), fileIndex(0), line(1U), col(0U) {}
@@ -50,6 +75,7 @@ namespace simplecpp {
             return *this;
         }
 
+        /** increment this location by string */
         void adjust(const std::string &str);
 
         bool operator<(const Location &rhs) const {
@@ -76,6 +102,10 @@ namespace simplecpp {
         static const std::string emptyFileName;
     };
 
+    /**
+     * token class.
+     * @todo don't use std::string representation - for both memory and performance reasons
+     */
     class SIMPLECPP_LIB Token {
     public:
         Token(const TokenString &s, const Location &loc, bool wsahead = false) :
@@ -153,14 +183,16 @@ namespace simplecpp {
 
         std::set<const Macro*> mExpandedFrom;
 
+        // Not implemented - prevent assignment
         Token &operator=(const Token &tok);
     };
 
+    /** Output from preprocessor */
     struct SIMPLECPP_LIB Output {
         explicit Output(const std::vector<std::string> &files) : type(ERROR), location(files) {}
         enum Type {
-            ERROR,   
-            WARNING,   
+            ERROR, /* #error */
+            WARNING, /* #warning */
             MISSING_HEADER,
             INCLUDE_NESTED_TOO_DEEPLY,
             SYNTAX_ERROR,
@@ -177,14 +209,19 @@ namespace simplecpp {
 
     typedef std::list<Output> OutputList;
 
+    /** List of tokens. */
     class SIMPLECPP_LIB TokenList {
     public:
         class Stream;
 
         explicit TokenList(std::vector<std::string> &filenames);
+        /** generates a token list from the given std::istream parameter */
         TokenList(std::istream &istr, std::vector<std::string> &filenames, const std::string &filename=std::string(), OutputList *outputList = nullptr);
+        /** generates a token list from the given buffer */
         TokenList(const unsigned char* data, std::size_t size, std::vector<std::string> &filenames, const std::string &filename=std::string(), OutputList *outputList = nullptr);
+        /** generates a token list from the given buffer */
         TokenList(const char* data, std::size_t size, std::vector<std::string> &filenames, const std::string &filename=std::string(), OutputList *outputList = nullptr);
+        /** generates a token list from the given filename parameter */
         TokenList(const std::string &filename, std::vector<std::string> &filenames, OutputList *outputList = nullptr);
         TokenList(const TokenList &other);
         TokenList(TokenList &&other);
@@ -251,6 +288,7 @@ namespace simplecpp {
             other.frontToken = other.backToken = nullptr;
         }
 
+        /** sizeof(T) */
         std::map<std::string, std::size_t> sizeOfType;
 
         const std::vector<std::string>& getFiles() const {
@@ -283,6 +321,7 @@ namespace simplecpp {
         std::vector<std::string> &files;
     };
 
+    /** Tracking how macros are used */
     struct SIMPLECPP_LIB MacroUsage {
         explicit MacroUsage(const std::vector<std::string> &f, bool macroValueKnown_) : macroLocation(f), useLocation(f), macroValueKnown(macroValueKnown_) {}
         std::string macroName;
@@ -291,13 +330,18 @@ namespace simplecpp {
         bool        macroValueKnown;
     };
 
+    /** Tracking #if/#elif expressions */
     struct SIMPLECPP_LIB IfCond {
         explicit IfCond(const Location& location, const std::string &E, long long result) : location(location), E(E), result(result) {}
-        Location location;    
-        std::string E;   
-        long long result;   
+        Location location; // location of #if/#elif
+        std::string E; // preprocessed condition
+        long long result; // condition result
     };
 
+    /**
+     * Command line preprocessor settings.
+     * On the command line these are configured by -D, -U, -I, --include, -std
+     */
     struct SIMPLECPP_LIB DUI {
         DUI() : clearIncludeCache(false), removeComments(false) {}
         std::list<std::string> defines;
@@ -306,33 +350,56 @@ namespace simplecpp {
         std::list<std::string> includes;
         std::string std;
         bool clearIncludeCache;
-        bool removeComments;        
+        bool removeComments; /** remove comment tokens from included files */
     };
 
     SIMPLECPP_LIB long long characterLiteralToLL(const std::string& str);
 
     SIMPLECPP_LIB FileDataCache load(const TokenList &rawtokens, std::vector<std::string> &filenames, const DUI &dui, OutputList *outputList = nullptr);
 
+    /**
+     * Preprocess
+     * @todo simplify interface
+     * @param output TokenList that receives the preprocessing output
+     * @param rawtokens Raw tokenlist for top sourcefile
+     * @param files internal data of simplecpp
+     * @param cache output from simplecpp::load()
+     * @param dui defines, undefs, and include paths
+     * @param outputList output: list that will receive output messages
+     * @param macroUsage output: macro usage
+     * @param ifCond output: #if/#elif expressions
+     */
     SIMPLECPP_LIB void preprocess(TokenList &output, const TokenList &rawtokens, std::vector<std::string> &files, FileDataCache &cache, const DUI &dui, OutputList *outputList = nullptr, std::list<MacroUsage> *macroUsage = nullptr, std::list<IfCond> *ifCond = nullptr);
 
+    /**
+     * Deallocate data
+     */
     SIMPLECPP_LIB void cleanup(FileDataCache &cache);
 
+    /** Simplify path */
     SIMPLECPP_LIB std::string simplifyPath(std::string path);
 
+    /** Convert Cygwin path to Windows path */
     SIMPLECPP_LIB std::string convertCygwinToWindowsPath(const std::string &cygwinPath);
 
+    /** Returns the C version a given standard */
     SIMPLECPP_LIB cstd_t getCStd(const std::string &std);
 
+    /** Returns the C++ version a given standard */
     SIMPLECPP_LIB cppstd_t getCppStd(const std::string &std);
 
+    /** Returns the __STDC_VERSION__ value for a given standard */
     SIMPLECPP_LIB std::string getCStdString(const std::string &std);
     SIMPLECPP_LIB std::string getCStdString(cstd_t std);
 
+    /** Returns the __cplusplus value for a given standard */
     SIMPLECPP_LIB std::string getCppStdString(const std::string &std);
     SIMPLECPP_LIB std::string getCppStdString(cppstd_t std);
 
     struct SIMPLECPP_LIB FileData {
+        /** The canonical filename associated with this data */
         std::string filename;
+        /** The tokens associated with this file */
         TokenList tokens;
     };
 
@@ -346,6 +413,8 @@ namespace simplecpp {
         FileDataCache &operator=(const FileDataCache &) = delete;
         FileDataCache &operator=(FileDataCache &&) = default;
 
+        /** Get the cached data for a file, or load and then return it if it isn't cached.
+         *  returns the file data and true if the file was loaded, false if it was cached. */
         std::pair<FileData *, bool> get(const std::string &sourcefile, const std::string &header, const DUI &dui, bool systemheader, std::vector<std::string> &filenames, OutputList *outputList);
 
         void insert(FileData data) {

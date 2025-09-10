@@ -2,8 +2,6 @@
  * simplecpp - A simple and high-fidelity C/C++ preprocessor library
  * Copyright (C) 2016-2023 simplecpp team
  */
-#include "pch.h"
-
 #define _CRT_SECURE_NO_WARNINGS
 #if defined(_WIN32) || defined(__CYGWIN__) || defined(__MINGW32__)
 #  define _WIN32_WINNT 0x0602
