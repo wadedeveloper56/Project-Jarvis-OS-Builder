@@ -1,4 +1,4 @@
-#include "alink.h"
+#include "linker.h"
 
 int getBitCount(UINT a)
 {

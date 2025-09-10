@@ -1,4 +1,4 @@
-#include "alink.h"
+#include "linker.h"
 
 void loadCoffLib(FILE *libfile,PCHAR libname)
 {
@@ -14,9 +14,9 @@ void loadCoffLib(FILE *libfile,PCHAR libname)
     PSORTENTRY symlist = NULL;
     int x;
 
-    libfiles=checkRealloc(libfiles,(libcount+1)*sizeof(LIBFILE));
+    libfiles=(PLIBFILE)checkRealloc(libfiles,(libcount+1)*sizeof(LIBFILE));
     p=&libfiles[libcount];
-    p->filename=checkMalloc(strlen(libname)+1);
+    p->filename=(PCHAR)checkMalloc(strlen(libname)+1);
     strcpy(p->filename,libname);
     startPoint=ftell(libfile);
     
@@ -27,7 +27,7 @@ void loadCoffLib(FILE *libfile,PCHAR libname)
     }
     buf[8]=0;
     /* complain if file header is wrong */
-    if(strcmp(buf,"!<arch>\n"))
+    if(strcmp((const char *)buf,"!<arch>\n"))
     {
 	printf("Invalid library file format - bad file header\n");
 	printf("\"%s\"\n",buf);
@@ -47,7 +47,7 @@ void loadCoffLib(FILE *libfile,PCHAR libname)
     }
     buf[16]=0;
     /* check name of first linker member */
-    if(strcmp(buf,"/               ")) /* 15 spaces */
+    if(strcmp((const char *)buf,"/               ")) /* 15 spaces */
     {
 	printf("Invalid library file format - bad member name\n");
 	exit(1);
@@ -64,7 +64,7 @@ void loadCoffLib(FILE *libfile,PCHAR libname)
     
     /* get size */
     errno=0;
-    memberSize=strtoul(buf+48,(PPCHAR)&endptr,10);
+    memberSize=strtoul((const char *)(buf+48),(PPCHAR)&endptr,10);
     if(errno || (*endptr))
     {
 	printf("Invalid library file format - bad member size\n");
@@ -177,7 +177,7 @@ void loadCoffLib(FILE *libfile,PCHAR libname)
     }
     buf[16]=0;
     /* check name of second linker member */
-    if(!strcmp(buf,"/               ")) /* 15 spaces */
+    if(!strcmp((const char*)buf,"/               ")) /* 15 spaces */
     {
 	/* OK, so we've found it, now skip over */
 	buf[58]=0;
@@ -192,7 +192,7 @@ void loadCoffLib(FILE *libfile,PCHAR libname)
     
 	/* get size */
 	errno=0;
-	memberSize=strtoul(buf+48,(PPCHAR)&endptr,10);
+	memberSize=strtoul((const char *)(buf+48),(PPCHAR)&endptr,10);
 	if(errno || (*endptr))
 	{
 	    printf("Invalid library file format - bad member size\n");
@@ -235,7 +235,7 @@ void loadCoffLib(FILE *libfile,PCHAR libname)
     }
     buf[16]=0;
     /* check name of long names linker member */
-    if(!strcmp(buf,"//              ")) /* 14 spaces */
+    if(!strcmp((const char *)buf,"//              ")) /* 14 spaces */
     {
 	buf[58]=0;
 
@@ -249,7 +249,7 @@ void loadCoffLib(FILE *libfile,PCHAR libname)
     
 	/* get size */
 	errno=0;
-	memberSize=strtoul(buf+48,(PPCHAR)&endptr,10);
+	memberSize=strtoul((const char *)(buf+48),(PPCHAR)&endptr,10);
 	if(errno || (*endptr))
 	{
 	    printf("Invalid library file format - bad member size\n");
@@ -273,7 +273,7 @@ void loadCoffLib(FILE *libfile,PCHAR libname)
     
 
     p->modsloaded=0;
-    p->modlist=checkMalloc(sizeof(unsigned short)*numsyms);
+    p->modlist=(UINT *)checkMalloc(sizeof(unsigned short)*numsyms);
     p->libtype='C';
     p->blocksize=1;
     p->flags=LIBF_CASESENSITIVE;
@@ -305,17 +305,17 @@ void loadcofflibmod(PLIBFILE p,FILE *libfile)
 	    ofs--;
 	}
 	
-	ofs=strtoul(buf+1,&name,10);
+	ofs=strtoul((const char*)(buf+1),(char **) & name, 10);
 	if(!buf[1] || *name)
 	{
 	    printf("Invalid string number \n");
 	    exit(1);
 	}
-	name=p->longnames+ofs;
+	name=(char *)(p->longnames+ofs);
     }
     else
     {
-	name=buf;
+	name=(char *)buf;
     }
     
     printf("Loading module %s\n",name);

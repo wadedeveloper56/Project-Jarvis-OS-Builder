@@ -466,11 +466,11 @@ typedef struct __libentry {
 } LIBENTRY, *PLIBENTRY, **PPLIBENTRY;
 
 typedef struct __resource {
- PUCHAR typename;
+ PUCHAR typename0;
  PUCHAR name;
  PUCHAR data;
  UINT length;
- unsigned short typeid;
+ unsigned short typeid0;
  unsigned short id;
  unsigned short languageid; 
 } RESOURCE, *PRESOURCE;
@@ -480,7 +480,7 @@ typedef struct __coffsym {
     UINT value;
     short section;
     unsigned short type;
-    unsigned char class;
+    unsigned char clazz;
     long extnum;
     UINT numAuxRecs;
     PUCHAR auxRecs;

@@ -1,4 +1,4 @@
-#include "alink.h"
+#include "linker.h"
 
 void fixpubsegs(int src,int dest,UINT shift)
 {
@@ -113,8 +113,8 @@ void combine_segments(long dest,long src)
 	break;
     }
     seglist[src]->base=k;
-    p=checkMalloc(k+seglist[src]->length);
-    q=checkMalloc((k+seglist[src]->length+7)/8);
+    p=(PUCHAR)checkMalloc(k+seglist[src]->length);
+    q=(PUCHAR)checkMalloc((k+seglist[src]->length+7)/8);
     for(k=0;k<seglist[dest]->length;k++)
     {
 	if(GetNbit(seglist[dest]->datmask,k))
