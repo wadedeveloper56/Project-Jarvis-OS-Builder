@@ -1,7 +1,9 @@
 #include "linker.h"
 #include "ArgumentTable.h"
+#include "BinaryFormat.h"
 
 using namespace std;
+using namespace BinaryFormat;
 
 void processArgs(int argc, char* argv[])
 {
@@ -26,10 +28,21 @@ void processArgs(int argc, char* argv[])
 	const char* progname = "Linker";
 	int exitcode = 0, nerrors = 0;
 	unsigned char setsubsys;
-	int gotsubsys = FALSE, gotbase = FALSE, gotfalign = FALSE, gotoalign = FALSE, gotsubsysver = FALSE, gotosversion = FALSE;
+	bool gotsubsys = false, gotbase = false, gotfalign = false, gotoalign = false, gotsubsysver = false, gotosversion = false;
 	int setbase, setfalign, setoalign;
 	int setsubsysmajor, setsubsysminor, setosmajor, setosminor;
+	char drive[_MAX_DRIVE];
+	char dir[_MAX_DIR];
+	char fname[_MAX_FNAME];
+	char ext[_MAX_EXT];
 
+	parameters.case_sensitive = 1;
+	parameters.padsegments = 0;
+	parameters.output_type = 0;
+	parameters.outname = nullptr;
+	parameters.imageBase = 0;
+	parameters.fileAlign = 1;
+	parameters.objectAlign = 1;
 	printf("Linker (x86/x64) v1.0 (C) Copyright 2025 Christopher D. Wade.\n");
 	printf("All Rights Reserved\n");
 
@@ -65,10 +78,12 @@ void processArgs(int argc, char* argv[])
 		printf("Try '%s --help' for more information.\n", progname);
 		exit(1);
 	}
-	case_sensitive = caseSensitive->count;
-	padsegments = segmentPadding->count;
-	mapfile = map->count;
-	outname = (char*)outfile->filename[0];
+	parameters.case_sensitive = caseSensitive->count;
+	parameters.padsegments = segmentPadding->count;
+	parameters.mapfile = map->count;
+	parameters.outname = (char*)outfile->filename[0];
+	_splitpath(parameters.outname, drive, dir, fname, ext);
+	_makepath(parameters.mapFileName, drive, dir, fname, "map");
 	for (int i = 0; i < infiles->count; i++)
 	{
 		inputFiles.push_back(infiles->filename[i]);
@@ -76,108 +91,108 @@ void processArgs(int argc, char* argv[])
 	inputFilesCount = inputFiles.size();
 	if (strcmp(format->sval[0], "COM"))
 	{
-		output_type = OUTPUT_COM;
-		imageBase = 0;
-		fileAlign = 1;
-		objectAlign = 1;
-		stackSize = 0;
-		stackCommitSize = 0;
-		heapSize = 0;
-		heapCommitSize = 0;
+		parameters.output_type = OUTPUT_COM;
+		parameters.imageBase = 0;
+		parameters.fileAlign = 1;
+		parameters.objectAlign = 1;
+		parameters.stackSize = 0;
+		parameters.stackCommitSize = 0;
+		parameters.heapSize = 0;
+		parameters.heapCommitSize = 0;
 	}
 	else if (strcmp(format->sval[0], "EXE"))
 	{
-		output_type = OUTPUT_EXE;
-		imageBase = 0;
-		fileAlign = 1;
-		objectAlign = 1;
-		stackSize = 0;
-		stackCommitSize = 0;
-		heapSize = 0;
-		heapCommitSize = 0;
+		parameters.output_type = OUTPUT_EXE;
+		parameters.imageBase = 0;
+		parameters.fileAlign = 1;
+		parameters.objectAlign = 1;
+		parameters.stackSize = 0;
+		parameters.stackCommitSize = 0;
+		parameters.heapSize = 0;
+		parameters.heapCommitSize = 0;
 	}
 	else if (strcmp(format->sval[0], "PE32"))
 	{
-		output_type = OUTPUT_PE32;
-		imageBase = WIN32_DEFAULT_BASE;
-		fileAlign = WIN32_DEFAULT_FILEALIGN;
-		objectAlign = WIN32_DEFAULT_OBJECTALIGN;
-		stackSize = WIN32_DEFAULT_STACKSIZE;
-		stackCommitSize = WIN32_DEFAULT_STACKCOMMITSIZE;
-		heapSize = WIN32_DEFAULT_HEAPSIZE;
-		heapCommitSize = WIN32_DEFAULT_HEAPCOMMITSIZE;
-		subSystem = WIN32_DEFAULT_SUBSYS;
-		subsysMajor = WIN32_DEFAULT_SUBSYSMAJOR;
-		subsysMinor = WIN32_DEFAULT_SUBSYSMINOR;
-		osMajor = WIN32_DEFAULT_OSMAJOR;
-		osMinor = WIN32_DEFAULT_OSMINOR;
+		parameters.output_type = OUTPUT_PE32;
+		parameters.imageBase = WIN32_DEFAULT_BASE;
+		parameters.fileAlign = WIN32_DEFAULT_FILEALIGN;
+		parameters.objectAlign = WIN32_DEFAULT_OBJECTALIGN;
+		parameters.stackSize = WIN32_DEFAULT_STACKSIZE;
+		parameters.stackCommitSize = WIN32_DEFAULT_STACKCOMMITSIZE;
+		parameters.heapSize = WIN32_DEFAULT_HEAPSIZE;
+		parameters.heapCommitSize = WIN32_DEFAULT_HEAPCOMMITSIZE;
+		parameters.subSystem = WIN32_DEFAULT_SUBSYS;
+		parameters.subsysMajor = WIN32_DEFAULT_SUBSYSMAJOR;
+		parameters.subsysMinor = WIN32_DEFAULT_SUBSYSMINOR;
+		parameters.osMajor = WIN32_DEFAULT_OSMAJOR;
+		parameters.osMinor = WIN32_DEFAULT_OSMINOR;
 	}
 	else if (strcmp(format->sval[0], "PE64"))
 	{
-		output_type = OUTPUT_PE64;
-		imageBase = WIN32_DEFAULT_BASE;
-		fileAlign = WIN32_DEFAULT_FILEALIGN;
-		objectAlign = WIN32_DEFAULT_OBJECTALIGN;
-		stackSize = WIN32_DEFAULT_STACKSIZE;
-		stackCommitSize = WIN32_DEFAULT_STACKCOMMITSIZE;
-		heapSize = WIN32_DEFAULT_HEAPSIZE;
-		heapCommitSize = WIN32_DEFAULT_HEAPCOMMITSIZE;
-		subSystem = WIN32_DEFAULT_SUBSYS;
-		subsysMajor = WIN32_DEFAULT_SUBSYSMAJOR;
-		subsysMinor = WIN32_DEFAULT_SUBSYSMINOR;
-		osMajor = WIN32_DEFAULT_OSMAJOR;
-		osMinor = WIN32_DEFAULT_OSMINOR;
+		parameters.output_type = OUTPUT_PE64;
+		parameters.imageBase = WIN32_DEFAULT_BASE;
+		parameters.fileAlign = WIN32_DEFAULT_FILEALIGN;
+		parameters.objectAlign = WIN32_DEFAULT_OBJECTALIGN;
+		parameters.stackSize = WIN32_DEFAULT_STACKSIZE;
+		parameters.stackCommitSize = WIN32_DEFAULT_STACKCOMMITSIZE;
+		parameters.heapSize = WIN32_DEFAULT_HEAPSIZE;
+		parameters.heapCommitSize = WIN32_DEFAULT_HEAPCOMMITSIZE;
+		parameters.subSystem = WIN32_DEFAULT_SUBSYS;
+		parameters.subsysMajor = WIN32_DEFAULT_SUBSYSMAJOR;
+		parameters.subsysMinor = WIN32_DEFAULT_SUBSYSMINOR;
+		parameters.osMajor = WIN32_DEFAULT_OSMAJOR;
+		parameters.osMinor = WIN32_DEFAULT_OSMINOR;
 	}
 	setbase = base->ival[0];
-	if (base->count > 0) gotbase = TRUE;
+	if (base->count > 0) gotbase = true;
 	if (strcmp(subsys->sval[0], "gui"))
 	{
 		setsubsys = PE_SUBSYS_WINDOWS;
-		gotsubsys = TRUE;
+		gotsubsys = true;
 	}
 	else if (strcmp(subsys->sval[0], "console"))
 	{
 		setsubsys = PE_SUBSYS_CONSOLE;
-		gotsubsys = TRUE;
+		gotsubsys = true;
 	}
 	else if (strcmp(subsys->sval[0], "native"))
 	{
 		setsubsys = PE_SUBSYS_NATIVE;
-		gotsubsys = TRUE;
+		gotsubsys = true;
 	}
 	else if (strcmp(subsys->sval[0], "posix"))
 	{
 		setsubsys = PE_SUBSYS_POSIX;
-		gotsubsys = TRUE;
+		gotsubsys = true;
 	}
 	setfalign = filealign->ival[0];
-	if (filealign->count > 0) gotfalign = TRUE;
+	if (filealign->count > 0) gotfalign = true;
 	setoalign = objectalign->ival[0];
-	if (objectalign->count > 0) gotoalign = TRUE;
+	if (objectalign->count > 0) gotoalign = true;
 	long j;
 	if (sscanf(subsysVersion->sval[0], "%d.%d%n", &setsubsysmajor, &setsubsysminor, &j) != 2)
-		exit(1);
+		gotsubsysver = false;
 	else
-		gotsubsysver = TRUE;
+		gotsubsysver = true;
 	if (sscanf(osVersion->sval[0], "%d.%d%n", &setosmajor, &setosminor, &j) != 2)
-		exit(1);
+		gotosversion = false;
 	else
-		gotosversion = TRUE;
-	stubName = (unsigned char*)stubfile->filename[0];
+		gotosversion = true;
+	parameters.stubName = (char*)stubfile->filename[0];
 
-	if (gotoalign) objectAlign = setoalign;
-	if (gotfalign) fileAlign = setfalign;
-	if (gotbase) imageBase = setbase;
-	if (gotsubsys) subSystem = setsubsys;
+	if (gotoalign) parameters.objectAlign = setoalign;
+	if (gotfalign) parameters.fileAlign = setfalign;
+	if (gotbase) parameters.imageBase = setbase;
+	if (gotsubsys) parameters.subSystem = setsubsys;
 	if (gotsubsysver)
 	{
-		subsysMajor = setsubsysmajor;
-		subsysMinor = setsubsysminor;
+		parameters.subsysMajor = setsubsysmajor;
+		parameters.subsysMinor = setsubsysminor;
 	}
 	if (gotosversion)
 	{
-		osMajor = setosmajor;
-		osMinor = setosminor;
+		parameters.osMajor = setosmajor;
+		parameters.osMinor = setosminor;
 	}
 }
 
@@ -197,9 +212,61 @@ void processEnvironmentVariable()
 
 }
 
+void checkForParameterErrors()
+{
+	if (parameters.outname == nullptr)
+	{
+		printf("No output name specified\n");
+		exit(1);
+	}
+	if (inputFilesCount == 0)
+	{
+		printf("No input name(s) specified\n");
+		exit(1);
+	}
+	if (parameters.output_type == 0)
+	{
+		printf("No output type specified\n");
+		exit(1);
+	}
+}
+
+void loadFiles()
+{
+	for (const string& file : inputFiles) {
+		printf("Loading file %s\n", file.c_str());
+		MemoryMappedFile* mmfile = new MemoryMappedFile((char*)file.c_str());
+		char* buffer = mmfile->getBuffer();
+		FileType fileType = getFileType(buffer);
+		LONGLONG fileSize = mmfile->getFileSize();
+		switch (fileType)
+		{
+			case EXE:
+				cout << "cant link an exe to form exe" << endl;
+				break;
+			case DEBUG:
+				break;
+			case OBJ:
+				cout << "its obj file type" << endl;
+				loadObjFile(buffer, fileSize);
+				break;
+			case ANONYMOUS:
+				break;
+			case LIB:
+				break;
+			default:
+				cout << "unknown file type" << endl;
+				break;
+		}
+		delete mmfile;
+	}
+}
+
 int main(int argc, char* argv[])
 {
 	processEnvironmentVariable();
 	processArgs(argc, argv);
+	checkForParameterErrors();
+	loadFiles();
 	return 0;
 }

@@ -3,6 +3,7 @@
 #pragma warning(disable : 4018)
 #pragma warning(disable : 4333)
 #define _CRT_SECURE_NO_WARNINGS
+#include <windows.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <memory.h>
@@ -20,9 +21,6 @@ using namespace std;
 
 #define stricmp _stricmp
 #define strupr _strupr
-
-#define TRUE  (1==1)
-#define FALSE (1==0)
 
 #define SWITCHCHAR '-'
 #define PATH_CHAR '\\'
@@ -357,6 +355,26 @@ using namespace std;
 
 #define EXP_ORD 0x80
 
+typedef struct _Parameters {
+	char case_sensitive;
+	char padsegments;
+	char mapfile;
+	int output_type;
+	char* outname;
+	unsigned long imageBase;
+	unsigned long fileAlign;
+	unsigned long objectAlign;
+	unsigned long stackSize;
+	unsigned long stackCommitSize;
+	unsigned long heapSize;
+	unsigned long heapCommitSize;
+	unsigned char osMajor, osMinor;
+	unsigned char subsysMajor, subsysMinor;
+	unsigned int subSystem;
+	char* stubName;
+	char mapFileName[_MAX_PATH];
+}Parameters,*ParametersPtr,**ParametersPtrPtr;
+
 typedef struct _SortEntry
 {
 	char* id;
@@ -502,22 +520,7 @@ void processEnvironmentVariable();
 
 #define strdup _strdup
 
-extern char case_sensitive;
-extern char padsegments;
-extern char mapfile;
-extern int output_type;
-extern char * outname;
-extern unsigned long imageBase;
-extern unsigned long fileAlign;
-extern unsigned long objectAlign;
-extern unsigned long stackSize;
-extern unsigned long stackCommitSize;
-extern unsigned long heapSize;
-extern unsigned long heapCommitSize;
-extern unsigned char osMajor, osMinor;
-extern unsigned char subsysMajor, subsysMinor;
-extern unsigned int subSystem;
-extern unsigned char * stubName;
+extern Parameters parameters;
 extern vector<string> libraryPath;
 extern unsigned long libPathCount;
 extern vector<string> inputFiles;

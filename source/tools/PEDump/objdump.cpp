@@ -61,7 +61,7 @@ int DumpObjRelocations(PIMAGE_RELOCATION pRelocs, DWORD count)
 
 void DumpObjFile(PIMAGE_FILE_HEADER pImageFileHeader)
 {
-	unsigned i;
+	unsigned i; 
 	int iret = 0;
 
 	DumpHeader(pImageFileHeader);
