@@ -5,16 +5,16 @@ using namespace BinaryFormat;
 
 MemoryMappedFile::MemoryMappedFile(char* filename) :buffer(nullptr), hFile(0), hMap(0), lpBasePtr(0)
 {
-	hFile = CreateFileA(filename, GENERIC_READ | GENERIC_WRITE, 0, NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+	hFile = CreateFileA(filename, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
 	if (hFile != INVALID_HANDLE_VALUE)
 	{
 		GetFileSizeEx(hFile, &fileSize);
-		hMap = CreateFileMapping(hFile, NULL, PAGE_READWRITE, 0, 1024, L"MySharedMemory");
+		hMap = CreateFileMapping(hFile, NULL, PAGE_READONLY, 0, 0, NULL);
 		if (hMap == NULL) {
 			CloseHandle(hFile);
 		}
 		else {
-			lpBasePtr = MapViewOfFile(hMap, FILE_MAP_ALL_ACCESS, 0, 0, 0);
+			lpBasePtr = MapViewOfFile(hMap, FILE_MAP_READ, 0, 0, 0);
 			if (lpBasePtr == NULL) {
 				CloseHandle(hMap);
 				CloseHandle(hFile);
