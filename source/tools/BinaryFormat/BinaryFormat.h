@@ -39,6 +39,54 @@ typedef struct _i386RelocTypes
 	const char* name;
 } i386RelocTypes;
 
+class COFFSymbolTable;
+
+class COFFSymbol
+{
+	PSTR 			m_pStringTable;
+	PIMAGE_SYMBOL 	m_pSymbolData;
+	DWORD			m_index;
+	PSTR			m_pszShortString;
+	char			m_szTypeName[16];
+	void	CleanUp(void);
+public:
+	COFFSymbol(PIMAGE_SYMBOL pSymbolData, PSTR pStringTable, DWORD index);
+	~COFFSymbol();
+	DWORD GetIndex();
+	PSTR  GetName();
+	DWORD GetValue();
+	SHORT GetSectionNumber();
+	WORD  GetType();
+	PSTR  GetTypeName();
+	BYTE  GetStorageClass();
+	PSTR  GetStorageClassName();
+	BOOL  GetNumberOfAuxSymbols();
+	BOOL  GetAuxSymbolAsString(PSTR pszBuffer, unsigned cbBuffer);
+	friend class COFFSymbolTable;
+};
+typedef COFFSymbol* PCOFFSymbol;
+class COFFSymbolTable
+{
+private:
+	PIMAGE_SYMBOL	m_pSymbolBase;
+	unsigned 		m_cSymbols;
+	PSTR			m_pStringTable;
+public:
+	COFFSymbolTable(PVOID pSymbolBase, unsigned cSymbols);
+	~COFFSymbolTable();
+	unsigned GetNumberOfSymbols(void) { return m_cSymbols; }
+	PCOFFSymbol GetNextSymbol(PCOFFSymbol);
+	PCOFFSymbol GetNearestSymbolFromRVA(DWORD rva, BOOL fExact);
+	PCOFFSymbol GetSymbolFromIndex(DWORD index);
+};
+typedef COFFSymbolTable* PCOFFSymbolTable;
+
+typedef struct SymbolTableEntry
+{
+	IMAGE_SYMBOL symbol;
+	vector<PIMAGE_AUX_SYMBOL> auxSymbols;
+}SymbolTableEntry, * SymbolTableEntryPtr, ** SymbolTableEntryPtrPtr;
+
 typedef struct OBJSection
 {
 	IMAGE_SECTION_HEADER header;
@@ -51,9 +99,11 @@ typedef struct _OBJFile
 {
 	IMAGE_FILE_HEADER header;
 	vector<OBJSectionPtr> sectionTable;
+	vector<SymbolTableEntryPtr> symbolTable;
 }OBJFile, * OBJFilePtr, ** OBJFilePtrPtr;
 
 #define MakePtr( cast, ptr, addValue ) (cast)( (BYTE *)(ptr) + (DWORD)(addValue))
+
 
 typedef enum _FileType { UNKNOWN, EXE, DEBUG, OBJ, ANONYMOUS, LIB }FileType;
 WORD getFileMagic(char* buffer);

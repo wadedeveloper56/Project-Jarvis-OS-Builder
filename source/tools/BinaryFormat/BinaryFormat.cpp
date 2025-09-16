@@ -245,11 +245,73 @@ void GetObjRelocationName(WORD type, PSTR buffer, DWORD cBytes)
 	sprintf(buffer, "???_%X", type);
 }
 
+void
+GetSectionName(
+	WORD section,
+	PSTR buffer,
+	unsigned cbBuffer
+)
+{
+	char tempbuffer[10];
+
+	switch ((SHORT)section)
+	{
+		case IMAGE_SYM_UNDEFINED: strcpy(
+			tempbuffer,
+			"UNDEF"
+		); break;
+		case IMAGE_SYM_ABSOLUTE: strcpy(
+			tempbuffer,
+			"ABS"
+		); break;
+		case IMAGE_SYM_DEBUG: strcpy(
+			tempbuffer,
+			"DEBUG"
+		); break;
+		default: sprintf(
+			tempbuffer,
+			"%X",
+			section
+		);
+	}
+
+	strncpy(
+		buffer,
+		tempbuffer,
+		cbBuffer - 1
+	);
+}
+
+void DumpSymbolTable(COFFSymbolTable* pSymTab)
+{
+	printf("Symbol Table - %d entries  (* = auxillary symbol)\n",pSymTab->GetNumberOfSymbols());
+	printf("Indx Sectn   Value   Type  Storage Name\n");
+	printf("---- ----- -------- ----- -------  --------\n");
+	PCOFFSymbol pSymbol = pSymTab->GetNextSymbol(0);
+	while (pSymbol)
+	{
+		char szSection[10];
+		GetSectionName(pSymbol->GetSectionNumber(),szSection,sizeof(szSection));
+		printf("%04X %5s %08X  %s %-8s %s\n",pSymbol->GetIndex(),szSection,pSymbol->GetValue(),pSymbol->GetTypeName(),pSymbol->GetStorageClassName(),pSymbol->GetName());
+		if (pSymbol->GetNumberOfAuxSymbols())
+		{
+			char szAuxSymbol[1024];
+
+			if (pSymbol->GetAuxSymbolAsString(szAuxSymbol,sizeof(szAuxSymbol)))
+			{
+				printf("     * %s\n",szAuxSymbol);
+			}
+		}
+		pSymbol = pSymTab->GetNextSymbol(pSymbol);
+	}
+}
+
 OBJFilePtr loadObjFile(char* buffer, LONGLONG fileSize)
 {
+	printf("file size %lld\n", fileSize);
+
 	OBJFilePtr result = new OBJFile;
 	PIMAGE_FILE_HEADER pImgFileHdr = (PIMAGE_FILE_HEADER)buffer;
-
 
 	result->header.Machine = pImgFileHdr->Machine;
 	result->header.NumberOfSections = pImgFileHdr->NumberOfSections;
@@ -261,10 +323,11 @@ OBJFilePtr loadObjFile(char* buffer, LONGLONG fileSize)
 
 	DumpHeader(&result->header);
 
-	printf("buffer size %lld\n", fileSize);
-
-	PIMAGE_SYMBOL pv = MakePtr(PIMAGE_SYMBOL, pImgFileHdr, pImgFileHdr->PointerToSymbolTable);
+	PIMAGE_SYMBOL symbolTableEntry = MakePtr(PIMAGE_SYMBOL, pImgFileHdr, pImgFileHdr->PointerToSymbolTable);
 	PIMAGE_SECTION_HEADER section = MakePtr(PIMAGE_SECTION_HEADER, (pImgFileHdr + 1), pImgFileHdr->SizeOfOptionalHeader);
+
+	PCOFFSymbolTable symbolTable = new COFFSymbolTable(symbolTableEntry, pImgFileHdr->NumberOfSymbols);
+	DumpSymbolTable(symbolTable);
 
 	for (int i = 1; i <= pImgFileHdr->NumberOfSections; i++)
 	{
@@ -345,7 +408,6 @@ OBJFilePtr loadObjFile(char* buffer, LONGLONG fileSize)
 		if (section->PointerToLinenumbers > 0 && section->NumberOfLinenumbers > 0)
 		{
 			ptr->lineNumbers = new IMAGE_LINENUMBER[section->NumberOfLinenumbers];
-			char buffer[64];
 			for (int j = 0; j < section->NumberOfLinenumbers; j++)
 			{
 				ptr->lineNumbers[j].Linenumber = pln->Linenumber;
