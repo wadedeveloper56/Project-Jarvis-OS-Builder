@@ -20,4 +20,12 @@
 #include <fcntl.h>
 #include <io.h>    
 #include <strsafe.h>
+#include <memory.h>
+#include <limits.h>
+#include <time.h>
+#include <errno.h>
+#include <iostream>
+#include <string>
+#include <sstream>
+#include <vector>
 

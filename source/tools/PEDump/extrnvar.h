@@ -8,14 +8,14 @@
 // EXTRNVAR.H holds the "extern" definitions for global variables used
 // through the program.
 
-extern BOOL fShowRelocations;
-extern BOOL fShowRawSectionData;
-extern BOOL fShowSymbolTable;
-extern BOOL fShowLineNumbers;
-extern BOOL fShowIATentries;
-extern BOOL fShowPDATA;
-extern BOOL fShowResources;
-extern BOOL fShowMachineType;
+extern bool fShowRelocations;
+extern bool fShowRawSectionData;
+extern bool fShowSymbolTable;
+extern bool fShowLineNumbers;
+extern bool fShowIATentries;
+extern bool fShowPDATA;
+extern bool fShowResources;
+extern bool fShowMachineType;
 
 extern PIMAGE_COFF_SYMBOLS_HEADER g_pCOFFHeader;
 extern PIMAGE_DEBUG_MISC g_pMiscDebugInfo;

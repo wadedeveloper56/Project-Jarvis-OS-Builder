@@ -1,575 +1,382 @@
 #include "pch.h"
+#include "ArgumentTable.h"
+#include "BinaryFormat.h"
+#include "MemoryMappedFile.h"
 #include "common.h"
-#include "objdump.h"
-#include "exedump.h"
-#include "dbgdump.h"
-#include "libdump.h"
-#include "romimage.h"
-#include "extrnvar.h"
-#include "pdbdump.h"
 
-typedef enum omf_cmd {
-	CMD_MIN_CMD = 0x6e,     /* minimum cmd enum                 */
-	CMD_RHEADR = 0x6e,
-	CMD_REGINT = 0x70,
-	CMD_REDATA = 0x72,
-	CMD_RIDATA = 0x74,
-	CMD_OVLDEF = 0x76,
-	CMD_ENDREC = 0x78,
-	CMD_BLKDEF = 0x7a,     /* block definition record          */
-	CMD_BLKDEF32 = 0x7b,     /* weird extension for QNX MAX assembler */
-	CMD_BLKD32 = 0x7b,     /* weird extension for QNX MAX assembler */
-	CMD_BLKEND = 0x7c,     /* block end record                 */
-	CMD_BLKEND32 = 0x7d,     /* _might_ be used by QNX MAX assembler */
-	CMD_BLKE32 = 0x7d,     /* _might_ be used by QNX MAX assembler */
-	CMD_DEBSYM = 0x7e,
-	CMD_THEADR = 0x80,     /* header record                    */
-	CMD_LHEADR = 0x82,
-	CMD_PEDATA = 0x84,
-	CMD_PIDATA = 0x86,
-	CMD_COMENT = 0x88,     /* comment record                   */
-	CMD_MODEND = 0x8a,     /* end of module record             */
-	CMD_MODEND32 = 0x8b,     /* 32-bit end of module record      */
-	CMD_MODE32 = 0x8b,     /* 32-bit end of module record      */
-	CMD_EXTDEF = 0x8c,     /* import names record              */
-	CMD_TYPDEF = 0x8e,     /* type definition record           */
-	CMD_PUBDEF = 0x90,     /* export names record              */
-	CMD_PUBDEF32 = 0x91,     /* 32-bit export names record       */
-	CMD_PUBD32 = 0x91,     /* 32-bit export names record       */
-	CMD_LOCSYM = 0x92,
-	CMD_LINNUM = 0x94,     /* line number record               */
-	CMD_LINNUM32 = 0x95,     /* 32-bit line number record.       */
-	CMD_LINN32 = 0x95,     /* 32-bit line number record.       */
-	CMD_LNAMES = 0x96,     /* list of names record             */
-	CMD_SEGDEF = 0x98,     /* segment definition record        */
-	CMD_SEGDEF32 = 0x99,     /* 32-bit segment definition        */
-	CMD_SEGD32 = 0x99,     /* 32-bit segment definition        */
-	CMD_GRPDEF = 0x9a,     /* group definition record          */
-	CMD_FIXUPP = 0x9c,     /* relocation record                */
-	CMD_FIXUPP32 = 0x9d,     /* 32-bit relocation record         */
-	CMD_FIXU32 = 0x9d,     /* 32-bit relocation record         */
-	CMD_LEDATA = 0xa0,     /* object record                    */
-	CMD_LEDATA32 = 0xa1,     /* 32-bit object record             */
-	CMD_LEDA32 = 0xa1,     /* 32-bit object record             */
-	CMD_LIDATA = 0xa2,     /* repeated data record             */
-	CMD_LIDATA32 = 0xa3,     /* 32-bit repeated data record      */
-	CMD_LIDA32 = 0xa3,     /* 32-bit repeated data record      */
-	CMD_LIBHED = 0xa4,
-	CMD_LIBNAM = 0xa6,
-	CMD_LIBLOC = 0xa8,
-	CMD_LIBDIC = 0xaa,
-	CMD_COMDEF = 0xb0,     /* communal definition              */
-	CMD_BAKPAT = 0xb2,     /* backpatch record (for Quick C) */
-	CMD_BAKPAT32 = 0xb3,
-	CMD_BAKP32 = 0xb3,
-	CMD_LEXTDEF = 0xb4,     /*  local import names record */
-	CMD_STATIC_EXTDEF = 0xb4,
-	CMD_LEXTDEF32 = 0xb5,     /*  32-bit local import names record */
-	CMD_STATIC_EXTD32 = 0xb5,
-	CMD_LPUBDEF = 0xb6,     /* static export names record */
-	CMD_STATIC_PUBDEF = 0xb6,
-	CMD_LPUBDEF32 = 0xb7,     /* static export names record */
-	CMD_STATIC_PUBD32 = 0xb7,
-	CMD_LCOMDEF = 0xb8,     /* local comdev */
-	CMD_STATIC_COMDEF = 0xb8,
-	CMD_CEXTDEF = 0xbc,     /* external reference to a COMDAT */
-	CMD_COMDAT = 0xc2,     /* initialized communal data record */
-	CMD_COMDAT32 = 0xc3,     /* initialized 32-bit communal data record */
-	CMD_COMD32 = 0xc3,     /* initialized 32-bit communal data record */
-	CMD_LINSYM = 0xc4,     /* LINNUM for a COMDAT */
-	CMD_LINSYM32 = 0xc5,     /* 32-bit LINNUM for a COMDAT */
-	CMD_LINS32 = 0xc5,     /* 32-bit LINNUM for a COMDAT */
-	CMD_ALIAS = 0xc6,     /* alias definition record          */
-	CMD_NBKPAT = 0xc8,     /* named backpatch record (quick c?) */
-	CMD_NBKPAT32 = 0xc9,     /* 32-bit named backpatch record */
-	CMD_NBKP32 = 0xc9,     /* 32-bit named backpatch record */
-	CMD_LLNAMES = 0xca,     /* a "local" lnames */
-	CMD_VERNUM = 0xcc,     /* TIS version number record        */
-	CMD_VENDEXT = 0xce,     /* TIS vendor extension record      */
-	CMD_MAX_CMD = 0xce      /* maximum cmd enum                 */
-} omf_cmd;
+using namespace std;
+using namespace BinaryFormat;
 
-BOOL fShowRelocations = FALSE;
-BOOL fShowRawSectionData = FALSE;
-BOOL fShowSymbolTable = FALSE;
-BOOL fShowLineNumbers = FALSE;
-BOOL fShowIATentries = FALSE;
-BOOL fShowPDATA = FALSE;
-BOOL fShowResources = FALSE;
-BOOL fShowMachineType = FALSE;
+i386RelocTypes i386Relocations[] =
+{
+	{IMAGE_REL_I386_ABSOLUTE, "ABSOLUTE"},
+	{IMAGE_REL_I386_DIR16, "DIR16"},
+	{IMAGE_REL_I386_REL16, "REL16"},
+	{IMAGE_REL_I386_DIR32, "DIR32"},
+	{IMAGE_REL_I386_DIR32NB, "DIR32NB"},
+	{IMAGE_REL_I386_SEG12, "SEG12"},
+	{IMAGE_REL_I386_SECTION, "SECTION"},
+	{IMAGE_REL_I386_SECREL, "SECREL"},
+	{IMAGE_REL_I386_REL32, "REL32"}
+};
+#define I386RELOCTYPECOUNT (sizeof(i386Relocations) / sizeof(i386RelocTypes))
+
+DWORD_FLAG_DESCRIPTIONS SectionCharacteristics[] =
+{
+	{IMAGE_SCN_TYPE_DSECT, "DSECT"},
+	{IMAGE_SCN_TYPE_NOLOAD, "NOLOAD"},
+	{IMAGE_SCN_TYPE_GROUP, "GROUP"},
+	{IMAGE_SCN_TYPE_NO_PAD, "NO_PAD"},
+	{IMAGE_SCN_TYPE_COPY, "COPY"},
+	{IMAGE_SCN_CNT_CODE, "CODE"},
+	{IMAGE_SCN_CNT_INITIALIZED_DATA, "INITIALIZED_DATA"},
+	{IMAGE_SCN_CNT_UNINITIALIZED_DATA, "UNINITIALIZED_DATA"},
+	{IMAGE_SCN_LNK_OTHER, "OTHER"},
+	{IMAGE_SCN_LNK_INFO, "INFO"},
+	{IMAGE_SCN_TYPE_OVER, "OVER"},
+	{IMAGE_SCN_LNK_REMOVE, "REMOVE"},
+	{IMAGE_SCN_LNK_COMDAT, "COMDAT"},
+	{IMAGE_SCN_MEM_PROTECTED, "PROTECTED"},
+	{IMAGE_SCN_MEM_FARDATA, "FARDATA"},
+	{IMAGE_SCN_MEM_SYSHEAP, "SYSHEAP"},
+	{IMAGE_SCN_MEM_PURGEABLE, "PURGEABLE"},
+	{IMAGE_SCN_MEM_LOCKED, "LOCKED"},
+	{IMAGE_SCN_MEM_PRELOAD, "PRELOAD"},
+	{IMAGE_SCN_LNK_NRELOC_OVFL, "NRELOC_OVFL"},
+	{IMAGE_SCN_MEM_DISCARDABLE, "DISCARDABLE"},
+	{IMAGE_SCN_MEM_NOT_CACHED, "NOT_CACHED"},
+	{IMAGE_SCN_MEM_NOT_PAGED, "NOT_PAGED"},
+	{IMAGE_SCN_MEM_SHARED, "SHARED"},
+	{IMAGE_SCN_MEM_EXECUTE, "EXECUTE"},
+	{IMAGE_SCN_MEM_READ, "READ"},
+	{IMAGE_SCN_MEM_WRITE, "WRITE"},
+	{IMAGE_SCN_ALIGN_1BYTES,"1_BYTE_ALIGN"},
+	{IMAGE_SCN_ALIGN_2BYTES,"2_BYTE_ALIGN"},
+	{IMAGE_SCN_ALIGN_4BYTES,"4_BYTE_ALIGN"},
+	{IMAGE_SCN_ALIGN_8BYTES,"8_BYTE_ALIGN"},
+	{IMAGE_SCN_ALIGN_16BYTES,"16_BYTE_ALIGN"},
+	{IMAGE_SCN_ALIGN_32BYTES,"32_BYTE_ALIGN"},
+	{IMAGE_SCN_ALIGN_64BYTES,"64_BYTE_ALIGN"},
+	{IMAGE_SCN_ALIGN_128BYTES,"128_BYTE_ALIGN"},
+	{IMAGE_SCN_ALIGN_256BYTES,"256_BYTE_ALIGN"},
+	{IMAGE_SCN_ALIGN_512BYTES,"512_BYTE_ALIGN"},
+	{IMAGE_SCN_ALIGN_1024BYTES,"1024_BYTE_ALIGN"},
+	{IMAGE_SCN_ALIGN_2048BYTES,"2048_BYTE_ALIGN"},
+	{IMAGE_SCN_ALIGN_4096BYTES,"4096_BYTE_ALIGN"},
+	{IMAGE_SCN_ALIGN_8192BYTES,"8192_BYTE_ALIGN"},
+
+};
+
+#define NUMBER_SECTION_CHARACTERISTICS (sizeof(SectionCharacteristics) / sizeof(DWORD_FLAG_DESCRIPTIONS))
+
+bool fShowRelocations = false;
+bool fShowRawSectionData = false;
+bool fShowSymbolTable = false;
+bool fShowLineNumbers = false;
+bool fShowIATentries = false;
+bool fShowPDATA = false;
+bool fShowResources = false;
+bool fShowMachineType = false;
 BYTE* fileBgn = 0;
 BYTE* fileEnd = 0;
 __int64 fileSize = 0;
 int OutOfRange = 0;
 char* filename = 0;
 
-#if defined(IMAGE_SIZEOF_ROM_OPTIONAL_HEADER)
-#define ADD_DUMP_ROM_IMAGE
-#else
-#undef ADD_DUMP_ROM_IMAGE
-#endif
-
-void showVersion()
-{
-	printf("PEDUMP - Win32/Win64 COFF EXE/OBJ/LIB file dumper) v1.0 (C) Copyright 2025 Christopher D. Wade.\n");
-	printf("All Rights Reserved\n");
-}
-
-void showHelp()
-{
-	showVersion();
-	printf("Syntax: pedump [switches] filename\n\n");
-	printf("  /A include everything in dump\n");
-	printf("  /B show base relocations (def=%s)\n", fShowRelocations ? "on" : "off");
-	printf("  /H include hex dump of sections (def=%s)\n", fShowRawSectionData ? "on" : "off");
-	printf("  /I include Import Address Table thunk addresses (def=%s)\n", fShowIATentries ? "on" : "off");
-	printf("  /L include line number information (def=%s)\n", fShowLineNumbers ? "on" : "off");
-	printf("  /P include PDATA (runtime functions) (def=%s)\n", fShowPDATA ? "on" : "off");
-	printf("  /R include detailed resources (stringtables and dialogs) (def=%s)\n", fShowResources ? "on" : "off");
-	printf("  /M Show ONLY machine type. (def=%s)\n", fShowMachineType ? "on" : "off");
-	printf("  /S show symbol table (def=%s)\n", fShowSymbolTable ? "on" : "off");
-	printf("  /? show this help, and exit(0)\n\n");
-	printf(" Note machine type is always shown, but with the /M switch, only that will be shown.\n");
-	printf(" Switches must be space separated, and may optionally be followed by +|-,\n");
-	printf(" denoting ON or OFF. Switch alone will be assumed ON. Switches may also use '-'\n");
-	printf(" instead of '/', and may be in lower case.\n\n");
-}
-
-int IsAddressInRange(BYTE* bgn, int len)
-{
-	if (fileBgn && fileEnd && fileSize)
-	{
-		if (bgn >= fileBgn)
-		{
-			BYTE* end = bgn + len;
-			if ((end >= fileBgn) && (end < fileEnd))
-			{
-				return 1;
-			}
-		}
-	}
-	OutOfRange++;
-	return 0;
-}
-
-const char* RecNumberToName(byte code)
-{
-	switch (code & ~1) {
-		case CMD_RHEADR:
-			return("RHEADR");
-		case CMD_REGINT:
-			return("REGINT");
-		case CMD_REDATA:
-			return("REDATA");
-		case CMD_RIDATA:
-			return("RIDATA");
-		case CMD_OVLDEF:
-			return("OVLDEF");
-		case CMD_ENDREC:
-			return("ENDREC");
-		case CMD_BLKDEF:
-			return("BLKDEF");
-		case CMD_BLKEND:
-			return("BLKEND");
-		case CMD_DEBSYM:
-			return("DEBSYM");
-		case CMD_THEADR:
-			return("THEADR");
-		case CMD_LHEADR:
-			return("LHEADR");
-		case CMD_PEDATA:
-			return("PEDATA");
-		case CMD_PIDATA:
-			return("PIDATA");
-		case CMD_COMENT:
-			return("COMENT");
-		case CMD_MODEND:
-			return("MODEND");
-		case CMD_EXTDEF:
-			return("EXTDEF");
-		case CMD_TYPDEF:
-			return("TYPDEF");
-		case CMD_PUBDEF:
-			return("PUBDEF");
-		case CMD_LOCSYM:
-			return("LOCSYM");
-		case CMD_LINNUM:
-			return("LINNUM");
-		case CMD_LNAMES:
-			return("LNAMES");
-		case CMD_SEGDEF:
-			return("SEGDEF");
-		case CMD_GRPDEF:
-			return("GRPDEF");
-		case CMD_FIXUPP:
-			return("FIXUPP");
-		case CMD_LEDATA:
-			return("LEDATA");
-		case CMD_LIDATA:
-			return("LIDATA");
-		case CMD_LIBHED:
-			return("LIBHED");
-		case CMD_LIBNAM:
-			return("LIBNAM");
-		case CMD_LIBLOC:
-			return("LIBLOC");
-		case CMD_LIBDIC:
-			return("LIBDIC");
-		case CMD_COMDEF:
-			return("COMDEF");
-		case CMD_STATIC_EXTDEF:
-			return("static EXTDEF");
-		case CMD_STATIC_PUBDEF:
-			return("static PUBDEF");
-		case CMD_STATIC_COMDEF:
-			return("static COMDEF");
-		case CMD_BAKPAT:
-			return("BAKPAT");
-		case CMD_CEXTDEF:
-			return("CEXTDF");
-		case CMD_COMDAT:
-			return("COMDAT");
-		case CMD_LINSYM:
-			return("LINSYM");
-		case CMD_ALIAS:
-			return("ALIAS");
-		case CMD_NBKPAT:
-			return("NBKPAT");
-		case CMD_LLNAMES:
-			return("LLNAME");
-		default:
-			return("**??**");
-	}
-}
-
-int DumpMemMap(LPVOID lpFileBase)
-{
-	int iret = 0;
-
-	PIMAGE_DOS_HEADER dosHeader = (PIMAGE_DOS_HEADER)lpFileBase;
-	WORD eMagic = dosHeader->e_magic;
-	PIMAGE_FILE_HEADER pImgFileHdr = (PIMAGE_FILE_HEADER)lpFileBase;
-	DWORD minSize = (sizeof(IMAGE_DOS_HEADER) > sizeof(IMAGE_FILE_HEADER)) ? (DWORD)sizeof(IMAGE_DOS_HEADER) : (DWORD)sizeof(IMAGE_FILE_HEADER);
-	int listed = is_listed_machine_type(pImgFileHdr->Machine);
-
-	if (eMagic == IMAGE_DOS_SIGNATURE)
-	{
-		DumpExeFile(dosHeader);
-	}
-	else if (eMagic == IMAGE_SEPARATE_DEBUG_SIGNATURE)
-	{
-		DumpDbgFile((PIMAGE_SEPARATE_DEBUG_HEADER)lpFileBase);
-	}
-	else if (listed)
-	{
-		if (0 == pImgFileHdr->SizeOfOptionalHeader)
-		{
-			DumpObjFile(pImgFileHdr);
-		}
-
-#ifdef ADD_DUMP_ROM_IMAGE
-		else if (pImgFileHdr->SizeOfOptionalHeader == IMAGE_SIZEOF_ROM_OPTIONAL_HEADER)
-		{
-			DumpROMImage((PIMAGE_ROM_HEADERS)pImgFileHdr);
-		}
-#endif  
-	}
-	else if (0 == strncmp((char*)lpFileBase, IMAGE_ARCHIVE_START, IMAGE_ARCHIVE_START_SIZE))
-	{
-		DumpLibFile(lpFileBase);
-	}
-
-#ifdef ADD_PDB_DUMP
-	else if (IsPdbFile((char*)lpFileBase, fileSize))
-	{
-		DumpPdbFile((char*)lpFileBase, fileSize);
-	}
-#endif   
-	else
-	{
-		unsigned char cksum = 0;
-		unsigned int RecLen = 0, RecNum = 0, offset = 0;
-		unsigned char* RecBuff = (unsigned char*)lpFileBase;
-		int index;
-
-		while (true)
-		{
-			bool IsMS386 = RecBuff[offset] & 1;
-			char* tmp = (char*)((IsMS386) ? "386" : "");
-			const char* recname = RecNumberToName(RecBuff[offset]);
-			unsigned char type = RecBuff[offset];
-			RecLen = RecBuff[offset + 1] | (RecBuff[offset + 2] << 8);
-			cksum = RecBuff[offset + RecLen + 2];
-			printf("\n%s%s(%02x) recnum:%u, offset:0x%08x, len:0x%04x, chksum:0x%02x\n", recname, tmp, RecBuff[offset], ++RecNum, offset, RecLen, cksum);
-			//char* name = NULL;
-			int nameLength = 0;
-			byte        c_bits;
-			byte        c_class;
-			unsigned int start = 0;
-			switch (type)
-			{
-				case CMD_THEADR: {
-					nameLength = RecBuff[offset + 3];
-					char* name = new char[nameLength + 1];
-					for (int i = 0; i <= nameLength; i++) name[i] = RecBuff[offset + i + 3];
-					printf("source file name : \"%s\"\n", name);
-					break;
-				}
-				case CMD_COMENT: {
-					c_bits = RecBuff[offset + 3];
-					c_class = RecBuff[offset + 4];
-					nameLength = RecBuff[offset + 5];
-					char* name = new char[nameLength + 1];
-					for (int i = 0; i < nameLength; i++) name[i] = RecBuff[offset + i + 6];
-					printf("bits 0x%02x, class 0x%02x, language translator : \"%s\"\n", c_bits, c_class, name);
-					break;
-				}
-				case CMD_LNAMES: {
-					index = 1;
-					start = offset + 3;
-					while ((start - offset + 3) <= RecLen) {
-						nameLength = RecBuff[start];
-						char* name1 = new char[nameLength + 1];
-						for (int i = 0; i < nameLength; i++) name1[i] = RecBuff[start + i + 1];
-						printf("%d - \"%s\"\n", index, name1);
-						start += nameLength + 1;
-						index++;
-					}
-					break;
-				case CMD_SEGDEF: {
-					start = offset + 3;
-					byte acbp = RecBuff[start];
-					byte align = acbp >> 5;
-					break;
-				}
-				default:
-					//printf("Unknown : %d (0x%02x)\n", type, type);
-					break;
-				}
-			}
-			HexDump(&RecBuff[offset + 3], RecLen - 1);
-			offset += RecLen + 3;
-			if (!strcmp(recname, "MODEND")) break;
-			iret = 2;
-		}
-	}
-	HexDump((BYTE*)lpFileBase, (DWORD)fileSize);
-	return iret;
-}
-
-int DumpFile(LPSTR filename)
-{
-	int iret = 0;
-
-	DiskType dt = is_file_or_directory64(filename);
-	if (dt != MDT_FILE)
-	{
-		printf("Error: Unable to 'stat' file '%s'!\n", filename);
-		return 1;
-	}
-	fileSize = get_last_file_size64();
-	if (fileSize < sizeof(IMAGE_FILE_HEADER))
-	{
-		printf("Warning: File '%s' appears too small at %I64u bytes...\n", filename, fileSize);
-	}
-
-	HANDLE hFile = CreateFileA(filename, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
-	if (hFile == INVALID_HANDLE_VALUE)
-	{
-		printf("Error: Couldn't open file '%s' with CreateFile()\n", filename);
-		return 1;
-	}
-	HANDLE hFileMapping = CreateFileMapping(hFile, NULL, PAGE_READONLY, 0, 0, NULL);
-	if (hFileMapping == 0)
-	{
-		CloseHandle(hFile);
-		printf("Error: Couldn't open file mapping with CreateFileMapping()\n");
-		return 1;
-	}
-	LPVOID lpFileBase = MapViewOfFile(hFileMapping, FILE_MAP_READ, 0, 0, 0);
-	if (lpFileBase == 0)
-	{
-		CloseHandle(hFileMapping);
-		CloseHandle(hFile);
-		printf("Error: Couldn't map view of file with MapViewOfFile()\n");
-		return 1;
-	}
-	if (!fShowMachineType)
-	{
-		printf("Dump of file %s, %lld bytes...\n\n", filename, fileSize);
-	}
-	fileBgn = (BYTE*)lpFileBase;
-	fileEnd = fileBgn + fileSize;
-	iret = DumpMemMap(lpFileBase);
-	UnmapViewOfFile(lpFileBase);
-	CloseHandle(hFileMapping);
-	CloseHandle(hFile);
-	return iret;
-}
-
 
 int ProcessCommandLine(int argc, char* argv[])
 {
-	int iret = 0;
-	int i, c, c2;
-	char* arg;
-	char* sarg;
-	BOOL sw;
+	ArgLitPtr help = argLit0("hH?", "help", "print this help and exit");
+	ArgLitPtr version = argLit0("vV", "version", "print version information and exit");
+	ArgLitPtr all = argLit0("aA", "ALL", "include everything in dump");
+	ArgLitPtr base = argLit0("bB", "BASE", "show base relocations");
+	ArgLitPtr hex = argLit0("eE", "HEX", "include hex dump of sections");
+	ArgLitPtr import = argLit0("iI", "IMPORT", "include Import Address Table thunk addresses");
+	ArgLitPtr line = argLit0("lL", "LINE", "include line number information");
+	ArgLitPtr pdata = argLit0("pP", "PDATA", "include PDATA (runtime functions)");
+	ArgLitPtr resources = argLit0("rR", "RESOURCES", "include detailed resources (stringtables and dialogs)");
+	ArgLitPtr machine = argLit0("mM", "MACHINE", "Show ONLY machine type");
+	ArgLitPtr symbol = argLit0("sS", "SYMBOL", "show symbol table");
+	ArgFilePtr infile = argFile1(NULL, NULL, NULL, "input file");
+	ArgEndPtr end = argEnd(20);
+	const char* progname = "PEDump";
+	int exitcode = 0, nerrors = 0;
+	void* argtable[] = { all, base, hex, import, line,  pdata, resources, machine, symbol, help, version, infile, end };
+	printf("PEDUMP - Win32/Win64 COFF EXE/OBJ/LIB file dumper v1.0 (C) Copyright 2025 Christopher D. Wade.\n");
+	printf("All Rights Reserved\n");
 
-	for (i = 1; i < argc; i++)
+	if (argNullCheck(argtable) != 0)
 	{
-		arg = argv[i];
-		c = *arg;
-
-		if (strcmp(arg, "--help") == 0)
-		{
-			showHelp();
-			return 2;
-		}
-		else if (strcmp(arg, "--version") == 0)
-		{
-			showVersion();
-			return 2;
-		}
-		if ((c == '-') || (c == '/'))
-		{
-			sarg = &arg[1];
-			while (*sarg == '-')
-			{
-				sarg++;
-			}
-			c = *sarg;
-			c2 = 0;
-			sw = TRUE;
-			if (c)
-			{
-				sarg++;
-				c2 = *sarg;
-
-				if (c2)
-				{
-					if (c2 == '+')
-					{
-						sw = TRUE;
-					}
-					else if (c2 == '-')
-					{
-						sw = FALSE;
-					}
-					else
-					{
-						printf("Error: Switches can only be followed by '+' or '-', not %c!\n", c2);
-						return 1;
-					}
-				}
-			}
-			switch (c)
-			{
-				case 'A':
-				case 'a':
-					fShowRelocations = sw;
-					fShowRawSectionData = sw;
-					fShowSymbolTable = sw;
-					fShowLineNumbers = sw;
-					fShowIATentries = sw;
-					fShowPDATA = sw;
-					fShowResources = sw;
-					break;
-				case 'H':
-				case 'h':
-					fShowRawSectionData = sw;
-					break;
-				case 'L':
-				case 'l':
-					fShowLineNumbers = sw;
-					break;
-				case 'P':
-				case 'p':
-					fShowPDATA = sw;
-					break;
-				case 'B':
-				case 'b':
-					fShowRelocations = sw;
-					break;
-				case 'S':
-				case 's':
-					fShowSymbolTable = sw;
-					break;
-				case 'I':
-				case 'i':
-					fShowIATentries = sw;
-					break;
-				case 'R':
-				case 'r':
-					fShowResources = sw;
-					break;
-				case 'M':
-				case 'm':
-					fShowMachineType = sw;
-					break;
-				case '?':
-					showHelp();
-					return 2;
-				default:
-					printf("Error: Unknown command '%s'\n",
-						arg
-					);
-					return 1;
-			}
-		}
-		else
-		{
-			if (filename)
-			{
-				printf("Error: Already have file '%s'! What is this '%s'\n", filename, arg);
-				return 1;
-			}
-			filename = _strdup(arg);
-		}
+		printf("%s: insufficient memory\n", progname);
+		exit(1);
+	}
+	nerrors = argParse(argc, argv, argtable);
+	if (help->count > 0 || argc == 1)
+	{
+		printf("\nUsage: %s", progname);
+		argPrintSyntax(stdout, argtable, "\n\n");
+		argPrintGlossary(stdout, argtable, "  %-35s %s\n");
+		exit(1);
+	}
+	if (version->count > 0)
+	{
+		printf("PEDUMP - Win32/Win64 COFF EXE/OBJ/LIB file dumper v1.0 (C) Copyright 2025 Christopher D. Wade.\n");
+		printf("All Rights Reserved\n");
+		exit(1);
+	}
+	if (nerrors > 0)
+	{
+		argPrintErrors(stdout, end, progname);
+		printf("Try '%s --help' for more information.\n", progname);
+		exit(1);
+	}
+	fShowRawSectionData = hex->count > 0;
+	fShowLineNumbers = line->count > 0;
+	fShowPDATA = pdata->count > 0;
+	fShowRelocations = base->count > 0;
+	fShowSymbolTable = symbol->count > 0;
+	fShowIATentries = import->count > 0;
+	fShowResources = resources->count > 0;
+	fShowMachineType = machine->count > 0;
+	if (all->count > 0)
+	{
+		fShowRelocations = true;
+		fShowRawSectionData = true;
+		fShowSymbolTable = true;
+		fShowLineNumbers = true;
+		fShowIATentries = true;
+		fShowPDATA = true;
+		fShowResources = true;
+		fShowMachineType = true;
+	}
+	if (infile->count > 0)
+	{
+		filename = (char*)infile->filename[0];
 	}
 	return 0;
 }
 
+void hexdump(const void* data, size_t size) {
+	const unsigned char* p = reinterpret_cast<const unsigned char*>(data);
+	const int bytes_per_row = 16;
+	size_t offset = 0;
+
+	while (offset < size) {
+		// Print the address offset
+		cout << hex << setw(8) << setfill('0') << offset << "  ";
+
+		// Print the hexadecimal representation
+		for (int i = 0; i < bytes_per_row; ++i) {
+			if (i > 0 && i % 8 == 0) {
+				cout << " "; // Add extra space after 8 bytes
+			}
+			if (offset + i < size) {
+				cout << hex << setw(2) << setfill('0') << static_cast<unsigned int>(p[offset + i]) << " ";
+			}
+			else {
+				cout << "   "; // Pad with spaces for the last line
+			}
+		}
+
+		// Print the ASCII character representation
+		cout << " ";
+		for (int i = 0; i < bytes_per_row; ++i) {
+			if (offset + i < size) {
+				char ch = static_cast<char>(p[offset + i]);
+				// Check if the character is printable; otherwise, print a dot
+				cout << (isprint(static_cast<unsigned char>(ch)) ? ch : '.');
+			}
+		}
+		cout << endl;
+		offset += bytes_per_row;
+	}
+}
+
+void DumpFileHeader(PIMAGE_FILE_HEADER pImageFileHeader)
+{
+	UINT headerFieldWidth = 30;
+	WORD nSects = pImageFileHeader->NumberOfSections;
+	PSTR mt = GetMachineTypeName(pImageFileHeader->Machine);
+
+	if (pImageFileHeader)
+	{
+		printf("FILE HEADER VALUES\n");
+		printf("  %-*s%04X (%s)\n", headerFieldWidth, "Machine:", pImageFileHeader->Machine, mt);
+		printf("  %-*s%08X (%d)\n", headerFieldWidth, "Number of Sections:", nSects, nSects);
+		printf("  %-*s%08X\n", headerFieldWidth, "TimeDateStamp:", pImageFileHeader->TimeDateStamp);
+		printf("  %-*s%08X\n", headerFieldWidth, "PointerToSymbolTable:", pImageFileHeader->PointerToSymbolTable);
+		printf("  %-*s%08X (%d)\n", headerFieldWidth, "NumberOfSymbols:", pImageFileHeader->NumberOfSymbols, pImageFileHeader->NumberOfSymbols);
+		printf("  %-*s%04X (%d)\n", headerFieldWidth, "SizeOfOptionalHeader:", pImageFileHeader->SizeOfOptionalHeader, pImageFileHeader->SizeOfOptionalHeader);
+		WORD Chars = pImageFileHeader->Characteristics;
+		printf("  %-*s%04X\n", headerFieldWidth, "Characteristics:", Chars);
+	}
+}
+
+void GetObjRelocationName(WORD type, PSTR buffer, DWORD cBytes)
+{
+	DWORD i;
+
+	for (i = 0; i < I386RELOCTYPECOUNT; i++)
+	{
+		if (type == i386Relocations[i].type)
+		{
+			strncpy(buffer, i386Relocations[i].name, cBytes);
+			return;
+		}
+	}
+	sprintf(buffer, "???_%X", type);
+}
+
+void DumpSection(int i, OBJSectionPtr ptr)
+{
+	PIMAGE_SECTION_HEADER section = &ptr->header;
+	printf("SECTION HEADER #%X (%d)\n", i, i);
+	printf("%8.8s name\n", section->Name);
+	printf("% 8X physical address\n", section->Misc.PhysicalAddress);
+	printf("% 8X virtual address\n", section->VirtualAddress);
+	printf("% 8X (%d) size of raw data\n", section->SizeOfRawData, section->SizeOfRawData);
+	printf("% 8X file pointer to raw data (%08X to %08X)\n", section->PointerToRawData, section->PointerToRawData, (section->PointerToRawData + section->SizeOfRawData - 1));
+	printf("% 8X file pointer to relocation table\n", section->PointerToRelocations);
+	printf("% 8X file pointer to line numbers\n", section->PointerToLinenumbers);
+	printf("% 8X number of relocations\n", section->NumberOfRelocations);
+	printf("% 8X number of line numbers\n", section->NumberOfLinenumbers);
+	DWORD Chars = section->Characteristics;
+	printf("% 8X flags (", Chars);
+	for (int j = 0; j < NUMBER_SECTION_CHARACTERISTICS; j++)
+	{
+		DWORD flag = SectionCharacteristics[j].flag;
+
+		if (Chars & flag)
+		{
+			printf("%s ", SectionCharacteristics[j].name);
+			Chars &= ~flag;
+
+			if (Chars == 0)
+			{
+				break;
+			}
+		}
+	}
+	printf("\b)\n\n");
+	if (section->PointerToRawData > 0 && section->SizeOfRawData > 0 && ptr->sectionBuffer != nullptr)
+	{
+		printf("RAW DATA #%X (%d)\n", i, i);
+		hexdump(ptr->sectionBuffer, section->SizeOfRawData);
+	}
+	if (section->PointerToRelocations > 0 && section->NumberOfRelocations > 0 && ptr->relocation != nullptr)
+	{
+		char szTypeName[32];
+		printf("SECTION HEADER #%X (%d) RELOCATIONS\n", i, i);
+		for (int k = 0; k < section->NumberOfRelocations; k++)
+		{
+			GetObjRelocationName(ptr->relocation[k].Type, szTypeName, sizeof(szTypeName));
+			printf("  Address: %08X  SymIndex: %08X  Type: %s\n", ptr->relocation[k].VirtualAddress, ptr->relocation[k].SymbolTableIndex, szTypeName);
+		}
+	}
+	if (section->PointerToLinenumbers > 0 && section->NumberOfLinenumbers > 0 && ptr->lineNumbers != nullptr)
+	{
+		for (int j = 0; j < section->NumberOfLinenumbers; j++)
+		{
+			if (ptr->lineNumbers[j].Linenumber == 0)
+			{
+				printf("Symbol Table Index: %08X  Line: %04u\n", ptr->lineNumbers[j].Type.SymbolTableIndex, ptr->lineNumbers[j].Linenumber);
+			}
+			else
+			{
+				printf("Virtual Address   : %08X  Line: %04u\n", ptr->lineNumbers[j].Type.VirtualAddress, ptr->lineNumbers[j].Linenumber);
+			}
+
+		}
+	}
+	printf("\n\n");
+}
+
+void GetSectionName(WORD section, PSTR buffer, unsigned cbBuffer)
+{
+	char tempbuffer[10];
+
+	switch ((SHORT)section)
+	{
+		case IMAGE_SYM_UNDEFINED:
+			strcpy(tempbuffer, "UNDEF");
+			break;
+		case IMAGE_SYM_ABSOLUTE:
+			strcpy(tempbuffer, "ABS");
+			break;
+		case IMAGE_SYM_DEBUG:
+			strcpy(tempbuffer, "DEBUG");
+			break;
+		default:
+			sprintf(tempbuffer, "%X", section);
+	}
+	strncpy(buffer, tempbuffer, cbBuffer - 1);
+}
+
+void DumpSymbolTable(COFFSymbolTable* pSymTab)
+{
+	printf("Symbol Table - %d entries  (* = auxillary symbol)\n", pSymTab->GetNumberOfSymbols());
+	printf("Indx Sectn   Value   Type  Storage Name\n");
+	printf("---- ----- -------- ----- -------  --------\n");
+	PCOFFSymbol pSymbol = pSymTab->GetNextSymbol(0);
+	while (pSymbol)
+	{
+		char szSection[10];
+		GetSectionName(pSymbol->GetSectionNumber(), szSection, sizeof(szSection));
+		printf("%04X %5s %08X  %s %-8s %s\n", pSymbol->GetIndex(), szSection, pSymbol->GetValue(), pSymbol->GetTypeName(), pSymbol->GetStorageClassName(), pSymbol->GetName());
+		if (pSymbol->GetNumberOfAuxSymbols())
+		{
+			char szAuxSymbol[1024];
+
+			if (pSymbol->GetAuxSymbolAsString(szAuxSymbol, sizeof(szAuxSymbol)))
+			{
+				printf("     * %s\n", szAuxSymbol);
+			}
+		}
+		pSymbol = pSymTab->GetNextSymbol(pSymbol);
+	}
+}
 int main(int argc, char* argv[])
 {
-	int iret = 0;
-	if (argc == 1)
+	ProcessCommandLine(argc, argv);
+	printf("Dump of file %s\n", filename);
+	MemoryMappedFile* mmfile = new MemoryMappedFile((char*)filename);
+	char* buffer = mmfile->getBuffer();
+	FileType fileType = getFileType(buffer);
+	LONGLONG fileSize = mmfile->getFileSize();
+	printf("file size %lld bytes\n", fileSize);
+	switch (fileType)
 	{
-		showHelp();
-		return 1;
-	}
-	iret = ProcessCommandLine(argc, argv);
-	if (iret)
-	{
-		if (iret == 2)
+		case EXE:
+			printf("exe file\n");
+			break;
+		case DEBUG:
+			break;
+		case OBJ:
 		{
-			iret = 0;
+			printf("File Type: COFF OBJECT\n\n");
+			OBJFilePtr data = loadObjFile(buffer, fileSize);
+			DumpFileHeader(&data->header);
+			printf("\n");
+			int i = 1;
+			for (OBJSectionPtr ptr : data->sectionTable)
+			{
+				DumpSection(i, ptr);
+				i++;
+			}
+			DumpSymbolTable(data->symbolTable);
+			break;
 		}
-		return iret;
+		case ANONYMOUS:
+			printf("anonymous obj file\n");
+			break;
+		case LIB:
+			printf("lib file\n");
+			break;
+		default:
+			cout << "unknown file type" << endl;
+			break;
 	}
-	if (filename)
-	{
-		iret = DumpFile(filename);
-	}
-	else
-	{
-		showHelp();
-		printf("Error: No file name found in command!\n");
-		iret = 1;
-	}
-	if (OutOfRange)
-	{
-		printf("TODO: Note had %d out-of-range addresses!\n", OutOfRange);
-	}
-	show_dll_list();
-	if (cMachineType[0])
-	{
-		printf("%s\n", cMachineType);
-	}
-	if (!fShowMachineType)
-	{
-		printf("\n");
-	}
-	return iret;
+	delete mmfile;
+	return 0;
 }
 

@@ -73,18 +73,22 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>..\..\..\bin\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\bin\intermediate\PEDump\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>C:\projects\ProjectJarvis\source\tools\BinaryFormat;C:\projects\ProjectJarvis\source\tools\Arguments;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>..\..\..\bin\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\bin\intermediate\PEDump\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>C:\projects\ProjectJarvis\source\tools\BinaryFormat;C:\projects\ProjectJarvis\source\tools\Arguments;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>..\..\..\bin\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\bin\intermediate\PEDump\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>C:\projects\ProjectJarvis\source\tools\BinaryFormat;C:\projects\ProjectJarvis\source\tools\Arguments;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>..\..\..\bin\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\bin\intermediate\PEDump\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>C:\projects\ProjectJarvis\source\tools\BinaryFormat;C:\projects\ProjectJarvis\source\tools\Arguments;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -123,6 +127,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <LinkTimeCodeGeneration />
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -162,39 +167,25 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <LinkTimeCodeGeneration />
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="COFFSymbolTable.cpp" />
-    <ClCompile Include="Common.cpp" />
-    <ClCompile Include="DbgDump.cpp" />
-    <ClCompile Include="EXEDump.cpp" />
-    <ClCompile Include="LibDump.cpp" />
-    <ClCompile Include="ObjDump.cpp" />
-    <ClCompile Include="PDBDump.cpp" />
     <ClCompile Include="PEDump.cpp" />
-    <ClCompile Include="ResDump.cpp" />
-    <ClCompile Include="ROMImage.cpp" />
     <ClCompile Include="SPrintf.cxx" />
-    <ClCompile Include="SymbolTableSupport.cpp" />
     <ClCompile Include="Utilities.cxx" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="coffsymboltable.h" />
     <ClInclude Include="common.h" />
-    <ClInclude Include="cv_dbg.h" />
-    <ClInclude Include="dbgdump.h" />
-    <ClInclude Include="exedump.h" />
-    <ClInclude Include="extrnvar.h" />
-    <ClInclude Include="libdump.h" />
-    <ClInclude Include="objdump.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="pdbdump.h" />
-    <ClInclude Include="resdump.h" />
-    <ClInclude Include="romimage.h" />
-    <ClInclude Include="sprtf.hxx" />
-    <ClInclude Include="symboltablesupport.h" />
-    <ClInclude Include="utils.hxx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Arguments\Arguments.vcxproj">
+      <Project>{fe883520-0f4b-494d-bf5e-714adb7881a3}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\BinaryFormat\BinaryFormat.vcxproj">
+      <Project>{d11c0fc7-5917-4d0d-894f-d3a11bd0fe8d}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

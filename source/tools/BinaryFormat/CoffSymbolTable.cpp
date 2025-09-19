@@ -58,6 +58,11 @@ void COFFSymbol::CleanUp(void)
 	m_pszShortString = 0;
 }
 
+PIMAGE_SYMBOL COFFSymbol::GetSymbol()
+{
+	return m_pSymbolData;
+}
+
 PSTR COFFSymbol::GetName()
 {
 	if (!m_pSymbolData)
@@ -105,7 +110,7 @@ BOOL COFFSymbol::GetAuxSymbolAsString(PSTR pszBuffer, unsigned cbBuffer)
 	}
 	else if ((m_pSymbolData->StorageClass == IMAGE_SYM_CLASS_STATIC))
 	{
-		sprintf(pszBuffer, "Section: %04X  Len: %05X  Relocs: %04X  LineNums: %04X", auxSym->Section.Number, auxSym->Section.Length, auxSym->Section.NumberOfRelocations, auxSym->Section.NumberOfLinenumbers);
+		sprintf(pszBuffer, "Section: %04X  Len: %05X  Relocs: %04X  LineNums: %04X checksum:%08X", auxSym->Section.Number, auxSym->Section.Length, auxSym->Section.NumberOfRelocations, auxSym->Section.NumberOfLinenumbers,auxSym->Section.CheckSum);
 	}
 	else
 	{

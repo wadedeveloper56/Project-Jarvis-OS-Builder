@@ -52,6 +52,7 @@ class COFFSymbol
 public:
 	COFFSymbol(PIMAGE_SYMBOL pSymbolData, PSTR pStringTable, DWORD index);
 	~COFFSymbol();
+	PIMAGE_SYMBOL GetSymbol();
 	DWORD GetIndex();
 	PSTR  GetName();
 	DWORD GetValue();
@@ -81,12 +82,6 @@ public:
 };
 typedef COFFSymbolTable* PCOFFSymbolTable;
 
-typedef struct SymbolTableEntry
-{
-	IMAGE_SYMBOL symbol;
-	vector<PIMAGE_AUX_SYMBOL> auxSymbols;
-}SymbolTableEntry, * SymbolTableEntryPtr, ** SymbolTableEntryPtrPtr;
-
 typedef struct OBJSection
 {
 	IMAGE_SECTION_HEADER header;
@@ -99,7 +94,7 @@ typedef struct _OBJFile
 {
 	IMAGE_FILE_HEADER header;
 	vector<OBJSectionPtr> sectionTable;
-	vector<SymbolTableEntryPtr> symbolTable;
+	PCOFFSymbolTable symbolTable;
 }OBJFile, * OBJFilePtr, ** OBJFilePtrPtr;
 
 #define MakePtr( cast, ptr, addValue ) (cast)( (BYTE *)(ptr) + (DWORD)(addValue))
@@ -111,3 +106,4 @@ FileType getFileType(char* buffer);
 PSTR GetMachineTypeName(WORD wMachineType);
 int islistedMachineType(WORD wMachineType);
 OBJFilePtr loadObjFile(char* buffer, LONGLONG fileSize);
+
