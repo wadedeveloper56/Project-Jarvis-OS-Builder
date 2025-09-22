@@ -156,26 +156,6 @@ int ProcessCommandLine(int argc, char* argv[])
 	return 0;
 }
 
-void DumpFileHeader(PIMAGE_FILE_HEADER pImageFileHeader)
-{
-	UINT headerFieldWidth = 30;
-	WORD nSects = pImageFileHeader->NumberOfSections;
-	PSTR mt = GetMachineTypeName(pImageFileHeader->Machine);
-
-	if (pImageFileHeader)
-	{
-		printf("FILE HEADER VALUES\n");
-		printf("  %-*s%04X (%s)\n", headerFieldWidth, "Machine:", pImageFileHeader->Machine, mt);
-		printf("  %-*s%08X (%d)\n", headerFieldWidth, "Number of Sections:", nSects, nSects);
-		printf("  %-*s%08X\n", headerFieldWidth, "TimeDateStamp:", pImageFileHeader->TimeDateStamp);
-		printf("  %-*s%08X\n", headerFieldWidth, "PointerToSymbolTable:", pImageFileHeader->PointerToSymbolTable);
-		printf("  %-*s%08X (%d)\n", headerFieldWidth, "NumberOfSymbols:", pImageFileHeader->NumberOfSymbols, pImageFileHeader->NumberOfSymbols);
-		printf("  %-*s%04X (%d)\n", headerFieldWidth, "SizeOfOptionalHeader:", pImageFileHeader->SizeOfOptionalHeader, pImageFileHeader->SizeOfOptionalHeader);
-		WORD Chars = pImageFileHeader->Characteristics;
-		printf("  %-*s%04X\n", headerFieldWidth, "Characteristics:", Chars);
-	}
-}
-
 void GetObjRelocationName(WORD type, PSTR buffer, DWORD cBytes)
 {
 	DWORD i;
@@ -221,7 +201,7 @@ void DumpSection(int i, OBJSectionPtr ptr)
 			}
 		}
 	}
-	printf("\b)\n\n");
+	printf(")\n\n");
 	if (section->PointerToRawData > 0 && section->SizeOfRawData > 0 && ptr->sectionBuffer != nullptr)
 	{
 		printf("RAW DATA #%X (%d)\n", i, i);
@@ -300,6 +280,101 @@ void DumpSymbolTable(COFFSymbolTable* pSymTab)
 	}
 }
 
+void DumpDOSHeader(PIMAGE_DOS_HEADER dosHeader)
+{
+	printf("DOS HEADER VALUES\n");
+	printf("  % 16X Magic number\n", dosHeader->e_magic);
+	printf("  % 16X Bytes on last page of file\n", dosHeader->e_cblp);
+	printf("  % 16X Pages in file\n", dosHeader->e_cp);
+	printf("  % 16X Relocations\n", dosHeader->e_crlc);
+	printf("  % 16X Size of header in paragraphs\n", dosHeader->e_cparhdr);
+	printf("  % 16X Minimum extra paragraphs needed\n", dosHeader->e_minalloc);
+	printf("  % 16X Maximum extra paragraphs needed\n", dosHeader->e_maxalloc);
+	printf("  % 16X Initial (relative) SS value\n", dosHeader->e_ss);
+	printf("  % 16X Initial SP value\n", dosHeader->e_sp);
+	printf("  % 16X Checksum\n", dosHeader->e_csum);
+	printf("  % 16X Initial IP value\n", dosHeader->e_ip);
+	printf("  % 16X Initial (relative) CS value\n", dosHeader->e_cs);
+	printf("  % 16X File address of relocation table\n", dosHeader->e_lfarlc);
+	printf("  % 16X Overlay number\n", dosHeader->e_ovno);
+	printf("  % 16X OEM identifier (for e_oeminfo)\n", dosHeader->e_oemid);
+	printf("  % 16X OEM information e_oemid specific\n", dosHeader->e_oeminfo);
+	printf("  % 16X File address of new exe header\n", dosHeader->e_lfanew);
+}
+
+void DumpFileHeader(PIMAGE_FILE_HEADER pImageFileHeader)
+{
+	PSTR mt = GetMachineTypeName(pImageFileHeader->Machine);
+	printf("FILE HEADER VALUES\n");
+	printf("  % 16X Machine (%s)\n", pImageFileHeader->Machine, mt);
+	printf("  % 16X (%d) Number of Sections\n", pImageFileHeader->NumberOfSections, pImageFileHeader->NumberOfSections);
+	printf("  % 16X TimeDateStamp\n", pImageFileHeader->TimeDateStamp);
+	printf("  % 16X PointerToSymbolTable\n", pImageFileHeader->PointerToSymbolTable);
+	printf("  % 16X (%d) NumberOfSymbols\n", pImageFileHeader->NumberOfSymbols, pImageFileHeader->NumberOfSymbols);
+	printf("  % 16X (%d) SizeOfOptionalHeader\n", pImageFileHeader->SizeOfOptionalHeader, pImageFileHeader->SizeOfOptionalHeader);
+	printf("  % 16X Flags\n", pImageFileHeader->Characteristics);
+}
+
+void DumpOptionalHeader64(PIMAGE_OPTIONAL_HEADER64 optionalHeader)
+{
+	printf("OPTIONAL HEADER VALUES\n");
+	printf("  % 16X magic\n", optionalHeader->Magic);
+	printf("  % 13u.%02u linker version\n", optionalHeader->MajorLinkerVersion, optionalHeader->MinorLinkerVersion);
+	printf("  % 16X (%ld) size of code\n", optionalHeader->SizeOfCode, optionalHeader->SizeOfCode);
+	printf("  % 16X (%ld) size of initialized data\n", optionalHeader->SizeOfInitializedData, optionalHeader->SizeOfInitializedData);
+	printf("  % 16X (%ld) size of uninitialized data\n", optionalHeader->SizeOfUninitializedData, optionalHeader->SizeOfUninitializedData);
+	printf("  % 16X entry point\n", optionalHeader->AddressOfEntryPoint);
+	printf("  % 16X base of code\n", optionalHeader->BaseOfCode);
+	printf("  % 16llX image base (%llX to %llX)\n", (LONGLONG)optionalHeader->ImageBase, (LONGLONG)optionalHeader->ImageBase, (LONGLONG)(optionalHeader->ImageBase + optionalHeader->SizeOfImage - 1));
+	printf("  % 16X section alignment\n", optionalHeader->SectionAlignment);
+	printf("  % 16X file alignment\n", optionalHeader->FileAlignment);
+	printf("  % 13u.%02u operating system version\n", optionalHeader->MajorOperatingSystemVersion, optionalHeader->MinorOperatingSystemVersion);
+	printf("  % 13u.%02u image version\n", optionalHeader->MajorImageVersion, optionalHeader->MinorImageVersion);
+	printf("  % 13u.%02u subsystem version\n", optionalHeader->MajorSubsystemVersion, optionalHeader->MinorSubsystemVersion);
+	printf("  % 16X Win32 version\n", optionalHeader->Win32VersionValue);
+	printf("  % 16X size of image\n", optionalHeader->SizeOfImage);
+	printf("  % 16X size of headers\n", optionalHeader->SizeOfHeaders);
+	printf("  % 16X checksum\n", optionalHeader->Win32VersionValue);
+	printf("  % 16X subsystem(Windows CUI)\n", optionalHeader->Subsystem);
+	printf("  % 16X DLL characteristics\n", optionalHeader->DllCharacteristics);
+	printf("  % 16llX size of stack reserve\n", optionalHeader->SizeOfStackReserve);
+	printf("  % 16llX size of stack commit\n", optionalHeader->SizeOfStackCommit);
+	printf("  % 16llX size of heap reserve\n", optionalHeader->SizeOfHeapReserve);
+	printf("  % 16llX size of heap commit\n", optionalHeader->SizeOfHeapCommit);
+	printf("  % 16X loader flags\n", optionalHeader->LoaderFlags);
+	printf("  % 16X number of directories\n", optionalHeader->NumberOfRvaAndSizes);
+}
+
+void DumpOptionalHeader32(PIMAGE_OPTIONAL_HEADER32 optionalHeader)
+{
+	printf("OPTIONAL HEADER VALUES\n");
+	printf("  % 16X magic\n", optionalHeader->Magic);
+	printf("  % 13u.%02u linker version\n", optionalHeader->MajorLinkerVersion, optionalHeader->MinorLinkerVersion);
+	printf("  % 16X (%ld) size of code\n", optionalHeader->SizeOfCode, optionalHeader->SizeOfCode);
+	printf("  % 16X (%ld) size of initialized data\n", optionalHeader->SizeOfInitializedData, optionalHeader->SizeOfInitializedData);
+	printf("  % 16X (%ld) size of uninitialized data\n", optionalHeader->SizeOfUninitializedData, optionalHeader->SizeOfUninitializedData);
+	printf("  % 16X entry point\n", optionalHeader->AddressOfEntryPoint);
+	printf("  % 16X base of code\n", optionalHeader->BaseOfCode);
+	printf("  % 16llX image base (%llX to %llX)\n", (LONGLONG)optionalHeader->ImageBase, (LONGLONG)optionalHeader->ImageBase, (LONGLONG)(optionalHeader->ImageBase + optionalHeader->SizeOfImage - 1));
+	printf("  % 16X section alignment\n", optionalHeader->SectionAlignment);
+	printf("  % 16X file alignment\n", optionalHeader->FileAlignment);
+	printf("  % 13u.%02u operating system version\n", optionalHeader->MajorOperatingSystemVersion, optionalHeader->MinorOperatingSystemVersion);
+	printf("  % 13u.%02u image version\n", optionalHeader->MajorImageVersion, optionalHeader->MinorImageVersion);
+	printf("  % 13u.%02u subsystem version\n", optionalHeader->MajorSubsystemVersion, optionalHeader->MinorSubsystemVersion);
+	printf("  % 16X Win32 version\n", optionalHeader->Win32VersionValue);
+	printf("  % 16X size of image\n", optionalHeader->SizeOfImage);
+	printf("  % 16X size of headers\n", optionalHeader->SizeOfHeaders);
+	printf("  % 16X checksum\n", optionalHeader->Win32VersionValue);
+	printf("  % 16X subsystem(Windows CUI)\n", optionalHeader->Subsystem);
+	printf("  % 16X DLL characteristics\n", optionalHeader->DllCharacteristics);
+	printf("  % 16X size of stack reserve\n", optionalHeader->SizeOfStackReserve);
+	printf("  % 16X size of stack commit\n", optionalHeader->SizeOfStackCommit);
+	printf("  % 16X size of heap reserve\n", optionalHeader->SizeOfHeapReserve);
+	printf("  % 16X size of heap commit\n", optionalHeader->SizeOfHeapCommit);
+	printf("  % 16X loader flags\n", optionalHeader->LoaderFlags);
+	printf("  % 16X number of directories\n", optionalHeader->NumberOfRvaAndSizes);
+}
+
 int main(int argc, char* argv[])
 {
 	ProcessCommandLine(argc, argv);
@@ -312,8 +387,23 @@ int main(int argc, char* argv[])
 	switch (fileType)
 	{
 		case EXE:
-			printf("exe file\n");
+		{
+			printf("File Type: PE EXECUTABLE IMAGE\n");
+			EXEFilePtr data = loadExeFile(buffer, fileSize);
+			DumpDOSHeader(&data->dosHeader);
+			DumpFileHeader(&data->FileHeader);
+			if (data->is64)
+				DumpOptionalHeader64(&data->OptionalHeader64);
+			else
+				DumpOptionalHeader32(&data->OptionalHeader32);
+			int i = 1;
+			for (OBJSectionPtr ptr : data->sectionTable)
+			{
+				DumpSection(i, ptr);
+				i++;
+			}
 			break;
+		}
 		case DEBUG:
 			break;
 		case OBJ:
@@ -332,7 +422,7 @@ int main(int argc, char* argv[])
 			printf("\nString Table Size = 0x%0X (%ld) bytes %lld entries\n", data->stringTableSize, data->stringTableSize, (LONGLONG)data->stringTable.size());
 			int j = 0;
 			for (const auto& s : data->stringTable) {
-				printf("stringtable[% 4d] = %s\n",j,s.c_str());
+				printf("stringtable[% 4d] = %s\n", j, s.c_str());
 				j++;
 			}
 			break;
