@@ -122,10 +122,68 @@ FileType getFileType(char* buffer)
 	return UNKNOWN;
 }
 
+void hexdump(const void* data, size_t size) {
+	const unsigned char* p = reinterpret_cast<const unsigned char*>(data);
+	const int bytes_per_row = 16;
+	size_t offset = 0;
+
+	while (offset < size) {
+		// Print the address offset
+		cout << hex << setw(8) << setfill('0') << offset << "  ";
+
+		// Print the hexadecimal representation
+		for (int i = 0; i < bytes_per_row; ++i) {
+			if (i > 0 && i % 8 == 0) {
+				cout << " "; // Add extra space after 8 bytes
+			}
+			if (offset + i < size) {
+				cout << hex << setw(2) << setfill('0') << static_cast<unsigned int>(p[offset + i]) << " ";
+			}
+			else {
+				cout << "   "; // Pad with spaces for the last line
+			}
+		}
+
+		// Print the ASCII character representation
+		cout << " ";
+		for (int i = 0; i < bytes_per_row; ++i) {
+			if (offset + i < size) {
+				char ch = static_cast<char>(p[offset + i]);
+				// Check if the character is printable; otherwise, print a dot
+				cout << (isprint(static_cast<unsigned char>(ch)) ? ch : '.');
+			}
+		}
+		cout << endl;
+		offset += bytes_per_row;
+	}
+}
+
+string getStringFromTable(const char* stringTable, size_t index) 
+{
+	if (index < 4) {
+		throw out_of_range("Invalid string table index.");
+	}
+	const char* str = stringTable + index;
+	return string(str);
+}
+
 OBJFilePtr loadObjFile(char* buffer, LONGLONG fileSize)
 {
 	OBJFilePtr result = new OBJFile;
 	PIMAGE_FILE_HEADER pImgFileHdr = (PIMAGE_FILE_HEADER)buffer;
+	PIMAGE_SECTION_HEADER section = MakePtr(PIMAGE_SECTION_HEADER, (pImgFileHdr + 1), pImgFileHdr->SizeOfOptionalHeader);
+	PIMAGE_SYMBOL symbolTableEntry = MakePtr(PIMAGE_SYMBOL, pImgFileHdr, pImgFileHdr->PointerToSymbolTable);
+	DWORD* stringtable = MakePtr(DWORD*, symbolTableEntry, (sizeof(IMAGE_SYMBOL)*pImgFileHdr->NumberOfSymbols));
+	result->stringTableSize = *stringtable;
+	const char* pStringTable = reinterpret_cast<char*>(stringtable);
+	for (size_t i = 4; i < result->stringTableSize; ++i) {
+		if (pStringTable[i] != '\0') {
+			result->stringTable.push_back(getStringFromTable(pStringTable, i));
+			while (i < result->stringTableSize && pStringTable[i] != '\0') {
+				i++;
+			}
+		}
+	}
 	result->header.Machine = pImgFileHdr->Machine;
 	result->header.NumberOfSections = pImgFileHdr->NumberOfSections;
 	result->header.TimeDateStamp = pImgFileHdr->TimeDateStamp;
@@ -133,8 +191,6 @@ OBJFilePtr loadObjFile(char* buffer, LONGLONG fileSize)
 	result->header.NumberOfSymbols = pImgFileHdr->NumberOfSymbols;
 	result->header.SizeOfOptionalHeader = pImgFileHdr->SizeOfOptionalHeader;
 	result->header.Characteristics = pImgFileHdr->Characteristics;
-	PIMAGE_SECTION_HEADER section = MakePtr(PIMAGE_SECTION_HEADER, (pImgFileHdr + 1), pImgFileHdr->SizeOfOptionalHeader);
-	PIMAGE_SYMBOL symbolTableEntry = MakePtr(PIMAGE_SYMBOL, pImgFileHdr, pImgFileHdr->PointerToSymbolTable);
 	result->symbolTable = new COFFSymbolTable(symbolTableEntry, pImgFileHdr->NumberOfSymbols);
 	for (int i = 1; i <= pImgFileHdr->NumberOfSections; i++)
 	{
@@ -165,7 +221,7 @@ OBJFilePtr loadObjFile(char* buffer, LONGLONG fileSize)
 		if (section->PointerToRelocations > 0 && section->NumberOfRelocations > 0)
 		{
 			ptr->relocation = new IMAGE_RELOCATION[section->NumberOfRelocations];
-			char szTypeName[32];
+			//char szTypeName[32];
 			//printf("SECTION HEADER #%X (%d) RELOCATIONS\n", i, i);
 			for (int k = 0; k < section->NumberOfRelocations; k++)
 			{

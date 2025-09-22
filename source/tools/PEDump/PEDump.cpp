@@ -156,42 +156,6 @@ int ProcessCommandLine(int argc, char* argv[])
 	return 0;
 }
 
-void hexdump(const void* data, size_t size) {
-	const unsigned char* p = reinterpret_cast<const unsigned char*>(data);
-	const int bytes_per_row = 16;
-	size_t offset = 0;
-
-	while (offset < size) {
-		// Print the address offset
-		cout << hex << setw(8) << setfill('0') << offset << "  ";
-
-		// Print the hexadecimal representation
-		for (int i = 0; i < bytes_per_row; ++i) {
-			if (i > 0 && i % 8 == 0) {
-				cout << " "; // Add extra space after 8 bytes
-			}
-			if (offset + i < size) {
-				cout << hex << setw(2) << setfill('0') << static_cast<unsigned int>(p[offset + i]) << " ";
-			}
-			else {
-				cout << "   "; // Pad with spaces for the last line
-			}
-		}
-
-		// Print the ASCII character representation
-		cout << " ";
-		for (int i = 0; i < bytes_per_row; ++i) {
-			if (offset + i < size) {
-				char ch = static_cast<char>(p[offset + i]);
-				// Check if the character is printable; otherwise, print a dot
-				cout << (isprint(static_cast<unsigned char>(ch)) ? ch : '.');
-			}
-		}
-		cout << endl;
-		offset += bytes_per_row;
-	}
-}
-
 void DumpFileHeader(PIMAGE_FILE_HEADER pImageFileHeader)
 {
 	UINT headerFieldWidth = 30;
@@ -335,6 +299,7 @@ void DumpSymbolTable(COFFSymbolTable* pSymTab)
 		pSymbol = pSymTab->GetNextSymbol(pSymbol);
 	}
 }
+
 int main(int argc, char* argv[])
 {
 	ProcessCommandLine(argc, argv);
@@ -343,7 +308,7 @@ int main(int argc, char* argv[])
 	char* buffer = mmfile->getBuffer();
 	FileType fileType = getFileType(buffer);
 	LONGLONG fileSize = mmfile->getFileSize();
-	printf("file size %lld bytes\n", fileSize);
+	printf("File Size %lld bytes\n", fileSize);
 	switch (fileType)
 	{
 		case EXE:
@@ -364,6 +329,12 @@ int main(int argc, char* argv[])
 				i++;
 			}
 			DumpSymbolTable(data->symbolTable);
+			printf("\nString Table Size = 0x%0X (%ld) bytes %lld entries\n", data->stringTableSize, data->stringTableSize, (LONGLONG)data->stringTable.size());
+			int j = 0;
+			for (const auto& s : data->stringTable) {
+				printf("stringtable[% 4d] = %s\n",j,s.c_str());
+				j++;
+			}
 			break;
 		}
 		case ANONYMOUS:

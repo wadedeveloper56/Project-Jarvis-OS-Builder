@@ -95,6 +95,8 @@ typedef struct _OBJFile
 	IMAGE_FILE_HEADER header;
 	vector<OBJSectionPtr> sectionTable;
 	PCOFFSymbolTable symbolTable;
+	DWORD stringTableSize;
+	vector<string> stringTable;
 }OBJFile, * OBJFilePtr, ** OBJFilePtrPtr;
 
 #define MakePtr( cast, ptr, addValue ) (cast)( (BYTE *)(ptr) + (DWORD)(addValue))
@@ -105,5 +107,6 @@ WORD getFileMagic(char* buffer);
 FileType getFileType(char* buffer);
 PSTR GetMachineTypeName(WORD wMachineType);
 int islistedMachineType(WORD wMachineType);
+void hexdump(const void* data, size_t size);
 OBJFilePtr loadObjFile(char* buffer, LONGLONG fileSize);
 
