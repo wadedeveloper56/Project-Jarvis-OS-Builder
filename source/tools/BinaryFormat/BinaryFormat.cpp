@@ -134,6 +134,7 @@ char* get_ctime_stg(time_t* pt)
 	char* pts = ctime(pt);
 	return pts;
 }
+
 string getStringFromTable(const char* stringTable, size_t index)
 {
 	if (index < 4) {

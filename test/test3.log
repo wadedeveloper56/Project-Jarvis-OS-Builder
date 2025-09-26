@@ -28,8 +28,8 @@ FILE HEADER VALUES
                  0 PointerToSymbolTable
                  0 (0) NumberOfSymbols
                 F0 (240) SizeOfOptionalHeader
-                22 Flags (EXECUTABLE_IMAGE LARGE_ADDRESS_AWARE )
-OPTIONAL HEADER VALUES
+                22 Flags (Executable Application can handle large (>2GB) addresses )
+OPTIONAL HEADER VALUES (PE32+)
                20B magic
              14.44 linker version
              14000 (81920) size of code
@@ -47,14 +47,30 @@ OPTIONAL HEADER VALUES
              2E000 size of image
                400 size of headers
                  0 checksum
-                 3 subsystem(Windows CUI)
-              8160 DLL characteristics
+                 3 subsystem (Windows character)
+              8160 DLL characteristics (HIGH_ENTROPY_VIRTUAL_ADDRESSES DYNAMIC_BASE NX_COMPATIBLE TERMINAL_SERVER_AWARE )
             100000 size of stack reserve
               1000 size of stack commit
             100000 size of heap reserve
               1000 size of heap commit
                  0 loader flags
                 10 number of directories
+                 0 [       0] RVA [size] of Export Directory
+             18A34 [     104] RVA [size] of Import Directory
+             2C000 [     1E0] RVA [size] of Resource Directory
+             2B000 [     6D8] RVA [size] of Exception Directory
+                 0 [       0] RVA [size] of Security Directory
+             2D000 [      3C] RVA [size] of Base Relocation Directory
+             17BB0 [      70] RVA [size] of Debug Directory
+                 0 [       0] RVA [size] of Architecture Directory
+                 0 [       0] RVA [size] of Global Pointer Directory
+                 0 [       0] RVA [size] of TLS Directory
+             17A70 [     140] RVA [size] of Load Configuration Directory
+                 0 [       0] RVA [size] of Bound Import Directory
+             15000 [     2B8] RVA [size] of Import Address Table Directory
+                 0 [       0] RVA [size] of Delay Import Directory
+                 0 [       0] RVA [size] of COM Descriptor Directory
+                 0 [       0] RVA [size] of Reserved Directory
 SECTION HEADER #1 (1)
    .text name
    13EDC physical address
@@ -65,7 +81,7 @@ SECTION HEADER #1 (1)
        0 file pointer to line numbers
        0 number of relocations
        0 number of line numbers
-60000020 flags (CODE EXECUTE READ )
+60000020 flags (CODE EXECUTABLE READABLE )
 
 
 
@@ -79,7 +95,7 @@ SECTION HEADER #2 (2)
        0 file pointer to line numbers
        0 number of relocations
        0 number of line numbers
-40000040 flags (INITIALIZED_DATA READ )
+40000040 flags (INITIALIZED_DATA READABLE )
 
 
 
@@ -93,7 +109,7 @@ SECTION HEADER #3 (3)
        0 file pointer to line numbers
        0 number of relocations
        0 number of line numbers
-C0000040 flags (INITIALIZED_DATA READ WRITE )
+C0000040 flags (INITIALIZED_DATA READABLE WRITEABLE )
 
 
 
@@ -107,7 +123,7 @@ SECTION HEADER #4 (4)
        0 file pointer to line numbers
        0 number of relocations
        0 number of line numbers
-40000040 flags (INITIALIZED_DATA READ )
+40000040 flags (INITIALIZED_DATA READABLE )
 
 
 
@@ -121,7 +137,7 @@ SECTION HEADER #5 (5)
        0 file pointer to line numbers
        0 number of relocations
        0 number of line numbers
-40000040 flags (INITIALIZED_DATA READ )
+40000040 flags (INITIALIZED_DATA READABLE )
 
 
 
@@ -135,7 +151,7 @@ SECTION HEADER #6 (6)
        0 file pointer to line numbers
        0 number of relocations
        0 number of line numbers
-42000040 flags (INITIALIZED_DATA DISCARDABLE READ )
+42000040 flags (INITIALIZED_DATA DISCARDABLE READABLE )
 
 
 

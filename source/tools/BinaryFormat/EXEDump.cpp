@@ -4,30 +4,38 @@
 
 using namespace std;
 
-const char* SzDebugFormats[] = {
-"UNKNOWN/BORLAND","COFF","CODEVIEW","FPO","MISC","EXCEPTION","FIXUP",
-"OMAP_TO_SRC", "OMAP_FROM_SRC" };
+const char* SzDebugFormats[] = { "UNKNOWN/BORLAND","COFF","CODEVIEW","FPO","MISC","EXCEPTION","FIXUP", "OMAP_TO_SRC", "OMAP_FROM_SRC" };
 
-DWORD GetImgDirEntryRVA(bool Is32, PVOID pNTHdr, DWORD IDE)
+DWORD GetImgDirEntryRVA(bool Is64, PVOID pNTHdr, DWORD IDE)
 {
 	DWORD rva = 0;
-	if (Is32) {
-		PIMAGE_NT_HEADERS32 p32 = (PIMAGE_NT_HEADERS32)pNTHdr;
-		rva = p32->OptionalHeader.DataDirectory[IDE].VirtualAddress;
-	}
-	else {
+	if (Is64) {
 		PIMAGE_NT_HEADERS64 p64 = (PIMAGE_NT_HEADERS64)pNTHdr;
 		rva = p64->OptionalHeader.DataDirectory[IDE].VirtualAddress;
+	}
+	else {
+		PIMAGE_NT_HEADERS32 p32 = (PIMAGE_NT_HEADERS32)pNTHdr;
+		rva = p32->OptionalHeader.DataDirectory[IDE].VirtualAddress;
 	}
 	return rva;
 }
 
-PIMAGE_SECTION_HEADER GetSectionHeader(PSTR name, PIMAGE_NT_HEADERS32 pNTHeader)
+PIMAGE_SECTION_HEADER GetSectionHeader(bool Is64, PSTR name, PVOID pNTHeader)
 {
-	PIMAGE_SECTION_HEADER section = IMAGE_FIRST_SECTION(pNTHeader);
-	unsigned i;
+	PIMAGE_SECTION_HEADER section;
+	int numberOfSections;
+	if (Is64) {
+		PIMAGE_NT_HEADERS64 p64 = (PIMAGE_NT_HEADERS64)pNTHeader;
+		section = IMAGE_FIRST_SECTION(p64);
+		numberOfSections = p64->FileHeader.NumberOfSections;
+	}
+	else {
+		PIMAGE_NT_HEADERS32 p32 = (PIMAGE_NT_HEADERS32)pNTHeader;
+		section = IMAGE_FIRST_SECTION(p32);
+		numberOfSections = p32->FileHeader.NumberOfSections;
+	}
 
-	for (i = 0; i < pNTHeader->FileHeader.NumberOfSections; i++, section++)
+	for (int i = 0; i < numberOfSections; i++, section++)
 	{
 		if (0 == strncmp((char*)section->Name, name, IMAGE_SIZEOF_SHORT_NAME))
 			return section;
@@ -36,26 +44,37 @@ PIMAGE_SECTION_HEADER GetSectionHeader(PSTR name, PIMAGE_NT_HEADERS32 pNTHeader)
 	return 0;
 }
 
-DWORD GetImgDirEntrySize(bool Is32, PVOID pNTHdr, DWORD IDE)
+DWORD GetImgDirEntrySize(bool Is64, PVOID pNTHdr, DWORD IDE)
 {
 	DWORD size = 0;
-	if (Is32) {
-		PIMAGE_NT_HEADERS32 p32 = (PIMAGE_NT_HEADERS32)pNTHdr;
-		size = p32->OptionalHeader.DataDirectory[IDE].Size;
-	}
-	else {
+	if (Is64) {
 		PIMAGE_NT_HEADERS64 p64 = (PIMAGE_NT_HEADERS64)pNTHdr;
 		size = p64->OptionalHeader.DataDirectory[IDE].Size;
+	}
+	else {
+		PIMAGE_NT_HEADERS32 p32 = (PIMAGE_NT_HEADERS32)pNTHdr;
+		size = p32->OptionalHeader.DataDirectory[IDE].Size;
 	}
 	return size;
 
 }
 
-PIMAGE_SECTION_HEADER GetEnclosingSectionHeader(DWORD rva, PIMAGE_NT_HEADERS32 pNTHeader)
+PIMAGE_SECTION_HEADER GetEnclosingSectionHeader(bool Is64, DWORD rva, PVOID pNTHeader)
 {
-	PIMAGE_SECTION_HEADER section = IMAGE_FIRST_SECTION(pNTHeader);
+	PIMAGE_SECTION_HEADER section;
+	int numberOfSections;
+	if (Is64) {
+		PIMAGE_NT_HEADERS64 p64 = (PIMAGE_NT_HEADERS64)pNTHeader;
+		section = IMAGE_FIRST_SECTION(p64);
+		numberOfSections = p64->FileHeader.NumberOfSections;
+	}
+	else {
+		PIMAGE_NT_HEADERS32 p32 = (PIMAGE_NT_HEADERS32)pNTHeader;
+		section = IMAGE_FIRST_SECTION(p32);
+		numberOfSections = p32->FileHeader.NumberOfSections;
+	}
 
-	for (int i = 0; i < pNTHeader->FileHeader.NumberOfSections; i++, section++)
+	for (int i = 0; i < numberOfSections; i++, section++)
 	{
 		if ((rva >= section->VirtualAddress) && (rva < (section->VirtualAddress + section->Misc.VirtualSize)))
 			return section;
@@ -64,12 +83,12 @@ PIMAGE_SECTION_HEADER GetEnclosingSectionHeader(DWORD rva, PIMAGE_NT_HEADERS32 p
 	return 0;
 }
 
-LPVOID GetPtrFromRVA(DWORD rva, PIMAGE_NT_HEADERS32 pNTHeader, char* imageBase)
+LPVOID GetPtrFromRVA(bool Is64, DWORD rva, PIMAGE_NT_HEADERS32 pNTHeader, char* imageBase)
 {
 	PIMAGE_SECTION_HEADER pSectionHdr;
 	INT delta;
 
-	pSectionHdr = GetEnclosingSectionHeader(rva, pNTHeader);
+	pSectionHdr = GetEnclosingSectionHeader(Is64, rva, pNTHeader);
 	if (!pSectionHdr)
 		return 0;
 
@@ -148,6 +167,11 @@ void loadPEHeaders(EXEFilePtr result, PIMAGE_NT_HEADERS32 pImgFileHdr)
 		result->OptionalHeader32.SizeOfHeapCommit = opt32->SizeOfHeapCommit;
 		result->OptionalHeader32.LoaderFlags = opt32->LoaderFlags;
 		result->OptionalHeader32.NumberOfRvaAndSizes = opt32->NumberOfRvaAndSizes;
+		for (int i = 0; i < IMAGE_NUMBEROF_DIRECTORY_ENTRIES; i++)
+		{
+			result->OptionalHeader32.DataDirectory[i].Size = opt32->DataDirectory[i].Size;
+			result->OptionalHeader32.DataDirectory[i].VirtualAddress = opt32->DataDirectory[i].VirtualAddress;
+		}
 	}
 	else if (pImgFileHdr->OptionalHeader.Magic == IMAGE_NT_OPTIONAL_HDR64_MAGIC)
 	{
@@ -182,6 +206,11 @@ void loadPEHeaders(EXEFilePtr result, PIMAGE_NT_HEADERS32 pImgFileHdr)
 		result->OptionalHeader64.SizeOfHeapCommit = opt64->SizeOfHeapCommit;
 		result->OptionalHeader64.LoaderFlags = opt64->LoaderFlags;
 		result->OptionalHeader64.NumberOfRvaAndSizes = opt64->NumberOfRvaAndSizes;
+		for (int i = 0; i < IMAGE_NUMBEROF_DIRECTORY_ENTRIES; i++)
+		{
+			result->OptionalHeader64.DataDirectory[i].Size = opt64->DataDirectory[i].Size;
+			result->OptionalHeader64.DataDirectory[i].VirtualAddress = opt64->DataDirectory[i].VirtualAddress;
+		}
 	}
 	else
 	{
@@ -222,88 +251,32 @@ void loadPESections(EXEFilePtr result, char* buffer, PIMAGE_NT_HEADERS32 pImgFil
 	}
 }
 
-void DumpDebugDirectory(EXEFilePtr result, PIMAGE_DEBUG_DIRECTORY debugDir, DWORD size, char* base)
-{
-	DWORD cDebugFormats = size / sizeof(IMAGE_DEBUG_DIRECTORY);
-
-	if (cDebugFormats == 0)
-		return;
-
-	for (int i = 0; i < cDebugFormats; i++)
-	{
-		PIMAGE_DEBUG_DIRECTORY data = new IMAGE_DEBUG_DIRECTORY;
-		data->Characteristics = debugDir->Characteristics;
-		data->TimeDateStamp = debugDir->TimeDateStamp;
-		data->MajorVersion = debugDir->MajorVersion;
-		data->MinorVersion = debugDir->MinorVersion;
-		data->Type = debugDir->Type;
-		data->SizeOfData = debugDir->SizeOfData;
-		data->AddressOfRawData = debugDir->AddressOfRawData;
-		data->PointerToRawData = debugDir->PointerToRawData;
-		result->debug.push_back(data);
-		debugDir++;
-	}
-}
-
-void loadDebug(EXEFilePtr result, char* buffer)
-{
-	PIMAGE_DOS_HEADER dosHeader = (PIMAGE_DOS_HEADER)buffer;
-	PIMAGE_NT_HEADERS32 pNTHeader = MakePtr(PIMAGE_NT_HEADERS32, dosHeader, dosHeader->e_lfanew);
-	PIMAGE_DEBUG_DIRECTORY debugDir;
-	DWORD size;
-	DWORD va_debug_dir = GetImgDirEntryRVA(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_DEBUG);
-	PIMAGE_SECTION_HEADER header = GetSectionHeader((PSTR)".debug", pNTHeader);
-	if (header && (header->VirtualAddress == va_debug_dir))
-	{
-		debugDir = (PIMAGE_DEBUG_DIRECTORY)(header->PointerToRawData + buffer);
-		size = GetImgDirEntrySize(result->is64, pNTHeader, (DWORD)IMAGE_DIRECTORY_ENTRY_DEBUG) * sizeof(IMAGE_DEBUG_DIRECTORY);
-	}
-	else
-	{
-		header = GetEnclosingSectionHeader(va_debug_dir, pNTHeader);
-		if (!header) return;
-		size = GetImgDirEntrySize(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_DEBUG);
-		debugDir = MakePtr(PIMAGE_DEBUG_DIRECTORY, buffer, header->PointerToRawData + (va_debug_dir - header->VirtualAddress));
-	}
-	DumpDebugDirectory(result, debugDir, size, buffer);
-}
-
-void loadResources(EXEFilePtr result, bool Is64, char* base, PIMAGE_NT_HEADERS32 pNTHeader)
-{
-	DWORD resourcesRVA = GetImgDirEntryRVA(Is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_RESOURCE);
-	if (!resourcesRVA) return;
-	PIMAGE_RESOURCE_DIRECTORY resDir = (PIMAGE_RESOURCE_DIRECTORY)GetPtrFromRVA(resourcesRVA, pNTHeader, base);
-	if (!resDir) return;
-	result->resources.res.Characteristics = resDir->Characteristics;
-	result->resources.res.TimeDateStamp = resDir->TimeDateStamp;
-	result->resources.res.MajorVersion = resDir->MajorVersion;
-	result->resources.res.MinorVersion = resDir->MinorVersion;
-	result->resources.res.NumberOfNamedEntries = resDir->NumberOfNamedEntries;
-	result->resources.res.NumberOfIdEntries = resDir->NumberOfIdEntries;
-	PIMAGE_RESOURCE_DIRECTORY_ENTRY resDirEntry = (PIMAGE_RESOURCE_DIRECTORY_ENTRY)(resDir + 1);
-	for (int i = 0; i < resDir->NumberOfNamedEntries; i++) {
-		PIMAGE_RESOURCE_DIRECTORY_ENTRY ptr = new IMAGE_RESOURCE_DIRECTORY_ENTRY;
-		ptr->DataIsDirectory = resDirEntry->DataIsDirectory;
-		ptr->Id = resDirEntry->Id;
-		ptr->Name = resDirEntry->Name;
-		ptr->NameIsString = resDirEntry->NameIsString;
-		ptr->NameOffset = resDirEntry->NameOffset;
-		ptr->OffsetToData = resDirEntry->OffsetToData;
-		ptr->OffsetToDirectory = resDirEntry->OffsetToDirectory;
-		result->resources.entries.push_back(ptr);
-		resDirEntry++;
-	}
-}
-
 EXEFilePtr loadExeFile(char* buffer, LONGLONG fileSize)
 {
 	EXEFilePtr result = new EXEFile;
 	PIMAGE_DOS_HEADER dosHeader = (PIMAGE_DOS_HEADER)buffer;
-	PIMAGE_NT_HEADERS32 pImgFileHdr = MakePtr(PIMAGE_NT_HEADERS32, dosHeader, dosHeader->e_lfanew);
+	PIMAGE_NT_HEADERS32 pNTHeader = MakePtr(PIMAGE_NT_HEADERS32, dosHeader, dosHeader->e_lfanew);
 	loadDOSEXE(result, dosHeader);
-	loadPEHeaders(result, pImgFileHdr);
-	loadPESections(result, buffer, pImgFileHdr);
-	loadDebug(result, buffer);
-	loadResources(result, result->is64, buffer, pImgFileHdr);
+	loadPEHeaders(result, pNTHeader);
+	loadPESections(result, buffer, pNTHeader);
+
+	DWORD va_debug_dir = GetImgDirEntryRVA(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_DEBUG);
+	PIMAGE_SECTION_HEADER header = GetSectionHeader(result->is64, (PSTR)".debug", pNTHeader);
+	PIMAGE_DEBUG_DIRECTORY debugDir;
+	DWORD size;
+	if (header && (header->VirtualAddress == va_debug_dir))
+	{
+		debugDir = (PIMAGE_DEBUG_DIRECTORY)(header->PointerToRawData + buffer);
+		size = GetImgDirEntrySize(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_DEBUG) * sizeof(IMAGE_DEBUG_DIRECTORY);
+	}
+	else    // Look for the debug directory
+	{
+		header = GetEnclosingSectionHeader(result->is64, va_debug_dir, pNTHeader);
+		if (header)
+		{
+			size = GetImgDirEntrySize(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_DEBUG);
+			debugDir = MakePtr(PIMAGE_DEBUG_DIRECTORY, buffer, header->PointerToRawData + (va_debug_dir - header->VirtualAddress));
+		}
+	}
 	return result;
 }

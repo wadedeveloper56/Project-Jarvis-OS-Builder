@@ -140,6 +140,7 @@ typedef struct _EXEFile
 
 
 typedef enum _FileType { UNKNOWN, EXE, DEBUG, OBJ, ANONYMOUS, LIB }FileType;
+
 WORD getFileMagic(char* buffer);
 FileType getFileType(char* buffer);
 const char* GetMachineTypeName(WORD wMachineType);
@@ -147,4 +148,26 @@ int islistedMachineType(WORD wMachineType);
 void hexdump(const void* data, size_t size);
 char* get_ctime_stg(time_t* pt);
 OBJFilePtr loadObjFile(char* buffer, LONGLONG fileSize);
+
+DWORD GetImgDirEntryRVA(bool Is32, PVOID pNTHdr, DWORD IDE);
+PIMAGE_SECTION_HEADER GetSectionHeader(bool Is64, PSTR name, PVOID pNTHeader);
+DWORD GetImgDirEntrySize(bool Is32, PVOID pNTHdr, DWORD IDE);
+PIMAGE_SECTION_HEADER GetEnclosingSectionHeader(bool Is64, DWORD rva, PVOID pNTHeader);
+LPVOID GetPtrFromRVA(DWORD rva, PIMAGE_NT_HEADERS32 pNTHeader, char* imageBase);
+void loadDOSEXE(EXEFilePtr result, PIMAGE_DOS_HEADER dosHeader);
+void loadPEHeaders(EXEFilePtr result, PIMAGE_NT_HEADERS32 pImgFileHdr);
+void loadPESections(EXEFilePtr result, char* buffer, PIMAGE_NT_HEADERS32 pImgFileHdr);
+void LoadDebugDirectory(EXEFilePtr result, PIMAGE_DEBUG_DIRECTORY debugDir, DWORD size, char* base);
+void loadDebug(EXEFilePtr result, char* buffer);
+void loadResources(EXEFilePtr result, bool Is64, char* base, PIMAGE_NT_HEADERS32 pNTHeader);
 EXEFilePtr loadExeFile(char* buffer, LONGLONG fileSize);
+
+void GetObjRelocationName(WORD type, PSTR buffer, DWORD cBytes);
+void DumpSection(int i, OBJSectionPtr ptr);
+void GetSectionName(WORD section, PSTR buffer, unsigned cbBuffer);
+void DumpSymbolTable(COFFSymbolTable* pSymTab);
+void DumpDOSHeader(PIMAGE_DOS_HEADER dosHeader);
+void DumpFileHeader(PIMAGE_FILE_HEADER pImageFileHeader);
+void DumpOptionalHeader64(PIMAGE_OPTIONAL_HEADER64 optionalHeader);
+void DumpOptionalHeader32(PIMAGE_OPTIONAL_HEADER32 optionalHeader);
+
