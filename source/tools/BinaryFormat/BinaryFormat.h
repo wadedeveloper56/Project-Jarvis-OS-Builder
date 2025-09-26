@@ -117,6 +117,12 @@ typedef struct _OBJFile
 	vector<string> stringTable;
 }OBJFile, * OBJFilePtr, ** OBJFilePtrPtr;
 
+typedef struct _Resources
+{
+	IMAGE_RESOURCE_DIRECTORY res;
+	vector<PIMAGE_RESOURCE_DIRECTORY_ENTRY> entries;
+}Resources, * ResourcesPtr;
+
 typedef struct _EXEFile
 {
 	bool is64;
@@ -126,6 +132,8 @@ typedef struct _EXEFile
 	IMAGE_OPTIONAL_HEADER32 OptionalHeader32;
 	IMAGE_OPTIONAL_HEADER64 OptionalHeader64;
 	vector<OBJSectionPtr> sectionTable;
+	vector<PIMAGE_DEBUG_DIRECTORY> debug;
+	Resources resources;
 }EXEFile, * EXEFilePtr, ** EXEFilePtrPtr;
 
 #define MakePtr( cast, ptr, addValue ) (cast)( (BYTE *)(ptr) + (DWORD)(addValue))
@@ -134,8 +142,9 @@ typedef struct _EXEFile
 typedef enum _FileType { UNKNOWN, EXE, DEBUG, OBJ, ANONYMOUS, LIB }FileType;
 WORD getFileMagic(char* buffer);
 FileType getFileType(char* buffer);
-PSTR GetMachineTypeName(WORD wMachineType);
+const char* GetMachineTypeName(WORD wMachineType);
 int islistedMachineType(WORD wMachineType);
 void hexdump(const void* data, size_t size);
+char* get_ctime_stg(time_t* pt);
 OBJFilePtr loadObjFile(char* buffer, LONGLONG fileSize);
 EXEFilePtr loadExeFile(char* buffer, LONGLONG fileSize);

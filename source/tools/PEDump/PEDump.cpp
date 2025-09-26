@@ -2,7 +2,6 @@
 #include "ArgumentTable.h"
 #include "BinaryFormat.h"
 #include "MemoryMappedFile.h"
-#include "common.h"
 
 using namespace std;
 using namespace BinaryFormat;
@@ -82,6 +81,27 @@ BYTE* fileEnd = 0;
 __int64 fileSize = 0;
 int OutOfRange = 0;
 char* filename = 0;
+
+WORD_FLAG_DESCRIPTIONS ImageFileHeaderCharacteristics[] =
+{
+	{IMAGE_FILE_RELOCS_STRIPPED, "Relocation info stripped from file"},
+	{IMAGE_FILE_EXECUTABLE_IMAGE, "Executable"},
+	{IMAGE_FILE_LINE_NUMS_STRIPPED, "LINE_NUMS_STRIPPED"},
+	{IMAGE_FILE_LOCAL_SYMS_STRIPPED, "LOCAL_SYMS_STRIPPED"},
+	{IMAGE_FILE_AGGRESIVE_WS_TRIM, "AGGRESIVE_WS_TRIM"},
+	{IMAGE_FILE_LARGE_ADDRESS_AWARE, "Application can handle large (>2GB) addresses"},
+	{IMAGE_FILE_BYTES_REVERSED_LO, "BYTES_REVERSED_LO"},
+	{IMAGE_FILE_32BIT_MACHINE, "32BIT_MACHINE"},
+	{IMAGE_FILE_DEBUG_STRIPPED, "DEBUG_STRIPPED"},
+	{IMAGE_FILE_REMOVABLE_RUN_FROM_SWAP, "REMOVABLE_RUN_FROM_SWAP"},
+	{IMAGE_FILE_NET_RUN_FROM_SWAP, "NET_RUN_FROM_SWAP"},
+	{IMAGE_FILE_SYSTEM, "SYSTEM"},
+	{IMAGE_FILE_DLL, "DLL"},
+	{IMAGE_FILE_UP_SYSTEM_ONLY, "UP_SYSTEM_ONLY"},
+	{IMAGE_FILE_BYTES_REVERSED_HI, "BYTES_REVERSED_HI"}
+};
+
+#define NUMBER_IMAGE_HEADER_FLAGS (sizeof(ImageFileHeaderCharacteristics) / sizeof(WORD_FLAG_DESCRIPTIONS))
 
 
 int ProcessCommandLine(int argc, char* argv[])
@@ -204,8 +224,8 @@ void DumpSection(int i, OBJSectionPtr ptr)
 	printf(")\n\n");
 	if (section->PointerToRawData > 0 && section->SizeOfRawData > 0 && ptr->sectionBuffer != nullptr)
 	{
-		printf("RAW DATA #%X (%d)\n", i, i);
-		hexdump(ptr->sectionBuffer, section->SizeOfRawData);
+		//printf("RAW DATA #%X (%d)\n", i, i);
+		//hexdump(ptr->sectionBuffer, section->SizeOfRawData);
 	}
 	if (section->PointerToRelocations > 0 && section->NumberOfRelocations > 0 && ptr->relocation != nullptr)
 	{
@@ -304,15 +324,28 @@ void DumpDOSHeader(PIMAGE_DOS_HEADER dosHeader)
 
 void DumpFileHeader(PIMAGE_FILE_HEADER pImageFileHeader)
 {
-	PSTR mt = GetMachineTypeName(pImageFileHeader->Machine);
+	const char *mt = GetMachineTypeName(pImageFileHeader->Machine);
+	char *time = get_ctime_stg((time_t*)&pImageFileHeader->TimeDateStamp);
 	printf("FILE HEADER VALUES\n");
 	printf("  % 16X Machine (%s)\n", pImageFileHeader->Machine, mt);
 	printf("  % 16X (%d) Number of Sections\n", pImageFileHeader->NumberOfSections, pImageFileHeader->NumberOfSections);
-	printf("  % 16X TimeDateStamp\n", pImageFileHeader->TimeDateStamp);
+	printf("  % 16X TimeDateStamp ->  %s", pImageFileHeader->TimeDateStamp, time);
 	printf("  % 16X PointerToSymbolTable\n", pImageFileHeader->PointerToSymbolTable);
 	printf("  % 16X (%d) NumberOfSymbols\n", pImageFileHeader->NumberOfSymbols, pImageFileHeader->NumberOfSymbols);
 	printf("  % 16X (%d) SizeOfOptionalHeader\n", pImageFileHeader->SizeOfOptionalHeader, pImageFileHeader->SizeOfOptionalHeader);
-	printf("  % 16X Flags\n", pImageFileHeader->Characteristics);
+	WORD Chars = pImageFileHeader->Characteristics;
+	printf("  % 16X Flags (", Chars);
+	for (int i = 0; i < NUMBER_IMAGE_HEADER_FLAGS; i++)
+	{
+		WORD flag = ImageFileHeaderCharacteristics[i].flag;
+		if (Chars & flag) {
+			printf("%s ", ImageFileHeaderCharacteristics[i].name);
+			Chars &= ~flag;
+			if (Chars == 0)
+				break;
+		}
+	}
+	printf(")\n");
 }
 
 void DumpOptionalHeader64(PIMAGE_OPTIONAL_HEADER64 optionalHeader)

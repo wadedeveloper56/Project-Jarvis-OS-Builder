@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<!-- saved from url=(0028)https://onlyf8.com/pe-format -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <meta name="generator" content="Jekyll">
+
+  <title>PE Format</title>
+
+  <link rel="stylesheet" href="./PE Format_files/main.css">
+  
+  <link href="https://onlyf8.com/atom.xml" type="application/atom+xml" rel="alternate" title="ATOM Feed"> <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>PE Format | Malware-Reverse Blog</title>
+<meta name="generator" content="Jekyll v3.10.0">
+<meta property="og:title" content="PE Format">
+<meta name="author" content="Fatih YILMAZ">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="What is PE ?">
+<meta property="og:description" content="What is PE ?">
+<link rel="canonical" href="https://onlyf8.com/pe-format">
+<meta property="og:url" content="http://onlyf8.com/pe-format">
+<meta property="og:site_name" content="Malware-Reverse Blog">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2022-12-05T00:00:00+00:00">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="PE Format">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Fatih YILMAZ","url":"https://onlyf8.com"},"dateModified":"2022-12-05T00:00:00+00:00","datePublished":"2022-12-05T00:00:00+00:00","description":"What is PE ?","headline":"PE Format","mainEntityOfPage":{"@type":"WebPage","@id":"http://onlyf8.com/pe-format"},"url":"http://onlyf8.com/pe-format"}</script>
+<!-- End Jekyll SEO tag -->
+
+<script src="./PE Format_files/8ee4ea609a6346c4cf34c2b621ac79ba.js.download"></script>
+<script src="./PE Format_files/desktop_inpage_script.js.download"></script>
+</head>
+
+<body data-new-gr-c-s-check-loaded="14.1255.0" data-gr-ext-installed="">
+  <div id="wrapper">
+    <header>
+  
+  <div>
+    <a href="https://onlyf8.com/">
+    
+    <h1>onlyf8@home:~$</h1>
+    </a>
+    <div class="header-links">
+      <style>
+    .mainmenubtn {
+  color: #666;
+  cursor: pointer;
+}
+.dropdown {
+  display: inline-block;
+  position: relative;
+}
+.dropdown-child {
+  display: none;
+  position: absolute;
+  background-color: rgb(26, 5, 5);
+  min-width: 200px;
+}
+.dropdown-child a {
+  color: #666;
+  padding: 20px;
+  border: 1px outset #e2e2e2;
+  text-decoration: none;
+  display: block;
+}
+.dropdown:hover .dropdown-child {
+  display: block;
+}
+</style>
+<div class="dropdown">
+    <a href="https://onlyf8.com/pe-format"><h2 class="header-link">Türkçe </h2></a>
+    <div class="dropdown-child">
+      <a href="https://onlyf8.com/trzararliyazilim"><h2 class="header-link">Zararlı Yazılım Blog Postları</h2></a>
+      <a href="https://onlyf8.com/trdfir"><h2 class="header-link">Adli Bilişim ve Olay Müdahalesi Blog Postları</h2></a>
+    </div>
+  </div>
+  <div class="dropdown">
+    <a href="https://onlyf8.com/pe-format"><h2 class="header-link">English </h2></a>
+    <div class="dropdown-child">
+      <a href="https://onlyf8.com/enmalware"><h2 class="header-link">Malware Blog Posts</h2></a>
+      <a href="https://onlyf8.com/endfir"><h2 class="header-link">DFIR Blog Posts</h2></a>
+    </div>
+  </div>
+<a href="https://onlyf8.com/archive"><h2 class="header-link">Arşiv/Archive</h2></a>
+<a href="https://onlyf8.com/atom.xml"><h2 class="header-link">RSS Feed</h2></a>
+    </div>
+
+    
+  </div>
+</header>
+    <div class="container">
+      <section id="main_content">
+        <article>
+  <h2>PE Format</h2>
+  <time datetime="2022-12-05T00:00:00+00:00" class="by-line">05 Dec 2022</time>
+  <h1 id="what-is-pe-">What is PE ?</h1>
+
+<p>PE (Portable Executable) are files that can be moved and run between Windows systems without compatibility problems. To be portable, a common language/architecture must be defined for all devices, data that means “A” on one device must mean “A” on another device. Here, too, an architecture emerges. For example, at the 0x24 address of a portable file, it is known by all devices that the ImageBase data is represented, and the file is interpreted and executed accordingly. In this article, we will look at what is present in a PE structure in general terms and what they mean.</p>
+
+<p>” The Portable Executable (PE) format is a file format for executables, object code, DLLs and others used in 32-bit and 64-bit versions of Windows operating systems. The PE format is a data structure that encapsulates the information necessary for the Windows OS loader to manage the wrapped executable code. This includes dynamic library references for linking, API export and import tables, resource management data and thread-local storage (TLS) data. On NT operating systems, the PE format is used for EXE, DLL, SYS (device driver), MUI and other file types.” <strong>[1]</strong></p>
+
+<hr>
+
+<p><img title="PE 101" src="./PE Format_files/pe101-1.png" style="display:block; margin-right:auto; margin-left:auto; padding-bottom:20px;"></p>
+
+<p>In the image above, the detailed structure of a PE is visualized by Ange Albertini <strong>[2]</strong> . Today, various tools analyze this structure and present the appropriate output to analysts. Examples of these tools include PEBear, CFF Explorer, PEStudio, etc. So why is the information here important to us? It guides us on issues such as “What does it mean if the difference between Raw Size and Virtual Size is high?” which we will talk about in the following sections and provides certain evidence.</p>
+
+<h1 id="virtual-adress-va-vs-relative-virtual-adress-rva">Virtual Adress (VA) vs Relative Virtual Adress (RVA)</h1>
+
+<p>Virtual Address is the memory address assigned to an application. Applications running on the device cannot directly access physical memory, only virtually created memory. This virtualization structure created for the management of the RAM of the devices provides flexibility to the applications, making it easier to manage their own memory and at the same time providing security over the physical memory.</p>
+
+<p>Relative Virtual Address is the difference between two Virtual Addresses. Virtual Adress shows the actual address of the application on the memory but references the Relative Virtual Adress Image Base. So we come across the equation =&gt; <strong>RVA= VA - Image Base</strong>. For example; Whether our application’s Image Base is 0x400000 (usually the default Image Base address of user mode applications) and our Virtual Address is 0x00401000. In this case, our RVA value is 0x00001000.</p>
+
+<hr>
+
+<h1 id="dos-headers">DOS Headers</h1>
+<p>DOS Header is a 64-byte data structure and is located at the top of an executable file. This part, which does not affect the functionality of the file, was created so that the file does not pose a compatibility problem. When run on MS-DOS, the MS-DOS Stub message <strong>“This program cannot be run in DOS mode”</strong> is shown instead of the actual  program. Any PE file will not work without this header. the 64-byte data content is as follows:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>typedef struct _IMAGE_DOS_HEADER {      // DOS .EXE header
+    WORD   e_magic;                     // Magic number
+    WORD   e_cblp;                      // Bytes on last page of file
+    WORD   e_cp;                        // Pages in file
+    WORD   e_crlc;                      // Relocations
+    WORD   e_cparhdr;                   // Size of header in paragraphs
+    WORD   e_minalloc;                  // Minimum extra paragraphs needed
+    WORD   e_maxalloc;                  // Maximum extra paragraphs needed
+    WORD   e_ss;                        // Initial (relative) SS value
+    WORD   e_sp;                        // Initial SP value
+    WORD   e_csum;                      // Checksum
+    WORD   e_ip;                        // Initial IP value
+    WORD   e_cs;                        // Initial (relative) CS value
+    WORD   e_lfarlc;                    // File address of relocation table
+    WORD   e_ovno;                      // Overlay number
+    WORD   e_res[4];                    // Reserved words
+    WORD   e_oemid;                     // OEM identifier (for e_oeminfo)
+    WORD   e_oeminfo;                   // OEM information; e_oemid specific
+    WORD   e_res2[10];                  // Reserved words
+    LONG   e_lfanew;                    // File address of new exe header
+  } IMAGE_DOS_HEADER, *PIMAGE_DOS_HEADER;   
+</code></pre></div></div>
+<p><strong>[3]</strong></p>
+
+<p>There are 2 important values for us here;</p>
+
+<ol>
+  <li>e_magic: It is the first element of the DOS Header and has a constant 0x5A4D (MZ) value. This value tells us that it is a PE file.</li>
+  <li>e_lfanew: It is the last element of the DOS Header and holds the starting address of the NT Headers.</li>
+</ol>
+
+<p><img title="lfanew" src="./PE Format_files/lfanew.png" style="display:block; margin-right:auto; margin-left:auto; padding-bottom:20px;"></p>
+
+<hr>
+
+<h1 id="coff-file-header">COFF File Header</h1>
+
+<p>It is the part that comes at the beginning of a PE file or immediately after its signature.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Offset</th>
+      <th>Size</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>2</td>
+      <td>Machine</td>
+      <td>The number that identifies the type of target machine. For more information, (<a href="https://learn.microsoft.com/en-us/windows/win32/debug/pe-format#machine-types">see Machine Types</a>)</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>2</td>
+      <td>NumberOfSections</td>
+      <td>The number of sections. This indicates the size of the section table, which immediately follows the headers.</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>4</td>
+      <td>TimeDateStamp The low 32 bits of the number of seconds since 00:00 January 1, 1970 (a C run-time time_t value), which indicates when the file was created.</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>4</td>
+      <td>PointerToSymbolTable</td>
+      <td>The file offset of the COFF symbol table, or zero if no COFF symbol table is present. This value should be zero for an image because COFF debugging information is deprecated.</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>4</td>
+      <td>NumberOfSymbols</td>
+      <td>The number of entries in the symbol table. This data can be used to locate the string table, which immediately follows the symbol table. This value should be zero for an image because COFF debugging information is deprecated.</td>
+    </tr>
+    <tr>
+      <td>16</td>
+      <td>2</td>
+      <td>SizeOfOptionalHeader</td>
+      <td>The size of the optional header, which is required for executable files but not for object files. This value should be zero for an object file</td>
+    </tr>
+    <tr>
+      <td>18</td>
+      <td>2</td>
+      <td>Characteristics</td>
+      <td>The flags that indicate the attributes of the file.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>[4]</strong></p>
+
+<p>The values in the File Characteristics section are as follows:</p>
+
+<p><img title="Characteristics" src="./PE Format_files/file-characteristics.png" style="display:block; margin-right:auto; margin-left:auto; padding-bottom:20px;"></p>
+
+<hr>
+
+<h1 id="optional-headers">Optional Headers</h1>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>typedef struct _IMAGE_OPTIONAL_HEADER {
+  WORD                 Magic;
+  BYTE                 MajorLinkerVersion;
+  BYTE                 MinorLinkerVersion;
+  DWORD                SizeOfCode;
+  DWORD                SizeOfInitializedData;
+  DWORD                SizeOfUninitializedData;
+  DWORD                AddressOfEntryPoint;
+  DWORD                BaseOfCode;
+  DWORD                BaseOfData;
+  DWORD                ImageBase;
+  DWORD                SectionAlignment;
+  DWORD                FileAlignment;
+  WORD                 MajorOperatingSystemVersion;
+  WORD                 MinorOperatingSystemVersion;
+  WORD                 MajorImageVersion;
+  WORD                 MinorImageVersion;
+  WORD                 MajorSubsystemVersion;
+  WORD                 MinorSubsystemVersion;
+  DWORD                Win32VersionValue;
+  DWORD                SizeOfImage;
+  DWORD                SizeOfHeaders;
+  DWORD                CheckSum;
+  WORD                 Subsystem;
+  WORD                 DllCharacteristics;
+  DWORD                SizeOfStackReserve;
+  DWORD                SizeOfStackCommit;
+  DWORD                SizeOfHeapReserve;
+  DWORD                SizeOfHeapCommit;
+  DWORD                LoaderFlags;
+  DWORD                NumberOfRvaAndSizes;
+  IMAGE_DATA_DIRECTORY DataDirectory[IMAGE_NUMBEROF_DIRECTORY_ENTRIES];
+} IMAGE_OPTIONAL_HEADER32, *PIMAGE_OPTIONAL_HEADER32; 
+</code></pre></div></div>
+<p><strong>WORD</strong> stands for 16 bits (2 bytes) unsigned number, <strong>DWORD</strong> stands for 32 bits (4 bytes) of unsigned number.</p>
+
+<p>In general, important data include:</p>
+
+<p><strong>Magic</strong>: Specifies the type of image file. 0x010B indicates that the image file is 32-bit, 0x020B indicates that the image file is 64-bit.</p>
+
+<p><strong>SizeOfCode:</strong> Specifies the total size of executable code.</p>
+
+<p><strong>SizeOfInitializedData</strong>: This field holds the size of the initialized data (<strong>.data</strong>) section, or the sum of all initialized data sections if there are multiple sections.</p>
+
+<p><strong>SizeOfUninitializedData</strong>: This field holds the size of the uninitialized data (<strong>.bss</strong>) section, or the sum of all uninitialized data sections if there are multiple sections.</p>
+
+<p><strong>AddressOfEntryPoint</strong>: An RVA of the entry point when the file is loaded into memory. The documentation states that for program images this relative address points to the starting address and for device drivers it points to initialization function. For DLLs an entry point is optional, and in the case of entry point absence the AddressOfEntryPoint field is set to 0. We’ll talk about the sections later, but here’s a quick note:  <strong>EntryPoint at a point other than the text section is suspicious!</strong>.</p>
+
+<p><img title="Entry Point" src="./PE Format_files/entry-point.png" style="display:block; margin-right:auto; margin-left:auto; padding-bottom:20px;"></p>
+
+<p><img title="Entry Point" src="./PE Format_files/entry-point-dbg.png" style="display:block; margin-right:auto; margin-left:auto; padding-bottom:20px;"></p>
+
+<p><strong>ImageBase</strong>: Holds the value of the address from which the PE format will be loaded. For executables for 32-bit architecture, in general, this section contains a value of <strong>0x00400000</strong>. You can change this part of your compiler’s Linker settings.</p>
+
+<p><strong>[5]</strong></p>
+
+<hr>
+<h1 id="section-table">Section Table</h1>
+
+<p>Section table is the part where section definitions are made. It is found immediately after the Optional Header (if any) because there is no data in the headers pointing to this part. The position of the Section table begins where the headers end.</p>
+
+<p>The number of sections found in this table is stored in the <strong>NumberOfSections</strong> value specified in the <strong>File Header</strong> section  . Each section header (each entry value of the table) is 40 bytes and is as follows:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Offset</th>
+      <th>Size</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>8</td>
+      <td>Name</td>
+      <td>An 8-byte, null-padded UTF-8 encoded string. If the string is exactly 8 characters long, there is no terminating null. For longer names, this field contains a slash (/) that is followed by an ASCII representation of a decimal number that is an offset into the string table. Executable images do not use a string table and do not support section names longer than 8 characters. Long names in object files are truncated if they are emitted to an executable file.</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>4</td>
+      <td>VirtualSize</td>
+      <td>The size of the Section when it is loaded into memory. If this value is greater than SizeOfRawData the empty parts of the section are filled with 0’s.</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>4</td>
+      <td>VirtualAdress</td>
+      <td>For executable files, the section holds the value of the address that is relative to the Image Base when loaded into memory.</td>
+    </tr>
+    <tr>
+      <td>16</td>
+      <td>4</td>
+      <td>SizeOfRawData</td>
+      <td>For executable images, this should be a multiple of FileAlignment found in the Optional Header. If this is less than VirtualSize, the rest of the section is filled in with zero. Because the SizeOfRawData field is rounded but the VirtualSize field is not, it may be greater than the VirtualSize of SizeOfRawData. if a partition contains only uninitialized data this field must be zero.</td>
+    </tr>
+    <tr>
+      <td>20</td>
+      <td>4</td>
+      <td>PointerToRawData</td>
+      <td>The pointer value of the first page of the section in the COFF (Common Object File Format) file. For executable files, this must be a multiple of FileAlignment in the Optional Header. if a section contains only uninitialized data, this field must be zero.</td>
+    </tr>
+    <tr>
+      <td>24</td>
+      <td>4</td>
+      <td>PointerToRelocations</td>
+      <td>The pointer value of the beginning of the relocation entry values for the Section.</td>
+    </tr>
+    <tr>
+      <td>28</td>
+      <td>4</td>
+      <td>PointerToLinenumbers</td>
+      <td>The pointer value of the beginning of the line number entries for Section. If there is no COFF line number, this value is zero. This value should be zero for an image because the COFF Debug Information has been deprecated.</td>
+    </tr>
+    <tr>
+      <td>32</td>
+      <td>2</td>
+      <td>NumberOfRelocations</td>
+      <td>The number of relocation entries for Section. For executable files this value is zero.</td>
+    </tr>
+    <tr>
+      <td>34</td>
+      <td>2</td>
+      <td>NumberOfLinenumbers</td>
+      <td>The number of line number entries for Section. This value should be zero for a file because the COFF Debug Information has been deprecated.</td>
+    </tr>
+    <tr>
+      <td>36</td>
+      <td>4</td>
+      <td>Characteristics</td>
+      <td>The flags that describe the characteristics of the section. For more information, <a href="https://learn.microsoft.com/en-us/windows/win32/debug/pe-format#section-flags">see Microsoft Documentation</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>[6]</strong></p>
+
+<p><img title="Sections" src="./PE Format_files/sections.png" style="display:block; margin-right:auto; margin-left:auto; padding-bottom:20px;"></p>
+
+<hr>
+
+<h1 id="sections">Sections</h1>
+
+<p>Sections are the parts that contain the actual data of the file. The sections starts immediately after the Header section. Executable codes, variables, information about the file, etc. are found in these sections.</p>
+
+<p>Sections can externally be defined, but there are predefined sections for special purposes. You can access these special sections <a href="https://learn.microsoft.com/en-us/windows/win32/debug/pe-format#special-sections">from the Microsoft Documentation</a>. Some of the important sections are:</p>
+
+<ul>
+  <li><strong>.text</strong>: Contains the executable code.</li>
+  <li><strong>.data</strong>: It contains initialized data that is defined in the code.</li>
+  <li><strong>.bss</strong>: Contains uninitialized data.</li>
+  <li><strong>.rdata</strong>: Contains read-only initialized data.</li>
+  <li><strong>.edata</strong>: Contains the Export tables.</li>
+  <li><strong>.idata</strong>: Contains the Import tables.</li>
+  <li><strong>.rsrc</strong>: Contains the resources (icon, photo, embedded binaries) used by the file.</li>
+  <li><strong>.tls</strong>: Thread Local Storage provides storage space for threads.</li>
+</ul>
+
+<hr>
+
+<h1 id="example">Example</h1>
+
+<p>Let’s look at how to find the DLL imported in a sample file and the functions imported from these DLLs.</p>
+
+<p>First, we look at the last value of the Optional Header, Data Directories, the <strong>Import Directory RVA</strong> value. This value gives us the address of the Import table when the file is loaded into memory. For example, the program is installed at the 0x0040000 address of the memory, our Import Directory is located at the 0x004&lt; ImportDirectoryRVA &gt;. But how can we find this table in the file (file offset )?</p>
+
+<p><img title="Data Directories" src="./PE Format_files/data-directories.png" style="display:block; margin-right:auto; margin-left:auto; padding-bottom:20px;"></p>
+
+<p>We need to find out which section the value here is in. For this, we look at the Virtual Offset values of the sections.</p>
+
+<p><img title="Section Header" src="./PE Format_files/section-header.png" style="display:block; margin-right:auto; margin-left:auto; padding-bottom:20px;"></p>
+
+<ul>
+  <li><strong>Name</strong> values in the <strong>Green</strong> boxes</li>
+  <li><strong>Virtual Offset</strong> values in <strong>Red</strong> boxes</li>
+  <li><strong>Raw Offset</strong> values in <strong>Yellow</strong> boxes</li>
+</ul>
+
+<p>Here we come across the <strong>Section Table</strong> structure. Here the 12th offset value refers to the Virtual Address of this section. So the sections here are as follows:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Raw Offset</th>
+      <th>Virtual Offset</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>.text</td>
+      <td>0x400</td>
+      <td>0x1000</td>
+    </tr>
+    <tr>
+      <td>.rdata</td>
+      <td>0x1200</td>
+      <td>0x2000</td>
+    </tr>
+    <tr>
+      <td>.data</td>
+      <td>0x1E00</td>
+      <td>0x3000</td>
+    </tr>
+    <tr>
+      <td>.rsrc</td>
+      <td>0x2000</td>
+      <td>0x4000</td>
+    </tr>
+    <tr>
+      <td>.reloc</td>
+      <td>0x2200</td>
+      <td>0x5000</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>What we need to look at is which range of our Import Directory is in the <strong>Virtual Offset</strong> range? Since our value is =&gt; 0x263C, we understand from here  that it is in the <strong>.rdata</strong> section of our Import table  . The formula we will use here is:</p>
+
+<p><strong>File Offset= Raw Offset + RVA - Virtual Offset</strong> if we apply it to our examples;</p>
+
+<p>File Offset= 0x1200 + 0x263C - 0x2000 =&gt; 0x183C, When we look at the address, we see the <strong>IMAGE_IMPORT_DESCRIPTOR</strong> structure.</p>
+
+<p><img title="Import Table" src="./PE Format_files/import-table.png" style="display:block; margin-right:auto; margin-left:auto; padding-bottom:20px;"></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public struct IMAGE_IMPORT_DESCRIPTOR
+  {
+      [FieldOffset(0)]
+      public uint Characteristics;
+
+      [FieldOffset(0)]
+      public uint OriginalFirstThunk;
+
+      [FieldOffset(4)]
+      public uint TimeDateStamp;
+
+      [FieldOffset(8)]
+      public uint ForwarderChain;
+
+      [FieldOffset(12)]
+      public uint Name;
+
+      [FieldOffset(16)]
+      public uint FirstThunk;
+  }
+</code></pre></div></div>
+
+<p>When we look at the structure here, each of the bytes consists of 20 bytes and the bytes between 12-16 contain the address where the name of the imported DLL is located, and when we look at the image above, we see that our 12-16 byte value in the  selected part is <strong>0x27C6</strong>. We need to calculate the File Offset value again. RVA(0x27C6) + Raw Offset(0x1200) - Virtual Offset(0x2000) =&gt; 0x19C6.</p>
+
+<p><img title="Imported DLL Name" src="./PE Format_files/imported-dll-name.png" style="display:block; margin-right:auto; margin-left:auto; padding-bottom:20px;"></p>
+
+<p>And the part where the APIs imported from this DLL are located is in the <strong>OriginalFirstThunk</strong> section, so we will look at the 0-4 bytes in the <strong>IMAGE_IMPORT_DESCRIPTOR</strong> structure. In our example, this value is <strong>0x26F0</strong>. We need to calculate the File Offset value again. RVA(0x26F0) + Raw Offset(0x1200) - Virtual Offset(0x2000) =&gt; 0x18F0.</p>
+
+<p><img title="OriginalFirstThunk" src="./PE Format_files/original-thunk.png" style="display:block; margin-right:auto; margin-left:auto; padding-bottom:20px;"></p>
+
+<p>The values found here are in the <strong>IMAGE_THUNK_DATA</strong> struct.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[StructLayout(LayoutKind.Explicit)]
+  public struct IMAGE_THUNK_DATA32
+  {
+      [FieldOffset(0)]
+      public uint ForwarderString;
+
+      [FieldOffset(0)]
+      public uint Function;
+
+      [FieldOffset(0)]
+      public uint Ordinal;
+
+      [FieldOffset(0)]
+      public uint AddressOfData;
+  }
+
+  [StructLayout(LayoutKind.Explicit)]
+  public struct IMAGE_THUNK_DATA64
+    {
+      [FieldOffset(0)]
+      public ulong ForwarderString;
+
+      [FieldOffset(0)]
+      public ulong Function;
+
+      [FieldOffset(0)]
+      public ulong Ordinal;
+
+      [FieldOffset(0)]
+      public ulong AddressOfData;
+  }
+</code></pre></div></div>
+
+<p>The name of each API is stored as a 4byte RVA, and when a DLL runs out of thunk data, the 0x00000000 value is seen. For example, let’s look at the 1st and 2nd functions that are called. First we calculate the File Offset value again:</p>
+
+<p><strong>File Offset for 1. API: RVA(0x27B8) + Raw Offset(0x1200) - Virtual Offset(0x2000) = 0x19B8</strong></p>
+
+<p><strong>File Offset for 2. API: RVA(0x2BB2) + Raw Offset(0x1200) - Virtual Offset(0x2000) = 0x1DB2</strong></p>
+
+<p><img title="First API Name" src="./PE Format_files/first-api.png" style="display:block; margin-right:auto; margin-left:auto; padding-bottom:20px;"></p>
+
+<p><img title="Second API Name" src="./PE Format_files/second-api.png" style="display:block; margin-right:auto; margin-left:auto; padding-bottom:20px;"></p>
+
+<p>In this way we can detect all the called DLLs and APIs.</p>
+
+<hr>
+
+<p>Please contact me at my contact addresses for criticism/correction/suggestion. Your comments are valuable to me :)</p>
+
+<hr>
+
+<h1 id="reference">Reference</h1>
+
+<p>[1] en[.]wikipedia.org/wiki/Portable_Executable</p>
+
+<p>[2] github[.]com/corkami/pics/tree/master/binary/pe101</p>
+
+<p>[3] 0xrick[.]github.io/win-internals/pe3/</p>
+
+<p>[4] learn[.]microsoft.com/en-us/windows/win32/debug/pe-format#coff-file-header-object-and-image</p>
+
+<p>[5] 0xrick[.]github.io/win-internals/pe4/#optional-header-image_optional_header</p>
+
+<p>[6] learn[.]microsoft.com/en-us/windows/win32/debug/pe-format#section-table-section-headers</p>
+
+
+</article>
+      </section>
+    </div>
+  </div>
+
+   <footer>
+  <a href="https://www.onlyf8.com/">
+    <span>
+
+        <b>OnlyF8</b>
+        
+    </span>
+    
+    <span>© 2025</span>
+  </a>
+</footer>
+
+  
+
+
+</body><grammarly-desktop-integration data-grammarly-shadow-root="true"><template shadowrootmode="open"><style>
+      div.grammarly-desktop-integration {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select:none;
+        user-select:none;
+      }
+
+      div.grammarly-desktop-integration:before {
+        content: attr(data-content);
+      }
+    </style><div aria-label="grammarly-integration" role="group" tabindex="-1" class="grammarly-desktop-integration" data-content="{&quot;mode&quot;:&quot;limited&quot;,&quot;isActive&quot;:false,&quot;isUserDisabled&quot;:false}"></div></template></grammarly-desktop-integration></html>

@@ -18,12 +18,6 @@
     <ClCompile Include="PEDump.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SPrintf.cxx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Utilities.cxx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common.h">
