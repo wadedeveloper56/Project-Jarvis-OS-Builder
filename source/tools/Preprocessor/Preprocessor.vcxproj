@@ -105,7 +105,7 @@
       <PrecompiledHeaderOutputFile />
       <EnableParallelCodeGeneration>
       </EnableParallelCodeGeneration>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -128,7 +128,7 @@
       <PrecompiledHeaderOutputFile />
       <EnableParallelCodeGeneration>
       </EnableParallelCodeGeneration>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -149,7 +149,7 @@
       <PrecompiledHeaderOutputFile />
       <EnableParallelCodeGeneration>
       </EnableParallelCodeGeneration>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -172,7 +172,7 @@
       <PrecompiledHeaderOutputFile />
       <EnableParallelCodeGeneration>
       </EnableParallelCodeGeneration>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>
