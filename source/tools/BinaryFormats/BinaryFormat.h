@@ -149,6 +149,7 @@ typedef Resources* ResourcesPtr;
 class EXEFile
 {
 	vector<OBJSectionPtr> sectionTable;
+	vector<PIMAGE_IMPORT_DESCRIPTOR> imports;
 public:
 	bool is64;
 	IMAGE_DOS_HEADER dosHeader;
@@ -161,6 +162,9 @@ public:
 	BINARYFORMATS_API int getSectionTableSize();
 	BINARYFORMATS_API void addSection(OBJSectionPtr ptr);
 	BINARYFORMATS_API OBJSectionPtr getSection(int index);
+	BINARYFORMATS_API int getImportsTableSize();
+	BINARYFORMATS_API void addImport(PIMAGE_IMPORT_DESCRIPTOR ptr);
+	BINARYFORMATS_API PIMAGE_IMPORT_DESCRIPTOR getImport(int index);
 };
 typedef EXEFile*  EXEFilePtr;
 typedef EXEFile** EXEFilePtrPtr;
@@ -178,9 +182,9 @@ BINARYFORMATS_API void hexdump(const void* data, size_t size);
 BINARYFORMATS_API char* get_ctime_stg(time_t* pt);
 BINARYFORMATS_API OBJFilePtr loadObjFile(char* buffer, LONGLONG fileSize);
 
-BINARYFORMATS_API DWORD GetImgDirEntryRVA(bool Is32, PVOID pNTHdr, DWORD IDE);
+BINARYFORMATS_API DWORD GetImgDirEntryRVA(bool Is64, PVOID pNTHdr, DWORD IDE);
 BINARYFORMATS_API PIMAGE_SECTION_HEADER GetSectionHeader(bool Is64, PSTR name, PVOID pNTHeader);
-BINARYFORMATS_API DWORD GetImgDirEntrySize(bool Is32, PVOID pNTHdr, DWORD IDE);
+BINARYFORMATS_API DWORD GetImgDirEntrySize(bool Is64, PVOID pNTHdr, DWORD IDE);
 BINARYFORMATS_API PIMAGE_SECTION_HEADER GetEnclosingSectionHeader(bool Is64, DWORD rva, PVOID pNTHeader);
 BINARYFORMATS_API LPVOID GetPtrFromRVA(bool Is64, DWORD rva, PIMAGE_NT_HEADERS32 pNTHeader, char* imageBase);
 BINARYFORMATS_API void loadDOSEXE(EXEFilePtr result, PIMAGE_DOS_HEADER dosHeader);

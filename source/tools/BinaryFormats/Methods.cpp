@@ -57,6 +57,21 @@ OBJSectionPtr EXEFile::getSection(int index)
 	return sectionTable[index];
 }
 
+int EXEFile::getImportsTableSize()
+{
+	return imports.size();
+}
+
+void EXEFile::addImport(PIMAGE_IMPORT_DESCRIPTOR ptr) 
+{
+	imports.push_back(ptr);
+}
+
+PIMAGE_IMPORT_DESCRIPTOR EXEFile::getImport(int index)
+{
+	return imports[index];
+}
+
 Resources::Resources() :res({ 0 })
 {
 

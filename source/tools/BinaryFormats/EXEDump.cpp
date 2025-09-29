@@ -260,23 +260,39 @@ EXEFilePtr loadExeFile(char* buffer, LONGLONG fileSize)
 	loadPEHeaders(result, pNTHeader);
 	loadPESections(result, buffer, pNTHeader);
 
-	DWORD va_debug_dir = GetImgDirEntryRVA(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_DEBUG);
-	PIMAGE_SECTION_HEADER header = GetSectionHeader(result->is64, (PSTR)".debug", pNTHeader);
-	PIMAGE_DEBUG_DIRECTORY debugDir;
-	DWORD size;
-	if (header && (header->VirtualAddress == va_debug_dir))
+	DWORD exportRVAStart = GetImgDirEntryRVA(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_EXPORT);
+	DWORD exportRVASize = GetImgDirEntrySize(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_EXPORT);
+	PIMAGE_SECTION_HEADER headerExports = GetEnclosingSectionHeader(result->is64, exportRVAStart, pNTHeader);
+	if (headerExports != NULL)
 	{
-		debugDir = (PIMAGE_DEBUG_DIRECTORY)(header->PointerToRawData + buffer);
-		size = GetImgDirEntrySize(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_DEBUG) * sizeof(IMAGE_DEBUG_DIRECTORY);
+		DWORD delta = headerExports->VirtualAddress - headerExports->PointerToRawData;
+		PIMAGE_EXPORT_DIRECTORY exportDir = MakePtr(PIMAGE_EXPORT_DIRECTORY, buffer, exportRVAStart - delta);
 	}
-	else    // Look for the debug directory
+
+	DWORD importRVAStart = GetImgDirEntryRVA(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_IMPORT);
+	DWORD importRVASize = GetImgDirEntrySize(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_IMPORT);
+	PIMAGE_SECTION_HEADER headerImports = GetEnclosingSectionHeader(result->is64, importRVAStart, pNTHeader);
+	PIMAGE_IMPORT_DESCRIPTOR importDesc = (PIMAGE_IMPORT_DESCRIPTOR)GetPtrFromRVA(result->is64, importRVAStart, pNTHeader, buffer);
+	while (1)
 	{
-		header = GetEnclosingSectionHeader(result->is64, va_debug_dir, pNTHeader);
-		if (header)
-		{
-			size = GetImgDirEntrySize(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_DEBUG);
-			debugDir = MakePtr(PIMAGE_DEBUG_DIRECTORY, buffer, header->PointerToRawData + (va_debug_dir - header->VirtualAddress));
-		}
+		if ((importDesc->TimeDateStamp == 0) && (importDesc->Name == 0))
+			break;
+		result->addImport(importDesc);
+		importDesc++;
 	}
+
+	DWORD resourceRVA = GetImgDirEntryRVA(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_RESOURCE);
+	DWORD exceptionRVA = GetImgDirEntryRVA(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_EXCEPTION);
+	DWORD securityRVA = GetImgDirEntryRVA(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_SECURITY);
+	DWORD baseRelocRVA = GetImgDirEntryRVA(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_BASERELOC);
+	DWORD debugRVA = GetImgDirEntryRVA(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_DEBUG); 
+	DWORD archRVA = GetImgDirEntryRVA(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_ARCHITECTURE);
+	DWORD globalPtrRVA = GetImgDirEntryRVA(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_GLOBALPTR);
+	DWORD tlsRVA = GetImgDirEntryRVA(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_TLS);
+	DWORD configRVA = GetImgDirEntryRVA(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG);
+	DWORD boundImportRVA = GetImgDirEntryRVA(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_BOUND_IMPORT);
+	DWORD iatRVA = GetImgDirEntryRVA(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_IAT);
+	DWORD delayImportRVA = GetImgDirEntryRVA(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_DELAY_IMPORT);
+	DWORD comRVA = GetImgDirEntryRVA(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_COM_DESCRIPTOR);
 	return result;
 }
