@@ -74,25 +74,25 @@
     <OutDir>..\..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\bin\tools\intermediate\Linker\$(Configuration)\$(Platform)\</IntDir>
     <ExecutablePath>$(VC_ExecutablePath_x86);$(CommonExecutablePath)</ExecutablePath>
-    <IncludePath>C:\projects\ProjectJarvis\source\tools\BinaryFormat;C:\projects\ProjectJarvis\source\tools\Argument;$(IncludePath)</IncludePath>
+    <IncludePath>C:\projects\ProjectJarvis\source\tools\BinaryFormats;C:\projects\ProjectJarvis\source\tools\Argument;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>..\..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\bin\tools\intermediate\Linker\$(Configuration)\$(Platform)\</IntDir>
     <ExecutablePath>$(VC_ExecutablePath_x86);$(CommonExecutablePath)</ExecutablePath>
-    <IncludePath>C:\projects\ProjectJarvis\source\tools\BinaryFormat;C:\projects\ProjectJarvis\source\tools\Argument;$(IncludePath)</IncludePath>
+    <IncludePath>C:\projects\ProjectJarvis\source\tools\BinaryFormats;C:\projects\ProjectJarvis\source\tools\Argument;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>..\..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\bin\tools\intermediate\Linker\$(Configuration)\$(Platform)\</IntDir>
     <ExecutablePath>$(VC_ExecutablePath_x64);$(CommonExecutablePath)</ExecutablePath>
-    <IncludePath>C:\projects\ProjectJarvis\source\tools\BinaryFormat;C:\projects\ProjectJarvis\source\tools\Argument;$(IncludePath)</IncludePath>
+    <IncludePath>C:\projects\ProjectJarvis\source\tools\BinaryFormats;C:\projects\ProjectJarvis\source\tools\Argument;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>..\..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\bin\tools\intermediate\Linker\$(Configuration)\$(Platform)\</IntDir>
     <ExecutablePath>$(VC_ExecutablePath_x64);$(CommonExecutablePath)</ExecutablePath>
-    <IncludePath>C:\projects\ProjectJarvis\source\tools\BinaryFormat;C:\projects\ProjectJarvis\source\tools\Argument;$(IncludePath)</IncludePath>
+    <IncludePath>C:\projects\ProjectJarvis\source\tools\BinaryFormats;C:\projects\ProjectJarvis\source\tools\Argument;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -182,8 +182,8 @@
     <ProjectReference Include="..\Argument\Argument.vcxproj">
       <Project>{7540fe94-b378-4098-a30c-db04adc990b3}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\BinaryFormat\BinaryFormat.vcxproj">
-      <Project>{d11c0fc7-5917-4d0d-894f-d3a11bd0fe8d}</Project>
+    <ProjectReference Include="..\BinaryFormats\BinaryFormats.vcxproj">
+      <Project>{73fb9a47-83a1-443c-a370-bb4e6175a1ff}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
