@@ -1,5 +1,11 @@
 #pragma once
 
+#ifdef BINARYFORMATS_EXPORTS
+#define BINARYFORMATS_API __declspec(dllexport)
+#else
+#define BINARYFORMATS_API __declspec(dllimport)
+#endif
+
 #include "MemoryMappedFile.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -39,19 +45,19 @@ using namespace std;
 #define IMAGE_SCN_MEM_SYSHEAP 0x00010000
 
 
-typedef struct
+typedef struct BINARYFORMATS_API
 {
 	WORD flag;
 	const char* name;
 } WORD_FLAG_DESCRIPTIONS;
 
-typedef struct
+typedef struct BINARYFORMATS_API
 {
 	DWORD flag;
 	const char* name;
 } DWORD_FLAG_DESCRIPTIONS;
 
-typedef struct _i386RelocTypes
+typedef struct BINARYFORMATS_API _i386RelocTypes
 {
 	WORD type;
 	const char* name;
@@ -59,7 +65,7 @@ typedef struct _i386RelocTypes
 
 class COFFSymbolTable;
 
-class COFFSymbol
+class BINARYFORMATS_API COFFSymbol
 {
 	PSTR 			m_pStringTable;
 	PIMAGE_SYMBOL 	m_pSymbolData;
@@ -83,8 +89,8 @@ public:
 	BOOL  GetAuxSymbolAsString(PSTR pszBuffer, unsigned cbBuffer);
 	friend class COFFSymbolTable;
 };
-typedef COFFSymbol* PCOFFSymbol;
-class COFFSymbolTable
+typedef BINARYFORMATS_API COFFSymbol* PCOFFSymbol;
+class BINARYFORMATS_API COFFSymbolTable
 {
 private:
 	PIMAGE_SYMBOL	m_pSymbolBase;
@@ -98,9 +104,9 @@ public:
 	PCOFFSymbol GetNearestSymbolFromRVA(DWORD rva, BOOL fExact);
 	PCOFFSymbol GetSymbolFromIndex(DWORD index);
 };
-typedef COFFSymbolTable* PCOFFSymbolTable;
+typedef BINARYFORMATS_API COFFSymbolTable* PCOFFSymbolTable;
 
-typedef struct OBJSection
+typedef struct BINARYFORMATS_API OBJSection
 {
 	IMAGE_SECTION_HEADER header;
 	PIMAGE_RELOCATION relocation;
@@ -108,7 +114,7 @@ typedef struct OBJSection
 	char* sectionBuffer;
 }OBJSection, * OBJSectionPtr;
 
-typedef struct _OBJFile
+typedef struct BINARYFORMATS_API _OBJFile
 {
 	IMAGE_FILE_HEADER header;
 	vector<OBJSectionPtr> sectionTable;
@@ -117,13 +123,13 @@ typedef struct _OBJFile
 	vector<string> stringTable;
 }OBJFile, * OBJFilePtr, ** OBJFilePtrPtr;
 
-typedef struct _Resources
+typedef struct BINARYFORMATS_API _Resources
 {
 	IMAGE_RESOURCE_DIRECTORY res;
 	vector<PIMAGE_RESOURCE_DIRECTORY_ENTRY> entries;
 }Resources, * ResourcesPtr;
 
-typedef struct _EXEFile
+typedef struct BINARYFORMATS_API _EXEFile
 {
 	bool is64;
 	IMAGE_DOS_HEADER dosHeader;
@@ -141,33 +147,33 @@ typedef struct _EXEFile
 
 typedef enum _FileType { UNKNOWN, EXE, DEBUG, OBJ, ANONYMOUS, LIB }FileType;
 
-WORD getFileMagic(char* buffer);
-FileType getFileType(char* buffer);
-const char* GetMachineTypeName(WORD wMachineType);
-int islistedMachineType(WORD wMachineType);
-void hexdump(const void* data, size_t size);
-char* get_ctime_stg(time_t* pt);
-OBJFilePtr loadObjFile(char* buffer, LONGLONG fileSize);
+BINARYFORMATS_API WORD getFileMagic(char* buffer);
+BINARYFORMATS_API FileType getFileType(char* buffer);
+BINARYFORMATS_API const char* GetMachineTypeName(WORD wMachineType);
+BINARYFORMATS_API int islistedMachineType(WORD wMachineType);
+BINARYFORMATS_API void hexdump(const void* data, size_t size);
+BINARYFORMATS_API char* get_ctime_stg(time_t* pt);
+BINARYFORMATS_API OBJFilePtr loadObjFile(char* buffer, LONGLONG fileSize);
 
-DWORD GetImgDirEntryRVA(bool Is32, PVOID pNTHdr, DWORD IDE);
-PIMAGE_SECTION_HEADER GetSectionHeader(bool Is64, PSTR name, PVOID pNTHeader);
-DWORD GetImgDirEntrySize(bool Is32, PVOID pNTHdr, DWORD IDE);
-PIMAGE_SECTION_HEADER GetEnclosingSectionHeader(bool Is64, DWORD rva, PVOID pNTHeader);
-LPVOID GetPtrFromRVA(DWORD rva, PIMAGE_NT_HEADERS32 pNTHeader, char* imageBase);
-void loadDOSEXE(EXEFilePtr result, PIMAGE_DOS_HEADER dosHeader);
-void loadPEHeaders(EXEFilePtr result, PIMAGE_NT_HEADERS32 pImgFileHdr);
-void loadPESections(EXEFilePtr result, char* buffer, PIMAGE_NT_HEADERS32 pImgFileHdr);
-void LoadDebugDirectory(EXEFilePtr result, PIMAGE_DEBUG_DIRECTORY debugDir, DWORD size, char* base);
-void loadDebug(EXEFilePtr result, char* buffer);
-void loadResources(EXEFilePtr result, bool Is64, char* base, PIMAGE_NT_HEADERS32 pNTHeader);
-EXEFilePtr loadExeFile(char* buffer, LONGLONG fileSize);
+BINARYFORMATS_API DWORD GetImgDirEntryRVA(bool Is32, PVOID pNTHdr, DWORD IDE);
+BINARYFORMATS_API PIMAGE_SECTION_HEADER GetSectionHeader(bool Is64, PSTR name, PVOID pNTHeader);
+BINARYFORMATS_API DWORD GetImgDirEntrySize(bool Is32, PVOID pNTHdr, DWORD IDE);
+BINARYFORMATS_API PIMAGE_SECTION_HEADER GetEnclosingSectionHeader(bool Is64, DWORD rva, PVOID pNTHeader);
+BINARYFORMATS_API LPVOID GetPtrFromRVA(DWORD rva, PIMAGE_NT_HEADERS32 pNTHeader, char* imageBase);
+BINARYFORMATS_API void loadDOSEXE(EXEFilePtr result, PIMAGE_DOS_HEADER dosHeader);
+BINARYFORMATS_API void loadPEHeaders(EXEFilePtr result, PIMAGE_NT_HEADERS32 pImgFileHdr);
+BINARYFORMATS_API void loadPESections(EXEFilePtr result, char* buffer, PIMAGE_NT_HEADERS32 pImgFileHdr);
+BINARYFORMATS_API void LoadDebugDirectory(EXEFilePtr result, PIMAGE_DEBUG_DIRECTORY debugDir, DWORD size, char* base);
+BINARYFORMATS_API void loadDebug(EXEFilePtr result, char* buffer);
+BINARYFORMATS_API void loadResources(EXEFilePtr result, bool Is64, char* base, PIMAGE_NT_HEADERS32 pNTHeader);
+BINARYFORMATS_API EXEFilePtr loadExeFile(char* buffer, LONGLONG fileSize);
 
-void GetObjRelocationName(WORD type, PSTR buffer, DWORD cBytes);
-void DumpSection(int i, OBJSectionPtr ptr);
-void GetSectionName(WORD section, PSTR buffer, unsigned cbBuffer);
-void DumpSymbolTable(COFFSymbolTable* pSymTab);
-void DumpDOSHeader(PIMAGE_DOS_HEADER dosHeader);
-void DumpFileHeader(PIMAGE_FILE_HEADER pImageFileHeader);
-void DumpOptionalHeader64(PIMAGE_OPTIONAL_HEADER64 optionalHeader);
-void DumpOptionalHeader32(PIMAGE_OPTIONAL_HEADER32 optionalHeader);
+BINARYFORMATS_API void GetObjRelocationName(WORD type, PSTR buffer, DWORD cBytes);
+BINARYFORMATS_API void DumpSection(int i, OBJSectionPtr ptr);
+BINARYFORMATS_API void GetSectionName(WORD section, PSTR buffer, unsigned cbBuffer);
+BINARYFORMATS_API void DumpSymbolTable(COFFSymbolTable* pSymTab);
+BINARYFORMATS_API void DumpDOSHeader(PIMAGE_DOS_HEADER dosHeader);
+BINARYFORMATS_API void DumpFileHeader(PIMAGE_FILE_HEADER pImageFileHeader);
+BINARYFORMATS_API void DumpOptionalHeader64(PIMAGE_OPTIONAL_HEADER64 optionalHeader);
+BINARYFORMATS_API void DumpOptionalHeader32(PIMAGE_OPTIONAL_HEADER32 optionalHeader);
 

@@ -15,51 +15,48 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <None Include="cpp.hint" />
+  </ItemGroup>
+  <ItemGroup>
     <ClInclude Include="framework.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BinaryFormats.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ArgumentTable.h">
+    <ClInclude Include="BinaryFormat.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MemoryMappedFile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Arguments.cpp">
+    <ClCompile Include="BinaryFormats.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ArgDstr.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ArgInt.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ArgLit.cpp">
+    <ClCompile Include="dllmain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ArgDbl.cpp">
+    <ClCompile Include="BinaryFormat.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ArgStr.cpp">
+    <ClCompile Include="CoffSymbolTable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ArgRex.cpp">
+    <ClCompile Include="EXEDump.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ArgFile.cpp">
+    <ClCompile Include="MemoryMappedFile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ArgDate.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ArgEnd.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ArgGetOpt.cpp">
+    <ClCompile Include="Output.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

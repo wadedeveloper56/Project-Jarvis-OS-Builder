@@ -72,28 +72,28 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>..\..\..\bin\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>..\..\..\bin\intermediate\Compiler\$(Configuration)\$(Platform)\</IntDir>
+    <OutDir>..\..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>..\..\..\bin\tools\intermediate\Compiler\$(Configuration)\$(Platform)\</IntDir>
     <LibraryPath>$(LibraryPath)</LibraryPath>
-    <IncludePath>C:\projects\ProjectJarvis\source\tools\Arguments;C:\projects\ProjectJarvis\source\tools\Preprocessor;C:\flex-bison;$(IncludePath)</IncludePath>
+    <IncludePath>C:\projects\ProjectJarvis\source\tools\Argument;C:\projects\ProjectJarvis\source\tools\Preprocessor;C:\flex-bison;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>..\..\..\bin\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>..\..\..\bin\intermediate\Compiler\$(Configuration)\$(Platform)\</IntDir>
+    <OutDir>..\..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>..\..\..\bin\tools\intermediate\Compiler\$(Configuration)\$(Platform)\</IntDir>
     <LibraryPath>$(LibraryPath)</LibraryPath>
-    <IncludePath>C:\projects\ProjectJarvis\source\tools\Arguments;C:\projects\ProjectJarvis\source\tools\Preprocessor;C:\flex-bison;$(IncludePath)</IncludePath>
+    <IncludePath>C:\projects\ProjectJarvis\source\tools\Argument;C:\projects\ProjectJarvis\source\tools\Preprocessor;C:\flex-bison;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>..\..\..\bin\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>..\..\..\bin\intermediate\Compiler\$(Configuration)\$(Platform)\</IntDir>
+    <OutDir>..\..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>..\..\..\bin\tools\intermediate\Compiler\$(Configuration)\$(Platform)\</IntDir>
     <LibraryPath>$(LibraryPath)</LibraryPath>
-    <IncludePath>C:\projects\ProjectJarvis\source\tools\Arguments;C:\projects\ProjectJarvis\source\tools\Preprocessor;C:\flex-bison;$(IncludePath)</IncludePath>
+    <IncludePath>C:\projects\ProjectJarvis\source\tools\Argument;C:\projects\ProjectJarvis\source\tools\Preprocessor;C:\flex-bison;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>..\..\..\bin\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>..\..\..\bin\intermediate\Compiler\$(Configuration)\$(Platform)\</IntDir>
+    <OutDir>..\..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>..\..\..\bin\tools\intermediate\Compiler\$(Configuration)\$(Platform)\</IntDir>
     <LibraryPath>$(LibraryPath)</LibraryPath>
-    <IncludePath>C:\projects\ProjectJarvis\source\tools\Arguments;C:\projects\ProjectJarvis\source\tools\Preprocessor;C:\flex-bison;$(IncludePath)</IncludePath>
+    <IncludePath>C:\projects\ProjectJarvis\source\tools\Argument;C:\projects\ProjectJarvis\source\tools\Preprocessor;C:\flex-bison;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -293,8 +293,8 @@
     <ClCompile Include="TypeSpecifier.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Arguments\Arguments.vcxproj">
-      <Project>{fe883520-0f4b-494d-bf5e-714adb7881a3}</Project>
+    <ProjectReference Include="..\Argument\Argument.vcxproj">
+      <Project>{7540fe94-b378-4098-a30c-db04adc990b3}</Project>
     </ProjectReference>
     <ProjectReference Include="..\PreProcessor\PreProcessor.vcxproj">
       <Project>{3b55590c-3e30-413c-b121-c80fbe2d2c77}</Project>

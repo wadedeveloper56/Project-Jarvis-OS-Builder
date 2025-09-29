@@ -71,23 +71,23 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>..\..\..\bin\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>..\..\..\bin\intermediate\Assembler\$(Configuration)\$(Platform)\</IntDir>
+    <OutDir>..\..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>..\..\..\bin\tools\intermediate\Assembler\$(Configuration)\$(Platform)\</IntDir>
     <LibraryPath>C:\projects\ProjectJarvis\bin\tools\Arguments\$(Configuration)\$(Platform)\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>..\..\..\bin\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>..\..\..\bin\intermediate\Assembler\$(Configuration)\$(Platform)\</IntDir>
+    <OutDir>..\..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>..\..\..\bin\tools\intermediate\Assembler\$(Configuration)\$(Platform)\</IntDir>
     <LibraryPath>C:\projects\ProjectJarvis\bin\tools\Arguments\$(Configuration)\$(Platform)\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>..\..\..\bin\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>..\..\..\bin\intermediate\Assembler\$(Configuration)\$(Platform)\</IntDir>
+    <OutDir>..\..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>..\..\..\bin\tools\intermediate\Assembler\$(Configuration)\$(Platform)\</IntDir>
     <LibraryPath>C:\projects\ProjectJarvis\bin\tools\Arguments\$(Configuration)\$(Platform)\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>..\..\..\bin\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>..\..\..\bin\intermediate\Assembler\$(Configuration)\$(Platform)\</IntDir>
+    <OutDir>..\..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>..\..\..\bin\tools\intermediate\Assembler\$(Configuration)\$(Platform)\</IntDir>
     <LibraryPath>C:\projects\ProjectJarvis\bin\tools\Arguments\$(Configuration)\$(Platform)\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
