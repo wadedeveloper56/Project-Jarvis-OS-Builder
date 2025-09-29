@@ -167,18 +167,17 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BinaryFormat.h" />
-    <ClInclude Include="BinaryFormats.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="MemoryMappedFile.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BinaryFormat.cpp" />
-    <ClCompile Include="BinaryFormats.cpp" />
     <ClCompile Include="CoffSymbolTable.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="EXEDump.cpp" />
     <ClCompile Include="MemoryMappedFile.cpp" />
+    <ClCompile Include="Methods.cpp" />
     <ClCompile Include="Output.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

@@ -1,9 +1,11 @@
 #pragma once
 
 #ifdef BINARYFORMATS_EXPORTS
-#define BINARYFORMATS_API __declspec(dllexport)
+  #define BINARYFORMATS_API __declspec(dllexport)
+  #define BINARYFORMATS_TEMPLATE
 #else
-#define BINARYFORMATS_API __declspec(dllimport)
+  #define BINARYFORMATS_API __declspec(dllimport)
+  #define BINARYFORMATS_TEMPLATE extern
 #endif
 
 #include "MemoryMappedFile.h"
@@ -114,33 +116,54 @@ typedef struct BINARYFORMATS_API OBJSection
 	char* sectionBuffer;
 }OBJSection, * OBJSectionPtr;
 
-typedef struct BINARYFORMATS_API _OBJFile
+class OBJFile
 {
-	IMAGE_FILE_HEADER header;
 	vector<OBJSectionPtr> sectionTable;
+	vector<string> stringTable;
+public:
+	IMAGE_FILE_HEADER header;
 	PCOFFSymbolTable symbolTable;
 	DWORD stringTableSize;
-	vector<string> stringTable;
-}OBJFile, * OBJFilePtr, ** OBJFilePtrPtr;
+	BINARYFORMATS_API OBJFile();
+	BINARYFORMATS_API int getSectionTableSize();
+	BINARYFORMATS_API void addSection(OBJSectionPtr ptr);
+	BINARYFORMATS_API OBJSectionPtr getSection(int index);
+	BINARYFORMATS_API int getStringTableSize();
+	BINARYFORMATS_API void addString(string str);
+	BINARYFORMATS_API string getString(int index);
+};
+typedef OBJFile* OBJFilePtr;
+typedef OBJFile** OBJFilePtrPtr;
 
-typedef struct BINARYFORMATS_API _Resources
+class Resources
 {
-	IMAGE_RESOURCE_DIRECTORY res;
 	vector<PIMAGE_RESOURCE_DIRECTORY_ENTRY> entries;
-}Resources, * ResourcesPtr;
+public:
+	IMAGE_RESOURCE_DIRECTORY res;
+	BINARYFORMATS_API Resources();
+	BINARYFORMATS_API int getEntriesSize();
+	BINARYFORMATS_API void addEntry(PIMAGE_RESOURCE_DIRECTORY_ENTRY ptr);
+};
+typedef Resources* ResourcesPtr;
 
-typedef struct BINARYFORMATS_API _EXEFile
+class EXEFile
 {
+	vector<OBJSectionPtr> sectionTable;
+public:
 	bool is64;
 	IMAGE_DOS_HEADER dosHeader;
 	DWORD Signature;
 	IMAGE_FILE_HEADER FileHeader;
 	IMAGE_OPTIONAL_HEADER32 OptionalHeader32;
 	IMAGE_OPTIONAL_HEADER64 OptionalHeader64;
-	vector<OBJSectionPtr> sectionTable;
-	vector<PIMAGE_DEBUG_DIRECTORY> debug;
 	Resources resources;
-}EXEFile, * EXEFilePtr, ** EXEFilePtrPtr;
+	BINARYFORMATS_API EXEFile();
+	BINARYFORMATS_API int getSectionTableSize();
+	BINARYFORMATS_API void addSection(OBJSectionPtr ptr);
+	BINARYFORMATS_API OBJSectionPtr getSection(int index);
+};
+typedef EXEFile*  EXEFilePtr;
+typedef EXEFile** EXEFilePtrPtr;
 
 #define MakePtr( cast, ptr, addValue ) (cast)( (BYTE *)(ptr) + (DWORD)(addValue))
 
@@ -159,13 +182,10 @@ BINARYFORMATS_API DWORD GetImgDirEntryRVA(bool Is32, PVOID pNTHdr, DWORD IDE);
 BINARYFORMATS_API PIMAGE_SECTION_HEADER GetSectionHeader(bool Is64, PSTR name, PVOID pNTHeader);
 BINARYFORMATS_API DWORD GetImgDirEntrySize(bool Is32, PVOID pNTHdr, DWORD IDE);
 BINARYFORMATS_API PIMAGE_SECTION_HEADER GetEnclosingSectionHeader(bool Is64, DWORD rva, PVOID pNTHeader);
-BINARYFORMATS_API LPVOID GetPtrFromRVA(DWORD rva, PIMAGE_NT_HEADERS32 pNTHeader, char* imageBase);
+BINARYFORMATS_API LPVOID GetPtrFromRVA(bool Is64, DWORD rva, PIMAGE_NT_HEADERS32 pNTHeader, char* imageBase);
 BINARYFORMATS_API void loadDOSEXE(EXEFilePtr result, PIMAGE_DOS_HEADER dosHeader);
 BINARYFORMATS_API void loadPEHeaders(EXEFilePtr result, PIMAGE_NT_HEADERS32 pImgFileHdr);
 BINARYFORMATS_API void loadPESections(EXEFilePtr result, char* buffer, PIMAGE_NT_HEADERS32 pImgFileHdr);
-BINARYFORMATS_API void LoadDebugDirectory(EXEFilePtr result, PIMAGE_DEBUG_DIRECTORY debugDir, DWORD size, char* base);
-BINARYFORMATS_API void loadDebug(EXEFilePtr result, char* buffer);
-BINARYFORMATS_API void loadResources(EXEFilePtr result, bool Is64, char* base, PIMAGE_NT_HEADERS32 pNTHeader);
 BINARYFORMATS_API EXEFilePtr loadExeFile(char* buffer, LONGLONG fileSize);
 
 BINARYFORMATS_API void GetObjRelocationName(WORD type, PSTR buffer, DWORD cBytes);

@@ -246,7 +246,7 @@ void loadPESections(EXEFilePtr result, char* buffer, PIMAGE_NT_HEADERS32 pImgFil
 		{
 			ptr->sectionBuffer = nullptr;
 		}
-		result->sectionTable.push_back(ptr);
+		result->addSection(ptr);
 		section = MakePtr(PIMAGE_SECTION_HEADER, section, sizeof(IMAGE_SECTION_HEADER));
 	}
 }

@@ -114,11 +114,10 @@ int main(int argc, char* argv[])
 				DumpOptionalHeader64(&data->OptionalHeader64);
 			else
 				DumpOptionalHeader32(&data->OptionalHeader32);
-			int i = 1;
-			for (OBJSectionPtr ptr : data->sectionTable)
+			for (int i = 0; i < data->getSectionTableSize(); i++)
 			{
+				OBJSectionPtr ptr = data->getSection(i);
 				DumpSection(i, ptr);
-				i++;
 			}
 			break;
 		}
@@ -130,18 +129,17 @@ int main(int argc, char* argv[])
 			OBJFilePtr data = loadObjFile(buffer, fileSize);
 			DumpFileHeader(&data->header);
 			printf("\n");
-			int i = 1;
-			for (OBJSectionPtr ptr : data->sectionTable)
+			for (int i = 0; i < data->getSectionTableSize(); i++)
 			{
+				OBJSectionPtr ptr = data->getSection(i);
 				DumpSection(i, ptr);
-				i++;
 			}
 			DumpSymbolTable(data->symbolTable);
-			printf("\nString Table Size = 0x%0X (%ld) bytes %lld entries\n", data->stringTableSize, data->stringTableSize, (LONGLONG)data->stringTable.size());
-			int j = 0;
-			for (const auto& s : data->stringTable) {
-				printf("stringtable[% 4d] = %s\n", j, s.c_str());
-				j++;
+			printf("\nString Table Size = 0x%0X (%ld) bytes %lld entries\n", data->stringTableSize, data->stringTableSize, (LONGLONG)data->getStringTableSize());
+			for (int i = 0; i < data->getStringTableSize(); i++)
+			{
+				string s = data->getString(i);
+				printf("stringtable[% 4d] = %s\n", i, s.c_str());
 			}
 			break;
 		}

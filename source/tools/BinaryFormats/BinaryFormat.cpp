@@ -155,7 +155,7 @@ OBJFilePtr loadObjFile(char* buffer, LONGLONG fileSize)
 	const char* pStringTable = reinterpret_cast<char*>(stringtable);
 	for (size_t i = 4; i < result->stringTableSize; ++i) {
 		if (pStringTable[i] != '\0') {
-			result->stringTable.push_back(getStringFromTable(pStringTable, i));
+			result->addString(getStringFromTable(pStringTable, i));
 			while (i < result->stringTableSize && pStringTable[i] != '\0') {
 				i++;
 			}
@@ -234,7 +234,7 @@ OBJFilePtr loadObjFile(char* buffer, LONGLONG fileSize)
 		{
 			ptr->lineNumbers = nullptr;
 		}
-		result->sectionTable.push_back(ptr);
+		result->addSection(ptr);
 		section = MakePtr(PIMAGE_SECTION_HEADER, section, sizeof(IMAGE_SECTION_HEADER));
 	}
 
