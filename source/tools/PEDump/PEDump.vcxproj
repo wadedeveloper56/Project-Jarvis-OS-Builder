@@ -73,22 +73,22 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>..\..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\bin\tools\intermediate\PEDump\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>C:\projects\ProjectJarvis\source\tools\BinaryFormats;C:\projects\ProjectJarvis\source\tools\Argument;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>C:\projects\ProjectJarvis\source\tools\BinaryFormats;C:\projects\ProjectJarvis\source\tools\Arguments;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>..\..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\bin\tools\intermediate\PEDump\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>C:\projects\ProjectJarvis\source\tools\BinaryFormats;C:\projects\ProjectJarvis\source\tools\Argument;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>C:\projects\ProjectJarvis\source\tools\BinaryFormats;C:\projects\ProjectJarvis\source\tools\Arguments;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>..\..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\bin\tools\intermediate\PEDump\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>C:\projects\ProjectJarvis\source\tools\BinaryFormats;C:\projects\ProjectJarvis\source\tools\Argument;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>C:\projects\ProjectJarvis\source\tools\BinaryFormats;C:\projects\ProjectJarvis\source\tools\Arguments;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>..\..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\bin\tools\intermediate\PEDump\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>C:\projects\ProjectJarvis\source\tools\BinaryFormats;C:\projects\ProjectJarvis\source\tools\Argument;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>C:\projects\ProjectJarvis\source\tools\BinaryFormats;C:\projects\ProjectJarvis\source\tools\Arguments;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -178,8 +178,8 @@
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Argument\Argument.vcxproj">
-      <Project>{7540fe94-b378-4098-a30c-db04adc990b3}</Project>
+    <ProjectReference Include="..\Arguments\Arguments.vcxproj">
+      <Project>{9f695958-67a8-42be-884f-2f9d616e6ab5}</Project>
     </ProjectReference>
     <ProjectReference Include="..\BinaryFormats\BinaryFormat.vcxproj">
       <Project>{14f5d769-bb02-4abf-a2d1-128749f72458}</Project>

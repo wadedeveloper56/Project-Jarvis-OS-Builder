@@ -107,20 +107,6 @@ int main(int argc, char* argv[])
 		case EXE:
 		{
 			printf("File Type: PE EXECUTABLE IMAGE\n");
-			EXEFilePtr data = loadExeFile(buffer, fileSize);
-			DumpDOSHeader(&data->dosHeader);
-			DumpFileHeader(&data->FileHeader);
-/*
-			if (data->is64)
-				DumpOptionalHeader64(&data->OptionalHeader64);
-			else
-				DumpOptionalHeader32(&data->OptionalHeader32);
-			for (int i = 0; i < data->getSectionTableSize(); i++)
-			{
-				OBJSectionPtr ptr = data->getSection(i);
-				DumpSection(i, ptr);
-			}
-*/
 			break;
 		}
 		case DEBUG:
@@ -128,21 +114,6 @@ int main(int argc, char* argv[])
 		case OBJ:
 		{
 			printf("File Type: COFF OBJECT\n\n");
-			OBJFilePtr data = loadObjFile(buffer, fileSize);
-			DumpFileHeader(&data->header);
-			printf("\n");
-			for (int i = 0; i < data->sectionTable.size(); i++)
-			{
-				OBJSectionPtr ptr = data->sectionTable[i];
-				DumpSection(i, ptr);
-			}
-			DumpSymbolTable(data->symbolTable);
-			printf("\nString Table Size = 0x%0X (%ld) bytes %lld entries\n", data->stringTableSize, data->stringTableSize, (LONGLONG)data->stringTable.size());
-			for (int i = 0; i < data->stringTable.size(); i++)
-			{
-				string s = data->stringTable[i];
-				printf("stringtable[% 4d] = %s\n", i, s.c_str());
-			}
 			break;
 		}
 		case ANONYMOUS:

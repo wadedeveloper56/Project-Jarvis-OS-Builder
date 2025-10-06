@@ -293,8 +293,8 @@
     <ClCompile Include="TypeSpecifier.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Argument\Argument.vcxproj">
-      <Project>{7540fe94-b378-4098-a30c-db04adc990b3}</Project>
+    <ProjectReference Include="..\Arguments\Arguments.vcxproj">
+      <Project>{9f695958-67a8-42be-884f-2f9d616e6ab5}</Project>
     </ProjectReference>
     <ProjectReference Include="..\PreProcessor\PreProcessor.vcxproj">
       <Project>{3b55590c-3e30-413c-b121-c80fbe2d2c77}</Project>

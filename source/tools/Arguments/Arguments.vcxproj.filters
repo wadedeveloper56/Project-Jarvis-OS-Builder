@@ -21,33 +21,48 @@
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BinaryFormat.h">
+    <ClInclude Include="Argument.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MemoryMappedFile.h">
+    <ClInclude Include="ArgumentTable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BinaryFormat.cpp">
+    <ClCompile Include="Arguments.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CoffSymbolTable.cpp">
+    <ClCompile Include="ArgDate.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="EXEDump.cpp">
+    <ClCompile Include="ArgDbl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MemoryMappedFile.cpp">
+    <ClCompile Include="ArgDstr.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Methods.cpp">
+    <ClCompile Include="ArgEnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Output.cpp">
+    <ClCompile Include="ArgFile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ArgGetOpt.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ArgInt.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ArgLit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ArgRex.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ArgStr.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

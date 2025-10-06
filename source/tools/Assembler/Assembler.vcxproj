@@ -328,6 +328,11 @@
     <ClInclude Include="warnings.h" />
     <ClInclude Include="warnings_c.h" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Arguments\Arguments.vcxproj">
+      <Project>{9f695958-67a8-42be-884f-2f9d616e6ab5}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
