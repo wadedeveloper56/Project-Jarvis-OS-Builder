@@ -246,7 +246,7 @@ void loadPESections(EXEFilePtr result, char* buffer, PIMAGE_NT_HEADERS32 pImgFil
 		{
 			ptr->sectionBuffer = nullptr;
 		}
-		result->addSection(ptr);
+		result->sectionTable.push_back(ptr);
 		section = MakePtr(PIMAGE_SECTION_HEADER, section, sizeof(IMAGE_SECTION_HEADER));
 	}
 }
@@ -273,6 +273,7 @@ EXEFilePtr loadExeFile(char* buffer, LONGLONG fileSize)
 	DWORD importRVASize = GetImgDirEntrySize(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_IMPORT);
 	PIMAGE_SECTION_HEADER headerImports = GetEnclosingSectionHeader(result->is64, importRVAStart, pNTHeader);
 	PIMAGE_IMPORT_DESCRIPTOR importDesc = (PIMAGE_IMPORT_DESCRIPTOR)GetPtrFromRVA(result->is64, importRVAStart, pNTHeader, buffer);
+	/*
 	while (1)
 	{
 		if ((importDesc->TimeDateStamp == 0) && (importDesc->Name == 0))
@@ -280,8 +281,12 @@ EXEFilePtr loadExeFile(char* buffer, LONGLONG fileSize)
 		result->addImport(importDesc);
 		importDesc++;
 	}
-
+	*/
 	DWORD resourceRVA = GetImgDirEntryRVA(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_RESOURCE);
+	DWORD resourceRVASize = GetImgDirEntrySize(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_RESOURCE);
+	//PIMAGE_RESOURCE_DIRECTORY resDir = (PIMAGE_RESOURCE_DIRECTORY)GetPtrFromRVA(result->is64, resourceRVA, pNTHeader, buffer);
+	//PIMAGE_RESOURCE_DIRECTORY_ENTRY resDirEntry = (PIMAGE_RESOURCE_DIRECTORY_ENTRY)(resDir + 1);
+
 	DWORD exceptionRVA = GetImgDirEntryRVA(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_EXCEPTION);
 	DWORD securityRVA = GetImgDirEntryRVA(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_SECURITY);
 	DWORD baseRelocRVA = GetImgDirEntryRVA(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_BASERELOC);

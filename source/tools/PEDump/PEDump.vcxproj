@@ -181,8 +181,8 @@
     <ProjectReference Include="..\Argument\Argument.vcxproj">
       <Project>{7540fe94-b378-4098-a30c-db04adc990b3}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\BinaryFormats\BinaryFormats.vcxproj">
-      <Project>{73fb9a47-83a1-443c-a370-bb4e6175a1ff}</Project>
+    <ProjectReference Include="..\BinaryFormats\BinaryFormat.vcxproj">
+      <Project>{14f5d769-bb02-4abf-a2d1-128749f72458}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

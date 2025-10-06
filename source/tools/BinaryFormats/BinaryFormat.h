@@ -1,12 +1,7 @@
 #pragma once
 
-#ifdef BINARYFORMATS_EXPORTS
-  #define BINARYFORMATS_API __declspec(dllexport)
-  #define BINARYFORMATS_TEMPLATE
-#else
-  #define BINARYFORMATS_API __declspec(dllimport)
-  #define BINARYFORMATS_TEMPLATE extern
-#endif
+#define BINARYFORMATS_API 
+#define BINARYFORMATS_TEMPLATE 
 
 #include "MemoryMappedFile.h"
 #include <stdio.h>
@@ -116,41 +111,38 @@ typedef struct BINARYFORMATS_API OBJSection
 	char* sectionBuffer;
 }OBJSection, * OBJSectionPtr;
 
-class OBJFile
+struct BINARYFORMATS_API OBJFile
 {
 	vector<OBJSectionPtr> sectionTable;
 	vector<string> stringTable;
-public:
 	IMAGE_FILE_HEADER header;
 	PCOFFSymbolTable symbolTable;
 	DWORD stringTableSize;
-	BINARYFORMATS_API OBJFile();
+	OBJFile();
+/*
 	BINARYFORMATS_API int getSectionTableSize();
 	BINARYFORMATS_API void addSection(OBJSectionPtr ptr);
 	BINARYFORMATS_API OBJSectionPtr getSection(int index);
 	BINARYFORMATS_API int getStringTableSize();
 	BINARYFORMATS_API void addString(string str);
 	BINARYFORMATS_API string getString(int index);
+*/
 };
 typedef OBJFile* OBJFilePtr;
 typedef OBJFile** OBJFilePtrPtr;
 
-class Resources
+struct BINARYFORMATS_API Resources
 {
 	vector<PIMAGE_RESOURCE_DIRECTORY_ENTRY> entries;
-public:
 	IMAGE_RESOURCE_DIRECTORY res;
-	BINARYFORMATS_API Resources();
-	BINARYFORMATS_API int getEntriesSize();
-	BINARYFORMATS_API void addEntry(PIMAGE_RESOURCE_DIRECTORY_ENTRY ptr);
+	Resources();
 };
 typedef Resources* ResourcesPtr;
 
-class EXEFile
+struct BINARYFORMATS_API EXEFile
 {
 	vector<OBJSectionPtr> sectionTable;
 	vector<PIMAGE_IMPORT_DESCRIPTOR> imports;
-public:
 	bool is64;
 	IMAGE_DOS_HEADER dosHeader;
 	DWORD Signature;
@@ -158,13 +150,7 @@ public:
 	IMAGE_OPTIONAL_HEADER32 OptionalHeader32;
 	IMAGE_OPTIONAL_HEADER64 OptionalHeader64;
 	Resources resources;
-	BINARYFORMATS_API EXEFile();
-	BINARYFORMATS_API int getSectionTableSize();
-	BINARYFORMATS_API void addSection(OBJSectionPtr ptr);
-	BINARYFORMATS_API OBJSectionPtr getSection(int index);
-	BINARYFORMATS_API int getImportsTableSize();
-	BINARYFORMATS_API void addImport(PIMAGE_IMPORT_DESCRIPTOR ptr);
-	BINARYFORMATS_API PIMAGE_IMPORT_DESCRIPTOR getImport(int index);
+	EXEFile();
 };
 typedef EXEFile*  EXEFilePtr;
 typedef EXEFile** EXEFilePtrPtr;

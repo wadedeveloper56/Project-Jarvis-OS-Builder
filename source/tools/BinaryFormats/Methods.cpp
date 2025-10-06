@@ -7,7 +7,7 @@ using namespace std;
 OBJFile::OBJFile() :header({ 0 }), symbolTable(nullptr), stringTableSize(0)
 {
 }
-
+/*
 OBJSectionPtr OBJFile::getSection(int index)
 {
 	return sectionTable[index];
@@ -37,11 +37,11 @@ string OBJFile::getString(int index)
 {
 	return stringTable[index];
 }
-
+*/
 EXEFile::EXEFile() :is64(false), dosHeader({ 0 }), Signature(0), FileHeader({ 0 }), OptionalHeader32({ 0 }), OptionalHeader64({ 0 })
 {
 }
-
+/*
 int EXEFile::getSectionTableSize()
 {
 	return sectionTable.size();
@@ -71,12 +71,12 @@ PIMAGE_IMPORT_DESCRIPTOR EXEFile::getImport(int index)
 {
 	return imports[index];
 }
-
+*/
 Resources::Resources() :res({ 0 })
 {
 
 }
-
+/*
 int Resources::getEntriesSize()
 {
 	return entries.size();
@@ -86,3 +86,4 @@ void Resources::addEntry(PIMAGE_RESOURCE_DIRECTORY_ENTRY ptr)
 {
 	entries.push_back(ptr);
 }
+*/
