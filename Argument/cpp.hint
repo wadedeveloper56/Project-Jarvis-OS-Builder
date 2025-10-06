@@ -1,2 +1,0 @@
-#define ARGUMENT_API __declspec(dllexport)
-#define ARGUMENT_API __declspec(dllimport)
