@@ -4,7 +4,7 @@
  * Poor substitute for a real vsnprintf() function for systems
  * that don't have them...
  */
-
+#define __restrict restrict
 #include "compiler.h"
 
 

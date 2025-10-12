@@ -111,33 +111,27 @@ void nasm_free(void *q)
 
 char *nasm_strdup(const char *s)
 {
-    char *p;
     const size_t size = strlen(s) + 1;
-
     _nasm_last_string_size = size;
-    p = nasm_malloc(size);
-    return memcpy(p, s, size);
+    char *p = (char *)nasm_malloc(size);
+    return (char *)memcpy(p, s, size);
 }
 
 char *nasm_strndup(const char *s, size_t len)
 {
-    char *p;
-
     len = strnlen(s, len);
     _nasm_last_string_size = len + 1;
-    p = nasm_malloc(len+1);
+    char *p = (char *)nasm_malloc(len+1);
     p[len] = '\0';
-    return memcpy(p, s, len);
+    return (char*)memcpy(p, s, len);
 }
 
 char *nasm_strcat(const char *one, const char *two)
 {
-    char *rslt;
     const size_t l1 = strlen(one);
     const size_t s2 = strlen(two) + 1;
-
     _nasm_last_string_size = l1 + s2;
-    rslt = nasm_malloc(l1 + s2);
+    char *rslt = (char*)nasm_malloc(l1 + s2);
     memcpy(rslt, one, l1);
     memcpy(rslt + l1, two, s2);
     return rslt;
@@ -149,7 +143,7 @@ char *nasm_strcatn(const char *str1, ...)
     char *rslt;                 /* Output buffer */
     size_t s;                   /* Total buffer size */
     size_t n;                   /* Number of arguments */
-    size_t *ltbl;               /* Table of lengths */
+    //size_t *ltbl;               /* Table of lengths */
     size_t l, *lp;              /* Length for current argument */
     const char *p;              /* Currently examined argument */
     char *q;                    /* Output pointer */
@@ -163,7 +157,7 @@ char *nasm_strcatn(const char *str1, ...)
     }
     va_end(ap);
 
-    ltbl = nasm_malloc(n * sizeof(size_t));
+    size_t* ltbl = (size_t *)nasm_malloc(n * sizeof(size_t));
 
     s = 1;                      /* Space for final NULL */
     p = str1;
@@ -178,7 +172,7 @@ char *nasm_strcatn(const char *str1, ...)
 
     _nasm_last_string_size = s;
 
-    q = rslt = nasm_malloc(s);
+    q = rslt = (char*)nasm_malloc(s);
 
     p = str1;
     lp = ltbl;

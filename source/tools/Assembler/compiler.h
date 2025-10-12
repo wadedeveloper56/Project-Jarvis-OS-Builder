@@ -42,7 +42,7 @@
 
 #ifndef NASM_COMPILER_H
 #define NASM_COMPILER_H 1
-
+#define __restrict restrict
 /*
  * At least DJGPP and Cygwin have broken header files if __STRICT_ANSI__
  * is defined.

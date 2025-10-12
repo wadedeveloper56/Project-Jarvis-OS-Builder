@@ -79,7 +79,7 @@ static inline bool nasm_isspace(char x)
 
 static inline bool nasm_isalpha(char x)
 {
-    return nasm_ctype(x, NCT_LOWER|NCT_UPPER);
+    return nasm_ctype(x, (enum nasm_ctype)(NCT_LOWER|NCT_UPPER));
 }
 
 static inline bool nasm_isdigit(char x)
@@ -88,7 +88,7 @@ static inline bool nasm_isdigit(char x)
 }
 static inline bool nasm_isalnum(char x)
 {
-    return nasm_ctype(x, NCT_LOWER|NCT_UPPER|NCT_DIGIT);
+    return nasm_ctype(x, (enum nasm_ctype)(NCT_LOWER|NCT_UPPER|NCT_DIGIT));
 }
 static inline bool nasm_isxdigit(char x)
 {
@@ -104,15 +104,15 @@ static inline bool nasm_isidchar(char x)
 }
 static inline bool nasm_isbrcchar(char x)
 {
-    return nasm_ctype(x, NCT_ID|NCT_MINUS);
+    return nasm_ctype(x, (enum nasm_ctype)(NCT_ID|NCT_MINUS));
 }
 static inline bool nasm_isnumstart(char x)
 {
-    return nasm_ctype(x, NCT_DIGIT|NCT_DOLLAR);
+    return nasm_ctype(x, (enum nasm_ctype)(NCT_DIGIT|NCT_DOLLAR));
 }
 static inline bool nasm_isnumchar(char x)
 {
-    return nasm_ctype(x, NCT_DIGIT|NCT_LOWER|NCT_UPPER|NCT_UNDER);
+    return nasm_ctype(x, (enum nasm_ctype)(NCT_DIGIT|NCT_LOWER|NCT_UPPER|NCT_UNDER));
 }
 static inline bool nasm_isquote(char x)
 {

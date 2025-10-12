@@ -172,6 +172,7 @@
  * \375             vsiby|vm32y|vm64y           this instruction takes an YMM VSIB memory EA
  * \376             vsibz|vm32z|vm64z           this instruction takes an ZMM VSIB memory EA
  */
+#define __restrict restrict
 #include <stdlib.h>
 #include <stdio.h>
 #include "compiler.h"
@@ -390,7 +391,7 @@ static void out(struct out_data *data)
             if (!(ofmt->flags & OFMT_KEEP_ADDR)) {
                 if (asize >= (size_t)(data->bits >> 3)) {
                     /* Support address space wrapping for low-bit modes */
-                    data->flags &= ~OUT_SIGNMASK;
+                    data->flags = (enum out_flags)(data->flags & ~OUT_SIGNMASK);
                 }
                 warn_overflow_out(addrval, asize, data->flags);
                 xdata.q = cpu_to_le64(addrval);
@@ -842,7 +843,7 @@ int64_t assemble(int32_t segment, int64_t start, int bits, insn *instruction)
         if (!t)
             goto done;
 
-        fp = nasm_open_read(fname, NF_BINARY|NF_FORMAP);
+        fp = nasm_open_read(fname, (enum file_flags)(NF_BINARY|NF_FORMAP));
         if (!fp) {
             nasm_nonfatal("`incbin': unable to open file `%s'",
                           fname);
@@ -879,7 +880,7 @@ int64_t assemble(int32_t segment, int64_t start, int bits, insn *instruction)
         map = nasm_map_file(fp, base, len);
         if (!map) {
             blk = len < (off_t)INCBIN_MAX_BUF ? (size_t)len : INCBIN_MAX_BUF;
-            buf = nasm_malloc(blk);
+            buf = (char *)nasm_malloc(blk);
         }
 
         while (t--) {
@@ -1294,7 +1295,7 @@ int64_t insn_size(int32_t segment, int64_t offset, int bits, insn *instruction)
 
 static void bad_hle_warn(const insn * ins, uint8_t hleok)
 {
-    enum prefixes rep_pfx = ins->prefixes[PPS_REP];
+    enum prefixes rep_pfx = (enum prefixes)ins->prefixes[PPS_REP];
     enum whatwarn { w_none, w_lock, w_inval } ww;
     static const enum whatwarn warn[2][4] =
     {
@@ -1469,7 +1470,7 @@ static int64_t calcsize(int32_t segment, int64_t offset, int bits,
             ins->evex_p[2] |= op_evexflags(opx, EVEX_P2VP, 2); /* High-16 NDS */
             ins->vex_cm = *codes++;
             ins->vex_wlp = *codes++;
-            ins->evex_tuple = (*codes++ - 0300);
+            ins->evex_tuple = (enum ttypes)(*codes++ - 0300);
             break;
 
         case 0250:
@@ -1477,7 +1478,7 @@ static int64_t calcsize(int32_t segment, int64_t offset, int bits,
             ins->vexreg = 0;
             ins->vex_cm = *codes++;
             ins->vex_wlp = *codes++;
-            ins->evex_tuple = (*codes++ - 0300);
+            ins->evex_tuple = (enum ttypes)(*codes++ - 0300);
             break;
 
         case4(0254):
@@ -1538,7 +1539,7 @@ static int64_t calcsize(int32_t segment, int64_t offset, int bits,
              *!   \c{osp}) invalid for the specified instruction has been specified.
              *!   The operand prefix will be ignored by the assembler.
              */
-            enum prefixes pfx = ins->prefixes[PPS_OSIZE];
+            enum prefixes pfx = (enum prefixes)ins->prefixes[PPS_OSIZE];
             if (pfx == P_O16)
                 break;
             if (pfx != P_none)
@@ -1551,7 +1552,7 @@ static int64_t calcsize(int32_t segment, int64_t offset, int bits,
 
         case 0321:
         {
-            enum prefixes pfx = ins->prefixes[PPS_OSIZE];
+            enum prefixes pfx = (enum prefixes)ins->prefixes[PPS_OSIZE];
             if (pfx == P_O32)
                 break;
             if (pfx != P_none)

@@ -148,7 +148,7 @@ void nasm_error_hold_pop(errhold hold, bool issue);
 /* True if a warning is enabled, either as a warning or an error */
 static inline bool warn_active(errflags warn)
 {
-    enum warn_index wa = WARN_IDX(warn);
+    enum warn_index wa = (enum warn_index)WARN_IDX(warn);
     return unlikely(warning_state[wa] & WARN_ST_ENABLED);
 }
 

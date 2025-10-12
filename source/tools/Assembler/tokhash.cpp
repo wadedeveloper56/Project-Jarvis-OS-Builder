@@ -2,7 +2,7 @@
  * This file is generated from insns.dat, regs.dat and token.dat
  * by tokhash.pl; do not edit.
  */
-
+#define __restrict restrict
 #include "compiler.h"
 #include "nasm.h"
 #include "hashtbl.h"

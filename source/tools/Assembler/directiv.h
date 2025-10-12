@@ -59,7 +59,7 @@ extern const char * const directive_tbl[40];
 
 static inline enum directive directive_find(const char *str)
 {
-    return perfhash_find(&directive_hash, str);
+    return (enum directive)perfhash_find(&directive_hash, str);
 }
 
 static inline const char * directive_name(enum directive x)

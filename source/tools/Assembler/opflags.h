@@ -178,15 +178,15 @@
 #define REG_CLASS_BND           GEN_REG_CLASS(9)
 #define REG_CLASS_RM_TMM	GEN_REG_CLASS(10)
 
-static inline bool is_class(opflags_t class, opflags_t op)
+static inline bool is_class(opflags_t clazz, opflags_t op)
 {
-	return !(class & ~op);
+	return !(clazz & ~op);
 }
 
-static inline bool is_reg_class(opflags_t class, opflags_t reg)
+static inline bool is_reg_class(opflags_t clazz, opflags_t reg)
 {
 	if (reg >= EXPR_REG_START && reg <= EXPR_REG_END)
-		return is_class(class, nasm_reg_flags[reg]);
+		return is_class(clazz, nasm_reg_flags[reg]);
 	return false;
 }
 

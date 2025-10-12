@@ -1,6 +1,6 @@
 /* ----------------------------------------------------------------------- *
- *
- *   Copyright 2017 The NASM Authors - All Rights Reserved
+ *   
+ *   Copyright 1996-2020 The NASM Authors - All Rights Reserved
  *   See the file AUTHORS included with the NASM distribution for
  *   the specific copyright holders.
  *
@@ -14,7 +14,7 @@
  *     copyright notice, this list of conditions and the following
  *     disclaimer in the documentation and/or other materials provided
  *     with the distribution.
- *
+ *     
  *     THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND
  *     CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
  *     INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
@@ -30,21 +30,51 @@
  *     EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  * ----------------------------------------------------------------------- */
-#include <stdio.h>
-#include <stdlib.h>
-#include "compiler.h"
+#define __restrict restrict
+#include "ver.h"
+#include "version.h"
 
-#ifndef HAVE_STRRCHRNUL
+/* This is printed when entering nasm -v */
+const char nasm_version[] = NASM_VER;
+const char nasm_date[] = __DATE__;
+const char nasm_compile_options[] = ""
+#ifdef DEBUG
+    " with -DDEBUG"
+#endif
+    ;
 
-char* strrchrnul(const char* s, int c)
+bool reproducible;              /* Reproducible output */
+
+/* These are used by some backends. For a reproducible build,
+ * these cannot contain version numbers.
+ */
+static const char * const _nasm_comment[2] =
 {
-    char* p;
+    "The Netwide Assembler " NASM_VER,
+    "The Netwide Assembler"
+};
 
-    p = strrchr(s, c);
-    if (!p)
-        p = strchr(s, '\0');
+static const char * const _nasm_signature[2] = {
+    "NASM " NASM_VER,
+    "NASM"
+};
 
-    return p;
+const char *nasm_comment(void)
+{
+    return _nasm_comment[reproducible];
 }
 
-#endif
+size_t nasm_comment_len(void)
+{
+    return strlen(nasm_comment());
+}
+
+const char *nasm_signature(void)
+{
+    return _nasm_signature[reproducible];
+}
+
+size_t nasm_signature_len(void)
+{
+    return strlen(nasm_signature());
+}

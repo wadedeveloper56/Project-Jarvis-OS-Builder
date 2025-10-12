@@ -30,7 +30,7 @@
  *     EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  * ----------------------------------------------------------------------- */
-
+#define __restrict restrict
 #include "nasmlib.h"
 
 /* Used to avoid returning NULL to a debug printing function */
