@@ -86,6 +86,7 @@ public:
 	BOOL  GetAuxSymbolAsString(PSTR pszBuffer, unsigned cbBuffer);
 	friend class COFFSymbolTable;
 };
+
 typedef BINARYFORMATS_API COFFSymbol* PCOFFSymbol;
 class BINARYFORMATS_API COFFSymbolTable
 {
@@ -103,7 +104,7 @@ public:
 };
 typedef BINARYFORMATS_API COFFSymbolTable* PCOFFSymbolTable;
 
-typedef struct BINARYFORMATS_API OBJSection
+typedef struct BINARYFORMATS_API _OBJSection
 {
 	IMAGE_SECTION_HEADER header;
 	PIMAGE_RELOCATION relocation;
@@ -111,35 +112,40 @@ typedef struct BINARYFORMATS_API OBJSection
 	char* sectionBuffer;
 }OBJSection, * OBJSectionPtr;
 
-struct BINARYFORMATS_API OBJFile
+typedef struct BINARYFORMATS_API _OBJFile
 {
 	vector<OBJSectionPtr> sectionTable;
 	vector<string> stringTable;
 	IMAGE_FILE_HEADER header;
 	PCOFFSymbolTable symbolTable;
 	DWORD stringTableSize;
-	OBJFile();
-/*
-	BINARYFORMATS_API int getSectionTableSize();
-	BINARYFORMATS_API void addSection(OBJSectionPtr ptr);
-	BINARYFORMATS_API OBJSectionPtr getSection(int index);
-	BINARYFORMATS_API int getStringTableSize();
-	BINARYFORMATS_API void addString(string str);
-	BINARYFORMATS_API string getString(int index);
-*/
-};
-typedef OBJFile* OBJFilePtr;
-typedef OBJFile** OBJFilePtrPtr;
+	_OBJFile();
+} OBJFile, * OBJFilePtr, ** OBJFilePtrPtr;
 
-struct BINARYFORMATS_API Resources
+typedef struct BINARYFORMATS_API _Resources
 {
 	vector<PIMAGE_RESOURCE_DIRECTORY_ENTRY> entries;
 	IMAGE_RESOURCE_DIRECTORY res;
-	Resources();
-};
-typedef Resources* ResourcesPtr;
+	_Resources();
+}Resources, * ResourcesPtr, ** ResourcesPtrPtr;
 
-struct BINARYFORMATS_API EXEFile
+typedef struct BINARYFORMATS_API _ExportsFunctions
+{
+	DWORD entryPoint;
+	DWORD ordinal;
+	char* filename;
+	_ExportsFunctions();
+} ExportsFunctions, * ExportsFunctionsPtr, ** ExportsFunctionsPtrPtr;
+
+typedef struct BINARYFORMATS_API _Exports
+{
+	IMAGE_EXPORT_DIRECTORY exports;
+	char* filename;
+	vector<ExportsFunctionsPtr> functions;
+	_Exports();
+} Exports, * ExportsPtr;
+
+typedef struct BINARYFORMATS_API _EXEFile
 {
 	vector<OBJSectionPtr> sectionTable;
 	vector<PIMAGE_IMPORT_DESCRIPTOR> imports;
@@ -150,10 +156,9 @@ struct BINARYFORMATS_API EXEFile
 	IMAGE_OPTIONAL_HEADER32 OptionalHeader32;
 	IMAGE_OPTIONAL_HEADER64 OptionalHeader64;
 	Resources resources;
-	EXEFile();
-};
-typedef EXEFile*  EXEFilePtr;
-typedef EXEFile** EXEFilePtrPtr;
+	ExportsPtr exportDir;
+	_EXEFile();
+} EXEFile, * EXEFilePtr, ** EXEFilePtrPtr;
 
 #define MakePtr( cast, ptr, addValue ) (cast)( (BYTE *)(ptr) + (DWORD)(addValue))
 
@@ -186,4 +191,4 @@ BINARYFORMATS_API void DumpDOSHeader(PIMAGE_DOS_HEADER dosHeader);
 BINARYFORMATS_API void DumpFileHeader(PIMAGE_FILE_HEADER pImageFileHeader);
 BINARYFORMATS_API void DumpOptionalHeader64(PIMAGE_OPTIONAL_HEADER64 optionalHeader);
 BINARYFORMATS_API void DumpOptionalHeader32(PIMAGE_OPTIONAL_HEADER32 optionalHeader);
-
+BINARYFORMATS_API void DumpExportDirectory(ExportsPtr exportDir);

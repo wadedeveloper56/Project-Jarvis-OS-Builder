@@ -1,7 +1,7 @@
 PEDUMP - Win32/Win64 COFF EXE/OBJ/LIB file dumper v1.0 (C) Copyright 2025 Christopher D. Wade.
 All Rights Reserved
-Dump of file C:\projects\research\alinksrc\ALink\Release\x64\alink.exe
-File Size 104448 bytes
+Dump of file C:\projects\ProjectJarvis\bin\tools\Release\x64\Test1.dll
+File Size 10752 bytes
 File Type: PE EXECUTABLE IMAGE
 DOS HEADER VALUES
               5A4D Magic number
@@ -20,63 +20,63 @@ DOS HEADER VALUES
                  0 Overlay number
                  0 OEM identifier (for e_oeminfo)
                  0 OEM information e_oemid specific
-                F0 File address of new exe header
+               100 File address of new exe header
 FILE HEADER VALUES
               8664 Machine (x64)
                  6 (6) Number of Sections
-          68B5BFBB TimeDateStamp ->  Mon Sep  1 10:46:03 2025
+          68EBDB91 TimeDateStamp ->  Sun Oct 12 11:47:13 2025
                  0 PointerToSymbolTable
                  0 (0) NumberOfSymbols
                 F0 (240) SizeOfOptionalHeader
-                22 Flags (Executable Application can handle large (>2GB) addresses )
+              2022 Flags (Executable Application can handle large (>2GB) addresses DLL )
 OPTIONAL HEADER VALUES (PE32+)
                20B magic
              14.44 linker version
-             14000 (81920) size of code
-             15C00 (89088) size of initialized data
+              1000 (4096) size of code
+              1C00 (7168) size of initialized data
                  0 (0) size of uninitialized data
-             14480 entry point
+              1374 entry point
               1000 base of code
-         140000000 image base (140000000 to 14002DFFF)
+         180000000 image base (180000000 to 180006FFF)
               1000 section alignment
                200 file alignment
               6.00 operating system version
               0.00 image version
               6.00 subsystem version
                  0 Win32 version
-             2E000 size of image
+              7000 size of image
                400 size of headers
                  0 checksum
-                 3 subsystem (Windows character)
-              8160 DLL characteristics (HIGH_ENTROPY_VIRTUAL_ADDRESSES DYNAMIC_BASE NX_COMPATIBLE TERMINAL_SERVER_AWARE )
+                 2 subsystem (Windows GUI)
+               160 DLL characteristics (HIGH_ENTROPY_VIRTUAL_ADDRESSES DYNAMIC_BASE NX_COMPATIBLE )
             100000 size of stack reserve
               1000 size of stack commit
             100000 size of heap reserve
               1000 size of heap commit
                  0 loader flags
                 10 number of directories
-                 0 [       0] RVA [size] of Export Directory
-             18A34 [     104] RVA [size] of Import Directory
-             2C000 [     1E0] RVA [size] of Resource Directory
-             2B000 [     6D8] RVA [size] of Exception Directory
+              2850 [      D4] RVA [size] of Export Directory
+              2924 [      50] RVA [size] of Import Directory
+              5000 [      F8] RVA [size] of Resource Directory
+              4000 [     1A4] RVA [size] of Exception Directory
                  0 [       0] RVA [size] of Security Directory
-             2D000 [      3C] RVA [size] of Base Relocation Directory
-             17BB0 [      70] RVA [size] of Debug Directory
+              6000 [      2C] RVA [size] of Base Relocation Directory
+              22D0 [      70] RVA [size] of Debug Directory
                  0 [       0] RVA [size] of Architecture Directory
                  0 [       0] RVA [size] of Global Pointer Directory
                  0 [       0] RVA [size] of TLS Directory
-             17A70 [     140] RVA [size] of Load Configuration Directory
+              2190 [     140] RVA [size] of Load Configuration Directory
                  0 [       0] RVA [size] of Bound Import Directory
-             15000 [     2B8] RVA [size] of Import Address Table Directory
+              2000 [      E8] RVA [size] of Import Address Table Directory
                  0 [       0] RVA [size] of Delay Import Directory
                  0 [       0] RVA [size] of COM Descriptor Directory
                  0 [       0] RVA [size] of Reserved Directory
 SECTION HEADER #0 (0)
    .text name
-   13EDC physical address
+     EE8 physical address
     1000 virtual address
-   14000 (81920) size of raw data
-     400 file pointer to raw data (00000400 to 000143FF)
+    1000 (4096) size of raw data
+     400 file pointer to raw data (00000400 to 000013FF)
        0 file pointer to relocation table
        0 file pointer to line numbers
        0 number of relocations
@@ -87,10 +87,10 @@ SECTION HEADER #0 (0)
 
 SECTION HEADER #1 (1)
   .rdata name
-    4426 physical address
-   15000 virtual address
-    4600 (17920) size of raw data
-   14400 file pointer to raw data (00014400 to 000189FF)
+     CDE physical address
+    2000 virtual address
+     E00 (3584) size of raw data
+    1400 file pointer to raw data (00001400 to 000021FF)
        0 file pointer to relocation table
        0 file pointer to line numbers
        0 number of relocations
@@ -101,10 +101,10 @@ SECTION HEADER #1 (1)
 
 SECTION HEADER #2 (2)
    .data name
-   108D0 physical address
-   1A000 virtual address
+     688 physical address
+    3000 virtual address
      200 (512) size of raw data
-   18A00 file pointer to raw data (00018A00 to 00018BFF)
+    2200 file pointer to raw data (00002200 to 000023FF)
        0 file pointer to relocation table
        0 file pointer to line numbers
        0 number of relocations
@@ -115,10 +115,10 @@ C0000040 flags (INITIALIZED_DATA READABLE WRITEABLE )
 
 SECTION HEADER #3 (3)
   .pdata name
-     6D8 physical address
-   2B000 virtual address
-     800 (2048) size of raw data
-   18C00 file pointer to raw data (00018C00 to 000193FF)
+     1A4 physical address
+    4000 virtual address
+     200 (512) size of raw data
+    2400 file pointer to raw data (00002400 to 000025FF)
        0 file pointer to relocation table
        0 file pointer to line numbers
        0 number of relocations
@@ -129,10 +129,10 @@ SECTION HEADER #3 (3)
 
 SECTION HEADER #4 (4)
    .rsrc name
-     1E0 physical address
-   2C000 virtual address
+      F8 physical address
+    5000 virtual address
      200 (512) size of raw data
-   19400 file pointer to raw data (00019400 to 000195FF)
+    2600 file pointer to raw data (00002600 to 000027FF)
        0 file pointer to relocation table
        0 file pointer to line numbers
        0 number of relocations
@@ -143,10 +143,10 @@ SECTION HEADER #4 (4)
 
 SECTION HEADER #5 (5)
   .reloc name
-      3C physical address
-   2D000 virtual address
+      2C physical address
+    6000 virtual address
      200 (512) size of raw data
-   19600 file pointer to raw data (00019600 to 000197FF)
+    2800 file pointer to raw data (00002800 to 000029FF)
        0 file pointer to relocation table
        0 file pointer to line numbers
        0 number of relocations
@@ -155,3 +155,18 @@ SECTION HEADER #5 (5)
 
 
 
+Exports table:
+  Name:            Test1.dll
+  Characteristics: 00000000
+  TimeDateStamp:   FFFFFFFF -> Sun Feb  7 00:28:15 2106
+  Version:         0.00
+  Ordinal base:    00000001
+  # of functions:  00000005
+  # of Names:      00000005
+
+  Ordinal   hint   RVA  Name
+        1     0   1010  ??0CTest1@@QEAA@XZ
+        2     1   1010  ??4CTest1@@QEAAAEAV0@$$QEAV0@@Z
+        3     2   1010  ??4CTest1@@QEAAAEAV0@AEBV0@@Z
+        4     3   1020  ?fnTest1@@YAHXZ
+        5     4   3678  ?nTest1@@3HA

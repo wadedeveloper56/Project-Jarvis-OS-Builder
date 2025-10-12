@@ -119,6 +119,10 @@ int main(int argc, char* argv[])
 				OBJSectionPtr ptr = data->sectionTable[i];
 				DumpSection(i, ptr);
 			}
+			if (data->exportDir != nullptr)
+			{
+				DumpExportDirectory(data->exportDir);
+			}
 			break;
 		}
 		case DEBUG:

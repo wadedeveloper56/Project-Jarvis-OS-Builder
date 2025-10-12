@@ -404,3 +404,22 @@ void DumpOptionalHeader32(PIMAGE_OPTIONAL_HEADER32 optionalHeader)
 		printf("  % 16X [% 8X] RVA [size] of %s Directory\n", optionalHeader->DataDirectory[i].VirtualAddress, optionalHeader->DataDirectory[i].Size, name);
 	}
 }
+
+void DumpExportDirectory(ExportsPtr exportDir)
+{
+	printf("Exports table:\n");
+	printf("  Name:            %s\n", exportDir->filename);
+	printf("  Characteristics: %08X\n", exportDir->exports.Characteristics);
+	printf("  TimeDateStamp:   %08X -> %s", exportDir->exports.TimeDateStamp, get_ctime_stg((time_t*)&exportDir->exports.TimeDateStamp));
+	printf("  Version:         %u.%02u\n", exportDir->exports.MajorVersion, exportDir->exports.MinorVersion);
+	printf("  Ordinal base:    %08X\n", exportDir->exports.Base);
+	printf("  # of functions:  %08X\n", exportDir->exports.NumberOfFunctions);
+	printf("  # of Names:      %08X\n", exportDir->exports.NumberOfNames);
+	printf("\n  Ordinal   hint   RVA  Name\n");
+	int i = 0;
+	for (ExportsFunctionsPtr item : exportDir->functions)
+	{
+		printf("  % 7X  % 4u  % 5X  %s\n", item->ordinal, i, item->entryPoint, item->filename);
+		i++;
+	}
+}
