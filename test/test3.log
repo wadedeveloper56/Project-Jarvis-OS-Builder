@@ -24,11 +24,15 @@ DOS HEADER VALUES
 FILE HEADER VALUES
               8664 Machine (x64)
                  6 (6) Number of Sections
-          68EBDB91 TimeDateStamp ->  Sun Oct 12 11:47:13 2025
+          68EC13D0 TimeDateStamp ->  Sun Oct 12 15:47:12 2025
                  0 PointerToSymbolTable
                  0 (0) NumberOfSymbols
                 F0 (240) SizeOfOptionalHeader
-              2022 Flags (Executable Application can handle large (>2GB) addresses DLL )
+              2022 Flags
+                     Executable
+                     Application can handle large (>2GB) addresses
+                     DLL
+
 OPTIONAL HEADER VALUES (PE32+)
                20B magic
              14.44 linker version
@@ -48,7 +52,10 @@ OPTIONAL HEADER VALUES (PE32+)
                400 size of headers
                  0 checksum
                  2 subsystem (Windows GUI)
-               160 DLL characteristics (HIGH_ENTROPY_VIRTUAL_ADDRESSES DYNAMIC_BASE NX_COMPATIBLE )
+               160 DLL characteristics
+                     HIGH_ENTROPY_VIRTUAL_ADDRESSES
+                     DYNAMIC_BASE
+                     NX_COMPATIBLE
             100000 size of stack reserve
               1000 size of stack commit
             100000 size of heap reserve
@@ -170,3 +177,52 @@ Exports table:
         3     2   1010  ??4CTest1@@QEAAAEAV0@AEBV0@@Z
         4     3   1020  ?fnTest1@@YAHXZ
         5     4   3678  ?nTest1@@3HA
+
+Exports table:
+  Name:            VCRUNTIME140.dll
+  OrigFirstThunk:  000029F0
+  TimeDateStamp:   00000000 -> Wed Dec 31 18:00:00 1969
+  ForwarderChain:  00000000
+  First thunk RVA: 00002078
+  Ordn  Name
+    62  memset (Bound to: 00002A98)
+    60  memcpy (Bound to: 00002CD4)
+    37  __std_type_info_destroy_list (Bound to: 00002A78)
+     8  __C_specific_handler (Bound to: 00002A60)
+
+  Name:            api-ms-win-crt-runtime-l1-1-0.dll
+  OrigFirstThunk:  00002A18
+  TimeDateStamp:   00000000 -> Wed Dec 31 18:00:00 1969
+  ForwarderChain:  00000000
+  First thunk RVA: 000020A0
+  Ordn  Name
+    22  _cexit (Bound to: 00002B50)
+    34  _execute_onexit_table (Bound to: 00002B38)
+    52  _initialize_onexit_table (Bound to: 00002B1C)
+    24  _configure_narrow_argv (Bound to: 00002AE0)
+    63  _seh_filter_dll (Bound to: 00002ACE)
+    55  _initterm_e (Bound to: 00002AC0)
+    54  _initterm (Bound to: 00002AB4)
+    51  _initialize_narrow_environment (Bound to: 00002AFA)
+
+  Name:            KERNEL32.dll
+  OrigFirstThunk:  00002978
+  TimeDateStamp:   00000000 -> Wed Dec 31 18:00:00 1969
+  ForwarderChain:  00000000
+  First thunk RVA: 00002000
+  Ordn  Name
+   793  GetSystemTimeAsFileTime (Bound to: 00002C82)
+  1303  RtlVirtualUnwind (Bound to: 00002BAA)
+  1296  RtlLookupFunctionEntry (Bound to: 00002B90)
+  1288  RtlCaptureContext (Bound to: 00002B7C)
+  1463  SetUnhandledExceptionFilter (Bound to: 00002BDA)
+   576  GetCurrentProcess (Bound to: 00002BF8)
+  1495  TerminateProcess (Bound to: 00002C0C)
+   951  IsProcessorFeaturePresent (Bound to: 00002C20)
+  1152  QueryPerformanceCounter (Bound to: 00002C3C)
+   943  IsDebuggerPresent (Bound to: 00002CB2)
+   921  InitializeSListHead (Bound to: 00002C9C)
+  1530  UnhandledExceptionFilter (Bound to: 00002BBE)
+   581  GetCurrentThreadId (Bound to: 00002C6C)
+   577  GetCurrentProcessId (Bound to: 00002C56)
+

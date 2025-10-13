@@ -253,18 +253,18 @@ void DumpFileHeader(PIMAGE_FILE_HEADER pImageFileHeader)
 	printf("  % 16X (%d) NumberOfSymbols\n", pImageFileHeader->NumberOfSymbols, pImageFileHeader->NumberOfSymbols);
 	printf("  % 16X (%d) SizeOfOptionalHeader\n", pImageFileHeader->SizeOfOptionalHeader, pImageFileHeader->SizeOfOptionalHeader);
 	WORD Chars = pImageFileHeader->Characteristics;
-	printf("  % 16X Flags (", Chars);
+	printf("  % 16X Flags\n", Chars);
 	for (int i = 0; i < NUMBER_IMAGE_HEADER_FLAGS; i++)
 	{
 		WORD flag = ImageFileHeaderCharacteristics[i].flag;
 		if (Chars & flag) {
-			printf("%s ", ImageFileHeaderCharacteristics[i].name);
+			printf("                     %s\n", ImageFileHeaderCharacteristics[i].name);
 			Chars &= ~flag;
 			if (Chars == 0)
 				break;
 		}
 	}
-	printf(")\n");
+	printf("\n");
 }
 
 void DumpOptionalHeader64(PIMAGE_OPTIONAL_HEADER64 optionalHeader)
@@ -297,13 +297,12 @@ void DumpOptionalHeader64(PIMAGE_OPTIONAL_HEADER64 optionalHeader)
 		case IMAGE_SUBSYSTEM_POSIX_CUI: s = "Posix character"; break;
 	}
 	printf("  % 16X subsystem (%s)\n", optionalHeader->Subsystem, s);
-	printf("  % 16X DLL characteristics (", optionalHeader->DllCharacteristics);
+	printf("  % 16X DLL characteristics\n", optionalHeader->DllCharacteristics);
 	for (int i = 0; i < NUMBER_DLL_CHARACTERISTICS; i++)
 	{
 		if (optionalHeader->DllCharacteristics & DllCharacteristics[i].flag)
-			printf("%s ", DllCharacteristics[i].name);
+			printf("                     %s\n", DllCharacteristics[i].name);
 	}
-	printf(")\n");
 	printf("  % 16llX size of stack reserve\n", optionalHeader->SizeOfStackReserve);
 	printf("  % 16llX size of stack commit\n", optionalHeader->SizeOfStackCommit);
 	printf("  % 16llX size of heap reserve\n", optionalHeader->SizeOfHeapReserve);
@@ -421,5 +420,62 @@ void DumpExportDirectory(ExportsPtr exportDir)
 	{
 		printf("  % 7X  % 4u  % 5X  %s\n", item->ordinal, i, item->entryPoint, item->filename);
 		i++;
+	}
+	printf("\n");
+}
+
+void DumpImportDirectory(bool is64, vector<ImportsPtr>* imports)
+{
+	printf("Exports table:\n");
+	for (ImportsPtr ptr : *imports)
+	{
+		printf("  Name:            %s\n", ptr->filename);
+		printf("  OrigFirstThunk:  %08X\n", ptr->imports.Characteristics);
+		printf("  TimeDateStamp:   %08X -> %s", ptr->imports.TimeDateStamp, get_ctime_stg((time_t*)&ptr->imports.TimeDateStamp));
+		printf("  ForwarderChain:  %08X\n", ptr->imports.ForwarderChain);
+		printf("  First thunk RVA: %08X\n", ptr->imports.FirstThunk);
+		printf("  Ordn  Name\n");
+		int i = 0;
+		if (is64)
+		{
+			for (Thunk64Ptr thunk : ptr->thunk64)
+			{
+				if (thunk->thunk.u1.Ordinal & IMAGE_ORDINAL_FLAG64)
+				{
+					printf("  % 8llu", IMAGE_ORDINAL64(thunk->thunk.u1.Ordinal));
+				}
+				else
+				{
+					printf("  %4u  %s", thunk->ordinalname->Hint, thunk->ordinalname->Name);
+				}
+				if (ptr->imports.TimeDateStamp == 0)
+				{
+					printf(" (Bound to: %08llX)", ptr->thunkIAT64[i]->thunk.u1.Function);
+				}
+				printf("\n");
+				i++;
+			}
+		}
+		else
+		{
+			for (Thunk32Ptr thunk : ptr->thunk32)
+			{
+				if (thunk->thunk.u1.Ordinal & IMAGE_ORDINAL_FLAG64)
+				{
+					printf("  % 8lu", IMAGE_ORDINAL64(thunk->thunk.u1.Ordinal));
+				}
+				else
+				{
+					printf("  %4u  %s", thunk->ordinalname->Hint, thunk->ordinalname->Name);
+				}
+				if (ptr->imports.TimeDateStamp == 0)
+				{
+					printf(" (Bound to: %08lX)", ptr->thunkIAT32[i]->thunk.u1.Function);
+				}
+				printf("\n");
+				i++;
+			}
+		}
+		printf("\n");
 	}
 }

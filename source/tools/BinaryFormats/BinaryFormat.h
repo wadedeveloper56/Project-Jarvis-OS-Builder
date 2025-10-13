@@ -145,10 +145,34 @@ typedef struct BINARYFORMATS_API _Exports
 	_Exports();
 } Exports, * ExportsPtr;
 
+typedef struct BINARYFORMATS_API _Thunk64
+{
+	IMAGE_THUNK_DATA64 thunk;
+	PIMAGE_IMPORT_BY_NAME ordinalname;
+	_Thunk64();
+} Thunk64, * Thunk64Ptr;
+
+typedef struct BINARYFORMATS_API _Thunk32
+{
+	IMAGE_THUNK_DATA32 thunk;
+	PIMAGE_IMPORT_BY_NAME ordinalname;
+	_Thunk32();
+} Thunk32, * Thunk32Ptr;
+
+typedef struct BINARYFORMATS_API _Imports
+{
+	IMAGE_IMPORT_DESCRIPTOR imports;
+	vector<Thunk64Ptr> thunk64;
+	vector<Thunk64Ptr> thunkIAT64;
+	vector<Thunk32Ptr> thunk32;
+	vector<Thunk32Ptr> thunkIAT32;
+	char* filename;
+	_Imports();
+} Imports, * ImportsPtr;
+
 typedef struct BINARYFORMATS_API _EXEFile
 {
 	vector<OBJSectionPtr> sectionTable;
-	vector<PIMAGE_IMPORT_DESCRIPTOR> imports;
 	bool is64;
 	IMAGE_DOS_HEADER dosHeader;
 	DWORD Signature;
@@ -156,7 +180,8 @@ typedef struct BINARYFORMATS_API _EXEFile
 	IMAGE_OPTIONAL_HEADER32 OptionalHeader32;
 	IMAGE_OPTIONAL_HEADER64 OptionalHeader64;
 	Resources resources;
-	ExportsPtr exportDir;
+	ExportsPtr exports;
+	vector<ImportsPtr> imports;
 	_EXEFile();
 } EXEFile, * EXEFilePtr, ** EXEFilePtrPtr;
 
@@ -192,3 +217,4 @@ BINARYFORMATS_API void DumpFileHeader(PIMAGE_FILE_HEADER pImageFileHeader);
 BINARYFORMATS_API void DumpOptionalHeader64(PIMAGE_OPTIONAL_HEADER64 optionalHeader);
 BINARYFORMATS_API void DumpOptionalHeader32(PIMAGE_OPTIONAL_HEADER32 optionalHeader);
 BINARYFORMATS_API void DumpExportDirectory(ExportsPtr exportDir);
+BINARYFORMATS_API void DumpImportDirectory(bool is64, vector<ImportsPtr>* imports);
