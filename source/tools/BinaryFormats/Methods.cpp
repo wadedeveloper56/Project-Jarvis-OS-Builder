@@ -12,7 +12,11 @@ _EXEFile::_EXEFile() :is64(false), dosHeader({ 0 }), Signature(0), FileHeader({ 
 {
 }
 
-_Resources::_Resources() :res({ 0 })
+_ResourcesEntry::_ResourcesEntry() :entry({ 0 }), isDirectory(0), isString(0)
+{
+}
+
+_Resources::_Resources() :header({ 0 })
 {
 
 }

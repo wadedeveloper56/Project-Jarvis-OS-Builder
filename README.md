@@ -2,7 +2,7 @@ Project Jarvis
 --------------
  ## Basic idea
 
-Project jarvis is an IDE, c compiler, assembler, disassembler,linker, preprocessor, and pedumper 
+Project jarvis is an IDE, c compiler, assembler, disassembler, linker, preprocessor, and pedumper 
 that supports 16, 32, and 64 bit development on a 32 or 64 bit host
 
 ****

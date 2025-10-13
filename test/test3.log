@@ -1,7 +1,7 @@
 PEDUMP - Win32/Win64 COFF EXE/OBJ/LIB file dumper v1.0 (C) Copyright 2025 Christopher D. Wade.
 All Rights Reserved
-Dump of file C:\projects\ProjectJarvis\bin\tools\Release\x64\Test1.dll
-File Size 10752 bytes
+Dump of file C:\projects\ProjectJarvis\bin\tools\Release\Win32\test1.dll
+File Size 9216 bytes
 File Type: PE EXECUTABLE IMAGE
 DOS HEADER VALUES
               5A4D Magic number
@@ -20,67 +20,66 @@ DOS HEADER VALUES
                  0 Overlay number
                  0 OEM identifier (for e_oeminfo)
                  0 OEM information e_oemid specific
-               100 File address of new exe header
+                F8 File address of new exe header
 FILE HEADER VALUES
-              8664 Machine (x64)
-                 6 (6) Number of Sections
-          68EC13D0 TimeDateStamp ->  Sun Oct 12 15:47:12 2025
+               14C Machine (Intel 386 or later processors and compatible processors)
+                 5 (5) Number of Sections
+          68EC13A9 TimeDateStamp ->  Sun Oct 12 15:46:33 2025
                  0 PointerToSymbolTable
                  0 (0) NumberOfSymbols
-                F0 (240) SizeOfOptionalHeader
-              2022 Flags
-                     Executable
-                     Application can handle large (>2GB) addresses
-                     DLL
+                E0 (224) SizeOfOptionalHeader
+              2102 Flags
+                   Executable
+                   32-Bit Machine
+                   DLL
 
-OPTIONAL HEADER VALUES (PE32+)
-               20B magic
+OPTIONAL HEADER VALUES (PE32)
+               10B magic
              14.44 linker version
               1000 (4096) size of code
-              1C00 (7168) size of initialized data
+              1200 (4608) size of initialized data
                  0 (0) size of uninitialized data
-              1374 entry point
+              138E entry point
               1000 base of code
-         180000000 image base (180000000 to 180006FFF)
+          10000000 image base (10000000 to 10005FFF)
               1000 section alignment
                200 file alignment
               6.00 operating system version
               0.00 image version
               6.00 subsystem version
                  0 Win32 version
-              7000 size of image
+              6000 size of image
                400 size of headers
                  0 checksum
                  2 subsystem (Windows GUI)
-               160 DLL characteristics
-                     HIGH_ENTROPY_VIRTUAL_ADDRESSES
-                     DYNAMIC_BASE
-                     NX_COMPATIBLE
+               140 DLL characteristics
+                   DLL can move
+                   NX Compatible
             100000 size of stack reserve
               1000 size of stack commit
             100000 size of heap reserve
               1000 size of heap commit
                  0 loader flags
                 10 number of directories
-              2850 [      D4] RVA [size] of Export Directory
-              2924 [      50] RVA [size] of Import Directory
-              5000 [      F8] RVA [size] of Resource Directory
-              4000 [     1A4] RVA [size] of Exception Directory
-                 0 [       0] RVA [size] of Security Directory
-              6000 [      2C] RVA [size] of Base Relocation Directory
-              22D0 [      70] RVA [size] of Debug Directory
-                 0 [       0] RVA [size] of Architecture Directory
-                 0 [       0] RVA [size] of Global Pointer Directory
-                 0 [       0] RVA [size] of TLS Directory
-              2190 [     140] RVA [size] of Load Configuration Directory
-                 0 [       0] RVA [size] of Bound Import Directory
-              2000 [      E8] RVA [size] of Import Address Table Directory
-                 0 [       0] RVA [size] of Delay Import Directory
-                 0 [       0] RVA [size] of COM Descriptor Directory
-                 0 [       0] RVA [size] of Reserved Directory
+            Export                 rva: 000025B0  size: 000000CC (204)
+            Import                 rva: 0000267C  size: 00000050 (80)
+            Resource               rva: 00004000  size: 000000F8 (248)
+            Exception              rva: 00000000  size: 00000000 (0)
+            Security               rva: 00000000  size: 00000000 (0)
+            Base Relocation        rva: 00005000  size: 0000016C (364)
+            Debug                  rva: 00002160  size: 00000070 (112)
+            Architecture           rva: 00000000  size: 00000000 (0)
+            Global Pointer         rva: 00000000  size: 00000000 (0)
+            TLS                    rva: 00000000  size: 00000000 (0)
+            Load Configuration     rva: 000020A0  size: 00000040 (64)
+            Bound Import           rva: 00000000  size: 00000000 (0)
+            Import Address Table   rva: 00002000  size: 00000064 (100)
+            Delay Import           rva: 00000000  size: 00000000 (0)
+            COM Descriptor         rva: 00000000  size: 00000000 (0)
+            Reserved               rva: 00000000  size: 00000000 (0)
 SECTION HEADER #0 (0)
    .text name
-     EE8 physical address
+     E6D physical address
     1000 virtual address
     1000 (4096) size of raw data
      400 file pointer to raw data (00000400 to 000013FF)
@@ -88,77 +87,76 @@ SECTION HEADER #0 (0)
        0 file pointer to line numbers
        0 number of relocations
        0 number of line numbers
-60000020 flags (CODE EXECUTABLE READABLE )
+60000020 flags
+         Code
+         Executable
+         Readable
 
 
 
 SECTION HEADER #1 (1)
   .rdata name
-     CDE physical address
+     964 physical address
     2000 virtual address
-     E00 (3584) size of raw data
-    1400 file pointer to raw data (00001400 to 000021FF)
+     A00 (2560) size of raw data
+    1400 file pointer to raw data (00001400 to 00001DFF)
        0 file pointer to relocation table
        0 file pointer to line numbers
        0 number of relocations
        0 number of line numbers
-40000040 flags (INITIALIZED_DATA READABLE )
+40000040 flags
+         Initialized Data
+         Readable
 
 
 
 SECTION HEADER #2 (2)
    .data name
-     688 physical address
+     3E0 physical address
     3000 virtual address
+     200 (512) size of raw data
+    1E00 file pointer to raw data (00001E00 to 00001FFF)
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+C0000040 flags
+         Initialized Data
+         Readable
+         Writeable
+
+
+
+SECTION HEADER #3 (3)
+   .rsrc name
+      F8 physical address
+    4000 virtual address
+     200 (512) size of raw data
+    2000 file pointer to raw data (00002000 to 000021FF)
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         Readable
+
+
+
+SECTION HEADER #4 (4)
+  .reloc name
+     16C physical address
+    5000 virtual address
      200 (512) size of raw data
     2200 file pointer to raw data (00002200 to 000023FF)
        0 file pointer to relocation table
        0 file pointer to line numbers
        0 number of relocations
        0 number of line numbers
-C0000040 flags (INITIALIZED_DATA READABLE WRITEABLE )
-
-
-
-SECTION HEADER #3 (3)
-  .pdata name
-     1A4 physical address
-    4000 virtual address
-     200 (512) size of raw data
-    2400 file pointer to raw data (00002400 to 000025FF)
-       0 file pointer to relocation table
-       0 file pointer to line numbers
-       0 number of relocations
-       0 number of line numbers
-40000040 flags (INITIALIZED_DATA READABLE )
-
-
-
-SECTION HEADER #4 (4)
-   .rsrc name
-      F8 physical address
-    5000 virtual address
-     200 (512) size of raw data
-    2600 file pointer to raw data (00002600 to 000027FF)
-       0 file pointer to relocation table
-       0 file pointer to line numbers
-       0 number of relocations
-       0 number of line numbers
-40000040 flags (INITIALIZED_DATA READABLE )
-
-
-
-SECTION HEADER #5 (5)
-  .reloc name
-      2C physical address
-    6000 virtual address
-     200 (512) size of raw data
-    2800 file pointer to raw data (00002800 to 000029FF)
-       0 file pointer to relocation table
-       0 file pointer to line numbers
-       0 number of relocations
-       0 number of line numbers
-42000040 flags (INITIALIZED_DATA DISCARDABLE READABLE )
+42000040 flags
+         Initialized Data
+         Discardable
+         Readable
 
 
 
@@ -172,57 +170,67 @@ Exports table:
   # of Names:      00000005
 
   Ordinal   hint   RVA  Name
-        1     0   1010  ??0CTest1@@QEAA@XZ
-        2     1   1010  ??4CTest1@@QEAAAEAV0@$$QEAV0@@Z
-        3     2   1010  ??4CTest1@@QEAAAEAV0@AEBV0@@Z
+        1     0   1030  ??0CTest1@@QAE@XZ
+        2     1   1010  ??4CTest1@@QAEAAV0@$$QAV0@@Z
+        3     2   1010  ??4CTest1@@QAEAAV0@ABV0@@Z
         4     3   1020  ?fnTest1@@YAHXZ
-        5     4   3678  ?nTest1@@3HA
+        5     4   33D8  ?nTest1@@3HA
 
 Exports table:
   Name:            VCRUNTIME140.dll
-  OrigFirstThunk:  000029F0
+  OrigFirstThunk:  000026FC
   TimeDateStamp:   00000000 -> Wed Dec 31 18:00:00 1969
   ForwarderChain:  00000000
-  First thunk RVA: 00002078
+  First thunk RVA: 00002030
   Ordn  Name
-    62  memset (Bound to: 00002A98)
-    60  memcpy (Bound to: 00002CD4)
-    37  __std_type_info_destroy_list (Bound to: 00002A78)
-     8  __C_specific_handler (Bound to: 00002A60)
+ (Bound to: 00002730)
+ (Bound to: 00002750)
+ (Bound to: 0000275A)
 
   Name:            api-ms-win-crt-runtime-l1-1-0.dll
-  OrigFirstThunk:  00002A18
+  OrigFirstThunk:  0000270C
   TimeDateStamp:   00000000 -> Wed Dec 31 18:00:00 1969
   ForwarderChain:  00000000
-  First thunk RVA: 000020A0
+  First thunk RVA: 00002040
   Ordn  Name
-    22  _cexit (Bound to: 00002B50)
-    34  _execute_onexit_table (Bound to: 00002B38)
-    52  _initialize_onexit_table (Bound to: 00002B1C)
-    24  _configure_narrow_argv (Bound to: 00002AE0)
-    63  _seh_filter_dll (Bound to: 00002ACE)
-    55  _initterm_e (Bound to: 00002AC0)
-    54  _initterm (Bound to: 00002AB4)
-    51  _initialize_narrow_environment (Bound to: 00002AFA)
+ (Bound to: 00002822)
+ (Bound to: 0000280A)
+ (Bound to: 000027EE)
+ (Bound to: 000027B2)
+ (Bound to: 000027A0)
+ (Bound to: 00002792)
+ (Bound to: 00002786)
+ (Bound to: 000027CC)
 
   Name:            KERNEL32.dll
-  OrigFirstThunk:  00002978
+  OrigFirstThunk:  000026CC
   TimeDateStamp:   00000000 -> Wed Dec 31 18:00:00 1969
   ForwarderChain:  00000000
   First thunk RVA: 00002000
   Ordn  Name
-   793  GetSystemTimeAsFileTime (Bound to: 00002C82)
-  1303  RtlVirtualUnwind (Bound to: 00002BAA)
-  1296  RtlLookupFunctionEntry (Bound to: 00002B90)
-  1288  RtlCaptureContext (Bound to: 00002B7C)
-  1463  SetUnhandledExceptionFilter (Bound to: 00002BDA)
-   576  GetCurrentProcess (Bound to: 00002BF8)
-  1495  TerminateProcess (Bound to: 00002C0C)
-   951  IsProcessorFeaturePresent (Bound to: 00002C20)
-  1152  QueryPerformanceCounter (Bound to: 00002C3C)
-   943  IsDebuggerPresent (Bound to: 00002CB2)
-   921  InitializeSListHead (Bound to: 00002C9C)
-  1530  UnhandledExceptionFilter (Bound to: 00002BBE)
-   581  GetCurrentThreadId (Bound to: 00002C6C)
-   577  GetCurrentProcessId (Bound to: 00002C56)
+ (Bound to: 0000292C)
+ (Bound to: 0000286A)
+ (Bound to: 00002888)
+ (Bound to: 0000289C)
+ (Bound to: 000028B0)
+ (Bound to: 000028CC)
+ (Bound to: 000028E6)
+ (Bound to: 00002942)
+ (Bound to: 0000284E)
+ (Bound to: 00002912)
+ (Bound to: 000028FC)
 
+Resources table:
+  Characteristics:         00000000
+  TimeDateStamp:           00000000 -> Wed Dec 31 18:00:00 1969
+  Version:                 0.00
+  Number of Named Entries: 0000 (0)
+  Number of Id Entries:    0001 (1)
+
+  Name Offset:             0018
+  Name Is String:          0000
+  Name:                    0018
+  Id:                      0018
+  Offset To Data:          80000018
+  Offset To Directory:     00000018
+  Data is Directory:       00000001

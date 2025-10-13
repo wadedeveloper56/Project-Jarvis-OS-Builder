@@ -13,7 +13,7 @@ WORD_FLAG_DESCRIPTIONS ImageFileHeaderCharacteristics[] =
 	{IMAGE_FILE_AGGRESIVE_WS_TRIM, "AGGRESIVE_WS_TRIM"},
 	{IMAGE_FILE_LARGE_ADDRESS_AWARE, "Application can handle large (>2GB) addresses"},
 	{IMAGE_FILE_BYTES_REVERSED_LO, "BYTES_REVERSED_LO"},
-	{IMAGE_FILE_32BIT_MACHINE, "32BIT_MACHINE"},
+	{IMAGE_FILE_32BIT_MACHINE, "32-Bit Machine"},
 	{IMAGE_FILE_DEBUG_STRIPPED, "DEBUG_STRIPPED"},
 	{IMAGE_FILE_REMOVABLE_RUN_FROM_SWAP, "REMOVABLE_RUN_FROM_SWAP"},
 	{IMAGE_FILE_NET_RUN_FROM_SWAP, "NET_RUN_FROM_SWAP"},
@@ -27,10 +27,10 @@ WORD_FLAG_DESCRIPTIONS ImageFileHeaderCharacteristics[] =
 
 WORD_FLAG_DESCRIPTIONS DllCharacteristics[] =
 {
-   {IMAGE_DLLCHARACTERISTICS_HIGH_ENTROPY_VA,"HIGH_ENTROPY_VIRTUAL_ADDRESSES"},
-   {IMAGE_DLLCHARACTERISTICS_DYNAMIC_BASE,"DYNAMIC_BASE"},
+   {IMAGE_DLLCHARACTERISTICS_HIGH_ENTROPY_VA,"Image can handle a high entropy 64-bit virtual address space"},
+   {IMAGE_DLLCHARACTERISTICS_DYNAMIC_BASE,"DLL can move"},
    {IMAGE_DLLCHARACTERISTICS_FORCE_INTEGRITY,"CODE_INTEGRITY"},
-   {IMAGE_DLLCHARACTERISTICS_NX_COMPAT,"NX_COMPATIBLE"},
+   {IMAGE_DLLCHARACTERISTICS_NX_COMPAT,"NX Compatible"},
    {IMAGE_DLLCHARACTERISTICS_NO_ISOLATION,"NO_ISOLATION"},
    {IMAGE_DLLCHARACTERISTICS_NO_SEH,"NO_SEH"},
    {IMAGE_DLLCHARACTERISTICS_NO_BIND,"NO_BIND"},
@@ -57,18 +57,18 @@ i386RelocTypes i386Relocations[] =
 
 DWORD_FLAG_DESCRIPTIONS SectionCharacteristics[] =
 {
-	{IMAGE_SCN_TYPE_NO_PAD, "NO_PAD"},
-	{IMAGE_SCN_CNT_CODE, "CODE"},
-	{IMAGE_SCN_CNT_INITIALIZED_DATA, "INITIALIZED_DATA"},
-	{IMAGE_SCN_CNT_UNINITIALIZED_DATA, "UNINITIALIZED_DATA"},
-	{IMAGE_SCN_LNK_OTHER, "OTHER"},
-	{IMAGE_SCN_LNK_INFO, "INFO"},
-	{IMAGE_SCN_LNK_REMOVE, "REMOVE"},
+	{IMAGE_SCN_TYPE_NO_PAD, "No Padding"},
+	{IMAGE_SCN_CNT_CODE, "Code"},
+	{IMAGE_SCN_CNT_INITIALIZED_DATA, "Initialized Data"},
+	{IMAGE_SCN_CNT_UNINITIALIZED_DATA, "Unnitialized Data"},
+	{IMAGE_SCN_LNK_OTHER, "Other"},
+	{IMAGE_SCN_LNK_INFO, "Informataion"},
+	{IMAGE_SCN_LNK_REMOVE, "Remove"},
 	{IMAGE_SCN_LNK_COMDAT, "COMDAT"},
-	{IMAGE_SCN_GPREL, "GLOBAL_POINTER"},
-	{IMAGE_SCN_MEM_PURGEABLE, "PURGEABLE"},
-	{IMAGE_SCN_MEM_LOCKED, "LOCKED"},
-	{IMAGE_SCN_MEM_PRELOAD, "PRELOAD"},
+	{IMAGE_SCN_GPREL, "Global Pointer"},
+	{IMAGE_SCN_MEM_PURGEABLE, "Purgeable"},
+	{IMAGE_SCN_MEM_LOCKED, "Locked"},
+	{IMAGE_SCN_MEM_PRELOAD, "Preload"},
 	{IMAGE_SCN_ALIGN_1BYTES,"1_BYTE_ALIGN"},
 	{IMAGE_SCN_ALIGN_2BYTES,"2_BYTE_ALIGN"},
 	{IMAGE_SCN_ALIGN_4BYTES,"4_BYTE_ALIGN"},
@@ -84,13 +84,13 @@ DWORD_FLAG_DESCRIPTIONS SectionCharacteristics[] =
 	{IMAGE_SCN_ALIGN_4096BYTES,"4096_BYTE_ALIGN"},
 	{IMAGE_SCN_ALIGN_8192BYTES,"8192_BYTE_ALIGN"},
 	{IMAGE_SCN_LNK_NRELOC_OVFL,"EXTENDED_RELOCATIONS" },
-	{IMAGE_SCN_MEM_DISCARDABLE,"DISCARDABLE" },
+	{IMAGE_SCN_MEM_DISCARDABLE,"Discardable" },
 	{IMAGE_SCN_MEM_NOT_CACHED,"NO_CACHE" },
 	{IMAGE_SCN_MEM_NOT_PAGED,"NOTPAGEABLE" },
-	{IMAGE_SCN_MEM_SHARED,"SHARED" },
-	{IMAGE_SCN_MEM_EXECUTE,"EXECUTABLE" },
-	{IMAGE_SCN_MEM_READ,"READABLE" },
-	{IMAGE_SCN_MEM_WRITE,"WRITEABLE" },
+	{IMAGE_SCN_MEM_SHARED,"Shared" },
+	{IMAGE_SCN_MEM_EXECUTE,"Executable" },
+	{IMAGE_SCN_MEM_READ,"Readable" },
+	{IMAGE_SCN_MEM_WRITE,"Writeable" },
 };
 
 #define NUMBER_SECTION_CHARACTERISTICS (sizeof(SectionCharacteristics) / sizeof(DWORD_FLAG_DESCRIPTIONS))
@@ -124,14 +124,14 @@ void DumpSection(int i, OBJSectionPtr ptr)
 	printf("% 8X number of relocations\n", section->NumberOfRelocations);
 	printf("% 8X number of line numbers\n", section->NumberOfLinenumbers);
 	DWORD Chars = section->Characteristics;
-	printf("% 8X flags (", Chars);
+	printf("% 8X flags\n", Chars);
 	for (int j = 0; j < NUMBER_SECTION_CHARACTERISTICS; j++)
 	{
 		DWORD flag = SectionCharacteristics[j].flag;
 
 		if (Chars & flag)
 		{
-			printf("%s ", SectionCharacteristics[j].name);
+			printf("         %s\n", SectionCharacteristics[j].name);
 			Chars &= ~flag;
 
 			if (Chars == 0)
@@ -140,7 +140,7 @@ void DumpSection(int i, OBJSectionPtr ptr)
 			}
 		}
 	}
-	printf(")\n\n");
+	printf("\n");
 	if (section->PointerToRawData > 0 && section->SizeOfRawData > 0 && ptr->sectionBuffer != nullptr)
 	{
 		//printf("RAW DATA #%X (%d)\n", i, i);
@@ -258,7 +258,7 @@ void DumpFileHeader(PIMAGE_FILE_HEADER pImageFileHeader)
 	{
 		WORD flag = ImageFileHeaderCharacteristics[i].flag;
 		if (Chars & flag) {
-			printf("                     %s\n", ImageFileHeaderCharacteristics[i].name);
+			printf("                   %s\n", ImageFileHeaderCharacteristics[i].name);
 			Chars &= ~flag;
 			if (Chars == 0)
 				break;
@@ -301,7 +301,7 @@ void DumpOptionalHeader64(PIMAGE_OPTIONAL_HEADER64 optionalHeader)
 	for (int i = 0; i < NUMBER_DLL_CHARACTERISTICS; i++)
 	{
 		if (optionalHeader->DllCharacteristics & DllCharacteristics[i].flag)
-			printf("                     %s\n", DllCharacteristics[i].name);
+			printf("                  %s\n", DllCharacteristics[i].name);
 	}
 	printf("  % 16llX size of stack reserve\n", optionalHeader->SizeOfStackReserve);
 	printf("  % 16llX size of stack commit\n", optionalHeader->SizeOfStackCommit);
@@ -331,7 +331,7 @@ void DumpOptionalHeader64(PIMAGE_OPTIONAL_HEADER64 optionalHeader)
 			case IMAGE_DIRECTORY_ENTRY_COM_DESCRIPTOR:name = "COM Descriptor"; break;
 			case 15:name = "Reserved"; break;
 		}
-		printf("  % 16X [% 8X] RVA [size] of %s Directory\n", optionalHeader->DataDirectory[i].VirtualAddress, optionalHeader->DataDirectory[i].Size, name);
+		printf("            %-22s rva: %08X  size: %08X (%lu)\n", name, optionalHeader->DataDirectory[i].VirtualAddress, optionalHeader->DataDirectory[i].Size, optionalHeader->DataDirectory[i].Size);
 	}
 }
 
@@ -365,13 +365,12 @@ void DumpOptionalHeader32(PIMAGE_OPTIONAL_HEADER32 optionalHeader)
 		case IMAGE_SUBSYSTEM_POSIX_CUI: s = "Posix character"; break;
 	}
 	printf("  % 16X subsystem (%s)\n", optionalHeader->Subsystem, s);
-	printf("  % 16X DLL characteristics (", optionalHeader->DllCharacteristics);
+	printf("  % 16X DLL characteristics\n", optionalHeader->DllCharacteristics);
 	for (int i = 0; i < NUMBER_DLL_CHARACTERISTICS; i++)
 	{
 		if (optionalHeader->DllCharacteristics & DllCharacteristics[i].flag)
-			printf("%s ", DllCharacteristics[i].name);
+			printf("                   %s\n", DllCharacteristics[i].name);
 	}
-	printf(")\n");
 	printf("  % 16X size of stack reserve\n", optionalHeader->SizeOfStackReserve);
 	printf("  % 16X size of stack commit\n", optionalHeader->SizeOfStackCommit);
 	printf("  % 16X size of heap reserve\n", optionalHeader->SizeOfHeapReserve);
@@ -400,7 +399,7 @@ void DumpOptionalHeader32(PIMAGE_OPTIONAL_HEADER32 optionalHeader)
 			case IMAGE_DIRECTORY_ENTRY_COM_DESCRIPTOR:name = "COM Descriptor"; break;
 			case 15:name = "Reserved"; break;
 		}
-		printf("  % 16X [% 8X] RVA [size] of %s Directory\n", optionalHeader->DataDirectory[i].VirtualAddress, optionalHeader->DataDirectory[i].Size, name);
+		printf("            %-22s rva: %08X  size: %08X (%lu)\n", name, optionalHeader->DataDirectory[i].VirtualAddress, optionalHeader->DataDirectory[i].Size, optionalHeader->DataDirectory[i].Size);
 	}
 }
 
@@ -464,7 +463,7 @@ void DumpImportDirectory(bool is64, vector<ImportsPtr>* imports)
 				{
 					printf("  % 8lu", IMAGE_ORDINAL64(thunk->thunk.u1.Ordinal));
 				}
-				else
+				else if (thunk->ordinalname != nullptr)
 				{
 					printf("  %4u  %s", thunk->ordinalname->Hint, thunk->ordinalname->Name);
 				}
@@ -477,5 +476,25 @@ void DumpImportDirectory(bool is64, vector<ImportsPtr>* imports)
 			}
 		}
 		printf("\n");
+	}
+}
+
+void DumpResourcesDirectory(ResourcesPtr resources)
+{
+	printf("Resources table:\n");
+	printf("  Characteristics:         %08X\n", resources->header.Characteristics);
+	printf("  TimeDateStamp:           %08X -> %s", resources->header.TimeDateStamp, get_ctime_stg((time_t*)&resources->header.TimeDateStamp));
+	printf("  Version:                 %u.%02u\n", resources->header.MajorVersion, resources->header.MinorVersion);
+	printf("  Number of Named Entries: %04X (%u)\n", resources->header.NumberOfNamedEntries, resources->header.NumberOfNamedEntries);
+	printf("  Number of Id Entries:    %04X (%u)\n\n", resources->header.NumberOfIdEntries, resources->header.NumberOfIdEntries);
+	for (ResourcesEntryPtr ptr : resources->entries)
+	{
+		printf("  Name Offset:             %04X\n", ptr->entry.NameOffset);
+		printf("  Name Is String:          %04X\n", ptr->entry.NameIsString);
+		printf("  Name:                    %04X\n", ptr->entry.Name);
+		printf("  Id:                      %04X\n", ptr->entry.Id);
+		printf("  Offset To Data:          %08X\n", ptr->entry.OffsetToData);
+		printf("  Offset To Directory:     %08X\n", ptr->entry.OffsetToDirectory);
+		printf("  Data is Directory:       %08X\n", ptr->entry.DataIsDirectory);
 	}
 }

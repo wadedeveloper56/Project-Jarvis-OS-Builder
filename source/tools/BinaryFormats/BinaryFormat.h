@@ -122,10 +122,18 @@ typedef struct BINARYFORMATS_API _OBJFile
 	_OBJFile();
 } OBJFile, * OBJFilePtr, ** OBJFilePtrPtr;
 
+typedef struct BINARYFORMATS_API _ResourcesEntry
+{
+	IMAGE_RESOURCE_DIRECTORY_ENTRY entry;
+	DWORD isDirectory;
+	DWORD isString;
+	_ResourcesEntry();
+} ResourcesEntry, * ResourcesEntryPtr, ** ResourcesEntryPtrPtr;
+
 typedef struct BINARYFORMATS_API _Resources
 {
-	vector<PIMAGE_RESOURCE_DIRECTORY_ENTRY> entries;
-	IMAGE_RESOURCE_DIRECTORY res;
+	vector<ResourcesEntryPtr> entries;
+	IMAGE_RESOURCE_DIRECTORY header;
 	_Resources();
 }Resources, * ResourcesPtr, ** ResourcesPtrPtr;
 
@@ -218,3 +226,4 @@ BINARYFORMATS_API void DumpOptionalHeader64(PIMAGE_OPTIONAL_HEADER64 optionalHea
 BINARYFORMATS_API void DumpOptionalHeader32(PIMAGE_OPTIONAL_HEADER32 optionalHeader);
 BINARYFORMATS_API void DumpExportDirectory(ExportsPtr exportDir);
 BINARYFORMATS_API void DumpImportDirectory(bool is64, vector<ImportsPtr>* imports);
+BINARYFORMATS_API void DumpResourcesDirectory(ResourcesPtr resources);

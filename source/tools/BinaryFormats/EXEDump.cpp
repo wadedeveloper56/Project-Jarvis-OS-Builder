@@ -406,6 +406,36 @@ void loadImportsDirectory(EXEFilePtr result, char* buffer, PIMAGE_NT_HEADERS32 p
 	}
 }
 
+void loadResourcesDirectory(EXEFilePtr result, char* buffer, PIMAGE_NT_HEADERS32 pNTHeader)
+{
+	DWORD resourceRVA = GetImgDirEntryRVA(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_RESOURCE);
+	DWORD resourceRVASize = GetImgDirEntrySize(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_RESOURCE);
+	PIMAGE_RESOURCE_DIRECTORY resDir = (PIMAGE_RESOURCE_DIRECTORY)GetPtrFromRVA(result->is64, resourceRVA, pNTHeader, buffer);
+	PIMAGE_RESOURCE_DIRECTORY_ENTRY resDirEntry = (PIMAGE_RESOURCE_DIRECTORY_ENTRY)(resDir + 1);
+	WORD nNamed = resDir->NumberOfNamedEntries;
+	WORD nIds = resDir->NumberOfIdEntries;
+	PIMAGE_RESOURCE_DATA_ENTRY  pResDataEntry;
+	result->resources.header.Characteristics = resDir->Characteristics;
+	result->resources.header.TimeDateStamp = resDir->TimeDateStamp;
+	result->resources.header.MajorVersion = resDir->MajorVersion;
+	result->resources.header.MinorVersion = resDir->MinorVersion;
+	result->resources.header.NumberOfNamedEntries = resDir->NumberOfNamedEntries;
+	result->resources.header.NumberOfIdEntries = resDir->NumberOfIdEntries;
+	for (WORD i = 0; i <= nNamed; i++, resDirEntry++)
+	{
+		ResourcesEntryPtr entry = new ResourcesEntry;
+		if (resDirEntry->OffsetToData & IMAGE_RESOURCE_DATA_IS_DIRECTORY) {
+			entry->isDirectory++;
+		}
+		else if (resDirEntry->Name & IMAGE_RESOURCE_NAME_IS_STRING) {
+			entry->isString++;
+		}
+		entry->entry.OffsetToData = resDirEntry->OffsetToData;
+		entry->entry.Name = resDirEntry->Name;
+		result->resources.entries.push_back(entry);
+	}
+}
+
 EXEFilePtr loadExeFile(char* buffer, LONGLONG fileSize)
 {
 	EXEFilePtr result = new EXEFile;
@@ -416,23 +446,12 @@ EXEFilePtr loadExeFile(char* buffer, LONGLONG fileSize)
 	loadPESections(result, buffer, pNTHeader);
 	loadExportsDirectory(result, buffer, pNTHeader);
 	loadImportsDirectory(result, buffer, pNTHeader);
+	loadResourcesDirectory(result, buffer, pNTHeader);
 
-	DWORD resourceRVA = GetImgDirEntryRVA(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_RESOURCE);
-	DWORD resourceRVASize = GetImgDirEntrySize(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_RESOURCE);
-	PIMAGE_RESOURCE_DIRECTORY resDir = (PIMAGE_RESOURCE_DIRECTORY)GetPtrFromRVA(result->is64, resourceRVA, pNTHeader, buffer);
-	PIMAGE_RESOURCE_DIRECTORY_ENTRY resDirEntry = (PIMAGE_RESOURCE_DIRECTORY_ENTRY)(resDir + 1);
 
-	DWORD exceptionRVA = GetImgDirEntryRVA(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_EXCEPTION);
-	DWORD securityRVA = GetImgDirEntryRVA(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_SECURITY);
 	DWORD baseRelocRVA = GetImgDirEntryRVA(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_BASERELOC);
 	DWORD debugRVA = GetImgDirEntryRVA(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_DEBUG);
-	DWORD archRVA = GetImgDirEntryRVA(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_ARCHITECTURE);
-	DWORD globalPtrRVA = GetImgDirEntryRVA(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_GLOBALPTR);
-	DWORD tlsRVA = GetImgDirEntryRVA(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_TLS);
 	DWORD configRVA = GetImgDirEntryRVA(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG);
-	DWORD boundImportRVA = GetImgDirEntryRVA(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_BOUND_IMPORT);
 	DWORD iatRVA = GetImgDirEntryRVA(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_IAT);
-	DWORD delayImportRVA = GetImgDirEntryRVA(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_DELAY_IMPORT);
-	DWORD comRVA = GetImgDirEntryRVA(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_COM_DESCRIPTOR);
 	return result;
 }
