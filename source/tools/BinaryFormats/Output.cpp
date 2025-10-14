@@ -238,7 +238,7 @@ void DumpDOSHeader(PIMAGE_DOS_HEADER dosHeader)
 	printf("  % 16X Overlay number\n", dosHeader->e_ovno);
 	printf("  % 16X OEM identifier (for e_oeminfo)\n", dosHeader->e_oemid);
 	printf("  % 16X OEM information e_oemid specific\n", dosHeader->e_oeminfo);
-	printf("  % 16X File address of new exe header\n", dosHeader->e_lfanew);
+	printf("  % 16X (%lu) File address of new exe header\n", dosHeader->e_lfanew, dosHeader->e_lfanew);
 }
 
 void DumpFileHeader(PIMAGE_FILE_HEADER pImageFileHeader)

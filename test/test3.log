@@ -20,7 +20,7 @@ DOS HEADER VALUES
                  0 Overlay number
                  0 OEM identifier (for e_oeminfo)
                  0 OEM information e_oemid specific
-                F8 File address of new exe header
+                F8 (248) File address of new exe header
 FILE HEADER VALUES
                14C Machine (Intel 386 or later processors and compatible processors)
                  5 (5) Number of Sections
