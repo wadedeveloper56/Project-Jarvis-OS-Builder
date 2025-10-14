@@ -147,7 +147,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="bitvect.cpp" />
+    <ClCompile Include="errwarn.cpp" />
+    <ClCompile Include="floatnum.cpp" />
+    <ClCompile Include="intnum.cpp" />
     <ClCompile Include="jasm.cpp" />
+    <ClCompile Include="xmalloc.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="jasm.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
