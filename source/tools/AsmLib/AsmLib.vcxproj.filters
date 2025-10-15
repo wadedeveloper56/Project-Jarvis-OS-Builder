@@ -1,0 +1,273 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="framework.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="alloc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="file.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="bytesex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="compiler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbginfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="disp8.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="error.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hashtbl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="iflag.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ilog2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="insns.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="labels.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="macros.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="md5.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nasm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nasmint.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nasmlib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nctype.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="opflags.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="perfhash.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="raa.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rbtree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rdoff.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="saa.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="strlist.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tables.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="warnings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="autoconf\attribute.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="config\config.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="config\msvc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="config\unconfig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="config\unknown.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="config\watcom.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="preproc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="asmutil.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="assemble.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="directiv.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eval.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="floats.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="listing.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="parser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pptok.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="quote.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="srcfile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="stdscan.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tokens.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="warnings_c.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="iflaggen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="insnsi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="regdis.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="regs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="x86const.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="version.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AsmLib.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="alloc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="asprintf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="badenum.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="bsi.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="crc32b.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="crc64.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="file.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="filename.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="hashtbl.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ilog2.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="md5c.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mmap.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nctype.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="numstr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="path.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="perfhash.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="raa.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rbtree.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="readnum.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="realpath.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rlimit.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="saa.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="string.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="strlist.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ver.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="zerobuf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
