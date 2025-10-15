@@ -19,8 +19,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Arguments", "Arguments\Argu
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Assembler", "Assembler\Assembler.vcxproj", "{2A06C047-5BFB-4898-93F4-C6EACE140D20}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "jasm", "jasm\jasm.vcxproj", "{1E27FB5D-8530-4969-AE1A-8DE738C12DF7}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		All|x64 = All|x64
@@ -127,18 +125,6 @@ Global
 		{2A06C047-5BFB-4898-93F4-C6EACE140D20}.Release|x64.Build.0 = Release|x64
 		{2A06C047-5BFB-4898-93F4-C6EACE140D20}.Release|x86.ActiveCfg = Release|Win32
 		{2A06C047-5BFB-4898-93F4-C6EACE140D20}.Release|x86.Build.0 = Release|Win32
-		{1E27FB5D-8530-4969-AE1A-8DE738C12DF7}.All|x64.ActiveCfg = Debug|x64
-		{1E27FB5D-8530-4969-AE1A-8DE738C12DF7}.All|x64.Build.0 = Debug|x64
-		{1E27FB5D-8530-4969-AE1A-8DE738C12DF7}.All|x86.ActiveCfg = Debug|Win32
-		{1E27FB5D-8530-4969-AE1A-8DE738C12DF7}.All|x86.Build.0 = Debug|Win32
-		{1E27FB5D-8530-4969-AE1A-8DE738C12DF7}.Debug|x64.ActiveCfg = Debug|x64
-		{1E27FB5D-8530-4969-AE1A-8DE738C12DF7}.Debug|x64.Build.0 = Debug|x64
-		{1E27FB5D-8530-4969-AE1A-8DE738C12DF7}.Debug|x86.ActiveCfg = Debug|Win32
-		{1E27FB5D-8530-4969-AE1A-8DE738C12DF7}.Debug|x86.Build.0 = Debug|Win32
-		{1E27FB5D-8530-4969-AE1A-8DE738C12DF7}.Release|x64.ActiveCfg = Release|x64
-		{1E27FB5D-8530-4969-AE1A-8DE738C12DF7}.Release|x64.Build.0 = Release|x64
-		{1E27FB5D-8530-4969-AE1A-8DE738C12DF7}.Release|x86.ActiveCfg = Release|Win32
-		{1E27FB5D-8530-4969-AE1A-8DE738C12DF7}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -24,7 +24,7 @@
     <ProjectGuid>{87c000dd-a17a-4cbc-9526-1e28a86816ec}</ProjectGuid>
     <RootNamespace>Linker</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>jln</ProjectName>
+    <ProjectName>Linker</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
