@@ -965,7 +965,7 @@ static void show_version(void)
 static bool stopoptions = false;
 static bool process_arg(char *p, char *q, int pass)
 {
-    char *param;
+    char *param = NULL;
     bool advance = false;
 
     if (!p || !p[0])

@@ -4,7 +4,7 @@
 /*
  * nasmlib.c	library routines for the Netwide Assembler
  */
-
+#include <stdlib.h>
 #include "compiler.h"
 #include "nasmlib.h"
 #include "error.h"
