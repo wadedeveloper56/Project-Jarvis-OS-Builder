@@ -21,6 +21,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Assembler", "Assembler\Asse
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Disassembler", "Disassembler\Disassembler.vcxproj", "{059A3D99-5D63-4B2B-9D03-707594602E40}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup32", "Setup32\Setup32.vdproj", "{4660D0A0-DE7A-EA1C-49BF-3E6D063DAEDD}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup64", "Setup64\Setup64.vdproj", "{ADA17661-C585-8C23-8EFF-CCCF6968B9A1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		All|x64 = All|x64
@@ -139,6 +143,20 @@ Global
 		{059A3D99-5D63-4B2B-9D03-707594602E40}.Release|x64.Build.0 = Release|x64
 		{059A3D99-5D63-4B2B-9D03-707594602E40}.Release|x86.ActiveCfg = Release|Win32
 		{059A3D99-5D63-4B2B-9D03-707594602E40}.Release|x86.Build.0 = Release|Win32
+		{4660D0A0-DE7A-EA1C-49BF-3E6D063DAEDD}.All|x64.ActiveCfg = Debug
+		{4660D0A0-DE7A-EA1C-49BF-3E6D063DAEDD}.All|x86.ActiveCfg = Debug
+		{4660D0A0-DE7A-EA1C-49BF-3E6D063DAEDD}.Debug|x64.ActiveCfg = Debug
+		{4660D0A0-DE7A-EA1C-49BF-3E6D063DAEDD}.Debug|x64.Build.0 = Debug
+		{4660D0A0-DE7A-EA1C-49BF-3E6D063DAEDD}.Debug|x86.ActiveCfg = Debug
+		{4660D0A0-DE7A-EA1C-49BF-3E6D063DAEDD}.Release|x64.ActiveCfg = Release
+		{4660D0A0-DE7A-EA1C-49BF-3E6D063DAEDD}.Release|x86.ActiveCfg = Release
+		{4660D0A0-DE7A-EA1C-49BF-3E6D063DAEDD}.Release|x86.Build.0 = Release
+		{ADA17661-C585-8C23-8EFF-CCCF6968B9A1}.All|x64.ActiveCfg = Debug
+		{ADA17661-C585-8C23-8EFF-CCCF6968B9A1}.All|x86.ActiveCfg = Debug
+		{ADA17661-C585-8C23-8EFF-CCCF6968B9A1}.Debug|x64.ActiveCfg = Debug
+		{ADA17661-C585-8C23-8EFF-CCCF6968B9A1}.Debug|x86.ActiveCfg = Debug
+		{ADA17661-C585-8C23-8EFF-CCCF6968B9A1}.Release|x64.ActiveCfg = Release
+		{ADA17661-C585-8C23-8EFF-CCCF6968B9A1}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
