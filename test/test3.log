@@ -3,6 +3,13 @@ All Rights Reserved
 Dump of file C:\projects\research\alinksrc\ALink\Release\x64\ALink.exe
 File Size 104448 bytes
 File Type: PE EXECUTABLE IMAGE
+Debug Formats in File
+  Type            Type      Size     Address  FilePtr  Charactr TimeDate Version
+  --------------- --------  -------- -------- -------- -------- -------- --------
+  CODEVIEW        00000002       73 00017CE8 000170E8 00000000 68B5BFBB 0.00
+  Undefined       0000000C       20 00017D34 00017134 00000000 68B5BFBB 0.00
+  Undefined       0000000D      644 00017D48 00017148 00000000 68B5BFBB 0.00
+  Undefined       0000000E        0 00000000 00000000 00000000 68B5BFBB 0.00
 DOS HEADER VALUES
               5A4D Magic number
                 90 Bytes on last page of file
@@ -351,32 +358,6 @@ Resources table:
   Offset To Data:          80000018
   Offset To Directory:     00000018
   Data is Directory:       00000001
-Relocations table:
-  Page RVA:      00015000
-  Block Size:    00000020 (32)
-  000152B8 TYPE10
-  000152C0 TYPE10
-  000152C8 TYPE10
-  000152D0 TYPE10
-  000152D8 TYPE10
-  000152E8 TYPE10
-  000152F8 TYPE10
-  00015310 TYPE10
-  00015318 TYPE10
-  00015350 TYPE10
-  00015358 TYPE10
-  00015000 ABSOLUTE
 
-  Page RVA:      00017000
-  Block Size:    0000001C (28)
-  00017AC8 TYPE10
-  00017AE0 TYPE10
-  00017AE8 TYPE10
-  00017B70 TYPE10
-  00017B88 TYPE10
-  00017B90 TYPE10
-  00017B98 TYPE10
-  00017BA0 TYPE10
-  00017BA8 TYPE10
-  00017000 ABSOLUTE
+Relocations table:
 
