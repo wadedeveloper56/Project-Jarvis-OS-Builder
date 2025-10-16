@@ -40,3 +40,11 @@ _Imports::_Imports() :imports({ 0 }), filename(nullptr)
 _ExportsFunctions::_ExportsFunctions() :filename(nullptr), ordinal(0), entryPoint(0)
 {
 }
+
+_RelocsEntry::_RelocsEntry() :relocType(0), szRelocType(nullptr)
+{
+}
+
+_Relocs::_Relocs() :baseReloc({ 0 })
+{
+}

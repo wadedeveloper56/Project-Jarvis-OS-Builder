@@ -2,66 +2,66 @@ Microsoft (R) COFF/PE Dumper Version 14.40.33811.0
 Copyright (C) Microsoft Corporation.  All rights reserved.
 
 
-Dump of file C:\projects\ProjectJarvis\bin\tools\Release\Win32\test1.dll
+Dump of file C:\projects\research\alinksrc\ALink\Release\x64\ALink.exe
 
 PE signature found
 
-File Type: DLL
+File Type: EXECUTABLE IMAGE
 
 FILE HEADER VALUES
-             14C machine (x86)
-               5 number of sections
-        68EC13A9 time date stamp Sun Oct 12 15:46:33 2025
+            8664 machine (x64)
+               6 number of sections
+        68B5BFBB time date stamp Mon Sep  1 10:46:03 2025
                0 file pointer to symbol table
                0 number of symbols
-              E0 size of optional header
-            2102 characteristics
+              F0 size of optional header
+              22 characteristics
                    Executable
-                   32 bit word machine
-                   DLL
+                   Application can handle large (>2GB) addresses
 
 OPTIONAL HEADER VALUES
-             10B magic # (PE32)
+             20B magic # (PE32+)
            14.44 linker version
-            1000 size of code
-            1200 size of initialized data
+           14000 size of code
+           15C00 size of initialized data
                0 size of uninitialized data
-            138E entry point (1000138E) __DllMainCRTStartup@12
+           14480 entry point (0000000140014480) mainCRTStartup
             1000 base of code
-            2000 base of data
-        10000000 image base (10000000 to 10005FFF)
+       140000000 image base (0000000140000000 to 000000014002DFFF)
             1000 section alignment
              200 file alignment
             6.00 operating system version
             0.00 image version
             6.00 subsystem version
                0 Win32 version
-            6000 size of image
+           2E000 size of image
              400 size of headers
                0 checksum
-               2 subsystem (Windows GUI)
-             140 DLL characteristics
+               3 subsystem (Windows CUI)
+            8160 DLL characteristics
+                   High Entropy Virtual Addresses
                    Dynamic base
                    NX compatible
+                   Terminal Server Aware
           100000 size of stack reserve
             1000 size of stack commit
           100000 size of heap reserve
             1000 size of heap commit
                0 loader flags
               10 number of directories
-            25B0 [      CC] RVA [size] of Export Directory
-            267C [      50] RVA [size] of Import Directory
-            4000 [      F8] RVA [size] of Resource Directory
-               0 [       0] RVA [size] of Exception Directory
+               0 [       0] RVA [size] of Export Directory
+           18A34 [     104] RVA [size] of Import Directory
+           2C000 [     1E0] RVA [size] of Resource Directory
+           2B000 [     6D8] RVA [size] of Exception Directory
                0 [       0] RVA [size] of Certificates Directory
-            5000 [     16C] RVA [size] of Base Relocation Directory
-            2160 [      70] RVA [size] of Debug Directory
+           2D000 [      3C] RVA [size] of Base Relocation Directory
+           17BB0 [      70] RVA [size] of Debug Directory
                0 [       0] RVA [size] of Architecture Directory
                0 [       0] RVA [size] of Global Pointer Directory
                0 [       0] RVA [size] of Thread Storage Directory
-            20A0 [      40] RVA [size] of Load Configuration Directory
+           17A70 [     140] RVA [size] of Load Configuration Directory
                0 [       0] RVA [size] of Bound Import Directory
-            2000 [      64] RVA [size] of Import Address Table Directory
+           15000 [     2B8] RVA [size] of Import Address Table Directory
                0 [       0] RVA [size] of Delay Import Directory
                0 [       0] RVA [size] of COM Descriptor Directory
                0 [       0] RVA [size] of Reserved Directory
@@ -69,10 +69,10 @@ OPTIONAL HEADER VALUES
 
 SECTION HEADER #1
    .text name
-     E6D virtual size
-    1000 virtual address (10001000 to 10001E6C)
-    1000 size of raw data
-     400 file pointer to raw data (00000400 to 000013FF)
+   13EDC virtual size
+    1000 virtual address (0000000140001000 to 0000000140014EDB)
+   14000 size of raw data
+     400 file pointer to raw data (00000400 to 000143FF)
        0 file pointer to relocation table
        0 file pointer to line numbers
        0 number of relocations
@@ -83,10 +83,10 @@ SECTION HEADER #1
 
 SECTION HEADER #2
   .rdata name
-     964 virtual size
-    2000 virtual address (10002000 to 10002963)
-     A00 size of raw data
-    1400 file pointer to raw data (00001400 to 00001DFF)
+    4426 virtual size
+   15000 virtual address (0000000140015000 to 0000000140019425)
+    4600 size of raw data
+   14400 file pointer to raw data (00014400 to 000189FF)
        0 file pointer to relocation table
        0 file pointer to line numbers
        0 number of relocations
@@ -99,76 +99,175 @@ SECTION HEADER #2
 
         Time Type        Size      RVA  Pointer
     -------- ------- -------- -------- --------
-    68EC13A9 cv            54 00002270     1670    Format: RSDS, {D3BC78A1-5F2F-4497-8F43-D712E891DB00}, 1, C:\projects\ProjectJarvis\bin\tools\Release\Win32\Test1.pdb
-    68EC13A9 feat          14 000022C4     16C4    Counts: Pre-VC++ 11.00=0, C/C++=23, /GS=23, /sdl=3, guardN=20
-    68EC13A9 coffgrp      240 000022D8     16D8    4C544347 (LTCG)
-    68EC13A9 iltcg          0 00000000        0
-
-  Section contains the following exports for Test1.dll
-
-    00000000 characteristics
-    FFFFFFFF time date stamp
-        0.00 version
-           1 ordinal base
-           5 number of functions
-           5 number of names
-
-    ordinal hint RVA      name
-
-          1    0 00001030 ??0CTest1@@QAE@XZ = ??0CTest1@@QAE@XZ (public: __thiscall CTest1::CTest1(void))
-          2    1 00001010 ??4CTest1@@QAEAAV0@$$QAV0@@Z = ??4CTest1@@QAEAAV0@$$QAV0@@Z (public: class CTest1 & __thiscall CTest1::operator=(class CTest1 &&))
-          3    2 00001010 ??4CTest1@@QAEAAV0@ABV0@@Z = ??4CTest1@@QAEAAV0@$$QAV0@@Z (public: class CTest1 & __thiscall CTest1::operator=(class CTest1 &&))
-          4    3 00001020 ?fnTest1@@YAHXZ = ?fnTest1@@YAHXZ (int __cdecl fnTest1(void))
-          5    4 000033D8 ?nTest1@@3HA = ?nTest1@@3HA (int nTest1)
+    68B5BFBB cv            49 00017CE8    170E8    Format: RSDS, {10295092-4A20-47AB-A161-F203F7B6B034}, 2, C:\projects\alinksrc\ALink\Release\x64\ALink.pdb
+    68B5BFBB feat          14 00017D34    17134    Counts: Pre-VC++ 11.00=0, C/C++=36, /GS=36, /sdl=7, guardN=29
+    68B5BFBB coffgrp      284 00017D48    17148    4C544347 (LTCG)
+    68B5BFBB iltcg          0 00000000        0
 
   Section contains the following imports:
 
     VCRUNTIME140.dll
-              10002030 Import Address Table
-              100026FC Import Name Table
+             140015080 Import Address Table
+             140018BB8 Import Name Table
                      0 time date stamp
                      0 Index of first forwarder reference
 
-                   25 __std_type_info_destroy_list
-                   48 memset
-                   35 _except_handler4_common
+                          3C memcpy
+                          3D memmove
+                          40 strchr
+                          3B memcmp
+                          1C __current_exception_context
+                          1B __current_exception
+                           8 __C_specific_handler
+                          3E memset
 
     api-ms-win-crt-runtime-l1-1-0.dll
-              10002040 Import Address Table
-              1000270C Import Name Table
+             140015130 Import Address Table
+             140018C68 Import Name Table
                      0 time date stamp
                      0 Index of first forwarder reference
 
-                   17 _cexit
-                   24 _execute_onexit_table
-                   36 _initialize_onexit_table
-                   19 _configure_narrow_argv
-                   41 _seh_filter_dll
-                   39 _initterm_e
-                   38 _initterm
-                   35 _initialize_narrow_environment
+                          42 _set_app_type
+                          36 _initterm
+                          37 _initterm_e
+                          21 _errno
+                          33 _initialize_narrow_environment
+                          18 _configure_narrow_argv
+                           4 __p___argc
+                           5 __p___argv
+                          16 _cexit
+                          15 _c_exit
+                          3D _register_thread_local_exe_atexit_callback
+                          40 _seh_filter_exe
+                          28 _get_initial_narrow_environment
+                          55 exit
+                          34 _initialize_onexit_table
+                          3C _register_onexit_function
+                          1E _crt_atexit
+                          67 terminate
+                          23 _exit
+
+    api-ms-win-crt-string-l1-1-0.dll
+             140015258 Import Address Table
+             140018D90 Import Name Table
+                     0 time date stamp
+                     0 Index of first forwarder reference
+
+                          6E isspace
+                          29 _strdup
+                          2A _stricmp
+                          3D _strupr
+                          98 toupper
+                          86 strcmp
+                          8F strncpy
+
+    api-ms-win-crt-stdio-l1-1-0.dll
+             1400151D0 Import Address Table
+             140018D08 Import Name Table
+                     0 time date stamp
+                     0 Index of first forwarder reference
+
+                          78 fgetc
+                          83 fread
+                           1 __p__commode
+                          54 _set_fmode
+                           3 __stdio_common_vfprintf
+                          7D fopen
+                          8C getchar
+                          10 __stdio_common_vsscanf
+                           0 __acrt_iob_func
+                          8A fwrite
+                          7F fputc
+                          75 feof
+                          74 fclose
+                          8B getc
+                          89 ftell
+                          87 fseek
+
+    api-ms-win-crt-convert-l1-1-0.dll
+             1400150C8 Import Address Table
+             140018C00 Import Name Table
+                     0 time date stamp
+                     0 Index of first forwarder reference
+
+                          64 strtoul
+
+    api-ms-win-crt-heap-l1-1-0.dll
+             1400150E8 Import Address Table
+             140018C20 Import Name Table
+                     0 time date stamp
+                     0 Index of first forwarder reference
+
+                          18 free
+                          1A realloc
+                          19 malloc
+                          16 _set_new_mode
+
+    api-ms-win-crt-environment-l1-1-0.dll
+             1400150D8 Import Address Table
+             140018C10 Import Name Table
+                     0 time date stamp
+                     0 Index of first forwarder reference
+
+                          10 getenv
+
+    api-ms-win-crt-utility-l1-1-0.dll
+             1400152A8 Import Address Table
+             140018DE0 Import Name Table
+                     0 time date stamp
+                     0 Index of first forwarder reference
+
+                          19 qsort
+
+    api-ms-win-crt-time-l1-1-0.dll
+             140015298 Import Address Table
+             140018DD0 Import Name Table
+                     0 time date stamp
+                     0 Index of first forwarder reference
+
+                          30 _time64
+
+    api-ms-win-crt-math-l1-1-0.dll
+             140015120 Import Address Table
+             140018C58 Import Name Table
+                     0 time date stamp
+                     0 Index of first forwarder reference
+
+                           9 __setusermatherr
+
+    api-ms-win-crt-locale-l1-1-0.dll
+             140015110 Import Address Table
+             140018C48 Import Name Table
+                     0 time date stamp
+                     0 Index of first forwarder reference
+
+                           8 _configthreadlocale
 
     KERNEL32.dll
-              10002000 Import Address Table
-              100026CC Import Name Table
+             140015000 Import Address Table
+             140018B38 Import Name Table
                      0 time date stamp
                      0 Index of first forwarder reference
 
-                  390 InitializeSListHead
-                  5A7 SetUnhandledExceptionFilter
-                  23A GetCurrentProcess
-                  5C7 TerminateProcess
-                  3B4 IsProcessorFeaturePresent
-                  47D QueryPerformanceCounter
-                  23B GetCurrentProcessId
-                  3AC IsDebuggerPresent
-                  5E9 UnhandledExceptionFilter
-                  312 GetSystemTimeAsFileTime
-                  23F GetCurrentThreadId
+                         508 RtlCaptureContext
+                         5D7 TerminateProcess
+                         3B7 IsProcessorFeaturePresent
+                         480 QueryPerformanceCounter
+                         5B7 SetUnhandledExceptionFilter
+                         241 GetCurrentProcessId
+                         245 GetCurrentThreadId
+                         510 RtlLookupFunctionEntry
+                         319 GetSystemTimeAsFileTime
+                         5FA UnhandledExceptionFilter
+                         399 InitializeSListHead
+                         3AF IsDebuggerPresent
+                         2A4 GetModuleHandleW
+                         517 RtlVirtualUnwind
+                         240 GetCurrentProcess
 
   Section contains the following load config:
 
-            000000C0 size
+            00000140 size
                    0 time date stamp
                 0.00 Version
                    0 GlobalFlags Clear
@@ -176,20 +275,18 @@ SECTION HEADER #2
                    0 Critical Section Default Timeout
                    0 Decommit Free Block Threshold
                    0 Decommit Total Free Threshold
-            00000000 Lock Prefix Table
+    0000000000000000 Lock Prefix Table
                    0 Maximum Allocation Size
                    0 Virtual Memory Threshold
                    0 Process Affinity Mask
                    0 Process Heap Flags
                    0 CSD Version
                 0000 Dependent Load Flag
-            00000000 Edit List
-            10003000 Security Cookie
-            10002200 Safe Exception Handler Table
-                   1 Safe Exception Handler Count
-            10002064 Guard CF address of check-function pointer
-            00000000 Guard CF address of dispatch-function pointer
-            00000000 Guard CF function table
+    0000000000000000 Edit List
+    000000014001A000 Security Cookie
+    00000001400152B8 Guard CF address of check-function pointer
+    00000001400152C8 Guard CF address of dispatch-function pointer
+    0000000000000000 Guard CF function table
                    0 Guard CF function count
             00000100 Guard Flags
                        CF instrumented
@@ -197,80 +294,73 @@ SECTION HEADER #2
                 0000 Code Integrity Catalog
             00000000 Code Integrity Catalog Offset
             00000000 Code Integrity Reserved
-            00000000 Guard CF address taken IAT entry table
+    0000000000000000 Guard CF address taken IAT entry table
                    0 Guard CF address taken IAT entry count
-            00000000 Guard CF long jump target table
+    0000000000000000 Guard CF long jump target table
                    0 Guard CF long jump target count
-            00000000 Dynamic value relocation table
-            00000000 Hybrid metadata pointer
-            00000000 Guard RF address of failure-function
-            00000000 Guard RF address of failure-function pointer
+    0000000000000000 Dynamic value relocation table
+    0000000000000000 Hybrid metadata pointer
+    0000000000000000 Guard RF address of failure-function
+    0000000000000000 Guard RF address of failure-function pointer
             00000000 Dynamic value relocation table offset
                 0000 Dynamic value relocation table section
                 0000 Reserved2
-            00000000 Guard RF address of stack pointer verification function pointer
+    0000000000000000 Guard RF address of stack pointer verification function pointer
             00000000 Hot patching table offset
                 0000 Reserved3
-            00000000 Enclave configuration pointer
-            10002204 Volatile metadata pointer
-            00000000 Guard EH continuation table
+    0000000000000000 Enclave configuration pointer
+    0000000140017C80 Volatile metadata pointer
+    0000000000000000 Guard EH continuation table
                    0 Guard EH continuation count
-            00000000 Guard XFG address of check-function pointer
-            00000000 Guard XFG address of dispatch-function pointer
-            00000000 Guard XFG address of dispatch-table-function pointer
-            10002068 CastGuard OS determined failure mode
-            00000000 Guard memcpy function pointer
-
-    Safe Exception Handler Table
-
-          Address
-          --------
-           10001A55  __except_handler4
+    00000001400152C0 Guard XFG address of check-function pointer
+    00000001400152D0 Guard XFG address of dispatch-function pointer
+    00000001400152D8 Guard XFG address of dispatch-table-function pointer
+    00000001400152E0 CastGuard OS determined failure mode
+    00000001400152E8 Guard memcpy function pointer
 
     Volatile Metadata
 
                       18 size
                        3 min version (8003)
                        3 max version (8003)
-                0000221C volatile access RVA table
-                      3C volatile access RVA table size
-                00002258 volatile range info table
+        0000000000017C98 volatile access RVA table
+                      38 volatile access RVA table size
+        0000000000017CD0 volatile range info table
                       18 volatile range info table size
 
     Volatile Access RVA Table
 
           Address
           --------
-           100014B3
-           100014C3
-           10001ABE
-           10001AF9
-           10001B65
-           10001BA1
-           10001BCC
-           10001C54
-           10001C59
-           10001C5C
-           10001C5F
-           10001CCA
-           10001CD2
-           10001D3A
-           10001D42
+           0000000140013FDF
+           000000014001405B
+           0000000140014070
+           00000001400140C7
+           00000001400144A1
+           00000001400144B7
+           0000000140014647
+           00000001400148A1
+           00000001400148D3
+           0000000140014BDF
+           0000000140014BEE
+           0000000140014C50
+           0000000140014CA0
+           0000000140014CF1
 
     Volatile Info Range Table
 
           Ranges
           -------
-          10001033 - 10001A10
-          10001A55 - 10001DB1
-          10001DF3 - 10001E6D
+          0000000140013F80 - 0000000140014D30
+          0000000140014DD4 - 0000000140014E54
+          0000000140014EA6 - 0000000140014EDC
 
 SECTION HEADER #3
    .data name
-     3E0 virtual size
-    3000 virtual address (10003000 to 100033DF)
+   108D0 virtual size
+   1A000 virtual address (000000014001A000 to 000000014002A8CF)
      200 size of raw data
-    1E00 file pointer to raw data (00001E00 to 00001FFF)
+   18A00 file pointer to raw data (00018A00 to 00018BFF)
        0 file pointer to relocation table
        0 file pointer to line numbers
        0 number of relocations
@@ -280,11 +370,11 @@ C0000040 flags
          Read Write
 
 SECTION HEADER #4
-   .rsrc name
-      F8 virtual size
-    4000 virtual address (10004000 to 100040F7)
-     200 size of raw data
-    2000 file pointer to raw data (00002000 to 000021FF)
+  .pdata name
+     6D8 virtual size
+   2B000 virtual address (000000014002B000 to 000000014002B6D7)
+     800 size of raw data
+   18C00 file pointer to raw data (00018C00 to 000193FF)
        0 file pointer to relocation table
        0 file pointer to line numbers
        0 number of relocations
@@ -293,12 +383,1533 @@ SECTION HEADER #4
          Initialized Data
          Read Only
 
+Function Table (146)
+
+           Begin    End      Info      Function Name
+
+  00000000 00001020 00001065 00017FF0  fprintf
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0x16
+    Count of codes: 4
+    Unwind codes:
+      16: ALLOC_SMALL, size=0x30
+      12: PUSH_NONVOL, register=rdi
+      11: PUSH_NONVOL, register=rsi
+      10: PUSH_NONVOL, register=rbx
+
+  0000000C 00001070 000010C5 00017FFC  printf
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0x1B
+    Count of codes: 4
+    Unwind codes:
+      1B: ALLOC_SMALL, size=0x30
+      17: PUSH_NONVOL, register=rdi
+      16: PUSH_NONVOL, register=rsi
+      15: PUSH_NONVOL, register=rbx
+
+  00000018 000010D0 00001122 00017FF0  sscanf
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0x16
+    Count of codes: 4
+    Unwind codes:
+      16: ALLOC_SMALL, size=0x30
+      12: PUSH_NONVOL, register=rdi
+      11: PUSH_NONVOL, register=rsi
+      10: PUSH_NONVOL, register=rbx
+
+  00000024 00001130 00002A99 00018008  processArgs
+    Unwind version: 1
+    Unwind flags: EHANDLER UHANDLER
+    Size of prologue: 0x2A
+    Count of codes: 11
+    Unwind codes:
+      1C: SAVE_NONVOL, register=rbx offset=0x100
+      1C: ALLOC_LARGE, size=0xB0
+      10: PUSH_NONVOL, register=r15
+      0E: PUSH_NONVOL, register=r14
+      0C: PUSH_NONVOL, register=r13
+      0A: PUSH_NONVOL, register=r12
+      08: PUSH_NONVOL, register=rdi
+      07: PUSH_NONVOL, register=rsi
+      06: PUSH_NONVOL, register=rbp
+    Handler: 00014DD4 __GSHandlerCheck
+    GS Unwind flags: None
+    Cookie Offset: 000000A8
+
+  00000030 00002AA0 00003449 0001802C  matchExterns
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0x1C
+    Count of codes: 12
+    Unwind codes:
+      1C: SAVE_NONVOL, register=rsi offset=0x60
+      1C: SAVE_NONVOL, register=rbp offset=0x58
+      1C: SAVE_NONVOL, register=rbx offset=0x50
+      1C: ALLOC_SMALL, size=0x20
+      18: PUSH_NONVOL, register=r15
+      16: PUSH_NONVOL, register=r14
+      14: PUSH_NONVOL, register=r13
+      12: PUSH_NONVOL, register=r12
+      10: PUSH_NONVOL, register=rdi
+
+  0000003C 00003450 00003466 00018048  matchComDefs
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0x06
+    Count of codes: 2
+    Unwind codes:
+      06: ALLOC_SMALL, size=0x40
+      02: PUSH_NONVOL, register=r12
+
+  00000048 00003466 0000354E 00018050
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x1D
+    Count of codes: 8
+    Unwind codes:
+      1D: SAVE_NONVOL, register=r14 offset=0x28
+      11: SAVE_NONVOL, register=rdi offset=0x38
+      0C: SAVE_NONVOL, register=rbx offset=0x58
+      05: SAVE_NONVOL, register=rsi offset=0x68
+    Chained: 00003450 00003466 00018048
+
+  00000054 0000354E 000035EE 00018070
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x0C
+    Count of codes: 4
+    Unwind codes:
+      0C: SAVE_NONVOL, register=r15 offset=0x20
+      05: SAVE_NONVOL, register=rbp offset=0x60
+    Chained: 00003466 0000354E 00018050
+
+  00000060 000035EE 00003610 00018088
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x00
+    Count of codes: 0
+    Chained: 00003466 0000354E 00018050
+
+  0000006C 00003610 000039F8 00018098
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x00
+    Count of codes: 4
+    Unwind codes:
+      00: SAVE_NONVOL, register=r15 offset=0x20
+      00: SAVE_NONVOL, register=rbp offset=0x60
+    Chained: 00003466 0000354E 00018050
+
+  00000078 000039F8 00004485 000180B0
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x05
+    Count of codes: 2
+    Unwind codes:
+      05: SAVE_NONVOL, register=r13 offset=0x30
+    Chained: 00003610 000039F8 00018098
+
+  00000084 00004485 0000448C 000180C4
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x00
+    Count of codes: 0
+    Chained: 00003450 00003466 00018048
+
+  00000090 00004490 00004529 000180D4  sortSegments
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0x08
+    Count of codes: 3
+    Unwind codes:
+      08: ALLOC_SMALL, size=0x38
+      04: PUSH_NONVOL, register=r15
+      02: PUSH_NONVOL, register=rbx
+
+  0000009C 00004529 0000490C 000180E0
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x32
+    Count of codes: 12
+    Unwind codes:
+      32: SAVE_NONVOL, register=r14 offset=0x20
+      26: SAVE_NONVOL, register=r13 offset=0x28
+      1C: SAVE_NONVOL, register=r12 offset=0x30
+      11: SAVE_NONVOL, register=rdi offset=0x68
+      0C: SAVE_NONVOL, register=rsi offset=0x60
+      05: SAVE_NONVOL, register=rbp offset=0x58
+    Chained: 00004490 00004529 000180D4
+
+  000000A8 0000490C 000049BD 00018108
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x00
+    Count of codes: 0
+    Chained: 00004490 00004529 000180D4
+
+  000000B4 000049C0 000049DB 00018118  loadFiles
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0x08
+    Count of codes: 3
+    Unwind codes:
+      08: ALLOC_SMALL, size=0x28
+      04: PUSH_NONVOL, register=r15
+      02: PUSH_NONVOL, register=r14
+
+  000000C0 000049DB 00004CAE 00018124
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x1C
+    Count of codes: 10
+    Unwind codes:
+      1C: SAVE_NONVOL, register=r12 offset=0x20
+      17: SAVE_NONVOL, register=rdi offset=0x58
+      12: SAVE_NONVOL, register=rsi offset=0x50
+      0A: SAVE_NONVOL, register=rbp offset=0x48
+      05: SAVE_NONVOL, register=rbx offset=0x40
+    Chained: 000049C0 000049DB 00018118
+
+  000000CC 00004CAE 00004CB7 00018148
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x00
+    Count of codes: 0
+    Chained: 000049C0 000049DB 00018118
+
+  000000D8 00004CB7 00004E2D 00018158
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x00
+    Count of codes: 10
+    Unwind codes:
+      00: SAVE_NONVOL, register=r12 offset=0x20
+      00: SAVE_NONVOL, register=rdi offset=0x58
+      00: SAVE_NONVOL, register=rsi offset=0x50
+      00: SAVE_NONVOL, register=rbp offset=0x48
+      00: SAVE_NONVOL, register=rbx offset=0x40
+    Chained: 000049C0 000049DB 00018118
+
+  000000E4 00004E30 00004E73 0001817C  generateMap
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0x04
+    Count of codes: 1
+    Unwind codes:
+      04: ALLOC_SMALL, size=0x38
+
+  000000F0 00004E73 00004E7F 00018184
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x05
+    Count of codes: 2
+    Unwind codes:
+      05: SAVE_NONVOL, register=rbx offset=0x40
+    Chained: 00004E30 00004E73 0001817C
+
+  000000FC 00004E7F 00005239 00018198
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x0F
+    Count of codes: 6
+    Unwind codes:
+      0F: SAVE_NONVOL, register=rdi offset=0x30
+      0A: SAVE_NONVOL, register=rsi offset=0x50
+      05: SAVE_NONVOL, register=rbp offset=0x48
+    Chained: 00004E73 00004E7F 00018184
+
+  00000108 00005239 00005344 000181B4
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x00
+    Count of codes: 2
+    Unwind codes:
+      00: SAVE_NONVOL, register=rdi offset=0x30
+    Chained: 00004E73 00004E7F 00018184
+
+  00000114 00005344 00005461 000181C8
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x00
+    Count of codes: 0
+    Chained: 00004E30 00004E73 0001817C
+
+  00000120 00005470 00005C40 000181D8  main
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0x1D
+    Count of codes: 10
+    Unwind codes:
+      1D: SAVE_NONVOL, register=rbx offset=0x78
+      1D: ALLOC_SMALL, size=0x20
+      19: PUSH_NONVOL, register=r15
+      17: PUSH_NONVOL, register=r14
+      15: PUSH_NONVOL, register=r13
+      13: PUSH_NONVOL, register=r12
+      11: PUSH_NONVOL, register=rdi
+      10: PUSH_NONVOL, register=rsi
+      0F: PUSH_NONVOL, register=rbp
+
+  0000012C 00005C40 00005CF0 000181F0  loadcoff
+    Unwind version: 1
+    Unwind flags: EHANDLER UHANDLER
+    Size of prologue: 0x23
+    Count of codes: 7
+    Unwind codes:
+      15: ALLOC_LARGE, size=0x100
+      09: PUSH_NONVOL, register=r14
+      07: PUSH_NONVOL, register=r13
+      05: PUSH_NONVOL, register=r12
+      03: PUSH_NONVOL, register=rdi
+      02: PUSH_NONVOL, register=rbp
+    Handler: 00014DD4 __GSHandlerCheck
+    GS Unwind flags: None
+    Cookie Offset: 000000F0
+
+  00000138 00005CF0 00007647 0001820C
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x2B
+    Count of codes: 6
+    Unwind codes:
+      2B: SAVE_NONVOL, register=r15 offset=0x148
+      1C: SAVE_NONVOL, register=rsi offset=0x140
+      08: SAVE_NONVOL, register=rbx offset=0x138
+    Chained: 00005C40 00005CF0 000181F0
+
+  00000144 00007647 000076EB 00018228
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x00
+    Count of codes: 0
+    Chained: 00005C40 00005CF0 000181F0
+
+  00000150 000076F0 00007772 00018238  loadCoffImport
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0x06
+    Count of codes: 2
+    Unwind codes:
+      06: ALLOC_SMALL, size=0x20
+      02: PUSH_NONVOL, register=rbx
+
+  0000015C 00007780 000077F7 00018240  loadCoffLib
+    Unwind version: 1
+    Unwind flags: EHANDLER UHANDLER
+    Size of prologue: 0x19
+    Count of codes: 4
+    Unwind codes:
+      0A: ALLOC_SMALL, size=0x70
+      06: PUSH_NONVOL, register=r14
+      04: PUSH_NONVOL, register=r12
+      02: PUSH_NONVOL, register=rbx
+    Handler: 00014DD4 __GSHandlerCheck
+    GS Unwind flags: None
+    Cookie Offset: 00000050
+
+  00000168 000077F7 0000800F 00018254
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x94
+    Count of codes: 10
+    Unwind codes:
+      94: SAVE_NONVOL, register=r15 offset=0x60
+      8F: SAVE_NONVOL, register=r13 offset=0x68
+      8A: SAVE_NONVOL, register=rdi offset=0xA8
+      7F: SAVE_NONVOL, register=rbp offset=0x90
+      08: SAVE_NONVOL, register=rsi offset=0xA0
+    Chained: 00007780 000077F7 00018240
+
+  00000174 0000800F 00008051 00018278
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x00
+    Count of codes: 10
+    Unwind codes:
+      00: SAVE_NONVOL, register=r15 offset=0x60
+      00: SAVE_NONVOL, register=r13 offset=0x68
+      00: SAVE_NONVOL, register=rdi offset=0xA8
+      00: SAVE_NONVOL, register=rsi offset=0xA0
+      00: SAVE_NONVOL, register=rbp offset=0x90
+    Chained: 00007780 000077F7 00018240
+
+  00000180 00008060 000082BE 0001829C  combine_segments
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0x12
+    Count of codes: 8
+    Unwind codes:
+      12: ALLOC_SMALL, size=0x40
+      0E: PUSH_NONVOL, register=r15
+      0C: PUSH_NONVOL, register=r14
+      0A: PUSH_NONVOL, register=r13
+      08: PUSH_NONVOL, register=rdi
+      07: PUSH_NONVOL, register=rsi
+      06: PUSH_NONVOL, register=rbp
+      05: PUSH_NONVOL, register=rbx
+
+  0000018C 000082BE 0000850B 000182B0
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x05
+    Count of codes: 2
+    Unwind codes:
+      05: SAVE_NONVOL, register=r12 offset=0x38
+    Chained: 00008060 000082BE 0001829C
+
+  00000198 0000850B 000086C3 000182C4
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x00
+    Count of codes: 0
+    Chained: 00008060 000082BE 0001829C
+
+  000001A4 000086D0 00008976 000182D4  combine_common
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0x8A
+    Count of codes: 12
+    Unwind codes:
+      8A: SAVE_NONVOL, register=rsi offset=0x50
+      17: SAVE_NONVOL, register=rbp offset=0x68
+      17: SAVE_NONVOL, register=rbx offset=0x58
+      17: ALLOC_SMALL, size=0x20
+      13: PUSH_NONVOL, register=r15
+      11: PUSH_NONVOL, register=r14
+      0F: PUSH_NONVOL, register=r13
+      0D: PUSH_NONVOL, register=r12
+      0B: PUSH_NONVOL, register=rdi
+
+  000001B0 00008980 00008994 000182F0  combine_groups
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0x07
+    Count of codes: 3
+    Unwind codes:
+      07: ALLOC_SMALL, size=0x28
+      03: PUSH_NONVOL, register=rdi
+      02: PUSH_NONVOL, register=rbx
+
+  000001BC 00008994 000089B2 000182FC
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x14
+    Count of codes: 4
+    Unwind codes:
+      14: SAVE_NONVOL, register=r15 offset=0x20
+      05: SAVE_NONVOL, register=rsi offset=0x48
+    Chained: 00008980 00008994 000182F0
+
+  000001C8 000089B2 00008A3F 00018314
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x1B
+    Count of codes: 6
+    Unwind codes:
+      1B: SAVE_NONVOL, register=r14 offset=0x58
+      10: SAVE_NONVOL, register=r12 offset=0x50
+      05: SAVE_NONVOL, register=rbp offset=0x40
+    Chained: 00008994 000089B2 000182FC
+
+  000001D4 00008A3F 00008A6D 00018330
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x00
+    Count of codes: 0
+    Chained: 00008994 000089B2 000182FC
+
+  000001E0 00008A6D 00008B58 00018340
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x00
+    Count of codes: 0
+    Chained: 00008980 00008994 000182F0
+
+  000001EC 00008B60 0000905A 00018350  combineBlocks
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0x11
+    Count of codes: 9
+    Unwind codes:
+      11: ALLOC_SMALL, size=0x38
+      0D: PUSH_NONVOL, register=r15
+      0B: PUSH_NONVOL, register=r14
+      09: PUSH_NONVOL, register=r13
+      07: PUSH_NONVOL, register=r12
+      05: PUSH_NONVOL, register=rdi
+      04: PUSH_NONVOL, register=rsi
+      03: PUSH_NONVOL, register=rbp
+      02: PUSH_NONVOL, register=rbx
+
+  000001F8 00009060 00009070 00018368  DestroyLIDATA
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0x06
+    Count of codes: 2
+    Unwind codes:
+      06: ALLOC_SMALL, size=0x20
+      02: PUSH_NONVOL, register=rdi
+
+  00000204 00009070 0000907B 00018370
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x05
+    Count of codes: 2
+    Unwind codes:
+      05: SAVE_NONVOL, register=rbx offset=0x30
+    Chained: 00009060 00009070 00018368
+
+  00000210 0000907B 0000909F 00018384
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x05
+    Count of codes: 2
+    Unwind codes:
+      05: SAVE_NONVOL, register=rsi offset=0x38
+    Chained: 00009070 0000907B 00018370
+
+  0000021C 0000909F 000090A4 00018398
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x00
+    Count of codes: 0
+    Chained: 00009070 0000907B 00018370
+
+  00000228 000090A4 000090BD 000183A8
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x00
+    Count of codes: 0
+    Chained: 00009060 00009070 00018368
+
+  00000234 000090C0 000091EF 000183B8  BuildLiData
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0xC5
+    Count of codes: 7
+    Unwind codes:
+      C5: SAVE_NONVOL, register=rdi offset=0x30
+      57: SAVE_NONVOL, register=rbx offset=0x58
+      08: ALLOC_SMALL, size=0x38
+      04: PUSH_NONVOL, register=r14
+      02: PUSH_NONVOL, register=rsi
+
+  00000240 000091EF 00009222 000183CC
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x05
+    Count of codes: 2
+    Unwind codes:
+      05: SAVE_NONVOL, register=rbp offset=0x60
+    Chained: 000090C0 000091EF 000183B8
+
+  0000024C 00009222 000092CE 000183E0
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x00
+    Count of codes: 0
+    Chained: 000090C0 000091EF 000183B8
+
+  00000258 000092D0 000092F1 000183F0  EmitLiData
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0x0C
+    Count of codes: 5
+    Unwind codes:
+      0C: ALLOC_SMALL, size=0x28
+      08: PUSH_NONVOL, register=r15
+      06: PUSH_NONVOL, register=r14
+      04: PUSH_NONVOL, register=r13
+      02: PUSH_NONVOL, register=rsi
+
+  00000264 000092F1 00009414 00018400
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x14
+    Count of codes: 8
+    Unwind codes:
+      14: SAVE_NONVOL, register=r12 offset=0x20
+      0F: SAVE_NONVOL, register=rdi offset=0x60
+      0A: SAVE_NONVOL, register=rbp offset=0x58
+      05: SAVE_NONVOL, register=rbx offset=0x50
+    Chained: 000092D0 000092F1 000183F0
+
+  00000270 00009414 00009420 00018420
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x00
+    Count of codes: 0
+    Chained: 000092D0 000092F1 000183F0
+
+  0000027C 00009420 00009436 00018430
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x00
+    Count of codes: 8
+    Unwind codes:
+      00: SAVE_NONVOL, register=r12 offset=0x20
+      00: SAVE_NONVOL, register=rdi offset=0x60
+      00: SAVE_NONVOL, register=rbp offset=0x58
+      00: SAVE_NONVOL, register=rbx offset=0x50
+    Chained: 000092D0 000092F1 000183F0
+
+  00000288 00009440 00009468 00018450  RelocLIDATA
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0x0E
+    Count of codes: 6
+    Unwind codes:
+      0E: SAVE_NONVOL, register=rbp offset=0x50
+      0E: ALLOC_SMALL, size=0x20
+      0A: PUSH_NONVOL, register=r15
+      08: PUSH_NONVOL, register=r14
+      06: PUSH_NONVOL, register=rsi
+
+  00000294 00009468 0000957E 00018460
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x0A
+    Count of codes: 4
+    Unwind codes:
+      0A: SAVE_NONVOL, register=rdi offset=0x48
+      05: SAVE_NONVOL, register=rbx offset=0x40
+    Chained: 00009440 00009468 00018450
+
+  000002A0 0000957E 0000958D 00018478
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x00
+    Count of codes: 0
+    Chained: 00009440 00009468 00018450
+
+  000002AC 0000958D 000095E4 00018488
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x00
+    Count of codes: 4
+    Unwind codes:
+      00: SAVE_NONVOL, register=rdi offset=0x48
+      00: SAVE_NONVOL, register=rbx offset=0x40
+    Chained: 00009440 00009468 00018450
+
+  000002B8 000095F0 0000998C 000184A0  LoadFIXUP
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0x19
+    Count of codes: 10
+    Unwind codes:
+      19: SAVE_NONVOL, register=rdi offset=0x50
+      19: SAVE_NONVOL, register=rsi offset=0x48
+      19: SAVE_NONVOL, register=rbx offset=0x40
+      19: ALLOC_SMALL, size=0x20
+      15: PUSH_NONVOL, register=r15
+      13: PUSH_NONVOL, register=r14
+      11: PUSH_NONVOL, register=r12
+
+  000002C4 00009990 0000C71A 000184B8  loadmod
+    Unwind version: 1
+    Unwind flags: EHANDLER UHANDLER
+    Size of prologue: 0x2D
+    Count of codes: 12
+    Unwind codes:
+      1F: SAVE_NONVOL, register=rdi offset=0xB8
+      1F: SAVE_NONVOL, register=rsi offset=0xB0
+      1F: SAVE_NONVOL, register=rbx offset=0xA8
+      1F: ALLOC_SMALL, size=0x70
+      18: PUSH_NONVOL, register=r15
+      16: PUSH_NONVOL, register=r14
+      14: PUSH_NONVOL, register=r13
+      12: PUSH_NONVOL, register=r12
+      10: PUSH_NONVOL, register=rbp
+    Handler: 00014DD4 __GSHandlerCheck
+    GS Unwind flags: None
+    Cookie Offset: 00000068
+
+  000002D0 0000C720 0000C790 000184DC  loadlib
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0x0B
+    Count of codes: 3
+    Unwind codes:
+      0B: ALLOC_SMALL, size=0x48
+      07: PUSH_NONVOL, register=rdi
+      06: PUSH_NONVOL, register=rbx
+
+  000002DC 0000C790 0000CB45 000184E8
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x94
+    Count of codes: 12
+    Unwind codes:
+      94: SAVE_NONVOL, register=r15 offset=0x20
+      87: SAVE_NONVOL, register=r14 offset=0x28
+      7F: SAVE_NONVOL, register=r13 offset=0x30
+      73: SAVE_NONVOL, register=rbp offset=0x68
+      5F: SAVE_NONVOL, register=rsi offset=0x40
+      05: SAVE_NONVOL, register=r12 offset=0x38
+    Chained: 0000C720 0000C790 000184DC
+
+  000002E8 0000CB45 0000CB5D 00018510
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x00
+    Count of codes: 12
+    Unwind codes:
+      00: SAVE_NONVOL, register=r15 offset=0x20
+      00: SAVE_NONVOL, register=r14 offset=0x28
+      00: SAVE_NONVOL, register=r13 offset=0x30
+      00: SAVE_NONVOL, register=r12 offset=0x38
+      00: SAVE_NONVOL, register=rsi offset=0x40
+      00: SAVE_NONVOL, register=rbp offset=0x68
+    Chained: 0000C720 0000C790 000184DC
+
+  000002F4 0000CB60 0000CBB1 00018538  loadlibmod
+    Unwind version: 1
+    Unwind flags: EHANDLER UHANDLER
+    Size of prologue: 0x17
+    Count of codes: 3
+    Unwind codes:
+      08: ALLOC_SMALL, size=0x38
+      04: PUSH_NONVOL, register=r14
+      02: PUSH_NONVOL, register=rsi
+    Handler: 00014DD4 __GSHandlerCheck
+    GS Unwind flags: None
+    Cookie Offset: 00000028
+
+  00000300 0000CBB1 0000CD46 0001854C
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x46
+    Count of codes: 6
+    Unwind codes:
+      46: SAVE_NONVOL, register=rdi offset=0x30
+      41: SAVE_NONVOL, register=rbx offset=0x60
+      05: SAVE_NONVOL, register=rbp offset=0x68
+    Chained: 0000CB60 0000CBB1 00018538
+
+  0000030C 0000CD46 0000CD5B 00018568
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x00
+    Count of codes: 0
+    Chained: 0000CB60 0000CBB1 00018538
+
+  00000318 0000CD5B 0000CD91 00018578
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x00
+    Count of codes: 6
+    Unwind codes:
+      00: SAVE_NONVOL, register=rdi offset=0x30
+      00: SAVE_NONVOL, register=rbp offset=0x68
+      00: SAVE_NONVOL, register=rbx offset=0x60
+    Chained: 0000CB60 0000CBB1 00018538
+
+  00000324 0000CDA0 0000CE18 00018594  loadres
+    Unwind version: 1
+    Unwind flags: EHANDLER UHANDLER
+    Size of prologue: 0x15
+    Count of codes: 2
+    Unwind codes:
+      06: ALLOC_SMALL, size=0x70
+      02: PUSH_NONVOL, register=r12
+    Handler: 00014DD4 __GSHandlerCheck
+    GS Unwind flags: None
+    Cookie Offset: 00000040
+
+  00000330 0000CE18 0000D1F2 000185A4
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x2C
+    Count of codes: 14
+    Unwind codes:
+      2C: SAVE_NONVOL, register=r15 offset=0x50
+      27: SAVE_NONVOL, register=r14 offset=0x58
+      22: SAVE_NONVOL, register=r13 offset=0x60
+      1D: SAVE_NONVOL, register=rbp offset=0x88
+      15: SAVE_NONVOL, register=rdi offset=0x68
+      10: SAVE_NONVOL, register=rsi offset=0x90
+      08: SAVE_NONVOL, register=rbx offset=0x80
+    Chained: 0000CDA0 0000CE18 00018594
+
+  0000033C 0000D1F2 0000D206 000185D0
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x00
+    Count of codes: 0
+    Chained: 0000CDA0 0000CE18 00018594
+
+  00000348 0000D206 0000D395 000185E0
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x00
+    Count of codes: 14
+    Unwind codes:
+      00: SAVE_NONVOL, register=r15 offset=0x50
+      00: SAVE_NONVOL, register=r14 offset=0x58
+      00: SAVE_NONVOL, register=r13 offset=0x60
+      00: SAVE_NONVOL, register=rdi offset=0x68
+      00: SAVE_NONVOL, register=rsi offset=0x90
+      00: SAVE_NONVOL, register=rbp offset=0x88
+      00: SAVE_NONVOL, register=rbx offset=0x80
+    Chained: 0000CDA0 0000CE18 00018594
+
+  00000354 0000D395 0000D3AD 000185D0
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x00
+    Count of codes: 0
+    Chained: 0000CDA0 0000CE18 00018594
+
+  00000360 0000D3B0 0000D4D2 0001860C  GetFixupTarget
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0x0D
+    Count of codes: 6
+    Unwind codes:
+      0D: ALLOC_SMALL, size=0x20
+      09: PUSH_NONVOL, register=r15
+      07: PUSH_NONVOL, register=r13
+      05: PUSH_NONVOL, register=r12
+      03: PUSH_NONVOL, register=rsi
+      02: PUSH_NONVOL, register=rbp
+
+  0000036C 0000D4D2 0000D691 0001861C
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x0A
+    Count of codes: 4
+    Unwind codes:
+      0A: SAVE_NONVOL, register=rdi offset=0x60
+      05: SAVE_NONVOL, register=rbx offset=0x58
+    Chained: 0000D3B0 0000D4D2 0001860C
+
+  00000378 0000D691 0000D81C 00018634
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x05
+    Count of codes: 2
+    Unwind codes:
+      05: SAVE_NONVOL, register=r14 offset=0x68
+    Chained: 0000D4D2 0000D691 0001861C
+
+  00000384 0000D81C 0000D838 00018648
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x00
+    Count of codes: 0
+    Chained: 0000D3B0 0000D4D2 0001860C
+
+  00000390 0000D840 0000D86A 00018658  OutputCOMfile
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0x0A
+    Count of codes: 2
+    Unwind codes:
+      0A: ALLOC_SMALL, size=0x50
+      06: PUSH_NONVOL, register=rbx
+
+  0000039C 0000D86A 0000D924 00018660
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0xB2
+    Count of codes: 12
+    Unwind codes:
+      B2: SAVE_NONVOL, register=r14 offset=0x28
+      AD: SAVE_NONVOL, register=r12 offset=0x38
+      A0: SAVE_NONVOL, register=rdi offset=0x40
+      9B: SAVE_NONVOL, register=rsi offset=0x48
+      91: SAVE_NONVOL, register=rbp offset=0x78
+      05: SAVE_NONVOL, register=r15 offset=0x20
+    Chained: 0000D840 0000D86A 00018658
+
+  000003A8 0000D924 0000DF65 00018688
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x05
+    Count of codes: 2
+    Unwind codes:
+      05: SAVE_NONVOL, register=r13 offset=0x30
+    Chained: 0000D86A 0000D924 00018660
+
+  000003B4 0000DF65 0000E185 0001869C
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x00
+    Count of codes: 0
+    Chained: 0000D86A 0000D924 00018660
+
+  000003C0 0000E185 0000E1D2 000186AC
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x00
+    Count of codes: 0
+    Chained: 0000D840 0000D86A 00018658
+
+  000003CC 0000E1E0 0000E20A 000186BC  OutputEXEfile
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0x0B
+    Count of codes: 2
+    Unwind codes:
+      0B: ALLOC_SMALL, size=0x70
+      07: PUSH_NONVOL, register=r14
+
+  000003D8 0000E20A 0000E37D 000186C4
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x91
+    Count of codes: 8
+    Unwind codes:
+      91: SAVE_NONVOL, register=r12 offset=0x48
+      56: SAVE_NONVOL, register=rbp offset=0x60
+      0C: SAVE_NONVOL, register=r15 offset=0x38
+      05: SAVE_NONVOL, register=rsi offset=0x58
+    Chained: 0000E1E0 0000E20A 000186BC
+
+  000003E4 0000E37D 0000E4A1 000186E4
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x0E
+    Count of codes: 4
+    Unwind codes:
+      0E: SAVE_NONVOL, register=rdi offset=0x50
+      05: SAVE_NONVOL, register=rbx offset=0x68
+    Chained: 0000E20A 0000E37D 000186C4
+
+  000003F0 0000E4A1 0000E524 000186FC
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x05
+    Count of codes: 2
+    Unwind codes:
+      05: SAVE_NONVOL, register=r13 offset=0x40
+    Chained: 0000E37D 0000E4A1 000186E4
+
+  000003FC 0000E524 0000E53C 00018710
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x00
+    Count of codes: 0
+    Chained: 0000E37D 0000E4A1 000186E4
+
+  00000408 0000E53C 0000EF7D 00018720
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x00
+    Count of codes: 2
+    Unwind codes:
+      00: SAVE_NONVOL, register=r13 offset=0x40
+    Chained: 0000E37D 0000E4A1 000186E4
+
+  00000414 0000EF7D 0000EF98 00018734
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x00
+    Count of codes: 14
+    Unwind codes:
+      00: SAVE_NONVOL, register=r15 offset=0x38
+      00: SAVE_NONVOL, register=r13 offset=0x40
+      00: SAVE_NONVOL, register=r12 offset=0x48
+      00: SAVE_NONVOL, register=rdi offset=0x50
+      00: SAVE_NONVOL, register=rsi offset=0x58
+      00: SAVE_NONVOL, register=rbp offset=0x60
+      00: SAVE_NONVOL, register=rbx offset=0x68
+    Chained: 0000E1E0 0000E20A 000186BC
+
+  00000420 0000EF98 0000EFE6 00018760
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x00
+    Count of codes: 0
+    Chained: 0000E1E0 0000E20A 000186BC
+
+  0000042C 0000EFF0 0000F2B5 00018770  createOutputSection
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0x0A
+    Count of codes: 4
+    Unwind codes:
+      0A: SAVE_NONVOL, register=rbx offset=0x30
+      0A: ALLOC_SMALL, size=0x20
+      06: PUSH_NONVOL, register=rdi
+
+  00000438 0000F2C0 0000F310 0001877C  BuildPEImports
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0x17
+    Count of codes: 7
+    Unwind codes:
+      17: ALLOC_SMALL, size=0x58
+      13: PUSH_NONVOL, register=r15
+      11: PUSH_NONVOL, register=r14
+      0F: PUSH_NONVOL, register=r13
+      0D: PUSH_NONVOL, register=r12
+      0B: PUSH_NONVOL, register=rdi
+      0A: PUSH_NONVOL, register=rsi
+
+  00000444 0000F310 0000FED9 00018790
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x10
+    Count of codes: 4
+    Unwind codes:
+      10: SAVE_NONVOL, register=rbp offset=0x48
+      05: SAVE_NONVOL, register=rbx offset=0x50
+    Chained: 0000F2C0 0000F310 0001877C
+
+  00000450 0000FED9 0000FEE8 000187A8
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x00
+    Count of codes: 0
+    Chained: 0000F2C0 0000F310 0001877C
+
+  0000045C 0000FEF0 00010CEC 000187B8  BuildPERelocs
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0x19
+    Count of codes: 9
+    Unwind codes:
+      19: ALLOC_SMALL, size=0x38
+      15: PUSH_NONVOL, register=r15
+      13: PUSH_NONVOL, register=r14
+      11: PUSH_NONVOL, register=r13
+      0F: PUSH_NONVOL, register=r12
+      0D: PUSH_NONVOL, register=rdi
+      0C: PUSH_NONVOL, register=rsi
+      0B: PUSH_NONVOL, register=rbp
+      0A: PUSH_NONVOL, register=rbx
+
+  00000468 00010CF0 00010D2D 000187D0  BuildPEExports
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0x14
+    Count of codes: 5
+    Unwind codes:
+      14: ALLOC_SMALL, size=0x68
+      10: PUSH_NONVOL, register=r15
+      0E: PUSH_NONVOL, register=r13
+      0C: PUSH_NONVOL, register=rdi
+      0B: PUSH_NONVOL, register=rsi
+
+  00000474 00010D2D 00010EB1 000187E0
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x14
+    Count of codes: 6
+    Unwind codes:
+      14: SAVE_NONVOL, register=r14 offset=0x50
+      0F: SAVE_NONVOL, register=r12 offset=0x58
+      05: SAVE_NONVOL, register=rbp offset=0x60
+    Chained: 00010CF0 00010D2D 000187D0
+
+  00000480 00010EB1 00011776 000187FC
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x08
+    Count of codes: 2
+    Unwind codes:
+      08: SAVE_NONVOL, register=rbx offset=0x90
+    Chained: 00010D2D 00010EB1 000187E0
+
+  0000048C 00011776 00011781 00018810
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x00
+    Count of codes: 0
+    Chained: 00010CF0 00010D2D 000187D0
+
+  00000498 00011790 000117C1 00018820  BuildPEResources
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0x13
+    Count of codes: 3
+    Unwind codes:
+      13: ALLOC_LARGE, size=0xE0
+      0C: PUSH_NONVOL, register=rbx
+
+  000004A4 000117C1 000126E9 0001882C
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x1C
+    Count of codes: 14
+    Unwind codes:
+      1C: SAVE_NONVOL, register=r15 offset=0xA8
+      18: SAVE_NONVOL, register=r14 offset=0xB0
+      14: SAVE_NONVOL, register=r13 offset=0xB8
+      10: SAVE_NONVOL, register=r12 offset=0xC0
+      0C: SAVE_NONVOL, register=rdi offset=0xC8
+      08: SAVE_NONVOL, register=rsi offset=0xD0
+      04: SAVE_NONVOL, register=rbp offset=0xD8
+    Chained: 00011790 000117C1 00018820
+
+  000004B0 000126E9 000126F2 00018858
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x00
+    Count of codes: 0
+    Chained: 00011790 000117C1 00018820
+
+  000004BC 00012700 00012734 00018868  getStub
+    Unwind version: 1
+    Unwind flags: EHANDLER UHANDLER
+    Size of prologue: 0x17
+    Count of codes: 3
+    Unwind codes:
+      08: ALLOC_SMALL, size=0x78
+      04: PUSH_NONVOL, register=r15
+      02: PUSH_NONVOL, register=r14
+    Handler: 00014DD4 __GSHandlerCheck
+    GS Unwind flags: None
+    Cookie Offset: 00000048
+
+  000004C8 00012734 00012A07 0001887C
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0xE4
+    Count of codes: 12
+    Unwind codes:
+      E4: SAVE_NONVOL, register=r13 offset=0x50
+      D3: SAVE_NONVOL, register=r12 offset=0x58
+      BA: SAVE_NONVOL, register=rdi offset=0x60
+      AB: SAVE_NONVOL, register=rbp offset=0x70
+      3A: SAVE_NONVOL, register=rbx offset=0xA0
+      05: SAVE_NONVOL, register=rsi offset=0x68
+    Chained: 00012700 00012734 00018868
+
+  000004D4 00012A07 00012A1D 000188A4
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x00
+    Count of codes: 0
+    Chained: 00012700 00012734 00018868
+
+  000004E0 00012A1D 00012A35 000188B4
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x00
+    Count of codes: 4
+    Unwind codes:
+      00: SAVE_NONVOL, register=rsi offset=0x68
+      00: SAVE_NONVOL, register=rbx offset=0xA0
+    Chained: 00012700 00012734 00018868
+
+  000004EC 00012A35 00012A47 000188A4
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x00
+    Count of codes: 0
+    Chained: 00012700 00012734 00018868
+
+  000004F8 00012A50 00012BBF 000188CC  OutputWin32file
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0x0E
+    Count of codes: 5
+    Unwind codes:
+      0E: ALLOC_SMALL, size=0x68
+      0A: PUSH_NONVOL, register=r13
+      08: PUSH_NONVOL, register=rdi
+      07: PUSH_NONVOL, register=rsi
+      06: PUSH_NONVOL, register=rbp
+
+  00000504 00012BBF 00013887 000188DC
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x14
+    Count of codes: 8
+    Unwind codes:
+      14: SAVE_NONVOL, register=r15 offset=0x48
+      0F: SAVE_NONVOL, register=r14 offset=0x50
+      0A: SAVE_NONVOL, register=r12 offset=0x58
+      05: SAVE_NONVOL, register=rbx offset=0x60
+    Chained: 00012A50 00012BBF 000188CC
+
+  00000510 00013887 000138D2 000188FC
+    Unwind version: 1
+    Unwind flags: CHAININFO
+    Size of prologue: 0x00
+    Count of codes: 8
+    Unwind codes:
+      00: SAVE_NONVOL, register=r15 offset=0x48
+      00: SAVE_NONVOL, register=r14 offset=0x50
+      00: SAVE_NONVOL, register=r12 offset=0x58
+      00: SAVE_NONVOL, register=rbx offset=0x60
+    Chained: 00012A50 00012BBF 000188CC
+
+  0000051C 00013910 00013B58 00018238  ReportError
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0x06
+    Count of codes: 2
+    Unwind codes:
+      06: ALLOC_SMALL, size=0x20
+      02: PUSH_NONVOL, register=rbx
+
+  00000528 00013B60 00013C57 0001891C  wstricmp
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0x1E
+    Count of codes: 12
+    Unwind codes:
+      1E: SAVE_NONVOL, register=rdi offset=0x58
+      1E: SAVE_NONVOL, register=rsi offset=0x50
+      1E: SAVE_NONVOL, register=rbp offset=0x48
+      1E: SAVE_NONVOL, register=rbx offset=0x40
+      1E: ALLOC_SMALL, size=0x20
+      1A: PUSH_NONVOL, register=r15
+      18: PUSH_NONVOL, register=r14
+      16: PUSH_NONVOL, register=r12
+
+  00000534 00013C90 00013F4C 00018938  sortedInsert
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0x18
+    Count of codes: 10
+    Unwind codes:
+      18: SAVE_NONVOL, register=rsi offset=0x50
+      18: SAVE_NONVOL, register=rbp offset=0x48
+      18: SAVE_NONVOL, register=rbx offset=0x40
+      18: ALLOC_SMALL, size=0x20
+      14: PUSH_NONVOL, register=r15
+      12: PUSH_NONVOL, register=r14
+      10: PUSH_NONVOL, register=rdi
+
+  00000540 00013F60 00013F7E 00018950  __security_check_cookie
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0x00
+    Count of codes: 0
+
+  0000054C 00013F80 00013FB4 00018238  __raise_securityfailure
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0x06
+    Count of codes: 2
+    Unwind codes:
+      06: ALLOC_SMALL, size=0x20
+      02: PUSH_NONVOL, register=rbx
+
+  00000558 00013FB4 00014087 00018964  __report_gsfailure
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0x09
+    Count of codes: 1
+    Unwind codes:
+      09: ALLOC_SMALL, size=0x38
+
+  00000564 00014088 0001409C 0001895C  __report_rangecheckfailure
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0x04
+    Count of codes: 1
+    Unwind codes:
+      04: ALLOC_SMALL, size=0x28
+
+  00000570 0001409C 00014139 00018954  __report_securityfailure
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0x08
+    Count of codes: 1
+    Unwind codes:
+      08: ALLOC_SMALL, size=0x28
+
+  0000057C 0001413C 000141AC 0001896C
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0x0A
+    Count of codes: 4
+    Unwind codes:
+      0A: SAVE_NONVOL, register=rbx offset=0x68
+      0A: ALLOC_SMALL, size=0x40
+      06: PUSH_NONVOL, register=rdi
+
+  00000588 000141AC 00014220 00018978
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0x08
+    Count of codes: 4
+    Unwind codes:
+      08: ALLOC_SMALL, size=0x40
+      04: PUSH_NONVOL, register=rdi
+      03: PUSH_NONVOL, register=rsi
+      02: PUSH_NONVOL, register=rbx
+
+  00000594 00014220 000142D6 00018238
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0x06
+    Count of codes: 2
+    Unwind codes:
+      06: ALLOC_SMALL, size=0x20
+      02: PUSH_NONVOL, register=rbx
+
+  000005A0 000142D8 000142E8 0001895C
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0x04
+    Count of codes: 1
+    Unwind codes:
+      04: ALLOC_SMALL, size=0x28
+
+  000005AC 000142E8 00014301 0001895C
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0x04
+    Count of codes: 1
+    Unwind codes:
+      04: ALLOC_SMALL, size=0x28
+
+  000005B8 00014304 00014480 00018984
+    Unwind version: 1
+    Unwind flags: EHANDLER
+    Size of prologue: 0x0F
+    Count of codes: 6
+    Unwind codes:
+      0F: SAVE_NONVOL, register=rsi offset=0x48
+      0F: SAVE_NONVOL, register=rbx offset=0x40
+      0F: ALLOC_SMALL, size=0x30
+      0B: PUSH_NONVOL, register=rdi
+    Handler: 00014D30 __C_specific_handler
+
+    Count of scope table entries: 2
+
+      Begin    End      Handler  Target
+
+      0001432D 00014432 00014EA6 00014432
+      00014466 00014478 00014EA6 00014432
+
+  000005C4 00014480 00014492 0001895C  mainCRTStartup
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0x04
+    Count of codes: 1
+    Unwind codes:
+      04: ALLOC_SMALL, size=0x28
+
+  000005D0 00014494 000144CD 0001895C  __scrt_acquire_startup_lock
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0x04
+    Count of codes: 1
+    Unwind codes:
+      04: ALLOC_SMALL, size=0x28
+
+  000005DC 000144D0 0001450A 0001895C  __scrt_initialize_crt
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0x04
+    Count of codes: 1
+    Unwind codes:
+      04: ALLOC_SMALL, size=0x28
+
+  000005E8 0001450C 00014597 00018238  __scrt_initialize_onexit_tables
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0x06
+    Count of codes: 2
+    Unwind codes:
+      06: ALLOC_SMALL, size=0x20
+      02: PUSH_NONVOL, register=rbx
+
+  000005F4 00014598 00014630 000189C4  __scrt_is_nonwritable_in_current_image
+    Unwind version: 1
+    Unwind flags: EHANDLER
+    Size of prologue: 0x04
+    Count of codes: 1
+    Unwind codes:
+      04: ALLOC_SMALL, size=0x18
+    Handler: 00014D30 __C_specific_handler
+
+    Count of scope table entries: 1
+
+      Begin    End      Handler  Target
+
+      0001459F 00014629 00014EC4 00014629
+
+  00000600 00014630 00014654 00018238  __scrt_release_startup_lock
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0x06
+    Count of codes: 2
+    Unwind codes:
+      06: ALLOC_SMALL, size=0x20
+      02: PUSH_NONVOL, register=rbx
+
+  0000060C 00014654 0001467D 00018238  __scrt_uninitialize_crt
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0x06
+    Count of codes: 2
+    Unwind codes:
+      06: ALLOC_SMALL, size=0x20
+      02: PUSH_NONVOL, register=rbx
+
+  00000618 00014680 000146BA 00018238  _onexit
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0x06
+    Count of codes: 2
+    Unwind codes:
+      06: ALLOC_SMALL, size=0x20
+      02: PUSH_NONVOL, register=rbx
+
+  00000624 000146BC 000146D3 0001895C  atexit
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0x04
+    Count of codes: 1
+    Unwind codes:
+      04: ALLOC_SMALL, size=0x28
+
+  00000630 000146D4 00014783 000189EC  __security_init_cookie
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0x0D
+    Count of codes: 4
+    Unwind codes:
+      0D: SAVE_NONVOL, register=rbx offset=0x50
+      0D: ALLOC_SMALL, size=0x30
+      06: PUSH_NONVOL, register=rbp
+
+  0000063C 000147B0 000147CB 0001895C  __scrt_initialize_default_local_stdio_options
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0x04
+    Count of codes: 1
+    Unwind codes:
+      04: ALLOC_SMALL, size=0x28
+
+  00000648 000147F4 0001493F 000189F8  __scrt_fastfail
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0x15
+    Count of codes: 5
+    Unwind codes:
+      15: SAVE_NONVOL, register=rbx offset=0x5D0
+      15: ALLOC_LARGE, size=0x5C0
+      06: PUSH_NONVOL, register=rbp
+
+  00000654 00014948 0001499A 0001895C  __scrt_is_managed_app
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0x04
+    Count of codes: 1
+    Unwind codes:
+      04: ALLOC_SMALL, size=0x28
+
+  00000660 000149AC 00014A0F 00018770  __scrt_unhandled_exception_filter
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0x0A
+    Count of codes: 4
+    Unwind codes:
+      0A: SAVE_NONVOL, register=rbx offset=0x30
+      0A: ALLOC_SMALL, size=0x20
+      06: PUSH_NONVOL, register=rdi
+
+  0000066C 00014A10 00014A4C 00018770  _RTC_Initialize
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0x0A
+    Count of codes: 4
+    Unwind codes:
+      0A: SAVE_NONVOL, register=rbx offset=0x30
+      0A: ALLOC_SMALL, size=0x20
+      06: PUSH_NONVOL, register=rdi
+
+  00000678 00014A4C 00014A88 00018770  _RTC_Terminate
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0x0A
+    Count of codes: 4
+    Unwind codes:
+      0A: SAVE_NONVOL, register=rbx offset=0x30
+      0A: ALLOC_SMALL, size=0x20
+      06: PUSH_NONVOL, register=rdi
+
+  00000684 00014A88 00014D1D 00018A08  __isa_available_init
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0x14
+    Count of codes: 8
+    Unwind codes:
+      14: SAVE_NONVOL, register=rsi offset=0x38
+      14: SAVE_NONVOL, register=rbp offset=0x30
+      14: SAVE_NONVOL, register=rbx offset=0x28
+      14: ALLOC_SMALL, size=0x10
+      10: PUSH_NONVOL, register=rdi
+
+  00000690 00014DD4 00014DF1 0001895C  __GSHandlerCheck
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0x04
+    Count of codes: 1
+    Unwind codes:
+      04: ALLOC_SMALL, size=0x28
+
+  0000069C 00014DF4 00014E54 00018A2C  __GSHandlerCheckCommon
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0x02
+    Count of codes: 1
+    Unwind codes:
+      02: PUSH_NONVOL, register=rbx
+
+  000006A8 00014E80 00014E82 00018A20  _guard_dispatch_icall_nop
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0x00
+    Count of codes: 0
+
+  000006B4 00014EA0 00014EA6 00018A28  _guard_xfg_dispatch_icall_nop
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0x00
+    Count of codes: 0
+
+  000006C0 00014EA6 00014EC4 000189BC
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0x06
+    Count of codes: 2
+    Unwind codes:
+      06: ALLOC_SMALL, size=0x20
+      02: PUSH_NONVOL, register=rbp
+
+  000006CC 00014EC4 00014EDC 000189E4
+    Unwind version: 1
+    Unwind flags: None
+    Size of prologue: 0x02
+    Count of codes: 1
+    Unwind codes:
+      02: PUSH_NONVOL, register=rbp
+
+
 SECTION HEADER #5
-  .reloc name
-     16C virtual size
-    5000 virtual address (10005000 to 1000516B)
+   .rsrc name
+     1E0 virtual size
+   2C000 virtual address (000000014002C000 to 000000014002C1DF)
      200 size of raw data
-    2200 file pointer to raw data (00002200 to 000023FF)
+   19400 file pointer to raw data (00019400 to 000195FF)
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+40000040 flags
+         Initialized Data
+         Read Only
+
+SECTION HEADER #6
+  .reloc name
+      3C virtual size
+   2D000 virtual address (000000014002D000 to 000000014002D03B)
+     200 size of raw data
+   19600 file pointer to raw data (00019600 to 000197FF)
        0 file pointer to relocation table
        0 file pointer to line numbers
        0 number of relocations
@@ -308,188 +1919,37 @@ SECTION HEADER #5
          Discardable
          Read Only
 
-BASE RELOCATIONS #5
-    1000 RVA,      144 SizeOfBlock
-      35  HIGHLOW            10003000  ___security_cookie
-      97  HIGHLOW            10002528
-      C6  HIGHLOW            100033A0  ___scrt_current_native_startup_state
-      D3  HIGHLOW            100033A0  ___scrt_current_native_startup_state
-      F4  HIGHLOW            10002078  ___xi_z
-      F9  HIGHLOW            10002074  ___xi_a
-     112  HIGHLOW            10002070  ___xc_z
-     117  HIGHLOW            1000206C  ___xc_a
-     124  HIGHLOW            100033A0  ___scrt_current_native_startup_state
-     166  HIGHLOW            10002064  ___guard_check_icall_fptr
-     16E  HIGHLOW            10003060
-     1A1  HIGHLOW            10002548
-     1AB  HIGHLOW            10003060
-     1B9  HIGHLOW            10003060
-     1D7  HIGHLOW            100033A0  ___scrt_current_native_startup_state
-     1EF  HIGHLOW            100033A0  ___scrt_current_native_startup_state
-     258  HIGHLOW            10002570
-     26A  HIGHLOW            10003060
-     32C  HIGHLOW            10001041
-     369  HIGHLOW            10002090  __pDefaultRawDllMain
-     383  HIGHLOW            10002064  ___guard_check_icall_fptr
-     3B8  HIGHLOW            10002004  __imp__SetUnhandledExceptionFilter@4
-     3C1  HIGHLOW            10002020  __imp__UnhandledExceptionFilter@4
-     3CC  HIGHLOW            10002008  __imp__GetCurrentProcess@0
-     3D3  HIGHLOW            1000200C  __imp__TerminateProcess@8
-     3E6  HIGHLOW            10002010  __imp__IsProcessorFeaturePresent@4
-     3F4  HIGHLOW            10003168
-     3FA  HIGHLOW            10003164
-     400  HIGHLOW            10003160
-     406  HIGHLOW            1000315C
-     40C  HIGHLOW            10003158
-     412  HIGHLOW            10003154
-     419  HIGHLOW            10003180
-     420  HIGHLOW            10003174
-     427  HIGHLOW            10003150
-     42E  HIGHLOW            1000314C
-     435  HIGHLOW            10003148
-     43C  HIGHLOW            10003144
-     443  HIGHLOW            10003178
-     44B  HIGHLOW            1000316C
-     453  HIGHLOW            10003170
-     45B  HIGHLOW            1000317C
-     467  HIGHLOW            100030B8
-     470  HIGHLOW            10003170
-     475  HIGHLOW            10003074
-     47B  HIGHLOW            10003068
-     485  HIGHLOW            1000306C
-     48F  HIGHLOW            10003078
-     49F  HIGHLOW            1000307C
-     4AF  HIGHLOW            10003000  ___security_cookie
-     4BF  HIGHLOW            10003040  ___security_cookie_complement
-     4C8  HIGHLOW            10002094
-     4E8  HIGHLOW            10002024  __imp__GetSystemTimeAsFileTime@4
-     4F7  HIGHLOW            10002028  __imp__GetCurrentThreadId@0
-     500  HIGHLOW            10002018  __imp__GetCurrentProcessId@0
-     50D  HIGHLOW            10002014  __imp__QueryPerformanceCounter@4
-     523  HIGHLOW            10003000  ___security_cookie
-     55D  HIGHLOW            10003000  ___security_cookie
-     566  HIGHLOW            10003040  ___security_cookie_complement
-     56D  HIGHLOW            10003388  ?__type_info_root_node@@3U__type_info_node@@A (struct __type_info_node __type_info_root_node)
-     573  HIGHLOW            10002000  __imp__InitializeSListHead@4
-     579  HIGHLOW            10003388  ?__type_info_root_node@@3U__type_info_node@@A (struct __type_info_node __type_info_root_node)
-     585  HIGHLOW            10003390  ?_OptionsStorage@?1??__local_stdio_printf_options@@9@4_KA (unsigned __int64 `__local_stdio_printf_options'::`2'::_OptionsStorage)
-     58B  HIGHLOW            10003398  ?_OptionsStorage@?1??__local_stdio_scanf_options@@9@4_KA (unsigned __int64 `__local_stdio_scanf_options'::`2'::_OptionsStorage)
-     600  HIGHLOW            100033A4  ___scrt_native_startup_lock
-     6A4  HIGHLOW            10002064  ___guard_check_icall_fptr
-     6C4  HIGHLOW            100033AC
-     6F5  HIGHLOW            100033A8
-     728  HIGHLOW            100033A9
-     74E  HIGHLOW            100033AC
-     75D  HIGHLOW            100033B8
-     774  HIGHLOW            100033AC
-     77A  HIGHLOW            100033B0
-     780  HIGHLOW            100033B4
-     786  HIGHLOW            100033B8
-     78C  HIGHLOW            100033BC
-     792  HIGHLOW            100033C0
-     798  HIGHLOW            100033A9
-     7AD  HIGHLOW            10002590
-     7C5  HIGHLOW            10000000
-     7CC  HIGHLOW            1000003C
-     7D2  HIGHLOW            10000000
-     7E4  HIGHLOW            10000018
-     7EE  HIGHLOW            10000000
-     856  HIGHLOW            100033A4  ___scrt_native_startup_lock
-     863  HIGHLOW            100033A8
-     887  HIGHLOW            100033DC  ___dyn_tls_init_callback
-     89A  HIGHLOW            10002010  __imp__IsProcessorFeaturePresent@4
-     966  HIGHLOW            1000201C  __imp__IsDebuggerPresent@0
-     97F  HIGHLOW            10002004  __imp__SetUnhandledExceptionFilter@4
-     989  HIGHLOW            10002020  __imp__UnhandledExceptionFilter@4
-     9A3  HIGHLOW            100033C4  ___scrt_debugger_hook_flag
-     9AF  HIGHLOW            1000251C  ___rtc_izz
-     9B4  HIGHLOW            1000251C  ___rtc_izz
-     9C7  HIGHLOW            10002064  ___guard_check_icall_fptr
-     9DB  HIGHLOW            10002524  ___rtc_tzz
-     9E0  HIGHLOW            10002524  ___rtc_tzz
-     9F3  HIGHLOW            10002064  ___guard_check_icall_fptr
-     A11  HIGHLOW            10001A55  __except_handler4
-     A2E  HIGHLOW            10003000  ___security_cookie
-     A70  HIGHLOW            10001033  @__security_check_cookie@4
-     A75  HIGHLOW            10003000  ___security_cookie
-     A8C  HIGHLOW            10003058  ___isa_enabled
-     A96  HIGHLOW            100033CC  ___isa_available
-     AA2  HIGHLOW            10002010  __imp__IsProcessorFeaturePresent@4
-     B3B  HIGHLOW            100033D0  ___favor
-     B8A  HIGHLOW            100033D0  ___favor
-     BE2  HIGHLOW            10003058  ___isa_enabled
-     BE8  HIGHLOW            10003050  ___isa_inverted
-     BF1  HIGHLOW            10003054
-     BFA  HIGHLOW            100033CC  ___isa_available
-     C03  HIGHLOW            10003058  ___isa_enabled
-     C09  HIGHLOW            10003050  ___isa_inverted
-     C0F  HIGHLOW            10003054
-     C24  HIGHLOW            100033CC  ___isa_available
-     C2D  HIGHLOW            10003058  ___isa_enabled
-     C3B  HIGHLOW            10003050  ___isa_inverted
-     C43  HIGHLOW            10003054
-     C79  HIGHLOW            10003058  ___isa_enabled
-     C82  HIGHLOW            100033CC  ___isa_available
-     C8B  HIGHLOW            10003058  ___isa_enabled
-     C96  HIGHLOW            10003054
-     C9E  HIGHLOW            10003058  ___isa_enabled
-     CA8  HIGHLOW            10003050  ___isa_inverted
-     CB3  HIGHLOW            100033CC  ___isa_available
-     CBC  HIGHLOW            10003050  ___isa_inverted
-     CC2  HIGHLOW            10003054
-     CE2  HIGHLOW            10003050  ___isa_inverted
-     CE8  HIGHLOW            10003058  ___isa_enabled
-     CF2  HIGHLOW            10003054
-     CF8  HIGHLOW            100033CC  ___isa_available
-     D01  HIGHLOW            10003050  ___isa_inverted
-     D07  HIGHLOW            10003054
-     D0F  HIGHLOW            10003054
-     D14  HIGHLOW            10003050  ___isa_inverted
-     D28  HIGHLOW            10003054
-     D2D  HIGHLOW            10003050  ___isa_inverted
-     D61  HIGHLOW            100033C8  ___avx10_version
-     D6F  HIGHLOW            10003054
-     D77  HIGHLOW            10003050  ___isa_inverted
-     D7D  HIGHLOW            10003050  ___isa_inverted
-     D83  HIGHLOW            10003054
-     D90  HIGHLOW            10003054
-     D96  HIGHLOW            10003050  ___isa_inverted
-     DA9  HIGHLOW            1000305C  ___scrt_ucrt_dll_is_in_use
-     DB3  HIGHLOW            10002030  __imp____std_type_info_destroy_list
-     DB9  HIGHLOW            10002034  __imp__memset
-     DBF  HIGHLOW            10002038  __imp___except_handler4_common
-     DC5  HIGHLOW            10002058  __imp___initterm
-     DCB  HIGHLOW            10002054  __imp___initterm_e
-     DD1  HIGHLOW            10002050  __imp___seh_filter_dll
-     DD7  HIGHLOW            1000204C  __imp___configure_narrow_argv
-     DDD  HIGHLOW            1000205C  __imp___initialize_narrow_environment
-     DE3  HIGHLOW            10002048  __imp___initialize_onexit_table
-     DE9  HIGHLOW            10002044  __imp___execute_onexit_table
-     DEF  HIGHLOW            10002040  __imp___cexit
-     DFC  HIGHLOW            100033CC  ___isa_available
+BASE RELOCATIONS #6
+   15000 RVA,       20 SizeOfBlock
+     2B8  DIR64      00000001400147AC  _guard_check_icall_nop
+     2C0  DIR64      00000001400147AC  _guard_check_icall_nop
+     2C8  DIR64      0000000140014E80  _guard_dispatch_icall_nop
+     2D0  DIR64      0000000140014EA0  _guard_xfg_dispatch_icall_nop
+     2D8  DIR64      0000000140014EA0  _guard_xfg_dispatch_icall_nop
+     2E8  DIR64      0000000140014E5A  memcpy
+     2F8  DIR64      00000001400142E8
+     310  DIR64      0000000140014220
+     318  DIR64      00000001400142D8
+     350  DIR64      000000014001A120
+     358  DIR64      000000014001A1C0
        0  ABS                        
-    2000 RVA,       28 SizeOfBlock
-      64  HIGHLOW            10001A84  @_guard_check_icall_nop@4
-      94  HIGHLOW            10003068
-      98  HIGHLOW            100030B8
-      DC  HIGHLOW            10003000  ___security_cookie
-      E0  HIGHLOW            10002200  ___safe_se_handler_table
-      E8  HIGHLOW            10002064  ___guard_check_icall_fptr
-     140  HIGHLOW            10002204  ___volatile_metadata
-     158  HIGHLOW            10002068  ___castguard_check_failure_os_handled_fptr
-     540  HIGHLOW            10001177
-     560  HIGHLOW            10001244
-     56C  HIGHLOW            10001237
-     584  HIGHLOW            10001323
-     588  HIGHLOW            10001342
-     5A4  HIGHLOW            10001812
-     5A8  HIGHLOW            10001825
+   17000 RVA,       1C SizeOfBlock
+     AC8  DIR64      000000014001A000  __security_cookie
+     AE0  DIR64      00000001400152B8  __guard_check_icall_fptr
+     AE8  DIR64      00000001400152C8  __guard_dispatch_icall_fptr
+     B70  DIR64      0000000140017C80  __volatile_metadata
+     B88  DIR64      00000001400152C0  __guard_xfg_check_icall_fptr
+     B90  DIR64      00000001400152D0  __guard_xfg_dispatch_icall_fptr
+     B98  DIR64      00000001400152D8  __guard_xfg_table_dispatch_icall_fptr
+     BA0  DIR64      00000001400152E0  __castguard_check_failure_os_handled_fptr
+     BA8  DIR64      00000001400152E8  __guard_memcpy_fptr
        0  ABS                        
 
   Summary
 
-        1000 .data
-        1000 .rdata
+       11000 .data
+        1000 .pdata
+        5000 .rdata
         1000 .reloc
         1000 .rsrc
-        1000 .text
+       14000 .text

@@ -75,26 +75,26 @@
     <OutDir>..\..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\bin\tools\intermediate\Linker\$(Configuration)\$(Platform)\</IntDir>
     <ExecutablePath>$(VC_ExecutablePath_x86);$(CommonExecutablePath)</ExecutablePath>
-    <IncludePath>C:\projects\ProjectJarvis\source\tools\BinaryFormats;C:\projects\ProjectJarvis\source\tools\Arguments;$(IncludePath)</IncludePath>
+    <IncludePath>..\BinaryFormats;..\Arguments;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>..\..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\bin\tools\intermediate\Linker\$(Configuration)\$(Platform)\</IntDir>
     <ExecutablePath>$(VC_ExecutablePath_x86);$(CommonExecutablePath)</ExecutablePath>
-    <IncludePath>C:\projects\ProjectJarvis\source\tools\BinaryFormats;C:\projects\ProjectJarvis\source\tools\Arguments;$(IncludePath)</IncludePath>
+    <IncludePath>..\BinaryFormats;..\Arguments;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>..\..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\bin\tools\intermediate\Linker\$(Configuration)\$(Platform)\</IntDir>
     <ExecutablePath>$(VC_ExecutablePath_x64);$(CommonExecutablePath)</ExecutablePath>
-    <IncludePath>C:\projects\ProjectJarvis\source\tools\BinaryFormats;C:\projects\ProjectJarvis\source\tools\Arguments;$(IncludePath)</IncludePath>
+    <IncludePath>..\BinaryFormats;..\Arguments;$(IncludePath)</IncludePath>
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>..\..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\bin\tools\intermediate\Linker\$(Configuration)\$(Platform)\</IntDir>
     <ExecutablePath>$(VC_ExecutablePath_x64);$(CommonExecutablePath)</ExecutablePath>
-    <IncludePath>C:\projects\ProjectJarvis\source\tools\BinaryFormats;C:\projects\ProjectJarvis\source\tools\Arguments;$(IncludePath)</IncludePath>
+    <IncludePath>..\BinaryFormats;..\Arguments;$(IncludePath)</IncludePath>
     <LinkIncremental>
     </LinkIncremental>
   </PropertyGroup>

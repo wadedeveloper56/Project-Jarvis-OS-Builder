@@ -178,6 +178,20 @@ typedef struct BINARYFORMATS_API _Imports
 	_Imports();
 } Imports, * ImportsPtr;
 
+typedef struct BINARYFORMATS_API _RelocsEntry
+{
+	WORD relocType;
+	const char* szRelocType;
+	_RelocsEntry();
+} RelocsEntry, * RelocsEntryPtr;
+
+typedef struct BINARYFORMATS_API _Relocs
+{
+	IMAGE_BASE_RELOCATION baseReloc;
+	vector<RelocsEntryPtr> entries;
+	_Relocs();
+} Relocs, * RelocsPtr;
+
 typedef struct BINARYFORMATS_API _EXEFile
 {
 	vector<OBJSectionPtr> sectionTable;
@@ -190,6 +204,7 @@ typedef struct BINARYFORMATS_API _EXEFile
 	Resources resources;
 	ExportsPtr exports;
 	vector<ImportsPtr> imports;
+	vector<RelocsPtr> relocs;
 	_EXEFile();
 } EXEFile, * EXEFilePtr, ** EXEFilePtrPtr;
 
@@ -227,3 +242,4 @@ BINARYFORMATS_API void DumpOptionalHeader32(PIMAGE_OPTIONAL_HEADER32 optionalHea
 BINARYFORMATS_API void DumpExportDirectory(ExportsPtr exportDir);
 BINARYFORMATS_API void DumpImportDirectory(bool is64, vector<ImportsPtr>* imports);
 BINARYFORMATS_API void DumpResourcesDirectory(ResourcesPtr resources);
+BINARYFORMATS_API void DumpBaseRelocationsDirectory(vector<RelocsPtr>* relocs);

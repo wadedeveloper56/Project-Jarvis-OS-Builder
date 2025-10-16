@@ -75,26 +75,26 @@
     <OutDir>..\..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\bin\tools\intermediate\Compiler\$(Configuration)\$(Platform)\</IntDir>
     <LibraryPath>$(LibraryPath)</LibraryPath>
-    <IncludePath>C:\projects\ProjectJarvis\source\tools\Argument;C:\projects\ProjectJarvis\source\tools\Preprocessor;C:\flex-bison;$(IncludePath)</IncludePath>
+    <IncludePath>..\Arguments;..\PreProcessor;C:\flex-bison;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>..\..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\bin\tools\intermediate\Compiler\$(Configuration)\$(Platform)\</IntDir>
     <LibraryPath>$(LibraryPath)</LibraryPath>
-    <IncludePath>C:\projects\ProjectJarvis\source\tools\Argument;C:\projects\ProjectJarvis\source\tools\Preprocessor;C:\flex-bison;$(IncludePath)</IncludePath>
+    <IncludePath>..\Arguments;..\PreProcessor;C:\flex-bison;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>..\..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\bin\tools\intermediate\Compiler\$(Configuration)\$(Platform)\</IntDir>
     <LibraryPath>$(LibraryPath)</LibraryPath>
-    <IncludePath>C:\projects\ProjectJarvis\source\tools\Argument;C:\projects\ProjectJarvis\source\tools\Preprocessor;C:\flex-bison;$(IncludePath)</IncludePath>
+    <IncludePath>..\Arguments;..\PreProcessor;C:\flex-bison;$(IncludePath)</IncludePath>
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>..\..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\bin\tools\intermediate\Compiler\$(Configuration)\$(Platform)\</IntDir>
     <LibraryPath>$(LibraryPath)</LibraryPath>
-    <IncludePath>C:\projects\ProjectJarvis\source\tools\Argument;C:\projects\ProjectJarvis\source\tools\Preprocessor;C:\flex-bison;$(IncludePath)</IncludePath>
+    <IncludePath>..\Arguments;..\PreProcessor;C:\flex-bison;$(IncludePath)</IncludePath>
     <LinkIncremental>
     </LinkIncremental>
   </PropertyGroup>

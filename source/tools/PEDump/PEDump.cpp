@@ -125,6 +125,7 @@ int main(int argc, char* argv[])
 			}
 			DumpImportDirectory(data->is64,&data->imports);
 			DumpResourcesDirectory(&data->resources);
+			DumpBaseRelocationsDirectory(&data->relocs);
 			break;
 		}
 		case DEBUG:

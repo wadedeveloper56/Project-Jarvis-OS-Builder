@@ -497,4 +497,27 @@ void DumpResourcesDirectory(ResourcesPtr resources)
 		printf("  Offset To Directory:     %08X\n", ptr->entry.OffsetToDirectory);
 		printf("  Data is Directory:       %08X\n", ptr->entry.DataIsDirectory);
 	}
+	printf("\n");
+}
+
+void DumpBaseRelocationsDirectory(vector<RelocsPtr> *relocs)
+{
+	printf("Relocations table:\n");
+	for(RelocsPtr ptr : *relocs)
+	{
+		printf("  Page RVA:      %08X\n", ptr->baseReloc.VirtualAddress);
+		printf("  Block Size:    %08X (%d)\n", ptr->baseReloc.SizeOfBlock, ptr->baseReloc.SizeOfBlock);
+		for (RelocsEntryPtr entry : ptr->entries)
+		{
+			WORD relocType = (entry->relocType & 0xF000) >> 12;
+			printf("  %08X %s", (entry->relocType & 0x0FFF) + ptr->baseReloc.VirtualAddress, entry->szRelocType);
+			if (IMAGE_REL_BASED_HIGHADJ == relocType)
+			{
+				printf(" (%X)", entry->relocType);
+			}
+			printf("\n");
+		}
+		printf("\n");
+	}
+	printf("\n");
 }

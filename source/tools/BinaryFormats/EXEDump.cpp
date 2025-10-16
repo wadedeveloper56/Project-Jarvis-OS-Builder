@@ -6,6 +6,9 @@ using namespace std;
 
 const char* SzDebugFormats[] = { "UNKNOWN/BORLAND","COFF","CODEVIEW","FPO","MISC","EXCEPTION","FIXUP", "OMAP_TO_SRC", "OMAP_FROM_SRC" };
 
+const char* SzRelocTypes[] = { "ABSOLUTE","HIGH","LOW","HIGHLOW","HIGHADJ","MIPS/ARM", "SECTION","REL32","MIPS16","DIR64", "TYPE10" };
+#define RELOC_TYPE_COUNT (sizeof(SzRelocTypes) / sizeof(char *))
+
 DWORD GetImgDirEntryRVA(bool Is64, PVOID pNTHdr, DWORD IDE)
 {
 	DWORD rva = 0;
@@ -436,6 +439,41 @@ void loadResourcesDirectory(EXEFilePtr result, char* buffer, PIMAGE_NT_HEADERS32
 	}
 }
 
+void loadBaseRelocationsDirectory(EXEFilePtr result, char* buffer, PIMAGE_NT_HEADERS32 pNTHeader)
+{
+	DWORD baseRelocRVA = GetImgDirEntryRVA(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_BASERELOC);
+	DWORD baseRelocRVASize = GetImgDirEntrySize(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_BASERELOC);
+	PIMAGE_BASE_RELOCATION baseReloc = (PIMAGE_BASE_RELOCATION)GetPtrFromRVA(result->is64, baseRelocRVA, pNTHeader, buffer);
+	while (baseReloc->SizeOfBlock != 0)
+	{
+		if (0 == baseReloc->VirtualAddress)
+			break;
+		if (baseReloc->SizeOfBlock < sizeof(*baseReloc))
+			break;
+		RelocsPtr relocs = new Relocs;
+		relocs->baseReloc.VirtualAddress = baseReloc->VirtualAddress;
+		relocs->baseReloc.SizeOfBlock = baseReloc->SizeOfBlock;
+		int cEntries = (baseReloc->SizeOfBlock - sizeof(*baseReloc)) / sizeof(WORD);
+		PWORD pEntry = MakePtr(PWORD, baseReloc, sizeof(*baseReloc));
+		for (int i = 0; i < cEntries; i++)
+		{
+			RelocsEntryPtr relocsEntry = new RelocsEntry;
+			relocsEntry->relocType = *pEntry;
+			WORD relocType = (*pEntry & 0xF000) >> 12;
+			relocsEntry->szRelocType = (relocType < RELOC_TYPE_COUNT) ? SzRelocTypes[relocType] : "unknown";
+			relocs->entries.push_back(relocsEntry);
+			if (IMAGE_REL_BASED_HIGHADJ == relocType)
+			{
+				pEntry++;
+				cEntries--;
+			}
+			pEntry++;
+		}
+		result->relocs.push_back(relocs);
+		baseReloc = MakePtr(PIMAGE_BASE_RELOCATION, baseReloc, baseReloc->SizeOfBlock);
+	}
+}
+
 EXEFilePtr loadExeFile(char* buffer, LONGLONG fileSize)
 {
 	EXEFilePtr result = new EXEFile;
@@ -448,8 +486,6 @@ EXEFilePtr loadExeFile(char* buffer, LONGLONG fileSize)
 	loadImportsDirectory(result, buffer, pNTHeader);
 	loadResourcesDirectory(result, buffer, pNTHeader);
 
-
-	DWORD baseRelocRVA = GetImgDirEntryRVA(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_BASERELOC);
 	DWORD debugRVA = GetImgDirEntryRVA(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_DEBUG);
 	DWORD configRVA = GetImgDirEntryRVA(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG);
 	DWORD iatRVA = GetImgDirEntryRVA(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_IAT);
