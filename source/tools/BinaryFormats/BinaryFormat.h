@@ -228,10 +228,10 @@ typedef struct BINARYFORMATS_API _EXEFile
 #define MakePtr( cast, ptr, addValue ) (cast)( (BYTE *)(ptr) + (DWORD)(addValue))
 
 
-typedef enum _FileType { UNKNOWN, EXE, DEBUG, OBJ, ANONYMOUS, LIB }FileType;
+typedef enum _FileType { UNKNOWN, DOSEXE, PE16EXE, PE32EXE, PE64EXE, DEBUG, PE16OBJ, PE32OBJ, PE64OBJ, ANONYMOUS, LIB }FileType;
 
 BINARYFORMATS_API WORD getFileMagic(char* buffer);
-BINARYFORMATS_API FileType getFileType(char* buffer);
+BINARYFORMATS_API FileType getFileType(char* buffer, LONGLONG fileSize);
 BINARYFORMATS_API const char* GetMachineTypeName(WORD wMachineType);
 BINARYFORMATS_API int islistedMachineType(WORD wMachineType);
 BINARYFORMATS_API void hexdump(const void* data, size_t size);

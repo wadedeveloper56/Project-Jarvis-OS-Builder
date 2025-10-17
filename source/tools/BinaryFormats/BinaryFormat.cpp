@@ -61,11 +61,48 @@ int islistedMachineType(WORD wMachineType)
 	return 1;
 }
 
-FileType getFileType(char* buffer)
+FileType getFileType(char* buffer,LONGLONG fileSize)
 {
-	WORD magic = getFileMagic(buffer);
-	PIMAGE_FILE_HEADER pImgFileHdr = (PIMAGE_FILE_HEADER)buffer;
-	DWORD minSize = (sizeof(IMAGE_DOS_HEADER) > sizeof(IMAGE_FILE_HEADER)) ? (DWORD)sizeof(IMAGE_DOS_HEADER) : (DWORD)sizeof(IMAGE_FILE_HEADER);
+	FileType result = UNKNOWN;
+	PIMAGE_DOS_HEADER dosHeader = (PIMAGE_DOS_HEADER)buffer;
+	PIMAGE_FILE_HEADER pImgFileHdr = (PIMAGE_FILE_HEADER)(buffer);
+	if (dosHeader->e_magic == IMAGE_DOS_SIGNATURE)
+	{
+		PIMAGE_NT_HEADERS32 pNTHeader = MakePtr(PIMAGE_NT_HEADERS32, dosHeader, dosHeader->e_lfanew);
+		if (dosHeader->e_lfanew < fileSize  && pNTHeader->Signature == IMAGE_NT_SIGNATURE)
+		{
+			if (pNTHeader->OptionalHeader.Magic == IMAGE_NT_OPTIONAL_HDR32_MAGIC)
+			{
+				result = PE32EXE;
+			}
+			else if (pNTHeader->OptionalHeader.Magic == IMAGE_NT_OPTIONAL_HDR64_MAGIC)
+			{
+				result = PE64EXE;
+			}
+		}
+		else
+		{
+			result = DOSEXE;
+		}
+	}
+	else if (!strncmp(buffer, IMAGE_ARCHIVE_START, IMAGE_ARCHIVE_START_SIZE))
+	{
+		return LIB;
+	}
+	else
+	{
+		PIMAGE_FILE_HEADER pImgFileHdr = (PIMAGE_FILE_HEADER)buffer;
+		if (pImgFileHdr->Machine == IMAGE_FILE_MACHINE_I386)
+		{
+			result = PE32OBJ;
+		}
+		else if (pImgFileHdr->Machine == IMAGE_FILE_MACHINE_AMD64)
+		{
+			result = PE64OBJ;
+		}
+	}
+	return result;
+/*
 	int listed = islistedMachineType(pImgFileHdr->Machine);
 	if (magic == IMAGE_DOS_SIGNATURE)
 	{
@@ -95,6 +132,7 @@ FileType getFileType(char* buffer)
 		return ANONYMOUS;
 	}
 	return UNKNOWN;
+	*/
 }
 
 void hexdump(const void* data, size_t size) {

@@ -99,21 +99,40 @@ int main(int argc, char* argv[])
 	printf("Dump of file %s\n", filename);
 	MemoryMappedFile* mmfile = new MemoryMappedFile((char*)filename);
 	char* buffer = mmfile->getBuffer();
-	FileType fileType = getFileType(buffer);
 	LONGLONG fileSize = mmfile->getFileSize();
 	printf("File Size %lld bytes\n", fileSize);
+	FileType fileType = getFileType(buffer, fileSize);
 	switch (fileType)
 	{
-		case EXE:
+		case PE32EXE:
 		{
-			printf("File Type: PE EXECUTABLE IMAGE\n");
+			printf("File Type: 32-bit PE EXECUTABLE IMAGE\n");
 			EXEFilePtr data = loadExeFile(buffer, fileSize);
 			DumpDOSHeader(&data->dosHeader);
 			DumpFileHeader(&data->FileHeader);
-			if (data->is64)
-				DumpOptionalHeader64(&data->OptionalHeader64);
-			else
-				DumpOptionalHeader32(&data->OptionalHeader32);
+			DumpOptionalHeader32(&data->OptionalHeader32);
+			for (int i = 0; i < data->sectionTable.size(); i++)
+			{
+				OBJSectionPtr ptr = data->sectionTable[i];
+				DumpSection(i, ptr);
+			}
+			if (data->exports != nullptr)
+			{
+				DumpExportDirectory(data->exports);
+			}
+			DumpImportDirectory(data->is64, &data->imports);
+			DumpResourcesDirectory(&data->resources);
+			DumpBaseRelocationsDirectory(&data->relocs);
+			DumpDebugDirectory(data->debug);
+			break;
+		}
+		case PE64EXE:
+		{
+			printf("File Type: 64-bit PE EXECUTABLE IMAGE\n");
+			EXEFilePtr data = loadExeFile(buffer, fileSize);
+			DumpDOSHeader(&data->dosHeader);
+			DumpFileHeader(&data->FileHeader);
+			DumpOptionalHeader64(&data->OptionalHeader64);
 			for (int i = 0; i < data->sectionTable.size(); i++)
 			{
 				OBJSectionPtr ptr = data->sectionTable[i];
@@ -131,9 +150,29 @@ int main(int argc, char* argv[])
 		}
 		case DEBUG:
 			break;
-		case OBJ:
+		case PE32OBJ:
 		{
-			printf("File Type: COFF OBJECT\n\n");
+			printf("File Type: 32-bit COFF OBJECT\n\n");
+			OBJFilePtr data = loadObjFile(buffer, fileSize);
+			DumpFileHeader(&data->header);
+			printf("\n");
+			for (int i = 0; i < data->sectionTable.size(); i++)
+			{
+				OBJSectionPtr ptr = data->sectionTable[i];
+				DumpSection(i, ptr);
+			}
+			DumpSymbolTable(data->symbolTable);
+			printf("\nString Table Size = 0x%0X (%ld) bytes %lld entries\n", data->stringTableSize, data->stringTableSize, (LONGLONG)data->stringTable.size());
+			for (int i = 0; i < data->stringTable.size(); i++)
+			{
+				string s = data->stringTable[i];
+				printf("stringtable[% 4d] = %s\n", i, s.c_str());
+			}
+			break;
+		}
+		case PE64OBJ:
+		{
+			printf("File Type: 64-bit COFF OBJECT\n\n");
 			OBJFilePtr data = loadObjFile(buffer, fileSize);
 			DumpFileHeader(&data->header);
 			printf("\n");

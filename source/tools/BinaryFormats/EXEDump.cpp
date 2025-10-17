@@ -535,6 +535,7 @@ EXEFilePtr loadExeFile(char* buffer, LONGLONG fileSize)
 	loadExportsDirectory(result, buffer, pNTHeader);
 	loadImportsDirectory(result, buffer, pNTHeader);
 	loadResourcesDirectory(result, buffer, pNTHeader);
+	loadBaseRelocationsDirectory(result, buffer, pNTHeader);
 	loadDebugDirectory(result, buffer, pNTHeader);
 
 	DWORD configRVA = GetImgDirEntryRVA(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG);

@@ -237,16 +237,18 @@ void loadFiles()
 		printf("Loading file %s\n", file.c_str());
 		MemoryMappedFile* mmfile = new MemoryMappedFile((char*)file.c_str());
 		char* buffer = mmfile->getBuffer();
-		FileType fileType = getFileType(buffer);
 		LONGLONG fileSize = mmfile->getFileSize();
+		FileType fileType = getFileType(buffer, fileSize);
 		switch (fileType)
 		{
-			case EXE:
+			case PE32EXE:
+			case PE64EXE:
 				cout << "cant link an exe to form exe" << endl;
 				break;
 			case DEBUG:
 				break;
-			case OBJ:
+			case PE32OBJ:
+			case PE64OBJ:
 				cout << "its obj file type" << endl;
 				loadObjFile(buffer, fileSize);
 				break;
