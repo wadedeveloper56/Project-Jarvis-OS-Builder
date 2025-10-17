@@ -556,7 +556,5 @@ EXEFilePtr loadExeFile(char* buffer, LONGLONG fileSize)
 	loadBaseRelocationsDirectory(result, buffer, pNTHeader);
 	loadDebugDirectory(result, buffer, pNTHeader);
 	loadLoadConfigDirectory(result, buffer, pNTHeader);
-
-	DWORD iatRVA = GetImgDirEntryRVA(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_IAT);
 	return result;
 }
