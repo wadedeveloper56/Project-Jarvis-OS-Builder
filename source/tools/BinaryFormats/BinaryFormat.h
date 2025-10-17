@@ -225,6 +225,12 @@ typedef struct BINARYFORMATS_API _EXEFile
 	_EXEFile();
 } EXEFile, * EXEFilePtr, ** EXEFilePtrPtr;
 
+typedef struct BINARYFORMATS_API _LIBFile
+{
+	IMAGE_ARCHIVE_MEMBER_HEADER header;
+	_LIBFile();
+} LIBFile, * LIBFilePtr, ** LIBFilePtrPtr;
+
 #define MakePtr( cast, ptr, addValue ) (cast)( (BYTE *)(ptr) + (DWORD)(addValue))
 
 
@@ -247,6 +253,8 @@ BINARYFORMATS_API void loadDOSEXE(EXEFilePtr result, PIMAGE_DOS_HEADER dosHeader
 BINARYFORMATS_API void loadPEHeaders(EXEFilePtr result, PIMAGE_NT_HEADERS32 pImgFileHdr);
 BINARYFORMATS_API void loadPESections(EXEFilePtr result, char* buffer, PIMAGE_NT_HEADERS32 pImgFileHdr);
 BINARYFORMATS_API EXEFilePtr loadExeFile(char* buffer, LONGLONG fileSize);
+
+BINARYFORMATS_API LIBFilePtr loadLibFile(char* buffer, LONGLONG fileSize);
 
 BINARYFORMATS_API void GetObjRelocationName(WORD type, PSTR buffer, DWORD cBytes);
 BINARYFORMATS_API void DumpSection(int i, OBJSectionPtr ptr);

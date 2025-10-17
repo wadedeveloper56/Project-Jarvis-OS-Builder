@@ -196,8 +196,11 @@ int main(int argc, char* argv[])
 			printf("anonymous obj file\n");
 			break;
 		case LIB:
+		{
 			printf("lib file\n");
+			LIBFilePtr data = loadLibFile(buffer, fileSize);
 			break;
+		}
 		default:
 			cout << "unknown file type" << endl;
 			break;

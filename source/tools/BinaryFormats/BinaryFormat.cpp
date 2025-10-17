@@ -102,37 +102,6 @@ FileType getFileType(char* buffer,LONGLONG fileSize)
 		}
 	}
 	return result;
-/*
-	int listed = islistedMachineType(pImgFileHdr->Machine);
-	if (magic == IMAGE_DOS_SIGNATURE)
-	{
-		return EXE;
-	}
-	else if (magic == IMAGE_SEPARATE_DEBUG_SIGNATURE)
-	{
-		return DEBUG;
-	}
-	else if (listed)
-	{
-		if (0 == pImgFileHdr->SizeOfOptionalHeader)
-		{
-			return OBJ;
-		}
-		else
-		{
-			return UNKNOWN;
-		}
-	}
-	else if (0 == strncmp(buffer, IMAGE_ARCHIVE_START, IMAGE_ARCHIVE_START_SIZE))
-	{
-		return LIB;
-	}
-	else
-	{
-		return ANONYMOUS;
-	}
-	return UNKNOWN;
-	*/
 }
 
 void hexdump(const void* data, size_t size) {

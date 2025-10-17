@@ -169,6 +169,7 @@
     <ClCompile Include="BinaryFormat.cpp" />
     <ClCompile Include="CoffSymbolTable.cpp" />
     <ClCompile Include="EXEDump.cpp" />
+    <ClCompile Include="LIBDump.cpp" />
     <ClCompile Include="MemoryMappedFile.cpp" />
     <ClCompile Include="Methods.cpp" />
     <ClCompile Include="Output.cpp" />

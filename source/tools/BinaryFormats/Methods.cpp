@@ -4,6 +4,10 @@
 
 using namespace std;
 
+_LIBFile::_LIBFile() :header({ 0 })
+{
+}
+
 _OBJFile::_OBJFile() :header({ 0 }), symbolTable(nullptr), stringTableSize(0)
 {
 }
