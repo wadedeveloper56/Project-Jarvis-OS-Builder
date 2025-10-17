@@ -124,6 +124,7 @@ int main(int argc, char* argv[])
 			DumpResourcesDirectory(&data->resources);
 			DumpBaseRelocationsDirectory(&data->relocs);
 			DumpDebugDirectory(data->debug);
+			DumpLoadConfig32Directory(&data->config32);
 			break;
 		}
 		case PE64EXE:
@@ -146,6 +147,7 @@ int main(int argc, char* argv[])
 			DumpResourcesDirectory(&data->resources);
 			DumpBaseRelocationsDirectory(&data->relocs);
 			DumpDebugDirectory(data->debug);
+			DumpLoadConfig64Directory(&data->config64);
 			break;
 		}
 		case DEBUG:

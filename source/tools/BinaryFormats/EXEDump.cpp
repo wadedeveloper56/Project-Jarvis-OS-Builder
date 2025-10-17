@@ -5,27 +5,27 @@
 using namespace std;
 
 const char* SzDebugFormats[] = {
-"UNKNOWN"                ,//0 An unknown value that is ignored by all tools.
-"COFF"                   ,//1 The COFF debug information(line numbers, symbol table, and string table).This type of debug information is also pointed to by fields in the file headers.
-"CODEVIEW"               ,//2 The Visual C++ debug information.
-"FPO"                    ,//3 The frame pointer omission(FPO) information.This information tells the debugger how to interpret nonstandard stack frames, which use the EBP register for a purpose other than as a frame pointer.
-"MISC"                   ,//4 The location of DBG file.
-"EXCEPTION"              ,//5 A copy of.pdata section.
-"FIXUP"                  ,//6 Reserved.
-"OMAP_TO_SRC"            ,//7 The mapping from an RVA in image to an RVA in source image.
-"OMAP_FROM_SRC"          ,//8 The mapping from an RVA in source image to an RVA in image.
-"BORLAND"                ,//9 Reserved for Borland.
-"RESERVED10"             ,//10 Reserved.
-"CLSID"                  ,//11 Reserved.
-"VC_FEATURE"             ,//12 unknown
-"POGO"                   ,//13 unknown
-"ILTCG"                  ,//14 unknown
-"MPX"                    ,//15 unknown
-"REPRO"                  ,//16 PE determinism or reproducibility.
-"Undefined"              ,//17 Debugging information is embedded in the PE file at location specified by PointerToRawData.
-"SPGO"                   ,//18 SPGO
-"Undefined"              ,//19 Stores crypto hash for the content of the symbol file used to build the PE / COFF file.
-"EX_DLLCHARACTERISTICS"	 ,//20	Extended DLL characteristics bits.
+"UNKNOWN"                ,
+"COFF"                   ,
+"CODEVIEW"               ,
+"FPO"                    ,
+"MISC"                   ,
+"EXCEPTION"              ,
+"FIXUP"                  ,
+"OMAP_TO_SRC"            ,
+"OMAP_FROM_SRC"          ,
+"BORLAND"                ,
+"RESERVED10"             ,
+"CLSID"                  ,
+"VC_FEATURE"             ,
+"POGO"                   ,
+"ILTCG"                  ,
+"MPX"                    ,
+"REPRO"                  ,
+"Undefined"              ,
+"SPGO"                   ,
+"Undefined"              ,
+"EX_DLLCHARACTERISTICS"	 ,
 };
 
 const char* SzRelocTypes[] = { "ABSOLUTE","HIGH","LOW","HIGHLOW","HIGHADJ","MIPS/ARM", "SECTION","REL32","MIPS16","DIR64", "TYPE10" };
@@ -524,6 +524,24 @@ void loadDebugDirectory(EXEFilePtr result, char* buffer, PIMAGE_NT_HEADERS32 pNT
 	}
 }
 
+void loadLoadConfigDirectory(EXEFilePtr result, char* buffer, PIMAGE_NT_HEADERS32 pNTHeader)
+{
+	DWORD configRVA = GetImgDirEntryRVA(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG);
+	DWORD configRVASize = GetImgDirEntrySize(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG);
+	PIMAGE_LOAD_CONFIG_DIRECTORY32 load32 = NULL;
+	PIMAGE_LOAD_CONFIG_DIRECTORY64 load64 = NULL;
+	if (result->is64)
+	{
+		load64 = (PIMAGE_LOAD_CONFIG_DIRECTORY64)GetPtrFromRVA(result->is64, configRVA, pNTHeader, buffer);
+		memcpy(&result->config64, load64, sizeof(IMAGE_LOAD_CONFIG_DIRECTORY64));	
+	}
+	else
+	{
+		load32 = (PIMAGE_LOAD_CONFIG_DIRECTORY32)GetPtrFromRVA(result->is64, configRVA, pNTHeader, buffer);
+		memcpy(&result->config32, load32, sizeof(IMAGE_LOAD_CONFIG_DIRECTORY32));
+	}
+}
+
 EXEFilePtr loadExeFile(char* buffer, LONGLONG fileSize)
 {
 	EXEFilePtr result = new EXEFile;
@@ -537,8 +555,8 @@ EXEFilePtr loadExeFile(char* buffer, LONGLONG fileSize)
 	loadResourcesDirectory(result, buffer, pNTHeader);
 	loadBaseRelocationsDirectory(result, buffer, pNTHeader);
 	loadDebugDirectory(result, buffer, pNTHeader);
+	loadLoadConfigDirectory(result, buffer, pNTHeader);
 
-	DWORD configRVA = GetImgDirEntryRVA(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG);
 	DWORD iatRVA = GetImgDirEntryRVA(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_IAT);
 	return result;
 }

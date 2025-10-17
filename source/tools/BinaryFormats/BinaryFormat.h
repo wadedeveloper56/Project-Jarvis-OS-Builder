@@ -261,3 +261,5 @@ BINARYFORMATS_API void DumpImportDirectory(bool is64, vector<ImportsPtr>* import
 BINARYFORMATS_API void DumpResourcesDirectory(ResourcesPtr resources);
 BINARYFORMATS_API void DumpBaseRelocationsDirectory(vector<RelocsPtr>* relocs);
 BINARYFORMATS_API void DumpDebugDirectory(DebugPtr debug);
+BINARYFORMATS_API void DumpLoadConfig32Directory(PIMAGE_LOAD_CONFIG_DIRECTORY32 load32);
+BINARYFORMATS_API void DumpLoadConfig64Directory(PIMAGE_LOAD_CONFIG_DIRECTORY64 load64);

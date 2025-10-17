@@ -525,7 +525,7 @@ void DumpBaseRelocationsDirectory(vector<RelocsPtr> *relocs)
 			printf("\n");
 		}
 	}
-	printf("\n");
+
 }
 
 void DumpDebugDirectory(DebugPtr debug)
@@ -548,5 +548,124 @@ void DumpDebugDirectory(DebugPtr debug)
 			ptr->entry.MinorVersion, 
 			get_ctime_stg((time_t*)&ptr->entry.TimeDateStamp)
 		);
+	}
+	printf("\n");
+}
+
+void DumpLoadConfig32Directory(PIMAGE_LOAD_CONFIG_DIRECTORY32 load32)
+{
+	if (load32 == NULL)
+	{
+		printf("No LoadConfig32 table present.\n");
+	}
+	else {
+		printf("LoadConfig32 table:\n");
+		printf("%08lX Size\n", load32->Size);
+		printf("%08X TimeDateStamp\n", load32->TimeDateStamp);
+		printf("% 5u.%02u MajorVersion\n", load32->MajorVersion, load32->MinorVersion);
+		printf("%08X GlobalFlagsClear\n", load32->GlobalFlagsClear);
+		printf("%08X GlobalFlagsSet\n", load32->GlobalFlagsSet);
+		printf("%08X CriticalSectionDefaultTimeout\n", load32->CriticalSectionDefaultTimeout);
+		printf("%08X DeCommitFreeBlockThreshold\n", load32->DeCommitFreeBlockThreshold);
+		printf("%08X DeCommitTotalFreeThreshold\n", load32->DeCommitTotalFreeThreshold);
+		printf("%08X LockPrefixTable\n", load32->LockPrefixTable);
+		printf("%08X MaximumAllocationSize\n", load32->MaximumAllocationSize);
+		printf("%08X VirtualMemoryThreshold\n", load32->VirtualMemoryThreshold);
+		printf("%08X ProcessHeapFlags\n", load32->ProcessHeapFlags);
+		printf("%08X ProcessAffinityMask\n", load32->ProcessAffinityMask);
+		printf("%08X CSDVersion\n", load32->CSDVersion);
+		printf("%08X DependentLoadFlags\n", load32->DependentLoadFlags);
+		printf("%08X EditList\n", load32->EditList);
+		printf("%08X SecurityCookie\n", load32->SecurityCookie);
+		printf("%08X SEHandlerTable\n", load32->SEHandlerTable);
+		printf("%08X SEHandlerCount\n", load32->Size);
+		printf("%08X GuardCFCheckFunctionPointer\n", load32->SEHandlerCount);
+		printf("%08X GuardCFDispatchFunctionPointer\n", load32->GuardCFDispatchFunctionPointer);
+		printf("%08X GuardCFFunctionTable\n", load32->GuardCFFunctionTable);
+		printf("%08X GuardCFFunctionCount\n", load32->GuardCFFunctionCount);
+		printf("%08X GuardFlags\n", load32->GuardFlags);
+		printf("%08X GuardAddressTakenIatEntryTable\n", load32->GuardAddressTakenIatEntryTable);
+		printf("%08X GuardAddressTakenIatEntryCount\n", load32->GuardAddressTakenIatEntryCount);
+		printf("%08X GuardLongJumpTargetTable\n", load32->GuardLongJumpTargetTable);
+		printf("%08X GuardLongJumpTargetCount\n", load32->GuardLongJumpTargetCount);
+		printf("%08X DynamicValueRelocTable\n", load32->DynamicValueRelocTable);
+		printf("%08X CHPEMetadataPointer\n", load32->CHPEMetadataPointer);
+		printf("%08X GuardRFFailureRoutine\n", load32->GuardRFFailureRoutine);
+		printf("%08X GuardRFFailureRoutineFunctionPointer\n", load32->GuardRFFailureRoutineFunctionPointer);
+		printf("%08X DynamicValueRelocTableOffset\n", load32->DynamicValueRelocTableOffset);
+		printf("%08X DynamicValueRelocTableSection\n", load32->DynamicValueRelocTableSection);
+		printf("%08X Reserved2\n", load32->Reserved2);
+		printf("%08X GuardRFVerifyStackPointerFunctionPointer\n", load32->GuardRFVerifyStackPointerFunctionPointer);
+		printf("%08X HotPatchTableOffset\n", load32->HotPatchTableOffset);
+		printf("%08X Reserved3\n", load32->Reserved3);
+		printf("%08X EnclaveConfigurationPointer\n", load32->EnclaveConfigurationPointer);
+		printf("%08X VolatileMetadataPointer\n", load32->VolatileMetadataPointer);
+		printf("%08X GuardEHContinuationTable\n", load32->GuardEHContinuationTable);
+		printf("%08X GuardEHContinuationCount\n", load32->GuardEHContinuationCount);
+		printf("%08X GuardXFGCheckFunctionPointer\n", load32->GuardXFGCheckFunctionPointer);
+		printf("%08X GuardXFGDispatchFunctionPointer\n", load32->GuardXFGDispatchFunctionPointer);
+		printf("%08X GuardXFGTableDispatchFunctionPointer\n", load32->GuardXFGTableDispatchFunctionPointer);
+		printf("%08X CastGuardOsDeterminedFailureMode\n", load32->CastGuardOsDeterminedFailureMode);
+		printf("%08X GuardMemcpyFunctionPointer\n", load32->GuardMemcpyFunctionPointer);
+		printf("%08X UmaFunctionPointers\n", load32->UmaFunctionPointers);
+	}
+}
+
+void DumpLoadConfig64Directory(PIMAGE_LOAD_CONFIG_DIRECTORY64 load64)
+{
+	if (load64==NULL)
+	{
+		printf("No LoadConfig64 table present.\n");
+	}
+	else {
+		printf("LoadConfig64 table:\n");
+		printf("%08X Size\n", load64->Size);
+		printf("%08X TimeDateStamp\n", load64->TimeDateStamp);
+		printf("% 5u.%02u MajorVersion\n", load64->MajorVersion, load64->MinorVersion);
+		printf("%08X GlobalFlagsClear\n", load64->GlobalFlagsClear);
+		printf("%08X GlobalFlagsSet\n", load64->GlobalFlagsSet);
+		printf("%08X CriticalSectionDefaultTimeout\n", load64->CriticalSectionDefaultTimeout);
+		printf("%08X DeCommitFreeBlockThreshold\n", load64->DeCommitFreeBlockThreshold);
+		printf("%08X DeCommitTotalFreeThreshold\n", load64->DeCommitTotalFreeThreshold);
+		printf("%08X LockPrefixTable\n", load64->LockPrefixTable);
+		printf("%08X MaximumAllocationSize\n", load64->MaximumAllocationSize);
+		printf("%08X VirtualMemoryThreshold\n", load64->VirtualMemoryThreshold);
+		printf("%08X ProcessHeapFlags\n", load64->ProcessHeapFlags);
+		printf("%08X ProcessAffinityMask\n", load64->ProcessAffinityMask);
+		printf("%08X CSDVersion\n", load64->CSDVersion);
+		printf("%08X DependentLoadFlags\n", load64->DependentLoadFlags);
+		printf("%08X EditList\n", load64->EditList);
+		printf("%08X SecurityCookie\n", load64->SecurityCookie);
+		printf("%08X SEHandlerTable\n", load64->SEHandlerTable);
+		printf("%08X SEHandlerCount\n", load64->Size);
+		printf("%08X GuardCFCheckFunctionPointer\n", load64->SEHandlerCount);
+		printf("%08X GuardCFDispatchFunctionPointer\n", load64->GuardCFDispatchFunctionPointer);
+		printf("%08X GuardCFFunctionTable\n", load64->GuardCFFunctionTable);
+		printf("%08X GuardCFFunctionCount\n", load64->GuardCFFunctionCount);
+		printf("%08X GuardFlags\n", load64->GuardFlags);
+		printf("%08X GuardAddressTakenIatEntryTable\n", load64->GuardAddressTakenIatEntryTable);
+		printf("%08X GuardAddressTakenIatEntryCount\n", load64->GuardAddressTakenIatEntryCount);
+		printf("%08X GuardLongJumpTargetTable\n", load64->GuardLongJumpTargetTable);
+		printf("%08X GuardLongJumpTargetCount\n", load64->GuardLongJumpTargetCount);
+		printf("%08X DynamicValueRelocTable\n", load64->DynamicValueRelocTable);
+		printf("%08X CHPEMetadataPointer\n", load64->CHPEMetadataPointer);
+		printf("%08X GuardRFFailureRoutine\n", load64->GuardRFFailureRoutine);
+		printf("%08X GuardRFFailureRoutineFunctionPointer\n", load64->GuardRFFailureRoutineFunctionPointer);
+		printf("%08X DynamicValueRelocTableOffset\n", load64->DynamicValueRelocTableOffset);
+		printf("%08X DynamicValueRelocTableSection\n", load64->DynamicValueRelocTableSection);
+		printf("%08X Reserved2\n", load64->Reserved2);
+		printf("%08X GuardRFVerifyStackPointerFunctionPointer\n", load64->GuardRFVerifyStackPointerFunctionPointer);
+		printf("%08X HotPatchTableOffset\n", load64->HotPatchTableOffset);
+		printf("%08X Reserved3\n", load64->Reserved3);
+		printf("%08X EnclaveConfigurationPointer\n", load64->EnclaveConfigurationPointer);
+		printf("%08X VolatileMetadataPointer\n", load64->VolatileMetadataPointer);
+		printf("%08X GuardEHContinuationTable\n", load64->GuardEHContinuationTable);
+		printf("%08X GuardEHContinuationCount\n", load64->GuardEHContinuationCount);
+		printf("%08X GuardXFGCheckFunctionPointer\n", load64->GuardXFGCheckFunctionPointer);
+		printf("%08X GuardXFGDispatchFunctionPointer\n", load64->GuardXFGDispatchFunctionPointer);
+		printf("%08X GuardXFGTableDispatchFunctionPointer\n", load64->GuardXFGTableDispatchFunctionPointer);
+		printf("%08X CastGuardOsDeterminedFailureMode\n", load64->CastGuardOsDeterminedFailureMode);
+		printf("%08X GuardMemcpyFunctionPointer\n", load64->GuardMemcpyFunctionPointer);
+		printf("%08X UmaFunctionPointers\n", load64->UmaFunctionPointers);
 	}
 }
