@@ -123,9 +123,10 @@ int main(int argc, char* argv[])
 			{
 				DumpExportDirectory(data->exports);
 			}
-			DumpImportDirectory(data->is64,&data->imports);
+			DumpImportDirectory(data->is64, &data->imports);
 			DumpResourcesDirectory(&data->resources);
 			DumpBaseRelocationsDirectory(&data->relocs);
+			DumpDebugDirectory(data->debug);
 			break;
 		}
 		case DEBUG:
@@ -159,8 +160,8 @@ int main(int argc, char* argv[])
 		default:
 			cout << "unknown file type" << endl;
 			break;
-		}
-		delete mmfile;
-		return 0;
 	}
+	delete mmfile;
+	return 0;
+}
 

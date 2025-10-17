@@ -4,7 +4,7 @@
 
 using namespace std;
 
-const char* SzDebugFormats[] = { 
+const char* SzDebugFormats[] = {
 "UNKNOWN"                ,//0 An unknown value that is ignored by all tools.
 "COFF"                   ,//1 The COFF debug information(line numbers, symbol table, and string table).This type of debug information is also pointed to by fields in the file headers.
 "CODEVIEW"               ,//2 The Visual C++ debug information.
@@ -17,13 +17,13 @@ const char* SzDebugFormats[] = {
 "BORLAND"                ,//9 Reserved for Borland.
 "RESERVED10"             ,//10 Reserved.
 "CLSID"                  ,//11 Reserved.
-"feat"                   ,//12 unknown
-"coffgrp"                ,//13 unknown
-"iltcg"                  ,//14 unknown
-"Undefined"              ,//15 unknown
+"VC_FEATURE"             ,//12 unknown
+"POGO"                   ,//13 unknown
+"ILTCG"                  ,//14 unknown
+"MPX"                    ,//15 unknown
 "REPRO"                  ,//16 PE determinism or reproducibility.
 "Undefined"              ,//17 Debugging information is embedded in the PE file at location specified by PointerToRawData.
-"Undefined"              ,//18 unknown
+"SPGO"                   ,//18 SPGO
 "Undefined"              ,//19 Stores crypto hash for the content of the symbol file used to build the PE / COFF file.
 "EX_DLLCHARACTERISTICS"	 ,//20	Extended DLL characteristics bits.
 };
@@ -496,6 +496,34 @@ void loadBaseRelocationsDirectory(EXEFilePtr result, char* buffer, PIMAGE_NT_HEA
 	}
 }
 
+void loadDebugDirectory(EXEFilePtr result, char* buffer, PIMAGE_NT_HEADERS32 pNTHeader)
+{
+	DWORD debugRVA = GetImgDirEntryRVA(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_DEBUG);
+	DWORD debugRVASize = GetImgDirEntrySize(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_DEBUG);
+	if (debugRVA != 0 && debugRVASize != 0)
+	{
+		result->debug = new Debug;
+		PIMAGE_SECTION_HEADER header = GetEnclosingSectionHeader(result->is64, debugRVA, pNTHeader);
+		PIMAGE_DEBUG_DIRECTORY debugDir = MakePtr(PIMAGE_DEBUG_DIRECTORY, buffer, header->PointerToRawData + (debugRVA - header->VirtualAddress));
+		DWORD cDebugFormats = debugRVASize / sizeof(IMAGE_DEBUG_DIRECTORY);
+		for (DWORD i = 0; i < cDebugFormats; i++)
+		{
+			DebugEntryPtr ptr = new DebugEntry;
+			ptr->debugFormat = (debugDir->Type <= IMAGE_DEBUG_TYPE_EX_DLLCHARACTERISTICS) ? SzDebugFormats[debugDir->Type] : "???";
+			ptr->entry.Characteristics = debugDir->Characteristics;
+			ptr->entry.TimeDateStamp = debugDir->TimeDateStamp;
+			ptr->entry.MajorVersion = debugDir->MajorVersion;
+			ptr->entry.MinorVersion = debugDir->MinorVersion;
+			ptr->entry.Type = debugDir->Type;
+			ptr->entry.SizeOfData = debugDir->SizeOfData;
+			ptr->entry.AddressOfRawData = debugDir->AddressOfRawData;
+			ptr->entry.PointerToRawData = debugDir->PointerToRawData;
+			result->debug->entries.push_back(ptr);
+			debugDir++;
+		}
+	}
+}
+
 EXEFilePtr loadExeFile(char* buffer, LONGLONG fileSize)
 {
 	EXEFilePtr result = new EXEFile;
@@ -507,43 +535,7 @@ EXEFilePtr loadExeFile(char* buffer, LONGLONG fileSize)
 	loadExportsDirectory(result, buffer, pNTHeader);
 	loadImportsDirectory(result, buffer, pNTHeader);
 	loadResourcesDirectory(result, buffer, pNTHeader);
-
-	DWORD debugRVA = GetImgDirEntryRVA(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_DEBUG);
-	DWORD debugRVASize = GetImgDirEntrySize(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_DEBUG);
-	if (debugRVA != 0)
-	{
-		PIMAGE_SECTION_HEADER header = GetSectionHeader(result->is64, (PSTR)".debug", pNTHeader);
-		PIMAGE_DEBUG_DIRECTORY debugDir;
-		DWORD size;
-		if (header && (header->VirtualAddress == debugRVA))
-		{
-			debugDir = (PIMAGE_DEBUG_DIRECTORY)(header->PointerToRawData + buffer);
-			size = debugRVASize * sizeof(IMAGE_DEBUG_DIRECTORY);
-		}
-		else
-		{
-			header = GetEnclosingSectionHeader(result->is64, debugRVA, pNTHeader);
-			if (!header) return NULL;
-			size = GetImgDirEntrySize(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_DEBUG);
-			debugDir = MakePtr(PIMAGE_DEBUG_DIRECTORY, buffer, header->PointerToRawData	+ (debugRVA - header->VirtualAddress));
-		}
-		DWORD cDebugFormats = size / sizeof(IMAGE_DEBUG_DIRECTORY);
-		printf(
-			"Debug Formats in File\n"
-			"  Type            Type      Size     Address  FilePtr  Charactr TimeDate Version\n"
-			"  --------------- --------  -------- -------- -------- -------- -------- --------\n"
-		);
-		for (DWORD i = 0; i < cDebugFormats; i++)
-		{
-			const char * szDebugFormat = (debugDir->Type <= IMAGE_DEBUG_TYPE_EX_DLLCHARACTERISTICS)	? SzDebugFormats[debugDir->Type] : "???";
-			printf("  %-15s % 8ld  % 8ld %08X %08X %08X %08X %u.%02u\n",
-				szDebugFormat, debugDir->Type, debugDir->SizeOfData, debugDir->AddressOfRawData,
-				debugDir->PointerToRawData, debugDir->Characteristics,
-				debugDir->TimeDateStamp, debugDir->MajorVersion,
-				debugDir->MinorVersion);
-			debugDir++;
-		}
-	}
+	loadDebugDirectory(result, buffer, pNTHeader);
 
 	DWORD configRVA = GetImgDirEntryRVA(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG);
 	DWORD iatRVA = GetImgDirEntryRVA(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_IAT);

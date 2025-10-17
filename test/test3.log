@@ -1,15 +1,8 @@
 PEDUMP - Win32/Win64 COFF EXE/OBJ/LIB file dumper v1.0 (C) Copyright 2025 Christopher D. Wade.
 All Rights Reserved
 Dump of file C:\projects\research\alinksrc\ALink\Release\x64\ALink.exe
-File Size 104448 bytes
+File Size 276992 bytes
 File Type: PE EXECUTABLE IMAGE
-Debug Formats in File
-  Type            Type      Size     Address  FilePtr  Charactr TimeDate Version
-  --------------- --------  -------- -------- -------- -------- -------- --------
-  CODEVIEW        00000002       73 00017CE8 000170E8 00000000 68B5BFBB 0.00
-  Undefined       0000000C       20 00017D34 00017134 00000000 68B5BFBB 0.00
-  Undefined       0000000D      644 00017D48 00017148 00000000 68B5BFBB 0.00
-  Undefined       0000000E        0 00000000 00000000 00000000 68B5BFBB 0.00
 DOS HEADER VALUES
               5A4D Magic number
                 90 Bytes on last page of file
@@ -27,11 +20,11 @@ DOS HEADER VALUES
                  0 Overlay number
                  0 OEM identifier (for e_oeminfo)
                  0 OEM information e_oemid specific
-                F0 (240) File address of new exe header
+               100 (256) File address of new exe header
 FILE HEADER VALUES
               8664 Machine (x64)
-                 6 (6) Number of Sections
-          68B5BFBB TimeDateStamp ->  Mon Sep  1 10:46:03 2025
+                 7 (7) Number of Sections
+          68F16620 TimeDateStamp ->  Thu Oct 16 16:39:44 2025
                  0 PointerToSymbolTable
                  0 (0) NumberOfSymbols
                 F0 (240) SizeOfOptionalHeader
@@ -42,19 +35,19 @@ FILE HEADER VALUES
 OPTIONAL HEADER VALUES (PE32+)
                20B magic
              14.44 linker version
-             14000 (81920) size of code
-             15C00 (89088) size of initialized data
+             31A00 (203264) size of code
+             23000 (143360) size of initialized data
                  0 (0) size of uninitialized data
-             14480 entry point
+             142D0 entry point
               1000 base of code
-         140000000 image base (140000000 to 14002DFFF)
+         140000000 image base (140000000 to 140058FFF)
               1000 section alignment
                200 file alignment
               6.00 operating system version
               0.00 image version
               6.00 subsystem version
                  0 Win32 version
-             2E000 size of image
+             59000 size of image
                400 size of headers
                  0 checksum
                  3 subsystem (Windows character)
@@ -70,27 +63,27 @@ OPTIONAL HEADER VALUES (PE32+)
                  0 loader flags
                 10 number of directories
             Export                 rva: 00000000  size: 00000000 (0)
-            Import                 rva: 00018A34  size: 00000104 (260)
-            Resource               rva: 0002C000  size: 000001E0 (480)
-            Exception              rva: 0002B000  size: 000006D8 (1752)
+            Import                 rva: 00040ABC  size: 00000028 (40)
+            Resource               rva: 00057000  size: 000001E0 (480)
+            Exception              rva: 00054000  size: 00001EC0 (7872)
             Security               rva: 00000000  size: 00000000 (0)
-            Base Relocation        rva: 0002D000  size: 0000003C (60)
-            Debug                  rva: 00017BB0  size: 00000070 (112)
+            Base Relocation        rva: 00058000  size: 00000690 (1680)
+            Debug                  rva: 0003DFD0  size: 00000070 (112)
             Architecture           rva: 00000000  size: 00000000 (0)
             Global Pointer         rva: 00000000  size: 00000000 (0)
             TLS                    rva: 00000000  size: 00000000 (0)
-            Load Configuration     rva: 00017A70  size: 00000140 (320)
+            Load Configuration     rva: 0003DE90  size: 00000140 (320)
             Bound Import           rva: 00000000  size: 00000000 (0)
-            Import Address Table   rva: 00015000  size: 000002B8 (696)
+            Import Address Table   rva: 00033000  size: 00000288 (648)
             Delay Import           rva: 00000000  size: 00000000 (0)
             COM Descriptor         rva: 00000000  size: 00000000 (0)
             Reserved               rva: 00000000  size: 00000000 (0)
 SECTION HEADER #0 (0)
    .text name
-   13EDC physical address
+   31810 physical address
     1000 virtual address
-   14000 (81920) size of raw data
-     400 file pointer to raw data (00000400 to 000143FF)
+   31A00 (203264) size of raw data
+     400 file pointer to raw data (00000400 to 00031DFF)
        0 file pointer to relocation table
        0 file pointer to line numbers
        0 number of relocations
@@ -104,10 +97,10 @@ SECTION HEADER #0 (0)
 
 SECTION HEADER #1 (1)
   .rdata name
-    4426 physical address
-   15000 virtual address
-    4600 (17920) size of raw data
-   14400 file pointer to raw data (00014400 to 000189FF)
+    E33A physical address
+   33000 virtual address
+    E400 (58368) size of raw data
+   31E00 file pointer to raw data (00031E00 to 000401FF)
        0 file pointer to relocation table
        0 file pointer to line numbers
        0 number of relocations
@@ -120,10 +113,10 @@ SECTION HEADER #1 (1)
 
 SECTION HEADER #2 (2)
    .data name
-   108D0 physical address
-   1A000 virtual address
-     200 (512) size of raw data
-   18A00 file pointer to raw data (00018A00 to 00018BFF)
+   11E10 physical address
+   42000 virtual address
+     C00 (3072) size of raw data
+   40200 file pointer to raw data (00040200 to 00040DFF)
        0 file pointer to relocation table
        0 file pointer to line numbers
        0 number of relocations
@@ -137,10 +130,10 @@ C0000040 flags
 
 SECTION HEADER #3 (3)
   .pdata name
-     6D8 physical address
-   2B000 virtual address
-     800 (2048) size of raw data
-   18C00 file pointer to raw data (00018C00 to 000193FF)
+    1EC0 physical address
+   54000 virtual address
+    2000 (8192) size of raw data
+   40E00 file pointer to raw data (00040E00 to 00042DFF)
        0 file pointer to relocation table
        0 file pointer to line numbers
        0 number of relocations
@@ -152,11 +145,28 @@ SECTION HEADER #3 (3)
 
 
 SECTION HEADER #4 (4)
+.fptable name
+     100 physical address
+   56000 virtual address
+     200 (512) size of raw data
+   42E00 file pointer to raw data (00042E00 to 00042FFF)
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+C0000040 flags
+         Initialized Data
+         Readable
+         Writeable
+
+
+
+SECTION HEADER #5 (5)
    .rsrc name
      1E0 physical address
-   2C000 virtual address
+   57000 virtual address
      200 (512) size of raw data
-   19400 file pointer to raw data (00019400 to 000195FF)
+   43000 file pointer to raw data (00043000 to 000431FF)
        0 file pointer to relocation table
        0 file pointer to line numbers
        0 number of relocations
@@ -167,12 +177,12 @@ SECTION HEADER #4 (4)
 
 
 
-SECTION HEADER #5 (5)
+SECTION HEADER #6 (6)
   .reloc name
-      3C physical address
-   2D000 virtual address
-     200 (512) size of raw data
-   19600 file pointer to raw data (00019600 to 000197FF)
+     690 physical address
+   58000 virtual address
+     800 (2048) size of raw data
+   43200 file pointer to raw data (00043200 to 000439FF)
        0 file pointer to relocation table
        0 file pointer to line numbers
        0 number of relocations
@@ -185,164 +195,92 @@ SECTION HEADER #5 (5)
 
 
 Exports table:
-  Name:            VCRUNTIME140.dll
-  OrigFirstThunk:  00018BB8
-  TimeDateStamp:   00000000 -> Wed Dec 31 18:00:00 1969
-  ForwarderChain:  00000000
-  First thunk RVA: 00015080
-  Ordn  Name
-    60  memcpy (Bound to: 00019408)
-    61  memmove (Bound to: 00019412)
-    64  strchr (Bound to: 00018DF0)
-    59  memcmp (Bound to: 000193FE)
-    28  __current_exception_context (Bound to: 00018E28)
-    27  __current_exception (Bound to: 00018E12)
-     8  __C_specific_handler (Bound to: 00018DFA)
-    62  memset (Bound to: 00018E46)
-
-  Name:            api-ms-win-crt-runtime-l1-1-0.dll
-  OrigFirstThunk:  00018C68
-  TimeDateStamp:   00000000 -> Wed Dec 31 18:00:00 1969
-  ForwarderChain:  00000000
-  First thunk RVA: 00015130
-  Ordn  Name
-    66  _set_app_type (Bound to: 00018FAA)
-    54  _initterm (Bound to: 0001902C)
-    55  _initterm_e (Bound to: 00019038)
-    33  _errno (Bound to: 00018F42)
-    51  _initialize_narrow_environment (Bound to: 00018FE8)
-    24  _configure_narrow_argv (Bound to: 00018FCE)
-     4  __p___argc (Bound to: 0001905C)
-     5  __p___argv (Bound to: 0001906A)
-    22  _cexit (Bound to: 00019078)
-    21  _c_exit (Bound to: 00019082)
-    61  _register_thread_local_exe_atexit_callback (Bound to: 0001908C)
-    64  _seh_filter_exe (Bound to: 00018F98)
-    40  _get_initial_narrow_environment (Bound to: 0001900A)
-    85  exit (Bound to: 00018E62)
-    52  _initialize_onexit_table (Bound to: 000190F0)
-    60  _register_onexit_function (Bound to: 0001910C)
-    30  _crt_atexit (Bound to: 00019128)
-   103  terminate (Bound to: 00019136)
-    35  _exit (Bound to: 00019046)
-
-  Name:            api-ms-win-crt-string-l1-1-0.dll
-  OrigFirstThunk:  00018D90
-  TimeDateStamp:   00000000 -> Wed Dec 31 18:00:00 1969
-  ForwarderChain:  00000000
-  First thunk RVA: 00015258
-  Ordn  Name
-   110  isspace (Bound to: 00018EEA)
-    41  _strdup (Bound to: 00018F84)
-    42  _stricmp (Bound to: 00018ECC)
-    61  _strupr (Bound to: 00018E6A)
-   152  toupper (Bound to: 00018F70)
-   134  strcmp (Bound to: 0001941C)
-   143  strncpy (Bound to: 00018F20)
-
-  Name:            api-ms-win-crt-stdio-l1-1-0.dll
-  OrigFirstThunk:  00018D08
-  TimeDateStamp:   00000000 -> Wed Dec 31 18:00:00 1969
-  ForwarderChain:  00000000
-  First thunk RVA: 000151D0
-  Ordn  Name
-   120  fgetc (Bound to: 00018EAA)
-   131  fread (Bound to: 00018F2A)
-     1  __p__commode (Bound to: 000190E0)
-    84  _set_fmode (Bound to: 0001904E)
-     3  __stdio_common_vfprintf (Bound to: 00018EB2)
-   125  fopen (Bound to: 00018E74)
-   140  getchar (Bound to: 00018EE0)
-    16  __stdio_common_vsscanf (Bound to: 00018EF4)
-     0  __acrt_iob_func (Bound to: 00018E7C)
-   138  fwrite (Bound to: 00018F5C)
-   127  fputc (Bound to: 00018F54)
-   117  feof (Bound to: 00018F4C)
-   116  fclose (Bound to: 00018E8E)
-   139  getc (Bound to: 00018F32)
-   137  ftell (Bound to: 00018F18)
-   135  fseek (Bound to: 00018E98)
-
-  Name:            api-ms-win-crt-convert-l1-1-0.dll
-  OrigFirstThunk:  00018C00
-  TimeDateStamp:   00000000 -> Wed Dec 31 18:00:00 1969
-  ForwarderChain:  00000000
-  First thunk RVA: 000150C8
-  Ordn  Name
-   100  strtoul (Bound to: 00018EA0)
-
-  Name:            api-ms-win-crt-heap-l1-1-0.dll
-  OrigFirstThunk:  00018C20
-  TimeDateStamp:   00000000 -> Wed Dec 31 18:00:00 1969
-  ForwarderChain:  00000000
-  First thunk RVA: 000150E8
-  Ordn  Name
-    24  free (Bound to: 00018ED8)
-    26  realloc (Bound to: 00018F7A)
-    25  malloc (Bound to: 00018F8E)
-    22  _set_new_mode (Bound to: 000190D0)
-
-  Name:            api-ms-win-crt-environment-l1-1-0.dll
-  OrigFirstThunk:  00018C10
-  TimeDateStamp:   00000000 -> Wed Dec 31 18:00:00 1969
-  ForwarderChain:  00000000
-  First thunk RVA: 000150D8
-  Ordn  Name
-    16  getenv (Bound to: 00018F0E)
-
-  Name:            api-ms-win-crt-utility-l1-1-0.dll
-  OrigFirstThunk:  00018DE0
-  TimeDateStamp:   00000000 -> Wed Dec 31 18:00:00 1969
-  ForwarderChain:  00000000
-  First thunk RVA: 000152A8
-  Ordn  Name
-    25  qsort (Bound to: 00018F3A)
-
-  Name:            api-ms-win-crt-time-l1-1-0.dll
-  OrigFirstThunk:  00018DD0
-  TimeDateStamp:   00000000 -> Wed Dec 31 18:00:00 1969
-  ForwarderChain:  00000000
-  First thunk RVA: 00015298
-  Ordn  Name
-    48  _time64 (Bound to: 00018F66)
-
-  Name:            api-ms-win-crt-math-l1-1-0.dll
-  OrigFirstThunk:  00018C58
-  TimeDateStamp:   00000000 -> Wed Dec 31 18:00:00 1969
-  ForwarderChain:  00000000
-  First thunk RVA: 00015120
-  Ordn  Name
-     9  __setusermatherr (Bound to: 00018FBA)
-
-  Name:            api-ms-win-crt-locale-l1-1-0.dll
-  OrigFirstThunk:  00018C48
-  TimeDateStamp:   00000000 -> Wed Dec 31 18:00:00 1969
-  ForwarderChain:  00000000
-  First thunk RVA: 00015110
-  Ordn  Name
-     8  _configthreadlocale (Bound to: 000190BA)
-
   Name:            KERNEL32.dll
-  OrigFirstThunk:  00018B38
+  OrigFirstThunk:  00040AE8
   TimeDateStamp:   00000000 -> Wed Dec 31 18:00:00 1969
   ForwarderChain:  00000000
-  First thunk RVA: 00015000
+  First thunk RVA: 00033000
   Ordn  Name
-  1288  RtlCaptureContext (Bound to: 00019292)
-  1495  TerminateProcess (Bound to: 00019322)
-   951  IsProcessorFeaturePresent (Bound to: 00019336)
-  1152  QueryPerformanceCounter (Bound to: 00019352)
-  1463  SetUnhandledExceptionFilter (Bound to: 000192F0)
-   577  GetCurrentProcessId (Bound to: 0001936C)
-   581  GetCurrentThreadId (Bound to: 00019382)
-  1296  RtlLookupFunctionEntry (Bound to: 000192A6)
-   793  GetSystemTimeAsFileTime (Bound to: 00019398)
-  1530  UnhandledExceptionFilter (Bound to: 000192D4)
-   921  InitializeSListHead (Bound to: 000193B2)
-   943  IsDebuggerPresent (Bound to: 000193C8)
-   676  GetModuleHandleW (Bound to: 000193DC)
-  1303  RtlVirtualUnwind (Bound to: 000192C0)
-   576  GetCurrentProcess (Bound to: 0001930E)
+  1288  RtlCaptureContext (Bound to: 00040D70)
+  1296  RtlLookupFunctionEntry (Bound to: 00040D84)
+  1303  RtlVirtualUnwind (Bound to: 00040D9E)
+  1530  UnhandledExceptionFilter (Bound to: 00040DB2)
+  1463  SetUnhandledExceptionFilter (Bound to: 00040DCE)
+   576  GetCurrentProcess (Bound to: 00040DEC)
+  1495  TerminateProcess (Bound to: 00040E00)
+   951  IsProcessorFeaturePresent (Bound to: 00040E14)
+  1152  QueryPerformanceCounter (Bound to: 00040E30)
+   577  GetCurrentProcessId (Bound to: 00040E4A)
+   581  GetCurrentThreadId (Bound to: 00040E60)
+   793  GetSystemTimeAsFileTime (Bound to: 00040E76)
+   921  InitializeSListHead (Bound to: 00040E90)
+   943  IsDebuggerPresent (Bound to: 00040EA6)
+   768  GetStartupInfoW (Bound to: 00040EBA)
+   676  GetModuleHandleW (Bound to: 00040ECC)
+  1302  RtlUnwindEx (Bound to: 00040EE0)
+   652  GetLastError (Bound to: 00040EEE)
+  1399  SetLastError (Bound to: 00040EFE)
+   342  EnterCriticalSection (Bound to: 00040F0E)
+  1007  LeaveCriticalSection (Bound to: 00040F26)
+   302  DeleteCriticalSection (Bound to: 00040F3E)
+   917  InitializeCriticalSectionAndSpinCount (Bound to: 00040F56)
+  1513  TlsAlloc (Bound to: 00040F7E)
+  1515  TlsGetValue (Bound to: 00040F8A)
+  1517  TlsSetValue (Bound to: 00040F98)
+  1514  TlsFree (Bound to: 00040FA6)
+   467  FreeLibrary (Bound to: 00040FB0)
+   732  GetProcAddress (Bound to: 00040FBE)
+  1013  LoadLibraryExW (Bound to: 00040FD0)
+   338  EncodePointer (Bound to: 00040FE2)
+  1175  RaiseException (Bound to: 00040FF2)
+  1298  RtlPcToFileHeader (Bound to: 00041004)
+   389  ExitProcess (Bound to: 00041018)
+   675  GetModuleHandleExW (Bound to: 00041026)
+  1192  ReadFile (Bound to: 0004103C)
+   770  GetStdHandle (Bound to: 00041048)
+  1631  WriteFile (Bound to: 00041058)
+   672  GetModuleFileNameW (Bound to: 00041064)
+   510  GetCommandLineA (Bound to: 0004107A)
+   511  GetCommandLineW (Bound to: 0004108C)
+   895  HeapFree (Bound to: 0004109E)
+   891  HeapAlloc (Bound to: 000410AA)
+   449  FlsAlloc (Bound to: 000410B6)
+   451  FlsGetValue (Bound to: 000410C2)
+   453  FlsSetValue (Bound to: 000410D0)
+   450  FlsFree (Bound to: 000410DE)
+   918  InitializeCriticalSectionEx (Bound to: 000410E8)
+  1561  VirtualProtect (Bound to: 00041106)
+   178  CompareStringW (Bound to: 00041118)
+   995  LCMapStringW (Bound to: 0004112A)
+   633  GetFileType (Bound to: 0004113A)
+   156  CloseHandle (Bound to: 00041148)
+  1384  SetFilePointerEx (Bound to: 00041156)
+   548  GetConsoleMode (Bound to: 0004116A)
+  1189  ReadConsoleW (Bound to: 0004117C)
+   631  GetFileSizeEx (Bound to: 0004118C)
+   552  GetConsoleOutputCP (Bound to: 0004119C)
+   898  HeapReAlloc (Bound to: 000411B2)
+   412  FindClose (Bound to: 000411C0)
+   418  FindFirstFileExW (Bound to: 000411CC)
+   435  FindNextFileW (Bound to: 000411E0)
+   957  IsValidCodePage (Bound to: 000411F0)
+   474  GetACP (Bound to: 00041202)
+   709  GetOEMCP (Bound to: 0004120C)
+   489  GetCPInfo (Bound to: 00041218)
+  1058  MultiByteToWideChar (Bound to: 00041224)
+  1611  WideCharToMultiByte (Bound to: 0004123A)
+   609  GetEnvironmentStringsW (Bound to: 00041250)
+   466  FreeEnvironmentStringsW (Bound to: 0004126A)
+  1369  SetEnvironmentVariableW (Bound to: 00041284)
+  1426  SetStdHandle (Bound to: 0004129E)
+   775  GetStringTypeW (Bound to: 000412AE)
+   739  GetProcessHeap (Bound to: 000412C0)
+   229  CreateFileW (Bound to: 000412D2)
+   455  FlushFileBuffers (Bound to: 000412E0)
+   900  HeapSize (Bound to: 000412F4)
+  1365  SetEndOfFile (Bound to: 00041300)
+  1630  WriteConsoleW (Bound to: 00041310)
+  1301  RtlUnwind (Bound to: 0004132E)
 
 Resources table:
   Characteristics:         00000000
@@ -359,5 +297,12 @@ Resources table:
   Offset To Directory:     00000018
   Data is Directory:       00000001
 
-Relocations table:
+No relocations table present.
 
+Debug Formats in File
+  Type            Type     Size     Address  FilePtr  Charactr Version  TimeDate
+  --------------- -------- -------- -------- -------- -------- -------- --------
+  CODEVIEW        00000002 00000052 0003E464 0003D264 00000000 0.00     Thu Oct 16 16:39:44 2025
+  VC_FEATURE      0000000C 00000014 0003E4B8 0003D2B8 00000000 0.00     Thu Oct 16 16:39:44 2025
+  POGO            0000000D 00000348 0003E4CC 0003D2CC 00000000 0.00     Thu Oct 16 16:39:44 2025
+  ILTCG           0000000E 00000000 00000000 00000000 00000000 0.00     Thu Oct 16 16:39:44 2025

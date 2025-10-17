@@ -269,7 +269,7 @@ void DumpFileHeader(PIMAGE_FILE_HEADER pImageFileHeader)
 
 void DumpOptionalHeader64(PIMAGE_OPTIONAL_HEADER64 optionalHeader)
 {
-	printf("OPTIONAL HEADER VALUES (PE32+)\n");
+	printf("OPTIONAL HEADER VALUES (64-bit)\n");
 	printf("  % 16X magic\n", optionalHeader->Magic);
 	printf("  % 13u.%02u linker version\n", optionalHeader->MajorLinkerVersion, optionalHeader->MinorLinkerVersion);
 	printf("  % 16X (%ld) size of code\n", optionalHeader->SizeOfCode, optionalHeader->SizeOfCode);
@@ -337,7 +337,7 @@ void DumpOptionalHeader64(PIMAGE_OPTIONAL_HEADER64 optionalHeader)
 
 void DumpOptionalHeader32(PIMAGE_OPTIONAL_HEADER32 optionalHeader)
 {
-	printf("OPTIONAL HEADER VALUES (PE32)\n");
+	printf("OPTIONAL HEADER VALUES (32-bit)\n");
 	printf("  % 16X magic\n", optionalHeader->Magic);
 	printf("  % 13u.%02u linker version\n", optionalHeader->MajorLinkerVersion, optionalHeader->MinorLinkerVersion);
 	printf("  % 16X (%ld) size of code\n", optionalHeader->SizeOfCode, optionalHeader->SizeOfCode);
@@ -502,22 +502,51 @@ void DumpResourcesDirectory(ResourcesPtr resources)
 
 void DumpBaseRelocationsDirectory(vector<RelocsPtr> *relocs)
 {
-	printf("Relocations table:\n");
-	for(RelocsPtr ptr : *relocs)
+	if (relocs->size() == 0)
 	{
-		printf("  Page RVA:      %08X\n", ptr->baseReloc.VirtualAddress);
-		printf("  Block Size:    %08X (%d)\n", ptr->baseReloc.SizeOfBlock, ptr->baseReloc.SizeOfBlock);
-		for (RelocsEntryPtr entry : ptr->entries)
+		printf("No relocations table present.\n");
+	}
+	else {
+		printf("Relocations table:\n");
+		for (RelocsPtr ptr : *relocs)
 		{
-			WORD relocType = (entry->relocType & 0xF000) >> 12;
-			printf("  %08X %s", (entry->relocType & 0x0FFF) + ptr->baseReloc.VirtualAddress, entry->szRelocType);
-			if (IMAGE_REL_BASED_HIGHADJ == relocType)
+			printf("  Page RVA:      %08X\n", ptr->baseReloc.VirtualAddress);
+			printf("  Block Size:    %08X (%d)\n", ptr->baseReloc.SizeOfBlock, ptr->baseReloc.SizeOfBlock);
+			for (RelocsEntryPtr entry : ptr->entries)
 			{
-				printf(" (%X)", entry->relocType);
+				WORD relocType = (entry->relocType & 0xF000) >> 12;
+				printf("  %08X %s", (entry->relocType & 0x0FFF) + ptr->baseReloc.VirtualAddress, entry->szRelocType);
+				if (IMAGE_REL_BASED_HIGHADJ == relocType)
+				{
+					printf(" (%X)", entry->relocType);
+				}
+				printf("\n");
 			}
 			printf("\n");
 		}
-		printf("\n");
 	}
 	printf("\n");
+}
+
+void DumpDebugDirectory(DebugPtr debug)
+{
+	printf(
+		"Debug Formats in File\n"
+		"  Type            Type     Size     Address  FilePtr  Charactr Version  TimeDate\n"
+		"  --------------- -------- -------- -------- -------- -------- -------- --------\n"
+	);
+	for (DebugEntryPtr ptr : debug->entries)
+	{
+		printf("  %-15s %08X %08X %08X %08X %08X %u.%02u     %s",
+			ptr->debugFormat, 
+			ptr->entry.Type,
+			ptr->entry.SizeOfData,
+			ptr->entry.AddressOfRawData,
+			ptr->entry.PointerToRawData,
+			ptr->entry.Characteristics,
+			ptr->entry.MajorVersion,
+			ptr->entry.MinorVersion, 
+			get_ctime_stg((time_t*)&ptr->entry.TimeDateStamp)
+		);
+	}
 }

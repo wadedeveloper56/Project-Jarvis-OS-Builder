@@ -192,6 +192,19 @@ typedef struct BINARYFORMATS_API _Relocs
 	_Relocs();
 } Relocs, * RelocsPtr;
 
+typedef struct BINARYFORMATS_API _DebugEntry
+{
+	IMAGE_DEBUG_DIRECTORY entry;
+	const char* debugFormat;
+	_DebugEntry();
+} DebugEntry, * DebugEntryPtr;
+
+typedef struct BINARYFORMATS_API _Debug
+{
+	vector<DebugEntryPtr> entries;
+	_Debug();
+} Debug, * DebugPtr;
+
 typedef struct BINARYFORMATS_API _EXEFile
 {
 	vector<OBJSectionPtr> sectionTable;
@@ -205,6 +218,10 @@ typedef struct BINARYFORMATS_API _EXEFile
 	ExportsPtr exports;
 	vector<ImportsPtr> imports;
 	vector<RelocsPtr> relocs;
+	IMAGE_LOAD_CONFIG_DIRECTORY32 config32;
+	IMAGE_LOAD_CONFIG_DIRECTORY64 config64;
+	IMAGE_IMPORT_DESCRIPTOR iat;
+	DebugPtr debug;
 	_EXEFile();
 } EXEFile, * EXEFilePtr, ** EXEFilePtrPtr;
 
@@ -243,3 +260,4 @@ BINARYFORMATS_API void DumpExportDirectory(ExportsPtr exportDir);
 BINARYFORMATS_API void DumpImportDirectory(bool is64, vector<ImportsPtr>* imports);
 BINARYFORMATS_API void DumpResourcesDirectory(ResourcesPtr resources);
 BINARYFORMATS_API void DumpBaseRelocationsDirectory(vector<RelocsPtr>* relocs);
+BINARYFORMATS_API void DumpDebugDirectory(DebugPtr debug);
