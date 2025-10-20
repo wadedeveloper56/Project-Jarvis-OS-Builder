@@ -31,10 +31,10 @@ const char* SzDebugFormats[] = {
 const char* SzRelocTypes[] = { "ABSOLUTE","HIGH","LOW","HIGHLOW","HIGHADJ","MIPS/ARM", "SECTION","REL32","MIPS16","DIR64", "TYPE10" };
 #define RELOC_TYPE_COUNT (sizeof(SzRelocTypes) / sizeof(char *))
 
-DWORD GetImgDirEntryRVA(bool Is64, PVOID pNTHdr, DWORD IDE)
+DWORD GetImgDirEntryRVA(FileType fileType, PVOID pNTHdr, DWORD IDE)
 {
 	DWORD rva = 0;
-	if (Is64) {
+	if (fileType==PE64EXE) {
 		PIMAGE_NT_HEADERS64 p64 = (PIMAGE_NT_HEADERS64)pNTHdr;
 		rva = p64->OptionalHeader.DataDirectory[IDE].VirtualAddress;
 	}
@@ -45,11 +45,11 @@ DWORD GetImgDirEntryRVA(bool Is64, PVOID pNTHdr, DWORD IDE)
 	return rva;
 }
 
-PIMAGE_SECTION_HEADER GetSectionHeader(bool Is64, PSTR name, PVOID pNTHeader)
+PIMAGE_SECTION_HEADER GetSectionHeader(FileType fileType, PSTR name, PVOID pNTHeader)
 {
 	PIMAGE_SECTION_HEADER section;
 	int numberOfSections;
-	if (Is64) {
+	if (fileType==PE64EXE) {
 		PIMAGE_NT_HEADERS64 p64 = (PIMAGE_NT_HEADERS64)pNTHeader;
 		section = IMAGE_FIRST_SECTION(p64);
 		numberOfSections = p64->FileHeader.NumberOfSections;
@@ -69,10 +69,10 @@ PIMAGE_SECTION_HEADER GetSectionHeader(bool Is64, PSTR name, PVOID pNTHeader)
 	return 0;
 }
 
-DWORD GetImgDirEntrySize(bool Is64, PVOID pNTHdr, DWORD IDE)
+DWORD GetImgDirEntrySize(FileType fileType, PVOID pNTHdr, DWORD IDE)
 {
 	DWORD size = 0;
-	if (Is64) {
+	if (fileType==PE64EXE) {
 		PIMAGE_NT_HEADERS64 p64 = (PIMAGE_NT_HEADERS64)pNTHdr;
 		size = p64->OptionalHeader.DataDirectory[IDE].Size;
 	}
@@ -84,11 +84,11 @@ DWORD GetImgDirEntrySize(bool Is64, PVOID pNTHdr, DWORD IDE)
 
 }
 
-PIMAGE_SECTION_HEADER GetEnclosingSectionHeader(bool Is64, DWORD rva, PVOID pNTHeader)
+PIMAGE_SECTION_HEADER GetEnclosingSectionHeader(FileType fileType, DWORD rva, PVOID pNTHeader)
 {
 	PIMAGE_SECTION_HEADER section;
 	int numberOfSections;
-	if (Is64) {
+	if (fileType==PE64EXE) {
 		PIMAGE_NT_HEADERS64 p64 = (PIMAGE_NT_HEADERS64)pNTHeader;
 		section = IMAGE_FIRST_SECTION(p64);
 		numberOfSections = p64->FileHeader.NumberOfSections;
@@ -108,12 +108,12 @@ PIMAGE_SECTION_HEADER GetEnclosingSectionHeader(bool Is64, DWORD rva, PVOID pNTH
 	return 0;
 }
 
-LPVOID GetPtrFromRVA(bool Is64, DWORD rva, PIMAGE_NT_HEADERS32 pNTHeader, char* imageBase)
+LPVOID GetPtrFromRVA(FileType fileType, DWORD rva, PIMAGE_NT_HEADERS32 pNTHeader, char* imageBase)
 {
 	PIMAGE_SECTION_HEADER pSectionHdr;
 	INT delta;
 
-	pSectionHdr = GetEnclosingSectionHeader(Is64, rva, pNTHeader);
+	pSectionHdr = GetEnclosingSectionHeader(fileType, rva, pNTHeader);
 	if (!pSectionHdr)
 		return 0;
 
@@ -147,9 +147,8 @@ void loadDOSEXE(EXEFilePtr result, PIMAGE_DOS_HEADER dosHeader)
 	result->dosHeader.e_lfanew = dosHeader->e_lfanew;
 }
 
-void loadPEHeaders(EXEFilePtr result, PIMAGE_NT_HEADERS32 pImgFileHdr)
+void loadPEHeaders(FileType fileType, EXEFilePtr result, PIMAGE_NT_HEADERS32 pImgFileHdr)
 {
-	result->is64 = false;
 	result->Signature = pImgFileHdr->Signature;
 	result->FileHeader.Machine = pImgFileHdr->FileHeader.Machine;
 	result->FileHeader.NumberOfSections = pImgFileHdr->FileHeader.NumberOfSections;
@@ -200,7 +199,6 @@ void loadPEHeaders(EXEFilePtr result, PIMAGE_NT_HEADERS32 pImgFileHdr)
 	}
 	else if (pImgFileHdr->OptionalHeader.Magic == IMAGE_NT_OPTIONAL_HDR64_MAGIC)
 	{
-		result->is64 = true;
 		opt64 = (PIMAGE_OPTIONAL_HEADER64)&pImgFileHdr->OptionalHeader;
 		result->OptionalHeader64.Magic = opt64->Magic;
 		result->OptionalHeader64.MajorLinkerVersion = opt64->MajorLinkerVersion;
@@ -319,31 +317,31 @@ PSTR GetSafeFileName(PSTR fn1, PSTR filename)
 	return cp;
 }
 
-void loadExportsDirectory(EXEFilePtr result, char* buffer, PIMAGE_NT_HEADERS32 pNTHeader)
+void loadExportsDirectory(FileType fileType, EXEFilePtr result, char* buffer, PIMAGE_NT_HEADERS32 pNTHeader)
 {
-	DWORD exportRVAStart = GetImgDirEntryRVA(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_EXPORT);
-	DWORD exportRVASize = GetImgDirEntrySize(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_EXPORT);
-	PIMAGE_SECTION_HEADER headerExports = GetEnclosingSectionHeader(result->is64, exportRVAStart, pNTHeader);
+	DWORD exportRVAStart = GetImgDirEntryRVA(fileType, pNTHeader, IMAGE_DIRECTORY_ENTRY_EXPORT);
+	DWORD exportRVASize = GetImgDirEntrySize(fileType, pNTHeader, IMAGE_DIRECTORY_ENTRY_EXPORT);
+	PIMAGE_SECTION_HEADER headerExports = GetEnclosingSectionHeader(fileType, exportRVAStart, pNTHeader);
 	if (headerExports != NULL)
 	{
 		DWORD delta = headerExports->VirtualAddress - headerExports->PointerToRawData;
 		PIMAGE_EXPORT_DIRECTORY exportDir = MakePtr(PIMAGE_EXPORT_DIRECTORY, buffer, exportRVAStart - delta);
 		DWORD Rva = exportDir->Name;
 		PSTR fn1 = (PSTR)(buffer + (Rva - delta));
-		result->exports = new Exports;
-		result->exports->filename = (PSTR)(buffer + Rva);
-		result->exports->filename = GetSafeFileName(fn1, result->exports->filename);
-		result->exports->exports.Characteristics = exportDir->Characteristics;
-		result->exports->exports.TimeDateStamp = exportDir->TimeDateStamp;
-		result->exports->exports.MajorVersion = exportDir->MajorVersion;
-		result->exports->exports.MinorVersion = exportDir->MinorVersion;
-		result->exports->exports.Name = exportDir->Name;
-		result->exports->exports.Base = exportDir->Base;
-		result->exports->exports.NumberOfFunctions = exportDir->NumberOfFunctions;
-		result->exports->exports.NumberOfNames = exportDir->NumberOfNames;
-		result->exports->exports.AddressOfFunctions = exportDir->AddressOfFunctions;
-		result->exports->exports.AddressOfNames = exportDir->AddressOfNames;
-		result->exports->exports.AddressOfNameOrdinals = exportDir->AddressOfNameOrdinals;
+		result->exportDirectory = new Exports;
+		result->exportDirectory->filename = (PSTR)(buffer + Rva);
+		result->exportDirectory->filename = GetSafeFileName(fn1, result->exportDirectory->filename);
+		result->exportDirectory->exports.Characteristics = exportDir->Characteristics;
+		result->exportDirectory->exports.TimeDateStamp = exportDir->TimeDateStamp;
+		result->exportDirectory->exports.MajorVersion = exportDir->MajorVersion;
+		result->exportDirectory->exports.MinorVersion = exportDir->MinorVersion;
+		result->exportDirectory->exports.Name = exportDir->Name;
+		result->exportDirectory->exports.Base = exportDir->Base;
+		result->exportDirectory->exports.NumberOfFunctions = exportDir->NumberOfFunctions;
+		result->exportDirectory->exports.NumberOfNames = exportDir->NumberOfNames;
+		result->exportDirectory->exports.AddressOfFunctions = exportDir->AddressOfFunctions;
+		result->exportDirectory->exports.AddressOfNames = exportDir->AddressOfNames;
+		result->exportDirectory->exports.AddressOfNameOrdinals = exportDir->AddressOfNameOrdinals;
 		PDWORD functions = (PDWORD)(buffer + (exportDir->AddressOfFunctions - delta));
 		PWORD ordinals = (PWORD)(buffer + (exportDir->AddressOfNameOrdinals - delta));
 		PDWORD dwpname = (PDWORD)(buffer + (exportDir->AddressOfNames - delta));
@@ -364,17 +362,17 @@ void loadExportsDirectory(EXEFilePtr result, char* buffer, PIMAGE_NT_HEADERS32 p
 					}
 				}
 			}
-			result->exports->functions.push_back(function);
+			result->exportDirectory->functions.push_back(function);
 		}
 	}
 }
 
-void loadImportsDirectory(EXEFilePtr result, char* buffer, PIMAGE_NT_HEADERS32 pNTHeader)
+void loadImportsDirectory(FileType fileType, EXEFilePtr result, char* buffer, PIMAGE_NT_HEADERS32 pNTHeader)
 {
-	DWORD importRVAStart = GetImgDirEntryRVA(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_IMPORT);
-	DWORD importRVASize = GetImgDirEntrySize(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_IMPORT);
-	PIMAGE_SECTION_HEADER headerImports = GetEnclosingSectionHeader(result->is64, importRVAStart, pNTHeader);
-	PIMAGE_IMPORT_DESCRIPTOR importDesc = (PIMAGE_IMPORT_DESCRIPTOR)GetPtrFromRVA(result->is64, importRVAStart, pNTHeader, buffer);
+	DWORD importRVAStart = GetImgDirEntryRVA(fileType, pNTHeader, IMAGE_DIRECTORY_ENTRY_IMPORT);
+	DWORD importRVASize = GetImgDirEntrySize(fileType, pNTHeader, IMAGE_DIRECTORY_ENTRY_IMPORT);
+	PIMAGE_SECTION_HEADER headerImports = GetEnclosingSectionHeader(fileType, importRVAStart, pNTHeader);
+	PIMAGE_IMPORT_DESCRIPTOR importDesc = (PIMAGE_IMPORT_DESCRIPTOR)GetPtrFromRVA(fileType, importRVAStart, pNTHeader, buffer);
 	while (1)
 	{
 		if ((importDesc->TimeDateStamp == 0) && (importDesc->Name == 0))
@@ -385,13 +383,13 @@ void loadImportsDirectory(EXEFilePtr result, char* buffer, PIMAGE_NT_HEADERS32 p
 		ptr->imports.ForwarderChain = importDesc->ForwarderChain;
 		ptr->imports.Name = importDesc->Name;
 		ptr->imports.FirstThunk = importDesc->FirstThunk;
-		ptr->filename = (char*)GetPtrFromRVA(result->is64, importDesc->Name, pNTHeader, buffer);
+		ptr->filename = (char*)GetPtrFromRVA(fileType, importDesc->Name, pNTHeader, buffer);
 		DWORD dwthunk = importDesc->Characteristics;
 		DWORD dwthunkIAT = importDesc->FirstThunk;
-		if (result->is64)
+		if (fileType==PE64EXE)
 		{
-			PIMAGE_THUNK_DATA64 thunk = (PIMAGE_THUNK_DATA64)GetPtrFromRVA(result->is64, dwthunk, pNTHeader, buffer);
-			PIMAGE_THUNK_DATA64 thunkIAT = (PIMAGE_THUNK_DATA64)GetPtrFromRVA(result->is64, dwthunkIAT, pNTHeader, buffer);
+			PIMAGE_THUNK_DATA64 thunk = (PIMAGE_THUNK_DATA64)GetPtrFromRVA(fileType, dwthunk, pNTHeader, buffer);
+			PIMAGE_THUNK_DATA64 thunkIAT = (PIMAGE_THUNK_DATA64)GetPtrFromRVA(fileType, dwthunkIAT, pNTHeader, buffer);
 			while (1)
 			{
 				if (thunk->u1.AddressOfData == 0)
@@ -399,7 +397,7 @@ void loadImportsDirectory(EXEFilePtr result, char* buffer, PIMAGE_NT_HEADERS32 p
 				DWORD dwOff = (DWORD)thunk->u1.AddressOfData;
 				Thunk64Ptr tempThunk = new Thunk64;
 				Thunk64Ptr tempIATThunk = new Thunk64;
-				tempThunk->ordinalname = (PIMAGE_IMPORT_BY_NAME)GetPtrFromRVA(result->is64, dwOff, pNTHeader, buffer);
+				tempThunk->ordinalname = (PIMAGE_IMPORT_BY_NAME)GetPtrFromRVA(fileType, dwOff, pNTHeader, buffer);
 				tempThunk->thunk.u1.AddressOfData = thunk->u1.AddressOfData;
 				tempIATThunk->thunk.u1.AddressOfData = thunkIAT->u1.AddressOfData;
 				ptr->thunk64.push_back(tempThunk);
@@ -410,8 +408,8 @@ void loadImportsDirectory(EXEFilePtr result, char* buffer, PIMAGE_NT_HEADERS32 p
 		}
 		else
 		{
-			PIMAGE_THUNK_DATA32 thunk = (PIMAGE_THUNK_DATA32)GetPtrFromRVA(result->is64, dwthunk, pNTHeader, buffer);
-			PIMAGE_THUNK_DATA32 thunkIAT = (PIMAGE_THUNK_DATA32)GetPtrFromRVA(result->is64, dwthunkIAT, pNTHeader, buffer);
+			PIMAGE_THUNK_DATA32 thunk = (PIMAGE_THUNK_DATA32)GetPtrFromRVA(fileType, dwthunk, pNTHeader, buffer);
+			PIMAGE_THUNK_DATA32 thunkIAT = (PIMAGE_THUNK_DATA32)GetPtrFromRVA(fileType, dwthunkIAT, pNTHeader, buffer);
 			while (1)
 			{
 				if (thunk->u1.AddressOfData == 0)
@@ -426,26 +424,26 @@ void loadImportsDirectory(EXEFilePtr result, char* buffer, PIMAGE_NT_HEADERS32 p
 				thunkIAT++;
 			}
 		}
-		result->imports.push_back(ptr);
+		result->importDirectory.push_back(ptr);
 		importDesc++;
 	}
 }
 
-void loadResourcesDirectory(EXEFilePtr result, char* buffer, PIMAGE_NT_HEADERS32 pNTHeader)
+void loadResourcesDirectory(FileType fileType, EXEFilePtr result, char* buffer, PIMAGE_NT_HEADERS32 pNTHeader)
 {
-	DWORD resourceRVA = GetImgDirEntryRVA(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_RESOURCE);
-	DWORD resourceRVASize = GetImgDirEntrySize(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_RESOURCE);
-	PIMAGE_RESOURCE_DIRECTORY resDir = (PIMAGE_RESOURCE_DIRECTORY)GetPtrFromRVA(result->is64, resourceRVA, pNTHeader, buffer);
+	DWORD resourceRVA = GetImgDirEntryRVA(fileType, pNTHeader, IMAGE_DIRECTORY_ENTRY_RESOURCE);
+	DWORD resourceRVASize = GetImgDirEntrySize(fileType, pNTHeader, IMAGE_DIRECTORY_ENTRY_RESOURCE);
+	PIMAGE_RESOURCE_DIRECTORY resDir = (PIMAGE_RESOURCE_DIRECTORY)GetPtrFromRVA(fileType, resourceRVA, pNTHeader, buffer);
 	PIMAGE_RESOURCE_DIRECTORY_ENTRY resDirEntry = (PIMAGE_RESOURCE_DIRECTORY_ENTRY)(resDir + 1);
 	WORD nNamed = resDir->NumberOfNamedEntries;
 	WORD nIds = resDir->NumberOfIdEntries;
 	PIMAGE_RESOURCE_DATA_ENTRY  pResDataEntry;
-	result->resources.header.Characteristics = resDir->Characteristics;
-	result->resources.header.TimeDateStamp = resDir->TimeDateStamp;
-	result->resources.header.MajorVersion = resDir->MajorVersion;
-	result->resources.header.MinorVersion = resDir->MinorVersion;
-	result->resources.header.NumberOfNamedEntries = resDir->NumberOfNamedEntries;
-	result->resources.header.NumberOfIdEntries = resDir->NumberOfIdEntries;
+	result->resourcesDirectory.header.Characteristics = resDir->Characteristics;
+	result->resourcesDirectory.header.TimeDateStamp = resDir->TimeDateStamp;
+	result->resourcesDirectory.header.MajorVersion = resDir->MajorVersion;
+	result->resourcesDirectory.header.MinorVersion = resDir->MinorVersion;
+	result->resourcesDirectory.header.NumberOfNamedEntries = resDir->NumberOfNamedEntries;
+	result->resourcesDirectory.header.NumberOfIdEntries = resDir->NumberOfIdEntries;
 	for (WORD i = 0; i <= nNamed; i++, resDirEntry++)
 	{
 		ResourcesEntryPtr entry = new ResourcesEntry;
@@ -457,15 +455,15 @@ void loadResourcesDirectory(EXEFilePtr result, char* buffer, PIMAGE_NT_HEADERS32
 		}
 		entry->entry.OffsetToData = resDirEntry->OffsetToData;
 		entry->entry.Name = resDirEntry->Name;
-		result->resources.entries.push_back(entry);
+		result->resourcesDirectory.entries.push_back(entry);
 	}
 }
 
-void loadBaseRelocationsDirectory(EXEFilePtr result, char* buffer, PIMAGE_NT_HEADERS32 pNTHeader)
+void loadBaseRelocationsDirectory(FileType fileType,EXEFilePtr result, char* buffer, PIMAGE_NT_HEADERS32 pNTHeader)
 {
-	DWORD baseRelocRVA = GetImgDirEntryRVA(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_BASERELOC);
-	DWORD baseRelocRVASize = GetImgDirEntrySize(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_BASERELOC);
-	PIMAGE_BASE_RELOCATION baseReloc = (PIMAGE_BASE_RELOCATION)GetPtrFromRVA(result->is64, baseRelocRVA, pNTHeader, buffer);
+	DWORD baseRelocRVA = GetImgDirEntryRVA(fileType, pNTHeader, IMAGE_DIRECTORY_ENTRY_BASERELOC);
+	DWORD baseRelocRVASize = GetImgDirEntrySize(fileType, pNTHeader, IMAGE_DIRECTORY_ENTRY_BASERELOC);
+	PIMAGE_BASE_RELOCATION baseReloc = (PIMAGE_BASE_RELOCATION)GetPtrFromRVA(fileType, baseRelocRVA, pNTHeader, buffer);
 	while (baseReloc->SizeOfBlock != 0)
 	{
 		if (0 == baseReloc->VirtualAddress)
@@ -491,19 +489,19 @@ void loadBaseRelocationsDirectory(EXEFilePtr result, char* buffer, PIMAGE_NT_HEA
 			}
 			pEntry++;
 		}
-		result->relocs.push_back(relocs);
+		result->baseRelocationsDirectory.push_back(relocs);
 		baseReloc = MakePtr(PIMAGE_BASE_RELOCATION, baseReloc, baseReloc->SizeOfBlock);
 	}
 }
 
-void loadDebugDirectory(EXEFilePtr result, char* buffer, PIMAGE_NT_HEADERS32 pNTHeader)
+void loadDebugDirectory(FileType fileType, EXEFilePtr result, char* buffer, PIMAGE_NT_HEADERS32 pNTHeader)
 {
-	DWORD debugRVA = GetImgDirEntryRVA(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_DEBUG);
-	DWORD debugRVASize = GetImgDirEntrySize(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_DEBUG);
+	DWORD debugRVA = GetImgDirEntryRVA(fileType, pNTHeader, IMAGE_DIRECTORY_ENTRY_DEBUG);
+	DWORD debugRVASize = GetImgDirEntrySize(fileType, pNTHeader, IMAGE_DIRECTORY_ENTRY_DEBUG);
 	if (debugRVA != 0 && debugRVASize != 0)
 	{
-		result->debug = new Debug;
-		PIMAGE_SECTION_HEADER header = GetEnclosingSectionHeader(result->is64, debugRVA, pNTHeader);
+		result->debugDirectory = new Debug;
+		PIMAGE_SECTION_HEADER header = GetEnclosingSectionHeader(fileType, debugRVA, pNTHeader);
 		PIMAGE_DEBUG_DIRECTORY debugDir = MakePtr(PIMAGE_DEBUG_DIRECTORY, buffer, header->PointerToRawData + (debugRVA - header->VirtualAddress));
 		DWORD cDebugFormats = debugRVASize / sizeof(IMAGE_DEBUG_DIRECTORY);
 		for (DWORD i = 0; i < cDebugFormats; i++)
@@ -518,43 +516,44 @@ void loadDebugDirectory(EXEFilePtr result, char* buffer, PIMAGE_NT_HEADERS32 pNT
 			ptr->entry.SizeOfData = debugDir->SizeOfData;
 			ptr->entry.AddressOfRawData = debugDir->AddressOfRawData;
 			ptr->entry.PointerToRawData = debugDir->PointerToRawData;
-			result->debug->entries.push_back(ptr);
+			result->debugDirectory->entries.push_back(ptr);
 			debugDir++;
 		}
 	}
 }
 
-void loadLoadConfigDirectory(EXEFilePtr result, char* buffer, PIMAGE_NT_HEADERS32 pNTHeader)
+void loadLoadConfigDirectory(FileType fileType,EXEFilePtr result, char* buffer, PIMAGE_NT_HEADERS32 pNTHeader)
 {
-	DWORD configRVA = GetImgDirEntryRVA(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG);
-	DWORD configRVASize = GetImgDirEntrySize(result->is64, pNTHeader, IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG);
+	DWORD configRVA = GetImgDirEntryRVA(fileType, pNTHeader, IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG);
+	DWORD configRVASize = GetImgDirEntrySize(fileType, pNTHeader, IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG);
 	PIMAGE_LOAD_CONFIG_DIRECTORY32 load32 = NULL;
 	PIMAGE_LOAD_CONFIG_DIRECTORY64 load64 = NULL;
-	if (result->is64)
+	if (fileType==PE64EXE)
 	{
-		load64 = (PIMAGE_LOAD_CONFIG_DIRECTORY64)GetPtrFromRVA(result->is64, configRVA, pNTHeader, buffer);
-		memcpy(&result->config64, load64, sizeof(IMAGE_LOAD_CONFIG_DIRECTORY64));	
+		load64 = (PIMAGE_LOAD_CONFIG_DIRECTORY64)GetPtrFromRVA(fileType, configRVA, pNTHeader, buffer);
+		memcpy(&result->loadConfiguration64BitDirectory, load64, sizeof(IMAGE_LOAD_CONFIG_DIRECTORY64));
 	}
 	else
 	{
-		load32 = (PIMAGE_LOAD_CONFIG_DIRECTORY32)GetPtrFromRVA(result->is64, configRVA, pNTHeader, buffer);
-		memcpy(&result->config32, load32, sizeof(IMAGE_LOAD_CONFIG_DIRECTORY32));
+		load32 = (PIMAGE_LOAD_CONFIG_DIRECTORY32)GetPtrFromRVA(fileType, configRVA, pNTHeader, buffer);
+		memcpy(&result->loadConfiguration32BitDirectory, load32, sizeof(IMAGE_LOAD_CONFIG_DIRECTORY32));
 	}
 }
 
-EXEFilePtr loadExeFile(char* buffer, LONGLONG fileSize)
+EXEFilePtr loadExeFile(FileType fileType, char* buffer, LONGLONG fileSize)
 {
 	EXEFilePtr result = new EXEFile;
+	result->fileType = fileType;
 	PIMAGE_DOS_HEADER dosHeader = (PIMAGE_DOS_HEADER)buffer;
 	PIMAGE_NT_HEADERS32 pNTHeader = MakePtr(PIMAGE_NT_HEADERS32, dosHeader, dosHeader->e_lfanew);
 	loadDOSEXE(result, dosHeader);
-	loadPEHeaders(result, pNTHeader);
+	loadPEHeaders(fileType,result, pNTHeader);
 	loadPESections(result, buffer, pNTHeader);
-	loadExportsDirectory(result, buffer, pNTHeader);
-	loadImportsDirectory(result, buffer, pNTHeader);
-	loadResourcesDirectory(result, buffer, pNTHeader);
-	loadBaseRelocationsDirectory(result, buffer, pNTHeader);
-	loadDebugDirectory(result, buffer, pNTHeader);
-	loadLoadConfigDirectory(result, buffer, pNTHeader);
+	loadExportsDirectory(fileType, result, buffer, pNTHeader);
+	loadImportsDirectory(fileType, result, buffer, pNTHeader);
+	loadResourcesDirectory(fileType, result, buffer, pNTHeader);
+	loadBaseRelocationsDirectory(fileType, result, buffer, pNTHeader);
+	loadDebugDirectory(fileType, result, buffer, pNTHeader);
+	loadLoadConfigDirectory(fileType, result, buffer, pNTHeader);
 	return result;
 }

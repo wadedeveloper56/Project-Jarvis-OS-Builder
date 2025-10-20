@@ -250,7 +250,7 @@ void loadFiles()
 			case PE32OBJ:
 			case PE64OBJ:
 				cout << "its obj file type" << endl;
-				loadObjFile(buffer, fileSize);
+				loadObjFile(fileType, buffer, fileSize);
 				break;
 			case ANONYMOUS:
 				break;

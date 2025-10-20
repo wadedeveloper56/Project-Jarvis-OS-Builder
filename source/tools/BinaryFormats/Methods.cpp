@@ -4,7 +4,11 @@
 
 using namespace std;
 
-_LIBFile::_LIBFile() :header({ 0 })
+_LIBFileEntry::_LIBFileEntry() :header({ 0 })
+{
+}
+
+_LIBFile::_LIBFile()
 {
 }
 
@@ -12,8 +16,16 @@ _OBJFile::_OBJFile() :header({ 0 }), symbolTable(nullptr), stringTableSize(0)
 {
 }
 
-_EXEFile::_EXEFile() :is64(false), dosHeader({ 0 }), Signature(0), FileHeader({ 0 }), 
-OptionalHeader32({ 0 }), OptionalHeader64({ 0 }), exports(nullptr), config32({ 0 }), config64({ 0 }), iat({ 0 }), debug(nullptr)
+_EXEFile::_EXEFile() :
+	fileType(UNKNOWN),
+	dosHeader({ 0 }),
+	Signature(0),
+	FileHeader({ 0 }),
+	OptionalHeader64({ 0 }),
+	exportDirectory(nullptr),
+	loadConfiguration64BitDirectory({ 0 }),
+	//iat({ 0 }),
+	debugDirectory(nullptr)
 {
 }
 

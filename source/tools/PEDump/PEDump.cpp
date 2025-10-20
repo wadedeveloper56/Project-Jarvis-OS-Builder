@@ -107,7 +107,7 @@ int main(int argc, char* argv[])
 		case PE32EXE:
 		{
 			printf("File Type: 32-bit PE EXECUTABLE IMAGE\n");
-			EXEFilePtr data = loadExeFile(buffer, fileSize);
+			EXEFilePtr data = loadExeFile(fileType, buffer, fileSize);
 			DumpDOSHeader(&data->dosHeader);
 			DumpFileHeader(&data->FileHeader);
 			DumpOptionalHeader32(&data->OptionalHeader32);
@@ -116,21 +116,21 @@ int main(int argc, char* argv[])
 				OBJSectionPtr ptr = data->sectionTable[i];
 				DumpSection(i, ptr);
 			}
-			if (data->exports != nullptr)
+			if (data->exportDirectory != nullptr)
 			{
-				DumpExportDirectory(data->exports);
+				DumpExportDirectory(data->exportDirectory);
 			}
-			DumpImportDirectory(data->is64, &data->imports);
-			DumpResourcesDirectory(&data->resources);
-			DumpBaseRelocationsDirectory(&data->relocs);
-			DumpDebugDirectory(data->debug);
-			DumpLoadConfig32Directory(&data->config32);
+			DumpImportDirectory(fileType, &data->importDirectory);
+			DumpResourcesDirectory(&data->resourcesDirectory);
+			DumpBaseRelocationsDirectory(&data->baseRelocationsDirectory);
+			DumpDebugDirectory(data->debugDirectory);
+			DumpLoadConfig32Directory(&data->loadConfiguration32BitDirectory);
 			break;
 		}
 		case PE64EXE:
 		{
 			printf("File Type: 64-bit PE EXECUTABLE IMAGE\n");
-			EXEFilePtr data = loadExeFile(buffer, fileSize);
+			EXEFilePtr data = loadExeFile(fileType, buffer, fileSize);
 			DumpDOSHeader(&data->dosHeader);
 			DumpFileHeader(&data->FileHeader);
 			DumpOptionalHeader64(&data->OptionalHeader64);
@@ -139,15 +139,15 @@ int main(int argc, char* argv[])
 				OBJSectionPtr ptr = data->sectionTable[i];
 				DumpSection(i, ptr);
 			}
-			if (data->exports != nullptr)
+			if (data->exportDirectory != nullptr)
 			{
-				DumpExportDirectory(data->exports);
+				DumpExportDirectory(data->exportDirectory);
 			}
-			DumpImportDirectory(data->is64, &data->imports);
-			DumpResourcesDirectory(&data->resources);
-			DumpBaseRelocationsDirectory(&data->relocs);
-			DumpDebugDirectory(data->debug);
-			DumpLoadConfig64Directory(&data->config64);
+			DumpImportDirectory(fileType, &data->importDirectory);
+			DumpResourcesDirectory(&data->resourcesDirectory);
+			DumpBaseRelocationsDirectory(&data->baseRelocationsDirectory);
+			DumpDebugDirectory(data->debugDirectory);
+			DumpLoadConfig64Directory(&data->loadConfiguration64BitDirectory);
 			break;
 		}
 		case DEBUG:
@@ -155,7 +155,7 @@ int main(int argc, char* argv[])
 		case PE32OBJ:
 		{
 			printf("File Type: 32-bit COFF OBJECT\n\n");
-			OBJFilePtr data = loadObjFile(buffer, fileSize);
+			OBJFilePtr data = loadObjFile(fileType, buffer, fileSize);
 			DumpFileHeader(&data->header);
 			printf("\n");
 			for (int i = 0; i < data->sectionTable.size(); i++)
@@ -175,7 +175,7 @@ int main(int argc, char* argv[])
 		case PE64OBJ:
 		{
 			printf("File Type: 64-bit COFF OBJECT\n\n");
-			OBJFilePtr data = loadObjFile(buffer, fileSize);
+			OBJFilePtr data = loadObjFile(fileType, buffer, fileSize);
 			DumpFileHeader(&data->header);
 			printf("\n");
 			for (int i = 0; i < data->sectionTable.size(); i++)
@@ -198,7 +198,7 @@ int main(int argc, char* argv[])
 		case LIB:
 		{
 			printf("lib file\n");
-			LIBFilePtr data = loadLibFile(buffer, fileSize);
+			LIBFilePtr data = loadLibFile(fileType, buffer, fileSize);
 			break;
 		}
 		default:

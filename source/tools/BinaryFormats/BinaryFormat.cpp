@@ -151,7 +151,7 @@ string getStringFromTable(const char* stringTable, size_t index)
 	return string(str);
 }
 
-OBJFilePtr loadObjFile(char* buffer, LONGLONG fileSize)
+OBJFilePtr loadObjFile(FileType fileType, char* buffer, LONGLONG fileSize)
 {
 	OBJFilePtr result = new OBJFile;
 	PIMAGE_FILE_HEADER pImgFileHdr = (PIMAGE_FILE_HEADER)buffer;

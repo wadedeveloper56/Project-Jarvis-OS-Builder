@@ -41,6 +41,7 @@ using namespace std;
 #define IMAGE_SCN_MEM_PROTECTED 0x00004000
 #define IMAGE_SCN_MEM_SYSHEAP 0x00010000
 
+typedef enum _FileType { UNKNOWN, DOSEXE, PE16EXE, PE32EXE, PE64EXE, DEBUG, PE16OBJ, PE32OBJ, PE64OBJ, ANONYMOUS, LIB }FileType;
 
 typedef struct BINARYFORMATS_API
 {
@@ -207,55 +208,73 @@ typedef struct BINARYFORMATS_API _Debug
 
 typedef struct BINARYFORMATS_API _EXEFile
 {
-	vector<OBJSectionPtr> sectionTable;
-	bool is64;
+	FileType fileType;
 	IMAGE_DOS_HEADER dosHeader;
 	DWORD Signature;
 	IMAGE_FILE_HEADER FileHeader;
-	IMAGE_OPTIONAL_HEADER32 OptionalHeader32;
-	IMAGE_OPTIONAL_HEADER64 OptionalHeader64;
-	Resources resources;
-	ExportsPtr exports;
-	vector<ImportsPtr> imports;
-	vector<RelocsPtr> relocs;
-	IMAGE_LOAD_CONFIG_DIRECTORY32 config32;
-	IMAGE_LOAD_CONFIG_DIRECTORY64 config64;
-	IMAGE_IMPORT_DESCRIPTOR iat;
-	DebugPtr debug;
+	union {
+		IMAGE_OPTIONAL_HEADER32 OptionalHeader32;
+		IMAGE_OPTIONAL_HEADER64 OptionalHeader64;
+	} DUMMYUNIONNAME;
+	Resources resourcesDirectory;
+	ExportsPtr exportDirectory;
+	vector<ImportsPtr> importDirectory;
+	vector<RelocsPtr> baseRelocationsDirectory;
+	union {
+		IMAGE_LOAD_CONFIG_DIRECTORY32 loadConfiguration32BitDirectory;
+		IMAGE_LOAD_CONFIG_DIRECTORY64 loadConfiguration64BitDirectory;
+	} DUMMYUNIONNAME2;
+	DebugPtr debugDirectory;
+	vector<OBJSectionPtr> sectionTable;
 	_EXEFile();
 } EXEFile, * EXEFilePtr, ** EXEFilePtrPtr;
 
-typedef struct BINARYFORMATS_API _LIBFile
+typedef struct BINARYFORMATS_API _LIBFileEntry
 {
 	IMAGE_ARCHIVE_MEMBER_HEADER header;
+	_LIBFileEntry();
+} LIBFileEntry, * LIBFileEntryPtr;
+
+typedef struct BINARYFORMATS_API _LIBFile
+{
+	vector<LIBFileEntryPtr> entrys;
 	_LIBFile();
 } LIBFile, * LIBFilePtr, ** LIBFilePtrPtr;
 
+#ifdef _WIN64
+#define MakePtr( cast, ptr, addValue ) (cast)( (BYTE *)(ptr) + (ULONGLONG)(addValue))
+#else
 #define MakePtr( cast, ptr, addValue ) (cast)( (BYTE *)(ptr) + (DWORD)(addValue))
+#endif
 
-
-typedef enum _FileType { UNKNOWN, DOSEXE, PE16EXE, PE32EXE, PE64EXE, DEBUG, PE16OBJ, PE32OBJ, PE64OBJ, ANONYMOUS, LIB }FileType;
-
+//Binaryformats.cpp functions
 BINARYFORMATS_API WORD getFileMagic(char* buffer);
 BINARYFORMATS_API FileType getFileType(char* buffer, LONGLONG fileSize);
 BINARYFORMATS_API const char* GetMachineTypeName(WORD wMachineType);
 BINARYFORMATS_API int islistedMachineType(WORD wMachineType);
 BINARYFORMATS_API void hexdump(const void* data, size_t size);
 BINARYFORMATS_API char* get_ctime_stg(time_t* pt);
-BINARYFORMATS_API OBJFilePtr loadObjFile(char* buffer, LONGLONG fileSize);
-
-BINARYFORMATS_API DWORD GetImgDirEntryRVA(bool Is64, PVOID pNTHdr, DWORD IDE);
-BINARYFORMATS_API PIMAGE_SECTION_HEADER GetSectionHeader(bool Is64, PSTR name, PVOID pNTHeader);
-BINARYFORMATS_API DWORD GetImgDirEntrySize(bool Is64, PVOID pNTHdr, DWORD IDE);
-BINARYFORMATS_API PIMAGE_SECTION_HEADER GetEnclosingSectionHeader(bool Is64, DWORD rva, PVOID pNTHeader);
-BINARYFORMATS_API LPVOID GetPtrFromRVA(bool Is64, DWORD rva, PIMAGE_NT_HEADERS32 pNTHeader, char* imageBase);
+BINARYFORMATS_API OBJFilePtr loadObjFile(FileType fileType, char* buffer, LONGLONG fileSize);
+//EXEDump.cpp functions
+BINARYFORMATS_API DWORD GetImgDirEntryRVA(FileType fileType, PVOID pNTHdr, DWORD IDE);
+BINARYFORMATS_API PIMAGE_SECTION_HEADER GetSectionHeader(FileType fileType, PSTR name, PVOID pNTHeader);
+BINARYFORMATS_API DWORD GetImgDirEntrySize(FileType fileType, PVOID pNTHdr, DWORD IDE);
+BINARYFORMATS_API PIMAGE_SECTION_HEADER GetEnclosingSectionHeader(FileType fileType, DWORD rva, PVOID pNTHeader);
+BINARYFORMATS_API LPVOID GetPtrFromRVA(FileType fileType, DWORD rva, PIMAGE_NT_HEADERS32 pNTHeader, char* imageBase);
 BINARYFORMATS_API void loadDOSEXE(EXEFilePtr result, PIMAGE_DOS_HEADER dosHeader);
-BINARYFORMATS_API void loadPEHeaders(EXEFilePtr result, PIMAGE_NT_HEADERS32 pImgFileHdr);
+BINARYFORMATS_API void loadPEHeaders(FileType fileType, EXEFilePtr result, PIMAGE_NT_HEADERS32 pImgFileHdr);
 BINARYFORMATS_API void loadPESections(EXEFilePtr result, char* buffer, PIMAGE_NT_HEADERS32 pImgFileHdr);
-BINARYFORMATS_API EXEFilePtr loadExeFile(char* buffer, LONGLONG fileSize);
-
-BINARYFORMATS_API LIBFilePtr loadLibFile(char* buffer, LONGLONG fileSize);
-
+BINARYFORMATS_API PSTR GetSafeFileName(PSTR fn1, PSTR filename);
+BINARYFORMATS_API void loadExportsDirectory(FileType fileType, EXEFilePtr result, char* buffer, PIMAGE_NT_HEADERS32 pNTHeader);
+BINARYFORMATS_API void loadImportsDirectory(FileType fileType, EXEFilePtr result, char* buffer, PIMAGE_NT_HEADERS32 pNTHeader);
+BINARYFORMATS_API void loadResourcesDirectory(FileType fileType, EXEFilePtr result, char* buffer, PIMAGE_NT_HEADERS32 pNTHeader);
+BINARYFORMATS_API void loadBaseRelocationsDirectory(FileType fileType, EXEFilePtr result, char* buffer, PIMAGE_NT_HEADERS32 pNTHeader);
+BINARYFORMATS_API void loadDebugDirectory(FileType fileType, EXEFilePtr result, char* buffer, PIMAGE_NT_HEADERS32 pNTHeader);
+BINARYFORMATS_API void loadLoadConfigDirectory(FileType fileType, EXEFilePtr result, char* buffer, PIMAGE_NT_HEADERS32 pNTHeader);
+BINARYFORMATS_API EXEFilePtr loadExeFile(FileType fileType, char* buffer, LONGLONG fileSize);
+//LIBDump.cpp functions
+BINARYFORMATS_API LIBFilePtr loadLibFile(FileType fileType, char* buffer, LONGLONG fileSize);
+//Output.cpp functions
 BINARYFORMATS_API void GetObjRelocationName(WORD type, PSTR buffer, DWORD cBytes);
 BINARYFORMATS_API void DumpSection(int i, OBJSectionPtr ptr);
 BINARYFORMATS_API void GetSectionName(WORD section, PSTR buffer, unsigned cbBuffer);
