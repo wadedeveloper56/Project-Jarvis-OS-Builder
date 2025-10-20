@@ -8,3 +8,6 @@
 /source/tools/ObjDump/x64
 /source/tools/x64
 /source/tools/dmpobj
+/research/ALink/Debug
+/research/ALink/Release
+/research/ALink/.vs

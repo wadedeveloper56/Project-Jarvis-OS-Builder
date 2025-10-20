@@ -630,7 +630,7 @@ void DumpLoadConfig64Directory(PIMAGE_LOAD_CONFIG_DIRECTORY64 load64)
 		printf("%016llX LockPrefixTable\n", load64->LockPrefixTable);
 		printf("%016llX MaximumAllocationSize\n", load64->MaximumAllocationSize);
 		printf("%016llX VirtualMemoryThreshold\n", load64->VirtualMemoryThreshold);
-		printf("%016llX ProcessHeapFlags\n", load64->ProcessHeapFlags);
+		printf("%016X ProcessHeapFlags\n", load64->ProcessHeapFlags);
 		printf("%016llX ProcessAffinityMask\n", load64->ProcessAffinityMask);
 		printf("%08X CSDVersion\n", load64->CSDVersion);
 		printf("%08X DependentLoadFlags\n", load64->DependentLoadFlags);
