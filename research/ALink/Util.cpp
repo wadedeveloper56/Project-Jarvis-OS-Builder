@@ -1,6 +1,6 @@
 #include "ALink.h"
 
-int getBitCount(UINT a)
+int getBitCount(UInt a)
 {
     int count = 0;
 
@@ -12,22 +12,22 @@ int getBitCount(UINT a)
     return count;
 }
 
-void ClearNbit(PUCHAR mask, long i)
+void ClearNbit(UCharPtr mask, long i)
 {
     mask[i / 8] &= 0xff - (1 << (i % 8));
 }
 
-void SetNbit(PUCHAR mask, long i)
+void SetNbit(UCharPtr mask, long i)
 {
     mask[i / 8] |= (1 << (i % 8));
 }
 
-char GetNbit(PUCHAR mask, long i)
+char GetNbit(UCharPtr mask, long i)
 {
     return (mask[i / 8] >> (i % 8)) & 1;
 }
 
-long GetIndex(PUCHAR buf, long* index)
+long GetIndex(UCharPtr buf, long* index)
 {
     long i;
     if (buf[*index] & 0x80)
@@ -44,7 +44,7 @@ long GetIndex(PUCHAR buf, long* index)
 
 void ReportError(long errnum)
 {
-    UINT tot, i;
+    UInt tot, i;
 
     printf("\nError in file at %08lX", filepos);
     switch (errnum)
@@ -158,14 +158,14 @@ int wstrlen(const char* s)
     return i / 2;
 }
 
-int sortCompare(const void* x1, const void* x2)
+int sortCompare(void const* x1, void const* x2)
 {
-    return strcmp(((PSORTENTRY)x1)->id, ((PSORTENTRY)x2)->id);
+    return strcmp(((SortEntryPtr)x1)->id, ((SortEntryPtr)x2)->id);
 }
 
-void* checkMalloc(size_t x)
+VoidPtr checkMalloc(size_t x)
 {
-    void* p;
+    VoidPtr p;
 
     p = malloc(x);
     if (!p)
@@ -176,7 +176,7 @@ void* checkMalloc(size_t x)
     return p;
 }
 
-void* checkRealloc(void* p, size_t x)
+VoidPtr checkRealloc(VoidPtr p, size_t x)
 {
     p = realloc(p, x);
     if (!p)
@@ -204,9 +204,9 @@ char* checkStrdup(const char* s)
 }
 
 
-PSORTENTRY binarySearch(PSORTENTRY list, UINT count, char* key)
+SortEntryPtr binarySearch(SortEntryPtr list, UInt count, char* key)
 {
-    UINT i;
+    UInt i;
     int j;
 
     if (!list) return NULL;
@@ -232,10 +232,10 @@ PSORTENTRY binarySearch(PSORTENTRY list, UINT count, char* key)
     return NULL; /* return NULL if no match (count=0) */
 }
 
-void sortedInsert(PSORTENTRY* plist, UINT* pcount, char* key, void* object)
+void sortedInsert(SortEntryPtr* plist, UInt* pcount, char* key, VoidPtr object)
 {
-    PSORTENTRY list, node;
-    UINT count, index, i;
+    SortEntryPtr list, node;
+    UInt count, index, i;
     int j;
 
     if (!plist || !pcount) return;
@@ -246,7 +246,7 @@ void sortedInsert(PSORTENTRY* plist, UINT* pcount, char* key, void* object)
     node = binarySearch(list, count, key);
     if (node) /* if ID already exists, add object to it */
     {
-        node->object = (void**)checkRealloc(node->object, (node->count + 1) * sizeof(void*));
+        node->object = (VoidPtrPtr)checkRealloc(node->object, (node->count + 1) * sizeof(VoidPtr));
         node->object[node->count] = object;
         ++(node->count);
         return;
@@ -279,17 +279,17 @@ void sortedInsert(PSORTENTRY* plist, UINT* pcount, char* key, void* object)
     /* grow list */
     count = *pcount + 1;
 
-    list = (PSORTENTRY)checkRealloc(list, sizeof(SORTENTRY) * count);
+    list = (SortEntryPtr)checkRealloc(list, sizeof(SortEntry) * count);
 
     j = count - index - 1; /* get number of entries after insertion index */
     if (j) /* move them up 1 entry if some */
     {
-        memmove(list + index + 1, list + index, j * sizeof(SORTENTRY));
+        memmove(list + index + 1, list + index, j * sizeof(SortEntry));
     }
 
     /* put new node in position */
     list[index].id = checkStrdup(key);
-    list[index].object = (void**)checkMalloc(sizeof(void*));
+    list[index].object = (VoidPtrPtr)checkMalloc(sizeof(VoidPtr));
     list[index].object[0] = object;
     list[index].count = 1;
 

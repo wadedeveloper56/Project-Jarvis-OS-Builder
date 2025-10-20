@@ -1,22 +1,22 @@
 #include "ALink.h"
 
-void loadCoffLib(FILE* libfile, PCHAR libname)
+void loadCoffLib(FILE* libfile, CharPtr libname)
 {
-	UINT i, j;
-	UINT numsyms;
-	UINT modpage;
-	UINT memberSize;
-	UINT startPoint;
-	PUCHAR endptr;
+	UInt i, j;
+	UInt numsyms;
+	UInt modpage;
+	UInt memberSize;
+	UInt startPoint;
+	UCharPtr endptr;
 	PLIBFILE p;
-	PCHAR name;
-	PUCHAR modbuf;
-	PSORTENTRY symlist = NULL;
+	CharPtr name;
+	UCharPtr modbuf;
+	SortEntryPtr symlist = NULL;
 	int x;
 
 	libfiles = (PLIBFILE)checkRealloc(libfiles, (libcount + 1) * sizeof(LIBFILE));
 	p = &libfiles[libcount];
-	p->filename = (PCHAR)checkMalloc(strlen(libname) + 1);
+	p->filename = (CharPtr)checkMalloc(strlen(libname) + 1);
 	strcpy(p->filename, libname);
 	startPoint = ftell(libfile);
 
@@ -64,7 +64,7 @@ void loadCoffLib(FILE* libfile, PCHAR libname)
 
 	/* get size */
 	errno = 0;
-	memberSize = strtoul((PCHAR)(buf + 48), (PPCHAR)&endptr, 10);
+	memberSize = strtoul((CharPtr)(buf + 48), (CharPtrPtr)&endptr, 10);
 	if (errno || (*endptr))
 	{
 		printf("Invalid library file format - bad member size\n");
@@ -89,7 +89,7 @@ void loadCoffLib(FILE* libfile, PCHAR libname)
 		numsyms = buf[3] + (buf[2] << 8) + (buf[1] << 16) + (buf[0] << 24);
 	}
 	printf("%u symbols\n", numsyms);
-	modbuf = (PUCHAR)checkMalloc(numsyms * 4);
+	modbuf = (UCharPtr)checkMalloc(numsyms * 4);
 
 	if (numsyms)
 	{
@@ -98,7 +98,7 @@ void loadCoffLib(FILE* libfile, PCHAR libname)
 			printf("Error reading from file\n");
 			exit(1);
 		}
-		symlist = (PSORTENTRY)checkMalloc(sizeof(SORTENTRY) * numsyms);
+		symlist = (SortEntryPtr)checkMalloc(sizeof(SortEntry) * numsyms);
 	}
 
 	for (i = 0; i < numsyms; i++)
@@ -134,7 +134,7 @@ void loadCoffLib(FILE* libfile, PCHAR libname)
 
 	if (numsyms)
 	{
-		qsort(symlist, numsyms, sizeof(SORTENTRY), sortCompare);
+		qsort(symlist, numsyms, sizeof(SortEntry), sortCompare);
 		p->symbols = symlist;
 		p->numsyms = numsyms;
 
@@ -177,7 +177,7 @@ void loadCoffLib(FILE* libfile, PCHAR libname)
 	}
 	buf[16] = 0;
 	/* check name of second linker member */
-	if (!strcmp((PCHAR)buf, "/               ")) /* 15 spaces */
+	if (!strcmp((CharPtr)buf, "/               ")) /* 15 spaces */
 	{
 		/* OK, so we've found it, now skip over */
 		buf[58] = 0;
@@ -192,7 +192,7 @@ void loadCoffLib(FILE* libfile, PCHAR libname)
 
 		/* get size */
 		errno = 0;
-		memberSize = strtoul((PCHAR)(buf + 48), (PPCHAR)&endptr, 10);
+		memberSize = strtoul((CharPtr)(buf + 48), (CharPtrPtr)&endptr, 10);
 		if (errno || (*endptr))
 		{
 			printf("Invalid library file format - bad member size\n");
@@ -235,7 +235,7 @@ void loadCoffLib(FILE* libfile, PCHAR libname)
 	}
 	buf[16] = 0;
 	/* check name of long names linker member */
-	if (!strcmp((PCHAR)buf, "//              ")) /* 14 spaces */
+	if (!strcmp((CharPtr)buf, "//              ")) /* 14 spaces */
 	{
 		buf[58] = 0;
 
@@ -249,7 +249,7 @@ void loadCoffLib(FILE* libfile, PCHAR libname)
 
 		/* get size */
 		errno = 0;
-		memberSize = strtoul((PCHAR)(buf + 48), (PPCHAR)&endptr, 10);
+		memberSize = strtoul((CharPtr)(buf + 48), (CharPtrPtr)&endptr, 10);
 		if (errno || (*endptr))
 		{
 			printf("Invalid library file format - bad member size\n");
@@ -257,7 +257,7 @@ void loadCoffLib(FILE* libfile, PCHAR libname)
 		}
 		if (memberSize)
 		{
-			p->longnames = (PUCHAR)checkMalloc(memberSize);
+			p->longnames = (UCharPtr)checkMalloc(memberSize);
 			if (fread(p->longnames, 1, memberSize, libfile) != memberSize)
 			{
 				printf("Error reading from file\n");
@@ -273,7 +273,7 @@ void loadCoffLib(FILE* libfile, PCHAR libname)
 
 
 	p->modsloaded = 0;
-	p->modlist = (UINT*)checkMalloc(sizeof(unsigned short) * numsyms);
+	p->modlist = (UInt*)checkMalloc(sizeof(unsigned short) * numsyms);
 	p->libtype = 'C';
 	p->blocksize = 1;
 	p->flags = LIBF_CASESENSITIVE;
@@ -283,7 +283,7 @@ void loadCoffLib(FILE* libfile, PCHAR libname)
 void loadcofflibmod(PLIBFILE p, FILE* libfile)
 {
 	char* name;
-	UINT ofs;
+	UInt ofs;
 
 	if (fread(buf, 1, 60, libfile) != 60)
 	{
@@ -305,17 +305,17 @@ void loadcofflibmod(PLIBFILE p, FILE* libfile)
 			ofs--;
 		}
 
-		ofs = strtoul((PCHAR)(buf + 1), &name, 10);
+		ofs = strtoul((CharPtr)(buf + 1), &name, 10);
 		if (!buf[1] || *name)
 		{
 			printf("Invalid string number \n");
 			exit(1);
 		}
-		name = (PCHAR)(p->longnames + ofs);
+		name = (CharPtr)(p->longnames + ofs);
 	}
 	else
 	{
-		name = (PCHAR)(PUCHAR)buf;
+		name = (CharPtr)(UCharPtr)buf;
 	}
 
 	printf("Loading module %s\n", name);

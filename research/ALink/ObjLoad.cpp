@@ -1,25 +1,25 @@
 #include "ALink.h"
 
-void DestroyLIDATA(PDATABLOCK p)
+void DestroyLIDATA(DatablockPtr p)
 {
 	long i;
 	if (p->blocks)
 	{
 		for (i = 0; i < p->blocks; i++)
 		{
-			DestroyLIDATA(((PPDATABLOCK)(p->data))[i]);
+			DestroyLIDATA(((DatablockPtrPtr)(p->data))[i]);
 		}
 	}
 	free(p->data);
 	free(p);
 }
 
-PDATABLOCK BuildLiData(long* bufofs)
+DatablockPtr BuildLiData(long* bufofs)
 {
-	PDATABLOCK p;
+	DatablockPtr p;
 	long i, j;
 
-	p = (PDATABLOCK)checkMalloc(sizeof(DATABLOCK));
+	p = (DatablockPtr)checkMalloc(sizeof(Datablock));
 	i = *bufofs;
 	p->dataofs = i - lidata->dataofs;
 	p->count = buf[i] + 256 * buf[i + 1];
@@ -33,10 +33,10 @@ PDATABLOCK BuildLiData(long* bufofs)
 	i += 2;
 	if (p->blocks)
 	{
-		p->data = checkMalloc(p->blocks * sizeof(PDATABLOCK));
+		p->data = checkMalloc(p->blocks * sizeof(DatablockPtr));
 		for (j = 0; j < p->blocks; j++)
 		{
-			((PPDATABLOCK)p->data)[j] = BuildLiData(&i);
+			((DatablockPtrPtr)p->data)[j] = BuildLiData(&i);
 		}
 	}
 	else
@@ -44,16 +44,16 @@ PDATABLOCK BuildLiData(long* bufofs)
 		p->data = checkMalloc(buf[i] + 1);
 		((char*)p->data)[0] = buf[i];
 		i++;
-		for (j = 0; j < ((PUCHAR)p->data)[0]; j++, i++)
+		for (j = 0; j < ((UCharPtr)p->data)[0]; j++, i++)
 		{
-			((PUCHAR)p->data)[j + 1] = buf[i];
+			((UCharPtr)p->data)[j + 1] = buf[i];
 		}
 	}
 	*bufofs = i;
 	return p;
 }
 
-void EmitLiData(PDATABLOCK p, long segnum, long* ofs)
+void EmitLiData(DatablockPtr p, long segnum, long* ofs)
 {
 	long i, j;
 
@@ -63,12 +63,12 @@ void EmitLiData(PDATABLOCK p, long segnum, long* ofs)
 		{
 			for (j = 0; j < p->blocks; j++)
 			{
-				EmitLiData(((PPDATABLOCK)p->data)[j], segnum, ofs);
+				EmitLiData(((DatablockPtrPtr)p->data)[j], segnum, ofs);
 			}
 		}
 		else
 		{
-			for (j = 0; j < ((PUCHAR)p->data)[0]; j++, (*ofs)++)
+			for (j = 0; j < ((UCharPtr)p->data)[0]; j++, (*ofs)++)
 			{
 				if ((*ofs) >= seglist[segnum]->length)
 				{
@@ -76,19 +76,19 @@ void EmitLiData(PDATABLOCK p, long segnum, long* ofs)
 				}
 				if (GetNbit(seglist[segnum]->datmask, *ofs))
 				{
-					if (seglist[segnum]->data[*ofs] != ((PUCHAR)p->data)[j + 1])
+					if (seglist[segnum]->data[*ofs] != ((UCharPtr)p->data)[j + 1])
 					{
 						ReportError(ERR_OVERWRITE);
 					}
 				}
-				seglist[segnum]->data[*ofs] = ((PUCHAR)p->data)[j + 1];
+				seglist[segnum]->data[*ofs] = ((UCharPtr)p->data)[j + 1];
 				SetNbit(seglist[segnum]->datmask, *ofs);
 			}
 		}
 	}
 }
 
-void RelocLIDATA(PDATABLOCK p, long* ofs, PRELOC r)
+void RelocLIDATA(DatablockPtr p, long* ofs, PRELOC r)
 {
 	long i, j;
 
@@ -98,7 +98,7 @@ void RelocLIDATA(PDATABLOCK p, long* ofs, PRELOC r)
 		{
 			for (j = 0; j < p->blocks; j++)
 			{
-				RelocLIDATA(((PPDATABLOCK)p->data)[j], ofs, r);
+				RelocLIDATA(((DatablockPtrPtr)p->data)[j], ofs, r);
 			}
 		}
 		else
@@ -115,13 +115,13 @@ void RelocLIDATA(PDATABLOCK p, long* ofs, PRELOC r)
 				memcpy(relocs[fixcount], r, sizeof(RELOC));
 				relocs[fixcount]->ofs = *ofs + j;
 				fixcount++;
-				*ofs += ((PUCHAR)p->data)[0];
+				*ofs += ((UCharPtr)p->data)[0];
 			}
 		}
 	}
 }
 
-void LoadFIXUP(PRELOC r, PUCHAR buf, long* p)
+void LoadFIXUP(PRELOC r, UCharPtr buf, long* p)
 {
 	long j;
 	int thrednum;
@@ -358,9 +358,9 @@ long loadmod(FILE* objfile)
 	long i, j, k;
 	long segnum, grpnum;
 	PRELOC r;
-	PPUBLIC pubdef;
-	PCHAR name, aliasName;
-	PSORTENTRY listnode;
+	PublicPtr pubdef;
+	CharPtr name, aliasName;
+	SortEntryPtr listnode;
 
 	modpos = 0;
 	done = 0;
@@ -392,8 +392,8 @@ long loadmod(FILE* objfile)
 				{
 					ReportError(ERR_EXTRA_HEADER);
 				}
-				modname = (PPCHAR)checkRealloc(modname, (nummods + 1) * sizeof(PCHAR));
-				modname[nummods] = (PCHAR)checkMalloc(buf[0] + 1);
+				modname = (CharPtrPtr)checkRealloc(modname, (nummods + 1) * sizeof(CharPtr));
+				modname[nummods] = (CharPtr)checkMalloc(buf[0] + 1);
 				for (i = 0; i < buf[0]; i++)
 				{
 					modname[nummods][i] = buf[i + 1];
@@ -428,8 +428,8 @@ long loadmod(FILE* objfile)
 					{
 						case COMENT_LIB_SPEC:
 						case COMENT_DEFLIB:
-							filename = (PPCHAR)checkRealloc(filename, (filecount + 1) * sizeof(PCHAR));
-							filename[filecount] = (PCHAR)checkMalloc(reclength - 1 + 4);
+							filename = (CharPtrPtr)checkRealloc(filename, (filecount + 1) * sizeof(CharPtr));
+							filename[filecount] = (CharPtr)checkMalloc(reclength - 1 + 4);
 							/* get filename */
 							for (i = 0; i < reclength - 2; i++)
 							{
@@ -464,7 +464,7 @@ long loadmod(FILE* objfile)
 									}
 									impdefs = (PIMPREC)checkRealloc(impdefs, (impcount + 1) * sizeof(IMPREC));
 									impdefs[impcount].flags = buf[3];
-									impdefs[impcount].int_name = (PCHAR)checkMalloc(buf[j] + 1);
+									impdefs[impcount].int_name = (CharPtr)checkMalloc(buf[j] + 1);
 									for (i = 0; i < buf[j]; i++)
 									{
 										impdefs[impcount].int_name[i] = buf[j + i + 1];
@@ -475,7 +475,7 @@ long loadmod(FILE* objfile)
 									{
 										strupr(impdefs[impcount].int_name);
 									}
-									impdefs[impcount].mod_name = (PCHAR)checkMalloc(buf[j] + 1);
+									impdefs[impcount].mod_name = (CharPtr)checkMalloc(buf[j] + 1);
 									for (i = 0; i < buf[j]; i++)
 									{
 										impdefs[impcount].mod_name[i] = buf[j + i + 1];
@@ -495,7 +495,7 @@ long loadmod(FILE* objfile)
 									{
 										if (buf[j])
 										{
-											impdefs[impcount].imp_name = (PCHAR)checkMalloc(buf[j] + 1);
+											impdefs[impcount].imp_name = (CharPtr)checkMalloc(buf[j] + 1);
 											for (i = 0; i < buf[j]; i++)
 											{
 												impdefs[impcount].imp_name[i] = buf[j + i + 1];
@@ -505,7 +505,7 @@ long loadmod(FILE* objfile)
 										}
 										else
 										{
-											impdefs[impcount].imp_name = (PCHAR)checkMalloc(strlen(impdefs[impcount].int_name) + 1);
+											impdefs[impcount].imp_name = (CharPtr)checkMalloc(strlen(impdefs[impcount].int_name) + 1);
 											strcpy(impdefs[impcount].imp_name, impdefs[impcount].int_name);
 										}
 									}
@@ -516,7 +516,7 @@ long loadmod(FILE* objfile)
 									j = 4;
 									expdefs[expcount].flags = buf[3];
 									expdefs[expcount].pubdef = NULL;
-									expdefs[expcount].exp_name = (PCHAR)checkMalloc(buf[j] + 1);
+									expdefs[expcount].exp_name = (CharPtr)checkMalloc(buf[j] + 1);
 									for (i = 0; i < buf[j]; i++)
 									{
 										expdefs[expcount].exp_name[i] = buf[j + i + 1];
@@ -529,7 +529,7 @@ long loadmod(FILE* objfile)
 									j += buf[j] + 1;
 									if (buf[j])
 									{
-										expdefs[expcount].int_name = (PCHAR)checkMalloc(buf[j] + 1);
+										expdefs[expcount].int_name = (CharPtr)checkMalloc(buf[j] + 1);
 										for (i = 0; i < buf[j]; i++)
 										{
 											expdefs[expcount].int_name[i] = buf[j + i + 1];
@@ -542,7 +542,7 @@ long loadmod(FILE* objfile)
 									}
 									else
 									{
-										expdefs[expcount].int_name = (PCHAR)checkMalloc(strlen(expdefs[expcount].exp_name) + 1);
+										expdefs[expcount].int_name = (CharPtr)checkMalloc(strlen(expdefs[expcount].exp_name) + 1);
 										strcpy(expdefs[expcount].int_name, expdefs[expcount].exp_name);
 									}
 									j += buf[j] + 1;
@@ -604,8 +604,8 @@ long loadmod(FILE* objfile)
 				j = 0;
 				while (j < reclength)
 				{
-					namelist = (PPCHAR)checkRealloc(namelist, (namecount + 1) * sizeof(PCHAR));
-					namelist[namecount] = (PCHAR)checkMalloc(buf[j] + 1);
+					namelist = (CharPtrPtr)checkRealloc(namelist, (namecount + 1) * sizeof(CharPtr));
+					namelist[namecount] = (CharPtr)checkMalloc(buf[j] + 1);
 					for (i = 0; i < buf[j]; i++)
 					{
 						namelist[namecount][i] = buf[j + i + 1];
@@ -621,8 +621,8 @@ long loadmod(FILE* objfile)
 				break;
 			case SEGDEF:
 			case SEGDEF32:
-				seglist = (PPSEG)checkRealloc(seglist, (segcount + 1) * sizeof(PSEG));
-				seglist[segcount] = (PSEG)checkMalloc(sizeof(SEG));
+				seglist = (SegmentPtrPtr)checkRealloc(seglist, (segcount + 1) * sizeof(SegmentPtr));
+				seglist[segcount] = (SegmentPtr)checkMalloc(sizeof(Segment));
 				seglist[segcount]->attr = buf[0];
 				j = 1;
 				if ((seglist[segcount]->attr & SEG_ALIGN) == SEG_ABS)
@@ -670,8 +670,8 @@ long loadmod(FILE* objfile)
 				}
 				if ((seglist[segcount]->attr & SEG_ALIGN) != SEG_ABS)
 				{
-					seglist[segcount]->data = (PUCHAR)checkMalloc(seglist[segcount]->length);
-					seglist[segcount]->datmask = (PUCHAR)checkMalloc((seglist[segcount]->length + 7) / 8);
+					seglist[segcount]->data = (UCharPtr)checkMalloc(seglist[segcount]->length);
+					seglist[segcount]->datmask = (UCharPtr)checkMalloc((seglist[segcount]->length + 7) / 8);
 					for (i = 0; i < (seglist[segcount]->length + 7) / 8; i++)
 					{
 						seglist[segcount]->datmask[i] = 0;
@@ -785,13 +785,13 @@ long loadmod(FILE* objfile)
 					prevofs += (buf[j] + (buf[j + 1] << 8)) << 16;
 					j += 2;
 				}
-				lidata = (PDATABLOCK)checkMalloc(sizeof(DATABLOCK));
-				lidata->data = checkMalloc(sizeof(PDATABLOCK) * (1024 / sizeof(DATABLOCK) + 1));
+				lidata = (DatablockPtr)checkMalloc(sizeof(Datablock));
+				lidata->data = checkMalloc(sizeof(DatablockPtr) * (1024 / sizeof(Datablock) + 1));
 				lidata->blocks = 0;
 				lidata->dataofs = j;
 				for (i = 0; j < reclength; i++)
 				{
-					((PPDATABLOCK)lidata->data)[i] = BuildLiData(&j);
+					((DatablockPtrPtr)lidata->data)[i] = BuildLiData(&j);
 				}
 				lidata->blocks = i;
 				lidata->count = 1;
@@ -821,11 +821,11 @@ long loadmod(FILE* objfile)
 				}
 				for (; j < reclength;)
 				{
-					pubdef = (PPUBLIC)checkMalloc(sizeof(PUBLIC));
+					pubdef = (PublicPtr)checkMalloc(sizeof(Public));
 					pubdef->aliasName = NULL;
 					pubdef->grpnum = grpnum;
 					pubdef->segnum = segnum;
-					name = (PCHAR)checkMalloc(buf[j] + 1);
+					name = (CharPtr)checkMalloc(buf[j] + 1);
 					k = buf[j];
 					j++;
 					for (i = 0; i < k; i++)
@@ -858,15 +858,15 @@ long loadmod(FILE* objfile)
 					{
 						for (i = 0; i < listnode->count; i++)
 						{
-							if (((PPUBLIC)listnode->object[i])->modnum == pubdef->modnum)
+							if (((PublicPtr)listnode->object[i])->modnum == pubdef->modnum)
 							{
-								if (!((PPUBLIC)listnode->object[i])->aliasName)
+								if (!((PublicPtr)listnode->object[i])->aliasName)
 								{
 									printf("Duplicate public symbol %s\n", name);
 									exit(1);
 								}
-								free(((PPUBLIC)listnode->object[i])->aliasName);
-								(*((PPUBLIC)listnode->object[i])) = (*pubdef);
+								free(((PublicPtr)listnode->object[i])->aliasName);
+								(*((PublicPtr)listnode->object[i])) = (*pubdef);
 								pubdef = NULL;
 								break;
 							}
@@ -885,7 +885,7 @@ long loadmod(FILE* objfile)
 				for (j = 0; j < reclength;)
 				{
 					externs = (PEXTREC)checkRealloc(externs, (extcount + 1) * sizeof(EXTREC));
-					externs[extcount].name = (PCHAR)checkMalloc(buf[j] + 1);
+					externs[extcount].name = (CharPtr)checkMalloc(buf[j] + 1);
 					k = buf[j];
 					j++;
 					for (i = 0; i < k; i++, j++)
@@ -1103,7 +1103,7 @@ long loadmod(FILE* objfile)
 				for (j = 0; j < reclength;)
 				{
 					externs = (PEXTREC)checkRealloc(externs, (extcount + 1) * sizeof(EXTREC));
-					externs[extcount].name = (PCHAR)checkMalloc(buf[j] + 1);
+					externs[extcount].name = (CharPtr)checkMalloc(buf[j] + 1);
 					k = buf[j];
 					j++;
 					for (i = 0; i < k; i++, j++)
@@ -1207,7 +1207,7 @@ long loadmod(FILE* objfile)
 			case ALIAS:
 				printf("ALIAS record\n");
 				j = 0;
-				name = (PCHAR)checkMalloc(buf[j] + 1);
+				name = (CharPtr)checkMalloc(buf[j] + 1);
 				k = buf[j];
 				j++;
 				for (i = 0; i < k; i++)
@@ -1221,7 +1221,7 @@ long loadmod(FILE* objfile)
 					strupr(name);
 				}
 				printf("ALIAS name:%s\n", name);
-				aliasName = (PCHAR)checkMalloc(buf[j] + 1);
+				aliasName = (CharPtr)checkMalloc(buf[j] + 1);
 				k = buf[j];
 				j++;
 				for (i = 0; i < k; i++)
@@ -1245,7 +1245,7 @@ long loadmod(FILE* objfile)
 					printf("No Alias name specified for %s\n", name);
 					exit(1);
 				}
-				pubdef = (PPUBLIC)checkMalloc(sizeof(PUBLIC));
+				pubdef = (PublicPtr)checkMalloc(sizeof(Public));
 				pubdef->segnum = -1;
 				pubdef->grpnum = -1;
 				pubdef->typenum = -1;
@@ -1256,11 +1256,11 @@ long loadmod(FILE* objfile)
 				{
 					for (i = 0; i < listnode->count; i++)
 					{
-						if (((PPUBLIC)listnode->object[i])->modnum == pubdef->modnum)
+						if (((PublicPtr)listnode->object[i])->modnum == pubdef->modnum)
 						{
-							if (((PPUBLIC)listnode->object[i])->aliasName)
+							if (((PublicPtr)listnode->object[i])->aliasName)
 							{
-								printf("Warning, two aliases for %s, using %s\n", name, ((PPUBLIC)listnode->object[i])->aliasName);
+								printf("Warning, two aliases for %s, using %s\n", name, ((PublicPtr)listnode->object[i])->aliasName);
 							}
 							free(pubdef->aliasName);
 							free(pubdef);
@@ -1288,19 +1288,19 @@ long loadmod(FILE* objfile)
 	return 0;
 }
 
-void loadlib(FILE* libfile, PCHAR libname)
+void loadlib(FILE* libfile, CharPtr libname)
 {
 	unsigned int i, j, k, n;
-	PCHAR name;
+	CharPtr name;
 	unsigned short modpage;
 	PLIBFILE p;
-	UINT numsyms;
-	PSORTENTRY symlist;
+	UInt numsyms;
+	SortEntryPtr symlist;
 
 	libfiles = (PLIBFILE)checkRealloc(libfiles, (libcount + 1) * sizeof(LIBFILE));
 	p = &libfiles[libcount];
 
-	p->filename = (PCHAR)checkMalloc(strlen(libname) + 1);
+	p->filename = (CharPtr)checkMalloc(strlen(libname) + 1);
 	strcpy(p->filename, libname);
 
 	if (fread(buf, 1, 3, libfile) != 3)
@@ -1322,7 +1322,7 @@ void loadlib(FILE* libfile, PCHAR libname)
 
 	fseek(libfile, p->dicstart, SEEK_SET);
 
-	symlist = (PSORTENTRY)checkMalloc(p->numdicpages * 37 * sizeof(SORTENTRY));
+	symlist = (SortEntryPtr)checkMalloc(p->numdicpages * 37 * sizeof(SortEntry));
 
 	numsyms = 0;
 	for (i = 0; i < p->numdicpages; i++)
@@ -1337,7 +1337,7 @@ void loadlib(FILE* libfile, PCHAR libname)
 			k = buf[j] * 2;
 			if (k)
 			{
-				name = (PCHAR)checkMalloc(buf[k] + 1);
+				name = (CharPtr)checkMalloc(buf[k] + 1);
 				for (n = 0; n < buf[k]; n++)
 				{
 					name[n] = buf[n + k + 1];
@@ -1363,19 +1363,19 @@ void loadlib(FILE* libfile, PCHAR libname)
 		}
 	}
 
-	qsort(symlist, numsyms, sizeof(SORTENTRY), sortCompare);
+	qsort(symlist, numsyms, sizeof(SortEntry), sortCompare);
 	p->symbols = symlist;
 	p->numsyms = numsyms;
 	p->modsloaded = 0;
-	p->modlist = (UINT*)checkMalloc(sizeof(unsigned short) * numsyms);
+	p->modlist = (UInt*)checkMalloc(sizeof(unsigned short) * numsyms);
 	libcount++;
 }
 
-void loadlibmod(UINT libnum, UINT modpage)
+void loadlibmod(UInt libnum, UInt modpage)
 {
 	PLIBFILE p;
 	FILE* libfile;
-	UINT i;
+	UInt i;
 
 	p = &libfiles[libnum];
 
@@ -1415,10 +1415,10 @@ void loadres(FILE* f)
 	unsigned char buf[32];
 	static unsigned char buf2[32] = { 0,0,0,0,0x20,0,0,0,0xff,0xff,0,0,0xff,0xff,0,0,
 				   0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
-	UINT i, j;
-	UINT hdrsize, datsize;
-	PUCHAR data;
-	PUCHAR hdr;
+	UInt i, j;
+	UInt hdrsize, datsize;
+	UCharPtr data;
+	UCharPtr hdr;
 
 	if (fread(buf, 1, 32, f) != 32)
 	{
@@ -1452,7 +1452,7 @@ void loadres(FILE* f)
 			printf("Invalid resource file, bad header\n");
 			exit(1);
 		}
-		hdr = (PUCHAR)checkMalloc(hdrsize);
+		hdr = (UCharPtr)checkMalloc(hdrsize);
 		if (fread(hdr, 1, hdrsize - 8, f) != (hdrsize - 8))
 		{
 			printf("Invalid resource file, missing header\n");
@@ -1466,7 +1466,7 @@ void loadres(FILE* f)
 		}
 		if (datsize)
 		{
-			data = (PUCHAR)checkMalloc(datsize);
+			data = (UCharPtr)checkMalloc(datsize);
 			if (fread(data, 1, datsize, f) != datsize)
 			{
 				printf("Invalid resource file, no data\n");
@@ -1493,7 +1493,7 @@ void loadres(FILE* f)
 				printf("Invalid resource file, bad name\n");
 				exit(1);
 			}
-			resource[rescount].typeName = (PUCHAR)checkMalloc(j - i + 2);
+			resource[rescount].typeName = (UCharPtr)checkMalloc(j - i + 2);
 			memcpy(resource[rescount].typeName, hdr + i, j - i + 2);
 			i = j + 5;
 			i &= 0xfffffffc;
@@ -1517,7 +1517,7 @@ void loadres(FILE* f)
 				printf("Invalid resource file,bad name (2)\n");
 				exit(1);
 			}
-			resource[rescount].name = (PUCHAR)checkMalloc(j - i + 2);
+			resource[rescount].name = (UCharPtr)checkMalloc(j - i + 2);
 			memcpy(resource[rescount].name, hdr + i, j - i + 2);
 			i = j + 5;
 			i &= 0xfffffffc;
