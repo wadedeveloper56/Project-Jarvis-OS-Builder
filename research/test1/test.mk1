@@ -1,0 +1,13 @@
+!define BLANK ""
+C:\projects\test1\test.obj : C:\projects\test1\test.c .AUTODEPEND
+ @C:
+ cd C:\projects\test1
+ *wcc test.c -i="C:\WATCOM/h" -w4 -e25 -zq -od -d2 -bt=dos -fo=.obj -ml
+
+C:\projects\test1\test.exe : C:\projects\test1\test.obj .AUTODEPEND
+ @C:
+ cd C:\projects\test1
+ @%write test.lk1 FIL test.obj
+ @%append test.lk1 
+ *wlink name test d all sys dos op m op maxe=25 op q op symf @test.lk1
+
