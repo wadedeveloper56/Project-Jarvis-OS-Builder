@@ -152,6 +152,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ALink.cpp" />
+    <ClCompile Include="Coff.cpp" />
+    <ClCompile Include="CoffLib.cpp" />
+    <ClCompile Include="Combine.cpp" />
+    <ClCompile Include="Globals.cpp" />
+    <ClCompile Include="ObjLoad.cpp" />
+    <ClCompile Include="Output.cpp" />
+    <ClCompile Include="Util.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ALink.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
