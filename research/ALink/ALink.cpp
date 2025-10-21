@@ -13,14 +13,13 @@ void processArgs(int argc, char** argv)
 	bool gotbase = false, gotfalign = false, gotoalign = false, gotsubsys = false;
 	bool gotstack = false, gotstackcommit = false, gotheap = false, gotheapcommit = false;
 	bool gotsubsysver = false, gotosver = false;
-	char* p;// , * q;
+	char* p;
 	int c;
 	char** newargs;
 	FILE* argFile;
 
 	for (i = 1; i < argc; i++)
 	{
-		/* cater for response files */
 		if (argv[i][0] == '@')
 		{
 			argFile = fopen(argv[i] + 1, "rt");
@@ -38,30 +37,26 @@ void processArgs(int argc, char** argv)
 			j = 0;
 			while ((c = fgetc(argFile)) != EOF)
 			{
-				if (c == ';') /* allow comments, starting with ; */
+				if (c == ';')
 				{
-					while (((c = fgetc(argFile)) != EOF) && (c != '\n')); /* loop until end of line */
-					/* continue main loop */
+					while (((c = fgetc(argFile)) != EOF) && (c != '\n'));
 					continue;
 				}
 				if (isspace(c))
 				{
-					if (p) /* if we've got an argument, add to list */
+					if (p)
 					{
 						newargs = (char**)checkRealloc(newargs, (argc + 1) * sizeof(char*));
 						newargs[argc] = p;
 						argc++;
-						/* clear pointer and length indicator */
 						p = NULL;
 						j = 0;
 					}
-					/* and continue */
 					continue;
 				}
 				if (c == '"')
 				{
-					/* quoted strings */
-					while (((c = fgetc(argFile)) != EOF) && (c != '"')) /* loop until end of string */
+					while (((c = fgetc(argFile)) != EOF) && (c != '"'))
 					{
 						if (c == '\\')
 						{
@@ -84,10 +79,8 @@ void processArgs(int argc, char** argv)
 						exit(1);
 					}
 
-					/* continue main loop */
 					continue;
 				}
-				/* if no special case, then add to string */
 				p = (char*)checkRealloc(p, j + 2);
 				p[j] = c;
 				j++;
@@ -186,7 +179,7 @@ void processArgs(int argc, char** argv)
 								i++;
 								if (!outname)
 								{
-									outname = (CharPtr)checkMalloc(strlen(argv[i]) + 1 + 4); /* space for added .EXT if none given */
+									outname = (CharPtr)checkMalloc(strlen(argv[i]) + 1 + 4);
 									strcpy(outname, argv[i]);
 								}
 								else
@@ -246,7 +239,7 @@ void processArgs(int argc, char** argv)
 								{
 									i++;
 									setoalign = strtoul(argv[i], &p, 0);
-									if (p[0]) /* if not at end of arg */
+									if (p[0])
 									{
 										printf("Bad object alignment\n");
 										exit(1);
@@ -309,7 +302,6 @@ void processArgs(int argc, char** argv)
 							j = strlen(argv[i]);
 							if (argv[i][j - 1] != PATH_CHAR)
 							{
-								/* append a path separator if not present */
 								libPath[libPathCount - 1] = (char*)checkMalloc(j + 2);
 								strcpy(libPath[libPathCount - 1], argv[i]);
 								libPath[libPathCount - 1][j] = PATH_CHAR;
@@ -343,7 +335,7 @@ void processArgs(int argc, char** argv)
 						{
 							i++;
 							setheap = strtoul(argv[i], &p, 0);
-							if (p[0]) /* if not at end of arg */
+							if (p[0])
 							{
 								printf("Bad heap size\n");
 								exit(1);
@@ -363,7 +355,7 @@ void processArgs(int argc, char** argv)
 						{
 							i++;
 							setheapcommit = strtoul(argv[i], &p, 0);
-							if (p[0]) /* if not at end of arg */
+							if (p[0])
 							{
 								printf("Bad heap commit size\n");
 								exit(1);
@@ -385,7 +377,7 @@ void processArgs(int argc, char** argv)
 						{
 							i++;
 							setbase = strtoul(argv[i], &p, 0);
-							if (p[0]) /* if not at end of arg */
+							if (p[0])
 							{
 								printf("Bad image base\n");
 								exit(1);
@@ -484,7 +476,7 @@ void processArgs(int argc, char** argv)
 						{
 							i++;
 							setstack = strtoul(argv[i], &p, 0);
-							if (p[0]) /* if not at end of arg */
+							if (p[0])
 							{
 								printf("Bad stack size\n");
 								exit(1);
@@ -504,7 +496,7 @@ void processArgs(int argc, char** argv)
 						{
 							i++;
 							setstackcommit = strtoul(argv[i], &p, 0);
-							if (p[0]) /* if not at end of arg */
+							if (p[0])
 							{
 								printf("Bad stack commit size\n");
 								exit(1);
@@ -545,7 +537,7 @@ void processArgs(int argc, char** argv)
 						{
 							i++;
 							setfalign = strtoul(argv[i], &p, 0);
-							if (p[0]) /* if not at end of arg */
+							if (p[0])
 							{
 								printf("Bad file alignment\n");
 								exit(1);
@@ -610,7 +602,7 @@ void processArgs(int argc, char** argv)
 		else
 		{
 			filename = (CharPtrPtr)checkRealloc(filename, (filecount + 1) * sizeof(CharPtr));
-			filename[filecount] = (char *)checkMalloc(strlen(argv[i]) + 1);
+			filename[filecount] = (char*)checkMalloc(strlen(argv[i]) + 1);
 			memcpy(filename[filecount], argv[i], strlen(argv[i]) + 1);
 			for (j = strlen(filename[filecount]);
 				j && (filename[filecount][j] != '.') &&
@@ -619,7 +611,6 @@ void processArgs(int argc, char** argv)
 			if ((j < 0) || (filename[filecount][j] != '.'))
 			{
 				j = strlen(filename[filecount]);
-				/* add default extension if none specified */
 				filename[filecount] = (CharPtr)checkRealloc(filename[filecount], strlen(argv[i]) + 5);
 				strcpy(filename[filecount] + j, DEFAULT_EXTENSION);
 			}
@@ -753,7 +744,6 @@ void processArgs(int argc, char** argv)
 void matchExterns()
 {
 	long i, j, k, old_nummods;
-	//int n;
 	SortEntryPtr listnode;
 	CharPtr name;
 	PublicPtr pubdef;
@@ -767,7 +757,6 @@ void matchExterns()
 			{
 				for (k = 0; k < listnode->count; k++)
 				{
-					/* exports can only match global publics */
 					if (((PublicPtr)listnode->object[k])->modnum == 0)
 					{
 						expdefs[i].pubdef = (PublicPtr)listnode->object[k];
@@ -778,16 +767,12 @@ void matchExterns()
 		}
 		for (i = 0; i < extcount; i++)
 		{
-			/* skip if we've already matched a public symbol */
-			/* as they override all others */
 			if (externs[i].flags == EXT_MATCHEDPUBLIC) continue;
 			externs[i].flags = EXT_NOMATCH;
 			if (listnode = binarySearch(publics, pubcount, externs[i].name))
 			{
 				for (k = 0; k < listnode->count; k++)
 				{
-					/* local publics can only match externs in same module */
-					/* and global publics can only match global externs */
 					if (((PublicPtr)listnode->object[k])->modnum == externs[i].modnum)
 					{
 						externs[i].pubdef = (PublicPtr)listnode->object[k];
@@ -882,7 +867,6 @@ void matchExterns()
 						if ((((PublicPtr)listnode->object[j])->modnum == pubdef->modnum)
 							&& !((PublicPtr)listnode->object[j])->aliasName)
 						{
-							/* if we've found a match for the alias, then kill the alias */
 							free(pubdef->aliasName);
 							(*pubdef) = (*((PublicPtr)listnode->object[j]));
 							break;
@@ -914,7 +898,7 @@ void matchExterns()
 
 void matchComDefs()
 {
-	int i, j;// , k;
+	int i, j;
 	int comseg;
 	int comfarseg;
 	SortEntryPtr listnode;
@@ -953,8 +937,6 @@ void matchComDefs()
 		{
 			for (j = 0; j < listnode->count; j++)
 			{
-				/* local publics can only match externs in same module */
-				/* and global publics can only match global externs */
 				if ((((PublicPtr)listnode->object[j])->modnum == comdefs[i]->modnum)
 					&& !((PublicPtr)listnode->object[j])->aliasName)
 				{
@@ -990,9 +972,7 @@ void matchComDefs()
 		if (grplist[i]->nameindex < 0) continue;
 		if (!strcmp("DGROUP", namelist[grplist[i]->nameindex]))
 		{
-			if (grplist[i]->numsegs == 0) continue; /* don't add to an emtpy group */
-			/* because empty groups are special */
-			/* else add to group */
+			if (grplist[i]->numsegs == 0) continue;
 			grplist[i]->segindex[grplist[i]->numsegs] = comseg;
 			grplist[i]->numsegs++;
 			break;
@@ -1127,7 +1107,6 @@ void matchComDefs()
 		{
 			for (j = 0; j < listnode->count; j++)
 			{
-				/* global publics only can match exports */
 				if (((PublicPtr)listnode->object[j])->modnum == 0)
 				{
 					expdefs[i].pubdef = (PublicPtr)listnode->object[j];
@@ -1143,7 +1122,6 @@ void matchComDefs()
 		{
 			for (j = 0; j < listnode->count; j++)
 			{
-				/* global publics only can match exports */
 				if (((PublicPtr)(listnode->object[j]))->modnum == externs[i].modnum)
 				{
 					externs[i].pubdef = (PublicPtr)(listnode->object[j]);
@@ -1188,12 +1166,10 @@ void sortSegments()
 					printf("Error - group %s contains non-existent segment\n", namelist[grplist[i]->nameindex]);
 					exit(1);
 				}
-				/* don't add removed sections */
 				if (seglist[k]->winFlags & WINF_REMOVE)
 				{
 					continue;
 				}
-				/* add non-absolute segment */
 				if ((seglist[k]->attr & SEG_ALIGN) != SEG_ABS)
 				{
 					switch (seglist[k]->attr & SEG_ALIGN)
@@ -1267,12 +1243,10 @@ void sortSegments()
 	{
 		if (seglist[i])
 		{
-			/* don't add removed sections */
 			if (seglist[i]->winFlags & WINF_REMOVE)
 			{
 				continue;
 			}
-			/* add non-absolute segment, not already dealt with */
 			if (((seglist[i]->attr & SEG_ALIGN) != SEG_ABS) &&
 				!seglist[i]->absframe)
 			{
@@ -1324,7 +1298,6 @@ void sortSegments()
 			}
 		}
 	}
-	/* build size of last segment in output list */
 	if (outcount)
 	{
 		outlist[outcount - 1]->virtualSize =
@@ -1347,7 +1320,6 @@ void loadFiles()
 		afile = fopen(filename[i], "rb");
 		if (!strchr(filename[i], PATH_CHAR))
 		{
-			/* if no path specified, search library path list */
 			for (j = 0; !afile && j < libPathCount; j++)
 			{
 				name = (char*)checkMalloc(strlen(libPath[j]) + strlen(filename[i]) + 1);
@@ -1551,8 +1523,6 @@ int main(int argc, char* argv[])
 	long i, j;
 	int isend;
 	char* libList;
-	//PublicPtr q;
-
 	printf("ALINK v1.6 (C) Copyright 1998-9 Anthony A.J. Williams.\n");
 	printf("All Rights Reserved\n\n");
 
@@ -1689,15 +1659,13 @@ int main(int argc, char* argv[])
 		{
 			printf("Warning, overriding entry point from Command Line\n");
 		}
-		/* define an external reference for entry point */
-		externs = (PEXTREC)checkRealloc(externs, (extcount + 1) * sizeof(EXTREC));
+		externs = (ExtRecPtr)checkRealloc(externs, (extcount + 1) * sizeof(ExtRec));
 		externs[extcount].name = entryPoint;
 		externs[extcount].typenum = -1;
 		externs[extcount].pubdef = NULL;
 		externs[extcount].flags = EXT_NOMATCH;
 		externs[extcount].modnum = 0;
 
-		/* point start address to this external */
 		startaddr.ftype = REL_EXTDISP;
 		startaddr.frame = extcount;
 		startaddr.ttype = REL_EXTONLY;

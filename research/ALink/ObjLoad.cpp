@@ -462,7 +462,7 @@ long loadmod(FILE* objfile)
 									{
 										ReportError(ERR_INVALID_COMENT);
 									}
-									impdefs = (PIMPREC)checkRealloc(impdefs, (impcount + 1) * sizeof(IMPREC));
+									impdefs = (ImpRecPtr)checkRealloc(impdefs, (impcount + 1) * sizeof(ImpRec));
 									impdefs[impcount].flags = buf[3];
 									impdefs[impcount].int_name = (CharPtr)checkMalloc(buf[j] + 1);
 									for (i = 0; i < buf[j]; i++)
@@ -884,7 +884,7 @@ long loadmod(FILE* objfile)
 			case EXTDEF:
 				for (j = 0; j < reclength;)
 				{
-					externs = (PEXTREC)checkRealloc(externs, (extcount + 1) * sizeof(EXTREC));
+					externs = (ExtRecPtr)checkRealloc(externs, (extcount + 1) * sizeof(ExtRec));
 					externs[extcount].name = (CharPtr)checkMalloc(buf[j] + 1);
 					k = buf[j];
 					j++;
@@ -1102,7 +1102,7 @@ long loadmod(FILE* objfile)
 			case COMDEF:
 				for (j = 0; j < reclength;)
 				{
-					externs = (PEXTREC)checkRealloc(externs, (extcount + 1) * sizeof(EXTREC));
+					externs = (ExtRecPtr)checkRealloc(externs, (extcount + 1) * sizeof(ExtRec));
 					externs[extcount].name = (CharPtr)checkMalloc(buf[j] + 1);
 					k = buf[j];
 					j++;

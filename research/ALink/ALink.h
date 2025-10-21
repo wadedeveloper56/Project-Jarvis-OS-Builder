@@ -397,16 +397,16 @@ typedef struct _Public {
 	CharPtr aliasName;
 } Public, * PublicPtr, ** PublicPtrPtr;
 
-typedef struct __extdef {
+typedef struct _ExtRec {
 	CharPtr name;
 	long typenum;
 	PublicPtr pubdef;
 	long impnum;
 	long flags;
 	UInt modnum;
-} EXTREC, * PEXTREC, ** PPEXTREC;
+} ExtRec, * ExtRecPtr, ** ExtRecPtrPtr;
 
-typedef struct __imprec {
+typedef struct _ImpRec {
 	CharPtr int_name;
 	CharPtr mod_name;
 	CharPtr imp_name;
@@ -414,7 +414,7 @@ typedef struct __imprec {
 	char flags;
 	long segnum;
 	UInt ofs;
-} IMPREC, * PIMPREC, ** PPIMPREC;
+} ImpRec, * ImpRecPtr, ** ImpRecPtrPtr;
 
 typedef struct __exprec {
 	CharPtr int_name;
@@ -534,10 +534,10 @@ extern SegmentPtrPtr seglist;
 extern SegmentPtrPtr outlist;
 extern PPGRP grplist;
 extern SortEntryPtr publics;
-extern PEXTREC externs;
+extern ExtRecPtr externs;
 extern PPCOMREC comdefs;
 extern PPRELOC relocs;
-extern PIMPREC impdefs;
+extern ImpRecPtr impdefs;
 extern PEXPREC expdefs;
 extern PLIBFILE libfiles;
 extern PRESOURCE resource;

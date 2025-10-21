@@ -14,3 +14,6 @@
 research/test1/test.exe
 research/test1/test.err
 /research/JWasm/bin
+/research/pedump3/Debug
+/research/pedump3/Release
+/research/pedump3/.vs
