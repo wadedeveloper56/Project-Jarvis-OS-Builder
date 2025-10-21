@@ -1,7 +1,56 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\projects\\OSDev\\experiment\\JWasm\\",
-  "Documents": [],
+  "WorkspaceRootPath": "C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{2A6BF63C-A435-409C-9882-18C5C25EDBCC}|JWasm\\JWasm.vcxproj|C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWasm\\types.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{2A6BF63C-A435-409C-9882-18C5C25EDBCC}|JWasm\\JWasm.vcxproj|solutionrelative:JWasm\\types.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2A6BF63C-A435-409C-9882-18C5C25EDBCC}|JWasm\\JWasm.vcxproj|C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWasm\\proc.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{2A6BF63C-A435-409C-9882-18C5C25EDBCC}|JWasm\\JWasm.vcxproj|solutionrelative:JWasm\\proc.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2A6BF63C-A435-409C-9882-18C5C25EDBCC}|JWasm\\JWasm.vcxproj|C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWasm\\expreval.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{2A6BF63C-A435-409C-9882-18C5C25EDBCC}|JWasm\\JWasm.vcxproj|solutionrelative:JWasm\\expreval.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2A6BF63C-A435-409C-9882-18C5C25EDBCC}|JWasm\\JWasm.vcxproj|C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWasm\\bin.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{2A6BF63C-A435-409C-9882-18C5C25EDBCC}|JWasm\\JWasm.vcxproj|solutionrelative:JWasm\\bin.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2A6BF63C-A435-409C-9882-18C5C25EDBCC}|JWasm\\JWasm.vcxproj|C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWasm\\coff.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{2A6BF63C-A435-409C-9882-18C5C25EDBCC}|JWasm\\JWasm.vcxproj|solutionrelative:JWasm\\coff.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2A6BF63C-A435-409C-9882-18C5C25EDBCC}|JWasm\\JWasm.vcxproj|C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWasm\\input.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{2A6BF63C-A435-409C-9882-18C5C25EDBCC}|JWasm\\JWasm.vcxproj|solutionrelative:JWasm\\input.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2A6BF63C-A435-409C-9882-18C5C25EDBCC}|JWasm\\JWasm.vcxproj|C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWasm\\dbgcv.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{2A6BF63C-A435-409C-9882-18C5C25EDBCC}|JWasm\\JWasm.vcxproj|solutionrelative:JWasm\\dbgcv.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2A6BF63C-A435-409C-9882-18C5C25EDBCC}|JWasm\\JWasm.vcxproj|C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWasm\\expans.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{2A6BF63C-A435-409C-9882-18C5C25EDBCC}|JWasm\\JWasm.vcxproj|solutionrelative:JWasm\\expans.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2A6BF63C-A435-409C-9882-18C5C25EDBCC}|JWasm\\JWasm.vcxproj|C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWasm\\symbols.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{2A6BF63C-A435-409C-9882-18C5C25EDBCC}|JWasm\\JWasm.vcxproj|solutionrelative:JWasm\\symbols.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2A6BF63C-A435-409C-9882-18C5C25EDBCC}|JWasm\\JWasm.vcxproj|C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWasm\\tokenize.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{2A6BF63C-A435-409C-9882-18C5C25EDBCC}|JWasm\\JWasm.vcxproj|solutionrelative:JWasm\\tokenize.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2A6BF63C-A435-409C-9882-18C5C25EDBCC}|JWasm\\JWasm.vcxproj|C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWasm\\loop.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{2A6BF63C-A435-409C-9882-18C5C25EDBCC}|JWasm\\JWasm.vcxproj|solutionrelative:JWasm\\loop.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2A6BF63C-A435-409C-9882-18C5C25EDBCC}|JWasm\\JWasm.vcxproj|C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWasm\\omf.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{2A6BF63C-A435-409C-9882-18C5C25EDBCC}|JWasm\\JWasm.vcxproj|solutionrelative:JWasm\\omf.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,7 +58,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -18,6 +67,162 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "types.c",
+              "DocumentMoniker": "C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWasm\\types.c",
+              "RelativeDocumentMoniker": "JWasm\\types.c",
+              "ToolTip": "C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWasm\\types.c*",
+              "RelativeToolTip": "JWasm\\types.c*",
+              "ViewState": "AgIAAKoEAAAAAAAAAAAtwLYEAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2025-10-21T16:29:18.97Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "proc.c",
+              "DocumentMoniker": "C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWasm\\proc.c",
+              "RelativeDocumentMoniker": "JWasm\\proc.c",
+              "ToolTip": "C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWasm\\proc.c",
+              "RelativeToolTip": "JWasm\\proc.c",
+              "ViewState": "AgIAANEJAAAAAAAAAAAYwN0JAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2025-10-21T16:28:43.223Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "expreval.c",
+              "DocumentMoniker": "C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWasm\\expreval.c",
+              "RelativeDocumentMoniker": "JWasm\\expreval.c",
+              "ToolTip": "C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWasm\\expreval.c",
+              "RelativeToolTip": "JWasm\\expreval.c",
+              "ViewState": "AgIAACAJAAAAAAAAAAAYwCwJAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2025-10-21T16:25:35.642Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "bin.c",
+              "DocumentMoniker": "C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWasm\\bin.c",
+              "RelativeDocumentMoniker": "JWasm\\bin.c",
+              "ToolTip": "C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWasm\\bin.c",
+              "RelativeToolTip": "JWasm\\bin.c",
+              "ViewState": "AgIAANgEAAAAAAAAAAAYwOEEAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2025-10-21T16:25:16.718Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "input.c",
+              "DocumentMoniker": "C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWasm\\input.c",
+              "RelativeDocumentMoniker": "JWasm\\input.c",
+              "ToolTip": "C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWasm\\input.c",
+              "RelativeToolTip": "JWasm\\input.c",
+              "ViewState": "AgIAAEMDAAAAAAAAAAAYwFIDAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2025-10-21T16:22:15.015Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "coff.c",
+              "DocumentMoniker": "C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWasm\\coff.c",
+              "RelativeDocumentMoniker": "JWasm\\coff.c",
+              "ToolTip": "C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWasm\\coff.c",
+              "RelativeToolTip": "JWasm\\coff.c",
+              "ViewState": "AgIAACUDAAAAAAAAAAAtwDEDAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2025-10-21T16:21:10.949Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "dbgcv.c",
+              "DocumentMoniker": "C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWasm\\dbgcv.c",
+              "RelativeDocumentMoniker": "JWasm\\dbgcv.c",
+              "ToolTip": "C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWasm\\dbgcv.c",
+              "RelativeToolTip": "JWasm\\dbgcv.c",
+              "ViewState": "AgIAAJMCAAAAAAAAAAAtwKACAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2025-10-21T16:20:02.593Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "expans.c",
+              "DocumentMoniker": "C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWasm\\expans.c",
+              "RelativeDocumentMoniker": "JWasm\\expans.c",
+              "ToolTip": "C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWasm\\expans.c",
+              "RelativeToolTip": "JWasm\\expans.c",
+              "ViewState": "AgIAAHcAAAAAAAAAAAAtwIMAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2025-10-21T16:18:51.019Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "symbols.c",
+              "DocumentMoniker": "C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWasm\\symbols.c",
+              "RelativeDocumentMoniker": "JWasm\\symbols.c",
+              "ToolTip": "C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWasm\\symbols.c",
+              "RelativeToolTip": "JWasm\\symbols.c",
+              "ViewState": "AgIAAEQCAAAAAAAAAAAtwFACAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2025-10-21T16:18:27.865Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "tokenize.c",
+              "DocumentMoniker": "C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWasm\\tokenize.c",
+              "RelativeDocumentMoniker": "JWasm\\tokenize.c",
+              "ToolTip": "C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWasm\\tokenize.c",
+              "RelativeToolTip": "JWasm\\tokenize.c",
+              "ViewState": "AgIAAAsCAAAAAAAAAAAtwBcCAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2025-10-21T16:18:02.781Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "loop.c",
+              "DocumentMoniker": "C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWasm\\loop.c",
+              "RelativeDocumentMoniker": "JWasm\\loop.c",
+              "ToolTip": "C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWasm\\loop.c",
+              "RelativeToolTip": "JWasm\\loop.c",
+              "ViewState": "AgIAABIAAAAAAAAAAAAtwCAAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2025-10-21T16:16:56.958Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "omf.c",
+              "DocumentMoniker": "C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWasm\\omf.c",
+              "RelativeDocumentMoniker": "JWasm\\omf.c",
+              "ToolTip": "C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWasm\\omf.c",
+              "RelativeToolTip": "JWasm\\omf.c",
+              "ViewState": "AgIAAFoFAAAAAAAAAAAtwGcFAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2025-10-21T16:16:19.041Z",
+              "EditorCaption": ""
             }
           ]
         }

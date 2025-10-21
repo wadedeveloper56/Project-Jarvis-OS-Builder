@@ -199,6 +199,7 @@ int main(int argc, char* argv[])
 		{
 			printf("lib file\n");
 			LIBFilePtr data = loadLibFile(fileType, buffer, fileSize);
+			DumpLibFile(data);
 			break;
 		}
 		default:

@@ -669,3 +669,96 @@ void DumpLoadConfig64Directory(PIMAGE_LOAD_CONFIG_DIRECTORY64 load64)
 		printf("%016llX UmaFunctionPointers\n", load64->UmaFunctionPointers);
 	}
 }
+
+void DumpArchiveMemberHeader(PIMAGE_ARCHIVE_MEMBER_HEADER pArchHeader)
+{
+	printf("Archive Member Header:\n");
+	printf("  Name:     %.16s\n", pArchHeader->Name);
+	char szDateAsLong[64];
+	sprintf(szDateAsLong, "%.12s", pArchHeader->Date);
+	time_t dateAsLong = atol(szDateAsLong);
+
+	printf("  Date:     %.12s -> %s", pArchHeader->Date, get_ctime_stg(&dateAsLong));
+	printf("  UserID:   %.6s\n", pArchHeader->UserID);
+	printf("  GroupID:  %.6s\n", pArchHeader->GroupID);
+	printf("  Mode:     %.8s\n", pArchHeader->Mode);
+	printf("  Size:     %.10s\n", pArchHeader->Size);
+}
+
+void DumpFirstLinkerMember(vector<LIBFileLinkerMembersPtr> *list)
+{
+	printf("First Linker Member:\n");
+	printf("  Symbols:         %08lX\n", list->size());
+	printf("  MbrOffs   Name\n  --------  ----\n");
+	for(LIBFileLinkerMembersPtr ptr : *list)
+	{
+		printf("  %08lX  %s\n", ptr->offset, ptr->pSymbolName);
+	}
+}
+
+void DumpSecondLinkerMember(vector<LIBFileLinkerMembersPtr>* list)
+{
+	printf("Second Linker Member:\n");
+#ifdef _WIN64
+	printf("  Symbols:         %08llX\n", list->size());
+#else
+	printf("  Symbols:         %08lX\n", list->size());
+#endif
+	printf("  MbrOffs   Name\n  --------  ----\n");
+	for (LIBFileLinkerMembersPtr ptr : *list)
+	{
+		printf("  %08lX  %s\n", ptr->offset, ptr->pSymbolName);
+	}
+}
+
+void DumpThirdLinkerMember(vector<LIBFileLinkerMembersPtr>* list)
+{
+	printf("Long Nammes:\n");
+#ifdef _WIN64
+	printf("  Symbols:         %08llX\n", list->size());
+#else
+	printf("  Symbols:         %08lX\n", list->size());
+#endif
+	for (LIBFileLinkerMembersPtr ptr : *list)
+	{
+		printf("  %08lX  %s\n", ptr->offset, ptr->pSymbolName);
+	}
+}
+
+void DumpLibFile(LIBFilePtr lib)
+{
+	int index = 0;
+	for (LIBFileEntryPtr ptr : lib->entrys)
+	{
+		DumpArchiveMemberHeader(&ptr->header);
+		switch (index)
+		{
+			case 0:
+				DumpFirstLinkerMember(&ptr->first);
+				break;
+			case 1:
+				DumpSecondLinkerMember(&ptr->second);
+				break;
+			case 2:
+				DumpThirdLinkerMember(&ptr->longNames);
+				break;
+			default:
+				DumpFileHeader(&ptr->objFile->header);
+				printf("\n");
+				for (int i = 0; i < ptr->objFile->sectionTable.size(); i++)
+				{
+					OBJSectionPtr section = ptr->objFile->sectionTable[i];
+					DumpSection(i, section);
+				}
+				DumpSymbolTable(ptr->objFile->symbolTable);
+				printf("\nString Table Size = 0x%0X (%ld) bytes %lld entries\n", ptr->objFile->stringTableSize, ptr->objFile->stringTableSize, (LONGLONG)ptr->objFile->stringTable.size());
+				for (int i = 0; i < ptr->objFile->stringTable.size(); i++)
+				{
+					string s = ptr->objFile->stringTable[i];
+					printf("stringtable[% 4d] = %s\n", i, s.c_str());
+				}
+				break;
+		}
+		index++;
+	}
+}

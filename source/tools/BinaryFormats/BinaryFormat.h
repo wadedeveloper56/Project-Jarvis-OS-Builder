@@ -229,9 +229,20 @@ typedef struct BINARYFORMATS_API _EXEFile
 	_EXEFile();
 } EXEFile, * EXEFilePtr, ** EXEFilePtrPtr;
 
+typedef struct BINARYFORMATS_API _LIBFileLinkerMembers
+{
+	DWORD offset;
+	PSTR pSymbolName;
+	_LIBFileLinkerMembers();
+} LIBFileLinkerMembers, * LIBFileLinkerMembersPtr;
+
 typedef struct BINARYFORMATS_API _LIBFileEntry
 {
 	IMAGE_ARCHIVE_MEMBER_HEADER header;
+	vector<LIBFileLinkerMembersPtr> first;
+	vector<LIBFileLinkerMembersPtr> second;
+	vector<LIBFileLinkerMembersPtr> longNames;
+	OBJFilePtr objFile;
 	_LIBFileEntry();
 } LIBFileEntry, * LIBFileEntryPtr;
 
@@ -290,3 +301,4 @@ BINARYFORMATS_API void DumpBaseRelocationsDirectory(vector<RelocsPtr>* relocs);
 BINARYFORMATS_API void DumpDebugDirectory(DebugPtr debug);
 BINARYFORMATS_API void DumpLoadConfig32Directory(PIMAGE_LOAD_CONFIG_DIRECTORY32 load32);
 BINARYFORMATS_API void DumpLoadConfig64Directory(PIMAGE_LOAD_CONFIG_DIRECTORY64 load64);
+BINARYFORMATS_API void DumpLibFile(LIBFilePtr ptr);
