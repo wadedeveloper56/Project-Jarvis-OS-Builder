@@ -1,7 +1,16 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{372497C2-70E7-4180-A660-CAFF76F4F30D}|JWLink\\JWLink.vcxproj|C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWlink\\wlink.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{372497C2-70E7-4180-A660-CAFF76F4F30D}|JWLink\\JWLink.vcxproj|solutionrelative:JWlink\\wlink.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{372497C2-70E7-4180-A660-CAFF76F4F30D}|JWLink\\JWLink.vcxproj|C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWlink\\wlink.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{372497C2-70E7-4180-A660-CAFF76F4F30D}|JWLink\\JWLink.vcxproj|solutionrelative:JWlink\\wlink.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,8 +18,21 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 3,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "wlink.h",
+              "DocumentMoniker": "C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWlink\\wlink.h",
+              "RelativeDocumentMoniker": "JWlink\\wlink.h",
+              "ToolTip": "C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWlink\\wlink.h",
+              "RelativeToolTip": "JWlink\\wlink.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-10-21T17:12:50.542Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
@@ -18,6 +40,19 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "wlink.c",
+              "DocumentMoniker": "C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWlink\\wlink.c",
+              "RelativeDocumentMoniker": "JWlink\\wlink.c",
+              "ToolTip": "C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWlink\\wlink.c",
+              "RelativeToolTip": "JWlink\\wlink.c",
+              "ViewState": "AgIAABUAAAAAAAAAAAAAACoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2025-10-21T17:12:48.648Z",
+              "EditorCaption": ""
             }
           ]
         }
