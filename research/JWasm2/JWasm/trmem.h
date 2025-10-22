@@ -1,65 +1,60 @@
-#pragma once
+#ifndef _TRMEM_H_INCLUDED
+#define _TRMEM_H_INCLUDED
 
-#define TRMEM_LOGFN "~jwasm.trk"
+#include <stddef.h>
 
-typedef unsigned long long   uint_64;
-typedef unsigned long   uint_32;
-typedef unsigned        uint;
-typedef void (*_trmem_who)(void);       
+typedef struct _trmem_internal *_trmem_hdl;
 
-typedef void* (*_trmem_realloc_who)(void*, size_t);
-#define _TRMEM_NO_REALLOC ((_trmem_realloc_who)0)
-
-typedef void (*_trmem_who)(void);       
+typedef void (*_trmem_who)( void );       
 #define _TRMEM_NO_ROUTINE   ((_trmem_who)0)
 
-#define msg(a,b)     static const char MSG_##a[]=b
-
-#define _PtrAdd( p, i ) ((void *)((char *)(p) + i))
-#define _PtrSub( p, i ) ((void *)((char *)(p) - i))
-#define _PtrCmp(a,op,b) ((void *)(a) op (void *)(b))
-
-#define ALLOC_BYTE      0xA5
-#define FREED_BYTE      0xBD
-
-#define MEMSET(p,c,l)   memset(p,c,l)
+typedef void *(*_trmem_realloc_who)(void*,size_t);
+#define _TRMEM_NO_REALLOC ((_trmem_realloc_who)0)
 
 enum {
-	_TRMEM_ALLOC_SIZE_0 = 0x0001,      
-	_TRMEM_REALLOC_SIZE_0 = 0x0002,      
-	_TRMEM_REALLOC_NULL = 0x0004,       
-	_TRMEM_FREE_NULL = 0x0008,       
-	_TRMEM_OUT_OF_MEMORY = 0x0010,      
-	_TRMEM_CLOSE_CHECK_FREE = 0x0020      
+    _TRMEM_ALLOC_SIZE_0     =0x0001,      
+    _TRMEM_REALLOC_SIZE_0   =0x0002,      
+    _TRMEM_REALLOC_NULL     =0x0004,       
+    _TRMEM_FREE_NULL        =0x0008,       
+    _TRMEM_OUT_OF_MEMORY    =0x0010,      
+    _TRMEM_CLOSE_CHECK_FREE =0x0020      
 };
 
-typedef struct Entry {
-	struct Entry *next;
-	void* mem;
-	_trmem_who      who;
-	size_t          size;                 
-	uint_32         when;
-} entry, * entry_ptr, ** entry_ptr_ptr;
+_trmem_hdl _trmem_open(
+    void *(*__alloc)(size_t),
+    void (*__free)(void*),
+    void * (*__realloc)(void*,size_t),
+    void * (*__expand)(void*,size_t),
+    FILE *__prt_parm,
+    void (*__prt_line)( FILE *__prt_parm, const char *__buf, size_t __len ),
+    unsigned __flags
+);
 
-typedef struct _trmem_internal {
-	entry_ptr   alloc_list;
-#ifdef _WIN64
-	uint_64     mem_used;
-	uint_64     max_mem;
-#else
-	uint_32     mem_used;
-	uint_32     max_mem;
+
+unsigned _trmem_close( _trmem_hdl );
+
+
+void *_trmem_alloc( size_t, _trmem_who, _trmem_hdl );
+void _trmem_free( void *, _trmem_who, _trmem_hdl );
+void *_trmem_realloc( void *, size_t, _trmem_who, _trmem_hdl );
+void *_trmem_expand( void *, size_t, _trmem_who, _trmem_hdl );
+char *_trmem_strdup( const char *str, _trmem_who who, _trmem_hdl hdl );
+size_t _trmem_msize( void *, _trmem_hdl );
+
+
+void _trmem_prt_usage( _trmem_hdl );
+unsigned _trmem_prt_list( _trmem_hdl );
+
+unsigned long _trmem_get_current_usage( _trmem_hdl );
+unsigned long _trmem_get_peak_usage( _trmem_hdl );
+
+_trmem_who  _trmem_guess_who( void * );
+#ifdef __WATCOMC__
+#pragma aux _trmem_guess_who = \
+    0x8b 0x45 0x04           \
+    parm caller         [] \
+    value               [eax] \
+    modify exact        [eax];
 #endif
-	uint_32     alloc_no;
-	void* (*alloc)(size_t);
-	void        (*free)(void*);
-	void* (*realloc)(void*, size_t);
-	void* (*expand)(void*, size_t);
-	FILE* prt_parm;
-	void        (*prt_line)(FILE*, const char*, size_t);
-	uint        flags;
-	size_t      min_alloc;
-}* _trmem_hdl;
 
-void tm_Init(void);
-void tm_Fini(void);
+#endif
