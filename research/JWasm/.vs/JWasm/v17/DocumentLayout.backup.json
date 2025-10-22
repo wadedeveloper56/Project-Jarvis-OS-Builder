@@ -3,12 +3,32 @@
   "WorkspaceRootPath": "C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{372497C2-70E7-4180-A660-CAFF76F4F30D}|JWLink\\JWLink.vcxproj|C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWlink\\wlink.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{372497C2-70E7-4180-A660-CAFF76F4F30D}|JWLink\\JWLink.vcxproj|solutionrelative:JWlink\\wlink.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{40E8DB7E-32DD-4FA3-A10B-3C6725E11544}|JWlink\\JWlink.vcxproj|C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWlink\\c\\obj2supp.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{40E8DB7E-32DD-4FA3-A10B-3C6725E11544}|JWlink\\JWlink.vcxproj|solutionrelative:JWlink\\c\\obj2supp.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{372497C2-70E7-4180-A660-CAFF76F4F30D}|JWLink\\JWLink.vcxproj|C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWlink\\wlink.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{372497C2-70E7-4180-A660-CAFF76F4F30D}|JWLink\\JWLink.vcxproj|solutionrelative:JWlink\\wlink.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{40E8DB7E-32DD-4FA3-A10B-3C6725E11544}|JWlink\\JWlink.vcxproj|C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWlink\\c\\loadraw.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{40E8DB7E-32DD-4FA3-A10B-3C6725E11544}|JWlink\\JWlink.vcxproj|solutionrelative:JWlink\\c\\loadraw.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{40E8DB7E-32DD-4FA3-A10B-3C6725E11544}|JWlink\\JWlink.vcxproj|C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWlink\\c\\cmdall.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{40E8DB7E-32DD-4FA3-A10B-3C6725E11544}|JWlink\\JWlink.vcxproj|solutionrelative:JWlink\\c\\cmdall.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{40E8DB7E-32DD-4FA3-A10B-3C6725E11544}|JWlink\\JWlink.vcxproj|C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWlink\\c\\impexp.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{40E8DB7E-32DD-4FA3-A10B-3C6725E11544}|JWlink\\JWlink.vcxproj|solutionrelative:JWlink\\c\\impexp.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{40E8DB7E-32DD-4FA3-A10B-3C6725E11544}|JWlink\\JWlink.vcxproj|C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWlink\\c\\loados2.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{40E8DB7E-32DD-4FA3-A10B-3C6725E11544}|JWlink\\JWlink.vcxproj|solutionrelative:JWlink\\c\\loados2.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{40E8DB7E-32DD-4FA3-A10B-3C6725E11544}|JWlink\\JWlink.vcxproj|C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWlink\\c\\objorl.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{40E8DB7E-32DD-4FA3-A10B-3C6725E11544}|JWlink\\JWlink.vcxproj|solutionrelative:JWlink\\c\\objorl.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{40E8DB7E-32DD-4FA3-A10B-3C6725E11544}|JWlink\\JWlink.vcxproj|C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWlink\\c\\wlnkmsg.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{40E8DB7E-32DD-4FA3-A10B-3C6725E11544}|JWlink\\JWlink.vcxproj|solutionrelative:JWlink\\c\\wlnkmsg.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,21 +38,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 2,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "wlink.h",
-              "DocumentMoniker": "C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWlink\\wlink.h",
-              "RelativeDocumentMoniker": "JWlink\\wlink.h",
-              "ToolTip": "C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWlink\\wlink.h",
-              "RelativeToolTip": "JWlink\\wlink.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-10-21T17:12:50.542Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
@@ -44,14 +51,92 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "wlink.c",
-              "DocumentMoniker": "C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWlink\\wlink.c",
-              "RelativeDocumentMoniker": "JWlink\\wlink.c",
-              "ToolTip": "C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWlink\\wlink.c",
-              "RelativeToolTip": "JWlink\\wlink.c",
-              "ViewState": "AgIAABUAAAAAAAAAAAAAACoAAAAAAAAAAAAAAA==",
+              "Title": "obj2supp.c",
+              "DocumentMoniker": "C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWlink\\c\\obj2supp.c",
+              "RelativeDocumentMoniker": "JWlink\\c\\obj2supp.c",
+              "ToolTip": "C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWlink\\c\\obj2supp.c",
+              "RelativeToolTip": "JWlink\\c\\obj2supp.c",
+              "ViewState": "AgIAABsDAAAAAAAAAAAgwCcDAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
-              "WhenOpened": "2025-10-21T17:12:48.648Z",
+              "WhenOpened": "2025-10-21T22:25:25.823Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "loadraw.c",
+              "DocumentMoniker": "C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWlink\\c\\loadraw.c",
+              "RelativeDocumentMoniker": "JWlink\\c\\loadraw.c",
+              "ToolTip": "C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWlink\\c\\loadraw.c",
+              "RelativeToolTip": "JWlink\\c\\loadraw.c",
+              "ViewState": "AgIAAAIBAAAAAAAAAAAgwBIBAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2025-10-21T22:23:06.621Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "cmdall.c",
+              "DocumentMoniker": "C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWlink\\c\\cmdall.c",
+              "RelativeDocumentMoniker": "JWlink\\c\\cmdall.c",
+              "ToolTip": "C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWlink\\c\\cmdall.c",
+              "RelativeToolTip": "JWlink\\c\\cmdall.c",
+              "ViewState": "AgIAAF8BAAAAAAAAAIAwwGsBAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2025-10-21T22:22:14.639Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "impexp.c",
+              "DocumentMoniker": "C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWlink\\c\\impexp.c",
+              "RelativeDocumentMoniker": "JWlink\\c\\impexp.c",
+              "ToolTip": "C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWlink\\c\\impexp.c",
+              "RelativeToolTip": "JWlink\\c\\impexp.c",
+              "ViewState": "AgIAADEAAAAAAAAAAIAwwD4AAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2025-10-21T22:21:43.041Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "loados2.c",
+              "DocumentMoniker": "C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWlink\\c\\loados2.c",
+              "RelativeDocumentMoniker": "JWlink\\c\\loados2.c",
+              "ToolTip": "C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWlink\\c\\loados2.c",
+              "RelativeToolTip": "JWlink\\c\\loados2.c",
+              "ViewState": "AgIAAFMBAAAAAAAAAIAwwF8BAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2025-10-21T22:21:19.903Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "wlnkmsg.c",
+              "DocumentMoniker": "C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWlink\\c\\wlnkmsg.c",
+              "RelativeDocumentMoniker": "JWlink\\c\\wlnkmsg.c",
+              "ToolTip": "C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWlink\\c\\wlnkmsg.c",
+              "RelativeToolTip": "JWlink\\c\\wlnkmsg.c",
+              "ViewState": "AgIAADIAAAAAAAAAAAAgwD4AAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2025-10-21T22:16:00.572Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "objorl.c",
+              "DocumentMoniker": "C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWlink\\c\\objorl.c",
+              "RelativeDocumentMoniker": "JWlink\\c\\objorl.c",
+              "ToolTip": "C:\\projects\\OSDev\\ProjectJarvis\\research\\JWasm\\JWlink\\c\\objorl.c",
+              "RelativeToolTip": "JWlink\\c\\objorl.c",
+              "ViewState": "AgIAAC4AAAAAAAAAAAAAAEEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2025-10-21T22:15:13.651Z",
               "EditorCaption": ""
             }
           ]
