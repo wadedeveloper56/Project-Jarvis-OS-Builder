@@ -15,247 +15,385 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="JWasm.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="trmem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="errmsg.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="expans.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="input.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="mgtext.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="listing.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="segment.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="cmdline.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="assemble.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="memalloc.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
+    <ClInclude Include="H\assume.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\atofloat.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\bin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\bool.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\cmdline.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\codegen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\coff.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\coffspec.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\condasm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\context.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\cpumodel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\data.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\dbgcv.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\dbgdw.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\directve.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\dirtype.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\elf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\elfspec.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\equate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\errmsg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\expreval.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\extern.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\fastpass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\fixup.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\fpfixup.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\globals.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\hll.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\input.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\instr64.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\instravx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\instruct.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\inttype.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\label.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\linnum.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\listing.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\lqueue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\ltext.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\macro.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\mangle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\memalloc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\msgdef.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\msgtext.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\myassert.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\omf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\omfint.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\omfspec.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\operands.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\opndcls.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\parser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\pespec.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\posndir.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\preproc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\proc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\queue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\reswords.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\segattr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\segment.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\special.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\symbols.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\tbyte.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\token.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\tokenize.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\trmem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\types.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\unaryop.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\usage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\win32.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\win64seh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="pch.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="trmem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="errmsg.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="globals.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="inttype.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="bool.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="queue.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="msgdef.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="usage.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="memalloc.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="parser.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="assume.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="atofloat.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="bin.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="cmdline.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="codegen.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="coff.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="coffspec.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="condasm.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="context.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="cpumodel.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="data.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="dbgcv.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="dbgdw.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="directve.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="dirtype.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="elf.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="elfspec.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="equate.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="expreval.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="extern.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="fastpass.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="fixup.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="fpfixup.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="hll.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="input.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="instr64.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="instravx.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="instruct.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="label.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="linnum.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="listing.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="lqueue.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ltext.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="macro.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="mangle.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="msgtext.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="myassert.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="omf.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="omfint.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="omfspec.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="operands.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="opndcls.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="pespec.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="posndir.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="preproc.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="proc.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="reswords.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="segattr.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="segment.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="special.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="symbols.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="tbyte.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="token.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="tokenize.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="types.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="unaryop.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="win32.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="win64seh.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+    <ClCompile Include="apiemu.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="assemble.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="assume.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="atofloat.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="backptch.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="bin.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="branch.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cmdline.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="codegen.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="coff.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="condasm.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="context.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cpumodel.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="data.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbgcv.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="directiv.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="elf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="end.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="equate.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="errmsg.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="expans.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="expreval.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="extern.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fastpass.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fixup.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fpfixup.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="hll.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="input.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="invoke.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="label.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="linnum.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="listing.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="loop.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lqueue.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="macro.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mangle.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="memalloc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="msgtext.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="omf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="omffixup.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="omfint.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="option.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="parser.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="posndir.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="preproc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="proc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="queue.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="reswords.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="safeseh.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="segment.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="simsegm.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="string.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="symbols.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tbyte.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tokenize.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="trmem.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="types.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -18,6 +18,136 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="H\assume.h" />
+    <ClInclude Include="H\atofloat.h" />
+    <ClInclude Include="H\bin.h" />
+    <ClInclude Include="H\bool.h" />
+    <ClInclude Include="H\cmdline.h" />
+    <ClInclude Include="H\codegen.h" />
+    <ClInclude Include="H\coff.h" />
+    <ClInclude Include="H\coffspec.h" />
+    <ClInclude Include="H\condasm.h" />
+    <ClInclude Include="H\context.h" />
+    <ClInclude Include="H\cpumodel.h" />
+    <ClInclude Include="H\data.h" />
+    <ClInclude Include="H\dbgcv.h" />
+    <ClInclude Include="H\dbgdw.h" />
+    <ClInclude Include="H\directve.h" />
+    <ClInclude Include="H\dirtype.h" />
+    <ClInclude Include="H\elf.h" />
+    <ClInclude Include="H\elfspec.h" />
+    <ClInclude Include="H\equate.h" />
+    <ClInclude Include="H\errmsg.h" />
+    <ClInclude Include="H\expreval.h" />
+    <ClInclude Include="H\extern.h" />
+    <ClInclude Include="H\fastpass.h" />
+    <ClInclude Include="H\fixup.h" />
+    <ClInclude Include="H\fpfixup.h" />
+    <ClInclude Include="H\globals.h" />
+    <ClInclude Include="H\hll.h" />
+    <ClInclude Include="H\input.h" />
+    <ClInclude Include="H\instr64.h" />
+    <ClInclude Include="H\instravx.h" />
+    <ClInclude Include="H\instruct.h" />
+    <ClInclude Include="H\inttype.h" />
+    <ClInclude Include="H\label.h" />
+    <ClInclude Include="H\linnum.h" />
+    <ClInclude Include="H\listing.h" />
+    <ClInclude Include="H\lqueue.h" />
+    <ClInclude Include="H\ltext.h" />
+    <ClInclude Include="H\macro.h" />
+    <ClInclude Include="H\mangle.h" />
+    <ClInclude Include="H\memalloc.h" />
+    <ClInclude Include="H\msgdef.h" />
+    <ClInclude Include="H\msgtext.h" />
+    <ClInclude Include="H\myassert.h" />
+    <ClInclude Include="H\omf.h" />
+    <ClInclude Include="H\omfint.h" />
+    <ClInclude Include="H\omfspec.h" />
+    <ClInclude Include="H\operands.h" />
+    <ClInclude Include="H\opndcls.h" />
+    <ClInclude Include="H\parser.h" />
+    <ClInclude Include="H\pespec.h" />
+    <ClInclude Include="H\posndir.h" />
+    <ClInclude Include="H\preproc.h" />
+    <ClInclude Include="H\proc.h" />
+    <ClInclude Include="H\queue.h" />
+    <ClInclude Include="H\reswords.h" />
+    <ClInclude Include="H\segattr.h" />
+    <ClInclude Include="H\segment.h" />
+    <ClInclude Include="H\special.h" />
+    <ClInclude Include="H\symbols.h" />
+    <ClInclude Include="H\tbyte.h" />
+    <ClInclude Include="H\token.h" />
+    <ClInclude Include="H\tokenize.h" />
+    <ClInclude Include="H\trmem.h" />
+    <ClInclude Include="H\types.h" />
+    <ClInclude Include="H\unaryop.h" />
+    <ClInclude Include="H\usage.h" />
+    <ClInclude Include="H\win32.h" />
+    <ClInclude Include="H\win64seh.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="apiemu.c" />
+    <ClCompile Include="assemble.c" />
+    <ClCompile Include="assume.c" />
+    <ClCompile Include="atofloat.c" />
+    <ClCompile Include="backptch.c" />
+    <ClCompile Include="bin.c" />
+    <ClCompile Include="branch.c" />
+    <ClCompile Include="cmdline.c" />
+    <ClCompile Include="codegen.c" />
+    <ClCompile Include="coff.c" />
+    <ClCompile Include="condasm.c" />
+    <ClCompile Include="context.c" />
+    <ClCompile Include="cpumodel.c" />
+    <ClCompile Include="data.c" />
+    <ClCompile Include="dbgcv.c" />
+    <ClCompile Include="directiv.c" />
+    <ClCompile Include="elf.c" />
+    <ClCompile Include="end.c" />
+    <ClCompile Include="equate.c" />
+    <ClCompile Include="errmsg.c" />
+    <ClCompile Include="expans.c" />
+    <ClCompile Include="expreval.c" />
+    <ClCompile Include="extern.c" />
+    <ClCompile Include="fastpass.c" />
+    <ClCompile Include="fixup.c" />
+    <ClCompile Include="fpfixup.c" />
+    <ClCompile Include="hll.c" />
+    <ClCompile Include="input.c" />
+    <ClCompile Include="invoke.c" />
+    <ClCompile Include="label.c" />
+    <ClCompile Include="linnum.c" />
+    <ClCompile Include="listing.c" />
+    <ClCompile Include="loop.c" />
+    <ClCompile Include="lqueue.c" />
+    <ClCompile Include="macro.c" />
+    <ClCompile Include="main.c" />
+    <ClCompile Include="mangle.c" />
+    <ClCompile Include="memalloc.c" />
+    <ClCompile Include="msgtext.c" />
+    <ClCompile Include="omf.c" />
+    <ClCompile Include="omffixup.c" />
+    <ClCompile Include="omfint.c" />
+    <ClCompile Include="option.c" />
+    <ClCompile Include="parser.c" />
+    <ClCompile Include="posndir.c" />
+    <ClCompile Include="preproc.c" />
+    <ClCompile Include="proc.c" />
+    <ClCompile Include="queue.c" />
+    <ClCompile Include="reswords.c" />
+    <ClCompile Include="safeseh.c" />
+    <ClCompile Include="segment.c" />
+    <ClCompile Include="simsegm.c" />
+    <ClCompile Include="string.c" />
+    <ClCompile Include="symbols.c" />
+    <ClCompile Include="tbyte.c" />
+    <ClCompile Include="tokenize.c" />
+    <ClCompile Include="trmem.c" />
+    <ClCompile Include="types.c" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -73,24 +203,28 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>..\bin\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\bin\intermediate\JWasm\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>./H;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>..\bin\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\bin\intermediate\JWasm\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>./H;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>..\bin\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\bin\intermediate\JWasm\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>./H;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>..\bin\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\bin\intermediate\JWasm\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>./H;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>DEBUG_OUT;_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
@@ -109,7 +243,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>DEBUG_OUT;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
@@ -126,7 +260,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>DEBUG_OUT;_CRT_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
@@ -145,7 +279,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>DEBUG_OUT;_CRT_SECURE_NO_WARNINGS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
@@ -158,90 +292,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="assemble.cpp" />
-    <ClCompile Include="cmdline.cpp" />
-    <ClCompile Include="errmsg.cpp" />
-    <ClCompile Include="expans.cpp" />
-    <ClCompile Include="input.cpp" />
-    <ClCompile Include="JWasm.cpp" />
-    <ClCompile Include="listing.cpp" />
-    <ClCompile Include="memalloc.cpp" />
-    <ClCompile Include="mgtext.cpp" />
-    <ClCompile Include="segment.cpp" />
-    <ClCompile Include="trmem.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="assume.h" />
-    <ClInclude Include="atofloat.h" />
-    <ClInclude Include="bin.h" />
-    <ClInclude Include="bool.h" />
-    <ClInclude Include="cmdline.h" />
-    <ClInclude Include="codegen.h" />
-    <ClInclude Include="coff.h" />
-    <ClInclude Include="coffspec.h" />
-    <ClInclude Include="condasm.h" />
-    <ClInclude Include="context.h" />
-    <ClInclude Include="cpumodel.h" />
-    <ClInclude Include="data.h" />
-    <ClInclude Include="dbgcv.h" />
-    <ClInclude Include="dbgdw.h" />
-    <ClInclude Include="directve.h" />
-    <ClInclude Include="dirtype.h" />
-    <ClInclude Include="elf.h" />
-    <ClInclude Include="elfspec.h" />
-    <ClInclude Include="equate.h" />
-    <ClInclude Include="errmsg.h" />
-    <ClInclude Include="expreval.h" />
-    <ClInclude Include="extern.h" />
-    <ClInclude Include="fastpass.h" />
-    <ClInclude Include="fixup.h" />
-    <ClInclude Include="fpfixup.h" />
-    <ClInclude Include="globals.h" />
-    <ClInclude Include="hll.h" />
-    <ClInclude Include="input.h" />
-    <ClInclude Include="instr64.h" />
-    <ClInclude Include="instravx.h" />
-    <ClInclude Include="instruct.h" />
-    <ClInclude Include="inttype.h" />
-    <ClInclude Include="label.h" />
-    <ClInclude Include="linnum.h" />
-    <ClInclude Include="listing.h" />
-    <ClInclude Include="lqueue.h" />
-    <ClInclude Include="ltext.h" />
-    <ClInclude Include="macro.h" />
-    <ClInclude Include="mangle.h" />
-    <ClInclude Include="memalloc.h" />
-    <ClInclude Include="msgdef.h" />
-    <ClInclude Include="msgtext.h" />
-    <ClInclude Include="myassert.h" />
-    <ClInclude Include="omf.h" />
-    <ClInclude Include="omfint.h" />
-    <ClInclude Include="omfspec.h" />
-    <ClInclude Include="operands.h" />
-    <ClInclude Include="opndcls.h" />
-    <ClInclude Include="parser.h" />
-    <ClInclude Include="pch.h" />
-    <ClInclude Include="pespec.h" />
-    <ClInclude Include="posndir.h" />
-    <ClInclude Include="preproc.h" />
-    <ClInclude Include="proc.h" />
-    <ClInclude Include="queue.h" />
-    <ClInclude Include="reswords.h" />
-    <ClInclude Include="segattr.h" />
-    <ClInclude Include="segment.h" />
-    <ClInclude Include="special.h" />
-    <ClInclude Include="symbols.h" />
-    <ClInclude Include="tbyte.h" />
-    <ClInclude Include="token.h" />
-    <ClInclude Include="tokenize.h" />
-    <ClInclude Include="trmem.h" />
-    <ClInclude Include="types.h" />
-    <ClInclude Include="unaryop.h" />
-    <ClInclude Include="usage.h" />
-    <ClInclude Include="win32.h" />
-    <ClInclude Include="win64seh.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
