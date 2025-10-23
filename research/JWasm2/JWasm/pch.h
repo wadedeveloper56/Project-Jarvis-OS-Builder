@@ -16,3 +16,11 @@
 #include <signal.h>
 #include <time.h>
 #include <malloc.h>
+
+#ifdef _DEBUG
+#define DEBUG_OUT
+#endif // _DEBUG
+
+#define WILDCARDS 1
+#define CATCHBREAK 1
+#define TRMEM 1

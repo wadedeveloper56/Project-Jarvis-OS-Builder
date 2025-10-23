@@ -142,7 +142,7 @@ static void trPrt(_trmem_hdl hdl, const char* fmt, ...)
     _trmem_who  who;
     char* start;
     char* xptr;
-    int         i;
+    //int         i;
     size_t      size;
 
     va_start(args, fmt);
@@ -195,7 +195,7 @@ static void trPrt(_trmem_hdl hdl, const char* fmt, ...)
                     size = va_arg(args, size_t);
                     if (size > 14) size = 14;
                     xptr = start;
-                    for (i = 0; i < 14; i++) {
+                    for (unsigned i = 0; i < 14; i++) {
                         if (i < size) {
                             ptr = formHex(ptr, *xptr, sizeof(char));
                             xptr++;
@@ -210,7 +210,7 @@ static void trPrt(_trmem_hdl hdl, const char* fmt, ...)
                             ptr++;
                         }
                     }
-                    for (i = 0; i < size; i++) {
+                    for (unsigned i = 0; i < size; i++) {
                         if (isprint(*start)) {
                             *ptr = *start;
                         }

@@ -166,6 +166,7 @@
     <ClCompile Include="input.cpp" />
     <ClCompile Include="JWasm.cpp" />
     <ClCompile Include="listing.cpp" />
+    <ClCompile Include="memalloc.cpp" />
     <ClCompile Include="mgtext.cpp" />
     <ClCompile Include="segment.cpp" />
     <ClCompile Include="trmem.cpp" />

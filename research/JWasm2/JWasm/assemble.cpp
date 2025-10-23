@@ -25,47 +25,28 @@
 #include "linnum.h"
 #include "cpumodel.h"
 #include "lqueue.h"
-#if DLLIMPORT
-#include "mangle.h"
-#endif
-
-#if COFF_SUPPORT
 #include "coff.h"
-#endif
-#if ELF_SUPPORT
 #include "elf.h"
-#endif
-#if BIN_SUPPORT
 #include "bin.h"
-#endif
 
-#if 1  
-#include <setjmp.h>
-jmp_buf jmpenv;
-#endif
-
-#ifdef __SW_BD
-#define EXPQUAL __stdcall
-#else
 #define EXPQUAL
-#endif
 
 #define USELSLINE 1       
 
-#ifdef __UNIX__
-#define OBJ_EXT "o"
-#else
 #define OBJ_EXT "obj"
-#endif
 #define LST_EXT "lst"
 #define ERR_EXT "err"
 #define BIN_EXT "BIN"
 #define EXE_EXT "EXE"
 
+jmp_buf jmpenv;
 struct module_info      ModuleInfo;
 unsigned int            Parse_Pass;        
 struct qdesc            LinnumQueue;         
 bool write_to_file;         
 
-
+int EXPQUAL AssembleModule(const char* source)
+{
+	return 1;
+}
 

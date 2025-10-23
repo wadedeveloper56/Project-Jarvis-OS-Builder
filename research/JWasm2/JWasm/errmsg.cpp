@@ -28,9 +28,20 @@ int write_logo(void)
     return(0);
 }
 
+void PrintUsage(void)
+{
+    const char* p;
+    write_logo();
+    for (p = usage; *p != '\n'; ) {
+        const char* p2 = p + strlen(p) + 1;
+        printf("%-20s %s\n", p, p2);
+        p = p2 + strlen(p2) + 1;
+    }
+}
+
 static void PutMsg(FILE* fp, int severity, int msgnum, va_list args)
 {
-    int             i, j;
+    int             i=0, j=0;
     const char* type;
     const char* pMsg;
     char            buffer[MAX_LINE_LEN + 128];
@@ -160,3 +171,86 @@ void Fatal(int msgnum, ...)
 
     exit(1);
 }
+
+int InternalError(const char* file, unsigned line)
+{
+    char buffer[MAX_LINE_LEN];
+    DebugMsg(("InternalError enter\n"));
+    ModuleInfo.g.error_count++;
+    GetCurrSrcPos(buffer);
+    fprintf(errout, "%s", buffer);
+    fprintf(errout, MsgGetEx(INTERNAL_ERROR), file, line);
+    close_files();
+    exit(EXIT_FAILURE);
+    return(0);
+}
+
+#ifdef DEBUG_OUT
+
+#ifdef DBGLOGFILE
+FILE* fdbglog=NULL;
+#endif
+
+void DoDebugMsg(const char* format, ...)
+{
+    va_list args;
+    if (!Options.debug) return;
+
+    if (ModuleInfo.cref == FALSE && CurrFName[ASM] != NULL)
+        return;
+
+    va_start(args, format);
+#ifdef DBGLOGFILE
+    if (fdbglog == NULL)
+        fdbglog=fopen(DBGLOGFILE, "w");
+    vfprintf(fdbglog, format, args);
+#else
+    vprintf(format, args);
+#endif
+    va_end(args);
+#if 0
+#ifdef DBGLOGFILE
+    fflush(fdbglog);
+#else
+    fflush(stdout);
+#endif
+#endif
+}
+
+void DoDebugMsg1(const char* format, ...)
+{
+    va_list args;
+    char buffer[MAX_LINE_LEN];
+
+    if (!Options.debug) return;
+
+    if (ModuleInfo.cref == FALSE) return;
+
+#ifdef DBGLOGFILE
+    if (fdbglog == NULL)
+        fdbglog=fopen(DBGLOGFILE, "w");
+#endif
+    if (ModuleInfo.g.src_stack) {
+#ifdef DBGLOGFILE
+        fprintf(fdbglog, "%" I32_SPEC "u%s. ", GetLineNumber(), GetTopLine(buffer));
+#else
+        printf("%" I32_SPEC "u%s. ", GetLineNumber(), GetTopLine(buffer));
+#endif
+    }
+    va_start(args, format);
+#ifdef DBGLOGFILE
+    vfprintf(fdbglog, format, args);
+#else
+    vprintf(format, args);
+#endif
+    va_end(args);
+
+#if 0
+#ifdef DBGLOGFILE
+    fflush(fdbglog);
+#else
+    fflush(stdout);
+#endif
+#endif
+}
+#endif

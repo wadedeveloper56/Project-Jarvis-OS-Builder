@@ -100,7 +100,7 @@ static const struct print_item cr[] = {
 	{ LQ_MACROS,          0, maccap, log_macro   },
 	{ LQ_STRUCTS,         0, strcap, NULL, log_struct  },
 #ifdef DEBUG_OUT
-	{ LQ_UNDEF_TYPES,     0, strcap, log_struct  },
+	{ LQ_UNDEF_TYPES,     0, strcap, NULL, log_struct  },
 #endif
 	{ LQ_RECORDS,         0, reccap, log_record  },
 	{ LQ_TYPEDEFS,        0, tdcap,  log_typedef },
