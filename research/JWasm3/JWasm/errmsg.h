@@ -1,5 +1,7 @@
 #pragma once
 
+#define errout stdout
+extern char banner_printed;
 #define pick( code, text )  code,
 enum msgno {
     #include "msgdef.h"
@@ -18,6 +20,7 @@ extern void DoDebugMsg1(const char* format, ...);
 #define DebugCmd( x )
 #endif
 
+static void PrtMsg(int severity, int msgnum, va_list args1, va_list args2);
 void Fatal(int msgnum, ...);
 int EmitError(int msgnum);
 int write_logo(void);

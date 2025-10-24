@@ -14,6 +14,7 @@
 #include <sys/stat.h>
 #include <stdarg.h>
 #include <ctype.h>
+#include <setjmp.h>
 
 #pragma warning(disable:4267)  /* conversion from 'size_t' to 'type', possible loss of data */
 #pragma warning(disable:4018)  /* signed/unsigned mismatch */

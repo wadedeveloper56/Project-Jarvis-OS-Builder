@@ -8,6 +8,10 @@ static uint_32 memcalls = 0;
 static uint_32 memstart;
 #endif
 
+void    LclFree(void*)
+{
+}
+
 void* MemAlloc(size_t size)
 {
     void* ptr;

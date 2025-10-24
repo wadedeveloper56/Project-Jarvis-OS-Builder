@@ -8,8 +8,6 @@
 #include "myassert.h"
 #include "assemble.h"
 
-char     banner_printed;
-
 struct global_options Options = {
                            FALSE,
                     FALSE,
@@ -273,7 +271,6 @@ static void OPTQUAL Set_ce(void) { rspidx = 1 / rspidx; }
 static void OPTQUAL Set_Cp(void) { Options.case_sensitive = TRUE;   Options.convert_uppercase = FALSE; }
 static void OPTQUAL Set_Cu(void) { Options.case_sensitive = FALSE;  Options.convert_uppercase = TRUE; }
 static void OPTQUAL Set_Cx(void) { Options.case_sensitive = FALSE;  Options.convert_uppercase = FALSE; }
-
 static void OPTQUAL Set_Zd(void) { Options.line_numbers = TRUE; }
 static void OPTQUAL Set_Zi(void)
 {

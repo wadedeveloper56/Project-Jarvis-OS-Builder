@@ -1,5 +1,3 @@
-#pragma once
-
 /* message texts.
  * since msg numbers shouldn't change, new ids must be added at the end -
  * unless a free entry is reused (search for "_unused"!)

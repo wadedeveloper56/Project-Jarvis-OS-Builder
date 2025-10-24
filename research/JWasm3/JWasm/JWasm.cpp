@@ -3,7 +3,8 @@
 #include "assemble.h"
 #include "trmem.h"
 #include "cmdline.h"
-#include"input.h"
+#include "input.h"
+#include "msgtext.h"
 
 static void genfailure(int signo)
 {
@@ -67,6 +68,12 @@ int main(int argc, char** argv)
 #endif
 	}
 	CmdlineFini();
+	if (numArgs == 0) {
+		write_logo();
+		printf("%s", MsgGetEx(MSG_USAGE));
+	}
+	else if (numFiles == 0)
+		EmitError(NO_FILENAME_SPECIFIED);
 #ifdef TRMEM
 	tm_Fini();
 #endif

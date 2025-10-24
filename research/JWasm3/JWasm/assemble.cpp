@@ -3,6 +3,9 @@
 #include "assemble.h"
 
 struct module_info      ModuleInfo;
+jmp_buf jmpenv;
+bool write_to_file;
+unsigned int            Parse_Pass;
 
 int EXPQUAL AssembleModule(const char* source)
 {
