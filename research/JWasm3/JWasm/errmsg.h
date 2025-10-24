@@ -18,7 +18,10 @@ extern void DoDebugMsg1(const char* format, ...);
 #define DebugCmd( x )
 #endif
 
+void Fatal(int msgnum, ...);
 int EmitError(int msgnum);
 int write_logo(void);
 char* ErrnoStr(void);
 int EmitErr(int msgnum, ...);
+void EmitWarn(int level, int msgnum, ...);
+void PrintUsage(void);

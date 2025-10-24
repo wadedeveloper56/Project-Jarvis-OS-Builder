@@ -36,6 +36,12 @@
     <ClCompile Include="input.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="memalloc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="msgtext.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -69,6 +75,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="input.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="memalloc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbgcv.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="msgtext.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="myassert.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
