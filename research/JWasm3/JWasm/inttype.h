@@ -1,7 +1,7 @@
 #pragma once
 
 /* v2.12: 'uint' removed ( replaced by 'unsigned') */
-//typedef unsigned        uint;
+typedef unsigned        uint;
 
 /* assumptions:
  * - [unsigned] char  is 8-bit

@@ -83,6 +83,7 @@ struct global_options Options = {
     /* naming_convention*/          NC_DO_NOTHING,
 #endif
 }; 
+
 char* EXPQUAL ParseCmdline(const char** cmdline, int*)
 {
 	return NULL;

@@ -12,7 +12,7 @@ static void genfailure(int signo)
 #else
 	if (signo != SIGTERM)
 #endif
-		EmitError(GENERAL_FAILURE);
+	EmitError(GENERAL_FAILURE);
 	close_files();
 	exit(EXIT_FAILURE);
 }
