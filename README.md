@@ -1,5 +1,5 @@
-Project Jarvis
---------------
+Project Jarvis OS Builder
+---------------------------
  ## Basic idea
 
 Project jarvis is an IDE, c compiler, assembler, linker, preprocessor, and pedumper 
