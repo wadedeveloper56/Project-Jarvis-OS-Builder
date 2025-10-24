@@ -397,7 +397,7 @@ struct asym *CreateConstant( struct asm_tok tokenarray[] )
          */
         myatoi128( tokenarray[2].string_ptr, &opnd.llvalue, tokenarray[2].numbase, tokenarray[2].itemlen );
     check_single_number:
-        opnd.instr = EMPTY;
+        opnd.instr = (enum special_token)EMPTY;
         opnd.kind = EXPR_CONST;
         opnd.mem_type = MT_EMPTY; /* v2.07: added */
         opnd.flags1 = 0;
