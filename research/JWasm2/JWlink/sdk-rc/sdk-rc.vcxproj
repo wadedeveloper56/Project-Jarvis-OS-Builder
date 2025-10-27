@@ -73,24 +73,28 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>..\..\bin\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\bin\intermediate\sdk-rc\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>..\sdk-rc\h;..\h;..\sdk-wres\h;..\watcom\h;.\;.\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>..\..\bin\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\bin\intermediate\sdk-rc\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>..\sdk-rc\h;..\h;..\sdk-wres\h;..\watcom\h;.\;.\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>..\..\bin\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\bin\intermediate\sdk-rc\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>..\sdk-rc\h;..\h;..\sdk-wres\h;..\watcom\h;.\;.\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>..\..\bin\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\bin\intermediate\sdk-rc\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>..\sdk-rc\h;..\h;..\sdk-wres\h;..\watcom\h;.\;.\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
@@ -110,7 +114,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
@@ -128,7 +132,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
@@ -148,7 +152,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
@@ -164,15 +168,68 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
+    <ClInclude Include="h\dbtable.h" />
+    <ClInclude Include="h\depend.h" />
+    <ClInclude Include="h\errors.h" />
+    <ClInclude Include="h\errprt.h" />
+    <ClInclude Include="h\exelxobj.h" />
+    <ClInclude Include="h\exeobj.h" />
+    <ClInclude Include="h\exeres.h" />
+    <ClInclude Include="h\exereslx.h" />
+    <ClInclude Include="h\exerespe.h" />
+    <ClInclude Include="h\exeseg.h" />
+    <ClInclude Include="h\exeutil.h" />
+    <ClInclude Include="h\global.h" />
+    <ClInclude Include="h\iortns.h" />
+    <ClInclude Include="h\keyword.h" />
+    <ClInclude Include="h\keyword2.h" />
+    <ClInclude Include="h\leadbyte.h" />
+    <ClInclude Include="h\os2res.h" />
+    <ClInclude Include="h\param.h" />
+    <ClInclude Include="h\pass2.h" />
+    <ClInclude Include="h\rcalloc0.h" />
+    <ClInclude Include="h\rcalloc1.h" />
+    <ClInclude Include="h\rcdll.h" />
+    <ClInclude Include="h\rcio.h" />
+    <ClInclude Include="h\rclayer0.h" />
+    <ClInclude Include="h\rcldstr.h" />
+    <ClInclude Include="h\rcmem.h" />
+    <ClInclude Include="h\rcmsg.h" />
+    <ClInclude Include="h\rcstr.h" />
+    <ClInclude Include="h\rctypes.h" />
+    <ClInclude Include="h\scan.h" />
+    <ClInclude Include="h\scan2.h" />
+    <ClInclude Include="h\semaccel.h" />
+    <ClInclude Include="h\semantic.h" />
+    <ClInclude Include="h\semdiag.h" />
+    <ClInclude Include="h\semhelp.h" />
+    <ClInclude Include="h\semmenu.h" />
+    <ClInclude Include="h\semraw.h" />
+    <ClInclude Include="h\semresfl.h" />
+    <ClInclude Include="h\semsingl.h" />
+    <ClInclude Include="h\semstr.h" />
+    <ClInclude Include="h\semtbar.h" />
+    <ClInclude Include="h\semutil.h" />
+    <ClInclude Include="h\semver.h" />
+    <ClInclude Include="h\sharedio.h" />
+    <ClInclude Include="h\tmpctl.h" />
+    <ClInclude Include="h\yydriver.h" />
+    <ClInclude Include="h\yydrivr2.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="c\exerespe.c" />
+    <ClCompile Include="c\rcstr.c" />
+    <ClCompile Include="c\sharedio.c" />
     <ClCompile Include="pch.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="h\rc.msg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

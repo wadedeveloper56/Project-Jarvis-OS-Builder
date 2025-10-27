@@ -37,7 +37,11 @@
 /* higher level I/O routines and which must be the WResFileID returned by one */
 /* of the file opening functions which will get it from the low level open */
 /* function */
-
+#include <ctype.h>
+#include <stddef.h>
+#include <basetsd.h>
+#include <sys/types.h>
+#define ssize_t SSIZE_T
 typedef int             WResFileID;
 
 struct WResRoutines {                                       /* defaults */

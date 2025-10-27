@@ -39,7 +39,7 @@ enum message_texts {
 #define pick( code, string )  code,
 #include   "lnkerror.msg"
 #include   "wlink.msg"
-#include   "sdk/rc/rc/h/rc.msg"
+#include   "..\sdk-rc\h\rc.msg"
 #undef pick
 
 };

@@ -21,10 +21,362 @@
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="h\filefmt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\layer0.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\layer1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\loadstr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\mem2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\mresfmt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\opcl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\read.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\resaccel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\resbitmp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\resdiag.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\reserr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\resfmt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\resfont.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\resiccu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\resmenu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\resnamor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\resraw.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\resstr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\restbar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\resutil.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\resver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\util.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\varstr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\wres.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\wresall.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\wresrtns.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\wressetr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\write.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\wrmergdi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="c\layer0.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\loadfind.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\loadres.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\loadstr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\mropnewf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\mrrdrh.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\ralliae.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\rclosef.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\rdlli.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\rduint8.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\rduint16.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\rduint32.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\resaccel.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\resbitmp.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\resdiag.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\resfont.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\resiccu.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\resmenu.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\resnamor.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\resraw.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\resseek.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\resstr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\restbar.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\restell.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\resver.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\rillia.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\rillib.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\ropenfro.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\ropenfrw.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\rrdstr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\rrlli.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\rrnamoor.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\varstr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\wraddres.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\wrauto.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\wrchkwrf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\wrdelrs.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\wrerror.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\wresrtns.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\wrfilein.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\wrfindrs.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\wrfirres.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\wrfree.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\wrfreedi.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\wrgetli.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\wrgetri.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\wrgetti.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\wrhidcmp.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\wrhidexb.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\wrhidfno.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\wrhidfre.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\wrhidfrn.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\wrhidfrs.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\wridcmp.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\wridexby.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\wridfnoo.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\wridfree.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\wridfrnu.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\wridfrst.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\wridnacm.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\wridnfst.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\wridtnoo.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\wridtonu.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\wridtost.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\wrihidf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\wriidfn.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\wrinitdi.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\wrisempt.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\wrislr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\wriswrf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\write.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\wrmergdi.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\wrnextrs.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\wropnewf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\wrreaddi.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\wrrewrid.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\wrrfrr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\wrrftr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\wrrfwrid.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\wrrhr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\wrrrr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\wrrtr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\wrrwrid.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\wrrwridn.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\wrwritdi.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="c\mem2.x" />
+    <None Include="c\opcl.x" />
+    <None Include="c\read.x" />
+    <None Include="c\util.x" />
+    <None Include="c\wres.x" />
   </ItemGroup>
 </Project>

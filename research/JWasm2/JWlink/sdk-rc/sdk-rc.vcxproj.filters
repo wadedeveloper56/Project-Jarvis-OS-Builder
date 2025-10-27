@@ -21,10 +21,163 @@
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="h\dbtable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\depend.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\errors.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\errprt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\exelxobj.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\exeobj.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\exeres.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\exereslx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\exerespe.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\exeseg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\exeutil.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\global.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\iortns.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\keyword.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\keyword2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\leadbyte.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\os2res.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\param.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\pass2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\rcalloc0.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\rcalloc1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\rcdll.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\rcio.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\rclayer0.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\rcldstr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\rcmem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\rcmsg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\rcstr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\rctypes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\scan.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\scan2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\semaccel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\semantic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\semdiag.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\semhelp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\semmenu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\semraw.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\semresfl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\semsingl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\semstr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\semtbar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\semutil.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\semver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\sharedio.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\tmpctl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\yydriver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\yydrivr2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="c\exerespe.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\rcstr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\sharedio.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="h\rc.msg" />
   </ItemGroup>
 </Project>
