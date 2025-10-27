@@ -48,7 +48,7 @@
 
 #if defined(__UNIX__) || defined(__CYGWIN__) || defined(__DJGPP__) /* avoid for MinGW! */
 
-extern char * strupr(char *);
+//extern char * strupr(char *);
 #define _stricmp strcasecmp
 #ifndef __WATCOMC__
 #define _memicmp strncasecmp

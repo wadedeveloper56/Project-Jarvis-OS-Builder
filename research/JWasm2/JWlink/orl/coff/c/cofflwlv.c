@@ -27,7 +27,7 @@
 * Description:  COFF symbol table and relocations processing.
 *
 ****************************************************************************/
-
+#include "pch.h"
 #include <ctype.h>
 #include "cofflwlv.h"
 #include "orlhash.h"
@@ -198,7 +198,7 @@ orl_return CoffBuildSecNameHashTable( coff_file_handle coff_file_hnd )
     int                                         loop;
     orl_return                                  error;
 
-    coff_file_hnd->sec_name_hash_table = ORLHashTableCreate( coff_file_hnd->coff_hnd->funcs, SEC_NAME_HASH_TABLE_SIZE, ORL_HASH_STRING, (orl_hash_comparison_func) stricmp );
+    coff_file_hnd->sec_name_hash_table = ORLHashTableCreate( coff_file_hnd->coff_hnd->funcs, SEC_NAME_HASH_TABLE_SIZE, ORL_HASH_STRING, (orl_hash_comparison_func) _stricmp );
     if( !(coff_file_hnd->sec_name_hash_table) ) {
         return( ORL_OUT_OF_MEMORY );
     }
