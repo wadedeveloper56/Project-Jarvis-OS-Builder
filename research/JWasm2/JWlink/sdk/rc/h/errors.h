@@ -24,22 +24,38 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
 
-#define MSG_LANG_SPACING        1000
-
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
-
+#ifdef WR_COMPILED
+#include "wrcmsg.gh"
+#elif defined( INCL_MSGTEXT )
 #undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
-
+#define pick( id, en, jp )  id,
+enum msg_num {
+    #include "rc.msg"
 };
+#else
+#define MSG_LANG_SPACING        1000
+#include "rcmsg.gh"
+#endif
+#undef ERRITEM
+
+enum {
+    INTERR_UNKNOWN_RCSTATUS,
+    INTERR_EXE_HAS_MINUS_1_SEGS,
+    INTERR_ERR_BUILDING_RES_DIR,
+    INTERR_MEM_FREE_FAILED,
+    INTERR_MEM_REALLOC_FAILED
+};
+
+extern void RcWarning( unsigned errornum, ... );
+extern void RcError(unsigned int ,... );
+#if defined(__WATCOMC__)
+#pragma aux RcFatalError aborts;
+#endif
+extern void RcFatalError( unsigned int, ... );
+extern void ErrorInitStatics( void );

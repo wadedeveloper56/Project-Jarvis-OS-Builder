@@ -24,22 +24,18 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
 
-#define MSG_LANG_SPACING        1000
+typedef struct WResMergeError {
+    struct WResMergeError       *next;
+    WResDirWindow               dstres;
+    WResDirWindow               srcres;
+} WResMergeError;
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
-
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
-
-};
+int             WResMergeDirs( WResDir dstdir, WResDir srcdir,
+                               WResMergeError **errs );
+void            WResFreeMergeErrors( WResMergeError * );

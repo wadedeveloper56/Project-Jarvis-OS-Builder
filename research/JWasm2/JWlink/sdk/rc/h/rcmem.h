@@ -24,22 +24,28 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
 
-#define MSG_LANG_SPACING        1000
+#ifndef RCMEMORY_INCLUDED
+#define RCMEMORY_INCLUDED
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
+#include <stddef.h>
 
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
+void RcMemInit( void );
+void RcMemShutdown( void );
+void * RcMemMalloc( size_t size );
+void * RcMemRealloc( void * old_ptr, size_t newsize );
+void RcMemFree( void * ptr );
 
-};
+/* these function are only use for debuging and are only available if */
+/* the memory tracker was compiled into memory.c */
+void RcPrintUsage( void );
+void RcPrintList( void );
+int RcMemValidate( void * ptr );
+int RcMemChkRange( void * start, size_t len );
+
+#endif

@@ -24,22 +24,53 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
+#include "pch.h"
+#include <string.h>
+#include "wresrtns.h"
+#include "read.h"
+#include "reserr.h"
 
-#define MSG_LANG_SPACING        1000
+WResID * WResReadWResID( WResFileID handle )
+/******************************************/
+{
+    WResID      newid;
+    WResID *    newidptr;
+    int         numread;
+    int         extrabytes;     /* chars to be read beyond the fixed size */
+    int         error;
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
+    /* read in the fixed part of the record */
+    error = WResReadFixedWResID( &newid, handle );
+    if (error) {
+        return( NULL );
+    }
 
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
+    if (newid.IsName) {
+        extrabytes = newid.ID.Name.NumChars - 1;
+    } else {
+        extrabytes = 0;
+    }
 
-};
+    newidptr = WRESALLOC( sizeof(WResID) + extrabytes );
+    if (newidptr == NULL) {
+        WRES_ERROR( WRS_MALLOC_FAILED );
+    } else {
+        memcpy( newidptr, &newid, sizeof(WResID) );
+        if (extrabytes != 0) {
+            numread = (* WRESREAD) ( handle, &(newidptr->ID.Name.Name[1]),
+                                extrabytes );
+            if (numread != extrabytes) {
+                WRES_ERROR( numread == -1 ? WRS_READ_FAILED:WRS_READ_INCOMPLETE );
+                WRESFREE( newidptr );
+                newidptr = NULL;
+            }
+        }
+    }
+
+    return( newidptr );
+} /* WResReadWResID */

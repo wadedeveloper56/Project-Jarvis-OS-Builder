@@ -24,22 +24,15 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
 
-#define MSG_LANG_SPACING        1000
+#ifndef RESRAW_INCLUDED
+#define RESRAW_INCLUDED
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
+extern int ResWrite( void * buffer, int len, WResFileID handle );
 
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
-
-};
+#endif

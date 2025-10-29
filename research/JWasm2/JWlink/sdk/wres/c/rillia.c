@@ -24,22 +24,71 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
+#include "pch.h"
+/*
+ * MEM2.C - memory allocation/usage routines
+ *
+ * By:  Craig Eisler
+ *      June 4-5,11-12,17 1990
+ *      July 16,31 1990
+ *      August 1 1990
+ *      September 11 1990
+ *      October 31 1990
+ *      November 4,7,19,22 1990
+ *      December 28 1990
+ *      January 1 1991
+ *      March 30 1991
+ *
+ * Routines:
+ *              ResAddLLItemAtEnd
+ *              ResInsertLLItemAfter
+ *              ResInsertLLItemBefore
+ *              ResDeleteLLItem
+ *              ResReplaceLLItem
+ */
 
-#define MSG_LANG_SPACING        1000
+#include <stdlib.h>
+#include "mem2.h"
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
+typedef struct ss {
+struct ss *next,*prev;
+} ss;
 
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
 
-};
+/*
+ * ResInsertLLItemAfter - insert an item into a linked list after an item
+ */
+#ifdef __WATCOMC__
+#pragma off (unreferenced)
+#endif
+void ResInsertLLItemAfter( void **headptr, void **tailptr,
+                                void *whoptr, void *itemptr )
+#ifdef __WATCOMC__
+#pragma on (unreferenced)
+#endif
+{
+    ss          *after_who;
+    ss          **tail;
+    ss          *who;
+    ss          *item;
+
+    tail = (ss **)tailptr;
+    who  = (ss *)whoptr;
+    item = (ss *)itemptr;
+    after_who = who->next;
+    who->next = item;
+    item->prev = who;
+    item->next = after_who;
+
+    if( after_who == NULL ) {
+        *tail = item;
+    } else {
+        after_who->prev = item;
+    } /* if */
+
+} /* ResInsertLLItemAfter */

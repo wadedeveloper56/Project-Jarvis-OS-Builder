@@ -24,22 +24,38 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
+#include "pch.h"
+#include "wresrtns.h"
+#include "read.h"
+#include "reserr.h"
 
-#define MSG_LANG_SPACING        1000
+int WResReadExtraWResID( WResID * name, WResFileID handle )
+/*********************************************************/
+/* reads the extra bytes into the end of the structure */
+/* assumes that the fixed portion has just been read in and is in name and */
+/* that name is big enough to hold the extra bytes */
+{
+    int         numread;
+    uint_16     extrabytes;
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
-
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
-
-};
+    if (name->IsName) {
+        extrabytes = name->ID.Name.NumChars - 1;
+        if (extrabytes > 0) {
+            numread = (* WRESREAD) ( handle, &(name->ID.Name.Name[1]),
+                        extrabytes );
+            if( numread == -1 ) {
+                WRES_ERROR( WRS_READ_FAILED );
+                return( TRUE );
+            } else if( numread != extrabytes ) {
+                WRES_ERROR( WRS_READ_INCOMPLETE );
+                return( TRUE );
+            }
+        }
+    }
+    return( FALSE );
+}

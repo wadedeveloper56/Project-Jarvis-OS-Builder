@@ -24,22 +24,17 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
 
-#define MSG_LANG_SPACING        1000
+#ifndef RESTBAR_INCLUDED
+#define RESTBAR_INCLUDED
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
+int ResWriteToolBarHeader( WResFileID handle, uint_16 item1, uint_16 item2,
+                           uint_16 cnt );
+int ResWriteToolBarItems( WResFileID handle, uint_16 *items, unsigned cnt );
 
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
-
-};
+#endif

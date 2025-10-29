@@ -24,22 +24,54 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
+#include "pch.h"
+#include <string.h>
+#include "watcom.h"
+#include "wresrtns.h"
+#include "resnamor.h"
+#include "reserr.h"
 
-#define MSG_LANG_SPACING        1000
+extern ResNameOrOrdinal * ResStrToNameOrOrd( char * string )
+/**********************************************************/
+{
+    ResNameOrOrdinal *  newname;
+    int                 stringlen;
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
+    if( string == NULL || *(unsigned char *)string == 0xff ) {
+        /* the first character of a ResNameOrOrdinal can't be 0xff */
+        /* since this indicated that it is an ordinal, not a name */
+        WRES_ERROR( WRS_BAD_PARAMETER );
+        return( NULL );
+    }
 
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
+    stringlen = strlen( string );
 
-};
+    newname = WRESALLOC( sizeof(ResNameOrOrdinal) + stringlen );
+    if (newname != NULL) {
+        /* +1 so we get the '\0' as well */
+        memcpy( &(newname->name), string, stringlen + 1 );
+    } else {
+        WRES_ERROR( WRS_MALLOC_FAILED );
+    }
+
+    return( newname );
+}
+
+extern ResNameOrOrdinal * ResNumToNameOrOrd( uint_16 num )
+/********************************************************/
+{
+    ResNameOrOrdinal *  newname;
+
+    newname = WRESALLOC( sizeof(ResNameOrOrdinal) );
+    if (newname != NULL) {
+        newname->ord.fFlag = 0xff;
+        newname->ord.wOrdinalID = num;
+    }
+
+    return( newname );
+}

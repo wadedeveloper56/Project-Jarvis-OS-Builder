@@ -24,22 +24,32 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
 
-#define MSG_LANG_SPACING        1000
+#ifndef SEMTBAR_INCLUDED
+#define SEMTBAR_INCLUDED
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
+#define TB_ITEM_CNT     30
 
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
+typedef struct ToolBarItems {
+    struct ToolBarItems         *next;
+    unsigned                    cnt;
+    uint_16                     items[ TB_ITEM_CNT ];
+}ToolBarItems;
 
-};
+typedef struct ToolBar {
+    unsigned            nodecnt;
+    ToolBarItems        *last;
+    ToolBarItems        first;
+} ToolBar;
+
+ToolBar *SemCreateToolBar( void );
+void SemAddToolBarItem( ToolBar *toolbar, uint_16 item );
+void SemWriteToolBar( WResID *name, ToolBar *toolbar,
+                      unsigned long item1, unsigned long item2,
+                      ResMemFlags flags );
+#endif

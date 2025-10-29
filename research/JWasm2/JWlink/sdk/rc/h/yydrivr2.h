@@ -24,22 +24,17 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  Public interface to OS/2 specific yydriver module.
 *
 ****************************************************************************/
 
 
-#define MSG_LANG_SPACING        1000
+#ifndef _YYDRIVR2_H
+#define _YYDRIVR2_H
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
+extern void ParseInitOS2( void );
+extern void ParseFiniOS2( void );
+extern bool ParseOS2( void );
+extern void ParseInitStaticsOS2( void );
 
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
-
-};
+#endif

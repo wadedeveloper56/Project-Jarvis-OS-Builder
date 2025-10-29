@@ -24,22 +24,41 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
 
-#define MSG_LANG_SPACING        1000
+#ifndef TYPES_INCLUDED
+#define TYPES_INCLUDED
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
+#include <stddef.h>
 
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
+#ifndef BOOL_DEFINED
+#define BOOL_DEFINED
+typedef int bool;
+#endif
 
+enum {
+    false,
+    true
 };
+
+typedef enum {
+    RS_OK = 0,                  /* this must be 0 because it is sometimes
+                                 * checked like this:
+                                 *      if( ret ) { do stuff }
+                                 */
+    RS_PARAM_ERROR,
+    RS_INVALID_RESOURCE,
+    RS_READ_ERROR,
+    RS_READ_INCMPLT,
+    RS_WRITE_ERROR,
+    RS_NO_MEM,
+    RS_BAD_FILE_FMT,
+    RS_WRONG_VER,
+    RS_OPEN_ERROR,
+    RS_FILE_NOT_FOUND
+} RcStatus;
+#endif

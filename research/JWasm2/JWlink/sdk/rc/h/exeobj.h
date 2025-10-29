@@ -24,22 +24,17 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
 
-#define MSG_LANG_SPACING        1000
+#ifndef EXEOBJ_H_INCLUDED
+#define EXEOBJ_H_INCLUDED
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
+extern int CopyExeObjects( void );
+extern uint_32 GetNextObjPhysOffset( PEExeInfo * info );
+extern pe_va GetNextObjRVA( PEExeInfo * info );
 
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
-
-};
+#endif

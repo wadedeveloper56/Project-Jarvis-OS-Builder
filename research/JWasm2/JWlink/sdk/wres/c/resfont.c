@@ -24,22 +24,42 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
+#include "pch.h"
+#include "watcom.h"
+#include "layer0.h"
+#include "wresrtns.h"
+#include "resfont.h"
+#include "reserr.h"
 
-#define MSG_LANG_SPACING        1000
+extern int ResWriteFontInfo( FontInfo * info, WResFileID handle )
+/***************************************************************/
+{
+    int     numwrote;
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
+    numwrote = WRESWRITE( handle, info, sizeof(FontInfo) );
+    if( numwrote != sizeof(FontInfo) ) {
+        WRES_ERROR( WRS_WRITE_FAILED );
+        return( TRUE );
+    } else {
+        return( FALSE );
+    }
+}
 
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
+extern int ResWriteFontDirEntry( FontDirEntry * entry, WResFileID handle )
+/************************************************************************/
+{
+    int     numwrote;
 
-};
+    numwrote = WRESWRITE( handle, &(entry->Info), entry->StructSize );
+    if( numwrote != entry->StructSize ) {
+        WRES_ERROR( WRS_WRITE_FAILED );
+        return( TRUE );
+    } else {
+        return( FALSE );
+    }
+}

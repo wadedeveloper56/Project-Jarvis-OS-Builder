@@ -24,22 +24,46 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
 
-#define MSG_LANG_SPACING        1000
+#ifndef RCGLOBAL_INCLUDED
+#define RCGLOBAL_INCLUDED
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
+#ifndef RCEXTERN
+#define RCEXTERN extern
+#endif
 
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
+#include "param.h"
+#include "rcio.h"
+#include "pass2.h"
+#include "wresset2.h"
 
-};
+/****** constants describing global data ******/
+/* this is the size of the text input buffer for pass 1 and the data trasfer */
+/* buffer for pass 2 */
+#define IO_BUFFER_SIZE  0x8000      /* 32k */
+#ifdef WR_COMPILED
+#ifndef __NT__
+#undef  IO_BUFFER_SIZE
+#define IO_BUFFER_SIZE  0x4000      /* 16 */
+#endif
+#endif
+
+/****** uninitialized global data ******/
+RCEXTERN struct RCParams     CmdLineParms;
+RCEXTERN RcResFileID         CurrResFile;
+RCEXTERN RcPass2Info         Pass2Info;
+RCEXTERN char               *NewIncludeDirs;
+RCEXTERN char                CharSet[256];
+RCEXTERN HANDLE_INFO         Instance;
+RCEXTERN bool                StopInvoked;
+
+/****** initialized global data ******/
+extern int                  ErrorHasOccured;
+
+#undef RCEXTERN
+#endif

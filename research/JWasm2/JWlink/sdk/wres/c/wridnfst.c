@@ -24,22 +24,38 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
+#include "pch.h"
+#include <string.h>
+#include <limits.h>
+#include "wresrtns.h"
+#include "util.h"
+#include "reserr.h"
 
-#define MSG_LANG_SPACING        1000
+WResIDName * WResIDNameFromStr( char * string )
+/*********************************************/
+{
+    WResIDName *        newstring;
+    unsigned            stringlen;
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
+    stringlen = strlen( string );
+    if( stringlen >= USHRT_MAX ) {
+        /* truncate the string if it is more that UCHAR_MAX in length */
+        stringlen = USHRT_MAX;
+    }
 
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
+    newstring = WRESALLOC( sizeof(WResIDName) + stringlen - 1 );
+    if (newstring == NULL) {
+        WRES_ERROR( WRS_MALLOC_FAILED );
+    } else {
+        newstring->NumChars = stringlen;
+        /* don't copy the '\0' */
+        memcpy( &(newstring->Name), string, stringlen );
+    }
 
-};
+    return( newstring );
+}

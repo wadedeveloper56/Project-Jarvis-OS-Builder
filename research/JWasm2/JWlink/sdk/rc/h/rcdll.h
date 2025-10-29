@@ -24,22 +24,27 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
 
-#define MSG_LANG_SPACING        1000
+#ifndef RCDLL_INCLUDED
+#define RCDLL_INCLUDED
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
+#include <setjmp.h>
+#include "idedll.h"
 
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
+#define RC_BUFFER_SIZE     1024
 
-};
+extern char     ImageName[ _MAX_PATH ];
+
+extern int Dllmain( int argc, char *argv[] );
+IDEBool IDEDLL_EXPORT IDERunYourSelf( IDEDllHdl hdl, const char *opts, IDEBool *fatalerr );
+IDEBool IDEDLL_EXPORT IDEInitDLL( IDECBHdl hdl, IDECallBacks *cb, IDEDllHdl *info );
+unsigned IDEDLL_EXPORT IDEGetVersion( void );
+void IDEDLL_EXPORT IDEFiniDLL( IDEDllHdl hdl );
+
+#endif
+

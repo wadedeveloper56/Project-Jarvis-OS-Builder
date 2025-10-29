@@ -24,22 +24,26 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
 
-#define MSG_LANG_SPACING        1000
+#ifndef VARSTR_INCLUDED
+#define VARSTR_INCLUDED
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
+#define VAR_STR_PART_SIZE 64
+typedef struct VarString {
+    char                    partString[ VAR_STR_PART_SIZE ];
+    int                     lastLoc;
+    struct VarString *      next;
+} VarString;
+/* lastLoc is the location of the last char of this part of the string or */
+/* -1 if this part is empty */
 
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
+VarString * VarStringStart( void );
+void VarStringAddChar( VarString * list, int newchar );
+char * VarStringEnd( VarString * list, int * retlength );
 
-};
+#endif

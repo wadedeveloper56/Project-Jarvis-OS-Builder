@@ -24,22 +24,53 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
+#include "pch.h"
+#include <string.h>
+#include "wresrtns.h"
+#include "read.h"
+#include "reserr.h"
 
-#define MSG_LANG_SPACING        1000
+WResResInfo * WResReadResRecord( WResFileID handle )
+/****************************************************************/
+/* reads in the fields of a res info record from the current position in */
+/* the file identified by fp */
+{
+    WResResInfo     newres;
+    WResResInfo *   newptr;
+    int             numread;
+    int             numcharsleft;
+    int             error;
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
+    error = WResReadFixedResRecord( &newres, handle );
+    if (error) {
+        return( NULL );
+    }
 
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
+    if (newres.ResName.IsName) {
+        numcharsleft = newres.ResName.ID.Name.NumChars - 1;
+    } else {
+        numcharsleft = 0;
+    }
+    newptr = WRESALLOC( sizeof(WResResInfo) + numcharsleft );
+    if (newptr == NULL) {
+        WRES_ERROR( WRS_MALLOC_FAILED );
+    } else {
+        memcpy( newptr, &newres, sizeof(WResResInfo) );
+        if (numcharsleft != 0) {
+            numread = (* WRESREAD) ( handle,
+                    &(newptr->ResName.ID.Name.Name[1]), numcharsleft );
+            if (numread != numcharsleft) {
+                WRES_ERROR( numread == -1 ? WRS_READ_FAILED:WRS_READ_INCOMPLETE );
+                WRESFREE( newptr );
+                newptr = NULL;
+            }
+        }
+    }
 
-};
+    return( newptr );
+} /* WResReadResRecord */

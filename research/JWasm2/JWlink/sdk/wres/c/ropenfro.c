@@ -24,22 +24,31 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
+#include "pch.h"
+#include <io.h>
+#include <fcntl.h>
+#include "wresrtns.h"
+#include "opcl.h"
+#include "reserr.h"
 
-#define MSG_LANG_SPACING        1000
+WResFileID  ResOpenFileRO( const char * filename )
+/*************************************************/
+/* use this function to open Microsoft .RES files also */
+{
+    WResFileID          ret;
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
-
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
-
-};
+    ret = (* WRESOPEN)( filename, O_RDONLY );
+    if( ret == -1 ) {
+        WRES_ERROR( WRS_OPEN_FAILED );
+    }
+#if defined( __WATCOMC__ )
+    /* This is a kludge fix to avoid turning on the O_TRUNC bit under QNX */
+    setmode( ret, O_BINARY );
+#endif
+    return( ret );
+}

@@ -24,22 +24,21 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
 
-#define MSG_LANG_SPACING        1000
+#include "pass2.h"
+#include "param.h"
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
-
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
-
-};
+void ReportDupResource( WResID *nameid, WResID *typeid, char *file1,
+                           char *file2, int warn );
+int OpenResFiles( struct ExtraRes *resnames, struct ResFileInfo **resinfo,
+                  int *allopen, ExeType type, char *exename );
+void CloseResFiles( struct ResFileInfo *resfiles );
+void SharedIOInitStatics( void );
+extern char *LastWresErrStr( void );
+int LastWresStatus( void );
+int LastWresErr( void );

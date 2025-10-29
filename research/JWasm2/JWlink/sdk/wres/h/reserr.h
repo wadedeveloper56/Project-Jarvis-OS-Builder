@@ -24,22 +24,34 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
+#ifndef RESERR_H
+#define RESERR_H
 
-#define MSG_LANG_SPACING        1000
+typedef enum {
+    WRS_OK = 0,                 /* things will break if this is not 0 */
+    WRS_BAD_PARAMETER,
+    WRS_DUP_ENTRY,
+    WRS_BAD_SIG,
+    WRS_BAD_VERSION,
+    WRS_OPEN_FAILED,
+    WRS_CLOSE_FAILED,
+    WRS_WRITE_FAILED,
+    WRS_READ_FAILED,
+    WRS_SEEK_FAILED,
+    WRS_TELL_FAILED,
+    WRS_SRC_SEEK_FAILED,
+    WRS_DST_SEEK_FAILED,
+    WRS_MALLOC_FAILED,
+    WRS_READ_INCOMPLETE,
+    WRS_RES_NOT_FOUND
+} WResStatus;
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
+#define WRES_ERROR( x )         WresRecordError( x );
 
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
-
-};
+extern void WresRecordError( WResStatus status );
+#endif

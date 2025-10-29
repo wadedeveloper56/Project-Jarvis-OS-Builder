@@ -24,22 +24,20 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
+#include "pch.h"
+#include "wres.h"
 
-#define MSG_LANG_SPACING        1000
-
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
-
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
-
-};
+WResResInfo * WResGetResInfo( WResDirWindow currwind )
+/****************************************************/
+{
+    if (currwind.CurrRes == NULL) {
+        return( NULL );
+    } else {
+        return( &(currwind.CurrRes->Info) );
+    }
+}

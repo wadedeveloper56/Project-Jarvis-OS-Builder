@@ -24,22 +24,26 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
+#include "pch.h"
+#include "layer0.h"
+#include "wresrtns.h"
+#include "resbitmp.h"
+#include "reserr.h"
 
-#define MSG_LANG_SPACING        1000
+extern int ResWriteBitmapInfoHeader( BitmapInfoHeader * head, WResFileID handle)
+/******************************************************************************/
+{
+    int     numwrote;
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
-
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
-
-};
+    numwrote = WRESWRITE( handle, head, sizeof(BitmapInfoHeader) );
+    if( numwrote != sizeof(BitmapInfoHeader) ) {
+        WRES_ERROR( WRS_WRITE_FAILED )
+        return( TRUE );
+    }
+    return( FALSE );
+}

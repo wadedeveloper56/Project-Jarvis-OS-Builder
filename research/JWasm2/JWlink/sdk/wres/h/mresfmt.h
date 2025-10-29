@@ -24,22 +24,39 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
 
-#define MSG_LANG_SPACING        1000
+#ifndef MRES_INCLUDED
+#define MRES_INCLUDED
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
+#include "resfmt.h"
 
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
+#if !defined( NATURAL_PACK )
+#include "pushpck1.h"
+#endif
 
-};
+typedef struct MResResourceHeader {
+    ResNameOrOrdinal       *Type;
+    ResNameOrOrdinal       *Name;
+    uint_16                 MemoryFlags;
+    uint_32                 Size;
+    uint_16                 LanguageId;
+    uint_32                 Version;
+    uint_32                 DataVersion;
+    uint_32                 Characteristics;
+} _WCUNALIGNED MResResourceHeader;
+
+typedef struct M32ResResourceHeader {
+    MResResourceHeader      *head16;
+    uint_32                  HeaderSize;
+} M32ResResourceHeader;
+
+#if !defined( NATURAL_PACK )
+#include "poppck.h"
+#endif
+
+#endif

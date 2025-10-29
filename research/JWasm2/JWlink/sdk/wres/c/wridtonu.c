@@ -24,22 +24,34 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
+#include "pch.h"
+#include <stddef.h>
+#include "util.h"
 
-#define MSG_LANG_SPACING        1000
+long WResIDToNum( const WResID * num )
+/************************************/
+/* return the value in a string if it is a number, -1 otherwise */
+{
+    if (num != NULL && !num->IsName) {
+        return( num->ID.Num );
+    } else {
+        return( -1 );
+    }
+} /* WResIDToNum */
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
 
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
-
-};
+long WResHelpIDToNum( const WResHelpID * num )
+/************************************/
+/* return the value in a string if it is a number, -1 otherwise */
+{
+    if (num != NULL && !num->IsName) {
+        return( num->ID.Num );
+    } else {
+        return( -1 );
+    }
+} /* WResHelpIDToNum */

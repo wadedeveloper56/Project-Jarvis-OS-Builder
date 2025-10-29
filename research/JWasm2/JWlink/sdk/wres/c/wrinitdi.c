@@ -24,22 +24,31 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
+#include "pch.h"
+#include "wresrtns.h"
+#include "wres.h"
+#include "reserr.h"
 
-#define MSG_LANG_SPACING        1000
+WResDir WResInitDir( void )
+/*************************/
+{
+    WResDirHead *   newdir;
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
+    newdir = WRESALLOC( sizeof(WResDirHead) );
+    if (newdir == NULL) {
+        WRES_ERROR( WRS_MALLOC_FAILED );
+    } else {
+        newdir->NumResources = 0;
+        newdir->NumTypes = 0;
+        newdir->TargetOS = WRES_OS_WIN16;
+        newdir->Head = NULL;
+        newdir->Tail = NULL;
+    }
 
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
-
-};
+    return( newdir );
+}

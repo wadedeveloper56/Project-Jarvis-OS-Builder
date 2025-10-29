@@ -24,22 +24,54 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
+#include "pch.h"
+#include "wresrtns.h"
+#include "read.h"
+#include "reserr.h"
 
-#define MSG_LANG_SPACING        1000
+extern ResTypeInfo WResFindResType( WResFileID handle )
+/*****************************************************/
+{
+    ResTypeInfo    type;
+    off_t          savepos;
+    uint_32        magic[ 2 ];
+    int            error;
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
+    savepos = WRESSEEK( handle, 0, SEEK_SET );
+    if( savepos == -1L ) {
+        WRES_ERROR( WRS_SEEK_FAILED );
+    }
+    error = ResReadUint32( magic, handle );
+    if( !error ) {
+        error = ResReadUint32( magic + 1, handle );
+    }
+    savepos = WRESSEEK( handle, savepos, SEEK_SET );
+    if( savepos == -1L ) {
+        WRES_ERROR( WRS_SEEK_FAILED );
+    }
 
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
+    type = RT_WIN16; /* what to return if (error) ? */
+    if( !error ) {
+        if( magic[0] == WRESMAGIC0 && magic[1] == WRESMAGIC1 ) {
+            type = RT_WATCOM;
+        } else if( magic[0] == 0L ) {
+            type = RT_WIN32;
+        } else {
+            type = RT_WIN16;
+        }
+    }
+    return( type );
+}
 
-};
+int WResIsWResFile( WResFileID handle )
+/*************************************/
+/* Checks the start of the file identified by fp for the Magic number then */
+/* resets the postion in the file. Returns true is this is a WRes file */
+{
+   return( WResFindResType( handle ) == RT_WATCOM );
+} /* WResIsWResFile */

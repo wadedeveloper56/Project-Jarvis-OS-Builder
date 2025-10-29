@@ -24,22 +24,52 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
+#include "pch.h"
+#include "write.h"
+#include "restbar.h"
+#include "reserr.h"
+#include "wresrtns.h"
 
-#define MSG_LANG_SPACING        1000
+int ResWriteToolBarHeader( WResFileID handle, uint_16 item1, uint_16 item2,
+                           uint_16 cnt )
+/************************************************************************/
+{
+    uint_16     tmp;
+    int         ret;
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
+    // don't know why but MS RC puts out a 1 at the start of the resourece
+    // perhaps this is a version ????
+    tmp = 1;
+    ret =  ResWriteUint16( &tmp, handle );
+    if( !ret ) {
+        ret =  ResWriteUint16( &item1, handle );
+    }
+    if( !ret ) {
+        ret =  ResWriteUint16( &item2, handle );
+    }
+    if( !ret ) {
+        ret =  ResWriteUint16( &cnt, handle );
+    }
+    return( ret );
+}
 
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
+int ResWriteToolBarItems( WResFileID handle, uint_16 *items, unsigned cnt ) {
+/****************************************************************************/
 
-};
+    int         numwrite;
+    unsigned    size;
+
+    size = cnt * sizeof( uint_16 );
+    numwrite = (* WRESWRITE) ( handle, items, size );
+    if( numwrite != size ) {
+        WRES_ERROR( WRS_WRITE_FAILED );
+        return( TRUE );
+    } else {
+        return( FALSE );
+    }
+}

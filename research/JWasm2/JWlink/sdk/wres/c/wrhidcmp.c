@@ -24,22 +24,30 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
+#include "pch.h"
+#include "layer0.h"
+#include "util.h"
 
-#define MSG_LANG_SPACING        1000
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
+int WResHelpIDCmp( const WResHelpID * name1, const WResHelpID * name2 )
+/*********************************************************/
+{
+    int     same;
 
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
+    if (name1->IsName && name2->IsName) {
+        /* they are both names */
+        same = ( WResIDNameCmp( &(name1->ID.Name), &(name2->ID.Name) ) == 0 );
+    } else if (!(name1->IsName) && !(name2->IsName)) {
+        same = (name1->ID.Num == name2->ID.Num);
+    } else {
+        /* one is a name, the other is a number:  they are not the same */
+        same = FALSE;
+    }
 
-};
+    return( same );
+}

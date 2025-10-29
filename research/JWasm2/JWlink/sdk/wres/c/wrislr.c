@@ -24,22 +24,31 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
+#include "pch.h"
+#include "wres.h"
 
-#define MSG_LANG_SPACING        1000
+/*
+ * WResIsLastResource
+ */
+int WResIsLastResource( WResDirWindow currwind, WResDir currdir )
+{
+    return( currwind.CurrType == currdir->Tail &&
+                currwind.CurrRes == currdir->Tail->Tail );
+} /* WResIsLastResource */
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
+/*
+ * WResIsLastLangRes
+ */
+int WResIsLastLangRes( WResDirWindow currwind, WResDir currdir ) {
 
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
-
-};
+    if( WResIsLastResource( currwind, currdir ) ) {
+        return( currwind.CurrLang == currwind.CurrRes->Tail );
+    } else {
+        return( FALSE );
+    }
+}

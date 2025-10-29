@@ -24,22 +24,31 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
 
-#define MSG_LANG_SPACING        1000
+typedef enum {
+    SEV_BANNER,
+    SEV_DEBUG,
+    SEV_WARNING,
+    SEV_ERROR,
+    SEV_FATAL_ERR
+}OutputSeverity;
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
+#define OUTFLAG_FILE    0x0001
+#define OUTFLAG_LINE    0x0002
+#define OUTFLAG_ERRID   0x0004
 
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
+typedef struct {
+    OutputSeverity       severity;
+    unsigned long        flags;
+    const char          *file;
+    unsigned             lineno;
+    unsigned             errid;
+} OutPutInfo;
 
-};
+int RcFprintf( FILE *fp, OutPutInfo *info, const char *format, ... );
+void InitOutPutInfo( OutPutInfo *info );

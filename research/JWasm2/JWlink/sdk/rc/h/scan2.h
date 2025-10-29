@@ -24,22 +24,17 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  Lexical scanner interface, OS/2 specifics.
 *
 ****************************************************************************/
 
 
-#define MSG_LANG_SPACING        1000
+#ifndef SCAN2_H_INCLUDED
+#define SCAN2_H_INCLUDED
+#include "varstr.h"
+#include "param.h"
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
-
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
-
-};
+extern void  ScanInitOS2( void );
+extern int   ScanOS2( ScanValue * value );
+extern void  ScanInitStaticsOS2( void );
+#endif

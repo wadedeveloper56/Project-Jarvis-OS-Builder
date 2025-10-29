@@ -24,22 +24,24 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
+#include "pch.h"
+#include "wresrtns.h"
+#include "opcl.h"
+#include "reserr.h"
 
-#define MSG_LANG_SPACING        1000
+int ResCloseFile( WResFileID handle )
+/************************************/
+{
+    int         ret;
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
-
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
-
-};
+    ret = (* WRESCLOSE)( handle );
+    if( ret == -1 ) {
+        WRES_ERROR( WRS_CLOSE_FAILED );
+    }
+    return( ret );
+}

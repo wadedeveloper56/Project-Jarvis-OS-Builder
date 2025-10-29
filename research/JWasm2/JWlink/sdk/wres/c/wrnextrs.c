@@ -24,22 +24,39 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
+#include "pch.h"
+#include "wres.h"
 
-#define MSG_LANG_SPACING        1000
-
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
-
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
-
-};
+#ifdef __WATCOMC__
+#pragma off (unreferenced);
+#endif
+WResDirWindow WResNextResource( WResDirWindow currwind, WResDir currdir )
+#ifdef __WATCOMC__
+#pragma on (unreferenced);
+#endif
+/***********************************************************************/
+{
+    if( !WResIsEmptyWindow( currwind ) ) {
+        if( currwind.CurrLang->Next != NULL ) {
+            currwind.CurrLang = currwind.CurrLang->Next;
+        } else if( currwind.CurrRes->Next != NULL ) {
+            currwind.CurrRes = currwind.CurrRes->Next;
+            currwind.CurrLang = currwind.CurrRes->Head;
+        } else {
+            currwind.CurrType = currwind.CurrType->Next;
+            if( currwind.CurrType == NULL ) {
+                currwind.CurrLang = NULL;
+                currwind.CurrRes = NULL;
+            } else {
+                currwind.CurrRes = currwind.CurrType->Head;
+                currwind.CurrLang = currwind.CurrRes->Head;
+            }
+        }
+    }
+    return( currwind );
+} /* WResNextResource */

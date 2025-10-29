@@ -24,22 +24,49 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
 
-#define MSG_LANG_SPACING        1000
+#ifndef RESACCEL_INCLUDED
+#define RESACCEL_INCLUDED
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
+#include "watcom.h"
+#include "layer0.h"
 
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
+#if !defined( NATURAL_PACK )
+#include "pushpck1.h"
+#endif
 
-};
+typedef struct AccelTableEntry32 {
+    uint_16     Flags;
+    uint_16     Ascii;
+    uint_16     Id;
+    uint_16     Unknown;            /* I don't know what this field is for. */
+} AccelTableEntry32;                /* MS makes it 0. (padding?) */
+
+typedef struct AccelTableEntry {
+    uint_8      Flags;
+    uint_16     Ascii;
+    uint_16     Id;
+} _WCUNALIGNED AccelTableEntry;
+
+#if !defined( NATURAL_PACK )
+#include "poppck.h"
+#endif
+
+typedef uint_8  AccelFlags;
+#define ACCEL_ASCII     0x00        /* last bit is 0 */
+#define ACCEL_VIRTKEY   0x01
+#define ACCEL_NOINVERT  0x02
+#define ACCEL_SHIFT     0x04
+#define ACCEL_CONTROL   0x08
+#define ACCEL_ALT       0x10
+#define ACCEL_LAST      0x80
+
+int ResWriteAccelEntry( AccelTableEntry * currentry, WResFileID handle );
+int ResWriteAccelEntry32( AccelTableEntry32 *, WResFileID );
+
+#endif

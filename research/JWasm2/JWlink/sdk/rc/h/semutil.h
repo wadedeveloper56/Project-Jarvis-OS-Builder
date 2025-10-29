@@ -24,22 +24,20 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  Interface to semantic utility routines.
 *
 ****************************************************************************/
 
 
-#define MSG_LANG_SPACING        1000
+#ifndef SEMUTIL_INCLUDED
+#define SEMUTIL_INCLUDED
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
+#include "watcom.h"
+#include "rctypes.h"
 
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
+extern void             ReportCopyError( RcStatus status, int read_msg,
+                                char *filename, int err_code );
+extern RcStatus         CopyData( uint_32 offset, uint_32 length, int handle,
+                                void *buff, int buffsize, int *err_code );
 
-};
+#endif

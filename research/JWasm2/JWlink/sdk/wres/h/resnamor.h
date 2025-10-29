@@ -24,22 +24,34 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
 
-#define MSG_LANG_SPACING        1000
+#ifndef RESNAMORD_INCLUDED
+#define RESNAMORD_INCLUDED
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
+#include "watcom.h"
 
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
+#if !defined( NATURAL_PACK )
+#include "pushpck1.h"
+#endif
 
-};
+typedef union ResNameOrOrdinal {
+    struct Ordinal {
+        uint_8  fFlag;
+        uint_16 wOrdinalID;
+    } ord;
+    char        name[ 1 ];          /* '\0' terminated */
+} _WCUNALIGNED ResNameOrOrdinal;
+
+#if !defined( NATURAL_PACK )
+#include "poppck.h"
+#endif
+
+extern ResNameOrOrdinal * ResNumToNameOrOrd( uint_16 num );
+extern ResNameOrOrdinal * ResStrToNameOrOrd( char * string );
+
+#endif

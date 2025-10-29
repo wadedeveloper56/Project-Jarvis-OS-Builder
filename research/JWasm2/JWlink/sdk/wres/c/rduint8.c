@@ -24,22 +24,28 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
+#include "pch.h"
+#include "wresrtns.h"
+#include "read.h"
+#include "reserr.h"
 
-#define MSG_LANG_SPACING        1000
+extern int ResReadUint8( uint_8 * newint, WResFileID handle )
+/***********************************************************/
+{
+    int numread;
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
-
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
-
-};
+    numread = (* WRESREAD) ( handle, newint, sizeof(uint_8) );
+    if( numread == sizeof(uint_8) ) {
+        return( FALSE );
+    } else if( numread == -1 ) {
+        WRES_ERROR( WRS_READ_FAILED );
+    } else if( numread != sizeof(uint_8) ) {
+        WRES_ERROR( WRS_READ_INCOMPLETE );
+    }
+    return( TRUE );
+}

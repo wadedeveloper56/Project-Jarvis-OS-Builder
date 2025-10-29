@@ -24,22 +24,45 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
+#include "pch.h"
+#include <stddef.h>
+#include <string.h>
+#include "layer0.h"
+#include "wresrtns.h"
+#include "util.h"
+#include "reserr.h"
 
-#define MSG_LANG_SPACING        1000
+WResHelpID * WResHelpIDFromStr( const char * newstr )
+/*******************************************/
+/* allocate a Help ID and fill it in */
+{
+    WResHelpID *newid;
+    unsigned    strsize;
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
+    strsize = strlen( newstr );
+    /* check the size of the string:  can it fit in one byte? */
+    if (strsize <= 0xff) {
+        /* allocate the new Help ID */
+        // if strsize is non-zero then the memory allocated is larger
+        // than required by 1 byte
+        newid = WRESALLOC( sizeof(WResHelpID) + strsize );
 
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
+        if (newid == NULL) {
+            WRES_ERROR( WRS_MALLOC_FAILED );
+        } else {
+            newid->IsName = TRUE;
+            newid->ID.Name.NumChars = strsize;
+            memcpy( newid->ID.Name.Name, newstr, strsize );
+        }
+    } else {
+        WRES_ERROR( WRS_BAD_PARAMETER );
+        newid = NULL;
+    }
 
-};
+    return( newid );
+} /* WResHelpIDFromStr */

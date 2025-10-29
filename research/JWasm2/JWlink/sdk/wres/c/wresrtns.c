@@ -24,22 +24,26 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  Client callback routines for wres library.
 *
 ****************************************************************************/
+#include "pch.h"
+#ifdef __LINUX__
+#ifndef LINUX
+#define LINUX __LINUX__
+#endif
+#endif
 
+#include <io.h>
+#include <fcntl.h>
 
-#define MSG_LANG_SPACING        1000
+#if defined( __UNIX__ )
+#include <fcntl.h>
+#endif
+#include <stdlib.h>
+#include "wressetr.h"
+#if defined( __UNIX__ ) && !defined( __WATCOMC__ )
+    #include "clibext.h"
+#endif
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
-
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
-
-};
+WResSetRtns( _open, _close, _read, _write, _lseek, _tell, malloc, free );

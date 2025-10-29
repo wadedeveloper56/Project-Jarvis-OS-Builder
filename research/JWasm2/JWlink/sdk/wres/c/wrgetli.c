@@ -24,22 +24,38 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
+#include "pch.h"
+#include "wres.h"
 
+#if defined( __UNIX__ ) && !defined( BOOTSTRAP )
+#include "wreslang.h"
 
-#define MSG_LANG_SPACING        1000
+res_language_enumeration _WResLanguage(void)
+{
+    return( RLE_ENGLISH );
+}
+#endif
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
+WResLangInfo * WResGetLangInfo( WResDirWindow currwind )
+/****************************************************/
+{
+    if (currwind.CurrLang == NULL) {
+        return( NULL );
+    } else {
+        return( &(currwind.CurrLang->Info) );
+    }
+}
 
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
-
-};
+void *WResGetFileInfo( WResDirWindow currwind )
+/**********************************************/
+{
+    if( currwind.CurrLang == NULL ) {
+        return( NULL );
+    } else {
+        return( currwind.CurrLang->fileInfo );
+    }
+}

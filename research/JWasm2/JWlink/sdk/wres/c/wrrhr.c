@@ -24,22 +24,53 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
+#include "pch.h"
+#include "wresrtns.h"
+#include "read.h"
+#include "reserr.h"
 
-#define MSG_LANG_SPACING        1000
+int WResReadHeaderRecord( WResHeader * header, WResFileID handle )
+/****************************************************************/
+{
+    off_t   currpos;
+    int     error;
+    int     numread;
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
+    error = TRUE;
+    currpos = WRESSEEK( handle, 0, SEEK_SET );
+    if( currpos == -1L ) {
+        WRES_ERROR( WRS_SEEK_FAILED );
+    } else {
+        numread = WRESREAD( handle, header, sizeof(WResHeader) );
+        if( numread != sizeof(WResHeader) ) {
+            WRES_ERROR( numread == -1 ? WRS_READ_FAILED:WRS_READ_INCOMPLETE );
+        } else {
+            currpos = WRESSEEK( handle, currpos, SEEK_SET );
+            if( currpos == -1L ) {
+                WRES_ERROR( WRS_SEEK_FAILED );
+            } else {
+                error = FALSE;
+            }
+        }
+    }
+    return( error );
+}
 
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
+int WResReadExtHeader( WResExtHeader * head, WResFileID handle )
+/**************************************************************/
+{
+    int     numread;
 
-};
+    numread = WRESREAD( handle, head, sizeof(WResExtHeader) );
+    if( numread != sizeof(WResExtHeader) ) {
+        WRES_ERROR( numread == -1 ? WRS_READ_FAILED:WRS_READ_INCOMPLETE );
+        return( TRUE );
+    } else {
+        return( FALSE );
+    }
+}

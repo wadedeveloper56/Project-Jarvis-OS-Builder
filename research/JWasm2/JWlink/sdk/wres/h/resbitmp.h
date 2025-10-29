@@ -24,22 +24,38 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
 
-#define MSG_LANG_SPACING        1000
+#ifndef RESBITMP_INCLUDED
+#define RESBITMP_INCLUDED
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
+#include "watcom.h"
 
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
+#if !defined( NATURAL_PACK )
+#include "pushpck1.h"
+#endif
 
-};
+typedef struct BitmapInfoHeader {
+    uint_32     Size;
+    uint_32     Width;
+    uint_32     Height;
+    uint_16     Planes;
+    uint_16     BitCount;
+    uint_32     Compression;
+    uint_32     XPelsPerMeter;
+    uint_32     YPelsPerMeter;
+    uint_32     ClrUsed;
+    uint_32     ClrImportant;
+} BitmapInfoHeader;
+
+#if !defined( NATURAL_PACK )
+#include "poppck.h"
+#endif
+
+extern int ResWriteBitmapInfoHeader( BitmapInfoHeader *, WResFileID );
+
+#endif

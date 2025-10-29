@@ -24,22 +24,65 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
 
-#define MSG_LANG_SPACING        1000
+/*
+ * MEM2.C - memory allocation/usage routines
+ *
+ * By:  Craig Eisler
+ *      June 4-5,11-12,17 1990
+ *      July 16,31 1990
+ *      August 1 1990
+ *      September 11 1990
+ *      October 31 1990
+ *      November 4,7,19,22 1990
+ *      December 28 1990
+ *      January 1 1991
+ *      March 30 1991
+ *
+ * Routines:
+ *              ResAddLLItemAtEnd
+ *              ResInsertLLItemAfter
+ *              ResInsertLLItemBefore
+ *              ResDeleteLLItem
+ *              ResReplaceLLItem
+ */
+#include "pch.h"
+#include <stdlib.h>
+#include "mem2.h"
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
+typedef struct ss {
+struct ss *next,*prev;
+} ss;
 
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
 
-};
+/*
+ * ResReplaceLLItem - drop a replacement item into a linked list
+ */
+void ResReplaceLLItem( void **headptr, void **tailptr,
+                        void *itemptr, void *newptr )
+{
+    ss          **head;
+    ss          **tail;
+    ss          *item;
+    ss          *new;
+
+    head = (ss **)headptr;
+    tail = (ss **)tailptr;
+    item = (ss *)itemptr;
+    new  = (ss *)newptr;
+
+    if( item == *head ) *head = new;
+    if( item == *tail ) *tail = new;
+
+    new->prev = item->prev;
+    new->next = item->next;
+
+    if( item->prev != NULL ) item->prev->next = new;
+    if( item->next != NULL ) item->next->prev = new;
+
+} /* ResReplaceLLItem */

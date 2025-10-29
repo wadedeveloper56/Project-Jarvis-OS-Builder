@@ -24,22 +24,70 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
+#include "pch.h"
+#include "wresrtns.h"
+#include "wres.h"
 
-#define MSG_LANG_SPACING        1000
+void __FreeLangList( WResResNode *curres ) {
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
+    WResLangNode        *oldnode;
+    WResLangNode        *currnode;
 
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
+    currnode = curres->Head;
+    while( currnode != NULL ) {
+        oldnode = currnode;
+        currnode = currnode->Next;
+        WRESFREE( oldnode );
+    }
+    curres->Head = NULL;
+    curres->Tail = NULL;
+}
 
-};
+void __FreeResList( WResTypeNode *currtype )
+{
+    WResResNode         *oldnode;
+    WResResNode         *currnode;
+
+    currnode = currtype->Head;
+    while( currnode != NULL ) {
+        oldnode = currnode;
+        currnode = currnode->Next;
+        __FreeLangList( oldnode );
+        WRESFREE( oldnode );
+    }
+
+    currtype->Head = NULL;
+    currtype->Tail = NULL;
+}
+
+void __FreeTypeList( WResDirHead *currdir )
+{
+    WResTypeNode        *oldtype;
+    WResTypeNode        *currtype;
+
+    currtype = currdir->Head;
+    while( currtype != NULL ) {
+        oldtype = currtype;
+        currtype = currtype->Next;
+        __FreeResList( oldtype );
+        WRESFREE( oldtype );
+    }
+
+    currdir->Head = NULL;
+    currdir->Tail = NULL;
+}
+
+void WResFreeDir( WResDir currdir )
+/*********************************/
+{
+    if( currdir != NULL ) {
+        __FreeTypeList( currdir );
+
+        WRESFREE( currdir );
+    }
+}

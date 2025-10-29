@@ -24,22 +24,14 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  Functions to manipulate LX objects and object tables.
 *
 ****************************************************************************/
 
 
-#define MSG_LANG_SPACING        1000
+#ifndef EXELXOBJ_H_INCLUDED
+#define EXELXOBJ_H_INCLUDED
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
+extern int CopyLXExeObjects( void );
 
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
-
-};
+#endif

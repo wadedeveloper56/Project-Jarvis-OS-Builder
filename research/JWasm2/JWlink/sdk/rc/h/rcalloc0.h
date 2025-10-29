@@ -24,22 +24,43 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
 
-#define MSG_LANG_SPACING        1000
+typedef struct FreeListInfo {
+    char       *next;
+} FreeListInfo;
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
+typedef struct HeapList {
+    struct HeapList    *next;
+} HeapList;
 
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
+typedef struct HeapHandle {
+    HeapList             *list;
+    int                   heapsize;
+    int                   blocksize;
+    char                 *freeList;
+} HeapHandle;
 
-};
+#ifdef RCMEM_DEBUG
+#define RCMEM_STARTBYTE      0x94
+#define RCMEM_ENDBYTE        0xA1
+#define RCMEM_GARBAGEBYTE    0xE2
+typedef struct DebugMemInfo {
+    unsigned long       size;
+    unsigned char       startbyte;
+} DebugMemInfo;
+#endif
+
+extern void RCMemLayer0Free( void *mem, HeapHandle *heap );
+extern HeapHandle *RCMemLayer0NewHeap( int heapsize, int blocks_per_heap );
+extern void RCMemLayer0ShutDown( HeapHandle *heap );
+
+#ifdef RCMEM_DEBUG
+extern void *RCMemLayer0Malloc( HeapHandle *heap, size_t size );
+#else
+extern void *RCMemLayer0Malloc( HeapHandle *heap );
+#endif

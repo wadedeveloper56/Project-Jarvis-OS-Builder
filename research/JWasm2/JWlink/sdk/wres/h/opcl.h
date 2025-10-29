@@ -24,22 +24,23 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
 
-#define MSG_LANG_SPACING        1000
+#ifndef WRESOPEN_INCLUDED
+#define WRESOPEN_INCLUDED
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
+#include "layer0.h"
 
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
+WResFileID  WResOpenNewFile( const char * filename );
+WResFileID  MResOpenNewFile( const char * filename );
+WResFileID  ResOpenFileRO( const char * filename );
+WResFileID  ResOpenFileRW( const char * filename );
+int         WResFileInit( WResFileID );
+int         ResCloseFile( WResFileID );
+int         WResCheckWResFile( const char * filename );
 
-};
+#endif

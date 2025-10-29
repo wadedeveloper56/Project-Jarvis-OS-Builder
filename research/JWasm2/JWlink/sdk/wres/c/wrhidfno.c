@@ -24,22 +24,20 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
+#include "pch.h"
+#include "util.h"
 
-#define MSG_LANG_SPACING        1000
-
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
-
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
-
-};
+extern WResHelpID * WResHelpIDFromNameOrOrd( ResNameOrOrdinal * name )
+/************************************************************/
+{
+    if (name->ord.fFlag == 0xff) {
+        return( WResHelpIDFromNum( name->ord.wOrdinalID ) );
+    } else {
+        return( WResHelpIDFromStr( name->name ) );
+    }
+} /* WResHelpIDFromNameOrOrd */

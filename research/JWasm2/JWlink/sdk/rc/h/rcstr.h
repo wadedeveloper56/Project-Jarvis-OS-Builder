@@ -24,22 +24,37 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
 
-#define MSG_LANG_SPACING        1000
+#ifndef RCSTR_INCLUDED
+#define RCSTR_INCLUDED
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
+#include "wresall.h"
 
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
+typedef struct StringItem32 {
+    uint_16     NumChars;       /* length */
+    char        Name[2];        /* followed by that many characters */
+} StringItem32;
 
-};
+typedef struct StringItem16 {
+    uint_8      NumChars;       /* length */
+    char        Name[1];        /* followed by that many characters */
+} StringItem16;
+
+typedef struct StringBlock {
+    int         UseUnicode;
+    uint_16     StringBlockSize;
+    void *      StringBlock;
+    uint_16     StringListLen;  /* number of entries in the string list */
+    void        **StringList;   /* sorted array of pointers to strings in the StringBlock */
+} StringBlock;
+
+
+extern void     StringBlockBuild( StringBlock *, WResDir, int use_unicode );
+extern int_32   StringBlockFind( StringBlock *, WResIDName *name );
+extern int      CompareStringItems32( const StringItem32 *item1, const StringItem32 *item2 );
+#endif

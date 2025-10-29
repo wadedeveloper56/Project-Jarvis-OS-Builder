@@ -24,22 +24,22 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
+#include "pch.h"
+#include <stddef.h>
+#include "wresrtns.h"
+#include "util.h"
 
-#define MSG_LANG_SPACING        1000
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
-
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
-
-};
+void WResHelpIDFree( WResHelpID * oldid )
+/*******************************/
+/* release the space occupied by a Help ID */
+{
+    if (oldid != NULL) {
+        WRESFREE( oldid );
+    }
+} /* WResHelpIDFree */

@@ -24,22 +24,25 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
 
-#define MSG_LANG_SPACING        1000
+#ifndef WRESRTNS_INLCUDED
+#define WRESRTNS_INLCUDED
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
+#include "layer0.h"
+#include "wressetr.h"
 
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
+#define WRESOPEN        WResRtns.open
+#define WRESCLOSE       WResRtns.close
+#define WRESWRITE       WResRtns.write
+#define WRESREAD        WResRtns.read
+#define WRESSEEK        WResRtns.seek
+#define WRESTELL        WResRtns.tell
+#define WRESALLOC       WResRtns.alloc
+#define WRESFREE        WResRtns.free
 
-};
+#endif

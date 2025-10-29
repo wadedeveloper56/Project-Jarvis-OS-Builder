@@ -24,22 +24,18 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
 
-#define MSG_LANG_SPACING        1000
+#ifndef RESUTIL_H_INCLUDED
+#define RESUTIL_H_INCLUDED
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
+#define RES_PADDING( size, bound ) (((bound) - ((size) % (bound))) % (bound))
 
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
+#define DEF_LANG                0x00    /* LANG_NEUTRAL */
+#define DEF_SUBLANG             0x00    /* SUBLANG_NEUTRAL */
 
-};
+#endif

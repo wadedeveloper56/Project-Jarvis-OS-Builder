@@ -24,22 +24,16 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
 
-#define MSG_LANG_SPACING        1000
+#define BIGLIST_ID         0x3F  /* Some sentinel < 0xFF */
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
-
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
-
-};
+extern void RCMemLayer1Init( void );
+extern void *RCMemLayer1Malloc( size_t size );
+extern void RCMemLayer1Free( void *mem );
+extern void RCMemLayer1ShutDown( void );
+extern void *RCMemLayer1Realloc( void *mem, size_t size );

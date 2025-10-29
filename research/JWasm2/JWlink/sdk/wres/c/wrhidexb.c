@@ -24,22 +24,24 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
+#include "pch.h"
+#include "util.h"
 
-#define MSG_LANG_SPACING        1000
+int WResHelpIDExtraBytes( const WResHelpID * name )
+/*****************************************/
+{
+    int     extrabytes;
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
+    if (name->IsName) {
+        extrabytes = name->ID.Name.NumChars - 1;
+    } else {
+        extrabytes = 0;
+    }
 
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
-
-};
+    return( extrabytes );
+}

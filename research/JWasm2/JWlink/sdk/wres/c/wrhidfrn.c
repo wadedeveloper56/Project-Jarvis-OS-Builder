@@ -24,22 +24,34 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
+#include "pch.h"
+#include <stddef.h>
+#include <limits.h>
+#include "wresrtns.h"
+#include "util.h"
+#include "reserr.h"
 
-#define MSG_LANG_SPACING        1000
+WResHelpID * WResHelpIDFromNum( long newnum )
+/***********************************/
+/* allocate an ID and fill it in */
+{
+    WResHelpID *        newid;
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
-
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
-
-};
+    if( newnum < 0 || newnum > SHRT_MAX  ) {
+        newid = NULL;
+        WRES_ERROR( WRS_BAD_PARAMETER );
+    } else {
+        newid = WRESALLOC( sizeof(WResHelpID) );
+        if (newid == NULL) {
+            WRES_ERROR( WRS_MALLOC_FAILED );
+        } else {
+            WResInitHelpIDFromNum( newnum, newid );
+        }
+    }
+    return( newid );
+} /* WResHelpIDFromNum */

@@ -24,22 +24,57 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
 
-#define MSG_LANG_SPACING        1000
+#ifndef EXERESPE_H_INCLUDED
+#define EXERESPE_H_INCLUDED
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
+#include "watcom.h"
+#include "exepe.h"
+#include "wresall.h"
+#include "rcstr.h"
 
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
+typedef struct PEResDirEntry {
+    resource_dir_header Head;
+    int                 NumUnused;
+    struct PEResEntry * Children;
+} PEResDirEntry;
 
-};
+typedef struct PEResDataEntry {
+    resource_entry      Entry;
+    WResDirWindow       Wind;           /* window into the current WResDir */
+} PEResDataEntry;
+
+typedef struct PEResEntry {
+    resource_dir_entry  Entry;
+    void *              Name;
+    char                IsDirEntry;
+    union {
+        PEResDataEntry  Data;
+        PEResDirEntry   Dir;
+    } u;
+} PEResEntry;
+
+typedef struct PEResDir {
+    PEResDirEntry   Root;
+    uint_32         DirSize;
+    pe_va           ResRVA;
+    uint_32         ResOffset;
+    uint_32         ResSize;
+    StringBlock     String;
+} PEResDir;
+
+struct ResFileInfo;     // ANSI/gcc
+struct ExeFileInfo;
+
+int BuildResourceObject( struct ExeFileInfo *exeinfo,
+                         struct ResFileInfo *resinfo,
+                         pe_object *res_obj, unsigned_32 rva,
+                         unsigned_32 offset, int writebyfile );
+int RcBuildResourceObject( void );
+
+#endif

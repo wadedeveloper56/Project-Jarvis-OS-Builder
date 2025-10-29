@@ -24,22 +24,63 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
+#include "pch.h"
 
+/*
+ * MEM2.C - memory allocation/usage routines
+ *
+ * By:  Craig Eisler
+ *      June 4-5,11-12,17 1990
+ *      July 16,31 1990
+ *      August 1 1990
+ *      September 11 1990
+ *      October 31 1990
+ *      November 4,7,19,22 1990
+ *      December 28 1990
+ *      January 1 1991
+ *      March 30 1991
+ *
+ * Routines:
+ *              ResAddLLItemAtEnd
+ *              ResInsertLLItemAfter
+ *              ResInsertLLItemBefore
+ *              ResDeleteLLItem
+ *              ResReplaceLLItem
+ */
 
-#define MSG_LANG_SPACING        1000
+#include <stdlib.h>
+#include "mem2.h"
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
+typedef struct ss {
+struct ss *next,*prev;
+} ss;
 
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
+/*
+ * ResAddLLItemAtEnd - create a new item at the tail of a linked list
+ */
+void ResAddLLItemAtEnd( void **head, void **tail, void *item )
+{
+    ss          **headptr;
+    ss          **tailptr;
+    ss          *itemptr;
 
-};
+    headptr = (ss **)head;
+    tailptr = (ss **)tail;
+    itemptr = (ss *)item;
+
+    if( *headptr == NULL ) {
+        *headptr = *tailptr = itemptr;
+        itemptr->next = NULL;
+        itemptr->prev = NULL;
+    } else {
+        itemptr->prev = *tailptr;
+        itemptr->next = NULL;
+        (*tailptr)->next = itemptr;
+        *tailptr = itemptr;
+    } /* if */
+
+} /* ResAddLLItemAtEnd */

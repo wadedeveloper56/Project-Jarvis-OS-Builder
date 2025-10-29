@@ -24,22 +24,45 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  Semantic actions for processing raw resource data.
 *
 ****************************************************************************/
 
 
-#define MSG_LANG_SPACING        1000
+#ifndef SEMRAW_INCLUDED
+#define SEMRAW_INCLUDED
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
+#include "watcom.h"
+#include "rctypes.h"
 
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
+#define MAX_DATA_NODES     100
 
-};
+typedef struct RawDataItem {
+    uint_8      IsString;
+    uint_8      LongItem;
+    uint_16     StrLen;
+    uint_8      TmpStr;
+    uint_8      WriteNull;
+    union {
+        char    *String;
+        uint_32  Num;
+    } Item;
+} RawDataItem;
+
+typedef struct DataElemList {
+    struct DataElemList   *next;
+    RawDataItem            data[ MAX_DATA_NODES ];
+    uint_16                count;
+} DataElemList;
+
+extern void SemWriteRawDataItem( RawDataItem item );
+extern RcStatus SemCopyDataUntilEOF( long offset, int handle, void *buff,
+                int buffsize, int *err_code );
+extern ResLocation SemCopyRawFile( char *filename );
+extern ResLocation SemFlushDataElemList( DataElemList *head, char call_startend );
+extern DataElemList *SemAppendDataElem( DataElemList *head, RawDataItem node );
+extern DataElemList *SemNewDataElemList( RawDataItem node );
+extern DataElemList *SemNewDataElemListNode( void );
+extern void SemFreeDataElemList( DataElemList *head );
+
+#endif

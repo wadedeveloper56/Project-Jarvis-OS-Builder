@@ -24,22 +24,41 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
+#include "pch.h"
+#include "wres.h"
 
-#define MSG_LANG_SPACING        1000
+WResDirWindow WResFirstResource( WResDir currdir )
+/************************************************/
+{
+    WResDirWindow   wind;
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
+    wind.CurrType = currdir->Head;
+    wind.CurrRes = wind.CurrType->Head;
+    wind.CurrLang = wind.CurrRes->Head;
 
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
+    return( wind );
+}
 
-};
+void WResSetEmptyWindow( WResDirWindow *wind ) {
+/***********************************************/
+    if( wind != NULL ) {
+        wind->CurrType = NULL;
+        wind->CurrRes = NULL;
+        wind->CurrLang = NULL;
+    }
+}
+
+void WResMakeWindow( WResDirWindow *wind, WResTypeNode *type,
+                        WResResNode *res, WResLangNode *lang ) {
+/*****************************************************************/
+    if( wind != NULL ) {
+        wind->CurrType = type;
+        wind->CurrRes = res;
+        wind->CurrLang = lang;
+    }
+}

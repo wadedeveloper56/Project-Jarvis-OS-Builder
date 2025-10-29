@@ -24,22 +24,30 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
+#include "pch.h"
+#include "read.h"
+#include "opcl.h"
 
-#define MSG_LANG_SPACING        1000
+int WResCheckWResFile( const char * filename )
+/********************************************/
+{
+    int         iswresfile;
+    WResFileID  handle;
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
+    handle = ResOpenFileRO( filename );
 
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
+    if (handle == -1) {
+        return( FALSE );        /* assume it's not a WRES file */
+    }
 
-};
+    iswresfile = WResIsWResFile( handle );
+
+    ResCloseFile( handle );
+
+    return( iswresfile );
+}

@@ -24,22 +24,34 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
 
-#define MSG_LANG_SPACING        1000
+#ifndef RESSTR_INCLUDED
+#define RESSTR_INCLUDED
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
+#include "filefmt.h"
 
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
+#define STRTABLE_STRS_PER_BLOCK     16
 
-};
+#if !defined( NATURAL_PACK )
+#include "pushpck1.h"
+#endif
+
+typedef struct StringTableBlock {
+    WResIDName *                String[ STRTABLE_STRS_PER_BLOCK ];
+} StringTableBlock;
+
+#if !defined( NATURAL_PACK )
+#include "poppck.h"
+#endif
+
+extern void ResInitStringTableBlock( StringTableBlock * );
+extern void ResFreeStringTableBlock( StringTableBlock * );
+extern int ResWriteStringTableBlock( StringTableBlock * currblock,
+                            uint_8 use_unicode, WResFileID handle );
+
+#endif

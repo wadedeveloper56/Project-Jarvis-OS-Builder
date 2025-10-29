@@ -24,22 +24,29 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
+#include "pch.h"
+#include <fcntl.h>
+#include <sys/stat.h>
+#include "wresrtns.h"
+#include "opcl.h"
+#include "reserr.h"
+#if defined( __UNIX__ ) && !defined( __WATCOMC__ )
+#include "clibext.h"
+#endif
 
+WResFileID  ResOpenFileRW( const char * filename )
+/*************************************************/
+{
+    WResFileID          ret;
 
-#define MSG_LANG_SPACING        1000
-
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
-
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
-
-};
+    ret = (* WRESOPEN) ( filename, O_CREAT | O_RDWR | O_BINARY,
+                        S_IWRITE | S_IREAD );
+    if( ret == -1 ) {
+        WRES_ERROR( WRS_OPEN_FAILED );
+    }
+    return( ret );
+}

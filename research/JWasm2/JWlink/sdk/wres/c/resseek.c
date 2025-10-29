@@ -24,22 +24,50 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
+#include "pch.h"
+#include "wresrtns.h"
+#include "resutil.h"
+#include "read.h"
+#include "reserr.h"
 
-#define MSG_LANG_SPACING        1000
+extern off_t ResSeek( WResFileID handle, off_t offset, int origin )
+/*****************************************************************/
+/* cover function for seek */
+{
+    off_t               posn;
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
+    posn = WRESSEEK( handle, offset, origin );
+    if( posn == -1L ) {
+        WRES_ERROR( WRS_SEEK_FAILED );
+    }
+    return( posn );
+}
 
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
+extern int ResPadDWord( WResFileID handle )
+/*****************************************/
+/* advances in the file to the next DWORD boundry */
+{
+    off_t   curr_pos;
+    off_t   padding;
+    int     error;
 
-};
+    error = FALSE;
+    curr_pos = WRESTELL( handle );
+    if( curr_pos == -1 ) {
+        WRES_ERROR( WRS_TELL_FAILED );
+        error = TRUE;
+    } else {
+        padding = RES_PADDING( curr_pos, sizeof(uint_32) );
+        curr_pos = WRESSEEK( handle, padding, SEEK_CUR );
+        if( curr_pos == -1L ) {
+            WRES_ERROR( WRS_SEEK_FAILED );
+            error = TRUE;
+        }
+    }
+    return( error );
+}

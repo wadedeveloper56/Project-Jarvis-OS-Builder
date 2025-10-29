@@ -24,22 +24,31 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
+#include "pch.h"
+/* Structure now declared in wresrtns.c */
+/* This file should be replace by a call to the WResSetRtns macro in projects */
+/* that define their own low level routines. */
+#if 0
 
-#define MSG_LANG_SPACING        1000
+#include <io.h>
+#include <malloc.h>
+#include "layer0.h"
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
 
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
-
+struct WResRoutines WResRtns = {
+    open,       /* from io.h */
+    close,
+    write,
+    read,
+    lseek,
+    tell,
+    malloc,     /* from malloc.h */
+    free
 };
+
+#endif

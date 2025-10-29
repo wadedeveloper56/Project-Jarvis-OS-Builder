@@ -24,22 +24,43 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  Data types used by lexical scanner.
 *
 ****************************************************************************/
 
 
-#define MSG_LANG_SPACING        1000
+#ifndef SCAN_H_INCLUDED
+#define SCAN_H_INCLUDED
+#include "varstr.h"
+#include "param.h"
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
+typedef struct ScanString {
+    int         lstring;        /* was string prefixed by L like this L"bob" */
+    int         length;
+    char        *string;
+} ScanString;
 
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
+typedef enum {
+    SCAN_INT_TYPE_DEFAULT,
+    SCAN_INT_TYPE_LONG,
+    SCAN_INT_TYPE_UNSIGNED
+} ScanIntType;
 
-};
+typedef struct {
+    ScanIntType		type;   /* non-default int type - long/unsigned */
+    unsigned long       val;
+    char                *str;
+} ScanInt;
+
+typedef union {
+    ScanInt     intinfo;
+    ScanString  string;
+    char        UnknownChar;
+} ScanValue;
+
+extern void  ScanInit( void );
+extern int   Scan( ScanValue * value );
+extern void  ScanInitStatics( void );
+extern char  *FindAndReplace( char *stringFromFile, FRStrings *frStrings );
+extern void  PrependToString( ScanValue *value, char *stringFromFile );
+#endif

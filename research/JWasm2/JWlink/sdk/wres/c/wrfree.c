@@ -24,22 +24,31 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
+#include "pch.h"
+#include <string.h>
+#include "filefmt.h"
+#include "resfmt.h"
+#include "mresfmt.h"
+#include "wresrtns.h"
+#include "layer0.h"
+#include "write.h"
+#include "reserr.h"
+#include "read.h"
 
-#define MSG_LANG_SPACING        1000
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
-
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
-
-};
+void MResFreeResourceHeader( MResResourceHeader * oldheader )
+/***********************************************************/
+{
+    if (oldheader->Type != NULL) {
+        WRESFREE( oldheader->Type );
+    }
+    if (oldheader->Name != NULL) {
+        WRESFREE( oldheader->Name );
+    }
+    WRESFREE( oldheader );
+} /* MResFreeResourceHeader */

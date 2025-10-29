@@ -24,22 +24,47 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
+#include "pch.h"
+#include "wresrtns.h"
+#include "read.h"
+#include "reserr.h"
 
-#define MSG_LANG_SPACING        1000
+WResIDName * WResReadWResIDName( WResFileID handle )
+/**************************************************/
+{
+    WResIDName      newname;
+    WResIDName *    newptr;
+    int             numread;
+    int             error;
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
+    /* read the size of the name in */
+    error = ResReadUint8( &(newname.NumChars), handle );
 
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "rc.msg"
-#undef pick
+    /* alloc the space for the new record */
+    if (error) {
+        return( NULL );
+    } else {
+        /* -1 because one of the chars in the name is declared in the struct */
+        newptr = WRESALLOC( sizeof(WResIDName) + newname.NumChars - 1 );
+    }
 
-};
+    /* read in the characters */
+    if (newptr == NULL) {
+        WRES_ERROR( WRS_MALLOC_FAILED );
+    } else {
+        newptr->NumChars = newname.NumChars;
+        numread = (* WRESREAD) ( handle, newptr->Name, newptr->NumChars );
+        if (numread != newptr->NumChars) {
+            WRES_ERROR( numread == -1 ? WRS_READ_FAILED:WRS_READ_INCOMPLETE );
+            WRESFREE( newptr );
+            newptr = NULL;
+        }
+    }
+
+    return( newptr );
+} /* WResReadWResIDName */
