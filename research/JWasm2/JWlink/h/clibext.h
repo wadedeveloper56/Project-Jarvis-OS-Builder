@@ -27,9 +27,9 @@
 #ifndef O_TEXT
 #define O_TEXT 0
 #endif
-//#define stricmp _strcasecmp
-//#define strcmpi strcasecmp
-//#define strnicmp strncasecmp
+#define stricmp strcasecmp
+#define strcmpi strcasecmp
+#define strnicmp strncasecmp
 #ifndef getch
 #define getch getchar
 #endif
@@ -82,7 +82,7 @@
 #define _WCNEAR
 #define __int64 long long
 
-//#define _HEAPOK 0
+#define _HEAPOK 0
 #define _heapchk(x) _HEAPOK
 #define _expand(x,y) (NULL)
 
