@@ -143,104 +143,107 @@ typedef struct {
 /* from the COFF/PE docs */
 
 // CPU types
+
 enum {
-    IMAGE_FILE_MACHINE_UNKNOWN          = 0,
-    IMAGE_FILE_MACHINE_I386             = 0x014c, // Intel 386.
+    //IMAGE_FILE_MACHINE_UNKNOWN          = 0,
+    //IMAGE_FILE_MACHINE_I386             = 0x014c, // Intel 386.
     IMAGE_FILE_MACHINE_I860             = 0x014d, // Intel 860.
-    IMAGE_FILE_MACHINE_R3000            = 0x0162, // MIPS little-endian, 0x160 big-endian
-    IMAGE_FILE_MACHINE_R4000            = 0x0166, // MIPS little-endian
-    IMAGE_FILE_MACHINE_R10000           = 0x0168, // MIPS little-endian
-    IMAGE_FILE_MACHINE_WCEMIPSV2        = 0x0169, // MIPS little-endian WCE v2
-    IMAGE_FILE_MACHINE_ALPHA            = 0x0184, // Alpha_AXP
-    IMAGE_FILE_MACHINE_POWERPC          = 0x01F0, // IBM PowerPC Little-Endian
-    IMAGE_FILE_MACHINE_SH3              = 0x01a2, // SH3 little-endian
-    IMAGE_FILE_MACHINE_SH3E             = 0x01a4, // SH3E little-endian
-    IMAGE_FILE_MACHINE_SH4              = 0x01a6, // SH4 little-endian
-    IMAGE_FILE_MACHINE_ARM              = 0x01c0, // ARM Little-Endian
-    IMAGE_FILE_MACHINE_THUMB            = 0x01c2,
-    IMAGE_FILE_MACHINE_IA64             = 0x0200, // Intel 64
-    IMAGE_FILE_MACHINE_MIPS16           = 0x0266, // MIPS
-    IMAGE_FILE_MACHINE_MIPSFPU          = 0x0366, // MIPS
-    IMAGE_FILE_MACHINE_MIPSFPU16        = 0x0466, // MIPS
-    IMAGE_FILE_MACHINE_ALPHA64          = 0x0284, // ALPHA64
-    IMAGE_FILE_MACHINE_AXP64            = IMAGE_FILE_MACHINE_ALPHA64,
-    IMAGE_FILE_MACHINE_AMD64            = 0x8664  // AMD64 / Intel EM64T
+    //IMAGE_FILE_MACHINE_R3000            = 0x0162, // MIPS little-endian, 0x160 big-endian
+    //IMAGE_FILE_MACHINE_R4000            = 0x0166, // MIPS little-endian
+    //IMAGE_FILE_MACHINE_R10000           = 0x0168, // MIPS little-endian
+    //IMAGE_FILE_MACHINE_WCEMIPSV2        = 0x0169, // MIPS little-endian WCE v2
+    //IMAGE_FILE_MACHINE_ALPHA            = 0x0184, // Alpha_AXP
+    //IMAGE_FILE_MACHINE_POWERPC          = 0x01F0, // IBM PowerPC Little-Endian
+    //IMAGE_FILE_MACHINE_SH3              = 0x01a2, // SH3 little-endian
+    //IMAGE_FILE_MACHINE_SH3E             = 0x01a4, // SH3E little-endian
+    //IMAGE_FILE_MACHINE_SH4              = 0x01a6, // SH4 little-endian
+    //IMAGE_FILE_MACHINE_ARM              = 0x01c0, // ARM Little-Endian
+    //IMAGE_FILE_MACHINE_THUMB            = 0x01c2,
+    //IMAGE_FILE_MACHINE_IA64             = 0x0200, // Intel 64
+    //IMAGE_FILE_MACHINE_MIPS16           = 0x0266, // MIPS
+    //IMAGE_FILE_MACHINE_MIPSFPU          = 0x0366, // MIPS
+    //IMAGE_FILE_MACHINE_MIPSFPU16        = 0x0466, // MIPS
+    //IMAGE_FILE_MACHINE_ALPHA64          = 0x0284, // ALPHA64
+    //IMAGE_FILE_MACHINE_AXP64            = IMAGE_FILE_MACHINE_ALPHA64,
+    //IMAGE_FILE_MACHINE_AMD64            = 0x8664  // AMD64 / Intel EM64T
 };
 
 // file flag values
+
 enum {
-    IMAGE_FILE_RELOCS_STRIPPED          = 0x0001, // Relocation info stripped from file.
-    IMAGE_FILE_EXECUTABLE_IMAGE         = 0x0002, // File is executable  (i.e. no unresolved externel references).
-    IMAGE_FILE_LINE_NUMS_STRIPPED       = 0x0004, // Line nunbers stripped from file.
-    IMAGE_FILE_LOCAL_SYMS_STRIPPED      = 0x0008, // Local symbols stripped from file.
-    IMAGE_FILE_AGGRESIVE_WS_TRIM        = 0x0010, // Agressively trim working set
-    IMAGE_FILE_LARGE_ADDRESS_AWARE      = 0x0020, // App can handle >2gb addresses
+    //IMAGE_FILE_RELOCS_STRIPPED          = 0x0001, // Relocation info stripped from file.
+    //IMAGE_FILE_EXECUTABLE_IMAGE         = 0x0002, // File is executable  (i.e. no unresolved externel references).
+    //IMAGE_FILE_LINE_NUMS_STRIPPED       = 0x0004, // Line nunbers stripped from file.
+    //IMAGE_FILE_LOCAL_SYMS_STRIPPED      = 0x0008, // Local symbols stripped from file.
+    //IMAGE_FILE_AGGRESIVE_WS_TRIM        = 0x0010, // Agressively trim working set
+    //IMAGE_FILE_LARGE_ADDRESS_AWARE      = 0x0020, // App can handle >2gb addresses
     IMAGE_FILE_16BIT_MACHINE            = 0x0040,
-    IMAGE_FILE_BYTES_REVERSED_LO        = 0x0080, // Bytes of machine word are reversed.
-    IMAGE_FILE_32BIT_MACHINE            = 0x0100, // 32 bit word machine.
-    IMAGE_FILE_DEBUG_STRIPPED           = 0x0200, // Debugging info stripped from file in .DBG file
-    IMAGE_FILE_REMOVABLE_RUN_FROM_SWAP  = 0x0400, // If Image is on removable media, copy and run from the swap file.
-    IMAGE_FILE_NET_RUN_FROM_SWAP        = 0x0800, // If Image is on Net, copy and run from the swap file.
-    IMAGE_FILE_SYSTEM                   = 0x1000, // System File.
-    IMAGE_FILE_DLL                      = 0x2000, // File is a DLL.
-    IMAGE_FILE_UP_SYSTEM_ONLY           = 0x4000, // File should only be run on a UP machine
-    IMAGE_FILE_BYTES_REVERSED_HI        = 0x8000  // Bytes of machine word are reversed.
+    //IMAGE_FILE_BYTES_REVERSED_LO        = 0x0080, // Bytes of machine word are reversed.
+    //IMAGE_FILE_32BIT_MACHINE            = 0x0100, // 32 bit word machine.
+    //IMAGE_FILE_DEBUG_STRIPPED           = 0x0200, // Debugging info stripped from file in .DBG file
+    //IMAGE_FILE_REMOVABLE_RUN_FROM_SWAP  = 0x0400, // If Image is on removable media, copy and run from the swap file.
+    //IMAGE_FILE_NET_RUN_FROM_SWAP        = 0x0800, // If Image is on Net, copy and run from the swap file.
+    //IMAGE_FILE_SYSTEM                   = 0x1000, // System File.
+    //IMAGE_FILE_DLL                      = 0x2000, // File is a DLL.
+    //IMAGE_FILE_UP_SYSTEM_ONLY           = 0x4000, // File should only be run on a UP machine
+    //IMAGE_FILE_BYTES_REVERSED_HI        = 0x8000  // Bytes of machine word are reversed.
 };
 
 // section flag values
+
 enum {
 //  IMAGE_SCN_TYPE_REG                  = 0x00000000, // Reserved.
 //  IMAGE_SCN_TYPE_DSECT                = 0x00000001, // Reserved.
 //  IMAGE_SCN_TYPE_NOLOAD               = 0x00000002, // Reserved.
 //  IMAGE_SCN_TYPE_GROUP                = 0x00000004, // Reserved.
-    IMAGE_SCN_TYPE_NO_PAD               = 0x00000008, // Reserved.
+//  IMAGE_SCN_TYPE_NO_PAD               = 0x00000008, // Reserved.
 //  IMAGE_SCN_TYPE_COPY                 = 0x00000010, // Reserved.
 
-    IMAGE_SCN_CNT_CODE                  = 0x00000020, // Section contains code.
-    IMAGE_SCN_CNT_INITIALIZED_DATA      = 0x00000040, // Section contains initialized data.
-    IMAGE_SCN_CNT_UNINITIALIZED_DATA    = 0x00000080, // Section contains uninitialized data.
+    //IMAGE_SCN_CNT_CODE                  = 0x00000020, // Section contains code.
+    //IMAGE_SCN_CNT_INITIALIZED_DATA      = 0x00000040, // Section contains initialized data.
+    //IMAGE_SCN_CNT_UNINITIALIZED_DATA    = 0x00000080, // Section contains uninitialized data.
 
-    IMAGE_SCN_LNK_OTHER                 = 0x00000100, // Reserved.
-    IMAGE_SCN_LNK_INFO                  = 0x00000200, // Section contains comments or some other type of information.
+    //IMAGE_SCN_LNK_OTHER                 = 0x00000100, // Reserved.
+    //IMAGE_SCN_LNK_INFO                  = 0x00000200, // Section contains comments or some other type of information.
 //  IMAGE_SCN_TYPE_OVER                 = 0x00000400, // Reserved.
-    IMAGE_SCN_LNK_REMOVE                = 0x00000800, // Section contents will not become part of image.
-    IMAGE_SCN_LNK_COMDAT                = 0x00001000, // Section contents comdat.
+    //IMAGE_SCN_LNK_REMOVE                = 0x00000800, // Section contents will not become part of image.
+    //IMAGE_SCN_LNK_COMDAT                = 0x00001000, // Section contents comdat.
 //                                      = 0x00002000, // Reserved.
 //  IMAGE_SCN_MEM_PROTECTED - Obsolete  = 0x00004000,
-    IMAGE_SCN_NO_DEFER_SPEC_EXC         = 0x00004000, // Reset speculative exceptions handling bits in the TLB entries for this section.
-    IMAGE_SCN_GPREL                     = 0x00008000, // Section content can be accessed relative to GP
-    IMAGE_SCN_MEM_FARDATA               = 0x00008000,
+    //IMAGE_SCN_NO_DEFER_SPEC_EXC         = 0x00004000, // Reset speculative exceptions handling bits in the TLB entries for this section.
+    //IMAGE_SCN_GPREL                     = 0x00008000, // Section content can be accessed relative to GP
+    //IMAGE_SCN_MEM_FARDATA               = 0x00008000,
 //  IMAGE_SCN_MEM_SYSHEAP  - Obsolete   = 0x00010000,
-    IMAGE_SCN_MEM_PURGEABLE             = 0x00020000,
-    IMAGE_SCN_MEM_16BIT                 = 0x00020000,
-    IMAGE_SCN_MEM_LOCKED                = 0x00040000,
-    IMAGE_SCN_MEM_PRELOAD               = 0x00080000,
-
-    IMAGE_SCN_ALIGN_1BYTES              = 0x00100000, //
-    IMAGE_SCN_ALIGN_2BYTES              = 0x00200000, //
-    IMAGE_SCN_ALIGN_4BYTES              = 0x00300000, //
-    IMAGE_SCN_ALIGN_8BYTES              = 0x00400000, //
-    IMAGE_SCN_ALIGN_16BYTES             = 0x00500000, // Default alignment if no others are specified.
-    IMAGE_SCN_ALIGN_32BYTES             = 0x00600000, //
-    IMAGE_SCN_ALIGN_64BYTES             = 0x00700000, //
-    IMAGE_SCN_ALIGN_128BYTES            = 0x00800000, //
-    IMAGE_SCN_ALIGN_256BYTES            = 0x00900000, //
-    IMAGE_SCN_ALIGN_512BYTES            = 0x00A00000, //
-    IMAGE_SCN_ALIGN_1024BYTES           = 0x00B00000, //
-    IMAGE_SCN_ALIGN_2048BYTES           = 0x00C00000, //
-    IMAGE_SCN_ALIGN_4096BYTES           = 0x00D00000, //
-    IMAGE_SCN_ALIGN_8192BYTES           = 0x00E00000, //
-// Unused                               = 0x00F00000,
-    IMAGE_SCN_ALIGN_MASK                = 0x00F00000,
-
-    IMAGE_SCN_LNK_NRELOC_OVFL           = 0x01000000, // Section contains extended relocations.
-    IMAGE_SCN_MEM_DISCARDABLE           = 0x02000000, // Section can be discarded.
-    IMAGE_SCN_MEM_NOT_CACHED            = 0x04000000, // Section is not cachable.
-    IMAGE_SCN_MEM_NOT_PAGED             = 0x08000000, // Section is not pageable.
-    IMAGE_SCN_MEM_SHARED                = 0x10000000, // Section is shareable.
-    IMAGE_SCN_MEM_EXECUTE               = 0x20000000, // Section is executable.
-    IMAGE_SCN_MEM_READ                  = 0x40000000, // Section is readable.
-    IMAGE_SCN_MEM_WRITE                 = 0x80000000, // Section is writeable.
+//    IMAGE_SCN_MEM_PURGEABLE             = 0x00020000,
+//    IMAGE_SCN_MEM_16BIT                 = 0x00020000,
+//    IMAGE_SCN_MEM_LOCKED                = 0x00040000,
+//    IMAGE_SCN_MEM_PRELOAD               = 0x00080000,
+//
+//    IMAGE_SCN_ALIGN_1BYTES              = 0x00100000, //
+//    IMAGE_SCN_ALIGN_2BYTES              = 0x00200000, //
+//    IMAGE_SCN_ALIGN_4BYTES              = 0x00300000, //
+//    IMAGE_SCN_ALIGN_8BYTES              = 0x00400000, //
+//    IMAGE_SCN_ALIGN_16BYTES             = 0x00500000, // Default alignment if no others are specified.
+//    IMAGE_SCN_ALIGN_32BYTES             = 0x00600000, //
+//    IMAGE_SCN_ALIGN_64BYTES             = 0x00700000, //
+//    IMAGE_SCN_ALIGN_128BYTES            = 0x00800000, //
+//    IMAGE_SCN_ALIGN_256BYTES            = 0x00900000, //
+//    IMAGE_SCN_ALIGN_512BYTES            = 0x00A00000, //
+//    IMAGE_SCN_ALIGN_1024BYTES           = 0x00B00000, //
+//    IMAGE_SCN_ALIGN_2048BYTES           = 0x00C00000, //
+//    IMAGE_SCN_ALIGN_4096BYTES           = 0x00D00000, //
+//    IMAGE_SCN_ALIGN_8192BYTES           = 0x00E00000, //
+//// Unused                               = 0x00F00000,
+//    IMAGE_SCN_ALIGN_MASK                = 0x00F00000,
+//
+//    IMAGE_SCN_LNK_NRELOC_OVFL           = 0x01000000, // Section contains extended relocations.
+//    IMAGE_SCN_MEM_DISCARDABLE           = 0x02000000, // Section can be discarded.
+//    IMAGE_SCN_MEM_NOT_CACHED            = 0x04000000, // Section is not cachable.
+//    IMAGE_SCN_MEM_NOT_PAGED             = 0x08000000, // Section is not pageable.
+//    IMAGE_SCN_MEM_SHARED                = 0x10000000, // Section is shareable.
+//    IMAGE_SCN_MEM_EXECUTE               = 0x20000000, // Section is executable.
+//    IMAGE_SCN_MEM_READ                  = 0x40000000, // Section is readable.
+//    IMAGE_SCN_MEM_WRITE                 = 0x80000000, // Section is writeable.
 
 //  COFF_SEC_FLAG_ALIGN_MASK            = 0x00700000, // replaced by IMAGE_SCN_ALIGN_MASK
     COFF_SEC_FLAG_ALIGN_SHIFT           = 20
@@ -252,15 +255,17 @@ enum {
 // Symbols have a section number of the section in which they are
 // defined. Otherwise, section numbers have the following meanings:
 //
+/*
 enum {
     IMAGE_SYM_UNDEFINED         = (signed_16)0,  // Symbol is undefined or is common.
     IMAGE_SYM_ABSOLUTE          = (signed_16)-1, // Symbol is an absolute value.
     IMAGE_SYM_DEBUG             = (signed_16)-2  // Symbol is a special debug item.
 };
-
+*/
 //
 // Type (fundamental) values.
 //
+/*
 enum {
     IMAGE_SYM_TYPE_NULL         = 0x0000, // no type.
     IMAGE_SYM_TYPE_VOID         = 0x0001, //
@@ -280,20 +285,22 @@ enum {
     IMAGE_SYM_TYPE_DWORD        = 0x000F, //
     IMAGE_SYM_TYPE_PCODE        = 0x8000  //
 };
-
+*/
 //
 // Type (derived) values.
 //
+/*
 enum {
     IMAGE_SYM_DTYPE_NULL        = 0, // no derived type.
     IMAGE_SYM_DTYPE_POINTER     = 1, // pointer.
     IMAGE_SYM_DTYPE_FUNCTION    = 2, // function.
     IMAGE_SYM_DTYPE_ARRAY       = 3  // array.
 };
-
+*/
 //
 // Storage classes.
 //
+/*
 typedef enum {
     IMAGE_SYM_CLASS_END_OF_FUNCTION     = -1,
     IMAGE_SYM_CLASS_NULL                = 0x0000,
@@ -326,11 +333,11 @@ typedef enum {
     IMAGE_SYM_CLASS_SECTION             = 0x0068,
     IMAGE_SYM_CLASS_WEAK_EXTERNAL       = 0x0069
 }image_sym_class;
-
+*/
 //
 // Communal selection types.
 //
-
+/*
 typedef enum {
     IMAGE_COMDAT_SELECT_UNKNOWN         = 0,
     IMAGE_COMDAT_SELECT_NODUPLICATES    = 1,
@@ -341,15 +348,15 @@ typedef enum {
     IMAGE_COMDAT_SELECT_LARGEST         = 6,
     IMAGE_COMDAT_SELECT_NEWEST          = 7
 }image_comdat_select;
-
+*/
 // weak extern types
-
+/*
 enum {
     IMAGE_WEAK_EXTERN_SEARCH_NOLIBRARY  = 1,
     IMAGE_WEAK_EXTERN_SEARCH_LIBRARY    = 2,
     IMAGE_WEAK_EXTERN_SEARCH_ALIAS      = 3
 };
-
+*/
 // Following comes from winnt.h
 
 //
@@ -570,14 +577,15 @@ typedef struct {
 } coff_import_object_header;
 
 // Note that coff_import_object_header is the same size as coff_file_header
-
+/*
 typedef enum
 {
     IMPORT_OBJECT_CODE = 0,
     IMPORT_OBJECT_DATA = 1,
     IMPORT_OBJECT_CONST = 2,
 } coff_import_object_type;
-
+*/
+/*
 typedef enum
 {
     IMPORT_OBJECT_ORDINAL = 0,          // Import by ordinal
@@ -586,5 +594,5 @@ typedef enum
     IMPORT_OBJECT_NAME_UNDECORATE = 3,  // Import name == public symbol name skipping leading ?, @, or optionally _
                                         // and truncating at first @
 } coff_import_object_name_type;
-
+*/
 #include "poppck.h"

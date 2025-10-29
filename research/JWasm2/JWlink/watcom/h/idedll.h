@@ -312,6 +312,7 @@ typedef struct {
 /*********************************************************
  * Routines implemented by the DLL
  *********************************************************/
+#define IDEDLL_EXPORT
 unsigned IDEDLL_EXPORT IDEGetVersion( void );
 IDEBool IDEDLL_EXPORT IDEInitDLL( IDECBHdl hdl, IDECallBacks *cb, IDEDllHdl *info );
 IDEBool IDEDLL_EXPORT IDEPassInitInfo( IDEDllHdl hdl, IDEInitInfo *info );

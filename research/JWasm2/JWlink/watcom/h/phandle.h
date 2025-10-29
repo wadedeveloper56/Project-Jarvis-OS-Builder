@@ -43,7 +43,7 @@ typedef struct handle_info {
 
 typedef struct handle_info * PHANDLE_INFO;
 #ifndef WIN_GUI
-typedef PHANDLE_INFO HINSTANCE;
+//typedef PHANDLE_INFO HINSTANCE;
 #endif
 
 #endif
