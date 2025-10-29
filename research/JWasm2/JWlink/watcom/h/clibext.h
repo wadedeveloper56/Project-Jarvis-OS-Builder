@@ -82,7 +82,7 @@
 #define _WCNEAR
 #define __int64 long long
 
-#define _HEAPOK 0
+//#define _HEAPOK 0
 #define _heapchk(x) _HEAPOK
 #define _expand(x,y) (NULL)
 
