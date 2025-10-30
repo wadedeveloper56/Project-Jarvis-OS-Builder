@@ -234,6 +234,123 @@ char* TRMem::formCodePtr(char* ptr, TRMemWho who)
     return formHex(ptr, (size_t)who, sizeof(who));
 }
 
+void TRMem::setSize(EntryPtr p, size_t size)
+{
+    p->size = size ^ (size_t)p->mem ^ (size_t)p->who ^ (size_t)p;
+}
+
+EntryPtr TRMem::allocEntry()
+{
+    EntryPtr   tr = (EntryPtr)allocFunc(sizeof(Entry));
+    if (tr == NULL && (flags & _TRMEM_OUT_OF_MEMORY)) {
+        trPrt(MSG_OUT_OF_MEMORY);
+    }
+    return(tr);
+}
+
+void TRMem::addToList(EntryPtr tr)
+{
+    tr->next = alloc_list;
+    alloc_list = tr;
+}
+
+void* TRMem::ChangeAlloc(void* old, size_t size, TRMemWho who, void* (*fn)(void*, size_t),  char* name)
+{
+    EntryPtr   tr;
+    void* new_block;
+    size_t      old_size;
+
+    if (fn == (void*)_TRMEM_NO_ROUTINE) {
+        trPrt(MSG_NO_ROUTINE, name);
+        return(NULL);
+    }
+
+    if (size == 0) {
+        if (flags & _TRMEM_REALLOC_SIZE_0) {
+            trPrt(MSG_SIZE_ZERO, name, who);
+        }
+        if (old == NULL) {
+            if (flags & _TRMEM_REALLOC_NULL) {
+                trPrt(MSG_NULL_PTR, name, who);
+            }
+            return(fn(NULL, 0));
+        }
+
+        /* old != NULL */
+        tr = removeFromList(old);
+        if (tr == NULL) {
+            trPrt(MSG_UNOWNED_CHUNK, name, who, old);
+            return(NULL);
+        }
+        isValidChunk(tr, name, who);
+        size = getSize(tr);
+        mem_used -= (uint_32)size;
+        MEMSET(old, FREED_BYTE, size + 1);
+        freeEntry(tr);
+        return(fn(old, 0));
+    }
+
+    /* size != 0 */
+    if (old == NULL) {
+        if (flags & _TRMEM_REALLOC_NULL) {
+            trPrt(MSG_NULL_PTR, name, who);
+        }
+        new_block = fn(NULL, size + 1);
+        if (new_block != NULL) {
+            MEMSET(new_block, ALLOC_BYTE, size + 1);
+            tr = allocEntry();
+            if (tr != NULL) {
+                tr->mem = new_block;
+                tr->who = who;
+                setSize(tr, size);
+                addToList(tr);
+            }
+            mem_used += (uint_32)size;
+            if (mem_used > max_mem) {
+                max_mem = mem_used;
+            }
+        }
+        return(new_block);
+    }
+
+    /* old != NULL && size != 0 */
+    tr = removeFromList(old);
+    if (tr == NULL) {
+        trPrt(MSG_UNOWNED_CHUNK, name, who, old);
+        return(NULL);
+    }
+    if (!isValidChunk(tr, name, who)) {
+        return(NULL);
+    }
+    new_block = fn(old, size + 1);
+    if (new_block == NULL) {
+        addToList(tr);   /* put back on list without change */
+        return(new_block);
+    }
+    old_size = getSize(tr);
+    if (size > old_size) {
+        MEMSET(_PtrAdd(new_block, old_size), ALLOC_BYTE, size + 1 - old_size);
+    }
+    else {
+        *(unsigned char*)_PtrAdd(new_block, size) = ALLOC_BYTE;
+    }
+    mem_used -= (uint_32)old_size;
+    mem_used += (uint_32)size;
+    if (mem_used > max_mem) {
+        max_mem = mem_used;
+    }
+    tr->mem = new_block;
+    tr->who = who;
+    setSize(tr, size);
+    addToList(tr);
+    return(new_block);
+}
+
+void* TRMem::TRMemRealloc(void* old, size_t size,TRMemWho who)
+{
+    return(ChangeAlloc(old, size, who, realloc, (char *)"Realloc"));
+}
+
 char* stpcpy(char* dest, const char* src)
 {
     *dest = *src;

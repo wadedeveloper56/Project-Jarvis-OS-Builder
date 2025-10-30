@@ -3,6 +3,18 @@
 #include "TRMem.h"
 #include "globals.h"
 
+void LFree(void* p)
+{
+	if (p == NULL) return;
+	trmem->TRMemfree(p, TRMemWho());
+}
+
+void* LnkReAlloc(void* src, size_t size)
+{
+	void *dest = trmem->TRMemRealloc(src, size, TRMemWho());
+	return(dest);
+}
+
 void* DoLAlloc(size_t size)
 {
 	void* p = trmem->alloc(size);

@@ -1,5 +1,5 @@
 #pragma once
-
+#include "watcom.h"
 enum {
     _TRMEM_ALLOC_SIZE_0 = 0x0001,/* attempted alloc of size 0 */
     _TRMEM_REALLOC_SIZE_0 = 0x0002,/* attempted realloc/expand of size 0 */
@@ -56,6 +56,11 @@ public:
     void trPrt(const char* fmt, ...);
     char* formCodePtr(char* ptr, TRMemWho who);
     void* alloc(size_t amount) { return allocFunc(amount); }
+    void* ChangeAlloc(void* old, size_t size, TRMemWho who, void* (*fn)(void*, size_t), char* name);
+    void* TRMemRealloc(void* old, size_t size, TRMemWho who);
+    void setSize(EntryPtr p, size_t size);
+    EntryPtr allocEntry();
+    void addToList(EntryPtr tr);
 };
 char* formHex(char* ptr, size_t data, uint size);
 char* stpcpy(char* dest, const char* src);

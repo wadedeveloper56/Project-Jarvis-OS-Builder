@@ -3,9 +3,6 @@
 #include "objnode.h"
 #include "mem.h"
 
-char* TokBuff;
-unsigned TokSize;
-
 void InitTokBuff(void)
 {
     TokSize = MAX_HEADROOM;

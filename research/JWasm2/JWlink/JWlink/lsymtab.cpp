@@ -13,3 +13,9 @@ void InitSym(void)
     _ChkAlloc(symbol * *,GlobalSymPtrs, GLOBAL_TABALLOC);
     _ChkAlloc(symbol * *,StaticSymPtrs, STATIC_TABALLOC);
 }
+
+void FiniSym(void)
+{
+    _LnkFree(GlobalSymPtrs);
+    _LnkFree(StaticSymPtrs);
+}

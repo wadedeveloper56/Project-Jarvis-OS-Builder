@@ -13,3 +13,4 @@ extern symbol** GlobalSymPtrs;
 extern symbol** StaticSymPtrs;
 
 void InitSym(void);
+void FiniSym(void);

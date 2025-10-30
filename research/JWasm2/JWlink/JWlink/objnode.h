@@ -1,12 +1,15 @@
 #pragma once
-
+#include "watcom.h"
 #define NODE_ARRAY_SIZE 256
 #define MAX_NUM_NODES   128
 #define NEED_NEW_ARRAY( x ) (!((x) & 0xFF))
 #define ARRAY_NUM( x )      ((x) >> 8 )
 #define ELEMENT_NUM( x )    ((x) & 0xFF)
 
+#include "mem.h"
 #define _ChkAlloc( cast, dest, size ) dest = (cast)ChkLAlloc( size )
+#define _LnkReAlloc( cast, dest, src, size ) dest = (cast)LnkReAlloc( src, size );
+#define _LnkFree( ptr )         LFree( ptr )
 
 typedef unsigned_32 offset;
 typedef unsigned_16 segment;

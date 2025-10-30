@@ -7,6 +7,7 @@
 #include "objio.h"
 #include "spillio.h"
 #include "lsymbtab.h"
+#include "objorl.h"
 
 void InitSubSystems(void)
 {
@@ -17,6 +18,7 @@ void InitSubSystems(void)
     InitTokBuff();
     InitSpillFile();
     InitSym();
+    InitObjORL();
 }
 
 void LinkMainLine(char* cmds)
@@ -25,6 +27,8 @@ void LinkMainLine(char* cmds)
 
 void FiniSubSystems(void)
 {
+    FiniMsg();
+    FiniSym();
     LnkMemFini();
 }
 

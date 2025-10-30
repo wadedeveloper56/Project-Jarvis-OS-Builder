@@ -171,13 +171,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="coffentr.cpp" />
+    <ClCompile Include="coffflhn.cpp" />
+    <ClCompile Include="elfentr.cpp" />
+    <ClCompile Include="elfflhn.cpp" />
     <ClCompile Include="globals.cpp" />
     <ClCompile Include="JWlink.cpp" />
     <ClCompile Include="lsymtab.cpp" />
     <ClCompile Include="mem.cpp" />
+    <ClCompile Include="mixcache.cpp" />
+    <ClCompile Include="msg.cpp" />
     <ClCompile Include="ntio.cpp" />
     <ClCompile Include="objio.cpp" />
     <ClCompile Include="objnode.cpp" />
+    <ClCompile Include="objorl.cpp" />
+    <ClCompile Include="omfentr.cpp" />
+    <ClCompile Include="omfflhn.cpp" />
+    <ClCompile Include="orlentry.cpp" />
+    <ClCompile Include="orlflhnd.cpp" />
+    <ClCompile Include="orlhash.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -189,15 +201,55 @@
     <ClCompile Include="wlnkmsg.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="coff.h" />
+    <ClInclude Include="coffentr.h" />
+    <ClInclude Include="coffflhn.h" />
+    <ClInclude Include="coffglbl.h" />
+    <ClInclude Include="coffimpl.h" />
+    <ClInclude Include="coffload.h" />
+    <ClInclude Include="cofflwlv.h" />
+    <ClInclude Include="cofforl.h" />
+    <ClInclude Include="cofftype.h" />
+    <ClInclude Include="elfentr.h" />
+    <ClInclude Include="elfflhn.h" />
+    <ClInclude Include="elfglbl.h" />
+    <ClInclude Include="elfload.h" />
+    <ClInclude Include="elflwlv.h" />
+    <ClInclude Include="elforl.h" />
+    <ClInclude Include="elfspec.h" />
+    <ClInclude Include="elftype.h" />
     <ClInclude Include="globals.h" />
+    <ClInclude Include="exeelf.h" />
     <ClInclude Include="lsymbtab.h" />
     <ClInclude Include="mem.h" />
+    <ClInclude Include="msg.h" />
     <ClInclude Include="ntio.h" />
+    <ClInclude Include="objcache.h" />
     <ClInclude Include="objio.h" />
     <ClInclude Include="objnode.h" />
+    <ClInclude Include="objorl.h" />
+    <ClInclude Include="omfdrctv.h" />
+    <ClInclude Include="omfentr.h" />
+    <ClInclude Include="omfflhn.h" />
+    <ClInclude Include="omfglbl.h" />
+    <ClInclude Include="omfload.h" />
+    <ClInclude Include="omfmunge.h" />
+    <ClInclude Include="omforl.h" />
+    <ClInclude Include="omftype.h" />
+    <ClInclude Include="orl.h" />
+    <ClInclude Include="orlcomon.h" />
+    <ClInclude Include="orlentry.h" />
+    <ClInclude Include="orlflhnd.h" />
+    <ClInclude Include="orlglobl.h" />
+    <ClInclude Include="orlhash.h" />
+    <ClInclude Include="orlhshdf.h" />
+    <ClInclude Include="orlintnl.h" />
+    <ClInclude Include="orllevel.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="pcobj.h" />
     <ClInclude Include="spillio.h" />
     <ClInclude Include="TRMem.h" />
+    <ClInclude Include="watcom.h" />
     <ClInclude Include="wlnkmsg.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
