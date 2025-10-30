@@ -1,8 +1,5 @@
 #pragma once
 
-typedef unsigned long   uint_32;
-typedef unsigned        uint;
-
 enum {
     _TRMEM_ALLOC_SIZE_0 = 0x0001,/* attempted alloc of size 0 */
     _TRMEM_REALLOC_SIZE_0 = 0x0002,/* attempted realloc/expand of size 0 */
@@ -58,6 +55,7 @@ public:
     size_t getSize(EntryPtr p);
     void trPrt(const char* fmt, ...);
     char* formCodePtr(char* ptr, TRMemWho who);
+    void* alloc(size_t amount) { return allocFunc(amount); }
 };
 char* formHex(char* ptr, size_t data, uint size);
 char* stpcpy(char* dest, const char* src);

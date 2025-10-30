@@ -5,6 +5,10 @@ int      OpenFiles;      // the number of open files
 unsigned LastResult;
 bool     CaughtBreak;
 
+void SetBreak(void)
+{
+}
+
 void LnkFilesInit(void)
 {
     OpenFiles = 0;

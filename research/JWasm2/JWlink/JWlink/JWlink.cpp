@@ -3,12 +3,20 @@
 #include "mem.h"
 #include "ntio.h"
 #include "wlnkmsg.h"
+#include "objnode.h"
+#include "objio.h"
+#include "spillio.h"
+#include "lsymbtab.h"
 
 void InitSubSystems(void)
 {
     LnkMemInit();
     LnkFilesInit();
     InitMsg();
+    InitNodes();
+    InitTokBuff();
+    InitSpillFile();
+    InitSym();
 }
 
 void LinkMainLine(char* cmds)

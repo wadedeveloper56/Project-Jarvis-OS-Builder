@@ -1,5 +1,6 @@
 #pragma once
 
+#define NIL_HANDLE      ((f_handle)-1)
 #define STDIN_HANDLE    ((f_handle)0)
 #define STDOUT_HANDLE   ((f_handle)1)
 #define STDERR_HANDLE   ((f_handle)2)
@@ -10,4 +11,5 @@ extern int      OpenFiles;      // the number of open files
 extern unsigned LastResult;
 extern bool     CaughtBreak;
 
+void SetBreak(void);
 void LnkFilesInit(void);
