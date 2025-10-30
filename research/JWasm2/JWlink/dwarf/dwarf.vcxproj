@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{49a0bebb-9797-4bd6-978d-e4211b7ea8ee}</ProjectGuid>
+    <ProjectGuid>{3ff218c1-1c10-4e2a-ab02-b84f35b1c00d}</ProjectGuid>
     <RootNamespace>dwarf</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -73,28 +73,28 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>..\..\bin\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\bin\intermediate\dwarf\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>..\watcom\h;.\;.\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>../watcom/h;./;./h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>..\..\bin\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\bin\intermediate\dwarf\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>..\watcom\h;.\;.\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>../watcom/h;./;./h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>..\..\bin\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\bin\intermediate\dwarf\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>..\watcom\h;.\;.\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>../watcom/h;./;./h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>..\..\bin\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\bin\intermediate\dwarf\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>..\watcom\h;.\;.\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>../watcom/h;./;./h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
@@ -114,7 +114,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
@@ -132,7 +132,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
@@ -152,7 +152,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
@@ -167,6 +167,139 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\h\alloc.h" />
+    <ClInclude Include="..\h\banner.h" />
+    <ClInclude Include="..\h\carve.h" />
+    <ClInclude Include="..\h\clibext.h" />
+    <ClInclude Include="..\h\cmd16m.h" />
+    <ClInclude Include="..\h\cmdall.h" />
+    <ClInclude Include="..\h\cmddos.h" />
+    <ClInclude Include="..\h\cmdelf.h" />
+    <ClInclude Include="..\h\cmdline.h" />
+    <ClInclude Include="..\h\cmdnov.h" />
+    <ClInclude Include="..\h\cmdos2.h" />
+    <ClInclude Include="..\h\cmdphar.h" />
+    <ClInclude Include="..\h\cmdqnx.h" />
+    <ClInclude Include="..\h\cmdraw.h" />
+    <ClInclude Include="..\h\command.h" />
+    <ClInclude Include="..\h\dbgall.h" />
+    <ClInclude Include="..\h\dbgcomm.h" />
+    <ClInclude Include="..\h\dbgcv.h" />
+    <ClInclude Include="..\h\dbgdwarf.h" />
+    <ClInclude Include="..\h\dbginfo.h" />
+    <ClInclude Include="..\h\dbgwat.h" />
+    <ClInclude Include="..\h\debug.h" />
+    <ClInclude Include="..\h\distrib.h" />
+    <ClInclude Include="..\h\dllentry.h" />
+    <ClInclude Include="..\h\fileio.h" />
+    <ClInclude Include="..\h\formats.h" />
+    <ClInclude Include="..\h\globals.h" />
+    <ClInclude Include="..\h\hash.h" />
+    <ClInclude Include="..\h\impexp.h" />
+    <ClInclude Include="..\h\ldefext.h" />
+    <ClInclude Include="..\h\library.h" />
+    <ClInclude Include="..\h\link.h" />
+    <ClInclude Include="..\h\linkstd.h" />
+    <ClInclude Include="..\h\linkutil.h" />
+    <ClInclude Include="..\h\load16m.h" />
+    <ClInclude Include="..\h\loaddos.h" />
+    <ClInclude Include="..\h\loadelf.h" />
+    <ClInclude Include="..\h\loadelf2.h" />
+    <ClInclude Include="..\h\loadfile.h" />
+    <ClInclude Include="..\h\loadnov.h" />
+    <ClInclude Include="..\h\loados2.h" />
+    <ClInclude Include="..\h\loadpe.h" />
+    <ClInclude Include="..\h\loadqnx.h" />
+    <ClInclude Include="..\h\loadraw.h" />
+    <ClInclude Include="..\h\mapio.h" />
+    <ClInclude Include="..\h\msg.h" />
+    <ClInclude Include="..\h\newmem.h" />
+    <ClInclude Include="..\h\ntio.h" />
+    <ClInclude Include="..\h\nwpfx.h" />
+    <ClInclude Include="..\h\obj2supp.h" />
+    <ClInclude Include="..\h\objcache.h" />
+    <ClInclude Include="..\h\objcalc.h" />
+    <ClInclude Include="..\h\objfree.h" />
+    <ClInclude Include="..\h\objio.h" />
+    <ClInclude Include="..\h\objnode.h" />
+    <ClInclude Include="..\h\objomf.h" />
+    <ClInclude Include="..\h\objorl.h" />
+    <ClInclude Include="..\h\objpass1.h" />
+    <ClInclude Include="..\h\objpass2.h" />
+    <ClInclude Include="..\h\objstrip.h" />
+    <ClInclude Include="..\h\objstruc.h" />
+    <ClInclude Include="..\h\omfreloc.h" />
+    <ClInclude Include="..\h\overlays.h" />
+    <ClInclude Include="..\h\ovlstruc.h" />
+    <ClInclude Include="..\h\permdata.h" />
+    <ClInclude Include="..\h\pharlap.h" />
+    <ClInclude Include="..\h\procfile.h" />
+    <ClInclude Include="..\h\reloc.h" />
+    <ClInclude Include="..\h\ring.h" />
+    <ClInclude Include="..\h\salloc.h" />
+    <ClInclude Include="..\h\specials.h" />
+    <ClInclude Include="..\h\spillio.h" />
+    <ClInclude Include="..\h\standard.h" />
+    <ClInclude Include="..\h\strtab.h" />
+    <ClInclude Include="..\h\syms.h" />
+    <ClInclude Include="..\h\symtab.h" />
+    <ClInclude Include="..\h\symtrace.h" />
+    <ClInclude Include="..\h\taddr.h" />
+    <ClInclude Include="..\h\toc.h" />
+    <ClInclude Include="..\h\uintmacs.h" />
+    <ClInclude Include="..\h\virtmem.h" />
+    <ClInclude Include="..\h\wcomdef.h" />
+    <ClInclude Include="..\h\wlink.h" />
+    <ClInclude Include="..\h\wlmsgs.h" />
+    <ClInclude Include="..\h\wlnkmsg.h" />
+    <ClInclude Include="..\h\wlrcmem.h" />
+    <ClInclude Include="..\watcom\h\ar.h" />
+    <ClInclude Include="..\watcom\h\autodep.h" />
+    <ClInclude Include="..\watcom\h\bancfg.h" />
+    <ClInclude Include="..\watcom\h\bool.h" />
+    <ClInclude Include="..\watcom\h\clibext.h" />
+    <ClInclude Include="..\watcom\h\coff.h" />
+    <ClInclude Include="..\watcom\h\cv4.h" />
+    <ClInclude Include="..\watcom\h\cv4f.h" />
+    <ClInclude Include="..\watcom\h\cv4nums.h" />
+    <ClInclude Include="..\watcom\h\cv4pads.h" />
+    <ClInclude Include="..\watcom\h\cv4syms.h" />
+    <ClInclude Include="..\watcom\h\cv4types.h" />
+    <ClInclude Include="..\watcom\h\cv4w.h" />
+    <ClInclude Include="..\watcom\h\dwarf.h" />
+    <ClInclude Include="..\watcom\h\dwati.h" />
+    <ClInclude Include="..\watcom\h\dwformi.h" />
+    <ClInclude Include="..\watcom\h\dwloccl.h" />
+    <ClInclude Include="..\watcom\h\dwlocop.h" />
+    <ClInclude Include="..\watcom\h\dwtagi.h" />
+    <ClInclude Include="..\watcom\h\elfspec.h" />
+    <ClInclude Include="..\watcom\h\exe16m.h" />
+    <ClInclude Include="..\watcom\h\exedos.h" />
+    <ClInclude Include="..\watcom\h\exeelf.h" />
+    <ClInclude Include="..\watcom\h\exeflat.h" />
+    <ClInclude Include="..\watcom\h\exenov.h" />
+    <ClInclude Include="..\watcom\h\exeos2.h" />
+    <ClInclude Include="..\watcom\h\exepe.h" />
+    <ClInclude Include="..\watcom\h\exephar.h" />
+    <ClInclude Include="..\watcom\h\exeqnx.h" />
+    <ClInclude Include="..\watcom\h\idedll.h" />
+    <ClInclude Include="..\watcom\h\idedrv.h" />
+    <ClInclude Include="..\watcom\h\lib.h" />
+    <ClInclude Include="..\watcom\h\ovltab.h" />
+    <ClInclude Include="..\watcom\h\patchsig.h" />
+    <ClInclude Include="..\watcom\h\pcobj.h" />
+    <ClInclude Include="..\watcom\h\phandle.h" />
+    <ClInclude Include="..\watcom\h\poppck.h" />
+    <ClInclude Include="..\watcom\h\proc386.h" />
+    <ClInclude Include="..\watcom\h\pushpck1.h" />
+    <ClInclude Include="..\watcom\h\pushpck2.h" />
+    <ClInclude Include="..\watcom\h\tistrail.h" />
+    <ClInclude Include="..\watcom\h\vxd_ddb.h" />
+    <ClInclude Include="..\watcom\h\walloca.h" />
+    <ClInclude Include="..\watcom\h\watcom.h" />
+    <ClInclude Include="..\watcom\h\wreslang.h" />
+    <ClInclude Include="..\watcom\h\wresset2.h" />
+    <ClInclude Include="..\watcom\h\wressetr.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="h\dw.h" />
     <ClInclude Include="h\dwabbrev.h" />
@@ -201,9 +334,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="h\dwabenum.gh" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

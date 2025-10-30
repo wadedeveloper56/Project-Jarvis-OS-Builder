@@ -30,7 +30,6 @@
 ****************************************************************************/
 
 #include "pch.h"
-#include <windows.h>
 #include "coffload.h"
 #include "coffimpl.h"
 

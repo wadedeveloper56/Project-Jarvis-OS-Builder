@@ -27,9 +27,9 @@
 #ifndef O_TEXT
 #define O_TEXT 0
 #endif
-//#define stricmp _strcasecmp
-//#define strcmpi strcasecmp
-//#define strnicmp strncasecmp
+#define stricmp strcasecmp
+#define strcmpi strcasecmp
+#define strnicmp strncasecmp
 #ifndef getch
 #define getch getchar
 #endif
@@ -82,10 +82,10 @@
 #define _WCNEAR
 #define __int64 long long
 
-//#define _HEAPOK 0
+/*
+#define _HEAPOK 0
 #define _heapchk(x) _HEAPOK
 #define _expand(x,y) (NULL)
-
 char *itoa( int value, char *buf, int radix );
 char *utoa( unsigned int value, char *buf, int radix );
 char *ltoa( long int value, char *buf, int radix );
@@ -113,6 +113,6 @@ char *strnset( char *string, int c, size_t len );
 size_t strlcpy( char *dst, const char *src, size_t len );
 size_t strlcat( char *dst, const char *t, size_t n );
 #endif
-
+*/
 extern char **_argv;    /* argument vector */
 extern int  _argc;

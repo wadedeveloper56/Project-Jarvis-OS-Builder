@@ -84,7 +84,7 @@ static int nameCmp( omf_file_handle ofh, omf_idx n1, omf_idx n2 )
     if( len1 < 0 ) return( 1 );
     len2 = OmfGetLName( ofh->lnames, n2, name2 );
     if( len1 != len2 ) return( 1 );
-    return( _stricmp( name1, name2 ) );
+    return( stricmp( name1, name2 ) );
 }
 
 
@@ -413,7 +413,7 @@ static orl_return       addToSymbolTable( omf_file_handle ofh,
         sh->flags |= ORL_SEC_FLAG_REMOVE;
         sh->assoc.sym.hash_tab = ORLHashTableCreate( ofh->omf_hnd->funcs, 257,
                                         ORL_HASH_STRING,
-                                        (orl_hash_comparison_func)_stricmp );
+                                        (orl_hash_comparison_func)stricmp );
         if( !sh->assoc.sym.hash_tab ) return( ORL_OUT_OF_MEMORY );
     }
     assert( sh->assoc.sym.hash_tab );

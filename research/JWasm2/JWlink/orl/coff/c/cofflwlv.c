@@ -28,7 +28,6 @@
 *
 ****************************************************************************/
 #include "pch.h"
-#include <windows.h>
 #include <ctype.h>
 #include "cofflwlv.h"
 #include "orlhash.h"
