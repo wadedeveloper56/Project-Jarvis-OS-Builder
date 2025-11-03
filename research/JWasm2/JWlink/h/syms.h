@@ -209,7 +209,7 @@ typedef struct symbol {
         struct symbol   *mainsym;   // altdefs: main symbol definition
         struct symbol   *def;       // for lazy externs
         struct symbol   **vfdata;   // for virtual function lazy externs.
-        void            *export;    // OS/2 & PE only: exported sym info.
+        void            *export1;    // OS/2 & PE only: exported sym info.
     } e;
     char                *name;
     char                *prefix;    // primarily for netware, though could be
