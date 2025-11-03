@@ -50,7 +50,7 @@ extern symbol * AddSym( void );
 extern void     ReleasePass1( void );
 extern void     RelSymBlock( void );
 
-#define _ChkAlloc( dest, size ) dest = ChkLAlloc( size )
+#define _ChkAlloc( cast, dest, size ) dest = (cast)ChkLAlloc( size )
 #define _LnkAlloc( dest, size ) dest = LAlloc( size )
 #define _TryAlloc( dest, size ) dest = TryAlloc( size )
 #define _PermAlloc( dest, size ) dest = PermAlloc( size );

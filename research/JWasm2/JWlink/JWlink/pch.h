@@ -12,3 +12,9 @@
 #include <conio.h>
 #include <fcntl.h>
 #include <sys/stat.h>
+#include <ctype.h>
+#include <sys/types.h>
+#ifdef __WATCOMC__
+#include <process.h>
+#endif
+#include <limits.h>

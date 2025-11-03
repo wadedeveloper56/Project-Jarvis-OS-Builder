@@ -50,6 +50,8 @@ void InitSubSystems(void)
 {
     LnkMemInit();
     LnkFilesInit();
+    InitMsg();
+    InitNodes();
 }
 
 void LinkMainLine(char* cmds)
