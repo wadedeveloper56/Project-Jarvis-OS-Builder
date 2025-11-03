@@ -175,7 +175,7 @@ struct fmt_d16m_data {
 // stuff common to some file formats which have the concept of an export
 
 struct exp_common {
-    name_list   *export1;
+    name_list   *export;
     name_list   *module;
 };
 

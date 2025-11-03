@@ -90,7 +90,7 @@
 
 #ifndef BOOL_DEFINED
 #define BOOL_DEFINED
-typedef enum bool {false, true} bool;
+typedef int bool;
 #endif
 typedef unsigned char   byte;
 typedef unsigned long   virt_mem;

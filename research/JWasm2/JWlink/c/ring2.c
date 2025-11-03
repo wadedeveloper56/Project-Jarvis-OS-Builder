@@ -24,22 +24,11 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  Indirected second version of ring.c.
 *
 ****************************************************************************/
 
 
-#define MSG_LANG_SPACING        1000
+#define PARAM2
+#include "ring.c"
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
-
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "sdk/rc/rc/h/rc.msg"
-#undef pick
-
-};

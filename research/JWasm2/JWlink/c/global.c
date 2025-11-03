@@ -24,22 +24,15 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
 
-#define MSG_LANG_SPACING        1000
+#include "linkstd.h"
+#include "reloc.h"
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
-
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "sdk/rc/rc/h/rc.msg"
-#undef pick
-
-};
+#define export
+#include "globals.h"
+#include "specials.h"

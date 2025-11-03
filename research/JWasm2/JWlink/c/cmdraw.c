@@ -24,22 +24,54 @@
 *
 *  ========================================================================
 *
-* Description:  Message constants used with linkerr.msg and wlink.msg
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
+/*
+ *  CMDRAW : command line parsing for the RAW load file format.
+ *
+*/
 
-#define MSG_LANG_SPACING        1000
+#include <string.h>
+#include "linkstd.h"
+#include "alloc.h"
+#include "command.h"
+#include "msg.h"
+#include "wlnkmsg.h"
+#include "dbgall.h"
+#include "cmdall.h"
+#include "overlays.h"
+#include "objcalc.h"
+#include "cmdline.h"
+#include "cmdraw.h"
 
-enum message_texts {
-   MSG_PRODUCT         ,
-   MSG_COPYRIGHT       ,
+extern bool ProcRaw( void )
+/*************************/
+{
+    FmtData.base = 0;                           // Default offset
+    LinkState |= MAKE_RELOCS + FMT_DECIDED;     // Make relocations;
+    ProcOne( RawOptions, SEP_NO, TRUE );
+    return( TRUE );
+}
 
-#undef pick
-#define pick( code, string )  code,
-#include   "lnkerror.msg"
-#include   "wlink.msg"
-#include   "sdk/rc/rc/h/rc.msg"
-#undef pick
+extern bool ProcRawBIN( void )
+/*************************/
+{
+    Extension = E_BIN;
+    FmtData.raw_hex_output = 0;
+    if( FmtData.osname == NULL )
+        FmtData.osname = "RAW Binary Image";
+    return( TRUE );
+}
 
-};
+extern bool ProcRawHEX( void )
+/*************************/
+{
+    Extension = E_HEX;
+    FmtData.raw_hex_output = 1;
+    if( FmtData.osname == NULL )
+        FmtData.osname = "RAW Intel Hex Image";
+    return( TRUE );
+}
