@@ -18,3 +18,4 @@
 #include <process.h>
 #endif
 #include <limits.h>
+#include <setjmp.h>

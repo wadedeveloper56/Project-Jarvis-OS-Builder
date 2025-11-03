@@ -171,50 +171,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="cmdline.c" />
-    <ClCompile Include="globals.c" />
     <ClCompile Include="JWlink.c" />
-    <ClCompile Include="libr.c" />
-    <ClCompile Include="lsymtab.c" />
-    <ClCompile Include="mem.c" />
-    <ClCompile Include="mixcache.c" />
-    <ClCompile Include="msg.c" />
-    <ClCompile Include="ntio.c" />
-    <ClCompile Include="objfree.c" />
-    <ClCompile Include="objio.c" />
-    <ClCompile Include="objnode.c" />
-    <ClCompile Include="objorl.c" />
     <ClCompile Include="pch.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="reloc.c" />
-    <ClCompile Include="spillio.c" />
-    <ClCompile Include="symmem.c" />
-    <ClCompile Include="virtmem.c" />
-    <ClCompile Include="wlnkmsg.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\dwarf\dwarf.vcxproj">
-      <Project>{49a0bebb-9797-4bd6-978d-e4211b7ea8ee}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\lib_misc\lib_misc.vcxproj">
-      <Project>{edd2c872-a5f7-40f2-a20f-3c46a96d5238}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\orl\orl.vcxproj">
-      <Project>{59299656-fd7b-4b15-9fd5-d22e198f0374}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\sdk-rc\sdk-rc.vcxproj">
-      <Project>{b1fed6c4-a21a-492b-aed5-47a03f26c8ef}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\sdk-wres\sdk-wres.vcxproj">
-      <Project>{fa6317a7-5c70-49ca-8270-2cb5eddd5d42}</Project>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
