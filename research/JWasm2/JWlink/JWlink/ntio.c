@@ -11,6 +11,14 @@ static int      OpenFiles;      // the number of open files
 static unsigned LastResult;
 static bool     CaughtBreak;    // set to TRUE if break hit.
 
+void SetBreak(void)
+{
+}
+
+void RestoreBreak(void)
+{
+}
+
 void LnkFilesInit(void)
 {
     OpenFiles = 0;

@@ -15,43 +15,61 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="JWlink.cpp">
+    <ClCompile Include="JWlink.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="pch.cpp">
+    <ClCompile Include="pch.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="globals.cpp">
+    <ClCompile Include="globals.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="mem.cpp">
+    <ClCompile Include="mem.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ntio.cpp">
+    <ClCompile Include="ntio.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="wlnkmsg.cpp">
+    <ClCompile Include="wlnkmsg.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="msg.cpp">
+    <ClCompile Include="msg.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="objnode.cpp">
+    <ClCompile Include="objnode.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="libr.cpp">
+    <ClCompile Include="libr.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="virtmem.cpp">
+    <ClCompile Include="virtmem.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="reloc.cpp">
+    <ClCompile Include="reloc.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="mixcache.cpp">
+    <ClCompile Include="mixcache.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="symmem.cpp">
+    <ClCompile Include="symmem.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="objio.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="spillio.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lsymtab.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="objorl.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cmdline.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="objfree.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

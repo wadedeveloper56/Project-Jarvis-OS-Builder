@@ -7,6 +7,15 @@
 #include "objio.h"
 #include "objcache.h"
 
+void CacheFini(void)
+{
+}
+
+void* CachePermRead(file_list* list, unsigned long pos, unsigned len)
+{
+	return NULL;
+}
+
 bool DumpObjCache(void)
 {
 	return false;

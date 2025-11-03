@@ -52,6 +52,11 @@ void InitSubSystems(void)
     LnkFilesInit();
     InitMsg();
     InitNodes();
+    InitTokBuff();
+    InitSpillFile();
+    InitSym();
+    InitObjORL();
+    InitCmdFile();
 }
 
 void LinkMainLine(char* cmds)
@@ -60,6 +65,10 @@ void LinkMainLine(char* cmds)
 
 void FiniSubSystems(void)
 {
+    FiniLinkStruct();
+    FiniMsg();
+    FiniSym();
+    LnkMemFini();
 }
 
 int main()

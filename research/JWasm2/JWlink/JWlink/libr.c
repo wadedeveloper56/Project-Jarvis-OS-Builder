@@ -9,7 +9,7 @@
 #include "fileio.h"
 #include "objio.h"
 #include "objcache.h"
-#include <ar.h>
+#include "ar.h"
 
 bool DiscardDicts(void)
 {

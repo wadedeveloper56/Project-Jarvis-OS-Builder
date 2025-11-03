@@ -29,6 +29,24 @@ nodearray* SegNodes;           // ptr to obj file segment list
 nodearray* GrpNodes;           // ptr to obj file group list
 nodearray* NameNodes;          // ptr to obj file lname list
 
+static void BurnNodeArray(nodearray* list)
+{
+	int index;
+
+	for (index = 0; index <= list->arraymax; index++) {
+		_LnkFree(list->array[index]);
+	}
+	_LnkFree(list);
+}
+
+void BurnNodes(void)
+{
+	BurnNodeArray(GrpNodes);
+	BurnNodeArray(SegNodes);
+	BurnNodeArray(ExtNodes);
+	BurnNodeArray(NameNodes);
+}
+
 static void* MakeArray(unsigned size)
 {
 	nodearray* nodes;
