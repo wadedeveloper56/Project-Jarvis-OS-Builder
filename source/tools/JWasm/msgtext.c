@@ -7,7 +7,7 @@
 * Description:  handle (error) message texts
 *
 ****************************************************************************/
-
+#include "pch.h"
 #include "globals.h"
 #include "token.h"
 #include "tokenize.h"

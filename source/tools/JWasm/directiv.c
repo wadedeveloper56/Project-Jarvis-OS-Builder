@@ -17,7 +17,7 @@
 * SegOrderDirective()     .DOSSEG, .SEQ, .ALPHA
 *
 ****************************************************************************/
-
+#include "pch.h"
 #include <ctype.h>
 
 #include "globals.h"

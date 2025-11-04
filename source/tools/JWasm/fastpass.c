@@ -16,7 +16,7 @@
 *               to save such lines during pass one.
 *
 ****************************************************************************/
-
+#include "pch.h"
 #include <ctype.h>
 
 #include "globals.h"

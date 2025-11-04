@@ -27,7 +27,7 @@
 * Description:  handle OMF fixups
 *
 ****************************************************************************/
-
+#include "pch.h"
 #include <stddef.h>
 
 #include "globals.h"

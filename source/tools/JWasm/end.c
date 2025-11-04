@@ -7,7 +7,7 @@
 * Description:  directives END, .STARTUP and .EXIT
 *
 ****************************************************************************/
-
+#include "pch.h"
 #include <ctype.h>
 
 #include "globals.h"

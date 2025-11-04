@@ -7,7 +7,7 @@
 * Description:  JWasm top level module
 *
 ****************************************************************************/
-
+#include "pch.h"
 #include <signal.h>
 
 #include "globals.h"

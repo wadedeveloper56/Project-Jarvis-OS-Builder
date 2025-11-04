@@ -33,7 +33,7 @@
 *                 by "j<cond> $+3|5" and "jmp <dest>" if cpu is < 386
 *                 (see OPTION LJMP | NOLJMP).
 ****************************************************************************/
-
+#include "pch.h"
 #include <limits.h>
 
 #include "globals.h"

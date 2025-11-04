@@ -19,7 +19,7 @@
 * - InStrFunc    handle @InStr   function
 *
 ****************************************************************************/
-
+#include "pch.h"
 #include <ctype.h>
 
 #include "globals.h"

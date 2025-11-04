@@ -7,7 +7,7 @@
 * Description:  Processing of OPTION directive.
 *
 ****************************************************************************/
-
+#include "pch.h"
 #include <ctype.h>
 
 #include "globals.h"

@@ -7,7 +7,7 @@
 * Description:  processes .MODEL and cpu directives
 *
 ****************************************************************************/
-
+#include "pch.h"
 #include <ctype.h>
 
 #include "globals.h"

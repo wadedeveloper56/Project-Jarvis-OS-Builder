@@ -15,7 +15,7 @@
 * - MacroInit        global macro initialization, set predefined macros
 *
 ****************************************************************************/
-
+#include "pch.h"
 #include <ctype.h>
 
 #include "globals.h"

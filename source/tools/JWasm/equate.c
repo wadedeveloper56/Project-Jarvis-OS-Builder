@@ -7,7 +7,7 @@
 * Description:  handles EQU and '=' directives.
 *
 ****************************************************************************/
-
+#include "pch.h"
 #include <ctype.h>
 
 #include "globals.h"

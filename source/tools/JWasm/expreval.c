@@ -27,7 +27,7 @@
 * Description:  expression evaluator.
 *
 ****************************************************************************/
-
+#include "pch.h"
 #include <stddef.h>
 #include <ctype.h>
 
@@ -105,7 +105,7 @@ static void init_expr( struct expr *opnd )
     opnd->idx_reg  = NULL;
     opnd->label_tok = NULL;
     opnd->override = NULL;
-    opnd->instr    = EMPTY;
+    opnd->instr    = (enum special_token)EMPTY;
     opnd->kind     = EXPR_EMPTY;
     opnd->mem_type = MT_EMPTY;
     opnd->scale    = 0;
@@ -301,7 +301,7 @@ static uint_32 GetRecordMask( struct dsym *record )
     for ( fl = record->e.structinfo->head; fl; fl = fl->next ) {
         struct asym *sym = &fl->sym;
         for ( i = sym->offset ;i < sym->offset + sym->total_size; i++ )
-            mask |= 1 << i;
+            mask |= (uint_64)(1) << i;
     }
     return( mask );
 }
@@ -906,7 +906,7 @@ static void MakeConst( struct expr *opnd )
 #endif
     if( opnd->override != NULL )
         return;
-    opnd->instr = EMPTY;
+    opnd->instr = (enum special_token)EMPTY;
     opnd->kind = EXPR_CONST;
     //opnd->indirect = FALSE; /* not needed */
     opnd->explicit = FALSE;
@@ -1150,7 +1150,7 @@ static ret_code type_op( int oper, struct expr *opnd1, struct expr *opnd2, struc
      * will set opnd.memtype to MT_EMPTY.
      */
     if( opnd2->instr != EMPTY && opnd2->mem_type != MT_EMPTY ) {
-        opnd2->instr = EMPTY;
+        opnd2->instr = (enum special_token)EMPTY;
         sym = NULL;
     }
     if( opnd2->instr != EMPTY ) {
@@ -1936,7 +1936,7 @@ static ret_code minus_op( struct expr *opnd1, struct expr *opnd2 )
             //if( opnd1->base_reg == NULL && opnd1->idx_reg == NULL ) { /* v2.09: just check 'indirect' */
             if( opnd1->indirect == FALSE ) {
                 if( opnd1->instr == T_OFFSET && opnd2->instr == T_OFFSET )
-                    opnd1->instr = EMPTY;
+                    opnd1->instr = (enum special_token)EMPTY;
                 //opnd1->indirect = FALSE; /* v2.09: not needed */
             } else {
                 DebugMsg1(("minus_op, exit, ADDR, base=%X, idx=%X\n", opnd1->base_reg, opnd1->idx_reg ));

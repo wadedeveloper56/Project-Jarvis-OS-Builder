@@ -7,7 +7,7 @@
 * Description:  Generate CodeView symbolic debug info ( Version 4 format )
 *
 ****************************************************************************/
-
+#include "pch.h"
 #include <stddef.h>
 
 #include "globals.h"

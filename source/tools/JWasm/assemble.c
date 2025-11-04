@@ -7,7 +7,7 @@
 * Description:  assemble a module.
 *
 ****************************************************************************/
-
+#include "pch.h"
 #include <ctype.h>
 #include <time.h>
 

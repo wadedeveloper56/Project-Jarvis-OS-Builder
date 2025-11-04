@@ -7,7 +7,7 @@
 * Description:  string to float conversion
 *
 ****************************************************************************/
-
+#include "pch.h"
 #include <float.h>
 #include <math.h>
 

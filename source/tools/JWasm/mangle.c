@@ -27,7 +27,7 @@
 * Description:  Symbol name mangling routines.
 *
 ****************************************************************************/
-
+#include "pch.h"
 #include <ctype.h>
 
 #include "globals.h"

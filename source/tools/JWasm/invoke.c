@@ -7,7 +7,7 @@
 * Description:  Processing of INVOKE directive.
 *
 ****************************************************************************/
-
+#include "pch.h"
 #include <ctype.h>
 #include <limits.h>
 

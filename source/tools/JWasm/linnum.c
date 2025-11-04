@@ -7,7 +7,7 @@
 * Description:  handles line numbers if -Zd or -Zi is set.
 *
 ****************************************************************************/
-
+#include "pch.h"
 #include <ctype.h>
 #include <time.h>
 

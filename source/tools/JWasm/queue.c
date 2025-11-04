@@ -27,7 +27,7 @@
 * Description:  implements queue object
 *
 ****************************************************************************/
-
+#include "pch.h"
 #include <stddef.h>
 
 #include "memalloc.h"

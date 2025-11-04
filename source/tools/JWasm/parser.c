@@ -27,7 +27,7 @@
 * Description:  Parser
 *
 ****************************************************************************/
-
+#include "pch.h"
 #include <ctype.h>
 #include <limits.h>
 
@@ -402,7 +402,7 @@ static void seg_override( struct code_info *CodeInfo, int seg_reg, const struct 
         return;
 
     if( CodeInfo->token == T_LEA ) {
-        CodeInfo->prefix.RegOverride = EMPTY; /* skip segment override */
+        CodeInfo->prefix.RegOverride = (enum assume_segreg)EMPTY; /* skip segment override */
         SetFixupFrame( sym, FALSE );
         return;
     }
@@ -450,7 +450,7 @@ static void seg_override( struct code_info *CodeInfo, int seg_reg, const struct 
     }
 
     if( CodeInfo->prefix.RegOverride == default_seg ) {
-        CodeInfo->prefix.RegOverride = EMPTY;
+        CodeInfo->prefix.RegOverride = (enum assume_segreg)EMPTY;
     }
 }
 
@@ -1017,7 +1017,7 @@ ret_code idata_fixup( struct code_info *CodeInfo, unsigned CurrOpnd, struct expr
                 /* v2.07: added cases IMAGEREL and SECTIONREL */
                 if ( opndx->mem_type == MT_EMPTY  ) {
                     switch( opndx->instr ) {
-                    case EMPTY:
+                    case (enum special_token)EMPTY:
                     case T_LOW:
                     case T_HIGH:
                         opndx->mem_type = MT_BYTE;
@@ -2127,7 +2127,7 @@ static void HandleStringInstructions( struct code_info *CodeInfo, const struct e
                      * CodeInfo->RegOverride is != EMPTY.
                      */
                     if ( LastRegOverride == ASSUME_DS )
-                        CodeInfo->prefix.RegOverride = EMPTY;
+                        CodeInfo->prefix.RegOverride = (enum assume_segreg)EMPTY;
                     else
                         CodeInfo->prefix.RegOverride = LastRegOverride;
                 } else {
@@ -2136,7 +2136,7 @@ static void HandleStringInstructions( struct code_info *CodeInfo, const struct e
                 }
             } else if ( CodeInfo->prefix.RegOverride == ASSUME_DS ) {
                 /* prefix for first operand? */
-                CodeInfo->prefix.RegOverride = EMPTY;
+                CodeInfo->prefix.RegOverride = (enum assume_segreg)EMPTY;
             }
         }
         break;
@@ -2165,7 +2165,7 @@ static void HandleStringInstructions( struct code_info *CodeInfo, const struct e
             if ( opndx[OPND2].override == NULL )
                 EmitError( INVALID_INSTRUCTION_OPERANDS );
             else if ( CodeInfo->prefix.RegOverride == ASSUME_DS )
-                CodeInfo->prefix.RegOverride = EMPTY;
+                CodeInfo->prefix.RegOverride = (enum assume_segreg)EMPTY;
         break;
     case T_OUTS:
     case T_OUTSB:
@@ -2173,7 +2173,7 @@ static void HandleStringInstructions( struct code_info *CodeInfo, const struct e
     case T_OUTSD:
         /* v2.01: remove default DS prefix */
         if ( CodeInfo->prefix.RegOverride == ASSUME_DS )
-            CodeInfo->prefix.RegOverride = EMPTY;
+            CodeInfo->prefix.RegOverride = (enum assume_segreg)EMPTY;
         opndidx = OPND2;
         break;
     case T_LODS:
@@ -2185,7 +2185,7 @@ static void HandleStringInstructions( struct code_info *CodeInfo, const struct e
 #endif
         /* v2.10: remove unnecessary DS prefix ( Masm-compatible ) */
         if ( CodeInfo->prefix.RegOverride == ASSUME_DS )
-            CodeInfo->prefix.RegOverride = EMPTY;
+            CodeInfo->prefix.RegOverride = (enum assume_segreg)EMPTY;
         break;
     default: /*INS[B|W|D], SCAS[B|W|D|Q], STOS[B|W|D|Q] */
         /* INSx, SCASx and STOSx don't allow any segment prefix != ES
@@ -2193,7 +2193,7 @@ static void HandleStringInstructions( struct code_info *CodeInfo, const struct e
          */
         if ( CodeInfo->prefix.RegOverride != EMPTY )
             if ( CodeInfo->prefix.RegOverride == ASSUME_ES )
-                CodeInfo->prefix.RegOverride = EMPTY;
+                CodeInfo->prefix.RegOverride = (enum assume_segreg)EMPTY;
             else
                 EmitError( INVALID_INSTRUCTION_OPERANDS );
     }
@@ -2953,8 +2953,8 @@ ret_code ParseLine( struct asm_tok tokenarray[] )
     if ( CurrFile[LST] ) oldofs = GetCurrOffset();
 
     /* init CodeInfo */
-    CodeInfo.prefix.ins         = EMPTY;
-    CodeInfo.prefix.RegOverride = EMPTY;
+    CodeInfo.prefix.ins         = (enum instr_token)EMPTY;
+    CodeInfo.prefix.RegOverride = (enum assume_segreg)EMPTY;
 #if AMD64_SUPPORT
     CodeInfo.prefix.rex     = 0;
 #endif

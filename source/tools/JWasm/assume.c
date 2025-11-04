@@ -27,7 +27,7 @@
 * Description:  handles ASSUME
 *
 ****************************************************************************/
-
+#include "pch.h"
 #include <ctype.h>
 
 #include "globals.h"

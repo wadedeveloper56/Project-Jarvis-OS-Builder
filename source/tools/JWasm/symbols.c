@@ -27,7 +27,7 @@
 * Description:  symbol table access
 *
 ****************************************************************************/
-
+#include "pch.h"
 #include <time.h>
 
 #include "globals.h"

@@ -7,7 +7,7 @@
 * Description:  reserved word handling, including hash table access
 *
 ****************************************************************************/
-
+#include "pch.h"
 #include "globals.h"
 #include "memalloc.h"
 #include "parser.h"

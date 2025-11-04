@@ -14,7 +14,7 @@
 * - ExpandLine        expand a source line
 * - ExpandLiterals    expand <> or {} literals for struct initialization
 ****************************************************************************/
-
+#include "pch.h"
 #include <ctype.h>
 
 #include "globals.h"

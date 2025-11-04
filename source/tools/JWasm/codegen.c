@@ -27,7 +27,7 @@
 * Description:  instruction encoding, scans opcode table and emits code.
 *
 ****************************************************************************/
-
+#include "pch.h"
 #include <limits.h>
 
 #include "globals.h"

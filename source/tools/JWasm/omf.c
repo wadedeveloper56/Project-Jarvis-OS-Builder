@@ -27,7 +27,7 @@
 * Description:  handle OMF output format.
 *
 ****************************************************************************/
-
+#include "pch.h"
 #include <limits.h>
 #include <ctype.h>
 #include <time.h>
@@ -382,7 +382,7 @@ static void omf_write_fixupp( struct dsym *seg, char is32 )
     uint_8 *data;
     unsigned size;
     struct fixup *fix;
-    enum fixup_types type = ( is32 ? FIX_GEN_MS386 : FIX_GEN_INTEL );
+    enum fixup_types type = (enum fixup_types)( is32 ? FIX_GEN_MS386 : FIX_GEN_INTEL );
     struct omf_rec  obj;
 
     fix = seg->e.seginfo->FixupList.head;

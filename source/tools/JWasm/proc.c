@@ -7,7 +7,7 @@
 * Description:  Processing of PROC/ENDP/LOCAL directives.
 *
 ****************************************************************************/
-
+#include "pch.h"
 #include <ctype.h>
 
 #include "globals.h"

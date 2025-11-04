@@ -8,7 +8,7 @@
 *               Used if -bin, -mz or -pe cmdline options were set.
 *
 ****************************************************************************/
-
+#include "pch.h"
 #include <stddef.h>
 #include <ctype.h>
 #include <time.h>

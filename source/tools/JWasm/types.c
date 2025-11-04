@@ -7,7 +7,7 @@
 * Description:  STRUCT, UNION, RECORD and TYPEDEF directives.
 *
 ****************************************************************************/
-
+#include "pch.h"
 #include <ctype.h>
 
 #include "globals.h"

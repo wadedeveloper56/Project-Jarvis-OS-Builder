@@ -13,7 +13,7 @@
 *               ZERO?, CARRY?, SIGN?, PARITY?, OVERFLOW?
 *
 ****************************************************************************/
-
+#include "pch.h"
 #include <ctype.h>
 
 #include "globals.h"
