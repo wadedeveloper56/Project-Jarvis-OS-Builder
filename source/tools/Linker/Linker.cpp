@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "linker.h"
 #include "ArgumentTable.h"
 #include "BinaryFormat.h"
