@@ -9,10 +9,6 @@
 *
 ****************************************************************************/
 #include "pch.h"
-#include <stddef.h>
-#include <ctype.h>
-#include <time.h>
-
 #include "globals.h"
 #include "memalloc.h"
 #include "parser.h"

@@ -8,9 +8,6 @@
 *
 ****************************************************************************/
 #include "pch.h"
-#include <ctype.h>
-#include <time.h>
-
 #include "globals.h"
 #include "memalloc.h"
 #include "input.h"

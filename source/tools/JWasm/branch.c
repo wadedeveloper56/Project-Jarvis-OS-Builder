@@ -34,8 +34,6 @@
 *                 (see OPTION LJMP | NOLJMP).
 ****************************************************************************/
 #include "pch.h"
-#include <limits.h>
-
 #include "globals.h"
 #include "parser.h"
 #include "fixup.h"

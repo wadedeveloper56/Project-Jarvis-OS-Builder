@@ -8,9 +8,6 @@
 *
 ****************************************************************************/
 #include "pch.h"
-#include <float.h>
-#include <math.h>
-
 #include "globals.h"
 #include "tbyte.h"
 #include "atofloat.h"
