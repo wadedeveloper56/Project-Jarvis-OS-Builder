@@ -18,14 +18,11 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="JWlink.c" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{fef0478c-cd7d-45e2-b1e4-79cba2f3a732}</ProjectGuid>
-    <RootNamespace>JWlink</RootNamespace>
+    <ProjectGuid>{1380a6ff-2050-42d4-a67e-60f2d0436e01}</ProjectGuid>
+    <RootNamespace>JWlib</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -75,19 +72,19 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>..\bin\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>..\bin\intermediate\JWlink\$(Configuration)\$(Platform)\</IntDir>
+    <IntDir>..\bin\intermediate\JWlib\$(Configuration)\$(Platform)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>..\bin\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>..\bin\intermediate\JWlink\$(Configuration)\$(Platform)\</IntDir>
+    <IntDir>..\bin\intermediate\JWlib\$(Configuration)\$(Platform)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>..\bin\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>..\bin\intermediate\JWlink\$(Configuration)\$(Platform)\</IntDir>
+    <IntDir>..\bin\intermediate\JWlib\$(Configuration)\$(Platform)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>..\bin\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>..\bin\intermediate\JWlink\$(Configuration)\$(Platform)\</IntDir>
+    <IntDir>..\bin\intermediate\JWlib\$(Configuration)\$(Platform)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -149,6 +146,9 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="JWlib.c" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
