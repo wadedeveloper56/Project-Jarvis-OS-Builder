@@ -39,12 +39,12 @@ extern void MemFree( void *ptr );
 
 #if defined(__WATCOMC__) || defined(__BORLANDC__) || defined(__OCC__)
 
-#define myalloca  alloca
+#define myalloca  _alloca
 #include <malloc.h>
 
 #elif defined(__GNUC__) || defined(__TINYC__)
 
-#define myalloca  alloca
+#define myalloca  _alloca
 #if !(defined(__FreeBSD__) || defined(__OpenBSD__) || defined(__APPLE__))
 #include <malloc.h>
 #endif
