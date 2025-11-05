@@ -27,3 +27,6 @@ research/test1/test.err
 /research/JWasm1/bin
 /research/JWlink/bin
 /research/JWlink/.vs
+/research/Linker/.vs
+/research/Linker/bin
+/research/Linker/Linker/.vs
