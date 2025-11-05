@@ -15,7 +15,173 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="JWlib.c">
+    <ClInclude Include="h\banner.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\cmdline.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\coffwrt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\convert.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\debug.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\errnum.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\error.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\ext.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\filetab.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\implib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\inlib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\liblist.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\libwalk.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\main.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\memfuncs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\objfile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\oldarch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\omfproc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\omfutil.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\ops.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\optdef.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\orlrtns.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\proclib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\symlist.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\types.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\wlib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\wlibio.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\wlibutil.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\writelib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="h\wlib.msg">
+      <Filter>Header Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="c\cmdline.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\coffwrt.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\convert.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\debug.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\elfobjs.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\error.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\idedrv.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\ideentry.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\idemsgfm.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\idemsgpr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\implib.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\inlib.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\libio.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\libwalk.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\memfuncs.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\omfproc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\omfutil.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\orlrtns.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\proclib.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\symlist.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\symtable.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\wlib.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\wlibutil.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\writelib.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\maindrv.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

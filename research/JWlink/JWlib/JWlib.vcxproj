@@ -73,24 +73,28 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>..\bin\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\bin\intermediate\JWlib\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>..\lib_misc\h;..\orl\h;..\watcom\h;.\;.\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>..\bin\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\bin\intermediate\JWlib\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>..\lib_misc\h;..\orl\h;..\watcom\h;.\;.\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>..\bin\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\bin\intermediate\JWlib\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>..\lib_misc\h;..\orl\h;..\watcom\h;.\;.\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>..\bin\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\bin\intermediate\JWlib\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>..\lib_misc\h;..\orl\h;..\watcom\h;.\;.\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
@@ -106,7 +110,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
@@ -120,7 +124,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
@@ -136,7 +140,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
@@ -147,7 +151,82 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="JWlib.c" />
+    <ClInclude Include="h\banner.h" />
+    <ClInclude Include="h\cmdline.h" />
+    <ClInclude Include="h\coffwrt.h" />
+    <ClInclude Include="h\convert.h" />
+    <ClInclude Include="h\debug.h" />
+    <ClInclude Include="h\errnum.h" />
+    <ClInclude Include="h\error.h" />
+    <ClInclude Include="h\ext.h" />
+    <ClInclude Include="h\filetab.h" />
+    <ClInclude Include="h\implib.h" />
+    <ClInclude Include="h\inlib.h" />
+    <ClInclude Include="h\liblist.h" />
+    <ClInclude Include="h\libwalk.h" />
+    <ClInclude Include="h\main.h" />
+    <ClInclude Include="h\memfuncs.h" />
+    <ClInclude Include="h\objfile.h" />
+    <ClInclude Include="h\oldarch.h" />
+    <ClInclude Include="h\omfproc.h" />
+    <ClInclude Include="h\omfutil.h" />
+    <ClInclude Include="h\ops.h" />
+    <ClInclude Include="h\optdef.h" />
+    <ClInclude Include="h\orlrtns.h" />
+    <ClInclude Include="h\proclib.h" />
+    <ClInclude Include="h\symlist.h" />
+    <ClInclude Include="h\types.h" />
+    <ClInclude Include="h\wlib.h" />
+    <ClInclude Include="h\wlibio.h" />
+    <ClInclude Include="h\wlibutil.h" />
+    <ClInclude Include="h\writelib.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="h\wlib.msg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="c\cmdline.c" />
+    <ClCompile Include="c\coffwrt.c" />
+    <ClCompile Include="c\convert.c" />
+    <ClCompile Include="c\debug.c" />
+    <ClCompile Include="c\elfobjs.c" />
+    <ClCompile Include="c\error.c" />
+    <ClCompile Include="c\idedrv.c" />
+    <ClCompile Include="c\ideentry.c" />
+    <ClCompile Include="c\idemsgfm.c" />
+    <ClCompile Include="c\idemsgpr.c" />
+    <ClCompile Include="c\implib.c" />
+    <ClCompile Include="c\inlib.c" />
+    <ClCompile Include="c\libio.c" />
+    <ClCompile Include="c\libwalk.c" />
+    <ClCompile Include="c\maindrv.c" />
+    <ClCompile Include="c\memfuncs.c" />
+    <ClCompile Include="c\omfproc.c" />
+    <ClCompile Include="c\omfutil.c" />
+    <ClCompile Include="c\orlrtns.c" />
+    <ClCompile Include="c\proclib.c" />
+    <ClCompile Include="c\symlist.c" />
+    <ClCompile Include="c\symtable.c" />
+    <ClCompile Include="c\wlib.c" />
+    <ClCompile Include="c\wlibutil.c" />
+    <ClCompile Include="c\writelib.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\dwarf\dwarf.vcxproj">
+      <Project>{3bac0e6b-e420-4462-8b7f-10ac310db4da}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\lib_misc\lib_misc.vcxproj">
+      <Project>{62eecd33-827a-4386-8513-e393845a6c3e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\orl\orl.vcxproj">
+      <Project>{d39a4508-787d-4a6a-94c5-ec4b83b04b73}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\sdk-rc\sdk-rc.vcxproj">
+      <Project>{df15ef70-ae5f-49e9-90a4-3acce3bc11dd}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\sdk-wres\sdk-wres.vcxproj">
+      <Project>{388533a4-26d2-4bf0-9314-4d4de807010f}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

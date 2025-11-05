@@ -495,7 +495,7 @@ static orl_return ParseExport( char **contents, int *len,
     int         l;
 
     l = strncspn( *contents, ", \t", *len );
-    arg = alloca((l+1));
+    arg = _alloca((l+1));
     memcpy(arg, *contents, l); arg[l] = 0;
     *len -= l;
     *contents += l;

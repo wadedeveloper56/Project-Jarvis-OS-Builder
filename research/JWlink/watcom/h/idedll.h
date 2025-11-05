@@ -308,7 +308,7 @@ typedef struct {
     IDEJavaSrcDepFile           SrcDepFile;     // (java src dependency file)
     IDEJavaSrcDepEnd            SrcDepEnd;      // (end java src dependendency)
 } IDECallBacks;
-
+#define IDEDLL_EXPORT
 /*********************************************************
  * Routines implemented by the DLL
  *********************************************************/
