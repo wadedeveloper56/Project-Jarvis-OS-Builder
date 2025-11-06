@@ -15,6 +15,7 @@
 #include <sys/stat.h>
 #include <ctype.h>
 #include <limits.h>
+#include <assert.h>
 
 #pragma warning(disable:6031)
 #pragma warning(disable:4018)

@@ -72,6 +72,15 @@
     <ClCompile Include="objfree.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="elfentr.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="coffentr.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="omfentr.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">

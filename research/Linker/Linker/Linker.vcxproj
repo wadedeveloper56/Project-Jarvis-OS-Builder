@@ -168,6 +168,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="cmdline.cpp" />
+    <ClCompile Include="coffentr.cpp" />
+    <ClCompile Include="elfentr.cpp" />
     <ClCompile Include="globals.cpp" />
     <ClCompile Include="Linker.cpp" />
     <ClCompile Include="lsymtab.cpp" />
@@ -179,6 +181,7 @@
     <ClCompile Include="objio.cpp" />
     <ClCompile Include="objnode.cpp" />
     <ClCompile Include="objorl.cpp" />
+    <ClCompile Include="omfentr.cpp" />
     <ClCompile Include="orlentry.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
