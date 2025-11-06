@@ -167,11 +167,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="carve.cpp" />
     <ClCompile Include="cmdline.cpp" />
     <ClCompile Include="coffentr.cpp" />
     <ClCompile Include="elfentr.cpp" />
     <ClCompile Include="globals.cpp" />
     <ClCompile Include="Linker.cpp" />
+    <ClCompile Include="linkutil.cpp" />
     <ClCompile Include="lsymtab.cpp" />
     <ClCompile Include="mem.cpp" />
     <ClCompile Include="msg.cpp" />
@@ -189,8 +191,11 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="permdata.cpp" />
     <ClCompile Include="reloc.cpp" />
+    <ClCompile Include="ring.cpp" />
     <ClCompile Include="spillio.cpp" />
+    <ClCompile Include="strtab.cpp" />
     <ClCompile Include="symmem.cpp" />
     <ClCompile Include="virtmem.cpp" />
     <ClCompile Include="wlnkmsg.cpp" />

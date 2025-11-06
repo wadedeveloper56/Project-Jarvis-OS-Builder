@@ -44,6 +44,10 @@
 #include "library.h"
 #include "globals.h"
 
+int _argc;
+char** _argv;
+static char* ArgSave;
+
 void InitSubSystems()
 {
     LnkMemInit();
@@ -57,8 +61,106 @@ void InitSubSystems()
     InitCmdFile();
 }
 
+static void ResetMisc(void)
+{
+    LinkFlags = CASE_FLAG | FAR_CALLS_FLAG;
+    LinkState = MAKE_RELOCS;
+    AbsGroups = NULL;
+    DataGroup = NULL;
+    IDataGroup = NULL;
+    MapFile = NIL_HANDLE;
+    MapFName = NULL;
+    OutFiles = NULL;
+    ObjLibFiles = NULL;
+    LibModules = NULL;
+    Groups = NULL;
+    CurrLoc.seg = UNDEFINED;
+    CurrLoc.off = 0;
+    OvlClasses = NULL;
+    OvlVectors = NULL;
+    VecNum = 0;
+    OvlNum = 0;
+    OvlFName = NULL;
+    CurrMod = NULL;
+    StackSize = 0x1000;
+    ResetSym();
+    SetSymCase();
+    SetLibCase();
+}
+
+static void ResetSubSystems(void)
+{
+    ResetPermData();
+    //ResetMsg();
+    //VirtMemInit();
+    //ResetMisc();
+    //Root = NewSection();
+    //ResetDBI();
+    //ResetMapIO();
+    //ResetCmdAll();
+    //ResetOvlSupp();
+    //ResetComdef();
+    //ResetDistrib();
+    //ResetLoadNov();
+    //ResetLoadPE();
+    //ResetObj2Supp();
+    //ResetObjIO();
+    //ResetObjOMF();
+    //ResetObjPass1();
+    //ResetObjStrip();
+    //ResetOMFReloc();
+    //ResetReloc();
+    //ResetSymTrace();
+    //ResetLoadFile();
+    //ResetAddr();
+    //ResetToc();
+}
+
+static void CleanSubSystems(void)
+{
+    //if (MapFile != NIL_HANDLE) {
+    //    QClose(MapFile, MapFName);
+    //    MapFile = NIL_HANDLE;
+    //}
+    //FreeOutFiles();
+    //_LnkFree(MapFName);
+    //BurnSystemList();
+    //FreeList(LibPath);
+    //CloseSpillFile();
+    //CleanTraces();
+    //FreePaths();
+    //FreeUndefs();
+    //FreeLocalImports();
+    //CleanLoadFile();
+    //CleanLinkStruct();
+    //FreeFormatStuff();
+    //FreeObjInfo();
+    //FreeVirtMem();
+    //CleanToc();
+    //CleanSym();
+    //CleanPermData();
+}
+
+static void DoLink(char* cmdline)
+{
+    //NOT YET
+}
+
+static void LinkMeBaby(void)
+{
+    ResetSubSystems();
+    DoLink(ArgSave);
+}
+
 void LinkMainLine(char* cmds)
 {
+    for (;;) {
+        ArgSave = cmds;                
+        Spawn(&LinkMeBaby);
+        CleanSubSystems();
+        cmds = GetNextLink();
+        if (cmds == NULL) break;
+    }
 }
 
 void FiniSubSystems()
@@ -69,8 +171,10 @@ void FiniSubSystems()
     LnkMemFini();
 }
 
-int main()
+int main(int argc, char** argv)
 {
+    _argv = argv;
+    _argc = argc;
     InitSubSystems();
     LinkMainLine(NULL);
     FiniSubSystems();
