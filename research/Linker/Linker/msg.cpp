@@ -7,5 +7,3 @@
 #include "loadfile.h"
 #include "demangle.h"
 #include "msg.h"
-
-bool            BannerPrinted;

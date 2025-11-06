@@ -91,7 +91,7 @@ static void ResetMisc(void)
 static void ResetSubSystems(void)
 {
     ResetPermData();
-    //ResetMsg();
+    ResetMsg();
     //VirtMemInit();
     //ResetMisc();
     //Root = NewSection();

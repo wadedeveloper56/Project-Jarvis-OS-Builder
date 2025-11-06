@@ -28,8 +28,9 @@
 *
 ****************************************************************************/
 
+#include <stdarg.h>
 
- #if !defined(pick)
+#if !defined(pick)
 
     enum msg_class {
         OUT_TERM    = 0x00100000,
@@ -56,18 +57,10 @@
 
 enum msg_num {
 #else
-#include <banner.h>
+#include "banner.h"
 #endif
 
-#if 0
-    #define IDV     "** EXPERIMENTAL ** "
-#elif _DEVELOPMENT == _ON
-    #define IDV   " **INTERNAL DEVELOPMENT** "
-#else
-    #define IDV
-#endif
-
-pick( PRODUCT,                  banner1( IDV "JWlink", _WLINK_VERSION_ ) ),
+pick( PRODUCT,                  banner1( "JWlink", _WLINK_VERSION_ ) ),
 pick( COPYRIGHT,                banner2( "1985" ) ),
 pick( TRADEMARK,                banner3 ),
 //pick( TRADEMARK2,               banner3a ),

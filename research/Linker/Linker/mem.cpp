@@ -1,12 +1,32 @@
 #include "pch.h"
 #include "linkstd.h"
-#include "msg.h"
+#include "command.h"
 #include "wlnkmsg.h"
-#include "library.h"
+#include "fileio.h"
+#include "mapio.h"
+#include "loadfile.h"
+#include "demangle.h"
+#include "msg.h"
 #include "virtmem.h"
 #include "reloc.h"
-#include "objcache.h"
+
+#undef pick
+#define pick( num, string ) string
+
+static char* MsgStrings[] = {
+#include "msg.h"
+
 #include "alloc.h"
+
+static  char* LocFile;
+static  char* LocMem;
+static  int             LocRec;
+static  MSG_ARG_LIST    MsgArgInfo;
+static  char* CurrSymName;
+#define MSG_ARRAY_SIZE ((MSG_MAX_ERR_MSG_NUM / 8) + 1)
+unsigned long   MaxErrors;
+bool            BannerPrinted;
+byte MsgFlags[MSG_ARRAY_SIZE];
 
 void LnkMemInit(void)
 {
@@ -19,6 +39,15 @@ void LnkMemFini(void)
 bool CacheRelease(void)
 {
     return false;
+}
+
+void ResetMsg(void)
+{
+    LocFile = NULL;
+    LocMem = NULL;
+    LocRec = 0;
+    MsgArgInfo.index = -1;
+    memset(MsgFlags, 0xFF, MSG_ARRAY_SIZE);
 }
 
 bool FreeUpMemory(void)
