@@ -11,6 +11,7 @@ using namespace std;
 #include "types.h"
 #include "nodes.h"
 #include "objstruc.h"
+#include "orl.h"
 
 #define STATIC_TABALLOC (256 * sizeof(symbol *))  // 1st power of 128 > TABSIZE
 #define GLOBAL_TABALLOC (1792 * sizeof(symbol *)) // 1st power of 128 > TABSIZE
@@ -30,3 +31,6 @@ extern fstream* TempFile;
 extern symbol** GlobalSymPtrs;
 extern symbol** StaticSymPtrs;
 extern readcache* ReadCacheList;
+extern orl_handle       ORLHandle;
+extern orl_funcs        ORLFuncs;
+extern orl_handle ORLInit(orl_funcs* funcs);

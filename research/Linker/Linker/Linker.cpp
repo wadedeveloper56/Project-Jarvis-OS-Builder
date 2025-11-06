@@ -26,7 +26,7 @@ void InitSubSystems()
     TmpFSize = 0;
     GlobalSymPtrs = new symbol * [GLOBAL_TABALLOC];
     StaticSymPtrs = new symbol * [STATIC_TABALLOC];
-    //ORLHandle = ORLInit(&ORLFuncs);
+    ORLHandle = ORLInit(&ORLFuncs);
     ReadCacheList = NULL;
 }
 

@@ -16,4 +16,3 @@ fstream* TempFile;
 symbol** GlobalSymPtrs;
 symbol** StaticSymPtrs;
 readcache* ReadCacheList;
-//orl_handle       ORLHandle;
