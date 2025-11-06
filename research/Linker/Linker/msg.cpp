@@ -1,0 +1,11 @@
+#include "pch.h"
+#include "linkstd.h"
+#include "command.h"
+#include "wlnkmsg.h"
+#include "fileio.h"
+#include "mapio.h"
+#include "loadfile.h"
+#include "demangle.h"
+#include "msg.h"
+
+bool            BannerPrinted;

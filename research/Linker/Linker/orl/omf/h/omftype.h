@@ -212,7 +212,7 @@ typedef struct omf_comdat_struct {
 
 struct omf_seg_assoc_struct {
     omf_idx             name;
-    omf_idx             class;
+    omf_idx             class1;
     orl_sec_alignment   alignment;
     orl_sec_combine     combine;
     orl_sec_frame       frame;
@@ -249,7 +249,7 @@ struct omf_string_assoc_struct {
 };
 
 typedef struct omf_comment_struct {
-    uint_8              class;
+    uint_8              class1;
     uint_8              flags;
     omf_sec_offset      len;
     unsigned char       data[1];
@@ -304,7 +304,8 @@ struct omf_grp_handle_struct {
     omf_idx             *segs;
     omf_symbol_handle   sym;
 };
-
+/*
+ FIX ME
 struct omf_reloc_handle_struct {
     omf_sec_handle      section;
     orl_sec_offset      locale;
@@ -312,7 +313,7 @@ struct omf_reloc_handle_struct {
     orl_reloc_type      type;
     omf_sec_offset      offset;
 };
-
+*/
 typedef struct omf_scan_tab_struct {
     omf_idx             seg;
     omf_idx             lname;

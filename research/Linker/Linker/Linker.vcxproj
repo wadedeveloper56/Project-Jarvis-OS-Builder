@@ -73,22 +73,22 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>..\bin\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\bin\intermediate\JWlink\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>.\watcom\h;.\orl\h;.\orl\coff\h;.\orl\elf\h;.\orl\omf\h;.\;.\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>.\lib_misc\h;.\watcom\h;.\orl\h;.\orl\coff\h;.\orl\elf\h;.\orl\omf\h;.\;.\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>..\bin\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\bin\intermediate\JWlink\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>.\watcom\h;.\orl\h;.\orl\coff\h;.\orl\elf\h;.\orl\omf\h;.\;.\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>.\lib_misc\h;.\watcom\h;.\orl\h;.\orl\coff\h;.\orl\elf\h;.\orl\omf\h;.\;.\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>..\bin\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\bin\intermediate\JWlink\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>.\watcom\h;.\orl\h;.\orl\coff\h;.\orl\elf\h;.\orl\omf\h;.\;.\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>.\lib_misc\h;.\watcom\h;.\orl\h;.\orl\coff\h;.\orl\elf\h;.\orl\omf\h;.\;.\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>..\bin\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\bin\intermediate\JWlink\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>.\watcom\h;.\orl\h;.\orl\coff\h;.\orl\elf\h;.\orl\omf\h;.\;.\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>.\lib_misc\h;.\watcom\h;.\orl\h;.\orl\coff\h;.\orl\elf\h;.\orl\omf\h;.\;.\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -167,14 +167,30 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="cmdline.cpp" />
     <ClCompile Include="globals.cpp" />
     <ClCompile Include="Linker.cpp" />
+    <ClCompile Include="lsymtab.cpp" />
+    <ClCompile Include="mem.cpp" />
+    <ClCompile Include="msg.cpp" />
+    <ClCompile Include="ntio.cpp" />
+    <ClCompile Include="objcache.cpp" />
+    <ClCompile Include="objfree.cpp" />
+    <ClCompile Include="objio.cpp" />
+    <ClCompile Include="objnode.cpp" />
+    <ClCompile Include="objorl.cpp" />
+    <ClCompile Include="orlentry.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="reloc.cpp" />
+    <ClCompile Include="spillio.cpp" />
+    <ClCompile Include="symmem.cpp" />
+    <ClCompile Include="virtmem.cpp" />
+    <ClCompile Include="wlnkmsg.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="h\alloc.h" />
