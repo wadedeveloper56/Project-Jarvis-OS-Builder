@@ -1,33 +1,51 @@
 #include "pch.h"
+#include "linkstd.h"
+#include "msg.h"
+#include "alloc.h"
+#include "wlnkmsg.h"
+#include "command.h"
+#include "fileio.h"
+#include "objpass2.h"
+#include "cmdline.h"
+#include "loadfile.h"
+#include "objfree.h"
+#include "mapio.h"
+#include "objcalc.h"
+#include "procfile.h"
+#include "spillio.h"
+#include "virtmem.h"
+#include "loados2.h"
+#include "loadpe.h"
+#include "loadqnx.h"
+#include "loadnov.h"
+#include "loadelf.h"
+#include "symtrace.h"
+#include "objnode.h"
+#include "objio.h"
+#include "distrib.h"
+#include "objorl.h"
+#include "strtab.h"
+#include "carve.h"
+#include "permdata.h"
+#include "toc.h"
+#include "dbgall.h"
+#include "objpass1.h"
+#include "obj2supp.h"
+#include "cmdall.h"
+#include "reloc.h"
+#include "salloc.h"
+#include "objstrip.h"
+#include "symtab.h"
+#include "omfreloc.h"
+#include "overlays.h"
+#include "wcomdef.h"
+#include "objomf.h"
+#include "wlink.h"
+#include "library.h"
 #include "globals.h"
-
-static nodearray* MakeArray(unsigned size)
-{
-    nodearray* nodes = new nodearray;
-    nodes->num = 0;
-    nodes->elsize = size;
-    nodes->arraymax = 0;
-    size *= NODE_ARRAY_SIZE;
-    nodes->array[0] = new char[size];
-    memset(nodes->array[0], 0, size);
-    return(nodes);
-}
 
 void InitSubSystems()
 {
-    GrpNodes = MakeArray(sizeof(grpnode));
-    SegNodes = MakeArray(sizeof(segnode));
-    ExtNodes = MakeArray(sizeof(extnode));
-    NameNodes = MakeArray(sizeof(list_of_names*));
-    TokSize = MAX_HEADROOM;
-    TokBuff = new char[MAX_HEADROOM];
-    TempFile = NULL;
-    TFileName = NULL;
-    TmpFSize = 0;
-    GlobalSymPtrs = new symbol * [GLOBAL_TABALLOC];
-    StaticSymPtrs = new symbol * [STATIC_TABALLOC];
-    ORLHandle = ORLInit(&ORLFuncs);
-    ReadCacheList = NULL;
 }
 
 void LinkMainLine(char* cmds)
