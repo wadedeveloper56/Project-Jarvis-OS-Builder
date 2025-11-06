@@ -86,3 +86,8 @@ void LFree(void* p)
     if (p == NULL) return;
     free(p);
 }
+
+void* LnkExpand(void* src, size_t size)
+{
+    return(_expand(src, size));
+}

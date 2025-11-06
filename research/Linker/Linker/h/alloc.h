@@ -51,14 +51,14 @@ extern void     ReleasePass1( void );
 extern void     RelSymBlock( void );
 
 #define _ChkAlloc( cast, dest, size ) dest = (cast)ChkLAlloc( size )
-#define _LnkAlloc( dest, size ) dest = LAlloc( size )
+#define _LnkAlloc( cast, dest, size ) dest = (cast)LAlloc( size )
 #define _TryAlloc( dest, size ) dest = TryAlloc( size )
 #define _PermAlloc( dest, size ) dest = PermAlloc( size );
 #define _LnkReAlloc( dest, src, size ) dest = LnkReAlloc( src, size );
 #define _LnkFree( ptr )         LFree( ptr )
 #define _PermFree( ptr )        /* nothing to do */
 #define _Pass1Alloc( dest, size ) dest = Pass1Alloc( size );
-#define _LnkExpand( dest, src, size ) dest = LnkExpand( src, size );
+#define _LnkExpand( cast, dest, src, size ) dest = (cast)LnkExpand( src, size );
 
 extern int      ValidateMem( void );    // just for debugging
 

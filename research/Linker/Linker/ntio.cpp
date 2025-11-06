@@ -22,3 +22,48 @@ void LnkFilesInit(void)
 void SetBreak(void)
 {
 }
+
+static int DoOpen(char* name, unsigned mode, bool isexe)
+{
+    int     h;
+
+    isexe = isexe;
+    //CheckBreak();
+    mode |= O_BINARY;
+    for (;; ) {
+        //if (OpenFiles >= MAX_OPEN_FILES)
+        //    CleanCachedHandles();
+        h = _open(name, mode, _S_IREAD | _S_IWRITE);
+        if (h != -1) {
+            OpenFiles++;
+            break;
+        }
+        //if (errno != TOOMANY)
+        //    break;
+        //if (!CleanCachedHandles()) {
+        //    break;
+        //}
+    }
+    return(h);
+}
+
+static f_handle NSOpen(char* name, unsigned mode)
+{
+    int         h;
+
+    h = DoOpen(name, mode, FALSE);
+    LastResult = h;
+    if (h != -1)
+        return(h);
+    return(NIL_HANDLE);
+}
+
+f_handle QObjOpen(char* name)
+{
+    return(NSOpen(name, O_RDONLY));
+}
+
+f_handle TempFileOpen(char* name)
+{
+    return(NSOpen(name, O_RDWR));
+}

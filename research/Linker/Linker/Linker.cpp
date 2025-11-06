@@ -92,7 +92,7 @@ static void ResetSubSystems(void)
 {
     ResetPermData();
     ResetMsg();
-    //VirtMemInit();
+    VirtMemInit();
     //ResetMisc();
     //Root = NewSection();
     //ResetDBI();

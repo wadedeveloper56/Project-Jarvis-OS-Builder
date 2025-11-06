@@ -31,3 +31,8 @@ int Spawn(void (*fn)(void))
     return(status);
 }
 
+char* GetEnvString(char* envname)
+{
+    return(getenv(envname));
+}
+
