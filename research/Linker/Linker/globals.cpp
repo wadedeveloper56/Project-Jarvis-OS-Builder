@@ -67,3 +67,4 @@ mod_entry* CurrMod;        /* pointer to current mod_entry struct  */
 offset         StackSize;      /* size of stack                        */
 symbol* HeadSym;        /* head of symbol table list */
 section* Root;           /* pointer to root information          */
+mapflag        MapFlags;       /* flags dealing with the map file */

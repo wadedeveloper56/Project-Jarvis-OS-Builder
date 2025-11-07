@@ -183,6 +183,7 @@
     <ClCompile Include="Linker.cpp" />
     <ClCompile Include="linkutil.cpp" />
     <ClCompile Include="lsymtab.cpp" />
+    <ClCompile Include="mapio.cpp" />
     <ClCompile Include="mem.cpp" />
     <ClCompile Include="msg.cpp" />
     <ClCompile Include="ntio.cpp" />
