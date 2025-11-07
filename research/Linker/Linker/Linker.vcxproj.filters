@@ -132,6 +132,12 @@
     <ClCompile Include="obj2supp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="objomf.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="objpass1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">

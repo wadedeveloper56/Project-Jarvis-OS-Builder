@@ -196,7 +196,9 @@
     <ClCompile Include="objfree.cpp" />
     <ClCompile Include="objio.cpp" />
     <ClCompile Include="objnode.cpp" />
+    <ClCompile Include="objomf.cpp" />
     <ClCompile Include="objorl.cpp" />
+    <ClCompile Include="objpass1.cpp" />
     <ClCompile Include="omfentr.cpp" />
     <ClCompile Include="orlentry.cpp" />
     <ClCompile Include="ovlsupp.cpp" />
