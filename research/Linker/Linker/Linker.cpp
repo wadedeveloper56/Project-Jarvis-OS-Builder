@@ -100,11 +100,11 @@ static void ResetSubSystems(void)
     ResetCmdAll();
     ResetOvlSupp();
     ResetComdef();
-    //ResetDistrib();
-    //ResetLoadNov();
-    //ResetLoadPE();
-    //ResetObj2Supp();
-    //ResetObjIO();
+    ResetDistrib();
+    ResetLoadNov();
+    ResetLoadPE();
+    ResetObj2Supp();
+    ResetObjIO();
     //ResetObjOMF();
     //ResetObjPass1();
     //ResetObjStrip();

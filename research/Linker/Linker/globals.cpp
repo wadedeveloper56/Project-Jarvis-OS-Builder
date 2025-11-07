@@ -43,6 +43,7 @@
 #include "wlink.h"
 #include "library.h"
 #include "globals.h"
+#include "watcom.h"
 
 stateflag LinkState;      /* flags to indicate linker state */
 linkflag LinkFlags;    /* flags to indicate presence of parms  */
@@ -69,3 +70,7 @@ symbol* HeadSym;        /* head of symbol table list */
 section* Root;           /* pointer to root information          */
 mapflag        MapFlags;       /* flags dealing with the map file */
 path_entry* LibPath;        /* path for library files               */
+unsigned_32    NumImports;
+unsigned_32    NumExports;
+char* TokBuff;        // Multi-purpose large buffer
+unsigned       TokSize;        // size of above buffer

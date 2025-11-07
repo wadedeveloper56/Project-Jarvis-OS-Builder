@@ -40,10 +40,10 @@
 typedef int bool;
 #endif
 
-enum {
-    false,
-    true
-};
+//enum {
+//    false,
+//    true
+//};
 
 typedef enum {
     RS_OK = 0,                  /* this must be 0 because it is sometimes

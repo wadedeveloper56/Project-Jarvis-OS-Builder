@@ -38,6 +38,8 @@
 #include "pushpck1.h"
 #endif
 
+#define _WCUNALIGNED
+
 typedef struct WResHeader {
     uint_32     Magic[ 2 ];     /* must be WRESMAGIC0 and WRESMAGIC1 */
     uint_32     DirOffset;      /* offset to the start of the directory */

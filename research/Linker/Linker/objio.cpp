@@ -10,8 +10,20 @@
 #include "permdata.h"
 #include "objio.h"
 
-char* TokBuff;        // Multi-purpose large buffer
-unsigned TokSize;     // size of above buffer
+typedef struct {
+    void* buffer;
+    unsigned long       pos;
+    infilelist* currfile;
+} bufferedfile;
+
+infilelist* CachedLibFiles;
+infilelist* CachedFiles;
+
+void ResetObjIO(void)
+{
+    CachedFiles = NULL;
+    CachedLibFiles = NULL;
+}
 
 void InitTokBuff(void)
 {
