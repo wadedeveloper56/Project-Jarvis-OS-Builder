@@ -114,3 +114,8 @@ void* PermAlloc(size_t size)
 {
 	return(AllocBlock(size, &PermBlocks));
 }
+
+void GetSymBlock(void)
+{
+    PermBlocks.list = NULL;
+}

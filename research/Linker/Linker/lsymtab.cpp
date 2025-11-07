@@ -29,6 +29,10 @@
 
 static symbol** GlobalSymPtrs;
 static symbol** StaticSymPtrs;
+static  symbol* SymList = NULL;
+unsigned        NameLen;
+symbol* LastSym;
+int             (*CmpRtn)(const void*, const void*, size_t);
 
 void InitSym(void)
 {
@@ -40,4 +44,31 @@ void FiniSym(void)
 {
 	_LnkFree(GlobalSymPtrs);
 	_LnkFree(StaticSymPtrs);
+}
+
+void ResetSym(void)
+{
+    NameLen = 0;
+    SymList = NULL;
+    HeadSym = NULL;
+    LastSym = NULL;
+    CmpRtn = _memicmp;
+    GetSymBlock();
+    ClearHashPointers();
+}
+
+void SetSymCase(void)
+{
+    if (LinkFlags & CASE_FLAG) {
+        CmpRtn = memcmp;
+    }
+    else {
+        CmpRtn = _memicmp;
+    }
+}
+
+void ClearHashPointers(void)
+{
+    memset(GlobalSymPtrs, 0, GLOBAL_TABSIZE * sizeof(symbol*));
+    memset(StaticSymPtrs, 0, STATIC_TABSIZE * sizeof(symbol*));
 }

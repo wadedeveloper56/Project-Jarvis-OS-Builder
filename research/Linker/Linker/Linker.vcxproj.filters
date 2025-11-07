@@ -96,6 +96,15 @@
     <ClCompile Include="carve.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="libr.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cmdutils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="hash.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">

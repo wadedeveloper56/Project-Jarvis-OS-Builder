@@ -18,6 +18,7 @@
 #include <assert.h>
 #include <setjmp.h>
 #include <stdarg.h>
+#include <direct.h>
 
 #pragma warning(disable:6031)
 #pragma warning(disable:4018)

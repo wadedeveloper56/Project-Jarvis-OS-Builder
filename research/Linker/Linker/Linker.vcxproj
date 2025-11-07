@@ -173,9 +173,12 @@
   <ItemGroup>
     <ClCompile Include="carve.cpp" />
     <ClCompile Include="cmdline.cpp" />
+    <ClCompile Include="cmdutils.cpp" />
     <ClCompile Include="coffentr.cpp" />
     <ClCompile Include="elfentr.cpp" />
     <ClCompile Include="globals.cpp" />
+    <ClCompile Include="hash.cpp" />
+    <ClCompile Include="libr.cpp" />
     <ClCompile Include="Linker.cpp" />
     <ClCompile Include="linkutil.cpp" />
     <ClCompile Include="lsymtab.cpp" />
