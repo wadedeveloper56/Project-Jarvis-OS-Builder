@@ -97,9 +97,9 @@ static void ResetSubSystems(void)
     Root = NewSection();
     ResetDBI();
     ResetMapIO();
-    //ResetCmdAll();
-    //ResetOvlSupp();
-    //ResetComdef();
+    ResetCmdAll();
+    ResetOvlSupp();
+    ResetComdef();
     //ResetDistrib();
     //ResetLoadNov();
     //ResetLoadPE();

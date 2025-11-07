@@ -44,8 +44,8 @@
 #include "library.h"
 #include "globals.h"
 
-stateflag      LinkState;      /* flags to indicate linker state */
-linkflag       LinkFlags;    /* flags to indicate presence of parms  */
+stateflag LinkState;      /* flags to indicate linker state */
+linkflag LinkFlags;    /* flags to indicate presence of parms  */
 group_entry* Groups;         /* pointer to defined groups            */
 group_entry* AbsGroups;      /* pointer to defined absolute groups   */
 group_entry* OvlGroup;       /* pointer to group for overlay table   */
@@ -68,3 +68,4 @@ offset         StackSize;      /* size of stack                        */
 symbol* HeadSym;        /* head of symbol table list */
 section* Root;           /* pointer to root information          */
 mapflag        MapFlags;       /* flags dealing with the map file */
+path_entry* LibPath;        /* path for library files               */

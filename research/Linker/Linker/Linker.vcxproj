@@ -173,6 +173,7 @@
   <ItemGroup>
     <ClCompile Include="carve.cpp" />
     <ClCompile Include="cmdline.cpp" />
+    <ClCompile Include="cmdll.cpp" />
     <ClCompile Include="cmdutils.cpp" />
     <ClCompile Include="coffentr.cpp" />
     <ClCompile Include="dbgall.cpp" />
@@ -194,6 +195,7 @@
     <ClCompile Include="objorl.cpp" />
     <ClCompile Include="omfentr.cpp" />
     <ClCompile Include="orlentry.cpp" />
+    <ClCompile Include="ovlsupp.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -207,6 +209,7 @@
     <ClCompile Include="strtab.cpp" />
     <ClCompile Include="symmem.cpp" />
     <ClCompile Include="virtmem.cpp" />
+    <ClCompile Include="wcomdef.cpp" />
     <ClCompile Include="wlnkmsg.cpp" />
   </ItemGroup>
   <ItemGroup>
