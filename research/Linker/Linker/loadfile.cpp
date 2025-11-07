@@ -37,6 +37,7 @@ seg_leader* StackSegPtr;
 startinfo       StartInfo;
 
 #define IMPLIB_BUFSIZE 4096
+#define BUFF_BLOCK_SIZE (16*1024)
 
 typedef struct {
     f_handle    handle;
@@ -66,3 +67,51 @@ void ResetLoadFile(void)
 {
     ClearStartAddr();
 }
+
+static void FlushBuffFile(outfilelist* outfile)
+{
+    unsigned    modpos;
+
+    modpos = outfile->bufpos % BUFF_BLOCK_SIZE;
+    if (modpos != 0) {
+        QWrite(outfile->handle, outfile->buffer, modpos, outfile->fname);
+    }
+    _LnkFree(outfile->buffer);
+    outfile->buffer = NULL;
+}
+
+void CloseBuffFile(outfilelist* outfile)
+{
+    if (outfile->buffer != NULL) {
+        FlushBuffFile(outfile);
+    }
+    QClose(outfile->handle, outfile->fname);
+    outfile->handle = NIL_HANDLE;
+}
+
+static void CloseOutFiles(void)
+{
+    outfilelist* fnode;
+
+    for (fnode = OutFiles; fnode != NULL; fnode = fnode->next) {
+        if (fnode->handle != NIL_HANDLE) {
+            CloseBuffFile(fnode);
+        }
+    }
+}
+
+void FreeOutFiles(void)
+{
+    outfilelist* fnode;
+
+    CloseOutFiles();
+    for (fnode = OutFiles; fnode != NULL; fnode = OutFiles) {
+        if (LinkState & LINK_ERROR) {
+            QDelete(fnode->fname);
+        }
+        _LnkFree(fnode->fname);
+        OutFiles = fnode->next;
+        _LnkFree(fnode);
+    }
+}
+

@@ -38,3 +38,16 @@ void FreeTokBuffs(void)
         TokBuff = NULL;
     }
 }
+
+bool CleanCachedHandles(void)
+{
+    infilelist* list;
+
+    for (list = CachedFiles; list != NULL; list = list->next) {
+        if (!(list->flags & INSTAT_IN_USE) && list->handle != NIL_HANDLE)break;
+    }
+    if (list == NULL) return(FALSE);
+    QClose(list->handle, list->name);
+    list->handle = NIL_HANDLE;
+    return(TRUE);
+}

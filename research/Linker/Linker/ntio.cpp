@@ -7,6 +7,10 @@
 #include "fileio.h"
 #include "ntio.h"
 
+#define TOOMANY EMFILE
+#define doread( f, b, l )  _read( f, b, l )
+#define dowrite( f, b, l ) _write( f, b, l )
+
 static int      OpenFiles;      // the number of open files
 static unsigned LastResult;
 static bool     CaughtBreak;    // set to TRUE if break hit.
@@ -19,6 +23,21 @@ void LnkFilesInit(void)
     setmode(STDOUT_HANDLE, O_BINARY);
 }
 
+void CheckBreak(void)
+{
+#ifdef __OSI__
+    if (*_BreakFlagPtr) {
+        *_BreakFlagPtr = 0;
+        LnkMsg(FTL + MSG_BREAK_HIT, NULL);    /* suicides */
+    }
+#else
+    if (CaughtBreak) {
+        CaughtBreak = FALSE;        /* prevent recursion */
+        //FIX ME LnkMsg(FTL + MSG_BREAK_HIT, NULL);    /* suicides */
+    }
+#endif
+}
+
 void SetBreak(void)
 {
 }
@@ -28,21 +47,21 @@ static int DoOpen(char* name, unsigned mode, bool isexe)
     int     h;
 
     isexe = isexe;
-    //CheckBreak();
+    CheckBreak();
     mode |= O_BINARY;
     for (;; ) {
-        //if (OpenFiles >= MAX_OPEN_FILES)
-        //    CleanCachedHandles();
+        if (OpenFiles >= MAX_OPEN_FILES)
+            CleanCachedHandles();
         h = _open(name, mode, _S_IREAD | _S_IWRITE);
         if (h != -1) {
             OpenFiles++;
             break;
         }
-        //if (errno != TOOMANY)
-        //    break;
-        //if (!CleanCachedHandles()) {
-        //    break;
-        //}
+        if (errno != TOOMANY)
+            break;
+        if (!CleanCachedHandles()) {
+            break;
+        }
     }
     return(h);
 }
@@ -66,4 +85,62 @@ f_handle QObjOpen(char* name)
 f_handle TempFileOpen(char* name)
 {
     return(NSOpen(name, O_RDWR));
+}
+
+void QClose(f_handle file, char* name)
+{
+    int         h;
+
+    CheckBreak();
+    h = _close(file);
+    OpenFiles--;
+    if (h != -1)
+        return;
+    //FIX ME LnkMsg(ERR + MSG_IO_PROBLEM, "12", name, strerror(errno));
+}
+
+unsigned QWrite(f_handle file, void* buffer, unsigned len, char* name)
+{
+    int     h;
+    //FIX ME char    rc_buff[RESOURCE_MAX_SIZE];
+
+    if (len == 0)
+        return(0);
+
+#ifdef _INT_DEBUG
+    {
+        unsigned long pos = QPos(file);
+        if (pos <= SpyWrite && SpyWrite <= pos + len
+            && file == Root->outfile->handle) {
+            DEBUG((DBG_ALWAYS, "About to write to %s (handle %d) %d bytes at position %d:",
+                name, file, len, pos));
+            PrintMemDump(buffer, len, DUMP_BYTE);
+        }
+    }
+#endif
+
+    CheckBreak();
+    h = dowrite(file, buffer, len);
+    if (name != NULL) {
+        if (h == -1) {
+            //FIX ME LnkMsg(ERR + MSG_IO_PROBLEM, "12", name, strerror(errno));
+        }
+        else if (h != len) {
+            //FIX ME Msg_Get(MSG_IOERRLIST_7, rc_buff);
+            //FIX ME LnkMsg((FTL + MSG_IO_PROBLEM) & ~OUT_MAP, "12", name, rc_buff);
+        }
+    }
+    return(h);
+}
+
+void QDelete(char* name)
+{
+    int   h;
+
+    if (name == NULL)
+        return;
+    h = remove(name);
+    if (h == -1 && errno != ENOENT) { /* file not found is OK */
+        //FIX ME LnkMsg(ERR + MSG_IO_PROBLEM, "12", name, strerror(errno));
+    }
 }
