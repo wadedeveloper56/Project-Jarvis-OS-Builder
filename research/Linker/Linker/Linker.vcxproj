@@ -175,6 +175,7 @@
     <ClCompile Include="cmdline.cpp" />
     <ClCompile Include="cmdutils.cpp" />
     <ClCompile Include="coffentr.cpp" />
+    <ClCompile Include="dbgall.cpp" />
     <ClCompile Include="elfentr.cpp" />
     <ClCompile Include="globals.cpp" />
     <ClCompile Include="hash.cpp" />

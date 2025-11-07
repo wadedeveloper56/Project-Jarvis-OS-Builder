@@ -95,7 +95,7 @@ static void ResetSubSystems(void)
     VirtMemInit();
     ResetMisc();
     Root = NewSection();
-    //ResetDBI();
+    ResetDBI();
     //ResetMapIO();
     //ResetCmdAll();
     //ResetOvlSupp();
