@@ -107,8 +107,8 @@ static void ResetSubSystems(void)
     ResetObjIO();
     ResetObjOMF();
     ResetObjPass1();
-    //ResetObjStrip();
-    //ResetOMFReloc();
+    ResetObjStrip();
+    ResetOMFReloc();
     //ResetReloc();
     //ResetSymTrace();
     //ResetLoadFile();

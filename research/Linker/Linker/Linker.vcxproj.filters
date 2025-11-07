@@ -138,6 +138,12 @@
     <ClCompile Include="objpass1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="objstrip.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="omfreloc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">

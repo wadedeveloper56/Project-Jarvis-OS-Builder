@@ -199,7 +199,9 @@
     <ClCompile Include="objomf.cpp" />
     <ClCompile Include="objorl.cpp" />
     <ClCompile Include="objpass1.cpp" />
+    <ClCompile Include="objstrip.cpp" />
     <ClCompile Include="omfentr.cpp" />
+    <ClCompile Include="omfreloc.cpp" />
     <ClCompile Include="orlentry.cpp" />
     <ClCompile Include="ovlsupp.cpp" />
     <ClCompile Include="pch.cpp">
