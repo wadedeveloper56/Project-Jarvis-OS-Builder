@@ -100,7 +100,7 @@ static void ResetSubSystems(void)
     ResetCmdAll();
     ResetOvlSupp();
     ResetComdef();
-    ResetDistrib();
+    //ResetDistrib();
     ResetLoadNov();
     ResetLoadPE();
     ResetObj2Supp();
@@ -109,11 +109,11 @@ static void ResetSubSystems(void)
     ResetObjPass1();
     ResetObjStrip();
     ResetOMFReloc();
-    //ResetReloc();
-    //ResetSymTrace();
-    //ResetLoadFile();
-    //ResetAddr();
-    //ResetToc();
+    ResetReloc();
+    ResetSymTrace();
+    ResetLoadFile();
+    ResetAddr();
+    ResetToc();
 }
 
 static void CleanSubSystems(void)

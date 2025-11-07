@@ -184,6 +184,7 @@
     <ClCompile Include="libr.cpp" />
     <ClCompile Include="Linker.cpp" />
     <ClCompile Include="linkutil.cpp" />
+    <ClCompile Include="loadfile.cpp" />
     <ClCompile Include="loadnov.cpp" />
     <ClCompile Include="loadpe.cpp" />
     <ClCompile Include="lsymtab.cpp" />
@@ -213,9 +214,12 @@
     <ClCompile Include="permdata.cpp" />
     <ClCompile Include="reloc.cpp" />
     <ClCompile Include="ring.cpp" />
+    <ClCompile Include="salloc.cpp" />
     <ClCompile Include="spillio.cpp" />
     <ClCompile Include="strtab.cpp" />
     <ClCompile Include="symmem.cpp" />
+    <ClCompile Include="symtrace.cpp" />
+    <ClCompile Include="toc.cpp" />
     <ClCompile Include="virtmem.cpp" />
     <ClCompile Include="wcomdef.cpp" />
     <ClCompile Include="wlnkmsg.cpp" />

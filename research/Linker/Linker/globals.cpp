@@ -75,3 +75,5 @@ unsigned_32    NumExports;
 char* TokBuff;        // Multi-purpose large buffer
 unsigned       TokSize;        // size of above buffer
 obj_format     ObjFormat;
+int            RecNum;         /* record number of the obj file        */
+seg_leader* CurrentSeg;    /* current segment being allocated       */
