@@ -83,8 +83,8 @@ void processArgs(int argc, char* argv[])
 	parameters.padsegments = segmentPadding->count;
 	parameters.mapfile = map->count;
 	parameters.outname = (char*)outfile->filename[0];
-	_splitpath(parameters.outname, drive, dir, fname, ext);
-	_makepath(parameters.mapFileName, drive, dir, fname, "map");
+	splitpath(parameters.outname, drive, dir, fname, ext);
+	makepath(parameters.mapFileName, drive, dir, fname, "map");
 	for (int i = 0; i < infiles->count; i++)
 	{
 		inputFiles.push_back(infiles->filename[i]);

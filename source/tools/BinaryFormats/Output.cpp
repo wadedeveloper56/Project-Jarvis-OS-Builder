@@ -688,7 +688,11 @@ void DumpArchiveMemberHeader(PIMAGE_ARCHIVE_MEMBER_HEADER pArchHeader)
 void DumpFirstLinkerMember(vector<LIBFileLinkerMembersPtr> *list)
 {
 	printf("First Linker Member:\n");
+#ifdef _WIN64
+	printf("  Symbols:         %08llX\n", list->size());
+#else
 	printf("  Symbols:         %08lX\n", list->size());
+#endif
 	printf("  MbrOffs   Name\n  --------  ----\n");
 	for(LIBFileLinkerMembersPtr ptr : *list)
 	{

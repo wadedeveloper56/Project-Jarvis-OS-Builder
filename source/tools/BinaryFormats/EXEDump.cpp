@@ -437,7 +437,7 @@ void loadResourcesDirectory(FileType fileType, EXEFilePtr result, char* buffer, 
 	PIMAGE_RESOURCE_DIRECTORY_ENTRY resDirEntry = (PIMAGE_RESOURCE_DIRECTORY_ENTRY)(resDir + 1);
 	WORD nNamed = resDir->NumberOfNamedEntries;
 	WORD nIds = resDir->NumberOfIdEntries;
-	PIMAGE_RESOURCE_DATA_ENTRY  pResDataEntry;
+	//PIMAGE_RESOURCE_DATA_ENTRY  pResDataEntry;
 	result->resourcesDirectory.header.Characteristics = resDir->Characteristics;
 	result->resourcesDirectory.header.TimeDateStamp = resDir->TimeDateStamp;
 	result->resourcesDirectory.header.MajorVersion = resDir->MajorVersion;

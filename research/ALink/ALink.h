@@ -1,26 +1,22 @@
-#include "LinkerMemory.h"
+#pragma once
 
-using namespace std;
+#pragma warning(disable : 4267)
+#pragma warning(disable : 4244)
+#pragma warning(disable : 4018)
+#pragma warning(disable : 4333)
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+#include <memory.h>
+#include <string.h>
+#include <limits.h>
+#include <time.h>
+#include <ctype.h>
+#include <errno.h>
+#include <iostream>
+#define stricmp _stricmp
+#define strupr _strupr
 
-typedef struct _Parameters {
-	char case_sensitive;
-	char padsegments;
-	char mapfile;
-	int output_type;
-	char* outname;
-	unsigned long imageBase;
-	unsigned long fileAlign;
-	unsigned long objectAlign;
-	unsigned long stackSize;
-	unsigned long stackCommitSize;
-	unsigned long heapSize;
-	unsigned long heapCommitSize;
-	unsigned char osMajor, osMinor;
-	unsigned char subsysMajor, subsysMinor;
-	unsigned int subSystem;
-	char* stubName;
-	char mapFileName[_MAX_PATH];
-}Parameters,*ParametersPtr,**ParametersPtrPtr;
 
 #define SWITCHCHAR '-'
 #define PATH_CHAR '\\'
@@ -338,8 +334,7 @@ typedef struct _Parameters {
 
 #define OUTPUT_COM 1
 #define OUTPUT_EXE 2
-#define OUTPUT_PE32  3
-#define OUTPUT_PE64  4
+#define OUTPUT_PE  3
 
 #define WIN32_DEFAULT_BASE              0x00400000
 #define WIN32_DEFAULT_FILEALIGN         0x00000200
@@ -503,18 +498,114 @@ typedef struct __comdatrec
 	UInt linkwith;
 } COMDATREC, * PCOMDAT;
 
-void processArgs(int argc, char* argv[]);
-void processEnvironmentVariable();
+extern char case_sensitive;
+extern char padsegments;
+extern char mapfile;
+extern CharPtr mapname;
+extern unsigned short maxalloc;
+extern int output_type;
+extern CharPtr outname;
+extern FILE* afile;
+extern UInt filepos;
+extern long reclength;
+extern unsigned char rectype;
+extern char li_le;
+extern UInt prevofs;
+extern long prevseg;
+extern long gotstart;
+extern RELOC startaddr;
+extern UInt imageBase;
+extern UInt fileAlign;
+extern UInt objectAlign;
+extern UInt stackSize;
+extern UInt stackCommitSize;
+extern UInt heapSize;
+extern UInt heapCommitSize;
+extern unsigned char osMajor, osMinor;
+extern unsigned char subsysMajor, subsysMinor;
+extern unsigned int subSystem;
+extern bool buildDll;
+extern UCharPtr stubName;
+extern long errcount;
+extern unsigned char buf[65536];
+extern DatablockPtr lidata;
+extern CharPtrPtr namelist;
+extern SegmentPtrPtr seglist;
+extern SegmentPtrPtr outlist;
+extern PPGRP grplist;
+extern SortEntryPtr publics;
+extern ExtRecPtr externs;
+extern PPCOMREC comdefs;
+extern PPRELOC relocs;
+extern ImpRecPtr impdefs;
+extern PEXPREC expdefs;
+extern PLIBFILE libfiles;
+extern PRESOURCE resource;
+extern SortEntryPtr comdats;
+extern CharPtrPtr modname;
+extern CharPtrPtr filename;
+extern UInt namecount, namemin, pubcount, pubmin, segcount, segmin, outcount, grpcount, grpmin, extcount, extmin, comcount, commin, fixcount, fixmin, impcount, impmin, impsreq, expcount, expmin, nummods, filecount, libcount, rescount;
+extern UInt libPathCount;
+extern CharPtr* libPath;
+extern char* entryPoint;
+extern char t_thred[4];
+extern char f_thred[4];
+extern int t_thredindex[4];
+extern int f_thredindex[4];
+//ALink.cpp
+void processArgs(int argc, char** argv);
+void matchExterns();
+void matchComDefs();
+void sortSegments();
+void loadFiles();
+void generateMap();
+//Util.cpp
+int getBitCount(UInt a);
+void ClearNbit(UCharPtr mask, long i);
+void SetNbit(UCharPtr mask, long i);
+char GetNbit(UCharPtr mask, long i);
+long GetIndex(UCharPtr buf, long* index);
+void ReportError(long errnum);
+unsigned short wtoupper(unsigned short a);
+int wstricmp(const char* s1, const char* s2);
+int wstrlen(const char* s);
+int sortCompare(void const* x1, void const* x2);
+VoidPtr checkMalloc(size_t x);
+VoidPtr checkRealloc(VoidPtr p, size_t x);
+char* checkStrdup(const char* s);
+SortEntryPtr binarySearch(SortEntryPtr list, UInt count, char* key);
+void sortedInsert(SortEntryPtr* plist, UInt* pcount, char* key, VoidPtr object);
+//ObjLoad.cpp
+void DestroyLIDATA(DatablockPtr p);
+DatablockPtr BuildLiData(long* bufofs);
+void EmitLiData(DatablockPtr p, long segnum, long* ofs);
+void RelocLIDATA(DatablockPtr p, long* ofs, PRELOC r);
+void LoadFIXUP(PRELOC r, UCharPtr buf, long* p);
+long loadmod(FILE* objfile);
+void loadlib(FILE* libfile, CharPtr libname);
+void loadlibmod(UInt libnum, UInt modpage);
+void loadres(FILE* f);
+// Coff.cpp
+void loadcoff(FILE* objfile);
+void loadCoffImport(FILE* objfile);
+// CoffLib.cpp
+void loadCoffLib(FILE* libfile, CharPtr libname);
+void loadcofflibmod(PLIBFILE p, FILE* libfile);
+// Combine.cpp
+void fixpubsegs(int src, int dest, UInt shift);
+void fixpubgrps(int src, int dest);
+void combine_segments(long dest, long src);
+void combine_common(long i, long j);
+void combine_groups(long i, long j);
+void combineBlocks();
+// Output.cpp
+void GetFixupTarget(PRELOC r, long* bseg, UInt* tofs, bool isFlat);
+void OutputCOMfile(CharPtr outname);
+void OutputEXEfile(CharPtr outname);
+long createOutputSection(char* name, UInt winFlags);
+void BuildPERelocs(long relocSectNum, UCharPtr objectTable);
+void BuildPEExports(long SectNum, UCharPtr objectTable, UCharPtr name);
+void BuildPEResources(long sectNum, UCharPtr objectTable);
+void getStub(UCharPtr* pstubData, UInt* pstubSize);
+void OutputWin32file(CharPtr outname);
 
-#define stricmp _stricmp
-#define strupr _strupr
-#define strdup _strdup
-#define splitpath _splitpath
-#define makepath _makepath
-
-extern LinkerMemory memory;
-extern Parameters parameters;
-extern vector<string> libraryPath;
-extern unsigned long libPathCount;
-extern vector<string> inputFiles;
-extern unsigned long inputFilesCount;
