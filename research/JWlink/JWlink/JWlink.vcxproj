@@ -250,18 +250,22 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>..\bin\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\bin\intermediate\JWlink\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>..\watcom\h;..\sdk\rc\rc\h;..\sdk\wres\h;..\h;..\dwarf\h;..\lib_misc\h;..\orl\h;..\orl\coff\h;..\orl\elf\h;..\orl\omf\h; $(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>..\bin\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\bin\intermediate\JWlink\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>..\watcom\h;..\sdk\rc\rc\h;..\sdk\wres\h;..\h;..\dwarf\h;..\lib_misc\h;..\orl\h;..\orl\coff\h;..\orl\elf\h;..\orl\omf\h; $(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>..\bin\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\bin\intermediate\JWlink\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>..\watcom\h;..\sdk\rc\rc\h;..\sdk\wres\h;..\h;..\dwarf\h;..\lib_misc\h;..\orl\h;..\orl\coff\h;..\orl\elf\h;..\orl\omf\h; $(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>..\bin\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\bin\intermediate\JWlink\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>..\watcom\h;..\sdk\rc\rc\h;..\sdk\wres\h;..\h;..\dwarf\h;..\lib_misc\h;..\orl\h;..\orl\coff\h;..\orl\elf\h;..\orl\omf\h; $(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
