@@ -62,7 +62,7 @@ static void GetNewBlock(block_data* block, unsigned size)
         if (new1 != NULL) break;
         try1 /= 2;
         if (try1 < size || try1 < SYM_BLOCK_MIN) {
-            //FIX ME LnkMsg(FTL + MSG_NO_DYN_MEM, NULL);
+            LnkMsg(FTL + MSG_NO_DYN_MEM, NULL);
         }
     }
     new1->next = block->list;

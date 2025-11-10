@@ -37,7 +37,7 @@ extern bool             TestBit( byte *, unsigned );
 extern char             *ChkStrDup( char * );
 extern char             *ChkToString( void *, unsigned );
 extern seg_leader       *FindSegment( section *, char * );
-extern group_entry      *FindGroup( segment );
+//extern group_entry      *FindGroup( segment );
 extern offset           FindLinearAddr( targ_addr * );
 extern offset           FindLinearAddr2( targ_addr * );
 extern void             WalkLeaders( void (*rtn)( seg_leader * ) );

@@ -58,12 +58,12 @@ f_handle OpenTempFile(char** fname)
 	tlen = 0;
 	for (;; ) {
 		if (tlen >= 26) {
-			//FIX ME LnkMsg(FTL + MSG_CANT_OPEN_SPILL, NULL);
+			LnkMsg(FTL + MSG_CANT_OPEN_SPILL, NULL);
 		}
 		*ptr += 1;                          // change temp file extension
 		fhdl = TempFileOpen(*fname);
 		if (fhdl == NIL_HANDLE) break;
-		//FIX ME QClose(fhdl, *fname);
+		QClose(fhdl, *fname);
 		++tlen;
 	}
 	return fhdl; //FIX ME  QOpenRW(*fname);
@@ -75,7 +75,7 @@ unsigned long SpillAlloc(unsigned amt)
 
 	if (TempFile == NIL_HANDLE) {
 		TempFile = OpenTempFile(&TFileName);
-		//FIX ME LnkMsg(INF + MSG_USING_SPILL, NULL);
+		LnkMsg(INF + MSG_USING_SPILL, NULL);
 	}
 	/* round up storage start to a disk sector boundry -- assumed power of 2 */
 	TmpFSize += SECTOR_SIZE - 1;
@@ -87,6 +87,6 @@ unsigned long SpillAlloc(unsigned amt)
 
 void SpillWrite(unsigned long base, unsigned off, void* mem, unsigned size)
 {
-	//FIX ME QSeek(TempFile, base + off - 1, TFileName);
-	//FIX ME QWrite(TempFile, mem, size, TFileName);
+	QSeek(TempFile, base + off - 1, TFileName);
+	QWrite(TempFile, mem, size, TFileName);
 }

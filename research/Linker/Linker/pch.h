@@ -26,5 +26,6 @@ typedef SSIZE_T ssize_t;
 #pragma warning(disable:6031)
 #pragma warning(disable:4018)
 #pragma warning(disable:4267)
+#pragma warning(disable:4244)
 
 #define setmode _setmode

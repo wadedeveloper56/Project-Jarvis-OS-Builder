@@ -33,7 +33,7 @@ void CheckBreak(void)
 #else
     if (CaughtBreak) {
         CaughtBreak = FALSE;        /* prevent recursion */
-        //FIX ME LnkMsg(FTL + MSG_BREAK_HIT, NULL);    /* suicides */
+        LnkMsg(FTL + MSG_BREAK_HIT, NULL);    /* suicides */
     }
 #endif
 }
@@ -96,13 +96,13 @@ void QClose(f_handle file, char* name)
     OpenFiles--;
     if (h != -1)
         return;
-    //FIX ME LnkMsg(ERR + MSG_IO_PROBLEM, "12", name, strerror(errno));
+    LnkMsg(ERR + MSG_IO_PROBLEM, "12", name, strerror(errno));
 }
 
 unsigned QWrite(f_handle file, void* buffer, unsigned len, char* name)
 {
     int     h;
-    //FIX ME char    rc_buff[RESOURCE_MAX_SIZE];
+    char    rc_buff[RESOURCE_MAX_SIZE];
 
     if (len == 0)
         return(0);
@@ -123,11 +123,11 @@ unsigned QWrite(f_handle file, void* buffer, unsigned len, char* name)
     h = dowrite(file, buffer, len);
     if (name != NULL) {
         if (h == -1) {
-            //FIX ME LnkMsg(ERR + MSG_IO_PROBLEM, "12", name, strerror(errno));
+            LnkMsg(ERR + MSG_IO_PROBLEM, "12", name, strerror(errno));
         }
         else if (h != len) {
-            //FIX ME Msg_Get(MSG_IOERRLIST_7, rc_buff);
-            //FIX ME LnkMsg((FTL + MSG_IO_PROBLEM) & ~OUT_MAP, "12", name, rc_buff);
+            Msg_Get(MSG_IOERRLIST_7, rc_buff);
+            LnkMsg((FTL + MSG_IO_PROBLEM) & ~OUT_MAP, "12", name, rc_buff);
         }
     }
     return(h);
@@ -141,6 +141,29 @@ void QDelete(char* name)
         return;
     h = remove(name);
     if (h == -1 && errno != ENOENT) { /* file not found is OK */
-        //FIX ME LnkMsg(ERR + MSG_IO_PROBLEM, "12", name, strerror(errno));
+        LnkMsg(ERR + MSG_IO_PROBLEM, "12", name, strerror(errno));
     }
+}
+
+long QLSeek(f_handle file, long position, int start, char* name)
+{
+    long int    h;
+
+    CheckBreak();
+    h = _lseek(file, position, start);
+    if (h == -1 && name != NULL) {
+        LnkMsg(ERR + MSG_IO_PROBLEM, "12", name, strerror(errno));
+    }
+    return(h);
+}
+
+void QSeek(f_handle file, long position, char* name)
+{
+    QLSeek(file, position, SEEK_SET, name);
+}
+
+char NLSeq[] = { "\r\n" }; 
+void QWriteNL(f_handle file, char* name)
+{
+    QWrite(file, NLSeq, sizeof(NLSeq) - 1, name);
 }

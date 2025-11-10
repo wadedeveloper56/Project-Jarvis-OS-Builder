@@ -25,6 +25,7 @@ char* Name;
 sysblock* SysBlocks;
 sysblock* LinkCommands;
 static sysblock* PrevCommand;
+tok             Token;
 
 void InitCmdFile(void)
 {

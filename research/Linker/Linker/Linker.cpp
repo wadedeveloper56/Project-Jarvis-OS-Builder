@@ -47,6 +47,7 @@
 int _argc;
 char** _argv;
 static char* ArgSave;
+section* NewSection(void);
 
 void InitSubSystems()
 {
