@@ -90,3 +90,15 @@ void SpillWrite(unsigned long base, unsigned off, void* mem, unsigned size)
 	QSeek(TempFile, base + off - 1, TFileName);
 	QWrite(TempFile, mem, size, TFileName);
 }
+
+void CloseSpillFile(void)
+{
+	if (TempFile != NIL_HANDLE) {
+		//RestoreBreak();
+		QClose(TempFile, TFileName);
+		QDelete(TFileName);
+		_LnkFree(TFileName);
+		TFileName = NULL;
+		TempFile = NIL_HANDLE;
+	}
+}

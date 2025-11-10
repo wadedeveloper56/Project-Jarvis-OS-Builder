@@ -124,11 +124,11 @@ static void CleanSubSystems(void)
 		MapFile = NIL_HANDLE;
 	}
 	FreeOutFiles();
-	//_LnkFree(MapFName);
-	//BurnSystemList();
-	//FreeList(LibPath);
-	//CloseSpillFile();
-	//CleanTraces();
+	_LnkFree(MapFName);
+	BurnSystemList();
+	FreeList(LibPath);
+	CloseSpillFile();
+	CleanTraces();
 	//FreePaths();
 	//FreeUndefs();
 	//FreeLocalImports();

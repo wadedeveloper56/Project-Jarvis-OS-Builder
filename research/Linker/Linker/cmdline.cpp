@@ -46,3 +46,34 @@ char* GetNextLink(void)
     return(cmd);
 }
 
+static void CleanSystemList(bool check)
+{
+    sysblock** sys;
+    sysblock* next;
+    char* name;
+
+    sys = &SysBlocks;
+    while (*sys != NULL) {
+        name = (*sys)->name;
+        if (!check || (memcmp("286", name, 4) != 0 && memcmp("386", name, 4) != 0)) {
+            next = (*sys)->next;
+            _LnkFree(name);
+            _LnkFree(*sys);
+            *sys = next;
+        }
+        else {
+            sys = &(*sys)->next;
+        }
+    }
+}
+
+void PruneSystemList(void)
+{
+    CleanSystemList(TRUE);
+}
+
+void BurnSystemList(void)
+{
+    CleanSystemList(FALSE);
+}
+
