@@ -196,6 +196,7 @@ int main(int argc, char* argv[])
 		{
 			printf("File Type: 16-bit DOS OBJECT\n\n");
 			DOSOBJFilePtr data = loadDOSObjFile(fileType, buffer, fileSize);
+			DumpDOSObjFile(data);
 			break;
 		}
 		case ANONYMOUS:

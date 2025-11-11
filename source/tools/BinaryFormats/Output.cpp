@@ -766,3 +766,15 @@ void DumpLibFile(LIBFilePtr lib)
 		index++;
 	}
 }
+
+void DumpDOSObjFile(DOSOBJFilePtr obj)
+{
+	int offset = 0;
+	for (DOSOBJRecordPtr ptr : obj->records)
+	{
+		printf("Type 0x%02X : length 0x%04lX (%ld)\n", ptr->rectype, ptr->reclength, ptr->reclength);
+		hexdump(ptr->buffer, ptr->reclength, offset + 3);
+		printf("\n");
+		offset += 3 + ptr->reclength;
+	}
+}

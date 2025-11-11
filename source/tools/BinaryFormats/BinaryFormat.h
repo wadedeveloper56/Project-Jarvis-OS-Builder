@@ -335,8 +335,17 @@ typedef struct BINARYFORMATS_API _LIBFile
 	_LIBFile();
 } LIBFile, * LIBFilePtr, ** LIBFilePtrPtr;
 
+typedef struct BINARYFORMATS_API _DOSOBJRecord
+{
+	unsigned char rectype;
+	unsigned long reclength;
+	unsigned char *buffer;
+	_DOSOBJRecord();
+} DOSOBJRecord, * DOSOBJRecordPtr, ** DOSOBJRecordPtrPtr;
+
 typedef struct BINARYFORMATS_API _DOSOBJFile
 {
+	vector<DOSOBJRecordPtr> records;
 	_DOSOBJFile();
 } DOSOBJFile, * DOSOBJFilePtr, ** DOSOBJFilePtrPtr;
 
@@ -390,5 +399,6 @@ BINARYFORMATS_API void DumpDebugDirectory(DebugPtr debug);
 BINARYFORMATS_API void DumpLoadConfig32Directory(PIMAGE_LOAD_CONFIG_DIRECTORY32 load32);
 BINARYFORMATS_API void DumpLoadConfig64Directory(PIMAGE_LOAD_CONFIG_DIRECTORY64 load64);
 BINARYFORMATS_API void DumpLibFile(LIBFilePtr ptr);
+BINARYFORMATS_API void DumpDOSObjFile(DOSOBJFilePtr ptr);
 //DosObjDump.cpp
 BINARYFORMATS_API DOSOBJFilePtr loadDOSObjFile(FileType fileType, char* buffer, LONGLONG fileSize);

@@ -4,6 +4,10 @@
 
 using namespace std;
 
+_DOSOBJRecord::_DOSOBJRecord():rectype(0),reclength(0),buffer(nullptr)
+{
+}
+
 _DOSOBJFile::_DOSOBJFile()
 {
 }
