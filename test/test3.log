@@ -4,24 +4,24 @@ Dump of file C:\projects\OSDev\research2\test1\test.obj
 File Size 1487 bytes
 File Type: 16-bit DOS OBJECT
 
-Type 0x80 : length 0x0006 (6)
+Type 0x80 (THEADR) : length 0x0006 (6)
 00000003  04 74 65 73 74 b6                                 .test.
 
-Type 0x80 : length 0x001A (26)
+Type 0x80 (THEADR) : length 0x001A (26)
 0000000c  18 43 3a 5c 70 72 6f 6a  65 63 74 73 5c 74 65 73  .C:\projects\tes
 0000001c  74 31 5c 74 65 73 74 2e  63 11                    t1\test.c.
 
-Type 0x88 : length 0x0003 (3)
+Type 0x88 (COMENT) : length 0x0003 (3)
 00000029  80 a1 54                                          ..T
 
-Type 0x88 : length 0x0008 (8)
+Type 0x88 (COMENT) : length 0x0008 (8)
 0000002f  80 9b 30 6c 4f 65 64 a1                           ..0lOed.
 
-Type 0x88 : length 0x0020 (32)
+Type 0x88 (COMENT) : length 0x0020 (32)
 0000003a  80 e9 c3 5b 3d 5b 18 43  3a 5c 70 72 6f 6a 65 63  ...[=[.C:\projec
 0000004a  74 73 5c 74 65 73 74 31  5c 74 65 73 74 2e 63 e4  ts\test1\test.c.
 
-Type 0x88 : length 0x0003 (3)
+Type 0x88 (COMENT) : length 0x0003 (3)
 0000005d  80 e9 0c                                          ...
 
 Type 0x96 : length 0x0025 (37)
@@ -32,7 +32,7 @@ Type 0x96 : length 0x0025 (37)
 Type 0x98 : length 0x0007 (7)
 0000008b  28 2c 00 07 02 01 03                              (,.....
 
-Type 0x88 : length 0x0005 (5)
+Type 0x88 (COMENT) : length 0x0005 (5)
 00000095  80 fe 4f 01 a5                                    ..O..
 
 Type 0x96 : length 0x0007 (7)
@@ -229,7 +229,7 @@ Type 0x8C : length 0x001F (31)
 000005a0  08 5f 63 73 74 61 72 74  5f 00 0a 5f 62 69 67 5f  ._cstart_.._big_
 000005b0  63 6f 64 65 5f 00 06 5f  5f 61 72 67 63 00 a9     code_..__argc..
 
-Type 0x88 : length 0x0008 (8)
+Type 0x88 (COMENT) : length 0x0008 (8)
 000005c2  80 9f 63 6c 69 62 6c 4b                           ..cliblK
 
 Type 0x8A : length 0x0002 (2)

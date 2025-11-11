@@ -772,7 +772,21 @@ void DumpDOSObjFile(DOSOBJFilePtr obj)
 	int offset = 0;
 	for (DOSOBJRecordPtr ptr : obj->records)
 	{
-		printf("Type 0x%02X : length 0x%04lX (%ld)\n", ptr->rectype, ptr->reclength, ptr->reclength);
+		switch (ptr->rectype)
+		{
+			case THEADR:
+				printf("Type 0x%02X (THEADR) : length 0x%04lX (%ld)\n", ptr->rectype, ptr->reclength, ptr->reclength);
+				break;
+			case LHEADR:
+				printf("Type 0x%02X (LHEADR) : length 0x%04lX (%ld)\n", ptr->rectype, ptr->reclength, ptr->reclength);
+	            break;
+			case COMENT:
+				printf("Type 0x%02X (COMENT) : length 0x%04lX (%ld)\n", ptr->rectype, ptr->reclength, ptr->reclength);
+				break;
+			default:
+				printf("Type 0x%02X : length 0x%04lX (%ld)\n", ptr->rectype, ptr->reclength, ptr->reclength);
+				break;
+		}
 		hexdump(ptr->buffer, ptr->reclength, offset + 3);
 		printf("\n");
 		offset += 3 + ptr->reclength;
