@@ -13,6 +13,82 @@
 
 using namespace std;
 
+#define THEADR 0x80
+#define LHEADR 0x82
+#define COMENT 0x88
+#define MODEND 0x8a
+#define MODEND32 0x8b
+#define EXTDEF 0x8c
+#define TYPDEF 0x8e
+#define PUBDEF 0x90
+#define PUBDEF32 0x91
+#define LINNUM 0x94
+#define LINNUM32 0x95
+#define LNAMES 0x96
+#define SEGDEF 0x98
+#define SEGDEF32 0x99
+#define GRPDEF 0x9a
+#define FIXUPP 0x9c
+#define FIXUPP32 0x9d
+#define LEDATA 0xa0
+#define LEDATA32 0xa1
+#define LIDATA 0xa2
+#define LIDATA32 0xa3
+#define COMDEF 0xb0
+#define BAKPAT 0xb2
+#define BAKPAT32 0xb3
+#define LEXTDEF 0xb4
+#define LEXTDEF32 0xb5
+#define LPUBDEF 0xb6
+#define LPUBDEF32 0xb7
+#define LCOMDEF 0xb8
+#define CEXTDEF 0xbc
+#define COMDAT 0xc2
+#define COMDAT32 0xc3
+#define LINSYM 0xc4
+#define LINSYM32 0xc5
+#define ALIAS 0xc6
+#define NBKPAT 0xc8
+#define NBKPAT32 0xc9
+#define LLNAMES 0xca
+#define LIBHDR 0xf0
+#define LIBEND 0xf1
+
+#define COMENT_TRANSLATOR 0x00
+#define COMENT_INTEL_COPYRIGHT 0x01
+#define COMENT_LIB_SPEC 0x81
+#define COMENT_MSDOS_VER 0x9c
+#define COMENT_MEMMODEL 0x9d
+#define COMENT_DOSSEG 0x9e
+#define COMENT_DEFLIB 0x9f
+#define COMENT_OMFEXT 0xa0
+#define COMENT_NEWOMF 0xa1
+#define COMENT_LINKPASS 0xa2
+#define COMENT_LIBMOD 0xa3 
+#define COMENT_EXESTR 0xa4
+#define COMENT_INCERR 0xa6
+#define COMENT_NOPAD 0xa7
+#define COMENT_WKEXT 0xa8
+#define COMENT_LZEXT 0xa9
+#define COMENT_PHARLAP 0xaa
+#define COMENT_IBM386 0xb0
+#define COMENT_RECORDER 0xb1
+#define COMENT_COMMENT 0xda
+#define COMENT_COMPILER 0xdb
+#define COMENT_DATE 0xdc
+#define COMENT_TIME 0xdd
+#define COMENT_USER 0xdf
+#define COMENT_DEPFILE 0xe9
+#define COMENT_COMMANDLINE 0xff
+#define COMENT_PUBTYPE 0xe1
+#define COMENT_COMPARAM 0xea
+#define COMENT_TYPDEF 0xe3
+#define COMENT_STRUCTMEM 0xe2
+#define COMENT_OPENSCOPE 0xe5
+#define COMENT_LOCAL 0xe6
+#define COMENT_ENDSCOPE 0xe7
+#define COMENT_SOURCEFILE 0xe8
+
 #define HEX_DUMP_WIDTH 16
 
 // Subsystem Values
@@ -41,7 +117,14 @@ using namespace std;
 #define IMAGE_SCN_MEM_PROTECTED 0x00004000
 #define IMAGE_SCN_MEM_SYSHEAP 0x00010000
 
-typedef enum _FileType { UNKNOWN, DOSEXE, PE16EXE, PE32EXE, PE64EXE, DEBUG, PE16OBJ, PE32OBJ, PE64OBJ, ANONYMOUS, LIB }FileType;
+typedef char* CharPtr;
+typedef char** CharPtrPtr;
+typedef void* VoidPtr;
+typedef void** VoidPtrPtr;
+typedef unsigned char* UCharPtr;
+typedef unsigned long UInt;
+
+typedef enum _FileType { UNKNOWN, DOSEXE, PE16EXE, PE32EXE, PE64EXE, DEBUG, DOS16OBJ, PE16OBJ, PE32OBJ, PE64OBJ, ANONYMOUS, LIB }FileType;
 
 typedef struct BINARYFORMATS_API
 {
@@ -252,6 +335,11 @@ typedef struct BINARYFORMATS_API _LIBFile
 	_LIBFile();
 } LIBFile, * LIBFilePtr, ** LIBFilePtrPtr;
 
+typedef struct BINARYFORMATS_API _DOSOBJFile
+{
+	_DOSOBJFile();
+} DOSOBJFile, * DOSOBJFilePtr, ** DOSOBJFilePtrPtr;
+
 #ifdef _WIN64
 #define MakePtr( cast, ptr, addValue ) (cast)( (BYTE *)(ptr) + (ULONGLONG)(addValue))
 #else
@@ -263,7 +351,7 @@ BINARYFORMATS_API WORD getFileMagic(char* buffer);
 BINARYFORMATS_API FileType getFileType(char* buffer, LONGLONG fileSize);
 BINARYFORMATS_API const char* GetMachineTypeName(WORD wMachineType);
 BINARYFORMATS_API int islistedMachineType(WORD wMachineType);
-BINARYFORMATS_API void hexdump(const void* data, size_t size);
+BINARYFORMATS_API void hexdump(const void* data, size_t size, size_t label);
 BINARYFORMATS_API char* get_ctime_stg(time_t* pt);
 BINARYFORMATS_API OBJFilePtr loadObjFile(FileType fileType, char* buffer, LONGLONG fileSize);
 //EXEDump.cpp functions
@@ -302,3 +390,5 @@ BINARYFORMATS_API void DumpDebugDirectory(DebugPtr debug);
 BINARYFORMATS_API void DumpLoadConfig32Directory(PIMAGE_LOAD_CONFIG_DIRECTORY32 load32);
 BINARYFORMATS_API void DumpLoadConfig64Directory(PIMAGE_LOAD_CONFIG_DIRECTORY64 load64);
 BINARYFORMATS_API void DumpLibFile(LIBFilePtr ptr);
+//DosObjDump.cpp
+BINARYFORMATS_API DOSOBJFilePtr loadDOSObjFile(FileType fileType, char* buffer, LONGLONG fileSize);

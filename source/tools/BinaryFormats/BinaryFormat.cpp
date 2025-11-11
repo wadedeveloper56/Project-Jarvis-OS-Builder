@@ -63,6 +63,7 @@ int islistedMachineType(WORD wMachineType)
 
 FileType getFileType(char* buffer,LONGLONG fileSize)
 {
+	bool isTHeader = buffer[0]==(char)THEADR;
 	FileType result = UNKNOWN;
 	PIMAGE_DOS_HEADER dosHeader = (PIMAGE_DOS_HEADER)buffer;
 	PIMAGE_FILE_HEADER pImgFileHdr = (PIMAGE_FILE_HEADER)(buffer);
@@ -89,6 +90,10 @@ FileType getFileType(char* buffer,LONGLONG fileSize)
 	{
 		return LIB;
 	}
+	else if (isTHeader)
+	{
+		return DOS16OBJ;
+	}
 	else
 	{
 		PIMAGE_FILE_HEADER pImgFileHdr = (PIMAGE_FILE_HEADER)buffer;
@@ -104,13 +109,13 @@ FileType getFileType(char* buffer,LONGLONG fileSize)
 	return result;
 }
 
-void hexdump(const void* data, size_t size) {
+void hexdump(const void* data, size_t size,size_t label) {
 	const unsigned char* p = reinterpret_cast<const unsigned char*>(data);
 	const int bytes_per_row = 16;
 	size_t offset = 0;
-
+	
 	while (offset < size) {
-		cout << hex << setw(8) << setfill('0') << offset << "  ";
+		cout << hex << setw(8) << setfill('0') << label << "  ";
 
 		for (int i = 0; i < bytes_per_row; ++i) {
 			if (i > 0 && i % 8 == 0) {
@@ -133,6 +138,7 @@ void hexdump(const void* data, size_t size) {
 		}
 		cout << endl;
 		offset += bytes_per_row;
+		label += bytes_per_row;
 	}
 }
 

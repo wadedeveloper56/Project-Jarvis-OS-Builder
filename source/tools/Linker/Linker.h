@@ -2,25 +2,6 @@
 
 using namespace std;
 
-typedef struct _Parameters {
-	char case_sensitive;
-	char padsegments;
-	char mapfile;
-	int output_type;
-	char* outname;
-	unsigned long imageBase;
-	unsigned long fileAlign;
-	unsigned long objectAlign;
-	unsigned long stackSize;
-	unsigned long stackCommitSize;
-	unsigned long heapSize;
-	unsigned long heapCommitSize;
-	unsigned char osMajor, osMinor;
-	unsigned char subsysMajor, subsysMinor;
-	unsigned int subSystem;
-	char* stubName;
-	char mapFileName[_MAX_PATH];
-}Parameters,*ParametersPtr,**ParametersPtrPtr;
 
 #define SWITCHCHAR '-'
 #define PATH_CHAR '\\'
@@ -50,46 +31,6 @@ typedef struct _Parameters {
 #define PREV_LI 2
 #define PREV_LI32 3
 
-#define THEADR 0x80
-#define LHEADR 0x82
-#define COMENT 0x88
-#define MODEND 0x8a
-#define MODEND32 0x8b
-#define EXTDEF 0x8c
-#define TYPDEF 0x8e
-#define PUBDEF 0x90
-#define PUBDEF32 0x91
-#define LINNUM 0x94
-#define LINNUM32 0x95
-#define LNAMES 0x96
-#define SEGDEF 0x98
-#define SEGDEF32 0x99
-#define GRPDEF 0x9a
-#define FIXUPP 0x9c
-#define FIXUPP32 0x9d
-#define LEDATA 0xa0
-#define LEDATA32 0xa1
-#define LIDATA 0xa2
-#define LIDATA32 0xa3
-#define COMDEF 0xb0
-#define BAKPAT 0xb2
-#define BAKPAT32 0xb3
-#define LEXTDEF 0xb4
-#define LEXTDEF32 0xb5
-#define LPUBDEF 0xb6
-#define LPUBDEF32 0xb7
-#define LCOMDEF 0xb8
-#define CEXTDEF 0xbc
-#define COMDAT 0xc2
-#define COMDAT32 0xc3
-#define LINSYM 0xc4
-#define LINSYM32 0xc5
-#define ALIAS 0xc6
-#define NBKPAT 0xc8
-#define NBKPAT32 0xc9
-#define LLNAMES 0xca
-#define LIBHDR 0xf0
-#define LIBEND 0xf1
 
 #define COMENT_TRANSLATOR 0x00
 #define COMENT_INTEL_COPYRIGHT 0x01
@@ -503,6 +444,26 @@ typedef struct __comdatrec
 	UInt linkwith;
 } COMDATREC, * PCOMDAT;
 
+typedef struct _Parameters {
+	char case_sensitive;
+	char padsegments;
+	char mapfile;
+	int output_type;
+	char* outname;
+	unsigned long imageBase;
+	unsigned long fileAlign;
+	unsigned long objectAlign;
+	unsigned long stackSize;
+	unsigned long stackCommitSize;
+	unsigned long heapSize;
+	unsigned long heapCommitSize;
+	unsigned char osMajor, osMinor;
+	unsigned char subsysMajor, subsysMinor;
+	unsigned int subSystem;
+	char* stubName;
+	char mapFileName[_MAX_PATH];
+}Parameters,*ParametersPtr,**ParametersPtrPtr;
+
 void processArgs(int argc, char* argv[]);
 void processEnvironmentVariable();
 
@@ -512,7 +473,7 @@ void processEnvironmentVariable();
 #define splitpath _splitpath
 #define makepath _makepath
 
-extern LinkerMemory memory;
+extern LinkerMemory *memory;
 extern Parameters parameters;
 extern vector<string> libraryPath;
 extern unsigned long libPathCount;

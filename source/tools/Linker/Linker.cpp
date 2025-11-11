@@ -250,9 +250,11 @@ void loadFiles()
 				break;
 			case PE32OBJ:
 			case PE64OBJ:
+			{
 				cout << "its obj file type" << endl;
-				loadObjFile(fileType, buffer, fileSize);
+				OBJFilePtr objfile = loadObjFile(fileType, buffer, fileSize);
 				break;
+			}
 			case ANONYMOUS:
 				break;
 			case LIB:
@@ -267,9 +269,11 @@ void loadFiles()
 
 int main(int argc, char* argv[])
 {
+	memory = new LinkerMemory();
 	processEnvironmentVariable();
 	processArgs(argc, argv);
 	checkForParameterErrors();
 	loadFiles();
+	delete memory;
 	return 0;
 }

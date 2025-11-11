@@ -4,7 +4,7 @@
 
 using namespace std;
 
-LinkerMemory memory;
+LinkerMemory *memory;
 Parameters parameters;
 vector<string> libraryPath;
 unsigned long libPathCount = 0;

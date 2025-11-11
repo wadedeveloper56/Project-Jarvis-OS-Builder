@@ -192,6 +192,12 @@ int main(int argc, char* argv[])
 			}
 			break;
 		}
+		case DOS16OBJ:
+		{
+			printf("File Type: 16-bit DOS OBJECT\n\n");
+			DOSOBJFilePtr data = loadDOSObjFile(fileType, buffer, fileSize);
+			break;
+		}
 		case ANONYMOUS:
 			printf("anonymous obj file\n");
 			break;

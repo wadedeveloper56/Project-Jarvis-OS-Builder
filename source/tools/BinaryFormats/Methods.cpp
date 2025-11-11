@@ -4,11 +4,15 @@
 
 using namespace std;
 
+_DOSOBJFile::_DOSOBJFile()
+{
+}
+
 _LIBFileLinkerMembers::_LIBFileLinkerMembers() :offset(0), pSymbolName(nullptr)
 {
 }
 
-_LIBFileEntry::_LIBFileEntry() :header({ 0 })
+_LIBFileEntry::_LIBFileEntry() :header({ 0 }), objFile(nullptr)
 {
 }
 
