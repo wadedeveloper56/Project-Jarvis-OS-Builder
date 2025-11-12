@@ -1,8 +1,8 @@
-Dump of file C:\projects\OSDev\research2\test1\test.obj, 1,487 bytes...
+Dump of file C:\WATCOM\samples\win\generic\win16\generic.obj, 5,991 bytes...
 
-Unknown e_magic or machine value 1664
+Unknown e_magic or machine value 2432
 HexDump of first 32 bytes of file...
-00000000:  80 06 00 04 74 65 73 74  b6 80 1a 00 18 43 3a 5c ....test.....C:\
-00000010:  70 72 6f 6a 65 63 74 73  5c 74 65 73 74 31 5c 74 projects\test1\t
+00000000:  80 09 00 07 47 45 4e 45  52 49 43 73 80 29 00 27 ....GENERICs.).'
+00000010:  43 3a 5c 57 41 54 43 4f  4d 5c 73 61 6d 70 6c 65 C:\WATCOM\sample
 Error: unrecognized file format
 

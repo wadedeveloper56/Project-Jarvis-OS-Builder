@@ -2,8 +2,8 @@ Microsoft (R) COFF/PE Dumper Version 14.40.33811.0
 Copyright (C) Microsoft Corporation.  All rights reserved.
 
 
-Dump of file C:\projects\OSDev\research2\test1\test.obj
-C:\projects\OSDev\research2\test1\test.obj : warning LNK4048: Invalid format file; ignored
+Dump of file C:\WATCOM\samples\win\generic\win16\generic.obj
+C:\WATCOM\samples\win\generic\win16\generic.obj : warning LNK4048: Invalid format file; ignored
 
   Summary
 

@@ -783,6 +783,30 @@ void DumpDOSObjFile(DOSOBJFilePtr obj)
 			case COMENT:
 				printf("Type 0x%02X (COMENT) : length 0x%04lX (%ld)\n", ptr->rectype, ptr->reclength, ptr->reclength);
 				break;
+			case LNAMES:
+				printf("Type 0x%02X (LNAMES) : length 0x%04lX (%ld)\n", ptr->rectype, ptr->reclength, ptr->reclength);
+				break;
+			case SEGDEF:
+				printf("Type 0x%02X (SEGDEF) : length 0x%04lX (%ld)\n", ptr->rectype, ptr->reclength, ptr->reclength);
+				break;
+			case SEGDEF32:
+				printf("Type 0x%02X (SEGDEF32) : length 0x%04lX (%ld)\n", ptr->rectype, ptr->reclength, ptr->reclength);
+				break;
+			case LEDATA:
+				printf("Type 0x%02X (LEDATA) : length 0x%04lX (%ld)\n", ptr->rectype, ptr->reclength, ptr->reclength);
+				break;
+			case LEDATA32:
+				printf("Type 0x%02X (lEDATA32) : length 0x%04lX (%ld)\n", ptr->rectype, ptr->reclength, ptr->reclength);
+				break;
+			case FIXUPP:
+				printf("Type 0x%02X (FIXUPP) : length 0x%04lX (%ld)\n", ptr->rectype, ptr->reclength, ptr->reclength);
+				break;
+			case LEXTDEF:
+				printf("Type 0x%02X (LEXTDEF) : length 0x%04lX (%ld)\n", ptr->rectype, ptr->reclength, ptr->reclength);
+				break;
+			case EXTDEF:
+				printf("Type 0x%02X (EXTDEF) : length 0x%04lX (%ld)\n", ptr->rectype, ptr->reclength, ptr->reclength);
+				break;
 			default:
 				printf("Type 0x%02X : length 0x%04lX (%ld)\n", ptr->rectype, ptr->reclength, ptr->reclength);
 				break;
