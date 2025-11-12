@@ -63,7 +63,6 @@ int islistedMachineType(WORD wMachineType)
 
 FileType getFileType(char* buffer,LONGLONG fileSize)
 {
-	bool isTHeader = buffer[0]==(char)THEADR;
 	FileType result = UNKNOWN;
 	PIMAGE_DOS_HEADER dosHeader = (PIMAGE_DOS_HEADER)buffer;
 	PIMAGE_FILE_HEADER pImgFileHdr = (PIMAGE_FILE_HEADER)(buffer);
@@ -90,9 +89,9 @@ FileType getFileType(char* buffer,LONGLONG fileSize)
 	{
 		return LIB;
 	}
-	else if (isTHeader)
+	else if (buffer[0] == (char)THEADR)
 	{
-		return DOS16OBJ;
+		return DOSWIN16OBJ;
 	}
 	else
 	{

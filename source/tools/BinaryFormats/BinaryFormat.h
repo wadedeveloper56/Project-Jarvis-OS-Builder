@@ -124,7 +124,15 @@ typedef void** VoidPtrPtr;
 typedef unsigned char* UCharPtr;
 typedef unsigned long UInt;
 
-typedef enum _FileType { UNKNOWN, DOSEXE, PE16EXE, PE32EXE, PE64EXE, DEBUG, DOS16OBJ, PE16OBJ, PE32OBJ, PE64OBJ, ANONYMOUS, LIB }FileType;
+typedef enum _FileType { 
+	UNKNOWN, 
+	DOSEXE, 
+	PE16EXE, PE32EXE, PE64EXE, 
+	DOSWIN16OBJ, 
+	PE32OBJ, PE64OBJ, 
+	ANONYMOUS, 
+	LIB 
+}FileType;
 
 typedef struct BINARYFORMATS_API
 {
@@ -401,4 +409,4 @@ BINARYFORMATS_API void DumpLoadConfig64Directory(PIMAGE_LOAD_CONFIG_DIRECTORY64 
 BINARYFORMATS_API void DumpLibFile(LIBFilePtr ptr);
 BINARYFORMATS_API void DumpDOSObjFile(DOSOBJFilePtr ptr);
 //DosObjDump.cpp
-BINARYFORMATS_API DOSOBJFilePtr loadDOSObjFile(FileType fileType, char* buffer, LONGLONG fileSize);
+BINARYFORMATS_API DOSOBJFilePtr loadDOSWin16ObjFile(FileType fileType, char* buffer, LONGLONG fileSize);

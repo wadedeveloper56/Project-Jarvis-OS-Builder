@@ -246,8 +246,6 @@ void loadFiles()
 			case PE64EXE:
 				cout << "cant link an exe to form exe" << endl;
 				break;
-			case DEBUG:
-				break;
 			case PE32OBJ:
 			case PE64OBJ:
 			{

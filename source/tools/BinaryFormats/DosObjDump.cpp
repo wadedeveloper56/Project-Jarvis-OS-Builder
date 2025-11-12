@@ -2,7 +2,7 @@
 #include "framework.h"
 #include "BinaryFormat.h"
 
-DOSOBJFilePtr loadDOSObjFile(FileType fileType, char* buffer, LONGLONG fileSize)
+DOSOBJFilePtr loadDOSWin16ObjFile(FileType fileType, char* buffer, LONGLONG fileSize)
 {
 	bool done = false;
 	int offset = 0;

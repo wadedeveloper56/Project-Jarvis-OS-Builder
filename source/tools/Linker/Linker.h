@@ -1,3 +1,6 @@
+#pragma once
+
+#include <stdint.h>
 #include "LinkerMemory.h"
 
 using namespace std;
@@ -296,7 +299,6 @@ using namespace std;
 #define WIN32_DEFAULT_OSMINOR           0
 
 #define EXP_ORD 0x80
-
 typedef char* CharPtr;
 typedef char** CharPtrPtr;
 typedef void* VoidPtr;
@@ -362,23 +364,23 @@ typedef struct _ImpRec {
 	UInt ofs;
 } ImpRec, * ImpRecPtr, ** ImpRecPtrPtr;
 
-typedef struct __exprec {
+typedef struct _ExpRec {
 	CharPtr int_name;
 	CharPtr exp_name;
 	UInt ordinal;
 	char flags;
 	PublicPtr pubdef;
 	UInt modnum;
-} EXPREC, * PEXPREC, ** PPEXPREC;
+} ExpRec, * ExpRecPtr, ** ExpRecPtrPtr;
 
-typedef struct __comdef {
+typedef struct _ComRec {
 	CharPtr name;
 	UInt length;
 	bool isFar;
 	UInt modnum;
-} COMREC, * PCOMREC, ** PPCOMREC;
+} ComRec, * ComRecPtr, ** ComRecPtrPtr;
 
-typedef struct __reloc {
+typedef struct _Reloc {
 	UInt ofs;
 	long segnum;
 	unsigned char ftype, ttype;
@@ -387,16 +389,16 @@ typedef struct __reloc {
 	UInt disp;
 	long frame;
 	UInt outputPos;
-} RELOC, * PRELOC, ** PPRELOC;
+} Reloc, * RelocPtr, ** RelocPtrPtr;
 
-typedef struct __grp {
+typedef struct _Group {
 	long nameindex;
 	long numsegs;
 	long segindex[256];
 	long segnum;
-} GRP, * PGRP, ** PPGRP;
+} Group, * GroupPtr, ** GroupPtrPtr;
 
-typedef struct __libfile {
+typedef struct _LibFile {
 	CharPtr filename;
 	unsigned short blocksize;
 	unsigned short numdicpages;
@@ -408,14 +410,14 @@ typedef struct __libfile {
 	UCharPtr longnames;
 	SortEntryPtr symbols;
 	UInt numsyms;
-} LIBFILE, * PLIBFILE, ** PPLIBFILE;
+} LibFile, * LibFilePtr, ** LibFilePtrPtr;
 
-typedef struct __libentry {
+typedef struct _LibEntry {
 	UInt libfile;
 	UInt modpage;
-} LIBENTRY, * PLIBENTRY, ** PPLIBENTRY;
+} LibEntry, * LibEntryPtr, ** LibEntryPtrPtr;
 
-typedef struct __resource {
+typedef struct _Resource {
 	UCharPtr typeName;
 	UCharPtr name;
 	UCharPtr data;
@@ -423,9 +425,9 @@ typedef struct __resource {
 	unsigned short typeId;
 	unsigned short id;
 	unsigned short languageid;
-} RESOURCE, * PRESOURCE;
+} Resource, * ResourcePtr,** ResourcePtrPtr;
 
-typedef struct __coffsym {
+typedef struct _CoffSym {
 	UCharPtr name;
 	UInt value;
 	short section;
@@ -435,14 +437,14 @@ typedef struct __coffsym {
 	UInt numAuxRecs;
 	UCharPtr auxRecs;
 	bool isComDat;
-} COFFSYM, * PCOFFSYM;
+} CoffSym, * CoffSymPtr, ** CoffSymPtrPtr;
 
-typedef struct __comdatrec
+typedef struct _ComDatRec
 {
 	UInt segnum;
 	UInt combineType;
 	UInt linkwith;
-} COMDATREC, * PCOMDAT;
+} ComDatRec, * ComDatRecPtr, ** ComDatRecPtrPtr;
 
 typedef struct _Parameters {
 	char case_sensitive;
@@ -479,3 +481,82 @@ extern vector<string> libraryPath;
 extern unsigned long libPathCount;
 extern vector<string> inputFiles;
 extern unsigned long inputFilesCount;
+
+extern char case_sensitive;
+extern char padsegments;
+extern char mapfile;
+extern CharPtr mapname;
+extern unsigned short maxalloc;
+extern int output_type;
+extern CharPtr outname;
+extern FILE* afile;
+extern UInt filepos;
+extern long reclength;
+extern unsigned char rectype;
+extern char li_le;
+extern UInt prevofs;
+extern long prevseg;
+extern long gotstart;
+extern Reloc startaddr;
+extern UInt imageBase;
+extern UInt fileAlign;
+extern UInt objectAlign;
+extern UInt stackSize;
+extern UInt stackCommitSize;
+extern UInt heapSize;
+extern UInt heapCommitSize;
+extern unsigned char osMajor;
+extern unsigned char osMinor;
+extern unsigned char subsysMajor;
+extern unsigned char subsysMinor;
+extern unsigned int subSystem;
+extern bool buildDll;
+extern UCharPtr stubName;
+extern long errcount;
+extern unsigned char buf[65536];
+extern DatablockPtr lidata;
+extern CharPtrPtr namelist;
+extern SegmentPtrPtr seglist;
+extern SegmentPtrPtr outlist;
+extern GroupPtrPtr grplist;
+extern SortEntryPtr publics;
+extern ExtRecPtr externs;
+extern ComRecPtrPtr comdefs;
+extern RelocPtrPtr relocs;
+extern ImpRecPtr impdefs;
+extern ExpRecPtr expdefs;
+extern LibFilePtr libfiles;
+extern ResourcePtr resource;
+extern SortEntryPtr comdats;
+extern CharPtrPtr modname;
+extern CharPtrPtr filename;
+extern UInt namecount;
+extern UInt namemin;
+extern UInt pubcount;
+extern UInt pubmin;
+extern UInt segcount;
+extern UInt segmin;
+extern UInt outcount;
+extern UInt grpcount;
+extern UInt grpmin;
+extern UInt extcount;
+extern UInt extmin;
+extern UInt comcount;
+extern UInt commin;
+extern UInt fixcount;
+extern UInt fixmin;
+extern UInt impcount;
+extern UInt impmin;
+extern UInt impsreq;
+extern UInt expcount;
+extern UInt expmin;
+extern UInt nummods;
+extern UInt filecount;
+extern UInt libcount;
+extern UInt rescount;
+extern CharPtr* libPath;
+extern char* entryPoint;
+extern char t_thred[4];
+extern char f_thred[4];
+extern int t_thredindex[4];
+extern int f_thredindex[4];

@@ -150,8 +150,6 @@ int main(int argc, char* argv[])
 			DumpLoadConfig64Directory(&data->loadConfiguration64BitDirectory);
 			break;
 		}
-		case DEBUG:
-			break;
 		case PE32OBJ:
 		{
 			printf("File Type: 32-bit COFF OBJECT\n\n");
@@ -192,10 +190,10 @@ int main(int argc, char* argv[])
 			}
 			break;
 		}
-		case DOS16OBJ:
+		case DOSWIN16OBJ:
 		{
-			printf("File Type: 16-bit DOS OBJECT\n\n");
-			DOSOBJFilePtr data = loadDOSObjFile(fileType, buffer, fileSize);
+			printf("File Type: 16-bit DOS\\Windows OBJECT\n\n");
+			DOSOBJFilePtr data = loadDOSWin16ObjFile(fileType, buffer, fileSize);
 			DumpDOSObjFile(data);
 			break;
 		}
