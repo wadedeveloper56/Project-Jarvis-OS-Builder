@@ -27,6 +27,9 @@
     <ClInclude Include="MemoryMappedFile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="NEHeader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BinaryFormat.cpp">

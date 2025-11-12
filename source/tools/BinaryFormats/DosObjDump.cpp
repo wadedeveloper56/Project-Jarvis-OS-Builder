@@ -26,3 +26,19 @@ DOSOBJFilePtr loadDOSWin16ObjFile(FileType fileType, char* buffer, LONGLONG file
 	}
 	return ptr;
 }
+
+WIN16EXEFilePtr loadWin16ExeFile(FileType fileType, char* buffer, LONGLONG fileSize)
+{
+	WIN16EXEFilePtr ptr = new WIN16EXEFile();
+	PIMAGE_DOS_HEADER dosHeader = (PIMAGE_DOS_HEADER)buffer;
+	NEHeaderPtr neHeader = MakePtr(NEHeaderPtr, dosHeader, dosHeader->e_lfanew);
+	uint16_t offset = neHeader->SegTableOffset;
+	uint16_t count = neHeader->SegCount;
+	for (int i = 0; i < count; i++)
+	{
+		NESegmentTableEntryPtr segmentTableEntry = MakePtr(NESegmentTableEntryPtr, neHeader, offset);
+		ptr->segmentTable.push_back(segmentTableEntry);
+		offset += sizeof(NESegmentTableEntry);
+	}
+	return ptr;
+}

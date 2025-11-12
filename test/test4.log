@@ -1,8 +1,4 @@
-Dump of file C:\WATCOM\samples\win\generic\win16\generic.obj, 5,991 bytes...
+Dump of file C:\WATCOM\samples\win\generic\win16\generic.exe, 23,994 bytes...
 
-Unknown e_magic or machine value 2432
-HexDump of first 32 bytes of file...
-00000000:  80 09 00 07 47 45 4e 45  52 49 43 73 80 29 00 27 ....GENERICs.).'
-00000010:  43 3a 5c 57 41 54 43 4f  4d 5c 73 61 6d 70 6c 65 C:\WATCOM\sample
-Error: unrecognized file format
+Not a Portable Executable (PE) EXE
 

@@ -2,8 +2,8 @@ Microsoft (R) COFF/PE Dumper Version 14.40.33811.0
 Copyright (C) Microsoft Corporation.  All rights reserved.
 
 
-Dump of file C:\WATCOM\samples\win\generic\win16\generic.obj
-C:\WATCOM\samples\win\generic\win16\generic.obj : warning LNK4048: Invalid format file; ignored
+Dump of file C:\WATCOM\samples\win\generic\win16\generic.exe
+LINK : warning LNK4094: 'C:\WATCOM\samples\win\generic\win16\generic.exe' is an MS-DOS executable; use EXEHDR to dump it
 
   Summary
 

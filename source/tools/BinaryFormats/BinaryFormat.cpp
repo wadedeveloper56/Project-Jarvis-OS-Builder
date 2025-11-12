@@ -69,6 +69,7 @@ FileType getFileType(char* buffer,LONGLONG fileSize)
 	if (dosHeader->e_magic == IMAGE_DOS_SIGNATURE)
 	{
 		PIMAGE_NT_HEADERS32 pNTHeader = MakePtr(PIMAGE_NT_HEADERS32, dosHeader, dosHeader->e_lfanew);
+		NEHeaderPtr neHeader = MakePtr(NEHeaderPtr, dosHeader, dosHeader->e_lfanew);
 		if (dosHeader->e_lfanew < fileSize  && pNTHeader->Signature == IMAGE_NT_SIGNATURE)
 		{
 			if (pNTHeader->OptionalHeader.Magic == IMAGE_NT_OPTIONAL_HDR32_MAGIC)
@@ -79,6 +80,10 @@ FileType getFileType(char* buffer,LONGLONG fileSize)
 			{
 				result = PE64EXE;
 			}
+		}
+		else if (dosHeader->e_lfanew < fileSize && neHeader->signature == IMAGE_OS2_SIGNATURE)  //os/2??
+		{
+			result = PE16EXE;
 		}
 		else
 		{

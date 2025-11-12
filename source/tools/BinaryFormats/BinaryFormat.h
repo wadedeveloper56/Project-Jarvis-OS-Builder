@@ -4,12 +4,7 @@
 #define BINARYFORMATS_TEMPLATE 
 
 #include "MemoryMappedFile.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <vector>
-#include <iostream>
-#include <iomanip>
-#include <cctype>
+#include "NEHeader.h"
 
 using namespace std;
 
@@ -357,6 +352,12 @@ typedef struct BINARYFORMATS_API _DOSOBJFile
 	_DOSOBJFile();
 } DOSOBJFile, * DOSOBJFilePtr, ** DOSOBJFilePtrPtr;
 
+typedef struct BINARYFORMATS_API WIN16EXEFile
+{
+	vector<NESegmentTableEntryPtr> segmentTable;
+	WIN16EXEFile();
+} WIN16EXEFile, * WIN16EXEFilePtr, ** WIN16EXEFilePtrPtr;
+
 #ifdef _WIN64
 #define MakePtr( cast, ptr, addValue ) (cast)( (BYTE *)(ptr) + (ULONGLONG)(addValue))
 #else
@@ -410,3 +411,4 @@ BINARYFORMATS_API void DumpLibFile(LIBFilePtr ptr);
 BINARYFORMATS_API void DumpDOSObjFile(DOSOBJFilePtr ptr);
 //DosObjDump.cpp
 BINARYFORMATS_API DOSOBJFilePtr loadDOSWin16ObjFile(FileType fileType, char* buffer, LONGLONG fileSize);
+BINARYFORMATS_API WIN16EXEFilePtr loadWin16ExeFile(FileType fileType, char* buffer, LONGLONG fileSize);

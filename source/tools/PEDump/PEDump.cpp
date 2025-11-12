@@ -104,6 +104,12 @@ int main(int argc, char* argv[])
 	FileType fileType = getFileType(buffer, fileSize);
 	switch (fileType)
 	{
+		case PE16EXE:
+		{
+			printf("File Type: 16-bit windows executable\n\n");
+			WIN16EXEFilePtr data = loadWin16ExeFile(fileType, buffer, fileSize);
+			break;
+		}
 		case PE32EXE:
 		{
 			printf("File Type: 32-bit PE EXECUTABLE IMAGE\n");

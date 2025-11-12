@@ -163,6 +163,7 @@
     <ClInclude Include="BinaryFormat.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="MemoryMappedFile.h" />
+    <ClInclude Include="NEHeader.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>

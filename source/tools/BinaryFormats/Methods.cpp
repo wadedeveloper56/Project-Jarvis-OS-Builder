@@ -4,6 +4,10 @@
 
 using namespace std;
 
+WIN16EXEFile::WIN16EXEFile()
+{
+}
+
 _DOSOBJRecord::_DOSOBJRecord():rectype(0),reclength(0),buffer(nullptr)
 {
 }
