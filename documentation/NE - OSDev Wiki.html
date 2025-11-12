@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<!-- saved from url=(0044)https://wiki.osdev.org/NE#Inside_the_NE_file -->
+<html class="client-js ve-available" lang="en" dir="ltr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>NE - OSDev Wiki</title>
+<script>document.documentElement.className="client-js";RLCONF={"wgBreakFrames":false,"wgSeparatorTransformTable":["",""],"wgDigitTransformTable":["",""],"wgDefaultDateFormat":"dmy","wgMonthNames":["","January","February","March","April","May","June","July","August","September","October","November","December"],"wgRequestId":"5e32c9bd6c8da626513fa77b","wgCSPNonce":false,"wgCanonicalNamespace":"","wgCanonicalSpecialPageName":false,"wgNamespaceNumber":0,"wgPageName":"NE","wgTitle":"NE","wgCurRevisionId":29636,"wgRevisionId":29636,"wgArticleId":1957,"wgIsArticle":true,"wgIsRedirect":false,"wgAction":"view","wgUserName":null,"wgUserGroups":["*"],"wgCategories":["Pages using duplicate arguments in template calls","Executable Formats"],"wgPageContentLanguage":"en","wgPageContentModel":"wikitext","wgRelevantPageName":"NE","wgRelevantArticleId":1957,"wgIsProbablyEditable":false,"wgRelevantPageIsProbablyEditable":false,"wgRestrictionEdit":[],"wgRestrictionMove":[],"wgMFDisplayWikibaseDescriptions":{
+"search":false,"nearby":false,"watchlist":false,"tagline":false},"wgVisualEditor":{"pageLanguageCode":"en","pageLanguageDir":"ltr","pageVariantFallbacks":"en"},"wgVector2022PreviewPages":[],"wgMediaViewerOnClick":true,"wgMediaViewerEnabledByDefault":true,"wgEditSubmitButtonLabelPublish":false};RLSTATE={"site.styles":"ready","user.styles":"ready","user":"ready","user.options":"loading","ext.pygments":"ready","skins.vector.styles.legacy":"ready","ext.visualEditor.desktopArticleTarget.noscript":"ready","ext.DarkMode.styles":"ready"};RLPAGEMODULES=["site","mediawiki.page.ready","mediawiki.toc","skins.vector.legacy.js","ext.visualEditor.desktopArticleTarget.init","ext.visualEditor.targetLoader","ext.DarkMode","ext.moderation.notify","ext.moderation.ve","ext.moderation.ajaxhook","ext.moderation.notify.desktop"];</script>
+<script>(RLQ=window.RLQ||[]).push(function(){mw.loader.implement("user.options@12s5i",function($,jQuery,require,module){mw.user.tokens.set({"patrolToken":"+\\","watchToken":"+\\","csrfToken":"+\\"});});});</script>
+<link rel="stylesheet" href="./NE - OSDev Wiki_files/load.php">
+<script async="" src="./NE - OSDev Wiki_files/load(1).php"></script>
+<style>
+.mw-editfont-monospace{font-family:monospace,monospace}.mw-editfont-sans-serif{font-family:sans-serif}.mw-editfont-serif{font-family:serif} .mw-editfont-monospace,.mw-editfont-sans-serif,.mw-editfont-serif{  font-size:13px;  -moz-tab-size:4; tab-size:4; }.mw-editfont-monospace.oo-ui-textInputWidget,.mw-editfont-sans-serif.oo-ui-textInputWidget,.mw-editfont-serif.oo-ui-textInputWidget{font-size:inherit}.mw-editfont-monospace.oo-ui-textInputWidget > .oo-ui-inputWidget-input,.mw-editfont-sans-serif.oo-ui-textInputWidget > .oo-ui-inputWidget-input,.mw-editfont-serif.oo-ui-textInputWidget > .oo-ui-inputWidget-input{  font-size:13px}.mw-editfont-monospace.oo-ui-textInputWidget > input.oo-ui-inputWidget-input,.mw-editfont-sans-serif.oo-ui-textInputWidget > input.oo-ui-inputWidget-input,.mw-editfont-serif.oo-ui-textInputWidget > input.oo-ui-inputWidget-input{min-height:32px}
+.oo-ui-icon-bright,.mw-ui-icon-bright:before{background-image:url(/load.php?modules=oojs-ui.styles.icons-accessibility&image=bright&format=rasterized&skin=vector&version=1gpp1);background-image:linear-gradient(transparent,transparent),url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2220%22 height=%2220%22 viewBox=%220 0 20 20%22%3E%3Ctitle%3E bright %3C/title%3E%3Cpath d=%22M17.07 7.07V2.93h-4.14L10 0 7.07 2.93H2.93v4.14L0 10l2.93 2.93v4.14h4.14L10 20l2.93-2.93h4.14v-4.14L20 10zM10 16a6 6 0 1 1 6-6 6 6 0 0 1-6 6z%22/%3E%3Ccircle cx=%2210%22 cy=%2210%22 r=%224.5%22/%3E%3C/svg%3E")}.oo-ui-image-invert.oo-ui-icon-bright,.mw-ui-icon-bright-invert:before{background-image:url(/load.php?modules=oojs-ui.styles.icons-accessibility&image=bright&variant=invert&format=rasterized&skin=vector&version=1gpp1);background-image:linear-gradient(transparent,transparent),url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2220%22 height=%2220%22 viewBox=%220 0 20 20%22%3E%3Ctitle%3E bright %3C/title%3E%3Cg fill=%22%23fff%22%3E%3Cpath d=%22M17.07 7.07V2.93h-4.14L10 0 7.07 2.93H2.93v4.14L0 10l2.93 2.93v4.14h4.14L10 20l2.93-2.93h4.14v-4.14L20 10zM10 16a6 6 0 1 1 6-6 6 6 0 0 1-6 6z%22/%3E%3Ccircle cx=%2210%22 cy=%2210%22 r=%224.5%22/%3E%3C/g%3E%3C/svg%3E")}.oo-ui-image-progressive.oo-ui-icon-bright,.mw-ui-icon-bright-progressive:before{background-image:url(/load.php?modules=oojs-ui.styles.icons-accessibility&image=bright&variant=progressive&format=rasterized&skin=vector&version=1gpp1);background-image:linear-gradient(transparent,transparent),url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2220%22 height=%2220%22 viewBox=%220 0 20 20%22%3E%3Ctitle%3E bright %3C/title%3E%3Cg fill=%22%2336c%22%3E%3Cpath d=%22M17.07 7.07V2.93h-4.14L10 0 7.07 2.93H2.93v4.14L0 10l2.93 2.93v4.14h4.14L10 20l2.93-2.93h4.14v-4.14L20 10zM10 16a6 6 0 1 1 6-6 6 6 0 0 1-6 6z%22/%3E%3Ccircle cx=%2210%22 cy=%2210%22 r=%224.5%22/%3E%3C/g%3E%3C/svg%3E")}.oo-ui-icon-halfBright,.mw-ui-icon-halfBright:before{background-image:url(/load.php?modules=oojs-ui.styles.icons-accessibility&image=halfBright&format=rasterized&lang=en&skin=vector&version=1gpp1);background-image:linear-gradient(transparent,transparent),url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2220%22 height=%2220%22 viewBox=%220 0 20 20%22%3E%3Ctitle%3E half bright %3C/title%3E%3Cpath d=%22M17 6.67V3h-4.2L9.87.07 6.94 3H3v3.67L.07 9.6 3 12.53V17h3.94l2.93 2.93L12.8 17H17v-4.47l2.93-2.93zm-7 8.93v-12a6.21 6.21 0 0 1 6 6 6.21 6.21 0 0 1-6 6z%22/%3E%3C/svg%3E")}.oo-ui-image-invert.oo-ui-icon-halfBright,.mw-ui-icon-halfBright-invert:before{background-image:url(/load.php?modules=oojs-ui.styles.icons-accessibility&image=halfBright&variant=invert&format=rasterized&lang=en&skin=vector&version=1gpp1);background-image:linear-gradient(transparent,transparent),url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2220%22 height=%2220%22 viewBox=%220 0 20 20%22%3E%3Ctitle%3E half bright %3C/title%3E%3Cg fill=%22%23fff%22%3E%3Cpath d=%22M17 6.67V3h-4.2L9.87.07 6.94 3H3v3.67L.07 9.6 3 12.53V17h3.94l2.93 2.93L12.8 17H17v-4.47l2.93-2.93zm-7 8.93v-12a6.21 6.21 0 0 1 6 6 6.21 6.21 0 0 1-6 6z%22/%3E%3C/g%3E%3C/svg%3E")}.oo-ui-image-progressive.oo-ui-icon-halfBright,.mw-ui-icon-halfBright-progressive:before{background-image:url(/load.php?modules=oojs-ui.styles.icons-accessibility&image=halfBright&variant=progressive&format=rasterized&lang=en&skin=vector&version=1gpp1);background-image:linear-gradient(transparent,transparent),url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2220%22 height=%2220%22 viewBox=%220 0 20 20%22%3E%3Ctitle%3E half bright %3C/title%3E%3Cg fill=%22%2336c%22%3E%3Cpath d=%22M17 6.67V3h-4.2L9.87.07 6.94 3H3v3.67L.07 9.6 3 12.53V17h3.94l2.93 2.93L12.8 17H17v-4.47l2.93-2.93zm-7 8.93v-12a6.21 6.21 0 0 1 6 6 6.21 6.21 0 0 1-6 6z%22/%3E%3C/g%3E%3C/svg%3E")}.oo-ui-icon-notBright,.mw-ui-icon-notBright:before{background-image:url(/load.php?modules=oojs-ui.styles.icons-accessibility&image=notBright&format=rasterized&skin=vector&version=1gpp1);background-image:linear-gradient(transparent,transparent),url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2220%22 height=%2220%22 viewBox=%220 0 20 20%22%3E%3Ctitle%3E not bright %3C/title%3E%3Ccircle cx=%229.85%22 cy=%2210%22 r=%229%22/%3E%3C/svg%3E")}.oo-ui-image-invert.oo-ui-icon-notBright,.mw-ui-icon-notBright-invert:before{background-image:url(/load.php?modules=oojs-ui.styles.icons-accessibility&image=notBright&variant=invert&format=rasterized&skin=vector&version=1gpp1);background-image:linear-gradient(transparent,transparent),url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2220%22 height=%2220%22 viewBox=%220 0 20 20%22%3E%3Ctitle%3E not bright %3C/title%3E%3Cg fill=%22%23fff%22%3E%3Ccircle cx=%229.85%22 cy=%2210%22 r=%229%22/%3E%3C/g%3E%3C/svg%3E")}.oo-ui-image-progressive.oo-ui-icon-notBright,.mw-ui-icon-notBright-progressive:before{background-image:url(/load.php?modules=oojs-ui.styles.icons-accessibility&image=notBright&variant=progressive&format=rasterized&skin=vector&version=1gpp1);background-image:linear-gradient(transparent,transparent),url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2220%22 height=%2220%22 viewBox=%220 0 20 20%22%3E%3Ctitle%3E not bright %3C/title%3E%3Cg fill=%22%2336c%22%3E%3Ccircle cx=%229.85%22 cy=%2210%22 r=%229%22/%3E%3C/g%3E%3C/svg%3E")}.oo-ui-icon-eye,.mw-ui-icon-eye:before{background-image:url(/load.php?modules=oojs-ui.styles.icons-accessibility&image=eye&format=rasterized&skin=vector&version=1gpp1);background-image:linear-gradient(transparent,transparent),url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2220%22 height=%2220%22 viewBox=%220 0 20 20%22%3E%3Ctitle%3E eye %3C/title%3E%3Cpath d=%22M10 14.5a4.5 4.5 0 1 1 4.5-4.5 4.5 4.5 0 0 1-4.5 4.5zM10 3C3 3 0 10 0 10s3 7 10 7 10-7 10-7-3-7-10-7z%22/%3E%3Ccircle cx=%2210%22 cy=%2210%22 r=%222.5%22/%3E%3C/svg%3E")}.oo-ui-image-invert.oo-ui-icon-eye,.mw-ui-icon-eye-invert:before{background-image:url(/load.php?modules=oojs-ui.styles.icons-accessibility&image=eye&variant=invert&format=rasterized&skin=vector&version=1gpp1);background-image:linear-gradient(transparent,transparent),url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2220%22 height=%2220%22 viewBox=%220 0 20 20%22%3E%3Ctitle%3E eye %3C/title%3E%3Cg fill=%22%23fff%22%3E%3Cpath d=%22M10 14.5a4.5 4.5 0 1 1 4.5-4.5 4.5 4.5 0 0 1-4.5 4.5zM10 3C3 3 0 10 0 10s3 7 10 7 10-7 10-7-3-7-10-7z%22/%3E%3Ccircle cx=%2210%22 cy=%2210%22 r=%222.5%22/%3E%3C/g%3E%3C/svg%3E")}.oo-ui-image-progressive.oo-ui-icon-eye,.mw-ui-icon-eye-progressive:before{background-image:url(/load.php?modules=oojs-ui.styles.icons-accessibility&image=eye&variant=progressive&format=rasterized&skin=vector&version=1gpp1);background-image:linear-gradient(transparent,transparent),url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2220%22 height=%2220%22 viewBox=%220 0 20 20%22%3E%3Ctitle%3E eye %3C/title%3E%3Cg fill=%22%2336c%22%3E%3Cpath d=%22M10 14.5a4.5 4.5 0 1 1 4.5-4.5 4.5 4.5 0 0 1-4.5 4.5zM10 3C3 3 0 10 0 10s3 7 10 7 10-7 10-7-3-7-10-7z%22/%3E%3Ccircle cx=%2210%22 cy=%2210%22 r=%222.5%22/%3E%3C/g%3E%3C/svg%3E")}.oo-ui-icon-eyeClosed,.mw-ui-icon-eyeClosed:before{background-image:url(/load.php?modules=oojs-ui.styles.icons-accessibility&image=eyeClosed&format=rasterized&skin=vector&version=1gpp1);background-image:linear-gradient(transparent,transparent),url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2220%22 height=%2220%22 viewBox=%220 0 20 20%22%3E%3Ctitle%3E eye closed %3C/title%3E%3Cpath d=%22M12.49 9.94A2.5 2.5 0 0 0 10 7.5z%22/%3E%3Cpath d=%22M8.2 5.9a4.38 4.38 0 0 1 1.8-.4 4.5 4.5 0 0 1 4.5 4.5 4.34 4.34 0 0 1-.29 1.55L17 14.14A14 14 0 0 0 20 10s-3-7-10-7a9.63 9.63 0 0 0-4 .85zM2 2 1 3l2.55 2.4A13.89 13.89 0 0 0 0 10s3 7 10 7a9.67 9.67 0 0 0 4.64-1.16L18 19l1-1zm8 12.5A4.5 4.5 0 0 1 5.5 10a4.45 4.45 0 0 1 .6-2.2l1.53 1.44a2.47 2.47 0 0 0-.13.76 2.49 2.49 0 0 0 3.41 2.32l1.54 1.45a4.47 4.47 0 0 1-2.45.73z%22/%3E%3C/svg%3E")}.oo-ui-image-invert.oo-ui-icon-eyeClosed,.mw-ui-icon-eyeClosed-invert:before{background-image:url(/load.php?modules=oojs-ui.styles.icons-accessibility&image=eyeClosed&variant=invert&format=rasterized&skin=vector&version=1gpp1);background-image:linear-gradient(transparent,transparent),url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2220%22 height=%2220%22 viewBox=%220 0 20 20%22%3E%3Ctitle%3E eye closed %3C/title%3E%3Cg fill=%22%23fff%22%3E%3Cpath d=%22M12.49 9.94A2.5 2.5 0 0 0 10 7.5z%22/%3E%3Cpath d=%22M8.2 5.9a4.38 4.38 0 0 1 1.8-.4 4.5 4.5 0 0 1 4.5 4.5 4.34 4.34 0 0 1-.29 1.55L17 14.14A14 14 0 0 0 20 10s-3-7-10-7a9.63 9.63 0 0 0-4 .85zM2 2 1 3l2.55 2.4A13.89 13.89 0 0 0 0 10s3 7 10 7a9.67 9.67 0 0 0 4.64-1.16L18 19l1-1zm8 12.5A4.5 4.5 0 0 1 5.5 10a4.45 4.45 0 0 1 .6-2.2l1.53 1.44a2.47 2.47 0 0 0-.13.76 2.49 2.49 0 0 0 3.41 2.32l1.54 1.45a4.47 4.47 0 0 1-2.45.73z%22/%3E%3C/g%3E%3C/svg%3E")}.oo-ui-image-progressive.oo-ui-icon-eyeClosed,.mw-ui-icon-eyeClosed-progressive:before{background-image:url(/load.php?modules=oojs-ui.styles.icons-accessibility&image=eyeClosed&variant=progressive&format=rasterized&skin=vector&version=1gpp1);background-image:linear-gradient(transparent,transparent),url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2220%22 height=%2220%22 viewBox=%220 0 20 20%22%3E%3Ctitle%3E eye closed %3C/title%3E%3Cg fill=%22%2336c%22%3E%3Cpath d=%22M12.49 9.94A2.5 2.5 0 0 0 10 7.5z%22/%3E%3Cpath d=%22M8.2 5.9a4.38 4.38 0 0 1 1.8-.4 4.5 4.5 0 0 1 4.5 4.5 4.34 4.34 0 0 1-.29 1.55L17 14.14A14 14 0 0 0 20 10s-3-7-10-7a9.63 9.63 0 0 0-4 .85zM2 2 1 3l2.55 2.4A13.89 13.89 0 0 0 0 10s3 7 10 7a9.67 9.67 0 0 0 4.64-1.16L18 19l1-1zm8 12.5A4.5 4.5 0 0 1 5.5 10a4.45 4.45 0 0 1 .6-2.2l1.53 1.44a2.47 2.47 0 0 0-.13.76 2.49 2.49 0 0 0 3.41 2.32l1.54 1.45a4.47 4.47 0 0 1-2.45.73z%22/%3E%3C/g%3E%3C/svg%3E")}.oo-ui-icon-moon,.mw-ui-icon-moon:before{background-image:url(/load.php?modules=oojs-ui.styles.icons-accessibility&image=moon&format=rasterized&skin=vector&version=1gpp1);background-image:linear-gradient(transparent,transparent),url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2220%22 height=%2220%22 viewBox=%220 0 20 20%22%3E%3Ctitle%3E moon %3C/title%3E%3Cpath d=%22M17.39 15.14A7.33 7.33 0 0 1 11.75 1.6c.23-.11.56-.23.79-.34a8.19 8.19 0 0 0-5.41.45 9 9 0 1 0 7 16.58 8.42 8.42 0 0 0 4.29-3.84 5.3 5.3 0 0 1-1.03.69z%22/%3E%3C/svg%3E")}.oo-ui-image-invert.oo-ui-icon-moon,.mw-ui-icon-moon-invert:before{background-image:url(/load.php?modules=oojs-ui.styles.icons-accessibility&image=moon&variant=invert&format=rasterized&skin=vector&version=1gpp1);background-image:linear-gradient(transparent,transparent),url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2220%22 height=%2220%22 viewBox=%220 0 20 20%22%3E%3Ctitle%3E moon %3C/title%3E%3Cg fill=%22%23fff%22%3E%3Cpath d=%22M17.39 15.14A7.33 7.33 0 0 1 11.75 1.6c.23-.11.56-.23.79-.34a8.19 8.19 0 0 0-5.41.45 9 9 0 1 0 7 16.58 8.42 8.42 0 0 0 4.29-3.84 5.3 5.3 0 0 1-1.03.69z%22/%3E%3C/g%3E%3C/svg%3E")}.oo-ui-image-progressive.oo-ui-icon-moon,.mw-ui-icon-moon-progressive:before{background-image:url(/load.php?modules=oojs-ui.styles.icons-accessibility&image=moon&variant=progressive&format=rasterized&skin=vector&version=1gpp1);background-image:linear-gradient(transparent,transparent),url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2220%22 height=%2220%22 viewBox=%220 0 20 20%22%3E%3Ctitle%3E moon %3C/title%3E%3Cg fill=%22%2336c%22%3E%3Cpath d=%22M17.39 15.14A7.33 7.33 0 0 1 11.75 1.6c.23-.11.56-.23.79-.34a8.19 8.19 0 0 0-5.41.45 9 9 0 1 0 7 16.58 8.42 8.42 0 0 0 4.29-3.84 5.3 5.3 0 0 1-1.03.69z%22/%3E%3C/g%3E%3C/svg%3E")}.oo-ui-icon-largerText,.mw-ui-icon-largerText:before{background-image:url(/load.php?modules=oojs-ui.styles.icons-accessibility&image=largerText&format=rasterized&skin=vector&version=1gpp1);background-image:linear-gradient(transparent,transparent),url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2220%22 height=%2220%22 viewBox=%220 0 20 20%22%3E%3Ctitle%3E larger text %3C/title%3E%3Cpath d=%22M17.66 18h-2a.85.85 0 0 1-.56-.17 1.11 1.11 0 0 1-.32-.43l-1.33-3.53h-6.9L5.22 17.4a1.06 1.06 0 0 1-.31.41.83.83 0 0 1-.56.19h-2L8.68 2h2.63zm-4.92-6-2.2-5.84A16.17 16.17 0 0 1 10 4.43q-.12.52-.27 1t-.27.77L7.26 12z%22/%3E%3C/svg%3E")}.oo-ui-image-invert.oo-ui-icon-largerText,.mw-ui-icon-largerText-invert:before{background-image:url(/load.php?modules=oojs-ui.styles.icons-accessibility&image=largerText&variant=invert&format=rasterized&skin=vector&version=1gpp1);background-image:linear-gradient(transparent,transparent),url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2220%22 height=%2220%22 viewBox=%220 0 20 20%22%3E%3Ctitle%3E larger text %3C/title%3E%3Cg fill=%22%23fff%22%3E%3Cpath d=%22M17.66 18h-2a.85.85 0 0 1-.56-.17 1.11 1.11 0 0 1-.32-.43l-1.33-3.53h-6.9L5.22 17.4a1.06 1.06 0 0 1-.31.41.83.83 0 0 1-.56.19h-2L8.68 2h2.63zm-4.92-6-2.2-5.84A16.17 16.17 0 0 1 10 4.43q-.12.52-.27 1t-.27.77L7.26 12z%22/%3E%3C/g%3E%3C/svg%3E")}.oo-ui-image-progressive.oo-ui-icon-largerText,.mw-ui-icon-largerText-progressive:before{background-image:url(/load.php?modules=oojs-ui.styles.icons-accessibility&image=largerText&variant=progressive&format=rasterized&skin=vector&version=1gpp1);background-image:linear-gradient(transparent,transparent),url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2220%22 height=%2220%22 viewBox=%220 0 20 20%22%3E%3Ctitle%3E larger text %3C/title%3E%3Cg fill=%22%2336c%22%3E%3Cpath d=%22M17.66 18h-2a.85.85 0 0 1-.56-.17 1.11 1.11 0 0 1-.32-.43l-1.33-3.53h-6.9L5.22 17.4a1.06 1.06 0 0 1-.31.41.83.83 0 0 1-.56.19h-2L8.68 2h2.63zm-4.92-6-2.2-5.84A16.17 16.17 0 0 1 10 4.43q-.12.52-.27 1t-.27.77L7.26 12z%22/%3E%3C/g%3E%3C/svg%3E")}.oo-ui-icon-smallerText,.mw-ui-icon-smallerText:before{background-image:url(/load.php?modules=oojs-ui.styles.icons-accessibility&image=smallerText&format=rasterized&skin=vector&version=1gpp1);background-image:linear-gradient(transparent,transparent),url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2220%22 height=%2220%22 viewBox=%220 0 20 20%22%3E%3Ctitle%3E smaller text %3C/title%3E%3Cpath d=%22M15.75 18h-1.51a.64.64 0 0 1-.42-.13.83.83 0 0 1-.24-.32l-1-2.65H7.41l-1 2.65a.79.79 0 0 1-.23.31.62.62 0 0 1-.42.14H4.25L9 6h2zm-3.69-4.5L10.4 9.12a12.13 12.13 0 0 1-.4-1.3q-.09.39-.2.72t-.2.58L7.95 13.5z%22/%3E%3C/svg%3E")}.oo-ui-image-invert.oo-ui-icon-smallerText,.mw-ui-icon-smallerText-invert:before{background-image:url(/load.php?modules=oojs-ui.styles.icons-accessibility&image=smallerText&variant=invert&format=rasterized&skin=vector&version=1gpp1);background-image:linear-gradient(transparent,transparent),url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2220%22 height=%2220%22 viewBox=%220 0 20 20%22%3E%3Ctitle%3E smaller text %3C/title%3E%3Cg fill=%22%23fff%22%3E%3Cpath d=%22M15.75 18h-1.51a.64.64 0 0 1-.42-.13.83.83 0 0 1-.24-.32l-1-2.65H7.41l-1 2.65a.79.79 0 0 1-.23.31.62.62 0 0 1-.42.14H4.25L9 6h2zm-3.69-4.5L10.4 9.12a12.13 12.13 0 0 1-.4-1.3q-.09.39-.2.72t-.2.58L7.95 13.5z%22/%3E%3C/g%3E%3C/svg%3E")}.oo-ui-image-progressive.oo-ui-icon-smallerText,.mw-ui-icon-smallerText-progressive:before{background-image:url(/load.php?modules=oojs-ui.styles.icons-accessibility&image=smallerText&variant=progressive&format=rasterized&skin=vector&version=1gpp1);background-image:linear-gradient(transparent,transparent),url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2220%22 height=%2220%22 viewBox=%220 0 20 20%22%3E%3Ctitle%3E smaller text %3C/title%3E%3Cg fill=%22%2336c%22%3E%3Cpath d=%22M15.75 18h-1.51a.64.64 0 0 1-.42-.13.83.83 0 0 1-.24-.32l-1-2.65H7.41l-1 2.65a.79.79 0 0 1-.23.31.62.62 0 0 1-.42.14H4.25L9 6h2zm-3.69-4.5L10.4 9.12a12.13 12.13 0 0 1-.4-1.3q-.09.39-.2.72t-.2.58L7.95 13.5z%22/%3E%3C/g%3E%3C/svg%3E")}.oo-ui-icon-visionSimulator,.mw-ui-icon-visionSimulator:before{background-image:url(/load.php?modules=oojs-ui.styles.icons-accessibility&image=visionSimulator&format=rasterized&skin=vector&version=1gpp1);background-image:linear-gradient(transparent,transparent),url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2220%22 height=%2220%22 viewBox=%220 0 20 20%22%3E%3Ctitle%3E vision simulator %3C/title%3E%3Cpath d=%22M17.5 11.83a.79.79 0 0 1-.83.83h-3.34A1.49 1.49 0 0 1 11.67 11V9.33a.79.79 0 0 1 .83-.83h4.17a.79.79 0 0 1 .83.83zM8.33 11a1.49 1.49 0 0 1-1.67 1.67H3.33a.79.79 0 0 1-.83-.83V9.33a.79.79 0 0 1 .83-.83H7.5a.79.79 0 0 1 .83.83zM0 6.2v6.28a.2.2 0 0 0 .2.2h1.72a1.61 1.61 0 0 0 1.42.83h3.33A2.46 2.46 0 0 0 9.13 12a.19.19 0 0 1 .18-.13h1.39a.19.19 0 0 1 .18.13 2.46 2.46 0 0 0 2.46 1.53h3.33c.55 0 1.1 0 1.37-.7a.2.2 0 0 1 .18-.13h1.58a.2.2 0 0 0 .2-.2V6.2a.2.2 0 0 0-.2-.2H.2a.2.2 0 0 0-.2.2z%22/%3E%3C/svg%3E")}.oo-ui-image-invert.oo-ui-icon-visionSimulator,.mw-ui-icon-visionSimulator-invert:before{background-image:url(/load.php?modules=oojs-ui.styles.icons-accessibility&image=visionSimulator&variant=invert&format=rasterized&skin=vector&version=1gpp1);background-image:linear-gradient(transparent,transparent),url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2220%22 height=%2220%22 viewBox=%220 0 20 20%22%3E%3Ctitle%3E vision simulator %3C/title%3E%3Cg fill=%22%23fff%22%3E%3Cpath d=%22M17.5 11.83a.79.79 0 0 1-.83.83h-3.34A1.49 1.49 0 0 1 11.67 11V9.33a.79.79 0 0 1 .83-.83h4.17a.79.79 0 0 1 .83.83zM8.33 11a1.49 1.49 0 0 1-1.67 1.67H3.33a.79.79 0 0 1-.83-.83V9.33a.79.79 0 0 1 .83-.83H7.5a.79.79 0 0 1 .83.83zM0 6.2v6.28a.2.2 0 0 0 .2.2h1.72a1.61 1.61 0 0 0 1.42.83h3.33A2.46 2.46 0 0 0 9.13 12a.19.19 0 0 1 .18-.13h1.39a.19.19 0 0 1 .18.13 2.46 2.46 0 0 0 2.46 1.53h3.33c.55 0 1.1 0 1.37-.7a.2.2 0 0 1 .18-.13h1.58a.2.2 0 0 0 .2-.2V6.2a.2.2 0 0 0-.2-.2H.2a.2.2 0 0 0-.2.2z%22/%3E%3C/g%3E%3C/svg%3E")}.oo-ui-image-progressive.oo-ui-icon-visionSimulator,.mw-ui-icon-visionSimulator-progressive:before{background-image:url(/load.php?modules=oojs-ui.styles.icons-accessibility&image=visionSimulator&variant=progressive&format=rasterized&skin=vector&version=1gpp1);background-image:linear-gradient(transparent,transparent),url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2220%22 height=%2220%22 viewBox=%220 0 20 20%22%3E%3Ctitle%3E vision simulator %3C/title%3E%3Cg fill=%22%2336c%22%3E%3Cpath d=%22M17.5 11.83a.79.79 0 0 1-.83.83h-3.34A1.49 1.49 0 0 1 11.67 11V9.33a.79.79 0 0 1 .83-.83h4.17a.79.79 0 0 1 .83.83zM8.33 11a1.49 1.49 0 0 1-1.67 1.67H3.33a.79.79 0 0 1-.83-.83V9.33a.79.79 0 0 1 .83-.83H7.5a.79.79 0 0 1 .83.83zM0 6.2v6.28a.2.2 0 0 0 .2.2h1.72a1.61 1.61 0 0 0 1.42.83h3.33A2.46 2.46 0 0 0 9.13 12a.19.19 0 0 1 .18-.13h1.39a.19.19 0 0 1 .18.13 2.46 2.46 0 0 0 2.46 1.53h3.33c.55 0 1.1 0 1.37-.7a.2.2 0 0 1 .18-.13h1.58a.2.2 0 0 0 .2-.2V6.2a.2.2 0 0 0-.2-.2H.2a.2.2 0 0 0-.2.2z%22/%3E%3C/g%3E%3C/svg%3E")}
+.ve-init-mw-progressBarWidget{height:1em;overflow:hidden;margin:0 25%}.ve-init-mw-progressBarWidget-bar{height:1em;width:0} .ve-init-mw-progressBarWidget{background-color:#fff;box-sizing:border-box;height:0.875em;border:1px solid #36c;border-radius:0.875em;box-shadow:0 1px 1px rgba(0,0,0,0.15)}.ve-init-mw-progressBarWidget-bar{background-color:#36c;height:0.875em}
+#pending-review{border:3px solid red} .mw-notification-area.mw-notification-area-modqueued{position:static;margin-left:auto;margin-right:auto;width:max-content;font-size:0.9em;line-height:25px}
+@media screen {
+	.toctoggle{-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none;user-select:none;font-size:94%}}
+#postedit-modqueued a{font-weight:bold}#pending-review{display:inline-block;padding:5px;margin:10px;margin-left:0;font-weight:bold;font-size:120%;text-transform:uppercase}</style><style>
+.ve-init-mw-tempWikitextEditorWidget{border:0;padding:0;color:inherit;line-height:1.5em;width:100%; -moz-tab-size:4; tab-size:4; }.ve-init-mw-tempWikitextEditorWidget:focus{outline:0;padding:0}.ve-init-mw-tempWikitextEditorWidget::selection{background:rgba(109,169,247,0.5); }</style><style>
+.ve-active .ve-init-mw-desktopArticleTarget-editableContent #toc,.ve-active #siteNotice,.ve-active .mw-indicators,.ve-active #t-print,.ve-active #t-permalink,.ve-active #p-coll-print_export,.ve-active #t-cite,.ve-active .ve-init-mw-desktopArticleTarget-editableContent,.ve-active .ve-init-mw-tempWikitextEditorWidget{display:none}.ve-deactivating .ve-ui-surface{display:none}.ve-activating{ }.ve-activating .ve-ui-surface{height:0;padding:0 !important; overflow:hidden} .ve-loading .ve-init-mw-desktopArticleTarget-targetContainer > :not(.ve-init-mw-desktopArticleTarget-toolbarPlaceholder):not(.ve-init-mw-desktopArticleTarget),.ve-loading .ve-init-mw-desktopArticleTarget-originalContent,.ve-activated:not(.ve-loading) .ve-init-mw-desktopArticleTarget-uneditableContent{pointer-events:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;opacity:0.5}.ve-activated .ve-init-mw-desktopArticleTarget-targetContainer #firstHeading{ -webkit-user-select:text;-moz-user-select:text;-ms-user-select:text;user-select:text;pointer-events:auto;cursor:text}.ve-activated .ve-init-mw-desktopArticleTarget-targetContainer #firstHeading a{ pointer-events:none}.ve-activated .ve-init-mw-desktopArticleTarget-originalContent #catlinks{cursor:pointer}.ve-activated .ve-init-mw-desktopArticleTarget-originalContent #catlinks:hover{ background:#e9f2fd}.ve-activated .ve-init-mw-desktopArticleTarget-originalContent #catlinks a{opacity:1} .ve-init-mw-desktopArticleTarget-loading-overlay{z-index:2;position:absolute;width:100%;top:1em}.ve-init-mw-desktopArticleTarget-toolbarPlaceholder{overflow:hidden;transition:height 250ms ease;height:0;padding-bottom:2px; }.ve-init-mw-desktopArticleTarget-toolbarPlaceholder-bar{transform:translateY(-100%);transition:transform 250ms ease}.ve-init-mw-desktopArticleTarget-toolbarPlaceholder-open .ve-init-mw-desktopArticleTarget-toolbarPlaceholder-bar{transform:translateY(0)}.ve-init-mw-desktopArticleTarget-toolbarPlaceholder-floating{transition:none}.ve-init-mw-desktopArticleTarget-toolbarPlaceholder-floating .ve-init-mw-desktopArticleTarget-toolbarPlaceholder-bar{position:fixed;top:0;z-index:1;background:#fff} .oo-ui-element-hidden{display:none !important; } .mw-editsection{ unicode-bidi:-moz-isolate;unicode-bidi:-webkit-isolate;unicode-bidi:isolate}.mw-editsection:before{content:'\200B'}.mw-editsection a{white-space:nowrap}.mw-editsection-divider{color:#54595d} .ve-init-mw-desktopArticleTarget-toolbarPlaceholder-bar{height:42px;border-bottom:1px solid #c8ccd1;box-shadow:0 1px 1px 0 rgba(0,0,0,0.1)}.ve-init-mw-desktopArticleTarget-toolbarPlaceholder-floating,.ve-init-mw-desktopArticleTarget-toolbarPlaceholder-open{height:42px} .ve-init-mw-desktopArticleTarget-toolbar,.ve-init-mw-desktopArticleTarget-toolbarPlaceholder{font-size:0.875em; margin:-1.14em -1.14em 1.14em -1.14em; }@media screen and (min-width:982px){.ve-init-mw-desktopArticleTarget-toolbar,.ve-init-mw-desktopArticleTarget-toolbarPlaceholder{ margin:-1.43em -1.71em 1.43em -1.71em}}.ve-init-mw-desktopArticleTarget-toolbarPlaceholder-floating{margin-top:0;margin-bottom:0} .ve-activated .vector-menu-tabs .selected{box-shadow:inset 0 -1px 0 #e1f1fc}</style><meta name="ResourceLoaderDynamicStyles" content="">
+<link rel="stylesheet" href="./NE - OSDev Wiki_files/load(2).php">
+<meta name="generator" content="MediaWiki 1.39.7">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=1000">
+<link rel="icon" href="https://wiki.osdev.org/favicon.ico">
+<link rel="search" type="application/opensearchdescription+xml" href="https://wiki.osdev.org/opensearch_desc.php" title="OSDev Wiki (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.osdev.org/api.php?action=rsd">
+<link rel="alternate" type="application/atom+xml" title="OSDev Wiki Atom feed" href="https://wiki.osdev.org/index.php?title=Special:RecentChanges&amp;feed=atom">
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-NE rootpage-NE skin-vector action-view skin-vector-legacy vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-language-alert-in-sidebar-disabled vector-feature-sticky-header-disabled vector-feature-sticky-header-edit-disabled vector-feature-table-of-contents-disabled vector-feature-visual-enhancement-next-disabled" data-new-gr-c-s-check-loaded="14.1261.0" data-gr-ext-installed=""><div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body ve-init-mw-desktopArticleTarget-targetContainer" role="main">
+	<a id="top"></a>
+	<div id="siteNotice"></div>
+	<div class="mw-indicators">
+	</div>
+	<h1 id="firstHeading" class="firstHeading mw-first-heading"><span class="mw-page-title-main">NE</span></h1>
+	<div id="bodyContent" class="vector-body">
+		<div id="siteSub" class="noprint">From OSDev Wiki</div>
+		<div id="contentSub"></div>
+		<div id="contentSub2"></div>
+		
+		<div id="jump-to-nav"></div>
+		<a class="mw-jump-link" href="https://wiki.osdev.org/NE#mw-head">Jump to navigation</a>
+		<a class="mw-jump-link" href="https://wiki.osdev.org/NE#searchInput">Jump to search</a>
+		<div id="mw-content-text" class="mw-body-content mw-content-ltr" lang="en" dir="ltr"><div class="mw-parser-output"><table style="font-size:95%; line-height:1.5em; padding:0.25em; float:right; margin: 0 0 8px 15px; clear: right; border:1px solid #aaaaaa; background:#eee; text-align:center; width:200px; ;"><tbody><tr><th style="background:#ffce7b; padding:0.3em; font-size:1.1em;"><a href="https://wiki.osdev.org/Executable_Formats" title="Executable Formats">Executable Formats</a></th></tr><tr><th>Microsoft</th></tr><tr><td><div>
+<p><b>16 bit:</b><br>
+<a href="https://wiki.osdev.org/COM" title="COM">COM</a><br>
+<a href="https://wiki.osdev.org/MZ" title="MZ">MZ</a><br>
+<a class="mw-selflink selflink">NE</a><br>
+<b>Mixed (16/32 bit):</b><br>
+<a href="https://wiki.osdev.org/LE" title="LE">LE</a><br>
+<b>32/64 bit:</b><br>
+<a href="https://wiki.osdev.org/PE" title="PE">PE</a><br>
+<a href="https://wiki.osdev.org/COFF" title="COFF">COFF</a><br>
+</p>
+</div></td></tr><tr><th>*nix</th></tr><tr><td><div>
+<p><a href="https://wiki.osdev.org/A.out" title="A.out">a.out</a><br>
+<a href="https://wiki.osdev.org/ELF" title="ELF">ELF</a><br>
+</p>
+</div></td></tr><tr><th>Apple</th></tr><tr><td><div>
+<p><a href="https://wiki.osdev.org/Mach-O" title="Mach-O">Mach-O</a><br>
+</p>
+</div></td></tr></tbody></table>
+<div id="toc" class="toc" role="navigation" aria-labelledby="mw-toc-heading"><input type="checkbox" role="button" id="toctogglecheckbox" class="toctogglecheckbox" style="display:none"><div class="toctitle" lang="en" dir="ltr"><h2 id="mw-toc-heading">Contents</h2><span class="toctogglespan"><label class="toctogglelabel" for="toctogglecheckbox"></label></span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="https://wiki.osdev.org/NE#Introduction"><span class="tocnumber">1</span> <span class="toctext">Introduction</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="https://wiki.osdev.org/NE#Support"><span class="tocnumber">2</span> <span class="toctext">Support</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="https://wiki.osdev.org/NE#Inside_the_NE_file"><span class="tocnumber">3</span> <span class="toctext">Inside the NE file</span></a>
+<ul>
+<li class="toclevel-2 tocsection-4"><a href="https://wiki.osdev.org/NE#DOS_Stub"><span class="tocnumber">3.1</span> <span class="toctext">DOS Stub</span></a></li>
+<li class="toclevel-2 tocsection-5"><a href="https://wiki.osdev.org/NE#NE_Header"><span class="tocnumber">3.2</span> <span class="toctext">NE Header</span></a></li>
+<li class="toclevel-2 tocsection-6"><a href="https://wiki.osdev.org/NE#Segment_Table"><span class="tocnumber">3.3</span> <span class="toctext">Segment Table</span></a></li>
+<li class="toclevel-2 tocsection-7"><a href="https://wiki.osdev.org/NE#Resource_Table"><span class="tocnumber">3.4</span> <span class="toctext">Resource Table</span></a>
+<ul>
+<li class="toclevel-3 tocsection-8"><a href="https://wiki.osdev.org/NE#Resource_Type_IDs_and_Resource_IDs"><span class="tocnumber">3.4.1</span> <span class="toctext">Resource Type IDs and Resource IDs</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-9"><a href="https://wiki.osdev.org/NE#Resident-Name_Table"><span class="tocnumber">3.5</span> <span class="toctext">Resident-Name Table</span></a></li>
+<li class="toclevel-2 tocsection-10"><a href="https://wiki.osdev.org/NE#Module-Reference_Table"><span class="tocnumber">3.6</span> <span class="toctext">Module-Reference Table</span></a></li>
+<li class="toclevel-2 tocsection-11"><a href="https://wiki.osdev.org/NE#Imported-Name_Table"><span class="tocnumber">3.7</span> <span class="toctext">Imported-Name Table</span></a></li>
+<li class="toclevel-2 tocsection-12"><a href="https://wiki.osdev.org/NE#Entry_Table"><span class="tocnumber">3.8</span> <span class="toctext">Entry Table</span></a></li>
+<li class="toclevel-2 tocsection-13"><a href="https://wiki.osdev.org/NE#Nonresident-Name_Table"><span class="tocnumber">3.9</span> <span class="toctext">Nonresident-Name Table</span></a></li>
+<li class="toclevel-2 tocsection-14"><a href="https://wiki.osdev.org/NE#Relocation_Data"><span class="tocnumber">3.10</span> <span class="toctext">Relocation Data</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-15"><a href="https://wiki.osdev.org/NE#Dynamic_Libraries"><span class="tocnumber">4</span> <span class="toctext">Dynamic Libraries</span></a></li>
+<li class="toclevel-1 tocsection-16"><a href="https://wiki.osdev.org/NE#See_Also"><span class="tocnumber">5</span> <span class="toctext">See Also</span></a>
+<ul>
+<li class="toclevel-2 tocsection-17"><a href="https://wiki.osdev.org/NE#NE"><span class="tocnumber">5.1</span> <span class="toctext">NE</span></a></li>
+<li class="toclevel-2 tocsection-18"><a href="https://wiki.osdev.org/NE#Similar_Formats"><span class="tocnumber">5.2</span> <span class="toctext">Similar Formats</span></a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+<h2><span class="mw-headline" id="Introduction">Introduction</span></h2>
+<p>The <b>NE</b> (<b>New Executable</b>) format was introduced with Windows 1.0. Like its predecessor <a href="https://wiki.osdev.org/MZ" title="MZ">MZ</a>, it is a 16-bit format, but it lifts some of its maximum size restrictions and adds new features, such as references to other files.
+</p><p>All numbers in the NE file's structures are in little-endian byte order.
+</p>
+<h2><span class="mw-headline" id="Support">Support</span></h2>
+<p>NE files are the native executable format of Windows 1.01 through 3.xx, Windows NT 3.1, as well as OS/2 1.x. The format can be run on later 32-bit Windows systems (in a Virtual DOS Machine), such as Windows 95 and Windows NT 3.5, but their native format is <a href="https://wiki.osdev.org/PE" title="PE">PE</a>.
+</p><p>Because 64-bit mode on x86 processors lacks virtual 8086 support, NE executables cannot be run on 64-bit Windows.
+</p>
+<h2><span class="mw-headline" id="Inside_the_NE_file">Inside the NE file</span></h2>
+<h3><span class="mw-headline" id="DOS_Stub">DOS Stub</span></h3>
+<p>Every NE executable is also a valid <a href="https://wiki.osdev.org/MZ" title="MZ">MZ</a> executable. This enables the developer to package both an MS-DOS and Win16 version of the program in one file, but for most programs, the MZ executable only prints "This Program requires Microsoft Windows" and exits, so the MZ part is often referred to as the <i>DOS Stub</i>.
+</p><p>To detect whether an MZ executable is also an NE executable, the following must be done:
+</p>
+<ol><li>Read the <tt>e_lfarlc</tt> field (uint16_t at offset 0x18). If it does not equal 0x0040, the executable is not an NE executable.</li>
+<li>Read the <tt>e_lfanew</tt> field (uint32_t at offset 0x3C). Seek to that location in the file and read 2 bytes. If these bytes are <tt>'N'</tt> and <tt>'E'</tt>, the executable is an NE executable. (Other common possibilities at that location are <tt>'L'</tt> and <tt>'E'</tt> for <a href="https://wiki.osdev.org/LE" title="LE">LE</a>, and <tt>'P'</tt> and <tt>'E'</tt> for <a href="https://wiki.osdev.org/PE" title="PE">PE</a> executables.)</li></ol>
+<h3><span class="mw-headline" id="NE_Header">NE Header</span></h3>
+<p>The NE header is a relatively large structure.
+</p>
+<div class="mw-highlight mw-highlight-lang-cpp mw-content-ltr" dir="ltr"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">NE_Header</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">sig</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span><span class="w">                 </span><span class="c1">// {'N', 'E'}</span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">MajLinkerVersion</span><span class="p">;</span><span class="w">    </span><span class="c1">//The major linker version</span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">MinLinkerVersion</span><span class="p">;</span><span class="w">    </span><span class="c1">//The minor linker version (also known as the linker revision)</span>
+<span class="w">    </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">EntryTableOffset</span><span class="p">;</span><span class="w">   </span><span class="c1">//Offset of entry table from start of NE_Header</span>
+<span class="w">    </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">EntryTableLength</span><span class="p">;</span><span class="w">   </span><span class="c1">//Length of entry table in bytes</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">FileLoadCRC</span><span class="p">;</span><span class="w">        </span><span class="c1">//32-bit CRC of entire contents of file</span>
+<span class="w">    </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">FlagWord</span><span class="p">;</span><span class="w">           </span><span class="c1">// Uses the FlagWord enum</span>
+<span class="w">    </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">AutoDataSegIndex</span><span class="p">;</span><span class="w">   </span><span class="c1">//The automatic data segment index</span>
+<span class="w">    </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">InitHeapSize</span><span class="p">;</span><span class="w">       </span><span class="c1">//The initial local heap size</span>
+<span class="w">    </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">InitStackSize</span><span class="p">;</span><span class="w">      </span><span class="c1">//The initial stack size</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">EntryPoint</span><span class="p">;</span><span class="w">         </span><span class="c1">//CS:IP entry point, CS is index into segment table</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">InitStack</span><span class="p">;</span><span class="w">          </span><span class="c1">//SS:SP initial stack pointer, SS is index into segment table</span>
+<span class="w">    </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">SegCount</span><span class="p">;</span><span class="w">           </span><span class="c1">//Number of segments in segment table</span>
+<span class="w">    </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">ModRefs</span><span class="p">;</span><span class="w">            </span><span class="c1">//Number of module references (DLLs)</span>
+<span class="w">    </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">NoResNamesTabSiz</span><span class="p">;</span><span class="w">   </span><span class="c1">//Size of non-resident names table in bytes</span>
+<span class="w">    </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">SegTableOffset</span><span class="p">;</span><span class="w">     </span><span class="c1">//Offset of segment table from start of NE_Header</span>
+<span class="w">    </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">ResTableOffset</span><span class="p">;</span><span class="w">     </span><span class="c1">//Offset of resources table from start of NE_Header</span>
+<span class="w">    </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">ResidNamTable</span><span class="p">;</span><span class="w">      </span><span class="c1">//Offset of resident names table from start of NE_Header</span>
+<span class="w">    </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">ModRefTable</span><span class="p">;</span><span class="w">        </span><span class="c1">//Offset of module reference table from start of NE_Header</span>
+<span class="w">    </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">ImportNameTable</span><span class="p">;</span><span class="w">    </span><span class="c1">//Offset of imported names table from start of NE_Header</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">OffStartNonResTab</span><span class="p">;</span><span class="w">  </span><span class="c1">//Offset of non-resident names table from start of file (!)</span>
+<span class="w">    </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">MovEntryCount</span><span class="p">;</span><span class="w">      </span><span class="c1">//Count of moveable entry point listed in entry table</span>
+<span class="w">    </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">FileAlnSzShftCnt</span><span class="p">;</span><span class="w">   </span><span class="c1">//File alignment size shift count (0=9(default 512 byte pages))</span>
+<span class="w">    </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">nResTabEntries</span><span class="p">;</span><span class="w">     </span><span class="c1">//Number of resource table entries (often inaccurate!)</span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">targOS</span><span class="p">;</span><span class="w">              </span><span class="c1">//Target OS</span>
+
+<span class="w">    </span><span class="c1">//</span>
+<span class="w">    </span><span class="c1">// The rest of these are not defined in the Windows 3.0 standard and</span>
+<span class="w">    </span><span class="c1">// appear to be specific to OS/2.</span>
+
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">OS2EXEFlags</span><span class="p">;</span><span class="w">         </span><span class="c1">//Other OS/2 flags</span>
+<span class="w">    </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">retThunkOffset</span><span class="p">;</span><span class="w">     </span><span class="c1">//Offset to return thunks or start of gangload area - what is gangload?</span>
+<span class="w">    </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">segrefthunksoff</span><span class="p">;</span><span class="w">    </span><span class="c1">//Offset to segment reference thunks or size of gangload area</span>
+<span class="w">    </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">mincodeswap</span><span class="p">;</span><span class="w">        </span><span class="c1">//Minimum code swap area size</span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">expctwinver</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span><span class="w">      </span><span class="c1">//Expected windows version (minor first)</span>
+<span class="p">};</span><span class="w"></span>
+
+<span class="c1">//</span>
+<span class="c1">// In 16-bit DOS/Windows terminology, DGROUP is a segment class that referring</span>
+<span class="c1">// to segments that are used for data.</span>
+<span class="c1">//</span>
+<span class="c1">// Win16 used segmentation to permit a DLL or program to have multiple</span>
+<span class="c1">// instances along with an instance handle and manage multiple data</span>
+<span class="c1">// segments. This allowed one NOTEPAD.EXE code segment to execute</span>
+<span class="c1">// multiple instances of the notepad application.</span>
+<span class="c1">//</span>
+<span class="k">enum</span><span class="w"> </span><span class="nc">FlagWord</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// how is data handled?</span>
+<span class="w">    </span><span class="n">NOAUTODATA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x0000</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">SINGLEDATA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x0001</span><span class="p">,</span><span class="w"> </span><span class="c1">// shared among instances of the same program</span>
+<span class="w">    </span><span class="n">MULTIPLEDATA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x0002</span><span class="p">,</span><span class="w"> </span><span class="c1">// separate for each instance of the same program</span>
+
+<span class="w">    </span><span class="c1">// additional flags:</span>
+<span class="w">    </span><span class="n">LINKERROR</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x2000</span><span class="p">,</span><span class="w"> </span><span class="c1">// Linker error, module cannot load</span>
+<span class="w">    </span><span class="n">LIBMODULE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x8000</span><span class="p">,</span><span class="w"> </span><span class="c1">// if this flag is set, this is a DLL;</span>
+<span class="w">                        </span><span class="c1">// see the "Dynamic Libraries" section below</span>
+<span class="p">};</span><span class="w"></span>
+
+<span class="cp">#define GLOBINIT 1&lt;&lt;2     </span><span class="c1">//global initialization</span>
+<span class="cp">#define PMODEONLY 1&lt;&lt;3    </span><span class="c1">//Protected mode only</span>
+<span class="cp">#define INSTRUC86 1&lt;&lt;4    </span><span class="c1">//8086 instructions</span>
+<span class="cp">#define INSTRU286 1&lt;&lt;5    </span><span class="c1">//80286 instructions</span>
+<span class="cp">#define INSTRU386 1&lt;&lt;6    </span><span class="c1">//80386 instructions</span>
+<span class="cp">#define INSTRUx87 1&lt;&lt;7    </span><span class="c1">//80x87 (FPU) instructions</span>
+
+<span class="c1">//Application flags</span>
+<span class="c1">//Application type</span>
+<span class="k">enum</span><span class="w"> </span><span class="nc">apptype</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">none</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">fullscreeen</span><span class="p">,</span><span class="w">    </span><span class="c1">//fullscreen (not aware of Windows/P.M. API)</span>
+<span class="w">    </span><span class="n">winpmcompat</span><span class="p">,</span><span class="w">    </span><span class="c1">//compatible with Windows/P.M. API</span>
+<span class="w">    </span><span class="n">winpmuses</span><span class="w">       </span><span class="c1">//uses Windows/P.M. API</span>
+<span class="p">};</span><span class="w"></span>
+
+<span class="c1">// #define OS2APP 1&lt;&lt;3    //OS/2 family application</span>
+<span class="c1">// //bit 4 reserved?</span>
+<span class="c1">// #define IMAGEERROR 1&lt;&lt;5    //errors in image/executable</span>
+<span class="c1">// #define NONCONFORM 1&lt;&lt;6    //non-conforming program?</span>
+<span class="c1">// #define DLL        1&lt;&lt;7</span>
+
+<span class="c1">//Target Operating System</span>
+<span class="k">enum</span><span class="w"> </span><span class="nc">targetos</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">unknown</span><span class="p">,</span><span class="w">    </span><span class="c1">//Obvious&nbsp;;)</span>
+<span class="w">    </span><span class="n">os2</span><span class="p">,</span><span class="w">        </span><span class="c1">//OS/2 (as if you hadn't worked that out!)</span>
+<span class="w">    </span><span class="n">win</span><span class="p">,</span><span class="w">        </span><span class="c1">//Windows (Win16)</span>
+<span class="w">    </span><span class="n">dos4</span><span class="p">,</span><span class="w">       </span><span class="c1">//European DOS  4.x</span>
+<span class="w">    </span><span class="n">win386</span><span class="p">,</span><span class="w">     </span><span class="c1">//Windows for the 80386 (Win32s). 32 bit code.</span>
+<span class="w">    </span><span class="n">BOSS</span><span class="w">        </span><span class="c1">//The boss, a.k.a Borland Operating System Services</span>
+<span class="p">};</span><span class="w"></span>
+<span class="c1">//Other OS/2 flags</span>
+<span class="cp">#define LFN 1        </span><span class="c1">//OS/2 Long File Names (finally, no more 8.3 conversion&nbsp;:) )</span>
+<span class="cp">#define PMODE 1&lt;&lt;1   </span><span class="c1">//OS/2 2.x Protected Mode executable</span>
+<span class="cp">#define PFONT 1&lt;&lt;2   </span><span class="c1">//OS/2 2.x Proportional Fonts</span>
+<span class="cp">#define GANGL 1&lt;&lt;3   </span><span class="c1">//OS/2 Gangload area</span>
+</pre></div>
+<p>Which types of processor mode are supported can be ascertained from the following fields:
+</p>
+<table class="wikitable">
+
+<tbody><tr>
+<th><code>expctwinver[1]</code>
+</th>
+<th><code>FlagWord &amp; 0x0008</code>
+</th>
+<th><code>OS2EXEFlags &amp; 0x04</code>
+</th>
+<th>real mode
+</th>
+<th>protected mode
+</th></tr>
+<tr>
+<td>&lt; 3</td>
+<td>any</td>
+<td>0</td>
+<td>yes</td>
+<td>no
+</td></tr>
+<tr>
+<td>&lt; 3</td>
+<td>any</td>
+<td>!= 0</td>
+<td>yes</td>
+<td>yes
+</td></tr>
+<tr>
+<td>3</td>
+<td>0</td>
+<td>any</td>
+<td>yes</td>
+<td>yes
+</td></tr>
+<tr>
+<td>3</td>
+<td>!= 0</td>
+<td>any</td>
+<td>no</td>
+<td>yes
+</td></tr></tbody></table>
+<p>In the following examples, it is assumed that <tt>neHeader</tt> is a variable of type <tt>struct NE_Header</tt>.
+</p>
+<h3><span class="mw-headline" id="Segment_Table">Segment Table</span></h3>
+<p>The segment table is similar to a section table in newer executable formats. Each segment can contain code, data, relocation information, etc.
+</p><p>It is found at <tt>neHeader.SegTableOffset</tt> from the beginning of <tt>neHeader</tt> and occupies <tt>neHeader.SegCount</tt> entries, each 8 bytes long.
+</p>
+<div class="mw-highlight mw-highlight-lang-cpp mw-content-ltr" dir="ltr"><pre><span></span><span class="c1">// The type is a 3-bit integer or'ed together with the other flags.</span>
+<span class="cp">#define SEGFLAGS_TYPE_CODE  0</span>
+<span class="cp">#define SEGFLAGS_TYPE_DATA  1</span>
+<span class="cp">#define SEGFLAGS_TYPE_MASK  0x0007</span>
+
+<span class="cp">#define SEGFLAGS_MOVABLE    0x0010</span>
+<span class="cp">#define SEGFLAGS_PRELOAD    0x0040</span>
+<span class="cp">#define SEGFLAGS_HAS_RELOCS 0x0100</span>
+<span class="cp">#define SEGFLAGS_DISCARD    0xF000</span>
+
+<span class="c1">// Segment table entry</span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint16_t</span><span class="w">    </span><span class="n">SectorBase</span><span class="p">;</span><span class="w"> </span><span class="c1">// offset in sectors from beginning of file;</span>
+<span class="w">                            </span><span class="c1">// byte offset: segEnt.SectorBase * (1 &lt;&lt; neHeader.FileAlnSzShftCnt)</span>
+<span class="w">    </span><span class="kt">uint16_t</span><span class="w">    </span><span class="n">SegBytes</span><span class="p">;</span><span class="w">   </span><span class="c1">// length of segment in file, in bytes</span>
+<span class="w">    </span><span class="kt">uint16_t</span><span class="w">    </span><span class="n">SegFlags</span><span class="p">;</span><span class="w">   </span><span class="c1">// see SEGFLAGS_*</span>
+<span class="w">    </span><span class="kt">uint16_t</span><span class="w">    </span><span class="n">MinAlloc</span><span class="p">;</span><span class="w">   </span><span class="c1">// minimum number of bytes to allocate</span>
+<span class="p">}</span><span class="w"> </span><span class="n">NE_SegEnt</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+<h3><span class="mw-headline" id="Resource_Table">Resource Table</span></h3>
+<p>The resource table contains structures such as icons and version information.
+</p><p>It is found at <tt>neHeader.ResTableOffset</tt> from the beginning of <tt>neHeader</tt>. Its length can only be determined by decoding it.
+</p><p>It begins with a short header:
+</p>
+<div class="mw-highlight mw-highlight-lang-cpp mw-content-ltr" dir="ltr"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint16_t</span><span class="w">    </span><span class="n">AlignmentShiftCount</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"> </span><span class="n">NE_ResourceTableHeader</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+<p>Then follows a table of resource types and resources.
+</p>
+<div class="mw-highlight mw-highlight-lang-cpp mw-content-ltr" dir="ltr"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint16_t</span><span class="w">    </span><span class="n">TypeID</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint16_t</span><span class="w">    </span><span class="n">ResourceCount</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w">    </span><span class="n">Reserved</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"> </span><span class="n">NE_ResourceTypeHeader</span><span class="p">;</span><span class="w"></span>
+
+<span class="cp">#define RESOURCE_FLAGS_MOVEABLE 0x0010</span>
+<span class="cp">#define RESOURCE_FLAGS_PURE     0x0020</span>
+<span class="cp">#define RESOURCE_FLAGS_PRELOAD  0x0040</span>
+
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint16_t</span><span class="w">    </span><span class="n">FileOffset</span><span class="p">;</span><span class="w">     </span><span class="c1">// byte offset of resource from start of file:</span>
+<span class="w">                                </span><span class="c1">// resource.FileOffset * (1 &lt;&lt; resourceTableHeader.AlignmentShiftCount)</span>
+<span class="w">    </span><span class="kt">uint16_t</span><span class="w">    </span><span class="n">ResourceLength</span><span class="p">;</span><span class="w"> </span><span class="c1">// actual number of bytes:</span>
+<span class="w">                                </span><span class="c1">// resource.ResourceLength * (1 &lt;&lt; resourceTableHeader.AlignmentShiftCount)</span>
+<span class="w">    </span><span class="kt">uint16_t</span><span class="w">    </span><span class="n">ResourceFlags</span><span class="p">;</span><span class="w">  </span><span class="c1">// see RESOURCE_FLAGS_*</span>
+<span class="w">    </span><span class="kt">uint16_t</span><span class="w">    </span><span class="n">ResourceID</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w">    </span><span class="n">Reserved</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"> </span><span class="n">NE_Resource</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+<p>These have to be decoded in a loop:
+</p>
+<ol><li>Read a <tt>uint16_t TypeID;</tt>.</li>
+<li>If <tt>TypeID</tt> is 0x0000, this is the end of the resource table; break out of the loop.</li>
+<li>Read the rest of <tt>NE_ResourceTypeHeader</tt>.</li>
+<li>Loop <tt>resourceTypeHeader.ResourceCount</tt> times to read the <tt>NE_Resource</tt> for each resource of the given type.</li></ol>
+<h4><span class="mw-headline" id="Resource_Type_IDs_and_Resource_IDs">Resource Type IDs and Resource IDs</span></h4>
+<p>Resource type IDs and resource IDs are either integers or strings.
+</p><p>If the top bit of the ID is set (0x8000), the ID is an integer ID.
+</p><p>If the top bit is not set, the ID is an offset, in bytes relative to the beginning of the resource table, to the type string.
+</p><p>Type strings are encoded as Pascal strings: one <tt>uint8_t</tt> specifying the length, followed by as many bytes containing the characters. Make sure to add the NUL terminator at the end of the string if you are using Pascal strings with C string functions!
+</p>
+<h3><span class="mw-headline" id="Resident-Name_Table">Resident-Name Table</span></h3>
+<p>The resident-name table contains the name of the module at index 0 followed by the module's exported procedures that stay resident in memory.
+</p><p>It is found at <tt>neHeader.ResidNamTable</tt> from the beginning of <tt>neHeader</tt>. Its length depends on the length of the strings contained within.
+</p><p>The structure of a resident-name table entry is roughly this:
+</p>
+<div class="mw-highlight mw-highlight-lang-cpp mw-content-ltr" dir="ltr"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w">  </span><span class="n">NameLength</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">char</span><span class="w">     </span><span class="n">Name</span><span class="p">[</span><span class="n">NameLength</span><span class="p">];</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">OrdinalNumber</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"> </span><span class="n">NE_ResidentNameEntry</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+<p>As is often the case with NE structures, the resident-name table must be read in a loop:
+</p>
+<ol><li>Read <tt>uint8_t NameLength</tt>.</li>
+<li>If <tt>NameLength</tt> is 0x00, this is the end of the table; break out of the loop.</li>
+<li>Read <tt>NameLength</tt> bytes to obtain the <tt>Name</tt>.</li>
+<li>Read <tt>uint16_t OrdinalNumber</tt>.</li></ol>
+<h3><span class="mw-headline" id="Module-Reference_Table">Module-Reference Table</span></h3>
+<p>The module-reference table is an additional layer of indirection when looking up module names in the imported names table.
+</p><p>It is found at <tt>neHeader.ModRefTable</tt> from the beginning of <tt>neHeader</tt>. Its entries are all of type <tt>uint16_t</tt> and its length in bytes is <tt>neHeader.ModRefs</tt> times 2 (the size of <tt>uint16_t</tt>).
+</p><p>The usage of the module reference table is described below, in the section concerning relocations.
+</p>
+<h3><span class="mw-headline" id="Imported-Name_Table">Imported-Name Table</span></h3>
+<p>The imported name table contains the names of modules and procedures that are being imported by the executable. Its entries are referenced by the module-reference table and the relocation tables of segments.
+</p><p>It is found at <tt>neHeader.ImportNameTable</tt> from the beginning of <tt>neHeader</tt>. Its entries are all Pascal strings:
+</p>
+<div class="mw-highlight mw-highlight-lang-cpp mw-content-ltr" dir="ltr"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w">  </span><span class="n">NameLength</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">char</span><span class="w">     </span><span class="n">Name</span><span class="p">[</span><span class="n">NameLength</span><span class="p">];</span><span class="w"></span>
+<span class="p">}</span><span class="w"> </span><span class="n">NE_ImportedNameTableEntry</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+<p>i.e. one <tt>uint8_t</tt> of length followed by that many bytes of characters. (Make sure to add the NUL terminator at the end of the string if you are using Pascal strings with C string functions!)
+</p><p>The usage of the imported name table is described below, in the section concerning relocations.
+</p>
+<h3><span class="mw-headline" id="Entry_Table">Entry Table</span></h3>
+<p>The entry table contains information about the entry points in the executable and is organized in bundles.
+</p><p>It is found at <tt>neHeader.EntryTableOffset</tt> from the beginning of <tt>neHeader</tt>. Its format differs depending on the segment indicator of each bundle. Let's begin with a few definitions:
+</p>
+<div class="mw-highlight mw-highlight-lang-cpp mw-content-ltr" dir="ltr"><pre><span></span><span class="cp">#define ENTRY_FLAGS_EXPORTED   0x01</span>
+<span class="cp">#define ENTRY_FLAGS_GLOBALDATA 0x02</span>
+
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kt">uint8_t</span><span class="w">  </span><span class="n">EntryFlags</span><span class="p">;</span><span class="w">       </span><span class="c1">// see ENTRY_FLAGS_*</span>
+<span class="w">  </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">EntryPointOffset</span><span class="p">;</span><span class="w"> </span><span class="c1">// entry point offset within segment</span>
+<span class="p">}</span><span class="w"> </span><span class="n">NE_FixedSegmentEntry</span><span class="p">;</span><span class="w"></span>
+
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kt">uint8_t</span><span class="w">  </span><span class="n">EntryFlags</span><span class="p">;</span><span class="w">       </span><span class="c1">// see ENTRY_FLAGS_*</span>
+<span class="w">  </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">Int3fh</span><span class="p">;</span><span class="w">           </span><span class="c1">// constant value (interrupt opcode)</span>
+<span class="w">  </span><span class="kt">uint8_t</span><span class="w">  </span><span class="n">SegmentNumber</span><span class="p">;</span><span class="w">    </span><span class="c1">// number of the movable segment</span>
+<span class="w">  </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">EntryPointOffset</span><span class="p">;</span><span class="w"> </span><span class="c1">// entry point offset within segment</span>
+<span class="p">}</span><span class="w"> </span><span class="n">NE_MovableSegmentEntry</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+<p>The entry table can be decoded bundle for bundle in a loop as follows:
+</p>
+<ol><li>Read <tt>uint8_t EntryCount</tt>.</li>
+<li>If <tt>EntryCount</tt> is 0x00, this is the end of the entry table; break out of the loop.</li>
+<li>Read <tt>uint8_t SegmentIndicator</tt>.</li>
+<li>If <tt>SegmentIndicator</tt> is 0x00, this is a bundle of unused entries. Read no further bytes for this bundle, mark the next <tt>EntryCount</tt> ordinals as unused and continue with step 1.</li>
+<li>If <tt>SegmentIndicator</tt> is 0xFF, these are movable segment entries. Read <tt>EntryCount</tt> structures of type <tt>NE_MovableSegmentEntry</tt>, then continue with step 1.</li>
+<li>If <tt>SegmentIndicator</tt> is any other value, these are fixed segment entries. Read <tt>EntryCount</tt> structures of type <tt>NE_FixedSegmentEntry</tt> (using <tt>SegmentIndicator</tt> as the segment number), then continue with step 1.</li></ol>
+<h3><span class="mw-headline" id="Nonresident-Name_Table">Nonresident-Name Table</span></h3>
+<p>The nonresident-name table contains a description of the module at index 0 followed by the module's exported procedures that do not stay resident in memory.
+</p><p>It is found at <tt>neHeader.OffStartNonResTab</tt> from the <b>beginning of the executable file</b>, in contrast to all other NE tables. Its length depends on the length of the strings contained within.
+</p><p>Its format is the same as that of the resident-name table, described in a previous section.
+</p>
+<h3><span class="mw-headline" id="Relocation_Data">Relocation Data</span></h3>
+<p>If a segment has the <tt>SEGFLAGS_HAS_RELOCS</tt> in <tt>SegFlags</tt> set, its content is followed directly by its relocation table.
+</p><p>To access a segment's relocation data, seek to <tt>segEnt.SectorBase * (1 &lt;&lt; neHeader.FileAlnSzShftCnt) + segEnt.SegBytes</tt>. The structure is as follows:
+</p>
+<div class="mw-highlight mw-highlight-lang-cpp mw-content-ltr" dir="ltr"><pre><span></span><span class="cp">#define ENTRY_FLAGS_EXPORTED   0x01</span>
+<span class="cp">#define ENTRY_FLAGS_GLOBALDATA 0x02</span>
+
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">RelocEntryCount</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">NE_SegRelocationEntry</span><span class="w"> </span><span class="n">Entries</span><span class="p">[</span><span class="n">RelocEntryCount</span><span class="p">];</span><span class="w"></span>
+<span class="p">}</span><span class="w"> </span><span class="n">NE_SegRelocationInfo</span><span class="p">;</span><span class="w"></span>
+
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kt">uint8_t</span><span class="w">  </span><span class="n">Source</span><span class="p">;</span><span class="w">            </span><span class="c1">// see RELOC_SOURCE_*</span>
+<span class="w">  </span><span class="kt">uint8_t</span><span class="w">  </span><span class="n">FlagsAndTarget</span><span class="p">;</span><span class="w">    </span><span class="c1">// one of RELOC_TARGET_* OR'ed with any number of RELOC_FLAGS_*</span>
+<span class="w">  </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">SourceChainOffset</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">union</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// variant depends on target within FlagsAndTarget (see RELOC_TARGET_*)</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="kt">uint8_t</span><span class="w">  </span><span class="n">SegmentNumber</span><span class="p">;</span><span class="w"> </span><span class="c1">// 0xFF == movable segment, other value == fixed segment</span>
+<span class="w">      </span><span class="kt">uint8_t</span><span class="w">  </span><span class="n">Zero</span><span class="p">;</span><span class="w">          </span><span class="c1">// always 0</span>
+<span class="w">      </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">SegmentIndex</span><span class="p">;</span><span class="w">  </span><span class="c1">// if fixed segment: offset into segment;</span>
+<span class="w">                              </span><span class="c1">// if movable segment: ordinal number index into Entry Table</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="n">InternalRef</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">ModRefTableIndex</span><span class="p">;</span><span class="w"> </span><span class="c1">// index into module reference table</span>
+<span class="w">      </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">ProcNameOffset</span><span class="p">;</span><span class="w">   </span><span class="c1">// offset from start of imported-names table to procedure name string</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="n">ImportName</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">ModRefTableIndex</span><span class="p">;</span><span class="w"> </span><span class="c1">// index into module reference table</span>
+<span class="w">      </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">OrdinalNumber</span><span class="p">;</span><span class="w">    </span><span class="c1">// ordinal number of the procedure</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="n">ImportOrdinal</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">OSFixupType</span><span class="p">;</span><span class="w"> </span><span class="c1">// see OS_FIXUP_TYPE_*</span>
+<span class="w">      </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">Zero</span><span class="p">;</span><span class="w">        </span><span class="c1">// always 0</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="n">OSFixup</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="n">Value</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"> </span><span class="n">NE_SegRelocationEntry</span><span class="p">;</span><span class="w"></span>
+
+<span class="cp">#define RELOC_SOURCE_LOW_BYTE 0x00</span>
+<span class="cp">#define RELOC_SOURCE_SEGMENT 0x02</span>
+<span class="cp">#define RELOC_SOURCE_FAR_ADDR 0x03 </span><span class="cm">/* (32-bit pointer) */</span><span class="cp"></span>
+<span class="cp">#define RELOC_SOURCE_OFFSET 0x05 </span><span class="cm">/* (16-bit offset) */</span><span class="cp"></span>
+
+<span class="cp">#define RELOC_TARGET_INTERNAL_REF 0x00</span>
+<span class="cp">#define RELOC_TARGET_IMPORT_ORDINAL 0x01</span>
+<span class="cp">#define RELOC_TARGET_IMPORT_NAME 0x02</span>
+<span class="cp">#define RELOC_TARGET_OS_FIXUP 0x03</span>
+<span class="cp">#define RELOC_TARGET_MASK 0x03</span>
+
+<span class="cp">#define RELOC_FLAGS_ADDITIVE 0x04</span>
+<span class="cp">#define RELOC_FLAGS_MASK 0xFC</span>
+
+<span class="cp">#define OS_FIXUP_TYPE_FIARQQ_FJARQQ 0x0001</span>
+<span class="cp">#define OS_FIXUP_TYPE_FISRQQ_FJSRQQ 0x0002</span>
+<span class="cp">#define OS_FIXUP_TYPE_FICRQQ_FJCRQQ 0x0003</span>
+<span class="cp">#define OS_FIXUP_TYPE_FIERQQ        0x0004</span>
+<span class="cp">#define OS_FIXUP_TYPE_FIDRQQ        0x0005</span>
+<span class="cp">#define OS_FIXUP_TYPE_FIWRQQ        0x0006</span>
+</pre></div>
+<p>To find the module name for an <tt>IMPORT_NAME</tt> or <tt>IMPORT_ORDINAL</tt> relocation, do the following:
+</p>
+<ol><li>Remember your current location in the file.</li>
+<li>Calculate the offset <tt>startOfNeHeader + neHeader.ModRefTable + 2 * (segRelocationEntry.ImportName.ModRefTableIndex - 1)</tt> and seek to it.</li>
+<li>Read <tt>uint16_t moduleNameOffset</tt>.</li>
+<li>Calculate the offset <tt>startOfNeHeader + neHeader.ImportNameTable + moduleNameOffset</tt> and seek to it.</li>
+<li>Read the Pascal string (one <tt>uint8_t</tt> of length, that many bytes of character data) at that location. (Make sure to add the NUL terminator at the end of the string if you are using Pascal strings with C string functions!)</li>
+<li>Seek to the location remembered in the first step.</li></ol>
+<p>(You may wish to store the names in a lookup table mapping <tt>ModRefTableIndex</tt> to module names to speed up repeated lookups of the same index.)
+</p><p>To find the procedure name for an <tt>IMPORT_NAME</tt> relocation, do the following:
+</p>
+<ol><li>Remember your current location in the file.</li>
+<li>Calculate the offset <tt>startOfNeHeader + neHeader.ImportNameTable + segRelocationEntry.ImportName.ProcNameOffset</tt> and seek to it.</li>
+<li>Read the Pascal string (one <tt>uint8_t</tt> of length, that many bytes of character data) at that location. (Make sure to add the NUL terminator at the end of the string if you are using Pascal strings with C string functions!)</li>
+<li>Seek to the location remembered in the first step.</li></ol>
+<h2><span class="mw-headline" id="Dynamic_Libraries">Dynamic Libraries</span></h2>
+<p>If the module is a DLL, the CS:IP in the header is instead the load procedure of the DLL and SS:SP is unused (since libraries do not get their own stacks). It takes the module handle in AX, which is an opaque data type that represents an EXE or a DLL when loaded in memory. On return it outputs a AX!=0 for SUCCESS and AX==0 for failure, which is unusual but very important.
+</p>
+<h2><span class="mw-headline" id="See_Also">See Also</span></h2>
+<h3><span class="mw-headline" id="NE">NE</span></h3>
+<ul><li><a rel="nofollow" class="external text" href="http://benoit.papillault.free.fr/c/disc2/exefmt.txt">Executable-File Header Format</a></li>
+<li><a rel="nofollow" class="external text" href="http://www.fileformat.info/format/exe/corion-ne.htm">fileformat.info</a></li></ul>
+<h3><span class="mw-headline" id="Similar_Formats">Similar Formats</span></h3>
+<ul><li><a href="https://wiki.osdev.org/MZ" title="MZ">MZ</a></li>
+<li><a href="https://wiki.osdev.org/PE" title="PE">PE</a></li></ul>
+<!-- 
+NewPP limit report
+Cached time: 20251112065047
+Cache expiry: 86400
+Reduced expiry: false
+Complications: [show‐toc]
+CPU time usage: 0.035 seconds
+Real time usage: 0.036 seconds
+Preprocessor visited node count: 401/1000000
+Post‐expand include size: 1654/2097152 bytes
+Template argument size: 922/2097152 bytes
+Highest expansion depth: 8/100
+Expensive parser function count: 0/100
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 30141/5000000 bytes
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    6.282      1 Template:File_formats
+100.00%    6.282      1 -total
+ 88.72%    5.573      1 Template:SmallNavBox
+ 67.21%    4.222     20 Template:If
+ 44.22%    2.778     20 Template:Show1
+-->
+
+<!-- Saved in parser cache with key wikidb:pcache:idhash:1957-0!canonical and timestamp 20251112065047 and revision id 29636.
+ -->
+</div>
+<div class="printfooter" data-nosnippet="">Retrieved from "<a dir="ltr" href="https://wiki.osdev.org/index.php?title=NE&amp;oldid=29636">https://wiki.osdev.org/index.php?title=NE&amp;oldid=29636</a>"</div></div>
+		<div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks"><a href="https://wiki.osdev.org/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="https://wiki.osdev.org/index.php?title=Category:Pages_using_duplicate_arguments_in_template_calls&amp;action=edit&amp;redlink=1" class="new" title="Category:Pages using duplicate arguments in template calls (page does not exist)">Pages using duplicate arguments in template calls</a></li><li><a href="https://wiki.osdev.org/Category:Executable_Formats" title="Category:Executable Formats">Executable Formats</a></li></ul></div></div>
+	</div>
+</div>
+
+<div id="mw-navigation">
+	<h2>Navigation menu</h2>
+	<div id="mw-head">
+		
+
+<nav id="p-personal" class="vector-menu mw-portlet mw-portlet-personal vector-user-menu-legacy" aria-labelledby="p-personal-label" role="navigation">
+	<h3 id="p-personal-label" class="vector-menu-heading ">
+		<span class="vector-menu-heading-label">Personal tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="pt-login" class="mw-list-item"><a href="https://wiki.osdev.org/index.php?title=Special:UserLogin&amp;returnto=NE" title="You are encouraged to log in; however, it is not mandatory [alt-shift-o]" accesskey="o"><span>Log in</span></a></li><li id="pt-darkmode" class="mw-list-item"><a href="https://wiki.osdev.org/NE#" class="ext-darkmode-link"><span>Dark mode</span></a></li></ul>
+		
+	</div>
+</nav>
+
+		<div id="left-navigation">
+			
+
+<nav id="p-namespaces" class="vector-menu mw-portlet mw-portlet-namespaces vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-namespaces-label" role="navigation">
+	<h3 id="p-namespaces-label" class="vector-menu-heading ">
+		<span class="vector-menu-heading-label">Namespaces</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="ca-nstab-main" class="selected mw-list-item"><a href="https://wiki.osdev.org/NE" title="View the content page [alt-shift-c]" accesskey="c"><span>Page</span></a></li><li id="ca-talk" class="mw-list-item"><a href="https://wiki.osdev.org/Talk:NE" rel="discussion" title="Discussion about the content page [alt-shift-t]" accesskey="t"><span>Discussion</span></a></li></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-variants" class="vector-menu mw-portlet mw-portlet-variants emptyPortlet vector-menu-dropdown" aria-labelledby="p-variants-label" role="navigation">
+	<input type="checkbox" id="p-variants-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-variants" class="vector-menu-checkbox" aria-labelledby="p-variants-label">
+	<label id="p-variants-label" aria-label="Change language variant" class="vector-menu-heading ">
+		<span class="vector-menu-heading-label">English</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+		</div>
+		<div id="right-navigation">
+			
+
+<nav id="p-views" class="vector-menu mw-portlet mw-portlet-views vector-menu-tabs vector-menu-tabs-legacy" aria-labelledby="p-views-label" role="navigation">
+	<h3 id="p-views-label" class="vector-menu-heading ">
+		<span class="vector-menu-heading-label">Views</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="ca-view" class="selected mw-list-item collapsible"><a href="https://wiki.osdev.org/NE"><span>Read</span></a></li><li id="ca-viewsource" class="mw-list-item collapsible"><a href="https://wiki.osdev.org/index.php?title=NE&amp;action=edit" title="This page is protected.
+You can view its source [alt-shift-e]" accesskey="e"><span>View source</span></a></li><li id="ca-history" class="mw-list-item collapsible"><a href="https://wiki.osdev.org/index.php?title=NE&amp;action=history" title="Past revisions of this page [alt-shift-h]" accesskey="h"><span>View history</span></a></li></ul>
+		
+	</div>
+</nav>
+
+			
+
+<nav id="p-cactions" class="vector-menu mw-portlet mw-portlet-cactions emptyPortlet vector-menu-dropdown" aria-labelledby="p-cactions-label" role="navigation" title="More options">
+	<input type="checkbox" id="p-cactions-checkbox" role="button" aria-haspopup="true" data-event-name="ui.dropdown-p-cactions" class="vector-menu-checkbox" aria-labelledby="p-cactions-label">
+	<label id="p-cactions-label" class="vector-menu-heading ">
+		<span class="vector-menu-heading-label">More</span>
+	</label>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"></ul>
+		
+	</div>
+</nav>
+
+			
+<div id="p-search" role="search" class="vector-search-box-vue  vector-search-box-show-thumbnail vector-search-box-auto-expand-width vector-search-box">
+	<div>
+			<h3>
+				<label for="searchInput">Search</label>
+			</h3>
+		<form action="https://wiki.osdev.org/index.php" id="searchform" class="vector-search-box-form">
+			<div id="simpleSearch" class="vector-search-box-inner" data-search-loc="header-navigation">
+				<input class="vector-search-box-input" type="search" name="search" placeholder="Search OSDev Wiki" aria-label="Search OSDev Wiki" autocapitalize="sentences" title="Search OSDev Wiki [alt-shift-f]" accesskey="f" id="searchInput">
+				<input type="hidden" name="title" value="Special:Search">
+				<input id="mw-searchButton" class="searchButton mw-fallbackSearchButton" type="submit" name="fulltext" title="Search the pages for this text" value="Search">
+				<input id="searchButton" class="searchButton" type="submit" name="go" title="Go to a page with this exact name if it exists" value="Go">
+			</div>
+		</form>
+	</div>
+</div>
+
+		</div>
+	</div>
+	
+
+<div id="mw-panel">
+	<div id="p-logo" role="banner">
+		<a class="mw-wiki-logo" href="https://wiki.osdev.org/Main_Page" title="Visit the main page"></a>
+	</div>
+	
+
+<nav id="p-navigation" class="vector-menu mw-portlet mw-portlet-navigation vector-menu-portal portal" aria-labelledby="p-navigation-label" role="navigation">
+	<h3 id="p-navigation-label" class="vector-menu-heading ">
+		<span class="vector-menu-heading-label">Navigation</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="n-mainpage" class="mw-list-item"><a href="https://wiki.osdev.org/Main_Page" title="Visit the main page [alt-shift-z]" accesskey="z"><span>Main Page</span></a></li><li id="n-portal" class="mw-list-item"><a href="http://forum.osdev.org/" rel="nofollow" title="About the project, what you can do, where to find things"><span>Forums</span></a></li><li id="n-FAQ" class="mw-list-item"><a href="https://wiki.osdev.org/Category:FAQ"><span>FAQ</span></a></li><li id="n-OS-Projects" class="mw-list-item"><a href="https://wiki.osdev.org/Projects"><span>OS Projects</span></a></li><li id="n-randompage" class="mw-list-item"><a href="https://wiki.osdev.org/Special:Random" title="Load a random page [alt-shift-x]" accesskey="x"><span>Random page</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+
+<nav id="p-about" class="vector-menu mw-portlet mw-portlet-about vector-menu-portal portal" aria-labelledby="p-about-label" role="navigation">
+	<h3 id="p-about-label" class="vector-menu-heading ">
+		<span class="vector-menu-heading-label">About</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="n-This-site" class="mw-list-item"><a href="https://wiki.osdev.org/OSDevWiki:About"><span>This site</span></a></li><li id="n-Joining" class="mw-list-item"><a href="https://wiki.osdev.org/OSDevWiki:Joining"><span>Joining</span></a></li><li id="n-Editing-help" class="mw-list-item"><a href="https://wiki.osdev.org/OSDevWiki:Editing"><span>Editing help</span></a></li><li id="n-recentchanges" class="mw-list-item"><a href="https://wiki.osdev.org/Special:RecentChanges" title="A list of recent changes in the wiki [alt-shift-r]" accesskey="r"><span>Recent changes</span></a></li></ul>
+		
+	</div>
+</nav>
+
+
+<nav id="p-tb" class="vector-menu mw-portlet mw-portlet-tb vector-menu-portal portal" aria-labelledby="p-tb-label" role="navigation">
+	<h3 id="p-tb-label" class="vector-menu-heading ">
+		<span class="vector-menu-heading-label">Tools</span>
+	</h3>
+	<div class="vector-menu-content">
+		
+		<ul class="vector-menu-content-list"><li id="t-whatlinkshere" class="mw-list-item"><a href="https://wiki.osdev.org/Special:WhatLinksHere/NE" title="A list of all wiki pages that link here [alt-shift-j]" accesskey="j"><span>What links here</span></a></li><li id="t-recentchangeslinked" class="mw-list-item"><a href="https://wiki.osdev.org/Special:RecentChangesLinked/NE" rel="nofollow" title="Recent changes in pages linked from this page [alt-shift-k]" accesskey="k"><span>Related changes</span></a></li><li id="t-specialpages" class="mw-list-item"><a href="https://wiki.osdev.org/Special:SpecialPages" title="A list of all special pages [alt-shift-q]" accesskey="q"><span>Special pages</span></a></li><li id="t-print" class="mw-list-item"><a href="javascript:print();" rel="alternate" title="Printable version of this page [alt-shift-p]" accesskey="p"><span>Printable version</span></a></li><li id="t-permalink" class="mw-list-item"><a href="https://wiki.osdev.org/index.php?title=NE&amp;oldid=29636" title="Permanent link to this revision of this page"><span>Permanent link</span></a></li><li id="t-info" class="mw-list-item"><a href="https://wiki.osdev.org/index.php?title=NE&amp;action=info" title="More information about this page"><span>Page information</span></a></li></ul>
+		
+	</div>
+</nav>
+
+	
+</div>
+
+</div>
+
+<footer id="footer" class="mw-footer" role="contentinfo">
+	<ul id="footer-info">
+	<li id="footer-info-lastmod"> This page was last edited on 31 August 2025, at 18:33.</li>
+	<li id="footer-info-0">This page has been accessed 18,515 times.</li>
+</ul>
+
+	<ul id="footer-places">
+	<li id="footer-places-privacy"><a href="https://wiki.osdev.org/OSDev_Wiki:Privacy_policy">Privacy policy</a></li>
+	<li id="footer-places-about"><a href="https://wiki.osdev.org/OSDev_Wiki:About">About OSDev Wiki</a></li>
+	<li id="footer-places-disclaimer"><a href="https://wiki.osdev.org/OSDev_Wiki:General_disclaimer">Disclaimers</a></li>
+	<li id="footer-places-mobileview"><a href="https://wiki.osdev.org/index.php?title=NE&amp;mobileaction=toggle_view_mobile" class="noprint stopMobileRedirectToggle">Mobile view</a></li>
+</ul>
+
+	<ul id="footer-icons" class="noprint">
+	<li id="footer-poweredbyico"><a href="https://www.mediawiki.org/"><img src="./NE - OSDev Wiki_files/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" srcset="/resources/assets/poweredby_mediawiki_132x47.png 1.5x, /resources/assets/poweredby_mediawiki_176x62.png 2x" width="88" height="31" loading="lazy"></a></li>
+</ul>
+
+</footer>
+
+<script>(RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgPageParseReport":{"limitreport":{"cputime":"0.035","walltime":"0.036","ppvisitednodes":{"value":401,"limit":1000000},"postexpandincludesize":{"value":1654,"limit":2097152},"templateargumentsize":{"value":922,"limit":2097152},"expansiondepth":{"value":8,"limit":100},"expensivefunctioncount":{"value":0,"limit":100},"unstrip-depth":{"value":0,"limit":20},"unstrip-size":{"value":30141,"limit":5000000},"timingprofile":["100.00%    6.282      1 Template:File_formats","100.00%    6.282      1 -total"," 88.72%    5.573      1 Template:SmallNavBox"," 67.21%    4.222     20 Template:If"," 44.22%    2.778     20 Template:Show1"]},"cachereport":{"timestamp":"20251112065047","ttl":86400,"transientcontent":false}}});mw.config.set({"wgBackendResponseTime":107});});</script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99d74bf91d2eabcd',t:'MTc2Mjk2Mzc5Nw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><iframe height="1" width="1" style="position: absolute; top: 0px; left: 0px; border: none; visibility: hidden;" src="./NE - OSDev Wiki_files/saved_resource.html"></iframe><script defer="" src="./NE - OSDev Wiki_files/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;ca8edd89ae604cb093371c5ef552b991&quot;,&quot;r&quot;:1,&quot;server_timing&quot;:{&quot;name&quot;:{&quot;cfCacheStatus&quot;:true,&quot;cfEdge&quot;:true,&quot;cfExtPri&quot;:true,&quot;cfL4&quot;:true,&quot;cfOrigin&quot;:true,&quot;cfSpeedBrain&quot;:true},&quot;location_startswith&quot;:null}}" crossorigin="anonymous"></script>
+
+</body><grammarly-desktop-integration data-grammarly-shadow-root="true"><template shadowrootmode="open"><style>
+      div.grammarly-desktop-integration {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select:none;
+        user-select:none;
+      }
+
+      div.grammarly-desktop-integration:before {
+        content: attr(data-content);
+      }
+    </style><div aria-label="grammarly-integration" role="group" tabindex="-1" class="grammarly-desktop-integration" data-content="{&quot;mode&quot;:&quot;limited&quot;,&quot;isActive&quot;:false,&quot;isUserDisabled&quot;:false}"></div></template></grammarly-desktop-integration></html>

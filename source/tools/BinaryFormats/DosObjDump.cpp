@@ -40,5 +40,6 @@ WIN16EXEFilePtr loadWin16ExeFile(FileType fileType, char* buffer, LONGLONG fileS
 		ptr->segmentTable.push_back(segmentTableEntry);
 		offset += sizeof(NESegmentTableEntry);
 	}
+	offset = neHeader->ResTableOffset;
 	return ptr;
 }

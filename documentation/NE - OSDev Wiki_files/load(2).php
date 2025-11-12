@@ -1,0 +1,1 @@
+.client-darkmode .mw-wiki-logo{filter:invert(1) hue-rotate(180deg);-webkit-filter:invert(1) hue-rotate(180deg)}div.mw-geshi div,div.mw-geshi div pre,span.mw-geshi,pre.source-css,pre.source-javascript{font-family:monospace,Courier !important}
