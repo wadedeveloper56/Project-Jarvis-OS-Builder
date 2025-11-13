@@ -219,7 +219,7 @@ void DumpSymbolTable(COFFSymbolTable* pSymTab)
 	}
 }
 
-void DumpDOSHeader(PIMAGE_DOS_HEADER dosHeader)
+void DumpDOSHeader(DosHeaderPtr dosHeader)
 {
 	printf("DOS HEADER VALUES\n");
 	printf("  % 16X Magic number\n", dosHeader->e_magic);
@@ -267,7 +267,7 @@ void DumpFileHeader(NTFileHeaderPtr pImageFileHeader)
 	printf("\n");
 }
 
-void DumpOptionalHeader64(PIMAGE_OPTIONAL_HEADER64 optionalHeader)
+void DumpOptionalHeader64(NTOptionalHeader64Ptr optionalHeader)
 {
 	printf("OPTIONAL HEADER VALUES (64-bit)\n");
 	printf("  % 16X magic\n", optionalHeader->Magic);
@@ -335,7 +335,7 @@ void DumpOptionalHeader64(PIMAGE_OPTIONAL_HEADER64 optionalHeader)
 	}
 }
 
-void DumpOptionalHeader32(PIMAGE_OPTIONAL_HEADER32 optionalHeader)
+void DumpOptionalHeader32(NTOptionalHeader32Ptr optionalHeader)
 {
 	printf("OPTIONAL HEADER VALUES (32-bit)\n");
 	printf("  % 16X magic\n", optionalHeader->Magic);
@@ -552,7 +552,7 @@ void DumpDebugDirectory(DebugPtr debug)
 	printf("\n");
 }
 
-void DumpLoadConfig32Directory(PIMAGE_LOAD_CONFIG_DIRECTORY32 load32)
+void DumpLoadConfig32Directory(NTLoadConfigDirectory32Ptr load32)
 {
 	if (load32 == NULL)
 	{
@@ -611,7 +611,7 @@ void DumpLoadConfig32Directory(PIMAGE_LOAD_CONFIG_DIRECTORY32 load32)
 	}
 }
 
-void DumpLoadConfig64Directory(PIMAGE_LOAD_CONFIG_DIRECTORY64 load64)
+void DumpLoadConfig64Directory(NTLoadConfigDirectory64Ptr load64)
 {
 	if (load64==NULL)
 	{

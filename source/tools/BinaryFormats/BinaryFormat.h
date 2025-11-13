@@ -221,7 +221,7 @@ typedef struct BINARYFORMATS_API _ResourcesEntry
 typedef struct BINARYFORMATS_API _Resources
 {
 	vector<ResourcesEntryPtr> entries;
-	IMAGE_RESOURCE_DIRECTORY header;
+	NTResourceDirectory header;
 	_Resources();
 }Resources, * ResourcesPtr, ** ResourcesPtrPtr;
 
@@ -235,7 +235,7 @@ typedef struct BINARYFORMATS_API _ExportsFunctions
 
 typedef struct BINARYFORMATS_API _Exports
 {
-	IMAGE_EXPORT_DIRECTORY exports;
+	NTExportDirectory exports;
 	char* filename;
 	vector<ExportsFunctionsPtr> functions;
 	_Exports();
@@ -243,21 +243,21 @@ typedef struct BINARYFORMATS_API _Exports
 
 typedef struct BINARYFORMATS_API _Thunk64
 {
-	IMAGE_THUNK_DATA64 thunk;
+	NTThunkData64 thunk;
 	NTImportByNamePtr ordinalname;
 	_Thunk64();
 } Thunk64, * Thunk64Ptr;
 
 typedef struct BINARYFORMATS_API _Thunk32
 {
-	IMAGE_THUNK_DATA32 thunk;
+	NTThunkData32 thunk;
 	NTImportByNamePtr ordinalname;
 	_Thunk32();
 } Thunk32, * Thunk32Ptr;
 
 typedef struct BINARYFORMATS_API _Imports
 {
-	IMAGE_IMPORT_DESCRIPTOR imports;
+	NTImportDesciptor imports;
 	vector<Thunk64Ptr> thunk64;
 	vector<Thunk64Ptr> thunkIAT64;
 	vector<Thunk32Ptr> thunk32;
@@ -275,14 +275,14 @@ typedef struct BINARYFORMATS_API _RelocsEntry
 
 typedef struct BINARYFORMATS_API _Relocs
 {
-	IMAGE_BASE_RELOCATION baseReloc;
+	NTBaseRelocation baseReloc;
 	vector<RelocsEntryPtr> entries;
 	_Relocs();
 } Relocs, * RelocsPtr;
 
 typedef struct BINARYFORMATS_API _DebugEntry
 {
-	IMAGE_DEBUG_DIRECTORY entry;
+	NTDebugDirectory entry;
 	const char* debugFormat;
 	_DebugEntry();
 } DebugEntry, * DebugEntryPtr;
@@ -296,20 +296,20 @@ typedef struct BINARYFORMATS_API _Debug
 typedef struct BINARYFORMATS_API _EXEFile
 {
 	FileType fileType;
-	IMAGE_DOS_HEADER dosHeader;
+	DosHeader dosHeader;
 	DWORD Signature;
-	IMAGE_FILE_HEADER FileHeader;
+	NTFileHeader FileHeader;
 	union {
-		IMAGE_OPTIONAL_HEADER32 OptionalHeader32;
-		IMAGE_OPTIONAL_HEADER64 OptionalHeader64;
+		NTOptionalHeader32 OptionalHeader32;
+		NTOptionalHeader64 OptionalHeader64;
 	} DUMMYUNIONNAME;
 	Resources resourcesDirectory;
 	ExportsPtr exportDirectory;
 	vector<ImportsPtr> importDirectory;
 	vector<RelocsPtr> baseRelocationsDirectory;
 	union {
-		IMAGE_LOAD_CONFIG_DIRECTORY32 loadConfiguration32BitDirectory;
-		IMAGE_LOAD_CONFIG_DIRECTORY64 loadConfiguration64BitDirectory;
+		NTLoadConfigDirectory32 loadConfiguration32BitDirectory;
+		NTLoadConfigDirectory64 loadConfiguration64BitDirectory;
 	} DUMMYUNIONNAME2;
 	DebugPtr debugDirectory;
 	vector<OBJSectionPtr> sectionTable;
@@ -399,7 +399,7 @@ BINARYFORMATS_API DWORD GetImgDirEntryRVA(FileType fileType, PVOID pNTHdr, DWORD
 BINARYFORMATS_API NTSectionHeaderPtr GetSectionHeader(FileType fileType, PSTR name, PVOID pNTHeader);
 BINARYFORMATS_API DWORD GetImgDirEntrySize(FileType fileType, PVOID pNTHdr, DWORD IDE);
 BINARYFORMATS_API NTSectionHeaderPtr GetEnclosingSectionHeader(FileType fileType, DWORD rva, PVOID pNTHeader);
-BINARYFORMATS_API LPVOID GetPtrFromRVA(FileType fileType, DWORD rva, PIMAGE_NT_HEADERS32 pNTHeader, char* imageBase);
+BINARYFORMATS_API LPVOID GetPtrFromRVA(FileType fileType, DWORD rva, NTHeaders32Ptr pNTHeader, char* imageBase);
 BINARYFORMATS_API void loadDOSEXE(EXEFilePtr result, DosHeaderPtr dosHeader);
 BINARYFORMATS_API void loadPEHeaders(FileType fileType, EXEFilePtr result, NTHeaders32Ptr pImgFileHdr);
 BINARYFORMATS_API void loadPESections(EXEFilePtr result, char* buffer, NTHeaders32Ptr pImgFileHdr);
@@ -418,17 +418,17 @@ BINARYFORMATS_API void GetObjRelocationName(WORD type, PSTR buffer, DWORD cBytes
 BINARYFORMATS_API void DumpSection(int i, OBJSectionPtr ptr);
 BINARYFORMATS_API void GetSectionName(WORD section, PSTR buffer, unsigned cbBuffer);
 BINARYFORMATS_API void DumpSymbolTable(COFFSymbolTable* pSymTab);
-BINARYFORMATS_API void DumpDOSHeader(PIMAGE_DOS_HEADER dosHeader);
+BINARYFORMATS_API void DumpDOSHeader(DosHeaderPtr dosHeader);
 BINARYFORMATS_API void DumpFileHeader(NTFileHeaderPtr pImageFileHeader);
-BINARYFORMATS_API void DumpOptionalHeader64(PIMAGE_OPTIONAL_HEADER64 optionalHeader);
-BINARYFORMATS_API void DumpOptionalHeader32(PIMAGE_OPTIONAL_HEADER32 optionalHeader);
+BINARYFORMATS_API void DumpOptionalHeader64(NTOptionalHeader64Ptr optionalHeader);
+BINARYFORMATS_API void DumpOptionalHeader32(NTOptionalHeader32Ptr optionalHeader);
 BINARYFORMATS_API void DumpExportDirectory(ExportsPtr exportDir);
 BINARYFORMATS_API void DumpImportDirectory(bool is64, vector<ImportsPtr>* imports);
 BINARYFORMATS_API void DumpResourcesDirectory(ResourcesPtr resources);
 BINARYFORMATS_API void DumpBaseRelocationsDirectory(vector<RelocsPtr>* relocs);
 BINARYFORMATS_API void DumpDebugDirectory(DebugPtr debug);
-BINARYFORMATS_API void DumpLoadConfig32Directory(PIMAGE_LOAD_CONFIG_DIRECTORY32 load32);
-BINARYFORMATS_API void DumpLoadConfig64Directory(PIMAGE_LOAD_CONFIG_DIRECTORY64 load64);
+BINARYFORMATS_API void DumpLoadConfig32Directory(NTLoadConfigDirectory32Ptr load32);
+BINARYFORMATS_API void DumpLoadConfig64Directory(NTLoadConfigDirectory64Ptr load64);
 BINARYFORMATS_API void DumpLibFile(LIBFilePtr ptr);
 BINARYFORMATS_API void DumpDOSObjFile(DOSOBJFilePtr ptr);
 //DosObjDump.cpp
