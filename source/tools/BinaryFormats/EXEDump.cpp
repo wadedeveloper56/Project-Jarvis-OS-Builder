@@ -34,29 +34,29 @@ const char* SzRelocTypes[] = { "ABSOLUTE","HIGH","LOW","HIGHLOW","HIGHADJ","MIPS
 DWORD GetImgDirEntryRVA(FileType fileType, PVOID pNTHdr, DWORD IDE)
 {
 	DWORD rva = 0;
-	if (fileType==PE64EXE) {
-		PIMAGE_NT_HEADERS64 p64 = (PIMAGE_NT_HEADERS64)pNTHdr;
+	if (fileType == PE64EXE) {
+		NTHeaders64Ptr p64 = (NTHeaders64Ptr)pNTHdr;
 		rva = p64->OptionalHeader.DataDirectory[IDE].VirtualAddress;
 	}
 	else {
-		PIMAGE_NT_HEADERS32 p32 = (PIMAGE_NT_HEADERS32)pNTHdr;
+		NTHeaders32Ptr p32 = (NTHeaders32Ptr)pNTHdr;
 		rva = p32->OptionalHeader.DataDirectory[IDE].VirtualAddress;
 	}
 	return rva;
 }
 
-PIMAGE_SECTION_HEADER GetSectionHeader(FileType fileType, PSTR name, PVOID pNTHeader)
+NTSectionHeaderPtr GetSectionHeader(FileType fileType, PSTR name, PVOID pNTHeader)
 {
-	PIMAGE_SECTION_HEADER section;
+	NTSectionHeaderPtr section;
 	int numberOfSections;
-	if (fileType==PE64EXE) {
-		PIMAGE_NT_HEADERS64 p64 = (PIMAGE_NT_HEADERS64)pNTHeader;
-		section = IMAGE_FIRST_SECTION(p64);
+	if (fileType == PE64EXE) {
+		NTHeaders64Ptr p64 = (NTHeaders64Ptr)pNTHeader;
+		section = PEEXE_FIRST_SECTION(NTSectionHeaderPtr, p64);
 		numberOfSections = p64->FileHeader.NumberOfSections;
 	}
 	else {
-		PIMAGE_NT_HEADERS32 p32 = (PIMAGE_NT_HEADERS32)pNTHeader;
-		section = IMAGE_FIRST_SECTION(p32);
+		NTHeaders32Ptr p32 = (NTHeaders32Ptr)pNTHeader;
+		section = PEEXE_FIRST_SECTION(NTSectionHeaderPtr, p32);
 		numberOfSections = p32->FileHeader.NumberOfSections;
 	}
 
@@ -72,30 +72,30 @@ PIMAGE_SECTION_HEADER GetSectionHeader(FileType fileType, PSTR name, PVOID pNTHe
 DWORD GetImgDirEntrySize(FileType fileType, PVOID pNTHdr, DWORD IDE)
 {
 	DWORD size = 0;
-	if (fileType==PE64EXE) {
-		PIMAGE_NT_HEADERS64 p64 = (PIMAGE_NT_HEADERS64)pNTHdr;
+	if (fileType == PE64EXE) {
+		NTHeaders64Ptr p64 = (NTHeaders64Ptr)pNTHdr;
 		size = p64->OptionalHeader.DataDirectory[IDE].Size;
 	}
 	else {
-		PIMAGE_NT_HEADERS32 p32 = (PIMAGE_NT_HEADERS32)pNTHdr;
+		NTHeaders32Ptr p32 = (NTHeaders32Ptr)pNTHdr;
 		size = p32->OptionalHeader.DataDirectory[IDE].Size;
 	}
 	return size;
 
 }
 
-PIMAGE_SECTION_HEADER GetEnclosingSectionHeader(FileType fileType, DWORD rva, PVOID pNTHeader)
+NTSectionHeaderPtr GetEnclosingSectionHeader(FileType fileType, DWORD rva, PVOID pNTHeader)
 {
-	PIMAGE_SECTION_HEADER section;
+	NTSectionHeaderPtr section;
 	int numberOfSections;
-	if (fileType==PE64EXE) {
-		PIMAGE_NT_HEADERS64 p64 = (PIMAGE_NT_HEADERS64)pNTHeader;
-		section = IMAGE_FIRST_SECTION(p64);
+	if (fileType == PE64EXE) {
+		NTHeaders64Ptr p64 = (NTHeaders64Ptr)pNTHeader;
+		section = PEEXE_FIRST_SECTION(NTSectionHeaderPtr, p64);
 		numberOfSections = p64->FileHeader.NumberOfSections;
 	}
 	else {
-		PIMAGE_NT_HEADERS32 p32 = (PIMAGE_NT_HEADERS32)pNTHeader;
-		section = IMAGE_FIRST_SECTION(p32);
+		NTHeaders32Ptr p32 = (NTHeaders32Ptr)pNTHeader;
+		section = PEEXE_FIRST_SECTION(NTSectionHeaderPtr, p32);
 		numberOfSections = p32->FileHeader.NumberOfSections;
 	}
 
@@ -108,20 +108,15 @@ PIMAGE_SECTION_HEADER GetEnclosingSectionHeader(FileType fileType, DWORD rva, PV
 	return 0;
 }
 
-LPVOID GetPtrFromRVA(FileType fileType, DWORD rva, PIMAGE_NT_HEADERS32 pNTHeader, char* imageBase)
+LPVOID GetPtrFromRVA(FileType fileType, DWORD rva, NTHeaders32Ptr pNTHeader, char* imageBase)
 {
-	PIMAGE_SECTION_HEADER pSectionHdr;
-	INT delta;
-
-	pSectionHdr = GetEnclosingSectionHeader(fileType, rva, pNTHeader);
-	if (!pSectionHdr)
-		return 0;
-
-	delta = (INT)(pSectionHdr->VirtualAddress - pSectionHdr->PointerToRawData);
+	NTSectionHeaderPtr pSectionHdr = GetEnclosingSectionHeader(fileType, rva, pNTHeader);
+	if (!pSectionHdr) return 0;
+	int delta = (int)(pSectionHdr->VirtualAddress - pSectionHdr->PointerToRawData);
 	return (PVOID)((BYTE*)imageBase + rva - delta);
 }
 
-void loadDOSEXE(EXEFilePtr result, PIMAGE_DOS_HEADER dosHeader)
+void loadDOSEXE(EXEFilePtr result, DosHeaderPtr dosHeader)
 {
 	result->dosHeader.e_magic = dosHeader->e_magic;
 	result->dosHeader.e_cblp = dosHeader->e_cblp;
@@ -147,7 +142,7 @@ void loadDOSEXE(EXEFilePtr result, PIMAGE_DOS_HEADER dosHeader)
 	result->dosHeader.e_lfanew = dosHeader->e_lfanew;
 }
 
-void loadPEHeaders(FileType fileType, EXEFilePtr result, PIMAGE_NT_HEADERS32 pImgFileHdr)
+void loadPEHeaders(FileType fileType, EXEFilePtr result, NTHeaders32Ptr pImgFileHdr)
 {
 	result->Signature = pImgFileHdr->Signature;
 	result->FileHeader.Machine = pImgFileHdr->FileHeader.Machine;
@@ -157,11 +152,11 @@ void loadPEHeaders(FileType fileType, EXEFilePtr result, PIMAGE_NT_HEADERS32 pIm
 	result->FileHeader.NumberOfSymbols = pImgFileHdr->FileHeader.NumberOfSymbols;
 	result->FileHeader.SizeOfOptionalHeader = pImgFileHdr->FileHeader.SizeOfOptionalHeader;
 	result->FileHeader.Characteristics = pImgFileHdr->FileHeader.Characteristics;
-	PIMAGE_OPTIONAL_HEADER64 opt64 = nullptr;
-	PIMAGE_OPTIONAL_HEADER32 opt32 = nullptr;
+	NTOptionalHeader64Ptr opt64 = nullptr;
+	NTOptionalHeader32Ptr opt32 = nullptr;
 	if (pImgFileHdr->OptionalHeader.Magic == IMAGE_NT_OPTIONAL_HDR32_MAGIC)
 	{
-		opt32 = (PIMAGE_OPTIONAL_HEADER32)&pImgFileHdr->OptionalHeader;
+		opt32 = (NTOptionalHeader32Ptr)&pImgFileHdr->OptionalHeader;
 		result->OptionalHeader32.Magic = opt32->Magic;
 		result->OptionalHeader32.MajorLinkerVersion = opt32->MajorLinkerVersion;
 		result->OptionalHeader32.MinorLinkerVersion = opt32->MinorLinkerVersion;
@@ -199,7 +194,7 @@ void loadPEHeaders(FileType fileType, EXEFilePtr result, PIMAGE_NT_HEADERS32 pIm
 	}
 	else if (pImgFileHdr->OptionalHeader.Magic == IMAGE_NT_OPTIONAL_HDR64_MAGIC)
 	{
-		opt64 = (PIMAGE_OPTIONAL_HEADER64)&pImgFileHdr->OptionalHeader;
+		opt64 = (NTOptionalHeader64Ptr)&pImgFileHdr->OptionalHeader;
 		result->OptionalHeader64.Magic = opt64->Magic;
 		result->OptionalHeader64.MajorLinkerVersion = opt64->MajorLinkerVersion;
 		result->OptionalHeader64.MinorLinkerVersion = opt64->MinorLinkerVersion;
@@ -242,9 +237,9 @@ void loadPEHeaders(FileType fileType, EXEFilePtr result, PIMAGE_NT_HEADERS32 pIm
 	}
 }
 
-void loadPESections(EXEFilePtr result, char* buffer, PIMAGE_NT_HEADERS32 pImgFileHdr)
+void loadPESections(EXEFilePtr result, char* buffer, NTHeaders32Ptr pImgFileHdr)
 {
-	PIMAGE_SECTION_HEADER section = IMAGE_FIRST_SECTION(pImgFileHdr);
+	NTSectionHeaderPtr section = PEEXE_FIRST_SECTION(NTSectionHeaderPtr,pImgFileHdr);
 	for (int i = 1; i <= pImgFileHdr->FileHeader.NumberOfSections; i++)
 	{
 		OBJSectionPtr ptr = new OBJSection;
@@ -270,7 +265,7 @@ void loadPESections(EXEFilePtr result, char* buffer, PIMAGE_NT_HEADERS32 pImgFil
 			ptr->sectionBuffer = nullptr;
 		}
 		result->sectionTable.push_back(ptr);
-		section = MakePtr(PIMAGE_SECTION_HEADER, section, sizeof(IMAGE_SECTION_HEADER));
+		section = MakePtr(NTSectionHeaderPtr, section, sizeof(IMAGE_SECTION_HEADER));
 	}
 }
 
@@ -317,15 +312,15 @@ PSTR GetSafeFileName(PSTR fn1, PSTR filename)
 	return cp;
 }
 
-void loadExportsDirectory(FileType fileType, EXEFilePtr result, char* buffer, PIMAGE_NT_HEADERS32 pNTHeader)
+void loadExportsDirectory(FileType fileType, EXEFilePtr result, char* buffer, NTHeaders32Ptr pNTHeader)
 {
 	DWORD exportRVAStart = GetImgDirEntryRVA(fileType, pNTHeader, IMAGE_DIRECTORY_ENTRY_EXPORT);
 	DWORD exportRVASize = GetImgDirEntrySize(fileType, pNTHeader, IMAGE_DIRECTORY_ENTRY_EXPORT);
-	PIMAGE_SECTION_HEADER headerExports = GetEnclosingSectionHeader(fileType, exportRVAStart, pNTHeader);
+	NTSectionHeaderPtr headerExports = GetEnclosingSectionHeader(fileType, exportRVAStart, pNTHeader);
 	if (headerExports != NULL)
 	{
 		DWORD delta = headerExports->VirtualAddress - headerExports->PointerToRawData;
-		PIMAGE_EXPORT_DIRECTORY exportDir = MakePtr(PIMAGE_EXPORT_DIRECTORY, buffer, exportRVAStart - delta);
+		NTExportDirectoryPtr exportDir = MakePtr(NTExportDirectoryPtr, buffer, exportRVAStart - delta);
 		DWORD Rva = exportDir->Name;
 		PSTR fn1 = (PSTR)(buffer + (Rva - delta));
 		result->exportDirectory = new Exports;
@@ -367,12 +362,12 @@ void loadExportsDirectory(FileType fileType, EXEFilePtr result, char* buffer, PI
 	}
 }
 
-void loadImportsDirectory(FileType fileType, EXEFilePtr result, char* buffer, PIMAGE_NT_HEADERS32 pNTHeader)
+void loadImportsDirectory(FileType fileType, EXEFilePtr result, char* buffer, NTHeaders32Ptr pNTHeader)
 {
 	DWORD importRVAStart = GetImgDirEntryRVA(fileType, pNTHeader, IMAGE_DIRECTORY_ENTRY_IMPORT);
 	DWORD importRVASize = GetImgDirEntrySize(fileType, pNTHeader, IMAGE_DIRECTORY_ENTRY_IMPORT);
-	PIMAGE_SECTION_HEADER headerImports = GetEnclosingSectionHeader(fileType, importRVAStart, pNTHeader);
-	PIMAGE_IMPORT_DESCRIPTOR importDesc = (PIMAGE_IMPORT_DESCRIPTOR)GetPtrFromRVA(fileType, importRVAStart, pNTHeader, buffer);
+	NTSectionHeaderPtr headerImports = GetEnclosingSectionHeader(fileType, importRVAStart, pNTHeader);
+	NTImportDesciptorPtr importDesc = (NTImportDesciptorPtr)GetPtrFromRVA(fileType, importRVAStart, pNTHeader, buffer);
 	while (1)
 	{
 		if ((importDesc->TimeDateStamp == 0) && (importDesc->Name == 0))
@@ -386,10 +381,10 @@ void loadImportsDirectory(FileType fileType, EXEFilePtr result, char* buffer, PI
 		ptr->filename = (char*)GetPtrFromRVA(fileType, importDesc->Name, pNTHeader, buffer);
 		DWORD dwthunk = importDesc->Characteristics;
 		DWORD dwthunkIAT = importDesc->FirstThunk;
-		if (fileType==PE64EXE)
+		if (fileType == PE64EXE)
 		{
-			PIMAGE_THUNK_DATA64 thunk = (PIMAGE_THUNK_DATA64)GetPtrFromRVA(fileType, dwthunk, pNTHeader, buffer);
-			PIMAGE_THUNK_DATA64 thunkIAT = (PIMAGE_THUNK_DATA64)GetPtrFromRVA(fileType, dwthunkIAT, pNTHeader, buffer);
+			NTThunkData64Ptr thunk = (NTThunkData64Ptr)GetPtrFromRVA(fileType, dwthunk, pNTHeader, buffer);
+			NTThunkData64Ptr thunkIAT = (NTThunkData64Ptr)GetPtrFromRVA(fileType, dwthunkIAT, pNTHeader, buffer);
 			while (1)
 			{
 				if (thunk->u1.AddressOfData == 0)
@@ -397,7 +392,7 @@ void loadImportsDirectory(FileType fileType, EXEFilePtr result, char* buffer, PI
 				DWORD dwOff = (DWORD)thunk->u1.AddressOfData;
 				Thunk64Ptr tempThunk = new Thunk64;
 				Thunk64Ptr tempIATThunk = new Thunk64;
-				tempThunk->ordinalname = (PIMAGE_IMPORT_BY_NAME)GetPtrFromRVA(fileType, dwOff, pNTHeader, buffer);
+				tempThunk->ordinalname = (NTImportByNamePtr)GetPtrFromRVA(fileType, dwOff, pNTHeader, buffer);
 				tempThunk->thunk.u1.AddressOfData = thunk->u1.AddressOfData;
 				tempIATThunk->thunk.u1.AddressOfData = thunkIAT->u1.AddressOfData;
 				ptr->thunk64.push_back(tempThunk);
@@ -408,12 +403,11 @@ void loadImportsDirectory(FileType fileType, EXEFilePtr result, char* buffer, PI
 		}
 		else
 		{
-			PIMAGE_THUNK_DATA32 thunk = (PIMAGE_THUNK_DATA32)GetPtrFromRVA(fileType, dwthunk, pNTHeader, buffer);
-			PIMAGE_THUNK_DATA32 thunkIAT = (PIMAGE_THUNK_DATA32)GetPtrFromRVA(fileType, dwthunkIAT, pNTHeader, buffer);
+			NTThunkData32Ptr thunk = (NTThunkData32Ptr)GetPtrFromRVA(fileType, dwthunk, pNTHeader, buffer);
+			NTThunkData32Ptr thunkIAT = (NTThunkData32Ptr)GetPtrFromRVA(fileType, dwthunkIAT, pNTHeader, buffer);
 			while (1)
 			{
-				if (thunk->u1.AddressOfData == 0)
-					break;
+				if (thunk->u1.AddressOfData == 0) break;
 				Thunk32Ptr tempThunk = new Thunk32;
 				Thunk32Ptr tempIATThunk = new Thunk32;
 				tempThunk->thunk.u1.AddressOfData = thunk->u1.AddressOfData;
@@ -429,15 +423,14 @@ void loadImportsDirectory(FileType fileType, EXEFilePtr result, char* buffer, PI
 	}
 }
 
-void loadResourcesDirectory(FileType fileType, EXEFilePtr result, char* buffer, PIMAGE_NT_HEADERS32 pNTHeader)
+void loadResourcesDirectory(FileType fileType, EXEFilePtr result, char* buffer, NTHeaders32Ptr pNTHeader)
 {
 	DWORD resourceRVA = GetImgDirEntryRVA(fileType, pNTHeader, IMAGE_DIRECTORY_ENTRY_RESOURCE);
 	DWORD resourceRVASize = GetImgDirEntrySize(fileType, pNTHeader, IMAGE_DIRECTORY_ENTRY_RESOURCE);
-	PIMAGE_RESOURCE_DIRECTORY resDir = (PIMAGE_RESOURCE_DIRECTORY)GetPtrFromRVA(fileType, resourceRVA, pNTHeader, buffer);
-	PIMAGE_RESOURCE_DIRECTORY_ENTRY resDirEntry = (PIMAGE_RESOURCE_DIRECTORY_ENTRY)(resDir + 1);
+	NTResourceDirectoryPtr resDir = (NTResourceDirectoryPtr)GetPtrFromRVA(fileType, resourceRVA, pNTHeader, buffer);
+	NTResourceDirectoryEntryPtr resDirEntry = (NTResourceDirectoryEntryPtr)(resDir + 1);
 	WORD nNamed = resDir->NumberOfNamedEntries;
 	WORD nIds = resDir->NumberOfIdEntries;
-	//PIMAGE_RESOURCE_DATA_ENTRY  pResDataEntry;
 	result->resourcesDirectory.header.Characteristics = resDir->Characteristics;
 	result->resourcesDirectory.header.TimeDateStamp = resDir->TimeDateStamp;
 	result->resourcesDirectory.header.MajorVersion = resDir->MajorVersion;
@@ -459,11 +452,11 @@ void loadResourcesDirectory(FileType fileType, EXEFilePtr result, char* buffer, 
 	}
 }
 
-void loadBaseRelocationsDirectory(FileType fileType,EXEFilePtr result, char* buffer, PIMAGE_NT_HEADERS32 pNTHeader)
+void loadBaseRelocationsDirectory(FileType fileType, EXEFilePtr result, char* buffer, NTHeaders32Ptr pNTHeader)
 {
 	DWORD baseRelocRVA = GetImgDirEntryRVA(fileType, pNTHeader, IMAGE_DIRECTORY_ENTRY_BASERELOC);
 	DWORD baseRelocRVASize = GetImgDirEntrySize(fileType, pNTHeader, IMAGE_DIRECTORY_ENTRY_BASERELOC);
-	PIMAGE_BASE_RELOCATION baseReloc = (PIMAGE_BASE_RELOCATION)GetPtrFromRVA(fileType, baseRelocRVA, pNTHeader, buffer);
+	NTBaseRelocationPtr baseReloc = (NTBaseRelocationPtr)GetPtrFromRVA(fileType, baseRelocRVA, pNTHeader, buffer);
 	while (baseReloc->SizeOfBlock != 0)
 	{
 		if (0 == baseReloc->VirtualAddress)
@@ -490,19 +483,19 @@ void loadBaseRelocationsDirectory(FileType fileType,EXEFilePtr result, char* buf
 			pEntry++;
 		}
 		result->baseRelocationsDirectory.push_back(relocs);
-		baseReloc = MakePtr(PIMAGE_BASE_RELOCATION, baseReloc, baseReloc->SizeOfBlock);
+		baseReloc = MakePtr(NTBaseRelocationPtr, baseReloc, baseReloc->SizeOfBlock);
 	}
 }
 
-void loadDebugDirectory(FileType fileType, EXEFilePtr result, char* buffer, PIMAGE_NT_HEADERS32 pNTHeader)
+void loadDebugDirectory(FileType fileType, EXEFilePtr result, char* buffer, NTHeaders32Ptr pNTHeader)
 {
 	DWORD debugRVA = GetImgDirEntryRVA(fileType, pNTHeader, IMAGE_DIRECTORY_ENTRY_DEBUG);
 	DWORD debugRVASize = GetImgDirEntrySize(fileType, pNTHeader, IMAGE_DIRECTORY_ENTRY_DEBUG);
 	if (debugRVA != 0 && debugRVASize != 0)
 	{
 		result->debugDirectory = new Debug;
-		PIMAGE_SECTION_HEADER header = GetEnclosingSectionHeader(fileType, debugRVA, pNTHeader);
-		PIMAGE_DEBUG_DIRECTORY debugDir = MakePtr(PIMAGE_DEBUG_DIRECTORY, buffer, header->PointerToRawData + (debugRVA - header->VirtualAddress));
+		NTSectionHeaderPtr header = GetEnclosingSectionHeader(fileType, debugRVA, pNTHeader);
+		NTDebugDirectoryPtr debugDir = MakePtr(NTDebugDirectoryPtr, buffer, header->PointerToRawData + (debugRVA - header->VirtualAddress));
 		DWORD cDebugFormats = debugRVASize / sizeof(IMAGE_DEBUG_DIRECTORY);
 		for (DWORD i = 0; i < cDebugFormats; i++)
 		{
@@ -522,21 +515,21 @@ void loadDebugDirectory(FileType fileType, EXEFilePtr result, char* buffer, PIMA
 	}
 }
 
-void loadLoadConfigDirectory(FileType fileType,EXEFilePtr result, char* buffer, PIMAGE_NT_HEADERS32 pNTHeader)
+void loadLoadConfigDirectory(FileType fileType, EXEFilePtr result, char* buffer, NTHeaders32Ptr pNTHeader)
 {
 	DWORD configRVA = GetImgDirEntryRVA(fileType, pNTHeader, IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG);
 	DWORD configRVASize = GetImgDirEntrySize(fileType, pNTHeader, IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG);
-	PIMAGE_LOAD_CONFIG_DIRECTORY32 load32 = NULL;
-	PIMAGE_LOAD_CONFIG_DIRECTORY64 load64 = NULL;
-	if (fileType==PE64EXE)
+	NTLoadConfigDirectory32Ptr load32 = NULL;
+	NTLoadConfigDirectory64Ptr load64 = NULL;
+	if (fileType == PE64EXE)
 	{
-		load64 = (PIMAGE_LOAD_CONFIG_DIRECTORY64)GetPtrFromRVA(fileType, configRVA, pNTHeader, buffer);
-		memcpy(&result->loadConfiguration64BitDirectory, load64, sizeof(IMAGE_LOAD_CONFIG_DIRECTORY64));
+		load64 = (NTLoadConfigDirectory64Ptr)GetPtrFromRVA(fileType, configRVA, pNTHeader, buffer);
+		memcpy(&result->loadConfiguration64BitDirectory, load64, sizeof(NTLoadConfigDirectory64));
 	}
 	else
 	{
-		load32 = (PIMAGE_LOAD_CONFIG_DIRECTORY32)GetPtrFromRVA(fileType, configRVA, pNTHeader, buffer);
-		memcpy(&result->loadConfiguration32BitDirectory, load32, sizeof(IMAGE_LOAD_CONFIG_DIRECTORY32));
+		load32 = (NTLoadConfigDirectory32Ptr)GetPtrFromRVA(fileType, configRVA, pNTHeader, buffer);
+		memcpy(&result->loadConfiguration32BitDirectory, load32, sizeof(NTLoadConfigDirectory32));
 	}
 }
 
@@ -544,10 +537,10 @@ EXEFilePtr loadExeFile(FileType fileType, char* buffer, LONGLONG fileSize)
 {
 	EXEFilePtr result = new EXEFile;
 	result->fileType = fileType;
-	PIMAGE_DOS_HEADER dosHeader = (PIMAGE_DOS_HEADER)buffer;
-	PIMAGE_NT_HEADERS32 pNTHeader = MakePtr(PIMAGE_NT_HEADERS32, dosHeader, dosHeader->e_lfanew);
+	DosHeaderPtr dosHeader = (DosHeaderPtr)buffer;
+	NTHeaders32Ptr pNTHeader = MakePtr(NTHeaders32Ptr, dosHeader, dosHeader->e_lfanew);
 	loadDOSEXE(result, dosHeader);
-	loadPEHeaders(fileType,result, pNTHeader);
+	loadPEHeaders(fileType, result, pNTHeader);
 	loadPESections(result, buffer, pNTHeader);
 	loadExportsDirectory(fileType, result, buffer, pNTHeader);
 	loadImportsDirectory(fileType, result, buffer, pNTHeader);

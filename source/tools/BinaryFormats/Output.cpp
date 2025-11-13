@@ -112,7 +112,7 @@ void GetObjRelocationName(WORD type, PSTR buffer, DWORD cBytes)
 
 void DumpSection(int i, OBJSectionPtr ptr)
 {
-	PIMAGE_SECTION_HEADER section = &ptr->header;
+	NTSectionHeaderPtr section = &ptr->header;
 	printf("SECTION HEADER #%X (%d)\n", i, i);
 	printf("%8.8s name\n", section->Name);
 	printf("% 8X physical address\n", section->Misc.PhysicalAddress);
@@ -241,7 +241,7 @@ void DumpDOSHeader(PIMAGE_DOS_HEADER dosHeader)
 	printf("  % 16X (%lu) File address of new exe header\n", dosHeader->e_lfanew, dosHeader->e_lfanew);
 }
 
-void DumpFileHeader(PIMAGE_FILE_HEADER pImageFileHeader)
+void DumpFileHeader(NTFileHeaderPtr pImageFileHeader)
 {
 	const char* mt = GetMachineTypeName(pImageFileHeader->Machine);
 	char* time = get_ctime_stg((time_t*)&pImageFileHeader->TimeDateStamp);

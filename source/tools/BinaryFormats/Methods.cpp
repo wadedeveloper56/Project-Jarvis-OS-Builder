@@ -4,6 +4,18 @@
 
 using namespace std;
 
+_NEResourceEntry::_NEResourceEntry():resource(nullptr)
+{
+}
+
+_NEResourceTypeEntry::_NEResourceTypeEntry() :header(nullptr)
+{
+}
+
+_NEResourceTable::_NEResourceTable():header(nullptr)
+{
+}
+
 WIN16EXEFile::WIN16EXEFile()
 {
 }

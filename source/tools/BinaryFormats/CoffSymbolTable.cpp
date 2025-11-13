@@ -4,7 +4,7 @@
 
 using namespace std;
 
-COFFSymbol::COFFSymbol(PIMAGE_SYMBOL pSymbolData, PSTR pStringTable, DWORD index)
+COFFSymbol::COFFSymbol(NTSymbolPtr pSymbolData, PSTR pStringTable, DWORD index)
 {
 	memset(&m_szTypeName, 0, sizeof(0));
 	m_pSymbolData = pSymbolData;
@@ -58,7 +58,7 @@ void COFFSymbol::CleanUp(void)
 	m_pszShortString = 0;
 }
 
-PIMAGE_SYMBOL COFFSymbol::GetSymbol()
+NTSymbolPtr COFFSymbol::GetSymbol()
 {
 	return m_pSymbolData;
 }
@@ -177,7 +177,7 @@ PSTR COFFSymbol::GetStorageClassName()
 
 COFFSymbolTable::COFFSymbolTable(PVOID pSymbolBase, unsigned cSymbols)
 {
-	m_pSymbolBase = (PIMAGE_SYMBOL)pSymbolBase;
+	m_pSymbolBase = (NTSymbolPtr)pSymbolBase;
 	m_cSymbols = cSymbols;
 	m_pStringTable = (PSTR)(m_pSymbolBase + m_cSymbols);
 }
@@ -190,7 +190,7 @@ PCOFFSymbol COFFSymbolTable::GetNextSymbol(PCOFFSymbol pSymbol)
 {
 	if (0 == pSymbol)
 	{
-		pSymbol = new COFFSymbol((PIMAGE_SYMBOL)m_pSymbolBase, m_pStringTable, 0);
+		pSymbol = new COFFSymbol((NTSymbolPtr)m_pSymbolBase, m_pStringTable, 0);
 		return pSymbol;
 	}
 

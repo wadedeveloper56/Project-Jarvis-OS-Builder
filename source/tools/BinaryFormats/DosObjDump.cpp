@@ -32,6 +32,7 @@ WIN16EXEFilePtr loadWin16ExeFile(FileType fileType, char* buffer, LONGLONG fileS
 	WIN16EXEFilePtr ptr = new WIN16EXEFile();
 	PIMAGE_DOS_HEADER dosHeader = (PIMAGE_DOS_HEADER)buffer;
 	NEHeaderPtr neHeader = MakePtr(NEHeaderPtr, dosHeader, dosHeader->e_lfanew);
+	//segment list
 	uint16_t offset = neHeader->SegTableOffset;
 	uint16_t count = neHeader->SegCount;
 	for (int i = 0; i < count; i++)
@@ -40,6 +41,28 @@ WIN16EXEFilePtr loadWin16ExeFile(FileType fileType, char* buffer, LONGLONG fileS
 		ptr->segmentTable.push_back(segmentTableEntry);
 		offset += sizeof(NESegmentTableEntry);
 	}
+	//resource list
+	ptr->resourceTable = new NEResourceTable();
 	offset = neHeader->ResTableOffset;
+	NEResourceTableHeaderPtr resourceTable = MakePtr(NEResourceTableHeaderPtr, neHeader, offset);
+	ptr->resourceTable->header = resourceTable;
+	offset += sizeof(NEResourceTableHeader);
+	while (true)
+	{
+		NEResourceTypeEntryPtr resourceTypeList = new NEResourceTypeEntry();
+		NEResourceTypeHeaderPtr resourceType = MakePtr(NEResourceTypeHeaderPtr, neHeader, offset);
+		if (resourceType->TypeID == 0x0000) break;
+		resourceTypeList->header = resourceType;
+		offset += sizeof(NEResourceTypeHeader);
+		for (int i = 0; i < resourceType->ResourceCount; i++)
+		{
+			NEResourcePtr resource = MakePtr(NEResourcePtr, neHeader, offset);
+			NEResourceEntryPtr resourceEntry = new NEResourceEntry();
+			resourceEntry->resource = resource;
+			resourceTypeList->entries.push_back(resourceEntry);
+			offset += sizeof(NEResource);
+		}
+		ptr->resourceTable->entries.push_back(resourceTypeList);
+	}
 	return ptr;
 }

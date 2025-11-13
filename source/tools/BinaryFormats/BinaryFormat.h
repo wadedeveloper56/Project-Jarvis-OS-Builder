@@ -5,6 +5,7 @@
 
 #include "MemoryMappedFile.h"
 #include "NEHeader.h"
+#include "PEHeader.h"
 
 using namespace std;
 
@@ -152,15 +153,15 @@ class COFFSymbolTable;
 class BINARYFORMATS_API COFFSymbol
 {
 	PSTR 			m_pStringTable;
-	PIMAGE_SYMBOL 	m_pSymbolData;
+	NTSymbolPtr 	m_pSymbolData;
 	DWORD			m_index;
 	PSTR			m_pszShortString;
 	char			m_szTypeName[16];
 	void	CleanUp(void);
 public:
-	COFFSymbol(PIMAGE_SYMBOL pSymbolData, PSTR pStringTable, DWORD index);
+	COFFSymbol(NTSymbolPtr pSymbolData, PSTR pStringTable, DWORD index);
 	~COFFSymbol();
-	PIMAGE_SYMBOL GetSymbol();
+	NTSymbolPtr GetSymbol();
 	DWORD GetIndex();
 	PSTR  GetName();
 	DWORD GetValue();
@@ -178,7 +179,7 @@ typedef BINARYFORMATS_API COFFSymbol* PCOFFSymbol;
 class BINARYFORMATS_API COFFSymbolTable
 {
 private:
-	PIMAGE_SYMBOL	m_pSymbolBase;
+	NTSymbolPtr	m_pSymbolBase;
 	unsigned 		m_cSymbols;
 	PSTR			m_pStringTable;
 public:
@@ -193,7 +194,7 @@ typedef BINARYFORMATS_API COFFSymbolTable* PCOFFSymbolTable;
 
 typedef struct BINARYFORMATS_API _OBJSection
 {
-	IMAGE_SECTION_HEADER header;
+	NTSectionHeader header;
 	PIMAGE_RELOCATION relocation;
 	PIMAGE_LINENUMBER lineNumbers;
 	char* sectionBuffer;
@@ -203,7 +204,7 @@ typedef struct BINARYFORMATS_API _OBJFile
 {
 	vector<OBJSectionPtr> sectionTable;
 	vector<string> stringTable;
-	IMAGE_FILE_HEADER header;
+	NTFileHeader header;
 	PCOFFSymbolTable symbolTable;
 	DWORD stringTableSize;
 	_OBJFile();
@@ -211,7 +212,7 @@ typedef struct BINARYFORMATS_API _OBJFile
 
 typedef struct BINARYFORMATS_API _ResourcesEntry
 {
-	IMAGE_RESOURCE_DIRECTORY_ENTRY entry;
+	NTResourceDirectoryEntry entry;
 	DWORD isDirectory;
 	DWORD isString;
 	_ResourcesEntry();
@@ -243,14 +244,14 @@ typedef struct BINARYFORMATS_API _Exports
 typedef struct BINARYFORMATS_API _Thunk64
 {
 	IMAGE_THUNK_DATA64 thunk;
-	PIMAGE_IMPORT_BY_NAME ordinalname;
+	NTImportByNamePtr ordinalname;
 	_Thunk64();
 } Thunk64, * Thunk64Ptr;
 
 typedef struct BINARYFORMATS_API _Thunk32
 {
 	IMAGE_THUNK_DATA32 thunk;
-	PIMAGE_IMPORT_BY_NAME ordinalname;
+	NTImportByNamePtr ordinalname;
 	_Thunk32();
 } Thunk32, * Thunk32Ptr;
 
@@ -352,9 +353,30 @@ typedef struct BINARYFORMATS_API _DOSOBJFile
 	_DOSOBJFile();
 } DOSOBJFile, * DOSOBJFilePtr, ** DOSOBJFilePtrPtr;
 
+typedef struct BINARYFORMATS_API _NEResourceEntry
+{
+	NEResourcePtr resource;
+	_NEResourceEntry();
+} NEResourceEntry, * NEResourceEntryPtr, ** NEResourceEntryPtrPtr;
+
+typedef struct BINARYFORMATS_API _NEResourceTypeEntry
+{
+	NEResourceTypeHeaderPtr header;
+	vector<NEResourceEntryPtr> entries;
+	_NEResourceTypeEntry();
+} NEResourceTypeEntry, * NEResourceTypeEntryPtr, ** NEResourceTypeEntryPtrPtr;
+
+typedef struct BINARYFORMATS_API _NEResourceTable
+{
+	NEResourceTableHeaderPtr header;
+	vector<NEResourceTypeEntryPtr> entries;
+	_NEResourceTable();
+}NEResourceTable, * NEResourceTablePtr, ** NEResourceTablePtrPtr;
+
 typedef struct BINARYFORMATS_API WIN16EXEFile
 {
 	vector<NESegmentTableEntryPtr> segmentTable;
+	NEResourceTablePtr resourceTable;
 	WIN16EXEFile();
 } WIN16EXEFile, * WIN16EXEFilePtr, ** WIN16EXEFilePtrPtr;
 
@@ -374,20 +396,20 @@ BINARYFORMATS_API char* get_ctime_stg(time_t* pt);
 BINARYFORMATS_API OBJFilePtr loadObjFile(FileType fileType, char* buffer, LONGLONG fileSize);
 //EXEDump.cpp functions
 BINARYFORMATS_API DWORD GetImgDirEntryRVA(FileType fileType, PVOID pNTHdr, DWORD IDE);
-BINARYFORMATS_API PIMAGE_SECTION_HEADER GetSectionHeader(FileType fileType, PSTR name, PVOID pNTHeader);
+BINARYFORMATS_API NTSectionHeaderPtr GetSectionHeader(FileType fileType, PSTR name, PVOID pNTHeader);
 BINARYFORMATS_API DWORD GetImgDirEntrySize(FileType fileType, PVOID pNTHdr, DWORD IDE);
-BINARYFORMATS_API PIMAGE_SECTION_HEADER GetEnclosingSectionHeader(FileType fileType, DWORD rva, PVOID pNTHeader);
+BINARYFORMATS_API NTSectionHeaderPtr GetEnclosingSectionHeader(FileType fileType, DWORD rva, PVOID pNTHeader);
 BINARYFORMATS_API LPVOID GetPtrFromRVA(FileType fileType, DWORD rva, PIMAGE_NT_HEADERS32 pNTHeader, char* imageBase);
-BINARYFORMATS_API void loadDOSEXE(EXEFilePtr result, PIMAGE_DOS_HEADER dosHeader);
-BINARYFORMATS_API void loadPEHeaders(FileType fileType, EXEFilePtr result, PIMAGE_NT_HEADERS32 pImgFileHdr);
-BINARYFORMATS_API void loadPESections(EXEFilePtr result, char* buffer, PIMAGE_NT_HEADERS32 pImgFileHdr);
+BINARYFORMATS_API void loadDOSEXE(EXEFilePtr result, DosHeaderPtr dosHeader);
+BINARYFORMATS_API void loadPEHeaders(FileType fileType, EXEFilePtr result, NTHeaders32Ptr pImgFileHdr);
+BINARYFORMATS_API void loadPESections(EXEFilePtr result, char* buffer, NTHeaders32Ptr pImgFileHdr);
 BINARYFORMATS_API PSTR GetSafeFileName(PSTR fn1, PSTR filename);
-BINARYFORMATS_API void loadExportsDirectory(FileType fileType, EXEFilePtr result, char* buffer, PIMAGE_NT_HEADERS32 pNTHeader);
-BINARYFORMATS_API void loadImportsDirectory(FileType fileType, EXEFilePtr result, char* buffer, PIMAGE_NT_HEADERS32 pNTHeader);
-BINARYFORMATS_API void loadResourcesDirectory(FileType fileType, EXEFilePtr result, char* buffer, PIMAGE_NT_HEADERS32 pNTHeader);
-BINARYFORMATS_API void loadBaseRelocationsDirectory(FileType fileType, EXEFilePtr result, char* buffer, PIMAGE_NT_HEADERS32 pNTHeader);
-BINARYFORMATS_API void loadDebugDirectory(FileType fileType, EXEFilePtr result, char* buffer, PIMAGE_NT_HEADERS32 pNTHeader);
-BINARYFORMATS_API void loadLoadConfigDirectory(FileType fileType, EXEFilePtr result, char* buffer, PIMAGE_NT_HEADERS32 pNTHeader);
+BINARYFORMATS_API void loadExportsDirectory(FileType fileType, EXEFilePtr result, char* buffer, NTHeaders32Ptr pNTHeader);
+BINARYFORMATS_API void loadImportsDirectory(FileType fileType, EXEFilePtr result, char* buffer, NTHeaders32Ptr pNTHeader);
+BINARYFORMATS_API void loadResourcesDirectory(FileType fileType, EXEFilePtr result, char* buffer, NTHeaders32Ptr pNTHeader);
+BINARYFORMATS_API void loadBaseRelocationsDirectory(FileType fileType, EXEFilePtr result, char* buffer, NTHeaders32Ptr pNTHeader);
+BINARYFORMATS_API void loadDebugDirectory(FileType fileType, EXEFilePtr result, char* buffer, NTHeaders32Ptr pNTHeader);
+BINARYFORMATS_API void loadLoadConfigDirectory(FileType fileType, EXEFilePtr result, char* buffer, NTHeaders32Ptr pNTHeader);
 BINARYFORMATS_API EXEFilePtr loadExeFile(FileType fileType, char* buffer, LONGLONG fileSize);
 //LIBDump.cpp functions
 BINARYFORMATS_API LIBFilePtr loadLibFile(FileType fileType, char* buffer, LONGLONG fileSize);
@@ -397,7 +419,7 @@ BINARYFORMATS_API void DumpSection(int i, OBJSectionPtr ptr);
 BINARYFORMATS_API void GetSectionName(WORD section, PSTR buffer, unsigned cbBuffer);
 BINARYFORMATS_API void DumpSymbolTable(COFFSymbolTable* pSymTab);
 BINARYFORMATS_API void DumpDOSHeader(PIMAGE_DOS_HEADER dosHeader);
-BINARYFORMATS_API void DumpFileHeader(PIMAGE_FILE_HEADER pImageFileHeader);
+BINARYFORMATS_API void DumpFileHeader(NTFileHeaderPtr pImageFileHeader);
 BINARYFORMATS_API void DumpOptionalHeader64(PIMAGE_OPTIONAL_HEADER64 optionalHeader);
 BINARYFORMATS_API void DumpOptionalHeader32(PIMAGE_OPTIONAL_HEADER32 optionalHeader);
 BINARYFORMATS_API void DumpExportDirectory(ExportsPtr exportDir);
