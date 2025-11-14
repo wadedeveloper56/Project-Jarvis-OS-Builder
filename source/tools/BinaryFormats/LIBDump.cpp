@@ -123,7 +123,7 @@ LIBFilePtr loadLibFile(FileType fileType, char* lpFileBase, LONGLONG fileSize)
 		else
 		{
 			char *buffer = (char *)(pArchHeader + 1);
-			OBJFilePtr obj = loadObjFile(fileType, buffer, 0);
+			OBJFilePtr obj = loadWin3264ObjFile(fileType, buffer, 0);
 			entry->objFile = obj;
 		}
 		thisMemberSize = atoi((char*)pArchHeader->Size) + IMAGE_SIZEOF_ARCHIVE_MEMBER_HDR;

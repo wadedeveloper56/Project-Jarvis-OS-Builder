@@ -47,7 +47,7 @@ const char* GetMachineTypeName(WORD wMachineType)
 
 int islistedMachineType(WORD wMachineType)
 {
-	const char * ps = GetMachineTypeName(wMachineType);
+	const char* ps = GetMachineTypeName(wMachineType);
 	if (strcmp(ps, "UNLISTED") == 0)
 	{
 		return 0;
@@ -61,7 +61,7 @@ int islistedMachineType(WORD wMachineType)
 	return 1;
 }
 
-FileType getFileType(char* buffer,LONGLONG fileSize)
+FileType getFileType(char* buffer, LONGLONG fileSize)
 {
 	FileType result = UNKNOWN;
 	PIMAGE_DOS_HEADER dosHeader = (PIMAGE_DOS_HEADER)buffer;
@@ -70,7 +70,7 @@ FileType getFileType(char* buffer,LONGLONG fileSize)
 	{
 		PIMAGE_NT_HEADERS32 pNTHeader = MakePtr(PIMAGE_NT_HEADERS32, dosHeader, dosHeader->e_lfanew);
 		NEHeaderPtr neHeader = MakePtr(NEHeaderPtr, dosHeader, dosHeader->e_lfanew);
-		if (dosHeader->e_lfanew < fileSize  && pNTHeader->Signature == IMAGE_NT_SIGNATURE)
+		if (dosHeader->e_lfanew < fileSize && pNTHeader->Signature == IMAGE_NT_SIGNATURE)
 		{
 			if (pNTHeader->OptionalHeader.Magic == IMAGE_NT_OPTIONAL_HDR32_MAGIC)
 			{
@@ -113,11 +113,11 @@ FileType getFileType(char* buffer,LONGLONG fileSize)
 	return result;
 }
 
-void hexdump(const void* data, size_t size,size_t label) {
+void hexdump(const void* data, size_t size, size_t label) {
 	const unsigned char* p = reinterpret_cast<const unsigned char*>(data);
 	const int bytes_per_row = 16;
 	size_t offset = 0;
-	
+
 	while (offset < size) {
 		cout << hex << setw(8) << setfill('0') << label << "  ";
 
@@ -161,7 +161,7 @@ string getStringFromTable(const char* stringTable, size_t index)
 	return string(str);
 }
 
-OBJFilePtr loadObjFile(FileType fileType, char* buffer, LONGLONG fileSize)
+OBJFilePtr loadWin3264ObjFile(FileType fileType, char* buffer, LONGLONG fileSize)
 {
 	OBJFilePtr result = new OBJFile;
 	PIMAGE_FILE_HEADER pImgFileHdr = (PIMAGE_FILE_HEADER)buffer;
@@ -201,8 +201,8 @@ OBJFilePtr loadObjFile(FileType fileType, char* buffer, LONGLONG fileSize)
 		ptr->header.NumberOfLinenumbers = section->NumberOfLinenumbers;
 		ptr->header.Characteristics = section->Characteristics;
 		char* sectionBuffer = MakePtr(char*, pImgFileHdr, section->PointerToRawData);
-		PIMAGE_RELOCATION pir = MakePtr(PIMAGE_RELOCATION, pImgFileHdr, section->PointerToRelocations);
-		PIMAGE_LINENUMBER pln = MakePtr(PIMAGE_LINENUMBER, pImgFileHdr, section->PointerToLinenumbers);
+		NTRelocationPtr pir = MakePtr(NTRelocationPtr, pImgFileHdr, section->PointerToRelocations);
+		NTLineNumberPtr pln = MakePtr(NTLineNumberPtr, pImgFileHdr, section->PointerToLinenumbers);
 		if (section->PointerToRawData > 0 && section->SizeOfRawData > 0)
 		{
 			ptr->sectionBuffer = new char[section->SizeOfRawData];
@@ -214,7 +214,7 @@ OBJFilePtr loadObjFile(FileType fileType, char* buffer, LONGLONG fileSize)
 		}
 		if (section->PointerToRelocations > 0 && section->NumberOfRelocations > 0)
 		{
-			ptr->relocation = new IMAGE_RELOCATION[section->NumberOfRelocations];
+			ptr->relocation = new NTRelocation[section->NumberOfRelocations];
 			for (int k = 0; k < section->NumberOfRelocations; k++)
 			{
 				ptr->relocation[k].RelocCount = pir->RelocCount;
@@ -222,7 +222,7 @@ OBJFilePtr loadObjFile(FileType fileType, char* buffer, LONGLONG fileSize)
 				ptr->relocation[k].Type = pir->Type;
 				ptr->relocation[k].VirtualAddress = pir->VirtualAddress;
 
-				pir = MakePtr(PIMAGE_RELOCATION, pir, sizeof(IMAGE_RELOCATION));
+				pir = MakePtr(NTRelocationPtr, pir, sizeof(NTRelocation));
 			}
 		}
 		else
@@ -231,7 +231,7 @@ OBJFilePtr loadObjFile(FileType fileType, char* buffer, LONGLONG fileSize)
 		}
 		if (section->PointerToLinenumbers > 0 && section->NumberOfLinenumbers > 0)
 		{
-			ptr->lineNumbers = new IMAGE_LINENUMBER[section->NumberOfLinenumbers];
+			ptr->lineNumbers = new NTLineNumber[section->NumberOfLinenumbers];
 			for (int j = 0; j < section->NumberOfLinenumbers; j++)
 			{
 				ptr->lineNumbers[j].Linenumber = pln->Linenumber;
@@ -243,7 +243,7 @@ OBJFilePtr loadObjFile(FileType fileType, char* buffer, LONGLONG fileSize)
 				else
 				{
 				}
-				pln = MakePtr(PIMAGE_LINENUMBER, pln, sizeof(IMAGE_LINENUMBER));
+				pln = MakePtr(NTLineNumberPtr, pln, sizeof(NTLineNumber));
 
 			}
 		}

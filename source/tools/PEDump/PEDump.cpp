@@ -113,7 +113,7 @@ int main(int argc, char* argv[])
 		case PE32EXE:
 		{
 			printf("File Type: 32-bit PE EXECUTABLE IMAGE\n");
-			EXEFilePtr data = loadExeFile(fileType, buffer, fileSize);
+			EXEFilePtr data = loadWin3264ExeFile(fileType, buffer, fileSize);
 			DumpDOSHeader(&data->dosHeader);
 			DumpFileHeader(&data->FileHeader);
 			DumpOptionalHeader32(&data->OptionalHeader32);
@@ -136,7 +136,7 @@ int main(int argc, char* argv[])
 		case PE64EXE:
 		{
 			printf("File Type: 64-bit PE EXECUTABLE IMAGE\n");
-			EXEFilePtr data = loadExeFile(fileType, buffer, fileSize);
+			EXEFilePtr data = loadWin3264ExeFile(fileType, buffer, fileSize);
 			DumpDOSHeader(&data->dosHeader);
 			DumpFileHeader(&data->FileHeader);
 			DumpOptionalHeader64(&data->OptionalHeader64);
@@ -159,7 +159,7 @@ int main(int argc, char* argv[])
 		case PE32OBJ:
 		{
 			printf("File Type: 32-bit COFF OBJECT\n\n");
-			OBJFilePtr data = loadObjFile(fileType, buffer, fileSize);
+			OBJFilePtr data = loadWin3264ObjFile(fileType, buffer, fileSize);
 			DumpFileHeader(&data->header);
 			printf("\n");
 			for (int i = 0; i < data->sectionTable.size(); i++)
@@ -179,7 +179,7 @@ int main(int argc, char* argv[])
 		case PE64OBJ:
 		{
 			printf("File Type: 64-bit COFF OBJECT\n\n");
-			OBJFilePtr data = loadObjFile(fileType, buffer, fileSize);
+			OBJFilePtr data = loadWin3264ObjFile(fileType, buffer, fileSize);
 			DumpFileHeader(&data->header);
 			printf("\n");
 			for (int i = 0; i < data->sectionTable.size(); i++)

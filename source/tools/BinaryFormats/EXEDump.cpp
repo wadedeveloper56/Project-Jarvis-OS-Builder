@@ -116,7 +116,7 @@ LPVOID GetPtrFromRVA(FileType fileType, DWORD rva, NTHeaders32Ptr pNTHeader, cha
 	return (PVOID)((BYTE*)imageBase + rva - delta);
 }
 
-void loadDOSEXE(EXEFilePtr result, DosHeaderPtr dosHeader)
+void loadDOSStubEXE(EXEFilePtr result, DosHeaderPtr dosHeader)
 {
 	result->dosHeader.e_magic = dosHeader->e_magic;
 	result->dosHeader.e_cblp = dosHeader->e_cblp;
@@ -533,13 +533,13 @@ void loadLoadConfigDirectory(FileType fileType, EXEFilePtr result, char* buffer,
 	}
 }
 
-EXEFilePtr loadExeFile(FileType fileType, char* buffer, LONGLONG fileSize)
+EXEFilePtr loadWin3264ExeFile(FileType fileType, char* buffer, LONGLONG fileSize)
 {
-	EXEFilePtr result = new EXEFile;
+	EXEFilePtr result = new EXEFile();
 	result->fileType = fileType;
 	DosHeaderPtr dosHeader = (DosHeaderPtr)buffer;
 	NTHeaders32Ptr pNTHeader = MakePtr(NTHeaders32Ptr, dosHeader, dosHeader->e_lfanew);
-	loadDOSEXE(result, dosHeader);
+	loadDOSStubEXE(result, dosHeader);
 	loadPEHeaders(fileType, result, pNTHeader);
 	loadPESections(result, buffer, pNTHeader);
 	loadExportsDirectory(fileType, result, buffer, pNTHeader);

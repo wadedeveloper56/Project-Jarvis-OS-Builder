@@ -365,6 +365,23 @@ typedef struct _NTSymbol {
 	BYTE    NumberOfAuxSymbols;
 } NTSymbol, * NTSymbolPtr, ** NTSymbolPtrPtr;
 
+typedef struct _NTRelocation {
+	union {
+		DWORD   VirtualAddress;
+		DWORD   RelocCount;             // Set to the real count when IMAGE_SCN_LNK_NRELOC_OVFL is set
+	} DUMMYUNIONNAME;
+	DWORD   SymbolTableIndex;
+	WORD    Type;
+} NTRelocation,* NTRelocationPtr, ** NTRelocationPtrPtr;
+
+typedef struct _NTLineNumber {
+	union {
+		DWORD   SymbolTableIndex;               // Symbol table index of function name if Linenumber is 0.
+		DWORD   VirtualAddress;                 // Virtual address of line number.
+	} Type;
+	WORD    Linenumber;                         // Line number.
+} NTLineNumber,* NTLineNumberPtr, ** NTLineNumberPtrPtr;
+
 #define PEEXE_FIRST_SECTION( cast, ntheader ) ((cast)        \
     ((ULONG_PTR)(ntheader) +                                            \
      FIELD_OFFSET( IMAGE_NT_HEADERS, OptionalHeader ) +                 \

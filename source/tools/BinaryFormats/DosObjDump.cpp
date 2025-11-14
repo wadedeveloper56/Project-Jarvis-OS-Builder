@@ -30,7 +30,7 @@ DOSOBJFilePtr loadDOSWin16ObjFile(FileType fileType, char* buffer, LONGLONG file
 WIN16EXEFilePtr loadWin16ExeFile(FileType fileType, char* buffer, LONGLONG fileSize)
 {
 	WIN16EXEFilePtr ptr = new WIN16EXEFile();
-	PIMAGE_DOS_HEADER dosHeader = (PIMAGE_DOS_HEADER)buffer;
+	DosHeaderPtr dosHeader = (DosHeaderPtr)buffer;
 	NEHeaderPtr neHeader = MakePtr(NEHeaderPtr, dosHeader, dosHeader->e_lfanew);
 	//segment list
 	uint16_t offset = neHeader->SegTableOffset;

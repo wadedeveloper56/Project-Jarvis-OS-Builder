@@ -250,7 +250,7 @@ void loadFiles()
 			case PE64OBJ:
 			{
 				cout << "its obj file type" << endl;
-				OBJFilePtr objfile = loadObjFile(fileType, buffer, fileSize);
+				OBJFilePtr objfile = loadWin3264ObjFile(fileType, buffer, fileSize);
 				break;
 			}
 			case ANONYMOUS:
