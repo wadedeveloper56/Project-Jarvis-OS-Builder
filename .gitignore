@@ -34,3 +34,7 @@ research/test1/test.err
 /research/tools/bin
 /research/old/tools/.vs
 /research/old/tools/bin
+/research/tools/out/build/x64-debug
+/research/tools/out/build/x64-release
+/research/tools/out/build/x86-debug
+/research/tools/out/build/x86-release
