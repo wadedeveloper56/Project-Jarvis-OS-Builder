@@ -13,3 +13,5 @@ project ("tools")
 
 # Include sub-projects.
 add_subdirectory ("yacc")
+
+add_subdirectory("dwarf")
