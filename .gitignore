@@ -32,3 +32,5 @@ research/test1/test.err
 /research/Linker/Linker/.vs
 /research/tools/.vs
 /research/tools/bin
+/research/old/tools/.vs
+/research/old/tools/bin

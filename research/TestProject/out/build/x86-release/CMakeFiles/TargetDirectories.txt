@@ -1,0 +1,5 @@
+C:/projects/OSDev/ProjectJarvis/research/TestProject/out/build/x86-release/CMakeFiles/edit_cache.dir
+C:/projects/OSDev/ProjectJarvis/research/TestProject/out/build/x86-release/CMakeFiles/rebuild_cache.dir
+C:/projects/OSDev/ProjectJarvis/research/TestProject/out/build/x86-release/Test/CMakeFiles/Test.dir
+C:/projects/OSDev/ProjectJarvis/research/TestProject/out/build/x86-release/Test/CMakeFiles/edit_cache.dir
+C:/projects/OSDev/ProjectJarvis/research/TestProject/out/build/x86-release/Test/CMakeFiles/rebuild_cache.dir
