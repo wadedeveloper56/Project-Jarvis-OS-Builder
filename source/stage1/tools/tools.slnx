@@ -3,6 +3,7 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
+  <Project Path="dmpobj/dmpobj.vcxproj" Id="04c4a887-98ea-48f8-a1a4-c79ba6fc31e0" />
   <Project Path="dwarf/dwarf.vcxproj" Id="8496848d-2bf0-4b61-919c-811c61669243" />
   <Project Path="lib_misc/lib_misc.vcxproj" Id="225bd3e4-7b4d-4495-97d0-a12a241453ce" />
   <Project Path="orl/orl.vcxproj" Id="7e3e56ac-7fa6-4526-a3fd-626e7acceec9" />
