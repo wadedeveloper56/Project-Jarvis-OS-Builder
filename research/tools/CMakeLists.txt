@@ -12,6 +12,9 @@ endif()
 project ("tools")
 
 # Include sub-projects.
-add_subdirectory ("yacc")
 
 add_subdirectory("dwarf")
+
+add_subdirectory("lib_misc")
+
+add_subdirectory ("yacc")
