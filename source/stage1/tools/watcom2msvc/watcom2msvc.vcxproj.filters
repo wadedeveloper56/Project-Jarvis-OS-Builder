@@ -614,6 +614,9 @@
     <ClCompile Include="..\watcom\c\clibext.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\watcom\c\leb128rd.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\watcom\h\_mathfun.inc">

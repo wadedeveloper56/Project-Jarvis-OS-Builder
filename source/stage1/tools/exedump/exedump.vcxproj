@@ -19,24 +19,65 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="h\dmpobj.h" />
+    <ClInclude Include="h\dumpwv.h" />
+    <ClInclude Include="h\wdfunc.h" />
+    <ClInclude Include="h\wdglb.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="c\dmpobj.c" />
-    <ClCompile Include="c\objread.c" />
-    <ClCompile Include="c\output.c" />
-    <ClCompile Include="c\process.c" />
+    <ClCompile Include="c\coff.c" />
+    <ClCompile Include="c\d16mexe.c" />
+    <ClCompile Include="c\dosexe.c" />
+    <ClCompile Include="c\dumpcv.c" />
+    <ClCompile Include="c\dumphll.c" />
+    <ClCompile Include="c\dumpwv.c" />
+    <ClCompile Include="c\elfexe.c" />
+    <ClCompile Include="c\machoexe.c" />
+    <ClCompile Include="c\novexe.c" />
+    <ClCompile Include="c\os2exe.c" />
+    <ClCompile Include="c\peexe.c" />
+    <ClCompile Include="c\pharexe.c" />
+    <ClCompile Include="c\qnxexe.c" />
+    <ClCompile Include="c\typewv.c" />
+    <ClCompile Include="c\wdata.c" />
+    <ClCompile Include="c\wdfix.c" />
+    <ClCompile Include="c\wdglb.c" />
+    <ClCompile Include="c\wdio.c" />
+    <ClCompile Include="c\wdmp.c" />
+    <ClCompile Include="c\wdprs.c" />
+    <ClCompile Include="c\wdres.c" />
+    <ClCompile Include="c\wdseg.c" />
+    <ClCompile Include="c\wdtab.c" />
+    <ClCompile Include="c\wdwarf.c" />
+    <ClCompile Include="c\wline.c" />
+    <ClCompile Include="c\wperes.c" />
+    <ClCompile Include="c\wpetbls.c" />
+    <ClCompile Include="c\wsect.c" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\dwarf\dwarf.vcxproj">
+      <Project>{8496848d-2bf0-4b61-919c-811c61669243}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\lib_misc\lib_misc.vcxproj">
+      <Project>{225bd3e4-7b4d-4495-97d0-a12a241453ce}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\orl\orl.vcxproj">
+      <Project>{7e3e56ac-7fa6-4526-a3fd-626e7acceec9}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\trmem\trmem.vcxproj">
+      <Project>{7314cad6-35df-415c-9b70-f80dc13064e8}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\watcom2msvc\watcom2msvc.vcxproj">
       <Project>{692ea488-1211-48d7-a368-3f05520b72e7}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\wres\wres.vcxproj">
+      <Project>{72a6ca87-8805-48c4-a5e5-91e6d28b1d80}</Project>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>18.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{04c4a887-98ea-48f8-a1a4-c79ba6fc31e0}</ProjectGuid>
-    <RootNamespace>dmpobj</RootNamespace>
+    <ProjectGuid>{22d11f02-778f-4e44-b5eb-5ae64fa66e45}</ProjectGuid>
+    <RootNamespace>exedump</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -86,23 +127,23 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>..\..\..\..\bin\stage1\tools\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>..\..\..\..\bin\stage1\tools\intermediate\dmpobj\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);.\;.\h;..\watcom\h;</IncludePath>
+    <IntDir>..\..\..\..\bin\stage1\tools\intermediate\exedump\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);.\h;.\;..\watcom\h;</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>..\..\..\..\bin\stage1\tools\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>..\..\..\..\bin\stage1\tools\intermediate\dmpobj\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);.\;.\h;..\watcom\h;</IncludePath>
+    <IntDir>..\..\..\..\bin\stage1\tools\intermediate\exedump\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);.\h;.\;..\watcom\h;</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>..\..\..\..\bin\stage1\tools\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>..\..\..\..\bin\stage1\tools\intermediate\dmpobj\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);.\;.\h;..\watcom\h;</IncludePath>
+    <IntDir>..\..\..\..\bin\stage1\tools\intermediate\exedump\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);.\h;.\;..\watcom\h;</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>..\..\..\..\bin\stage1\tools\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>..\..\..\..\bin\stage1\tools\intermediate\dmpobj\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);.\;.\h;..\watcom\h;</IncludePath>
+    <IntDir>..\..\..\..\bin\stage1\tools\intermediate\exedump\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);.\h;.\;..\watcom\h;</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -111,8 +152,8 @@
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -128,8 +169,8 @@
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -143,8 +184,8 @@
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -160,8 +201,8 @@
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

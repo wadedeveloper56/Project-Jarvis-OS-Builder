@@ -367,6 +367,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\watcom\c\clibext.c" />
+    <ClCompile Include="..\watcom\c\leb128rd.c" />
     <ClCompile Include="pch.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
