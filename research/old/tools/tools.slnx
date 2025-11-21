@@ -1,7 +1,0 @@
-<Solution>
-  <Configurations>
-    <Platform Name="x64" />
-    <Platform Name="x86" />
-  </Configurations>
-  <Project Path="yacc/yacc.vcxproj" Id="011f8461-3544-4664-bb9f-7906bbcb37cb" />
-</Solution>
