@@ -1303,7 +1303,7 @@ int setenv( const char *name, const char *newvalue, int overwrite )
     buff = malloc( len );
     overwrite = overwrite;
     sprintf( buff, "%s=%s", name, newvalue );
-    putenv( buff );
+    _putenv( buff );
     free( buff );
     return( 0 );
 }
@@ -1317,7 +1317,7 @@ int unsetenv( const char *name )
     len = strlen( name ) + 16;
     buff = malloc( len );
     sprintf( buff, "%s=", name );
-    putenv( buff );
+    _putenv( buff );
     free( buff );
     return( 0 );
 }
@@ -1583,7 +1583,7 @@ DIRXX *OPENDIRXX( const char *dirname )
         errno = ENOMEM;
         return( NULL );
     }
-    tmp.d_openpath = strdup( dirname );
+    tmp.d_openpath = _strdup( dirname );
     *dirp = tmp;
     return( dirp );
 }
@@ -1787,8 +1787,8 @@ int mkstemp( char *template_str )
     /*** Try to build a unique filename ***/
     for( letter = 'a'; letter <= 'z'; letter++ ) {
         sprintf( xs, "%c%05u", letter, pid );
-        if( access( template_str, F_OK ) != 0 ) {
-            fh = open( template_str, O_RDWR | O_CREAT | O_TRUNC | O_EXCL | O_BINARY, S_IREAD | S_IWRITE );
+        if( _access( template_str, F_OK ) != 0 ) {
+            fh = _open( template_str, O_RDWR | O_CREAT | O_TRUNC | O_EXCL | O_BINARY, S_IREAD | S_IWRITE );
             if( fh != -1 ) {
                 return( fh );       /* file successfully created */
             }

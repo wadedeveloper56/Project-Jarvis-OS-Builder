@@ -93,6 +93,12 @@
     <ProjectReference Include="..\trmem\trmem.vcxproj">
       <Project>{7314cad6-35df-415c-9b70-f80dc13064e8}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\watcom2msvc\watcom2msvc.vcxproj">
+      <Project>{692ea488-1211-48d7-a368-3f05520b72e7}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\wres\wres.vcxproj">
+      <Project>{72a6ca87-8805-48c4-a5e5-91e6d28b1d80}</Project>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>18.0</VCProjectVersion>
