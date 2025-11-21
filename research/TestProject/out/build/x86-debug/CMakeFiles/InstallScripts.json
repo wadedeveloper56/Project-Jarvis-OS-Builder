@@ -1,8 +1,0 @@
-{
-	"InstallScripts" : 
-	[
-		"C:/projects/OSDev/ProjectJarvis/research/TestProject/out/build/x86-debug/cmake_install.cmake",
-		"C:/projects/OSDev/ProjectJarvis/research/TestProject/out/build/x86-debug/Test/cmake_install.cmake"
-	],
-	"Parallel" : false
-}
