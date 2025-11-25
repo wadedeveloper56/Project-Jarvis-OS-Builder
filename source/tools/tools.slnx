@@ -8,6 +8,7 @@
   <Project Path="exedump/exedump.vcxproj" Id="22d11f02-778f-4e44-b5eb-5ae64fa66e45" />
   <Project Path="lib_misc/lib_misc.vcxproj" Id="225bd3e4-7b4d-4495-97d0-a12a241453ce" />
   <Project Path="orl/orl.vcxproj" Id="7e3e56ac-7fa6-4526-a3fd-626e7acceec9" />
+  <Project Path="sweep/sweep.vcxproj" Id="e11acc54-41c2-4ff0-9512-f399576a46b5" />
   <Project Path="trmem/trmem.vcxproj" Id="7314cad6-35df-415c-9b70-f80dc13064e8" />
   <Project Path="watcom2msvc/watcom2msvc.vcxproj" Id="692ea488-1211-48d7-a368-3f05520b72e7" />
   <Project Path="wmake/wmake.vcxproj" Id="9b3dbee7-fcd4-4e0e-bc8f-180ad8093bdf" />
