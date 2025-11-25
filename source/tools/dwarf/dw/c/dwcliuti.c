@@ -29,7 +29,7 @@
 *
 ****************************************************************************/
 
-
+#include "pch.h"
 #include "dwpriv.h"
 #include "dwutils.h"
 #include "dwcliuti.h"

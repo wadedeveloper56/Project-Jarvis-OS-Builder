@@ -30,7 +30,7 @@
 *
 ****************************************************************************/
 
-
+#include "pch.h"
 #include <stddef.h>
 #include <string.h>
 #include "wresall.h"

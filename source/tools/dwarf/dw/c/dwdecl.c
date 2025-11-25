@@ -30,7 +30,7 @@
 *
 ****************************************************************************/
 
-
+#include "pch.h"
 #include "dwpriv.h"
 #include "dwline.h"
 #include "dwinfo.h"

@@ -29,7 +29,7 @@
 *
 ****************************************************************************/
 
-
+#include "pch.h"
 #include "dwpriv.h"
 #include "dwrefer.h"
 #include "dwhandle.h"

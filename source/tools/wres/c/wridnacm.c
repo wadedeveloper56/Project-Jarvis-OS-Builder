@@ -30,7 +30,7 @@
 *
 ****************************************************************************/
 
-
+#include "pch.h"
 #include <stdlib.h>
 #include "wresall.h"
 #include "wstrcmp.h"

@@ -36,7 +36,7 @@
 *   multi-byte encodings or wide character support
 *
 ****************************************************************************/
-
+#include "pch.h"
 #ifdef __WATCOMC__
 
     #include <stddef.h> /* need to load _comdef.h */

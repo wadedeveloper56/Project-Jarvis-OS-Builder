@@ -34,7 +34,7 @@
 /*
     Handle the .debug_pubnames section
 */
-
+#include "pch.h"
 #include "dwpriv.h"
 #include "dwcliuti.h"
 #include "dwhandle.h"

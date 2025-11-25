@@ -28,7 +28,7 @@
 *
 ****************************************************************************/
 
-
+#include "pch.h"
 #include <stdio.h>
 #include "watcom.h"
 #include "wres.h"

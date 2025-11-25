@@ -29,7 +29,7 @@
 *
 ****************************************************************************/
 
-
+#include "pch.h"
 #include "layer0.h"
 #include "filefmt.h"
 #include "reserr.h"

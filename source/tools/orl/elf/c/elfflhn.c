@@ -29,7 +29,7 @@
 *
 ****************************************************************************/
 
-
+#include "pch.h"
 #include "elfflhn.h"
 #include "elforl.h"
 #include "orlhash.h"

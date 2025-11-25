@@ -29,7 +29,7 @@
 *
 ****************************************************************************/
 
-
+#include "pch.h"
 #include <setjmp.h>
 #include <stdio.h>
 #include "wdglb.h"

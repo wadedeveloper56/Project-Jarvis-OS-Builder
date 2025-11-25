@@ -51,7 +51,7 @@
  *              ResDeleteLLItem
  *              ResReplaceLLItem
  */
-
+#include "pch.h"
 #include <stdlib.h>
 #include "mem2.h"
 

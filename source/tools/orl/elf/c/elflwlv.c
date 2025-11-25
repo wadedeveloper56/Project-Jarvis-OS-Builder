@@ -29,7 +29,7 @@
 *
 ****************************************************************************/
 
-
+#include "pch.h"
 #include <assert.h>
 #include "walloca.h"
 #include "elflwlv.h"

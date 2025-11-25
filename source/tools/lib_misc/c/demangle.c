@@ -35,7 +35,7 @@
 #ifdef INSIDE_DIP
 #define __NO_STACK_CHECKING__
 #endif
-
+#include "pch.h"
 #include <assert.h>
 #include <stdlib.h>
 #include <stdio.h>

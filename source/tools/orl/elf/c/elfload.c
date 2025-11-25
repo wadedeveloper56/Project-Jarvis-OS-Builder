@@ -29,7 +29,7 @@
 *
 ****************************************************************************/
 
-
+#include "pch.h"
 #include "elfload.h"
 #include "elforl.h"
 #include "i64.h"
