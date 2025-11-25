@@ -4,6 +4,7 @@
     <Platform Name="x86" />
   </Configurations>
   <Folder Name="/exes/">
+    <Project Path="builder/builder.vcxproj" Id="7b90ca05-6656-47b7-a3ca-1b36669cfc8a" />
     <Project Path="comstrip/comstrip.vcxproj" Id="c577b16a-1232-44c1-bc6b-a55787b5cc56" />
     <Project Path="crlf/crlf.vcxproj" Id="ad0d7267-5cfa-453d-8e80-c082ff4f5194" />
     <Project Path="diff/diff.vcxproj" Id="7309e8cc-eeb4-4aff-ad13-051a2ab35f60" />
