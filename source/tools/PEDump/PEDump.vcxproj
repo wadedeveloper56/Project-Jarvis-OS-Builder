@@ -71,27 +71,27 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>..\..\..\..\bin\stage2\tools\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>..\..\..\..\bin\stage2\tools\intermediate\PEDump\$(Configuration)\$(Platform)\</IntDir>
+    <OutDir>..\..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>..\..\..\bin\tools\intermediate\PEDump\$(Configuration)\$(Platform)\</IntDir>
     <IncludePath>..\BinaryFormats;..\Arguments;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>..\..\..\..\bin\stage2\tools\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>..\..\..\..\bin\stage2\tools\intermediate\PEDump\$(Configuration)\$(Platform)\</IntDir>
+    <OutDir>..\..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>..\..\..\bin\tools\intermediate\PEDump\$(Configuration)\$(Platform)\</IntDir>
     <IncludePath>..\BinaryFormats;..\Arguments;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
     <LinkIncremental>
     </LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>..\..\..\..\bin\stage2\tools\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>..\..\..\..\bin\stage2\tools\intermediate\PEDump\$(Configuration)\$(Platform)\</IntDir>
+    <OutDir>..\..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>..\..\..\bin\tools\intermediate\PEDump\$(Configuration)\$(Platform)\</IntDir>
     <IncludePath>..\BinaryFormats;..\Arguments;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>..\..\..\..\bin\stage2\tools\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>..\..\..\..\bin\stage2\tools\intermediate\PEDump\$(Configuration)\$(Platform)\</IntDir>
+    <OutDir>..\..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>..\..\..\bin\tools\intermediate\PEDump\$(Configuration)\$(Platform)\</IntDir>
     <IncludePath>..\BinaryFormats;..\Arguments;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
     <LinkIncremental>
     </LinkIncremental>
