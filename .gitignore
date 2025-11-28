@@ -10,3 +10,6 @@
 /research/tools/.vs
 /research/stage2/tools/Compiler/.vs
 /research/stage2/tools/Compiler/.vs/Compiler
+/research/yacc/.vs
+/research/yacc/bin
+/research/yacc/yacc/.vs
