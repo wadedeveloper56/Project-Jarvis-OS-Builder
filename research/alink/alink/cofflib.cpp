@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "alink.h"
 
 void loadCoffLib(FILE* libfile, PCHAR libname)

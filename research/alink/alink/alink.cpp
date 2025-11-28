@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "alink.h"
 
 char case_sensitive = 1;

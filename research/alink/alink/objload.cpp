@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "alink.h"
 
 char t_thred[4];

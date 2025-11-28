@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "alink.h"
 
 void fixpubsegs(int src, int dest, UINT shift)
