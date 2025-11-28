@@ -1,16 +1,16 @@
 #include "pch.h"
 #include "alink.h"
 
-void fixpubSegs(int src, int dest, UINT shift)
+void fixpubSegs(int src, int dest, UInt shift)
 {
-	UINT i, j;
-	PPUBLIC q;
+	UInt i, j;
+	PublicPtr q;
 
 	for (i = 0; i < pubcount; ++i)
 	{
 		for (j = 0; j < publics[i].count; ++j)
 		{
-			q = (PPUBLIC)publics[i].object[j];
+			q = (PublicPtr)publics[i].object[j];
 			if (q->Segnum == src)
 			{
 				q->Segnum = dest;
@@ -22,14 +22,14 @@ void fixpubSegs(int src, int dest, UINT shift)
 
 void fixpubgrps(int src, int dest)
 {
-	UINT i, j;
-	PPUBLIC q;
+	UInt i, j;
+	PublicPtr q;
 
 	for (i = 0; i < pubcount; ++i)
 	{
 		for (j = 0; j < publics[i].count; ++j)
 		{
-			q = (PPUBLIC)publics[i].object[j];
+			q = (PublicPtr)publics[i].object[j];
 			if (q->grpnum == src)
 			{
 				q->grpnum = dest;
@@ -40,7 +40,7 @@ void fixpubgrps(int src, int dest)
 
 void combine_Segments(long dest, long src)
 {
-	UINT k, n;
+	UInt k, n;
 	UCharPtr p, q;
 	long a1, a2;
 
@@ -239,7 +239,7 @@ void combine_Segments(long dest, long src)
 
 void combine_common(long i, long j)
 {
-	UINT k, n;
+	UInt k, n;
 	UCharPtr p, q;
 
 	if (Seglist[j]->length > Seglist[i]->length)
@@ -422,15 +422,15 @@ void combineBlocks()
 	long i, j, k;
 	char* name;
 	long attr;
-	UINT count;
-	UINT* slist;
-	UINT curSeg;
+	UInt count;
+	UInt* slist;
+	UInt curSeg;
 
 	for (i = 0; i < Segcount; i++)
 	{
 		if (Seglist[i] && ((Seglist[i]->attr & Seg_ALIGN) != Seg_ABS))
 		{
-			if (Seglist[i]->winFlags & WINF_COMDAT) continue; /* don't combine COMDAT Segments */
+			if (Seglist[i]->winFlags & WINF_COMDAT) continue; /* don't combine ComDat Segments */
 			name = namelist[Seglist[i]->nameindex];
 			attr = Seglist[i]->attr & (Seg_COMBINE | Seg_USE32);
 			switch (attr & Seg_COMBINE)
@@ -448,7 +448,7 @@ void combineBlocks()
 				case Seg_PUBLIC:
 				case Seg_PUBLIC2:
 				case Seg_PUBLIC3:
-					slist = (UINT*)checkMalloc(sizeof(UINT));
+					slist = (UInt*)checkMalloc(sizeof(UInt));
 					slist[0] = i;
 					/* get list of Segments to combine */
 					for (j = i + 1, count = 1; j < Segcount; j++)
@@ -458,7 +458,7 @@ void combineBlocks()
 						if ((Seglist[j]->attr & Seg_ALIGN) == Seg_ABS) continue;
 						if (attr != (Seglist[j]->attr & (Seg_COMBINE | Seg_USE32))) continue;
 						if (strcmp(name, namelist[Seglist[j]->nameindex]) != 0) continue;
-						slist = (UINT*)checkRealloc(slist, (count + 1) * sizeof(UINT));
+						slist = (UInt*)checkRealloc(slist, (count + 1) * sizeof(UInt));
 						slist[count] = j;
 						count++;
 					}

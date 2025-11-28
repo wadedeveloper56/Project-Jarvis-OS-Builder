@@ -10,21 +10,21 @@ int output_type = OUTPUT_EXE;
 CharPtr outname = 0;
 
 FILE* afile = 0;
-UINT filepos = 0;
+UInt filepos = 0;
 long reclength = 0;
 unsigned char rectype = 0;
 char li_le = 0;
-UINT prevofs = 0;
+UInt prevofs = 0;
 long prevSeg = 0;
 long gotstart = 0;
-RELOC startaddr;
-UINT imageBase = 0;
-UINT fileAlign = 1;
-UINT objectAlign = 1;
-UINT stackSize;
-UINT stackCommitSize;
-UINT heapSize;
-UINT heapCommitSize;
+Reloc startaddr;
+UInt imageBase = 0;
+UInt fileAlign = 1;
+UInt objectAlign = 1;
+UInt stackSize;
+UInt stackCommitSize;
+UInt heapSize;
+UInt heapCommitSize;
 unsigned char osMajor, osMinor;
 unsigned char subsysMajor, subsysMinor;
 unsigned int subSystem;
@@ -34,24 +34,24 @@ UCharPtr stubName = NULL;
 long errcount = 0;
 
 unsigned char buf[65536];
-PDATABLOCK lidata;
+DataBlockPtr lidata;
 
 CharPtrPtr namelist = NULL;
 SegPtrPtr Seglist = NULL;
 SegPtrPtr outlist = NULL;
-PPGRP grplist = NULL;
+GroupPtrPtr grplist = NULL;
 SortEntryPtr publics = NULL;
-PEXTREC externs = NULL;
-PPCOMREC comdefs = NULL;
-PPRELOC relocs = NULL;
-PIMPREC impdefs = NULL;
-PEXPREC expdefs = NULL;
-PLIBFILE libfiles = NULL;
-PRESOURCE resource = NULL;
+ExtRecPtr externs = NULL;
+ComRecPtrPtr comdefs = NULL;
+RelocPtrPtr relocs = NULL;
+ImpRecPtr impdefs = NULL;
+ExpRecPtr expdefs = NULL;
+LibraryFilePtr libfiles = NULL;
+ResourcePtr resource = NULL;
 SortEntryPtr comdats = NULL;
 CharPtrPtr modname;
 CharPtrPtr filename;
-UINT namecount = 0, namemin = 0,
+UInt namecount = 0, namemin = 0,
 pubcount = 0, pubmin = 0,
 Segcount = 0, Segmin = 0, outcount = 0,
 grpcount = 0, grpmin = 0,
@@ -64,7 +64,7 @@ nummods = 0,
 filecount = 0,
 libcount = 0,
 rescount = 0;
-UINT libPathCount = 0;
+UInt libPathCount = 0;
 CharPtr* libPath = NULL;
 char* entryPoint = NULL;
 
@@ -72,8 +72,8 @@ void processArgs(int argc, char** argv)
 {
 	long i, j;
 	int helpRequested = FALSE;
-	UINT setbase, setfalign, setoalign;
-	UINT setstack, setstackcommit, setheap, setheapcommit;
+	UInt setbase, setfalign, setoalign;
+	UInt setstack, setstackcommit, setheap, setheapcommit;
 	int setsubsysmajor, setsubsysminor, setosmajor, setosminor;
 	unsigned char setsubsys;
 	int gotbase = FALSE, gotfalign = FALSE, gotoalign = FALSE, gotsubsys = FALSE;
@@ -822,7 +822,7 @@ void matchExterns()
 	//int n;
 	SortEntryPtr listnode;
 	CharPtr name;
-	PPUBLIC pubdef;
+	PublicPtr pubdef;
 
 	do
 	{
@@ -834,9 +834,9 @@ void matchExterns()
 				for (k = 0; k < listnode->count; k++)
 				{
 					/* exports can only match global publics */
-					if (((PPUBLIC)listnode->object[k])->modnum == 0)
+					if (((PublicPtr)listnode->object[k])->modnum == 0)
 					{
-						expdefs[i].pubdef = (PPUBLIC)listnode->object[k];
+						expdefs[i].pubdef = (PublicPtr)listnode->object[k];
 						break;
 					}
 				}
@@ -854,9 +854,9 @@ void matchExterns()
 				{
 					/* local publics can only match externs in same module */
 					/* and global publics can only match global externs */
-					if (((PPUBLIC)listnode->object[k])->modnum == externs[i].modnum)
+					if (((PublicPtr)listnode->object[k])->modnum == externs[i].modnum)
 					{
-						externs[i].pubdef = (PPUBLIC)listnode->object[k];
+						externs[i].pubdef = (PublicPtr)listnode->object[k];
 						externs[i].flags = EXT_MATCHEDPUBLIC;
 						break;
 					}
@@ -939,18 +939,18 @@ void matchExterns()
 		{
 			for (k = 0; k < publics[i].count; ++k)
 			{
-				pubdef = (PPUBLIC)publics[i].object[k];
+				pubdef = (PublicPtr)publics[i].object[k];
 				if (!pubdef->aliasName) continue;
 				if (listnode = binarySearch(publics, pubcount, pubdef->aliasName))
 				{
 					for (j = 0; j < listnode->count; j++)
 					{
-						if ((((PPUBLIC)listnode->object[j])->modnum == pubdef->modnum)
-							&& !((PPUBLIC)listnode->object[j])->aliasName)
+						if ((((PublicPtr)listnode->object[j])->modnum == pubdef->modnum)
+							&& !((PublicPtr)listnode->object[j])->aliasName)
 						{
 							/* if we've found a match for the alias, then kill the alias */
 							free(pubdef->aliasName);
-							(*pubdef) = (*((PPUBLIC)listnode->object[j]));
+							(*pubdef) = (*((PublicPtr)listnode->object[j]));
 							break;
 						}
 					}
@@ -984,7 +984,7 @@ void matchComDefs()
 	int comSeg;
 	int comfarSeg;
 	SortEntryPtr listnode;
-	PPUBLIC pubdef;
+	PublicPtr pubdef;
 
 	if (!comcount) return;
 
@@ -1021,8 +1021,8 @@ void matchComDefs()
 			{
 				/* local publics can only match externs in same module */
 				/* and global publics can only match global externs */
-				if ((((PPUBLIC)listnode->object[j])->modnum == comdefs[i]->modnum)
-					&& !((PPUBLIC)listnode->object[j])->aliasName)
+				if ((((PublicPtr)listnode->object[j])->modnum == comdefs[i]->modnum)
+					&& !((PublicPtr)listnode->object[j])->aliasName)
 				{
 					free(comdefs[i]->name);
 					free(comdefs[i]);
@@ -1084,7 +1084,7 @@ void matchComDefs()
 	for (i = 0; i < comcount; i++)
 	{
 		if (!comdefs[i]) continue;
-		pubdef = (PPUBLIC)checkMalloc(sizeof(PUBLIC));
+		pubdef = (PublicPtr)checkMalloc(sizeof(Public));
 		if (comdefs[i]->isFar)
 		{
 			if (comdefs[i]->length > 65536)
@@ -1155,15 +1155,15 @@ void matchComDefs()
 		{
 			for (j = 0; j < listnode->count; ++j)
 			{
-				if (((PPUBLIC)listnode->object[j])->modnum == pubdef->modnum)
+				if (((PublicPtr)listnode->object[j])->modnum == pubdef->modnum)
 				{
-					if (!((PPUBLIC)listnode->object[j])->aliasName)
+					if (!((PublicPtr)listnode->object[j])->aliasName)
 					{
 						printf("Duplicate public symbol %s\n", comdefs[i]->name);
 						exit(1);
 					}
-					free(((PPUBLIC)listnode->object[j])->aliasName);
-					(*((PPUBLIC)listnode->object[j])) = (*pubdef);
+					free(((PublicPtr)listnode->object[j])->aliasName);
+					(*((PublicPtr)listnode->object[j])) = (*pubdef);
 					pubdef = NULL;
 					break;
 				}
@@ -1194,9 +1194,9 @@ void matchComDefs()
 			for (j = 0; j < listnode->count; j++)
 			{
 				/* global publics only can match exports */
-				if (((PPUBLIC)listnode->object[j])->modnum == 0)
+				if (((PublicPtr)listnode->object[j])->modnum == 0)
 				{
-					expdefs[i].pubdef = (PPUBLIC)listnode->object[j];
+					expdefs[i].pubdef = (PublicPtr)listnode->object[j];
 					break;
 				}
 			}
@@ -1210,9 +1210,9 @@ void matchComDefs()
 			for (j = 0; j < listnode->count; j++)
 			{
 				/* global publics only can match exports */
-				if (((PPUBLIC)(listnode->object[j]))->modnum == externs[i].modnum)
+				if (((PublicPtr)(listnode->object[j]))->modnum == externs[i].modnum)
 				{
-					externs[i].pubdef = (PPUBLIC)(listnode->object[j]);
+					externs[i].pubdef = (PublicPtr)(listnode->object[j]);
 					externs[i].flags = EXT_MATCHEDPUBLIC;
 					break;
 				}
@@ -1224,7 +1224,7 @@ void matchComDefs()
 void sortSegments()
 {
 	long i, j, k;
-	UINT base, align;
+	UInt base, align;
 	long baseSeg;
 
 	for (i = 0; i < Segcount; i++)
@@ -1484,7 +1484,7 @@ void loadFiles()
 void generateMap()
 {
 	long i, j;
-	PPUBLIC q;
+	PublicPtr q;
 
 	afile = fopen(mapname, "wt");
 	if (!afile)
@@ -1506,10 +1506,10 @@ void generateMap()
 					fprintf(afile, "PRIVATE ");
 					break;
 				case Seg_PUBLIC:
-					fprintf(afile, "PUBLIC ");
+					fprintf(afile, "Public ");
 					break;
 				case Seg_PUBLIC2:
-					fprintf(afile, "PUBLIC(2) ");
+					fprintf(afile, "Public(2) ");
 					break;
 				case Seg_STACK:
 					fprintf(afile, "STACK ");
@@ -1518,7 +1518,7 @@ void generateMap()
 					fprintf(afile, "COMMON ");
 					break;
 				case Seg_PUBLIC3:
-					fprintf(afile, "PUBLIC(3) ");
+					fprintf(afile, "Public(3) ");
 					break;
 				default:
 					fprintf(afile, "unknown ");
@@ -1583,7 +1583,7 @@ void generateMap()
 	{
 		for (j = 0; j < publics[i].count; ++j)
 		{
-			q = (PPUBLIC)publics[i].object[j];
+			q = (PublicPtr)publics[i].object[j];
 			if (q->modnum) continue;
 			fprintf(afile, "%s at %s:%08lX\n",
 				publics[i].id,
@@ -1617,7 +1617,7 @@ int main(int argc, char* argv[])
 	long i, j;
 	int isend;
 	char* libList;
-	//PPUBLIC q;
+	//PublicPtr q;
 
 	printf("ALINK v1.6 (C) Copyright 1998-9 Anthony A.J. Williams.\n");
 	printf("All Rights Reserved\n\n");
@@ -1756,7 +1756,7 @@ int main(int argc, char* argv[])
 			printf("Warning, overriding entry point from Command Line\n");
 		}
 		/* define an external reference for entry point */
-		externs = (PEXTREC)checkRealloc(externs, (extcount + 1) * sizeof(EXTREC));
+		externs = (ExtRecPtr)checkRealloc(externs, (extcount + 1) * sizeof(ExtRec));
 		externs[extcount].name = entryPoint;
 		externs[extcount].typenum = -1;
 		externs[extcount].pubdef = NULL;

@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "alink.h"
 
-int getBitCount(UINT a)
+int getBitCount(UInt a)
 {
     int count=0;
 
@@ -45,7 +45,7 @@ long GetIndex(UCharPtr buf,long *index)
 
 void ReportError(long errnum)
 {
-    UINT tot,i;
+    UInt tot,i;
     
     printf("\nError in file at %08lX",filepos);
     switch(errnum)
@@ -207,9 +207,9 @@ char *checkStrdup(const char *s)
 }
 
 
-SortEntryPtr binarySearch(SortEntryPtr list,UINT count,char *key)
+SortEntryPtr binarySearch(SortEntryPtr list,UInt count,char *key)
 {
-    UINT i;
+    UInt i;
     int j;
     
     if(!list) return NULL;
@@ -235,10 +235,10 @@ SortEntryPtr binarySearch(SortEntryPtr list,UINT count,char *key)
     return NULL; /* return NULL if no match (count=0) */
 }
 
-void sortedInsert(SortEntryPtr *plist,UINT *pcount,char *key,void *object)
+void sortedInsert(SortEntryPtr *plist,UInt *pcount,char *key,void *object)
 {
     SortEntryPtr list,node;
-    UINT count,index,i;
+    UInt count,index,i;
     int j;
    
     if(!plist || !pcount) return;

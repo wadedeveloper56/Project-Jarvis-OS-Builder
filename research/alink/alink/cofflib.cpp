@@ -3,19 +3,19 @@
 
 void loadCoffLib(FILE* libfile, CharPtr libname)
 {
-	UINT i, j;
-	UINT numsyms;
-	UINT modpage;
-	UINT memberSize;
-	UINT startPoint;
+	UInt i, j;
+	UInt numsyms;
+	UInt modpage;
+	UInt memberSize;
+	UInt startPoint;
 	UCharPtr endptr;
-	PLIBFILE p;
+	LibraryFilePtr p;
 	CharPtr name;
 	UCharPtr modbuf;
 	SortEntryPtr symlist = NULL;
 	int x;
 
-	libfiles = (PLIBFILE)checkRealloc(libfiles, (libcount + 1) * sizeof(LIBFILE));
+	libfiles = (LibraryFilePtr)checkRealloc(libfiles, (libcount + 1) * sizeof(LibraryFile));
 	p = &libfiles[libcount];
 	p->filename = (CharPtr)checkMalloc(strlen(libname) + 1);
 	strcpy(p->filename, libname);
@@ -274,17 +274,17 @@ void loadCoffLib(FILE* libfile, CharPtr libname)
 
 
 	p->modsloaded = 0;
-	p->modlist = (UINT*)checkMalloc(sizeof(unsigned short) * numsyms);
+	p->modlist = (UInt*)checkMalloc(sizeof(unsigned short) * numsyms);
 	p->libtype = 'C';
 	p->blocksize = 1;
 	p->flags = LIBF_CASESENSITIVE;
 	libcount++;
 }
 
-void loadcofflibmod(PLIBFILE p, FILE* libfile)
+void loadcofflibmod(LibraryFilePtr p, FILE* libfile)
 {
 	char* name;
-	UINT ofs;
+	UInt ofs;
 
 	if (fread(buf, 1, 60, libfile) != 60)
 	{

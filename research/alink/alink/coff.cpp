@@ -7,26 +7,26 @@ void loadcoff(FILE* objfile)
 	unsigned char buf[100];
 	UCharPtr bigbuf;
 	UCharPtr stringList;
-	UINT thiscpu;
-	UINT numSect;
-	UINT headerSize;
-	UINT symbolPtr;
-	UINT numSymbols;
-	UINT stringPtr;
-	UINT stringSize;
-	UINT stringOfs;
-	UINT i, j, k;// , l;
-	UINT fileStart;
-	UINT minSeg;
-	UINT numrel;
-	UINT relofs;
-	UINT relshift;
-	UINT sectname;
+	UInt thiscpu;
+	UInt numSect;
+	UInt headerSize;
+	UInt symbolPtr;
+	UInt numSymbols;
+	UInt stringPtr;
+	UInt stringSize;
+	UInt stringOfs;
+	UInt i, j, k;// , l;
+	UInt fileStart;
+	UInt minSeg;
+	UInt numrel;
+	UInt relofs;
+	UInt relshift;
+	UInt sectname;
 	long sectorder;
-	PCOFFSYM sym = NULL;
-	UINT combineType;
-	PPUBLIC pubdef;
-	PCOMDAT comdat;
+	CoffSymPtr sym = NULL;
+	UInt combineType;
+	PublicPtr pubdef;
+	ComDatPtr comdat;
 	CharPtr comdatsym;
 	SortEntryPtr listnode;
 
@@ -116,7 +116,7 @@ void loadcoff(FILE* objfile)
 	if (symbolPtr && numSymbols)
 	{
 		fseek(objfile, fileStart + symbolPtr, SEEK_SET);
-		sym = (PCOFFSYM)checkMalloc(sizeof(COFFSYM) * numSymbols);
+		sym = (CoffSymPtr)checkMalloc(sizeof(CoffSym) * numSymbols);
 		for (i = 0; i < numSymbols; i++)
 		{
 			if (fread(buf, 1, PE_SYMBOL_SIZE, objfile) != PE_SYMBOL_SIZE)
@@ -168,7 +168,7 @@ void loadcoff(FILE* objfile)
 					}
 					/* section symbols declare an extern always, so can use in relocs */
 					/* they may also include a PUBDEF */
-					externs = (PEXTREC)checkRealloc(externs, (extcount + 1) * sizeof(EXTREC));
+					externs = (ExtRecPtr)checkRealloc(externs, (extcount + 1) * sizeof(ExtRec));
 					externs[extcount].name = (CharPtr)sym[i].name;
 					externs[extcount].pubdef = NULL;
 					externs[extcount].modnum = 0;
@@ -177,7 +177,7 @@ void loadcoff(FILE* objfile)
 					extcount++;
 					if (sym[i].section != 0) /* if the section is defined here, make public */
 					{
-						pubdef = (PPUBLIC)checkMalloc(sizeof(PUBLIC));
+						pubdef = (PublicPtr)checkMalloc(sizeof(Public));
 						pubdef->grpnum = -1;
 						pubdef->typenum = 0;
 						pubdef->modnum = 0;
@@ -196,15 +196,15 @@ void loadcoff(FILE* objfile)
 						{
 							for (j = 0; j < listnode->count; ++j)
 							{
-								if (((PPUBLIC)listnode->object[j])->modnum == pubdef->modnum)
+								if (((PublicPtr)listnode->object[j])->modnum == pubdef->modnum)
 								{
-									if (!((PPUBLIC)listnode->object[j])->aliasName)
+									if (!((PublicPtr)listnode->object[j])->aliasName)
 									{
 										printf("Duplicate public symbol %s\n", sym[i].name);
 										exit(1);
 									}
-									free(((PPUBLIC)listnode->object[j])->aliasName);
-									(*((PPUBLIC)listnode->object[j])) = (*pubdef);
+									free(((PublicPtr)listnode->object[j])->aliasName);
+									(*((PublicPtr)listnode->object[j])) = (*pubdef);
 									pubdef = NULL;
 									break;
 								}
@@ -394,8 +394,8 @@ void loadcoff(FILE* objfile)
 
 		if (Seglist[Segcount]->winFlags & WINF_COMDAT)
 		{
-			printf("COMDAT section %s\n", namelist[sectname]);
-			comdat = (PCOMDAT)checkMalloc(sizeof(COMDATREC));
+			printf("ComDat section %s\n", namelist[sectname]);
+			comdat = (ComDatPtr)checkMalloc(sizeof(ComDatRec));
 			combineType = 0;
 			comdat->linkwith = 0;
 			for (j = 0; j < numSymbols; j++)
@@ -405,7 +405,7 @@ void loadcoff(FILE* objfile)
 				{
 					if (sym[j].numAuxRecs != 1)
 					{
-						printf("Invalid COMDAT section reference\n");
+						printf("Invalid ComDat section reference\n");
 						exit(1);
 					}
 					printf("Section %s ", sym[j].name);
@@ -419,7 +419,7 @@ void loadcoff(FILE* objfile)
 			}
 			if (j == numSymbols)
 			{
-				printf("Invalid COMDAT section\n");
+				printf("Invalid ComDat section\n");
 				exit(1);
 			}
 			for (j++; j < numSymbols; j++)
@@ -429,11 +429,11 @@ void loadcoff(FILE* objfile)
 				{
 					if (sym[j].numAuxRecs)
 					{
-						printf("Invalid COMDAT symbol\n");
+						printf("Invalid ComDat symbol\n");
 						exit(1);
 					}
 
-					printf("COMDAT Symbol %s\n", sym[j].name);
+					printf("ComDat Symbol %s\n", sym[j].name);
 					comdatsym = (CharPtr)sym[j].name;
 					sym[j].isComDat = TRUE;
 					break;
@@ -444,7 +444,7 @@ void loadcoff(FILE* objfile)
 			{
 				if (combineType != 5)
 				{
-					printf("\nInvalid COMDAT section\n");
+					printf("\nInvalid ComDat section\n");
 					exit(1);
 				}
 				else
@@ -459,7 +459,7 @@ void loadcoff(FILE* objfile)
 			printf("COMDATs not yet supported\n");
 			exit(1);
 
-			printf("Combine types for duplicate COMDAT symbol %s do not match\n", comdatsym);
+			printf("Combine types for duplicate ComDat symbol %s do not match\n", comdatsym);
 			exit(1);
 		}
 
@@ -502,8 +502,8 @@ void loadcoff(FILE* objfile)
 				printf("Invalid COFF object file, unable to read reloc table\n");
 				exit(1);
 			}
-			relocs = (PPRELOC)checkRealloc(relocs, (fixcount + 1) * sizeof(PRELOC));
-			relocs[fixcount] = (PRELOC)checkMalloc(sizeof(RELOC));
+			relocs = (RelocPtrPtr)checkRealloc(relocs, (fixcount + 1) * sizeof(RelocPtr));
+			relocs[fixcount] = (RelocPtr)checkMalloc(sizeof(Reloc));
 			/* get address to relocate */
 			relocs[fixcount]->ofs = buf[0] + (buf[1] << 8) + (buf[2] << 16) + (buf[3] << 24);
 			relocs[fixcount]->ofs -= relshift;
@@ -525,7 +525,7 @@ void loadcoff(FILE* objfile)
 				{
 					case COFF_SYM_EXTERNAL:
 						/* global symbols declare an extern when used in relocs */
-						externs = (PEXTREC)checkRealloc(externs, (extcount + 1) * sizeof(EXTREC));
+						externs = (ExtRecPtr)checkRealloc(externs, (extcount + 1) * sizeof(ExtRec));
 						externs[extcount].name = (CharPtr)sym[k].name;
 						externs[extcount].pubdef = NULL;
 						externs[extcount].modnum = 0;
@@ -533,7 +533,7 @@ void loadcoff(FILE* objfile)
 						sym[k].extnum = extcount;
 						extcount++;
 						/* they may also include a COMDEF or a PUBDEF */
-						/* this is dealt with after all sections loaded, to cater for COMDAT symbols */
+						/* this is dealt with after all sections loaded, to cater for ComDat symbols */
 						break;
 					case COFF_SYM_STATIC: /* static symbol */
 					case COFF_SYM_LABEL: /* code label symbol */
@@ -547,7 +547,7 @@ void loadcoff(FILE* objfile)
 						{
 							if (sym[k].value)
 							{
-								externs = (PEXTREC)checkRealloc(externs, (extcount + 1) * sizeof(EXTREC));
+								externs = (ExtRecPtr)checkRealloc(externs, (extcount + 1) * sizeof(ExtRec));
 								externs[extcount].name = (CharPtr)sym[k].name;
 								externs[extcount].pubdef = NULL;
 								externs[extcount].modnum = nummods;
@@ -555,8 +555,8 @@ void loadcoff(FILE* objfile)
 								sym[k].extnum = extcount;
 								extcount++;
 
-								comdefs = (PPCOMREC)checkRealloc(comdefs, (comcount + 1) * sizeof(PCOMREC));
-								comdefs[comcount] = (PCOMREC)checkMalloc(sizeof(COMREC));
+								comdefs = (ComRecPtrPtr)checkRealloc(comdefs, (comcount + 1) * sizeof(ComRecPtr));
+								comdefs[comcount] = (ComRecPtr)checkMalloc(sizeof(ComRec));
 								comdefs[comcount]->length = sym[k].value;
 								comdefs[comcount]->isFar = FALSE;
 								comdefs[comcount]->name = (CharPtr)sym[k].name;
@@ -627,7 +627,7 @@ void loadcoff(FILE* objfile)
 
 		Segcount++;
 	}
-	/* build PUBDEFs or COMDEFs for external symbols defined here that aren't COMDAT symbols. */
+	/* build PUBDEFs or COMDEFs for external symbols defined here that aren't ComDat symbols. */
 	for (i = 0; i < numSymbols; i++)
 	{
 		if (sym[i].clazz != COFF_SYM_EXTERNAL) continue;
@@ -640,8 +640,8 @@ void loadcoff(FILE* objfile)
 		{
 			if (sym[i].value)
 			{
-				comdefs = (PPCOMREC)checkRealloc(comdefs, (comcount + 1) * sizeof(PCOMREC));
-				comdefs[comcount] = (PCOMREC)checkMalloc(sizeof(COMREC));
+				comdefs = (ComRecPtrPtr)checkRealloc(comdefs, (comcount + 1) * sizeof(ComRecPtr));
+				comdefs[comcount] = (ComRecPtr)checkMalloc(sizeof(ComRec));
 				comdefs[comcount]->length = sym[i].value;
 				comdefs[comcount]->isFar = FALSE;
 				comdefs[comcount]->name = (CharPtr)sym[i].name;
@@ -651,7 +651,7 @@ void loadcoff(FILE* objfile)
 		}
 		else
 		{
-			pubdef = (PPUBLIC)checkMalloc(sizeof(PUBLIC));
+			pubdef = (PublicPtr)checkMalloc(sizeof(Public));
 			pubdef->grpnum = -1;
 			pubdef->typenum = 0;
 			pubdef->modnum = 0;
@@ -670,15 +670,15 @@ void loadcoff(FILE* objfile)
 			{
 				for (j = 0; j < listnode->count; ++j)
 				{
-					if (((PPUBLIC)listnode->object[j])->modnum == pubdef->modnum)
+					if (((PublicPtr)listnode->object[j])->modnum == pubdef->modnum)
 					{
-						if (!((PPUBLIC)listnode->object[j])->aliasName)
+						if (!((PublicPtr)listnode->object[j])->aliasName)
 						{
 							printf("Duplicate public symbol %s\n", sym[i].name);
 							exit(1);
 						}
-						free(((PPUBLIC)listnode->object[j])->aliasName);
-						(*((PPUBLIC)listnode->object[j])) = (*pubdef);
+						free(((PublicPtr)listnode->object[j])->aliasName);
+						(*((PublicPtr)listnode->object[j])) = (*pubdef);
 						pubdef = NULL;
 						break;
 					}
@@ -697,8 +697,8 @@ void loadcoff(FILE* objfile)
 
 void loadCoffImport(FILE* objfile)
 {
-	UINT fileStart;
-	UINT thiscpu;
+	UInt fileStart;
+	UInt thiscpu;
 
 	fileStart = ftell(objfile);
 
