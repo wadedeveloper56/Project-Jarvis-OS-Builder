@@ -15,30 +15,30 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ALINK.C">
+    <ClCompile Include="alink.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="COFF.C">
+    <ClCompile Include="coff.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="COFFLIB.C">
+    <ClCompile Include="cofflib.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="COMBINE.C">
+    <ClCompile Include="combine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="OBJLOAD.C">
+    <ClCompile Include="objload.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="OUTPUT.C">
+    <ClCompile Include="output.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="UTIL.C">
+    <ClCompile Include="util.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ALINK.H">
+    <ClInclude Include="alink.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
