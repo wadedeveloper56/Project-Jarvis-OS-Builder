@@ -50,16 +50,16 @@ PDATABLOCK BuildLiData(long* bufofs)
 		p->data = checkMalloc(buf[i] + 1);
 		((char*)p->data)[0] = buf[i];
 		i++;
-		for (j = 0; j < ((PUCHAR)p->data)[0]; j++, i++)
+		for (j = 0; j < ((UCharPtr)p->data)[0]; j++, i++)
 		{
-			((PUCHAR)p->data)[j + 1] = buf[i];
+			((UCharPtr)p->data)[j + 1] = buf[i];
 		}
 	}
 	*bufofs = i;
 	return p;
 }
 
-void EmitLiData(PDATABLOCK p, long segnum, long* ofs)
+void EmitLiData(PDATABLOCK p, long Segnum, long* ofs)
 {
 	long i, j;
 
@@ -69,26 +69,26 @@ void EmitLiData(PDATABLOCK p, long segnum, long* ofs)
 		{
 			for (j = 0; j < p->blocks; j++)
 			{
-				EmitLiData(((PPDATABLOCK)p->data)[j], segnum, ofs);
+				EmitLiData(((PPDATABLOCK)p->data)[j], Segnum, ofs);
 			}
 		}
 		else
 		{
-			for (j = 0; j < ((PUCHAR)p->data)[0]; j++, (*ofs)++)
+			for (j = 0; j < ((UCharPtr)p->data)[0]; j++, (*ofs)++)
 			{
-				if ((*ofs) >= seglist[segnum]->length)
+				if ((*ofs) >= Seglist[Segnum]->length)
 				{
 					ReportError(ERR_INV_DATA);
 				}
-				if (GetNbit(seglist[segnum]->datmask, *ofs))
+				if (GetNbit(Seglist[Segnum]->datmask, *ofs))
 				{
-					if (seglist[segnum]->data[*ofs] != ((PUCHAR)p->data)[j + 1])
+					if (Seglist[Segnum]->data[*ofs] != ((UCharPtr)p->data)[j + 1])
 					{
 						ReportError(ERR_OVERWRITE);
 					}
 				}
-				seglist[segnum]->data[*ofs] = ((PUCHAR)p->data)[j + 1];
-				SetNbit(seglist[segnum]->datmask, *ofs);
+				Seglist[Segnum]->data[*ofs] = ((UCharPtr)p->data)[j + 1];
+				SetNbit(Seglist[Segnum]->datmask, *ofs);
 			}
 		}
 	}
@@ -121,13 +121,13 @@ void RelocLIDATA(PDATABLOCK p, long* ofs, PRELOC r)
 				memcpy(relocs[fixcount], r, sizeof(RELOC));
 				relocs[fixcount]->ofs = *ofs + j;
 				fixcount++;
-				*ofs += ((PUCHAR)p->data)[0];
+				*ofs += ((UCharPtr)p->data)[0];
 			}
 		}
 	}
 }
 
-void LoadFIXUP(PRELOC r, PUCHAR buf, long* p)
+void LoadFIXUP(PRELOC r, UCharPtr buf, long* p)
 {
 	long j;
 	int thrednum;
@@ -148,7 +148,7 @@ void LoadFIXUP(PRELOC r, PUCHAR buf, long* p)
 		r->ftype = (f_thred[thrednum] >> 2) & 7;
 		switch (r->ftype)
 		{
-			case REL_SEGFRAME:
+			case REL_SegFRAME:
 			case REL_GRPFRAME:
 			case REL_EXTFRAME:
 				r->frame = f_thredindex[thrednum];
@@ -165,8 +165,8 @@ void LoadFIXUP(PRELOC r, PUCHAR buf, long* p)
 		}
 		switch (r->ftype)
 		{
-			case REL_SEGFRAME:
-				r->frame += segmin - 1;
+			case REL_SegFRAME:
+				r->frame += Segmin - 1;
 				break;
 			case REL_GRPFRAME:
 				r->frame += grpmin - 1;
@@ -175,7 +175,7 @@ void LoadFIXUP(PRELOC r, PUCHAR buf, long* p)
 				r->frame += extmin - 1;
 				break;
 			case REL_LILEFRAME:
-				r->frame = prevseg;
+				r->frame = prevSeg;
 				break;
 			default:
 				break;
@@ -185,7 +185,7 @@ void LoadFIXUP(PRELOC r, PUCHAR buf, long* p)
 	{
 		switch (r->ftype)
 		{
-			case REL_SEGFRAME:
+			case REL_SegFRAME:
 			case REL_GRPFRAME:
 			case REL_EXTFRAME:
 				r->frame = GetIndex(buf, &j);
@@ -202,8 +202,8 @@ void LoadFIXUP(PRELOC r, PUCHAR buf, long* p)
 		}
 		switch (r->ftype)
 		{
-			case REL_SEGFRAME:
-				r->frame += segmin - 1;
+			case REL_SegFRAME:
+				r->frame += Segmin - 1;
 				break;
 			case REL_GRPFRAME:
 				r->frame += grpmin - 1;
@@ -212,7 +212,7 @@ void LoadFIXUP(PRELOC r, PUCHAR buf, long* p)
 				r->frame += extmin - 1;
 				break;
 			case REL_LILEFRAME:
-				r->frame = prevseg;
+				r->frame = prevSeg;
 				break;
 			default:
 				break;
@@ -232,10 +232,10 @@ void LoadFIXUP(PRELOC r, PUCHAR buf, long* p)
 		r->target = t_thredindex[thrednum];
 		switch (r->ttype)
 		{
-			case REL_SEGDISP:
+			case REL_SegDISP:
 			case REL_GRPDISP:
 			case REL_EXTDISP:
-			case REL_SEGONLY:
+			case REL_SegONLY:
 			case REL_GRPONLY:
 			case REL_EXTONLY:
 				if (!r->target)
@@ -250,8 +250,8 @@ void LoadFIXUP(PRELOC r, PUCHAR buf, long* p)
 		}
 		switch (r->ttype)
 		{
-			case REL_SEGDISP:
-				r->target += segmin - 1;
+			case REL_SegDISP:
+				r->target += Segmin - 1;
 				break;
 			case REL_GRPDISP:
 				r->target += grpmin - 1;
@@ -261,8 +261,8 @@ void LoadFIXUP(PRELOC r, PUCHAR buf, long* p)
 				break;
 			case REL_EXPFRAME:
 				break;
-			case REL_SEGONLY:
-				r->target += segmin - 1;
+			case REL_SegONLY:
+				r->target += Segmin - 1;
 				break;
 			case REL_GRPONLY:
 				r->target += grpmin - 1;
@@ -277,10 +277,10 @@ void LoadFIXUP(PRELOC r, PUCHAR buf, long* p)
 		r->target = GetIndex(buf, &j);
 		switch (r->ttype)
 		{
-			case REL_SEGDISP:
+			case REL_SegDISP:
 			case REL_GRPDISP:
 			case REL_EXTDISP:
-			case REL_SEGONLY:
+			case REL_SegONLY:
 			case REL_GRPONLY:
 			case REL_EXTONLY:
 				if (!r->target)
@@ -295,8 +295,8 @@ void LoadFIXUP(PRELOC r, PUCHAR buf, long* p)
 		}
 		switch (r->ttype)
 		{
-			case REL_SEGDISP:
-				r->target += segmin - 1;
+			case REL_SegDISP:
+				r->target += Segmin - 1;
 				break;
 			case REL_GRPDISP:
 				r->target += grpmin - 1;
@@ -306,8 +306,8 @@ void LoadFIXUP(PRELOC r, PUCHAR buf, long* p)
 				break;
 			case REL_EXPFRAME:
 				break;
-			case REL_SEGONLY:
-				r->target += segmin - 1;
+			case REL_SegONLY:
+				r->target += Segmin - 1;
 				break;
 			case REL_GRPONLY:
 				r->target += grpmin - 1;
@@ -319,7 +319,7 @@ void LoadFIXUP(PRELOC r, PUCHAR buf, long* p)
 	}
 	switch (r->ttype)
 	{
-		case REL_SEGDISP:
+		case REL_SegDISP:
 		case REL_GRPDISP:
 		case REL_EXTDISP:
 		case REL_EXPFRAME:
@@ -338,14 +338,14 @@ void LoadFIXUP(PRELOC r, PUCHAR buf, long* p)
 	{
 		switch (r->ttype)
 		{
-			case REL_SEGDISP:
+			case REL_SegDISP:
 			case REL_GRPDISP:
 			case REL_EXTDISP:
 			case REL_EXPFRAME:
 				r->ftype = r->ttype;
 				r->frame = r->target;
 				break;
-			case REL_SEGONLY:
+			case REL_SegONLY:
 			case REL_GRPONLY:
 			case REL_EXTONLY:
 				r->ftype = r->ttype - 4;
@@ -362,11 +362,11 @@ long loadmod(FILE* objfile)
 	long modpos;
 	long done;
 	long i, j, k;
-	long segnum, grpnum;
+	long Segnum, grpnum;
 	PRELOC r;
 	PPUBLIC pubdef;
-	PCHAR name, aliasName;
-	PSORTENTRY listnode;
+	CharPtr name, aliasName;
+	SortEntryPtr listnode;
 
 	modpos = 0;
 	done = 0;
@@ -398,8 +398,8 @@ long loadmod(FILE* objfile)
 				{
 					ReportError(ERR_EXTRA_HEADER);
 				}
-				modname = (PPCHAR)checkRealloc(modname, (nummods + 1) * sizeof(PCHAR));
-				modname[nummods] = (PCHAR)checkMalloc(buf[0] + 1);
+				modname = (CharPtrPtr)checkRealloc(modname, (nummods + 1) * sizeof(CharPtr));
+				modname[nummods] = (CharPtr)checkMalloc(buf[0] + 1);
 				for (i = 0; i < buf[0]; i++)
 				{
 					modname[nummods][i] = buf[i + 1];
@@ -412,7 +412,7 @@ long loadmod(FILE* objfile)
 					ReportError(ERR_EXTRA_DATA);
 				}
 				namemin = namecount;
-				segmin = segcount;
+				Segmin = Segcount;
 				extmin = extcount;
 				fixmin = fixcount;
 				grpmin = grpcount;
@@ -434,8 +434,8 @@ long loadmod(FILE* objfile)
 					{
 						case COMENT_LIB_SPEC:
 						case COMENT_DEFLIB:
-							filename = (PPCHAR)checkRealloc(filename, (filecount + 1) * sizeof(PCHAR));
-							filename[filecount] = (PCHAR)checkMalloc(reclength - 1 + 4);
+							filename = (CharPtrPtr)checkRealloc(filename, (filecount + 1) * sizeof(CharPtr));
+							filename[filecount] = (CharPtr)checkMalloc(reclength - 1 + 4);
 							/* get filename */
 							for (i = 0; i < reclength - 2; i++)
 							{
@@ -470,7 +470,7 @@ long loadmod(FILE* objfile)
 									}
 									impdefs = (PIMPREC)checkRealloc(impdefs, (impcount + 1) * sizeof(IMPREC));
 									impdefs[impcount].flags = buf[3];
-									impdefs[impcount].int_name = (PCHAR)checkMalloc(buf[j] + 1);
+									impdefs[impcount].int_name = (CharPtr)checkMalloc(buf[j] + 1);
 									for (i = 0; i < buf[j]; i++)
 									{
 										impdefs[impcount].int_name[i] = buf[j + i + 1];
@@ -481,7 +481,7 @@ long loadmod(FILE* objfile)
 									{
 										strupr(impdefs[impcount].int_name);
 									}
-									impdefs[impcount].mod_name = (PCHAR)checkMalloc(buf[j] + 1);
+									impdefs[impcount].mod_name = (CharPtr)checkMalloc(buf[j] + 1);
 									for (i = 0; i < buf[j]; i++)
 									{
 										impdefs[impcount].mod_name[i] = buf[j + i + 1];
@@ -501,7 +501,7 @@ long loadmod(FILE* objfile)
 									{
 										if (buf[j])
 										{
-											impdefs[impcount].imp_name = (PCHAR)checkMalloc(buf[j] + 1);
+											impdefs[impcount].imp_name = (CharPtr)checkMalloc(buf[j] + 1);
 											for (i = 0; i < buf[j]; i++)
 											{
 												impdefs[impcount].imp_name[i] = buf[j + i + 1];
@@ -511,7 +511,7 @@ long loadmod(FILE* objfile)
 										}
 										else
 										{
-											impdefs[impcount].imp_name = (PCHAR)checkMalloc(strlen(impdefs[impcount].int_name) + 1);
+											impdefs[impcount].imp_name = (CharPtr)checkMalloc(strlen(impdefs[impcount].int_name) + 1);
 											strcpy(impdefs[impcount].imp_name, impdefs[impcount].int_name);
 										}
 									}
@@ -522,7 +522,7 @@ long loadmod(FILE* objfile)
 									j = 4;
 									expdefs[expcount].flags = buf[3];
 									expdefs[expcount].pubdef = NULL;
-									expdefs[expcount].exp_name = (PCHAR)checkMalloc(buf[j] + 1);
+									expdefs[expcount].exp_name = (CharPtr)checkMalloc(buf[j] + 1);
 									for (i = 0; i < buf[j]; i++)
 									{
 										expdefs[expcount].exp_name[i] = buf[j + i + 1];
@@ -535,7 +535,7 @@ long loadmod(FILE* objfile)
 									j += buf[j] + 1;
 									if (buf[j])
 									{
-										expdefs[expcount].int_name = (PCHAR)checkMalloc(buf[j] + 1);
+										expdefs[expcount].int_name = (CharPtr)checkMalloc(buf[j] + 1);
 										for (i = 0; i < buf[j]; i++)
 										{
 											expdefs[expcount].int_name[i] = buf[j + i + 1];
@@ -548,7 +548,7 @@ long loadmod(FILE* objfile)
 									}
 									else
 									{
-										expdefs[expcount].int_name = (PCHAR)checkMalloc(strlen(expdefs[expcount].exp_name) + 1);
+										expdefs[expcount].int_name = (CharPtr)checkMalloc(strlen(expdefs[expcount].exp_name) + 1);
 										strcpy(expdefs[expcount].int_name, expdefs[expcount].exp_name);
 									}
 									j += buf[j] + 1;
@@ -566,7 +566,7 @@ long loadmod(FILE* objfile)
 									ReportError(ERR_INVALID_COMENT);
 							}
 							break;
-						case COMENT_DOSSEG:
+						case COMENT_DOSSeg:
 							break;
 						case COMENT_TRANSLATOR:
 						case COMENT_INTEL_COPYRIGHT:
@@ -610,8 +610,8 @@ long loadmod(FILE* objfile)
 				j = 0;
 				while (j < reclength)
 				{
-					namelist = (PPCHAR)checkRealloc(namelist, (namecount + 1) * sizeof(PCHAR));
-					namelist[namecount] = (PCHAR)checkMalloc(buf[j] + 1);
+					namelist = (CharPtrPtr)checkRealloc(namelist, (namecount + 1) * sizeof(CharPtr));
+					namelist[namecount] = (CharPtr)checkMalloc(buf[j] + 1);
 					for (i = 0; i < buf[j]; i++)
 					{
 						namelist[namecount][i] = buf[j + i + 1];
@@ -625,121 +625,121 @@ long loadmod(FILE* objfile)
 					namecount++;
 				}
 				break;
-			case SEGDEF:
-			case SEGDEF32:
-				seglist = (PPSEG)checkRealloc(seglist, (segcount + 1) * sizeof(PSEG));
-				seglist[segcount] = (PSEG)checkMalloc(sizeof(SEG));
-				seglist[segcount]->attr = buf[0];
+			case SegDEF:
+			case SegDEF32:
+				Seglist = (SegPtrPtr)checkRealloc(Seglist, (Segcount + 1) * sizeof(SegPtr));
+				Seglist[Segcount] = (SegPtr)checkMalloc(sizeof(Seg));
+				Seglist[Segcount]->attr = buf[0];
 				j = 1;
-				if ((seglist[segcount]->attr & SEG_ALIGN) == SEG_ABS)
+				if ((Seglist[Segcount]->attr & Seg_ALIGN) == Seg_ABS)
 				{
-					seglist[segcount]->absframe = buf[j] + 256 * buf[j + 1];
-					seglist[segcount]->absofs = buf[j + 2];
+					Seglist[Segcount]->absframe = buf[j] + 256 * buf[j + 1];
+					Seglist[Segcount]->absofs = buf[j + 2];
 					j += 3;
 				}
-				seglist[segcount]->length = buf[j] + 256 * buf[j + 1];
+				Seglist[Segcount]->length = buf[j] + 256 * buf[j + 1];
 				j += 2;
-				if (rectype == SEGDEF32)
+				if (rectype == SegDEF32)
 				{
-					seglist[segcount]->length += (buf[j] + 256 * buf[j + 1]) << 16;
+					Seglist[Segcount]->length += (buf[j] + 256 * buf[j + 1]) << 16;
 					j += 2;
 				}
-				if (seglist[segcount]->attr & SEG_BIG)
+				if (Seglist[Segcount]->attr & Seg_BIG)
 				{
-					if (rectype == SEGDEF)
+					if (rectype == SegDEF)
 					{
-						seglist[segcount]->length += 65536;
+						Seglist[Segcount]->length += 65536;
 					}
 					else
 					{
-						if ((seglist[segcount]->attr & SEG_ALIGN) != SEG_ABS)
+						if ((Seglist[Segcount]->attr & Seg_ALIGN) != Seg_ABS)
 						{
-							ReportError(ERR_SEG_TOO_LARGE);
+							ReportError(ERR_Seg_TOO_LARGE);
 						}
 					}
 				}
-				seglist[segcount]->nameindex = GetIndex(buf, &j) - 1;
-				seglist[segcount]->classindex = GetIndex(buf, &j) - 1;
-				seglist[segcount]->overlayindex = GetIndex(buf, &j) - 1;
-				seglist[segcount]->orderindex = -1;
-				if (seglist[segcount]->nameindex >= 0)
+				Seglist[Segcount]->nameindex = GetIndex(buf, &j) - 1;
+				Seglist[Segcount]->classindex = GetIndex(buf, &j) - 1;
+				Seglist[Segcount]->overlayindex = GetIndex(buf, &j) - 1;
+				Seglist[Segcount]->orderindex = -1;
+				if (Seglist[Segcount]->nameindex >= 0)
 				{
-					seglist[segcount]->nameindex += namemin;
+					Seglist[Segcount]->nameindex += namemin;
 				}
-				if (seglist[segcount]->classindex >= 0)
+				if (Seglist[Segcount]->classindex >= 0)
 				{
-					seglist[segcount]->classindex += namemin;
+					Seglist[Segcount]->classindex += namemin;
 				}
-				if (seglist[segcount]->overlayindex >= 0)
+				if (Seglist[Segcount]->overlayindex >= 0)
 				{
-					seglist[segcount]->overlayindex += namemin;
+					Seglist[Segcount]->overlayindex += namemin;
 				}
-				if ((seglist[segcount]->attr & SEG_ALIGN) != SEG_ABS)
+				if ((Seglist[Segcount]->attr & Seg_ALIGN) != Seg_ABS)
 				{
-					seglist[segcount]->data = (PUCHAR)checkMalloc(seglist[segcount]->length);
-					seglist[segcount]->datmask = (PUCHAR)checkMalloc((seglist[segcount]->length + 7) / 8);
-					for (i = 0; i < (seglist[segcount]->length + 7) / 8; i++)
+					Seglist[Segcount]->data = (UCharPtr)checkMalloc(Seglist[Segcount]->length);
+					Seglist[Segcount]->datmask = (UCharPtr)checkMalloc((Seglist[Segcount]->length + 7) / 8);
+					for (i = 0; i < (Seglist[Segcount]->length + 7) / 8; i++)
 					{
-						seglist[segcount]->datmask[i] = 0;
+						Seglist[Segcount]->datmask[i] = 0;
 					}
 				}
 				else
 				{
-					seglist[segcount]->data = 0;
-					seglist[segcount]->datmask = 0;
-					seglist[segcount]->attr &= (0xffff - SEG_COMBINE);
-					seglist[segcount]->attr |= SEG_PRIVATE;
+					Seglist[Segcount]->data = 0;
+					Seglist[Segcount]->datmask = 0;
+					Seglist[Segcount]->attr &= (0xffff - Seg_COMBINE);
+					Seglist[Segcount]->attr |= Seg_PRIVATE;
 				}
-				switch (seglist[segcount]->attr & SEG_COMBINE)
+				switch (Seglist[Segcount]->attr & Seg_COMBINE)
 				{
-					case SEG_PRIVATE:
-					case SEG_PUBLIC:
-					case SEG_PUBLIC2:
-					case SEG_COMMON:
-					case SEG_PUBLIC3:
+					case Seg_PRIVATE:
+					case Seg_PUBLIC:
+					case Seg_PUBLIC2:
+					case Seg_COMMON:
+					case Seg_PUBLIC3:
 						break;
-					case SEG_STACK:
-						/* stack segs are always byte aligned */
-						seglist[segcount]->attr &= (0xffff - SEG_ALIGN);
-						seglist[segcount]->attr |= SEG_BYTE;
+					case Seg_STACK:
+						/* stack Segs are always byte aligned */
+						Seglist[Segcount]->attr &= (0xffff - Seg_ALIGN);
+						Seglist[Segcount]->attr |= Seg_BYTE;
 						break;
 					default:
-						ReportError(ERR_BAD_SEGDEF);
+						ReportError(ERR_BAD_SegDEF);
 						break;
 				}
-				if ((seglist[segcount]->attr & SEG_ALIGN) == SEG_BADALIGN)
+				if ((Seglist[Segcount]->attr & Seg_ALIGN) == Seg_BADALIGN)
 				{
-					ReportError(ERR_BAD_SEGDEF);
+					ReportError(ERR_BAD_SegDEF);
 				}
-				if ((seglist[segcount]->classindex >= 0) &&
-					(!stricmp(namelist[seglist[segcount]->classindex], "CODE") ||
-						!stricmp(namelist[seglist[segcount]->classindex], "TEXT")))
+				if ((Seglist[Segcount]->classindex >= 0) &&
+					(!stricmp(namelist[Seglist[Segcount]->classindex], "CODE") ||
+						!stricmp(namelist[Seglist[Segcount]->classindex], "TEXT")))
 				{
-					/* code segment */
-					seglist[segcount]->winFlags = WINF_CODE | WINF_INITDATA | WINF_EXECUTE | WINF_READABLE | WINF_NEG_FLAGS;
+					/* code Segment */
+					Seglist[Segcount]->winFlags = WINF_CODE | WINF_INITDATA | WINF_EXECUTE | WINF_READABLE | WINF_NEG_FLAGS;
 				}
-				else    /* data segment */
-					seglist[segcount]->winFlags = WINF_INITDATA | WINF_READABLE | WINF_WRITEABLE | WINF_NEG_FLAGS;
+				else    /* data Segment */
+					Seglist[Segcount]->winFlags = WINF_INITDATA | WINF_READABLE | WINF_WRITEABLE | WINF_NEG_FLAGS;
 
-				if (!stricmp(namelist[seglist[segcount]->nameindex], "$$SYMBOLS") ||
-					!stricmp(namelist[seglist[segcount]->nameindex], "$$TYPES"))
+				if (!stricmp(namelist[Seglist[Segcount]->nameindex], "$$SYMBOLS") ||
+					!stricmp(namelist[Seglist[Segcount]->nameindex], "$$TYPES"))
 				{
-					seglist[segcount]->winFlags |= WINF_REMOVE;
+					Seglist[Segcount]->winFlags |= WINF_REMOVE;
 				}
-				segcount++;
+				Segcount++;
 				break;
 			case LEDATA:
 			case LEDATA32:
 				j = 0;
-				prevseg = GetIndex(buf, &j) - 1;
-				if (prevseg < 0)
+				prevSeg = GetIndex(buf, &j) - 1;
+				if (prevSeg < 0)
 				{
-					ReportError(ERR_INV_SEG);
+					ReportError(ERR_INV_Seg);
 				}
-				prevseg += segmin;
-				if ((seglist[prevseg]->attr & SEG_ALIGN) == SEG_ABS)
+				prevSeg += Segmin;
+				if ((Seglist[prevSeg]->attr & Seg_ALIGN) == Seg_ABS)
 				{
-					ReportError(ERR_ABS_SEG);
+					ReportError(ERR_ABS_Seg);
 				}
 				prevofs = buf[j] + (buf[j + 1] << 8);
 				j += 2;
@@ -750,20 +750,20 @@ long loadmod(FILE* objfile)
 				}
 				for (k = 0; j < reclength; j++, k++)
 				{
-					if ((prevofs + k) >= seglist[prevseg]->length)
+					if ((prevofs + k) >= Seglist[prevSeg]->length)
 					{
 						ReportError(ERR_INV_DATA);
 					}
-					if (GetNbit(seglist[prevseg]->datmask, prevofs + k))
+					if (GetNbit(Seglist[prevSeg]->datmask, prevofs + k))
 					{
-						if (seglist[prevseg]->data[prevofs + k] != buf[j])
+						if (Seglist[prevSeg]->data[prevofs + k] != buf[j])
 						{
-							printf("%08lX: %08lX: %i, %li,%li,%li\n", prevofs + k, j, GetNbit(seglist[prevseg]->datmask, prevofs + k), segcount, segmin, prevseg);
+							printf("%08lX: %08lX: %i, %li,%li,%li\n", prevofs + k, j, GetNbit(Seglist[prevSeg]->datmask, prevofs + k), Segcount, Segmin, prevSeg);
 							ReportError(ERR_OVERWRITE);
 						}
 					}
-					seglist[prevseg]->data[prevofs + k] = buf[j];
-					SetNbit(seglist[prevseg]->datmask, prevofs + k);
+					Seglist[prevSeg]->data[prevofs + k] = buf[j];
+					SetNbit(Seglist[prevSeg]->datmask, prevofs + k);
 				}
 				li_le = PREV_LE;
 				break;
@@ -774,15 +774,15 @@ long loadmod(FILE* objfile)
 					DestroyLIDATA(lidata);
 				}
 				j = 0;
-				prevseg = GetIndex(buf, &j) - 1;
-				if (prevseg < 0)
+				prevSeg = GetIndex(buf, &j) - 1;
+				if (prevSeg < 0)
 				{
-					ReportError(ERR_INV_SEG);
+					ReportError(ERR_INV_Seg);
 				}
-				prevseg += segmin;
-				if ((seglist[prevseg]->attr & SEG_ALIGN) == SEG_ABS)
+				prevSeg += Segmin;
+				if ((Seglist[prevSeg]->attr & Seg_ALIGN) == Seg_ABS)
 				{
-					ReportError(ERR_ABS_SEG);
+					ReportError(ERR_ABS_Seg);
 				}
 				prevofs = buf[j] + (buf[j + 1] << 8);
 				j += 2;
@@ -803,7 +803,7 @@ long loadmod(FILE* objfile)
 				lidata->count = 1;
 
 				k = prevofs;
-				EmitLiData(lidata, prevseg, &k);
+				EmitLiData(lidata, prevSeg, &k);
 				li_le = (rectype == LIDATA) ? PREV_LI : PREV_LI32;
 				break;
 			case LPUBDEF:
@@ -816,22 +816,22 @@ long loadmod(FILE* objfile)
 				{
 					grpnum += grpmin;
 				}
-				segnum = GetIndex(buf, &j) - 1;
-				if (segnum < 0)
+				Segnum = GetIndex(buf, &j) - 1;
+				if (Segnum < 0)
 				{
 					j += 2;
 				}
 				else
 				{
-					segnum += segmin;
+					Segnum += Segmin;
 				}
 				for (; j < reclength;)
 				{
 					pubdef = (PPUBLIC)checkMalloc(sizeof(PUBLIC));
 					pubdef->aliasName = NULL;
 					pubdef->grpnum = grpnum;
-					pubdef->segnum = segnum;
-					name = (PCHAR)checkMalloc(buf[j] + 1);
+					pubdef->Segnum = Segnum;
+					name = (CharPtr)checkMalloc(buf[j] + 1);
 					k = buf[j];
 					j++;
 					for (i = 0; i < k; i++)
@@ -891,7 +891,7 @@ long loadmod(FILE* objfile)
 				for (j = 0; j < reclength;)
 				{
 					externs = (PEXTREC)checkRealloc(externs, (extcount + 1) * sizeof(EXTREC));
-					externs[extcount].name = (PCHAR)checkMalloc(buf[j] + 1);
+					externs[extcount].name = (CharPtr)checkMalloc(buf[j] + 1);
 					k = buf[j];
 					j++;
 					for (i = 0; i < k; i++, j++)
@@ -926,19 +926,19 @@ long loadmod(FILE* objfile)
 				{
 					ReportError(ERR_BAD_GRPDEF);
 				}
-				grplist[grpcount]->numsegs = 0;
+				grplist[grpcount]->numSegs = 0;
 				while (j < reclength)
 				{
 					if (buf[j] == 0xff)
 					{
 						j++;
-						i = GetIndex(buf, &j) - 1 + segmin;
-						if (i < segmin)
+						i = GetIndex(buf, &j) - 1 + Segmin;
+						if (i < Segmin)
 						{
 							ReportError(ERR_BAD_GRPDEF);
 						}
-						grplist[grpcount]->segindex[grplist[grpcount]->numsegs] = i;
-						grplist[grpcount]->numsegs++;
+						grplist[grpcount]->Segindex[grplist[grpcount]->numSegs] = i;
+						grplist[grpcount]->numSegs++;
 					}
 					else
 					{
@@ -991,14 +991,14 @@ long loadmod(FILE* objfile)
 						if (li_le == PREV_LE)
 						{
 							r->ofs += prevofs;
-							r->segnum = prevseg;
+							r->Segnum = prevSeg;
 							relocs = (PPRELOC)checkRealloc(relocs, (fixcount + 1) * sizeof(PRELOC));
 							relocs[fixcount] = r;
 							fixcount++;
 						}
 						else
 						{
-							r->segnum = prevseg;
+							r->Segnum = prevSeg;
 							i = prevofs;
 							RelocLIDATA(lidata, &i, r);
 							free(r);
@@ -1032,7 +1032,7 @@ long loadmod(FILE* objfile)
 			case BAKPAT32:
 				j = 0;
 				if (j < reclength) i = GetIndex(buf, &j);
-				i += segmin - 1;
+				i += Segmin - 1;
 				if (j < reclength)
 				{
 					k = buf[j];
@@ -1058,11 +1058,11 @@ long loadmod(FILE* objfile)
 						relocs[fixcount]->ofs += (buf[j] + 256 * buf[j + 1]) << 16;
 						j += 2;
 					}
-					relocs[fixcount]->segnum = i;
+					relocs[fixcount]->Segnum = i;
 					relocs[fixcount]->target = i;
 					relocs[fixcount]->frame = i;
-					relocs[fixcount]->ttype = REL_SEGDISP;
-					relocs[fixcount]->ftype = REL_SEGFRAME;
+					relocs[fixcount]->ttype = REL_SegDISP;
+					relocs[fixcount]->ftype = REL_SegFRAME;
 					relocs[fixcount]->disp = buf[j] + 256 * buf[j + 1];
 					j += 2;
 					if (rectype == BAKPAT32)
@@ -1109,7 +1109,7 @@ long loadmod(FILE* objfile)
 				for (j = 0; j < reclength;)
 				{
 					externs = (PEXTREC)checkRealloc(externs, (extcount + 1) * sizeof(EXTREC));
-					externs[extcount].name = (PCHAR)checkMalloc(buf[j] + 1);
+					externs[extcount].name = (CharPtr)checkMalloc(buf[j] + 1);
 					k = buf[j];
 					j++;
 					for (i = 0; i < k; i++, j++)
@@ -1213,7 +1213,7 @@ long loadmod(FILE* objfile)
 			case ALIAS:
 				printf("ALIAS record\n");
 				j = 0;
-				name = (PCHAR)checkMalloc(buf[j] + 1);
+				name = (CharPtr)checkMalloc(buf[j] + 1);
 				k = buf[j];
 				j++;
 				for (i = 0; i < k; i++)
@@ -1227,7 +1227,7 @@ long loadmod(FILE* objfile)
 					strupr(name);
 				}
 				printf("ALIAS name:%s\n", name);
-				aliasName = (PCHAR)checkMalloc(buf[j] + 1);
+				aliasName = (CharPtr)checkMalloc(buf[j] + 1);
 				k = buf[j];
 				j++;
 				for (i = 0; i < k; i++)
@@ -1252,7 +1252,7 @@ long loadmod(FILE* objfile)
 					exit(1);
 				}
 				pubdef = (PPUBLIC)checkMalloc(sizeof(PUBLIC));
-				pubdef->segnum = -1;
+				pubdef->Segnum = -1;
 				pubdef->grpnum = -1;
 				pubdef->typenum = -1;
 				pubdef->ofs = 0;
@@ -1294,19 +1294,19 @@ long loadmod(FILE* objfile)
 	return 0;
 }
 
-void loadlib(FILE* libfile, PCHAR libname)
+void loadlib(FILE* libfile, CharPtr libname)
 {
 	unsigned int i, j, k, n;
-	PCHAR name;
+	CharPtr name;
 	unsigned short modpage;
 	PLIBFILE p;
 	UINT numsyms;
-	PSORTENTRY symlist;
+	SortEntryPtr symlist;
 
 	libfiles = (PLIBFILE)checkRealloc(libfiles, (libcount + 1) * sizeof(LIBFILE));
 	p = &libfiles[libcount];
 
-	p->filename = (PCHAR)checkMalloc(strlen(libname) + 1);
+	p->filename = (CharPtr)checkMalloc(strlen(libname) + 1);
 	strcpy(p->filename, libname);
 
 	if (fread(buf, 1, 3, libfile) != 3)
@@ -1328,7 +1328,7 @@ void loadlib(FILE* libfile, PCHAR libname)
 
 	fseek(libfile, p->dicstart, SEEK_SET);
 
-	symlist = (PSORTENTRY)checkMalloc(p->numdicpages * 37 * sizeof(SORTENTRY));
+	symlist = (SortEntryPtr)checkMalloc(p->numdicpages * 37 * sizeof(SortEntry));
 
 	numsyms = 0;
 	for (i = 0; i < p->numdicpages; i++)
@@ -1343,7 +1343,7 @@ void loadlib(FILE* libfile, PCHAR libname)
 			k = buf[j] * 2;
 			if (k)
 			{
-				name = (PCHAR)checkMalloc(buf[k] + 1);
+				name = (CharPtr)checkMalloc(buf[k] + 1);
 				for (n = 0; n < buf[k]; n++)
 				{
 					name[n] = buf[n + k + 1];
@@ -1369,7 +1369,7 @@ void loadlib(FILE* libfile, PCHAR libname)
 		}
 	}
 
-	qsort(symlist, numsyms, sizeof(SORTENTRY), sortCompare);
+	qsort(symlist, numsyms, sizeof(SortEntry), sortCompare);
 	p->symbols = symlist;
 	p->numsyms = numsyms;
 	p->modsloaded = 0;
@@ -1423,8 +1423,8 @@ void loadres(FILE* f)
 				   0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
 	UINT i, j;
 	UINT hdrsize, datsize;
-	PUCHAR data;
-	PUCHAR hdr;
+	UCharPtr data;
+	UCharPtr hdr;
 
 	if (fread(buf, 1, 32, f) != 32)
 	{
@@ -1458,7 +1458,7 @@ void loadres(FILE* f)
 			printf("Invalid resource file, bad header\n");
 			exit(1);
 		}
-		hdr = (PUCHAR)checkMalloc(hdrsize);
+		hdr = (UCharPtr)checkMalloc(hdrsize);
 		if (fread(hdr, 1, hdrsize - 8, f) != (hdrsize - 8))
 		{
 			printf("Invalid resource file, missing header\n");
@@ -1472,7 +1472,7 @@ void loadres(FILE* f)
 		}
 		if (datsize)
 		{
-			data = (PUCHAR)checkMalloc(datsize);
+			data = (UCharPtr)checkMalloc(datsize);
 			if (fread(data, 1, datsize, f) != datsize)
 			{
 				printf("Invalid resource file, no data\n");
@@ -1499,7 +1499,7 @@ void loadres(FILE* f)
 				printf("Invalid resource file, bad name\n");
 				exit(1);
 			}
-			resource[rescount].typename1 = (PUCHAR)checkMalloc(j - i + 2);
+			resource[rescount].typename1 = (UCharPtr)checkMalloc(j - i + 2);
 			memcpy(resource[rescount].typename1, hdr + i, j - i + 2);
 			i = j + 5;
 			i &= 0xfffffffc;
@@ -1523,7 +1523,7 @@ void loadres(FILE* f)
 				printf("Invalid resource file,bad name (2)\n");
 				exit(1);
 			}
-			resource[rescount].name = (PUCHAR)checkMalloc(j - i + 2);
+			resource[rescount].name = (UCharPtr)checkMalloc(j - i + 2);
 			memcpy(resource[rescount].name, hdr + i, j - i + 2);
 			i = j + 5;
 			i &= 0xfffffffc;

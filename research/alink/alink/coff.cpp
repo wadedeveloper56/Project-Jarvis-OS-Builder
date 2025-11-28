@@ -5,8 +5,8 @@ void loadcoff(FILE* objfile)
 {
 	unsigned char headbuf[20];
 	unsigned char buf[100];
-	PUCHAR bigbuf;
-	PUCHAR stringList;
+	UCharPtr bigbuf;
+	UCharPtr stringList;
 	UINT thiscpu;
 	UINT numSect;
 	UINT headerSize;
@@ -17,7 +17,7 @@ void loadcoff(FILE* objfile)
 	UINT stringOfs;
 	UINT i, j, k;// , l;
 	UINT fileStart;
-	UINT minseg;
+	UINT minSeg;
 	UINT numrel;
 	UINT relofs;
 	UINT relshift;
@@ -27,11 +27,11 @@ void loadcoff(FILE* objfile)
 	UINT combineType;
 	PPUBLIC pubdef;
 	PCOMDAT comdat;
-	PCHAR comdatsym;
-	PSORTENTRY listnode;
+	CharPtr comdatsym;
+	SortEntryPtr listnode;
 
 	nummods++;
-	minseg = segcount;
+	minSeg = Segcount;
 	fileStart = ftell(objfile);
 
 	if (fread(headbuf, 1, 20, objfile) != 20)
@@ -96,7 +96,7 @@ void loadcoff(FILE* objfile)
 	}
 	if (stringSize)
 	{
-		stringList = (PUCHAR)checkMalloc(stringSize);
+		stringList = (UCharPtr)checkMalloc(stringSize);
 		if (fread(stringList, 1, stringSize, objfile) != stringSize)
 		{
 			printf("Invalid COFF object file, unable to read string table\n");
@@ -126,7 +126,7 @@ void loadcoff(FILE* objfile)
 			}
 			if (buf[0] | buf[1] | buf[2] | buf[3])
 			{
-				sym[i].name = (PUCHAR)checkMalloc(9);
+				sym[i].name = (UCharPtr)checkMalloc(9);
 				strncpy((char*)sym[i].name, (const char*)buf, 8);
 				sym[i].name[8] = 0;
 			}
@@ -144,7 +144,7 @@ void loadcoff(FILE* objfile)
 					printf("Invalid COFF object file bad symbol location\n");
 					exit(1);
 				}
-				sym[i].name = (PUCHAR)checkStrdup((const char*)(stringList + stringOfs));
+				sym[i].name = (UCharPtr)checkStrdup((const char*)(stringList + stringOfs));
 			}
 			if (!case_sensitive)
 			{
@@ -169,7 +169,7 @@ void loadcoff(FILE* objfile)
 					/* section symbols declare an extern always, so can use in relocs */
 					/* they may also include a PUBDEF */
 					externs = (PEXTREC)checkRealloc(externs, (extcount + 1) * sizeof(EXTREC));
-					externs[extcount].name = (PCHAR)sym[i].name;
+					externs[extcount].name = (CharPtr)sym[i].name;
 					externs[extcount].pubdef = NULL;
 					externs[extcount].modnum = 0;
 					externs[extcount].flags = EXT_NOMATCH;
@@ -186,11 +186,11 @@ void loadcoff(FILE* objfile)
 
 						if (sym[i].section == -1)
 						{
-							pubdef->segnum = -1;
+							pubdef->Segnum = -1;
 						}
 						else
 						{
-							pubdef->segnum = minseg + sym[i].section - 1;
+							pubdef->Segnum = minSeg + sym[i].section - 1;
 						}
 						if (listnode = binarySearch(publics, pubcount, (char*)sym[i].name))
 						{
@@ -227,7 +227,7 @@ void loadcoff(FILE* objfile)
 			}
 			if (sym[i].numAuxRecs)
 			{
-				sym[i].auxRecs = (PUCHAR)checkMalloc(sym[i].numAuxRecs * PE_SYMBOL_SIZE);
+				sym[i].auxRecs = (UCharPtr)checkMalloc(sym[i].numAuxRecs * PE_SYMBOL_SIZE);
 			}
 			else
 			{
@@ -263,7 +263,7 @@ void loadcoff(FILE* objfile)
 			printf("Invalid COFF object file, unable to read section header\n");
 			exit(1);
 		}
-		/* virtual size is also the offset of the data into the segment */
+		/* virtual size is also the offset of the data into the Segment */
 	/*
 	  if(buf[PE_OBJECT_VIRTSIZE]|buf[PE_OBJECT_VIRTSIZE+1]|buf[PE_OBJECT_VIRTSIZE+2]
 	  |buf[PE_OBJECT_VIRTSIZE+3])
@@ -296,14 +296,14 @@ void loadcoff(FILE* objfile)
 				printf("Invalid COFF object file\n");
 				exit(1);
 			}
-			namelist = (PPCHAR)checkRealloc(namelist, (namecount + 1) * sizeof(PCHAR));
+			namelist = (CharPtrPtr)checkRealloc(namelist, (namecount + 1) * sizeof(CharPtr));
 			namelist[namecount] = checkStrdup((const char*)(stringList + sectname));
 			sectname = namecount;
 			namecount++;
 		}
 		else
 		{
-			namelist = (PPCHAR)checkRealloc(namelist, (namecount + 1) * sizeof(PCHAR));
+			namelist = (CharPtrPtr)checkRealloc(namelist, (namecount + 1) * sizeof(CharPtr));
 			namelist[namecount] = checkStrdup((const char*)buf);
 
 			sectname = namecount;
@@ -311,10 +311,10 @@ void loadcoff(FILE* objfile)
 		}
 		if (strchr(namelist[sectname], '$'))
 		{
-			/* if we have a grouped segment, sort by original name */
+			/* if we have a grouped Segment, sort by original name */
 			sectorder = sectname;
 			/* and get real name, without $ sort section */
-			namelist = (PPCHAR)checkRealloc(namelist, (namecount + 1) * sizeof(PCHAR));
+			namelist = (CharPtrPtr)checkRealloc(namelist, (namecount + 1) * sizeof(CharPtr));
 			namelist[namecount] = checkStrdup(namelist[sectname]);
 			*(strchr(namelist[namecount], '$')) = 0;
 			sectname = namecount;
@@ -329,70 +329,70 @@ void loadcoff(FILE* objfile)
 		relofs = buf[PE_OBJECT_RELPTR] + (buf[PE_OBJECT_RELPTR + 1] << 8) +
 			(buf[PE_OBJECT_RELPTR + 2] << 16) + (buf[PE_OBJECT_RELPTR + 3] << 24);
 
-		seglist = (PPSEG)checkRealloc(seglist, (segcount + 1) * sizeof(PSEG));
-		seglist[segcount] = (PSEG)checkMalloc(sizeof(SEG));
+		Seglist = (SegPtrPtr)checkRealloc(Seglist, (Segcount + 1) * sizeof(SegPtr));
+		Seglist[Segcount] = (SegPtr)checkMalloc(sizeof(Seg));
 
-		seglist[segcount]->nameindex = sectname;
-		seglist[segcount]->orderindex = sectorder;
-		seglist[segcount]->classindex = -1;
-		seglist[segcount]->overlayindex = -1;
-		seglist[segcount]->length = buf[PE_OBJECT_RAWSIZE] + (buf[PE_OBJECT_RAWSIZE + 1] << 8) +
+		Seglist[Segcount]->nameindex = sectname;
+		Seglist[Segcount]->orderindex = sectorder;
+		Seglist[Segcount]->classindex = -1;
+		Seglist[Segcount]->overlayindex = -1;
+		Seglist[Segcount]->length = buf[PE_OBJECT_RAWSIZE] + (buf[PE_OBJECT_RAWSIZE + 1] << 8) +
 			(buf[PE_OBJECT_RAWSIZE + 2] << 16) + (buf[PE_OBJECT_RAWSIZE + 3] << 24);
 
-		seglist[segcount]->attr = SEG_PUBLIC | SEG_USE32;
-		seglist[segcount]->winFlags = buf[PE_OBJECT_FLAGS] + (buf[PE_OBJECT_FLAGS + 1] << 8) +
+		Seglist[Segcount]->attr = Seg_PUBLIC | Seg_USE32;
+		Seglist[Segcount]->winFlags = buf[PE_OBJECT_FLAGS] + (buf[PE_OBJECT_FLAGS + 1] << 8) +
 			(buf[PE_OBJECT_FLAGS + 2] << 16) + (buf[PE_OBJECT_FLAGS + 3] << 24);
-		seglist[segcount]->base = buf[PE_OBJECT_RAWPTR] + (buf[PE_OBJECT_RAWPTR + 1] << 8) +
+		Seglist[Segcount]->base = buf[PE_OBJECT_RAWPTR] + (buf[PE_OBJECT_RAWPTR + 1] << 8) +
 			(buf[PE_OBJECT_RAWPTR + 2] << 16) + (buf[PE_OBJECT_RAWPTR + 3] << 24);
 
-		if (seglist[segcount]->winFlags & WINF_ALIGN_NOPAD)
+		if (Seglist[Segcount]->winFlags & WINF_ALIGN_NOPAD)
 		{
-			seglist[segcount]->winFlags &= (0xffffffff - WINF_ALIGN);
-			seglist[segcount]->winFlags |= WINF_ALIGN_BYTE;
+			Seglist[Segcount]->winFlags &= (0xffffffff - WINF_ALIGN);
+			Seglist[Segcount]->winFlags |= WINF_ALIGN_BYTE;
 		}
 
-		switch (seglist[segcount]->winFlags & WINF_ALIGN)
+		switch (Seglist[Segcount]->winFlags & WINF_ALIGN)
 		{
 			case WINF_ALIGN_BYTE:
-				seglist[segcount]->attr |= SEG_BYTE;
+				Seglist[Segcount]->attr |= Seg_BYTE;
 				break;
 			case WINF_ALIGN_WORD:
-				seglist[segcount]->attr |= SEG_WORD;
+				Seglist[Segcount]->attr |= Seg_WORD;
 				break;
 			case WINF_ALIGN_DWORD:
-				seglist[segcount]->attr |= SEG_DWORD;
+				Seglist[Segcount]->attr |= Seg_DWORD;
 				break;
 			case WINF_ALIGN_8:
-				seglist[segcount]->attr |= SEG_8BYTE;
+				Seglist[Segcount]->attr |= Seg_8BYTE;
 				break;
 			case WINF_ALIGN_PARA:
-				seglist[segcount]->attr |= SEG_PARA;
+				Seglist[Segcount]->attr |= Seg_PARA;
 				break;
 			case WINF_ALIGN_32:
-				seglist[segcount]->attr |= SEG_32BYTE;
+				Seglist[Segcount]->attr |= Seg_32BYTE;
 				break;
 			case WINF_ALIGN_64:
-				seglist[segcount]->attr |= SEG_64BYTE;
+				Seglist[Segcount]->attr |= Seg_64BYTE;
 				break;
 			case 0:
-				seglist[segcount]->attr |= SEG_PARA; /* default */
+				Seglist[Segcount]->attr |= Seg_PARA; /* default */
 				break;
 			default:
-				printf("Invalid COFF object file, bad section alignment %08X\n", seglist[segcount]->winFlags);
+				printf("Invalid COFF object file, bad section alignment %08X\n", Seglist[Segcount]->winFlags);
 				exit(1);
 		}
 
 		/* invert all negative-logic flags */
-		seglist[segcount]->winFlags ^= WINF_NEG_FLAGS;
+		Seglist[Segcount]->winFlags ^= WINF_NEG_FLAGS;
 		/* remove .debug sections */
 		if (!stricmp(namelist[sectname], ".debug"))
 		{
-			seglist[segcount]->winFlags |= WINF_REMOVE;
-			seglist[segcount]->length = 0;
+			Seglist[Segcount]->winFlags |= WINF_REMOVE;
+			Seglist[Segcount]->length = 0;
 			numrel = 0;
 		}
 
-		if (seglist[segcount]->winFlags & WINF_COMDAT)
+		if (Seglist[Segcount]->winFlags & WINF_COMDAT)
 		{
 			printf("COMDAT section %s\n", namelist[sectname]);
 			comdat = (PCOMDAT)checkMalloc(sizeof(COMDATREC));
@@ -410,7 +410,7 @@ void loadcoff(FILE* objfile)
 					}
 					printf("Section %s ", sym[j].name);
 					combineType = sym[j].auxRecs[14];
-					comdat->linkwith = sym[j].auxRecs[12] + (sym[j].auxRecs[13] << 8) + minseg - 1;
+					comdat->linkwith = sym[j].auxRecs[12] + (sym[j].auxRecs[13] << 8) + minSeg - 1;
 					printf("Combine type %i ", sym[j].auxRecs[14]);
 					printf("Link alongside section %i", comdat->linkwith);
 
@@ -434,7 +434,7 @@ void loadcoff(FILE* objfile)
 					}
 
 					printf("COMDAT Symbol %s\n", sym[j].name);
-					comdatsym = (PCHAR)sym[j].name;
+					comdatsym = (CharPtr)sym[j].name;
 					sym[j].isComDat = TRUE;
 					break;
 				}
@@ -453,7 +453,7 @@ void loadcoff(FILE* objfile)
 				}
 				comdatsym = (char*)""; /* dummy name */
 			}
-			comdat->segnum = segcount;
+			comdat->Segnum = Segcount;
 			comdat->combineType = combineType;
 
 			printf("COMDATs not yet supported\n");
@@ -463,35 +463,35 @@ void loadcoff(FILE* objfile)
 			exit(1);
 		}
 
-		if (seglist[segcount]->length)
+		if (Seglist[Segcount]->length)
 		{
-			seglist[segcount]->data = (PUCHAR)checkMalloc(seglist[segcount]->length);
+			Seglist[Segcount]->data = (UCharPtr)checkMalloc(Seglist[Segcount]->length);
 
-			seglist[segcount]->datmask = (PUCHAR)checkMalloc((seglist[segcount]->length + 7) / 8);
+			Seglist[Segcount]->datmask = (UCharPtr)checkMalloc((Seglist[Segcount]->length + 7) / 8);
 
-			if (seglist[segcount]->base)
+			if (Seglist[Segcount]->base)
 			{
-				fseek(objfile, fileStart + seglist[segcount]->base, SEEK_SET);
-				if (fread(seglist[segcount]->data, 1, seglist[segcount]->length, objfile)
-					!= seglist[segcount]->length)
+				fseek(objfile, fileStart + Seglist[Segcount]->base, SEEK_SET);
+				if (fread(Seglist[Segcount]->data, 1, Seglist[Segcount]->length, objfile)
+					!= Seglist[Segcount]->length)
 				{
 					printf("Invalid COFF object file\n");
 					exit(1);
 				}
-				for (j = 0; j < (seglist[segcount]->length + 7) / 8; j++)
-					seglist[segcount]->datmask[j] = 0xff;
+				for (j = 0; j < (Seglist[Segcount]->length + 7) / 8; j++)
+					Seglist[Segcount]->datmask[j] = 0xff;
 			}
 			else
 			{
-				for (j = 0; j < (seglist[segcount]->length + 7) / 8; j++)
-					seglist[segcount]->datmask[j] = 0;
+				for (j = 0; j < (Seglist[Segcount]->length + 7) / 8; j++)
+					Seglist[Segcount]->datmask[j] = 0;
 			}
 
 		}
 		else
 		{
-			seglist[segcount]->data = NULL;
-			seglist[segcount]->datmask = NULL;
+			Seglist[Segcount]->data = NULL;
+			Seglist[Segcount]->datmask = NULL;
 		}
 
 		if (numrel) fseek(objfile, fileStart + relofs, SEEK_SET);
@@ -507,8 +507,8 @@ void loadcoff(FILE* objfile)
 			/* get address to relocate */
 			relocs[fixcount]->ofs = buf[0] + (buf[1] << 8) + (buf[2] << 16) + (buf[3] << 24);
 			relocs[fixcount]->ofs -= relshift;
-			/* get segment */
-			relocs[fixcount]->segnum = i + minseg;
+			/* get Segment */
+			relocs[fixcount]->Segnum = i + minSeg;
 			relocs[fixcount]->disp = 0;
 			/* get relocation target external index */
 			relocs[fixcount]->target = buf[4] + (buf[5] << 8) + (buf[6] << 16) + (buf[7] << 24);
@@ -526,7 +526,7 @@ void loadcoff(FILE* objfile)
 					case COFF_SYM_EXTERNAL:
 						/* global symbols declare an extern when used in relocs */
 						externs = (PEXTREC)checkRealloc(externs, (extcount + 1) * sizeof(EXTREC));
-						externs[extcount].name = (PCHAR)sym[k].name;
+						externs[extcount].name = (CharPtr)sym[k].name;
 						externs[extcount].pubdef = NULL;
 						externs[extcount].modnum = 0;
 						externs[extcount].flags = EXT_NOMATCH;
@@ -548,7 +548,7 @@ void loadcoff(FILE* objfile)
 							if (sym[k].value)
 							{
 								externs = (PEXTREC)checkRealloc(externs, (extcount + 1) * sizeof(EXTREC));
-								externs[extcount].name = (PCHAR)sym[k].name;
+								externs[extcount].name = (CharPtr)sym[k].name;
 								externs[extcount].pubdef = NULL;
 								externs[extcount].modnum = nummods;
 								externs[extcount].flags = EXT_NOMATCH;
@@ -559,7 +559,7 @@ void loadcoff(FILE* objfile)
 								comdefs[comcount] = (PCOMREC)checkMalloc(sizeof(COMREC));
 								comdefs[comcount]->length = sym[k].value;
 								comdefs[comcount]->isFar = FALSE;
-								comdefs[comcount]->name = (PCHAR)sym[k].name;
+								comdefs[comcount]->name = (CharPtr)sym[k].name;
 								comdefs[comcount]->modnum = nummods;
 								comcount++;
 							}
@@ -572,7 +572,7 @@ void loadcoff(FILE* objfile)
 						else
 						{
 							/* update relocation information to reflect symbol */
-							relocs[fixcount]->ttype = REL_SEGDISP;
+							relocs[fixcount]->ttype = REL_SegDISP;
 							relocs[fixcount]->disp = sym[k].value;
 							if (sym[k].section == -1)
 							{
@@ -582,7 +582,7 @@ void loadcoff(FILE* objfile)
 							else
 							{
 								/* else get real number of section */
-								relocs[fixcount]->target = sym[k].section + minseg - 1;
+								relocs[fixcount]->target = sym[k].section + minSeg - 1;
 							}
 						}
 						break;
@@ -597,9 +597,9 @@ void loadcoff(FILE* objfile)
 				relocs[fixcount]->target = sym[k].extnum;
 			}
 
-			/* frame is current segment (only relevant for non-FLAT output) */
-			relocs[fixcount]->ftype = REL_SEGFRAME;
-			relocs[fixcount]->frame = i + minseg;
+			/* frame is current Segment (only relevant for non-FLAT output) */
+			relocs[fixcount]->ftype = REL_SegFRAME;
+			relocs[fixcount]->frame = i + minSeg;
 			/* set relocation type */
 			switch (buf[8] + (buf[9] << 8))
 			{
@@ -625,7 +625,7 @@ void loadcoff(FILE* objfile)
 			fixcount++;
 		}
 
-		segcount++;
+		Segcount++;
 	}
 	/* build PUBDEFs or COMDEFs for external symbols defined here that aren't COMDAT symbols. */
 	for (i = 0; i < numSymbols; i++)
@@ -644,7 +644,7 @@ void loadcoff(FILE* objfile)
 				comdefs[comcount] = (PCOMREC)checkMalloc(sizeof(COMREC));
 				comdefs[comcount]->length = sym[i].value;
 				comdefs[comcount]->isFar = FALSE;
-				comdefs[comcount]->name = (PCHAR)sym[i].name;
+				comdefs[comcount]->name = (CharPtr)sym[i].name;
 				comdefs[comcount]->modnum = 0;
 				comcount++;
 			}
@@ -660,13 +660,13 @@ void loadcoff(FILE* objfile)
 
 			if (sym[i].section == -1)
 			{
-				pubdef->segnum = -1;
+				pubdef->Segnum = -1;
 			}
 			else
 			{
-				pubdef->segnum = minseg + sym[i].section - 1;
+				pubdef->Segnum = minSeg + sym[i].section - 1;
 			}
-			if (listnode = binarySearch(publics, pubcount, (PCHAR)sym[i].name))
+			if (listnode = binarySearch(publics, pubcount, (CharPtr)sym[i].name))
 			{
 				for (j = 0; j < listnode->count; ++j)
 				{

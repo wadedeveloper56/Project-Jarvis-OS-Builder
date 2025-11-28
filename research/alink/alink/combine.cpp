@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "alink.h"
 
-void fixpubsegs(int src, int dest, UINT shift)
+void fixpubSegs(int src, int dest, UINT shift)
 {
 	UINT i, j;
 	PPUBLIC q;
@@ -11,9 +11,9 @@ void fixpubsegs(int src, int dest, UINT shift)
 		for (j = 0; j < publics[i].count; ++j)
 		{
 			q = (PPUBLIC)publics[i].object[j];
-			if (q->segnum == src)
+			if (q->Segnum == src)
 			{
-				q->segnum = dest;
+				q->Segnum = dest;
 				q->ofs += shift;
 			}
 		}
@@ -38,44 +38,44 @@ void fixpubgrps(int src, int dest)
 	}
 }
 
-void combine_segments(long dest, long src)
+void combine_Segments(long dest, long src)
 {
 	UINT k, n;
-	PUCHAR p, q;
+	UCharPtr p, q;
 	long a1, a2;
 
-	k = seglist[dest]->length;
-	switch (seglist[src]->attr & SEG_ALIGN)
+	k = Seglist[dest]->length;
+	switch (Seglist[src]->attr & Seg_ALIGN)
 	{
-		case SEG_WORD:
+		case Seg_WORD:
 			a2 = 2;
 			k = (k + 1) & 0xfffffffe;
 			break;
-		case SEG_PARA:
+		case Seg_PARA:
 			a2 = 16;
 			k = (k + 0xf) & 0xfffffff0;
 			break;
-		case SEG_PAGE:
+		case Seg_PAGE:
 			a2 = 0x100;
 			k = (k + 0xff) & 0xffffff00;
 			break;
-		case SEG_DWORD:
+		case Seg_DWORD:
 			a2 = 4;
 			k = (k + 3) & 0xfffffffc;
 			break;
-		case SEG_MEMPAGE:
+		case Seg_MEMPAGE:
 			a2 = 0x1000;
 			k = (k + 0xfff) & 0xfffff000;
 			break;
-		case SEG_8BYTE:
+		case Seg_8BYTE:
 			a2 = 8;
 			k = (k + 7) & 0xfffffff8;
 			break;
-		case SEG_32BYTE:
+		case Seg_32BYTE:
 			a2 = 32;
 			k = (k + 31) & 0xffffffe0;
 			break;
-		case SEG_64BYTE:
+		case Seg_64BYTE:
 			a2 = 64;
 			k = (k + 63) & 0xffffffc0;
 			break;
@@ -83,60 +83,60 @@ void combine_segments(long dest, long src)
 			a2 = 1;
 			break;
 	}
-	switch (seglist[dest]->attr & SEG_ALIGN)
+	switch (Seglist[dest]->attr & Seg_ALIGN)
 	{
-		case SEG_WORD:
+		case Seg_WORD:
 			a1 = 2;
 			break;
-		case SEG_DWORD:
+		case Seg_DWORD:
 			a1 = 4;
 			break;
-		case SEG_8BYTE:
+		case Seg_8BYTE:
 			a1 = 8;
 			break;
-		case SEG_PARA:
+		case Seg_PARA:
 			a1 = 16;
 			break;
-		case SEG_32BYTE:
+		case Seg_32BYTE:
 			a1 = 32;
 			break;
-		case SEG_64BYTE:
+		case Seg_64BYTE:
 			a1 = 64;
 			break;
-		case SEG_PAGE:
+		case Seg_PAGE:
 			a1 = 0x100;
 			break;
-		case SEG_MEMPAGE:
+		case Seg_MEMPAGE:
 			a1 = 0x1000;
 			break;
 		default:
 			a1 = 1;
 			break;
 	}
-	seglist[src]->base = k;
-	p = (PUCHAR)checkMalloc(k + seglist[src]->length);
-	q = (PUCHAR)checkMalloc((k + seglist[src]->length + 7) / 8);
-	for (k = 0; k < seglist[dest]->length; k++)
+	Seglist[src]->base = k;
+	p = (UCharPtr)checkMalloc(k + Seglist[src]->length);
+	q = (UCharPtr)checkMalloc((k + Seglist[src]->length + 7) / 8);
+	for (k = 0; k < Seglist[dest]->length; k++)
 	{
-		if (GetNbit(seglist[dest]->datmask, k))
+		if (GetNbit(Seglist[dest]->datmask, k))
 		{
 			SetNbit(q, k);
-			p[k] = seglist[dest]->data[k];
+			p[k] = Seglist[dest]->data[k];
 		}
 		else
 		{
 			ClearNbit(q, k);
 		}
 	}
-	for (; k < seglist[src]->base; k++)
+	for (; k < Seglist[src]->base; k++)
 	{
 		ClearNbit(q, k);
 	}
-	for (; k < (seglist[src]->base + seglist[src]->length); k++)
+	for (; k < (Seglist[src]->base + Seglist[src]->length); k++)
 	{
-		if (GetNbit(seglist[src]->datmask, k - seglist[src]->base))
+		if (GetNbit(Seglist[src]->datmask, k - Seglist[src]->base))
 		{
-			p[k] = seglist[src]->data[k - seglist[src]->base];
+			p[k] = Seglist[src]->data[k - Seglist[src]->base];
 			SetNbit(q, k);
 		}
 		else
@@ -144,43 +144,43 @@ void combine_segments(long dest, long src)
 			ClearNbit(q, k);
 		}
 	}
-	seglist[dest]->length = k;
-	if (a2 > a1) seglist[dest]->attr = seglist[src]->attr;
-	seglist[dest]->winFlags |= seglist[src]->winFlags;
-	free(seglist[dest]->data);
-	free(seglist[src]->data);
-	free(seglist[dest]->datmask);
-	free(seglist[src]->datmask);
-	seglist[dest]->data = p;
-	seglist[dest]->datmask = q;
+	Seglist[dest]->length = k;
+	if (a2 > a1) Seglist[dest]->attr = Seglist[src]->attr;
+	Seglist[dest]->winFlags |= Seglist[src]->winFlags;
+	free(Seglist[dest]->data);
+	free(Seglist[src]->data);
+	free(Seglist[dest]->datmask);
+	free(Seglist[src]->datmask);
+	Seglist[dest]->data = p;
+	Seglist[dest]->datmask = q;
 
-	fixpubsegs(src, dest, seglist[src]->base);
+	fixpubSegs(src, dest, Seglist[src]->base);
 
 	for (k = 0; k < fixcount; k++)
 	{
-		if (relocs[k]->segnum == src)
+		if (relocs[k]->Segnum == src)
 		{
-			relocs[k]->segnum = dest;
-			relocs[k]->ofs += seglist[src]->base;
+			relocs[k]->Segnum = dest;
+			relocs[k]->ofs += Seglist[src]->base;
 		}
-		if (relocs[k]->ttype == REL_SEGDISP)
-		{
-			if (relocs[k]->target == src)
-			{
-				relocs[k]->target = dest;
-				relocs[k]->disp += seglist[src]->base;
-			}
-		}
-		else if (relocs[k]->ttype == REL_SEGONLY)
+		if (relocs[k]->ttype == REL_SegDISP)
 		{
 			if (relocs[k]->target == src)
 			{
 				relocs[k]->target = dest;
-				relocs[k]->ttype = REL_SEGDISP;
-				relocs[k]->disp = seglist[src]->base;
+				relocs[k]->disp += Seglist[src]->base;
 			}
 		}
-		if ((relocs[k]->ftype == REL_SEGFRAME) ||
+		else if (relocs[k]->ttype == REL_SegONLY)
+		{
+			if (relocs[k]->target == src)
+			{
+				relocs[k]->target = dest;
+				relocs[k]->ttype = REL_SegDISP;
+				relocs[k]->disp = Seglist[src]->base;
+			}
+		}
+		if ((relocs[k]->ftype == REL_SegFRAME) ||
 			(relocs[k]->ftype == REL_LILEFRAME))
 		{
 			if (relocs[k]->frame == src)
@@ -192,24 +192,24 @@ void combine_segments(long dest, long src)
 
 	if (gotstart)
 	{
-		if (startaddr.ttype == REL_SEGDISP)
+		if (startaddr.ttype == REL_SegDISP)
 		{
 			if (startaddr.target == src)
 			{
 				startaddr.target = dest;
-				startaddr.disp += seglist[src]->base;
+				startaddr.disp += Seglist[src]->base;
 			}
 		}
-		else if (startaddr.ttype == REL_SEGONLY)
+		else if (startaddr.ttype == REL_SegONLY)
 		{
 			if (startaddr.target == src)
 			{
 				startaddr.target = dest;
-				startaddr.disp = seglist[src]->base;
-				startaddr.ttype = REL_SEGDISP;
+				startaddr.disp = Seglist[src]->base;
+				startaddr.ttype = REL_SegDISP;
 			}
 		}
-		if ((startaddr.ftype == REL_SEGFRAME) ||
+		if ((startaddr.ftype == REL_SegFRAME) ||
 			(startaddr.ftype == REL_LILEFRAME))
 		{
 			if (startaddr.frame == src)
@@ -223,84 +223,84 @@ void combine_segments(long dest, long src)
 	{
 		if (grplist[k])
 		{
-			for (n = 0; n < grplist[k]->numsegs; n++)
+			for (n = 0; n < grplist[k]->numSegs; n++)
 			{
-				if (grplist[k]->segindex[n] == src)
+				if (grplist[k]->Segindex[n] == src)
 				{
-					grplist[k]->segindex[n] = dest;
+					grplist[k]->Segindex[n] = dest;
 				}
 			}
 		}
 	}
 
-	free(seglist[src]);
-	seglist[src] = 0;
+	free(Seglist[src]);
+	Seglist[src] = 0;
 }
 
 void combine_common(long i, long j)
 {
 	UINT k, n;
-	PUCHAR p, q;
+	UCharPtr p, q;
 
-	if (seglist[j]->length > seglist[i]->length)
+	if (Seglist[j]->length > Seglist[i]->length)
 	{
-		k = seglist[i]->length;
-		seglist[i]->length = seglist[j]->length;
-		seglist[j]->length = k;
-		p = seglist[i]->data;
-		q = seglist[i]->datmask;
-		seglist[i]->data = seglist[j]->data;
-		seglist[i]->datmask = seglist[j]->datmask;
+		k = Seglist[i]->length;
+		Seglist[i]->length = Seglist[j]->length;
+		Seglist[j]->length = k;
+		p = Seglist[i]->data;
+		q = Seglist[i]->datmask;
+		Seglist[i]->data = Seglist[j]->data;
+		Seglist[i]->datmask = Seglist[j]->datmask;
 	}
 	else
 	{
-		p = seglist[j]->data;
-		q = seglist[j]->datmask;
+		p = Seglist[j]->data;
+		q = Seglist[j]->datmask;
 	}
-	for (k = 0; k < seglist[j]->length; k++)
+	for (k = 0; k < Seglist[j]->length; k++)
 	{
 		if (GetNbit(q, k))
 		{
-			if (GetNbit(seglist[i]->datmask, k))
+			if (GetNbit(Seglist[i]->datmask, k))
 			{
-				if (seglist[i]->data[k] != p[k])
+				if (Seglist[i]->data[k] != p[k])
 				{
 					ReportError(ERR_OVERWRITE);
 				}
 			}
 			else
 			{
-				SetNbit(seglist[i]->datmask, k);
-				seglist[i]->data[k] = p[k];
+				SetNbit(Seglist[i]->datmask, k);
+				Seglist[i]->data[k] = p[k];
 			}
 		}
 	}
 	free(p);
 	free(q);
 
-	fixpubsegs(j, i, 0);
+	fixpubSegs(j, i, 0);
 
 	for (k = 0; k < fixcount; k++)
 	{
-		if (relocs[k]->segnum == j)
+		if (relocs[k]->Segnum == j)
 		{
-			relocs[k]->segnum = i;
+			relocs[k]->Segnum = i;
 		}
-		if (relocs[k]->ttype == REL_SEGDISP)
-		{
-			if (relocs[k]->target == j)
-			{
-				relocs[k]->target = i;
-			}
-		}
-		else if (relocs[k]->ttype == REL_SEGONLY)
+		if (relocs[k]->ttype == REL_SegDISP)
 		{
 			if (relocs[k]->target == j)
 			{
 				relocs[k]->target = i;
 			}
 		}
-		if ((relocs[k]->ftype == REL_SEGFRAME) ||
+		else if (relocs[k]->ttype == REL_SegONLY)
+		{
+			if (relocs[k]->target == j)
+			{
+				relocs[k]->target = i;
+			}
+		}
+		if ((relocs[k]->ftype == REL_SegFRAME) ||
 			(relocs[k]->ftype == REL_LILEFRAME))
 		{
 			if (relocs[k]->frame == j)
@@ -312,21 +312,21 @@ void combine_common(long i, long j)
 
 	if (gotstart)
 	{
-		if (startaddr.ttype == REL_SEGDISP)
+		if (startaddr.ttype == REL_SegDISP)
 		{
 			if (startaddr.target == j)
 			{
 				startaddr.target = i;
 			}
 		}
-		else if (startaddr.ttype == REL_SEGONLY)
+		else if (startaddr.ttype == REL_SegONLY)
 		{
 			if (startaddr.target == j)
 			{
 				startaddr.target = i;
 			}
 		}
-		if ((startaddr.ftype == REL_SEGFRAME) ||
+		if ((startaddr.ftype == REL_SegFRAME) ||
 			(startaddr.ftype == REL_LILEFRAME))
 		{
 			if (startaddr.frame == j)
@@ -340,18 +340,18 @@ void combine_common(long i, long j)
 	{
 		if (grplist[k])
 		{
-			for (n = 0; n < grplist[k]->numsegs; n++)
+			for (n = 0; n < grplist[k]->numSegs; n++)
 			{
-				if (grplist[k]->segindex[n] == j)
+				if (grplist[k]->Segindex[n] == j)
 				{
-					grplist[k]->segindex[n] = i;
+					grplist[k]->Segindex[n] = i;
 				}
 			}
 		}
 	}
 
-	free(seglist[j]);
-	seglist[j] = 0;
+	free(Seglist[j]);
+	Seglist[j] = 0;
 }
 
 void combine_groups(long i, long j)
@@ -359,20 +359,20 @@ void combine_groups(long i, long j)
 	long n, m;
 	char match;
 
-	for (n = 0; n < grplist[j]->numsegs; n++)
+	for (n = 0; n < grplist[j]->numSegs; n++)
 	{
 		match = 0;
-		for (m = 0; m < grplist[i]->numsegs; m++)
+		for (m = 0; m < grplist[i]->numSegs; m++)
 		{
-			if (grplist[j]->segindex[n] == grplist[i]->segindex[m])
+			if (grplist[j]->Segindex[n] == grplist[i]->Segindex[m])
 			{
 				match = 1;
 			}
 		}
 		if (!match)
 		{
-			grplist[i]->numsegs++;
-			grplist[i]->segindex[grplist[i]->numsegs] = grplist[j]->segindex[n];
+			grplist[i]->numSegs++;
+			grplist[i]->Segindex[grplist[i]->numSegs] = grplist[j]->Segindex[n];
 		}
 	}
 	free(grplist[j]);
@@ -424,40 +424,40 @@ void combineBlocks()
 	long attr;
 	UINT count;
 	UINT* slist;
-	UINT curseg;
+	UINT curSeg;
 
-	for (i = 0; i < segcount; i++)
+	for (i = 0; i < Segcount; i++)
 	{
-		if (seglist[i] && ((seglist[i]->attr & SEG_ALIGN) != SEG_ABS))
+		if (Seglist[i] && ((Seglist[i]->attr & Seg_ALIGN) != Seg_ABS))
 		{
-			if (seglist[i]->winFlags & WINF_COMDAT) continue; /* don't combine COMDAT segments */
-			name = namelist[seglist[i]->nameindex];
-			attr = seglist[i]->attr & (SEG_COMBINE | SEG_USE32);
-			switch (attr & SEG_COMBINE)
+			if (Seglist[i]->winFlags & WINF_COMDAT) continue; /* don't combine COMDAT Segments */
+			name = namelist[Seglist[i]->nameindex];
+			attr = Seglist[i]->attr & (Seg_COMBINE | Seg_USE32);
+			switch (attr & Seg_COMBINE)
 			{
-				case SEG_STACK:
-					for (j = i + 1; j < segcount; j++)
+				case Seg_STACK:
+					for (j = i + 1; j < Segcount; j++)
 					{
-						if (!seglist[j]) continue;
-						if (seglist[j]->winFlags & WINF_COMDAT) continue;
-						if ((seglist[j]->attr & SEG_ALIGN) == SEG_ABS) continue;
-						if ((seglist[j]->attr & SEG_COMBINE) != SEG_STACK) continue;
-						combine_segments(i, j);
+						if (!Seglist[j]) continue;
+						if (Seglist[j]->winFlags & WINF_COMDAT) continue;
+						if ((Seglist[j]->attr & Seg_ALIGN) == Seg_ABS) continue;
+						if ((Seglist[j]->attr & Seg_COMBINE) != Seg_STACK) continue;
+						combine_Segments(i, j);
 					}
 					break;
-				case SEG_PUBLIC:
-				case SEG_PUBLIC2:
-				case SEG_PUBLIC3:
+				case Seg_PUBLIC:
+				case Seg_PUBLIC2:
+				case Seg_PUBLIC3:
 					slist = (UINT*)checkMalloc(sizeof(UINT));
 					slist[0] = i;
-					/* get list of segments to combine */
-					for (j = i + 1, count = 1; j < segcount; j++)
+					/* get list of Segments to combine */
+					for (j = i + 1, count = 1; j < Segcount; j++)
 					{
-						if (!seglist[j]) continue;
-						if (seglist[j]->winFlags & WINF_COMDAT) continue;
-						if ((seglist[j]->attr & SEG_ALIGN) == SEG_ABS) continue;
-						if (attr != (seglist[j]->attr & (SEG_COMBINE | SEG_USE32))) continue;
-						if (strcmp(name, namelist[seglist[j]->nameindex]) != 0) continue;
+						if (!Seglist[j]) continue;
+						if (Seglist[j]->winFlags & WINF_COMDAT) continue;
+						if ((Seglist[j]->attr & Seg_ALIGN) == Seg_ABS) continue;
+						if (attr != (Seglist[j]->attr & (Seg_COMBINE | Seg_USE32))) continue;
+						if (strcmp(name, namelist[Seglist[j]->nameindex]) != 0) continue;
 						slist = (UINT*)checkRealloc(slist, (count + 1) * sizeof(UINT));
 						slist[count] = j;
 						count++;
@@ -465,35 +465,35 @@ void combineBlocks()
 					/* sort them by sortorder */
 					for (j = 1; j < count; j++)
 					{
-						curseg = slist[j];
+						curSeg = slist[j];
 						for (k = j - 1; k >= 0; k--)
 						{
-							if (seglist[slist[k]]->orderindex < 0) break;
-							if (seglist[curseg]->orderindex >= 0)
+							if (Seglist[slist[k]]->orderindex < 0) break;
+							if (Seglist[curSeg]->orderindex >= 0)
 							{
-								if (strcmp(namelist[seglist[curseg]->orderindex],
-									namelist[seglist[slist[k]]->orderindex]) >= 0) break;
+								if (strcmp(namelist[Seglist[curSeg]->orderindex],
+									namelist[Seglist[slist[k]]->orderindex]) >= 0) break;
 							}
 							slist[k + 1] = slist[k];
 						}
 						k++;
-						slist[k] = curseg;
+						slist[k] = curSeg;
 					}
 					/* then combine in that order */
 					for (j = 1; j < count; j++)
 					{
-						combine_segments(i, slist[j]);
+						combine_Segments(i, slist[j]);
 					}
 					free(slist);
 					break;
-				case SEG_COMMON:
-					for (j = i + 1; j < segcount; j++)
+				case Seg_COMMON:
+					for (j = i + 1; j < Segcount; j++)
 					{
-						if ((seglist[j] && ((seglist[j]->attr & SEG_ALIGN) != SEG_ABS)) &&
-							((seglist[i]->attr & (SEG_ALIGN | SEG_COMBINE | SEG_USE32)) == (seglist[j]->attr & (SEG_ALIGN | SEG_COMBINE | SEG_USE32)))
+						if ((Seglist[j] && ((Seglist[j]->attr & Seg_ALIGN) != Seg_ABS)) &&
+							((Seglist[i]->attr & (Seg_ALIGN | Seg_COMBINE | Seg_USE32)) == (Seglist[j]->attr & (Seg_ALIGN | Seg_COMBINE | Seg_USE32)))
 							&&
-							(strcmp(name, namelist[seglist[j]->nameindex]) == 0)
-							&& !(seglist[j]->winFlags & WINF_COMDAT)
+							(strcmp(name, namelist[Seglist[j]->nameindex]) == 0)
+							&& !(Seglist[j]->winFlags & WINF_COMDAT)
 							)
 						{
 							combine_common(i, j);

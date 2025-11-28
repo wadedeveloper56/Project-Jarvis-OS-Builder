@@ -2,12 +2,12 @@
 #include "alink.h"
 
 char case_sensitive = 1;
-char padsegments = 0;
+char padSegments = 0;
 char mapfile = 0;
-PCHAR mapname = 0;
+CharPtr mapname = 0;
 unsigned short maxalloc = 0xffff;
 int output_type = OUTPUT_EXE;
-PCHAR outname = 0;
+CharPtr outname = 0;
 
 FILE* afile = 0;
 UINT filepos = 0;
@@ -15,7 +15,7 @@ long reclength = 0;
 unsigned char rectype = 0;
 char li_le = 0;
 UINT prevofs = 0;
-long prevseg = 0;
+long prevSeg = 0;
 long gotstart = 0;
 RELOC startaddr;
 UINT imageBase = 0;
@@ -29,18 +29,18 @@ unsigned char osMajor, osMinor;
 unsigned char subsysMajor, subsysMinor;
 unsigned int subSystem;
 int buildDll = FALSE;
-PUCHAR stubName = NULL;
+UCharPtr stubName = NULL;
 
 long errcount = 0;
 
 unsigned char buf[65536];
 PDATABLOCK lidata;
 
-PPCHAR namelist = NULL;
-PPSEG seglist = NULL;
-PPSEG outlist = NULL;
+CharPtrPtr namelist = NULL;
+SegPtrPtr Seglist = NULL;
+SegPtrPtr outlist = NULL;
 PPGRP grplist = NULL;
-PSORTENTRY publics = NULL;
+SortEntryPtr publics = NULL;
 PEXTREC externs = NULL;
 PPCOMREC comdefs = NULL;
 PPRELOC relocs = NULL;
@@ -48,12 +48,12 @@ PIMPREC impdefs = NULL;
 PEXPREC expdefs = NULL;
 PLIBFILE libfiles = NULL;
 PRESOURCE resource = NULL;
-PSORTENTRY comdats = NULL;
-PPCHAR modname;
-PPCHAR filename;
+SortEntryPtr comdats = NULL;
+CharPtrPtr modname;
+CharPtrPtr filename;
 UINT namecount = 0, namemin = 0,
 pubcount = 0, pubmin = 0,
-segcount = 0, segmin = 0, outcount = 0,
+Segcount = 0, Segmin = 0, outcount = 0,
 grpcount = 0, grpmin = 0,
 extcount = 0, extmin = 0,
 comcount = 0, commin = 0,
@@ -65,7 +65,7 @@ filecount = 0,
 libcount = 0,
 rescount = 0;
 UINT libPathCount = 0;
-PCHAR* libPath = NULL;
+CharPtr* libPath = NULL;
 char* entryPoint = NULL;
 
 void processArgs(int argc, char** argv)
@@ -203,17 +203,17 @@ void processArgs(int argc, char** argv)
 					switch (strlen(argv[i]))
 					{
 						case 2:
-							padsegments = 1;
+							padSegments = 1;
 							break;
 						case 3:
 							if (argv[i][2] == '+')
 							{
-								padsegments = 1;
+								padSegments = 1;
 								break;
 							}
 							else if (argv[i][2] == '-')
 							{
-								padsegments = 0;
+								padSegments = 0;
 								break;
 							}
 						default:
@@ -252,7 +252,7 @@ void processArgs(int argc, char** argv)
 								i++;
 								if (!outname)
 								{
-									outname = (PCHAR)checkMalloc(strlen(argv[i]) + 1 + 4); /* space for added .EXT if none given */
+									outname = (CharPtr)checkMalloc(strlen(argv[i]) + 1 + 4); /* space for added .EXT if none given */
 									strcpy(outname, argv[i]);
 								}
 								else
@@ -371,7 +371,7 @@ void processArgs(int argc, char** argv)
 						{
 							i++;
 							libPathCount++;
-							libPath = (PCHAR*)checkRealloc(libPath, libPathCount * sizeof(PCHAR));
+							libPath = (CharPtr*)checkRealloc(libPath, libPathCount * sizeof(CharPtr));
 							j = strlen(argv[i]);
 							if (argv[i][j - 1] != PATH_CHAR)
 							{
@@ -589,7 +589,7 @@ void processArgs(int argc, char** argv)
 						if (i < (argc - 1))
 						{
 							i++;
-							stubName = (PUCHAR)argv[i];
+							stubName = (UCharPtr)argv[i];
 						}
 						else
 						{
@@ -675,8 +675,8 @@ void processArgs(int argc, char** argv)
 		}
 		else
 		{
-			filename = (PPCHAR)checkRealloc(filename, (filecount + 1) * sizeof(PCHAR));
-			filename[filecount] = (PCHAR)checkMalloc(strlen(argv[i]) + 1);
+			filename = (CharPtrPtr)checkRealloc(filename, (filecount + 1) * sizeof(CharPtr));
+			filename[filecount] = (CharPtr)checkMalloc(strlen(argv[i]) + 1);
 			memcpy(filename[filecount], argv[i], strlen(argv[i]) + 1);
 			for (j = strlen(filename[filecount]);
 				j && (filename[filecount][j] != '.') &&
@@ -686,7 +686,7 @@ void processArgs(int argc, char** argv)
 			{
 				j = strlen(filename[filecount]);
 				/* add default extension if none specified */
-				filename[filecount] = (PCHAR)checkRealloc(filename[filecount], strlen(argv[i]) + 5);
+				filename[filecount] = (CharPtr)checkRealloc(filename[filecount], strlen(argv[i]) + 5);
 				strcpy(filename[filecount] + j, DEFAULT_EXTENSION);
 			}
 			filecount++;
@@ -708,9 +708,9 @@ void processArgs(int argc, char** argv)
 		printf("    -c      Enable Case sensitivity\n");
 		printf("    -c+     Enable Case sensitivity\n");
 		printf("    -c-     Disable Case sensitivity\n");
-		printf("    -p      Enable segment padding\n");
-		printf("    -p+     Enable segment padding\n");
-		printf("    -p-     Disable segment padding\n");
+		printf("    -p      Enable Segment padding\n");
+		printf("    -p+     Enable Segment padding\n");
+		printf("    -p-     Disable Segment padding\n");
 		printf("    -m      Enable map file\n");
 		printf("    -m+     Enable map file\n");
 		printf("    -m-     Disable map file\n");
@@ -820,8 +820,8 @@ void matchExterns()
 {
 	long i, j, k, old_nummods;
 	//int n;
-	PSORTENTRY listnode;
-	PCHAR name;
+	SortEntryPtr listnode;
+	CharPtr name;
 	PPUBLIC pubdef;
 
 	do
@@ -981,9 +981,9 @@ void matchExterns()
 void matchComDefs()
 {
 	int i, j;// , k;
-	int comseg;
-	int comfarseg;
-	PSORTENTRY listnode;
+	int comSeg;
+	int comfarSeg;
+	SortEntryPtr listnode;
 	PPUBLIC pubdef;
 
 	if (!comcount) return;
@@ -1033,20 +1033,20 @@ void matchComDefs()
 		}
 	}
 
-	seglist = (PPSEG)checkRealloc(seglist, (segcount + 1) * sizeof(PSEG));
-	seglist[segcount] = (PSEG)checkMalloc(sizeof(SEG));
-	namelist = (PPCHAR)checkRealloc(namelist, (namecount + 1) * sizeof(PCHAR));
+	Seglist = (SegPtrPtr)checkRealloc(Seglist, (Segcount + 1) * sizeof(SegPtr));
+	Seglist[Segcount] = (SegPtr)checkMalloc(sizeof(Seg));
+	namelist = (CharPtrPtr)checkRealloc(namelist, (namecount + 1) * sizeof(CharPtr));
 	namelist[namecount] = checkStrdup("COMDEFS");
-	seglist[segcount]->nameindex = namecount;
-	seglist[segcount]->classindex = -1;
-	seglist[segcount]->overlayindex = -1;
-	seglist[segcount]->length = 0;
-	seglist[segcount]->data = NULL;
-	seglist[segcount]->datmask = NULL;
-	seglist[segcount]->attr = SEG_PRIVATE | SEG_PARA;
-	seglist[segcount]->winFlags = WINF_READABLE | WINF_WRITEABLE | WINF_NEG_FLAGS;
-	comseg = segcount;
-	segcount++;
+	Seglist[Segcount]->nameindex = namecount;
+	Seglist[Segcount]->classindex = -1;
+	Seglist[Segcount]->overlayindex = -1;
+	Seglist[Segcount]->length = 0;
+	Seglist[Segcount]->data = NULL;
+	Seglist[Segcount]->datmask = NULL;
+	Seglist[Segcount]->attr = Seg_PRIVATE | Seg_PARA;
+	Seglist[Segcount]->winFlags = WINF_READABLE | WINF_WRITEABLE | WINF_NEG_FLAGS;
+	comSeg = Segcount;
+	Segcount++;
 	namecount++;
 
 
@@ -1056,30 +1056,30 @@ void matchComDefs()
 		if (grplist[i]->nameindex < 0) continue;
 		if (!strcmp("DGROUP", namelist[grplist[i]->nameindex]))
 		{
-			if (grplist[i]->numsegs == 0) continue; /* don't add to an emtpy group */
+			if (grplist[i]->numSegs == 0) continue; /* don't add to an emtpy group */
 			/* because empty groups are special */
 			/* else add to group */
-			grplist[i]->segindex[grplist[i]->numsegs] = comseg;
-			grplist[i]->numsegs++;
+			grplist[i]->Segindex[grplist[i]->numSegs] = comSeg;
+			grplist[i]->numSegs++;
 			break;
 		}
 	}
 
-	seglist = (PPSEG)checkRealloc(seglist, (segcount + 1) * sizeof(PSEG));
-	seglist[segcount] = (PSEG)checkMalloc(sizeof(SEG));
-	namelist = (PPCHAR)checkRealloc(namelist, (namecount + 1) * sizeof(PCHAR));
+	Seglist = (SegPtrPtr)checkRealloc(Seglist, (Segcount + 1) * sizeof(SegPtr));
+	Seglist[Segcount] = (SegPtr)checkMalloc(sizeof(Seg));
+	namelist = (CharPtrPtr)checkRealloc(namelist, (namecount + 1) * sizeof(CharPtr));
 	namelist[namecount] = checkStrdup("FARCOMDEFS");
-	seglist[segcount]->nameindex = namecount;
-	seglist[segcount]->classindex = -1;
-	seglist[segcount]->overlayindex = -1;
-	seglist[segcount]->length = 0;
-	seglist[segcount]->data = NULL;
-	seglist[segcount]->datmask = NULL;
-	seglist[segcount]->attr = SEG_PRIVATE | SEG_PARA;
-	seglist[segcount]->winFlags = WINF_READABLE | WINF_WRITEABLE | WINF_NEG_FLAGS;
+	Seglist[Segcount]->nameindex = namecount;
+	Seglist[Segcount]->classindex = -1;
+	Seglist[Segcount]->overlayindex = -1;
+	Seglist[Segcount]->length = 0;
+	Seglist[Segcount]->data = NULL;
+	Seglist[Segcount]->datmask = NULL;
+	Seglist[Segcount]->attr = Seg_PRIVATE | Seg_PARA;
+	Seglist[Segcount]->winFlags = WINF_READABLE | WINF_WRITEABLE | WINF_NEG_FLAGS;
 	namecount++;
-	comfarseg = segcount;
-	segcount++;
+	comfarSeg = Segcount;
+	Segcount++;
 
 	for (i = 0; i < comcount; i++)
 	{
@@ -1089,63 +1089,63 @@ void matchComDefs()
 		{
 			if (comdefs[i]->length > 65536)
 			{
-				seglist = (PPSEG)checkRealloc(seglist, (segcount + 1) * sizeof(PSEG));
-				seglist[segcount] = (PSEG)checkMalloc(sizeof(SEG));
-				namelist = (PPCHAR)checkRealloc(namelist, (namecount + 1) * sizeof(PCHAR));
+				Seglist = (SegPtrPtr)checkRealloc(Seglist, (Segcount + 1) * sizeof(SegPtr));
+				Seglist[Segcount] = (SegPtr)checkMalloc(sizeof(Seg));
+				namelist = (CharPtrPtr)checkRealloc(namelist, (namecount + 1) * sizeof(CharPtr));
 				namelist[namecount] = checkStrdup("FARCOMDEFS");
-				seglist[segcount]->nameindex = namecount;
-				seglist[segcount]->classindex = -1;
-				seglist[segcount]->overlayindex = -1;
-				seglist[segcount]->length = comdefs[i]->length;
-				seglist[segcount]->data = NULL;
-				seglist[segcount]->datmask =
-					(PUCHAR)checkMalloc((comdefs[i]->length + 7) / 8);
+				Seglist[Segcount]->nameindex = namecount;
+				Seglist[Segcount]->classindex = -1;
+				Seglist[Segcount]->overlayindex = -1;
+				Seglist[Segcount]->length = comdefs[i]->length;
+				Seglist[Segcount]->data = NULL;
+				Seglist[Segcount]->datmask =
+					(UCharPtr)checkMalloc((comdefs[i]->length + 7) / 8);
 				for (j = 0; j < (comdefs[i]->length + 7) / 8; j++)
-					seglist[segcount]->datmask[j] = 0;
-				seglist[segcount]->attr = SEG_PRIVATE | SEG_PARA;
-				seglist[segcount]->winFlags = WINF_READABLE | WINF_WRITEABLE | WINF_NEG_FLAGS;
+					Seglist[Segcount]->datmask[j] = 0;
+				Seglist[Segcount]->attr = Seg_PRIVATE | Seg_PARA;
+				Seglist[Segcount]->winFlags = WINF_READABLE | WINF_WRITEABLE | WINF_NEG_FLAGS;
 				namecount++;
-				pubdef->segnum = segcount;
-				segcount++;
+				pubdef->Segnum = Segcount;
+				Segcount++;
 				pubdef->ofs = 0;
 			}
-			else if ((comdefs[i]->length + seglist[comfarseg]->length) > 65536)
+			else if ((comdefs[i]->length + Seglist[comfarSeg]->length) > 65536)
 			{
-				seglist[comfarseg]->datmask =
-					(PUCHAR)checkMalloc((seglist[comfarseg]->length + 7) / 8);
-				for (j = 0; j < (seglist[comfarseg]->length + 7) / 8; j++)
-					seglist[comfarseg]->datmask[j] = 0;
+				Seglist[comfarSeg]->datmask =
+					(UCharPtr)checkMalloc((Seglist[comfarSeg]->length + 7) / 8);
+				for (j = 0; j < (Seglist[comfarSeg]->length + 7) / 8; j++)
+					Seglist[comfarSeg]->datmask[j] = 0;
 
-				seglist = (PPSEG)checkRealloc(seglist, (segcount + 1) * sizeof(PSEG));
-				seglist[segcount] = (PSEG)checkMalloc(sizeof(SEG));
-				namelist = (PPCHAR)checkRealloc(namelist, (namecount + 1) * sizeof(PCHAR));
+				Seglist = (SegPtrPtr)checkRealloc(Seglist, (Segcount + 1) * sizeof(SegPtr));
+				Seglist[Segcount] = (SegPtr)checkMalloc(sizeof(Seg));
+				namelist = (CharPtrPtr)checkRealloc(namelist, (namecount + 1) * sizeof(CharPtr));
 				namelist[namecount] = checkStrdup("FARCOMDEFS");
-				seglist[segcount]->nameindex = namecount;
-				seglist[segcount]->classindex = -1;
-				seglist[segcount]->overlayindex = -1;
-				seglist[segcount]->length = comdefs[i]->length;
-				seglist[segcount]->data = NULL;
-				seglist[segcount]->datmask = NULL;
-				seglist[segcount]->attr = SEG_PRIVATE | SEG_PARA;
-				seglist[segcount]->winFlags = WINF_READABLE | WINF_WRITEABLE | WINF_NEG_FLAGS;
-				comfarseg = segcount;
-				segcount++;
+				Seglist[Segcount]->nameindex = namecount;
+				Seglist[Segcount]->classindex = -1;
+				Seglist[Segcount]->overlayindex = -1;
+				Seglist[Segcount]->length = comdefs[i]->length;
+				Seglist[Segcount]->data = NULL;
+				Seglist[Segcount]->datmask = NULL;
+				Seglist[Segcount]->attr = Seg_PRIVATE | Seg_PARA;
+				Seglist[Segcount]->winFlags = WINF_READABLE | WINF_WRITEABLE | WINF_NEG_FLAGS;
+				comfarSeg = Segcount;
+				Segcount++;
 				namecount++;
-				pubdef->segnum = comfarseg;
+				pubdef->Segnum = comfarSeg;
 				pubdef->ofs = 0;
 			}
 			else
 			{
-				pubdef->segnum = comfarseg;
-				pubdef->ofs = seglist[comfarseg]->length;
-				seglist[comfarseg]->length += comdefs[i]->length;
+				pubdef->Segnum = comfarSeg;
+				pubdef->ofs = Seglist[comfarSeg]->length;
+				Seglist[comfarSeg]->length += comdefs[i]->length;
 			}
 		}
 		else
 		{
-			pubdef->segnum = comseg;
-			pubdef->ofs = seglist[comseg]->length;
-			seglist[comseg]->length += comdefs[i]->length;
+			pubdef->Segnum = comSeg;
+			pubdef->ofs = Seglist[comSeg]->length;
+			Seglist[comSeg]->length += comdefs[i]->length;
 		}
 		pubdef->modnum = comdefs[i]->modnum;
 		pubdef->grpnum = -1;
@@ -1174,16 +1174,16 @@ void matchComDefs()
 			sortedInsert(&publics, &pubcount, comdefs[i]->name, pubdef);
 		}
 	}
-	seglist[comfarseg]->datmask =
-		(PUCHAR)checkMalloc((seglist[comfarseg]->length + 7) / 8);
-	for (j = 0; j < (seglist[comfarseg]->length + 7) / 8; j++)
-		seglist[comfarseg]->datmask[j] = 0;
+	Seglist[comfarSeg]->datmask =
+		(UCharPtr)checkMalloc((Seglist[comfarSeg]->length + 7) / 8);
+	for (j = 0; j < (Seglist[comfarSeg]->length + 7) / 8; j++)
+		Seglist[comfarSeg]->datmask[j] = 0;
 
 
-	seglist[comseg]->datmask =
-		(PUCHAR)checkMalloc((seglist[comseg]->length + 7) / 8);
-	for (j = 0; j < (seglist[comseg]->length + 7) / 8; j++)
-		seglist[comseg]->datmask[j] = 0;
+	Seglist[comSeg]->datmask =
+		(UCharPtr)checkMalloc((Seglist[comSeg]->length + 7) / 8);
+	for (j = 0; j < (Seglist[comSeg]->length + 7) / 8; j++)
+		Seglist[comSeg]->datmask[j] = 0;
 
 
 	for (i = 0; i < expcount; i++)
@@ -1227,68 +1227,68 @@ void sortSegments()
 	UINT base, align;
 	long baseSeg;
 
-	for (i = 0; i < segcount; i++)
+	for (i = 0; i < Segcount; i++)
 	{
-		if (seglist[i])
+		if (Seglist[i])
 		{
-			if ((seglist[i]->attr & SEG_ALIGN) != SEG_ABS)
+			if ((Seglist[i]->attr & Seg_ALIGN) != Seg_ABS)
 			{
-				seglist[i]->absframe = 0;
+				Seglist[i]->absframe = 0;
 			}
 		}
 	}
 
 	outcount = 0;
 	base = 0;
-	outlist = (PPSEG)checkMalloc(sizeof(PSEG) * segcount);
+	outlist = (SegPtrPtr)checkMalloc(sizeof(SegPtr) * Segcount);
 	for (i = 0; i < grpcount; i++)
 	{
 		if (grplist[i])
 		{
-			grplist[i]->segnum = -1;
-			for (j = 0; j < grplist[i]->numsegs; j++)
+			grplist[i]->Segnum = -1;
+			for (j = 0; j < grplist[i]->numSegs; j++)
 			{
-				k = grplist[i]->segindex[j];
-				if (!seglist[k])
+				k = grplist[i]->Segindex[j];
+				if (!Seglist[k])
 				{
-					printf("Error - group %s contains non-existent segment\n", namelist[grplist[i]->nameindex]);
+					printf("Error - group %s contains non-existent Segment\n", namelist[grplist[i]->nameindex]);
 					exit(1);
 				}
 				/* don't add removed sections */
-				if (seglist[k]->winFlags & WINF_REMOVE)
+				if (Seglist[k]->winFlags & WINF_REMOVE)
 				{
 					continue;
 				}
-				/* add non-absolute segment */
-				if ((seglist[k]->attr & SEG_ALIGN) != SEG_ABS)
+				/* add non-absolute Segment */
+				if ((Seglist[k]->attr & Seg_ALIGN) != Seg_ABS)
 				{
-					switch (seglist[k]->attr & SEG_ALIGN)
+					switch (Seglist[k]->attr & Seg_ALIGN)
 					{
-						case SEG_WORD:
+						case Seg_WORD:
 							align = 2;
 							break;
-						case SEG_DWORD:
+						case Seg_DWORD:
 							align = 4;
 							break;
-						case SEG_8BYTE:
+						case Seg_8BYTE:
 							align = 0x8;
 							break;
-						case SEG_PARA:
+						case Seg_PARA:
 							align = 0x10;
 							break;
-						case SEG_32BYTE:
+						case Seg_32BYTE:
 							align = 0x20;
 							break;
-						case SEG_64BYTE:
+						case Seg_64BYTE:
 							align = 0x40;
 							break;
-						case SEG_PAGE:
+						case Seg_PAGE:
 							align = 0x100;
 							break;
-						case SEG_MEMPAGE:
+						case Seg_MEMPAGE:
 							align = 0x1000;
 							break;
-						case SEG_BYTE:
+						case Seg_BYTE:
 						default:
 							align = 1;
 							break;
@@ -1298,20 +1298,20 @@ void sortSegments()
 						align = objectAlign;
 					}
 					base = (base + align - 1) & (0xffffffff - (align - 1));
-					seglist[k]->base = base;
-					if (seglist[k]->length > 0)
+					Seglist[k]->base = base;
+					if (Seglist[k]->length > 0)
 					{
-						base += seglist[k]->length;
-						if (seglist[k]->absframe != 0)
+						base += Seglist[k]->length;
+						if (Seglist[k]->absframe != 0)
 						{
-							printf("Error - Segment %s part of more than one group\n", namelist[seglist[k]->nameindex]);
+							printf("Error - Segment %s part of more than one group\n", namelist[Seglist[k]->nameindex]);
 							exit(1);
 						}
-						seglist[k]->absframe = 1;
-						seglist[k]->absofs = i + 1;
-						if (grplist[i]->segnum < 0)
+						Seglist[k]->absframe = 1;
+						Seglist[k]->absofs = i + 1;
+						if (grplist[i]->Segnum < 0)
 						{
-							grplist[i]->segnum = k;
+							grplist[i]->Segnum = k;
 						}
 						if (outcount == 0)
 						{
@@ -1319,41 +1319,41 @@ void sortSegments()
 						}
 						else
 						{
-							outlist[outcount - 1]->virtualSize = seglist[k]->base -
+							outlist[outcount - 1]->virtualSize = Seglist[k]->base -
 								outlist[outcount - 1]->base;
 						}
-						outlist[outcount] = seglist[k];
+						outlist[outcount] = Seglist[k];
 						outcount++;
 					}
 				}
 			}
 		}
 	}
-	for (i = 0; i < segcount; i++)
+	for (i = 0; i < Segcount; i++)
 	{
-		if (seglist[i])
+		if (Seglist[i])
 		{
 			/* don't add removed sections */
-			if (seglist[i]->winFlags & WINF_REMOVE)
+			if (Seglist[i]->winFlags & WINF_REMOVE)
 			{
 				continue;
 			}
-			/* add non-absolute segment, not already dealt with */
-			if (((seglist[i]->attr & SEG_ALIGN) != SEG_ABS) &&
-				!seglist[i]->absframe)
+			/* add non-absolute Segment, not already dealt with */
+			if (((Seglist[i]->attr & Seg_ALIGN) != Seg_ABS) &&
+				!Seglist[i]->absframe)
 			{
-				switch (seglist[i]->attr & SEG_ALIGN)
+				switch (Seglist[i]->attr & Seg_ALIGN)
 				{
-					case SEG_WORD:
-					case SEG_BYTE:
-					case SEG_DWORD:
-					case SEG_PARA:
+					case Seg_WORD:
+					case Seg_BYTE:
+					case Seg_DWORD:
+					case Seg_PARA:
 						align = 0x10;
 						break;
-					case SEG_PAGE:
+					case Seg_PAGE:
 						align = 0x100;
 						break;
-					case SEG_MEMPAGE:
+					case Seg_MEMPAGE:
 						align = 0x1000;
 						break;
 					default:
@@ -1365,32 +1365,32 @@ void sortSegments()
 					align = objectAlign;
 				}
 				base = (base + align - 1) & (0xffffffff - (align - 1));
-				seglist[i]->base = base;
-				if (seglist[i]->length > 0)
+				Seglist[i]->base = base;
+				if (Seglist[i]->length > 0)
 				{
-					base += seglist[i]->length;
-					seglist[i]->absframe = 1;
-					seglist[i]->absofs = 0;
+					base += Seglist[i]->length;
+					Seglist[i]->absframe = 1;
+					Seglist[i]->absofs = 0;
 					if (outcount == 0)
 					{
 						baseSeg = i;
 					}
 					else
 					{
-						outlist[outcount - 1]->virtualSize = seglist[i]->base -
+						outlist[outcount - 1]->virtualSize = Seglist[i]->base -
 							outlist[outcount - 1]->base;
 					}
-					outlist[outcount] = seglist[i];
+					outlist[outcount] = Seglist[i];
 					outcount++;
 				}
 			}
-			else if ((seglist[i]->attr & SEG_ALIGN) == SEG_ABS)
+			else if ((Seglist[i]->attr & Seg_ALIGN) == Seg_ABS)
 			{
-				seglist[i]->base = (seglist[i]->absframe << 4) + seglist[i]->absofs;
+				Seglist[i]->base = (Seglist[i]->absframe << 4) + Seglist[i]->absofs;
 			}
 		}
 	}
-	/* build size of last segment in output list */
+	/* build size of last Segment in output list */
 	if (outcount)
 	{
 		outlist[outcount - 1]->virtualSize =
@@ -1399,7 +1399,7 @@ void sortSegments()
 	}
 	for (i = 0; i < grpcount; i++)
 	{
-		if (grplist[i] && (grplist[i]->segnum < 0)) grplist[i]->segnum = baseSeg;
+		if (grplist[i] && (grplist[i]->Segnum < 0)) grplist[i]->Segnum = baseSeg;
 	}
 }
 
@@ -1494,37 +1494,37 @@ void generateMap()
 	}
 	printf("Generating map file %s\n", mapname);
 
-	for (i = 0; i < segcount; i++)
+	for (i = 0; i < Segcount; i++)
 	{
-		if (seglist[i])
+		if (Seglist[i])
 		{
-			fprintf(afile, "SEGMENT %s ",
-				(seglist[i]->nameindex >= 0) ? namelist[seglist[i]->nameindex] : "");
-			switch (seglist[i]->attr & SEG_COMBINE)
+			fprintf(afile, "SegMENT %s ",
+				(Seglist[i]->nameindex >= 0) ? namelist[Seglist[i]->nameindex] : "");
+			switch (Seglist[i]->attr & Seg_COMBINE)
 			{
-				case SEG_PRIVATE:
+				case Seg_PRIVATE:
 					fprintf(afile, "PRIVATE ");
 					break;
-				case SEG_PUBLIC:
+				case Seg_PUBLIC:
 					fprintf(afile, "PUBLIC ");
 					break;
-				case SEG_PUBLIC2:
+				case Seg_PUBLIC2:
 					fprintf(afile, "PUBLIC(2) ");
 					break;
-				case SEG_STACK:
+				case Seg_STACK:
 					fprintf(afile, "STACK ");
 					break;
-				case SEG_COMMON:
+				case Seg_COMMON:
 					fprintf(afile, "COMMON ");
 					break;
-				case SEG_PUBLIC3:
+				case Seg_PUBLIC3:
 					fprintf(afile, "PUBLIC(3) ");
 					break;
 				default:
 					fprintf(afile, "unknown ");
 					break;
 			}
-			if (seglist[i]->attr & SEG_USE32)
+			if (Seglist[i]->attr & Seg_USE32)
 			{
 				fprintf(afile, "USE32 ");
 			}
@@ -1532,46 +1532,46 @@ void generateMap()
 			{
 				fprintf(afile, "USE16 ");
 			}
-			switch (seglist[i]->attr & SEG_ALIGN)
+			switch (Seglist[i]->attr & Seg_ALIGN)
 			{
-				case SEG_ABS:
-					fprintf(afile, "AT 0%04lXh ", seglist[i]->absframe);
+				case Seg_ABS:
+					fprintf(afile, "AT 0%04lXh ", Seglist[i]->absframe);
 					break;
-				case SEG_BYTE:
+				case Seg_BYTE:
 					fprintf(afile, "BYTE ");
 					break;
-				case SEG_WORD:
+				case Seg_WORD:
 					fprintf(afile, "WORD ");
 					break;
-				case SEG_PARA:
+				case Seg_PARA:
 					fprintf(afile, "PARA ");
 					break;
-				case SEG_PAGE:
+				case Seg_PAGE:
 					fprintf(afile, "PAGE ");
 					break;
-				case SEG_DWORD:
+				case Seg_DWORD:
 					fprintf(afile, "DWORD ");
 					break;
-				case SEG_MEMPAGE:
+				case Seg_MEMPAGE:
 					fprintf(afile, "MEMPAGE ");
 					break;
 				default:
 					fprintf(afile, "unknown ");
 			}
-			if (seglist[i]->classindex >= 0)
-				fprintf(afile, "'%s'\n", namelist[seglist[i]->classindex]);
+			if (Seglist[i]->classindex >= 0)
+				fprintf(afile, "'%s'\n", namelist[Seglist[i]->classindex]);
 			else
 				fprintf(afile, "\n");
-			fprintf(afile, "  at %08lX, length %08lX\n", seglist[i]->base, seglist[i]->length);
+			fprintf(afile, "  at %08lX, length %08lX\n", Seglist[i]->base, Seglist[i]->length);
 		}
 	}
 	for (i = 0; i < grpcount; i++)
 	{
 		if (!grplist[i]) continue;
 		fprintf(afile, "\nGroup %s:\n", namelist[grplist[i]->nameindex]);
-		for (j = 0; j < grplist[i]->numsegs; j++)
+		for (j = 0; j < grplist[i]->numSegs; j++)
 		{
-			fprintf(afile, "    %s\n", namelist[seglist[grplist[i]->segindex[j]]->nameindex]);
+			fprintf(afile, "    %s\n", namelist[Seglist[grplist[i]->Segindex[j]]->nameindex]);
 		}
 	}
 
@@ -1587,7 +1587,7 @@ void generateMap()
 			if (q->modnum) continue;
 			fprintf(afile, "%s at %s:%08lX\n",
 				publics[i].id,
-				(q->segnum >= 0) ? namelist[seglist[q->segnum]->nameindex] : "Absolute",
+				(q->Segnum >= 0) ? namelist[Seglist[q->Segnum]->nameindex] : "Absolute",
 				q->ofs);
 		}
 	}
@@ -1632,7 +1632,7 @@ int main(int argc, char* argv[])
 			{
 				if (i - j)
 				{
-					libPath = (PCHAR*)checkRealloc(libPath, (libPathCount + 1) * sizeof(PCHAR));
+					libPath = (CharPtr*)checkRealloc(libPath, (libPathCount + 1) * sizeof(CharPtr));
 					libList[i] = 0;
 					if (libList[i - 1] == PATH_CHAR)
 					{
@@ -1640,7 +1640,7 @@ int main(int argc, char* argv[])
 					}
 					else
 					{
-						libPath[libPathCount] = (PCHAR)checkMalloc(i - j + 2);
+						libPath[libPathCount] = (CharPtr)checkMalloc(i - j + 2);
 						strcpy(libPath[libPathCount], libList + j);
 						libPath[libPathCount][i - j] = PATH_CHAR;
 						libPath[libPathCount][i - j + 1] = 0;
@@ -1663,7 +1663,7 @@ int main(int argc, char* argv[])
 
 	if (!outname)
 	{
-		outname = (PCHAR)checkMalloc(strlen(filename[0]) + 1 + 4);
+		outname = (CharPtr)checkMalloc(strlen(filename[0]) + 1 + 4);
 		strcpy(outname, filename[0]);
 		i = strlen(outname);
 		while ((i >= 0) && (outname[i] != '.') && (outname[i] != PATH_CHAR) && (outname[i] != ':'))
@@ -1707,7 +1707,7 @@ int main(int argc, char* argv[])
 	{
 		if (!mapname)
 		{
-			mapname = (PCHAR)checkMalloc(strlen(outname) + 1 + 4);
+			mapname = (CharPtr)checkMalloc(strlen(outname) + 1 + 4);
 			strcpy(mapname, outname);
 			i = strlen(mapname);
 			while ((i >= 0) && (mapname[i] != '.') && (mapname[i] != PATH_CHAR) && (mapname[i] != ':'))

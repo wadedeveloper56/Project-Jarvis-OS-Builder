@@ -13,22 +13,22 @@ int getBitCount(UINT a)
     return count;
 }
 
-void ClearNbit(PUCHAR mask,long i)
+void ClearNbit(UCharPtr mask,long i)
 {
     mask[i/8]&=0xff-(1<<(i%8));
 }
 
-void SetNbit(PUCHAR mask,long i)
+void SetNbit(UCharPtr mask,long i)
 {
     mask[i/8]|=(1<<(i%8));
 }
 
-char GetNbit(PUCHAR mask,long i)
+char GetNbit(UCharPtr mask,long i)
 {
     return (mask[i/8]>>(i%8))&1;
 }
 
-long GetIndex(PUCHAR buf,long *index)
+long GetIndex(UCharPtr buf,long *index)
 {
     long i;
     if(buf[*index]&0x80)
@@ -65,17 +65,17 @@ void ReportError(long errnum)
     case ERR_INV_DATA:
 	printf(" - invalid data address\n");
 	break;
-    case ERR_INV_SEG:
-	printf(" - invalid segment number\n");
+    case ERR_INV_Seg:
+	printf(" - invalid Segment number\n");
 	break;
     case ERR_BAD_FIXUP:
 	printf(" - invalid fixup record\n");
 	break;
-    case ERR_BAD_SEGDEF:
-	printf(" - invalid segment definition record\n");
+    case ERR_BAD_SegDEF:
+	printf(" - invalid Segment definition record\n");
 	break;
-    case ERR_ABS_SEG:
-	printf(" - data emitted to absolute segment\n");
+    case ERR_ABS_Seg:
+	printf(" - data emitted to absolute Segment\n");
 	break;
     case ERR_DUP_PUBLIC:
 	printf(" - duplicate public definition\n");
@@ -89,8 +89,8 @@ void ReportError(long errnum)
     case ERR_UNKNOWN_RECTYPE:
 	printf(" - unknown object module record type %02X\n",rectype);
 	break;
-    case ERR_SEG_TOO_LARGE:
-	printf(" - 4Gb Non-Absolute segments not supported.\n");
+    case ERR_Seg_TOO_LARGE:
+	printf(" - 4Gb Non-Absolute Segments not supported.\n");
 	break;
     case ERR_MULTIPLE_STARTS:
 	printf(" - start address defined in more than one module.\n");
@@ -111,7 +111,7 @@ void ReportError(long errnum)
 	printf("\n");
     }
     printf("name count = %i\n",namecount);
-    printf("seg count = %i\n",segcount);
+    printf("Seg count = %i\n",Segcount);
     printf("extcount=%i\n",extcount);
     printf("grpcount=%i\n",grpcount);
     printf("comcount=%i\n",comcount);
@@ -120,12 +120,12 @@ void ReportError(long errnum)
     printf("expcount=%i\n",expcount);
     printf("modcount=%i\n",nummods);
 
-    for(i=0,tot=0;i<segcount;i++)
+    for(i=0,tot=0;i<Segcount;i++)
     {
-	if(seglist[i] && seglist[i]->data)
-	    tot+=seglist[i]->length;
+	if(Seglist[i] && Seglist[i]->data)
+	    tot+=Seglist[i]->length;
     }
-    printf("total segment size=%08X\n",tot);
+    printf("total Segment size=%08X\n",tot);
 		
     exit(1);
 }
@@ -161,7 +161,7 @@ int wstrlen(const char *s)
 
 int sortCompare(const void *x1,const void *x2)
 {
-    return strcmp(((PSORTENTRY) x1)->id,((PSORTENTRY)x2)->id);
+    return strcmp(((SortEntryPtr) x1)->id,((SortEntryPtr)x2)->id);
 }
 
 void *checkMalloc(size_t x)
@@ -207,7 +207,7 @@ char *checkStrdup(const char *s)
 }
 
 
-PSORTENTRY binarySearch(PSORTENTRY list,UINT count,char *key)
+SortEntryPtr binarySearch(SortEntryPtr list,UINT count,char *key)
 {
     UINT i;
     int j;
@@ -235,9 +235,9 @@ PSORTENTRY binarySearch(PSORTENTRY list,UINT count,char *key)
     return NULL; /* return NULL if no match (count=0) */
 }
 
-void sortedInsert(PSORTENTRY *plist,UINT *pcount,char *key,void *object)
+void sortedInsert(SortEntryPtr *plist,UINT *pcount,char *key,void *object)
 {
-    PSORTENTRY list,node;
+    SortEntryPtr list,node;
     UINT count,index,i;
     int j;
    
@@ -282,12 +282,12 @@ void sortedInsert(PSORTENTRY *plist,UINT *pcount,char *key,void *object)
     /* grow list */
     count=*pcount+1;
     
-    list=(PSORTENTRY)checkRealloc(list,sizeof(SORTENTRY)*count);
+    list=(SortEntryPtr)checkRealloc(list,sizeof(SortEntry)*count);
 
     j=count-index-1; /* get number of entries after insertion index */
     if(j) /* move them up 1 entry if some */
     {
-	memmove(list+index+1,list+index,j*sizeof(SORTENTRY));
+	memmove(list+index+1,list+index,j*sizeof(SortEntry));
     }
 
     /* put new node in position */

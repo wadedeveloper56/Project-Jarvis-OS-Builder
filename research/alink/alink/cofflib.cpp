@@ -1,23 +1,23 @@
 #include "pch.h"
 #include "alink.h"
 
-void loadCoffLib(FILE* libfile, PCHAR libname)
+void loadCoffLib(FILE* libfile, CharPtr libname)
 {
 	UINT i, j;
 	UINT numsyms;
 	UINT modpage;
 	UINT memberSize;
 	UINT startPoint;
-	PUCHAR endptr;
+	UCharPtr endptr;
 	PLIBFILE p;
-	PCHAR name;
-	PUCHAR modbuf;
-	PSORTENTRY symlist = NULL;
+	CharPtr name;
+	UCharPtr modbuf;
+	SortEntryPtr symlist = NULL;
 	int x;
 
 	libfiles = (PLIBFILE)checkRealloc(libfiles, (libcount + 1) * sizeof(LIBFILE));
 	p = &libfiles[libcount];
-	p->filename = (PCHAR)checkMalloc(strlen(libname) + 1);
+	p->filename = (CharPtr)checkMalloc(strlen(libname) + 1);
 	strcpy(p->filename, libname);
 	startPoint = ftell(libfile);
 
@@ -65,7 +65,7 @@ void loadCoffLib(FILE* libfile, PCHAR libname)
 
 	/* get size */
 	errno = 0;
-	memberSize = strtoul((const char*)(buf + 48), (PPCHAR)&endptr, 10);
+	memberSize = strtoul((const char*)(buf + 48), (CharPtrPtr)&endptr, 10);
 	if (errno || (*endptr))
 	{
 		printf("Invalid library file format - bad member size\n");
@@ -90,7 +90,7 @@ void loadCoffLib(FILE* libfile, PCHAR libname)
 		numsyms = buf[3] + (buf[2] << 8) + (buf[1] << 16) + (buf[0] << 24);
 	}
 	printf("%u symbols\n", numsyms);
-	modbuf = (PUCHAR)checkMalloc(numsyms * 4);
+	modbuf = (UCharPtr)checkMalloc(numsyms * 4);
 
 	if (numsyms)
 	{
@@ -99,7 +99,7 @@ void loadCoffLib(FILE* libfile, PCHAR libname)
 			printf("Error reading from file\n");
 			exit(1);
 		}
-		symlist = (PSORTENTRY)checkMalloc(sizeof(SORTENTRY) * numsyms);
+		symlist = (SortEntryPtr)checkMalloc(sizeof(SortEntry) * numsyms);
 	}
 
 	for (i = 0; i < numsyms; i++)
@@ -135,7 +135,7 @@ void loadCoffLib(FILE* libfile, PCHAR libname)
 
 	if (numsyms)
 	{
-		qsort(symlist, numsyms, sizeof(SORTENTRY), sortCompare);
+		qsort(symlist, numsyms, sizeof(SortEntry), sortCompare);
 		p->symbols = symlist;
 		p->numsyms = numsyms;
 
@@ -193,7 +193,7 @@ void loadCoffLib(FILE* libfile, PCHAR libname)
 
 		/* get size */
 		errno = 0;
-		memberSize = strtoul((const char*)(buf + 48), (PPCHAR)&endptr, 10);
+		memberSize = strtoul((const char*)(buf + 48), (CharPtrPtr)&endptr, 10);
 		if (errno || (*endptr))
 		{
 			printf("Invalid library file format - bad member size\n");
@@ -250,7 +250,7 @@ void loadCoffLib(FILE* libfile, PCHAR libname)
 
 		/* get size */
 		errno = 0;
-		memberSize = strtoul((const char*)(buf + 48), (PPCHAR)&endptr, 10);
+		memberSize = strtoul((const char*)(buf + 48), (CharPtrPtr)&endptr, 10);
 		if (errno || (*endptr))
 		{
 			printf("Invalid library file format - bad member size\n");
@@ -258,7 +258,7 @@ void loadCoffLib(FILE* libfile, PCHAR libname)
 		}
 		if (memberSize)
 		{
-			p->longnames = (PUCHAR)checkMalloc(memberSize);
+			p->longnames = (UCharPtr)checkMalloc(memberSize);
 			if (fread(p->longnames, 1, memberSize, libfile) != memberSize)
 			{
 				printf("Error reading from file\n");

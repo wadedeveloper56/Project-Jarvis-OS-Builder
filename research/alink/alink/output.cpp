@@ -20,21 +20,21 @@ static unsigned char defaultStub[] = {
 
 static UINT defaultStubSize = sizeof(defaultStub);
 
-void GetFixupTarget(PRELOC r, long* bseg, UINT* tofs, int isFlat)
+void GetFixupTarget(PRELOC r, long* bSeg, UINT* tofs, int isFlat)
 {
-	long baseseg;
-	long targseg;
+	long baseSeg;
+	long targSeg;
 	UINT targofs;
 
-	r->outputPos = seglist[r->segnum]->base + r->ofs;
+	r->outputPos = Seglist[r->Segnum]->base + r->ofs;
 	switch (r->ftype)
 	{
-		case REL_SEGFRAME:
+		case REL_SegFRAME:
 		case REL_LILEFRAME:
-			baseseg = r->frame;
+			baseSeg = r->frame;
 			break;
 		case REL_GRPFRAME:
-			baseseg = grplist[r->frame]->segnum;
+			baseSeg = grplist[r->frame]->Segnum;
 			break;
 		case REL_EXTFRAME:
 			switch (externs[r->frame].flags)
@@ -47,10 +47,10 @@ void GetFixupTarget(PRELOC r, long* bseg, UINT* tofs, int isFlat)
 						break;
 					}
 
-					baseseg = externs[r->frame].pubdef->segnum;
+					baseSeg = externs[r->frame].pubdef->Segnum;
 					break;
 				case EXT_MATCHEDIMPORT:
-					baseseg = impdefs[externs[r->frame].impnum].segnum;
+					baseSeg = impdefs[externs[r->frame].impnum].Segnum;
 					break;
 				default:
 					printf("Reloc:Unmatched external referenced in frame\n");
@@ -62,11 +62,11 @@ void GetFixupTarget(PRELOC r, long* bseg, UINT* tofs, int isFlat)
 			printf("Reloc:Unsupported FRAME type %i\n", r->ftype);
 			errcount++;
 	}
-	if (baseseg < 0)
+	if (baseSeg < 0)
 	{
-		printf("Undefined base seg\n");
+		printf("Undefined base Seg\n");
 		exit(1);
-	}   /* this is a fix for TASM FLAT model, where FLAT group has no segments */
+	}   /* this is a fix for TASM FLAT model, where FLAT group has no Segments */
 
 	switch (r->ttype)
 	{
@@ -81,11 +81,11 @@ void GetFixupTarget(PRELOC r, long* bseg, UINT* tofs, int isFlat)
 						break;
 					}
 
-					targseg = externs[r->target].pubdef->segnum;
+					targSeg = externs[r->target].pubdef->Segnum;
 					targofs = externs[r->target].pubdef->ofs;
 					break;
 				case EXT_MATCHEDIMPORT:
-					targseg = impdefs[externs[r->target].impnum].segnum;
+					targSeg = impdefs[externs[r->target].impnum].Segnum;
 					targofs = impdefs[externs[r->target].impnum].ofs;
 					break;
 				default:
@@ -106,11 +106,11 @@ void GetFixupTarget(PRELOC r, long* bseg, UINT* tofs, int isFlat)
 						break;
 					}
 
-					targseg = externs[r->target].pubdef->segnum;
+					targSeg = externs[r->target].pubdef->Segnum;
 					targofs = externs[r->target].pubdef->ofs;
 					break;
 				case EXT_MATCHEDIMPORT:
-					targseg = impdefs[externs[r->target].impnum].segnum;
+					targSeg = impdefs[externs[r->target].impnum].Segnum;
 					targofs = impdefs[externs[r->target].impnum].ofs;
 					break;
 				default:
@@ -119,40 +119,40 @@ void GetFixupTarget(PRELOC r, long* bseg, UINT* tofs, int isFlat)
 					break;
 			}
 			break;
-		case REL_SEGONLY:
-			targseg = r->target;
+		case REL_SegONLY:
+			targSeg = r->target;
 			targofs = 0;
 			break;
-		case REL_SEGDISP:
-			targseg = r->target;
+		case REL_SegDISP:
+			targSeg = r->target;
 			targofs = r->disp;
 			break;
 		case REL_GRPONLY:
-			targseg = grplist[r->target]->segnum;
+			targSeg = grplist[r->target]->Segnum;
 			targofs = 0;
 			break;
 		case REL_GRPDISP:
-			targseg = grplist[r->target]->segnum;
+			targSeg = grplist[r->target]->Segnum;
 			targofs = r->disp;
 			break;
 		default:
 			printf("Reloc:Unsupported TARGET type %i\n", r->ttype);
 			errcount++;
 	}
-	if (targseg < 0)
+	if (targSeg < 0)
 	{
-		printf("undefined seg\n");
+		printf("undefined Seg\n");
 		exit(1);
 	}
-	if ((!errcount) && (!seglist[targseg]))
+	if ((!errcount) && (!Seglist[targSeg]))
 	{
-		printf("Reloc: no target segment\n");
+		printf("Reloc: no target Segment\n");
 
 		errcount++;
 	}
-	if ((!errcount) && (!seglist[baseseg]))
+	if ((!errcount) && (!Seglist[baseSeg]))
 	{
-		printf("reloc: no base segment\n");
+		printf("reloc: no base Segment\n");
 
 		errcount++;
 	}
@@ -160,61 +160,61 @@ void GetFixupTarget(PRELOC r, long* bseg, UINT* tofs, int isFlat)
 	if (!errcount)
 	{
 		/*
-				if(((seglist[targseg]->attr&SEG_ALIGN)!=SEG_ABS) &&
-				   ((seglist[baseseg]->attr&SEG_ALIGN)!=SEG_ABS))
+				if(((Seglist[targSeg]->attr&Seg_ALIGN)!=Seg_ABS) &&
+				   ((Seglist[baseSeg]->attr&Seg_ALIGN)!=Seg_ABS))
 				{
-					if(seglist[baseseg]->base>seglist[targseg]->base)
+					if(Seglist[baseSeg]->base>Seglist[targSeg]->base)
 					{
 						printf("Reloc:Negative base address\n");
 						errcount++;
 					}
-					targofs+=seglist[targseg]->base-seglist[baseseg]->base;
+					targofs+=Seglist[targSeg]->base-Seglist[baseSeg]->base;
 				}
 		*/
-		if ((seglist[baseseg]->attr & SEG_ALIGN) == SEG_ABS)
+		if ((Seglist[baseSeg]->attr & Seg_ALIGN) == Seg_ABS)
 		{
-			printf("Warning: Reloc frame is absolute segment\n");
-			targseg = baseseg;
+			printf("Warning: Reloc frame is absolute Segment\n");
+			targSeg = baseSeg;
 		}
-		else if ((seglist[targseg]->attr & SEG_ALIGN) == SEG_ABS)
+		else if ((Seglist[targSeg]->attr & Seg_ALIGN) == Seg_ABS)
 		{
-			printf("Warning: Reloc target is in absolute segment\n");
-			targseg = baseseg;
+			printf("Warning: Reloc target is in absolute Segment\n");
+			targSeg = baseSeg;
 		}
-		if (!isFlat || ((seglist[baseseg]->attr & SEG_ALIGN) == SEG_ABS))
+		if (!isFlat || ((Seglist[baseSeg]->attr & Seg_ALIGN) == Seg_ABS))
 		{
-			if (seglist[baseseg]->base > (seglist[targseg]->base + targofs))
+			if (Seglist[baseSeg]->base > (Seglist[targSeg]->base + targofs))
 			{
 				printf("Error: target address out of frame\n");
 				printf("Base=%08X,target=%08X\n",
-					seglist[baseseg]->base, seglist[targseg]->base + targofs);
+					Seglist[baseSeg]->base, Seglist[targSeg]->base + targofs);
 				errcount++;
 			}
-			targofs += seglist[targseg]->base - seglist[baseseg]->base;
-			*bseg = baseseg;
+			targofs += Seglist[targSeg]->base - Seglist[baseSeg]->base;
+			*bSeg = baseSeg;
 			*tofs = targofs;
 		}
 		else
 		{
-			*bseg = -1;
-			*tofs = targofs + seglist[targseg]->base;
+			*bSeg = -1;
+			*tofs = targofs + Seglist[targSeg]->base;
 		}
 	}
 	else
 	{
 		printf("relocation error occurred\n");
-		*bseg = 0;
+		*bSeg = 0;
 		*tofs = 0;
 	}
 }
 
 
-void OutputCOMfile(PCHAR outname)
+void OutputCOMfile(CharPtr outname)
 {
 	long i, j;
 	UINT started;
 	UINT lastout;
-	long targseg;
+	long targSeg;
 	UINT targofs;
 	FILE* outfile;
 	unsigned short temps;
@@ -228,14 +228,14 @@ void OutputCOMfile(PCHAR outname)
 	errcount = 0;
 	if (gotstart)
 	{
-		GetFixupTarget(&startaddr, &startaddr.segnum, &startaddr.ofs, FALSE);
+		GetFixupTarget(&startaddr, &startaddr.Segnum, &startaddr.ofs, FALSE);
 		if (errcount)
 		{
 			printf("Invalid start address record\n");
 			exit(1);
 		}
 
-		if ((startaddr.ofs + seglist[startaddr.segnum]->base) != 0x100)
+		if ((startaddr.ofs + Seglist[startaddr.Segnum]->base) != 0x100)
 		{
 			printf("Warning, start address not 0100h as required for COM file\n");
 		}
@@ -247,13 +247,13 @@ void OutputCOMfile(PCHAR outname)
 
 	for (i = 0; i < fixcount; i++)
 	{
-		GetFixupTarget(relocs[i], &targseg, &targofs, FALSE);
+		GetFixupTarget(relocs[i], &targSeg, &targofs, FALSE);
 		switch (relocs[i]->rtype)
 		{
 			case FIX_BASE:
 			case FIX_PTR1616:
 			case FIX_PTR1632:
-				if ((seglist[targseg]->attr & SEG_ALIGN) != SEG_ABS)
+				if ((Seglist[targSeg]->attr & Seg_ALIGN) != Seg_ABS)
 				{
 					printf("Reloc %li:Segment selector relocations are not supported in COM files\n", i);
 					errcount++;
@@ -268,47 +268,47 @@ void OutputCOMfile(PCHAR outname)
 							printf("Relocs %li:Offset out of range\n", i);
 							errcount++;
 						}
-						temps = seglist[relocs[i]->segnum]->data[j];
-						temps += seglist[relocs[i]->segnum]->data[j + 1] << 8;
+						temps = Seglist[relocs[i]->Segnum]->data[j];
+						temps += Seglist[relocs[i]->Segnum]->data[j + 1] << 8;
 						temps += targofs;
-						temps += seglist[targseg]->base & 0xf; /* non-para seg */
-						seglist[relocs[i]->segnum]->data[j] = temps & 0xff;
-						seglist[relocs[i]->segnum]->data[j + 1] = (temps >> 8) & 0xff;
+						temps += Seglist[targSeg]->base & 0xf; /* non-para Seg */
+						Seglist[relocs[i]->Segnum]->data[j] = temps & 0xff;
+						Seglist[relocs[i]->Segnum]->data[j + 1] = (temps >> 8) & 0xff;
 						j += 2;
 					}
 					else if (relocs[i]->rtype == FIX_PTR1632)
 					{
-						templ = seglist[relocs[i]->segnum]->data[j];
-						templ += seglist[relocs[i]->segnum]->data[j + 1] << 8;
-						templ += seglist[relocs[i]->segnum]->data[j + 2] << 16;
-						templ += seglist[relocs[i]->segnum]->data[j + 3] << 24;
+						templ = Seglist[relocs[i]->Segnum]->data[j];
+						templ += Seglist[relocs[i]->Segnum]->data[j + 1] << 8;
+						templ += Seglist[relocs[i]->Segnum]->data[j + 2] << 16;
+						templ += Seglist[relocs[i]->Segnum]->data[j + 3] << 24;
 						templ += targofs;
-						templ += seglist[targseg]->base & 0xf; /* non-para seg */
-						seglist[relocs[i]->segnum]->data[j] = templ & 0xff;
-						seglist[relocs[i]->segnum]->data[j + 1] = (templ >> 8) & 0xff;
-						seglist[relocs[i]->segnum]->data[j + 2] = (templ >> 16) & 0xff;
-						seglist[relocs[i]->segnum]->data[j + 3] = (templ >> 24) & 0xff;
+						templ += Seglist[targSeg]->base & 0xf; /* non-para Seg */
+						Seglist[relocs[i]->Segnum]->data[j] = templ & 0xff;
+						Seglist[relocs[i]->Segnum]->data[j + 1] = (templ >> 8) & 0xff;
+						Seglist[relocs[i]->Segnum]->data[j + 2] = (templ >> 16) & 0xff;
+						Seglist[relocs[i]->Segnum]->data[j + 3] = (templ >> 24) & 0xff;
 						j += 4;
 					}
-					temps = seglist[relocs[i]->segnum]->data[j];
-					temps += seglist[relocs[i]->segnum]->data[j + 1] << 8;
-					temps += seglist[targseg]->absframe;
-					seglist[relocs[i]->segnum]->data[j] = temps & 0xff;
-					seglist[relocs[i]->segnum]->data[j + 1] = (temps >> 8) & 0xff;
+					temps = Seglist[relocs[i]->Segnum]->data[j];
+					temps += Seglist[relocs[i]->Segnum]->data[j + 1] << 8;
+					temps += Seglist[targSeg]->absframe;
+					Seglist[relocs[i]->Segnum]->data[j] = temps & 0xff;
+					Seglist[relocs[i]->Segnum]->data[j + 1] = (temps >> 8) & 0xff;
 				}
 				break;
 			case FIX_OFS32:
 			case FIX_OFS32_2:
-				templ = seglist[relocs[i]->segnum]->data[relocs[i]->ofs];
-				templ += seglist[relocs[i]->segnum]->data[relocs[i]->ofs + 1] << 8;
-				templ += seglist[relocs[i]->segnum]->data[relocs[i]->ofs + 2] << 16;
-				templ += seglist[relocs[i]->segnum]->data[relocs[i]->ofs + 3] << 24;
+				templ = Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs];
+				templ += Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs + 1] << 8;
+				templ += Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs + 2] << 16;
+				templ += Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs + 3] << 24;
 				templ += targofs;
-				templ += seglist[targseg]->base & 0xf; /* non-para seg */
-				seglist[relocs[i]->segnum]->data[relocs[i]->ofs] = templ & 0xff;
-				seglist[relocs[i]->segnum]->data[relocs[i]->ofs + 1] = (templ >> 8) & 0xff;
-				seglist[relocs[i]->segnum]->data[relocs[i]->ofs + 2] = (templ >> 16) & 0xff;
-				seglist[relocs[i]->segnum]->data[relocs[i]->ofs + 3] = (templ >> 24) & 0xff;
+				templ += Seglist[targSeg]->base & 0xf; /* non-para Seg */
+				Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs] = templ & 0xff;
+				Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs + 1] = (templ >> 8) & 0xff;
+				Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs + 2] = (templ >> 16) & 0xff;
+				Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs + 3] = (templ >> 24) & 0xff;
 				break;
 			case FIX_OFS16:
 			case FIX_OFS16_2:
@@ -317,86 +317,86 @@ void OutputCOMfile(PCHAR outname)
 					printf("Relocs %li:Offset out of range\n", i);
 					errcount++;
 				}
-				temps = seglist[relocs[i]->segnum]->data[relocs[i]->ofs];
-				temps += seglist[relocs[i]->segnum]->data[relocs[i]->ofs + 1] << 8;
+				temps = Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs];
+				temps += Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs + 1] << 8;
 				temps += targofs;
-				temps += seglist[targseg]->base & 0xf; /* non-para seg */
-				seglist[relocs[i]->segnum]->data[relocs[i]->ofs] = temps & 0xff;
-				seglist[relocs[i]->segnum]->data[relocs[i]->ofs + 1] = (temps >> 8) & 0xff;
+				temps += Seglist[targSeg]->base & 0xf; /* non-para Seg */
+				Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs] = temps & 0xff;
+				Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs + 1] = (temps >> 8) & 0xff;
 				break;
 			case FIX_LBYTE:
-				seglist[relocs[i]->segnum]->data[relocs[i]->ofs] += targofs & 0xff;
-				seglist[relocs[i]->segnum]->data[relocs[i]->ofs] += seglist[targseg]->base & 0xf; /* non-para seg */
+				Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs] += targofs & 0xff;
+				Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs] += Seglist[targSeg]->base & 0xf; /* non-para Seg */
 				break;
 			case FIX_HBYTE:
-				templ = targofs + (seglist[targseg]->base & 0xf); /* non-para seg */
-				seglist[relocs[i]->segnum]->data[relocs[i]->ofs] += (templ >> 8) & 0xff;
+				templ = targofs + (Seglist[targSeg]->base & 0xf); /* non-para Seg */
+				Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs] += (templ >> 8) & 0xff;
 				break;
 			case FIX_SELF_LBYTE:
-				if ((seglist[targseg]->attr & SEG_ALIGN) == SEG_ABS)
+				if ((Seglist[targSeg]->attr & Seg_ALIGN) == Seg_ABS)
 				{
 					printf("Error: Absolute Reloc target not supported for self-relative fixups\n");
 					errcount++;
 				}
 				else
 				{
-					j = seglist[targseg]->base + targofs;
-					j -= seglist[relocs[i]->segnum]->base + relocs[i]->ofs + 1;
+					j = Seglist[targSeg]->base + targofs;
+					j -= Seglist[relocs[i]->Segnum]->base + relocs[i]->ofs + 1;
 					if ((j < -128) || (j > 127))
 					{
 						printf("Error: Reloc %li out of range\n", i);
 					}
 					else
 					{
-						seglist[relocs[i]->segnum]->data[relocs[i]->ofs] += j;
+						Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs] += j;
 					}
 				}
 				break;
 			case FIX_SELF_OFS16:
 			case FIX_SELF_OFS16_2:
-				if ((seglist[targseg]->attr & SEG_ALIGN) == SEG_ABS)
+				if ((Seglist[targSeg]->attr & Seg_ALIGN) == Seg_ABS)
 				{
 					printf("Error: Absolute Reloc target not supported for self-relative fixups\n");
 					errcount++;
 				}
 				else
 				{
-					j = seglist[targseg]->base + targofs;
-					j -= seglist[relocs[i]->segnum]->base + relocs[i]->ofs + 2;
+					j = Seglist[targSeg]->base + targofs;
+					j -= Seglist[relocs[i]->Segnum]->base + relocs[i]->ofs + 2;
 					if ((j < -32768) || (j > 32767))
 					{
 						printf("Error: Reloc %li out of range\n", i);
 					}
 					else
 					{
-						temps = seglist[relocs[i]->segnum]->data[relocs[i]->ofs];
-						temps += seglist[relocs[i]->segnum]->data[relocs[i]->ofs + 1] << 8;
+						temps = Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs];
+						temps += Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs + 1] << 8;
 						temps += j;
-						seglist[relocs[i]->segnum]->data[relocs[i]->ofs] = temps & 0xff;
-						seglist[relocs[i]->segnum]->data[relocs[i]->ofs + 1] = (temps >> 8) & 0xff;
+						Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs] = temps & 0xff;
+						Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs + 1] = (temps >> 8) & 0xff;
 					}
 				}
 				break;
 			case FIX_SELF_OFS32:
 			case FIX_SELF_OFS32_2:
-				if ((seglist[targseg]->attr & SEG_ALIGN) == SEG_ABS)
+				if ((Seglist[targSeg]->attr & Seg_ALIGN) == Seg_ABS)
 				{
 					printf("Error: Absolute Reloc target not supported for self-relative fixups\n");
 					errcount++;
 				}
 				else
 				{
-					j = seglist[targseg]->base + targofs;
-					j -= seglist[relocs[i]->segnum]->base + relocs[i]->ofs + 4;
-					templ = seglist[relocs[i]->segnum]->data[relocs[i]->ofs];
-					templ += seglist[relocs[i]->segnum]->data[relocs[i]->ofs + 1] << 8;
-					templ += seglist[relocs[i]->segnum]->data[relocs[i]->ofs + 2] << 16;
-					templ += seglist[relocs[i]->segnum]->data[relocs[i]->ofs + 3] << 24;
+					j = Seglist[targSeg]->base + targofs;
+					j -= Seglist[relocs[i]->Segnum]->base + relocs[i]->ofs + 4;
+					templ = Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs];
+					templ += Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs + 1] << 8;
+					templ += Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs + 2] << 16;
+					templ += Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs + 3] << 24;
 					templ += j;
-					seglist[relocs[i]->segnum]->data[relocs[i]->ofs] = templ & 0xff;
-					seglist[relocs[i]->segnum]->data[relocs[i]->ofs + 1] = (templ >> 8) & 0xff;
-					seglist[relocs[i]->segnum]->data[relocs[i]->ofs + 2] = (templ >> 16) & 0xff;
-					seglist[relocs[i]->segnum]->data[relocs[i]->ofs + 3] = (templ >> 24) & 0xff;
+					Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs] = templ & 0xff;
+					Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs + 1] = (templ >> 8) & 0xff;
+					Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs + 2] = (templ >> 16) & 0xff;
+					Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs + 3] = (templ >> 24) & 0xff;
 				}
 				break;
 			default:
@@ -420,7 +420,7 @@ void OutputCOMfile(PCHAR outname)
 
 	for (i = 0; i < outcount; i++)
 	{
-		if (outlist[i] && ((outlist[i]->attr & SEG_ALIGN) != SEG_ABS))
+		if (outlist[i] && ((outlist[i]->attr & Seg_ALIGN) != Seg_ABS))
 		{
 			if (started > outlist[i]->base)
 			{
@@ -428,7 +428,7 @@ void OutputCOMfile(PCHAR outname)
 				fclose(outfile);
 				exit(1);
 			}
-			if (padsegments)
+			if (padSegments)
 			{
 				while (started < outlist[i]->base)
 				{
@@ -453,7 +453,7 @@ void OutputCOMfile(PCHAR outname)
 						fputc(outlist[i]->data[j], outfile);
 						lastout = started + 1;
 					}
-					else if (padsegments)
+					else if (padSegments)
 					{
 						fputc(0, outfile);
 						lastout = started + 1;
@@ -475,14 +475,14 @@ void OutputCOMfile(PCHAR outname)
 	fclose(outfile);
 }
 
-void OutputEXEfile(PCHAR outname)
+void OutputEXEfile(CharPtr outname)
 {
 	long i, j;
 	UINT started, lastout;
-	long targseg;
+	long targSeg;
 	UINT targofs;
 	FILE* outfile;
-	PUCHAR headbuf;
+	UCharPtr headbuf;
 	long relcount;
 	int gotstack;
 	UINT totlength;
@@ -496,7 +496,7 @@ void OutputEXEfile(PCHAR outname)
 
 	errcount = 0;
 	gotstack = 0;
-	headbuf = (PUCHAR)checkMalloc(0x40 + 4 * fixcount);
+	headbuf = (UCharPtr)checkMalloc(0x40 + 4 * fixcount);
 	relcount = 0;
 
 	for (i = 0; i < 0x40; i++)
@@ -512,17 +512,17 @@ void OutputEXEfile(PCHAR outname)
 
 	if (gotstart)
 	{
-		GetFixupTarget(&startaddr, &startaddr.segnum, &startaddr.ofs, FALSE);
+		GetFixupTarget(&startaddr, &startaddr.Segnum, &startaddr.ofs, FALSE);
 		if (errcount)
 		{
 			printf("Invalid start address record\n");
 			exit(1);
 		}
 
-		i = seglist[startaddr.segnum]->base;
+		i = Seglist[startaddr.Segnum]->base;
 		startaddr.ofs += i & 0xf;
 		i >>= 4;
-		if ((startaddr.ofs > 65535) || (i > 65535) || ((seglist[startaddr.segnum]->attr & SEG_ALIGN) == SEG_ABS))
+		if ((startaddr.ofs > 65535) || (i > 65535) || ((Seglist[startaddr.Segnum]->attr & Seg_ALIGN) == Seg_ABS))
 		{
 			printf("Invalid start address\n");
 			errcount++;
@@ -545,14 +545,14 @@ void OutputEXEfile(PCHAR outname)
 
 	for (i = 0; i < outcount; i++)
 	{
-		if ((outlist[i]->attr & SEG_ALIGN) != SEG_ABS)
+		if ((outlist[i]->attr & Seg_ALIGN) != Seg_ABS)
 		{
 			totlength = outlist[i]->base + outlist[i]->length;
-			if ((outlist[i]->attr & SEG_COMBINE) == SEG_STACK)
+			if ((outlist[i]->attr & Seg_COMBINE) == Seg_STACK)
 			{
 				if (gotstack)
 				{
-					printf("Internal error - stack segments not combined\n");
+					printf("Internal error - stack Segments not combined\n");
 					exit(1);
 				}
 				gotstack = 1;
@@ -584,7 +584,7 @@ void OutputEXEfile(PCHAR outname)
 
 	for (i = 0; i < fixcount; i++)
 	{
-		GetFixupTarget(relocs[i], &targseg, &targofs, FALSE);
+		GetFixupTarget(relocs[i], &targSeg, &targofs, FALSE);
 		switch (relocs[i]->rtype)
 		{
 			case FIX_BASE:
@@ -598,69 +598,69 @@ void OutputEXEfile(PCHAR outname)
 						printf("Relocs %li:Offset out of range\n", i);
 						errcount++;
 					}
-					temps = seglist[relocs[i]->segnum]->data[j];
-					temps += seglist[relocs[i]->segnum]->data[j + 1] << 8;
+					temps = Seglist[relocs[i]->Segnum]->data[j];
+					temps += Seglist[relocs[i]->Segnum]->data[j + 1] << 8;
 					temps += targofs;
-					temps += seglist[targseg]->base & 0xf; /* non-para seg */
-					seglist[relocs[i]->segnum]->data[j] = temps & 0xff;
-					seglist[relocs[i]->segnum]->data[j + 1] = (temps >> 8) & 0xff;
+					temps += Seglist[targSeg]->base & 0xf; /* non-para Seg */
+					Seglist[relocs[i]->Segnum]->data[j] = temps & 0xff;
+					Seglist[relocs[i]->Segnum]->data[j + 1] = (temps >> 8) & 0xff;
 					j += 2;
 				}
 				else if (relocs[i]->rtype == FIX_PTR1632)
 				{
-					templ = seglist[relocs[i]->segnum]->data[j];
-					templ += seglist[relocs[i]->segnum]->data[j + 1] << 8;
-					templ += seglist[relocs[i]->segnum]->data[j + 2] << 16;
-					templ += seglist[relocs[i]->segnum]->data[j + 3] << 24;
+					templ = Seglist[relocs[i]->Segnum]->data[j];
+					templ += Seglist[relocs[i]->Segnum]->data[j + 1] << 8;
+					templ += Seglist[relocs[i]->Segnum]->data[j + 2] << 16;
+					templ += Seglist[relocs[i]->Segnum]->data[j + 3] << 24;
 					templ += targofs;
-					templ += seglist[targseg]->base & 0xf; /* non-para seg */
-					seglist[relocs[i]->segnum]->data[j] = templ & 0xff;
-					seglist[relocs[i]->segnum]->data[j + 1] = (templ >> 8) & 0xff;
-					seglist[relocs[i]->segnum]->data[j + 2] = (templ >> 16) & 0xff;
-					seglist[relocs[i]->segnum]->data[j + 3] = (templ >> 24) & 0xff;
+					templ += Seglist[targSeg]->base & 0xf; /* non-para Seg */
+					Seglist[relocs[i]->Segnum]->data[j] = templ & 0xff;
+					Seglist[relocs[i]->Segnum]->data[j + 1] = (templ >> 8) & 0xff;
+					Seglist[relocs[i]->Segnum]->data[j + 2] = (templ >> 16) & 0xff;
+					Seglist[relocs[i]->Segnum]->data[j + 3] = (templ >> 24) & 0xff;
 					j += 4;
 				}
-				if ((seglist[targseg]->attr & SEG_ALIGN) != SEG_ABS)
+				if ((Seglist[targSeg]->attr & Seg_ALIGN) != Seg_ABS)
 				{
-					if (seglist[targseg]->base > 0xfffff)
+					if (Seglist[targSeg]->base > 0xfffff)
 					{
 						printf("Relocs %li:Segment base out of range\n", i);
 						errcount++;
 					}
-					temps = seglist[relocs[i]->segnum]->data[j];
-					temps += seglist[relocs[i]->segnum]->data[j + 1] << 8;
-					temps += (seglist[targseg]->base >> 4);
-					seglist[relocs[i]->segnum]->data[j] = temps & 0xff;
-					seglist[relocs[i]->segnum]->data[j + 1] = (temps >> 8) & 0xff;
-					templ = seglist[relocs[i]->segnum]->base >> 4;
+					temps = Seglist[relocs[i]->Segnum]->data[j];
+					temps += Seglist[relocs[i]->Segnum]->data[j + 1] << 8;
+					temps += (Seglist[targSeg]->base >> 4);
+					Seglist[relocs[i]->Segnum]->data[j] = temps & 0xff;
+					Seglist[relocs[i]->Segnum]->data[j + 1] = (temps >> 8) & 0xff;
+					templ = Seglist[relocs[i]->Segnum]->base >> 4;
 					headbuf[0x40 + relcount * 4 + 2] = templ & 0xff;
 					headbuf[0x40 + relcount * 4 + 3] = (templ >> 8) & 0xff;
-					templ = (seglist[relocs[i]->segnum]->base & 0xf) + j;
+					templ = (Seglist[relocs[i]->Segnum]->base & 0xf) + j;
 					headbuf[0x40 + relcount * 4] = (templ) & 0xff;
 					headbuf[0x40 + relcount * 4 + 1] = (templ >> 8) & 0xff;
 					relcount++;
 				}
 				else
 				{
-					temps = seglist[relocs[i]->segnum]->data[j];
-					temps += seglist[relocs[i]->segnum]->data[j + 1] << 8;
-					temps += seglist[targseg]->absframe;
-					seglist[relocs[i]->segnum]->data[j] = temps & 0xff;
-					seglist[relocs[i]->segnum]->data[j + 1] = (temps >> 8) & 0xff;
+					temps = Seglist[relocs[i]->Segnum]->data[j];
+					temps += Seglist[relocs[i]->Segnum]->data[j + 1] << 8;
+					temps += Seglist[targSeg]->absframe;
+					Seglist[relocs[i]->Segnum]->data[j] = temps & 0xff;
+					Seglist[relocs[i]->Segnum]->data[j + 1] = (temps >> 8) & 0xff;
 				}
 				break;
 			case FIX_OFS32:
 			case FIX_OFS32_2:
-				templ = seglist[relocs[i]->segnum]->data[relocs[i]->ofs];
-				templ += seglist[relocs[i]->segnum]->data[relocs[i]->ofs + 1] << 8;
-				templ += seglist[relocs[i]->segnum]->data[relocs[i]->ofs + 2] << 16;
-				templ += seglist[relocs[i]->segnum]->data[relocs[i]->ofs + 3] << 24;
+				templ = Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs];
+				templ += Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs + 1] << 8;
+				templ += Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs + 2] << 16;
+				templ += Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs + 3] << 24;
 				templ += targofs;
-				templ += seglist[targseg]->base & 0xf; /* non-para seg */
-				seglist[relocs[i]->segnum]->data[relocs[i]->ofs] = templ & 0xff;
-				seglist[relocs[i]->segnum]->data[relocs[i]->ofs + 1] = (templ >> 8) & 0xff;
-				seglist[relocs[i]->segnum]->data[relocs[i]->ofs + 2] = (templ >> 16) & 0xff;
-				seglist[relocs[i]->segnum]->data[relocs[i]->ofs + 3] = (templ >> 24) & 0xff;
+				templ += Seglist[targSeg]->base & 0xf; /* non-para Seg */
+				Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs] = templ & 0xff;
+				Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs + 1] = (templ >> 8) & 0xff;
+				Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs + 2] = (templ >> 16) & 0xff;
+				Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs + 3] = (templ >> 24) & 0xff;
 				break;
 			case FIX_OFS16:
 			case FIX_OFS16_2:
@@ -669,86 +669,86 @@ void OutputEXEfile(PCHAR outname)
 					printf("Relocs %li:Offset out of range\n", i);
 					errcount++;
 				}
-				temps = seglist[relocs[i]->segnum]->data[relocs[i]->ofs];
-				temps += seglist[relocs[i]->segnum]->data[relocs[i]->ofs + 1] << 8;
+				temps = Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs];
+				temps += Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs + 1] << 8;
 				temps += targofs;
-				temps += seglist[targseg]->base & 0xf; /* non-para seg */
-				seglist[relocs[i]->segnum]->data[relocs[i]->ofs] = temps & 0xff;
-				seglist[relocs[i]->segnum]->data[relocs[i]->ofs + 1] = (temps >> 8) & 0xff;
+				temps += Seglist[targSeg]->base & 0xf; /* non-para Seg */
+				Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs] = temps & 0xff;
+				Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs + 1] = (temps >> 8) & 0xff;
 				break;
 			case FIX_LBYTE:
-				seglist[relocs[i]->segnum]->data[relocs[i]->ofs] += targofs & 0xff;
-				seglist[relocs[i]->segnum]->data[relocs[i]->ofs] += seglist[targseg]->base & 0xf; /* non-para seg */
+				Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs] += targofs & 0xff;
+				Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs] += Seglist[targSeg]->base & 0xf; /* non-para Seg */
 				break;
 			case FIX_HBYTE:
-				templ = targofs + (seglist[targseg]->base & 0xf); /* non-para seg */
-				seglist[relocs[i]->segnum]->data[relocs[i]->ofs] += (templ >> 8) & 0xff;
+				templ = targofs + (Seglist[targSeg]->base & 0xf); /* non-para Seg */
+				Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs] += (templ >> 8) & 0xff;
 				break;
 			case FIX_SELF_LBYTE:
-				if ((seglist[targseg]->attr & SEG_ALIGN) == SEG_ABS)
+				if ((Seglist[targSeg]->attr & Seg_ALIGN) == Seg_ABS)
 				{
 					printf("Error: Absolute Reloc target not supported for self-relative fixups\n");
 					errcount++;
 				}
 				else
 				{
-					j = seglist[targseg]->base + targofs;
-					j -= seglist[relocs[i]->segnum]->base + relocs[i]->ofs + 1;
+					j = Seglist[targSeg]->base + targofs;
+					j -= Seglist[relocs[i]->Segnum]->base + relocs[i]->ofs + 1;
 					if ((j < -128) || (j > 127))
 					{
 						printf("Error: Reloc %li out of range\n", i);
 					}
 					else
 					{
-						seglist[relocs[i]->segnum]->data[relocs[i]->ofs] += j;
+						Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs] += j;
 					}
 				}
 				break;
 			case FIX_SELF_OFS16:
 			case FIX_SELF_OFS16_2:
-				if ((seglist[targseg]->attr & SEG_ALIGN) == SEG_ABS)
+				if ((Seglist[targSeg]->attr & Seg_ALIGN) == Seg_ABS)
 				{
 					printf("Error: Absolute Reloc target not supported for self-relative fixups\n");
 					errcount++;
 				}
 				else
 				{
-					j = seglist[targseg]->base + targofs;
-					j -= seglist[relocs[i]->segnum]->base + relocs[i]->ofs + 2;
+					j = Seglist[targSeg]->base + targofs;
+					j -= Seglist[relocs[i]->Segnum]->base + relocs[i]->ofs + 2;
 					if ((j < -32768) || (j > 32767))
 					{
 						printf("Error: Reloc %li out of range\n", i);
 					}
 					else
 					{
-						temps = seglist[relocs[i]->segnum]->data[relocs[i]->ofs];
-						temps += seglist[relocs[i]->segnum]->data[relocs[i]->ofs + 1] << 8;
+						temps = Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs];
+						temps += Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs + 1] << 8;
 						temps += j;
-						seglist[relocs[i]->segnum]->data[relocs[i]->ofs] = temps & 0xff;
-						seglist[relocs[i]->segnum]->data[relocs[i]->ofs + 1] = (temps >> 8) & 0xff;
+						Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs] = temps & 0xff;
+						Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs + 1] = (temps >> 8) & 0xff;
 					}
 				}
 				break;
 			case FIX_SELF_OFS32:
 			case FIX_SELF_OFS32_2:
-				if ((seglist[targseg]->attr & SEG_ALIGN) == SEG_ABS)
+				if ((Seglist[targSeg]->attr & Seg_ALIGN) == Seg_ABS)
 				{
 					printf("Error: Absolute Reloc target not supported for self-relative fixups\n");
 					errcount++;
 				}
 				else
 				{
-					j = seglist[targseg]->base + targofs;
-					j -= seglist[relocs[i]->segnum]->base + relocs[i]->ofs + 4;
-					templ = seglist[relocs[i]->segnum]->data[relocs[i]->ofs];
-					templ += seglist[relocs[i]->segnum]->data[relocs[i]->ofs + 1] << 8;
-					templ += seglist[relocs[i]->segnum]->data[relocs[i]->ofs + 2] << 16;
-					templ += seglist[relocs[i]->segnum]->data[relocs[i]->ofs + 3] << 24;
+					j = Seglist[targSeg]->base + targofs;
+					j -= Seglist[relocs[i]->Segnum]->base + relocs[i]->ofs + 4;
+					templ = Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs];
+					templ += Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs + 1] << 8;
+					templ += Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs + 2] << 16;
+					templ += Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs + 3] << 24;
 					templ += j;
-					seglist[relocs[i]->segnum]->data[relocs[i]->ofs] = templ & 0xff;
-					seglist[relocs[i]->segnum]->data[relocs[i]->ofs + 1] = (templ >> 8) & 0xff;
-					seglist[relocs[i]->segnum]->data[relocs[i]->ofs + 2] = (templ >> 16) & 0xff;
-					seglist[relocs[i]->segnum]->data[relocs[i]->ofs + 3] = (templ >> 24) & 0xff;
+					Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs] = templ & 0xff;
+					Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs + 1] = (templ >> 8) & 0xff;
+					Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs + 2] = (templ >> 16) & 0xff;
+					Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs + 3] = (templ >> 24) & 0xff;
 				}
 				break;
 			default:
@@ -807,7 +807,7 @@ void OutputEXEfile(PCHAR outname)
 
 	for (i = 0; i < outcount; i++)
 	{
-		if (outlist[i] && ((outlist[i]->attr & SEG_ALIGN) != SEG_ABS))
+		if (outlist[i] && ((outlist[i]->attr & Seg_ALIGN) != Seg_ABS))
 		{
 			if (started > outlist[i]->base)
 			{
@@ -815,7 +815,7 @@ void OutputEXEfile(PCHAR outname)
 				fclose(outfile);
 				exit(1);
 			}
-			if (padsegments)
+			if (padSegments)
 			{
 				while (started < outlist[i]->base)
 				{
@@ -838,7 +838,7 @@ void OutputEXEfile(PCHAR outname)
 					fputc(outlist[i]->data[j], outfile);
 					lastout = started + 1;
 				}
-				else if (padsegments)
+				else if (padSegments)
 				{
 					fputc(0, outfile);
 					lastout = started + 1;
@@ -878,12 +878,12 @@ long createOutputSection(char* name, UINT winFlags)
 {
 	UINT j;
 
-	outlist = (PPSEG)checkRealloc(outlist, sizeof(PSEG) * (outcount + 1));
-	outlist[outcount] = (PSEG)checkMalloc(sizeof(SEG));
-	seglist = (PPSEG)checkRealloc(seglist, sizeof(PSEG) * (segcount + 1));
-	seglist = (PPSEG)checkRealloc(seglist, (segcount + 1) * sizeof(PSEG));
-	seglist[segcount] = outlist[outcount];
-	namelist = (PPCHAR)checkRealloc(namelist, (namecount + 1) * sizeof(PCHAR));
+	outlist = (SegPtrPtr)checkRealloc(outlist, sizeof(SegPtr) * (outcount + 1));
+	outlist[outcount] = (SegPtr)checkMalloc(sizeof(Seg));
+	Seglist = (SegPtrPtr)checkRealloc(Seglist, sizeof(SegPtr) * (Segcount + 1));
+	Seglist = (SegPtrPtr)checkRealloc(Seglist, (Segcount + 1) * sizeof(SegPtr));
+	Seglist[Segcount] = outlist[outcount];
+	namelist = (CharPtrPtr)checkRealloc(namelist, (namecount + 1) * sizeof(CharPtr));
 	namelist[namecount] = checkStrdup(name);
 	outlist[outcount]->nameindex = namecount;
 	outlist[outcount]->classindex = -1;
@@ -895,15 +895,15 @@ long createOutputSection(char* name, UINT winFlags)
 	outlist[outcount]->base = j;
 	outlist[outcount]->length = 0;
 	outlist[outcount]->data = outlist[outcount]->datmask = NULL;
-	outlist[outcount]->absofs = segcount;
-	outlist[outcount]->attr = SEG_BYTE | SEG_PRIVATE;
+	outlist[outcount]->absofs = Segcount;
+	outlist[outcount]->attr = Seg_BYTE | Seg_PRIVATE;
 	outlist[outcount]->winFlags = winFlags ^ WINF_NEG_FLAGS;
-	segcount++;
+	Segcount++;
 	outcount++;
 	return outcount - 1;
 }
 
-void BuildPEImports(long impsectNum, PUCHAR objectTable)
+void BuildPEImports(long impsectNum, UCharPtr objectTable)
 {
 	long i, j, k;
 	UINT* reqimps = NULL, reqcount = 0;
@@ -912,7 +912,7 @@ void BuildPEImports(long impsectNum, PUCHAR objectTable)
 	int* dllImpsDone = NULL;
 	int* dllImpNameSize = NULL;
 	UINT dllCount = 0, dllNameSize = 0, namePos;
-	SEG* impsect;
+	Seg* impsect;
 	UINT thunkPos, thunk2Pos, impNamePos;
 
 	if (impsectNum < 0) return;
@@ -1015,8 +1015,8 @@ void BuildPEImports(long impsectNum, PUCHAR objectTable)
 
 	impsect->length += i;
 
-	impsect->data = (PUCHAR)checkMalloc(impsect->length);
-	impsect->datmask = (PUCHAR)checkMalloc((impsect->length + 7) / 8);
+	impsect->data = (UCharPtr)checkMalloc(impsect->length);
+	impsect->datmask = (UCharPtr)checkMalloc((impsect->length + 7) / 8);
 	for (i = 0; i < (impsect->length + 7) / 8; i++)
 	{
 		impsect->datmask[i] = 0xff;
@@ -1101,7 +1101,7 @@ void BuildPEImports(long impsectNum, PUCHAR objectTable)
 				impsect->data[thunk2Pos - impsect->base + 2] = (j >> 16) & 0xff;
 				impsect->data[thunk2Pos - impsect->base + 3] = (j >> 24) & 0xff;
 			}
-			impdefs[reqimps[k]].segnum = impsect->absofs;
+			impdefs[reqimps[k]].Segnum = impsect->absofs;
 			impdefs[reqimps[k]].ofs = thunk2Pos - impsect->base;
 			thunkPos += 4;
 			thunk2Pos += 4;
@@ -1128,7 +1128,7 @@ void BuildPEImports(long impsectNum, PUCHAR objectTable)
 	k += objectAlign - 1;
 	k &= (0xffffffff - (objectAlign - 1));
 	impsect->virtualSize = k;
-	objectTable[8] = k & 0xff; /* store virtual size (in memory) of segment */
+	objectTable[8] = k & 0xff; /* store virtual size (in memory) of Segment */
 	objectTable[9] = (k >> 8) & 0xff;
 	objectTable[10] = (k >> 16) & 0xff;
 	objectTable[11] = (k >> 24) & 0xff;
@@ -1142,15 +1142,15 @@ void BuildPEImports(long impsectNum, PUCHAR objectTable)
 	return;
 }
 
-void BuildPERelocs(long relocSectNum, PUCHAR objectTable)
+void BuildPERelocs(long relocSectNum, UCharPtr objectTable)
 {
 	int i, j;
 	PRELOC r;
-	PSEG relocSect;
+	SegPtr relocSect;
 	UINT curStartPos;
 	UINT curBlockPos;
 	UINT k;
-	long targseg;
+	long targSeg;
 	UINT targofs;
 	unsigned long templ;
 	unsigned short temps;
@@ -1158,13 +1158,13 @@ void BuildPERelocs(long relocSectNum, PUCHAR objectTable)
 	/* do fixups */
 	for (i = 0; i < fixcount; i++)
 	{
-		GetFixupTarget(relocs[i], &targseg, &targofs, TRUE);
+		GetFixupTarget(relocs[i], &targSeg, &targofs, TRUE);
 		switch (relocs[i]->rtype)
 		{
 			case FIX_BASE:
 			case FIX_PTR1616:
 			case FIX_PTR1632:
-				if (targseg < 0)
+				if (targSeg < 0)
 				{
 					printf("Reloc %li:Segment selector relocations are not supported in PE files\n", i);
 					printf("rtype=%02X, frame=%04X, target=%04X, ftype=%02X, ttype=%02X\n",
@@ -1183,55 +1183,55 @@ void BuildPERelocs(long relocSectNum, PUCHAR objectTable)
 							printf("Relocs %li:Warning 32 bit offset in 16 bit field\n", i);
 						}
 						targofs &= 0xffff;
-						temps = seglist[relocs[i]->segnum]->data[j];
-						temps += seglist[relocs[i]->segnum]->data[j + 1] << 8;
+						temps = Seglist[relocs[i]->Segnum]->data[j];
+						temps += Seglist[relocs[i]->Segnum]->data[j + 1] << 8;
 						temps += targofs;
-						seglist[relocs[i]->segnum]->data[j] = temps & 0xff;
-						seglist[relocs[i]->segnum]->data[j + 1] = (temps >> 8) & 0xff;
+						Seglist[relocs[i]->Segnum]->data[j] = temps & 0xff;
+						Seglist[relocs[i]->Segnum]->data[j + 1] = (temps >> 8) & 0xff;
 						j += 2;
 					}
 					else if (relocs[i]->rtype == FIX_PTR1632)
 					{
-						templ = seglist[relocs[i]->segnum]->data[j];
-						templ += seglist[relocs[i]->segnum]->data[j + 1] << 8;
-						templ += seglist[relocs[i]->segnum]->data[j + 2] << 16;
-						templ += seglist[relocs[i]->segnum]->data[j + 3] << 24;
+						templ = Seglist[relocs[i]->Segnum]->data[j];
+						templ += Seglist[relocs[i]->Segnum]->data[j + 1] << 8;
+						templ += Seglist[relocs[i]->Segnum]->data[j + 2] << 16;
+						templ += Seglist[relocs[i]->Segnum]->data[j + 3] << 24;
 						templ += targofs;
-						seglist[relocs[i]->segnum]->data[j] = templ & 0xff;
-						seglist[relocs[i]->segnum]->data[j + 1] = (templ >> 8) & 0xff;
-						seglist[relocs[i]->segnum]->data[j + 2] = (templ >> 16) & 0xff;
-						seglist[relocs[i]->segnum]->data[j + 3] = (templ >> 24) & 0xff;
+						Seglist[relocs[i]->Segnum]->data[j] = templ & 0xff;
+						Seglist[relocs[i]->Segnum]->data[j + 1] = (templ >> 8) & 0xff;
+						Seglist[relocs[i]->Segnum]->data[j + 2] = (templ >> 16) & 0xff;
+						Seglist[relocs[i]->Segnum]->data[j + 3] = (templ >> 24) & 0xff;
 						j += 4;
 					}
-					temps = seglist[relocs[i]->segnum]->data[j];
-					temps += seglist[relocs[i]->segnum]->data[j + 1] << 8;
-					temps += seglist[targseg]->absframe;
-					seglist[relocs[i]->segnum]->data[j] = temps & 0xff;
-					seglist[relocs[i]->segnum]->data[j + 1] = (temps >> 8) & 0xff;
+					temps = Seglist[relocs[i]->Segnum]->data[j];
+					temps += Seglist[relocs[i]->Segnum]->data[j + 1] << 8;
+					temps += Seglist[targSeg]->absframe;
+					Seglist[relocs[i]->Segnum]->data[j] = temps & 0xff;
+					Seglist[relocs[i]->Segnum]->data[j + 1] = (temps >> 8) & 0xff;
 				}
 				break;
 			case FIX_OFS32:
 			case FIX_OFS32_2:
-				templ = seglist[relocs[i]->segnum]->data[relocs[i]->ofs];
-				templ += seglist[relocs[i]->segnum]->data[relocs[i]->ofs + 1] << 8;
-				templ += seglist[relocs[i]->segnum]->data[relocs[i]->ofs + 2] << 16;
-				templ += seglist[relocs[i]->segnum]->data[relocs[i]->ofs + 3] << 24;
+				templ = Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs];
+				templ += Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs + 1] << 8;
+				templ += Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs + 2] << 16;
+				templ += Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs + 3] << 24;
 				templ += targofs;
-				seglist[relocs[i]->segnum]->data[relocs[i]->ofs] = templ & 0xff;
-				seglist[relocs[i]->segnum]->data[relocs[i]->ofs + 1] = (templ >> 8) & 0xff;
-				seglist[relocs[i]->segnum]->data[relocs[i]->ofs + 2] = (templ >> 16) & 0xff;
-				seglist[relocs[i]->segnum]->data[relocs[i]->ofs + 3] = (templ >> 24) & 0xff;
+				Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs] = templ & 0xff;
+				Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs + 1] = (templ >> 8) & 0xff;
+				Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs + 2] = (templ >> 16) & 0xff;
+				Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs + 3] = (templ >> 24) & 0xff;
 				break;
 			case FIX_RVA32:
-				templ = seglist[relocs[i]->segnum]->data[relocs[i]->ofs];
-				templ += seglist[relocs[i]->segnum]->data[relocs[i]->ofs + 1] << 8;
-				templ += seglist[relocs[i]->segnum]->data[relocs[i]->ofs + 2] << 16;
-				templ += seglist[relocs[i]->segnum]->data[relocs[i]->ofs + 3] << 24;
+				templ = Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs];
+				templ += Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs + 1] << 8;
+				templ += Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs + 2] << 16;
+				templ += Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs + 3] << 24;
 				templ += targofs - imageBase;
-				seglist[relocs[i]->segnum]->data[relocs[i]->ofs] = templ & 0xff;
-				seglist[relocs[i]->segnum]->data[relocs[i]->ofs + 1] = (templ >> 8) & 0xff;
-				seglist[relocs[i]->segnum]->data[relocs[i]->ofs + 2] = (templ >> 16) & 0xff;
-				seglist[relocs[i]->segnum]->data[relocs[i]->ofs + 3] = (templ >> 24) & 0xff;
+				Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs] = templ & 0xff;
+				Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs + 1] = (templ >> 8) & 0xff;
+				Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs + 2] = (templ >> 16) & 0xff;
+				Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs + 3] = (templ >> 24) & 0xff;
 				break;
 			case FIX_OFS16:
 			case FIX_OFS16_2:
@@ -1240,11 +1240,11 @@ void BuildPERelocs(long relocSectNum, PUCHAR objectTable)
 					printf("Relocs %li:Warning 32 bit offset in 16 bit field\n", i);
 				}
 				targofs &= 0xffff;
-				temps = seglist[relocs[i]->segnum]->data[relocs[i]->ofs];
-				temps += seglist[relocs[i]->segnum]->data[relocs[i]->ofs + 1] << 8;
+				temps = Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs];
+				temps += Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs + 1] << 8;
 				temps += targofs;
-				seglist[relocs[i]->segnum]->data[relocs[i]->ofs] = temps & 0xff;
-				seglist[relocs[i]->segnum]->data[relocs[i]->ofs + 1] = (temps >> 8) & 0xff;
+				Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs] = temps & 0xff;
+				Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs + 1] = (temps >> 8) & 0xff;
 				break;
 			case FIX_LBYTE:
 			case FIX_HBYTE:
@@ -1252,7 +1252,7 @@ void BuildPERelocs(long relocSectNum, PUCHAR objectTable)
 				errcount++;
 				break;
 			case FIX_SELF_LBYTE:
-				if (targseg >= 0)
+				if (targSeg >= 0)
 				{
 					printf("Error: Absolute Reloc target not supported for self-relative fixups\n");
 					errcount++;
@@ -1260,20 +1260,20 @@ void BuildPERelocs(long relocSectNum, PUCHAR objectTable)
 				else
 				{
 					j = targofs;
-					j -= (seglist[relocs[i]->segnum]->base + relocs[i]->ofs + 1);
+					j -= (Seglist[relocs[i]->Segnum]->base + relocs[i]->ofs + 1);
 					if ((j < -128) || (j > 127))
 					{
 						printf("Error: Reloc %li out of range\n", i);
 					}
 					else
 					{
-						seglist[relocs[i]->segnum]->data[relocs[i]->ofs] += j;
+						Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs] += j;
 					}
 				}
 				break;
 			case FIX_SELF_OFS16:
 			case FIX_SELF_OFS16_2:
-				if (targseg >= 0)
+				if (targSeg >= 0)
 				{
 					printf("Error: Absolute Reloc target not supported for self-relative fixups\n");
 					errcount++;
@@ -1281,24 +1281,24 @@ void BuildPERelocs(long relocSectNum, PUCHAR objectTable)
 				else
 				{
 					j = targofs;
-					j -= (seglist[relocs[i]->segnum]->base + relocs[i]->ofs + 2);
+					j -= (Seglist[relocs[i]->Segnum]->base + relocs[i]->ofs + 2);
 					if ((j < -32768) || (j > 32767))
 					{
 						printf("Error: Reloc %li out of range\n", i);
 					}
 					else
 					{
-						temps = seglist[relocs[i]->segnum]->data[relocs[i]->ofs];
-						temps += seglist[relocs[i]->segnum]->data[relocs[i]->ofs + 1] << 8;
+						temps = Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs];
+						temps += Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs + 1] << 8;
 						temps += j;
-						seglist[relocs[i]->segnum]->data[relocs[i]->ofs] = temps & 0xff;
-						seglist[relocs[i]->segnum]->data[relocs[i]->ofs + 1] = (temps >> 8) & 0xff;
+						Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs] = temps & 0xff;
+						Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs + 1] = (temps >> 8) & 0xff;
 					}
 				}
 				break;
 			case FIX_SELF_OFS32:
 			case FIX_SELF_OFS32_2:
-				if (targseg >= 0)
+				if (targSeg >= 0)
 				{
 					printf("Error: Absolute Reloc target not supported for self-relative fixups\n");
 					errcount++;
@@ -1306,16 +1306,16 @@ void BuildPERelocs(long relocSectNum, PUCHAR objectTable)
 				else
 				{
 					j = targofs;
-					j -= (seglist[relocs[i]->segnum]->base + relocs[i]->ofs + 4);
-					templ = seglist[relocs[i]->segnum]->data[relocs[i]->ofs];
-					templ += seglist[relocs[i]->segnum]->data[relocs[i]->ofs + 1] << 8;
-					templ += seglist[relocs[i]->segnum]->data[relocs[i]->ofs + 2] << 16;
-					templ += seglist[relocs[i]->segnum]->data[relocs[i]->ofs + 3] << 24;
+					j -= (Seglist[relocs[i]->Segnum]->base + relocs[i]->ofs + 4);
+					templ = Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs];
+					templ += Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs + 1] << 8;
+					templ += Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs + 2] << 16;
+					templ += Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs + 3] << 24;
 					templ += j;
-					seglist[relocs[i]->segnum]->data[relocs[i]->ofs] = templ & 0xff;
-					seglist[relocs[i]->segnum]->data[relocs[i]->ofs + 1] = (templ >> 8) & 0xff;
-					seglist[relocs[i]->segnum]->data[relocs[i]->ofs + 2] = (templ >> 16) & 0xff;
-					seglist[relocs[i]->segnum]->data[relocs[i]->ofs + 3] = (templ >> 24) & 0xff;
+					Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs] = templ & 0xff;
+					Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs + 1] = (templ >> 8) & 0xff;
+					Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs + 2] = (templ >> 16) & 0xff;
+					Seglist[relocs[i]->Segnum]->data[relocs[i]->ofs + 3] = (templ >> 24) & 0xff;
 				}
 				break;
 			default:
@@ -1363,7 +1363,7 @@ void BuildPERelocs(long relocSectNum, PUCHAR objectTable)
 			{
 				relocSect->length += 4 - j; /* update length to align block */
 				/* and block memory */
-				relocSect->data = (PUCHAR)checkRealloc(relocSect->data, relocSect->length);
+				relocSect->data = (UCharPtr)checkRealloc(relocSect->data, relocSect->length);
 				/* update size of current reloc block */
 				k = relocSect->data[curBlockPos + 4];
 				k += relocSect->data[curBlockPos + 5] << 8;
@@ -1382,7 +1382,7 @@ void BuildPERelocs(long relocSectNum, PUCHAR objectTable)
 			curBlockPos = relocSect->length; /* get address in section of current block */
 			relocSect->length += 8; /* 8 bytes block header */
 			/* increase size of block */
-			relocSect->data = (PUCHAR)checkRealloc(relocSect->data, relocSect->length);
+			relocSect->data = (UCharPtr)checkRealloc(relocSect->data, relocSect->length);
 			/* store reloc base address, and block size */
 			curStartPos = relocs[i]->outputPos & 0xfffff000; /* start of mem page */
 
@@ -1397,7 +1397,7 @@ void BuildPERelocs(long relocSectNum, PUCHAR objectTable)
 			relocSect->data[curBlockPos + 6] = 0;
 			relocSect->data[curBlockPos + 7] = 0;
 		}
-		relocSect->data = (PUCHAR)checkRealloc(relocSect->data, relocSect->length + 2);
+		relocSect->data = (UCharPtr)checkRealloc(relocSect->data, relocSect->length + 2);
 
 		j = relocs[i]->outputPos - curStartPos; /* low 12 bits of address */
 		switch (relocs[i]->rtype)
@@ -1434,13 +1434,13 @@ void BuildPERelocs(long relocSectNum, PUCHAR objectTable)
 	{
 		/* 12 bytes for dummy section */
 		relocSect->length = 12;
-		relocSect->data = (PUCHAR)checkMalloc(12);
+		relocSect->data = (UCharPtr)checkMalloc(12);
 		/* zero it out for now */
 		for (i = 0; i < 12; i++) relocSect->data[i] = 0;
 		relocSect->data[4] = 12; /* size of block */
 	}
 
-	relocSect->datmask = (PUCHAR)checkMalloc((relocSect->length + 7) / 8);
+	relocSect->datmask = (UCharPtr)checkMalloc((relocSect->length + 7) / 8);
 	for (i = 0; i < (relocSect->length + 7) / 8; i++)
 	{
 		relocSect->datmask[i] = 0xff;
@@ -1451,7 +1451,7 @@ void BuildPERelocs(long relocSectNum, PUCHAR objectTable)
 	k += objectAlign - 1;
 	k &= (0xffffffff - (objectAlign - 1));
 	relocSect->virtualSize = k;
-	objectTable[8] = k & 0xff; /* store virtual size (in memory) of segment */
+	objectTable[8] = k & 0xff; /* store virtual size (in memory) of Segment */
 	objectTable[9] = (k >> 8) & 0xff;
 	objectTable[10] = (k >> 16) & 0xff;
 	objectTable[11] = (k >> 24) & 0xff;
@@ -1503,11 +1503,11 @@ void BuildPERelocs(long relocSectNum, PUCHAR objectTable)
 	return;
 }
 
-void BuildPEExports(long SectNum, PUCHAR objectTable, PUCHAR name)
+void BuildPEExports(long SectNum, UCharPtr objectTable, UCharPtr name)
 {
 	long i, j;
 	UINT k;
-	PSEG expSect;
+	SegPtr expSect;
 	UINT namelen;
 	UINT numNames = 0;
 	UINT RVAStart;
@@ -1576,14 +1576,14 @@ void BuildPEExports(long SectNum, PUCHAR objectTable, PUCHAR name)
 		minOrd = 1; /* if none defined, min is set to 1 */
 	}
 
-	expSect->data = (PUCHAR)checkMalloc(expSect->length);
+	expSect->data = (UCharPtr)checkMalloc(expSect->length);
 
 	objectTable += PE_OBJECTENTRY_SIZE * SectNum; /* point to reloc object entry */
 	k = expSect->length;
 	k += objectAlign - 1;
 	k &= (0xffffffff - (objectAlign - 1));
 	expSect->virtualSize = k;
-	objectTable[8] = k & 0xff; /* store virtual size (in memory) of segment */
+	objectTable[8] = k & 0xff; /* store virtual size (in memory) of Segment */
 	objectTable[9] = (k >> 8) & 0xff;
 	objectTable[10] = (k >> 16) & 0xff;
 	objectTable[11] = (k >> 24) & 0xff;
@@ -1699,7 +1699,7 @@ void BuildPEExports(long SectNum, PUCHAR objectTable, PUCHAR name)
 			}
 			/* get RVA of export entry */
 			k = expdefs[i].pubdef->ofs +
-				seglist[expdefs[i].pubdef->segnum]->base -
+				Seglist[expdefs[i].pubdef->Segnum]->base -
 				imageBase;
 			/* store it */
 			expSect->data[RVAStart + 4 * (expdefs[i].ordinal - minOrd)] = k & 0xff;
@@ -1724,7 +1724,7 @@ void BuildPEExports(long SectNum, PUCHAR objectTable, PUCHAR name)
 			} while (k); /* move through table until we find a free spot */
 			/* get RVA of export entry */
 			k = expdefs[i].pubdef->ofs;
-			k += seglist[expdefs[i].pubdef->segnum]->base;
+			k += Seglist[expdefs[i].pubdef->Segnum]->base;
 			k -= imageBase;
 			/* store RVA */
 			expSect->data[j] = k & 0xff;
@@ -1805,7 +1805,7 @@ void BuildPEExports(long SectNum, PUCHAR objectTable, PUCHAR name)
 		expSect->data[15] = ((nameSpaceStart + expSect->base - imageBase) >> 24) & 0xff;
 	}
 
-	expSect->datmask = (PUCHAR)checkMalloc((expSect->length + 7) / 8);
+	expSect->datmask = (UCharPtr)checkMalloc((expSect->length + 7) / 8);
 	for (i = 0; i < (expSect->length + 7) / 8; i++)
 	{
 		expSect->datmask[i] = 0xff;
@@ -1814,11 +1814,11 @@ void BuildPEExports(long SectNum, PUCHAR objectTable, PUCHAR name)
 	return;
 }
 
-void BuildPEResources(long sectNum, PUCHAR objectTable)
+void BuildPEResources(long sectNum, UCharPtr objectTable)
 {
 	long i, j;
 	UINT k;
-	SEG* ressect;
+	Seg* ressect;
 	RESOURCE curres;
 	int numtypes, numnamedtypes;
 	int numPairs, numnames, numids;
@@ -2034,9 +2034,9 @@ void BuildPEResources(long sectNum, PUCHAR objectTable)
 
 	ressect->length = dataPos + dataSize;
 
-	ressect->data = (PUCHAR)checkMalloc(ressect->length);
+	ressect->data = (UCharPtr)checkMalloc(ressect->length);
 
-	ressect->datmask = (PUCHAR)checkMalloc((ressect->length + 7) / 8);
+	ressect->datmask = (UCharPtr)checkMalloc((ressect->length + 7) / 8);
 
 	/* empty section to start with */
 	for (i = 0; i < ressect->length; i++)
@@ -2071,7 +2071,7 @@ void BuildPEResources(long sectNum, PUCHAR objectTable)
 				ressect->data[curTypePos + 1] = ((namePos) >> 8) & 0xff;
 				ressect->data[curTypePos + 2] = ((namePos) >> 16) & 0xff;
 				ressect->data[curTypePos + 3] = (((namePos) >> 24) & 0xff) | 0x80;
-				curTypeName = (PCHAR)resource[i].typename1;
+				curTypeName = (CharPtr)resource[i].typename1;
 				k = wstrlen(curTypeName);
 				ressect->data[namePos] = k & 0xff;
 				ressect->data[namePos + 1] = (k >> 8) & 0xff;
@@ -2247,7 +2247,7 @@ void BuildPEResources(long sectNum, PUCHAR objectTable)
 	k += objectAlign - 1;
 	k &= (0xffffffff - (objectAlign - 1));
 	ressect->virtualSize = k;
-	objectTable[8] = k & 0xff; /* store virtual size (in memory) of segment */
+	objectTable[8] = k & 0xff; /* store virtual size (in memory) of Segment */
 	objectTable[9] = (k >> 8) & 0xff;
 	objectTable[10] = (k >> 16) & 0xff;
 	objectTable[11] = (k >> 24) & 0xff;
@@ -2261,11 +2261,11 @@ void BuildPEResources(long sectNum, PUCHAR objectTable)
 	return;
 }
 
-void getStub(PUCHAR* pstubData, UINT* pstubSize)
+void getStub(UCharPtr* pstubData, UINT* pstubSize)
 {
 	FILE* f;
 	unsigned char headbuf[0x1c];
-	PUCHAR buf;
+	UCharPtr buf;
 	UINT imageSize;
 	UINT headerSize;
 	UINT relocSize;
@@ -2274,7 +2274,7 @@ void getStub(PUCHAR* pstubData, UINT* pstubSize)
 
 	if (stubName)
 	{
-		f = fopen((PCHAR)stubName, "rb");
+		f = fopen((CharPtr)stubName, "rb");
 		if (!f)
 		{
 			printf("Unable to open stub file %s\n", stubName);
@@ -2301,7 +2301,7 @@ void getStub(PUCHAR* pstubData, UINT* pstubSize)
 		printf("reloc=%i\n", relocSize);
 
 		/* allocate buffer for load image */
-		buf = (PUCHAR)checkMalloc(imageSize + 0x40 + ((relocSize + 0xf) & 0xfffffff0));
+		buf = (UCharPtr)checkMalloc(imageSize + 0x40 + ((relocSize + 0xf) & 0xfffffff0));
 		/* copy header */
 		for (i = 0; i < 0x1c; i++) buf[i] = headbuf[i];
 
@@ -2353,13 +2353,13 @@ void getStub(PUCHAR* pstubData, UINT* pstubSize)
 	}
 }
 
-void OutputWin32file(PCHAR outname)
+void OutputWin32file(CharPtr outname)
 {
 	long i, j, k;
 	UINT started;
 	UINT lastout;
-	PUCHAR headbuf;
-	PUCHAR stubData;
+	UCharPtr headbuf;
+	UCharPtr stubData;
 	FILE* outfile;
 	UINT headerSize;
 	UINT headerVirtSize;
@@ -2380,7 +2380,7 @@ void OutputWin32file(PCHAR outname)
 	/* allocate section entries for imports, exports and relocs if required */
 	if (impsreq)
 	{
-		importSectNum = createOutputSection((PCHAR)"imports", WINF_INITDATA | WINF_SHARED | WINF_READABLE);
+		importSectNum = createOutputSection((CharPtr)"imports", WINF_INITDATA | WINF_SHARED | WINF_READABLE);
 	}
 	else
 	{
@@ -2389,7 +2389,7 @@ void OutputWin32file(PCHAR outname)
 
 	if (expcount)
 	{
-		exportSectNum = createOutputSection((PCHAR)"exports", WINF_INITDATA | WINF_SHARED | WINF_READABLE);
+		exportSectNum = createOutputSection((CharPtr)"exports", WINF_INITDATA | WINF_SHARED | WINF_READABLE);
 	}
 	else
 	{
@@ -2398,11 +2398,11 @@ void OutputWin32file(PCHAR outname)
 
 	/* Windows NT requires a reloc section to relocate image files, even */
 	/* if it contains no actual fixups */
-	relocSectNum = createOutputSection((PCHAR)"relocs", WINF_INITDATA | WINF_SHARED | WINF_DISCARDABLE | WINF_READABLE);
+	relocSectNum = createOutputSection((CharPtr)"relocs", WINF_INITDATA | WINF_SHARED | WINF_DISCARDABLE | WINF_READABLE);
 
 	if (rescount)
 	{
-		resourceSectNum = createOutputSection((PCHAR)"resource", WINF_INITDATA | WINF_SHARED | WINF_READABLE);
+		resourceSectNum = createOutputSection((CharPtr)"resource", WINF_INITDATA | WINF_SHARED | WINF_READABLE);
 	}
 	else
 	{
@@ -2423,7 +2423,7 @@ void OutputWin32file(PCHAR outname)
 	headerSize &= (0xffffffff - (fileAlign - 1));
 
 
-	headbuf = (PUCHAR)checkMalloc(headerSize);
+	headbuf = (UCharPtr)checkMalloc(headerSize);
 
 	for (i = 0; i < headerSize; i++)
 	{
@@ -2518,7 +2518,7 @@ void OutputWin32file(PCHAR outname)
 	headbuf[headerStart + PE_STACKCOMMSIZE + 3] = (stackCommitSize >> 24) & 0xff;
 
 
-	/* shift segment start addresses up into place and build section headers */
+	/* shift Segment start addresses up into place and build section headers */
 	sectionStart = headerSize;
 	j = headerStart + PE_HEADBUF_SIZE;
 
@@ -2533,12 +2533,12 @@ void OutputWin32file(PCHAR outname)
 			}
 		}
 		k = outlist[i]->virtualSize; /* get virtual size */
-		headbuf[j + 8] = k & 0xff; /* store virtual size (in memory) of segment */
+		headbuf[j + 8] = k & 0xff; /* store virtual size (in memory) of Segment */
 		headbuf[j + 9] = (k >> 8) & 0xff;
 		headbuf[j + 10] = (k >> 16) & 0xff;
 		headbuf[j + 11] = (k >> 24) & 0xff;
 
-		if (!padsegments) /* if not padding segments, reduce space consumption */
+		if (!padSegments) /* if not padding Segments, reduce space consumption */
 		{
 			for (k = outlist[i]->length - 1; (k >= 0) && !GetNbit(outlist[i]->datmask, k); k--);
 			k++; /* k=initialised length */
@@ -2577,7 +2577,7 @@ void OutputWin32file(PCHAR outname)
 	/* build import, export and relocation sections */
 
 	BuildPEImports(importSectNum, headbuf + headerStart + PE_HEADBUF_SIZE);
-	BuildPEExports(exportSectNum, headbuf + headerStart + PE_HEADBUF_SIZE, (PUCHAR)outname);
+	BuildPEExports(exportSectNum, headbuf + headerStart + PE_HEADBUF_SIZE, (UCharPtr)outname);
 	BuildPERelocs(relocSectNum, headbuf + headerStart + PE_HEADBUF_SIZE);
 	BuildPEResources(resourceSectNum, headbuf + headerStart + PE_HEADBUF_SIZE);
 
@@ -2589,16 +2589,16 @@ void OutputWin32file(PCHAR outname)
 	/* get start address */
 	if (gotstart)
 	{
-		GetFixupTarget(&startaddr, &startaddr.segnum, &startaddr.ofs, TRUE);
+		GetFixupTarget(&startaddr, &startaddr.Segnum, &startaddr.ofs, TRUE);
 		if (errcount)
 		{
 			printf("Invalid start address record\n");
 			exit(1);
 		}
 		i = startaddr.ofs;
-		if (startaddr.segnum >= 0)
+		if (startaddr.Segnum >= 0)
 		{
-			i += seglist[startaddr.segnum]->base;
+			i += Seglist[startaddr.Segnum]->base;
 		}
 		i -= imageBase; /* RVA */
 		headbuf[headerStart + PE_ENTRYPOINT] = i & 0xff;
@@ -2701,7 +2701,7 @@ void OutputWin32file(PCHAR outname)
 	headbuf[headerStart + PE_INITDATASIZE + 2] = (dataSize >> 16) & 0xff;
 	headbuf[headerStart + PE_INITDATASIZE + 3] = (dataSize >> 24) & 0xff;
 
-	/* zero out section start for all zero-length segments */
+	/* zero out section start for all zero-length Segments */
 	j = headerStart + PE_HEADBUF_SIZE;
 	for (i = 0; i < outcount; i++, j += PE_OBJECTENTRY_SIZE)
 	{
@@ -2735,7 +2735,7 @@ void OutputWin32file(PCHAR outname)
 
 	for (i = 0; i < outcount; i++)
 	{
-		if (outlist[i] && ((outlist[i]->attr & SEG_ALIGN) != SEG_ABS))
+		if (outlist[i] && ((outlist[i]->attr & Seg_ALIGN) != Seg_ABS))
 		{
 			/* ensure section is aligned to file-Align */
 			while (ftell(outfile) & (fileAlign - 1))
@@ -2749,7 +2749,7 @@ void OutputWin32file(PCHAR outname)
 				fclose(outfile);
 				exit(1);
 			}
-			if (padsegments)
+			if (padSegments)
 			{
 				while (started < outlist[i]->base)
 				{
@@ -2772,7 +2772,7 @@ void OutputWin32file(PCHAR outname)
 					fputc(outlist[i]->data[j], outfile);
 					lastout = started + 1;
 				}
-				else if (padsegments)
+				else if (padSegments)
 				{
 					fputc(0, outfile);
 					lastout = started + 1;
