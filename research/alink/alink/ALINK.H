@@ -587,3 +587,6 @@ rescount;
 
 extern int buildDll;
 extern UCharPtr stubName;
+extern UInt libPathCount;
+extern CharPtr* libPath;
+extern char* entryPoint;

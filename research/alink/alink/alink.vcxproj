@@ -167,6 +167,7 @@
     <ClCompile Include="coff.cpp" />
     <ClCompile Include="cofflib.cpp" />
     <ClCompile Include="combine.cpp" />
+    <ClCompile Include="globals.cpp" />
     <ClCompile Include="objload.cpp" />
     <ClCompile Include="output.cpp" />
     <ClCompile Include="pch.cpp">
