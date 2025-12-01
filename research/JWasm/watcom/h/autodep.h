@@ -38,7 +38,7 @@ extern "C" {
 #define         DEP_LIST_NAME   "EBWF_XFMMTUPPE"
 
 #include "pushpck1.h"
-
+#define _WCUNALIGNED
 typedef struct {
     uint_32     time;           /* file's time taken from stat */
     uint_16     len;            /* sizeof the name array */
