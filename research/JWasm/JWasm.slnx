@@ -3,6 +3,11 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="JWasm/JWasm.vcxproj" />
-  <Project Path="JWasmLib/JWasmLib.vcxproj" />
+  <Folder Name="/JWasm Prrojects/">
+    <Project Path="JWasm/JWasm.vcxproj" />
+    <Project Path="JWasmLib/JWasmLib.vcxproj" />
+  </Folder>
+  <Folder Name="/JWlink Projects/">
+    <Project Path="dwarf/dwarf.vcxproj" />
+  </Folder>
 </Solution>
