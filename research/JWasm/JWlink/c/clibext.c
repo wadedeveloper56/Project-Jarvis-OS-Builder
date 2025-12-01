@@ -29,7 +29,8 @@
 ****************************************************************************/
 
 #include <stdio.h>
-#include <unistd.h>
+#include <io.h>
+#include <fcntl.h>
 #include <string.h>
 #include <stdlib.h>
 #include <errno.h>
@@ -666,7 +667,7 @@ void _makepath( char *path, const char *drive,
             /* if no path separator was specified then pick a default */
             if( first_pc == '\0' ) first_pc = PC;
             /* if dir did not end in '/' then put in a provisional one */
-                if( *(_mbsdec(pathstart,path)) == first_pc )
+                if( (_mbsdec(pathstart,path)) == first_pc )
                     path--;
                 else
                     *path = first_pc;
@@ -1136,7 +1137,7 @@ off_t tell( int handle )
 *
 ****************************************************************************/
 
-unsigned int _rotl( unsigned int value, unsigned int shift )
+unsigned int rotl( unsigned int value, unsigned int shift )
 {
     unsigned int    tmp;
 
@@ -1368,7 +1369,7 @@ void _searchenv( const char *name, const char *env_var, char *buffer )
     size_t      len;
 
     prev_errno = errno;
-    if( access( name, F_OK ) == 0 ) {
+    if( _access( name, 0 ) == 0 ) {
         p = buffer;                                 /* JBS 90/3/30 */
         len = 0;                                    /* JBS 04/1/06 */
         for( ;; ) {

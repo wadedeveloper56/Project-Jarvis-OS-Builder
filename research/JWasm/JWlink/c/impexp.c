@@ -279,7 +279,7 @@ static symbol * GetIATSym( symbol *sym )
     }
     prefixlen = sizeof(ImportSymPrefix) - 1;
     namelen = strlen( name );
-    iatname = alloca( namelen + prefixlen + 1 );
+    iatname = _alloca( namelen + prefixlen + 1 );
     memcpy( iatname, ImportSymPrefix, prefixlen );
     memcpy( iatname + prefixlen, name, namelen );
     prefixlen += namelen;
@@ -483,7 +483,7 @@ static void ReadNameTable( f_handle the_file )
     if( LinkFlags & CASE_FLAG ) {
         compare_rtn = &strcmp;
     } else {
-        compare_rtn = &stricmp;
+        compare_rtn = &_stricmp;
     }                             // skip the module name & ordinal.
     for( ;; ) {
         QRead( the_file, &length, sizeof( unsigned_8 ), fname );

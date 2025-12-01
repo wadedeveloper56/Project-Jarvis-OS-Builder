@@ -98,7 +98,7 @@ static entry_export *ProcWlibDLLImportEntry( void )
     length_name     internal;
 
     symname.len = Token.len;
-    symname.name = alloca( Token.len + 1 );
+    symname.name = _alloca( Token.len + 1 );
     memcpy( symname.name, Token.this, Token.len );
     symname.name[ Token.len ] = '\0';
     if( !GetToken( SEP_DOT_EXT, 0 ) ) {
@@ -111,7 +111,7 @@ static entry_export *ProcWlibDLLImportEntry( void )
             if( Token.len > 0 ) {
                 internal = symname;
                 symname.len = Token.len;
-                symname.name = alloca( Token.len + 1 );
+                symname.name = _alloca( Token.len + 1 );
                 memcpy( symname.name, Token.this, Token.len );
                 symname.name[ Token.len ] = '\0';
             }
@@ -188,14 +188,14 @@ static bool getimport( void )
     ord_state           state;
 
     DEBUG(( DBG_OLD, "cmdos2.getimport: enter" ));
-    intname.name = alloca( Token.len + 1 );
+    intname.name = _alloca( Token.len + 1 );
     memcpy( intname.name, Token.this, Token.len );
     intname.name[ Token.len ] = '\0';
     intname.len = Token.len;
     if( !GetToken( SEP_NO, 0 ) ) {
         return( FALSE );
     }
-    modname.name = alloca( Token.len + 1 );
+    modname.name = _alloca( Token.len + 1 );
     memcpy( modname.name, Token.this, Token.len );
     modname.name[ Token.len ] = '\0';
     modname.len = Token.len;
@@ -203,7 +203,7 @@ static bool getimport( void )
     if( GetToken( SEP_PERIOD, TOK_INCLUDE_DOT ) ) {
         state =  getatoi( &ordinal );
         if( state == ST_NOT_ORDINAL ) {
-            extname.name = alloca( Token.len + 1 );
+            extname.name = _alloca( Token.len + 1 );
             memcpy( extname.name, Token.this, Token.len );
             extname.name[ Token.len ] = '\0';
             extname.len = Token.len;

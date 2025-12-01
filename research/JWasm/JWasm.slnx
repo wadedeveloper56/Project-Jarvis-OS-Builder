@@ -13,6 +13,6 @@
     <Project Path="lib_misc/lib_misc.vcxproj" Id="3cc103a7-2f19-4ee3-880b-6935d35aa0c6" />
     <Project Path="orl/orl.vcxproj" Id="6d6ea67c-cf31-4c1c-a102-d3fc81329a21" />
     <Project Path="sdk/sdk.vcxproj" Id="3f25a4ee-aad2-4be8-af08-4ecbb66a6084" />
+    <Project Path="trmem/trmem.vcxproj" Id="7314cad6-35df-415c-9b70-f80dc13064e8" />
   </Folder>
-  <Project Path="trmem/trmem.vcxproj" Id="7314cad6-35df-415c-9b70-f80dc13064e8" />
 </Solution>

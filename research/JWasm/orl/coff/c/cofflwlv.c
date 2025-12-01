@@ -33,7 +33,7 @@
 #include "orlhash.h"
 #include "walloca.h"
 #ifdef _BSD_SOURCE
-#define stricmp strcasecmp
+//#define stricmp strcasecmp
 #endif
 
 orl_return CoffCreateSymbolHandles( coff_file_handle file_hnd )
@@ -495,7 +495,7 @@ static orl_return ParseExport( char **contents, int *len,
     int         l;
 
     l = strncspn( *contents, ", \t", *len );
-    arg = alloca((l+1));
+    arg = _alloca((l+1));
     memcpy(arg, *contents, l); arg[l] = 0;
     *len -= l;
     *contents += l;
@@ -525,7 +525,7 @@ static orl_return ParseLnkCmd( char *cmd, char **contents, int *len,
         }
     }
     l = value - *contents;
-    arg = alloca( l + 1 );
+    arg = _alloca( l + 1 );
     memcpy( arg, *contents, l );
     *contents = value;
     if ( delim )

@@ -36,7 +36,7 @@
 #include <conio.h>
 #include <errno.h>
 #include <fcntl.h>
-#include <unistd.h>
+#include <io.h>
 #include <sys/stat.h>
 #include "linkstd.h"
 #include "msg.h"
@@ -45,6 +45,31 @@
 #include "objio.h"
 #include "fileio.h"
 #include "ntio.h"
+
+enum perms {// names for permissions
+    none = 0,
+    owner_read = 0400,  // S_IRUSR
+    owner_write = 0200, // S_IWUSR
+    owner_exec = 0100,  // S_IXUSR
+    owner_all = 0700,   // S_IRWXU
+    group_read = 040,   // S_IRGRP
+    group_write = 020,  // S_IWGRP
+    group_exec = 010,   // S_IXGRP
+    group_all = 070,    // S_IRWXG
+    others_read = 04,   // S_IROTH
+    others_write = 02,  // S_IWOTH
+    others_exec = 01,   // S_IXOTH
+    others_all = 07,    // S_IRWXO
+    all = 0777,
+    set_uid = 04000,    // S_ISUID
+    set_gid = 02000,    // S_ISGID
+    sticky_bit = 01000, // S_ISVTX
+    mask = 07777,
+    unknown = 0xFFFF,
+    add_perms = 0x10000,
+    remove_perms = 0x20000,
+    resolve_symlinks = 0x40000
+};
 
 #ifdef __OSI__
 //If or when OSI builds are re-enabled, we need to find the header for this
@@ -96,8 +121,8 @@ void LnkFilesInit( void )
     OpenFiles = 0;
     CaughtBreak = FALSE;
 #if !defined( _DLLHOST )
-    setmode( STDIN_HANDLE, O_BINARY );
-    setmode( STDOUT_HANDLE, O_BINARY );
+    _setmode(_fileno(stdin), O_BINARY );
+    _setmode(_fileno(stdout), O_BINARY );
 #endif
 }
 
@@ -118,7 +143,7 @@ static int DoOpen( char *name, unsigned mode, bool isexe )
     for( ;; ) {
         if( OpenFiles >= MAX_OPEN_FILES )
             CleanCachedHandles();
-        h = open( name, mode, S_IRUSR | S_IWUSR );
+        h = _open( name, mode, owner_read | owner_write);
         if( h != -1 ) {
             OpenFiles++;
             break;
@@ -190,8 +215,8 @@ f_handle ExeOpen( char *name )
     return( NIL_HANDLE );
 }
 
-    #define doread( f, b, l )  read( f, b, l )
-    #define dowrite( f, b, l ) write( f, b, l )
+    #define doread( f, b, l )  _read( f, b, l )
+    #define dowrite( f, b, l ) _write( f, b, l )
 
 unsigned QRead( f_handle file, void *buffer, unsigned len, char *name )
 /****************************************************************************/

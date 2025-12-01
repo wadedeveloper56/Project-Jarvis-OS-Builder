@@ -2,6 +2,7 @@
 *
 *                            Open Watcom Project
 *
+* Copyright (c) 2002-2022 The Open Watcom Contributors. All Rights Reserved.
 *    Portions Copyright (c) 1983-2002 Sybase, Inc. All Rights Reserved.
 *
 *  ========================================================================
@@ -30,18 +31,36 @@
 ****************************************************************************/
 
 
-#include "linkstd.h"
-#include "reloc.h"
-#include "param.h"
-#include "pass2.h"
-#define export
-#include "globals.h"
-#include "specials.h"
+#include <stdarg.h>
+#ifdef INSIDE_WLINK
+    #include "wlnkmsg.rh"
+#elif defined( INSIDE_WR )
+    #include "wrmsg.rh"
+#else
+    #include "rcmsg.rh"
+#endif
 
-struct RCParams     CmdLineParms;
-//RCEXTERN RcResFileID         CurrResFile;
-RcPass2Info         Pass2Info;
-//RCEXTERN char* NewIncludeDirs;
-//RCEXTERN char                CharSet[256];
-//RCEXTERN HANDLE_INFO         Instance;
-//RCEXTERN bool                StopInvoked;
+
+#if defined( INSIDE_WLINK )
+#elif defined( INSIDE_WR )
+    #define TMPFILE2    "Temporary file 2 (exe)"
+#else
+    #define TMPFILE0    "Temporary file 0 (res)"
+    #define TMPFILE1    "Temporary file 1 (res)"
+    #define TMPFILE2    "Temporary file 2 (exe)"
+#endif
+
+enum {
+    INTERR_UNKNOWN_RCSTATUS,
+    INTERR_EXE_HAS_MINUS_1_SEGS,
+    INTERR_ERR_BUILDING_RES_DIR,
+    INTERR_MEM_FREE_FAILED,
+    INTERR_MEM_REALLOC_FAILED
+};
+
+extern void RcWarning( unsigned errornum, ... );
+extern void RcError( unsigned int ,... );
+#if defined(__WATCOMC__)
+#pragma aux RcFatalError __aborts
+#endif
+extern void RcFatalError( unsigned int errornum, ... );

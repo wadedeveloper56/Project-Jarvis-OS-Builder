@@ -35,7 +35,7 @@
 #include <string.h>
 #include <ctype.h>
 #ifdef _BSD_SOURCE
-#define stricmp strcasecmp
+//#define stricmp strcasecmp
 #endif
 
 #include "omfload.h"
@@ -413,7 +413,7 @@ static orl_return       addToSymbolTable( omf_file_handle ofh,
         sh->flags |= ORL_SEC_FLAG_REMOVE;
         sh->assoc.sym.hash_tab = ORLHashTableCreate( ofh->omf_hnd->funcs, 257,
                                         ORL_HASH_STRING,
-                                        (orl_hash_comparison_func)stricmp );
+                                        (orl_hash_comparison_func)_stricmp );
         if( !sh->assoc.sym.hash_tab ) return( ORL_OUT_OF_MEMORY );
     }
     assert( sh->assoc.sym.hash_tab );

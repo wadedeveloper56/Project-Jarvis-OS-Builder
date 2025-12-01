@@ -840,7 +840,7 @@ void AddImpLibEntry( char *intname, char *extname, unsigned ordinal )
     } else {
         otherlen = 10;          // max length of a 32-bit int.
     }
-    buff = alloca( intlen + otherlen + ImpLib.dlllen + 13 );
+    buff = _alloca( intlen + otherlen + ImpLib.dlllen + 13 );
     buff[0] = '+';
     buff[1] = '+';
     buff[2] = '\'';

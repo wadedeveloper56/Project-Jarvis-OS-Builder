@@ -2,6 +2,7 @@
 *
 *                            Open Watcom Project
 *
+* Copyright (c) 2002-2023 The Open Watcom Contributors. All Rights Reserved.
 *    Portions Copyright (c) 1983-2002 Sybase, Inc. All Rights Reserved.
 *
 *  ========================================================================
@@ -24,24 +25,18 @@
 *
 *  ========================================================================
 *
-* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
-*               DESCRIBE IT HERE!
+* Description:  Global declarations, pass2.
 *
 ****************************************************************************/
 
 
-#include "linkstd.h"
-#include "reloc.h"
-#include "param.h"
-#include "pass2.h"
-#define export
-#include "globals.h"
-#include "specials.h"
+#ifndef RCCORE_INCLUDED
+#define RCCORE_INCLUDED
 
-struct RCParams     CmdLineParms;
-//RCEXTERN RcResFileID         CurrResFile;
-RcPass2Info         Pass2Info;
-//RCEXTERN char* NewIncludeDirs;
-//RCEXTERN char                CharSet[256];
-//RCEXTERN HANDLE_INFO         Instance;
-//RCEXTERN bool                StopInvoked;
+#include "pass2.h"
+#include "rcio_2.h"
+#include "sharedio.h"
+#include "paramd.h"
+#include "rcvars_2.h"
+
+#endif

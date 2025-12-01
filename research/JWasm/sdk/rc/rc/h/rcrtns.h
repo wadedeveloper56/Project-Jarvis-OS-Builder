@@ -2,6 +2,7 @@
 *
 *                            Open Watcom Project
 *
+* Copyright (c) 2023      The Open Watcom Contributors. All Rights Reserved.
 *    Portions Copyright (c) 1983-2002 Sybase, Inc. All Rights Reserved.
 *
 *  ========================================================================
@@ -24,24 +25,35 @@
 *
 *  ========================================================================
 *
-* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
-*               DESCRIBE IT HERE!
+* Description:  wres library client routine prototypes.
 *
 ****************************************************************************/
 
 
-#include "linkstd.h"
-#include "reloc.h"
-#include "param.h"
-#include "pass2.h"
-#define export
-#include "globals.h"
-#include "specials.h"
+#ifndef RCRTNS_INLCUDED
+#define RCRTNS_INLCUDED
 
-struct RCParams     CmdLineParms;
-//RCEXTERN RcResFileID         CurrResFile;
-RcPass2Info         Pass2Info;
-//RCEXTERN char* NewIncludeDirs;
-//RCEXTERN char                CharSet[256];
-//RCEXTERN HANDLE_INFO         Instance;
-//RCEXTERN bool                StopInvoked;
+#include "rcmem.h"
+
+#define RESOPEN         res_open
+#define RESCLOSE        res_close
+#define RESWRITE        res_write
+#define RESREAD         res_read
+#define RESSEEK         res_seek
+#define RESTELL         res_tell
+#define RESIOERR        res_ioerr
+
+#define RESALLOC        RcMemAlloc
+#define RESFREE         RcMemFree
+
+#define RCREALLOC       RcMemRealloc
+
+extern FILE             *res_open( const char *, wres_open_mode );
+extern bool             res_close( FILE * );
+extern size_t           res_write( FILE *, const void *, size_t );
+extern size_t           res_read( FILE *, void *, size_t );
+extern bool             res_seek( FILE *, long, int );
+extern long             res_tell( FILE * );
+extern bool             res_ioerr( FILE *, size_t );
+
+#endif
