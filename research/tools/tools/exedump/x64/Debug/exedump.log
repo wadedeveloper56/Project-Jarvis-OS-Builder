@@ -1,0 +1,59 @@
+﻿  coff.c
+C:\projects\OSDev\ProjectJarvis\source\stage1\tools\exedump\c\coff.c(38,10): error C1083: Cannot open include file: 'wdglb.h': No such file or directory
+  d16mexe.c
+C:\projects\OSDev\ProjectJarvis\source\stage1\tools\exedump\c\d16mexe.c(36,10): error C1083: Cannot open include file: 'wio.h': No such file or directory
+  dosexe.c
+C:\projects\OSDev\ProjectJarvis\source\stage1\tools\exedump\c\dosexe.c(36,10): error C1083: Cannot open include file: 'wio.h': No such file or directory
+  dumpcv.c
+C:\projects\OSDev\ProjectJarvis\source\stage1\tools\exedump\c\dumpcv.c(36,10): error C1083: Cannot open include file: 'wio.h': No such file or directory
+  dumphll.c
+C:\projects\OSDev\ProjectJarvis\source\stage1\tools\exedump\c\dumphll.c(37,10): error C1083: Cannot open include file: 'wio.h': No such file or directory
+  dumpwv.c
+C:\projects\OSDev\ProjectJarvis\source\stage1\tools\exedump\c\dumpwv.c(37,10): error C1083: Cannot open include file: 'walloca.h': No such file or directory
+  elfexe.c
+C:\projects\OSDev\ProjectJarvis\source\stage1\tools\exedump\c\elfexe.c(37,10): error C1083: Cannot open include file: 'wdglb.h': No such file or directory
+  machoexe.c
+C:\projects\OSDev\ProjectJarvis\source\stage1\tools\exedump\c\machoexe.c(37,10): error C1083: Cannot open include file: 'wdglb.h': No such file or directory
+  novexe.c
+C:\projects\OSDev\ProjectJarvis\source\stage1\tools\exedump\c\novexe.c(37,10): error C1083: Cannot open include file: 'wdglb.h': No such file or directory
+  os2exe.c
+C:\projects\OSDev\ProjectJarvis\source\stage1\tools\exedump\c\os2exe.c(39,10): error C1083: Cannot open include file: 'wdglb.h': No such file or directory
+  peexe.c
+C:\projects\OSDev\ProjectJarvis\source\stage1\tools\exedump\c\peexe.c(38,10): error C1083: Cannot open include file: 'wdglb.h': No such file or directory
+  pharexe.c
+C:\projects\OSDev\ProjectJarvis\source\stage1\tools\exedump\c\pharexe.c(37,10): error C1083: Cannot open include file: 'wdglb.h': No such file or directory
+  qnxexe.c
+C:\projects\OSDev\ProjectJarvis\source\stage1\tools\exedump\c\qnxexe.c(37,10): error C1083: Cannot open include file: 'wdglb.h': No such file or directory
+  typewv.c
+C:\projects\OSDev\ProjectJarvis\source\stage1\tools\exedump\c\typewv.c(35,10): error C1083: Cannot open include file: 'wio.h': No such file or directory
+  wdata.c
+C:\projects\OSDev\ProjectJarvis\source\stage1\tools\exedump\c\wdata.c(37,10): error C1083: Cannot open include file: 'walloca.h': No such file or directory
+  wdfix.c
+C:\projects\OSDev\ProjectJarvis\source\stage1\tools\exedump\c\wdfix.c(36,10): error C1083: Cannot open include file: 'wdglb.h': No such file or directory
+  wdglb.c
+C:\projects\OSDev\ProjectJarvis\source\stage1\tools\exedump\c\wdglb.c(35,10): error C1083: Cannot open include file: 'wdglb.h': No such file or directory
+  wdio.c
+C:\projects\OSDev\ProjectJarvis\source\stage1\tools\exedump\c\wdio.c(40,10): error C1083: Cannot open include file: 'wio.h': No such file or directory
+  wdmp.c
+C:\projects\OSDev\ProjectJarvis\source\stage1\tools\exedump\c\wdmp.c(39,10): error C1083: Cannot open include file: 'wio.h': No such file or directory
+  wdprs.c
+C:\projects\OSDev\ProjectJarvis\source\stage1\tools\exedump\c\wdprs.c(37,10): error C1083: Cannot open include file: 'wdglb.h': No such file or directory
+  Generating Code...
+  Compiling...
+  wdres.c
+C:\projects\OSDev\ProjectJarvis\source\stage1\tools\exedump\c\wdres.c(36,10): error C1083: Cannot open include file: 'wio.h': No such file or directory
+  wdseg.c
+C:\projects\OSDev\ProjectJarvis\source\stage1\tools\exedump\c\wdseg.c(36,10): error C1083: Cannot open include file: 'wio.h': No such file or directory
+  wdtab.c
+C:\projects\OSDev\ProjectJarvis\source\stage1\tools\exedump\c\wdtab.c(35,10): error C1083: Cannot open include file: 'walloca.h': No such file or directory
+  wdwarf.c
+C:\projects\OSDev\ProjectJarvis\source\stage1\tools\exedump\c\wdwarf.c(37,10): error C1083: Cannot open include file: 'wio.h': No such file or directory
+  wline.c
+C:\projects\OSDev\ProjectJarvis\source\stage1\tools\exedump\c\wline.c(38,10): error C1083: Cannot open include file: 'wdglb.h': No such file or directory
+  wperes.c
+C:\projects\OSDev\ProjectJarvis\source\stage1\tools\exedump\c\wperes.c(35,10): error C1083: Cannot open include file: 'wdglb.h': No such file or directory
+  wpetbls.c
+C:\projects\OSDev\ProjectJarvis\source\stage1\tools\exedump\c\wpetbls.c(37,10): error C1083: Cannot open include file: 'wdglb.h': No such file or directory
+  wsect.c
+C:\projects\OSDev\ProjectJarvis\source\stage1\tools\exedump\c\wsect.c(38,10): error C1083: Cannot open include file: 'wdglb.h': No such file or directory
+  Generating Code...

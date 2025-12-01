@@ -101,7 +101,12 @@ FileType getFileType(char* buffer, LONGLONG fileSize)
 	else
 	{
 		PIMAGE_FILE_HEADER pImgFileHdr = (PIMAGE_FILE_HEADER)buffer;
-		if (pImgFileHdr->Machine == IMAGE_FILE_MACHINE_I386)
+		if (pImgFileHdr->Machine == IMAGE_FILE_MACHINE_UNKNOWN)
+		{
+			ANON_OBJECT_HEADER* ao = (ANON_OBJECT_HEADER*)buffer;
+			result = ANONYMOUS;
+		}
+		else if (pImgFileHdr->Machine == IMAGE_FILE_MACHINE_I386)
 		{
 			result = PE32OBJ;
 		}

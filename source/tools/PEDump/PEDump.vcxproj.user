@@ -11,7 +11,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LocalDebuggerCommandArguments>-A C:\projects\OSDev\ProjectJarvis\bin\tools\intermediate\Arguments\Release\Win32\ArgDate.obj</LocalDebuggerCommandArguments>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
-    <LocalDebuggerCommandArgumentsHistory>-A C:\projects\OSDev\ProjectJarvis\bin\tools\intermediate\JWasm\Release\Win32\assemble.obj|-A C:\projects\OSDev\ProjectJarvis\bin\tools\intermediate\Arguments\Release\Win32\ArgDate.obj|</LocalDebuggerCommandArgumentsHistory>
+    <LocalDebuggerCommandArgumentsHistory>-A C:\projects\OSDev\ProjectJarvis\bin\tools\intermediate\JWasm\Release\Win32\assemble.obj|-A C:\projects\OSDev\ProjectJarvis\bin\tools\intermediate\Arguments\Debug\Win32\ArgDate.obj|-A C:\projects\OSDev\ProjectJarvis\bin\tools\intermediate\Arguments\Release\Win32\ArgDate.obj|</LocalDebuggerCommandArgumentsHistory>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LocalDebuggerCommandArguments>-A C:\projects\OSDev\ProjectJarvis\bin\tools\intermediate\Arguments\Release\Win32\ArgDate.obj</LocalDebuggerCommandArguments>
