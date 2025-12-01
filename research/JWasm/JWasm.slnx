@@ -9,5 +9,6 @@
   </Folder>
   <Folder Name="/JWlink Projects/">
     <Project Path="dwarf/dwarf.vcxproj" />
+    <Project Path="lib_misc/lib_misc.vcxproj" />
   </Folder>
 </Solution>
