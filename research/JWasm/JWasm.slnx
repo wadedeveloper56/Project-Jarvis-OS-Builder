@@ -1,0 +1,8 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="JWasm/JWasm.vcxproj" />
+  <Project Path="JWasmLib/JWasmLib.vcxproj" />
+</Solution>
