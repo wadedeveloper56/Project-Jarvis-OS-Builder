@@ -936,14 +936,14 @@ long RcTell( int hdl )
     return( PosLoad() );
 }
 
-//int RcPadFile( int handle, long pad )
-//{
-//    DbgAssert( handle == Root->outfile->handle );
-//
-//    handle = handle;
-//    PadLoad( pad );
-//    return( FALSE );
-//}
+int RcPadFile( int handle, long pad )
+{
+    DbgAssert( handle == Root->outfile->handle );
+
+    handle = handle;
+    PadLoad( pad );
+    return( FALSE );
+}
 
 void CheckDebugOffset( ExeFileInfo *info )
 {

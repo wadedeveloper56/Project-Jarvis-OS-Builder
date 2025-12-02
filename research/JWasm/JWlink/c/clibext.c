@@ -635,71 +635,71 @@ static unsigned pickup( unsigned c, unsigned *pc_of_choice )
 }
 
 /* create full MS-DOS path name from the components */
-
+//FIX ME
 void _makepath( char *path, const char *drive,
                 const char *dir, const char *fname, const char *ext )
 {
-    unsigned            first_pc = '\0';
-    char *              pathstart = path;
-    unsigned            ch;
+    //unsigned            first_pc = '\0';
+    //char *              pathstart = path;
+    //unsigned            ch;
 
-    if( drive != NULL ) {
-        if( *drive != '\0' ) {
-            if ((*drive == '\\') && (drive[1] == '\\')) {
-                strcpy(path, drive);
-                path += strlen(drive);
-            } else {
-                *path++ = *drive;                               /* OK for MBCS */
-                *path++ = ':';
-            }
-        }
-    }
-    *path = '\0';
-    if( dir != NULL ) {
-        if( *dir != '\0' ) {
-            do {
-                    ch = pickup( _mbsnextc(dir), &first_pc );
-                    _mbvtop( ch, path );
-                    path[_mbclen(path)] = '\0';
-                    path = _mbsinc( path );
-                    dir = _mbsinc( dir );
-            } while( *dir != '\0' );
-            /* if no path separator was specified then pick a default */
-            if( first_pc == '\0' ) first_pc = PC;
-            /* if dir did not end in '/' then put in a provisional one */
-                if( (_mbsdec(pathstart,path)) == first_pc )
-                    path--;
-                else
-                    *path = first_pc;
-        }
-    }
+    //if( drive != NULL ) {
+    //    if( *drive != '\0' ) {
+    //        if ((*drive == '\\') && (drive[1] == '\\')) {
+    //            strcpy(path, drive);
+    //            path += strlen(drive);
+    //        } else {
+    //            *path++ = *drive;                               /* OK for MBCS */
+    //            *path++ = ':';
+    //        }
+    //    }
+    //}
+    //*path = '\0';
+    //if( dir != NULL ) {
+    //    if( *dir != '\0' ) {
+    //        do {
+    //                ch = pickup( _mbsnextc(dir), &first_pc );
+    //                //FIX ME _mbvtop( ch, path );
+    //                path[_mbclen(path)] = '\0';
+    //                path = _mbsinc( path );
+    //                dir = _mbsinc( dir );
+    //        } while( *dir != '\0' );
+    //        /* if no path separator was specified then pick a default */
+    //        if( first_pc == '\0' ) first_pc = PC;
+    //        /* if dir did not end in '/' then put in a provisional one */
+    //            if( (_mbsdec(pathstart,path)) == first_pc )
+    //                path--;
+    //            else
+    //                *path = first_pc;
+    //    }
+    //}
 
-    /* if no path separator was specified thus far then pick a default */
-    if( first_pc == '\0' ) first_pc = PC;
-    if( fname != NULL ) {
-            ch = _mbsnextc( fname );
-            if( pickup(ch,&first_pc) != first_pc  &&  *path == first_pc )
-                path++;
+    ///* if no path separator was specified thus far then pick a default */
+    //if( first_pc == '\0' ) first_pc = PC;
+    //if( fname != NULL ) {
+    //        ch = _mbsnextc( fname );
+    //        if( pickup(ch,&first_pc) != first_pc  &&  *path == first_pc )
+    //            path++;
 
-        while (*fname != '\0')
-        {
-        //do {
-                ch = pickup( _mbsnextc(fname), &first_pc );
-                _mbvtop( ch, path );
-                path[_mbclen(path)] = '\0';
-                path = _mbsinc( path );
-                fname = _mbsinc( fname );
-        } //while( *fname != '\0' );
-    } else {
-        if( *path == first_pc ) path++;
-    }
-    if( ext != NULL ) {
-        if( *ext != '\0' ) {
-            if( *ext != '.' )  *path++ = '.';
-            while( *ext != '\0' ) *path++ = *ext++;     /* OK for MBCS */
-        }
-    }
-    *path = '\0';
+    //    while (*fname != '\0')
+    //    {
+    //    //do {
+    //            ch = pickup( _mbsnextc(fname), &first_pc );
+    //            _mbvtop( ch, path );
+    //            path[_mbclen(path)] = '\0';
+    //            path = _mbsinc( path );
+    //            fname = _mbsinc( fname );
+    //    } //while( *fname != '\0' );
+    //} else {
+    //    if( *path == first_pc ) path++;
+    //}
+    //if( ext != NULL ) {
+    //    if( *ext != '\0' ) {
+    //        if( *ext != '.' )  *path++ = '.';
+    //        while( *ext != '\0' ) *path++ = *ext++;     /* OK for MBCS */
+    //    }
+    //}
+    //*path = '\0';
 }
 #endif
 
@@ -752,6 +752,9 @@ static char *__qnx_fullpath(char *fullpath, const char *path)
 }
 #endif
 
+//FIX ME
+#define __F_NAME(x,y) x
+
 char *_sys_fullpath( char *buff, const char *path, size_t size )
 /*********************************************************************/
 {
@@ -772,7 +775,7 @@ char *_sys_fullpath( char *buff, const char *path, size_t size )
     // If the function fails, the return value is zero. To get extended error
     // information, call GetLastError.
     if( (rc == 0) || (rc > size) ) {
-        __set_errno_nt();
+        // FIX ME __set_errno_nt();
         return( NULL );
     }
 
@@ -1027,30 +1030,31 @@ char *_sys_fullpath( char *buff, const char *path, size_t size )
 #endif
 }
 
-char *_fullpath( char *buff, const char *path, size_t size )
-/**********************************************************/
-{
-    char *ptr = NULL;
-
-    if( buff == NULL ) {
-        size = _MAX_PATH;
-        ptr = malloc( size );
-        if( ptr == NULL ) __set_errno( ENOMEM );
-        buff = ptr;
-    }
-    if( buff != NULL ) {
-        buff[0] = '\0';
-        if( path == NULL || path[0] == '\0' ) {
-            buff = getcwd( buff, size );
-        } else {
-            buff = _sys_fullpath( buff, path, size );
-        }
-        if( buff == NULL ) {
-            if( ptr != NULL ) free( ptr );
-        }
-    }
-    return buff;
-}
+//FIX ME
+//char *_fullpath( char *buff, const char *path, size_t size )
+///**********************************************************/
+//{
+//    char *ptr = NULL;
+//
+//    if( buff == NULL ) {
+//        size = _MAX_PATH;
+//        ptr = malloc( size );
+//        if( ptr == NULL ) __set_errno( ENOMEM );
+//        buff = ptr;
+//    }
+//    if( buff != NULL ) {
+//        buff[0] = '\0';
+//        if( path == NULL || path[0] == '\0' ) {
+//            buff = getcwd( buff, size );
+//        } else {
+//            buff = _sys_fullpath( buff, path, size );
+//        }
+//        if( buff == NULL ) {
+//            if( ptr != NULL ) free( ptr );
+//        }
+//    }
+//    return buff;
+//}
 
 /****************************************************************************
 *

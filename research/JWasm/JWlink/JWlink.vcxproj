@@ -72,22 +72,22 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>..\bin\tools\intermediate\jwlink\$(Configuration)\$(Platform)</IntDir>
+    <IntDir>..\bin\tools\intermediate\jwlink\$(Configuration)\$(Platform)\</IntDir>
     <IncludePath>..\dwarf\dw\h;.\h;..\watcom\h;..\dwarf\h;..\lib_misc\h;..\orl\h;..\orl\coff\h;..\orl\elf\h;..\orl\omf\h;..\sdk\rc\rc\h;..\sdk\rc\wres\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>..\bin\tools\intermediate\jwlink\$(Configuration)\$(Platform)</IntDir>
+    <IntDir>..\bin\tools\intermediate\jwlink\$(Configuration)\$(Platform)\</IntDir>
     <IncludePath>..\dwarf\dw\h;.\h;..\watcom\h;..\dwarf\h;..\lib_misc\h;..\orl\h;..\orl\coff\h;..\orl\elf\h;..\orl\omf\h;..\sdk\rc\rc\h;..\sdk\rc\wres\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>..\bin\tools\intermediate\jwlink\$(Configuration)\$(Platform)</IntDir>
+    <IntDir>..\bin\tools\intermediate\jwlink\$(Configuration)\$(Platform)\</IntDir>
     <IncludePath>..\dwarf\dw\h;.\h;..\watcom\h;..\dwarf\h;..\lib_misc\h;..\orl\h;..\orl\coff\h;..\orl\elf\h;..\orl\omf\h;..\sdk\rc\rc\h;..\sdk\rc\wres\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>..\bin\tools\intermediate\jwlink\$(Configuration)\$(Platform)</IntDir>
+    <IntDir>..\bin\tools\intermediate\jwlink\$(Configuration)\$(Platform)\</IntDir>
     <IncludePath>..\dwarf\dw\h;.\h;..\watcom\h;..\dwarf\h;..\lib_misc\h;..\orl\h;..\orl\coff\h;..\orl\elf\h;..\orl\omf\h;..\sdk\rc\rc\h;..\sdk\rc\wres\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -335,6 +335,9 @@
     </ProjectReference>
     <ProjectReference Include="..\orl\orl.vcxproj">
       <Project>{6d6ea67c-cf31-4c1c-a102-d3fc81329a21}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\sdk\sdk.vcxproj">
+      <Project>{3f25a4ee-aad2-4be8-af08-4ecbb66a6084}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
