@@ -210,114 +210,114 @@ static void copypart( char *buf, const char *p, int len, int maxlen )
  */
 
 /* Under Netware, 'drive' maps to 'volume' */
-
-void _splitpath( const char *path,
-    char *drive, char *dir, char *fname, char *ext )
-{
-    const char *dotp;
-    const char *fnamep;
-    const char *startp;
-    unsigned    ch;
-#ifdef __NETWARE__
-    const char *ptr;
-#endif
-
-    /* take apart specification like -> //0/hd/user/fred/filename.ext for QNX */
-    /* take apart specification like -> c:\fred\filename.ext for DOS, OS/2 */
-
-#if defined(__UNIX__)
-
-    /* process node/drive specification */
-    startp = path;
-    if( path[0] == PC  &&  path[1] == PC ) {
-        path += 2;
-        for( ;; ) {
-            if( *path == '\0' ) break;
-            if( *path == PC ) break;
-            if( *path == '.' ) break;
-                #ifdef __UNIX__
-                    path++;
-                #else
-                    path = _mbsinc( path );
-                #endif
-        }
-    }
-    copypart( drive, startp, path - startp, _MAX_NODE );
-
-#elif defined(__NETWARE__)
-
-        #ifdef __UNIX__
-            ptr = strchr( path, ':' );
-        #else
-            ptr = _mbschr( path, ':' );
-        #endif
-    if( ptr != NULL ) {
-        if( drive != NULL ) {
-            copypart( drive, path, ptr - path + 1, _MAX_SERVER +
-                      _MAX_VOLUME + 1 );
-        }
-            #ifdef __UNIX__
-                path = ptr + 1;
-            #else
-                path = _mbsinc( ptr );
-            #endif
-    } else if( drive != NULL ) {
-        *drive = '\0';
-    }
-
-#else
-
-    /* processs drive specification */
-    if( path[0] != '\0'  &&  path[1] == ':' ) {
-        if( drive != NULL ) {
-            drive[0] = path[0];
-            drive[1] = ':';
-            drive[2] = '\0';
-        }
-        path += 2;
-    } else if( drive != NULL ) {
-        drive[0] = '\0';
-    }
-
-#endif
-
-    /* process /user/fred/filename.ext for QNX */
-    /* process /fred/filename.ext for DOS, OS/2 */
-    dotp = NULL;
-    fnamep = path;
-    startp = path;
-
-    for(;;) {           /* 07-jul-91 DJG -- save *path in ch for speed */
-        if( *path == '\0' )  break;
-            #ifdef __UNIX__
-                ch = *path;
-            #else
-                ch = _mbsnextc( path );
-            #endif
-        if( ch == '.' ) {
-            dotp = path;
-            ++path;
-            continue;
-        }
-            #ifdef __UNIX__
-                path++;
-            #else
-                path = _mbsinc( path );
-            #endif
-#if defined(__UNIX__)
-        if( ch == PC ) {
-#else /* DOS, OS/2, Windows, Netware */
-        if( ch == PC  ||  ch == ALT_PC ) {
-#endif
-            fnamep = path;
-            dotp = NULL;
-        }
-    }
-    copypart( dir, startp, fnamep - startp, _MAX_DIR - 1 );
-    if( dotp == NULL ) dotp = path;
-    copypart( fname, fnamep, dotp - fnamep, _MAX_FNAME - 1 );
-    copypart( ext,   dotp,   path - dotp,   _MAX_EXT - 1);
-}
+//FIX ME
+//void _splitpath( const char *path,
+//    char *drive, char *dir, char *fname, char *ext )
+//{
+//    const char *dotp;
+//    const char *fnamep;
+//    const char *startp;
+//    unsigned    ch;
+//#ifdef __NETWARE__
+//    const char *ptr;
+//#endif
+//
+//    /* take apart specification like -> //0/hd/user/fred/filename.ext for QNX */
+//    /* take apart specification like -> c:\fred\filename.ext for DOS, OS/2 */
+//
+//#if defined(__UNIX__)
+//
+//    /* process node/drive specification */
+//    startp = path;
+//    if( path[0] == PC  &&  path[1] == PC ) {
+//        path += 2;
+//        for( ;; ) {
+//            if( *path == '\0' ) break;
+//            if( *path == PC ) break;
+//            if( *path == '.' ) break;
+//                #ifdef __UNIX__
+//                    path++;
+//                #else
+//                    path = _mbsinc( path );
+//                #endif
+//        }
+//    }
+//    copypart( drive, startp, path - startp, _MAX_NODE );
+//
+//#elif defined(__NETWARE__)
+//
+//        #ifdef __UNIX__
+//            ptr = strchr( path, ':' );
+//        #else
+//            ptr = _mbschr( path, ':' );
+//        #endif
+//    if( ptr != NULL ) {
+//        if( drive != NULL ) {
+//            copypart( drive, path, ptr - path + 1, _MAX_SERVER +
+//                      _MAX_VOLUME + 1 );
+//        }
+//            #ifdef __UNIX__
+//                path = ptr + 1;
+//            #else
+//                path = _mbsinc( ptr );
+//            #endif
+//    } else if( drive != NULL ) {
+//        *drive = '\0';
+//    }
+//
+//#else
+//
+//    /* processs drive specification */
+//    if( path[0] != '\0'  &&  path[1] == ':' ) {
+//        if( drive != NULL ) {
+//            drive[0] = path[0];
+//            drive[1] = ':';
+//            drive[2] = '\0';
+//        }
+//        path += 2;
+//    } else if( drive != NULL ) {
+//        drive[0] = '\0';
+//    }
+//
+//#endif
+//
+//    /* process /user/fred/filename.ext for QNX */
+//    /* process /fred/filename.ext for DOS, OS/2 */
+//    dotp = NULL;
+//    fnamep = path;
+//    startp = path;
+//
+//    for(;;) {           /* 07-jul-91 DJG -- save *path in ch for speed */
+//        if( *path == '\0' )  break;
+//            #ifdef __UNIX__
+//                ch = *path;
+//            #else
+//                ch = _mbsnextc( path );
+//            #endif
+//        if( ch == '.' ) {
+//            dotp = path;
+//            ++path;
+//            continue;
+//        }
+//            #ifdef __UNIX__
+//                path++;
+//            #else
+//                path = _mbsinc( path );
+//            #endif
+//#if defined(__UNIX__)
+//        if( ch == PC ) {
+//#else /* DOS, OS/2, Windows, Netware */
+//        if( ch == PC  ||  ch == ALT_PC ) {
+//#endif
+//            fnamep = path;
+//            dotp = NULL;
+//        }
+//    }
+//    copypart( dir, startp, fnamep - startp, _MAX_DIR - 1 );
+//    if( dotp == NULL ) dotp = path;
+//    copypart( fname, fnamep, dotp - fnamep, _MAX_FNAME - 1 );
+//    copypart( ext,   dotp,   path - dotp,   _MAX_EXT - 1);
+//}
 
 /****************************************************************************
 *
@@ -494,64 +494,64 @@ void  _splitpath2( char const *inp, char *outp,
 #if defined(__UNIX__)
 
 /* create full Unix style path name from the components */
-
-void _makepath(
-        char           *path,
-        const char  *node,
-        const char  *dir,
-        const char  *fname,
-        const char  *ext )
-{
-    *path = '\0';
-
-    if( node != NULL ) {
-        if( *node != '\0' ) {
-            strcpy( path, node );
-            path = strchr( path, '\0' );
-
-            /* if node did not end in '/' then put in a provisional one */
-            if( path[-1] == PC )
-                path--;
-            else
-                *path = PC;
-        }
-    }
-    if( dir != NULL ) {
-        if( *dir != '\0' ) {
-            /*  if dir does not start with a '/' and we had a node then
-                    stick in a separator
-            */
-            if( (*dir != PC) && (*path == PC) ) path++;
-
-            strcpy( path, dir );
-            path = strchr( path, '\0' );
-
-            /* if dir did not end in '/' then put in a provisional one */
-            if( path[-1] == PC )
-                path--;
-            else
-                *path = PC;
-        }
-    }
-
-    if( fname != NULL ) {
-        if( (*fname != PC) && (*path == PC) ) path++;
-
-        strcpy( path, fname );
-        path = strchr( path, '\0' );
-
-    } else {
-        if( *path == PC ) path++;
-    }
-    if( ext != NULL ) {
-        if( *ext != '\0' ) {
-            if( *ext != '.' )  *path++ = '.';
-            strcpy( path, ext );
-            path = strchr( path, '\0' );
-        }
-    }
-    *path = '\0';
-}
+//FIX ME
+//void _makepath(
+//        char           *path,
+//        const char  *node,
+//        const char  *dir,
+//        const char  *fname,
+//        const char  *ext )
+//{
+//    *path = '\0';
+//
+//    if( node != NULL ) {
+//        if( *node != '\0' ) {
+//            strcpy( path, node );
+//            path = strchr( path, '\0' );
+//
+//            /* if node did not end in '/' then put in a provisional one */
+//            if( path[-1] == PC )
+//                path--;
+//            else
+//                *path = PC;
+//        }
+//    }
+//    if( dir != NULL ) {
+//        if( *dir != '\0' ) {
+//            /*  if dir does not start with a '/' and we had a node then
+//                    stick in a separator
+//            */
+//            if( (*dir != PC) && (*path == PC) ) path++;
+//
+//            strcpy( path, dir );
+//            path = strchr( path, '\0' );
+//
+//            /* if dir did not end in '/' then put in a provisional one */
+//            if( path[-1] == PC )
+//                path--;
+//            else
+//                *path = PC;
+//        }
+//    }
+//
+//    if( fname != NULL ) {
+//        if( (*fname != PC) && (*path == PC) ) path++;
+//
+//        strcpy( path, fname );
+//        path = strchr( path, '\0' );
+//
+//    } else {
+//        if( *path == PC ) path++;
+//    }
+//    if( ext != NULL ) {
+//        if( *ext != '\0' ) {
+//            if( *ext != '.' )  *path++ = '.';
+//            strcpy( path, ext );
+//            path = strchr( path, '\0' );
+//        }
+//    }
+//    *path = '\0';
+//}
 
 #elif defined( __NETWARE__ )
 
@@ -569,54 +569,54 @@ static char pickup( char c, char *pc_of_choice )
     return( c );
 }
 
-extern void _makepath( char *path, const char *volume,
-                const char *dir, const char *fname, const char *ext )
-{
-    char first_pc = '\0';
-
-    if( volume != NULL ) {
-        if( *volume != '\0' ) {
-            do {
-                *path++ = *volume++;
-            } while( *volume != '\0' );
-            if( path[ -1 ] != ':' ) {
-                *path++ = ':';
-            }
-        }
-    }
-    *path = '\0';
-    if( dir != NULL ) {
-        if( *dir != '\0' ) {
-            do {
-                *path++ = pickup( *dir++, &first_pc );
-            } while( *dir != '\0' );
-            /* if no path separator was specified then pick a default */
-            if( first_pc == '\0' ) first_pc = PC;
-            /* if dir did not end in path sep then put in a provisional one */
-            if( path[-1] == first_pc ) {
-                path--;
-            } else {
-                *path = first_pc;
-            }
-        }
-    }
-    /* if no path separator was specified thus far then pick a default */
-    if( first_pc == '\0' ) first_pc = PC;
-    if( fname != NULL ) {
-        if( (pickup( *fname, &first_pc ) != first_pc)
-            && (*path == first_pc) ) path++;
-        while( *fname != '\0' ) *path++ = pickup( *fname++, &first_pc );
-    } else {
-        if( *path == first_pc ) path++;
-    }
-    if( ext != NULL ) {
-        if( *ext != '\0' ) {
-            if( *ext != '.' )  *path++ = '.';
-            while( *ext != '\0' ) *path++ = *ext++;
-        }
-    }
-    *path = '\0';
-}
+//extern void _makepath( char *path, const char *volume,
+//                const char *dir, const char *fname, const char *ext )
+//{
+//    char first_pc = '\0';
+//
+//    if( volume != NULL ) {
+//        if( *volume != '\0' ) {
+//            do {
+//                *path++ = *volume++;
+//            } while( *volume != '\0' );
+//            if( path[ -1 ] != ':' ) {
+//                *path++ = ':';
+//            }
+//        }
+//    }
+//    *path = '\0';
+//    if( dir != NULL ) {
+//        if( *dir != '\0' ) {
+//            do {
+//                *path++ = pickup( *dir++, &first_pc );
+//            } while( *dir != '\0' );
+//            /* if no path separator was specified then pick a default */
+//            if( first_pc == '\0' ) first_pc = PC;
+//            /* if dir did not end in path sep then put in a provisional one */
+//            if( path[-1] == first_pc ) {
+//                path--;
+//            } else {
+//                *path = first_pc;
+//            }
+//        }
+//    }
+//    /* if no path separator was specified thus far then pick a default */
+//    if( first_pc == '\0' ) first_pc = PC;
+//    if( fname != NULL ) {
+//        if( (pickup( *fname, &first_pc ) != first_pc)
+//            && (*path == first_pc) ) path++;
+//        while( *fname != '\0' ) *path++ = pickup( *fname++, &first_pc );
+//    } else {
+//        if( *path == first_pc ) path++;
+//    }
+//    if( ext != NULL ) {
+//        if( *ext != '\0' ) {
+//            if( *ext != '.' )  *path++ = '.';
+//            while( *ext != '\0' ) *path++ = *ext++;
+//        }
+//    }
+//    *path = '\0';
+//}
 
 #else
 
@@ -636,71 +636,71 @@ static unsigned pickup( unsigned c, unsigned *pc_of_choice )
 
 /* create full MS-DOS path name from the components */
 //FIX ME
-void _makepath( char *path, const char *drive,
-                const char *dir, const char *fname, const char *ext )
-{
-    //unsigned            first_pc = '\0';
-    //char *              pathstart = path;
-    //unsigned            ch;
-
-    //if( drive != NULL ) {
-    //    if( *drive != '\0' ) {
-    //        if ((*drive == '\\') && (drive[1] == '\\')) {
-    //            strcpy(path, drive);
-    //            path += strlen(drive);
-    //        } else {
-    //            *path++ = *drive;                               /* OK for MBCS */
-    //            *path++ = ':';
-    //        }
-    //    }
-    //}
-    //*path = '\0';
-    //if( dir != NULL ) {
-    //    if( *dir != '\0' ) {
-    //        do {
-    //                ch = pickup( _mbsnextc(dir), &first_pc );
-    //                //FIX ME _mbvtop( ch, path );
-    //                path[_mbclen(path)] = '\0';
-    //                path = _mbsinc( path );
-    //                dir = _mbsinc( dir );
-    //        } while( *dir != '\0' );
-    //        /* if no path separator was specified then pick a default */
-    //        if( first_pc == '\0' ) first_pc = PC;
-    //        /* if dir did not end in '/' then put in a provisional one */
-    //            if( (_mbsdec(pathstart,path)) == first_pc )
-    //                path--;
-    //            else
-    //                *path = first_pc;
-    //    }
-    //}
-
-    ///* if no path separator was specified thus far then pick a default */
-    //if( first_pc == '\0' ) first_pc = PC;
-    //if( fname != NULL ) {
-    //        ch = _mbsnextc( fname );
-    //        if( pickup(ch,&first_pc) != first_pc  &&  *path == first_pc )
-    //            path++;
-
-    //    while (*fname != '\0')
-    //    {
-    //    //do {
-    //            ch = pickup( _mbsnextc(fname), &first_pc );
-    //            _mbvtop( ch, path );
-    //            path[_mbclen(path)] = '\0';
-    //            path = _mbsinc( path );
-    //            fname = _mbsinc( fname );
-    //    } //while( *fname != '\0' );
-    //} else {
-    //    if( *path == first_pc ) path++;
-    //}
-    //if( ext != NULL ) {
-    //    if( *ext != '\0' ) {
-    //        if( *ext != '.' )  *path++ = '.';
-    //        while( *ext != '\0' ) *path++ = *ext++;     /* OK for MBCS */
-    //    }
-    //}
-    //*path = '\0';
-}
+//void _makepath( char *path, const char *drive,
+//                const char *dir, const char *fname, const char *ext )
+//{
+//    //unsigned            first_pc = '\0';
+//    //char *              pathstart = path;
+//    //unsigned            ch;
+//
+//    //if( drive != NULL ) {
+//    //    if( *drive != '\0' ) {
+//    //        if ((*drive == '\\') && (drive[1] == '\\')) {
+//    //            strcpy(path, drive);
+//    //            path += strlen(drive);
+//    //        } else {
+//    //            *path++ = *drive;                               /* OK for MBCS */
+//    //            *path++ = ':';
+//    //        }
+//    //    }
+//    //}
+//    //*path = '\0';
+//    //if( dir != NULL ) {
+//    //    if( *dir != '\0' ) {
+//    //        do {
+//    //                ch = pickup( _mbsnextc(dir), &first_pc );
+//    //                //FIX ME _mbvtop( ch, path );
+//    //                path[_mbclen(path)] = '\0';
+//    //                path = _mbsinc( path );
+//    //                dir = _mbsinc( dir );
+//    //        } while( *dir != '\0' );
+//    //        /* if no path separator was specified then pick a default */
+//    //        if( first_pc == '\0' ) first_pc = PC;
+//    //        /* if dir did not end in '/' then put in a provisional one */
+//    //            if( (_mbsdec(pathstart,path)) == first_pc )
+//    //                path--;
+//    //            else
+//    //                *path = first_pc;
+//    //    }
+//    //}
+//
+//    ///* if no path separator was specified thus far then pick a default */
+//    //if( first_pc == '\0' ) first_pc = PC;
+//    //if( fname != NULL ) {
+//    //        ch = _mbsnextc( fname );
+//    //        if( pickup(ch,&first_pc) != first_pc  &&  *path == first_pc )
+//    //            path++;
+//
+//    //    while (*fname != '\0')
+//    //    {
+//    //    //do {
+//    //            ch = pickup( _mbsnextc(fname), &first_pc );
+//    //            _mbvtop( ch, path );
+//    //            path[_mbclen(path)] = '\0';
+//    //            path = _mbsinc( path );
+//    //            fname = _mbsinc( fname );
+//    //    } //while( *fname != '\0' );
+//    //} else {
+//    //    if( *path == first_pc ) path++;
+//    //}
+//    //if( ext != NULL ) {
+//    //    if( *ext != '\0' ) {
+//    //        if( *ext != '.' )  *path++ = '.';
+//    //        while( *ext != '\0' ) *path++ = *ext++;     /* OK for MBCS */
+//    //    }
+//    //}
+//    //*path = '\0';
+//}
 #endif
 
 /****************************************************************************
