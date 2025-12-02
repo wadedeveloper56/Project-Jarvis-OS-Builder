@@ -8,8 +8,7 @@
 *
 ****************************************************************************/
 
-#include <signal.h>
-
+#include "pch.h"
 #include "globals.h"
 #include "msgtext.h"
 #include "cmdline.h"

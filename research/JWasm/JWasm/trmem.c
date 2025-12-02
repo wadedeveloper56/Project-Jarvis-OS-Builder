@@ -27,18 +27,7 @@
 * Description:  Memory tracker - included only if TRMEM was set.
 *
 ****************************************************************************/
-
-
-#include <stdarg.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <ctype.h>
-
-#if defined( _M_IX86 ) && defined(__WATCOMC__)
-#include <i86.h>
-#endif
-
+#include "pch.h"
 #include "trmem.h"
 
 typedef unsigned long   uint_32;

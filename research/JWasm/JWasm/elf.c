@@ -7,10 +7,7 @@
 * Description:  ELF output routines
 *
 ****************************************************************************/
-
-#include <ctype.h>
-#include <time.h>
-
+#include "pch.h"
 #include "globals.h"
 #include "memalloc.h"
 #include "parser.h"

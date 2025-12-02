@@ -27,9 +27,7 @@
 * Description:  Processing of segment and group related directives:
 *               - SEGMENT, ENDS, GROUP
 ****************************************************************************/
-
-#include <ctype.h>
-
+#include "pch.h"
 #include "globals.h"
 #include "memalloc.h"
 #include "parser.h"

@@ -34,9 +34,7 @@
        80-bit extended double.
     Math operation is on 96-bit wide operands (mantisa).
 */
-
-#include <ctype.h>
-
+#include "pch.h"
 #include "globals.h"
 #include "tbyte.h"
 

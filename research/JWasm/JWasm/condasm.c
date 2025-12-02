@@ -37,9 +37,7 @@
 *               .ERR1, .ERR2
 ****************************************************************************/
 
-
-#include <ctype.h>
-
+#include "pch.h"
 #include "globals.h"
 #include "parser.h"
 #include "condasm.h"

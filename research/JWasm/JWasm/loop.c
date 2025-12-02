@@ -7,9 +7,7 @@
 * Description:  Implements FOR/IRP, FORC/IRPC, REPEAT/REPT, WHILE
 *
 ****************************************************************************/
-
-#include <ctype.h>
-
+#include "pch.h"
 #include "globals.h"
 #include "memalloc.h"
 #include "parser.h"

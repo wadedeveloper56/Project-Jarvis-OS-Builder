@@ -27,7 +27,7 @@
 * Description:  handles fixups
 *
 ****************************************************************************/
-
+#include "pch.h"
 #include "globals.h"
 #include "memalloc.h"
 #include "parser.h"

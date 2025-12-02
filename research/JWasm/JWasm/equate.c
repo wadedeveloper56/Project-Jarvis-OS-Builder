@@ -7,9 +7,7 @@
 * Description:  handles EQU and '=' directives.
 *
 ****************************************************************************/
-
-#include <ctype.h>
-
+#include "pch.h"
 #include "globals.h"
 #include "memalloc.h"
 #include "parser.h"

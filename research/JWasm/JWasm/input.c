@@ -27,10 +27,7 @@
 * Description:  processing file/macro input data.
 *
 ****************************************************************************/
-
-#include <ctype.h>
-//#include <stdarg.h> /* v2.12: removed - was necessary for _splitpath()/_makepath() */
-
+#include "pch.h"
 #include "globals.h"
 #include "memalloc.h"
 #include "parser.h"

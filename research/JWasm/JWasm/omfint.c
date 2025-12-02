@@ -27,9 +27,7 @@
 * Description:  OMF low-level output routines.
 *
 ****************************************************************************/
-
-#include <stddef.h>
-
+#include "pch.h"
 #include "globals.h"
 #include "omfint.h"
 #include "omfspec.h"

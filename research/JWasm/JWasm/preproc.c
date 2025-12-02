@@ -7,10 +7,7 @@
 * Description:  preprocessor
 *
 ****************************************************************************/
-
-#include <ctype.h>
-#include <stdarg.h>
-
+#include "pch.h"
 #include "globals.h"
 #include "memalloc.h"
 #include "parser.h"

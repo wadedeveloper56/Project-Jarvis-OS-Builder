@@ -17,9 +17,7 @@
 * SegOrderDirective()     .DOSSEG, .SEQ, .ALPHA
 *
 ****************************************************************************/
-
-#include <ctype.h>
-
+#include "pch.h"
 #include "globals.h"
 #include "memalloc.h"
 #include "parser.h"

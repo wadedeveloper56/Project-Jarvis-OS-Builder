@@ -27,9 +27,7 @@
 * Description:  handle OMF fixups
 *
 ****************************************************************************/
-
-#include <stddef.h>
-
+#include "pch.h"
 #include "globals.h"
 #include "parser.h"
 #include "segment.h"

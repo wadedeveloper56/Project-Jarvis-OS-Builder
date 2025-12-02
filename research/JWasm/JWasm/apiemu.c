@@ -9,7 +9,7 @@
 *               OW:      CharUpperA()
 *
 ****************************************************************************/
-
+#include "pch.h"
 #if defined(__UNIX__)
 
 /* v2.12: _splitpath()/_makepath() removed */

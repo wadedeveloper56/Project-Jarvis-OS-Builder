@@ -7,13 +7,10 @@
 * Description:  processes directive .SAFESEH
 *
 ****************************************************************************/
-
-#include <ctype.h>
-
+#include "pch.h"
 #include "globals.h"
 #include "memalloc.h"
 #include "parser.h"
-
 #include "myassert.h"
 
 #if COFF_SUPPORT

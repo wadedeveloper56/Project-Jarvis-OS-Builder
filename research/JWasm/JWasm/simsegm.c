@@ -7,9 +7,7 @@
 * Description:  Processing simplified segment directives:
 *               - .CODE, .DATA, .DATA?, .CONST, .STACK, .FARDATA, .FARDATA?
 ****************************************************************************/
-
-#include <ctype.h>
-
+#include "pch.h"
 #include "globals.h"
 #include "memalloc.h"
 #include "parser.h"

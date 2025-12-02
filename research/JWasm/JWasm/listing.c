@@ -7,10 +7,7 @@
 * Description:  listing support
 *
 ****************************************************************************/
-
-#include <stdarg.h>
-#include <ctype.h>
-
+#include "pch.h"
 #include "globals.h"
 #include "memalloc.h"
 #include "parser.h"

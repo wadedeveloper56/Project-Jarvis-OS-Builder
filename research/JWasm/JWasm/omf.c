@@ -27,12 +27,7 @@
 * Description:  handle OMF output format.
 *
 ****************************************************************************/
-
-#include <limits.h>
-#include <ctype.h>
-#include <time.h>
-#include <sys/stat.h>
-
+#include "pch.h"
 #include "globals.h"
 #include "memalloc.h"
 #include "parser.h"

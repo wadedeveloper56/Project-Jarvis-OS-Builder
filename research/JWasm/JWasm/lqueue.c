@@ -8,9 +8,7 @@
 *               this queue is used for "generated code".
 *
 ****************************************************************************/
-
-#include <stdarg.h>
-
+#include "pch.h"
 #include "globals.h"
 #include "memalloc.h"
 #include "reswords.h"

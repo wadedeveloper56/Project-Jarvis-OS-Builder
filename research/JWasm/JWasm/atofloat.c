@@ -7,10 +7,7 @@
 * Description:  string to float conversion
 *
 ****************************************************************************/
-
-#include <float.h>
-#include <math.h>
-
+#include "pch.h"
 #include "globals.h"
 #include "tbyte.h"
 #include "atofloat.h"

@@ -13,9 +13,7 @@
 *               ZERO?, CARRY?, SIGN?, PARITY?, OVERFLOW?
 *
 ****************************************************************************/
-
-#include <ctype.h>
-
+#include "pch.h"
 #include "globals.h"
 #include "memalloc.h"
 #include "parser.h"

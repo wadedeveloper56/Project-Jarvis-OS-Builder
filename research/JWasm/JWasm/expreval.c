@@ -27,10 +27,7 @@
 * Description:  expression evaluator.
 *
 ****************************************************************************/
-
-#include <stddef.h>
-#include <ctype.h>
-
+#include "pch.h"
 #include "globals.h"
 #include "parser.h"
 #include "reswords.h"

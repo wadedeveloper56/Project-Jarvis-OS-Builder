@@ -27,9 +27,7 @@
 * Description:  implements queue object
 *
 ****************************************************************************/
-
-#include <stddef.h>
-
+#include "pch.h"
 #include "memalloc.h"
 #include "queue.h"
 #include "myassert.h"

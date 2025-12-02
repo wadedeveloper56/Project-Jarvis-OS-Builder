@@ -7,9 +7,7 @@
 * Description:  directives END, .STARTUP and .EXIT
 *
 ****************************************************************************/
-
-#include <ctype.h>
-
+#include "pch.h"
 #include "globals.h"
 #include "memalloc.h"
 #include "parser.h"

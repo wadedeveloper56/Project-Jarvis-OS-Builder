@@ -8,11 +8,7 @@
 *               Used if -bin, -mz or -pe cmdline options were set.
 *
 ****************************************************************************/
-
-#include <stddef.h>
-#include <ctype.h>
-#include <time.h>
-
+#include "pch.h"
 #include "globals.h"
 #include "memalloc.h"
 #include "parser.h"

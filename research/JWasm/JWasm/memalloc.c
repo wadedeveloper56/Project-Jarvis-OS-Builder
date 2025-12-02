@@ -7,11 +7,7 @@
 * Description:  Memory allocation routines.
 *
 ****************************************************************************/
-
-#if defined(__UNIX__) && ( defined(__GNUC__) || defined(__TINYC__) )
-    #include <sys/mman.h>
-#endif
-
+#include "pch.h"
 #include "globals.h"
 #include "memalloc.h"
 

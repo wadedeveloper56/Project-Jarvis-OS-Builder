@@ -18,6 +18,9 @@
     <ClCompile Include="main.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="H\pch.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="H\assume.h">
@@ -222,6 +225,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="H\win64seh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="H\pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

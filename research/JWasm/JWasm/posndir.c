@@ -27,7 +27,7 @@
 * Description:  ALIGN, EVEN, ORG directives
 *
 ****************************************************************************/
-
+#include "pch.h"
 #include "globals.h"
 #include "parser.h"
 #include "segment.h"

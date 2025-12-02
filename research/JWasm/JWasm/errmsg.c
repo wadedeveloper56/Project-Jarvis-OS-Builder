@@ -27,11 +27,7 @@
 * Description:  Diagnostics routines: (fatal) errors, warnings, notes
 *
 ****************************************************************************/
-
-#include <stdarg.h>
-#include <ctype.h>
-#include <setjmp.h>
-
+#include "pch.h"
 #include "globals.h"
 #include "memalloc.h"
 #include "parser.h"
