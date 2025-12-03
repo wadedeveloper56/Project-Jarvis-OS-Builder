@@ -1,0 +1,20 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Folder Name="/JWasm Prrojects/">
+    <Project Path="JWasm/JWasm.vcxproj" Id="633eb358-5b2b-405a-8000-48622145a995" />
+    <Project Path="JWasmLib/JWasmLib.vcxproj" Id="fd8eeaf5-d96a-4978-9cb3-d573a9c0d4b1" />
+  </Folder>
+  <Folder Name="/JWlib projects/">
+    <Project Path="JWlib/JWlib.vcxproj" Id="1235d032-dfee-4eda-b634-9be66a8a9778" />
+  </Folder>
+  <Folder Name="/JWlink Projects/">
+    <Project Path="dwarf/dwarf.vcxproj" Id="b718b7e9-c715-40a0-beda-8d1b72585155" />
+    <Project Path="JWlink/JWlink.vcxproj" Id="0d43610f-ca55-42b2-aebb-507e513af19f" />
+    <Project Path="lib_misc/lib_misc.vcxproj" Id="3cc103a7-2f19-4ee3-880b-6935d35aa0c6" />
+    <Project Path="orl/orl.vcxproj" Id="6d6ea67c-cf31-4c1c-a102-d3fc81329a21" />
+    <Project Path="sdk/sdk.vcxproj" Id="3f25a4ee-aad2-4be8-af08-4ecbb66a6084" />
+  </Folder>
+</Solution>
