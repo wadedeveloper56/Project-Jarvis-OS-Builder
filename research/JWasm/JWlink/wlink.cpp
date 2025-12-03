@@ -1,5 +1,9 @@
 #include "pch.h"
 #include "globals.h"
+#include "mem.h"
+#include "ntio.h"
+#include "wlnkmsg.h"
+#include "objnode.h"
 
 void InitSubSystems(void)
 {
@@ -7,11 +11,11 @@ void InitSubSystems(void)
     LnkFilesInit();
     InitMsg();
     InitNodes();
-    InitTokBuff();
-    InitSpillFile();
-    InitSym();
-    InitObjORL();
-    InitCmdFile();
+    //InitTokBuff();
+    //InitSpillFile();
+    //InitSym();
+    //InitObjORL();
+    //InitCmdFile();
 }
 
 void LinkMainLine(char* cmds)
@@ -20,9 +24,9 @@ void LinkMainLine(char* cmds)
 
 void FiniSubSystems(void)
 {
-    FiniLinkStruct();
+    //FiniLinkStruct();
     FiniMsg();
-    FiniSym();
+    //FiniSym();
     LnkMemFini();
 }
 

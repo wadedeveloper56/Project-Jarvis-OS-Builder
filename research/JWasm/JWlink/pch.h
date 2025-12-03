@@ -11,9 +11,9 @@
 #include <stdarg.h>
 #include <setjmp.h>
 #include <sys/stat.h>
-#include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
+#include <io.h>
+#include <fcntl.h>
 
 #pragma warning(disable:4267)
 #pragma warning(disable:4244)
