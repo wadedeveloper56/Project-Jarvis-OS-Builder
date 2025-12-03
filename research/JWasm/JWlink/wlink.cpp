@@ -1,6 +1,37 @@
 #include "pch.h"
+#include "globals.h"
 
-int main(int argc, char* argv[])
+void InitSubSystems(void)
 {
-	return 0;
+    LnkMemInit();
+    LnkFilesInit();
+    InitMsg();
+    InitNodes();
+    InitTokBuff();
+    InitSpillFile();
+    InitSym();
+    InitObjORL();
+    InitCmdFile();
+}
+
+void LinkMainLine(char* cmds)
+{
+}
+
+void FiniSubSystems(void)
+{
+    FiniLinkStruct();
+    FiniMsg();
+    FiniSym();
+    LnkMemFini();
+}
+
+int main(int argc, char** argv)
+{
+    _argv = argv;
+    _argc = argc;
+    InitSubSystems();
+    LinkMainLine(NULL);
+    FiniSubSystems();
+    return((LinkState & LINK_ERROR) ? 1 : 0);
 }
