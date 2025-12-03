@@ -60,6 +60,12 @@
     <ClInclude Include="objnode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="objio.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="spillio.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -84,6 +90,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="objnode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="objio.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="spillio.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

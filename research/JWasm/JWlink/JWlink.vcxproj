@@ -176,9 +176,11 @@
     <ClInclude Include="mem.h" />
     <ClInclude Include="msg.h" />
     <ClInclude Include="ntio.h" />
+    <ClInclude Include="objio.h" />
     <ClInclude Include="objnode.h" />
     <ClInclude Include="objstruct.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="spillio.h" />
     <ClInclude Include="standard.h" />
     <ClInclude Include="syms.h" />
     <ClInclude Include="taddr.h" />
@@ -190,6 +192,7 @@
     <ClCompile Include="mem.cpp" />
     <ClCompile Include="msg.cpp" />
     <ClCompile Include="ntio.cpp" />
+    <ClCompile Include="objio.cpp" />
     <ClCompile Include="objnode.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -197,6 +200,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="spillio.cpp" />
     <ClCompile Include="wlink.cpp" />
     <ClCompile Include="wlinkmsg.cpp" />
   </ItemGroup>

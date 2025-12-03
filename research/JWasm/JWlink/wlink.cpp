@@ -4,6 +4,8 @@
 #include "ntio.h"
 #include "wlnkmsg.h"
 #include "objnode.h"
+#include "objio.h"
+#include "spillio.h"
 
 void InitSubSystems(void)
 {
@@ -11,8 +13,8 @@ void InitSubSystems(void)
     LnkFilesInit();
     InitMsg();
     InitNodes();
-    //InitTokBuff();
-    //InitSpillFile();
+    InitTokBuff();
+    InitSpillFile();
     //InitSym();
     //InitObjORL();
     //InitCmdFile();

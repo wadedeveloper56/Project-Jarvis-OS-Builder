@@ -1,6 +1,7 @@
 #pragma once
 
 typedef int FileHandle;
+#define NIL_HANDLE      ((FileHandle)-1)
 
 FileHandle OpenFile(const char* filename, int oflag, int pmode);
 void CloseFile(FileHandle handle);

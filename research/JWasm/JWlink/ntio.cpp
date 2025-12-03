@@ -13,3 +13,11 @@ void LnkFilesInit(void)
     setFileMode(_fileno(stdin), _O_BINARY);
     setFileMode(_fileno(stdout), _O_BINARY);
 }
+
+void SetBreak(void)
+{
+}
+
+void RestoreBreak(void)
+{
+}
