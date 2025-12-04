@@ -8,6 +8,7 @@
 #include "spillio.h"
 #include "lsymtab.h"
 #include "objorl.h"
+#include "command.h"
 
 void InitSubSystems(void)
 {
@@ -19,7 +20,7 @@ void InitSubSystems(void)
     InitSpillFile();
     InitSym();
     InitObjORL();
-    //InitCmdFile();
+    InitCmdFile();
 }
 
 void LinkMainLine(char* cmds)

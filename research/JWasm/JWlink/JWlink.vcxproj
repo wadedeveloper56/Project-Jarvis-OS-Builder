@@ -170,6 +170,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="alloc.h" />
+    <ClInclude Include="command.h" />
     <ClInclude Include="globals.h" />
     <ClInclude Include="hash.h" />
     <ClInclude Include="link.h" />
@@ -191,6 +192,7 @@
     <ClInclude Include="wlnkmsg.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="cmdline.cpp" />
     <ClCompile Include="globals.cpp" />
     <ClCompile Include="lsymtab.cpp" />
     <ClCompile Include="mem.cpp" />
