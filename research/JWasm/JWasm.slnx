@@ -6,4 +6,5 @@
   <Project Path="File/File.vcxproj" />
   <Project Path="JWlink/JWlink.vcxproj" />
   <Project Path="Memory/Memory.vcxproj" />
+  <Project Path="orl/orl.vcxproj" />
 </Solution>

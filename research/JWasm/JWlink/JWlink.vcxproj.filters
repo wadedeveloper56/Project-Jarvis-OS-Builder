@@ -66,6 +66,12 @@
     <ClInclude Include="spillio.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="lsymtab.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="objorl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -96,6 +102,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="spillio.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lsymtab.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="objorl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
