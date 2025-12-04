@@ -175,6 +175,7 @@
     <ClInclude Include="link.h" />
     <ClInclude Include="lsymtab.h" />
     <ClInclude Include="mem.h" />
+    <ClInclude Include="mixcache.h" />
     <ClInclude Include="msg.h" />
     <ClInclude Include="ntio.h" />
     <ClInclude Include="objio.h" />
@@ -193,6 +194,7 @@
     <ClCompile Include="globals.cpp" />
     <ClCompile Include="lsymtab.cpp" />
     <ClCompile Include="mem.cpp" />
+    <ClCompile Include="mixcache.cpp" />
     <ClCompile Include="msg.cpp" />
     <ClCompile Include="ntio.cpp" />
     <ClCompile Include="objio.cpp" />

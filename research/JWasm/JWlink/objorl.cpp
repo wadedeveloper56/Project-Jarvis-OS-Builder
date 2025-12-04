@@ -4,6 +4,8 @@
 #include "Memory.h"
 #include "orl.h"
 #include "objstruct.h"
+#include "alloc.h"
+#include "mixcache.h"
 
 static long ORLSeek(void* _list, long pos, int where);
 static void* ORLRead(void* _list, size_t len);
@@ -56,5 +58,15 @@ static long ORLSeek(void* _list, long pos, int where)
 
 static void* ORLRead(void* _list, size_t len)
 {
-    return nullptr;
+    file_list* list = (file_list*)_list;
+    void* result;
+    readcache* cache;
+
+    result = CachePermRead(list, ORLFilePos, len);
+    ORLFilePos += len;
+    _ChkAlloc(readcache * ,cache, sizeof(readcache));
+    cache->next = ReadCacheList;
+    ReadCacheList = cache;
+    cache->data = result;
+    return(result);
 }
