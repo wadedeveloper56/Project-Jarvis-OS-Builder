@@ -198,6 +198,7 @@
     <ClCompile Include="coffentr.cpp" />
     <ClCompile Include="c\orlentry.cpp" />
     <ClCompile Include="elfentr.cpp" />
+    <ClCompile Include="elfflhn.cpp" />
     <ClCompile Include="omfentr.cpp" />
     <ClCompile Include="orlflhnd.cpp" />
   </ItemGroup>
