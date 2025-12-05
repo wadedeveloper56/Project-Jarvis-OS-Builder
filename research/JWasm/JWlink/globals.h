@@ -25,3 +25,4 @@ extern linkflag       LinkFlags;
 extern FileHandle       MapFile;        /* handle of map file                   */
 extern char* MapFName;       /* name of map file                     */
 extern mapflag        MapFlags;       /* flags dealing with the map file */
+extern outfilelist* OutFiles;       // list of files which will be written to

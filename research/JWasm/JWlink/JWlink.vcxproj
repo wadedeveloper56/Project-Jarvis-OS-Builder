@@ -178,6 +178,7 @@
     <ClInclude Include="hash.h" />
     <ClInclude Include="link.h" />
     <ClInclude Include="linkutil.h" />
+    <ClInclude Include="loadfile.h" />
     <ClInclude Include="lsymtab.h" />
     <ClInclude Include="mapio.h" />
     <ClInclude Include="mem.h" />
@@ -204,6 +205,7 @@
     <ClCompile Include="Debug.cpp" />
     <ClCompile Include="globals.cpp" />
     <ClCompile Include="linkutil.cpp" />
+    <ClCompile Include="loadFile.cpp" />
     <ClCompile Include="lsymtab.cpp" />
     <ClCompile Include="mapio.cpp" />
     <ClCompile Include="mem.cpp" />

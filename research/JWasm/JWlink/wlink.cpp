@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "globals.h"
+#include "alloc.h"
 #include "mem.h"
 #include "ntio.h"
 #include "wlnkmsg.h"
@@ -11,6 +12,7 @@
 #include "command.h"
 #include "objfree.h"
 #include "linkutil.h"
+#include "loadfile.h"
 
 static char* ArgSave;
 
@@ -37,8 +39,8 @@ static void CleanSubSystems(void)
 		QClose(MapFile, MapFName);
 		MapFile = NIL_HANDLE;
 	}
-	//FreeOutFiles();
-	//_LnkFree(MapFName);
+	FreeOutFiles();
+	_LnkFree(MapFName);
 	//BurnSystemList();
 	//FreeList(LibPath);
 	//CloseSpillFile();

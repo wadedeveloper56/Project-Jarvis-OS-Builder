@@ -21,3 +21,4 @@ linkflag       LinkFlags;      /* flags to indicate presence of parms  */
 FileHandle       MapFile;
 char* MapFName;       /* name of map file                     */
 mapflag        MapFlags;       /* flags dealing with the map file */
+outfilelist* OutFiles;       // list of files which will be written to
