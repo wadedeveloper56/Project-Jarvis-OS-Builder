@@ -14,3 +14,4 @@ typedef struct nodearray {
 } nodearray;
 
 void InitNodes(void);
+void BurnNodes(void);

@@ -25,3 +25,6 @@ typedef unsigned long stateflag;
 #define DOSSEG_FLAG             0x00200000
 #define SPEC_ORDER_FLAG         0x00400000
 #define FMT_SEEN_64_BIT         0x00800000      /* jwlink */
+
+#define CODE_SEGMENT    1
+#define DATA_SEGMENT    2

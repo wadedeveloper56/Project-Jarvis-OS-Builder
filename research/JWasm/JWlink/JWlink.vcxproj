@@ -170,15 +170,20 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="alloc.h" />
+    <ClInclude Include="banner.h" />
     <ClInclude Include="command.h" />
+    <ClInclude Include="debug.h" />
+    <ClInclude Include="formats.h" />
     <ClInclude Include="globals.h" />
     <ClInclude Include="hash.h" />
     <ClInclude Include="link.h" />
+    <ClInclude Include="linkutil.h" />
     <ClInclude Include="lsymtab.h" />
     <ClInclude Include="mem.h" />
     <ClInclude Include="mixcache.h" />
     <ClInclude Include="msg.h" />
     <ClInclude Include="ntio.h" />
+    <ClInclude Include="objfree.h" />
     <ClInclude Include="objio.h" />
     <ClInclude Include="objnode.h" />
     <ClInclude Include="objorl.h" />
@@ -189,16 +194,20 @@
     <ClInclude Include="syms.h" />
     <ClInclude Include="taddr.h" />
     <ClInclude Include="types.h" />
+    <ClInclude Include="wlmsgs.h" />
     <ClInclude Include="wlnkmsg.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cmdline.cpp" />
+    <ClCompile Include="Debug.cpp" />
     <ClCompile Include="globals.cpp" />
+    <ClCompile Include="linkutil.cpp" />
     <ClCompile Include="lsymtab.cpp" />
     <ClCompile Include="mem.cpp" />
     <ClCompile Include="mixcache.cpp" />
     <ClCompile Include="msg.cpp" />
     <ClCompile Include="ntio.cpp" />
+    <ClCompile Include="objfree.cpp" />
     <ClCompile Include="objio.cpp" />
     <ClCompile Include="objnode.cpp" />
     <ClCompile Include="objorl.cpp" />
@@ -222,6 +231,11 @@
     <ProjectReference Include="..\orl\orl.vcxproj">
       <Project>{6d6ea67c-cf31-4c1c-a102-d3fc81329a21}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="lnkerror.msg" />
+    <None Include="rc.msg" />
+    <None Include="wlink.msg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

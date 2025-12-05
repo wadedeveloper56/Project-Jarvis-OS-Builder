@@ -31,3 +31,24 @@ int FileAccess(const char* path, int mode)
 {
 	return _access(path, mode);
 }
+
+__int64 FileTell(FileHandle handle)
+{
+	return _telli64(handle);
+}
+
+__int64 FileSeek(FileHandle handle, __int64 offset, int origin)
+{
+	return _lseeki64(handle, offset, origin);
+}
+
+int FileRemove(const char* path)
+{
+	return remove(path);
+}
+
+int FileStat(FileHandle handle, struct _stati64* buffer)
+{
+	return _fstati64(handle, buffer);
+}
+

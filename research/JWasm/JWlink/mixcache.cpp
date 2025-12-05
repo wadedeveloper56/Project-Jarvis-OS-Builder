@@ -14,3 +14,7 @@ void* CachePermRead(file_list* list, unsigned long pos, unsigned len)
 {
 	return nullptr;
 }
+
+void CacheFini(void)
+{
+}

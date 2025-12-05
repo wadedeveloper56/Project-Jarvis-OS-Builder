@@ -9,6 +9,7 @@
 #include "lsymtab.h"
 #include "objorl.h"
 #include "command.h"
+#include "objfree.h"
 
 void InitSubSystems(void)
 {
@@ -29,7 +30,7 @@ void LinkMainLine(char* cmds)
 
 void FiniSubSystems(void)
 {
-    //FiniLinkStruct();
+    FiniLinkStruct();
     FiniMsg();
     FiniSym();
     LnkMemFini();
