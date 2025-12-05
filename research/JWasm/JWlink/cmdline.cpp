@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "command.h"
 #include "alloc.h"
+#include "linkutil.h"
 
 tok             Token;
 commandflag     CmdFlags;
@@ -54,4 +55,14 @@ static void CleanSystemList(bool check)
 void BurnSystemList(void)
 {
     CleanSystemList(false);
+}
+
+void FreePaths(void)
+{
+    FreeList(Path);
+    Path = NULL;
+    if (Name != NULL) {
+        _LnkFree(Name);
+        Name = NULL;
+    }
 }

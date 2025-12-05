@@ -46,7 +46,7 @@ static void CleanSubSystems(void)
 	FreeList(LibPath);
 	CloseSpillFile();
 	CleanTraces();
-	//FreePaths();
+	FreePaths();
 	//FreeUndefs();
 	//FreeLocalImports();
 	//CleanLoadFile();
