@@ -191,6 +191,7 @@
     <ClInclude Include="objorl.h" />
     <ClInclude Include="objstruct.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="ring.h" />
     <ClInclude Include="spillio.h" />
     <ClInclude Include="standard.h" />
     <ClInclude Include="syms.h" />
@@ -223,6 +224,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="ring.cpp" />
     <ClCompile Include="spillio.cpp" />
     <ClCompile Include="symtrace.cpp" />
     <ClCompile Include="wlink.cpp" />

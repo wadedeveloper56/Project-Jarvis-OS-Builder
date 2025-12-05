@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "globals.h"
 #include "ntio.h"
+#include "ring.h"
 
 typedef struct symrecinfo {
     struct symrecinfo* next;
@@ -57,3 +58,8 @@ void WriteMapNL(unsigned count)
     }
 }
 
+void FreeUndefs(void)
+{
+    RingFree(&SymTraceList);
+    RingFree(&UndefList);
+}

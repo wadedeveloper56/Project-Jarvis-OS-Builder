@@ -14,6 +14,7 @@
 #include "linkutil.h"
 #include "loadfile.h"
 #include "symtrace.h"
+#include "mapio.h"
 
 static char* ArgSave;
 
@@ -47,7 +48,7 @@ static void CleanSubSystems(void)
 	CloseSpillFile();
 	CleanTraces();
 	FreePaths();
-	//FreeUndefs();
+	FreeUndefs();
 	//FreeLocalImports();
 	//CleanLoadFile();
 	//CleanLinkStruct();
