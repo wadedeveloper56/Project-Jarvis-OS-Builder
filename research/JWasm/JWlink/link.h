@@ -1,6 +1,41 @@
 #pragma once
 
 typedef unsigned long stateflag;
+typedef unsigned long linkflag;
+
+#define DWARF_DBI_FLAG  0x00000001UL    // set if making DWARF debug info
+#define STK_SIZE_FLAG   0x00000002UL
+#define GOT_CHGD_FILES  0x00000004UL
+#define TRACE_FLAG      0x00000008UL
+#define __UNUSED_FLAG_0 0x00000010UL
+#define CV_DBI_FLAG     0x00000020UL
+#define UNDEFS_ARE_OK   0x00000040UL
+#define REDEFS_OK       0x00000080UL
+#define QUIET_FLAG      0x00000100UL
+#define PACKCODE_FLAG   0x00000200UL    // set if packcode specified
+#define VF_REMOVAL      0x00000400UL
+#define NOVELL_DBI_FLAG 0x00000800UL    // set if generating novell debug info
+#define PACKDATA_FLAG   0x00001000UL
+#define CASE_FLAG       0x00002000UL    // set for case sensitive operation
+#define OLD_DBI_FLAG    0x00004000UL    // set if making WATCOM debug info
+#define SHOW_DEAD       0x00008000UL
+#define STRIP_CODE      0x00010000UL    // strip dead code.
+#define CVPACK_FLAG     0x00020000UL
+#define MAX_ERRORS_FLAG 0x00040000UL    // there is a max. number of errors.
+#define DONT_UNMANGLE   0x00080000UL    // don't unmangle the names
+#define INC_LINK_FLAG   0x00100000UL
+#define NOCACHE_FLAG    0x00200000UL
+#define CACHE_FLAG      0x00400000UL
+#define FAR_CALLS_FLAG  0x00800000UL    // optimize far calls
+#define __UNUSED_FLAG_8 0x01000000UL
+#define __UNUSED_FLAG_7 0x02000000UL
+#define __UNUSED_FLAG_6 0x04000000UL
+#define __UNUSED_FLAG_5 0x08000000UL
+#define __UNUSED_FLAG_4 0x10000000UL
+#define __UNUSED_FLAG_3 0x20000000UL
+#define __UNUSED_FLAG_2 0x40000000UL
+#define __UNUSED_FLAG_1 0x80000000UL
+
 #define MAKE_RELOCS             0x00000001
 #define SEARCHING_LIBRARIES     0x00000002
 #define LIBRARIES_ADDED         0x00000004
@@ -28,3 +63,13 @@ typedef unsigned long stateflag;
 
 #define CODE_SEGMENT    1
 #define DATA_SEGMENT    2
+
+typedef enum mapflag {
+    MAP_FLAG = 0x0001,
+    MAP_STATICS = 0x0002,       // put statics in the map file
+    MAP_ARTIFICIAL = 0x0004,       // put artificial syms in the map file
+    MAP_SORT = 0x0008,       // sort symbols in the map file
+    MAP_ALPHA = 0x0010,       // sort symbols in alphabetical order
+    MAP_GLOBAL = 0x0020,       // sort symbols globally.
+    MAP_VERBOSE = 0x0040
+} mapflag;

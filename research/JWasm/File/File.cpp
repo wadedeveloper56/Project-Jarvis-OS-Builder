@@ -7,9 +7,9 @@ FileHandle OpenFile(const char* filename, int oflag, int pmode)
 	return _open(filename, oflag, pmode);
 }
 
-void CloseFile(FileHandle handle)
+int CloseFile(FileHandle handle)
 {
-	_close(handle);
+	return _close(handle);
 }
 
 int ReadFile(FileHandle handle, void* const buffer, unsigned const buffer_size)

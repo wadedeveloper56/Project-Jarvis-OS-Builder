@@ -111,3 +111,7 @@ typedef enum {
 } tokcontrol;
 
 void InitCmdFile(void);
+char* GetNextLink(void);
+
+extern tok             Token;
+extern cmdfilelist* CmdFile;

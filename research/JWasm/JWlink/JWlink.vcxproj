@@ -179,6 +179,7 @@
     <ClInclude Include="link.h" />
     <ClInclude Include="linkutil.h" />
     <ClInclude Include="lsymtab.h" />
+    <ClInclude Include="mapio.h" />
     <ClInclude Include="mem.h" />
     <ClInclude Include="mixcache.h" />
     <ClInclude Include="msg.h" />
@@ -199,10 +200,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cmdline.cpp" />
+    <ClCompile Include="cmdutils.cpp" />
     <ClCompile Include="Debug.cpp" />
     <ClCompile Include="globals.cpp" />
     <ClCompile Include="linkutil.cpp" />
     <ClCompile Include="lsymtab.cpp" />
+    <ClCompile Include="mapio.cpp" />
     <ClCompile Include="mem.cpp" />
     <ClCompile Include="mixcache.cpp" />
     <ClCompile Include="msg.cpp" />

@@ -1,6 +1,18 @@
 #include "pch.h"
 #include "objstruct.h"
 #include "globals.h"
+#include "ntio.h"
+
+static void* SpawnStack;
+
+bool TestBit(byte* array, unsigned num)
+{
+    byte        mask;
+
+    mask = 1 << (num % 8);
+    num /= 8;
+    return(*(array + num) & mask);
+}
 
 group_entry* FindGroup(segment seg)
 {
@@ -54,12 +66,46 @@ unsigned_16 blog_32(unsigned_32 value)
     return(log);
 }
 
+void Suicide(void)
+{
+    if (SpawnStack != NULL) {
+#ifdef _WIN64
+        longjmp((_SETJMP_FLOAT128*)SpawnStack, 1);
+#else
+        longjmp((int *)SpawnStack, 1);
+#endif // _WIN64
+
+    }
+}
+
+int Spawn(void (*fn)(void))
+{
+    void* save_env;
+    jmp_buf env;
+    int     status;
+
+    save_env = SpawnStack;
+    SpawnStack = env;
+    status = setjmp(env);
+    if (status == 0) {
+        (*fn)();
+    }
+    SpawnStack = save_env;  /* unwind */
+    return(status);
+}
+
 void WriteStdOut(char* str)
 {
-    //QWrite(STDOUT_HANDLE, str, strlen(str), NULL);
+    QWrite(_fileno(stdout), str, strlen(str), NULL);
 }
 
 void WriteNLStdOut(void)
 {
-    //QWriteNL(STDOUT_HANDLE, NULL);
+    QWriteNL(_fileno(stdout), NULL);
+}
+
+void WriteInfoStdOut(char* str, unsigned level, char* sym)
+{
+    WriteStdOut(str);
+    WriteNLStdOut();
 }

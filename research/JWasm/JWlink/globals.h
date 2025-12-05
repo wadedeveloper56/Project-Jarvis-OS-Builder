@@ -19,3 +19,9 @@ extern group_entry* AbsGroups;     /* pointer to defined absolute groups   */
 extern group_entry* OvlGroup;       /* pointer to group for overlay table   */
 extern group_entry* DataGroup;      /* pointer to DGROUP */
 extern group_entry* IDataGroup;     /* pointer to .idata */
+extern int            RecNum;         /* record number of the obj file        */
+extern mod_entry* CurrMod;
+extern linkflag       LinkFlags;
+extern FileHandle       MapFile;        /* handle of map file                   */
+extern char* MapFName;       /* name of map file                     */
+extern mapflag        MapFlags;       /* flags dealing with the map file */

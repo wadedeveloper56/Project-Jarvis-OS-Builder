@@ -2,15 +2,17 @@
 #include "msg.h"
 #include "types.h"
 #include "taddr.h"
+#include "command.h"
 #include "wlnkmsg.h"
 #include "formats.h"
 #include "globals.h"
 #include "linkutil.h"
 #include "banner.h"
+#include "mapio.h"
+
 #define BAN_VER_STR "1.9" "beta 13"
 #define _WLINK_VERSION_         BAN_VER_STR
-
-bool BannerPrinted;
+#define MSG_ARRAY_SIZE ((MSG_MAX_ERR_MSG_NUM / 8) + 1)
 #undef pick
 #define pick( num, string ) (char*)string
 
@@ -24,6 +26,9 @@ static  char* LocMem;
 static  int             LocRec;
 static  MSG_ARG_LIST    MsgArgInfo;
 static  char* CurrSymName;
+bool BannerPrinted;
+unsigned long   MaxErrors;
+byte MsgFlags[MSG_ARRAY_SIZE];
 
 static int UseArgInfo(void)
 {
@@ -311,3 +316,211 @@ unsigned DoFmtStr(char* buff, unsigned len, char* src, va_list* args)
     *dest = '\0';
     return(dest - buff);
 }
+
+void Locator(char* filename, char* mem, unsigned rec)
+{
+    LocFile = filename;
+    LocMem = mem;
+    LocRec = rec;
+}
+
+static void LocateFile(unsigned num)
+{
+    unsigned    rec;
+
+    if (num & LOC) {
+        if (num & (LOC_REC & ~LOC)) {
+            rec = RecNum;
+        }
+        else {
+            rec = 0;
+        }
+        if (CurrMod == NULL) {
+            if (CmdFile == NULL) {
+                Locator(NULL, NULL, 0);
+            }
+            else {
+                Locator(CmdFile->name, NULL, 0);
+            }
+        }
+        else {
+            Locator(CurrMod->f.source->file->name, CurrMod->name, rec);
+        }
+    }
+}
+
+unsigned CalcMsgNum(unsigned num)
+{
+    unsigned    clazz;
+
+    clazz = (num & CLASS_MSK) >> NUM_SHIFT;
+    clazz = (clazz + 1) / 2;
+    return clazz * 1000 + (num & NUM_MSK);
+}
+
+static void FileOrder(char rc_buff[], int which_file)
+{
+    switch (which_file) {
+        case 1:
+            Msg_Do_Put_Args(rc_buff, &MsgArgInfo, (char*)"s", LocFile);
+            break;
+        case 2:
+            Msg_Do_Put_Args(rc_buff, &MsgArgInfo, (char*)"s", LocMem);
+            break;
+        case 3:
+            Msg_Do_Put_Args(rc_buff, &MsgArgInfo, (char*)"12", LocFile, LocMem);
+            break;
+        case 4:
+            Msg_Do_Put_Args(rc_buff, &MsgArgInfo, (char*)"d", LocRec);
+            break;
+        case 5:
+            Msg_Do_Put_Args(rc_buff, &MsgArgInfo, (char*)"sd", LocFile, LocRec);
+            break;
+        case 6:
+            Msg_Do_Put_Args(rc_buff, &MsgArgInfo, (char*)"sd", LocMem, LocRec);
+            break;
+        case 7:
+            Msg_Do_Put_Args(rc_buff, &MsgArgInfo, (char*)"12d", LocFile, LocMem,
+                LocRec);
+            break;
+    }
+}
+
+void WLPrtBanner(void)
+{
+    char* msg;
+
+    if (!BannerPrinted) {
+        msg = MsgStrings[PRODUCT];
+        WriteInfoStdOut(msg, BANNER, NULL);
+        msg = MsgStrings[COPYRIGHT];
+        WriteInfoStdOut(msg, BANNER, NULL);
+        msg = MsgStrings[TRADEMARK];
+        WriteInfoStdOut(msg, BANNER, NULL);
+        //msg = MsgStrings[ TRADEMARK2 ];
+        //WriteInfoStdOut( msg, BANNER, NULL );
+        BannerPrinted = true;
+    }
+}
+
+static void MessageFini(unsigned num, char* buff, unsigned len, char* prefix, unsigned prefixlen, bool waserror)
+{
+    if (num & OUT_TERM) {
+        if (!(LinkFlags & QUIET_FLAG)) {
+            WLPrtBanner();
+            WriteInfoStdOut(buff, num, CurrSymName);
+        }
+        else if ((num & CLASS_MSK) != (CLASS_MSK & INF)) {
+            WriteInfoStdOut(buff, num, CurrSymName);
+        }
+    }
+    if ((num & OUT_MAP) && (MapFile != NIL_HANDLE)) {
+#if defined( _DLLHOST )
+        BufWrite(prefix, prefixlen);
+#endif
+        BufWrite(buff, len);
+        WriteMapNL(1);
+    }
+    if ((num & CLASS_MSK) == (FTL & ~OUT_MSK)) Suicide();
+    if (waserror && LinkFlags & MAX_ERRORS_FLAG) {
+        MaxErrors--;
+        if (MaxErrors == 0) {
+            LnkMsg(FTL + MSG_TOO_MANY_ERRORS, NULL);
+        }
+    }
+}
+
+void LnkMsg(
+    unsigned    num,    // A message number + control flags
+    char* types, // Conversion qualifiers
+    ...)               // Arguments to interpolate into message
+    /**************************************************
+     * report a linker message
+     *
+     * num   selects a message containing substitutions; both printf and %digit
+     * types is either NULL or the order of interpolated arguments.
+     */
+{
+    va_list     args;
+    int         which_file = 0;
+    unsigned    len;
+    unsigned    prefixlen;
+    unsigned    clazz;
+    bool        waserror;
+    char        rc_buff[RESOURCE_MAX_SIZE];
+    char        buff[MAX_MSG_SIZE];
+    char        prefix[MAX_MSG_SIZE];
+
+    if (!TestBit(MsgFlags, num & NUM_MSK))
+        return;
+    CurrSymName = NULL;
+    LocateFile(num);
+    len = 0;
+    prefixlen = 0;
+    waserror = false;
+    clazz = num & CLASS_MSK;
+    if (clazz == (YELL & CLASS_MSK)) {
+        waserror = true;        /* yells are counted as errors for limits */
+    }
+    else if (clazz >= (MILD_ERR & CLASS_MSK)) {
+        waserror = true;
+        if (clazz >= (ERR & CLASS_MSK)) {
+            LinkState |= LINK_ERROR;
+        }
+    }
+    if (clazz >= (WRN & CLASS_MSK)) {
+        if (clazz == (WRN & CLASS_MSK)) {
+            Msg_Get(MSG_WARNING, rc_buff);
+        }
+        else {
+            Msg_Get(MSG_ERROR, rc_buff);
+        }
+#if !defined( _DLLHOST )
+        len = FmtStr(buff, MAX_MSG_SIZE - len, rc_buff, CalcMsgNum(num));
+#else
+        prefixlen = FmtStr(prefix, MAX_MSG_SIZE, rc_buff, CalcMsgNum(num));
+#endif
+    }
+    if (LocFile != NULL) {
+        which_file += 1;
+    }
+    if (LocMem != NULL) {
+        which_file += 2;
+    }
+    if (LocRec != 0) {
+        which_file += 4;
+    }
+    if (which_file != 0) {
+        if (Token.how == SYSTEM) {
+            Msg_Get(MSG_SYS_BLK, rc_buff);
+            which_file = 1;
+        }
+        else if (Token.how == ENVIRONMENT) {
+            Msg_Get(MSG_ENVIRON, rc_buff);
+            which_file = 1;
+        }
+        else {
+            Msg_Get(MSG_FILE_REC_NAME_0 + which_file - 1, rc_buff);
+        }
+        FileOrder(rc_buff, which_file);
+        len += FmtStr(&buff[len], MAX_MSG_SIZE - len, rc_buff);
+        if (num & LINE) {
+            if (Token.how != SYSTEM && Token.how != ENVIRONMENT) {
+                Msg_Get(MSG_LINE, rc_buff);
+                Msg_Do_Put_Args(rc_buff, &MsgArgInfo, (char*)"d", Token.line);
+                len += FmtStr(&buff[len], MAX_MSG_SIZE - len, rc_buff);
+            }
+        }
+        LocFile = NULL;
+        LocMem = NULL;
+        LocRec = 0;
+    }
+
+    va_start(args, types);
+    Msg_Get(num & NUM_MSK, rc_buff);
+    Msg_Put_Args(rc_buff, &MsgArgInfo, types, &args);
+    va_end(args);
+    len += FmtStr(&buff[len], MAX_MSG_SIZE - len, rc_buff);
+    MessageFini(num, buff, len, prefix, prefixlen, waserror);
+}
+
