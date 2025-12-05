@@ -112,6 +112,7 @@ typedef enum {
 
 void InitCmdFile(void);
 char* GetNextLink(void);
+void BurnSystemList(void);
 
 extern tok             Token;
 extern cmdfilelist* CmdFile;

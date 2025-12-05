@@ -13,6 +13,7 @@
 #include "objfree.h"
 #include "linkutil.h"
 #include "loadfile.h"
+#include "symtrace.h"
 
 static char* ArgSave;
 
@@ -41,10 +42,10 @@ static void CleanSubSystems(void)
 	}
 	FreeOutFiles();
 	_LnkFree(MapFName);
-	//BurnSystemList();
-	//FreeList(LibPath);
-	//CloseSpillFile();
-	//CleanTraces();
+	BurnSystemList();
+	FreeList(LibPath);
+	CloseSpillFile();
+	CleanTraces();
 	//FreePaths();
 	//FreeUndefs();
 	//FreeLocalImports();

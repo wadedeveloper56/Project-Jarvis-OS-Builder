@@ -22,3 +22,4 @@ FileHandle       MapFile;
 char* MapFName;       /* name of map file                     */
 mapflag        MapFlags;       /* flags dealing with the map file */
 outfilelist* OutFiles;       // list of files which will be written to
+path_entry* LibPath;        /* path for library files               */

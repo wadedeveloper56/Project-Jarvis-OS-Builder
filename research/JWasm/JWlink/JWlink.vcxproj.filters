@@ -102,6 +102,9 @@
     <ClInclude Include="loadfile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="symtrace.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -162,6 +165,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="loadFile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="symtrace.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -13,3 +13,4 @@ void WriteStdOut(char* str);
 void WriteNLStdOut(void);
 bool TestBit(byte* array, unsigned num);
 void WriteInfoStdOut(char* str, unsigned level, char* sym);
+void FreeList(void* _curr);

@@ -2,6 +2,7 @@
 #include "objstruct.h"
 #include "globals.h"
 #include "ntio.h"
+#include "alloc.h"
 
 static void* SpawnStack;
 
@@ -108,4 +109,16 @@ void WriteInfoStdOut(char* str, unsigned level, char* sym)
 {
     WriteStdOut(str);
     WriteNLStdOut();
+}
+
+void FreeList(void* _curr)
+{
+    node* curr = (node*)_curr;
+    node* next_node;
+
+    while (curr) {
+        next_node = (node*)curr->next;
+        _LnkFree(curr);
+        curr = next_node;
+    }
 }
