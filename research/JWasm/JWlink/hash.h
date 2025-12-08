@@ -36,3 +36,5 @@ typedef struct _TAG_HTable {
         int longestChainLen;
     } stats;
 } *pHTable;
+
+void ZapHTable(pHTable table, void (*zapElemAction)(void*));

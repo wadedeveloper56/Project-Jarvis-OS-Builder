@@ -15,6 +15,8 @@
 #include "loadfile.h"
 #include "symtrace.h"
 #include "mapio.h"
+#include "procfile.h"
+#include "objfree.h"
 
 static char* ArgSave;
 
@@ -31,8 +33,37 @@ void InitSubSystems(void)
 	InitCmdFile();
 }
 
+static void ResetSubSystems(void)
+{
+	//ResetPermData();
+	//ResetMsg();
+	//VirtMemInit();
+	//ResetMisc();
+	//Root = NewSection();
+	//ResetDBI();
+	//ResetMapIO();
+	//ResetCmdAll();
+	//ResetOvlSupp();
+	//ResetComdef();
+	//ResetDistrib();
+	//ResetLoadNov();
+	//ResetLoadPE();
+	//ResetObj2Supp();
+	//ResetObjIO();
+	//ResetObjOMF();
+	//ResetObjPass1();
+	//ResetObjStrip();
+	//ResetOMFReloc();
+	//ResetReloc();
+	//ResetSymTrace();
+	//ResetLoadFile();
+	//ResetAddr();
+	//ResetToc();
+}
+
 static void LinkMeBaby(void)
 {
+	ResetSubSystems();
 }
 
 static void CleanSubSystems(void)
@@ -49,9 +80,9 @@ static void CleanSubSystems(void)
 	CleanTraces();
 	FreePaths();
 	FreeUndefs();
-	//FreeLocalImports();
-	//CleanLoadFile();
-	//CleanLinkStruct();
+	FreeLocalImports();
+	CleanLoadFile();
+	CleanLinkStruct();
 	//FreeFormatStuff();
 	//FreeObjInfo();
 	//FreeVirtMem();

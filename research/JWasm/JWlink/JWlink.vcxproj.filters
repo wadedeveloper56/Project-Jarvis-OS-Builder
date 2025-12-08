@@ -108,6 +108,45 @@
     <ClInclude Include="ring.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="procfile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="libr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbgall.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="carve.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="permdata.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="reloc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ovltab.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="symmem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="overlays.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ovlsupp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ovlstruct.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="objpass1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="distrib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -174,6 +213,42 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ring.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="procfile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="libr.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbgall.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="perrmdata.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="reloc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="symmem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="overlays.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ovlsupp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="hash.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="objpass1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="distrib.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="carve.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

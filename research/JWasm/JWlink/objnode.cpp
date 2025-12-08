@@ -2,11 +2,17 @@
 #include "objnode.h"
 #include "alloc.h"
 #include "objstruct.h"
+#include "permdata.h"
 
 nodearray* ExtNodes;           // ptr to obj file import list
 nodearray* SegNodes;           // ptr to obj file segment list
 nodearray* GrpNodes;           // ptr to obj file group list
 nodearray* NameNodes;          // ptr to obj file lname list
+
+void FreeModEntry(mod_entry* mod)
+{
+	CarveFree(CarveModEntry, mod);
+}
 
 static nodearray* MakeArray(unsigned size)
 {
@@ -46,3 +52,7 @@ void BurnNodes(void)
 	BurnNodeArray(NameNodes);
 }
 
+void FreeSegData(void* sdata)
+{
+	CarveFree(CarveSegData, sdata);
+}

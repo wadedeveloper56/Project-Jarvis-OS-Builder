@@ -63,3 +63,41 @@ void FreeOutFiles(void)
         _LnkFree(fnode);
     }
 }
+
+void CleanLoadFile(void)
+{
+}
+
+static void WriteBuffer(char* info, unsigned long len, outfilelist* outfile, void* (*rtn)(void*, const void*, size_t))
+{
+    unsigned modpos;
+    unsigned adjust;
+
+    modpos = outfile->bufpos % BUFF_BLOCK_SIZE;
+    outfile->bufpos += len;
+    while (modpos + len >= BUFF_BLOCK_SIZE) {
+        adjust = BUFF_BLOCK_SIZE - modpos;
+        rtn(outfile->buffer + modpos, info, adjust);
+        QWrite(outfile->handle, outfile->buffer, BUFF_BLOCK_SIZE,
+            outfile->fname);
+        info += adjust;
+        len -= adjust;
+        modpos = 0;
+    }
+    if (len > 0) {
+        rtn(outfile->buffer + modpos, info, len);
+    }
+}
+
+void WriteLoad(void* buff, unsigned long size)
+{
+    outfilelist* outfile;
+
+    outfile = CurrSect->outfile;
+    if (outfile->buffer != NULL) {
+        WriteBuffer((char *)buff, size, outfile, memcpy);
+    }
+    else {
+        QWrite(outfile->handle, buff, size, outfile->fname);
+    }
+}

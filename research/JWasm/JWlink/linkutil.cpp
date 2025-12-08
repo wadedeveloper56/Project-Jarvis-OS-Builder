@@ -3,6 +3,8 @@
 #include "globals.h"
 #include "ntio.h"
 #include "alloc.h"
+#include "msg.h"
+#include "wlmsgs.h"
 
 static void* SpawnStack;
 
@@ -121,4 +123,9 @@ void FreeList(void* _curr)
         _LnkFree(curr);
         curr = next_node;
     }
+}
+
+void LnkFatal(char* msg)
+{
+    LnkMsg(FTL + MSG_INTERNAL, (char*)"s", msg);
 }

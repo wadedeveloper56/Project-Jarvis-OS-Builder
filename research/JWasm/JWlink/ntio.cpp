@@ -3,6 +3,33 @@
 #include "File.h"
 #include "msg.h"
 #include "wlnkmsg.h"
+#include "objio.h"
+#define TOOMANY EMFILE
+
+enum perms {// names for permissions
+	none = 0,
+	owner_read = 0400,  // S_IRUSR
+	owner_write = 0200, // S_IWUSR
+	owner_exec = 0100,  // S_IXUSR
+	owner_all = 0700,   // S_IRWXU
+	group_read = 040,   // S_IRGRP
+	group_write = 020,  // S_IWGRP
+	group_exec = 010,   // S_IXGRP
+	group_all = 070,    // S_IRWXG
+	others_read = 04,   // S_IROTH
+	others_write = 02,  // S_IWOTH
+	others_exec = 01,   // S_IXOTH
+	others_all = 07,    // S_IRWXO
+	all = 0777,
+	set_uid = 04000,    // S_ISUID
+	set_gid = 02000,    // S_ISGID
+	sticky_bit = 01000, // S_ISVTX
+	mask = 07777,
+	unknown = 0xFFFF,
+	add_perms = 0x10000,
+	remove_perms = 0x20000,
+	resolve_symlinks = 0x40000
+};
 
 static int      OpenFiles;      // the number of open files
 static unsigned LastResult;
@@ -151,5 +178,45 @@ void QSeek(FileHandle file, long position, char* name)
 bool QIsDevice(FileHandle file)
 {
 	return(_isatty(file));
+}
+
+static FileHandle DoOpen(char* name, unsigned mode, bool isexe)
+{
+	FileHandle h;
+
+	mode |= _O_BINARY;
+	for (;; ) {
+		if (OpenFiles >= MAX_OPEN_FILES)
+			CleanCachedHandles();
+		h = OpenFile(name, mode, owner_read | owner_write);
+		if (h != -1) {
+			OpenFiles++;
+			break;
+		}
+		if (errno != TOOMANY)
+			break;
+		if (!CleanCachedHandles()) {
+			break;
+		}
+	}
+	return(h);
+}
+
+static FileHandle NSOpen(char* name, unsigned mode)
+{
+	FileHandle h = DoOpen(name, mode, false);
+	LastResult = h;
+	if (h != -1) return(h);
+	return(NIL_HANDLE);
+}
+
+FileHandle QObjOpen(char* name)
+{
+	return(NSOpen(name, _O_RDONLY));
+}
+
+FileHandle TempFileOpen(char* name)
+{
+	return(NSOpen(name, _O_RDWR));
 }
 

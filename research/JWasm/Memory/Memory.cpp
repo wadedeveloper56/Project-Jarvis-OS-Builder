@@ -16,3 +16,8 @@ void* ReallocateMemory(void* memblock, size_t size)
 {
 	return realloc(memblock, size);
 }
+
+void* ExpandMemory(void* memblock, size_t size)
+{
+	return _expand(memblock, size);
+}

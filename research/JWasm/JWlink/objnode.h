@@ -15,3 +15,4 @@ typedef struct nodearray {
 
 void InitNodes(void);
 void BurnNodes(void);
+void FreeSegData(void* sdata);

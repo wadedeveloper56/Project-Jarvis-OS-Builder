@@ -12,9 +12,21 @@
 
 void* CachePermRead(file_list* list, unsigned long pos, unsigned len)
 {
+	//FIX ME
 	return nullptr;
 }
 
 void CacheFini(void)
 {
+	//FIX ME
+}
+
+void CacheClose(file_list* list, unsigned pass)
+{
+	//FIX ME
+}
+
+void FreeObjCache(file_list* list)
+{
+  //FIX ME
 }

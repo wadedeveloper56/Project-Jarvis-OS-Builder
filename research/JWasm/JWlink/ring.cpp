@@ -11,6 +11,18 @@ struct ring                     // model of a ring
     RING* next;                 // - points to next
 };
 
+#define RingIterBegSafe( h, i ) \
+    if( i == h ) { \
+        RING* _T = i; \
+        RING* _N = _T->next; \
+        do { \
+            i = _N; \
+            _N = i->next;
+
+#define RingIterEndSafe( i ) \
+        } while( i != _T ); \
+    }
+
 void* RINGNAME(Pop) (          // PRUNE FIRST ELEMENT IN THE RING
     void* hdr)                 // - addr( ring header )
 {
@@ -45,4 +57,15 @@ void RINGNAME(Free) (           // FREE ALL ELEMENTS IN A RING
         if (elt == NULL) break;
         _LnkFree(elt);
     }
+}
+
+void RINGNAME(Walk) (           // TRAVERSE RING
+    void* hdr,                  // - ring header
+    void (*rtn)                 // - traversal routine
+    (void* curr))          // - - passed current element
+{
+    RING* relement=nullptr;             // - ring element
+    RingIterBegSafe(hdr, relement) {
+        (*rtn)(relement);
+    } RingIterEndSafe(relement)
 }

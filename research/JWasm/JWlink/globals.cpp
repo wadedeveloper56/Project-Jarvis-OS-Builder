@@ -2,6 +2,7 @@
 #include "globals.h"
 #include "File.h"
 #include "link.h"
+#include "ovlstruct.h"
 
 int _argc;
 char** _argv;
@@ -24,3 +25,10 @@ mapflag        MapFlags;       /* flags dealing with the map file */
 outfilelist* OutFiles;       // list of files which will be written to
 path_entry* LibPath;        /* path for library files               */
 path_entry* Path;           /* path for object files                */
+section* Root;           /* pointer to root information          */
+file_list* ObjLibFiles;   /* list of library files (for searching)*/
+mod_entry* LibModules;    /* library modules (for processing)     */
+section* CurrSect;       /* current section for file processing  */
+list_of_names* OvlClasses;    /* list of classes to be overlayed       */
+vecnode* OvlVectors;    /* point to overlay vector notes         */
+seg_leader* OvlSeg;         /* pointer to seg_leader for overlaytab */

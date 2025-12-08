@@ -3,6 +3,12 @@
 #include "globals.h"
 #include "ntio.h"
 #include "alloc.h"
+#include "msg.h"
+#include "wlmsgs.h"
+#include "standard.h"
+#include "ntio.h"
+#define TEMPFNAME "WLK02112.xx`"        // "'" will be an "a" when processed.
+#define TEMPFNAME_SIZE 13
 
 static char* TFileName;
 static unsigned long    TmpFSize;
@@ -27,3 +33,78 @@ void CloseSpillFile(void)
 	}
 }
 
+static char* MakeTempName(char* name)
+{
+    memcpy(name, TEMPFNAME, sizeof(TEMPFNAME));   // includes nullchar
+    return(name + sizeof(TEMPFNAME) - 2);         // pointer to "a"
+}
+
+FileHandle OpenTempFile(char** fname)
+{
+    char* ptr;
+    unsigned    tlen;
+    char* tptr;
+    FileHandle    fhdl;
+
+    ptr = getenv("WLINKTMP");
+    if (ptr == NULL) ptr = getenv("TMP");
+    if (ptr == NULL) ptr = getenv("TMPDIR");
+    if (ptr == NULL) {
+        _ChkAlloc(char *, *fname, TEMPFNAME_SIZE);
+        tptr = *fname;
+    }
+    else {
+        tlen = strlen(ptr);
+        _ChkAlloc(char*, *fname, tlen + 1 + TEMPFNAME_SIZE);
+        memcpy(*fname, ptr, tlen);
+        switch ((*fname)[tlen - 1]) {
+        CASE_PATH_SEP:
+            break;
+            default:
+                (*fname)[tlen++] = PATH_SEP;
+                break;
+        }
+        tptr = *fname + tlen;
+    }
+    ptr = MakeTempName(tptr);
+    tlen = 0;
+    for (;; ) {
+        if (tlen >= 26) {
+            LnkMsg(FTL + MSG_CANT_OPEN_SPILL, NULL);
+        }
+        *ptr += 1;                          // change temp file extension
+        fhdl = TempFileOpen(*fname);
+        if (fhdl == NIL_HANDLE) break;
+        QClose(fhdl, *fname);
+        ++tlen;
+    }
+    return QOpenRW(*fname);
+}
+
+unsigned long SpillAlloc(unsigned amt)
+{
+	unsigned long           stg;
+
+	if (TempFile == NIL_HANDLE) {
+		TempFile = OpenTempFile(&TFileName);
+		LnkMsg(INF + MSG_USING_SPILL, NULL);
+	}
+	/* round up storage start to a disk sector boundry -- assumed power of 2 */
+	TmpFSize += SECTOR_SIZE - 1;
+	TmpFSize &= ~(SECTOR_SIZE - 1);
+	stg = TmpFSize;
+	TmpFSize += amt;
+	return(stg + 1);  /* add 1 to prevent a NULL handle */
+}
+
+void SpillWrite(unsigned long base, unsigned off, void* mem, unsigned size)
+{
+    QSeek(TempFile, base + off - 1, TFileName);
+    QWrite(TempFile, mem, size, TFileName);
+}
+
+void SpillRead(unsigned long base, unsigned off, void* mem, unsigned size)
+{
+    QSeek(TempFile, base + off - 1, TFileName);
+    QRead(TempFile, mem, size, TFileName);
+}
