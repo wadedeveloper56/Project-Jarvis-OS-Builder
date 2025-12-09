@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "globals.h"
+#include "mem.h"
 
 static char* ArgSave;
 char** _argv;
@@ -24,7 +25,7 @@ void LinkMainLine(char* cmds)
 
 void InitSubSystems(void)
 {
-   //LnkMemInit();
+   LnkMemInit();
    // LnkFilesInit();
    // InitMsg();
    // InitNodes();
@@ -33,6 +34,14 @@ void InitSubSystems(void)
    // InitSym();
    // InitObjORL();
    // InitCmdFile();
+}
+
+void FiniSubSystems(void)
+{
+    //FiniLinkStruct();
+    //FiniMsg();
+    //FiniSym();
+    LnkMemFini();
 }
 
 static void ResetSubSystems(void)
@@ -86,14 +95,6 @@ static void CleanSubSystems(void)
     //CleanToc();
     //CleanSym();
     //CleanPermData();
-}
-
-void FiniSubSystems(void)
-{
-    //FiniLinkStruct();
-    //FiniMsg();
-    //FiniSym();
-    //LnkMemFini();
 }
 
 static void DoLink(char* cmdline)
@@ -278,10 +279,6 @@ static void FindLibPaths(void)
 
 int main(int argc, char** argv)
 {
-#ifndef __WATCOMC__
-    _argv = argv;
-    _argc = argc;
-#endif
     InitSubSystems();
     LinkMainLine(NULL);
     FiniSubSystems();

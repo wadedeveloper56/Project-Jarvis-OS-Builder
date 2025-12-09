@@ -24,6 +24,9 @@
     <ClCompile Include="globals.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="mem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -60,6 +63,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ovltab.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
