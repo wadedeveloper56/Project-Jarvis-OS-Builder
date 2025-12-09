@@ -1,6 +1,7 @@
 #pragma once
 
 #include "types.h"
+#include "objstruct.h"
 
 typedef enum exe_format {       // there is a corresp. table in MSG.C
     MK_OS2_NE = 0x00000001,

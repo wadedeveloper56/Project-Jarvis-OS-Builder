@@ -54,13 +54,9 @@
 #define FNAMECMPSTR      stricmp     /* for case insensitive file systems */
 #endif
 
-#ifndef BOOL_DEFINED
-#define BOOL_DEFINED
-//typedef int bool;
-#endif
 typedef unsigned char   byte;
 typedef unsigned long   virt_mem;
-typedef unsigned        f_handle;
+//typedef unsigned        f_handle;
 
 #ifndef __386__
 #define UNALIGN
@@ -88,3 +84,4 @@ typedef unsigned        f_handle;
 //    #define _ZDOS      7
 #define _RAW       8
 #endif
+

@@ -2,6 +2,7 @@
 
 #include "types.h"
 #include "File.h"
+#include "globals.h"
 
 typedef enum {
     MIDST,
@@ -114,6 +115,8 @@ void InitCmdFile(void);
 char* GetNextLink(void);
 void BurnSystemList(void);
 void FreePaths(void);
+void FreeFormatStuff(void);
 
+extern file_defext     Extension;
 extern tok             Token;
 extern cmdfilelist* CmdFile;

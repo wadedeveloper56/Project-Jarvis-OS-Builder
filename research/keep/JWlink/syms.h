@@ -1,15 +1,6 @@
 #pragma once
 
-#include "types.h"
-#include "objstruct.h"
-
-typedef unsigned_32 offset;
-typedef unsigned_16 segment;
-
-typedef struct targ_addr {
-    offset              off;
-    segment             seg;
-} targ_addr;
+#include "taddr.h"
 
 typedef enum {
 

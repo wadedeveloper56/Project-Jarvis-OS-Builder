@@ -1,4 +1,5 @@
 #include "pch.h"
+#include "objfree.h"
 #include "globals.h"
 #include "alloc.h"
 #include "debug.h"
@@ -175,3 +176,14 @@ void CleanLinkStruct(void)
     }
 }
 
+void FreeSegFlags(seg_flags* curr)
+{
+    seg_flags* next;
+
+    while (curr != NULL) {
+        next = curr->next;
+        _LnkFree(curr->name);
+        _LnkFree(curr);
+        curr = next;
+    }
+}

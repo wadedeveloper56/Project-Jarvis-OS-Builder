@@ -1,5 +1,7 @@
 #pragma once
 
+#include "types.h"
+
 #define OVL_MAJOR_VERSION 3
 #define OVL_MINOR_VERSION 0
 
@@ -111,4 +113,3 @@ typedef struct lvector {            /* long overlay vector */
 typedef lvector _CODE_BASED* lvector_ptr;
 
 #include "poppack.h"
-

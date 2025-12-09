@@ -1,5 +1,7 @@
 #pragma once
 
+#include <stddef.h>
+
 typedef void* AllocFunc(size_t size);
 typedef AllocFunc* pAllocFunc;
 typedef void FreeFunc(void* elem);
@@ -35,3 +37,4 @@ typedef struct _TAG_HTable {
     } stats;
 } *pHTable;
 
+void ZapHTable(pHTable table, void (*zapElemAction)(void*));

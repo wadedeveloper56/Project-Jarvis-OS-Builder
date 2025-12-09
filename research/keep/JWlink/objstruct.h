@@ -1,5 +1,8 @@
 #pragma once
 
+#include <time.h>
+#include "taddr.h"
+#include "File.h"
 #include "syms.h"
 #include "standard.h"
 
@@ -62,7 +65,7 @@ typedef struct path_entry {
 typedef struct outfilelist {
     OUTFILELIST* next;
     char* fname;     // name of the file to be written to.
-    f_handle        handle;
+    FileHandle        handle;
     unsigned long   file_loc;
     char* buffer;
     unsigned long   bufpos;
@@ -92,7 +95,7 @@ typedef struct infilelist {
     void* cache;  // used when object file cached in mem
     unsigned long       len;     // length of the file.
     unsigned long       currpos; // current position of the file.
-    f_handle            handle;
+    FileHandle          handle;
     time_t              modtime;
     char* name;
     enum infile_flags   flags;

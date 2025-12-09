@@ -124,11 +124,11 @@ typedef enum obj_format {
 
 /* Default File Extension Enumeration, see ldefext.h */
 
-typedef enum file_defext {
+typedef enum _file_defext {
 #undef pick1
-#define pick1(enum,text) enum,
+#define pick1(enum1,text) enum1,
 #include "ldefext.h"
-} file_defext;
+}file_defext;
 
 
 /*  Generic constants */
