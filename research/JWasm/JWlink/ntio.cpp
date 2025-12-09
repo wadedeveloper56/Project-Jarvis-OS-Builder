@@ -2,6 +2,8 @@
 #include "globals.h"
 #include "ntio.h"
 #include "File.h"
+#include "msg.h"
+#include "wlmsgs.h"
 
 static int      OpenFiles;      // the number of open files
 static unsigned LastResult;
@@ -21,7 +23,7 @@ void CheckBreak(void)
 {
     if (CaughtBreak) {
         CaughtBreak = false;        /* prevent recursion */
-        //LnkMsg(FTL + MSG_BREAK_HIT, NULL);    /* suicides */
+        LnkMsg(FTL + MSG_BREAK_HIT, NULL);    /* suicides */
     }
 }
 
@@ -56,7 +58,7 @@ FileHandle QOpenR(char* name)
 {
     FileHandle h = DoOpen(name, O_RDONLY, FALSE);
     if (h != -1) return(h);
-    //LnkMsg(FTL + MSG_CANT_OPEN, "12", name, strerror(errno));
+    LnkMsg(FTL + MSG_CANT_OPEN, "12", name, strerror(errno));
     return(NIL_HANDLE);
 }
 
@@ -64,7 +66,7 @@ FileHandle QOpenRW(char* name)
 {
     FileHandle h = DoOpen(name, O_RDWR | O_CREAT | O_TRUNC, FALSE);
     if (h != -1) return(h);
-    //LnkMsg(FTL + MSG_CANT_OPEN, "12", name, strerror(errno));
+    LnkMsg(FTL + MSG_CANT_OPEN, "12", name, strerror(errno));
     return(NIL_HANDLE);
 }
 
@@ -73,23 +75,24 @@ unsigned QRead(FileHandle file, void* buffer, unsigned len, char* name)
     CheckBreak();
     int h = ReadFile(file, buffer, len);
     if (h == -1) {
-        //LnkMsg(ERR + MSG_IO_PROBLEM, "12", name, strerror(errno));
+        LnkMsg(ERR + MSG_IO_PROBLEM, "12", name, strerror(errno));
     }
     return(h);
 }
 
 unsigned QWrite(FileHandle file, void* buffer, unsigned len, char* name)
 {
+    char    rc_buff[RESOURCE_MAX_SIZE];
     if (len == 0) return(0);
     CheckBreak();
     int h = WriteFile(file, buffer, len);
     if (name != NULL) {
         if (h == -1) {
-            //LnkMsg(ERR + MSG_IO_PROBLEM, "12", name, strerror(errno));
+            LnkMsg(ERR + MSG_IO_PROBLEM, "12", name, strerror(errno));
         }
         else if (h != len) {
             //Msg_Get(MSG_IOERRLIST_7, rc_buff);
-            //LnkMsg((FTL + MSG_IO_PROBLEM) & ~OUT_MAP, "12", name, rc_buff);
+            LnkMsg((FTL + MSG_IO_PROBLEM) & ~OUT_MAP, "12", name, rc_buff);
         }
     }
     return(h);
@@ -108,7 +111,7 @@ void QClose(FileHandle file, char* name)
     int h = CloseFile(file);
     OpenFiles--;
     if (h != -1) return;
-    //LnkMsg(ERR + MSG_IO_PROBLEM, "12", name, strerror(errno));
+    LnkMsg(ERR + MSG_IO_PROBLEM, "12", name, strerror(errno));
 }
 
 __int64 QLSeek(FileHandle file, long position, int start, char* name)
@@ -116,7 +119,7 @@ __int64 QLSeek(FileHandle file, long position, int start, char* name)
     CheckBreak();
     __int64 h = FileSeek(file, position, start);
     if (h == -1 && name != NULL) {
-        //LnkMsg(ERR + MSG_IO_PROBLEM, "12", name, strerror(errno));
+        LnkMsg(ERR + MSG_IO_PROBLEM, "12", name, strerror(errno));
     }
     return(h);
 }
@@ -146,7 +149,7 @@ void QDelete(char* name)
     if (name == NULL) return;
     int h = FileRemove(name);
     if (h == -1 && errno != ENOENT) { /* file not found is OK */
-        //LnkMsg(ERR + MSG_IO_PROBLEM, "12", name, strerror(errno));
+        LnkMsg(ERR + MSG_IO_PROBLEM, "12", name, strerror(errno));
     }
 }
 

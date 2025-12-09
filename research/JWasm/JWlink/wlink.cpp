@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "globals.h"
 #include "mem.h"
+#include "ntio.h"
 
 static char* ArgSave;
 char** _argv;
@@ -26,7 +27,7 @@ void LinkMainLine(char* cmds)
 void InitSubSystems(void)
 {
    LnkMemInit();
-   // LnkFilesInit();
+   LnkFilesInit();
    // InitMsg();
    // InitNodes();
    // InitTokBuff();

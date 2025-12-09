@@ -95,7 +95,7 @@
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
+      <ConformanceMode>false</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -112,7 +112,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
+      <ConformanceMode>false</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
@@ -130,7 +130,7 @@
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
+      <ConformanceMode>false</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -147,7 +147,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
+      <ConformanceMode>false</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
@@ -161,22 +161,32 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="cmdline.cpp" />
+    <ClCompile Include="cmdutil.cpp" />
     <ClCompile Include="globals.cpp" />
+    <ClCompile Include="linkutil.cpp" />
     <ClCompile Include="mem.cpp" />
+    <ClCompile Include="msg.cpp" />
     <ClCompile Include="ntio.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="wlink.cpp" />
+    <ClCompile Include="wlnkmsg.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="banner.h" />
+    <ClInclude Include="cmdline.h" />
+    <ClInclude Include="cmdutil.h" />
     <ClInclude Include="formats.h" />
     <ClInclude Include="globals.h" />
     <ClInclude Include="hash.h" />
     <ClInclude Include="ldefext.h" />
     <ClInclude Include="link.h" />
+    <ClInclude Include="linkutil.h" />
     <ClInclude Include="mem.h" />
+    <ClInclude Include="msg.h" />
     <ClInclude Include="ntio.h" />
     <ClInclude Include="objstruct.h" />
     <ClInclude Include="ovlstruct.h" />
@@ -185,6 +195,8 @@
     <ClInclude Include="standard.h" />
     <ClInclude Include="syms.h" />
     <ClInclude Include="types.h" />
+    <ClInclude Include="wlmsgs.h" />
+    <ClInclude Include="wlnkmsg.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\File\File.vcxproj">
@@ -193,6 +205,11 @@
     <ProjectReference Include="..\Memory\Memory.vcxproj">
       <Project>{36412e4a-5780-46b9-bf4b-0d79b4a7de96}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="lnkerror.msg" />
+    <None Include="rc.msg" />
+    <None Include="wlink.msg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

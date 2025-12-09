@@ -2,6 +2,8 @@
 #include "globals.h"
 #include "mem.h"
 #include "Memory.h"
+#include "msg.h"
+#include "wlmsgs.h"
 
 void LnkMemInit(void)
 {
@@ -30,7 +32,7 @@ void* ChkLAlloc(size_t size)
     void* ptr;
     ptr = LAlloc(size);
     if (ptr == NULL) {
-        //LnkMsg(FTL + MSG_NO_DYN_MEM, NULL);
+        LnkMsg(FTL + MSG_NO_DYN_MEM, NULL);
     }
     return(ptr);
 }
