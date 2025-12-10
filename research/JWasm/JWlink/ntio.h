@@ -17,7 +17,7 @@ void QWriteNL(FileHandle file, char* name);
 void QClose(FileHandle file, char* name);
 __int64 QLSeek(FileHandle file, long position, int start, char* name);
 void QSeek(FileHandle file, long position, char* name);
-__int64 QPos(f_handle file);
+__int64 QPos(FileHandle file);
 long QFileSize(FileHandle file);
 void QDelete(char* name);
 bool QReadStr(FileHandle file, char* dest, unsigned size, char* name);

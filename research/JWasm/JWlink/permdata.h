@@ -59,7 +59,7 @@ typedef struct liblist {
 } libnamelist;
 
 struct perm_read_info_struct {
-    f_handle    incfhdl;
+    FileHandle    incfhdl;
     unsigned    currpos;
     char* buffer;
     unsigned    num;
@@ -72,7 +72,7 @@ typedef struct perm_read_info_struct perm_read_info;
 typedef struct {
     stringtable strtab;
     unsigned    currpos;
-    f_handle    incfhdl;
+    FileHandle    incfhdl;
     void        (*prepfn)(void*, void*);
 } perm_write_info;
 

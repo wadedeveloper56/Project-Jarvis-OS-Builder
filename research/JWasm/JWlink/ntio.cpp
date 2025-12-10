@@ -129,7 +129,7 @@ void QSeek(FileHandle file, long position, char* name)
     QLSeek(file, position, SEEK_SET, name);
 }
 
-__int64 QPos(f_handle file)
+__int64 QPos(FileHandle file)
 {
     CheckBreak();
     return(FileSeek(file, 0LL, SEEK_CUR));

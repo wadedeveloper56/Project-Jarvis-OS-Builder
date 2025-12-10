@@ -13,6 +13,7 @@
 #include "objfree.h"
 #include "permdata.h"
 #include "virtpage.h"
+#include "dbgall.h"
 
 static char* ArgSave;
 char** _argv;
@@ -38,7 +39,6 @@ void FiniSubSystems(void)
     FiniSym();
     LnkMemFini();
 }
-
 
 static void ResetMisc(void)
 {
@@ -77,7 +77,7 @@ static void ResetSubSystems(void)
     VirtMemInit();
     ResetMisc();
     Root = NewSection();
-    //ResetDBI();
+    ResetDBI();
     //ResetMapIO();
     //ResetCmdAll();
     //ResetOvlSupp();

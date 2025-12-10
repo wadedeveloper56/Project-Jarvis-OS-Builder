@@ -83,7 +83,7 @@ typedef enum commandflag {
 typedef struct cmdfilelist {
     struct cmdfilelist* prev;
     struct cmdfilelist* next;
-    f_handle            file;
+    FileHandle            file;
     char* symprefix;
     char* name;
     tok                 token;

@@ -7,6 +7,7 @@
 #include "ovlstruct.h"
 #include "syms.h"
 #include "formats.h"
+#include "File.h"
 
 #define SECTOR_SIZE     512
 #define MAX_HEADROOM    (4*1024)
@@ -14,7 +15,7 @@
 /* linker global variables */
 extern outfilelist* OutFiles;       // list of files which will be written to
 extern char* MapFName;       /* name of map file                     */
-extern f_handle       MapFile;        /* handle of map file                   */
+extern FileHandle       MapFile;        /* handle of map file                   */
 extern targ_addr      StackAddr;      /* initial stack address                */
 extern linkflag       LinkFlags;      /* flags to indicate presence of parms  */
 extern stateflag      LinkState;      /* flags to indicate linker state */
@@ -54,7 +55,7 @@ extern symbol* HeadSym;        /* head of symbol table list */
 extern byte           DBIFlag;
 extern struct fmt_data FmtData;       /* format specific data */
 extern obj_format     ObjFormat;
-extern f_handle       TempFile;
+extern FileHandle       TempFile;
 extern mod_entry* FakeModule;     // Module containing all the extra sections
 extern unsigned_32    NumImports;
 extern unsigned_32    NumExports;

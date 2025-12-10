@@ -4,7 +4,7 @@
 /* linker global variables */
  outfilelist* OutFiles;       // list of files which will be written to
  char* MapFName;       /* name of map file                     */
- f_handle       MapFile;        /* handle of map file                   */
+ FileHandle       MapFile;        /* handle of map file                   */
  targ_addr      StackAddr;      /* initial stack address                */
  linkflag       LinkFlags;      /* flags to indicate presence of parms  */
  stateflag      LinkState;      /* flags to indicate linker state */
@@ -44,7 +44,7 @@
  byte           DBIFlag;
  struct fmt_data FmtData;       /* format specific data */
  obj_format     ObjFormat;
- f_handle       TempFile;
+ FileHandle       TempFile;
  mod_entry* FakeModule;     // Module containing all the extra sections
  unsigned_32    NumImports;
  unsigned_32    NumExports;

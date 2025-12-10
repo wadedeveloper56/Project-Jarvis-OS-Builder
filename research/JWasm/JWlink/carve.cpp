@@ -140,6 +140,7 @@ void CarveVerifyAllGone(carve_t cv, char* node_name)
     bool        some_unfreed;
 
     some_unfreed = FALSE;
+    if (cv==NULL) return;
     for (block = cv->blk_list; block != NULL; block = block->next) {
         compare = block->data + cv->blk_top;
         do {

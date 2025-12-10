@@ -164,6 +164,7 @@
     <ClCompile Include="carve.cpp" />
     <ClCompile Include="cmdline.cpp" />
     <ClCompile Include="cmdutil.cpp" />
+    <ClCompile Include="dbgall.cpp" />
     <ClCompile Include="debug.cpp" />
     <ClCompile Include="globals.cpp" />
     <ClCompile Include="hash.cpp" />
@@ -195,6 +196,7 @@
     <ClInclude Include="carve.h" />
     <ClInclude Include="cmdline.h" />
     <ClInclude Include="cmdutil.h" />
+    <ClInclude Include="dbgall.h" />
     <ClInclude Include="debug.h" />
     <ClInclude Include="formats.h" />
     <ClInclude Include="globals.h" />
