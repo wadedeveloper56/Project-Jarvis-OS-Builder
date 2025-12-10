@@ -5,6 +5,9 @@
 #include "msg.h"
 #include "wlnkmsg.h"
 #include "objnode.h"
+#include "objio.h"
+#include "spillio.h"
+#include "lsymtab.h"
 
 static char* ArgSave;
 char** _argv;
@@ -33,9 +36,9 @@ void InitSubSystems(void)
    LnkFilesInit();
    InitMsg();
    InitNodes();
-   // InitTokBuff();
-   // InitSpillFile();
-   // InitSym();
+   InitTokBuff();
+   InitSpillFile();
+   InitSym();
    // InitObjORL();
    // InitCmdFile();
 }
@@ -44,7 +47,7 @@ void FiniSubSystems(void)
 {
     //FiniLinkStruct();
     FiniMsg();
-    //FiniSym();
+    FiniSym();
     LnkMemFini();
 }
 
@@ -233,8 +236,8 @@ static void ResetMisc(void)
     //CurrMod = NULL;
     //StackSize = 0x1000;
     //// set case sensitivity for symbols
-    //ResetSym();
-    //SetSymCase();
+    ResetSym();
+    SetSymCase();
     //SetLibCase();
 }
 

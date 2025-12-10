@@ -21,32 +21,32 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>18.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{e9f56c09-0b89-4d56-a063-60205ea6de6d}</ProjectGuid>
-    <RootNamespace>JWlink</RootNamespace>
+    <ProjectGuid>{6d6ea67c-cf31-4c1c-a102-d3fc81329a21}</ProjectGuid>
+    <RootNamespace>orl</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v145</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v145</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v145</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v145</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -72,33 +72,34 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>..\bin\tools\intermediate\jwlink\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>..\orl\h;..\orl\coff\h;..\orl\elf\h;..\orl\omf\h;..\File;..\Memory;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IntDir>..\bin\tools\intermediate\orl\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>..\JWlink;..\Memory;.\h;.\coff\h;.\elf\h;.\omf\h;..\watcom\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>..\bin\tools\intermediate\jwlink\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>..\orl\h;..\orl\coff\h;..\orl\elf\h;..\orl\omf\h;..\File;..\Memory;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IntDir>..\bin\tools\intermediate\orl\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>..\JWlink;..\Memory;.\h;.\coff\h;.\elf\h;.\omf\h;..\watcom\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>..\bin\tools\intermediate\jwlink\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>..\orl\h;..\orl\coff\h;..\orl\elf\h;..\orl\omf\h;..\File;..\Memory;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IntDir>..\bin\tools\intermediate\orl\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>..\JWlink;..\Memory;.\h;.\coff\h;.\elf\h;.\omf\h;..\watcom\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>..\bin\tools\intermediate\jwlink\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>..\orl\h;..\orl\coff\h;..\orl\elf\h;..\orl\omf\h;..\File;..\Memory;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IntDir>..\bin\tools\intermediate\orl\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>..\JWlink;..\Memory;.\h;.\coff\h;.\elf\h;.\omf\h;..\watcom\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>false</ConformanceMode>
+      <PreprocessorDefinitions>DEBUG_OUT;__NT__;_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -111,14 +112,12 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>false</ConformanceMode>
+      <PreprocessorDefinitions>DEBUG_OUT;__NT__;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <BufferSecurityCheck>false</BufferSecurityCheck>
-      <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -129,11 +128,12 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>false</ConformanceMode>
+      <PreprocessorDefinitions>DEBUG_OUT;__NT__;_CRT_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -146,14 +146,12 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>false</ConformanceMode>
+      <PreprocessorDefinitions>DEBUG_OUT;__NT__;_CRT_SECURE_NO_WARNINGS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <BufferSecurityCheck>false</BufferSecurityCheck>
-      <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -161,65 +159,50 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="cmdline.cpp" />
-    <ClCompile Include="cmdutil.cpp" />
-    <ClCompile Include="globals.cpp" />
-    <ClCompile Include="linkutil.cpp" />
-    <ClCompile Include="lsymtab.cpp" />
-    <ClCompile Include="mem.cpp" />
-    <ClCompile Include="msg.cpp" />
-    <ClCompile Include="ntio.cpp" />
-    <ClCompile Include="objio.cpp" />
-    <ClCompile Include="objnode.cpp" />
-    <ClCompile Include="pch.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="spillio.cpp" />
-    <ClCompile Include="symmem.cpp" />
-    <ClCompile Include="wlink.cpp" />
-    <ClCompile Include="wlnkmsg.cpp" />
+    <ClInclude Include="coff\h\coffentr.h" />
+    <ClInclude Include="coff\h\coffflhn.h" />
+    <ClInclude Include="coff\h\coffglbl.h" />
+    <ClInclude Include="coff\h\coffhash.h" />
+    <ClInclude Include="coff\h\coffimpl.h" />
+    <ClInclude Include="coff\h\coffload.h" />
+    <ClInclude Include="coff\h\cofflwlv.h" />
+    <ClInclude Include="coff\h\cofforl.h" />
+    <ClInclude Include="coff\h\cofftype.h" />
+    <ClInclude Include="elf\h\elfentr.h" />
+    <ClInclude Include="elf\h\elfflhn.h" />
+    <ClInclude Include="elf\h\elfglbl.h" />
+    <ClInclude Include="elf\h\elfhash.h" />
+    <ClInclude Include="elf\h\elfload.h" />
+    <ClInclude Include="elf\h\elflwlv.h" />
+    <ClInclude Include="elf\h\elforl.h" />
+    <ClInclude Include="elf\h\elftype.h" />
+    <ClInclude Include="h\orl.h" />
+    <ClInclude Include="h\orlcomon.h" />
+    <ClInclude Include="h\orlentry.h" />
+    <ClInclude Include="h\orlflhnd.h" />
+    <ClInclude Include="h\orlglobl.h" />
+    <ClInclude Include="h\orlhash.h" />
+    <ClInclude Include="h\orlhshdf.h" />
+    <ClInclude Include="h\orlintnl.h" />
+    <ClInclude Include="h\orllevel.h" />
+    <ClInclude Include="omf\h\omfdrctv.h" />
+    <ClInclude Include="omf\h\omfentr.h" />
+    <ClInclude Include="omf\h\omfflhn.h" />
+    <ClInclude Include="omf\h\omfglbl.h" />
+    <ClInclude Include="omf\h\omfload.h" />
+    <ClInclude Include="omf\h\omfmunge.h" />
+    <ClInclude Include="omf\h\omforl.h" />
+    <ClInclude Include="omf\h\omftype.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="banner.h" />
-    <ClInclude Include="cmdline.h" />
-    <ClInclude Include="cmdutil.h" />
-    <ClInclude Include="formats.h" />
-    <ClInclude Include="globals.h" />
-    <ClInclude Include="hash.h" />
-    <ClInclude Include="ldefext.h" />
-    <ClInclude Include="link.h" />
-    <ClInclude Include="linkutil.h" />
-    <ClInclude Include="lsymtab.h" />
-    <ClInclude Include="mem.h" />
-    <ClInclude Include="msg.h" />
-    <ClInclude Include="ntio.h" />
-    <ClInclude Include="objio.h" />
-    <ClInclude Include="objnode.h" />
-    <ClInclude Include="objstruct.h" />
-    <ClInclude Include="ovlstruct.h" />
-    <ClInclude Include="ovltab.h" />
-    <ClInclude Include="pch.h" />
-    <ClInclude Include="spillio.h" />
-    <ClInclude Include="standard.h" />
-    <ClInclude Include="symmem.h" />
-    <ClInclude Include="syms.h" />
-    <ClInclude Include="types.h" />
-    <ClInclude Include="wlmsgs.h" />
-    <ClInclude Include="wlnkmsg.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\File\File.vcxproj">
-      <Project>{07c330d8-c0c2-42b5-a94e-ae87dab6420d}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\Memory\Memory.vcxproj">
-      <Project>{36412e4a-5780-46b9-bf4b-0d79b4a7de96}</Project>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="lnkerror.msg" />
-    <None Include="rc.msg" />
-    <None Include="wlink.msg" />
+    <ClCompile Include="coffentr.cpp" />
+    <ClCompile Include="coffflhn.cpp" />
+    <ClCompile Include="c\orlentry.cpp" />
+    <ClCompile Include="elfentr.cpp" />
+    <ClCompile Include="elfflhn.cpp" />
+    <ClCompile Include="omfentr.cpp" />
+    <ClCompile Include="omfflhn.cpp" />
+    <ClCompile Include="orlflhnd.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

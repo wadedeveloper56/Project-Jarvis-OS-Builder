@@ -48,6 +48,18 @@
     <ClCompile Include="objnode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="objio.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="spillio.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lsymtab.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="symmem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -114,6 +126,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="objnode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="objio.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="spillio.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lsymtab.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="symmem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
