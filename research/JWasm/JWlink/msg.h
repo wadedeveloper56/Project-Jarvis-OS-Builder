@@ -76,6 +76,7 @@ pick( TRADEMARK,                banner3 ),
 extern unsigned FmtStr( char *, unsigned, char *, ... );
 extern unsigned DoFmtStr( char *, unsigned, char *, va_list * );
 extern void     LnkMsg( unsigned, char *, ... );
+extern void LnkFatal(char* msg);
 extern void     Locator( char *, char *, unsigned );
 extern void     WLPrtBanner( void );
 extern bool     SkipSymbol( symbol * );

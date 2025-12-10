@@ -630,3 +630,8 @@ int SymAlphaCompare( const void *a, const void *b )
     }
     return result;
 }
+
+void LnkFatal(char* msg)
+{
+    LnkMsg(FTL + MSG_INTERNAL, "s", msg);
+}

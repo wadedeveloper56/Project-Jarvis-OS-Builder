@@ -66,6 +66,24 @@
     <ClCompile Include="mixcache.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="objfree.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="debug.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="permdata.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="carve.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="strtab.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ring.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -150,6 +168,27 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="mixcache.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="objfree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="debug.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="permdata.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="strtab.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="carve.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="impexp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ring.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

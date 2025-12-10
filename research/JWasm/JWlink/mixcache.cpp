@@ -8,6 +8,10 @@ static bool     Multipage;
 
 #define CACHE_PAGE_SIZE         (8*1024)
 
+void CacheFini(void)
+{
+}
+
 void* CacheRead(file_list* list, unsigned long pos, unsigned len)
 {
     unsigned    bufnum;

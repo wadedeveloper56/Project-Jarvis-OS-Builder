@@ -7,6 +7,8 @@ void* ChkLAlloc(size_t size);
 void LFree(void* p);
 void* LnkExpand(void* src, size_t size);
 void* LnkReAlloc(void* src, size_t size);
+void DbgZapAlloc(void* tgt, size_t size);
+void DbgZapFreed(void* tgt, size_t size);
 
 #define _ChkAlloc( cast, dest, size ) dest = (cast)ChkLAlloc( size )
 #define _LnkAlloc( cast, dest, size ) dest = (cast)LAlloc( size )

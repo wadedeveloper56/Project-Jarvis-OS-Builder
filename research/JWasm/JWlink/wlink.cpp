@@ -9,27 +9,14 @@
 #include "spillio.h"
 #include "lsymtab.h"
 #include "objorl.h"
+#include "cmdline.h"
+#include "objfree.h"
+#include "permdata.h"
 
 static char* ArgSave;
 char** _argv;
 int  _argc;
 
-static void LinkMeBaby(void)
-{
-    //ResetSubSystems();
-    //DoLink(ArgSave);
-}
-
-void LinkMainLine(char* cmds)
-{
-    //for (;;) {
-    //    ArgSave = cmds;
-    //    Spawn(&LinkMeBaby);
-    //    CleanSubSystems();
-    //    cmds = GetNextLink();
-    //    if (cmds == NULL) break;
-    //}
-}
 
 void InitSubSystems(void)
 {
@@ -41,12 +28,12 @@ void InitSubSystems(void)
    InitSpillFile();
    InitSym();
    InitObjORL();
-   // InitCmdFile();
+   InitCmdFile();
 }
 
 void FiniSubSystems(void)
 {
-    //FiniLinkStruct();
+    FiniLinkStruct();
     FiniMsg();
     FiniSym();
     LnkMemFini();
@@ -54,7 +41,7 @@ void FiniSubSystems(void)
 
 static void ResetSubSystems(void)
 {
-    //ResetPermData();
+    ResetPermData();
     ResetMsg();
     //VirtMemInit();
     //ResetMisc();
@@ -82,12 +69,12 @@ static void ResetSubSystems(void)
 
 static void CleanSubSystems(void)
 {
-    //if (MapFile != NIL_HANDLE) {
-    //    QClose(MapFile, MapFName);
-    //    MapFile = NIL_HANDLE;
-    //}
+    if (MapFile != NIL_HANDLE) {
+        QClose(MapFile, MapFName);
+        MapFile = NIL_HANDLE;
+    }
     //FreeOutFiles();
-    //_LnkFree(MapFName);
+    _LnkFree(MapFName);
     //BurnSystemList();
     //FreeList(LibPath);
     //CloseSpillFile();
@@ -102,7 +89,7 @@ static void CleanSubSystems(void)
     //FreeVirtMem();
     //CleanToc();
     //CleanSym();
-    //CleanPermData();
+    CleanPermData();
 }
 
 static void DoLink(char* cmdline)
@@ -155,6 +142,23 @@ static void DoLink(char* cmdline)
 //#ifndef __OSI__
 //    signal(SIGINT, SIG_IGN); /* we're going to clean up anyway */
 //#endif
+}
+
+static void LinkMeBaby(void)
+{
+    ResetSubSystems();
+    DoLink(ArgSave);
+}
+
+void LinkMainLine(char* cmds)
+{
+    for (;;) {
+        ArgSave = cmds;
+    //    Spawn(&LinkMeBaby);
+        CleanSubSystems();
+    //    cmds = GetNextLink();
+        if (cmds == NULL) break;
+    }
 }
 
 static void PreAddrCalcFormatSpec(void)
@@ -215,28 +219,28 @@ static void PostAddrCalcFormatSpec(void)
 static void ResetMisc(void)
 {
     ///* jwlink: default is: multiple defines are NOT ok */
-    ////LinkFlags = REDEFS_OK | CASE_FLAG | FAR_CALLS_FLAG;
-    //LinkFlags = CASE_FLAG | FAR_CALLS_FLAG;
-    //LinkState = MAKE_RELOCS;
-    //AbsGroups = NULL;
-    //DataGroup = NULL;
-    //IDataGroup = NULL;
-    //MapFile = NIL_HANDLE;
-    //MapFName = NULL;
-    //OutFiles = NULL;
-    //ObjLibFiles = NULL;
-    //LibModules = NULL;
-    //Groups = NULL;
-    //CurrLoc.seg = UNDEFINED;
-    //CurrLoc.off = 0;
-    //OvlClasses = NULL;
-    //OvlVectors = NULL;
-    //VecNum = 0;
-    //OvlNum = 0;
-    //OvlFName = NULL;
-    //CurrMod = NULL;
-    //StackSize = 0x1000;
-    //// set case sensitivity for symbols
+    //LinkFlags = REDEFS_OK | CASE_FLAG | FAR_CALLS_FLAG;
+    LinkFlags = CASE_FLAG | FAR_CALLS_FLAG;
+    LinkState = MAKE_RELOCS;
+    AbsGroups = NULL;
+    DataGroup = NULL;
+    IDataGroup = NULL;
+    MapFile = NIL_HANDLE;
+    MapFName = NULL;
+    OutFiles = NULL;
+    ObjLibFiles = NULL;
+    LibModules = NULL;
+    Groups = NULL;
+    CurrLoc.seg = UNDEFINED;
+    CurrLoc.off = 0;
+    OvlClasses = NULL;
+    OvlVectors = NULL;
+    VecNum = 0;
+    OvlNum = 0;
+    OvlFName = NULL;
+    CurrMod = NULL;
+    StackSize = 0x1000;
+    // set case sensitivity for symbols
     ResetSym();
     SetSymCase();
     //SetLibCase();

@@ -57,3 +57,23 @@ void* LnkReAlloc(void* src, size_t size)
     }
     return(dest);
 }
+
+#ifndef NDEBUG
+void DbgZapAlloc(void* tgt, size_t size)
+{
+    memset(tgt, 0xA5, size);
+}
+
+void DbgZapFreed(void* tgt, size_t size)
+{
+    memset(tgt, 0xBD, size);
+}
+#else
+void DbgZapAlloc(void* tgt, size_t size)
+{
+}
+
+void DbgZapFreed(void* tgt, size_t size)
+{
+}
+#endif
