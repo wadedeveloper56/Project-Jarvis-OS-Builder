@@ -2,6 +2,9 @@
 #include "globals.h"
 #include "mem.h"
 #include "ntio.h"
+#include "msg.h"
+#include "wlnkmsg.h"
+#include "objnode.h"
 
 static char* ArgSave;
 char** _argv;
@@ -28,8 +31,8 @@ void InitSubSystems(void)
 {
    LnkMemInit();
    LnkFilesInit();
-   // InitMsg();
-   // InitNodes();
+   InitMsg();
+   InitNodes();
    // InitTokBuff();
    // InitSpillFile();
    // InitSym();
@@ -40,7 +43,7 @@ void InitSubSystems(void)
 void FiniSubSystems(void)
 {
     //FiniLinkStruct();
-    //FiniMsg();
+    FiniMsg();
     //FiniSym();
     LnkMemFini();
 }
@@ -48,7 +51,7 @@ void FiniSubSystems(void)
 static void ResetSubSystems(void)
 {
     //ResetPermData();
-    //ResetMsg();
+    ResetMsg();
     //VirtMemInit();
     //ResetMisc();
     //Root = NewSection();

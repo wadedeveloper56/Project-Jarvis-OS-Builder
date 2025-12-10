@@ -45,6 +45,9 @@
     <ClCompile Include="wlnkmsg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="objnode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -108,6 +111,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="banner.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="objnode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -263,9 +263,9 @@ static unsigned MakeExeName( char * buff, unsigned max )
         format = FmtData.type;
         /* jwlink: just add PE32+ */
         if ( ( FmtData.type & MK_PE ) && FmtData.u.pe.win64 ) {
-            //Msg_Get( MSG_FILE_PE64, rc_buff );
+            Msg_Get( MSG_FILE_PE64, rc_buff );
         } else if ( ( FmtData.type & MK_ELF ) && FmtData.u.elf.elf64 ) {
-            //Msg_Get( MSG_FILE_ELF64, rc_buff );
+            Msg_Get( MSG_FILE_ELF64, rc_buff );
         } else {
             for( ;; ) {
                 num = blog_32( format );
@@ -273,7 +273,7 @@ static unsigned MakeExeName( char * buff, unsigned max )
                 if( format == 0 )
                     break;
             }
-            //Msg_Get( MSG_FILE_TYPES_0 + num, rc_buff );
+            Msg_Get( MSG_FILE_TYPES_0 + num, rc_buff );
         }
         str = rc_buff;
     }
@@ -289,10 +289,10 @@ static unsigned MakeExeName( char * buff, unsigned max )
     buff += num;
     *buff++ = ' ';
     if( FmtData.dll ) {
-        //Msg_Get( MSG_CREATE_TYPE_DLL, rc_buff );
+        Msg_Get( MSG_CREATE_TYPE_DLL, rc_buff );
         str = rc_buff;
     } else {
-        //Msg_Get( MSG_CREATE_TYPE_EXE, rc_buff );
+        Msg_Get( MSG_CREATE_TYPE_EXE, rc_buff );
         str = rc_buff;
     }
     num = strlen( str );
@@ -434,9 +434,9 @@ void LnkMsg(
     }
     if( class1 >= (WRN & CLASS_MSK) ) {
         if( class1 == (WRN & CLASS_MSK) ) {
-            //Msg_Get( MSG_WARNING, rc_buff );
+            Msg_Get( MSG_WARNING, rc_buff );
         } else {
-            //Msg_Get( MSG_ERROR, rc_buff );
+            Msg_Get( MSG_ERROR, rc_buff );
         }
 #if !defined( _DLLHOST )
         len = FmtStr( buff, MAX_MSG_SIZE - len, rc_buff, CalcMsgNum( num ));
@@ -455,20 +455,20 @@ void LnkMsg(
     }
     if( which_file != 0 ) {
         if( Token.how == SYSTEM ) {
-            //Msg_Get( MSG_SYS_BLK, rc_buff );
+            Msg_Get( MSG_SYS_BLK, rc_buff );
             which_file = 1;
         } else if( Token.how == ENVIRONMENT ) {
-            //Msg_Get( MSG_ENVIRON, rc_buff );
+            Msg_Get( MSG_ENVIRON, rc_buff );
             which_file = 1;
         } else {
-            //Msg_Get( MSG_FILE_REC_NAME_0 + which_file - 1, rc_buff );
+            Msg_Get( MSG_FILE_REC_NAME_0 + which_file - 1, rc_buff );
         }
         FileOrder( rc_buff, which_file );
         len += FmtStr( &buff[len], MAX_MSG_SIZE - len, rc_buff );
         if( num & LINE ) {
             if( Token.how != SYSTEM && Token.how != ENVIRONMENT ) {
-                //Msg_Get( MSG_LINE, rc_buff );
-                //Msg_Do_Put_Args( rc_buff, &MsgArgInfo, "d", Token.line );
+                Msg_Get( MSG_LINE, rc_buff );
+                Msg_Do_Put_Args( rc_buff, &MsgArgInfo, "d", Token.line );
                 len += FmtStr( &buff[len], MAX_MSG_SIZE - len, rc_buff );
             }
         }
@@ -500,7 +500,7 @@ static void HandleRcMsg( unsigned num, va_list *args )
     prefixlen = 0;
     LinkState |= LINK_ERROR;
     CurrSymName = NULL;
-    //Msg_Get( MSG_ERROR, rc_buff );
+    Msg_Get( MSG_ERROR, rc_buff );
 #if !defined( _DLLHOST )
     len = FmtStr( buff, MAX_MSG_SIZE - len, rc_buff, CalcMsgNum( num ));
 #else

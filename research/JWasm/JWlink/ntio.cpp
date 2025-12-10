@@ -3,7 +3,7 @@
 #include "ntio.h"
 #include "File.h"
 #include "msg.h"
-#include "wlmsgs.h"
+#include "wlnkmsg.h"
 
 static int      OpenFiles;      // the number of open files
 static unsigned LastResult;
@@ -91,7 +91,7 @@ unsigned QWrite(FileHandle file, void* buffer, unsigned len, char* name)
             LnkMsg(ERR + MSG_IO_PROBLEM, "12", name, strerror(errno));
         }
         else if (h != len) {
-            //Msg_Get(MSG_IOERRLIST_7, rc_buff);
+            Msg_Get(MSG_IOERRLIST_7, rc_buff);
             LnkMsg((FTL + MSG_IO_PROBLEM) & ~OUT_MAP, "12", name, rc_buff);
         }
     }
