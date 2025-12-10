@@ -166,6 +166,7 @@
     <ClCompile Include="cmdutil.cpp" />
     <ClCompile Include="debug.cpp" />
     <ClCompile Include="globals.cpp" />
+    <ClCompile Include="hash.cpp" />
     <ClCompile Include="linkutil.cpp" />
     <ClCompile Include="lsymtab.cpp" />
     <ClCompile Include="mem.cpp" />
@@ -185,6 +186,7 @@
     <ClCompile Include="spillio.cpp" />
     <ClCompile Include="strtab.cpp" />
     <ClCompile Include="symmem.cpp" />
+    <ClCompile Include="virtpage.cpp" />
     <ClCompile Include="wlink.cpp" />
     <ClCompile Include="wlnkmsg.cpp" />
   </ItemGroup>
@@ -222,6 +224,7 @@
     <ClInclude Include="symmem.h" />
     <ClInclude Include="syms.h" />
     <ClInclude Include="types.h" />
+    <ClInclude Include="virtpage.h" />
     <ClInclude Include="wlmsgs.h" />
     <ClInclude Include="wlnkmsg.h" />
   </ItemGroup>

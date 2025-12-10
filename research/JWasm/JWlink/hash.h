@@ -35,3 +35,5 @@ typedef struct _TAG_HTable {
     } stats;
 } *pHTable;
 
+unsigned StringiHashFunc(void* _s, unsigned size);
+pHTable CreateHTable(int size, pHashFunc hashFunc, pHashElemCmp compareFunc, pAllocFunc allocFunc, pFreeFunc freeFunc);

@@ -108,3 +108,5 @@ typedef enum {
 } tokcontrol;
 
 extern cmdfilelist* CmdFile;
+
+section* NewSection(void);

@@ -12,11 +12,11 @@
 #include "cmdline.h"
 #include "objfree.h"
 #include "permdata.h"
+#include "virtpage.h"
 
 static char* ArgSave;
 char** _argv;
 int  _argc;
-
 
 void InitSubSystems(void)
 {
@@ -39,13 +39,44 @@ void FiniSubSystems(void)
     LnkMemFini();
 }
 
+
+static void ResetMisc(void)
+{
+    ///* jwlink: default is: multiple defines are NOT ok */
+    //LinkFlags = REDEFS_OK | CASE_FLAG | FAR_CALLS_FLAG;
+    LinkFlags = CASE_FLAG | FAR_CALLS_FLAG;
+    LinkState = MAKE_RELOCS;
+    AbsGroups = NULL;
+    DataGroup = NULL;
+    IDataGroup = NULL;
+    MapFile = NIL_HANDLE;
+    MapFName = NULL;
+    OutFiles = NULL;
+    ObjLibFiles = NULL;
+    LibModules = NULL;
+    Groups = NULL;
+    CurrLoc.seg = UNDEFINED;
+    CurrLoc.off = 0;
+    OvlClasses = NULL;
+    OvlVectors = NULL;
+    VecNum = 0;
+    OvlNum = 0;
+    OvlFName = NULL;
+    CurrMod = NULL;
+    StackSize = 0x1000;
+    // set case sensitivity for symbols
+    ResetSym();
+    SetSymCase();
+    //SetLibCase();
+}
+
 static void ResetSubSystems(void)
 {
     ResetPermData();
     ResetMsg();
-    //VirtMemInit();
-    //ResetMisc();
-    //Root = NewSection();
+    VirtMemInit();
+    ResetMisc();
+    Root = NewSection();
     //ResetDBI();
     //ResetMapIO();
     //ResetCmdAll();
@@ -214,36 +245,6 @@ static void PostAddrCalcFormatSpec(void)
 //        SetQNXSegFlags();
 //    }
 //#endif
-}
-
-static void ResetMisc(void)
-{
-    ///* jwlink: default is: multiple defines are NOT ok */
-    //LinkFlags = REDEFS_OK | CASE_FLAG | FAR_CALLS_FLAG;
-    LinkFlags = CASE_FLAG | FAR_CALLS_FLAG;
-    LinkState = MAKE_RELOCS;
-    AbsGroups = NULL;
-    DataGroup = NULL;
-    IDataGroup = NULL;
-    MapFile = NIL_HANDLE;
-    MapFName = NULL;
-    OutFiles = NULL;
-    ObjLibFiles = NULL;
-    LibModules = NULL;
-    Groups = NULL;
-    CurrLoc.seg = UNDEFINED;
-    CurrLoc.off = 0;
-    OvlClasses = NULL;
-    OvlVectors = NULL;
-    VecNum = 0;
-    OvlNum = 0;
-    OvlFName = NULL;
-    CurrMod = NULL;
-    StackSize = 0x1000;
-    // set case sensitivity for symbols
-    ResetSym();
-    SetSymCase();
-    //SetLibCase();
 }
 
 static void DoDefaultSystem(void)
