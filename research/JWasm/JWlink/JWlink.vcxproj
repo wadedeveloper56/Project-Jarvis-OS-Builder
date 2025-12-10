@@ -162,14 +162,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="carve.cpp" />
+    <ClCompile Include="cmdall.cpp" />
     <ClCompile Include="cmdline.cpp" />
     <ClCompile Include="cmdutil.cpp" />
     <ClCompile Include="dbgall.cpp" />
     <ClCompile Include="debug.cpp" />
+    <ClCompile Include="distrib.cpp" />
     <ClCompile Include="globals.cpp" />
     <ClCompile Include="hash.cpp" />
     <ClCompile Include="linkutil.cpp" />
     <ClCompile Include="lsymtab.cpp" />
+    <ClCompile Include="mapio.cpp" />
     <ClCompile Include="mem.cpp" />
     <ClCompile Include="mixcache.cpp" />
     <ClCompile Include="msg.cpp" />
@@ -178,6 +181,7 @@
     <ClCompile Include="objio.cpp" />
     <ClCompile Include="objnode.cpp" />
     <ClCompile Include="objorl.cpp" />
+    <ClCompile Include="ovlsupp.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
@@ -188,16 +192,19 @@
     <ClCompile Include="strtab.cpp" />
     <ClCompile Include="symmem.cpp" />
     <ClCompile Include="virtpage.cpp" />
+    <ClCompile Include="wcomdef.cpp" />
     <ClCompile Include="wlink.cpp" />
     <ClCompile Include="wlnkmsg.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="banner.h" />
     <ClInclude Include="carve.h" />
+    <ClInclude Include="cmdall.h" />
     <ClInclude Include="cmdline.h" />
     <ClInclude Include="cmdutil.h" />
     <ClInclude Include="dbgall.h" />
     <ClInclude Include="debug.h" />
+    <ClInclude Include="distrib.h" />
     <ClInclude Include="formats.h" />
     <ClInclude Include="globals.h" />
     <ClInclude Include="hash.h" />
@@ -206,6 +213,7 @@
     <ClInclude Include="link.h" />
     <ClInclude Include="linkutil.h" />
     <ClInclude Include="lsymtab.h" />
+    <ClInclude Include="mapio.h" />
     <ClInclude Include="mem.h" />
     <ClInclude Include="mixcache.h" />
     <ClInclude Include="msg.h" />
@@ -214,8 +222,10 @@
     <ClInclude Include="objio.h" />
     <ClInclude Include="objnode.h" />
     <ClInclude Include="objorl.h" />
+    <ClInclude Include="objpass1.h" />
     <ClInclude Include="objstruct.h" />
     <ClInclude Include="ovlstruct.h" />
+    <ClInclude Include="ovlsupp.h" />
     <ClInclude Include="ovltab.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="permdata.h" />
@@ -227,6 +237,7 @@
     <ClInclude Include="syms.h" />
     <ClInclude Include="types.h" />
     <ClInclude Include="virtpage.h" />
+    <ClInclude Include="wcomdef.h" />
     <ClInclude Include="wlmsgs.h" />
     <ClInclude Include="wlnkmsg.h" />
   </ItemGroup>

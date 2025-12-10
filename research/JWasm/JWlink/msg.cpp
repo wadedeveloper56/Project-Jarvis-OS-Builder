@@ -5,6 +5,8 @@
 #include "linkutil.h"
 #include "cmdutil.h"
 #include "cmdline.h"
+#include "linkutil.h"
+#include "mapio.h"
 
 #undef pick
 #define pick( num, string ) string
@@ -367,24 +369,22 @@ unsigned CalcMsgNum( unsigned num )
  * hoops we jump through.
  */
 
-static void MessageFini( unsigned num, char *buff, unsigned len,
-    char *prefix, unsigned prefixlen, bool waserror )
-/**************************************************************/
+static void MessageFini( unsigned num, char *buff, unsigned len, char *prefix, unsigned prefixlen, bool waserror )
 {
     if( num & OUT_TERM ) {
         if( !(LinkFlags & QUIET_FLAG) ) {
-            //WLPrtBanner();
-            //WriteInfoStdOut( buff, num, CurrSymName );
+            WLPrtBanner();
+            WriteInfoStdOut( buff, num, CurrSymName );
         } else if( (num & CLASS_MSK) != (CLASS_MSK & INF)) {
-            //WriteInfoStdOut( buff, num, CurrSymName );
+            WriteInfoStdOut( buff, num, CurrSymName );
         }
     }
     if( (num & OUT_MAP) && (MapFile != -1) ) {
 #if defined( _DLLHOST )
         BufWrite( prefix, prefixlen );
 #endif
-        //BufWrite( buff, len );
-        //WriteMapNL( 1 );
+        BufWrite( buff, len );
+        WriteMapNL( 1 );
     }
     //if( (num & CLASS_MSK) == (FTL&~OUT_MSK) ) Suicide();
     if( waserror && LinkFlags & MAX_ERRORS_FLAG ) {
@@ -559,18 +559,16 @@ static void FileOrder( char rc_buff[], int which_file )
 }
 
 void WLPrtBanner( void )
-/*****************************/
-// print the banner, if it hasn't already been printed.
 {
     char *  msg;
 
     if( !BannerPrinted ) {
         msg = MsgStrings[ PRODUCT ];
-        //WriteInfoStdOut( msg, BANNER, NULL );
+        WriteInfoStdOut( msg, BANNER, NULL );
         msg = MsgStrings[ COPYRIGHT ];
-        //WriteInfoStdOut( msg, BANNER, NULL );
+        WriteInfoStdOut( msg, BANNER, NULL );
         msg = MsgStrings[ TRADEMARK ];
-        //WriteInfoStdOut( msg, BANNER, NULL );
+        WriteInfoStdOut( msg, BANNER, NULL );
         //msg = MsgStrings[ TRADEMARK2 ];
         //WriteInfoStdOut( msg, BANNER, NULL );
         BannerPrinted = TRUE;
@@ -578,7 +576,7 @@ void WLPrtBanner( void )
 }
 
 bool SkipSymbol( symbol * sym )
-/************************************/
+
 {
     if( sym->info & SYM_STATIC && !(MapFlags & MAP_STATICS) ) return TRUE;
 #if defined(__WATCOMC__)

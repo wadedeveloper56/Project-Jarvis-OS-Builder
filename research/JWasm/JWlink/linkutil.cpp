@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "globals.h"
 #include "linkutil.h"
+#include "ntio.h"
 
 unsigned_16 blog_32(unsigned_32 value)
 {
@@ -61,4 +62,25 @@ bool TestBit(byte* array, unsigned num)
     mask = 1 << (num % 8);
     num /= 8;
     return(*(array + num) & mask);
+}
+
+void WriteStdOut(char* str)
+{
+    QWrite(_fileno(stdout), str, strlen(str), NULL);
+}
+
+void WriteNLStdOut(void)
+{
+    QWriteNL(_fileno(stdout), NULL);
+}
+
+void WriteInfoStdOut(char* str, unsigned level, char* sym)
+{
+    WriteStdOut(str);
+    WriteNLStdOut();
+}
+
+char* GetEnvString(char* envname)
+{
+    return(getenv(envname));
 }

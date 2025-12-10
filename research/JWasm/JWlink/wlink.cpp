@@ -14,6 +14,11 @@
 #include "permdata.h"
 #include "virtpage.h"
 #include "dbgall.h"
+#include "mapio.h"
+#include "cmdall.h"
+#include "ovlsupp.h"
+#include "wcomdef.h"
+#include "distrib.h"
 
 static char* ArgSave;
 char** _argv;
@@ -78,11 +83,11 @@ static void ResetSubSystems(void)
     ResetMisc();
     Root = NewSection();
     ResetDBI();
-    //ResetMapIO();
-    //ResetCmdAll();
-    //ResetOvlSupp();
-    //ResetComdef();
-    //ResetDistrib();
+    ResetMapIO();
+    ResetCmdAll();
+    ResetOvlSupp();
+    ResetComdef();
+    ResetDistrib();
     //ResetLoadNov();
     //ResetLoadPE();
     //ResetObj2Supp();

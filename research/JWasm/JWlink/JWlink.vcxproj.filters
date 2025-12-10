@@ -93,6 +93,21 @@
     <ClCompile Include="dbgall.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="mapio.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cmdall.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ovlsupp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="wcomdef.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="distrib.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -204,6 +219,24 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="dbgall.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mapio.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cmdall.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ovlsupp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="wcomdef.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="objpass1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="distrib.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

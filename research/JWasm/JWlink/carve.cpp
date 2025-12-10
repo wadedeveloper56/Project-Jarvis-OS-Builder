@@ -4,6 +4,7 @@
 #include "mem.h"
 #include "standard.h"
 #include "msg.h"
+#include "linkutil.h"
 
 #ifndef NDEBUG
 void CarveDebugFree(carve_t cv, void* elm)
@@ -152,16 +153,16 @@ void CarveVerifyAllGone(carve_t cv, char* node_name)
             if (check == NULL) {
                 if (!some_unfreed) {
                     FmtStr(buff, 80, "carve %s unfreed:", node_name);
-                    //WriteStdOut(buff);
+                    WriteStdOut(buff);
                     some_unfreed = TRUE;
                 }
                 FmtStr(buff, 80, " %h", compare);
-                //WriteStdOut(buff);
+                WriteStdOut(buff);
             }
         } while (compare != block->data);
     }
     if (some_unfreed) {
-        //WriteNLStdOut();
+        WriteNLStdOut();
     }
 }
 #endif
