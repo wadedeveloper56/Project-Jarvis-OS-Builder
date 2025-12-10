@@ -15,234 +15,234 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="wlink.cpp">
+    <None Include="lnkerror.msg" />
+    <None Include="wlink.msg" />
+    <None Include="rc.msg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="h\banner.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\carve.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\cmdall.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\cmdline.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\cmdutil.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\dbgall.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\debug.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\distrib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\formats.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\globals.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\hash.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\impexp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\ldefext.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\link.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\linkutil.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\lsymtab.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\mapio.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\mem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\mixcache.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\msg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\ntio.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\objfree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\objio.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\objnode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\objorl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\objpass1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\objstruct.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\ovlstruct.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\ovlsupp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\ovltab.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\permdata.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\ring.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\spillio.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\standard.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\strtab.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\symmem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\syms.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\types.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\virtpage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\wcomdef.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\wlmsgs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\wlnkmsg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="c\carve.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\cmdall.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\cmdline.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\cmdutil.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\dbgall.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\debug.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\distrib.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\globals.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\hash.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\linkutil.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\lsymtab.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\mapio.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\mem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\mixcache.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\msg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\ntio.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\objfree.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\objio.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\objnode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\objorl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\ovlsupp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\permdata.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\ring.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\spillio.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\strtab.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\symmem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\virtpage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\wcomdef.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\wlink.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\wlnkmsg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="globals.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="mem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ntio.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="msg.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="linkutil.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="cmdutil.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="cmdline.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="wlnkmsg.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="objnode.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="objio.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="spillio.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="lsymtab.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="symmem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="objorl.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="mixcache.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="objfree.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="debug.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="permdata.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="carve.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="strtab.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ring.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="virtpage.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="hash.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="dbgall.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="mapio.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="cmdall.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ovlsupp.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="wcomdef.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="distrib.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="pch.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="globals.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="types.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="objstruct.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="standard.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="link.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ldefext.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ovlstruct.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="syms.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="hash.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="formats.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ovltab.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="mem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ntio.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="msg.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="linkutil.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="cmdutil.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="cmdline.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="wlnkmsg.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="wlmsgs.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="banner.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="objnode.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="objio.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="spillio.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="lsymtab.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="symmem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="objorl.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="mixcache.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="objfree.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="debug.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="permdata.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="strtab.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="carve.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="impexp.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ring.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="virtpage.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="dbgall.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="mapio.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="cmdall.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ovlsupp.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="wcomdef.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="objpass1.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="distrib.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="lnkerror.msg" />
-    <None Include="wlink.msg" />
-    <None Include="rc.msg" />
   </ItemGroup>
 </Project>

@@ -119,55 +119,28 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="coff\c\coffentr.c">
+    <ClCompile Include="coffentr.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="coff\c\coffflhn.c">
+    <ClCompile Include="coffflhn.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="coff\c\coffimpl.c">
+    <ClCompile Include="elfentr.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="coff\c\coffload.c">
+    <ClCompile Include="elfflhn.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="coff\c\cofflwlv.c">
+    <ClCompile Include="omfentr.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="elf\c\elfentr.c">
+    <ClCompile Include="omfflhn.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="elf\c\elfflhn.c">
+    <ClCompile Include="c\orlentry.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="elf\c\elfload.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="elf\c\elflwlv.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="omf\c\omfdrctv.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="omf\c\omfentr.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="omf\c\omfflhn.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="omf\c\omfload.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="omf\c\omfmunge.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="c\orlentry.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="c\orlflhnd.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="c\orlhash.c">
+    <ClCompile Include="orlflhnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
