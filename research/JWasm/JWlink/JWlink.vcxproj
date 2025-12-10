@@ -73,22 +73,22 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\bin\tools\intermediate\jwlink\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>..\orl\h;..\orl\coff\h;..\orl\elf\h;..\orl\omf\h;..\File;..\Memory;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>..\watcom\h;..\orl\h;..\orl\coff\h;..\orl\elf\h;..\orl\omf\h;..\File;..\Memory;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\bin\tools\intermediate\jwlink\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>..\orl\h;..\orl\coff\h;..\orl\elf\h;..\orl\omf\h;..\File;..\Memory;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>..\watcom\h;..\orl\h;..\orl\coff\h;..\orl\elf\h;..\orl\omf\h;..\File;..\Memory;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\bin\tools\intermediate\jwlink\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>..\orl\h;..\orl\coff\h;..\orl\elf\h;..\orl\omf\h;..\File;..\Memory;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>..\watcom\h;..\orl\h;..\orl\coff\h;..\orl\elf\h;..\orl\omf\h;..\File;..\Memory;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\bin\tools\intermediate\jwlink\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>..\orl\h;..\orl\coff\h;..\orl\elf\h;..\orl\omf\h;..\File;..\Memory;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>..\watcom\h;..\orl\h;..\orl\coff\h;..\orl\elf\h;..\orl\omf\h;..\File;..\Memory;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -167,10 +167,12 @@
     <ClCompile Include="linkutil.cpp" />
     <ClCompile Include="lsymtab.cpp" />
     <ClCompile Include="mem.cpp" />
+    <ClCompile Include="mixcache.cpp" />
     <ClCompile Include="msg.cpp" />
     <ClCompile Include="ntio.cpp" />
     <ClCompile Include="objio.cpp" />
     <ClCompile Include="objnode.cpp" />
+    <ClCompile Include="objorl.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
@@ -192,10 +194,12 @@
     <ClInclude Include="linkutil.h" />
     <ClInclude Include="lsymtab.h" />
     <ClInclude Include="mem.h" />
+    <ClInclude Include="mixcache.h" />
     <ClInclude Include="msg.h" />
     <ClInclude Include="ntio.h" />
     <ClInclude Include="objio.h" />
     <ClInclude Include="objnode.h" />
+    <ClInclude Include="objorl.h" />
     <ClInclude Include="objstruct.h" />
     <ClInclude Include="ovlstruct.h" />
     <ClInclude Include="ovltab.h" />
@@ -214,6 +218,9 @@
     </ProjectReference>
     <ProjectReference Include="..\Memory\Memory.vcxproj">
       <Project>{36412e4a-5780-46b9-bf4b-0d79b4a7de96}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\orl\orl.vcxproj">
+      <Project>{6d6ea67c-cf31-4c1c-a102-d3fc81329a21}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

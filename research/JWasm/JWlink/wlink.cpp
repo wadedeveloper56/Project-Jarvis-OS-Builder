@@ -8,6 +8,7 @@
 #include "objio.h"
 #include "spillio.h"
 #include "lsymtab.h"
+#include "objorl.h"
 
 static char* ArgSave;
 char** _argv;
@@ -39,7 +40,7 @@ void InitSubSystems(void)
    InitTokBuff();
    InitSpillFile();
    InitSym();
-   // InitObjORL();
+   InitObjORL();
    // InitCmdFile();
 }
 

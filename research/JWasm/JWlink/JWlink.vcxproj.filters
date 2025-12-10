@@ -60,6 +60,12 @@
     <ClCompile Include="symmem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="objorl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mixcache.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -138,6 +144,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="symmem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="objorl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mixcache.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
