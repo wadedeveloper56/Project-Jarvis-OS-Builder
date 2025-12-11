@@ -19,6 +19,9 @@
 #include "ovlsupp.h"
 #include "wcomdef.h"
 #include "distrib.h"
+#include "loadnov.h"
+#include "loadpe.h"
+#include "obj2supp.h"
 
 static char* ArgSave;
 char** _argv;
@@ -88,9 +91,9 @@ static void ResetSubSystems(void)
     ResetOvlSupp();
     ResetComdef();
     ResetDistrib();
-    //ResetLoadNov();
-    //ResetLoadPE();
-    //ResetObj2Supp();
+    ResetLoadNov();
+    ResetLoadPE();
+    ResetObj2Supp();
     //ResetObjIO();
     //ResetObjOMF();
     //ResetObjPass1();
