@@ -345,11 +345,18 @@
     <None Include="wlink.msg" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="c\cmdphar.h" />
+    <ClInclude Include="c\exephar.h" />
+    <ClInclude Include="c\impexp.h" />
     <ClInclude Include="c\procfile.h" />
     <ClInclude Include="h\banner.h" />
     <ClInclude Include="h\carve.h" />
     <ClInclude Include="h\cmdall.h" />
+    <ClInclude Include="h\cmdelf.h" />
     <ClInclude Include="h\cmdline.h" />
+    <ClInclude Include="h\cmdnov.h" />
+    <ClInclude Include="h\cmdos2.h" />
+    <ClInclude Include="h\cmdqnx.h" />
     <ClInclude Include="h\cmdutil.h" />
     <ClInclude Include="h\dbgall.h" />
     <ClInclude Include="h\debug.h" />
@@ -364,6 +371,7 @@
     <ClInclude Include="h\ldefext.h" />
     <ClInclude Include="h\link.h" />
     <ClInclude Include="h\linkutil.h" />
+    <ClInclude Include="h\loados2.h" />
     <ClInclude Include="h\loadpe.h" />
     <ClInclude Include="h\lsymtab.h" />
     <ClInclude Include="h\mapio.h" />
@@ -406,17 +414,23 @@
   <ItemGroup>
     <ClCompile Include="c\carve.cpp" />
     <ClCompile Include="c\cmdall.cpp" />
+    <ClCompile Include="c\cmdelf.cpp" />
     <ClCompile Include="c\cmdline.cpp" />
+    <ClCompile Include="c\cmdnov.cpp" />
+    <ClCompile Include="c\cmdphar.cpp" />
+    <ClCompile Include="c\cmdqnx.cpp" />
     <ClCompile Include="c\cmdutil.cpp" />
     <ClCompile Include="c\dbgall.cpp" />
     <ClCompile Include="c\debug.cpp" />
     <ClCompile Include="c\distrib.cpp" />
     <ClCompile Include="c\globals.cpp" />
     <ClCompile Include="c\hash.cpp" />
+    <ClCompile Include="c\impexp.cpp" />
     <ClCompile Include="c\libr.cpp" />
     <ClCompile Include="c\linkutil.cpp" />
     <ClCompile Include="c\loadfile.cpp" />
     <ClCompile Include="c\loadnov.cpp" />
+    <ClCompile Include="c\loados2.cpp" />
     <ClCompile Include="c\loadpe.cpp" />
     <ClCompile Include="c\lsymtab.cpp" />
     <ClCompile Include="c\mapio.cpp" />
@@ -449,6 +463,7 @@
     <ClCompile Include="c\wcomdef.cpp" />
     <ClCompile Include="c\wlink.cpp" />
     <ClCompile Include="c\wlnkmsg.cpp" />
+    <ClCompile Include="h\cmdos2.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>

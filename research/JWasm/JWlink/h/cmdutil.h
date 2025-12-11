@@ -110,3 +110,4 @@ typedef enum {
 extern cmdfilelist* CmdFile;
 
 section* NewSection(void);
+char* FileName(char* buff, unsigned len, file_defext etype, bool force);

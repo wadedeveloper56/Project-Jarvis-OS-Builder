@@ -2,6 +2,7 @@
 #include "globals.h"
 #include "linkutil.h"
 #include "ntio.h"
+#include "mem.h"
 
 unsigned_16 blog_32(unsigned_32 value)
 {
@@ -83,4 +84,15 @@ void WriteInfoStdOut(char* str, unsigned level, char* sym)
 char* GetEnvString(char* envname)
 {
     return(getenv(envname));
+}
+
+char* ChkToString(void* mem, unsigned len)
+/******************************************/
+{
+    char* str;
+
+    _ChkAlloc(char *, str, len + 1);
+    memcpy(str, mem, len);
+    str[len] = '\0';
+    return(str);
 }

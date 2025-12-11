@@ -1,5 +1,3 @@
-#pragma once
-
 pick1(E_COMMAND, ".lnk")
 pick1(E_MAP, ".map")
 pick1(E_LIBRARY, ".lib")

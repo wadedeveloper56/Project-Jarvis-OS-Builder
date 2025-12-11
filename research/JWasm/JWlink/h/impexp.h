@@ -1,8 +1,5 @@
 #pragma once
 
-#include "types.h"
-#include "globals.h"
-
 #define NOT_IMP_BY_ORDINAL 0xFFFFFFFF
 
 typedef struct entry_export {
@@ -21,3 +18,4 @@ typedef struct entry_export {
     targ_addr               addr;
 } entry_export;
 
+void FreeExportList(void);

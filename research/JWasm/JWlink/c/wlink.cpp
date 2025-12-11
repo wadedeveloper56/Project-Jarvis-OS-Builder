@@ -134,7 +134,7 @@ static void CleanSubSystems(void)
     FreeLocalImports();
     CleanLoadFile();
     CleanLinkStruct();
-    //FreeFormatStuff();
+    FreeFormatStuff();
     //FreeObjInfo();
     //FreeVirtMem();
     //CleanToc();

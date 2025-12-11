@@ -174,3 +174,16 @@ void CleanLinkStruct(void)
     }
 }
 
+#if defined(_OS2) || defined( _QNXLOAD )
+void FreeSegFlags(seg_flags* curr)
+{
+    seg_flags* next;
+
+    while (curr != NULL) {
+        next = curr->next;
+        _LnkFree(curr->name);
+        _LnkFree(curr);
+        curr = next;
+    }
+}
+#endif

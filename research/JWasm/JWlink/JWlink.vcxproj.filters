@@ -191,6 +191,30 @@
     <ClInclude Include="h\overlays.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="h\cmdqnx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\cmdos2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\loados2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c\impexp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\cmdelf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c\cmdphar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c\exephar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\cmdnov.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="c\carve.cpp">
@@ -329,6 +353,27 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="c\overlays.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\cmdqnx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="h\cmdos2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\loados2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\impexp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\cmdelf.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\cmdphar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\cmdnov.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
