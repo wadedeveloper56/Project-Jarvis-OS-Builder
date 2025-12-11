@@ -27,6 +27,11 @@
 #include "objstrip.h"
 #include "omfreloc.h"
 #include "reloc.h"
+#include "symtrace.h"
+#include "loadfile.h"
+#include "salloc.h"
+#include "toc.h"
+#include "libr.h"
 
 static char* ArgSave;
 char** _argv;
@@ -80,7 +85,7 @@ static void ResetMisc(void)
     // set case sensitivity for symbols
     ResetSym();
     SetSymCase();
-    //SetLibCase();
+    SetLibCase();
 }
 
 static void ResetSubSystems(void)
@@ -105,10 +110,10 @@ static void ResetSubSystems(void)
     ResetObjStrip();
     ResetOMFReloc();
     ResetReloc();
-    //ResetSymTrace();
-    //ResetLoadFile();
-    //ResetAddr();
-    //ResetToc();
+    ResetSymTrace();
+    ResetLoadFile();
+    ResetAddr();
+    ResetToc();
 }
 
 static void CleanSubSystems(void)

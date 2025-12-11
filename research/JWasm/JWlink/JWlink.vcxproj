@@ -348,6 +348,8 @@
     <ClInclude Include="h\formats.h" />
     <ClInclude Include="h\globals.h" />
     <ClInclude Include="h\hash.h" />
+    <ClInclude Include="h\libr.h" />
+    <ClInclude Include="h\loadfile.h" />
     <ClInclude Include="h\loadnov.h" />
     <ClInclude Include="h\impexp.h" />
     <ClInclude Include="h\ldefext.h" />
@@ -376,11 +378,14 @@
     <ClInclude Include="h\permdata.h" />
     <ClInclude Include="h\reloc.h" />
     <ClInclude Include="h\ring.h" />
+    <ClInclude Include="h\salloc.h" />
     <ClInclude Include="h\spillio.h" />
     <ClInclude Include="h\standard.h" />
     <ClInclude Include="h\strtab.h" />
     <ClInclude Include="h\symmem.h" />
     <ClInclude Include="h\syms.h" />
+    <ClInclude Include="h\symtrace.h" />
+    <ClInclude Include="h\toc.h" />
     <ClInclude Include="h\types.h" />
     <ClInclude Include="h\virtpage.h" />
     <ClInclude Include="h\wcomdef.h" />
@@ -398,7 +403,9 @@
     <ClCompile Include="c\distrib.cpp" />
     <ClCompile Include="c\globals.cpp" />
     <ClCompile Include="c\hash.cpp" />
+    <ClCompile Include="c\libr.cpp" />
     <ClCompile Include="c\linkutil.cpp" />
+    <ClCompile Include="c\loadfile.cpp" />
     <ClCompile Include="c\loadnov.cpp" />
     <ClCompile Include="c\loadpe.cpp" />
     <ClCompile Include="c\lsymtab.cpp" />
@@ -420,9 +427,12 @@
     <ClCompile Include="c\permdata.cpp" />
     <ClCompile Include="c\reloc.cpp" />
     <ClCompile Include="c\ring.cpp" />
+    <ClCompile Include="c\salloc.cpp" />
     <ClCompile Include="c\spillio.cpp" />
     <ClCompile Include="c\strtab.cpp" />
     <ClCompile Include="c\symmem.cpp" />
+    <ClCompile Include="c\symtrace.cpp" />
+    <ClCompile Include="c\toc.cpp" />
     <ClCompile Include="c\virtpage.cpp" />
     <ClCompile Include="c\wcomdef.cpp" />
     <ClCompile Include="c\wlink.cpp" />
