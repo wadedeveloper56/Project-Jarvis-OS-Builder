@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "globals.h"
 #include "symmem.h"
+#include "permdata.h"
 
 #define SYM_BLOCK_SIZE      (16*1024)
 #define SYM_BLOCK_MIN       32
@@ -24,4 +25,10 @@ static block_data PermBlocks;
 void GetSymBlock(void)
 {
     PermBlocks.list = NULL;
+}
+
+void ReleasePass1(void)
+{
+    FreeList(Pass1Blocks.list);
+    Pass1Blocks.list = NULL;
 }

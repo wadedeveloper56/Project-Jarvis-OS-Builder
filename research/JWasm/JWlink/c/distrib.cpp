@@ -1,6 +1,10 @@
 #include "pch.h"
 #include "globals.h"
 #include "distrib.h"
+#include "objfree.h"
+#include "mem.h"
+#include "symmem.h"
+#include "distrib.h"
 
 static unsigned_16  CurrModThere;
 static arcdata* ArcBuffer;
@@ -19,4 +23,17 @@ void ResetDistrib(void)
     ArcBuffer = NULL;
     ModTable = NULL;
     SectOvlTab = NULL;
+}
+
+void FreeDistStuff(void)
+{
+    unsigned    index;
+
+    for (index = 1; index <= CurrModHandle; index++) {
+        FreeAMod(ModTable[index]);
+    }
+    _LnkFree(ModTable);
+    _LnkFree(ArcBuffer);
+    _LnkFree(SectOvlTab);
+    ReleasePass1();
 }

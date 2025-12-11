@@ -19,3 +19,4 @@ typedef struct module_import {
     unsigned                    num_entries;
 } module_import;
 
+void FreePELocalImports(void);

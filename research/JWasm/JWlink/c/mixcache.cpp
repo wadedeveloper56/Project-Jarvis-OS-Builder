@@ -3,6 +3,7 @@
 #include "mixcache.h"
 #include "mem.h"
 #include "ntio.h"
+#include "objio.h"
 
 static bool     Multipage;
 
@@ -94,4 +95,114 @@ void* CachePermRead(file_list* list, unsigned long pos, unsigned len)
         memcpy(result, buf, len);
     }
     return result;
+}
+
+void CacheFree(file_list* list, void* mem)
+{
+    if (list->file->flags & INSTAT_PAGE_CACHE) {
+        _LnkFree(mem);
+    }
+}
+
+#define CACHE_PAGE_SIZE         (8*1024)
+
+static unsigned NumCacheBlocks(unsigned long len)
+{
+    unsigned    numblocks;
+
+    numblocks = len / CACHE_PAGE_SIZE;
+    if (len % CACHE_PAGE_SIZE != 0) {
+        numblocks++;
+    }
+    return numblocks;
+}
+
+static bool DumpFileCache(infilelist* file, bool nuke)
+{
+    unsigned    num;
+    unsigned    savenum;
+    unsigned    index;
+    char** blocklist;
+    bool        blockfreed;
+
+    blockfreed = FALSE;
+    if (nuke) {
+        savenum = UINT_MAX;
+    }
+    else {
+        savenum = file->currpos / CACHE_PAGE_SIZE;
+    }
+    if (file->cache != NULL) {
+        num = NumCacheBlocks(file->len);
+        blocklist = (char**)file->cache;
+        for (index = 0; index < num; index++) {
+            if (index != savenum && *blocklist != NULL) {
+                _LnkFree(*blocklist);
+                *blocklist = NULL;
+                blockfreed = TRUE;
+            }
+            blocklist++;
+        }
+    }
+    return blockfreed;
+}
+
+void FreeObjCache(file_list* list)
+{
+    if (list == NULL) return;
+    if (list->file->flags & INSTAT_FULL_CACHE) {
+        _LnkFree(list->file->cache);
+    }
+    else {
+        DumpFileCache(list->file, TRUE);
+    }
+    list->file->cache = NULL;
+}
+
+bool DumpObjCache(void)
+{
+    infilelist* file;
+
+    file = CachedFiles;
+    while (file != NULL) {
+        if (file->flags & INSTAT_PAGE_CACHE) {
+            if (CurrMod == NULL || CurrMod->f.source == NULL
+                || CurrMod->f.source->file != file) {
+                if (DumpFileCache(file, TRUE)) return TRUE;
+            }
+        }
+        file = file->next;
+    }
+    return FALSE;
+}
+
+void CacheClose(file_list* list, unsigned pass)
+{
+    infilelist* file;
+    bool        nukecache;
+
+    if (list == NULL) return;
+    file = list->file;
+    //    if( file->handle == NIL_HANDLE ) return;
+    file->flags = (infile_flags)(file->flags & ~INSTAT_IN_USE);
+    switch (pass) {
+        case 1: /* first pass */
+            nukecache = !(file->flags & INSTAT_LIBRARY);
+            if (file->flags & INSTAT_FULL_CACHE) {
+                if (nukecache) {
+                    FreeObjCache(list);
+                }
+            }
+            else {
+                DumpFileCache(file, nukecache);   // don't cache .obj's
+            }
+            break;
+        case 3: /* freeing structure */
+            FreeObjCache(list);
+            if (file->handle != NIL_HANDLE) {
+                QClose(file->handle, file->name);
+                file->handle = NIL_HANDLE;
+            }
+            break;
+    }
 }

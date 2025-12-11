@@ -2,6 +2,8 @@
 #include "globals.h"
 #include "objnode.h"
 #include "mem.h"
+#include "carve.h"
+#include "permdata.h"
 
 nodearray* ExtNodes;           // ptr to obj file import list
 nodearray* SegNodes;           // ptr to obj file segment list
@@ -46,4 +48,14 @@ void BurnNodes(void)
     BurnNodeArray(SegNodes);
     BurnNodeArray(ExtNodes);
     BurnNodeArray(NameNodes);
+}
+
+void FreeModEntry(mod_entry* mod)
+{
+    CarveFree(CarveModEntry, mod);
+}
+
+void FreeSegData(void* sdata)
+{
+    CarveFree(CarveSegData, sdata);
 }

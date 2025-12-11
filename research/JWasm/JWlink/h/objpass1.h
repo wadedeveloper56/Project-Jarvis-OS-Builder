@@ -28,3 +28,4 @@ typedef struct cdat_info {
 } comdat_info;
 
 void ResetObjPass1(void);
+void FreeLeader(void* seg);

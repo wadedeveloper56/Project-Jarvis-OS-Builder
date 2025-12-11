@@ -4,6 +4,7 @@
 #include "msg.h"
 #include "wlnkmsg.h"
 #include "ntio.h"
+#include "ring.h"
 
 #undef pick
 #define pick( num, string ) string
@@ -71,4 +72,10 @@ void WriteMapNL(unsigned count)
         }
         MapCol = 0;
     }
+}
+
+void FreeUndefs(void)
+{
+    RingFree(&SymTraceList);
+    RingFree(&UndefList);
 }

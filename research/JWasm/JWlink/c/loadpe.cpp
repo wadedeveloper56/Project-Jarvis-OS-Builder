@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "globals.h"
 #include "loadpe.h"
+#include "permdata.h"
 
 #define I386_TRANSFER_OP1       0xff    /* first byte of a "JMP [FOO]" */
 #define I386_TRANSFER_OP2       0x25    /* second byte of a "JMP [FOO]" */
@@ -99,4 +100,11 @@ void ResetLoadPE(void)
 #if 1 /* JWLink: exports */
     memset(&EData, 0, sizeof(EData));
 #endif
+}
+
+void FreePELocalImports(void)
+{
+    FreeList(PELocalImpList);
+    PELocalImpList = NULL;
+    NumLocalImports = 0;
 }

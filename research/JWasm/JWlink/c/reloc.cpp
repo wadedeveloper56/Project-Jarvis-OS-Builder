@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "globals.h"
 #include "reloc.h"
+#include "mem.h"
+#include "overlays.h"
 
 typedef union {
     unsigned long   spill;
@@ -32,4 +34,109 @@ reloc_info* FloatFixups;
 void ResetReloc(void)
 {
     FloatFixups = NULL;
+}
+
+static bool FreeRelocList(reloc_info* list)
+{
+    while (list != NULL) {
+        if (!(list->sizeleft & RELOC_SPILLED)) {
+            _LnkFree(list->loc.addr);
+        }
+        list = list->next;
+    }
+    return(FALSE);  /* needed for OS2 generic traversal routines */
+}
+
+static void FreeRelocSect(section* sect)
+{
+    FreeRelocList((reloc_info*)sect->reloclist);
+}
+
+static bool TraverseRelocBlock(reloc_info** reloclist, unsigned num,  bool (*fn)(reloc_info*))
+{
+    while (num > 0) {
+        if (fn(*reloclist++))
+            return(TRUE);
+        if (FmtData.type & MK_OS2_FLAT) {
+            if (fn(*reloclist++)) {
+                return(TRUE);
+            }
+        }
+        num--;
+    }
+    return(FALSE);
+}
+
+bool TraverseOS2RelocList(group_entry* group, bool (*fn)(reloc_info*))
+{
+    unsigned_32         index;
+    unsigned_32         highidx;
+    unsigned            lowidx;
+    reloc_info*** reloclist;
+
+    reloclist = (reloc_info***)group->g.grp_relocs;
+    if (reloclist != NULL) {
+        index = OSF_PAGE_COUNT(group->totalsize);
+        highidx = OSF_RLIDX_HIGH(index);
+        while (highidx > 0) {
+            if (TraverseRelocBlock(*reloclist, OSF_RLIDX_MAX, fn))
+                return(TRUE);
+            reloclist++;
+            highidx--;
+        }
+        lowidx = OSF_RLIDX_LOW(index);
+        if (lowidx > 0) {
+            return(TraverseRelocBlock(*reloclist, OSF_RLIDX_LOW(index), fn));
+        }
+    }
+    return(FALSE);
+}
+
+static void FreeGroupRelocs(group_entry* group)
+{
+    unsigned_32         highidx;
+    unsigned_32         index;
+    reloc_info*** reloclist;
+
+    if (!(LinkState & MAKE_RELOCS))
+        return;
+    if (FmtData.type & (MK_OS2_FLAT | MK_PE)) {
+        TraverseOS2RelocList(group, FreeRelocList);
+        reloclist = (reloc_info***)group->g.grp_relocs;
+        if (reloclist != NULL) {
+            index = OSF_PAGE_COUNT(group->totalsize);
+            highidx = OSF_RLIDX_HIGH(index);
+            if (OSF_RLIDX_LOW(index) != 0) {
+                highidx++;
+            }
+            while (highidx > 0) {
+                _LnkFree(*reloclist);
+                reloclist++;
+                highidx--;
+            }
+        }
+    }
+    else if (FmtData.type & (MK_ELF | MK_OS2_16BIT | MK_QNX)) {
+        FreeRelocList((reloc_info*)group->g.grp_relocs);
+    }
+}
+
+void FreeRelocInfo(void)
+{
+    group_entry* group;
+
+    if (!(LinkState & MAKE_RELOCS))
+        return;
+    if (FmtData.type & (MK_ELF | MK_OS2_FLAT | MK_PE | MK_OS2_16BIT | MK_QNX)) {
+        for (group = Groups; group != NULL; group = group->next_group) {
+            FreeGroupRelocs(group);
+        }
+    }
+    else if (Root != NULL) {
+        WalkAllSects(FreeRelocSect);
+    }
+    if (FmtData.type & MK_QNX) {
+        FreeRelocList(FloatFixups);
+        FreeRelocSect(Root);
+    }
 }

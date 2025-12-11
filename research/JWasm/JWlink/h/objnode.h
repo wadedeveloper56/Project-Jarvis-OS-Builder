@@ -15,3 +15,5 @@ typedef struct nodearray {
 
 void InitNodes(void);
 void BurnNodes(void);
+void FreeModEntry(mod_entry* mod);
+void FreeSegData(void* sdata);

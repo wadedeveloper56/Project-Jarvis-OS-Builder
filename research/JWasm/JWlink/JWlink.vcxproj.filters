@@ -185,6 +185,12 @@
     <ClInclude Include="h\libr.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="c\procfile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\overlays.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="c\carve.cpp">
@@ -317,6 +323,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="c\libr.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\procfile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\overlays.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

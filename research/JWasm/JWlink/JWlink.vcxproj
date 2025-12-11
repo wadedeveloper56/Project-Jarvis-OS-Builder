@@ -179,6 +179,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <GenerateMapFile>true</GenerateMapFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -200,7 +201,8 @@
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <GenerateMapFile>true</GenerateMapFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -218,6 +220,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <GenerateMapFile>true</GenerateMapFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
@@ -235,6 +238,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <GenerateMapFile>true</GenerateMapFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64EC'">
@@ -252,6 +256,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <GenerateMapFile>true</GenerateMapFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -273,7 +278,8 @@
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <GenerateMapFile>true</GenerateMapFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
@@ -295,7 +301,8 @@
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <GenerateMapFile>true</GenerateMapFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64EC'">
@@ -317,7 +324,8 @@
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <GenerateMapFile>true</GenerateMapFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -337,6 +345,7 @@
     <None Include="wlink.msg" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="c\procfile.h" />
     <ClInclude Include="h\banner.h" />
     <ClInclude Include="h\carve.h" />
     <ClInclude Include="h\cmdall.h" />
@@ -372,6 +381,7 @@
     <ClInclude Include="h\objstrip.h" />
     <ClInclude Include="h\objstruct.h" />
     <ClInclude Include="h\omfreloc.h" />
+    <ClInclude Include="h\overlays.h" />
     <ClInclude Include="h\ovlstruct.h" />
     <ClInclude Include="h\ovlsupp.h" />
     <ClInclude Include="h\ovltab.h" />
@@ -423,8 +433,10 @@
     <ClCompile Include="c\objpass1.cpp" />
     <ClCompile Include="c\objstrip.cpp" />
     <ClCompile Include="c\omfreloc.cpp" />
+    <ClCompile Include="c\overlays.cpp" />
     <ClCompile Include="c\ovlsupp.cpp" />
     <ClCompile Include="c\permdata.cpp" />
+    <ClCompile Include="c\procfile.cpp" />
     <ClCompile Include="c\reloc.cpp" />
     <ClCompile Include="c\ring.cpp" />
     <ClCompile Include="c\salloc.cpp" />

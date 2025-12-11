@@ -23,3 +23,9 @@ extern seg_leader* StackSegPtr;
 extern startinfo        StartInfo;
 
 void ResetLoadFile(void);
+void FreeOutFiles(void);
+void InitBuffFile(outfilelist* outfile, char* filename, bool executable);
+void ResetLoadFile(void);
+void CleanLoadFile(void);
+void InitLoadFile(void);
+

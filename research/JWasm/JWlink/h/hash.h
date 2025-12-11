@@ -37,3 +37,4 @@ typedef struct _TAG_HTable {
 
 unsigned StringiHashFunc(void* _s, unsigned size);
 pHTable CreateHTable(int size, pHashFunc hashFunc, pHashElemCmp compareFunc, pAllocFunc allocFunc, pFreeFunc freeFunc);
+void ZapHTable(pHTable table, void (*zapElemAction)(void*));

@@ -32,6 +32,7 @@
 #include "salloc.h"
 #include "toc.h"
 #include "libr.h"
+#include "procfile.h"
 
 static char* ArgSave;
 char** _argv;
@@ -122,17 +123,17 @@ static void CleanSubSystems(void)
         QClose(MapFile, MapFName);
         MapFile = NIL_HANDLE;
     }
-    //FreeOutFiles();
+    FreeOutFiles();
     _LnkFree(MapFName);
-    //BurnSystemList();
-    //FreeList(LibPath);
-    //CloseSpillFile();
-    //CleanTraces();
-    //FreePaths();
-    //FreeUndefs();
-    //FreeLocalImports();
-    //CleanLoadFile();
-    //CleanLinkStruct();
+    BurnSystemList();
+    FreeList(LibPath);
+    CloseSpillFile();
+    CleanTraces();
+    FreePaths();
+    FreeUndefs();
+    FreeLocalImports();
+    CleanLoadFile();
+    CleanLinkStruct();
     //FreeFormatStuff();
     //FreeObjInfo();
     //FreeVirtMem();
@@ -208,104 +209,6 @@ void LinkMainLine(char* cmds)
     //    cmds = GetNextLink();
         if (cmds == NULL) break;
     }
-}
-
-static void PreAddrCalcFormatSpec(void)
-{
-//#ifdef _OS2
-//    if (FmtData.type & MK_PE) {
-//        ChkPEData();
-//    }
-//    else if (FmtData.type & (MK_OS2 | MK_WIN_VXD)) {
-//        if (IS_PPC_OS2) {
-//            // Development temporarly on hold:
-//            // ChkOS2ElfData();
-//        }
-//        else {
-//            ChkOS2Data();
-//        }
-//    }
-//#endif
-//#ifdef _NOVELL
-//    if (FmtData.type & MK_NOVELL) {
-//        FindExportedSyms();
-//    }
-//#endif
-//#ifdef _PHARLAP
-//    if (FmtData.type & MK_PHAR_FLAT && LinkState & HAVE_16BIT_CODE
-//        && !(CmdFlags & CF_HAVE_REALBREAK)) {
-//        LnkMsg(WRN + MSG_NO_REALBREAK_WITH_16BIT, NULL);
-//    }
-//#endif
-}
-
-static void PostAddrCalcFormatSpec(void)
-{
-//#ifdef _OS2
-//    if (FmtData.type & MK_PE) {
-//        AllocPETransferTable();
-//    }
-//    else if (FmtData.type & MK_ELF) {
-//        ChkElfData();
-//    }
-//    else if (FmtData.type & (MK_OS2 | MK_WIN_VXD)) {
-//        if (IS_PPC_OS2) {
-//            // Development temporarly on hold:
-//            //PrepareOS2Elf();
-//        }
-//        else {
-//            ChkOS2Exports();
-//        }
-//    }
-//#endif
-//#ifdef _QNXLOAD
-//    else if (FmtData.type & MK_QNX) {
-//        SetQNXSegFlags();
-//    }
-//#endif
-}
-
-static void DoDefaultSystem(void)
-{
-    //if (!(LinkState & FMT_DECIDED)) {
-    //    if (LinkState & FMT_SEEN_32_BIT) {
-    //        HintFormat(MK_386);
-    //    }
-    //    else if (LinkState & FMT_SEEN_64_BIT) {
-    //        HintFormat(MK_PE);
-    //    }
-    //    else {
-    //        HintFormat(MK_286 | MK_QNX);
-    //    }
-    //    if (!(LinkState & FMT_DECIDED)) {
-    //        if (LinkState & FMT_SPECIFIED) {
-    //            LnkMsg(FTL + MSG_AMBIG_FORMAT, NULL);
-    //        }
-    //        if (LinkState & FMT_SEEN_32_BIT) {
-    //            ExecSystem("386");
-    //        }
-    //        else {
-    //            ExecSystem("286"); /* no 386 obj's after this */
-    //        }
-    //    }
-    //}
-}
-
-static void FindLibPaths(void)
-{
-    //AddFmtLibPaths();
-    //if (LinkState & FMT_SEEN_32_BIT) {
-    //    AddEnvPaths("LIB386");
-    //}
-    //else {
-    //    AddEnvPaths("LIB286");
-    //    /*
-    //        If we haven't seen a 386 object file by this time, we're
-    //        not going to.
-    //    */
-    //    HintFormat(MK_286);
-    //}
-    //AddEnvPaths("LIB");
 }
 
 int main(int argc, char** argv)
