@@ -158,6 +158,18 @@
     <ClInclude Include="h\obj2supp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="h\objomf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\objstrip.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\omfreloc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\reloc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="c\carve.cpp">
@@ -260,6 +272,21 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="c\obj2supp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\objomf.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\objpass1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\objstrip.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\omfreloc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\reloc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

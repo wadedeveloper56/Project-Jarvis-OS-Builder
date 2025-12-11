@@ -2,6 +2,22 @@
 #include "globals.h"
 #include "objio.h"
 #include "mem.h"
+#include "objstruct.h"
+
+typedef struct {
+    void* buffer;
+    unsigned long       pos;
+    infilelist* currfile;
+} bufferedfile;
+
+infilelist* CachedLibFiles;
+infilelist* CachedFiles;
+
+void ResetObjIO(void)
+{
+    CachedFiles = NULL;
+    CachedLibFiles = NULL;
+}
 
 void InitTokBuff(void)
 {

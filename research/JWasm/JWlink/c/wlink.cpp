@@ -22,6 +22,11 @@
 #include "loadnov.h"
 #include "loadpe.h"
 #include "obj2supp.h"
+#include "objomf.h"
+#include "objpass1.h"
+#include "objstrip.h"
+#include "omfreloc.h"
+#include "reloc.h"
 
 static char* ArgSave;
 char** _argv;
@@ -94,12 +99,12 @@ static void ResetSubSystems(void)
     ResetLoadNov();
     ResetLoadPE();
     ResetObj2Supp();
-    //ResetObjIO();
-    //ResetObjOMF();
-    //ResetObjPass1();
-    //ResetObjStrip();
-    //ResetOMFReloc();
-    //ResetReloc();
+    ResetObjIO();
+    ResetObjOMF();
+    ResetObjPass1();
+    ResetObjStrip();
+    ResetOMFReloc();
+    ResetReloc();
     //ResetSymTrace();
     //ResetLoadFile();
     //ResetAddr();

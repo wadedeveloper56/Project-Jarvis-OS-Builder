@@ -27,3 +27,4 @@ typedef struct cdat_info {
     sym_info            flags;
 } comdat_info;
 
+void ResetObjPass1(void);
