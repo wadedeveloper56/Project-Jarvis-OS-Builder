@@ -16,6 +16,7 @@
 #include "objpass1.h"
 #include "hash.h"
 #include "ovlsupp.h"
+#include "objnode.h"
 
 void FiniLinkStruct(void)
 {
@@ -187,3 +188,10 @@ void FreeSegFlags(seg_flags* curr)
     }
 }
 #endif
+
+void FreeObjInfo(void)
+{
+    FreeNodes(ExtNodes);
+    FreeNodes(SegNodes);
+    FreeNodes(GrpNodes);
+}
