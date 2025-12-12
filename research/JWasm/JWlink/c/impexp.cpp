@@ -6,7 +6,6 @@
 #include "permdata.h"
 
 static entry_export* FreeAnExport(entry_export* exp)
-/****************************************************/
 {
     entry_export* next;
 
@@ -17,7 +16,6 @@ static entry_export* FreeAnExport(entry_export* exp)
 }
 
 void FreeExportList(void)
-/********************************/
 {
     entry_export* exp;
 
@@ -26,4 +24,9 @@ void FreeExportList(void)
     while (exp != NULL) {
         exp = FreeAnExport(exp);
     }
+}
+
+void FreeImport(dll_sym_info* dll)
+{
+    CarveFree(CarveDLLInfo, dll);
 }

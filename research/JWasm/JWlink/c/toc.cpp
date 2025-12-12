@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "globals.h"
+#include "toc.h"
 #include "mem.h"
 
 #define BOGUS  0xa5a5a5a5
@@ -33,3 +34,7 @@ void ResetToc(void)
     TocSym = NULL;
 }
 
+void CleanToc(void)
+{
+    ZapHTable(Toc, LFree);
+}

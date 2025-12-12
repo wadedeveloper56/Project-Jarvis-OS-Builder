@@ -19,3 +19,4 @@ typedef struct entry_export {
 } entry_export;
 
 void FreeExportList(void);
+void FreeImport(dll_sym_info* dll);

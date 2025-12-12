@@ -32,3 +32,9 @@ void ReleasePass1(void)
     FreeList(Pass1Blocks.list);
     Pass1Blocks.list = NULL;
 }
+
+void RelSymBlock(void)
+{
+    FreeList(PermBlocks.list);
+    PermBlocks.list = NULL;
+}

@@ -3,6 +3,9 @@
 #include "lsymtab.h"
 #include "mem.h"
 #include "symmem.h"
+#include "carve.h"
+#include "permdata.h"
+#include "impexp.h"
 
 #define STATIC_TABSIZE  241  /* should be prime */
 #define GLOBAL_TABSIZE  1789  /* should be prime */
@@ -54,4 +57,46 @@ void SetSymCase(void)
     else {
         CmpRtn = _memicmp;
     }
+}
+
+static void WipeSym(symbol* sym)
+{
+    if (IS_SYM_IMPORTED(sym) && !(FmtData.type & MK_ELF)) {
+        if (FmtData.type & MK_NOVELL) {
+            if (sym->p.import != DUMMY_IMPORT_PTR) {
+                _LnkFree(sym->p.import);
+            }
+        }
+        else {
+            FreeImport((dll_sym_info*)sym->p.import);
+        }
+        sym->p.import = NULL;
+    }
+    else if (IS_SYM_ALIAS(sym)) {
+        if (sym->info & SYM_FREE_ALIAS) {
+            _LnkFree(sym->p.alias);
+        }
+        sym->u.aliaslen = 0;    // make sure this is nulled again
+    }
+}
+
+static void FreeSymbol(symbol* sym)
+{
+    WipeSym(sym);
+    CarveFree(CarveSymbol, sym);
+}
+
+void CleanSym(void)
+{
+    symbol* sym;
+    symbol* next;
+
+    if (!(LinkFlags & INC_LINK_FLAG)) {
+        for (sym = HeadSym; sym != NULL; sym = next) {
+            next = sym->link;
+            FreeSymbol(sym);
+        }
+    }
+    RelSymBlock();
+    ReleasePass1();
 }

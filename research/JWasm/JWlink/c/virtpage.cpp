@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "globals.h"
 #include "virtpage.h"
+#include "permdata.h"
 
 typedef struct vmemblock {
     struct vmemblock* next;
@@ -15,4 +16,10 @@ static vmemblock* VMemBlocks;
 void VirtMemInit(void)
 {
     VMemBlocks = nullptr;
+}
+
+void FreeVirtMem(void)
+{
+    FreeList(VMemBlocks);
+    VMemBlocks = NULL;
 }
