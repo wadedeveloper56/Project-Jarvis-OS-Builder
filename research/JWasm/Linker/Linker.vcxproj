@@ -157,15 +157,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="FileSubsystem.cpp" />
     <ClCompile Include="globals.cpp" />
     <ClCompile Include="Linker.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MemorySubsystem.cpp" />
+    <ClCompile Include="MessagingSubsystem.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="FileSubsystem.h" />
     <ClInclude Include="globals.h" />
+    <ClInclude Include="hash.h" />
     <ClInclude Include="Linker.h" />
     <ClInclude Include="MemorySubsystem.h" />
+    <ClInclude Include="MessagingSubsystem.h" />
+    <ClInclude Include="structures.h" />
+    <ClInclude Include="syms.h" />
     <ClInclude Include="types.h" />
   </ItemGroup>
   <ItemGroup>
@@ -175,6 +182,11 @@
     <ProjectReference Include="..\Memory\Memory.vcxproj">
       <Project>{36412e4a-5780-46b9-bf4b-0d79b4a7de96}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="lnkerror.msg" />
+    <None Include="rc.msg" />
+    <None Include="wlink.msg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

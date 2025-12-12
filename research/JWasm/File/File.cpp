@@ -2,53 +2,32 @@
 #include "framework.h"
 #include "File.h"
 
-FileHandle OpenFile(const char* filename, int oflag, int pmode)
+FileHandle OpenFile(const char* filename, const char* mode)
 {
-	return _open(filename, oflag, pmode);
+	return fopen(filename, mode);
 }
 
 int CloseFile(FileHandle handle)
 {
-	return _close(handle);
+	return fclose(handle);
 }
 
-int ReadFile(FileHandle handle, void* const buffer, unsigned const buffer_size)
+int ReadFile(FileHandle handle, void* buffer, size_t size, size_t count)
 {
-	return _read(handle, buffer, buffer_size);
+	return fread(buffer, size, count, handle);
 }
 
-int WriteFile(FileHandle handle, void* const buffer, unsigned int count)
+int WriteFile(FileHandle handle, const void* buffer, size_t size, size_t count)
 {
-	return _write(handle, buffer, count);
-}
-
-int setFileMode(FileHandle handle, int mode)
-{
-	return _setmode(handle, mode);
-}
-
-int FileAccess(const char* path, int mode)
-{
-	return _access(path, mode);
+	return fwrite(buffer, size, count, handle);
 }
 
 __int64 FileTell(FileHandle handle)
 {
-	return _telli64(handle);
+	return _ftelli64(handle);
 }
 
 __int64 FileSeek(FileHandle handle, __int64 offset, int origin)
 {
-	return _lseeki64(handle, offset, origin);
+	return _fseeki64(handle, offset, origin);
 }
-
-int FileRemove(const char* path)
-{
-	return remove(path);
-}
-
-int FileStat(FileHandle handle, struct _stati64* buffer)
-{
-	return _fstati64(handle, buffer);
-}
-

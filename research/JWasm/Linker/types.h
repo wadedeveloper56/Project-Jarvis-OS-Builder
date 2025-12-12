@@ -1,7 +1,32 @@
 #pragma once
 
 typedef unsigned long stateflag;
+typedef unsigned char   uint_8;
+typedef unsigned short  uint_16;
+typedef unsigned int    uint_32;
 
+typedef unsigned char   unsigned_8;
+typedef unsigned short  unsigned_16;
+typedef unsigned int    unsigned_32;
+
+typedef signed char     int_8;
+typedef signed short    int_16;
+typedef signed int      int_32;
+
+typedef signed char     signed_8;
+typedef signed short    signed_16;
+typedef signed int      signed_32;
+
+typedef unsigned_32 offset;
+typedef unsigned_16 segment;
+typedef unsigned long   virt_mem;
+
+typedef struct targ_addr {
+    offset              off;
+    segment             seg;
+} targ_addr;
+
+/*------------------ Linker Global State Flags -----------------------*/
 #define MAKE_RELOCS             0x00000001
 #define SEARCHING_LIBRARIES     0x00000002
 #define LIBRARIES_ADDED         0x00000004
