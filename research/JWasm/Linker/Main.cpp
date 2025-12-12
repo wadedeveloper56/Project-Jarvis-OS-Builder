@@ -5,9 +5,8 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-	Linker* linker = new Linker();
-	linker->mainLine();
-	delete linker;
+	Linker linker;
+	linker.mainLine();
 	return((LinkState & LINK_ERROR) ? 1 : 0);
 }
 

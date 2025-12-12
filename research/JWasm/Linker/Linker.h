@@ -1,7 +1,11 @@
 #pragma once
+
+#include "MemorySubsystem.h"
+
 class Linker
 {
-	public:
+	MemorySubsystem* memory;
+public:
 	Linker();
 	~Linker();
 	void mainLine();
