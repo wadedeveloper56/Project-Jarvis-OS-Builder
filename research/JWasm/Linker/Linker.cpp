@@ -8,10 +8,12 @@ Linker::Linker()
 	memory = new MemorySubsystem();
 	file = new FileSubsystem();
 	messaging = new MessagingSubsystem(file);
+	nodes = new NodeSubsystem(memory);
 }
 
 Linker::~Linker()
 {
+	delete nodes;
 	delete messaging;
 	delete file;
 	delete memory;
