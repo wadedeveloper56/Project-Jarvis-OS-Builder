@@ -6,7 +6,9 @@
     <Platform Name="x86" />
   </Configurations>
   <Project Path="File/File.vcxproj" Id="07c330d8-c0c2-42b5-a94e-ae87dab6420d" />
-  <Project Path="JWlink/JWlink.vcxproj" Id="e9f56c09-0b89-4d56-a063-60205ea6de6d" />
+  <Project Path="Linker/Linker.vcxproj" Id="cdbfd082-dd82-4f90-8d72-f346106592ee">
+    <Platform Solution="*|ARM64" Project="x64" />
+    <Platform Solution="*|ARM64EC" Project="x64" />
+  </Project>
   <Project Path="Memory/Memory.vcxproj" Id="36412e4a-5780-46b9-bf4b-0d79b4a7de96" />
-  <Project Path="orl/orl.vcxproj" Id="6d6ea67c-cf31-4c1c-a102-d3fc81329a21" />
 </Solution>
