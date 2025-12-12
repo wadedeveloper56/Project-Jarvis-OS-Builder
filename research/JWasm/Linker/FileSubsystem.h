@@ -13,6 +13,7 @@ public:
 	int Close();
 	int Read(void* buffer, size_t size, size_t count);
 	int Write(const void* buffer, size_t size, size_t count);
+	int WriteStdOut(const void* buffer, size_t size, size_t count);
 	__int64 Tell();
 	__int64 Seek(__int64 offset, int origin);
 };

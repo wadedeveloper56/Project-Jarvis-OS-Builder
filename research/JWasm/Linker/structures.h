@@ -154,13 +154,13 @@ typedef struct trace_info {
 typedef enum {
     // DBI_xxxx symbols are also stored here.
     // FMT_xxxx symbols (for deciding .obj format) are also stored here
-    MOD_DBI_SEEN = 0x00000800, // TRUE if dbi segment seen in this mod.
-    MOD_FIXED = 0x00001000, // TRUE if mod must stay in spec'd section
-    MOD_VISITED = 0x00002000, // TRUE if visited in call graph analysis.
-    MOD_NEED_PASS_2 = 0x00004000, // TRUE if pass 2 needed for this module.
-    MOD_LAST_SEG = 0x00008000, // TRUE if this module should end a group
-    MOD_GOT_NAME = 0x00010000, // TRUE if already got a source file name
-    MOD_IMPORT_LIB = 0x00020000, // ORL: TRUE if this is an import lib.
+    MOD_DBI_SEEN = 0x00000800, // true if dbi segment seen in this mod.
+    MOD_FIXED = 0x00001000, // true if mod must stay in spec'd section
+    MOD_VISITED = 0x00002000, // true if visited in call graph analysis.
+    MOD_NEED_PASS_2 = 0x00004000, // true if pass 2 needed for this module.
+    MOD_LAST_SEG = 0x00008000, // true if this module should end a group
+    MOD_GOT_NAME = 0x00010000, // true if already got a source file name
+    MOD_IMPORT_LIB = 0x00020000, // ORL: true if this is an import lib.
     MOD_KILL = 0x00040000, // module should be removed from list
     MOD_FLATTEN_DBI = 0x00080000, // flatten DBI found in this mod.
     MOD_DONE_PASS_1 = 0x00100000, // module been through pass 1 already.
@@ -431,25 +431,25 @@ typedef struct segdata {
 
     unsigned        combine : 2; // how to combine segment with others
     unsigned        alloc : 2; // comdat: where to allocate segment.
-    unsigned        is32bit : 1; // TRUE if segment is 32 bits
-    unsigned        iscode : 1; // TRUE if a code segment.
-    unsigned        isabs : 1; // TRUE if this is an absolute segment.
-    unsigned        iscdat : 1; // TRUE if this is a comdat
+    unsigned        is32bit : 1; // true if segment is 32 bits
+    unsigned        iscode : 1; // true if a code segment.
+    unsigned        isabs : 1; // true if this is an absolute segment.
+    unsigned        iscdat : 1; // true if this is a comdat
 
-    unsigned        isuninit : 1; // TRUE if seg is uninitialized
-    unsigned        isidata : 1; // TRUE if segment is .idata (ORL only)
-    unsigned        ispdata : 1; // TRUE if segment is .pdata
-    unsigned        isreldata : 1; // TRUE if segment is .reldata
-    unsigned        visited : 1; // dce: TRUE if visited in graph search.
-    unsigned        isrefd : 1; // dce: TRUE if this module is referenced.
-    unsigned        isdead : 1; // dce: TRUE if segdata or segdef killed.
+    unsigned        isuninit : 1; // true if seg is uninitialized
+    unsigned        isidata : 1; // true if segment is .idata (ORL only)
+    unsigned        ispdata : 1; // true if segment is .pdata
+    unsigned        isreldata : 1; // true if segment is .reldata
+    unsigned        visited : 1; // dce: true if visited in graph search.
+    unsigned        isrefd : 1; // dce: true if this module is referenced.
+    unsigned        isdead : 1; // dce: true if segdata or segdef killed.
     unsigned        isdefd : 1; // segdata has been defined
 
     unsigned        isfree : 1; // segdata is free (used in carver stuff)
     unsigned        isprepd : 1; // has been prepped for inc linking
     unsigned        canfarcall : 1; // OK to do far call optimization here
-    unsigned        hascdatsym : 1; // TRUE if comdat and has a symbol defd
-    unsigned        isreadonly : 1; // TRUE if readonly data. jwlink
+    unsigned        hascdatsym : 1; // true if comdat and has a symbol defd
+    unsigned        isreadonly : 1; // true if readonly data. jwlink
 } segdata;
 
 typedef struct node {
@@ -543,3 +543,109 @@ typedef struct order_segment {
     unsigned            NoEmit : 1;
 } order_segment;
 
+typedef enum {
+    MIDST,
+    ENDOFLINE,
+    ENDOFFILE,
+    ENDOFCMD
+}                       place;
+
+typedef enum {
+    NONBUFFERED,
+    COMMANDLINE,
+    INTERACTIVE,
+    BUFFERED,
+    ENVIRONMENT,
+    SYSTEM
+}                       method;
+
+typedef enum {
+    SEP_NO,
+    SEP_COMMA,
+    SEP_EQUALS,
+    SEP_PERIOD,
+    SEP_END,
+    SEP_QUOTE,
+    SEP_PAREN,
+    SEP_SPACE,
+    SEP_PERCENT,
+    SEP_DOT_EXT,
+    SEP_LCURLY,
+    SEP_RCURLY
+}                       sep_type;
+
+typedef enum {
+    OK,
+    REJECT
+}                       status;
+
+typedef enum {
+    ST_IS_ORDINAL,
+    ST_NOT_ORDINAL,
+    ST_INVALID_ORDINAL
+} ord_state;
+
+typedef struct tok {
+    char* buff;
+    unsigned    len;
+    char* next;
+    char* this1;
+    unsigned_16 line;
+    char        quoted;     /* if token parsed as a quoted string*/
+    unsigned_8  where : 2;
+    unsigned_8  how : 3;
+    unsigned_8  thumb : 1;
+    unsigned_8  locked : 1;
+    unsigned_8  skipToNext : 1;   /* set true if we need to skip to next token without a separator */
+} tok;
+
+typedef enum commandflag {
+    CF_TO_STDOUT = 0x00000001,
+    CF_SET_SECTION = 0x00000002,   // used for LIB/FIXEDLIB directives
+    CF_NO_DEF_LIBS = 0x00000004,
+    CF_FILES_BEFORE_DBI = 0x00000008,
+    CF_UNNAMED = 0x00000010,
+    CF_AUTO_SEG_FLAG = 0x00000020,   // used in CMDOS2
+    CF_MEMBER_ADDED = 0x00000040,
+    CF_SEPARATE_SYM = 0x00000080,
+    CF_AUTOSECTION = 0x00000100,
+    CF_SECTION_THERE = 0x00000200,
+    CF_HAVE_FILES = 0x00000400,
+    CF_HAVE_REALBREAK = 0x00000800,
+    CF_LANGUAGE_MASK = 0x00003000,
+    CF_LANGUAGE_ENGLISH = 0x00000000,
+    CF_LANGUAGE_JAPANESE = 0x00001000,
+    CF_LANGUAGE_CHINESE = 0x00002000,
+    CF_LANGUAGE_KOREAN = 0x00003000,
+    CF_ANON_EXPORT = 0x00004000,
+    CF_AFTER_INC = 0x00008000,  // option must be specd. after op inc
+    CF_DOING_OPTLIB = 0x00010000,
+    CF_NO_EXTENSION = 0x00020000    // don't put an extension on exe name
+} commandflag;
+
+typedef struct cmdfilelist {
+    struct cmdfilelist* prev;
+    struct cmdfilelist* next;
+    FileHandle            file;
+    char* symprefix;
+    char* name;
+    tok                 token;
+} cmdfilelist;
+
+typedef struct parse_entry {
+    char* keyword;
+    bool                (*rtn)(void);
+    enum exe_format     format;
+    commandflag         flags;
+} parse_entry;
+
+typedef struct sysblock {
+    struct sysblock* next;
+    char* name;
+    char                commands[1];
+} sysblock;
+
+typedef enum {
+    TOK_INCLUDE_DOT = 0x01,
+    TOK_IS_FILENAME = 0x02
+} tokcontrol;

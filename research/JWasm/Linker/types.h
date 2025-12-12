@@ -39,7 +39,7 @@ typedef struct targ_addr {
 #define FMT_INITIALIZED         0x00000200
 #define UNDEFED_SYM_ERROR       0x00000400
 #define GENERATE_LIB_LIST       0x00000800
-#define HAVE_16BIT_CODE         0x00001000      // TRUE if we have 16 bit code.
+#define HAVE_16BIT_CODE         0x00001000      // true if we have 16 bit code.
 #define HAVE_ALPHA_CODE         0x00002000
 #define HAVE_PPC_CODE           0x00004000
 #define HAVE_I86_CODE           0x00008000
@@ -55,3 +55,38 @@ typedef struct targ_addr {
 #define HAVE_MACHTYPE_MASK      (HAVE_I86_CODE | HAVE_ALPHA_CODE | HAVE_PPC_CODE | HAVE_MIPS_CODE)
 #define CLEAR_ON_INC    (STOP_WORKING | INTERNAL_DEBUG | GOT_PREV_STRUCTS | MAKE_RELOCS | FMT_SPECIFIED | FMT_DECIDED | FMT_INITIALIZED)
 #define ORDER_FLAG_MASK (DOSSEG_FLAG | SPEC_ORDER_FLAG)
+
+typedef unsigned long linkflag;
+
+#define DWARF_DBI_FLAG  0x00000001UL    // set if making DWARF debug info
+#define STK_SIZE_FLAG   0x00000002UL
+#define GOT_CHGD_FILES  0x00000004UL
+#define TRACE_FLAG      0x00000008UL
+#define __UNUSED_FLAG_0 0x00000010UL
+#define CV_DBI_FLAG     0x00000020UL
+#define UNDEFS_ARE_OK   0x00000040UL
+#define REDEFS_OK       0x00000080UL
+#define QUIET_FLAG      0x00000100UL
+#define PACKCODE_FLAG   0x00000200UL    // set if packcode specified
+#define VF_REMOVAL      0x00000400UL
+#define NOVELL_DBI_FLAG 0x00000800UL    // set if generating novell debug info
+#define PACKDATA_FLAG   0x00001000UL
+#define CASE_FLAG       0x00002000UL    // set for case sensitive operation
+#define OLD_DBI_FLAG    0x00004000UL    // set if making WATCOM debug info
+#define SHOW_DEAD       0x00008000UL
+#define STRIP_CODE      0x00010000UL    // strip dead code.
+#define CVPACK_FLAG     0x00020000UL
+#define MAX_ERRORS_FLAG 0x00040000UL    // there is a max. number of errors.
+#define DONT_UNMANGLE   0x00080000UL    // don't unmangle the names
+#define INC_LINK_FLAG   0x00100000UL
+#define NOCACHE_FLAG    0x00200000UL
+#define CACHE_FLAG      0x00400000UL
+#define FAR_CALLS_FLAG  0x00800000UL    // optimize far calls
+#define __UNUSED_FLAG_8 0x01000000UL
+#define __UNUSED_FLAG_7 0x02000000UL
+#define __UNUSED_FLAG_6 0x04000000UL
+#define __UNUSED_FLAG_5 0x08000000UL
+#define __UNUSED_FLAG_4 0x10000000UL
+#define __UNUSED_FLAG_3 0x20000000UL
+#define __UNUSED_FLAG_2 0x40000000UL
+#define __UNUSED_FLAG_1 0x80000000UL

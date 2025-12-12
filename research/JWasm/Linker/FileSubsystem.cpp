@@ -29,6 +29,11 @@ int FileSubsystem::Write(const void* buffer, size_t size, size_t count)
 	return WriteFile(currentFile, buffer, size, count);
 }
 
+int FileSubsystem::WriteStdOut(const void* buffer, size_t size, size_t count) 
+{
+	return WriteFile(stdout, buffer, size, count);
+}
+
 __int64 FileSubsystem::Tell()
 {
 	return FileTell(currentFile);
