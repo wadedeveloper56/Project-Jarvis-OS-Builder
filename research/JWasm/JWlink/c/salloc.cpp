@@ -9,5 +9,5 @@ void ResetAddr(void)
 {
     CurrLoc.seg = 0;
     CurrLoc.off = 0;
-    CurrentSeg = NULL;
+    CurrentSeg = nullptr;
 }

@@ -4,6 +4,6 @@
 
 void ResetObjOMF(void)
 {
-	//    ObjBuff = NULL;
-	//    EOObjRec = NULL;
+	//    ObjBuff = nullptr;
+	//    EOObjRec = nullptr;
 }

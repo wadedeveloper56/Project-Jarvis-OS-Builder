@@ -21,5 +21,5 @@ void VirtMemInit(void)
 void FreeVirtMem(void)
 {
     FreeList(VMemBlocks);
-    VMemBlocks = NULL;
+    VMemBlocks = nullptr;
 }

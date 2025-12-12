@@ -26,7 +26,7 @@ group_entry* FindGroup(segment seg)
 {
     group_entry* group;
 
-    for (group = Groups; group != NULL; group = group->next_group) {
+    for (group = Groups; group != nullptr; group = group->next_group) {
         if (group->grp_addr.seg == seg) {
             break;
         }
@@ -39,7 +39,7 @@ offset FindLinearAddr(targ_addr* addr)
     group_entry* group;
 
     group = FindGroup(addr->seg);
-    if (group != NULL) {
+    if (group != nullptr) {
         return(addr->off + (group->linear - group->grp_addr.off));
     }
     return(addr->off);
@@ -50,7 +50,7 @@ offset FindLinearAddr2(targ_addr* addr)
     group_entry* group;
 
     group = FindGroup(addr->seg);
-    if (group != NULL) {
+    if (group != nullptr) {
         return(addr->off + group->linear + FmtData.base);
     }
     return(addr->off);
@@ -67,12 +67,12 @@ bool TestBit(byte* array, unsigned num)
 
 void WriteStdOut(char* str)
 {
-    QWrite(_fileno(stdout), str, strlen(str), NULL);
+    QWrite(_fileno(stdout), str, strlen(str), nullptr);
 }
 
 void WriteNLStdOut(void)
 {
-    QWriteNL(_fileno(stdout), NULL);
+    QWriteNL(_fileno(stdout), nullptr);
 }
 
 void WriteInfoStdOut(char* str, unsigned level, char* sym)
@@ -95,4 +95,22 @@ char* ChkToString(void* mem, unsigned len)
     memcpy(str, mem, len);
     str[len] = '\0';
     return(str);
+}
+
+static void* SpawnStack;
+
+int Spawn(void (*fn)(void))
+{
+    void* save_env;
+    jmp_buf env;
+    int     status;
+
+    save_env = SpawnStack;
+    SpawnStack = env;
+    status = setjmp(env);
+    if (status == 0) {
+        (*fn)();
+    }
+    SpawnStack = save_env;  /* unwind */
+    return(status);
 }

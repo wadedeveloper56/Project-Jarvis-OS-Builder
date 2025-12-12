@@ -49,7 +49,7 @@ void InitBuffFile(outfilelist* outfile, char* filename, bool executable)
     outfile->handle = NIL_HANDLE;
     outfile->file_loc = 0;
     outfile->bufpos = 0;
-    outfile->buffer = NULL;
+    outfile->buffer = nullptr;
     outfile->ovlfnoff = 0;
     outfile->is_exe = executable;
     outfile->origin = 0;
@@ -64,12 +64,12 @@ static void FlushBuffFile(outfilelist* outfile)
         QWrite(outfile->handle, outfile->buffer, modpos, outfile->fname);
     }
     _LnkFree(outfile->buffer);
-    outfile->buffer = NULL;
+    outfile->buffer = nullptr;
 }
 
 void CloseBuffFile(outfilelist* outfile)
 {
-    if (outfile->buffer != NULL) {
+    if (outfile->buffer != nullptr) {
         FlushBuffFile(outfile);
     }
     QClose(outfile->handle, outfile->fname);
@@ -80,7 +80,7 @@ static void CloseOutFiles(void)
 {
     outfilelist* fnode;
 
-    for (fnode = OutFiles; fnode != NULL; fnode = fnode->next) {
+    for (fnode = OutFiles; fnode != nullptr; fnode = fnode->next) {
         if (fnode->handle != NIL_HANDLE) {
             CloseBuffFile(fnode);
         }
@@ -92,7 +92,7 @@ void FreeOutFiles(void)
     outfilelist* fnode;
 
     CloseOutFiles();
-    for (fnode = OutFiles; fnode != NULL; fnode = OutFiles) {
+    for (fnode = OutFiles; fnode != nullptr; fnode = OutFiles) {
         if (LinkState & LINK_ERROR) {
             QDelete(fnode->fname);
         }

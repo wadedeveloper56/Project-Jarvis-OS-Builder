@@ -21,5 +21,5 @@ static edgelist* FreedEdges;
 
 void ResetObjStrip(void)
 {
-    FreedEdges = NULL;
+    FreedEdges = nullptr;
 }

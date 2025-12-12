@@ -16,13 +16,13 @@ void CarveDebugFree(carve_t cv, void* elm)
     size_t esize;
 
     /* make sure object hasn't been freed before */
-    for (check = cv->free_list; check != NULL; check = check->next_free) {
+    for (check = cv->free_list; check != nullptr; check = check->next_free) {
         if (elm == (void*)check) {
             LnkFatal("carve: freed object was previously freed");
         }
     }
     /* make sure object is from this carve allocator */
-    for (block = cv->blk_list; block != NULL; block = block->next) {
+    for (block = cv->blk_list; block != nullptr; block = block->next) {
         start = block->data;
         compare = start + cv->blk_top;
 #if ! ( defined(__COMPACT__) || defined(__LARGE__) )
@@ -39,7 +39,7 @@ void CarveDebugFree(carve_t cv, void* elm)
         }
         if (elm == compare) break;
     }
-    if (block == NULL) {
+    if (block == nullptr) {
         LnkFatal("carve: freed object was never allocated");
     }
     DbgZapFreed(elm, cv->elm_size);
@@ -50,7 +50,7 @@ void CarveDebugFree(carve_t cv, void* elm)
 
 void CarveFree(carve_t cv, void* elm)
 {
-    if (elm == NULL) {
+    if (elm == nullptr) {
         return;
     }
     CarveDebugFree(cv, elm);
@@ -99,7 +99,7 @@ void* CarveAlloc(carve_t cv)
 {
     void* p;
 
-    if (cv->free_list == NULL) {
+    if (cv->free_list == nullptr) {
         MakeFreeList(cv, newBlk(cv), 0);
     }
     _REMOVE_FROM_FREE(cv, p);
@@ -121,9 +121,9 @@ carve_t CarveCreate(size_t elm_size, size_t blk_size)
     cv->elm_count = cv->blk_size / cv->elm_size;
     cv->blk_top = cv->elm_count * elm_size;
     cv->blk_count = 0;
-    cv->blk_list = NULL;
-    cv->free_list = NULL;
-    cv->blk_map = NULL;
+    cv->blk_list = nullptr;
+    cv->free_list = nullptr;
+    cv->blk_map = nullptr;
     cv->size_chg = FALSE;
     DbgAssert(cv->elm_size >= 2 * sizeof(void*));
     DbgAssert(cv->elm_count != 0);
@@ -141,16 +141,16 @@ void CarveVerifyAllGone(carve_t cv, char* node_name)
     bool        some_unfreed;
 
     some_unfreed = FALSE;
-    if (cv==NULL) return;
-    for (block = cv->blk_list; block != NULL; block = block->next) {
+    if (cv==nullptr) return;
+    for (block = cv->blk_list; block != nullptr; block = block->next) {
         compare = block->data + cv->blk_top;
         do {
             compare -= cv->elm_size;
             /* verify every block has been freed */
-            for (check = cv->free_list; check != NULL; check = check->next_free) {
+            for (check = cv->free_list; check != nullptr; check = check->next_free) {
                 if (compare == (void*)check) break;
             }
-            if (check == NULL) {
+            if (check == nullptr) {
                 if (!some_unfreed) {
                     FmtStr(buff, 80, "carve %s unfreed:", node_name);
                     WriteStdOut(buff);
@@ -172,12 +172,12 @@ void CarveDestroy(carve_t cv)
     blk_t* cur;
     blk_t* next;
 
-    if (cv != NULL) {
-        if (cv->blk_map != NULL) {
+    if (cv != nullptr) {
+        if (cv->blk_map != nullptr) {
             _LnkFree(cv->blk_map);
         }
         cur = cv->blk_list;
-        while (cur != NULL) {
+        while (cur != nullptr) {
             next = cur->next;
             _LnkFree(cur);
             cur = next;

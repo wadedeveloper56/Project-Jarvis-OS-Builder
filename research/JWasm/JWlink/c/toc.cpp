@@ -13,7 +13,7 @@ offset TocSize;
 offset TocShift;
 
 typedef struct {
-    segdata* sdata;    // If sdata == NULL, use sym to get address
+    segdata* sdata;    // If sdata == nullptr, use sym to get address
     // else use off and sdata->addr get address
     union {
         offset off;  // relative to sdata->addr
@@ -28,10 +28,10 @@ typedef struct {
 
 void ResetToc(void)
 {
-    Toc = NULL;
+    Toc = nullptr;
     TocSize = 0;
-    TocName = NULL;
-    TocSym = NULL;
+    TocName = nullptr;
+    TocSym = nullptr;
 }
 
 void CleanToc(void)

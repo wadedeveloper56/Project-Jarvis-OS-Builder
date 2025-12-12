@@ -13,9 +13,9 @@ void ResetOvlSupp(void)
 
 void FreeOvlStruct(void)
 {
-    OvlClasses = NULL;
-    OvlVectors = NULL;
-    if (OvlSeg != NULL) {
+    OvlClasses = nullptr;
+    OvlVectors = nullptr;
+    if (OvlSeg != nullptr) {
         FreeLeader(OvlSeg);
     }
     FreeDistStuff();
@@ -23,7 +23,7 @@ void FreeOvlStruct(void)
 
 static void WalkSections(section* sect, void (*rtn)(section*))
 {
-    for (; sect != NULL; sect = sect->next_sect) {
+    for (; sect != nullptr; sect = sect->next_sect) {
         rtn(sect);
         WalkAreas(sect->areas, rtn);
     }
@@ -31,7 +31,7 @@ static void WalkSections(section* sect, void (*rtn)(section*))
 
 void WalkAreas(OVL_AREA* ovl, void (*rtn)(section*))
 {
-    for (; ovl != NULL; ovl = ovl->next_area) {
+    for (; ovl != nullptr; ovl = ovl->next_area) {
         WalkSections(ovl->sections, rtn);
     }
 }

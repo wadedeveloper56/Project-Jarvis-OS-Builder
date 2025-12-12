@@ -31,12 +31,12 @@ void SetOS2Fmt(void)
     FmtData.u.os2.flags = MULTIPLE_AUTO_DATA;
     FmtData.u.os2.heapsize = 0;
     FmtData.u.os2.segment_shift = -1;
-    FmtData.u.os2.res_module_name = NULL;
-    FmtData.u.os2.stub_file_name = NULL;
-    FmtData.u.os2.os2_seg_flags = NULL;
-    FmtData.u.os2.description = NULL;
-    FmtData.u.os2.exports = NULL;
-    FmtData.u.os2.old_lib_name = NULL;
+    FmtData.u.os2.res_module_name = nullptr;
+    FmtData.u.os2.stub_file_name = nullptr;
+    FmtData.u.os2.os2_seg_flags = nullptr;
+    FmtData.u.os2.description = nullptr;
+    FmtData.u.os2.exports = nullptr;
+    FmtData.u.os2.old_lib_name = nullptr;
 #if 0 /* jwlink. set PRELOAD for DATA segs only! */
     if (FmtData.type & MK_WIN_NE) {
         FmtData.def_seg_flags |= SEG_PRELOAD;

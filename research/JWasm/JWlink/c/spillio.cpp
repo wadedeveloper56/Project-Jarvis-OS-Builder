@@ -10,7 +10,7 @@ static unsigned long    TmpFSize;
 void InitSpillFile(void)
 {
     TempFile = NIL_HANDLE;
-    TFileName = NULL;
+    TFileName = nullptr;
     TmpFSize = 0;
     SetBreak();
 }
@@ -22,7 +22,7 @@ void CloseSpillFile(void)
         QClose(TempFile, TFileName);
         QDelete(TFileName);
         _LnkFree(TFileName);
-        TFileName = NULL;
+        TFileName = nullptr;
         TempFile = NIL_HANDLE;
     }
 }

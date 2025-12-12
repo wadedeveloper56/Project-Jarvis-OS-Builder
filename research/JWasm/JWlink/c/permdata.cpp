@@ -40,16 +40,16 @@ static char* IncStrTab;
 void ResetPermData(void)
 {
     DEBUG((DBG_OLD, "ResetPermData() enter"));
-    IncFileName = NULL;
-    IncStrTab = NULL;
-    ReadRelocs = NULL;
-    OldExe = NULL;
-    AltDefData = NULL;
-    OldSymFile = NULL;
-    IncGroupDefs = NULL;
-    IncGroups = NULL;
-    SavedUserLibs = NULL;
-    SavedDefLibs = NULL;
+    IncFileName = nullptr;
+    IncStrTab = nullptr;
+    ReadRelocs = nullptr;
+    OldExe = nullptr;
+    AltDefData = nullptr;
+    OldSymFile = nullptr;
+    IncGroupDefs = nullptr;
+    IncGroups = nullptr;
+    SavedUserLibs = nullptr;
+    SavedDefLibs = nullptr;
     CarveClass = CarveCreate(sizeof(class_entry), 20 * sizeof(class_entry));
     CarveGroup = CarveCreate(sizeof(group_entry), 20 * sizeof(group_entry));
     CarveDLLInfo = CarveCreate(sizeof(dll_sym_info), 100 * sizeof(dll_sym_info));

@@ -12,3 +12,4 @@ void WriteNLStdOut(void);
 void WriteInfoStdOut(char* str, unsigned level, char* sym);
 char* GetEnvString(char* envname);
 char* ChkToString(void* mem, unsigned len);
+int Spawn(void (*fn)(void));

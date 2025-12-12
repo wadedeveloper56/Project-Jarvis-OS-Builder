@@ -6,6 +6,7 @@
 #define RESOURCE_MAX_SIZE       128
 
 void LnkFilesInit(void);
+void TrapBreak(int sig_num);
 void CheckBreak(void);
 void SetBreak(void);
 void RestoreBreak(void);

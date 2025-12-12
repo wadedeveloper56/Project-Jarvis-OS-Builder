@@ -30,8 +30,8 @@ static int              BufferSize;          // # of chars in buffer.
 void ResetMapIO(void)
 {
     MapFlags = (mapflag)0;
-    UndefList = NULL;
-    SymTraceList = NULL;
+    UndefList = nullptr;
+    SymTraceList = nullptr;
 }
 
 void BufWrite(char* buffer, int len)

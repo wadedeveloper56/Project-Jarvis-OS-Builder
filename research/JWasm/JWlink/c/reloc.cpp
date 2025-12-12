@@ -33,12 +33,12 @@ reloc_info* FloatFixups;
 
 void ResetReloc(void)
 {
-    FloatFixups = NULL;
+    FloatFixups = nullptr;
 }
 
 static bool FreeRelocList(reloc_info* list)
 {
-    while (list != NULL) {
+    while (list != nullptr) {
         if (!(list->sizeleft & RELOC_SPILLED)) {
             _LnkFree(list->loc.addr);
         }
@@ -75,7 +75,7 @@ bool TraverseOS2RelocList(group_entry* group, bool (*fn)(reloc_info*))
     reloc_info*** reloclist;
 
     reloclist = (reloc_info***)group->g.grp_relocs;
-    if (reloclist != NULL) {
+    if (reloclist != nullptr) {
         index = OSF_PAGE_COUNT(group->totalsize);
         highidx = OSF_RLIDX_HIGH(index);
         while (highidx > 0) {
@@ -103,7 +103,7 @@ static void FreeGroupRelocs(group_entry* group)
     if (FmtData.type & (MK_OS2_FLAT | MK_PE)) {
         TraverseOS2RelocList(group, FreeRelocList);
         reloclist = (reloc_info***)group->g.grp_relocs;
-        if (reloclist != NULL) {
+        if (reloclist != nullptr) {
             index = OSF_PAGE_COUNT(group->totalsize);
             highidx = OSF_RLIDX_HIGH(index);
             if (OSF_RLIDX_LOW(index) != 0) {
@@ -128,11 +128,11 @@ void FreeRelocInfo(void)
     if (!(LinkState & MAKE_RELOCS))
         return;
     if (FmtData.type & (MK_ELF | MK_OS2_FLAT | MK_PE | MK_OS2_16BIT | MK_QNX)) {
-        for (group = Groups; group != NULL; group = group->next_group) {
+        for (group = Groups; group != nullptr; group = group->next_group) {
             FreeGroupRelocs(group);
         }
     }
-    else if (Root != NULL) {
+    else if (Root != nullptr) {
         WalkAllSects(FreeRelocSect);
     }
     if (FmtData.type & MK_QNX) {

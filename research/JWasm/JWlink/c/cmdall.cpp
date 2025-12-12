@@ -7,7 +7,7 @@ static file_list** LastLibFile;
 
 void ResetCmdAll(void)
 {
-    LastFile = NULL;
-    LastLibFile = NULL;
-    LibPath = NULL;
+    LastFile = nullptr;
+    LastLibFile = nullptr;
+    LibPath = nullptr;
 }

@@ -7,7 +7,7 @@
 void SetNovFmt(void)
 {
     Extension = E_NLM;
-    if (!(LinkState & FMT_SPECIFIED) && Name != NULL) {
+    if (!(LinkState & FMT_SPECIFIED) && Name != nullptr) {
         FmtData.u.nov.description = FileName(Name, strlen(Name), E_NLM, CmdFlags & CF_UNNAMED);
     }
 }

@@ -86,14 +86,14 @@ static struct {
 #endif
 
 #define WALK_IMPORT_SYMBOLS(sym) \
-    for( (sym) = HeadSym; (sym) != NULL; (sym) = (sym)->link ) \
-        if( IS_SYM_IMPORTED(sym) && (sym)->p.import != NULL \
+    for( (sym) = HeadSym; (sym) != nullptr; (sym) = (sym)->link ) \
+        if( IS_SYM_IMPORTED(sym) && (sym)->p.import != nullptr \
             /*&& !((sym)->info & SYM_DEAD)*/)
 
 void ResetLoadPE(void)
 {
-    PEImpList = NULL;
-    XFerSegData = NULL;
+    PEImpList = nullptr;
+    XFerSegData = nullptr;
     NumMods = 0;
     NumImports = 0;
     memset(&IData, 0, sizeof(IData));
@@ -105,6 +105,6 @@ void ResetLoadPE(void)
 void FreePELocalImports(void)
 {
     FreeList(PELocalImpList);
-    PELocalImpList = NULL;
+    PELocalImpList = nullptr;
     NumLocalImports = 0;
 }

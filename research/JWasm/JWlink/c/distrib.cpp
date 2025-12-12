@@ -20,9 +20,9 @@ section** SectOvlTab;
 
 void ResetDistrib(void)
 {
-    ArcBuffer = NULL;
-    ModTable = NULL;
-    SectOvlTab = NULL;
+    ArcBuffer = nullptr;
+    ModTable = nullptr;
+    SectOvlTab = nullptr;
 }
 
 void FreeDistStuff(void)

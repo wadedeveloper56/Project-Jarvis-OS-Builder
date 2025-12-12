@@ -104,7 +104,7 @@ void Trec(char* str, ...) {
         FmtStr(buf, 100, "Trec break! Count=%d. Trace history:\n", TrecCount);
         WriteStdOut(buf);
         for (i = currBuff, j = 0; j < max; j++, i = (i + 1) % max) {
-            if (buff[i] != NULL) {
+            if (buff[i] != nullptr) {
                 WriteStdOut(buff[i]);
                 WriteNLStdOut();
             }

@@ -19,7 +19,7 @@ void* LAlloc(size_t size)
 
     for (;; ) {
         p = AllocateMemory(size);
-        if (p != NULL) {
+        if (p != nullptr) {
             memset(p, 0, size);
             break;
         }
@@ -31,15 +31,15 @@ void* ChkLAlloc(size_t size)
 {
     void* ptr;
     ptr = LAlloc(size);
-    if (ptr == NULL) {
-        LnkMsg(FTL + MSG_NO_DYN_MEM, NULL);
+    if (ptr == nullptr) {
+        LnkMsg(FTL + MSG_NO_DYN_MEM, nullptr);
     }
     return(ptr);
 }
 
 void LFree(void* p)
 {
-    if (p == NULL) return;
+    if (p == nullptr) return;
     FreeMemory(p);
 }
 
@@ -53,7 +53,7 @@ void* LnkReAlloc(void* src, size_t size)
     void* dest;
     for (;; ) {
         dest = ReallocateMemory(src, size);
-        if (dest != NULL) break;
+        if (dest != nullptr) break;
     }
     return(dest);
 }

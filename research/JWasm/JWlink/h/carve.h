@@ -28,7 +28,7 @@ struct free_t {
     free_t* next_free;
 };
 
-// assumes '->free_list' is non-NULL
+// assumes '->free_list' is non-nullptr
 #define _REMOVE_FROM_FREE( pcv, p ) \
     { \
         free_t *head = pcv->free_list; \

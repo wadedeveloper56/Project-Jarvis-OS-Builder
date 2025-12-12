@@ -25,7 +25,7 @@ void* CacheRead(file_list* list, unsigned long pos, unsigned len)
     infilelist* file;
 
     if (list->file->flags & INSTAT_FULL_CACHE) {
-        if (pos + len > list->file->len) return NULL;
+        if (pos + len > list->file->len) return nullptr;
         return (char*)list->file->cache + pos;
     }
     Multipage = FALSE;
@@ -36,7 +36,7 @@ void* CacheRead(file_list* list, unsigned long pos, unsigned len)
     bufnum = startnum;
     cache = (char**)file->cache;
     for (;;) {
-        if (cache[bufnum] == NULL) {   // make sure page is in.
+        if (cache[bufnum] == nullptr) {   // make sure page is in.
             _ChkAlloc(char*, cache[bufnum], CACHE_PAGE_SIZE);
             newpos = (unsigned long)bufnum * CACHE_PAGE_SIZE;
             if (file->currpos != newpos) {
@@ -132,13 +132,13 @@ static bool DumpFileCache(infilelist* file, bool nuke)
     else {
         savenum = file->currpos / CACHE_PAGE_SIZE;
     }
-    if (file->cache != NULL) {
+    if (file->cache != nullptr) {
         num = NumCacheBlocks(file->len);
         blocklist = (char**)file->cache;
         for (index = 0; index < num; index++) {
-            if (index != savenum && *blocklist != NULL) {
+            if (index != savenum && *blocklist != nullptr) {
                 _LnkFree(*blocklist);
-                *blocklist = NULL;
+                *blocklist = nullptr;
                 blockfreed = TRUE;
             }
             blocklist++;
@@ -149,14 +149,14 @@ static bool DumpFileCache(infilelist* file, bool nuke)
 
 void FreeObjCache(file_list* list)
 {
-    if (list == NULL) return;
+    if (list == nullptr) return;
     if (list->file->flags & INSTAT_FULL_CACHE) {
         _LnkFree(list->file->cache);
     }
     else {
         DumpFileCache(list->file, TRUE);
     }
-    list->file->cache = NULL;
+    list->file->cache = nullptr;
 }
 
 bool DumpObjCache(void)
@@ -164,9 +164,9 @@ bool DumpObjCache(void)
     infilelist* file;
 
     file = CachedFiles;
-    while (file != NULL) {
+    while (file != nullptr) {
         if (file->flags & INSTAT_PAGE_CACHE) {
-            if (CurrMod == NULL || CurrMod->f.source == NULL
+            if (CurrMod == nullptr || CurrMod->f.source == nullptr
                 || CurrMod->f.source->file != file) {
                 if (DumpFileCache(file, TRUE)) return TRUE;
             }
@@ -181,7 +181,7 @@ void CacheClose(file_list* list, unsigned pass)
     infilelist* file;
     bool        nukecache;
 
-    if (list == NULL) return;
+    if (list == nullptr) return;
     file = list->file;
     //    if( file->handle == NIL_HANDLE ) return;
     file->flags = (infile_flags)(file->flags & ~INSTAT_IN_USE);

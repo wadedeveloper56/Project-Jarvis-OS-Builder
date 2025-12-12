@@ -17,7 +17,7 @@ struct select_format {
 };
 
 static struct select_format PossibleFmt[] = {
-    MK_DOS,         "LIBDOS",       NULL,           NULL,
+    MK_DOS,         "LIBDOS",       nullptr,           nullptr,
 #ifdef _DOS16M
     MK_DOS16M,      "LIBDOS16M",    SetD16MFmt,     FreeD16MFmt,
 #endif
@@ -62,7 +62,7 @@ static sysblock* PrevCommand;
 
 void InitCmdFile(void)
 {
-    PrevCommand = NULL;
+    PrevCommand = nullptr;
 }
 
 static void CleanSystemList(bool check)
@@ -72,7 +72,7 @@ static void CleanSystemList(bool check)
     char* name;
 
     sys = &SysBlocks;
-    while (*sys != NULL) {
+    while (*sys != nullptr) {
         name = (*sys)->name;
         if (!check || (memcmp("286", name, 4) != 0 && memcmp("386", name, 4) != 0)) {
             next = (*sys)->next;
@@ -94,10 +94,10 @@ void BurnSystemList(void)
 void FreePaths(void)
 {
     FreeList(Path);
-    Path = NULL;
-    if (Name != NULL) {
+    Path = nullptr;
+    if (Name != nullptr) {
         _LnkFree(Name);
-        Name = NULL;
+        Name = nullptr;
     }
 }
 
@@ -110,9 +110,23 @@ void FreeFormatStuff(void)
     for (i = 0; i < NUMPOSSIBLEFMT; i++) {
         possible = (exe_format)PossibleFmt[i].bits;
         if ((~possible & FmtData.type) == 0) {
-            if (PossibleFmt[i].free_func != NULL)
+            if (PossibleFmt[i].free_func != nullptr)
                 PossibleFmt[i].free_func();
             break;
         }
     }
+}
+
+char* GetNextLink(void)
+{
+    char* cmd;
+
+    cmd = nullptr;
+    _LnkFree(PrevCommand);
+    if (LinkCommands != nullptr) {
+        PrevCommand = LinkCommands;
+        LinkCommands = LinkCommands->next;
+        cmd = PrevCommand->commands;
+    }
+    return(cmd);
 }

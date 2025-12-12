@@ -36,8 +36,8 @@ byte MsgFlags[ MSG_ARRAY_SIZE ];
 void ResetMsg( void )
 /**************************/
 {
-    LocFile = NULL;
-    LocMem = NULL;
+    LocFile = nullptr;
+    LocMem = nullptr;
     LocRec = 0;
     MsgArgInfo.index = -1;
     memset( MsgFlags, 0xFF, MSG_ARRAY_SIZE );
@@ -259,7 +259,7 @@ static unsigned MakeExeName( char * buff, unsigned max )
     if( max <= 3 ) return( 0 );
     len = 1;
     *buff++ = 'a';
-    if( FmtData.osname != NULL ) {
+    if( FmtData.osname != nullptr ) {
         str = FmtData.osname;
     } else {
         format = FmtData.type;
@@ -335,11 +335,11 @@ static void LocateFile( unsigned num )
         } else {
             rec = 0;
         }
-        if( CurrMod == NULL ) {
-            if( CmdFile == NULL ) {
-                Locator( NULL, NULL, 0 );
+        if( CurrMod == nullptr ) {
+            if( CmdFile == nullptr ) {
+                Locator( nullptr, nullptr, 0 );
             } else {
-                Locator( CmdFile->name, NULL, 0 );
+                Locator( CmdFile->name, nullptr, 0 );
             }
          } else {
             Locator( CurrMod->f.source->file->name, CurrMod->name, rec );
@@ -390,7 +390,7 @@ static void MessageFini( unsigned num, char *buff, unsigned len, char *prefix, u
     if( waserror && LinkFlags & MAX_ERRORS_FLAG ) {
         MaxErrors--;
         if( MaxErrors == 0 ) {
-            LnkMsg( FTL+MSG_TOO_MANY_ERRORS, NULL );
+            LnkMsg( FTL+MSG_TOO_MANY_ERRORS, nullptr );
         }
     }
 }
@@ -403,7 +403,7 @@ void LnkMsg(
  * report a linker message
  *
  * num   selects a message containing substitutions; both printf and %digit
- * types is either NULL or the order of interpolated arguments.
+ * types is either nullptr or the order of interpolated arguments.
  */
 {
     va_list     args;
@@ -418,7 +418,7 @@ void LnkMsg(
 
     if( !TestBit( MsgFlags, num & NUM_MSK ) )
         return;
-    CurrSymName = NULL;
+    CurrSymName = nullptr;
     LocateFile( num );
     len = 0;
     prefixlen = 0;
@@ -444,10 +444,10 @@ void LnkMsg(
         prefixlen = FmtStr( prefix, MAX_MSG_SIZE, rc_buff, CalcMsgNum( num ));
 #endif
     }
-    if( LocFile != NULL ) {
+    if( LocFile != nullptr ) {
         which_file += 1;
     }
-    if( LocMem != NULL ) {
+    if( LocMem != nullptr ) {
         which_file += 2;
     }
     if( LocRec != 0 ) {
@@ -472,8 +472,8 @@ void LnkMsg(
                 len += FmtStr( &buff[len], MAX_MSG_SIZE - len, rc_buff );
             }
         }
-        LocFile = NULL;
-        LocMem = NULL;
+        LocFile = nullptr;
+        LocMem = nullptr;
         LocRec = 0;
     }
 
@@ -499,7 +499,7 @@ static void HandleRcMsg( unsigned num, va_list *args )
     len = 0;
     prefixlen = 0;
     LinkState |= LINK_ERROR;
-    CurrSymName = NULL;
+    CurrSymName = nullptr;
     Msg_Get( MSG_ERROR, rc_buff );
 #if !defined( _DLLHOST )
     len = FmtStr( buff, MAX_MSG_SIZE - len, rc_buff, CalcMsgNum( num ));
@@ -564,13 +564,13 @@ void WLPrtBanner( void )
 
     if( !BannerPrinted ) {
         msg = MsgStrings[ PRODUCT ];
-        WriteInfoStdOut( msg, BANNER, NULL );
+        WriteInfoStdOut( msg, BANNER, nullptr );
         msg = MsgStrings[ COPYRIGHT ];
-        WriteInfoStdOut( msg, BANNER, NULL );
+        WriteInfoStdOut( msg, BANNER, nullptr );
         msg = MsgStrings[ TRADEMARK ];
-        WriteInfoStdOut( msg, BANNER, NULL );
+        WriteInfoStdOut( msg, BANNER, nullptr );
         //msg = MsgStrings[ TRADEMARK2 ];
-        //WriteInfoStdOut( msg, BANNER, NULL );
+        //WriteInfoStdOut( msg, BANNER, nullptr );
         BannerPrinted = TRUE;
     }
 }

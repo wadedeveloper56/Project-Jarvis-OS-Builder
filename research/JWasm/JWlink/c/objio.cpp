@@ -15,8 +15,8 @@ infilelist* CachedFiles;
 
 void ResetObjIO(void)
 {
-    CachedFiles = NULL;
-    CachedLibFiles = NULL;
+    CachedFiles = nullptr;
+    CachedLibFiles = nullptr;
 }
 
 void InitTokBuff(void)
@@ -27,8 +27,8 @@ void InitTokBuff(void)
 
 void FreeTokBuffs(void)
 {
-    if (TokBuff != NULL) {
+    if (TokBuff != nullptr) {
         _LnkFree(TokBuff);
-        TokBuff = NULL;
+        TokBuff = nullptr;
     }
 }

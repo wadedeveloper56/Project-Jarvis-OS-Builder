@@ -21,7 +21,7 @@ void FreeExportList(void)
 
     if (LinkFlags & INC_LINK_FLAG) return;
     exp = FmtData.u.os2.exports;
-    while (exp != NULL) {
+    while (exp != nullptr) {
         exp = FreeAnExport(exp);
     }
 }

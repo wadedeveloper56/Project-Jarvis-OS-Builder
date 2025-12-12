@@ -11,13 +11,13 @@ void ResetComdef(void)
 {
 #if 0
     memcpy(CDatSegName, CDAT_SEG_NAME, CDAT_SEG_NAME_LEN);
-    CDatSegments[0] = NULL;
-    CDatSegments[1] = NULL;
-    CDatSegments[2] = NULL;
-    CDatSegments[3] = NULL;
+    CDatSegments[0] = nullptr;
+    CDatSegments[1] = nullptr;
+    CDatSegments[2] = nullptr;
+    CDatSegments[3] = nullptr;
     CDatSegNum = 0;
 #endif
-    CDatList = NULL;
-    FreedInfos = NULL;
-    FreedPieces = NULL;
+    CDatList = nullptr;
+    FreedInfos = nullptr;
+    FreedPieces = nullptr;
 }

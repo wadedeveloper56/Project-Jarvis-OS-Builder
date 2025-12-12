@@ -16,6 +16,7 @@
 #include <string.h>
 #include <io.h>
 #include <fcntl.h>
+#include <signal.h>
 
 #pragma warning(disable:4267)
 #pragma warning(disable:4244)

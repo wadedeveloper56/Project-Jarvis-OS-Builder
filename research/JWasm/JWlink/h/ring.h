@@ -49,7 +49,7 @@ void* RINGHNAME(Promote) (      // PROMOTE ELEMENT TO START OF RING
 void RINGHNAME(Insert) (        // INSERT ELEMENT INTO RING
     void* hdr,                  // - addr( ring header )
     void* element,              // - element to be inserted
-    void* insert)              // - insertion point (or NULL for start)
+    void* insert)              // - insertion point (or nullptr for start)
     ;
 void* RINGHNAME(Lookup) (       // LOOKUP IN A RING (also used for walks)
     void* hdr,                  // - ring hdr
@@ -89,9 +89,9 @@ void RINGHNAME(Walk) (          // TRAVERSE RING
     void (*rtn)                 // - traversal routine
     (void* curr))         // - - passed current element
     ;
-void* RINGHNAME(Step) (         // STEP ALONG ELEMENTS (NULL -> e1 -> e2 -> NULL)
+void* RINGHNAME(Step) (         // STEP ALONG ELEMENTS (nullptr -> e1 -> e2 -> nullptr)
     void* hdr,                  // - ring header
-    void* elt)                 // - curr element (NULL to start)
+    void* elt)                 // - curr element (nullptr to start)
     ;
 #endif
 

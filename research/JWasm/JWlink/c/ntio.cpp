@@ -19,16 +19,21 @@ void LnkFilesInit(void)
     setFileMode(_fileno(stdout), _O_BINARY);
 }
 
+void TrapBreak(int sig_num)
+{
+    sig_num = sig_num;          // to avoid a warning, will be optimized out.
+    CaughtBreak = TRUE;
+}
+
 void CheckBreak(void)
 {
     if (CaughtBreak) {
         CaughtBreak = false;        /* prevent recursion */
-        LnkMsg(FTL + MSG_BREAK_HIT, NULL);    /* suicides */
+        LnkMsg(FTL + MSG_BREAK_HIT, nullptr);    /* suicides */
     }
 }
 
 void SetBreak(void)
-
 {
 }
 
@@ -86,7 +91,7 @@ unsigned QWrite(FileHandle file, void* buffer, unsigned len, char* name)
     if (len == 0) return(0);
     CheckBreak();
     int h = WriteFile(file, buffer, len);
-    if (name != NULL) {
+    if (name != nullptr) {
         if (h == -1) {
             LnkMsg(ERR + MSG_IO_PROBLEM, "12", name, strerror(errno));
         }
@@ -118,7 +123,7 @@ __int64 QLSeek(FileHandle file, long position, int start, char* name)
 {
     CheckBreak();
     __int64 h = FileSeek(file, position, start);
-    if (h == -1 && name != NULL) {
+    if (h == -1 && name != nullptr) {
         LnkMsg(ERR + MSG_IO_PROBLEM, "12", name, strerror(errno));
     }
     return(h);
@@ -146,7 +151,7 @@ long QFileSize(FileHandle file)
 
 void QDelete(char* name)
 {
-    if (name == NULL) return;
+    if (name == nullptr) return;
     int h = FileRemove(name);
     if (h == -1 && errno != ENOENT) { /* file not found is OK */
         LnkMsg(ERR + MSG_IO_PROBLEM, "12", name, strerror(errno));

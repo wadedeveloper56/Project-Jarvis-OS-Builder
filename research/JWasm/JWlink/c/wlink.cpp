@@ -33,6 +33,7 @@
 #include "toc.h"
 #include "libr.h"
 #include "procfile.h"
+#include "linkutil.h"
 
 static char* ArgSave;
 char** _argv;
@@ -65,23 +66,23 @@ static void ResetMisc(void)
     //LinkFlags = REDEFS_OK | CASE_FLAG | FAR_CALLS_FLAG;
     LinkFlags = CASE_FLAG | FAR_CALLS_FLAG;
     LinkState = MAKE_RELOCS;
-    AbsGroups = NULL;
-    DataGroup = NULL;
-    IDataGroup = NULL;
+    AbsGroups = nullptr;
+    DataGroup = nullptr;
+    IDataGroup = nullptr;
     MapFile = NIL_HANDLE;
-    MapFName = NULL;
-    OutFiles = NULL;
-    ObjLibFiles = NULL;
-    LibModules = NULL;
-    Groups = NULL;
+    MapFName = nullptr;
+    OutFiles = nullptr;
+    ObjLibFiles = nullptr;
+    LibModules = nullptr;
+    Groups = nullptr;
     CurrLoc.seg = UNDEFINED;
     CurrLoc.off = 0;
-    OvlClasses = NULL;
-    OvlVectors = NULL;
+    OvlClasses = nullptr;
+    OvlVectors = nullptr;
     VecNum = 0;
     OvlNum = 0;
-    OvlFName = NULL;
-    CurrMod = NULL;
+    OvlFName = nullptr;
+    CurrMod = nullptr;
     StackSize = 0x1000;
     // set case sensitivity for symbols
     ResetSym();
@@ -144,9 +145,9 @@ static void CleanSubSystems(void)
 
 static void DoLink(char* cmdline)
 {
-//#ifndef __OSI__
-//    signal(SIGINT, &TrapBreak); /* so we can clean up */
-//#endif
+#ifndef __OSI__
+    signal(SIGINT, &TrapBreak); /* so we can clean up */
+#endif
 //    StartTime();
 //    DoCmdFile(cmdline);
 //    CheckErr();
@@ -189,9 +190,9 @@ static void DoLink(char* cmdline)
 //    WritePermData();
 //    BuildImpLib();
 //    EndTime();
-//#ifndef __OSI__
-//    signal(SIGINT, SIG_IGN); /* we're going to clean up anyway */
-//#endif
+#ifndef __OSI__
+    signal(SIGINT, SIG_IGN); /* we're going to clean up anyway */
+#endif
 }
 
 static void LinkMeBaby(void)
@@ -204,17 +205,17 @@ void LinkMainLine(char* cmds)
 {
     for (;;) {
         ArgSave = cmds;
-    //    Spawn(&LinkMeBaby);
+        Spawn(&LinkMeBaby);
         CleanSubSystems();
-    //    cmds = GetNextLink();
-        if (cmds == NULL) break;
+        cmds = GetNextLink();
+        if (cmds == nullptr) break;
     }
 }
 
 int main(int argc, char** argv)
 {
     InitSubSystems();
-    LinkMainLine(NULL);
+    LinkMainLine(nullptr);
     FiniSubSystems();
     return((LinkState & LINK_ERROR) ? 1 : 0);
 }

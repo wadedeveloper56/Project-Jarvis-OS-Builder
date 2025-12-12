@@ -24,17 +24,17 @@ static block_data PermBlocks;
 
 void GetSymBlock(void)
 {
-    PermBlocks.list = NULL;
+    PermBlocks.list = nullptr;
 }
 
 void ReleasePass1(void)
 {
     FreeList(Pass1Blocks.list);
-    Pass1Blocks.list = NULL;
+    Pass1Blocks.list = nullptr;
 }
 
 void RelSymBlock(void)
 {
     FreeList(PermBlocks.list);
-    PermBlocks.list = NULL;
+    PermBlocks.list = nullptr;
 }

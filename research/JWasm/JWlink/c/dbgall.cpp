@@ -9,8 +9,8 @@ group_entry* DBIGroups;
 
 void ResetDBI(void)
 {
-    SymFileName = NULL;
-    DBIGroups = NULL;
+    SymFileName = nullptr;
+    DBIGroups = nullptr;
 }
 
 void ODBISectCleanup(section* sect)

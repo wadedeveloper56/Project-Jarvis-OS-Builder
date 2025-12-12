@@ -43,7 +43,7 @@ void ZapHTable(pHTable table, void (*zapElemAction)(void*)) {
     pHTElem tblElem, temp;
     pFreeFunc free;
 
-    if (table == NULL) {
+    if (table == nullptr) {
         return;
     }
 
@@ -51,8 +51,8 @@ void ZapHTable(pHTable table, void (*zapElemAction)(void*)) {
     free = table->freeFunc;
 
     for (i = 0; i < table->size; i++) {
-        for (tblElem = tblPtr[i]; tblElem != NULL; tblElem = temp) {
-            if (zapElemAction != NULL) {
+        for (tblElem = tblPtr[i]; tblElem != nullptr; tblElem = temp) {
+            if (zapElemAction != nullptr) {
                 zapElemAction(tblElem->userData);
             }
             temp = tblElem->next;

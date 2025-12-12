@@ -9,7 +9,7 @@ static stringblock* AllocNewBlock(stringtable* strtab)
     stringblock* blk;
 
     _ChkAlloc(stringblock * , blk, sizeof(stringblock));
-    blk->next = NULL;
+    blk->next = nullptr;
     RingAppend(&strtab->data, blk);
     blk->size = 0;
     return blk;
@@ -17,7 +17,7 @@ static stringblock* AllocNewBlock(stringtable* strtab)
 
 void InitStringTable(stringtable* strtab, bool dontsplit)
 {
-    strtab->data = NULL;
+    strtab->data = nullptr;
     if (dontsplit) {
         strtab->currbase = 1;
     }

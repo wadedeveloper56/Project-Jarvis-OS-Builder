@@ -37,7 +37,7 @@ static readcache* ReadCacheList;
 void InitObjORL(void)
 {
     ORLHandle = ORLInit(&ORLFuncs);
-    ReadCacheList = NULL;
+    ReadCacheList = nullptr;
 }
 
 void ObjORLFini(void)

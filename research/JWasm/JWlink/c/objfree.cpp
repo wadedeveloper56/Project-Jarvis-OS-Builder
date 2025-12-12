@@ -31,10 +31,10 @@ static void FreeFiles(file_list* list)
 {
     void* temp;
 
-    while (list != NULL) {
+    while (list != nullptr) {
         temp = list->next_file;
         CacheClose(list, 3);
-        if (list->status & STAT_HAS_MEMBER && list->u.member != NULL) {
+        if (list->status & STAT_HAS_MEMBER && list->u.member != nullptr) {
             FreeList(list->u.member);
         }
         _PermFree(list);
@@ -52,7 +52,7 @@ static void FreeMods(mod_entry* head)
 {
     void* temp;
 
-    while (head != NULL) {
+    while (head != nullptr) {
         temp = head->n.next_mod;
         FreeAMod(head);
         head = (mod_entry*)temp;
@@ -68,7 +68,7 @@ void FreeGroups(group_entry* head)
 {
     group_entry* next;
 
-    while (head != NULL) {
+    while (head != nullptr) {
         next = head->next_group;
         FreeAGroup(head);
         head = next;
@@ -79,7 +79,7 @@ static void FreeClasses(class_entry* list)
 {
     class_entry* next;
 
-    while (list != NULL) {
+    while (list != nullptr) {
         next = list->next_class;
         RingWalk(list->segs, FreeLeader);
         CarveFree(CarveClass, list);
@@ -93,7 +93,7 @@ static void FreeAreas(OVL_AREA* area)
 {
     OVL_AREA* next;
 
-    while (area != NULL) {
+    while (area != nullptr) {
         next = area->next_area;
         FreeSections(area->sections);
         area = next;
@@ -106,7 +106,7 @@ static void FreeSections(section* sec)
     ORDER_CLASS* Class, * NextClass;
     ORDER_SEGMENT* Seg, * NextSeg;
 
-    while (sec != NULL) {
+    while (sec != nullptr) {
         FreeFiles(sec->files);
         if (!(LinkFlags & INC_LINK_FLAG)) {
             FreeMods(sec->mods);
@@ -116,16 +116,16 @@ static void FreeSections(section* sec)
         FreeAreas(sec->areas);
         ZapHTable(sec->modFilesHashed, LFree);
         Class = sec->orderlist;
-        while (Class != NULL) {   // Free up any Order Class entries
-            if (Class->Name != NULL) {   // Including members and sucessors
+        while (Class != nullptr) {   // Free up any Order Class entries
+            if (Class->Name != nullptr) {   // Including members and sucessors
                 _LnkFree(Class->Name);
             }
             if (Class->Copy) {
                 _LnkFree(Class->SrcName);
             }
             Seg = Class->SegList;
-            while (Seg != NULL) {  // Order Seg emtries can also have members and sucessors
-                if (Seg->Name != NULL) {
+            while (Seg != nullptr) {  // Order Seg emtries can also have members and sucessors
+                if (Seg->Name != nullptr) {
                     _LnkFree(Seg->Name);
                 }
                 NextSeg = Seg->NextSeg;
@@ -144,32 +144,32 @@ static void FreeSections(section* sec)
 
 void CleanLinkStruct(void)
 {
-    if (Root == NULL) return;  /* haven't finished initializing */
+    if (Root == nullptr) return;  /* haven't finished initializing */
     BurnLibs();
     FreeFiles(ObjLibFiles);
     FreeFiles(Root->files);
-    ObjLibFiles = NULL;
-    Root->files = NULL;
+    ObjLibFiles = nullptr;
+    Root->files = nullptr;
     if (!(LinkFlags & INC_LINK_FLAG)) {
         FreeMods(LibModules);
     }
-    if (SymFileName != NULL) {
+    if (SymFileName != nullptr) {
         _LnkFree(SymFileName);
     }
-    if (FmtData.osname != NULL) {
+    if (FmtData.osname != nullptr) {
         _LnkFree(FmtData.osname);
     }
-    if (FmtData.resource != NULL) {
+    if (FmtData.resource != nullptr) {
         _LnkFree(FmtData.resource);
     }
     FreeRelocInfo();
     FreeGroups(Groups);
     FreeGroups(AbsGroups);
-    Groups = NULL;
-    AbsGroups = NULL;
+    Groups = nullptr;
+    AbsGroups = nullptr;
     FreeSections(Root);
     DBICleanup();
-    Root = NULL;
+    Root = nullptr;
     if (FmtData.type & MK_REAL_MODE) {
         FreeOvlStruct();
     }
@@ -180,7 +180,7 @@ void FreeSegFlags(seg_flags* curr)
 {
     seg_flags* next;
 
-    while (curr != NULL) {
+    while (curr != nullptr) {
         next = curr->next;
         _LnkFree(curr->name);
         _LnkFree(curr);

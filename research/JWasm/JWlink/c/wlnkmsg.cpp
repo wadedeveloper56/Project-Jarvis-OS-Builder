@@ -54,7 +54,7 @@ void Msg_Put_Args(
     char                message[],      // Contains %s, etc. or %digit specifiers
     MSG_ARG_LIST        *arg_info,      // Arguments found
     char                *types,         // message conversion specifier types
-                                        // NULL or strlen <= 3 ( arg_info->arg elements)
+                                        // nullptr or strlen <= 3 ( arg_info->arg elements)
     va_list             *args )         // Initialized va_list
 {
     int         argnum = 0;             // Index of argument found
@@ -64,11 +64,11 @@ void Msg_Put_Args(
     char        types_buff[1 + 3];      // readwrite copy of types
     char        specifier;              // Character following '%'
 
-    if( types != NULL ) {
+    if( types != nullptr ) {
         strcpy( types_buff, types );
                                         // conversions set order[]; digits->s
         percent = message - 2;          // So strchr below can work
-        while( ( percent = strchr( percent + 2, '%' ) ) != NULL ) {
+        while( ( percent = strchr( percent + 2, '%' ) ) != nullptr ) {
             specifier = percent[1];
             for( j = 0; types_buff[j] != '\0'; j++ ) {  // Match with types
                 if( types_buff[j] == specifier ) {

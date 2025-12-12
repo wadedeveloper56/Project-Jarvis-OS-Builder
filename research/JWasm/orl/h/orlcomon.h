@@ -42,7 +42,7 @@ typedef struct {
     orl_symbol_handle                   symbol;
     orl_reloc_type                      type;
     orl_reloc_addend                    addend;
-    orl_symbol_handle                   frame; // used in OMF should be NULL otherwise
+    orl_symbol_handle                   frame; // used in OMF should be nullptr otherwise
 } orl_reloc;
 
 typedef

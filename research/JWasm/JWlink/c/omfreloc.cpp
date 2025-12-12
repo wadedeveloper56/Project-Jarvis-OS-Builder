@@ -35,5 +35,5 @@ static void GetFrame(unsigned frame, frame_spec* refframe, struct objbuff*);
 
 void ResetOMFReloc(void)
 {
-    BakPats = NULL;
+    BakPats = nullptr;
 }

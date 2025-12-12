@@ -9,14 +9,14 @@ trace_info* TraceList;
 
 void ResetSymTrace(void)
 {
-    TraceList = NULL;
+    TraceList = nullptr;
 }
 
 void CleanTraces(void)
 {
     trace_info* next;
 
-    while (TraceList != NULL) {
+    while (TraceList != nullptr) {
         next = TraceList->next;
         if (!TraceList->found) {
             _LnkFree(TraceList->u.name);
@@ -25,6 +25,6 @@ void CleanTraces(void)
         _LnkFree(TraceList);
         TraceList = next;
     }
-    TraceList = NULL;
+    TraceList = nullptr;
 }
 

@@ -72,24 +72,24 @@ void BurnLibs(void)
     file_list* temp;
     dict_entry* dict;
 
-    for (temp = ObjLibFiles; temp != NULL; temp = temp->next_file) {
+    for (temp = ObjLibFiles; temp != nullptr; temp = temp->next_file) {
         if (temp->status & STAT_AR_LIB) {
             CacheFree(temp, temp->strtab);
-            temp->strtab = NULL;
+            temp->strtab = nullptr;
         }
         dict = temp->u.dict;
-        if (dict == NULL) continue;
+        if (dict == nullptr) continue;
         if (temp->status & STAT_AR_LIB) {
             CacheFree(temp, dict->a.filepostab - 1);
             _LnkFree(dict->a.fnametab);
         }
         else {
-            if (dict->o.cache != NULL) {
+            if (dict->o.cache != nullptr) {
                 FreeDictCache(dict->o.cache, (dict->o.pages / PAGES_IN_CACHE) + 1);
             }
         }
         _LnkFree(dict);
-        temp->u.dict = NULL;
+        temp->u.dict = nullptr;
         FreeObjCache(temp);
     }
 }

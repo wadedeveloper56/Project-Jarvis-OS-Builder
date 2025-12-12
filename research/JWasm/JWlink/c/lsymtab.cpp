@@ -15,7 +15,7 @@
 int             (*CmpRtn)(const void*, const void*, size_t);
 unsigned        NameLen;
 symbol* LastSym;
-static  symbol* SymList = NULL;
+static  symbol* SymList = nullptr;
 // not a static array to save space for watfor
 static symbol** GlobalSymPtrs;
 static symbol** StaticSymPtrs;
@@ -29,9 +29,9 @@ void ClearHashPointers(void)
 void ResetSym(void)
 {
     NameLen = 0;
-    SymList = NULL;
-    HeadSym = NULL;
-    LastSym = NULL;
+    SymList = nullptr;
+    HeadSym = nullptr;
+    LastSym = nullptr;
     CmpRtn = _memicmp;
     GetSymBlock();
     ClearHashPointers();
@@ -70,7 +70,7 @@ static void WipeSym(symbol* sym)
         else {
             FreeImport((dll_sym_info*)sym->p.import);
         }
-        sym->p.import = NULL;
+        sym->p.import = nullptr;
     }
     else if (IS_SYM_ALIAS(sym)) {
         if (sym->info & SYM_FREE_ALIAS) {
@@ -92,7 +92,7 @@ void CleanSym(void)
     symbol* next;
 
     if (!(LinkFlags & INC_LINK_FLAG)) {
-        for (sym = HeadSym; sym != NULL; sym = next) {
+        for (sym = HeadSym; sym != nullptr; sym = next) {
             next = sym->link;
             FreeSymbol(sym);
         }

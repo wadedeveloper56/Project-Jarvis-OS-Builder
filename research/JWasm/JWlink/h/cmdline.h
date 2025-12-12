@@ -15,3 +15,4 @@ void InitCmdFile(void);
 void BurnSystemList(void);
 void FreePaths(void);
 void FreeFormatStuff(void);
+char* GetNextLink(void);

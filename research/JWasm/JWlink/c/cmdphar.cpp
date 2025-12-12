@@ -15,8 +15,8 @@ void SetPharFmt(void)
     _ChkAlloc(rtpblock*,FmtData.u.phar.params, sizeof(*FmtData.u.phar.params));
     FmtData.u.phar.mindata = 0;
     FmtData.u.phar.maxdata = 0xFFFFFFFF;
-    FmtData.u.phar.breaksym = NULL;
-    FmtData.u.phar.stub = NULL;
+    FmtData.u.phar.breaksym = nullptr;
+    FmtData.u.phar.stub = nullptr;
     //  FmtData.u.phar.pack = FALSE;
     FmtData.u.phar.params->minreal = 0;
     FmtData.u.phar.params->maxreal = 0;

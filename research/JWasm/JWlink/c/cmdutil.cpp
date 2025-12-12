@@ -9,7 +9,7 @@
 
 #define _LinkerPrompt "JWLINK>"
 
-cmdfilelist* CmdFile = NULL;
+cmdfilelist* CmdFile = nullptr;
 
 /* Default File Extension array, see ldefext.h */
 
@@ -31,23 +31,23 @@ section* NewSection(void)
 
     OvlNum++;
     _ChkAlloc(section *, sect, sizeof(section));
-    sect->next_sect = NULL;
-    sect->classlist = NULL;
-    sect->orderlist = NULL;
-    sect->areas = NULL;
-    sect->files = NULL;
+    sect->next_sect = nullptr;
+    sect->classlist = nullptr;
+    sect->orderlist = nullptr;
+    sect->areas = nullptr;
+    sect->files = nullptr;
     sect->modFilesHashed = CreateHTable(256, StringiHashFunc, stricmp_wrapper, ChkLAlloc, LFree);
-    sect->mods = NULL;
-    sect->reloclist = NULL;
+    sect->mods = nullptr;
+    sect->reloclist = nullptr;
     sect->sect_addr.off = 0;
     sect->sect_addr.seg = UNDEFINED;
     sect->ovl_num = 0;
-    sect->parent = NULL;
+    sect->parent = nullptr;
     sect->relocs = 0;
     sect->size = 0;
-    sect->outfile = NULL;
-    sect->u.dist_mods = NULL;
-    sect->dbg_info = NULL;
+    sect->outfile = nullptr;
+    sect->u.dist_mods = nullptr;
+    sect->dbg_info = nullptr;
     return(sect);
 }
 
