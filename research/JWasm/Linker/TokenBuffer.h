@@ -9,7 +9,9 @@ class TokenBuffer
 	unsigned TokSize;        // size of above buffer
 	MemorySubsystem* memory;
 public:
-	TokenBuffer(MemorySubsystem *memory);
+	TokenBuffer(MemorySubsystem* memory);
 	~TokenBuffer();
+	void Reallocate(unsigned newSize);
+	unsigned GetSize() const { return TokSize; }
+	char* GetBuffer() const { return TokBuff; }
 };
-

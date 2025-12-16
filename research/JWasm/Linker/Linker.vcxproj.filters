@@ -42,6 +42,24 @@
     <ClCompile Include="TokenBuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SpillFile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SymbolTable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjOrl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MixCache.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CmdLine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PermData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Linker.h">
@@ -84,6 +102,126 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TokenBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SpillFile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SymbolTable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjOrl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="elftype.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="orlglobl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="orlintnl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="orlhshdf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cofftype.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="coffentr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="coffflhn.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="coffglbl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="coffhash.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="coffimpl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="coffload.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cofflwlv.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cofforl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="elfentr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="elfflhn.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="elfglbl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="elfhash.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="elfload.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="elflwlv.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="elforl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="orl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="orlcomon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="orlentry.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="orlflhnd.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="orlhash.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="orllevel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="omfdrctv.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="omfentr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="omfflhn.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="omfglbl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="omfload.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="omfmunge.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="omforl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="omftype.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MixCache.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CmdLine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PermData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
