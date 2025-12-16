@@ -164,7 +164,8 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MemorySubsystem.cpp" />
     <ClCompile Include="MessagingSubsystem.cpp" />
-    <ClCompile Include="NodeSubsystem.cpp" />
+    <ClCompile Include="Node.cpp" />
+    <ClCompile Include="TokenBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FileSubsystem.h" />
@@ -176,9 +177,10 @@
     <ClInclude Include="lnkmsg.h" />
     <ClInclude Include="MemorySubsystem.h" />
     <ClInclude Include="MessagingSubsystem.h" />
-    <ClInclude Include="NodeSubsystem.h" />
+    <ClInclude Include="Node.h" />
     <ClInclude Include="structures.h" />
     <ClInclude Include="syms.h" />
+    <ClInclude Include="TokenBuffer.h" />
     <ClInclude Include="types.h" />
   </ItemGroup>
   <ItemGroup>

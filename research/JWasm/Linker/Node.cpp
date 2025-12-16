@@ -1,15 +1,15 @@
-#include "NodeSubsystem.h"
+#include "Node.h"
 
-NodeSubsystem::NodeSubsystem(MemorySubsystem* memory)
+Node::Node(MemorySubsystem* memory)
 {
 	this->memory = memory;
-	GrpNodes = MakeArray(sizeof(grpnode));
-	SegNodes = MakeArray(sizeof(segnode));
-	ExtNodes = MakeArray(sizeof(extnode));
-	NameNodes = MakeArray(sizeof(list_of_names*));
+	GrpNodes = MakeArray(sizeof(GroupNode));
+	SegNodes = MakeArray(sizeof(SegmentNode));
+	ExtNodes = MakeArray(sizeof(ExtNode));
+	NameNodes = MakeArray(sizeof(ListOfNamesPtr));
 }
 
-NodeSubsystem::~NodeSubsystem()
+Node::~Node()
 {
 	BurnNodeArray(GrpNodes);
 	BurnNodeArray(SegNodes);
@@ -17,7 +17,7 @@ NodeSubsystem::~NodeSubsystem()
 	BurnNodeArray(NameNodes);
 }
 
-NodeArrayPtr NodeSubsystem::MakeArray(unsigned size)
+NodeArrayPtr Node::MakeArray(unsigned size)
 {
 	NodeArrayPtr nodes = (NodeArrayPtr)memory->AllocateMemory(sizeof(NodeArray));
 	nodes->num = 0;
@@ -29,7 +29,7 @@ NodeArrayPtr NodeSubsystem::MakeArray(unsigned size)
 	return(nodes);
 }
 
-void NodeSubsystem::BurnNodeArray(NodeArrayPtr list)
+void Node::BurnNodeArray(NodeArrayPtr list)
 {
 	for (int index = 0; index <= list->arraymax; index++) {
 		memory->FreeMemory(list->array[index]);

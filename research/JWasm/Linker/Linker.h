@@ -3,14 +3,16 @@
 #include "MemorySubsystem.h"
 #include "FileSubsystem.h"
 #include "MessagingSubsystem.h"
-#include "NodeSubsystem.h"
+#include "Node.h"
+#include "TokenBuffer.h"
 
 class Linker
 {
 	MemorySubsystem* memory;
 	FileSubsystem* file;
 	MessagingSubsystem* messaging;
-	NodeSubsystem* nodes;
+	Node* nodes;
+	TokenBuffer* tokenBuffer;
 public:
 	Linker();
 	~Linker();

@@ -33,10 +33,13 @@
     <ClCompile Include="MessagingSubsystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="NodeSubsystem.cpp">
+    <ClCompile Include="Node.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="LinkerUtils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TokenBuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -68,7 +71,7 @@
     <ClInclude Include="MessagingSubsystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="NodeSubsystem.h">
+    <ClInclude Include="Node.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="lnkmsg.h">
@@ -78,6 +81,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="LinkerUtils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TokenBuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

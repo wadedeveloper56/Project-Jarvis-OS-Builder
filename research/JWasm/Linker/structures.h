@@ -487,29 +487,29 @@ typedef struct seg_flags {
     segflag_type        type;
 } seg_flags;
 
-typedef struct extnode {
+typedef struct _ExtNode  {
     symbol* entry;
     void* handle;    // ORL: handle for the symbol
     unsigned            ovlref : 12;
     unsigned            isweak : 1;
     unsigned            isdefd : 1; // used in ORL
-} extnode;
+} ExtNode,* ExtNodePtr,**ExtNodePtrPtr;
 
-typedef struct grpnode {
+typedef struct _GroupNode {
     GROUP_ENTRY* entry;
-} grpnode;
+} GroupNode,* GroupNodePtr,** GroupNodePtrPtr;
 
-typedef struct segnode {
+typedef struct _SegmentNode {
     SEGDATA* entry;
     void* handle;    // ORL: handle for the segment.
     unsigned_8* contents;  // ORL: pointer to contents of segment.
     unsigned            info;
-} segnode;
+} SegmentNode,* SegmentNodePtr,** SegmentNodePtrPtr;
 
-typedef struct list_of_names {
+typedef struct _ListOfNames {
     LIST_OF_NAMES* next_name;
     char                name[1];
-} list_of_names;
+} ListOfNames,* ListOfNamesPtr,** ListOfNamesPtrPtr;
 
 typedef struct lobject_data {
     segdata* seg;

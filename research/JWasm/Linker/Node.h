@@ -17,7 +17,7 @@ typedef struct _NodeArray {
 	char* array[MAX_NUM_NODES];   // the array.
 } NodeArray, * NodeArrayPtr, ** NodeArrayPtrPtr;
 
-class NodeSubsystem
+class Node
 {
 	MemorySubsystem* memory;
 	NodeArrayPtr ExtNodes;           // ptr to obj file import list
@@ -25,8 +25,8 @@ class NodeSubsystem
 	NodeArrayPtr GrpNodes;           // ptr to obj file group list
 	NodeArrayPtr NameNodes;          // ptr to obj file lname list
 public:
-	NodeSubsystem(MemorySubsystem* memory);
-	~NodeSubsystem();
+	Node(MemorySubsystem* memory);
+	~Node();
 private:
 	NodeArrayPtr MakeArray(unsigned size);
 	void BurnNodeArray(NodeArrayPtr list);
