@@ -34,6 +34,7 @@ Linker::~Linker()
 void Linker::ResetSubSystems(void)
 {
 	permData->Reset();
+	messaging->ResetMsg();
 }
 
 void Linker::mainLine()
