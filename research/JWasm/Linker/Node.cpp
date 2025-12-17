@@ -31,7 +31,7 @@ NodeArrayPtr Node::MakeArray(unsigned size)
 
 void Node::BurnNodeArray(NodeArrayPtr list)
 {
-	for (int index = 0; index <= list->arraymax; index++) {
+	for (unsigned int index = 0; index <= list->arraymax; index++) {
 		memory->FreeMemory(list->array[index]);
 	}
 	memory->FreeMemory(list);

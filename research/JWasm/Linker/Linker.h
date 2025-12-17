@@ -10,6 +10,9 @@
 #include "ObjOrl.h"
 #include "CmdLine.h"
 #include "PermData.h"
+#include "VirtualMemory.h"
+#include "HashTable.h"
+#include "ring.h"
 
 class Linker
 {
@@ -23,6 +26,10 @@ class Linker
 	ObjOrl* objorl;
 	CmdLine* cmdLine;
 	PermData* permData;
+	VirtualMemory* virtMem;
+	HashTable* hashTable;
+	Ring* ring;
+	Carve* carve;
 public:
 	Linker();
 	~Linker();
@@ -30,5 +37,6 @@ public:
 private:
 	void ResetSubSystems(void);
 	void CleanSubSystems();
+	void ResetMisc(void);
 };
 

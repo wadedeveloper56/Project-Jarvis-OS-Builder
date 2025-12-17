@@ -31,12 +31,12 @@ typedef struct ovl_area {
 typedef struct order_class      ORDER_CLASS;
 typedef struct order_segment    ORDER_SEGMENT;
 
-#include "hash.h"
+#include "HashTable.h"
 
 typedef struct section {
     SECTION* next_sect;
     FILE_LIST* files;
-    pHTable             modFilesHashed;
+    HashTableDataPtr modFilesHashed;
     MOD_ENTRY* mods;
     CLASS_ENTRY* classlist;
     ORDER_CLASS* orderlist; // Link to data for ordering, if used
@@ -649,3 +649,8 @@ typedef enum {
     TOK_INCLUDE_DOT = 0x01,
     TOK_IS_FILENAME = 0x02
 } tokcontrol;
+
+typedef struct vecnode {
+    struct vecnode* next;
+    symbol* entry;
+} vecnode;

@@ -2,12 +2,17 @@
 
 #include "MemorySubsystem.h"
 #include "globals.h"
+#include "SymbolTableMemory.h"
 
+#define STATIC_TABSIZE  241  /* should be prime */
+#define GLOBAL_TABSIZE  1789  /* should be prime */
 #define STATIC_TABALLOC (256 * sizeof(symbol *))  // 1st power of 128 > TABSIZE
 #define GLOBAL_TABALLOC (1792 * sizeof(symbol *)) // 1st power of 128 > TABSIZE
 
 class SymbolTable
 {
+	SymbolTableMemory* symMem;
+	int (*CmpRtn)(const void*, const void*, size_t);
 	unsigned NameLen;
 	symbol* LastSym;
 	symbol* SymList;
@@ -17,5 +22,8 @@ class SymbolTable
 public:
 	SymbolTable(MemorySubsystem* memory);
 	~SymbolTable();
+	void ResetSym(void);
+	void ClearHashPointers(void);
+	void SetSymCase(void);
 };
 
