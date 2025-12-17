@@ -19,7 +19,7 @@ Linker::Linker()
 	cmdLine = new CmdLine();
 	ring = new Ring(memory);
 	carve = new Carve();
-	permData = new PermData(memory, /*ring,*/ carve);
+	permData = new PermData(memory, ring, carve);
 }
 
 Linker::~Linker()

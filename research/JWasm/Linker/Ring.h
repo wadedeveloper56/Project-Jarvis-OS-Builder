@@ -1,15 +1,8 @@
 #pragma once
 
-#undef RINGHNAME
-#define RINGHNAME( name ) Ring##name
+//#define RINGHNAME( name ) Ring##name
 
-// PROTOTYPES:
-
-#include "carve.h"
-#include "globals.h"
-#include "PermData.h"
 #include "MemorySubsystem.h"
-#include "Carve.h"
 
 class Ring
 {

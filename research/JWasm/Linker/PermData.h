@@ -8,10 +8,10 @@
 class PermData
 {
     MemorySubsystem* memory;
-    //Ring* ring;
+    Ring* ring;
 	Carve* carve;
 public:
-	PermData(MemorySubsystem* memory, /*Ring* ring,*/ Carve* carve);
+	PermData(MemorySubsystem* memory, Ring* ring, Carve* carve);
 	~PermData();
 	void Reset(void);
 };
