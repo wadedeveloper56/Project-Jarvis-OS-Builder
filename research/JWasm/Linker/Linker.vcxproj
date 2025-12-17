@@ -327,6 +327,7 @@
     <ClCompile Include="PermData.cpp" />
     <ClCompile Include="Ring.cpp" />
     <ClCompile Include="SpillFile.cpp" />
+    <ClCompile Include="StringTable.cpp" />
     <ClCompile Include="SymbolTable.cpp" />
     <ClCompile Include="SymbolTableMemory.cpp" />
     <ClCompile Include="TokenBuffer.cpp" />
@@ -387,6 +388,7 @@
     <ClInclude Include="PermData.h" />
     <ClInclude Include="Ring.h" />
     <ClInclude Include="SpillFile.h" />
+    <ClInclude Include="StringTable.h" />
     <ClInclude Include="structures.h" />
     <ClInclude Include="SymbolTable.h" />
     <ClInclude Include="SymbolTableMemory.h" />

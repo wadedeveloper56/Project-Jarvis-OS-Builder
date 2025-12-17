@@ -1,6 +1,7 @@
 #pragma once
 
 #include "globals.h"
+#include "MemorySubsystem.h"
 
 typedef struct blk blk_t;
 typedef struct free_t free_t;
@@ -38,9 +39,13 @@ enum {
 
 class Carve
 {
+	MemorySubsystem* memory;
 public:
-	Carve();
+	Carve(MemorySubsystem* memory);
 	~Carve();
+	blk_t* newBlk(cv_t* cv);
+	static void MakeFreeList(cv_t* cv, blk_t* newblk, unsigned offset);
+	static void CarveZapBlock(carve_t cv, void* blk, void* dummy);
 	carve_t CarveCreate(size_t elm_size, size_t how_many);
 	void CarveRestart(carve_t cv, unsigned);
 	void CarvePurge(carve_t cv);

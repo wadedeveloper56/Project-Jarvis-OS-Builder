@@ -18,14 +18,16 @@ Linker::Linker()
 	objorl = new ObjOrl(memory, file, tokenBuffer);
 	cmdLine = new CmdLine();
 	ring = new Ring(memory);
-	carve = new Carve();
-	permData = new PermData(memory, ring, carve);
+	carve = new Carve(memory);
+	strtab = new StringTable(memory, ring);
+	permData = new PermData(memory, ring, carve, strtab);
 }
 
 Linker::~Linker()
 {
 	delete virtMem;
 	delete permData;
+	delete strtab;
 	delete carve;
 	delete ring;
 	delete cmdLine;

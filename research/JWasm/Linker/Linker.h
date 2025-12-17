@@ -13,6 +13,7 @@
 #include "VirtualMemory.h"
 #include "HashTable.h"
 #include "ring.h"
+#include "StringTable.h"
 
 class Linker
 {
@@ -30,6 +31,7 @@ class Linker
 	HashTable* hashTable;
 	Ring* ring;
 	Carve* carve;
+	StringTable* strtab;
 public:
 	Linker();
 	~Linker();
