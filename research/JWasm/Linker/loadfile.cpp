@@ -36,3 +36,30 @@ void ResetLoadFile(void)
 {
     ClearStartAddr();
 }
+
+static void CloseOutFiles(void)
+/*******************************/
+{
+    outfilelist* fnode;
+
+    for (fnode = OutFiles; fnode != NULL; fnode = fnode->next) {
+        if (fnode->handle != NIL_HANDLE) {
+            CloseFile(fnode->handle);
+        }
+    }
+}
+
+void FreeOutFiles(MemorySubsystem* memory)
+{
+    outfilelist* fnode;
+
+    CloseOutFiles();
+    for (fnode = OutFiles; fnode != NULL; fnode = OutFiles) {
+        if (LinkState & LINK_ERROR) {
+            //FIX ME QDelete(fnode->fname);
+        }
+        memory->FreeMemory(fnode->fname);
+        OutFiles = fnode->next;
+        memory->FreeMemory(fnode);
+    }
+}

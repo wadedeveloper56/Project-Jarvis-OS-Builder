@@ -30,7 +30,8 @@ symbol* HeadSym;            /* head of symbol table list */
 section* Root;              /* pointer to root information          */
 mapflag MapFlags;           /* flags dealing with the map file */
 path_entry* LibPath;        /* path for library files               */
-unsigned_32    NumImports;
-unsigned_32    NumExports;
-obj_format     ObjFormat;
+unsigned_32 NumImports;
+unsigned_32 NumExports;
+obj_format ObjFormat;
 seg_leader* CurrentSeg;     /* current segment being allocated       */
+FileHandle TempFile;

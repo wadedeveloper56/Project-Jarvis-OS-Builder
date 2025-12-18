@@ -23,4 +23,4 @@ extern seg_leader* StackSegPtr;
 extern startinfo        StartInfo;
 
 void ResetLoadFile(void);
-
+void FreeOutFiles(MemorySubsystem* memory);

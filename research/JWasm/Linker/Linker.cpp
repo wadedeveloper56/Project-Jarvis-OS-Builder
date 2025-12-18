@@ -31,10 +31,10 @@ Linker::Linker()
 	hashTable = new HashTable(memory);
 	nodes = new Node(memory);
 	tokenBuffer = new TokenBuffer(memory);
-	spillFile = new SpillFile(file);
+	spillFile = new SpillFile(file, memory);
 	symbolTable = new SymbolTable(memory);
 	objorl = new ObjOrl(memory, file, tokenBuffer);
-	cmdLine = new CmdLine();
+	cmdLine = new CmdLine(memory);
 	ring = new Ring(memory);
 	carve = new Carve(memory);
 	strtab = new StringTable(memory, ring);
@@ -126,11 +126,10 @@ void Linker::CleanSubSystems()
 		CloseFile(MapFile);
 		MapFile = NIL_HANDLE;
 	}
-	//FreeOutFiles();
+	FreeOutFiles(memory);
 	memory->FreeMemory(MapFName);
-	//BurnSystemList();
-	//FreeList(LibPath);
-	//CloseSpillFile();
+	cmdLine->BurnSystemList();
+	virtMem->FreeList(LibPath);
 	//CleanTraces();
 	//FreePaths();
 	//FreeUndefs();
