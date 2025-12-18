@@ -42,5 +42,6 @@ private:
 	void ResetSubSystems(void);
 	void CleanSubSystems();
 	void ResetMisc(void);
+	void doLink(void);
 };
 

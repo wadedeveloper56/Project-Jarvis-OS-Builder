@@ -329,6 +329,7 @@
     <ClCompile Include="cmdall.cpp" />
     <ClCompile Include="CmdLine.cpp" />
     <ClCompile Include="CmdUtils.cpp" />
+    <ClCompile Include="comdef.cpp" />
     <ClCompile Include="dbgall.cpp" />
     <ClCompile Include="FileSubsystem.cpp" />
     <ClCompile Include="globals.cpp" />
@@ -343,6 +344,7 @@
     <ClCompile Include="MixCache.cpp" />
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="ObjOrl.cpp" />
+    <ClCompile Include="ovlsupp.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64EC'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|ARM64EC'">Create</PrecompiledHeader>
@@ -376,6 +378,7 @@
     <ClInclude Include="cofflwlv.h" />
     <ClInclude Include="cofforl.h" />
     <ClInclude Include="cofftype.h" />
+    <ClInclude Include="comdef.h" />
     <ClInclude Include="dbgall.h" />
     <ClInclude Include="elfentr.h" />
     <ClInclude Include="elfflhn.h" />
@@ -417,6 +420,7 @@
     <ClInclude Include="orlhshdf.h" />
     <ClInclude Include="orlintnl.h" />
     <ClInclude Include="orllevel.h" />
+    <ClInclude Include="ovlsupp.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="PermData.h" />
     <ClInclude Include="Ring.h" />

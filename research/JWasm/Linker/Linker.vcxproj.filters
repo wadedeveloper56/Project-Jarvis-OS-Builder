@@ -96,6 +96,12 @@
     <ClCompile Include="cmdall.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ovlsupp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="comdef.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Linker.h">
@@ -294,6 +300,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="cmdall.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ovlsupp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="comdef.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

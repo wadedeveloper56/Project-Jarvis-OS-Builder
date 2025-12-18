@@ -6,6 +6,8 @@
 #include "CmdUtils.h"
 #include "dbgall.h"
 #include "cmdall.h"
+#include "ovlsupp.h"
+#include "comdef.h"
 
 Linker::Linker()
 {
@@ -48,17 +50,6 @@ Linker::~Linker()
 	delete memory;
 }
 
-void Linker::ResetSubSystems(void)
-{
-	permData->Reset();
-	messaging->ResetMsg();
-	ResetMisc();
-	Root = NewSection(memory, hashTable);
-	ResetDBI();
-	mapio->ResetMapIO();
-	ResetCmdAll();
-}
-
 void Linker::ResetMisc(void)
 {
 	/* jwlink: default is: multiple defines are NOT ok */
@@ -89,11 +80,67 @@ void Linker::ResetMisc(void)
 	SetLibCase();
 }
 
-void Linker::mainLine()
+void Linker::ResetSubSystems(void)
 {
-	ResetSubSystems();
+	permData->Reset();
+	messaging->ResetMsg();
+	ResetMisc();
+	Root = NewSection(memory, hashTable);
+	ResetDBI();
+	mapio->ResetMapIO();
+	ResetCmdAll();
+	ResetOvlSupp();
+	ResetComdef();
+	//ResetDistrib();
+	//ResetLoadNov();
+	//ResetLoadPE();
+	//ResetObj2Supp();
+	//ResetObjIO();
+	//ResetObjOMF();
+	//ResetObjPass1();
+	//ResetObjStrip();
+	//ResetOMFReloc();
+	//ResetReloc();
+	//ResetSymTrace();
+	//ResetLoadFile();
+	//ResetAddr();
+	//ResetToc();
 }
 
 void Linker::CleanSubSystems()
 {
+	//if (MapFile != NIL_HANDLE) {
+	//	QClose(MapFile, MapFName);
+	//	MapFile = NIL_HANDLE;
+	//}
+	//FreeOutFiles();
+	//_LnkFree(MapFName);
+	//BurnSystemList();
+	//FreeList(LibPath);
+	//CloseSpillFile();
+	//CleanTraces();
+	//FreePaths();
+	//FreeUndefs();
+	//FreeLocalImports();
+	//CleanLoadFile();
+	//CleanLinkStruct();
+	//FreeFormatStuff();
+	//FreeObjInfo();
+	//FreeVirtMem();
+	//CleanToc();
+	//CleanSym();
+	//CleanPermData();
+}
+
+void Linker::doLink(void)
+{
+	// The main linking process would be implemented here.
+	// This is a placeholder for the actual linking logic.
+}
+
+void Linker::mainLine()
+{
+	ResetSubSystems();
+	doLink();
+	CleanSubSystems();
 }

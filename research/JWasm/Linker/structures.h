@@ -670,3 +670,18 @@ typedef struct entry_export {
     char* impname;
     targ_addr               addr;
 } entry_export;
+
+typedef struct cdat_piece {
+    struct cdat_piece* next;
+    unsigned_8* data;
+    offset              length;
+    unsigned            free_data : 1;
+} comdat_piece;
+
+typedef struct cdat_info {
+    struct cdat_info* next;
+    segdata* sdata;
+    symbol* sym;
+    comdat_piece* pieces;
+    sym_info            flags;
+} comdat_info;
