@@ -105,6 +105,18 @@
     <ClCompile Include="distrib.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="loadnov.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="loadpe.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="obj2supp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="objio.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Linker.h">
@@ -312,6 +324,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="distrib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="loadnov.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="loadpe.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="obj2supp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="objio.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

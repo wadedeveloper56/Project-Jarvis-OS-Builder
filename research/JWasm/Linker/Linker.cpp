@@ -1,7 +1,6 @@
 #include "pch.h"
 #include "Linker.h"
 #include "globals.h"
-#include "structures.h"
 #include "libr.h"
 #include "CmdUtils.h"
 #include "dbgall.h"
@@ -9,6 +8,10 @@
 #include "ovlsupp.h"
 #include "comdef.h"
 #include "distrib.h"
+#include "loadnov.h"
+#include "loadpe.h"
+#include "obj2supp.h"
+#include "objio.h"
 
 Linker::Linker()
 {
@@ -93,10 +96,10 @@ void Linker::ResetSubSystems(void)
 	ResetOvlSupp();
 	ResetComdef();
 	ResetDistrib();
-	//ResetLoadNov();
-	//ResetLoadPE();
-	//ResetObj2Supp();
-	//ResetObjIO();
+	ResetLoadNov();
+	ResetLoadPE();
+	ResetObj2Supp();
+	ResetObjIO();
 	//ResetObjOMF();
 	//ResetObjPass1();
 	//ResetObjStrip();

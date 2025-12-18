@@ -20,6 +20,7 @@ typedef signed int      signed_32;
 typedef unsigned_32 offset;
 typedef unsigned_16 segment;
 typedef unsigned long   virt_mem;
+typedef unsigned char   byte;
 
 typedef enum mapflag {
     MAP_FLAG = 0x0001,
