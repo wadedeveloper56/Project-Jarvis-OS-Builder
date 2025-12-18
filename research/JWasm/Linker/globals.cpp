@@ -33,3 +33,4 @@ path_entry* LibPath;        /* path for library files               */
 unsigned_32    NumImports;
 unsigned_32    NumExports;
 obj_format     ObjFormat;
+seg_leader* CurrentSeg;     /* current segment being allocated       */

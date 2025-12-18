@@ -135,6 +135,15 @@
     <ClCompile Include="symtrace.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="loadfile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SAlloc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="toc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Linker.h">
@@ -375,6 +384,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="symtrace.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="loadfile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SAlloc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="toc.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

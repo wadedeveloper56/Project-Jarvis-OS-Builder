@@ -18,6 +18,9 @@
 #include "omfreloc.h"
 #include "reloc.h"
 #include "symtrace.h"
+#include "loadfile.h"
+#include "SAlloc.h"
+#include "toc.h"
 
 Linker::Linker()
 {
@@ -112,19 +115,19 @@ void Linker::ResetSubSystems(void)
 	ResetOMFReloc();
 	ResetReloc();
 	ResetSymTrace();
-	//ResetLoadFile();
-	//ResetAddr();
-	//ResetToc();
+	ResetLoadFile();
+	ResetAddr();
+	ResetToc();
 }
 
 void Linker::CleanSubSystems()
 {
-	//if (MapFile != NIL_HANDLE) {
-	//	QClose(MapFile, MapFName);
-	//	MapFile = NIL_HANDLE;
-	//}
+	if (MapFile != NIL_HANDLE) {
+		CloseFile(MapFile);
+		MapFile = NIL_HANDLE;
+	}
 	//FreeOutFiles();
-	//_LnkFree(MapFName);
+	memory->FreeMemory(MapFName);
 	//BurnSystemList();
 	//FreeList(LibPath);
 	//CloseSpillFile();
@@ -137,7 +140,7 @@ void Linker::CleanSubSystems()
 	//FreeFormatStuff();
 	//FreeObjInfo();
 	//FreeVirtMem();
-	//CleanToc();
+	CleanToc();
 	//CleanSym();
 	//CleanPermData();
 }

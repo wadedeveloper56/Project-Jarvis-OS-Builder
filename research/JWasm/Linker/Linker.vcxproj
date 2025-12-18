@@ -338,6 +338,7 @@
     <ClCompile Include="Linker.cpp" />
     <ClCompile Include="LinkerUtils.cpp" />
     <ClCompile Include="libr.cpp" />
+    <ClCompile Include="loadfile.cpp" />
     <ClCompile Include="loadnov.cpp" />
     <ClCompile Include="loadpe.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -367,11 +368,13 @@
     <ClCompile Include="PermData.cpp" />
     <ClCompile Include="reloc.cpp" />
     <ClCompile Include="Ring.cpp" />
+    <ClCompile Include="SAlloc.cpp" />
     <ClCompile Include="SpillFile.cpp" />
     <ClCompile Include="StringTable.cpp" />
     <ClCompile Include="SymbolTable.cpp" />
     <ClCompile Include="SymbolTableMemory.cpp" />
     <ClCompile Include="symtrace.cpp" />
+    <ClCompile Include="toc.cpp" />
     <ClCompile Include="TokenBuffer.cpp" />
     <ClCompile Include="VirtualMemory.cpp" />
   </ItemGroup>
@@ -409,6 +412,7 @@
     <ClInclude Include="LinkerUtils.h" />
     <ClInclude Include="lmsgs.h" />
     <ClInclude Include="lnkmsg.h" />
+    <ClInclude Include="loadfile.h" />
     <ClInclude Include="loadnov.h" />
     <ClInclude Include="loadpe.h" />
     <ClInclude Include="MapIO.h" />
@@ -446,6 +450,7 @@
     <ClInclude Include="PermData.h" />
     <ClInclude Include="reloc.h" />
     <ClInclude Include="Ring.h" />
+    <ClInclude Include="SAlloc.h" />
     <ClInclude Include="SpillFile.h" />
     <ClInclude Include="StringTable.h" />
     <ClInclude Include="structures.h" />
@@ -453,6 +458,7 @@
     <ClInclude Include="SymbolTableMemory.h" />
     <ClInclude Include="syms.h" />
     <ClInclude Include="symtrace.h" />
+    <ClInclude Include="toc.h" />
     <ClInclude Include="TokenBuffer.h" />
     <ClInclude Include="types.h" />
     <ClInclude Include="VirtualMemory.h" />
