@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "LinkerUtils.h"
 #include "structures.h"
 

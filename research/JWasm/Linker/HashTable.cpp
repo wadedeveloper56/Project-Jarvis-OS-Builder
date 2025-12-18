@@ -1,5 +1,4 @@
-#include <cstring>
-#include <cctype>
+#include "pch.h"
 #include "HashTable.h"
 
 HashTable::HashTable(MemorySubsystem* memory)

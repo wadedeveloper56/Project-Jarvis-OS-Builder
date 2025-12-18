@@ -1,4 +1,4 @@
-#include <cstring>
+#include "pch.h"
 #include "SymbolTable.h"
 
 SymbolTable::SymbolTable(MemorySubsystem* memory)

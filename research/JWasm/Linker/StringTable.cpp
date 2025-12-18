@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "StringTable.h"
 
 StringTable::StringTable(MemorySubsystem* memory, Ring* ring)

@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "globals.h"
 #include "Linker.h"
 

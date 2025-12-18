@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "Carve.h"
 
 struct blk {
@@ -63,7 +64,7 @@ void Carve::CarveVerifyAllGone(carve_t cv, char* node_name)
     free_t* check;
     blk_t* block;
     char* compare;
-    char buff[80];
+    //char buff[80];
     bool some_unfreed;
 
     some_unfreed = false;
@@ -268,7 +269,7 @@ void* Carve::CarveGetIndex(carve_t cv, void* elm)
     if (elm == NULL) {
         return((void*)CARVE_NULL_INDEX);
     }
-    block_index = cv->blk_count;
+    block_index = (unsigned)cv->blk_count;
     block = cv->blk_list;
     while (elm < (void*)block) {
         --block_index;

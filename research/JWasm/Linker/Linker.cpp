@@ -1,8 +1,10 @@
+#include "pch.h"
 #include "Linker.h"
 #include "globals.h"
 #include "structures.h"
 #include "libr.h"
 #include "CmdUtils.h"
+#include "dbgall.h"
 
 Linker::Linker()
 {
@@ -21,6 +23,7 @@ Linker::Linker()
 	carve = new Carve(memory);
 	strtab = new StringTable(memory, ring);
 	permData = new PermData(memory, ring, carve, strtab);
+	virtMem = new VirtualMemory(memory);
 }
 
 Linker::~Linker()
@@ -46,9 +49,9 @@ void Linker::ResetSubSystems(void)
 {
 	permData->Reset();
 	messaging->ResetMsg();
-	virtMem = new VirtualMemory(memory);
 	ResetMisc();
 	Root = NewSection(memory, hashTable);
+	ResetDBI();
 }
 
 void Linker::ResetMisc(void)

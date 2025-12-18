@@ -4,7 +4,7 @@
 
 void* AllocateMemory(size_t size)
 {
-	return malloc(size);
+	return calloc(1, size);
 }
 
 void FreeMemory(void* memoryBlock)
@@ -14,7 +14,7 @@ void FreeMemory(void* memoryBlock)
 
 void* ReallocateMemory(void* memblock, size_t size)
 {
-	return realloc(memblock, size);
+	return _recalloc(memblock, 1, size);
 }
 
 void* ExpandMemory(void* memblock, size_t size)
