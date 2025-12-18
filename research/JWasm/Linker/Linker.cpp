@@ -12,6 +12,9 @@
 #include "loadpe.h"
 #include "obj2supp.h"
 #include "objio.h"
+#include "objomf.h"
+#include "objpass1.h"
+#include "objstrip.h"
 
 Linker::Linker()
 {
@@ -100,9 +103,9 @@ void Linker::ResetSubSystems(void)
 	ResetLoadPE();
 	ResetObj2Supp();
 	ResetObjIO();
-	//ResetObjOMF();
-	//ResetObjPass1();
-	//ResetObjStrip();
+	ResetObjOMF();
+	ResetObjPass1();
+	ResetObjStrip();
 	//ResetOMFReloc();
 	//ResetReloc();
 	//ResetSymTrace();

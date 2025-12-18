@@ -39,3 +39,4 @@ extern mapflag MapFlags;           /* flags dealing with the map file */
 extern path_entry* LibPath;        /* path for library files               */
 extern unsigned_32    NumImports;
 extern unsigned_32    NumExports;
+extern obj_format     ObjFormat;

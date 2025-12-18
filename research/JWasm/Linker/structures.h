@@ -685,3 +685,22 @@ typedef struct cdat_info {
     comdat_piece* pieces;
     sym_info            flags;
 } comdat_info;
+
+typedef enum obj_format {
+    FMT_EASY_OMF = 0x0001,
+    FMT_MS_386 = 0x0002,
+    FMT_UNUSED_3 = 0x0004,
+    FMT_IS_LIDATA = 0x0008,   // true if last data was lidata
+    FMT_TOLD_XXBIT = 0x0010,   // already said object was xx-bit
+    FMT_IGNORE_FIXUPP = 0x0020,   // don't process a fixup record
+    FMT_UNSAFE_FIXUPP = 0x0040,   // don't optimize calls in current fixupp
+    FMT_UNUSED_1 = 0x0080,
+    FMT_PE_XFER = 0x0000,   // .obj is PE xfer code segment(see note)
+    FMT_OMF = 0x0100,   // .obj is an OMF object file (see note)
+    FMT_COFF = 0x0200,   // .obj is a COFF object file (see note)
+    FMT_ELF = 0x0300,   // .obj is an ELF object file (see note)
+    FMT_INCREMENTAL = 0x0400,   // .obj is saved inc. linking info
+    FMT_OBJ_FMT_MASK = 0x0700,
+    FMT_UNUSED_2 = 0x0800,
+    FMT_DEBUG_COMENT = 0x1000,   // saw an object debug coment.
+} obj_format;
