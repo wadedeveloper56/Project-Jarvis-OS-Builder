@@ -126,6 +126,15 @@
     <ClCompile Include="objstrip.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="omfreloc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="reloc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="symtrace.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Linker.h">
@@ -354,6 +363,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="objstrip.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="omfreloc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="reloc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ovltab.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="symtrace.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

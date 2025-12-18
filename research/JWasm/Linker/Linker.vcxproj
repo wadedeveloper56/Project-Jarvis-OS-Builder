@@ -352,6 +352,7 @@
     <ClCompile Include="ObjOrl.cpp" />
     <ClCompile Include="objpass1.cpp" />
     <ClCompile Include="objstrip.cpp" />
+    <ClCompile Include="omfreloc.cpp" />
     <ClCompile Include="ovlsupp.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64EC'">Create</PrecompiledHeader>
@@ -364,11 +365,13 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="PermData.cpp" />
+    <ClCompile Include="reloc.cpp" />
     <ClCompile Include="Ring.cpp" />
     <ClCompile Include="SpillFile.cpp" />
     <ClCompile Include="StringTable.cpp" />
     <ClCompile Include="SymbolTable.cpp" />
     <ClCompile Include="SymbolTableMemory.cpp" />
+    <ClCompile Include="symtrace.cpp" />
     <ClCompile Include="TokenBuffer.cpp" />
     <ClCompile Include="VirtualMemory.cpp" />
   </ItemGroup>
@@ -426,6 +429,7 @@
     <ClInclude Include="omfload.h" />
     <ClInclude Include="omfmunge.h" />
     <ClInclude Include="omforl.h" />
+    <ClInclude Include="omfreloc.h" />
     <ClInclude Include="omftype.h" />
     <ClInclude Include="orl.h" />
     <ClInclude Include="orlcomon.h" />
@@ -437,8 +441,10 @@
     <ClInclude Include="orlintnl.h" />
     <ClInclude Include="orllevel.h" />
     <ClInclude Include="ovlsupp.h" />
+    <ClInclude Include="ovltab.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="PermData.h" />
+    <ClInclude Include="reloc.h" />
     <ClInclude Include="Ring.h" />
     <ClInclude Include="SpillFile.h" />
     <ClInclude Include="StringTable.h" />
@@ -446,6 +452,7 @@
     <ClInclude Include="SymbolTable.h" />
     <ClInclude Include="SymbolTableMemory.h" />
     <ClInclude Include="syms.h" />
+    <ClInclude Include="symtrace.h" />
     <ClInclude Include="TokenBuffer.h" />
     <ClInclude Include="types.h" />
     <ClInclude Include="VirtualMemory.h" />
