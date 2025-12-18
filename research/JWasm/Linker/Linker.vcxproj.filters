@@ -102,6 +102,9 @@
     <ClCompile Include="comdef.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="distrib.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Linker.h">
@@ -306,6 +309,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="comdef.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="distrib.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

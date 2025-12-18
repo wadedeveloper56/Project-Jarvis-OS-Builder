@@ -331,6 +331,7 @@
     <ClCompile Include="CmdUtils.cpp" />
     <ClCompile Include="comdef.cpp" />
     <ClCompile Include="dbgall.cpp" />
+    <ClCompile Include="distrib.cpp" />
     <ClCompile Include="FileSubsystem.cpp" />
     <ClCompile Include="globals.cpp" />
     <ClCompile Include="HashTable.cpp" />
@@ -380,6 +381,7 @@
     <ClInclude Include="cofftype.h" />
     <ClInclude Include="comdef.h" />
     <ClInclude Include="dbgall.h" />
+    <ClInclude Include="distrib.h" />
     <ClInclude Include="elfentr.h" />
     <ClInclude Include="elfflhn.h" />
     <ClInclude Include="elfglbl.h" />

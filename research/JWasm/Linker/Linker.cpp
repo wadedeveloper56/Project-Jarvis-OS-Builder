@@ -8,6 +8,7 @@
 #include "cmdall.h"
 #include "ovlsupp.h"
 #include "comdef.h"
+#include "distrib.h"
 
 Linker::Linker()
 {
@@ -91,7 +92,7 @@ void Linker::ResetSubSystems(void)
 	ResetCmdAll();
 	ResetOvlSupp();
 	ResetComdef();
-	//ResetDistrib();
+	ResetDistrib();
 	//ResetLoadNov();
 	//ResetLoadPE();
 	//ResetObj2Supp();
