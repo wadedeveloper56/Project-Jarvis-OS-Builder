@@ -326,6 +326,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Carve.cpp" />
+    <ClCompile Include="cmdall.cpp" />
     <ClCompile Include="CmdLine.cpp" />
     <ClCompile Include="CmdUtils.cpp" />
     <ClCompile Include="dbgall.cpp" />
@@ -336,6 +337,7 @@
     <ClCompile Include="LinkerUtils.cpp" />
     <ClCompile Include="libr.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MapIO.cpp" />
     <ClCompile Include="MemorySubsystem.cpp" />
     <ClCompile Include="MessagingSubsystem.cpp" />
     <ClCompile Include="MixCache.cpp" />
@@ -362,6 +364,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Carve.h" />
+    <ClInclude Include="cmdall.h" />
     <ClInclude Include="CmdLine.h" />
     <ClInclude Include="CmdUtils.h" />
     <ClInclude Include="coffentr.h" />
@@ -391,6 +394,7 @@
     <ClInclude Include="LinkerUtils.h" />
     <ClInclude Include="lmsgs.h" />
     <ClInclude Include="lnkmsg.h" />
+    <ClInclude Include="MapIO.h" />
     <ClInclude Include="MemorySubsystem.h" />
     <ClInclude Include="MessagingSubsystem.h" />
     <ClInclude Include="MixCache.h" />

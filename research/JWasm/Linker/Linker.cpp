@@ -5,6 +5,7 @@
 #include "libr.h"
 #include "CmdUtils.h"
 #include "dbgall.h"
+#include "cmdall.h"
 
 Linker::Linker()
 {
@@ -24,10 +25,12 @@ Linker::Linker()
 	strtab = new StringTable(memory, ring);
 	permData = new PermData(memory, ring, carve, strtab);
 	virtMem = new VirtualMemory(memory);
+	mapio = new MapIO();
 }
 
 Linker::~Linker()
 {
+	delete mapio;
 	delete virtMem;
 	delete permData;
 	delete strtab;
@@ -52,6 +55,8 @@ void Linker::ResetSubSystems(void)
 	ResetMisc();
 	Root = NewSection(memory, hashTable);
 	ResetDBI();
+	mapio->ResetMapIO();
+	ResetCmdAll();
 }
 
 void Linker::ResetMisc(void)

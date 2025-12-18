@@ -35,4 +35,5 @@ extern char* OvlFName;             /* points to file name for overlays     */
 extern offset StackSize;           /* size of stack                        */
 extern symbol* HeadSym;            /* head of symbol table list */
 extern section* Root;              /* pointer to root information          */
-
+extern mapflag MapFlags;           /* flags dealing with the map file */
+extern path_entry* LibPath;        /* path for library files               */

@@ -28,4 +28,5 @@ char* OvlFName;             /* points to file name for overlays     */
 offset StackSize;           /* size of stack                        */
 symbol* HeadSym;            /* head of symbol table list */
 section* Root;              /* pointer to root information          */
-
+mapflag MapFlags;           /* flags dealing with the map file */
+path_entry* LibPath;        /* path for library files               */

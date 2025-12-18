@@ -21,6 +21,16 @@ typedef unsigned_32 offset;
 typedef unsigned_16 segment;
 typedef unsigned long   virt_mem;
 
+typedef enum mapflag {
+    MAP_FLAG = 0x0001,
+    MAP_STATICS = 0x0002,       // put statics in the map file
+    MAP_ARTIFICIAL = 0x0004,       // put artificial syms in the map file
+    MAP_SORT = 0x0008,       // sort symbols in the map file
+    MAP_ALPHA = 0x0010,       // sort symbols in alphabetical order
+    MAP_GLOBAL = 0x0020,       // sort symbols globally.
+    MAP_VERBOSE = 0x0040
+} mapflag; 
+
 typedef struct targ_addr {
     offset              off;
     segment             seg;

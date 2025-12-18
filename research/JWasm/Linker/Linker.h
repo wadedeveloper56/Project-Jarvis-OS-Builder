@@ -14,6 +14,7 @@
 #include "HashTable.h"
 #include "ring.h"
 #include "StringTable.h"
+#include "MapIO.h"
 
 class Linker
 {
@@ -32,6 +33,7 @@ class Linker
 	Ring* ring;
 	Carve* carve;
 	StringTable* strtab;
+	MapIO* mapio;
 public:
 	Linker();
 	~Linker();
