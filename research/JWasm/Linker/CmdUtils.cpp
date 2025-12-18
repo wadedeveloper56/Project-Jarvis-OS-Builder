@@ -18,7 +18,7 @@ section* NewSection(MemorySubsystem* memory, HashTable* hashTable)
     sect->orderlist = nullptr;
     sect->areas = nullptr;
     sect->files = nullptr;
-    //FIX ME sect->modFilesHashed = hashTable->CreateHTable(256, StringiHashFunc, stricmp_wrapper);
+    sect->modFilesHashed = hashTable->CreateHTable(256, StringiHashFunc, stricmp_wrapper);
     sect->mods = nullptr;
     sect->reloclist = nullptr;
     sect->sect_addr.off = 0;
