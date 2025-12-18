@@ -11,16 +11,14 @@ static int stricmp_wrapper(const void* s1, const void* s2)
 
 section* NewSection(MemorySubsystem* memory, HashTable* hashTable)
 {
-    section* sect;
-
     OvlNum++;
-    sect = (section*)memory->AllocateMemory(sizeof(section));
+    section *sect = (section*)memory->AllocateMemory(sizeof(section));
     sect->next_sect = nullptr;
     sect->classlist = nullptr;
     sect->orderlist = nullptr;
     sect->areas = nullptr;
     sect->files = nullptr;
-    sect->modFilesHashed = hashTable->CreateHTable(256, StringiHashFunc, stricmp_wrapper);
+    //FIX ME sect->modFilesHashed = hashTable->CreateHTable(256, StringiHashFunc, stricmp_wrapper);
     sect->mods = nullptr;
     sect->reloclist = nullptr;
     sect->sect_addr.off = 0;
