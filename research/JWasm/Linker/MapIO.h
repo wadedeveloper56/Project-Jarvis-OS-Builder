@@ -1,6 +1,7 @@
 #pragma once
 
 #include "globals.h"
+#include "ring.h"
 
 typedef struct symrecinfo {
 	struct symrecinfo* next;
@@ -10,11 +11,13 @@ typedef struct symrecinfo {
 
 class MapIO
 {
+	Ring* ring;
 	symrecinfo* UndefList;
 	symrecinfo* SymTraceList;
 public:
-	MapIO();
+	MapIO(Ring* ring);
 	~MapIO();
 	void ResetMapIO(void);
+	void FreeUndefs(void);
 };
 

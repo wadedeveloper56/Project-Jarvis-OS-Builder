@@ -40,7 +40,7 @@ Linker::Linker()
 	strtab = new StringTable(memory, ring);
 	permData = new PermData(memory, ring, carve, strtab);
 	virtMem = new VirtualMemory(memory);
-	mapio = new MapIO();
+	mapio = new MapIO(ring);
 }
 
 Linker::~Linker()
@@ -132,7 +132,7 @@ void Linker::CleanSubSystems()
 	FreeList(memory, LibPath);
 	CleanTraces(memory);
 	cmdLine->FreePaths();
-	//FreeUndefs();
+	mapio->FreeUndefs();
 	//FreeLocalImports();
 	//CleanLoadFile();
 	//CleanLinkStruct();
