@@ -328,6 +328,8 @@
     <ClCompile Include="Carve.cpp" />
     <ClCompile Include="cmdall.cpp" />
     <ClCompile Include="CmdLine.cpp" />
+    <ClCompile Include="CmdPlatform.cpp" />
+    <ClCompile Include="CmdQnx.cpp" />
     <ClCompile Include="CmdUtils.cpp" />
     <ClCompile Include="comdef.cpp" />
     <ClCompile Include="dbgall.cpp" />
@@ -348,6 +350,7 @@
     <ClCompile Include="MixCache.cpp" />
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="obj2supp.cpp" />
+    <ClCompile Include="objfree.cpp" />
     <ClCompile Include="objio.cpp" />
     <ClCompile Include="objomf.cpp" />
     <ClCompile Include="ObjOrl.cpp" />
@@ -382,6 +385,8 @@
     <ClInclude Include="Carve.h" />
     <ClInclude Include="cmdall.h" />
     <ClInclude Include="CmdLine.h" />
+    <ClInclude Include="CmdPlatform.h" />
+    <ClInclude Include="CmdQnx.h" />
     <ClInclude Include="CmdUtils.h" />
     <ClInclude Include="coffentr.h" />
     <ClInclude Include="coffflhn.h" />
@@ -407,6 +412,7 @@
     <ClInclude Include="globals.h" />
     <ClInclude Include="hash.h" />
     <ClInclude Include="HashTable.h" />
+    <ClInclude Include="ldefext.h" />
     <ClInclude Include="libr.h" />
     <ClInclude Include="Linker.h" />
     <ClInclude Include="LinkerUtils.h" />
@@ -421,6 +427,7 @@
     <ClInclude Include="MixCache.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="obj2supp.h" />
+    <ClInclude Include="objfree.h" />
     <ClInclude Include="objio.h" />
     <ClInclude Include="objomf.h" />
     <ClInclude Include="ObjOrl.h" />

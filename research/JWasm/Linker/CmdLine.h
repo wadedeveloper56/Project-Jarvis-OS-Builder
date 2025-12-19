@@ -2,18 +2,29 @@
 
 #include "globals.h"
 #include "MemorySubsystem.h"
+#include "MessagingSubsystem.h"
+#include "CmdPlatform.h"
+
+typedef struct _select_format {
+	exe_format bits;
+	char* lib_var_name;
+	CmdPlatform* platform;
+}select_format;
 
 class CmdLine
 {
 	MemorySubsystem* memory;
+	MessagingSubsystem* msg;
+	select_format PossibleFmt[11];
 	char* Name;
 	sysblock* PrevCommand;
 	sysblock* SysBlocks;
 public:
-	CmdLine(MemorySubsystem* memory);
+	CmdLine(MemorySubsystem* memory, MessagingSubsystem* msg);
 	~CmdLine();
 	void BurnSystemList(void);
 	void FreePaths(void);
+	void FreeFormatStuff(void);
 private:
 	void CleanSystemList(bool check);
 };

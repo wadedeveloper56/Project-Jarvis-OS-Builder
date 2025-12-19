@@ -9,14 +9,15 @@ SymbolTable::SymbolTable(MemorySubsystem* memory)
 	LastSym = nullptr;
 	SymList = nullptr;
 	CmpRtn = nullptr;
-	GlobalSymPtrs = (symbol**)memory->AllocateMemory(GLOBAL_TABALLOC);
-	StaticSymPtrs = (symbol**)memory->AllocateMemory(STATIC_TABALLOC);
+	_ChkAlloc(symbol**, GlobalSymPtrs, GLOBAL_TABALLOC);
+	_ChkAlloc(symbol**, StaticSymPtrs, STATIC_TABALLOC);
 }
 
 SymbolTable::~SymbolTable()
 {
-	memory->FreeMemory(GlobalSymPtrs);
-	memory->FreeMemory(StaticSymPtrs);
+	delete symMem;
+	_LnkFree(GlobalSymPtrs);
+	_LnkFree(StaticSymPtrs);
 }
 
 void SymbolTable::ClearHashPointers(void)

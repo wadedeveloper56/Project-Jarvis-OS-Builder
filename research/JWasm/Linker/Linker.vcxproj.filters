@@ -144,6 +144,15 @@
     <ClCompile Include="toc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="objfree.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CmdPlatform.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CmdQnx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Linker.h">
@@ -393,6 +402,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="toc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="objfree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CmdPlatform.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CmdQnx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ldefext.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

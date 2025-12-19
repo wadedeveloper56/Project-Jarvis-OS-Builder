@@ -1,5 +1,12 @@
 #pragma once
 
+#define _ChkAlloc( cast, dest, size ) dest = (cast)memory->AllocateMemory( size )
+#define _LnkAlloc( cast, dest, size ) dest = (cast)memory->AllocateMemory( size )
+#define _LnkReAlloc( cast, dest, src, size ) dest = (cast)memory->ReallocateMemory( src, size );
+#define _LnkFree( ptr )         memory->FreeMemory( ptr )
+#define _PermFree( ptr )        /* nothing to do */
+#define _LnkExpand( cast, dest, src, size ) dest = (cast)memory->ExpandMemory( src, size );
+
 class MemorySubsystem
 {
 public:

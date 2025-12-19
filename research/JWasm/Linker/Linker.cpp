@@ -21,6 +21,7 @@
 #include "loadfile.h"
 #include "SAlloc.h"
 #include "toc.h"
+#include "objfree.h"
 
 Linker::Linker()
 {
@@ -34,7 +35,7 @@ Linker::Linker()
 	spillFile = new SpillFile(file, memory);
 	symbolTable = new SymbolTable(memory);
 	objorl = new ObjOrl(memory, file, tokenBuffer);
-	cmdLine = new CmdLine(memory);
+	cmdLine = new CmdLine(memory, messaging);
 	ring = new Ring(memory);
 	carve = new Carve(memory);
 	strtab = new StringTable(memory, ring);
@@ -135,8 +136,8 @@ void Linker::CleanSubSystems()
 	mapio->FreeUndefs();
 	//FreeLocalImports();
 	//CleanLoadFile();
-	//CleanLinkStruct();
-	//FreeFormatStuff();
+	CleanLinkStruct(memory);
+	cmdLine->FreeFormatStuff();
 	//FreeObjInfo();
 	//FreeVirtMem();
 	CleanToc();

@@ -1,5 +1,15 @@
 #pragma once
 
+#define _EXE       0
+#define _QNXLOAD   1
+#define _OS2       2
+#define _PHARLAP   3
+#define _NOVELL    4
+//    #define _DOS16M    5
+#define _ELF       6
+//    #define _ZDOS      7
+#define _RAW       8
+
 #include "types.h"
 #include "structures.h"
 
@@ -43,3 +53,4 @@ extern obj_format     ObjFormat;
 extern seg_leader* CurrentSeg;     /* current segment being allocated       */
 extern FileHandle TempFile;
 extern path_entry* Path;           /* path for object files                */
+extern struct fmt_data FmtData;    /* format specific data */
