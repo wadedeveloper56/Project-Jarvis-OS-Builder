@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "VirtualMemory.h"
 #include "globals.h"
+#include "LinkerUtils.h"
 
 VirtualMemory::VirtualMemory(MemorySubsystem* memory)
 {
@@ -10,18 +11,6 @@ VirtualMemory::VirtualMemory(MemorySubsystem* memory)
 
 VirtualMemory::~VirtualMemory()
 {
-	FreeList(VMemBlocks);
+	FreeList(memory, VMemBlocks);
 	VMemBlocks = nullptr;
-}
-
-void VirtualMemory::FreeList(void* _curr)
-{
-    node* curr = (node *)_curr;
-    node* next_node;
-
-    while (curr) {
-        next_node = (node*)curr->next;
-        memory->FreeMemory(curr);
-        curr = next_node;
-    }
 }

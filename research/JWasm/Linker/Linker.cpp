@@ -129,9 +129,9 @@ void Linker::CleanSubSystems()
 	FreeOutFiles(memory);
 	memory->FreeMemory(MapFName);
 	cmdLine->BurnSystemList();
-	virtMem->FreeList(LibPath);
-	//CleanTraces();
-	//FreePaths();
+	FreeList(memory, LibPath);
+	CleanTraces(memory);
+	cmdLine->FreePaths();
 	//FreeUndefs();
 	//FreeLocalImports();
 	//CleanLoadFile();

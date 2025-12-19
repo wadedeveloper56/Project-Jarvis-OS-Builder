@@ -35,3 +35,4 @@ unsigned_32 NumExports;
 obj_format ObjFormat;
 seg_leader* CurrentSeg;     /* current segment being allocated       */
 FileHandle TempFile;
+path_entry* Path;           /* path for object files                */

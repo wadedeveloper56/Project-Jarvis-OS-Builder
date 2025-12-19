@@ -7,5 +7,21 @@ trace_info* TraceList;
 
 void ResetSymTrace(void)
 {
-    TraceList = NULL;
+    TraceList = nullptr;
+}
+
+void CleanTraces(MemorySubsystem* memory)
+{
+    trace_info* next;
+
+    while (TraceList != nullptr) {
+        next = TraceList->next;
+        if (!TraceList->found) {
+            memory->FreeMemory(TraceList->u.name);
+        }
+        memory->FreeMemory(TraceList->member);
+        memory->FreeMemory(TraceList);
+        TraceList = next;
+    }
+    TraceList = nullptr;
 }

@@ -15,6 +15,5 @@ class VirtualMemory
 public:
 	VirtualMemory(MemorySubsystem* memory);
 	~VirtualMemory();
-	void FreeList(void* _curr);
 };
 
