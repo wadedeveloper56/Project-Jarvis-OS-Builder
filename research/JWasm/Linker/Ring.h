@@ -8,8 +8,9 @@
 class Ring
 {
     MemorySubsystem* memory;
+    Carve* carve;
 public:
-    Ring(MemorySubsystem* memory);
+    Ring(MemorySubsystem* memory, Carve* carve);
     ~Ring();
     void* RINGHNAME(Alloc) (void* hdr, size_t size);
     void* RINGHNAME(CarveAlloc) (carve_t carver, void* hdr);
@@ -21,41 +22,15 @@ public:
     void* RINGHNAME(Promote) (void* hdr,void* elt,void* prv);
     void RINGHNAME(Insert) (void* hdr,void* element,void* insert);
     void* RINGHNAME(Lookup) (void* hdr,bool (*compare_rtn)(void* element,void* comparand),void* comparand);
-    void* RINGHNAME(Pop) (          // PRUNE FIRST ELEMENT IN THE RING
-        void* hdr)                 // - addr( ring header )
-        ;
-    void* RINGHNAME(Last) (         // RETURN LAST ELEMENT IN THE RING
-        void* hdr)
-        ;
-    void* RINGHNAME(First) (        // RETURN FIRST ELEMENT IN THE RING
-        void* hdr)
-        ;
-    void* RINGHNAME(Pred) (         // FIND PREDECESSOR ELEMENT IN A RING
-        void* hdr,                  // - ring header
-        void* element)             // - element
-        ;
-    void* RINGHNAME(Prune) (        // PRUNE ELEMENT FROM A RING
-        void* hdr,                  // - addr( ring header )
-        void* element)             // - element to be pruned
-        ;
-    void* RINGHNAME(PruneWithPrev) ( // PRUNE ELEMENT FROM A RING (PREV ELT AVAILABLE)
-        void* hdr,                  // - addr( ring header )
-        void* element,              // - element to be pruned
-        void* prv)                 // - element just before element
-        ;
-    void* RINGHNAME(Push) (         // INSERT ELEMENT AT START OF RING
-        void* hdr,                  // - addr( ring header )
-        void* element)             // - element to be pushed
-        ;
-    void RINGHNAME(Walk) (          // TRAVERSE RING
-        void* hdr,                  // - ring header
-        void (*rtn)                 // - traversal routine
-        (void* curr))         // - - passed current element
-        ;
-    void* RINGHNAME(Step) (         // STEP ALONG ELEMENTS (nullptr -> e1 -> e2 -> nullptr)
-        void* hdr,                  // - ring header
-        void* elt)                 // - curr element (nullptr to start)
-        ;
+    void* RINGHNAME(Pop) (void* hdr);
+    void* RINGHNAME(Last) (void* hdr);
+    void* RINGHNAME(First) (void* hdr);
+    void* RINGHNAME(Pred) (void* hdr,void* element);
+    void* RINGHNAME(Prune) (void* hdr,void* element);
+    void* RINGHNAME(PruneWithPrev) (void* hdr,void* element,void* prv);
+    void* RINGHNAME(Push) (void* hdr,void* element);
+    void RINGHNAME(Walk) (void* hdr,void (*rtn)(void* curr));
+    void* RINGHNAME(Step) (void* hdr,void* elt);
 };
 
 

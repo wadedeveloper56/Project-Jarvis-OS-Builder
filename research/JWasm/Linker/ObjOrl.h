@@ -19,6 +19,10 @@ typedef struct readcache {
 #include "elftype.h"
 #include "omftype.h"
 
+#define _HashAlloc( a, b ) a->funcs->memory->AllocateMemory( b )
+#define _HashFree( a, b ) a->funcs->memory->FreeMemory( b )
+#define _HashCompare( a, b, c ) a->compare( b, c )
+
 class ObjOrl
 {
 	orl_funcs ORLFuncs;
@@ -61,5 +65,7 @@ private:
 	void free_coff_file_hnd(coff_file_handle coff_file_hnd);
 	
 	orl_return freeFileHandle(omf_file_handle ofh);
+
+	void ORLHashTableFree(orl_hash_table hash_table);
 };
 

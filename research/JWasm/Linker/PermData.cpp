@@ -15,6 +15,21 @@ PermData::~PermData()
 {
 }
 
+entry_export* PermData::FreeAnExport(entry_export* exp)
+{
+    entry_export* next;
+
+    _LnkFree(exp->impname);
+    next = exp->next;
+    carve->CarveFree(CarveExportInfo, exp);
+    return(next);
+}
+
+void PermData::FreeSymbol(symbol* sym)
+{
+    carve->CarveFree(CarveSymbol, sym);
+}
+
 void PermData::Reset(void)
 {
     IncFileName = NULL;
@@ -80,3 +95,12 @@ void PermData::CleanPermData(void)
     FreeList(memory, SavedDefLibs);
 }
 
+void PermData::FreeAGroup(group_entry* group)
+{
+    carve->CarveFree(CarveGroup, group);
+}
+
+void PermData::FreeImport(dll_sym_info* dll)
+{
+    carve->CarveFree(CarveDLLInfo, dll);
+}

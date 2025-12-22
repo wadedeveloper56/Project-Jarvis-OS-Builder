@@ -2,8 +2,9 @@
 #include "CmdWinOS2.h"
 #include "objfree.h"
 
-CmdWinOS2::CmdWinOS2(MemorySubsystem* memory, MessagingSubsystem* msg) :CmdPlatform(memory, msg)
+CmdWinOS2::CmdWinOS2(MemorySubsystem* memory, MessagingSubsystem* msg, PermData* permData) :CmdPlatform(memory, msg)
 {
+    this->permData = permData;
 }
 
 CmdWinOS2::~CmdWinOS2()
@@ -38,16 +39,6 @@ void CmdWinOS2::FreeImpNameTab(void)
     FmtData.u.os2.imp_tab_list = NULL;
 }
 
-entry_export* CmdWinOS2::FreeAnExport(entry_export* exp)
-{
-    entry_export* next;
-
-    _LnkFree(exp->impname);
-    next = exp->next;
-    //FIX ME CarveFree(CarveExportInfo, exp);
-    return(next);
-}
-
 void CmdWinOS2::FreeExportList(void)
 {
     entry_export* exp;
@@ -55,7 +46,7 @@ void CmdWinOS2::FreeExportList(void)
     if (LinkFlags & INC_LINK_FLAG) return;
     exp = FmtData.u.os2.exports;
     while (exp != NULL) {
-        exp = FreeAnExport(exp);
+        exp = permData->FreeAnExport(exp);
     }
 }
 

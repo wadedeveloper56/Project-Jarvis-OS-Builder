@@ -1,9 +1,10 @@
 #include "pch.h"
 #include "SymbolTable.h"
 
-SymbolTable::SymbolTable(MemorySubsystem* memory)
+SymbolTable::SymbolTable(MemorySubsystem* memory,PermData* permData)
 {
 	this->memory = memory;
+	this->permData = permData;
 	this->symMem = new SymbolTableMemory(memory);
 	NameLen = 0;
 	LastSym = nullptr;
@@ -55,7 +56,7 @@ void SymbolTable::WipeSym(symbol* sym)
 			}
 		}
 		else {
-			//FIX ME FreeImport(sym->p.import);
+			permData->FreeImport((dll_sym_info*)sym->p.import);
 		}
 		sym->p.import = NULL;
 	}
@@ -66,10 +67,11 @@ void SymbolTable::WipeSym(symbol* sym)
 		sym->u.aliaslen = 0;    // make sure this is nulled again
 	}
 }
+
 void SymbolTable::FreeSymbol(symbol* sym)
 {
 	WipeSym(sym);
-	//FIX ME CarveFree(CarveSymbol, sym);
+	permData->FreeSymbol(sym);
 }
 
 void SymbolTable::CleanSym(void)

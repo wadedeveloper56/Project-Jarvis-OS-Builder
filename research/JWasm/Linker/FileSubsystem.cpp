@@ -35,6 +35,13 @@ int FileSubsystem::WriteStdOut(const void* buffer, size_t size, size_t count)
 	return WriteFile(stdout, buffer, size, count);
 }
 
+char NLSeq[] = { "\r\n" };
+
+int FileSubsystem::WriteNLStdOut(void)
+{
+	return WriteStdOut(NLSeq, sizeof(NLSeq) - 1, 1);
+}
+
 __int64 FileSubsystem::Tell()
 {
 	return FileTell(currentFile);

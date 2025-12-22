@@ -33,13 +33,13 @@ Linker::Linker()
 	nodes = new Node(memory);
 	tokenBuffer = new TokenBuffer(memory);
 	spillFile = new SpillFile(file, memory);
-	symbolTable = new SymbolTable(memory);
 	objorl = new ObjOrl(memory, file, tokenBuffer);
-	cmdLine = new CmdLine(memory, messaging);
-	ring = new Ring(memory);
-	carve = new Carve(memory);
+	carve = new Carve(memory, messaging, file);
+	ring = new Ring(memory, carve);
 	strtab = new StringTable(memory, ring);
 	permData = new PermData(memory, ring, carve, strtab);
+	symbolTable = new SymbolTable(memory, permData);
+	cmdLine = new CmdLine(memory, messaging, permData);
 	virtMem = new VirtualMemory(memory);
 	mapio = new MapIO(ring);
 }
@@ -48,13 +48,13 @@ Linker::~Linker()
 {
 	delete mapio;
 	delete virtMem;
+	delete cmdLine;
+	delete symbolTable;
 	delete permData;
 	delete strtab;
-	delete carve;
 	delete ring;
-	delete cmdLine;
+	delete carve;
 	delete objorl;
-	delete symbolTable;
 	delete spillFile;
 	delete tokenBuffer;
 	delete nodes;
@@ -136,7 +136,7 @@ void Linker::CleanSubSystems()
 	mapio->FreeUndefs();
 	//FreeLocalImports();
 	//CleanLoadFile();
-	CleanLinkStruct(memory);
+	CleanLinkStruct(memory, permData);
 	cmdLine->FreeFormatStuff();
 	nodes->FreeObjInfo();
 	CleanToc();

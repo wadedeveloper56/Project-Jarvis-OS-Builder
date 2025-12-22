@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CmdPlatform.h"
+#include "PermData.h"
 
 typedef struct os2_seg_flags {
     struct os2_seg_flags* next;
@@ -59,14 +60,14 @@ typedef struct os2_seg_flags {
 
 class CmdWinOS2 : public CmdPlatform
 {
+    PermData* permData;
 public:
-	CmdWinOS2(MemorySubsystem* memory, MessagingSubsystem* msg);
+	CmdWinOS2(MemorySubsystem* memory, MessagingSubsystem* msg, PermData* permData);
 	~CmdWinOS2();
 	virtual void setFormat();
 	virtual void freeFormat();
 private:
     void FreeImpNameTab(void);
-    entry_export* FreeAnExport(entry_export* exp);
     void FreeExportList(void);
 };
 

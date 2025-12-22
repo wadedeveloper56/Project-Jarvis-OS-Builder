@@ -91,7 +91,8 @@ class PermData
 	carve_t                 CarveSymbol;
 	carve_t                 CarveSegData;
 	carve_t                 CarveClass;
-	carve_t                 CarveGroup;
+
+    carve_t                 CarveGroup;
 	carve_t                 CarveDLLInfo;
 	carve_t                 CarveExportInfo;
 	char* IncFileName;
@@ -111,4 +112,8 @@ public:
 	~PermData();
 	void Reset(void);
     void CleanPermData(void);
+    void FreeAGroup(group_entry* group);
+    entry_export* FreeAnExport(entry_export* exp);
+    void PermData::FreeSymbol(symbol* sym);
+    void FreeImport(dll_sym_info* dll);
 };

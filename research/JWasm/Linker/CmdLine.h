@@ -4,6 +4,7 @@
 #include "MemorySubsystem.h"
 #include "MessagingSubsystem.h"
 #include "CmdPlatform.h"
+#include "PermData.h"
 
 typedef struct _select_format {
 	exe_format bits;
@@ -15,12 +16,13 @@ class CmdLine
 {
 	MemorySubsystem* memory;
 	MessagingSubsystem* msg;
+	PermData* permData;
 	select_format PossibleFmt[11];
 	char* Name;
 	sysblock* PrevCommand;
 	sysblock* SysBlocks;
 public:
-	CmdLine(MemorySubsystem* memory, MessagingSubsystem* msg);
+	CmdLine(MemorySubsystem* memory, MessagingSubsystem* msg, PermData* permData);
 	~CmdLine();
 	void BurnSystemList(void);
 	void FreePaths(void);

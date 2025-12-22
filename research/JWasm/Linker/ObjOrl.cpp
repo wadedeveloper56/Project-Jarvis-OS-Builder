@@ -76,12 +76,39 @@ void ObjOrl::free_coff_file_hnd(coff_file_handle coff_file_hnd)
 		coff_file_hnd->coff_hnd->funcs->memory->FreeMemory(coff_file_hnd->symbol_handles);
 	}
 	if (coff_file_hnd->sec_name_hash_table) {
-		//FIX ME ORLHashTableFree(coff_file_hnd->sec_name_hash_table);
+		ORLHashTableFree(coff_file_hnd->sec_name_hash_table);
 	}
 	if (coff_file_hnd->implib_data != NULL) {
 		coff_file_hnd->coff_hnd->funcs->memory->FreeMemory(coff_file_hnd->implib_data);
 	}
 	coff_file_hnd->coff_hnd->funcs->memory->FreeMemory(coff_file_hnd);
+}
+
+void ObjOrl::ORLHashTableFree(orl_hash_table hash_table)
+{
+	int                         loop;
+	orl_hash_struct* hash_ptr;
+	orl_hash_struct* last_hash_ptr;
+	orl_hash_data_struct* data_ptr;
+	orl_hash_data_struct* last_data_ptr;
+
+	for (loop = 0; loop < hash_table->size; loop++)
+	{
+		hash_ptr = hash_table->table[loop];
+		while (hash_ptr != NULL) {
+			data_ptr = hash_ptr->data_struct;
+			while (data_ptr != NULL) {
+				last_data_ptr = data_ptr;
+				data_ptr = data_ptr->next;
+				_HashFree(hash_table, last_data_ptr);
+			}
+			last_hash_ptr = hash_ptr;
+			hash_ptr = hash_ptr->next;
+			_HashFree(hash_table, last_hash_ptr);
+		}
+	}
+	_HashFree(hash_table, hash_table->table);
+	_HashFree(hash_table, hash_table);
 }
 
 orl_return ObjOrl::CoffRemoveFileLinks(coff_file_handle coff_file_hnd)
@@ -163,7 +190,7 @@ orl_return ObjOrl::freeFileHandle(omf_file_handle ofh)
 					sh->assoc.sym.num = 0;
 				}
 				if (sh->assoc.sym.hash_tab) {
-					//FIX ME ORLHashTableFree(sh->assoc.sym.hash_tab);
+					ORLHashTableFree(sh->assoc.sym.hash_tab);
 				}
 				break;
 			case(ORL_SEC_TYPE_STR_TABLE):
@@ -298,7 +325,7 @@ void ObjOrl::free_elf_file_hnd(elf_file_handle elf_file_hnd)
 	}
 	elf_file_hnd->elf_hnd->funcs->memory->FreeMemory(elf_file_hnd->orig_sec_hnd);
 	if (elf_file_hnd->sec_name_hash_table) {
-		//FIX ME ORLHashTableFree(elf_file_hnd->sec_name_hash_table);
+		ORLHashTableFree(elf_file_hnd->sec_name_hash_table);
 	}
 	elf_file_hnd->elf_hnd->funcs->memory->FreeMemory(elf_file_hnd);
 }

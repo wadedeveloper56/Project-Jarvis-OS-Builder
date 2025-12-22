@@ -3,6 +3,7 @@
 #include "MemorySubsystem.h"
 #include "globals.h"
 #include "SymbolTableMemory.h"
+#include "PermData.h"
 
 #define STATIC_TABSIZE  241  /* should be prime */
 #define GLOBAL_TABSIZE  1789  /* should be prime */
@@ -19,8 +20,9 @@ class SymbolTable
 	symbol** GlobalSymPtrs;
 	symbol** StaticSymPtrs;
 	MemorySubsystem* memory;
+	PermData* permData;
 public:
-	SymbolTable(MemorySubsystem* memory);
+	SymbolTable(MemorySubsystem* memory, PermData* permData);
 	~SymbolTable();
 	void ResetSym(void);
 	void ClearHashPointers(void);

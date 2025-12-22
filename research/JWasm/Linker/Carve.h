@@ -2,6 +2,7 @@
 
 #include "globals.h"
 #include "MemorySubsystem.h"
+#include "MessagingSubsystem.h"
 
 typedef struct blk blk_t;
 typedef struct free_t free_t;
@@ -40,8 +41,10 @@ enum {
 class Carve
 {
 	MemorySubsystem* memory;
+	MessagingSubsystem* msg;
+	FileSubsystem* file;
 public:
-	Carve(MemorySubsystem* memory);
+	Carve(MemorySubsystem* memory, MessagingSubsystem* msg, FileSubsystem* file);
 	~Carve();
 	blk_t* newBlk(cv_t* cv);
 	static void MakeFreeList(cv_t* cv, blk_t* newblk, unsigned offset);
