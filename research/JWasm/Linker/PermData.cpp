@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "PermData.h"
 #include "globals.h"
+#include "LinkerUtils.h"
 
 PermData::PermData(MemorySubsystem* memory, Ring* ring, Carve* carve, StringTable* strtab)
 {
@@ -38,3 +39,44 @@ void PermData::Reset(void)
     strtab->InitStringTable(&PrefixStrings, true);
     strtab->InitStringTable(&StoredRelocs, false);
 }
+
+void PermData::CleanPermData(void)
+{
+#ifndef NDEBUG
+    if (!(LinkFlags & INC_LINK_FLAG)) {
+        carve->CarveVerifyAllGone(CarveLeader, "seg_leader");
+        carve->CarveVerifyAllGone(CarveModEntry, "mod_entry");
+        carve->CarveVerifyAllGone(CarveDLLInfo, "dll_sym_info");
+        carve->CarveVerifyAllGone(CarveExportInfo, "entry_export");
+        carve->CarveVerifyAllGone(CarveSymbol, "symbol");
+        carve->CarveVerifyAllGone(CarveSegData, "segdata");
+        carve->CarveVerifyAllGone(CarveClass, "class_entry");
+        carve->CarveVerifyAllGone(CarveGroup, "group_entry");
+    }
+#endif
+    if (LinkState & LINK_ERROR) {
+        //FOX ME QDelete(IncFileName);
+    }
+    carve->CarveDestroy(CarveLeader);
+    carve->CarveDestroy(CarveModEntry);
+    carve->CarveDestroy(CarveDLLInfo);
+    carve->CarveDestroy(CarveExportInfo);
+    carve->CarveDestroy(CarveSymbol);
+    carve->CarveDestroy(CarveSegData);
+    carve->CarveDestroy(CarveClass);
+    carve->CarveDestroy(CarveGroup);
+    strtab->FiniStringTable(&PrefixStrings);
+    strtab->FiniStringTable(&PermStrings);
+    strtab->FiniStringTable(&StoredRelocs);
+    _LnkFree(IncFileName);
+    _LnkFree(IncStrTab);
+    _LnkFree(ReadRelocs);
+    _LnkFree(OldExe);
+    _LnkFree(OldSymFile);
+    _LnkFree(AltDefData);
+    ring->RingFree(&IncGroupDefs);
+    _LnkFree(IncGroups);
+    FreeList(memory, SavedUserLibs);
+    FreeList(memory, SavedDefLibs);
+}
+

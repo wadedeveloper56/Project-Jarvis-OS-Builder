@@ -37,3 +37,18 @@ void Node::BurnNodeArray(NodeArrayPtr list)
 	}
 	memory->FreeMemory(list);
 }
+
+void Node::FreeNodes(NodeArrayPtr nodes)
+{
+	for (unsigned index = 0; index <= nodes->arraymax; index++) {
+		memset(nodes->array[index], 0, nodes->elsize * NODE_ARRAY_SIZE);
+	}
+	nodes->num = 0;
+}
+
+void Node::FreeObjInfo(void)
+{
+	FreeNodes(ExtNodes);
+	FreeNodes(SegNodes);
+	FreeNodes(GrpNodes);
+}

@@ -27,6 +27,9 @@ class Node
 public:
 	Node(MemorySubsystem* memory);
 	~Node();
+	void FreeNodes(NodeArrayPtr nodes);
+	void FreeObjInfo(void);
+
 private:
 	NodeArrayPtr MakeArray(unsigned size);
 	void BurnNodeArray(NodeArrayPtr list);

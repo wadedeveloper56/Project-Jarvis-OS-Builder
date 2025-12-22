@@ -4,7 +4,7 @@
 SymbolTable::SymbolTable(MemorySubsystem* memory)
 {
 	this->memory = memory;
-	this->symMem = new SymbolTableMemory();
+	this->symMem = new SymbolTableMemory(memory);
 	NameLen = 0;
 	LastSym = nullptr;
 	SymList = nullptr;
@@ -45,3 +45,45 @@ void SymbolTable::ResetSym(void)
 	CmpRtn = _memicmp;
 	ClearHashPointers();
 }
+
+void SymbolTable::WipeSym(symbol* sym)
+{
+	if (IS_SYM_IMPORTED(sym) && !(FmtData.type & MK_ELF)) {
+		if (FmtData.type & MK_NOVELL) {
+			if (sym->p.import != DUMMY_IMPORT_PTR) {
+				_LnkFree(sym->p.import);
+			}
+		}
+		else {
+			//FIX ME FreeImport(sym->p.import);
+		}
+		sym->p.import = NULL;
+	}
+	else if (IS_SYM_ALIAS(sym)) {
+		if (sym->info & SYM_FREE_ALIAS) {
+			_LnkFree(sym->p.alias);
+		}
+		sym->u.aliaslen = 0;    // make sure this is nulled again
+	}
+}
+void SymbolTable::FreeSymbol(symbol* sym)
+{
+	WipeSym(sym);
+	//FIX ME CarveFree(CarveSymbol, sym);
+}
+
+void SymbolTable::CleanSym(void)
+{
+	symbol* sym;
+	symbol* next;
+
+	if (!(LinkFlags & INC_LINK_FLAG)) {
+		for (sym = HeadSym; sym != NULL; sym = next) {
+			next = sym->link;
+			FreeSymbol(sym);
+		}
+	}
+	symMem->RelSymBlock();
+	symMem->ReleasePass1();
+}
+

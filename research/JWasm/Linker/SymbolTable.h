@@ -25,5 +25,8 @@ public:
 	void ResetSym(void);
 	void ClearHashPointers(void);
 	void SetSymCase(void);
+	void CleanSym(void);
+	void FreeSymbol(symbol* sym);
+	void WipeSym(symbol* sym);
 };
 

@@ -327,10 +327,14 @@
   <ItemGroup>
     <ClCompile Include="Carve.cpp" />
     <ClCompile Include="cmdall.cpp" />
+    <ClCompile Include="CmdElf.cpp" />
     <ClCompile Include="CmdLine.cpp" />
+    <ClCompile Include="CmdNovell.cpp" />
+    <ClCompile Include="CmdPharlap.cpp" />
     <ClCompile Include="CmdPlatform.cpp" />
     <ClCompile Include="CmdQnx.cpp" />
     <ClCompile Include="CmdUtils.cpp" />
+    <ClCompile Include="CmdWinOS2.cpp" />
     <ClCompile Include="comdef.cpp" />
     <ClCompile Include="dbgall.cpp" />
     <ClCompile Include="distrib.cpp" />
@@ -384,10 +388,14 @@
   <ItemGroup>
     <ClInclude Include="Carve.h" />
     <ClInclude Include="cmdall.h" />
+    <ClInclude Include="CmdElf.h" />
     <ClInclude Include="CmdLine.h" />
+    <ClInclude Include="CmdNovell.h" />
+    <ClInclude Include="CmdPharlap.h" />
     <ClInclude Include="CmdPlatform.h" />
     <ClInclude Include="CmdQnx.h" />
     <ClInclude Include="CmdUtils.h" />
+    <ClInclude Include="CmdWinOS2.h" />
     <ClInclude Include="coffentr.h" />
     <ClInclude Include="coffflhn.h" />
     <ClInclude Include="coffglbl.h" />

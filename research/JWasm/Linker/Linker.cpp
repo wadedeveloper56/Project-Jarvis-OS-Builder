@@ -138,11 +138,10 @@ void Linker::CleanSubSystems()
 	//CleanLoadFile();
 	CleanLinkStruct(memory);
 	cmdLine->FreeFormatStuff();
-	//FreeObjInfo();
-	//FreeVirtMem();
+	nodes->FreeObjInfo();
 	CleanToc();
-	//CleanSym();
-	//CleanPermData();
+	symbolTable->CleanSym();
+	permData->CleanPermData();
 }
 
 void Linker::doLink(void)

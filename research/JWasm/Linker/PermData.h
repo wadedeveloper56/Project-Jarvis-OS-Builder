@@ -110,4 +110,5 @@ public:
 	PermData(MemorySubsystem* memory, Ring* ring, Carve* carve, StringTable* strtab);
 	~PermData();
 	void Reset(void);
+    void CleanPermData(void);
 };

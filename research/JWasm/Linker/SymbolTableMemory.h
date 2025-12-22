@@ -1,5 +1,7 @@
 #pragma once
 
+#include "MemorySubsystem.h"
+
 #define SYM_BLOCK_SIZE      (16*1024)
 #define SYM_BLOCK_MIN       32
 
@@ -18,10 +20,13 @@ typedef struct block_data {
 
 class SymbolTableMemory
 {
+	MemorySubsystem* memory;
 	block_data Pass1Blocks;
 	block_data PermBlocks;
 public:
-	SymbolTableMemory();
+	SymbolTableMemory(MemorySubsystem* memory);
 	~SymbolTableMemory();
+	void RelSymBlock(void);
+	void ReleasePass1(void);
 };
 

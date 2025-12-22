@@ -928,6 +928,20 @@ struct fmt_elf_data {
 
 #define NO_BASE_SPEC    ((offset)-1UL)
 
+typedef struct rtpblock {        // run-time parameter block.
+    unsigned_16     signature;
+    unsigned_16     minreal;
+    unsigned_16     maxreal;
+    unsigned_16     minibuf;
+    unsigned_16     maxibuf;
+    unsigned_16     nistack;
+    unsigned_16     istksize;
+    unsigned_32     realbreak;
+    unsigned_16     callbufs;
+    unsigned_16     extender_flags;     /* for undocumented "runtime flags" */
+    unsigned_16     unpriv;
+} rtpblock;
+
 struct fmt_data {
     union   fmt_spec_data {
         struct  fmt_dos_data    dos;
