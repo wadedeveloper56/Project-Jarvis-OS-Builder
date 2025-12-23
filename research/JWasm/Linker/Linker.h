@@ -15,6 +15,7 @@
 #include "ring.h"
 #include "StringTable.h"
 #include "MapIO.h"
+#include "MixCache.h"
 
 class Linker
 {
@@ -34,6 +35,7 @@ class Linker
 	Carve* carve;
 	StringTable* strtab;
 	MapIO* mapio;
+	MixCache* cache;
 public:
 	Linker();
 	~Linker();

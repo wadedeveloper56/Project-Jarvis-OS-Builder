@@ -42,6 +42,7 @@ public:
 	~HashTable();
 	HashTableDataPtr CreateHTable(int size, pHashFunc hashFunc, pHashElemCmp compareFunc);
 	HashTableDataPtr CreateHTableDouble(int size, pHashFunc hashFunc, pHashElemCmp compareFunc);
+	void ZapHTable(HashTableDataPtr table);
 };
 unsigned StringHashFunc(char* s, unsigned size);
 unsigned StringiHashFunc(void* s, unsigned size);

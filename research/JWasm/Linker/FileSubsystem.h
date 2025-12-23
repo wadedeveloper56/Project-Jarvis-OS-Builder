@@ -5,18 +5,17 @@
 
 class FileSubsystem
 {
-	FileHandle currentFile;
 public:
 	FileSubsystem();
 	~FileSubsystem();
-	void Open(const char* filename, const char* mode);
-	int Close();
-	int Read(void* buffer, size_t size, size_t count);
-	int Write(const void* buffer, size_t size, size_t count);
+	FileHandle Open(const char* filename, const char* mode);
+	int Close(FileHandle handle);
+	int Read(FileHandle handle,void* buffer, size_t size, size_t count);
+	int Write(FileHandle handle,const void* buffer, size_t size, size_t count);
 	int WriteStdOut(const void* buffer, size_t size, size_t count);
 	int WriteNLStdOut(void);
-	__int64 Tell();
-	__int64 Seek(__int64 offset, int origin);
+	__int64 Tell(FileHandle handle);
+	__int64 Seek(FileHandle handle,__int64 offset, int origin);
 	static int Delete(char* name);
 };
 

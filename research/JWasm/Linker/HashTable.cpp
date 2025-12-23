@@ -157,31 +157,30 @@ HashTableDataPtr HashTable::CreateHTableDouble(int size, pHashFunc hashFunc, pHa
 //		}
 //	}
 //}
-//
-//void HashTable::ZapHTable(HashTableDataPtr table, void (*zapElemAction)(void*)) {
-//	unsigned int i;
-//	HashTableElementPtrPtr tblPtr;
-//	HashTableElementPtr tblElem;
-//	HashTableElementPtr temp;
-//
-//	if (table == NULL) {
-//		return;
-//	}
-//	tblPtr = table->tbl;
-//	for (i = 0; i < table->size; i++) {
-//		for (tblElem = tblPtr[i]; tblElem != NULL; tblElem = temp) {
-//			if (zapElemAction != NULL) {
-//				zapElemAction(tblElem->userData);
-//			}
-//			temp = tblElem->next;
-//			memory->FreeMemory(tblElem);
-//		}
-//	}
-//
-//	memory->FreeMemory(table->tbl);
-//	memory->FreeMemory(table);
-//}
-//
+
+void HashTable::ZapHTable(HashTableDataPtr table)
+{
+	unsigned int i;
+	pHTElem* tblPtr;
+	pHTElem tblElem, temp;
+	pFreeFunc free;
+
+	if (table == NULL) {
+		return;
+	}
+	tblPtr = table->tbl;
+	for (i = 0; i < table->size; i++) {
+		for (tblElem = tblPtr[i]; tblElem != NULL; tblElem = temp) {
+			memory->FreeMemory(tblElem->userData);
+			temp = tblElem->next;
+			memory->FreeMemory(tblElem);
+		}
+	}
+
+	memory->FreeMemory(table->tbl);
+	memory->FreeMemory(table);
+}
+
 //void HashTable::GetHTableStats(HashTableDataPtr table, int* numElems, int* longestChainLen) {
 //	*numElems = table->stats.numElems;
 //	*longestChainLen = table->stats.longestChainLen;

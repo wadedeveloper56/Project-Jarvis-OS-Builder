@@ -20,5 +20,10 @@ public:
 	~MixCache();
 	void* CachePermRead(file_list* list, unsigned long pos, size_t len);
 	void* CacheRead(file_list* list, unsigned long pos, size_t len);
+	bool DumpFileCache(infilelist* file, bool nuke);
+	void FreeObjCache(file_list* list);
+	unsigned NumCacheBlocks(unsigned long len);
+	void CacheClose(file_list* list, unsigned pass);
+	void CacheFree(file_list* list, void* mem);
 };
 

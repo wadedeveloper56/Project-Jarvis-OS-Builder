@@ -104,3 +104,20 @@ void PermData::FreeImport(dll_sym_info* dll)
 {
     carve->CarveFree(CarveDLLInfo, dll);
 }
+
+void PermData::FreeClasses(class_entry* list)
+{
+    class_entry* next;
+
+    while (list != NULL) {
+        next = list->next_class;
+        //FIX ME ring->RingWalk(list->segs, FreeLeader);
+        carve->CarveFree(CarveClass, list);
+        list = next;
+    }
+}
+
+void PermData::FreeModEntry(mod_entry* mod)
+{
+    carve->CarveFree(CarveModEntry, mod);
+}

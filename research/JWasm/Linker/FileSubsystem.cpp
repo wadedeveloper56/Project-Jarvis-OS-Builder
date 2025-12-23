@@ -16,24 +16,24 @@ int FileSubsystem::Delete(char* name)
 	return remove(name);
 }
 
-void FileSubsystem::Open(const char* filename, const char* mode)
+FileHandle FileSubsystem::Open(const char* filename, const char* mode)
 {
-	currentFile = OpenFile(filename, mode);
+	return OpenFile(filename, mode);
 }	
 
-int FileSubsystem::Close()
+int FileSubsystem::Close(FileHandle handle)
 {
-	return CloseFile(currentFile);
+	return CloseFile(handle);
 }	
 
-int FileSubsystem::Read(void* buffer, size_t size, size_t count)
+int FileSubsystem::Read(FileHandle handle,void* buffer, size_t size, size_t count)
 {
-	return ReadFile(currentFile, buffer, size, count);
+	return ReadFile(handle, buffer, size, count);
 }	
 
-int FileSubsystem::Write(const void* buffer, size_t size, size_t count)
+int FileSubsystem::Write(FileHandle handle,const void* buffer, size_t size, size_t count)
 {
-	return WriteFile(currentFile, buffer, size, count);
+	return WriteFile(handle, buffer, size, count);
 }
 
 int FileSubsystem::WriteStdOut(const void* buffer, size_t size, size_t count) 
@@ -48,13 +48,13 @@ int FileSubsystem::WriteNLStdOut(void)
 	return WriteStdOut(NLSeq, sizeof(NLSeq) - 1, 1);
 }
 
-__int64 FileSubsystem::Tell()
+__int64 FileSubsystem::Tell(FileHandle handle)
 {
-	return FileTell(currentFile);
+	return FileTell(handle);
 }
 
-__int64 FileSubsystem::Seek(__int64 offset, int origin)
+__int64 FileSubsystem::Seek(FileHandle handle,__int64 offset, int origin)
 {
-	return FileSeek(currentFile, offset, origin);
+	return FileSeek(handle, offset, origin);
 }
 

@@ -42,10 +42,12 @@ Linker::Linker()
 	cmdLine = new CmdLine(memory, messaging, permData);
 	virtMem = new VirtualMemory(memory);
 	mapio = new MapIO(ring);
+	cache = new MixCache(memory, file, tokenBuffer);
 }
 
 Linker::~Linker()
 {
+	delete cache;
 	delete mapio;
 	delete virtMem;
 	delete cmdLine;
@@ -136,7 +138,7 @@ void Linker::CleanSubSystems()
 	mapio->FreeUndefs();
 	//FreeLocalImports();
 	//CleanLoadFile();
-	CleanLinkStruct(memory, permData);
+	CleanLinkStruct(memory, permData, hashTable, cache);
 	cmdLine->FreeFormatStuff();
 	nodes->FreeObjInfo();
 	CleanToc();
