@@ -138,7 +138,7 @@ void Linker::CleanSubSystems()
 	mapio->FreeUndefs();
 	//FreeLocalImports();
 	//CleanLoadFile();
-	CleanLinkStruct(memory, permData, hashTable, cache);
+	CleanLinkStruct(memory, permData, hashTable, cache, symbolTable->symMem);
 	cmdLine->FreeFormatStuff();
 	nodes->FreeObjInfo();
 	CleanToc();

@@ -54,3 +54,4 @@ extern seg_leader* CurrentSeg;     /* current segment being allocated       */
 extern FileHandle TempFile;
 extern path_entry* Path;           /* path for object files                */
 extern struct fmt_data FmtData;    /* format specific data */
+extern seg_leader* OvlSeg;         /* pointer to seg_leader for overlaytab */

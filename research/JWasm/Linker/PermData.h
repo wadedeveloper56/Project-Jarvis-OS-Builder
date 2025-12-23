@@ -117,4 +117,5 @@ public:
     void FreeImport(dll_sym_info* dll);
     void FreeClasses(class_entry* list);
     void FreeModEntry(mod_entry* mod);
+    void FreeLeader(void* seg);
 };

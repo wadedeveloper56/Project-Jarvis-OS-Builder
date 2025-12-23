@@ -6,6 +6,7 @@
 #include "reloc.h"
 #include "Carve.h"
 #include "MixCache.h"
+#include "ovlsupp.h"
 
 void BurnLibs(MemorySubsystem* memory, MixCache* cache)
 {
@@ -46,7 +47,7 @@ void FreeSections(MemorySubsystem* memory, PermData* permData, HashTable* hashTa
 			FreeMods(permData, cache, sec->mods);
 			permData->FreeClasses(sec->classlist);
 		}
-		//FIX ME DBISectCleanup(sec);
+	    DBISectCleanup(sec);
 		FreeAreas(memory, permData, hashTable, cache, sec->areas);
 		hashTable->ZapHTable(sec->modFilesHashed);
 		Class = sec->orderlist;
@@ -120,7 +121,7 @@ void FreeFiles(MemorySubsystem* memory, MixCache* cache, file_list* list)
 }
 
 
-void CleanLinkStruct(MemorySubsystem* memory, PermData* permData, HashTable* hashTable, MixCache* cache)
+void CleanLinkStruct(MemorySubsystem* memory, PermData* permData, HashTable* hashTable, MixCache* cache, SymbolTableMemory* symMem)
 {
 	if (Root == NULL) return;  /* haven't finished initializing */
 	BurnLibs(memory, cache);
@@ -146,10 +147,10 @@ void CleanLinkStruct(MemorySubsystem* memory, PermData* permData, HashTable* has
 	Groups = NULL;
 	AbsGroups = NULL;
 	FreeSections(memory, permData, hashTable, cache, Root);
-	//FIX ME DBICleanup();
+	DBICleanup(permData);
 	Root = NULL;
 	if (FmtData.type & MK_REAL_MODE) {
-		//FIX ME FreeOvlStruct();
+		FreeOvlStruct(memory, permData, cache, symMem);
 	}
 }
 

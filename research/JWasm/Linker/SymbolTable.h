@@ -12,7 +12,6 @@
 
 class SymbolTable
 {
-	SymbolTableMemory* symMem;
 	int (*CmpRtn)(const void*, const void*, size_t);
 	unsigned NameLen;
 	symbol* LastSym;
@@ -22,6 +21,7 @@ class SymbolTable
 	MemorySubsystem* memory;
 	PermData* permData;
 public:
+	SymbolTableMemory* symMem;
 	SymbolTable(MemorySubsystem* memory, PermData* permData);
 	~SymbolTable();
 	void ResetSym(void);

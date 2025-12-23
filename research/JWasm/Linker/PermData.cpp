@@ -121,3 +121,9 @@ void PermData::FreeModEntry(mod_entry* mod)
 {
     carve->CarveFree(CarveModEntry, mod);
 }
+
+void PermData::FreeLeader(void* seg)
+{
+    //FIX ME ring->RingWalk(((seg_leader*)seg)->pieces, FreeSegData);
+    carve->CarveFree(CarveLeader, seg);
+}
