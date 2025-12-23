@@ -139,31 +139,12 @@ void Ring::RINGNAME(Insert) (
 }
 
 
-void Ring::RINGNAME(Walk) (             
-	void* hdr,                     
-	void (*rtn)                    
-	(void* curr))               
+void Ring::RINGNAME(Walk) (void* hdr,void (*rtn)(void* curr))               
 {
-#if 0
-	RING* rhdr;                    
-	RING* relement;                
-	RING* nelement;                 
-
-	if (hdr != nullptr) {
-		rhdr = hdr;
-		nelement = rhdr->next;
-		do {
-			relement = nelement;
-			nelement = nelement->next;
-			(*rtn)(relement) );
-		} while (relement != rhdr);
-	}
-#else
 	RING* relement = nullptr;                
 	RingIterBegSafe(hdr, relement) {
 		(*rtn)(relement);
 	} RingIterEndSafe(relement)
-#endif
 }
 
 

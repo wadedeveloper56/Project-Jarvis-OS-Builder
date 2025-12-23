@@ -105,13 +105,21 @@ void PermData::FreeImport(dll_sym_info* dll)
     carve->CarveFree(CarveDLLInfo, dll);
 }
 
+static PermData* permDataLocal;
+
+static void FreeLeaderLocal(void* curr)
+{
+    permDataLocal->FreeLeader(curr);
+}
+
 void PermData::FreeClasses(class_entry* list)
 {
     class_entry* next;
 
     while (list != NULL) {
         next = list->next_class;
-        //FIX ME ring->RingWalk(list->segs, FreeLeader);
+        permDataLocal = this;
+        ring->RingWalk(list->segs, FreeLeaderLocal);
         carve->CarveFree(CarveClass, list);
         list = next;
     }
@@ -122,8 +130,19 @@ void PermData::FreeModEntry(mod_entry* mod)
     carve->CarveFree(CarveModEntry, mod);
 }
 
+static void FreeSegDataLocal(void* curr)
+{
+    permDataLocal->FreeSegData(curr);
+}
+
 void PermData::FreeLeader(void* seg)
 {
-    //FIX ME ring->RingWalk(((seg_leader*)seg)->pieces, FreeSegData);
+    permDataLocal = this;
+    ring->RingWalk(((seg_leader*)seg)->pieces, FreeSegDataLocal);
     carve->CarveFree(CarveLeader, seg);
+}
+
+void PermData::FreeSegData(void* sdata)
+{
+    carve->CarveFree(CarveSegData, sdata);
 }

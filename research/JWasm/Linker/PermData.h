@@ -118,4 +118,5 @@ public:
     void FreeClasses(class_entry* list);
     void FreeModEntry(mod_entry* mod);
     void FreeLeader(void* seg);
+    void FreeSegData(void* sdata);
 };
