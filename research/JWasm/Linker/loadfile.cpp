@@ -2,6 +2,7 @@
 #include "globals.h"
 #include "loadfile.h"
 #include "debug.h"
+#include "FileSubsystem.h"
 
 seg_leader* StackSegPtr;
 startinfo       StartInfo;
@@ -38,7 +39,6 @@ void ResetLoadFile(void)
 }
 
 static void CloseOutFiles(void)
-/*******************************/
 {
     outfilelist* fnode;
 
@@ -56,7 +56,7 @@ void FreeOutFiles(MemorySubsystem* memory)
     CloseOutFiles();
     for (fnode = OutFiles; fnode != NULL; fnode = OutFiles) {
         if (LinkState & LINK_ERROR) {
-            //FIX ME QDelete(fnode->fname);
+            FileSubsystem::Delete(fnode->fname);
         }
         memory->FreeMemory(fnode->fname);
         OutFiles = fnode->next;

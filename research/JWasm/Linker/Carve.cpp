@@ -130,7 +130,7 @@ blk_t* Carve::newBlk(cv_t* cv)
 	return newblk;
 }
 
-void Carve::MakeFreeList(cv_t* cv, blk_t* newblk, unsigned offset)
+void Carve::MakeFreeList(MemorySubsystem* memory,cv_t* cv, blk_t* newblk, unsigned offset)
 {
 	size_t      elm_size;
 	char* top_elm;
@@ -145,7 +145,7 @@ void Carve::MakeFreeList(cv_t* cv, blk_t* newblk, unsigned offset)
 	free_elm = top_elm;
 	do {                         /* free_list must be maintained in order */
 		free_elm -= elm_size;
-		//FIX ME DbgZapFreed(free_elm, elm_size);
+		memory->DbgZapFreed(free_elm, elm_size);
 		_ADD_TO_FREE(free_list, free_elm);
 	} while (free_elm != bottom_elm);
 	cv->free_list = free_list;
@@ -156,10 +156,10 @@ void* Carve::CarveAlloc(carve_t cv)
 	void* p;
 
 	if (cv->free_list == NULL) {
-		MakeFreeList(cv, newBlk(cv), 0);
+		MakeFreeList(this->memory, cv, newBlk(cv), 0);
 	}
 	_REMOVE_FROM_FREE(cv, p);
-	//FIX ME DbgZapAlloc(p, cv->elm_size);
+	memory->DbgZapAlloc(p, cv->elm_size);
 	return p;
 }
 
@@ -169,7 +169,7 @@ void* Carve::CarveZeroAlloc(carve_t cv)
 	unsigned* p;
 
 	if (cv->free_list == NULL) {
-		MakeFreeList(cv, newBlk(cv), 0);
+		MakeFreeList(this->memory, cv, newBlk(cv), 0);
 	}
 	_REMOVE_FROM_FREE(cv, v);
 	p = (unsigned*)v;
@@ -212,7 +212,7 @@ void* Carve::CarveZeroAlloc(carve_t cv)
 
 
 #ifndef NDEBUG
-void CarveDebugFree(carve_t cv, void* elm)
+void Carve::CarveDebugFree(carve_t cv, void* elm)
 {
 	free_t* check;
 	blk_t* block;
@@ -223,7 +223,7 @@ void CarveDebugFree(carve_t cv, void* elm)
 	/* make sure object hasn't been freed before */
 	for (check = cv->free_list; check != NULL; check = check->next_free) {
 		if (elm == (void*)check) {
-			//FIX ME LnkFatal("carve: freed object was previously freed");
+			msg->LnkFatal("carve: freed object was previously freed");
 		}
 	}
 	/* make sure object is from this carve allocator */
@@ -245,9 +245,9 @@ void CarveDebugFree(carve_t cv, void* elm)
 		if (elm == compare) break;
 	}
 	if (block == NULL) {
-		//FIX ME LnkFatal("carve: freed object was never allocated");
+		msg->LnkFatal("carve: freed object was never allocated");
 	}
-	//FIX ME DbgZapFreed(elm, cv->elm_size);
+	memory->DbgZapFreed(elm, cv->elm_size);
 }
 #else
 #define CarveDebugFree( cv, elm )
@@ -279,13 +279,13 @@ void* Carve::CarveGetIndex(carve_t cv, void* elm)
 	return (void*)MK_INDEX(block_index, ((char*)elm) - block->data);
 }
 
-void Carve::CarveWalkBlocks(carve_t cv, void (*cbfn)(carve_t, void*, void*), void* cookie)
+void Carve::CarveWalkBlocks(carve_t cv, void (*cbfn)(MemorySubsystem*, carve_t, void*, void*), void* cookie)
 {
 	blk_t* block;
 
 	block = cv->blk_list;
 	while (block != NULL) {
-		cbfn(cv, block, cookie);
+		cbfn(this->memory, cv, block, cookie);
 		block = block->next;
 	}
 }
@@ -339,7 +339,7 @@ void Carve::CarveWalkAllFree(carve_t cv, void (*rtn)(void*))
 		free_t* check_next = check->next_free;
 		(*rtn)(check);
 		if (check->next_free != check_next) {
-			//FIX ME LnkFatal("carve walk free routine destroyed links");
+			msg->LnkFatal("carve walk free routine destroyed links");
 		}
 #else
 		(*rtn)(check);
@@ -376,15 +376,15 @@ void Carve::CarveRestart(carve_t cv, unsigned num)
 	}
 	remainder = num % cv->elm_count;
 	if (remainder != 0) {
-		MakeFreeList(cv, cv->blk_map[0], remainder * cv->elm_size);
+		MakeFreeList(this->memory, cv, cv->blk_map[0], remainder * cv->elm_size);
 	}
 	cv->insert = NULL;
 }
 
-void Carve::CarveZapBlock(carve_t cv, void* blk, void* dummy)
+void Carve::CarveZapBlock(MemorySubsystem* memory,carve_t cv, void* blk, void* dummy)
 {
-	dummy = dummy;
-	MakeFreeList(cv, (blk_t*)blk, 0);
+
+	MakeFreeList(memory, cv, (blk_t*)blk, 0);
 }
 
 void Carve::CarvePurge(carve_t cv)

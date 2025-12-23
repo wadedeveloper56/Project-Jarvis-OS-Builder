@@ -47,8 +47,8 @@ public:
 	Carve(MemorySubsystem* memory, MessagingSubsystem* msg, FileSubsystem* file);
 	~Carve();
 	blk_t* newBlk(cv_t* cv);
-	static void MakeFreeList(cv_t* cv, blk_t* newblk, unsigned offset);
-	static void CarveZapBlock(carve_t cv, void* blk, void* dummy);
+	static void MakeFreeList(MemorySubsystem* memory, cv_t* cv, blk_t* newblk, unsigned offset);
+	static void CarveZapBlock(MemorySubsystem* memory, carve_t cv, void* blk, void* dummy);
 	carve_t CarveCreate(size_t elm_size, size_t how_many);
 	void CarveRestart(carve_t cv, unsigned);
 	void CarvePurge(carve_t cv);
@@ -58,7 +58,7 @@ public:
 	void* CarveZeroAlloc(carve_t cv);
 	void CarveFree(carve_t cv, void* elm);
 	void* CarveGetIndex(carve_t, void*);
-	void CarveWalkBlocks(carve_t, void (*)(carve_t, void*, void*), void*);
+	void CarveWalkBlocks(carve_t cv, void (*cbfn)(MemorySubsystem*, carve_t, void*, void*), void* cookie);
 	bool CarveBlockModified(void*);
 	void CarveBlockScan(carve_t, void*, void (*)(void*, void*), void*);
 	unsigned CarveBlockSize(carve_t);
@@ -69,5 +69,6 @@ public:
 	void CarveInsertFree(carve_t, void*);
 	void CarveWalkAllFree(carve_t gcv, void (*rtn)(void*));
 	void CarveWalkAll(carve_t, void (*)(void*, void*), void*);
+	void CarveDebugFree(carve_t cv, void* elm);
 };
 

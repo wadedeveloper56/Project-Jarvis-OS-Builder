@@ -10,6 +10,12 @@ FileSubsystem::~FileSubsystem()
 {
 }
 
+int FileSubsystem::Delete(char* name)
+{
+	if (name == NULL) return -1;
+	return remove(name);
+}
+
 void FileSubsystem::Open(const char* filename, const char* mode)
 {
 	currentFile = OpenFile(filename, mode);

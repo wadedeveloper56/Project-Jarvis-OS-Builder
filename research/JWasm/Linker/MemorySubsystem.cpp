@@ -29,3 +29,13 @@ void* MemorySubsystem::ExpandMemory(void* memblock, size_t size)
 {
 	return ::ExpandMemory(memblock, size);
 }
+
+void MemorySubsystem::DbgZapAlloc(void* tgt, size_t size)
+{
+	memset(tgt, 0xA5, size);
+}
+
+void MemorySubsystem::DbgZapFreed(void* tgt, size_t size)
+{
+	memset(tgt, 0xBD, size);
+}

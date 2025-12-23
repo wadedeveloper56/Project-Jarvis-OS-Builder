@@ -369,3 +369,7 @@ void MessagingSubsystem::MessageFini(unsigned num, char* buff, unsigned len, cha
 	}
 }
 
+void MessagingSubsystem::LnkFatal(char* msg)
+{
+	LnkMsg(FTL + MSG_INTERNAL, "s", msg);
+}

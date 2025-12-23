@@ -2,6 +2,7 @@
 #include "globals.h"
 #include "reloc.h"
 #include "MemorySubsystem.h"
+#include "LinkerUtils.h"
 
 unsigned FmtRelocSize;
 reloc_info* FloatFixups;
@@ -91,9 +92,9 @@ static void FreeGroupRelocs(MemorySubsystem *memory, group_entry* group)
     }
 }
 
-static void FreeRelocSect(MemorySubsystem*memory,section* sect)
+void FreeRelocSect(MemorySubsystem* memory, section* sect)
 {
-    FreeRelocList(memory, (reloc_info *)sect->reloclist);
+    FreeRelocList(memory, (reloc_info*)sect->reloclist);
 }
 
 void FreeRelocInfo(MemorySubsystem* memory)
@@ -108,7 +109,7 @@ void FreeRelocInfo(MemorySubsystem* memory)
         }
     }
     else if (Root != NULL) {
-        //FIX ME WalkAllSects(FreeRelocSect);
+        WalkAllSects(memory, FreeRelocSect);
     }
     if (FmtData.type & MK_QNX) {
         FreeRelocList(memory, FloatFixups);

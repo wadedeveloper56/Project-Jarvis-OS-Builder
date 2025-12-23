@@ -16,7 +16,7 @@ SpillFile::~SpillFile()
 {
     if (TempFile != NIL_HANDLE) {
         CloseFile(TempFile);
-        //FIX ME QDelete(TFileName);
+        FileSubsystem::Delete(TFileName);
         memory->FreeMemory(TFileName);
         TFileName = NULL;
         TempFile = NIL_HANDLE;

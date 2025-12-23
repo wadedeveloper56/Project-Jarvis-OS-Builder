@@ -17,5 +17,6 @@ public:
 	int WriteNLStdOut(void);
 	__int64 Tell();
 	__int64 Seek(__int64 offset, int origin);
+	static int Delete(char* name);
 };
 

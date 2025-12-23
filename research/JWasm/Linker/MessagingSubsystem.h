@@ -54,6 +54,7 @@ public:
     unsigned FmtStr(char*, unsigned, char*, ...);
     unsigned DoFmtStr(char*, unsigned, char*, va_list*);
     void     LnkMsg(unsigned, char*, ...);
+    void LnkFatal(char* msg);
     void     Locator(char*, char*, unsigned);
     void     WLPrtBanner(void);
     bool     SkipSymbol(symbol*);
