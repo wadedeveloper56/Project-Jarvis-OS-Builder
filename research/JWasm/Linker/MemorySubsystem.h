@@ -18,5 +18,7 @@ public:
 	void* ExpandMemory(void* memblock, size_t size);
 	void DbgZapAlloc(void* tgt, size_t size);
 	void DbgZapFreed(void* tgt, size_t size);
+	void* LAlloc(size_t size);
+	void* ChkLAlloc(size_t size);
 };
 

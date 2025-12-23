@@ -39,3 +39,27 @@ void MemorySubsystem::DbgZapFreed(void* tgt, size_t size)
 {
 	memset(tgt, 0xBD, size);
 }
+
+void* MemorySubsystem::LAlloc(size_t size)
+{
+    void* p;
+
+    for (;; ) {
+        p = AllocateMemory(size);
+        if (p != NULL) {
+            break;
+        }
+    }
+    return(p);
+}
+
+void* MemorySubsystem::ChkLAlloc(size_t size)
+{
+    void* ptr;
+    ptr = LAlloc(size);
+    if (ptr == NULL) {
+        //FIX ME LnkMsg(FTL + MSG_NO_DYN_MEM, NULL);
+    }
+    return(ptr);
+}
+
