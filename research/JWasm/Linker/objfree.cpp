@@ -7,6 +7,7 @@
 #include "Carve.h"
 #include "MixCache.h"
 #include "ovlsupp.h"
+#include "libr.h"
 
 void BurnLibs(MemorySubsystem* memory, MixCache* cache)
 {
@@ -26,7 +27,7 @@ void BurnLibs(MemorySubsystem* memory, MixCache* cache)
 		}
 		else {
 			if (dict->o.cache != NULL) {
-				//FIX ME FreeDictCache(dict->o.cache, (dict->o.pages / PAGES_IN_CACHE) + 1);
+				FreeDictCache(memory, dict->o.cache, (dict->o.pages / PAGES_IN_CACHE) + 1);
 			}
 		}
 		_LnkFree(dict);

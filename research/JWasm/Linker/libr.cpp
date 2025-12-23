@@ -30,3 +30,11 @@ static int ARCompIName(const void* key, const void* vbase)
     char** base = (char**)vbase;
     return _stricmp((const char*)key, *base);
 }
+
+void FreeDictCache(MemorySubsystem* memory,void** cache, unsigned_16 buckets)
+{
+    while (buckets != 0) {
+        _LnkFree(cache[--buckets]);
+    }
+    _LnkFree(cache);
+}
