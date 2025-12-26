@@ -146,10 +146,64 @@ void Linker::CleanSubSystems()
 	permData->CleanPermData();
 }
 
+void TrapBreak(int sig_num)
+{
+}
+
+static  time_t          StartT;
+static  clock_t         ClockTicks;
+
+void StartTime(void)
+{
+	StartT = time(NULL);
+	ClockTicks = clock();
+}
+
+static char* PutDec(char* ptr, unsigned num)
+{
+	*ptr++ = (num / 10) % 10 + '0';
+	*ptr++ = num % 10 + '0';
+	return(ptr);
+}
+
+void EndTime(void)
+{
+	char* ptr;
+	signed_16   h;
+	signed_16   m;
+	signed_16   s;
+	signed_16   t;
+	char        tim[11 + 1];
+
+	ClockTicks = clock() - ClockTicks;
+	t = (unsigned_16)(ClockTicks % CLOCKS_PER_SEC);
+	ClockTicks /= CLOCKS_PER_SEC;
+	s = (unsigned_16)(ClockTicks % 60);
+	ClockTicks /= 60;
+	m = (unsigned_16)(ClockTicks % 60);
+	ClockTicks /= 60;
+	h = (unsigned_16)ClockTicks;
+
+	ptr = tim;
+	if (h > 0) {
+		ptr = PutDec(ptr, h);
+		*ptr++ = ':';
+	}
+	ptr = PutDec(ptr, m);
+	*ptr++ = ':';
+	ptr = PutDec(ptr, s);
+	*ptr++ = '.';
+	ptr = PutDec(ptr, t);
+	*ptr = '\0';
+	printf("Elasped time : %s\n", tim);
+}
+
 void Linker::doLink(void)
 {
-	// The main linking process would be implemented here.
-	// This is a placeholder for the actual linking logic.
+	signal(SIGINT, &TrapBreak); /* so we can clean up */
+	StartTime();
+	EndTime();
+	signal(SIGINT, SIG_IGN);
 }
 
 void Linker::mainLine()

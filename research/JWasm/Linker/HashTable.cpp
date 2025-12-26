@@ -12,16 +12,18 @@ HashTable::~HashTable()
 
 HashTableDataPtr HashTable::CreateHTable(int size, pHashFunc hashFunc, pHashElemCmp compareFunc)
 {
-	pHTable table;
-
-	_ChkAlloc(HashTableDataPtr, table, sizeof(sizeof * table));
-	_ChkAlloc(pHTElem*, table->tbl, sizeof table[0] * size);
+	HashTableDataPtr table = new HashTableData;
+	memset(table, 0, sizeof(HashTableData));
+	table->tbl = new HashTableElemDataPtr[size];
+	for (int i = 0; i < size; i++) table->tbl[i] = nullptr;
+	//_ChkAlloc(pHTable, table, sizeof(sizeof * table));
+	//_ChkAlloc(pHTElem*, table->tbl, sizeof table[0] * size);
 	table->size = size;
 	table->hashFunc = hashFunc;
 	table->compareFunc = compareFunc;
 	table->stats.numElems = 0;
 	table->stats.longestChainLen = 0;
-	table->allowDoubles = 0;
+	table->allowDoubles = false;
 	return table;
 }
 
@@ -29,7 +31,7 @@ HashTableDataPtr HashTable::CreateHTableDouble(int size, pHashFunc hashFunc, pHa
 {
 	HashTableDataPtr table = CreateHTable(size, hashFunc, compareFunc);
 	if (table != nullptr) {
-		table->allowDoubles = 1;
+		table->allowDoubles = true;
 	}
 	return table;
 }
@@ -160,25 +162,16 @@ HashTableDataPtr HashTable::CreateHTableDouble(int size, pHashFunc hashFunc, pHa
 
 void HashTable::ZapHTable(HashTableDataPtr table)
 {
-	unsigned int i;
-	pHTElem* tblPtr;
-	pHTElem tblElem, temp;
-	pFreeFunc free;
-
-	if (table == NULL) {
-		return;
-	}
-	tblPtr = table->tbl;
-	for (i = 0; i < table->size; i++) {
-		for (tblElem = tblPtr[i]; tblElem != NULL; tblElem = temp) {
-			memory->FreeMemory(tblElem->userData);
-			temp = tblElem->next;
-			memory->FreeMemory(tblElem);
+	if (table == NULL) return;
+	for (int i = 0; i < table->size; i++)
+	{
+		if (table->tbl[i] != nullptr)
+		{
+			delete table->tbl[i]->userData;
 		}
 	}
-
-	memory->FreeMemory(table->tbl);
-	memory->FreeMemory(table);
+	delete[] table->tbl;
+	delete table;
 }
 
 //void HashTable::GetHTableStats(HashTableDataPtr table, int* numElems, int* longestChainLen) {

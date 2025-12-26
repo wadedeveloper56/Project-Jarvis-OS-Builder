@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "SymbolTable.h"
 
-SymbolTable::SymbolTable(MemorySubsystem* memory,PermData* permData)
+SymbolTable::SymbolTable(MemorySubsystem* memory, PermData* permData)
 {
 	this->memory = memory;
 	this->permData = permData;

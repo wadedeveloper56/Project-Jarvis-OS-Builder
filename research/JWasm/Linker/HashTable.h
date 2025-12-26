@@ -16,13 +16,13 @@ typedef HashElemCmp* pHashElemCmp;
 
 typedef struct _HTElem {
 	void* userData;
-	struct _HTElem* next;
-} *pHTElem;
+	//_HTElem* next;
+}  HashTableElemData, * HashTableElemDataPtr, ** HashTableElemenDataPtrPtr;
 
-typedef struct _TAG_HTable {
-	pHTElem* tbl;
+typedef struct _HTable {
+	HashTableElemenDataPtrPtr tbl;
 	unsigned size;
-	int allowDoubles;
+	bool allowDoubles;
 	pHashFunc hashFunc;
 	pHashElemCmp compareFunc; // Take two elements of the table;
 	// Return 0 iff elem1 == elem2
@@ -32,7 +32,7 @@ typedef struct _TAG_HTable {
 		long numElems;
 		int longestChainLen;
 	} stats;
-} HashTableData, * pHTable, * HashTableDataPtr;
+} HashTableData, * HashTableDataPtr, ** HashTableDataPtrPtr;
 
 class HashTable
 {

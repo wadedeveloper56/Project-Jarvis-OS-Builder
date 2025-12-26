@@ -8,7 +8,8 @@
 #include <cstdio>
 #include <cassert>
 #include <ctime>
-
+#include <csignal>
+#include <list>
 #pragma warning(disable:4267)
 #pragma warning(disable:4244)
 #pragma warning(disable:4018)
