@@ -22,7 +22,7 @@ void* MixCache::CachePermRead(file_list* list, unsigned long pos, size_t len)
     char *buf = (char*)CacheRead(list, pos, len);
     if (list->file->flags & INSTAT_FULL_CACHE) return buf;
     if (Multipage) {
-        result = (char*)memory->ReallocateMemory(buf, len);
+        _LnkReAlloc(char *,result,buf,len);
         //FIX ME _ChkAlloc(TokBuff, TokSize);
         Multipage = false;              // indicate that last read is permanent.
     }

@@ -14,8 +14,8 @@ class MemorySubsystem
 public:
 	MemorySubsystem(MessagingSubsystem* msg);
 	~MemorySubsystem();
-	void FreeMemory(void* memoryBlock);
 	void* ReallocateMemory(void* memblock, size_t size);
+	void FreeMemory(void* memoryBlock);
 	void* ExpandMemory(void* memblock, size_t size);
 	void DbgZapAlloc(void* tgt, size_t size);
 	void DbgZapFreed(void* tgt, size_t size);

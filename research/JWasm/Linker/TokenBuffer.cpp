@@ -18,7 +18,7 @@ TokenBuffer::~TokenBuffer()
 void TokenBuffer::Reallocate(unsigned newSize)
 {
 	if (newSize <= TokSize) return;
-	TokBuff = (char*)memory->ReallocateMemory(TokBuff, newSize);
+	_LnkReAlloc(char*, TokBuff, TokBuff, newSize);
 	memset(TokBuff + TokSize, 0, newSize - TokSize);
 	TokSize = newSize;
 }
