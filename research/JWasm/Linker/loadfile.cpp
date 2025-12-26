@@ -58,8 +58,8 @@ void FreeOutFiles(MemorySubsystem* memory)
         if (LinkState & LINK_ERROR) {
             FileSubsystem::Delete(fnode->fname);
         }
-        memory->FreeMemory(fnode->fname);
+        _LnkFree(fnode->fname);
         OutFiles = fnode->next;
-        memory->FreeMemory(fnode);
+        _LnkFree(fnode);
     }
 }

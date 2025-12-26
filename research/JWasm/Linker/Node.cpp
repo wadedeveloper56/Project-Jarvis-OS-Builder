@@ -34,9 +34,9 @@ NodeArrayPtr Node::MakeArray(unsigned size)
 void Node::BurnNodeArray(NodeArrayPtr list)
 {
 	for (unsigned int index = 0; index <= list->arraymax; index++) {
-		memory->FreeMemory(list->array[index]);
+		_LnkFree(list->array[index]);
 	}
-	memory->FreeMemory(list);
+	_LnkFree(list);
 }
 
 void Node::FreeNodes(NodeArrayPtr nodes)

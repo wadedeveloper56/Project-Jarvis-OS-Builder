@@ -18,8 +18,8 @@ struct ring
 };
 
 #define RingIterBeg( h, i ) \
-    if( i == h ) { \
-        RING* _T = i=nullptr; \
+    if( i = h ) { \
+        RING* _T = i; \
         do { \
             i = i->next;
 
@@ -28,8 +28,8 @@ struct ring
     }
 
 #define RingIterBegSafe( h, i ) \
-    if( i == h ) { \
-        RING* _T = i; \
+    if( i = h ) { \
+        RING* _T = (RING*)i; \
         RING* _N = _T->next; \
         do { \
             i = _N; \
@@ -142,7 +142,7 @@ void Ring::RINGNAME(Insert) (
 void Ring::RINGNAME(Walk) (void* hdr,void (*rtn)(void* curr))               
 {
 	RING* relement = nullptr;                
-	RingIterBegSafe(hdr, relement) {
+	RingIterBegSafe((RING*)hdr, relement) {
 		(*rtn)(relement);
 	} RingIterEndSafe(relement)
 }
@@ -305,17 +305,16 @@ void* Ring::RINGNAME(Lookup) (
 }
 
 
-int Ring::RINGNAME(Count) (                
-	void* hdr)                    
+int Ring::RINGNAME(Count) (void* hdr)                    
 {
 	int count;                     
 	RING* curr = nullptr;                    
 
 	count = 0;
-	RingIterBeg(hdr, curr) {
+	RingIterBeg((RING*)hdr, curr) {
 		++count;
 	} RingIterEnd(curr)
-		return count;
+	return count;
 }
 
 void* Ring::RINGNAME(Alloc) (void* hdr, size_t size)
