@@ -14,8 +14,8 @@ HashTableDataPtr HashTable::CreateHTable(int size, pHashFunc hashFunc, pHashElem
 {
 	pHTable table;
 
-	table = (HashTableDataPtr)memory->AllocateMemory(sizeof * table);
-	table->tbl = (pHTElem *)memory->AllocateMemory(sizeof table[0] * size);
+	_ChkAlloc(HashTableDataPtr, table, sizeof(sizeof * table));
+	_ChkAlloc(pHTElem*, table->tbl, sizeof table[0] * size);
 	table->size = size;
 	table->hashFunc = hashFunc;
 	table->compareFunc = compareFunc;

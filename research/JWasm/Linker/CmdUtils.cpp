@@ -80,7 +80,8 @@ char* FileName(MemorySubsystem* memory, MessagingSubsystem* msg, char* buff, uns
 section* NewSection(MemorySubsystem* memory, HashTable* hashTable)
 {
     OvlNum++;
-    section *sect = (section*)memory->AllocateMemory(sizeof(section));
+    section* sect;
+    _ChkAlloc(section*, sect, sizeof(section));
     sect->next_sect = nullptr;
     sect->classlist = nullptr;
     sect->orderlist = nullptr;

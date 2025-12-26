@@ -19,7 +19,7 @@ void DBICleanup(PermData* permData)
 void ODBISectCleanup(section* sect)
 {
     sect = sect;
-    _PermFree(sect->dbg_info);
+    //_PermFree(sect->dbg_info);
 }
 
 void DBISectCleanup(section* sect)

@@ -320,7 +320,8 @@ int Ring::RINGNAME(Count) (
 
 void* Ring::RINGNAME(Alloc) (void* hdr, size_t size)
 {
-	void* new_element = (void*)memory->AllocateMemory(size);             
+	void* new_element;
+	_ChkAlloc(void *,new_element, size);
 	RINGNAME(Append)(hdr, new_element);
 	return(new_element);
 }

@@ -116,7 +116,7 @@ void FreeFiles(MemorySubsystem* memory, MixCache* cache, file_list* list)
 		if (list->status & STAT_HAS_MEMBER && list->u.member != NULL) {
 			FreeList(memory, list->u.member);
 		}
-		_PermFree(list);
+		//_PermFree(list);
 		list = (file_list*)temp;
 	}
 }

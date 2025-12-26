@@ -23,11 +23,11 @@ void* MixCache::CachePermRead(file_list* list, unsigned long pos, size_t len)
     if (list->file->flags & INSTAT_FULL_CACHE) return buf;
     if (Multipage) {
         result = (char*)memory->ReallocateMemory(buf, len);
-        //_ChkAlloc(TokBuff, TokSize);
+        //FIX ME _ChkAlloc(TokBuff, TokSize);
         Multipage = false;              // indicate that last read is permanent.
     }
     else {
-        result = (char *)memory->AllocateMemory(len);
+        _ChkAlloc(char*,result,len);       
         memcpy(result, buf, len);
     }
     return result;
@@ -57,7 +57,7 @@ void* MixCache::CacheRead(file_list* list, unsigned long pos, size_t len)
     cache = (char**)file->cache;
     for (;;) {
         if (cache[bufnum] == NULL) {   // make sure page is in.
-            cache[bufnum] = (char*)memory->AllocateMemory(CACHE_PAGE_SIZE);
+            _ChkAlloc(char*, cache[bufnum], CACHE_PAGE_SIZE);
             newpos = (unsigned long)bufnum * CACHE_PAGE_SIZE;
             if (file->currpos != newpos) {
                 this->file->Seek(file->handle,newpos,SEEK_SET);

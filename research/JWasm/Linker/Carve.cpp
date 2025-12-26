@@ -48,7 +48,7 @@ carve_t Carve::CarveCreate(size_t elm_size, size_t blk_size)
 	if (elm_size < sizeof(free_t)) {
 		elm_size = sizeof(free_t);
 	}
-	cv = (cv_t*)memory->AllocateMemory(sizeof(*cv));
+	_ChkAlloc(cv_t*,cv,sizeof(*cv));
 	cv->elm_size = elm_size;
 	cv->blk_size = blk_size;
 	cv->elm_count = cv->blk_size / cv->elm_size;
@@ -118,7 +118,7 @@ blk_t* Carve::newBlk(cv_t* cv)
 	blk_t* newblk;
 	blk_t** blklist;
 
-	newblk = (blk_t*)memory->AllocateMemory(sizeof(blk_t) - 1 + cv->blk_size);
+	_ChkAlloc(blk_t*,newblk, sizeof(blk_t) - 1 + cv->blk_size);
 	blklist = &cv->blk_list;
 	while (*blklist > newblk) {        // keep list sorted by memory address
 		blklist = &(*blklist)->next;   // biggest first.
@@ -368,7 +368,7 @@ void Carve::CarveRestart(carve_t cv, unsigned num)
 	for (index = 0; index < numblks; index++) {
 		newBlk(cv);
 	}
-	cv->blk_map = (blk_t**)memory->AllocateMemory(numblks * sizeof(blk_t*));
+	_ChkAlloc(blk_t**,cv->blk_map, numblks * sizeof(blk_t*));
 	index = numblks - 1;
 	for (block = cv->blk_list; block != NULL; block = block->next) {
 		cv->blk_map[index] = block;

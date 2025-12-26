@@ -20,12 +20,13 @@ Node::~Node()
 
 NodeArrayPtr Node::MakeArray(unsigned size)
 {
-	NodeArrayPtr nodes = (NodeArrayPtr)memory->AllocateMemory(sizeof(NodeArray));
+	NodeArrayPtr nodes;
+	_ChkAlloc(NodeArrayPtr, nodes, sizeof(NodeArray));
 	nodes->num = 0;
 	nodes->elsize = size;
 	nodes->arraymax = 0;
 	size *= NODE_ARRAY_SIZE;
-	nodes->array[0] = (char*)memory->AllocateMemory(size);
+	_ChkAlloc(char*, nodes->array[0], size);
 	memset(nodes->array[0], 0, size);
 	return(nodes);
 }

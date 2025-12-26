@@ -13,7 +13,8 @@ StringTable::~StringTable()
 
 stringblock* StringTable::AllocNewBlock(stringtable* strtab)
 {
-    stringblock* blk = (stringblock*)memory->AllocateMemory(sizeof(stringblock));
+    stringblock* blk;
+    _ChkAlloc(stringblock *, blk, sizeof(stringblock));
     blk->next = nullptr;
     ring->RingAppend(&strtab->data, blk);
     blk->size = 0;

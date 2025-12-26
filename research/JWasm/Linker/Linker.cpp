@@ -26,9 +26,9 @@
 Linker::Linker()
 {
 	LinkState = 0;
-	memory = new MemorySubsystem();
 	file = new FileSubsystem();
 	messaging = new MessagingSubsystem(file);
+	memory = new MemorySubsystem(messaging);
 	hashTable = new HashTable(memory);
 	nodes = new Node(memory);
 	tokenBuffer = new TokenBuffer(memory);
@@ -61,9 +61,9 @@ Linker::~Linker()
 	delete tokenBuffer;
 	delete nodes;
 	delete hashTable;
+	delete memory;
 	delete messaging;
 	delete file;
-	delete memory;
 }
 
 void Linker::ResetMisc(void)

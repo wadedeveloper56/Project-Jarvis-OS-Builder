@@ -6,7 +6,7 @@ TokenBuffer::TokenBuffer(MemorySubsystem* memory)
 {
 	this->memory = memory;
 	TokSize = MAX_HEADROOM;
-	TokBuff = (char*)memory->AllocateMemory(TokSize);
+	_ChkAlloc(char *, TokBuff, TokSize);
 	memset(TokBuff, 0, TokSize);
 }
 

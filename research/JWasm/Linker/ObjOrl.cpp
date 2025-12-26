@@ -405,7 +405,8 @@ orl_return ObjOrl::ORLRemoveFileLinks(orl_file_handle orl_file_hnd)
 
 orl_handle ObjOrl::ORLInit(orl_funcs* funcs)
 {
-	orl_handle orl_hnd = (orl_handle)funcs->memory->AllocateMemory(sizeof(orl_handle_struct));
+	orl_handle orl_hnd;
+	_ChkAlloc(orl_handle,orl_hnd, sizeof(orl_handle_struct));
 	if (!orl_hnd) return(nullptr);
 	orl_hnd->error = ORL_OKAY;
 	orl_hnd->funcs = funcs;
@@ -430,7 +431,8 @@ orl_handle ObjOrl::ORLInit(orl_funcs* funcs)
 
 elf_handle ObjOrl::ElfInit(orl_funcs* funcs)
 {
-	elf_handle elf_hnd = (elf_handle)funcs->memory->AllocateMemory(sizeof(elf_handle_struct));
+	elf_handle elf_hnd;
+	_ChkAlloc(elf_handle, elf_hnd, sizeof(elf_handle_struct));
 	if (!elf_hnd) return(nullptr);
 	elf_hnd->funcs = funcs;
 	elf_hnd->first_file_hnd = nullptr;
@@ -439,7 +441,8 @@ elf_handle ObjOrl::ElfInit(orl_funcs* funcs)
 
 coff_handle ObjOrl::CoffInit(orl_funcs* funcs)
 {
-	coff_handle coff_hnd = (coff_handle)funcs->memory->AllocateMemory(sizeof(coff_handle_struct));
+	coff_handle coff_hnd;
+	_ChkAlloc(coff_handle, coff_hnd, sizeof(coff_handle_struct));
 	if (!coff_hnd) return(nullptr);
 	coff_hnd->funcs = funcs;
 	coff_hnd->first_file_hnd = nullptr;
@@ -448,7 +451,8 @@ coff_handle ObjOrl::CoffInit(orl_funcs* funcs)
 
 omf_handle ObjOrl::OmfInit(orl_funcs* funcs)
 {
-	omf_handle oh = (omf_handle)funcs->memory->AllocateMemory(sizeof(omf_handle_struct));
+	omf_handle oh;
+	_ChkAlloc(omf_handle, oh, sizeof(omf_handle_struct));
 	if (!oh) return(nullptr);
 	oh->funcs = funcs;
 	oh->first_file_hnd = nullptr;
@@ -479,7 +483,7 @@ void* ObjOrl::read(void* _list, size_t len)
 
 	result = mixcache->CachePermRead(list, ORLFilePos, len);
 	ORLFilePos += (long)len;
-	cache = (readcache*)memory->AllocateMemory(sizeof(readcache));
+	_ChkAlloc(readcache*, cache, sizeof(readcache));
 	cache->next = ReadCacheList;
 	ReadCacheList = cache;
 	cache->data = result;
