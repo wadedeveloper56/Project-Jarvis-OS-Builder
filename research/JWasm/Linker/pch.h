@@ -10,6 +10,9 @@
 #include <ctime>
 #include <csignal>
 #include <list>
+#include <io.h>
+#include <fcntl.h>
+
 #pragma warning(disable:4267)
 #pragma warning(disable:4244)
 #pragma warning(disable:4018)

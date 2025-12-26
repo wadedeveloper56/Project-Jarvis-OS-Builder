@@ -18,6 +18,8 @@ enum {
     UNDEFINED = 0xffff,   /* undefined segment */
 };
 
+extern int _argc;
+extern char** _argv;
 extern stateflag LinkState;        /* flags to indicate linker state */
 extern int RecNum;                 /* record number of the obj file        */
 extern tok Token;
@@ -45,6 +47,7 @@ extern char* OvlFName;             /* points to file name for overlays     */
 extern offset StackSize;           /* size of stack                        */
 extern symbol* HeadSym;            /* head of symbol table list */
 extern section* Root;              /* pointer to root information          */
+extern section* CurrSect;       /* current section for file processing  */
 extern mapflag MapFlags;           /* flags dealing with the map file */
 extern path_entry* LibPath;        /* path for library files               */
 extern unsigned_32    NumImports;
@@ -55,3 +58,4 @@ extern FileHandle TempFile;
 extern path_entry* Path;           /* path for object files                */
 extern struct fmt_data FmtData;    /* format specific data */
 extern seg_leader* OvlSeg;         /* pointer to seg_leader for overlaytab */
+extern byte           DBIFlag;

@@ -4,8 +4,10 @@
 
 using namespace std;
 
-int main(int argc, char *argv[])
+int main(int argc, char **argv)
 {
+	_argc = argc;
+	_argv = argv;
 	Linker* linker = new Linker();
 	linker->mainLine();
 	delete linker;

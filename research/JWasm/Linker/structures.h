@@ -4,6 +4,28 @@
 #include "File.h"
 #include "syms.h"
 
+#define SEG_DATA            1
+#define SEG_FLAG_1       0x02
+#define SEG_FLAG_2       0x04
+#define SEG_ITERATED        8
+#define SEG_MOVABLE      0x10       /* for PE, it is SEG_WRITABLE */
+#define SEG_PURE         0x20       /* i.e. segment is sharable. */
+#define SEG_PRELOAD      0x40
+#define SEG_READ_ONLY    0x80
+#define SEG_RELOC       0x100
+#define SEG_CONFORMING  0x200       /* was SEG_DEBUG, is SEG_EXECUTABLE for PE */
+#define SEG_LEVEL_1     0x400
+#define SEG_LEVEL_2     0x800
+#define SEG_LEVEL_3     0xC00
+#define SEG_DISCARD    0x1000
+#define SEG_32_BIT     0x2000
+#define SEG_HUGE       0x4000
+#define SEG_RESRC_HIGH 0x8000
+#define SEG_SHIFT_PMODE_LVL     10
+#define SEG_SHIFT_PRI_LVL       12
+
+#define SEG_LEVEL_MASK  0x0C00
+
 typedef struct file_list        FILE_LIST;
 typedef struct path_entry       PATH_ENTRY;
 typedef struct mod_entry        MOD_ENTRY;

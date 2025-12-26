@@ -202,6 +202,7 @@ void Linker::doLink(void)
 {
 	signal(SIGINT, &TrapBreak); /* so we can clean up */
 	StartTime();
+	cmdLine->DoCmdFile(NULL);
 	EndTime();
 	signal(SIGINT, SIG_IGN);
 }

@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "globals.h"
 
+int _argc;
+char** _argv;
 stateflag LinkState;        /* flags to indicate linker state */
 int RecNum;                 /* record number of the obj file        */
 tok Token;
@@ -28,6 +30,7 @@ char* OvlFName;             /* points to file name for overlays     */
 offset StackSize;           /* size of stack                        */
 symbol* HeadSym;            /* head of symbol table list */
 section* Root;              /* pointer to root information          */
+section* CurrSect;          /* current section for file processing  */
 mapflag MapFlags;           /* flags dealing with the map file */
 path_entry* LibPath;        /* path for library files               */
 unsigned_32 NumImports;
@@ -38,3 +41,4 @@ FileHandle TempFile;
 path_entry* Path;           /* path for object files                */
 struct fmt_data FmtData;    /* format specific data */
 seg_leader* OvlSeg;         /* pointer to seg_leader for overlaytab */
+byte           DBIFlag;
