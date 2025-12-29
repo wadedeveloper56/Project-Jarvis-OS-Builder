@@ -56,7 +56,7 @@ extern char * strupr(char *);
 
 #elif defined(__BORLANDC__) || defined(__OCC__)
 
-#define _stricmp  stricmp
+#define _stricmp  _stricmp
 #define _strnicmp strnicmp
 #define _strupr   strupr
 #define _memicmp  memicmp

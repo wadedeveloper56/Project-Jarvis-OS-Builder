@@ -587,7 +587,7 @@ ret_code LocalDir( int i, struct asm_tok tokenarray[] )
 
 #if STACKBASESUPP
 
-/* read/write value of @StackBase variable */
+/* _read/write value of @StackBase variable */
 
 void UpdateStackBase( struct asym *sym, struct expr *opnd )
 /*********************************************************/
@@ -600,7 +600,7 @@ void UpdateStackBase( struct asym *sym, struct expr *opnd )
     sym->value3264 = StackAdjHigh;
 }
 
-/* read value of @ProcStatus variable */
+/* _read value of @ProcStatus variable */
 
 void UpdateProcStatus( struct asym *sym, struct expr *opnd )
 /**********************************************************/
@@ -677,7 +677,7 @@ static ret_code ParseParams( struct dsym *proc, int i, struct asm_tok tokenarray
 
         is_vararg = FALSE;
 
-        /* read colon. It's optional for PROC.
+        /* _read colon. It's optional for PROC.
          * Masm also allows a missing colon for PROTO - if there's
          * just one parameter. Probably a Masm bug.
          * JWasm always require a colon for PROTO.
@@ -1233,7 +1233,7 @@ ret_code ParseProc( struct dsym *proc, int i, struct asm_tok tokenarray[], bool 
             regist = LclAlloc( (cnt + 1) * sizeof( uint_16 ) );
             proc->e.procinfo->regslist = regist;
             *regist++ = cnt;
-            /* read in registers */
+            /* _read in registers */
             for( ; tokenarray[i].token == T_REG; i++ ) {
                 if ( SizeFromRegister( tokenarray[i].tokval ) == 1 ) {
                     EmitError( INVALID_USE_OF_REGISTER );
@@ -1640,7 +1640,7 @@ static void WriteSEHData( struct dsym *proc )
     if ( unw_segs_defined )
         AddLineQueueX("%s %r", segname, T_SEGMENT );
     else {
-        AddLineQueueX("%s %r align(%u) flat read 'DATA'", segname, T_SEGMENT, 8 );
+        AddLineQueueX("%s %r align(%u) flat _read 'DATA'", segname, T_SEGMENT, 8 );
         AddLineQueue("$xdatasym label near");
     }
     xdataofs = 0;
@@ -1698,7 +1698,7 @@ static void WriteSEHData( struct dsym *proc )
     if ( simplespec )
         AddLineQueueX( "%s %r", segname, T_SEGMENT );
     else
-        AddLineQueueX( "%s %r align(%u) flat read 'DATA'", segname, T_SEGMENT, 4 );
+        AddLineQueueX( "%s %r align(%u) flat _read 'DATA'", segname, T_SEGMENT, 4 );
     /* write the .pdata stuff ( type IMAGE_RUNTIME_FUNCTION_ENTRY )*/
     AddLineQueueX( "dd %r %s, %r %s+0%xh, %r $xdatasym+0%xh",
                   T_IMAGEREL, proc->sym.name,
@@ -1715,7 +1715,7 @@ static void WriteSEHData( struct dsym *proc )
 
 static void SetLocalOffsets( struct proc_info *info );
 
-/* close a PROC
+/* _close a PROC
  */
 
 static void ProcFini( struct dsym *proc )
@@ -2039,7 +2039,7 @@ ret_code ExcFrameDirective( int i, struct asm_tok tokenarray[] )
 }
 #endif
 
-/* see if there are open procedures.
+/* see if there are _open procedures.
  * called when the END directive has been found.
  */
 void ProcCheckOpen( void )

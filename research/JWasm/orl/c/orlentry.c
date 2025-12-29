@@ -91,7 +91,7 @@ orl_file_format ORLFileIdentify( orl_handle orl_hnd, void * file )
     uint_16             len;
     unsigned char       chksum;
 
-    magic = orl_hnd->funcs->read( file, 4 );
+    magic = orl_hnd->funcs->_read( file, 4 );
     if( magic == NULL ) {
         return ORL_UNRECOGNIZED_FORMAT;
     }
@@ -117,7 +117,7 @@ orl_file_format ORLFileIdentify( orl_handle orl_hnd, void * file )
                 return ORL_UNRECOGNIZED_FORMAT;
             }
             chksum = magic[0] + magic[1] + magic[2] + magic[3];
-            magic = orl_hnd->funcs->read( file, len );
+            magic = orl_hnd->funcs->_read( file, len );
             if( orl_hnd->funcs->seek( file, -( 4 + len ), SEEK_CUR ) == -1 ) {
                 return ORL_UNRECOGNIZED_FORMAT;
             }
@@ -134,7 +134,7 @@ orl_file_format ORLFileIdentify( orl_handle orl_hnd, void * file )
                     return( ORL_OMF );
                 }
             } else {
-                magic = orl_hnd->funcs->read( file, 4 );
+                magic = orl_hnd->funcs->_read( file, 4 );
                 if( magic == NULL ) {
                     return ORL_UNRECOGNIZED_FORMAT;
                 } else if( orl_hnd->funcs->seek( file, -4, SEEK_CUR ) == -1 ) {
@@ -161,7 +161,7 @@ orl_file_format ORLFileIdentify( orl_handle orl_hnd, void * file )
         if( orl_hnd->funcs->seek( file, 0x3c, SEEK_CUR ) == -1 ) {
             return ORL_UNRECOGNIZED_FORMAT;
         }
-        magic = orl_hnd->funcs->read( file, 0x4 );
+        magic = orl_hnd->funcs->_read( file, 0x4 );
         if( magic == NULL ) {
             return ORL_UNRECOGNIZED_FORMAT;
         }
@@ -169,12 +169,12 @@ orl_file_format ORLFileIdentify( orl_handle orl_hnd, void * file )
         if( orl_hnd->funcs->seek( file, offset-0x40, SEEK_CUR ) == -1 ) {
             return ORL_UNRECOGNIZED_FORMAT;
         }
-        magic = orl_hnd->funcs->read( file, 4 );
+        magic = orl_hnd->funcs->_read( file, 4 );
         if( magic == NULL ) {
             return ORL_UNRECOGNIZED_FORMAT;
         }
         if( magic[0]=='P' && magic[1] == 'E' && magic[2] == '\0' && magic[3] == '\0' ) {
-            magic = orl_hnd->funcs->read( file, 4 );
+            magic = orl_hnd->funcs->_read( file, 4 );
             if( magic == NULL ) {
                 return ORL_UNRECOGNIZED_FORMAT;
             }

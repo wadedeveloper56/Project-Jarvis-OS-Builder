@@ -82,7 +82,7 @@ msg(PRT_LIST_3,         "%C %D %U %L %X" );
               for allocation and what was actually allocated.
               It has been selected based on the assumption that the worst
               case delta is a request of 1 byte that gets allocated as
-              64 bytes.  We can't cut it too close because skip list
+              64 bytes.  We can't cut it too _close because skip list
               allocators often have extreme minimum sizes.
 */
 #define SIZE_DELTA      64

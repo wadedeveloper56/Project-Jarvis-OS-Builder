@@ -799,7 +799,7 @@ static void DefineGroup( struct objbuff *ob )
             return;                     // NOTE: premature return!
         }
         group = AllocGroup( grp_name->name, &Groups );
-        /* jwlink: reset read-only flag for groups */
+        /* jwlink: reset _read-only flag for groups */
         if ( FmtData.type & MK_PE )
             group->segflags &= ~SEG_READ_ONLY;
     }
@@ -1070,7 +1070,7 @@ static void ProcLxdata( bool islidata, struct objbuff *ob )
         ob->curr += sizeof( unsigned_16 );
     }
 #if _DEVELOPMENT == _ON
-    if( stricmp( seg->entry->u.leader->segname, "_BSS" ) == 0 ) {
+    if( _stricmp( seg->entry->u.leader->segname, "_BSS" ) == 0 ) {
         LnkMsg( LOC_REC+ERR+MSG_INTERNAL, "s", "Initialized BSS found" );
     }
 #endif

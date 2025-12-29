@@ -56,7 +56,7 @@
     extern void LPrint( char *str, ... ); // link print
     #define DEBUG( x )   _Debug x ;
     #define PRINTLOC   printf("%s(%d)\n", __FILE__, __LINE__);
-    int CanReadWord(void *p);  // Can we read from p?
+    int CanReadWord(void *p);  // Can we _read from p?
 
     typedef enum {
         DUMP_BYTE,

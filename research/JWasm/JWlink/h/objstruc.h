@@ -102,9 +102,9 @@ enum infile_flags {
     INSTAT_LIBRARY      = 0x0002,       // file is a library
     INSTAT_IOERR        = 0x0004,       // problem reading this file
     INSTAT_IN_USE       = 0x0008,       // file in use.
-    INSTAT_OPEN_WARNING = 0x0010,       // only give a warning if can't open
-    INSTAT_FULL_CACHE   = 0x0020,       // read entire file.
-    INSTAT_PAGE_CACHE   = 0x0040,       // read in "paged"
+    INSTAT_OPEN_WARNING = 0x0010,       // only give a warning if can't _open
+    INSTAT_FULL_CACHE   = 0x0020,       // _read entire file.
+    INSTAT_PAGE_CACHE   = 0x0040,       // _read in "paged"
     INSTAT_GOT_MODTIME  = 0x0080,
     INSTAT_NO_WARNING   = 0x0100
 };

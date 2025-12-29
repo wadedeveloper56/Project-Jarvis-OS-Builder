@@ -1032,7 +1032,7 @@ ret_code HllEndDir( int i, struct asm_tok tokenarray[] )
         if ( hll->labels[LTEST] ) /* v2.11: LTEST only needed if .CONTINUE has occured */
             AddLineQueueX( "%s" LABELQUAL, GetLabelStr( hll->labels[LTEST], buff ) );
 
-        /* read in optional (simple) expression */
+        /* _read in optional (simple) expression */
         if ( tokenarray[i].token != T_FINAL ) {
             rc = EvaluateHllExpression( hll, &i, tokenarray, LSTART, FALSE, buffer );
             if ( rc == NOT_ERROR ) {
@@ -1055,7 +1055,7 @@ ret_code HllEndDir( int i, struct asm_tok tokenarray[] )
         if ( hll->labels[LTEST] ) /* v2.11: LTEST only needed if .CONTINUE has occured */
             AddLineQueueX( "%s" LABELQUAL, GetLabelStr( hll->labels[LTEST], buff ) );
 
-        /* read in (optional) expression */
+        /* _read in (optional) expression */
         /* if expression is missing, just generate nothing */
         if ( tokenarray[i].token != T_FINAL ) {
             rc = EvaluateHllExpression( hll, &i, tokenarray, LSTART, FALSE, buffer );
@@ -1208,7 +1208,7 @@ ret_code HllExitDir( int i, struct asm_tok tokenarray[] )
     return( rc );
 }
 
-/* check if an hll block has been left open. called after pass 1 */
+/* check if an hll block has been left _open. called after pass 1 */
 
 void HllCheckOpen( void )
 /***********************/
@@ -1244,7 +1244,7 @@ void HllInit( int pass )
     //if ( pass == PASS_1 )
     //    HllFree = NULL;
 
-    //HllStack = NULL; /* empty stack of open hll directives */
+    //HllStack = NULL; /* empty stack of _open hll directives */
     ModuleInfo.hll_label = 0; /* init hll label counter */
 #ifdef DEBUG_OUT
     evallvl = 0;

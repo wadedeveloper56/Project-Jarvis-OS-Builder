@@ -908,7 +908,7 @@ static void omf_write_segdef( void )
     DebugMsg1(("omf_write_segdef exit\n"));
 }
 
-/* the lnames are stored in a queue. read
+/* the lnames are stored in a queue. _read
  * the items one by one and take care that
  * the record size doesn't exceed 1024 bytes.
  */
@@ -980,7 +980,7 @@ struct readext {
     uint_8 method;
 };
 
-/* read items for EXTDEF records.
+/* _read items for EXTDEF records.
  * there are 2 sources:
  * - the AltQueue of weak externals
  * - the TAB_EXT queue of externals
@@ -1289,7 +1289,7 @@ static ret_code omf_write_autodep( void )
         if ( len > 255 )
             len = 255; /* length is 1 byte only */
 #endif
-        /* v2.11: field mtime removed, timestamp read when needed */
+        /* v2.11: field mtime removed, timestamp _read when needed */
         //*((time_t *)p) = timet2dostime( curr->mtime );
         *((time_t *)p) = timet2dostime( GetFileTimeStamp( curr->fname ) );
         *(p + 4) = (unsigned char)len;

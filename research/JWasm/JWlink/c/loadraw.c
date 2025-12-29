@@ -148,7 +148,7 @@ void BinOutput( void )
 // If data is encountered above what Segmented addressing can handle (1 M for default)
 // the routine outputs an extended linear address record, seamlessly switching
 // to a full 32 bit address range.  This approach provides full backward compatibility
-// for systems which cannot read the newer formats when creating files that don't
+// for systems which cannot _read the newer formats when creating files that don't
 // need the extra range.
 
 #define HEXLEN 16   // number of bytes of data in a full record

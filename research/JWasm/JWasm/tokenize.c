@@ -519,7 +519,7 @@ static void array_mul_add( unsigned char *buf, unsigned base, unsigned num, unsi
 }
 #endif
 
-/* read in a number.
+/* _read in a number.
  * check the number suffix:
  * b or y: base 2
  * d or t: base 10

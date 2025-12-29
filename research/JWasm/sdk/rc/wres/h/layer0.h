@@ -50,17 +50,17 @@
 
 /* The low level I/O routines named below will be passed a WResFileID by the */
 /* higher level I/O routines and which must be the WResFileID returned by one */
-/* of the file opening functions which will get it from the low level open */
+/* of the file opening functions which will get it from the low level _open */
 /* function */
 
 typedef int             WResFileID;
 
 struct WResRoutines {                                       /* defaults */
     /* I/O routines */
-    WResFileID (*   open) (const char *, int, ...);         /* open */
-    int (*          close) (WResFileID);                    /* close */
+    WResFileID (*   _open) (const char *, int, ...);         /* _open */
+    int (*          _close) (WResFileID);                    /* _close */
     int (*          write) (WResFileID, const void *, size_t); /* write */
-    int (*          read) (WResFileID, void *, size_t);        /* read */
+    int (*          _read) (WResFileID, void *, size_t);        /* _read */
     off_t (*        seek) (WResFileID, off_t, int );        /* lseek */
     off_t (*        tell) (WResFileID);                     /* tell */
     /* memory routines */

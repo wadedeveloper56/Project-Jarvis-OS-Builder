@@ -36,7 +36,7 @@ typedef SSIZE_T ssize_t;
 #ifndef WRESLAYER0_INCLUDED
 /* The low level I/O routines named below will be passed a WResFileID by the */
 /* higher level I/O routines and which must be the WResFileID returned by one */
-/* of the file opening functions which will get it from the low level open */
+/* of the file opening functions which will get it from the low level _open */
 /* function */
 
 typedef int             WResFileID;
@@ -45,10 +45,10 @@ typedef _off_t off_t;
 
 struct WResRoutines {                                       /* defaults */
     /* I/O routines */
-    WResFileID (*   open) (const char *, int, ...);         /* open */
-    int (*          close) (WResFileID);                    /* close */
+    WResFileID (*   _open) (const char *, int, ...);         /* _open */
+    int (*          _close) (WResFileID);                    /* _close */
     ssize_t (*      write) (WResFileID, const void *, size_t); /* write */
-    ssize_t (*      read) (WResFileID, void *, size_t);     /* read */
+    ssize_t (*      _read) (WResFileID, void *, size_t);     /* _read */
     off_t (*        seek) (WResFileID, off_t, int );        /* lseek */
     off_t (*        tell) (WResFileID);                     /* tell */
     /* memory routines */
@@ -57,12 +57,12 @@ struct WResRoutines {                                       /* defaults */
 };
 #endif
 
-#define WResSetRtns( open, close, read, write, seek, tell, alloc, free ) \
+#define WResSetRtns( _open, _close, _read, write, seek, tell, alloc, free ) \
                 struct WResRoutines WResRtns = {    \
-                    open,                           \
-                    close,                          \
+                    _open,                           \
+                    _close,                          \
                     write,                          \
-                    read,                           \
+                    _read,                           \
                     seek,                           \
                     tell,                           \
                     alloc,                          \

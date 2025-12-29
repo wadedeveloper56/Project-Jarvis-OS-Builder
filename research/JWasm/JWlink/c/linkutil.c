@@ -79,7 +79,7 @@ static off_t ResSeek( int handle, off_t position, int where )
 static int ResClose( int handle )
 /*******************************/
 {
-    return( close( handle ) );
+    return( _close( handle ) );
 }
 
 static ssize_t ResRead( int handle, void *buffer, size_t len )
@@ -286,7 +286,7 @@ static class_entry  *class = NULL;
     }
     for( ; class != NULL; class = class->next_class ) {
         while( (seg = RingStep( class->segs, seg )) != NULL ) {
-            if( stricmp( seg->segname, name ) == 0 ) {
+            if( _stricmp( seg->segname, name ) == 0 ) {
                 return( seg );
             }
         }

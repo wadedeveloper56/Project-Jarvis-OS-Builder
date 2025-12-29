@@ -50,7 +50,7 @@ ResNameOrOrdinal * ResReadNameOrOrdinal( WResFileID handle )
     error = ResReadUint8( &tmp8, handle );
     newname.ord.fFlag = tmp8;
 
-    /* read the rest of the Name or Ordinal */
+    /* _read the rest of the Name or Ordinal */
     if (!error) {
         if (newname.ord.fFlag == 0xff) {
             error = ResReadUint16( &tmp16, handle );
@@ -105,7 +105,7 @@ ResNameOrOrdinal * ResRead32NameOrOrdinal( WResFileID handle )
     restofstr = NULL;
     error = ResReadUint16( &flags, handle );
 
-    /* read the rest of the Name or Ordinal */
+    /* _read the rest of the Name or Ordinal */
     if( !error ) {
         if( flags == 0xffff ) {
             error = ResReadUint16( &ord, handle );

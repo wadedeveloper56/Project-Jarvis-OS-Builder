@@ -75,7 +75,7 @@ typedef struct {
 #include <poppck.h>
 
 typedef struct {
-    void *      (*read)( void *, size_t );
+    void *      (*_read)( void *, size_t );
     long int    (*seek)( void *, long int, int );
     void *      (*alloc)( size_t );
     void        (*free)( void * );
@@ -154,7 +154,7 @@ typedef enum {
     ORL_SEC_FLAG_NOT_PAGEABLE           = 0x0400, // section is not pageable
     ORL_SEC_FLAG_SHARED                 = 0x0800, // section can be shared in memory
     ORL_SEC_FLAG_EXECUTE_PERMISSION     = 0x1000, // section can be executed as code
-    ORL_SEC_FLAG_READ_PERMISSION        = 0x2000, // section can be read
+    ORL_SEC_FLAG_READ_PERMISSION        = 0x2000, // section can be _read
     ORL_SEC_FLAG_WRITE_PERMISSION       = 0x4000, // section can be written to
     ORL_SEC_FLAG_USE_32                 = 0x8000  // omf section's use-32 bit
 } orl_sec_flags;

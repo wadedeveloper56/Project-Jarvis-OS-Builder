@@ -1174,7 +1174,7 @@ static ret_code ExpandToken( char *line, int *pi, struct asm_tok tokenarray[], i
                         size = ( tokenarray[i-1].tokpos + 1) - tokenarray[tmp].tokpos;
                         AddTokens( tokenarray, tmp+1, tmp+1 - i, Token_Count );
                         Token_Count += (tmp+1) - i;
-                        if ( Token_Count < max ) /* take care not to read beyond T_FINAL */
+                        if ( Token_Count < max ) /* take care not to _read beyond T_FINAL */
                             max = Token_Count;
                         if ( ERROR == RebuildLine( buffer, tmp, tokenarray,
                                                   size, tokenarray[tmp].tokpos - line, addbrackets ) )
@@ -1222,7 +1222,7 @@ static ret_code ExpandToken( char *line, int *pi, struct asm_tok tokenarray[], i
                             return( ERROR );
 #if 0
                         /* it's possible to "hide" the EXITM directive when the
-                         * macro lines are read. But it's not useful for macro
+                         * macro lines are _read. But it's not useful for macro
                          * procs to check if exitm has been executed, because
                          * Masm simply will ignore anything that's "returned".
                          */

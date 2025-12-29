@@ -47,7 +47,7 @@
 #define LSEEK_CURRENT  1       /* Seek relative to current position    */
 #define LSEEK_END      2       /* Seek relative to the end of the file */
 
-#define MAX_OPEN_FILES 12       // the maximum number of open files.
+#define MAX_OPEN_FILES 12       // the maximum number of _open files.
 #define MAX_FILE        2 + 63 + 8 + 1 + 3 + 1
 
 #define EXTRA_NAME_DIR  2

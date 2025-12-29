@@ -252,7 +252,7 @@ int ResReadMenuExtraBytes( MenuHeader *header, WResFileID handle,
 
 // NB: Anyone using this function will have to manually seek back after
 // calling ResIsMenuEx() (just as in ResIsDialogEx()).
-// If you've already read the header, just call ResIsHeaderMenuEx().
+// If you've already _read the header, just call ResIsHeaderMenuEx().
 int ResIsMenuEx( WResFileID handle )
 /**********************************/
 {

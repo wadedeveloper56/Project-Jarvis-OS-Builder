@@ -56,7 +56,7 @@ enum src_item_type {
     SIT_MACRO,
 };
 
-/* item on src stack ( contains currently open source files & macros ) */
+/* item on src stack ( contains currently _open source files & macros ) */
 struct src_item {
     struct src_item     *next;
     uint_8              type;       /* item type ( see enum src_item_type ) */
@@ -83,8 +83,8 @@ struct qdesc            FileSeq;
 #ifdef DEBUG_OUT
 struct asm_tok *end_tokenarray;
 char           *end_stringbuf;
-static int_32 cntflines;  /* count file lines ( read by fgets() ) */
-static int_32 cntlines;   /* count lines read by GetTextLine() */
+static int_32 cntflines;  /* count file lines ( _read by fgets() ) */
+static int_32 cntlines;   /* count lines _read by GetTextLine() */
 extern int_32 cnttok0;    /* count Tokenize() calls, index==0 */
 extern int_32 cnttok1;    /* count Tokenize() calls, index!=0 */
 extern int_32 cntppl0;    /* count preprocessed lines 1 */
@@ -268,7 +268,7 @@ static void FreeFiles( void )
     return;
 }
 
-/* clear input source stack (include files and open macros).
+/* clear input source stack (include files and _open macros).
  * This is done after each pass.
  * Usually the stack is empty when the END directive occurs,
  * but it isn't required that the END directive is located in
@@ -283,7 +283,7 @@ void ClearSrcStack( void )
 
     DeleteLineQueue();
 
-    /* dont close the last item (which is the main src file) */
+    /* dont _close the last item (which is the main src file) */
     for( ; src_stack->next ; src_stack = nextfile ) {
         nextfile = src_stack->next;
         if ( src_stack->type == SIT_FILE ) {
@@ -342,7 +342,7 @@ char *GetTopSrcName( void )
 
 #endif
 
-/* read one line from current source file.
+/* _read one line from current source file.
  * returns NULL if EOF has been detected and no char stored in buffer
  * v2.08: 00 in the stream no longer causes an exit. Hence if the
  * char occurs in the comment part, everything is ok.
@@ -680,7 +680,7 @@ FILE *SearchFile( const char *path, bool queue )
 }
 
 /* get the next source line from file or macro.
- * v2.11: line queues are no longer read here,
+ * v2.11: line queues are no longer _read here,
  * this is now done in RunLineQueue().
  * Also, if EOF/EOM is reached, the function will
  * now return NULL in any case.
@@ -702,7 +702,7 @@ char *GetTextLine( char *buffer )
         }
         DebugCmd( ModuleInfo.g.FNames[curr->srcfile].lines = curr->line_num );
         DebugMsg1(("GetTextLine: ***** EOF file %s (idx=%u) *****\n", GetFName( curr->srcfile )->fname, curr->srcfile ));
-        /* don't close and remove main source file */
+        /* don't _close and remove main source file */
         if ( curr->next ) {
             fclose( curr->file );
             src_stack = curr->next;
@@ -985,7 +985,7 @@ void InputFini( void )
     FreeFiles();
 #ifdef DEBUG_OUT
     if ( Options.quiet == FALSE ) {
-        printf("lines read(files)/processed in pass one: %" I32_SPEC "u / %" I32_SPEC "u\n", cntflines, cntlines );
+        printf("lines _read(files)/processed in pass one: %" I32_SPEC "u / %" I32_SPEC "u\n", cntflines, cntlines );
         printf("invokations: PreprocessLine=%" I32_SPEC "u/%" I32_SPEC "u/%" I32_SPEC "u, Tokenize=%" I32_SPEC "u/%" I32_SPEC "u\n", cntppl0, cntppl1, cntppl2, cnttok0, cnttok1 );
     }
 #endif

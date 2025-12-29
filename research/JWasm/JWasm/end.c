@@ -223,7 +223,7 @@ ret_code EndDirective( int i, struct asm_tok tokenarray[] )
             CurrStruct = CurrStruct->next;
         EmitErr( UNMATCHED_BLOCK_NESTING, CurrStruct->sym.name );
     }
-    /* v2.10: check for open PROCedures */
+    /* v2.10: check for _open PROCedures */
     ProcCheckOpen();
 
     /* check type of start label. Must be a symbolic code label, internal or external */
@@ -275,7 +275,7 @@ ret_code EndDirective( int i, struct asm_tok tokenarray[] )
         return( EmitError( OPERAND_MUST_BE_RELOCATABLE ) );
     }
 
-    /* close open segments */
+    /* _close _open segments */
     SegmentModuleExit();
 
     if ( ModuleInfo.g.EndDirHook )

@@ -154,7 +154,7 @@ static int AddCoffSection( coff_lib_file *c_file, char *name, unsigned_32 size,
     memset( section, 0, COFF_SECTION_HEADER_SIZE );
     if( len > COFF_SEC_NAME_LEN ) {
         section->name[0] = '/';
-        ultoa( c_file->string_table_size + 4, section->name + 1, 10 );
+        _ultoa( c_file->string_table_size + 4, section->name + 1, 10 );
         AddCoffString( c_file, name, len );
     } else {
         memcpy( section->name, name, len );
@@ -563,7 +563,7 @@ int convert_import_library(coff_file_handle coff_file_hnd)
 
     i_hdr = (coff_import_object_header*)coff_file_hnd->f_hdr_buffer;
     sym.processor = i_hdr->machine;
-    sym.exportedName = coff_file_hnd->coff_hnd->funcs->read( coff_file_hnd->file,
+    sym.exportedName = coff_file_hnd->coff_hnd->funcs->_read( coff_file_hnd->file,
         i_hdr->size_of_data );
     sym.DLLName = sym.exportedName + strlen( sym.exportedName ) + 1;
     sym.time_date_stamp = i_hdr->time_date_stamp;

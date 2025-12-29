@@ -54,7 +54,7 @@ static void ExtractObj( libfile io, char *name, arch_header *arch, char *newname
     char        *obj_name;
 
     obj_name = MakeObjOutputName( name, newname );
-    unlink( obj_name );
+    _unlink( obj_name );
     out = LibOpen( obj_name, LIBOPEN_BINARY_WRITE );
     pos = LibTell( io );
     CopyObj( io, out, arch );

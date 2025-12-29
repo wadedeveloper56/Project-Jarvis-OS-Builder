@@ -200,7 +200,7 @@ static void PrtMsg( int severity, int msgnum, va_list args1, va_list args2 )
 #ifndef __SW_BD
     write_logo();
 #endif
-    /* open .err file if not already open and a name is given */
+    /* _open .err file if not already _open and a name is given */
     if( CurrFile[ERR] == NULL && CurrFName[ERR] != NULL ) {
         CurrFile[ERR] = fopen( CurrFName[ERR], "w" );
         if( CurrFile[ERR] == NULL ) {
@@ -297,7 +297,7 @@ char *ErrnoStr( void )
     return( ( errno == ENOENT ) ? "ENOENT" : myltoa( errno, buffer, 10, FALSE, FALSE ) );
 }
 
-/* fatal error (out of memory, unable to open files for write, ...)
+/* fatal error (out of memory, unable to _open files for write, ...)
  * don't use functions which need to alloc memory here!
  * v2.08: do not exit(), just a longjmp() into AssembleModule().
  */
@@ -320,7 +320,7 @@ void Fatal( int msgnum, ... )
 
     /* setjmp() has been called in AssembleModule().
      * if a fatal error happens outside of this function, longjmp()
-     * is NOT to be used ( out of memory condition, @cmd file open error, ... )
+     * is NOT to be used ( out of memory condition, @cmd file _open error, ... )
      */
     if ( CurrFName[ASM] )
         longjmp( jmpenv, 2 );

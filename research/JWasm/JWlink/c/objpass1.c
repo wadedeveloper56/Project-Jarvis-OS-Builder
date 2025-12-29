@@ -328,7 +328,7 @@ static class_entry *FindNamedClass( char *name )
     class_entry   *class;
 
     for( class = Root->classlist; class != NULL; class = class->next_class ) {
-        if( stricmp( class->name, name ) == 0 ) {
+        if( _stricmp( class->name, name ) == 0 ) {
             return( class );
         }
     }
@@ -338,7 +338,7 @@ static class_entry *FindNamedClass( char *name )
 static bool CmpSegName( void *leader, void *name )
 /************************************************/
 {
-    return( stricmp( ((seg_leader *)leader)->segname, name ) == 0 );
+    return( _stricmp( ((seg_leader *)leader)->segname, name ) == 0 );
 }
 
 static bool DefIncGroup( void *_def, void *_grouptab )
@@ -589,7 +589,7 @@ class_entry *FindClass( section *sect, char *name, bool is32bit,
 
     lastclass = sect->classlist;
     for( currclass = sect->classlist; currclass != NULL; currclass = currclass->next_class ) {
-        if( stricmp( currclass->name, name ) == 0
+        if( _stricmp( currclass->name, name ) == 0
                         && !((currclass->flags & CLASS_32BIT) ^ is32bit) ) {
             /* jwlink: don't mix STACK combine with other classes */
             if ( comb == COMBINE_STACK && ( !(currclass->flags & CLASS_STACK ) ) )
@@ -647,7 +647,7 @@ static bool CheckClassName( void *_seg, void *_sdata )
     seg_leader  *seg = _seg;
     segdata     *sdata = _sdata;
 
-    return( stricmp( seg->segname, sdata->u.name ) == 0 &&
+    return( _stricmp( seg->segname, sdata->u.name ) == 0 &&
                                 seg->combine != COMBINE_INVALID );
 }
 
@@ -1267,7 +1267,7 @@ group_entry *SearchGroups( char *name )
     group_entry     *currgrp;
 
     for( currgrp = Groups; currgrp != NULL; currgrp = currgrp->next_group ) {
-        if( stricmp( currgrp->sym->name, name ) == 0 ) {
+        if( _stricmp( currgrp->sym->name, name ) == 0 ) {
             DEBUG(( DBG_OLD, "objpass1.SearchGroups(%s): group found at %x", name, currgrp ));
             return( currgrp );
         }

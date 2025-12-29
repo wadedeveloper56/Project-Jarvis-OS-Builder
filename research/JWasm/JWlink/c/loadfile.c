@@ -116,7 +116,7 @@ void CleanLoadFile( void )
 
 void InitLoadFile( void )
 /******************************/
-/* open the file, and write out header info */
+/* _open the file, and write out header info */
 {
     DEBUG(( DBG_OLD, "InitLoadFile()" ));
     LnkMsg( INF+MSG_CREATE_EXE, "f" );
@@ -197,8 +197,7 @@ static void DoCVPack( void )
         } else {
             name = Root->outfile->fname;
         }
-        retval = spawnlp( P_WAIT, CVPACK_EXE, CVPACK_EXE, "/nologo",
-                          name, NULL );
+        retval = _spawnlp( P_WAIT, CVPACK_EXE, CVPACK_EXE, "/nologo", name, NULL );
         if( retval == -1 ) {
             PrintIOError( ERR+MSG_CANT_EXECUTE, "12", CVPACK_EXE );
         }
@@ -266,7 +265,7 @@ static class_entry *LocateBSSClass( void )
 
     sect = (Root->areas == NULL) ? Root : NonSect;
     for( currclass = sect->classlist; currclass != NULL; currclass = currclass->next_class ) {
-        if( stricmp( currclass->name, BSSClassName ) == 0 ) {
+        if( _stricmp( currclass->name, BSSClassName ) == 0 ) {
             return( currclass );
         }
     }
@@ -810,11 +809,11 @@ static void ExecWlib( void )
     }
 #if 1 /* JWLink: create a COFF import library for PE binaries */
     if ( FmtData.type & MK_PE ) {
-        retval = spawnlp( P_WAIT, WLIB_EXE, WLIB_EXE, "-c", "-b", "-n", "-q",
+        retval = _spawnlp( P_WAIT, WLIB_EXE, WLIB_EXE, "-c", "-b", "-n", "-q",
                          "-ic", libtype, FmtData.implibname, atfname, NULL );
     } else
 #endif
-    retval = spawnlp( P_WAIT, WLIB_EXE, WLIB_EXE, "-c", "-b", "-n", "-q",
+    retval = _spawnlp( P_WAIT, WLIB_EXE, WLIB_EXE, "-c", "-b", "-n", "-q",
                   libtype, FmtData.implibname, atfname, NULL );
     if( retval == -1 ) {
         PrintIOError( ERR+MSG_CANT_EXECUTE, "12", WLIB_EXE );

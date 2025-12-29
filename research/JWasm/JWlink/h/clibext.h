@@ -27,7 +27,7 @@
 #ifndef O_TEXT
 #define O_TEXT 0
 #endif
-//#define stricmp strcasecmp
+//#define _stricmp strcasecmp
 //#define strcmpi strcasecmp
 //#define strnicmp strncasecmp
 #ifndef getch
@@ -42,7 +42,7 @@
 #define  __va_list  va_list
 #define __Strtold(s,ld,endptr) ((*(double *)(ld))=strtod(s,endptr))
 #define SOPEN_DEFINED
-#define sopen(x,y,z) open((x),(y))
+#define sopen(x,y,z) _open((x),(y))
 #define _fsopen(x,y,z) fopen(x,y)
 #define _fmemcpy memcpy
 #ifndef PATH_MAX

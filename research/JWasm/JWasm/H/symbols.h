@@ -307,7 +307,7 @@ struct seg_info {
     union {
         void            *LinnumQueue;   /* for COFF line numbers */
         uint_32         fileoffset;     /* used by BIN + ELF */
-        uint_32         num_linnums;    /* used by COFF (after LinnumQueue has been read) */
+        uint_32         num_linnums;    /* used by COFF (after LinnumQueue has been _read) */
     };
     uint_32             num_relocs;     /* used by COFF/ELF */
     unsigned            seg_idx;        /* segment #; v2.12: changed from short to unsigned */

@@ -90,7 +90,7 @@ void InitObj( void )
 /******************/
 {
 
-    OrlFuncs.read = &ObjRead;
+    OrlFuncs._read = &ObjRead;
     OrlFuncs.seek = &ObjSeek;
     OrlFuncs.alloc = &ObjAlloc;
     OrlFuncs.free = &ObjFree;

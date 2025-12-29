@@ -112,12 +112,12 @@ enum pe_flags_values {
 
 #define hdrname ".hdr$"
 
-static const char hdrattr[]   = { "read public 'HDR'" };
+static const char hdrattr[]   = { "_read public 'HDR'" };
 static const char edataname[] = { ".edata" };
-static const char edataattr[] = { "FLAT read public alias('.rdata') 'DATA'" };
+static const char edataattr[] = { "FLAT _read public alias('.rdata') 'DATA'" };
 static const char idataname[] = { ".idata$" };
-//static const char idataattr[] = { "FLAT read public 'DATA'" };
-static const char idataattr[] = { "FLAT read public alias('.rdata') 'DATA'" };
+//static const char idataattr[] = { "FLAT _read public 'DATA'" };
+static const char idataattr[] = { "FLAT _read public alias('.rdata') 'DATA'" };
 
 static const char mzcode[] = {
     "db 'MZ'\0"           /* e_magic */
@@ -1286,7 +1286,7 @@ static void pe_set_values( struct calc_param *cp )
     }
 
 
-    /* sort: header, executable, readable, read-write segments, resources, relocs */
+    /* sort: header, executable, readable, _read-write segments, resources, relocs */
     for ( i = 0; i < SIZE_PEFLAT; i++ ) {
         DebugMsg(("pe_set_values: searching segment types %Xh\n", flat_order[i] ));
         for( curr = SymTables[TAB_SEG].head; curr; curr = curr->next ) {

@@ -36,10 +36,10 @@
 #include "layer0.h"
 #include "wressetr.h"
 
-#define WRESOPEN        WResRtns.open
-#define WRESCLOSE       WResRtns.close
+#define WRESOPEN        WResRtns._open
+#define WRESCLOSE       WResRtns._close
 #define WRESWRITE       WResRtns.write
-#define WRESREAD        WResRtns.read
+#define WRESREAD        WResRtns._read
 #define WRESSEEK        WResRtns.seek
 #define WRESTELL        WResRtns.tell
 #define WRESALLOC       WResRtns.alloc

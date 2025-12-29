@@ -8,7 +8,7 @@
 *               "fastpass" is an optimization which increases
 *               assembly time speed by storing preprocessed lines
 *               in memory during the first pass. In further passes,
-*               those lines are "read" instead of the original assembly
+*               those lines are "_read" instead of the original assembly
 *               source files.
 *               Speed increase is significant if there's a large include
 *               file at the top of an assembly source which contains

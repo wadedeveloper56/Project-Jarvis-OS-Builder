@@ -720,7 +720,7 @@ static void WriteArMlibFileTable( void )
                     append_name = TRUE;
                     arch.size += sfile->name_length;
                     strcpy( buff, AR_NAME_CONTINUED_AFTER );
-                    itoa( sfile->name_length, buff + AR_NAME_CONTINUED_AFTER_LEN, 10 );
+                    _itoa( sfile->name_length, buff + AR_NAME_CONTINUED_AFTER_LEN, 10 );
                     arch.name = buff;
                 } else {
                     arch.name = sfile->arch.name;
@@ -733,7 +733,7 @@ static void WriteArMlibFileTable( void )
             }
         } else {
             buff[ 0 ] = '/';
-            itoa( sfile->name_offset, buff+1, 10 );
+            _itoa( sfile->name_offset, buff+1, 10 );
             arch.name = buff;
         }
         WriteFileHeader( &arch );

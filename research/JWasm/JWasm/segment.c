@@ -87,7 +87,7 @@ static unsigned         grpdefidx;      /* Number of group definitions   */
 /* v2.12: obsolete, lnames are OMF only */
 //static unsigned         LnamesIdx;      /* Number of LNAMES definitions  */
 
-static struct dsym      *SegStack[MAX_SEG_NESTING]; /* stack of open segments */
+static struct dsym      *SegStack[MAX_SEG_NESTING]; /* stack of _open segments */
 static int              stkindex;       /* current top of stack */
 
 #if FASTPASS
@@ -537,7 +537,7 @@ ret_code SetOfssize( void )
     return( NOT_ERROR );
 }
 
-/* close segment */
+/* _close segment */
 
 static ret_code CloseSeg( const char *name )
 /******************************************/
@@ -1413,10 +1413,10 @@ ret_code SegmentModuleExit( void )
 {
     if ( ModuleInfo.model != MODEL_NONE )
         ModelSimSegmExit();
-    /* if there's still an open segment, it's an error */
+    /* if there's still an _open segment, it's an error */
     if ( CurrSeg ) {
         EmitErr( BLOCK_NESTING_ERROR, CurrSeg->sym.name );
-        /* but close the still open segments anyway */
+        /* but _close the still _open segments anyway */
         while( CurrSeg && ( CloseSeg( CurrSeg->sym.name ) == NOT_ERROR ) );
     }
 

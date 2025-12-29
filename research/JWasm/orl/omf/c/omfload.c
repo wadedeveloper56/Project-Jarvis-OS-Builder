@@ -938,7 +938,7 @@ static orl_return       doLIDATA( omf_file_handle ofh, omf_rectyp typ )
     len -= wordsize;
     if( len < 0 ) return( ORL_ERROR );
 
-    /* LIData must be processed after the fixups have been read in,  in order
+    /* LIData must be processed after the fixups have been _read in,  in order
      * to clone them appropriately, evil but necessary, we have no choice in
      * the matter, the conversion will create an LEData which will then be
      * added to the section.

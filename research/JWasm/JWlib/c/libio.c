@@ -70,7 +70,7 @@ void ResetLibIo( void )
 
     while( fileList ) {
         lio = fileList->next;
-        close( fileList->io );
+        _close( fileList->io );
         MemFreeGlobal( fileList->name );
         MemFreeGlobal( fileList );
         fileList = lio;
@@ -82,20 +82,20 @@ libfile LibOpen( char *name, int access )
     int io;
     libfile lio;
     if( access & O_CREAT ) {
-        io = open( name, access, S_IRUSR | S_IRGRP | S_IROTH |
+        io = _open( name, access, S_IRUSR | S_IRGRP | S_IROTH |
                                  S_IWUSR | S_IWGRP | S_IWOTH );
     } else {
-        io = open( name, access );
+        io = _open( name, access );
     }
 
 
     if( io == -1 && errno == EMFILE ) {
         CloseOneInputLib();
         if( access & O_CREAT ) {
-            io = open( name, access, S_IRUSR | S_IRGRP | S_IROTH | 
+            io = _open( name, access, S_IRUSR | S_IRGRP | S_IROTH | 
                                      S_IWUSR | S_IWGRP | S_IWOTH );
         } else {
-            io = open( name, access );
+            io = _open( name, access );
         }
     }
     if( io == -1 ) {
@@ -139,7 +139,7 @@ void BadLibrary( char *name )
 static void LibFlush( libfile lio )
 {
     if( lio->buf_size ) {
-        if( write( lio->io, lio->buffer, lio->buf_size ) != lio->buf_size ) {
+        if( _write( lio->io, lio->buffer, lio->buf_size ) != lio->buf_size ) {
             LibWriteError( lio );
         }
         lio->buf_size = 0;
@@ -156,7 +156,7 @@ file_offset LibRead( libfile lio, void *buff, file_offset len )
         if( b_read ) {
             memcpy( buff, lio->buffer + lio->buf_pos, b_read );
         }
-        ret = read( lio->io, (char *)buff + b_read, len - b_read );
+        ret = _read( lio->io, (char *)buff + b_read, len - b_read );
         if( ret < 0 ) {
             LibReadError( lio );
         }
@@ -171,7 +171,7 @@ file_offset LibRead( libfile lio, void *buff, file_offset len )
         lio->buf_pos += b_read;
     }
     if( lio->buf_pos == lio->buf_size ) {
-        ret = read( lio->io, lio->buffer, READ_FILE_BUFFER_SIZE );
+        ret = _read( lio->io, lio->buffer, READ_FILE_BUFFER_SIZE );
         if( ret < 0 ) {
             LibReadError( lio );
         }
@@ -196,7 +196,7 @@ void LibWrite( libfile lio, void *buff, file_offset len )
 
     if( len > WRITE_FILE_BUFFER_SIZE ) {
         LibFlush( lio );
-        if( write( lio->io, buff, len ) != len ) {
+        if( _write( lio->io, buff, len ) != len ) {
             LibWriteError( lio );
         }
         return;
@@ -217,7 +217,7 @@ void LibClose( libfile lio )
     if( lio->access & O_WRONLY ) {
         LibFlush( lio );
     }
-    if( close( lio->io ) != 0 ) {
+    if( _close( lio->io ) != 0 ) {
         LibWriteError( lio );
     }
     if( fileList == lio ) {
@@ -239,7 +239,7 @@ void LibSeek( libfile lio, long where, int whence )
         LibFlush( lio );
     } else {
         if( whence == SEEK_END ) {
-            where += filelength( lio->io ) - LibTell( lio );
+            where += _filelength( lio->io ) - LibTell( lio );
             whence = SEEK_CUR;
         } else if( whence == SEEK_SET ) {
             where -= LibTell( lio );
@@ -251,7 +251,7 @@ void LibSeek( libfile lio, long where, int whence )
         }
         where -= lio->buf_size - lio->buf_pos;
     }
-    lseek( lio->io, where, whence );
+    _lseek( lio->io, where, whence );
     lio->buf_size = 0;
     lio->buf_pos = 0;
 }
@@ -259,8 +259,8 @@ void LibSeek( libfile lio, long where, int whence )
 file_offset LibTell( libfile lio )
 {
     if( lio->access & O_WRONLY ) {
-        return( tell( lio->io ) + lio->buf_size );
+        return( _tell( lio->io ) + lio->buf_size );
     } else {
-        return( tell( lio->io ) - lio->buf_size + lio->buf_pos );
+        return( _tell( lio->io ) - lio->buf_size + lio->buf_pos );
     }
 }

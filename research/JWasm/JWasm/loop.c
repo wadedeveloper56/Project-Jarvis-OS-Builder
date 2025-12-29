@@ -63,7 +63,7 @@ ret_code LoopDirective( int i, struct asm_tok tokenarray[] )
             opnd.value = 0;
         } else if( tokenarray[i].token != T_FINAL ) {
             EmitErr( SYNTAX_ERROR_EX, tokenarray[i].tokpos );
-            /* v2.09: don't exit, the macro lines must be read first. */
+            /* v2.09: don't exit, the macro lines must be _read first. */
             //return( ERROR );
             opnd.value = 0;
         }

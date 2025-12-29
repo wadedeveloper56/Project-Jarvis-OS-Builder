@@ -148,9 +148,9 @@ static void ReOrderClasses( section *sec )
         } else {
             name = currcl->name;
             if( currcl->flags & CLASS_CODE ) {
-                if( stricmp( name, OvlMgrClass ) == 0 ) {
+                if( _stricmp( name, OvlMgrClass ) == 0 ) {
                     ord = ORD_OVLMGR;
-                } else if( stricmp( name, BegCodeClassName ) == 0 ) {
+                } else if( _stricmp( name, BegCodeClassName ) == 0 ) {
                     ord = ORD_BEGCODE;
                 } else {
                     ord = ORD_CODE;
@@ -162,13 +162,13 @@ static void ReOrderClasses( section *sec )
             } else if( ( FmtData.type & (MK_PE|MK_ELF) ) && ( currcl->flags & CLASS_READ_ONLY ) ) {
                 ord = ORD_OTHER;
             } else {     // it's the DGROUP segments.
-                if( stricmp( name, BSSClassName ) == 0 ) {
+                if( _stricmp( name, BSSClassName ) == 0 ) {
                     ord = ORD_BSS;
-                } else if( stricmp( name, StackClassName ) == 0 ) {
+                } else if( _stricmp( name, StackClassName ) == 0 ) {
                     ord = ORD_STACK;
-                } else if( stricmp( name, BegDataClassName ) == 0 ) {
+                } else if( _stricmp( name, BegDataClassName ) == 0 ) {
                     ord = ORD_BEGDGROUP;
-                } else if( stricmp( name, DataClassName ) == 0 ) {
+                } else if( _stricmp( name, DataClassName ) == 0 ) {
                     ord = ORD_DATA;
                 } else if( currcl->flags & CLASS_LXDATA_SEEN ) {
                     ord = ORD_INITDGROUP;
@@ -198,7 +198,7 @@ static void ReOrderClasses( section *sec )
                 break;
             currseg = prevseg->next_seg;
             for( ;; ) {
-                if( stricmp( currseg->segname, BegTextSegName ) == 0 ) {
+                if( _stricmp( currseg->segname, BegTextSegName ) == 0 ) {
                     RingPromote( &currcl->segs, currseg, prevseg );
                     break;
                 }
@@ -249,7 +249,7 @@ static void SortClasses( section *sec )
         CheckClassUninitialized( currcl );
         NewRing = &DefaultRing;  // In case no special class is found
         for( MatchClass = sec->orderlist; MatchClass != NULL; MatchClass = MatchClass->NextClass ) {
-            if( stricmp( currcl->name, MatchClass->Name ) == 0 ) { // search order list for name match
+            if( _stricmp( currcl->name, MatchClass->Name ) == 0 ) { // search order list for name match
                 NewRing = &(MatchClass->Ring);   // if found save ptr to instance
                 if( MatchClass->FixedAddr) {     // and copy any flags or address from it
                     currcl->flags |= CLASS_FIXED;
@@ -282,7 +282,7 @@ static void SortClasses( section *sec )
                 currseg = prevseg->next_seg;
 
                 for( ;; ) {
-                    if( stricmp( currseg->segname, MatchSeg->Name ) == 0 ) {
+                    if( _stricmp( currseg->segname, MatchSeg->Name ) == 0 ) {
                         if( MatchSeg->FixedAddr) {     // and copy any flags or address from it
                             currseg->segflags |= SEG_FIXED;
                             currseg->seg_addr = MatchSeg->Base;
@@ -320,7 +320,7 @@ static void SortClasses( section *sec )
     for( MatchClass = sec->orderlist; MatchClass != NULL; MatchClass = MatchClass->NextClass ) {
          if( MatchClass->Copy && MatchClass->Ring != NULL ) {   // If this is a duplicate destination, find the source
              for( currcl = sec->classlist; currcl != NULL; currcl = currcl->next_class ) {
-                if( stricmp( MatchClass->SrcName, currcl->name ) == 0 ) {
+                if( _stricmp( MatchClass->SrcName, currcl->name ) == 0 ) {
                     MatchClass->Ring->DupClass = currcl;
                     MatchClass->Ring->flags |= CLASS_COPY;
                     break;
@@ -431,7 +431,7 @@ bool IsCodeClass( char *name, unsigned namelen )
 /*****************************************************/
 {
     return( ( namelen >= CODECL_SIZE )
-        && ( memicmp( name + namelen - CODECL_SIZE, CodeClassName, CODECL_SIZE ) == 0 ) );
+        && ( _memicmp( name + namelen - CODECL_SIZE, CodeClassName, CODECL_SIZE ) == 0 ) );
 }
 
 #define CONSTCL_SIZE ( sizeof( ConstClassName ) - 1 )
@@ -440,7 +440,7 @@ bool IsConstClass( char *name, unsigned namelen )
 /******************************************************/
 {
     return( ( namelen >= CONSTCL_SIZE )
-        && ( memicmp( name + namelen - CONSTCL_SIZE, ConstClassName, CONSTCL_SIZE ) == 0 ) );
+        && ( _memicmp( name + namelen - CONSTCL_SIZE, ConstClassName, CONSTCL_SIZE ) == 0 ) );
 }
 
 #define STACKCL_SIZE ( sizeof( StackClassName ) - 1 )
@@ -449,7 +449,7 @@ bool IsStackClass( char *name, unsigned namelen )
 /******************************************************/
 {
     return( ( namelen >= STACKCL_SIZE )
-        && ( stricmp( name, StackClassName ) == 0 ) );
+        && ( _stricmp( name, StackClassName ) == 0 ) );
 }
 
 /* -----------------------Allocating Segments-------------------------------- */
@@ -1255,7 +1255,7 @@ static void FillClassFlags( char *name, unsigned_16 flags )
     class_entry     *class;
 
     for( class = Root->classlist; class != NULL; class = class->next_class ) {
-        if( stricmp( class->name, name ) == 0 ) {
+        if( _stricmp( class->name, name ) == 0 ) {
             RingLookup( class->segs, SetClassFlag, &flags );
             return;
         }

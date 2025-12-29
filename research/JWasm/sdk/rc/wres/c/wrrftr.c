@@ -36,7 +36,7 @@
 
 int WResReadFixedTypeRecord( WResTypeInfo * newtype, WResFileID handle )
 /**********************************************************************/
-/* read the fixed part of a Type info record */
+/* _read the fixed part of a Type info record */
 {
     int                 numread;
 
@@ -53,7 +53,7 @@ int WResReadFixedTypeRecord( WResTypeInfo * newtype, WResFileID handle )
 
 int WResReadFixedTypeRecord2( WResTypeInfo * newtype, WResFileID handle )
 /**********************************************************************/
-/* read the fixed part of a Type info record for version 2 or before */
+/* _read the fixed part of a Type info record for version 2 or before */
 {
     int                 numread;
     WResTypeInfo2       info;

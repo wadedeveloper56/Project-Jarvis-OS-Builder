@@ -1047,7 +1047,7 @@ void LstWriteCRef( void )
     uint_32         SymCount;
     struct qdesc    queues[LQ_LAST];
 
-    /* no point going through the motions if lst file isn't open */
+    /* no point going through the motions if lst file isn't _open */
     if( CurrFile[LST] == NULL || Options.no_symbol_listing == TRUE ) {
         return;
     }

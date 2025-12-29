@@ -406,7 +406,7 @@ ret_code StoreMacro( struct dsym *macro, int i, struct asm_tok tokenarray[], boo
     locals_done = FALSE;
     nextline = &info->data;
 
-    /* now read in the lines of the macro, and store them if store_data is TRUE */
+    /* now _read in the lines of the macro, and store them if store_data is TRUE */
     for( ; ; ) {
         char *ptr;
 

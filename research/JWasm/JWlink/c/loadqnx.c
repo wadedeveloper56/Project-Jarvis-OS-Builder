@@ -241,7 +241,7 @@ static void WriteQNXData( unsigned_32 * segments )
 
     first = TRUE;
     InVerifySegment = FALSE;
-    /* write all read/write segment data */
+    /* write all _read/write segment data */
     RWEndRec.signature = 0;
     for( grp = Groups; grp != NULL; grp = grp->next_group ){
         if( grp->u.qnxflags == QNX_READ_WRITE && grp->totalsize != 0 ) {
@@ -261,7 +261,7 @@ static void WriteQNXData( unsigned_32 * segments )
     WriteLoad( &record, sizeof( lmf_record ) );
     RWEndRec.verify ^= (unsigned_16) ~0;
     WriteLoad( &RWEndRec, sizeof( RWEndRec ) );
-    /* write all read only segment data */
+    /* write all _read only segment data */
     for( grp = Groups; grp != NULL; grp = grp->next_group ){
         if( grp->u.qnxflags != QNX_READ_WRITE && grp->totalsize != 0 ) {
             WriteQNXGroup( grp, segments );
@@ -287,12 +287,12 @@ static bool CheckQNXGrpFlag( void *_seg, void *_grp )
 // specified.
 
     if( sflags < 0x10 ) {
-        if( !(sflags & 1) ) {     // if can read/write or exec/read
+        if( !(sflags & 1) ) {     // if can _read/write or exec/_read
             grp->u.qnxflags &= ~1;       // can for all segments.
             return TRUE;                // no need to check others
         }
     } else {
-// make segments read/write or exec/read unless every segment is specifically
+// make segments _read/write or exec/_read unless every segment is specifically
 // set otherwise.
         grp->u.qnxflags &= ~1;
         return TRUE;

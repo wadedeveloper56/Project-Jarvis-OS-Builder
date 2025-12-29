@@ -1577,7 +1577,7 @@ static void ReadExports( unsigned_32 namestart, unsigned_32 nameend,
 
 void ReadPEExportTable( f_handle file, pe_hdr_table_entry *base )
 /***********************************************************************/
-/* read a PE export table, and set ordinal values accordingly. */
+/* _read a PE export table, and set ordinal values accordingly. */
 {
     pe_export_directory table;
     char                *fname;

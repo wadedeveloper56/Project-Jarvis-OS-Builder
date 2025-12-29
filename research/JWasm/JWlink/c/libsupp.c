@@ -126,7 +126,7 @@ bool ModNameCompare( char *tname, char *membname )
     namestart = RemovePath( tname, &lentheadr );
     lenmember = strlen( membname );
     if( lentheadr == lenmember ) {
-        if( memicmp( namestart, membname, lenmember ) == 0 ) {
+        if( _memicmp( namestart, membname, lenmember ) == 0 ) {
             return( TRUE );
         }
     }

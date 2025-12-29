@@ -36,7 +36,7 @@ int SymbolNameCmp( const char *s1, const char *s2)
     if( Options.respect_case ) {
         return( strcmp( s1, s2 ) );
     } else {
-        return( stricmp( s1, s2 ) );
+        return( _stricmp( s1, s2 ) );
     }
 }
 
@@ -190,7 +190,7 @@ char *MakeTmpName( char *buffer )
         sprintf( name, "_wlib%03ld", count );
         _makepath( buffer, drive, dir, name, "$$$" );
 
-        if( access( buffer, 0 ) != 0 ) {
+        if( _access( buffer, 0 ) != 0 ) {
             break;
         }
     }

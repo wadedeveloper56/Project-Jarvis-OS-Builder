@@ -723,7 +723,7 @@ is_quote:
 
 /*
  * A '@' was found in the cmdline. It's not an environment variable,
- * so check if it is a file and, if yes, read it.
+ * so check if it is a file and, if yes, _read it.
  */
 
 static char *ReadParamFile( const char *name )

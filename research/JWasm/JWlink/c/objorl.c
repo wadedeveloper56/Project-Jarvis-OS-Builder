@@ -203,7 +203,7 @@ void ORLSkipObj( file_list *list, unsigned long *loc )
     orl_file_handle     filehdl;
 
     ORLSeek( list, *loc, SEEK_SET );
-    filehdl = InitFile();               // assumes that entire file is read!
+    filehdl = InitFile();               // assumes that entire file is _read!
     *loc = ORLSeek( list, 0, SEEK_CUR );
     FiniFile( filehdl, list );
 }
@@ -474,7 +474,7 @@ static void AllocSeg( void *_snode, void *dummy )
         }
     }
     isdbi = FALSE;
-    if( memicmp( CoffDebugPrefix, sdata->u.name,
+    if( _memicmp( CoffDebugPrefix, sdata->u.name,
                 sizeof(CoffDebugPrefix) - 1 ) == 0 ) {
         if( CurrMod->modinfo & MOD_IMPORT_LIB ) {
             DEBUG((DBG_OLD,"objorl: AllocSeg() - SEG_DEAD is ON (2)" ));
@@ -484,14 +484,14 @@ static void AllocSeg( void *_snode, void *dummy )
             return;
         }
         isdbi = TRUE;
-        if( stricmp(CoffDebugSymName, sdata->u.name ) == 0 ) {
+        if( _stricmp(CoffDebugSymName, sdata->u.name ) == 0 ) {
             clname = _MSLocalClass;
-        } else if( stricmp(CoffDebugTypeName, sdata->u.name ) == 0 ) {
+        } else if( _stricmp(CoffDebugTypeName, sdata->u.name ) == 0 ) {
             clname = _MSTypeClass;
         } else {
             clname = _DwarfClass;
         }
-    } else if( memicmp( TLSSegPrefix, sdata->u.name,
+    } else if( _memicmp( TLSSegPrefix, sdata->u.name,
                         sizeof(TLSSegPrefix) - 1 ) == 0 ) {
         clname = TLSClassName;
     } else if( sdata->iscode ) {
@@ -584,7 +584,7 @@ static orl_return DeclareSegment( orl_sec_handle sec )
     snode->handle = sec;
     sdata->iscdat = (flags & ORL_SEC_FLAG_COMDAT) != 0;
     len = sizeof( CoffIDataSegName ) - 1;
-    if( strnicmp( CoffIDataSegName, name, len ) == 0 ) {
+    if( _strnicmp( CoffIDataSegName, name, len ) == 0 ) {
         SeenDLLRecord();
         CurrMod->modinfo |= MOD_IMPORT_LIB;
         /* .idata$4, .idata$5 (IAT) and .idata$6 */
@@ -660,11 +660,11 @@ static void ImpProcSymbol( segnode *snode, orl_symbol_type type, char *name,
     if( type & ORL_SYM_TYPE_UNDEFINED ) {
         if( namelen > sizeof(CoffImportRefName) - 1 ) {
             namelen -= sizeof(CoffImportRefName) - 1;
-            if( memicmp( name + namelen, CoffImportRefName,
+            if( _memicmp( name + namelen, CoffImportRefName,
                          sizeof(CoffImportRefName) - 1 ) == 0 ) {
                 _ChkAlloc( ImpModName, namelen + 5 );
                 memcpy( ImpModName, name, namelen );
-                if( memicmp( CurrMod->name + strlen(CurrMod->name)
+                if( _memicmp( CurrMod->name + strlen(CurrMod->name)
                              - 4, ".drv", 4 ) == 0 ) { //KLUDGE!!
                     memcpy( ImpModName + namelen, ".drv", 5 );
                 } else {

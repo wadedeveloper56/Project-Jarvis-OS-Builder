@@ -158,7 +158,7 @@ static void PutARValue( char *element, uint_32 value, uint_8 base, ar_len desire
 {
     ar_len      value_len;
 
-    ultoa( value, element, base );
+    _ultoa( value, element, base );
     value_len = strlen( element );
     if( value_len < desired_len ) {
         PutARPadding( element, value_len, desired_len );

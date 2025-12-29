@@ -83,8 +83,8 @@ int main                        // MAIN-LINE FOR DLL DRIVER
     cmd_line = malloc( len );
     _bgetcmd( cmd_line, len );
     /* Turn on 'ar' mode by setting WLIB$AR env var */
-    if( stricmp( strrchr( args[ 0 ], '\\' ) + 1, "ar.exe" ) == 0 ) {
-        putenv( AR_MODE_ENV "=ON" );
+    if( _stricmp( strrchr( args[ 0 ], '\\' ) + 1, "ar.exe" ) == 0 ) {
+        _putenv( AR_MODE_ENV "=ON" );
     }
     retcode = IdeDrvExecDLL( &info, cmd_line );
     free( cmd_line );

@@ -145,7 +145,7 @@ char *ltoa( long value, char *buffer, int radix )
             value = - value;
         }
     }
-    ultoa( value, p, radix );
+    _ultoa( value, p, radix );
     return( buffer );
 }
 
@@ -742,7 +742,7 @@ static char *__qnx_fullpath(char *fullpath, const char *path)
     msg._io_open.oflag = _IO_HNDL_INFO;
     fd = __resolve_net( _IO_HANDLE, 1, &msg._io_open, path, 0, fullpath );
     if( fd != -1) {
-        close(fd);
+        _close(fd);
     } else if (errno != ENOENT) {
         return 0;
     } else {
@@ -763,7 +763,7 @@ char *_sys_fullpath( char *buff, const char *path, size_t size )
     char *         filepart;
     DWORD               rc;
 
-    if( stricmp( path, __F_NAME("con",L"con") ) == 0 ) {
+    if( _stricmp( path, __F_NAME("con",L"con") ) == 0 ) {
         _WILL_FIT( 3 );
         return( strcpy( buff, __F_NAME("con",L"con") ) );
     }
@@ -1133,7 +1133,7 @@ int memicmp( const void *in_s1, const void *in_s2, size_t len )
 
 off_t tell( int handle )
 {
-    return( lseek( handle, 0L, SEEK_CUR ) );
+    return( _lseek( handle, 0L, SEEK_CUR ) );
 }
 /****************************************************************************
 *
@@ -1206,13 +1206,13 @@ long filelength( int handle )
 {
     long                current_posn, file_len;
 
-    current_posn = lseek( handle, 0L, SEEK_CUR );
+    current_posn = _lseek( handle, 0L, SEEK_CUR );
     if( current_posn == -1L )
     {
         return( -1L );
     }
-    file_len = lseek( handle, 0L, SEEK_END );
-    lseek( handle, current_posn, SEEK_SET );
+    file_len = _lseek( handle, 0L, SEEK_END );
+    _lseek( handle, current_posn, SEEK_SET );
 
     return( file_len );
 }
@@ -1227,10 +1227,10 @@ int eof( int handle )         /* determine if at EOF */
 {
     off_t   current_posn, file_len;
 
-    file_len = filelength( handle );
+    file_len = _filelength( handle );
     if( file_len == -1L )
         return( -1 );
-    current_posn = tell( handle );
+    current_posn = _tell( handle );
     if( current_posn == -1L )
         return( -1 );
     if( current_posn == file_len )
@@ -1383,7 +1383,7 @@ void _searchenv( const char *name, const char *env_var, char *buffer )
             if( name[0] == '/' ) break;
             if( (name[0] != '\0') && (name[1] == ':') ) break;
 #endif
-            getcwd( buffer, _MAX_PATH );
+            _getcwd( buffer, _MAX_PATH );
             len = strlen( buffer );
             p = &buffer[ len ];
             if( p[-1] != PATH_SEPARATOR ) {
@@ -1432,7 +1432,7 @@ void _searchenv( const char *name, const char *env_var, char *buffer )
                 if( len < _MAX_PATH ) {
                     strcat( p2, name );
                     /* check to see if file exists */
-                    if( access( buffer, 0 ) == 0 ) {
+                    if( _access( buffer, 0 ) == 0 ) {
                         __set_errno( prev_errno );
                         return;
                     }

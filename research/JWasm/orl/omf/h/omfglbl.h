@@ -36,13 +36,13 @@
 #include "orlintnl.h"
 #include "omftype.h"
 
-#define _ClientRead( a, b )             ((a)->omf_hnd->funcs->read( a->file, b ))
+#define _ClientRead( a, b )             ((a)->omf_hnd->funcs->_read( a->file, b ))
 #define _ClientSeek( a, b, c )          ((a)->omf_hnd->funcs->seek( a->file, b, c ))
 #define _ClientAlloc( a, b )            ((a)->omf_hnd->funcs->alloc( b ))
 #define _ClientFree( a, b )             ((a)->omf_hnd->funcs->free( b ))
 #define _ClientReAlloc( a, b, c )       ((a)->omf_hnd->funcs->realloc( b, c ))
 
-#define _ClientSecRead( a, b, c )       ((a)->omf_file_hnd->omf_hnd->funcs->read( a->omf_file_hnd->file, b, c ))
+#define _ClientSecRead( a, b, c )       ((a)->omf_file_hnd->omf_hnd->funcs->_read( a->omf_file_hnd->file, b, c ))
 #define _ClientSecSeek( a, b, c )       ((a)->omf_file_hnd->omf_hnd->funcs->seek( a->omf_file_hnd->file, b, c ))
 #define _ClientSecAlloc( a, b )         ((a)->omf_file_hnd->omf_hnd->funcs->alloc( b ))
 #define _ClientSecFree( a, b )          ((a)->omf_file_hnd->omf_hnd->funcs->free( b ))

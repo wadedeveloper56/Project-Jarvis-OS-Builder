@@ -3086,7 +3086,7 @@ static ret_code calculate( struct expr *opnd1, struct expr *opnd2, const struct 
     return( NOT_ERROR );
 }
 
-/* this code runs BEFORE the - right - operand of an operator is read */
+/* this code runs BEFORE the - right - operand of an operator is _read */
 
 static void PrepareOp( struct expr *opnd, const struct expr *old, const struct asm_tok *oper )
 /********************************************************************************************/
@@ -3183,7 +3183,7 @@ static ret_code evaluate( struct expr *opnd1, int *i, struct asm_tok tokenarray[
                    evallvl, tokenarray[curr_operator].string_ptr, opnd1->sym, (opnd1->type ? opnd1->type->name : "NULL") ));
 
         if ( opnd1->kind != EXPR_EMPTY ) {
-            /* check operator behind operand. Must be binary or open bracket */
+            /* check operator behind operand. Must be binary or _open bracket */
             if ( tokenarray[curr_operator].token == '+' || tokenarray[curr_operator].token == '-' )
                 tokenarray[curr_operator].specval = BINARY_PLUSMINUS;
             else if( !is_operator( tokenarray[curr_operator].token ) || tokenarray[curr_operator].token == T_UNARY_OPERATOR ) {
@@ -3201,7 +3201,7 @@ static ret_code evaluate( struct expr *opnd1, int *i, struct asm_tok tokenarray[
         init_expr( &opnd2 );
         PrepareOp( &opnd2, opnd1, &tokenarray[curr_operator] );
 
-        /* read the (next) operand.
+        /* _read the (next) operand.
          */
 
         if( tokenarray[curr_operator].token == T_OP_BRACKET ||

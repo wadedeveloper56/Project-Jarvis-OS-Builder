@@ -265,7 +265,7 @@ extern int ResReadDialogBoxHeader32( DialogBoxHeader32 *head, WResFileID handle 
     int         fixedbytes;
     uint_16     tmp16;
 
-    /* read in the fixed size portion of the structure */
+    /* _read in the fixed size portion of the structure */
     /* the fixed portion is everything up to, but not including, MenuName */
     fixedbytes = offsetof( DialogBoxHeader32, MenuName );
     numread = WRESREAD( handle, head, fixedbytes );
@@ -310,7 +310,7 @@ extern int ResReadDialogBoxHeader( DialogBoxHeader * head, WResFileID handle )
     int     fixedbytes;
     uint_16 tmp16;
 
-    /* read in the fixed size portion of the structure */
+    /* _read in the fixed size portion of the structure */
     /* the fixed portion is everything up to, but not including, MenuName */
     fixedbytes = offsetof( DialogBoxHeader, MenuName );
     numread = WRESREAD( handle, head, fixedbytes );
@@ -353,7 +353,7 @@ extern int ResIsDialogEx( WResFileID handle )
     int     numread;
     uint_16   signa[2];
 
-    /* read in the signature part of the header and check it */
+    /* _read in the signature part of the header and check it */
     numread = WRESREAD( handle, signa, sizeof(signa) );
     if( numread != sizeof(signa) ) {
         WRES_ERROR( numread == -1 ? WRS_READ_FAILED:WRS_READ_INCOMPLETE );
@@ -582,7 +582,7 @@ static ControlClass * ReadControlClass( WResFileID handle )
 
     restofstring = NULL;
 
-    /* read in the first byte */
+    /* _read in the first byte */
     error = ResReadUint8( &(class), handle );
     if (!error) {
         if (class & 0x80 || class == '\0') {
@@ -632,7 +632,7 @@ static ControlClass * Read32ControlClass( WResFileID handle )
 
     restofstring = NULL;
 
-    /* read in the first word */
+    /* _read in the first word */
     error = ResReadUint16( &flags, handle );
     if( !error ) {
         if( flags == 0xffff ) {
@@ -682,7 +682,7 @@ extern int ResReadDialogBoxControl( DialogBoxControl * control,
     int         fixedbytes;
     uint_8      tmp8;
 
-    /* read the fixed part of the structure */
+    /* _read the fixed part of the structure */
     /* the structure is fixed up to, but not including, ClassID */
     fixedbytes = offsetof( DialogBoxControl, ClassID );
     numread = WRESREAD( handle, control, fixedbytes );
@@ -718,7 +718,7 @@ extern int ResReadDialogBoxControl32( DialogBoxControl32 * control,
 
     error = ResPadDWord( handle );
 
-    /* read the fixed part of the structure */
+    /* _read the fixed part of the structure */
     /* the structure is fixed up to, but not including, ClassID */
     if( !error ) {
         fixedbytes = offsetof( DialogBoxControl32, ClassID );
@@ -755,7 +755,7 @@ extern int ResReadDialogExControl32( DialogBoxExControl32 * control,
 
     error = ResPadDWord( handle );
 
-    /* read the fixed part of the structure */
+    /* _read the fixed part of the structure */
     /* the structure is fixed up to, but not including, ClassID */
     if( !error ) {
         fixedbytes = offsetof( DialogBoxExControl32, ClassID );
@@ -790,17 +790,17 @@ extern ControlClass * ResNameOrOrdToControlClass( const ResNameOrOrdinal * name)
     if (name->ord.fFlag == 0xff) {
         class = ResNumToControlClass( name->ord.wOrdinalID );
     } else {
-        if (stricmp( name->name, "button" ) == 0) {
+        if (_stricmp( name->name, "button" ) == 0) {
             class = ResNumToControlClass( CLASS_BUTTON );
-        } else if (stricmp( name->name, "edit" ) == 0) {
+        } else if (_stricmp( name->name, "edit" ) == 0) {
             class = ResNumToControlClass( CLASS_EDIT );
-        } else if (stricmp( name->name, "static" ) == 0) {
+        } else if (_stricmp( name->name, "static" ) == 0) {
             class = ResNumToControlClass( CLASS_STATIC );
-        } else if (stricmp( name->name, "listbox" ) == 0) {
+        } else if (_stricmp( name->name, "listbox" ) == 0) {
             class = ResNumToControlClass( CLASS_LISTBOX );
-        } else if (stricmp( name->name, "scrollbar" ) == 0) {
+        } else if (_stricmp( name->name, "scrollbar" ) == 0) {
             class = ResNumToControlClass( CLASS_SCROLLBAR );
-        } else if (stricmp( name->name, "combobox" ) == 0) {
+        } else if (_stricmp( name->name, "combobox" ) == 0) {
             class = ResNumToControlClass( CLASS_COMBOBOX );
         } else {
             /* space for the '\0' is reserve in the ControlClass structure */

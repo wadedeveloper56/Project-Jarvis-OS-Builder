@@ -75,7 +75,7 @@ static void AddToDgroup( enum sim_seg segm, const char *name )
     AddLineQueueX( "%s %r %s", szDgroup, T_GROUP, name );
 }
 
-/* generate code to close the current segment */
+/* generate code to _close the current segment */
 
 static void close_currseg( void )
 /*******************************/
@@ -218,7 +218,7 @@ ret_code SimplifiedSegDir( int i, struct asm_tok tokenarray[] )
     }
 
     if( type != SIM_STACK )
-        close_currseg();  /* emit a "xxx ENDS" line to close current seg */
+        close_currseg();  /* emit a "xxx ENDS" line to _close current seg */
 
     if ( name == NULL )
         init = ( ModuleInfo.simseg_init & ( 1 << type ) );
@@ -357,7 +357,7 @@ ret_code ModelSimSegmInit( int model )
 void ModelSimSegmExit( void )
 /***************************/
 {
-    /* a model is set. Close current segment if one is open. */
+    /* a model is set. Close current segment if one is _open. */
     if ( CurrSeg ) {
         close_currseg();
         RunLineQueue();

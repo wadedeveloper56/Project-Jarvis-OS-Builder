@@ -35,7 +35,7 @@
 #include <string.h>
 #include <ctype.h>
 #ifdef _BSD_SOURCE
-//#define stricmp strcasecmp
+//#define _stricmp strcasecmp
 #endif
 
 #include "omfload.h"
@@ -84,7 +84,7 @@ static int nameCmp( omf_file_handle ofh, omf_idx n1, omf_idx n2 )
     if( len1 < 0 ) return( 1 );
     len2 = OmfGetLName( ofh->lnames, n2, name2 );
     if( len1 != len2 ) return( 1 );
-    return( stricmp( name1, name2 ) );
+    return( _stricmp( name1, name2 ) );
 }
 
 

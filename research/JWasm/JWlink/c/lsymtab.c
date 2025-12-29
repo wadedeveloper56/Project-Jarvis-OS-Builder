@@ -601,7 +601,7 @@ void ResetSym( void )
     SymList = NULL;
     HeadSym = NULL;
     LastSym = NULL;
-    CmpRtn = memicmp;
+    CmpRtn = _memicmp;
     GetSymBlock();
     ClearHashPointers();
 }
@@ -767,7 +767,7 @@ void SetSymCase( void )
     if( LinkFlags & CASE_FLAG ) {
         CmpRtn = memcmp;
     } else {
-        CmpRtn = memicmp;
+        CmpRtn = _memicmp;
     }
 }
 

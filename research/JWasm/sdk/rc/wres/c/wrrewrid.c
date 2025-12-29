@@ -37,7 +37,7 @@
 int WResReadExtraWResID( WResID * name, WResFileID handle )
 /*********************************************************/
 /* reads the extra bytes into the end of the structure */
-/* assumes that the fixed portion has just been read in and is in name and */
+/* assumes that the fixed portion has just been _read in and is in name and */
 /* that name is big enough to hold the extra bytes */
 {
     int         numread;

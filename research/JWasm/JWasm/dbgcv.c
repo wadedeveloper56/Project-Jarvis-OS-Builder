@@ -540,7 +540,7 @@ static void cv_write_type( struct dbgcv *cv, struct asym *sym )
     count.ofs = 0;
     cv_enum_fields( type, cv_cntproc, cv, &count );
 
-    /* WinDbg wants embedded structs to have a name - else it won't allow to "open" it. */
+    /* WinDbg wants embedded structs to have a name - else it won't allow to "_open" it. */
     namesize = ( sym->name_size ? sym->name_size : 9 );  /* 9 is sizeof("__unnamed") */
 
     sym->cvtyperef = cv->currtype++;

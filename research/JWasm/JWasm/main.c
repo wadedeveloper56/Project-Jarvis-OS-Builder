@@ -65,7 +65,7 @@ int main( int argc, char **argv )
     int     numFiles = 0;
     int     rc = 0;
 #if WILDCARDS
-    /* v2.11: _findfirst/next/close() handle, should be of type intptr_t.
+    /* v2.11: _findfirst/next/_close() handle, should be of type intptr_t.
      * since this type isn't necessarily defined, type long is used as substitute.
      */
     long    fh;

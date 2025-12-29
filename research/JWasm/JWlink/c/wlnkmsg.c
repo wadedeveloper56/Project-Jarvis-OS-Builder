@@ -67,7 +67,7 @@ static const char * const msgtexts[] = {
 
 int WLinkItself;   // file handle
 
-#define NO_RES_MESSAGE "could not open message resource file"
+#define NO_RES_MESSAGE "could not _open message resource file"
 
 static void Msg_Add_Arg( MSG_ARG *arginfo, char typech, va_list *args );
 

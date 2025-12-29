@@ -89,7 +89,7 @@ static int readResList( WResFileID handle, WResTypeNode * currtype,
     for (resnum = 0, error = FALSE; resnum < currtype->Info.NumResources &&
             !error; resnum++) {
 
-        /* read a resource record from disk */
+        /* _read a resource record from disk */
         if( ver < 2 ) {
             error = WResReadFixedResRecord1( &newres1, handle );
             resid = &tmpresid;
@@ -129,7 +129,7 @@ static int readResList( WResFileID handle, WResTypeNode * currtype,
                 memcpy( &(newnode->Info), &newres, sizeof(WResResInfo) );
             }
 
-            /* read the extra bytes (if any) */
+            /* _read the extra bytes (if any) */
             if( extrabytes > 0 ) {
                 error = WResReadExtraWResID( &(newnode->Info.ResName), handle );
             }
@@ -177,7 +177,7 @@ static int readTypeList( WResFileID handle, WResDirHead * currdir,
     /* loop through the list of types */
     for (error = FALSE, typenum = 0; typenum < currdir->NumTypes && !error;
                     typenum++) {
-        /* read a type record from disk */
+        /* _read a type record from disk */
         if( ver < 3 ) {
             error = WResReadFixedTypeRecord2( &newtype, handle );
         } else {
@@ -199,7 +199,7 @@ static int readTypeList( WResFileID handle, WResDirHead * currdir,
             /* copy the new type info into the new node */
             memcpy( &(newnode->Info), &newtype, sizeof(WResTypeInfo) );
 
-            /* read the extra bytes (if any) */
+            /* _read the extra bytes (if any) */
             if( extrabytes > 0 ) {
                 error = WResReadExtraWResID( &(newnode->Info.TypeName),
                         handle );
@@ -208,7 +208,7 @@ static int readTypeList( WResFileID handle, WResDirHead * currdir,
         if( !error ) {
             /* add the type node to the linked list */
             ResAddLLItemAtEnd( (void **)&(currdir->Head), (void **)&(currdir->Tail), newnode );
-            /* read in the list of resources of this type */
+            /* _read in the list of resources of this type */
             error = readResList( handle, newnode, ver, fileinfo );
         }
     }
@@ -224,7 +224,7 @@ static int readWResDir( WResFileID handle, WResDir currdir, void *fileinfo )
     int             error;
     off_t           seekpos;
 
-    /* read the header and check that it is valid */
+    /* _read the header and check that it is valid */
     error = WResReadHeaderRecord( &head, handle );
     if( !error ) {
         if( head.Magic[0] != WRESMAGIC0 || head.Magic[1] != WRESMAGIC1 ) {
@@ -241,7 +241,7 @@ static int readWResDir( WResFileID handle, WResDir currdir, void *fileinfo )
     if( !error ) {
         if( head.WResVer >= 1 ) {
             /*
-             * seek to the extended header and read it
+             * seek to the extended header and _read it
              */
             seekpos = WRESSEEK( handle, sizeof( head ), SEEK_CUR );
             error = (seekpos == -1L);
@@ -266,7 +266,7 @@ static int readWResDir( WResFileID handle, WResDir currdir, void *fileinfo )
             WRES_ERROR( WRS_SEEK_FAILED );
         }
     }
-    /* read in the list of types (and the resources) */
+    /* _read in the list of types (and the resources) */
     if( !error ) {
         error = readTypeList( handle, currdir, head.WResVer, fileinfo );
     }

@@ -64,5 +64,5 @@ extern void BadLibrary( char *name );
 #ifdef __UNIX__
 #define FNCMP strcmp
 #else
-#define FNCMP stricmp
+#define FNCMP _stricmp
 #endif

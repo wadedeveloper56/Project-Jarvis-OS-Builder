@@ -38,7 +38,7 @@
 
 WResFileID  ResOpenFileRO( const char * filename )
 /*************************************************/
-/* use this function to open Microsoft .RES files also */
+/* use this function to _open Microsoft .RES files also */
 {
     WResFileID          ret;
 

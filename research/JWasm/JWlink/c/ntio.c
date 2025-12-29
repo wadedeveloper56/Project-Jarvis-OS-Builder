@@ -76,7 +76,7 @@ enum perms {// names for permissions
 //extern  char    *_BreakFlagPtr;
 #endif
 
-static int      OpenFiles;      // the number of open files
+static int      OpenFiles;      // the number of _open files
 static unsigned LastResult;
 static bool     CaughtBreak;    // set to TRUE if break hit.
 
@@ -183,12 +183,12 @@ f_handle QOpenRW( char *name )
 
 int ResOpen( const char *path, int access, ... )
 /*****************************************************/
-/* a simple open cover routine for wres stuff */
+/* a simple _open cover routine for wres stuff */
 {
     int     perm;
 
     perm = 0666;
-    return( open( path, access, perm ) );
+    return( _open( path, access, perm ) );
 }
 
 f_handle ExeCreate( char *name )
@@ -220,7 +220,7 @@ f_handle ExeOpen( char *name )
 
 unsigned QRead( f_handle file, void *buffer, unsigned len, char *name )
 /****************************************************************************/
-/* read into far memory */
+/* _read into far memory */
 {
     int     h;
 
@@ -277,12 +277,12 @@ void QWriteNL( f_handle file, char *name )
 
 void QClose( f_handle file, char *name )
 /*********************************************/
-/* file close */
+/* file _close */
 {
     int         h;
 
     CheckBreak();
-    h = close( file );
+    h = _close( file );
     OpenFiles--;
     if( h != -1 )
         return;
@@ -295,7 +295,7 @@ long QLSeek( f_handle file, long position, int start, char *name )
     long int    h;
 
     CheckBreak();
-    h = lseek( file, position, start );
+    h = _lseek( file, position, start );
     if( h == -1 && name != NULL ) {
         LnkMsg( ERR+MSG_IO_PROBLEM, "12", name, strerror( errno ) );
     }
@@ -312,7 +312,7 @@ unsigned long QPos( f_handle file )
 /****************************************/
 {
     CheckBreak();
-    return( lseek( file, 0L, SEEK_CUR ) );
+    return( _lseek( file, 0L, SEEK_CUR ) );
 }
 
 unsigned long QFileSize( f_handle file )
@@ -320,7 +320,7 @@ unsigned long QFileSize( f_handle file )
 {
     long        result;
 
-    result = filelength( file );
+    result = _filelength( file );
     if( result == -1 ) {
         result = 0;
     }
@@ -342,7 +342,7 @@ void QDelete( char *name )
 
 bool QReadStr( f_handle file, char *dest, unsigned size, char *name )
 /**************************************************************************/
-/* quick read string (for reading directive file) */
+/* quick _read string (for reading directive file) */
 {
     bool            eof;
     char            ch;
@@ -366,7 +366,7 @@ bool QReadStr( f_handle file, char *dest, unsigned size, char *name )
 bool QIsDevice( f_handle file )
 /************************************/
 {
-    return( isatty( file ) );
+    return( _isatty( file ) );
 }
 
 static f_handle NSOpen( char *name, unsigned mode )

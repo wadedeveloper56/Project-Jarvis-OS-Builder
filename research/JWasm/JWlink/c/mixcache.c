@@ -166,7 +166,7 @@ void * CachePermRead( file_list *list, unsigned long pos, unsigned len )
     if( Multipage ) {
         _LnkReAlloc( result, buf, len );
         _ChkAlloc( TokBuff, TokSize );
-        Multipage = FALSE;              // indicate that last read is permanent.
+        Multipage = FALSE;              // indicate that last _read is permanent.
     } else {
         _ChkAlloc( result, len );
         memcpy( result, buf, len );
@@ -176,7 +176,7 @@ void * CachePermRead( file_list *list, unsigned long pos, unsigned len )
 
 void * CacheRead( file_list * list, unsigned long pos, unsigned len )
 /**************************************************************************/
-/* read len bytes out of the cache. */
+/* _read len bytes out of the cache. */
 {
     unsigned    bufnum;
     unsigned    startnum;

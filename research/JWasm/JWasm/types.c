@@ -304,7 +304,7 @@ ret_code StructDirective( int i, struct asm_tok tokenarray[] )
              */
             sym = CreateTypeSymbol( NULL, name, FALSE );
             /* v2: don't create the struct field here. First the
-             * structure must be read in ( because of alignment issues
+             * structure must be _read in ( because of alignment issues
              */
             // sym = CreateStructField( name_loc, -1, MT_TYPE, dir, 0 );
 
@@ -822,7 +822,7 @@ ret_code GetQualifiedType( int *pi, struct asm_tok tokenarray[], struct qualifie
      * 2. PTR NEARxx | FARxx
      * 3. NEARxx | FARxx PTR [<type>]
      */
-    /* read qualified type */
+    /* _read qualified type */
     for ( type = ERROR; tokenarray[i].token == T_STYPE || tokenarray[i].token == T_BINARY_OPERATOR; i++ ) {
         if ( tokenarray[i].token == T_STYPE ) {
             tmp = tokenarray[i].tokval;

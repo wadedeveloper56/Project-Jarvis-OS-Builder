@@ -85,7 +85,7 @@
 #ifdef CASE_SENSITIVE
     #define FNAMECMPSTR      strcmp      /* for case  sensitive file systems */
 #else
-    #define FNAMECMPSTR      stricmp     /* for case insensitive file systems */
+    #define FNAMECMPSTR      _stricmp     /* for case insensitive file systems */
 #endif
 
 #ifndef BOOL_DEFINED

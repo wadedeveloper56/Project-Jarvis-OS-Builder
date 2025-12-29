@@ -441,7 +441,7 @@ orl_return CoffLoadFileStructure( coff_file_handle coff_file_hnd )
         // we have identified an import_object_header
         // convert short import library structures to long import
         // library structures, change _ClientRead and _ClientSeek
-        // macros to read from converted metadata
+        // macros to _read from converted metadata
         error = convert_import_library( coff_file_hnd );
         if ( error != ORL_OKAY ) {
 			DEBUG((DBG_OLD, "CoffLoadFileStructure(): error 1"));

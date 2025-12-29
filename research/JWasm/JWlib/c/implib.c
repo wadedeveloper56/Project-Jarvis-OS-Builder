@@ -82,7 +82,7 @@ static orl_sec_handle FindSec( obj_file *ofile, char *name )
 
     ORLFileScan( ofile->orl, name, FindHelper );
     if( found_sec_handle == 0 ) {
-        if( !stricmp( ".edata", name ) ) {
+        if( !_stricmp( ".edata", name ) ) {
             export_table_rva = ORLExportTableRVA( ofile->orl );
 
             if( export_table_rva == 0L ) {
