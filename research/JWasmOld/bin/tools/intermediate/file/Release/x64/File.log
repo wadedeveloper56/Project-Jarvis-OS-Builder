@@ -1,0 +1,5 @@
+﻿cl : command line  warning D9025: overriding '/sdl' with '/GS-'
+  pch.cpp
+cl : command line  warning D9025: overriding '/sdl' with '/GS-'
+  File.cpp
+  File.vcxproj -> C:\projects\OSDev\ProjectJarvis\research\JWasm\bin\tools\Release\x64\File.lib
