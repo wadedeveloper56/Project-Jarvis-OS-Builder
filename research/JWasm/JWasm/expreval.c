@@ -1672,7 +1672,36 @@ static ret_code wimask_op( int oper, struct expr *opnd1, struct expr *opnd2, str
 
 #define  res(token, function) function ,
 static ret_code (* const unaryop[])( int, struct expr *, struct expr *, struct asym *, char * ) = {
-#include "unaryop.h"
+//#include "unaryop.h"
+    /* table of unary operators, used in expreval.c */
+res(LOW,       low_op)
+res(HIGH,      high_op)
+res(LOWWORD,   lowword_op)
+res(HIGHWORD,  highword_op)
+#if LOHI32
+res(LOW32,     low32_op)
+res(HIGH32,    high32_op)
+#endif
+res(OFFSET,    offset_op)
+res(LROFFSET,  offset_op)
+#if IMAGERELSUPP
+res(IMAGEREL,  offset_op)
+#endif
+#if SECTIONRELSUPP
+res(SECTIONREL, offset_op)
+#endif
+res(SEG,       seg_op)
+res(OPATTR,    opattr_op)
+res(DOT_TYPE,  opattr_op)
+res(SIZE,      sizlen_op)
+res(SIZEOF,    sizlen_op)
+res(LENGTH,    sizlen_op)
+res(LENGTHOF,  sizlen_op)
+res(SHORT,     short_op)
+res(THIS,      this_op)
+res(TYPE,      type_op)
+res(MASK,      wimask_op)
+res(WIDTH,     wimask_op)
 };
 #undef res
 
@@ -2337,13 +2366,13 @@ static ret_code negative_op( struct expr *opnd1, struct expr *opnd2 )
     MakeConst( opnd2 );
     if( opnd2->kind == EXPR_CONST ) {
         opnd1->kind = EXPR_CONST;
-        opnd1->llvalue = -opnd2->llvalue;
+        opnd1->llvalue = -(int_64)opnd2->llvalue;
         /* v2.06: the unary '-' operator is to work with
          * magnitudes > 64-bit. Current implementation is
          * a bit hackish.
          */
         if ( opnd2->hlvalue )
-            opnd1->hlvalue = -opnd2->hlvalue - 1;
+            opnd1->hlvalue = -(int_64)opnd2->hlvalue - 1;
         opnd1->negative = 1 - opnd2->negative; /* ??? supposed to be used for EXPR_FLOAT only! */
     } else if( opnd2->kind == EXPR_FLOAT ) {
         opnd1->kind = EXPR_FLOAT;

@@ -222,7 +222,7 @@ static void CalcOffset( struct dsym *curr, struct calc_param *cp )
     else
         align = 1 << curr->e.seginfo->alignment;
     //alignbytes = ((offset + (align - 1)) & (-align)) - offset;
-    alignbytes = ((cp->fileoffset + (align - 1)) & (-align)) - cp->fileoffset;
+    alignbytes = ((cp->fileoffset + (align - 1)) & (-(int_32)align)) - cp->fileoffset;
     cp->fileoffset += alignbytes;
 
     if ( grp == NULL ) {
@@ -1241,9 +1241,9 @@ static void pe_set_values( struct calc_param *cp )
     struct dsym *pehdr;
     struct dsym *objtab;
     struct dsym *reloc = NULL;
-    struct IMAGE_PE_HEADER32 *ph32;
+    struct IMAGE_PE_HEADER32 *ph32=NULL;
 #if AMD64_SUPPORT
-    struct IMAGE_PE_HEADER64 *ph64;
+    struct IMAGE_PE_HEADER64 *ph64=NULL;
 #endif
     struct IMAGE_FILE_HEADER *fh;
     struct IMAGE_SECTION_HEADER *section;
@@ -1519,7 +1519,7 @@ static ret_code bin_write_module( struct module_info *modinfo )
     uint_16 reloccnt;
     uint_32 sizemem;
     struct dsym *stack = NULL;
-    uint_8  *hdrbuf;
+    uint_8  *hdrbuf=NULL;
 #endif
     struct calc_param cp = { TRUE, 0 };
 

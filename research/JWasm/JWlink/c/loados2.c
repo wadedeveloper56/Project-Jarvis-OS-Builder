@@ -265,7 +265,7 @@ static FullTypeRecord *findExeTypeRecord( ResTable *restab,
             exe_type_name = (StringItem16 *) ((char *) restab->Str.StringBlock +
                             (exe_type->Info.type - restab->Dir.TableSize));
             if( exe_type_name->NumChars == type->TypeName.ID.Name.NumChars
-                && !memicmp( exe_type_name->Name, type->TypeName.ID.Name.Name,
+                && !_memicmp( exe_type_name->Name, type->TypeName.ID.Name.Name,
                             exe_type_name->NumChars ) ) break;
         } else if( !(type->TypeName.IsName) && exe_type->Info.type & 0x8000 ) {
             /* if they are both numbers */
@@ -349,9 +349,9 @@ static void WriteOS2Resources( int reshandle, WResDir inRes, ResTable *outRes )
     int align = 1 << shift_count;
     int outRes_off;
     WResDirWindow       wind;
-    FullTypeRecord      *exe_type;
-    WResResInfo         *res;
-    WResLangInfo        *lang;
+    FullTypeRecord      *exe_type=NULL;
+    WResResInfo         *res=NULL;
+    WResLangInfo        *lang=NULL;
 
     if( inRes == NULL ) return;
     outRes_off = NullAlign(align) >> shift_count;
@@ -503,7 +503,7 @@ unsigned long ResNonResNameTable( bool dores )
         if( exp->isanonymous ) continue;
         if( (dores && exp->isresident) || (!dores && !exp->isresident) ) {
             if( !(LinkFlags & CASE_FLAG) ) {
-                strupr( exp->name );
+                _strupr( exp->name );
             }
             namelen = strlen( exp->name );
             WriteLoad( &namelen, 1 );

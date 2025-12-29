@@ -437,7 +437,7 @@ ret_code EndstructDirective( int i, struct asm_tok tokenarray[] )
             size++;
         if ( size > dir->e.structinfo->alignment )
             size = dir->e.structinfo->alignment;
-        dir->sym.total_size = (dir->sym.total_size + size - 1) & (-size);
+        dir->sym.total_size = (dir->sym.total_size + size - 1) & (-(int)size);
         DebugMsg1(("EndstructDirective:, struct size after final alignment=%" I32_SPEC "u\n", dir->sym.total_size));
     }
 #endif
@@ -689,7 +689,7 @@ struct asym *CreateStructField( int loc, struct asm_tok tokenarray[], const char
             if ( si->alignment < size )
                 offset = (offset + (si->alignment - 1)) & ( - si->alignment);
             else if ( size )
-                offset = (offset + (size - 1)) & (-size);
+                offset = (offset + (size - 1)) & (-(int_32)size);
         }
         /* adjust the struct's current offset + size.
          The field's size is added in UpdateStructSize()

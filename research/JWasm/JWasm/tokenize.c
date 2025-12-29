@@ -530,8 +530,8 @@ static ret_code get_number( struct asm_tok *buf, struct line_status *p )
 /**********************************************************************/
 {
     char                *ptr = p->input;
-    char                *dig_start;
-    char                *dig_end;
+    char                *dig_start=NULL;
+    char                *dig_end=NULL;
     unsigned            base = 0;
     unsigned            len;
     uint_32             digits_seen;

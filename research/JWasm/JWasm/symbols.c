@@ -588,7 +588,7 @@ void SymFini( void )
 void SymInit( void )
 /******************/
 {
-    struct asym *sym;
+    struct asym *sym=NULL;
     int i;
     time_t    time_of_day;
     struct tm *now;

@@ -268,11 +268,11 @@ void WriteStart( void )
 
     if( StartInfo.addr.off > 0xffff ) {
         sprintf( str_buf, ":04000005%08lx%02x\r\n", StartInfo.addr.off,
-                (-(9 + (StartInfo.addr.off >> 24) + ((StartInfo.addr.off >> 16) & 0xFF) +
+                (-(int_32)(9 + (StartInfo.addr.off >> 24) + ((StartInfo.addr.off >> 16) & 0xFF) +
                 ((StartInfo.addr.off >> 8) & 0xFF) + (StartInfo.addr.off & 0xFF) )) & 0xFF );
     } else {
         sprintf( str_buf, ":04000003%04lx%04lx%02x\r\n", StartInfo.addr.seg, StartInfo.addr.off,
-                (-(7 + (StartInfo.addr.seg >> 8) + (StartInfo.addr.seg & 0xFF) +
+                (-(int_16)(7 + (StartInfo.addr.seg >> 8) + (StartInfo.addr.seg & 0xFF) +
                 (StartInfo.addr.off >> 8) + (StartInfo.addr.off & 0xFF) )) & 0xFF );
     }
     WriteLoad( str_buf, 21 );

@@ -808,12 +808,12 @@ static uint_8 *coff_flushfunc( struct dsym *seg, uint_8 *curr, unsigned size, vo
 static uint_32 SetSymbolIndices( struct module_info *ModuleInfo, struct coffmod *cm )
 /***********************************************************************************/
 {
-    struct qnode *q;
-    struct dsym  *curr;
-    struct asym  *sym;
+    struct qnode *q=NULL;
+    struct dsym  *curr=NULL;
+    struct asym  *sym=NULL;
     uint_32 index;
     uint_32 i;
-    struct asym *lastfproc;
+    struct asym *lastfproc=NULL;
     unsigned lastfile = 0;
 
     index = 0;

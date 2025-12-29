@@ -147,8 +147,8 @@ static void ResetCmdFile( void )
     CmdFlags = CF_UNNAMED;
     Path = NULL;
     memset( &FmtData, 0, sizeof(FmtData) );
-    FmtData.base = NO_BASE_SPEC;
-    FmtData.objalign = NO_BASE_SPEC;
+    FmtData.base = -1;// NO_BASE_SPEC;
+    FmtData.objalign = -1;// NO_BASE_SPEC;
     FmtData.type = MK_ALL;
     FmtData.def_seg_flags = SEG_LEVEL_3;
     FmtData.output_raw = FALSE;

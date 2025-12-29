@@ -2392,7 +2392,7 @@ static ret_code write_default_prologue( void )
          * with SUB, short instructions work up to 127 only.
          */
         if ( Options.masm_compat_gencode || info->localsize == 128 )
-            AddLineQueueX( "add %r, %d", stackreg[ModuleInfo.Ofssize], NUMQUAL - info->localsize );
+            AddLineQueueX( "add %r, %d", stackreg[ModuleInfo.Ofssize], NUMQUAL - (int)info->localsize );
         else
             AddLineQueueX( "sub %r, %d", stackreg[ModuleInfo.Ofssize], NUMQUAL info->localsize );
     }
@@ -2521,7 +2521,7 @@ static void SetLocalOffsets( struct proc_info *info )
             info->localsize = ROUND_UP( info->localsize, align );
         else if ( itemsize ) /* v2.04: skip if size == 0 */
             info->localsize = ROUND_UP( info->localsize, itemsize );
-        curr->sym.offset = - info->localsize;
+        curr->sym.offset = - (int)info->localsize;
         DebugMsg1(("SetLocalOffsets(%s): offset of %s (size=%u) set to %d\n", CurrProc->sym.name, curr->sym.name, curr->sym.total_size, curr->sym.offset));
     }
 

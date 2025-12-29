@@ -564,10 +564,10 @@ void ChkBase( offset align )
 /*********************************/
 // Note: align must be a power of 2
 {
-    if( FmtData.objalign != NO_BASE_SPEC && FmtData.objalign > align ) {
+    if( FmtData.objalign != -1/*NO_BASE_SPEC*/ && FmtData.objalign > align) {
         align = FmtData.objalign;
     }
-    if( FmtData.base != NO_BASE_SPEC &&
+    if( FmtData.base != -1/*NO_BASE_SPEC*/ &&
                 (FmtData.base & (align-1)) != 0 ) {
         LnkMsg( LOC+LINE+WRN+MSG_OFFSET_MUST_BE_ALIGNED, "l", align );
         FmtData.base = (FmtData.base + align-1) & ~(align-1);

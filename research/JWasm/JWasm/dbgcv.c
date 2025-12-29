@@ -472,7 +472,7 @@ static void cv_write_type( struct dbgcv *cv, struct asym *sym )
 /*************************************************************/
 {
     struct dsym *type = (struct dsym *)sym;
-    uint_8      *tmp;
+    uint_8      *tmp=NULL;
     int         namesize;
     int         typelen;
     int         size;
@@ -666,9 +666,9 @@ static void cv_write_symbol( struct dbgcv *cv, struct asym *sym )
     unsigned   ofs;
     enum fixup_types rlctype;
     uint_8     Ofssize;
-    struct fixup *fixup;
-    struct dsym *proc;
-    struct dsym *lcl;
+    struct fixup *fixup=NULL;
+    struct dsym *proc=NULL;
+    struct dsym *lcl=NULL;
     int        i;
     int        cnt[2];
     struct     dsym *locals[2];

@@ -26,7 +26,7 @@ ret_code LoopDirective( int i, struct asm_tok tokenarray[] )
     int arg_loc;
     int len;
     //int skipcomma;
-    char *parmstring;
+    char *parmstring=NULL;
     char *ptr;
     struct dsym *macro;
     bool is_exitm;

@@ -522,7 +522,7 @@ void CalcAddresses( void )
     offset          flat;
 
     DEBUG(( DBG_OLD, "CalcAddresses() enter" ));
-    if( FmtData.base == NO_BASE_SPEC ) {
+    if( FmtData.base == -1/*NO_BASE_SPEC*/) {
         if( FmtData.type & MK_PE ) {
             if ( FmtData.dll ) /* jwlink */
                 FmtData.base = PE_DEFAULT_BASE_DLL;
@@ -552,7 +552,7 @@ void CalcAddresses( void )
     CurrSect = Root;
     if( FmtData.type & MK_PROT_MODE ) {
         AllocFileSegs();
-        if( FmtData.objalign == NO_BASE_SPEC ) {
+        if( FmtData.objalign == -1 /*NO_BASE_SPEC*/) {
             if( FmtData.type & MK_PE ) {
                 if( !( LinkState & HAVE_I86_CODE ) ) {
                     FmtData.objalign = ( 64 * 1024UL );

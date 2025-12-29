@@ -1375,7 +1375,7 @@ static ret_code omf_write_pubdef( void )
 
     q = ModuleInfo.g.PubQueue.head;
     while ( q ) {
-        struct asym     *curr_seg;
+        struct asym     *curr_seg=NULL;
         uint_8          *data;
         unsigned        size;
         uint_8          curr32;
@@ -1384,7 +1384,7 @@ static ret_code omf_write_pubdef( void )
         for ( size = 0, data = StringBufferEnd; q; q = q->next ) {
             unsigned    recsize;
             unsigned    len;
-            struct asym *sym;
+            struct asym *sym=NULL;
             sym = q->sym;
 #if COMDATSUPP
             /* COMDAT symbol? Then write an LNAME record */

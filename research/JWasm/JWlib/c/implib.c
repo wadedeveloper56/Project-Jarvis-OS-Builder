@@ -106,10 +106,10 @@ static bool elfAddImport( arch_header *arch, libfile io )
     orl_sec_handle  sym_sec;
     orl_sec_handle  export_sec;
     orl_sec_handle  string_sec;
-    Elf32_Export    *export_table;
-    Elf32_Sym       *sym_table;
+    Elf32_Export    *export_table=NULL;
+    Elf32_Sym       *sym_table=NULL;
     orl_sec_size    export_size, sym_size;
-    char            *strings;
+    char            *strings=NULL;
     processor_type  processor = WL_PROC_NONE;
     char            *oldname;
     char            *DLLname;
@@ -322,7 +322,7 @@ static void peAddImport( arch_header *arch, libfile io )
     obj_file        *ofile;
     orl_sec_handle  export_sec;
     orl_sec_offset  export_base;
-    char            *edata;
+    char            *edata=NULL;
     char            *DLLName;
     char            *oldname;
     char            *currname;

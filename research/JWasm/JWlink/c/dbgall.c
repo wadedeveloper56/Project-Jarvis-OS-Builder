@@ -553,7 +553,7 @@ void DBIWrite( void )
 // positioned to the right spot.
 {
     outfilelist symfile;
-    outfilelist *save;
+    outfilelist *save=NULL;
 
     DEBUG(( DBG_OLD, "DBIWrite() enter" ));
     if( !( LinkFlags & ANY_DBI_FLAG ) )
