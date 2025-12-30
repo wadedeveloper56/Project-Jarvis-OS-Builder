@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="alink/alink.vcxproj" />
+  <Project Path="alink/alink.vcxproj" Id="eec0128b-2171-4cc1-82e9-9bea058b9b91" />
 </Solution>
