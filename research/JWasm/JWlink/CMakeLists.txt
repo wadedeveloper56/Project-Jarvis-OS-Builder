@@ -1,3 +1,4 @@
+include_directories(h)
 set(CompilerFlags
         CMAKE_CXX_FLAGS
         CMAKE_CXX_FLAGS_DEBUG
@@ -10,5 +11,5 @@ foreach(CompilerFlag ${CompilerFlags})
   string(REPLACE "/MD" "/MT" ${CompilerFlag} "${${CompilerFlag}}")
 endforeach()
 add_definitions(-D__NT__ -DNDEBUG -DDEBUG_OUT -D_CRT_SECURE_NO_WARNINGS)
-FILE(GLOB all_c_files *.c)
+FILE(GLOB all_c_files c/*.c)
 add_executable(JWlink ${all_c_files})
