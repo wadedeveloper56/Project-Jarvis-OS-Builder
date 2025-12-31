@@ -1,5 +1,5 @@
 include_directories(h)
-include_directories(../watcom/h)
+include_directories(../jarvis/h)
 set(CompilerFlags
         CMAKE_CXX_FLAGS
         CMAKE_CXX_FLAGS_DEBUG

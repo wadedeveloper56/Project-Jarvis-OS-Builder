@@ -24,32 +24,38 @@
 *
 *  ========================================================================
 *
-* Description:  Autdependency structure defintion shared between resource
-*               compiler and wmake.
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
 
-#ifdef __cplusplus
-extern "C" {
+#ifndef RESBITMP_INCLUDED
+#define RESBITMP_INCLUDED
+
+#include "watcom.h"
+
+#if !defined( NATURAL_PACK )
+#include "pushpck1.h"
 #endif
 
-#define         DEP_LIST_TYPE   0x79
-#define         DEP_LIST_NAME   "EBWF_XFMMTUPPE"
+typedef struct BitmapInfoHeader {
+    uint_32     Size;
+    uint_32     Width;
+    uint_32     Height;
+    uint_16     Planes;
+    uint_16     BitCount;
+    uint_32     Compression;
+    uint_32     XPelsPerMeter;
+    uint_32     YPelsPerMeter;
+    uint_32     ClrUsed;
+    uint_32     ClrImportant;
+} BitmapInfoHeader;
 
-#include "pushpck1.h"
-
-typedef struct {
-    uint_32     time;           /* file's time taken from stat */
-    uint_16     len;            /* sizeof the name array */
-    char        name[1];        /* dynamic array */
-} _WCUNALIGNED DepInfo;
-
+#if !defined( NATURAL_PACK )
 #include "poppck.h"
+#endif
 
-DepInfo *WResGetAutoDep( char *fname );
-void WResFreeAutoDep( DepInfo *ptr );
+extern int ResWriteBitmapInfoHeader( BitmapInfoHeader *, WResFileID );
 
-#ifdef __cplusplus
-}
 #endif

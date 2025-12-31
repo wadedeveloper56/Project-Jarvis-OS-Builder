@@ -3,7 +3,7 @@ include_directories(../h)
 include_directories(coff/h)
 include_directories(elf/h)
 include_directories(omf/h)
-include_directories(../watcom/h)
+include_directories(../jarvis/h)
 set(CompilerFlags
         CMAKE_CXX_FLAGS
         CMAKE_CXX_FLAGS_DEBUG
