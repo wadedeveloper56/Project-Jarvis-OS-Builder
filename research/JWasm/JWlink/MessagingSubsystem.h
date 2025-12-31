@@ -1,7 +1,7 @@
 #pragma once
 
 #include "FileSubsystem.h"
-#include "types.h"
+#include "globals.h"
 
 #define MSG_LANG_SPACING        1000
 
@@ -58,16 +58,44 @@ typedef struct msg_arg_list {
     MSG_ARG         arg[5];
 } MSG_ARG_LIST;
 
-#define MSG_MAX_ERR_MSG_NUM MSG_UNKNOWN_DIRECTIVE_IGNORED
+#define RESOURCE_MAX_SIZE       128
 #define MSG_ARRAY_SIZE ((MSG_MAX_ERR_MSG_NUM / 8) + 1)
 #define MAX_MSG_SIZE 512
 
 class MessagingSubsystem
 {
+    char* LocFile;
+    char* LocMem;
+    int             LocRec;
+    MSG_ARG_LIST    MsgArgInfo;
+    char* CurrSymName;
+    unsigned long   MaxErrors;
+    bool            BannerPrinted;
     int_8 MsgFlags[MSG_ARRAY_SIZE];
     FileSubsystem* file;
 public:
-	MessagingSubsystem(FileSubsystem* file);
-	~MessagingSubsystem();
+    MessagingSubsystem(FileSubsystem* file);
+    ~MessagingSubsystem();
+    unsigned FmtStr(char*, unsigned, char*, ...);
+    unsigned DoFmtStr(char*, unsigned, char*, va_list*);
+    void     LnkMsg(unsigned, char*, ...);
+    void LnkFatal(char* msg);
+    void     Locator(char*, char*, unsigned);
+    void     WLPrtBanner(void);
+    //bool     SkipSymbol(symbol*);
+    int      SymAlphaCompare(const void*, const void*);
+    unsigned CalcMsgNum(unsigned);
+
+    void     ResetMsg(void);
+    int      Msg_Get(int resourceid, char buffer[]);
+    void     Msg_Do_Put_Args(char rc_buff[], MSG_ARG_LIST*, char*, ...);
+    void     Msg_Put_Args(char rc_buff[], MSG_ARG_LIST*, char*, va_list*);
+
+private:
+    void Msg_Add_Arg(MSG_ARG* arginfo, char typech, va_list* args);
+    void LocateFile(unsigned num);
+    void FileOrder(char rc_buff[], int which_file);
+    void MessageFini(unsigned num, char* buff, unsigned len, char* prefix, unsigned prefixlen, bool waserror);
 };
+
 

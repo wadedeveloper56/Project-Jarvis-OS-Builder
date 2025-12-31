@@ -60,7 +60,7 @@ void* MemorySubsystem::ChkLAlloc(size_t size)
     void* ptr;
     ptr = LAlloc(size);
     if (ptr == NULL) {
-        //FIX ME msg->LnkMsg(FTL + MSG_NO_DYN_MEM, NULL);
+        msg->LnkMsg(FTL + MSG_NO_DYN_MEM, NULL);
     }
     return(ptr);
 }

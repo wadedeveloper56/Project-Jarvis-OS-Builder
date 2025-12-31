@@ -173,6 +173,7 @@
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -240,6 +241,7 @@
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -284,6 +286,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="FileSubsystem.cpp" />
+    <ClCompile Include="globals.cpp" />
     <ClCompile Include="JWlink.cpp" />
     <ClCompile Include="Linker.cpp" />
     <ClCompile Include="MemorySubsystem.cpp" />
@@ -301,10 +304,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FileSubsystem.h" />
+    <ClInclude Include="globals.h" />
     <ClInclude Include="Linker.h" />
     <ClInclude Include="MemorySubsystem.h" />
     <ClInclude Include="MessagingSubsystem.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="structures.h" />
     <ClInclude Include="types.h" />
   </ItemGroup>
   <ItemGroup>
