@@ -33,10 +33,10 @@
 #ifndef RESNAMORD_INCLUDED
 #define RESNAMORD_INCLUDED
 
-#include "watcom.h"
+#include "../../JWlink/watcom/h/watcom.h"
 
 #if !defined( NATURAL_PACK )
-#include "pushpck1.h"
+#include "pshpack1.h"
 #endif
 
 typedef union ResNameOrOrdinal {
@@ -48,7 +48,7 @@ typedef union ResNameOrOrdinal {
 } _WCUNALIGNED ResNameOrOrdinal;
 
 #if !defined( NATURAL_PACK )
-#include "poppck.h"
+#include "poppack.h"
 #endif
 
 extern ResNameOrOrdinal * ResNumToNameOrOrd( uint_16 num );

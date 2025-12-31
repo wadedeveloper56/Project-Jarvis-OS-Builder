@@ -33,10 +33,10 @@
 #ifndef RESICCU_INCLUDED
 #define RESICCU_INCLUDED
 
-#include "watcom.h"
+#include "../../JWlink/watcom/h/watcom.h"
 
 #if !defined( NATURAL_PACK )
-#include "pushpck1.h"
+#include "pshpack1.h"
 #endif
 
 typedef struct IconCurDirHeader {
@@ -76,7 +76,7 @@ typedef struct CurHotspot {
 } CurHotspot;
 
 #if !defined( NATURAL_PACK )
-#include "poppck.h"
+#include "poppack.h"
 #endif
 
 extern int ResWriteIconCurDirHeader( const IconCurDirHeader *, WResFileID );

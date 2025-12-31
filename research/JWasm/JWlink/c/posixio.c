@@ -33,8 +33,8 @@
 #include <string.h>
 #include <stdlib.h>
 #include <errno.h>
+#include <io.h>
 #include <fcntl.h>
-#include <unistd.h>
 #include <termios.h>
 #include <sys/stat.h>
 #ifdef __WATCOMC__

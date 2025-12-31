@@ -33,10 +33,10 @@
 #ifndef RESFONT_INCLUDED
 #define RESFONT_INCLUDED
 
-#include "watcom.h"
+#include "../../JWlink/watcom/h/watcom.h"
 
 #if !defined( NATURAL_PACK )
-#include "pushpck1.h"
+#include "pshpack1.h"
 #endif
 
 typedef struct FontInfo {
@@ -78,7 +78,7 @@ typedef struct FontDirEntry {
 } FontDirEntry;
 
 #if !defined( NATURAL_PACK )
-#include "poppck.h"
+#include "poppack.h"
 #endif
 
 /* NOTE: The StructSize field is not acutally part of the directory entry and */

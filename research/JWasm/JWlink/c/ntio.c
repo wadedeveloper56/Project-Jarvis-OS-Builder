@@ -35,8 +35,8 @@
 #include <process.h>
 #include <conio.h>
 #include <errno.h>
+#include <io.h>
 #include <fcntl.h>
-#include <unistd.h>
 #include <sys/stat.h>
 #include "linkstd.h"
 #include "msg.h"

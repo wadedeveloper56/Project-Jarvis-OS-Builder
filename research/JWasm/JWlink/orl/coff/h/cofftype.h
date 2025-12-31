@@ -35,6 +35,7 @@
 
 #include <coff.h>
 
+#define ORLUNALIGNED
 #define COFFENTRY
 
 // handle definitions

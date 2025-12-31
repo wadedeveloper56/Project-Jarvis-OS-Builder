@@ -43,7 +43,7 @@
 extern char * strupr(char *);
 #define _stricmp strcasecmp
 #ifndef __WATCOMC__
-#define _memicmp strncasecmp
+//#define _memicmp strncasecmp
 #endif
 #define _ltoa   ltoa
 #define _strupr strupr
@@ -59,7 +59,7 @@ extern char * strupr(char *);
 #define _stricmp  stricmp
 #define _strnicmp strnicmp
 #define _strupr   strupr
-#define _memicmp  memicmp
+//#define _memicmp  memicmp
 
 #endif
 

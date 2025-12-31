@@ -280,7 +280,7 @@ typedef enum {
 ***************************************************************************/
 
 #define LAST_LINKER_ABBREV 4
-
+#define _WCUNALIGNED
 /* handy structures section */
 
 typedef struct {

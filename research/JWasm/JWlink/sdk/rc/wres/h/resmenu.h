@@ -33,7 +33,7 @@
 #ifndef RESMENU_INCLUDED
 #define RESMENU_INCLUDED
 
-#include "watcom.h"
+#include "../../JWlink/watcom/h/watcom.h"
 
 typedef uint_16             MenuFlags;
 #define MENU_GRAYED         0x0001
@@ -54,7 +54,7 @@ typedef uint_16             MenuFlags;
 #define MENUEX_VERSION_SIG  0x0001
 
 #if !defined( NATURAL_PACK )
-#include "pushpck1.h"
+#include "pshpack1.h"
 #endif
 
 typedef struct MenuHeader {
@@ -112,7 +112,7 @@ typedef struct MenuExItem {
 } MenuExItem;
 
 #if !defined( NATURAL_PACK )
-#include "poppck.h"
+#include "poppack.h"
 #endif
 
 int ResWriteMenuItemNormal( const MenuItemNormal * curritem, uint_8 use_unicode,

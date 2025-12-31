@@ -30,7 +30,7 @@
 ****************************************************************************/
 
 
-#include <unistd.h>
+#include <io.h>
 #include <fcntl.h>
 #include "wresrtns.h"
 #include "opcl.h"

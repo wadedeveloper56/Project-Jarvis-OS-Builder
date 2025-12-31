@@ -35,7 +35,8 @@
 #include <stdlib.h>
 #include <process.h>
 #include <conio.h>
-#include <unistd.h>
+#include <io.h>
+#include <fcntl.h>
 #include "linkstd.h"
 #include "msg.h"
 #include "alloc.h"

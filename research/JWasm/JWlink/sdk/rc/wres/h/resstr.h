@@ -38,7 +38,7 @@
 #define STRTABLE_STRS_PER_BLOCK     16
 
 #if !defined( NATURAL_PACK )
-#include "pushpck1.h"
+#include "pshpack1.h"
 #endif
 
 typedef struct StringTableBlock {
@@ -46,7 +46,7 @@ typedef struct StringTableBlock {
 } StringTableBlock;
 
 #if !defined( NATURAL_PACK )
-#include "poppck.h"
+#include "poppack.h"
 #endif
 
 extern void ResInitStringTableBlock( StringTableBlock * );

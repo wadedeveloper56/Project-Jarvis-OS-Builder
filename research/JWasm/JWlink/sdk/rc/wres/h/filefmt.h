@@ -32,11 +32,13 @@
 #ifndef FILEFMT_INCLUDED
 #define FILEFMT_INCLUDED
 
-#include "watcom.h"
+#include "../../JWlink/watcom/h/watcom.h"
 
 #if !defined( NATURAL_PACK )
-#include "pushpck1.h"
+#include "pshpack1.h"
 #endif
+
+#define _WCUNALIGNED
 
 typedef struct WResHeader {
     uint_32     Magic[ 2 ];     /* must be WRESMAGIC0 and WRESMAGIC1 */
@@ -146,7 +148,7 @@ typedef struct WResLangInfo {
 } _WCUNALIGNED WResLangInfo;
 
 #if !defined( NATURAL_PACK )
-#include "poppck.h"
+#include "poppack.h"
 #endif
 
 /* Wes uses this stuff in the resource editors - not really file formats, don't have to be packed */

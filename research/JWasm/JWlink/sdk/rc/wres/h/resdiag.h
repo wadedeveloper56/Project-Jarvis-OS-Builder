@@ -181,8 +181,8 @@ typedef struct DialogBoxControl {
 } _WCUNALIGNED DialogBoxControl;
 
 #if !defined( NATURAL_PACK )
-#include "poppck.h"
-#include "pushpck2.h"
+#include "poppack.h"
+#include "pshpack2.h"
 #endif
 
 typedef struct DialogBoxControl32 {

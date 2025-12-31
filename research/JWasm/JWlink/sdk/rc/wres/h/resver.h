@@ -36,7 +36,7 @@
 #define VER_CALC_SIZE   0xFFFF
 
 #if !defined( NATURAL_PACK )
-#include "pushpck1.h"
+#include "pshpack1.h"
 #endif
 
 typedef struct VerBlockHeader {
@@ -72,7 +72,7 @@ typedef struct VerFixedInfo {
 } VerFixedInfo;
 
 #if !defined( NATURAL_PACK )
-#include "poppck.h"
+#include "poppack.h"
 #endif
 
 /* Why theses two values? Cause that's what Microsoft uses. */
