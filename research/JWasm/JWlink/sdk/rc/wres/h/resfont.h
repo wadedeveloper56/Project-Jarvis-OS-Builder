@@ -35,8 +35,6 @@
 
 #include "watcom.h"
 
-#define _WCUNALIGNED
-
 #if !defined( NATURAL_PACK )
 #include "pushpck1.h"
 #endif

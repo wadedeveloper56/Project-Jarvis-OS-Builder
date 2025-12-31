@@ -34,8 +34,6 @@
 
 #include "pushpck1.h"
 
-#define _WCUNALIGNED
-
 #ifdef __cplusplus
 extern "C" {
 #endif

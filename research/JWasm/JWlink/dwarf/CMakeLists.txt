@@ -1,5 +1,5 @@
-include_directories(h)
-include_directories(../jarvis/h)
+include_directories(dw/h)
+include_directories(../watcom/h)
 set(CompilerFlags
         CMAKE_CXX_FLAGS
         CMAKE_CXX_FLAGS_DEBUG
@@ -12,5 +12,5 @@ foreach(CompilerFlag ${CompilerFlags})
   string(REPLACE "/MD" "/MT" ${CompilerFlag} "${${CompilerFlag}}")
 endforeach()
 add_definitions(-D__NT__ -DNDEBUG -DDEBUG_OUT -D_CRT_SECURE_NO_WARNINGS)
-FILE(GLOB all_c_files c/*.c)
+FILE(GLOB all_c_files dw/c/*.c)
 add_library(dwarf ${all_c_files})

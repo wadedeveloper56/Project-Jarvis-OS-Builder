@@ -24,32 +24,11 @@
 *
 *  ========================================================================
 *
-* Description:  Autdependency structure defintion shared between resource
-*               compiler and wmake.
+* Description:  Indirected second version of ring.c.
 *
 ****************************************************************************/
 
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+#define PARAM2
+#include "ring.c"
 
-#define         DEP_LIST_TYPE   0x79
-#define         DEP_LIST_NAME   "EBWF_XFMMTUPPE"
-#define _WCUNALIGNED
-#include "pushpck1.h"
-
-typedef struct {
-    uint_32     time;           /* file's time taken from stat */
-    uint_16     len;            /* sizeof the name array */
-    char        name[1];        /* dynamic array */
-} _WCUNALIGNED DepInfo;
-
-#include "poppck.h"
-
-DepInfo *WResGetAutoDep( char *fname );
-void WResFreeAutoDep( DepInfo *ptr );
-
-#ifdef __cplusplus
-}
-#endif

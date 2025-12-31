@@ -34,9 +34,7 @@
 #endif
 #endif
 
-#include <io.h>
-#include <fcntl.h>
-
+#include <unistd.h>
 
 #if defined( __UNIX__ )
 #include <fcntl.h>

@@ -49,9 +49,7 @@ typedef unsigned int UINT;
 typedef char _WCI86FAR *   LPSTR;
 #endif
 
-#include <io.h>
-#include <fcntl.h>
-
+#include <unistd.h>
 #include "wresall.h"
 #include "loadstr.h"
 
