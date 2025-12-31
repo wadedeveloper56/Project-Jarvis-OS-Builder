@@ -5,5 +5,5 @@ int _argc;
 char** _argv;
 stateflag LinkState;        /* flags to indicate linker state */
 int RecNum;                 /* record number of the obj file        */
-tok Token;
+Token token;
 linkflag LinkFlags;         /* flags to indicate presence of parms  */

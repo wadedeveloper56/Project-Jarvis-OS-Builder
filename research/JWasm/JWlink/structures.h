@@ -11,7 +11,7 @@ typedef enum {
     SYSTEM
 } method;
 
-typedef struct tok {
+typedef struct Token {
     char* buff;
     unsigned    len;
     char* next;
@@ -23,4 +23,4 @@ typedef struct tok {
     unsigned_8  thumb : 1;
     unsigned_8  locked : 1;
     unsigned_8  skipToNext : 1;   /* set true if we need to skip to next token without a separator */
-} tok;
+} Token, *TokenPtr, **TokenPtrPtr;

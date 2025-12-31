@@ -153,11 +153,11 @@ void MessagingSubsystem::LnkMsg(unsigned num, char* types, ...)
 		which_file += 4;
 	}
 	if (which_file != 0) {
-		if (Token.how == SYSTEM) {
+		if (token.how == SYSTEM) {
 			Msg_Get(MSG_SYS_BLK, rc_buff);
 			which_file = 1;
 		}
-		else if (Token.how == ENVIRONMENT) {
+		else if (token.how == ENVIRONMENT) {
 			Msg_Get(MSG_ENVIRON, rc_buff);
 			which_file = 1;
 		}
@@ -167,9 +167,9 @@ void MessagingSubsystem::LnkMsg(unsigned num, char* types, ...)
 		FileOrder(rc_buff, which_file);
 		len += FmtStr(&buff[len], MAX_MSG_SIZE - len, rc_buff);
 		if (num & LINE) {
-			if (Token.how != SYSTEM && Token.how != ENVIRONMENT) {
+			if (token.how != SYSTEM && token.how != ENVIRONMENT) {
 				Msg_Get(MSG_LINE, rc_buff);
-				Msg_Do_Put_Args(rc_buff, &MsgArgInfo, "d", Token.line);
+				Msg_Do_Put_Args(rc_buff, &MsgArgInfo, "d", token.line);
 				len += FmtStr(&buff[len], MAX_MSG_SIZE - len, rc_buff);
 			}
 		}
