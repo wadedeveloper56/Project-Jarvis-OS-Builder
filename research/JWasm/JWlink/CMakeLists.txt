@@ -1,4 +1,13 @@
 include_directories(h)
+include_directories(jarvis/h)
+include_directories(dwarf/h)
+include_directories(../orl/coff/h)
+include_directories(../orl/elf/h)
+include_directories(../orl/omf/h)
+include_directories(lib_misc/h)
+include_directories(dwarf/h)
+include_directories(rc/rc/h)
+include_directories(rc/wres/h)
 set(CompilerFlags
         CMAKE_CXX_FLAGS
         CMAKE_CXX_FLAGS_DEBUG

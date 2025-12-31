@@ -1,4 +1,5 @@
 include_directories(rc/wres/h)
+include_directories(rc/rc/h)
 include_directories(../h)
 include_directories(../jarvis/h)
 set(CompilerFlags
@@ -12,6 +13,6 @@ set(CompilerFlags
 foreach(CompilerFlag ${CompilerFlags})
   string(REPLACE "/MD" "/MT" ${CompilerFlag} "${${CompilerFlag}}")
 endforeach()
-add_definitions(-D__NT__ -DNDEBUG -DDEBUG_OUT -D_CRT_SECURE_NO_WARNINGS)
-FILE(GLOB all_c_files rc/wres/c/*.c)
+add_definitions(-D__NT__ -DNDEBUG -DDEBUG_OUT -D_CRT_SECURE_NO_WARNINGS -DINSIDE_WLINK)
+FILE(GLOB all_c_files rc/wres/c/*.c rc/rc/c/*.c)
 add_library(sdk ${all_c_files})
