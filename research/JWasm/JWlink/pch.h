@@ -12,6 +12,7 @@
 #include <list>
 #include <io.h>
 #include <fcntl.h>
+#include <ctype.h>
 
 #pragma warning(disable:4267)
 #pragma warning(disable:4244)
