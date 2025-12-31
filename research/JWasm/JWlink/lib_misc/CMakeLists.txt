@@ -1,4 +1,5 @@
 include_directories(h)
+include_directories(../watcom/h)
 set(CompilerFlags
         CMAKE_CXX_FLAGS
         CMAKE_CXX_FLAGS_DEBUG
@@ -12,7 +13,4 @@ foreach(CompilerFlag ${CompilerFlags})
 endforeach()
 add_definitions(-D__NT__ -DNDEBUG -DDEBUG_OUT -D_CRT_SECURE_NO_WARNINGS)
 FILE(GLOB all_c_files c/*.c)
-add_executable(JWlink ${all_c_files})
-target_link_libraries(JWlink PRIVATE dwarf)
-target_link_libraries(JWlink PRIVATE lib_misc)
-target_link_libraries(JWlink PRIVATE orl)
+add_library(lib_misc ${all_c_files})
