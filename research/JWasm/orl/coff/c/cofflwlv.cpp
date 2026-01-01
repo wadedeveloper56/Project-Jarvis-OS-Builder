@@ -138,9 +138,9 @@ orl_return CoffCreateSymbolHandles( coff_file_handle file_hnd )
                 }
                 type = _CoffComplexType( current->symbol->type );
                 if( type & IMAGE_SYM_DTYPE_FUNCTION ) {
-                    current->type |= ORL_SYM_TYPE_FUNCTION;
+                    current->type = (orl_symbol_type)(current->type | ORL_SYM_TYPE_FUNCTION);
                 } else {
-                    current->type |= ORL_SYM_TYPE_OBJECT;
+                    current->type = (orl_symbol_type)(current->type | ORL_SYM_TYPE_OBJECT);
                 }
                 break;
             case IMAGE_SYM_CLASS_STATIC:
@@ -148,26 +148,26 @@ orl_return CoffCreateSymbolHandles( coff_file_handle file_hnd )
                 if( current->symbol->num_aux == 0 ) {
                     if( sechdl != NULL
                         && strcmp( sechdl->name, current->name ) == 0 ) {
-                        current->type |= ORL_SYM_TYPE_SECTION;
+                        current->type = (orl_symbol_type)(current->type | ORL_SYM_TYPE_SECTION);
                     } else {
                         type = _CoffComplexType( current->symbol->type );
                         if( type & IMAGE_SYM_DTYPE_FUNCTION ) {
-                            current->type |= ORL_SYM_TYPE_FUNCTION;
+                            current->type = (orl_symbol_type)(current->type | ORL_SYM_TYPE_FUNCTION);
                         } else {
-                            current->type |= ORL_SYM_TYPE_OBJECT;
+                            current->type = (orl_symbol_type)(current->type | ORL_SYM_TYPE_OBJECT);
                         }
                     }
                 } else if( current->symbol->num_aux == 1
                         && current->type & ORL_SYM_CDAT_MASK ) {
-                    current->type |= ORL_SYM_TYPE_SECTION;
+                    current->type = (orl_symbol_type)(current->type | ORL_SYM_TYPE_SECTION);
                     aux = (coff_sym_section *)(current->symbol + 1);
-                    current->type &= ~ORL_SYM_CDAT_MASK;
-                    current->type |= (aux->selection << ORL_SYM_CDAT_SHIFT)
-                                        & ORL_SYM_CDAT_MASK;
+                    current->type = (orl_symbol_type)(current->type & ~ORL_SYM_CDAT_MASK);
+                    current->type = (orl_symbol_type)(current->type | (aux->selection << ORL_SYM_CDAT_SHIFT)
+                                        & ORL_SYM_CDAT_MASK);
                 } else {
                     type = _CoffComplexType( current->symbol->type );
                     if( type & IMAGE_SYM_DTYPE_FUNCTION ) {
-                        current->type |= ORL_SYM_TYPE_FUNCTION;
+                        current->type = (orl_symbol_type)(current->type | ORL_SYM_TYPE_FUNCTION);
                     }
                 }
                 break;
@@ -181,11 +181,11 @@ orl_return CoffCreateSymbolHandles( coff_file_handle file_hnd )
                     current->binding = ORL_SYM_BINDING_NONE;
                 else
                     current->binding = ORL_SYM_BINDING_LOCAL;
-                current->type |= ORL_SYM_TYPE_FUNC_INFO;
+                current->type = (orl_symbol_type)(current->type | ORL_SYM_TYPE_FUNC_INFO);
                 break;
             case IMAGE_SYM_CLASS_FILE:
                 current->binding = ORL_SYM_BINDING_LOCAL;
-                current->type |= ORL_SYM_TYPE_FILE;
+                current->type = (orl_symbol_type)(current->type | ORL_SYM_TYPE_FILE);
                 break;
         }
         prev = loop;
@@ -359,7 +359,7 @@ orl_reloc_type CoffConvertRelocType( coff_file_handle coff_file_hnd, coff_reloc_
                 return( ORL_RELOC_TYPE_NONE );
         }
     }
-    return( 0 );
+    return( (orl_reloc_type)0 );
 }
 
 orl_return CoffCreateRelocs( coff_sec_handle orig_sec, coff_sec_handle reloc_sec )
@@ -526,7 +526,7 @@ static orl_return ParseLnkCmd( char *cmd, char **contents, int *len,
         }
     }
     l = value - *contents;
-    arg = alloca( l + 1 );
+    arg = (char *)alloca( l + 1 );
     memcpy( arg, *contents, l );
     *contents = value;
     if ( delim )

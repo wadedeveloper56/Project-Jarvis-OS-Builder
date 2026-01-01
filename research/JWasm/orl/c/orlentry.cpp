@@ -34,7 +34,7 @@
 #include "orllevel.h"
 #include "orlentry.h"
 #include "orlflhnd.h"
-//#include "pcobj.h"
+#include "pcobj.h"
 
 orl_handle ORLENTRY ORLInit( orl_funcs * funcs )
 {
@@ -90,7 +90,7 @@ orl_file_format ORLFileIdentify( orl_handle orl_hnd, void * file )
     uint_16             len;
     unsigned char       chksum;
 
-    magic = orl_hnd->funcs->read( file, 4 );
+    magic = (unsigned char *)orl_hnd->funcs->read( file, 4 );
     if( magic == NULL ) {
         return ORL_UNRECOGNIZED_FORMAT;
     }
@@ -116,7 +116,7 @@ orl_file_format ORLFileIdentify( orl_handle orl_hnd, void * file )
                 return ORL_UNRECOGNIZED_FORMAT;
             }
             chksum = magic[0] + magic[1] + magic[2] + magic[3];
-            magic = orl_hnd->funcs->read( file, len );
+            magic = (unsigned char*)orl_hnd->funcs->read( file, len );
             if( orl_hnd->funcs->seek( file, -( 4 + len ), SEEK_CUR ) == -1 ) {
                 return ORL_UNRECOGNIZED_FORMAT;
             }
@@ -133,7 +133,7 @@ orl_file_format ORLFileIdentify( orl_handle orl_hnd, void * file )
                     return( ORL_OMF );
                 }
             } else {
-                magic = orl_hnd->funcs->read( file, 4 );
+                magic = (unsigned char*)orl_hnd->funcs->read( file, 4 );
                 if( magic == NULL ) {
                     return ORL_UNRECOGNIZED_FORMAT;
                 } else if( orl_hnd->funcs->seek( file, -4, SEEK_CUR ) == -1 ) {
@@ -160,7 +160,7 @@ orl_file_format ORLFileIdentify( orl_handle orl_hnd, void * file )
         if( orl_hnd->funcs->seek( file, 0x3c, SEEK_CUR ) == -1 ) {
             return ORL_UNRECOGNIZED_FORMAT;
         }
-        magic = orl_hnd->funcs->read( file, 0x4 );
+        magic = (unsigned char*)orl_hnd->funcs->read( file, 0x4 );
         if( magic == NULL ) {
             return ORL_UNRECOGNIZED_FORMAT;
         }
@@ -168,12 +168,12 @@ orl_file_format ORLFileIdentify( orl_handle orl_hnd, void * file )
         if( orl_hnd->funcs->seek( file, offset-0x40, SEEK_CUR ) == -1 ) {
             return ORL_UNRECOGNIZED_FORMAT;
         }
-        magic = orl_hnd->funcs->read( file, 4 );
+        magic = (unsigned char*)orl_hnd->funcs->read( file, 4 );
         if( magic == NULL ) {
             return ORL_UNRECOGNIZED_FORMAT;
         }
         if( magic[0]=='P' && magic[1] == 'E' && magic[2] == '\0' && magic[3] == '\0' ) {
-            magic = orl_hnd->funcs->read( file, 4 );
+            magic = (unsigned char*)orl_hnd->funcs->read( file, 4 );
             if( magic == NULL ) {
                 return ORL_UNRECOGNIZED_FORMAT;
             }
@@ -306,7 +306,7 @@ orl_machine_type ORLENTRY ORLFileGetMachineType( orl_file_handle orl_file_hnd )
         return( OmfFileGetMachineType( orl_file_hnd->file_hnd.omf ) );
     default: break;//ORL_UNRECOGNIZED_FORMAT
     }
-    return( 0 );
+    return( (orl_machine_type)0 );
 }
 
 orl_file_flags ORLENTRY ORLFileGetFlags( orl_file_handle orl_file_hnd )
@@ -320,7 +320,7 @@ orl_file_flags ORLENTRY ORLFileGetFlags( orl_file_handle orl_file_hnd )
         return( OmfFileGetFlags( orl_file_hnd->file_hnd.omf ) );
     default: break;//ORL_UNRECOGNIZED_FORMAT
     }
-    return( 0 );
+    return( (orl_file_flags)0 );
 }
 
 orl_file_size ORLENTRY ORLFileGetSize( orl_file_handle orl_file_hnd )
@@ -348,7 +348,7 @@ orl_file_type ORLENTRY ORLFileGetType( orl_file_handle orl_file_hnd )
         return( OmfFileGetType( orl_file_hnd->file_hnd.omf ) );
     default: break;//ORL_UNRECOGNIZED_FORMAT
     }
-    return( 0 );
+    return( (orl_file_type)0 );
 }
 
 orl_file_format ORLENTRY ORLFileGetFormat( orl_file_handle orl_file_hnd )
@@ -423,7 +423,7 @@ orl_sec_type ORLENTRY ORLSecGetType( orl_sec_handle orl_sec_hnd )
         return( OmfSecGetType( (omf_sec_handle) orl_sec_hnd ) );
     default: break;//ORL_UNRECOGNIZED_FORMAT
     }
-    return( 0 );
+    return( (orl_sec_type)0 );
 }
 
 orl_sec_alignment ORLENTRY ORLSecGetAlignment( orl_sec_handle orl_sec_hnd )
@@ -451,7 +451,7 @@ orl_sec_flags ORLENTRY ORLSecGetFlags( orl_sec_handle orl_sec_hnd )
         return( OmfSecGetFlags( (omf_sec_handle) orl_sec_hnd ) );
     default: break;//ORL_UNRECOGNIZED_FORMAT
     }
-    return( 0 );
+    return( (orl_sec_flags)0 );
 }
 
 orl_sec_handle ORLENTRY ORLSecGetStringTable( orl_sec_handle orl_sec_hnd )
@@ -730,7 +730,7 @@ orl_symbol_binding ORLENTRY ORLSymbolGetBinding( orl_symbol_handle orl_symbol_hn
         return( OmfSymbolGetBinding( (omf_symbol_handle) orl_symbol_hnd ) );
     default: break;//ORL_UNRECOGNIZED_FORMAT
     }
-    return( 0 );
+    return( (orl_symbol_binding)0 );
 }
 
 orl_symbol_type ORLENTRY ORLSymbolGetType( orl_symbol_handle orl_symbol_hnd )
@@ -744,7 +744,7 @@ orl_symbol_type ORLENTRY ORLSymbolGetType( orl_symbol_handle orl_symbol_hnd )
         return( OmfSymbolGetType( (omf_symbol_handle) orl_symbol_hnd ) );
     default: break;//ORL_UNRECOGNIZED_FORMAT
     }
-    return( 0 );
+    return( (orl_symbol_type)0 );
 }
 
 unsigned char ORLENTRY ORLSymbolGetRawInfo( orl_symbol_handle orl_symbol_hnd )
