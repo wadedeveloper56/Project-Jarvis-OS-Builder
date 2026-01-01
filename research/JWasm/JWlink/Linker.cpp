@@ -25,8 +25,8 @@ void Linker::InitSubSystems(void)
     LnkMemInit();
     LnkFilesInit();
     InitMsg();
-//    InitNodes();
-//    InitTokBuff();
+    InitNodes(memory);
+    InitTokBuff(memory);
 //    InitSpillFile();
 //    InitSym();
 //    InitObjORL();
@@ -35,7 +35,7 @@ void Linker::InitSubSystems(void)
 
 void Linker::FiniSubSystems(void)
 {
-	//FiniLinkStruct();
+	FiniLinkStruct(memory);
 	FiniMsg();
 	//FiniSym();
 	//LnkMemFini();
