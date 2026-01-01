@@ -201,7 +201,7 @@ static omf_symbol_handle newSymbol( omf_file_handle ofh, orl_symbol_type typ,
     assert( name );
     assert( len >= 0 );
 
-    sym = _ClientAlloc( ofh, sizeof( omf_symbol_handle_struct ) + len );
+    sym = (omf_symbol_handle)_ClientAlloc( ofh, sizeof( omf_symbol_handle_struct ) + len );
     if( !sym ) return( sym );
     memset( sym, 0, sizeof( omf_symbol_handle_struct ) + len );
 
@@ -232,7 +232,7 @@ static omf_sec_handle   newSection( omf_file_handle ofh, omf_quantity idx,
         ofh->next_idx = idx + 1;
     }
 
-    sh = _ClientAlloc( ofh, sizeof( omf_sec_handle_struct ) );
+    sh = (omf_sec_handle)_ClientAlloc( ofh, sizeof( omf_sec_handle_struct ) );
     if( !sh ) return( sh );
     memset( sh, 0, sizeof( omf_sec_handle_struct ) );
 
@@ -259,7 +259,7 @@ static omf_sec_handle   newComDatSection( omf_file_handle ofh )
 
     assert( ofh );
 
-    ofh->comdats = checkArraySize( ofh, ofh->comdats, ofh->num_comdats, STD_INC,
+    ofh->comdats = (omf_sec_handle*)checkArraySize( ofh, ofh->comdats, ofh->num_comdats, STD_INC,
                                 sizeof( omf_sec_handle ) );
     if( !ofh->comdats ) return( NULL );
 
@@ -280,7 +280,7 @@ static omf_sec_handle   newSegSection( omf_file_handle ofh, orl_sec_type typ )
 
     assert( ofh );
 
-    ofh->segs = checkArraySize( ofh, ofh->segs, ofh->num_segs, STD_INC,
+    ofh->segs = (omf_sec_handle*)checkArraySize( ofh, ofh->segs, ofh->num_segs, STD_INC,
                                 sizeof( omf_sec_handle ) );
     if( !ofh->segs ) return( NULL );
 
@@ -301,11 +301,11 @@ static omf_grp_handle   newGroup( omf_file_handle ofh )
 
     assert( ofh );
 
-    ofh->groups = checkArraySize( ofh, ofh->groups, ofh->num_groups, STD_INC,
+    ofh->groups = (omf_grp_handle*)checkArraySize( ofh, ofh->groups, ofh->num_groups, STD_INC,
                                 sizeof( omf_grp_handle ) );
     if( !ofh->groups ) return( NULL );
 
-    gr = _ClientAlloc( ofh, sizeof( omf_grp_handle_struct ) );
+    gr = (omf_grp_handle)_ClientAlloc( ofh, sizeof( omf_grp_handle_struct ) );
     if( !gr ) return( gr );
     memset( gr, 0, sizeof( omf_grp_handle_struct ) );
 
@@ -376,7 +376,7 @@ static orl_return       addString( omf_sec_handle sh, omf_bytes buffer,
 
     /* Check if we need to allocate more string table
      */
-    sh->assoc.string.strings = checkArraySize( ofh, sh->assoc.string.strings,
+    sh->assoc.string.strings = (omf_string_struct*)checkArraySize( ofh, sh->assoc.string.strings,
                                                sh->assoc.string.num, STD_INC,
                                                sizeof( omf_string_struct * ) );
     if( !sh->assoc.string.strings ) return( ORL_OUT_OF_MEMORY );
