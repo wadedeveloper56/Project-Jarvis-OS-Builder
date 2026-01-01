@@ -2,6 +2,10 @@
 #include "structures.h"
 #include "globals.h"
 
+#ifdef _INT_DEBUG
+char* _edata;
+char* _end;
+#endif
 int             _argc;
 char**          _argv;
 Token           token;

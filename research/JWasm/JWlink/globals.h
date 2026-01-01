@@ -6,6 +6,10 @@
 #define SECTOR_SIZE     512
 #define MAX_HEADROOM    (4*1024)
 
+#ifdef _INT_DEBUG
+extern char* _edata;
+extern char* _end;
+#endif
 extern int             _argc;
 extern char**          _argv;
 extern Token           token;
