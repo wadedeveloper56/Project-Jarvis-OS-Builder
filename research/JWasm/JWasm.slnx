@@ -9,4 +9,5 @@
   <Project Path="JWlink/JWlink.vcxproj" Id="d6ce8cc8-a65d-471c-9c12-01821ef9ecd7" />
   <Project Path="Memory/Memory.vcxproj" Id="36412e4a-5780-46b9-bf4b-0d79b4a7de96" />
   <Project Path="orl/orl.vcxproj" Id="254c4c4d-ac55-4f7a-a05d-ecf2f897c42d" />
+  <Project Path="Subsystem/Subsystem.vcxproj" Id="15f4408c-b796-4e92-8b09-4caa3a8a9d21" />
 </Solution>

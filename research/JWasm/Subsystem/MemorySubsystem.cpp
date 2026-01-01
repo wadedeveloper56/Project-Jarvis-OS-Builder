@@ -1,11 +1,9 @@
 #include "pch.h"
-#include "MessagingSubsystem.h"
 #include "MemorySubsystem.h"
 #include "Memory.h"
 
-MemorySubsystem::MemorySubsystem(MessagingSubsystem* msg)
+MemorySubsystem::MemorySubsystem()
 {
-    this->msg = msg;
 }
 
 MemorySubsystem::~MemorySubsystem()
@@ -60,7 +58,7 @@ void* MemorySubsystem::ChkLAlloc(size_t size)
     void* ptr;
     ptr = LAlloc(size);
     if (ptr == NULL) {
-        msg->LnkMsg(FTL + MSG_NO_DYN_MEM, NULL);
+        //msg->LnkMsg(FTL + MSG_NO_DYN_MEM, NULL);
     }
     return(ptr);
 }

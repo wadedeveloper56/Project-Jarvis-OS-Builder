@@ -7,13 +7,10 @@
 #define _LnkFree( ptr )         memory->FreeMemory( ptr )
 #define _LnkExpand( cast, dest, src, size ) dest = (cast)memory->ExpandMemory( src, size );
 
-class MessagingSubsystem;
-
 class MemorySubsystem
 {
-	MessagingSubsystem* msg;
 public:
-	MemorySubsystem(MessagingSubsystem* msg);
+	MemorySubsystem();
 	~MemorySubsystem();
 	void* ReallocateMemory(void* memblock, size_t size);
 	void FreeMemory(void* memoryBlock);

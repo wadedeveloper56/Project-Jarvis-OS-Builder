@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>18.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{254c4c4d-ac55-4f7a-a05d-ecf2f897c42d}</ProjectGuid>
-    <RootNamespace>orl</RootNamespace>
+    <ProjectGuid>{15f4408c-b796-4e92-8b09-4caa3a8a9d21}</ProjectGuid>
+    <RootNamespace>Subsystem</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -70,36 +70,37 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>..\watcom\h;.\;.\h;.\coff\h;.\elf\h;.\omf\h;..\Subsystem;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
-    <OutDir>..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>..\bin\tools\intermediate\orl\$(Configuration)\$(Platform)\</IntDir>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>..\watcom\h;.\;.\h;.\coff\h;.\elf\h;.\omf\h;..\Subsystem;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
-    <OutDir>..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>..\bin\tools\intermediate\orl\$(Configuration)\$(Platform)\</IntDir>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>..\watcom\h;.\;.\h;.\coff\h;.\elf\h;.\omf\h;..\Subsystem;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>..\File;..\Memory;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
     <OutDir>..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>..\bin\tools\intermediate\orl\$(Configuration)\$(Platform)\</IntDir>
+    <IntDir>..\bin\tools\intermediate\subsystem\$(Configuration)\$(Platform)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>..\File;..\Memory;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <OutDir>..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>..\bin\tools\intermediate\subsystem\$(Configuration)\$(Platform)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>..\watcom\h;.\;.\h;.\coff\h;.\elf\h;.\omf\h;..\Subsystem;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>..\File;..\Memory;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
     <OutDir>..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>..\bin\tools\intermediate\orl\$(Configuration)\$(Platform)\</IntDir>
+    <IntDir>..\bin\tools\intermediate\subsystem\$(Configuration)\$(Platform)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>..\File;..\Memory;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <OutDir>..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>..\bin\tools\intermediate\subsystem\$(Configuration)\$(Platform)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -113,12 +114,13 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -130,12 +132,13 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -149,12 +152,13 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -163,61 +167,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="coff\h\coffentr.h" />
-    <ClInclude Include="coff\h\coffflhn.h" />
-    <ClInclude Include="coff\h\coffglbl.h" />
-    <ClInclude Include="coff\h\coffhash.h" />
-    <ClInclude Include="coff\h\coffimpl.h" />
-    <ClInclude Include="coff\h\coffload.h" />
-    <ClInclude Include="coff\h\cofflwlv.h" />
-    <ClInclude Include="coff\h\cofforl.h" />
-    <ClInclude Include="coff\h\cofftype.h" />
-    <ClInclude Include="elf\h\elfentr.h" />
-    <ClInclude Include="elf\h\elfflhn.h" />
-    <ClInclude Include="elf\h\elfglbl.h" />
-    <ClInclude Include="elf\h\elfhash.h" />
-    <ClInclude Include="elf\h\elfload.h" />
-    <ClInclude Include="elf\h\elflwlv.h" />
-    <ClInclude Include="elf\h\elforl.h" />
-    <ClInclude Include="elf\h\elftype.h" />
+    <ClInclude Include="FileSubsystem.h" />
     <ClInclude Include="framework.h" />
-    <ClInclude Include="h\orl.h" />
-    <ClInclude Include="h\orlcomon.h" />
-    <ClInclude Include="h\orlentry.h" />
-    <ClInclude Include="h\orlflhnd.h" />
-    <ClInclude Include="h\orlglobl.h" />
-    <ClInclude Include="h\orlhash.h" />
-    <ClInclude Include="h\orlhshdf.h" />
-    <ClInclude Include="h\orlintnl.h" />
-    <ClInclude Include="h\orllevel.h" />
-    <ClInclude Include="omf\h\omfdrctv.h" />
-    <ClInclude Include="omf\h\omfentr.h" />
-    <ClInclude Include="omf\h\omfflhn.h" />
-    <ClInclude Include="omf\h\omfglbl.h" />
-    <ClInclude Include="omf\h\omfload.h" />
-    <ClInclude Include="omf\h\omfmunge.h" />
-    <ClInclude Include="omf\h\omforl.h" />
-    <ClInclude Include="omf\h\omftype.h" />
+    <ClInclude Include="MemorySubsystem.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="coff\c\coffentr.cpp" />
-    <ClCompile Include="coff\c\coffflhn.cpp" />
-    <ClCompile Include="coff\c\coffimpl.cpp" />
-    <ClCompile Include="coff\c\coffload.cpp" />
-    <ClCompile Include="coff\c\cofflwlv.cpp" />
-    <ClCompile Include="c\orlentry.cpp" />
-    <ClCompile Include="c\orlflhnd.cpp" />
-    <ClCompile Include="c\orlhash.cpp" />
-    <ClCompile Include="elf\c\elfentr.cpp" />
-    <ClCompile Include="elf\c\elfflhn.cpp" />
-    <ClCompile Include="elf\c\elfload.cpp" />
-    <ClCompile Include="elf\c\elflwlv.cpp" />
-    <ClCompile Include="omf\c\omfdrctv.cpp" />
-    <ClCompile Include="omf\c\omfentr.cpp" />
-    <ClCompile Include="omf\c\omfflhn.cpp" />
-    <ClCompile Include="omf\c\omfload.cpp" />
-    <ClCompile Include="omf\c\omfmunge.cpp" />
+    <ClCompile Include="FileSubsystem.cpp" />
+    <ClCompile Include="MemorySubsystem.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -226,8 +183,11 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Subsystem\Subsystem.vcxproj">
-      <Project>{15f4408c-b796-4e92-8b09-4caa3a8a9d21}</Project>
+    <ProjectReference Include="..\File\File.vcxproj">
+      <Project>{07c330d8-c0c2-42b5-a94e-ae87dab6420d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Memory\Memory.vcxproj">
+      <Project>{36412e4a-5780-46b9-bf4b-0d79b4a7de96}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

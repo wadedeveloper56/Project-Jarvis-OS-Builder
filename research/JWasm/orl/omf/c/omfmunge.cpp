@@ -376,12 +376,12 @@ static orl_return       addString( omf_sec_handle sh, omf_bytes buffer,
 
     /* Check if we need to allocate more string table
      */
-    sh->assoc.string.strings = (omf_string_struct*)checkArraySize( ofh, sh->assoc.string.strings,
+    sh->assoc.string.strings = (omf_string_struct**)checkArraySize( ofh, sh->assoc.string.strings,
                                                sh->assoc.string.num, STD_INC,
                                                sizeof( omf_string_struct * ) );
     if( !sh->assoc.string.strings ) return( ORL_OUT_OF_MEMORY );
 
-    str = _ClientAlloc( ofh, sizeof( omf_string_struct ) + len );
+    str = (omf_string_struct *)_ClientAlloc( ofh, sizeof( omf_string_struct ) + len );
     if( !str ) return( ORL_OUT_OF_MEMORY );
     memset( str, 0, sizeof( omf_string_struct ) + len );
 
@@ -408,7 +408,7 @@ static orl_return       addToSymbolTable( omf_file_handle ofh,
         sh = newSection( ofh, OMF_SEC_SYM_TABLE_INDEX, ORL_SEC_TYPE_SYM_TABLE );
         if( !sh ) return( ORL_OUT_OF_MEMORY );
         ofh->symbol_table = sh;
-        sh->flags |= ORL_SEC_FLAG_REMOVE;
+        sh->flags = (orl_sec_flags)(sh->flags|ORL_SEC_FLAG_REMOVE);
         sh->assoc.sym.hash_tab = ORLHashTableCreate( ofh->omf_hnd->funcs, 257,
                                         ORL_HASH_STRING,
                                         (orl_hash_comparison_func)_stricmp );
@@ -416,7 +416,7 @@ static orl_return       addToSymbolTable( omf_file_handle ofh,
     }
     assert( sh->assoc.sym.hash_tab );
 
-    sh->assoc.sym.syms = checkArraySize( ofh, sh->assoc.sym.syms,
+    sh->assoc.sym.syms = (omf_symbol_handle*)checkArraySize( ofh, sh->assoc.sym.syms,
                                          sh->assoc.sym.num, STD_INC,
                                          sizeof( omf_symbol_handle ) );
     if( !sh->assoc.sym.syms ) return( ORL_OUT_OF_MEMORY );
@@ -439,11 +439,11 @@ static orl_return       addReloc( omf_file_handle ofh, omf_reloc_handle orh )
         ofh->relocs = newSection( ofh, OMF_SEC_RELOC_INDEX,
                                   ORL_SEC_TYPE_RELOCS );
         if( !ofh->relocs ) return( ORL_OUT_OF_MEMORY );
-        ofh->relocs->flags |= ORL_SEC_FLAG_REMOVE;
+        ofh->relocs->flags = (orl_sec_flags)(ofh->relocs->flags|ORL_SEC_FLAG_REMOVE);
     }
 
     sh = ofh->relocs;
-    sh->assoc.reloc.relocs = checkArraySize( ofh, sh->assoc.reloc.relocs,
+    sh->assoc.reloc.relocs = (omf_reloc_handle*)checkArraySize( ofh, sh->assoc.reloc.relocs,
                                              sh->assoc.reloc.num, STD_INC,
                                              sizeof( omf_reloc_handle ) );
     if( !sh->assoc.reloc.relocs ) return( ORL_OUT_OF_MEMORY );
@@ -545,7 +545,7 @@ static orl_return       writeAndFixupLIData( omf_file_handle ofh,
              */
             ftr = findMatchingFixup( ofh->lidata->first_fixup, lo, hi );
             while( ftr ) {
-                ntr = _ClientAlloc( ofh, sizeof( omf_tmp_fixup_struct ) );
+                ntr = (omf_tmp_fixup)_ClientAlloc( ofh, sizeof( omf_tmp_fixup_struct ) );
                 if( !ntr ) return( ORL_OUT_OF_MEMORY );
                 memcpy( ntr, ftr, sizeof( omf_tmp_fixup_struct ) );
 
@@ -598,7 +598,7 @@ static orl_return       expandPrevLIData( omf_file_handle ofh )
     size = ofh->lidata->size;
 
     if( size > 1024 ) {
-        buffer = _ClientAlloc( ofh, size );
+        buffer = (omf_bytes)_ClientAlloc( ofh, size );
         if( !buffer ) return( ORL_OUT_OF_MEMORY );
     } else {
         buffer = tmp;
@@ -725,7 +725,7 @@ static orl_return       checkSegmentLength( omf_sec_handle sh, uint_32 max )
     if( max > sh->assoc.seg.cur_size ) {
         max = ( max / STD_CODE_SIZE ) + 1;
         max *= STD_CODE_SIZE;
-        conts = _ClientAlloc( sh->omf_file_hnd, max );
+        conts = (omf_bytes)_ClientAlloc( sh->omf_file_hnd, max );
         if( !conts ) return( ORL_OUT_OF_MEMORY );
         memset( conts, 0, max );
         if( sh->contents ) {
@@ -758,7 +758,7 @@ static orl_sec_flags    getSegSecFlags( omf_file_handle ofh, omf_idx name,
 {
     char                lname[257];
     int                 slen;
-    orl_sec_flags       flags = 0;
+    orl_sec_flags       flags = (orl_sec_flags)0;
 
     align = align; combine = combine;
     assert( ofh );
@@ -770,46 +770,46 @@ static orl_sec_flags    getSegSecFlags( omf_file_handle ofh, omf_idx name,
         if( ( slen > 3 ) &&
             ( !strcmp( "CODE", &lname[slen - 4] ) ||
               !strcmp( "TEXT", &lname[slen - 4] ) ) ) {
-            flags |= ORL_SEC_FLAG_EXEC | ORL_SEC_FLAG_EXECUTE_PERMISSION |
-                     ORL_SEC_FLAG_READ_PERMISSION;
+            flags = (orl_sec_flags)(flags|ORL_SEC_FLAG_EXEC | ORL_SEC_FLAG_EXECUTE_PERMISSION |
+                     ORL_SEC_FLAG_READ_PERMISSION);
         } else if( ( slen > 3 ) && !strcmp( "DATA", &lname[slen - 4] ) ) {
-            flags |= ORL_SEC_FLAG_READ_PERMISSION;
+            flags = (orl_sec_flags)(flags | ORL_SEC_FLAG_READ_PERMISSION);
             slen = OmfGetLName( ofh->lnames, name, lname );
             if( slen > 0 ) {
                 lname[slen] = '\0';
                 strNUpper( lname, slen );
                 if( strstr( "CONST", lname ) ) {
-                        flags |= ORL_SEC_FLAG_INITIALIZED_DATA;
+                    flags = (orl_sec_flags)(flags | ORL_SEC_FLAG_INITIALIZED_DATA);
                 }
             }
         } else if( ( slen > 4 ) && !strcmp( "CONST", &lname[slen - 5] ) ) {
-            flags |= ORL_SEC_FLAG_READ_PERMISSION |
-                     ORL_SEC_FLAG_INITIALIZED_DATA;
+            flags = (orl_sec_flags)(flags | ORL_SEC_FLAG_READ_PERMISSION |
+                     ORL_SEC_FLAG_INITIALIZED_DATA);
         } else if( ( slen > 2 ) && !strcmp( "BSS", &lname[slen - 3] ) ) {
-            flags |= ORL_SEC_FLAG_READ_PERMISSION |
+            flags = (orl_sec_flags)(flags | ORL_SEC_FLAG_READ_PERMISSION |
                      ORL_SEC_FLAG_WRITE_PERMISSION |
-                     ORL_SEC_FLAG_UNINITIALIZED_DATA;
+                     ORL_SEC_FLAG_UNINITIALIZED_DATA);
         } else if( ( slen > 4 ) && !strcmp( "STACK", &lname[slen - 5] ) ) {
-            flags |= ORL_SEC_FLAG_READ_PERMISSION |
+            flags = (orl_sec_flags)(flags | ORL_SEC_FLAG_READ_PERMISSION |
                      ORL_SEC_FLAG_WRITE_PERMISSION |
-                     ORL_SEC_FLAG_UNINITIALIZED_DATA;
+                     ORL_SEC_FLAG_UNINITIALIZED_DATA);
         } else {
-            flags |= ORL_SEC_FLAG_READ_PERMISSION;
+            flags = (orl_sec_flags)(flags | ORL_SEC_FLAG_READ_PERMISSION);
             slen = OmfGetLName( ofh->lnames, name, lname );
             lname[slen] = '\0';
             strNUpper( lname, slen );
             if( ( slen > 3 ) &&
                 ( !strcmp( "CODE", &lname[slen - 4] ) ||
                   !strcmp( "TEXT", &lname[slen - 4] ) ) ) {
-                flags |= ORL_SEC_FLAG_EXEC | ORL_SEC_FLAG_EXECUTE_PERMISSION;
+                flags = (orl_sec_flags)(flags | ORL_SEC_FLAG_EXEC | ORL_SEC_FLAG_EXECUTE_PERMISSION);
             }
         }
     } else {
-        flags |= ORL_SEC_FLAG_READ_PERMISSION;
+        flags = (orl_sec_flags)(flags | ORL_SEC_FLAG_READ_PERMISSION);
     }
 
     if( use32 ) {
-        flags |= ORL_SEC_FLAG_USE_32;
+        flags = (orl_sec_flags)(flags | ORL_SEC_FLAG_USE_32);
     }
 
     return( flags );
@@ -876,7 +876,7 @@ orl_return              OmfAddLIData( omf_file_handle ofh, int is32,
     /* we put off expanding the lidata until all the fixups are in
      */
     if( !ofh->lidata ) {
-        ofh->lidata = _ClientAlloc( ofh, sizeof( omf_tmp_lidata_struct ) );
+        ofh->lidata = (omf_tmp_lidata)_ClientAlloc( ofh, sizeof( omf_tmp_lidata_struct ) );
         if( !ofh->lidata ) return( ORL_OUT_OF_MEMORY );
     }
 
@@ -961,7 +961,7 @@ orl_return              OmfAddFixupp( omf_file_handle ofh, int is32, int mode,
         assert( ofh->work_sec );
         assert( ofh->lidata );
 
-        tfr = _ClientAlloc( ofh, sizeof( omf_tmp_fixup_struct ) );
+        tfr = (omf_tmp_fixup)_ClientAlloc( ofh, sizeof( omf_tmp_fixup_struct ) );
         if( !tfr ) return( ORL_OUT_OF_MEMORY );
         memset( tfr, 0, sizeof( omf_tmp_fixup_struct ) );
 
@@ -989,7 +989,7 @@ orl_return              OmfAddFixupp( omf_file_handle ofh, int is32, int mode,
         return( ORL_OKAY );
     }
 
-    orel = _ClientAlloc( ofh, sizeof( omf_reloc_handle_struct ) );
+    orel = (omf_reloc_handle)_ClientAlloc( ofh, sizeof( omf_reloc_handle_struct ) );
     if( !orel ) return( ORL_OUT_OF_MEMORY );
     memset( orel, 0, sizeof( omf_reloc_handle_struct ) );
 
@@ -1135,9 +1135,9 @@ orl_return              OmfAddExtDef( omf_file_handle ofh, omf_bytes buffer,
 
     styp = ORL_SYM_TYPE_OBJECT;
     if( ( typ == CMD_COMDEF ) || ( typ == CMD_LCOMDEF ) ) {
-        styp |= ORL_SYM_TYPE_COMMON;
+        styp = (orl_symbol_type)(styp|ORL_SYM_TYPE_COMMON);
     } else {
-        styp |= ORL_SYM_TYPE_UNDEFINED;
+        styp = (orl_symbol_type)(styp | ORL_SYM_TYPE_UNDEFINED);
     }
     sym = newSymbol( ofh, styp, (char *)buffer, len );
     if( !sym ) return( ORL_OUT_OF_MEMORY );
@@ -1212,58 +1212,58 @@ orl_return              OmfAddComDat( omf_file_handle ofh, int is32, int flags,
             sh->assoc.seg.seg_flags |= OMF_SEG_IS_32;
         }
 
-        sh->flags |= ORL_SEC_FLAG_COMDAT | ORL_SEC_FLAG_READ_PERMISSION |
-                     ORL_SEC_FLAG_INITIALIZED_DATA;
+        sh->flags = (orl_sec_flags)(sh->flags | ORL_SEC_FLAG_COMDAT | ORL_SEC_FLAG_READ_PERMISSION |
+                     ORL_SEC_FLAG_INITIALIZED_DATA);
         sh->assoc.seg.combine = ORL_SEC_COMBINE_COMDAT;
 
         switch( attr & COMDAT_ALLOC_MASK ) {
         case( COMDAT_EXPLICIT ):        /* in given segment */
             sh->assoc.seg.comdat.assoc_seg = findSegment( ofh, seg );
             if( !sh->assoc.seg.comdat.assoc_seg ) return( ORL_ERROR );
-            sh->flags |= sh->assoc.seg.comdat.assoc_seg->flags;
-            sh->assoc.seg.combine |= ORL_SEC_COMBINE_COMDAT_ALLOC_EXPLIC;
+            sh->flags = (orl_sec_flags)(sh->flags | sh->assoc.seg.comdat.assoc_seg->flags);
+            sh->assoc.seg.combine = (orl_sec_combine)(sh->assoc.seg.combine|ORL_SEC_COMBINE_COMDAT_ALLOC_EXPLIC);
             if( group ) {
                 sh->assoc.seg.comdat.group = findGroup( ofh, group );
             }
             break;
         case( COMDAT_FAR_CODE ):        /* allocate CODE use16 segment */
-            sh->flags |= ORL_SEC_FLAG_EXEC | ORL_SEC_FLAG_EXECUTE_PERMISSION;
-            sh->assoc.seg.combine |= ORL_SEC_COMBINE_COMDAT_ALLOC_CODE16;
+            sh->flags = (orl_sec_flags)(sh->flags | ORL_SEC_FLAG_EXEC | ORL_SEC_FLAG_EXECUTE_PERMISSION);
+            sh->assoc.seg.combine = (orl_sec_combine)(sh->assoc.seg.combine | ORL_SEC_COMBINE_COMDAT_ALLOC_CODE16);
             break;
         case( COMDAT_CODE32 ):          /* allocate CODE use32 segment */
-            sh->flags |= ORL_SEC_FLAG_EXEC | ORL_SEC_FLAG_EXECUTE_PERMISSION;
-            sh->assoc.seg.combine |= ORL_SEC_COMBINE_COMDAT_ALLOC_CODE32;
+            sh->flags = (orl_sec_flags)(sh->flags | ORL_SEC_FLAG_EXEC | ORL_SEC_FLAG_EXECUTE_PERMISSION);
+            sh->assoc.seg.combine = (orl_sec_combine)(sh->assoc.seg.combine | ORL_SEC_COMBINE_COMDAT_ALLOC_CODE32);
             break;
         case( COMDAT_FAR_DATA ):        /* allocate DATA use16 segment */
-            sh->flags |= ORL_SEC_FLAG_WRITE_PERMISSION;
-            sh->assoc.seg.combine |= ORL_SEC_COMBINE_COMDAT_ALLOC_DATA16;
+            sh->flags = (orl_sec_flags)(sh->flags | ORL_SEC_FLAG_WRITE_PERMISSION);
+            sh->assoc.seg.combine = (orl_sec_combine)(sh->assoc.seg.combine | ORL_SEC_COMBINE_COMDAT_ALLOC_DATA16);
             break;
         case( COMDAT_DATA32 ):          /* allocate DATA use32 segment */
-            sh->flags |= ORL_SEC_FLAG_WRITE_PERMISSION;
-            sh->assoc.seg.combine |= ORL_SEC_COMBINE_COMDAT_ALLOC_DATA32;
+            sh->flags = (orl_sec_flags)(sh->flags | ORL_SEC_FLAG_WRITE_PERMISSION);
+            sh->assoc.seg.combine = (orl_sec_combine)(sh->assoc.seg.combine | ORL_SEC_COMBINE_COMDAT_ALLOC_DATA32);
             break;
         }
 
         /* Create symbol for section using its name, when looking up we will
          * need to match the indexes for proper matching
          */
-        styp = ORL_SYM_TYPE_SECTION | ORL_SYM_TYPE_COMMON;
+        styp = (orl_symbol_type)(ORL_SYM_TYPE_SECTION | ORL_SYM_TYPE_COMMON);
         switch( attr & COMDAT_MATCH_MASK ) {
         case( COMDAT_MATCH_NONE ):              /* don't match anyone */
-            styp |= ORL_SYM_CDAT_NODUPLICATES;
-            sh->assoc.seg.combine |= ORL_SEC_COMBINE_COMDAT_PICK_NONE;
+            styp = (orl_symbol_type)(ORL_SYM_CDAT_NODUPLICATES);
+            sh->assoc.seg.combine = (orl_sec_combine)(sh->assoc.seg.combine | ORL_SEC_COMBINE_COMDAT_PICK_NONE);
             break;
         case( COMDAT_MATCH_ANY ):               /* pick any instance */
-            styp |= ORL_SYM_CDAT_ANY;
-            sh->assoc.seg.combine |= ORL_SEC_COMBINE_COMDAT_PICK_ANY;
+            styp = (orl_symbol_type)(styp|ORL_SYM_CDAT_ANY);
+            sh->assoc.seg.combine = (orl_sec_combine)(sh->assoc.seg.combine | ORL_SEC_COMBINE_COMDAT_PICK_ANY);
             break;
         case( COMDAT_MATCH_SAME ):              /* must be same size */
-            styp |= ORL_SYM_CDAT_SAME_SIZE;
-            sh->assoc.seg.combine |= ORL_SEC_COMBINE_COMDAT_PICK_SAME;
+            styp = (orl_symbol_type)(styp | ORL_SYM_CDAT_SAME_SIZE);
+            sh->assoc.seg.combine = (orl_sec_combine)(sh->assoc.seg.combine | ORL_SEC_COMBINE_COMDAT_PICK_SAME);
             break;
         case( COMDAT_MATCH_EXACT ):             /* must be exact match */
-            styp |= ORL_SYM_CDAT_EXACT;
-            sh->assoc.seg.combine |= ORL_SEC_COMBINE_COMDAT_PICK_EXACT;
+            styp = (orl_symbol_type)(styp | ORL_SYM_CDAT_EXACT);
+            sh->assoc.seg.combine = (orl_sec_combine)(sh->assoc.seg.combine | ORL_SEC_COMBINE_COMDAT_PICK_EXACT);
             break;
         }
 
@@ -1306,7 +1306,7 @@ orl_return              OmfAddComDat( omf_file_handle ofh, int is32, int flags,
 extern orl_return       OmfAddLineNum( omf_sec_handle sh, unsigned_16 line,
                                        unsigned_32 offset )
 {
-    sh->assoc.seg.lines = checkArraySize( sh->omf_file_hnd, sh->assoc.seg.lines,
+    sh->assoc.seg.lines = (orl_linnum*)checkArraySize( sh->omf_file_hnd, sh->assoc.seg.lines,
                                           sh->assoc.seg.num_lines, STD_INC,
                                           sizeof( orl_linnum ) );
     if( sh->assoc.seg.lines == NULL )
@@ -1361,7 +1361,7 @@ orl_return              OmfAddSegDef( omf_file_handle ofh, int is32,
         sh->size = size;
     }
 
-    sh->flags |= getSegSecFlags( ofh, name, class1, align, combine, use32 );
+    sh->flags = (orl_sec_flags)(sh->flags|getSegSecFlags( ofh, name, class1, align, combine, use32 ));
 
     if( sh->flags & ORL_SEC_FLAG_UNINITIALIZED_DATA ) {
         sh->type = ORL_SEC_TYPE_NO_BITS;
@@ -1404,7 +1404,7 @@ orl_return              OmfAddPubDef( omf_file_handle ofh, int is32,
     } else {
         styp = ORL_SYM_TYPE_DEFINED;
     }
-    styp |= ORL_SYM_TYPE_OBJECT;
+    styp = (orl_symbol_type)(styp|ORL_SYM_TYPE_OBJECT);
 
     sym = newSymbol( ofh, styp, name, len );
     if( !sym ) return( ORL_OUT_OF_MEMORY );
@@ -1453,7 +1453,7 @@ orl_return              OmfAddGrpDef( omf_file_handle ofh, omf_idx name,
         size--;
         sh = findSegment( ofh, segs[size] );
         if( !sh ) return( ORL_ERROR );
-        sh->flags |= ORL_SEC_FLAG_GROUPED;
+        sh->flags = (orl_sec_flags)(sh->flags|ORL_SEC_FLAG_GROUPED);
         sh->assoc.seg.group = gr;
     }
 
@@ -1495,16 +1495,16 @@ extern orl_return       OmfAddComment( omf_file_handle ofh, uint_8 class1,
     if( !sh ) {
         sh = newSection( ofh, OMF_SEC_COMMENT_INDEX, ORL_SEC_TYPE_NOTE );
         if( !sh ) return( ORL_OUT_OF_MEMORY );
-        sh->flags |= ORL_SEC_FLAG_REMOVE;
+        sh->flags = (orl_sec_flags)(sh->flags|ORL_SEC_FLAG_REMOVE);
         ofh->comments = sh;
     }
 
-    sh->assoc.comment.comments = checkArraySize(ofh, sh->assoc.comment.comments,
+    sh->assoc.comment.comments = (omf_comment_struct**)checkArraySize(ofh, sh->assoc.comment.comments,
                                                 sh->assoc.comment.num, STD_INC,
                                                 sizeof(omf_comment_struct *) );
     if( !sh->assoc.comment.comments ) return( ORL_OUT_OF_MEMORY );
 
-    comment = _ClientAlloc( ofh, sizeof( omf_comment_struct ) + len );
+    comment = (omf_comment_struct*)_ClientAlloc( ofh, sizeof( omf_comment_struct ) + len );
     if( !comment ) return( ORL_OUT_OF_MEMORY );
     memset( comment, 0, sizeof( omf_comment_struct ) + len );
 

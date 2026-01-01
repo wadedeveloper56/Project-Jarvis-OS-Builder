@@ -15,30 +15,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="JWlink.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="pch.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Linker.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MessagingSubsystem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="globals.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Initialize.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="pch.h">
+    <ClInclude Include="framework.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Linker.h">
+    <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="FileSubsystem.h">
@@ -47,25 +27,16 @@
     <ClInclude Include="MemorySubsystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MessagingSubsystem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="types.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="globals.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="structures.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Initialize.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="wlink.msg">
-      <Filter>Header Files</Filter>
-    </None>
+    <ClCompile Include="pch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FileSubsystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MemorySubsystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

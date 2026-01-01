@@ -5,7 +5,7 @@ Linker::Linker()
 {
 	file = new FileSubsystem();
 	msg = new MessagingSubsystem(file);
-	memory = new MemorySubsystem(msg);
+	memory = new MemorySubsystem();
 	InitSubSystems();
 }
 
