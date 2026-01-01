@@ -109,11 +109,15 @@ void FiniSym(MemorySubsystem* memory)
     _LnkFree(StaticSymPtrs);
 }
 
+void CacheFini(void)
+{
+}
+
 void FiniLinkStruct(MemorySubsystem* memory)
 {
     BurnNodes(memory);
     FreeTokBuffs(memory);
-    //CacheFini();
+    CacheFini();
     //ObjORLFini();
 }
 

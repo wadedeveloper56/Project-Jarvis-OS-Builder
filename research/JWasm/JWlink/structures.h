@@ -1050,3 +1050,10 @@ struct fmt_data {
     unsigned        output_start : 1; // If Hexout should provide a start record
     unsigned        raw_hex_output : 1;
 };
+
+typedef struct readcache READCACHE;
+
+typedef struct readcache {
+    READCACHE* next;
+    void* data;
+} readcache;

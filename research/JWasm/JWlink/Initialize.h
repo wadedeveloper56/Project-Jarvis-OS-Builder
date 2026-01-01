@@ -34,4 +34,5 @@ void FreeTokBuffs(MemorySubsystem* memory);
 void InitSpillFile(void);
 void InitSym(MemorySubsystem* memory);
 void FiniSym(MemorySubsystem* memory);
+void CacheFini(void);
 
