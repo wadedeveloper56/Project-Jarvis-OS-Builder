@@ -39,7 +39,7 @@ coff_handle COFFENTRY CoffInit( orl_funcs * funcs )
 {
     coff_handle                                 coff_hnd;
 
-    coff_hnd = (coff_handle) funcs->alloc( sizeof( coff_handle_struct ) );
+    coff_hnd = (coff_handle) funcs->mem->AllocateMemory( sizeof( coff_handle_struct ) );
     if( !coff_hnd ) return( NULL );
     coff_hnd->funcs = funcs;
     coff_hnd->first_file_hnd = NULL;
@@ -54,7 +54,7 @@ orl_return COFFENTRY CoffFini( coff_handle coff_hnd )
         error = CoffRemoveFileLinks( coff_hnd->first_file_hnd );
         if( error != ORL_OKAY ) return( error );
     }
-    coff_hnd->funcs->free( coff_hnd );
+    coff_hnd->funcs->mem->FreeMemory( coff_hnd );
     return( ORL_OKAY );
 }
 
@@ -63,7 +63,7 @@ coff_file_handle COFFENTRY CoffFileInit( coff_handle coff_hnd, void *file )
     coff_file_handle    coff_file_hnd;
     orl_return          return_val;
 
-    coff_file_hnd = (coff_file_handle) coff_hnd->funcs->alloc( sizeof( coff_file_handle_struct ) );
+    coff_file_hnd = (coff_file_handle) coff_hnd->funcs->mem->AllocateMemory( sizeof( coff_file_handle_struct ) );
     if( !coff_file_hnd ) return( NULL );
     coff_file_hnd->coff_sec_hnd = NULL;
     coff_file_hnd->orig_sec_hnd = NULL;

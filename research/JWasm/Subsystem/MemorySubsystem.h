@@ -12,6 +12,7 @@ class MemorySubsystem
 public:
 	MemorySubsystem();
 	~MemorySubsystem();
+	void* AllocateMemory(size_t size);
 	void* ReallocateMemory(void* memblock, size_t size);
 	void FreeMemory(void* memoryBlock);
 	void* ExpandMemory(void* memblock, size_t size);
@@ -20,6 +21,5 @@ public:
 	void* LAlloc(size_t size);
 	void* ChkLAlloc(size_t size);
 private:
-	void* AllocateMemory(size_t size);
 };
 

@@ -39,9 +39,9 @@
 
 #define _ClientRead( a, b )             (((a)->implib_data != NULL) ? ImportLibData.read( a, b ) : (a)->coff_hnd->funcs->read( a->file, b ))
 #define _ClientSeek( a, b, c )          (((a)->implib_data != NULL) ? ImportLibData.seek( a, b, c ) : (a)->coff_hnd->funcs->seek( a->file, b, c ))
-#define _ClientAlloc( cast, a, b )      ((cast)(a)->coff_hnd->funcs->alloc( b ))
-#define _ClientFree( a, b )             ((a)->coff_hnd->funcs->free( b ))
-#define _ClientReAlloc( cast, a, b, c ) ((cast)(a)->coff_hnd->funcs->realloc( b, c ))
+#define _ClientAlloc( cast, a, b )      ((cast)(a)->coff_hnd->funcs->mem->AllocateMemory( b ))
+#define _ClientFree( a, b )             ((a)->coff_hnd->funcs->mem->FreeMemory( b ))
+#define _ClientReAlloc( cast, a, b, c ) ((cast)(a)->coff_hnd->funcs->mem->ReallocateMemory( b, c ))
 
 #define _ClientSecRead( a, b )          ((a)->coff_file_hnd->coff_hnd->funcs->read( a->coff_file_hnd->file, b ))
 #define _ClientSecSeek( a, b, c )       ((a)->coff_file_hnd->coff_hnd->funcs->seek( a->coff_file_hnd->file, b, c ))

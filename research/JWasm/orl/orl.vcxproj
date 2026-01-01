@@ -71,22 +71,22 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>..\watcom\h;.\;.\h;.\coff\h;.\elf\h;.\omf\h;..\Subsystem;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>..\watcom\h;.\;.\h;.\coff\h;.\elf\h;.\omf\h;..\Subsystem;..\File;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
     <OutDir>..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\bin\tools\intermediate\orl\$(Configuration)\$(Platform)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>..\watcom\h;.\;.\h;.\coff\h;.\elf\h;.\omf\h;..\Subsystem;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>..\watcom\h;.\;.\h;.\coff\h;.\elf\h;.\omf\h;..\Subsystem;..\File;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
     <OutDir>..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\bin\tools\intermediate\orl\$(Configuration)\$(Platform)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>..\watcom\h;.\;.\h;.\coff\h;.\elf\h;.\omf\h;..\Subsystem;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>..\watcom\h;.\;.\h;.\coff\h;.\elf\h;.\omf\h;..\Subsystem;..\File;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
     <OutDir>..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\bin\tools\intermediate\orl\$(Configuration)\$(Platform)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>..\watcom\h;.\;.\h;.\coff\h;.\elf\h;.\omf\h;..\Subsystem;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>..\watcom\h;.\;.\h;.\coff\h;.\elf\h;.\omf\h;..\Subsystem;..\File;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
     <OutDir>..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\bin\tools\intermediate\orl\$(Configuration)\$(Platform)\</IntDir>
   </PropertyGroup>
