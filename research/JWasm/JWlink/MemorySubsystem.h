@@ -1,6 +1,7 @@
 #pragma once
 
 #define _ChkAlloc( cast, dest, size ) dest = (cast)memory->ChkLAlloc( size )
+#define _ChkAlloc2( cast, dest, size ) cast dest = (cast)memory->ChkLAlloc( size )
 #define _LnkAlloc( cast, dest, size ) dest = (cast)memory->LAlloc( size )
 #define _LnkReAlloc( cast, dest, src, size ) dest = (cast)memory->ReallocateMemory( src, size );
 #define _LnkFree( ptr )         memory->FreeMemory( ptr )
