@@ -27,8 +27,8 @@ void Linker::InitSubSystems(void)
     InitMsg();
     InitNodes(memory);
     InitTokBuff(memory);
-//    InitSpillFile();
-//    InitSym();
+    InitSpillFile();
+    InitSym(memory);
 //    InitObjORL();
 //    InitCmdFile();
 }
@@ -37,7 +37,7 @@ void Linker::FiniSubSystems(void)
 {
 	FiniLinkStruct(memory);
 	FiniMsg();
-	//FiniSym();
+	FiniSym(memory);
 	//LnkMemFini();
 }
 

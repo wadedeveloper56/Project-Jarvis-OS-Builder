@@ -7,6 +7,8 @@
 #define NEED_NEW_ARRAY( x ) (!((x) & 0xFF))
 #define ARRAY_NUM( x )      ((x) >> 8 )
 #define ELEMENT_NUM( x )    ((x) & 0xFF)
+#define STATIC_TABALLOC (256 * sizeof(symbol *))  // 1st power of 128 > TABSIZE
+#define GLOBAL_TABALLOC (1792 * sizeof(symbol *)) // 1st power of 128 > TABSIZE
 
 typedef struct nodearray {
     unsigned    num;            // number of nodes inserted
@@ -29,3 +31,7 @@ void BurnNodes(MemorySubsystem* memory);
 void FiniLinkStruct(MemorySubsystem* memory);
 void InitTokBuff(MemorySubsystem* memory);
 void FreeTokBuffs(MemorySubsystem* memory);
+void InitSpillFile(void);
+void InitSym(MemorySubsystem* memory);
+void FiniSym(MemorySubsystem* memory);
+

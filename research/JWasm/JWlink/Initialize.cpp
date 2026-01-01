@@ -8,11 +8,15 @@ static  int     Chunks;
 static int      OpenFiles;      // the number of open files
 static unsigned LastResult;
 static bool     CaughtBreak;    // set to TRUE if break hit.
+static char* TFileName;
+static unsigned long    TmpFSize;
 bool BannerPrinted;
 nodearray* ExtNodes;           // ptr to obj file import list
 nodearray* SegNodes;           // ptr to obj file segment list
 nodearray* GrpNodes;           // ptr to obj file group list
 nodearray* NameNodes;          // ptr to obj file lname list
+symbol** GlobalSymPtrs;
+symbol** StaticSymPtrs;
 
 void LnkMemInit(void)
 {
@@ -83,6 +87,26 @@ void FreeTokBuffs(MemorySubsystem* memory)
         _LnkFree(TokBuff);
         TokBuff = NULL;
     }
+}
+
+void InitSpillFile(void)
+{
+    TempFile = NIL_HANDLE;
+    TFileName = NULL;
+    TmpFSize = 0;
+    //SetBreak();
+}
+
+void InitSym(MemorySubsystem* memory)
+{
+    _ChkAlloc(symbol**, GlobalSymPtrs, GLOBAL_TABALLOC);
+    _ChkAlloc(symbol**, StaticSymPtrs, STATIC_TABALLOC);
+}
+
+void FiniSym(MemorySubsystem* memory)
+{
+    _LnkFree(GlobalSymPtrs);
+    _LnkFree(StaticSymPtrs);
 }
 
 void FiniLinkStruct(MemorySubsystem* memory)
