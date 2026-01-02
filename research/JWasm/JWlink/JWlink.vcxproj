@@ -291,6 +291,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="carve.cpp" />
     <ClCompile Include="globals.cpp" />
     <ClCompile Include="Initialize.cpp" />
     <ClCompile Include="JWlink.cpp" />
@@ -307,8 +308,11 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|ARM64EC'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="ring.cpp" />
+    <ClCompile Include="stringtable.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="carve.h" />
     <ClInclude Include="coffentr.h" />
     <ClInclude Include="coffflhn.h" />
     <ClInclude Include="coffglbl.h" />
@@ -351,6 +355,8 @@
     <ClInclude Include="orlintnl.h" />
     <ClInclude Include="orllevel.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="ring.h" />
+    <ClInclude Include="stringtable.h" />
     <ClInclude Include="structures.h" />
     <ClInclude Include="types.h" />
   </ItemGroup>

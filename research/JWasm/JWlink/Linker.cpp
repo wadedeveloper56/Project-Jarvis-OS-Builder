@@ -37,7 +37,7 @@ void Linker::InitSubSystems(void)
 
 void Linker::ResetSubSystems(void)
 {
-    ResetPermData();
+    ResetPermData(memory);
     //ResetMsg();
     //VirtMemInit();
     //ResetMisc();

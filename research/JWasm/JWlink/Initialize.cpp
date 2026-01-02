@@ -3,11 +3,18 @@
 #include "Initialize.h"
 #include "orl.h"
 #include "debug.h"
+#include "carve.h"
+#include "stringtable.h"
+
+#define SEG_CARVE_SIZE          (2*1024)
+#define MOD_CARVE_SIZE          (5*1024)
+#define SDATA_CARVE_SIZE        (16*1024)
+#define SYM_CARVE_SIZE          (32*1024)
 
 #ifdef _INT_DEBUG
-int     Chunks;
+int           Chunks;
 #endif
-int      OpenFiles;      // the number of open files
+int           OpenFiles;      // the number of open files
 unsigned      LastResult;
 bool          CaughtBreak;    // set to TRUE if break hit.
 char*         TFileName;
@@ -47,7 +54,7 @@ char*         OldSymFile;
 void*         AltDefData;
 char*         IncStrTab;
 
-void ResetPermData(void)
+void ResetPermData(MemorySubsystem* memory)
 {
     DEBUG(("ResetPermData() enter\n"));
     IncFileName = NULL;
@@ -60,17 +67,17 @@ void ResetPermData(void)
     IncGroups = NULL;
     SavedUserLibs = NULL;
     SavedDefLibs = NULL;
-    //CarveClass = CarveCreate(sizeof(class_entry), 20 * sizeof(class_entry));
-    //CarveGroup = CarveCreate(sizeof(group_entry), 20 * sizeof(group_entry));
-    //CarveDLLInfo = CarveCreate(sizeof(dll_sym_info), 100 * sizeof(dll_sym_info));
-    //CarveExportInfo = CarveCreate(sizeof(entry_export), 20 * sizeof(entry_export));
-    //CarveLeader = CarveCreate(sizeof(seg_leader), SEG_CARVE_SIZE);
-    //CarveModEntry = CarveCreate(sizeof(mod_entry), MOD_CARVE_SIZE);
-    //CarveSegData = CarveCreate(sizeof(segdata), SDATA_CARVE_SIZE);
-    //CarveSymbol = CarveCreate(sizeof(symbol), SYM_CARVE_SIZE);
-    //InitStringTable(&PermStrings, TRUE);
-    //InitStringTable(&PrefixStrings, TRUE);
-    //InitStringTable(&StoredRelocs, FALSE);
+    CarveClass = CarveCreate(memory, sizeof(class_entry), 20 * sizeof(class_entry));
+    CarveGroup = CarveCreate(memory, sizeof(group_entry), 20 * sizeof(group_entry));
+    CarveDLLInfo = CarveCreate(memory, sizeof(dll_sym_info), 100 * sizeof(dll_sym_info));
+    CarveExportInfo = CarveCreate(memory, sizeof(entry_export), 20 * sizeof(entry_export));
+    CarveLeader = CarveCreate(memory, sizeof(seg_leader), SEG_CARVE_SIZE);
+    CarveModEntry = CarveCreate(memory, sizeof(mod_entry), MOD_CARVE_SIZE);
+    CarveSegData = CarveCreate(memory, sizeof(segdata), SDATA_CARVE_SIZE);
+    CarveSymbol = CarveCreate(memory, sizeof(symbol), SYM_CARVE_SIZE);
+    InitStringTable(memory, &PermStrings, true);
+    InitStringTable(memory, &PrefixStrings, true);
+    InitStringTable(memory, &StoredRelocs, false);
 }
 
 void LnkMemInit(void)

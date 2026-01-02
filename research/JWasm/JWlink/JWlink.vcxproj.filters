@@ -36,6 +36,15 @@
     <ClCompile Include="orl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="carve.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="stringtable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ring.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -168,6 +177,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="debug.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="carve.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="stringtable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ring.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

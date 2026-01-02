@@ -25,3 +25,13 @@
 #define PRINTLOC
 #define DEBUG( x )
 #endif
+
+#ifdef _DEBUG
+#define DbgVerify( cond, msg ) if( ! ( cond ) ) { PRINTLOC printf( msg "\n" );}
+#define DbgDefault( msg ) default: printf( msg __location )
+#define DbgAssert( cond )   if( !(cond) )  { PRINTLOC printf( #cond "\n");}
+#else
+#define DbgVerify( cond, msg )
+#define DbgDefault( msg )
+#define DbgAssert( cond )
+#endif
