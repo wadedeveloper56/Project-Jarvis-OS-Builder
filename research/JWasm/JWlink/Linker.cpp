@@ -70,7 +70,7 @@ void Linker::CleanSubSystems(void)
     //    MapFile = NIL_HANDLE;
     //}
     //FreeOutFiles();
-    //_LnkFree(MapFName);
+    _LnkFree(MapFName);
     //BurnSystemList();
     //FreeList(LibPath);
     //CloseSpillFile();
@@ -85,7 +85,7 @@ void Linker::CleanSubSystems(void)
     //FreeVirtMem();
     //CleanToc();
     //CleanSym();
-    //CleanPermData();
+    CleanPermData(memory);
 }
 
 void Linker::FiniSubSystems(void)

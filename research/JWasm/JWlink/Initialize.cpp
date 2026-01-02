@@ -5,6 +5,7 @@
 #include "debug.h"
 #include "carve.h"
 #include "stringtable.h"
+#include "ring.h"
 
 #define SEG_CARVE_SIZE          (2*1024)
 #define MOD_CARVE_SIZE          (5*1024)
@@ -80,6 +81,45 @@ void ResetPermData(MemorySubsystem* memory)
     InitStringTable(memory, &StoredRelocs, false);
 }
 
+void CleanPermData(MemorySubsystem* memory)
+{
+//#ifndef _DEBUG
+//    if (!(LinkFlags & INC_LINK_FLAG)) {
+//        CarveVerifyAllGone(CarveLeader, "seg_leader");
+//        CarveVerifyAllGone(CarveModEntry, "mod_entry");
+//        CarveVerifyAllGone(CarveDLLInfo, "dll_sym_info");
+//        CarveVerifyAllGone(CarveExportInfo, "entry_export");
+//        CarveVerifyAllGone(CarveSymbol, "symbol");
+//        CarveVerifyAllGone(CarveSegData, "segdata");
+//        CarveVerifyAllGone(CarveClass, "class_entry");
+//        CarveVerifyAllGone(CarveGroup, "group_entry");
+//    }
+//#endif
+//    if (LinkState & LINK_ERROR) {
+//        QDelete(IncFileName);
+//    }
+//    CarveDestroy(CarveLeader);
+//    CarveDestroy(CarveModEntry);
+//    CarveDestroy(CarveDLLInfo);
+//    CarveDestroy(CarveExportInfo);
+//    CarveDestroy(CarveSymbol);
+//    CarveDestroy(CarveSegData);
+//    CarveDestroy(CarveClass);
+//    CarveDestroy(CarveGroup);
+    FiniStringTable(memory, &PrefixStrings);
+    FiniStringTable(memory, &PermStrings);
+    FiniStringTable(memory, &StoredRelocs);
+    _LnkFree(IncFileName);
+    _LnkFree(IncStrTab);
+    _LnkFree(ReadRelocs);
+    _LnkFree(OldExe);
+    _LnkFree(OldSymFile);
+    _LnkFree(AltDefData);
+    RingFree(memory, &IncGroupDefs);
+    _LnkFree(IncGroups);
+//    FreeList(SavedUserLibs);
+//    FreeList(SavedDefLibs);
+}
 void LnkMemInit(void)
 {
 #ifdef _INT_DEBUG

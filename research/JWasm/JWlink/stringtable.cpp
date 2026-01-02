@@ -3,6 +3,11 @@
 #include "stringtable.h"
 #include "ring.h"
 
+void FiniStringTable(MemorySubsystem* memory, stringtable* strtab)
+{
+    RingFree(memory, &strtab->data);
+}
+
 stringblock* AllocNewBlock(MemorySubsystem* memory, stringtable* strtab)
 {
     _ChkAlloc2(stringblock *, blk, sizeof(stringblock));

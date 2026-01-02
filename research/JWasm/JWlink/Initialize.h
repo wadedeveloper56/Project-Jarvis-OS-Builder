@@ -23,6 +23,7 @@ extern nodearray* GrpNodes;           // ptr to obj file group list
 extern nodearray* NameNodes;          // ptr to obj file lname list
 
 void ResetPermData(MemorySubsystem* memory);
+void CleanPermData(MemorySubsystem* memory);
 void LnkMemInit(void);
 void LnkMemFini(void);
 void InitCmdFile(void);
