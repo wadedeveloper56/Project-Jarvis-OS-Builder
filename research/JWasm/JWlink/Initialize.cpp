@@ -7,28 +7,37 @@
 int     Chunks;
 #endif
 int      OpenFiles;      // the number of open files
-unsigned LastResult;
-bool     CaughtBreak;    // set to TRUE if break hit.
-char* TFileName;
-unsigned long    TmpFSize;
-bool BannerPrinted;
-nodearray* ExtNodes;           // ptr to obj file import list
-nodearray* SegNodes;           // ptr to obj file segment list
-nodearray* GrpNodes;           // ptr to obj file group list
-nodearray* NameNodes;          // ptr to obj file lname list
-symbol** GlobalSymPtrs;
-symbol** StaticSymPtrs;
-orl_handle       ORLHandle;
-long             ORLFilePos;
-orl_funcs        ORLFuncs;
-readcache* ReadCacheList;
-static MemorySubsystem* memory;
+unsigned      LastResult;
+bool          CaughtBreak;    // set to TRUE if break hit.
+char*         TFileName;
+unsigned long TmpFSize;
+bool          BannerPrinted;
+nodearray*    ExtNodes;           // ptr to obj file import list
+nodearray*    SegNodes;           // ptr to obj file segment list
+nodearray*    GrpNodes;           // ptr to obj file group list
+nodearray*    NameNodes;          // ptr to obj file lname list
+symbol**      GlobalSymPtrs;
+symbol**      StaticSymPtrs;
+orl_handle    ORLHandle;
+long          ORLFilePos;
+orl_funcs     ORLFuncs;
+readcache*    ReadCacheList;
+sysblock*     PrevCommand;
 
 void LnkMemInit(void)
 {
 #ifdef _INT_DEBUG
     Chunks = 0;
 #endif
+}
+
+void LnkMemFini(void)
+{
+}
+
+void InitCmdFile(void)
+{
+    PrevCommand = NULL;
 }
 
 void LnkFilesInit(void)
@@ -146,7 +155,7 @@ void* CacheRead(file_list* list, unsigned long pos, unsigned len)
     return (char*)list->file->cache + pos;
 }
 
-void* ORLRead(void* _list, size_t len)
+void* ORLRead(MemorySubsystem* memory, void* _list, size_t len)
 {
     file_list* list = (file_list*)_list;
     void* result;
@@ -163,7 +172,6 @@ void* ORLRead(void* _list, size_t len)
 
 void InitObjORL(MemorySubsystem* mem)
 {
-    memory = mem;
     ORLFuncs = { ORLRead, ORLSeek, mem };
     ORLHandle = ORLInit(&ORLFuncs);
     ReadCacheList = NULL;

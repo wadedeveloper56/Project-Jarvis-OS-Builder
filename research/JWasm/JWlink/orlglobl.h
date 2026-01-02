@@ -74,7 +74,7 @@ typedef struct {
 #include <poppck.h>
 
 typedef struct {
-    void *      (*read)( void *, size_t );
+    void *      (*read)(MemorySubsystem*, void *, size_t );
     long int    (*seek)( void *, long int, int );
     MemorySubsystem* memory;
 } orl_funcs;

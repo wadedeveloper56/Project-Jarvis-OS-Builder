@@ -1058,3 +1058,10 @@ typedef struct readcache {
     READCACHE* next;
     void* data;
 } readcache;
+
+typedef struct sysblock {
+    struct sysblock* next;
+    char* name;
+    char                commands[1];
+} sysblock;
+

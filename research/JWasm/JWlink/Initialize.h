@@ -23,6 +23,8 @@ extern nodearray* GrpNodes;           // ptr to obj file group list
 extern nodearray* NameNodes;          // ptr to obj file lname list
 
 void LnkMemInit(void);
+void LnkMemFini(void);
+void InitCmdFile(void);
 void LnkFilesInit(void);
 int InitMsg(void);
 int FiniMsg(void);

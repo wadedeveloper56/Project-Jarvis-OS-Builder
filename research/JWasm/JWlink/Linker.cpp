@@ -7,10 +7,12 @@ Linker::Linker()
 	msg = new MessagingSubsystem(file);
 	memory = new MemorySubsystem();
 	InitSubSystems();
+    ResetSubSystems();
 }
 
 Linker::~Linker()
 {
+    CleanSubSystems();
 	FiniSubSystems();
 	delete memory;
 	delete msg;
@@ -30,7 +32,60 @@ void Linker::InitSubSystems(void)
     InitSpillFile();
     InitSym(memory);
     InitObjORL(memory);
-//    InitCmdFile();
+    InitCmdFile();
+}
+
+void Linker::ResetSubSystems(void)
+{
+    //ResetPermData();
+    //ResetMsg();
+    //VirtMemInit();
+    //ResetMisc();
+    //Root = NewSection();
+    //ResetDBI();
+    //ResetMapIO();
+    //ResetCmdAll();
+    //ResetOvlSupp();
+    //ResetComdef();
+    //ResetDistrib();
+    //ResetLoadNov();
+    //ResetLoadPE();
+    //ResetObj2Supp();
+    //ResetObjIO();
+    //ResetObjOMF();
+    //ResetObjPass1();
+    //ResetObjStrip();
+    //ResetOMFReloc();
+    //ResetReloc();
+    //ResetSymTrace();
+    //ResetLoadFile();
+    //ResetAddr();
+    //ResetToc();
+}
+
+void Linker::CleanSubSystems(void)
+{
+    //if (MapFile != NIL_HANDLE) {
+    //    QClose(MapFile, MapFName);
+    //    MapFile = NIL_HANDLE;
+    //}
+    //FreeOutFiles();
+    //_LnkFree(MapFName);
+    //BurnSystemList();
+    //FreeList(LibPath);
+    //CloseSpillFile();
+    //CleanTraces();
+    //FreePaths();
+    //FreeUndefs();
+    //FreeLocalImports();
+    //CleanLoadFile();
+    //CleanLinkStruct();
+    //FreeFormatStuff();
+    //FreeObjInfo();
+    //FreeVirtMem();
+    //CleanToc();
+    //CleanSym();
+    //CleanPermData();
 }
 
 void Linker::FiniSubSystems(void)
@@ -38,7 +93,7 @@ void Linker::FiniSubSystems(void)
 	FiniLinkStruct(memory);
 	FiniMsg();
 	FiniSym(memory);
-	//LnkMemFini();
+	LnkMemFini();
 }
 
 void Linker::mainLine()
