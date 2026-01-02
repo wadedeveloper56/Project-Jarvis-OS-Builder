@@ -34,7 +34,7 @@
 
 static void free_orl_file_hnd( orl_file_handle orl_file_hnd )
 {
-    orl_file_hnd->orl_hnd->funcs->free( orl_file_hnd );
+    orl_file_hnd->orl_hnd->funcs->mem->FreeMemory( orl_file_hnd );
 }
 
 void ORLAddFileLinks( orl_handle orl_hnd, orl_file_handle orl_file_hnd )

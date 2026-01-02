@@ -78,7 +78,8 @@ typedef struct {
 #include "FileSubsystem.h"
 
 typedef struct {
-    FileSubsystem* file;
+    void*     (*read)(void*, size_t);
+    long int  (*seek)(void*, long int, int);
     MemorySubsystem* mem;
 } orl_funcs;
 

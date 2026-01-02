@@ -45,7 +45,7 @@
 
 #define _ClientSecRead( a, b )          ((a)->coff_file_hnd->coff_hnd->funcs->read( a->coff_file_hnd->file, b ))
 #define _ClientSecSeek( a, b, c )       ((a)->coff_file_hnd->coff_hnd->funcs->seek( a->coff_file_hnd->file, b, c ))
-#define _ClientSecAlloc( a, b )         ((a)->coff_file_hnd->coff_hnd->funcs->alloc( b ))
-#define _ClientSecFree( a, b )          ((a)->coff_file_hnd->coff_hnd->funcs->free( b ))
+#define _ClientSecAlloc( a, b )         ((a)->coff_file_hnd->coff_hnd->funcs->mem->AllocateMemory( b ))
+#define _ClientSecFree( a, b )          ((a)->coff_file_hnd->coff_hnd->funcs->mem->FreeMemory( b ))
 
 #endif

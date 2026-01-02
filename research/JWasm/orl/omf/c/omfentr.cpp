@@ -46,7 +46,7 @@ omf_handle OMFENTRY OmfInit( orl_funcs * funcs )
 
     assert( funcs );
 
-    oh = (omf_handle)funcs->alloc( sizeof( omf_handle_struct ) );
+    oh = (omf_handle)funcs->mem->AllocateMemory( sizeof( omf_handle_struct ) );
     if( !oh ) return( NULL );
     oh->funcs = funcs;
     oh->first_file_hnd = NULL;
@@ -64,7 +64,7 @@ orl_return OMFENTRY OmfFini( omf_handle oh )
         err = OmfRemoveFileLinks( oh->first_file_hnd );
         if( err != ORL_OKAY ) return( err );
     }
-    oh->funcs->free( oh );
+    oh->funcs->mem->FreeMemory( oh );
     return( ORL_OKAY );
 }
 
@@ -75,7 +75,7 @@ omf_file_handle OMFENTRY OmfFileInit( omf_handle oh, void *file )
 
     assert( oh );
 
-    ofh = (omf_file_handle)oh->funcs->alloc( sizeof( omf_file_handle_struct ) );
+    ofh = (omf_file_handle)oh->funcs->mem->AllocateMemory( sizeof( omf_file_handle_struct ) );
     if( !ofh ) return( NULL );
 
     memset( ofh, 0, sizeof( omf_file_handle_struct ) );

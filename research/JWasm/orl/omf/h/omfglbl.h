@@ -38,8 +38,8 @@
 
 #define _ClientRead( a, b )             ((a)->omf_hnd->funcs->read( a->file, b ))
 #define _ClientSeek( a, b, c )          ((a)->omf_hnd->funcs->seek( a->file, b, c ))
-#define _ClientAlloc( a, b )            ((a)->omf_hnd->funcs->alloc( b ))
-#define _ClientFree( a, b )             ((a)->omf_hnd->funcs->free( b ))
+#define _ClientAlloc( a, b )            ((a)->omf_hnd->funcs->mem->AllocateMemory( b ))
+#define _ClientFree( a, b )             ((a)->omf_hnd->funcs->mem->FreeMemory( b ))
 #define _ClientReAlloc( a, b, c )       ((a)->omf_hnd->funcs->realloc( b, c ))
 
 #define _ClientSecRead( a, b, c )       ((a)->omf_file_hnd->omf_hnd->funcs->read( a->omf_file_hnd->file, b, c ))

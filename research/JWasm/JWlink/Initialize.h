@@ -35,4 +35,8 @@ void InitSpillFile(void);
 void InitSym(MemorySubsystem* memory);
 void FiniSym(MemorySubsystem* memory);
 void CacheFini(void);
+void InitObjORL(MemorySubsystem* memory);
+void ObjORLFini(void);
+void* CachePermRead(file_list* list, unsigned long pos, unsigned len);
+void* CacheRead(file_list* list, unsigned long pos, unsigned len);
 

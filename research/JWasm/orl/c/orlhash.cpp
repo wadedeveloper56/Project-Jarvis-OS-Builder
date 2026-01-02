@@ -35,8 +35,8 @@
 #include "orllevel.h"
 #include "orlhash.h"
 
-#define _HashAlloc( a, b ) a->funcs->alloc( b )
-#define _HashFree( a, b ) a->funcs->free( b )
+#define _HashAlloc( a, b ) a->funcs->mem->AllocateMemory( b )
+#define _HashFree( a, b ) a->funcs->mem->FreeMemory( b )
 #define _HashCompare( a, b, c ) a->compare( b, c )
 
 int ORLNumberCmp( orl_hash_value n1, orl_hash_value n2 )
@@ -132,11 +132,11 @@ orl_hash_table ORLHashTableCreate( orl_funcs * funcs, orl_hash_table_size size, 
     orl_hash_table      hash_table;
     int                 loop;
 
-    hash_table = (orl_hash_table) funcs->alloc( sizeof( orl_hash_table_struct ) );
+    hash_table = (orl_hash_table)funcs->mem->AllocateMemory( sizeof( orl_hash_table_struct ) );
     if( !hash_table) return( NULL );
-    hash_table->table = (orl_hash_struct **) funcs->alloc( size * sizeof( orl_hash_struct * ) );
+    hash_table->table = (orl_hash_struct **)funcs->mem->AllocateMemory( size * sizeof( orl_hash_struct * ) );
     if( !(hash_table->table) ) {
-        funcs->free( hash_table );
+        funcs->mem->FreeMemory( hash_table );
         return( NULL );
     }
     hash_table->size = size;

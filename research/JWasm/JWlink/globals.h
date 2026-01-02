@@ -1,5 +1,6 @@
 #pragma once
 
+#include "watcom.h"
 #include "types.h"
 #include "structures.h"
 

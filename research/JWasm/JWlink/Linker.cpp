@@ -29,7 +29,7 @@ void Linker::InitSubSystems(void)
     InitTokBuff(memory);
     InitSpillFile();
     InitSym(memory);
-    //InitObjORL();
+    InitObjORL(memory);
 //    InitCmdFile();
 }
 

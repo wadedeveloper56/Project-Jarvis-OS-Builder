@@ -40,23 +40,23 @@ orl_handle ORLENTRY ORLInit( orl_funcs * funcs )
 {
     orl_handle                  orl_hnd;
 
-    orl_hnd = (orl_handle) funcs->alloc( sizeof( orl_handle_struct ) );
+    orl_hnd = (orl_handle) funcs->mem->AllocateMemory( sizeof( orl_handle_struct ) );
     if( !orl_hnd ) return( NULL );
     orl_hnd->error = ORL_OKAY;
     orl_hnd->funcs = funcs;
     orl_hnd->elf_hnd = ElfInit( funcs );
     if( !(orl_hnd->elf_hnd) ) {
-        funcs->free( orl_hnd );
+        funcs->mem->FreeMemory( orl_hnd );
         return( NULL );
     }
     orl_hnd->coff_hnd = CoffInit( funcs );
     if( !(orl_hnd->coff_hnd) ) {
-        funcs->free( orl_hnd );
+        funcs->mem->FreeMemory( orl_hnd );
         return( NULL );
     }
     orl_hnd->omf_hnd = OmfInit( funcs );
     if( !(orl_hnd->omf_hnd) ) {
-        funcs->free( orl_hnd );
+        funcs->mem->FreeMemory( orl_hnd );
         return( NULL );
     }
     orl_hnd->first_file_hnd = NULL;
@@ -77,7 +77,7 @@ orl_return ORLENTRY ORLFini( orl_handle orl_hnd ) {
         error = ORLRemoveFileLinks( orl_hnd->first_file_hnd );
         if( error != ORL_OKAY ) return( error );
     }
-    orl_hnd->funcs->free( orl_hnd );
+    orl_hnd->funcs->mem->FreeMemory( orl_hnd );
     return( ORL_OKAY );
 }
 
@@ -202,7 +202,7 @@ orl_file_handle ORLENTRY ORLFileInit( orl_handle orl_hnd, void * file, orl_file_
 
     switch( type ) {
     case( ORL_ELF ):
-        orl_file_hnd = (orl_file_handle) orl_hnd->funcs->alloc( sizeof( orl_file_handle_struct ) );
+        orl_file_hnd = (orl_file_handle) orl_hnd->funcs->mem->AllocateMemory( sizeof( orl_file_handle_struct ) );
         if( !orl_file_hnd ) {
             orl_hnd->error = ORL_OUT_OF_MEMORY;
             return( NULL );
@@ -211,25 +211,25 @@ orl_file_handle ORLENTRY ORLFileInit( orl_handle orl_hnd, void * file, orl_file_
         orl_file_hnd->file_hnd.elf = ElfFileInit( orl_hnd->elf_hnd, file );
         if( orl_file_hnd->file_hnd.elf == NULL ) {
             orl_hnd->error = ORL_OUT_OF_MEMORY;
-            orl_hnd->funcs->free( orl_file_hnd );
+            orl_hnd->funcs->mem->FreeMemory( orl_file_hnd );
             return( NULL );
         }
         ORLAddFileLinks( orl_hnd, orl_file_hnd );
         return( orl_file_hnd );
     case( ORL_COFF ):
-        orl_file_hnd = (orl_file_handle) orl_hnd->funcs->alloc( sizeof( orl_file_handle_struct ) );
+        orl_file_hnd = (orl_file_handle) orl_hnd->funcs->mem->AllocateMemory( sizeof( orl_file_handle_struct ) );
         if( !orl_file_hnd ) return( NULL );
         orl_file_hnd->type = ORL_COFF;
         orl_file_hnd->file_hnd.coff = CoffFileInit( orl_hnd->coff_hnd, file );
         if( orl_file_hnd->file_hnd.coff == NULL ) {
             orl_hnd->error = ORL_OUT_OF_MEMORY;
-            orl_hnd->funcs->free( orl_file_hnd );
+            orl_hnd->funcs->mem->FreeMemory( orl_file_hnd );
             return( NULL );
         }
         ORLAddFileLinks( orl_hnd, orl_file_hnd );
         return( orl_file_hnd );
     case( ORL_OMF ):
-        orl_file_hnd = (orl_file_handle) orl_hnd->funcs->alloc( sizeof( orl_file_handle_struct ) );
+        orl_file_hnd = (orl_file_handle) orl_hnd->funcs->mem->AllocateMemory( sizeof( orl_file_handle_struct ) );
         if( !orl_file_hnd ) {
             orl_hnd->error = ORL_OUT_OF_MEMORY;
             return( NULL );
@@ -238,7 +238,7 @@ orl_file_handle ORLENTRY ORLFileInit( orl_handle orl_hnd, void * file, orl_file_
         orl_file_hnd->file_hnd.omf = OmfFileInit( orl_hnd->omf_hnd, file );
         if( orl_file_hnd->file_hnd.omf == NULL ) {
             orl_hnd->error = ORL_OUT_OF_MEMORY;
-            orl_hnd->funcs->free( orl_file_hnd );
+            orl_hnd->funcs->mem->FreeMemory( orl_file_hnd );
             return( NULL );
         }
         ORLAddFileLinks( orl_hnd, orl_file_hnd );
@@ -572,7 +572,7 @@ orl_group_handle ORLENTRY ORLSecGetGroup( orl_sec_handle orl_sec_hnd )
     return NULL;
 }
 
-orl_return ORLENTRY ORLSecGetContents( orl_sec_handle orl_sec_hnd, char **buffer )
+orl_return ORLENTRY ORLSecGetContents ( orl_sec_handle orl_sec_hnd, char **buffer )
 {
     switch( orl_sec_hnd->type ) {
     case( ORL_ELF ):
