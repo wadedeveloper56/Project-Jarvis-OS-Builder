@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "globals.h"
 #include "Initialize.h"
-//#include "orl.h"
+#include "orl.h"
 
 #ifdef _INT_DEBUG
 int     Chunks;
@@ -18,9 +18,9 @@ nodearray* GrpNodes;           // ptr to obj file group list
 nodearray* NameNodes;          // ptr to obj file lname list
 symbol** GlobalSymPtrs;
 symbol** StaticSymPtrs;
-//orl_handle       ORLHandle;
+orl_handle       ORLHandle;
 long             ORLFilePos;
-//orl_funcs        ORLFuncs;
+orl_funcs        ORLFuncs;
 readcache* ReadCacheList;
 static MemorySubsystem* memory;
 

@@ -306,12 +306,46 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="coffentr.h" />
+    <ClInclude Include="coffflhn.h" />
+    <ClInclude Include="coffglbl.h" />
+    <ClInclude Include="coffhash.h" />
+    <ClInclude Include="coffimpl.h" />
+    <ClInclude Include="coffload.h" />
+    <ClInclude Include="cofflwlv.h" />
+    <ClInclude Include="cofforl.h" />
+    <ClInclude Include="cofftype.h" />
+    <ClInclude Include="elfentr.h" />
+    <ClInclude Include="elfflhn.h" />
+    <ClInclude Include="elfglbl.h" />
+    <ClInclude Include="elfhash.h" />
+    <ClInclude Include="elfload.h" />
+    <ClInclude Include="elflwlv.h" />
+    <ClInclude Include="elforl.h" />
+    <ClInclude Include="elftype.h" />
     <ClInclude Include="FileSubsystem.h" />
     <ClInclude Include="globals.h" />
     <ClInclude Include="Initialize.h" />
     <ClInclude Include="Linker.h" />
     <ClInclude Include="MemorySubsystem.h" />
     <ClInclude Include="MessagingSubsystem.h" />
+    <ClInclude Include="omfdrctv.h" />
+    <ClInclude Include="omfentr.h" />
+    <ClInclude Include="omfflhn.h" />
+    <ClInclude Include="omfglbl.h" />
+    <ClInclude Include="omfload.h" />
+    <ClInclude Include="omfmunge.h" />
+    <ClInclude Include="omforl.h" />
+    <ClInclude Include="omftype.h" />
+    <ClInclude Include="orl.h" />
+    <ClInclude Include="orlcomon.h" />
+    <ClInclude Include="orlentry.h" />
+    <ClInclude Include="orlflhnd.h" />
+    <ClInclude Include="orlglobl.h" />
+    <ClInclude Include="orlhash.h" />
+    <ClInclude Include="orlhshdf.h" />
+    <ClInclude Include="orlintnl.h" />
+    <ClInclude Include="orllevel.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="structures.h" />
     <ClInclude Include="types.h" />
