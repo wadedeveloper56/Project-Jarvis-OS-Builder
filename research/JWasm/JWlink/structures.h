@@ -1065,3 +1065,56 @@ typedef struct sysblock {
     char                commands[1];
 } sysblock;
 
+typedef struct stringblock STRINGBLOCK;
+typedef struct {
+    STRINGBLOCK* data;
+    unsigned    currbase;
+} stringtable;
+
+#define STR_BLOCK_SIZE   (4*1024)
+typedef struct stringblock {
+    STRINGBLOCK* next;
+    unsigned    size;
+    char        data[STR_BLOCK_SIZE];
+} stringblock;
+
+typedef struct blk blk_t;
+typedef struct free_t free_t;
+typedef struct {
+    free_t* free_list;
+    free_t* insert;
+    blk_t* blk_list;
+    blk_t** blk_map;
+    size_t      elm_size;
+    size_t      elm_count;
+    size_t      blk_top;
+    size_t      blk_count;
+    size_t      blk_size;
+    unsigned    size_chg : 1;
+} cv_t, * carve_t;
+
+struct blk {
+    blk_t* next;
+    unsigned    index;
+    unsigned    modified : 1;
+    unsigned : 15;
+    char        data[1];
+};
+
+struct free_t {
+    free_t* next_free;
+};
+
+typedef struct groupdef {
+    struct groupdef* next;
+    unsigned            numsegs;
+    char* grpname;
+    char* names[1];
+} incgroupdef;
+
+typedef struct liblist {
+    struct liblist* next;
+    unsigned            namelen;
+    char                name[1];
+} libnamelist;
+
