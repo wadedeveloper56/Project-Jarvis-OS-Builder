@@ -109,8 +109,8 @@ typedef omf_symbol_handle_struct        *omf_symbol_handle;
 typedef struct omf_grp_handle_struct    omf_grp_handle_struct;
 typedef omf_grp_handle_struct           *omf_grp_handle;
 
-typedef orl_reloc                       omf_reloc_handle_struct;
-typedef omf_reloc_handle_struct         *omf_reloc_handle;
+typedef orl_reloc                       omf_reloc_handle_struct2;
+typedef omf_reloc_handle_struct2        *omf_reloc_handle;
 
 typedef struct omf_tmp_lidata_struct    omf_tmp_lidata_struct;
 typedef omf_tmp_lidata_struct           *omf_tmp_lidata;
@@ -212,7 +212,7 @@ typedef struct omf_comdat_struct {
 
 struct omf_seg_assoc_struct {
     omf_idx             name;
-    omf_idx             class;
+    omf_idx             class1;
     orl_sec_alignment   alignment;
     orl_sec_combine     combine;
     orl_sec_frame       frame;
@@ -249,7 +249,7 @@ struct omf_string_assoc_struct {
 };
 
 typedef struct omf_comment_struct {
-    uint_8              class;
+    uint_8              class1;
     uint_8              flags;
     omf_sec_offset      len;
     unsigned char       data[1];

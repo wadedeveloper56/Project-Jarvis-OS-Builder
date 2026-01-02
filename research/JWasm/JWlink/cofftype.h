@@ -144,7 +144,7 @@ struct coff_symbol_handle_struct {
     coff_file_handle    coff_file_hnd;
     orl_symbol_binding  binding;
     orl_symbol_type     type;
-    coff_symbol ORLUNALIGNED *symbol;
+    coff_symbol *symbol;
     char *              name;
     unsigned            name_alloced : 1;
     unsigned            has_bf : 1;
