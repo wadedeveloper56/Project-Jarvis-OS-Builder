@@ -34,8 +34,6 @@
 
 #include <watcom.h>
 
-#define ORLENTRY
-
 typedef uint_32                         orl_file_offset;
 typedef uint_32                         orl_file_size;
 

@@ -44,67 +44,67 @@ typedef struct orl_group_handle_struct  * orl_group_handle;
 
 #include "orlcomon.h"
 
-orl_handle              ORLENTRY ORLInit( orl_funcs *funcs );
-orl_return              ORLENTRY ORLGetError( orl_handle );
-orl_return              ORLENTRY ORLFini( orl_handle );
+orl_handle               ORLInit( orl_funcs *funcs );
+orl_return               ORLGetError( orl_handle );
+orl_return               ORLFini( orl_handle );
 
-orl_file_format         ORLENTRY ORLFileIdentify( orl_handle, void * );
-orl_file_handle         ORLENTRY ORLFileInit( orl_handle, void *, orl_file_format );
-orl_return              ORLENTRY ORLFileFini( orl_file_handle );
-orl_return              ORLENTRY ORLFileScan( orl_file_handle, char *, orl_sec_return_func );
-orl_machine_type        ORLENTRY ORLFileGetMachineType( orl_file_handle );
-orl_file_flags          ORLENTRY ORLFileGetFlags( orl_file_handle );
-orl_file_type           ORLENTRY ORLFileGetType( orl_file_handle );
-orl_file_format         ORLENTRY ORLFileGetFormat( orl_file_handle );
-orl_file_size           ORLENTRY ORLFileGetSize( orl_file_handle );
-orl_sec_handle          ORLENTRY ORLFileGetSymbolTable( orl_file_handle );
+orl_file_format          ORLFileIdentify( orl_handle, void * );
+orl_file_handle          ORLFileInit( orl_handle, void *, orl_file_format );
+orl_return               ORLFileFini( orl_file_handle );
+orl_return               ORLFileScan( orl_file_handle, char *, orl_sec_return_func );
+orl_machine_type         ORLFileGetMachineType( orl_file_handle );
+orl_file_flags           ORLFileGetFlags( orl_file_handle );
+orl_file_type            ORLFileGetType( orl_file_handle );
+orl_file_format          ORLFileGetFormat( orl_file_handle );
+orl_file_size            ORLFileGetSize( orl_file_handle );
+orl_sec_handle           ORLFileGetSymbolTable( orl_file_handle );
 
-char *                  ORLENTRY ORLSecGetName( orl_sec_handle );
-orl_sec_offset          ORLENTRY ORLSecGetBase( orl_sec_handle );
-orl_sec_size            ORLENTRY ORLSecGetSize( orl_sec_handle );
-orl_sec_type            ORLENTRY ORLSecGetType( orl_sec_handle );
-orl_sec_flags           ORLENTRY ORLSecGetFlags( orl_sec_handle );
-orl_sec_alignment       ORLENTRY ORLSecGetAlignment( orl_sec_handle );
-orl_sec_handle          ORLENTRY ORLSecGetStringTable( orl_sec_handle );
-orl_sec_handle          ORLENTRY ORLSecGetSymbolTable( orl_sec_handle );
-orl_sec_handle          ORLENTRY ORLSecGetRelocTable( orl_sec_handle );
-orl_linnum *            ORLENTRY ORLSecGetLines( orl_sec_handle );
-orl_table_index         ORLENTRY ORLSecGetNumLines( orl_sec_handle );
-orl_sec_offset          ORLENTRY ORLSecGetOffset( orl_sec_handle );
-orl_return              ORLENTRY ORLSecGetContents( orl_sec_handle, unsigned_8 ** );
-orl_return              ORLENTRY ORLSecQueryReloc( orl_sec_handle, orl_sec_offset, orl_reloc_return_func );
-orl_return              ORLENTRY ORLSecScanReloc( orl_sec_handle, orl_reloc_return_func );
-orl_table_index         ORLENTRY ORLCvtSecHdlToIdx( orl_sec_handle );
-orl_sec_handle          ORLENTRY ORLCvtIdxToSecHdl( orl_file_handle,
+char *                   ORLSecGetName( orl_sec_handle );
+orl_sec_offset           ORLSecGetBase( orl_sec_handle );
+orl_sec_size             ORLSecGetSize( orl_sec_handle );
+orl_sec_type             ORLSecGetType( orl_sec_handle );
+orl_sec_flags            ORLSecGetFlags( orl_sec_handle );
+orl_sec_alignment        ORLSecGetAlignment( orl_sec_handle );
+orl_sec_handle           ORLSecGetStringTable( orl_sec_handle );
+orl_sec_handle           ORLSecGetSymbolTable( orl_sec_handle );
+orl_sec_handle           ORLSecGetRelocTable( orl_sec_handle );
+orl_linnum *             ORLSecGetLines( orl_sec_handle );
+orl_table_index          ORLSecGetNumLines( orl_sec_handle );
+orl_sec_offset           ORLSecGetOffset( orl_sec_handle );
+orl_return               ORLSecGetContents( orl_sec_handle, unsigned_8 ** );
+orl_return               ORLSecQueryReloc( orl_sec_handle, orl_sec_offset, orl_reloc_return_func );
+orl_return               ORLSecScanReloc( orl_sec_handle, orl_reloc_return_func );
+orl_table_index          ORLCvtSecHdlToIdx( orl_sec_handle );
+orl_sec_handle           ORLCvtIdxToSecHdl( orl_file_handle,
                                                     orl_table_index );
 
-char *                  ORLENTRY ORLSecGetClassName( orl_sec_handle );
-orl_sec_combine         ORLENTRY ORLSecGetCombine( orl_sec_handle );
-orl_sec_frame           ORLENTRY ORLSecGetAbsFrame( orl_sec_handle );
-orl_sec_handle          ORLENTRY ORLSecGetAssociated( orl_sec_handle );
-orl_group_handle        ORLENTRY ORLSecGetGroup( orl_sec_handle );
+char *                   ORLSecGetClassName( orl_sec_handle );
+orl_sec_combine          ORLSecGetCombine( orl_sec_handle );
+orl_sec_frame            ORLSecGetAbsFrame( orl_sec_handle );
+orl_sec_handle           ORLSecGetAssociated( orl_sec_handle );
+orl_group_handle         ORLSecGetGroup( orl_sec_handle );
 
-orl_return              ORLENTRY ORLRelocSecScan( orl_sec_handle,
+orl_return               ORLRelocSecScan( orl_sec_handle,
                                                   orl_reloc_return_func );
-orl_return              ORLENTRY ORLSymbolSecScan( orl_sec_handle,
+orl_return               ORLSymbolSecScan( orl_sec_handle,
                                                    orl_symbol_return_func );
-orl_return              ORLENTRY ORLNoteSecScan( orl_sec_handle,
+orl_return               ORLNoteSecScan( orl_sec_handle,
                                                  orl_note_callbacks *, void * );
 
-char *                  ORLENTRY ORLSymbolGetName( orl_symbol_handle );
-orl_symbol_value        ORLENTRY ORLSymbolGetValue( orl_symbol_handle );
-orl_symbol_binding      ORLENTRY ORLSymbolGetBinding( orl_symbol_handle );
-orl_symbol_type         ORLENTRY ORLSymbolGetType( orl_symbol_handle );
-unsigned char           ORLENTRY ORLSymbolGetRawInfo( orl_symbol_handle );
-orl_sec_handle          ORLENTRY ORLSymbolGetSecHandle( orl_symbol_handle );
-orl_symbol_handle       ORLENTRY ORLSymbolGetAssociated( orl_symbol_handle );
+char *                   ORLSymbolGetName( orl_symbol_handle );
+orl_symbol_value         ORLSymbolGetValue( orl_symbol_handle );
+orl_symbol_binding       ORLSymbolGetBinding( orl_symbol_handle );
+orl_symbol_type          ORLSymbolGetType( orl_symbol_handle );
+unsigned char            ORLSymbolGetRawInfo( orl_symbol_handle );
+orl_sec_handle           ORLSymbolGetSecHandle( orl_symbol_handle );
+orl_symbol_handle        ORLSymbolGetAssociated( orl_symbol_handle );
 
-orl_return              ORLENTRY ORLGroupsScan( orl_file_handle,
+orl_return               ORLGroupsScan( orl_file_handle,
                                                 orl_group_return_func );
-char *                  ORLENTRY ORLGroupName( orl_group_handle );
-orl_table_index         ORLENTRY ORLGroupSize( orl_group_handle );
-char *                  ORLENTRY ORLGroupMember( orl_group_handle,
+char *                   ORLGroupName( orl_group_handle );
+orl_table_index          ORLGroupSize( orl_group_handle );
+char *                   ORLGroupMember( orl_group_handle,
                                                  orl_table_index );
 
-unsigned long           ORLENTRY ORLExportTableRVA( orl_file_handle);
+unsigned long            ORLExportTableRVA( orl_file_handle);
 #endif
