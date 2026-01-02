@@ -33,6 +33,7 @@
 #define ORL_GLOBAL_INCLUDED
 
 #include <watcom.h>
+#include "MemorySubsystem.h"
 
 typedef uint_32                         orl_file_offset;
 typedef uint_32                         orl_file_size;
@@ -75,8 +76,7 @@ typedef struct {
 typedef struct {
     void *      (*read)( void *, size_t );
     long int    (*seek)( void *, long int, int );
-    void *      (*alloc)( size_t );
-    void        (*free)( void * );
+    MemorySubsystem* memory;
 } orl_funcs;
 
 typedef enum {

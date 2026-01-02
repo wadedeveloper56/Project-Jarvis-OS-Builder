@@ -164,14 +164,14 @@ void* ORLRead(void* _list, size_t len)
 void InitObjORL(MemorySubsystem* mem)
 {
     memory = mem;
-    //ORLFuncs = { ORLRead, ORLSeek, mem };
-    //ORLHandle = ORLInit(&ORLFuncs);
+    ORLFuncs = { ORLRead, ORLSeek, mem };
+    ORLHandle = ORLInit(&ORLFuncs);
     ReadCacheList = NULL;
 }
 
 void ObjORLFini(void)
 {
-    //ORLFini(ORLHandle);
+    ORLFini(ORLHandle);
 }
 
 void FiniLinkStruct(MemorySubsystem* memory)
