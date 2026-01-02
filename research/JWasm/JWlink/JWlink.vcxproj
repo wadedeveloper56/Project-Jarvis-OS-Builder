@@ -318,6 +318,7 @@
     <ClInclude Include="cofflwlv.h" />
     <ClInclude Include="cofforl.h" />
     <ClInclude Include="cofftype.h" />
+    <ClInclude Include="debug.h" />
     <ClInclude Include="elfentr.h" />
     <ClInclude Include="elfflhn.h" />
     <ClInclude Include="elfglbl.h" />
