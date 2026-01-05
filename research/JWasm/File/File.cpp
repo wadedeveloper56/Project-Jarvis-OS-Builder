@@ -2,37 +2,37 @@
 #include "framework.h"
 #include "File.h"
 
-f_handle OpenFile(const char* filename, const char* mode)
+errno_t OpenFile(f_handle* pfh, const char* filename, int oflag, int shflag, int pmode)
 {
-	return fopen(filename, mode);
+	return _sopen_s(pfh, filename, oflag, shflag, pmode);
 }
 
 int CloseFile(f_handle handle)
 {
-	return fclose(handle);
+	return _close(handle);
 }
 
 int FlushFile(f_handle handle)
 {
-	return fflush(handle);
+	return _commit(handle);
 }
 
-int ReadFile(f_handle handle, void* buffer, size_t size, size_t count)
+int ReadFile(f_handle handle, void* const buffer, unsigned const buffer_size)
 {
-	return fread(buffer, size, count, handle);
+	return _read(handle, buffer, buffer_size);
 }
 
-int WriteFile(f_handle handle, const void* buffer, size_t size, size_t count)
+int WriteFile(f_handle handle, void* const buffer, unsigned const buffer_size)
 {
-	return fwrite(buffer, size, count, handle);
+	return _write(handle, buffer, buffer_size);
 }
 
 __int64 FileTell(f_handle handle)
 {
-	return _ftelli64(handle);
+	return _telli64(handle);
 }
 
 __int64 FileSeek(f_handle handle, __int64 offset, int origin)
 {
-	return _fseeki64(handle, offset, origin);
+	return _lseeki64(handle, offset, origin);
 }

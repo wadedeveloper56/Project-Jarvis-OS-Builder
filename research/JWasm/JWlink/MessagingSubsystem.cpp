@@ -192,11 +192,11 @@ void MessagingSubsystem::WLPrtBanner(void)
 
 	if (!BannerPrinted) {
 		msg = MsgStrings[PRODUCT];
-		file->WriteStdOut(msg, sizeof(msg), 1);
+		file->WriteStdOut(msg, sizeof(msg));
 		msg = MsgStrings[COPYRIGHT];
-		file->WriteStdOut(msg, sizeof(msg), 1);
+		file->WriteStdOut(msg, sizeof(msg));
 		msg = MsgStrings[TRADEMARK];
-		file->WriteStdOut(msg, sizeof(msg), 1);
+		file->WriteStdOut(msg, sizeof(msg));
 		BannerPrinted = true;
 	}
 }
@@ -361,10 +361,10 @@ void MessagingSubsystem::MessageFini(unsigned num, char* buff, unsigned len, cha
 	if (num & OUT_TERM) {
 		if (!(LinkFlags & QUIET_FLAG)) {
 			WLPrtBanner();
-			file->WriteStdOut(buff, strlen(buff), 1);
+			file->WriteStdOut(buff, strlen(buff));
 		}
 		else if ((num & CLASS_MSK) != (CLASS_MSK & INF)) {
-			file->WriteStdOut(buff, strlen(buff), 1);
+			file->WriteStdOut(buff, strlen(buff));
 		}
 	}
 	if (waserror && LinkFlags & MAX_ERRORS_FLAG) {

@@ -17,6 +17,8 @@
 #include <string.h>
 #include <fcntl.h>
 #include <io.h>
+#include <sys/locking.h>
+#include <share.h>
 
 
 #pragma warning(disable:4267)
