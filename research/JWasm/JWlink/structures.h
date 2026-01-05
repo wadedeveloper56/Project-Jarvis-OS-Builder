@@ -1133,3 +1133,25 @@ typedef struct entry_export {
     char* impname;
     targ_addr               addr;
 } entry_export;
+
+#define STATIC_TABSIZE  241  /* should be prime */
+#define GLOBAL_TABSIZE  1789  /* should be prime */
+
+#define STATIC_TABALLOC (256 * sizeof(symbol *))  // 1st power of 128 > TABSIZE
+#define GLOBAL_TABALLOC (1792 * sizeof(symbol *)) // 1st power of 128 > TABSIZE
+
+#define SYM_BLOCK_SIZE      (16*1024)
+#define SYM_BLOCK_MIN       32
+
+typedef struct sym_block {
+    struct sym_block* next;       /* NOTE: this *must* be the first field */
+    unsigned            size;
+    char                block[1];
+} sym_block;
+
+#define ALLOC_SIZE  (sizeof( sym_block )-1)
+
+typedef struct block_data {
+    sym_block* list;
+    unsigned        currbrk;
+} block_data;

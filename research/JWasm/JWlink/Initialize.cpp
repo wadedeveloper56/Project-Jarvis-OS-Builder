@@ -12,6 +12,12 @@
 #define SDATA_CARVE_SIZE        (16*1024)
 #define SYM_CARVE_SIZE          (32*1024)
 
+int ARCompName(const void* key, const void* vbase);
+int ARCompIName(const void* key, const void* vbase);
+int (*CmpARRtn)(const void*, const void*) = ARCompName;
+int (*CmpOMFRtn)(const void*, const void*, unsigned) = memcmp; 
+int             (*CmpRtn)(const void*, const void*, size_t);
+
 #ifdef _INT_DEBUG
 int           Chunks;
 #endif
@@ -54,6 +60,11 @@ char* OldExe;
 char* OldSymFile;
 void* AltDefData;
 char* IncStrTab;
+unsigned        NameLen;
+symbol* LastSym;
+symbol* SymList = NULL;
+block_data Pass1Blocks;
+block_data PermBlocks;
 
 void ResetPermData(MemorySubsystem* memory)
 {
@@ -349,4 +360,90 @@ void FiniLinkStruct(MemorySubsystem* memory)
 int FiniMsg(void)
 {
 	return(EXIT_SUCCESS);
+}
+
+void GetSymBlock(void)
+{
+	PermBlocks.list = NULL;
+}
+
+int ARCompName(const void* key, const void* vbase)
+{
+	//FIX ME
+	return 0;
+}
+
+int ARCompIName(const void* key, const void* vbase)
+{
+	//FIX ME
+	return 0;
+}
+
+void SetLibCase(void)
+{
+	if (LinkFlags & CASE_FLAG) {
+		CmpOMFRtn = memcmp;
+		CmpARRtn = ARCompName;
+	}
+	else {
+		CmpOMFRtn = _memicmp;
+		CmpARRtn = ARCompIName;
+	}
+}
+
+void ClearHashPointers(void)
+{
+	memset(GlobalSymPtrs, 0, GLOBAL_TABSIZE * sizeof(symbol*));
+	memset(StaticSymPtrs, 0, STATIC_TABSIZE * sizeof(symbol*));
+}
+
+void SetSymCase(void)
+{
+	if (LinkFlags & CASE_FLAG) {
+		CmpRtn = memcmp;
+	}
+	else {
+		CmpRtn = _memicmp;
+	}
+}
+
+void ResetSym(void)
+{
+	NameLen = 0;
+	SymList = NULL;
+	HeadSym = NULL;
+	LastSym = NULL;
+	CmpRtn = _memicmp;
+	GetSymBlock();
+	ClearHashPointers();
+}
+
+void ResetMisc(void)
+{
+	/* jwlink: default is: multiple defines are NOT ok */
+	//LinkFlags = REDEFS_OK | CASE_FLAG | FAR_CALLS_FLAG;
+	LinkFlags = CASE_FLAG | FAR_CALLS_FLAG;
+	LinkState = MAKE_RELOCS;
+	AbsGroups = NULL;
+	DataGroup = NULL;
+	IDataGroup = NULL;
+	MapFile = NIL_HANDLE;
+	MapFName = NULL;
+	OutFiles = NULL;
+	ObjLibFiles = NULL;
+	LibModules = NULL;
+	Groups = NULL;
+	CurrLoc.seg = UNDEFINED;
+	CurrLoc.off = 0;
+	OvlClasses = NULL;
+	OvlVectors = NULL;
+	VecNum = 0;
+	OvlNum = 0;
+	OvlFName = NULL;
+	CurrMod = NULL;
+	StackSize = 0x1000;
+	// set case sensitivity for symbols
+	ResetSym();
+	SetSymCase();
+	SetLibCase();
 }

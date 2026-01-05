@@ -12,6 +12,11 @@
 #define GLOBAL_TABALLOC (1792 * sizeof(symbol *)) // 1st power of 128 > TABSIZE
 #define BUFF_BLOCK_SIZE (16*1024)
 
+enum {
+    MAX_REC = 1024,
+    UNDEFINED = 0xffff,   /* undefined segment */
+};
+
 typedef struct nodearray {
     unsigned    num;            // number of nodes inserted
     unsigned    elsize;         // size of individual element in array.
@@ -46,3 +51,4 @@ void ObjORLFini(void);
 void* CachePermRead(file_list* list, unsigned long pos, unsigned len);
 void* CacheRead(file_list* list, unsigned long pos, unsigned len);
 void FreeOutFiles(FileSubsystem* file, MemorySubsystem* memory);
+void ResetMisc(void);

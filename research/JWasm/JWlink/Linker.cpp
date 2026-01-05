@@ -40,7 +40,7 @@ void Linker::ResetSubSystems(void)
     ResetPermData(memory);
     //ResetMsg();
     //VirtMemInit();
-    //ResetMisc();
+    ResetMisc();
     //Root = NewSection();
     //ResetDBI();
     //ResetMapIO();

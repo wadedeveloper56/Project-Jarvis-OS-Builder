@@ -23,7 +23,7 @@ f_handle FileSubsystem::Open(const char* filename, const char* mode)
 
 int FileSubsystem::FlushFile(f_handle handle)
 {
-	return FlushFile(handle);
+	return ::FlushFile(handle);
 }	
 
 int FileSubsystem::Close(f_handle handle)
