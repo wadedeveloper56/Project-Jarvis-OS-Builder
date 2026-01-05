@@ -9,6 +9,7 @@ public:
 	FileSubsystem();
 	~FileSubsystem();
 	f_handle Open(const char* filename, const char* mode);
+	int FlushFile(f_handle handle);
 	int Close(f_handle handle);
 	int Read(f_handle handle,void* buffer, size_t size, size_t count);
 	int Write(f_handle handle,const void* buffer, size_t size, size_t count);

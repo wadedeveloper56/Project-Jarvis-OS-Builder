@@ -18,20 +18,20 @@ int           Chunks;
 int           OpenFiles;      // the number of open files
 unsigned      LastResult;
 bool          CaughtBreak;    // set to TRUE if break hit.
-char*         TFileName;
+char* TFileName;
 unsigned long TmpFSize;
 bool          BannerPrinted;
-nodearray*    ExtNodes;           // ptr to obj file import list
-nodearray*    SegNodes;           // ptr to obj file segment list
-nodearray*    GrpNodes;           // ptr to obj file group list
-nodearray*    NameNodes;          // ptr to obj file lname list
-symbol**      GlobalSymPtrs;
-symbol**      StaticSymPtrs;
+nodearray* ExtNodes;           // ptr to obj file import list
+nodearray* SegNodes;           // ptr to obj file segment list
+nodearray* GrpNodes;           // ptr to obj file group list
+nodearray* NameNodes;          // ptr to obj file lname list
+symbol** GlobalSymPtrs;
+symbol** StaticSymPtrs;
 orl_handle    ORLHandle;
 long          ORLFilePos;
 orl_funcs     ORLFuncs;
-readcache*    ReadCacheList;
-sysblock*     PrevCommand;
+readcache* ReadCacheList;
+sysblock* PrevCommand;
 stringtable   PermStrings;
 stringtable   PrefixStrings;  /* these are NetWare prefix strings of which there could possibly be several */
 stringtable   StoredRelocs;
@@ -43,87 +43,147 @@ carve_t       CarveClass;
 carve_t       CarveGroup;
 carve_t       CarveDLLInfo;
 carve_t       CarveExportInfo;
-char*         IncFileName;
-incgroupdef*  IncGroupDefs;
+char* IncFileName;
+incgroupdef* IncGroupDefs;
 group_entry** IncGroups;
-libnamelist*  SavedUserLibs;
-libnamelist*  SavedDefLibs;
-char*         ReadRelocs;
+libnamelist* SavedUserLibs;
+libnamelist* SavedDefLibs;
+char* ReadRelocs;
 unsigned      SizeRelocs;
-char*         OldExe;
-char*         OldSymFile;
-void*         AltDefData;
-char*         IncStrTab;
+char* OldExe;
+char* OldSymFile;
+void* AltDefData;
+char* IncStrTab;
 
 void ResetPermData(MemorySubsystem* memory)
 {
-    DEBUG(("ResetPermData() enter\n"));
-    IncFileName = NULL;
-    IncStrTab = NULL;
-    ReadRelocs = NULL;
-    OldExe = NULL;
-    AltDefData = NULL;
-    OldSymFile = NULL;
-    IncGroupDefs = NULL;
-    IncGroups = NULL;
-    SavedUserLibs = NULL;
-    SavedDefLibs = NULL;
-    CarveClass = CarveCreate(memory, sizeof(class_entry), 20 * sizeof(class_entry));
-    CarveGroup = CarveCreate(memory, sizeof(group_entry), 20 * sizeof(group_entry));
-    CarveDLLInfo = CarveCreate(memory, sizeof(dll_sym_info), 100 * sizeof(dll_sym_info));
-    CarveExportInfo = CarveCreate(memory, sizeof(entry_export), 20 * sizeof(entry_export));
-    CarveLeader = CarveCreate(memory, sizeof(seg_leader), SEG_CARVE_SIZE);
-    CarveModEntry = CarveCreate(memory, sizeof(mod_entry), MOD_CARVE_SIZE);
-    CarveSegData = CarveCreate(memory, sizeof(segdata), SDATA_CARVE_SIZE);
-    CarveSymbol = CarveCreate(memory, sizeof(symbol), SYM_CARVE_SIZE);
-    InitStringTable(memory, &PermStrings, true);
-    InitStringTable(memory, &PrefixStrings, true);
-    InitStringTable(memory, &StoredRelocs, false);
+	DEBUG(("ResetPermData() enter\n"));
+	IncFileName = NULL;
+	IncStrTab = NULL;
+	ReadRelocs = NULL;
+	OldExe = NULL;
+	AltDefData = NULL;
+	OldSymFile = NULL;
+	IncGroupDefs = NULL;
+	IncGroups = NULL;
+	SavedUserLibs = NULL;
+	SavedDefLibs = NULL;
+	CarveClass = CarveCreate(memory, sizeof(class_entry), 20 * sizeof(class_entry));
+	CarveGroup = CarveCreate(memory, sizeof(group_entry), 20 * sizeof(group_entry));
+	CarveDLLInfo = CarveCreate(memory, sizeof(dll_sym_info), 100 * sizeof(dll_sym_info));
+	CarveExportInfo = CarveCreate(memory, sizeof(entry_export), 20 * sizeof(entry_export));
+	CarveLeader = CarveCreate(memory, sizeof(seg_leader), SEG_CARVE_SIZE);
+	CarveModEntry = CarveCreate(memory, sizeof(mod_entry), MOD_CARVE_SIZE);
+	CarveSegData = CarveCreate(memory, sizeof(segdata), SDATA_CARVE_SIZE);
+	CarveSymbol = CarveCreate(memory, sizeof(symbol), SYM_CARVE_SIZE);
+	InitStringTable(memory, &PermStrings, true);
+	InitStringTable(memory, &PrefixStrings, true);
+	InitStringTable(memory, &StoredRelocs, false);
+}
+
+void FlushBuffFile(FileSubsystem* file, MemorySubsystem* memory, outfilelist* outfile)
+{
+	unsigned    modpos;
+
+	modpos = outfile->bufpos % BUFF_BLOCK_SIZE;
+	if (modpos != 0) {
+		file->FlushFile(outfile->handle);
+	}
+	_LnkFree(outfile->buffer);
+	outfile->buffer = NULL;
+}
+
+void CloseBuffFile(FileSubsystem* file, MemorySubsystem* memory, outfilelist* outfile)
+{
+	if (outfile->buffer != NULL) {
+		FlushBuffFile(file, memory,outfile);
+	}
+	file->Close(outfile->handle);
+	outfile->handle = NIL_HANDLE;
+}
+
+void CloseOutFiles(FileSubsystem* file, MemorySubsystem* memory)
+{
+	outfilelist* fnode;
+
+	for (fnode = OutFiles; fnode != NULL; fnode = fnode->next) {
+		if (fnode->handle != NIL_HANDLE) {
+			CloseBuffFile(file, memory, fnode);
+		}
+	}
+}
+
+void FreeOutFiles(FileSubsystem* file, MemorySubsystem* memory)
+{
+	outfilelist* fnode;
+
+	CloseOutFiles(file, memory);
+	for (fnode = OutFiles; fnode != NULL; fnode = OutFiles) {
+		if (LinkState & LINK_ERROR) {
+			file->Delete(fnode->fname);
+		}
+		_LnkFree(fnode->fname);
+		OutFiles = fnode->next;
+		_LnkFree(fnode);
+	}
+}
+
+void FreeList(MemorySubsystem* memory,void* _curr)
+{
+	node* curr = (node*)_curr;
+	node* next_node;
+
+	while (curr) {
+		next_node = (node*)curr->next;
+		_LnkFree(curr);
+		curr = next_node;
+	}
 }
 
 void CleanPermData(MemorySubsystem* memory)
 {
-//#ifndef _DEBUG
-//    if (!(LinkFlags & INC_LINK_FLAG)) {
-//        CarveVerifyAllGone(CarveLeader, "seg_leader");
-//        CarveVerifyAllGone(CarveModEntry, "mod_entry");
-//        CarveVerifyAllGone(CarveDLLInfo, "dll_sym_info");
-//        CarveVerifyAllGone(CarveExportInfo, "entry_export");
-//        CarveVerifyAllGone(CarveSymbol, "symbol");
-//        CarveVerifyAllGone(CarveSegData, "segdata");
-//        CarveVerifyAllGone(CarveClass, "class_entry");
-//        CarveVerifyAllGone(CarveGroup, "group_entry");
-//    }
-//#endif
-//    if (LinkState & LINK_ERROR) {
-//        QDelete(IncFileName);
-//    }
-//    CarveDestroy(CarveLeader);
-//    CarveDestroy(CarveModEntry);
-//    CarveDestroy(CarveDLLInfo);
-//    CarveDestroy(CarveExportInfo);
-//    CarveDestroy(CarveSymbol);
-//    CarveDestroy(CarveSegData);
-//    CarveDestroy(CarveClass);
-//    CarveDestroy(CarveGroup);
-    FiniStringTable(memory, &PrefixStrings);
-    FiniStringTable(memory, &PermStrings);
-    FiniStringTable(memory, &StoredRelocs);
-    _LnkFree(IncFileName);
-    _LnkFree(IncStrTab);
-    _LnkFree(ReadRelocs);
-    _LnkFree(OldExe);
-    _LnkFree(OldSymFile);
-    _LnkFree(AltDefData);
-    RingFree(memory, &IncGroupDefs);
-    _LnkFree(IncGroups);
-//    FreeList(SavedUserLibs);
-//    FreeList(SavedDefLibs);
+#ifndef _DEBUG
+	if (!(LinkFlags & INC_LINK_FLAG)) {
+		CarveVerifyAllGone(CarveLeader, "seg_leader");
+		CarveVerifyAllGone(CarveModEntry, "mod_entry");
+		CarveVerifyAllGone(CarveDLLInfo, "dll_sym_info");
+		CarveVerifyAllGone(CarveExportInfo, "entry_export");
+		CarveVerifyAllGone(CarveSymbol, "symbol");
+		CarveVerifyAllGone(CarveSegData, "segdata");
+		CarveVerifyAllGone(CarveClass, "class_entry");
+		CarveVerifyAllGone(CarveGroup, "group_entry");
+	}
+#endif
+	if (LinkState & LINK_ERROR) {
+		//FIX ME        QDelete(IncFileName);
+	}
+	CarveDestroy(memory, CarveLeader);
+	CarveDestroy(memory, CarveModEntry);
+	CarveDestroy(memory, CarveDLLInfo);
+	CarveDestroy(memory, CarveExportInfo);
+	CarveDestroy(memory, CarveSymbol);
+	CarveDestroy(memory, CarveSegData);
+	CarveDestroy(memory, CarveClass);
+	CarveDestroy(memory, CarveGroup);
+	FiniStringTable(memory, &PrefixStrings);
+	FiniStringTable(memory, &PermStrings);
+	FiniStringTable(memory, &StoredRelocs);
+	_LnkFree(IncFileName);
+	_LnkFree(IncStrTab);
+	_LnkFree(ReadRelocs);
+	_LnkFree(OldExe);
+	_LnkFree(OldSymFile);
+	_LnkFree(AltDefData);
+	RingFree(memory, &IncGroupDefs);
+	_LnkFree(IncGroups);
+	FreeList(memory, SavedUserLibs);
+	FreeList(memory, SavedDefLibs);
 }
+
 void LnkMemInit(void)
 {
 #ifdef _INT_DEBUG
-    Chunks = 0;
+	Chunks = 0;
 #endif
 }
 
@@ -133,91 +193,91 @@ void LnkMemFini(void)
 
 void InitCmdFile(void)
 {
-    PrevCommand = NULL;
+	PrevCommand = NULL;
 }
 
 void LnkFilesInit(void)
 {
-    OpenFiles = 0;
-    CaughtBreak = false;
-    _setmode(_fileno(stdin), O_BINARY);
-    _setmode(_fileno(stdout), O_BINARY);
+	OpenFiles = 0;
+	CaughtBreak = false;
+	_setmode(_fileno(stdin), O_BINARY);
+	_setmode(_fileno(stdout), O_BINARY);
 }
 
 int InitMsg(void)
 {
-    BannerPrinted = false;
-    return(EXIT_SUCCESS);
+	BannerPrinted = false;
+	return(EXIT_SUCCESS);
 }
 
-static nodearray* MakeArray(MemorySubsystem* memory,unsigned size)
+static nodearray* MakeArray(MemorySubsystem* memory, unsigned size)
 {
-    _ChkAlloc2(nodearray * ,nodes, sizeof(nodearray));
-    nodes->num = 0;
-    nodes->elsize = size;
-    nodes->arraymax = 0;
-    size *= NODE_ARRAY_SIZE;
-    _ChkAlloc(char*, nodes->array[0], size);
-    memset(nodes->array[0], 0, size);
-    return(nodes);
+	_ChkAlloc2(nodearray*, nodes, sizeof(nodearray));
+	nodes->num = 0;
+	nodes->elsize = size;
+	nodes->arraymax = 0;
+	size *= NODE_ARRAY_SIZE;
+	_ChkAlloc(char*, nodes->array[0], size);
+	memset(nodes->array[0], 0, size);
+	return(nodes);
 }
 
 void InitNodes(MemorySubsystem* memory)
 {
-    GrpNodes = MakeArray(memory, sizeof(grpnode));
-    SegNodes = MakeArray(memory, sizeof(segnode));
-    ExtNodes = MakeArray(memory, sizeof(extnode));
-    NameNodes = MakeArray(memory, sizeof(list_of_names*));
+	GrpNodes = MakeArray(memory, sizeof(grpnode));
+	SegNodes = MakeArray(memory, sizeof(segnode));
+	ExtNodes = MakeArray(memory, sizeof(extnode));
+	NameNodes = MakeArray(memory, sizeof(list_of_names*));
 }
 
 static void BurnNodeArray(MemorySubsystem* memory, nodearray* list)
 {
-    for (int index = 0; index <= list->arraymax; index++) {
-        _LnkFree(list->array[index]);
-    }
-    _LnkFree(list);
+	for (int index = 0; index <= list->arraymax; index++) {
+		_LnkFree(list->array[index]);
+	}
+	_LnkFree(list);
 }
 
 void BurnNodes(MemorySubsystem* memory)
 {
-    BurnNodeArray(memory, GrpNodes);
-    BurnNodeArray(memory, SegNodes);
-    BurnNodeArray(memory, ExtNodes);
-    BurnNodeArray(memory, NameNodes);
+	BurnNodeArray(memory, GrpNodes);
+	BurnNodeArray(memory, SegNodes);
+	BurnNodeArray(memory, ExtNodes);
+	BurnNodeArray(memory, NameNodes);
 }
 
 void InitTokBuff(MemorySubsystem* memory)
 {
-    TokSize = MAX_HEADROOM;
-    _ChkAlloc(char*, TokBuff, MAX_HEADROOM);
+	TokSize = MAX_HEADROOM;
+	_ChkAlloc(char*, TokBuff, MAX_HEADROOM);
 }
 
 void FreeTokBuffs(MemorySubsystem* memory)
 {
-    if (TokBuff != NULL) {
-        _LnkFree(TokBuff);
-        TokBuff = NULL;
-    }
+	if (TokBuff != NULL) {
+		_LnkFree(TokBuff);
+		TokBuff = NULL;
+	}
 }
 
 void InitSpillFile(void)
 {
-    TempFile = NIL_HANDLE;
-    TFileName = NULL;
-    TmpFSize = 0;
-    //SetBreak();
+	TempFile = NIL_HANDLE;
+	TFileName = NULL;
+	TmpFSize = 0;
+	//SetBreak();
 }
 
 void InitSym(MemorySubsystem* memory)
 {
-    _ChkAlloc(symbol**, GlobalSymPtrs, GLOBAL_TABALLOC);
-    _ChkAlloc(symbol**, StaticSymPtrs, STATIC_TABALLOC);
+	_ChkAlloc(symbol**, GlobalSymPtrs, GLOBAL_TABALLOC);
+	_ChkAlloc(symbol**, StaticSymPtrs, STATIC_TABALLOC);
 }
 
 void FiniSym(MemorySubsystem* memory)
 {
-    _LnkFree(GlobalSymPtrs);
-    _LnkFree(StaticSymPtrs);
+	_LnkFree(GlobalSymPtrs);
+	_LnkFree(StaticSymPtrs);
 }
 
 void CacheFini(void)
@@ -226,67 +286,67 @@ void CacheFini(void)
 
 long ORLSeek(void* _list, long pos, int where)
 {
-    file_list* list = (file_list*)_list;
+	file_list* list = (file_list*)_list;
 
-    if (where == SEEK_SET) {
-        ORLFilePos = pos;
-    }
-    else if (where == SEEK_CUR) {
-        ORLFilePos += pos;
-    }
-    else {
-        ORLFilePos = list->file->len - pos;
-    }
-    return(ORLFilePos);
+	if (where == SEEK_SET) {
+		ORLFilePos = pos;
+	}
+	else if (where == SEEK_CUR) {
+		ORLFilePos += pos;
+	}
+	else {
+		ORLFilePos = list->file->len - pos;
+	}
+	return(ORLFilePos);
 }
 
 void* CachePermRead(file_list* list, unsigned long pos, unsigned len)
 {
-    return CacheRead(list, pos, len);
+	return CacheRead(list, pos, len);
 }
 
 void* CacheRead(file_list* list, unsigned long pos, unsigned len)
 {
-    if (pos + len > list->file->len) return NULL;
-    return (char*)list->file->cache + pos;
+	if (pos + len > list->file->len) return NULL;
+	return (char*)list->file->cache + pos;
 }
 
 void* ORLRead(MemorySubsystem* memory, void* _list, size_t len)
 {
-    file_list* list = (file_list*)_list;
-    void* result;
-    readcache* cache;
+	file_list* list = (file_list*)_list;
+	void* result;
+	readcache* cache;
 
-    result = CachePermRead(list, ORLFilePos, len);
-    ORLFilePos += len;
-    _ChkAlloc(readcache *, cache, sizeof(readcache));
-    cache->next = ReadCacheList;
-    ReadCacheList = cache;
-    cache->data = result;
-    return(result);
+	result = CachePermRead(list, ORLFilePos, len);
+	ORLFilePos += len;
+	_ChkAlloc(readcache*, cache, sizeof(readcache));
+	cache->next = ReadCacheList;
+	ReadCacheList = cache;
+	cache->data = result;
+	return(result);
 }
 
 void InitObjORL(MemorySubsystem* mem)
 {
-    ORLFuncs = { ORLRead, ORLSeek, mem };
-    ORLHandle = ORLInit(&ORLFuncs);
-    ReadCacheList = NULL;
+	ORLFuncs = { ORLRead, ORLSeek, mem };
+	ORLHandle = ORLInit(&ORLFuncs);
+	ReadCacheList = NULL;
 }
 
 void ObjORLFini(void)
 {
-    ORLFini(ORLHandle);
+	ORLFini(ORLHandle);
 }
 
 void FiniLinkStruct(MemorySubsystem* memory)
 {
-    BurnNodes(memory);
-    FreeTokBuffs(memory);
-    CacheFini();
-    ObjORLFini();
+	BurnNodes(memory);
+	FreeTokBuffs(memory);
+	CacheFini();
+	ObjORLFini();
 }
 
 int FiniMsg(void)
 {
-    return(EXIT_SUCCESS);
+	return(EXIT_SUCCESS);
 }

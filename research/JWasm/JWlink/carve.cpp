@@ -19,6 +19,60 @@
     }
 
 #ifndef _DEBUG
+void CarveVerifyAllGone(carve_t cv, char* node_name)
+{
+    free_t* check;
+    blk_t* block;
+    char* compare;
+    char        buff[80];
+    bool        some_unfreed;
+
+    some_unfreed = false;
+    for (block = cv->blk_list; block != NULL; block = block->next) {
+        compare = block->data + cv->blk_top;
+        do {
+            compare -= cv->elm_size;
+            /* verify every block has been freed */
+            for (check = cv->free_list; check != NULL; check = check->next_free) {
+                if (compare == (void*)check) break;
+            }
+            if (check == NULL) {
+                if (!some_unfreed) {
+                    //FIX ME FmtStr(buff, 80, "carve %s unfreed:", node_name);
+                    //FIX ME WriteStdOut(buff);
+                    some_unfreed = true;
+                }
+                //FIX ME FmtStr(buff, 80, " %h", compare);
+                //FIX ME WriteStdOut(buff);
+            }
+        } while (compare != block->data);
+    }
+    if (some_unfreed) {
+        //FIX ME WriteNLStdOut();
+    }
+}
+#endif
+
+void CarveDestroy(MemorySubsystem* memory, carve_t cv)
+{
+    blk_t* cur;
+    blk_t* next;
+
+    if (cv != NULL) {
+        if (cv->blk_map != NULL) {
+            _LnkFree(cv->blk_map);
+        }
+        cur = cv->blk_list;
+        while (cur != NULL) {
+            next = cur->next;
+            _LnkFree(cur);
+            cur = next;
+        }
+        _LnkFree(cv);
+    }
+}
+
+#ifndef _DEBUG
 void CarveDebugFree(carve_t cv, void* elm)
 {
     free_t* check;

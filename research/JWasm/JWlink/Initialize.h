@@ -1,6 +1,7 @@
 #pragma once
 
 #include "MemorySubsystem.h"
+#include "FileSubsystem.h"
 
 #define NODE_ARRAY_SIZE 256
 #define MAX_NUM_NODES   128
@@ -9,6 +10,7 @@
 #define ELEMENT_NUM( x )    ((x) & 0xFF)
 #define STATIC_TABALLOC (256 * sizeof(symbol *))  // 1st power of 128 > TABSIZE
 #define GLOBAL_TABALLOC (1792 * sizeof(symbol *)) // 1st power of 128 > TABSIZE
+#define BUFF_BLOCK_SIZE (16*1024)
 
 typedef struct nodearray {
     unsigned    num;            // number of nodes inserted
@@ -43,4 +45,4 @@ void InitObjORL(MemorySubsystem* memory);
 void ObjORLFini(void);
 void* CachePermRead(file_list* list, unsigned long pos, unsigned len);
 void* CacheRead(file_list* list, unsigned long pos, unsigned len);
-
+void FreeOutFiles(FileSubsystem* file, MemorySubsystem* memory);

@@ -12,6 +12,11 @@ int CloseFile(f_handle handle)
 	return fclose(handle);
 }
 
+int FlushFile(f_handle handle)
+{
+	return fflush(handle);
+}
+
 int ReadFile(f_handle handle, void* buffer, size_t size, size_t count)
 {
 	return fread(buffer, size, count, handle);

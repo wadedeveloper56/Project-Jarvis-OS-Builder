@@ -21,10 +21,15 @@ f_handle FileSubsystem::Open(const char* filename, const char* mode)
 	return OpenFile(filename, mode);
 }	
 
+int FileSubsystem::FlushFile(f_handle handle)
+{
+	return FlushFile(handle);
+}	
+
 int FileSubsystem::Close(f_handle handle)
 {
 	return CloseFile(handle);
-}	
+}
 
 int FileSubsystem::Read(f_handle handle,void* buffer, size_t size, size_t count)
 {

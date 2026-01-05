@@ -65,11 +65,11 @@ void Linker::ResetSubSystems(void)
 
 void Linker::CleanSubSystems(void)
 {
-    //if (MapFile != NIL_HANDLE) {
-    //    QClose(MapFile, MapFName);
-    //    MapFile = NIL_HANDLE;
-    //}
-    //FreeOutFiles();
+    if (MapFile != NIL_HANDLE) {
+        file->Close(MapFile);
+        MapFile = NIL_HANDLE;
+    }
+    FreeOutFiles(file, memory);
     _LnkFree(MapFName);
     //BurnSystemList();
     //FreeList(LibPath);
