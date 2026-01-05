@@ -6,6 +6,7 @@
 #include "carve.h"
 #include "stringtable.h"
 #include "ring.h"
+#include "hash.h"
 
 #define SEG_CARVE_SIZE          (2*1024)
 #define MOD_CARVE_SIZE          (5*1024)
@@ -448,6 +449,11 @@ void ResetMisc(void)
 	SetLibCase();
 }
 
+int stricmp_wrapper(const void* s1, const void* s2)
+{
+	return(_stricmp((char *)s1, (char *)s2));
+}
+
 section* NewSection(MemorySubsystem* memory)
 {
 	section* sect;
@@ -459,7 +465,7 @@ section* NewSection(MemorySubsystem* memory)
 	sect->orderlist = NULL;
 	sect->areas = NULL;
 	sect->files = NULL;
-	//FIX ME sect->modFilesHashed = CreateHTable(256, StringiHashFunc, stricmp_wrapper,	ChkLAlloc, LFree);
+	sect->modFilesHashed = CreateHTable(memory, 256, StringiHashFunc, stricmp_wrapper);
 	sect->mods = NULL;
 	sect->reloclist = NULL;
 	sect->sect_addr.off = 0;

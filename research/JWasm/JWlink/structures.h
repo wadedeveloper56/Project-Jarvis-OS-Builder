@@ -48,6 +48,8 @@ typedef struct _HTElem {
     struct _HTElem* next;
 } *pHTElem;
 
+class MemorySubsystem;
+
 typedef struct _TAG_HTable {
     pHTElem* tbl;
     unsigned size;
@@ -55,9 +57,7 @@ typedef struct _TAG_HTable {
     pHashFunc hashFunc;
     pHashElemCmp compareFunc; // Take two elements of the table;
     // Return 0 iff elem1 == elem2
-    pAllocFunc allocFunc;
-    pFreeFunc freeFunc;
-
+    MemorySubsystem* memory;
     struct {
         long numElems;
         int longestChainLen;

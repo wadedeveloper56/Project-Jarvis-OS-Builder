@@ -293,6 +293,7 @@
   <ItemGroup>
     <ClCompile Include="carve.cpp" />
     <ClCompile Include="globals.cpp" />
+    <ClCompile Include="hash.cpp" />
     <ClCompile Include="Initialize.cpp" />
     <ClCompile Include="JWlink.cpp" />
     <ClCompile Include="Linker.cpp" />
@@ -333,6 +334,7 @@
     <ClInclude Include="elftype.h" />
     <ClInclude Include="FileSubsystem.h" />
     <ClInclude Include="globals.h" />
+    <ClInclude Include="hash.h" />
     <ClInclude Include="Initialize.h" />
     <ClInclude Include="Linker.h" />
     <ClInclude Include="MemorySubsystem.h" />
