@@ -15,8 +15,8 @@
 int ARCompName(const void* key, const void* vbase);
 int ARCompIName(const void* key, const void* vbase);
 int (*CmpARRtn)(const void*, const void*) = ARCompName;
-int (*CmpOMFRtn)(const void*, const void*, unsigned) = memcmp; 
-int             (*CmpRtn)(const void*, const void*, size_t);
+int (*CmpOMFRtn)(const void*, const void*, size_t) = memcmp; 
+int (*CmpRtn)(const void*, const void*, size_t);
 
 #ifdef _INT_DEBUG
 int           Chunks;
@@ -447,3 +447,30 @@ void ResetMisc(void)
 	SetSymCase();
 	SetLibCase();
 }
+
+section* NewSection(MemorySubsystem* memory)
+{
+	section* sect;
+
+	OvlNum++;
+	_ChkAlloc(section *, sect, sizeof(section));
+	sect->next_sect = NULL;
+	sect->classlist = NULL;
+	sect->orderlist = NULL;
+	sect->areas = NULL;
+	sect->files = NULL;
+	//FIX ME sect->modFilesHashed = CreateHTable(256, StringiHashFunc, stricmp_wrapper,	ChkLAlloc, LFree);
+	sect->mods = NULL;
+	sect->reloclist = NULL;
+	sect->sect_addr.off = 0;
+	sect->sect_addr.seg = UNDEFINED;
+	sect->ovl_num = 0;
+	sect->parent = NULL;
+	sect->relocs = 0;
+	sect->size = 0;
+	sect->outfile = NULL;
+	sect->u.dist_mods = NULL;
+	sect->dbg_info = NULL;
+	return(sect);
+}
+

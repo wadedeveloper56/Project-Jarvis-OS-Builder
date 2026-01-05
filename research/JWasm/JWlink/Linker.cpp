@@ -41,7 +41,7 @@ void Linker::ResetSubSystems(void)
     //ResetMsg();
     //VirtMemInit();
     ResetMisc();
-    //Root = NewSection();
+    Root = NewSection(memory);
     //ResetDBI();
     //ResetMapIO();
     //ResetCmdAll();
