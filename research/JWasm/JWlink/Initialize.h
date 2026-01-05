@@ -59,4 +59,5 @@ void ResetCmdAll(void);
 void ResetOvlSupp(void);
 void ResetComdef(void);
 void ResetDistrib(void);
-
+void BurnSystemList(MemorySubsystem* memory);
+void FreeList(MemorySubsystem* memory, void* _curr);

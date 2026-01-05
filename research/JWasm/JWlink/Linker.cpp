@@ -71,8 +71,8 @@ void Linker::CleanSubSystems(void)
     }
     FreeOutFiles(file, memory);
     _LnkFree(MapFName);
-    //BurnSystemList();
-    //FreeList(LibPath);
+    BurnSystemList(memory);
+    FreeList(memory, LibPath);
     //CloseSpillFile();
     //CleanTraces();
     //FreePaths();
