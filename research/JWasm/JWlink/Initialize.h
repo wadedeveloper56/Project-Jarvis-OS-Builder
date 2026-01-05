@@ -53,3 +53,10 @@ void* CacheRead(file_list* list, unsigned long pos, unsigned len);
 void FreeOutFiles(FileSubsystem* file, MemorySubsystem* memory);
 void ResetMisc(void);
 section* NewSection(MemorySubsystem* memory);
+void ResetDBI(void);
+void ResetMapIO(void);
+void ResetCmdAll(void);
+void ResetOvlSupp(void);
+void ResetComdef(void);
+void ResetDistrib(void);
+

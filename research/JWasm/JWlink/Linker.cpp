@@ -42,12 +42,12 @@ void Linker::ResetSubSystems(void)
     //VirtMemInit();
     ResetMisc();
     Root = NewSection(memory);
-    //ResetDBI();
-    //ResetMapIO();
-    //ResetCmdAll();
-    //ResetOvlSupp();
-    //ResetComdef();
-    //ResetDistrib();
+    ResetDBI();
+    ResetMapIO();
+    ResetCmdAll();
+    ResetOvlSupp();
+    ResetComdef();
+    ResetDistrib();
     //ResetLoadNov();
     //ResetLoadPE();
     //ResetObj2Supp();

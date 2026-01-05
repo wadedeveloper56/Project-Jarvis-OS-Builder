@@ -66,7 +66,72 @@ symbol* LastSym;
 symbol* SymList = NULL;
 block_data Pass1Blocks;
 block_data PermBlocks;
+char* SymFileName;
+group_entry* DBIGroups;
+symrecinfo* UndefList;
+symrecinfo* SymTraceList;
+int             MapCol;
+time_t          StartT;
+clock_t         ClockTicks;
+bool            Absolute_Seg;
+bool             Buffering;  // buffering on/off.
+int              BufferSize;          // # of chars in buffer.
+void* LastFile;
+file_list** LastLibFile;
+unsigned_16         AreaSize;
+comdat_info* CDatList;
+comdat_info* FreedInfos;
+comdat_piece* FreedPieces;
+unsigned_16  CurrModThere;
+arcdata* ArcBuffer;
+unsigned_32  ArcBufLen;
+mod_entry** ModTable;
+unsigned_16  CurrModHandle;
+section** SectOvlTab;
 
+void ResetDistrib(void)
+{
+	ArcBuffer = NULL;
+	ModTable = NULL;
+	SectOvlTab = NULL;
+}
+
+void ResetComdef(void)
+{
+#if 0
+	memcpy(CDatSegName, CDAT_SEG_NAME, CDAT_SEG_NAME_LEN);
+	CDatSegments[0] = NULL;
+	CDatSegments[1] = NULL;
+	CDatSegments[2] = NULL;
+	CDatSegments[3] = NULL;
+	CDatSegNum = 0;
+#endif
+	CDatList = NULL;
+	FreedInfos = NULL;
+	FreedPieces = NULL;
+}
+void ResetOvlSupp(void)
+{
+	AreaSize = 0xFFFF;
+}
+void ResetCmdAll(void)
+{
+	LastFile = NULL;
+	LastLibFile = NULL;
+	LibPath = NULL;
+}
+void ResetMapIO(void)
+{
+	MapFlags = (mapflag)0;
+	UndefList = NULL;
+	SymTraceList = NULL;
+}
+
+void ResetDBI(void)
+{
+	SymFileName = NULL;
+	DBIGroups = NULL;
+}
 void ResetPermData(MemorySubsystem* memory)
 {
 	DEBUG(("ResetPermData() enter\n"));

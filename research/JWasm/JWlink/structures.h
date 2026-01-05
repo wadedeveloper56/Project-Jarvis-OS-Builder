@@ -1155,3 +1155,24 @@ typedef struct block_data {
     sym_block* list;
     unsigned        currbrk;
 } block_data;
+
+typedef struct symrecinfo {
+    struct symrecinfo* next;
+    symbol* sym;
+    mod_entry* mod;
+} symrecinfo;
+
+typedef struct cdat_piece {
+    struct cdat_piece* next;
+    unsigned_8* data;
+    offset              length;
+    unsigned            free_data : 1;
+} comdat_piece;
+
+typedef struct cdat_info {
+    struct cdat_info* next;
+    segdata* sdata;
+    symbol* sym;
+    comdat_piece* pieces;
+    sym_info            flags;
+} comdat_info;
