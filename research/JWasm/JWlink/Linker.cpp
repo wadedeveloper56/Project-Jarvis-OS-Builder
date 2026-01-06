@@ -54,13 +54,13 @@ void Linker::ResetSubSystems(void)
     ResetObjIO();
     ResetObjOMF();
     ResetObjPass1();
-    //ResetObjStrip();
-    //ResetOMFReloc();
-    //ResetReloc();
-    //ResetSymTrace();
-    //ResetLoadFile();
-    //ResetAddr();
-    //ResetToc();
+    ResetObjStrip();
+    ResetOMFReloc();
+    ResetReloc();
+    ResetSymTrace();
+    ResetLoadFile();
+    ResetAddr();
+    ResetToc();
 }
 
 void Linker::CleanSubSystems(void)

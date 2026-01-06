@@ -122,6 +122,57 @@ static struct {
 infilelist* CachedLibFiles;
 infilelist* CachedFiles;
 edgelist* FreedEdges;
+bakpat_list* BakPats;
+unsigned        FmtRelocSize;
+reloc_info* FloatFixups;
+trace_info* CurrTrace;
+trace_info* TraceList;
+startinfo       StartInfo;
+pHTable  Toc;
+char* TocName;
+symbol* TocSym;
+offset TocSize;
+offset TocShift;
+
+void ResetToc(void)
+{
+	Toc = NULL;
+	TocSize = 0;
+	TocName = NULL;
+	TocSym = NULL;
+}
+
+void ResetAddr(void)
+{
+	CurrLoc.seg = 0;
+	CurrLoc.off = 0;
+	CurrentSeg = NULL;
+}
+
+void ClearStartAddr(void)
+{
+	memset(&StartInfo, 0, sizeof(startinfo));
+}
+
+void ResetLoadFile(void)
+{
+	ClearStartAddr();
+}
+
+void ResetSymTrace(void)
+{
+	TraceList = NULL;
+}
+
+void ResetReloc(void)
+{
+	FloatFixups = NULL;
+}
+
+void ResetOMFReloc(void)
+{
+	BakPats = NULL;
+}
 
 void ResetObjStrip(void)
 {

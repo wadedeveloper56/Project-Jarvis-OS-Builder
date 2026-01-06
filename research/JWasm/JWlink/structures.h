@@ -1270,3 +1270,45 @@ typedef struct edgelist {
     // direction
 } edgelist;
 
+typedef struct bakpatlist {
+    struct bakpatlist* next;
+    virt_mem            addr;
+    unsigned_16         len;
+    byte                loctype;
+    bool                is32bit;
+    char                data[1];
+} bakpat_list;
+
+typedef union {
+    unsigned long   spill;
+    void* addr;
+} spilladdr;
+
+/* note: if either of these two structures get any bigger, the magic constants
+ * in the RLIDX_* macros will have to change to ensure that no allocation > 64k
+ * occurs. */
+
+typedef struct reloc_info {
+    struct reloc_info* next;
+    unsigned            sizeleft;
+    spilladdr           loc;
+} reloc_info;
+
+typedef struct os2_reloc_header {
+    reloc_info* externals; /* external and segment style fixups */
+    reloc_info* internals; /* internal, non-segment fixups */
+} os2_reloc_header;
+
+typedef struct {
+    union {
+        symbol* sym;
+        segdata* sdata;
+    } targ;
+    offset              off;
+    mod_entry* mod;
+    targ_addr           addr;
+    unsigned            type : 2;
+    unsigned            user_specd : 1;
+    unsigned            from_inc : 1;
+} startinfo;
+
