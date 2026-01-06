@@ -82,9 +82,9 @@ void Linker::CleanSubSystems(void)
     CleanLinkStruct(memory);
     FreeFormatStuff();
     FreeObjInfo();
-    //FreeVirtMem();
-    //CleanToc();
-    //CleanSym();
+    FreeVirtMem(memory);
+    CleanToc(memory);
+    CleanSym(memory);
     CleanPermData(memory);
 }
 

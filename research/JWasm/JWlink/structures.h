@@ -1532,5 +1532,11 @@ typedef struct base_reloc {
 #define RELOC_SPILLED   0x8000
 #define SIZELEFT_MASK   0x7FFF
 
+typedef struct vmemblock {
+    struct vmemblock* next;
+    struct vmemblock* prev;
+    char                mem[1];
+} vmemblock;
+
 
 #include "poppack.h"

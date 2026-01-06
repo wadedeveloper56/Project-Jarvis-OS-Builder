@@ -134,6 +134,7 @@ symbol* TocSym;
 offset TocSize;
 offset TocShift;
 char* Name;
+vmemblock* VMemBlocks;
 
 void BurnLibs(MemorySubsystem* memory)
 {
@@ -1155,5 +1156,72 @@ void FreeObjInfo(void)
 	FreeNodes(ExtNodes);
 	FreeNodes(SegNodes);
 	FreeNodes(GrpNodes);
+}
+
+void FreeVirtMem(MemorySubsystem* memory)
+{
+	FreeList(memory, VMemBlocks);
+	VMemBlocks = NULL;
+}
+
+void CleanToc(MemorySubsystem* memory)
+{
+	ZapHTable(memory, Toc);
+}
+
+void FreeImport(dll_sym_info* dll)
+{
+	CarveFree(CarveDLLInfo, dll);
+}
+
+void WipeSym(MemorySubsystem* memory, symbol* sym)
+{
+	if (IS_SYM_IMPORTED(sym) && !(FmtData.type & MK_ELF)) {
+		if (FmtData.type & MK_NOVELL) {
+			if (sym->p.import != DUMMY_IMPORT_PTR) {
+				_LnkFree(sym->p.import);
+			}
+		}
+		else {
+			FreeImport((dll_sym_info*)sym->p.import);
+		}
+		sym->p.import = NULL;
+	}
+	else if (IS_SYM_ALIAS(sym)) {
+		if (sym->info & SYM_FREE_ALIAS) {
+			_LnkFree(sym->p.alias);
+		}
+		sym->u.aliaslen = 0;    // make sure this is nulled again
+	}
+}
+
+void FreeSymbol(MemorySubsystem* memory,symbol* sym)
+{
+	WipeSym(memory, sym);
+	CarveFree(CarveSymbol, sym);
+}
+
+void RelSymBlock(MemorySubsystem* memory)
+{
+	FreeList(memory, PermBlocks.list);
+	PermBlocks.list = NULL;
+}
+
+void CleanSym(MemorySubsystem* memory)
+{
+	symbol* sym;
+	symbol* next;
+
+#ifdef _INT_DEBUG
+	DumpHashTable();
+#endif
+	if (!(LinkFlags & INC_LINK_FLAG)) {
+		for (sym = HeadSym; sym != NULL; sym = next) {
+			next = sym->link;
+			FreeSymbol(memory, sym);
+		}
+	}
+	RelSymBlock(memory);
+	ReleasePass1(memory);
 }
 

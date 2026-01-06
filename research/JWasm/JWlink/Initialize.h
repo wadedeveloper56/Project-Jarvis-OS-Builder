@@ -86,3 +86,7 @@ void FreeSections(MemorySubsystem* memory, section* sec);
 void FreeGroups(group_entry* head);
 void FreeFormatStuff(void);
 void FreeObjInfo(void);
+void FreeVirtMem(MemorySubsystem* memory);
+void CleanToc(MemorySubsystem* memory);
+void CleanSym(MemorySubsystem* memory);
+
