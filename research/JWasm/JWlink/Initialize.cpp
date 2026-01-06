@@ -1122,3 +1122,38 @@ void BurnSystemList(MemorySubsystem* memory)
 {
 	CleanSystemList(memory, false);
 }
+
+void FreeFormatStuff(void)
+{
+	int i;
+	exe_format                  possible;
+
+	if (!(LinkState & FMT_DECIDED)) return;
+	//FIX ME
+	//for (i = 0; i < NUMPOSSIBLEFMT; i++) {
+	//	possible = PossibleFmt[i].bits;
+	//	if ((~possible & FmtData.type) == 0) {
+	//		if (PossibleFmt[i].free_func != NULL)
+	//			PossibleFmt[i].free_func();
+	//		break;
+	//	}
+	//}
+}
+
+void FreeNodes(nodearray* nodes)
+{
+	unsigned    index;
+
+	for (index = 0; index <= nodes->arraymax; index++) {
+		memset(nodes->array[index], 0, nodes->elsize * NODE_ARRAY_SIZE);
+	}
+	nodes->num = 0;
+}
+
+void FreeObjInfo(void)
+{
+	FreeNodes(ExtNodes);
+	FreeNodes(SegNodes);
+	FreeNodes(GrpNodes);
+}
+

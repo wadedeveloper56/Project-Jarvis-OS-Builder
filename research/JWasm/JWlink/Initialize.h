@@ -84,3 +84,5 @@ void CleanLinkStruct(MemorySubsystem* memory);
 void FreeFiles(MemorySubsystem* memory, file_list* list);
 void FreeSections(MemorySubsystem* memory, section* sec);
 void FreeGroups(group_entry* head);
+void FreeFormatStuff(void);
+void FreeObjInfo(void);
