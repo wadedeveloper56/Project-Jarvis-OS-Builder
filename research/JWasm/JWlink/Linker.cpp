@@ -48,12 +48,12 @@ void Linker::ResetSubSystems(void)
     ResetOvlSupp();
     ResetComdef();
     ResetDistrib();
-    //ResetLoadNov();
-    //ResetLoadPE();
-    //ResetObj2Supp();
-    //ResetObjIO();
-    //ResetObjOMF();
-    //ResetObjPass1();
+    ResetLoadNov();
+    ResetLoadPE();
+    ResetObj2Supp();
+    ResetObjIO();
+    ResetObjOMF();
+    ResetObjPass1();
     //ResetObjStrip();
     //ResetOMFReloc();
     //ResetReloc();

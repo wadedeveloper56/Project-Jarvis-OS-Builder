@@ -1176,3 +1176,97 @@ typedef struct cdat_info {
     comdat_piece* pieces;
     sym_info            flags;
 } comdat_info;
+
+typedef struct local_import {
+    struct local_import* next;
+    symbol* iatsym;
+    symbol* locsym;
+} local_import;
+
+struct import_name {
+    struct import_name* next;
+    dll_sym_info* dll;
+    name_list* imp;
+};
+
+typedef struct module_import {
+    struct module_import* next;
+    struct name_list* mod;
+    struct import_name* imports;
+    unsigned                    num_entries;
+} module_import;
+
+typedef enum {
+    FIX_CHANGE_SEG = 0x00000001,   // has to be 1.  used in pointers!
+    FIX_ADDEND_ZERO = 0x00000002,
+    FIX_UNSAFE = 0x00000004,
+    FIX_ABS = 0x00000008,
+
+    FIX_BASE = 0x00000010,
+    FIX_HIGH = 0x00000020,
+    FIX_REL = 0x00000040,
+    FIX_SHIFT = 0x00000080,
+
+    FIX_TARGET_SHIFT = 8,            // contains frame_type
+    FIX_TARGET_MASK = 0x00000700,
+
+    FIX_NOADJ = 0x00000800,   // flags no adjustment for FIX_REL
+
+    FIX_NO_BASE = 0x00001000,
+    FIX_SIGNED = 0x00002000,
+    FIX_LOADER_RES = 0x00004000,
+    FIX_SEC_REL = 0x00008000,
+
+    FIX_NO_OFFSET = 0,
+    FIX_OFFSET_8 = 0x00010000,   // If a new FIX_OFFSET constant is
+    FIX_OFFSET_16 = 0x00020000,   // added, the OffsetSizes array in
+    FIX_OFFSET_21 = 0x00030000,   // obj2supp.c also has to be updated!
+    FIX_OFFSET_32 = 0x00040000,
+    FIX_OFFSET_24 = 0x00050000,
+    FIX_OFFSET_26 = 0x00060000,
+    FIX_OFFSET_64 = 0x00080000,   // jwlink
+    FIX_OFFSET_SHIFT = 16,
+    FIX_OFFSET_MASK = 0x000F0000,   // jwlink
+
+    FIX_TOC = 0x00100000,   // PPC PE
+    FIX_TOCV = 0x00200000,   // PPC PE
+    FIX_IFGLUE = 0x00300000,   // PPC PE
+    FIX_SPECIAL_MASK = 0x00300000,
+
+    FIX_FRAME_SHIFT = 24,           // contains frame_type
+    FIX_FRAME_MASK = 0x07000000,
+
+
+    // now for some handy constants which use these
+
+    FIX_BASE_OFFSET_16 = (FIX_BASE | FIX_OFFSET_16),
+    FIX_BASE_OFFSET_32 = (FIX_BASE | FIX_OFFSET_32),
+    FIX_HIGH_OFFSET_8 = (FIX_HIGH | FIX_OFFSET_8),
+    FIX_HIGH_OFFSET_16 = (FIX_HIGH | FIX_OFFSET_16),
+} fix_type;
+
+typedef struct fix_data {
+    byte* data;
+    unsigned_32 value;              /* value at location being patched */
+    unsigned_32 hvalue;             /* jwlink: in case value is 64-bit */
+    targ_addr   loc_addr;
+    targ_addr   tgt_addr;
+    fix_type    type;
+    unsigned    ffix : 3;
+    unsigned    additive : 1;
+    unsigned    done : 1;
+    unsigned    imported : 1;
+    unsigned    os2_selfrel : 1;
+} fix_data;
+
+typedef struct edgelist {
+    struct edgelist* next;
+    union {
+        segdata* seg;
+        symbol* sym;
+    } u;
+    unsigned            issym : 1;      // true if contains a symbol
+    unsigned            reverse_dir : 1;// true if edge points in the opposite
+    // direction
+} edgelist;
+

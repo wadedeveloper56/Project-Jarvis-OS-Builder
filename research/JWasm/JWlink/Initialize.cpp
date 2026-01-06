@@ -90,7 +90,85 @@ unsigned_16  CurrModHandle;
 section** SectOvlTab;
 sysblock* SysBlocks;
 sysblock* LinkCommands;
+unsigned_32  DbgInfoCount;
+unsigned_32  DbgInfoLen;
+virt_mem     NovDbgInfo;
+virt_mem     CurrDbgLoc;
+module_import* PEImpList;  /* list of imported modules */
+unsigned         NumMods;
+segdata* XFerSegData; /* linker-generated thunk data */
+local_import* PELocalImpList;
+unsigned         NumLocalImports;
 
+static struct {
+	offset      ilt_off;
+	offset      eof_ilt_off;
+	offset      iat_off;
+	offset      mod_name_off;
+	offset      hint_off;
+	offset      total_size;
+	segdata* sdata;
+} IData;
+offset           LastOptimized;  // offset last optimized.
+fix_type         LastOptType;
+segdata* LastSegData;
+offset           FixupOverflow;
+
+#if 1 /* JWLink */
+static struct {
+	segdata* sdata;
+} EData;
+#endif
+infilelist* CachedLibFiles;
+infilelist* CachedFiles;
+edgelist* FreedEdges;
+
+void ResetObjStrip(void)
+{
+	FreedEdges = NULL;
+}
+
+void ResetObjPass1(void)
+{
+	ObjFormat = (obj_format)0;
+}
+
+void ResetObjOMF(void)
+{
+	//    ObjBuff = NULL;
+	//    EOObjRec = NULL;
+}
+
+void ResetObjIO(void)
+{
+	CachedFiles = NULL;
+	CachedLibFiles = NULL;
+}
+
+void ResetObj2Supp(void)
+{
+	FixupOverflow = 0;
+	LastOptType = (fix_type)0;
+	LastOptimized = 0xFFFFFFFF;
+}
+
+void ResetLoadPE(void)
+{
+	PEImpList = NULL;
+	XFerSegData = NULL;
+	NumMods = 0;
+	NumImports = 0;
+	memset(&IData, 0, sizeof(IData));
+#if 1 /* JWLink: exports */
+	memset(&EData, 0, sizeof(EData));
+#endif
+}
+
+void ResetLoadNov(void)
+{
+	DbgInfoCount = 0;
+	DbgInfoLen = 0;
+}
 
 void ResetDistrib(void)
 {
