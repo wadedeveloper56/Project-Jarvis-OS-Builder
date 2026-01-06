@@ -2,6 +2,7 @@
 
 #include "MemorySubsystem.h"
 #include "FileSubsystem.h"
+#include "MessagingSubsystem.h"
 
 #define NODE_ARRAY_SIZE 256
 #define MAX_NUM_NODES   128
@@ -11,7 +12,7 @@
 #define STATIC_TABALLOC (256 * sizeof(symbol *))  // 1st power of 128 > TABSIZE
 #define GLOBAL_TABALLOC (1792 * sizeof(symbol *)) // 1st power of 128 > TABSIZE
 #define BUFF_BLOCK_SIZE (16*1024)
-
+#define CACHE_PAGE_SIZE         (8*1024)
 enum {
     MAX_REC = 1024,
     UNDEFINED = 0xffff,   /* undefined segment */
@@ -30,7 +31,7 @@ extern nodearray* GrpNodes;           // ptr to obj file group list
 extern nodearray* NameNodes;          // ptr to obj file lname list
 
 void ResetPermData(MemorySubsystem* memory);
-void CleanPermData(MemorySubsystem* memory);
+void CleanPermData(MessagingSubsystem* msg, MemorySubsystem* memory, FileSubsystem* file);
 void LnkMemInit(void);
 void LnkMemFini(void);
 void InitCmdFile(void);
@@ -80,13 +81,16 @@ void FreePaths(MemorySubsystem* memory);
 void FreeUndefs(MemorySubsystem* memory);
 void FreeLocalImports(void);
 void CleanLoadFile(void);
-void CleanLinkStruct(MemorySubsystem* memory);
-void FreeFiles(MemorySubsystem* memory, file_list* list);
-void FreeSections(MemorySubsystem* memory, section* sec);
-void FreeGroups(group_entry* head);
+void CleanLinkStruct(MessagingSubsystem* msg, FileSubsystem* file, MemorySubsystem* memory);
+void FreeFiles(FileSubsystem* file, MemorySubsystem* memory, file_list* list);
+void FreeSections(MessagingSubsystem* msg, FileSubsystem* file, MemorySubsystem* memory, section* sec);
+void FreeGroups(MessagingSubsystem* msg, group_entry* head);
 void FreeFormatStuff(void);
 void FreeObjInfo(void);
 void FreeVirtMem(MemorySubsystem* memory);
 void CleanToc(MemorySubsystem* memory);
-void CleanSym(MemorySubsystem* memory);
+void CleanSym(MessagingSubsystem* msg, MemorySubsystem* memory);
+void CacheFree(MemorySubsystem* memory, file_list* list, void* mem);
+void CacheClose(FileSubsystem* files, MemorySubsystem* memory, file_list* list, unsigned pass);
+void FreeObjCache(MemorySubsystem* memory, file_list* list);
 

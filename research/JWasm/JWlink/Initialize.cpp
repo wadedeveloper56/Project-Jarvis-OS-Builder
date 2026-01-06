@@ -136,6 +136,97 @@ offset TocShift;
 char* Name;
 vmemblock* VMemBlocks;
 
+unsigned NumCacheBlocks(unsigned long len)
+{
+	unsigned    numblocks;
+
+	numblocks = len / CACHE_PAGE_SIZE;
+	if (len % CACHE_PAGE_SIZE != 0) {
+		numblocks++;
+	}
+	return numblocks;
+}
+
+bool DumpFileCache(MemorySubsystem* memory, infilelist* file, bool nuke)
+{
+	unsigned    num;
+	unsigned    savenum;
+	unsigned    index;
+	char** blocklist;
+	bool        blockfreed;
+
+	blockfreed = false;
+	if (nuke) {
+		savenum = UINT_MAX;
+	}
+	else {
+		savenum = file->currpos / CACHE_PAGE_SIZE;
+	}
+	if (file->cache != NULL) {
+		num = NumCacheBlocks(file->len);
+		blocklist = (char**)file->cache;
+		for (index = 0; index < num; index++) {
+			if (index != savenum && *blocklist != NULL) {
+				_LnkFree(*blocklist);
+				*blocklist = NULL;
+				blockfreed = true;
+			}
+			blocklist++;
+		}
+	}
+	return blockfreed;
+}
+
+void FreeObjCache(MemorySubsystem* memory, file_list* list)
+{
+	if (list == NULL) return;
+	if (list->file->flags & INSTAT_FULL_CACHE) {
+		_LnkFree(list->file->cache);
+	}
+	else {
+		DumpFileCache(memory, list->file, true);
+	}
+	list->file->cache = NULL;
+}
+
+void CacheClose(FileSubsystem* files, MemorySubsystem* memory, file_list* list, unsigned pass)
+{
+	infilelist* file;
+	bool        nukecache;
+
+	if (list == NULL) return;
+	file = list->file;
+	//    if( file->handle == NIL_HANDLE ) return;
+	file->flags = (infile_flags)(file->flags & ~INSTAT_IN_USE);
+	switch (pass) {
+		case 1: /* first pass */
+			nukecache = !(file->flags & INSTAT_LIBRARY);
+			if (file->flags & INSTAT_FULL_CACHE) {
+				if (nukecache) {
+					FreeObjCache(memory, list);
+				}
+			}
+			else {
+				DumpFileCache(memory, file, nukecache);   // don't cache .obj's
+			}
+			break;
+		case 3: /* freeing structure */
+			FreeObjCache(memory, list);
+			if (file->handle != NIL_HANDLE) {
+				files->Close(file->handle);
+				file->handle = NIL_HANDLE;
+			}
+			break;
+	}
+}
+
+void CacheFree(MemorySubsystem* memory, file_list* list, void* mem)
+{
+	if (list->file->flags & INSTAT_PAGE_CACHE) {
+		_LnkFree(mem);
+	}
+}
+
 void BurnLibs(MemorySubsystem* memory)
 {
 	file_list* temp;
@@ -143,13 +234,13 @@ void BurnLibs(MemorySubsystem* memory)
 
 	for (temp = ObjLibFiles; temp != NULL; temp = temp->next_file) {
 		if (temp->status & STAT_AR_LIB) {
-			//FIX ME CacheFree(temp, temp->strtab);
+			CacheFree(memory, temp, temp->strtab);
 			temp->strtab = NULL;
 		}
 		dict = temp->u.dict;
 		if (dict == NULL) continue;
 		if (temp->status & STAT_AR_LIB) {
-			//FIX ME CacheFree(temp, dict->a.filepostab - 1);
+			CacheFree(memory, temp, dict->a.filepostab - 1);
 			_LnkFree(dict->a.fnametab);
 		}
 		else {
@@ -159,17 +250,17 @@ void BurnLibs(MemorySubsystem* memory)
 		}
 		_LnkFree(dict);
 		temp->u.dict = NULL;
-		//FIX ME FreeObjCache(temp);
+		FreeObjCache(memory, temp);
 	}
 }
 
-void FreeFiles(MemorySubsystem* memory, file_list* list)
+void FreeFiles(FileSubsystem* file, MemorySubsystem* memory, file_list* list)
 {
 	void* temp;
 
 	while (list != NULL) {
 		temp = list->next_file;
-		//FIX ME CacheClose(list, 3);
+		CacheClose(file, memory, list, 3);
 		if (list->status & STAT_HAS_MEMBER && list->u.member != NULL) {
 			FreeList(memory, list->u.member);
 		}
@@ -178,24 +269,24 @@ void FreeFiles(MemorySubsystem* memory, file_list* list)
 	}
 }
 
-void FreeModEntry(mod_entry* mod)
+void FreeModEntry(MessagingSubsystem* msg, mod_entry* mod)
 {
-	CarveFree(CarveModEntry, mod);
+	CarveFree(msg, CarveModEntry, mod);
 }
 
-void FreeAMod(mod_entry* mod)
+void FreeAMod(MessagingSubsystem* msg, MemorySubsystem* memory, mod_entry* mod)
 {
-	//FIX ME FreeObjCache(mod->f.source);
-	FreeModEntry(mod);
+	FreeObjCache(memory, mod->f.source);
+	FreeModEntry(msg, mod);
 }
 
-void FreeMods(mod_entry* head)
+void FreeMods(MessagingSubsystem* msg, MemorySubsystem* memory, mod_entry* head)
 {
 	void* temp;
 
 	while (head != NULL) {
 		temp = head->n.next_mod;
-		FreeAMod(head);
+		FreeAMod(msg, memory, head);
 		head = (mod_entry*)temp;
 	}
 }
@@ -305,52 +396,52 @@ void FreeRelocInfo(MemorySubsystem* memory)
 	}
 }
 
-void FreeAGroup(group_entry* group)
+void FreeAGroup(MessagingSubsystem* msg, group_entry* group)
 {
-	CarveFree(CarveGroup, group);
+	CarveFree(msg, CarveGroup, group);
 }
 
-void FreeGroups(group_entry* head)
+void FreeGroups(MessagingSubsystem* msg, group_entry* head)
 {
 	group_entry* next;
 
 	while (head != NULL) {
 		next = head->next_group;
-		FreeAGroup(head);
+		FreeAGroup(msg, head);
 		head = next;
 	}
 }
 
-void FreeSegData(void* sdata)
+void FreeSegData(MessagingSubsystem* msg, void* sdata)
 {
-	CarveFree(CarveSegData, sdata);
+	CarveFree(msg, CarveSegData, sdata);
 }
 
-void FreeLeader(void* seg)
+void FreeLeader(MessagingSubsystem* msg, void* seg)
 {
-	RingWalk(((seg_leader*)seg)->pieces, FreeSegData);
-	CarveFree(CarveLeader, seg);
+	RingWalk(msg, ((seg_leader*)seg)->pieces, FreeSegData);
+	CarveFree(msg, CarveLeader, seg);
 }
 
-void FreeClasses(class_entry* list)
+void FreeClasses(MessagingSubsystem* msg, class_entry* list)
 {
 	class_entry* next;
 
 	while (list != NULL) {
 		next = list->next_class;
-		RingWalk(list->segs, FreeLeader);
-		CarveFree(CarveClass, list);
+		RingWalk(msg, list->segs, FreeLeader);
+		CarveFree(msg, CarveClass, list);
 		list = next;
 	}
 }
 
-void FreeAreas(MemorySubsystem* memory, OVL_AREA* area)
+void FreeAreas(MessagingSubsystem* msg, FileSubsystem* file, MemorySubsystem* memory, OVL_AREA* area)
 {
 	OVL_AREA* next;
 
 	while (area != NULL) {
 		next = area->next_area;
-		FreeSections(memory, area->sections);
+		FreeSections(msg, file, memory, area->sections);
 		area = next;
 	}
 }
@@ -391,20 +482,20 @@ void ZapHTable(MemorySubsystem* memory, pHTable table) {
 	memory->FreeMemory(table);
 }
 
-void FreeSections(MemorySubsystem* memory, section* sec)
+void FreeSections(MessagingSubsystem* msg, FileSubsystem* file, MemorySubsystem* memory, section* sec)
 {
 	section* next;
 	ORDER_CLASS* Class, * NextClass;
 	ORDER_SEGMENT* Seg, * NextSeg;
 
 	while (sec != NULL) {
-		FreeFiles(memory, sec->files);
+		FreeFiles(file, memory, sec->files);
 		if (!(LinkFlags & INC_LINK_FLAG)) {
-			FreeMods(sec->mods);
-			FreeClasses(sec->classlist);
+			FreeMods(msg, memory, sec->mods);
+			FreeClasses(msg, sec->classlist);
 		}
 		DBISectCleanup(sec);
-		FreeAreas(memory, sec->areas);
+		FreeAreas(msg, file, memory, sec->areas);
 		ZapHTable(memory, sec->modFilesHashed);
 		Class = sec->orderlist;
 		while (Class != NULL) {   // Free up any Order Class entries
@@ -433,9 +524,9 @@ void FreeSections(MemorySubsystem* memory, section* sec)
 	}
 }
 
-void DBICleanup(void)
+void DBICleanup(MessagingSubsystem* msg)
 {
-	FreeGroups(DBIGroups);
+	FreeGroups(msg, DBIGroups);
 }
 
 void ReleasePass1(MemorySubsystem* memory)
@@ -444,12 +535,12 @@ void ReleasePass1(MemorySubsystem* memory)
 	Pass1Blocks.list = NULL;
 }
 
-void FreeDistStuff(MemorySubsystem* memory)
+void FreeDistStuff(MessagingSubsystem* msg, MemorySubsystem* memory)
 {
 	unsigned    index;
 
 	for (index = 1; index <= CurrModHandle; index++) {
-		FreeAMod(ModTable[index]);
+		FreeAMod(msg, memory, ModTable[index]);
 	}
 	_LnkFree(ModTable);
 	_LnkFree(ArcBuffer);
@@ -457,26 +548,26 @@ void FreeDistStuff(MemorySubsystem* memory)
 	ReleasePass1(memory);
 }
 
-void FreeOvlStruct(MemorySubsystem* memory)
+void FreeOvlStruct(MessagingSubsystem* msg, MemorySubsystem* memory)
 {
 	OvlClasses = NULL;
 	OvlVectors = NULL;
 	if (OvlSeg != NULL) {
-		FreeLeader(OvlSeg);
+		FreeLeader(msg, OvlSeg);
 	}
-	FreeDistStuff(memory);
+	FreeDistStuff(msg, memory);
 }
 
-void CleanLinkStruct(MemorySubsystem* memory)
+void CleanLinkStruct(MessagingSubsystem* msg, FileSubsystem* file, MemorySubsystem* memory)
 {
 	if (Root == NULL) return;  /* haven't finished initializing */
 	BurnLibs(memory);
-	FreeFiles(memory, ObjLibFiles);
-	FreeFiles(memory, Root->files);
+	FreeFiles(file, memory, ObjLibFiles);
+	FreeFiles(file, memory, Root->files);
 	ObjLibFiles = NULL;
 	Root->files = NULL;
 	if (!(LinkFlags & INC_LINK_FLAG)) {
-		FreeMods(LibModules);
+		FreeMods(msg, memory, LibModules);
 	}
 	if (SymFileName != NULL) {
 		_LnkFree(SymFileName);
@@ -488,15 +579,15 @@ void CleanLinkStruct(MemorySubsystem* memory)
 		_LnkFree(FmtData.resource);
 	}
 	FreeRelocInfo(memory);
-	FreeGroups(Groups);
-	FreeGroups(AbsGroups);
+	FreeGroups(msg, Groups);
+	FreeGroups(msg, AbsGroups);
 	Groups = NULL;
 	AbsGroups = NULL;
-	FreeSections(memory, Root);
-	DBICleanup();
+	FreeSections(msg, file, memory, Root);
+	DBICleanup(msg);
 	Root = NULL;
 	if (FmtData.type & MK_REAL_MODE) {
-		FreeOvlStruct(memory);
+		FreeOvlStruct(msg, memory);
 	}
 }
 
@@ -769,22 +860,22 @@ void FreeList(MemorySubsystem* memory, void* _curr)
 	}
 }
 
-void CleanPermData(MemorySubsystem* memory)
+void CleanPermData(MessagingSubsystem* msg, MemorySubsystem* memory, FileSubsystem* file)
 {
 #ifndef _DEBUG
 	if (!(LinkFlags & INC_LINK_FLAG)) {
-		CarveVerifyAllGone(CarveLeader, "seg_leader");
-		CarveVerifyAllGone(CarveModEntry, "mod_entry");
-		CarveVerifyAllGone(CarveDLLInfo, "dll_sym_info");
-		CarveVerifyAllGone(CarveExportInfo, "entry_export");
-		CarveVerifyAllGone(CarveSymbol, "symbol");
-		CarveVerifyAllGone(CarveSegData, "segdata");
-		CarveVerifyAllGone(CarveClass, "class_entry");
-		CarveVerifyAllGone(CarveGroup, "group_entry");
+		CarveVerifyAllGone(msg, file, CarveLeader, "seg_leader");
+		CarveVerifyAllGone(msg, file, CarveModEntry, "mod_entry");
+		CarveVerifyAllGone(msg, file, CarveDLLInfo, "dll_sym_info");
+		CarveVerifyAllGone(msg, file, CarveExportInfo, "entry_export");
+		CarveVerifyAllGone(msg, file, CarveSymbol, "symbol");
+		CarveVerifyAllGone(msg, file, CarveSegData, "segdata");
+		CarveVerifyAllGone(msg, file, CarveClass, "class_entry");
+		CarveVerifyAllGone(msg, file, CarveGroup, "group_entry");
 	}
 #endif
 	if (LinkState & LINK_ERROR) {
-		//FIX ME        QDelete(IncFileName);
+		file->Delete(IncFileName);
 	}
 	CarveDestroy(memory, CarveLeader);
 	CarveDestroy(memory, CarveModEntry);
@@ -1169,12 +1260,12 @@ void CleanToc(MemorySubsystem* memory)
 	ZapHTable(memory, Toc);
 }
 
-void FreeImport(dll_sym_info* dll)
+void FreeImport(MessagingSubsystem* msg,dll_sym_info* dll)
 {
-	CarveFree(CarveDLLInfo, dll);
+	CarveFree(msg, CarveDLLInfo, dll);
 }
 
-void WipeSym(MemorySubsystem* memory, symbol* sym)
+void WipeSym(MessagingSubsystem* msg, MemorySubsystem* memory, symbol* sym)
 {
 	if (IS_SYM_IMPORTED(sym) && !(FmtData.type & MK_ELF)) {
 		if (FmtData.type & MK_NOVELL) {
@@ -1183,7 +1274,7 @@ void WipeSym(MemorySubsystem* memory, symbol* sym)
 			}
 		}
 		else {
-			FreeImport((dll_sym_info*)sym->p.import);
+			FreeImport(msg, (dll_sym_info*)sym->p.import);
 		}
 		sym->p.import = NULL;
 	}
@@ -1195,10 +1286,10 @@ void WipeSym(MemorySubsystem* memory, symbol* sym)
 	}
 }
 
-void FreeSymbol(MemorySubsystem* memory,symbol* sym)
+void FreeSymbol(MessagingSubsystem* msg, MemorySubsystem* memory, symbol* sym)
 {
-	WipeSym(memory, sym);
-	CarveFree(CarveSymbol, sym);
+	WipeSym(msg, memory, sym);
+	CarveFree(msg, CarveSymbol, sym);
 }
 
 void RelSymBlock(MemorySubsystem* memory)
@@ -1207,7 +1298,7 @@ void RelSymBlock(MemorySubsystem* memory)
 	PermBlocks.list = NULL;
 }
 
-void CleanSym(MemorySubsystem* memory)
+void CleanSym(MessagingSubsystem* msg, MemorySubsystem* memory)
 {
 	symbol* sym;
 	symbol* next;
@@ -1218,7 +1309,7 @@ void CleanSym(MemorySubsystem* memory)
 	if (!(LinkFlags & INC_LINK_FLAG)) {
 		for (sym = HeadSym; sym != NULL; sym = next) {
 			next = sym->link;
-			FreeSymbol(memory, sym);
+			FreeSymbol(msg, memory, sym);
 		}
 	}
 	RelSymBlock(memory);

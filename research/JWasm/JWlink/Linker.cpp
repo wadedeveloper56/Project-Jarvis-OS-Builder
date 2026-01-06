@@ -79,13 +79,13 @@ void Linker::CleanSubSystems(void)
     FreeUndefs(memory);
     FreeLocalImports();
     CleanLoadFile();
-    CleanLinkStruct(memory);
+    CleanLinkStruct(msg, file, memory);
     FreeFormatStuff();
     FreeObjInfo();
     FreeVirtMem(memory);
     CleanToc(memory);
-    CleanSym(memory);
-    CleanPermData(memory);
+    CleanSym(msg, memory);
+    CleanPermData(msg, memory, file);
 }
 
 void Linker::FiniSubSystems(void)

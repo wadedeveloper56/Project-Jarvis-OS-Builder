@@ -58,6 +58,7 @@ void* RINGHNAME(CarveAlloc) (   // CARVER ALLOC AND APPEND AN ENTRY
     void *hdr )                 // - addr( ring header )
 ;
 void RINGHNAME(CarveFree) (     // CARVER FREE ALL ELEMENTS IN A RING
+    MessagingSubsystem* msg,
     carve_t carver,             // - carving control
     void *hdr )                 // - addr( ring header )
 ;
@@ -121,9 +122,10 @@ void* RINGHNAME(Push) (         // INSERT ELEMENT AT START OF RING
     void *element )             // - element to be pushed
 ;
 void RINGHNAME(Walk) (          // TRAVERSE RING
+    MessagingSubsystem* msg,
     void *hdr,                  // - ring header
     void (*rtn)                 // - traversal routine
-        (void * curr) )         // - - passed current element
+        (MessagingSubsystem* msg, void * curr) )         // - - passed current element
 ;
 void *RINGHNAME(Step) (         // STEP ALONG ELEMENTS (NULL -> e1 -> e2 -> NULL)
     void *hdr,                  // - ring header

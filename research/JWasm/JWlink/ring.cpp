@@ -171,9 +171,10 @@ void RINGNAME(Insert) (         // INSERT ELEMENT INTO RING
 
 
 void RINGNAME(Walk) (           // TRAVERSE RING
+    MessagingSubsystem* msg,
     void *hdr,                  // - ring header
     void (*rtn)                 // - traversal routine
-        (void * curr) )          // - - passed current element
+        (MessagingSubsystem* msg, void * curr) )          // - - passed current element
 {
 #if 0
     RING *rhdr;                 // - ring header
@@ -192,7 +193,7 @@ void RINGNAME(Walk) (           // TRAVERSE RING
 #else
     RING *relement;             // - ring element
     RingIterBegSafe((RING*)hdr, relement ) {
-            (*rtn)( relement );
+            (*rtn)( msg, relement );
     } RingIterEndSafe( relement )
 #endif
 }
@@ -420,6 +421,7 @@ void* RINGNAME(CarveAlloc) (    // CARVER ALLOC AND APPEND AN ENTRY
 
 
 void RINGNAME(CarveFree) (      // CARVER FREE ALL ELEMENTS IN A RING
+    MessagingSubsystem* msg,
     carve_t carver,             // - carving control
     void *hdr )                 // - addr( ring header )
 {
@@ -428,7 +430,7 @@ void RINGNAME(CarveFree) (      // CARVER FREE ALL ELEMENTS IN A RING
     for(;;) {
         elt = RINGNAME(Pop)( hdr );
         if( elt == NULL ) break;
-        CarveFree( carver, elt );
+        CarveFree( msg, carver, elt );
     }
 }
 

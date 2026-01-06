@@ -19,7 +19,7 @@
     }
 
 #ifndef _DEBUG
-void CarveVerifyAllGone(carve_t cv, char* node_name)
+void CarveVerifyAllGone(MessagingSubsystem* msg,FileSubsystem* file,carve_t cv, char* node_name)
 {
     free_t* check;
     blk_t* block;
@@ -38,17 +38,17 @@ void CarveVerifyAllGone(carve_t cv, char* node_name)
             }
             if (check == NULL) {
                 if (!some_unfreed) {
-                    //FIX ME FmtStr(buff, 80, "carve %s unfreed:", node_name);
-                    //FIX ME WriteStdOut(buff);
+                    msg->FmtStr(buff, 80, "carve %s unfreed:", node_name);
+                    file->WriteStdOut(buff,80);
                     some_unfreed = true;
                 }
-                //FIX ME FmtStr(buff, 80, " %h", compare);
-                //FIX ME WriteStdOut(buff);
+                msg->FmtStr(buff, 80, " %h", compare);
+                file->WriteStdOut(buff,80);
             }
         } while (compare != block->data);
     }
     if (some_unfreed) {
-        //FIX ME WriteNLStdOut();
+        file->WriteNLStdOut();
     }
 }
 #endif
@@ -73,7 +73,7 @@ void CarveDestroy(MemorySubsystem* memory, carve_t cv)
 }
 
 #ifndef _DEBUG
-void CarveDebugFree(carve_t cv, void* elm)
+void CarveDebugFree(MessagingSubsystem* msg, carve_t cv, void* elm)
 {
     free_t* check;
     blk_t* block;
@@ -84,7 +84,7 @@ void CarveDebugFree(carve_t cv, void* elm)
     /* make sure object hasn't been freed before */
     for (check = cv->free_list; check != NULL; check = check->next_free) {
         if (elm == (void*)check) {
-            //FIX ME LnkFatal("carve: freed object was previously freed");
+            msg->LnkFatal("carve: freed object was previously freed");
         }
     }
     /* make sure object is from this carve allocator */
@@ -106,12 +106,12 @@ void CarveDebugFree(carve_t cv, void* elm)
         if (elm == compare) break;
     }
     if (block == NULL) {
-        //FIX ME LnkFatal("carve: freed object was never allocated");
+        msg->LnkFatal("carve: freed object was never allocated");
     }
     DbgZapFreed(elm, cv->elm_size);
 }
 #else
-#define CarveDebugFree( cv, elm )
+#define CarveDebugFree( msg, cv, elm )
 #endif
 
 void DbgZapAlloc(void* tgt, size_t size)
@@ -140,12 +140,12 @@ blk_t* newBlk(MemorySubsystem* memory, cv_t* cv)
     return newblk;
 }
 
-void CarveFree(carve_t cv, void* elm)
+void CarveFree(MessagingSubsystem* msg, carve_t cv, void* elm)
 {
     if (elm == NULL) {
         return;
     }
-    CarveDebugFree(cv, elm);
+    CarveDebugFree(msg, cv, elm);
     _ADD_TO_FREE(cv->free_list, elm);
 }
 
