@@ -16,7 +16,7 @@
 int ARCompName(const void* key, const void* vbase);
 int ARCompIName(const void* key, const void* vbase);
 int (*CmpARRtn)(const void*, const void*) = ARCompName;
-int (*CmpOMFRtn)(const void*, const void*, size_t) = memcmp; 
+int (*CmpOMFRtn)(const void*, const void*, size_t) = memcmp;
 int (*CmpRtn)(const void*, const void*, size_t);
 
 #ifdef _INT_DEBUG
@@ -133,7 +133,426 @@ char* TocName;
 symbol* TocSym;
 offset TocSize;
 offset TocShift;
+char* Name;
 
+void BurnLibs(MemorySubsystem* memory)
+{
+	file_list* temp;
+	dict_entry* dict;
+
+	for (temp = ObjLibFiles; temp != NULL; temp = temp->next_file) {
+		if (temp->status & STAT_AR_LIB) {
+			//FIX ME CacheFree(temp, temp->strtab);
+			temp->strtab = NULL;
+		}
+		dict = temp->u.dict;
+		if (dict == NULL) continue;
+		if (temp->status & STAT_AR_LIB) {
+			//FIX ME CacheFree(temp, dict->a.filepostab - 1);
+			_LnkFree(dict->a.fnametab);
+		}
+		else {
+			if (dict->o.cache != NULL) {
+				//FIX ME FreeDictCache(dict->o.cache, (dict->o.pages / PAGES_IN_CACHE) + 1);
+			}
+		}
+		_LnkFree(dict);
+		temp->u.dict = NULL;
+		//FIX ME FreeObjCache(temp);
+	}
+}
+
+void FreeFiles(MemorySubsystem* memory, file_list* list)
+{
+	void* temp;
+
+	while (list != NULL) {
+		temp = list->next_file;
+		//FIX ME CacheClose(list, 3);
+		if (list->status & STAT_HAS_MEMBER && list->u.member != NULL) {
+			FreeList(memory, list->u.member);
+		}
+		//_PermFree(list);
+		list = (file_list*)temp;
+	}
+}
+
+void FreeModEntry(mod_entry* mod)
+{
+	CarveFree(CarveModEntry, mod);
+}
+
+void FreeAMod(mod_entry* mod)
+{
+	//FIX ME FreeObjCache(mod->f.source);
+	FreeModEntry(mod);
+}
+
+void FreeMods(mod_entry* head)
+{
+	void* temp;
+
+	while (head != NULL) {
+		temp = head->n.next_mod;
+		FreeAMod(head);
+		head = (mod_entry*)temp;
+	}
+}
+
+bool TraverseRelocBlock(MemorySubsystem* memory, reloc_info** reloclist, unsigned num, bool (*fn)(MemorySubsystem*, reloc_info*))
+{
+	while (num > 0) {
+		if (fn(memory, *reloclist++))
+			return(true);
+		if (FmtData.type & MK_OS2_FLAT) {
+			if (fn(memory, *reloclist++)) {
+				return(true);
+			}
+		}
+		num--;
+	}
+	return(false);
+}
+
+bool TraverseOS2RelocList(MemorySubsystem* memory, group_entry* group, bool (*fn)(MemorySubsystem*, reloc_info*))
+{
+	unsigned_32         index;
+	unsigned_32         highidx;
+	unsigned            lowidx;
+	reloc_info*** reloclist;
+
+	reloclist = (reloc_info***)group->g.grp_relocs;
+	if (reloclist != NULL) {
+		index = OSF_PAGE_COUNT(group->totalsize);
+		highidx = OSF_RLIDX_HIGH(index);
+		while (highidx > 0) {
+			if (TraverseRelocBlock(memory, *reloclist, OSF_RLIDX_MAX, fn))
+				return(true);
+			reloclist++;
+			highidx--;
+		}
+		lowidx = OSF_RLIDX_LOW(index);
+		if (lowidx > 0) {
+			return(TraverseRelocBlock(memory, *reloclist, OSF_RLIDX_LOW(index), fn));
+		}
+	}
+	return(false);
+}
+
+bool FreeRelocList(MemorySubsystem* memory, reloc_info* list)
+{
+	while (list != NULL) {
+		if (!(list->sizeleft & RELOC_SPILLED)) {
+			_LnkFree(list->loc.addr);
+		}
+		list = list->next;
+	}
+	return(false);  /* needed for OS2 generic traversal routines */
+}
+
+void FreeRelocSect(MemorySubsystem* memory, section* sect)
+{
+	FreeRelocList(memory, (reloc_info*)sect->reloclist);
+}
+
+void FreeGroupRelocs(MemorySubsystem* memory, group_entry* group)
+{
+	unsigned_32         highidx;
+	unsigned_32         index;
+	reloc_info*** reloclist;
+
+	if (!(LinkState & MAKE_RELOCS))
+		return;
+	if (FmtData.type & (MK_OS2_FLAT | MK_PE)) {
+		TraverseOS2RelocList(memory, group, FreeRelocList);
+		reloclist = (reloc_info***)group->g.grp_relocs;
+		if (reloclist != NULL) {
+			index = OSF_PAGE_COUNT(group->totalsize);
+			highidx = OSF_RLIDX_HIGH(index);
+			if (OSF_RLIDX_LOW(index) != 0) {
+				highidx++;
+			}
+			while (highidx > 0) {
+				_LnkFree(*reloclist);
+				reloclist++;
+				highidx--;
+			}
+		}
+	}
+	else if (FmtData.type & (MK_ELF | MK_OS2_16BIT | MK_QNX)) {
+		FreeRelocList(memory, (reloc_info*)group->g.grp_relocs);
+	}
+}
+
+void FreeRelocInfo(MemorySubsystem* memory)
+{
+	group_entry* group;
+
+	if (!(LinkState & MAKE_RELOCS))
+		return;
+	if (FmtData.type & (MK_ELF | MK_OS2_FLAT | MK_PE | MK_OS2_16BIT | MK_QNX)) {
+		for (group = Groups; group != NULL; group = group->next_group) {
+			FreeGroupRelocs(memory, group);
+		}
+	}
+	else if (Root != NULL) {
+		//FIX ME WalkAllSects(FreeRelocSect);
+	}
+	if (FmtData.type & MK_QNX) {
+		FreeRelocList(memory, FloatFixups);
+		FreeRelocSect(memory, Root);
+	}
+}
+
+void FreeAGroup(group_entry* group)
+{
+	CarveFree(CarveGroup, group);
+}
+
+void FreeGroups(group_entry* head)
+{
+	group_entry* next;
+
+	while (head != NULL) {
+		next = head->next_group;
+		FreeAGroup(head);
+		head = next;
+	}
+}
+
+void FreeSegData(void* sdata)
+{
+	CarveFree(CarveSegData, sdata);
+}
+
+void FreeLeader(void* seg)
+{
+	RingWalk(((seg_leader*)seg)->pieces, FreeSegData);
+	CarveFree(CarveLeader, seg);
+}
+
+void FreeClasses(class_entry* list)
+{
+	class_entry* next;
+
+	while (list != NULL) {
+		next = list->next_class;
+		RingWalk(list->segs, FreeLeader);
+		CarveFree(CarveClass, list);
+		list = next;
+	}
+}
+
+void FreeAreas(MemorySubsystem* memory, OVL_AREA* area)
+{
+	OVL_AREA* next;
+
+	while (area != NULL) {
+		next = area->next_area;
+		FreeSections(memory, area->sections);
+		area = next;
+	}
+}
+
+void ODBISectCleanup(section* sect)
+{
+	sect = sect;
+	//_PermFree(sect->dbg_info);
+}
+
+void DBISectCleanup(section* sect)
+{
+	if (LinkFlags & OLD_DBI_FLAG) {
+		ODBISectCleanup(sect);
+	}
+}
+
+void ZapHTable(MemorySubsystem* memory, pHTable table) {
+	int i;
+	pHTElem* tblPtr;
+	pHTElem tblElem, temp;
+
+	if (table == NULL) {
+		return;
+	}
+
+	tblPtr = table->tbl;
+
+	for (i = 0; i < table->size; i++) {
+		for (tblElem = tblPtr[i]; tblElem != NULL; tblElem = temp) {
+			memory->FreeMemory(tblElem->userData);
+			temp = tblElem->next;
+			free(tblElem);
+		}
+	}
+
+	memory->FreeMemory(table->tbl);
+	memory->FreeMemory(table);
+}
+
+void FreeSections(MemorySubsystem* memory, section* sec)
+{
+	section* next;
+	ORDER_CLASS* Class, * NextClass;
+	ORDER_SEGMENT* Seg, * NextSeg;
+
+	while (sec != NULL) {
+		FreeFiles(memory, sec->files);
+		if (!(LinkFlags & INC_LINK_FLAG)) {
+			FreeMods(sec->mods);
+			FreeClasses(sec->classlist);
+		}
+		DBISectCleanup(sec);
+		FreeAreas(memory, sec->areas);
+		ZapHTable(memory, sec->modFilesHashed);
+		Class = sec->orderlist;
+		while (Class != NULL) {   // Free up any Order Class entries
+			if (Class->Name != NULL) {   // Including members and sucessors
+				_LnkFree(Class->Name);
+			}
+			if (Class->Copy) {
+				_LnkFree(Class->SrcName);
+			}
+			Seg = Class->SegList;
+			while (Seg != NULL) {  // Order Seg emtries can also have members and sucessors
+				if (Seg->Name != NULL) {
+					_LnkFree(Seg->Name);
+				}
+				NextSeg = Seg->NextSeg;
+				_LnkFree(Seg);
+				Seg = NextSeg;
+			}
+			NextClass = Class->NextClass;
+			_LnkFree(Class);
+			Class = NextClass;
+		}
+		next = sec->next_sect;
+		_LnkFree(sec);
+		sec = next;
+	}
+}
+
+void DBICleanup(void)
+{
+	FreeGroups(DBIGroups);
+}
+
+void ReleasePass1(MemorySubsystem* memory)
+{
+	FreeList(memory, Pass1Blocks.list);
+	Pass1Blocks.list = NULL;
+}
+
+void FreeDistStuff(MemorySubsystem* memory)
+{
+	unsigned    index;
+
+	for (index = 1; index <= CurrModHandle; index++) {
+		FreeAMod(ModTable[index]);
+	}
+	_LnkFree(ModTable);
+	_LnkFree(ArcBuffer);
+	_LnkFree(SectOvlTab);
+	ReleasePass1(memory);
+}
+
+void FreeOvlStruct(MemorySubsystem* memory)
+{
+	OvlClasses = NULL;
+	OvlVectors = NULL;
+	if (OvlSeg != NULL) {
+		FreeLeader(OvlSeg);
+	}
+	FreeDistStuff(memory);
+}
+
+void CleanLinkStruct(MemorySubsystem* memory)
+{
+	if (Root == NULL) return;  /* haven't finished initializing */
+	BurnLibs(memory);
+	FreeFiles(memory, ObjLibFiles);
+	FreeFiles(memory, Root->files);
+	ObjLibFiles = NULL;
+	Root->files = NULL;
+	if (!(LinkFlags & INC_LINK_FLAG)) {
+		FreeMods(LibModules);
+	}
+	if (SymFileName != NULL) {
+		_LnkFree(SymFileName);
+	}
+	if (FmtData.osname != NULL) {
+		_LnkFree(FmtData.osname);
+	}
+	if (FmtData.resource != NULL) {
+		_LnkFree(FmtData.resource);
+	}
+	FreeRelocInfo(memory);
+	FreeGroups(Groups);
+	FreeGroups(AbsGroups);
+	Groups = NULL;
+	AbsGroups = NULL;
+	FreeSections(memory, Root);
+	DBICleanup();
+	Root = NULL;
+	if (FmtData.type & MK_REAL_MODE) {
+		FreeOvlStruct(memory);
+	}
+}
+
+void CleanLoadFile(void)
+{
+}
+
+void FreeLocalImports(void)
+{
+#ifdef _OS2
+	FreePELocalImports();
+#endif
+}
+
+void FreeUndefs(MemorySubsystem* memory)
+{
+	RingFree(memory, &SymTraceList);
+	RingFree(memory, &UndefList);
+}
+
+void FreePaths(MemorySubsystem* memory)
+{
+	FreeList(memory, Path);
+	Path = NULL;
+	if (Name != NULL) {
+		_LnkFree(Name);
+		Name = NULL;
+	}
+}
+
+void CleanTraces(MemorySubsystem* memory)
+{
+	trace_info* next;
+
+	while (TraceList != NULL) {
+		next = TraceList->next;
+		if (!TraceList->found) {
+			_LnkFree(TraceList->u.name);
+		}
+		_LnkFree(TraceList->member);
+		_LnkFree(TraceList);
+		TraceList = next;
+	}
+	TraceList = NULL;
+}
+
+void CloseSpillFile(FileSubsystem* file, MemorySubsystem* memory)
+{
+	if (TempFile != NIL_HANDLE) {
+		//RestoreBreak();
+		file->Close(TempFile);
+		file->Delete(TFileName);
+		_LnkFree(TFileName);
+		TFileName = NULL;
+		TempFile = NIL_HANDLE;
+	}
+}
 void ResetToc(void)
 {
 	Toc = NULL;
@@ -305,7 +724,7 @@ void FlushBuffFile(FileSubsystem* file, MemorySubsystem* memory, outfilelist* ou
 void CloseBuffFile(FileSubsystem* file, MemorySubsystem* memory, outfilelist* outfile)
 {
 	if (outfile->buffer != NULL) {
-		FlushBuffFile(file, memory,outfile);
+		FlushBuffFile(file, memory, outfile);
 	}
 	file->Close(outfile->handle);
 	outfile->handle = NIL_HANDLE;
@@ -337,7 +756,7 @@ void FreeOutFiles(FileSubsystem* file, MemorySubsystem* memory)
 	}
 }
 
-void FreeList(MemorySubsystem* memory,void* _curr)
+void FreeList(MemorySubsystem* memory, void* _curr)
 {
 	node* curr = (node*)_curr;
 	node* next_node;
@@ -648,7 +1067,7 @@ void ResetMisc(void)
 
 int stricmp_wrapper(const void* s1, const void* s2)
 {
-	return(_stricmp((char *)s1, (char *)s2));
+	return(_stricmp((char*)s1, (char*)s2));
 }
 
 section* NewSection(MemorySubsystem* memory)
@@ -656,7 +1075,7 @@ section* NewSection(MemorySubsystem* memory)
 	section* sect;
 
 	OvlNum++;
-	_ChkAlloc(section *, sect, sizeof(section));
+	_ChkAlloc(section*, sect, sizeof(section));
 	sect->next_sect = NULL;
 	sect->classlist = NULL;
 	sect->orderlist = NULL;
@@ -677,7 +1096,7 @@ section* NewSection(MemorySubsystem* memory)
 	return(sect);
 }
 
-void CleanSystemList(MemorySubsystem* memory,bool check)
+void CleanSystemList(MemorySubsystem* memory, bool check)
 {
 	sysblock** sys;
 	sysblock* next;
