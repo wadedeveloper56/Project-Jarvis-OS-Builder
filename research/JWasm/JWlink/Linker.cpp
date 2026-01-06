@@ -80,7 +80,7 @@ void Linker::CleanSubSystems(void)
     FreeLocalImports();
     CleanLoadFile();
     CleanLinkStruct(msg, file, memory);
-    FreeFormatStuff();
+    FreeFormatStuff(memory, msg);
     FreeObjInfo();
     FreeVirtMem(memory);
     CleanToc(memory);

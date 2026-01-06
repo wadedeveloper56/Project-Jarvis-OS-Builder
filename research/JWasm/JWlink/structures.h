@@ -1538,5 +1538,50 @@ typedef struct vmemblock {
     char                mem[1];
 } vmemblock;
 
+typedef enum commandflag {
+    CF_TO_STDOUT = 0x00000001,
+    CF_SET_SECTION = 0x00000002,   // used for LIB/FIXEDLIB directives
+    CF_NO_DEF_LIBS = 0x00000004,
+    CF_FILES_BEFORE_DBI = 0x00000008,
+    CF_UNNAMED = 0x00000010,
+    CF_AUTO_SEG_FLAG = 0x00000020,   // used in CMDOS2
+    CF_MEMBER_ADDED = 0x00000040,
+    CF_SEPARATE_SYM = 0x00000080,
+    CF_AUTOSECTION = 0x00000100,
+    CF_SECTION_THERE = 0x00000200,
+    CF_HAVE_FILES = 0x00000400,
+    CF_HAVE_REALBREAK = 0x00000800,
+    CF_LANGUAGE_MASK = 0x00003000,
+    CF_LANGUAGE_ENGLISH = 0x00000000,
+    CF_LANGUAGE_JAPANESE = 0x00001000,
+    CF_LANGUAGE_CHINESE = 0x00002000,
+    CF_LANGUAGE_KOREAN = 0x00003000,
+    CF_ANON_EXPORT = 0x00004000,
+    CF_AFTER_INC = 0x00008000,  // option must be specd. after op inc
+    CF_DOING_OPTLIB = 0x00010000,
+    CF_NO_EXTENSION = 0x00020000    // don't put an extension on exe name
+} commandflag;
+
+typedef struct rtpblock {        // run-time parameter block.
+    unsigned_16     signature;
+    unsigned_16     minreal;
+    unsigned_16     maxreal;
+    unsigned_16     minibuf;
+    unsigned_16     maxibuf;
+    unsigned_16     nistack;
+    unsigned_16     istksize;
+    unsigned_32     realbreak;
+    unsigned_16     callbufs;
+    unsigned_16     extender_flags;     /* for undocumented "runtime flags" */
+    unsigned_16     unpriv;
+} rtpblock;
+
+typedef struct parse_entry {
+    char* keyword;
+    bool                (*rtn)(void);
+    enum exe_format     format;
+    commandflag         flags;
+} parse_entry;
+
 
 #include "poppack.h"

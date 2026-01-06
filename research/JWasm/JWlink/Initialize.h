@@ -85,7 +85,7 @@ void CleanLinkStruct(MessagingSubsystem* msg, FileSubsystem* file, MemorySubsyst
 void FreeFiles(FileSubsystem* file, MemorySubsystem* memory, file_list* list);
 void FreeSections(MessagingSubsystem* msg, FileSubsystem* file, MemorySubsystem* memory, section* sec);
 void FreeGroups(MessagingSubsystem* msg, group_entry* head);
-void FreeFormatStuff(void);
+void FreeFormatStuff(MemorySubsystem* memory, MessagingSubsystem* msg);
 void FreeObjInfo(void);
 void FreeVirtMem(MemorySubsystem* memory);
 void CleanToc(MemorySubsystem* memory);
@@ -93,4 +93,4 @@ void CleanSym(MessagingSubsystem* msg, MemorySubsystem* memory);
 void CacheFree(MemorySubsystem* memory, file_list* list, void* mem);
 void CacheClose(FileSubsystem* files, MemorySubsystem* memory, file_list* list, unsigned pass);
 void FreeObjCache(MemorySubsystem* memory, file_list* list);
-
+void FreeSegFlags(MemorySubsystem* memory, seg_flags* curr);

@@ -292,6 +292,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="carve.cpp" />
+    <ClCompile Include="CmdElf.cpp" />
+    <ClCompile Include="CmdLine.cpp" />
+    <ClCompile Include="CmdNovell.cpp" />
+    <ClCompile Include="CmdPharlap.cpp" />
+    <ClCompile Include="CmdPlatform.cpp" />
+    <ClCompile Include="CmdQnx.cpp" />
+    <ClCompile Include="CmdUtils.cpp" />
+    <ClCompile Include="CmdWinOS2.cpp" />
     <ClCompile Include="globals.cpp" />
     <ClCompile Include="hash.cpp" />
     <ClCompile Include="Initialize.cpp" />
@@ -314,6 +322,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="carve.h" />
+    <ClInclude Include="CmdElf.h" />
+    <ClInclude Include="CmdLine.h" />
+    <ClInclude Include="CmdNovell.h" />
+    <ClInclude Include="CmdPharlap.h" />
+    <ClInclude Include="CmdPlatform.h" />
+    <ClInclude Include="CmdQnx.h" />
+    <ClInclude Include="CmdUtils.h" />
+    <ClInclude Include="CmdWinOS2.h" />
     <ClInclude Include="coffentr.h" />
     <ClInclude Include="coffflhn.h" />
     <ClInclude Include="coffglbl.h" />
@@ -336,6 +352,7 @@
     <ClInclude Include="globals.h" />
     <ClInclude Include="hash.h" />
     <ClInclude Include="Initialize.h" />
+    <ClInclude Include="ldefext.h" />
     <ClInclude Include="Linker.h" />
     <ClInclude Include="MemorySubsystem.h" />
     <ClInclude Include="MessagingSubsystem.h" />

@@ -7,6 +7,7 @@
 #include "stringtable.h"
 #include "ring.h"
 #include "hash.h"
+#include "CmdLine.h"
 
 #define SEG_CARVE_SIZE          (2*1024)
 #define MOD_CARVE_SIZE          (5*1024)
@@ -135,6 +136,18 @@ offset TocSize;
 offset TocShift;
 char* Name;
 vmemblock* VMemBlocks;
+
+void FreeSegFlags(MemorySubsystem* memory, seg_flags* curr)
+{
+	seg_flags* next;
+
+	while (curr != NULL) {
+		next = curr->next;
+		_LnkFree(curr->name);
+		_LnkFree(curr);
+		curr = next;
+	}
+}
 
 unsigned NumCacheBlocks(unsigned long len)
 {
@@ -1252,21 +1265,22 @@ void BurnSystemList(MemorySubsystem* memory)
 	CleanSystemList(memory, false);
 }
 
-void FreeFormatStuff(void)
+void FreeFormatStuff(MemorySubsystem* memory, MessagingSubsystem* msg)
 {
 	int i;
 	exe_format                  possible;
 
+	CmdLine* cmdLine = new CmdLine(memory, msg);
 	if (!(LinkState & FMT_DECIDED)) return;
-	//FIX ME
-	//for (i = 0; i < NUMPOSSIBLEFMT; i++) {
-	//	possible = PossibleFmt[i].bits;
-	//	if ((~possible & FmtData.type) == 0) {
-	//		if (PossibleFmt[i].free_func != NULL)
-	//			PossibleFmt[i].free_func();
-	//		break;
-	//	}
-	//}
+	for (i = 0; i < 11; i++) {
+		select_format* sf = cmdLine->getPossibleFormat(i);
+		possible = sf->bits;
+		if ((~possible & FmtData.type) == 0) {
+			if (sf->platform != NULL)
+				sf->platform->freeFormat();
+			break;
+		}
+	}
 }
 
 void FreeNodes(nodearray* nodes)

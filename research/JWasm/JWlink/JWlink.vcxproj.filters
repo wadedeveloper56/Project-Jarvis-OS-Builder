@@ -48,6 +48,30 @@
     <ClCompile Include="hash.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CmdNovell.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CmdPharlap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CmdPlatform.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CmdQnx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CmdWinOS2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CmdUtils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CmdLine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CmdElf.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -192,6 +216,33 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="hash.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CmdNovell.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CmdPharlap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CmdPlatform.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CmdQnx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CmdWinOS2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CmdUtils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ldefext.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CmdLine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CmdElf.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
