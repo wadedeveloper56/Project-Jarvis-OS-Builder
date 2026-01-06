@@ -149,17 +149,6 @@ void FreeSegFlags(MemorySubsystem* memory, seg_flags* curr)
 	}
 }
 
-unsigned NumCacheBlocks(unsigned long len)
-{
-	unsigned    numblocks;
-
-	numblocks = len / CACHE_PAGE_SIZE;
-	if (len % CACHE_PAGE_SIZE != 0) {
-		numblocks++;
-	}
-	return numblocks;
-}
-
 bool DumpFileCache(MemorySubsystem* memory, infilelist* file, bool nuke)
 {
 	unsigned    num;
@@ -200,44 +189,6 @@ void FreeObjCache(MemorySubsystem* memory, file_list* list)
 		DumpFileCache(memory, list->file, true);
 	}
 	list->file->cache = NULL;
-}
-
-void CacheClose(FileSubsystem* files, MemorySubsystem* memory, file_list* list, unsigned pass)
-{
-	infilelist* file;
-	bool        nukecache;
-
-	if (list == NULL) return;
-	file = list->file;
-	//    if( file->handle == NIL_HANDLE ) return;
-	file->flags = (infile_flags)(file->flags & ~INSTAT_IN_USE);
-	switch (pass) {
-		case 1: /* first pass */
-			nukecache = !(file->flags & INSTAT_LIBRARY);
-			if (file->flags & INSTAT_FULL_CACHE) {
-				if (nukecache) {
-					FreeObjCache(memory, list);
-				}
-			}
-			else {
-				DumpFileCache(memory, file, nukecache);   // don't cache .obj's
-			}
-			break;
-		case 3: /* freeing structure */
-			FreeObjCache(memory, list);
-			if (file->handle != NIL_HANDLE) {
-				files->Close(file->handle);
-				file->handle = NIL_HANDLE;
-			}
-			break;
-	}
-}
-
-void CacheFree(MemorySubsystem* memory, file_list* list, void* mem)
-{
-	if (list->file->flags & INSTAT_PAGE_CACHE) {
-		_LnkFree(mem);
-	}
 }
 
 void FreeDictCache(MemorySubsystem* memory, void** cache, unsigned_16 buckets)
@@ -1046,10 +997,6 @@ void FiniSym(MemorySubsystem* memory)
 	_LnkFree(StaticSymPtrs);
 }
 
-void CacheFini(void)
-{
-}
-
 long ORLSeek(void* _list, long pos, int where)
 {
 	file_list* list = (file_list*)_list;
@@ -1064,17 +1011,6 @@ long ORLSeek(void* _list, long pos, int where)
 		ORLFilePos = list->file->len - pos;
 	}
 	return(ORLFilePos);
-}
-
-void* CachePermRead(file_list* list, unsigned long pos, unsigned len)
-{
-	return CacheRead(list, pos, len);
-}
-
-void* CacheRead(file_list* list, unsigned long pos, unsigned len)
-{
-	if (pos + len > list->file->len) return NULL;
-	return (char*)list->file->cache + pos;
 }
 
 void* ORLRead(MemorySubsystem* memory, void* _list, size_t len)

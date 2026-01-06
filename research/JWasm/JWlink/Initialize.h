@@ -3,6 +3,7 @@
 #include "MemorySubsystem.h"
 #include "FileSubsystem.h"
 #include "MessagingSubsystem.h"
+#include "cache.h"
 
 #define NODE_ARRAY_SIZE 256
 #define MAX_NUM_NODES   128
@@ -46,11 +47,8 @@ void FreeTokBuffs(MemorySubsystem* memory);
 void InitSpillFile(void);
 void InitSym(MemorySubsystem* memory);
 void FiniSym(MemorySubsystem* memory);
-void CacheFini(void);
 void InitObjORL(MemorySubsystem* memory);
 void ObjORLFini(void);
-void* CachePermRead(file_list* list, unsigned long pos, unsigned len);
-void* CacheRead(file_list* list, unsigned long pos, unsigned len);
 void FreeOutFiles(FileSubsystem* file, MemorySubsystem* memory);
 void ResetMisc(void);
 section* NewSection(MemorySubsystem* memory);
@@ -90,7 +88,6 @@ void FreeObjInfo(void);
 void FreeVirtMem(MemorySubsystem* memory);
 void CleanToc(MemorySubsystem* memory);
 void CleanSym(MessagingSubsystem* msg, MemorySubsystem* memory);
-void CacheFree(MemorySubsystem* memory, file_list* list, void* mem);
-void CacheClose(FileSubsystem* files, MemorySubsystem* memory, file_list* list, unsigned pass);
 void FreeObjCache(MemorySubsystem* memory, file_list* list);
 void FreeSegFlags(MemorySubsystem* memory, seg_flags* curr);
+bool DumpFileCache(MemorySubsystem* memory, infilelist* file, bool nuke);

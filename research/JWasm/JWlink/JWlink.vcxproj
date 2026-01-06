@@ -291,6 +291,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="cache.cpp" />
     <ClCompile Include="carve.cpp" />
     <ClCompile Include="CmdElf.cpp" />
     <ClCompile Include="CmdLine.cpp" />
@@ -321,6 +322,7 @@
     <ClCompile Include="stringtable.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="cache.h" />
     <ClInclude Include="carve.h" />
     <ClInclude Include="CmdElf.h" />
     <ClInclude Include="CmdLine.h" />

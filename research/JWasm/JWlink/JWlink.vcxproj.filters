@@ -72,6 +72,9 @@
     <ClCompile Include="CmdElf.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="cache.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -243,6 +246,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CmdElf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cache.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
