@@ -45,7 +45,7 @@ TRADEMARK,
 };
 
 typedef union msg_arg {
-    //symbol* symb;
+    symbol* symb;
     char* string;
     char            c;
     unsigned_16     int_16;

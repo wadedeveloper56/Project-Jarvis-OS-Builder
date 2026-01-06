@@ -227,6 +227,14 @@ void CacheFree(MemorySubsystem* memory, file_list* list, void* mem)
 	}
 }
 
+void FreeDictCache(MemorySubsystem* memory, void** cache, unsigned_16 buckets)
+{
+	while (buckets != 0) {
+		_LnkFree(cache[--buckets]);
+	}
+	_LnkFree(cache);
+}
+
 void BurnLibs(MemorySubsystem* memory)
 {
 	file_list* temp;
@@ -245,7 +253,7 @@ void BurnLibs(MemorySubsystem* memory)
 		}
 		else {
 			if (dict->o.cache != NULL) {
-				//FIX ME FreeDictCache(dict->o.cache, (dict->o.pages / PAGES_IN_CACHE) + 1);
+				FreeDictCache(memory, dict->o.cache, (dict->o.pages / PAGES_IN_CACHE) + 1);
 			}
 		}
 		_LnkFree(dict);
@@ -376,6 +384,31 @@ void FreeGroupRelocs(MemorySubsystem* memory, group_entry* group)
 	}
 }
 
+void WalkAreas(MemorySubsystem* memory, OVL_AREA* ovl, void (*rtn)(MemorySubsystem*, section*));
+
+void WalkSections(MemorySubsystem* memory, section* sect, void (*rtn)(MemorySubsystem*, section*))
+{
+	for (; sect != NULL; sect = sect->next_sect) {
+		rtn(memory, sect);
+		WalkAreas(memory, sect->areas, rtn);
+	}
+}
+
+void WalkAreas(MemorySubsystem* memory, OVL_AREA* ovl, void (*rtn)(MemorySubsystem*, section*))
+{
+	for (; ovl != NULL; ovl = ovl->next_area) {
+		WalkSections(memory, ovl->sections, rtn);
+	}
+}
+
+void WalkAllSects(MemorySubsystem* memory, void (*rtn)(MemorySubsystem*,section*))
+{
+	rtn(memory, Root);
+	if (FmtData.type & MK_OVERLAYS) {
+		WalkAreas(memory, Root->areas, rtn);
+	}
+}
+
 void FreeRelocInfo(MemorySubsystem* memory)
 {
 	group_entry* group;
@@ -388,7 +421,7 @@ void FreeRelocInfo(MemorySubsystem* memory)
 		}
 	}
 	else if (Root != NULL) {
-		//FIX ME WalkAllSects(FreeRelocSect);
+		WalkAllSects(memory, FreeRelocSect);
 	}
 	if (FmtData.type & MK_QNX) {
 		FreeRelocList(memory, FloatFixups);
@@ -1078,14 +1111,18 @@ void GetSymBlock(void)
 
 int ARCompName(const void* key, const void* vbase)
 {
-	//FIX ME
-	return 0;
+	char** base;
+
+	base = (char**)vbase;
+	return strcmp((char*)key, *base);
 }
 
 int ARCompIName(const void* key, const void* vbase)
 {
-	//FIX ME
-	return 0;
+	char** base;
+
+	base = (char**)vbase;
+	return _stricmp((char*)key, *base);
 }
 
 void SetLibCase(void)

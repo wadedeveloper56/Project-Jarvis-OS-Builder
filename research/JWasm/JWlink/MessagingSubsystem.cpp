@@ -291,7 +291,7 @@ void MessagingSubsystem::Msg_Add_Arg(MSG_ARG* arginfo, char typech, va_list* arg
 			arginfo->address = va_arg(*args, targ_addr*);
 			break;
 		case 'S':
-			//FIX ME arginfo->symb = va_arg(*args, symbol*);
+			arginfo->symb = va_arg(*args, symbol*);
 			break;
 	}
 }
