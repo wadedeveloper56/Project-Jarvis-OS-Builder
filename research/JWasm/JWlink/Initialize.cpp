@@ -149,48 +149,6 @@ void FreeSegFlags(MemorySubsystem* memory, seg_flags* curr)
 	}
 }
 
-bool DumpFileCache(MemorySubsystem* memory, infilelist* file, bool nuke)
-{
-	unsigned    num;
-	unsigned    savenum;
-	unsigned    index;
-	char** blocklist;
-	bool        blockfreed;
-
-	blockfreed = false;
-	if (nuke) {
-		savenum = UINT_MAX;
-	}
-	else {
-		savenum = file->currpos / CACHE_PAGE_SIZE;
-	}
-	if (file->cache != NULL) {
-		num = NumCacheBlocks(file->len);
-		blocklist = (char**)file->cache;
-		for (index = 0; index < num; index++) {
-			if (index != savenum && *blocklist != NULL) {
-				_LnkFree(*blocklist);
-				*blocklist = NULL;
-				blockfreed = true;
-			}
-			blocklist++;
-		}
-	}
-	return blockfreed;
-}
-
-void FreeObjCache(MemorySubsystem* memory, file_list* list)
-{
-	if (list == NULL) return;
-	if (list->file->flags & INSTAT_FULL_CACHE) {
-		_LnkFree(list->file->cache);
-	}
-	else {
-		DumpFileCache(memory, list->file, true);
-	}
-	list->file->cache = NULL;
-}
-
 void FreeDictCache(MemorySubsystem* memory, void** cache, unsigned_16 buckets)
 {
 	while (buckets != 0) {
@@ -232,7 +190,7 @@ void FreeFiles(FileSubsystem* file, MemorySubsystem* memory, file_list* list)
 
 	while (list != NULL) {
 		temp = list->next_file;
-		CacheClose(file, memory, list, 3);
+		CacheClose(memory, file, list, 3);
 		if (list->status & STAT_HAS_MEMBER && list->u.member != NULL) {
 			FreeList(memory, list->u.member);
 		}
@@ -1013,13 +971,13 @@ long ORLSeek(void* _list, long pos, int where)
 	return(ORLFilePos);
 }
 
-void* ORLRead(MemorySubsystem* memory, void* _list, size_t len)
+void* ORLRead(MemorySubsystem* memory, FileSubsystem* file, void* _list, size_t len)
 {
 	file_list* list = (file_list*)_list;
 	void* result;
 	readcache* cache;
 
-	result = CachePermRead(list, ORLFilePos, len);
+	result = CachePermRead(memory, file, list, ORLFilePos, len);
 	ORLFilePos += len;
 	_ChkAlloc(readcache*, cache, sizeof(readcache));
 	cache->next = ReadCacheList;

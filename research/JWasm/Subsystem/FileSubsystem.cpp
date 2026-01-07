@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "FileSubsystem.h"
-#include "File.h"
 
 FileSubsystem::FileSubsystem()
 {
@@ -8,6 +7,30 @@ FileSubsystem::FileSubsystem()
 
 FileSubsystem::~FileSubsystem()
 {
+}
+
+int FileSubsystem::DoOpen(char* name, unsigned mode)
+{
+    int h = -1;
+
+    mode |= O_BINARY;
+    for (;; ) {
+        h = _open(name, mode, S_IRUSR | S_IWUSR);
+        if (h != -1) break;
+    }
+    return(h);
+}
+
+f_handle FileSubsystem::NSOpen(char* name, unsigned mode)
+{
+	int h = DoOpen(name, mode);
+	if (h != -1) return(h);
+	return(NIL_HANDLE);
+}
+
+f_handle FileSubsystem::QObjOpen(char* name)
+{
+	return(NSOpen(name, O_RDONLY));
 }
 
 int FileSubsystem::Delete(char* name)
@@ -65,3 +88,7 @@ __int64 FileSubsystem::Seek(f_handle handle, __int64 offset, int origin)
 	return FileSeek(handle, offset, origin);
 }
 
+__int64 FileSubsystem::FileLength(f_handle handle)
+{
+	return ::FileSize(handle);
+}

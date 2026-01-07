@@ -13,6 +13,7 @@
 #include <io.h>
 #include <fcntl.h>
 #include <ctype.h>
+#include <climits>
 
 #pragma warning(disable:4267)
 #pragma warning(disable:4244)

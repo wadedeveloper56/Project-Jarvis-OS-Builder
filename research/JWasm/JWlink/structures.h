@@ -3,8 +3,16 @@
 #include "watcom.h"
 #include "types.h"
 #include "File.h"
+#include "Flag.h"
 
 #include "pshpack1.h"               /* make sure no structures are padded. */
+
+#define ROUND_UP( x, r )        (((x)+((r)-1))&~((r)-1))
+#define PATH_MAX 250
+#define PATH_SEP '\\'
+#define IS_PATH_SEP( a ) ((a)=='\\' || (a)=='/' || (a)==':')
+#define CASE_PATH_SEP   case '\\': case '/': case ':'
+#define PATH_LIST_SEP ';'
 
 typedef struct file_list        FILE_LIST;
 typedef struct path_entry       PATH_ENTRY;
@@ -339,7 +347,8 @@ typedef struct infilelist {
     f_handle            handle;
     time_t              modtime;
     char* name;
-    enum infile_flags   flags;
+    //enum infile_flags   flags;
+    Flag flags;
 } infilelist;
 
 enum file_status {

@@ -34,6 +34,7 @@
 
 #include <watcom.h>
 #include "MemorySubsystem.h"
+#include "FileSubsystem.h"
 
 typedef uint_32                         orl_file_offset;
 typedef uint_32                         orl_file_size;
@@ -74,7 +75,7 @@ typedef struct {
 #include <poppck.h>
 
 typedef struct {
-    void *      (*read)(MemorySubsystem*, void *, size_t );
+    void *      (*read)(MemorySubsystem*, FileSubsystem*, void *, size_t );
     long int    (*seek)( void *, long int, int );
     MemorySubsystem* memory;
 } orl_funcs;

@@ -17,6 +17,10 @@ public:
 	int WriteNLStdOut(void);
 	__int64 Tell(f_handle handle);
 	__int64 Seek(f_handle handle, __int64 offset, int origin);
+	__int64 FileLength(f_handle handle);
 	static int Delete(char* name);
+	int DoOpen(char* name, unsigned mode);
+	f_handle NSOpen(char* name, unsigned mode);
+	f_handle QObjOpen(char* name);
 };
 

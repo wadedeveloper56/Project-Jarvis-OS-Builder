@@ -36,3 +36,8 @@ __int64 FileSeek(f_handle handle, __int64 offset, int origin)
 {
 	return _lseeki64(handle, offset, origin);
 }
+
+__int64 FileSize(f_handle handle)
+{
+	return _filelengthi64(handle);
+}
