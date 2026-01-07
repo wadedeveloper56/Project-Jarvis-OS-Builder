@@ -78,22 +78,22 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>..\bin\tools\intermediate\memorytest\$(Configuration)\$(Platform)\</IntDir>
+    <IntDir>..\bin\tools\intermediate\MemoryTest\$(Configuration)\$(Platform)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>..\bin\tools\intermediate\memorytest\$(Configuration)\$(Platform)\</IntDir>
+    <IntDir>..\bin\tools\intermediate\MemoryTest\$(Configuration)\$(Platform)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>..\bin\tools\intermediate\memorytest\$(Configuration)\$(Platform)\</IntDir>
+    <IntDir>..\bin\tools\intermediate\MemoryTest\$(Configuration)\$(Platform)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>..\bin\tools\intermediate\memorytest\$(Configuration)\$(Platform)\</IntDir>
+    <IntDir>..\bin\tools\intermediate\MemoryTest\$(Configuration)\$(Platform)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>

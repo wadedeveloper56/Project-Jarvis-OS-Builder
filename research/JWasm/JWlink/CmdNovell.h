@@ -7,7 +7,7 @@ class CmdNovell : public CmdPlatform
 	char* Name;
 	commandflag     CmdFlags;
 public:
-	CmdNovell(MemorySubsystem* memory, MessagingSubsystem* msg);
+	CmdNovell();
 	~CmdNovell();
 	virtual void setFormat();
 	virtual void freeFormat();

@@ -5,7 +5,7 @@
 class CmdPharlap : public CmdPlatform
 {
 public:
-	CmdPharlap(MemorySubsystem* memory, MessagingSubsystem* msg);
+	CmdPharlap();
 	~CmdPharlap();
 	virtual void setFormat();
 	virtual void freeFormat();

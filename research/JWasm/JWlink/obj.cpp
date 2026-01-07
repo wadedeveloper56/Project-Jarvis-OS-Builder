@@ -1,5 +1,8 @@
 #include "pch.h"
 #include "obj.h"
+#include "FileSubsystem.h"
+#include "MessagingSubsystem.h"
+#include "MemorySubsystem.h"
 
 #define LIB_SEARCH (INSTAT_USE_LIBPATH | INSTAT_LIBRARY)
 
@@ -86,7 +89,7 @@ bool QHavePath(char* name)
 	return(*name == '\\' || *name == '/' || *(name + 1) == ':');
 }
 
-bool DoObjOpen(FileSubsystem* files, MessagingSubsystem* msg, infilelist* list)
+bool DoObjOpen(infilelist* list)
 {
 	char* name;
 	f_handle    fp;

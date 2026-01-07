@@ -2,7 +2,7 @@
 #include "CmdQnx.h"
 #include "Initialize.h"
 
-CmdQnx::CmdQnx(MemorySubsystem* memory, MessagingSubsystem* msg) :CmdPlatform(memory, msg)
+CmdQnx::CmdQnx() :CmdPlatform()
 {
 }
 
@@ -19,10 +19,10 @@ void CmdQnx::setFormat()
 	FmtData.u.qnx.heapsize = 4096;
 	FmtData.u.qnx.gen_seg_relocs = true;
 	FmtData.u.qnx.gen_linear_relocs = false;
-	ChkBase(msg, 4 * 1024);
+	ChkBase(4 * 1024);
 }
 
 void CmdQnx::freeFormat()
 {
-	FreeSegFlags(memory, (seg_flags*)FmtData.u.qnx.seg_flags);
+	FreeSegFlags((seg_flags*)FmtData.u.qnx.seg_flags);
 }

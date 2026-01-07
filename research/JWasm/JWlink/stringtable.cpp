@@ -2,13 +2,16 @@
 #include "globals.h"
 #include "stringtable.h"
 #include "ring.h"
+#include "FileSubsystem.h"
+#include "MessagingSubsystem.h"
+#include "MemorySubsystem.h"
 
-void FiniStringTable(MemorySubsystem* memory, stringtable* strtab)
+void FiniStringTable(stringtable* strtab)
 {
-    RingFree(memory, &strtab->data);
+    RingFree(&strtab->data);
 }
 
-stringblock* AllocNewBlock(MemorySubsystem* memory, stringtable* strtab)
+stringblock* AllocNewBlock(stringtable* strtab)
 {
     _ChkAlloc2(stringblock *, blk, sizeof(stringblock));
     blk->next = NULL;
@@ -17,7 +20,7 @@ stringblock* AllocNewBlock(MemorySubsystem* memory, stringtable* strtab)
     return blk;
 }
 
-void InitStringTable(MemorySubsystem* memory, stringtable* strtab, bool dontsplit)
+void InitStringTable(stringtable* strtab, bool dontsplit)
 {
     strtab->data = NULL;
     if (dontsplit) {
@@ -26,5 +29,5 @@ void InitStringTable(MemorySubsystem* memory, stringtable* strtab, bool dontspli
     else {
         strtab->currbase = 0;
     }
-    AllocNewBlock(memory, strtab);
+    AllocNewBlock(strtab);
 }

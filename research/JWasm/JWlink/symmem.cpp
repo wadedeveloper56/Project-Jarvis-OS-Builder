@@ -1,5 +1,8 @@
 #include "pch.h"
 #include "symmem.h"
+#include "FileSubsystem.h"
+#include "MessagingSubsystem.h"
+#include "MemorySubsystem.h"
 
 #define SYM_BLOCK_SIZE      (16*1024)
 #define SYM_BLOCK_MIN       32
@@ -14,7 +17,7 @@ bool ShrinkBlock(block_data* block)
     return(false);
 }
 
-void GetNewBlock(MemorySubsystem* memory, MessagingSubsystem* msg, block_data* block, unsigned size)
+void GetNewBlock(block_data* block, unsigned size)
 {
     unsigned   try1;
     sym_block* new1;
@@ -36,7 +39,7 @@ void GetNewBlock(MemorySubsystem* memory, MessagingSubsystem* msg, block_data* b
     block->currbrk = 0;
 }
 
-void* AllocBlock(MemorySubsystem* memory, MessagingSubsystem* msg, unsigned size, block_data* block)
+void* AllocBlock(unsigned size, block_data* block)
 {
     void* ptr;
     unsigned long       newbrk;
@@ -46,7 +49,7 @@ void* AllocBlock(MemorySubsystem* memory, MessagingSubsystem* msg, unsigned size
     size = (size + ROUND) & ~ROUND;
     newbrk = (unsigned long)block->currbrk + size;
     if (block->list == NULL) {
-        GetNewBlock(memory, msg, block, size);
+        GetNewBlock(block, size);
     }
     else if (newbrk > block->list->size) {
 #ifndef __V80_LIB__
@@ -62,7 +65,7 @@ void* AllocBlock(MemorySubsystem* memory, MessagingSubsystem* msg, unsigned size
 #else
             {
 #endif
-                GetNewBlock(memory, msg, block, size);
+                GetNewBlock(block, size);
             }
         }
     ptr = block->list->block + block->currbrk;
@@ -70,13 +73,13 @@ void* AllocBlock(MemorySubsystem* memory, MessagingSubsystem* msg, unsigned size
     return(ptr);
     }
 
-void* Pass1Alloc(MemorySubsystem* memory, MessagingSubsystem* msg, size_t size)
+void* Pass1Alloc(size_t size)
 {
-    return(AllocBlock(memory, msg, size, &Pass1Blocks));
+    return(AllocBlock(size, &Pass1Blocks));
 }
 
-void* PermAlloc(MemorySubsystem* memory, MessagingSubsystem* msg, size_t size)
+void* PermAlloc(size_t size)
 {
-    return(AllocBlock(memory, msg, size, &PermBlocks));
+    return(AllocBlock(size, &PermBlocks));
 }
 

@@ -42,23 +42,20 @@
 #undef RINGHNAME
 #define RINGHNAME( name ) Ring2##name
 #endif
-#include "MemorySubsystem.h"
+
 // PROTOTYPES:
 
 #include "carve.h"
 
 void *RINGHNAME(Alloc) (        // ALLOCATE AND APPEND NEW ELEMENT
-    MemorySubsystem* memory,
     void *hdr,                  // - addr( ring header )
     size_t size )               // - size of entry to be allocated
 ;
 void* RINGHNAME(CarveAlloc) (   // CARVER ALLOC AND APPEND AN ENTRY
-    MemorySubsystem* memory,
     carve_t carver,             // - carving control
     void *hdr )                 // - addr( ring header )
 ;
 void RINGHNAME(CarveFree) (     // CARVER FREE ALL ELEMENTS IN A RING
-    MessagingSubsystem* msg,
     carve_t carver,             // - carving control
     void *hdr )                 // - addr( ring header )
 ;
@@ -70,12 +67,10 @@ int RINGHNAME(Count) (          // COUNT ELEMENTS IN A RING
     void *hdr )                 // - ring hdr
 ;
 void RINGHNAME(Dealloc) (       // DE-ALLOCATE A RING ELEMENT
-    MemorySubsystem* memory,
     void *hdr,                  // - addr( ring header )
     void *element )             // - element to be de-allocated
 ;
 void RINGHNAME(Free) (          // FREE ALL ELEMENTS IN A RING
-    MemorySubsystem* memory,
     void *hdr )                 // - addr( ring header )
 ;
 void* RINGHNAME(Promote) (      // PROMOTE ELEMENT TO START OF RING
@@ -122,10 +117,9 @@ void* RINGHNAME(Push) (         // INSERT ELEMENT AT START OF RING
     void *element )             // - element to be pushed
 ;
 void RINGHNAME(Walk) (          // TRAVERSE RING
-    MessagingSubsystem* msg,
     void *hdr,                  // - ring header
     void (*rtn)                 // - traversal routine
-        (MessagingSubsystem* msg, void * curr) )         // - - passed current element
+        (void * curr) )         // - - passed current element
 ;
 void *RINGHNAME(Step) (         // STEP ALONG ELEMENTS (NULL -> e1 -> e2 -> NULL)
     void *hdr,                  // - ring header

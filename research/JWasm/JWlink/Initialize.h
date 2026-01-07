@@ -1,8 +1,5 @@
 #pragma once
 
-#include "MemorySubsystem.h"
-#include "FileSubsystem.h"
-#include "MessagingSubsystem.h"
 #include "cache.h"
 
 #define NODE_ARRAY_SIZE 256
@@ -31,35 +28,35 @@ extern nodearray* SegNodes;           // ptr to obj file segment list
 extern nodearray* GrpNodes;           // ptr to obj file group list
 extern nodearray* NameNodes;          // ptr to obj file lname list
 
-void ResetPermData(MemorySubsystem* memory);
-void CleanPermData(MessagingSubsystem* msg, MemorySubsystem* memory, FileSubsystem* file);
+void ResetPermData();
+void CleanPermData();
 void LnkMemInit(void);
 void LnkMemFini(void);
 void InitCmdFile(void);
 void LnkFilesInit(void);
 int InitMsg(void);
 int FiniMsg(void);
-void InitNodes(MemorySubsystem* memory);
-void BurnNodes(MemorySubsystem* memory);
-void FiniLinkStruct(MemorySubsystem* memory);
-void InitTokBuff(MemorySubsystem* memory);
-void FreeTokBuffs(MemorySubsystem* memory);
+void InitNodes();
+void BurnNodes();
+void FiniLinkStruct();
+void InitTokBuff();
+void FreeTokBuffs();
 void InitSpillFile(void);
-void InitSym(MemorySubsystem* memory);
-void FiniSym(MemorySubsystem* memory);
-void InitObjORL(MemorySubsystem* memory);
+void InitSym();
+void FiniSym();
+void InitObjORL();
 void ObjORLFini(void);
-void FreeOutFiles(FileSubsystem* file, MemorySubsystem* memory);
+void FreeOutFiles();
 void ResetMisc(void);
-section* NewSection(MemorySubsystem* memory);
+section* NewSection();
 void ResetDBI(void);
 void ResetMapIO(void);
 void ResetCmdAll(void);
 void ResetOvlSupp(void);
 void ResetComdef(void);
 void ResetDistrib(void);
-void BurnSystemList(MemorySubsystem* memory);
-void FreeList(MemorySubsystem* memory, void* _curr);
+void BurnSystemList();
+void FreeList(void* _curr);
 void ResetLoadNov(void);
 void ResetLoadPE(void);
 void ResetObj2Supp(void);
@@ -73,21 +70,21 @@ void ResetSymTrace(void);
 void ResetLoadFile(void);
 void ResetAddr(void);
 void ResetToc(void);
-void CloseSpillFile(FileSubsystem* file, MemorySubsystem* memory);
-void CleanTraces(MemorySubsystem* memory);
-void FreePaths(MemorySubsystem* memory);
-void FreeUndefs(MemorySubsystem* memory);
+void CloseSpillFile();
+void CleanTraces();
+void FreePaths();
+void FreeUndefs();
 void FreeLocalImports(void);
 void CleanLoadFile(void);
-void CleanLinkStruct(MessagingSubsystem* msg, FileSubsystem* file, MemorySubsystem* memory);
-void FreeFiles(FileSubsystem* file, MemorySubsystem* memory, file_list* list);
-void FreeSections(MessagingSubsystem* msg, FileSubsystem* file, MemorySubsystem* memory, section* sec);
-void FreeGroups(MessagingSubsystem* msg, group_entry* head);
-void FreeFormatStuff(MemorySubsystem* memory, MessagingSubsystem* msg);
+void CleanLinkStruct();
+void FreeFiles(file_list* list);
+void FreeSections(section* sec);
+void FreeGroups(group_entry* head);
+void FreeFormatStuff();
 void FreeObjInfo(void);
-void FreeVirtMem(MemorySubsystem* memory);
-void CleanToc(MemorySubsystem* memory);
-void CleanSym(MessagingSubsystem* msg, MemorySubsystem* memory);
-void FreeObjCache(MemorySubsystem* memory, file_list* list);
-void FreeSegFlags(MemorySubsystem* memory, seg_flags* curr);
-bool DumpFileCache(MemorySubsystem* memory, infilelist* file, bool nuke);
+void FreeVirtMem();
+void CleanToc();
+void CleanSym();
+void FreeObjCache(file_list* list);
+void FreeSegFlags(seg_flags* curr);
+bool DumpFileCache(infilelist* file, bool nuke);

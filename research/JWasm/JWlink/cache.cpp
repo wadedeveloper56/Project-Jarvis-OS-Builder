@@ -2,6 +2,9 @@
 #include "cache.h"
 #include "Initialize.h"
 #include "symmem.h"
+#include "FileSubsystem.h"
+#include "MessagingSubsystem.h"
+#include "MemorySubsystem.h"
 
 #define CACHE_PAGE_SIZE         (8*1024)
 
@@ -18,7 +21,7 @@ unsigned NumCacheBlocks(unsigned long len)
     return numblocks;
 }
 
-bool CacheOpen(FileSubsystem* files, MemorySubsystem* memory, MessagingSubsystem* msg, file_list* list)
+bool CacheOpen(file_list* list)
 {
     infilelist* file;
     unsigned    numblocks;
@@ -27,7 +30,7 @@ bool CacheOpen(FileSubsystem* files, MemorySubsystem* memory, MessagingSubsystem
     if (list == NULL) return true;
     file = list->file;
     if (file->flags & INSTAT_IOERR) return(false);
-    if (DoObjOpen(files, msg, file)) {
+    if (DoObjOpen(file)) {
         file->flags |= INSTAT_IN_USE;
     }
     else {
@@ -69,7 +72,7 @@ bool CacheOpen(FileSubsystem* files, MemorySubsystem* memory, MessagingSubsystem
         }
         else {
             numblocks = NumCacheBlocks(file->len);
-            _Pass1Alloc(memory, msg, file->cache, numblocks * sizeof(char*));
+            _Pass1Alloc(file->cache, numblocks * sizeof(char*));
             cache = (char**)file->cache;
             while (numblocks > 0) {
                 *cache = NULL;
@@ -81,7 +84,7 @@ bool CacheOpen(FileSubsystem* files, MemorySubsystem* memory, MessagingSubsystem
     return true;
 }
 
-void CacheClose(MemorySubsystem* memory, FileSubsystem* files, file_list* list, unsigned pass)
+void CacheClose(file_list* list, unsigned pass)
 {
     infilelist* file;
     bool        nukecache;
@@ -95,15 +98,15 @@ void CacheClose(MemorySubsystem* memory, FileSubsystem* files, file_list* list, 
             nukecache = !(file->flags & INSTAT_LIBRARY);
             if (file->flags & INSTAT_FULL_CACHE) {
                 if (nukecache) {
-                    FreeObjCache(memory, list);
+                    FreeObjCache(list);
                 }
             }
             else {
-                DumpFileCache(memory, file, nukecache);   // don't cache .obj's
+                DumpFileCache(file, nukecache);   // don't cache .obj's
             }
             break;
         case 3: /* freeing structure */
-            FreeObjCache(memory, list);
+            FreeObjCache(list);
             if (file->handle != NIL_HANDLE) {
                 files->Close(file->handle);
                 file->handle = NIL_HANDLE;
@@ -112,12 +115,12 @@ void CacheClose(MemorySubsystem* memory, FileSubsystem* files, file_list* list, 
     }
 }
 
-void* CachePermRead(MemorySubsystem* memory, FileSubsystem* files, file_list* list, unsigned long pos, unsigned len)
+void* CachePermRead(file_list* list, unsigned long pos, unsigned len)
 {
     char* buf;
     char* result;
 
-    buf = (char *)CacheRead(memory, files, list, pos, len);
+    buf = (char *)CacheRead(list, pos, len);
     if (list->file->flags & INSTAT_FULL_CACHE) return buf;
     if (Multipage) {
         _LnkReAlloc(char*, result, buf, len);
@@ -131,7 +134,7 @@ void* CachePermRead(MemorySubsystem* memory, FileSubsystem* files, file_list* li
     return result;
 }
 
-void* CacheRead(MemorySubsystem* memory, FileSubsystem* files, file_list* list, unsigned long pos, unsigned len)
+void* CacheRead(file_list* list, unsigned long pos, unsigned len)
 {
     unsigned    bufnum;
     unsigned    startnum;
@@ -198,13 +201,11 @@ void* CacheRead(MemorySubsystem* memory, FileSubsystem* files, file_list* list, 
 }
 
 bool CacheIsPerm(void)
-/*****************************/
 {
     return !Multipage;
 }
 
 bool CacheEnd(file_list* list, unsigned long pos)
-/*********************************************************/
 {
     return pos >= list->file->len;
 }
@@ -213,13 +214,14 @@ void CacheFini(void)
 {
 }
 
-void CacheFree(MemorySubsystem* memory, file_list* list, void* mem)
+void CacheFree(file_list* list, void* mem)
 {
     if (list->file->flags & INSTAT_PAGE_CACHE) {
         _LnkFree(mem);
     }
 }
-bool DumpFileCache(MemorySubsystem* memory, infilelist* file, bool nuke)
+
+bool DumpFileCache(infilelist* file, bool nuke)
 {
     unsigned    num;
     unsigned    savenum;
@@ -249,19 +251,19 @@ bool DumpFileCache(MemorySubsystem* memory, infilelist* file, bool nuke)
     return blockfreed;
 }
 
-void FreeObjCache(MemorySubsystem* memory,file_list* list)
+void FreeObjCache(file_list* list)
 {
     if (list == NULL) return;
     if (list->file->flags & INSTAT_FULL_CACHE) {
         _LnkFree(list->file->cache);
     }
     else {
-        DumpFileCache(memory, list->file, true);
+        DumpFileCache(list->file, true);
     }
     list->file->cache = NULL;
 }
 
-bool DumpObjCache(MemorySubsystem* memory)
+bool DumpObjCache()
 {
     infilelist* file;
 
@@ -270,7 +272,7 @@ bool DumpObjCache(MemorySubsystem* memory)
         if (file->flags & INSTAT_PAGE_CACHE) {
             if (CurrMod == NULL || CurrMod->f.source == NULL
                 || CurrMod->f.source->file != file) {
-                if (DumpFileCache(memory, file, true)) return true;
+                if (DumpFileCache(file, true)) return true;
             }
         }
         file = file->next;

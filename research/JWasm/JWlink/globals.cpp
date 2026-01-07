@@ -8,6 +8,10 @@ char* _end;
 #endif
 int             _argc;
 char**          _argv;
+MessagingSubsystem* msg;
+MemorySubsystem* memory;
+FileSubsystem* files;
+
 Token           token;
 outfilelist*    OutFiles;       // list of files which will be written to
 char*           MapFName;       /* name of map file                     */

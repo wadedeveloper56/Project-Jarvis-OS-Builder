@@ -7,12 +7,19 @@
 #define SECTOR_SIZE     512
 #define MAX_HEADROOM    (4*1024)
 
+class MessagingSubsystem;
+class MemorySubSystem;
+class FileSubsystem;
+
 #ifdef _INT_DEBUG
 extern char* _edata;
 extern char* _end;
 #endif
 extern int             _argc;
 extern char**          _argv;
+extern MessagingSubsystem* msg;
+extern MemorySubsystem* memory;
+extern FileSubsystem* files;
 extern Token           token;
 extern linkflag        LinkFlags;      /* flags to indicate presence of parms  */
 extern outfilelist*    OutFiles;       // list of files which will be written to

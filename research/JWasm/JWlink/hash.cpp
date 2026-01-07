@@ -1,5 +1,8 @@
 #include "pch.h"
 #include "hash.h"
+#include "FileSubsystem.h"
+#include "MessagingSubsystem.h"
+#include "MemorySubsystem.h"
 
 unsigned StringiHashFunc(void* _s, unsigned size) {
     char* s = (char *)_s;
@@ -17,7 +20,7 @@ unsigned StringiHashFunc(void* _s, unsigned size) {
     return key;
 }
 
-pHTable CreateHTable(MemorySubsystem* memory, int size, pHashFunc hashFunc, pHashElemCmp compareFunc)
+pHTable CreateHTable(int size, pHashFunc hashFunc, pHashElemCmp compareFunc)
 {
     pHTable table;
 

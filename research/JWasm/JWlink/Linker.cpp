@@ -1,10 +1,13 @@
 #include "pch.h"
 #include "Linker.h"
+#include "FileSubsystem.h"
+#include "MessagingSubsystem.h"
+#include "MemorySubsystem.h"
 
 Linker::Linker()
 {
-	file = new FileSubsystem();
-	msg = new MessagingSubsystem(file);
+	files = new FileSubsystem();
+	msg = new MessagingSubsystem(files);
 	memory = new MemorySubsystem();
 	InitSubSystems();
     ResetSubSystems();
@@ -16,7 +19,7 @@ Linker::~Linker()
 	FiniSubSystems();
 	delete memory;
 	delete msg;
-	delete file;
+	delete files;
 }
 
 void Linker::InitSubSystems(void)
@@ -27,21 +30,21 @@ void Linker::InitSubSystems(void)
     LnkMemInit();
     LnkFilesInit();
     InitMsg();
-    InitNodes(memory);
-    InitTokBuff(memory);
+    InitNodes();
+    InitTokBuff();
     InitSpillFile();
-    InitSym(memory);
-    InitObjORL(memory);
+    InitSym();
+    InitObjORL();
     InitCmdFile();
 }
 
 void Linker::ResetSubSystems(void)
 {
-    ResetPermData(memory);
+    ResetPermData();
     //ResetMsg();
     //VirtMemInit();
     ResetMisc();
-    Root = NewSection(memory);
+    Root = NewSection();
     ResetDBI();
     ResetMapIO();
     ResetCmdAll();
@@ -66,33 +69,33 @@ void Linker::ResetSubSystems(void)
 void Linker::CleanSubSystems(void)
 {
     if (MapFile != NIL_HANDLE) {
-        file->Close(MapFile);
+        files->Close(MapFile);
         MapFile = NIL_HANDLE;
     }
-    FreeOutFiles(file, memory);
+    FreeOutFiles();
     _LnkFree(MapFName);
-    BurnSystemList(memory);
-    FreeList(memory, LibPath);
-    CloseSpillFile(file, memory);
-    CleanTraces(memory);
-    FreePaths(memory);
-    FreeUndefs(memory);
+    BurnSystemList();
+    FreeList(LibPath);
+    CloseSpillFile();
+    CleanTraces();
+    FreePaths();
+    FreeUndefs();
     FreeLocalImports();
     CleanLoadFile();
-    CleanLinkStruct(msg, file, memory);
-    FreeFormatStuff(memory, msg);
+    CleanLinkStruct();
+    FreeFormatStuff();
     FreeObjInfo();
-    FreeVirtMem(memory);
-    CleanToc(memory);
-    CleanSym(msg, memory);
-    CleanPermData(msg, memory, file);
+    FreeVirtMem();
+    CleanToc();
+    CleanSym();
+    CleanPermData();
 }
 
 void Linker::FiniSubSystems(void)
 {
-	FiniLinkStruct(memory);
+	FiniLinkStruct();
 	FiniMsg();
-	FiniSym(memory);
+	FiniSym();
 	LnkMemFini();
 }
 

@@ -110,17 +110,17 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>..\bin\tools\intermediate\jwlink\$(Configuration)\$(Platform)\</IntDir>
+    <IntDir>..\bin\tools\intermediate\JWlink\$(Configuration)\$(Platform)\</IntDir>
     <IncludePath>..\watcom\h;..\orl\h;..\orl\coff\h;..\orl\elf\h;..\orl\omf\h;..\File;..\Memory;..\Subsystem;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>..\bin\tools\intermediate\jwlink\$(Configuration)\$(Platform)\</IntDir>
+    <IntDir>..\bin\tools\intermediate\JWlink\$(Configuration)\$(Platform)\</IntDir>
     <IncludePath>..\watcom\h;..\File;..\Memory;..\Subsystem;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>..\bin\tools\intermediate\jwlink\$(Configuration)\$(Platform)\</IntDir>
+    <IntDir>..\bin\tools\intermediate\JWlink\$(Configuration)\$(Platform)\</IntDir>
     <IncludePath>..\watcom\h;..\orl\h;..\orl\coff\h;..\orl\elf\h;..\orl\omf\h;..\File;..\Memory;..\Subsystem;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
@@ -133,7 +133,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>..\bin\tools\intermediate\jwlink\$(Configuration)\$(Platform)\</IntDir>
+    <IntDir>..\bin\tools\intermediate\JWlink\$(Configuration)\$(Platform)\</IntDir>
     <IncludePath>..\watcom\h;..\File;..\Memory;..\Subsystem;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">

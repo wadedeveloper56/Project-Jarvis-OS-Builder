@@ -60,7 +60,7 @@ typedef struct os2_seg_flags {
 class CmdWinOS2 : public CmdPlatform
 {
 public:
-	CmdWinOS2(MemorySubsystem* memory, MessagingSubsystem* msg);
+	CmdWinOS2();
 	~CmdWinOS2();
 	virtual void setFormat();
 	virtual void freeFormat();

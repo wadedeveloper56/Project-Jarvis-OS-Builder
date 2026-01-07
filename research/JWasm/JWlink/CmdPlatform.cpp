@@ -1,10 +1,11 @@
 #include "pch.h"
 #include "CmdPlatform.h"
+#include "FileSubsystem.h"
+#include "MessagingSubsystem.h"
+#include "MemorySubsystem.h"
 
-CmdPlatform::CmdPlatform(MemorySubsystem* memory, MessagingSubsystem* msg)
+CmdPlatform::CmdPlatform()
 {
-	this->msg = msg;
-	this->memory = memory;
 	this->Extension = (file_defext)0;
 }
 
@@ -12,7 +13,7 @@ CmdPlatform::~CmdPlatform()
 {
 }
 
-void CmdPlatform::ChkBase(MessagingSubsystem* msg, offset align)
+void CmdPlatform::ChkBase(offset align)
 {
 	if (FmtData.objalign != (offset)-1 && FmtData.objalign > align) {
 		align = FmtData.objalign;

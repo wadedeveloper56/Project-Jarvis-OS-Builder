@@ -1,8 +1,9 @@
 #include "pch.h"
 #include "CmdUtils.h"
 #include "globals.h"
-#include "MemorySubsystem.h"
+#include "FileSubsystem.h"
 #include "MessagingSubsystem.h"
+#include "MemorySubsystem.h"
 
 static  char* DefExt[] = {
 #undef pick1
@@ -15,7 +16,7 @@ static int stricmp_wrapper(const void* s1, const void* s2)
     return(_stricmp((const char*)s1, (const char*)s2));
 }
 
-char* ChkToString(MemorySubsystem* memory, void* mem, unsigned len)
+char* ChkToString(void* mem, unsigned len)
 {
     char* str;
 
@@ -25,7 +26,7 @@ char* ChkToString(MemorySubsystem* memory, void* mem, unsigned len)
     return(str);
 }
 
-char* FileName(MemorySubsystem* memory, MessagingSubsystem* msg, char* buff, unsigned len, file_defext etype, bool force)
+char* FileName(char* buff, unsigned len, file_defext etype, bool force)
 {
     char* namptr;
     char* namstart;
@@ -71,7 +72,7 @@ char* FileName(MemorySubsystem* memory, MessagingSubsystem* msg, char* buff, uns
         strcpy(ptr + len, DefExt[etype]);
     }
     else {
-        ptr = ChkToString(memory, buff, len);
+        ptr = ChkToString(buff, len);
     }
     return(ptr);
 }

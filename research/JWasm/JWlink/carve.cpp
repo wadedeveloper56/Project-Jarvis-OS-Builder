@@ -1,8 +1,10 @@
 #include "pch.h"
 #include "globals.h"
 #include "carve.h"
-#include "MemorySubsystem.h"
 #include "debug.h"
+#include "FileSubsystem.h"
+#include "MessagingSubsystem.h"
+#include "MemorySubsystem.h"
 
 #define _REMOVE_FROM_FREE( pcv, p ) \
     { \
@@ -19,7 +21,7 @@
     }
 
 #ifndef _DEBUG
-void CarveVerifyAllGone(MessagingSubsystem* msg,FileSubsystem* file,carve_t cv, char* node_name)
+void CarveVerifyAllGone(carve_t cv, char* node_name)
 {
     free_t* check;
     blk_t* block;
@@ -39,21 +41,21 @@ void CarveVerifyAllGone(MessagingSubsystem* msg,FileSubsystem* file,carve_t cv, 
             if (check == NULL) {
                 if (!some_unfreed) {
                     msg->FmtStr(buff, 80, "carve %s unfreed:", node_name);
-                    file->WriteStdOut(buff,80);
+                    files->WriteStdOut(buff,80);
                     some_unfreed = true;
                 }
                 msg->FmtStr(buff, 80, " %h", compare);
-                file->WriteStdOut(buff,80);
+                files->WriteStdOut(buff,80);
             }
         } while (compare != block->data);
     }
     if (some_unfreed) {
-        file->WriteNLStdOut();
+        files->WriteNLStdOut();
     }
 }
 #endif
 
-void CarveDestroy(MemorySubsystem* memory, carve_t cv)
+void CarveDestroy(carve_t cv)
 {
     blk_t* cur;
     blk_t* next;
@@ -124,7 +126,7 @@ void DbgZapFreed(void* tgt, size_t size)
     memset(tgt, 0xBD, size);
 }
 
-blk_t* newBlk(MemorySubsystem* memory, cv_t* cv)
+blk_t* newBlk(cv_t* cv)
 {
     blk_t** blklist;
 
@@ -140,7 +142,7 @@ blk_t* newBlk(MemorySubsystem* memory, cv_t* cv)
     return newblk;
 }
 
-void CarveFree(MessagingSubsystem* msg, carve_t cv, void* elm)
+void CarveFree(carve_t cv, void* elm)
 {
     if (elm == NULL) {
         return;
@@ -170,19 +172,19 @@ void MakeFreeList(cv_t* cv, blk_t* newblk, unsigned offset)
     cv->free_list = free_list;
 }
 
-void* CarveAlloc(MemorySubsystem* memory, carve_t cv)
+void* CarveAlloc(carve_t cv)
 {
     void* p;
 
     if (cv->free_list == NULL) {
-        MakeFreeList(cv, newBlk(memory,cv), 0);
+        MakeFreeList(cv, newBlk(cv), 0);
     }
     _REMOVE_FROM_FREE(cv, p);
     DbgZapAlloc(p, cv->elm_size);
     return p;
 }
 
-carve_t CarveCreate(MemorySubsystem* memory, size_t elm_size, size_t blk_size)
+carve_t CarveCreate(size_t elm_size, size_t blk_size)
 {
     cv_t* cv;
 

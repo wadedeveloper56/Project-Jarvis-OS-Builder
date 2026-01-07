@@ -30,6 +30,9 @@
 ****************************************************************************/
 #include "pch.h"
 #include "ring.h"
+#include "FileSubsystem.h"
+#include "MessagingSubsystem.h"
+#include "MemorySubsystem.h"
 
 #ifdef PARAM2
 #define RINGNAME( name ) Ring2##name
@@ -171,10 +174,9 @@ void RINGNAME(Insert) (         // INSERT ELEMENT INTO RING
 
 
 void RINGNAME(Walk) (           // TRAVERSE RING
-    MessagingSubsystem* msg,
     void *hdr,                  // - ring header
     void (*rtn)                 // - traversal routine
-        (MessagingSubsystem* msg, void * curr) )          // - - passed current element
+        (void * curr) )          // - - passed current element
 {
 #if 0
     RING *rhdr;                 // - ring header
@@ -193,7 +195,7 @@ void RINGNAME(Walk) (           // TRAVERSE RING
 #else
     RING *relement;             // - ring element
     RingIterBegSafe((RING*)hdr, relement ) {
-            (*rtn)( msg, relement );
+            (*rtn)( relement );
     } RingIterEndSafe( relement )
 #endif
 }
@@ -365,7 +367,6 @@ int RINGNAME(Count) (           // COUNT ELEMENTS IN A RING
 }
 
 void *RINGNAME(Alloc) (         // ALLOCATE AND APPEND NEW ELEMENT
-    MemorySubsystem *memory,
     void *hdr,                  // - addr( ring header )
     size_t size )               // - size of entry to be allocated
 {
@@ -375,7 +376,6 @@ void *RINGNAME(Alloc) (         // ALLOCATE AND APPEND NEW ELEMENT
 }
 
 void RINGNAME(Dealloc) (        // DE-ALLOCATE A RING ELEMENT
-    MemorySubsystem* memory,
     void *hdr,                  // - addr( ring header )
     void *element )             // - element to be de-allocated
 {
@@ -385,7 +385,6 @@ void RINGNAME(Dealloc) (        // DE-ALLOCATE A RING ELEMENT
 
 
 void RINGNAME(Free) (           // FREE ALL ELEMENTS IN A RING
-    MemorySubsystem* memory,
     void *hdr )                 // - addr( ring header )
 {
     void *elt;
@@ -408,20 +407,18 @@ void RINGNAME(Free) (           // FREE ALL ELEMENTS IN A RING
 
 
 void* RINGNAME(CarveAlloc) (    // CARVER ALLOC AND APPEND AN ENTRY
-    MemorySubsystem* memory,
     carve_t carver,             // - carving control
     void *hdr )                 // - addr( ring header )
 {
     void *elt;
 
-    elt = CarveAlloc( memory, carver );
+    elt = CarveAlloc( carver );
     RINGNAME(Append)( hdr, elt );
     return elt;
 }
 
 
 void RINGNAME(CarveFree) (      // CARVER FREE ALL ELEMENTS IN A RING
-    MessagingSubsystem* msg,
     carve_t carver,             // - carving control
     void *hdr )                 // - addr( ring header )
 {
@@ -430,7 +427,7 @@ void RINGNAME(CarveFree) (      // CARVER FREE ALL ELEMENTS IN A RING
     for(;;) {
         elt = RINGNAME(Pop)( hdr );
         if( elt == NULL ) break;
-        CarveFree( msg, carver, elt );
+        CarveFree( carver, elt );
     }
 }
 

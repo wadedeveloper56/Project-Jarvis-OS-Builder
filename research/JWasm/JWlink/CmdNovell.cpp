@@ -2,8 +2,11 @@
 #include "globals.h"
 #include "CmdNovell.h"
 #include "CmdUtils.h"
+#include "FileSubsystem.h"
+#include "MessagingSubsystem.h"
+#include "MemorySubsystem.h"
 
-CmdNovell::CmdNovell(MemorySubsystem* memory, MessagingSubsystem* msg) :CmdPlatform(memory, msg)
+CmdNovell::CmdNovell() :CmdPlatform()
 {
     Name = nullptr;
 }
@@ -16,7 +19,7 @@ void CmdNovell::setFormat()
 {
     Extension = E_NLM;
     if (!(LinkState & FMT_SPECIFIED) && Name != NULL) {
-        FmtData.u.nov.description = FileName(memory, msg, Name, strlen(Name), E_NLM, CmdFlags & CF_UNNAMED);
+        FmtData.u.nov.description = FileName(Name, strlen(Name), E_NLM, CmdFlags & CF_UNNAMED);
     }
 }
 

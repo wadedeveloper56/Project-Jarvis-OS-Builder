@@ -1,8 +1,11 @@
 #include "pch.h"
 #include "CmdWinOS2.h"
 #include "Initialize.h"
+#include "FileSubsystem.h"
+#include "MessagingSubsystem.h"
+#include "MemorySubsystem.h"
 
-CmdWinOS2::CmdWinOS2(MemorySubsystem* memory, MessagingSubsystem* msg) :CmdPlatform(memory, msg)
+CmdWinOS2::CmdWinOS2() :CmdPlatform()
 {
 }
 
@@ -29,7 +32,7 @@ void CmdWinOS2::setFormat()
     }
 #endif
     Extension = E_LOAD;
-    ChkBase(msg, 64 * 1024);
+    ChkBase(64 * 1024);
 }
 
 void CmdWinOS2::FreeImpNameTab(void)
@@ -57,5 +60,5 @@ void CmdWinOS2::freeFormat()
     _LnkFree(FmtData.u.os2.description);
     FreeImpNameTab();
     FreeExportList();
-    FreeSegFlags(memory, (seg_flags*)FmtData.u.os2.os2_seg_flags);
+    FreeSegFlags((seg_flags*)FmtData.u.os2.os2_seg_flags);
 }

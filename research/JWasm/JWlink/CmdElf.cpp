@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "CmdElf.h"
 
-CmdElf::CmdElf(MemorySubsystem* memory, MessagingSubsystem* msg) :CmdPlatform(memory, msg)
+CmdElf::CmdElf() :CmdPlatform()
 {
 }
 

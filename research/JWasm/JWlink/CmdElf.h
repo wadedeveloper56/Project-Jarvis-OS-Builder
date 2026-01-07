@@ -5,7 +5,7 @@
 class CmdElf : public CmdPlatform
 {
 public:
-	CmdElf(MemorySubsystem* memory, MessagingSubsystem* msg);
+	CmdElf();
 	~CmdElf();
 	virtual void setFormat();
 	virtual void freeFormat();

@@ -1,8 +1,10 @@
 #include "pch.h"
 #include "CmdPharlap.h"
+#include "FileSubsystem.h"
+#include "MessagingSubsystem.h"
+#include "MemorySubsystem.h"
 
-
-CmdPharlap::CmdPharlap(MemorySubsystem* memory, MessagingSubsystem* msg) :CmdPlatform(memory, msg)
+CmdPharlap::CmdPharlap() :CmdPlatform()
 {
 }
 
@@ -30,7 +32,7 @@ void CmdPharlap::setFormat()
     FmtData.u.phar.params->istksize = 1;
     FmtData.u.phar.params->extender_flags = 0;
     FmtData.u.phar.params->unpriv = 0;
-    ChkBase(msg, 4 * 1024);
+    ChkBase(4 * 1024);
 }
 
 void CmdPharlap::freeFormat()

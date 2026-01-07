@@ -7,9 +7,9 @@
 #define _LnkFree( ptr )         memory->FreeMemory( ptr )
 #define _LnkExpand( cast, dest, src, size ) dest = (cast)memory->ExpandMemory( src, size );
 #define _TryAlloc( dest, size ) dest = TryAlloc( size )
-#define _PermAlloc( mem, msg, dest, size ) dest = PermAlloc(  mem, msg, size );
+#define _PermAlloc( dest, size ) dest = PermAlloc(  size );
 #define _PermFree( ptr )        /* nothing to do */
-#define _Pass1Alloc( mem, msg, dest, size ) dest = Pass1Alloc( mem, msg, size );
+#define _Pass1Alloc( dest, size ) dest = Pass1Alloc( size );
 
 class MemorySubsystem
 {

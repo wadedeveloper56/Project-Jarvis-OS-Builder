@@ -1,8 +1,6 @@
 #pragma once
 
 #include "globals.h"
-#include "MemorySubsystem.h"
-#include "MessagingSubsystem.h"
 #include "CmdPlatform.h"
 
 #define IS_WHITESPACE(ptr) (*(ptr) == ' ' || *(ptr) =='\t' || *(ptr) == '\r')
@@ -17,12 +15,10 @@ typedef struct _select_format {
 
 class CmdLine
 {
-	MemorySubsystem* memory;
-	MessagingSubsystem* msg;
 	select_format PossibleFmt[11];
 	parse_entry   FormatHelp[11];
 public:
-	CmdLine(MemorySubsystem* memory, MessagingSubsystem* msg);
+	CmdLine();
 	~CmdLine();
 	select_format* getPossibleFormat(int i) { return &PossibleFmt[i]; }
 };
