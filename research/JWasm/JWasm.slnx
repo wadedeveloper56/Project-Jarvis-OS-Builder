@@ -7,6 +7,7 @@
   <Project Path="JWasm/JWasm.vcxproj" Id="633eb358-5b2b-405a-8000-48622145a995" />
   <Project Path="JWasmLib/JWasmLib.vcxproj" Id="fd8eeaf5-d96a-4978-9cb3-d573a9c0d4b1" />
   <Project Path="JWlink/JWlink.vcxproj" Id="d6ce8cc8-a65d-471c-9c12-01821ef9ecd7" />
+  <Project Path="JWlinkTest/JWlinkTest.vcxproj" />
   <Project Path="Memory/Memory.vcxproj" Id="36412e4a-5780-46b9-bf4b-0d79b4a7de96" />
   <Project Path="MemoryTest/MemoryTest.vcxproj" />
   <Project Path="Subsystem/Subsystem.vcxproj" Id="15f4408c-b796-4e92-8b09-4caa3a8a9d21" />
