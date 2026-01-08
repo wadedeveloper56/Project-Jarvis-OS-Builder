@@ -7,6 +7,8 @@
 #define NLCHAR         '\n'
 #define CTRLZ          '\32'
 
+class CmdPlatform;
+
 typedef struct _select_format {
 	exe_format bits;
 	char* lib_var_name;
