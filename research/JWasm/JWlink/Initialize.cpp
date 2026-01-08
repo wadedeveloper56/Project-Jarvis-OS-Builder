@@ -1167,16 +1167,22 @@ void FreeFormatStuff()
 	exe_format                  possible;
 
 	CmdLine* cmdLine = new CmdLine();
-	if (!(LinkState & FMT_DECIDED)) return;
-	for (i = 0; i < 11; i++) {
-		select_format* sf = cmdLine->getPossibleFormat(i);
-		possible = sf->bits;
-		if ((~possible & FmtData.type) == 0) {
-			if (sf->platform != NULL)
-				sf->platform->freeFormat();
-			break;
+	if (LinkState & FMT_DECIDED)
+	{
+		for (i = 0; i < 11; i++) {
+			select_format* sf = cmdLine->getPossibleFormat(i);
+			possible = sf->bits;
+			if ((~possible & FmtData.type) == 0) {
+				if (sf->platform != NULL)
+				{
+					sf->platform->freeFormat();
+					delete sf->platform;
+				}
+				break;
+			}
 		}
 	}
+	delete cmdLine;
 }
 
 void FreeNodes(nodearray* nodes)

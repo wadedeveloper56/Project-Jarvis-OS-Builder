@@ -6,6 +6,7 @@
 #include "CmdWinOS2.h"
 #include "CmdPharlap.h"
 #include "CmdNovell.h"
+#include "MemorySubsystem.h"
 
 CmdLine::CmdLine()
 {
@@ -24,4 +25,8 @@ CmdLine::CmdLine()
 
 CmdLine::~CmdLine()
 {
+	for (int i = 0; i < 11; i++)
+	{
+		delete PossibleFmt[i].platform;
+	}
 }
