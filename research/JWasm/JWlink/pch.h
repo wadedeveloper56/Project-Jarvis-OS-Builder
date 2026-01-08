@@ -15,11 +15,6 @@
 #include <ctype.h>
 #include <climits>
 
-#include "types.h"
-#include "hash.h"
-#include "File.h"
-#include "syms.h"
-#include "structures.h"
 
 #pragma warning(disable:4267)
 #pragma warning(disable:4244)
