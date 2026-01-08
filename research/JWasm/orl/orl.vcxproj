@@ -168,69 +168,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="coff\h\coffentr.h" />
-    <ClInclude Include="coff\h\coffflhn.h" />
-    <ClInclude Include="coff\h\coffglbl.h" />
-    <ClInclude Include="coff\h\coffhash.h" />
-    <ClInclude Include="coff\h\coffimpl.h" />
-    <ClInclude Include="coff\h\coffload.h" />
-    <ClInclude Include="coff\h\cofflwlv.h" />
-    <ClInclude Include="coff\h\cofforl.h" />
-    <ClInclude Include="coff\h\cofftype.h" />
-    <ClInclude Include="elf\h\elfentr.h" />
-    <ClInclude Include="elf\h\elfflhn.h" />
-    <ClInclude Include="elf\h\elfglbl.h" />
-    <ClInclude Include="elf\h\elfhash.h" />
-    <ClInclude Include="elf\h\elfload.h" />
-    <ClInclude Include="elf\h\elflwlv.h" />
-    <ClInclude Include="elf\h\elforl.h" />
-    <ClInclude Include="elf\h\elftype.h" />
-    <ClInclude Include="framework.h" />
-    <ClInclude Include="h\orl.h" />
-    <ClInclude Include="h\orlcomon.h" />
-    <ClInclude Include="h\orlentry.h" />
-    <ClInclude Include="h\orlflhnd.h" />
-    <ClInclude Include="h\orlglobl.h" />
-    <ClInclude Include="h\orlhash.h" />
-    <ClInclude Include="h\orlhshdf.h" />
-    <ClInclude Include="h\orlintnl.h" />
-    <ClInclude Include="h\orllevel.h" />
-    <ClInclude Include="omf\h\omfdrctv.h" />
-    <ClInclude Include="omf\h\omfentr.h" />
-    <ClInclude Include="omf\h\omfflhn.h" />
-    <ClInclude Include="omf\h\omfglbl.h" />
-    <ClInclude Include="omf\h\omfload.h" />
-    <ClInclude Include="omf\h\omfmunge.h" />
-    <ClInclude Include="omf\h\omforl.h" />
-    <ClInclude Include="omf\h\omftype.h" />
-    <ClInclude Include="pch.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="coff\c\coffentr.c" />
-    <ClCompile Include="coff\c\coffflhn.c" />
-    <ClCompile Include="coff\c\coffimpl.c" />
-    <ClCompile Include="coff\c\coffload.c" />
-    <ClCompile Include="coff\c\cofflwlv.c" />
-    <ClCompile Include="c\orlentry.c" />
-    <ClCompile Include="c\orlflhnd.c" />
-    <ClCompile Include="c\orlhash.c" />
-    <ClCompile Include="elf\c\elfentr.c" />
-    <ClCompile Include="elf\c\elfflhn.c" />
-    <ClCompile Include="elf\c\elfload.c" />
-    <ClCompile Include="elf\c\elflwlv.c" />
-    <ClCompile Include="omf\c\omfdrctv.c" />
-    <ClCompile Include="omf\c\omfentr.c" />
-    <ClCompile Include="omf\c\omfflhn.c" />
-    <ClCompile Include="omf\c\omfload.c" />
-    <ClCompile Include="omf\c\omfmunge.c" />
-    <ClCompile Include="pch.c">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
-    </ClCompile>
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

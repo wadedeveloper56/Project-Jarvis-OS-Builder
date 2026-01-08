@@ -168,42 +168,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="framework.h" />
-    <ClInclude Include="h\dw.h" />
-    <ClInclude Include="h\dwabbrev.h" />
-    <ClInclude Include="h\dwabort.h" />
-    <ClInclude Include="h\dwarange.h" />
-    <ClInclude Include="h\dwassert.h" />
-    <ClInclude Include="h\dwcarve.h" />
-    <ClInclude Include="h\dwcnf.h" />
-    <ClInclude Include="h\dwdecl.h" />
-    <ClInclude Include="h\dwdie.h" />
-    <ClInclude Include="h\dwhandle.h" />
-    <ClInclude Include="h\dwinfo.h" />
-    <ClInclude Include="h\dwline.h" />
-    <ClInclude Include="h\dwloc.h" />
-    <ClInclude Include="h\dwmac.h" />
-    <ClInclude Include="h\dwmem.h" />
-    <ClInclude Include="h\dwname.h" />
-    <ClInclude Include="h\dwpriv.h" />
-    <ClInclude Include="h\dwrefer.h" />
-    <ClInclude Include="h\dwsym.h" />
-    <ClInclude Include="h\dwtype.h" />
-    <ClInclude Include="h\dwutils.h" />
-    <ClInclude Include="h\testcli.h" />
-    <ClInclude Include="pch.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="c\dwlngen.c" />
-    <ClCompile Include="c\dwutils.c" />
-    <ClCompile Include="pch.c">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
-    </ClCompile>
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
