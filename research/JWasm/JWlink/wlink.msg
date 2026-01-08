@@ -126,7 +126,7 @@ pick(    MSG_GENERAL_HELP_28,   "obj_spec  ::= obj_file[\"(\"obj_member\")\"] | 
 pick(    MSG_GENERAL_HELP_29,   "dbtype    ::= \"Watcom\" | \"Dwarf\" | \"Codeview\"" )
 pick(    MSG_GENERAL_HELP_30,   "dblist    ::= dboption{\",\"dboption}" )
 pick(    MSG_GENERAL_HELP_31,   "dboption  ::= \"LInes\" | \"Types\" | \"LOcals\" | \"All\"" )
-pick(    MSG_GENERAL_HELP_32,   "option    ::= \"ARTificial\" | \"[NO]CAChe\" | \"[NO]Caseexact\" | \"CVPack\"" )
+pick(    MSG_GENERAL_HELP_32,   "option    ::= \"ARTificial\" | \"[NO]CAChe\" | \"[NO]CASEexact\" | \"CVPack\"" )
 pick(    MSG_GENERAL_HELP_33,   "            | \"Dosseg\" | \"ELiminate\" | \"[NO]FARcalls\"" )
 pick(    MSG_GENERAL_HELP_34,   "            | \"INCremental[=file_name]\" | \"MANGlednames\"" )
 pick(    MSG_GENERAL_HELP_35,   "            | \"Map\"[\"=\"map_file] | \"MAXErrors=\"n | \"NAMELen=\"n" )
@@ -185,7 +185,7 @@ pick(    MSG_OS2_HELP_24,   "            | \"CONTiguous\" | \"DYNamic\"\n" )
  *  To start a new page, leave a line undefined or define an empty line.
  */
 pick(    MSG_WINDOWS_HELP_0,    "\ncommands valid for the Microsoft Win16 executable formats (NE) only:\n" )
-pick(    MSG_WINDOWS_HELP_1,    "form      ::= \"WIndows\" [\"DLl\"[\"INITGlobal\" | \"INITInstance\"]] [MEMory] [FOnt]" )
+pick(    MSG_WINDOWS_HELP_1,    "form      ::= \"WIndows\" [\"DLl\"[\"INITGlobal\" | \"INITInstance\"]] [DPMI] [MEMory] [FOnt]" )
 pick(    MSG_WINDOWS_HELP_2,    "directive ::= \"NEWsegment\"" )
 pick(    MSG_WINDOWS_HELP_3,    "            | \"SEGment\"     segdesc{\",\"segdesc}" )
 pick(    MSG_WINDOWS_HELP_4,    "            | \"IMPort\"      import{\",\"import}" )

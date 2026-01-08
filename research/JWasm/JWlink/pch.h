@@ -15,6 +15,12 @@
 #include <ctype.h>
 #include <climits>
 
+#include "linkstd.h"
+#include "reloc.h"
+#include "globals.h"
+#include "specials.h"
+#include "MemorySubsystem.h"
+#include "FileSubsystem.h"
 
 #pragma warning(disable:4267)
 #pragma warning(disable:4244)
