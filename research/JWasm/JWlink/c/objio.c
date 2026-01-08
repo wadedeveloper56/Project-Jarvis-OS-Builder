@@ -50,6 +50,7 @@
 #include "permdata.h"
 #include "objio.h"
 
+#define PATH_MAX 260
 
 typedef struct {
     void *              buffer;

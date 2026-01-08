@@ -227,7 +227,7 @@ unsigned DoFmtStr( char *buff, unsigned len, char *src, va_list *args )
                 } else {
                     num2 = va_arg( *args, unsigned_32 );
                 }
-                ultoa( num2, dest, 10 );
+                _ultoa( num2, dest, 10 );
                 size = strlen( dest );
                 dest += size;
                 len -= size;
@@ -653,10 +653,10 @@ int SymAlphaCompare( const void *a, const void *b )
         rightsize = strlen( rightname );
     }
     if( leftsize < rightsize ) {
-        result = memicmp( leftname, rightname, leftsize );
+        result = _memicmp( leftname, rightname, leftsize );
         if( result == 0 ) result = -1;  // since leftsize < rightsize;
     } else {
-        result = memicmp( leftname, rightname, rightsize );
+        result = _memicmp( leftname, rightname, rightsize );
         if( result == 0 ) {
             if( leftsize > rightsize ) {
                 result = 1;

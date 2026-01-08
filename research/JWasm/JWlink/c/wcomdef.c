@@ -307,7 +307,7 @@ static char * GetNewName( void )
 /* get a new name for an automatically defined comdat segment */
 {
     CDatSegNum++;
-    ultoa( CDatSegNum, CDatSegName + CDAT_SEG_NUM_OFF, 36 );
+    _ultoa( CDatSegNum, CDatSegName + CDAT_SEG_NUM_OFF, 36 );
     return CDatSegName;
 }
 

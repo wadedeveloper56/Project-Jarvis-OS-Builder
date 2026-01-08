@@ -66,7 +66,7 @@ static void     StartNewFile( void );
 static bool WildCard( bool (*rtn)( void ), tokcontrol ctrl )
 /**********************************************************/
 {
-#if defined( __UNIX__ )
+#if defined( __NOWC__ )
     //opendir - readdir wildcarding not supported here.
     ctrl = ctrl;
     return( rtn() );
@@ -199,7 +199,7 @@ bool ProcOne( parse_entry *entry, sep_type req, bool suicide )
                     CmdFlags |= entry->flags;
                 } else {
                     strcpy( keybuff, entry->keyword );
-                    strupr( keybuff ); /* jwlink: was strlwr() */
+                    _strupr( keybuff ); /* jwlink: was strlwr() */
                     LnkMsg( LOC+LINE+WRN+MSG_FORMAT_BAD_OPTION, "s", keybuff );
                     ret = TRUE;
                 }
@@ -1146,7 +1146,7 @@ outfilelist *NewOutFile( char *filename )
 
 int stricmp_wrapper( const void *s1, const void *s2 )
 {
-    return( stricmp( s1, s2 ) );
+    return( _stricmp( s1, s2 ) );
 }
 
 section *NewSection( void )

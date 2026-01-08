@@ -110,8 +110,92 @@
     <None Include="h\wlink.msg" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="c\autogrp.c" />
+    <ClCompile Include="c\carve.c" />
+    <ClCompile Include="c\cmd16m.c" />
+    <ClCompile Include="c\cmdall.c" />
+    <ClCompile Include="c\cmddos.c" />
+    <ClCompile Include="c\cmdelf.c" />
+    <ClCompile Include="c\cmdline.c" />
+    <ClCompile Include="c\cmdnov.c" />
+    <ClCompile Include="c\cmdos2.c" />
+    <ClCompile Include="c\cmdphar.c" />
+    <ClCompile Include="c\cmdqnx.c" />
+    <ClCompile Include="c\cmdraw.c" />
+    <ClCompile Include="c\cmdtable.c" />
+    <ClCompile Include="c\cmdutils.c" />
+    <ClCompile Include="c\dbgall.c" />
+    <ClCompile Include="c\dbgcv.c" />
+    <ClCompile Include="c\dbgdwarf.c" />
+    <ClCompile Include="c\dbginfo.c" />
+    <ClCompile Include="c\debug.c" />
+    <ClCompile Include="c\distrib.c" />
     <ClCompile Include="c\global.c" />
+    <ClCompile Include="c\hash.c" />
+    <ClCompile Include="c\impexp.c" />
+    <ClCompile Include="c\libr.c" />
+    <ClCompile Include="c\libsupp.c" />
+    <ClCompile Include="c\linkutil.c" />
+    <ClCompile Include="c\load16m.c" />
+    <ClCompile Include="c\loaddos.c" />
+    <ClCompile Include="c\loadelf.c" />
+    <ClCompile Include="c\loadelf2.c" />
+    <ClCompile Include="c\loadfile.c" />
+    <ClCompile Include="c\loadflat.c" />
+    <ClCompile Include="c\loadnov.c" />
+    <ClCompile Include="c\loados2.c" />
+    <ClCompile Include="c\loadpe.c" />
+    <ClCompile Include="c\loadphar.c" />
+    <ClCompile Include="c\loadqnx.c" />
+    <ClCompile Include="c\loadraw.c" />
+    <ClCompile Include="c\lsymtab.c" />
+    <ClCompile Include="c\mapio.c" />
+    <ClCompile Include="c\mem.c" />
+    <ClCompile Include="c\mixcache.c" />
+    <ClCompile Include="c\msg.c" />
+    <ClCompile Include="c\ntio.c" />
+    <ClCompile Include="c\obj2supp.c" />
+    <ClCompile Include="c\objcalc.c" />
+    <ClCompile Include="c\objfree.c" />
+    <ClCompile Include="c\objio.c" />
+    <ClCompile Include="c\objnode.c" />
+    <ClCompile Include="c\objomf.c" />
+    <ClCompile Include="c\objorl.c" />
+    <ClCompile Include="c\objpass1.c" />
+    <ClCompile Include="c\objpass2.c" />
+    <ClCompile Include="c\objstrip.c" />
+    <ClCompile Include="c\omfreloc.c" />
+    <ClCompile Include="c\overlays.c" />
+    <ClCompile Include="c\ovlsupp.c" />
+    <ClCompile Include="c\permdata.c" />
+    <ClCompile Include="c\procfile.c" />
+    <ClCompile Include="c\reloc.c" />
+    <ClCompile Include="c\ring.c" />
+    <ClCompile Include="c\ring2.c" />
+    <ClCompile Include="c\salloc.c" />
+    <ClCompile Include="c\spillio.c" />
+    <ClCompile Include="c\strtab.c" />
+    <ClCompile Include="c\symmem.c" />
+    <ClCompile Include="c\symtrace.c" />
+    <ClCompile Include="c\toc.c" />
+    <ClCompile Include="c\virtpage.c" />
+    <ClCompile Include="c\wcomdef.c" />
     <ClCompile Include="c\wlink.c" />
+    <ClCompile Include="c\wlnkmsg.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\dwarf\dwarf.vcxproj">
+      <Project>{40c13ca4-1753-42d9-b5fe-a250c29e7d27}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\lib_misc\lib_misc.vcxproj">
+      <Project>{a046f8b3-3ced-451b-ab5a-f81c2869dda9}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\orl\orl.vcxproj">
+      <Project>{78dd3629-68ee-498b-a8c0-b414f51bb2c9}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\sdk\sdk.vcxproj">
+      <Project>{0cb0f88c-6348-47cd-a16a-da5b30ef259a}</Project>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>18.0</VCProjectVersion>
@@ -168,28 +252,28 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\bin\tools\intermediate\JWlink\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>..\watcom\h;..\orl\h;..\orl\coff\h;..\orl\elf\h;..\orl\omf\h;..\File;..\Memory;..\Subsystem;.\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>..\lib_misc\h;..\sdk\rc\rc\h;..\sdk\rc\wres\h;..\dwarf\h;..\watcom\h;..\orl\h;..\orl\coff\h;..\orl\elf\h;..\orl\omf\h;.\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\bin\tools\intermediate\JWlink\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>..\watcom\h;..\orl\h;..\orl\coff\h;..\orl\elf\h;..\orl\omf\h;..\File;..\Memory;..\Subsystem;.\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>..\lib_misc\h;..\sdk\rc\rc\h;..\sdk\rc\wres\h;..\dwarf\h;..\watcom\h;..\orl\h;..\orl\coff\h;..\orl\elf\h;..\orl\omf\h;.\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\bin\tools\intermediate\JWlink\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>..\watcom\h;..\orl\h;..\orl\coff\h;..\orl\elf\h;..\orl\omf\h;..\File;..\Memory;..\Subsystem;.\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>..\lib_misc\h;..\sdk\rc\rc\h;..\sdk\rc\wres\h;..\dwarf\h;..\watcom\h;..\orl\h;..\orl\coff\h;..\orl\elf\h;..\orl\omf\h;.\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\bin\tools\intermediate\JWlink\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>..\watcom\h;..\orl\h;..\orl\coff\h;..\orl\elf\h;..\orl\omf\h;..\File;..\Memory;..\Subsystem;.\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>..\lib_misc\h;..\sdk\rc\rc\h;..\sdk\rc\wres\h;..\dwarf\h;..\watcom\h;..\orl\h;..\orl\coff\h;..\orl\elf\h;..\orl\omf\h;.\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>__NT__;_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>__NOWC__;__NT__;_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
@@ -208,7 +292,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>__NT__;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>__NOWC__;__NT__;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
@@ -225,7 +309,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>__NT__;_CRT_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>__NOWC__;__NT__;_CRT_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
@@ -244,7 +328,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>__NT__;_CRT_SECURE_NO_WARNINGS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>__NOWC__;__NT__;_CRT_SECURE_NO_WARNINGS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>

@@ -50,6 +50,8 @@
 #include "objcalc.h"
 #include "permdata.h"
 
+#define PATH_MAX 260
+
 stringtable             PermStrings;
 stringtable             PrefixStrings;  /* these are NetWare prefix strings of which there could possibly be several */
 carve_t                 CarveLeader;

@@ -36,7 +36,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <fcntl.h>
-#include <unistd.h>
+#include <io.h>
 #include "linkstd.h"
 #include "pcobj.h"
 #include "newmem.h"
@@ -53,6 +53,12 @@
 #include "mapio.h"
 #include "wressetr.h"   // from wres project
 
+#include <basetsd.h>
+typedef SSIZE_T ssize_t;
+
+#define PATH_MAX 260
+
+extern long FileShift;
 
 static ssize_t ResWrite( int dummy, const void *buff, size_t size )
 /*****************************************************************/
@@ -79,7 +85,7 @@ static off_t ResSeek( int handle, off_t position, int where )
 static int ResClose( int handle )
 /*******************************/
 {
-    return( close( handle ) );
+    return( _close( handle ) );
 }
 
 static ssize_t ResRead( int handle, void *buffer, size_t len )
@@ -286,7 +292,7 @@ static class_entry  *class = NULL;
     }
     for( ; class != NULL; class = class->next_class ) {
         while( (seg = RingStep( class->segs, seg )) != NULL ) {
-            if( stricmp( seg->segname, name ) == 0 ) {
+            if( _stricmp( seg->segname, name ) == 0 ) {
                 return( seg );
             }
         }

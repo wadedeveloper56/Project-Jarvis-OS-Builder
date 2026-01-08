@@ -229,7 +229,7 @@ struct fmt_elf_data {
     unsigned            elf64 : 1;               /* JWlink */
 };
 
-#define NO_BASE_SPEC    ((offset)-1UL)
+#define NO_BASE_SPEC    ((offset)-1L)
 
 struct fmt_data {
     union   fmt_spec_data {

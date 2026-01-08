@@ -36,7 +36,7 @@
 #include <conio.h>
 #include <errno.h>
 #include <fcntl.h>
-#include <unistd.h>
+#include <io.h>
 #include <sys/stat.h>
 #include "linkstd.h"
 #include "msg.h"
@@ -45,6 +45,33 @@
 #include "objio.h"
 #include "fileio.h"
 #include "ntio.h"
+
+enum perms {// names for permissions
+    none = 0,
+    owner_read = 0400, S_IRUSR = 0400,
+    owner_write = 0200, S_IWUSR = 0200,
+    owner_exec = 0100, S_IXUSR = 0100,
+    owner_all = 0700, S_IRWXU = 0700,
+    group_read = 040, S_IRGRP = 040,
+    group_write = 020, S_IWGRP = 020,
+    group_exec = 010, S_IXGRP = 010,
+    group_all = 070, S_IRWXG = 070,
+    others_read = 04, S_IROTH = 04,
+    others_write = 02, S_IWOTH = 02,
+    others_exec = 01, S_IXOTH = 010,
+    others_all = 07, S_IRWXO = 07,
+    all = 0777,
+    set_uid = 04000, S_ISUID = 04000,
+    set_gid = 02000, S_ISGID = 02000,
+    sticky_bit = 01000, S_ISVTX = 01000,
+    mask = 07777,
+    unknown = 0xFFFF,
+    add_perms = 0x10000,
+    remove_perms = 0x20000,
+    resolve_symlinks = 0x40000
+};
+
+
 
 #ifdef __OSI__
 //If or when OSI builds are re-enabled, we need to find the header for this
@@ -96,8 +123,8 @@ void LnkFilesInit( void )
     OpenFiles = 0;
     CaughtBreak = FALSE;
 #if !defined( _DLLHOST )
-    setmode( STDIN_HANDLE, O_BINARY );
-    setmode( STDOUT_HANDLE, O_BINARY );
+    _setmode( STDIN_HANDLE, O_BINARY );
+    _setmode( STDOUT_HANDLE, O_BINARY );
 #endif
 }
 
@@ -118,7 +145,7 @@ static int DoOpen( char *name, unsigned mode, bool isexe )
     for( ;; ) {
         if( OpenFiles >= MAX_OPEN_FILES )
             CleanCachedHandles();
-        h = open( name, mode, S_IRUSR | S_IWUSR );
+        h = _open( name, mode, S_IRUSR | S_IWUSR );
         if( h != -1 ) {
             OpenFiles++;
             break;
@@ -163,7 +190,7 @@ int ResOpen( const char *path, int access, ... )
     int     perm;
 
     perm = 0666;
-    return( open( path, access, perm ) );
+    return( _open( path, access, perm ) );
 }
 
 f_handle ExeCreate( char *name )
@@ -190,8 +217,8 @@ f_handle ExeOpen( char *name )
     return( NIL_HANDLE );
 }
 
-    #define doread( f, b, l )  read( f, b, l )
-    #define dowrite( f, b, l ) write( f, b, l )
+    #define doread( f, b, l )  _read( f, b, l )
+    #define dowrite( f, b, l ) _write( f, b, l )
 
 unsigned QRead( f_handle file, void *buffer, unsigned len, char *name )
 /****************************************************************************/
@@ -257,7 +284,7 @@ void QClose( f_handle file, char *name )
     int         h;
 
     CheckBreak();
-    h = close( file );
+    h = _close( file );
     OpenFiles--;
     if( h != -1 )
         return;
@@ -270,7 +297,7 @@ long QLSeek( f_handle file, long position, int start, char *name )
     long int    h;
 
     CheckBreak();
-    h = lseek( file, position, start );
+    h = _lseek( file, position, start );
     if( h == -1 && name != NULL ) {
         LnkMsg( ERR+MSG_IO_PROBLEM, "12", name, strerror( errno ) );
     }
@@ -287,7 +314,7 @@ unsigned long QPos( f_handle file )
 /****************************************/
 {
     CheckBreak();
-    return( lseek( file, 0L, SEEK_CUR ) );
+    return( _lseek( file, 0L, SEEK_CUR ) );
 }
 
 unsigned long QFileSize( f_handle file )
@@ -295,7 +322,7 @@ unsigned long QFileSize( f_handle file )
 {
     long        result;
 
-    result = filelength( file );
+    result = _filelength( file );
     if( result == -1 ) {
         result = 0;
     }
@@ -341,7 +368,7 @@ bool QReadStr( f_handle file, char *dest, unsigned size, char *name )
 bool QIsDevice( f_handle file )
 /************************************/
 {
-    return( isatty( file ) );
+    return( _isatty( file ) );
 }
 
 static f_handle NSOpen( char *name, unsigned mode )
@@ -443,7 +470,7 @@ time_t QFModTime( int handle )
 char WaitForKey( void )
 /****************************/
 {
-    return getch();
+    return _getch();
 }
 
 void GetCmdLine( char *buff )

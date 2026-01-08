@@ -282,5 +282,215 @@
     <ClCompile Include="c\global.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="c\mem.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\ntio.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\autogrp.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\carve.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\cmd16m.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\cmdall.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\cmddos.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\cmdelf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\cmdline.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\cmdnov.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\cmdos2.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\cmdphar.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\cmdqnx.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\cmdraw.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\cmdtable.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\cmdutils.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\dbgall.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\dbgcv.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\dbgdwarf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\dbginfo.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\debug.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\distrib.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\hash.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\impexp.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\libr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\libsupp.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\linkutil.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\load16m.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\loaddos.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\loadelf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\loadelf2.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\loadfile.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\loadflat.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\loadnov.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\loados2.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\loadpe.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\loadphar.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\loadqnx.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\loadraw.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\lsymtab.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\mapio.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\mixcache.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\msg.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\obj2supp.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\objcalc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\objfree.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\objio.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\objnode.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\objomf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\objorl.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\objpass1.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\objpass2.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\objstrip.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\omfreloc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\overlays.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\ovlsupp.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\permdata.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\procfile.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\reloc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\ring.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\ring2.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\salloc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\spillio.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\strtab.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\symmem.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\symtrace.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\toc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\wcomdef.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\wlnkmsg.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\virtpage.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

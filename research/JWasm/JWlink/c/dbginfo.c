@@ -159,7 +159,7 @@ static bool FindMatch( byte len, void *buff, unsigned *offset )
     *offset = 0;
     while( node != NULL ) {
         if( node->len == len ) {
-            if( memicmp( buff, node->name, len ) == 0 ) {
+            if( _memicmp( buff, node->name, len ) == 0 ) {
                 return( TRUE );
             }
         }

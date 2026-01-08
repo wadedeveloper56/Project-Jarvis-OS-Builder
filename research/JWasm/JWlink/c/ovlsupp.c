@@ -506,7 +506,7 @@ bool CheckOvlClass( char *clname, bool *isovlclass )
         return( retval );
     } else {
         do {
-            if( stricmp( clname, cnamelist->name ) == 0 ) {
+            if( _stricmp( clname, cnamelist->name ) == 0 ) {
                 *isovlclass = TRUE;
                 return( retval );
             }

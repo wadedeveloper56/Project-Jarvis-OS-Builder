@@ -134,9 +134,9 @@ bool ProcBegin( void )
 /***************************/
 /* process a new overlay area */
 {
-    section         *oldsect;
-    file_list       **oldflist;
-    section         *sect;
+    section         *oldsect = NULL;
+    file_list       **oldflist = NULL;
+    section         *sect = NULL;
 
     LinkState |= FMT_SPECIFIED;      // she must want DOS mode.
     if( ( OvlLevel > 0 ) && FmtData.u.dos.dynamic ) {

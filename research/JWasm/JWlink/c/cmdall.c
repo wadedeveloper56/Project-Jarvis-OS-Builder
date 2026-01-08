@@ -364,10 +364,10 @@ file_list *AddObjLib( char *name, lib_priority priority )
 /***************************************************************/
 
  {
-    file_list   **next_owner;
-    file_list   **proc_owner;
-    file_list   *proc_curr;
-    file_list   *newproc;
+    file_list   **next_owner = NULL;
+    file_list   **proc_owner = NULL;
+    file_list   *proc_curr = NULL;
+    file_list   *newproc = NULL;
     bool        added;
 
     DEBUG(( DBG_OLD, "Adding Object library name %s", name ));
@@ -967,7 +967,7 @@ sysblock *FindSysBlock( char *name )
     sysblock    *sys;
 
     for( sys = SysBlocks; sys != NULL; sys = sys->next ) {
-        if( stricmp( sys->name, name ) == 0 ) {
+        if( _stricmp( sys->name, name ) == 0 ) {
             return( sys );
         }
     }
@@ -985,7 +985,7 @@ static sysblock *FindSystemBlock( char *name )
     if( tmpblk == NULL ) {
         len = strlen( name );
         for( sys = SysBlocks; sys != NULL; sys = sys->next ) {
-            if( strnicmp( sys->name, name, len ) == 0 ) {
+            if( _strnicmp( sys->name, name, len ) == 0 ) {
                 if( tmpblk == NULL ) {
                     tmpblk = sys;
                 } else {

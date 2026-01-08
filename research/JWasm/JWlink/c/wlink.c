@@ -92,16 +92,16 @@ char** _argv;
 //static void     DoLink( char * );
 //static void     CleanSubSystems( void );
 //
-//#ifdef _INT_DEBUG
-///*
-// *  I have temporarily left these as extern as they are internal data. On the final pass, either find
-// *  a library header that defines these or create one!
-// */
-//extern char     *_edata;
-//extern char     *_end;
-//#endif
-//
-//static char     *ArgSave;
+#ifdef _INT_DEBUG
+/*
+ *  I have temporarily left these as extern as they are internal data. On the final pass, either find
+ *  a library header that defines these or create one!
+ */
+extern char     *_edata;
+extern char     *_end;
+#endif
+
+static char     *ArgSave;
 //
 //// Not sure what this is for - doesn't seem to be referenced
 ////extern int              __nheapblk;
@@ -116,11 +116,10 @@ int main( int argc, char ** argv )
     _argv = argv;
     _argc = argc;
 #endif
-//    InitSubSystems();
+    InitSubSystems();
 //    LinkMainLine( NULL );
-//    FiniSubSystems();
-//    return( (LinkState & LINK_ERROR) ? 1 : 0 );
-    return 0;
+    FiniSubSystems();
+    return( (LinkState & LINK_ERROR) ? 1 : 0 );
 }
 #endif
 //
@@ -146,22 +145,22 @@ int main( int argc, char ** argv )
 //#endif
 //}
 //
-//void InitSubSystems( void )
-///********************************/
-//{
-//#ifdef _INT_DEBUG
-//    memset( _edata, 0xA5, _end - _edata );      // don't rely on BSS == 0
-//#endif
-//    LnkMemInit();
-//    LnkFilesInit();
-//    InitMsg();
-//    InitNodes();
-//    InitTokBuff();
-//    InitSpillFile();
-//    InitSym();
-//    InitObjORL();
-//    InitCmdFile();
-//}
+void InitSubSystems( void )
+/********************************/
+{
+#ifdef _INT_DEBUG
+    memset( _edata, 0xA5, _end - _edata );      // don't rely on BSS == 0
+#endif
+    LnkMemInit();
+    LnkFilesInit();
+    InitMsg();
+    InitNodes();
+    InitTokBuff();
+    InitSpillFile();
+    InitSym();
+    InitObjORL();
+    InitCmdFile();
+}
 //
 //static void ResetSubSystems( void )
 ///*********************************/
@@ -219,15 +218,14 @@ int main( int argc, char ** argv )
 //    CleanPermData();
 //}
 //
-//void FiniSubSystems( void )
-///********************************/
-//{
-//    FiniLinkStruct();
-//    FiniMsg();
-//    FiniSym();
-//    LnkMemFini();
-//}
-//
+void FiniSubSystems( void )
+{
+    //FiniLinkStruct();
+    //FiniMsg();
+    //FiniSym();
+    LnkMemFini();
+}
+
 //static void DoLink( char *cmdline )
 ///**********************************/
 //// cmdline is only used when we are running under watfor.

@@ -48,6 +48,8 @@
 #include "ring.h"
 #include "mapio.h"
 
+#define PATH_MAX 260
+
 #undef pick
 #define pick( num, string ) string
 

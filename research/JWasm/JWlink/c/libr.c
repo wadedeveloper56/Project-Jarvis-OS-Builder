@@ -83,8 +83,8 @@ static  void            SetDict( file_list *, unsigned_16 );
  */
 static int ARCompName( const void *key, const void *vbase );
 static int ARCompIName( const void *key, const void *vbase );
-int (*CmpARRtn)( const void *, const void * ) = ARCompName;
-int (*CmpOMFRtn)( const void *, const void *, unsigned ) = memcmp;
+//int (*CmpARRtn)(const void*, const void*) = ARCompName;
+//int (*CmpOMFRtn)(const void*, const void*, size_t) = memcmp;
 
 unsigned_16 Rotr16( unsigned_16 value, unsigned_16 shift );
 #pragma aux Rotr16 =\
@@ -114,18 +114,18 @@ void SetLibCase( void )
 /****************************/
 {
     if( LinkFlags & CASE_FLAG ) {
-        CmpOMFRtn = memcmp;
-        CmpARRtn = ARCompName;
+        //CmpOMFRtn = memcmp;
+        //CmpARRtn = ARCompName;
     } else {
-        CmpOMFRtn = memicmp;
-        CmpARRtn = ARCompIName;
+        //CmpOMFRtn = _memicmp;
+        //CmpARRtn = ARCompIName;
     }
 }
 void SetLibCmp( int (*cmpOMF)(), int (*cmpAR)() )
 /****************************/
 {
-	CmpOMFRtn = cmpOMF;
-	CmpARRtn = cmpAR;
+	//CmpOMFRtn = cmpOMF;
+	//CmpARRtn = cmpAR;
 }
 
 static void BadLibrary( file_list *list )
@@ -254,7 +254,7 @@ static ar_dict_entry *ARDict;   /* pointer to AR dictionary structures */
 static int ARCompI( const void *index1, const void *index2 )
 /**********************************************************/
 {
-    return stricmp( ARDict->fnametab[ *(unsigned_16 *)index1 ],
+    return _stricmp( ARDict->fnametab[ *(unsigned_16 *)index1 ],
                     ARDict->fnametab[ *(unsigned_16 *)index2 ] );
 }
 
@@ -657,13 +657,13 @@ static unsigned_16 OMFCompName( const char *name,
     unsigned    len;
     unsigned_16 off;
     unsigned_16 returnval;
-    size_t      result;
+    size_t      result=0;
 
     returnval = 0;
     off = buff[ index ];
     buff += off * 2;
     len = *buff++;
-    result = CmpOMFRtn( buff, name, len );
+    //FIX ME result = CmpOMFRtn( buff, name, len );
 #if 0
     if( LinkFlags & CASE_FLAG ) {
         result = memcmp( buff, name, len );
@@ -692,7 +692,7 @@ static int ARCompIName( const void *key, const void *vbase )
     char **     base;
 
     base = (char **)vbase;
-    return stricmp( key, *base );
+    return _stricmp( key, *base );
 }
 
 static bool ARSearchExtLib( file_list *lib, char *name, unsigned long *off )
@@ -704,8 +704,9 @@ static bool ARSearchExtLib( file_list *lib, char *name, unsigned long *off )
     unsigned            tabidx;
 
     dict = &lib->u.dict->a;
-    result = bsearch( name, dict->fnametab, dict->num_entries,
-                     sizeof(char *), CmpARRtn );
+    //FIX ME
+    //result = bsearch( name, dict->fnametab, dict->num_entries,
+    //                 sizeof(char *), (_CoreCrtNonSecureSearchSortCompareFunction)CmpARRtn );
 #if 0
     if( LinkFlags & CASE_FLAG ) {
         result = bsearch( name, dict->fnametab, dict->num_entries,
