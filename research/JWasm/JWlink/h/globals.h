@@ -40,8 +40,8 @@
 #define MAX_HEADROOM    (4*1024)
 
 /* linker global variables */
-GLOB int _argc;
-GLOB char** _argv;
+extern int _argc;
+extern char** _argv;
 GLOB outfilelist *  OutFiles;       // list of files which will be written to
 GLOB char *         MapFName;       /* name of map file                     */
 GLOB f_handle       MapFile;        /* handle of map file                   */

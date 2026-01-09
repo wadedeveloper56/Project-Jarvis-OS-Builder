@@ -496,5 +496,8 @@
     <ClCompile Include="c\virtpage.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="c\clibext.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

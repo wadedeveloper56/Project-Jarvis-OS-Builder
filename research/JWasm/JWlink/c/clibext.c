@@ -29,7 +29,8 @@
 ****************************************************************************/
 
 #include <stdio.h>
-#include <unistd.h>
+#include <io.h>
+#include <fcntl.h>
 #include <string.h>
 #include <stdlib.h>
 #include <errno.h>
@@ -57,7 +58,7 @@
 #include "wreslang.h"
 
 #define __set_errno( err ) errno = (err)
-
+#define __F_NAME(x,y) x
 char **_argv;
 int  _argc;
 
@@ -144,7 +145,7 @@ char *ltoa( long value, char *buffer, int radix )
             value = - value;
         }
     }
-    ultoa( value, p, radix );
+    _ultoa( value, p, radix );
     return( buffer );
 }
 
@@ -210,7 +211,7 @@ static void copypart( char *buf, const char *p, int len, int maxlen )
 
 /* Under Netware, 'drive' maps to 'volume' */
 
-void _splitpath( const char *path,
+void _splitpath3( const char *path,
     char *drive, char *dir, char *fname, char *ext )
 {
     const char *dotp;
@@ -635,71 +636,71 @@ static unsigned pickup( unsigned c, unsigned *pc_of_choice )
 
 /* create full MS-DOS path name from the components */
 
-void _makepath( char *path, const char *drive,
-                const char *dir, const char *fname, const char *ext )
-{
-    unsigned            first_pc = '\0';
-    char *              pathstart = path;
-    unsigned            ch;
-
-    if( drive != NULL ) {
-        if( *drive != '\0' ) {
-            if ((*drive == '\\') && (drive[1] == '\\')) {
-                strcpy(path, drive);
-                path += strlen(drive);
-            } else {
-                *path++ = *drive;                               /* OK for MBCS */
-                *path++ = ':';
-            }
-        }
-    }
-    *path = '\0';
-    if( dir != NULL ) {
-        if( *dir != '\0' ) {
-            do {
-                    ch = pickup( _mbsnextc(dir), &first_pc );
-                    _mbvtop( ch, path );
-                    path[_mbclen(path)] = '\0';
-                    path = _mbsinc( path );
-                    dir = _mbsinc( dir );
-            } while( *dir != '\0' );
-            /* if no path separator was specified then pick a default */
-            if( first_pc == '\0' ) first_pc = PC;
-            /* if dir did not end in '/' then put in a provisional one */
-                if( *(_mbsdec(pathstart,path)) == first_pc )
-                    path--;
-                else
-                    *path = first_pc;
-        }
-    }
-
-    /* if no path separator was specified thus far then pick a default */
-    if( first_pc == '\0' ) first_pc = PC;
-    if( fname != NULL ) {
-            ch = _mbsnextc( fname );
-            if( pickup(ch,&first_pc) != first_pc  &&  *path == first_pc )
-                path++;
-
-        while (*fname != '\0')
-        {
-        //do {
-                ch = pickup( _mbsnextc(fname), &first_pc );
-                _mbvtop( ch, path );
-                path[_mbclen(path)] = '\0';
-                path = _mbsinc( path );
-                fname = _mbsinc( fname );
-        } //while( *fname != '\0' );
-    } else {
-        if( *path == first_pc ) path++;
-    }
-    if( ext != NULL ) {
-        if( *ext != '\0' ) {
-            if( *ext != '.' )  *path++ = '.';
-            while( *ext != '\0' ) *path++ = *ext++;     /* OK for MBCS */
-        }
-    }
-    *path = '\0';
-}
+//void _makepath( char *path, const char *drive,
+//                const char *dir, const char *fname, const char *ext )
+//{
+//    unsigned            first_pc = '\0';
+//    char *              pathstart = path;
+//    unsigned            ch;
+//
+//    if( drive != NULL ) {
+//        if( *drive != '\0' ) {
+//            if ((*drive == '\\') && (drive[1] == '\\')) {
+//                strcpy(path, drive);
+//                path += strlen(drive);
+//            } else {
+//                *path++ = *drive;                               /* OK for MBCS */
+//                *path++ = ':';
+//            }
+//        }
+//    }
+//    *path = '\0';
+//    if( dir != NULL ) {
+//        if( *dir != '\0' ) {
+//            do {
+//                    ch = pickup( _mbsnextc(dir), &first_pc );
+//                    _mbvtop( ch, path );
+//                    path[_mbclen(path)] = '\0';
+//                    path = _mbsinc( path );
+//                    dir = _mbsinc( dir );
+//            } while( *dir != '\0' );
+//            /* if no path separator was specified then pick a default */
+//            if( first_pc == '\0' ) first_pc = PC;
+//            /* if dir did not end in '/' then put in a provisional one */
+//                if( (_mbsdec(pathstart,path)) == first_pc )
+//                    path--;
+//                else
+//                    *path = first_pc;
+//        }
+//    }
+//
+//    /* if no path separator was specified thus far then pick a default */
+//    if( first_pc == '\0' ) first_pc = PC;
+//    if( fname != NULL ) {
+//            ch = _mbsnextc( fname );
+//            if( pickup(ch,&first_pc) != first_pc  &&  *path == first_pc )
+//                path++;
+//
+//        while (*fname != '\0')
+//        {
+//        //do {
+//                ch = pickup( _mbsnextc(fname), &first_pc );
+//                _mbvtop( ch, path );
+//                path[_mbclen(path)] = '\0';
+//                path = _mbsinc( path );
+//                fname = _mbsinc( fname );
+//        } //while( *fname != '\0' );
+//    } else {
+//        if( *path == first_pc ) path++;
+//    }
+//    if( ext != NULL ) {
+//        if( *ext != '\0' ) {
+//            if( *ext != '.' )  *path++ = '.';
+//            while( *ext != '\0' ) *path++ = *ext++;     /* OK for MBCS */
+//        }
+//    }
+//    *path = '\0';
+//}
 #endif
 
 /****************************************************************************
@@ -759,7 +760,7 @@ char *_sys_fullpath( char *buff, const char *path, size_t size )
     char *         filepart;
     DWORD               rc;
 
-    if( stricmp( path, __F_NAME("con",L"con") ) == 0 ) {
+    if( _stricmp( path, __F_NAME("con",L"con") ) == 0 ) {
         _WILL_FIT( 3 );
         return( strcpy( buff, __F_NAME("con",L"con") ) );
     }
@@ -771,7 +772,7 @@ char *_sys_fullpath( char *buff, const char *path, size_t size )
     // If the function fails, the return value is zero. To get extended error
     // information, call GetLastError.
     if( (rc == 0) || (rc > size) ) {
-        __set_errno_nt();
+        //__set_errno_nt();
         return( NULL );
     }
 
@@ -1026,30 +1027,30 @@ char *_sys_fullpath( char *buff, const char *path, size_t size )
 #endif
 }
 
-char *_fullpath( char *buff, const char *path, size_t size )
-/**********************************************************/
-{
-    char *ptr = NULL;
-
-    if( buff == NULL ) {
-        size = _MAX_PATH;
-        ptr = malloc( size );
-        if( ptr == NULL ) __set_errno( ENOMEM );
-        buff = ptr;
-    }
-    if( buff != NULL ) {
-        buff[0] = '\0';
-        if( path == NULL || path[0] == '\0' ) {
-            buff = getcwd( buff, size );
-        } else {
-            buff = _sys_fullpath( buff, path, size );
-        }
-        if( buff == NULL ) {
-            if( ptr != NULL ) free( ptr );
-        }
-    }
-    return buff;
-}
+//char *_fullpath( char *buff, const char *path, size_t size )
+///**********************************************************/
+//{
+//    char *ptr = NULL;
+//
+//    if( buff == NULL ) {
+//        size = _MAX_PATH;
+//        ptr = malloc( size );
+//        if( ptr == NULL ) __set_errno( ENOMEM );
+//        buff = ptr;
+//    }
+//    if( buff != NULL ) {
+//        buff[0] = '\0';
+//        if( path == NULL || path[0] == '\0' ) {
+//            buff = _getcwd( buff, size );
+//        } else {
+//            buff = _sys_fullpath( buff, path, size );
+//        }
+//        if( buff == NULL ) {
+//            if( ptr != NULL ) free( ptr );
+//        }
+//    }
+//    return buff;
+//}
 
 /****************************************************************************
 *
@@ -1128,7 +1129,7 @@ int memicmp( const void *in_s1, const void *in_s2, size_t len )
 
 off_t tell( int handle )
 {
-    return( lseek( handle, 0L, SEEK_CUR ) );
+    return( _lseek( handle, 0L, SEEK_CUR ) );
 }
 /****************************************************************************
 *
@@ -1136,7 +1137,7 @@ off_t tell( int handle )
 *
 ****************************************************************************/
 
-unsigned int _rotl( unsigned int value, unsigned int shift )
+unsigned int _rotl2( unsigned int value, unsigned int shift )
 {
     unsigned int    tmp;
 
@@ -1201,13 +1202,13 @@ long filelength( int handle )
 {
     long                current_posn, file_len;
 
-    current_posn = lseek( handle, 0L, SEEK_CUR );
+    current_posn = _lseek( handle, 0L, SEEK_CUR );
     if( current_posn == -1L )
     {
         return( -1L );
     }
-    file_len = lseek( handle, 0L, SEEK_END );
-    lseek( handle, current_posn, SEEK_SET );
+    file_len = _lseek( handle, 0L, SEEK_END );
+    _lseek( handle, current_posn, SEEK_SET );
 
     return( file_len );
 }
@@ -1222,10 +1223,10 @@ int eof( int handle )         /* determine if at EOF */
 {
     off_t   current_posn, file_len;
 
-    file_len = filelength( handle );
+    file_len = _filelength( handle );
     if( file_len == -1L )
         return( -1 );
-    current_posn = tell( handle );
+    current_posn = _tell( handle );
     if( current_posn == -1L )
         return( -1 );
     if( current_posn == file_len )
@@ -1368,7 +1369,7 @@ void _searchenv( const char *name, const char *env_var, char *buffer )
     size_t      len;
 
     prev_errno = errno;
-    if( access( name, F_OK ) == 0 ) {
+    if( _access( name, 0 ) == 0 ) {
         p = buffer;                                 /* JBS 90/3/30 */
         len = 0;                                    /* JBS 04/1/06 */
         for( ;; ) {
@@ -1378,7 +1379,7 @@ void _searchenv( const char *name, const char *env_var, char *buffer )
             if( name[0] == '/' ) break;
             if( (name[0] != '\0') && (name[1] == ':') ) break;
 #endif
-            getcwd( buffer, _MAX_PATH );
+            _getcwd( buffer, _MAX_PATH );
             len = strlen( buffer );
             p = &buffer[ len ];
             if( p[-1] != PATH_SEPARATOR ) {
@@ -1427,7 +1428,7 @@ void _searchenv( const char *name, const char *env_var, char *buffer )
                 if( len < _MAX_PATH ) {
                     strcat( p2, name );
                     /* check to see if file exists */
-                    if( access( buffer, 0 ) == 0 ) {
+                    if( _access( buffer, 0 ) == 0 ) {
                         __set_errno( prev_errno );
                         return;
                     }

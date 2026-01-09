@@ -358,10 +358,10 @@ file_list *AddObjLib( char *name, lib_priority priority )
 /***************************************************************/
 
  {
-    file_list   **next_owner;
-    file_list   **proc_owner;
-    file_list   *proc_curr;
-    file_list   *newproc;
+    file_list** next_owner = NULL;
+    file_list** proc_owner = NULL;
+    file_list* proc_curr = NULL;
+    file_list* newproc = NULL;
     bool        added;
 
     DEBUG(( DBG_OLD, "Adding Object library name %s", name ));

@@ -128,6 +128,7 @@
   <ItemGroup>
     <ClCompile Include="c\autogrp.c" />
     <ClCompile Include="c\carve.c" />
+    <ClCompile Include="c\clibext.c" />
     <ClCompile Include="c\cmd16m.c" />
     <ClCompile Include="c\cmdall.c" />
     <ClCompile Include="c\cmddos.c" />
