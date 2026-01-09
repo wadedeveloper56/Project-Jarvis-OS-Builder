@@ -358,5 +358,38 @@
     <ClCompile Include="rc\wres\c\wrrhr.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="rc\rc\c\rcstr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rc\wres\c\wrgetti.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rc\wres\c\wrnextrs.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rc\wres\c\wrgetri.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rc\rc\c\exerespe.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rc\rc\c\sharedio.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rc\wres\c\wrmergdi.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rc\wres\c\wrisempt.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rc\wres\c\wridfree.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rc\wres\c\wridtost.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rc\wres\c\wrdelrs.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
