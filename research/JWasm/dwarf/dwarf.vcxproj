@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="dw\c\dwlngen.c" />
     <ClCompile Include="dw\c\dwutils.c" />
+    <ClCompile Include="pch.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dw\h\dw.h" />
@@ -45,6 +46,7 @@
     <ClInclude Include="dw\h\dwtype.h" />
     <ClInclude Include="dw\h\dwutils.h" />
     <ClInclude Include="dw\h\testcli.h" />
+    <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="dw\h\dwabenum.gh" />
@@ -148,7 +150,7 @@
       <PreprocessorDefinitions>_WCUNALIGNED;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
@@ -187,7 +189,7 @@
       <PreprocessorDefinitions>_WCUNALIGNED;_CRT_SECURE_NO_WARNINGS;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>

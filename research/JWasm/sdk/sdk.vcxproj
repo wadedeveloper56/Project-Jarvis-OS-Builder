@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="pch.h" />
     <ClInclude Include="rc\rc\h\dbtable.h" />
     <ClInclude Include="rc\rc\h\depend.h" />
     <ClInclude Include="rc\rc\h\errors.h" />
@@ -106,6 +107,7 @@
     <None Include="rc\wres\c\wres.x" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="pch.c" />
     <ClCompile Include="rc\rc\c\exerespe.c" />
     <ClCompile Include="rc\rc\c\rcstr.c" />
     <ClCompile Include="rc\rc\c\sharedio.c" />
@@ -251,7 +253,7 @@
       <PreprocessorDefinitions>INSIDE_WLINK;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
@@ -290,7 +292,7 @@
       <PreprocessorDefinitions>INSIDE_WLINK;_CRT_SECURE_NO_WARNINGS;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>

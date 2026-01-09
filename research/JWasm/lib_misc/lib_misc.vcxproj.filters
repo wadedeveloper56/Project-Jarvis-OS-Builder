@@ -18,12 +18,18 @@
     <ClCompile Include="c\demangle.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="pch.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="h\demangle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="h\dm_pts.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

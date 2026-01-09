@@ -246,6 +246,9 @@
     <ClInclude Include="rc\wres\h\wrmergdi.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="rc\rc\h\rc.msg" />
@@ -389,6 +392,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="rc\wres\c\wrdelrs.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
