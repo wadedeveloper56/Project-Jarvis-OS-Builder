@@ -32,6 +32,9 @@
 #ifndef WRESSETRTNS_INCLUDED
 #define WRESSETRTNS_INCLUDED
 
+#include <basetsd.h>
+typedef SSIZE_T ssize_t;
+
 #ifndef WRESLAYER0_INCLUDED
 /* The low level I/O routines named below will be passed a WResFileID by the */
 /* higher level I/O routines and which must be the WResFileID returned by one */

@@ -85,7 +85,7 @@
 #ifdef CASE_SENSITIVE
     #define FNAMECMPSTR      strcmp      /* for case  sensitive file systems */
 #else
-    #define FNAMECMPSTR      stricmp     /* for case insensitive file systems */
+    #define FNAMECMPSTR      _stricmp     /* for case insensitive file systems */
 #endif
 
 #ifndef BOOL_DEFINED
@@ -97,7 +97,8 @@ typedef unsigned long   virt_mem;
 typedef unsigned        f_handle;
 
 #ifndef __386__
-#define UNALIGN _WCUNALIGNED
+#define UNALIGN 
+//_WCUNALIGNED
 #else
 #define UNALIGN
 #endif

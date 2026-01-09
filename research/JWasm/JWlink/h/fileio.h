@@ -32,9 +32,9 @@
 #define NIL_HANDLE      ((f_handle)-1)
 #if defined( __NT__ )
 #include <stdio.h>
-    #define STDIN_HANDLE        (stdin->_handle)
-    #define STDOUT_HANDLE       (stdout->_handle)
-    #define STDERR_HANDLE       (stderr->_handle)
+    #define STDIN_HANDLE        (_fileno(stdin))
+    #define STDOUT_HANDLE       (_fileno(stdout))
+    #define STDERR_HANDLE       (_fileno(stderr))
 #else
     #define STDIN_HANDLE    ((f_handle)0)
     #define STDOUT_HANDLE   ((f_handle)1)
