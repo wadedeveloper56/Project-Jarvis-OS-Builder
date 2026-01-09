@@ -350,7 +350,7 @@ static orl_return EntryCmd( char *name, void *dummy )
         if ( ( FmtData.type & MK_PE ) && FmtData.u.pe.win64 == 0 ) {
             char *tmpname;
             int i = strlen( name );
-            tmpname = alloca( i + 2 );
+            tmpname = malloc( i + 2 );
             tmpname[0] = '_';
             strcpy( tmpname+1, name );
             SetStartSym( tmpname );

@@ -597,7 +597,7 @@ static orl_return ParseExport( char **contents, int *len,
     int         l;
 
     l = strncspn( *contents, ", \t", *len );
-    arg = alloca( l + 1 );
+    arg = malloc( l + 1 );
     memcpy(arg, *contents, l);
     arg[l] = 0;
     *len -= l;
@@ -615,7 +615,7 @@ static orl_return ParseDefLibEntry( char **contents, int *len,
 
     for( ;; ) {
         l = strncspn( *contents, ", \t", *len );
-        arg = alloca( l + 1 );
+        arg = malloc( l + 1 );
         memcpy(arg, *contents, l);
         arg[l] = 0;
         *len -= l;
@@ -652,7 +652,7 @@ static orl_return ParseLnkCmd( char *cmd, char **contents, int *len,
         }
     }
     l = value - *contents;
-    arg = alloca( l + 1 );
+    arg = malloc( l + 1 );
     memcpy( arg, *contents, l );
     *contents = value;
     if ( delim )

@@ -388,7 +388,7 @@ void DwarfAddModule( mod_entry *mod, section *sect )
             zero = 0;                       // no include directories;
             PutInfo( mod->d.d->dasi.addr, &zero, 1 );
             mod->d.d->dasi.addr += 1;
-            buff = alloca( namelen + 3 );
+            buff = malloc( namelen + 3 );
             memcpy( &buff[0], mod->name, namelen );
             buff[namelen + 0] = 0;          // no directory index
             buff[namelen + 1] = 0;          // no time

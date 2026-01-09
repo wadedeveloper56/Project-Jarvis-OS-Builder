@@ -465,7 +465,7 @@ void ODBIGenGlobal( symbol *sym, section *sect )
             len = 255;
         }
         entrylen = sizeof( gblinfo ) + len;
-        data = (gblinfo *) alloca( entrylen );
+        data = (gblinfo *) malloc( entrylen );
         _HostU32toTarg( sym->addr.off, data->off );
         _HostU16toTarg( sym->addr.seg, data->seg );
         _HostU16toTarg( dptr->modnum, data->mod_idx );
@@ -783,7 +783,7 @@ void ODBIGenModule( void )
     rec = CurrMod->d.o;
     name = CurrMod->name;
     len = strlen( name );
-    info = (modinfo *) alloca( len + sizeof( modinfo ) );
+    info = (modinfo *) malloc( len + sizeof( modinfo ) );
     _HostU16toTarg( rec->types.num, info->types.len );
     _HostU32toTarg( rec->types.offset, info->types.off );
     _HostU16toTarg( rec->locals.num, info->locals.len );

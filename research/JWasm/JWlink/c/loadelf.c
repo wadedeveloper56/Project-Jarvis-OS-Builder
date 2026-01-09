@@ -554,7 +554,7 @@ static unsigned_32 SetRelocSectName( ElfHdr *hdr, char *secname )
     char        *name;
 
     len = strlen( secname );
-    name = alloca( RELA_NAME_SIZE + len );
+    name = malloc( RELA_NAME_SIZE + len );
     memcpy( name, RelASecName, RELA_NAME_SIZE - 1 );
     memcpy( name + RELA_NAME_SIZE - 1, secname, len + 1 );
     return( AddSecName( hdr, name ) );

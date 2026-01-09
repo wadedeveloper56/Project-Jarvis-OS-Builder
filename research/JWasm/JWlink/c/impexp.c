@@ -279,7 +279,7 @@ static symbol * GetIATSym( symbol *sym )
     }
     prefixlen = sizeof(ImportSymPrefix) - 1;
     namelen = strlen( name );
-    iatname = alloca( namelen + prefixlen + 1 );
+    iatname = malloc( namelen + prefixlen + 1 );
     memcpy( iatname, ImportSymPrefix, prefixlen );
     memcpy( iatname + prefixlen, name, namelen );
     prefixlen += namelen;

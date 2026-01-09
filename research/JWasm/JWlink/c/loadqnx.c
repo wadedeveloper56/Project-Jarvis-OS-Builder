@@ -388,7 +388,7 @@ void FiniQNXLoadFile( void )
         }
     }
     nbytes = NumGroups * sizeof( unsigned_32 );
-    segments = (unsigned_32 *) alloca( nbytes );
+    segments = (unsigned_32 *) malloc( nbytes );
     SeekLoad( sizeof(lmf_header) + nbytes + sizeof(lmf_record) );
     WriteQNXResource();
     WriteQNXData( segments );
