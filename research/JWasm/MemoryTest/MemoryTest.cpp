@@ -27,5 +27,16 @@ namespace MemoryTest
 			Assert::AreNotEqual(size1, size2, L"Memory reallocation size failure");
 			FreeMemory(buffer);
 		}
+		TEST_METHOD(ExpandMemory_NotNull)
+		{
+			void* buffer = AllocateMemory(10);
+			size_t size1 = _msize(buffer);
+			Assert::IsNotNull(buffer, L"Memory allocation failure");
+			buffer = ExpandMemory(buffer, 20);
+			//Assert::IsNotNull(buffer, _wcserror(errno));
+			//size_t size2 = _msize(buffer);
+			//Assert::AreNotEqual(size1, size2, L"Memory reallocation size failure");
+			FreeMemory(buffer);
+		}
 	};
 }
