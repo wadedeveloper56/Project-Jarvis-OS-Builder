@@ -18,6 +18,13 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="c\demangle.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="h\demangle.h" />
+    <ClInclude Include="h\dm_pts.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>18.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>

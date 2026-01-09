@@ -14,4 +14,83 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="dw\c\dwlngen.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dw\c\dwutils.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="dw\h\dw.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dw\h\dwabbrev.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dw\h\dwabort.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dw\h\dwarange.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dw\h\dwassert.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dw\h\dwcarve.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dw\h\dwcnf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dw\h\dwdecl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dw\h\dwdie.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dw\h\dwhandle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dw\h\dwinfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dw\h\dwline.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dw\h\dwloc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dw\h\dwmac.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dw\h\dwmem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dw\h\dwname.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dw\h\dwpriv.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dw\h\dwrefer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dw\h\dwsym.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dw\h\dwtype.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dw\h\dwutils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dw\h\testcli.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="dw\h\dwabenum.gh" />
+  </ItemGroup>
 </Project>
