@@ -29,6 +29,7 @@
 ****************************************************************************/
 
 
+#include "pch.h"
 #include "wlib.h"
 #include "idedll.h"
 #ifdef __WATCOMC__

@@ -29,6 +29,7 @@
 ****************************************************************************/
 
 
+#include "pch.h"
 #include "wlib.h"
 
 // must correspond to defines in implib.h

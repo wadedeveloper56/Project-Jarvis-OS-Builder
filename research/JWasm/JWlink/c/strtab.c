@@ -35,6 +35,7 @@
  *
 */
 
+#include "pch.h"
 #include "linkstd.h"
 #include "strtab.h"
 #include "alloc.h"

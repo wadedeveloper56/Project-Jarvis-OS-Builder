@@ -27,8 +27,7 @@
 * Description:  Generate line information.
 *
 ****************************************************************************/
-
-
+#include "pch.h"
 #include "dwpriv.h"
 #include "dwutils.h"
 #include "dwline.h"

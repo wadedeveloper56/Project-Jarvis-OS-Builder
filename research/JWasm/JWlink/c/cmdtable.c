@@ -29,6 +29,7 @@
 ****************************************************************************/
 
 
+#include "pch.h"
 #include "linkstd.h"
 #include "command.h"
 #include "cmdall.h"

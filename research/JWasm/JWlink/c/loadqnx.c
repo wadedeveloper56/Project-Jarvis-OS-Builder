@@ -29,6 +29,7 @@
 ****************************************************************************/
 
 
+#include "pch.h"
 #include <string.h>
 #include "walloca.h"
 #include "linkstd.h"

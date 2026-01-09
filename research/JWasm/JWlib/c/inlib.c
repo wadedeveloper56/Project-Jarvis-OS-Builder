@@ -30,6 +30,7 @@
 ****************************************************************************/
 
 
+#include "pch.h"
 #include "wlib.h"
 
 static input_lib *InputLibs;

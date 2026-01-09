@@ -29,6 +29,7 @@
 ****************************************************************************/
 
 
+#include "pch.h"
 #include "elfload.h"
 
 // fixme: finish making ELF SPECIFIC (see next fixme)

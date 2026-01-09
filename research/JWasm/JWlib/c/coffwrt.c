@@ -29,6 +29,7 @@
 ****************************************************************************/
 
 
+#include "pch.h"
 #include "wlib.h"
 #include "walloca.h"
 #include <assert.h>

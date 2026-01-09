@@ -28,6 +28,7 @@
 *
 ****************************************************************************/
 
+#include "pch.h"
 #include "linkstd.h"
 #include "msg.h"
 #include "alloc.h"

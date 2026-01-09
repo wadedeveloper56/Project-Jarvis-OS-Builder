@@ -35,6 +35,7 @@
  *
  */
 
+#include "pch.h"
 #include <string.h>
 #include "linkstd.h"
 #include "pcobj.h"

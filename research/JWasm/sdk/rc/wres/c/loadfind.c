@@ -29,6 +29,7 @@
 ****************************************************************************/
 
 
+#include "pch.h"
 #include <string.h>
 #include "wresall.h"
 #include "phandle.h"

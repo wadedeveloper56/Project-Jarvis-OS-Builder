@@ -30,6 +30,7 @@
 ****************************************************************************/
 
 
+#include "pch.h"
 #include <string.h>
 #include "wresrtns.h"
 #include "wres.h"
