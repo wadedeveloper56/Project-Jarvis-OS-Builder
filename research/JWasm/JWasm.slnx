@@ -3,17 +3,14 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Folder Name="/later/">
-    <Project Path="File/File.vcxproj" Id="07c330d8-c0c2-42b5-a94e-ae87dab6420d" />
-    <Project Path="Memory/Memory.vcxproj" Id="36412e4a-5780-46b9-bf4b-0d79b4a7de96" />
-    <Project Path="MemoryTest/MemoryTest.vcxproj" />
-    <Project Path="Subsystem/Subsystem.vcxproj" Id="15f4408c-b796-4e92-8b09-4caa3a8a9d21" />
-  </Folder>
   <Project Path="dwarf/dwarf.vcxproj" Id="40c13ca4-1753-42d9-b5fe-a250c29e7d27" />
+  <Project Path="File/File.vcxproj" Id="07c330d8-c0c2-42b5-a94e-ae87dab6420d" />
   <Project Path="JWasm/JWasm.vcxproj" Id="633eb358-5b2b-405a-8000-48622145a995" />
   <Project Path="JWasmLib/JWasmLib.vcxproj" Id="fd8eeaf5-d96a-4978-9cb3-d573a9c0d4b1" />
+  <Project Path="JWlib/JWlib.vcxproj" Id="76c572b3-357e-4761-86a8-e1a895107baf" />
   <Project Path="JWlink/JWlink.vcxproj" Id="0a693a41-edfd-4a59-a88c-2b8b9f5a0521" />
   <Project Path="lib_misc/lib_misc.vcxproj" Id="a046f8b3-3ced-451b-ab5a-f81c2869dda9" />
+  <Project Path="Memory/Memory.vcxproj" Id="36412e4a-5780-46b9-bf4b-0d79b4a7de96" />
   <Project Path="orl/orl.vcxproj" Id="78dd3629-68ee-498b-a8c0-b414f51bb2c9" />
   <Project Path="sdk/sdk.vcxproj" Id="0cb0f88c-6348-47cd-a16a-da5b30ef259a" />
 </Solution>

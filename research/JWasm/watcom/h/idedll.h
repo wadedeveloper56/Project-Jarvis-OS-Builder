@@ -68,6 +68,7 @@ struct IDEMsgInfo;
 typedef void (*BatchFilter)( void *cookie, const char *msg );
 typedef void (*BatchDllFilter)( void *cookie, struct IDEMsgInfo *errinfo );
 
+#define IDEDLL_EXPORT
 /*******************************************
  *
  * Error Information

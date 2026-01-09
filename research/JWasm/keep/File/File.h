@@ -1,5 +1,7 @@
 #pragma once
 
+#include <cstdio>
+
 typedef int f_handle;
 #define NIL_HANDLE -1
 
