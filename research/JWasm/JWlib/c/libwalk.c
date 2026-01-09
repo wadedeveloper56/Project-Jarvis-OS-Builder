@@ -30,6 +30,7 @@
 ****************************************************************************/
 
 
+#include "pch.h"
 #include "wlib.h"
 
 static void AllocFNameTab( char *name, libfile io, arch_header *arch )

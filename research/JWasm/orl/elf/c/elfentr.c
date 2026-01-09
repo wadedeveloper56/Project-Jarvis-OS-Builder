@@ -30,6 +30,7 @@
 ****************************************************************************/
 
 
+#include "pch.h"
 #include "elfentr.h"
 #include "elfload.h"
 #include "elfflhn.h"

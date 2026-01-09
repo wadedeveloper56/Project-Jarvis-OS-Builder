@@ -29,6 +29,7 @@
 ****************************************************************************/
 
 
+#include "pch.h"
 #include "wlib.h"
 
 enum perms {// names for permissions

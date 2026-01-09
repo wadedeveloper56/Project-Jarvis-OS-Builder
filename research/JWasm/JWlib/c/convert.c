@@ -30,6 +30,7 @@
 ****************************************************************************/
 
 
+#include "pch.h"
 #include "wlib.h"
 
 static void GetARValue( char *element, ar_len len, char delimiter, char *buffer );

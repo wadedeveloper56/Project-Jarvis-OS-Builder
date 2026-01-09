@@ -30,6 +30,7 @@
 ****************************************************************************/
 
 
+#include "pch.h"
 #include "wlib.h"
 #ifdef TRMEM
 #include "trmemcvr.h"

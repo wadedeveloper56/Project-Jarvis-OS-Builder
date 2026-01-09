@@ -29,6 +29,7 @@
 ****************************************************************************/
 
 
+#include "pch.h"
 #include "linkstd.h"
 #include "exeelf.h"
 #include "loadelf.h"

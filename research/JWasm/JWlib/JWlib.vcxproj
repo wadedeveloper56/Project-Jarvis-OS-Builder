@@ -73,22 +73,22 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\bin\tools\intermediate\JWlib\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>..\lib_misc\h;..\sdk\rc\rc\h;..\sdk\rc\wres\h;..\dwarf\dw\h;..\watcom\h;..\orl\h;..\orl\coff\h;..\orl\elf\h;..\orl\omf\h;.\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>.\;..\lib_misc\h;..\sdk\rc\rc\h;..\sdk\rc\wres\h;..\dwarf\dw\h;..\watcom\h;..\orl\h;..\orl\coff\h;..\orl\elf\h;..\orl\omf\h;.\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\bin\tools\intermediate\JWlib\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>..\lib_misc\h;..\sdk\rc\rc\h;..\sdk\rc\wres\h;..\dwarf\dw\h;..\watcom\h;..\orl\h;..\orl\coff\h;..\orl\elf\h;..\orl\omf\h;.\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>.\;..\lib_misc\h;..\sdk\rc\rc\h;..\sdk\rc\wres\h;..\dwarf\dw\h;..\watcom\h;..\orl\h;..\orl\coff\h;..\orl\elf\h;..\orl\omf\h;.\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\bin\tools\intermediate\JWlib\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>..\lib_misc\h;..\sdk\rc\rc\h;..\sdk\rc\wres\h;..\dwarf\dw\h;..\watcom\h;..\orl\h;..\orl\coff\h;..\orl\elf\h;..\orl\omf\h;.\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>.\;..\lib_misc\h;..\sdk\rc\rc\h;..\sdk\rc\wres\h;..\dwarf\dw\h;..\watcom\h;..\orl\h;..\orl\coff\h;..\orl\elf\h;..\orl\omf\h;.\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\bin\tools\intermediate\JWlib\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>..\lib_misc\h;..\sdk\rc\rc\h;..\sdk\rc\wres\h;..\dwarf\dw\h;..\watcom\h;..\orl\h;..\orl\coff\h;..\orl\elf\h;..\orl\omf\h;.\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>.\;..\lib_misc\h;..\sdk\rc\rc\h;..\sdk\rc\wres\h;..\dwarf\dw\h;..\watcom\h;..\orl\h;..\orl\coff\h;..\orl\elf\h;..\orl\omf\h;.\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -99,6 +99,8 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -117,6 +119,8 @@
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <DebugInformationFormat>None</DebugInformationFormat>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -132,6 +136,8 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -150,6 +156,8 @@
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <DebugInformationFormat>None</DebugInformationFormat>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -158,6 +166,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\JWlink\c\clibext.c" />
+    <ClCompile Include="..\JWlink\pch.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="c\cmdline.c" />
     <ClCompile Include="c\coffwrt.c" />
     <ClCompile Include="c\convert.c" />
@@ -185,6 +199,7 @@
     <ClCompile Include="c\writelib.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\JWlink\pch.h" />
     <ClInclude Include="h\banner.h" />
     <ClInclude Include="h\cmdline.h" />
     <ClInclude Include="h\coffwrt.h" />

@@ -27,6 +27,7 @@
 * Description:  Object file processing routines specific to ORL.
 *
 ****************************************************************************/
+#include "pch.h"
 #include <fcntl.h>
 #include <io.h>
 #include <string.h>

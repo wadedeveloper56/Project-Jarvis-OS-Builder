@@ -27,6 +27,7 @@
 * Description:  C++ name demangling.
 *
 ****************************************************************************/
+#include "pch.h"
 
 
 #ifdef TEST

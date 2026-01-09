@@ -93,6 +93,9 @@
     <ClCompile Include="..\JWlink\c\clibext.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\JWlink\pch.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="h\banner.h">
@@ -180,6 +183,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="h\writelib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\JWlink\pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

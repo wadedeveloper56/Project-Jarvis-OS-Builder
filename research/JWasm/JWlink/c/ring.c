@@ -30,6 +30,7 @@
 ****************************************************************************/
 
 
+#include "pch.h"
 #include "linkstd.h"
 #include "ring.h"
 #include "alloc.h"
