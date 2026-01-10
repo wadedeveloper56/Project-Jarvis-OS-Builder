@@ -9,8 +9,6 @@
 *
 ****************************************************************************/
 #include "pch.h"
-#include <stdarg.h>
-
 #include "globals.h"
 #include "memalloc.h"
 #include "reswords.h"
@@ -34,7 +32,7 @@ struct lq_line {
 
 #ifdef DEBUG_OUT
 static unsigned lqlines_written; /* lq lines written by AddLineQueue() */
-static unsigned lqlines_read;    /* lq lines read by RunLineQueue() */
+static unsigned lqlines_read;    /* lq lines _read by RunLineQueue() */
 unsigned GetLqLine( void ) { return( lqlines_read ); }
 #endif
 

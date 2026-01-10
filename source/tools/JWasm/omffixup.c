@@ -28,8 +28,6 @@
 *
 ****************************************************************************/
 #include "pch.h"
-#include <stddef.h>
-
 #include "globals.h"
 #include "parser.h"
 #include "segment.h"

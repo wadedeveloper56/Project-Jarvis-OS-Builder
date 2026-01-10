@@ -28,11 +28,6 @@
 *
 ****************************************************************************/
 #include "pch.h"
-#include <limits.h>
-#include <ctype.h>
-#include <time.h>
-#include <sys/stat.h>
-
 #include "globals.h"
 #include "memalloc.h"
 #include "parser.h"
@@ -382,7 +377,7 @@ static void omf_write_fixupp( struct dsym *seg, char is32 )
     uint_8 *data;
     unsigned size;
     struct fixup *fix;
-    enum fixup_types type = (enum fixup_types)( is32 ? FIX_GEN_MS386 : FIX_GEN_INTEL );
+    enum fixup_types type = ( is32 ? FIX_GEN_MS386 : FIX_GEN_INTEL );
     struct omf_rec  obj;
 
     fix = seg->e.seginfo->FixupList.head;
@@ -913,7 +908,7 @@ static void omf_write_segdef( void )
     DebugMsg1(("omf_write_segdef exit\n"));
 }
 
-/* the lnames are stored in a queue. read
+/* the lnames are stored in a queue. _read
  * the items one by one and take care that
  * the record size doesn't exceed 1024 bytes.
  */
@@ -985,7 +980,7 @@ struct readext {
     uint_8 method;
 };
 
-/* read items for EXTDEF records.
+/* _read items for EXTDEF records.
  * there are 2 sources:
  * - the AltQueue of weak externals
  * - the TAB_EXT queue of externals
@@ -1294,7 +1289,7 @@ static ret_code omf_write_autodep( void )
         if ( len > 255 )
             len = 255; /* length is 1 byte only */
 #endif
-        /* v2.11: field mtime removed, timestamp read when needed */
+        /* v2.11: field mtime removed, timestamp _read when needed */
         //*((time_t *)p) = timet2dostime( curr->mtime );
         *((time_t *)p) = timet2dostime( GetFileTimeStamp( curr->fname ) );
         *(p + 4) = (unsigned char)len;
@@ -1380,8 +1375,8 @@ static ret_code omf_write_pubdef( void )
 
     q = ModuleInfo.g.PubQueue.head;
     while ( q ) {
-        struct asym     *curr_seg = NULL;
-        uint_8          *data = NULL;
+        struct asym     *curr_seg=NULL;
+        uint_8          *data;
         unsigned        size;
         uint_8          curr32;
         uint_8          is32;
@@ -1389,7 +1384,7 @@ static ret_code omf_write_pubdef( void )
         for ( size = 0, data = StringBufferEnd; q; q = q->next ) {
             unsigned    recsize;
             unsigned    len;
-            struct asym *sym;
+            struct asym *sym=NULL;
             sym = q->sym;
 #if COMDATSUPP
             /* COMDAT symbol? Then write an LNAME record */

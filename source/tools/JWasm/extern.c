@@ -834,7 +834,7 @@ void AddPublicData( struct asym *sym )
     QAddItem( &ModuleInfo.g.PubQueue, sym );
 }
 
-#if 0 /* v2.11: obsolete - the queue is read directly when needed */
+#if 0 /* v2.11: obsolete - the queue is _read directly when needed */
 
 /* get (next) PUBLIC symbol */
 
@@ -902,7 +902,7 @@ ret_code PublicDirective( int i, struct asm_tok tokenarray[] )
 #endif
     do {
 
-        /* read the optional language type */
+        /* _read the optional language type */
         langtype = ModuleInfo.langtype;
         GetLangType( &i, tokenarray, &langtype );
 

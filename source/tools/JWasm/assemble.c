@@ -729,7 +729,7 @@ static void PassOneChecks( void )
     int cntUnusedExt = 0;
 #endif
 
-    /* check for open structures and segments has been done inside the
+    /* check for _open structures and segments has been done inside the
      * END directive handling already
      * v2.10: now done for PROCs as well, since procedures
      * must be closed BEFORE segments are to be closed.
@@ -942,7 +942,7 @@ static void PassOneChecks( void )
  *    Preprocessed macro lines are stored in RunMacro().
  * 3. for subsequent passes do
  *    - restore the state
- *    - read preprocessed lines and feed ParseLine() with it
+ *    - _read preprocessed lines and feed ParseLine() with it
  */
 static int OnePass( void )
 /************************/
@@ -1146,22 +1146,22 @@ static void ReswTableInit( void )
 static void open_files( void )
 /****************************/
 {
-    /* open ASM file */
+    /* _open ASM file */
     DebugMsg(("open_files() enter\n" ));
 
     //memset( CurrFile, 0, sizeof( CurrFile ) );
     /* CurrFile[ASM] = fopen( CurrFName[ASM], "r" ); */
     CurrFile[ASM] = fopen( CurrFName[ASM], "rb" );
     if( CurrFile[ASM] == NULL ) {
-        DebugMsg(("open_files(): cannot open source file, fopen(\"%s\") failed\n", CurrFName[ASM] ));
+        DebugMsg(("open_files(): cannot _open source file, fopen(\"%s\") failed\n", CurrFName[ASM] ));
         Fatal( CANNOT_OPEN_FILE, CurrFName[ASM], ErrnoStr() );
     }
 
-    /* open OBJ file */
+    /* _open OBJ file */
     if ( Options.syntax_check_only == FALSE ) {
         CurrFile[OBJ] = fopen( CurrFName[OBJ], "wb" );
         if( CurrFile[OBJ] == NULL ) {
-            DebugMsg(("open_files(): cannot open object file, fopen(\"%s\") failed\n", CurrFName[OBJ] ));
+            DebugMsg(("open_files(): cannot _open object file, fopen(\"%s\") failed\n", CurrFName[OBJ] ));
             Fatal( CANNOT_OPEN_FILE, CurrFName[OBJ], ErrnoStr() );
         }
         DebugMsg(("open_files(): output, fopen(\"%s\") ok\n", CurrFName[OBJ] ));
@@ -1183,14 +1183,14 @@ void close_files( void )
      * reentered and thus cause an endless loop.
      */
 
-    /* close ASM file */
+    /* _close ASM file */
     if( CurrFile[ASM] != NULL ) {
         if( fclose( CurrFile[ASM] ) != 0 )
             EmitErr( CANNOT_CLOSE_FILE, CurrFName[ASM], errno );
         CurrFile[ASM] = NULL;
     }
 
-    /* close OBJ file */
+    /* _close OBJ file */
     if ( CurrFile[OBJ] != NULL ) {
         if ( fclose( CurrFile[OBJ] ) != 0 )
             EmitErr( CANNOT_CLOSE_FILE, CurrFName[OBJ], errno );
@@ -1207,7 +1207,7 @@ void close_files( void )
         CurrFile[LST] = NULL;
     }
 
-    /* close ERR file */
+    /* _close ERR file */
     if ( CurrFile[ERR] != NULL ) {
         fclose( CurrFile[ERR] );
         CurrFile[ERR] = NULL;

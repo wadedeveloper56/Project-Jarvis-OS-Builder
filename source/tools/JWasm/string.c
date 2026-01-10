@@ -20,8 +20,6 @@
 *
 ****************************************************************************/
 #include "pch.h"
-#include <ctype.h>
-
 #include "globals.h"
 #include "memalloc.h"
 #include "parser.h"

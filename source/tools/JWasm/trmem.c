@@ -27,25 +27,8 @@
 * Description:  Memory tracker - included only if TRMEM was set.
 *
 ****************************************************************************/
-
 #include "pch.h"
-#include <stdarg.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <ctype.h>
-
-#if defined( _M_IX86 ) && defined(__WATCOMC__)
-#include <i86.h>
-#endif
-
 #include "trmem.h"
-
-#pragma warning(disable:4267)  /* conversion from 'size_t' to 'type', possible loss of data */
-#pragma warning(disable:4018)  /* signed/unsigned mismatch */
-#pragma warning(disable:4244)  /* conversion from 'type1' to 'type2', possible loss of data */
-#pragma warning(disable:4311)  /* 'type cast': pointer truncation from 'type' to 'type' */
-#pragma warning(disable:4113)  /* incompatible parameter lists */
 
 typedef unsigned long   uint_32;
 typedef unsigned        uint;
@@ -99,7 +82,7 @@ msg(PRT_LIST_3,         "%C %D %U %L %X" );
               for allocation and what was actually allocated.
               It has been selected based on the assumption that the worst
               case delta is a request of 1 byte that gets allocated as
-              64 bytes.  We can't cut it too close because skip list
+              64 bytes.  We can't cut it too _close because skip list
               allocators often have extreme minimum sizes.
 */
 #define SIZE_DELTA      64

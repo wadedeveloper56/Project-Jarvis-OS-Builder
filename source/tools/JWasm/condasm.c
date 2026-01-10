@@ -38,8 +38,6 @@
 ****************************************************************************/
 
 #include "pch.h"
-#include <ctype.h>
-
 #include "globals.h"
 #include "parser.h"
 #include "condasm.h"
