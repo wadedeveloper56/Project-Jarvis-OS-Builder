@@ -51,6 +51,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Compiler projects", "Compil
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PEDump projects", "PEDump projects", "{3445479B-AD78-43AF-A730-869D32A248D0}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "JarvisToolsSDK", "JarvisToolsSDK\JarvisToolsSDK.vcxproj", "{4DEBDE6F-D981-4074-B420-5C142C260144}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		All|x64 = All|x64
@@ -351,6 +353,22 @@ Global
 		{0CB0F88C-6348-47CD-A16A-DA5B30EF259A}.Release|x64.Build.0 = Release|x64
 		{0CB0F88C-6348-47CD-A16A-DA5B30EF259A}.Release|x86.ActiveCfg = Release|Win32
 		{0CB0F88C-6348-47CD-A16A-DA5B30EF259A}.Release|x86.Build.0 = Release|Win32
+		{4DEBDE6F-D981-4074-B420-5C142C260144}.All|x64.ActiveCfg = Debug|x64
+		{4DEBDE6F-D981-4074-B420-5C142C260144}.All|x64.Build.0 = Debug|x64
+		{4DEBDE6F-D981-4074-B420-5C142C260144}.All|x86.ActiveCfg = Debug|Win32
+		{4DEBDE6F-D981-4074-B420-5C142C260144}.All|x86.Build.0 = Debug|Win32
+		{4DEBDE6F-D981-4074-B420-5C142C260144}.Debug|x64.ActiveCfg = Debug|x64
+		{4DEBDE6F-D981-4074-B420-5C142C260144}.Debug|x64.Build.0 = Debug|x64
+		{4DEBDE6F-D981-4074-B420-5C142C260144}.Debug|x86.ActiveCfg = Debug|Win32
+		{4DEBDE6F-D981-4074-B420-5C142C260144}.Debug|x86.Build.0 = Debug|Win32
+		{4DEBDE6F-D981-4074-B420-5C142C260144}.DefaultBuild|x64.ActiveCfg = Release|x64
+		{4DEBDE6F-D981-4074-B420-5C142C260144}.DefaultBuild|x64.Build.0 = Release|x64
+		{4DEBDE6F-D981-4074-B420-5C142C260144}.DefaultBuild|x86.ActiveCfg = Release|Win32
+		{4DEBDE6F-D981-4074-B420-5C142C260144}.DefaultBuild|x86.Build.0 = Release|Win32
+		{4DEBDE6F-D981-4074-B420-5C142C260144}.Release|x64.ActiveCfg = Release|x64
+		{4DEBDE6F-D981-4074-B420-5C142C260144}.Release|x64.Build.0 = Release|x64
+		{4DEBDE6F-D981-4074-B420-5C142C260144}.Release|x86.ActiveCfg = Release|Win32
+		{4DEBDE6F-D981-4074-B420-5C142C260144}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

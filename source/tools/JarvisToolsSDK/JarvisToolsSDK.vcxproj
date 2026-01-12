@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>18.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{4debde6f-d981-4074-b420-5c142c260144}</ProjectGuid>
+    <RootNamespace>JarvisToolsSDK</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>..\..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>..\..\..\bin\tools\intermediate\JarvisToolsSDK\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>.\;..\watcom\h;.\dwarf\dw\h;.\lib_misc\h;.\orl\h;.\orl\coff\h;.\orl\elf\h;.\orl\\omf\h;.\sdk\rc\rc\h;.\sdk\rc\wres\h;..\jwlink\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>..\..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>..\..\..\bin\tools\intermediate\JarvisToolsSDK\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>.\;..\watcom\h;.\dwarf\dw\h;.\lib_misc\h;.\orl\h;.\orl\coff\h;.\orl\elf\h;.\orl\\omf\h;.\sdk\rc\rc\h;.\sdk\rc\wres\h;..\jwlink\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>..\..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>..\..\..\bin\tools\intermediate\JarvisToolsSDK\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>.\;..\watcom\h;.\dwarf\dw\h;.\lib_misc\h;.\orl\h;.\orl\coff\h;.\orl\elf\h;.\orl\\omf\h;.\sdk\rc\rc\h;.\sdk\rc\wres\h;..\jwlink\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>..\..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>..\..\..\bin\tools\intermediate\JarvisToolsSDK\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>.\;..\watcom\h;.\dwarf\dw\h;.\lib_misc\h;.\orl\h;.\orl\coff\h;.\orl\elf\h;.\orl\\omf\h;.\sdk\rc\rc\h;.\sdk\rc\wres\h;..\jwlink\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>false</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>false</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <DebugInformationFormat>None</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>false</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>false</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <DebugInformationFormat>None</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="dwarf\dw\h\dw.h" />
+    <ClInclude Include="dwarf\dw\h\dwabbrev.h" />
+    <ClInclude Include="dwarf\dw\h\dwabort.h" />
+    <ClInclude Include="dwarf\dw\h\dwarange.h" />
+    <ClInclude Include="dwarf\dw\h\dwassert.h" />
+    <ClInclude Include="dwarf\dw\h\dwcarve.h" />
+    <ClInclude Include="dwarf\dw\h\dwcnf.h" />
+    <ClInclude Include="dwarf\dw\h\dwdecl.h" />
+    <ClInclude Include="dwarf\dw\h\dwdie.h" />
+    <ClInclude Include="dwarf\dw\h\dwhandle.h" />
+    <ClInclude Include="dwarf\dw\h\dwinfo.h" />
+    <ClInclude Include="dwarf\dw\h\dwline.h" />
+    <ClInclude Include="dwarf\dw\h\dwloc.h" />
+    <ClInclude Include="dwarf\dw\h\dwmac.h" />
+    <ClInclude Include="dwarf\dw\h\dwmem.h" />
+    <ClInclude Include="dwarf\dw\h\dwname.h" />
+    <ClInclude Include="dwarf\dw\h\dwpriv.h" />
+    <ClInclude Include="dwarf\dw\h\dwrefer.h" />
+    <ClInclude Include="dwarf\dw\h\dwsym.h" />
+    <ClInclude Include="dwarf\dw\h\dwtype.h" />
+    <ClInclude Include="dwarf\dw\h\dwutils.h" />
+    <ClInclude Include="dwarf\dw\h\testcli.h" />
+    <ClInclude Include="framework.h" />
+    <ClInclude Include="lib_misc\h\demangle.h" />
+    <ClInclude Include="lib_misc\h\dm_pts.h" />
+    <ClInclude Include="orl\coff\h\coffentr.h" />
+    <ClInclude Include="orl\coff\h\coffflhn.h" />
+    <ClInclude Include="orl\coff\h\coffglbl.h" />
+    <ClInclude Include="orl\coff\h\coffhash.h" />
+    <ClInclude Include="orl\coff\h\coffimpl.h" />
+    <ClInclude Include="orl\coff\h\coffload.h" />
+    <ClInclude Include="orl\coff\h\cofflwlv.h" />
+    <ClInclude Include="orl\coff\h\cofforl.h" />
+    <ClInclude Include="orl\coff\h\cofftype.h" />
+    <ClInclude Include="orl\elf\h\elfentr.h" />
+    <ClInclude Include="orl\elf\h\elfflhn.h" />
+    <ClInclude Include="orl\elf\h\elfglbl.h" />
+    <ClInclude Include="orl\elf\h\elfhash.h" />
+    <ClInclude Include="orl\elf\h\elfload.h" />
+    <ClInclude Include="orl\elf\h\elflwlv.h" />
+    <ClInclude Include="orl\elf\h\elforl.h" />
+    <ClInclude Include="orl\elf\h\elftype.h" />
+    <ClInclude Include="orl\h\orl.h" />
+    <ClInclude Include="orl\h\orlcomon.h" />
+    <ClInclude Include="orl\h\orlentry.h" />
+    <ClInclude Include="orl\h\orlflhnd.h" />
+    <ClInclude Include="orl\h\orlglobl.h" />
+    <ClInclude Include="orl\h\orlhash.h" />
+    <ClInclude Include="orl\h\orlhshdf.h" />
+    <ClInclude Include="orl\h\orlintnl.h" />
+    <ClInclude Include="orl\h\orllevel.h" />
+    <ClInclude Include="orl\omf\h\omfdrctv.h" />
+    <ClInclude Include="orl\omf\h\omfentr.h" />
+    <ClInclude Include="orl\omf\h\omfflhn.h" />
+    <ClInclude Include="orl\omf\h\omfglbl.h" />
+    <ClInclude Include="orl\omf\h\omfload.h" />
+    <ClInclude Include="orl\omf\h\omfmunge.h" />
+    <ClInclude Include="orl\omf\h\omforl.h" />
+    <ClInclude Include="orl\omf\h\omftype.h" />
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="sdk\rc\rc\h\dbtable.h" />
+    <ClInclude Include="sdk\rc\rc\h\depend.h" />
+    <ClInclude Include="sdk\rc\rc\h\errors.h" />
+    <ClInclude Include="sdk\rc\rc\h\errprt.h" />
+    <ClInclude Include="sdk\rc\rc\h\exelxobj.h" />
+    <ClInclude Include="sdk\rc\rc\h\exeobj.h" />
+    <ClInclude Include="sdk\rc\rc\h\exeres.h" />
+    <ClInclude Include="sdk\rc\rc\h\exereslx.h" />
+    <ClInclude Include="sdk\rc\rc\h\exerespe.h" />
+    <ClInclude Include="sdk\rc\rc\h\exeseg.h" />
+    <ClInclude Include="sdk\rc\rc\h\exeutil.h" />
+    <ClInclude Include="sdk\rc\rc\h\global.h" />
+    <ClInclude Include="sdk\rc\rc\h\iortns.h" />
+    <ClInclude Include="sdk\rc\rc\h\keyword.h" />
+    <ClInclude Include="sdk\rc\rc\h\keyword2.h" />
+    <ClInclude Include="sdk\rc\rc\h\leadbyte.h" />
+    <ClInclude Include="sdk\rc\rc\h\os2res.h" />
+    <ClInclude Include="sdk\rc\rc\h\param.h" />
+    <ClInclude Include="sdk\rc\rc\h\pass2.h" />
+    <ClInclude Include="sdk\rc\rc\h\rcalloc0.h" />
+    <ClInclude Include="sdk\rc\rc\h\rcalloc1.h" />
+    <ClInclude Include="sdk\rc\rc\h\rcdll.h" />
+    <ClInclude Include="sdk\rc\rc\h\rcio.h" />
+    <ClInclude Include="sdk\rc\rc\h\rclayer0.h" />
+    <ClInclude Include="sdk\rc\rc\h\rcldstr.h" />
+    <ClInclude Include="sdk\rc\rc\h\rcmem.h" />
+    <ClInclude Include="sdk\rc\rc\h\rcmsg.h" />
+    <ClInclude Include="sdk\rc\rc\h\rcstr.h" />
+    <ClInclude Include="sdk\rc\rc\h\rctypes.h" />
+    <ClInclude Include="sdk\rc\rc\h\scan.h" />
+    <ClInclude Include="sdk\rc\rc\h\scan2.h" />
+    <ClInclude Include="sdk\rc\rc\h\semaccel.h" />
+    <ClInclude Include="sdk\rc\rc\h\semantic.h" />
+    <ClInclude Include="sdk\rc\rc\h\semdiag.h" />
+    <ClInclude Include="sdk\rc\rc\h\semhelp.h" />
+    <ClInclude Include="sdk\rc\rc\h\semmenu.h" />
+    <ClInclude Include="sdk\rc\rc\h\semraw.h" />
+    <ClInclude Include="sdk\rc\rc\h\semresfl.h" />
+    <ClInclude Include="sdk\rc\rc\h\semsingl.h" />
+    <ClInclude Include="sdk\rc\rc\h\semstr.h" />
+    <ClInclude Include="sdk\rc\rc\h\semtbar.h" />
+    <ClInclude Include="sdk\rc\rc\h\semutil.h" />
+    <ClInclude Include="sdk\rc\rc\h\semver.h" />
+    <ClInclude Include="sdk\rc\rc\h\sharedio.h" />
+    <ClInclude Include="sdk\rc\rc\h\tmpctl.h" />
+    <ClInclude Include="sdk\rc\rc\h\yydriver.h" />
+    <ClInclude Include="sdk\rc\rc\h\yydrivr2.h" />
+    <ClInclude Include="sdk\rc\wres\h\filefmt.h" />
+    <ClInclude Include="sdk\rc\wres\h\layer0.h" />
+    <ClInclude Include="sdk\rc\wres\h\layer1.h" />
+    <ClInclude Include="sdk\rc\wres\h\loadstr.h" />
+    <ClInclude Include="sdk\rc\wres\h\mem2.h" />
+    <ClInclude Include="sdk\rc\wres\h\mresfmt.h" />
+    <ClInclude Include="sdk\rc\wres\h\opcl.h" />
+    <ClInclude Include="sdk\rc\wres\h\read.h" />
+    <ClInclude Include="sdk\rc\wres\h\resaccel.h" />
+    <ClInclude Include="sdk\rc\wres\h\resbitmp.h" />
+    <ClInclude Include="sdk\rc\wres\h\resdiag.h" />
+    <ClInclude Include="sdk\rc\wres\h\reserr.h" />
+    <ClInclude Include="sdk\rc\wres\h\resfmt.h" />
+    <ClInclude Include="sdk\rc\wres\h\resfont.h" />
+    <ClInclude Include="sdk\rc\wres\h\resiccu.h" />
+    <ClInclude Include="sdk\rc\wres\h\resmenu.h" />
+    <ClInclude Include="sdk\rc\wres\h\resnamor.h" />
+    <ClInclude Include="sdk\rc\wres\h\resraw.h" />
+    <ClInclude Include="sdk\rc\wres\h\resstr.h" />
+    <ClInclude Include="sdk\rc\wres\h\restbar.h" />
+    <ClInclude Include="sdk\rc\wres\h\resutil.h" />
+    <ClInclude Include="sdk\rc\wres\h\resver.h" />
+    <ClInclude Include="sdk\rc\wres\h\util.h" />
+    <ClInclude Include="sdk\rc\wres\h\varstr.h" />
+    <ClInclude Include="sdk\rc\wres\h\wres.h" />
+    <ClInclude Include="sdk\rc\wres\h\wresall.h" />
+    <ClInclude Include="sdk\rc\wres\h\wresrtns.h" />
+    <ClInclude Include="sdk\rc\wres\h\wressetr.h" />
+    <ClInclude Include="sdk\rc\wres\h\write.h" />
+    <ClInclude Include="sdk\rc\wres\h\wrmergdi.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="dwarf\dw\c\dwlngen.c" />
+    <ClCompile Include="dwarf\dw\c\dwutils.c" />
+    <ClCompile Include="lib_misc\c\demangle.c" />
+    <ClCompile Include="orl\coff\c\coffentr.c" />
+    <ClCompile Include="orl\coff\c\coffflhn.c" />
+    <ClCompile Include="orl\coff\c\coffimpl.c" />
+    <ClCompile Include="orl\coff\c\coffload.c" />
+    <ClCompile Include="orl\coff\c\cofflwlv.c" />
+    <ClCompile Include="orl\c\orlentry.c" />
+    <ClCompile Include="orl\c\orlflhnd.c" />
+    <ClCompile Include="orl\c\orlhash.c" />
+    <ClCompile Include="orl\elf\c\elfentr.c" />
+    <ClCompile Include="orl\elf\c\elfflhn.c" />
+    <ClCompile Include="orl\elf\c\elfload.c" />
+    <ClCompile Include="orl\elf\c\elflwlv.c" />
+    <ClCompile Include="orl\omf\c\omfdrctv.c" />
+    <ClCompile Include="orl\omf\c\omfentr.c" />
+    <ClCompile Include="orl\omf\c\omfflhn.c" />
+    <ClCompile Include="orl\omf\c\omfload.c" />
+    <ClCompile Include="orl\omf\c\omfmunge.c" />
+    <ClCompile Include="pch.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\rc\c\exerespe.c" />
+    <ClCompile Include="sdk\rc\rc\c\rcstr.c" />
+    <ClCompile Include="sdk\rc\rc\c\sharedio.c" />
+    <ClCompile Include="sdk\rc\wres\c\layer0.c" />
+    <ClCompile Include="sdk\rc\wres\c\loadfind.c" />
+    <ClCompile Include="sdk\rc\wres\c\loadres.c" />
+    <ClCompile Include="sdk\rc\wres\c\loadstr.c" />
+    <ClCompile Include="sdk\rc\wres\c\mropnewf.c" />
+    <ClCompile Include="sdk\rc\wres\c\mrrdrh.c" />
+    <ClCompile Include="sdk\rc\wres\c\ralliae.c" />
+    <ClCompile Include="sdk\rc\wres\c\rclosef.c" />
+    <ClCompile Include="sdk\rc\wres\c\rdlli.c" />
+    <ClCompile Include="sdk\rc\wres\c\rduint16.c" />
+    <ClCompile Include="sdk\rc\wres\c\rduint32.c" />
+    <ClCompile Include="sdk\rc\wres\c\rduint8.c" />
+    <ClCompile Include="sdk\rc\wres\c\resaccel.c" />
+    <ClCompile Include="sdk\rc\wres\c\resbitmp.c" />
+    <ClCompile Include="sdk\rc\wres\c\resdiag.c" />
+    <ClCompile Include="sdk\rc\wres\c\resfont.c" />
+    <ClCompile Include="sdk\rc\wres\c\resiccu.c" />
+    <ClCompile Include="sdk\rc\wres\c\resmenu.c" />
+    <ClCompile Include="sdk\rc\wres\c\resnamor.c" />
+    <ClCompile Include="sdk\rc\wres\c\resraw.c" />
+    <ClCompile Include="sdk\rc\wres\c\resseek.c" />
+    <ClCompile Include="sdk\rc\wres\c\resstr.c" />
+    <ClCompile Include="sdk\rc\wres\c\restbar.c" />
+    <ClCompile Include="sdk\rc\wres\c\restell.c" />
+    <ClCompile Include="sdk\rc\wres\c\resver.c" />
+    <ClCompile Include="sdk\rc\wres\c\rillia.c" />
+    <ClCompile Include="sdk\rc\wres\c\rillib.c" />
+    <ClCompile Include="sdk\rc\wres\c\ropenfro.c" />
+    <ClCompile Include="sdk\rc\wres\c\ropenfrw.c" />
+    <ClCompile Include="sdk\rc\wres\c\rrdstr.c" />
+    <ClCompile Include="sdk\rc\wres\c\rrlli.c" />
+    <ClCompile Include="sdk\rc\wres\c\rrnamoor.c" />
+    <ClCompile Include="sdk\rc\wres\c\varstr.c" />
+    <ClCompile Include="sdk\rc\wres\c\wraddres.c" />
+    <ClCompile Include="sdk\rc\wres\c\wrauto.c" />
+    <ClCompile Include="sdk\rc\wres\c\wrchkwrf.c" />
+    <ClCompile Include="sdk\rc\wres\c\wrdelrs.c" />
+    <ClCompile Include="sdk\rc\wres\c\wrerror.c" />
+    <ClCompile Include="sdk\rc\wres\c\wresrtns.c" />
+    <ClCompile Include="sdk\rc\wres\c\wrfilein.c" />
+    <ClCompile Include="sdk\rc\wres\c\wrfindrs.c" />
+    <ClCompile Include="sdk\rc\wres\c\wrfirres.c" />
+    <ClCompile Include="sdk\rc\wres\c\wrfree.c" />
+    <ClCompile Include="sdk\rc\wres\c\wrfreedi.c" />
+    <ClCompile Include="sdk\rc\wres\c\wrgetli.c" />
+    <ClCompile Include="sdk\rc\wres\c\wrgetri.c" />
+    <ClCompile Include="sdk\rc\wres\c\wrgetti.c" />
+    <ClCompile Include="sdk\rc\wres\c\wrhidcmp.c" />
+    <ClCompile Include="sdk\rc\wres\c\wrhidexb.c" />
+    <ClCompile Include="sdk\rc\wres\c\wrhidfno.c" />
+    <ClCompile Include="sdk\rc\wres\c\wrhidfre.c" />
+    <ClCompile Include="sdk\rc\wres\c\wrhidfrn.c" />
+    <ClCompile Include="sdk\rc\wres\c\wrhidfrs.c" />
+    <ClCompile Include="sdk\rc\wres\c\wridcmp.c" />
+    <ClCompile Include="sdk\rc\wres\c\wridexby.c" />
+    <ClCompile Include="sdk\rc\wres\c\wridfnoo.c" />
+    <ClCompile Include="sdk\rc\wres\c\wridfree.c" />
+    <ClCompile Include="sdk\rc\wres\c\wridfrnu.c" />
+    <ClCompile Include="sdk\rc\wres\c\wridfrst.c" />
+    <ClCompile Include="sdk\rc\wres\c\wridnacm.c" />
+    <ClCompile Include="sdk\rc\wres\c\wridnfst.c" />
+    <ClCompile Include="sdk\rc\wres\c\wridtnoo.c" />
+    <ClCompile Include="sdk\rc\wres\c\wridtonu.c" />
+    <ClCompile Include="sdk\rc\wres\c\wridtost.c" />
+    <ClCompile Include="sdk\rc\wres\c\wrihidf.c" />
+    <ClCompile Include="sdk\rc\wres\c\wriidfn.c" />
+    <ClCompile Include="sdk\rc\wres\c\wrinitdi.c" />
+    <ClCompile Include="sdk\rc\wres\c\wrisempt.c" />
+    <ClCompile Include="sdk\rc\wres\c\wrislr.c" />
+    <ClCompile Include="sdk\rc\wres\c\wriswrf.c" />
+    <ClCompile Include="sdk\rc\wres\c\write.c" />
+    <ClCompile Include="sdk\rc\wres\c\wrmergdi.c" />
+    <ClCompile Include="sdk\rc\wres\c\wrnextrs.c" />
+    <ClCompile Include="sdk\rc\wres\c\wropnewf.c" />
+    <ClCompile Include="sdk\rc\wres\c\wrreaddi.c" />
+    <ClCompile Include="sdk\rc\wres\c\wrrewrid.c" />
+    <ClCompile Include="sdk\rc\wres\c\wrrfrr.c" />
+    <ClCompile Include="sdk\rc\wres\c\wrrftr.c" />
+    <ClCompile Include="sdk\rc\wres\c\wrrfwrid.c" />
+    <ClCompile Include="sdk\rc\wres\c\wrrhr.c" />
+    <ClCompile Include="sdk\rc\wres\c\wrrrr.c" />
+    <ClCompile Include="sdk\rc\wres\c\wrrtr.c" />
+    <ClCompile Include="sdk\rc\wres\c\wrrwrid.c" />
+    <ClCompile Include="sdk\rc\wres\c\wrrwridn.c" />
+    <ClCompile Include="sdk\rc\wres\c\wrwritdi.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="dwarf\dw\h\dwabenum.gh" />
+    <None Include="rcmsg.gh" />
+    <None Include="sdk\rc\rc\h\rc.msg" />
+    <None Include="sdk\rc\wres\c\mem2.x" />
+    <None Include="sdk\rc\wres\c\opcl.x" />
+    <None Include="sdk\rc\wres\c\read.x" />
+    <None Include="sdk\rc\wres\c\util.x" />
+    <None Include="sdk\rc\wres\c\wres.x" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

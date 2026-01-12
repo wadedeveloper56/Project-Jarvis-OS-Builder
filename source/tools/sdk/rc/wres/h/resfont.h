@@ -39,6 +39,8 @@
 #include "pushpck1.h"
 #endif
 
+#define _WCUNALIGNED
+
 typedef struct FontInfo {
     uint_16         dfVersion;
     uint_32         dfSize;

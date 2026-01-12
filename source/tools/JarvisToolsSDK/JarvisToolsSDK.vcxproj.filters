@@ -1,0 +1,769 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="framework.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dwarf\dw\h\dw.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dwarf\dw\h\dwabbrev.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dwarf\dw\h\dwabort.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dwarf\dw\h\dwarange.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dwarf\dw\h\dwassert.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dwarf\dw\h\dwcarve.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dwarf\dw\h\dwcnf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dwarf\dw\h\dwdecl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dwarf\dw\h\dwdie.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dwarf\dw\h\dwhandle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dwarf\dw\h\dwinfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dwarf\dw\h\dwline.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dwarf\dw\h\dwloc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dwarf\dw\h\dwmac.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dwarf\dw\h\dwmem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dwarf\dw\h\dwname.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dwarf\dw\h\dwpriv.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dwarf\dw\h\dwrefer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dwarf\dw\h\dwsym.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dwarf\dw\h\dwtype.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dwarf\dw\h\dwutils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dwarf\dw\h\testcli.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lib_misc\h\demangle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lib_misc\h\dm_pts.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="orl\coff\h\coffentr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="orl\coff\h\coffflhn.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="orl\coff\h\coffglbl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="orl\coff\h\coffhash.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="orl\coff\h\coffimpl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="orl\coff\h\coffload.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="orl\coff\h\cofflwlv.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="orl\coff\h\cofforl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="orl\coff\h\cofftype.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="orl\elf\h\elfentr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="orl\elf\h\elfflhn.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="orl\elf\h\elfglbl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="orl\elf\h\elfhash.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="orl\elf\h\elfload.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="orl\elf\h\elflwlv.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="orl\elf\h\elforl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="orl\elf\h\elftype.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="orl\h\orl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="orl\h\orlcomon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="orl\h\orlentry.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="orl\h\orlflhnd.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="orl\h\orlglobl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="orl\h\orlhash.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="orl\h\orlhshdf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="orl\h\orlintnl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="orl\h\orllevel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="orl\omf\h\omfdrctv.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="orl\omf\h\omfentr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="orl\omf\h\omfflhn.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="orl\omf\h\omfglbl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="orl\omf\h\omfload.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="orl\omf\h\omfmunge.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="orl\omf\h\omforl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="orl\omf\h\omftype.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\rc\h\dbtable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\rc\h\depend.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\rc\h\errors.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\rc\h\errprt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\rc\h\exelxobj.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\rc\h\exeobj.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\rc\h\exeres.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\rc\h\exereslx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\rc\h\exerespe.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\rc\h\exeseg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\rc\h\exeutil.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\rc\h\global.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\rc\h\iortns.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\rc\h\keyword.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\rc\h\keyword2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\rc\h\leadbyte.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\rc\h\os2res.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\rc\h\param.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\rc\h\pass2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\rc\h\rcalloc0.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\rc\h\rcalloc1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\rc\h\rcdll.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\rc\h\rcio.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\rc\h\rclayer0.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\rc\h\rcldstr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\rc\h\rcmem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\rc\h\rcmsg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\rc\h\rcstr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\rc\h\rctypes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\rc\h\scan.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\rc\h\scan2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\rc\h\semaccel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\rc\h\semantic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\rc\h\semdiag.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\rc\h\semhelp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\rc\h\semmenu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\rc\h\semraw.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\rc\h\semresfl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\rc\h\semsingl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\rc\h\semstr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\rc\h\semtbar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\rc\h\semutil.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\rc\h\semver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\rc\h\sharedio.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\rc\h\tmpctl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\rc\h\yydriver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\rc\h\yydrivr2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\wres\h\filefmt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\wres\h\layer0.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\wres\h\layer1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\wres\h\loadstr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\wres\h\mem2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\wres\h\mresfmt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\wres\h\opcl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\wres\h\read.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\wres\h\resaccel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\wres\h\resbitmp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\wres\h\resdiag.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\wres\h\reserr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\wres\h\resfmt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\wres\h\resfont.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\wres\h\resiccu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\wres\h\resmenu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\wres\h\resnamor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\wres\h\resraw.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\wres\h\resstr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\wres\h\restbar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\wres\h\resutil.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\wres\h\resver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\wres\h\util.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\wres\h\varstr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\wres\h\wres.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\wres\h\wresall.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\wres\h\wresrtns.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\wres\h\wressetr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\wres\h\write.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk\rc\wres\h\wrmergdi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="pch.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dwarf\dw\c\dwlngen.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dwarf\dw\c\dwutils.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lib_misc\c\demangle.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="orl\c\orlentry.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="orl\c\orlflhnd.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="orl\c\orlhash.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="orl\coff\c\coffentr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="orl\coff\c\coffflhn.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="orl\coff\c\coffimpl.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="orl\coff\c\coffload.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="orl\coff\c\cofflwlv.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="orl\elf\c\elfentr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="orl\elf\c\elfflhn.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="orl\elf\c\elfload.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="orl\elf\c\elflwlv.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="orl\omf\c\omfdrctv.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="orl\omf\c\omfentr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="orl\omf\c\omfflhn.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="orl\omf\c\omfload.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="orl\omf\c\omfmunge.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\rc\c\exerespe.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\rc\c\rcstr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\rc\c\sharedio.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\layer0.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\loadfind.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\loadres.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\loadstr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\mropnewf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\mrrdrh.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\ralliae.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\rclosef.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\rdlli.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\rduint8.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\rduint16.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\rduint32.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\resaccel.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\resbitmp.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\resdiag.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\resfont.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\resiccu.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\resmenu.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\resnamor.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\resraw.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\resseek.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\resstr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\restbar.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\restell.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\resver.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\rillia.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\rillib.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\ropenfro.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\ropenfrw.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\rrdstr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\rrlli.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\rrnamoor.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\varstr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\wraddres.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\wrauto.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\wrchkwrf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\wrdelrs.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\wrerror.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\wresrtns.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\wrfilein.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\wrfindrs.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\wrfirres.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\wrfree.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\wrfreedi.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\wrgetli.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\wrgetri.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\wrgetti.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\wrhidcmp.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\wrhidexb.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\wrhidfno.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\wrhidfre.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\wrhidfrn.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\wrhidfrs.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\wridcmp.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\wridexby.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\wridfnoo.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\wridfree.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\wridfrnu.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\wridfrst.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\wridnacm.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\wridnfst.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\wridtnoo.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\wridtonu.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\wridtost.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\wrihidf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\wriidfn.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\wrinitdi.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\wrisempt.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\wrislr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\wriswrf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\write.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\wrmergdi.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\wrnextrs.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\wropnewf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\wrreaddi.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\wrrewrid.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\wrrfrr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\wrrftr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\wrrfwrid.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\wrrhr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\wrrrr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\wrrtr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\wrrwrid.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\wrrwridn.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sdk\rc\wres\c\wrwritdi.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="dwarf\dw\h\dwabenum.gh" />
+    <None Include="sdk\rc\rc\h\rc.msg" />
+    <None Include="sdk\rc\wres\c\mem2.x" />
+    <None Include="sdk\rc\wres\c\opcl.x" />
+    <None Include="sdk\rc\wres\c\read.x" />
+    <None Include="sdk\rc\wres\c\util.x" />
+    <None Include="sdk\rc\wres\c\wres.x" />
+    <None Include="rcmsg.gh" />
+  </ItemGroup>
+</Project>

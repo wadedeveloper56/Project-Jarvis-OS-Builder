@@ -42,7 +42,7 @@ typedef SSIZE_T ssize_t;
 /* function */
 
 typedef int             WResFileID;
-
+typedef long off_t;
 struct WResRoutines {                                       /* defaults */
     /* I/O routines */
     WResFileID (*   open) (const char *, int, ...);         /* open */
