@@ -55,6 +55,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "JWlinkLib", "JWlinkLib\JWli
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Unit Test projects", "Unit Test projects", "{D3336FBB-9D43-4F80-9100-44BAAC64ECD5}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "yacc", "yacc\yacc\yacc.vcxproj", "{011F8461-3544-4664-BB9F-7906BBCB37CB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		All|x64 = All|x64
@@ -371,6 +373,22 @@ Global
 		{1054801F-1A40-4A7C-A7D1-303D2A64B79C}.Release|x64.Build.0 = Release|x64
 		{1054801F-1A40-4A7C-A7D1-303D2A64B79C}.Release|x86.ActiveCfg = Release|Win32
 		{1054801F-1A40-4A7C-A7D1-303D2A64B79C}.Release|x86.Build.0 = Release|Win32
+		{011F8461-3544-4664-BB9F-7906BBCB37CB}.All|x64.ActiveCfg = Debug|x64
+		{011F8461-3544-4664-BB9F-7906BBCB37CB}.All|x64.Build.0 = Debug|x64
+		{011F8461-3544-4664-BB9F-7906BBCB37CB}.All|x86.ActiveCfg = Debug|Win32
+		{011F8461-3544-4664-BB9F-7906BBCB37CB}.All|x86.Build.0 = Debug|Win32
+		{011F8461-3544-4664-BB9F-7906BBCB37CB}.Debug|x64.ActiveCfg = Debug|x64
+		{011F8461-3544-4664-BB9F-7906BBCB37CB}.Debug|x64.Build.0 = Debug|x64
+		{011F8461-3544-4664-BB9F-7906BBCB37CB}.Debug|x86.ActiveCfg = Debug|Win32
+		{011F8461-3544-4664-BB9F-7906BBCB37CB}.Debug|x86.Build.0 = Debug|Win32
+		{011F8461-3544-4664-BB9F-7906BBCB37CB}.DefaultBuild|x64.ActiveCfg = Release|x64
+		{011F8461-3544-4664-BB9F-7906BBCB37CB}.DefaultBuild|x64.Build.0 = Release|x64
+		{011F8461-3544-4664-BB9F-7906BBCB37CB}.DefaultBuild|x86.ActiveCfg = Release|Win32
+		{011F8461-3544-4664-BB9F-7906BBCB37CB}.DefaultBuild|x86.Build.0 = Release|Win32
+		{011F8461-3544-4664-BB9F-7906BBCB37CB}.Release|x64.ActiveCfg = Release|x64
+		{011F8461-3544-4664-BB9F-7906BBCB37CB}.Release|x64.Build.0 = Release|x64
+		{011F8461-3544-4664-BB9F-7906BBCB37CB}.Release|x86.ActiveCfg = Release|Win32
+		{011F8461-3544-4664-BB9F-7906BBCB37CB}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
