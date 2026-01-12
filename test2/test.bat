@@ -1,0 +1,1 @@
+C:\projects\OSDev\ProjectJarvis\bin\tools\Release\x64\yacc -b asiy -d -db -dd cansi.y yydriver.c
