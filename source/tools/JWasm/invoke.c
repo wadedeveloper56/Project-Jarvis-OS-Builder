@@ -8,9 +8,6 @@
 *
 ****************************************************************************/
 #include "pch.h"
-#include <ctype.h>
-#include <limits.h>
-
 #include "globals.h"
 #include "memalloc.h"
 #include "parser.h"

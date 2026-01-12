@@ -38,17 +38,9 @@
 #include <stdint.h>
 #include <errno.h> /* needed for errno declaration ( "sometimes" it's defined in stdlib.h ) */
 
-#pragma warning(disable:4267)  /* conversion from 'size_t' to 'type', possible loss of data */
-#pragma warning(disable:4018)  /* signed/unsigned mismatch */
-#pragma warning(disable:4244)  /* conversion from 'type1' to 'type2', possible loss of data */
-#pragma warning(disable:4311)  /* 'type cast': pointer truncation from 'type' to 'type' */
-#pragma warning(disable:4113)  /* incompatible parameter lists */
-#pragma warning(disable:4477)  /* 'format string' : too many arguments for format specifier */
-#pragma warning(disable:5287)  /* 'function' : function has no prototype */
-
 #if defined(__UNIX__) || defined(__CYGWIN__) || defined(__DJGPP__) /* avoid for MinGW! */
 
-//extern char * strupr(char *);
+extern char * strupr(char *);
 //#define _stricmp strcasecmp
 #ifndef __WATCOMC__
 #define _memicmp strncasecmp
@@ -58,11 +50,13 @@
 
 #elif defined(__POCC__)
 
-
+#pragma warn(disable:2030) /* disable '=' used in a conditional expression */
+#pragma warn(disable:2229) /* disable 'local x is potentially used without ...' */
+#pragma warn(disable:2231) /* disable 'enum value x not handled in switch statement' */
 
 #elif defined(__BORLANDC__) || defined(__OCC__)
 
-#define _stricmp  stricmp
+#define _stricmp  _stricmp
 #define _strnicmp strnicmp
 #define _strupr   strupr
 #define _memicmp  memicmp

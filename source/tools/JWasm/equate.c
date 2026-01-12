@@ -8,8 +8,6 @@
 *
 ****************************************************************************/
 #include "pch.h"
-#include <ctype.h>
-
 #include "globals.h"
 #include "memalloc.h"
 #include "parser.h"
@@ -22,15 +20,6 @@
 #include "input.h"
 #include "fixup.h"
 #include "myassert.h"
-
-#pragma warning(disable:4267)  /* conversion from 'size_t' to 'type', possible loss of data */
-#pragma warning(disable:4018)  /* signed/unsigned mismatch */
-#pragma warning(disable:4244)  /* conversion from 'type1' to 'type2', possible loss of data */
-#pragma warning(disable:4311)  /* 'type cast': pointer truncation from 'type' to 'type' */
-#pragma warning(disable:4113)  /* incompatible parameter lists */
-#pragma warning(disable:4477)  /* 'format string' : too many arguments for format specifier */
-#pragma warning(disable:5287)  /* 'function' : function has no prototype */
-
 
 extern void myatoi128( const char *, uint_64[], int, int );
 
@@ -397,7 +386,7 @@ struct asym *CreateConstant( struct asm_tok tokenarray[] )
          */
         myatoi128( tokenarray[2].string_ptr, &opnd.llvalue, tokenarray[2].numbase, tokenarray[2].itemlen );
     check_single_number:
-        opnd.instr = (enum special_token)EMPTY;
+        opnd.instr = EMPTY;
         opnd.kind = EXPR_CONST;
         opnd.mem_type = MT_EMPTY; /* v2.07: added */
         opnd.flags1 = 0;

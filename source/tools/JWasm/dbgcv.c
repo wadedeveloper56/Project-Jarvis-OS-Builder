@@ -8,8 +8,6 @@
 *
 ****************************************************************************/
 #include "pch.h"
-#include <stddef.h>
-
 #include "globals.h"
 #include "memalloc.h"
 #include "parser.h"
@@ -474,7 +472,7 @@ static void cv_write_type( struct dbgcv *cv, struct asym *sym )
 /*************************************************************/
 {
     struct dsym *type = (struct dsym *)sym;
-    uint_8      *tmp = NULL;
+    uint_8      *tmp=NULL;
     int         namesize;
     int         typelen;
     int         size;
@@ -542,7 +540,7 @@ static void cv_write_type( struct dbgcv *cv, struct asym *sym )
     count.ofs = 0;
     cv_enum_fields( type, cv_cntproc, cv, &count );
 
-    /* WinDbg wants embedded structs to have a name - else it won't allow to "open" it. */
+    /* WinDbg wants embedded structs to have a name - else it won't allow to "_open" it. */
     namesize = ( sym->name_size ? sym->name_size : 9 );  /* 9 is sizeof("__unnamed") */
 
     sym->cvtyperef = cv->currtype++;
@@ -668,9 +666,9 @@ static void cv_write_symbol( struct dbgcv *cv, struct asym *sym )
     unsigned   ofs;
     enum fixup_types rlctype;
     uint_8     Ofssize;
-    struct fixup *fixup = NULL;
-    struct dsym *proc = NULL;
-    struct dsym *lcl = NULL;
+    struct fixup *fixup=NULL;
+    struct dsym *proc=NULL;
+    struct dsym *lcl=NULL;
     int        i;
     int        cnt[2];
     struct     dsym *locals[2];

@@ -394,7 +394,7 @@ ret_code AssumeDirective( int i, struct asm_tok tokenarray[] )
         } else { /* segment register */
             struct expr opnd;
 
-            /* v2.08: read expression with standard evaluator */
+            /* v2.08: _read expression with standard evaluator */
             if( EvalOperand( &i, tokenarray, Token_Count, &opnd, 0 ) == ERROR )
                 return( ERROR );
             switch ( opnd.kind ) {

@@ -28,8 +28,6 @@
 *
 ****************************************************************************/
 #include "pch.h"
-#include <time.h>
-
 #include "globals.h"
 #include "memalloc.h"
 #include "parser.h"
@@ -42,8 +40,6 @@
 #include "types.h"
 #include "proc.h"
 #include "input.h"
-
-#pragma warning(disable:4477)  /* 'format string' : too many arguments for format specifier */
 
 #if defined(__WATCOMC__) && !defined(__FLAT__)
 #define HASH_MAGNITUDE 12  /* for 16bit model */
@@ -592,10 +588,10 @@ void SymFini( void )
 void SymInit( void )
 /******************/
 {
-    struct asym *sym = NULL;
+    struct asym *sym=NULL;
     int i;
     time_t    time_of_day;
-    struct tm *now = NULL;
+    struct tm *now;
 
     DebugMsg(("SymInit() enter\n"));
     SymCount = 0;

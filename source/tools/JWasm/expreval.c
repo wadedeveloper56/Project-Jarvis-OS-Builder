@@ -28,9 +28,6 @@
 *
 ****************************************************************************/
 #include "pch.h"
-#include <stddef.h>
-#include <ctype.h>
-
 #include "globals.h"
 #include "parser.h"
 #include "reswords.h"
@@ -43,15 +40,6 @@
 #include "label.h"
 #include "atofloat.h"
 #include "myassert.h"
-
-
-#pragma warning(disable:4267)  /* conversion from 'size_t' to 'type', possible loss of data */
-#pragma warning(disable:4018)  /* signed/unsigned mismatch */
-#pragma warning(disable:4244)  /* conversion from 'type1' to 'type2', possible loss of data */
-#pragma warning(disable:4311)  /* 'type cast': pointer truncation from 'type' to 'type' */
-#pragma warning(disable:4113)  /* incompatible parameter lists */
-#pragma warning(disable:4477)  /* 'format string' : too many arguments for format specifier */
-#pragma warning(disable:5287)  /* 'function' : function has no prototype */
 
 #define ALIAS_IN_EXPR 1 /* allow alias names in expression */
 
@@ -105,7 +93,7 @@ static void init_expr( struct expr *opnd )
     opnd->idx_reg  = NULL;
     opnd->label_tok = NULL;
     opnd->override = NULL;
-    opnd->instr    = (enum special_token)EMPTY;
+    opnd->instr    = EMPTY;
     opnd->kind     = EXPR_EMPTY;
     opnd->mem_type = MT_EMPTY;
     opnd->scale    = 0;
@@ -301,7 +289,7 @@ static uint_32 GetRecordMask( struct dsym *record )
     for ( fl = record->e.structinfo->head; fl; fl = fl->next ) {
         struct asym *sym = &fl->sym;
         for ( i = sym->offset ;i < sym->offset + sym->total_size; i++ )
-            mask |= (uint_64)(1) << i;
+            mask |= 1 << i;
     }
     return( mask );
 }
@@ -906,7 +894,7 @@ static void MakeConst( struct expr *opnd )
 #endif
     if( opnd->override != NULL )
         return;
-    opnd->instr = (enum special_token)EMPTY;
+    opnd->instr = EMPTY;
     opnd->kind = EXPR_CONST;
     //opnd->indirect = FALSE; /* not needed */
     opnd->explicit = FALSE;
@@ -1150,7 +1138,7 @@ static ret_code type_op( int oper, struct expr *opnd1, struct expr *opnd2, struc
      * will set opnd.memtype to MT_EMPTY.
      */
     if( opnd2->instr != EMPTY && opnd2->mem_type != MT_EMPTY ) {
-        opnd2->instr = (enum special_token)EMPTY;
+        opnd2->instr = EMPTY;
         sym = NULL;
     }
     if( opnd2->instr != EMPTY ) {
@@ -1684,7 +1672,36 @@ static ret_code wimask_op( int oper, struct expr *opnd1, struct expr *opnd2, str
 
 #define  res(token, function) function ,
 static ret_code (* const unaryop[])( int, struct expr *, struct expr *, struct asym *, char * ) = {
-#include "unaryop.h"
+//#include "unaryop.h"
+    /* table of unary operators, used in expreval.c */
+res(LOW,       low_op)
+res(HIGH,      high_op)
+res(LOWWORD,   lowword_op)
+res(HIGHWORD,  highword_op)
+#if LOHI32
+res(LOW32,     low32_op)
+res(HIGH32,    high32_op)
+#endif
+res(OFFSET,    offset_op)
+res(LROFFSET,  offset_op)
+#if IMAGERELSUPP
+res(IMAGEREL,  offset_op)
+#endif
+#if SECTIONRELSUPP
+res(SECTIONREL, offset_op)
+#endif
+res(SEG,       seg_op)
+res(OPATTR,    opattr_op)
+res(DOT_TYPE,  opattr_op)
+res(SIZE,      sizlen_op)
+res(SIZEOF,    sizlen_op)
+res(LENGTH,    sizlen_op)
+res(LENGTHOF,  sizlen_op)
+res(SHORT,     short_op)
+res(THIS,      this_op)
+res(TYPE,      type_op)
+res(MASK,      wimask_op)
+res(WIDTH,     wimask_op)
 };
 #undef res
 
@@ -1936,7 +1953,7 @@ static ret_code minus_op( struct expr *opnd1, struct expr *opnd2 )
             //if( opnd1->base_reg == NULL && opnd1->idx_reg == NULL ) { /* v2.09: just check 'indirect' */
             if( opnd1->indirect == FALSE ) {
                 if( opnd1->instr == T_OFFSET && opnd2->instr == T_OFFSET )
-                    opnd1->instr = (enum special_token)EMPTY;
+                    opnd1->instr = EMPTY;
                 //opnd1->indirect = FALSE; /* v2.09: not needed */
             } else {
                 DebugMsg1(("minus_op, exit, ADDR, base=%X, idx=%X\n", opnd1->base_reg, opnd1->idx_reg ));
@@ -3098,7 +3115,7 @@ static ret_code calculate( struct expr *opnd1, struct expr *opnd2, const struct 
     return( NOT_ERROR );
 }
 
-/* this code runs BEFORE the - right - operand of an operator is read */
+/* this code runs BEFORE the - right - operand of an operator is _read */
 
 static void PrepareOp( struct expr *opnd, const struct expr *old, const struct asm_tok *oper )
 /********************************************************************************************/
@@ -3195,7 +3212,7 @@ static ret_code evaluate( struct expr *opnd1, int *i, struct asm_tok tokenarray[
                    evallvl, tokenarray[curr_operator].string_ptr, opnd1->sym, (opnd1->type ? opnd1->type->name : "NULL") ));
 
         if ( opnd1->kind != EXPR_EMPTY ) {
-            /* check operator behind operand. Must be binary or open bracket */
+            /* check operator behind operand. Must be binary or _open bracket */
             if ( tokenarray[curr_operator].token == '+' || tokenarray[curr_operator].token == '-' )
                 tokenarray[curr_operator].specval = BINARY_PLUSMINUS;
             else if( !is_operator( tokenarray[curr_operator].token ) || tokenarray[curr_operator].token == T_UNARY_OPERATOR ) {
@@ -3213,7 +3230,7 @@ static ret_code evaluate( struct expr *opnd1, int *i, struct asm_tok tokenarray[
         init_expr( &opnd2 );
         PrepareOp( &opnd2, opnd1, &tokenarray[curr_operator] );
 
-        /* read the (next) operand.
+        /* _read the (next) operand.
          */
 
         if( tokenarray[curr_operator].token == T_OP_BRACKET ||

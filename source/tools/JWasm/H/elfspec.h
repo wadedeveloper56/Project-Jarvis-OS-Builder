@@ -207,7 +207,7 @@ typedef struct {
 #define SHT_OS          0x60000001      // info to identify target OS
 #define SHT_IMPORTS     0x60000002      // info on refs to external symbols
 #define SHT_EXPORTS     0x60000003      // info on symbols exported by ordinal
-#define SHT_RES         0x60000004      // read-only resource data.
+#define SHT_RES         0x60000004      // _read-only resource data.
 #define SHT_PROGFRAGS   0x60001001      // similar to SHT_PROGBITS
 #define SHT_IDMDLL      0x60001002      // symbol name demangling information
 #define SHT_DEFLIB      0x60001003      // default static libraries
@@ -224,7 +224,7 @@ typedef struct {
 #define SHT_OS_O        12              // info to identify target OS
 #define SHT_IMPORTS_O   13              // info on refs to external symbols
 #define SHT_EXPORTS_O   14              // info on symbols exported by ordinal
-#define SHT_RES_O       15              // read-only resource data.
+#define SHT_RES_O       15              // _read-only resource data.
 
 /* sh_flags values */
 
@@ -405,14 +405,14 @@ typedef struct {
 #define PT_SHLIB        5               // here be dragons
 #define PT_PHDR         6               // address of prog. header in mem (for interp.)
 #define PT_OS           0x60000001      // target os information
-#define PT_RES          0x60000002      // read-only resource information
+#define PT_RES          0x60000002      // _read-only resource information
 #define PT_LOPROC       0x70000000      // processor specific
 #define PT_HIPROC       0x7fffffff
 
 // Old segment types.  Readers should handle these, writers must use the above
 
 #define PT_OS_O         7       // target os information
-#define PT_RES_O        9       // read-only resource information
+#define PT_RES_O        9       // _read-only resource information
 
 // note entry format
 
@@ -517,7 +517,7 @@ typedef unsigned long INITTERM ( unsigned long modhandle, unsigned long flag );
 
 #define PF_X            0x1             // seg has execute permissions
 #define PF_W            0x2             // seg has write permissions
-#define PF_R            0x4             // seg has read permissions
+#define PF_R            0x4             // seg has _read permissions
 #define PF_S            0x01000000      // segment is shared.
 #define PF_MASKPROC     0xf0000000      // processor-specific flag mask
 
