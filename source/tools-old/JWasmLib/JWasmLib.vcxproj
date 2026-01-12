@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>18.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{fd8eeaf5-d96a-4978-9cb3-d573a9c0d4b1}</ProjectGuid>
+    <RootNamespace>JWasmLib</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>..\..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>..\..\..\bin\intermediate\JWasmLib\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>.\;..\JWasm\H;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>..\..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>..\..\..\bin\intermediate\JWasmLib\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>.\;..\JWasm\H;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>..\..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>..\..\..\bin\intermediate\JWasmLib\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>.\;..\JWasm\H;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>..\..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>..\..\..\bin\intermediate\JWasmLib\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>.\;..\JWasm\H;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>TRMEM;DEBUG_OUT;__NT__;_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>false</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <BrowseInformation>false</BrowseInformation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>TRMEM;DEBUG_OUT;__NT__;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>false</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <BrowseInformation>false</BrowseInformation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>TRMEM;DEBUG_OUT;__NT__;_CRT_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>false</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <BrowseInformation>false</BrowseInformation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>TRMEM;DEBUG_OUT;__NT__;_CRT_SECURE_NO_WARNINGS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>false</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <BrowseInformation>false</BrowseInformation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\JWasm\H\assume.h" />
+    <ClInclude Include="..\JWasm\H\atofloat.h" />
+    <ClInclude Include="..\JWasm\H\bin.h" />
+    <ClInclude Include="..\JWasm\H\bool.h" />
+    <ClInclude Include="..\JWasm\H\cmdline.h" />
+    <ClInclude Include="..\JWasm\H\codegen.h" />
+    <ClInclude Include="..\JWasm\H\coff.h" />
+    <ClInclude Include="..\JWasm\H\coffspec.h" />
+    <ClInclude Include="..\JWasm\H\condasm.h" />
+    <ClInclude Include="..\JWasm\H\context.h" />
+    <ClInclude Include="..\JWasm\H\cpumodel.h" />
+    <ClInclude Include="..\JWasm\H\data.h" />
+    <ClInclude Include="..\JWasm\H\dbgcv.h" />
+    <ClInclude Include="..\JWasm\H\dbgdw.h" />
+    <ClInclude Include="..\JWasm\H\directve.h" />
+    <ClInclude Include="..\JWasm\H\dirtype.h" />
+    <ClInclude Include="..\JWasm\H\elf.h" />
+    <ClInclude Include="..\JWasm\H\elfspec.h" />
+    <ClInclude Include="..\JWasm\H\equate.h" />
+    <ClInclude Include="..\JWasm\H\errmsg.h" />
+    <ClInclude Include="..\JWasm\H\expreval.h" />
+    <ClInclude Include="..\JWasm\H\extern.h" />
+    <ClInclude Include="..\JWasm\H\fastpass.h" />
+    <ClInclude Include="..\JWasm\H\fixup.h" />
+    <ClInclude Include="..\JWasm\H\fpfixup.h" />
+    <ClInclude Include="..\JWasm\H\globals.h" />
+    <ClInclude Include="..\JWasm\H\hll.h" />
+    <ClInclude Include="..\JWasm\H\input.h" />
+    <ClInclude Include="..\JWasm\H\instr64.h" />
+    <ClInclude Include="..\JWasm\H\instravx.h" />
+    <ClInclude Include="..\JWasm\H\instruct.h" />
+    <ClInclude Include="..\JWasm\H\inttype.h" />
+    <ClInclude Include="..\JWasm\H\label.h" />
+    <ClInclude Include="..\JWasm\H\linnum.h" />
+    <ClInclude Include="..\JWasm\H\listing.h" />
+    <ClInclude Include="..\JWasm\H\lqueue.h" />
+    <ClInclude Include="..\JWasm\H\ltext.h" />
+    <ClInclude Include="..\JWasm\H\macro.h" />
+    <ClInclude Include="..\JWasm\H\mangle.h" />
+    <ClInclude Include="..\JWasm\H\memalloc.h" />
+    <ClInclude Include="..\JWasm\H\msgdef.h" />
+    <ClInclude Include="..\JWasm\H\msgtext.h" />
+    <ClInclude Include="..\JWasm\H\myassert.h" />
+    <ClInclude Include="..\JWasm\H\omf.h" />
+    <ClInclude Include="..\JWasm\H\omfint.h" />
+    <ClInclude Include="..\JWasm\H\omfspec.h" />
+    <ClInclude Include="..\JWasm\H\operands.h" />
+    <ClInclude Include="..\JWasm\H\opndcls.h" />
+    <ClInclude Include="..\JWasm\H\parser.h" />
+    <ClInclude Include="..\JWasm\H\pespec.h" />
+    <ClInclude Include="..\JWasm\H\posndir.h" />
+    <ClInclude Include="..\JWasm\H\preproc.h" />
+    <ClInclude Include="..\JWasm\H\proc.h" />
+    <ClInclude Include="..\JWasm\H\queue.h" />
+    <ClInclude Include="..\JWasm\H\reswords.h" />
+    <ClInclude Include="..\JWasm\H\segattr.h" />
+    <ClInclude Include="..\JWasm\H\segment.h" />
+    <ClInclude Include="..\JWasm\H\special.h" />
+    <ClInclude Include="..\JWasm\H\symbols.h" />
+    <ClInclude Include="..\JWasm\H\tbyte.h" />
+    <ClInclude Include="..\JWasm\H\token.h" />
+    <ClInclude Include="..\JWasm\H\tokenize.h" />
+    <ClInclude Include="..\JWasm\H\trmem.h" />
+    <ClInclude Include="..\JWasm\H\types.h" />
+    <ClInclude Include="..\JWasm\H\unaryop.h" />
+    <ClInclude Include="..\JWasm\H\usage.h" />
+    <ClInclude Include="..\JWasm\H\win32.h" />
+    <ClInclude Include="..\JWasm\H\win64seh.h" />
+    <ClInclude Include="pch.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\JWasm\apiemu.c" />
+    <ClCompile Include="..\JWasm\assemble.c" />
+    <ClCompile Include="..\JWasm\assume.c" />
+    <ClCompile Include="..\JWasm\atofloat.c" />
+    <ClCompile Include="..\JWasm\backptch.c" />
+    <ClCompile Include="..\JWasm\bin.c" />
+    <ClCompile Include="..\JWasm\branch.c" />
+    <ClCompile Include="..\JWasm\cmdline.c" />
+    <ClCompile Include="..\JWasm\codegen.c" />
+    <ClCompile Include="..\JWasm\coff.c" />
+    <ClCompile Include="..\JWasm\condasm.c" />
+    <ClCompile Include="..\JWasm\context.c" />
+    <ClCompile Include="..\JWasm\cpumodel.c" />
+    <ClCompile Include="..\JWasm\data.c" />
+    <ClCompile Include="..\JWasm\dbgcv.c" />
+    <ClCompile Include="..\JWasm\directiv.c" />
+    <ClCompile Include="..\JWasm\elf.c" />
+    <ClCompile Include="..\JWasm\end.c" />
+    <ClCompile Include="..\JWasm\equate.c" />
+    <ClCompile Include="..\JWasm\errmsg.c" />
+    <ClCompile Include="..\JWasm\expans.c" />
+    <ClCompile Include="..\JWasm\expreval.c" />
+    <ClCompile Include="..\JWasm\extern.c" />
+    <ClCompile Include="..\JWasm\fastpass.c" />
+    <ClCompile Include="..\JWasm\fixup.c" />
+    <ClCompile Include="..\JWasm\fpfixup.c" />
+    <ClCompile Include="..\JWasm\hll.c" />
+    <ClCompile Include="..\JWasm\input.c" />
+    <ClCompile Include="..\JWasm\invoke.c" />
+    <ClCompile Include="..\JWasm\label.c" />
+    <ClCompile Include="..\JWasm\linnum.c" />
+    <ClCompile Include="..\JWasm\listing.c" />
+    <ClCompile Include="..\JWasm\loop.c" />
+    <ClCompile Include="..\JWasm\lqueue.c" />
+    <ClCompile Include="..\JWasm\macro.c" />
+    <ClCompile Include="..\JWasm\mangle.c" />
+    <ClCompile Include="..\JWasm\memalloc.c" />
+    <ClCompile Include="..\JWasm\msgtext.c" />
+    <ClCompile Include="..\JWasm\omf.c" />
+    <ClCompile Include="..\JWasm\omffixup.c" />
+    <ClCompile Include="..\JWasm\omfint.c" />
+    <ClCompile Include="..\JWasm\option.c" />
+    <ClCompile Include="..\JWasm\parser.c" />
+    <ClCompile Include="..\JWasm\posndir.c" />
+    <ClCompile Include="..\JWasm\preproc.c" />
+    <ClCompile Include="..\JWasm\proc.c" />
+    <ClCompile Include="..\JWasm\queue.c" />
+    <ClCompile Include="..\JWasm\reswords.c" />
+    <ClCompile Include="..\JWasm\safeseh.c" />
+    <ClCompile Include="..\JWasm\segment.c" />
+    <ClCompile Include="..\JWasm\simsegm.c" />
+    <ClCompile Include="..\JWasm\string.c" />
+    <ClCompile Include="..\JWasm\symbols.c" />
+    <ClCompile Include="..\JWasm\tbyte.c" />
+    <ClCompile Include="..\JWasm\tokenize.c" />
+    <ClCompile Include="..\JWasm\trmem.c" />
+    <ClCompile Include="..\JWasm\types.c" />
+    <ClCompile Include="pch.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

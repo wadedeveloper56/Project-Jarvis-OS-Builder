@@ -1,4 +1,0 @@
-BITS 32
-SECTION .data
-SECTION .bss
-SECTION .text

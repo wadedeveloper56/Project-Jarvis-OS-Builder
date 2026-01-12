@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="c\bitsets.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\buildpro.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\default.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\defshift.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\dont_opt.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\elimunit.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\fpopen.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\genfast.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\gensupp.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\gentable.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\getname.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\lalr1.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\lr0.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\parse.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\sentence.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\used.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\writeobj.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\yacc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="h\alloc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\yacc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="h\yaccins.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="h\ytabmac.inc">
+      <Filter>Header Files</Filter>
+    </None>
+  </ItemGroup>
+</Project>
