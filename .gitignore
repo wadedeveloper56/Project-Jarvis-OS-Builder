@@ -30,3 +30,5 @@
 /research/JWasm/TestResults
 /source/tools - Copy
 /source/tools-old/.vs
+/source/tools/out
+/source/tools/yacc/yacc/.vs
