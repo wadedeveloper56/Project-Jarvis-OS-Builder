@@ -28,8 +28,6 @@
 *
 ****************************************************************************/
 #include "pch.h"
-#include <ctype.h>
-
 #include "globals.h"
 #include "memalloc.h"
 #include "parser.h"
@@ -521,7 +519,7 @@ static void array_mul_add( unsigned char *buf, unsigned base, unsigned num, unsi
 }
 #endif
 
-/* read in a number.
+/* _read in a number.
  * check the number suffix:
  * b or y: base 2
  * d or t: base 10
@@ -532,8 +530,8 @@ static ret_code get_number( struct asm_tok *buf, struct line_status *p )
 /**********************************************************************/
 {
     char                *ptr = p->input;
-    char                *dig_start = NULL;
-    char                *dig_end = NULL;
+    char                *dig_start=NULL;
+    char                *dig_end=NULL;
     unsigned            base = 0;
     unsigned            len;
     uint_32             digits_seen;

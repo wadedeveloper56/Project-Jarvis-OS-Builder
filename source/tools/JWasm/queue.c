@@ -28,8 +28,6 @@
 *
 ****************************************************************************/
 #include "pch.h"
-#include <stddef.h>
-
 #include "memalloc.h"
 #include "queue.h"
 #include "myassert.h"

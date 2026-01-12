@@ -35,8 +35,6 @@
     Math operation is on 96-bit wide operands (mantisa).
 */
 #include "pch.h"
-#include <ctype.h>
-
 #include "globals.h"
 #include "tbyte.h"
 

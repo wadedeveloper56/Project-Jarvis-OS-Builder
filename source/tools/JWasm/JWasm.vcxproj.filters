@@ -15,6 +15,14 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="main.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H\pch.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
     <ClInclude Include="H\assume.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -219,187 +227,8 @@
     <ClInclude Include="H\win64seh.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="pch.h">
+    <ClInclude Include="H\pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="apiemu.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="assemble.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="assume.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="atofloat.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="backptch.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="bin.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="branch.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="cmdline.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="codegen.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="coff.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="condasm.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="context.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="cpumodel.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="data.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="dbgcv.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="directiv.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="elf.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="end.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="equate.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="errmsg.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="expans.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="expreval.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="extern.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="fastpass.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="fixup.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="fpfixup.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="hll.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="input.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="invoke.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="label.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="linnum.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="listing.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="loop.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="lqueue.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="macro.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="main.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="mangle.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="memalloc.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="msgtext.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="omf.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="omffixup.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="omfint.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="option.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="parser.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="posndir.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="preproc.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="proc.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="queue.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="reswords.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="safeseh.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="segment.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="simsegm.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="string.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="symbols.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="tbyte.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="tokenize.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="trmem.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="types.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="pch.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>

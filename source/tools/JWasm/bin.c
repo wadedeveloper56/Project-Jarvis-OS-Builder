@@ -112,12 +112,12 @@ enum pe_flags_values {
 
 #define hdrname ".hdr$"
 
-static const char hdrattr[]   = { "read public 'HDR'" };
+static const char hdrattr[]   = { "_read public 'HDR'" };
 static const char edataname[] = { ".edata" };
-static const char edataattr[] = { "FLAT read public alias('.rdata') 'DATA'" };
+static const char edataattr[] = { "FLAT _read public alias('.rdata') 'DATA'" };
 static const char idataname[] = { ".idata$" };
-//static const char idataattr[] = { "FLAT read public 'DATA'" };
-static const char idataattr[] = { "FLAT read public alias('.rdata') 'DATA'" };
+//static const char idataattr[] = { "FLAT _read public 'DATA'" };
+static const char idataattr[] = { "FLAT _read public alias('.rdata') 'DATA'" };
 
 static const char mzcode[] = {
     "db 'MZ'\0"           /* e_magic */
@@ -1241,9 +1241,9 @@ static void pe_set_values( struct calc_param *cp )
     struct dsym *pehdr;
     struct dsym *objtab;
     struct dsym *reloc = NULL;
-    struct IMAGE_PE_HEADER32 *ph32 = NULL;
+    struct IMAGE_PE_HEADER32 *ph32=NULL;
 #if AMD64_SUPPORT
-    struct IMAGE_PE_HEADER64 *ph64 = NULL;
+    struct IMAGE_PE_HEADER64 *ph64=NULL;
 #endif
     struct IMAGE_FILE_HEADER *fh;
     struct IMAGE_SECTION_HEADER *section;
@@ -1286,7 +1286,7 @@ static void pe_set_values( struct calc_param *cp )
     }
 
 
-    /* sort: header, executable, readable, read-write segments, resources, relocs */
+    /* sort: header, executable, readable, _read-write segments, resources, relocs */
     for ( i = 0; i < SIZE_PEFLAT; i++ ) {
         DebugMsg(("pe_set_values: searching segment types %Xh\n", flat_order[i] ));
         for( curr = SymTables[TAB_SEG].head; curr; curr = curr->next ) {
@@ -1519,7 +1519,7 @@ static ret_code bin_write_module( struct module_info *modinfo )
     uint_16 reloccnt;
     uint_32 sizemem;
     struct dsym *stack = NULL;
-    uint_8  *hdrbuf = NULL;
+    uint_8  *hdrbuf=NULL;
 #endif
     struct calc_param cp = { TRUE, 0 };
 

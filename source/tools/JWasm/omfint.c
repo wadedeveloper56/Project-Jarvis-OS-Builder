@@ -28,8 +28,6 @@
 *
 ****************************************************************************/
 #include "pch.h"
-#include <stddef.h>
-
 #include "globals.h"
 #include "omfint.h"
 #include "omfspec.h"

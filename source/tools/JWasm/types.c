@@ -8,8 +8,6 @@
 *
 ****************************************************************************/
 #include "pch.h"
-#include <ctype.h>
-
 #include "globals.h"
 #include "memalloc.h"
 #include "parser.h"
@@ -23,10 +21,6 @@
 #include "listing.h"
 #include "fastpass.h"
 #include "myassert.h"
-
-#pragma warning(disable:4267)  /* conversion from 'size_t' to 'type', possible loss of data */
-#pragma warning(disable:4018)  /* signed/unsigned mismatch */
-#pragma warning(disable:4244)  /* conversion from 'type1' to 'type2', possible loss of data */
 
 /* v2.04: changed to 0 */
 //#define ANYNAME 1 /* fixme: this probably should be changed to 0 */
@@ -310,7 +304,7 @@ ret_code StructDirective( int i, struct asm_tok tokenarray[] )
              */
             sym = CreateTypeSymbol( NULL, name, FALSE );
             /* v2: don't create the struct field here. First the
-             * structure must be read in ( because of alignment issues
+             * structure must be _read in ( because of alignment issues
              */
             // sym = CreateStructField( name_loc, -1, MT_TYPE, dir, 0 );
 
@@ -828,7 +822,7 @@ ret_code GetQualifiedType( int *pi, struct asm_tok tokenarray[], struct qualifie
      * 2. PTR NEARxx | FARxx
      * 3. NEARxx | FARxx PTR [<type>]
      */
-    /* read qualified type */
+    /* _read qualified type */
     for ( type = ERROR; tokenarray[i].token == T_STYPE || tokenarray[i].token == T_BINARY_OPERATOR; i++ ) {
         if ( tokenarray[i].token == T_STYPE ) {
             tmp = tokenarray[i].tokval;

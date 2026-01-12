@@ -7,9 +7,8 @@
 * Description:  Processing of PUSHCONTEXT and POPCONTEXT directives.
 *
 ****************************************************************************/
-#include "pch.h"
-#include <ctype.h>
 
+#include "pch.h"
 #include "globals.h"
 #include "memalloc.h"
 #include "parser.h"

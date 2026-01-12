@@ -23,7 +23,7 @@ struct equ_item {
 };
 
 /* line_item: used for a linked list of preprocessed lines. After SaveState()
- * has been called, all preprocessed lines are written in pass one and read
+ * has been called, all preprocessed lines are written in pass one and _read
  * in further passes
  */
 
@@ -60,10 +60,10 @@ struct mod_state {
 //extern struct mod_state modstate;
 extern bool StoreState; /* is 1 if states are to be stored in pass one */
 
-/* UseSavedState: is TRUE if preprocessed lines are to be read in pass 2,3,...
+/* UseSavedState: is TRUE if preprocessed lines are to be _read in pass 2,3,...
  * Currently, this flag is set DURING pass one! That's bad,
  * because it means that the flag itself doesn't tell whether
- * (preprocessed) lines are read.
+ * (preprocessed) lines are _read.
  * the fix proposal is: set the flag - conditionally - AFTER pass one.
  * Also, rename the flag (perhaps UseSavedLines )!
  */
