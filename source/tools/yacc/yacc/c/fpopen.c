@@ -32,8 +32,8 @@
 
 #include <string.h>
 #include <stdio.h>
-#include "..\..\watcom\h\walloca.h"
-#include "..\h\yacc.h"
+#include "walloca.h"
+#include "yacc.h"
 
 
 FILE *fpopen( char *path, char *name )

@@ -35,9 +35,9 @@
 #include <string.h>
 #include <assert.h>
 
-#include "..\h\yacc.h"
-#include "..\h\yaccins.h"
-#include "..\h\alloc.h"
+#include "yacc.h"
+#include "yaccins.h"
+#include "alloc.h"
 
 void MarkDefaultReductions( void )
 /********************************/

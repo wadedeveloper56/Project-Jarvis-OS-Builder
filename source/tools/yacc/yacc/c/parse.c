@@ -35,8 +35,8 @@
 #include <string.h>
 #include <stdlib.h>
 #include <ctype.h>
-#include "..\h\alloc.h"
-#include "..\h\yacc.h"
+#include "alloc.h"
+#include "yacc.h"
 
 #define BUF_INCR            500
 

@@ -36,8 +36,8 @@
 #include <string.h>
 #include <limits.h>
 #include <assert.h>
-#include "..\h\yacc.h"
-#include "..\h\alloc.h"
+#include "yacc.h"
+#include "alloc.h"
 
 enum {
     ACTION_REDUCE       = 0x8000,

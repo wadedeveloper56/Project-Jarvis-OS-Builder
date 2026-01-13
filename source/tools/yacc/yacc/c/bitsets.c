@@ -32,8 +32,8 @@
 
 #include <stdio.h>
 #include <limits.h>
-#include "..\h\yacc.h"
-#include "..\h\alloc.h"
+#include "yacc.h"
+#include "alloc.h"
 
 set_size *setmembers;
 

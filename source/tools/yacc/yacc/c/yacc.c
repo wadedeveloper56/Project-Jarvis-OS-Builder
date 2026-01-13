@@ -34,9 +34,9 @@
 #include <stdlib.h>
 #include <stdarg.h>
 #include <string.h>
-#include "..\h\yacc.h"
-#include "..\h\alloc.h"
-#include "..\..\watcom\h\walloca.h"
+#include "yacc.h"
+#include "alloc.h"
+#include "walloca.h"
 
 FILE *yaccin;
 char *loadpath;

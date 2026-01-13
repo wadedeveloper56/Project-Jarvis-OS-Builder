@@ -32,7 +32,7 @@
 
 
 #include <stdio.h>
-#include "..\..\watcom\h\bool.h"
+#include "bool.h"
 
 enum {
     TOKEN_EOF           = 0x0000,

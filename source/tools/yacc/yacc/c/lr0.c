@@ -33,8 +33,8 @@
 
 #include <stdlib.h>
 #include <string.h>
-#include "..\h\yacc.h"
-#include "..\h\alloc.h"
+#include "yacc.h"
+#include "alloc.h"
 
 index_n nbstate;
 index_n nstate;

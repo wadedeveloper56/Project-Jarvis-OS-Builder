@@ -34,8 +34,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
-#include "..\h\yacc.h"
-#include "..\h\alloc.h"
+#include "yacc.h"
+#include "alloc.h"
 
 unsigned long bytesused;
 

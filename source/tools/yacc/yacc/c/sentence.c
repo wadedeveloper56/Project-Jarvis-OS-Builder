@@ -34,9 +34,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "..\h\yacc.h"
-#include "..\h\yaccins.h"
-#include "..\h\alloc.h"
+#include "yacc.h"
+#include "yaccins.h"
+#include "alloc.h"
 
 typedef struct traceback traceback;
 struct traceback {

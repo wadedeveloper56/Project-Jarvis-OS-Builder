@@ -34,9 +34,9 @@
 #include <ctype.h>
 #include <string.h>
 
-#include "..\h\yacc.h"
-#include "..\h\yaccins.h"
-#include "..\h\alloc.h"
+#include "yacc.h"
+#include "yaccins.h"
+#include "alloc.h"
 
 unsigned keyword_id_low;
 unsigned keyword_id_high;

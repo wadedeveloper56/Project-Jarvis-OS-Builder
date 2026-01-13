@@ -34,7 +34,7 @@
 #include <ctype.h>
 #include <string.h>
 
-#include "..\h\yacc.h"
+#include "yacc.h"
 
 void FindUnused( void )
 {

@@ -32,7 +32,7 @@
 
 
 #include <string.h>
-#include "..\h\yacc.h"
+#include "yacc.h"
 
 
 char *getname( char *qualname )

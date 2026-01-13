@@ -36,8 +36,8 @@
 #include <stdlib.h>
 #include <limits.h>
 #include <string.h>
-#include "..\h\yacc.h"
-#include "..\h\alloc.h"
+#include "yacc.h"
+#include "alloc.h"
 
 #define INFINITY        (unsigned short)-1
 
