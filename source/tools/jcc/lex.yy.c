@@ -1068,539 +1068,539 @@ YY_RULE_SETUP
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 42 "cansi.l"
+#line 41 "cansi.l"
 { return(AUTO); }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 43 "cansi.l"
+#line 42 "cansi.l"
 { return(BREAK); }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 44 "cansi.l"
+#line 43 "cansi.l"
 { return(CASE); }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 45 "cansi.l"
+#line 44 "cansi.l"
 { return(CHAR); }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 46 "cansi.l"
+#line 45 "cansi.l"
 { return(CONST); }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 47 "cansi.l"
+#line 46 "cansi.l"
 { return(CONTINUE); }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 48 "cansi.l"
+#line 47 "cansi.l"
 { return(DEFAULT); }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 49 "cansi.l"
+#line 48 "cansi.l"
 { return(DO); }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 50 "cansi.l"
+#line 49 "cansi.l"
 { return(DOUBLE); }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 51 "cansi.l"
+#line 50 "cansi.l"
 { return(LONG_DOUBLE); }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 52 "cansi.l"
+#line 51 "cansi.l"
 { return(ELSE); }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 53 "cansi.l"
+#line 52 "cansi.l"
 { return(ENUM); }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 54 "cansi.l"
+#line 53 "cansi.l"
 { return(EXTERN); }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 55 "cansi.l"
+#line 54 "cansi.l"
 { return(FLOAT); }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 56 "cansi.l"
+#line 55 "cansi.l"
 { return(FOR); }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 57 "cansi.l"
+#line 56 "cansi.l"
 { return(GOTO); }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 58 "cansi.l"
+#line 57 "cansi.l"
 { return(IF); }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 59 "cansi.l"
+#line 58 "cansi.l"
 { return(INLINE); }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 60 "cansi.l"
+#line 59 "cansi.l"
 { return(INT); }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 61 "cansi.l"
+#line 60 "cansi.l"
 { return(LONG); }
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 62 "cansi.l"
+#line 61 "cansi.l"
 { return(REGISTER); }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 63 "cansi.l"
+#line 62 "cansi.l"
 { return(RESTRICT); }
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 64 "cansi.l"
+#line 63 "cansi.l"
 { return(RETURN); }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 65 "cansi.l"
+#line 64 "cansi.l"
 { return(SHORT); }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 66 "cansi.l"
+#line 65 "cansi.l"
 { return(SIGNED); }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 67 "cansi.l"
+#line 66 "cansi.l"
 { return(SIZEOF); }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 68 "cansi.l"
+#line 67 "cansi.l"
 { return(STATIC); }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 69 "cansi.l"
+#line 68 "cansi.l"
 { return(STRUCT); }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 70 "cansi.l"
+#line 69 "cansi.l"
 { return(SWITCH); }
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 71 "cansi.l"
+#line 70 "cansi.l"
 { return(TYPEDEF); }
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 72 "cansi.l"
+#line 71 "cansi.l"
 { return(UNION); }
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 73 "cansi.l"
+#line 72 "cansi.l"
 { return(UNSIGNED); }
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 74 "cansi.l"
+#line 73 "cansi.l"
 { return(VOID); }
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 75 "cansi.l"
+#line 74 "cansi.l"
 { return(VOLATILE); }
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 76 "cansi.l"
+#line 75 "cansi.l"
 { return(WHILE); }
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 77 "cansi.l"
+#line 76 "cansi.l"
 { return ALIGNAS; }
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 78 "cansi.l"
+#line 77 "cansi.l"
 { return ALIGNOF; }
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 79 "cansi.l"
+#line 78 "cansi.l"
 { return ATOMIC; }
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 80 "cansi.l"
+#line 79 "cansi.l"
 { return BOOL; }
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 81 "cansi.l"
+#line 80 "cansi.l"
 { return COMPLEX; }
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 82 "cansi.l"
+#line 81 "cansi.l"
 { return GENERIC; }
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 83 "cansi.l"
+#line 82 "cansi.l"
 { return IMAGINARY; }
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 84 "cansi.l"
+#line 83 "cansi.l"
 { return NORETURN; }
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 85 "cansi.l"
+#line 84 "cansi.l"
 { return STATIC_ASSERT; }
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 86 "cansi.l"
+#line 85 "cansi.l"
 { return THREAD_LOCAL; }
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 87 "cansi.l"
+#line 86 "cansi.l"
 { return FUNC_NAME; }
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 89 "cansi.l"
+#line 87 "cansi.l"
 { return check_type(); }
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 91 "cansi.l"
+#line 88 "cansi.l"
 { return I_CONSTANT; }
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
-#line 92 "cansi.l"
+#line 89 "cansi.l"
 { return I_CONSTANT; }
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 93 "cansi.l"
+#line 90 "cansi.l"
 { return I_CONSTANT; }
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
-#line 94 "cansi.l"
+#line 91 "cansi.l"
 { return I_CONSTANT; }
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
-#line 96 "cansi.l"
+#line 92 "cansi.l"
 { return F_CONSTANT; }
 	YY_BREAK
 case 55:
 YY_RULE_SETUP
-#line 97 "cansi.l"
+#line 93 "cansi.l"
 { return F_CONSTANT; }
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
-#line 98 "cansi.l"
+#line 94 "cansi.l"
 { return F_CONSTANT; }
 	YY_BREAK
 case 57:
 YY_RULE_SETUP
-#line 99 "cansi.l"
+#line 95 "cansi.l"
 { return F_CONSTANT; }
 	YY_BREAK
 case 58:
 YY_RULE_SETUP
-#line 100 "cansi.l"
+#line 96 "cansi.l"
 { return F_CONSTANT; }
 	YY_BREAK
 case 59:
 YY_RULE_SETUP
-#line 101 "cansi.l"
+#line 97 "cansi.l"
 { return F_CONSTANT; }
 	YY_BREAK
 case 60:
 /* rule 60 can match eol */
 YY_RULE_SETUP
-#line 103 "cansi.l"
+#line 98 "cansi.l"
 { return STRING_LITERAL; }
 	YY_BREAK
 case 61:
 YY_RULE_SETUP
-#line 105 "cansi.l"
+#line 99 "cansi.l"
 { return ELLIPSIS; }
 	YY_BREAK
 case 62:
 YY_RULE_SETUP
-#line 106 "cansi.l"
+#line 100 "cansi.l"
 { return RIGHT_ASSIGN; }
 	YY_BREAK
 case 63:
 YY_RULE_SETUP
-#line 107 "cansi.l"
+#line 101 "cansi.l"
 { return LEFT_ASSIGN; }
 	YY_BREAK
 case 64:
 YY_RULE_SETUP
-#line 108 "cansi.l"
+#line 102 "cansi.l"
 { return ADD_ASSIGN; }
 	YY_BREAK
 case 65:
 YY_RULE_SETUP
-#line 109 "cansi.l"
+#line 103 "cansi.l"
 { return SUB_ASSIGN; }
 	YY_BREAK
 case 66:
 YY_RULE_SETUP
-#line 110 "cansi.l"
+#line 104 "cansi.l"
 { return MUL_ASSIGN; }
 	YY_BREAK
 case 67:
 YY_RULE_SETUP
-#line 111 "cansi.l"
+#line 105 "cansi.l"
 { return DIV_ASSIGN; }
 	YY_BREAK
 case 68:
 YY_RULE_SETUP
-#line 112 "cansi.l"
+#line 106 "cansi.l"
 { return MOD_ASSIGN; }
 	YY_BREAK
 case 69:
 YY_RULE_SETUP
-#line 113 "cansi.l"
+#line 107 "cansi.l"
 { return AND_ASSIGN; }
 	YY_BREAK
 case 70:
 YY_RULE_SETUP
-#line 114 "cansi.l"
+#line 108 "cansi.l"
 { return XOR_ASSIGN; }
 	YY_BREAK
 case 71:
 YY_RULE_SETUP
-#line 115 "cansi.l"
+#line 109 "cansi.l"
 { return OR_ASSIGN; }
 	YY_BREAK
 case 72:
 YY_RULE_SETUP
-#line 116 "cansi.l"
+#line 110 "cansi.l"
 { return RIGHT_OP; }
 	YY_BREAK
 case 73:
 YY_RULE_SETUP
-#line 117 "cansi.l"
+#line 111 "cansi.l"
 { return LEFT_OP; }
 	YY_BREAK
 case 74:
 YY_RULE_SETUP
-#line 118 "cansi.l"
+#line 112 "cansi.l"
 { return INC_OP; }
 	YY_BREAK
 case 75:
 YY_RULE_SETUP
-#line 119 "cansi.l"
+#line 113 "cansi.l"
 { return DEC_OP; }
 	YY_BREAK
 case 76:
 YY_RULE_SETUP
-#line 120 "cansi.l"
+#line 114 "cansi.l"
 { return PTR_OP; }
 	YY_BREAK
 case 77:
 YY_RULE_SETUP
-#line 121 "cansi.l"
+#line 115 "cansi.l"
 { return AND_OP; }
 	YY_BREAK
 case 78:
 YY_RULE_SETUP
-#line 122 "cansi.l"
+#line 116 "cansi.l"
 { return OR_OP; }
 	YY_BREAK
 case 79:
 YY_RULE_SETUP
-#line 123 "cansi.l"
+#line 117 "cansi.l"
 { return LE_OP; }
 	YY_BREAK
 case 80:
 YY_RULE_SETUP
-#line 124 "cansi.l"
+#line 118 "cansi.l"
 { return GE_OP; }
 	YY_BREAK
 case 81:
 YY_RULE_SETUP
-#line 125 "cansi.l"
+#line 119 "cansi.l"
 { return EQ_OP; }
 	YY_BREAK
 case 82:
 YY_RULE_SETUP
-#line 126 "cansi.l"
+#line 120 "cansi.l"
 { return NE_OP; }
 	YY_BREAK
 case 83:
 YY_RULE_SETUP
-#line 127 "cansi.l"
+#line 121 "cansi.l"
 { return ';'; }
 	YY_BREAK
 case 84:
 YY_RULE_SETUP
-#line 128 "cansi.l"
+#line 122 "cansi.l"
 { return '{'; }
 	YY_BREAK
 case 85:
 YY_RULE_SETUP
-#line 129 "cansi.l"
+#line 123 "cansi.l"
 { return '}'; }
 	YY_BREAK
 case 86:
 YY_RULE_SETUP
-#line 130 "cansi.l"
+#line 124 "cansi.l"
 { return ','; }
 	YY_BREAK
 case 87:
 YY_RULE_SETUP
-#line 131 "cansi.l"
+#line 125 "cansi.l"
 { return ':'; }
 	YY_BREAK
 case 88:
 YY_RULE_SETUP
-#line 132 "cansi.l"
+#line 126 "cansi.l"
 { return '='; }
 	YY_BREAK
 case 89:
 YY_RULE_SETUP
-#line 133 "cansi.l"
+#line 127 "cansi.l"
 { return '('; }
 	YY_BREAK
 case 90:
 YY_RULE_SETUP
-#line 134 "cansi.l"
+#line 128 "cansi.l"
 { return ')'; }
 	YY_BREAK
 case 91:
 YY_RULE_SETUP
-#line 135 "cansi.l"
+#line 129 "cansi.l"
 { return '['; }
 	YY_BREAK
 case 92:
 YY_RULE_SETUP
-#line 136 "cansi.l"
+#line 130 "cansi.l"
 { return ']'; }
 	YY_BREAK
 case 93:
 YY_RULE_SETUP
-#line 137 "cansi.l"
+#line 131 "cansi.l"
 { return '.'; }
 	YY_BREAK
 case 94:
 YY_RULE_SETUP
-#line 138 "cansi.l"
+#line 132 "cansi.l"
 { return '&'; }
 	YY_BREAK
 case 95:
 YY_RULE_SETUP
-#line 139 "cansi.l"
+#line 133 "cansi.l"
 { return '!'; }
 	YY_BREAK
 case 96:
 YY_RULE_SETUP
-#line 140 "cansi.l"
+#line 134 "cansi.l"
 { return '~'; }
 	YY_BREAK
 case 97:
 YY_RULE_SETUP
-#line 141 "cansi.l"
+#line 135 "cansi.l"
 { return '-'; }
 	YY_BREAK
 case 98:
 YY_RULE_SETUP
-#line 142 "cansi.l"
+#line 136 "cansi.l"
 { return '+'; }
 	YY_BREAK
 case 99:
 YY_RULE_SETUP
-#line 143 "cansi.l"
+#line 137 "cansi.l"
 { return '*'; }
 	YY_BREAK
 case 100:
 YY_RULE_SETUP
-#line 144 "cansi.l"
+#line 138 "cansi.l"
 { return '/'; }
 	YY_BREAK
 case 101:
 YY_RULE_SETUP
-#line 145 "cansi.l"
+#line 139 "cansi.l"
 { return '%'; }
 	YY_BREAK
 case 102:
 YY_RULE_SETUP
-#line 146 "cansi.l"
+#line 140 "cansi.l"
 { return '<'; }
 	YY_BREAK
 case 103:
 YY_RULE_SETUP
-#line 147 "cansi.l"
+#line 141 "cansi.l"
 { return '>'; }
 	YY_BREAK
 case 104:
 YY_RULE_SETUP
-#line 148 "cansi.l"
+#line 142 "cansi.l"
 { return '^'; }
 	YY_BREAK
 case 105:
 YY_RULE_SETUP
-#line 149 "cansi.l"
+#line 143 "cansi.l"
 { return '|'; }
 	YY_BREAK
 case 106:
 YY_RULE_SETUP
-#line 150 "cansi.l"
+#line 144 "cansi.l"
 { return '?'; }
 	YY_BREAK
 case 107:
 /* rule 107 can match eol */
 YY_RULE_SETUP
-#line 152 "cansi.l"
+#line 146 "cansi.l"
 { /* whitespace separates tokens */ }
 	YY_BREAK
 case 108:
 YY_RULE_SETUP
-#line 153 "cansi.l"
+#line 147 "cansi.l"
 { /* discard bad characters */ }
 	YY_BREAK
 case 109:
 YY_RULE_SETUP
-#line 155 "cansi.l"
+#line 149 "cansi.l"
 ECHO;
 	YY_BREAK
 #line 1606 "lex.yy.c"
@@ -2608,7 +2608,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 155 "cansi.l"
+#line 149 "cansi.l"
 
 
 int yywrap(void)        /* called at end of input */
@@ -2647,3 +2647,4 @@ static int check_type(void)
         return IDENTIFIER;
     }
 }
+

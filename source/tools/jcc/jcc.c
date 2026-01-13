@@ -6,5 +6,6 @@ extern FILE* yyin;
 int main()
 {
 	yyin = NULL;
+	yyparse();
 	return 0;
 }
