@@ -1,9 +1,19 @@
-D			[0-9]
-L			[a-zA-Z_]
-H			[a-fA-F0-9]
-E			[Ee][+-]?{D}+
-FS			(f|F|l|L)
-IS			(u|U|l|L)*
+O   [0-7]
+D   [0-9]
+NZ  [1-9]
+L   [a-zA-Z_]
+A   [a-zA-Z_0-9]
+H   [a-fA-F0-9]
+HP  (0[xX])
+E   ([Ee][+-]?{D}+)
+P   ([Pp][+-]?{D}+)
+FS  (f|F|l|L)
+IS  (((u|U)(l|L|ll|LL)?)|((l|L|ll|LL)(u|U)?))
+CP  (u|U|L)
+SP  (u8|u|U|L)
+ES  (\\(['"\?\\abfnrtv]|[0-7]{1,3}|x[a-fA-F0-9]+))
+WS  [ \t\v\n\f]
+
 
 %{
 #include <stdio.h>
@@ -332,52 +342,52 @@ void count();
                }
 {L}{A}*        { 
                 count();
-                return WadeSpace::Parser::make_IDENTIFIER(yytext, WadeSpace::location()); 
+                return(IDENTIFIER); 
                }
 {HP}{H}+{IS}?  {
                 count();
-                return WadeSpace::Parser::make_I_CONST(number, WadeSpace::location());
+                return(I_CONST);
                }
 {NZ}{D}*{IS}?  {
                 count();
-                return WadeSpace::Parser::make_I_CONST(number, WadeSpace::location());
+                return(I_CONST);
                }
 "0"{O}*{IS}?   {
                 count();
-                return WadeSpace::Parser::make_I_CONST(number, WadeSpace::location());
+                return(I_CONST);
                }
 {CP}?"'"([^'\\\n]|{ES})+"'"  {
                 count();
-                return WadeSpace::Parser::make_I_CONST(number, WadeSpace::location());
+                return(I_CONST);
                }
 {D}+{E}{FS}?  {              
                 count();
-                return WadeSpace::Parser::make_F_CONST(number, WadeSpace::location());
+                return(F_CONST);
                }
 {D}*"."{D}+{E}?{FS}? {              
                 count();
-                return WadeSpace::Parser::make_F_CONST(number, WadeSpace::location());
+                return(F_CONST);
                }
 {D}+"."{E}?{FS}? {              
                 count();
-                return WadeSpace::Parser::make_F_CONST(number, WadeSpace::location());
+                return(F_CONST);
                }
 {HP}{H}+{P}{FS}? {              
                 count();
-                return WadeSpace::Parser::make_F_CONST(number, WadeSpace::location());
+                return(F_CONST);
                }
 {HP}{H}*"."{H}+{P}{FS}? {              
                 count();
-                return WadeSpace::Parser::make_F_CONST(number, WadeSpace::location());
+                return(F_CONST);
                }
 {HP}{H}+"."{P}{FS}? {              
                 count();
-                return WadeSpace::Parser::make_F_CONST(number, WadeSpace::location());
+                return(F_CONST);
                }
 
 ({SP}?\"([^"\\\n]|{ES})*\"{WS}*)+   { 
                 count();
-                return WadeSpace::Parser::make_STRING_LITERAL(yytext, WadeSpace::location()); 
+                return(STRING_LITERAL); 
                }               
 [ \t\v\n\f]		        { count(); }
 .			            { /* ignore bad characters */ }
