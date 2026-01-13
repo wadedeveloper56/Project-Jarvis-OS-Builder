@@ -48,6 +48,7 @@ static int check_type(void);
 "default"				{ return(DEFAULT); }
 "do"					{ return(DO); }
 "double"				{ return(DOUBLE); }
+"long double"			{ return(LONG_DOUBLE); }
 "else"					{ return(ELSE); }
 "enum"					{ return(ENUM); }
 "extern"				{ return(EXTERN); }

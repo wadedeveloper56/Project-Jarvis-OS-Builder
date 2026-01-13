@@ -101,32 +101,33 @@ extern int yydebug;
     UNSIGNED = 302,                /* UNSIGNED  */
     FLOAT = 303,                   /* FLOAT  */
     DOUBLE = 304,                  /* DOUBLE  */
-    VOID = 305,                    /* VOID  */
-    COMPLEX = 306,                 /* COMPLEX  */
-    IMAGINARY = 307,               /* IMAGINARY  */
-    STRUCT = 308,                  /* STRUCT  */
-    UNION = 309,                   /* UNION  */
-    ENUM = 310,                    /* ENUM  */
-    ELLIPSIS = 311,                /* ELLIPSIS  */
-    CASE = 312,                    /* CASE  */
-    DEFAULT = 313,                 /* DEFAULT  */
-    IF = 314,                      /* IF  */
-    ELSE = 315,                    /* ELSE  */
-    SWITCH = 316,                  /* SWITCH  */
-    WHILE = 317,                   /* WHILE  */
-    DO = 318,                      /* DO  */
-    FOR = 319,                     /* FOR  */
-    GOTO = 320,                    /* GOTO  */
-    CONTINUE = 321,                /* CONTINUE  */
-    BREAK = 322,                   /* BREAK  */
-    RETURN = 323,                  /* RETURN  */
-    ALIGNAS = 324,                 /* ALIGNAS  */
-    ALIGNOF = 325,                 /* ALIGNOF  */
-    ATOMIC = 326,                  /* ATOMIC  */
-    GENERIC = 327,                 /* GENERIC  */
-    NORETURN = 328,                /* NORETURN  */
-    STATIC_ASSERT = 329,           /* STATIC_ASSERT  */
-    THREAD_LOCAL = 330             /* THREAD_LOCAL  */
+    LONG_DOUBLE = 305,             /* LONG_DOUBLE  */
+    VOID = 306,                    /* VOID  */
+    COMPLEX = 307,                 /* COMPLEX  */
+    IMAGINARY = 308,               /* IMAGINARY  */
+    STRUCT = 309,                  /* STRUCT  */
+    UNION = 310,                   /* UNION  */
+    ENUM = 311,                    /* ENUM  */
+    ELLIPSIS = 312,                /* ELLIPSIS  */
+    CASE = 313,                    /* CASE  */
+    DEFAULT = 314,                 /* DEFAULT  */
+    IF = 315,                      /* IF  */
+    ELSE = 316,                    /* ELSE  */
+    SWITCH = 317,                  /* SWITCH  */
+    WHILE = 318,                   /* WHILE  */
+    DO = 319,                      /* DO  */
+    FOR = 320,                     /* FOR  */
+    GOTO = 321,                    /* GOTO  */
+    CONTINUE = 322,                /* CONTINUE  */
+    BREAK = 323,                   /* BREAK  */
+    RETURN = 324,                  /* RETURN  */
+    ALIGNAS = 325,                 /* ALIGNAS  */
+    ALIGNOF = 326,                 /* ALIGNOF  */
+    ATOMIC = 327,                  /* ATOMIC  */
+    GENERIC = 328,                 /* GENERIC  */
+    NORETURN = 329,                /* NORETURN  */
+    STATIC_ASSERT = 330,           /* STATIC_ASSERT  */
+    THREAD_LOCAL = 331             /* THREAD_LOCAL  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -142,7 +143,7 @@ union YYSTYPE
     long long longlong;
     long double longdouble;
 
-#line 146 "cansi.tab.h"
+#line 147 "cansi.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
