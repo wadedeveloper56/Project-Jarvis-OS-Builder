@@ -2,6 +2,7 @@
 *
 *                            Open Watcom Project
 *
+* Copyright (c) 2002-2025 The Open Watcom Contributors. All Rights Reserved.
 *    Portions Copyright (c) 1983-2002 Sybase, Inc. All Rights Reserved.
 *
 *  ========================================================================
@@ -30,10 +31,19 @@
 
 
 #ifndef _EXEDOS_H
+#define _EXEDOS_H
+
+#include "exesigns.h"
+
 
 /* DOS EXE file header */
 /* =================== */
 
+#define DOS_RELOC_OFFSET        0x0018L
+#define NE_HEADER_OFFSET        0x003cL
+#define NE_HEADER_FOLLOWS(x)    ((x) >= 0x0040) /* reloc table offset 0x40 */
+
+#include "pushpck1.h"
 typedef struct dos_exe_header {
     unsigned_16         signature;      /* signature to mark valid EXE file */
     unsigned_16         mod_size;       /* length of image mod 512          */
@@ -50,9 +60,6 @@ typedef struct dos_exe_header {
     unsigned_16         reloc_offset;   /* offset to 1st relocation item    */
     unsigned_16         overlay_num;    /* overlay number (0 if resident)   */
 } dos_exe_header;
+#include "poppck.h"
 
-#define DOS_SIGNATURE   0x5a4d
-#define NH_OFFSET       0x003c
-
-#define _EXEDOS_H
 #endif

@@ -76,12 +76,14 @@
     <IntDir>..\..\..\bin\intermediate\Compiler\$(Configuration)\$(Platform)\</IntDir>
     <LibraryPath>$(LibraryPath)</LibraryPath>
     <IncludePath>..\Arguments;..\PreProcessor;C:\flex-bison;$(IncludePath)</IncludePath>
+    <CustomBuildBeforeTargets />
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>..\..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\bin\intermediate\Compiler\$(Configuration)\$(Platform)\</IntDir>
     <LibraryPath>$(LibraryPath)</LibraryPath>
     <IncludePath>..\Arguments;..\PreProcessor;C:\flex-bison;$(IncludePath)</IncludePath>
+    <CustomBuildBeforeTargets />
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>..\..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
@@ -89,6 +91,7 @@
     <LibraryPath>$(LibraryPath)</LibraryPath>
     <IncludePath>..\Arguments;..\PreProcessor;C:\flex-bison;$(IncludePath)</IncludePath>
     <LinkIncremental>true</LinkIncremental>
+    <CustomBuildBeforeTargets />
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>..\..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
@@ -97,6 +100,7 @@
     <IncludePath>..\Arguments;..\PreProcessor;C:\flex-bison;$(IncludePath)</IncludePath>
     <LinkIncremental>
     </LinkIncremental>
+    <CustomBuildBeforeTargets />
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -125,6 +129,14 @@
       <LinkTimeCodeGeneration>
       </LinkTimeCodeGeneration>
     </Link>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+    <PreBuildEvent>
+      <Message>
+      </Message>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -155,6 +167,14 @@
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
     </Link>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+    <PreBuildEvent>
+      <Message>
+      </Message>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -183,6 +203,14 @@
       <LinkTimeCodeGeneration>
       </LinkTimeCodeGeneration>
     </Link>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+    <PreBuildEvent>
+      <Message>
+      </Message>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -213,6 +241,14 @@
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
     </Link>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+    <PreBuildEvent>
+      <Message>
+      </Message>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AbstractDeclarator.h" />

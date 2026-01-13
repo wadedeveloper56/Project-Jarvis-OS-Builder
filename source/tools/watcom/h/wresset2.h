@@ -2,6 +2,7 @@
 *
 *                            Open Watcom Project
 *
+* Copyright (c) 2002-2021 The Open Watcom Contributors. All Rights Reserved.
 *    Portions Copyright (c) 1983-2002 Sybase, Inc. All Rights Reserved.
 *
 *  ========================================================================
@@ -31,60 +32,38 @@
 
 #ifndef WRESSET2_INCLUDED
 #define WRESSET2_INCLUDED
-#ifdef WIN_GUI
-#include "windows.h"
-#endif
-#include "phandle.h"
 
-#ifndef WIN_GUI
-#define LoadString2( Dir, hInstance, idResource, lpszBuffer, nBufferMax ) \
-            WResLoadString2( Dir, hInstance, idResource, lpszBuffer, nBufferMax )
-#define LoadString( hInstance, idResource, lpszBuffer, nBufferMax ) \
-            WResLoadString( hInstance, idResource, lpszBuffer, nBufferMax )
-#ifndef WINAPI
-#define WINAPI
-#endif
-typedef unsigned int UINT;
-#ifndef _WCI86FAR
-    #define _WCI86FAR   // Is there a cleaner way?
-#endif
-typedef char _WCI86FAR * LPSTR;
+#define NO_RES_MESSAGE          "Error: could not open message resource file."
+#define NO_RES_MESSAGE_PREFIX   "Error: could not open message resource file ("
+#define NO_RES_MESSAGE_SUFFIX   ")."
+
+typedef struct handle_info {
+    FILE        *fp;
+    int         status;
+} HANDLE_INFO, *PHANDLE_INFO;
+
+#ifdef _M_I86
+typedef char        __far *lpstr;
+typedef const char  __far *lpcstr;
+#else
+typedef char        *lpstr;
+typedef const char  *lpcstr;
 #endif
 
 #if defined( __cplusplus )
 extern "C" {
 #endif
 
-/* This is a global variable exported by function FindResources */
-extern long FileShift;
-
-struct WResDirHead;
-int OpenResFile( PHANDLE_INFO hInstance );
-int FindResources( PHANDLE_INFO hInstance );
-int InitResources( PHANDLE_INFO hInstance );
-int InitResources2( struct WResDirHead **, PHANDLE_INFO hInstance );
-int WINAPI WResLoadString( PHANDLE_INFO hInstance,
-                           UINT idResource,
-                           LPSTR lpszBuffer,
-                           int nBufferMax );
-int WINAPI WResLoadString2( struct WResDirHead *,
-                            PHANDLE_INFO hInstance,
-                            UINT idResource,
-                            LPSTR lpszBuffer,
-                            int nBufferMax );
-int WINAPI WResLoadResource( PHANDLE_INFO       hInstance,
-                             UINT               idType,
-                             UINT               idResource,
-                             LPSTR              *lpszBuffer,
-                             int                *bufferSize );
-int WINAPI WResLoadResource2( struct WResDirHead *,
-                              PHANDLE_INFO      hInstance,
-                              UINT              idType,
-                              UINT              idResource,
-                              LPSTR             *lpszBuffer,
-                              int               *bufferSize );
-int CloseResFile( PHANDLE_INFO hInstance );
-int CloseResFile2( struct WResDirHead *, PHANDLE_INFO hInstance );
+extern bool         OpenResFile( PHANDLE_INFO hinfo, const char *filename );
+extern bool         OpenResFileX( PHANDLE_INFO hinfo, const char *filename, bool res_file );
+extern bool         CloseResFile( PHANDLE_INFO hinfo );
+extern bool         FindResources( PHANDLE_INFO hinfo );
+extern bool         FindResourcesX( PHANDLE_INFO hinfo, bool res_file );
+extern bool         InitResources( PHANDLE_INFO hinfo );
+extern bool         FiniResources( PHANDLE_INFO hinfo );
+extern int          WResLoadString( PHANDLE_INFO hinfo, unsigned int idResource, lpstr lpszBuffer, int nBufferMax );
+extern int          WResLoadResource( PHANDLE_INFO hinfo, unsigned int idType, unsigned int idResource, lpstr *lpszBuffer, size_t *bufferSize );
+extern int          WResLoadResourceX( PHANDLE_INFO hinfo, lpcstr idType, lpcstr idResource, lpstr *lpszBuffer, size_t *bufferSize );
 
 #if defined( __cplusplus )
 }

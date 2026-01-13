@@ -2,6 +2,7 @@
 *
 *                            Open Watcom Project
 *
+* Copyright (c) 2015-2025 The Open Watcom Contributors. All Rights Reserved.
 *    Portions Copyright (c) 1983-2002 Sybase, Inc. All Rights Reserved.
 *
 *  ========================================================================
@@ -32,8 +33,6 @@
 #ifndef _DWARF_H_INCLUDED_
 #define _DWARF_H_INCLUDED_
 
-#define _WCUNALIGNED
-
 #include "pushpck1.h"
 
 #ifdef __cplusplus
@@ -47,45 +46,57 @@ extern "C" {
 
 */
 
-#define DWARF_IMPL_VERSION  2   /* uint_16 */
+#define DWARF_IMPL_VERSION          2
 
 /*
-    IMPORTANT:
-        TAG_*, AT_*, and FORM_* MUST be #define's since they are used in
-        the compiling of dwabbrev.dat!  Further, they must expand to an
-        integer constant.
-*/
+ * Watcom producer version related constants and definitions
+ */
+#define DWARF_WATCOM_PRODUCER       DWARF_WATCOM_PRODUCER_V2
+
+#define DWARF_WATCOM_PRODUCER_V3    "V2.0 WATCOM"
+#define DWARF_WATCOM_PRODUCER_V2    "V1.0 WATCOM"
+#define DWARF_WATCOM_PRODUCER_V1    "WATCOM"
+
+typedef enum {
+    VER_ERROR = -1,
+    VER_NONE,
+    VER_V1,             /* Watcom 10.x */
+    VER_V2,             /* Watcom 11.0 and early Open Watcom */
+    VER_V3,             /* Open Watcom 2.0 and later */
+} df_ver;
 
 /* Tag encodings: Figure 14 & 15 */
 
 typedef enum {
-#define DWTAGI( __n, __v  )   DW_TAG_##__n = __v,
-#include "dwtagi.h"
-#undef  DWTAGI
-}dw_tagnum;
+    #define DWTAGI( __n, __v  )   DW_TAG_##__n = __v,
+    #include "dwtagi.h"
+    #undef  DWTAGI
+} dw_tagnum;
 
 /* Attribute form encodings: Figure 19.  */
 
 typedef enum {
-#define DWFORMI( __n, __v  )   DW_FORM_##__n = __v,
-#include "dwformi.h"
-#undef  DWFORMI
-}dw_formnum;
+    #define DWFORMI( __n, __v  )   DW_FORM_##__n = __v,
+    #include "dwformi.h"
+    #undef  DWFORMI
+} dw_formnum;
 
 /* Attribute encodings: Figure 17 & 18  */
 
 typedef enum {
-#define DWATI( __n, __v  )   DW_AT_##__n = __v,
-#include "dwati.h"
-#undef  DWATI
-}dw_atnum;
+    #define DWATI( __n, __v  )   DW_AT_##__n = __v,
+    #include "dwati.h"
+    #undef  DWATI
+} dw_atnum;
 
 /* Location operation encodings: section 7.7, figure 23 */
 
-#define DW_OP_lit( __x )        ( (__x) + 0x30 )        // valid for 0..31 only
-#define DW_OP_reg( __x )        ( (__x) + 0x50 )        // valid for 0..31 only
-#define DW_OP_breg( __x )       ( (__x) + 0x70 )        // valid for 0..31 only
+#define DW_OP_lit( __x )        ((dw_op)((__x) + 0x30))     // valid for 0..31 only
+#define DW_OP_reg( __x )        ((dw_op)((__x) + 0x50))     // valid for 0..31 only
+#define DW_OP_breg( __x )       ((dw_op)((__x) + 0x70))     // valid for 0..31 only
+
 #include "dwloccl.h"
+
 typedef enum {
     DW_OP_regx          = 0x90,
     DW_OP_addr          = 0x03,
@@ -110,80 +121,148 @@ typedef enum {
 #undef DW_LOC_OP
     DW_OP_lo_user       = 0xe0,
     DW_OP_hi_user       = 0xff
-}dw_op;
+} dw_op;
 
 /* Base Type encodings: Figure 24. */
 typedef enum {
-    DW_ATE_address          =0x01,
-    DW_ATE_boolean          =0x02,
-    DW_ATE_complex_float    =0x03,
-    DW_ATE_float            =0x04,
-    DW_ATE_signed           =0x05,
-    DW_ATE_signed_char      =0x06,
-    DW_ATE_unsigned         =0x07,
-    DW_ATE_unsigned_char    =0x08,
-    DW_ATE_lo_user          =0x80,
-    DW_ATE_hi_user          =0xff,
-}dw_ate;
+    DW_ATE_address          = 1,
+    DW_ATE_boolean,
+    DW_ATE_complex_float,
+    DW_ATE_float,
+    DW_ATE_signed,
+    DW_ATE_signed_char,
+    DW_ATE_unsigned,
+    DW_ATE_unsigned_char,
+    DW_ATE_lo_user          = 0x80,
+    DW_ATE_hi_user          = 0xff,
+} dw_ate;
+
 /* Accessibility codes: Figure 25 */
 typedef enum {
-    DW_ACCESS_public      = 1,
-    DW_ACCESS_protected   = 2,
-    DW_ACCESS_private     = 3,
-}dw_access;
+    DW_ACCESS_public        = 1,
+    DW_ACCESS_protected,
+    DW_ACCESS_private,
+} dw_access;
+
 /* Virtuality codes: Figure 27 */
 typedef enum {
-    DW_VIRTUALITY_none           =  0,
-    DW_VIRTUALITY_virtual        =  1,
-    DW_VIRTUALITY_pure_virtual   =  2,
-}dw_virtuality;
+    DW_VIRTUALITY_none,
+    DW_VIRTUALITY_virtual,
+    DW_VIRTUALITY_pure_virtual,
+} dw_virtuality;
+
 /* Language encodings: Figure 28.  */
 typedef enum {
-    DW_LANG_C89             = 0x0001,
-    DW_LANG_C               = 0x0002,
-    DW_LANG_Ada83           = 0x0003,
-    DW_LANG_C_plus_plus     = 0x0004,
-    DW_LANG_Cobol74         = 0x0005,
-    DW_LANG_Cobol85         = 0x0006,
-    DW_LANG_Fortran77       = 0x0007,
-    DW_LANG_Fortran90       = 0x0008,
-    DW_LANG_Pascal83        = 0x0009,
-    DW_LANG_Modula2         = 0x000a,
+    DW_LANG_C89 = 1,        /* 0x0001 */
+    DW_LANG_C,
+    DW_LANG_Ada83,
+    DW_LANG_C_plus_plus,
+    DW_LANG_Cobol74,
+    DW_LANG_Cobol85,
+    DW_LANG_Fortran77,
+    DW_LANG_Fortran90,      /* 0x0008 */
+    DW_LANG_Pascal83,
+    DW_LANG_Modula2,
+    /* Dwarf 3 */
+    DW_LANG_Java,
+    DW_LANG_C99,
+    DW_LANG_Ada95,
+    DW_LANG_Fortran95,
+    DW_LANG_PLI,
+    DW_LANG_ObjC,           /* 0x0010 */
+    DW_LANG_ObjC_plus_plus,
+    DW_LANG_UPC,
+    DW_LANG_D,
+    /* Dwarf 4 */
+    DW_LANG_Python,
+    /* Dwarf 5 */
+    DW_LANG_OpenCL,
+    DW_LANG_Go,
+    DW_LANG_Modula3,
+    DW_LANG_Haskell,        /* 0x0018 */
+    DW_LANG_C_plus_plus_03,
+    DW_LANG_C_plus_plus_11,
+    DW_LANG_OCaml,
+    DW_LANG_Rust,
+    DW_LANG_C11,
+    DW_LANG_Swift,
+    DW_LANG_Julia,
+    DW_LANG_Dylan,          /* 0x0020 */
+    DW_LANG_C_plus_plus_14,
+    DW_LANG_Fortran03,
+    DW_LANG_Fortran08,
+    DW_LANG_RenderScript,
+    DW_LANG_BLISS,
+    /* Dwarf 6 */
+    DW_LANG_Kotlin,
+    DW_LANG_Zig,
+    DW_LANG_Crystal,        /* 0x0028 */
+    DW_LANG_C_plus_plus_17,
+    DW_LANG_C_plus_plus_20,
+    DW_LANG_C17,
+    DW_LANG_Fortran18,
+    DW_LANG_Ada2005,
+    DW_LANG_Ada2012,
+    DW_LANG_HIP,            /* 0x0030 */
+    DW_LANG_Assembly,
+    DW_LANG_C_sharp,
+    DW_LANG_Mojo,
+    DW_LANG_GLSL,
+    DW_LANG_GLSL_ES,
+    DW_LANG_HLSL,
+    DW_LANG_OpenCL_CPP,
+    DW_LANG_CPP_for_OpenCL, /* 0x0038 */
+    DW_LANG_SYCL,
+    DW_LANG_C_plus_plus_23,
+    DW_LANG_Odin,
+    DW_LANG_P4,
+    DW_LANG_Metal,
+    DW_LANG_C23,
+    DW_LANG_Fortran23,
+    DW_LANG_Ruby,           /* 0x0040 */
+    DW_LANG_Move,
+    DW_LANG_Hylo,
+    DW_LANG_V,
+    DW_LANG_Algol68,        /* 0x0044 */
     DW_LANG_lo_user         = 0x8000,
     DW_LANG_hi_user         = 0xffff,
-}dw_langnum;
+} dw_langnum;
+
 /* Identifier case encodings: Figure 29 */
 typedef enum {
-    DW_ID_case_sensitive   =0,
-    DW_ID_up_case          =1,
-    DW_ID_down_case        =2,
-    DW_ID_case_insensitive =3,
-}dw_id;
+    DW_ID_case_sensitive,
+    DW_ID_up_case,
+    DW_ID_down_case,
+    DW_ID_case_insensitive,
+} dw_id;
+
 /* Calling convention encodings: Figure 30 */
 typedef enum {
-    DW_CC_normal           =0x01,
-    DW_CC_program          =0x02,
-    DW_CC_nocall           =0x03,
-    DW_CC_lo_user          =0x40,
-    DW_CC_hi_user          =0xff,
-}dw_cc;
+    DW_CC_normal            = 1,
+    DW_CC_program,
+    DW_CC_nocall,
+    DW_CC_lo_user           = 0x40,
+    DW_CC_hi_user           = 0xff,
+} dw_cc;
+
 /* Inline codes: Figure 31 */
 typedef enum {
-    DW_INL_not_inlined             =0,
-    DW_INL_inlined                 =1,
-    DW_INL_declared_not_inlined    =2,
-    DW_INL_declared_inlined        =3,
-}dw_inl;
+    DW_INL_not_inlined,
+    DW_INL_inlined,
+    DW_INL_declared_not_inlined,
+    DW_INL_declared_inlined,
+} dw_inl;
+
 /* Ordering encodings: Figure 32.  */
 typedef enum {
-  DW_ORD_row_major =  0,
-  DW_ORD_col_major =  1,
-}dw_ord;
+    DW_ORD_row_major,
+    DW_ORD_col_major,
+} dw_ord;
 
 /* Standard opcode encodings: figure 34 */
 
 typedef enum {
-    DW_LNS_copy = 1,
+    DW_LNS_copy                 = 1,
     DW_LNS_advance_pc,
     DW_LNS_advance_line,
     DW_LNS_set_file,
@@ -191,24 +270,33 @@ typedef enum {
     DW_LNS_negate_stmt,
     DW_LNS_set_basic_block,
     DW_LNS_const_add_pc,
-    DW_LNS_fixed_advance_pc
-}dw_lns;
+    DW_LNS_fixed_advance_pc,
+    DW_LNS_hi_user              = 0xff
+} dw_lns;
 
 /* extended opcode encodings: figure 35 */
 
 typedef enum {
-    DW_LNE_end_sequence = 1,
+    DW_LNE_end_sequence             = 1,
     DW_LNE_set_address,
     DW_LNE_define_file,
-#if 1
+    DW_LNE_set_discriminator,               /* Dwarf V4 */
+    DW_LNE_lo_user                  = 0x80, /* Dwarf V3 */
+    DW_LNE_hi_user                  = 0xff, /* Dwarf V3 */
+
     /*
-    //  Carl Young - 2004-07-05
-    //  Despite recognizing the need for this extended opcode, I disagree with its use. Dwarf 3
-    //  may yet add more extended instructions which will screw us over using enumeration value 4!
-    */
-    DW_LNE_set_segment
-#endif
-}dw_lne;
+     * WATCOM extension
+     *
+     *  Carl Young - 2004-07-05
+     *  Despite recognizing the need for this extended opcode, I disagree with its use. Dwarf 3
+     *  may yet add more extended instructions which will screw us over using enumeration value 4!
+     *
+     * DW_LNE_WATCOM_set_segment_OLD is old definition for backward compatibility
+     * DW_LNE_WATCOM_set_segment is new definition compatible with DWARF 3 and above
+     */
+    DW_LNE_WATCOM_set_segment_OLD   = DW_LNE_set_discriminator,
+    DW_LNE_WATCOM_set_segment       = DW_LNE_lo_user + 0,
+} dw_lne;
 
 /* Macinfo type encodings: figure 36 */
 
@@ -233,14 +321,14 @@ typedef enum {
 
 /* AT_WATCOM_memory_model  */
 typedef enum {
-    DW_MEM_MODEL_none    = 0,
-    DW_MEM_MODEL_flat    = 1,
-    DW_MEM_MODEL_small   = 2,
-    DW_MEM_MODEL_medium  = 3,
-    DW_MEM_MODEL_compact = 4,
-    DW_MEM_MODEL_large   = 5,
-    DW_MEM_MODEL_huge    = 6,
-}dw_mem_model;
+    DW_MEM_MODEL_none,
+    DW_MEM_MODEL_flat,
+    DW_MEM_MODEL_small,
+    DW_MEM_MODEL_medium,
+    DW_MEM_MODEL_compact,
+    DW_MEM_MODEL_large,
+    DW_MEM_MODEL_huge,
+} dw_mem_model;
 
 /* AT_address_class values */
 typedef enum {
@@ -250,63 +338,72 @@ typedef enum {
     DW_ADDR_huge16,
     DW_ADDR_near32,
     DW_ADDR_far32
-}dw_addr;
+} dw_addr;
 
 /* the child determination byte */
 typedef enum {
     DW_CHILDREN_no,
     DW_CHILDREN_yes
-}dw_children;
+} dw_children;
 
 /* handy constants section */
 
-#define COMPILE_UNIT_HDR_SIZE   11    // 4 + 2 + 4 + 1
 #define DWLINE_OPCODE_BASE      10
 
-// these next three constants do not have to be defined this way, but it
-// makes for consistancy between projects (and thus we can steal code).
-
+/*
+ * these next three constants do not have to be defined this way, but it
+ * makes for consistency between projects (and thus we can steal code).
+ */
 #define DW_MIN_INSTR_LENGTH     1
 #define DWLINE_BASE             (-1)
 #define DWLINE_RANGE            4
 
-/* *****NOTE*******NOTE******** BIG KLUDGE FOLLOWS *****NOTE*****NOTE******
- *
- * in the dwarf reading library, we assume that the abbrev codes are unique -
- * i.e. that a particular abbreviation code corresponds to only one kind
- * of abbreviation.  This used to be true, since the dwarf writing library was
- * the only thing we had generating dwarf.  Now that the linker is doing it,
- * we have a problem of conflicting abbrev codes.  So... until the reading
- * library assumption is removed, we have to keep the abbrev code spaces
- * separate!  This next constant is used in the dwarf reading library for this.
-***************************************************************************/
-
-#define LAST_LINKER_ABBREV 4
-
 /* handy structures section */
 
 typedef struct {
-    unsigned_32 total_length;
-    unsigned_16 version;
-    unsigned_32 prologue_length;
-    unsigned_8  minimum_instruction_length;
-    unsigned_8  default_is_stmt;
-    signed_8    line_base;
-    unsigned_8  line_range;
-    unsigned_8  opcode_base;
-    unsigned_8  standard_opcode_lengths[DWLINE_OPCODE_BASE - 1];
+    unsigned_32     total_length;
+    unsigned_16     version;
+    unsigned_32     prologue_length;
+    unsigned_8      minimum_instruction_length;
+    unsigned_8      default_is_stmt;
+    signed_8        line_base;
+    unsigned_8      line_range;
+    unsigned_8      opcode_base;
+    unsigned_8      standard_opcode_lengths[DWLINE_OPCODE_BASE - 1];
 } _WCUNALIGNED stmt_prologue;
 
+/*
+ * !!!! WARNING !!!!
+ *
+ * In Dwarf V4 was specified arange triple structure in different field order
+ * { selector, offset, length }.
+ * It is big issue, because it can not be simply derived what version was used
+ * for records creation.
+ * Version of this record is same from Dwarf V2 even if it was changed in V4.
+ * Dwarf comitee probably think that changes for segmented architectures are
+ * minor nowdays and don't take care about it.
+ * Therefore we have hadache how to resolve this compatible way.
+ */
+typedef struct {
+    unsigned_32     offset;
+    unsigned_16     segment;
+    unsigned_32     length;
+} _WCUNALIGNED segmented_arange_tuple_v2;
 
 typedef struct {
-    unsigned_32 offset;
-    unsigned_16 segment;
-    unsigned_32 length;
-} _WCUNALIGNED segmented_arange_tuple;
+    unsigned_16     segment;
+    unsigned_32     offset;
+    unsigned_32     length;
+} _WCUNALIGNED segmented_arange_tuple_v4;
+
+typedef union {
+    segmented_arange_tuple_v2   v2;
+    segmented_arange_tuple_v4   v4;
+} segmented_arange_tuple;
 
 typedef struct {
-    unsigned_32 offset;
-    unsigned_32 length;
+    unsigned_32     offset;
+    unsigned_32     length;
 } flat_arange_tuple;
 
 typedef union {
@@ -315,26 +412,25 @@ typedef union {
 } arange_tuple;
 
 typedef struct {
-    unsigned_32 length;
-    unsigned_16 version;
-    unsigned_32 debug_offset;
-    unsigned_8  offset_size;
-    unsigned_8  segment_size;
-//   unsigned_8 padding[ 8 ];   // to make it a multiple of a tuple size.
+    unsigned_32     length;
+    unsigned_16     version;
+    unsigned_32     debug_offset;
+    unsigned_8      offset_size;
+    unsigned_8      segment_size;
 } _WCUNALIGNED arange_prologue;
 
 typedef struct {
-    unsigned_32 length;
-    unsigned_16 version;
-    unsigned_32 abbrev_offset;
-    unsigned_8  addr_size;
+    unsigned_32     length;
+    unsigned_16     version;
+    unsigned_32     abbrev_offset;
+    unsigned_8      addr_size;
 } _WCUNALIGNED compuhdr_prologue;
 
 typedef struct {
-    unsigned_32 length;
-    unsigned_16 version;
-    unsigned_32 debug_offset;
-    unsigned_32 debug_size;
+    unsigned_32     length;
+    unsigned_16     version;
+    unsigned_32     debug_offset;
+    unsigned_32     debug_size;
 } _WCUNALIGNED pubnames_prologue;
 
 #ifdef __cplusplus

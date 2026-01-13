@@ -24,18 +24,27 @@
 *
 *  ========================================================================
 *
-* Description:  Include appropriate header defining alloca().
+* Description:  Include appropriate header defining alloca and define
+*                   walloca macro
 *
 ****************************************************************************/
 
 
-#ifndef WALLOCA_H_INCLUDED
-#define WALLOCA_H_INCLUDED
+#ifndef _WALLOCA_H_INCLUDED
+#define _WALLOCA_H_INCLUDED
 
-#ifdef __WATCOMC__
-    #include <malloc.h>
-#else
+#if defined( __UNIX__ ) || defined( __WATCOMC__ ) && ( __WATCOMC__ > 1290 )
     #include <stdlib.h>
+#else
+    #include <malloc.h>
+#endif
+
+#if defined( __WATCOMC__ )
+    #define walloca     __alloca
+#elif defined( _MSC_VER )
+    #define walloca     _alloca
+#else
+    #define walloca     alloca
 #endif
 
 #endif
