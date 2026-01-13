@@ -2,7 +2,6 @@
 *
 *                            Open Watcom Project
 *
-* Copyright (c) 2002-2023 The Open Watcom Contributors. All Rights Reserved.
 *    Portions Copyright (c) 1983-2002 Sybase, Inc. All Rights Reserved.
 *
 *  ========================================================================
@@ -31,26 +30,9 @@
 
 
 #ifndef _EXEPHAR_H
-#define _EXEPHAR_H
-
-#include "exesigns.h"
-
-
-#define SIMPLE_SIGNATURE        EXESIGN_MP
-#define EXTENDED_SIGNATURE      EXESIGN_P3
-#define RTP_SIGNATURE           EXESIGN_DX
-
-#define REX_HEADER_OFFSET       0x0038
-
-#define PHAR_FORMAT_FLAT        1
-#define PHAR_FORMAT_SEGMENTED   2
-
-/*
- * this value is for the flags field
- */
-#define PHAR_PACK               0x0001
 
 #include "pushpck1.h"
+
 typedef struct simple_header {
     unsigned_16     signature;
     unsigned_16     mod_size;       // file size mod 512
@@ -107,6 +89,9 @@ typedef struct extended_header {
     unsigned_32     stack_size;     // initial stack size
 } extended_header;
 
+// this value is for the flags field
+#define PHAR_PACK   0x0001
+
 typedef struct rtpblock {        // run-time parameter block.
     unsigned_16     signature;
     unsigned_16     minreal;
@@ -127,7 +112,17 @@ typedef struct {
     unsigned_32 base;
     unsigned_32 extra;
 } seg_info_table;
+
+#define SIMPLE_SIGNATURE    0x504D      // 'MP'
+#define EXTENDED_SIGNATURE  0x3350      // 'P3'
+#define RTP_SIGNATURE       0x5844      // 'DX'
+#define REX_SIGNATURE       0x514D      // 'MQ'
+
+#define PHAR_FORMAT_FLAT        1
+#define PHAR_FORMAT_SEGMENTED   2
+
 #include "poppck.h"
 
+#define _EXEPHAR_H
 #endif
 

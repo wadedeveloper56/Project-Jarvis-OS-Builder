@@ -2,7 +2,6 @@
 *
 *                            Open Watcom Project
 *
-* Copyright (c) 2002-2025 The Open Watcom Contributors. All Rights Reserved.
 *    Portions Copyright (c) 1983-2002 Sybase, Inc. All Rights Reserved.
 *
 *  ========================================================================
@@ -31,35 +30,42 @@
 
 
 #ifndef PCOBJ_H
-#define PCOBJ_H
-
-
-#define IS_2_BYTES      0x80        /* bit set indicating 2 byte value */
+#include <watcom.h>
 
 #include "pushpck1.h"
 /*
  * Library stuff
  */
-typedef struct omf_lib_header {
+typedef struct hash_entry {
+    uint_16     minor_class;
+    uint_16     minor_inc;
+    uint_16     major_class;
+    uint_16     major_inc;
+} hash_entry;
+
+typedef struct lib_header {
     uint_8      cmd;
     uint_16     length;
     uint_32     dict_start;
     uint_16     dict_size;
-} omf_lib_header;
+} lib_header;
 
 enum {
+    LIB_FULL_PAGE       = 0xff,
     LIB_NOT_FOUND       = 0,
     LIB_HEADER_REC      = 0xf0,
-    LIB_TRAILER_REC     = 0xf1,
-    LIB_FULL_PAGE       = 0xff
+    LIB_TRAILER_REC     = 0xf1
 };
 
-#define DIC_REC_SIZE    512U        /* record size of dictionary entry */
+enum {
+    DIC_REC_SIZE        = 512U,     /* record size of dictionary entry */
+    IS_2_BYTES          = 0x80      /* bit set indicating 2 byte value */
+};
 
 /*
  *  INTEL Segment Alignment Specifiers - A field
  */
-enum {
+ enum {
     ALIGN_ABS           = 0,        /* absolute segment - no alignment  */
     ALIGN_BYTE          = 1,        /* relocatable seg - byte aligned   */
     ALIGN_WORD          = 2,        /* relocatable seg - word aligned   */
@@ -91,18 +97,18 @@ enum {
 #define SEGATTR_A( a )  (ALIGN_##a << 5)
 #define SEGATTR_C( a )  (COMB_##a << 2)
 enum {
-      SEGATTR_BIG  =   1 << 1,  // exactly 64k or 2**32
+      SEGATTR_BIG  =   1<< 1,   // exactly 64k or 2**32
       SEGATTR_P    =   1,       // use 32
 };
 /*  Bits in FIXUPP records          TAI */
 
 enum {
     FIXUPP_FIXUP        = 0x80,
-    FIXUPP_MBIT         = 0x40,
 
     FIXDAT_FTHREAD      = 0x80,
     FIXDAT_TTHREAD      = 8,
     FIXDAT_PBIT         = 4,
+    FIXDAT_MBIT         = 0x40,
     TRDDAT_DBIT         = 0x40,
 
 /*
@@ -121,10 +127,16 @@ enum {
  *  INTEL Target Specifiers
  */
 
-    TARGET_SEG          = 0,        /* segment index with displacement  */
-    TARGET_GRP          = 1,        /* group index with displacement    */
-    TARGET_EXT          = 2,        /* external index with displacement */
-    TARGET_ABS          = 3,        /* abs frame num with displacement  */
+    TARGET_SEGWD        = 0,        /* segment index with displacement  */
+    TARGET_GRPWD        = 1,        /* group index with displacement    */
+    TARGET_EXTWD        = 2,        /* external index with displacement */
+    TARGET_ABSWD        = 3,        /* abs frame num with displacement  */
+    TARGET_SEG          = 4,        /* segment index, no displacement   */
+    TARGET_GRP          = 5,        /* group index, no displacement     */
+    TARGET_EXT          = 6,        /* external index, no displacement  */
+    TARGET_ABS          = 7,        /* abs frame num, no displacement   */
+
+    TARGET_WITH_DISPL   = ~4,       /* frame with displacement          */
 
 /*
  *  INTEL Group Specifiers
@@ -137,13 +149,11 @@ enum {
     GRP_ADDR            = 0xfa,     /* load time addr for the group     */
 };
 
-#define TARGET_NO_DISPL(x)  ((x) | 4) /* frame without displacement       */
-
 /*
  *  INTEL Object Record Types
  */
 
-typedef enum omf_cmd {
+typedef enum {
     CMD_MIN_CMD         = 0x6e,     /* minimum cmd enum                 */
     CMD_RHEADR          = 0x6e,
     CMD_REGINT          = 0x70,
@@ -180,7 +190,8 @@ typedef enum omf_cmd {
     CMD_SEGDEF32        = 0x99,     /* 32-bit segment definition        */
     CMD_SEGD32          = 0x99,     /* 32-bit segment definition        */
     CMD_GRPDEF          = 0x9a,     /* group definition record          */
-    CMD_FIXUPP          = 0x9c,     /* relocation record                */
+    CMD_FIXUP           = 0x9c,     /* relocation record                */
+    CMD_FIXUPP          = 0x9c,     /* for those who stuttttttter       */
     CMD_FIXUPP32        = 0x9d,     /* 32-bit relocation record         */
     CMD_FIXU32          = 0x9d,     /* 32-bit relocation record         */
     CMD_LEDATA          = 0xa0,     /* object record                    */
@@ -207,7 +218,7 @@ typedef enum omf_cmd {
     CMD_STATIC_PUBD32   = 0xb7,
     CMD_LCOMDEF         = 0xb8,     /* local comdev */
     CMD_STATIC_COMDEF   = 0xb8,
-    CMD_CEXTDEF         = 0xbc,     /* external reference to a COMDAT */
+    CMD_CEXTDF          = 0xbc,     /* external reference to a COMDAT */
     CMD_COMDAT          = 0xc2,     /* initialized communal data record */
     CMD_COMDAT32        = 0xc3,     /* initialized 32-bit communal data record */
     CMD_COMD32          = 0xc3,     /* initialized 32-bit communal data record */
@@ -218,41 +229,36 @@ typedef enum omf_cmd {
     CMD_NBKPAT          = 0xc8,     /* named backpatch record (quick c?) */
     CMD_NBKPAT32        = 0xc9,     /* 32-bit named backpatch record */
     CMD_NBKP32          = 0xc9,     /* 32-bit named backpatch record */
-    CMD_LLNAMES         = 0xca,     /* a "local" lnames */
+    CMD_LLNAME          = 0xca,     /* a "local" lnames */
+    CMD_LLNAMES         = 0xca,
     CMD_VERNUM          = 0xcc,     /* TIS version number record        */
     CMD_VENDEXT         = 0xce,     /* TIS vendor extension record      */
     CMD_MAX_CMD         = 0xce      /* maximum cmd enum                 */
-} omf_cmd;
+}cmd_omf;
 
-typedef enum omf_fix_loc {
-    LOC_OFFSET_LO        = 0,       /* relocate lo byte of offset             */
-    LOC_OFFSET           = 1,       /* relocate offset                        */
-    LOC_BASE             = 2,       /* relocate segment                       */
-    LOC_BASE_OFFSET      = 3,       /* relocate segment and offset            */
-    LOC_OFFSET_HI        = 4,       /* relocate hi byte of offset             */
-    LOC_OFFSET_LOADER    = 5,       /* like OFFSET but loader resolved        */
-    LOC_OFFSET_32        = 9,       /* relocate 32-bit offset                 */
-    LOC_BASE_OFFSET_32   = 11,      /* relocate 48-bit pointer                */
-    LOC_OFFSET_LOADER_32 = 13       /* like 32-bit offset but loader resolved */
-} omf_fix_loc;
-#define LOC_PHARLAP_OFFSET_32       LOC_OFFSET_LOADER       /* Pharlap, relocate 32-bit offset  */
-#define LOC_PHARLAP_BASE_OFFSET_32  (LOC_OFFSET_LOADER + 1) /* Pharlap, relocate segment and 32-bit offset */
+enum {
+    LOC_OFFSET_LO       = 0,        /* relocate lo byte of offset       */
+    LOC_OFFSET          = 1,        /* relocate offset                  */
+    LOC_BASE            = 2,        /* relocate segment                 */
+    LOC_BASE_OFFSET     = 3,        /* relocate segment and offset      */
+    LOC_OFFSET_HI       = 4,        /* relocate hi byte of offset       */
+    LOC_MS_LINK_OFFSET  = 5,        /* like OFFSET but loader resolved  */
+    LOC_OFFSET_32       = 5,        /* relocate 32-bit offset           */
+    LOC_BASE_OFFSET_32  = 6,        /* relocate segment and 32-bit offset*/
+    LOC_MS_OFFSET_32    = 9,        /* MS 32-bit offset                 */
+    LOC_MS_BASE_OFFSET_32= 11,      /* MS 48-bit pointer                */
+    LOC_MS_LINK_OFFSET_32= 13       /* like OFFSET_32 but loader resolved*/
+};
 
-typedef struct omf_record {
+typedef struct obj_record {
     uint_8      command;
     uint_16     length;
-} omf_record;
+} obj_record;
 
-typedef struct omf_name {
+typedef struct obj_name {
     uint_8      len;
     char        name[ 1 ];
-} omf_name;
-
-typedef struct omf_coment {
-    uint_8      type;
-    uint_8      class;
-} omf_coment;
-
+} obj_name;
 /*
     Comment Type
 */
@@ -288,13 +294,12 @@ enum {
     CMT_COMPILER_OPTIONS= 0xff, /* Microsoft: incremental compiler opts */
     CMT_SOURCE_NAME     = 0xff  /* name of the source file              */
 };
-
 /*
  * pack COMENT into two bytes so it can be written as a word
  */
-#define CMT_NP( a ) ((CMT_##a<<8)|CMT_TNP)
-#define CMT_P( a )  (CMT_##a<<8)
 
+
+#define CMT_NP( a ) ((CMT_##a<<8)|CMT_TNP)
 /*
  * Comment Class Subtype
  */
@@ -305,12 +310,6 @@ enum {
     DLL_PROTLIB     = 0x04, /* Protected Memory Library (OMF extension) */
     DLL_LNKDIR      = 0x05, /* Subtype LNKDIR of OMF extension class    */
 };
-
-typedef struct omf_coment_dep {
-    uint_16         dos_time;
-    uint_16         dos_date;
-    uint_8          name_len;
-} omf_coment_dep;
 
 #define EASY_OMF_SIGNATURE  "80386"
 
@@ -324,7 +323,7 @@ typedef struct {
     char    mem_model;
     char    unknown;
     char    emulation;
-} omf_cpu_data;
+} cpu_data;
 
 /*
     Linker directives (mostly WLINK directives)
@@ -433,4 +432,5 @@ enum {
 
 #include "poppck.h"
 
+#define PCOBJ_H 1
 #endif

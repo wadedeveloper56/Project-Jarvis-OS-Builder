@@ -29,39 +29,45 @@
 ****************************************************************************/
 
 
-#ifndef WRESSETR_INCLUDED
-#define WRESSETR_INCLUDED
+#ifndef WRESSETRTNS_INCLUDED
+#define WRESSETRTNS_INCLUDED
 
-/* The low level I/O routines named below will be passed a file handle by the */
-/* higher level I/O routines and which must be the file handle returned by one */
+#include <basetsd.h>
+typedef SSIZE_T ssize_t;
+
+#ifndef WRESLAYER0_INCLUDED
+/* The low level I/O routines named below will be passed a WResFileID by the */
+/* higher level I/O routines and which must be the WResFileID returned by one */
 /* of the file opening functions which will get it from the low level open */
 /* function */
 
-typedef enum {
-    WRES_OPEN_RO,
-    WRES_OPEN_RW,
-    WRES_OPEN_NEW,
-    WRES_OPEN_TMP
-} wres_open_mode;
+typedef int             WResFileID;
 
-typedef struct WResRoutines {                                       /* defaults */
+struct WResRoutines {                                       /* defaults */
     /* I/O routines */
-    FILE            *(*cli_open)(const char *, wres_open_mode);     /* fopen */
-    bool            (*cli_close)(FILE *);                           /* fclose */
-    size_t          (*cli_read)(FILE *, void *, size_t);            /* fread */
-    size_t          (*cli_write)(FILE *, const void *, size_t);     /* fwrite */
-    bool            (*cli_seek)(FILE *, long, int );                /* fseek */
-    long            (*cli_tell)(FILE *);                            /* ftell */
-    bool            (*cli_ioerr)(FILE *,size_t);                    /* ioerr */
+    WResFileID (*   open) (const char *, int, ...);         /* open */
+    int (*          close) (WResFileID);                    /* close */
+    ssize_t (*      write) (WResFileID, const void *, size_t); /* write */
+    ssize_t (*      read) (WResFileID, void *, size_t);     /* read */
+    off_t (*        seek) (WResFileID, off_t, int );        /* lseek */
+    off_t (*        tell) (WResFileID);                     /* tell */
     /* memory routines */
-    void            *(*cli_alloc)(size_t);                          /* malloc */
-    void            (*cli_free)(void *);                            /* free */
-} WResRoutines;
+    void * (*       alloc) (size_t);                        /* malloc */
+    void (*         free) (void *);                         /* free */
+};
+#endif
 
-#define WResSetRtns( __open, __close, __read, __write, __seek, __tell, __ioerr, __alloc, __free ) \
-    WResRoutines WResRtns = { __open, __close, __read, __write, __seek, __tell, __ioerr, __alloc, __free }
+#define WResSetRtns( open, close, read, write, seek, tell, alloc, free ) \
+                struct WResRoutines WResRtns = {    \
+                    open,                           \
+                    close,                          \
+                    write,                          \
+                    read,                           \
+                    seek,                           \
+                    tell,                           \
+                    alloc,                          \
+                    free                            \
+                }
 
-/* This is a global variable exported by function FindResources */
-extern long     WResFileShift;
-
+#include "wresset2.h"
 #endif

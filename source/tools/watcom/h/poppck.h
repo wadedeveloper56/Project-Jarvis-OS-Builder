@@ -2,7 +2,6 @@
 *
 *                            Open Watcom Project
 *
-* Copyright (c) 2002-2023 The Open Watcom Contributors. All Rights Reserved.
 *    Portions Copyright (c) 1983-2002 Sybase, Inc. All Rights Reserved.
 *
 *  ========================================================================
@@ -38,8 +37,6 @@
     #pragma options align= reset
 #elif defined( _MSC_VER )
     #pragma warning(disable:4103)
-    #pragma pack(pop)
-#elif defined( __clang__ )
     #pragma pack(pop)
 #else
     #pragma pack(pop)

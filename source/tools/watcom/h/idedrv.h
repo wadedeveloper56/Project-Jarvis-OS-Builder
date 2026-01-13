@@ -2,7 +2,6 @@
 *
 *                            Open Watcom Project
 *
-* Copyright (c) 2023      The Open Watcom Contributors. All Rights Reserved.
 *    Portions Copyright (c) 1983-2002 Sybase, Inc. All Rights Reserved.
 *
 *  ========================================================================
@@ -55,26 +54,24 @@
 , _IDEDRV( IDEDRV_ERR_INFO_EXEC , "error return from init-info routine" ) \
 , _IDEDRV( IDEDRV_ERR_RUN       , "cannot find run-self routine" ) \
 , _IDEDRV( IDEDRV_ERR_RUN_EXEC  , "error return from run-self routine" ) \
-, _IDEDRV( IDEDRV_ERR_RUN_FATAL , "fatal return from run-self routine" ) \
-, _IDEDRV( IDEDRV_ERR_STOP      , "cannot find stop routine" )
-
-#define IDEDRV_STATUS_VALID(x)  ((x) >= IDEDRV_SUCCESS && (x) <= IDEDRV_ERR_STOP)
+, _IDEDRV( IDEDRV_ERR_RUN_FATAL , "fatal return from run-self routine" )
 
 typedef enum                    // error codes
 {
 #define _IDEDRV(e,m) e
 __IDEDRV
 #undef _IDEDRV
+, IDEDRV_ERR_MAXIMUM
 } IDEDRV_STATUS;
 
 typedef struct {                // IDEDRV structure
-    char const  *dll_name;      // * dll name
-    char const  *ent_name;      // * NULL or entry name
-    void        *ide_handle;    // # handle, when WATCOM IDE
-    int         drv_status;     // # status: from IDEDRV (IDEDRV_STATUS)
-    int         dll_status;     // # status: from DLL
-    void        *dll_handle;    // $ handle for a loaded DLL
-    unsigned    loaded      :1; // # TRUE ==> dll is loaded
+    char const *dll_name;       // * dll name
+    char const *ent_name;       // * NULL or entry name
+    void *ide_handle;           // # handle, when WATCOM IDE
+    unsigned long drv_status;   // # status: from IDEDRV (IDEDRV_STATUS)
+    unsigned long dll_status;   // # status: from DLL
+    void *dll_handle;           // $ handle for a loaded DLL
+    unsigned loaded         :1; // # TRUE ==> dll is loaded
 
                                 // * filled in by caller
                                 // # filled in by IDEDRV (public)

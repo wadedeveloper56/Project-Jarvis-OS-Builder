@@ -46,8 +46,8 @@
 #define _CODE_BASED __based( __segname("_CODE") )
 #else
 #define _CODE_BASED
-#define __far
-#define __near
+#define far
+#define near
 #endif
 
 #include "pushpck1.h"               /* make sure no structures are padded. */

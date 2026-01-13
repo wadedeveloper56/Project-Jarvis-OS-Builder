@@ -2,7 +2,6 @@
 *
 *                            Open Watcom Project
 *
-* Copyright (c) 2002-2019 The Open Watcom Contributors. All Rights Reserved.
 *    Portions Copyright (c) 1983-2002 Sybase, Inc. All Rights Reserved.
 *
 *  ========================================================================
@@ -30,8 +29,6 @@
 ****************************************************************************/
 
 
-#define PATCH_SIGNATURE       "WATCOM binary patch file format\r\n\r\n"
-#define PATCH_LEVEL_HEAD      "WATCOM patch level "
-#define PATCH_LEVEL_LEVEL     ".xxx"
-#define PATCH_LEVEL           PATCH_LEVEL_HEAD PATCH_LEVEL_LEVEL
-#define PATCH_LEVEL_HEAD_SIZE (sizeof(PATCH_LEVEL) - sizeof(PATCH_LEVEL_LEVEL)) /* w/o ".xxx\0" */
+#define SIGNATURE       "WATCOM binary patch file format\r\n\r\n"
+#define LEVEL           "WATCOM patch level .xxx"
+#define LEVEL_HEAD_SIZE (sizeof(LEVEL)-5)       /* w/o ".xxx\0" */

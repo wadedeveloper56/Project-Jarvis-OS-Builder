@@ -2,7 +2,6 @@
 *
 *                            Open Watcom Project
 *
-* Copyright (c) 2002-2025 The Open Watcom Contributors. All Rights Reserved.
 *    Portions Copyright (c) 1983-2002 Sybase, Inc. All Rights Reserved.
 *
 *  ========================================================================
@@ -32,15 +31,12 @@
 
 
 #ifndef _EXEOS2_H
-#define _EXEOS2_H
 
-#include "exesigns.h"
-
+#include "pushpck1.h"
 
 /* OS/2 EXE file header and various tables */
 /* ======================================= */
 
-#include "pushpck1.h"
 typedef struct os2_exe_header {
     unsigned_16         signature;      /* signature to mark valid EXE file */
     unsigned_16         version;        /* version of linker                */
@@ -76,11 +72,10 @@ typedef struct os2_exe_header {
     unsigned_16         expver;
 } os2_exe_header;
 
-#define RAT_SIGNATURE_WORD          EXESIGN_LE
-#define OS2_SIGNATURE_WORD          EXESIGN_NE
-
-#define NE_HEADER_OFFSET            0x003cL
-#define OS2_EXE_HEADER_FOLLOWS(x)   ((x) >= 0x0040) /* reloc table offset 0x40 */
+#define OS2_SIGNATURE_WORD      0x454e  // 'NE'
+#define RAT_SIGNATURE_WORD      0x454c  // 'LE'
+#define OS2_NE_OFFSET             0x3c
+#define OS2_EXE_HEADER_FOLLOWS  0x0040  /* reloc table offset 0x40 */
 
 /******************************************************************************
  *
@@ -137,6 +132,7 @@ typedef struct os2_exe_header {
 #define TARGET_WINDOWS  2
 #define TARGET_DOS4     3
 #define TARGET_WIN386   4
+#define TARGET_DPMI     5 /* jwlink */
 
 /* these are the flags in the otherflags field */
 
@@ -180,12 +176,12 @@ typedef struct segment_record {
 #define SEG_FLAG_1       0x02
 #define SEG_FLAG_2       0x04
 #define SEG_ITERATED        8
-#define SEG_MOVABLE      0x10
+#define SEG_MOVABLE      0x10       /* for PE, it is SEG_WRITABLE */
 #define SEG_PURE         0x20       /* i.e. segment is sharable. */
 #define SEG_PRELOAD      0x40
 #define SEG_READ_ONLY    0x80
 #define SEG_RELOC       0x100
-#define SEG_CONFORMING  0x200       /* was SEG_DEBUG */
+#define SEG_CONFORMING  0x200       /* was SEG_DEBUG, is SEG_EXECUTABLE for PE */
 #define SEG_LEVEL_1     0x400
 #define SEG_LEVEL_2     0x800
 #define SEG_LEVEL_3     0xC00
@@ -219,7 +215,7 @@ typedef struct movable_record {
 
 #define ENTRY_EXPORTED  0x01
 #define ENTRY_SHARED    0x02
-#define IOPL_WORD_SHIFT 3
+#define IOPL_WORD_SHIFT 2
 
 typedef struct fixed_record {
     unsigned_8          info;           /* flags: 1 = exported entry        */
@@ -229,12 +225,7 @@ typedef struct fixed_record {
 
 #define OS2_DEF_SEGMENT_SHIFT  9
 
-/* The resource table entries type */
-typedef struct resource_table_record {
-    unsigned_16         type;           /* resource type */
-    unsigned_16         name;           /* resource name */
-} resource_table_record;
-
+/* The resource table is an unsigned_16 resource shift count followed by: */
 /* repeated for each type */
 typedef struct resource_type_record {
     unsigned_16         type;           /* see below */
@@ -250,7 +241,6 @@ typedef struct resource_record {
     unsigned_16         name;
     unsigned_32         reserved;
 } resource_record;
-#include "poppck.h"
 
 /* resource flags are any combination of SEG_MOVABLE, SEG_PURE, SEG_PRELOAD, */
 /* and SEG_DISCARD */
@@ -271,4 +261,7 @@ typedef struct resource_record {
 #define REL_IMPORTED_NAME       0x0002
 #define REL_ADDITIVE            0x0004
 
+#include "poppck.h"
+
+#define _EXEOS2_H
 #endif
