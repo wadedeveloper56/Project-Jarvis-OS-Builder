@@ -31,7 +31,9 @@
 
 #include "pch.h"
 #include "wlib.h"
-
+#include <stdbool.h>
+#define TRUE true
+#define FALSE false
 #define AR_MODE_ENV "WLIB$AR"
 
 #define eatwhite( c ) while( *(c) && isspace( *(unsigned char *)(c) ) ) ++(c);

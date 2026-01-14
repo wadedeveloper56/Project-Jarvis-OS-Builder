@@ -306,11 +306,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="File.h" />
+    <ClInclude Include="File2.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="File.c" />
+    <ClCompile Include="File2.c" />
     <ClCompile Include="pch.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">Create</PrecompiledHeader>

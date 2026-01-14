@@ -24,12 +24,18 @@
     <ClInclude Include="File.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="File2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="File.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="pch.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="File2.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

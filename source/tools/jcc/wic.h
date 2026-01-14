@@ -18,6 +18,7 @@
 #include "wicstr.h"
 #include "print.h"
 #include "Memory.h"
+#include "File2.h"
 
 int isEmptySLList(pSLList pList);
 void rewindCurrSLListPos(pSLList pList);

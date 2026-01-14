@@ -46,6 +46,9 @@
 #include <process.h>
 #include <conio.h>
 #endif
+#include <stdbool.h>
+#define TRUE true
+#define FALSE false
 
 #include "watcom.h"
 #include "debug.h"

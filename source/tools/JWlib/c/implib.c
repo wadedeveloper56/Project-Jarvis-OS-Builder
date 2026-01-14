@@ -31,6 +31,9 @@
 
 #include "pch.h"
 #include "wlib.h"
+#include <stdbool.h>
+#define TRUE true
+#define FALSE false
 
 // must correspond to defines in implib.h
 static char *procname[ 5 ] = { "", "AXP", "PPC", "X86","" };

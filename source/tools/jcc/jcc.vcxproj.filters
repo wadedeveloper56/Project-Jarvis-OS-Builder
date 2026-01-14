@@ -90,5 +90,8 @@
     <ClInclude Include="wicstr.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="bool.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -31,6 +31,9 @@
 
 #include "pch.h"
 #include "wlib.h"
+#include <stdbool.h>
+#define TRUE true
+#define FALSE false
 
 enum perms {// names for permissions
     none = 0,

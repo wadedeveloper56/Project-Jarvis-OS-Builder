@@ -17,6 +17,7 @@ typedef pSLList pArrList;
 typedef struct SymTabEntry *pSymTabEntry;
 typedef struct OUnit *pOUnit;   // Output unit
 typedef pSLList pLogList;
+typedef struct SLList *pSLList;
 
 typedef signed char int8;
 typedef unsigned char uint8;

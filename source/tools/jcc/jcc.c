@@ -4,12 +4,19 @@
 
 extern FILE* yyin; 
 
+void printUsageAndExit(void)
+{
+}
+
+void getCmdLineOptions(int argc, char* argv[]) {
+}
+
 static void initJccBasics(int argc, char* argv[]) {
     g_commentList = createSLList();
     g_dirList = createSLList();
     g_logList = createSLList();
     g_currPos = NULL;
-    //getCmdLineOptions(argc, argv);
+    getCmdLineOptions(argc, argv);
 }
 
 void jccExit(int exitCode) {

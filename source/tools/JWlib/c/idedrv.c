@@ -41,6 +41,9 @@
 #include "idedrv.h"
 #include "walloca.h"
 #include "bool.h"
+#include <stdbool.h>
+#define TRUE true
+#define FALSE false
 
 #define errout stdout
 

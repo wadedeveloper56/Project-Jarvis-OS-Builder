@@ -31,6 +31,9 @@
 
 #include "pch.h"
 #include "wlib.h"
+#include <stdbool.h>
+#define TRUE true
+#define FALSE false
 
 int SymbolNameCmp( const char *s1, const char *s2)
 {

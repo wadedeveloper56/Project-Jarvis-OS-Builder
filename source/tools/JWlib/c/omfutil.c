@@ -31,6 +31,9 @@
 
 #include "pch.h"
 #include "wlib.h"
+#include <stdbool.h>
+#define TRUE true
+#define FALSE false
 
 static unsigned long    charCount;
 static unsigned long    symCount;

@@ -36,6 +36,9 @@
     #include <malloc.h> // for _heapshrink()
 #endif
 #include <banner.h>
+#include <stdbool.h>
+#define TRUE true
+#define FALSE false
 
 #if defined(__DEBUG__) && defined(_BANEXTRA)
 #undef  _BANEXTRA
