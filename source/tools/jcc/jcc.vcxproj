@@ -24,6 +24,7 @@
     <ProjectGuid>{c9415ceb-a901-40a4-a954-6fbf514987ca}</ProjectGuid>
     <RootNamespace>jcc</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>JWcc</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

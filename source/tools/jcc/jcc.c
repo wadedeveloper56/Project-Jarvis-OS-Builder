@@ -35,5 +35,6 @@ void jccExit(int exitCode) {
 void main(int argc, char* argv[])
 {
     initJccBasics(argc, argv);
+    yyparse();
 	jccExit(0);
 }
