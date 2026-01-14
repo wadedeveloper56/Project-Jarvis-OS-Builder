@@ -51,83 +51,135 @@ extern int yydebug;
   enum yytokentype
   {
     YYEMPTY = -2,
-    YYEOF = 0,                     /* "end of file"  */
+    END = 0,                       /* "end of file"  */
     YYerror = 256,                 /* error  */
     YYUNDEF = 257,                 /* "invalid token"  */
-    IDENTIFIER = 258,              /* IDENTIFIER  */
-    I_CONSTANT = 259,              /* I_CONSTANT  */
-    F_CONSTANT = 260,              /* F_CONSTANT  */
-    STRING_LITERAL = 261,          /* STRING_LITERAL  */
-    FUNC_NAME = 262,               /* FUNC_NAME  */
-    SIZEOF = 263,                  /* SIZEOF  */
-    PTR_OP = 264,                  /* PTR_OP  */
-    INC_OP = 265,                  /* INC_OP  */
-    DEC_OP = 266,                  /* DEC_OP  */
-    LEFT_OP = 267,                 /* LEFT_OP  */
-    RIGHT_OP = 268,                /* RIGHT_OP  */
-    LE_OP = 269,                   /* LE_OP  */
-    GE_OP = 270,                   /* GE_OP  */
-    EQ_OP = 271,                   /* EQ_OP  */
-    NE_OP = 272,                   /* NE_OP  */
-    AND_OP = 273,                  /* AND_OP  */
-    OR_OP = 274,                   /* OR_OP  */
-    MUL_ASSIGN = 275,              /* MUL_ASSIGN  */
-    DIV_ASSIGN = 276,              /* DIV_ASSIGN  */
-    MOD_ASSIGN = 277,              /* MOD_ASSIGN  */
-    ADD_ASSIGN = 278,              /* ADD_ASSIGN  */
-    SUB_ASSIGN = 279,              /* SUB_ASSIGN  */
-    LEFT_ASSIGN = 280,             /* LEFT_ASSIGN  */
-    RIGHT_ASSIGN = 281,            /* RIGHT_ASSIGN  */
-    AND_ASSIGN = 282,              /* AND_ASSIGN  */
-    XOR_ASSIGN = 283,              /* XOR_ASSIGN  */
-    OR_ASSIGN = 284,               /* OR_ASSIGN  */
-    TYPEDEF_NAME = 285,            /* TYPEDEF_NAME  */
-    ENUMERATION_CONSTANT = 286,    /* ENUMERATION_CONSTANT  */
-    TYPEDEF = 287,                 /* TYPEDEF  */
-    EXTERN = 288,                  /* EXTERN  */
-    STATIC = 289,                  /* STATIC  */
-    AUTO = 290,                    /* AUTO  */
-    REGISTER = 291,                /* REGISTER  */
-    INLINE = 292,                  /* INLINE  */
-    CONST = 293,                   /* CONST  */
-    RESTRICT = 294,                /* RESTRICT  */
-    VOLATILE = 295,                /* VOLATILE  */
-    BOOL = 296,                    /* BOOL  */
-    CHAR = 297,                    /* CHAR  */
-    SHORT = 298,                   /* SHORT  */
-    INT = 299,                     /* INT  */
-    LONG = 300,                    /* LONG  */
-    SIGNED = 301,                  /* SIGNED  */
-    UNSIGNED = 302,                /* UNSIGNED  */
-    FLOAT = 303,                   /* FLOAT  */
-    DOUBLE = 304,                  /* DOUBLE  */
-    LONG_DOUBLE = 305,             /* LONG_DOUBLE  */
-    VOID = 306,                    /* VOID  */
-    COMPLEX = 307,                 /* COMPLEX  */
-    IMAGINARY = 308,               /* IMAGINARY  */
-    STRUCT = 309,                  /* STRUCT  */
-    UNION = 310,                   /* UNION  */
-    ENUM = 311,                    /* ENUM  */
-    ELLIPSIS = 312,                /* ELLIPSIS  */
-    CASE = 313,                    /* CASE  */
-    DEFAULT = 314,                 /* DEFAULT  */
-    IF = 315,                      /* IF  */
-    ELSE = 316,                    /* ELSE  */
-    SWITCH = 317,                  /* SWITCH  */
-    WHILE = 318,                   /* WHILE  */
-    DO = 319,                      /* DO  */
-    FOR = 320,                     /* FOR  */
-    GOTO = 321,                    /* GOTO  */
-    CONTINUE = 322,                /* CONTINUE  */
-    BREAK = 323,                   /* BREAK  */
-    RETURN = 324,                  /* RETURN  */
-    ALIGNAS = 325,                 /* ALIGNAS  */
-    ALIGNOF = 326,                 /* ALIGNOF  */
-    ATOMIC = 327,                  /* ATOMIC  */
-    GENERIC = 328,                 /* GENERIC  */
-    NORETURN = 329,                /* NORETURN  */
-    STATIC_ASSERT = 330,           /* STATIC_ASSERT  */
-    THREAD_LOCAL = 331             /* THREAD_LOCAL  */
+    IDENTIFIER = 258,              /* "identifier"  */
+    I_CONSTANT = 259,              /* "i_const"  */
+    F_CONSTANT = 260,              /* "f_const"  */
+    STRING_LITERAL = 261,          /* "sting_literal"  */
+    Y_EXCLAMATION = 262,           /* Y_EXCLAMATION  */
+    Y_NE = 263,                    /* Y_NE  */
+    Y_POUND = 264,                 /* Y_POUND  */
+    Y_POUND_POUND = 265,           /* Y_POUND_POUND  */
+    Y_AND = 266,                   /* Y_AND  */
+    Y_AND_AND = 267,               /* Y_AND_AND  */
+    Y_AND_EQUAL = 268,             /* Y_AND_EQUAL  */
+    Y_LEFT_PAREN = 269,            /* Y_LEFT_PAREN  */
+    Y_RIGHT_PAREN = 270,           /* Y_RIGHT_PAREN  */
+    Y_TIMES = 271,                 /* Y_TIMES  */
+    Y_TIMES_EQUAL = 272,           /* Y_TIMES_EQUAL  */
+    Y_PLUS = 273,                  /* Y_PLUS  */
+    Y_PLUS_PLUS = 274,             /* Y_PLUS_PLUS  */
+    Y_PLUS_EQUAL = 275,            /* Y_PLUS_EQUAL  */
+    Y_COMMA = 276,                 /* Y_COMMA  */
+    Y_MINUS = 277,                 /* Y_MINUS  */
+    Y_MINUS_MINUS = 278,           /* Y_MINUS_MINUS  */
+    Y_MINUS_EQUAL = 279,           /* Y_MINUS_EQUAL  */
+    Y_ARROW = 280,                 /* Y_ARROW  */
+    Y_DOT = 281,                   /* Y_DOT  */
+    Y_DOT_DOT_DOT = 282,           /* Y_DOT_DOT_DOT  */
+    Y_DIVIDE = 283,                /* Y_DIVIDE  */
+    Y_DIVIDE_EQUAL = 284,          /* Y_DIVIDE_EQUAL  */
+    Y_COLON = 285,                 /* Y_COLON  */
+    Y_SEG_OP = 286,                /* Y_SEG_OP  */
+    Y_SEMICOLON = 287,             /* Y_SEMICOLON  */
+    Y_LT = 288,                    /* Y_LT  */
+    Y_LSHIFT = 289,                /* Y_LSHIFT  */
+    Y_LSHIFT_EQUAL = 290,          /* Y_LSHIFT_EQUAL  */
+    Y_LE = 291,                    /* Y_LE  */
+    Y_EQUAL = 292,                 /* Y_EQUAL  */
+    Y_EQ = 293,                    /* Y_EQ  */
+    Y_GT = 294,                    /* Y_GT  */
+    Y_GE = 295,                    /* Y_GE  */
+    Y_RSHIFT = 296,                /* Y_RSHIFT  */
+    Y_RSHIFT_EQUAL = 297,          /* Y_RSHIFT_EQUAL  */
+    Y_QUESTION = 298,              /* Y_QUESTION  */
+    Y_LEFT_BRACKET = 299,          /* Y_LEFT_BRACKET  */
+    Y_RIGHT_BRACKET = 300,         /* Y_RIGHT_BRACKET  */
+    Y_XOR = 301,                   /* Y_XOR  */
+    Y_XOR_EQUAL = 302,             /* Y_XOR_EQUAL  */
+    Y___BASED = 303,               /* Y___BASED  */
+    Y___CDECL = 304,               /* Y___CDECL  */
+    Y___EXPORT = 305,              /* Y___EXPORT  */
+    Y___FAR = 306,                 /* Y___FAR  */
+    Y___FAR16 = 307,               /* Y___FAR16  */
+    Y___FORTRAN = 308,             /* Y___FORTRAN  */
+    Y___HUGE = 309,                /* Y___HUGE  */
+    Y___INTERRUPT = 310,           /* Y___INTERRUPT  */
+    Y___LOADDS = 311,              /* Y___LOADDS  */
+    Y___NEAR = 312,                /* Y___NEAR  */
+    Y___PASCAL = 313,              /* Y___PASCAL  */
+    Y___PRAGMA = 314,              /* Y___PRAGMA  */
+    Y___SAVEREGS = 315,            /* Y___SAVEREGS  */
+    Y___SEGMENT = 316,             /* Y___SEGMENT  */
+    Y___SEGNAME = 317,             /* Y___SEGNAME  */
+    Y___SELF = 318,                /* Y___SELF  */
+    Y___STDCALL = 319,             /* Y___STDCALL  */
+    Y__PACKED = 320,               /* Y__PACKED  */
+    Y__SEG16 = 321,                /* Y__SEG16  */
+    Y__SYSCALL = 322,              /* Y__SYSCALL  */
+    Y_THREAD_LOCAL = 323,          /* Y_THREAD_LOCAL  */
+    Y_AUTO = 324,                  /* Y_AUTO  */
+    Y_CHAR = 325,                  /* Y_CHAR  */
+    Y_CONST = 326,                 /* Y_CONST  */
+    Y_DOUBLE = 327,                /* Y_DOUBLE  */
+    Y_ELSE = 328,                  /* Y_ELSE  */
+    Y_ENUM = 329,                  /* Y_ENUM  */
+    Y_EXTERN = 330,                /* Y_EXTERN  */
+    Y_FLOAT = 331,                 /* Y_FLOAT  */
+    Y_INT = 332,                   /* Y_INT  */
+    Y_LONG = 333,                  /* Y_LONG  */
+    Y_REGISTER = 334,              /* Y_REGISTER  */
+    Y_SHORT = 335,                 /* Y_SHORT  */
+    Y_SIGNED = 336,                /* Y_SIGNED  */
+    Y_SIZEOF = 337,                /* Y_SIZEOF  */
+    Y_STATIC = 338,                /* Y_STATIC  */
+    Y_STRUCT = 339,                /* Y_STRUCT  */
+    Y_TYPEDEF = 340,               /* Y_TYPEDEF  */
+    Y_UNION = 341,                 /* Y_UNION  */
+    Y_UNSIGNED = 342,              /* Y_UNSIGNED  */
+    Y_VOID = 343,                  /* Y_VOID  */
+    Y_VOLATILE = 344,              /* Y_VOLATILE  */
+    Y_LEFT_BRACE = 345,            /* Y_LEFT_BRACE  */
+    Y_OR = 346,                    /* Y_OR  */
+    Y_OR_EQUAL = 347,              /* Y_OR_EQUAL  */
+    Y_OR_OR = 348,                 /* Y_OR_OR  */
+    Y_RIGHT_BRACE = 349,           /* Y_RIGHT_BRACE  */
+    Y_TILDE = 350,                 /* Y_TILDE  */
+    Y_IF = 351,                    /* Y_IF  */
+    Y_STRING = 352,                /* Y_STRING  */
+    Y_INCLUDE_FILE_NAME = 353,     /* Y_INCLUDE_FILE_NAME  */
+    Y_TYPEDEF_NAME = 354,          /* Y_TYPEDEF_NAME  */
+    Y_NUMBER = 355,                /* Y_NUMBER  */
+    Y_PERCENT = 356,               /* Y_PERCENT  */
+    Y_PERCENT_EQUAL = 357,         /* Y_PERCENT_EQUAL  */
+    Y_DEFINED = 358,               /* Y_DEFINED  */
+    Y_ENUMERATION_CONSTANT = 359,  /* Y_ENUMERATION_CONSTANT  */
+    Y_FUNC_NAME = 360,             /* Y_FUNC_NAME  */
+    Y_GENERIC = 361,               /* Y_GENERIC  */
+    Y_DEFAULT = 362,               /* Y_DEFAULT  */
+    Y_CASE = 363,                  /* Y_CASE  */
+    Y_ALIGNOF = 364,               /* Y_ALIGNOF  */
+    Y_IMAGINARY = 365,             /* Y_IMAGINARY  */
+    Y_COMPLEX = 366,               /* Y_COMPLEX  */
+    Y_LONG_DOUBLE = 367,           /* Y_LONG_DOUBLE  */
+    Y_BOOL = 368,                  /* Y_BOOL  */
+    Y_ATOMIC = 369,                /* Y_ATOMIC  */
+    Y_RESTRICT = 370,              /* Y_RESTRICT  */
+    Y_INLINE = 371,                /* Y_INLINE  */
+    Y_NORETURN = 372,              /* Y_NORETURN  */
+    Y_ALIGNAS = 373,               /* Y_ALIGNAS  */
+    Y_STATIC_ASSERT = 374,         /* Y_STATIC_ASSERT  */
+    Y_SWITCH = 375,                /* Y_SWITCH  */
+    Y_WHILE = 376,                 /* Y_WHILE  */
+    Y_DO = 377,                    /* Y_DO  */
+    Y_FOR = 378,                   /* Y_FOR  */
+    Y_GOTO = 379,                  /* Y_GOTO  */
+    Y_CONTINUE = 380,              /* Y_CONTINUE  */
+    Y_BREAK = 381,                 /* Y_BREAK  */
+    Y_RETURN = 382,                /* Y_RETURN  */
+    Y_LONG_LONG = 383              /* Y_LONG_LONG  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -136,14 +188,14 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 1 "cansi.y"
+#line 7 "cansi.y"
 
     int integer;
     char* string;
     long long longlong;
     long double longdouble;
 
-#line 147 "cansi.tab.h"
+#line 199 "cansi.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
