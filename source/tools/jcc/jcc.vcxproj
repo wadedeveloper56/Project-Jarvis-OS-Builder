@@ -73,22 +73,22 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>..\..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\bin\intermediate\jcc\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>.\;.\h;..\watcom\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>..\Memory;.\;.\h;..\watcom\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>..\..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\bin\intermediate\jcc\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>.\;.\h;..\watcom\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>..\Memory;.\;.\h;..\watcom\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>..\..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\bin\intermediate\jcc\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>.\;.\h;..\watcom\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>..\Memory;.\;.\h;..\watcom\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>..\..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\bin\intermediate\jcc\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>.\;.\h;..\watcom\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>..\Memory;.\;.\h;..\watcom\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -172,7 +172,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="cansi.tab.c" />
-    <ClCompile Include="globals.cpp" />
+    <ClCompile Include="gentypes.c" />
+    <ClCompile Include="globals.c" />
     <ClCompile Include="jcc.c" />
     <ClCompile Include="lex.yy.c" />
   </ItemGroup>
@@ -199,6 +200,11 @@
     <ClInclude Include="wicgener.h" />
     <ClInclude Include="wicmsg.h" />
     <ClInclude Include="wicstr.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Memory\Memory.vcxproj">
+      <Project>{36412e4a-5780-46b9-bf4b-0d79b4a7de96}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
