@@ -73,18 +73,22 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>..\..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\bin\intermediate\Arguments\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>..\Memory;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>..\..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\bin\intermediate\Arguments\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>..\Memory;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>..\..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\bin\intermediate\Arguments\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>..\Memory;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>..\..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\bin\intermediate\Arguments\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>..\Memory;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -167,23 +171,28 @@
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ArgDate.cpp" />
-    <ClCompile Include="ArgDbl.cpp" />
-    <ClCompile Include="ArgDstr.cpp" />
-    <ClCompile Include="ArgEnd.cpp" />
-    <ClCompile Include="ArgFile.cpp" />
-    <ClCompile Include="ArgGetOpt.cpp" />
-    <ClCompile Include="ArgInt.cpp" />
-    <ClCompile Include="ArgLit.cpp" />
-    <ClCompile Include="ArgRex.cpp" />
-    <ClCompile Include="ArgStr.cpp" />
-    <ClCompile Include="Arguments.cpp" />
-    <ClCompile Include="pch.cpp">
+    <ClCompile Include="ArgDate.c" />
+    <ClCompile Include="ArgDbl.c" />
+    <ClCompile Include="ArgDstr.c" />
+    <ClCompile Include="ArgEnd.c" />
+    <ClCompile Include="ArgFile.c" />
+    <ClCompile Include="ArgGetOpt.c" />
+    <ClCompile Include="ArgInt.c" />
+    <ClCompile Include="ArgLit.c" />
+    <ClCompile Include="ArgRex.c" />
+    <ClCompile Include="ArgStr.c" />
+    <ClCompile Include="Arguments.c" />
+    <ClCompile Include="pch.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Memory\Memory.vcxproj">
+      <Project>{36412e4a-5780-46b9-bf4b-0d79b4a7de96}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

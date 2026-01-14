@@ -19,4 +19,5 @@
 #include <setjmp.h>
 #include <time.h>
 #include <errno.h>
+#include "memory.h"
 #endif //PCH_H

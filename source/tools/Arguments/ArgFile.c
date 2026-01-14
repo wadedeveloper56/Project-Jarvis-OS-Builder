@@ -106,7 +106,7 @@ ArgFilePtr argFile1(const char* shortopts, const char* longopts, const char* dat
 
 ArgFilePtr argFileN(const char* shortopts, const char* longopts, const char* datatype, int mincount, int maxcount, const char* glossary) {
 	maxcount = (maxcount < mincount) ? mincount : maxcount;
-	ArgFilePtr result = new ArgFile;
+	ArgFilePtr result = AllocateMemory(sizeof(ArgFile));
 	if (result) {
 		result->hdr.flag = ARG_HASVALUE;
 		result->hdr.shortopts = shortopts;
@@ -121,9 +121,9 @@ ArgFilePtr argFileN(const char* shortopts, const char* longopts, const char* dat
 		result->hdr.checkfn = argFileCheckFn;
 		result->hdr.errorfn = argFileErrorFn;
 
-		result->filename = new const char* [maxcount];
-		result->basename = new const char* [maxcount];
-		result->extension = new const char* [maxcount];
+		result->filename = AllocateMemory(sizeof(const char*)*maxcount);
+		result->basename = AllocateMemory(sizeof(const char*) * maxcount);
+		result->extension = AllocateMemory(sizeof(const char*) * maxcount);
 		result->count = 0;
 
 		for (int i = 0; i < maxcount; i++) {

@@ -223,6 +223,10 @@
 		int _flags;
 	}TRex, * TRexPtr, ** TRexPtrPtr;
 
+#ifdef __cplusplus
+	extern "C" {
+#endif
+
 	// ArgGetOpt.cpp
 	ARGUMENTS_API void warnx(const char* fmt, ...);
 	ARGUMENTS_API void permuteArgs(int panonopt_start, int panonopt_end, int opt_end, char* const* nargv);
@@ -361,5 +365,7 @@
 	ARGUMENTS_API void argPrintSyntax(FILE* fp, void** argtable, const char* suffix);
 	ARGUMENTS_API void arg_print_glossary_ds(ArgDstrPtr ds, void** argtable, const char* format);
 	ARGUMENTS_API void argPrintGlossary(FILE* fp, void** argtable, const char* format);
-
+#ifdef __cplusplus
+}
+#endif
 #endif

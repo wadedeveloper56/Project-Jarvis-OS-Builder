@@ -67,7 +67,7 @@ ArgStrPtr argStr1(const char* shortopts, const char* longopts, const char* datat
 
 ArgStrPtr argStrN(const char* shortopts, const char* longopts, const char* datatype, int mincount, int maxcount, const char* glossary) {
 	maxcount = (maxcount < mincount) ? mincount : maxcount;
-	ArgStrPtr result = new ArgStr;
+	ArgStrPtr result = AllocateMemory(sizeof(ArgStr));
 	if (result) {
 		result->hdr.flag = ARG_HASVALUE;
 		result->hdr.shortopts = shortopts;
@@ -82,7 +82,7 @@ ArgStrPtr argStrN(const char* shortopts, const char* longopts, const char* datat
 		result->hdr.checkfn = argStrCheckFn;
 		result->hdr.errorfn = argStrErrorFn;
 
-		result->sval = new const char*[maxcount];
+		result->sval = AllocateMemory(sizeof(const char*)*maxcount);
 		result->count = 0;
 
 		for (int i = 0; i < maxcount; i++) {
