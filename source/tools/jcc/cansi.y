@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "wic.h"
+
+int yyerror(const char *s);
+int yylex();
 %}
 
 %union {

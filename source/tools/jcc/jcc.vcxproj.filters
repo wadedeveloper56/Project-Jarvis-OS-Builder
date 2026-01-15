@@ -98,7 +98,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Resource.rc">
+    <ResourceCompile Include="JWcc.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>
