@@ -195,6 +195,7 @@
     <ClInclude Include="hash.h" />
     <ClInclude Include="parse.h" />
     <ClInclude Include="print.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="tables.h" />
     <ClInclude Include="token.h" />
     <ClInclude Include="trandecl.h" />
@@ -213,6 +214,9 @@
     <ProjectReference Include="..\Memory\Memory.vcxproj">
       <Project>{36412e4a-5780-46b9-bf4b-0d79b4a7de96}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
