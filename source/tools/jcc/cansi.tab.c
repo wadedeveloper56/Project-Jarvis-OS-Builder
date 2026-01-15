@@ -2104,8 +2104,32 @@ yyreduce:
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
+  case 270: /* translation_unit: external_declaration  */
+#line 638 "cansi.y"
+                                                 { printf("translation_unit -> external_declaration\n\n"); }
+#line 2111 "cansi.tab.c"
+    break;
 
-#line 2109 "cansi.tab.c"
+  case 271: /* translation_unit: translation_unit external_declaration  */
+#line 639 "cansi.y"
+                                                 { printf("translation_unit -> translation_unit external_declaration\n\n"); }
+#line 2117 "cansi.tab.c"
+    break;
+
+  case 272: /* external_declaration: function_definition  */
+#line 643 "cansi.y"
+                                { printf("external_declaration -> function_definition\n"); }
+#line 2123 "cansi.tab.c"
+    break;
+
+  case 273: /* external_declaration: declaration  */
+#line 644 "cansi.y"
+                                { printf("external_declaration -> declaration\n"); }
+#line 2129 "cansi.tab.c"
+    break;
+
+
+#line 2133 "cansi.tab.c"
 
       default: break;
     }
@@ -2302,9 +2326,11 @@ yyreturnlab:
 
 #include <stdio.h>
 
+extern char * yytext;
+
 int yyerror(const char *s)
 {
 	fflush(stdout);
-	fprintf(stderr, "*** %s\n", s);
+	fprintf(stderr, "*** %s %s\n", s, yytext);
 	return 0;
 }

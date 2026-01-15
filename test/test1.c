@@ -1,4 +1,3 @@
-#define value(x) (x+2)
 char var1;
 short var2;
 int var3;
@@ -12,12 +11,6 @@ complex var10;
 imaginary var11;
 char *var12[];
 
-void function2(int var);
-
 int main(){
-    function2(value(7));
     return 0;
-}
-
-void function2(int var){
 }

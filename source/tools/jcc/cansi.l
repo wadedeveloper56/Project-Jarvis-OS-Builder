@@ -75,10 +75,10 @@ static int check_type(void);
 "_Alignas"              { return Y_ALIGNAS; }
 "_Alignof"              { return Y_ALIGNOF; }
 "_Atomic"               { return Y_ATOMIC; }
-"_Bool"                 { return Y_BOOL; }
-"_Complex"              { return Y_COMPLEX; }
+"bool"                 { return Y_BOOL; }
+"complex"              { return Y_COMPLEX; }
 "_Generic"              { return Y_GENERIC; }
-"_Imaginary"            { return Y_IMAGINARY; }
+"imaginary"            { return Y_IMAGINARY; }
 "_Noreturn"             { return Y_NORETURN; }
 "_Static_assert"        { return Y_STATIC_ASSERT; }
 "_Thread_local"         	        { return Y_THREAD_LOCAL; }

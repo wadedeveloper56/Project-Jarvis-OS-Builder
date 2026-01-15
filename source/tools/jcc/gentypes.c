@@ -1,6 +1,26 @@
 #include "wic.h"
 
-int isEmptySLList(pSLList pList) 
+void forAllInSLList(pSLList pList, void (func)(void**))
+{
+    _SLList* temp;
+    if (func == NULL) {
+        return;
+    }
+    temp = pList->head;
+    while (temp != pList->tail) {
+        func(&(temp->userData));
+        temp = temp->next;
+    }
+}
+
+void addSLListElem(pSLList pList, void* elem)
+{
+    pList->tail->next = AllocateMemory(sizeof(_SLList));
+    pList->tail->userData = elem;
+    pList->tail = pList->tail->next;
+}
+
+int isEmptySLList(pSLList pList)
 {
     return (pList->head == pList->tail);
 }

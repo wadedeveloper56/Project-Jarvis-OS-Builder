@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "cansi.tab.h"
 #include "wic.h"
 #include "ArgumentTable.h"
@@ -8,6 +9,8 @@ extern FILE* yyin;
 
 void printHeader(void)
 {
+	printf("JWcc - Open Source C Compiler v0.0.1 (C) Copyright 2025 Christopher D. Wade.\n");
+	printf("All Rights Reserved\n");
 }
 
 void getCmdLineOptions(int argc, char* argv[]) {
@@ -45,6 +48,11 @@ void getCmdLineOptions(int argc, char* argv[]) {
 		exit(1);
 	}
 	g_opt.fileNameList = createSLList();
+	for (int i = 0; i < infiles->count; i++)
+	{
+		addSLListElem(g_opt.fileNameList, _strdup(infiles->filename[i]));
+	}
+	argFreeTable(argtable, sizeof(argtable) / sizeof(argtable[0]));
 }
 
 static void initJccBasics(int argc, char* argv[]) {
@@ -68,9 +76,22 @@ void jccExit(int exitCode) {
     exit(exitCode);
 }
 
+static void doConversion(void** name) 
+{
+	char* newName = *name;
+	printf("Processing file: %s\n", newName);
+	yyin = fopen(newName, "r");
+	if (yyin == NULL) {
+		printf("Error: Could not open file %s for reading.\n", newName);
+		jccExit(1);
+	}
+	yyparse();
+	if (yyin!=NULL) fclose(yyin);
+}
+
 void main(int argc, char* argv[])
 {
     initJccBasics(argc, argv);
-    //yyparse();
+	forAllInSLList(g_opt.fileNameList, doConversion);
 	jccExit(0);
 }

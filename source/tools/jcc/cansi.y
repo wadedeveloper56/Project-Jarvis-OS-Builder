@@ -635,13 +635,13 @@ jump_statement
 	;
 
 translation_unit
-	: external_declaration
-	| translation_unit external_declaration
+	: external_declaration                   { printf("translation_unit -> external_declaration\n\n"); }
+	| translation_unit external_declaration  { printf("translation_unit -> translation_unit external_declaration\n\n"); }
 	;
 
 external_declaration
-	: function_definition
-	| declaration
+	: function_definition   { printf("external_declaration -> function_definition\n"); }
+	| declaration           { printf("external_declaration -> declaration\n"); }
 	;
 
 function_definition
@@ -658,9 +658,11 @@ declaration_list
 %%
 #include <stdio.h>
 
+extern char * yytext;
+
 int yyerror(const char *s)
 {
 	fflush(stdout);
-	fprintf(stderr, "*** %s\n", s);
+	fprintf(stderr, "*** %s %s\n", s, yytext);
 	return 0;
 }
