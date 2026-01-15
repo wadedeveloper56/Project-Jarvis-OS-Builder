@@ -71,6 +71,6 @@ void jccExit(int exitCode) {
 void main(int argc, char* argv[])
 {
     initJccBasics(argc, argv);
-    yyparse();
+    //yyparse();
 	jccExit(0);
 }
