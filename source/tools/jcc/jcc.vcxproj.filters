@@ -24,6 +24,9 @@
     <ClCompile Include="lex.yy.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="structures.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="cansi.y" />

@@ -1300,52 +1300,52 @@ YY_RULE_SETUP
 case 51:
 YY_RULE_SETUP
 #line 92 "cansi.l"
-{ yylval->longlong = strtoull(yytext, 0, 10); return I_CONSTANT; }
+{ yylval->token = createConstantULLToken(strtoull(yytext, 0, 10)); return I_CONSTANT; }
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
 #line 93 "cansi.l"
-{ yylval->longlong = strtoull(yytext, 0, 10); return I_CONSTANT; }
+{ yylval->token = createConstantULLToken(strtoull(yytext, 0, 10)); return I_CONSTANT; }
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
 #line 94 "cansi.l"
-{ yylval->longlong = strtoull(yytext, 0, 10); return I_CONSTANT; }
+{ yylval->token = createConstantULLToken(strtoull(yytext, 0, 10)); return I_CONSTANT; }
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
 #line 95 "cansi.l"
-{ yylval->longlong = strtoull(yytext, 0, 10); return I_CONSTANT; }
+{ yylval->token = createConstantULLToken(strtoull(yytext, 0, 10)); return I_CONSTANT; }
 	YY_BREAK
 case 55:
 YY_RULE_SETUP
 #line 96 "cansi.l"
-{ yylval->longdouble = strtold(yytext, NULL); return F_CONSTANT; }
+{ yylval->token = createConstantLDToken(strtold(yytext, NULL)); return F_CONSTANT; }
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
 #line 97 "cansi.l"
-{ yylval->longdouble = strtold(yytext, NULL); return F_CONSTANT; }
+{ yylval->token = createConstantLDToken(strtold(yytext, NULL)); return F_CONSTANT; }
 	YY_BREAK
 case 57:
 YY_RULE_SETUP
 #line 98 "cansi.l"
-{ yylval->longdouble = strtold(yytext, NULL); return F_CONSTANT; }
+{ yylval->token = createConstantLDToken(strtold(yytext, NULL)); return F_CONSTANT; }
 	YY_BREAK
 case 58:
 YY_RULE_SETUP
 #line 99 "cansi.l"
-{ yylval->longdouble = strtold(yytext, NULL); return F_CONSTANT; }
+{ yylval->token = createConstantLDToken(strtold(yytext, NULL)); return F_CONSTANT; }
 	YY_BREAK
 case 59:
 YY_RULE_SETUP
 #line 100 "cansi.l"
-{ yylval->longdouble = strtold(yytext, NULL); return F_CONSTANT; }
+{ yylval->token = createConstantLDToken(strtold(yytext, NULL)); return F_CONSTANT; }
 	YY_BREAK
 case 60:
 YY_RULE_SETUP
 #line 101 "cansi.l"
-{ yylval->longdouble = strtold(yytext, NULL); return F_CONSTANT; }
+{ yylval->token = createConstantLDToken(strtold(yytext, NULL)); return F_CONSTANT; }
 	YY_BREAK
 case 61:
 /* rule 61 can match eol */

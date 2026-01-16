@@ -89,16 +89,16 @@ static int check_type(void);
 "_Thread_local"         	        { return Y_THREAD_LOCAL; }
 "__func__"              	        { return Y_FUNC_NAME; }
 {L}{A}*						        { yylval->string = _strdup(yytext); return IDENTIFIER; }
-{HP}{H}+{IS}?				        { yylval->longlong = strtoull(yytext, 0, 10); return I_CONSTANT; }
-{NZ}{D}*{IS}?				        { yylval->longlong = strtoull(yytext, 0, 10); return I_CONSTANT; }
-"0"{O}*{IS}?				        { yylval->longlong = strtoull(yytext, 0, 10); return I_CONSTANT; }
-{CP}?"'"([^'\\\n]|{ES})+"'"		    { yylval->longlong = strtoull(yytext, 0, 10); return I_CONSTANT; }
-{D}+{E}{FS}?				        { yylval->longdouble = strtold(yytext, NULL); return F_CONSTANT; }
-{D}*"."{D}+{E}?{FS}?			    { yylval->longdouble = strtold(yytext, NULL); return F_CONSTANT; }
-{D}+"."{E}?{FS}?			        { yylval->longdouble = strtold(yytext, NULL); return F_CONSTANT; }
-{HP}{H}+{P}{FS}?			        { yylval->longdouble = strtold(yytext, NULL); return F_CONSTANT; }
-{HP}{H}*"."{H}+{P}{FS}?			    { yylval->longdouble = strtold(yytext, NULL); return F_CONSTANT; }
-{HP}{H}+"."{P}{FS}?    			    { yylval->longdouble = strtold(yytext, NULL); return F_CONSTANT; }
+{HP}{H}+{IS}?				        { yylval->token = createConstantULLToken(strtoull(yytext, 0, 10)); return I_CONSTANT; }
+{NZ}{D}*{IS}?				        { yylval->token = createConstantULLToken(strtoull(yytext, 0, 10)); return I_CONSTANT; }
+"0"{O}*{IS}?				        { yylval->token = createConstantULLToken(strtoull(yytext, 0, 10)); return I_CONSTANT; }
+{CP}?"'"([^'\\\n]|{ES})+"'"		    { yylval->token = createConstantULLToken(strtoull(yytext, 0, 10)); return I_CONSTANT; }
+{D}+{E}{FS}?				        { yylval->token = createConstantLDToken(strtold(yytext, NULL)); return F_CONSTANT; }
+{D}*"."{D}+{E}?{FS}?			    { yylval->token = createConstantLDToken(strtold(yytext, NULL)); return F_CONSTANT; }
+{D}+"."{E}?{FS}?			        { yylval->token = createConstantLDToken(strtold(yytext, NULL)); return F_CONSTANT; }
+{HP}{H}+{P}{FS}?			        { yylval->token = createConstantLDToken(strtold(yytext, NULL)); return F_CONSTANT; }
+{HP}{H}*"."{H}+{P}{FS}?			    { yylval->token = createConstantLDToken(strtold(yytext, NULL)); return F_CONSTANT; }
+{HP}{H}+"."{P}{FS}?    			    { yylval->token = createConstantLDToken(strtold(yytext, NULL)); return F_CONSTANT; }
 ({SP}?\"([^"\\\n]|{ES})*\"{WS}*)+	{ yylval->string = _strdup(yytext); return STRING_LITERAL; }
 "..."					{ return Y_DOT_DOT_DOT; }
 ">>="					{ return Y_RSHIFT_EQUAL; }

@@ -175,6 +175,7 @@
     <ClCompile Include="cansi.tab.c" />
     <ClCompile Include="jcc.c" />
     <ClCompile Include="lex.yy.c" />
+    <ClCompile Include="structures.c" />
   </ItemGroup>
   <ItemGroup>
     <None Include="cansi.l" />
