@@ -7,12 +7,7 @@ int yyerror(const char *s);
 int yylex();
 %}
 
-%union {
-    int integer;
-    char* string;
-    long long longlong;
-    long double longdouble;
-}
+%define api.value.type { union ParseUnion }
 
 %token END 0 "end of file"
 %token<string>     IDENTIFIER "identifier"

@@ -82,7 +82,7 @@ typedef struct _CTree {
 	struct _CTree* child2;  /* Right child */
 } CTree, * pCTree;
 
-typedef union {
+typedef union ParseUnion {
 	pOUnit oUnit;
 	pToken token;
 	pCTree tree;
@@ -102,6 +102,10 @@ typedef union {
 	pArrElem arrElem;
 	int flag;
 	void* data;
+	int integer;
+	char* string;
+	long long longlong;
+	long double longdouble;
 } ParseUnion;
 
 /* types used for collecting decl-specifiers */

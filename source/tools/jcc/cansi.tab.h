@@ -186,19 +186,7 @@ extern int yydebug;
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-union YYSTYPE
-{
-#line 10 "cansi.y"
-
-    int integer;
-    char* string;
-    long long longlong;
-    long double longdouble;
-
-#line 199 "cansi.tab.h"
-
-};
-typedef union YYSTYPE YYSTYPE;
+typedef  union ParseUnion  YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1
 #endif
