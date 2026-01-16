@@ -25,7 +25,7 @@ WS  [ \t\v\n\f]
 #include <stdio.h>
 #include <io.h>
 #include <fcntl.h>
-#include "wic.h"
+#include "jcc.h"
 #include "cansi.tab.h"
 
 #define fileno _fileno

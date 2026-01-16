@@ -1,7 +1,7 @@
 %{
 #include <stdlib.h>
 #include <stdio.h>
-#include "wic.h"
+#include "jcc.h"
 
 int yyerror(const char *s);
 int yylex();
@@ -622,11 +622,11 @@ iteration_statement
 	;
 
 jump_statement
-	: Y_GOTO IDENTIFIER Y_SEMICOLON
-	| Y_CONTINUE Y_SEMICOLON
-	| Y_BREAK Y_SEMICOLON
-	| Y_RETURN Y_SEMICOLON
-	| Y_RETURN expression Y_SEMICOLON
+	: Y_GOTO IDENTIFIER Y_SEMICOLON    { printf("jump_statement -> Y_GOTO IDENTIFIER Y_SEMICOLON\n"); }
+	| Y_CONTINUE Y_SEMICOLON           { printf("jump_statement -> Y_CONTINUE Y_SEMICOLON\n"); }
+	| Y_BREAK Y_SEMICOLON              { printf("jump_statement -> Y_BREAK Y_SEMICOLON\n"); }
+	| Y_RETURN Y_SEMICOLON             { printf("jump_statement -> Y_RETURN Y_SEMICOLON\n"); }
+	| Y_RETURN expression Y_SEMICOLON  { printf("jump_statement -> Y_RETURN expression Y_SEMICOLON\n"); }
 	;
 
 translation_unit

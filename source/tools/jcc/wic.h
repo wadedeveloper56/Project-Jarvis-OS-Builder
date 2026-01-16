@@ -21,10 +21,3 @@
 #include "File2.h"
 #include "Memory.h"
 
-void forAllInSLList(pSLList pList, void (func)(void**));
-void addSLListElem(pSLList pList, void* elem);
-int isEmptySLList(pSLList pList);
-void rewindCurrSLListPos(pSLList pList);
-pSLList createSLList(void);
-void zapSLList(pSLList pList, void (zapElem)(void*));
-
