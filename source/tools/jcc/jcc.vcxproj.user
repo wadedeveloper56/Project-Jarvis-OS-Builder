@@ -16,5 +16,6 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LocalDebuggerCommandArguments>C:\projects\OSDev\ProjectJarvis\test\test1.c</LocalDebuggerCommandArguments>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+    <LocalDebuggerCommandArgumentsHistory>C:\projects\OSDev\ProjectJarvis\test\test1.c|</LocalDebuggerCommandArgumentsHistory>
   </PropertyGroup>
 </Project>

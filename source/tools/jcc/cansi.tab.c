@@ -55,7 +55,7 @@
 #define YYSKELETON_NAME "yacc.c"
 
 /* Pure parsers.  */
-#define YYPURE 0
+#define YYPURE 1
 
 /* Push parsers.  */
 #define YYPUSH 0
@@ -1847,13 +1847,6 @@ yydestruct (const char *yymsg,
 }
 
 
-/* Lookahead token kind.  */
-int yychar;
-
-/* The semantic value of the lookahead symbol.  */
-YYSTYPE yylval;
-/* Number of syntax errors so far.  */
-int yynerrs;
 
 
 
@@ -1865,6 +1858,19 @@ int yynerrs;
 int
 yyparse (void)
 {
+/* Lookahead token kind.  */
+int yychar;
+
+
+/* The semantic value of the lookahead symbol.  */
+/* Default value used for initialization, for pacifying older GCCs
+   or non-GCC compilers.  */
+YY_INITIAL_VALUE (static YYSTYPE yyval_default;)
+YYSTYPE yylval YY_INITIAL_VALUE (= yyval_default);
+
+    /* Number of syntax errors so far.  */
+    int yynerrs = 0;
+
     yy_state_fast_t yystate = 0;
     /* Number of tokens to shift before error messages enabled.  */
     int yyerrstatus = 0;
@@ -2017,7 +2023,7 @@ yybackup:
   if (yychar == YYEMPTY)
     {
       YYDPRINTF ((stderr, "Reading a token\n"));
-      yychar = yylex ();
+      yychar = yylex (&yylval);
     }
 
   if (yychar <= END)
@@ -2107,29 +2113,41 @@ yyreduce:
   case 270: /* translation_unit: external_declaration  */
 #line 633 "cansi.y"
                                                  { printf("translation_unit -> external_declaration\n\n"); }
-#line 2111 "cansi.tab.c"
+#line 2117 "cansi.tab.c"
     break;
 
   case 271: /* translation_unit: translation_unit external_declaration  */
 #line 634 "cansi.y"
                                                  { printf("translation_unit -> translation_unit external_declaration\n\n"); }
-#line 2117 "cansi.tab.c"
+#line 2123 "cansi.tab.c"
     break;
 
   case 272: /* external_declaration: function_definition  */
 #line 638 "cansi.y"
                                 { printf("external_declaration -> function_definition\n"); }
-#line 2123 "cansi.tab.c"
+#line 2129 "cansi.tab.c"
     break;
 
   case 273: /* external_declaration: declaration  */
 #line 639 "cansi.y"
                                 { printf("external_declaration -> declaration\n"); }
-#line 2129 "cansi.tab.c"
+#line 2135 "cansi.tab.c"
+    break;
+
+  case 274: /* function_definition: declaration_specifiers declarator declaration_list compound_statement  */
+#line 643 "cansi.y"
+                                                                                   { printf("function_definition -> declaration_specifiers declarator declaration_list compound_statement\n"); }
+#line 2141 "cansi.tab.c"
+    break;
+
+  case 275: /* function_definition: declaration_specifiers declarator compound_statement  */
+#line 644 "cansi.y"
+                                                                                   { printf("function_definition -> declaration_specifiers declarator compound_statement\n"); }
+#line 2147 "cansi.tab.c"
     break;
 
 
-#line 2133 "cansi.tab.c"
+#line 2151 "cansi.tab.c"
 
       default: break;
     }

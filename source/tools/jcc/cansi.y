@@ -6,7 +6,7 @@
 int yyerror(const char *s);
 int yylex();
 %}
-
+%define api.pure
 %define api.value.type { union ParseUnion }
 
 %token END 0 "end of file"
@@ -640,8 +640,8 @@ external_declaration
 	;
 
 function_definition
-	: declaration_specifiers declarator declaration_list compound_statement
-	| declaration_specifiers declarator compound_statement
+	: declaration_specifiers declarator declaration_list compound_statement    { printf("function_definition -> declaration_specifiers declarator declaration_list compound_statement\n"); }
+	| declaration_specifiers declarator compound_statement                     { printf("function_definition -> declaration_specifiers declarator compound_statement\n"); }
 	;
 
 declaration_list

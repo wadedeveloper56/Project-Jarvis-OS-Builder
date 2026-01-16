@@ -36,6 +36,8 @@ static void comment(void);
 static int check_type(void);
 %}
 
+%option bison-bridge
+
 %%
 "/*"                    { comment(); }
 "//".*                  { /* consume //-comment */ }

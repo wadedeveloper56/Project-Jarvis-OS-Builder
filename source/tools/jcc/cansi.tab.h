@@ -192,7 +192,6 @@ typedef  union ParseUnion  YYSTYPE;
 #endif
 
 
-extern YYSTYPE yylval;
 
 
 int yyparse (void);
