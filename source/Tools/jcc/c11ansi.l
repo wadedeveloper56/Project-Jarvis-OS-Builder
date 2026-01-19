@@ -41,64 +41,65 @@ static int check_type(void);
 %%
 "/*"                    { comment(); }
 "//".*                  { /* consume //-comment */ }
-"auto"					{ return(Y_AUTO); }
-"break"					{ return(Y_BREAK); }
-"case"					{ return(Y_CASE); }
-"char"					{ return(Y_CHAR); }
-"const"					{ return(Y_CONST); }
-"continue"				{ return(Y_CONTINUE); }
-"default"				{ return(Y_DEFAULT); }
-"do"					{ return(Y_DO); }
-"double"				{ return(Y_DOUBLE); }
-"long double"			{ return(Y_LONG_DOUBLE); }
-"else"					{ return(Y_ELSE); }
-"enum"					{ return(Y_ENUM); }
-"extern"				{ return(Y_EXTERN); }
-"float"					{ return(Y_FLOAT); }
-"for"					{ return(Y_FOR); }
-"goto"					{ return(Y_GOTO); }
-"if"					{ return(Y_IF); }
-"inline"				{ return(Y_INLINE); }
-"int"					{ return(Y_INT); }
-"long"					{ return(Y_LONG); }
-"long long"				{ return(Y_LONG_LONG); }
-"register"				{ return(Y_REGISTER); }
-"restrict"				{ return(Y_RESTRICT); }
-"return"				{ return(Y_RETURN); }
-"short"					{ return(Y_SHORT); }
-"signed"				{ return(Y_SIGNED); }
-"sizeof"				{ return(Y_SIZEOF); }
-"static"				{ return(Y_STATIC); }
-"struct"				{ return(Y_STRUCT); }
-"switch"				{ return(Y_SWITCH); }
-"typedef"				{ return(Y_TYPEDEF); }
-"union"					{ return(Y_UNION); }
-"unsigned"				{ return(Y_UNSIGNED); }
-"void"					{ return(Y_VOID); }
-"volatile"				{ return(Y_VOLATILE); }
-"while"					{ return(Y_WHILE); }
-"_Alignas"              { return Y_ALIGNAS; }
-"_Alignof"              { return Y_ALIGNOF; }
-"_Atomic"               { return Y_ATOMIC; }
-"bool"                 { return Y_BOOL; }
-"complex"              { return Y_COMPLEX; }
-"_Generic"              { return Y_GENERIC; }
-"imaginary"            { return Y_IMAGINARY; }
-"_Noreturn"             { return Y_NORETURN; }
-"_Static_assert"        { return Y_STATIC_ASSERT; }
-"_Thread_local"         	        { return Y_THREAD_LOCAL; }
-"__func__"              	        { return Y_FUNC_NAME; }
-{L}{A}*						        { yylval->token = createStringIDToken(yytext); return IDENTIFIER; }
-{HP}{H}+{IS}?				        { yylval->token = createConstantULLToken(strtoull(yytext, 0, 10)); return I_CONSTANT; }
-{NZ}{D}*{IS}?				        { yylval->token = createConstantULLToken(strtoull(yytext, 0, 10)); return I_CONSTANT; }
-"0"{O}*{IS}?				        { yylval->token = createConstantULLToken(strtoull(yytext, 0, 10)); return I_CONSTANT; }
-{CP}?"'"([^'\\\n]|{ES})+"'"		    { yylval->token = createConstantULLToken(strtoull(yytext, 0, 10)); return I_CONSTANT; }
-{D}+{E}{FS}?				        { yylval->token = createConstantLDToken(strtold(yytext, NULL)); return F_CONSTANT; }
-{D}*"."{D}+{E}?{FS}?			    { yylval->token = createConstantLDToken(strtold(yytext, NULL)); return F_CONSTANT; }
-{D}+"."{E}?{FS}?			        { yylval->token = createConstantLDToken(strtold(yytext, NULL)); return F_CONSTANT; }
-{HP}{H}+{P}{FS}?			        { yylval->token = createConstantLDToken(strtold(yytext, NULL)); return F_CONSTANT; }
-{HP}{H}*"."{H}+{P}{FS}?			    { yylval->token = createConstantLDToken(strtold(yytext, NULL)); return F_CONSTANT; }
-{HP}{H}+"."{P}{FS}?    			    { yylval->token = createConstantLDToken(strtold(yytext, NULL)); return F_CONSTANT; }
+"auto"					{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_AUTO); }
+"break"					{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_BREAK); }
+"case"					{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_CASE); }
+"char"					{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_CHAR); }
+"const"					{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_CONST); }
+"continue"				{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_CONTINUE); }
+"default"				{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_DEFAULT); }
+"do"					{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_DO); }
+"double"				{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_DOUBLE); }
+"long double"			{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_LONG_DOUBLE); }
+"else"					{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_ELSE); }
+"enum"					{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_ENUM); }
+"extern"				{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_EXTERN); }
+"float"					{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_FLOAT); }
+"for"					{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_FOR); }
+"goto"					{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_GOTO); }
+"if"					{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_IF); }
+"inline"				{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_INLINE); }
+"int"					{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_INT); }
+"long"					{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_LONG); }
+"long long"				{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_LONG_LONG); }
+"register"				{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_REGISTER); }
+"restrict"				{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_RESTRICT); }
+"return"				{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_RETURN); }
+"short"					{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_SHORT); }
+"signed"				{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_SIGNED); }
+"sizeof"				{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_SIZEOF); }
+"static"				{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_STATIC); }
+"struct"				{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_STRUCT); }
+"switch"				{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_SWITCH); }
+"typedef"				{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_TYPEDEF); }
+"union"					{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_UNION); }
+"unsigned"				{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_UNSIGNED); }
+"void"					{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_VOID); }
+"volatile"				{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_VOLATILE); }
+"while"					{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_WHILE); }
+"_Alignas"              { yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return Y_ALIGNAS; }
+"_Alignof"              { yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return Y_ALIGNOF; }
+"_Atomic"               { yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return Y_ATOMIC; }
+"bool"                 { yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return Y_BOOL; }
+"complex"              { yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return Y_COMPLEX; }
+"_Generic"              { yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return Y_GENERIC; }
+"imaginary"            { yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return Y_IMAGINARY; }
+"_Noreturn"             { yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return Y_NORETURN; }
+
+"_Static_assert"                    { yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return Y_STATIC_ASSERT; }
+"_Thread_local"                     { yylval->token = createKeywordToken(yytext,Y_THREAD_LOCAL); return Y_THREAD_LOCAL; }
+"__func__"                          { yylval->token = createKeywordToken(yytext,Y_FUNC_NAME); return Y_FUNC_NAME; }
+{L}{A}*                             { yylval->token = createStringIDToken(yytext); return IDENTIFIER; }
+{HP}{H}+{IS}?                       { yylval->token = createConstantULLToken(strtoull(yytext, 0, 10)); return I_CONSTANT; }
+{NZ}{D}*{IS}?                       { yylval->token = createConstantULLToken(strtoull(yytext, 0, 10)); return I_CONSTANT; }
+"0"{O}*{IS}?                        { yylval->token = createConstantULLToken(strtoull(yytext, 0, 10)); return I_CONSTANT; }
+{CP}?"'"([^'\\\n]|{ES})+"'"         { yylval->token = createConstantULLToken(strtoull(yytext, 0, 10)); return I_CONSTANT; }
+{D}+{E}{FS}?                        { yylval->token = createConstantLDToken(strtold(yytext, NULL)); return F_CONSTANT; }
+{D}*"."{D}+{E}?{FS}?                { yylval->token = createConstantLDToken(strtold(yytext, NULL)); return F_CONSTANT; }
+{D}+"."{E}?{FS}?                    { yylval->token = createConstantLDToken(strtold(yytext, NULL)); return F_CONSTANT; }
+{HP}{H}+{P}{FS}?                    { yylval->token = createConstantLDToken(strtold(yytext, NULL)); return F_CONSTANT; }
+{HP}{H}*"."{H}+{P}{FS}?             { yylval->token = createConstantLDToken(strtold(yytext, NULL)); return F_CONSTANT; }
+{HP}{H}+"."{P}{FS}?                 { yylval->token = createConstantLDToken(strtold(yytext, NULL)); return F_CONSTANT; }
 ({SP}?\"([^"\\\n]|{ES})*\"{WS}*)+   { yylval->token = createStringConstantToken(yytext); return STRING_LITERAL; }
 "..."                               { yylval->token = createKeywordToken(yytext,Y_DOT_DOT_DOT); return Y_DOT_DOT_DOT; }
 ">>="                               { yylval->token = createKeywordToken(yytext,Y_RSHIFT_EQUAL); return Y_RSHIFT_EQUAL; }
