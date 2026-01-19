@@ -172,9 +172,9 @@
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="c11lexer.c" />
-    <ClCompile Include="c11parser.c" />
+    <ClCompile Include="c11ansi.tab.c" />
     <ClCompile Include="jcc.c" />
+    <ClCompile Include="lex.yy.c" />
     <ClCompile Include="structures.c" />
   </ItemGroup>
   <ItemGroup>
@@ -183,7 +183,8 @@
     <None Include="generate.bat" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="c11parser.h" />
+    <ClInclude Include="bool.h" />
+    <ClInclude Include="c11ansi.tab.h" />
     <ClInclude Include="jcc.h" />
   </ItemGroup>
   <ItemGroup>

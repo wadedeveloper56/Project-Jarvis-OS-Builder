@@ -21,10 +21,10 @@
     <ClCompile Include="structures.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="c11lexer.c">
+    <ClCompile Include="c11ansi.tab.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="c11parser.c">
+    <ClCompile Include="lex.yy.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -37,7 +37,10 @@
     <ClInclude Include="jcc.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="c11parser.h">
+    <ClInclude Include="bool.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c11ansi.tab.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

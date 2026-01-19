@@ -76,7 +76,7 @@
 int yyerror(const char *s);
 int yylex();
 
-#line 80 "c11parser.c"
+#line 80 "c11ansi.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -99,7 +99,7 @@ int yylex();
 #  endif
 # endif
 
-#include "c11parser.h"
+#include "c11ansi.tab.h"
 /* Symbol kind.  */
 enum yysymbol_kind_t
 {
@@ -2113,107 +2113,107 @@ yyreduce:
   case 7: /* constant: "i_const"  */
 #line 156 "c11ansi.y"
                      {(yyval.token) = (yyvsp[0].token);}
-#line 2117 "c11parser.c"
+#line 2117 "c11ansi.tab.c"
     break;
 
   case 8: /* constant: "f_const"  */
 #line 157 "c11ansi.y"
                      {(yyval.token) = (yyvsp[0].token);}
-#line 2123 "c11parser.c"
+#line 2123 "c11ansi.tab.c"
     break;
 
   case 9: /* constant: Y_ENUMERATION_CONSTANT  */
 #line 158 "c11ansi.y"
                                  {(yyval.token) = (yyvsp[0].token);}
-#line 2129 "c11parser.c"
+#line 2129 "c11ansi.tab.c"
     break;
 
   case 10: /* enumeration_constant: "identifier"  */
 #line 162 "c11ansi.y"
                      {(yyval.token) = (yyvsp[0].token);}
-#line 2135 "c11parser.c"
+#line 2135 "c11ansi.tab.c"
     break;
 
   case 11: /* string: "sting_literal"  */
 #line 166 "c11ansi.y"
                          {(yyval.token) = (yyvsp[0].token);}
-#line 2141 "c11parser.c"
+#line 2141 "c11ansi.tab.c"
     break;
 
   case 12: /* string: Y_FUNC_NAME  */
 #line 167 "c11ansi.y"
                       {(yyval.token) = (yyvsp[0].token);}
-#line 2147 "c11parser.c"
+#line 2147 "c11ansi.tab.c"
     break;
 
   case 265: /* jump_statement: Y_GOTO "identifier" Y_SEMICOLON  */
 #line 628 "c11ansi.y"
                                            { printf("jump_statement -> Y_GOTO IDENTIFIER Y_SEMICOLON\n"); }
-#line 2153 "c11parser.c"
+#line 2153 "c11ansi.tab.c"
     break;
 
   case 266: /* jump_statement: Y_CONTINUE Y_SEMICOLON  */
 #line 629 "c11ansi.y"
                                            { printf("jump_statement -> Y_CONTINUE Y_SEMICOLON\n"); }
-#line 2159 "c11parser.c"
+#line 2159 "c11ansi.tab.c"
     break;
 
   case 267: /* jump_statement: Y_BREAK Y_SEMICOLON  */
 #line 630 "c11ansi.y"
                                            { printf("jump_statement -> Y_BREAK Y_SEMICOLON\n"); }
-#line 2165 "c11parser.c"
+#line 2165 "c11ansi.tab.c"
     break;
 
   case 268: /* jump_statement: Y_RETURN Y_SEMICOLON  */
 #line 631 "c11ansi.y"
                                            { printf("jump_statement -> Y_RETURN Y_SEMICOLON\n"); }
-#line 2171 "c11parser.c"
+#line 2171 "c11ansi.tab.c"
     break;
 
   case 269: /* jump_statement: Y_RETURN expression Y_SEMICOLON  */
 #line 632 "c11ansi.y"
                                            { printf("jump_statement -> Y_RETURN expression Y_SEMICOLON\n"); }
-#line 2177 "c11parser.c"
+#line 2177 "c11ansi.tab.c"
     break;
 
   case 270: /* translation_unit: external_declaration  */
 #line 636 "c11ansi.y"
                                                  { printf("translation_unit -> external_declaration\n\n"); }
-#line 2183 "c11parser.c"
+#line 2183 "c11ansi.tab.c"
     break;
 
   case 271: /* translation_unit: translation_unit external_declaration  */
 #line 637 "c11ansi.y"
                                                  { printf("translation_unit -> translation_unit external_declaration\n\n"); }
-#line 2189 "c11parser.c"
+#line 2189 "c11ansi.tab.c"
     break;
 
   case 272: /* external_declaration: function_definition  */
 #line 641 "c11ansi.y"
                                 { printf("external_declaration -> function_definition\n"); }
-#line 2195 "c11parser.c"
+#line 2195 "c11ansi.tab.c"
     break;
 
   case 273: /* external_declaration: declaration  */
 #line 642 "c11ansi.y"
                                 { printf("external_declaration -> declaration\n"); }
-#line 2201 "c11parser.c"
+#line 2201 "c11ansi.tab.c"
     break;
 
   case 274: /* function_definition: declaration_specifiers declarator declaration_list compound_statement  */
 #line 646 "c11ansi.y"
                                                                                    { printf("function_definition -> declaration_specifiers declarator declaration_list compound_statement\n"); }
-#line 2207 "c11parser.c"
+#line 2207 "c11ansi.tab.c"
     break;
 
   case 275: /* function_definition: declaration_specifiers declarator compound_statement  */
 #line 647 "c11ansi.y"
                                                                                    { printf("function_definition -> declaration_specifiers declarator compound_statement\n"); }
-#line 2213 "c11parser.c"
+#line 2213 "c11ansi.tab.c"
     break;
 
 
-#line 2217 "c11parser.c"
+#line 2217 "c11ansi.tab.c"
 
       default: break;
     }

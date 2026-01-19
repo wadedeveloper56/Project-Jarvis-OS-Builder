@@ -26,7 +26,6 @@ WS  [ \t\v\n\f]
 #include <io.h>
 #include <fcntl.h>
 #include "jcc.h"
-#include "c11parser.h"
 
 #define fileno _fileno
 #define isatty _isatty
