@@ -172,17 +172,18 @@
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="cansi.tab.c" />
+    <ClCompile Include="c11lexer.c" />
+    <ClCompile Include="c11parser.c" />
     <ClCompile Include="jcc.c" />
-    <ClCompile Include="lex.yy.c" />
     <ClCompile Include="structures.c" />
   </ItemGroup>
   <ItemGroup>
     <None Include="cansi.l" />
     <None Include="cansi.y" />
+    <None Include="generate.bat" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="cansi.tab.h" />
+    <ClInclude Include="c11parser.h" />
     <ClInclude Include="jcc.h" />
   </ItemGroup>
   <ItemGroup>

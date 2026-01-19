@@ -1,5 +1,6 @@
+#line 1 "c11lexer.c"
 
-#line 2 "lex.yy.c"
+#line 3 "c11lexer.c"
 
 #define  YY_INT_ALIGNED short int
 
@@ -752,7 +753,7 @@ char *yytext;
 #include <io.h>
 #include <fcntl.h>
 #include "jcc.h"
-#include "cansi.tab.h"
+#include "c11parser.h"
 
 #define fileno _fileno
 #define isatty _isatty
@@ -760,8 +761,8 @@ char *yytext;
 extern void yyerror(const char *);  /* prints grammar violation message */
 static void comment(void);
 static int check_type(void);
-#line 763 "lex.yy.c"
-#line 764 "lex.yy.c"
+#line 764 "c11lexer.c"
+#line 765 "c11lexer.c"
 
 #define INITIAL 0
 
@@ -990,7 +991,7 @@ YY_DECL
 	{
 #line 41 "cansi.l"
 
-#line 993 "lex.yy.c"
+#line 994 "c11lexer.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -1295,7 +1296,7 @@ YY_RULE_SETUP
 case 50:
 YY_RULE_SETUP
 #line 91 "cansi.l"
-{ yylval->string = _strdup(yytext); return IDENTIFIER; }
+{ yylval->token = createStringIDToken(yytext); return IDENTIFIER; }
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
@@ -1351,47 +1352,47 @@ case 61:
 /* rule 61 can match eol */
 YY_RULE_SETUP
 #line 102 "cansi.l"
-{ yylval->string = _strdup(yytext); return STRING_LITERAL; }
+{ yylval->token = createStringConstantToken(yytext); return STRING_LITERAL; }
 	YY_BREAK
 case 62:
 YY_RULE_SETUP
 #line 103 "cansi.l"
-{ return Y_DOT_DOT_DOT; }
+{ yylval->token = createKeywordToken(yytext,Y_DOT_DOT_DOT); return Y_DOT_DOT_DOT; }
 	YY_BREAK
 case 63:
 YY_RULE_SETUP
 #line 104 "cansi.l"
-{ return Y_RSHIFT_EQUAL; }
+{ yylval->token = createKeywordToken(yytext,Y_RSHIFT_EQUAL); return Y_RSHIFT_EQUAL; }
 	YY_BREAK
 case 64:
 YY_RULE_SETUP
 #line 105 "cansi.l"
-{ return Y_LSHIFT_EQUAL; }
+{ yylval->token = createKeywordToken(yytext,Y_LSHIFT_EQUAL); return Y_LSHIFT_EQUAL; }
 	YY_BREAK
 case 65:
 YY_RULE_SETUP
 #line 106 "cansi.l"
-{ return Y_PLUS_EQUAL; }
+{ yylval->token = createKeywordToken(yytext,Y_PLUS_EQUAL); return Y_PLUS_EQUAL; }
 	YY_BREAK
 case 66:
 YY_RULE_SETUP
 #line 107 "cansi.l"
-{ return Y_MINUS_EQUAL; }
+{ yylval->token = createKeywordToken(yytext,Y_MINUS_EQUAL); return Y_MINUS_EQUAL; }
 	YY_BREAK
 case 67:
 YY_RULE_SETUP
 #line 108 "cansi.l"
-{ return Y_TIMES_EQUAL; }
+{ yylval->token = createKeywordToken(yytext,Y_TIMES_EQUAL); return Y_TIMES_EQUAL; }
 	YY_BREAK
 case 68:
 YY_RULE_SETUP
 #line 109 "cansi.l"
-{ return Y_DIVIDE_EQUAL; }
+{ yylval->token = createKeywordToken(yytext,Y_DIVIDE_EQUAL); return Y_DIVIDE_EQUAL; }
 	YY_BREAK
 case 69:
 YY_RULE_SETUP
 #line 110 "cansi.l"
-{ return Y_PERCENT_EQUAL; }
+{ yylval->token = createKeywordToken(yytext,Y_PERCENT_EQUAL); return Y_PERCENT_EQUAL; }
 	YY_BREAK
 case 70:
 YY_RULE_SETUP
@@ -1599,7 +1600,7 @@ YY_RULE_SETUP
 #line 153 "cansi.l"
 ECHO;
 	YY_BREAK
-#line 1602 "lex.yy.c"
+#line 1603 "c11lexer.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 

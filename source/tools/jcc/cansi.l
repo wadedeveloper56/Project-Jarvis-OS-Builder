@@ -26,7 +26,7 @@ WS  [ \t\v\n\f]
 #include <io.h>
 #include <fcntl.h>
 #include "jcc.h"
-#include "cansi.tab.h"
+#include "c11parser.h"
 
 #define fileno _fileno
 #define isatty _isatty
@@ -88,7 +88,7 @@ static int check_type(void);
 "_Static_assert"        { return Y_STATIC_ASSERT; }
 "_Thread_local"         	        { return Y_THREAD_LOCAL; }
 "__func__"              	        { return Y_FUNC_NAME; }
-{L}{A}*						        { yylval->string = _strdup(yytext); return IDENTIFIER; }
+{L}{A}*						        { yylval->token = createStringIDToken(yytext); return IDENTIFIER; }
 {HP}{H}+{IS}?				        { yylval->token = createConstantULLToken(strtoull(yytext, 0, 10)); return I_CONSTANT; }
 {NZ}{D}*{IS}?				        { yylval->token = createConstantULLToken(strtoull(yytext, 0, 10)); return I_CONSTANT; }
 "0"{O}*{IS}?				        { yylval->token = createConstantULLToken(strtoull(yytext, 0, 10)); return I_CONSTANT; }
@@ -99,15 +99,15 @@ static int check_type(void);
 {HP}{H}+{P}{FS}?			        { yylval->token = createConstantLDToken(strtold(yytext, NULL)); return F_CONSTANT; }
 {HP}{H}*"."{H}+{P}{FS}?			    { yylval->token = createConstantLDToken(strtold(yytext, NULL)); return F_CONSTANT; }
 {HP}{H}+"."{P}{FS}?    			    { yylval->token = createConstantLDToken(strtold(yytext, NULL)); return F_CONSTANT; }
-({SP}?\"([^"\\\n]|{ES})*\"{WS}*)+	{ yylval->string = _strdup(yytext); return STRING_LITERAL; }
-"..."					{ return Y_DOT_DOT_DOT; }
-">>="					{ return Y_RSHIFT_EQUAL; }
-"<<="					{ return Y_LSHIFT_EQUAL; }
-"+="					{ return Y_PLUS_EQUAL; }
-"-="					{ return Y_MINUS_EQUAL; }
-"*="					{ return Y_TIMES_EQUAL; }
-"/="					{ return Y_DIVIDE_EQUAL; }
-"%="					{ return Y_PERCENT_EQUAL; }
+({SP}?\"([^"\\\n]|{ES})*\"{WS}*)+	{ yylval->token = createStringConstantToken(yytext); return STRING_LITERAL; }
+"..."					{ yylval->token = createKeywordToken(yytext,Y_DOT_DOT_DOT); return Y_DOT_DOT_DOT; }
+">>="					{ yylval->token = createKeywordToken(yytext,Y_RSHIFT_EQUAL); return Y_RSHIFT_EQUAL; }
+"<<="					{ yylval->token = createKeywordToken(yytext,Y_LSHIFT_EQUAL); return Y_LSHIFT_EQUAL; }
+"+="					{ yylval->token = createKeywordToken(yytext,Y_PLUS_EQUAL); return Y_PLUS_EQUAL; }
+"-="					{ yylval->token = createKeywordToken(yytext,Y_MINUS_EQUAL); return Y_MINUS_EQUAL; }
+"*="					{ yylval->token = createKeywordToken(yytext,Y_TIMES_EQUAL); return Y_TIMES_EQUAL; }
+"/="					{ yylval->token = createKeywordToken(yytext,Y_DIVIDE_EQUAL); return Y_DIVIDE_EQUAL; }
+"%="					{ yylval->token = createKeywordToken(yytext,Y_PERCENT_EQUAL); return Y_PERCENT_EQUAL; }
 "&="					{ return Y_AND_EQUAL; }
 "^="					{ return Y_XOR_EQUAL; }
 "|="					{ return Y_OR_EQUAL; }

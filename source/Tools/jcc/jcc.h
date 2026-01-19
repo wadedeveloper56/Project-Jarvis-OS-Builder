@@ -3,7 +3,8 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdint.h>
-#include "cansi.tab.h"
+#include <string.h>
+#include "c11parser.h"
 #include "ArgumentTable.h"
 #include "Memory.h"
 
@@ -106,23 +107,28 @@ typedef enum {
 typedef struct {
 	uint16_t code;
 	union {
-		struct {      // General info
+		struct {
+			int keyword;
+			int strLen;
 			char* string;
-			//pDeclInfo pTypeDecl;  // This only points to a symbol table entry
-		} ginfo;
+		} keyword;
+		struct {
+			char* string;
+			int strLen;
+			//pDeclInfo pTypeDecl;
+		} symbol;
 		struct {
 			ConstType type : 6;
 			RadixType radix : 2;
 			union {
 				unsigned long long lIntConst;
 				long double lDoubleConst;
-				//long double data;
 			} repr;
-		} constant;
+		} numericConstant;
 		struct {
 			char* s;
 			int strLen;
-		} s;  // String representation
+		} stringConstant;
 	} repr;
 } TokData, *TokDataPtr;
 
@@ -172,4 +178,7 @@ TokPosPtr createTokPos(void);
 TokDataPtr createTokData(void);
 TokenPtr createConstantULLToken(unsigned long long num);
 TokenPtr createConstantLDToken(long double num);
+TokenPtr createStringConstantToken(char* str);
+TokenPtr createStringIDToken(char* str);
+TokenPtr createKeywordToken(char* str, int keyword);
 

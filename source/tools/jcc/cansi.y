@@ -146,13 +146,13 @@ primary_expression
 	| constant
 	| string
 	| Y_LEFT_PAREN expression Y_RIGHT_PAREN
-	//| generic_selection
+	| generic_selection
 	;
 
 constant
 	: I_CONSTANT
 	| F_CONSTANT
-	//| Y_ENUMERATION_CONSTANT
+	| Y_ENUMERATION_CONSTANT
 	;
 
 enumeration_constant		/* before it has been defined as such */

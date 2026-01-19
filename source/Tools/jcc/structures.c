@@ -59,7 +59,7 @@ TokDataPtr createTokData(void)
 {
     TokDataPtr newData = AllocateMemory(sizeof(TokData));
     memset(newData, 0, sizeof(TokData));
-    newData->repr.ginfo.string = NULL;
+    newData->repr.symbol.string = NULL;
     return newData;
 }
 
@@ -67,9 +67,9 @@ TokenPtr createConstantULLToken(unsigned long long num)
 {
     TokenPtr tok = createToken(createTokData(), NULL);
     tok->data->code = Y_NUMBER;
-    tok->data->repr.constant.type = CONSTT_UINT_CONST;
-    tok->data->repr.constant.radix = RADT_DECIMAL;
-    tok->data->repr.constant.repr.lIntConst = num;
+    tok->data->repr.numericConstant.type = CONSTT_UINT_CONST;
+    tok->data->repr.numericConstant.radix = RADT_DECIMAL;
+    tok->data->repr.numericConstant.repr.lIntConst = num;
     return tok;
 }
 
@@ -77,8 +77,36 @@ TokenPtr createConstantLDToken(long double num)
 {
     TokenPtr tok = createToken(createTokData(), NULL);
     tok->data->code = Y_NUMBER;
-    tok->data->repr.constant.type = CONSTT_LDOUBLE_CONST;
-    tok->data->repr.constant.radix = RADT_DECIMAL;
-    tok->data->repr.constant.repr.lDoubleConst = num;
+    tok->data->repr.numericConstant.type = CONSTT_LDOUBLE_CONST;
+    tok->data->repr.numericConstant.radix = RADT_DECIMAL;
+    tok->data->repr.numericConstant.repr.lDoubleConst = num;
+    return tok;
+}
+
+TokenPtr createStringConstantToken(char *str)
+{
+    TokenPtr tok = createToken(createTokData(), NULL);
+    tok->data->code = STRING_LITERAL;
+    tok->data->repr.stringConstant.s = _strdup(str);
+	tok->data->repr.stringConstant.strLen = (int)strlen(str);
+    return tok;
+}
+
+TokenPtr createStringIDToken(char* str)
+{
+    TokenPtr tok = createToken(createTokData(), NULL);
+    tok->data->code = IDENTIFIER;
+    tok->data->repr.symbol.string = _strdup(str);
+    tok->data->repr.symbol.strLen = (int)strlen(str);
+    return tok;
+}
+
+TokenPtr createKeywordToken(char* str,int keyword)
+{
+    TokenPtr tok = createToken(createTokData(), NULL);
+    tok->data->code = IDENTIFIER;
+    tok->data->repr.keyword.string = _strdup(str);
+	tok->data->repr.keyword.keyword = keyword;
+    tok->data->repr.keyword.strLen = (int)strlen(str);
     return tok;
 }

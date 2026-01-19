@@ -18,25 +18,26 @@
     <ClCompile Include="jcc.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="cansi.tab.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="lex.yy.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="structures.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c11lexer.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c11parser.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="cansi.y" />
     <None Include="cansi.l" />
+    <None Include="generate.bat" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="cansi.tab.h">
+    <ClInclude Include="jcc.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="jcc.h">
+    <ClInclude Include="c11parser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
