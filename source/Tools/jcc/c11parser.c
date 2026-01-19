@@ -67,7 +67,7 @@
 
 
 /* First part of user prologue.  */
-#line 1 "cansi.y"
+#line 1 "c11ansi.y"
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -2111,67 +2111,67 @@ yyreduce:
   switch (yyn)
     {
   case 265: /* jump_statement: Y_GOTO "identifier" Y_SEMICOLON  */
-#line 625 "cansi.y"
+#line 625 "c11ansi.y"
                                            { printf("jump_statement -> Y_GOTO IDENTIFIER Y_SEMICOLON\n"); }
 #line 2117 "c11parser.c"
     break;
 
   case 266: /* jump_statement: Y_CONTINUE Y_SEMICOLON  */
-#line 626 "cansi.y"
+#line 626 "c11ansi.y"
                                            { printf("jump_statement -> Y_CONTINUE Y_SEMICOLON\n"); }
 #line 2123 "c11parser.c"
     break;
 
   case 267: /* jump_statement: Y_BREAK Y_SEMICOLON  */
-#line 627 "cansi.y"
+#line 627 "c11ansi.y"
                                            { printf("jump_statement -> Y_BREAK Y_SEMICOLON\n"); }
 #line 2129 "c11parser.c"
     break;
 
   case 268: /* jump_statement: Y_RETURN Y_SEMICOLON  */
-#line 628 "cansi.y"
+#line 628 "c11ansi.y"
                                            { printf("jump_statement -> Y_RETURN Y_SEMICOLON\n"); }
 #line 2135 "c11parser.c"
     break;
 
   case 269: /* jump_statement: Y_RETURN expression Y_SEMICOLON  */
-#line 629 "cansi.y"
+#line 629 "c11ansi.y"
                                            { printf("jump_statement -> Y_RETURN expression Y_SEMICOLON\n"); }
 #line 2141 "c11parser.c"
     break;
 
   case 270: /* translation_unit: external_declaration  */
-#line 633 "cansi.y"
+#line 633 "c11ansi.y"
                                                  { printf("translation_unit -> external_declaration\n\n"); }
 #line 2147 "c11parser.c"
     break;
 
   case 271: /* translation_unit: translation_unit external_declaration  */
-#line 634 "cansi.y"
+#line 634 "c11ansi.y"
                                                  { printf("translation_unit -> translation_unit external_declaration\n\n"); }
 #line 2153 "c11parser.c"
     break;
 
   case 272: /* external_declaration: function_definition  */
-#line 638 "cansi.y"
+#line 638 "c11ansi.y"
                                 { printf("external_declaration -> function_definition\n"); }
 #line 2159 "c11parser.c"
     break;
 
   case 273: /* external_declaration: declaration  */
-#line 639 "cansi.y"
+#line 639 "c11ansi.y"
                                 { printf("external_declaration -> declaration\n"); }
 #line 2165 "c11parser.c"
     break;
 
   case 274: /* function_definition: declaration_specifiers declarator declaration_list compound_statement  */
-#line 643 "cansi.y"
+#line 643 "c11ansi.y"
                                                                                    { printf("function_definition -> declaration_specifiers declarator declaration_list compound_statement\n"); }
 #line 2171 "c11parser.c"
     break;
 
   case 275: /* function_definition: declaration_specifiers declarator compound_statement  */
-#line 644 "cansi.y"
+#line 644 "c11ansi.y"
                                                                                    { printf("function_definition -> declaration_specifiers declarator compound_statement\n"); }
 #line 2177 "c11parser.c"
     break;
@@ -2370,7 +2370,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 653 "cansi.y"
+#line 653 "c11ansi.y"
 
 #include <stdio.h>
 

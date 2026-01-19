@@ -178,8 +178,8 @@
     <ClCompile Include="structures.c" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="cansi.l" />
-    <None Include="cansi.y" />
+    <None Include="c11ansi.l" />
+    <None Include="c11ansi.y" />
     <None Include="generate.bat" />
   </ItemGroup>
   <ItemGroup>

@@ -104,8 +104,17 @@ typedef enum {
 	TT_OTHER
 } token_type;
 
+typedef enum {
+	YC_INT_CONST,
+	YC_FLOAT_CONST,
+	YC_STRING_CONST,
+	YC_ID,
+	YC_KEYWORD
+	// ... other token codes as needed
+} TokenCode;	
+
 typedef struct {
-	uint16_t code;
+	TokenCode code;
 	union {
 		struct {
 			int keyword;

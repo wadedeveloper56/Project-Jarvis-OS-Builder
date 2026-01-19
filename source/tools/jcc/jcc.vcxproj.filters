@@ -29,8 +29,8 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="cansi.y" />
-    <None Include="cansi.l" />
+    <None Include="c11ansi.y" />
+    <None Include="c11ansi.l" />
     <None Include="generate.bat" />
   </ItemGroup>
   <ItemGroup>
