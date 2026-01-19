@@ -1180,103 +1180,103 @@ YY_RULE_SETUP
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 68 "c11ansi.l"
-{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_SHORT); }
+#line 69 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_SHORT); return(Y_SHORT); }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 69 "c11ansi.l"
-{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_SIGNED); }
+#line 70 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_SIGNED); return(Y_SIGNED); }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 70 "c11ansi.l"
-{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_SIZEOF); }
+#line 71 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_SIZEOF); return(Y_SIZEOF); }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 71 "c11ansi.l"
-{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_STATIC); }
+#line 72 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_STATIC); return(Y_STATIC); }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 72 "c11ansi.l"
-{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_STRUCT); }
+#line 73 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_STRUCT); return(Y_STRUCT); }
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 73 "c11ansi.l"
-{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_SWITCH); }
+#line 74 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_SWITCH); return(Y_SWITCH); }
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 74 "c11ansi.l"
-{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_TYPEDEF); }
+#line 75 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_TYPEDEF); return(Y_TYPEDEF); }
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 75 "c11ansi.l"
-{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_UNION); }
+#line 76 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_UNION); return(Y_UNION); }
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 76 "c11ansi.l"
-{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_UNSIGNED); }
+#line 77 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_UNSIGNED); return(Y_UNSIGNED); }
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 77 "c11ansi.l"
-{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_VOID); }
+#line 78 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_VOID); return(Y_VOID); }
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 78 "c11ansi.l"
-{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_VOLATILE); }
+#line 79 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_VOLATILE); return(Y_VOLATILE); }
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 79 "c11ansi.l"
-{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_WHILE); }
+#line 80 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_WHILE); return(Y_WHILE); }
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 80 "c11ansi.l"
-{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return Y_ALIGNAS; }
+#line 81 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_ALIGNAS); return Y_ALIGNAS; }
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 81 "c11ansi.l"
-{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return Y_ALIGNOF; }
+#line 82 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_ALIGNOF); return Y_ALIGNOF; }
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 82 "c11ansi.l"
-{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return Y_ATOMIC; }
+#line 83 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_ATOMIC); return Y_ATOMIC; }
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 83 "c11ansi.l"
-{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return Y_BOOL; }
+#line 84 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_BOOL); return Y_BOOL; }
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 84 "c11ansi.l"
-{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return Y_COMPLEX; }
+#line 85 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_COMPLEX); return Y_COMPLEX; }
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 85 "c11ansi.l"
-{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return Y_GENERIC; }
+#line 86 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_GENERIC); return Y_GENERIC; }
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 86 "c11ansi.l"
-{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return Y_IMAGINARY; }
+#line 87 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_IMAGINARY); return Y_IMAGINARY; }
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 87 "c11ansi.l"
-{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return Y_NORETURN; }
+#line 88 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_NORETURN); return Y_NORETURN; }
 	YY_BREAK
 case 47:
 YY_RULE_SETUP

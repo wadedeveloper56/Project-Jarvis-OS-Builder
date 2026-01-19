@@ -111,7 +111,18 @@ typedef enum {
 	YC_ID,
 	YC_KEYWORD
 	// ... other token codes as needed
-} TokenCode;	
+} TokenCode;
+
+typedef struct _SLListNode{
+	struct _SLListNode* next;
+	void* userData;
+} SLListNode,* SLListNodePtr, ** SLListNodePtrPtr;
+
+typedef struct SLList {
+	SLListNodePtr head;  /* 1-st element in the list */
+	SLListNodePtr tail;  /* Last (most recently added) element in the list */
+	SLListNodePtr currPos;
+} SLList, * SLListPtr, ** SLListPtrPtr;
 
 typedef struct {
 	TokenCode code;
@@ -139,12 +150,12 @@ typedef struct {
 			int strLen;
 		} stringConstant;
 	} repr;
-} TokData, *TokDataPtr;
+} TokData, * TokDataPtr;
 
 typedef struct {
 	TokDataPtr data;
 	TokPosPtr pos;
-}Token, *TokenPtr, ** TokenPtrPtr;
+}Token, * TokenPtr, ** TokenPtrPtr;
 
 typedef struct {
 	LabelType type;
@@ -154,10 +165,10 @@ typedef struct {
 			int8_t numTokens;
 			TokenPtrPtr tokens;
 		} constr;
-		//pSLList list; // List of tokens
+		SLListPtr list; // List of tokens
 		TokenPtr token;
 		//pDeclInfo dinfo;
-		//pDeclList declList;
+		SLListPtr declList;
 		void* data;
 	} repr;
 } Label, * LabelPtr, ** LabelPtrPtr;
@@ -171,6 +182,7 @@ typedef struct _CTree {
 union ParseUnion {
 	CTreePtr tree;
 	TokenPtr token;
+	SLListPtr dclrList;
 };
 
 void printHeader(void);

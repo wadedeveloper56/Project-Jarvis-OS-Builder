@@ -710,34 +710,34 @@ static const yytype_uint8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,   145,   145,   146,   147,   148,   149,   153,   154,   155,
-     159,   163,   164,   168,   172,   173,   177,   178,   182,   183,
-     184,   185,   186,   187,   188,   189,   190,   191,   195,   196,
-     200,   201,   202,   203,   204,   205,   206,   210,   211,   212,
-     213,   214,   215,   219,   220,   224,   225,   226,   227,   231,
-     232,   233,   237,   238,   239,   243,   244,   245,   246,   247,
-     251,   252,   253,   257,   258,   262,   263,   267,   268,   272,
-     273,   277,   278,   282,   283,   287,   288,   292,   293,   294,
-     295,   296,   297,   298,   299,   300,   301,   302,   306,   307,
-     311,   315,   316,   317,   321,   322,   323,   324,   325,   326,
-     327,   328,   329,   330,   334,   335,   339,   340,   344,   345,
-     346,   347,   348,   349,   353,   354,   355,   356,   357,   358,
-     359,   360,   361,   362,   363,   364,   365,   366,   367,   368,
-     369,   370,   374,   375,   376,   380,   381,   385,   386,   390,
-     391,   392,   396,   397,   398,   399,   403,   404,   408,   409,
-     410,   414,   415,   416,   417,   418,   422,   423,   427,   428,
-     432,   436,   437,   438,   439,   443,   444,   448,   449,   453,
-     454,   458,   459,   460,   461,   462,   463,   464,   465,   466,
-     467,   468,   469,   470,   471,   475,   476,   477,   478,   482,
-     483,   488,   489,   493,   494,   498,   499,   500,   504,   505,
-     509,   510,   514,   515,   516,   520,   521,   522,   523,   524,
-     525,   526,   527,   528,   529,   530,   531,   532,   533,   534,
-     535,   536,   537,   538,   539,   540,   544,   545,   546,   550,
-     551,   552,   553,   557,   561,   562,   566,   567,   571,   575,
-     576,   577,   578,   579,   580,   584,   585,   586,   590,   591,
-     595,   596,   600,   601,   605,   606,   610,   611,   612,   616,
-     617,   618,   619,   620,   621,   625,   626,   627,   628,   629,
-     633,   634,   638,   639,   643,   644,   648,   649
+       0,   148,   148,   149,   150,   151,   152,   156,   157,   158,
+     162,   166,   167,   171,   175,   176,   180,   181,   185,   186,
+     187,   188,   189,   190,   191,   192,   193,   194,   198,   199,
+     203,   204,   205,   206,   207,   208,   209,   213,   214,   215,
+     216,   217,   218,   222,   223,   227,   228,   229,   230,   234,
+     235,   236,   240,   241,   242,   246,   247,   248,   249,   250,
+     254,   255,   256,   260,   261,   265,   266,   270,   271,   275,
+     276,   280,   281,   285,   286,   290,   291,   295,   296,   297,
+     298,   299,   300,   301,   302,   303,   304,   305,   309,   310,
+     314,   318,   319,   320,   324,   325,   326,   327,   328,   329,
+     330,   331,   332,   333,   337,   338,   342,   343,   347,   348,
+     349,   350,   351,   352,   356,   357,   358,   359,   360,   361,
+     362,   363,   364,   365,   366,   367,   368,   369,   370,   371,
+     372,   373,   377,   378,   379,   383,   384,   388,   389,   393,
+     394,   395,   399,   400,   401,   402,   406,   407,   411,   412,
+     413,   417,   418,   419,   420,   421,   425,   426,   430,   431,
+     435,   439,   440,   441,   442,   446,   447,   451,   452,   456,
+     457,   461,   462,   463,   464,   465,   466,   467,   468,   469,
+     470,   471,   472,   473,   474,   478,   479,   480,   481,   485,
+     486,   491,   492,   496,   497,   501,   502,   503,   507,   508,
+     512,   513,   517,   518,   519,   523,   524,   525,   526,   527,
+     528,   529,   530,   531,   532,   533,   534,   535,   536,   537,
+     538,   539,   540,   541,   542,   543,   547,   548,   549,   553,
+     554,   555,   556,   560,   564,   565,   569,   570,   574,   578,
+     579,   580,   581,   582,   583,   587,   588,   589,   593,   594,
+     598,   599,   603,   604,   608,   609,   613,   614,   615,   619,
+     620,   621,   622,   623,   624,   628,   629,   630,   631,   632,
+     636,   637,   641,   642,   646,   647,   651,   652
 };
 #endif
 
@@ -2110,74 +2110,110 @@ yyreduce:
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
-  case 265: /* jump_statement: Y_GOTO "identifier" Y_SEMICOLON  */
-#line 625 "c11ansi.y"
-                                           { printf("jump_statement -> Y_GOTO IDENTIFIER Y_SEMICOLON\n"); }
+  case 7: /* constant: "i_const"  */
+#line 156 "c11ansi.y"
+                     {(yyval.token) = (yyvsp[0].token);}
 #line 2117 "c11parser.c"
     break;
 
-  case 266: /* jump_statement: Y_CONTINUE Y_SEMICOLON  */
-#line 626 "c11ansi.y"
-                                           { printf("jump_statement -> Y_CONTINUE Y_SEMICOLON\n"); }
+  case 8: /* constant: "f_const"  */
+#line 157 "c11ansi.y"
+                     {(yyval.token) = (yyvsp[0].token);}
 #line 2123 "c11parser.c"
     break;
 
-  case 267: /* jump_statement: Y_BREAK Y_SEMICOLON  */
-#line 627 "c11ansi.y"
-                                           { printf("jump_statement -> Y_BREAK Y_SEMICOLON\n"); }
+  case 9: /* constant: Y_ENUMERATION_CONSTANT  */
+#line 158 "c11ansi.y"
+                                 {(yyval.token) = (yyvsp[0].token);}
 #line 2129 "c11parser.c"
     break;
 
-  case 268: /* jump_statement: Y_RETURN Y_SEMICOLON  */
-#line 628 "c11ansi.y"
-                                           { printf("jump_statement -> Y_RETURN Y_SEMICOLON\n"); }
+  case 10: /* enumeration_constant: "identifier"  */
+#line 162 "c11ansi.y"
+                     {(yyval.token) = (yyvsp[0].token);}
 #line 2135 "c11parser.c"
     break;
 
-  case 269: /* jump_statement: Y_RETURN expression Y_SEMICOLON  */
-#line 629 "c11ansi.y"
-                                           { printf("jump_statement -> Y_RETURN expression Y_SEMICOLON\n"); }
+  case 11: /* string: "sting_literal"  */
+#line 166 "c11ansi.y"
+                         {(yyval.token) = (yyvsp[0].token);}
 #line 2141 "c11parser.c"
     break;
 
-  case 270: /* translation_unit: external_declaration  */
-#line 633 "c11ansi.y"
-                                                 { printf("translation_unit -> external_declaration\n\n"); }
+  case 12: /* string: Y_FUNC_NAME  */
+#line 167 "c11ansi.y"
+                      {(yyval.token) = (yyvsp[0].token);}
 #line 2147 "c11parser.c"
     break;
 
-  case 271: /* translation_unit: translation_unit external_declaration  */
-#line 634 "c11ansi.y"
-                                                 { printf("translation_unit -> translation_unit external_declaration\n\n"); }
+  case 265: /* jump_statement: Y_GOTO "identifier" Y_SEMICOLON  */
+#line 628 "c11ansi.y"
+                                           { printf("jump_statement -> Y_GOTO IDENTIFIER Y_SEMICOLON\n"); }
 #line 2153 "c11parser.c"
     break;
 
-  case 272: /* external_declaration: function_definition  */
-#line 638 "c11ansi.y"
-                                { printf("external_declaration -> function_definition\n"); }
+  case 266: /* jump_statement: Y_CONTINUE Y_SEMICOLON  */
+#line 629 "c11ansi.y"
+                                           { printf("jump_statement -> Y_CONTINUE Y_SEMICOLON\n"); }
 #line 2159 "c11parser.c"
     break;
 
-  case 273: /* external_declaration: declaration  */
-#line 639 "c11ansi.y"
-                                { printf("external_declaration -> declaration\n"); }
+  case 267: /* jump_statement: Y_BREAK Y_SEMICOLON  */
+#line 630 "c11ansi.y"
+                                           { printf("jump_statement -> Y_BREAK Y_SEMICOLON\n"); }
 #line 2165 "c11parser.c"
     break;
 
-  case 274: /* function_definition: declaration_specifiers declarator declaration_list compound_statement  */
-#line 643 "c11ansi.y"
-                                                                                   { printf("function_definition -> declaration_specifiers declarator declaration_list compound_statement\n"); }
+  case 268: /* jump_statement: Y_RETURN Y_SEMICOLON  */
+#line 631 "c11ansi.y"
+                                           { printf("jump_statement -> Y_RETURN Y_SEMICOLON\n"); }
 #line 2171 "c11parser.c"
     break;
 
-  case 275: /* function_definition: declaration_specifiers declarator compound_statement  */
-#line 644 "c11ansi.y"
-                                                                                   { printf("function_definition -> declaration_specifiers declarator compound_statement\n"); }
+  case 269: /* jump_statement: Y_RETURN expression Y_SEMICOLON  */
+#line 632 "c11ansi.y"
+                                           { printf("jump_statement -> Y_RETURN expression Y_SEMICOLON\n"); }
 #line 2177 "c11parser.c"
     break;
 
+  case 270: /* translation_unit: external_declaration  */
+#line 636 "c11ansi.y"
+                                                 { printf("translation_unit -> external_declaration\n\n"); }
+#line 2183 "c11parser.c"
+    break;
 
-#line 2181 "c11parser.c"
+  case 271: /* translation_unit: translation_unit external_declaration  */
+#line 637 "c11ansi.y"
+                                                 { printf("translation_unit -> translation_unit external_declaration\n\n"); }
+#line 2189 "c11parser.c"
+    break;
+
+  case 272: /* external_declaration: function_definition  */
+#line 641 "c11ansi.y"
+                                { printf("external_declaration -> function_definition\n"); }
+#line 2195 "c11parser.c"
+    break;
+
+  case 273: /* external_declaration: declaration  */
+#line 642 "c11ansi.y"
+                                { printf("external_declaration -> declaration\n"); }
+#line 2201 "c11parser.c"
+    break;
+
+  case 274: /* function_definition: declaration_specifiers declarator declaration_list compound_statement  */
+#line 646 "c11ansi.y"
+                                                                                   { printf("function_definition -> declaration_specifiers declarator declaration_list compound_statement\n"); }
+#line 2207 "c11parser.c"
+    break;
+
+  case 275: /* function_definition: declaration_specifiers declarator compound_statement  */
+#line 647 "c11ansi.y"
+                                                                                   { printf("function_definition -> declaration_specifiers declarator compound_statement\n"); }
+#line 2213 "c11parser.c"
+    break;
+
+
+#line 2217 "c11parser.c"
 
       default: break;
     }
@@ -2370,7 +2406,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 653 "c11ansi.y"
+#line 656 "c11ansi.y"
 
 #include <stdio.h>
 

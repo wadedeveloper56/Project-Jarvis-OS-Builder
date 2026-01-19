@@ -10,11 +10,10 @@ int yylex();
 %define api.value.type { union ParseUnion }
 
 %token END 0 "end of file"
-%token<string>     IDENTIFIER "identifier"
-%token<longlong>   I_CONSTANT "i_const"
-%token<longdouble> F_CONSTANT "f_const"
-%token<string>     STRING_LITERAL  "sting_literal"
-
+%token <token>  IDENTIFIER "identifier"
+%token <token>  I_CONSTANT "i_const"
+%token <token>  F_CONSTANT "f_const"
+%token <token>  STRING_LITERAL  "sting_literal"
 %token <token>  Y_EXCLAMATION
 %token <token>  Y_NE         
 %token <token>  Y_POUND                 
@@ -138,6 +137,10 @@ int yylex();
 %token <token>  Y_RETURN
 %token <token>  Y_LONG_LONG
 
+%type<token> constant
+%type<token> enumeration_constant
+%type<token> string
+
 %start translation_unit
 %%
 
@@ -150,18 +153,18 @@ primary_expression
 	;
 
 constant
-	: I_CONSTANT
-	| F_CONSTANT
-	| Y_ENUMERATION_CONSTANT
+	: I_CONSTANT {$<token>$ = $1;}
+	| F_CONSTANT {$<token>$ = $1;}
+	| Y_ENUMERATION_CONSTANT {$<token>$ = $1;}
 	;
 
-enumeration_constant		/* before it has been defined as such */
-	: IDENTIFIER
+enumeration_constant
+	: IDENTIFIER {$<token>$ = $1;}
 	;
 
 string
-	: STRING_LITERAL
-	| Y_FUNC_NAME
+	: STRING_LITERAL {$<token>$ = $1;}
+	| Y_FUNC_NAME {$<token>$ = $1;}
 	;
 
 generic_selection
