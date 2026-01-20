@@ -261,3 +261,10 @@ struct EnumElem {
 	pCTree expression;
 };
 
+pLabel _createLabel(LabelType type, void* data);
+pLabel createTokenLabel(pToken token);
+pLabel createConstr0Label(LabelConstrType type);
+pLabel createConstr1Label(LabelConstrType type, pToken t0);
+pLabel createConstr2Label(LabelConstrType type, pToken t0, pToken t1);
+pCTree createCTreeRoot(pLabel label);
+pCTree createCTree1(pLabel label, pCTree child);

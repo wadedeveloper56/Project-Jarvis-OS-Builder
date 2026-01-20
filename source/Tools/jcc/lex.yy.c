@@ -174,8 +174,27 @@ extern FILE *yyin, *yyout;
 #define EOB_ACT_END_OF_FILE 1
 #define EOB_ACT_LAST_MATCH 2
     
-    #define YY_LESS_LINENO(n)
-    #define YY_LINENO_REWIND_TO(ptr)
+    /* Note: We specifically omit the test for yy_rule_can_match_eol because it requires
+     *       access to the local variable yy_act. Since yyless() is a macro, it would break
+     *       existing scanners that call yyless() from OUTSIDE yylex.
+     *       One obvious solution it to make yy_act a global. I tried that, and saw
+     *       a 5% performance hit in a non-yylineno scanner, because yy_act is
+     *       normally declared as a register variable-- so it is not worth it.
+     */
+    #define  YY_LESS_LINENO(n) \
+            do { \
+                int yyl;\
+                for ( yyl = n; yyl < yyleng; ++yyl )\
+                    if ( yytext[yyl] == '\n' )\
+                        --yylineno;\
+            }while(0)
+    #define YY_LINENO_REWIND_TO(dst) \
+            do {\
+                const char *p;\
+                for ( p = yy_cp-1; p >= (dst); --p)\
+                    if ( *p == '\n' )\
+                        --yylineno;\
+            }while(0)
     
 /* Return all but the first "n" matched characters back to the input stream. */
 #define yyless(n) \
@@ -732,6 +751,16 @@ static const flex_int16_t yy_chk[755] =
       387,  387,  387,  387
     } ;
 
+/* Table of booleans, true if rule could match eol. */
+static const flex_int32_t yy_rule_can_match_eol[111] =
+    {   0,
+0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+    0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+    0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0,     };
+
 static yy_state_type yy_last_accepting_state;
 static char *yy_last_accepting_cpos;
 
@@ -746,13 +775,12 @@ int yy_flex_debug = 0;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "cansi.l"
-#line 25 "cansi.l"
+#line 1 "c11ansi.l"
+#line 25 "c11ansi.l"
 #include <stdio.h>
 #include <io.h>
 #include <fcntl.h>
-#include "wic.h"
-#include "cansi.tab.h"
+#include "jcc.h"
 
 #define fileno _fileno
 #define isatty _isatty
@@ -760,8 +788,8 @@ char *yytext;
 extern void yyerror(const char *);  /* prints grammar violation message */
 static void comment(void);
 static int check_type(void);
-#line 763 "lex.yy.c"
-#line 764 "lex.yy.c"
+#line 791 "lex.yy.c"
+#line 792 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -988,9 +1016,9 @@ YY_DECL
 		}
 
 	{
-#line 41 "cansi.l"
+#line 40 "c11ansi.l"
 
-#line 993 "lex.yy.c"
+#line 1021 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -1036,6 +1064,16 @@ yy_find_action:
 
 		YY_DO_BEFORE_ACTION;
 
+		if ( yy_act != YY_END_OF_BUFFER && yy_rule_can_match_eol[yy_act] )
+			{
+			int yyl;
+			for ( yyl = 0; yyl < yyleng; ++yyl )
+				if ( yytext[yyl] == '\n' )
+					
+    yylineno++;
+;
+			}
+
 do_action:	/* This label is used only to access EOF actions. */
 
 		switch ( yy_act )
@@ -1049,557 +1087,557 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 42 "cansi.l"
+#line 41 "c11ansi.l"
 { comment(); }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 43 "cansi.l"
+#line 42 "c11ansi.l"
 { /* consume //-comment */ }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 44 "cansi.l"
-{ return(Y_AUTO); }
+#line 43 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_AUTO); return(Y_AUTO); }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 45 "cansi.l"
-{ return(Y_BREAK); }
+#line 44 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_BREAK); return(Y_BREAK); }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 46 "cansi.l"
-{ return(Y_CASE); }
+#line 45 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_CASE); return(Y_CASE); }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 47 "cansi.l"
-{ return(Y_CHAR); }
+#line 46 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_CHAR); return(Y_CHAR); }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 48 "cansi.l"
-{ return(Y_CONST); }
+#line 47 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_CONST); return(Y_CONST); }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 49 "cansi.l"
-{ return(Y_CONTINUE); }
+#line 48 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_CONTINUE); return(Y_CONTINUE); }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 50 "cansi.l"
-{ return(Y_DEFAULT); }
+#line 49 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_DEFAULT); return(Y_DEFAULT); }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 51 "cansi.l"
-{ return(Y_DO); }
+#line 50 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_DO); return(Y_DO); }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 52 "cansi.l"
-{ return(Y_DOUBLE); }
+#line 51 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_DOUBLE); return(Y_DOUBLE); }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 53 "cansi.l"
-{ return(Y_LONG_DOUBLE); }
+#line 52 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_LONG_DOUBLE); return(Y_LONG_DOUBLE); }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 54 "cansi.l"
-{ return(Y_ELSE); }
+#line 53 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_ELSE); return(Y_ELSE); }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 55 "cansi.l"
-{ return(Y_ENUM); }
+#line 54 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_ENUM); return(Y_ENUM); }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 56 "cansi.l"
-{ return(Y_EXTERN); }
+#line 55 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_EXTERN); return(Y_EXTERN); }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 57 "cansi.l"
-{ return(Y_FLOAT); }
+#line 56 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_FLOAT); return(Y_FLOAT); }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 58 "cansi.l"
-{ return(Y_FOR); }
+#line 57 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_FOR); return(Y_FOR); }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 59 "cansi.l"
-{ return(Y_GOTO); }
+#line 58 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_GOTO); return(Y_GOTO); }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 60 "cansi.l"
-{ return(Y_IF); }
+#line 59 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_IF); return(Y_IF); }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 61 "cansi.l"
-{ return(Y_INLINE); }
+#line 60 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_INLINE); return(Y_INLINE); }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 62 "cansi.l"
-{ return(Y_INT); }
+#line 61 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_INT); return(Y_INT); }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 63 "cansi.l"
-{ return(Y_LONG); }
+#line 62 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_LONG); return(Y_LONG); }
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 64 "cansi.l"
-{ return(Y_LONG_LONG); }
+#line 63 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_LONG_LONG); return(Y_LONG_LONG); }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 65 "cansi.l"
-{ return(Y_REGISTER); }
+#line 64 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_REGISTER); return(Y_REGISTER); }
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 66 "cansi.l"
-{ return(Y_RESTRICT); }
+#line 65 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_RESTRICT); return(Y_RESTRICT); }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 67 "cansi.l"
-{ return(Y_RETURN); }
+#line 66 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_RETURN); return(Y_RETURN); }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 68 "cansi.l"
-{ return(Y_SHORT); }
+#line 67 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_SHORT); return(Y_SHORT); }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 69 "cansi.l"
-{ return(Y_SIGNED); }
+#line 68 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_SIGNED); return(Y_SIGNED); }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 70 "cansi.l"
-{ return(Y_SIZEOF); }
+#line 69 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_SIZEOF); return(Y_SIZEOF); }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 71 "cansi.l"
-{ return(Y_STATIC); }
+#line 70 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_STATIC); return(Y_STATIC); }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 72 "cansi.l"
-{ return(Y_STRUCT); }
+#line 71 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_STRUCT); return(Y_STRUCT); }
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 73 "cansi.l"
-{ return(Y_SWITCH); }
+#line 72 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_SWITCH); return(Y_SWITCH); }
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 74 "cansi.l"
-{ return(Y_TYPEDEF); }
+#line 73 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_TYPEDEF); return(Y_TYPEDEF); }
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 75 "cansi.l"
-{ return(Y_UNION); }
+#line 74 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_UNION); return(Y_UNION); }
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 76 "cansi.l"
-{ return(Y_UNSIGNED); }
+#line 75 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_UNSIGNED); return(Y_UNSIGNED); }
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 77 "cansi.l"
-{ return(Y_VOID); }
+#line 76 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_VOID); return(Y_VOID); }
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 78 "cansi.l"
-{ return(Y_VOLATILE); }
+#line 77 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_VOLATILE); return(Y_VOLATILE); }
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 79 "cansi.l"
-{ return(Y_WHILE); }
+#line 78 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_WHILE); return(Y_WHILE); }
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 80 "cansi.l"
-{ return Y_ALIGNAS; }
+#line 79 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_ALIGNAS); return Y_ALIGNAS; }
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 81 "cansi.l"
-{ return Y_ALIGNOF; }
+#line 80 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_ALIGNOF); return Y_ALIGNOF; }
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 82 "cansi.l"
-{ return Y_ATOMIC; }
+#line 81 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_ATOMIC); return Y_ATOMIC; }
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 83 "cansi.l"
-{ return Y_BOOL; }
+#line 82 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_BOOL); return Y_BOOL; }
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 84 "cansi.l"
-{ return Y_COMPLEX; }
+#line 83 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_COMPLEX); return Y_COMPLEX; }
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 85 "cansi.l"
-{ return Y_GENERIC; }
+#line 84 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_GENERIC); return Y_GENERIC; }
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 86 "cansi.l"
-{ return Y_IMAGINARY; }
+#line 85 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_IMAGINARY); return Y_IMAGINARY; }
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 87 "cansi.l"
-{ return Y_NORETURN; }
+#line 86 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_NORETURN); return Y_NORETURN; }
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 88 "cansi.l"
-{ return Y_STATIC_ASSERT; }
+#line 87 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return Y_STATIC_ASSERT; }
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 89 "cansi.l"
-{ return Y_THREAD_LOCAL; }
+#line 88 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_THREAD_LOCAL); return Y_THREAD_LOCAL; }
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 90 "cansi.l"
-{ return Y_FUNC_NAME; }
+#line 89 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_FUNC_NAME); return Y_FUNC_NAME; }
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 91 "cansi.l"
-{ yylval->string = _strdup(yytext); return IDENTIFIER; }
+#line 90 "c11ansi.l"
+{ yylval->token = createStringIDToken(yytext); return IDENTIFIER; }
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
-#line 92 "cansi.l"
-{ yylval->longlong = strtoull(yytext, 0, 10); return I_CONSTANT; }
+#line 91 "c11ansi.l"
+{ yylval->token = createConstantULLToken(strtoull(yytext, 0, 10)); return I_CONSTANT; }
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 93 "cansi.l"
-{ yylval->longlong = strtoull(yytext, 0, 10); return I_CONSTANT; }
+#line 92 "c11ansi.l"
+{ yylval->token = createConstantULLToken(strtoull(yytext, 0, 10)); return I_CONSTANT; }
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
-#line 94 "cansi.l"
-{ yylval->longlong = strtoull(yytext, 0, 10); return I_CONSTANT; }
+#line 93 "c11ansi.l"
+{ yylval->token = createConstantULLToken(strtoull(yytext, 0, 10)); return I_CONSTANT; }
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
-#line 95 "cansi.l"
-{ yylval->longlong = strtoull(yytext, 0, 10); return I_CONSTANT; }
+#line 94 "c11ansi.l"
+{ yylval->token = createConstantULLToken(strtoull(yytext, 0, 10)); return I_CONSTANT; }
 	YY_BREAK
 case 55:
 YY_RULE_SETUP
-#line 96 "cansi.l"
-{ yylval->longdouble = strtold(yytext, NULL); return F_CONSTANT; }
+#line 95 "c11ansi.l"
+{ yylval->token = createConstantLDToken(strtold(yytext, NULL)); return F_CONSTANT; }
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
-#line 97 "cansi.l"
-{ yylval->longdouble = strtold(yytext, NULL); return F_CONSTANT; }
+#line 96 "c11ansi.l"
+{ yylval->token = createConstantLDToken(strtold(yytext, NULL)); return F_CONSTANT; }
 	YY_BREAK
 case 57:
 YY_RULE_SETUP
-#line 98 "cansi.l"
-{ yylval->longdouble = strtold(yytext, NULL); return F_CONSTANT; }
+#line 97 "c11ansi.l"
+{ yylval->token = createConstantLDToken(strtold(yytext, NULL)); return F_CONSTANT; }
 	YY_BREAK
 case 58:
 YY_RULE_SETUP
-#line 99 "cansi.l"
-{ yylval->longdouble = strtold(yytext, NULL); return F_CONSTANT; }
+#line 98 "c11ansi.l"
+{ yylval->token = createConstantLDToken(strtold(yytext, NULL)); return F_CONSTANT; }
 	YY_BREAK
 case 59:
 YY_RULE_SETUP
-#line 100 "cansi.l"
-{ yylval->longdouble = strtold(yytext, NULL); return F_CONSTANT; }
+#line 99 "c11ansi.l"
+{ yylval->token = createConstantLDToken(strtold(yytext, NULL)); return F_CONSTANT; }
 	YY_BREAK
 case 60:
 YY_RULE_SETUP
-#line 101 "cansi.l"
-{ yylval->longdouble = strtold(yytext, NULL); return F_CONSTANT; }
+#line 100 "c11ansi.l"
+{ yylval->token = createConstantLDToken(strtold(yytext, NULL)); return F_CONSTANT; }
 	YY_BREAK
 case 61:
 /* rule 61 can match eol */
 YY_RULE_SETUP
-#line 102 "cansi.l"
-{ yylval->string = _strdup(yytext); return STRING_LITERAL; }
+#line 101 "c11ansi.l"
+{ yylval->token = createStringConstantToken(yytext); return STRING_LITERAL; }
 	YY_BREAK
 case 62:
 YY_RULE_SETUP
-#line 103 "cansi.l"
-{ return Y_DOT_DOT_DOT; }
+#line 102 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_DOT_DOT_DOT); return Y_DOT_DOT_DOT; }
 	YY_BREAK
 case 63:
 YY_RULE_SETUP
-#line 104 "cansi.l"
-{ return Y_RSHIFT_EQUAL; }
+#line 103 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_RSHIFT_EQUAL); return Y_RSHIFT_EQUAL; }
 	YY_BREAK
 case 64:
 YY_RULE_SETUP
-#line 105 "cansi.l"
-{ return Y_LSHIFT_EQUAL; }
+#line 104 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_LSHIFT_EQUAL); return Y_LSHIFT_EQUAL; }
 	YY_BREAK
 case 65:
 YY_RULE_SETUP
-#line 106 "cansi.l"
-{ return Y_PLUS_EQUAL; }
+#line 105 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_PLUS_EQUAL); return Y_PLUS_EQUAL; }
 	YY_BREAK
 case 66:
 YY_RULE_SETUP
-#line 107 "cansi.l"
-{ return Y_MINUS_EQUAL; }
+#line 106 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_MINUS_EQUAL); return Y_MINUS_EQUAL; }
 	YY_BREAK
 case 67:
 YY_RULE_SETUP
-#line 108 "cansi.l"
-{ return Y_TIMES_EQUAL; }
+#line 107 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_TIMES_EQUAL); return Y_TIMES_EQUAL; }
 	YY_BREAK
 case 68:
 YY_RULE_SETUP
-#line 109 "cansi.l"
-{ return Y_DIVIDE_EQUAL; }
+#line 108 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_DIVIDE_EQUAL); return Y_DIVIDE_EQUAL; }
 	YY_BREAK
 case 69:
 YY_RULE_SETUP
-#line 110 "cansi.l"
-{ return Y_PERCENT_EQUAL; }
+#line 109 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_PERCENT_EQUAL); return Y_PERCENT_EQUAL; }
 	YY_BREAK
 case 70:
 YY_RULE_SETUP
-#line 111 "cansi.l"
-{ return Y_AND_EQUAL; }
+#line 110 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_AND_EQUAL); return Y_AND_EQUAL; }
 	YY_BREAK
 case 71:
 YY_RULE_SETUP
-#line 112 "cansi.l"
-{ return Y_XOR_EQUAL; }
+#line 111 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_XOR_EQUAL); return Y_XOR_EQUAL; }
 	YY_BREAK
 case 72:
 YY_RULE_SETUP
-#line 113 "cansi.l"
-{ return Y_OR_EQUAL; }
+#line 112 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_OR_EQUAL); return Y_OR_EQUAL; }
 	YY_BREAK
 case 73:
 YY_RULE_SETUP
-#line 114 "cansi.l"
-{ return Y_RSHIFT; }
+#line 113 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_RSHIFT); return Y_RSHIFT; }
 	YY_BREAK
 case 74:
 YY_RULE_SETUP
-#line 115 "cansi.l"
-{ return Y_LSHIFT; }
+#line 114 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_LSHIFT); return Y_LSHIFT; }
 	YY_BREAK
 case 75:
 YY_RULE_SETUP
-#line 116 "cansi.l"
-{ return Y_PLUS_PLUS; }
+#line 115 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_PLUS_PLUS); return Y_PLUS_PLUS; }
 	YY_BREAK
 case 76:
 YY_RULE_SETUP
-#line 117 "cansi.l"
-{ return Y_MINUS_MINUS; }
+#line 116 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_MINUS_MINUS); return Y_MINUS_MINUS; }
 	YY_BREAK
 case 77:
 YY_RULE_SETUP
-#line 118 "cansi.l"
-{ return Y_ARROW; }
+#line 117 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_ARROW); return Y_ARROW; }
 	YY_BREAK
 case 78:
 YY_RULE_SETUP
-#line 119 "cansi.l"
-{ return Y_AND_AND; }
+#line 118 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_AND_AND); return Y_AND_AND; }
 	YY_BREAK
 case 79:
 YY_RULE_SETUP
-#line 120 "cansi.l"
-{ return Y_OR_OR; }
+#line 119 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_OR_OR); return Y_OR_OR; }
 	YY_BREAK
 case 80:
 YY_RULE_SETUP
-#line 121 "cansi.l"
-{ return Y_LE; }
+#line 120 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_LE); return Y_LE; }
 	YY_BREAK
 case 81:
 YY_RULE_SETUP
-#line 122 "cansi.l"
-{ return Y_GE; }
+#line 121 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_GE); return Y_GE; }
 	YY_BREAK
 case 82:
 YY_RULE_SETUP
-#line 123 "cansi.l"
-{ return Y_EQ; }
+#line 122 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_EQ); return Y_EQ; }
 	YY_BREAK
 case 83:
 YY_RULE_SETUP
-#line 124 "cansi.l"
-{ return Y_NE; }
+#line 123 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_NE); return Y_NE; }
 	YY_BREAK
 case 84:
 YY_RULE_SETUP
-#line 125 "cansi.l"
-{ return Y_SEMICOLON; }
+#line 124 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_SEMICOLON); return Y_SEMICOLON; }
 	YY_BREAK
 case 85:
 YY_RULE_SETUP
-#line 126 "cansi.l"
-{ return  Y_LEFT_BRACE; }
+#line 125 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_LEFT_BRACE); return Y_LEFT_BRACE; }
 	YY_BREAK
 case 86:
 YY_RULE_SETUP
-#line 127 "cansi.l"
-{ return  Y_RIGHT_BRACE; }
+#line 126 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_RIGHT_BRACE); return Y_RIGHT_BRACE; }
 	YY_BREAK
 case 87:
 YY_RULE_SETUP
-#line 128 "cansi.l"
-{ return  Y_COMMA; }
+#line 127 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_COMMA); return Y_COMMA; }
 	YY_BREAK
 case 88:
 YY_RULE_SETUP
-#line 129 "cansi.l"
-{ return Y_COLON; }
+#line 128 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_COLON); return Y_COLON; }
 	YY_BREAK
 case 89:
 YY_RULE_SETUP
-#line 130 "cansi.l"
-{ return Y_EQUAL; }
+#line 129 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_EQUAL); return Y_EQUAL; }
 	YY_BREAK
 case 90:
 YY_RULE_SETUP
-#line 131 "cansi.l"
-{ return Y_LEFT_PAREN; }
+#line 130 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_LEFT_PAREN); return Y_LEFT_PAREN; }
 	YY_BREAK
 case 91:
 YY_RULE_SETUP
-#line 132 "cansi.l"
-{ return Y_RIGHT_PAREN; }
+#line 131 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_RIGHT_PAREN); return Y_RIGHT_PAREN; }
 	YY_BREAK
 case 92:
 YY_RULE_SETUP
-#line 133 "cansi.l"
-{ return Y_LEFT_BRACKET; }
+#line 132 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_LEFT_BRACKET); return Y_LEFT_BRACKET; }
 	YY_BREAK
 case 93:
 YY_RULE_SETUP
-#line 134 "cansi.l"
-{ return Y_RIGHT_BRACKET; }
+#line 133 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_RIGHT_BRACKET); return Y_RIGHT_BRACKET; }
 	YY_BREAK
 case 94:
 YY_RULE_SETUP
-#line 135 "cansi.l"
-{ return Y_DOT; }
+#line 134 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_DOT); return Y_DOT; }
 	YY_BREAK
 case 95:
 YY_RULE_SETUP
-#line 136 "cansi.l"
-{ return Y_AND; }
+#line 135 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_AND); return Y_AND; }
 	YY_BREAK
 case 96:
 YY_RULE_SETUP
-#line 137 "cansi.l"
-{ return Y_EXCLAMATION; }
+#line 136 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_EXCLAMATION); return Y_EXCLAMATION; }
 	YY_BREAK
 case 97:
 YY_RULE_SETUP
-#line 138 "cansi.l"
-{ return Y_TILDE; }
+#line 137 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_TILDE); return Y_TILDE; }
 	YY_BREAK
 case 98:
 YY_RULE_SETUP
-#line 139 "cansi.l"
-{ return Y_MINUS; }
+#line 138 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_MINUS); return Y_MINUS; }
 	YY_BREAK
 case 99:
 YY_RULE_SETUP
-#line 140 "cansi.l"
-{ return Y_PLUS; }
+#line 139 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_PLUS); return Y_PLUS; }
 	YY_BREAK
 case 100:
 YY_RULE_SETUP
-#line 141 "cansi.l"
-{ return Y_TIMES; }
+#line 140 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_TIMES); return Y_TIMES; }
 	YY_BREAK
 case 101:
 YY_RULE_SETUP
-#line 142 "cansi.l"
-{ return Y_DIVIDE; }
+#line 141 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_DIVIDE); return Y_DIVIDE; }
 	YY_BREAK
 case 102:
 YY_RULE_SETUP
-#line 143 "cansi.l"
-{ return Y_PERCENT; }
+#line 142 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_PERCENT); return Y_PERCENT; }
 	YY_BREAK
 case 103:
 YY_RULE_SETUP
-#line 144 "cansi.l"
-{ return Y_LT; }
+#line 143 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_LT); return Y_LT; }
 	YY_BREAK
 case 104:
 YY_RULE_SETUP
-#line 145 "cansi.l"
-{ return Y_GT; }
+#line 144 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_GT); return Y_GT; }
 	YY_BREAK
 case 105:
 YY_RULE_SETUP
-#line 146 "cansi.l"
-{ return Y_XOR; }
+#line 145 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_XOR); return Y_XOR; }
 	YY_BREAK
 case 106:
 YY_RULE_SETUP
-#line 147 "cansi.l"
-{ return Y_OR; }
+#line 146 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_OR); return Y_OR; }
 	YY_BREAK
 case 107:
 YY_RULE_SETUP
-#line 148 "cansi.l"
-{ return Y_QUESTION; }
+#line 147 "c11ansi.l"
+{ yylval->token = createKeywordToken(yytext,Y_QUESTION); return Y_QUESTION; }
 	YY_BREAK
 case 108:
 /* rule 108 can match eol */
 YY_RULE_SETUP
-#line 150 "cansi.l"
+#line 149 "c11ansi.l"
 { /* whitespace separates tokens */ }
 	YY_BREAK
 case 109:
 YY_RULE_SETUP
-#line 151 "cansi.l"
+#line 150 "c11ansi.l"
 { /* discard bad characters */ }
 	YY_BREAK
 case 110:
 YY_RULE_SETUP
-#line 153 "cansi.l"
+#line 152 "c11ansi.l"
 ECHO;
 	YY_BREAK
-#line 1602 "lex.yy.c"
+#line 1640 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1967,6 +2005,10 @@ static int yy_get_next_buffer (void)
 
 	*--yy_cp = (char) c;
 
+    if ( c == '\n' ){
+        --yylineno;
+    }
+
 	(yytext_ptr) = yy_bp;
 	(yy_hold_char) = *yy_cp;
 	(yy_c_buf_p) = yy_cp;
@@ -2043,6 +2085,11 @@ static int yy_get_next_buffer (void)
 	c = *(unsigned char *) (yy_c_buf_p);	/* cast for 8-bit char's */
 	*(yy_c_buf_p) = '\0';	/* preserve yytext */
 	(yy_hold_char) = *++(yy_c_buf_p);
+
+	if ( c == '\n' )
+		
+    yylineno++;
+;
 
 	return c;
 }
@@ -2510,6 +2557,9 @@ static int yy_init_globals (void)
      * This function is called from yylex_destroy(), so don't allocate here.
      */
 
+    /* We do not touch yylineno unless the option is enabled. */
+    yylineno =  1;
+    
     (yy_buffer_stack) = NULL;
     (yy_buffer_stack_top) = 0;
     (yy_buffer_stack_max) = 0;
@@ -2604,7 +2654,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 153 "cansi.l"
+#line 152 "c11ansi.l"
 
 
 int yywrap(void)        /* called at end of input */

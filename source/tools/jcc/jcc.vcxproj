@@ -172,37 +172,20 @@
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="cansi.tab.c" />
-    <ClCompile Include="gentypes.c" />
-    <ClCompile Include="globals.c" />
+    <ClCompile Include="c11ansi.tab.c" />
     <ClCompile Include="jcc.c" />
     <ClCompile Include="lex.yy.c" />
+    <ClCompile Include="structures.c" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="cansi.l" />
-    <None Include="cansi.y" />
-    <None Include="wicmsg.rh" />
+    <None Include="c11ansi.l" />
+    <None Include="c11ansi.y" />
+    <None Include="generate.bat" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bool.h" />
-    <ClInclude Include="cansi.tab.h" />
-    <ClInclude Include="cmdline.h" />
-    <ClInclude Include="ctree.h" />
-    <ClInclude Include="exptok.h" />
-    <ClInclude Include="forward.h" />
-    <ClInclude Include="gentypes.h" />
-    <ClInclude Include="globals.h" />
-    <ClInclude Include="hash.h" />
-    <ClInclude Include="parse.h" />
-    <ClInclude Include="print.h" />
-    <ClInclude Include="resource.h" />
-    <ClInclude Include="tables.h" />
-    <ClInclude Include="token.h" />
-    <ClInclude Include="trandecl.h" />
-    <ClInclude Include="wic.h" />
-    <ClInclude Include="wicgener.h" />
-    <ClInclude Include="wicmsg.h" />
-    <ClInclude Include="wicstr.h" />
+    <ClInclude Include="c11ansi.tab.h" />
+    <ClInclude Include="jcc.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Arguments\Arguments.vcxproj">

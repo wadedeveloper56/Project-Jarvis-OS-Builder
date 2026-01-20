@@ -18,82 +18,29 @@
     <ClCompile Include="jcc.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="cansi.tab.c">
+    <ClCompile Include="structures.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="globals.c">
+    <ClCompile Include="c11ansi.tab.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="lex.yy.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="gentypes.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="cansi.y" />
-    <None Include="cansi.l" />
-    <None Include="wicmsg.rh">
-      <Filter>Header Files</Filter>
-    </None>
+    <None Include="c11ansi.y" />
+    <None Include="c11ansi.l" />
+    <None Include="generate.bat" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="cansi.tab.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="cmdline.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ctree.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="exptok.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="forward.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="gentypes.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="globals.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="hash.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="parse.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="print.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="tables.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="token.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="trandecl.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="wic.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="wicgener.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="wicmsg.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="wicstr.h">
+    <ClInclude Include="jcc.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="bool.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h">
+    <ClInclude Include="c11ansi.tab.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
