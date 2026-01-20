@@ -38,33 +38,32 @@ static int check_type(void);
 %option bison-bridge
 
 %%
-"/*"                    { comment(); }
-"//".*                  { /* consume //-comment */ }
-"auto"					{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_AUTO); }
-"break"					{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_BREAK); }
-"case"					{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_CASE); }
-"char"					{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_CHAR); }
-"const"					{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_CONST); }
-"continue"				{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_CONTINUE); }
-"default"				{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_DEFAULT); }
-"do"					{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_DO); }
-"double"				{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_DOUBLE); }
-"long double"			{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_LONG_DOUBLE); }
-"else"					{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_ELSE); }
-"enum"					{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_ENUM); }
-"extern"				{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_EXTERN); }
-"float"					{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_FLOAT); }
-"for"					{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_FOR); }
-"goto"					{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_GOTO); }
-"if"					{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_IF); }
-"inline"				{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_INLINE); }
-"int"					{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_INT); }
-"long"					{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_LONG); }
-"long long"				{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_LONG_LONG); }
-"register"				{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_REGISTER); }
-"restrict"				{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_RESTRICT); }
-"return"				{ yylval->token = createKeywordToken(yytext,Y_STATIC_ASSERT); return(Y_RETURN); }
-
+"/*"                                { comment(); }
+"//".*                              { /* consume //-comment */ }
+"auto"                              { yylval->token = createKeywordToken(yytext,Y_AUTO); return(Y_AUTO); }
+"break"                             { yylval->token = createKeywordToken(yytext,Y_BREAK); return(Y_BREAK); }
+"case"                              { yylval->token = createKeywordToken(yytext,Y_CASE); return(Y_CASE); }
+"char"                              { yylval->token = createKeywordToken(yytext,Y_CHAR); return(Y_CHAR); }
+"const"                             { yylval->token = createKeywordToken(yytext,Y_CONST); return(Y_CONST); }
+"continue"                          { yylval->token = createKeywordToken(yytext,Y_CONTINUE); return(Y_CONTINUE); }
+"default"                           { yylval->token = createKeywordToken(yytext,Y_DEFAULT); return(Y_DEFAULT); }
+"do"                                { yylval->token = createKeywordToken(yytext,Y_DO); return(Y_DO); }
+"double"                            { yylval->token = createKeywordToken(yytext,Y_DOUBLE); return(Y_DOUBLE); }
+"long double"                       { yylval->token = createKeywordToken(yytext,Y_LONG_DOUBLE); return(Y_LONG_DOUBLE); }
+"else"                              { yylval->token = createKeywordToken(yytext,Y_ELSE); return(Y_ELSE); }
+"enum"                              { yylval->token = createKeywordToken(yytext,Y_ENUM); return(Y_ENUM); }
+"extern"                            { yylval->token = createKeywordToken(yytext,Y_EXTERN); return(Y_EXTERN); }
+"float"                             { yylval->token = createKeywordToken(yytext,Y_FLOAT); return(Y_FLOAT); }
+"for"                               { yylval->token = createKeywordToken(yytext,Y_FOR); return(Y_FOR); }
+"goto"                              { yylval->token = createKeywordToken(yytext,Y_GOTO); return(Y_GOTO); }
+"if"                                { yylval->token = createKeywordToken(yytext,Y_IF); return(Y_IF); }
+"inline"                            { yylval->token = createKeywordToken(yytext,Y_INLINE); return(Y_INLINE); }
+"int"                               { yylval->token = createKeywordToken(yytext,Y_INT); return(Y_INT); }
+"long"                              { yylval->token = createKeywordToken(yytext,Y_LONG); return(Y_LONG); }
+"long long"                         { yylval->token = createKeywordToken(yytext,Y_LONG_LONG); return(Y_LONG_LONG); }
+"register"                          { yylval->token = createKeywordToken(yytext,Y_REGISTER); return(Y_REGISTER); }
+"restrict"                          { yylval->token = createKeywordToken(yytext,Y_RESTRICT); return(Y_RESTRICT); }
+"return"                            { yylval->token = createKeywordToken(yytext,Y_RETURN); return(Y_RETURN); }
 "short"                             { yylval->token = createKeywordToken(yytext,Y_SHORT); return(Y_SHORT); }
 "signed"                            { yylval->token = createKeywordToken(yytext,Y_SIGNED); return(Y_SIGNED); }
 "sizeof"                            { yylval->token = createKeywordToken(yytext,Y_SIZEOF); return(Y_SIZEOF); }
