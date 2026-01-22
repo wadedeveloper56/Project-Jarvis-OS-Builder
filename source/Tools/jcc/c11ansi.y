@@ -140,33 +140,37 @@ int yylex();
 %type<token> constant
 %type<token> enumeration_constant
 %type<token> string
-
+%type<tree> primary_expression	
+%type<tree> expression	
+%type<tree> postfix_expression
+%type<tree> argument_expression_list
+ 
 %start translation_unit
 %%
 
 primary_expression
-	: IDENTIFIER
-	| constant
-	| string
-	| Y_LEFT_PAREN expression Y_RIGHT_PAREN
-	| generic_selection
+	: IDENTIFIER                            { $$ = createCTreeRoot(createTokenLabel($1)); }
+	| constant                              { $$ = createCTreeRoot(createTokenLabel($1)); }
+	| string                                { $$ = createCTreeRoot(createTokenLabel($1)); }
+	| Y_LEFT_PAREN expression Y_RIGHT_PAREN { $$ = createCTree1(createConstr2Label(LABCT_PAREN_EXPR, $1, $3), $2); }
+	//| generic_selection
 	;
 
 constant
-	: I_CONSTANT {$<token>$ = $1;}
-	| F_CONSTANT {$<token>$ = $1;}
-	| Y_ENUMERATION_CONSTANT {$<token>$ = $1;}
+	: I_CONSTANT             {$$ = $1;}
+	| F_CONSTANT             {$$ = $1;}
+	| Y_ENUMERATION_CONSTANT {$$ = $1;}
 	;
 
 enumeration_constant
-	: IDENTIFIER {$<token>$ = $1;}
+	: IDENTIFIER {$$ = $1;}
 	;
 
 string
-	: STRING_LITERAL {$<token>$ = $1;}
-	| Y_FUNC_NAME {$<token>$ = $1;}
+	: STRING_LITERAL {$$ = $1;}
+	| Y_FUNC_NAME    {$$ = $1;}
 	;
-
+/*
 generic_selection
 	: Y_GENERIC Y_LEFT_PAREN assignment_expression Y_COMMA generic_assoc_list Y_RIGHT_PAREN
 	;
@@ -180,16 +184,16 @@ generic_association
 	: type_name Y_COLON assignment_expression
 	| Y_DEFAULT Y_COLON assignment_expression
 	;
-
+*/
 postfix_expression
-	: primary_expression
-	| postfix_expression Y_LEFT_BRACKET expression Y_RIGHT_BRACKET
-	| postfix_expression Y_LEFT_PAREN Y_RIGHT_PAREN
-	| postfix_expression Y_LEFT_PAREN argument_expression_list Y_RIGHT_PAREN
-	| postfix_expression Y_DOT IDENTIFIER
-	| postfix_expression Y_ARROW IDENTIFIER
-	| postfix_expression Y_PLUS_PLUS
-	| postfix_expression Y_MINUS_MINUS
+	: primary_expression                                                       { $$ = $1; }
+	| postfix_expression Y_LEFT_BRACKET expression Y_RIGHT_BRACKET             { $$ = createCTree2(createConstr2Label(LABCT_INDEX, $2, $4), $1,  $3); }
+	| postfix_expression Y_LEFT_PAREN Y_RIGHT_PAREN                            { $$ = createCTree1(createConstr2Label(LABCT_CALL, $2, $3), $1); }
+	| postfix_expression Y_LEFT_PAREN argument_expression_list Y_RIGHT_PAREN   { $$ = createCTree2(createConstr2Label(LABCT_CALL, $2, $4), $1, $3); }
+	| postfix_expression Y_DOT IDENTIFIER                                      { $$ = createCTree2(createConstr1Label(LABCT_DOT, $2), $1, createCTreeRoot(createTokenLabel($3))); }
+	| postfix_expression Y_ARROW IDENTIFIER                                    { $$ = createCTree2(createConstr1Label(LABCT_ARROW, $2), $1, createCTreeRoot(createTokenLabel($3))); }
+	| postfix_expression Y_PLUS_PLUS                                           { $$ = createCTree1(createConstr1Label(LABCT_PLUS_PLUS, $2), $1); }
+	| postfix_expression Y_MINUS_MINUS                                         { $$ = createCTree1(createConstr1Label(LABCT_MINUS_MINUS, $2), $1); }
 	| Y_LEFT_PAREN type_name Y_RIGHT_PAREN  Y_LEFT_BRACE initializer_list Y_RIGHT_BRACE
 	| Y_LEFT_PAREN type_name Y_RIGHT_PAREN  Y_LEFT_BRACE initializer_list Y_COMMA Y_RIGHT_BRACE
 	;
@@ -657,10 +661,11 @@ declaration_list
 #include <stdio.h>
 
 extern char * yytext;
+extern int yylineno;
 
 int yyerror(const char *s)
 {
 	fflush(stdout);
-	fprintf(stderr, "*** %s %s\n", s, yytext);
+	fprintf(stderr, "*** Line %d %s %s\n", yylineno, s, yytext);
 	return 0;
 }

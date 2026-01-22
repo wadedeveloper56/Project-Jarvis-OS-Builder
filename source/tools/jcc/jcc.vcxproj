@@ -176,6 +176,7 @@
     <ClCompile Include="jcc.c" />
     <ClCompile Include="lex.yy.c" />
     <ClCompile Include="structures.c" />
+    <ClCompile Include="tree.c" />
   </ItemGroup>
   <ItemGroup>
     <None Include="c11ansi.l" />

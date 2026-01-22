@@ -8,7 +8,8 @@
 #include "ArgumentTable.h"
 #include "Memory.h"
 
-typedef enum {
+typedef enum
+{
 	LABT_LIST,
 	LABT_TOKEN,
 	LABT_CONSTRUCT_ROOT,
@@ -16,7 +17,8 @@ typedef enum {
 	LABT_DECL_LIST
 } LabelType;
 
-typedef enum {
+typedef enum
+{
 	LABCT_ADDR_OF_VALUE,
 	LABCT_AND,
 	LABCT_AND_AND,
@@ -38,12 +40,14 @@ typedef enum {
 	LABCT_LSHIFT,
 	LABCT_LT,
 	LABCT_MINUS,
+	LABCT_MINUS_MINUS,
 	LABCT_NE,
 	LABCT_OR,
 	LABCT_OR_OR,
 	LABCT_PAREN_EXPR,
 	LABCT_PERCENT,
 	LABCT_PLUS,
+	LABCT_PLUS_PLUS,
 	LABCT_QUESTION,
 	LABCT_RSHIFT,
 	LABCT_SIZEOF_EXPR,
@@ -70,14 +74,16 @@ typedef enum {
 //	long orderLineNum;
 //} TokPos, * TokPosPtr;
 //
-typedef enum {
+typedef enum
+{
 	RADT_DECIMAL,
 	RADT_HEX,
 	RADT_OCTAL,
 	RADT_MAX
 } RadixType;
 
-typedef enum {
+typedef enum
+{
 	CONSTT_CHAR_CONST,
 	CONSTT_INT_CONST,
 	CONSTT_UINT_CONST,
@@ -95,7 +101,8 @@ typedef enum {
 //	TT_OTHER
 //} token_type;
 //
-typedef enum {
+typedef enum
+{
 	YC_INT_CONST,
 	YC_FLOAT_CONST,
 	YC_STRING_CONST,
@@ -104,34 +111,42 @@ typedef enum {
 	// ... other token codes as needed
 } TokenCode;
 
-typedef struct {
+typedef struct
+{
 	TokenCode code;
-	union {
-		struct {
+	union
+	{
+		struct
+		{
 			int keyword;
 			int strLen;
 			char* string;
 		} keyword;
-		struct {
+		struct
+		{
 			char* string;
 			int strLen;
 		} symbol;
-		struct {
+		struct
+		{
 			ConstType type : 6;
 			RadixType radix : 2;
-			union {
+			union
+			{
 				unsigned long long lIntConst;
 				long double lDoubleConst;
 			} repr;
 		} numericConstant;
-		struct {
+		struct
+		{
 			char* s;
 			int strLen;
 		} stringConstant;
 	} repr;
 } TokData, * TokDataPtr;
 
-typedef struct {
+typedef struct
+{
 	TokDataPtr data;
 }Token, * TokenPtr, ** TokenPtrPtr;
 
@@ -147,22 +162,34 @@ typedef struct SLList
 	SLListNodePtr tail;  /* Last (most recently added) element in the list */
 } SLList, * SLListPtr, ** SLListPtrPtr;
 
-typedef struct {
+typedef struct
+{
 	LabelType type;
-	union {
-		struct { /* Construct in case type=LABT_CONSTRUCT_ROOT*/
+	union
+	{
+		struct
+		{
 			LabelConstrType type : 8;
 			int8_t numTokens;
 			TokenPtrPtr tokens;
 		} constr;
 		SLListPtr list; // List of tokens
 		TokenPtr token;
-		SLListPtr declList;
 		void* data;
 	} repr;
 } Label, * LabelPtr, ** LabelPtrPtr;
 
-union ParseUnion {
+typedef struct _CTree
+{
+	LabelPtr label;
+	struct _CTree* child1; /* Left child */
+	struct _CTree* child2;  /* Right child */
+} CTree, * CTreePtr, ** CTreePtrPtr;
+
+union ParseUnion
+{
+	CTreePtr tree;
+	LabelPtr label;
 	TokenPtr token;
 };
 
@@ -176,4 +203,16 @@ TokenPtr createConstantLDToken(long double num);
 TokenPtr createStringConstantToken(char* str);
 TokenPtr createStringIDToken(char* str);
 TokenPtr createKeywordToken(char* str, int keyword);
+//********************************************
+CTreePtr createCTreeRoot(LabelPtr label);
+CTreePtr createNULLCTree(void);
+CTreePtr createCTree1(LabelPtr label, CTreePtr child);
+CTreePtr createCTree2(LabelPtr label, CTreePtr child1, CTreePtr child2);
+LabelPtr createTokenLabel(TokenPtr token);
+LabelPtr createConstr0Label(LabelConstrType type);
+LabelPtr createConstr1Label(LabelConstrType type, TokenPtr t0);
+LabelPtr createConstr2Label(LabelConstrType type, TokenPtr t0, TokenPtr t1);
+LabelPtr createConstr3Label(LabelConstrType type, TokenPtr t0, TokenPtr t1, TokenPtr t2);
+LabelPtr createConstr4Label(LabelConstrType type, TokenPtr t0, TokenPtr t1, TokenPtr t2, TokenPtr t3);
+LabelPtr createConstr5Label(LabelConstrType type, TokenPtr t0, TokenPtr t1, TokenPtr t2, TokenPtr t3, TokenPtr t4);
 
