@@ -199,7 +199,7 @@ postfix_expression
 	| postfix_expression Y_PLUS_PLUS                                           { $$ = createCTree1(createConstr1Label(LABCT_PLUS_PLUS, $2), $1); }
 	| postfix_expression Y_MINUS_MINUS                                         { $$ = createCTree1(createConstr1Label(LABCT_MINUS_MINUS, $2), $1); }
 	| Y_LEFT_PAREN type_name Y_RIGHT_PAREN  Y_LEFT_BRACE initializer_list Y_RIGHT_BRACE  { $$ = createCTree2(createConstr4Label(LABCT_CAST_EXPR, $1, $3, $4, $6), $2, $5); }
-	| Y_LEFT_PAREN type_name Y_RIGHT_PAREN  Y_LEFT_BRACE initializer_list Y_COMMA Y_RIGHT_BRACE
+	| Y_LEFT_PAREN type_name Y_RIGHT_PAREN  Y_LEFT_BRACE initializer_list Y_COMMA Y_RIGHT_BRACE  { $$ = createCTree2(createConstr5Label(LABCT_CAST_EXPR, $1, $3, $4, $6, $7), $2, $5); }
 	;
 	
 argument_expression_list
