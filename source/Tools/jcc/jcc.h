@@ -44,15 +44,6 @@ typedef enum {
 	LABCT_PAREN_EXPR,
 	LABCT_PERCENT,
 	LABCT_PLUS,
-	LABCT_PRE_DEFINE_MACRO,
-	LABCT_PRE_ELIF,
-	LABCT_PRE_ELSE,
-	LABCT_PRE_ENDIF,
-	LABCT_PRE_IF,
-	LABCT_PRE_IFDEF,
-	LABCT_PRE_IFNDEF,
-	LABCT_PRE_INCLUDE,
-	LABCT_PRE_DIR_LIST,
 	LABCT_QUESTION,
 	LABCT_RSHIFT,
 	LABCT_SIZEOF_EXPR,
@@ -69,16 +60,16 @@ typedef enum {
 	LABCT_MAX
 } LabelConstrType;
 
-typedef struct {
-	char* fileName;
-	int8_t fileLevel;
-	int16_t lineNum;
-	int16_t  colNum;
-	uint8_t  linesBefore;
-	uint8_t  spacesBefore;
-	long orderLineNum;
-} TokPos, * TokPosPtr;
-
+//typedef struct {
+//	char* fileName;
+//	int8_t fileLevel;
+//	int16_t lineNum;
+//	int16_t  colNum;
+//	uint8_t  linesBefore;
+//	uint8_t  spacesBefore;
+//	long orderLineNum;
+//} TokPos, * TokPosPtr;
+//
 typedef enum {
 	RADT_DECIMAL,
 	RADT_HEX,
@@ -99,11 +90,11 @@ typedef enum {
 	CONSTT_MAX
 } ConstType;
 
-typedef enum {
-	TT_PREPROCESSOR,
-	TT_OTHER
-} token_type;
-
+//typedef enum {
+//	TT_PREPROCESSOR,
+//	TT_OTHER
+//} token_type;
+//
 typedef enum {
 	YC_INT_CONST,
 	YC_FLOAT_CONST,
@@ -112,17 +103,6 @@ typedef enum {
 	YC_KEYWORD
 	// ... other token codes as needed
 } TokenCode;
-
-typedef struct _SLListNode{
-	struct _SLListNode* next;
-	void* userData;
-} SLListNode,* SLListNodePtr, ** SLListNodePtrPtr;
-
-typedef struct SLList {
-	SLListNodePtr head;  /* 1-st element in the list */
-	SLListNodePtr tail;  /* Last (most recently added) element in the list */
-	SLListNodePtr currPos;
-} SLList, * SLListPtr, ** SLListPtrPtr;
 
 typedef struct {
 	TokenCode code;
@@ -135,7 +115,6 @@ typedef struct {
 		struct {
 			char* string;
 			int strLen;
-			//pDeclInfo pTypeDecl;
 		} symbol;
 		struct {
 			ConstType type : 6;
@@ -154,8 +133,19 @@ typedef struct {
 
 typedef struct {
 	TokDataPtr data;
-	TokPosPtr pos;
 }Token, * TokenPtr, ** TokenPtrPtr;
+
+typedef struct _SLListNode
+{
+	struct _SLListNode* next;
+	void* userData;
+} SLListNode, * SLListNodePtr, ** SLListNodePtrPtr;
+
+typedef struct SLList
+{
+	SLListNodePtr head;  /* 1-st element in the list */
+	SLListNodePtr tail;  /* Last (most recently added) element in the list */
+} SLList, * SLListPtr, ** SLListPtrPtr;
 
 typedef struct {
 	LabelType type;
@@ -167,22 +157,13 @@ typedef struct {
 		} constr;
 		SLListPtr list; // List of tokens
 		TokenPtr token;
-		//pDeclInfo dinfo;
 		SLListPtr declList;
 		void* data;
 	} repr;
 } Label, * LabelPtr, ** LabelPtrPtr;
 
-typedef struct _CTree {
-	LabelPtr label;
-	struct _CTree* child1; /* Left child */
-	struct _CTree* child2;  /* Right child */
-} CTree, * CTreePtr, ** CTreePtrPtr;
-
 union ParseUnion {
-	CTreePtr tree;
 	TokenPtr token;
-	SLListPtr dclrList;
 };
 
 void printHeader(void);
@@ -190,13 +171,6 @@ void doConversion(void** name);
 void initiate(int argc, char* argv[]);
 void terminate(int exitCode);
 //********************************************
-CTreePtr createCTreeRoot(LabelPtr label);
-CTreePtr createCTree1(LabelPtr label, CTreePtr child);
-LabelPtr createTokenLabelStr(char* token);
-LabelPtr createConstr2Label(LabelConstrType type, TokenPtr t0, TokenPtr t1);
-TokenPtr createToken(TokDataPtr data, TokPosPtr pos);
-TokPosPtr createTokPos(void);
-TokDataPtr createTokData(void);
 TokenPtr createConstantULLToken(unsigned long long num);
 TokenPtr createConstantLDToken(long double num);
 TokenPtr createStringConstantToken(char* str);

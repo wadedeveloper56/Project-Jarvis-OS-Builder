@@ -1,58 +1,10 @@
 #include "jcc.h"
 
-CTreePtr createCTreeRoot(LabelPtr label) 
-{
-    CTreePtr newTree = AllocateMemory(sizeof(CTree));
-    newTree->label = label;
-    newTree->child1 = NULL;
-    newTree->child2 = NULL;
-    return newTree;
-}
-
-CTreePtr createCTree1(LabelPtr label, CTreePtr child) 
-{
-    CTreePtr newTree = createCTreeRoot(label);
-    newTree->child1 = child;
-    return newTree;
-}
-
-static LabelPtr _createLabel(LabelType type, void* data)
-{
-    LabelPtr newLabel = AllocateMemory(sizeof(Label));
-    newLabel->type = type;
-    newLabel->repr.data = data;
-    return newLabel;
-}
-
-LabelPtr createConstr2Label(LabelConstrType type, TokenPtr t0, TokenPtr t1) 
-{
-    LabelPtr newLabel = _createLabel(LABT_CONSTRUCT_ROOT, NULL);
-    newLabel->repr.constr.type = type;
-    newLabel->repr.constr.numTokens = 2;
-    newLabel->repr.constr.tokens = AllocateMemory(sizeof(TokenPtr) * 2);
-    newLabel->repr.constr.tokens[0] = t0;
-    newLabel->repr.constr.tokens[1] = t1;
-    return newLabel;
-}
-
-LabelPtr createTokenLabelStr(char* token) 
-{
-    return _createLabel(LABT_TOKEN, token);
-}
-
-TokenPtr createToken(TokDataPtr data, TokPosPtr pos) 
+TokenPtr createToken(TokDataPtr data) 
 {
     TokenPtr tok = AllocateMemory(sizeof(Token));
     tok->data = data;
-    tok->pos = pos;
     return tok;
-}
-
-TokPosPtr createTokPos(void) 
-{
-    TokPosPtr newPos = AllocateMemory(sizeof(TokPos));
-    memset(newPos, 0, sizeof(TokPos));
-    return newPos;
 }
 
 TokDataPtr createTokData(void)
@@ -65,7 +17,7 @@ TokDataPtr createTokData(void)
 
 TokenPtr createConstantULLToken(unsigned long long num) 
 {
-    TokenPtr tok = createToken(createTokData(), NULL);
+    TokenPtr tok = createToken(createTokData());
     tok->data->code = YC_INT_CONST;
     tok->data->repr.numericConstant.type = CONSTT_UINT_CONST;
     tok->data->repr.numericConstant.radix = RADT_DECIMAL;
@@ -75,7 +27,7 @@ TokenPtr createConstantULLToken(unsigned long long num)
 
 TokenPtr createConstantLDToken(long double num)
 {
-    TokenPtr tok = createToken(createTokData(), NULL);
+    TokenPtr tok = createToken(createTokData());
     tok->data->code = YC_FLOAT_CONST;
     tok->data->repr.numericConstant.type = CONSTT_LDOUBLE_CONST;
     tok->data->repr.numericConstant.radix = RADT_DECIMAL;
@@ -85,7 +37,7 @@ TokenPtr createConstantLDToken(long double num)
 
 TokenPtr createStringConstantToken(char *str)
 {
-    TokenPtr tok = createToken(createTokData(), NULL);
+    TokenPtr tok = createToken(createTokData());
     tok->data->code = YC_STRING_CONST;
     tok->data->repr.stringConstant.s = _strdup(str);
 	tok->data->repr.stringConstant.strLen = (int)strlen(str);
@@ -94,7 +46,7 @@ TokenPtr createStringConstantToken(char *str)
 
 TokenPtr createStringIDToken(char* str)
 {
-    TokenPtr tok = createToken(createTokData(), NULL);
+    TokenPtr tok = createToken(createTokData());
     tok->data->code = YC_ID;
     tok->data->repr.symbol.string = _strdup(str);
     tok->data->repr.symbol.strLen = (int)strlen(str);
@@ -103,7 +55,7 @@ TokenPtr createStringIDToken(char* str)
 
 TokenPtr createKeywordToken(char* str,int keyword)
 {
-    TokenPtr tok = createToken(createTokData(), NULL);
+    TokenPtr tok = createToken(createTokData());
     tok->data->code = YC_KEYWORD;
     tok->data->repr.keyword.string = _strdup(str);
 	tok->data->repr.keyword.keyword = keyword;
