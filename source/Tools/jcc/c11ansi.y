@@ -143,7 +143,9 @@ int yylex();
 %type<tree> primary_expression	
 %type<tree> expression	
 %type<tree> postfix_expression
-%type<tree> argument_expression_list
+%type<tree> assignment_expression
+%type<tree> unary_expression
+%type<token> unary_operator
  
 %glr-parser
 
@@ -196,19 +198,19 @@ postfix_expression
 	| postfix_expression Y_ARROW IDENTIFIER                                    { $$ = createCTree2(createConstr1Label(LABCT_ARROW, $2), $1, createCTreeRoot(createTokenLabel($3))); }
 	| postfix_expression Y_PLUS_PLUS                                           { $$ = createCTree1(createConstr1Label(LABCT_PLUS_PLUS, $2), $1); }
 	| postfix_expression Y_MINUS_MINUS                                         { $$ = createCTree1(createConstr1Label(LABCT_MINUS_MINUS, $2), $1); }
-	| Y_LEFT_PAREN type_name Y_RIGHT_PAREN  Y_LEFT_BRACE initializer_list Y_RIGHT_BRACE
+	| Y_LEFT_PAREN type_name Y_RIGHT_PAREN  Y_LEFT_BRACE initializer_list Y_RIGHT_BRACE  { $$ = createCTree2(createConstr4Label(LABCT_CAST_EXPR, $1, $3, $4, $6), $2, $5); }
 	| Y_LEFT_PAREN type_name Y_RIGHT_PAREN  Y_LEFT_BRACE initializer_list Y_COMMA Y_RIGHT_BRACE
 	;
-
+	
 argument_expression_list
-	: assignment_expression
-	| argument_expression_list Y_COMMA assignment_expression
+	: assignment_expression                                  { $$ = $1; }
+	| argument_expression_list Y_COMMA assignment_expression { $$ = createCTree2(createConstr1Label(LABCT_EXPR_SEPARATOR, $2), $1, $3); }
 	;
 
 unary_expression
-	: postfix_expression
-	| Y_PLUS_PLUS unary_expression
-	| Y_MINUS_MINUS unary_expression
+	: postfix_expression             { $$ = $1; }
+	| Y_PLUS_PLUS unary_expression   { $$ = createCTree1(createConstr1Label(LABCT_PLUS_PLUS, $2), $1); }
+	| Y_MINUS_MINUS unary_expression { $$ = createCTree1(createConstr1Label(LABCT_MINUS_MINUS, $2), $1); }
 	| unary_operator cast_expression
 	| Y_SIZEOF unary_expression
 	| Y_SIZEOF Y_LEFT_PAREN type_name Y_RIGHT_PAREN
