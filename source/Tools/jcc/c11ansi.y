@@ -145,6 +145,8 @@ int yylex();
 %type<tree> postfix_expression
 %type<tree> argument_expression_list
  
+%glr-parser
+
 %start translation_unit
 %%
 
