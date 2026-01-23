@@ -197,11 +197,170 @@ typedef struct _CTree
 	struct _CTree* child2;  /* Right child */
 } CTree, * CTreePtr, ** CTreePtrPtr;
 
+typedef enum
+{
+	STG_NULL = 0,
+	STG_TYPEDEF,
+	STG_REGISTER,
+	STG_AUTO,
+	STG_EXTERN,
+	STG_STATIC,
+	STG_MAX
+} StgClass;
+
+typedef enum
+{
+	STY_NULL = 0x00,
+	STY_CONST = 0x01,
+	STY_VOLATILE = 0x02,
+} TypeQualifier;
+
+typedef enum
+{
+	STM_NULL = 0x0000,
+	STM_CHAR = 0x0001,
+	STM_INT = 0x0002,
+	STM_LONG = 0x0004,
+	STM_FLOAT = 0x0008,
+	STM_DOUBLE = 0x0010,
+	STM_SIGNED = 0x0020,
+	STM_UNSIGNED = 0x0040,
+	STM_SHORT = 0x0080,
+	STM_VOID = 0x0100,
+	STM_DOT_DOT_DOT = 0x0200      // Used exclusively for function args
+} YScalarType;
+
+typedef enum
+{
+	DIT_NULL = 0,
+	DIT_SCALAR,                 // Things like int, uint and alike
+	DIT_STRUCT_OR_UNION,
+	DIT_ENUM
+} DeclInfoType;
+
+// Scalar types
+typedef enum
+{
+	SCL_NULL = 0x00,
+	SCL_CHAR,
+	SCL_SCHAR,
+	SCL_UCHAR,
+	SCL_WCHAR,            // extension: long char
+	SCL_SSHORT,
+	SCL_USHORT,
+	SCL_SINT,
+	SCL_UINT,
+	SCL_SLONG,
+	SCL_ULONG,
+	SCL_FLOAT,
+	SCL_DOUBLE,
+	SCL_LDOUBLE,        // long double
+	SCL_VOID,
+	SCL_DOT_DOT_DOT,
+	SCL_MAX
+} ScalarType;
+
+typedef enum
+{
+	DSIT_STRUCT,
+	DSIT_UNION
+} DeclStructInfoType;
+
+typedef struct _DeclStructBody
+{
+	SLListPtr declList;
+}DeclStructBody, * DeclStructBodyPtr, ** DeclStructBodyPtrPtr;
+
+typedef struct _DeclStructInfo
+{
+	DeclStructInfoType type;
+	TokenPtr name;                // Name (optional) of the structure
+	DeclStructBodyPtr body;       // Body (optional) of the structure
+}DeclStructInfo, * DeclStructInfoPtr, ** DeclStructInfoPtrPtr;
+
+typedef struct DeclEnum
+{
+	SLListPtr list;             // optional
+}DeclEnum, * DeclEnumPtr, ** DeclEnumPtrPtr;
+
+typedef enum
+{
+	MT_NULL = 0,
+	MT_NEAR,
+	MT_FAR,
+	MT_FAR16,
+	MT_HUGE,
+	MT_MAX
+} MemType;
+
+typedef struct _DclrPtr
+{
+	MemType memType;
+	TypeQualifier qualifiers;
+}_DclrPtr, * pDclrPtr;
+
+typedef struct _Dclr
+{
+	MemType memType;
+	TokenPtr pragmaMod;
+	pDclrPtr ptr;
+	TokenPtr id;
+	SLListPtr arrList;
+	TokenPtr argBegin;  // '('
+	SLListPtr args;
+	TokenPtr argEnd;  // ')'
+	TokenPtr equalTok;
+	CTreePtr initializer;
+}Dclr, * DclrPtr, ** DclrPtrPtr;
+
+typedef struct _DeclInfo
+{
+	TokenPtr begPunct;  // Punctuation mark at the beginning of a declarator
+	StgClass storage;
+	TypeQualifier qualifier;
+	DeclInfoType type : 8;
+	union
+	{
+		struct
+		{        // DIT_SCALAR
+			YScalarType scalarCombo;
+			ScalarType scalar;
+		} scalar;
+		DeclEnumPtr e;                    // DIT_ENUM
+		DeclStructInfoPtr s;              // DIT_STRUCT_OR_UNION
+	} repr;
+	SLList dclrList;  // List of declarators (optional)
+	DclrPtr dclr;  // Declarator that may come from defined type
+}DeclInfo, * DeclInfoPtr, ** DeclInfoPtrPtr;
+
+typedef struct _EnumElem
+{
+	char   begPunctExists;  // comma exists before this element
+	TokenPtr name;
+	TokenPtr equal;
+	CTreePtr expression;
+}EnumElem, * EnumElemPtr, ** EnumElemPtrPtr;
+
 union ParseUnion
 {
 	CTreePtr tree;
 	LabelPtr label;
 	TokenPtr token;
+	DeclInfoPtr dinfo;
+	DeclStructInfoPtr dsinfo;
+	DeclStructBodyPtr dsbody;
+	DeclEnumPtr declEnum;
+	DclrPtr dclr;
+	pDclrPtr dclrPtr;
+	SLListPtr tokenList;
+	SLListPtr enumList;
+	SLListPtr declList;
+	SLListPtr dclrList;
+	EnumElemPtr enumElem;
+	int flag;
+	void* data;
+	//pDeclTreeElem declTreeElem;
+	//pArrElem arrElem;
 };
 
 void printHeader(void);
