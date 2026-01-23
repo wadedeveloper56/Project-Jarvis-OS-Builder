@@ -341,6 +341,29 @@ typedef struct _EnumElem
 	CTreePtr expression;
 }EnumElem, * EnumElemPtr, ** EnumElemPtrPtr;
 
+typedef struct _ArrElem
+{
+	TokenPtr lBracket;
+	CTreePtr constExpr;
+	TokenPtr rBracket;
+}ArrElem, * ArrElemPtr, ** ArrElemPtrPtr;
+
+typedef enum
+{
+	DECL_INFO,
+	DECL_TREE_ELEM
+} DeclTreeElemType;
+
+typedef struct _DeclTreeElem
+{
+	DeclTreeElemType type;
+	union
+	{
+		DeclInfoPtr decl;
+		SLListPtr list;
+	} u;
+}DeclTreeElem, *DeclTreeElemPtr, **DeclTreeElemPtrPtr;
+
 union ParseUnion
 {
 	CTreePtr tree;
@@ -357,10 +380,10 @@ union ParseUnion
 	SLListPtr declList;
 	SLListPtr dclrList;
 	EnumElemPtr enumElem;
+	ArrElemPtr arrElem;
+	DeclTreeElemPtr declTreeElem;
 	int flag;
 	void* data;
-	//pDeclTreeElem declTreeElem;
-	//pArrElem arrElem;
 };
 
 void printHeader(void);
