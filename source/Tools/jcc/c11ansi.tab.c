@@ -634,34 +634,34 @@ static const yytype_uint8 yytranslate[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,   154,   154,   155,   156,   157,   162,   163,   164,   168,
-     172,   173,   191,   192,   193,   194,   195,   196,   197,   198,
-     199,   200,   204,   205,   209,   210,   211,   212,   213,   214,
-     215,   219,   220,   221,   222,   223,   224,   228,   229,   233,
-     234,   235,   236,   240,   241,   242,   246,   247,   248,   252,
-     253,   254,   255,   256,   260,   261,   262,   266,   267,   271,
-     272,   276,   277,   281,   282,   286,   287,   291,   292,   296,
-     297,   301,   302,   303,   304,   305,   306,   307,   308,   309,
-     310,   311,   315,   316,   320,   324,   325,   326,   330,   331,
-     332,   333,   334,   335,   336,   337,   338,   339,   343,   344,
-     348,   349,   353,   354,   355,   356,   357,   358,   362,   363,
-     364,   365,   366,   367,   368,   369,   370,   371,   372,   373,
-     374,   375,   376,   377,   378,   379,   383,   384,   385,   389,
-     390,   394,   395,   399,   400,   401,   405,   406,   407,   408,
-     412,   413,   417,   418,   419,   423,   424,   425,   426,   427,
-     431,   432,   436,   437,   441,   445,   446,   447,   448,   452,
-     453,   457,   458,   462,   463,   467,   468,   469,   470,   471,
-     472,   473,   474,   475,   476,   477,   478,   479,   480,   484,
-     485,   486,   487,   491,   492,   497,   498,   502,   503,   507,
-     508,   509,   513,   514,   518,   519,   523,   524,   525,   529,
-     530,   531,   532,   533,   534,   535,   536,   537,   538,   539,
-     540,   541,   542,   543,   544,   545,   546,   547,   548,   549,
-     553,   554,   555,   559,   560,   561,   562,   566,   570,   571,
-     575,   576,   580,   584,   585,   586,   587,   588,   589,   593,
-     594,   595,   599,   600,   604,   605,   609,   610,   614,   615,
-     619,   620,   621,   625,   626,   627,   628,   629,   630,   634,
-     635,   636,   637,   638,   642,   643,   647,   648,   652,   653,
-     657,   658
+       0,   163,   163,   164,   165,   166,   171,   172,   173,   177,
+     181,   182,   200,   201,   202,   203,   204,   205,   206,   207,
+     208,   209,   213,   214,   218,   219,   220,   221,   222,   223,
+     224,   228,   229,   230,   231,   232,   233,   237,   238,   242,
+     243,   244,   245,   249,   250,   251,   255,   256,   257,   261,
+     262,   263,   264,   265,   269,   270,   271,   275,   276,   280,
+     281,   285,   286,   290,   291,   295,   296,   300,   301,   305,
+     306,   310,   311,   312,   313,   314,   315,   316,   317,   318,
+     319,   320,   324,   325,   329,   333,   334,   335,   339,   340,
+     341,   342,   343,   344,   345,   346,   347,   348,   352,   353,
+     357,   358,   362,   363,   364,   365,   366,   367,   371,   372,
+     373,   374,   375,   376,   377,   378,   379,   380,   381,   382,
+     383,   384,   385,   386,   387,   388,   392,   393,   394,   398,
+     399,   403,   404,   408,   409,   410,   414,   415,   416,   417,
+     421,   422,   426,   427,   428,   432,   433,   434,   435,   436,
+     440,   441,   445,   446,   450,   454,   455,   456,   457,   461,
+     462,   466,   467,   471,   472,   476,   477,   478,   479,   480,
+     481,   482,   483,   484,   485,   486,   487,   488,   489,   493,
+     494,   495,   496,   500,   501,   506,   507,   511,   512,   516,
+     517,   518,   522,   523,   527,   528,   532,   533,   534,   538,
+     539,   540,   541,   542,   543,   544,   545,   546,   547,   548,
+     549,   550,   551,   552,   553,   554,   555,   556,   557,   558,
+     562,   563,   564,   568,   569,   570,   571,   575,   579,   580,
+     584,   585,   589,   593,   594,   595,   596,   597,   598,   602,
+     603,   604,   608,   609,   613,   614,   618,   619,   623,   624,
+     628,   629,   630,   634,   635,   636,   637,   638,   639,   643,
+     644,   645,   646,   647,   651,   652,   656,   657,   661,   662,
+     666,   667
 };
 #endif
 
@@ -2320,181 +2320,325 @@ yyuserAction (yyRuleNum yyrule, int yyrhslen, yyGLRStackItem* yyvsp,
   switch (yyrule)
     {
   case 2: /* primary_expression: "identifier"  */
-#line 154 "c11ansi.y"
+#line 163 "c11ansi.y"
                                                 { ((*yyvalp).tree) = createCTreeRoot(createTokenLabel((YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (0)].yystate.yysemantics.yyval.token))); }
 #line 2326 "c11ansi.tab.c"
     break;
 
   case 3: /* primary_expression: constant  */
-#line 155 "c11ansi.y"
+#line 164 "c11ansi.y"
                                                 { ((*yyvalp).tree) = createCTreeRoot(createTokenLabel((YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (0)].yystate.yysemantics.yyval.token))); }
 #line 2332 "c11ansi.tab.c"
     break;
 
   case 4: /* primary_expression: string  */
-#line 156 "c11ansi.y"
+#line 165 "c11ansi.y"
                                                 { ((*yyvalp).tree) = createCTreeRoot(createTokenLabel((YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (0)].yystate.yysemantics.yyval.token))); }
 #line 2338 "c11ansi.tab.c"
     break;
 
   case 5: /* primary_expression: Y_LEFT_PAREN expression Y_RIGHT_PAREN  */
-#line 157 "c11ansi.y"
+#line 166 "c11ansi.y"
                                                 { ((*yyvalp).tree) = createCTree1(createConstr2Label(LABCT_PAREN_EXPR, (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (-2)].yystate.yysemantics.yyval.token), (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (0)].yystate.yysemantics.yyval.token)), (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (-1)].yystate.yysemantics.yyval.tree)); }
 #line 2344 "c11ansi.tab.c"
     break;
 
   case 6: /* constant: "i_const"  */
-#line 162 "c11ansi.y"
+#line 171 "c11ansi.y"
                                  {((*yyvalp).token) = (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (0)].yystate.yysemantics.yyval.token);}
 #line 2350 "c11ansi.tab.c"
     break;
 
   case 7: /* constant: "f_const"  */
-#line 163 "c11ansi.y"
+#line 172 "c11ansi.y"
                                  {((*yyvalp).token) = (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (0)].yystate.yysemantics.yyval.token);}
 #line 2356 "c11ansi.tab.c"
     break;
 
   case 8: /* constant: Y_ENUMERATION_CONSTANT  */
-#line 164 "c11ansi.y"
+#line 173 "c11ansi.y"
                                  {((*yyvalp).token) = (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (0)].yystate.yysemantics.yyval.token);}
 #line 2362 "c11ansi.tab.c"
     break;
 
   case 9: /* enumeration_constant: "identifier"  */
-#line 168 "c11ansi.y"
+#line 177 "c11ansi.y"
                      {((*yyvalp).token) = (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (0)].yystate.yysemantics.yyval.token);}
 #line 2368 "c11ansi.tab.c"
     break;
 
   case 10: /* string: "sting_literal"  */
-#line 172 "c11ansi.y"
+#line 181 "c11ansi.y"
                          {((*yyvalp).token) = (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (0)].yystate.yysemantics.yyval.token);}
 #line 2374 "c11ansi.tab.c"
     break;
 
   case 11: /* string: Y_FUNC_NAME  */
-#line 173 "c11ansi.y"
+#line 182 "c11ansi.y"
                          {((*yyvalp).token) = (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (0)].yystate.yysemantics.yyval.token);}
 #line 2380 "c11ansi.tab.c"
     break;
 
   case 12: /* postfix_expression: primary_expression  */
-#line 191 "c11ansi.y"
+#line 200 "c11ansi.y"
                                                                                    { ((*yyvalp).tree) = (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (0)].yystate.yysemantics.yyval.tree); }
 #line 2386 "c11ansi.tab.c"
     break;
 
   case 13: /* postfix_expression: postfix_expression Y_LEFT_BRACKET expression Y_RIGHT_BRACKET  */
-#line 192 "c11ansi.y"
+#line 201 "c11ansi.y"
                                                                                    { ((*yyvalp).tree) = createCTree2(createConstr2Label(LABCT_INDEX, (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (-2)].yystate.yysemantics.yyval.token), (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (0)].yystate.yysemantics.yyval.token)), (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (-3)].yystate.yysemantics.yyval.tree),  (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (-1)].yystate.yysemantics.yyval.tree)); }
 #line 2392 "c11ansi.tab.c"
     break;
 
   case 14: /* postfix_expression: postfix_expression Y_LEFT_PAREN Y_RIGHT_PAREN  */
-#line 193 "c11ansi.y"
+#line 202 "c11ansi.y"
                                                                                    { ((*yyvalp).tree) = createCTree1(createConstr2Label(LABCT_CALL, (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (-1)].yystate.yysemantics.yyval.token), (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (0)].yystate.yysemantics.yyval.token)), (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (-2)].yystate.yysemantics.yyval.tree)); }
 #line 2398 "c11ansi.tab.c"
     break;
 
   case 15: /* postfix_expression: postfix_expression Y_LEFT_PAREN argument_expression_list Y_RIGHT_PAREN  */
-#line 194 "c11ansi.y"
+#line 203 "c11ansi.y"
                                                                                    { ((*yyvalp).tree) = createCTree2(createConstr2Label(LABCT_CALL, (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (-2)].yystate.yysemantics.yyval.token), (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (0)].yystate.yysemantics.yyval.token)), (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (-3)].yystate.yysemantics.yyval.tree), (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (-1)].yystate.yysemantics.yyval.tree)); }
 #line 2404 "c11ansi.tab.c"
     break;
 
   case 16: /* postfix_expression: postfix_expression Y_DOT "identifier"  */
-#line 195 "c11ansi.y"
+#line 204 "c11ansi.y"
                                                                                    { ((*yyvalp).tree) = createCTree2(createConstr1Label(LABCT_DOT, (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (-1)].yystate.yysemantics.yyval.token)), (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (-2)].yystate.yysemantics.yyval.tree), createCTreeRoot(createTokenLabel((YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (0)].yystate.yysemantics.yyval.token)))); }
 #line 2410 "c11ansi.tab.c"
     break;
 
   case 17: /* postfix_expression: postfix_expression Y_ARROW "identifier"  */
-#line 196 "c11ansi.y"
+#line 205 "c11ansi.y"
                                                                                    { ((*yyvalp).tree) = createCTree2(createConstr1Label(LABCT_ARROW, (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (-1)].yystate.yysemantics.yyval.token)), (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (-2)].yystate.yysemantics.yyval.tree), createCTreeRoot(createTokenLabel((YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (0)].yystate.yysemantics.yyval.token)))); }
 #line 2416 "c11ansi.tab.c"
     break;
 
   case 18: /* postfix_expression: postfix_expression Y_PLUS_PLUS  */
-#line 197 "c11ansi.y"
+#line 206 "c11ansi.y"
                                                                                    { ((*yyvalp).tree) = createCTree1(createConstr1Label(LABCT_PLUS_PLUS, (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (0)].yystate.yysemantics.yyval.token)), (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (-1)].yystate.yysemantics.yyval.tree)); }
 #line 2422 "c11ansi.tab.c"
     break;
 
   case 19: /* postfix_expression: postfix_expression Y_MINUS_MINUS  */
-#line 198 "c11ansi.y"
+#line 207 "c11ansi.y"
                                                                                    { ((*yyvalp).tree) = createCTree1(createConstr1Label(LABCT_MINUS_MINUS, (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (0)].yystate.yysemantics.yyval.token)), (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (-1)].yystate.yysemantics.yyval.tree)); }
 #line 2428 "c11ansi.tab.c"
     break;
 
-  case 259: /* jump_statement: Y_GOTO "identifier" Y_SEMICOLON  */
-#line 634 "c11ansi.y"
-                                           { printf("jump_statement -> Y_GOTO IDENTIFIER Y_SEMICOLON\n"); }
+  case 20: /* postfix_expression: Y_LEFT_PAREN type_name Y_RIGHT_PAREN Y_LEFT_BRACE initializer_list Y_RIGHT_BRACE  */
+#line 208 "c11ansi.y"
+                                                                                             { ((*yyvalp).tree) = createCTree2(createConstr4Label(LABCT_CAST_EXPR, (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (-5)].yystate.yysemantics.yyval.token), (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (-3)].yystate.yysemantics.yyval.token), (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (-2)].yystate.yysemantics.yyval.token), (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (0)].yystate.yysemantics.yyval.token)), (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (-4)].yystate.yysemantics.yyval.tree), (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (-1)].yystate.yysemantics.yyval.tree)); }
 #line 2434 "c11ansi.tab.c"
     break;
 
-  case 260: /* jump_statement: Y_CONTINUE Y_SEMICOLON  */
-#line 635 "c11ansi.y"
-                                           { printf("jump_statement -> Y_CONTINUE Y_SEMICOLON\n"); }
+  case 21: /* postfix_expression: Y_LEFT_PAREN type_name Y_RIGHT_PAREN Y_LEFT_BRACE initializer_list Y_COMMA Y_RIGHT_BRACE  */
+#line 209 "c11ansi.y"
+                                                                                                     { ((*yyvalp).tree) = createCTree2(createConstr5Label(LABCT_CAST_EXPR, (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (-6)].yystate.yysemantics.yyval.token), (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (-4)].yystate.yysemantics.yyval.token), (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (-3)].yystate.yysemantics.yyval.token), (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (-1)].yystate.yysemantics.yyval.token), (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (0)].yystate.yysemantics.yyval.token)), (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (-5)].yystate.yysemantics.yyval.tree), (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (-2)].yystate.yysemantics.yyval.tree)); }
 #line 2440 "c11ansi.tab.c"
     break;
 
-  case 261: /* jump_statement: Y_BREAK Y_SEMICOLON  */
-#line 636 "c11ansi.y"
-                                           { printf("jump_statement -> Y_BREAK Y_SEMICOLON\n"); }
+  case 22: /* argument_expression_list: assignment_expression  */
+#line 213 "c11ansi.y"
+                                                                 { ((*yyvalp).tree) = (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (0)].yystate.yysemantics.yyval.tree); }
 #line 2446 "c11ansi.tab.c"
     break;
 
-  case 262: /* jump_statement: Y_RETURN Y_SEMICOLON  */
-#line 637 "c11ansi.y"
-                                           { printf("jump_statement -> Y_RETURN Y_SEMICOLON\n"); }
+  case 23: /* argument_expression_list: argument_expression_list Y_COMMA assignment_expression  */
+#line 214 "c11ansi.y"
+                                                                 { ((*yyvalp).tree) = createCTree2(createConstr1Label(LABCT_EXPR_SEPARATOR, (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (-1)].yystate.yysemantics.yyval.token)), (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (-2)].yystate.yysemantics.yyval.tree), (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (0)].yystate.yysemantics.yyval.tree)); }
 #line 2452 "c11ansi.tab.c"
     break;
 
-  case 263: /* jump_statement: Y_RETURN expression Y_SEMICOLON  */
-#line 638 "c11ansi.y"
-                                           { printf("jump_statement -> Y_RETURN expression Y_SEMICOLON\n"); }
+  case 24: /* unary_expression: postfix_expression  */
+#line 218 "c11ansi.y"
+                                                          { ((*yyvalp).tree) = (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (0)].yystate.yysemantics.yyval.tree); }
 #line 2458 "c11ansi.tab.c"
     break;
 
-  case 264: /* translation_unit: external_declaration  */
-#line 642 "c11ansi.y"
-                                                 { printf("translation_unit -> external_declaration\n\n"); }
+  case 25: /* unary_expression: Y_PLUS_PLUS unary_expression  */
+#line 219 "c11ansi.y"
+                                                          { ((*yyvalp).tree) = createCTree1(createConstr1Label(LABCT_PLUS_PLUS, (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (-1)].yystate.yysemantics.yyval.token)), (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (0)].yystate.yysemantics.yyval.tree)); }
 #line 2464 "c11ansi.tab.c"
     break;
 
-  case 265: /* translation_unit: translation_unit external_declaration  */
-#line 643 "c11ansi.y"
-                                                 { printf("translation_unit -> translation_unit external_declaration\n\n"); }
+  case 26: /* unary_expression: Y_MINUS_MINUS unary_expression  */
+#line 220 "c11ansi.y"
+                                                          { ((*yyvalp).tree) = createCTree1(createConstr1Label(LABCT_MINUS_MINUS, (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (-1)].yystate.yysemantics.yyval.token)), (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (0)].yystate.yysemantics.yyval.tree)); }
 #line 2470 "c11ansi.tab.c"
     break;
 
-  case 266: /* external_declaration: function_definition  */
-#line 647 "c11ansi.y"
-                                { printf("external_declaration -> function_definition\n"); }
+  case 27: /* unary_expression: unary_operator cast_expression  */
+#line 221 "c11ansi.y"
+                                                          { ((*yyvalp).tree) = createCTree1((YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (-1)].yystate.yysemantics.yyval.label), (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (0)].yystate.yysemantics.yyval.tree)); }
 #line 2476 "c11ansi.tab.c"
     break;
 
-  case 267: /* external_declaration: declaration  */
-#line 648 "c11ansi.y"
-                                { printf("external_declaration -> declaration\n"); }
+  case 28: /* unary_expression: Y_SIZEOF unary_expression  */
+#line 222 "c11ansi.y"
+                                                          { ((*yyvalp).tree) = createCTree1(createConstr1Label(LABCT_SIZEOF_EXPR, (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (-1)].yystate.yysemantics.yyval.token)), (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (0)].yystate.yysemantics.yyval.tree)); }
 #line 2482 "c11ansi.tab.c"
     break;
 
-  case 268: /* function_definition: declaration_specifiers declarator declaration_list compound_statement  */
-#line 652 "c11ansi.y"
-                                                                                   { printf("function_definition -> declaration_specifiers declarator declaration_list compound_statement\n"); }
+  case 29: /* unary_expression: Y_SIZEOF Y_LEFT_PAREN type_name Y_RIGHT_PAREN  */
+#line 223 "c11ansi.y"
+                                                          { ((*yyvalp).tree) = createCTree1(createConstr3Label(LABCT_SIZEOF_TYPE, (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (-3)].yystate.yysemantics.yyval.token), (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (-2)].yystate.yysemantics.yyval.token), (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (0)].yystate.yysemantics.yyval.token)), (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (-1)].yystate.yysemantics.yyval.tree)); }
 #line 2488 "c11ansi.tab.c"
     break;
 
-  case 269: /* function_definition: declaration_specifiers declarator compound_statement  */
-#line 653 "c11ansi.y"
-                                                                                   { printf("function_definition -> declaration_specifiers declarator compound_statement\n"); }
+  case 30: /* unary_expression: Y_ALIGNOF Y_LEFT_PAREN type_name Y_RIGHT_PAREN  */
+#line 224 "c11ansi.y"
+                                                          { ((*yyvalp).tree) = createCTree1(createConstr3Label(LABCT_ALIGNOF_TYPE, (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (-3)].yystate.yysemantics.yyval.token), (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (-2)].yystate.yysemantics.yyval.token), (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (0)].yystate.yysemantics.yyval.token)), (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (-1)].yystate.yysemantics.yyval.tree)); }
 #line 2494 "c11ansi.tab.c"
     break;
 
+  case 31: /* unary_operator: Y_AND  */
+#line 228 "c11ansi.y"
+                        { ((*yyvalp).label) = createConstr1Label(LABCT_ADDR_OF_VALUE, (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (0)].yystate.yysemantics.yyval.token)); }
+#line 2500 "c11ansi.tab.c"
+    break;
 
-#line 2498 "c11ansi.tab.c"
+  case 32: /* unary_operator: Y_TIMES  */
+#line 229 "c11ansi.y"
+                        { ((*yyvalp).label) = createConstr1Label(LABCT_VALUE_AT_ADDR, (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (0)].yystate.yysemantics.yyval.token)); }
+#line 2506 "c11ansi.tab.c"
+    break;
+
+  case 33: /* unary_operator: Y_PLUS  */
+#line 230 "c11ansi.y"
+                        { ((*yyvalp).label) = createConstr1Label(LABCT_UNARY_PLUS, (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (0)].yystate.yysemantics.yyval.token)); }
+#line 2512 "c11ansi.tab.c"
+    break;
+
+  case 34: /* unary_operator: Y_MINUS  */
+#line 231 "c11ansi.y"
+                        { ((*yyvalp).label) = createConstr1Label(LABCT_UNARY_MINUS, (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (0)].yystate.yysemantics.yyval.token)); }
+#line 2518 "c11ansi.tab.c"
+    break;
+
+  case 35: /* unary_operator: Y_TILDE  */
+#line 232 "c11ansi.y"
+                        { ((*yyvalp).label) = createConstr1Label(LABCT_TILDE, (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (0)].yystate.yysemantics.yyval.token)); }
+#line 2524 "c11ansi.tab.c"
+    break;
+
+  case 36: /* unary_operator: Y_EXCLAMATION  */
+#line 233 "c11ansi.y"
+                        { ((*yyvalp).label) = createConstr1Label(LABCT_EXCLAMATION, (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (0)].yystate.yysemantics.yyval.token)); }
+#line 2530 "c11ansi.tab.c"
+    break;
+
+  case 220: /* initializer: Y_LEFT_BRACE initializer_list Y_RIGHT_BRACE  */
+#line 562 "c11ansi.y"
+                                                              { ((*yyvalp).tree) = createCTree1(createConstr2Label(LABCT_EXPR_LIST, (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (-2)].yystate.yysemantics.yyval.token), (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (0)].yystate.yysemantics.yyval.token)), (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (-1)].yystate.yysemantics.yyval.tree)); }
+#line 2536 "c11ansi.tab.c"
+    break;
+
+  case 221: /* initializer: Y_LEFT_BRACE initializer_list Y_COMMA Y_RIGHT_BRACE  */
+#line 563 "c11ansi.y"
+                                                              { ((*yyvalp).tree) = createCTree1(createConstr3Label(LABCT_EXPR_LIST, (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (-3)].yystate.yysemantics.yyval.token), (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (-1)].yystate.yysemantics.yyval.token), (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (0)].yystate.yysemantics.yyval.token)), (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (-2)].yystate.yysemantics.yyval.tree)); }
+#line 2542 "c11ansi.tab.c"
+    break;
+
+  case 222: /* initializer: assignment_expression  */
+#line 564 "c11ansi.y"
+                                                              { ((*yyvalp).tree) = (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (0)].yystate.yysemantics.yyval.tree); }
+#line 2548 "c11ansi.tab.c"
+    break;
+
+  case 223: /* initializer_list: designation initializer  */
+#line 568 "c11ansi.y"
+                                                            { ((*yyvalp).tree) = createCTree2(createConstr0Label(LABCT_EXPR_LIST), (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (-1)].yystate.yysemantics.yyval.tree), (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (0)].yystate.yysemantics.yyval.tree)); }
+#line 2554 "c11ansi.tab.c"
+    break;
+
+  case 224: /* initializer_list: initializer  */
+#line 569 "c11ansi.y"
+                                                            { ((*yyvalp).tree) = createCTree1(createConstr0Label(LABCT_EXPR_LIST), (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (0)].yystate.yysemantics.yyval.tree)); }
+#line 2560 "c11ansi.tab.c"
+    break;
+
+  case 225: /* initializer_list: initializer_list Y_COMMA designation initializer  */
+#line 570 "c11ansi.y"
+                                                            { ((*yyvalp).tree) = createCTree2(createConstr1Label(LABCT_EXPR_LIST, (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (-2)].yystate.yysemantics.yyval.token)), (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (-3)].yystate.yysemantics.yyval.tree), createCTree1(createConstr0Label(LABCT_EXPR_LIST), (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (-1)].yystate.yysemantics.yyval.tree))); }
+#line 2566 "c11ansi.tab.c"
+    break;
+
+  case 226: /* initializer_list: initializer_list Y_COMMA initializer  */
+#line 571 "c11ansi.y"
+                                                            { ((*yyvalp).tree) = createCTree2(createConstr1Label(LABCT_EXPR_LIST, (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (-1)].yystate.yysemantics.yyval.token)), (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (-2)].yystate.yysemantics.yyval.tree), (YY_CAST (yyGLRStackItem const *, yyvsp)[YYFILL (0)].yystate.yysemantics.yyval.tree)); }
+#line 2572 "c11ansi.tab.c"
+    break;
+
+  case 259: /* jump_statement: Y_GOTO "identifier" Y_SEMICOLON  */
+#line 643 "c11ansi.y"
+                                           { printf("jump_statement -> Y_GOTO IDENTIFIER Y_SEMICOLON\n"); }
+#line 2578 "c11ansi.tab.c"
+    break;
+
+  case 260: /* jump_statement: Y_CONTINUE Y_SEMICOLON  */
+#line 644 "c11ansi.y"
+                                           { printf("jump_statement -> Y_CONTINUE Y_SEMICOLON\n"); }
+#line 2584 "c11ansi.tab.c"
+    break;
+
+  case 261: /* jump_statement: Y_BREAK Y_SEMICOLON  */
+#line 645 "c11ansi.y"
+                                           { printf("jump_statement -> Y_BREAK Y_SEMICOLON\n"); }
+#line 2590 "c11ansi.tab.c"
+    break;
+
+  case 262: /* jump_statement: Y_RETURN Y_SEMICOLON  */
+#line 646 "c11ansi.y"
+                                           { printf("jump_statement -> Y_RETURN Y_SEMICOLON\n"); }
+#line 2596 "c11ansi.tab.c"
+    break;
+
+  case 263: /* jump_statement: Y_RETURN expression Y_SEMICOLON  */
+#line 647 "c11ansi.y"
+                                           { printf("jump_statement -> Y_RETURN expression Y_SEMICOLON\n"); }
+#line 2602 "c11ansi.tab.c"
+    break;
+
+  case 264: /* translation_unit: external_declaration  */
+#line 651 "c11ansi.y"
+                                                 { printf("translation_unit -> external_declaration\n\n"); }
+#line 2608 "c11ansi.tab.c"
+    break;
+
+  case 265: /* translation_unit: translation_unit external_declaration  */
+#line 652 "c11ansi.y"
+                                                 { printf("translation_unit -> translation_unit external_declaration\n\n"); }
+#line 2614 "c11ansi.tab.c"
+    break;
+
+  case 266: /* external_declaration: function_definition  */
+#line 656 "c11ansi.y"
+                                { printf("external_declaration -> function_definition\n"); }
+#line 2620 "c11ansi.tab.c"
+    break;
+
+  case 267: /* external_declaration: declaration  */
+#line 657 "c11ansi.y"
+                                { printf("external_declaration -> declaration\n"); }
+#line 2626 "c11ansi.tab.c"
+    break;
+
+  case 268: /* function_definition: declaration_specifiers declarator declaration_list compound_statement  */
+#line 661 "c11ansi.y"
+                                                                                   { printf("function_definition -> declaration_specifiers declarator declaration_list compound_statement\n"); }
+#line 2632 "c11ansi.tab.c"
+    break;
+
+  case 269: /* function_definition: declaration_specifiers declarator compound_statement  */
+#line 662 "c11ansi.y"
+                                                                                   { printf("function_definition -> declaration_specifiers declarator compound_statement\n"); }
+#line 2638 "c11ansi.tab.c"
+    break;
+
+
+#line 2642 "c11ansi.tab.c"
 
       default: break;
     }
@@ -4017,7 +4161,7 @@ yypdumpstack (yyGLRStack* yystackp)
 
 
 
-#line 662 "c11ansi.y"
+#line 671 "c11ansi.y"
 
 #include <stdio.h>
 

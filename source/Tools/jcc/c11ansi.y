@@ -145,8 +145,15 @@ int yylex();
 %type<tree> postfix_expression
 %type<tree> assignment_expression
 %type<tree> unary_expression
-%type<token> unary_operator
- 
+%type<label> unary_operator
+%type<tree> cast_expression
+%type<tree> argument_expression_list
+%type<tree> initializer_list
+%type<tree> initializer
+%type<tree> designation
+%type<tree> designator_list
+%type<tree> type_name
+
 %glr-parser
 
 %start translation_unit
@@ -208,22 +215,22 @@ argument_expression_list
 	;
 
 unary_expression
-	: postfix_expression             { $$ = $1; }
-	| Y_PLUS_PLUS unary_expression   { $$ = createCTree1(createConstr1Label(LABCT_PLUS_PLUS, $2), $1); }
-	| Y_MINUS_MINUS unary_expression { $$ = createCTree1(createConstr1Label(LABCT_MINUS_MINUS, $2), $1); }
-	| unary_operator cast_expression
-	| Y_SIZEOF unary_expression
-	| Y_SIZEOF Y_LEFT_PAREN type_name Y_RIGHT_PAREN
-	| Y_ALIGNOF Y_LEFT_PAREN type_name Y_RIGHT_PAREN
+	: postfix_expression                              { $$ = $1; }
+	| Y_PLUS_PLUS unary_expression                    { $$ = createCTree1(createConstr1Label(LABCT_PLUS_PLUS, $1), $2); }
+	| Y_MINUS_MINUS unary_expression                  { $$ = createCTree1(createConstr1Label(LABCT_MINUS_MINUS, $1), $2); }
+	| unary_operator cast_expression                  { $$ = createCTree1($1, $2); }
+	| Y_SIZEOF unary_expression                       { $$ = createCTree1(createConstr1Label(LABCT_SIZEOF_EXPR, $1), $2); }
+	| Y_SIZEOF Y_LEFT_PAREN type_name Y_RIGHT_PAREN   { $$ = createCTree1(createConstr3Label(LABCT_SIZEOF_TYPE, $1, $2, $4), $3); }
+	| Y_ALIGNOF Y_LEFT_PAREN type_name Y_RIGHT_PAREN  { $$ = createCTree1(createConstr3Label(LABCT_ALIGNOF_TYPE, $1, $2, $4), $3); }
 	;
 
 unary_operator
-	: Y_AND
-	| Y_TIMES
-	| Y_PLUS
-	| Y_MINUS
-	| Y_TILDE
-	| Y_EXCLAMATION
+	: Y_AND         { $$ = createConstr1Label(LABCT_ADDR_OF_VALUE, $1); }
+	| Y_TIMES       { $$ = createConstr1Label(LABCT_VALUE_AT_ADDR, $1); }
+	| Y_PLUS        { $$ = createConstr1Label(LABCT_UNARY_PLUS, $1); }
+	| Y_MINUS       { $$ = createConstr1Label(LABCT_UNARY_MINUS, $1); }
+	| Y_TILDE       { $$ = createConstr1Label(LABCT_TILDE, $1); }
+	| Y_EXCLAMATION { $$ = createConstr1Label(LABCT_EXCLAMATION, $1); }
 	;
 
 cast_expression
@@ -552,16 +559,16 @@ direct_abstract_declarator
 	;
 
 initializer
-	: Y_LEFT_BRACE initializer_list Y_RIGHT_BRACE
-	| Y_LEFT_BRACE initializer_list Y_COMMA Y_RIGHT_BRACE
-	| assignment_expression
+	: Y_LEFT_BRACE initializer_list Y_RIGHT_BRACE         { $$ = createCTree1(createConstr2Label(LABCT_EXPR_LIST, $1, $3), $2); }
+	| Y_LEFT_BRACE initializer_list Y_COMMA Y_RIGHT_BRACE { $$ = createCTree1(createConstr3Label(LABCT_EXPR_LIST, $1, $3, $4), $2); }
+	| assignment_expression                               { $$ = $1; }
 	;
 
 initializer_list
-	: designation initializer
-	| initializer
-	| initializer_list Y_COMMA designation initializer
-	| initializer_list Y_COMMA initializer
+	: designation initializer                           { $$ = createCTree2(createConstr0Label(LABCT_EXPR_LIST), $1, $2); }
+	| initializer                                       { $$ = createCTree1(createConstr0Label(LABCT_EXPR_LIST), $1); }
+	| initializer_list Y_COMMA designation initializer  { $$ = createCTree2(createConstr1Label(LABCT_EXPR_LIST, $2), $1, createCTree1(createConstr0Label(LABCT_EXPR_LIST), $3)); }
+	| initializer_list Y_COMMA initializer              { $$ = createCTree2(createConstr1Label(LABCT_EXPR_LIST, $2), $1, $3); }
 	;
 
 designation
