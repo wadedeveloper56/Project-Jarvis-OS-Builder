@@ -408,4 +408,7 @@ LabelPtr createConstr2Label(LabelConstrType type, TokenPtr t0, TokenPtr t1);
 LabelPtr createConstr3Label(LabelConstrType type, TokenPtr t0, TokenPtr t1, TokenPtr t2);
 LabelPtr createConstr4Label(LabelConstrType type, TokenPtr t0, TokenPtr t1, TokenPtr t2, TokenPtr t3);
 LabelPtr createConstr5Label(LabelConstrType type, TokenPtr t0, TokenPtr t1, TokenPtr t2, TokenPtr t3, TokenPtr t4);
+SLListPtr transformDecl(DeclInfoPtr decl);
+DeclInfoPtr addDeclInfoDclrList(DeclInfoPtr decl, SLListPtr list);
+void zapToken(void* elem);
 

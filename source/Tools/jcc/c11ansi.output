@@ -589,19 +589,19 @@ Nonterminals, with rules where they appear
     expression <tree> (153)
         on left: 81 82
         on right: 4 12 67 82 248 249 250 251 252 253 255 257 262
-    constant_expression (154)
+    constant_expression <tree> (154)
         on left: 83
         on right: 141 142 151 161 229 231 239
-    declaration (155)
+    declaration <declList> (155)
         on left: 84 85 86
         on right: 245 256 257 266 269 270
-    declaration_specifiers (156)
+    declaration_specifiers <dinfo> (156)
         on left: 87 88 89 90 91 92 93 94 95 96
         on right: 84 85 87 89 91 93 95 188 189 190 267 268
-    init_declarator_list (157)
+    init_declarator_list <dclrList> (157)
         on left: 97 98
         on right: 85 98
-    init_declarator (158)
+    init_declarator <dclr> (158)
         on left: 99 100
         on right: 97 98
     storage_class_specifier (159)

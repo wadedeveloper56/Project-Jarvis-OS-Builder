@@ -148,6 +148,7 @@ int yylex();
 %type<label> unary_operator
 %type<label> assignment_operator
 %type<tree> cast_expression
+%type<tree> constant_expression
 %type<tree> argument_expression_list
 %type<tree> initializer_list
 %type<tree> initializer
@@ -165,6 +166,10 @@ int yylex();
 %type<tree> logical_and_expression
 %type<tree> logical_or_expression
 %type<tree> conditional_expression
+%type<declList> declaration
+%type<dinfo> declaration_specifiers
+%type<dclr> init_declarator
+%type<dclrList> init_declarator_list
 
 %glr-parser
 
@@ -342,8 +347,8 @@ constant_expression
 	;
 
 declaration
-	: declaration_specifiers Y_SEMICOLON
-	| declaration_specifiers init_declarator_list Y_SEMICOLON
+	: declaration_specifiers Y_SEMICOLON                       { $$ = transformDecl($1); zapToken($2); }
+	| declaration_specifiers init_declarator_list Y_SEMICOLON  { $$ = transformDecl(addDeclInfoDclrList($1, $2)); zapToken($3); }
 	| static_assert_declaration
 	;
 

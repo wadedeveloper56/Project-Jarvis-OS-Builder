@@ -60,3 +60,17 @@ LabelPtr createConstr5Label(LabelConstrType type, TokenPtr t0, TokenPtr t1, Toke
 	return NULL;
 }
 
+SLListPtr transformDecl(DeclInfoPtr decl)
+{
+	return NULL;
+}
+
+DeclInfoPtr addDeclInfoDclrList(DeclInfoPtr decl, SLListPtr list)
+{
+	return NULL;
+}
+
+void zapToken(void* elem)
+{
+}
+
