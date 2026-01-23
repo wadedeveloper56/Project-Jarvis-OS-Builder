@@ -153,6 +153,17 @@ int yylex();
 %type<tree> designation
 %type<tree> designator_list
 %type<tree> type_name
+%type<tree> multiplicative_expression
+%type<tree> additive_expression
+%type<tree> shift_expression
+%type<tree> relational_expression
+%type<tree> equality_expression
+%type<tree> and_expression
+%type<tree> exclusive_or_expression
+%type<tree> inclusive_or_expression
+%type<tree> logical_and_expression
+%type<tree> logical_or_expression
+%type<tree> conditional_expression
 
 %glr-parser
 
@@ -234,75 +245,75 @@ unary_operator
 	;
 
 cast_expression
-	: unary_expression
-	| Y_LEFT_PAREN type_name Y_RIGHT_PAREN cast_expression
+	: unary_expression                                     { $$ = $1; }
+	| Y_LEFT_PAREN type_name Y_RIGHT_PAREN cast_expression { $$ = createCTree2(createConstr2Label(LABCT_CAST_EXPR, $1, $3), $2, $4); }
 	;
 
 multiplicative_expression
-	: cast_expression
-	| multiplicative_expression Y_TIMES cast_expression
-	| multiplicative_expression Y_DIVIDE cast_expression
-	| multiplicative_expression Y_PERCENT cast_expression
+	: cast_expression { $$ = $1; }
+	| multiplicative_expression Y_TIMES cast_expression   { $$ = createCTree2(createConstr1Label(LABCT_TIMES, $2), $1, $3); }
+	| multiplicative_expression Y_DIVIDE cast_expression  { $$ = createCTree2(createConstr1Label(LABCT_DIVIDE, $2), $1, $3); }
+	| multiplicative_expression Y_PERCENT cast_expression { $$ = createCTree2(createConstr1Label(LABCT_PERCENT, $2), $1, $3); }
 	;
 
 additive_expression
-	: multiplicative_expression
-	| additive_expression Y_PLUS multiplicative_expression
-	| additive_expression Y_MINUS multiplicative_expression
+	: multiplicative_expression                             { $$ = $1; }
+	| additive_expression Y_PLUS multiplicative_expression  { $$ = createCTree2(createConstr1Label(LABCT_PLUS, $2), $1, $3); }
+	| additive_expression Y_MINUS multiplicative_expression { $$ = createCTree2(createConstr1Label(LABCT_MINUS, $2), $1, $3); }
 	;
 
 shift_expression
-	: additive_expression
-	| shift_expression Y_RSHIFT additive_expression
-	| shift_expression Y_LSHIFT additive_expression
+	: additive_expression                            { $$ = $1; }
+	| shift_expression Y_RSHIFT additive_expression  { $$ = createCTree2(createConstr1Label(LABCT_TIMES, $2), $1, $3); }
+	| shift_expression Y_LSHIFT additive_expression  { $$ = createCTree2(createConstr1Label(LABCT_TIMES, $2), $1, $3); }
 	;
 
 relational_expression
-	: shift_expression
-	| relational_expression Y_LT shift_expression
-	| relational_expression Y_GT shift_expression
-	| relational_expression Y_LE shift_expression
-	| relational_expression Y_GE shift_expression
+	: shift_expression                            { $$ = $1; }
+	| relational_expression Y_LT shift_expression { $$ = createCTree2(createConstr1Label(LABCT_LT, $2), $1, $3); }
+	| relational_expression Y_GT shift_expression { $$ = createCTree2(createConstr1Label(LABCT_GT, $2), $1, $3); }
+	| relational_expression Y_LE shift_expression { $$ = createCTree2(createConstr1Label(LABCT_LE, $2), $1, $3); }
+	| relational_expression Y_GE shift_expression { $$ = createCTree2(createConstr1Label(LABCT_GE, $2), $1, $3); }
 	;
 
 equality_expression
-	: relational_expression
-	| equality_expression Y_EQ relational_expression
-	| equality_expression Y_NE relational_expression
+	: relational_expression                          { $$ = $1; }
+	| equality_expression Y_EQ relational_expression { $$ = createCTree2(createConstr1Label(LABCT_EQ, $2), $1, $3); }
+	| equality_expression Y_NE relational_expression { $$ = createCTree2(createConstr1Label(LABCT_NE, $2), $1, $3); }
 	;
 
 and_expression
-	: equality_expression
-	| and_expression Y_AND equality_expression
+	: equality_expression                      { $$ = $1; }
+	| and_expression Y_AND equality_expression { $$ = createCTree2(createConstr1Label(LABCT_AND, $2), $1, $3); }
 	;
 
 exclusive_or_expression
-	: and_expression
-	| exclusive_or_expression Y_XOR and_expression
+	: and_expression                               { $$ = $1; }
+	| exclusive_or_expression Y_XOR and_expression { $$ = createCTree2(createConstr1Label(LABCT_XOR, $2), $1, $3); }
 	;
 
 inclusive_or_expression
-	: exclusive_or_expression
-	| inclusive_or_expression Y_OR exclusive_or_expression
+	: exclusive_or_expression                              { $$ = $1; }
+	| inclusive_or_expression Y_OR exclusive_or_expression { $$ = createCTree2(createConstr1Label(LABCT_OR, $2), $1, $3); }
 	;
 
 logical_and_expression
-	: inclusive_or_expression
-	| logical_and_expression Y_AND_AND inclusive_or_expression
+	: inclusive_or_expression                                   { $$ = $1; }
+	| logical_and_expression Y_AND_AND inclusive_or_expression  { $$ = createCTree2(createConstr1Label(LABCT_AND_AND, $2), $1, $3); }
 	;
 
 logical_or_expression
-	: logical_and_expression
+	: logical_and_expression { $$ = $1; }
 	| logical_or_expression Y_OR_OR logical_and_expression
 	;
 
 conditional_expression
-	: logical_or_expression
+	: logical_or_expression { $$ = $1; }
 	| logical_or_expression Y_QUESTION expression Y_COLON conditional_expression
 	;
 
 assignment_expression
-	: conditional_expression
+	: conditional_expression { $$ = $1; }
 	| unary_expression assignment_operator assignment_expression
 	;
 
