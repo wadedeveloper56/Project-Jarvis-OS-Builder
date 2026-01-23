@@ -333,12 +333,12 @@ assignment_operator
 	;
 
 expression
-	: assignment_expression
-	| expression Y_COMMA assignment_expression
+	: assignment_expression                    { $$ = $1; }
+	| expression Y_COMMA assignment_expression { $$ = createCTree2(createConstr1Label(LABCT_EXPR_SEPARATOR, $2), $1, $3); }
 	;
 
 constant_expression
-	: conditional_expression	/* with constraints */
+	: conditional_expression  { $$ = $1; }
 	;
 
 declaration
