@@ -146,6 +146,7 @@ int yylex();
 %type<tree> assignment_expression
 %type<tree> unary_expression
 %type<label> unary_operator
+%type<label> assignment_operator
 %type<tree> cast_expression
 %type<tree> argument_expression_list
 %type<tree> initializer_list
@@ -303,32 +304,32 @@ logical_and_expression
 	;
 
 logical_or_expression
-	: logical_and_expression { $$ = $1; }
-	| logical_or_expression Y_OR_OR logical_and_expression
+	: logical_and_expression                                { $$ = $1; }
+	| logical_or_expression Y_OR_OR logical_and_expression  { $$ = createCTree2(createConstr1Label(LABCT_OR_OR, $2), $1, $3); }
 	;
 
 conditional_expression
 	: logical_or_expression { $$ = $1; }
-	| logical_or_expression Y_QUESTION expression Y_COLON conditional_expression
+	| logical_or_expression Y_QUESTION expression Y_COLON conditional_expression { $$ = createCTree2(createConstr1Label(LABCT_QUESTION, $2), $1, createCTree2(createConstr1Label(LABCT_COLON, $4), $3, $5)); }
 	;
 
 assignment_expression
-	: conditional_expression { $$ = $1; }
-	| unary_expression assignment_operator assignment_expression
+	: conditional_expression                                      { $$ = $1; }
+	| unary_expression assignment_operator assignment_expression  { $$ = createCTree2($2, $1, $3); }
 	;
 
 assignment_operator
-	: Y_EQUAL
-	| Y_TIMES_EQUAL
-	| Y_DIVIDE_EQUAL
-	| Y_PERCENT_EQUAL
-	| Y_PLUS_EQUAL
-	| Y_MINUS_EQUAL
-	| Y_LSHIFT_EQUAL
-	| Y_RSHIFT_EQUAL
-	| Y_AND_EQUAL
-	| Y_XOR_EQUAL
-	| Y_OR_EQUAL
+	: Y_EQUAL          { $$ = createConstr1Label(LABCT_EQ, $1); }
+	| Y_TIMES_EQUAL    { $$ = createConstr1Label(LABCT_TIMES_EQUAL, $1); }
+	| Y_DIVIDE_EQUAL   { $$ = createConstr1Label(LABCT_DIVIDE_EQUAL, $1); }
+	| Y_PERCENT_EQUAL  { $$ = createConstr1Label(LABCT_PERCENT_EQUAL, $1); }
+	| Y_PLUS_EQUAL     { $$ = createConstr1Label(LABCT_PLUS_EQUAL, $1); }
+	| Y_MINUS_EQUAL    { $$ = createConstr1Label(LABCT_MINUS_EQUAL, $1); }
+	| Y_LSHIFT_EQUAL   { $$ = createConstr1Label(LABCT_LSHIFT_EQUAL, $1); }
+	| Y_RSHIFT_EQUAL   { $$ = createConstr1Label(LABCT_RSHIFT_EQUAL, $1); }
+	| Y_AND_EQUAL      { $$ = createConstr1Label(LABCT_AND_EQUAL, $1); }
+	| Y_XOR_EQUAL      { $$ = createConstr1Label(LABCT_XOR_EQUAL, $1); }
+	| Y_OR_EQUAL       { $$ = createConstr1Label(LABCT_OR_EQUAL, $1); }
 	;
 
 expression
