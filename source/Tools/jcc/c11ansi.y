@@ -9,7 +9,7 @@ int yylex();
 %define api.pure
 %define api.value.type { union ParseUnion }
 
-%token END 0 "end of file"
+%token END      0          "end of file"
 %token <token>  IDENTIFIER "identifier"
 %token <token>  I_CONSTANT "i_const"
 %token <token>  F_CONSTANT "f_const"
@@ -152,9 +152,6 @@ int yylex();
 %type<expression> argument_expression_list
 %type<expression> initializer_list
 %type<expression> initializer
-%type<expression> designation
-%type<expression> designator_list
-%type<expression> type_name
 %type<expression> multiplicative_expression
 %type<expression> additive_expression
 %type<expression> shift_expression
@@ -166,31 +163,6 @@ int yylex();
 %type<expression> logical_and_expression
 %type<expression> logical_or_expression
 %type<expression> conditional_expression
-%type<declList> declaration
-%type<dclr> init_declarator
-%type<dclrList> init_declarator_list
-%type<dinfo> declaration_specifiers
-%type<dinfo> storage_class_specifier 
-%type<dinfo> type_specifier
-%type<dinfo> type_qualifier
-%type<dinfo> function_specifier
-%type<dinfo> alignment_specifier
-%type<token> struct_or_union
-%type<declList> struct_declaration_list
-%type<dinfo> struct_declaration
-%type<dclr> struct_declarator
-%type<dinfo> specifier_qualifier_list
-%type<dclr> declarator
-%type<declEnum> enum_specifier
-%type<enumList> enumerator_list
-%type<enumElem> enumerator
-%type<token> atomic_type_specifier
-%type<token> struct_or_union_specifier
-%type<declList> struct_declarator_list
-%type<declList> static_assert_declaration
-	
-//%glr-parser
-
 %start translation_unit
 %%
 
@@ -240,8 +212,8 @@ postfix_expression
 	| postfix_expression Y_ARROW IDENTIFIER                                    { $$ = createCTree2(createConstr1Label(LABCT_ARROW, $2), $1, createCTreeRoot(createTokenLabel($3))); }
 	| postfix_expression Y_PLUS_PLUS                                           { $$ = createCTree1(createConstr1Label(LABCT_PLUS_PLUS, $2), $1); }
 	| postfix_expression Y_MINUS_MINUS                                         { $$ = createCTree1(createConstr1Label(LABCT_MINUS_MINUS, $2), $1); }
-	| Y_LEFT_PAREN type_name Y_RIGHT_PAREN  Y_LEFT_BRACE initializer_list Y_RIGHT_BRACE  { $$ = createCTree2(createConstr4Label(LABCT_CAST_EXPR, $1, $3, $4, $6), $2, $5); }
-	| Y_LEFT_PAREN type_name Y_RIGHT_PAREN  Y_LEFT_BRACE initializer_list Y_COMMA Y_RIGHT_BRACE  { $$ = createCTree2(createConstr5Label(LABCT_CAST_EXPR, $1, $3, $4, $6, $7), $2, $5); }
+	| Y_LEFT_PAREN type_name Y_RIGHT_PAREN  Y_LEFT_BRACE initializer_list Y_RIGHT_BRACE  { $$ = NULL; }
+	| Y_LEFT_PAREN type_name Y_RIGHT_PAREN  Y_LEFT_BRACE initializer_list Y_COMMA Y_RIGHT_BRACE  { $$ = NULL; }
 	;
 	
 argument_expression_list
@@ -255,8 +227,8 @@ unary_expression
 	| Y_MINUS_MINUS unary_expression                  { $$ = createCTree1(createConstr1Label(LABCT_MINUS_MINUS, $1), $2); }
 	| unary_operator cast_expression                  { $$ = createCTree1($1, $2); }
 	| Y_SIZEOF unary_expression                       { $$ = createCTree1(createConstr1Label(LABCT_SIZEOF_EXPR, $1), $2); }
-	| Y_SIZEOF Y_LEFT_PAREN type_name Y_RIGHT_PAREN   { $$ = createCTree1(createConstr3Label(LABCT_SIZEOF_TYPE, $1, $2, $4), $3); }
-	| Y_ALIGNOF Y_LEFT_PAREN type_name Y_RIGHT_PAREN  { $$ = createCTree1(createConstr3Label(LABCT_ALIGNOF_TYPE, $1, $2, $4), $3); }
+	| Y_SIZEOF Y_LEFT_PAREN type_name Y_RIGHT_PAREN   { $$ = NULL; }
+	| Y_ALIGNOF Y_LEFT_PAREN type_name Y_RIGHT_PAREN  { $$ = NULL; }
 	;
 
 unary_operator
@@ -270,7 +242,7 @@ unary_operator
 
 cast_expression
 	: unary_expression                                     { $$ = $1; }
-	| Y_LEFT_PAREN type_name Y_RIGHT_PAREN cast_expression { $$ = createCTree2(createConstr2Label(LABCT_CAST_EXPR, $1, $3), $2, $4); }
+	| Y_LEFT_PAREN type_name Y_RIGHT_PAREN cast_expression { $$ = NULL; }
 	;
 
 multiplicative_expression
@@ -365,62 +337,62 @@ constant_expression
 	;
 
 declaration
-	: declaration_specifiers Y_SEMICOLON                       { $$ = transformDecl($1); zapToken($2); }
-	| declaration_specifiers init_declarator_list Y_SEMICOLON  { $$ = transformDecl(addDeclInfoDclrList($1, $2)); zapToken($3); }
-	| static_assert_declaration                                { $$ = NULL; }
+	: declaration_specifiers Y_SEMICOLON
+	| declaration_specifiers init_declarator_list Y_SEMICOLON
+	| static_assert_declaration                              
 	;
 
 declaration_specifiers
-	: storage_class_specifier declaration_specifiers { $$ = combine2DeclInfo($1, $2); }
-	| storage_class_specifier                        { $$ = $1; }
-	| type_specifier declaration_specifiers          { $$ = combine2DeclInfo($1, $2); }
-	| type_specifier                                 { $$ = $1; }
-	| type_qualifier declaration_specifiers          { $$ = combine2DeclInfo($1, $2); }
-	| type_qualifier                                 { $$ = $1; }
-	| function_specifier declaration_specifiers      { $$ = combine2DeclInfo($1, $2); }
-	| function_specifier                             { $$ = $1; }
-	| alignment_specifier declaration_specifiers     { $$ = combine2DeclInfo($1, $2); }
-	| alignment_specifier                            { $$ = $1; }
+	: storage_class_specifier declaration_specifiers
+	| storage_class_specifier                       
+	| type_specifier declaration_specifiers         
+	| type_specifier                                
+	| type_qualifier declaration_specifiers         
+	| type_qualifier                                
+	| function_specifier declaration_specifiers     
+	| function_specifier                            
+	| alignment_specifier declaration_specifiers    
+	| alignment_specifier                           
 	;
 
 init_declarator_list
-	: init_declarator                              { $$ = createDclrList($1); }
-	| init_declarator_list Y_COMMA init_declarator { $$ = addDclrList($1,  $3); zapToken($2); }
+	: init_declarator                              
+	| init_declarator_list Y_COMMA init_declarator 
 	;
 
 init_declarator
-	: declarator Y_EQUAL initializer { addDclrInitializer($1, $2, $3);}
-	| declarator 				     { $$ = $1; }
+	: declarator Y_EQUAL initializer
+	| declarator 				    
 	;
 
 storage_class_specifier
-	: Y_TYPEDEF	      { $$ = createStgClassDeclInfo(STG_TYPEDEF, $1); }
-	| Y_EXTERN        { $$ = createStgClassDeclInfo(STG_EXTERN, $1); }
-	| Y_STATIC        { $$ = createStgClassDeclInfo(STG_STATIC, $1); }
-	| Y_THREAD_LOCAL  { $$ = createStgClassDeclInfo(STG_THREAD_LOCAL, $1); }
-	| Y_AUTO          { $$ = createStgClassDeclInfo(STG_AUTO, $1); }
-	| Y_REGISTER      { $$ = createStgClassDeclInfo(STG_REGISTER, $1); }
+	: Y_TYPEDEF	      
+	| Y_EXTERN        
+	| Y_STATIC      
+	| Y_THREAD_LOCAL
+	| Y_AUTO        
+	| Y_REGISTER    
 	;
 
 type_specifier
-	: Y_VOID                    { $$ = createDeclInfoSCALAR(STM_VOID); zapToken($1); }
-	| Y_CHAR                    { $$ = createDeclInfoSCALAR(STM_CHAR); zapToken($1); }
-	| Y_SHORT                   { $$ = createDeclInfoSCALAR(STM_SHORT); zapToken($1); }
-	| Y_INT                     { $$ = createDeclInfoSCALAR(STM_INT); zapToken($1); }
-	| Y_LONG                    { $$ = createDeclInfoSCALAR(STM_LONG); zapToken($1); }
-	| Y_LONG_LONG               { $$ = createDeclInfoSCALAR(STM_LONG_LONG); zapToken($1); }
-	| Y_FLOAT                   { $$ = createDeclInfoSCALAR(STM_FLOAT); zapToken($1); }
-	| Y_DOUBLE                  { $$ = createDeclInfoSCALAR(STM_DOUBLE); zapToken($1); }
-	| Y_LONG_DOUBLE             { $$ = createDeclInfoSCALAR(STM_LONG_DOUBLE); zapToken($1); }
-	| Y_SIGNED                  { $$ = createDeclInfoSCALAR(STM_SIGNED); zapToken($1); }
-	| Y_UNSIGNED                { $$ = createDeclInfoSCALAR(STM_UNSIGNED); zapToken($1); }
-	| Y_BOOL                    { $$ = createDeclInfoSCALAR(STM_BOOL); zapToken($1); }
-	| Y_COMPLEX                 { $$ = createDeclInfoSCALAR(STM_COMPLEX); zapToken($1); }
-	| Y_IMAGINARY               { $$ = createDeclInfoSCALAR(STM_IMAGINARY); zapToken($1); }
-	| atomic_type_specifier     { $$ = createDeclInfoSCALAR(STM_ATOMIC); zapToken($1); }
-	| struct_or_union_specifier { $$ = createDeclInfoSCALAR(STM_STRUCT); zapToken($1); }
-	| enum_specifier            { $$ = createDeclInfoSCALAR(STM_ENUM); zapToken($1); }
-	| Y_TYPEDEF_NAME            { $$ = createDeclInfoSCALAR(STM_TYPEDEF); zapToken($1); }
+	: Y_VOID                    
+	| Y_CHAR                    
+	| Y_SHORT                   
+	| Y_INT                     
+	| Y_LONG                    
+	| Y_LONG_LONG               
+	| Y_FLOAT                   
+	| Y_DOUBLE                  
+	| Y_LONG_DOUBLE             
+	| Y_SIGNED                  
+	| Y_UNSIGNED                
+	| Y_BOOL                    
+	| Y_COMPLEX                 
+	| Y_IMAGINARY               
+	| atomic_type_specifier     
+	| struct_or_union_specifier 
+	| enum_specifier            
+	| Y_TYPEDEF_NAME            
 	;
 
 struct_or_union_specifier
@@ -430,55 +402,55 @@ struct_or_union_specifier
 	;
 
 struct_or_union
-	: Y_STRUCT { $$ = $1; }
-	| Y_UNION  { $$ = $1; }
+	: Y_STRUCT 
+	| Y_UNION  
 	;
 
 struct_declaration_list
-	: struct_declaration                         { $$ = createDclrInfoList($1); }
-	| struct_declaration_list struct_declaration { $$ = addDclrInfoList($1, $2); }
+	: struct_declaration                         
+	| struct_declaration_list struct_declaration 
 	;
 
 struct_declaration
-	: specifier_qualifier_list Y_SEMICOLON                        { $$ = $1; zapToken($2); }
-	| specifier_qualifier_list struct_declarator_list Y_SEMICOLON { $$ = NULL; }
-	| static_assert_declaration                                   { $$ = NULL; }
+	: specifier_qualifier_list Y_SEMICOLON                        
+	| specifier_qualifier_list struct_declarator_list Y_SEMICOLON 
+	| static_assert_declaration                                   
 	;
 
 specifier_qualifier_list
-	: type_specifier specifier_qualifier_list { $$ = combine2DeclInfo($1, $2); }
-	| type_specifier                          { $$ = $1; }
-	| type_qualifier specifier_qualifier_list { $$ = combine2DeclInfo($1, $2); }
-	| type_qualifier                          { $$ = $1; }
+	: type_specifier specifier_qualifier_list 
+	| type_specifier                         
+	| type_qualifier specifier_qualifier_list
+	| type_qualifier                          
 	;
 
 struct_declarator_list
-	: struct_declarator                                 { $$ = createDclrList($1); }
-	| struct_declarator_list Y_COMMA struct_declarator  { $$ = addDclrList($1, $3); zapToken($2); }
+	: struct_declarator                                
+	| struct_declarator_list Y_COMMA struct_declarator  
 	;
 
 struct_declarator
-	: Y_COLON constant_expression            { $$ = createStructDeclarator(NULL,$2); }
-	| declarator Y_COLON constant_expression { $$ = createStructDeclarator($1, $3); zapToken($2); }
-	| declarator                             { $$ = createStructDeclarator($1, NULL); }
+	: Y_COLON constant_expression           
+	| declarator Y_COLON constant_expression 
+	| declarator                            
 	;
 
 enum_specifier
-	: Y_ENUM Y_LEFT_BRACE enumerator_list Y_RIGHT_BRACE                    { $$ = createDeclEnum($1, NULL, $3); zapToken($2); zapToken($4); }
-	| Y_ENUM Y_LEFT_BRACE enumerator_list Y_COMMA Y_RIGHT_BRACE            { $$ = createDeclEnum($1, NULL, $3); zapToken($2); zapToken($4); zapToken($5); }
-	| Y_ENUM IDENTIFIER Y_LEFT_BRACE enumerator_list Y_RIGHT_BRACE         { $$ = createDeclEnum($1, $2, $4); zapToken($3); zapToken($5);  }
-	| Y_ENUM IDENTIFIER Y_LEFT_BRACE enumerator_list Y_COMMA Y_RIGHT_BRACE { $$ = createDeclEnum($1, $2, $4); zapToken($3); zapToken($5); zapToken($6); }
-	| Y_ENUM IDENTIFIER                                                    { $$ = createDeclEnum($1, NULL, NULL); zapToken($2); }
+	: Y_ENUM Y_LEFT_BRACE enumerator_list Y_RIGHT_BRACE                   
+	| Y_ENUM Y_LEFT_BRACE enumerator_list Y_COMMA Y_RIGHT_BRACE            
+	| Y_ENUM IDENTIFIER Y_LEFT_BRACE enumerator_list Y_RIGHT_BRACE         
+	| Y_ENUM IDENTIFIER Y_LEFT_BRACE enumerator_list Y_COMMA Y_RIGHT_BRACE 
+	| Y_ENUM IDENTIFIER                                                    
 	;
 
 enumerator_list
-	: enumerator                          { $$ = createEnumElemList($1); }
-	| enumerator_list Y_COMMA enumerator  { $$ = addEnumElemList($1, $3); zapToken($2); }
+	: enumerator                         
+	| enumerator_list Y_COMMA enumerator 
 	;
 
 enumerator	/* identifiers must be flagged as ENUMERATION_CONSTANT */
-	: enumeration_constant Y_EQUAL constant_expression  { $$ = createEnumElem($1, $2, $3); }
-	| enumeration_constant                              { $$ = createEnumElem($1, NULL, NULL); }
+	: enumeration_constant Y_EQUAL constant_expression 
+	| enumeration_constant                             
 	;
 
 atomic_type_specifier
@@ -486,20 +458,20 @@ atomic_type_specifier
 	;
 
 type_qualifier
-	: Y_CONST     { $$ = createQualifierDeclInfo(STY_CONST);  zapToken($1); }
-	| Y_RESTRICT  { $$ = createQualifierDeclInfo(STY_RESTRICT);  zapToken($1); }
-	| Y_VOLATILE  { $$ = createQualifierDeclInfo(STY_VOLATILE);  zapToken($1); }
-	| Y_ATOMIC    { $$ = createQualifierDeclInfo(STY_ATOMIC);  zapToken($1); }
+	: Y_CONST     
+	| Y_RESTRICT  
+	| Y_VOLATILE  
+	| Y_ATOMIC    
 	;
 
 function_specifier
-	: Y_INLINE     { $$ = createFunctionSpecifirDeclInfo(STY_INLINE);  zapToken($1); }
-	| Y_NORETURN   { $$ = createFunctionSpecifirDeclInfo(STY_NORETURN);  zapToken($1); }
+	: Y_INLINE    
+	| Y_NORETURN  
 	;
 
 alignment_specifier
-	: Y_ALIGNAS Y_LEFT_PAREN type_name Y_RIGHT_PAREN           { $$ = createAlignmentSpecifierDeclInfo(STY_ALIGNAS,$1, $2, $3, $4);  }
-	| Y_ALIGNAS Y_LEFT_PAREN constant_expression Y_RIGHT_PAREN { $$ = createAlignmentSpecifierDeclInfo(STY_ALIGNAS,$1, $2, $3, $4);  }
+	: Y_ALIGNAS Y_LEFT_PAREN type_name Y_RIGHT_PAREN           
+	| Y_ALIGNAS Y_LEFT_PAREN constant_expression Y_RIGHT_PAREN 
 	;
 
 declarator
@@ -600,9 +572,9 @@ initializer
 	;
 
 initializer_list
-	: designation initializer                           { $$ = createCTree2(createConstr0Label(LABCT_EXPR_LIST), $1, $2); }
+	: designation initializer                           { $$ = NULL; }
 	| initializer                                       { $$ = createCTree1(createConstr0Label(LABCT_EXPR_LIST), $1); }
-	| initializer_list Y_COMMA designation initializer  { $$ = createCTree2(createConstr1Label(LABCT_EXPR_LIST, $2), $1, createCTree1(createConstr0Label(LABCT_EXPR_LIST), $3)); }
+	| initializer_list Y_COMMA designation initializer  { $$ = NULL; }
 	| initializer_list Y_COMMA initializer              { $$ = createCTree2(createConstr1Label(LABCT_EXPR_LIST, $2), $1, $3); }
 	;
 

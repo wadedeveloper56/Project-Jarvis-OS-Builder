@@ -609,67 +609,67 @@ Nonterminals, with rules where they appear
     constant_expression <expression> (157)
         on left: 89
         on right: 147 148 157 167 235 237 245
-    declaration <declList> (158)
+    declaration (158)
         on left: 90 91 92
         on right: 251 262 263 272 275 276
-    declaration_specifiers <dinfo> (159)
+    declaration_specifiers (159)
         on left: 93 94 95 96 97 98 99 100 101 102
         on right: 90 91 93 95 97 99 101 194 195 196 273 274
-    init_declarator_list <dclrList> (160)
+    init_declarator_list (160)
         on left: 103 104
         on right: 91 104
-    init_declarator <dclr> (161)
+    init_declarator (161)
         on left: 105 106
         on right: 103 104
-    storage_class_specifier <dinfo> (162)
+    storage_class_specifier (162)
         on left: 107 108 109 110 111 112
         on right: 93 94
-    type_specifier <dinfo> (163)
+    type_specifier (163)
         on left: 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130
         on right: 95 96 141 142
-    struct_or_union_specifier <token> (164)
+    struct_or_union_specifier (164)
         on left: 131 132 133
         on right: 128
-    struct_or_union <token> (165)
+    struct_or_union (165)
         on left: 134 135
         on right: 131 132 133
-    struct_declaration_list <declList> (166)
+    struct_declaration_list (166)
         on left: 136 137
         on right: 131 132 137
-    struct_declaration <dinfo> (167)
+    struct_declaration (167)
         on left: 138 139 140
         on right: 136 137
-    specifier_qualifier_list <dinfo> (168)
+    specifier_qualifier_list (168)
         on left: 141 142 143 144
         on right: 138 139 141 143 199 200
-    struct_declarator_list <declList> (169)
+    struct_declarator_list (169)
         on left: 145 146
         on right: 139 146
-    struct_declarator <dclr> (170)
+    struct_declarator (170)
         on left: 147 148 149
         on right: 145 146
-    enum_specifier <declEnum> (171)
+    enum_specifier (171)
         on left: 150 151 152 153 154
         on right: 129
-    enumerator_list <enumList> (172)
+    enumerator_list (172)
         on left: 155 156
         on right: 150 151 152 153 156
-    enumerator <enumElem> (173)
+    enumerator (173)
         on left: 157 158
         on right: 155 156
-    atomic_type_specifier <token> (174)
+    atomic_type_specifier (174)
         on left: 159
         on right: 127
-    type_qualifier <dinfo> (175)
+    type_qualifier (175)
         on left: 160 161 162 163
         on right: 97 98 143 144 188 189
-    function_specifier <dinfo> (176)
+    function_specifier (176)
         on left: 164 165
         on right: 99 100
-    alignment_specifier <dinfo> (177)
+    alignment_specifier (177)
         on left: 166 167
         on right: 101 102
-    declarator <dclr> (178)
+    declarator (178)
         on left: 168 169
         on right: 105 106 148 149 171 194 273 274
     direct_declarator (179)
@@ -693,7 +693,7 @@ Nonterminals, with rules where they appear
     identifier_list (185)
         on left: 197 198
         on right: 183 198
-    type_name <expression> (186)
+    type_name (186)
         on left: 199 200
         on right: 15 25 26 34 35 43 159 166
     abstract_declarator (187)
@@ -708,16 +708,16 @@ Nonterminals, with rules where they appear
     initializer_list <expression> (190)
         on left: 228 229 230 231
         on right: 25 26 225 226 230 231
-    designation <expression> (191)
+    designation (191)
         on left: 232
         on right: 228 230
-    designator_list <expression> (192)
+    designator_list (192)
         on left: 233 234
         on right: 232 234
     designator (193)
         on left: 235 236
         on right: 233 234
-    static_assert_declaration <declList> (194)
+    static_assert_declaration (194)
         on left: 237
         on right: 92 140
     statement (195)
