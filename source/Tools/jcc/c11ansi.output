@@ -610,37 +610,37 @@ Nonterminals, with rules where they appear
     type_specifier <dinfo> (160)
         on left: 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124
         on right: 89 90 135 136
-    struct_or_union_specifier (161)
+    struct_or_union_specifier <token> (161)
         on left: 125 126 127
         on right: 122
-    struct_or_union (162)
+    struct_or_union <token> (162)
         on left: 128 129
         on right: 125 126 127
-    struct_declaration_list (163)
+    struct_declaration_list <declList> (163)
         on left: 130 131
         on right: 125 126 131
-    struct_declaration (164)
+    struct_declaration <dinfo> (164)
         on left: 132 133 134
         on right: 130 131
-    specifier_qualifier_list (165)
+    specifier_qualifier_list <dinfo> (165)
         on left: 135 136 137 138
         on right: 132 133 135 137 193 194
-    struct_declarator_list (166)
+    struct_declarator_list <declList> (166)
         on left: 139 140
         on right: 133 140
-    struct_declarator (167)
+    struct_declarator <dclr> (167)
         on left: 141 142 143
         on right: 139 140
-    enum_specifier (168)
+    enum_specifier <declEnum> (168)
         on left: 144 145 146 147 148
         on right: 123
-    enumerator_list (169)
+    enumerator_list <enumList> (169)
         on left: 149 150
         on right: 144 145 146 147 150
-    enumerator (170)
+    enumerator <enumElem> (170)
         on left: 151 152
         on right: 149 150
-    atomic_type_specifier (171)
+    atomic_type_specifier <token> (171)
         on left: 153
         on right: 121
     type_qualifier <dinfo> (172)
@@ -652,7 +652,7 @@ Nonterminals, with rules where they appear
     alignment_specifier <dinfo> (174)
         on left: 160 161
         on right: 95 96
-    declarator (175)
+    declarator <dclr> (175)
         on left: 162 163
         on right: 99 100 142 143 165 188 267 268
     direct_declarator (176)
@@ -700,7 +700,7 @@ Nonterminals, with rules where they appear
     designator (190)
         on left: 229 230
         on right: 227 228
-    static_assert_declaration (191)
+    static_assert_declaration <declList> (191)
         on left: 231
         on right: 86 134
     statement (192)

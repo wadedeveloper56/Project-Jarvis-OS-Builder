@@ -175,16 +175,20 @@ int yylex();
 %type<dinfo> type_qualifier
 %type<dinfo> function_specifier
 %type<dinfo> alignment_specifier
-%type<token> struct-or-union
+%type<token> struct_or_union
 %type<declList> struct_declaration_list
 %type<dinfo> struct_declaration
-%type<dclr> struct-declarator
+%type<dclr> struct_declarator
 %type<dinfo> specifier_qualifier_list
 %type<dclr> declarator
 %type<declEnum> enum_specifier
 %type<enumList> enumerator_list
 %type<enumElem> enumerator
-
+%type<token> atomic_type_specifier
+%type<token> struct_or_union_specifier
+%type<declList> struct_declarator_list
+%type<declList> static_assert_declaration
+	
 //%glr-parser
 
 %start translation_unit
@@ -363,7 +367,7 @@ constant_expression
 declaration
 	: declaration_specifiers Y_SEMICOLON                       { $$ = transformDecl($1); zapToken($2); }
 	| declaration_specifiers init_declarator_list Y_SEMICOLON  { $$ = transformDecl(addDeclInfoDclrList($1, $2)); zapToken($3); }
-	| static_assert_declaration
+	| static_assert_declaration                                { $$ = NULL; }
 	;
 
 declaration_specifiers
@@ -431,14 +435,14 @@ struct_or_union
 	;
 
 struct_declaration_list
-	: struct_declaration                         { $$ = createDclrList($1); }
+	: struct_declaration                         { $$ = createDclrInfoList($1); }
 	| struct_declaration_list struct_declaration { $$ = addDclrInfoList($1, $2); }
 	;
 
 struct_declaration
-	: specifier_qualifier_list Y_SEMICOLON                        { $$ = addDeclInfoDclrList($1, NULL); zapToken($2); }
-	| specifier_qualifier_list struct_declarator_list Y_SEMICOLON { $$ = addDeclInfoDclrList($1, $2); zapToken($3); }
-	| static_assert_declaration
+	: specifier_qualifier_list Y_SEMICOLON                        { $$ = $1; zapToken($2); }
+	| specifier_qualifier_list struct_declarator_list Y_SEMICOLON { $$ = NULL; }
+	| static_assert_declaration                                   { $$ = NULL; }
 	;
 
 specifier_qualifier_list
@@ -450,26 +454,26 @@ specifier_qualifier_list
 
 struct_declarator_list
 	: struct_declarator                                 { $$ = createDclrList($1); }
-	| struct_declarator_list Y_COMMA struct_declarator  { $$ = addDclrInfoList($1, $2); }
+	| struct_declarator_list Y_COMMA struct_declarator  { $$ = addDclrList($1, $3); zapToken($2); }
 	;
 
 struct_declarator
 	: Y_COLON constant_expression            { $$ = createStructDeclarator(NULL,$2); }
-	| declarator Y_COLON constant_expression { $$ = createStructDeclarator($1,$2); }
-	| declarator                             { $$ = createStructDeclarator(NULL,$1); }
+	| declarator Y_COLON constant_expression { $$ = createStructDeclarator($1, $3); zapToken($2); }
+	| declarator                             { $$ = createStructDeclarator($1, NULL); }
 	;
 
 enum_specifier
 	: Y_ENUM Y_LEFT_BRACE enumerator_list Y_RIGHT_BRACE                    { $$ = createDeclEnum($1, NULL, $3); zapToken($2); zapToken($4); }
 	| Y_ENUM Y_LEFT_BRACE enumerator_list Y_COMMA Y_RIGHT_BRACE            { $$ = createDeclEnum($1, NULL, $3); zapToken($2); zapToken($4); zapToken($5); }
-	| Y_ENUM IDENTIFIER Y_LEFT_BRACE enumerator_list Y_RIGHT_BRACE         { $$ = createDeclEnum($1, $2, $4); zapToken($3); zapToken($5); zapToken($6); }
+	| Y_ENUM IDENTIFIER Y_LEFT_BRACE enumerator_list Y_RIGHT_BRACE         { $$ = createDeclEnum($1, $2, $4); zapToken($3); zapToken($5);  }
 	| Y_ENUM IDENTIFIER Y_LEFT_BRACE enumerator_list Y_COMMA Y_RIGHT_BRACE { $$ = createDeclEnum($1, $2, $4); zapToken($3); zapToken($5); zapToken($6); }
 	| Y_ENUM IDENTIFIER
 	;
 
 enumerator_list
-	: enumerator                          { $$ = createDclrList($1); }
-	| enumerator_list Y_COMMA enumerator  { $$ = addEnumElemList($1, $2); }
+	: enumerator                          { $$ = createEnumElemList($1); }
+	| enumerator_list Y_COMMA enumerator  { $$ = addEnumElemList($1, $3); zapToken($2); }
 	;
 
 enumerator	/* identifiers must be flagged as ENUMERATION_CONSTANT */

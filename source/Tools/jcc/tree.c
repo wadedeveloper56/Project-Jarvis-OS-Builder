@@ -134,6 +134,11 @@ DeclEnumPtr createDeclEnum(TokenPtr enumPos, TokenPtr identifier, SLListPtr list
 	return NULL;
 }
 
+SLListPtr createEnumElemList(EnumElemPtr element)
+{
+	return NULL;
+}	
+
 SLListPtr addEnumElemList(SLListPtr list, EnumElemPtr element)
 {
 	return NULL;
@@ -143,4 +148,14 @@ EnumElemPtr createEnumElem(TokenPtr name, TokenPtr equal, CTreePtr expression)
 {
 	return NULL;
 }	
+
+SLListPtr createDclrInfoList(DeclInfoPtr elem)
+{
+	return NULL;
+}
+
+DeclInfoPtr createStructDeclaration(DeclInfoPtr info, SLListPtr list)
+{
+	return NULL;
+}
 
