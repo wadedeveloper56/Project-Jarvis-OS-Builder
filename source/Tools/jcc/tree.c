@@ -84,3 +84,28 @@ SLListPtr addDclrList(SLListPtr list, DclrPtr elem)
 	return NULL;
 }
 
+DeclInfoPtr createStgClassDeclInfo(StgClass stgClass, TokenPtr pos)
+{
+	return NULL;
+}
+
+DclrPtr addDclrInitializer(DclrPtr dclr, TokenPtr equalTok, CTreePtr initializer)
+{
+	return NULL;
+}
+
+DeclInfoPtr createDeclInfoSCALAR(YScalarType tokCode)
+{
+	return NULL;
+}
+
+DeclInfoPtr combine2DeclInfo(DeclInfoPtr d1, DeclInfoPtr d2)
+{
+	return NULL;
+}
+
+DeclInfoPtr createQualifierDeclInfo(TypeQualifier qualifier)
+{
+	return NULL;
+}
+

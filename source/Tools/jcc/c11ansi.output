@@ -604,10 +604,10 @@ Nonterminals, with rules where they appear
     init_declarator <dclr> (158)
         on left: 99 100
         on right: 97 98
-    storage_class_specifier (159)
+    storage_class_specifier <dinfo> (159)
         on left: 101 102 103 104 105 106
         on right: 87 88
-    type_specifier (160)
+    type_specifier <dinfo> (160)
         on left: 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124
         on right: 89 90 135 136
     struct_or_union_specifier (161)
@@ -643,13 +643,13 @@ Nonterminals, with rules where they appear
     atomic_type_specifier (171)
         on left: 153
         on right: 121
-    type_qualifier (172)
+    type_qualifier <dinfo> (172)
         on left: 154 155 156 157
         on right: 91 92 137 138 182 183
-    function_specifier (173)
+    function_specifier <dinfo> (173)
         on left: 158 159
         on right: 93 94
-    alignment_specifier (174)
+    alignment_specifier <dinfo> (174)
         on left: 160 161
         on right: 95 96
     declarator (175)

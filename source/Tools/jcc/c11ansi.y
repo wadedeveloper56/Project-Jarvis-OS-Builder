@@ -167,9 +167,15 @@ int yylex();
 %type<tree> logical_or_expression
 %type<tree> conditional_expression
 %type<declList> declaration
-%type<dinfo> declaration_specifiers
 %type<dclr> init_declarator
 %type<dclrList> init_declarator_list
+%type<dinfo> declaration_specifiers
+%type<dinfo> storage_class_specifier 
+%type<dinfo> type_specifier
+
+%type<dinfo> type_qualifier
+%type<dinfo> function_specifier
+%type<dinfo> alignment_specifier
 
 //%glr-parser
 
@@ -353,16 +359,16 @@ declaration
 	;
 
 declaration_specifiers
-	: storage_class_specifier declaration_specifiers
-	| storage_class_specifier
-	| type_specifier declaration_specifiers
-	| type_specifier
-	| type_qualifier declaration_specifiers
-	| type_qualifier
-	| function_specifier declaration_specifiers
-	| function_specifier
-	| alignment_specifier declaration_specifiers
-	| alignment_specifier
+	: storage_class_specifier declaration_specifiers { $$ = combine2DeclInfo($1, $2); }
+	| storage_class_specifier                        { $$ = $1; }
+	| type_specifier declaration_specifiers          { $$ = combine2DeclInfo($1, $2); }
+	| type_specifier                                 { $$ = $1; }
+	| type_qualifier declaration_specifiers          { $$ = combine2DeclInfo($1, $2); }
+	| type_qualifier                                 { $$ = $1; }
+	| function_specifier declaration_specifiers      { $$ = combine2DeclInfo($1, $2); }
+	| function_specifier                             { $$ = $1; }
+	| alignment_specifier declaration_specifiers     { $$ = combine2DeclInfo($1, $2); }
+	| alignment_specifier                            { $$ = $1; }
 	;
 
 init_declarator_list
@@ -371,38 +377,38 @@ init_declarator_list
 	;
 
 init_declarator
-	: declarator Y_EQUAL initializer
-	| declarator
+	: declarator Y_EQUAL initializer { addDclrInitializer($1, $2, $3);}
+	| declarator 				     { $$ = $1; }
 	;
 
 storage_class_specifier
-	: Y_TYPEDEF	/* identifiers must be flagged as TYPEDEF_NAME */
-	| Y_EXTERN
-	| Y_STATIC
-	| Y_THREAD_LOCAL
-	| Y_AUTO
-	| Y_REGISTER
+	: Y_TYPEDEF	      { $$ = createStgClassDeclInfo(STG_TYPEDEF, $1); }
+	| Y_EXTERN        { $$ = createStgClassDeclInfo(STG_EXTERN, $1); }
+	| Y_STATIC        { $$ = createStgClassDeclInfo(STG_STATIC, $1); }
+	| Y_THREAD_LOCAL  { $$ = createStgClassDeclInfo(STG_THREAD_LOCAL, $1); }
+	| Y_AUTO          { $$ = createStgClassDeclInfo(STG_AUTO, $1); }
+	| Y_REGISTER      { $$ = createStgClassDeclInfo(STG_REGISTER, $1); }
 	;
 
 type_specifier
-	: Y_VOID
-	| Y_CHAR
-	| Y_SHORT
-	| Y_INT
-	| Y_LONG
-	| Y_LONG_LONG
-	| Y_FLOAT
-	| Y_DOUBLE
-	| Y_LONG_DOUBLE
-	| Y_SIGNED
-	| Y_UNSIGNED
-	| Y_BOOL
-	| Y_COMPLEX
-	| Y_IMAGINARY	  	/* non-mandated extension */
-	| atomic_type_specifier
-	| struct_or_union_specifier
-	| enum_specifier
-	| Y_TYPEDEF_NAME		/* after it has been defined as such */
+	: Y_VOID                    { $$ = createDeclInfoSCALAR(STM_VOID); zapToken($1); }
+	| Y_CHAR                    { $$ = createDeclInfoSCALAR(STM_CHAR); zapToken($1); }
+	| Y_SHORT                   { $$ = createDeclInfoSCALAR(STM_SHORT); zapToken($1); }
+	| Y_INT                     { $$ = createDeclInfoSCALAR(STM_INT); zapToken($1); }
+	| Y_LONG                    { $$ = createDeclInfoSCALAR(STM_LONG); zapToken($1); }
+	| Y_LONG_LONG               { $$ = createDeclInfoSCALAR(STM_LONG_LONG); zapToken($1); }
+	| Y_FLOAT                   { $$ = createDeclInfoSCALAR(STM_FLOAT); zapToken($1); }
+	| Y_DOUBLE                  { $$ = createDeclInfoSCALAR(STM_DOUBLE); zapToken($1); }
+	| Y_LONG_DOUBLE             { $$ = createDeclInfoSCALAR(STM_LONG_DOUBLE); zapToken($1); }
+	| Y_SIGNED                  { $$ = createDeclInfoSCALAR(STM_SIGNED); zapToken($1); }
+	| Y_UNSIGNED                { $$ = createDeclInfoSCALAR(STM_UNSIGNED); zapToken($1); }
+	| Y_BOOL                    { $$ = createDeclInfoSCALAR(STM_BOOL); zapToken($1); }
+	| Y_COMPLEX                 { $$ = createDeclInfoSCALAR(STM_COMPLEX); zapToken($1); }
+	| Y_IMAGINARY               { $$ = createDeclInfoSCALAR(STM_IMAGINARY); zapToken($1); }
+	| atomic_type_specifier     { $$ = createDeclInfoSCALAR(STM_ATOMIC); zapToken($1); }
+	| struct_or_union_specifier { $$ = createDeclInfoSCALAR(STM_STRUCT); zapToken($1); }
+	| enum_specifier            { $$ = createDeclInfoSCALAR(STM_ENUM); zapToken($1); }
+	| Y_TYPEDEF_NAME            { $$ = createDeclInfoSCALAR(STM_TYPEDEF); zapToken($1); }
 	;
 
 struct_or_union_specifier
@@ -468,10 +474,10 @@ atomic_type_specifier
 	;
 
 type_qualifier
-	: Y_CONST
-	| Y_RESTRICT
-	| Y_VOLATILE
-	| Y_ATOMIC
+	: Y_CONST     { $$ = createQualifierDeclInfo(STY_CONST);  zapToken($1); }
+	| Y_RESTRICT  { $$ = createQualifierDeclInfo(STY_RESTRICT);  zapToken($1); }
+	| Y_VOLATILE  { $$ = createQualifierDeclInfo(STY_VOLATILE);  zapToken($1); }
+	| Y_ATOMIC    { $$ = createQualifierDeclInfo(STY_ATOMIC);  zapToken($1); }
 	;
 
 function_specifier

@@ -205,6 +205,7 @@ typedef enum
 	STG_AUTO,
 	STG_EXTERN,
 	STG_STATIC,
+	STG_THREAD_LOCAL,
 	STG_MAX
 } StgClass;
 
@@ -213,21 +214,33 @@ typedef enum
 	STY_NULL = 0x00,
 	STY_CONST = 0x01,
 	STY_VOLATILE = 0x02,
+	STY_RESTRICT = 0x03,
+	STY_ATOMIC = 0x04,
 } TypeQualifier;
 
 typedef enum
 {
-	STM_NULL = 0x0000,
-	STM_CHAR = 0x0001,
-	STM_INT = 0x0002,
-	STM_LONG = 0x0004,
-	STM_FLOAT = 0x0008,
-	STM_DOUBLE = 0x0010,
-	STM_SIGNED = 0x0020,
-	STM_UNSIGNED = 0x0040,
-	STM_SHORT = 0x0080,
-	STM_VOID = 0x0100,
-	STM_DOT_DOT_DOT = 0x0200      // Used exclusively for function args
+	STM_NULL = 0x00000,
+	STM_CHAR = 0x00001,
+	STM_INT = 0x00002,
+	STM_LONG = 0x00004,
+	STM_LONG_LONG = 0x00008,
+	STM_FLOAT = 0x00010,
+	STM_DOUBLE = 0x00020,
+	STM_LONG_DOUBLE = 0x00040,
+	STM_SIGNED = 0x00080,
+	STM_UNSIGNED = 0x00100,
+	STM_SHORT = 0x00200,
+	STM_VOID = 0x00400,
+	STM_BOOL = 0x00800,
+	STM_DOT_DOT_DOT = 0x01000,      // Used exclusively for function args
+	STM_COMPLEX = 0x002000,
+    STM_IMAGINARY = 0x04000,
+    STM_ATOMIC = 0x08000,
+    STM_STRUCT = 0x10000,
+    STM_ENUM = 0x20000,
+    STM_TYPEDEF = 0x40000
+
 } YScalarType;
 
 typedef enum
@@ -417,4 +430,9 @@ DeclInfoPtr addDeclInfoDclrList(DeclInfoPtr decl, SLListPtr list);
 void zapToken(void* elem);
 SLListPtr createDclrList(DclrPtr elem);
 SLListPtr addDclrList(SLListPtr list, DclrPtr elem);
+DeclInfoPtr createStgClassDeclInfo(StgClass stgClass, TokenPtr pos);
+DclrPtr addDclrInitializer(DclrPtr dclr, TokenPtr equalTok, CTreePtr initializer);
+DeclInfoPtr createDeclInfoSCALAR(YScalarType tokCode);
+DeclInfoPtr combine2DeclInfo(DeclInfoPtr d1, DeclInfoPtr d2);
+DeclInfoPtr createQualifierDeclInfo(TypeQualifier qualifier);
 
