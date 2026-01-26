@@ -146,16 +146,16 @@ typedef struct
 	TokDataPtr data;
 }Token, * TokenPtr, ** TokenPtrPtr;
 
-typedef struct _SLListNode
+typedef struct _LinkedListNode
 {
-	struct _SLListNode* next;
+	struct _LinkedListNode* next;
 	void* userData;
-} SLListNode, * SLListNodePtr, ** SLListNodePtrPtr;
+} LinkedListNode, * LinkedListNodePtr, ** LinkedListNodePtrPtr;
 
 typedef struct _LinkedList
 {
-	SLListNodePtr head;  /* 1-st element in the list */
-	SLListNodePtr tail;  /* Last (most recently added) element in the list */
+	LinkedListNodePtr head;  /* 1-st element in the list */
+	LinkedListNodePtr tail;  /* Last (most recently added) element in the list */
 } LinkedList, * LinkedListPtr, ** LinkedListPtrPtr;
 
 typedef struct
