@@ -60,12 +60,12 @@ LabelPtr createConstr5Label(LabelConstrType type, TokenPtr t0, TokenPtr t1, Toke
 	return NULL;
 }
 
-SLListPtr transformDecl(DeclInfoPtr decl)
+LinkedListPtr transformDecl(DeclInfoPtr decl)
 {
 	return NULL;
 }
 
-DeclInfoPtr addDeclInfoDclrList(DeclInfoPtr decl, SLListPtr list)
+DeclInfoPtr addDeclInfoDclrList(DeclInfoPtr decl, LinkedListPtr list)
 {
 	return NULL;
 }
@@ -74,17 +74,17 @@ void zapToken(void* elem)
 {
 }
 
-SLListPtr createDclrList(DclrPtr elem)
+LinkedListPtr createDclrList(DclrPtr elem)
 {
 	return NULL;
 }
 
-SLListPtr addDclrList(SLListPtr list, DclrPtr elem)
+LinkedListPtr addDclrList(LinkedListPtr list, DclrPtr elem)
 {
 	return NULL;
 }
 
-SLListPtr addDclrInfoList(SLListPtr list, DeclInfoPtr elem)
+LinkedListPtr addDclrInfoList(LinkedListPtr list, DeclInfoPtr elem)
 {
 	return NULL;
 }
@@ -129,17 +129,17 @@ DclrPtr createStructDeclarator(DclrPtr decl, CTreePtr expression)
 	return NULL;
 }
 
-DeclEnumPtr createDeclEnum(TokenPtr enumPos, TokenPtr identifier, SLListPtr list)
+DeclEnumPtr createDeclEnum(TokenPtr enumPos, TokenPtr identifier, LinkedListPtr list)
 {
 	return NULL;
 }
 
-SLListPtr createEnumElemList(EnumElemPtr element)
+LinkedListPtr createEnumElemList(EnumElemPtr element)
 {
 	return NULL;
 }	
 
-SLListPtr addEnumElemList(SLListPtr list, EnumElemPtr element)
+LinkedListPtr addEnumElemList(LinkedListPtr list, EnumElemPtr element)
 {
 	return NULL;
 }
@@ -149,12 +149,12 @@ EnumElemPtr createEnumElem(TokenPtr name, TokenPtr equal, CTreePtr expression)
 	return NULL;
 }	
 
-SLListPtr createDclrInfoList(DeclInfoPtr elem)
+LinkedListPtr createDclrInfoList(DeclInfoPtr elem)
 {
 	return NULL;
 }
 
-DeclInfoPtr createStructDeclaration(DeclInfoPtr info, SLListPtr list)
+DeclInfoPtr createStructDeclaration(DeclInfoPtr info, LinkedListPtr list)
 {
 	return NULL;
 }

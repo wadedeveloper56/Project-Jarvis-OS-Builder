@@ -140,32 +140,32 @@ int yylex();
 %type<token> constant
 %type<token> enumeration_constant
 %type<token> string
-%type<tree> primary_expression	
-%type<tree> expression	
-%type<tree> postfix_expression
-%type<tree> assignment_expression
-%type<tree> unary_expression
+%type<expression> primary_expression	
+%type<expression> expression	
+%type<expression> postfix_expression
+%type<expression> assignment_expression
+%type<expression> unary_expression
 %type<label> unary_operator
 %type<label> assignment_operator
-%type<tree> cast_expression
-%type<tree> constant_expression
-%type<tree> argument_expression_list
-%type<tree> initializer_list
-%type<tree> initializer
-%type<tree> designation
-%type<tree> designator_list
-%type<tree> type_name
-%type<tree> multiplicative_expression
-%type<tree> additive_expression
-%type<tree> shift_expression
-%type<tree> relational_expression
-%type<tree> equality_expression
-%type<tree> and_expression
-%type<tree> exclusive_or_expression
-%type<tree> inclusive_or_expression
-%type<tree> logical_and_expression
-%type<tree> logical_or_expression
-%type<tree> conditional_expression
+%type<expression> cast_expression
+%type<expression> constant_expression
+%type<expression> argument_expression_list
+%type<expression> initializer_list
+%type<expression> initializer
+%type<expression> designation
+%type<expression> designator_list
+%type<expression> type_name
+%type<expression> multiplicative_expression
+%type<expression> additive_expression
+%type<expression> shift_expression
+%type<expression> relational_expression
+%type<expression> equality_expression
+%type<expression> and_expression
+%type<expression> exclusive_or_expression
+%type<expression> inclusive_or_expression
+%type<expression> logical_and_expression
+%type<expression> logical_or_expression
+%type<expression> conditional_expression
 %type<declList> declaration
 %type<dclr> init_declarator
 %type<dclrList> init_declarator_list
@@ -199,7 +199,7 @@ primary_expression
 	| constant                              { $$ = createCTreeRoot(createTokenLabel($1)); }
 	| string                                { $$ = createCTreeRoot(createTokenLabel($1)); }
 	| Y_LEFT_PAREN expression Y_RIGHT_PAREN { $$ = createCTree1(createConstr2Label(LABCT_PAREN_EXPR, $1, $3), $2); }
-	//| generic_selection
+	| generic_selection                     { $$ = NULL; }
 	;
 
 constant
@@ -216,7 +216,7 @@ string
 	: STRING_LITERAL {$$ = $1;}
 	| Y_FUNC_NAME    {$$ = $1;}
 	;
-/*
+
 generic_selection
 	: Y_GENERIC Y_LEFT_PAREN assignment_expression Y_COMMA generic_assoc_list Y_RIGHT_PAREN
 	;
@@ -230,7 +230,7 @@ generic_association
 	: type_name Y_COLON assignment_expression
 	| Y_DEFAULT Y_COLON assignment_expression
 	;
-*/
+
 postfix_expression
 	: primary_expression                                                       { $$ = $1; }
 	| postfix_expression Y_LEFT_BRACKET expression Y_RIGHT_BRACKET             { $$ = createCTree2(createConstr2Label(LABCT_INDEX, $2, $4), $1,  $3); }

@@ -167,11 +167,11 @@ typedef struct _SLListNode
 	void* userData;
 } SLListNode, * SLListNodePtr, ** SLListNodePtrPtr;
 
-typedef struct SLList
+typedef struct _LinkedList
 {
 	SLListNodePtr head;  /* 1-st element in the list */
 	SLListNodePtr tail;  /* Last (most recently added) element in the list */
-} SLList, * SLListPtr, ** SLListPtrPtr;
+} LinkedList, * LinkedListPtr, ** LinkedListPtrPtr;
 
 typedef struct
 {
@@ -184,7 +184,7 @@ typedef struct
 			int8_t numTokens;
 			TokenPtrPtr tokens;
 		} constr;
-		SLListPtr list; // List of tokens
+		LinkedListPtr list; // List of tokens
 		TokenPtr token;
 		void* data;
 	} repr;
@@ -284,7 +284,7 @@ typedef enum
 
 typedef struct _DeclStructBody
 {
-	SLListPtr declList;
+	LinkedListPtr declList;
 }DeclStructBody, * DeclStructBodyPtr, ** DeclStructBodyPtrPtr;
 
 typedef struct _DeclStructInfo
@@ -296,7 +296,7 @@ typedef struct _DeclStructInfo
 
 typedef struct DeclEnum
 {
-	SLListPtr list;             // optional
+	LinkedListPtr list;             // optional
 }DeclEnum, * DeclEnumPtr, ** DeclEnumPtrPtr;
 
 typedef enum
@@ -321,9 +321,9 @@ typedef struct _Dclr
 	TokenPtr pragmaMod;
 	pDclrPtr ptr;
 	TokenPtr id;
-	SLListPtr arrList;
+	LinkedListPtr arrList;
 	TokenPtr argBegin;  // '('
-	SLListPtr args;
+	LinkedListPtr args;
 	TokenPtr argEnd;  // ')'
 	TokenPtr equalTok;
 	CTreePtr initializer;
@@ -345,7 +345,7 @@ typedef struct _DeclInfo
 		DeclEnumPtr e;                    // DIT_ENUM
 		DeclStructInfoPtr s;              // DIT_STRUCT_OR_UNION
 	} repr;
-	SLList dclrList;  // List of declarators (optional)
+	LinkedListPtr dclrList;  // List of declarators (optional)
 	DclrPtr dclr;  // Declarator that may come from defined type
 }DeclInfo, * DeclInfoPtr, ** DeclInfoPtrPtr;
 
@@ -364,42 +364,42 @@ typedef struct _ArrElem
 	TokenPtr rBracket;
 }ArrElem, * ArrElemPtr, ** ArrElemPtrPtr;
 
-typedef enum
-{
-	DECL_INFO,
-	DECL_TREE_ELEM
-} DeclTreeElemType;
-
-typedef struct _DeclTreeElem
-{
-	DeclTreeElemType type;
-	union
-	{
-		DeclInfoPtr decl;
-		SLListPtr list;
-	} u;
-}DeclTreeElem, *DeclTreeElemPtr, **DeclTreeElemPtrPtr;
+//typedef enum
+//{
+//	DECL_INFO,
+//	DECL_TREE_ELEM
+//} DeclTreeElemType;
+//
+//typedef struct _DeclTreeElem
+//{
+//	DeclTreeElemType type;
+//	union
+//	{
+//		DeclInfoPtr decl;
+//		LinkedListPtr list;
+//	} u;
+//}DeclTreeElem, *DeclTreeElemPtr, **DeclTreeElemPtrPtr;
 
 union ParseUnion
 {
-	CTreePtr tree;
+	CTreePtr expression;
 	LabelPtr label;
 	TokenPtr token;
 	DeclInfoPtr dinfo;
-	DeclStructInfoPtr dsinfo;
-	DeclStructBodyPtr dsbody;
+	//DeclStructInfoPtr dsinfo;
+	//DeclStructBodyPtr dsbody;
 	DeclEnumPtr declEnum;
 	DclrPtr dclr;
-	pDclrPtr dclrPtr;
-	SLListPtr tokenList;
-	SLListPtr enumList;
-	SLListPtr declList;
-	SLListPtr dclrList;
+	//pDclrPtr dclrPtr;
+	//LinkedListPtr tokenList;
+	LinkedListPtr enumList;
+	LinkedListPtr declList;
+	LinkedListPtr dclrList;
 	EnumElemPtr enumElem;
-	ArrElemPtr arrElem;
-	DeclTreeElemPtr declTreeElem;
-	int flag;
-	void* data;
+	//ArrElemPtr arrElem;
+	//DeclTreeElemPtr declTreeElem;
+	//int flag;
+	//void* data;
 };
 
 void printHeader(void);
@@ -428,14 +428,14 @@ LabelPtr createConstr2Label(LabelConstrType type, TokenPtr t0, TokenPtr t1);
 LabelPtr createConstr3Label(LabelConstrType type, TokenPtr t0, TokenPtr t1, TokenPtr t2);
 LabelPtr createConstr4Label(LabelConstrType type, TokenPtr t0, TokenPtr t1, TokenPtr t2, TokenPtr t3);
 LabelPtr createConstr5Label(LabelConstrType type, TokenPtr t0, TokenPtr t1, TokenPtr t2, TokenPtr t3, TokenPtr t4);
-SLListPtr transformDecl(DeclInfoPtr decl);
-DeclInfoPtr addDeclInfoDclrList(DeclInfoPtr decl, SLListPtr list);
+LinkedListPtr transformDecl(DeclInfoPtr decl);
+DeclInfoPtr addDeclInfoDclrList(DeclInfoPtr decl, LinkedListPtr list);
 void zapToken(void* elem);
-SLListPtr createDclrList(DclrPtr elem);
-SLListPtr createDclrInfoList(DeclInfoPtr elem);
-SLListPtr addDclrList(SLListPtr list, DclrPtr elem);
-SLListPtr addDclrInfoList(SLListPtr list, DeclInfoPtr elem);
-DeclInfoPtr createStructDeclaration(DeclInfoPtr info, SLListPtr list);
+LinkedListPtr createDclrList(DclrPtr elem);
+LinkedListPtr createDclrInfoList(DeclInfoPtr elem);
+LinkedListPtr addDclrList(LinkedListPtr list, DclrPtr elem);
+LinkedListPtr addDclrInfoList(LinkedListPtr list, DeclInfoPtr elem);
+DeclInfoPtr createStructDeclaration(DeclInfoPtr info, LinkedListPtr list);
 DeclInfoPtr createStgClassDeclInfo(StgClass stgClass, TokenPtr pos);
 DclrPtr addDclrInitializer(DclrPtr dclr, TokenPtr equalTok, CTreePtr initializer);
 DeclInfoPtr createDeclInfoSCALAR(YScalarType tokCode);
@@ -444,7 +444,7 @@ DeclInfoPtr createQualifierDeclInfo(TypeQualifier qualifier);
 DeclInfoPtr createFunctionSpecifirDeclInfo(TypeQualifier qualifier);
 DeclInfoPtr createAlignmentSpecifierDeclInfo(TypeQualifier qualifier, TokenPtr tok1, TokenPtr tok2, CTreePtr tok3, TokenPtr tok4);
 DclrPtr createStructDeclarator(DclrPtr decl, CTreePtr expression);
-DeclEnumPtr createDeclEnum(TokenPtr enumPos, TokenPtr identifier, SLListPtr list);
-SLListPtr createEnumElemList(EnumElemPtr element);
-SLListPtr addEnumElemList(SLListPtr list, EnumElemPtr element);
+DeclEnumPtr createDeclEnum(TokenPtr enumPos, TokenPtr identifier, LinkedListPtr list);
+LinkedListPtr createEnumElemList(EnumElemPtr element);
+LinkedListPtr addEnumElemList(LinkedListPtr list, EnumElemPtr element);
 EnumElemPtr createEnumElem(TokenPtr name, TokenPtr equal, CTreePtr expression);
