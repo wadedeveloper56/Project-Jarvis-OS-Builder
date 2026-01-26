@@ -107,33 +107,33 @@ typedef enum
 	YC_KEYWORD
 } TokenCode;
 
-typedef struct
+typedef struct _TokData
 {
 	TokenCode code;
-	union
+	union _Representation
 	{
-		struct
+		struct _Keyword
 		{
 			int keyword;
 			int strLen;
 			char* string;
 		} keyword;
-		struct
+		struct _Symbol
 		{
 			char* string;
 			int strLen;
 		} symbol;
-		struct
+		struct _NumericConstant
 		{
 			ConstType type : 6;
 			RadixType radix : 2;
-			union
+			union _ConstRepr
 			{
 				unsigned long long lIntConst;
 				long double lDoubleConst;
 			} repr;
 		} numericConstant;
-		struct
+		struct _StringConstant
 		{
 			char* s;
 			int strLen;
@@ -141,7 +141,7 @@ typedef struct
 	} repr;
 } TokData, * TokDataPtr;
 
-typedef struct
+typedef struct _Token
 {
 	TokDataPtr data;
 }Token, * TokenPtr, ** TokenPtrPtr;
@@ -158,12 +158,12 @@ typedef struct _LinkedList
 	LinkedListNodePtr tail;  /* Last (most recently added) element in the list */
 } LinkedList, * LinkedListPtr, ** LinkedListPtrPtr;
 
-typedef struct
+typedef struct _Label
 {
 	LabelType type;
-	union
+	union _LabelRepr
 	{
-		struct
+		struct _LabelConstr
 		{
 			LabelConstrType type : 8;
 			int8_t numTokens;
