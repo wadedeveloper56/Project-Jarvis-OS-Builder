@@ -74,3 +74,13 @@ void zapToken(void* elem)
 {
 }
 
+SLListPtr createDclrList(DclrPtr elem)
+{
+	return NULL;
+}
+
+SLListPtr addDclrList(SLListPtr list, DclrPtr elem)
+{
+	return NULL;
+}
+

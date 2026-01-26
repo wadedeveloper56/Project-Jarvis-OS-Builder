@@ -171,7 +171,7 @@ int yylex();
 %type<dclr> init_declarator
 %type<dclrList> init_declarator_list
 
-%glr-parser
+//%glr-parser
 
 %start translation_unit
 %%
@@ -366,8 +366,8 @@ declaration_specifiers
 	;
 
 init_declarator_list
-	: init_declarator
-	| init_declarator_list Y_COMMA init_declarator
+	: init_declarator                              { $$ = createDclrList($1); }
+	| init_declarator_list Y_COMMA init_declarator { $$ = addDclrList($1,  $3); zapToken($2); }
 	;
 
 init_declarator

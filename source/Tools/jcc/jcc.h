@@ -391,11 +391,15 @@ void doConversion(void** name);
 void initiate(int argc, char* argv[]);
 void terminate(int exitCode);
 //********************************************
+// structures.c functions
+//********************************************
 TokenPtr createConstantULLToken(unsigned long long num);
 TokenPtr createConstantLDToken(long double num);
 TokenPtr createStringConstantToken(char* str);
 TokenPtr createStringIDToken(char* str);
 TokenPtr createKeywordToken(char* str, int keyword);
+//********************************************
+// tree.c functions
 //********************************************
 CTreePtr createCTreeRoot(LabelPtr label);
 CTreePtr createNULLCTree(void);
@@ -411,4 +415,6 @@ LabelPtr createConstr5Label(LabelConstrType type, TokenPtr t0, TokenPtr t1, Toke
 SLListPtr transformDecl(DeclInfoPtr decl);
 DeclInfoPtr addDeclInfoDclrList(DeclInfoPtr decl, SLListPtr list);
 void zapToken(void* elem);
+SLListPtr createDclrList(DclrPtr elem);
+SLListPtr addDclrList(SLListPtr list, DclrPtr elem);
 
