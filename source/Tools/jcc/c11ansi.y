@@ -175,6 +175,12 @@ int yylex();
 %type<dinfo> type_qualifier
 %type<dinfo> function_specifier
 %type<dinfo> alignment_specifier
+%type<token> struct-or-union
+%type<declList> struct_declaration_list
+%type<dinfo> struct_declaration
+%type<dclr> struct-declarator
+%type<dinfo> specifier_qualifier_list
+%type<dclr> declarator
 
 //%glr-parser
 
@@ -417,37 +423,37 @@ struct_or_union_specifier
 	;
 
 struct_or_union
-	: Y_STRUCT
-	| Y_UNION
+	: Y_STRUCT { $$ = $1; }
+	| Y_UNION  { $$ = $1; }
 	;
 
 struct_declaration_list
-	: struct_declaration
-	| struct_declaration_list struct_declaration
+	: struct_declaration                         { $$ = createDclrList($1); }
+	| struct_declaration_list struct_declaration { $$ = addDclrInfoList($1, $2); }
 	;
 
 struct_declaration
-	: specifier_qualifier_list Y_SEMICOLON	/* for anonymous struct/union */
-	| specifier_qualifier_list struct_declarator_list Y_SEMICOLON
+	: specifier_qualifier_list Y_SEMICOLON                        { $$ = addDeclInfoDclrList($1, NULL); zapToken($2); }
+	| specifier_qualifier_list struct_declarator_list Y_SEMICOLON { $$ = addDeclInfoDclrList($1, $2); zapToken($3); }
 	| static_assert_declaration
 	;
 
 specifier_qualifier_list
-	: type_specifier specifier_qualifier_list
-	| type_specifier
-	| type_qualifier specifier_qualifier_list
-	| type_qualifier
+	: type_specifier specifier_qualifier_list { $$ = combine2DeclInfo($1, $2); }
+	| type_specifier                          { $$ = $1; }
+	| type_qualifier specifier_qualifier_list { $$ = combine2DeclInfo($1, $2); }
+	| type_qualifier                          { $$ = $1; }
 	;
 
 struct_declarator_list
-	: struct_declarator
-	| struct_declarator_list Y_COMMA struct_declarator
+	: struct_declarator                                 { $$ = createDclrList($1); }
+	| struct_declarator_list Y_COMMA struct_declarator  { $$ = addDclrInfoList($1, $2); }
 	;
 
 struct_declarator
-	: Y_COLON constant_expression
-	| declarator Y_COLON constant_expression
-	| declarator
+	: Y_COLON constant_expression            { $$ = createStructDeclarator(NULL,$2); }
+	| declarator Y_COLON constant_expression { $$ = createStructDeclarator($1,$2); }
+	| declarator                             { $$ = createStructDeclarator(NULL,$1); }
 	;
 
 enum_specifier

@@ -433,6 +433,7 @@ DeclInfoPtr addDeclInfoDclrList(DeclInfoPtr decl, SLListPtr list);
 void zapToken(void* elem);
 SLListPtr createDclrList(DclrPtr elem);
 SLListPtr addDclrList(SLListPtr list, DclrPtr elem);
+SLListPtr addDclrInfoList(SLListPtr list, DeclInfoPtr elem);
 DeclInfoPtr createStgClassDeclInfo(StgClass stgClass, TokenPtr pos);
 DclrPtr addDclrInitializer(DclrPtr dclr, TokenPtr equalTok, CTreePtr initializer);
 DeclInfoPtr createDeclInfoSCALAR(YScalarType tokCode);
@@ -440,4 +441,5 @@ DeclInfoPtr combine2DeclInfo(DeclInfoPtr d1, DeclInfoPtr d2);
 DeclInfoPtr createQualifierDeclInfo(TypeQualifier qualifier);
 DeclInfoPtr createFunctionSpecifirDeclInfo(TypeQualifier qualifier);
 DeclInfoPtr createAlignmentSpecifierDeclInfo(TypeQualifier qualifier, TokenPtr tok1, TokenPtr tok2, CTreePtr tok3, TokenPtr tok4);
-
+DeclInfoPtr addDeclInfoDclrList(DeclInfoPtr decl, SLListPtr list);
+DclrPtr createStructDeclarator(DclrPtr decl, CTreePtr expression);

@@ -84,6 +84,11 @@ SLListPtr addDclrList(SLListPtr list, DclrPtr elem)
 	return NULL;
 }
 
+SLListPtr addDclrInfoList(SLListPtr list, DeclInfoPtr elem)
+{
+	return NULL;
+}
+
 DeclInfoPtr createStgClassDeclInfo(StgClass stgClass, TokenPtr pos)
 {
 	return NULL;
@@ -115,6 +120,11 @@ DeclInfoPtr createFunctionSpecifirDeclInfo(TypeQualifier qualifier)
 }
 
 DeclInfoPtr createAlignmentSpecifierDeclInfo(TypeQualifier qualifier, TokenPtr tok1, TokenPtr tok2, CTreePtr tok3, TokenPtr tok4)
+{
+	return NULL;
+}
+
+DclrPtr createStructDeclarator(DclrPtr decl, CTreePtr expression)
 {
 	return NULL;
 }
