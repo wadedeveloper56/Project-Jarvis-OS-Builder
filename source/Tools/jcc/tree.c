@@ -134,4 +134,13 @@ DeclEnumPtr createDeclEnum(TokenPtr enumPos, TokenPtr identifier, SLListPtr list
 	return NULL;
 }
 
+SLListPtr addEnumElemList(SLListPtr list, EnumElemPtr element)
+{
+	return NULL;
+}
+
+EnumElemPtr createEnumElem(TokenPtr name, TokenPtr equal, CTreePtr expression)
+{
+	return NULL;
+}	
 

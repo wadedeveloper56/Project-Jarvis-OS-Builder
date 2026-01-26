@@ -468,13 +468,13 @@ enum_specifier
 	;
 
 enumerator_list
-	: enumerator
-	| enumerator_list Y_COMMA enumerator
+	: enumerator                          { $$ = createDclrList($1); }
+	| enumerator_list Y_COMMA enumerator  { $$ = addEnumElemList($1, $2); }
 	;
 
 enumerator	/* identifiers must be flagged as ENUMERATION_CONSTANT */
-	: enumeration_constant Y_EQUAL constant_expression
-	| enumeration_constant
+	: enumeration_constant Y_EQUAL constant_expression  { $$ = createEnumElem($1, $2, $3); }
+	| enumeration_constant                              { $$ = createEnumElem($1, NULL, NULL); }
 	;
 
 atomic_type_specifier
