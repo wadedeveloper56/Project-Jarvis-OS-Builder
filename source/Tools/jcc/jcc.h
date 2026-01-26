@@ -443,3 +443,4 @@ DeclInfoPtr createFunctionSpecifirDeclInfo(TypeQualifier qualifier);
 DeclInfoPtr createAlignmentSpecifierDeclInfo(TypeQualifier qualifier, TokenPtr tok1, TokenPtr tok2, CTreePtr tok3, TokenPtr tok4);
 DeclInfoPtr addDeclInfoDclrList(DeclInfoPtr decl, SLListPtr list);
 DclrPtr createStructDeclarator(DclrPtr decl, CTreePtr expression);
+DeclEnumPtr createDeclEnum(TokenPtr enumPos, TokenPtr identifier, SLListPtr list);

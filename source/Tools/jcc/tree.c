@@ -129,3 +129,9 @@ DclrPtr createStructDeclarator(DclrPtr decl, CTreePtr expression)
 	return NULL;
 }
 
+DeclEnumPtr createDeclEnum(TokenPtr enumPos, TokenPtr identifier, SLListPtr list)
+{
+	return NULL;
+}
+
+

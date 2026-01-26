@@ -181,6 +181,9 @@ int yylex();
 %type<dclr> struct-declarator
 %type<dinfo> specifier_qualifier_list
 %type<dclr> declarator
+%type<declEnum> enum_specifier
+%type<enumList> enumerator_list
+%type<enumElem> enumerator
 
 //%glr-parser
 
@@ -457,10 +460,10 @@ struct_declarator
 	;
 
 enum_specifier
-	: Y_ENUM Y_LEFT_BRACE enumerator_list Y_RIGHT_BRACE
-	| Y_ENUM Y_LEFT_BRACE enumerator_list Y_COMMA Y_RIGHT_BRACE
-	| Y_ENUM IDENTIFIER Y_LEFT_BRACE enumerator_list Y_RIGHT_BRACE
-	| Y_ENUM IDENTIFIER Y_LEFT_BRACE enumerator_list Y_COMMA Y_RIGHT_BRACE
+	: Y_ENUM Y_LEFT_BRACE enumerator_list Y_RIGHT_BRACE                    { $$ = createDeclEnum($1, NULL, $3); zapToken($2); zapToken($4); }
+	| Y_ENUM Y_LEFT_BRACE enumerator_list Y_COMMA Y_RIGHT_BRACE            { $$ = createDeclEnum($1, NULL, $3); zapToken($2); zapToken($4); zapToken($5); }
+	| Y_ENUM IDENTIFIER Y_LEFT_BRACE enumerator_list Y_RIGHT_BRACE         { $$ = createDeclEnum($1, $2, $4); zapToken($3); zapToken($5); zapToken($6); }
+	| Y_ENUM IDENTIFIER Y_LEFT_BRACE enumerator_list Y_COMMA Y_RIGHT_BRACE { $$ = createDeclEnum($1, $2, $4); zapToken($3); zapToken($5); zapToken($6); }
 	| Y_ENUM IDENTIFIER
 	;
 
