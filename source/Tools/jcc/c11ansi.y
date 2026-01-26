@@ -172,7 +172,6 @@ int yylex();
 %type<dinfo> declaration_specifiers
 %type<dinfo> storage_class_specifier 
 %type<dinfo> type_specifier
-
 %type<dinfo> type_qualifier
 %type<dinfo> function_specifier
 %type<dinfo> alignment_specifier
@@ -481,13 +480,13 @@ type_qualifier
 	;
 
 function_specifier
-	: Y_INLINE
-	| Y_NORETURN
+	: Y_INLINE     { $$ = createFunctionSpecifirDeclInfo(STY_INLINE);  zapToken($1); }
+	| Y_NORETURN   { $$ = createFunctionSpecifirDeclInfo(STY_NORETURN);  zapToken($1); }
 	;
 
 alignment_specifier
-	: Y_ALIGNAS Y_LEFT_PAREN type_name Y_RIGHT_PAREN
-	| Y_ALIGNAS Y_LEFT_PAREN constant_expression Y_RIGHT_PAREN
+	: Y_ALIGNAS Y_LEFT_PAREN type_name Y_RIGHT_PAREN           { $$ = createAlignmentSpecifierDeclInfo(STY_ALIGNAS,$1, $2, $3, $4);  }
+	| Y_ALIGNAS Y_LEFT_PAREN constant_expression Y_RIGHT_PAREN { $$ = createAlignmentSpecifierDeclInfo(STY_ALIGNAS,$1, $2, $3, $4);  }
 	;
 
 declarator

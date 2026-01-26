@@ -109,3 +109,13 @@ DeclInfoPtr createQualifierDeclInfo(TypeQualifier qualifier)
 	return NULL;
 }
 
+DeclInfoPtr createFunctionSpecifirDeclInfo(TypeQualifier qualifier)
+{
+	return NULL;
+}
+
+DeclInfoPtr createAlignmentSpecifierDeclInfo(TypeQualifier qualifier, TokenPtr tok1, TokenPtr tok2, CTreePtr tok3, TokenPtr tok4)
+{
+	return NULL;
+}
+

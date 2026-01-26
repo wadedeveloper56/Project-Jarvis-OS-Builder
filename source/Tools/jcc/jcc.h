@@ -216,6 +216,9 @@ typedef enum
 	STY_VOLATILE = 0x02,
 	STY_RESTRICT = 0x03,
 	STY_ATOMIC = 0x04,
+	STY_INLINE = 0x05,
+	STY_NORETURN = 0x06,
+	STY_ALIGNAS = 0x07,
 } TypeQualifier;
 
 typedef enum
@@ -435,4 +438,6 @@ DclrPtr addDclrInitializer(DclrPtr dclr, TokenPtr equalTok, CTreePtr initializer
 DeclInfoPtr createDeclInfoSCALAR(YScalarType tokCode);
 DeclInfoPtr combine2DeclInfo(DeclInfoPtr d1, DeclInfoPtr d2);
 DeclInfoPtr createQualifierDeclInfo(TypeQualifier qualifier);
+DeclInfoPtr createFunctionSpecifirDeclInfo(TypeQualifier qualifier);
+DeclInfoPtr createAlignmentSpecifierDeclInfo(TypeQualifier qualifier, TokenPtr tok1, TokenPtr tok2, CTreePtr tok3, TokenPtr tok4);
 
