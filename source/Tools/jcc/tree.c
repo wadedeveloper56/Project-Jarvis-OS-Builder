@@ -2,7 +2,11 @@
 
 CTreePtr createCTreeRoot(LabelPtr label)
 {
-	return NULL;
+	CTreePtr newTree = AllocateMemory(sizeof(CTree));
+	newTree->label = label;
+	newTree->child1 = NULL;
+	newTree->child2 = NULL;
+	return newTree;
 }
 
 CTreePtr createNULLCTree(void)
@@ -12,150 +16,98 @@ CTreePtr createNULLCTree(void)
 
 CTreePtr createCTree1(LabelPtr label, CTreePtr child)
 {
-	return NULL;
+	CTreePtr newTree = createCTreeRoot(label);
+	newTree->child1 = child;
+	return newTree;
 }
 
 CTreePtr createCTree2(LabelPtr label, CTreePtr child1, CTreePtr child2)
 {
-	return NULL;
+	CTreePtr newTree = createCTreeRoot(label);
+	newTree->child1 = child1;
+	newTree->child2 = child2;
+	return newTree;
 }
 
 static LabelPtr _createLabel(LabelType type, void* data) 
 {
-	return NULL;
+	LabelPtr newLabel = AllocateMemory(sizeof(Label));
+	newLabel->type = type;
+	newLabel->repr.data = data;
+	return newLabel;
 }
 
 LabelPtr createTokenLabel(TokenPtr token) 
 {
-	return NULL;
+	return _createLabel(LABT_TOKEN, token);
 }
 
 LabelPtr createConstr0Label(LabelConstrType type) 
 {
-	return NULL;
+	LabelPtr newLabel = _createLabel(LABT_CONSTRUCT_ROOT, NULL);
+	newLabel->repr.constr.type = type;
+	newLabel->repr.constr.numTokens = 0;
+	return newLabel;
 }
 
 LabelPtr createConstr1Label(LabelConstrType type, TokenPtr t0) 
 {
-	return NULL;
+	LabelPtr newLabel = _createLabel(LABT_CONSTRUCT_ROOT, NULL);
+	newLabel->repr.constr.type = type;
+	newLabel->repr.constr.numTokens = 1;
+	newLabel->repr.constr.tokens = AllocateMemory(sizeof(Token) * 1);
+	newLabel->repr.constr.tokens[0] = t0;
+	return newLabel;
+
 }
 
 LabelPtr createConstr2Label(LabelConstrType type, TokenPtr t0, TokenPtr t1) 
 {
-	return NULL;
+	LabelPtr newLabel = _createLabel(LABT_CONSTRUCT_ROOT, NULL);
+	newLabel->repr.constr.type = type;
+	newLabel->repr.constr.numTokens = 2;
+	newLabel->repr.constr.tokens = AllocateMemory(sizeof(Token) * 2);
+	newLabel->repr.constr.tokens[0] = t0;
+	newLabel->repr.constr.tokens[1] = t1;
+	return newLabel;
 }
 
 LabelPtr createConstr3Label(LabelConstrType type, TokenPtr t0, TokenPtr t1,TokenPtr t2) 
 {
-	return NULL;
+	LabelPtr newLabel = _createLabel(LABT_CONSTRUCT_ROOT, NULL);
+	newLabel->repr.constr.type = type;
+	newLabel->repr.constr.numTokens = 3;
+	newLabel->repr.constr.tokens = AllocateMemory(sizeof(Token) * 3);
+	newLabel->repr.constr.tokens[0] = t0;
+	newLabel->repr.constr.tokens[1] = t1;
+	newLabel->repr.constr.tokens[2] = t2;
+	return newLabel;
 }
 
 LabelPtr createConstr4Label(LabelConstrType type, TokenPtr t0, TokenPtr t1,TokenPtr t2, TokenPtr t3) 
 {
-	return NULL;
+	LabelPtr newLabel = _createLabel(LABT_CONSTRUCT_ROOT, NULL);
+	newLabel->repr.constr.type = type;
+	newLabel->repr.constr.numTokens = 4;
+	newLabel->repr.constr.tokens = AllocateMemory(sizeof(Token) * 4);
+	newLabel->repr.constr.tokens[0] = t0;
+	newLabel->repr.constr.tokens[1] = t1;
+	newLabel->repr.constr.tokens[2] = t2;
+	newLabel->repr.constr.tokens[3] = t3;
+	return newLabel;
 }
 
 LabelPtr createConstr5Label(LabelConstrType type, TokenPtr t0, TokenPtr t1, TokenPtr t2, TokenPtr t3, TokenPtr t4)
 {
-	return NULL;
+	LabelPtr newLabel = _createLabel(LABT_CONSTRUCT_ROOT, NULL);
+	newLabel->repr.constr.type = type;
+	newLabel->repr.constr.numTokens = 5;
+	newLabel->repr.constr.tokens = AllocateMemory(sizeof(Token) * 5);
+	newLabel->repr.constr.tokens[0] = t0;
+	newLabel->repr.constr.tokens[1] = t1;
+	newLabel->repr.constr.tokens[2] = t2;
+	newLabel->repr.constr.tokens[3] = t3;
+	newLabel->repr.constr.tokens[4] = t4;
+	return newLabel;
 }
 
-//LinkedListPtr transformDecl(DeclInfoPtr decl)
-//{
-//	return NULL;
-//}
-//
-//DeclInfoPtr addDeclInfoDclrList(DeclInfoPtr decl, LinkedListPtr list)
-//{
-//	return NULL;
-//}
-//
-//void zapToken(void* elem)
-//{
-//}
-//
-//LinkedListPtr createDclrList(DclrPtr elem)
-//{
-//	return NULL;
-//}
-//
-//LinkedListPtr addDclrList(LinkedListPtr list, DclrPtr elem)
-//{
-//	return NULL;
-//}
-//
-//LinkedListPtr addDclrInfoList(LinkedListPtr list, DeclInfoPtr elem)
-//{
-//	return NULL;
-//}
-//
-//DeclInfoPtr createStgClassDeclInfo(StgClass stgClass, TokenPtr pos)
-//{
-//	return NULL;
-//}
-//
-//DclrPtr addDclrInitializer(DclrPtr dclr, TokenPtr equalTok, CTreePtr initializer)
-//{
-//	return NULL;
-//}
-//
-//DeclInfoPtr createDeclInfoSCALAR(YScalarType tokCode)
-//{
-//	return NULL;
-//}
-//
-//DeclInfoPtr combine2DeclInfo(DeclInfoPtr d1, DeclInfoPtr d2)
-//{
-//	return NULL;
-//}
-//
-//DeclInfoPtr createQualifierDeclInfo(TypeQualifier qualifier)
-//{
-//	return NULL;
-//}
-//
-//DeclInfoPtr createFunctionSpecifirDeclInfo(TypeQualifier qualifier)
-//{
-//	return NULL;
-//}
-//
-//DeclInfoPtr createAlignmentSpecifierDeclInfo(TypeQualifier qualifier, TokenPtr tok1, TokenPtr tok2, CTreePtr tok3, TokenPtr tok4)
-//{
-//	return NULL;
-//}
-//
-//DclrPtr createStructDeclarator(DclrPtr decl, CTreePtr expression)
-//{
-//	return NULL;
-//}
-//
-//DeclEnumPtr createDeclEnum(TokenPtr enumPos, TokenPtr identifier, LinkedListPtr list)
-//{
-//	return NULL;
-//}
-//
-//LinkedListPtr createEnumElemList(EnumElemPtr element)
-//{
-//	return NULL;
-//}	
-//
-//LinkedListPtr addEnumElemList(LinkedListPtr list, EnumElemPtr element)
-//{
-//	return NULL;
-//}
-//
-//EnumElemPtr createEnumElem(TokenPtr name, TokenPtr equal, CTreePtr expression)
-//{
-//	return NULL;
-//}	
-//
-//LinkedListPtr createDclrInfoList(DeclInfoPtr elem)
-//{
-//	return NULL;
-//}
-//
-//DeclInfoPtr createStructDeclaration(DeclInfoPtr info, LinkedListPtr list)
-//{
-//	return NULL;
-//}
-//

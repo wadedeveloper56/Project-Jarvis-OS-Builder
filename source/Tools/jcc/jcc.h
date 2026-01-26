@@ -75,16 +75,6 @@ typedef enum
 	LABCT_MAX
 } LabelConstrType;
 
-//typedef struct {
-//	char* fileName;
-//	int8_t fileLevel;
-//	int16_t lineNum;
-//	int16_t  colNum;
-//	uint8_t  linesBefore;
-//	uint8_t  spacesBefore;
-//	long orderLineNum;
-//} TokPos, * TokPosPtr;
-//
 typedef enum
 {
 	RADT_DECIMAL,
@@ -107,11 +97,6 @@ typedef enum
 	CONSTT_MAX
 } ConstType;
 
-//typedef enum {
-//	TT_PREPROCESSOR,
-//	TT_OTHER
-//} token_type;
-//
 typedef enum
 {
 	YC_INT_CONST,
@@ -119,7 +104,6 @@ typedef enum
 	YC_STRING_CONST,
 	YC_ID,
 	YC_KEYWORD
-	// ... other token codes as needed
 } TokenCode;
 
 typedef struct
@@ -197,209 +181,12 @@ typedef struct _CTree
 	struct _CTree* child2;  /* Right child */
 } CTree, * CTreePtr, ** CTreePtrPtr;
 
-//typedef enum
-//{
-//	STG_NULL = 0,
-//	STG_TYPEDEF,
-//	STG_REGISTER,
-//	STG_AUTO,
-//	STG_EXTERN,
-//	STG_STATIC,
-//	STG_THREAD_LOCAL,
-//	STG_MAX
-//} StgClass;
-//
-//typedef enum
-//{
-//	STY_NULL = 0x00,
-//	STY_CONST = 0x01,
-//	STY_VOLATILE = 0x02,
-//	STY_RESTRICT = 0x03,
-//	STY_ATOMIC = 0x04,
-//	STY_INLINE = 0x05,
-//	STY_NORETURN = 0x06,
-//	STY_ALIGNAS = 0x07,
-//} TypeQualifier;
-//
-//typedef enum
-//{
-//	STM_NULL = 0x00000,
-//	STM_CHAR = 0x00001,
-//	STM_INT = 0x00002,
-//	STM_LONG = 0x00004,
-//	STM_LONG_LONG = 0x00008,
-//	STM_FLOAT = 0x00010,
-//	STM_DOUBLE = 0x00020,
-//	STM_LONG_DOUBLE = 0x00040,
-//	STM_SIGNED = 0x00080,
-//	STM_UNSIGNED = 0x00100,
-//	STM_SHORT = 0x00200,
-//	STM_VOID = 0x00400,
-//	STM_BOOL = 0x00800,
-//	STM_DOT_DOT_DOT = 0x01000,      // Used exclusively for function args
-//	STM_COMPLEX = 0x002000,
-//    STM_IMAGINARY = 0x04000,
-//    STM_ATOMIC = 0x08000,
-//    STM_STRUCT = 0x10000,
-//    STM_ENUM = 0x20000,
-//    STM_TYPEDEF = 0x40000
-//
-//} YScalarType;
-//
-//typedef enum
-//{
-//	DIT_NULL = 0,
-//	DIT_SCALAR,                 // Things like int, uint and alike
-//	DIT_STRUCT_OR_UNION,
-//	DIT_ENUM
-//} DeclInfoType;
-//
-//// Scalar types
-//typedef enum
-//{
-//	SCL_NULL = 0x00,
-//	SCL_CHAR,
-//	SCL_SCHAR,
-//	SCL_UCHAR,
-//	SCL_WCHAR,            // extension: long char
-//	SCL_SSHORT,
-//	SCL_USHORT,
-//	SCL_SINT,
-//	SCL_UINT,
-//	SCL_SLONG,
-//	SCL_ULONG,
-//	SCL_FLOAT,
-//	SCL_DOUBLE,
-//	SCL_LDOUBLE,        // long double
-//	SCL_VOID,
-//	SCL_DOT_DOT_DOT,
-//	SCL_MAX
-//} ScalarType;
-//
-//typedef enum
-//{
-//	DSIT_STRUCT,
-//	DSIT_UNION
-//} DeclStructInfoType;
-//
-//typedef struct _DeclStructBody
-//{
-//	LinkedListPtr declList;
-//}DeclStructBody, * DeclStructBodyPtr, ** DeclStructBodyPtrPtr;
-//
-//typedef struct _DeclStructInfo
-//{
-//	DeclStructInfoType type;
-//	TokenPtr name;                // Name (optional) of the structure
-//	DeclStructBodyPtr body;       // Body (optional) of the structure
-//}DeclStructInfo, * DeclStructInfoPtr, ** DeclStructInfoPtrPtr;
-//
-//typedef struct DeclEnum
-//{
-//	LinkedListPtr list;             // optional
-//}DeclEnum, * DeclEnumPtr, ** DeclEnumPtrPtr;
-
-//typedef enum
-//{
-//	MT_NULL = 0,
-//	MT_NEAR,
-//	MT_FAR,
-//	MT_FAR16,
-//	MT_HUGE,
-//	MT_MAX
-//} MemType;
-//
-//typedef struct _DclrPtr
-//{
-//	MemType memType;
-//	TypeQualifier qualifiers;
-//}_DclrPtr, * pDclrPtr;
-//
-//typedef struct _Dclr
-//{
-//	MemType memType;
-//	TokenPtr pragmaMod;
-//	pDclrPtr ptr;
-//	TokenPtr id;
-//	LinkedListPtr arrList;
-//	TokenPtr argBegin;  // '('
-//	LinkedListPtr args;
-//	TokenPtr argEnd;  // ')'
-//	TokenPtr equalTok;
-//	CTreePtr initializer;
-//}Dclr, * DclrPtr, ** DclrPtrPtr;
-
-//typedef struct _DeclInfo
-//{
-//	TokenPtr begPunct;  // Punctuation mark at the beginning of a declarator
-//	StgClass storage;
-//	TypeQualifier qualifier;
-//	DeclInfoType type : 8;
-//	union
-//	{
-//		struct
-//		{        // DIT_SCALAR
-//			YScalarType scalarCombo;
-//			ScalarType scalar;
-//		} scalar;
-//		DeclEnumPtr e;                    // DIT_ENUM
-//		DeclStructInfoPtr s;              // DIT_STRUCT_OR_UNION
-//	} repr;
-//	LinkedListPtr dclrList;  // List of declarators (optional)
-//	DclrPtr dclr;  // Declarator that may come from defined type
-//}DeclInfo, * DeclInfoPtr, ** DeclInfoPtrPtr;
-
-//typedef struct _EnumElem
-//{
-//	char   begPunctExists;  // comma exists before this element
-//	TokenPtr name;
-//	TokenPtr equal;
-//	CTreePtr expression;
-//}EnumElem, * EnumElemPtr, ** EnumElemPtrPtr;
-//
-//typedef struct _ArrElem
-//{
-//	TokenPtr lBracket;
-//	CTreePtr constExpr;
-//	TokenPtr rBracket;
-//}ArrElem, * ArrElemPtr, ** ArrElemPtrPtr;
-
-//typedef enum
-//{
-//	DECL_INFO,
-//	DECL_TREE_ELEM
-//} DeclTreeElemType;
-//
-//typedef struct _DeclTreeElem
-//{
-//	DeclTreeElemType type;
-//	union
-//	{
-//		DeclInfoPtr decl;
-//		LinkedListPtr list;
-//	} u;
-//}DeclTreeElem, *DeclTreeElemPtr, **DeclTreeElemPtrPtr;
-
 union ParseUnion
 {
 	CTreePtr expression;
 	LabelPtr label;
 	TokenPtr token;
 	LinkedListPtr list;
-	//DeclInfoPtr dinfo;
-	//DeclStructInfoPtr dsinfo;
-	//DeclStructBodyPtr dsbody;
-	//DeclEnumPtr declEnum;
-	//DclrPtr dclr;
-	//pDclrPtr dclrPtr;
-	//LinkedListPtr enumList;
-	//LinkedListPtr declList;
-	//LinkedListPtr dclrList;
-	//EnumElemPtr enumElem;
-	//ArrElemPtr arrElem;
-	//DeclTreeElemPtr declTreeElem;
-	//int flag;
-	//void* data;
 };
 
 void printHeader(void);
