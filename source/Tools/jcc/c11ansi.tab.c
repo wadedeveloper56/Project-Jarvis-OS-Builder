@@ -2948,188 +2948,194 @@ yyreduce:
 #line 2949 "c11ansi.tab.c"
     break;
 
+  case 149: /* enum_specifier: Y_ENUM "identifier"  */
+#line 471 "c11ansi.y"
+                                                                               { (yyval.declEnum) = createDeclEnum((yyvsp[-1].token), NULL, NULL); zapToken((yyvsp[0].token)); }
+#line 2955 "c11ansi.tab.c"
+    break;
+
   case 150: /* enumerator_list: enumerator  */
 #line 475 "c11ansi.y"
                                               { (yyval.enumList) = createEnumElemList((yyvsp[0].enumElem)); }
-#line 2955 "c11ansi.tab.c"
+#line 2961 "c11ansi.tab.c"
     break;
 
   case 151: /* enumerator_list: enumerator_list Y_COMMA enumerator  */
 #line 476 "c11ansi.y"
                                               { (yyval.enumList) = addEnumElemList((yyvsp[-2].enumList), (yyvsp[0].enumElem)); zapToken((yyvsp[-1].token)); }
-#line 2961 "c11ansi.tab.c"
+#line 2967 "c11ansi.tab.c"
     break;
 
   case 152: /* enumerator: enumeration_constant Y_EQUAL constant_expression  */
 #line 480 "c11ansi.y"
                                                             { (yyval.enumElem) = createEnumElem((yyvsp[-2].token), (yyvsp[-1].token), (yyvsp[0].tree)); }
-#line 2967 "c11ansi.tab.c"
+#line 2973 "c11ansi.tab.c"
     break;
 
   case 153: /* enumerator: enumeration_constant  */
 #line 481 "c11ansi.y"
                                                             { (yyval.enumElem) = createEnumElem((yyvsp[0].token), NULL, NULL); }
-#line 2973 "c11ansi.tab.c"
+#line 2979 "c11ansi.tab.c"
     break;
 
   case 155: /* type_qualifier: Y_CONST  */
 #line 489 "c11ansi.y"
                       { (yyval.dinfo) = createQualifierDeclInfo(STY_CONST);  zapToken((yyvsp[0].token)); }
-#line 2979 "c11ansi.tab.c"
+#line 2985 "c11ansi.tab.c"
     break;
 
   case 156: /* type_qualifier: Y_RESTRICT  */
 #line 490 "c11ansi.y"
                       { (yyval.dinfo) = createQualifierDeclInfo(STY_RESTRICT);  zapToken((yyvsp[0].token)); }
-#line 2985 "c11ansi.tab.c"
+#line 2991 "c11ansi.tab.c"
     break;
 
   case 157: /* type_qualifier: Y_VOLATILE  */
 #line 491 "c11ansi.y"
                       { (yyval.dinfo) = createQualifierDeclInfo(STY_VOLATILE);  zapToken((yyvsp[0].token)); }
-#line 2991 "c11ansi.tab.c"
+#line 2997 "c11ansi.tab.c"
     break;
 
   case 158: /* type_qualifier: Y_ATOMIC  */
 #line 492 "c11ansi.y"
                       { (yyval.dinfo) = createQualifierDeclInfo(STY_ATOMIC);  zapToken((yyvsp[0].token)); }
-#line 2997 "c11ansi.tab.c"
+#line 3003 "c11ansi.tab.c"
     break;
 
   case 159: /* function_specifier: Y_INLINE  */
 #line 496 "c11ansi.y"
                        { (yyval.dinfo) = createFunctionSpecifirDeclInfo(STY_INLINE);  zapToken((yyvsp[0].token)); }
-#line 3003 "c11ansi.tab.c"
+#line 3009 "c11ansi.tab.c"
     break;
 
   case 160: /* function_specifier: Y_NORETURN  */
 #line 497 "c11ansi.y"
                        { (yyval.dinfo) = createFunctionSpecifirDeclInfo(STY_NORETURN);  zapToken((yyvsp[0].token)); }
-#line 3009 "c11ansi.tab.c"
+#line 3015 "c11ansi.tab.c"
     break;
 
   case 161: /* alignment_specifier: Y_ALIGNAS Y_LEFT_PAREN type_name Y_RIGHT_PAREN  */
 #line 501 "c11ansi.y"
                                                                    { (yyval.dinfo) = createAlignmentSpecifierDeclInfo(STY_ALIGNAS,(yyvsp[-3].token), (yyvsp[-2].token), (yyvsp[-1].tree), (yyvsp[0].token));  }
-#line 3015 "c11ansi.tab.c"
+#line 3021 "c11ansi.tab.c"
     break;
 
   case 162: /* alignment_specifier: Y_ALIGNAS Y_LEFT_PAREN constant_expression Y_RIGHT_PAREN  */
 #line 502 "c11ansi.y"
                                                                    { (yyval.dinfo) = createAlignmentSpecifierDeclInfo(STY_ALIGNAS,(yyvsp[-3].token), (yyvsp[-2].token), (yyvsp[-1].tree), (yyvsp[0].token));  }
-#line 3021 "c11ansi.tab.c"
+#line 3027 "c11ansi.tab.c"
     break;
 
   case 220: /* initializer: Y_LEFT_BRACE initializer_list Y_RIGHT_BRACE  */
 #line 597 "c11ansi.y"
                                                               { (yyval.tree) = createCTree1(createConstr2Label(LABCT_EXPR_LIST, (yyvsp[-2].token), (yyvsp[0].token)), (yyvsp[-1].tree)); }
-#line 3027 "c11ansi.tab.c"
+#line 3033 "c11ansi.tab.c"
     break;
 
   case 221: /* initializer: Y_LEFT_BRACE initializer_list Y_COMMA Y_RIGHT_BRACE  */
 #line 598 "c11ansi.y"
                                                               { (yyval.tree) = createCTree1(createConstr3Label(LABCT_EXPR_LIST, (yyvsp[-3].token), (yyvsp[-1].token), (yyvsp[0].token)), (yyvsp[-2].tree)); }
-#line 3033 "c11ansi.tab.c"
+#line 3039 "c11ansi.tab.c"
     break;
 
   case 222: /* initializer: assignment_expression  */
 #line 599 "c11ansi.y"
                                                               { (yyval.tree) = (yyvsp[0].tree); }
-#line 3039 "c11ansi.tab.c"
+#line 3045 "c11ansi.tab.c"
     break;
 
   case 223: /* initializer_list: designation initializer  */
 #line 603 "c11ansi.y"
                                                             { (yyval.tree) = createCTree2(createConstr0Label(LABCT_EXPR_LIST), (yyvsp[-1].tree), (yyvsp[0].tree)); }
-#line 3045 "c11ansi.tab.c"
+#line 3051 "c11ansi.tab.c"
     break;
 
   case 224: /* initializer_list: initializer  */
 #line 604 "c11ansi.y"
                                                             { (yyval.tree) = createCTree1(createConstr0Label(LABCT_EXPR_LIST), (yyvsp[0].tree)); }
-#line 3051 "c11ansi.tab.c"
+#line 3057 "c11ansi.tab.c"
     break;
 
   case 225: /* initializer_list: initializer_list Y_COMMA designation initializer  */
 #line 605 "c11ansi.y"
                                                             { (yyval.tree) = createCTree2(createConstr1Label(LABCT_EXPR_LIST, (yyvsp[-2].token)), (yyvsp[-3].tree), createCTree1(createConstr0Label(LABCT_EXPR_LIST), (yyvsp[-1].tree))); }
-#line 3057 "c11ansi.tab.c"
+#line 3063 "c11ansi.tab.c"
     break;
 
   case 226: /* initializer_list: initializer_list Y_COMMA initializer  */
 #line 606 "c11ansi.y"
                                                             { (yyval.tree) = createCTree2(createConstr1Label(LABCT_EXPR_LIST, (yyvsp[-1].token)), (yyvsp[-2].tree), (yyvsp[0].tree)); }
-#line 3063 "c11ansi.tab.c"
+#line 3069 "c11ansi.tab.c"
     break;
 
   case 259: /* jump_statement: Y_GOTO "identifier" Y_SEMICOLON  */
 #line 678 "c11ansi.y"
                                            { printf("jump_statement -> Y_GOTO IDENTIFIER Y_SEMICOLON\n"); }
-#line 3069 "c11ansi.tab.c"
+#line 3075 "c11ansi.tab.c"
     break;
 
   case 260: /* jump_statement: Y_CONTINUE Y_SEMICOLON  */
 #line 679 "c11ansi.y"
                                            { printf("jump_statement -> Y_CONTINUE Y_SEMICOLON\n"); }
-#line 3075 "c11ansi.tab.c"
+#line 3081 "c11ansi.tab.c"
     break;
 
   case 261: /* jump_statement: Y_BREAK Y_SEMICOLON  */
 #line 680 "c11ansi.y"
                                            { printf("jump_statement -> Y_BREAK Y_SEMICOLON\n"); }
-#line 3081 "c11ansi.tab.c"
+#line 3087 "c11ansi.tab.c"
     break;
 
   case 262: /* jump_statement: Y_RETURN Y_SEMICOLON  */
 #line 681 "c11ansi.y"
                                            { printf("jump_statement -> Y_RETURN Y_SEMICOLON\n"); }
-#line 3087 "c11ansi.tab.c"
+#line 3093 "c11ansi.tab.c"
     break;
 
   case 263: /* jump_statement: Y_RETURN expression Y_SEMICOLON  */
 #line 682 "c11ansi.y"
                                            { printf("jump_statement -> Y_RETURN expression Y_SEMICOLON\n"); }
-#line 3093 "c11ansi.tab.c"
+#line 3099 "c11ansi.tab.c"
     break;
 
   case 264: /* translation_unit: external_declaration  */
 #line 686 "c11ansi.y"
                                                  { printf("translation_unit -> external_declaration\n\n"); }
-#line 3099 "c11ansi.tab.c"
+#line 3105 "c11ansi.tab.c"
     break;
 
   case 265: /* translation_unit: translation_unit external_declaration  */
 #line 687 "c11ansi.y"
                                                  { printf("translation_unit -> translation_unit external_declaration\n\n"); }
-#line 3105 "c11ansi.tab.c"
+#line 3111 "c11ansi.tab.c"
     break;
 
   case 266: /* external_declaration: function_definition  */
 #line 691 "c11ansi.y"
                                 { printf("external_declaration -> function_definition\n"); }
-#line 3111 "c11ansi.tab.c"
+#line 3117 "c11ansi.tab.c"
     break;
 
   case 267: /* external_declaration: declaration  */
 #line 692 "c11ansi.y"
                                 { printf("external_declaration -> declaration\n"); }
-#line 3117 "c11ansi.tab.c"
+#line 3123 "c11ansi.tab.c"
     break;
 
   case 268: /* function_definition: declaration_specifiers declarator declaration_list compound_statement  */
 #line 696 "c11ansi.y"
                                                                                    { printf("function_definition -> declaration_specifiers declarator declaration_list compound_statement\n"); }
-#line 3123 "c11ansi.tab.c"
+#line 3129 "c11ansi.tab.c"
     break;
 
   case 269: /* function_definition: declaration_specifiers declarator compound_statement  */
 #line 697 "c11ansi.y"
                                                                                    { printf("function_definition -> declaration_specifiers declarator compound_statement\n"); }
-#line 3129 "c11ansi.tab.c"
+#line 3135 "c11ansi.tab.c"
     break;
 
 
-#line 3133 "c11ansi.tab.c"
+#line 3139 "c11ansi.tab.c"
 
       default: break;
     }
