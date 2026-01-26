@@ -140,6 +140,7 @@ int yylex();
 %type<token> constant
 %type<token> enumeration_constant
 %type<token> string
+%type<token> type_name
 %type<expression> primary_expression	
 %type<expression> expression	
 %type<expression> postfix_expression
@@ -212,8 +213,8 @@ postfix_expression
 	| postfix_expression Y_ARROW IDENTIFIER                                    { $$ = createCTree2(createConstr1Label(LABCT_ARROW, $2), $1, createCTreeRoot(createTokenLabel($3))); }
 	| postfix_expression Y_PLUS_PLUS                                           { $$ = createCTree1(createConstr1Label(LABCT_PLUS_PLUS, $2), $1); }
 	| postfix_expression Y_MINUS_MINUS                                         { $$ = createCTree1(createConstr1Label(LABCT_MINUS_MINUS, $2), $1); }
-	| Y_LEFT_PAREN type_name Y_RIGHT_PAREN  Y_LEFT_BRACE initializer_list Y_RIGHT_BRACE  { $$ = NULL; }
-	| Y_LEFT_PAREN type_name Y_RIGHT_PAREN  Y_LEFT_BRACE initializer_list Y_COMMA Y_RIGHT_BRACE  { $$ = NULL; }
+	| Y_LEFT_PAREN type_name Y_RIGHT_PAREN  Y_LEFT_BRACE initializer_list Y_RIGHT_BRACE  { $$ = createCTree1(createConstr5Label(LABCT_INIT, $1,$2,$3,$4,$6), $5); }
+	| Y_LEFT_PAREN type_name Y_RIGHT_PAREN  Y_LEFT_BRACE initializer_list Y_COMMA Y_RIGHT_BRACE { $$ = createCTree1(createConstr5Label(LABCT_INIT, $1,$2,$3,$4,$6), $5); }
 	;
 	
 argument_expression_list
@@ -227,8 +228,8 @@ unary_expression
 	| Y_MINUS_MINUS unary_expression                  { $$ = createCTree1(createConstr1Label(LABCT_MINUS_MINUS, $1), $2); }
 	| unary_operator cast_expression                  { $$ = createCTree1($1, $2); }
 	| Y_SIZEOF unary_expression                       { $$ = createCTree1(createConstr1Label(LABCT_SIZEOF_EXPR, $1), $2); }
-	| Y_SIZEOF Y_LEFT_PAREN type_name Y_RIGHT_PAREN   { $$ = NULL; }
-	| Y_ALIGNOF Y_LEFT_PAREN type_name Y_RIGHT_PAREN  { $$ = NULL; }
+	| Y_SIZEOF Y_LEFT_PAREN type_name Y_RIGHT_PAREN   { $$ = createCTreeRoot(createConstr3Label(LABCT_SIZEOF_TYPE, $1, $2, $4)); }
+	| Y_ALIGNOF Y_LEFT_PAREN type_name Y_RIGHT_PAREN  { $$ = createCTreeRoot(createConstr3Label(LABCT_ALIGNOF_TYPE, $1, $2, $4)); }
 	;
 
 unary_operator

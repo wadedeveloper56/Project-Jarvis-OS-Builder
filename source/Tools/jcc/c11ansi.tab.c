@@ -710,34 +710,34 @@ static const yytype_uint8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,   170,   170,   171,   172,   173,   174,   178,   179,   180,
-     184,   188,   189,   193,   197,   198,   202,   203,   207,   208,
-     209,   210,   211,   212,   213,   214,   215,   216,   220,   221,
-     225,   226,   227,   228,   229,   230,   231,   235,   236,   237,
-     238,   239,   240,   244,   245,   249,   250,   251,   252,   256,
-     257,   258,   262,   263,   264,   268,   269,   270,   271,   272,
-     276,   277,   278,   282,   283,   287,   288,   292,   293,   297,
-     298,   302,   303,   307,   308,   312,   313,   317,   318,   319,
-     320,   321,   322,   323,   324,   325,   326,   327,   331,   332,
-     336,   340,   341,   342,   346,   347,   348,   349,   350,   351,
-     352,   353,   354,   355,   359,   360,   364,   365,   369,   370,
-     371,   372,   373,   374,   378,   379,   380,   381,   382,   383,
-     384,   385,   386,   387,   388,   389,   390,   391,   392,   393,
-     394,   395,   399,   400,   401,   405,   406,   410,   411,   415,
-     416,   417,   421,   422,   423,   424,   428,   429,   433,   434,
-     435,   439,   440,   441,   442,   443,   447,   448,   452,   453,
-     457,   461,   462,   463,   464,   468,   469,   473,   474,   478,
-     479,   483,   484,   485,   486,   487,   488,   489,   490,   491,
-     492,   493,   494,   495,   496,   500,   501,   502,   503,   507,
-     508,   513,   514,   518,   519,   523,   524,   525,   529,   530,
-     534,   535,   539,   540,   541,   545,   546,   547,   548,   549,
-     550,   551,   552,   553,   554,   555,   556,   557,   558,   559,
-     560,   561,   562,   563,   564,   565,   569,   570,   571,   575,
-     576,   577,   578,   582,   586,   587,   591,   592,   596,   600,
-     601,   602,   603,   604,   605,   609,   610,   611,   615,   616,
-     620,   621,   625,   626,   630,   631,   635,   636,   637,   641,
-     642,   643,   644,   645,   646,   650,   651,   652,   653,   654,
-     658,   659,   663,   664,   668,   669,   673,   674
+       0,   171,   171,   172,   173,   174,   175,   179,   180,   181,
+     185,   189,   190,   194,   198,   199,   203,   204,   208,   209,
+     210,   211,   212,   213,   214,   215,   216,   217,   221,   222,
+     226,   227,   228,   229,   230,   231,   232,   236,   237,   238,
+     239,   240,   241,   245,   246,   250,   251,   252,   253,   257,
+     258,   259,   263,   264,   265,   269,   270,   271,   272,   273,
+     277,   278,   279,   283,   284,   288,   289,   293,   294,   298,
+     299,   303,   304,   308,   309,   313,   314,   318,   319,   320,
+     321,   322,   323,   324,   325,   326,   327,   328,   332,   333,
+     337,   341,   342,   343,   347,   348,   349,   350,   351,   352,
+     353,   354,   355,   356,   360,   361,   365,   366,   370,   371,
+     372,   373,   374,   375,   379,   380,   381,   382,   383,   384,
+     385,   386,   387,   388,   389,   390,   391,   392,   393,   394,
+     395,   396,   400,   401,   402,   406,   407,   411,   412,   416,
+     417,   418,   422,   423,   424,   425,   429,   430,   434,   435,
+     436,   440,   441,   442,   443,   444,   448,   449,   453,   454,
+     458,   462,   463,   464,   465,   469,   470,   474,   475,   479,
+     480,   484,   485,   486,   487,   488,   489,   490,   491,   492,
+     493,   494,   495,   496,   497,   501,   502,   503,   504,   508,
+     509,   514,   515,   519,   520,   524,   525,   526,   530,   531,
+     535,   536,   540,   541,   542,   546,   547,   548,   549,   550,
+     551,   552,   553,   554,   555,   556,   557,   558,   559,   560,
+     561,   562,   563,   564,   565,   566,   570,   571,   572,   576,
+     577,   578,   579,   583,   587,   588,   592,   593,   597,   601,
+     602,   603,   604,   605,   606,   610,   611,   612,   616,   617,
+     621,   622,   626,   627,   631,   632,   636,   637,   638,   642,
+     643,   644,   645,   646,   647,   651,   652,   653,   654,   655,
+     659,   660,   664,   665,   669,   670,   674,   675
 };
 #endif
 
@@ -2111,613 +2111,613 @@ yyreduce:
   switch (yyn)
     {
   case 2: /* primary_expression: "identifier"  */
-#line 170 "c11ansi.y"
+#line 171 "c11ansi.y"
                                                 { (yyval.expression) = createCTreeRoot(createTokenLabel((yyvsp[0].token))); }
 #line 2117 "c11ansi.tab.c"
     break;
 
   case 3: /* primary_expression: constant  */
-#line 171 "c11ansi.y"
+#line 172 "c11ansi.y"
                                                 { (yyval.expression) = createCTreeRoot(createTokenLabel((yyvsp[0].token))); }
 #line 2123 "c11ansi.tab.c"
     break;
 
   case 4: /* primary_expression: string  */
-#line 172 "c11ansi.y"
+#line 173 "c11ansi.y"
                                                 { (yyval.expression) = createCTreeRoot(createTokenLabel((yyvsp[0].token))); }
 #line 2129 "c11ansi.tab.c"
     break;
 
   case 5: /* primary_expression: Y_LEFT_PAREN expression Y_RIGHT_PAREN  */
-#line 173 "c11ansi.y"
+#line 174 "c11ansi.y"
                                                 { (yyval.expression) = createCTree1(createConstr2Label(LABCT_PAREN_EXPR, (yyvsp[-2].token), (yyvsp[0].token)), (yyvsp[-1].expression)); }
 #line 2135 "c11ansi.tab.c"
     break;
 
   case 6: /* primary_expression: generic_selection  */
-#line 174 "c11ansi.y"
+#line 175 "c11ansi.y"
                                                 { (yyval.expression) = NULL; }
 #line 2141 "c11ansi.tab.c"
     break;
 
   case 7: /* constant: "i_const"  */
-#line 178 "c11ansi.y"
+#line 179 "c11ansi.y"
                                  {(yyval.token) = (yyvsp[0].token);}
 #line 2147 "c11ansi.tab.c"
     break;
 
   case 8: /* constant: "f_const"  */
-#line 179 "c11ansi.y"
+#line 180 "c11ansi.y"
                                  {(yyval.token) = (yyvsp[0].token);}
 #line 2153 "c11ansi.tab.c"
     break;
 
   case 9: /* constant: Y_ENUMERATION_CONSTANT  */
-#line 180 "c11ansi.y"
+#line 181 "c11ansi.y"
                                  {(yyval.token) = (yyvsp[0].token);}
 #line 2159 "c11ansi.tab.c"
     break;
 
   case 10: /* enumeration_constant: "identifier"  */
-#line 184 "c11ansi.y"
+#line 185 "c11ansi.y"
                      {(yyval.token) = (yyvsp[0].token);}
 #line 2165 "c11ansi.tab.c"
     break;
 
   case 11: /* string: "sting_literal"  */
-#line 188 "c11ansi.y"
+#line 189 "c11ansi.y"
                          {(yyval.token) = (yyvsp[0].token);}
 #line 2171 "c11ansi.tab.c"
     break;
 
   case 12: /* string: Y_FUNC_NAME  */
-#line 189 "c11ansi.y"
+#line 190 "c11ansi.y"
                          {(yyval.token) = (yyvsp[0].token);}
 #line 2177 "c11ansi.tab.c"
     break;
 
   case 18: /* postfix_expression: primary_expression  */
-#line 207 "c11ansi.y"
+#line 208 "c11ansi.y"
                                                                                    { (yyval.expression) = (yyvsp[0].expression); }
 #line 2183 "c11ansi.tab.c"
     break;
 
   case 19: /* postfix_expression: postfix_expression Y_LEFT_BRACKET expression Y_RIGHT_BRACKET  */
-#line 208 "c11ansi.y"
+#line 209 "c11ansi.y"
                                                                                    { (yyval.expression) = createCTree2(createConstr2Label(LABCT_INDEX, (yyvsp[-2].token), (yyvsp[0].token)), (yyvsp[-3].expression),  (yyvsp[-1].expression)); }
 #line 2189 "c11ansi.tab.c"
     break;
 
   case 20: /* postfix_expression: postfix_expression Y_LEFT_PAREN Y_RIGHT_PAREN  */
-#line 209 "c11ansi.y"
+#line 210 "c11ansi.y"
                                                                                    { (yyval.expression) = createCTree1(createConstr2Label(LABCT_CALL, (yyvsp[-1].token), (yyvsp[0].token)), (yyvsp[-2].expression)); }
 #line 2195 "c11ansi.tab.c"
     break;
 
   case 21: /* postfix_expression: postfix_expression Y_LEFT_PAREN argument_expression_list Y_RIGHT_PAREN  */
-#line 210 "c11ansi.y"
+#line 211 "c11ansi.y"
                                                                                    { (yyval.expression) = createCTree2(createConstr2Label(LABCT_CALL, (yyvsp[-2].token), (yyvsp[0].token)), (yyvsp[-3].expression), (yyvsp[-1].expression)); }
 #line 2201 "c11ansi.tab.c"
     break;
 
   case 22: /* postfix_expression: postfix_expression Y_DOT "identifier"  */
-#line 211 "c11ansi.y"
+#line 212 "c11ansi.y"
                                                                                    { (yyval.expression) = createCTree2(createConstr1Label(LABCT_DOT, (yyvsp[-1].token)), (yyvsp[-2].expression), createCTreeRoot(createTokenLabel((yyvsp[0].token)))); }
 #line 2207 "c11ansi.tab.c"
     break;
 
   case 23: /* postfix_expression: postfix_expression Y_ARROW "identifier"  */
-#line 212 "c11ansi.y"
+#line 213 "c11ansi.y"
                                                                                    { (yyval.expression) = createCTree2(createConstr1Label(LABCT_ARROW, (yyvsp[-1].token)), (yyvsp[-2].expression), createCTreeRoot(createTokenLabel((yyvsp[0].token)))); }
 #line 2213 "c11ansi.tab.c"
     break;
 
   case 24: /* postfix_expression: postfix_expression Y_PLUS_PLUS  */
-#line 213 "c11ansi.y"
+#line 214 "c11ansi.y"
                                                                                    { (yyval.expression) = createCTree1(createConstr1Label(LABCT_PLUS_PLUS, (yyvsp[0].token)), (yyvsp[-1].expression)); }
 #line 2219 "c11ansi.tab.c"
     break;
 
   case 25: /* postfix_expression: postfix_expression Y_MINUS_MINUS  */
-#line 214 "c11ansi.y"
+#line 215 "c11ansi.y"
                                                                                    { (yyval.expression) = createCTree1(createConstr1Label(LABCT_MINUS_MINUS, (yyvsp[0].token)), (yyvsp[-1].expression)); }
 #line 2225 "c11ansi.tab.c"
     break;
 
   case 26: /* postfix_expression: Y_LEFT_PAREN type_name Y_RIGHT_PAREN Y_LEFT_BRACE initializer_list Y_RIGHT_BRACE  */
-#line 215 "c11ansi.y"
-                                                                                             { (yyval.expression) = NULL; }
+#line 216 "c11ansi.y"
+                                                                                             { (yyval.expression) = createCTree1(createConstr5Label(LABCT_INIT, (yyvsp[-5].token),(yyvsp[-4].token),(yyvsp[-3].token),(yyvsp[-2].token),(yyvsp[0].token)), (yyvsp[-1].expression)); }
 #line 2231 "c11ansi.tab.c"
     break;
 
   case 27: /* postfix_expression: Y_LEFT_PAREN type_name Y_RIGHT_PAREN Y_LEFT_BRACE initializer_list Y_COMMA Y_RIGHT_BRACE  */
-#line 216 "c11ansi.y"
-                                                                                                     { (yyval.expression) = NULL; }
+#line 217 "c11ansi.y"
+                                                                                                    { (yyval.expression) = createCTree1(createConstr5Label(LABCT_INIT, (yyvsp[-6].token),(yyvsp[-5].token),(yyvsp[-4].token),(yyvsp[-3].token),(yyvsp[-1].token)), (yyvsp[-2].expression)); }
 #line 2237 "c11ansi.tab.c"
     break;
 
   case 28: /* argument_expression_list: assignment_expression  */
-#line 220 "c11ansi.y"
+#line 221 "c11ansi.y"
                                                                  { (yyval.expression) = (yyvsp[0].expression); }
 #line 2243 "c11ansi.tab.c"
     break;
 
   case 29: /* argument_expression_list: argument_expression_list Y_COMMA assignment_expression  */
-#line 221 "c11ansi.y"
+#line 222 "c11ansi.y"
                                                                  { (yyval.expression) = createCTree2(createConstr1Label(LABCT_EXPR_SEPARATOR, (yyvsp[-1].token)), (yyvsp[-2].expression), (yyvsp[0].expression)); }
 #line 2249 "c11ansi.tab.c"
     break;
 
   case 30: /* unary_expression: postfix_expression  */
-#line 225 "c11ansi.y"
+#line 226 "c11ansi.y"
                                                           { (yyval.expression) = (yyvsp[0].expression); }
 #line 2255 "c11ansi.tab.c"
     break;
 
   case 31: /* unary_expression: Y_PLUS_PLUS unary_expression  */
-#line 226 "c11ansi.y"
+#line 227 "c11ansi.y"
                                                           { (yyval.expression) = createCTree1(createConstr1Label(LABCT_PLUS_PLUS, (yyvsp[-1].token)), (yyvsp[0].expression)); }
 #line 2261 "c11ansi.tab.c"
     break;
 
   case 32: /* unary_expression: Y_MINUS_MINUS unary_expression  */
-#line 227 "c11ansi.y"
+#line 228 "c11ansi.y"
                                                           { (yyval.expression) = createCTree1(createConstr1Label(LABCT_MINUS_MINUS, (yyvsp[-1].token)), (yyvsp[0].expression)); }
 #line 2267 "c11ansi.tab.c"
     break;
 
   case 33: /* unary_expression: unary_operator cast_expression  */
-#line 228 "c11ansi.y"
+#line 229 "c11ansi.y"
                                                           { (yyval.expression) = createCTree1((yyvsp[-1].label), (yyvsp[0].expression)); }
 #line 2273 "c11ansi.tab.c"
     break;
 
   case 34: /* unary_expression: Y_SIZEOF unary_expression  */
-#line 229 "c11ansi.y"
+#line 230 "c11ansi.y"
                                                           { (yyval.expression) = createCTree1(createConstr1Label(LABCT_SIZEOF_EXPR, (yyvsp[-1].token)), (yyvsp[0].expression)); }
 #line 2279 "c11ansi.tab.c"
     break;
 
   case 35: /* unary_expression: Y_SIZEOF Y_LEFT_PAREN type_name Y_RIGHT_PAREN  */
-#line 230 "c11ansi.y"
-                                                          { (yyval.expression) = NULL; }
+#line 231 "c11ansi.y"
+                                                          { (yyval.expression) = createCTreeRoot(createConstr3Label(LABCT_SIZEOF_TYPE, (yyvsp[-3].token), (yyvsp[-2].token), (yyvsp[0].token))); }
 #line 2285 "c11ansi.tab.c"
     break;
 
   case 36: /* unary_expression: Y_ALIGNOF Y_LEFT_PAREN type_name Y_RIGHT_PAREN  */
-#line 231 "c11ansi.y"
-                                                          { (yyval.expression) = NULL; }
+#line 232 "c11ansi.y"
+                                                          { (yyval.expression) = createCTreeRoot(createConstr3Label(LABCT_ALIGNOF_TYPE, (yyvsp[-3].token), (yyvsp[-2].token), (yyvsp[0].token))); }
 #line 2291 "c11ansi.tab.c"
     break;
 
   case 37: /* unary_operator: Y_AND  */
-#line 235 "c11ansi.y"
+#line 236 "c11ansi.y"
                         { (yyval.label) = createConstr1Label(LABCT_ADDR_OF_VALUE, (yyvsp[0].token)); }
 #line 2297 "c11ansi.tab.c"
     break;
 
   case 38: /* unary_operator: Y_TIMES  */
-#line 236 "c11ansi.y"
+#line 237 "c11ansi.y"
                         { (yyval.label) = createConstr1Label(LABCT_VALUE_AT_ADDR, (yyvsp[0].token)); }
 #line 2303 "c11ansi.tab.c"
     break;
 
   case 39: /* unary_operator: Y_PLUS  */
-#line 237 "c11ansi.y"
+#line 238 "c11ansi.y"
                         { (yyval.label) = createConstr1Label(LABCT_UNARY_PLUS, (yyvsp[0].token)); }
 #line 2309 "c11ansi.tab.c"
     break;
 
   case 40: /* unary_operator: Y_MINUS  */
-#line 238 "c11ansi.y"
+#line 239 "c11ansi.y"
                         { (yyval.label) = createConstr1Label(LABCT_UNARY_MINUS, (yyvsp[0].token)); }
 #line 2315 "c11ansi.tab.c"
     break;
 
   case 41: /* unary_operator: Y_TILDE  */
-#line 239 "c11ansi.y"
+#line 240 "c11ansi.y"
                         { (yyval.label) = createConstr1Label(LABCT_TILDE, (yyvsp[0].token)); }
 #line 2321 "c11ansi.tab.c"
     break;
 
   case 42: /* unary_operator: Y_EXCLAMATION  */
-#line 240 "c11ansi.y"
+#line 241 "c11ansi.y"
                         { (yyval.label) = createConstr1Label(LABCT_EXCLAMATION, (yyvsp[0].token)); }
 #line 2327 "c11ansi.tab.c"
     break;
 
   case 43: /* cast_expression: unary_expression  */
-#line 244 "c11ansi.y"
+#line 245 "c11ansi.y"
                                                                { (yyval.expression) = (yyvsp[0].expression); }
 #line 2333 "c11ansi.tab.c"
     break;
 
   case 44: /* cast_expression: Y_LEFT_PAREN type_name Y_RIGHT_PAREN cast_expression  */
-#line 245 "c11ansi.y"
+#line 246 "c11ansi.y"
                                                                { (yyval.expression) = NULL; }
 #line 2339 "c11ansi.tab.c"
     break;
 
   case 45: /* multiplicative_expression: cast_expression  */
-#line 249 "c11ansi.y"
+#line 250 "c11ansi.y"
                           { (yyval.expression) = (yyvsp[0].expression); }
 #line 2345 "c11ansi.tab.c"
     break;
 
   case 46: /* multiplicative_expression: multiplicative_expression Y_TIMES cast_expression  */
-#line 250 "c11ansi.y"
+#line 251 "c11ansi.y"
                                                               { (yyval.expression) = createCTree2(createConstr1Label(LABCT_TIMES, (yyvsp[-1].token)), (yyvsp[-2].expression), (yyvsp[0].expression)); }
 #line 2351 "c11ansi.tab.c"
     break;
 
   case 47: /* multiplicative_expression: multiplicative_expression Y_DIVIDE cast_expression  */
-#line 251 "c11ansi.y"
+#line 252 "c11ansi.y"
                                                               { (yyval.expression) = createCTree2(createConstr1Label(LABCT_DIVIDE, (yyvsp[-1].token)), (yyvsp[-2].expression), (yyvsp[0].expression)); }
 #line 2357 "c11ansi.tab.c"
     break;
 
   case 48: /* multiplicative_expression: multiplicative_expression Y_PERCENT cast_expression  */
-#line 252 "c11ansi.y"
+#line 253 "c11ansi.y"
                                                               { (yyval.expression) = createCTree2(createConstr1Label(LABCT_PERCENT, (yyvsp[-1].token)), (yyvsp[-2].expression), (yyvsp[0].expression)); }
 #line 2363 "c11ansi.tab.c"
     break;
 
   case 49: /* additive_expression: multiplicative_expression  */
-#line 256 "c11ansi.y"
+#line 257 "c11ansi.y"
                                                                 { (yyval.expression) = (yyvsp[0].expression); }
 #line 2369 "c11ansi.tab.c"
     break;
 
   case 50: /* additive_expression: additive_expression Y_PLUS multiplicative_expression  */
-#line 257 "c11ansi.y"
+#line 258 "c11ansi.y"
                                                                 { (yyval.expression) = createCTree2(createConstr1Label(LABCT_PLUS, (yyvsp[-1].token)), (yyvsp[-2].expression), (yyvsp[0].expression)); }
 #line 2375 "c11ansi.tab.c"
     break;
 
   case 51: /* additive_expression: additive_expression Y_MINUS multiplicative_expression  */
-#line 258 "c11ansi.y"
+#line 259 "c11ansi.y"
                                                                 { (yyval.expression) = createCTree2(createConstr1Label(LABCT_MINUS, (yyvsp[-1].token)), (yyvsp[-2].expression), (yyvsp[0].expression)); }
 #line 2381 "c11ansi.tab.c"
     break;
 
   case 52: /* shift_expression: additive_expression  */
-#line 262 "c11ansi.y"
+#line 263 "c11ansi.y"
                                                          { (yyval.expression) = (yyvsp[0].expression); }
 #line 2387 "c11ansi.tab.c"
     break;
 
   case 53: /* shift_expression: shift_expression Y_RSHIFT additive_expression  */
-#line 263 "c11ansi.y"
+#line 264 "c11ansi.y"
                                                          { (yyval.expression) = createCTree2(createConstr1Label(LABCT_TIMES, (yyvsp[-1].token)), (yyvsp[-2].expression), (yyvsp[0].expression)); }
 #line 2393 "c11ansi.tab.c"
     break;
 
   case 54: /* shift_expression: shift_expression Y_LSHIFT additive_expression  */
-#line 264 "c11ansi.y"
+#line 265 "c11ansi.y"
                                                          { (yyval.expression) = createCTree2(createConstr1Label(LABCT_TIMES, (yyvsp[-1].token)), (yyvsp[-2].expression), (yyvsp[0].expression)); }
 #line 2399 "c11ansi.tab.c"
     break;
 
   case 55: /* relational_expression: shift_expression  */
-#line 268 "c11ansi.y"
+#line 269 "c11ansi.y"
                                                       { (yyval.expression) = (yyvsp[0].expression); }
 #line 2405 "c11ansi.tab.c"
     break;
 
   case 56: /* relational_expression: relational_expression Y_LT shift_expression  */
-#line 269 "c11ansi.y"
+#line 270 "c11ansi.y"
                                                       { (yyval.expression) = createCTree2(createConstr1Label(LABCT_LT, (yyvsp[-1].token)), (yyvsp[-2].expression), (yyvsp[0].expression)); }
 #line 2411 "c11ansi.tab.c"
     break;
 
   case 57: /* relational_expression: relational_expression Y_GT shift_expression  */
-#line 270 "c11ansi.y"
+#line 271 "c11ansi.y"
                                                       { (yyval.expression) = createCTree2(createConstr1Label(LABCT_GT, (yyvsp[-1].token)), (yyvsp[-2].expression), (yyvsp[0].expression)); }
 #line 2417 "c11ansi.tab.c"
     break;
 
   case 58: /* relational_expression: relational_expression Y_LE shift_expression  */
-#line 271 "c11ansi.y"
+#line 272 "c11ansi.y"
                                                       { (yyval.expression) = createCTree2(createConstr1Label(LABCT_LE, (yyvsp[-1].token)), (yyvsp[-2].expression), (yyvsp[0].expression)); }
 #line 2423 "c11ansi.tab.c"
     break;
 
   case 59: /* relational_expression: relational_expression Y_GE shift_expression  */
-#line 272 "c11ansi.y"
+#line 273 "c11ansi.y"
                                                       { (yyval.expression) = createCTree2(createConstr1Label(LABCT_GE, (yyvsp[-1].token)), (yyvsp[-2].expression), (yyvsp[0].expression)); }
 #line 2429 "c11ansi.tab.c"
     break;
 
   case 60: /* equality_expression: relational_expression  */
-#line 276 "c11ansi.y"
+#line 277 "c11ansi.y"
                                                          { (yyval.expression) = (yyvsp[0].expression); }
 #line 2435 "c11ansi.tab.c"
     break;
 
   case 61: /* equality_expression: equality_expression Y_EQ relational_expression  */
-#line 277 "c11ansi.y"
+#line 278 "c11ansi.y"
                                                          { (yyval.expression) = createCTree2(createConstr1Label(LABCT_EQ, (yyvsp[-1].token)), (yyvsp[-2].expression), (yyvsp[0].expression)); }
 #line 2441 "c11ansi.tab.c"
     break;
 
   case 62: /* equality_expression: equality_expression Y_NE relational_expression  */
-#line 278 "c11ansi.y"
+#line 279 "c11ansi.y"
                                                          { (yyval.expression) = createCTree2(createConstr1Label(LABCT_NE, (yyvsp[-1].token)), (yyvsp[-2].expression), (yyvsp[0].expression)); }
 #line 2447 "c11ansi.tab.c"
     break;
 
   case 63: /* and_expression: equality_expression  */
-#line 282 "c11ansi.y"
+#line 283 "c11ansi.y"
                                                    { (yyval.expression) = (yyvsp[0].expression); }
 #line 2453 "c11ansi.tab.c"
     break;
 
   case 64: /* and_expression: and_expression Y_AND equality_expression  */
-#line 283 "c11ansi.y"
+#line 284 "c11ansi.y"
                                                    { (yyval.expression) = createCTree2(createConstr1Label(LABCT_AND, (yyvsp[-1].token)), (yyvsp[-2].expression), (yyvsp[0].expression)); }
 #line 2459 "c11ansi.tab.c"
     break;
 
   case 65: /* exclusive_or_expression: and_expression  */
-#line 287 "c11ansi.y"
+#line 288 "c11ansi.y"
                                                        { (yyval.expression) = (yyvsp[0].expression); }
 #line 2465 "c11ansi.tab.c"
     break;
 
   case 66: /* exclusive_or_expression: exclusive_or_expression Y_XOR and_expression  */
-#line 288 "c11ansi.y"
+#line 289 "c11ansi.y"
                                                        { (yyval.expression) = createCTree2(createConstr1Label(LABCT_XOR, (yyvsp[-1].token)), (yyvsp[-2].expression), (yyvsp[0].expression)); }
 #line 2471 "c11ansi.tab.c"
     break;
 
   case 67: /* inclusive_or_expression: exclusive_or_expression  */
-#line 292 "c11ansi.y"
+#line 293 "c11ansi.y"
                                                                { (yyval.expression) = (yyvsp[0].expression); }
 #line 2477 "c11ansi.tab.c"
     break;
 
   case 68: /* inclusive_or_expression: inclusive_or_expression Y_OR exclusive_or_expression  */
-#line 293 "c11ansi.y"
+#line 294 "c11ansi.y"
                                                                { (yyval.expression) = createCTree2(createConstr1Label(LABCT_OR, (yyvsp[-1].token)), (yyvsp[-2].expression), (yyvsp[0].expression)); }
 #line 2483 "c11ansi.tab.c"
     break;
 
   case 69: /* logical_and_expression: inclusive_or_expression  */
-#line 297 "c11ansi.y"
+#line 298 "c11ansi.y"
                                                                     { (yyval.expression) = (yyvsp[0].expression); }
 #line 2489 "c11ansi.tab.c"
     break;
 
   case 70: /* logical_and_expression: logical_and_expression Y_AND_AND inclusive_or_expression  */
-#line 298 "c11ansi.y"
+#line 299 "c11ansi.y"
                                                                     { (yyval.expression) = createCTree2(createConstr1Label(LABCT_AND_AND, (yyvsp[-1].token)), (yyvsp[-2].expression), (yyvsp[0].expression)); }
 #line 2495 "c11ansi.tab.c"
     break;
 
   case 71: /* logical_or_expression: logical_and_expression  */
-#line 302 "c11ansi.y"
+#line 303 "c11ansi.y"
                                                                 { (yyval.expression) = (yyvsp[0].expression); }
 #line 2501 "c11ansi.tab.c"
     break;
 
   case 72: /* logical_or_expression: logical_or_expression Y_OR_OR logical_and_expression  */
-#line 303 "c11ansi.y"
+#line 304 "c11ansi.y"
                                                                 { (yyval.expression) = createCTree2(createConstr1Label(LABCT_OR_OR, (yyvsp[-1].token)), (yyvsp[-2].expression), (yyvsp[0].expression)); }
 #line 2507 "c11ansi.tab.c"
     break;
 
   case 73: /* conditional_expression: logical_or_expression  */
-#line 307 "c11ansi.y"
+#line 308 "c11ansi.y"
                                 { (yyval.expression) = (yyvsp[0].expression); }
 #line 2513 "c11ansi.tab.c"
     break;
 
   case 74: /* conditional_expression: logical_or_expression Y_QUESTION expression Y_COLON conditional_expression  */
-#line 308 "c11ansi.y"
+#line 309 "c11ansi.y"
                                                                                      { (yyval.expression) = createCTree2(createConstr1Label(LABCT_QUESTION, (yyvsp[-3].token)), (yyvsp[-4].expression), createCTree2(createConstr1Label(LABCT_COLON, (yyvsp[-1].token)), (yyvsp[-2].expression), (yyvsp[0].expression))); }
 #line 2519 "c11ansi.tab.c"
     break;
 
   case 75: /* assignment_expression: conditional_expression  */
-#line 312 "c11ansi.y"
+#line 313 "c11ansi.y"
                                                                       { (yyval.expression) = (yyvsp[0].expression); }
 #line 2525 "c11ansi.tab.c"
     break;
 
   case 76: /* assignment_expression: unary_expression assignment_operator assignment_expression  */
-#line 313 "c11ansi.y"
+#line 314 "c11ansi.y"
                                                                       { (yyval.expression) = createCTree2((yyvsp[-1].label), (yyvsp[-2].expression), (yyvsp[0].expression)); }
 #line 2531 "c11ansi.tab.c"
     break;
 
   case 77: /* assignment_operator: Y_EQUAL  */
-#line 317 "c11ansi.y"
+#line 318 "c11ansi.y"
                            { (yyval.label) = createConstr1Label(LABCT_EQ, (yyvsp[0].token)); }
 #line 2537 "c11ansi.tab.c"
     break;
 
   case 78: /* assignment_operator: Y_TIMES_EQUAL  */
-#line 318 "c11ansi.y"
+#line 319 "c11ansi.y"
                            { (yyval.label) = createConstr1Label(LABCT_TIMES_EQUAL, (yyvsp[0].token)); }
 #line 2543 "c11ansi.tab.c"
     break;
 
   case 79: /* assignment_operator: Y_DIVIDE_EQUAL  */
-#line 319 "c11ansi.y"
+#line 320 "c11ansi.y"
                            { (yyval.label) = createConstr1Label(LABCT_DIVIDE_EQUAL, (yyvsp[0].token)); }
 #line 2549 "c11ansi.tab.c"
     break;
 
   case 80: /* assignment_operator: Y_PERCENT_EQUAL  */
-#line 320 "c11ansi.y"
+#line 321 "c11ansi.y"
                            { (yyval.label) = createConstr1Label(LABCT_PERCENT_EQUAL, (yyvsp[0].token)); }
 #line 2555 "c11ansi.tab.c"
     break;
 
   case 81: /* assignment_operator: Y_PLUS_EQUAL  */
-#line 321 "c11ansi.y"
+#line 322 "c11ansi.y"
                            { (yyval.label) = createConstr1Label(LABCT_PLUS_EQUAL, (yyvsp[0].token)); }
 #line 2561 "c11ansi.tab.c"
     break;
 
   case 82: /* assignment_operator: Y_MINUS_EQUAL  */
-#line 322 "c11ansi.y"
+#line 323 "c11ansi.y"
                            { (yyval.label) = createConstr1Label(LABCT_MINUS_EQUAL, (yyvsp[0].token)); }
 #line 2567 "c11ansi.tab.c"
     break;
 
   case 83: /* assignment_operator: Y_LSHIFT_EQUAL  */
-#line 323 "c11ansi.y"
+#line 324 "c11ansi.y"
                            { (yyval.label) = createConstr1Label(LABCT_LSHIFT_EQUAL, (yyvsp[0].token)); }
 #line 2573 "c11ansi.tab.c"
     break;
 
   case 84: /* assignment_operator: Y_RSHIFT_EQUAL  */
-#line 324 "c11ansi.y"
+#line 325 "c11ansi.y"
                            { (yyval.label) = createConstr1Label(LABCT_RSHIFT_EQUAL, (yyvsp[0].token)); }
 #line 2579 "c11ansi.tab.c"
     break;
 
   case 85: /* assignment_operator: Y_AND_EQUAL  */
-#line 325 "c11ansi.y"
+#line 326 "c11ansi.y"
                            { (yyval.label) = createConstr1Label(LABCT_AND_EQUAL, (yyvsp[0].token)); }
 #line 2585 "c11ansi.tab.c"
     break;
 
   case 86: /* assignment_operator: Y_XOR_EQUAL  */
-#line 326 "c11ansi.y"
+#line 327 "c11ansi.y"
                            { (yyval.label) = createConstr1Label(LABCT_XOR_EQUAL, (yyvsp[0].token)); }
 #line 2591 "c11ansi.tab.c"
     break;
 
   case 87: /* assignment_operator: Y_OR_EQUAL  */
-#line 327 "c11ansi.y"
+#line 328 "c11ansi.y"
                            { (yyval.label) = createConstr1Label(LABCT_OR_EQUAL, (yyvsp[0].token)); }
 #line 2597 "c11ansi.tab.c"
     break;
 
   case 88: /* expression: assignment_expression  */
-#line 331 "c11ansi.y"
+#line 332 "c11ansi.y"
                                                    { (yyval.expression) = (yyvsp[0].expression); }
 #line 2603 "c11ansi.tab.c"
     break;
 
   case 89: /* expression: expression Y_COMMA assignment_expression  */
-#line 332 "c11ansi.y"
+#line 333 "c11ansi.y"
                                                    { (yyval.expression) = createCTree2(createConstr1Label(LABCT_EXPR_SEPARATOR, (yyvsp[-1].token)), (yyvsp[-2].expression), (yyvsp[0].expression)); }
 #line 2609 "c11ansi.tab.c"
     break;
 
   case 90: /* constant_expression: conditional_expression  */
-#line 336 "c11ansi.y"
+#line 337 "c11ansi.y"
                                   { (yyval.expression) = (yyvsp[0].expression); }
 #line 2615 "c11ansi.tab.c"
     break;
 
   case 226: /* initializer: Y_LEFT_BRACE initializer_list Y_RIGHT_BRACE  */
-#line 569 "c11ansi.y"
+#line 570 "c11ansi.y"
                                                               { (yyval.expression) = createCTree1(createConstr2Label(LABCT_EXPR_LIST, (yyvsp[-2].token), (yyvsp[0].token)), (yyvsp[-1].expression)); }
 #line 2621 "c11ansi.tab.c"
     break;
 
   case 227: /* initializer: Y_LEFT_BRACE initializer_list Y_COMMA Y_RIGHT_BRACE  */
-#line 570 "c11ansi.y"
+#line 571 "c11ansi.y"
                                                               { (yyval.expression) = createCTree1(createConstr3Label(LABCT_EXPR_LIST, (yyvsp[-3].token), (yyvsp[-1].token), (yyvsp[0].token)), (yyvsp[-2].expression)); }
 #line 2627 "c11ansi.tab.c"
     break;
 
   case 228: /* initializer: assignment_expression  */
-#line 571 "c11ansi.y"
+#line 572 "c11ansi.y"
                                                               { (yyval.expression) = (yyvsp[0].expression); }
 #line 2633 "c11ansi.tab.c"
     break;
 
   case 229: /* initializer_list: designation initializer  */
-#line 575 "c11ansi.y"
+#line 576 "c11ansi.y"
                                                             { (yyval.expression) = NULL; }
 #line 2639 "c11ansi.tab.c"
     break;
 
   case 230: /* initializer_list: initializer  */
-#line 576 "c11ansi.y"
+#line 577 "c11ansi.y"
                                                             { (yyval.expression) = createCTree1(createConstr0Label(LABCT_EXPR_LIST), (yyvsp[0].expression)); }
 #line 2645 "c11ansi.tab.c"
     break;
 
   case 231: /* initializer_list: initializer_list Y_COMMA designation initializer  */
-#line 577 "c11ansi.y"
+#line 578 "c11ansi.y"
                                                             { (yyval.expression) = NULL; }
 #line 2651 "c11ansi.tab.c"
     break;
 
   case 232: /* initializer_list: initializer_list Y_COMMA initializer  */
-#line 578 "c11ansi.y"
+#line 579 "c11ansi.y"
                                                             { (yyval.expression) = createCTree2(createConstr1Label(LABCT_EXPR_LIST, (yyvsp[-1].token)), (yyvsp[-2].expression), (yyvsp[0].expression)); }
 #line 2657 "c11ansi.tab.c"
     break;
 
   case 265: /* jump_statement: Y_GOTO "identifier" Y_SEMICOLON  */
-#line 650 "c11ansi.y"
+#line 651 "c11ansi.y"
                                            { printf("jump_statement -> Y_GOTO IDENTIFIER Y_SEMICOLON\n"); }
 #line 2663 "c11ansi.tab.c"
     break;
 
   case 266: /* jump_statement: Y_CONTINUE Y_SEMICOLON  */
-#line 651 "c11ansi.y"
+#line 652 "c11ansi.y"
                                            { printf("jump_statement -> Y_CONTINUE Y_SEMICOLON\n"); }
 #line 2669 "c11ansi.tab.c"
     break;
 
   case 267: /* jump_statement: Y_BREAK Y_SEMICOLON  */
-#line 652 "c11ansi.y"
+#line 653 "c11ansi.y"
                                            { printf("jump_statement -> Y_BREAK Y_SEMICOLON\n"); }
 #line 2675 "c11ansi.tab.c"
     break;
 
   case 268: /* jump_statement: Y_RETURN Y_SEMICOLON  */
-#line 653 "c11ansi.y"
+#line 654 "c11ansi.y"
                                            { printf("jump_statement -> Y_RETURN Y_SEMICOLON\n"); }
 #line 2681 "c11ansi.tab.c"
     break;
 
   case 269: /* jump_statement: Y_RETURN expression Y_SEMICOLON  */
-#line 654 "c11ansi.y"
+#line 655 "c11ansi.y"
                                            { printf("jump_statement -> Y_RETURN expression Y_SEMICOLON\n"); }
 #line 2687 "c11ansi.tab.c"
     break;
 
   case 270: /* translation_unit: external_declaration  */
-#line 658 "c11ansi.y"
+#line 659 "c11ansi.y"
                                                  { printf("translation_unit -> external_declaration\n\n"); }
 #line 2693 "c11ansi.tab.c"
     break;
 
   case 271: /* translation_unit: translation_unit external_declaration  */
-#line 659 "c11ansi.y"
+#line 660 "c11ansi.y"
                                                  { printf("translation_unit -> translation_unit external_declaration\n\n"); }
 #line 2699 "c11ansi.tab.c"
     break;
 
   case 272: /* external_declaration: function_definition  */
-#line 663 "c11ansi.y"
+#line 664 "c11ansi.y"
                                 { printf("external_declaration -> function_definition\n"); }
 #line 2705 "c11ansi.tab.c"
     break;
 
   case 273: /* external_declaration: declaration  */
-#line 664 "c11ansi.y"
+#line 665 "c11ansi.y"
                                 { printf("external_declaration -> declaration\n"); }
 #line 2711 "c11ansi.tab.c"
     break;
 
   case 274: /* function_definition: declaration_specifiers declarator declaration_list compound_statement  */
-#line 668 "c11ansi.y"
+#line 669 "c11ansi.y"
                                                                                    { printf("function_definition -> declaration_specifiers declarator declaration_list compound_statement\n"); }
 #line 2717 "c11ansi.tab.c"
     break;
 
   case 275: /* function_definition: declaration_specifiers declarator compound_statement  */
-#line 669 "c11ansi.y"
+#line 670 "c11ansi.y"
                                                                                    { printf("function_definition -> declaration_specifiers declarator compound_statement\n"); }
 #line 2723 "c11ansi.tab.c"
     break;
@@ -2916,7 +2916,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 678 "c11ansi.y"
+#line 679 "c11ansi.y"
 
 #include <stdio.h>
 
