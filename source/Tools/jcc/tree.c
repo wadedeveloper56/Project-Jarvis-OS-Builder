@@ -135,13 +135,52 @@ LinkedListPtr createList(void)
 	return newList;
 }
 
-DeclarationSpecifiersPtr createDeclarationSpecifiers(TokenPtr storageClass, DeclarationSpecifiersPtr tokenList)
+DeclarationSpecifiersPtr createDeclarationSpecifiers1(TokenPtr token, DeclarationSpecifiersPtr tokenList)
 {
 	if (tokenList == NULL) {
 		tokenList = AllocateMemory(sizeof(DeclarationSpecifiers));
 		tokenList->tokenList = createList();
 	}
-	addListElem(tokenList->tokenList, storageClass);
+	DeclarationSpecifiersNodePtr node = AllocateMemory(sizeof(DeclarationSpecifiersNode));
+	node->token = token;
+	addListElem(tokenList->tokenList, node);
 	return tokenList;
 }
+
+DeclarationSpecifiersPtr createDeclarationSpecifiers2(TypeSpecifierPtr typeSpecifier, DeclarationSpecifiersPtr tokenList)
+{
+	if (tokenList == NULL)
+	{
+		tokenList = AllocateMemory(sizeof(DeclarationSpecifiers));
+		tokenList->tokenList = createList();
+	}
+	DeclarationSpecifiersNodePtr node = AllocateMemory(sizeof(DeclarationSpecifiersNode));
+	node->typeSpecifier = typeSpecifier;
+	addListElem(tokenList->tokenList, node);
+	return tokenList;
+}
+
+TypeSpecifierPtr createTypeSpecifier(TokenPtr token)
+{
+	TypeSpecifierPtr newTypeSpec = AllocateMemory(sizeof(TypeSpecifier));
+	newTypeSpec->specifierToken = token;
+	return newTypeSpec;
+}
+
+TypeSpecifierPtr createTypeSpecifier2(AtomicTypeSpecifierPtr token)
+{
+	TypeSpecifierPtr newTypeSpec = AllocateMemory(sizeof(TypeSpecifier));
+	newTypeSpec->atomicTypeSpecifier = token;
+	return newTypeSpec;
+}
+
+AtomicTypeSpecifierPtr createAtomicTypeSpecifier(TokenPtr atomicToken, TokenPtr typeNameToken)
+{
+	AtomicTypeSpecifierPtr newAtomicTypeSpec = AllocateMemory(sizeof(AtomicTypeSpecifier));
+	newAtomicTypeSpec->atomicToken = atomicToken;
+	newAtomicTypeSpec->typeSpecifier = createTypeSpecifier(typeNameToken);
+	return newAtomicTypeSpec;
+}
+
+
 

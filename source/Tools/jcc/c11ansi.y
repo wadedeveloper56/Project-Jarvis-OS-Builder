@@ -172,9 +172,10 @@ int yylex();
 
 %type<token> storage_class_specifier
 %type<token> type_qualifier
-%type<token> type_specifier
+%type<typeSpecifier> type_specifier
 %type<token> function_specifier
 %type<token> alignment_specifier
+%type<atomicTypeSpecifier> atomic_type_specifier
 
 %start translation_unit
 %%
@@ -356,16 +357,16 @@ declaration
 	;
 
 declaration_specifiers
-	: storage_class_specifier declaration_specifiers { $$ = createDeclarationSpecifiers($1,$2); }
-	| storage_class_specifier                        { $$ = createDeclarationSpecifiers($1,NULL); }
-	| type_specifier declaration_specifiers          { $$ = createDeclarationSpecifiers($1,$2); }
-	| type_specifier                                 { $$ = createDeclarationSpecifiers($1,NULL); }
-	| type_qualifier declaration_specifiers          { $$ = createDeclarationSpecifiers($1,$2); }
-	| type_qualifier                                 { $$ = createDeclarationSpecifiers($1,NULL); }
-	| function_specifier declaration_specifiers      { $$ = createDeclarationSpecifiers($1,$2); }
-	| function_specifier                             { $$ = createDeclarationSpecifiers($1,NULL); }
-	| alignment_specifier declaration_specifiers     { $$ = createDeclarationSpecifiers($1,$2); }
-	| alignment_specifier                            { $$ = createDeclarationSpecifiers($1,NULL); }
+	: storage_class_specifier declaration_specifiers { $$ = createDeclarationSpecifiers1($1,$2); }
+	| storage_class_specifier                        { $$ = createDeclarationSpecifiers1($1,NULL); }
+	| type_specifier declaration_specifiers          { $$ = createDeclarationSpecifiers2($1,$2); }
+	| type_specifier                                 { $$ = createDeclarationSpecifiers2($1,NULL); }
+	| type_qualifier declaration_specifiers          { $$ = createDeclarationSpecifiers1($1,$2); }
+	| type_qualifier                                 { $$ = createDeclarationSpecifiers1($1,NULL); }
+	| function_specifier declaration_specifiers      { $$ = createDeclarationSpecifiers1($1,$2); }
+	| function_specifier                             { $$ = createDeclarationSpecifiers1($1,NULL); }
+	| alignment_specifier declaration_specifiers     { $$ = createDeclarationSpecifiers1($1,$2); }
+	| alignment_specifier                            { $$ = createDeclarationSpecifiers1($1,NULL); }
 	;
 
 init_declarator_list
@@ -388,24 +389,24 @@ storage_class_specifier
 	;
 
 type_specifier
-	: Y_VOID                    { $$ = $1; }
-	| Y_CHAR                    { $$ = $1; }
-	| Y_SHORT                   { $$ = $1; }
-	| Y_INT                     { $$ = $1; }
-	| Y_LONG                    { $$ = $1; }
-	| Y_LONG_LONG               { $$ = $1; }
-	| Y_FLOAT                   { $$ = $1; }
-	| Y_DOUBLE                  { $$ = $1; }
-	| Y_LONG_DOUBLE             { $$ = $1; }
-	| Y_SIGNED                  { $$ = $1; }
-	| Y_UNSIGNED                { $$ = $1; }
-	| Y_BOOL                    { $$ = $1; }
-	| Y_COMPLEX                 { $$ = $1; }
-	| Y_IMAGINARY               { $$ = $1; }
-	| atomic_type_specifier     { $$ = NULL; }
+	: Y_VOID                    { $$ = createTypeSpecifier($1); }
+	| Y_CHAR                    { $$ = createTypeSpecifier($1); }
+	| Y_SHORT                   { $$ = createTypeSpecifier($1); }
+	| Y_INT                     { $$ = createTypeSpecifier($1); }
+	| Y_LONG                    { $$ = createTypeSpecifier($1); }
+	| Y_LONG_LONG               { $$ = createTypeSpecifier($1); }
+	| Y_FLOAT                   { $$ = createTypeSpecifier($1); }
+	| Y_DOUBLE                  { $$ = createTypeSpecifier($1); }
+	| Y_LONG_DOUBLE             { $$ = createTypeSpecifier($1); }
+	| Y_SIGNED                  { $$ = createTypeSpecifier($1); }
+	| Y_UNSIGNED                { $$ = createTypeSpecifier($1); }
+	| Y_BOOL                    { $$ = createTypeSpecifier($1); }
+	| Y_COMPLEX                 { $$ = createTypeSpecifier($1); }
+	| Y_IMAGINARY               { $$ = createTypeSpecifier($1); }
+	| atomic_type_specifier     { $$ = createTypeSpecifier2($1); }
 	| struct_or_union_specifier { $$ = NULL; }
 	| enum_specifier            { $$ = NULL; }
-	| Y_TYPEDEF_NAME            { $$ = $1; } 
+	| Y_TYPEDEF_NAME            { $$ = createTypeSpecifier($1); } 
 	;
 
 struct_or_union_specifier
@@ -467,7 +468,7 @@ enumerator	/* identifiers must be flagged as ENUMERATION_CONSTANT */
 	;
 
 atomic_type_specifier
-	: Y_ATOMIC Y_LEFT_PAREN type_name Y_RIGHT_PAREN
+	: Y_ATOMIC Y_LEFT_PAREN type_name Y_RIGHT_PAREN { $$ = createAtomicTypeSpecifier($1,$3); }
 	;
 
 type_qualifier

@@ -202,29 +202,19 @@ typedef enum _TypeQualifier
 	TQ_MAX
 } TypeQualifier;
 
-typedef enum _TypeSpecifier
+typedef struct _TypeSpecifier TypeSpecifier, * TypeSpecifierPtr, ** TypeSpecifierPtrPtr;
+
+typedef struct _AtomicTypeSpecifier
 {
-	TS_VOID,
-	TS_CHAR,
-	TS_SHORT,
-	TS_INT,
-	TS_LONG,
-	TS_LONG_LONG,
-	TS_FLOAT,
-	TS_DOUBLE,
-	TS_LONG_DOUBLE,
-	TS_SIGNED,
-	TS_UNSIGNED,
-	TS_BOOL,
-	TS_COMPLEX,
-	TS_IMAGINARY,
-	TS_ATOMIC_TYPE,
-	TS_STRUCT_OR_UNION,
-	TS_ENUM,
-	TS_TYPEDEF_NAME,
-	TS_ATOMIC,
-	TS_MAX
-} TypeSpecifier;
+	TokenPtr atomicToken;
+	TypeSpecifierPtr typeSpecifier;
+} AtomicTypeSpecifier, * AtomicTypeSpecifierPtr, ** AtomicTypeSpecifierPtrPtr;
+
+typedef struct _TypeSpecifier
+{
+	TokenPtr specifierToken;
+	AtomicTypeSpecifierPtr atomicTypeSpecifier;
+} TypeSpecifier, * TypeSpecifierPtr, ** TypeSpecifierPtrPtr;
 
 typedef enum _FunctionSpecifier
 {
@@ -238,9 +228,15 @@ typedef enum _AlignmentSpecifier
 	AS_ALIGNOF
 } AlignmentSpecifier;
 
+typedef struct _DeclarationSpecifiersNode
+{
+	TokenPtr token;
+	TypeSpecifierPtr typeSpecifier;
+} DeclarationSpecifiersNode, * DeclarationSpecifiersNodePtr, ** DeclarationSpecifiersNodePtrPtr;
+
 typedef struct _DeclarationSpecifiers
 {
-	LinkedListPtr tokenList;
+	LinkedListPtr tokenList; // list of DeclarationSpecifiersNode
 } DeclarationSpecifiers, * DeclarationSpecifiersPtr, ** DeclarationSpecifiersPtrPtr;
 
 typedef struct _StaticAssertDeclaration
@@ -266,6 +262,8 @@ union ParseUnion
 	DeclarationSpecifiersPtr declSpecifiers;
 	LinkedListPtr initDeclaratorList;
 	StaticAssertDeclarationPtr staticAssertDecl;
+	TypeSpecifierPtr typeSpecifier;
+	AtomicTypeSpecifierPtr atomicTypeSpecifier;
 };
 
 void printHeader(void);
@@ -295,4 +293,9 @@ LabelPtr createConstr3Label(LabelConstrType type, TokenPtr t0, TokenPtr t1, Toke
 LabelPtr createConstr4Label(LabelConstrType type, TokenPtr t0, TokenPtr t1, TokenPtr t2, TokenPtr t3);
 LabelPtr createConstr5Label(LabelConstrType type, TokenPtr t0, TokenPtr t1, TokenPtr t2, TokenPtr t3, TokenPtr t4);
 DeclarationPtr createDeclaration(DeclarationSpecifiersPtr declSpecifiers, LinkedListPtr initDeclaratorList, StaticAssertDeclarationPtr staticAssertDecl);
-DeclarationSpecifiersPtr createDeclarationSpecifiers(TokenPtr storageClass, DeclarationSpecifiersPtr tokenList);
+DeclarationSpecifiersPtr createDeclarationSpecifiers1(TokenPtr token, DeclarationSpecifiersPtr tokenList);
+DeclarationSpecifiersPtr createDeclarationSpecifiers2(TypeSpecifierPtr typeSpecifier, DeclarationSpecifiersPtr tokenList);
+TypeSpecifierPtr createTypeSpecifier(TokenPtr token);
+TypeSpecifierPtr createTypeSpecifier2(AtomicTypeSpecifierPtr token);
+AtomicTypeSpecifierPtr createAtomicTypeSpecifier(TokenPtr atomicToken, TokenPtr typeNameToken);
+

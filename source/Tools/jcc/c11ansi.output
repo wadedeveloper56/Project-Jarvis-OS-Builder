@@ -624,7 +624,7 @@ Nonterminals, with rules where they appear
     storage_class_specifier <token> (162)
         on left: 107 108 109 110 111 112
         on right: 93 94
-    type_specifier <token> (163)
+    type_specifier <typeSpecifier> (163)
         on left: 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130
         on right: 95 96 141 142
     struct_or_union_specifier (164)
@@ -657,7 +657,7 @@ Nonterminals, with rules where they appear
     enumerator (173)
         on left: 157 158
         on right: 155 156
-    atomic_type_specifier (174)
+    atomic_type_specifier <atomicTypeSpecifier> (174)
         on left: 159
         on right: 127
     type_qualifier <token> (175)
