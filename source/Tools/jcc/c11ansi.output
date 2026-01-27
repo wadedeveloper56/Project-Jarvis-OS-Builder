@@ -299,7 +299,7 @@ Grammar
 
   204 direct_abstract_declarator: Y_LEFT_PAREN abstract_declarator Y_RIGHT_PAREN
   205                           | Y_LEFT_BRACKET Y_RIGHT_BRACKET
-  206                           | Y_LEFT_BRACKET '*' Y_RIGHT_BRACKET
+  206                           | Y_LEFT_BRACKET Y_TIMES Y_RIGHT_BRACKET
   207                           | Y_LEFT_BRACKET Y_STATIC type_qualifier_list assignment_expression Y_RIGHT_BRACKET
   208                           | Y_LEFT_BRACKET Y_STATIC assignment_expression Y_RIGHT_BRACKET
   209                           | Y_LEFT_BRACKET type_qualifier_list Y_STATIC assignment_expression Y_RIGHT_BRACKET
@@ -394,7 +394,7 @@ Grammar
 Terminals, with rules where they appear
 
     "end of file" (0) 0
-    '*' (42) 206 214
+    '*' (42) 214
     error (256)
     "identifier" <token> (258) 1 9 21 22 132 133 152 153 154 170 197 198 236 244 264
     "i_const" <token> (259) 6
@@ -409,7 +409,7 @@ Terminals, with rules where they appear
     Y_AND_EQUAL <token> (268) 84
     Y_LEFT_PAREN <token> (269) 4 12 19 20 25 26 34 35 43 159 166 167 171 181 182 183 204 221 222 223 224 237 255 256 257 258 259 260 261 262 263
     Y_RIGHT_PAREN <token> (270) 4 12 19 20 25 26 34 35 43 159 166 167 171 181 182 183 204 221 222 223 224 237 255 256 257 258 259 260 261 262 263
-    Y_TIMES <token> (271) 37 45 173 176 184 185 186 187
+    Y_TIMES <token> (271) 37 45 173 176 184 185 186 187 206
     Y_TIMES_EQUAL <token> (272) 77
     Y_PLUS <token> (273) 38 49
     Y_PLUS_PLUS <token> (274) 23 30
@@ -621,10 +621,10 @@ Nonterminals, with rules where they appear
     init_declarator (161)
         on left: 105 106
         on right: 103 104
-    storage_class_specifier <storageClass> (162)
+    storage_class_specifier <token> (162)
         on left: 107 108 109 110 111 112
         on right: 93 94
-    type_specifier <typeSpecifier> (163)
+    type_specifier <token> (163)
         on left: 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130
         on right: 95 96 141 142
     struct_or_union_specifier (164)
@@ -660,13 +660,13 @@ Nonterminals, with rules where they appear
     atomic_type_specifier (174)
         on left: 159
         on right: 127
-    type_qualifier <typeQualifier> (175)
+    type_qualifier <token> (175)
         on left: 160 161 162 163
         on right: 97 98 143 144 188 189
-    function_specifier <functionSpecifier> (176)
+    function_specifier <token> (176)
         on left: 164 165
         on right: 99 100
-    alignment_specifier <alignmentSpecifier> (177)
+    alignment_specifier <token> (177)
         on left: 166 167
         on right: 101 102
     declarator (178)
@@ -3244,7 +3244,7 @@ State 146
 State 147
 
   205 direct_abstract_declarator: Y_LEFT_BRACKET . Y_RIGHT_BRACKET
-  206                           | Y_LEFT_BRACKET . '*' Y_RIGHT_BRACKET
+  206                           | Y_LEFT_BRACKET . Y_TIMES Y_RIGHT_BRACKET
   207                           | Y_LEFT_BRACKET . Y_STATIC type_qualifier_list assignment_expression Y_RIGHT_BRACKET
   208                           | Y_LEFT_BRACKET . Y_STATIC assignment_expression Y_RIGHT_BRACKET
   209                           | Y_LEFT_BRACKET . type_qualifier_list Y_STATIC assignment_expression Y_RIGHT_BRACKET
@@ -3259,15 +3259,15 @@ State 147
     Y_EXCLAMATION           shift, and go to state 84
     Y_AND                   shift, and go to state 85
     Y_LEFT_PAREN            shift, and go to state 86
-    Y_TIMES                 shift, and go to state 87
+    Y_TIMES                 shift, and go to state 257
     Y_PLUS                  shift, and go to state 88
     Y_PLUS_PLUS             shift, and go to state 89
     Y_MINUS                 shift, and go to state 90
     Y_MINUS_MINUS           shift, and go to state 91
-    Y_RIGHT_BRACKET         shift, and go to state 257
+    Y_RIGHT_BRACKET         shift, and go to state 258
     Y_CONST                 shift, and go to state 4
     Y_SIZEOF                shift, and go to state 92
-    Y_STATIC                shift, and go to state 258
+    Y_STATIC                shift, and go to state 259
     Y_VOLATILE              shift, and go to state 20
     Y_TILDE                 shift, and go to state 93
     Y_ENUMERATION_CONSTANT  shift, and go to state 94
@@ -3276,7 +3276,6 @@ State 147
     Y_ALIGNOF               shift, and go to state 97
     Y_ATOMIC                shift, and go to state 121
     Y_RESTRICT              shift, and go to state 27
-    '*'                     shift, and go to state 259
 
     primary_expression         go to state 98
     constant                   go to state 99
@@ -5465,12 +5464,22 @@ State 256
 
 State 257
 
+   37 unary_operator: Y_TIMES .
+  206 direct_abstract_declarator: Y_LEFT_BRACKET Y_TIMES . Y_RIGHT_BRACKET
+
+    Y_RIGHT_BRACKET  shift, and go to state 357
+
+    $default  reduce using rule 37 (unary_operator)
+
+
+State 258
+
   205 direct_abstract_declarator: Y_LEFT_BRACKET Y_RIGHT_BRACKET .
 
     $default  reduce using rule 205 (direct_abstract_declarator)
 
 
-State 258
+State 259
 
   207 direct_abstract_declarator: Y_LEFT_BRACKET Y_STATIC . type_qualifier_list assignment_expression Y_RIGHT_BRACKET
   208                           | Y_LEFT_BRACKET Y_STATIC . assignment_expression Y_RIGHT_BRACKET
@@ -5517,16 +5526,9 @@ State 258
     logical_and_expression     go to state 114
     logical_or_expression      go to state 115
     conditional_expression     go to state 154
-    assignment_expression      go to state 357
+    assignment_expression      go to state 358
     type_qualifier             go to state 122
-    type_qualifier_list        go to state 358
-
-
-State 259
-
-  206 direct_abstract_declarator: Y_LEFT_BRACKET '*' . Y_RIGHT_BRACKET
-
-    Y_RIGHT_BRACKET  shift, and go to state 359
+    type_qualifier_list        go to state 359
 
 
 State 260
@@ -7218,12 +7220,19 @@ State 356
 
 State 357
 
+  206 direct_abstract_declarator: Y_LEFT_BRACKET Y_TIMES Y_RIGHT_BRACKET .
+
+    $default  reduce using rule 206 (direct_abstract_declarator)
+
+
+State 358
+
   208 direct_abstract_declarator: Y_LEFT_BRACKET Y_STATIC assignment_expression . Y_RIGHT_BRACKET
 
     Y_RIGHT_BRACKET  shift, and go to state 412
 
 
-State 358
+State 359
 
   189 type_qualifier_list: type_qualifier_list . type_qualifier
   207 direct_abstract_declarator: Y_LEFT_BRACKET Y_STATIC type_qualifier_list . assignment_expression Y_RIGHT_BRACKET
@@ -7272,13 +7281,6 @@ State 358
     conditional_expression     go to state 154
     assignment_expression      go to state 413
     type_qualifier             go to state 195
-
-
-State 359
-
-  206 direct_abstract_declarator: Y_LEFT_BRACKET '*' Y_RIGHT_BRACKET .
-
-    $default  reduce using rule 206 (direct_abstract_declarator)
 
 
 State 360

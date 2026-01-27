@@ -120,81 +120,28 @@ DeclarationPtr createDeclaration(DeclarationSpecifiersPtr declSpecifiers, Linked
 	return newDecl;
 }
 
-void addListElem(LinkedListPtr pList, void* elem) {
+void addListElem(LinkedListPtr pList, void* elem)
+{
 	pList->tail->next = AllocateMemory(sizeof(LinkedListNode));
 	pList->tail->userData = elem;
 	pList->tail = pList->tail->next;
 }
 
-LinkedListPtr createSLList(void) 
+LinkedListPtr createList(void) 
 {
-	LinkedListPtr newList = AllocateMemory(sizeof * newList);
-	newList->head = AllocateMemory(sizeof * newList->head);
+	LinkedListPtr newList = AllocateMemory(sizeof(LinkedList));
+	newList->head = AllocateMemory(sizeof(LinkedListNode));
 	newList->tail = newList->head;
 	return newList;
 }
 
-DeclarationSpecifiersPtr createDeclarationSpecifiers1(StorageClass storageClass, DeclarationSpecifiersPtr tokenList)
+DeclarationSpecifiersPtr createDeclarationSpecifiers(TokenPtr storageClass, DeclarationSpecifiersPtr tokenList)
 {
 	if (tokenList == NULL) {
 		tokenList = AllocateMemory(sizeof(DeclarationSpecifiers));
-		tokenList->tokenList = createSLList();
+		tokenList->tokenList = createList();
 	}
-	int* data = AllocateMemory(sizeof(storageClass));
-	*data = storageClass;
-	addListElem(tokenList->tokenList, data);
-	return tokenList;
-}
-
-DeclarationSpecifiersPtr createDeclarationSpecifiers2(TypeQualifier storageClass, DeclarationSpecifiersPtr tokenList)
-{
-	if (tokenList == NULL)
-	{
-		tokenList = AllocateMemory(sizeof(DeclarationSpecifiers));
-		tokenList->tokenList = createSLList();
-	}
-	int* data = AllocateMemory(sizeof(storageClass));
-	*data = storageClass;
-	addListElem(tokenList->tokenList, data);
-	return tokenList;
-}
-
-DeclarationSpecifiersPtr createDeclarationSpecifiers3(TypeSpecifier storageClass, DeclarationSpecifiersPtr tokenList)
-{
-	if (tokenList == NULL)
-	{
-		tokenList = AllocateMemory(sizeof(DeclarationSpecifiers));
-		tokenList->tokenList = createSLList();
-	}
-	int* data = AllocateMemory(sizeof(storageClass));
-	*data = storageClass;
-	addListElem(tokenList->tokenList, data);
-	return tokenList;
-}
-
-DeclarationSpecifiersPtr createDeclarationSpecifiers4(FunctionSpecifier storageClass, DeclarationSpecifiersPtr tokenList)
-{
-	if (tokenList == NULL)
-	{
-		tokenList = AllocateMemory(sizeof(DeclarationSpecifiers));
-		tokenList->tokenList = createSLList();
-	}
-	int* data = AllocateMemory(sizeof(storageClass));
-	*data = storageClass;
-	addListElem(tokenList->tokenList, data);
-	return tokenList;
-}
-
-DeclarationSpecifiersPtr createDeclarationSpecifiers5(AlignmentSpecifier storageClass, DeclarationSpecifiersPtr tokenList)
-{
-	if (tokenList == NULL)
-	{
-		tokenList = AllocateMemory(sizeof(DeclarationSpecifiers));
-		tokenList->tokenList = createSLList();
-	}
-	int* data = AllocateMemory(sizeof(storageClass));
-	*data = storageClass;
-	addListElem(tokenList->tokenList, data);
+	addListElem(tokenList->tokenList, storageClass);
 	return tokenList;
 }
 

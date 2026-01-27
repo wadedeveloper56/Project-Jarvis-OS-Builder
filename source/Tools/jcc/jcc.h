@@ -266,12 +266,6 @@ union ParseUnion
 	DeclarationSpecifiersPtr declSpecifiers;
 	LinkedListPtr initDeclaratorList;
 	StaticAssertDeclarationPtr staticAssertDecl;
-	StorageClass storageClass;
-	TypeQualifier typeQualifier;
-	TypeSpecifier typeSpecifier;
-	FunctionSpecifier functionSpecifier;
-	AlignmentSpecifier alignmentSpecifier;
-
 };
 
 void printHeader(void);
@@ -301,9 +295,4 @@ LabelPtr createConstr3Label(LabelConstrType type, TokenPtr t0, TokenPtr t1, Toke
 LabelPtr createConstr4Label(LabelConstrType type, TokenPtr t0, TokenPtr t1, TokenPtr t2, TokenPtr t3);
 LabelPtr createConstr5Label(LabelConstrType type, TokenPtr t0, TokenPtr t1, TokenPtr t2, TokenPtr t3, TokenPtr t4);
 DeclarationPtr createDeclaration(DeclarationSpecifiersPtr declSpecifiers, LinkedListPtr initDeclaratorList, StaticAssertDeclarationPtr staticAssertDecl);
-
-DeclarationSpecifiersPtr createDeclarationSpecifiers1(StorageClass storageClass, DeclarationSpecifiersPtr tokenList);
-DeclarationSpecifiersPtr createDeclarationSpecifiers2(TypeQualifier storageClass, DeclarationSpecifiersPtr tokenList);
-DeclarationSpecifiersPtr createDeclarationSpecifiers3(TypeSpecifier storageClass, DeclarationSpecifiersPtr tokenList);
-DeclarationSpecifiersPtr createDeclarationSpecifiers4(FunctionSpecifier storageClass, DeclarationSpecifiersPtr tokenList);
-DeclarationSpecifiersPtr createDeclarationSpecifiers5(AlignmentSpecifier storageClass, DeclarationSpecifiersPtr tokenList);
+DeclarationSpecifiersPtr createDeclarationSpecifiers(TokenPtr storageClass, DeclarationSpecifiersPtr tokenList);

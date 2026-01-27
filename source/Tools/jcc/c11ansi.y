@@ -169,11 +169,12 @@ int yylex();
 %type<declSpecifiers> declaration_specifiers
 %type<initDeclaratorList> init_declarator_list
 %type<staticAssertDecl> static_assert_declaration
-%type<storageClass> storage_class_specifier
-%type<typeQualifier> type_qualifier
-%type<typeSpecifier> type_specifier
-%type<functionSpecifier> function_specifier
-%type<alignmentSpecifier> alignment_specifier
+
+%type<token> storage_class_specifier
+%type<token> type_qualifier
+%type<token> type_specifier
+%type<token> function_specifier
+%type<token> alignment_specifier
 
 %start translation_unit
 %%
@@ -355,16 +356,16 @@ declaration
 	;
 
 declaration_specifiers
-	: storage_class_specifier declaration_specifiers { $$ = createDeclarationSpecifiers1($1,$2); }
-	| storage_class_specifier                        { $$ = createDeclarationSpecifiers1($1,NULL); }
-	| type_specifier declaration_specifiers          { $$ = createDeclarationSpecifiers2($1,$2); }
-	| type_specifier                                 { $$ = createDeclarationSpecifiers2($1,NULL); }
-	| type_qualifier declaration_specifiers          { $$ = createDeclarationSpecifiers3($1,$2); }
-	| type_qualifier                                 { $$ = createDeclarationSpecifiers3($1,NULL); }
-	| function_specifier declaration_specifiers      { $$ = createDeclarationSpecifiers4($1,$2); }
-	| function_specifier                             { $$ = createDeclarationSpecifiers4($1,NULL); }
-	| alignment_specifier declaration_specifiers     { $$ = createDeclarationSpecifiers5($1,$2); }
-	| alignment_specifier                            { $$ = createDeclarationSpecifiers5($1,NULL); }
+	: storage_class_specifier declaration_specifiers { $$ = createDeclarationSpecifiers($1,$2); }
+	| storage_class_specifier                        { $$ = createDeclarationSpecifiers($1,NULL); }
+	| type_specifier declaration_specifiers          { $$ = createDeclarationSpecifiers($1,$2); }
+	| type_specifier                                 { $$ = createDeclarationSpecifiers($1,NULL); }
+	| type_qualifier declaration_specifiers          { $$ = createDeclarationSpecifiers($1,$2); }
+	| type_qualifier                                 { $$ = createDeclarationSpecifiers($1,NULL); }
+	| function_specifier declaration_specifiers      { $$ = createDeclarationSpecifiers($1,$2); }
+	| function_specifier                             { $$ = createDeclarationSpecifiers($1,NULL); }
+	| alignment_specifier declaration_specifiers     { $$ = createDeclarationSpecifiers($1,$2); }
+	| alignment_specifier                            { $$ = createDeclarationSpecifiers($1,NULL); }
 	;
 
 init_declarator_list
@@ -378,33 +379,33 @@ init_declarator
 	;
 
 storage_class_specifier
-	: Y_TYPEDEF	      { $$ = SC_TYPEDEF; }
-	| Y_EXTERN        { $$ = SC_EXTERN; }
-	| Y_STATIC        { $$ = SC_STATIC; }
-	| Y_THREAD_LOCAL  { $$ = SC_THREAD_LOCAL; }
-	| Y_AUTO          { $$ = SC_AUTO; }
-	| Y_REGISTER      { $$ = SC_REGISTER; }
+	: Y_TYPEDEF	      { $$ = $1; }
+	| Y_EXTERN        { $$ = $1; }
+	| Y_STATIC        { $$ = $1; }
+	| Y_THREAD_LOCAL  { $$ = $1; }
+	| Y_AUTO          { $$ = $1; }
+	| Y_REGISTER      { $$ = $1; }
 	;
 
 type_specifier
-	: Y_VOID                    { $$ = TS_VOID; }
-	| Y_CHAR                    { $$ = TS_CHAR; }
-	| Y_SHORT                   { $$ = TS_SHORT; }
-	| Y_INT                     { $$ = TS_INT; }
-	| Y_LONG                    { $$ = TS_LONG; }
-	| Y_LONG_LONG               { $$ = TS_LONG_LONG; }
-	| Y_FLOAT                   { $$ = TS_FLOAT; }
-	| Y_DOUBLE                  { $$ = TS_DOUBLE; }
-	| Y_LONG_DOUBLE             { $$ = TS_LONG_DOUBLE; }
-	| Y_SIGNED                  { $$ = TS_SIGNED; }
-	| Y_UNSIGNED                { $$ = TS_UNSIGNED; }
-	| Y_BOOL                    { $$ = TS_BOOL; }
-	| Y_COMPLEX                 { $$ = TS_COMPLEX; }
-	| Y_IMAGINARY               { $$ = TS_IMAGINARY; }
-	| atomic_type_specifier     { $$ = TS_ATOMIC; }
-	| struct_or_union_specifier { $$ = TS_STRUCT_OR_UNION; }
-	| enum_specifier            { $$ = TS_ENUM; }
-	| Y_TYPEDEF_NAME            { $$ = TS_TYPEDEF_NAME; } 
+	: Y_VOID                    { $$ = $1; }
+	| Y_CHAR                    { $$ = $1; }
+	| Y_SHORT                   { $$ = $1; }
+	| Y_INT                     { $$ = $1; }
+	| Y_LONG                    { $$ = $1; }
+	| Y_LONG_LONG               { $$ = $1; }
+	| Y_FLOAT                   { $$ = $1; }
+	| Y_DOUBLE                  { $$ = $1; }
+	| Y_LONG_DOUBLE             { $$ = $1; }
+	| Y_SIGNED                  { $$ = $1; }
+	| Y_UNSIGNED                { $$ = $1; }
+	| Y_BOOL                    { $$ = $1; }
+	| Y_COMPLEX                 { $$ = $1; }
+	| Y_IMAGINARY               { $$ = $1; }
+	| atomic_type_specifier     { $$ = NULL; }
+	| struct_or_union_specifier { $$ = NULL; }
+	| enum_specifier            { $$ = NULL; }
+	| Y_TYPEDEF_NAME            { $$ = $1; } 
 	;
 
 struct_or_union_specifier
@@ -470,20 +471,20 @@ atomic_type_specifier
 	;
 
 type_qualifier
-	: Y_CONST      { $$ = TQ_CONST; }
-	| Y_RESTRICT   { $$ = TQ_RESTRICT; }
-	| Y_VOLATILE   { $$ = TQ_VOLATILE; }
-	| Y_ATOMIC     { $$ = TQ_ATOMIC; }
+	: Y_CONST      { $$ = $1; }
+	| Y_RESTRICT   { $$ = $1; }
+	| Y_VOLATILE   { $$ = $1; }
+	| Y_ATOMIC     { $$ = $1; }
 	;
 
 function_specifier
-	: Y_INLINE    { $$ = FS_INLINE;  }
-	| Y_NORETURN  { $$ = FS_NORETURN; }
+	: Y_INLINE    { $$ = $1;  }
+	| Y_NORETURN  { $$ = $1; }
 	;
 
 alignment_specifier
-	: Y_ALIGNAS Y_LEFT_PAREN type_name Y_RIGHT_PAREN            { $$ = AS_ALIGNOF; }
-	| Y_ALIGNAS Y_LEFT_PAREN constant_expression Y_RIGHT_PAREN  { $$ = AS_ALIGNOF; }
+	: Y_ALIGNAS Y_LEFT_PAREN type_name Y_RIGHT_PAREN            { $$ = $1; }
+	| Y_ALIGNAS Y_LEFT_PAREN constant_expression Y_RIGHT_PAREN  { $$ = $1; }
 	;
 
 declarator
@@ -556,7 +557,7 @@ abstract_declarator
 direct_abstract_declarator
 	: Y_LEFT_PAREN abstract_declarator Y_RIGHT_PAREN
 	| Y_LEFT_BRACKET Y_RIGHT_BRACKET
-	| Y_LEFT_BRACKET '*' Y_RIGHT_BRACKET
+	| Y_LEFT_BRACKET Y_TIMES Y_RIGHT_BRACKET
 	| Y_LEFT_BRACKET Y_STATIC type_qualifier_list assignment_expression Y_RIGHT_BRACKET
 	| Y_LEFT_BRACKET Y_STATIC assignment_expression Y_RIGHT_BRACKET
 	| Y_LEFT_BRACKET type_qualifier_list Y_STATIC assignment_expression Y_RIGHT_BRACKET
