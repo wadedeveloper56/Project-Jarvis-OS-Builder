@@ -8,7 +8,7 @@
 #include "ArgumentTable.h"
 #include "Memory.h"
 
-typedef enum
+typedef enum _LabelType
 {
 	LABT_LIST,
 	LABT_TOKEN,
@@ -17,7 +17,7 @@ typedef enum
 	LABT_DECL_LIST
 } LabelType;
 
-typedef enum
+typedef enum _LabelConstrType
 {
 	LABCT_ADDR_OF_VALUE,
 	LABCT_AND,
@@ -76,7 +76,7 @@ typedef enum
 	LABCT_MAX
 } LabelConstrType;
 
-typedef enum
+typedef enum _RadixType
 {
 	RADT_DECIMAL,
 	RADT_HEX,
@@ -84,7 +84,7 @@ typedef enum
 	RADT_MAX
 } RadixType;
 
-typedef enum
+typedef enum _ConstType
 {
 	CONSTT_CHAR_CONST,
 	CONSTT_INT_CONST,
@@ -98,7 +98,7 @@ typedef enum
 	CONSTT_MAX
 } ConstType;
 
-typedef enum
+typedef enum _TokenCode
 {
 	YC_INT_CONST,
 	YC_FLOAT_CONST,
