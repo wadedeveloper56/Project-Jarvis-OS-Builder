@@ -182,12 +182,96 @@ typedef struct _CTree
 	struct _CTree* child2;  /* Right child */
 } CTree, * CTreePtr, ** CTreePtrPtr;
 
+typedef enum _StorageClass
+{
+	SC_AUTO,
+	SC_REGISTER,
+	SC_STATIC,
+	SC_EXTERN,
+	SC_TYPEDEF,
+	SC_THREAD_LOCAL,
+	SC_MAX
+} StorageClass;
+
+typedef enum _TypeQualifier
+{
+	TQ_CONST,
+	TQ_RESTRICT,
+	TQ_VOLATILE,
+	TQ_ATOMIC,
+	TQ_MAX
+} TypeQualifier;
+
+typedef enum _TypeSpecifier
+{
+	TS_VOID,
+	TS_CHAR,
+	TS_SHORT,
+	TS_INT,
+	TS_LONG,
+	TS_LONG_LONG,
+	TS_FLOAT,
+	TS_DOUBLE,
+	TS_LONG_DOUBLE,
+	TS_SIGNED,
+	TS_UNSIGNED,
+	TS_BOOL,
+	TS_COMPLEX,
+	TS_IMAGINARY,
+	TS_ATOMIC_TYPE,
+	TS_STRUCT_OR_UNION,
+	TS_ENUM,
+	TS_TYPEDEF_NAME,
+	TS_ATOMIC,
+	TS_MAX
+} TypeSpecifier;
+
+typedef enum _FunctionSpecifier
+{
+	FS_INLINE,
+	FS_NORETURN,
+	FS_MAX
+} FunctionSpecifier;
+
+typedef enum _AlignmentSpecifier
+{
+	AS_ALIGNOF
+} AlignmentSpecifier;
+
+typedef struct _DeclarationSpecifiers
+{
+	LinkedListPtr tokenList;
+} DeclarationSpecifiers, * DeclarationSpecifiersPtr, ** DeclarationSpecifiersPtrPtr;
+
+typedef struct _StaticAssertDeclaration
+{
+	CTreePtr constExpr;
+	TokenPtr strLiteral;
+} StaticAssertDeclaration, * StaticAssertDeclarationPtr, ** StaticAssertDeclarationPtrPtr;
+
+typedef struct _Declaration
+{
+	DeclarationSpecifiersPtr declSpecifiers;
+	LinkedListPtr initDeclaratorList;
+	StaticAssertDeclarationPtr staticAssertDecl;
+} Declaration, * DeclarationPtr, ** DeclarationPtrPtr;
+
 union ParseUnion
 {
 	CTreePtr expression;
 	LabelPtr label;
 	TokenPtr token;
 	LinkedListPtr list;
+	DeclarationPtr declaration;	
+	DeclarationSpecifiersPtr declSpecifiers;
+	LinkedListPtr initDeclaratorList;
+	StaticAssertDeclarationPtr staticAssertDecl;
+	StorageClass storageClass;
+	TypeQualifier typeQualifier;
+	TypeSpecifier typeSpecifier;
+	FunctionSpecifier functionSpecifier;
+	AlignmentSpecifier alignmentSpecifier;
+
 };
 
 void printHeader(void);
@@ -216,3 +300,10 @@ LabelPtr createConstr2Label(LabelConstrType type, TokenPtr t0, TokenPtr t1);
 LabelPtr createConstr3Label(LabelConstrType type, TokenPtr t0, TokenPtr t1, TokenPtr t2);
 LabelPtr createConstr4Label(LabelConstrType type, TokenPtr t0, TokenPtr t1, TokenPtr t2, TokenPtr t3);
 LabelPtr createConstr5Label(LabelConstrType type, TokenPtr t0, TokenPtr t1, TokenPtr t2, TokenPtr t3, TokenPtr t4);
+DeclarationPtr createDeclaration(DeclarationSpecifiersPtr declSpecifiers, LinkedListPtr initDeclaratorList, StaticAssertDeclarationPtr staticAssertDecl);
+
+DeclarationSpecifiersPtr createDeclarationSpecifiers1(StorageClass storageClass, DeclarationSpecifiersPtr tokenList);
+DeclarationSpecifiersPtr createDeclarationSpecifiers2(TypeQualifier storageClass, DeclarationSpecifiersPtr tokenList);
+DeclarationSpecifiersPtr createDeclarationSpecifiers3(TypeSpecifier storageClass, DeclarationSpecifiersPtr tokenList);
+DeclarationSpecifiersPtr createDeclarationSpecifiers4(FunctionSpecifier storageClass, DeclarationSpecifiersPtr tokenList);
+DeclarationSpecifiersPtr createDeclarationSpecifiers5(AlignmentSpecifier storageClass, DeclarationSpecifiersPtr tokenList);

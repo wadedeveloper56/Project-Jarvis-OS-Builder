@@ -164,6 +164,17 @@ int yylex();
 %type<expression> logical_and_expression
 %type<expression> logical_or_expression
 %type<expression> conditional_expression
+
+%type<declaration> declaration
+%type<declSpecifiers> declaration_specifiers
+%type<initDeclaratorList> init_declarator_list
+%type<staticAssertDecl> static_assert_declaration
+%type<storageClass> storage_class_specifier
+%type<typeQualifier> type_qualifier
+%type<typeSpecifier> type_specifier
+%type<functionSpecifier> function_specifier
+%type<alignmentSpecifier> alignment_specifier
+
 %start translation_unit
 %%
 
@@ -338,27 +349,27 @@ constant_expression
 	;
 
 declaration
-	: declaration_specifiers Y_SEMICOLON
-	| declaration_specifiers init_declarator_list Y_SEMICOLON
-	| static_assert_declaration                              
+	: declaration_specifiers Y_SEMICOLON                      { $$ = createDeclaration($1,NULL,NULL); }
+	| declaration_specifiers init_declarator_list Y_SEMICOLON { $$ = createDeclaration($1,$2,NULL); }
+	| static_assert_declaration                               { $$ = createDeclaration(NULL,NULL,$1); }
 	;
 
 declaration_specifiers
-	: storage_class_specifier declaration_specifiers
-	| storage_class_specifier                       
-	| type_specifier declaration_specifiers         
-	| type_specifier                                
-	| type_qualifier declaration_specifiers         
-	| type_qualifier                                
-	| function_specifier declaration_specifiers     
-	| function_specifier                            
-	| alignment_specifier declaration_specifiers    
-	| alignment_specifier                           
+	: storage_class_specifier declaration_specifiers { $$ = createDeclarationSpecifiers1($1,$2); }
+	| storage_class_specifier                        { $$ = createDeclarationSpecifiers1($1,NULL); }
+	| type_specifier declaration_specifiers          { $$ = createDeclarationSpecifiers2($1,$2); }
+	| type_specifier                                 { $$ = createDeclarationSpecifiers2($1,NULL); }
+	| type_qualifier declaration_specifiers          { $$ = createDeclarationSpecifiers3($1,$2); }
+	| type_qualifier                                 { $$ = createDeclarationSpecifiers3($1,NULL); }
+	| function_specifier declaration_specifiers      { $$ = createDeclarationSpecifiers4($1,$2); }
+	| function_specifier                             { $$ = createDeclarationSpecifiers4($1,NULL); }
+	| alignment_specifier declaration_specifiers     { $$ = createDeclarationSpecifiers5($1,$2); }
+	| alignment_specifier                            { $$ = createDeclarationSpecifiers5($1,NULL); }
 	;
 
 init_declarator_list
-	: init_declarator                              
-	| init_declarator_list Y_COMMA init_declarator 
+	: init_declarator                               { $$ = NULL; }
+	| init_declarator_list Y_COMMA init_declarator  { $$ = NULL; }
 	;
 
 init_declarator
@@ -367,33 +378,33 @@ init_declarator
 	;
 
 storage_class_specifier
-	: Y_TYPEDEF	      
-	| Y_EXTERN        
-	| Y_STATIC      
-	| Y_THREAD_LOCAL
-	| Y_AUTO        
-	| Y_REGISTER    
+	: Y_TYPEDEF	      { $$ = SC_TYPEDEF; }
+	| Y_EXTERN        { $$ = SC_EXTERN; }
+	| Y_STATIC        { $$ = SC_STATIC; }
+	| Y_THREAD_LOCAL  { $$ = SC_THREAD_LOCAL; }
+	| Y_AUTO          { $$ = SC_AUTO; }
+	| Y_REGISTER      { $$ = SC_REGISTER; }
 	;
 
 type_specifier
-	: Y_VOID                    
-	| Y_CHAR                    
-	| Y_SHORT                   
-	| Y_INT                     
-	| Y_LONG                    
-	| Y_LONG_LONG               
-	| Y_FLOAT                   
-	| Y_DOUBLE                  
-	| Y_LONG_DOUBLE             
-	| Y_SIGNED                  
-	| Y_UNSIGNED                
-	| Y_BOOL                    
-	| Y_COMPLEX                 
-	| Y_IMAGINARY               
-	| atomic_type_specifier     
-	| struct_or_union_specifier 
-	| enum_specifier            
-	| Y_TYPEDEF_NAME            
+	: Y_VOID                    { $$ = TS_VOID; }
+	| Y_CHAR                    { $$ = TS_CHAR; }
+	| Y_SHORT                   { $$ = TS_SHORT; }
+	| Y_INT                     { $$ = TS_INT; }
+	| Y_LONG                    { $$ = TS_LONG; }
+	| Y_LONG_LONG               { $$ = TS_LONG_LONG; }
+	| Y_FLOAT                   { $$ = TS_FLOAT; }
+	| Y_DOUBLE                  { $$ = TS_DOUBLE; }
+	| Y_LONG_DOUBLE             { $$ = TS_LONG_DOUBLE; }
+	| Y_SIGNED                  { $$ = TS_SIGNED; }
+	| Y_UNSIGNED                { $$ = TS_UNSIGNED; }
+	| Y_BOOL                    { $$ = TS_BOOL; }
+	| Y_COMPLEX                 { $$ = TS_COMPLEX; }
+	| Y_IMAGINARY               { $$ = TS_IMAGINARY; }
+	| atomic_type_specifier     { $$ = TS_ATOMIC; }
+	| struct_or_union_specifier { $$ = TS_STRUCT_OR_UNION; }
+	| enum_specifier            { $$ = TS_ENUM; }
+	| Y_TYPEDEF_NAME            { $$ = TS_TYPEDEF_NAME; } 
 	;
 
 struct_or_union_specifier
@@ -459,20 +470,20 @@ atomic_type_specifier
 	;
 
 type_qualifier
-	: Y_CONST     
-	| Y_RESTRICT  
-	| Y_VOLATILE  
-	| Y_ATOMIC    
+	: Y_CONST      { $$ = TQ_CONST; }
+	| Y_RESTRICT   { $$ = TQ_RESTRICT; }
+	| Y_VOLATILE   { $$ = TQ_VOLATILE; }
+	| Y_ATOMIC     { $$ = TQ_ATOMIC; }
 	;
 
 function_specifier
-	: Y_INLINE    
-	| Y_NORETURN  
+	: Y_INLINE    { $$ = FS_INLINE;  }
+	| Y_NORETURN  { $$ = FS_NORETURN; }
 	;
 
 alignment_specifier
-	: Y_ALIGNAS Y_LEFT_PAREN type_name Y_RIGHT_PAREN           
-	| Y_ALIGNAS Y_LEFT_PAREN constant_expression Y_RIGHT_PAREN 
+	: Y_ALIGNAS Y_LEFT_PAREN type_name Y_RIGHT_PAREN            { $$ = AS_ALIGNOF; }
+	| Y_ALIGNAS Y_LEFT_PAREN constant_expression Y_RIGHT_PAREN  { $$ = AS_ALIGNOF; }
 	;
 
 declarator
@@ -532,8 +543,8 @@ identifier_list
 	;
 
 type_name
-	: specifier_qualifier_list abstract_declarator
-	| specifier_qualifier_list
+	: specifier_qualifier_list abstract_declarator { $$ = NULL; }
+	| specifier_qualifier_list                     { $$ = NULL; }
 	;
 
 abstract_declarator
@@ -594,7 +605,7 @@ designator
 	;
 
 static_assert_declaration
-	: Y_STATIC_ASSERT Y_LEFT_PAREN constant_expression Y_COMMA STRING_LITERAL Y_RIGHT_PAREN Y_SEMICOLON
+	: Y_STATIC_ASSERT Y_LEFT_PAREN constant_expression Y_COMMA STRING_LITERAL Y_RIGHT_PAREN Y_SEMICOLON { $$ = NULL; }
 	;
 
 statement
