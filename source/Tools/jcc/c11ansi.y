@@ -189,7 +189,7 @@ int yylex();
 
 %type<list> enumerator_list
 %type<enumerator> enumerator
-$type<enumSpecifier> enum_specifier
+%type<enumSpecifier> enum_specifier
 
 %start translation_unit
 %%
@@ -464,8 +464,8 @@ struct_declarator
 	;
 
 enum_specifier
-	: Y_ENUM Y_LEFT_BRACE enumerator_list Y_RIGHT_BRACE                     { $$ = createEnumSpecifier(NULL,$4); }
-	| Y_ENUM Y_LEFT_BRACE enumerator_list Y_COMMA Y_RIGHT_BRACE             { $$ = createEnumSpecifier(NUMM,$4); }
+	: Y_ENUM Y_LEFT_BRACE enumerator_list Y_RIGHT_BRACE                     { $$ = createEnumSpecifier(NULL,$3); }
+	| Y_ENUM Y_LEFT_BRACE enumerator_list Y_COMMA Y_RIGHT_BRACE             { $$ = createEnumSpecifier(NULL,$3); }
 	| Y_ENUM IDENTIFIER Y_LEFT_BRACE enumerator_list Y_RIGHT_BRACE          { $$ = createEnumSpecifier($2,$4); }
 	| Y_ENUM IDENTIFIER Y_LEFT_BRACE enumerator_list Y_COMMA Y_RIGHT_BRACE  { $$ = createEnumSpecifier($2,$4); } 
 	| Y_ENUM IDENTIFIER                                                     { $$ = createEnumSpecifier($2,NULL); }

@@ -266,6 +266,7 @@ typedef struct _StructDeclaration
 } StructDeclaration, * StructDeclarationPtr, ** StructDeclarationPtrPtr;
 
 typedef struct _Declarator Declarator, * DeclaratorPtr, ** DeclaratorPtrPtr;
+typedef struct _DirectDeclarator DirectDeclarator, * DirectDeclaratorPtr, ** DirectDeclaratorPtrPtr;
 
 typedef struct _StructDeclarator
 {
@@ -275,8 +276,12 @@ typedef struct _StructDeclarator
 
 typedef struct _DirectDeclarator
 {
-	CTreePtr directDeclarator;
-	CTreePtr constantExpr;
+	DirectDeclaratorPtr directDeclarator;
+	DeclaratorPtr declarator;
+	LinkedListPtr identifierList;
+	TokenPtr identifier;
+	TokenPtr delimStart;
+	TokenPtr delimEnd;
 } DirectDeclarator, * DirectDeclaratorPtr, ** DirectDeclaratorPtrPtr;
 
 typedef struct _Declarator

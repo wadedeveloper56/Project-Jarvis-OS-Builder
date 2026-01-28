@@ -648,13 +648,13 @@ Nonterminals, with rules where they appear
     struct_declarator <structDeclarator> (170)
         on left: 147 148 149
         on right: 145 146
-    enum_specifier (171)
+    enum_specifier <enumSpecifier> (171)
         on left: 150 151 152 153 154
         on right: 129
-    enumerator_list (172)
+    enumerator_list <list> (172)
         on left: 155 156
         on right: 150 151 152 153 156
-    enumerator (173)
+    enumerator <enumerator> (173)
         on left: 157 158
         on right: 155 156
     atomic_type_specifier <atomicTypeSpecifier> (174)
