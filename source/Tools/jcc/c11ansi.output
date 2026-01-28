@@ -645,7 +645,7 @@ Nonterminals, with rules where they appear
     struct_declarator_list <list> (169)
         on left: 145 146
         on right: 139 146
-    struct_declarator (170)
+    struct_declarator <structDeclarator> (170)
         on left: 147 148 149
         on right: 145 146
     enum_specifier (171)
@@ -669,7 +669,7 @@ Nonterminals, with rules where they appear
     alignment_specifier <token> (177)
         on left: 166 167
         on right: 101 102
-    declarator (178)
+    declarator <declarator> (178)
         on left: 168 169
         on right: 105 106 148 149 171 194 273 274
     direct_declarator (179)

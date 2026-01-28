@@ -182,6 +182,8 @@ int yylex();
 %type<structDeclaration> struct_declaration
 %type<list> specifier_qualifier_list
 %type<list> struct_declarator_list
+%type<structDeclarator> struct_declarator
+%type<declarator> declarator
 
 %start translation_unit
 %%
@@ -445,8 +447,8 @@ specifier_qualifier_list
 	;
 
 struct_declarator_list
-	: struct_declarator                                
-	| struct_declarator_list Y_COMMA struct_declarator  
+	: struct_declarator                                { $$ = createStructDeclaratorList($1,NULL); }
+	| struct_declarator_list Y_COMMA struct_declarator { $$ = createStructDeclaratorList($3,$1); } 
 	;
 
 struct_declarator

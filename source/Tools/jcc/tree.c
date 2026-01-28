@@ -214,4 +214,14 @@ LinkedListPtr createSecifierQualifierList(TypeSpecifierPtr typeSpecifier, TokenP
 	return list;
 }
 
+LinkedListPtr createStructDeclaratorList(StructDeclaratorPtr structDeclarator, LinkedListPtr list)
+{
+	if (list == NULL)
+	{
+		list = createList();
+	}
+	addListElem(list, structDeclarator);
+	return list;
+}
+
 
