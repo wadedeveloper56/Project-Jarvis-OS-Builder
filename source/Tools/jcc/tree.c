@@ -161,16 +161,21 @@ DeclarationPtr createDeclaration(DeclarationSpecifiersPtr declSpecifiers, Linked
 
 void addListElem(LinkedListPtr pList, void* elem)
 {
-	pList->tail->next = AllocateMemory(sizeof(LinkedListNode));
-	pList->tail->userData = elem;
-	pList->tail = pList->tail->next;
+	LinkedListNodePtr node = AllocateMemory(sizeof(LinkedListNode));
+	node->userData = elem;
+	node->next = NULL;
+	LinkedListNodePtr ptr = pList->list;
+	while (ptr->next != NULL)
+	{
+		ptr = ptr->next;
+	}
+	ptr->next = node;
 }
 
 LinkedListPtr createList(void) 
 {
 	LinkedListPtr newList = AllocateMemory(sizeof(LinkedList));
-	newList->head = AllocateMemory(sizeof(LinkedListNode));
-	newList->tail = newList->head;
+	newList->list = AllocateMemory(sizeof(LinkedListNode));
 	return newList;
 }
 

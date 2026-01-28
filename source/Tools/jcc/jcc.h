@@ -157,8 +157,7 @@ typedef struct _LinkedListNode
 
 typedef struct _LinkedList
 {
-	LinkedListNodePtr head;  /* 1-st element in the list */
-	LinkedListNodePtr tail;  /* Last (most recently added) element in the list */
+	LinkedListNodePtr list; 
 } LinkedList, * LinkedListPtr, ** LinkedListPtrPtr;
 
 typedef struct _Label
@@ -321,6 +320,7 @@ TokenPtr createKeywordToken(char* str, int keyword);
 //********************************************
 // tree.c functions
 //********************************************
+void zapToken(void* elem);
 CTreePtr createCTreeRoot(LabelPtr label);
 CTreePtr createNULLCTree(void);
 CTreePtr createCTree1(LabelPtr label, CTreePtr child);

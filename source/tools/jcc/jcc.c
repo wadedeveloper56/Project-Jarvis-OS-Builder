@@ -62,7 +62,7 @@ void getCmdLineOptions(int argc, char* argv[]) {
 	files = createList();
 	for (int i = 0; i < infiles->count; i++)
 	{
-		addListElem(files,infiles->filename[i]);
+		addListElem(files,(void *)infiles->filename[i]);
 	}
 	argFreeTable(argtable, sizeof(argtable) / sizeof(argtable[0]));
 }
@@ -79,11 +79,11 @@ void terminate(int exitCode) {
 void main(int argc, char* argv[])
 {
     initiate(argc, argv);
-	LinkedListPtr ptr = files;
-	while (ptr->head != NULL && ptr->head->userData != NULL)
+	LinkedListNodePtr ptr = files->list;
+	while (ptr != NULL && ptr->userData != NULL)
 	{
-		doConversion(&ptr->head->userData);
-		ptr->head = ptr->head->next;
+		doConversion(&ptr->userData);
+		ptr = ptr->next;
 	}	
 	terminate(0);
 }
