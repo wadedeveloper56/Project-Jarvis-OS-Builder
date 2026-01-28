@@ -177,6 +177,12 @@ int yylex();
 %type<token> alignment_specifier
 %type<atomicTypeSpecifier> atomic_type_specifier
 
+%type<token> struct_or_union
+%type<list> struct_declaration_list
+%type<structDeclaration> struct_declaration
+%type<list> specifier_qualifier_list
+%type<list> struct_declarator_list
+
 %start translation_unit
 %%
 
@@ -416,26 +422,26 @@ struct_or_union_specifier
 	;
 
 struct_or_union
-	: Y_STRUCT 
-	| Y_UNION  
+	: Y_STRUCT  { $$ = $1; }
+	| Y_UNION   { $$ = $1; }
 	;
 
 struct_declaration_list
-	: struct_declaration                         
-	| struct_declaration_list struct_declaration 
+	: struct_declaration                         { $$ = createStructDeclarationList($1,NULL); }
+	| struct_declaration_list struct_declaration { $$ = createStructDeclarationList($2,$1); } 
 	;
 
 struct_declaration
-	: specifier_qualifier_list Y_SEMICOLON                        
-	| specifier_qualifier_list struct_declarator_list Y_SEMICOLON 
-	| static_assert_declaration                                   
+	: specifier_qualifier_list Y_SEMICOLON                         { $$ = createStructDeclaration($1,NULL,NULL); }
+	| specifier_qualifier_list struct_declarator_list Y_SEMICOLON  { $$ = createStructDeclaration($1,$2,NULL); }
+	| static_assert_declaration                                    { $$ = createStructDeclaration(NULL,NULL,$1); }
 	;
 
 specifier_qualifier_list
-	: type_specifier specifier_qualifier_list 
-	| type_specifier                         
-	| type_qualifier specifier_qualifier_list
-	| type_qualifier                          
+	: type_specifier specifier_qualifier_list  { $$ = createSecifierQualifierList($1,NULL,$2); }
+	| type_specifier                           { $$ = createSecifierQualifierList($1,NULL,NULL); }
+	| type_qualifier specifier_qualifier_list  { $$ = createSecifierQualifierList(NULL,$1,$2); }
+	| type_qualifier                           { $$ = createSecifierQualifierList(NULL,$1,NULL); }
 	;
 
 struct_declarator_list

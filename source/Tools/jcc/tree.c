@@ -182,5 +182,36 @@ AtomicTypeSpecifierPtr createAtomicTypeSpecifier(TokenPtr atomicToken, TokenPtr 
 	return newAtomicTypeSpec;
 }
 
+LinkedListPtr createStructDeclarationList(StructDeclarationPtr node, LinkedListPtr list)
+{
+	if (list == NULL)
+	{
+		list = createList();
+	}
+	addListElem(list, node);
+	return list;
+}
+
+StructDeclarationPtr createStructDeclaration(LinkedListPtr specifierQualifierList, LinkedListPtr structDeclaratorList, StaticAssertDeclarationPtr staticAssertDeclaration)
+{
+	StructDeclarationPtr newStructDecl = AllocateMemory(sizeof(StructDeclaration));
+	newStructDecl->specifierQualifierList = specifierQualifierList;
+	newStructDecl->structDeclaratorList = structDeclaratorList;
+	newStructDecl->staticAssertDeclarationPtr = staticAssertDeclaration;
+	return newStructDecl;
+}
+
+LinkedListPtr createSecifierQualifierList(TypeSpecifierPtr typeSpecifier, TokenPtr typeQualifier, LinkedListPtr list)
+{
+	if (list == NULL)
+	{
+		list = createList();
+	}
+	SpecifierQualifierListNodePtr node = AllocateMemory(sizeof(SpecifierQualifierListNode));
+	node->typeQualifier = typeQualifier;
+	node->typeSpecifier = typeSpecifier;
+	addListElem(list, node);
+	return list;
+}
 
 

@@ -630,19 +630,19 @@ Nonterminals, with rules where they appear
     struct_or_union_specifier (164)
         on left: 131 132 133
         on right: 128
-    struct_or_union (165)
+    struct_or_union <token> (165)
         on left: 134 135
         on right: 131 132 133
-    struct_declaration_list (166)
+    struct_declaration_list <list> (166)
         on left: 136 137
         on right: 131 132 137
-    struct_declaration (167)
+    struct_declaration <structDeclaration> (167)
         on left: 138 139 140
         on right: 136 137
-    specifier_qualifier_list (168)
+    specifier_qualifier_list <list> (168)
         on left: 141 142 143 144
         on right: 138 139 141 143 199 200
-    struct_declarator_list (169)
+    struct_declarator_list <list> (169)
         on left: 145 146
         on right: 139 146
     struct_declarator (170)

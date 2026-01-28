@@ -252,6 +252,19 @@ typedef struct _Declaration
 	StaticAssertDeclarationPtr staticAssertDecl;
 } Declaration, * DeclarationPtr, ** DeclarationPtrPtr;
 
+typedef struct _StructDeclaration
+{
+	LinkedListPtr specifierQualifierList;
+	LinkedListPtr structDeclaratorList;
+	StaticAssertDeclarationPtr staticAssertDeclarationPtr;
+} StructDeclaration, * StructDeclarationPtr, ** StructDeclarationPtrPtr;
+
+typedef struct _SpecifierQualifierListNode
+{
+	TokenPtr typeQualifier;
+	TypeSpecifierPtr typeSpecifier;
+} SpecifierQualifierListNode, * SpecifierQualifierListNodePtr, ** SpecifierQualifierListNodePtrPtr;
+
 union ParseUnion
 {
 	CTreePtr expression;
@@ -264,6 +277,7 @@ union ParseUnion
 	StaticAssertDeclarationPtr staticAssertDecl;
 	TypeSpecifierPtr typeSpecifier;
 	AtomicTypeSpecifierPtr atomicTypeSpecifier;
+	StructDeclarationPtr structDeclaration;
 };
 
 void printHeader(void);
@@ -298,4 +312,6 @@ DeclarationSpecifiersPtr createDeclarationSpecifiers2(TypeSpecifierPtr typeSpeci
 TypeSpecifierPtr createTypeSpecifier(TokenPtr token);
 TypeSpecifierPtr createTypeSpecifier2(AtomicTypeSpecifierPtr token);
 AtomicTypeSpecifierPtr createAtomicTypeSpecifier(TokenPtr atomicToken, TokenPtr typeNameToken);
-
+LinkedListPtr createStructDeclarationList(StructDeclarationPtr node, LinkedListPtr list);
+StructDeclarationPtr createStructDeclaration(LinkedListPtr specifierQualifierList, LinkedListPtr structDeclaratorList, StaticAssertDeclarationPtr staticAssertDeclaration);
+LinkedListPtr createSecifierQualifierList(TypeSpecifierPtr typeSpecifier, TokenPtr typeQualifier, LinkedListPtr list);
