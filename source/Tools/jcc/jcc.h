@@ -206,6 +206,7 @@ typedef enum _TypeQualifier
 
 typedef struct _TypeSpecifier TypeSpecifier, * TypeSpecifierPtr, ** TypeSpecifierPtrPtr;
 typedef struct _StructOrUnionSpecifier StructOrUnionSpecifier, * StructOrUnionSpecifierPtr, ** StructOrUnionSpecifierPtrPtr;
+typedef struct _EnumSpecifier EnumSpecifier, * EnumSpecifierPtr, ** EnumSpecifierPtrPtr;
 
 typedef struct _AtomicTypeSpecifier
 {
@@ -218,6 +219,7 @@ typedef struct _TypeSpecifier
 	TokenPtr specifierToken;
 	AtomicTypeSpecifierPtr atomicTypeSpecifier;
 	StructOrUnionSpecifierPtr structOrUnionSpecifier;
+	EnumSpecifierPtr enumSpecifier;
 } TypeSpecifier, * TypeSpecifierPtr, ** TypeSpecifierPtrPtr;
 
 typedef enum _FunctionSpecifier
@@ -364,6 +366,7 @@ DeclarationSpecifiersPtr createDeclarationSpecifiers2(TypeSpecifierPtr typeSpeci
 TypeSpecifierPtr createTypeSpecifier(TokenPtr token);
 TypeSpecifierPtr createTypeSpecifier2(AtomicTypeSpecifierPtr token);
 TypeSpecifierPtr createTypeSpecifier3(StructOrUnionSpecifierPtr token);
+TypeSpecifierPtr createTypeSpecifier4(EnumSpecifierPtr token);
 AtomicTypeSpecifierPtr createAtomicTypeSpecifier(TokenPtr atomicToken, TokenPtr typeNameToken);
 LinkedListPtr createStructDeclarationList(StructDeclarationPtr node, LinkedListPtr list);
 StructDeclarationPtr createStructDeclaration(LinkedListPtr specifierQualifierList, LinkedListPtr structDeclaratorList, StaticAssertDeclarationPtr staticAssertDeclaration);

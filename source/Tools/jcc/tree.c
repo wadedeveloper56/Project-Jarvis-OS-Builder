@@ -225,6 +225,13 @@ TypeSpecifierPtr createTypeSpecifier3(StructOrUnionSpecifierPtr token)
 	return newTypeSpec;
 }
 
+TypeSpecifierPtr createTypeSpecifier4(EnumSpecifierPtr token)
+{
+	TypeSpecifierPtr newTypeSpec = AllocateMemory(sizeof(TypeSpecifier));
+	newTypeSpec->enumSpecifier = token;
+	return newTypeSpec;
+}
+
 AtomicTypeSpecifierPtr createAtomicTypeSpecifier(TokenPtr atomicToken, TokenPtr typeNameToken)
 {
 	AtomicTypeSpecifierPtr newAtomicTypeSpec = AllocateMemory(sizeof(AtomicTypeSpecifier));

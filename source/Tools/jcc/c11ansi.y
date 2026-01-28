@@ -419,7 +419,7 @@ type_specifier
 	| Y_IMAGINARY               { $$ = createTypeSpecifier($1); }
 	| atomic_type_specifier     { $$ = createTypeSpecifier2($1); }
 	| struct_or_union_specifier { $$ = createTypeSpecifier3($1); }
-	| enum_specifier            { $$ = NULL; }
+	| enum_specifier            { $$ = createTypeSpecifier4($1); }
 	| Y_TYPEDEF_NAME            { $$ = createTypeSpecifier($1); } 
 	;
 
