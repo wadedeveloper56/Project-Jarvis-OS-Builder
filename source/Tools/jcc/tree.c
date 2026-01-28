@@ -292,3 +292,31 @@ StructOrUnionSpecifierPtr createStructOrUnionSpecifier(TokenPtr structOrUnion, T
 	return newStructOrUnionSpecifier;
 }
 
+LinkedListPtr createEnumeratorList(EnumeratorPtr enumerator, LinkedListPtr list)
+{
+	if (list == NULL)
+	{
+		list = createList();
+	}
+	addListElem(list, enumerator);
+	return list;
+}
+
+EnumeratorPtr createEnumerator(TokenPtr enumeratorName, CTreePtr constExpr)
+{
+	EnumeratorPtr newEnumerator = AllocateMemory(sizeof(Enumerator));
+	newEnumerator->enumeratorName = enumeratorName;
+	newEnumerator->constExpr = constExpr;
+	return newEnumerator;
+}
+
+EnumSpecifierPtr createEnumSpecifier(TokenPtr enumName, LinkedListPtr enumeratorList)
+{
+	EnumSpecifierPtr newEnumSpecifier = AllocateMemory(sizeof(EnumSpecifier));
+	newEnumSpecifier->enumName = enumName;
+	newEnumSpecifier->enumeratorList = enumeratorList;
+	return newEnumSpecifier;
+}
+
+ 
+

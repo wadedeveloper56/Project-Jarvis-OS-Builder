@@ -296,6 +296,18 @@ typedef struct _StructOrUnionSpecifier
 	LinkedListPtr structDeclarationList; // list of StructDeclarationPtr
 } StructOrUnionSpecifier, * StructOrUnionSpecifierPtr, ** StructOrUnionSpecifierPtrPtr;
 
+typedef struct _Enumerator
+{
+	TokenPtr enumeratorName;
+	CTreePtr constExpr;
+} Enumerator, * EnumeratorPtr, ** EnumeratorPtrPtr;
+
+typedef struct _EnumSpecifier
+{
+	TokenPtr enumName;
+	LinkedListPtr enumeratorList; // list of EnumeratorPtr
+} EnumSpecifier, * EnumSpecifierPtr, ** EnumSpecifierPtrPtr;
+
 union ParseUnion
 {
 	CTreePtr expression;
@@ -313,6 +325,8 @@ union ParseUnion
 	DeclaratorPtr declarator;
 	DirectDeclaratorPtr directDeclarator;
 	StructOrUnionSpecifierPtr structOrUnionSpecifier;
+	EnumeratorPtr enumerator;
+	EnumSpecifierPtr enumSpecifier;
 };
 
 void printHeader(void);
@@ -357,3 +371,6 @@ LinkedListPtr createSecifierQualifierList(TypeSpecifierPtr typeSpecifier, TokenP
 LinkedListPtr createStructDeclaratorList(StructDeclaratorPtr structDeclarator, LinkedListPtr list);
 StructDeclaratorPtr createStructDeclarator(DeclaratorPtr declarator, CTreePtr constExpression);
 StructOrUnionSpecifierPtr createStructOrUnionSpecifier(TokenPtr structOrUnion, TokenPtr identifier, LinkedListPtr list);
+LinkedListPtr createEnumeratorList(EnumeratorPtr enumerator, LinkedListPtr list);
+EnumeratorPtr createEnumerator(TokenPtr enumeratorName, CTreePtr constExpr);
+EnumSpecifierPtr createEnumSpecifier(TokenPtr enumName, LinkedListPtr enumeratorList);

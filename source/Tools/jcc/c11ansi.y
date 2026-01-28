@@ -187,6 +187,10 @@ int yylex();
 %type<directDeclarator> direct_declarator
 %type<structOrUnionSpecifier> struct_or_union_specifier
 
+%type<list> enumerator_list
+%type<enumerator> enumerator
+$type<enumSpecifier> enum_specifier
+
 %start translation_unit
 %%
 
@@ -426,8 +430,8 @@ struct_or_union_specifier
 	;
 
 struct_or_union
-	: Y_STRUCT  { $$ = $1; }
-	| Y_UNION   { $$ = $1; }
+	: Y_STRUCT  { $$ = $1; zapToken($1); }
+	| Y_UNION   { $$ = $1; zapToken($1); }
 	;
 
 struct_declaration_list
@@ -460,21 +464,21 @@ struct_declarator
 	;
 
 enum_specifier
-	: Y_ENUM Y_LEFT_BRACE enumerator_list Y_RIGHT_BRACE                   
-	| Y_ENUM Y_LEFT_BRACE enumerator_list Y_COMMA Y_RIGHT_BRACE            
-	| Y_ENUM IDENTIFIER Y_LEFT_BRACE enumerator_list Y_RIGHT_BRACE         
-	| Y_ENUM IDENTIFIER Y_LEFT_BRACE enumerator_list Y_COMMA Y_RIGHT_BRACE 
-	| Y_ENUM IDENTIFIER                                                    
+	: Y_ENUM Y_LEFT_BRACE enumerator_list Y_RIGHT_BRACE                     { $$ = createEnumSpecifier(NULL,$4); }
+	| Y_ENUM Y_LEFT_BRACE enumerator_list Y_COMMA Y_RIGHT_BRACE             { $$ = createEnumSpecifier(NUMM,$4); }
+	| Y_ENUM IDENTIFIER Y_LEFT_BRACE enumerator_list Y_RIGHT_BRACE          { $$ = createEnumSpecifier($2,$4); }
+	| Y_ENUM IDENTIFIER Y_LEFT_BRACE enumerator_list Y_COMMA Y_RIGHT_BRACE  { $$ = createEnumSpecifier($2,$4); } 
+	| Y_ENUM IDENTIFIER                                                     { $$ = createEnumSpecifier($2,NULL); }
 	;
 	 
 enumerator_list
-	: enumerator                         
-	| enumerator_list Y_COMMA enumerator 
+	: enumerator                          { $$ = createEnumeratorList($1, NULL); }
+	| enumerator_list Y_COMMA enumerator  { $$ = createEnumeratorList($3, $1); }
 	;
 
 enumerator	/* identifiers must be flagged as ENUMERATION_CONSTANT */
-	: enumeration_constant Y_EQUAL constant_expression 
-	| enumeration_constant                             
+	: enumeration_constant Y_EQUAL constant_expression { $$ = createEnumerator($1, $3); }
+	| enumeration_constant                             { $$ = createEnumerator($1, NULL); }
 	;
 
 atomic_type_specifier
