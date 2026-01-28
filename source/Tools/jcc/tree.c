@@ -1,5 +1,44 @@
 #include "jcc.h"
 
+static void _zapTokData(TokDataPtr elem) 
+{
+	if (elem == NULL)
+	{
+		return;
+	}
+	if (elem->code == YC_NUMERIC)
+	{
+		// Nothing to free
+	}
+	else if (elem->code == YC_STRING)
+	{
+		FreeMemory(elem->repr.stringConstant.s);
+	}
+	else if (elem->code == YC_KEYWORD)
+	{
+		FreeMemory(elem->repr.keyword.string);
+	}
+	else if (elem->code == YC_SYMBOL)
+	{
+		FreeMemory(elem->repr.symbol.string);
+	}
+	FreeMemory(elem);
+}
+
+static void _zapToken(void* _elem)
+{
+	TokenPtr elem = _elem;
+
+	if (elem == NULL)
+	{
+		return;
+	}
+	_zapTokData(elem->data);
+	FreeMemory(elem);
+}
+
+void zapToken(void* elem)  CALL_INTERNAL_zap(Token)
+
 CTreePtr createCTreeRoot(LabelPtr label)
 {
 	CTreePtr newTree = AllocateMemory(sizeof(CTree));
@@ -222,6 +261,14 @@ LinkedListPtr createStructDeclaratorList(StructDeclaratorPtr structDeclarator, L
 	}
 	addListElem(list, structDeclarator);
 	return list;
+}
+
+StructDeclaratorPtr createStructDeclarator(DeclaratorPtr declarator, CTreePtr constExpression)
+{
+	StructDeclaratorPtr newStructDeclarator = AllocateMemory(sizeof(StructDeclarator));
+	newStructDeclarator->declarator = declarator;
+	newStructDeclarator->constantExpr = constExpression;
+	return newStructDeclarator;
 }
 
 

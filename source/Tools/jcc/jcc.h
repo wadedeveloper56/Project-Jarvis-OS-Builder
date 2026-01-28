@@ -8,6 +8,10 @@
 #include "ArgumentTable.h"
 #include "Memory.h"
 
+#define CALL_INTERNAL_zap(name)   { \
+    _zap##name(elem); \
+}
+
 typedef enum _LabelType
 {
 	LABT_LIST,
@@ -100,11 +104,10 @@ typedef enum _ConstType
 
 typedef enum _TokenCode
 {
-	YC_INT_CONST,
-	YC_FLOAT_CONST,
-	YC_STRING_CONST,
-	YC_ID,
-	YC_KEYWORD
+	YC_KEYWORD,
+	YC_SYMBOL,
+	YC_NUMERIC,
+	YC_STRING
 } TokenCode;
 
 typedef struct _TokData
@@ -259,9 +262,11 @@ typedef struct _StructDeclaration
 	StaticAssertDeclarationPtr staticAssertDeclarationPtr;
 } StructDeclaration, * StructDeclarationPtr, ** StructDeclarationPtrPtr;
 
+typedef struct _Declarator Declarator, * DeclaratorPtr, ** DeclaratorPtrPtr;
+
 typedef struct _StructDeclarator
 {
-	CTreePtr declarator;
+	DeclaratorPtr declarator;
 	CTreePtr constantExpr;
 } StructDeclarator, * StructDeclaratorPtr, ** StructDeclaratorPtrPtr;
 
@@ -328,6 +333,8 @@ LabelPtr createConstr3Label(LabelConstrType type, TokenPtr t0, TokenPtr t1, Toke
 LabelPtr createConstr4Label(LabelConstrType type, TokenPtr t0, TokenPtr t1, TokenPtr t2, TokenPtr t3);
 LabelPtr createConstr5Label(LabelConstrType type, TokenPtr t0, TokenPtr t1, TokenPtr t2, TokenPtr t3, TokenPtr t4);
 DeclarationPtr createDeclaration(DeclarationSpecifiersPtr declSpecifiers, LinkedListPtr initDeclaratorList, StaticAssertDeclarationPtr staticAssertDecl);
+void addListElem(LinkedListPtr pList, void* elem);
+LinkedListPtr createList(void);
 DeclarationSpecifiersPtr createDeclarationSpecifiers1(TokenPtr token, DeclarationSpecifiersPtr tokenList);
 DeclarationSpecifiersPtr createDeclarationSpecifiers2(TypeSpecifierPtr typeSpecifier, DeclarationSpecifiersPtr tokenList);
 TypeSpecifierPtr createTypeSpecifier(TokenPtr token);
@@ -337,3 +344,4 @@ LinkedListPtr createStructDeclarationList(StructDeclarationPtr node, LinkedListP
 StructDeclarationPtr createStructDeclaration(LinkedListPtr specifierQualifierList, LinkedListPtr structDeclaratorList, StaticAssertDeclarationPtr staticAssertDeclaration);
 LinkedListPtr createSecifierQualifierList(TypeSpecifierPtr typeSpecifier, TokenPtr typeQualifier, LinkedListPtr list);
 LinkedListPtr createStructDeclaratorList(StructDeclaratorPtr structDeclarator, LinkedListPtr list);
+StructDeclaratorPtr createStructDeclarator(DeclaratorPtr declarator, CTreePtr constExpression);

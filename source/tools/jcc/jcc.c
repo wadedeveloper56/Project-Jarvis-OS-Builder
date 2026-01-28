@@ -4,6 +4,7 @@
 #include "jcc.h"
 
 extern FILE* yyin; 
+LinkedListPtr files;
 
 void printHeader(void)
 {
@@ -58,9 +59,10 @@ void getCmdLineOptions(int argc, char* argv[]) {
 		printf("Try '%s --help' for more information.\n", progname);
 		exit(1);
 	}
+	files = createList();
 	for (int i = 0; i < infiles->count; i++)
 	{
-		doConversion((void**)infiles->filename[i]);
+		addListElem(files,infiles->filename[i]);
 	}
 	argFreeTable(argtable, sizeof(argtable) / sizeof(argtable[0]));
 }
@@ -77,5 +79,11 @@ void terminate(int exitCode) {
 void main(int argc, char* argv[])
 {
     initiate(argc, argv);
+	LinkedListPtr ptr = files;
+	while (ptr->head != NULL && ptr->head->userData != NULL)
+	{
+		doConversion(&ptr->head->userData);
+		ptr->head = ptr->head->next;
+	}	
 	terminate(0);
 }

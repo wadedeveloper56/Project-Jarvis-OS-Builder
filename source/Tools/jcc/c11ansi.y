@@ -184,6 +184,7 @@ int yylex();
 %type<list> struct_declarator_list
 %type<structDeclarator> struct_declarator
 %type<declarator> declarator
+%type<directDeclarator> direct_declarator
 
 %start translation_unit
 %%
@@ -197,18 +198,18 @@ primary_expression
 	;
 
 constant
-	: I_CONSTANT             {$$ = $1;}
-	| F_CONSTANT             {$$ = $1;}
-	| Y_ENUMERATION_CONSTANT {$$ = $1;}
+	: I_CONSTANT             {$$ = $1; zapToken($1); }
+	| F_CONSTANT             {$$ = $1; zapToken($1); }
+	| Y_ENUMERATION_CONSTANT {$$ = $1; zapToken($1); }
 	;
 
 enumeration_constant
-	: IDENTIFIER {$$ = $1;}
+	: IDENTIFIER {$$ = $1; zapToken($1); }
 	;
 
 string
-	: STRING_LITERAL {$$ = $1;}
-	| Y_FUNC_NAME    {$$ = $1;}
+	: STRING_LITERAL {$$ = $1; zapToken($1); }
+	| Y_FUNC_NAME    {$$ = $1; zapToken($1); }
 	;
 
 generic_selection
@@ -452,9 +453,9 @@ struct_declarator_list
 	;
 
 struct_declarator
-	: Y_COLON constant_expression           
-	| declarator Y_COLON constant_expression 
-	| declarator                            
+	: Y_COLON constant_expression            { $$ = createStructDeclarator(NULL,$2); }
+	| declarator Y_COLON constant_expression { $$ = createStructDeclarator($1,$3); }
+	| declarator                             { $$ = createStructDeclarator($1,NULL); }
 	;
 
 enum_specifier
@@ -464,7 +465,7 @@ enum_specifier
 	| Y_ENUM IDENTIFIER Y_LEFT_BRACE enumerator_list Y_COMMA Y_RIGHT_BRACE 
 	| Y_ENUM IDENTIFIER                                                    
 	;
-
+	 
 enumerator_list
 	: enumerator                         
 	| enumerator_list Y_COMMA enumerator 
@@ -497,25 +498,25 @@ alignment_specifier
 	;
 
 declarator
-	: pointer direct_declarator
-	| direct_declarator
+	: pointer direct_declarator { $$ = NULL; }
+	| direct_declarator         { $$ = NULL; }
 	;
 
 direct_declarator
-	: IDENTIFIER
-	| Y_LEFT_PAREN declarator Y_RIGHT_PAREN
-	| direct_declarator Y_LEFT_BRACKET Y_RIGHT_BRACKET
-	| direct_declarator Y_LEFT_BRACKET Y_TIMES Y_RIGHT_BRACKET
-	| direct_declarator Y_LEFT_BRACKET Y_STATIC type_qualifier_list assignment_expression Y_RIGHT_BRACKET
-	| direct_declarator Y_LEFT_BRACKET Y_STATIC assignment_expression Y_RIGHT_BRACKET
-	| direct_declarator Y_LEFT_BRACKET type_qualifier_list Y_TIMES Y_RIGHT_BRACKET
-	| direct_declarator Y_LEFT_BRACKET type_qualifier_list Y_STATIC assignment_expression Y_RIGHT_BRACKET
-	| direct_declarator Y_LEFT_BRACKET type_qualifier_list assignment_expression Y_RIGHT_BRACKET
-	| direct_declarator Y_LEFT_BRACKET type_qualifier_list Y_RIGHT_BRACKET
-	| direct_declarator Y_LEFT_BRACKET assignment_expression Y_RIGHT_BRACKET
-	| direct_declarator Y_LEFT_PAREN parameter_type_list Y_RIGHT_PAREN
-	| direct_declarator Y_LEFT_PAREN Y_RIGHT_PAREN
-	| direct_declarator Y_LEFT_PAREN identifier_list Y_RIGHT_PAREN
+	: IDENTIFIER                                                                                          { $$ = NULL; }
+	| Y_LEFT_PAREN declarator Y_RIGHT_PAREN                                                               { $$ = NULL; }
+	| direct_declarator Y_LEFT_BRACKET Y_RIGHT_BRACKET                                                    { $$ = NULL; }
+	| direct_declarator Y_LEFT_BRACKET Y_TIMES Y_RIGHT_BRACKET                                            { $$ = NULL; }
+	| direct_declarator Y_LEFT_BRACKET Y_STATIC type_qualifier_list assignment_expression Y_RIGHT_BRACKET { $$ = NULL; }
+	| direct_declarator Y_LEFT_BRACKET Y_STATIC assignment_expression Y_RIGHT_BRACKET                     { $$ = NULL; }
+	| direct_declarator Y_LEFT_BRACKET type_qualifier_list Y_TIMES Y_RIGHT_BRACKET                        { $$ = NULL; }
+	| direct_declarator Y_LEFT_BRACKET type_qualifier_list Y_STATIC assignment_expression Y_RIGHT_BRACKET { $$ = NULL; }
+	| direct_declarator Y_LEFT_BRACKET type_qualifier_list assignment_expression Y_RIGHT_BRACKET          { $$ = NULL; }
+	| direct_declarator Y_LEFT_BRACKET type_qualifier_list Y_RIGHT_BRACKET                                { $$ = NULL; }
+	| direct_declarator Y_LEFT_BRACKET assignment_expression Y_RIGHT_BRACKET                              { $$ = NULL; }
+	| direct_declarator Y_LEFT_PAREN parameter_type_list Y_RIGHT_PAREN                                    { $$ = NULL; }
+	| direct_declarator Y_LEFT_PAREN Y_RIGHT_PAREN                                                        { $$ = NULL; }
+	| direct_declarator Y_LEFT_PAREN identifier_list Y_RIGHT_PAREN                                        { $$ = NULL; }
 	;
 
 pointer

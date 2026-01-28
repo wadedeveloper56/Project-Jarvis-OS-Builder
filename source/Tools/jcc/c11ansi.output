@@ -672,7 +672,7 @@ Nonterminals, with rules where they appear
     declarator <declarator> (178)
         on left: 168 169
         on right: 105 106 148 149 171 194 273 274
-    direct_declarator (179)
+    direct_declarator <directDeclarator> (179)
         on left: 170 171 172 173 174 175 176 177 178 179 180 181 182 183
         on right: 168 169 172 173 174 175 176 177 178 179 180 181 182 183
     pointer (180)
