@@ -218,6 +218,13 @@ TypeSpecifierPtr createTypeSpecifier2(AtomicTypeSpecifierPtr token)
 	return newTypeSpec;
 }
 
+TypeSpecifierPtr createTypeSpecifier3(StructOrUnionSpecifierPtr token)
+{
+	TypeSpecifierPtr newTypeSpec = AllocateMemory(sizeof(TypeSpecifier));
+	newTypeSpec->structOrUnionSpecifier = token;
+	return newTypeSpec;
+}
+
 AtomicTypeSpecifierPtr createAtomicTypeSpecifier(TokenPtr atomicToken, TokenPtr typeNameToken)
 {
 	AtomicTypeSpecifierPtr newAtomicTypeSpec = AllocateMemory(sizeof(AtomicTypeSpecifier));
@@ -276,4 +283,12 @@ StructDeclaratorPtr createStructDeclarator(DeclaratorPtr declarator, CTreePtr co
 	return newStructDeclarator;
 }
 
+StructOrUnionSpecifierPtr createStructOrUnionSpecifier(TokenPtr structOrUnion, TokenPtr identifier, LinkedListPtr list)
+{
+	StructOrUnionSpecifierPtr newStructOrUnionSpecifier = AllocateMemory(sizeof(StructOrUnionSpecifier));
+	newStructOrUnionSpecifier->structOrUnionToken = structOrUnion;
+	newStructOrUnionSpecifier->structOrUnionName = identifier;
+	newStructOrUnionSpecifier->structDeclarationList = list;
+	return newStructOrUnionSpecifier;
+}
 

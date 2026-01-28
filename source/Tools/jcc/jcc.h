@@ -205,6 +205,7 @@ typedef enum _TypeQualifier
 } TypeQualifier;
 
 typedef struct _TypeSpecifier TypeSpecifier, * TypeSpecifierPtr, ** TypeSpecifierPtrPtr;
+typedef struct _StructOrUnionSpecifier StructOrUnionSpecifier, * StructOrUnionSpecifierPtr, ** StructOrUnionSpecifierPtrPtr;
 
 typedef struct _AtomicTypeSpecifier
 {
@@ -216,6 +217,7 @@ typedef struct _TypeSpecifier
 {
 	TokenPtr specifierToken;
 	AtomicTypeSpecifierPtr atomicTypeSpecifier;
+	StructOrUnionSpecifierPtr structOrUnionSpecifier;
 } TypeSpecifier, * TypeSpecifierPtr, ** TypeSpecifierPtrPtr;
 
 typedef enum _FunctionSpecifier
@@ -287,6 +289,13 @@ typedef struct _SpecifierQualifierListNode
 	TypeSpecifierPtr typeSpecifier;
 } SpecifierQualifierListNode, * SpecifierQualifierListNodePtr, ** SpecifierQualifierListNodePtrPtr;
 
+typedef struct _StructOrUnionSpecifier
+{
+	TokenPtr structOrUnionToken;
+	TokenPtr structOrUnionName;
+	LinkedListPtr structDeclarationList; // list of StructDeclarationPtr
+} StructOrUnionSpecifier, * StructOrUnionSpecifierPtr, ** StructOrUnionSpecifierPtrPtr;
+
 union ParseUnion
 {
 	CTreePtr expression;
@@ -303,6 +312,7 @@ union ParseUnion
 	StructDeclaratorPtr structDeclarator;
 	DeclaratorPtr declarator;
 	DirectDeclaratorPtr directDeclarator;
+	StructOrUnionSpecifierPtr structOrUnionSpecifier;
 };
 
 void printHeader(void);
@@ -339,9 +349,11 @@ DeclarationSpecifiersPtr createDeclarationSpecifiers1(TokenPtr token, Declaratio
 DeclarationSpecifiersPtr createDeclarationSpecifiers2(TypeSpecifierPtr typeSpecifier, DeclarationSpecifiersPtr tokenList);
 TypeSpecifierPtr createTypeSpecifier(TokenPtr token);
 TypeSpecifierPtr createTypeSpecifier2(AtomicTypeSpecifierPtr token);
+TypeSpecifierPtr createTypeSpecifier3(StructOrUnionSpecifierPtr token);
 AtomicTypeSpecifierPtr createAtomicTypeSpecifier(TokenPtr atomicToken, TokenPtr typeNameToken);
 LinkedListPtr createStructDeclarationList(StructDeclarationPtr node, LinkedListPtr list);
 StructDeclarationPtr createStructDeclaration(LinkedListPtr specifierQualifierList, LinkedListPtr structDeclaratorList, StaticAssertDeclarationPtr staticAssertDeclaration);
 LinkedListPtr createSecifierQualifierList(TypeSpecifierPtr typeSpecifier, TokenPtr typeQualifier, LinkedListPtr list);
 LinkedListPtr createStructDeclaratorList(StructDeclaratorPtr structDeclarator, LinkedListPtr list);
 StructDeclaratorPtr createStructDeclarator(DeclaratorPtr declarator, CTreePtr constExpression);
+StructOrUnionSpecifierPtr createStructOrUnionSpecifier(TokenPtr structOrUnion, TokenPtr identifier, LinkedListPtr list);

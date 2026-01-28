@@ -185,6 +185,7 @@ int yylex();
 %type<structDeclarator> struct_declarator
 %type<declarator> declarator
 %type<directDeclarator> direct_declarator
+%type<structOrUnionSpecifier> struct_or_union_specifier
 
 %start translation_unit
 %%
@@ -380,7 +381,7 @@ declaration_specifiers
 
 init_declarator_list
 	: init_declarator                               { $$ = NULL; }
-	| init_declarator_list Y_COMMA init_declarator  { $$ = NULL; }
+	| init_declarator_list Y_COMMA init_declarator  { $$ = NULL;  zapToken($2); }
 	;
 
 init_declarator
@@ -389,12 +390,12 @@ init_declarator
 	;
 
 storage_class_specifier
-	: Y_TYPEDEF	      { $$ = $1; }
-	| Y_EXTERN        { $$ = $1; }
-	| Y_STATIC        { $$ = $1; }
-	| Y_THREAD_LOCAL  { $$ = $1; }
-	| Y_AUTO          { $$ = $1; }
-	| Y_REGISTER      { $$ = $1; }
+	: Y_TYPEDEF	      { $$ = $1;  zapToken($1); }
+	| Y_EXTERN        { $$ = $1;  zapToken($1); }
+	| Y_STATIC        { $$ = $1;  zapToken($1); }
+	| Y_THREAD_LOCAL  { $$ = $1;  zapToken($1); }
+	| Y_AUTO          { $$ = $1;  zapToken($1); }
+	| Y_REGISTER      { $$ = $1;  zapToken($1); }
 	;
 
 type_specifier
@@ -413,15 +414,15 @@ type_specifier
 	| Y_COMPLEX                 { $$ = createTypeSpecifier($1); }
 	| Y_IMAGINARY               { $$ = createTypeSpecifier($1); }
 	| atomic_type_specifier     { $$ = createTypeSpecifier2($1); }
-	| struct_or_union_specifier { $$ = NULL; }
+	| struct_or_union_specifier { $$ = createTypeSpecifier3($1); }
 	| enum_specifier            { $$ = NULL; }
 	| Y_TYPEDEF_NAME            { $$ = createTypeSpecifier($1); } 
 	;
 
 struct_or_union_specifier
-	: struct_or_union Y_LEFT_BRACE struct_declaration_list Y_RIGHT_BRACE
-	| struct_or_union IDENTIFIER Y_LEFT_BRACE struct_declaration_list Y_RIGHT_BRACE
-	| struct_or_union IDENTIFIER
+	: struct_or_union Y_LEFT_BRACE struct_declaration_list Y_RIGHT_BRACE            { $$ = createStructOrUnionSpecifier($1,NULL,$3); }
+	| struct_or_union IDENTIFIER Y_LEFT_BRACE struct_declaration_list Y_RIGHT_BRACE { $$ = createStructOrUnionSpecifier($1,$2,$4); }
+	| struct_or_union IDENTIFIER                                                    { $$ = createStructOrUnionSpecifier($1,$2,NULL); }
 	;
 
 struct_or_union
