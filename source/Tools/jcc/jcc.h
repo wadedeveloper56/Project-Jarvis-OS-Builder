@@ -267,6 +267,7 @@ typedef struct _StructDeclaration
 
 typedef struct _Declarator Declarator, * DeclaratorPtr, ** DeclaratorPtrPtr;
 typedef struct _DirectDeclarator DirectDeclarator, * DirectDeclaratorPtr, ** DirectDeclaratorPtrPtr;
+typedef struct _ParameterTypeList ParameterTypeList, * ParameterTypeListPtr, ** ParameterTypeListPtrPtr;
 
 typedef struct _StructDeclarator
 {
@@ -278,7 +279,8 @@ typedef struct _DirectDeclarator
 {
 	DirectDeclaratorPtr directDeclarator;
 	DeclaratorPtr declarator;
-	LinkedListPtr list;
+	ParameterTypeListPtr list;
+	LinkedListPtr list2;
 	CTreePtr assignExpr;	
 	TokenPtr identifier;
 	TokenPtr delimStart;
@@ -348,6 +350,12 @@ typedef struct _ParameterDeclaration
 	DeclaratorPtr declarator;
 }ParameterDeclaration, * ParameterDeclarationPtr, ** ParameterDeclarationPtrPtr;
 
+typedef struct _ParameterTypeList
+{
+	LinkedListPtr parameterList; // list of ParameterDeclarationPtr
+	bool isVariadic;
+} ParameterTypeList, * ParameterTypeListPtr, ** ParameterTypeListPtrPtr;
+
 union ParseUnion
 {
 	CTreePtr expression;
@@ -371,6 +379,7 @@ union ParseUnion
 	DirectAbstractDeclaratorPtr directAbstractDeclarator;
 	AbstractDeclaratorPtr abstractDeclarator;
 	ParameterDeclarationPtr parameterDeclaration;
+	ParameterTypeListPtr parameterTypeList;
 };
 
 void printHeader(void);
@@ -423,10 +432,12 @@ EnumSpecifierPtr createEnumSpecifier(TokenPtr enumName, LinkedListPtr enumerator
 DirectDeclaratorPtr createDirectDeclarator1(TokenPtr identifier);
 DirectDeclaratorPtr createDirectDeclarator2(DeclaratorPtr declarator);
 DirectDeclaratorPtr createDirectDeclarator3(DirectDeclaratorPtr directDeclarator, TokenPtr delimStart, TokenPtr times, TokenPtr delimEnd);
-DirectDeclaratorPtr createDirectDeclarator4(DirectDeclaratorPtr directDeclarator, TokenPtr delimStart, LinkedListPtr list, TokenPtr delimEnd);
+DirectDeclaratorPtr createDirectDeclarator4(DirectDeclaratorPtr directDeclarator, TokenPtr delimStart, ParameterTypeListPtr list, TokenPtr delimEnd);
 DirectDeclaratorPtr createDirectDeclarator5(DirectDeclaratorPtr directDeclarator, TokenPtr delimStart, LinkedListPtr tqlist, CTreePtr aaisnExp, TokenPtr delimEnd, TokenPtr times, TokenPtr staticss);
 PointerPtr createPointer(PointerPtr ptr, LinkedListPtr list);
 LinkedListPtr createTypeQualifierList(TokenPtr typeQualifier, LinkedListPtr list);
 AbstractDeclaratorPtr creatorAbstractDeclarator(PointerPtr pntr, DirectAbstractDeclaratorPtr dad);
 ParameterDeclarationPtr createParameterDeclaration(DeclarationSpecifiersPtr ds, DeclaratorPtr decl, AbstractDeclaratorPtr ad);
+LinkedListPtr createParameterList(ParameterDeclarationPtr pd, LinkedListPtr list);
+ParameterTypeListPtr createParameterTypeList(LinkedListPtr parameterList, bool isVariadic);
 

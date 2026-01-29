@@ -188,13 +188,13 @@ int yylex();
 %type<enumerator> enumerator
 %type<enumSpecifier> enum_specifier
 %type<list> identifier_list
-%type<list>  parameter_type_list
 %type<pointer> pointer
 
 %type<directAbstractDeclarator> direct_abstract_declarator
 %type<abstractDeclarator> abstract_declarator
 %type<parameterDeclaration> parameter_declaration
 %type<list> parameter_list
+%type<parameterTypeList> parameter_type_list
 
 %start translation_unit
 %%
@@ -526,7 +526,7 @@ direct_declarator
 	| direct_declarator Y_LEFT_BRACKET assignment_expression Y_RIGHT_BRACKET                              { $$ = createDirectDeclarator5($1,$2,NULL,$3,$4,NULL,NULL); }
 	| direct_declarator Y_LEFT_PAREN parameter_type_list Y_RIGHT_PAREN                                    { $$ = createDirectDeclarator4($1,$2,$3,$4); }
 	| direct_declarator Y_LEFT_PAREN Y_RIGHT_PAREN                                                        { $$ = createDirectDeclarator3($1,$2,NULL,$3); }
-	| direct_declarator Y_LEFT_PAREN identifier_list Y_RIGHT_PAREN                                        { $$ = createDirectDeclarator4($1,$2,$3,$4); }
+	| direct_declarator Y_LEFT_PAREN identifier_list Y_RIGHT_PAREN                                        { $$ = NULL; }
 	;
 
 pointer
@@ -543,13 +543,13 @@ type_qualifier_list
 
 
 parameter_type_list
-	: parameter_list Y_COMMA Y_DOT_DOT_DOT { $$ = NULL; }
-	| parameter_list                       { $$ = NULL; }
+	: parameter_list Y_COMMA Y_DOT_DOT_DOT { $$ = createParameterTypeList($1,true); }
+	| parameter_list                       { $$ = createParameterTypeList($1,false); }
 	;
 
 parameter_list
-	: parameter_declaration                        { $$ = NULL; }
-	| parameter_list Y_COMMA parameter_declaration { $$ = NULL; }
+	: parameter_declaration                        { $$ = createParameterList($1,NULL); }
+	| parameter_list Y_COMMA parameter_declaration { $$ = createParameterList($3,$1); }
 	;
 
 parameter_declaration

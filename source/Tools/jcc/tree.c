@@ -382,7 +382,7 @@ DirectDeclaratorPtr createDirectDeclarator3(DirectDeclaratorPtr directDeclarator
 	return newDirectDeclarator;
 }
 
-DirectDeclaratorPtr createDirectDeclarator4(DirectDeclaratorPtr directDeclarator, TokenPtr delimStart, LinkedListPtr list, TokenPtr delimEnd)
+DirectDeclaratorPtr createDirectDeclarator4(DirectDeclaratorPtr directDeclarator, TokenPtr delimStart, ParameterTypeListPtr list, TokenPtr delimEnd)
 {
 	DirectDeclaratorPtr newDirectDeclarator = AllocateMemory(sizeof(DirectDeclarator));
 	newDirectDeclarator->directDeclarator = directDeclarator;
@@ -399,7 +399,7 @@ DirectDeclaratorPtr createDirectDeclarator5(DirectDeclaratorPtr directDeclarator
 	DirectDeclaratorPtr newDirectDeclarator = AllocateMemory(sizeof(DirectDeclarator));
 	newDirectDeclarator->directDeclarator = directDeclarator;
 	newDirectDeclarator->delimStart = delimStart;
-	newDirectDeclarator->list = tqlist;
+	newDirectDeclarator->list2 = tqlist;
 	newDirectDeclarator->assignExpr = aaisnExp;
 	newDirectDeclarator->delimEnd = delimEnd;
 	newDirectDeclarator->times = times;
@@ -462,5 +462,24 @@ ParameterDeclarationPtr createParameterDeclaration(DeclarationSpecifiersPtr ds, 
 	newParamDecl->abstractDeclarator = ad;
 	return newParamDecl;
 }
+
+LinkedListPtr createParameterList(ParameterDeclarationPtr pd, LinkedListPtr list)
+{
+	if (list == NULL)
+	{
+		list = createList();
+	}
+	addListElem(list, pd);
+	return list;
+}
+
+ParameterTypeListPtr createParameterTypeList(LinkedListPtr parameterList, bool isVariadic)
+{
+	ParameterTypeListPtr newParamTypeList = AllocateMemory(sizeof(ParameterTypeList));
+	newParamTypeList->parameterList = parameterList;
+	newParamTypeList->isVariadic = isVariadic;
+	return newParamTypeList;
+}
+
 
 

@@ -3138,7 +3138,7 @@ yyreduce:
 
   case 182: /* direct_declarator: direct_declarator Y_LEFT_PAREN parameter_type_list Y_RIGHT_PAREN  */
 #line 527 "c11ansi.y"
-                                                                                                              { (yyval.directDeclarator) = createDirectDeclarator4((yyvsp[-3].directDeclarator),(yyvsp[-2].token),(yyvsp[-1].list),(yyvsp[0].token)); }
+                                                                                                              { (yyval.directDeclarator) = createDirectDeclarator4((yyvsp[-3].directDeclarator),(yyvsp[-2].token),(yyvsp[-1].parameterTypeList),(yyvsp[0].token)); }
 #line 3143 "c11ansi.tab.c"
     break;
 
@@ -3150,7 +3150,7 @@ yyreduce:
 
   case 184: /* direct_declarator: direct_declarator Y_LEFT_PAREN identifier_list Y_RIGHT_PAREN  */
 #line 529 "c11ansi.y"
-                                                                                                              { (yyval.directDeclarator) = createDirectDeclarator4((yyvsp[-3].directDeclarator),(yyvsp[-2].token),(yyvsp[-1].list),(yyvsp[0].token)); }
+                                                                                                              { (yyval.directDeclarator) = NULL; }
 #line 3155 "c11ansi.tab.c"
     break;
 
@@ -3192,25 +3192,25 @@ yyreduce:
 
   case 191: /* parameter_type_list: parameter_list Y_COMMA Y_DOT_DOT_DOT  */
 #line 546 "c11ansi.y"
-                                               { (yyval.list) = NULL; }
+                                               { (yyval.parameterTypeList) = createParameterTypeList((yyvsp[-2].list),true); }
 #line 3197 "c11ansi.tab.c"
     break;
 
   case 192: /* parameter_type_list: parameter_list  */
 #line 547 "c11ansi.y"
-                                               { (yyval.list) = NULL; }
+                                               { (yyval.parameterTypeList) = createParameterTypeList((yyvsp[0].list),false); }
 #line 3203 "c11ansi.tab.c"
     break;
 
   case 193: /* parameter_list: parameter_declaration  */
 #line 551 "c11ansi.y"
-                                                       { (yyval.list) = NULL; }
+                                                       { (yyval.list) = createParameterList((yyvsp[0].parameterDeclaration),NULL); }
 #line 3209 "c11ansi.tab.c"
     break;
 
   case 194: /* parameter_list: parameter_list Y_COMMA parameter_declaration  */
 #line 552 "c11ansi.y"
-                                                       { (yyval.list) = NULL; }
+                                                       { (yyval.list) = createParameterList((yyvsp[0].parameterDeclaration),(yyvsp[-2].list)); }
 #line 3215 "c11ansi.tab.c"
     break;
 
