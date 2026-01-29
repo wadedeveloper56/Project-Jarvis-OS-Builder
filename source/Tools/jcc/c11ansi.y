@@ -172,6 +172,7 @@ int yylex();
 
 %type<token> storage_class_specifier
 %type<token> type_qualifier
+%type<list> type_qualifier_list
 %type<typeSpecifier> type_specifier
 %type<token> function_specifier
 %type<token> alignment_specifier
@@ -513,17 +514,17 @@ declarator
 direct_declarator
 	: IDENTIFIER                                                                                          { $$ = createDirectDeclarator1($1); }
 	| Y_LEFT_PAREN declarator Y_RIGHT_PAREN                                                               { $$ = createDirectDeclarator2($2); }
-	| direct_declarator Y_LEFT_BRACKET Y_RIGHT_BRACKET                                                    { $$ = createDirectDeclarator3($1,$2,$3); }
-	| direct_declarator Y_LEFT_BRACKET Y_TIMES Y_RIGHT_BRACKET                                            { $$ = NULL; }
+	| direct_declarator Y_LEFT_BRACKET Y_RIGHT_BRACKET                                                    { $$ = createDirectDeclarator3($1,$2,NULL,$3); }
+	| direct_declarator Y_LEFT_BRACKET Y_TIMES Y_RIGHT_BRACKET                                            { $$ = createDirectDeclarator3($1,$2,$3,$4); }
 	| direct_declarator Y_LEFT_BRACKET Y_STATIC type_qualifier_list assignment_expression Y_RIGHT_BRACKET { $$ = NULL; }
 	| direct_declarator Y_LEFT_BRACKET Y_STATIC assignment_expression Y_RIGHT_BRACKET                     { $$ = NULL; }
 	| direct_declarator Y_LEFT_BRACKET type_qualifier_list Y_TIMES Y_RIGHT_BRACKET                        { $$ = NULL; }
 	| direct_declarator Y_LEFT_BRACKET type_qualifier_list Y_STATIC assignment_expression Y_RIGHT_BRACKET { $$ = NULL; }
-	| direct_declarator Y_LEFT_BRACKET type_qualifier_list assignment_expression Y_RIGHT_BRACKET          { $$ = NULL; }
-	| direct_declarator Y_LEFT_BRACKET type_qualifier_list Y_RIGHT_BRACKET                                { $$ = NULL; }
-	| direct_declarator Y_LEFT_BRACKET assignment_expression Y_RIGHT_BRACKET                              { $$ = NULL; }
+	| direct_declarator Y_LEFT_BRACKET type_qualifier_list assignment_expression Y_RIGHT_BRACKET          { $$ = createDirectDeclarator5($1,$2,$3,$4,$5); }
+	| direct_declarator Y_LEFT_BRACKET type_qualifier_list Y_RIGHT_BRACKET                                { $$ = createDirectDeclarator5($1,$2,$3,NULL,$4); }
+	| direct_declarator Y_LEFT_BRACKET assignment_expression Y_RIGHT_BRACKET                              { $$ = createDirectDeclarator5($1,$2,NULL,$3,$4); }
 	| direct_declarator Y_LEFT_PAREN parameter_type_list Y_RIGHT_PAREN                                    { $$ = createDirectDeclarator4($1,$2,$3,$4); }
-	| direct_declarator Y_LEFT_PAREN Y_RIGHT_PAREN                                                        { $$ = createDirectDeclarator3($1,$2,$3); }
+	| direct_declarator Y_LEFT_PAREN Y_RIGHT_PAREN                                                        { $$ = createDirectDeclarator3($1,$2,NULL,$3); }
 	| direct_declarator Y_LEFT_PAREN identifier_list Y_RIGHT_PAREN                                        { $$ = createDirectDeclarator4($1,$2,$3,$4); }
 	;
 
@@ -535,8 +536,8 @@ pointer
 	;
 
 type_qualifier_list
-	: type_qualifier
-	| type_qualifier_list type_qualifier
+	: type_qualifier                     { $$ = NULL; }
+	| type_qualifier_list type_qualifier { $$ = NULL; }
 	;
 
 

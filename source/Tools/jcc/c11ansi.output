@@ -678,7 +678,7 @@ Nonterminals, with rules where they appear
     pointer (180)
         on left: 184 185 186 187
         on right: 168 184 186 201 202
-    type_qualifier_list (181)
+    type_qualifier_list <list> (181)
         on left: 188 189
         on right: 174 176 177 178 179 184 185 189 207 209 210 211 215 217 218 219
     parameter_type_list <list> (182)

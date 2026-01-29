@@ -279,9 +279,12 @@ typedef struct _DirectDeclarator
 	DirectDeclaratorPtr directDeclarator;
 	DeclaratorPtr declarator;
 	LinkedListPtr list;
+	CTreePtr assignExpr;	
 	TokenPtr identifier;
 	TokenPtr delimStart;
 	TokenPtr delimEnd;
+	TokenPtr times;
+	TokenPtr statics;
 } DirectDeclarator, * DirectDeclaratorPtr, ** DirectDeclaratorPtrPtr;
 
 typedef struct _Declarator
@@ -384,5 +387,6 @@ EnumeratorPtr createEnumerator(TokenPtr enumeratorName, CTreePtr constExpr);
 EnumSpecifierPtr createEnumSpecifier(TokenPtr enumName, LinkedListPtr enumeratorList);
 DirectDeclaratorPtr createDirectDeclarator1(TokenPtr identifier);
 DirectDeclaratorPtr createDirectDeclarator2(DeclaratorPtr declarator);
-DirectDeclaratorPtr createDirectDeclarator3(DirectDeclaratorPtr directDeclarator, TokenPtr delimStart, TokenPtr delimEnd);
+DirectDeclaratorPtr createDirectDeclarator3(DirectDeclaratorPtr directDeclarator, TokenPtr delimStart, TokenPtr times, TokenPtr delimEnd);
 DirectDeclaratorPtr createDirectDeclarator4(DirectDeclaratorPtr directDeclarator, TokenPtr delimStart, LinkedListPtr list, TokenPtr delimEnd);
+DirectDeclaratorPtr createDirectDeclarator5(DirectDeclaratorPtr directDeclarator, TokenPtr delimStart, LinkedListPtr tqlist, CTreePtr aaisnExp, TokenPtr delimEnd);

@@ -349,12 +349,13 @@ DirectDeclaratorPtr createDirectDeclarator2(DeclaratorPtr declarator)
 	return newDirectDeclarator;
 }
 
-DirectDeclaratorPtr createDirectDeclarator3(DirectDeclaratorPtr directDeclarator, TokenPtr delimStart, TokenPtr delimEnd)
+DirectDeclaratorPtr createDirectDeclarator3(DirectDeclaratorPtr directDeclarator, TokenPtr delimStart, TokenPtr times, TokenPtr delimEnd)
 {
 	DirectDeclaratorPtr newDirectDeclarator = AllocateMemory(sizeof(DirectDeclarator));
 	newDirectDeclarator->directDeclarator = directDeclarator;
 	newDirectDeclarator->delimStart = delimStart;
 	newDirectDeclarator->delimEnd = delimEnd;
+	newDirectDeclarator->times = times;
 	newDirectDeclarator->declarator = NULL;
 	newDirectDeclarator->identifier = NULL;
 	newDirectDeclarator->list = NULL;
@@ -373,4 +374,16 @@ DirectDeclaratorPtr createDirectDeclarator4(DirectDeclaratorPtr directDeclarator
 	return newDirectDeclarator;
 }
 
+DirectDeclaratorPtr createDirectDeclarator5(DirectDeclaratorPtr directDeclarator, TokenPtr delimStart, LinkedListPtr tqlist, CTreePtr aaisnExp, TokenPtr delimEnd)
+{
+	DirectDeclaratorPtr newDirectDeclarator = AllocateMemory(sizeof(DirectDeclarator));
+	newDirectDeclarator->directDeclarator = directDeclarator;
+	newDirectDeclarator->delimStart = delimStart;
+	newDirectDeclarator->list = tqlist;
+	newDirectDeclarator->assignExpr = aaisnExp;
+	newDirectDeclarator->delimEnd = delimEnd;
+	newDirectDeclarator->declarator = NULL;
+	newDirectDeclarator->identifier = NULL;
+	return newDirectDeclarator;
+}
 
