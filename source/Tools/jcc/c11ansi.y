@@ -164,12 +164,10 @@ int yylex();
 %type<expression> logical_and_expression
 %type<expression> logical_or_expression
 %type<expression> conditional_expression
-
 %type<declaration> declaration
 %type<declSpecifiers> declaration_specifiers
 %type<initDeclaratorList> init_declarator_list
 %type<staticAssertDecl> static_assert_declaration
-
 %type<token> storage_class_specifier
 %type<token> type_qualifier
 %type<list> type_qualifier_list
@@ -177,7 +175,6 @@ int yylex();
 %type<token> function_specifier
 %type<token> alignment_specifier
 %type<atomicTypeSpecifier> atomic_type_specifier
-
 %type<token> struct_or_union
 %type<list> struct_declaration_list
 %type<structDeclaration> struct_declaration
@@ -187,15 +184,17 @@ int yylex();
 %type<declarator> declarator
 %type<directDeclarator> direct_declarator
 %type<structOrUnionSpecifier> struct_or_union_specifier
-
 %type<list> enumerator_list
 %type<enumerator> enumerator
 %type<enumSpecifier> enum_specifier
-
 %type<list> identifier_list
 %type<list>  parameter_type_list
-
 %type<pointer> pointer
+
+%type<directAbstractDeclarator> direct_abstract_declarator
+%type<abstractDeclarator> abstract_declarator
+%type<parameterDeclaration> parameter_declaration
+%type<list> parameter_list
 
 %start translation_unit
 %%
@@ -538,8 +537,8 @@ pointer
 	;
 
 type_qualifier_list
-	: type_qualifier                     { $$ = NULL; }
-	| type_qualifier_list type_qualifier { $$ = NULL; }
+	: type_qualifier                     { $$ = createTypeQualifierList($1,NULL); }
+	| type_qualifier_list type_qualifier { $$ = createTypeQualifierList($2,$1); }
 	;
 
 
@@ -549,14 +548,14 @@ parameter_type_list
 	;
 
 parameter_list
-	: parameter_declaration
-	| parameter_list Y_COMMA parameter_declaration
+	: parameter_declaration                        { $$ = NULL; }
+	| parameter_list Y_COMMA parameter_declaration { $$ = NULL; }
 	;
 
 parameter_declaration
-	: declaration_specifiers declarator
-	| declaration_specifiers abstract_declarator
-	| declaration_specifiers
+	: declaration_specifiers declarator          { $$ = createParameterDeclaration($1,$2,NULL); }
+	| declaration_specifiers abstract_declarator { $$ = createParameterDeclaration($1,NULL,$2); }
+	| declaration_specifiers                     { $$ = createParameterDeclaration($1,NULL,NULL); }
 	;
 
 identifier_list
@@ -570,33 +569,33 @@ type_name
 	;
 
 abstract_declarator
-	: pointer direct_abstract_declarator
-	| pointer
-	| direct_abstract_declarator
+	: pointer direct_abstract_declarator  { $$ = creatorAbstractDeclarator($1,$2); }
+	| pointer                             { $$ = creatorAbstractDeclarator($1,NULL); }
+	| direct_abstract_declarator          { $$ = creatorAbstractDeclarator(NULL,$1); }
 	;
 
 direct_abstract_declarator
-	: Y_LEFT_PAREN abstract_declarator Y_RIGHT_PAREN
-	| Y_LEFT_BRACKET Y_RIGHT_BRACKET
-	| Y_LEFT_BRACKET Y_TIMES Y_RIGHT_BRACKET
-	| Y_LEFT_BRACKET Y_STATIC type_qualifier_list assignment_expression Y_RIGHT_BRACKET
-	| Y_LEFT_BRACKET Y_STATIC assignment_expression Y_RIGHT_BRACKET
-	| Y_LEFT_BRACKET type_qualifier_list Y_STATIC assignment_expression Y_RIGHT_BRACKET
-	| Y_LEFT_BRACKET type_qualifier_list assignment_expression Y_RIGHT_BRACKET
-	| Y_LEFT_BRACKET type_qualifier_list Y_RIGHT_BRACKET
-	| Y_LEFT_BRACKET assignment_expression Y_RIGHT_BRACKET
-	| direct_abstract_declarator Y_LEFT_BRACKET Y_RIGHT_BRACKET
-	| direct_abstract_declarator Y_LEFT_BRACKET '*' Y_RIGHT_BRACKET
-	| direct_abstract_declarator Y_LEFT_BRACKET Y_STATIC type_qualifier_list assignment_expression Y_RIGHT_BRACKET
-	| direct_abstract_declarator Y_LEFT_BRACKET Y_STATIC assignment_expression Y_RIGHT_BRACKET
-	| direct_abstract_declarator Y_LEFT_BRACKET type_qualifier_list assignment_expression Y_RIGHT_BRACKET
-	| direct_abstract_declarator Y_LEFT_BRACKET type_qualifier_list Y_STATIC assignment_expression Y_RIGHT_BRACKET
-	| direct_abstract_declarator Y_LEFT_BRACKET type_qualifier_list Y_RIGHT_BRACKET
-	| direct_abstract_declarator Y_LEFT_BRACKET assignment_expression Y_RIGHT_BRACKET
-	| Y_LEFT_PAREN Y_RIGHT_PAREN
-	| Y_LEFT_PAREN parameter_type_list Y_RIGHT_PAREN
-	| direct_abstract_declarator Y_LEFT_PAREN Y_RIGHT_PAREN
-	| direct_abstract_declarator Y_LEFT_PAREN parameter_type_list Y_RIGHT_PAREN
+	: Y_LEFT_PAREN abstract_declarator Y_RIGHT_PAREN                                                               { $$ = NULL; }
+	| Y_LEFT_BRACKET Y_RIGHT_BRACKET                                                                               { $$ = NULL; }
+	| Y_LEFT_BRACKET Y_TIMES Y_RIGHT_BRACKET                                                                       { $$ = NULL; }
+	| Y_LEFT_BRACKET Y_STATIC type_qualifier_list assignment_expression Y_RIGHT_BRACKET                            { $$ = NULL; }
+	| Y_LEFT_BRACKET Y_STATIC assignment_expression Y_RIGHT_BRACKET                                                { $$ = NULL; }
+	| Y_LEFT_BRACKET type_qualifier_list Y_STATIC assignment_expression Y_RIGHT_BRACKET                            { $$ = NULL; }
+	| Y_LEFT_BRACKET type_qualifier_list assignment_expression Y_RIGHT_BRACKET                                     { $$ = NULL; }
+	| Y_LEFT_BRACKET type_qualifier_list Y_RIGHT_BRACKET                                                           { $$ = NULL; }
+	| Y_LEFT_BRACKET assignment_expression Y_RIGHT_BRACKET                                                         { $$ = NULL; }
+	| direct_abstract_declarator Y_LEFT_BRACKET Y_RIGHT_BRACKET                                                    { $$ = NULL; }
+	| direct_abstract_declarator Y_LEFT_BRACKET '*' Y_RIGHT_BRACKET                                                { $$ = NULL; }
+	| direct_abstract_declarator Y_LEFT_BRACKET Y_STATIC type_qualifier_list assignment_expression Y_RIGHT_BRACKET { $$ = NULL; }
+	| direct_abstract_declarator Y_LEFT_BRACKET Y_STATIC assignment_expression Y_RIGHT_BRACKET                     { $$ = NULL; }
+	| direct_abstract_declarator Y_LEFT_BRACKET type_qualifier_list assignment_expression Y_RIGHT_BRACKET          { $$ = NULL; }
+	| direct_abstract_declarator Y_LEFT_BRACKET type_qualifier_list Y_STATIC assignment_expression Y_RIGHT_BRACKET { $$ = NULL; }
+	| direct_abstract_declarator Y_LEFT_BRACKET type_qualifier_list Y_RIGHT_BRACKET                                { $$ = NULL; }
+	| direct_abstract_declarator Y_LEFT_BRACKET assignment_expression Y_RIGHT_BRACKET                              { $$ = NULL; }
+	| Y_LEFT_PAREN Y_RIGHT_PAREN                                                                                   { $$ = NULL; }
+	| Y_LEFT_PAREN parameter_type_list Y_RIGHT_PAREN                                                               { $$ = NULL; }
+	| direct_abstract_declarator Y_LEFT_PAREN Y_RIGHT_PAREN                                                        { $$ = NULL; }
+	| direct_abstract_declarator Y_LEFT_PAREN parameter_type_list Y_RIGHT_PAREN                                    { $$ = NULL; }
 	;
 
 initializer

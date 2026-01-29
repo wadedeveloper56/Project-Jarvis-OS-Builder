@@ -324,6 +324,30 @@ typedef struct _Pointer
 	int numberOfStars;
 } Pointer, * PointerPtr, ** PointerPtrPtr;
 
+typedef struct _DirectAbstractDeclarator
+{
+	struct _DirectAbstractDeclarator* directAbstractDeclarator;
+	LinkedListPtr list; // list of TokenPtr (TypeQualifier)
+	CTreePtr assignExpr;
+	TokenPtr delimStart;
+	TokenPtr delimEnd;
+	TokenPtr times;
+	TokenPtr statics;
+} DirectAbstractDeclarator, * DirectAbstractDeclaratorPtr, ** DirectAbstractDeclaratorPtrPtr;
+
+typedef struct _AbstractDeclarator
+{
+	DirectAbstractDeclaratorPtr directAbstractDeclarator;
+	PointerPtr pointerList; // list of TokenPtr (TypeQualifier)
+} AbstractDeclarator, * AbstractDeclaratorPtr, ** AbstractDeclaratorPtrPtr;
+
+typedef struct _ParameterDeclaration
+{
+	DeclarationSpecifiersPtr declSpecifiers;
+	AbstractDeclaratorPtr abstractDeclarator;
+	DeclaratorPtr declarator;
+}ParameterDeclaration, * ParameterDeclarationPtr, ** ParameterDeclarationPtrPtr;
+
 union ParseUnion
 {
 	CTreePtr expression;
@@ -344,6 +368,9 @@ union ParseUnion
 	EnumeratorPtr enumerator;
 	EnumSpecifierPtr enumSpecifier;
 	PointerPtr pointer;
+	DirectAbstractDeclaratorPtr directAbstractDeclarator;
+	AbstractDeclaratorPtr abstractDeclarator;
+	ParameterDeclarationPtr parameterDeclaration;
 };
 
 void printHeader(void);
@@ -399,4 +426,7 @@ DirectDeclaratorPtr createDirectDeclarator3(DirectDeclaratorPtr directDeclarator
 DirectDeclaratorPtr createDirectDeclarator4(DirectDeclaratorPtr directDeclarator, TokenPtr delimStart, LinkedListPtr list, TokenPtr delimEnd);
 DirectDeclaratorPtr createDirectDeclarator5(DirectDeclaratorPtr directDeclarator, TokenPtr delimStart, LinkedListPtr tqlist, CTreePtr aaisnExp, TokenPtr delimEnd, TokenPtr times, TokenPtr staticss);
 PointerPtr createPointer(PointerPtr ptr, LinkedListPtr list);
+LinkedListPtr createTypeQualifierList(TokenPtr typeQualifier, LinkedListPtr list);
+AbstractDeclaratorPtr creatorAbstractDeclarator(PointerPtr pntr, DirectAbstractDeclaratorPtr dad);
+ParameterDeclarationPtr createParameterDeclaration(DeclarationSpecifiersPtr ds, DeclaratorPtr decl, AbstractDeclaratorPtr ad);
 

@@ -436,3 +436,31 @@ PointerPtr createPointer(PointerPtr ptr, LinkedListPtr list)
 	return newPointer;
 }
 
+LinkedListPtr createTypeQualifierList(TokenPtr typeQualifier, LinkedListPtr list)
+{
+	if (list == NULL)
+	{
+		list = createList();
+	}
+	addListElem(list, typeQualifier);
+	return list;
+}
+
+AbstractDeclaratorPtr creatorAbstractDeclarator(PointerPtr pntr, DirectAbstractDeclaratorPtr dad)
+{
+	AbstractDeclaratorPtr newAbsDecl = AllocateMemory(sizeof(AbstractDeclarator));
+	newAbsDecl->directAbstractDeclarator = dad;
+	newAbsDecl->pointerList = pntr;
+	return newAbsDecl;
+}
+
+ParameterDeclarationPtr createParameterDeclaration(DeclarationSpecifiersPtr ds, DeclaratorPtr decl, AbstractDeclaratorPtr ad)
+{
+	ParameterDeclarationPtr newParamDecl = AllocateMemory(sizeof(ParameterDeclaration));
+	newParamDecl->declSpecifiers = ds;
+	newParamDecl->declarator = decl;
+	newParamDecl->abstractDeclarator = ad;
+	return newParamDecl;
+}
+
+
