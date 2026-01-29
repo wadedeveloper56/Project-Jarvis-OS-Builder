@@ -325,5 +325,27 @@ EnumSpecifierPtr createEnumSpecifier(TokenPtr enumName, LinkedListPtr enumerator
 	return newEnumSpecifier;
 }
 
- 
+DirectDeclaratorPtr createDirectDeclarator1(TokenPtr identifier)
+{
+	DirectDeclaratorPtr newDirectDeclarator = AllocateMemory(sizeof(DirectDeclarator));
+	newDirectDeclarator->identifier = identifier;
+	newDirectDeclarator->directDeclarator = NULL;
+	newDirectDeclarator->declarator = NULL;
+	newDirectDeclarator->identifierList = NULL;
+	newDirectDeclarator->delimStart = NULL;
+	newDirectDeclarator->delimEnd = NULL;
+	return newDirectDeclarator;
+}
+
+DirectDeclaratorPtr createDirectDeclarator2(DirectDeclaratorPtr directDeclarator, DeclaratorPtr declarator)
+{
+	DirectDeclaratorPtr newDirectDeclarator = AllocateMemory(sizeof(DirectDeclarator));
+	newDirectDeclarator->directDeclarator = directDeclarator;
+	newDirectDeclarator->declarator = declarator;
+	newDirectDeclarator->identifier = NULL;
+	newDirectDeclarator->identifierList = NULL;
+	newDirectDeclarator->delimStart = NULL;
+	newDirectDeclarator->delimEnd = NULL;
+	return newDirectDeclarator;
+}
 

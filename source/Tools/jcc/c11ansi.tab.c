@@ -3072,13 +3072,13 @@ yyreduce:
 
   case 171: /* direct_declarator: "identifier"  */
 #line 511 "c11ansi.y"
-                                                                                                              { (yyval.directDeclarator) = NULL; }
+                                                                                                              { (yyval.directDeclarator) = createDirectDeclarator1((yyvsp[0].token)); }
 #line 3077 "c11ansi.tab.c"
     break;
 
   case 172: /* direct_declarator: Y_LEFT_PAREN declarator Y_RIGHT_PAREN  */
 #line 512 "c11ansi.y"
-                                                                                                              { (yyval.directDeclarator) = NULL; }
+                                                                                                              { (yyval.directDeclarator) = createDirectDeclarator2((yyvsp[-2].token),(yyvsp[-1].declarator)); }
 #line 3083 "c11ansi.tab.c"
     break;
 

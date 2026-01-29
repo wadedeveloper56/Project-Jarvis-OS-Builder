@@ -382,3 +382,5 @@ StructOrUnionSpecifierPtr createStructOrUnionSpecifier(TokenPtr structOrUnion, T
 LinkedListPtr createEnumeratorList(EnumeratorPtr enumerator, LinkedListPtr list);
 EnumeratorPtr createEnumerator(TokenPtr enumeratorName, CTreePtr constExpr);
 EnumSpecifierPtr createEnumSpecifier(TokenPtr enumName, LinkedListPtr enumeratorList);
+DirectDeclaratorPtr createDirectDeclarator1(TokenPtr identifier);
+DirectDeclaratorPtr createDirectDeclarator2(DirectDeclaratorPtr directDeclarator, DeclaratorPtr declarator);

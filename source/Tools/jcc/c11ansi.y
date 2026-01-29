@@ -508,8 +508,8 @@ declarator
 	;
 
 direct_declarator
-	: IDENTIFIER                                                                                          { $$ = NULL; }
-	| Y_LEFT_PAREN declarator Y_RIGHT_PAREN                                                               { $$ = NULL; }
+	: IDENTIFIER                                                                                          { $$ = createDirectDeclarator1($1); }
+	| Y_LEFT_PAREN declarator Y_RIGHT_PAREN                                                               { $$ = createDirectDeclarator2($1,$2); }
 	| direct_declarator Y_LEFT_BRACKET Y_RIGHT_BRACKET                                                    { $$ = NULL; }
 	| direct_declarator Y_LEFT_BRACKET Y_TIMES Y_RIGHT_BRACKET                                            { $$ = NULL; }
 	| direct_declarator Y_LEFT_BRACKET Y_STATIC type_qualifier_list assignment_expression Y_RIGHT_BRACKET { $$ = NULL; }
