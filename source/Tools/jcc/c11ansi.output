@@ -675,7 +675,7 @@ Nonterminals, with rules where they appear
     direct_declarator <directDeclarator> (179)
         on left: 170 171 172 173 174 175 176 177 178 179 180 181 182 183
         on right: 168 169 172 173 174 175 176 177 178 179 180 181 182 183
-    pointer (180)
+    pointer <pointer> (180)
         on left: 184 185 186 187
         on right: 168 184 186 201 202
     type_qualifier_list <list> (181)

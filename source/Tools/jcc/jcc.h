@@ -318,6 +318,12 @@ typedef struct _EnumSpecifier
 	LinkedListPtr enumeratorList; // list of EnumeratorPtr
 } EnumSpecifier, * EnumSpecifierPtr, ** EnumSpecifierPtrPtr;
 
+typedef struct _Pointer 
+{
+	LinkedListPtr typeQualifierList; // list of TokenPtr (TypeQualifier)
+	int numberOfStars;
+} Pointer, * PointerPtr, ** PointerPtrPtr;
+
 union ParseUnion
 {
 	CTreePtr expression;
@@ -337,6 +343,7 @@ union ParseUnion
 	StructOrUnionSpecifierPtr structOrUnionSpecifier;
 	EnumeratorPtr enumerator;
 	EnumSpecifierPtr enumSpecifier;
+	PointerPtr pointer;
 };
 
 void printHeader(void);
@@ -369,6 +376,7 @@ LabelPtr createConstr5Label(LabelConstrType type, TokenPtr t0, TokenPtr t1, Toke
 DeclarationPtr createDeclaration(DeclarationSpecifiersPtr declSpecifiers, LinkedListPtr initDeclaratorList, StaticAssertDeclarationPtr staticAssertDecl);
 void addListElem(LinkedListPtr pList, void* elem);
 LinkedListPtr createList(void);
+LinkedListPtr combineLists(LinkedListPtr list1, LinkedListPtr list2);
 DeclarationSpecifiersPtr createDeclarationSpecifiers1(TokenPtr token, DeclarationSpecifiersPtr tokenList);
 DeclarationSpecifiersPtr createDeclarationSpecifiers2(TypeSpecifierPtr typeSpecifier, DeclarationSpecifiersPtr tokenList);
 TypeSpecifierPtr createTypeSpecifier(TokenPtr token);
@@ -390,4 +398,5 @@ DirectDeclaratorPtr createDirectDeclarator2(DeclaratorPtr declarator);
 DirectDeclaratorPtr createDirectDeclarator3(DirectDeclaratorPtr directDeclarator, TokenPtr delimStart, TokenPtr times, TokenPtr delimEnd);
 DirectDeclaratorPtr createDirectDeclarator4(DirectDeclaratorPtr directDeclarator, TokenPtr delimStart, LinkedListPtr list, TokenPtr delimEnd);
 DirectDeclaratorPtr createDirectDeclarator5(DirectDeclaratorPtr directDeclarator, TokenPtr delimStart, LinkedListPtr tqlist, CTreePtr aaisnExp, TokenPtr delimEnd, TokenPtr times, TokenPtr staticss);
+PointerPtr createPointer(PointerPtr ptr, LinkedListPtr list);
 

@@ -195,6 +195,8 @@ int yylex();
 %type<list> identifier_list
 %type<list>  parameter_type_list
 
+%type<pointer> pointer
+
 %start translation_unit
 %%
 
@@ -529,10 +531,10 @@ direct_declarator
 	;
 
 pointer
-	: Y_TIMES type_qualifier_list pointer
-	| Y_TIMES type_qualifier_list
-	| Y_TIMES pointer
-	| Y_TIMES
+	: Y_TIMES type_qualifier_list pointer { $$ = createPointer($3,$2); }
+	| Y_TIMES type_qualifier_list         { $$ = createPointer(NULL,$2); }
+	| Y_TIMES pointer                     { $$ = createPointer($2,NULL); }
+	| Y_TIMES                             { $$ = createPointer(NULL,NULL); }
 	;
 
 type_qualifier_list

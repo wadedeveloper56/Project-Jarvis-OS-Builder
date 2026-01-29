@@ -1,6 +1,6 @@
 #include "jcc.h"
 
-static void _zapTokData(TokDataPtr elem) 
+static void _zapTokData(TokDataPtr elem)
 {
 	if (elem == NULL)
 	{
@@ -68,7 +68,7 @@ CTreePtr createCTree2(LabelPtr label, CTreePtr child1, CTreePtr child2)
 	return newTree;
 }
 
-static LabelPtr _createLabel(LabelType type, void* data) 
+static LabelPtr _createLabel(LabelType type, void* data)
 {
 	LabelPtr newLabel = AllocateMemory(sizeof(Label));
 	newLabel->type = type;
@@ -76,12 +76,12 @@ static LabelPtr _createLabel(LabelType type, void* data)
 	return newLabel;
 }
 
-LabelPtr createTokenLabel(TokenPtr token) 
+LabelPtr createTokenLabel(TokenPtr token)
 {
 	return _createLabel(LABT_TOKEN, token);
 }
 
-LabelPtr createConstr0Label(LabelConstrType type) 
+LabelPtr createConstr0Label(LabelConstrType type)
 {
 	LabelPtr newLabel = _createLabel(LABT_CONSTRUCT_ROOT, NULL);
 	newLabel->repr.constr.type = type;
@@ -89,7 +89,7 @@ LabelPtr createConstr0Label(LabelConstrType type)
 	return newLabel;
 }
 
-LabelPtr createConstr1Label(LabelConstrType type, TokenPtr t0) 
+LabelPtr createConstr1Label(LabelConstrType type, TokenPtr t0)
 {
 	LabelPtr newLabel = _createLabel(LABT_CONSTRUCT_ROOT, NULL);
 	newLabel->repr.constr.type = type;
@@ -100,7 +100,7 @@ LabelPtr createConstr1Label(LabelConstrType type, TokenPtr t0)
 
 }
 
-LabelPtr createConstr2Label(LabelConstrType type, TokenPtr t0, TokenPtr t1) 
+LabelPtr createConstr2Label(LabelConstrType type, TokenPtr t0, TokenPtr t1)
 {
 	LabelPtr newLabel = _createLabel(LABT_CONSTRUCT_ROOT, NULL);
 	newLabel->repr.constr.type = type;
@@ -111,7 +111,7 @@ LabelPtr createConstr2Label(LabelConstrType type, TokenPtr t0, TokenPtr t1)
 	return newLabel;
 }
 
-LabelPtr createConstr3Label(LabelConstrType type, TokenPtr t0, TokenPtr t1,TokenPtr t2) 
+LabelPtr createConstr3Label(LabelConstrType type, TokenPtr t0, TokenPtr t1, TokenPtr t2)
 {
 	LabelPtr newLabel = _createLabel(LABT_CONSTRUCT_ROOT, NULL);
 	newLabel->repr.constr.type = type;
@@ -123,7 +123,7 @@ LabelPtr createConstr3Label(LabelConstrType type, TokenPtr t0, TokenPtr t1,Token
 	return newLabel;
 }
 
-LabelPtr createConstr4Label(LabelConstrType type, TokenPtr t0, TokenPtr t1,TokenPtr t2, TokenPtr t3) 
+LabelPtr createConstr4Label(LabelConstrType type, TokenPtr t0, TokenPtr t1, TokenPtr t2, TokenPtr t3)
 {
 	LabelPtr newLabel = _createLabel(LABT_CONSTRUCT_ROOT, NULL);
 	newLabel->repr.constr.type = type;
@@ -172,16 +172,36 @@ void addListElem(LinkedListPtr pList, void* elem)
 	ptr->next = node;
 }
 
-LinkedListPtr createList(void) 
+LinkedListPtr createList(void)
 {
 	LinkedListPtr newList = AllocateMemory(sizeof(LinkedList));
 	newList->list = AllocateMemory(sizeof(LinkedListNode));
 	return newList;
 }
 
+LinkedListPtr combineLists(LinkedListPtr list1, LinkedListPtr list2)
+{
+	if (list1 == NULL)
+	{
+		return list2;
+	}
+	if (list2 == NULL)
+	{
+		return list1;
+	}
+	LinkedListNodePtr ptr = list1->list;
+	while (ptr->next != NULL)
+	{
+		ptr = ptr->next;
+	}
+	ptr->next = list2->list;
+	return list1;
+}
+
 DeclarationSpecifiersPtr createDeclarationSpecifiers1(TokenPtr token, DeclarationSpecifiersPtr tokenList)
 {
-	if (tokenList == NULL) {
+	if (tokenList == NULL)
+	{
 		tokenList = AllocateMemory(sizeof(DeclarationSpecifiers));
 		tokenList->tokenList = createList();
 	}
@@ -387,5 +407,32 @@ DirectDeclaratorPtr createDirectDeclarator5(DirectDeclaratorPtr directDeclarator
 	newDirectDeclarator->declarator = NULL;
 	newDirectDeclarator->identifier = NULL;
 	return newDirectDeclarator;
+}
+
+PointerPtr createPointer(PointerPtr ptr, LinkedListPtr list)
+{
+	PointerPtr newPointer = AllocateMemory(sizeof(Pointer));
+	if (ptr != NULL && list != NULL)
+	{
+		LinkedListPtr temp = combineLists(newPointer->typeQualifierList, ptr->typeQualifierList);
+		newPointer->typeQualifierList = temp;
+		newPointer->numberOfStars = ptr->numberOfStars + 1;
+	}
+	else if (ptr != NULL && list == NULL)
+	{
+		newPointer->typeQualifierList = ptr->typeQualifierList;
+		newPointer->numberOfStars = ptr->numberOfStars + 1;
+	}
+	else if (ptr == NULL && list != NULL)
+	{
+		newPointer->typeQualifierList = list;
+		newPointer->numberOfStars = 1;
+	}
+	else if (ptr == NULL && list == NULL)
+	{
+		newPointer->typeQualifierList = NULL;
+		newPointer->numberOfStars = 1;
+	}
+	return newPointer;
 }
 
