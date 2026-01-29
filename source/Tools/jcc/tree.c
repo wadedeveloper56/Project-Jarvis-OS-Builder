@@ -331,21 +331,46 @@ DirectDeclaratorPtr createDirectDeclarator1(TokenPtr identifier)
 	newDirectDeclarator->identifier = identifier;
 	newDirectDeclarator->directDeclarator = NULL;
 	newDirectDeclarator->declarator = NULL;
-	newDirectDeclarator->identifierList = NULL;
+	newDirectDeclarator->list = NULL;
 	newDirectDeclarator->delimStart = NULL;
 	newDirectDeclarator->delimEnd = NULL;
 	return newDirectDeclarator;
 }
 
-DirectDeclaratorPtr createDirectDeclarator2(DirectDeclaratorPtr directDeclarator, DeclaratorPtr declarator)
+DirectDeclaratorPtr createDirectDeclarator2(DeclaratorPtr declarator)
 {
 	DirectDeclaratorPtr newDirectDeclarator = AllocateMemory(sizeof(DirectDeclarator));
-	newDirectDeclarator->directDeclarator = directDeclarator;
+	newDirectDeclarator->directDeclarator = NULL;
 	newDirectDeclarator->declarator = declarator;
 	newDirectDeclarator->identifier = NULL;
-	newDirectDeclarator->identifierList = NULL;
+	newDirectDeclarator->list = NULL;
 	newDirectDeclarator->delimStart = NULL;
 	newDirectDeclarator->delimEnd = NULL;
 	return newDirectDeclarator;
 }
+
+DirectDeclaratorPtr createDirectDeclarator3(DirectDeclaratorPtr directDeclarator, TokenPtr delimStart, TokenPtr delimEnd)
+{
+	DirectDeclaratorPtr newDirectDeclarator = AllocateMemory(sizeof(DirectDeclarator));
+	newDirectDeclarator->directDeclarator = directDeclarator;
+	newDirectDeclarator->delimStart = delimStart;
+	newDirectDeclarator->delimEnd = delimEnd;
+	newDirectDeclarator->declarator = NULL;
+	newDirectDeclarator->identifier = NULL;
+	newDirectDeclarator->list = NULL;
+	return newDirectDeclarator;
+}
+
+DirectDeclaratorPtr createDirectDeclarator4(DirectDeclaratorPtr directDeclarator, TokenPtr delimStart, LinkedListPtr list, TokenPtr delimEnd)
+{
+	DirectDeclaratorPtr newDirectDeclarator = AllocateMemory(sizeof(DirectDeclarator));
+	newDirectDeclarator->directDeclarator = directDeclarator;
+	newDirectDeclarator->delimStart = delimStart;
+	newDirectDeclarator->list = list;
+	newDirectDeclarator->delimEnd = delimEnd;
+	newDirectDeclarator->declarator = NULL;
+	newDirectDeclarator->identifier = NULL;
+	return newDirectDeclarator;
+}
+
 

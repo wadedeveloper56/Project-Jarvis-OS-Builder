@@ -681,7 +681,7 @@ Nonterminals, with rules where they appear
     type_qualifier_list (181)
         on left: 188 189
         on right: 174 176 177 178 179 184 185 189 207 209 210 211 215 217 218 219
-    parameter_type_list (182)
+    parameter_type_list <list> (182)
         on left: 190 191
         on right: 181 222 224
     parameter_list (183)
@@ -690,7 +690,7 @@ Nonterminals, with rules where they appear
     parameter_declaration (184)
         on left: 194 195 196
         on right: 192 193
-    identifier_list (185)
+    identifier_list <list> (185)
         on left: 197 198
         on right: 183 198
     type_name <token> (186)

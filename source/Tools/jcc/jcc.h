@@ -278,7 +278,7 @@ typedef struct _DirectDeclarator
 {
 	DirectDeclaratorPtr directDeclarator;
 	DeclaratorPtr declarator;
-	LinkedListPtr identifierList;
+	LinkedListPtr list;
 	TokenPtr identifier;
 	TokenPtr delimStart;
 	TokenPtr delimEnd;
@@ -383,4 +383,6 @@ LinkedListPtr createEnumeratorList(EnumeratorPtr enumerator, LinkedListPtr list)
 EnumeratorPtr createEnumerator(TokenPtr enumeratorName, CTreePtr constExpr);
 EnumSpecifierPtr createEnumSpecifier(TokenPtr enumName, LinkedListPtr enumeratorList);
 DirectDeclaratorPtr createDirectDeclarator1(TokenPtr identifier);
-DirectDeclaratorPtr createDirectDeclarator2(DirectDeclaratorPtr directDeclarator, DeclaratorPtr declarator);
+DirectDeclaratorPtr createDirectDeclarator2(DeclaratorPtr declarator);
+DirectDeclaratorPtr createDirectDeclarator3(DirectDeclaratorPtr directDeclarator, TokenPtr delimStart, TokenPtr delimEnd);
+DirectDeclaratorPtr createDirectDeclarator4(DirectDeclaratorPtr directDeclarator, TokenPtr delimStart, LinkedListPtr list, TokenPtr delimEnd);
