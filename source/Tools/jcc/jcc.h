@@ -389,4 +389,5 @@ DirectDeclaratorPtr createDirectDeclarator1(TokenPtr identifier);
 DirectDeclaratorPtr createDirectDeclarator2(DeclaratorPtr declarator);
 DirectDeclaratorPtr createDirectDeclarator3(DirectDeclaratorPtr directDeclarator, TokenPtr delimStart, TokenPtr times, TokenPtr delimEnd);
 DirectDeclaratorPtr createDirectDeclarator4(DirectDeclaratorPtr directDeclarator, TokenPtr delimStart, LinkedListPtr list, TokenPtr delimEnd);
-DirectDeclaratorPtr createDirectDeclarator5(DirectDeclaratorPtr directDeclarator, TokenPtr delimStart, LinkedListPtr tqlist, CTreePtr aaisnExp, TokenPtr delimEnd);
+DirectDeclaratorPtr createDirectDeclarator5(DirectDeclaratorPtr directDeclarator, TokenPtr delimStart, LinkedListPtr tqlist, CTreePtr aaisnExp, TokenPtr delimEnd, TokenPtr times, TokenPtr staticss);
+
