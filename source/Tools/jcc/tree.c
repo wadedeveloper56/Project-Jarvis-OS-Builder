@@ -409,6 +409,16 @@ DirectDeclaratorPtr createDirectDeclarator5(DirectDeclaratorPtr directDeclarator
 	return newDirectDeclarator;
 }
 
+DirectDeclaratorPtr createDirectDeclarator6(DirectDeclaratorPtr directDeclarator, LinkedListPtr tqlist)
+{
+	DirectDeclaratorPtr newDirectDeclarator = AllocateMemory(sizeof(DirectDeclarator));
+	newDirectDeclarator->directDeclarator = directDeclarator;
+	newDirectDeclarator->list2 = tqlist;
+	newDirectDeclarator->declarator = NULL;
+	newDirectDeclarator->identifier = NULL;
+	return newDirectDeclarator;
+}
+
 PointerPtr createPointer(PointerPtr ptr, LinkedListPtr list)
 {
 	PointerPtr newPointer = AllocateMemory(sizeof(Pointer));

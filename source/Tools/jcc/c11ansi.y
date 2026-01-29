@@ -526,7 +526,7 @@ direct_declarator
 	| direct_declarator Y_LEFT_BRACKET assignment_expression Y_RIGHT_BRACKET                              { $$ = createDirectDeclarator5($1,$2,NULL,$3,$4,NULL,NULL); }
 	| direct_declarator Y_LEFT_PAREN parameter_type_list Y_RIGHT_PAREN                                    { $$ = createDirectDeclarator4($1,$2,$3,$4); }
 	| direct_declarator Y_LEFT_PAREN Y_RIGHT_PAREN                                                        { $$ = createDirectDeclarator3($1,$2,NULL,$3); }
-	| direct_declarator Y_LEFT_PAREN identifier_list Y_RIGHT_PAREN                                        { $$ = NULL; }
+	| direct_declarator Y_LEFT_PAREN identifier_list Y_RIGHT_PAREN                                        { $$ = createDirectDeclarator6($1,$3); }
 	;
 
 pointer

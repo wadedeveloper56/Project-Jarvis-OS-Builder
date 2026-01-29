@@ -3150,7 +3150,7 @@ yyreduce:
 
   case 184: /* direct_declarator: direct_declarator Y_LEFT_PAREN identifier_list Y_RIGHT_PAREN  */
 #line 529 "c11ansi.y"
-                                                                                                              { (yyval.directDeclarator) = NULL; }
+                                                                                                              { (yyval.directDeclarator) = createDirectDeclarator6((yyvsp[-3].directDeclarator),(yyvsp[-1].list)); }
 #line 3155 "c11ansi.tab.c"
     break;
 
