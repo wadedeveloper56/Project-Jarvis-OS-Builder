@@ -333,6 +333,7 @@ typedef struct _Pointer
 typedef struct _DirectAbstractDeclaratorNode
 {
 	LinkedListPtr list; // list of TokenPtr (TypeQualifier)
+	ParameterTypeListPtr parameterTypeList;
 	AbstractDeclaratorPtr abstractDeclarator;
 	CTreePtr assignExpr;
 	TokenPtr delimStart;
@@ -467,6 +468,7 @@ DirectAbstractDeclaratorPtr createDirectAbstractDeclarator(
 	TokenPtr times,
 	LinkedListPtr list,
 	CTreePtr assignExpr,
-	TokenPtr statics
+	TokenPtr statics,
+	ParameterTypeListPtr parameterTypeList
 );
 

@@ -575,27 +575,27 @@ abstract_declarator
 	;
 
 direct_abstract_declarator
-	: Y_LEFT_PAREN abstract_declarator Y_RIGHT_PAREN                                                               { $$ = createDirectAbstractDeclarator(NULL,$1,$2,$3,NULL,NULL,NULL,NULL); }
-	| Y_LEFT_BRACKET Y_RIGHT_BRACKET                                                                               { $$ = createDirectAbstractDeclarator(NULL,$1,NULL,$2,NULL,NULL,NULL,NULL); }
-	| Y_LEFT_BRACKET Y_TIMES Y_RIGHT_BRACKET                                                                       { $$ = createDirectAbstractDeclarator(NULL,$1,NULL,$3,$2,NULL,NULL,NULL); }
-	| Y_LEFT_BRACKET Y_STATIC type_qualifier_list assignment_expression Y_RIGHT_BRACKET                            { $$ = NULL; }
-	| Y_LEFT_BRACKET Y_STATIC assignment_expression Y_RIGHT_BRACKET                                                { $$ = NULL; }
-	| Y_LEFT_BRACKET type_qualifier_list Y_STATIC assignment_expression Y_RIGHT_BRACKET                            { $$ = NULL; }
-	| Y_LEFT_BRACKET type_qualifier_list assignment_expression Y_RIGHT_BRACKET                                     { $$ = createDirectAbstractDeclarator(NULL,$1,NULL,$4,NULL,$2,$3,NULL); }
-	| Y_LEFT_BRACKET type_qualifier_list Y_RIGHT_BRACKET                                                           { $$ = createDirectAbstractDeclarator(NULL,$1,NULL,$3,NULL,$2,NULL,NULL); }
-	| Y_LEFT_BRACKET assignment_expression Y_RIGHT_BRACKET                                                         { $$ = createDirectAbstractDeclarator(NULL,$1,NULL,$3,NULL,NULL,$2,NULL); }
-	| direct_abstract_declarator Y_LEFT_BRACKET Y_RIGHT_BRACKET                                                    { $$ = createDirectAbstractDeclarator($1,$2,NULL,$3,NULL,NULL,NULL,NULL); }
-	| direct_abstract_declarator Y_LEFT_BRACKET Y_TIMES Y_RIGHT_BRACKET                                            { $$ = createDirectAbstractDeclarator($1,$2,NULL,$4,$3,NULL,NULL,NULL); }
-	| direct_abstract_declarator Y_LEFT_BRACKET Y_STATIC type_qualifier_list assignment_expression Y_RIGHT_BRACKET { $$ = NULL; }
-	| direct_abstract_declarator Y_LEFT_BRACKET Y_STATIC assignment_expression Y_RIGHT_BRACKET                     { $$ = NULL; }
-	| direct_abstract_declarator Y_LEFT_BRACKET type_qualifier_list assignment_expression Y_RIGHT_BRACKET          { $$ = createDirectAbstractDeclarator($1,$2,NULL,$5,NULL,$3,$4,NULL); }
-	| direct_abstract_declarator Y_LEFT_BRACKET type_qualifier_list Y_STATIC assignment_expression Y_RIGHT_BRACKET { $$ = NULL; }
-	| direct_abstract_declarator Y_LEFT_BRACKET type_qualifier_list Y_RIGHT_BRACKET                                { $$ = createDirectAbstractDeclarator($1,$2,NULL,$4,NULL,$3,NULL,NULL); } 
-	| direct_abstract_declarator Y_LEFT_BRACKET assignment_expression Y_RIGHT_BRACKET                              { $$ = createDirectAbstractDeclarator($1,$2,NULL,$4,NULL,NULL,$3,NULL); }
-	| Y_LEFT_PAREN Y_RIGHT_PAREN                                                                                   { $$ = createDirectAbstractDeclarator(NULL,$1,NULL,$2,NULL,NULL,NULL,NULL); }
-	| Y_LEFT_PAREN parameter_type_list Y_RIGHT_PAREN                                                               { $$ = NULL; }
-	| direct_abstract_declarator Y_LEFT_PAREN Y_RIGHT_PAREN                                                        { $$ = createDirectAbstractDeclarator($1,$2,NULL,$3,NULL,NULL,NULL,NULL); }
-	| direct_abstract_declarator Y_LEFT_PAREN parameter_type_list Y_RIGHT_PAREN                                    { $$ = NULL; }
+	: Y_LEFT_PAREN abstract_declarator Y_RIGHT_PAREN                                                               { $$ = createDirectAbstractDeclarator(NULL,$1,$2,$3,NULL,NULL,NULL,NULL,NULL); }
+	| Y_LEFT_BRACKET Y_RIGHT_BRACKET                                                                               { $$ = createDirectAbstractDeclarator(NULL,$1,NULL,$2,NULL,NULL,NULL,NULL,NULL); }
+	| Y_LEFT_BRACKET Y_TIMES Y_RIGHT_BRACKET                                                                       { $$ = createDirectAbstractDeclarator(NULL,$1,NULL,$3,$2,NULL,NULL,NULL,NULL); }
+	| Y_LEFT_BRACKET Y_STATIC type_qualifier_list assignment_expression Y_RIGHT_BRACKET                            { $$ = createDirectAbstractDeclarator(NULL,$1,NULL,$5,NULL,$3,$4,$2,NULL); }
+	| Y_LEFT_BRACKET Y_STATIC assignment_expression Y_RIGHT_BRACKET                                                { $$ = createDirectAbstractDeclarator(NULL,$1,NULL,$4,NULL,NULL,$3,$2,NULL); }
+	| Y_LEFT_BRACKET type_qualifier_list Y_STATIC assignment_expression Y_RIGHT_BRACKET                            { $$ = createDirectAbstractDeclarator(NULL,$1,NULL,$5,NULL,$2,$4,$3,NULL); }
+	| Y_LEFT_BRACKET type_qualifier_list assignment_expression Y_RIGHT_BRACKET                                     { $$ = createDirectAbstractDeclarator(NULL,$1,NULL,$4,NULL,$2,$3,NULL,NULL); }
+	| Y_LEFT_BRACKET type_qualifier_list Y_RIGHT_BRACKET                                                           { $$ = createDirectAbstractDeclarator(NULL,$1,NULL,$3,NULL,$2,NULL,NULL,NULL); }
+	| Y_LEFT_BRACKET assignment_expression Y_RIGHT_BRACKET                                                         { $$ = createDirectAbstractDeclarator(NULL,$1,NULL,$3,NULL,NULL,$2,NULL,NULL); }
+	| direct_abstract_declarator Y_LEFT_BRACKET Y_RIGHT_BRACKET                                                    { $$ = createDirectAbstractDeclarator($1,$2,NULL,$3,NULL,NULL,NULL,NULL,NULL); }
+	| direct_abstract_declarator Y_LEFT_BRACKET Y_TIMES Y_RIGHT_BRACKET                                            { $$ = createDirectAbstractDeclarator($1,$2,NULL,$4,$3,NULL,NULL,NULL,NULL); }
+	| direct_abstract_declarator Y_LEFT_BRACKET Y_STATIC type_qualifier_list assignment_expression Y_RIGHT_BRACKET { $$ = createDirectAbstractDeclarator($1,$2,NULL,$6,NULL,$4,$5,$3,NULL); }
+	| direct_abstract_declarator Y_LEFT_BRACKET Y_STATIC assignment_expression Y_RIGHT_BRACKET                     { $$ = createDirectAbstractDeclarator($1,$2,NULL,$5,NULL,NULL,$4,$3,NULL); }
+	| direct_abstract_declarator Y_LEFT_BRACKET type_qualifier_list assignment_expression Y_RIGHT_BRACKET          { $$ = createDirectAbstractDeclarator($1,$2,NULL,$5,NULL,$3,$4,NULL,NULL); }
+	| direct_abstract_declarator Y_LEFT_BRACKET type_qualifier_list Y_STATIC assignment_expression Y_RIGHT_BRACKET { $$ = createDirectAbstractDeclarator($1,$2,NULL,$6,NULL,$3,$5,$4,NULL); }
+	| direct_abstract_declarator Y_LEFT_BRACKET type_qualifier_list Y_RIGHT_BRACKET                                { $$ = createDirectAbstractDeclarator($1,$2,NULL,$4,NULL,$3,NULL,NULL,NULL); } 
+	| direct_abstract_declarator Y_LEFT_BRACKET assignment_expression Y_RIGHT_BRACKET                              { $$ = createDirectAbstractDeclarator($1,$2,NULL,$4,NULL,NULL,$3,NULL,NULL); }
+	| Y_LEFT_PAREN Y_RIGHT_PAREN                                                                                   { $$ = createDirectAbstractDeclarator(NULL,$1,NULL,$2,NULL,NULL,NULL,NULL,NULL); }
+	| Y_LEFT_PAREN parameter_type_list Y_RIGHT_PAREN                                                               { $$ = createDirectAbstractDeclarator(NULL,$1,NULL,$3,NULL,NULL,NULL,NULL,$2); }
+	| direct_abstract_declarator Y_LEFT_PAREN Y_RIGHT_PAREN                                                        { $$ = createDirectAbstractDeclarator($1,$2,NULL,$3,NULL,NULL,NULL,NULL,NULL); }
+	| direct_abstract_declarator Y_LEFT_PAREN parameter_type_list Y_RIGHT_PAREN                                    { $$ = createDirectAbstractDeclarator($1,$2,NULL,$4,NULL,NULL,NULL,NULL,$3); }
 	;
 
 initializer
