@@ -466,6 +466,7 @@ DirectAbstractDeclaratorPtr createDirectAbstractDeclarator(
 	TokenPtr delimEnd,
 	TokenPtr times,
 	LinkedListPtr list,
-	CTreePtr assignExpr
+	CTreePtr assignExpr,
+	TokenPtr statics
 );
 

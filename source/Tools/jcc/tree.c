@@ -523,7 +523,8 @@ DirectAbstractDeclaratorPtr createDirectAbstractDeclarator(
 	TokenPtr delimEnd,
 	TokenPtr times,
 	LinkedListPtr list,
-	CTreePtr assignExpr
+	CTreePtr assignExpr, 
+	TokenPtr statics
 )
 {
 	DirectAbstractDeclaratorNodePtr node = AllocateMemory(sizeof(DirectAbstractDeclaratorNode));
@@ -533,7 +534,7 @@ DirectAbstractDeclaratorPtr createDirectAbstractDeclarator(
 	node->list = list;
 	node->assignExpr = assignExpr;
 	node->times = times;
-	node->statics = NULL;
+	node->statics = statics;
 	if (dad != NULL)
 	{
 		addListElem(dad->list, node);
