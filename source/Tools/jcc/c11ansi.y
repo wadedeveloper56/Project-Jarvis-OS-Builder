@@ -6,7 +6,7 @@
 int yyerror(const char *s);
 int yylex();
 %}
-%define api.pure
+%define api.pure full
 %define api.value.type { union ParseUnion }
 
 %token END      0          "end of file"
