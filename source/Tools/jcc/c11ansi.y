@@ -198,6 +198,9 @@ int yylex();
 %type<list> designator_list
 %type<designation> designation
 
+%nonassoc "then"
+%nonassoc Y_ELSE
+
 %start translation_unit
 %%
 
@@ -667,8 +670,8 @@ expression_statement
 	;
 
 selection_statement
-	: Y_IF Y_LEFT_PAREN expression Y_RIGHT_PAREN statement Y_ELSE statement
-	| Y_IF Y_LEFT_PAREN expression Y_RIGHT_PAREN statement
+	: Y_IF Y_LEFT_PAREN expression Y_RIGHT_PAREN statement %prec "then"
+	| Y_IF Y_LEFT_PAREN expression Y_RIGHT_PAREN statement Y_ELSE statement
 	| Y_SWITCH Y_LEFT_PAREN expression Y_RIGHT_PAREN statement
 	;
 
