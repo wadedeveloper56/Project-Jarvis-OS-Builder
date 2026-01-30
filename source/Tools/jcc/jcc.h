@@ -459,5 +459,11 @@ LinkedListPtr createParameterList(ParameterDeclarationPtr pd, LinkedListPtr list
 ParameterTypeListPtr createParameterTypeList(LinkedListPtr parameterList, bool isVariadic);
 LinkedListPtr createIdentifierList(TokenPtr token, LinkedListPtr list);
 TypeNamePtr createTypeName(LinkedListPtr sql, AbstractDeclaratorPtr ad);
-DirectAbstractDeclaratorPtr createDirectAbstractDeclarator(DirectAbstractDeclaratorPtr dad, TokenPtr delimStart, AbstractDeclaratorPtr ad, TokenPtr delimEnd);
+DirectAbstractDeclaratorPtr createDirectAbstractDeclarator(
+	DirectAbstractDeclaratorPtr dad, 
+	TokenPtr delimStart, 
+	AbstractDeclaratorPtr ad, 
+	TokenPtr delimEnd,
+	TokenPtr times
+);
 

@@ -516,7 +516,13 @@ TypeNamePtr createTypeName(LinkedListPtr sql, AbstractDeclaratorPtr ad)
 	return newTypeName;
 }
 
-DirectAbstractDeclaratorPtr createDirectAbstractDeclarator(DirectAbstractDeclaratorPtr dad, TokenPtr delimStart, AbstractDeclaratorPtr ad, TokenPtr delimEnd)
+DirectAbstractDeclaratorPtr createDirectAbstractDeclarator(
+	DirectAbstractDeclaratorPtr dad,
+	TokenPtr delimStart,
+	AbstractDeclaratorPtr ad,
+	TokenPtr delimEnd,
+	TokenPtr times
+)
 {
 	DirectAbstractDeclaratorNodePtr node = AllocateMemory(sizeof(DirectAbstractDeclaratorNode));
 	node->delimStart = delimStart;
@@ -524,7 +530,7 @@ DirectAbstractDeclaratorPtr createDirectAbstractDeclarator(DirectAbstractDeclara
 	node->delimEnd = delimEnd;
 	node->list = NULL;
 	node->assignExpr = NULL;
-	node->times = NULL;
+	node->times = times;
 	node->statics = NULL;
 	if (dad != NULL)
 	{
