@@ -207,11 +207,15 @@ typedef enum _TypeQualifier
 typedef struct _TypeSpecifier TypeSpecifier, * TypeSpecifierPtr, ** TypeSpecifierPtrPtr;
 typedef struct _StructOrUnionSpecifier StructOrUnionSpecifier, * StructOrUnionSpecifierPtr, ** StructOrUnionSpecifierPtrPtr;
 typedef struct _EnumSpecifier EnumSpecifier, * EnumSpecifierPtr, ** EnumSpecifierPtrPtr;
+typedef struct _Declarator Declarator, * DeclaratorPtr, ** DeclaratorPtrPtr;
+typedef struct _DirectDeclarator DirectDeclarator, * DirectDeclaratorPtr, ** DirectDeclaratorPtrPtr;
+typedef struct _ParameterTypeList ParameterTypeList, * ParameterTypeListPtr, ** ParameterTypeListPtrPtr;
+typedef struct _TypeName TypeName, * TypeNamePtr, ** TypeNamePtrPtr;
 
 typedef struct _AtomicTypeSpecifier
 {
 	TokenPtr atomicToken;
-	TypeSpecifierPtr typeSpecifier;
+	TypeNamePtr typeName;
 } AtomicTypeSpecifier, * AtomicTypeSpecifierPtr, ** AtomicTypeSpecifierPtrPtr;
 
 typedef struct _TypeSpecifier
@@ -265,9 +269,6 @@ typedef struct _StructDeclaration
 	StaticAssertDeclarationPtr staticAssertDeclarationPtr;
 } StructDeclaration, * StructDeclarationPtr, ** StructDeclarationPtrPtr;
 
-typedef struct _Declarator Declarator, * DeclaratorPtr, ** DeclaratorPtrPtr;
-typedef struct _DirectDeclarator DirectDeclarator, * DirectDeclaratorPtr, ** DirectDeclaratorPtrPtr;
-typedef struct _ParameterTypeList ParameterTypeList, * ParameterTypeListPtr, ** ParameterTypeListPtrPtr;
 
 typedef struct _StructDeclarator
 {
@@ -356,6 +357,12 @@ typedef struct _ParameterTypeList
 	bool isVariadic;
 } ParameterTypeList, * ParameterTypeListPtr, ** ParameterTypeListPtrPtr;
 
+typedef struct _TypeName
+{
+	LinkedListPtr qualifierList; // list of TokenPtr (TypeQualifier)
+	AbstractDeclaratorPtr abstractDeclarator;
+} TypeName, * TypeNamePtr, ** TypeNamePtrPtr;
+
 union ParseUnion
 {
 	CTreePtr expression;
@@ -380,6 +387,7 @@ union ParseUnion
 	AbstractDeclaratorPtr abstractDeclarator;
 	ParameterDeclarationPtr parameterDeclaration;
 	ParameterTypeListPtr parameterTypeList;
+	TypeNamePtr typeName;
 };
 
 void printHeader(void);
@@ -419,7 +427,7 @@ TypeSpecifierPtr createTypeSpecifier(TokenPtr token);
 TypeSpecifierPtr createTypeSpecifier2(AtomicTypeSpecifierPtr token);
 TypeSpecifierPtr createTypeSpecifier3(StructOrUnionSpecifierPtr token);
 TypeSpecifierPtr createTypeSpecifier4(EnumSpecifierPtr token);
-AtomicTypeSpecifierPtr createAtomicTypeSpecifier(TokenPtr atomicToken, TokenPtr typeNameToken);
+AtomicTypeSpecifierPtr createAtomicTypeSpecifier(TokenPtr atomicToken, TypeNamePtr typeNameToken);
 LinkedListPtr createStructDeclarationList(StructDeclarationPtr node, LinkedListPtr list);
 StructDeclarationPtr createStructDeclaration(LinkedListPtr specifierQualifierList, LinkedListPtr structDeclaratorList, StaticAssertDeclarationPtr staticAssertDeclaration);
 LinkedListPtr createSecifierQualifierList(TypeSpecifierPtr typeSpecifier, TokenPtr typeQualifier, LinkedListPtr list);

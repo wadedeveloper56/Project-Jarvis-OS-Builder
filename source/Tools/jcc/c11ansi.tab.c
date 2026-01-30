@@ -2214,13 +2214,13 @@ yyreduce:
 
   case 26: /* postfix_expression: Y_LEFT_PAREN type_name Y_RIGHT_PAREN Y_LEFT_BRACE initializer_list Y_RIGHT_BRACE  */
 #line 248 "c11ansi.y"
-                                                                                             { (yyval.expression) = createCTree1(createConstr5Label(LABCT_INIT, (yyvsp[-5].token),(yyvsp[-4].token),(yyvsp[-3].token),(yyvsp[-2].token),(yyvsp[0].token)), (yyvsp[-1].expression)); }
+                                                                                             { (yyval.expression) = createCTree1(createConstr5Label(LABCT_INIT, (yyvsp[-5].token),(yyvsp[-4].typeName),(yyvsp[-3].token),(yyvsp[-2].token),(yyvsp[0].token)), (yyvsp[-1].expression)); }
 #line 2219 "c11ansi.tab.c"
     break;
 
   case 27: /* postfix_expression: Y_LEFT_PAREN type_name Y_RIGHT_PAREN Y_LEFT_BRACE initializer_list Y_COMMA Y_RIGHT_BRACE  */
 #line 249 "c11ansi.y"
-                                                                                                    { (yyval.expression) = createCTree1(createConstr5Label(LABCT_INIT, (yyvsp[-6].token),(yyvsp[-5].token),(yyvsp[-4].token),(yyvsp[-3].token),(yyvsp[-1].token)), (yyvsp[-2].expression)); }
+                                                                                                    { (yyval.expression) = createCTree1(createConstr5Label(LABCT_INIT, (yyvsp[-6].token),(yyvsp[-5].typeName),(yyvsp[-4].token),(yyvsp[-3].token),(yyvsp[-1].token)), (yyvsp[-2].expression)); }
 #line 2225 "c11ansi.tab.c"
     break;
 
@@ -3006,7 +3006,7 @@ yyreduce:
 
   case 160: /* atomic_type_specifier: Y_ATOMIC Y_LEFT_PAREN type_name Y_RIGHT_PAREN  */
 #line 490 "c11ansi.y"
-                                                        { (yyval.atomicTypeSpecifier) = createAtomicTypeSpecifier((yyvsp[-3].token),(yyvsp[-1].token)); }
+                                                        { (yyval.atomicTypeSpecifier) = createAtomicTypeSpecifier((yyvsp[-3].token),(yyvsp[-1].typeName)); }
 #line 3011 "c11ansi.tab.c"
     break;
 
@@ -3246,13 +3246,13 @@ yyreduce:
 
   case 200: /* type_name: specifier_qualifier_list abstract_declarator  */
 #line 567 "c11ansi.y"
-                                                       { (yyval.token) = NULL; }
+                                                       { (yyval.typeName) = NULL; }
 #line 3251 "c11ansi.tab.c"
     break;
 
   case 201: /* type_name: specifier_qualifier_list  */
 #line 568 "c11ansi.y"
-                                                       { (yyval.token) = NULL; }
+                                                       { (yyval.typeName) = NULL; }
 #line 3257 "c11ansi.tab.c"
     break;
 

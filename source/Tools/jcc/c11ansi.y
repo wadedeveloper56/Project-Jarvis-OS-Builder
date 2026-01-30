@@ -140,7 +140,7 @@ int yylex();
 %type<token> constant
 %type<token> enumeration_constant
 %type<token> string
-%type<token> type_name
+%type<typeName> type_name
 %type<expression> primary_expression	
 %type<expression> expression	
 %type<expression> postfix_expression

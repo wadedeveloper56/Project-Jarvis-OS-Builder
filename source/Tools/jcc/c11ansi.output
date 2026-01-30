@@ -693,7 +693,7 @@ Nonterminals, with rules where they appear
     identifier_list <list> (185)
         on left: 197 198
         on right: 183 198
-    type_name <token> (186)
+    type_name <typeName> (186)
         on left: 199 200
         on right: 15 25 26 34 35 43 159 166
     abstract_declarator <abstractDeclarator> (187)

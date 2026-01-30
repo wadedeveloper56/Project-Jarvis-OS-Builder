@@ -259,11 +259,11 @@ TypeSpecifierPtr createTypeSpecifier4(EnumSpecifierPtr token)
 	return newTypeSpec;
 }
 
-AtomicTypeSpecifierPtr createAtomicTypeSpecifier(TokenPtr atomicToken, TokenPtr typeNameToken)
+AtomicTypeSpecifierPtr createAtomicTypeSpecifier(TokenPtr atomicToken, TypeNamePtr typeNameToken)
 {
 	AtomicTypeSpecifierPtr newAtomicTypeSpec = AllocateMemory(sizeof(AtomicTypeSpecifier));
 	newAtomicTypeSpec->atomicToken = atomicToken;
-	newAtomicTypeSpec->typeSpecifier = createTypeSpecifier(typeNameToken);
+	newAtomicTypeSpec->typeName = typeNameToken;
 	return newAtomicTypeSpec;
 }
 
