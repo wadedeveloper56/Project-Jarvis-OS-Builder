@@ -704,10 +704,10 @@ Nonterminals, with rules where they appear
     initializer <expression> (188)
         on left: 225 226 227
         on right: 105 228 229 230 231
-    initializer_list <expression> (189)
+    initializer_list <list> (189)
         on left: 228 229 230 231
         on right: 25 26 225 226 230 231
-    designation (190)
+    designation <designation> (190)
         on left: 232
         on right: 228 230
     designator_list <list> (191)

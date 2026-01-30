@@ -150,6 +150,18 @@ LabelPtr createConstr5Label(LabelConstrType type, TokenPtr t0, TokenPtr t1, Toke
 	return newLabel;
 }
 
+LabelPtr createConstr6Label(LabelConstrType type, TokenPtr t0, TokenPtr t1, LinkedListPtr list)
+{
+	LabelPtr newLabel = _createLabel(LABT_CONSTRUCT_ROOT, NULL);
+	newLabel->repr.constr.type = type;
+	newLabel->repr.constr.numTokens = 2;
+	newLabel->repr.constr.tokens = AllocateMemory(sizeof(Token) * 5);
+	newLabel->repr.constr.tokens[0] = t0;
+	newLabel->repr.constr.tokens[1] = t1;
+	newLabel->repr.list = list;
+	return newLabel;
+}
+
 DeclarationPtr createDeclaration(DeclarationSpecifiersPtr declSpecifiers, LinkedListPtr initDeclaratorList, StaticAssertDeclarationPtr staticAssertDecl)
 {
 	DeclarationPtr newDecl = AllocateMemory(sizeof(Declaration));
@@ -572,5 +584,25 @@ LinkedListPtr createDesignatorList(DesignatorPtr designator, LinkedListPtr list)
 	return list;
 }
 
+DesignationPtr createDesignation(LinkedListPtr list, TokenPtr equal)
+{
+	DesignationPtr newDesignation = AllocateMemory(sizeof(Designation));
+	newDesignation->list = list;
+	newDesignation->equal = equal;
+	return newDesignation;
+}
+
+LinkedListPtr createInitializerList(DesignationPtr designation, CTreePtr initializer, LinkedListPtr list)
+{
+	if (list == NULL)
+	{
+		list = createList();
+	}
+	InitializerListNodePtr node = AllocateMemory(sizeof(InitializerListNode));
+	node->designation = designation;
+	node->initializer = initializer;
+	addListElem(list, node);
+	return list;
+}
 
 

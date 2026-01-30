@@ -151,7 +151,7 @@ int yylex();
 %type<expression> cast_expression
 %type<expression> constant_expression
 %type<expression> argument_expression_list
-%type<expression> initializer_list
+%type<list> initializer_list
 %type<expression> initializer
 %type<expression> multiplicative_expression
 %type<expression> additive_expression
@@ -196,6 +196,7 @@ int yylex();
 %type<parameterTypeList> parameter_type_list
 %type<designator> designator
 %type<list> designator_list
+%type<designation> designation
 
 %start translation_unit
 %%
@@ -600,20 +601,20 @@ direct_abstract_declarator
 	;
 
 initializer
-	: Y_LEFT_BRACE initializer_list Y_RIGHT_BRACE         { $$ = createCTree1(createConstr2Label(LABCT_EXPR_LIST, $1, $3), $2); }
-	| Y_LEFT_BRACE initializer_list Y_COMMA Y_RIGHT_BRACE { $$ = createCTree1(createConstr3Label(LABCT_EXPR_LIST, $1, $3, $4), $2); }
+	: Y_LEFT_BRACE initializer_list Y_RIGHT_BRACE         { $$ = createCTreeRoot(createConstr6Label(LABCT_EXPR_LIST, $1, $3, $2)); }
+	| Y_LEFT_BRACE initializer_list Y_COMMA Y_RIGHT_BRACE { $$ = createCTreeRoot(createConstr6Label(LABCT_EXPR_LIST, $1, $3, $2)); }
 	| assignment_expression                               { $$ = $1; }
 	;
 
 initializer_list
-	: designation initializer                           { $$ = NULL; }
-	| initializer                                       { $$ = createCTree1(createConstr0Label(LABCT_EXPR_LIST), $1); }
-	| initializer_list Y_COMMA designation initializer  { $$ = NULL; }
-	| initializer_list Y_COMMA initializer              { $$ = createCTree2(createConstr1Label(LABCT_EXPR_LIST, $2), $1, $3); }
+	: designation initializer                           { $$ = createInitializerList($1,$2,NULL); }
+	| initializer                                       { $$ = createInitializerList(NULL,$1,NULL); }
+	| initializer_list Y_COMMA designation initializer  { $$ = createInitializerList($3,$4,$1); }
+	| initializer_list Y_COMMA initializer              { $$ = createInitializerList(NULL,$3,$1); }
 	;
 
 designation
-	: designator_list Y_EQUAL
+	: designator_list Y_EQUAL  { $$ = createDesignation($1,$2); }
 	;
 
 designator_list

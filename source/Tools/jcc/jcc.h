@@ -20,6 +20,7 @@ typedef struct _DirectDeclarator DirectDeclarator, * DirectDeclaratorPtr, ** Dir
 typedef struct _ParameterTypeList ParameterTypeList, * ParameterTypeListPtr, ** ParameterTypeListPtrPtr;
 typedef struct _TypeName TypeName, * TypeNamePtr, ** TypeNamePtrPtr;
 typedef struct _AbstractDeclarator AbstractDeclarator, * AbstractDeclaratorPtr, ** AbstractDeclaratorPtrPtr;
+typedef struct _Designation Designation, * DesignationPtr, ** DesignationPtrPtr;
 
 typedef enum _LabelType
 {
@@ -166,7 +167,7 @@ typedef struct _LinkedListNode
 
 typedef struct _LinkedList
 {
-	LinkedListNodePtr list; 
+	LinkedListNodePtr list;
 } LinkedList, * LinkedListPtr, ** LinkedListPtrPtr;
 
 typedef struct _Label
@@ -181,7 +182,7 @@ typedef struct _Label
 			TokenPtrPtr tokens;
 			TypeNamePtr typeName;
 		} constr;
-		LinkedListPtr list; // List of tokens
+		LinkedListPtr list; 
 		TokenPtr token;
 		void* data;
 	} repr;
@@ -285,7 +286,7 @@ typedef struct _DirectDeclarator
 	DeclaratorPtr declarator;
 	ParameterTypeListPtr list;
 	LinkedListPtr list2;
-	CTreePtr assignExpr;	
+	CTreePtr assignExpr;
 	TokenPtr identifier;
 	TokenPtr delimStart;
 	TokenPtr delimEnd;
@@ -297,7 +298,7 @@ typedef struct _Declarator
 {
 	DirectDeclaratorPtr directDeclarator;
 	LinkedListPtr pointerList; // list of TokenPtr (TypeQualifier)
-} Declarator, * DeclaratorPtr, ** DeclaratorPtrPtr;	
+} Declarator, * DeclaratorPtr, ** DeclaratorPtrPtr;
 
 typedef struct _SpecifierQualifierListNode
 {
@@ -324,7 +325,7 @@ typedef struct _EnumSpecifier
 	LinkedListPtr enumeratorList; // list of EnumeratorPtr
 } EnumSpecifier, * EnumSpecifierPtr, ** EnumSpecifierPtrPtr;
 
-typedef struct _Pointer 
+typedef struct _Pointer
 {
 	LinkedListPtr typeQualifierList; // list of TokenPtr (TypeQualifier)
 	int numberOfStars;
@@ -381,13 +382,25 @@ typedef struct _Designator
 	TokenPtr identifier;
 } Designator, * DesignatorPtr, ** DesignatorPtrPtr;
 
+typedef struct _Designation
+{
+	LinkedListPtr list; // list of DesignatorPtr
+	TokenPtr equal;
+} Designation, * DesignationPtr, ** DesignationPtrPtr;
+
+typedef struct _InitializerListNode
+{
+	DesignationPtr designation;
+	CTreePtr initializer;
+} InitializerListNode, * InitializerListNodePtr, ** InitializerListNodePtrPtr;
+
 union ParseUnion
 {
 	CTreePtr expression;
 	LabelPtr label;
 	TokenPtr token;
 	LinkedListPtr list;
-	DeclarationPtr declaration;	
+	DeclarationPtr declaration;
 	DeclarationSpecifiersPtr declSpecifiers;
 	LinkedListPtr initDeclaratorList;
 	StaticAssertDeclarationPtr staticAssertDecl;
@@ -407,6 +420,7 @@ union ParseUnion
 	ParameterTypeListPtr parameterTypeList;
 	TypeNamePtr typeName;
 	DesignatorPtr designator;
+	DesignationPtr designation;
 };
 
 void printHeader(void);
@@ -436,6 +450,7 @@ LabelPtr createConstr2Label(LabelConstrType type, TokenPtr t0, TokenPtr t1);
 LabelPtr createConstr3Label(LabelConstrType type, TokenPtr t0, TokenPtr t1, TokenPtr t2);
 LabelPtr createConstr4Label(LabelConstrType type, TokenPtr t0, TokenPtr t1, TokenPtr t2, TokenPtr t3);
 LabelPtr createConstr5Label(LabelConstrType type, TokenPtr t0, TokenPtr t1, TokenPtr t2, TokenPtr t3, TypeNamePtr t4);
+LabelPtr createConstr6Label(LabelConstrType type, TokenPtr t0, TokenPtr t1, LinkedListPtr list);
 DeclarationPtr createDeclaration(DeclarationSpecifiersPtr declSpecifiers, LinkedListPtr initDeclaratorList, StaticAssertDeclarationPtr staticAssertDecl);
 void addListElem(LinkedListPtr pList, void* elem);
 LinkedListPtr createList(void);
@@ -471,9 +486,9 @@ ParameterTypeListPtr createParameterTypeList(LinkedListPtr parameterList, bool i
 LinkedListPtr createIdentifierList(TokenPtr token, LinkedListPtr list);
 TypeNamePtr createTypeName(LinkedListPtr sql, AbstractDeclaratorPtr ad);
 DirectAbstractDeclaratorPtr createDirectAbstractDeclarator(
-	DirectAbstractDeclaratorPtr dad, 
-	TokenPtr delimStart, 
-	AbstractDeclaratorPtr ad, 
+	DirectAbstractDeclaratorPtr dad,
+	TokenPtr delimStart,
+	AbstractDeclaratorPtr ad,
 	TokenPtr delimEnd,
 	TokenPtr times,
 	LinkedListPtr list,
@@ -481,5 +496,9 @@ DirectAbstractDeclaratorPtr createDirectAbstractDeclarator(
 	TokenPtr statics,
 	ParameterTypeListPtr parameterTypeList
 );
-DesignatorPtr createDesignator(TokenPtr delimStart,CTreePtr assignExpr,TokenPtr delimEnd,TokenPtr dot,TokenPtr identifier);
+DesignatorPtr createDesignator(TokenPtr delimStart, CTreePtr assignExpr, TokenPtr delimEnd, TokenPtr dot, TokenPtr identifier);
 LinkedListPtr createDesignatorList(DesignatorPtr designator, LinkedListPtr list);
+DesignationPtr createDesignation(LinkedListPtr list, TokenPtr equal);
+LinkedListPtr createInitializerList(DesignationPtr designation, CTreePtr initializer, LinkedListPtr list);
+
+
