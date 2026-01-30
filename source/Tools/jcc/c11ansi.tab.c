@@ -3295,19 +3295,19 @@ yyreduce:
 
   case 205: /* direct_abstract_declarator: Y_LEFT_PAREN abstract_declarator Y_RIGHT_PAREN  */
 #line 578 "c11ansi.y"
-                                                                                                                       { (yyval.directAbstractDeclarator) = createDirectAbstractDeclarator(NULL,(yyvsp[-2].token),(yyvsp[-1].abstractDeclarator),(yyvsp[0].token),NULL); }
+                                                                                                                       { (yyval.directAbstractDeclarator) = createDirectAbstractDeclarator(NULL,(yyvsp[-2].token),(yyvsp[-1].abstractDeclarator),(yyvsp[0].token),NULL,NULL); }
 #line 3300 "c11ansi.tab.c"
     break;
 
   case 206: /* direct_abstract_declarator: Y_LEFT_BRACKET Y_RIGHT_BRACKET  */
 #line 579 "c11ansi.y"
-                                                                                                                       { (yyval.directAbstractDeclarator) = createDirectAbstractDeclarator(NULL,(yyvsp[-1].token),NULL,(yyvsp[0].token),NULL); }
+                                                                                                                       { (yyval.directAbstractDeclarator) = createDirectAbstractDeclarator(NULL,(yyvsp[-1].token),NULL,(yyvsp[0].token),NULL,NULL); }
 #line 3306 "c11ansi.tab.c"
     break;
 
   case 207: /* direct_abstract_declarator: Y_LEFT_BRACKET Y_TIMES Y_RIGHT_BRACKET  */
 #line 580 "c11ansi.y"
-                                                                                                                       { (yyval.directAbstractDeclarator) = createDirectAbstractDeclarator(NULL,(yyvsp[-2].token),NULL,(yyvsp[0].token),(yyvsp[-1].token)); }
+                                                                                                                       { (yyval.directAbstractDeclarator) = createDirectAbstractDeclarator(NULL,(yyvsp[-2].token),NULL,(yyvsp[0].token),(yyvsp[-1].token),NULL); }
 #line 3312 "c11ansi.tab.c"
     break;
 
@@ -3349,13 +3349,13 @@ yyreduce:
 
   case 214: /* direct_abstract_declarator: direct_abstract_declarator Y_LEFT_BRACKET Y_RIGHT_BRACKET  */
 #line 587 "c11ansi.y"
-                                                                                                                       { (yyval.directAbstractDeclarator) = createDirectAbstractDeclarator((yyvsp[-2].directAbstractDeclarator),(yyvsp[-1].token),NULL,(yyvsp[0].token),NULL); }
+                                                                                                                       { (yyval.directAbstractDeclarator) = createDirectAbstractDeclarator((yyvsp[-2].directAbstractDeclarator),(yyvsp[-1].token),NULL,(yyvsp[0].token),NULL,NULL); }
 #line 3354 "c11ansi.tab.c"
     break;
 
   case 215: /* direct_abstract_declarator: direct_abstract_declarator Y_LEFT_BRACKET Y_TIMES Y_RIGHT_BRACKET  */
 #line 588 "c11ansi.y"
-                                                                                                                       { (yyval.directAbstractDeclarator) = createDirectAbstractDeclarator((yyvsp[-3].directAbstractDeclarator),(yyvsp[-2].token),NULL,(yyvsp[0].token),(yyvsp[-1].token)); }
+                                                                                                                       { (yyval.directAbstractDeclarator) = createDirectAbstractDeclarator((yyvsp[-3].directAbstractDeclarator),(yyvsp[-2].token),NULL,(yyvsp[0].token),(yyvsp[-1].token),NULL); }
 #line 3360 "c11ansi.tab.c"
     break;
 
@@ -3397,7 +3397,7 @@ yyreduce:
 
   case 222: /* direct_abstract_declarator: Y_LEFT_PAREN Y_RIGHT_PAREN  */
 #line 595 "c11ansi.y"
-                                                                                                                       { (yyval.directAbstractDeclarator) = createDirectAbstractDeclarator(NULL,(yyvsp[-1].token),NULL,(yyvsp[0].token),NULL); }
+                                                                                                                       { (yyval.directAbstractDeclarator) = createDirectAbstractDeclarator(NULL,(yyvsp[-1].token),NULL,(yyvsp[0].token),NULL,NULL); }
 #line 3402 "c11ansi.tab.c"
     break;
 
@@ -3409,7 +3409,7 @@ yyreduce:
 
   case 224: /* direct_abstract_declarator: direct_abstract_declarator Y_LEFT_PAREN Y_RIGHT_PAREN  */
 #line 597 "c11ansi.y"
-                                                                                                                       { (yyval.directAbstractDeclarator) = createDirectAbstractDeclarator((yyvsp[-2].directAbstractDeclarator),(yyvsp[-1].token),NULL,(yyvsp[0].token),NULL); }
+                                                                                                                       { (yyval.directAbstractDeclarator) = createDirectAbstractDeclarator((yyvsp[-2].directAbstractDeclarator),(yyvsp[-1].token),NULL,(yyvsp[0].token),NULL,NULL); }
 #line 3414 "c11ansi.tab.c"
     break;
 

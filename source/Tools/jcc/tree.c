@@ -521,7 +521,8 @@ DirectAbstractDeclaratorPtr createDirectAbstractDeclarator(
 	TokenPtr delimStart,
 	AbstractDeclaratorPtr ad,
 	TokenPtr delimEnd,
-	TokenPtr times
+	TokenPtr times,
+	LinkedListPtr list
 )
 {
 	DirectAbstractDeclaratorNodePtr node = AllocateMemory(sizeof(DirectAbstractDeclaratorNode));
