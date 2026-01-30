@@ -710,7 +710,7 @@ Nonterminals, with rules where they appear
     designation (190)
         on left: 232
         on right: 228 230
-    designator_list (191)
+    designator_list <list> (191)
         on left: 233 234
         on right: 232 234
     designator <designator> (192)

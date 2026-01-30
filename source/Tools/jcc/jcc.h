@@ -482,4 +482,4 @@ DirectAbstractDeclaratorPtr createDirectAbstractDeclarator(
 	ParameterTypeListPtr parameterTypeList
 );
 DesignatorPtr createDesignator(TokenPtr delimStart,CTreePtr assignExpr,TokenPtr delimEnd,TokenPtr dot,TokenPtr identifier);
-
+LinkedListPtr createDesignatorList(DesignatorPtr designator, LinkedListPtr list);

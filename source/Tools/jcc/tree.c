@@ -562,5 +562,15 @@ DesignatorPtr createDesignator(TokenPtr delimStart, CTreePtr assignExpr, TokenPt
 	return newDesignator;
 }
 
+LinkedListPtr createDesignatorList(DesignatorPtr designator, LinkedListPtr list)
+{
+	if (list == NULL)
+	{
+		list = createList();
+	}
+	addListElem(list, designator);
+	return list;
+}
+
 
 

@@ -195,6 +195,7 @@ int yylex();
 %type<list> parameter_list
 %type<parameterTypeList> parameter_type_list
 %type<designator> designator
+%type<list> designator_list
 
 %start translation_unit
 %%
@@ -616,8 +617,8 @@ designation
 	;
 
 designator_list
-	: designator
-	| designator_list designator
+	: designator                 { $$ = createDesignatorList($1,NULL); }
+	| designator_list designator { $$ = createDesignatorList($2,$1); }
 	;
 
 designator
