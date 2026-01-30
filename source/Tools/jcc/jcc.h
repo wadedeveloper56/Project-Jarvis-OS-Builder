@@ -19,6 +19,7 @@ typedef struct _Declarator Declarator, * DeclaratorPtr, ** DeclaratorPtrPtr;
 typedef struct _DirectDeclarator DirectDeclarator, * DirectDeclaratorPtr, ** DirectDeclaratorPtrPtr;
 typedef struct _ParameterTypeList ParameterTypeList, * ParameterTypeListPtr, ** ParameterTypeListPtrPtr;
 typedef struct _TypeName TypeName, * TypeNamePtr, ** TypeNamePtrPtr;
+typedef struct _AbstractDeclarator AbstractDeclarator, * AbstractDeclaratorPtr, ** AbstractDeclaratorPtrPtr;
 
 typedef enum _LabelType
 {
@@ -329,15 +330,20 @@ typedef struct _Pointer
 	int numberOfStars;
 } Pointer, * PointerPtr, ** PointerPtrPtr;
 
-typedef struct _DirectAbstractDeclarator
+typedef struct _DirectAbstractDeclaratorNode
 {
-	struct _DirectAbstractDeclarator* directAbstractDeclarator;
 	LinkedListPtr list; // list of TokenPtr (TypeQualifier)
+	AbstractDeclaratorPtr abstractDeclarator;
 	CTreePtr assignExpr;
 	TokenPtr delimStart;
 	TokenPtr delimEnd;
 	TokenPtr times;
 	TokenPtr statics;
+} DirectAbstractDeclaratorNode, * DirectAbstractDeclaratorNodePtr, ** DirectAbstractDeclaratorNodePtrPtr;
+
+typedef struct _DirectAbstractDeclarator
+{
+	LinkedListPtr list; // list of DirectAbstractDeclaratorNodePtr
 } DirectAbstractDeclarator, * DirectAbstractDeclaratorPtr, ** DirectAbstractDeclaratorPtrPtr;
 
 typedef struct _AbstractDeclarator
@@ -453,4 +459,5 @@ LinkedListPtr createParameterList(ParameterDeclarationPtr pd, LinkedListPtr list
 ParameterTypeListPtr createParameterTypeList(LinkedListPtr parameterList, bool isVariadic);
 LinkedListPtr createIdentifierList(TokenPtr token, LinkedListPtr list);
 TypeNamePtr createTypeName(LinkedListPtr sql, AbstractDeclaratorPtr ad);
+DirectAbstractDeclaratorPtr createDirectAbstractDeclarator(DirectAbstractDeclaratorPtr dad, TokenPtr delimStart, AbstractDeclaratorPtr ad, TokenPtr delimEnd);
 

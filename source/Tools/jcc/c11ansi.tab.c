@@ -3295,7 +3295,7 @@ yyreduce:
 
   case 205: /* direct_abstract_declarator: Y_LEFT_PAREN abstract_declarator Y_RIGHT_PAREN  */
 #line 578 "c11ansi.y"
-                                                                                                                       { (yyval.directAbstractDeclarator) = NULL; }
+                                                                                                                       { (yyval.directAbstractDeclarator) = createDirectAbstractDeclarator(NULL,(yyvsp[-2].token),(yyvsp[-1].abstractDeclarator),(yyvsp[0].token)); }
 #line 3300 "c11ansi.tab.c"
     break;
 
