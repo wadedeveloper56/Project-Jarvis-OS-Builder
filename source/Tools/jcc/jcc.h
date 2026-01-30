@@ -452,4 +452,5 @@ ParameterDeclarationPtr createParameterDeclaration(DeclarationSpecifiersPtr ds, 
 LinkedListPtr createParameterList(ParameterDeclarationPtr pd, LinkedListPtr list);
 ParameterTypeListPtr createParameterTypeList(LinkedListPtr parameterList, bool isVariadic);
 LinkedListPtr createIdentifierList(TokenPtr token, LinkedListPtr list);
+TypeNamePtr createTypeName(LinkedListPtr sql, AbstractDeclaratorPtr ad);
 

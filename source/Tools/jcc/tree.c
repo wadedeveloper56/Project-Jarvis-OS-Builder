@@ -508,6 +508,14 @@ LinkedListPtr createIdentifierList(TokenPtr token, LinkedListPtr list)
 	return list;
 }
 
+TypeNamePtr createTypeName(LinkedListPtr sql, AbstractDeclaratorPtr ad)
+{
+	TypeNamePtr newTypeName = AllocateMemory(sizeof(TypeName));
+	newTypeName->qualifierList = sql;
+	newTypeName->abstractDeclarator = ad;
+	return newTypeName;
+}
+
 
 
 

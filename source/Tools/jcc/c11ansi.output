@@ -307,7 +307,7 @@ Grammar
   211                           | Y_LEFT_BRACKET type_qualifier_list Y_RIGHT_BRACKET
   212                           | Y_LEFT_BRACKET assignment_expression Y_RIGHT_BRACKET
   213                           | direct_abstract_declarator Y_LEFT_BRACKET Y_RIGHT_BRACKET
-  214                           | direct_abstract_declarator Y_LEFT_BRACKET '*' Y_RIGHT_BRACKET
+  214                           | direct_abstract_declarator Y_LEFT_BRACKET Y_TIMES Y_RIGHT_BRACKET
   215                           | direct_abstract_declarator Y_LEFT_BRACKET Y_STATIC type_qualifier_list assignment_expression Y_RIGHT_BRACKET
   216                           | direct_abstract_declarator Y_LEFT_BRACKET Y_STATIC assignment_expression Y_RIGHT_BRACKET
   217                           | direct_abstract_declarator Y_LEFT_BRACKET type_qualifier_list assignment_expression Y_RIGHT_BRACKET
@@ -394,7 +394,6 @@ Grammar
 Terminals, with rules where they appear
 
     "end of file" (0) 0
-    '*' (42) 214
     error (256)
     "identifier" <token> (258) 1 9 21 22 132 133 152 153 154 170 197 198 236 244 264
     "i_const" <token> (259) 6
@@ -409,7 +408,7 @@ Terminals, with rules where they appear
     Y_AND_EQUAL <token> (268) 84
     Y_LEFT_PAREN <token> (269) 4 12 19 20 25 26 34 35 43 159 166 167 171 181 182 183 204 221 222 223 224 237 255 256 257 258 259 260 261 262 263
     Y_RIGHT_PAREN <token> (270) 4 12 19 20 25 26 34 35 43 159 166 167 171 181 182 183 204 221 222 223 224 237 255 256 257 258 259 260 261 262 263
-    Y_TIMES <token> (271) 37 45 173 176 184 185 186 187 206
+    Y_TIMES <token> (271) 37 45 173 176 184 185 186 187 206 214
     Y_TIMES_EQUAL <token> (272) 77
     Y_PLUS <token> (273) 38 49
     Y_PLUS_PLUS <token> (274) 23 30
@@ -526,237 +525,237 @@ Terminals, with rules where they appear
 
 Nonterminals, with rules where they appear
 
-    $accept (130)
+    $accept (129)
         on left: 0
-    primary_expression <expression> (131)
+    primary_expression <expression> (130)
         on left: 1 2 3 4 5
         on right: 17
-    constant <token> (132)
+    constant <token> (131)
         on left: 6 7 8
         on right: 2
-    enumeration_constant <token> (133)
+    enumeration_constant <token> (132)
         on left: 9
         on right: 157 158
-    string <token> (134)
+    string <token> (133)
         on left: 10 11
         on right: 3
-    generic_selection (135)
+    generic_selection (134)
         on left: 12
         on right: 5
-    generic_assoc_list (136)
+    generic_assoc_list (135)
         on left: 13 14
         on right: 12 14
-    generic_association (137)
+    generic_association (136)
         on left: 15 16
         on right: 13 14
-    postfix_expression <expression> (138)
+    postfix_expression <expression> (137)
         on left: 17 18 19 20 21 22 23 24 25 26
         on right: 18 19 20 21 22 23 24 29
-    argument_expression_list <expression> (139)
+    argument_expression_list <expression> (138)
         on left: 27 28
         on right: 20 28
-    unary_expression <expression> (140)
+    unary_expression <expression> (139)
         on left: 29 30 31 32 33 34 35
         on right: 30 31 33 42 75
-    unary_operator <label> (141)
+    unary_operator <label> (140)
         on left: 36 37 38 39 40 41
         on right: 32
-    cast_expression <expression> (142)
+    cast_expression <expression> (141)
         on left: 42 43
         on right: 32 43 44 45 46 47
-    multiplicative_expression <expression> (143)
+    multiplicative_expression <expression> (142)
         on left: 44 45 46 47
         on right: 45 46 47 48 49 50
-    additive_expression <expression> (144)
+    additive_expression <expression> (143)
         on left: 48 49 50
         on right: 49 50 51 52 53
-    shift_expression <expression> (145)
+    shift_expression <expression> (144)
         on left: 51 52 53
         on right: 52 53 54 55 56 57 58
-    relational_expression <expression> (146)
+    relational_expression <expression> (145)
         on left: 54 55 56 57 58
         on right: 55 56 57 58 59 60 61
-    equality_expression <expression> (147)
+    equality_expression <expression> (146)
         on left: 59 60 61
         on right: 60 61 62 63
-    and_expression <expression> (148)
+    and_expression <expression> (147)
         on left: 62 63
         on right: 63 64 65
-    exclusive_or_expression <expression> (149)
+    exclusive_or_expression <expression> (148)
         on left: 64 65
         on right: 65 66 67
-    inclusive_or_expression <expression> (150)
+    inclusive_or_expression <expression> (149)
         on left: 66 67
         on right: 67 68 69
-    logical_and_expression <expression> (151)
+    logical_and_expression <expression> (150)
         on left: 68 69
         on right: 69 70 71
-    logical_or_expression <expression> (152)
+    logical_or_expression <expression> (151)
         on left: 70 71
         on right: 71 72 73
-    conditional_expression <expression> (153)
+    conditional_expression <expression> (152)
         on left: 72 73
         on right: 73 74 89
-    assignment_expression <expression> (154)
+    assignment_expression <expression> (153)
         on left: 74 75
         on right: 12 15 16 27 28 75 87 88 174 175 177 178 180 207 208 209 210 212 215 216 217 218 220 227
-    assignment_operator <label> (155)
+    assignment_operator <label> (154)
         on left: 76 77 78 79 80 81 82 83 84 85 86
         on right: 75
-    expression <expression> (156)
+    expression <expression> (155)
         on left: 87 88
         on right: 4 18 73 88 254 255 256 257 258 259 261 263 268
-    constant_expression <expression> (157)
+    constant_expression <expression> (156)
         on left: 89
         on right: 147 148 157 167 235 237 245
-    declaration <declaration> (158)
+    declaration <declaration> (157)
         on left: 90 91 92
         on right: 251 262 263 272 275 276
-    declaration_specifiers <declSpecifiers> (159)
+    declaration_specifiers <declSpecifiers> (158)
         on left: 93 94 95 96 97 98 99 100 101 102
         on right: 90 91 93 95 97 99 101 194 195 196 273 274
-    init_declarator_list <initDeclaratorList> (160)
+    init_declarator_list <initDeclaratorList> (159)
         on left: 103 104
         on right: 91 104
-    init_declarator (161)
+    init_declarator (160)
         on left: 105 106
         on right: 103 104
-    storage_class_specifier <token> (162)
+    storage_class_specifier <token> (161)
         on left: 107 108 109 110 111 112
         on right: 93 94
-    type_specifier <typeSpecifier> (163)
+    type_specifier <typeSpecifier> (162)
         on left: 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130
         on right: 95 96 141 142
-    struct_or_union_specifier <structOrUnionSpecifier> (164)
+    struct_or_union_specifier <structOrUnionSpecifier> (163)
         on left: 131 132 133
         on right: 128
-    struct_or_union <token> (165)
+    struct_or_union <token> (164)
         on left: 134 135
         on right: 131 132 133
-    struct_declaration_list <list> (166)
+    struct_declaration_list <list> (165)
         on left: 136 137
         on right: 131 132 137
-    struct_declaration <structDeclaration> (167)
+    struct_declaration <structDeclaration> (166)
         on left: 138 139 140
         on right: 136 137
-    specifier_qualifier_list <list> (168)
+    specifier_qualifier_list <list> (167)
         on left: 141 142 143 144
         on right: 138 139 141 143 199 200
-    struct_declarator_list <list> (169)
+    struct_declarator_list <list> (168)
         on left: 145 146
         on right: 139 146
-    struct_declarator <structDeclarator> (170)
+    struct_declarator <structDeclarator> (169)
         on left: 147 148 149
         on right: 145 146
-    enum_specifier <enumSpecifier> (171)
+    enum_specifier <enumSpecifier> (170)
         on left: 150 151 152 153 154
         on right: 129
-    enumerator_list <list> (172)
+    enumerator_list <list> (171)
         on left: 155 156
         on right: 150 151 152 153 156
-    enumerator <enumerator> (173)
+    enumerator <enumerator> (172)
         on left: 157 158
         on right: 155 156
-    atomic_type_specifier <atomicTypeSpecifier> (174)
+    atomic_type_specifier <atomicTypeSpecifier> (173)
         on left: 159
         on right: 127
-    type_qualifier <token> (175)
+    type_qualifier <token> (174)
         on left: 160 161 162 163
         on right: 97 98 143 144 188 189
-    function_specifier <token> (176)
+    function_specifier <token> (175)
         on left: 164 165
         on right: 99 100
-    alignment_specifier <token> (177)
+    alignment_specifier <token> (176)
         on left: 166 167
         on right: 101 102
-    declarator <declarator> (178)
+    declarator <declarator> (177)
         on left: 168 169
         on right: 105 106 148 149 171 194 273 274
-    direct_declarator <directDeclarator> (179)
+    direct_declarator <directDeclarator> (178)
         on left: 170 171 172 173 174 175 176 177 178 179 180 181 182 183
         on right: 168 169 172 173 174 175 176 177 178 179 180 181 182 183
-    pointer <pointer> (180)
+    pointer <pointer> (179)
         on left: 184 185 186 187
         on right: 168 184 186 201 202
-    type_qualifier_list <list> (181)
+    type_qualifier_list <list> (180)
         on left: 188 189
         on right: 174 176 177 178 179 184 185 189 207 209 210 211 215 217 218 219
-    parameter_type_list <parameterTypeList> (182)
+    parameter_type_list <parameterTypeList> (181)
         on left: 190 191
         on right: 181 222 224
-    parameter_list <list> (183)
+    parameter_list <list> (182)
         on left: 192 193
         on right: 190 191 193
-    parameter_declaration <parameterDeclaration> (184)
+    parameter_declaration <parameterDeclaration> (183)
         on left: 194 195 196
         on right: 192 193
-    identifier_list <list> (185)
+    identifier_list <list> (184)
         on left: 197 198
         on right: 183 198
-    type_name <typeName> (186)
+    type_name <typeName> (185)
         on left: 199 200
         on right: 15 25 26 34 35 43 159 166
-    abstract_declarator <abstractDeclarator> (187)
+    abstract_declarator <abstractDeclarator> (186)
         on left: 201 202 203
         on right: 195 199 204
-    direct_abstract_declarator <directAbstractDeclarator> (188)
+    direct_abstract_declarator <directAbstractDeclarator> (187)
         on left: 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220 221 222 223 224
         on right: 201 203 213 214 215 216 217 218 219 220 223 224
-    initializer <expression> (189)
+    initializer <expression> (188)
         on left: 225 226 227
         on right: 105 228 229 230 231
-    initializer_list <expression> (190)
+    initializer_list <expression> (189)
         on left: 228 229 230 231
         on right: 25 26 225 226 230 231
-    designation (191)
+    designation (190)
         on left: 232
         on right: 228 230
-    designator_list (192)
+    designator_list (191)
         on left: 233 234
         on right: 232 234
-    designator (193)
+    designator (192)
         on left: 235 236
         on right: 233 234
-    static_assert_declaration <staticAssertDecl> (194)
+    static_assert_declaration <staticAssertDecl> (193)
         on left: 237
         on right: 92 140
-    statement (195)
+    statement (194)
         on left: 238 239 240 241 242 243
         on right: 244 245 246 252 255 256 257 258 259 260 261 262 263
-    labeled_statement (196)
+    labeled_statement (195)
         on left: 244 245 246
         on right: 238
-    compound_statement (197)
+    compound_statement (196)
         on left: 247 248
         on right: 239 273 274
-    block_item_list (198)
+    block_item_list (197)
         on left: 249 250
         on right: 248 250
-    block_item (199)
+    block_item (198)
         on left: 251 252
         on right: 249 250
-    expression_statement (200)
+    expression_statement (199)
         on left: 253 254
         on right: 240 260 261 262 263
-    selection_statement (201)
+    selection_statement (200)
         on left: 255 256 257
         on right: 241
-    iteration_statement (202)
+    iteration_statement (201)
         on left: 258 259 260 261 262 263
         on right: 242
-    jump_statement (203)
+    jump_statement (202)
         on left: 264 265 266 267 268
         on right: 243
-    translation_unit (204)
+    translation_unit (203)
         on left: 269 270
         on right: 0 270
-    external_declaration (205)
+    external_declaration (204)
         on left: 271 272
         on right: 269 270
-    function_definition (206)
+    function_definition (205)
         on left: 273 274
         on right: 271
-    declaration_list (207)
+    declaration_list (206)
         on left: 275 276
         on right: 273 276
 
@@ -3325,7 +3324,7 @@ State 150
 
   203 abstract_declarator: direct_abstract_declarator .
   213 direct_abstract_declarator: direct_abstract_declarator . Y_LEFT_BRACKET Y_RIGHT_BRACKET
-  214                           | direct_abstract_declarator . Y_LEFT_BRACKET '*' Y_RIGHT_BRACKET
+  214                           | direct_abstract_declarator . Y_LEFT_BRACKET Y_TIMES Y_RIGHT_BRACKET
   215                           | direct_abstract_declarator . Y_LEFT_BRACKET Y_STATIC type_qualifier_list assignment_expression Y_RIGHT_BRACKET
   216                           | direct_abstract_declarator . Y_LEFT_BRACKET Y_STATIC assignment_expression Y_RIGHT_BRACKET
   217                           | direct_abstract_declarator . Y_LEFT_BRACKET type_qualifier_list assignment_expression Y_RIGHT_BRACKET
@@ -5597,7 +5596,7 @@ State 262
 
   201 abstract_declarator: pointer direct_abstract_declarator .
   213 direct_abstract_declarator: direct_abstract_declarator . Y_LEFT_BRACKET Y_RIGHT_BRACKET
-  214                           | direct_abstract_declarator . Y_LEFT_BRACKET '*' Y_RIGHT_BRACKET
+  214                           | direct_abstract_declarator . Y_LEFT_BRACKET Y_TIMES Y_RIGHT_BRACKET
   215                           | direct_abstract_declarator . Y_LEFT_BRACKET Y_STATIC type_qualifier_list assignment_expression Y_RIGHT_BRACKET
   216                           | direct_abstract_declarator . Y_LEFT_BRACKET Y_STATIC assignment_expression Y_RIGHT_BRACKET
   217                           | direct_abstract_declarator . Y_LEFT_BRACKET type_qualifier_list assignment_expression Y_RIGHT_BRACKET
@@ -5669,7 +5668,7 @@ State 263
 State 264
 
   213 direct_abstract_declarator: direct_abstract_declarator Y_LEFT_BRACKET . Y_RIGHT_BRACKET
-  214                           | direct_abstract_declarator Y_LEFT_BRACKET . '*' Y_RIGHT_BRACKET
+  214                           | direct_abstract_declarator Y_LEFT_BRACKET . Y_TIMES Y_RIGHT_BRACKET
   215                           | direct_abstract_declarator Y_LEFT_BRACKET . Y_STATIC type_qualifier_list assignment_expression Y_RIGHT_BRACKET
   216                           | direct_abstract_declarator Y_LEFT_BRACKET . Y_STATIC assignment_expression Y_RIGHT_BRACKET
   217                           | direct_abstract_declarator Y_LEFT_BRACKET . type_qualifier_list assignment_expression Y_RIGHT_BRACKET
@@ -5684,15 +5683,15 @@ State 264
     Y_EXCLAMATION           shift, and go to state 84
     Y_AND                   shift, and go to state 85
     Y_LEFT_PAREN            shift, and go to state 86
-    Y_TIMES                 shift, and go to state 87
+    Y_TIMES                 shift, and go to state 366
     Y_PLUS                  shift, and go to state 88
     Y_PLUS_PLUS             shift, and go to state 89
     Y_MINUS                 shift, and go to state 90
     Y_MINUS_MINUS           shift, and go to state 91
-    Y_RIGHT_BRACKET         shift, and go to state 366
+    Y_RIGHT_BRACKET         shift, and go to state 367
     Y_CONST                 shift, and go to state 4
     Y_SIZEOF                shift, and go to state 92
-    Y_STATIC                shift, and go to state 367
+    Y_STATIC                shift, and go to state 368
     Y_VOLATILE              shift, and go to state 20
     Y_TILDE                 shift, and go to state 93
     Y_ENUMERATION_CONSTANT  shift, and go to state 94
@@ -5701,7 +5700,6 @@ State 264
     Y_ALIGNOF               shift, and go to state 97
     Y_ATOMIC                shift, and go to state 121
     Y_RESTRICT              shift, and go to state 27
-    '*'                     shift, and go to state 368
 
     primary_expression         go to state 98
     constant                   go to state 99
@@ -7365,12 +7363,22 @@ State 365
 
 State 366
 
+   37 unary_operator: Y_TIMES .
+  214 direct_abstract_declarator: direct_abstract_declarator Y_LEFT_BRACKET Y_TIMES . Y_RIGHT_BRACKET
+
+    Y_RIGHT_BRACKET  shift, and go to state 417
+
+    $default  reduce using rule 37 (unary_operator)
+
+
+State 367
+
   213 direct_abstract_declarator: direct_abstract_declarator Y_LEFT_BRACKET Y_RIGHT_BRACKET .
 
     $default  reduce using rule 213 (direct_abstract_declarator)
 
 
-State 367
+State 368
 
   215 direct_abstract_declarator: direct_abstract_declarator Y_LEFT_BRACKET Y_STATIC . type_qualifier_list assignment_expression Y_RIGHT_BRACKET
   216                           | direct_abstract_declarator Y_LEFT_BRACKET Y_STATIC . assignment_expression Y_RIGHT_BRACKET
@@ -7417,16 +7425,9 @@ State 367
     logical_and_expression     go to state 114
     logical_or_expression      go to state 115
     conditional_expression     go to state 154
-    assignment_expression      go to state 417
+    assignment_expression      go to state 418
     type_qualifier             go to state 122
-    type_qualifier_list        go to state 418
-
-
-State 368
-
-  214 direct_abstract_declarator: direct_abstract_declarator Y_LEFT_BRACKET '*' . Y_RIGHT_BRACKET
-
-    Y_RIGHT_BRACKET  shift, and go to state 419
+    type_qualifier_list        go to state 419
 
 
 State 369
@@ -8173,12 +8174,19 @@ State 416
 
 State 417
 
+  214 direct_abstract_declarator: direct_abstract_declarator Y_LEFT_BRACKET Y_TIMES Y_RIGHT_BRACKET .
+
+    $default  reduce using rule 214 (direct_abstract_declarator)
+
+
+State 418
+
   216 direct_abstract_declarator: direct_abstract_declarator Y_LEFT_BRACKET Y_STATIC assignment_expression . Y_RIGHT_BRACKET
 
     Y_RIGHT_BRACKET  shift, and go to state 447
 
 
-State 418
+State 419
 
   189 type_qualifier_list: type_qualifier_list . type_qualifier
   215 direct_abstract_declarator: direct_abstract_declarator Y_LEFT_BRACKET Y_STATIC type_qualifier_list . assignment_expression Y_RIGHT_BRACKET
@@ -8227,13 +8235,6 @@ State 418
     conditional_expression     go to state 154
     assignment_expression      go to state 448
     type_qualifier             go to state 195
-
-
-State 419
-
-  214 direct_abstract_declarator: direct_abstract_declarator Y_LEFT_BRACKET '*' Y_RIGHT_BRACKET .
-
-    $default  reduce using rule 214 (direct_abstract_declarator)
 
 
 State 420

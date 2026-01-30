@@ -564,8 +564,8 @@ identifier_list
 	;
 
 type_name
-	: specifier_qualifier_list abstract_declarator { $$ = NULL; }
-	| specifier_qualifier_list                     { $$ = NULL; }
+	: specifier_qualifier_list abstract_declarator { $$ = createTypeName($1,$2); }
+	| specifier_qualifier_list                     { $$ = createTypeName($1,NULL); }
 	;
 
 abstract_declarator
@@ -585,7 +585,7 @@ direct_abstract_declarator
 	| Y_LEFT_BRACKET type_qualifier_list Y_RIGHT_BRACKET                                                           { $$ = NULL; }
 	| Y_LEFT_BRACKET assignment_expression Y_RIGHT_BRACKET                                                         { $$ = NULL; }
 	| direct_abstract_declarator Y_LEFT_BRACKET Y_RIGHT_BRACKET                                                    { $$ = NULL; }
-	| direct_abstract_declarator Y_LEFT_BRACKET '*' Y_RIGHT_BRACKET                                                { $$ = NULL; }
+	| direct_abstract_declarator Y_LEFT_BRACKET Y_TIMES Y_RIGHT_BRACKET                                            { $$ = NULL; }
 	| direct_abstract_declarator Y_LEFT_BRACKET Y_STATIC type_qualifier_list assignment_expression Y_RIGHT_BRACKET { $$ = NULL; }
 	| direct_abstract_declarator Y_LEFT_BRACKET Y_STATIC assignment_expression Y_RIGHT_BRACKET                     { $$ = NULL; }
 	| direct_abstract_declarator Y_LEFT_BRACKET type_qualifier_list assignment_expression Y_RIGHT_BRACKET          { $$ = NULL; }
