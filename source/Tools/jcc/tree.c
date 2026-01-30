@@ -136,17 +136,17 @@ LabelPtr createConstr4Label(LabelConstrType type, TokenPtr t0, TokenPtr t1, Toke
 	return newLabel;
 }
 
-LabelPtr createConstr5Label(LabelConstrType type, TokenPtr t0, TokenPtr t1, TokenPtr t2, TokenPtr t3, TokenPtr t4)
+LabelPtr createConstr5Label(LabelConstrType type, TokenPtr t0, TokenPtr t1, TokenPtr t2, TokenPtr t3, TypeNamePtr t4)
 {
 	LabelPtr newLabel = _createLabel(LABT_CONSTRUCT_ROOT, NULL);
 	newLabel->repr.constr.type = type;
-	newLabel->repr.constr.numTokens = 5;
+	newLabel->repr.constr.numTokens = 4;
 	newLabel->repr.constr.tokens = AllocateMemory(sizeof(Token) * 5);
 	newLabel->repr.constr.tokens[0] = t0;
 	newLabel->repr.constr.tokens[1] = t1;
 	newLabel->repr.constr.tokens[2] = t2;
 	newLabel->repr.constr.tokens[3] = t3;
-	newLabel->repr.constr.tokens[4] = t4;
+	newLabel->repr.constr.typeName = t4;
 	return newLabel;
 }
 

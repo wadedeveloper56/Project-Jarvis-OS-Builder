@@ -237,16 +237,16 @@ generic_association
 	;
 
 postfix_expression
-	: primary_expression                                                       { $$ = $1; }
-	| postfix_expression Y_LEFT_BRACKET expression Y_RIGHT_BRACKET             { $$ = createCTree2(createConstr2Label(LABCT_INDEX, $2, $4), $1,  $3); }
-	| postfix_expression Y_LEFT_PAREN Y_RIGHT_PAREN                            { $$ = createCTree1(createConstr2Label(LABCT_CALL, $2, $3), $1); }
-	| postfix_expression Y_LEFT_PAREN argument_expression_list Y_RIGHT_PAREN   { $$ = createCTree2(createConstr2Label(LABCT_CALL, $2, $4), $1, $3); }
-	| postfix_expression Y_DOT IDENTIFIER                                      { $$ = createCTree2(createConstr1Label(LABCT_DOT, $2), $1, createCTreeRoot(createTokenLabel($3))); }
-	| postfix_expression Y_ARROW IDENTIFIER                                    { $$ = createCTree2(createConstr1Label(LABCT_ARROW, $2), $1, createCTreeRoot(createTokenLabel($3))); }
-	| postfix_expression Y_PLUS_PLUS                                           { $$ = createCTree1(createConstr1Label(LABCT_PLUS_PLUS, $2), $1); }
-	| postfix_expression Y_MINUS_MINUS                                         { $$ = createCTree1(createConstr1Label(LABCT_MINUS_MINUS, $2), $1); }
-	| Y_LEFT_PAREN type_name Y_RIGHT_PAREN  Y_LEFT_BRACE initializer_list Y_RIGHT_BRACE  { $$ = createCTree1(createConstr5Label(LABCT_INIT, $1,$2,$3,$4,$6), $5); }
-	| Y_LEFT_PAREN type_name Y_RIGHT_PAREN  Y_LEFT_BRACE initializer_list Y_COMMA Y_RIGHT_BRACE { $$ = createCTree1(createConstr5Label(LABCT_INIT, $1,$2,$3,$4,$6), $5); }
+	: primary_expression                                                                        { $$ = $1; }
+	| postfix_expression Y_LEFT_BRACKET expression Y_RIGHT_BRACKET                              { $$ = createCTree2(createConstr2Label(LABCT_INDEX, $2, $4), $1,  $3); }
+	| postfix_expression Y_LEFT_PAREN Y_RIGHT_PAREN                                             { $$ = createCTree1(createConstr2Label(LABCT_CALL, $2, $3), $1); }
+	| postfix_expression Y_LEFT_PAREN argument_expression_list Y_RIGHT_PAREN                    { $$ = createCTree2(createConstr2Label(LABCT_CALL, $2, $4), $1, $3); }
+	| postfix_expression Y_DOT IDENTIFIER                                                       { $$ = createCTree2(createConstr1Label(LABCT_DOT, $2), $1, createCTreeRoot(createTokenLabel($3))); }
+	| postfix_expression Y_ARROW IDENTIFIER                                                     { $$ = createCTree2(createConstr1Label(LABCT_ARROW, $2), $1, createCTreeRoot(createTokenLabel($3))); }
+	| postfix_expression Y_PLUS_PLUS                                                            { $$ = createCTree1(createConstr1Label(LABCT_PLUS_PLUS, $2), $1); }
+	| postfix_expression Y_MINUS_MINUS                                                          { $$ = createCTree1(createConstr1Label(LABCT_MINUS_MINUS, $2), $1); }
+	| Y_LEFT_PAREN type_name Y_RIGHT_PAREN  Y_LEFT_BRACE initializer_list Y_RIGHT_BRACE         { $$ = createCTree1(createConstr5Label(LABCT_INIT, $1,$3,$4,$6,$2), $5); }
+	| Y_LEFT_PAREN type_name Y_RIGHT_PAREN  Y_LEFT_BRACE initializer_list Y_COMMA Y_RIGHT_BRACE { $$ = createCTree1(createConstr5Label(LABCT_INIT, $1,$3,$4,$6,$2), $5); }
 	;
 	
 argument_expression_list

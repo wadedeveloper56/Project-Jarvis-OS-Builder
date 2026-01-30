@@ -12,6 +12,14 @@
     _zap##name(elem); \
 }
 
+typedef struct _TypeSpecifier TypeSpecifier, * TypeSpecifierPtr, ** TypeSpecifierPtrPtr;
+typedef struct _StructOrUnionSpecifier StructOrUnionSpecifier, * StructOrUnionSpecifierPtr, ** StructOrUnionSpecifierPtrPtr;
+typedef struct _EnumSpecifier EnumSpecifier, * EnumSpecifierPtr, ** EnumSpecifierPtrPtr;
+typedef struct _Declarator Declarator, * DeclaratorPtr, ** DeclaratorPtrPtr;
+typedef struct _DirectDeclarator DirectDeclarator, * DirectDeclaratorPtr, ** DirectDeclaratorPtrPtr;
+typedef struct _ParameterTypeList ParameterTypeList, * ParameterTypeListPtr, ** ParameterTypeListPtrPtr;
+typedef struct _TypeName TypeName, * TypeNamePtr, ** TypeNamePtrPtr;
+
 typedef enum _LabelType
 {
 	LABT_LIST,
@@ -170,6 +178,7 @@ typedef struct _Label
 			LabelConstrType type : 8;
 			int8_t numTokens;
 			TokenPtrPtr tokens;
+			TypeNamePtr typeName;
 		} constr;
 		LinkedListPtr list; // List of tokens
 		TokenPtr token;
@@ -204,13 +213,6 @@ typedef enum _TypeQualifier
 	TQ_MAX
 } TypeQualifier;
 
-typedef struct _TypeSpecifier TypeSpecifier, * TypeSpecifierPtr, ** TypeSpecifierPtrPtr;
-typedef struct _StructOrUnionSpecifier StructOrUnionSpecifier, * StructOrUnionSpecifierPtr, ** StructOrUnionSpecifierPtrPtr;
-typedef struct _EnumSpecifier EnumSpecifier, * EnumSpecifierPtr, ** EnumSpecifierPtrPtr;
-typedef struct _Declarator Declarator, * DeclaratorPtr, ** DeclaratorPtrPtr;
-typedef struct _DirectDeclarator DirectDeclarator, * DirectDeclaratorPtr, ** DirectDeclaratorPtrPtr;
-typedef struct _ParameterTypeList ParameterTypeList, * ParameterTypeListPtr, ** ParameterTypeListPtrPtr;
-typedef struct _TypeName TypeName, * TypeNamePtr, ** TypeNamePtrPtr;
 
 typedef struct _AtomicTypeSpecifier
 {
@@ -416,7 +418,7 @@ LabelPtr createConstr1Label(LabelConstrType type, TokenPtr t0);
 LabelPtr createConstr2Label(LabelConstrType type, TokenPtr t0, TokenPtr t1);
 LabelPtr createConstr3Label(LabelConstrType type, TokenPtr t0, TokenPtr t1, TokenPtr t2);
 LabelPtr createConstr4Label(LabelConstrType type, TokenPtr t0, TokenPtr t1, TokenPtr t2, TokenPtr t3);
-LabelPtr createConstr5Label(LabelConstrType type, TokenPtr t0, TokenPtr t1, TokenPtr t2, TokenPtr t3, TokenPtr t4);
+LabelPtr createConstr5Label(LabelConstrType type, TokenPtr t0, TokenPtr t1, TokenPtr t2, TokenPtr t3, TypeNamePtr t4);
 DeclarationPtr createDeclaration(DeclarationSpecifiersPtr declSpecifiers, LinkedListPtr initDeclaratorList, StaticAssertDeclarationPtr staticAssertDecl);
 void addListElem(LinkedListPtr pList, void* elem);
 LinkedListPtr createList(void);

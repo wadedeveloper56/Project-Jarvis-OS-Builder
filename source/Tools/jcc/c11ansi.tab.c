@@ -2166,61 +2166,61 @@ yyreduce:
 
   case 18: /* postfix_expression: primary_expression  */
 #line 240 "c11ansi.y"
-                                                                                   { (yyval.expression) = (yyvsp[0].expression); }
+                                                                                                    { (yyval.expression) = (yyvsp[0].expression); }
 #line 2171 "c11ansi.tab.c"
     break;
 
   case 19: /* postfix_expression: postfix_expression Y_LEFT_BRACKET expression Y_RIGHT_BRACKET  */
 #line 241 "c11ansi.y"
-                                                                                   { (yyval.expression) = createCTree2(createConstr2Label(LABCT_INDEX, (yyvsp[-2].token), (yyvsp[0].token)), (yyvsp[-3].expression),  (yyvsp[-1].expression)); }
+                                                                                                    { (yyval.expression) = createCTree2(createConstr2Label(LABCT_INDEX, (yyvsp[-2].token), (yyvsp[0].token)), (yyvsp[-3].expression),  (yyvsp[-1].expression)); }
 #line 2177 "c11ansi.tab.c"
     break;
 
   case 20: /* postfix_expression: postfix_expression Y_LEFT_PAREN Y_RIGHT_PAREN  */
 #line 242 "c11ansi.y"
-                                                                                   { (yyval.expression) = createCTree1(createConstr2Label(LABCT_CALL, (yyvsp[-1].token), (yyvsp[0].token)), (yyvsp[-2].expression)); }
+                                                                                                    { (yyval.expression) = createCTree1(createConstr2Label(LABCT_CALL, (yyvsp[-1].token), (yyvsp[0].token)), (yyvsp[-2].expression)); }
 #line 2183 "c11ansi.tab.c"
     break;
 
   case 21: /* postfix_expression: postfix_expression Y_LEFT_PAREN argument_expression_list Y_RIGHT_PAREN  */
 #line 243 "c11ansi.y"
-                                                                                   { (yyval.expression) = createCTree2(createConstr2Label(LABCT_CALL, (yyvsp[-2].token), (yyvsp[0].token)), (yyvsp[-3].expression), (yyvsp[-1].expression)); }
+                                                                                                    { (yyval.expression) = createCTree2(createConstr2Label(LABCT_CALL, (yyvsp[-2].token), (yyvsp[0].token)), (yyvsp[-3].expression), (yyvsp[-1].expression)); }
 #line 2189 "c11ansi.tab.c"
     break;
 
   case 22: /* postfix_expression: postfix_expression Y_DOT "identifier"  */
 #line 244 "c11ansi.y"
-                                                                                   { (yyval.expression) = createCTree2(createConstr1Label(LABCT_DOT, (yyvsp[-1].token)), (yyvsp[-2].expression), createCTreeRoot(createTokenLabel((yyvsp[0].token)))); }
+                                                                                                    { (yyval.expression) = createCTree2(createConstr1Label(LABCT_DOT, (yyvsp[-1].token)), (yyvsp[-2].expression), createCTreeRoot(createTokenLabel((yyvsp[0].token)))); }
 #line 2195 "c11ansi.tab.c"
     break;
 
   case 23: /* postfix_expression: postfix_expression Y_ARROW "identifier"  */
 #line 245 "c11ansi.y"
-                                                                                   { (yyval.expression) = createCTree2(createConstr1Label(LABCT_ARROW, (yyvsp[-1].token)), (yyvsp[-2].expression), createCTreeRoot(createTokenLabel((yyvsp[0].token)))); }
+                                                                                                    { (yyval.expression) = createCTree2(createConstr1Label(LABCT_ARROW, (yyvsp[-1].token)), (yyvsp[-2].expression), createCTreeRoot(createTokenLabel((yyvsp[0].token)))); }
 #line 2201 "c11ansi.tab.c"
     break;
 
   case 24: /* postfix_expression: postfix_expression Y_PLUS_PLUS  */
 #line 246 "c11ansi.y"
-                                                                                   { (yyval.expression) = createCTree1(createConstr1Label(LABCT_PLUS_PLUS, (yyvsp[0].token)), (yyvsp[-1].expression)); }
+                                                                                                    { (yyval.expression) = createCTree1(createConstr1Label(LABCT_PLUS_PLUS, (yyvsp[0].token)), (yyvsp[-1].expression)); }
 #line 2207 "c11ansi.tab.c"
     break;
 
   case 25: /* postfix_expression: postfix_expression Y_MINUS_MINUS  */
 #line 247 "c11ansi.y"
-                                                                                   { (yyval.expression) = createCTree1(createConstr1Label(LABCT_MINUS_MINUS, (yyvsp[0].token)), (yyvsp[-1].expression)); }
+                                                                                                    { (yyval.expression) = createCTree1(createConstr1Label(LABCT_MINUS_MINUS, (yyvsp[0].token)), (yyvsp[-1].expression)); }
 #line 2213 "c11ansi.tab.c"
     break;
 
   case 26: /* postfix_expression: Y_LEFT_PAREN type_name Y_RIGHT_PAREN Y_LEFT_BRACE initializer_list Y_RIGHT_BRACE  */
 #line 248 "c11ansi.y"
-                                                                                             { (yyval.expression) = createCTree1(createConstr5Label(LABCT_INIT, (yyvsp[-5].token),(yyvsp[-4].typeName),(yyvsp[-3].token),(yyvsp[-2].token),(yyvsp[0].token)), (yyvsp[-1].expression)); }
+                                                                                                    { (yyval.expression) = createCTree1(createConstr5Label(LABCT_INIT, (yyvsp[-5].token),(yyvsp[-3].token),(yyvsp[-2].token),(yyvsp[0].token),(yyvsp[-4].typeName)), (yyvsp[-1].expression)); }
 #line 2219 "c11ansi.tab.c"
     break;
 
   case 27: /* postfix_expression: Y_LEFT_PAREN type_name Y_RIGHT_PAREN Y_LEFT_BRACE initializer_list Y_COMMA Y_RIGHT_BRACE  */
 #line 249 "c11ansi.y"
-                                                                                                    { (yyval.expression) = createCTree1(createConstr5Label(LABCT_INIT, (yyvsp[-6].token),(yyvsp[-5].typeName),(yyvsp[-4].token),(yyvsp[-3].token),(yyvsp[-1].token)), (yyvsp[-2].expression)); }
+                                                                                                    { (yyval.expression) = createCTree1(createConstr5Label(LABCT_INIT, (yyvsp[-6].token),(yyvsp[-4].token),(yyvsp[-3].token),(yyvsp[-1].token),(yyvsp[-5].typeName)), (yyvsp[-2].expression)); }
 #line 2225 "c11ansi.tab.c"
     break;
 
