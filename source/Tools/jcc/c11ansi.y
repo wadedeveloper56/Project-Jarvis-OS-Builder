@@ -559,8 +559,8 @@ parameter_declaration
 	;
 
 identifier_list
-	: IDENTIFIER                         { $$ = NULL; }
-	| identifier_list Y_COMMA IDENTIFIER { $$ = NULL; }
+	: IDENTIFIER                         { $$ = createIdentifierList($1,NULL); }
+	| identifier_list Y_COMMA IDENTIFIER { $$ = createIdentifierList($3,$1); zapToken($2); }
 	;
 
 type_name

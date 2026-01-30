@@ -498,5 +498,16 @@ ParameterTypeListPtr createParameterTypeList(LinkedListPtr parameterList, bool i
 	return newParamTypeList;
 }
 
+LinkedListPtr createIdentifierList(TokenPtr token, LinkedListPtr list)
+{
+	if (list == NULL)
+	{
+		list = createList();
+	}
+	addListElem(list, token);
+	return list;
+}
+
+
 
 

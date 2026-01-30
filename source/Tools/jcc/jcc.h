@@ -441,4 +441,5 @@ AbstractDeclaratorPtr creatorAbstractDeclarator(PointerPtr pntr, DirectAbstractD
 ParameterDeclarationPtr createParameterDeclaration(DeclarationSpecifiersPtr ds, DeclaratorPtr decl, AbstractDeclaratorPtr ad);
 LinkedListPtr createParameterList(ParameterDeclarationPtr pd, LinkedListPtr list);
 ParameterTypeListPtr createParameterTypeList(LinkedListPtr parameterList, bool isVariadic);
+LinkedListPtr createIdentifierList(TokenPtr token, LinkedListPtr list);
 

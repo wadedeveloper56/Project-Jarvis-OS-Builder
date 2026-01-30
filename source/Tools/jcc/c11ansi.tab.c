@@ -3234,13 +3234,13 @@ yyreduce:
 
   case 198: /* identifier_list: "identifier"  */
 #line 562 "c11ansi.y"
-                                             { (yyval.list) = NULL; }
+                                             { (yyval.list) = createIdentifierList((yyvsp[0].token),NULL); }
 #line 3239 "c11ansi.tab.c"
     break;
 
   case 199: /* identifier_list: identifier_list Y_COMMA "identifier"  */
 #line 563 "c11ansi.y"
-                                             { (yyval.list) = NULL; }
+                                             { (yyval.list) = createIdentifierList((yyvsp[0].token),(yyvsp[-2].list)); zapToken((yyvsp[-1].token)); }
 #line 3245 "c11ansi.tab.c"
     break;
 
