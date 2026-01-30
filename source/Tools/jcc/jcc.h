@@ -372,6 +372,15 @@ typedef struct _TypeName
 	AbstractDeclaratorPtr abstractDeclarator;
 } TypeName, * TypeNamePtr, ** TypeNamePtrPtr;
 
+typedef struct _Designator
+{
+	TokenPtr delimStart;
+	CTreePtr assignExpr;
+	TokenPtr delimEnd;
+	TokenPtr dot;
+	TokenPtr identifier;
+} Designator, * DesignatorPtr, ** DesignatorPtrPtr;
+
 union ParseUnion
 {
 	CTreePtr expression;
@@ -397,6 +406,7 @@ union ParseUnion
 	ParameterDeclarationPtr parameterDeclaration;
 	ParameterTypeListPtr parameterTypeList;
 	TypeNamePtr typeName;
+	DesignatorPtr designator;
 };
 
 void printHeader(void);
@@ -471,4 +481,5 @@ DirectAbstractDeclaratorPtr createDirectAbstractDeclarator(
 	TokenPtr statics,
 	ParameterTypeListPtr parameterTypeList
 );
+DesignatorPtr createDesignator(TokenPtr delimStart,CTreePtr assignExpr,TokenPtr delimEnd,TokenPtr dot,TokenPtr identifier);
 

@@ -551,6 +551,16 @@ DirectAbstractDeclaratorPtr createDirectAbstractDeclarator(
 	}
 }
 
+DesignatorPtr createDesignator(TokenPtr delimStart, CTreePtr assignExpr, TokenPtr delimEnd, TokenPtr dot, TokenPtr identifier)
+{
+	DesignatorPtr newDesignator = AllocateMemory(sizeof(Designator));
+	newDesignator->delimStart = delimStart;
+	newDesignator->assignExpr = assignExpr;
+	newDesignator->delimEnd = delimEnd;
+	newDesignator->dot = dot;
+	newDesignator->identifier = identifier;
+	return newDesignator;
+}
 
 
 

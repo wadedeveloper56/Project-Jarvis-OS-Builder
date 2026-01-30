@@ -3461,80 +3461,92 @@ yyreduce:
 #line 3462 "c11ansi.tab.c"
     break;
 
+  case 236: /* designator: Y_LEFT_BRACKET constant_expression Y_RIGHT_BRACKET  */
+#line 624 "c11ansi.y"
+                                                             { (yyval.designator) = createDesignator((yyvsp[-2].token),(yyvsp[-1].expression),(yyvsp[0].token),NULL,NULL); }
+#line 3468 "c11ansi.tab.c"
+    break;
+
+  case 237: /* designator: Y_DOT "identifier"  */
+#line 625 "c11ansi.y"
+                                                             { (yyval.designator) = createDesignator(NULL,NULL,NULL,(yyvsp[-1].token),(yyvsp[0].token)); }
+#line 3474 "c11ansi.tab.c"
+    break;
+
   case 238: /* static_assert_declaration: Y_STATIC_ASSERT Y_LEFT_PAREN constant_expression Y_COMMA "sting_literal" Y_RIGHT_PAREN Y_SEMICOLON  */
 #line 629 "c11ansi.y"
                                                                                                             { (yyval.staticAssertDecl) = NULL; }
-#line 3468 "c11ansi.tab.c"
+#line 3480 "c11ansi.tab.c"
     break;
 
   case 265: /* jump_statement: Y_GOTO "identifier" Y_SEMICOLON  */
 #line 683 "c11ansi.y"
                                            { printf("jump_statement -> Y_GOTO IDENTIFIER Y_SEMICOLON\n"); }
-#line 3474 "c11ansi.tab.c"
+#line 3486 "c11ansi.tab.c"
     break;
 
   case 266: /* jump_statement: Y_CONTINUE Y_SEMICOLON  */
 #line 684 "c11ansi.y"
                                            { printf("jump_statement -> Y_CONTINUE Y_SEMICOLON\n"); }
-#line 3480 "c11ansi.tab.c"
+#line 3492 "c11ansi.tab.c"
     break;
 
   case 267: /* jump_statement: Y_BREAK Y_SEMICOLON  */
 #line 685 "c11ansi.y"
                                            { printf("jump_statement -> Y_BREAK Y_SEMICOLON\n"); }
-#line 3486 "c11ansi.tab.c"
+#line 3498 "c11ansi.tab.c"
     break;
 
   case 268: /* jump_statement: Y_RETURN Y_SEMICOLON  */
 #line 686 "c11ansi.y"
                                            { printf("jump_statement -> Y_RETURN Y_SEMICOLON\n"); }
-#line 3492 "c11ansi.tab.c"
+#line 3504 "c11ansi.tab.c"
     break;
 
   case 269: /* jump_statement: Y_RETURN expression Y_SEMICOLON  */
 #line 687 "c11ansi.y"
                                            { printf("jump_statement -> Y_RETURN expression Y_SEMICOLON\n"); }
-#line 3498 "c11ansi.tab.c"
+#line 3510 "c11ansi.tab.c"
     break;
 
   case 270: /* translation_unit: external_declaration  */
 #line 691 "c11ansi.y"
                                                  { printf("translation_unit -> external_declaration\n\n"); }
-#line 3504 "c11ansi.tab.c"
+#line 3516 "c11ansi.tab.c"
     break;
 
   case 271: /* translation_unit: translation_unit external_declaration  */
 #line 692 "c11ansi.y"
                                                  { printf("translation_unit -> translation_unit external_declaration\n\n"); }
-#line 3510 "c11ansi.tab.c"
+#line 3522 "c11ansi.tab.c"
     break;
 
   case 272: /* external_declaration: function_definition  */
 #line 696 "c11ansi.y"
                                 { printf("external_declaration -> function_definition\n"); }
-#line 3516 "c11ansi.tab.c"
+#line 3528 "c11ansi.tab.c"
     break;
 
   case 273: /* external_declaration: declaration  */
 #line 697 "c11ansi.y"
                                 { printf("external_declaration -> declaration\n"); }
-#line 3522 "c11ansi.tab.c"
+#line 3534 "c11ansi.tab.c"
     break;
 
   case 274: /* function_definition: declaration_specifiers declarator declaration_list compound_statement  */
 #line 701 "c11ansi.y"
                                                                                    { printf("function_definition -> declaration_specifiers declarator declaration_list compound_statement\n"); }
-#line 3528 "c11ansi.tab.c"
+#line 3540 "c11ansi.tab.c"
     break;
 
   case 275: /* function_definition: declaration_specifiers declarator compound_statement  */
 #line 702 "c11ansi.y"
                                                                                    { printf("function_definition -> declaration_specifiers declarator compound_statement\n"); }
-#line 3534 "c11ansi.tab.c"
+#line 3546 "c11ansi.tab.c"
     break;
 
 
-#line 3538 "c11ansi.tab.c"
+#line 3550 "c11ansi.tab.c"
 
       default: break;
     }

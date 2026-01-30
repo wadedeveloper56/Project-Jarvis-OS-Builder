@@ -189,12 +189,12 @@ int yylex();
 %type<enumSpecifier> enum_specifier
 %type<list> identifier_list
 %type<pointer> pointer
-
 %type<directAbstractDeclarator> direct_abstract_declarator
 %type<abstractDeclarator> abstract_declarator
 %type<parameterDeclaration> parameter_declaration
 %type<list> parameter_list
 %type<parameterTypeList> parameter_type_list
+%type<designator> designator
 
 %start translation_unit
 %%
@@ -621,8 +621,8 @@ designator_list
 	;
 
 designator
-	: Y_LEFT_BRACKET constant_expression Y_RIGHT_BRACKET
-	| Y_DOT IDENTIFIER
+	: Y_LEFT_BRACKET constant_expression Y_RIGHT_BRACKET { $$ = createDesignator($1,$2,$3,NULL,NULL); }
+	| Y_DOT IDENTIFIER                                   { $$ = createDesignator(NULL,NULL,NULL,$1,$2); }
 	;
 
 static_assert_declaration

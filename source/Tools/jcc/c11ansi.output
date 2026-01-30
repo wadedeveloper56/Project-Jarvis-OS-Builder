@@ -713,7 +713,7 @@ Nonterminals, with rules where they appear
     designator_list (191)
         on left: 233 234
         on right: 232 234
-    designator (192)
+    designator <designator> (192)
         on left: 235 236
         on right: 233 234
     static_assert_declaration <staticAssertDecl> (193)
