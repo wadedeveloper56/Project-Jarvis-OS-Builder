@@ -141,7 +141,7 @@ LabelPtr createConstr5Label(LabelConstrType type, TokenPtr t0, TokenPtr t1, Toke
 	LabelPtr newLabel = _createLabel(LABT_CONSTRUCT_ROOT, NULL);
 	newLabel->repr.constr.type = type;
 	newLabel->repr.constr.numTokens = 4;
-	newLabel->repr.constr.tokens = AllocateMemory(sizeof(Token) * 5);
+	newLabel->repr.constr.tokens = AllocateMemory(sizeof(Token) * 4);
 	newLabel->repr.constr.tokens[0] = t0;
 	newLabel->repr.constr.tokens[1] = t1;
 	newLabel->repr.constr.tokens[2] = t2;
@@ -155,9 +155,24 @@ LabelPtr createConstr6Label(LabelConstrType type, TokenPtr t0, TokenPtr t1, Link
 	LabelPtr newLabel = _createLabel(LABT_CONSTRUCT_ROOT, NULL);
 	newLabel->repr.constr.type = type;
 	newLabel->repr.constr.numTokens = 2;
-	newLabel->repr.constr.tokens = AllocateMemory(sizeof(Token) * 5);
+	newLabel->repr.constr.tokens = AllocateMemory(sizeof(Token) * 2);
 	newLabel->repr.constr.tokens[0] = t0;
 	newLabel->repr.constr.tokens[1] = t1;
+	newLabel->repr.list = list;
+	return newLabel;
+}
+
+LabelPtr createConstr7Label(LabelConstrType type, TokenPtr t0, TokenPtr t1, TokenPtr t2, TokenPtr t3, TypeNamePtr t4, LinkedListPtr list)
+{
+	LabelPtr newLabel = _createLabel(LABT_CONSTRUCT_ROOT, NULL);
+	newLabel->repr.constr.type = type;
+	newLabel->repr.constr.numTokens = 4;
+	newLabel->repr.constr.tokens = AllocateMemory(sizeof(Token) * 4);
+	newLabel->repr.constr.tokens[0] = t0;
+	newLabel->repr.constr.tokens[1] = t1;
+	newLabel->repr.constr.tokens[2] = t2;
+	newLabel->repr.constr.tokens[3] = t3;
+	newLabel->repr.constr.typeName = t4;
 	newLabel->repr.list = list;
 	return newLabel;
 }

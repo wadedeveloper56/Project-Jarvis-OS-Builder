@@ -451,6 +451,7 @@ LabelPtr createConstr3Label(LabelConstrType type, TokenPtr t0, TokenPtr t1, Toke
 LabelPtr createConstr4Label(LabelConstrType type, TokenPtr t0, TokenPtr t1, TokenPtr t2, TokenPtr t3);
 LabelPtr createConstr5Label(LabelConstrType type, TokenPtr t0, TokenPtr t1, TokenPtr t2, TokenPtr t3, TypeNamePtr t4);
 LabelPtr createConstr6Label(LabelConstrType type, TokenPtr t0, TokenPtr t1, LinkedListPtr list);
+LabelPtr createConstr7Label(LabelConstrType type, TokenPtr t0, TokenPtr t1, TokenPtr t2, TokenPtr t3, TypeNamePtr t4, LinkedListPtr list);
 DeclarationPtr createDeclaration(DeclarationSpecifiersPtr declSpecifiers, LinkedListPtr initDeclaratorList, StaticAssertDeclarationPtr staticAssertDecl);
 void addListElem(LinkedListPtr pList, void* elem);
 LinkedListPtr createList(void);
