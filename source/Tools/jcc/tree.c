@@ -522,15 +522,16 @@ DirectAbstractDeclaratorPtr createDirectAbstractDeclarator(
 	AbstractDeclaratorPtr ad,
 	TokenPtr delimEnd,
 	TokenPtr times,
-	LinkedListPtr list
+	LinkedListPtr list,
+	CTreePtr assignExpr
 )
 {
 	DirectAbstractDeclaratorNodePtr node = AllocateMemory(sizeof(DirectAbstractDeclaratorNode));
 	node->delimStart = delimStart;
 	node->abstractDeclarator = ad;
 	node->delimEnd = delimEnd;
-	node->list = NULL;
-	node->assignExpr = NULL;
+	node->list = list;
+	node->assignExpr = assignExpr;
 	node->times = times;
 	node->statics = NULL;
 	if (dad != NULL)
