@@ -725,7 +725,7 @@ Nonterminals, with rules where they appear
     labeled_statement <labeledStatement> (196)
         on left: 244 245 246
         on right: 238
-    compound_statement (197)
+    compound_statement <list> (197)
         on left: 247 248
         on right: 239 273 274
     block_item_list <list> (198)

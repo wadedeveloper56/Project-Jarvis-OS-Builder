@@ -620,11 +620,12 @@ LinkedListPtr createInitializerList(DesignationPtr designation, CTreePtr initial
 	return list;
 }
 
-StatementPtr createStatement(StatementType type, LabeledStatemntPtr labeledStatement)
+StatementPtr createStatement(StatementType type, LabeledStatemntPtr labeledStatement, LinkedListPtr compoundStatement)
 {
 	StatementPtr node = AllocateMemory(sizeof(Statement));
 	node->type = type;
 	node->labeledStatemnt = labeledStatement;
+	node->compoundStatement = compoundStatement;
 	return node;
 }
 

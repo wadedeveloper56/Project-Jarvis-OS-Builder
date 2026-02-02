@@ -200,6 +200,7 @@ int yylex();
 %type<labeledStatement> labeled_statement
 %type<blockItem> block_item
 %type<list> block_item_list
+%type<list> compound_statement
 
 %nonassoc "then"
 %nonassoc Y_ELSE
@@ -638,12 +639,12 @@ static_assert_declaration
 	;
 
 statement
-	: labeled_statement     { $$ = createStatement(LABELED_STATEMENT,$1); }
-	| compound_statement    { $$ = createStatement(COMPOUND_STATEMENT,NULL); }
-	| expression_statement  { $$ = createStatement(EXPRESSION_STATEMENT,NULL); }
-	| selection_statement   { $$ = createStatement(SELECTION_STATEMENT,NULL); }
-	| iteration_statement   { $$ = createStatement(ITERATION_STATEMENT,NULL); }
-	| jump_statement        { $$ = createStatement(JUMP_STATEMENT,NULL); }
+	: labeled_statement     { $$ = createStatement(LABELED_STATEMENT,$1,NULL); }
+	| compound_statement    { $$ = createStatement(COMPOUND_STATEMENT,NULL,$1); }
+	| expression_statement  { $$ = createStatement(EXPRESSION_STATEMENT,NULL,NULL); }
+	| selection_statement   { $$ = createStatement(SELECTION_STATEMENT,NULL,NULL); }
+	| iteration_statement   { $$ = createStatement(ITERATION_STATEMENT,NULL,NULL); }
+	| jump_statement        { $$ = createStatement(JUMP_STATEMENT,NULL,NULL); }
 	;
 
 labeled_statement
@@ -653,8 +654,8 @@ labeled_statement
 	;
 
 compound_statement
-	: Y_LEFT_BRACE Y_RIGHT_BRACE
-	| Y_LEFT_BRACE  block_item_list Y_RIGHT_BRACE
+	: Y_LEFT_BRACE Y_RIGHT_BRACE                  { $$ = NULL; }
+	| Y_LEFT_BRACE  block_item_list Y_RIGHT_BRACE { $$ = $2; }
 	;
 
 block_item_list

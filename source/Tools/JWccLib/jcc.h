@@ -5,7 +5,7 @@
 #include <stdint.h>
 #include <string.h>
 #include "c11ansi.h"
-#include "Memory.h"
+#include "..\Memory\Memory.h"
 
 #define CALL_INTERNAL_zap(name)   { \
     _zap##name(elem); \
@@ -416,6 +416,7 @@ typedef struct _Statement
 {
 	StatementType type;
 	LabeledStatemntPtr labeledStatemnt;
+	LinkedListPtr compoundStatement;
 } Statement, * StatementPtr, ** StatementPtrPtr;
 
 typedef struct _BlockItem
@@ -535,7 +536,7 @@ DesignatorPtr createDesignator(TokenPtr delimStart, CTreePtr assignExpr, TokenPt
 LinkedListPtr createDesignatorList(DesignatorPtr designator, LinkedListPtr list);
 DesignationPtr createDesignation(LinkedListPtr list, TokenPtr equal);
 LinkedListPtr createInitializerList(DesignationPtr designation, CTreePtr initializer, LinkedListPtr list);
-StatementPtr createStatement(StatementType type, LabeledStatemntPtr labeledStatement);
+StatementPtr createStatement(StatementType type, LabeledStatemntPtr labeledStatement, LinkedListPtr compoundStatement);
 LabeledStatemntPtr createLabeledStatement(TokenPtr id, StatementPtr statement, CTreePtr expr, TokenPtr defaults);
 BlockItemPtr createBlockItem(DeclarationPtr decl, StatementPtr statement);
 LinkedListPtr createBlockItemList(BlockItemPtr block, LinkedListPtr list);
