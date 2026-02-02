@@ -719,7 +719,7 @@ Nonterminals, with rules where they appear
     static_assert_declaration <staticAssertDecl> (194)
         on left: 237
         on right: 92 140
-    statement (195)
+    statement <statement> (195)
         on left: 238 239 240 241 242 243
         on right: 244 245 246 252 255 256 257 258 259 260 261 262 263
     labeled_statement (196)

@@ -620,4 +620,9 @@ LinkedListPtr createInitializerList(DesignationPtr designation, CTreePtr initial
 	return list;
 }
 
-
+StatementPtr createStatement(StatementType type)
+{
+	StatementPtr node = AllocateMemory(sizeof(Statement));
+	node->type = type;
+	return node;
+}

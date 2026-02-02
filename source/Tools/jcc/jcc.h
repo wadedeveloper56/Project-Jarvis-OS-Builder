@@ -394,6 +394,21 @@ typedef struct _InitializerListNode
 	CTreePtr initializer;
 } InitializerListNode, * InitializerListNodePtr, ** InitializerListNodePtrPtr;
 
+typedef enum _StatementType
+{
+	LABELED_STATEMENT,
+	COMPOUND_STATEMENT,
+	EXPRESSION_STATEMENT,
+	SELECTION_STATEMENT,
+	ITERATION_STATEMENT,
+	JUMP_STATEMENT
+} StatementType;
+
+typedef struct _Statement
+{
+	StatementType type;
+} Statement, *StatementPtr, ** StatementPtrPtr;
+
 union ParseUnion
 {
 	CTreePtr expression;
@@ -421,6 +436,7 @@ union ParseUnion
 	TypeNamePtr typeName;
 	DesignatorPtr designator;
 	DesignationPtr designation;
+	StatementPtr statement;
 };
 
 void printHeader(void);
@@ -501,5 +517,5 @@ DesignatorPtr createDesignator(TokenPtr delimStart, CTreePtr assignExpr, TokenPt
 LinkedListPtr createDesignatorList(DesignatorPtr designator, LinkedListPtr list);
 DesignationPtr createDesignation(LinkedListPtr list, TokenPtr equal);
 LinkedListPtr createInitializerList(DesignationPtr designation, CTreePtr initializer, LinkedListPtr list);
-
+StatementPtr createStatement(StatementType type);
 

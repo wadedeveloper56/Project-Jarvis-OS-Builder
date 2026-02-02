@@ -197,7 +197,8 @@ int yylex();
 %type<designator> designator
 %type<list> designator_list
 %type<designation> designation
-
+%type<statement> statement
+	
 %nonassoc "then"
 %nonassoc Y_ELSE
 
@@ -635,12 +636,12 @@ static_assert_declaration
 	;
 
 statement
-	: labeled_statement
-	| compound_statement
-	| expression_statement
-	| selection_statement
-	| iteration_statement
-	| jump_statement
+	: labeled_statement     { $$ = createStatement(LABELED_STATEMENT); }
+	| compound_statement    { $$ = createStatement(COMPOUND_STATEMENT); }
+	| expression_statement  { $$ = createStatement(EXPRESSION_STATEMENT); }
+	| selection_statement   { $$ = createStatement(SELECTION_STATEMENT); }
+	| iteration_statement   { $$ = createStatement(ITERATION_STATEMENT); }
+	| jump_statement        { $$ = createStatement(JUMP_STATEMENT); }
 	;
 
 labeled_statement
