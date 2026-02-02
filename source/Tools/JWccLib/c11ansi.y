@@ -1,7 +1,5 @@
 %{
 #include "pch.h"
-#include <stdlib.h>
-#include <stdio.h>
 #include "jcc.h"
 
 int yyerror(const char *s);
@@ -199,6 +197,7 @@ int yylex();
 %type<list> designator_list
 %type<designation> designation
 %type<statement> statement
+%type<labeledStatement> labeled_statement
 	
 %nonassoc "then"
 %nonassoc Y_ELSE
@@ -637,18 +636,18 @@ static_assert_declaration
 	;
 
 statement
-	: labeled_statement     { $$ = createStatement(LABELED_STATEMENT); }
-	| compound_statement    { $$ = createStatement(COMPOUND_STATEMENT); }
-	| expression_statement  { $$ = createStatement(EXPRESSION_STATEMENT); }
-	| selection_statement   { $$ = createStatement(SELECTION_STATEMENT); }
-	| iteration_statement   { $$ = createStatement(ITERATION_STATEMENT); }
-	| jump_statement        { $$ = createStatement(JUMP_STATEMENT); }
+	: labeled_statement     { $$ = createStatement(LABELED_STATEMENT,$1); }
+	| compound_statement    { $$ = createStatement(COMPOUND_STATEMENT,NULL); }
+	| expression_statement  { $$ = createStatement(EXPRESSION_STATEMENT,NULL); }
+	| selection_statement   { $$ = createStatement(SELECTION_STATEMENT,NULL); }
+	| iteration_statement   { $$ = createStatement(ITERATION_STATEMENT,NULL); }
+	| jump_statement        { $$ = createStatement(JUMP_STATEMENT,NULL); }
 	;
 
 labeled_statement
-	: IDENTIFIER Y_COLON statement
-	| Y_CASE constant_expression Y_COLON statement
-	| Y_DEFAULT Y_COLON statement
+	: IDENTIFIER Y_COLON statement                  { $$ = createLabeledStatement($1,$3,NULL,NULL); }
+	| Y_CASE constant_expression Y_COLON statement  { $$ = createLabeledStatement(NULL,$4,$2,NULL); }
+	| Y_DEFAULT Y_COLON statement                   { $$ = createLabeledStatement(NULL,$3,NULL,$1); }
 	;
 
 compound_statement

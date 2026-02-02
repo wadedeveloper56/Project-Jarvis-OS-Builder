@@ -23,13 +23,7 @@ WS  [ \t\v\n\f]
 
 %{
 #include "pch.h"
-#include <stdio.h>
-#include <io.h>
-#include <fcntl.h>
 #include "jcc.h"
-
-#define fileno _fileno
-#define isatty _isatty
 
 extern void yyerror(const char *);  /* prints grammar violation message */
 static void comment(void);

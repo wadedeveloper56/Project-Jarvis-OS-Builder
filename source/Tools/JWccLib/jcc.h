@@ -20,6 +20,7 @@ typedef struct _ParameterTypeList ParameterTypeList, * ParameterTypeListPtr, ** 
 typedef struct _TypeName TypeName, * TypeNamePtr, ** TypeNamePtrPtr;
 typedef struct _AbstractDeclarator AbstractDeclarator, * AbstractDeclaratorPtr, ** AbstractDeclaratorPtrPtr;
 typedef struct _Designation Designation, * DesignationPtr, ** DesignationPtrPtr;
+typedef struct _Statement Statement, * StatementPtr, ** StatementPtrPtr;
 
 typedef enum _LabelType
 {
@@ -181,7 +182,7 @@ typedef struct _Label
 			TokenPtrPtr tokens;
 			TypeNamePtr typeName;
 		} constr;
-		LinkedListPtr list; 
+		LinkedListPtr list;
 		TokenPtr token;
 		void* data;
 	} repr;
@@ -403,10 +404,19 @@ typedef enum _StatementType
 	JUMP_STATEMENT
 } StatementType;
 
+typedef struct _LabeledStatement
+{
+	TokenPtr id;
+	StatementPtr statement;
+	CTreePtr expr;
+	TokenPtr defaults;
+}LabeledStatemnt, * LabeledStatemntPtr, ** LabeledStatemntPtrPtr;
+
 typedef struct _Statement
 {
 	StatementType type;
-} Statement, *StatementPtr, ** StatementPtrPtr;
+	LabeledStatemntPtr labeledStatemnt;
+} Statement, * StatementPtr, ** StatementPtrPtr;
 
 union ParseUnion
 {
@@ -436,6 +446,7 @@ union ParseUnion
 	DesignatorPtr designator;
 	DesignationPtr designation;
 	StatementPtr statement;
+	LabeledStatemntPtr labeledStatement;
 };
 
 void printHeader(void);
@@ -516,5 +527,5 @@ DesignatorPtr createDesignator(TokenPtr delimStart, CTreePtr assignExpr, TokenPt
 LinkedListPtr createDesignatorList(DesignatorPtr designator, LinkedListPtr list);
 DesignationPtr createDesignation(LinkedListPtr list, TokenPtr equal);
 LinkedListPtr createInitializerList(DesignationPtr designation, CTreePtr initializer, LinkedListPtr list);
-StatementPtr createStatement(StatementType type);
-
+StatementPtr createStatement(StatementType type, LabeledStatemntPtr labeledStatement);
+LabeledStatemntPtr createLabeledStatement(TokenPtr id, StatementPtr statement, CTreePtr expr, TokenPtr defaults);
