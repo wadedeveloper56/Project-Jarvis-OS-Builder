@@ -22,6 +22,7 @@ ES  (\\(['"\?\\abfnrtv]|[0-7]{1,3}|x[a-fA-F0-9]+))
 WS  [ \t\v\n\f]
 
 %{
+#include "pch.h"
 #include <stdio.h>
 #include <io.h>
 #include <fcntl.h>

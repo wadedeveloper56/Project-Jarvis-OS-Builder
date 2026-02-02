@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>18.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{442e8f4b-c823-46c1-aced-e5e2506ad435}</ProjectGuid>
-    <RootNamespace>Preprocessor</RootNamespace>
+    <ProjectGuid>{9a41eb4e-1bb0-4729-b90b-258395199e3f}</ProjectGuid>
+    <RootNamespace>JWccLib</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -54,6 +54,7 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
+    <Import Project="..\..\..\external\flex-bison\custom_build_rules\win_flex_bison\win_flex_bison_custom_build.props" />
   </ImportGroup>
   <ImportGroup Label="Shared">
   </ImportGroup>
@@ -72,19 +73,21 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>..\..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>..\..\..\bin\intermediate\preprocessor\$(Configuration)\$(Platform)\</IntDir>
+    <IntDir>..\..\..\bin\intermediate\JWccLib\$(Configuration)\$(Platform)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>..\..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>..\..\..\bin\intermediate\preprocessor\$(Configuration)\$(Platform)\</IntDir>
+    <IntDir>..\..\..\bin\intermediate\JWccLib\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>..\Arguments;..\File;..\Memory;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>..\..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>..\..\..\bin\intermediate\preprocessor\$(Configuration)\$(Platform)\</IntDir>
+    <IntDir>..\..\..\bin\intermediate\JWccLib\$(Configuration)\$(Platform)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>..\..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>..\..\..\bin\intermediate\preprocessor\$(Configuration)\$(Platform)\</IntDir>
+    <IntDir>..\..\..\bin\intermediate\JWccLib\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>..\Arguments;..\File;..\Memory;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -93,7 +96,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -113,7 +116,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
@@ -131,7 +134,7 @@
       <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -151,7 +154,7 @@
       <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
@@ -163,19 +166,37 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="c11ansi.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="jcc.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="pch.cpp">
+    <ClCompile Include="c11ansi.c" />
+    <ClCompile Include="c11ansi.lex.c" />
+    <ClCompile Include="JWccLib.c" />
+    <ClCompile Include="pch.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Preprocessor.cpp" />
+    <ClCompile Include="structures.c" />
+    <ClCompile Include="tree.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <Flex Include="c11ansi.l" />
+  </ItemGroup>
+  <ItemGroup>
+    <Bison Include="c11ansi.y" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Memory\Memory.vcxproj">
+      <Project>{36412e4a-5780-46b9-bf4b-0d79b4a7de96}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="..\..\..\external\flex-bison\custom_build_rules\win_flex_bison\win_flex_bison_custom_build.targets" />
   </ImportGroup>
 </Project>

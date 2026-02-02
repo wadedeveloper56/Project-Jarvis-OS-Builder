@@ -4,8 +4,7 @@
 #include <stdbool.h>
 #include <stdint.h>
 #include <string.h>
-#include "c11ansi.tab.h"
-#include "ArgumentTable.h"
+#include "c11ansi.h"
 #include "Memory.h"
 
 #define CALL_INTERNAL_zap(name)   { \

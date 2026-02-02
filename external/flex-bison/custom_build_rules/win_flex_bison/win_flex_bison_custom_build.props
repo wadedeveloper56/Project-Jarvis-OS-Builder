@@ -11,10 +11,10 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <Bison>
-      <OutputFile>%(Filename).tab.cpp</OutputFile>
-      <DefinesFile>%(Filename).tab.h</DefinesFile>
+      <OutputFile>%(Filename).c</OutputFile>
+      <DefinesFile>%(Filename).h</DefinesFile>
       <CommandLineTemplate>
-start /B /WAIT /D "%(RootDir)%(Directory)" win_bison.exe [AllOptions] [AdditionalOptions] "%(Filename)%(Extension)"
+"..\..\..\external\flex-bison\win_bison.exe" [AllOptions] [AdditionalOptions] "%(Filename)%(Extension)"
 exit /b %errorlevel%</CommandLineTemplate>
       <Outputs>%(RootDir)%(Directory)%(OutputFile);%(RootDir)%(Directory)%(DefinesFile);</Outputs>
       <ExecutionDescription>Process "%(Filename)%(Extension)" bison file</ExecutionDescription>
@@ -31,10 +31,10 @@ exit /b %errorlevel%</CommandLineTemplate>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <Flex>
-      <OutputFile>%(Filename).flex.cpp</OutputFile>
+      <OutputFile>%(Filename).lex.c</OutputFile>
       <Wincompat>true</Wincompat>
       <CommandLineTemplate>
-start /B /WAIT /D "%(RootDir)%(Directory)" win_flex.exe [AllOptions] [AdditionalOptions] "%(Filename)%(Extension)"
+"..\..\..\external\flex-bison\win_flex.exe" [AllOptions] [AdditionalOptions] "%(Filename)%(Extension)"
 exit /b %errorlevel%</CommandLineTemplate>
       <Outputs>%(RootDir)%(Directory)%(OutputFile);</Outputs>
       <ExecutionDescription>Process "%(Filename)%(Extension)" flex file</ExecutionDescription>

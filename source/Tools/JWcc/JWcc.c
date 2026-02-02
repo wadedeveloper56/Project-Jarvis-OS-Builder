@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "ArgumentTable.h"
 #include "jcc.h"
 
-extern FILE* yyin; 
+extern FILE* yyin;
 LinkedListPtr files;
 
 void printHeader(void)
@@ -12,17 +13,18 @@ void printHeader(void)
 	printf("All Rights Reserved\n");
 }
 
-void doConversion(void** name) 
+void doConversion(void** name)
 {
 	char* newName = *name;
 	printf("Processing file: %s\n", newName);
 	yyin = fopen(newName, "r");
-	if (yyin == NULL) {
+	if (yyin == NULL)
+	{
 		printf("Error: Could not open file %s for reading.\n", newName);
 		terminate(1);
 	}
 	yyparse();
-	if (yyin!=NULL) fclose(yyin);
+	if (yyin != NULL) fclose(yyin);
 }
 
 void getCmdLineOptions(int argc, char* argv[]) {
@@ -32,8 +34,8 @@ void getCmdLineOptions(int argc, char* argv[]) {
 	ArgEndPtr end = argEnd(20);
 	const char* progname = "PEDump";
 	int exitcode = 0, nerrors = 0;
-	void* argtable[] = {help, version, infiles, end };
-	
+	void* argtable[] = { help, version, infiles, end };
+
 	printHeader();
 	if (argNullCheck(argtable) != 0)
 	{
@@ -62,28 +64,28 @@ void getCmdLineOptions(int argc, char* argv[]) {
 	files = createList();
 	for (int i = 0; i < infiles->count; i++)
 	{
-		addListElem(files,(void *)infiles->filename[i]);
+		addListElem(files, (void*)infiles->filename[i]);
 	}
 	argFreeTable(argtable, sizeof(argtable) / sizeof(argtable[0]));
 }
 
 void initiate(int argc, char* argv[]) {
-    getCmdLineOptions(argc, argv);
+	getCmdLineOptions(argc, argv);
 }
 
 void terminate(int exitCode) {
-    _fcloseall();
-    exit(exitCode);
+	_fcloseall();
+	exit(exitCode);
 }
 
 void main(int argc, char* argv[])
 {
-    initiate(argc, argv);
+	initiate(argc, argv);
 	LinkedListNodePtr ptr = files->list;
 	while (ptr != NULL && ptr->userData != NULL)
 	{
 		doConversion(&ptr->userData);
 		ptr = ptr->next;
-	}	
+	}
 	terminate(0);
 }

@@ -15,16 +15,33 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="jcc.c">
+    <ClInclude Include="framework.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="c11ansi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="jcc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="JWccLib.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c11ansi.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c11ansi.lex.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="structures.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="c11ansi.tab.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="lex.yy.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="tree.c">
@@ -32,24 +49,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="c11ansi.y" />
-    <None Include="c11ansi.l" />
-    <None Include="generate.bat" />
+    <Flex Include="c11ansi.l" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="jcc.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="bool.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="c11ansi.tab.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="JWcc.rc">
-      <Filter>Resource Files</Filter>
-    </ResourceCompile>
+    <Bison Include="c11ansi.y" />
   </ItemGroup>
 </Project>
