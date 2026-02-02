@@ -185,10 +185,24 @@
     <ClCompile Include="tree.c" />
   </ItemGroup>
   <ItemGroup>
-    <Flex Include="c11ansi.l" />
+    <Flex Include="c11ansi.l">
+      <OutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(Filename).flex.c</OutputFile>
+      <OutputFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(Filename).flex.c</OutputFile>
+      <OutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename).flex.c</OutputFile>
+      <OutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename).flex.c</OutputFile>
+    </Flex>
   </ItemGroup>
   <ItemGroup>
-    <Bison Include="c11ansi.y" />
+    <Bison Include="c11ansi.y">
+      <OutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(Filename).c</OutputFile>
+      <DefinesFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(Filename).h</DefinesFile>
+      <OutputFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(Filename).c</OutputFile>
+      <DefinesFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(Filename).h</DefinesFile>
+      <OutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename).c</OutputFile>
+      <DefinesFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename).h</DefinesFile>
+      <OutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename).c</OutputFile>
+      <DefinesFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename).h</DefinesFile>
+    </Bison>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Memory\Memory.vcxproj">

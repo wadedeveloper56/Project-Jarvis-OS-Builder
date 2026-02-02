@@ -638,3 +638,21 @@ LabeledStatemntPtr createLabeledStatement(TokenPtr id, StatementPtr statement, C
 	return node;
 }
 
+BlockItemPtr createBlockItem(DeclarationPtr decl, StatementPtr statement)
+{
+	BlockItemPtr node = AllocateMemory(sizeof(BlockItem));
+	node->statement = statement;
+	node->decl = decl;
+	return node;
+}
+
+LinkedListPtr createBlockItemList(BlockItemPtr block, LinkedListPtr list)
+{
+	if (list == NULL)
+	{
+		list = createList();
+	}
+	addListElem(list, block);
+	return list;
+}
+

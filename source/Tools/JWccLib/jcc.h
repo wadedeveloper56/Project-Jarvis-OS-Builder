@@ -418,6 +418,12 @@ typedef struct _Statement
 	LabeledStatemntPtr labeledStatemnt;
 } Statement, * StatementPtr, ** StatementPtrPtr;
 
+typedef struct _BlockItem
+{
+	StatementPtr statement;
+	DeclarationPtr decl;
+} BlockItem, * BlockItemPtr, ** BlockItemPtrPtr;
+
 union ParseUnion
 {
 	CTreePtr expression;
@@ -447,6 +453,8 @@ union ParseUnion
 	DesignationPtr designation;
 	StatementPtr statement;
 	LabeledStatemntPtr labeledStatement;
+	BlockItemPtr blockItem;
+
 };
 
 void printHeader(void);
@@ -529,3 +537,5 @@ DesignationPtr createDesignation(LinkedListPtr list, TokenPtr equal);
 LinkedListPtr createInitializerList(DesignationPtr designation, CTreePtr initializer, LinkedListPtr list);
 StatementPtr createStatement(StatementType type, LabeledStatemntPtr labeledStatement);
 LabeledStatemntPtr createLabeledStatement(TokenPtr id, StatementPtr statement, CTreePtr expr, TokenPtr defaults);
+BlockItemPtr createBlockItem(DeclarationPtr decl, StatementPtr statement);
+LinkedListPtr createBlockItemList(BlockItemPtr block, LinkedListPtr list);

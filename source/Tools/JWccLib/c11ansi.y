@@ -198,7 +198,9 @@ int yylex();
 %type<designation> designation
 %type<statement> statement
 %type<labeledStatement> labeled_statement
-	
+%type<blockItem> block_item
+%type<list> block_item_list
+
 %nonassoc "then"
 %nonassoc Y_ELSE
 
@@ -656,13 +658,13 @@ compound_statement
 	;
 
 block_item_list
-	: block_item
-	| block_item_list block_item
+	: block_item                 { $$ = createBlockItemList($1,NULL); }
+	| block_item_list block_item { $$ = createBlockItemList($2,$1); }
 	;
 
 block_item
-	: declaration
-	| statement
+	: declaration { $$ = createBlockItem($1,NULL); }
+	| statement   { $$ = createBlockItem(NULL,$1); }
 	;
 
 expression_statement
