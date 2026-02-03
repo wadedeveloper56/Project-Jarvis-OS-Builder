@@ -587,4 +587,5 @@ LinkedListPtr createBlockItemList(BlockItemPtr block, LinkedListPtr list);
 ExpressionStatementPtr createExpressionStatement(CTreePtr expr);
 SelectionStatementPtr createSelectionStatement(CTreePtr expr, StatementPtr thenStatement, StatementPtr elseStatement);
 IterationStatementPtr createIterationStatement(TokenPtr type, CTreePtr exp, StatementPtr statement, ExpressionStatementPtr estmt1, ExpressionStatementPtr estmt2, DeclarationPtr decl);
-JumpStatementPtr createJumpStatemnt(TokenPtr type, TokenPtr id, CTreePtr exp);
+JumpStatementPtr createJumpStatement(TokenPtr type, TokenPtr id, CTreePtr exp);
+LinkedListPtr createDeclarationList(DeclarationPtr block, LinkedListPtr list);

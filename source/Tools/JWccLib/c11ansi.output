@@ -755,7 +755,7 @@ Nonterminals, with rules where they appear
     function_definition (206)
         on left: 273 274
         on right: 271
-    declaration_list (207)
+    declaration_list <list> (207)
         on left: 275 276
         on right: 273 276
 

@@ -205,6 +205,7 @@ int yylex();
 %type<selectionStatement> selection_statement
 %type<iterationStatement> iteration_statement
 %type<jumpStatement> jump_statement
+%type<list> declaration_list
 
 %nonassoc "then"
 %nonassoc Y_ELSE
@@ -716,8 +717,8 @@ function_definition
 	;
 
 declaration_list
-	: declaration
-	| declaration_list declaration
+	: declaration                  { $$ = createDeclarationList($1,NULL); }
+	| declaration_list declaration { $$ = createDeclarationList($2,$1); }
 	;
 
 

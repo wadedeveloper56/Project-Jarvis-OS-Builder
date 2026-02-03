@@ -706,3 +706,13 @@ JumpStatementPtr createJumpStatement(TokenPtr type, TokenPtr id, CTreePtr exp)
 	return node;
 }
 
+LinkedListPtr createDeclarationList(DeclarationPtr block, LinkedListPtr list)
+{
+	if (list == NULL)
+	{
+		list = createList();
+	}
+	addListElem(list, block);
+	return list;
+}
+
