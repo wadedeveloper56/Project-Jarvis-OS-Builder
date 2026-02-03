@@ -211,6 +211,7 @@ int yylex();
 %type<genericAssoc> generic_association
 %type<list> generic_assoc_list
 %type<genericSelection> generic_selection
+%type<initDeclarator> init_declarator
 
 %nonassoc "then"
 %nonassoc Y_ELSE
@@ -408,13 +409,13 @@ declaration_specifiers
 	;
 
 init_declarator_list
-	: init_declarator                               { $$ = NULL; }
-	| init_declarator_list Y_COMMA init_declarator  { $$ = NULL;  zapToken($2); }
+	: init_declarator                               { $$ = createInitDeclaratorList($1,NULL); }
+	| init_declarator_list Y_COMMA init_declarator  { $$ = createInitDeclaratorList($3,$1);  zapToken($2); }
 	;
 
 init_declarator
-	: declarator Y_EQUAL initializer
-	| declarator 				    
+	: declarator Y_EQUAL initializer { $$ = createInitDeclarator($1,$3); }
+	| declarator 				     { $$ = createInitDeclarator($1,NULL); }
 	;
 
 storage_class_specifier

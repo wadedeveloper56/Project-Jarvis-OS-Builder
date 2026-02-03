@@ -777,4 +777,20 @@ GenericSelectionPtr createGenericSelection(CTreePtr assignmentExpression, Linked
 	return node;
 }
 
+InitDeclaratorPtr createInitDeclarator(DeclaratorPtr decl, CTreePtr initializer)
+{
+	InitDeclaratorPtr node = AllocateMemory(sizeof(InitDeclarator));
+	node->decl = decl;
+	node->initializer = initializer;
+	return node;
+}
 
+LinkedListPtr createInitDeclaratorList(InitDeclaratorPtr block, LinkedListPtr list)
+{
+	if (list == NULL)
+	{
+		list = createList();
+	}
+	addListElem(list, block);
+	return list;
+}

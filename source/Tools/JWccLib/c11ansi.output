@@ -617,7 +617,7 @@ Nonterminals, with rules where they appear
     init_declarator_list <initDeclaratorList> (160)
         on left: 103 104
         on right: 91 104
-    init_declarator (161)
+    init_declarator <initDeclarator> (161)
         on left: 105 106
         on right: 103 104
     storage_class_specifier <token> (162)

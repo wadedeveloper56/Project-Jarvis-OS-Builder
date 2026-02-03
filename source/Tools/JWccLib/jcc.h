@@ -486,6 +486,12 @@ typedef struct _GenericSelection
 	LinkedListPtr assocList;
 }GenericSelection, * GenericSelectionPtr, ** GenericSelectionPtrPtr;
 
+typedef struct _InitDeclarator
+{
+	DeclaratorPtr decl;
+	CTreePtr initializer;
+}InitDeclarator, * InitDeclaratorPtr, ** InitDeclaratorPtrPtr;
+
 union ParseUnion
 {
 	CTreePtr expression;
@@ -524,6 +530,7 @@ union ParseUnion
 	ExternalDeclarationPtr externalDeclaration;
 	GenericAssocPtr genericAssoc;
 	GenericSelectionPtr genericSelection;
+	InitDeclaratorPtr initDeclarator;
 };
 
 extern LinkedListPtr programData;
@@ -630,3 +637,6 @@ void createProgramData(ExternalDeclarationPtr ed);
 GenericAssocPtr createGenericAssoc(TypeNamePtr typeName, CTreePtr assignmentExpression, TokenPtr defaults);
 LinkedListPtr createGenericAssocList(GenericAssocPtr block, LinkedListPtr list);
 GenericSelectionPtr createGenericSelection(CTreePtr assignmentExpression, LinkedListPtr list);
+InitDeclaratorPtr createInitDeclarator(DeclaratorPtr decl, CTreePtr initializer);
+LinkedListPtr createInitDeclaratorList(InitDeclaratorPtr block, LinkedListPtr list);
+
