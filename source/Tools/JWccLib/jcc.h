@@ -434,6 +434,13 @@ typedef struct _IterationStatement
 	DeclarationPtr decl;
 }IterationStatement, * IterationStatementPtr, ** IterationStatementPtrPtr;
 
+typedef struct _JumpStatement
+{
+	TokenPtr type;
+	TokenPtr id;
+	CTreePtr exp;
+}JumpStatement, * JumpStatementPtr, ** JumpStatementPtrPtr;
+
 typedef struct _Statement
 {
 	StatementType type;
@@ -442,6 +449,7 @@ typedef struct _Statement
 	ExpressionStatementPtr expressionStatement;
 	SelectionStatementPtr selectionStatement;
 	IterationStatementPtr iterationStatement;
+	JumpStatementPtr jumpStatement;
 } Statement, * StatementPtr, ** StatementPtrPtr;
 
 typedef struct _BlockItem
@@ -483,6 +491,7 @@ union ParseUnion
 	ExpressionStatementPtr expressionStatement;
 	SelectionStatementPtr selectionStatement;
 	IterationStatementPtr iterationStatement;
+	JumpStatementPtr jumpStatement;
 };
 
 void printHeader(void);
@@ -569,7 +578,8 @@ StatementPtr createStatement(
 	LinkedListPtr compoundStatement,
 	ExpressionStatementPtr expressionStatement,
 	SelectionStatementPtr selectionStatement,
-	IterationStatementPtr iterationStatement
+	IterationStatementPtr iterationStatement,
+	JumpStatementPtr jumpStatement
 );
 LabeledStatementPtr createLabeledStatement(TokenPtr id, StatementPtr statement, CTreePtr expr, TokenPtr defaults);
 BlockItemPtr createBlockItem(DeclarationPtr decl, StatementPtr statement);
@@ -577,3 +587,4 @@ LinkedListPtr createBlockItemList(BlockItemPtr block, LinkedListPtr list);
 ExpressionStatementPtr createExpressionStatement(CTreePtr expr);
 SelectionStatementPtr createSelectionStatement(CTreePtr expr, StatementPtr thenStatement, StatementPtr elseStatement);
 IterationStatementPtr createIterationStatement(TokenPtr type, CTreePtr exp, StatementPtr statement, ExpressionStatementPtr estmt1, ExpressionStatementPtr estmt2, DeclarationPtr decl);
+JumpStatementPtr createJumpStatemnt(TokenPtr type, TokenPtr id, CTreePtr exp);

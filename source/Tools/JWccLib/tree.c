@@ -626,7 +626,8 @@ StatementPtr createStatement(
 	LinkedListPtr compoundStatement,
 	ExpressionStatementPtr expressionStatement,
 	SelectionStatementPtr selectionStatement,
-	IterationStatementPtr iterationStatement
+	IterationStatementPtr iterationStatement,
+	JumpStatementPtr jumpStatement
 )
 {
 	StatementPtr node = AllocateMemory(sizeof(Statement));
@@ -636,6 +637,7 @@ StatementPtr createStatement(
 	node->expressionStatement = expressionStatement;
 	node->selectionStatement = selectionStatement;
 	node->iterationStatement = iterationStatement;
+	node->jumpStatement = jumpStatement;
 	return node;
 }
 
@@ -694,3 +696,13 @@ IterationStatementPtr createIterationStatement(TokenPtr type, CTreePtr exp, Stat
 	node->decl = decl;
 	return node;
 }
+
+JumpStatementPtr createJumpStatement(TokenPtr type, TokenPtr id, CTreePtr exp)
+{
+	JumpStatementPtr node = AllocateMemory(sizeof(JumpStatement));
+	node->type = type;
+	node->id = id;
+	node->exp = exp;
+	return node;
+}
+

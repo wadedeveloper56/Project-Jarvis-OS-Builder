@@ -743,7 +743,7 @@ Nonterminals, with rules where they appear
     iteration_statement <iterationStatement> (202)
         on left: 258 259 260 261 262 263
         on right: 242
-    jump_statement (203)
+    jump_statement <jumpStatement> (203)
         on left: 264 265 266 267 268
         on right: 243
     translation_unit (204)
