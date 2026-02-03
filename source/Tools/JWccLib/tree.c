@@ -1,5 +1,7 @@
 #include "jcc.h"
 
+LinkedListPtr programData = NULL;
+
 static void _zapTokData(TokDataPtr elem)
 {
 	if (elem == NULL)

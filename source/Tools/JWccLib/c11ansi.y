@@ -704,8 +704,8 @@ jump_statement
 	;
 
 translation_unit
-	: external_declaration                   { printf("translation_unit -> external_declaration\n\n"); }
-	| translation_unit external_declaration  { printf("translation_unit -> translation_unit external_declaration\n\n"); }
+	: external_declaration                   { printf("translation_unit -> external_declaration\n\n"); programData = createList(); addListElem(programData, $1); }
+	| translation_unit external_declaration  { printf("translation_unit -> translation_unit external_declaration\n\n"); addListElem(programData, $2); }
 	;
 
 external_declaration

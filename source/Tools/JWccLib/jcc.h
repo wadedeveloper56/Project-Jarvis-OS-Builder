@@ -510,6 +510,8 @@ union ParseUnion
 	ExternalDeclarationPtr externalDeclaration;
 };
 
+extern LinkedListPtr programData;
+
 void printHeader(void);
 void doConversion(void** name);
 void initiate(int argc, char* argv[]);
