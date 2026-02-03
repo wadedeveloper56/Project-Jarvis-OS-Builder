@@ -736,3 +736,12 @@ ExternalDeclarationPtr createExternalDeclaration(DeclarationPtr declaration, Fun
 	return node;
 }
 
+void createProgramData(ExternalDeclarationPtr ed)
+{
+	if (programData == NULL)
+	{
+		programData = createList();
+	}
+	addListElem(programData, ed);
+}
+

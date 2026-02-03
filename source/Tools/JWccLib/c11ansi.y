@@ -704,8 +704,8 @@ jump_statement
 	;
 
 translation_unit
-	: external_declaration                   { printf("translation_unit -> external_declaration\n\n"); programData = createList(); addListElem(programData, $1); }
-	| translation_unit external_declaration  { printf("translation_unit -> translation_unit external_declaration\n\n"); addListElem(programData, $2); }
+	: external_declaration                   { printf("translation_unit -> external_declaration\n\n"); createProgramData($1); }
+	| translation_unit external_declaration  { printf("translation_unit -> translation_unit external_declaration\n\n"); createProgramData($2); }
 	;
 
 external_declaration
@@ -715,7 +715,7 @@ external_declaration
 
 function_definition
 	: declaration_specifiers declarator declaration_list compound_statement { printf("function_definition -> declaration_specifiers declarator declaration_list compound_statement\n"); $$ = createFunctionDefinition($1,$2,$3,$4); }
-	| declaration_specifiers declarator compound_statement                  { printf("function_definition -> declaration_specifiers declarator compound_statement\n"); $$ = createFunctionDefinition($1,$2,NULL,$4); }
+	| declaration_specifiers declarator compound_statement                  { printf("function_definition -> declaration_specifiers declarator compound_statement\n"); $$ = createFunctionDefinition($1,$2,NULL,$3); }
 	;
 
 declaration_list

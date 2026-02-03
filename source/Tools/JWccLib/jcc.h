@@ -609,3 +609,4 @@ JumpStatementPtr createJumpStatement(TokenPtr type, TokenPtr id, CTreePtr exp);
 LinkedListPtr createDeclarationList(DeclarationPtr block, LinkedListPtr list);
 FunctionDefinitionPtr createFunctionDefinition(DeclarationSpecifiersPtr declarationSpecifiers, DeclaratorPtr declarator, LinkedListPtr declarationList, LinkedListPtr compoundStatement);
 ExternalDeclarationPtr createExternalDeclaration(DeclarationPtr declaration, FunctionDefinitionPtr functionDefinition);
+void createProgramData(ExternalDeclarationPtr ed);

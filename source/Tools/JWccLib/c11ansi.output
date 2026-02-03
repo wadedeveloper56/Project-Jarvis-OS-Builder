@@ -749,10 +749,10 @@ Nonterminals, with rules where they appear
     translation_unit (204)
         on left: 269 270
         on right: 0 270
-    external_declaration (205)
+    external_declaration <externalDeclaration> (205)
         on left: 271 272
         on right: 269 270
-    function_definition (206)
+    function_definition <functionDefinition> (206)
         on left: 273 274
         on right: 271
     declaration_list <list> (207)
