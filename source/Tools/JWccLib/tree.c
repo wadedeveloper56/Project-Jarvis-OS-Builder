@@ -620,19 +620,26 @@ LinkedListPtr createInitializerList(DesignationPtr designation, CTreePtr initial
 	return list;
 }
 
-StatementPtr createStatement(StatementType type, LabeledStatemntPtr labeledStatement, LinkedListPtr compoundStatement, ExpressionStatementPtr expressionStatement)
+StatementPtr createStatement(
+	StatementType type,
+	LabeledStatementPtr labeledStatement,
+	LinkedListPtr compoundStatement,
+	ExpressionStatementPtr expressionStatement,
+	SelectionStatementPtr selectionStatement
+)
 {
 	StatementPtr node = AllocateMemory(sizeof(Statement));
 	node->type = type;
 	node->labeledStatemnt = labeledStatement;
 	node->compoundStatement = compoundStatement;
 	node->expressionStatement = expressionStatement;
+	node->selectionStatement = selectionStatement;
 	return node;
 }
 
-LabeledStatemntPtr createLabeledStatement(TokenPtr id, StatementPtr statement, CTreePtr expr, TokenPtr defaults)
+LabeledStatementPtr createLabeledStatement(TokenPtr id, StatementPtr statement, CTreePtr expr, TokenPtr defaults)
 {
-	LabeledStatemntPtr node = AllocateMemory(sizeof(LabeledStatemnt));
+	LabeledStatementPtr node = AllocateMemory(sizeof(LabeledStatement));
 	node->id = id;
 	node->statement = statement;
 	node->expr = expr;

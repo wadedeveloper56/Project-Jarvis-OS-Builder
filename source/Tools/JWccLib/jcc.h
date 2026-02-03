@@ -410,7 +410,7 @@ typedef struct _LabeledStatement
 	StatementPtr statement;
 	CTreePtr expr;
 	TokenPtr defaults;
-}LabeledStatemnt, * LabeledStatemntPtr, ** LabeledStatemntPtrPtr;
+}LabeledStatement, * LabeledStatementPtr, ** LabeledStatementPtrPtr;
 
 typedef struct _SelectionStatement
 {
@@ -427,9 +427,10 @@ typedef struct _ExpressionStatement
 typedef struct _Statement
 {
 	StatementType type;
-	LabeledStatemntPtr labeledStatemnt;
+	LabeledStatementPtr labeledStatemnt;
 	LinkedListPtr compoundStatement;
 	ExpressionStatementPtr expressionStatement;
+	SelectionStatementPtr selectionStatement;
 } Statement, * StatementPtr, ** StatementPtrPtr;
 
 typedef struct _BlockItem
@@ -466,7 +467,7 @@ union ParseUnion
 	DesignatorPtr designator;
 	DesignationPtr designation;
 	StatementPtr statement;
-	LabeledStatemntPtr labeledStatement;
+	LabeledStatementPtr labeledStatement;
 	BlockItemPtr blockItem;
 	ExpressionStatementPtr expressionStatement;
 	SelectionStatementPtr selectionStatement;
@@ -550,8 +551,14 @@ DesignatorPtr createDesignator(TokenPtr delimStart, CTreePtr assignExpr, TokenPt
 LinkedListPtr createDesignatorList(DesignatorPtr designator, LinkedListPtr list);
 DesignationPtr createDesignation(LinkedListPtr list, TokenPtr equal);
 LinkedListPtr createInitializerList(DesignationPtr designation, CTreePtr initializer, LinkedListPtr list);
-StatementPtr createStatement(StatementType type, LabeledStatemntPtr labeledStatement, LinkedListPtr compoundStatement, ExpressionStatementPtr expressionStatement);
-LabeledStatemntPtr createLabeledStatement(TokenPtr id, StatementPtr statement, CTreePtr expr, TokenPtr defaults);
+StatementPtr createStatement(
+	StatementType type, 
+	LabeledStatementPtr labeledStatement, 
+	LinkedListPtr compoundStatement, 
+	ExpressionStatementPtr expressionStatement,
+	SelectionStatementPtr selectionStatement
+);
+LabeledStatementPtr createLabeledStatement(TokenPtr id, StatementPtr statement, CTreePtr expr, TokenPtr defaults);
 BlockItemPtr createBlockItem(DeclarationPtr decl, StatementPtr statement);
 LinkedListPtr createBlockItemList(BlockItemPtr block, LinkedListPtr list);
 ExpressionStatementPtr createExpressionStatement(CTreePtr expr);
