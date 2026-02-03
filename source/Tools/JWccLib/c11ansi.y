@@ -642,12 +642,12 @@ static_assert_declaration
 	;
 
 statement
-	: labeled_statement     { $$ = createStatement(LABELED_STATEMENT,$1,NULL,NULL,NULL); }
-	| compound_statement    { $$ = createStatement(COMPOUND_STATEMENT,NULL,$1,NULL,NULL); }
-	| expression_statement  { $$ = createStatement(EXPRESSION_STATEMENT,NULL,NULL,$1,NULL); }
-	| selection_statement   { $$ = createStatement(SELECTION_STATEMENT,NULL,NULL,NULL,$1); }
-	| iteration_statement   { $$ = createStatement(ITERATION_STATEMENT,NULL,NULL,NULL,NULL); }
-	| jump_statement        { $$ = createStatement(JUMP_STATEMENT,NULL,NULL,NULL,NULL); }
+	: labeled_statement     { $$ = createStatement(LABELED_STATEMENT,$1,NULL,NULL,NULL,NULL); }
+	| compound_statement    { $$ = createStatement(COMPOUND_STATEMENT,NULL,$1,NULL,NULL,NULL); }
+	| expression_statement  { $$ = createStatement(EXPRESSION_STATEMENT,NULL,NULL,$1,NULL,NULL); }
+	| selection_statement   { $$ = createStatement(SELECTION_STATEMENT,NULL,NULL,NULL,$1,NULL); }
+	| iteration_statement   { $$ = createStatement(ITERATION_STATEMENT,NULL,NULL,NULL,NULL,$1); }
+	| jump_statement        { $$ = createStatement(JUMP_STATEMENT,NULL,NULL,NULL,NULL,NULL); }
 	;
 
 labeled_statement

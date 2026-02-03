@@ -441,6 +441,7 @@ typedef struct _Statement
 	LinkedListPtr compoundStatement;
 	ExpressionStatementPtr expressionStatement;
 	SelectionStatementPtr selectionStatement;
+	IterationStatementPtr iterationStatement;
 } Statement, * StatementPtr, ** StatementPtrPtr;
 
 typedef struct _BlockItem
@@ -567,7 +568,8 @@ StatementPtr createStatement(
 	LabeledStatementPtr labeledStatement,
 	LinkedListPtr compoundStatement,
 	ExpressionStatementPtr expressionStatement,
-	SelectionStatementPtr selectionStatement
+	SelectionStatementPtr selectionStatement,
+	IterationStatementPtr iterationStatement
 );
 LabeledStatementPtr createLabeledStatement(TokenPtr id, StatementPtr statement, CTreePtr expr, TokenPtr defaults);
 BlockItemPtr createBlockItem(DeclarationPtr decl, StatementPtr statement);

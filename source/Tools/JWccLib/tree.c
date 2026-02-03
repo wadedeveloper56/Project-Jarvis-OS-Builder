@@ -625,7 +625,8 @@ StatementPtr createStatement(
 	LabeledStatementPtr labeledStatement,
 	LinkedListPtr compoundStatement,
 	ExpressionStatementPtr expressionStatement,
-	SelectionStatementPtr selectionStatement
+	SelectionStatementPtr selectionStatement,
+	IterationStatementPtr iterationStatement
 )
 {
 	StatementPtr node = AllocateMemory(sizeof(Statement));
@@ -634,6 +635,7 @@ StatementPtr createStatement(
 	node->compoundStatement = compoundStatement;
 	node->expressionStatement = expressionStatement;
 	node->selectionStatement = selectionStatement;
+	node->iterationStatement = iterationStatement;
 	return node;
 }
 
