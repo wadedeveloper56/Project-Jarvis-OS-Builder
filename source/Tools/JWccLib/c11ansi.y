@@ -201,6 +201,7 @@ int yylex();
 %type<blockItem> block_item
 %type<list> block_item_list
 %type<list> compound_statement
+%type<expressionStatement> expression_statement
 
 %nonassoc "then"
 %nonassoc Y_ELSE
@@ -639,12 +640,12 @@ static_assert_declaration
 	;
 
 statement
-	: labeled_statement     { $$ = createStatement(LABELED_STATEMENT,$1,NULL); }
-	| compound_statement    { $$ = createStatement(COMPOUND_STATEMENT,NULL,$1); }
-	| expression_statement  { $$ = createStatement(EXPRESSION_STATEMENT,NULL,NULL); }
-	| selection_statement   { $$ = createStatement(SELECTION_STATEMENT,NULL,NULL); }
-	| iteration_statement   { $$ = createStatement(ITERATION_STATEMENT,NULL,NULL); }
-	| jump_statement        { $$ = createStatement(JUMP_STATEMENT,NULL,NULL); }
+	: labeled_statement     { $$ = createStatement(LABELED_STATEMENT,$1,NULL,NULL); }
+	| compound_statement    { $$ = createStatement(COMPOUND_STATEMENT,NULL,$1,NULL); }
+	| expression_statement  { $$ = createStatement(EXPRESSION_STATEMENT,NULL,NULL,$1); }
+	| selection_statement   { $$ = createStatement(SELECTION_STATEMENT,NULL,NULL,NULL); }
+	| iteration_statement   { $$ = createStatement(ITERATION_STATEMENT,NULL,NULL,NULL); }
+	| jump_statement        { $$ = createStatement(JUMP_STATEMENT,NULL,NULL,NULL); }
 	;
 
 labeled_statement
@@ -669,8 +670,8 @@ block_item
 	;
 
 expression_statement
-	: Y_SEMICOLON
-	| expression Y_SEMICOLON
+	: Y_SEMICOLON            { $$ = createExpressionStatement(NULL); }
+	| expression Y_SEMICOLON { $$ = createExpressionStatement($1); }
 	;
 
 selection_statement

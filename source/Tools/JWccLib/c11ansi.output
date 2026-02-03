@@ -734,7 +734,7 @@ Nonterminals, with rules where they appear
     block_item <blockItem> (199)
         on left: 251 252
         on right: 249 250
-    expression_statement (200)
+    expression_statement <expressionStatement> (200)
         on left: 253 254
         on right: 240 260 261 262 263
     selection_statement (201)

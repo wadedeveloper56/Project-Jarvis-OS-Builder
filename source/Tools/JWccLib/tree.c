@@ -620,12 +620,13 @@ LinkedListPtr createInitializerList(DesignationPtr designation, CTreePtr initial
 	return list;
 }
 
-StatementPtr createStatement(StatementType type, LabeledStatemntPtr labeledStatement, LinkedListPtr compoundStatement)
+StatementPtr createStatement(StatementType type, LabeledStatemntPtr labeledStatement, LinkedListPtr compoundStatement, ExpressionStatementPtr expressionStatement)
 {
 	StatementPtr node = AllocateMemory(sizeof(Statement));
 	node->type = type;
 	node->labeledStatemnt = labeledStatement;
 	node->compoundStatement = compoundStatement;
+	node->expressionStatement = expressionStatement;
 	return node;
 }
 
@@ -657,3 +658,9 @@ LinkedListPtr createBlockItemList(BlockItemPtr block, LinkedListPtr list)
 	return list;
 }
 
+ExpressionStatementPtr createExpressionStatement(CTreePtr expr)
+{
+	ExpressionStatementPtr node = AllocateMemory(sizeof(ExpressionStatement));
+	node->exp = expr;
+	return node;
+}
