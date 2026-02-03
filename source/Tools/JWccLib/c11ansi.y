@@ -206,6 +206,8 @@ int yylex();
 %type<iterationStatement> iteration_statement
 %type<jumpStatement> jump_statement
 %type<list> declaration_list
+%type<functionDefinition> function_definition
+%type<externalDeclaration> external_declaration
 
 %nonassoc "then"
 %nonassoc Y_ELSE
@@ -707,13 +709,13 @@ translation_unit
 	;
 
 external_declaration
-	: function_definition   { printf("external_declaration -> function_definition\n"); }
-	| declaration           { printf("external_declaration -> declaration\n"); }
+	: function_definition   { printf("external_declaration -> function_definition\n"); $$ = createExternalDeclaration(NULL, $1); }
+	| declaration           { printf("external_declaration -> declaration\n"); $$ = createExternalDeclaration($1,NULL); }
 	;
 
 function_definition
-	: declaration_specifiers declarator declaration_list compound_statement    { printf("function_definition -> declaration_specifiers declarator declaration_list compound_statement\n"); }
-	| declaration_specifiers declarator compound_statement                     { printf("function_definition -> declaration_specifiers declarator compound_statement\n"); }
+	: declaration_specifiers declarator declaration_list compound_statement { printf("function_definition -> declaration_specifiers declarator declaration_list compound_statement\n"); $$ = createFunctionDefinition($1,$2,$3,$4); }
+	| declaration_specifiers declarator compound_statement                  { printf("function_definition -> declaration_specifiers declarator compound_statement\n"); $$ = createFunctionDefinition($1,$2,NULL,$4); }
 	;
 
 declaration_list

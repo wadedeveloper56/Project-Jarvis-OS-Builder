@@ -716,3 +716,21 @@ LinkedListPtr createDeclarationList(DeclarationPtr block, LinkedListPtr list)
 	return list;
 }
 
+FunctionDefinitionPtr createFunctionDefinition(DeclarationSpecifiersPtr declarationSpecifiers, DeclaratorPtr declarator, LinkedListPtr declarationList, LinkedListPtr compoundStatement)
+{
+	FunctionDefinitionPtr node = AllocateMemory(sizeof(FunctionDefinition));
+	node->declarationSpecifiers = declarationSpecifiers;
+	node->declarator = declarator;
+	node->declarationList = declarationList;
+	node->compoundStatement = compoundStatement;
+	return node;
+}
+
+ExternalDeclarationPtr createExternalDeclaration(DeclarationPtr declaration, FunctionDefinitionPtr functionDefinition)
+{
+	ExternalDeclarationPtr node = AllocateMemory(sizeof(ExternalDeclaration));
+	node->declaration = declaration;
+	node->functionDefinition = functionDefinition;
+	return node;
+}
+

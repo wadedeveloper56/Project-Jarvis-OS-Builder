@@ -458,6 +458,20 @@ typedef struct _BlockItem
 	DeclarationPtr decl;
 } BlockItem, * BlockItemPtr, ** BlockItemPtrPtr;
 
+typedef struct _FunctionDefinition
+{
+	DeclarationSpecifiersPtr declarationSpecifiers;
+	DeclaratorPtr declarator;
+	LinkedListPtr declarationList;
+	LinkedListPtr compoundStatement;
+}FunctionDefinition, * FunctionDefinitionPtr, ** FunctionDefinitionPtrPtr;
+
+typedef struct _ExternalDeclaration
+{
+	DeclarationPtr declaration;
+	FunctionDefinitionPtr functionDefinition;
+}ExternalDeclaration, * ExternalDeclarationPtr, ** ExternalDeclarationPtrPtr;
+
 union ParseUnion
 {
 	CTreePtr expression;
@@ -492,6 +506,8 @@ union ParseUnion
 	SelectionStatementPtr selectionStatement;
 	IterationStatementPtr iterationStatement;
 	JumpStatementPtr jumpStatement;
+	FunctionDefinitionPtr functionDefinition;
+	ExternalDeclarationPtr externalDeclaration;
 };
 
 void printHeader(void);
@@ -589,3 +605,5 @@ SelectionStatementPtr createSelectionStatement(CTreePtr expr, StatementPtr thenS
 IterationStatementPtr createIterationStatement(TokenPtr type, CTreePtr exp, StatementPtr statement, ExpressionStatementPtr estmt1, ExpressionStatementPtr estmt2, DeclarationPtr decl);
 JumpStatementPtr createJumpStatement(TokenPtr type, TokenPtr id, CTreePtr exp);
 LinkedListPtr createDeclarationList(DeclarationPtr block, LinkedListPtr list);
+FunctionDefinitionPtr createFunctionDefinition(DeclarationSpecifiersPtr declarationSpecifiers, DeclaratorPtr declarator, LinkedListPtr declarationList, LinkedListPtr compoundStatement);
+ExternalDeclarationPtr createExternalDeclaration(DeclarationPtr declaration, FunctionDefinitionPtr functionDefinition);
