@@ -680,3 +680,15 @@ SelectionStatementPtr createSelectionStatement(CTreePtr expr, StatementPtr thenS
 	node->elseStatement = elseStatement;
 	return node;
 }
+
+IterationStatementPtr createIterationStatement(TokenPtr type, CTreePtr exp, StatementPtr statement, ExpressionStatementPtr estmt1, ExpressionStatementPtr estmt2, DeclarationPtr decl)
+{
+	IterationStatementPtr node = AllocateMemory(sizeof(IterationStatement));
+	node->type = type;
+	node->exp = exp;
+	node->statement = statement;
+	node->estmt1 = estmt1;
+	node->estmt2 = estmt2;
+	node->decl = decl;
+	return node;
+}

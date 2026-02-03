@@ -203,6 +203,7 @@ int yylex();
 %type<list> compound_statement
 %type<expressionStatement> expression_statement
 %type<selectionStatement> selection_statement
+%type<iterationStatement> iteration_statement
 
 %nonassoc "then"
 %nonassoc Y_ELSE
@@ -681,13 +682,13 @@ selection_statement
 	| Y_SWITCH Y_LEFT_PAREN expression Y_RIGHT_PAREN statement              { $$ = createSelectionStatement($3,$5,NULL); }
 	;
 
-iteration_statement
-	: Y_WHILE Y_LEFT_PAREN expression Y_RIGHT_PAREN statement
-	| Y_DO statement Y_WHILE Y_LEFT_PAREN expression Y_RIGHT_PAREN Y_SEMICOLON
-	| Y_FOR Y_LEFT_PAREN expression_statement expression_statement Y_RIGHT_PAREN statement
-	| Y_FOR Y_LEFT_PAREN expression_statement expression_statement expression Y_RIGHT_PAREN statement
-	| Y_FOR Y_LEFT_PAREN declaration expression_statement Y_RIGHT_PAREN statement
-	| Y_FOR Y_LEFT_PAREN declaration expression_statement expression Y_RIGHT_PAREN statement
+iteration_statement 
+	: Y_WHILE Y_LEFT_PAREN expression Y_RIGHT_PAREN statement                                         { $$ = createIterationStatement($1, $3, $5, NULL, NULL, NULL); }
+	| Y_DO statement Y_WHILE Y_LEFT_PAREN expression Y_RIGHT_PAREN Y_SEMICOLON                        { $$ = createIterationStatement($1, $5, $2, NULL, NULL, NULL); }
+	| Y_FOR Y_LEFT_PAREN expression_statement expression_statement Y_RIGHT_PAREN statement            { $$ = createIterationStatement($1, NULL, $6, $3, $4, NULL); }
+	| Y_FOR Y_LEFT_PAREN expression_statement expression_statement expression Y_RIGHT_PAREN statement { $$ = createIterationStatement($1, $5, $7, $3, $4, NULL); }
+	| Y_FOR Y_LEFT_PAREN declaration expression_statement Y_RIGHT_PAREN statement                     { $$ = createIterationStatement($1, NULL, $6, $4, NULL, $3); }
+	| Y_FOR Y_LEFT_PAREN declaration expression_statement expression Y_RIGHT_PAREN statement          { $$ = createIterationStatement($1, $5, $7, $4, NULL, $3); }
 	;
 
 jump_statement
