@@ -202,6 +202,7 @@ int yylex();
 %type<list> block_item_list
 %type<list> compound_statement
 %type<expressionStatement> expression_statement
+%type<selectionStatement> selection_statement
 
 %nonassoc "then"
 %nonassoc Y_ELSE
@@ -675,9 +676,9 @@ expression_statement
 	;
 
 selection_statement
-	: Y_IF Y_LEFT_PAREN expression Y_RIGHT_PAREN statement %prec "then"
-	| Y_IF Y_LEFT_PAREN expression Y_RIGHT_PAREN statement Y_ELSE statement
-	| Y_SWITCH Y_LEFT_PAREN expression Y_RIGHT_PAREN statement
+	: Y_IF Y_LEFT_PAREN expression Y_RIGHT_PAREN statement %prec "then"     { $$ = createSelectionStatement($3,$5,NULL); }
+	| Y_IF Y_LEFT_PAREN expression Y_RIGHT_PAREN statement Y_ELSE statement { $$ = createSelectionStatement($3,$5,$7); }
+	| Y_SWITCH Y_LEFT_PAREN expression Y_RIGHT_PAREN statement              { $$ = createSelectionStatement($3,$5,NULL); }
 	;
 
 iteration_statement

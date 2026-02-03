@@ -412,6 +412,13 @@ typedef struct _LabeledStatement
 	TokenPtr defaults;
 }LabeledStatemnt, * LabeledStatemntPtr, ** LabeledStatemntPtrPtr;
 
+typedef struct _SelectionStatement
+{
+	CTreePtr exp;
+	StatementPtr thenStatement;
+	StatementPtr elseStatement;
+}SelectionStatement, * SelectionStatementPtr, ** SelectionStatementPtrPtr;
+
 typedef struct _ExpressionStatement
 {
 	CTreePtr exp;
@@ -462,6 +469,7 @@ union ParseUnion
 	LabeledStatemntPtr labeledStatement;
 	BlockItemPtr blockItem;
 	ExpressionStatementPtr expressionStatement;
+	SelectionStatementPtr selectionStatement;
 };
 
 void printHeader(void);
@@ -547,3 +555,4 @@ LabeledStatemntPtr createLabeledStatement(TokenPtr id, StatementPtr statement, C
 BlockItemPtr createBlockItem(DeclarationPtr decl, StatementPtr statement);
 LinkedListPtr createBlockItemList(BlockItemPtr block, LinkedListPtr list);
 ExpressionStatementPtr createExpressionStatement(CTreePtr expr);
+SelectionStatementPtr createSelectionStatement(CTreePtr expr, StatementPtr thenStatement, StatementPtr elseStatement);

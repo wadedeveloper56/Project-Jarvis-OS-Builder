@@ -664,3 +664,12 @@ ExpressionStatementPtr createExpressionStatement(CTreePtr expr)
 	node->exp = expr;
 	return node;
 }
+
+SelectionStatementPtr createSelectionStatement(CTreePtr expr, StatementPtr thenStatement, StatementPtr elseStatement)
+{
+	SelectionStatementPtr node = AllocateMemory(sizeof(SelectionStatement));
+	node->exp = expr;
+	node->thenStatement = thenStatement;
+	node->elseStatement = elseStatement;
+	return node;
+}

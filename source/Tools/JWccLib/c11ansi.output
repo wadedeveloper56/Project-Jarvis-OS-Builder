@@ -737,7 +737,7 @@ Nonterminals, with rules where they appear
     expression_statement <expressionStatement> (200)
         on left: 253 254
         on right: 240 260 261 262 263
-    selection_statement (201)
+    selection_statement <selectionStatement> (201)
         on left: 255 256 257
         on right: 241
     iteration_statement (202)
