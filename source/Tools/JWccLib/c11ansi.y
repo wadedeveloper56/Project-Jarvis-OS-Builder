@@ -208,6 +208,9 @@ int yylex();
 %type<list> declaration_list
 %type<functionDefinition> function_definition
 %type<externalDeclaration> external_declaration
+%type<genericAssoc> generic_association
+%type<list> generic_assoc_list
+%type<genericSelection> generic_selection
 
 %nonassoc "then"
 %nonassoc Y_ELSE
@@ -220,36 +223,36 @@ primary_expression
 	| constant                              { $$ = createCTreeRoot(createTokenLabel($1)); }
 	| string                                { $$ = createCTreeRoot(createTokenLabel($1)); }
 	| Y_LEFT_PAREN expression Y_RIGHT_PAREN { $$ = createCTree1(createConstr2Label(LABCT_PAREN_EXPR, $1, $3), $2); }
-	| generic_selection                     { $$ = NULL; }
+	| generic_selection                     { $$ = createCTreeRoot(createGenericSelectionLabel($1)); }
 	;
 
 constant
-	: I_CONSTANT             {$$ = $1; zapToken($1); }
-	| F_CONSTANT             {$$ = $1; zapToken($1); }
-	| Y_ENUMERATION_CONSTANT {$$ = $1; zapToken($1); }
+	: I_CONSTANT             {$$ = $1; }
+	| F_CONSTANT             {$$ = $1; }
+	| Y_ENUMERATION_CONSTANT {$$ = $1; }
 	;
 
 enumeration_constant
-	: IDENTIFIER {$$ = $1; zapToken($1); }
+	: IDENTIFIER {$$ = $1; }
 	;
 
 string
-	: STRING_LITERAL {$$ = $1; zapToken($1); }
-	| Y_FUNC_NAME    {$$ = $1; zapToken($1); }
+	: STRING_LITERAL {$$ = $1; }
+	| Y_FUNC_NAME    {$$ = $1; }
 	;
 
 generic_selection
-	: Y_GENERIC Y_LEFT_PAREN assignment_expression Y_COMMA generic_assoc_list Y_RIGHT_PAREN
+	: Y_GENERIC Y_LEFT_PAREN assignment_expression Y_COMMA generic_assoc_list Y_RIGHT_PAREN { $$ = createGenericSelection($3,$5); }
 	;
 
 generic_assoc_list
-	: generic_association
-	| generic_assoc_list Y_COMMA generic_association
+	: generic_association                            { $$ = createGenericAssocList($1,NULL); }
+	| generic_assoc_list Y_COMMA generic_association { $$ = createGenericAssocList($3,$1); }
 	;
 
 generic_association
-	: type_name Y_COLON assignment_expression
-	| Y_DEFAULT Y_COLON assignment_expression
+	: type_name Y_COLON assignment_expression { $$ = createGenericAssoc($1,$3,NULL); }
+	| Y_DEFAULT Y_COLON assignment_expression { $$ = createGenericAssoc(NULL,$3,$1); }
 	;
 
 postfix_expression

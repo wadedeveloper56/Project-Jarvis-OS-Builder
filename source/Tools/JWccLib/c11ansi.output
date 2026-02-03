@@ -539,13 +539,13 @@ Nonterminals, with rules where they appear
     string <token> (134)
         on left: 10 11
         on right: 3
-    generic_selection (135)
+    generic_selection <genericSelection> (135)
         on left: 12
         on right: 5
-    generic_assoc_list (136)
+    generic_assoc_list <list> (136)
         on left: 13 14
         on right: 12 14
-    generic_association (137)
+    generic_association <genericAssoc> (137)
         on left: 15 16
         on right: 13 14
     postfix_expression <expression> (138)

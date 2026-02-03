@@ -26,6 +26,7 @@ typedef enum _LabelType
 {
 	LABT_LIST,
 	LABT_TOKEN,
+	LABT_GS,
 	LABT_CONSTRUCT_ROOT,
 	LABT_DECL_INFO,
 	LABT_DECL_LIST
@@ -472,6 +473,19 @@ typedef struct _ExternalDeclaration
 	FunctionDefinitionPtr functionDefinition;
 }ExternalDeclaration, * ExternalDeclarationPtr, ** ExternalDeclarationPtrPtr;
 
+typedef struct _GenericAssoc
+{
+	CTreePtr assignmentExpression;
+	TypeNamePtr typeName;
+	TokenPtr defaults;
+}GenericAssoc, * GenericAssocPtr, ** GenericAssocPtrPtr;
+
+typedef struct _GenericSelection
+{
+	CTreePtr assignmentExpression;
+	LinkedListPtr assocList;
+}GenericSelection, * GenericSelectionPtr, ** GenericSelectionPtrPtr;
+
 union ParseUnion
 {
 	CTreePtr expression;
@@ -508,6 +522,8 @@ union ParseUnion
 	JumpStatementPtr jumpStatement;
 	FunctionDefinitionPtr functionDefinition;
 	ExternalDeclarationPtr externalDeclaration;
+	GenericAssocPtr genericAssoc;
+	GenericSelectionPtr genericSelection;
 };
 
 extern LinkedListPtr programData;
@@ -533,6 +549,7 @@ CTreePtr createNULLCTree(void);
 CTreePtr createCTree1(LabelPtr label, CTreePtr child);
 CTreePtr createCTree2(LabelPtr label, CTreePtr child1, CTreePtr child2);
 LabelPtr createTokenLabel(TokenPtr token);
+LabelPtr createGenericSelectionLabel(GenericSelectionPtr gs);
 LabelPtr createConstr0Label(LabelConstrType type);
 LabelPtr createConstr1Label(LabelConstrType type, TokenPtr t0);
 LabelPtr createConstr2Label(LabelConstrType type, TokenPtr t0, TokenPtr t1);
@@ -610,3 +627,6 @@ LinkedListPtr createDeclarationList(DeclarationPtr block, LinkedListPtr list);
 FunctionDefinitionPtr createFunctionDefinition(DeclarationSpecifiersPtr declarationSpecifiers, DeclaratorPtr declarator, LinkedListPtr declarationList, LinkedListPtr compoundStatement);
 ExternalDeclarationPtr createExternalDeclaration(DeclarationPtr declaration, FunctionDefinitionPtr functionDefinition);
 void createProgramData(ExternalDeclarationPtr ed);
+GenericAssocPtr createGenericAssoc(TypeNamePtr typeName, CTreePtr assignmentExpression, TokenPtr defaults);
+LinkedListPtr createGenericAssocList(GenericAssocPtr block, LinkedListPtr list);
+GenericSelectionPtr createGenericSelection(CTreePtr assignmentExpression, LinkedListPtr list);

@@ -83,6 +83,11 @@ LabelPtr createTokenLabel(TokenPtr token)
 	return _createLabel(LABT_TOKEN, token);
 }
 
+LabelPtr createGenericSelectionLabel(GenericSelectionPtr gs)
+{
+	return _createLabel(LABT_GS, gs);
+}
+
 LabelPtr createConstr0Label(LabelConstrType type)
 {
 	LabelPtr newLabel = _createLabel(LABT_CONSTRUCT_ROOT, NULL);
@@ -744,4 +749,32 @@ void createProgramData(ExternalDeclarationPtr ed)
 	}
 	addListElem(programData, ed);
 }
+
+GenericAssocPtr createGenericAssoc(TypeNamePtr typeName, CTreePtr assignmentExpression, TokenPtr defaults)
+{
+	GenericAssocPtr node = AllocateMemory(sizeof(GenericAssoc));
+	node->typeName = typeName;
+	node->assignmentExpression = assignmentExpression;
+	node->defaults = defaults;
+	return node;
+}
+
+LinkedListPtr createGenericAssocList(GenericAssocPtr block, LinkedListPtr list)
+{
+	if (list == NULL)
+	{
+		list = createList();
+	}
+	addListElem(list, block);
+	return list;
+}
+
+GenericSelectionPtr createGenericSelection(CTreePtr assignmentExpression, LinkedListPtr list)
+{
+	GenericSelectionPtr node = AllocateMemory(sizeof(GenericSelection));
+	node->assignmentExpression = assignmentExpression;
+	node->assocList = list;
+	return node;
+}
+
 
