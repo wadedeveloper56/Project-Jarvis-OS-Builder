@@ -10,12 +10,6 @@
 %code requires
 {
     #include "pch.h"
-    #include <iostream>
-    #include <string>
-    #include <vector>
-    #include <stdint.h>
-    #include <stdlib.h>
-    #include <optional>
     #include "Constant.h"
     #include "StorageClassSpecifier.h"
     #include "DeclarationSpecifiers.h"
@@ -70,8 +64,6 @@
 %code top
 {
     #include "pch.h"
-    #include <iostream>
-    #include <stdlib.h>
     #include "scanner.h"
     #include "parser.hpp"
     #include "interpreter.h"

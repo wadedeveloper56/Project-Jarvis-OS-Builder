@@ -1,5 +1,4 @@
 #include "pch.h"
-#include <iostream>
 #include "DirectDeclarator.h"
 #include "ParameterTypeList.h"
 #include "Declarator.h"

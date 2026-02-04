@@ -23,9 +23,6 @@ WS  [ \t\v\n\f]
 
 %{
     #include "pch.h"
-    #include <iostream>
-    #include <cstdlib>
-    #include <stdlib.h>
     #include "TokenType.h"
     #define YY_NO_UNISTD_H
     #include "scanner.h"
