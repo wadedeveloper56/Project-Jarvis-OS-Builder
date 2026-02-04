@@ -665,7 +665,7 @@ Nonterminals, with rules where they appear
     function_specifier <token> (176)
         on left: 164 165
         on right: 99 100
-    alignment_specifier <token> (177)
+    alignment_specifier <alignmentSpecifier> (177)
         on left: 166 167
         on right: 101 102
     declarator <declarator> (178)

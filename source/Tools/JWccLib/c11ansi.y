@@ -172,7 +172,7 @@ int yylex();
 %type<list> type_qualifier_list
 %type<typeSpecifier> type_specifier
 %type<token> function_specifier
-%type<token> alignment_specifier
+%type<alignmentSpecifier> alignment_specifier
 %type<atomicTypeSpecifier> atomic_type_specifier
 %type<token> struct_or_union
 %type<list> struct_declaration_list
@@ -228,18 +228,18 @@ primary_expression
 	;
 
 constant
-	: I_CONSTANT             {$$ = $1; }
-	| F_CONSTANT             {$$ = $1; }
-	| Y_ENUMERATION_CONSTANT {$$ = $1; }
+	: I_CONSTANT             { $$ = $1; }
+	| F_CONSTANT             { $$ = $1; }
+	| Y_ENUMERATION_CONSTANT { $$ = $1; }
 	;
 
 enumeration_constant
-	: IDENTIFIER {$$ = $1; }
+	: IDENTIFIER { $$ = $1; }
 	;
 
 string
-	: STRING_LITERAL {$$ = $1; }
-	| Y_FUNC_NAME    {$$ = $1; }
+	: STRING_LITERAL { $$ = $1; }
+	| Y_FUNC_NAME    { $$ = $1; }
 	;
 
 generic_selection
@@ -299,7 +299,7 @@ cast_expression
 	;
 
 multiplicative_expression
-	: cast_expression { $$ = $1; }
+	: cast_expression                                     { $$ = $1; }
 	| multiplicative_expression Y_TIMES cast_expression   { $$ = createCTree2(createConstr1Label(LABCT_TIMES, $2), $1, $3); }
 	| multiplicative_expression Y_DIVIDE cast_expression  { $$ = createCTree2(createConstr1Label(LABCT_DIVIDE, $2), $1, $3); }
 	| multiplicative_expression Y_PERCENT cast_expression { $$ = createCTree2(createConstr1Label(LABCT_PERCENT, $2), $1, $3); }
@@ -404,8 +404,8 @@ declaration_specifiers
 	| type_qualifier                                 { $$ = createDeclarationSpecifiers1($1,NULL); }
 	| function_specifier declaration_specifiers      { $$ = createDeclarationSpecifiers1($1,$2); }
 	| function_specifier                             { $$ = createDeclarationSpecifiers1($1,NULL); }
-	| alignment_specifier declaration_specifiers     { $$ = createDeclarationSpecifiers1($1,$2); }
-	| alignment_specifier                            { $$ = createDeclarationSpecifiers1($1,NULL); }
+	| alignment_specifier declaration_specifiers     { $$ = createDeclarationSpecifiers3($1,$2); }
+	| alignment_specifier                            { $$ = createDeclarationSpecifiers3($1,NULL); }
 	;
 
 init_declarator_list
@@ -419,12 +419,12 @@ init_declarator
 	;
 
 storage_class_specifier
-	: Y_TYPEDEF	      { $$ = $1;  zapToken($1); }
-	| Y_EXTERN        { $$ = $1;  zapToken($1); }
-	| Y_STATIC        { $$ = $1;  zapToken($1); }
-	| Y_THREAD_LOCAL  { $$ = $1;  zapToken($1); }
-	| Y_AUTO          { $$ = $1;  zapToken($1); }
-	| Y_REGISTER      { $$ = $1;  zapToken($1); }
+	: Y_TYPEDEF	      { $$ = $1; }
+	| Y_EXTERN        { $$ = $1; }
+	| Y_STATIC        { $$ = $1; }
+	| Y_THREAD_LOCAL  { $$ = $1; }
+	| Y_AUTO          { $$ = $1; }
+	| Y_REGISTER      { $$ = $1; }
 	;
 
 type_specifier
@@ -455,8 +455,8 @@ struct_or_union_specifier
 	;
 
 struct_or_union
-	: Y_STRUCT  { $$ = $1; zapToken($1); }
-	| Y_UNION   { $$ = $1; zapToken($1); }
+	: Y_STRUCT  { $$ = $1; }
+	| Y_UNION   { $$ = $1; }
 	;
 
 struct_declaration_list
@@ -501,7 +501,7 @@ enumerator_list
 	| enumerator_list Y_COMMA enumerator  { $$ = createEnumeratorList($3, $1); }
 	;
 
-enumerator	/* identifiers must be flagged as ENUMERATION_CONSTANT */
+enumerator
 	: enumeration_constant Y_EQUAL constant_expression { $$ = createEnumerator($1, $3); }
 	| enumeration_constant                             { $$ = createEnumerator($1, NULL); }
 	;
@@ -523,11 +523,11 @@ function_specifier
 	;
 
 alignment_specifier
-	: Y_ALIGNAS Y_LEFT_PAREN type_name Y_RIGHT_PAREN            { $$ = $1; }
-	| Y_ALIGNAS Y_LEFT_PAREN constant_expression Y_RIGHT_PAREN  { $$ = $1; }
+	: Y_ALIGNAS Y_LEFT_PAREN type_name Y_RIGHT_PAREN            { $$ = createAlignmentSpecifiers($3,NULL); }
+	| Y_ALIGNAS Y_LEFT_PAREN constant_expression Y_RIGHT_PAREN  { $$ = createAlignmentSpecifiers(NULL,$3); }
 	;
 
-declarator
+declarator  //FIX ME
 	: pointer direct_declarator { $$ = NULL; }
 	| direct_declarator         { $$ = NULL; }
 	;
@@ -645,7 +645,7 @@ designator
 	| Y_DOT IDENTIFIER                                   { $$ = createDesignator(NULL,NULL,NULL,$1,$2); }
 	;
 
-static_assert_declaration
+static_assert_declaration  //FIX ME
 	: Y_STATIC_ASSERT Y_LEFT_PAREN constant_expression Y_COMMA STRING_LITERAL Y_RIGHT_PAREN Y_SEMICOLON { $$ = NULL; }
 	;
 

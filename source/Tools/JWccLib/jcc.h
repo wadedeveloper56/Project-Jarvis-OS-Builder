@@ -21,6 +21,7 @@ typedef struct _TypeName TypeName, * TypeNamePtr, ** TypeNamePtrPtr;
 typedef struct _AbstractDeclarator AbstractDeclarator, * AbstractDeclaratorPtr, ** AbstractDeclaratorPtrPtr;
 typedef struct _Designation Designation, * DesignationPtr, ** DesignationPtrPtr;
 typedef struct _Statement Statement, * StatementPtr, ** StatementPtrPtr;
+typedef struct _AlignmentSpecifier AlignmentSpecifier, * AlignmentSpecifierPtr, ** AlignmentSpecifierPtrPtr;
 
 typedef enum _LabelType
 {
@@ -238,15 +239,16 @@ typedef enum _FunctionSpecifier
 	FS_MAX
 } FunctionSpecifier;
 
-typedef enum _AlignmentSpecifier
+typedef enum _AlignmentSpecifierType
 {
 	AS_ALIGNOF
-} AlignmentSpecifier;
+} AlignmentSpecifierType;
 
 typedef struct _DeclarationSpecifiersNode
 {
 	TokenPtr token;
 	TypeSpecifierPtr typeSpecifier;
+	AlignmentSpecifierPtr alignment;
 } DeclarationSpecifiersNode, * DeclarationSpecifiersNodePtr, ** DeclarationSpecifiersNodePtrPtr;
 
 typedef struct _DeclarationSpecifiers
@@ -492,6 +494,12 @@ typedef struct _InitDeclarator
 	CTreePtr initializer;
 }InitDeclarator, * InitDeclaratorPtr, ** InitDeclaratorPtrPtr;
 
+typedef struct _AlignmentSpecifier
+{
+	TypeNamePtr type;
+	CTreePtr constExp;
+}AlignmentSpecifier, * AlignmentSpecifierPtr, ** AlignmentSpecifierPtrPtr;
+
 union ParseUnion
 {
 	CTreePtr expression;
@@ -531,6 +539,7 @@ union ParseUnion
 	GenericAssocPtr genericAssoc;
 	GenericSelectionPtr genericSelection;
 	InitDeclaratorPtr initDeclarator;
+	AlignmentSpecifierPtr alignmentSpecifier;
 };
 
 extern LinkedListPtr programData;
@@ -571,6 +580,7 @@ LinkedListPtr createList(void);
 LinkedListPtr combineLists(LinkedListPtr list1, LinkedListPtr list2);
 DeclarationSpecifiersPtr createDeclarationSpecifiers1(TokenPtr token, DeclarationSpecifiersPtr tokenList);
 DeclarationSpecifiersPtr createDeclarationSpecifiers2(TypeSpecifierPtr typeSpecifier, DeclarationSpecifiersPtr tokenList);
+DeclarationSpecifiersPtr createDeclarationSpecifiers3(AlignmentSpecifierPtr token, DeclarationSpecifiersPtr tokenList);
 TypeSpecifierPtr createTypeSpecifier(TokenPtr token);
 TypeSpecifierPtr createTypeSpecifier2(AtomicTypeSpecifierPtr token);
 TypeSpecifierPtr createTypeSpecifier3(StructOrUnionSpecifierPtr token);
@@ -639,4 +649,5 @@ LinkedListPtr createGenericAssocList(GenericAssocPtr block, LinkedListPtr list);
 GenericSelectionPtr createGenericSelection(CTreePtr assignmentExpression, LinkedListPtr list);
 InitDeclaratorPtr createInitDeclarator(DeclaratorPtr decl, CTreePtr initializer);
 LinkedListPtr createInitDeclaratorList(InitDeclaratorPtr block, LinkedListPtr list);
+AlignmentSpecifierPtr createAlignmentSpecifiers(TypeNamePtr type, CTreePtr expression);
 

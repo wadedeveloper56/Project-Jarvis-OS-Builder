@@ -265,6 +265,19 @@ DeclarationSpecifiersPtr createDeclarationSpecifiers2(TypeSpecifierPtr typeSpeci
 	return tokenList;
 }
 
+DeclarationSpecifiersPtr createDeclarationSpecifiers3(AlignmentSpecifierPtr token, DeclarationSpecifiersPtr tokenList)
+{
+	if (tokenList == NULL)
+	{
+		tokenList = AllocateMemory(sizeof(DeclarationSpecifiers));
+		tokenList->tokenList = createList();
+	}
+	DeclarationSpecifiersNodePtr node = AllocateMemory(sizeof(DeclarationSpecifiersNode));
+	node->alignment = token;
+	addListElem(tokenList->tokenList, node);
+	return tokenList;
+}
+
 TypeSpecifierPtr createTypeSpecifier(TokenPtr token)
 {
 	TypeSpecifierPtr newTypeSpec = AllocateMemory(sizeof(TypeSpecifier));
@@ -794,3 +807,12 @@ LinkedListPtr createInitDeclaratorList(InitDeclaratorPtr block, LinkedListPtr li
 	addListElem(list, block);
 	return list;
 }
+
+AlignmentSpecifierPtr createAlignmentSpecifiers(TypeNamePtr type, CTreePtr expression)
+{
+	AlignmentSpecifierPtr node = AllocateMemory(sizeof(AlignmentSpecifier));
+	node->type = type;
+	node->constExp = expression;
+	return node;
+}
+

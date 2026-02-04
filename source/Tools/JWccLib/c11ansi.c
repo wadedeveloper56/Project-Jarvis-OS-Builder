@@ -2149,37 +2149,37 @@ yyreduce:
 
   case 7: /* constant: "i_const"  */
 #line 231 "c11ansi.y"
-                                 {(yyval.token) = (yyvsp[0].token); }
+                                 { (yyval.token) = (yyvsp[0].token); }
 #line 2154 "c11ansi.c"
     break;
 
   case 8: /* constant: "f_const"  */
 #line 232 "c11ansi.y"
-                                 {(yyval.token) = (yyvsp[0].token); }
+                                 { (yyval.token) = (yyvsp[0].token); }
 #line 2160 "c11ansi.c"
     break;
 
   case 9: /* constant: Y_ENUMERATION_CONSTANT  */
 #line 233 "c11ansi.y"
-                                 {(yyval.token) = (yyvsp[0].token); }
+                                 { (yyval.token) = (yyvsp[0].token); }
 #line 2166 "c11ansi.c"
     break;
 
   case 10: /* enumeration_constant: "identifier"  */
 #line 237 "c11ansi.y"
-                     {(yyval.token) = (yyvsp[0].token); }
+                     { (yyval.token) = (yyvsp[0].token); }
 #line 2172 "c11ansi.c"
     break;
 
   case 11: /* string: "sting_literal"  */
 #line 241 "c11ansi.y"
-                         {(yyval.token) = (yyvsp[0].token); }
+                         { (yyval.token) = (yyvsp[0].token); }
 #line 2178 "c11ansi.c"
     break;
 
   case 12: /* string: Y_FUNC_NAME  */
 #line 242 "c11ansi.y"
-                         {(yyval.token) = (yyvsp[0].token); }
+                         { (yyval.token) = (yyvsp[0].token); }
 #line 2184 "c11ansi.c"
     break;
 
@@ -2377,7 +2377,7 @@ yyreduce:
 
   case 45: /* multiplicative_expression: cast_expression  */
 #line 302 "c11ansi.y"
-                          { (yyval.expression) = (yyvsp[0].expression); }
+                                                              { (yyval.expression) = (yyvsp[0].expression); }
 #line 2382 "c11ansi.c"
     break;
 
@@ -2719,13 +2719,13 @@ yyreduce:
 
   case 102: /* declaration_specifiers: alignment_specifier declaration_specifiers  */
 #line 407 "c11ansi.y"
-                                                         { (yyval.declSpecifiers) = createDeclarationSpecifiers1((yyvsp[-1].token),(yyvsp[0].declSpecifiers)); }
+                                                         { (yyval.declSpecifiers) = createDeclarationSpecifiers3((yyvsp[-1].alignmentSpecifier),(yyvsp[0].declSpecifiers)); }
 #line 2724 "c11ansi.c"
     break;
 
   case 103: /* declaration_specifiers: alignment_specifier  */
 #line 408 "c11ansi.y"
-                                                         { (yyval.declSpecifiers) = createDeclarationSpecifiers1((yyvsp[0].token),NULL); }
+                                                         { (yyval.declSpecifiers) = createDeclarationSpecifiers3((yyvsp[0].alignmentSpecifier),NULL); }
 #line 2730 "c11ansi.c"
     break;
 
@@ -2755,37 +2755,37 @@ yyreduce:
 
   case 108: /* storage_class_specifier: Y_TYPEDEF  */
 #line 422 "c11ansi.y"
-                              { (yyval.token) = (yyvsp[0].token);  zapToken((yyvsp[0].token)); }
+                              { (yyval.token) = (yyvsp[0].token); }
 #line 2760 "c11ansi.c"
     break;
 
   case 109: /* storage_class_specifier: Y_EXTERN  */
 #line 423 "c11ansi.y"
-                          { (yyval.token) = (yyvsp[0].token);  zapToken((yyvsp[0].token)); }
+                          { (yyval.token) = (yyvsp[0].token); }
 #line 2766 "c11ansi.c"
     break;
 
   case 110: /* storage_class_specifier: Y_STATIC  */
 #line 424 "c11ansi.y"
-                          { (yyval.token) = (yyvsp[0].token);  zapToken((yyvsp[0].token)); }
+                          { (yyval.token) = (yyvsp[0].token); }
 #line 2772 "c11ansi.c"
     break;
 
   case 111: /* storage_class_specifier: Y_THREAD_LOCAL  */
 #line 425 "c11ansi.y"
-                          { (yyval.token) = (yyvsp[0].token);  zapToken((yyvsp[0].token)); }
+                          { (yyval.token) = (yyvsp[0].token); }
 #line 2778 "c11ansi.c"
     break;
 
   case 112: /* storage_class_specifier: Y_AUTO  */
 #line 426 "c11ansi.y"
-                          { (yyval.token) = (yyvsp[0].token);  zapToken((yyvsp[0].token)); }
+                          { (yyval.token) = (yyvsp[0].token); }
 #line 2784 "c11ansi.c"
     break;
 
   case 113: /* storage_class_specifier: Y_REGISTER  */
 #line 427 "c11ansi.y"
-                          { (yyval.token) = (yyvsp[0].token);  zapToken((yyvsp[0].token)); }
+                          { (yyval.token) = (yyvsp[0].token); }
 #line 2790 "c11ansi.c"
     break;
 
@@ -2917,13 +2917,13 @@ yyreduce:
 
   case 135: /* struct_or_union: Y_STRUCT  */
 #line 458 "c11ansi.y"
-                    { (yyval.token) = (yyvsp[0].token); zapToken((yyvsp[0].token)); }
+                    { (yyval.token) = (yyvsp[0].token); }
 #line 2922 "c11ansi.c"
     break;
 
   case 136: /* struct_or_union: Y_UNION  */
 #line 459 "c11ansi.y"
-                    { (yyval.token) = (yyvsp[0].token); zapToken((yyvsp[0].token)); }
+                    { (yyval.token) = (yyvsp[0].token); }
 #line 2928 "c11ansi.c"
     break;
 
@@ -3109,13 +3109,13 @@ yyreduce:
 
   case 167: /* alignment_specifier: Y_ALIGNAS Y_LEFT_PAREN type_name Y_RIGHT_PAREN  */
 #line 526 "c11ansi.y"
-                                                                    { (yyval.token) = (yyvsp[-3].token); }
+                                                                    { (yyval.alignmentSpecifier) = createAlignmentSpecifiers((yyvsp[-1].typeName),NULL); }
 #line 3114 "c11ansi.c"
     break;
 
   case 168: /* alignment_specifier: Y_ALIGNAS Y_LEFT_PAREN constant_expression Y_RIGHT_PAREN  */
 #line 527 "c11ansi.y"
-                                                                    { (yyval.token) = (yyvsp[-3].token); }
+                                                                    { (yyval.alignmentSpecifier) = createAlignmentSpecifiers(NULL,(yyvsp[-1].expression)); }
 #line 3120 "c11ansi.c"
     break;
 
