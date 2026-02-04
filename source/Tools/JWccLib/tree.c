@@ -184,6 +184,19 @@ LabelPtr createConstr7Label(LabelConstrType type, TokenPtr t0, TokenPtr t1, Toke
 	return newLabel;
 }
 
+LabelPtr createConstr8Label(LabelConstrType type, TokenPtr t0, TokenPtr t1, TokenPtr t2, TypeNamePtr t3)
+{
+	LabelPtr newLabel = _createLabel(LABT_CONSTRUCT_ROOT, NULL);
+	newLabel->repr.constr.type = type;
+	newLabel->repr.constr.numTokens = 3;
+	newLabel->repr.constr.tokens = AllocateMemory(sizeof(Token) * 4);
+	newLabel->repr.constr.tokens[0] = t0;
+	newLabel->repr.constr.tokens[1] = t1;
+	newLabel->repr.constr.tokens[2] = t2;
+	newLabel->repr.constr.typeName = t3;
+	return newLabel;
+}
+
 DeclarationPtr createDeclaration(DeclarationSpecifiersPtr declSpecifiers, LinkedListPtr initDeclaratorList, StaticAssertDeclarationPtr staticAssertDecl)
 {
 	DeclarationPtr newDecl = AllocateMemory(sizeof(Declaration));
@@ -196,6 +209,7 @@ DeclarationPtr createDeclaration(DeclarationSpecifiersPtr declSpecifiers, Linked
 LinkedListPtr createList(void)
 {
 	LinkedListPtr newList = AllocateMemory(sizeof(LinkedList));
+	newList->numberOfNodes = 0;
 	return newList;
 }
 
@@ -207,7 +221,6 @@ void addListElem(LinkedListPtr pList, void* elem)
 	if (pList->list == NULL)
 	{
 		pList->list = node;
-		return;
 	}
 	else
 	{
@@ -218,6 +231,7 @@ void addListElem(LinkedListPtr pList, void* elem)
 		}
 		ptr->next = node;
 	}
+	pList->numberOfNodes++;
 }
 
 LinkedListPtr combineLists(LinkedListPtr list1, LinkedListPtr list2)

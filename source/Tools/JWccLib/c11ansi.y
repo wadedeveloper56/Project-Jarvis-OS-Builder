@@ -280,8 +280,8 @@ unary_expression
 	| Y_MINUS_MINUS unary_expression                  { $$ = createCTree1(createConstr1Label(LABCT_MINUS_MINUS, $1), $2); }
 	| unary_operator cast_expression                  { $$ = createCTree1($1, $2); }
 	| Y_SIZEOF unary_expression                       { $$ = createCTree1(createConstr1Label(LABCT_SIZEOF_EXPR, $1), $2); }
-	| Y_SIZEOF Y_LEFT_PAREN type_name Y_RIGHT_PAREN   { $$ = createCTreeRoot(createConstr3Label(LABCT_SIZEOF_TYPE, $1, $2, $4)); }
-	| Y_ALIGNOF Y_LEFT_PAREN type_name Y_RIGHT_PAREN  { $$ = createCTreeRoot(createConstr3Label(LABCT_ALIGNOF_TYPE, $1, $2, $4)); }
+	| Y_SIZEOF Y_LEFT_PAREN type_name Y_RIGHT_PAREN   { $$ = createCTreeRoot(createConstr8Label(LABCT_SIZEOF_TYPE,$1,$2,$4,$3)); }
+	| Y_ALIGNOF Y_LEFT_PAREN type_name Y_RIGHT_PAREN  { $$ = createCTreeRoot(createConstr8Label(LABCT_ALIGNOF_TYPE,$1,$2,$4,$3)); }
 	;
 
 unary_operator
@@ -645,7 +645,7 @@ designator
 	| Y_DOT IDENTIFIER                                   { $$ = createDesignator(NULL,NULL,NULL,$1,$2); }
 	;
 
-static_assert_declaration  //FIX ME
+static_assert_declaration 
 	: Y_STATIC_ASSERT Y_LEFT_PAREN constant_expression Y_COMMA STRING_LITERAL Y_RIGHT_PAREN Y_SEMICOLON { $$ = createStaticAssertDecl($3,$5); }
 	;
 

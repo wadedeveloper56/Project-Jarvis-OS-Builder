@@ -2317,13 +2317,13 @@ yyreduce:
 
   case 35: /* unary_expression: Y_SIZEOF Y_LEFT_PAREN type_name Y_RIGHT_PAREN  */
 #line 283 "c11ansi.y"
-                                                          { (yyval.expression) = createCTreeRoot(createConstr3Label(LABCT_SIZEOF_TYPE, (yyvsp[-3].token), (yyvsp[-2].token), (yyvsp[0].token))); }
+                                                          { (yyval.expression) = createCTreeRoot(createConstr8Label(LABCT_SIZEOF_TYPE,(yyvsp[-3].token),(yyvsp[-2].token),(yyvsp[0].token),(yyvsp[-1].typeName))); }
 #line 2322 "c11ansi.c"
     break;
 
   case 36: /* unary_expression: Y_ALIGNOF Y_LEFT_PAREN type_name Y_RIGHT_PAREN  */
 #line 284 "c11ansi.y"
-                                                          { (yyval.expression) = createCTreeRoot(createConstr3Label(LABCT_ALIGNOF_TYPE, (yyvsp[-3].token), (yyvsp[-2].token), (yyvsp[0].token))); }
+                                                          { (yyval.expression) = createCTreeRoot(createConstr8Label(LABCT_ALIGNOF_TYPE,(yyvsp[-3].token),(yyvsp[-2].token),(yyvsp[0].token),(yyvsp[-1].typeName))); }
 #line 2328 "c11ansi.c"
     break;
 
