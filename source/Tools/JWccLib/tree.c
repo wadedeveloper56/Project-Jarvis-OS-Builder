@@ -824,3 +824,11 @@ DeclaratorPtr createDeclarator(PointerPtr ptr, DirectDeclaratorPtr dd)
 	return node;
 }
 
+StaticAssertDeclarationPtr createStaticAssertDecl(CTreePtr exp, TokenPtr literal)
+{
+	StaticAssertDeclarationPtr node = AllocateMemory(sizeof(StaticAssertDeclaration));
+	node->constExpr = exp;
+	node->strLiteral = literal;
+	return node;
+}
+

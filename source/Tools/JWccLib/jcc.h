@@ -652,4 +652,5 @@ InitDeclaratorPtr createInitDeclarator(DeclaratorPtr decl, CTreePtr initializer)
 LinkedListPtr createInitDeclaratorList(InitDeclaratorPtr block, LinkedListPtr list);
 AlignmentSpecifierPtr createAlignmentSpecifiers(TypeNamePtr type, CTreePtr expression);
 DeclaratorPtr createDeclarator(PointerPtr ptr, DirectDeclaratorPtr dd);
+StaticAssertDeclarationPtr createStaticAssertDecl(CTreePtr exp, TokenPtr literal);
 

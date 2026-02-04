@@ -646,7 +646,7 @@ designator
 	;
 
 static_assert_declaration  //FIX ME
-	: Y_STATIC_ASSERT Y_LEFT_PAREN constant_expression Y_COMMA STRING_LITERAL Y_RIGHT_PAREN Y_SEMICOLON { $$ = NULL; }
+	: Y_STATIC_ASSERT Y_LEFT_PAREN constant_expression Y_COMMA STRING_LITERAL Y_RIGHT_PAREN Y_SEMICOLON { $$ = createStaticAssertDecl($3,$5); }
 	;
 
 statement

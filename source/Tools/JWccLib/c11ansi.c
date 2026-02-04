@@ -3535,7 +3535,7 @@ yyreduce:
 
   case 238: /* static_assert_declaration: Y_STATIC_ASSERT Y_LEFT_PAREN constant_expression Y_COMMA "sting_literal" Y_RIGHT_PAREN Y_SEMICOLON  */
 #line 649 "c11ansi.y"
-                                                                                                            { (yyval.staticAssertDecl) = NULL; }
+                                                                                                            { (yyval.staticAssertDecl) = createStaticAssertDecl((yyvsp[-4].expression),(yyvsp[-2].token)); }
 #line 3540 "c11ansi.c"
     break;
 
