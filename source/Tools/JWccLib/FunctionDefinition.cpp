@@ -28,9 +28,12 @@ FunctionDefinition::~FunctionDefinition()
 {
     delete declarationSpecifiers;
     delete declarator;
-    for (Declaration* ptr : *vectorDeclaration)
+    if (vectorDeclaration != NULL)
     {
-        delete ptr;
+        for (Declaration* ptr : *vectorDeclaration)
+        {
+            delete ptr;
+        }
     }
     delete vectorDeclaration;
     delete baseStatement;

@@ -100,6 +100,12 @@ namespace WadeSpace
 		PLUS_OP,
 		TIMES_OP,
 		DIV_OP,
-		MOD_OP
+		MOD_OP, 
+		labeled_statement,
+	    compound_statement,
+	    expression_statement,
+	    selection_statement,
+	    iteration_statement,
+	    jump_statement 
 	} TokenType;
 }

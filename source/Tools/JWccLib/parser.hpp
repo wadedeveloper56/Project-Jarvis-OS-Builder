@@ -48,12 +48,6 @@
 #line 11 "ansic.y"
 
     #include "pch.h"
-    #include <iostream>
-    #include <string>
-    #include <vector>
-    #include <stdint.h>
-    #include <stdlib.h>
-    #include <optional>
     #include "Constant.h"
     #include "StorageClassSpecifier.h"
     #include "DeclarationSpecifiers.h"
@@ -99,7 +93,7 @@
         class Interpreter;
     }
 
-#line 103 "parser.hpp"
+#line 97 "parser.hpp"
 
 # include <cassert>
 # include <cstdlib> // std::abort
@@ -240,7 +234,7 @@
 
 #line 9 "ansic.y"
 namespace  WadeSpace  {
-#line 244 "parser.hpp"
+#line 238 "parser.hpp"
 
 
 
@@ -4929,7 +4923,7 @@ switch (yykind)
 
 #line 9 "ansic.y"
 } //  WadeSpace 
-#line 4933 "parser.hpp"
+#line 4927 "parser.hpp"
 
 
 

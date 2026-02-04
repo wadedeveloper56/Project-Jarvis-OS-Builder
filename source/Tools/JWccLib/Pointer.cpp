@@ -25,9 +25,12 @@ Pointer::Pointer() : name(nullopt), typeQualifierList(nullptr), level(0), pointe
 
 Pointer::~Pointer()
 {
-	for (TypeQualifier* ptr : *typeQualifierList)
+	if (typeQualifierList != NULL)
 	{
-		delete ptr;
+		for (TypeQualifier* ptr : *typeQualifierList)
+		{
+			delete ptr;
+		}
 	}
 	delete typeQualifierList;
 	delete pointer;

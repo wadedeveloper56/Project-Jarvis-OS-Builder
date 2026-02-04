@@ -18,7 +18,3 @@ var12:  resb 1
 _main:
 	ret
 
-	 global _function2
-_function2:
-	ret
-

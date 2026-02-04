@@ -108,14 +108,20 @@ BaseStatement::~BaseStatement()
 	delete es1;
 	delete es2;
 	delete statement2;
-	for (BaseStatement* obj : *statementList)
+	if (statementList != NULL)
 	{
-		delete obj;
+		for (BaseStatement* obj : *statementList)
+		{
+			delete obj;
+		}
 	}
 	delete statementList;
-	for (Declaration* obj : *declarationList)
+	if (declarationList != NULL)
 	{
-		delete obj;
+		for (Declaration* obj : *declarationList)
+		{
+			delete obj;
+		}
 	}
 	delete declarationList;
 }
