@@ -243,17 +243,17 @@ string
 	;
 
 generic_selection
-	: Y_GENERIC Y_LEFT_PAREN assignment_expression Y_COMMA generic_assoc_list Y_RIGHT_PAREN { $$ = createGenericSelection($3,$5); }
+	: Y_GENERIC Y_LEFT_PAREN assignment_expression Y_COMMA generic_assoc_list Y_RIGHT_PAREN { $$ = createGenericSelection($3,$5); zapToken($1); zapToken($2); zapToken($4); zapToken($6);}
 	;
 
 generic_assoc_list
 	: generic_association                            { $$ = createGenericAssocList($1,NULL); }
-	| generic_assoc_list Y_COMMA generic_association { $$ = createGenericAssocList($3,$1); }
+	| generic_assoc_list Y_COMMA generic_association { $$ = createGenericAssocList($3,$1); zapToken($2);}
 	;
 
 generic_association
-	: type_name Y_COLON assignment_expression { $$ = createGenericAssoc($1,$3,NULL); }
-	| Y_DEFAULT Y_COLON assignment_expression { $$ = createGenericAssoc(NULL,$3,$1); }
+	: type_name Y_COLON assignment_expression { $$ = createGenericAssoc($1,$3,NULL); zapToken($2); }
+	| Y_DEFAULT Y_COLON assignment_expression { $$ = createGenericAssoc(NULL,$3,$1); zapToken($2); }
 	;
 
 postfix_expression
