@@ -3121,13 +3121,13 @@ yyreduce:
 
   case 169: /* declarator: pointer direct_declarator  */
 #line 531 "c11ansi.y"
-                                    { (yyval.declarator) = NULL; }
+                                    { (yyval.declarator) = createDeclarator((yyvsp[-1].pointer),(yyvsp[0].directDeclarator)); }
 #line 3126 "c11ansi.c"
     break;
 
   case 170: /* declarator: direct_declarator  */
 #line 532 "c11ansi.y"
-                                    { (yyval.declarator) = NULL; }
+                                    { (yyval.declarator) = createDeclarator(NULL,(yyvsp[0].directDeclarator)); }
 #line 3132 "c11ansi.c"
     break;
 

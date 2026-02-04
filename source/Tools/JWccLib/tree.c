@@ -816,3 +816,11 @@ AlignmentSpecifierPtr createAlignmentSpecifiers(TypeNamePtr type, CTreePtr expre
 	return node;
 }
 
+DeclaratorPtr createDeclarator(PointerPtr ptr, DirectDeclaratorPtr dd)
+{
+	DeclaratorPtr node = AllocateMemory(sizeof(Declarator));
+	node->pointer = ptr;
+	node->directDeclarator = dd;
+	return node;
+}
+

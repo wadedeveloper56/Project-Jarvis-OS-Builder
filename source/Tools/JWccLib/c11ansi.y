@@ -527,9 +527,9 @@ alignment_specifier
 	| Y_ALIGNAS Y_LEFT_PAREN constant_expression Y_RIGHT_PAREN  { $$ = createAlignmentSpecifiers(NULL,$3); }
 	;
 
-declarator  //FIX ME
-	: pointer direct_declarator { $$ = NULL; }
-	| direct_declarator         { $$ = NULL; }
+declarator
+	: pointer direct_declarator { $$ = createDeclarator($1,$2); }
+	| direct_declarator         { $$ = createDeclarator(NULL,$1); }
 	;
 
 direct_declarator

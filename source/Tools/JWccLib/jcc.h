@@ -22,6 +22,7 @@ typedef struct _AbstractDeclarator AbstractDeclarator, * AbstractDeclaratorPtr, 
 typedef struct _Designation Designation, * DesignationPtr, ** DesignationPtrPtr;
 typedef struct _Statement Statement, * StatementPtr, ** StatementPtrPtr;
 typedef struct _AlignmentSpecifier AlignmentSpecifier, * AlignmentSpecifierPtr, ** AlignmentSpecifierPtrPtr;
+typedef struct _Pointer Pointer, * PointerPtr, ** PointerPtrPtr;
 
 typedef enum _LabelType
 {
@@ -300,7 +301,7 @@ typedef struct _DirectDeclarator
 typedef struct _Declarator
 {
 	DirectDeclaratorPtr directDeclarator;
-	LinkedListPtr pointerList; // list of TokenPtr (TypeQualifier)
+	PointerPtr pointer;
 } Declarator, * DeclaratorPtr, ** DeclaratorPtrPtr;
 
 typedef struct _SpecifierQualifierListNode
@@ -650,4 +651,5 @@ GenericSelectionPtr createGenericSelection(CTreePtr assignmentExpression, Linked
 InitDeclaratorPtr createInitDeclarator(DeclaratorPtr decl, CTreePtr initializer);
 LinkedListPtr createInitDeclaratorList(InitDeclaratorPtr block, LinkedListPtr list);
 AlignmentSpecifierPtr createAlignmentSpecifiers(TypeNamePtr type, CTreePtr expression);
+DeclaratorPtr createDeclarator(PointerPtr ptr, DirectDeclaratorPtr dd);
 
