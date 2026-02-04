@@ -255,6 +255,9 @@
 %type<FunctionDefinition *> function_definition
 %type<ExternalDeclaration *> external_declaration
 
+%nonassoc "then"
+%nonassoc ELSE
+
 %start translation_unit
 
 %%
@@ -767,7 +770,7 @@ expression_statement
     ;
 
 selection_statement
-    : IF OPAREN expression CPAREN statement                { $<BaseStatement *>$ = new SelectionStatement(IF,$3,$5); cout << "IF OPAREN expression CPAREN statement REDUCE to selection_statement" << endl; }
+    : IF OPAREN expression CPAREN statement  %prec "then"  { $<BaseStatement *>$ = new SelectionStatement(IF,$3,$5); cout << "IF OPAREN expression CPAREN statement REDUCE to selection_statement" << endl; }
     | IF OPAREN expression CPAREN statement ELSE statement { $<BaseStatement *>$ = new SelectionStatement(IF,$3,$5,$7); cout << "IF OPAREN expression CPAREN statement ELSE statement REDUCE to selection_statement" << endl; }
     | SWITCH OPAREN expression CPAREN statement            { $<BaseStatement *>$ = new SelectionStatement(SWITCH,$3,$5); cout << "SWITCH OPAREN expression CPAREN statement REDUCE to selection_statement" << endl; }
     ;
