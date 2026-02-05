@@ -14,12 +14,6 @@ namespace WadeSpace
 	public:
 		DeclarationSpecifiers() = default;
 		DeclarationSpecifiers(StorageClassSpecifier* const storageClassSpecifier, TypeSpecifier* const typeSpecifier, TypeQualifier* const typeQualifier, DeclarationSpecifiers* const declarationSpecifiers);
-		DeclarationSpecifiers(TypeQualifier* typeQualifier, DeclarationSpecifiers* declarationSpecifiers);
-		explicit DeclarationSpecifiers(TypeQualifier* typeQualifier);
-		DeclarationSpecifiers(TypeSpecifier* typeSpecifier, DeclarationSpecifiers* declarationSpecifiers);
-		explicit DeclarationSpecifiers(TypeSpecifier* typeSpecifier);
-		explicit DeclarationSpecifiers(StorageClassSpecifier* storageClassSpecifier);
-		DeclarationSpecifiers(StorageClassSpecifier* storageClassSpecifier, DeclarationSpecifiers* declarationSpecifiers);
 		virtual ~DeclarationSpecifiers();
 		[[nodiscard]] StorageClassSpecifier* getStorageClassSpecifier() const;
 		[[nodiscard]] TypeSpecifier* getTypeSpecifier() const;

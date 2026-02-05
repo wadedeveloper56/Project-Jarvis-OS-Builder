@@ -2449,37 +2449,37 @@ namespace  WadeSpace  {
 
   case 82: // declaration_specifiers: storage_class_specifier
 #line 418 "ansic.y"
-                                                      { yylhs.value.as< DeclarationSpecifiers * > () = new DeclarationSpecifiers(yystack_[0].value.as < StorageClassSpecifier * > ()); cout << "storage_class_specifier REDUCE to declaration_specifiers" << endl;}
+                                                      { yylhs.value.as < DeclarationSpecifiers * > () = new DeclarationSpecifiers(yystack_[0].value.as < StorageClassSpecifier * > (),nullptr,nullptr,nullptr); cout << "storage_class_specifier REDUCE to declaration_specifiers" << endl;}
 #line 2454 "parser.cpp"
     break;
 
   case 83: // declaration_specifiers: storage_class_specifier declaration_specifiers
 #line 419 "ansic.y"
-                                                      { yylhs.value.as< DeclarationSpecifiers * > () = new DeclarationSpecifiers(yystack_[1].value.as < StorageClassSpecifier * > (),yystack_[0].value.as < DeclarationSpecifiers * > ()); cout << "storage_class_specifier declaration_specifiers REDUCE to declaration_specifiers" << endl;}
+                                                      { yylhs.value.as < DeclarationSpecifiers * > () = new DeclarationSpecifiers(yystack_[1].value.as < StorageClassSpecifier * > (),nullptr,nullptr,yystack_[0].value.as < DeclarationSpecifiers * > ());      cout << "storage_class_specifier declaration_specifiers REDUCE to declaration_specifiers" << endl;}
 #line 2460 "parser.cpp"
     break;
 
   case 84: // declaration_specifiers: type_specifier
 #line 420 "ansic.y"
-                                                      { yylhs.value.as< DeclarationSpecifiers * > () = new DeclarationSpecifiers(yystack_[0].value.as < TypeSpecifier * > ()); cout << "type_specifier REDUCE to declaration_specifiers" << endl;}
+                                                      { yylhs.value.as < DeclarationSpecifiers * > () = new DeclarationSpecifiers(nullptr,yystack_[0].value.as < TypeSpecifier * > (),nullptr,nullptr); cout << "type_specifier REDUCE to declaration_specifiers" << endl;}
 #line 2466 "parser.cpp"
     break;
 
   case 85: // declaration_specifiers: type_specifier declaration_specifiers
 #line 421 "ansic.y"
-                                                      { yylhs.value.as< DeclarationSpecifiers * > () = new DeclarationSpecifiers(yystack_[1].value.as < TypeSpecifier * > (),yystack_[0].value.as < DeclarationSpecifiers * > ()); cout << "type_specifier declaration_specifiers REDUCE to declaration_specifiers" << endl;}
+                                                      { yylhs.value.as < DeclarationSpecifiers * > () = new DeclarationSpecifiers(nullptr,yystack_[1].value.as < TypeSpecifier * > (),nullptr,yystack_[0].value.as < DeclarationSpecifiers * > ());      cout << "type_specifier declaration_specifiers REDUCE to declaration_specifiers" << endl;}
 #line 2472 "parser.cpp"
     break;
 
   case 86: // declaration_specifiers: type_qualifier
 #line 422 "ansic.y"
-                                                      { yylhs.value.as< DeclarationSpecifiers * > () = new DeclarationSpecifiers(yystack_[0].value.as < TypeQualifier * > ()); cout << "type_qualifier REDUCE to declaration_specifiers" << endl;}
+                                                      { yylhs.value.as < DeclarationSpecifiers * > () = new DeclarationSpecifiers(nullptr,nullptr,yystack_[0].value.as < TypeQualifier * > (),nullptr); cout << "type_qualifier REDUCE to declaration_specifiers" << endl;}
 #line 2478 "parser.cpp"
     break;
 
   case 87: // declaration_specifiers: type_qualifier declaration_specifiers
 #line 423 "ansic.y"
-                                                      { yylhs.value.as< DeclarationSpecifiers * > () = new DeclarationSpecifiers(yystack_[1].value.as < TypeQualifier * > (),yystack_[0].value.as < DeclarationSpecifiers * > ()); cout << "type_qualifier declaration_specifiers REDUCE to declaration_specifiers" << endl;}
+                                                      { yylhs.value.as < DeclarationSpecifiers * > () = new DeclarationSpecifiers(nullptr,nullptr,yystack_[1].value.as < TypeQualifier * > (),yystack_[0].value.as < DeclarationSpecifiers * > ());      cout << "type_qualifier declaration_specifiers REDUCE to declaration_specifiers" << endl;}
 #line 2484 "parser.cpp"
     break;
 
