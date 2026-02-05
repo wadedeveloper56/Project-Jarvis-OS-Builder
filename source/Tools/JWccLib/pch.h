@@ -25,7 +25,6 @@
 #include <set>
 #include <unordered_map>
 
-
 #pragma warning(disable:4267)
 #pragma warning(disable:4244)
 #pragma warning(disable:4018)
@@ -38,5 +37,6 @@
 #pragma warning(disable:5287)
 #pragma warning(disable:4047)
 #pragma warning(disable:4065)
+#pragma warning(disable:4005)
 
 #endif //PCH_H

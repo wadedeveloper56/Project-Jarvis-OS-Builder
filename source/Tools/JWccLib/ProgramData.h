@@ -26,6 +26,8 @@ namespace WadeSpace
 		void test();
 
 	private:
+		void handleDeclaration(Declaration* declaration, vector<struct _VariableData*>* variableTable);
+		void handleFunction(FunctionDefinition* declaration, vector<struct _FunctionData*>* functionTable);
 		vector<ExternalDeclaration*> *programData;
 		BaseCodeGenerator* generator;
 	};

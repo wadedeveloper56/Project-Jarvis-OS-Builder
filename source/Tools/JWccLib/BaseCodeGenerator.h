@@ -11,14 +11,14 @@ using namespace std;
 
 namespace WadeSpace
 {
-	typedef struct
+	typedef struct _VariableData
 	{
 		string name;
 		TokenType type;
 		int size;
 	} VariableData;
 
-	typedef struct
+	typedef struct _FunctionData
 	{
 		string name;
 		TokenType type;

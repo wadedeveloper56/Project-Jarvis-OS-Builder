@@ -43,51 +43,62 @@ int ProgramData::getSize(TokenType type)
 	return 0;
 }
 
+void ProgramData::handleDeclaration(Declaration* declaration, vector<VariableData*>* variableTable)
+{
+	TokenType type = declaration->getDeclarationSpecifiers()->getTypeSpecifier()->getType();
+	for (InitDeclarator* initDecl : *declaration->getVectorInitDeclarator())
+	{
+		VariableData* data = new VariableData();
+		DirectDeclarator* dd = initDecl->getDeclarator()->getDirectDeclarator();
+		if (!((dd->getStr1() == OPAREN && dd->getStr2() == CPAREN) || (dd->getParameterTypeList() != nullptr)))
+		{
+			data->name = initDecl->getVariableName();
+			data->type = type;
+			data->size = getSize(type);
+			variableTable->push_back(data);
+		}
+	}
+}
+
+void ProgramData::handleFunction(FunctionDefinition* declaration, vector<FunctionData*>* functionTable)
+{
+	FunctionData* data = new FunctionData();
+	data->type = declaration->getDeclarationSpecifiers()->getTypeSpecifier()->getType();
+	data->name = declaration->getDeclarator()->getDirectDeclarator()->getDirectDeclarator()->getIdentifier().value();
+	ParameterTypeList* parameters = declaration->getDeclarator()->getDirectDeclarator()->getParameterTypeList();
+	if (parameters != nullptr && !parameters->getVectorParameterDeclaration()->empty())
+	{
+		data->parameters = new vector<VariableData*>();
+		for (ParameterDeclaration* parameterDeclaration : *parameters->getVectorParameterDeclaration())
+		{
+			VariableData* functionData = new VariableData();
+			functionData->name = parameterDeclaration->getDeclarator()->getDirectDeclarator()->getIdentifier().value();
+			TokenType type = parameterDeclaration->getDeclarationSpecifiers()->getTypeSpecifier()->getType();
+			functionData->type = type;
+			functionData->size = getSize(type);
+			data->parameters->push_back(functionData);
+		}
+	}
+	functionTable->push_back(data);
+}
+
 BaseCodeGenerator* ProgramData::processGlobalVariables()
 {
 	vector<VariableData*>* variableTable = new vector<VariableData*>();
 	vector<FunctionData*>* functionTable = new vector<FunctionData*>();
 
-	for (ExternalDeclaration* ptr : *programData)
+	if (programData != NULL)
 	{
-		if (ptr->isDeclaration())
+		for (ExternalDeclaration* ptr : *programData)
 		{
-			Declaration* declaration = ptr->getDeclaration();
-			TokenType type = declaration->getDeclarationSpecifiers()->getTypeSpecifier()->getType();
-			for (InitDeclarator* initDecl : *declaration->getVectorInitDeclarator())
+			if (ptr->isDeclaration())
 			{
-				VariableData* data = new VariableData();
-				DirectDeclarator* dd = initDecl->getDeclarator()->getDirectDeclarator();
-				if (!((dd->getStr1() == OPAREN && dd->getStr2() == CPAREN) || (dd->getParameterTypeList() != nullptr)))
-				{
-					data->name = initDecl->getVariableName();
-					data->type = type;
-					data->size = getSize(type);
-					variableTable->push_back(data);
-				}
+				handleDeclaration(ptr->getDeclaration(), variableTable);
 			}
-		}
-		else if (ptr->isFunction())
-		{
-			FunctionDefinition* declaration = ptr->getFunction();
-			FunctionData* data = new FunctionData();
-			data->type = declaration->getDeclarationSpecifiers()->getTypeSpecifier()->getType();
-			data->name = declaration->getDeclarator()->getDirectDeclarator()->getDirectDeclarator()->getIdentifier().value();
-			ParameterTypeList* parameters = declaration->getDeclarator()->getDirectDeclarator()->getParameterTypeList();
-			if (parameters != nullptr && !parameters->getVectorParameterDeclaration()->empty())
+			else if (ptr->isFunction())
 			{
-				data->parameters = new vector<VariableData*>();
-				for (ParameterDeclaration* parameterDeclaration : *parameters->getVectorParameterDeclaration())
-				{
-					VariableData* functionData = new VariableData();
-					functionData->name = parameterDeclaration->getDeclarator()->getDirectDeclarator()->getIdentifier().value();
-					TokenType type = parameterDeclaration->getDeclarationSpecifiers()->getTypeSpecifier()->getType();
-					functionData->type = type;
-					functionData->size = getSize(type);
-					data->parameters->push_back(functionData);
-				}
+				handleFunction(ptr->getFunction(), functionTable);
 			}
-			functionTable->push_back(data);
 		}
 	}
 	generator = new MasmCodeGenerator(variableTable, functionTable);
