@@ -10,7 +10,7 @@ _Nodedata::_Nodedata() :type(NT_NONE), str(""), const1(nullptr), op(0), exp(null
 _Nodedata::~_Nodedata() {}
 
 
-ExpressionNode::ExpressionNode(string identifier, Constant* constant) :left(nullptr), op(0), right(nullptr)
+Expression::Expression(string identifier, Constant* constant) :left(nullptr), op(0), right(nullptr)
 {
 	data = new NodeData;
 	if (identifier != "")
@@ -25,7 +25,7 @@ ExpressionNode::ExpressionNode(string identifier, Constant* constant) :left(null
 	}
 }
 
-ExpressionNode::ExpressionNode(TypeName* typeName, ExpressionNode* exp) :left(nullptr), op(0), right(nullptr)
+Expression::Expression(TypeName* typeName, Expression* exp) :left(nullptr), op(0), right(nullptr)
 {
 	data = new NodeData;
 	data->type = CAST;
@@ -33,7 +33,7 @@ ExpressionNode::ExpressionNode(TypeName* typeName, ExpressionNode* exp) :left(nu
 	data->exp = exp;
 }
 
-ExpressionNode::ExpressionNode(ExpressionNode* exp, ExpressionNode* exp2, ExpressionNode* exp3) :left(nullptr), op(0), right(nullptr)
+Expression::Expression(Expression* exp, Expression* exp2, Expression* exp3) :left(nullptr), op(0), right(nullptr)
 {
 	data = new NodeData;
 	data->type = CONDITIONAL;
@@ -42,7 +42,7 @@ ExpressionNode::ExpressionNode(ExpressionNode* exp, ExpressionNode* exp2, Expres
 	data->exp3 = exp3;
 }
 
-ExpressionNode::ExpressionNode(ExpressionNode* exp, int op, const string& identifier) :left(nullptr), op(0), right(nullptr)
+Expression::Expression(Expression* exp, int op, const string& identifier) :left(nullptr), op(0), right(nullptr)
 {
 	data = new NodeData;
 	data->type = IDENTIFIER_TYPE;
@@ -51,7 +51,7 @@ ExpressionNode::ExpressionNode(ExpressionNode* exp, int op, const string& identi
 	data->str = identifier;
 }
 
-ExpressionNode::ExpressionNode(ExpressionNode* exp, vector<ExpressionNode*>* vectorAssignmentExpression) :left(nullptr), op(0), right(nullptr)
+Expression::Expression(Expression* exp, vector<Expression*>* vectorAssignmentExpression) :left(nullptr), op(0), right(nullptr)
 {
 	data = new NodeData;
 	data->type = ARGUMENT_LIST;
@@ -60,7 +60,7 @@ ExpressionNode::ExpressionNode(ExpressionNode* exp, vector<ExpressionNode*>* vec
 	data->vectorAssignmentExpression = vectorAssignmentExpression;
 }
 
-ExpressionNode::ExpressionNode(TypeName* typeName, int op) :left(nullptr), op(0), right(nullptr)
+Expression::Expression(TypeName* typeName, int op) :left(nullptr), op(0), right(nullptr)
 {
 	data = new NodeData;
 	data->type = SIZEOF_TYPE;
@@ -68,7 +68,7 @@ ExpressionNode::ExpressionNode(TypeName* typeName, int op) :left(nullptr), op(0)
 	data->op = op;
 }
 
-ExpressionNode::ExpressionNode(TypeName* typeName, vector<Initializer*>* vectorInitializer) :data(nullptr), left(nullptr), op(0), right(nullptr)
+Expression::Expression(TypeName* typeName, vector<Initializer*>* vectorInitializer) :data(nullptr), left(nullptr), op(0), right(nullptr)
 {
 	data = new NodeData;
 	data->type = ARGUMENT_LIST;
@@ -76,17 +76,17 @@ ExpressionNode::ExpressionNode(TypeName* typeName, vector<Initializer*>* vectorI
 	data->vectorInitializer = vectorInitializer;
 }
 
-ExpressionNode::ExpressionNode(ExpressionNode* left, int op, ExpressionNode* right) :data(nullptr), left(left), op(op), right(right)
+Expression::Expression(Expression* left, int op, Expression* right) :data(nullptr), left(left), op(op), right(right)
 {
 
 }
 
-ExpressionNode::ExpressionNode() :data(nullptr), left(nullptr), op(0), right(nullptr)
+Expression::Expression() :data(nullptr), left(nullptr), op(0), right(nullptr)
 {
 
 }
 
-ExpressionNode::~ExpressionNode()
+Expression::~Expression()
 {
 	delete data;
 }

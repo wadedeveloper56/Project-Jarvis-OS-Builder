@@ -4,7 +4,7 @@
 
 using namespace WadeSpace;
 
-Initializer::Initializer(ExpressionNode* assignmentExpression) : assignmentExpression(assignmentExpression), initializerList(nullptr)
+Initializer::Initializer(Expression* assignmentExpression) : assignmentExpression(assignmentExpression), initializerList(nullptr)
 {
 }
 
@@ -26,7 +26,7 @@ Initializer::~Initializer()
 	delete initializerList;
 }
 
-ExpressionNode* Initializer::getAssignmentExpression() const
+Expression* Initializer::getAssignmentExpression() const
 {
 	return assignmentExpression;
 }

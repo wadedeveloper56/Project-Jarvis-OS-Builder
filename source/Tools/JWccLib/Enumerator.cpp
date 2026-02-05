@@ -4,7 +4,7 @@
 
 using namespace WadeSpace;
 
-Enumerator::Enumerator(string&  operatorStr, ExpressionNode* constantExpression) : operatorStr(operatorStr), constantExpression(constantExpression)
+Enumerator::Enumerator(string&  operatorStr, Expression* constantExpression) : operatorStr(operatorStr), constantExpression(constantExpression)
 {
 }
 
@@ -21,7 +21,7 @@ Enumerator::~Enumerator()
 	delete constantExpression;
 }
 
-ExpressionNode* Enumerator::getConstantExpression() const
+Expression* Enumerator::getConstantExpression() const
 {
 	return constantExpression;
 }

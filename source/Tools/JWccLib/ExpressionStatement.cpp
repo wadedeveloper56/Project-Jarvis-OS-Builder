@@ -5,7 +5,7 @@
 using namespace WadeSpace;
 using namespace std;
 
-ExpressionStatement::ExpressionStatement(ExpressionNode* exp) : BaseStatement(NONE, exp)
+ExpressionStatement::ExpressionStatement(Expression* exp) : BaseStatement(NONE, exp)
 {
 }
 

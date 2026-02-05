@@ -11,29 +11,29 @@ using namespace std;
 
 namespace WadeSpace
 {
-	class ExpressionNode;
+	class Expression;
 
 	class BaseStatement
 	{
 	public:
 		BaseStatement(TokenType op);
 		BaseStatement(TokenType op, string& identifier);
-		BaseStatement(TokenType op, ExpressionNode* exp);
-		BaseStatement(TokenType op, ExpressionNode* exp, BaseStatement* statement);
-		BaseStatement(TokenType op, ExpressionNode* exp, BaseStatement* ifStatement, BaseStatement* elseStatement);
+		BaseStatement(TokenType op, Expression* exp);
+		BaseStatement(TokenType op, Expression* exp, BaseStatement* statement);
+		BaseStatement(TokenType op, Expression* exp, BaseStatement* ifStatement, BaseStatement* elseStatement);
 		BaseStatement(TokenType op, BaseStatement* es1, BaseStatement* es2, BaseStatement* statement);
-		BaseStatement(TokenType op, BaseStatement* es1, BaseStatement* es2, ExpressionNode* exp, BaseStatement* statement);
+		BaseStatement(TokenType op, BaseStatement* es1, BaseStatement* es2, Expression* exp, BaseStatement* statement);
 		BaseStatement(vector<BaseStatement*>* statementList);
 		BaseStatement(vector<Declaration*>* declarationList);
 		BaseStatement(vector<BaseStatement*>* statementList, vector<Declaration*>* declarationList);
 		BaseStatement(string&  identifier, BaseStatement* statement);
-		//BaseStatement(TokenType op, ExpressionNode* exp, BaseStatement* statement);
+		//BaseStatement(TokenType op, Expression* exp, BaseStatement* statement);
 		BaseStatement(TokenType op, BaseStatement* statement);
 		BaseStatement();
 		virtual ~BaseStatement();
 		optional<string> getIdentifier() const;
-		ExpressionNode* getExp() const;
-		ExpressionNode* getContExp() const;
+		Expression* getExp() const;
+		Expression* getContExp() const;
 		BaseStatement* getStatement() const;
 		BaseStatement* getEs1() const;
 		BaseStatement* getEs2() const;
@@ -44,8 +44,8 @@ namespace WadeSpace
 	protected:
 		TokenType op;
 		optional<string> identifier;
-		ExpressionNode* exp;
-		ExpressionNode* contExp;
+		Expression* exp;
+		Expression* contExp;
 		BaseStatement* statement;
 		BaseStatement* es1;
 		BaseStatement* es2;

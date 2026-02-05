@@ -9,20 +9,20 @@ using namespace std;
 
 namespace WadeSpace
 {
-	class ExpressionNode;
+	class Expression;
 
 	class Enumerator
 	{
 	public:
-		Enumerator(string&  operatorStr, ExpressionNode* constantExpression);
+		Enumerator(string&  operatorStr, Expression* constantExpression);
 		Enumerator(string&  operatorStr);
 		Enumerator();
 		virtual ~Enumerator();
 		optional<string> getOperatorStr() const;
-		ExpressionNode* getConstantExpression() const;
+		Expression* getConstantExpression() const;
 
 	private:
 		optional<string> operatorStr;
-		ExpressionNode* constantExpression;
+		Expression* constantExpression;
 	};
 }

@@ -14,7 +14,7 @@ declarationList(nullptr)
 {
 }
 
-BaseStatement::BaseStatement(TokenType op, ExpressionNode* exp, BaseStatement* statement) : op(op), identifier(nullopt),
+BaseStatement::BaseStatement(TokenType op, Expression* exp, BaseStatement* statement) : op(op), identifier(nullopt),
 contExp(exp), exp(nullptr), statement(statement), es1(nullptr), es2(nullptr), statement2(nullptr),
 statementList(nullptr), declarationList(nullptr)
 {
@@ -49,7 +49,7 @@ BaseStatement::BaseStatement(vector<BaseStatement*>* statementList, vector<Decla
 {
 }
 
-BaseStatement::BaseStatement(TokenType op, BaseStatement* es1, BaseStatement* es2, ExpressionNode* exp,
+BaseStatement::BaseStatement(TokenType op, BaseStatement* es1, BaseStatement* es2, Expression* exp,
 	BaseStatement* statement) : op(op), identifier(nullopt), contExp(nullptr), exp(exp),
 	statement(statement), es1(es1), es2(es2), statement2(nullptr),
 	statementList(nullptr), declarationList(nullptr)
@@ -62,19 +62,19 @@ BaseStatement::BaseStatement(TokenType op, BaseStatement* es1, BaseStatement* es
 {
 }
 
-BaseStatement::BaseStatement(TokenType op, ExpressionNode* exp, BaseStatement* ifStatement, BaseStatement* elseStatement) :
+BaseStatement::BaseStatement(TokenType op, Expression* exp, BaseStatement* ifStatement, BaseStatement* elseStatement) :
 	op(op), identifier(nullopt), contExp(nullptr), exp(exp), statement(ifStatement), es1(nullptr), es2(nullptr),
 	statement2(elseStatement), statementList(nullptr), declarationList(nullptr)
 {
 }
 /*
-BaseStatement::BaseStatement(TokenType op, ExpressionNode* exp, BaseStatement* statement) : op(op), identifier(nullopt),
+BaseStatement::BaseStatement(TokenType op, Expression* exp, BaseStatement* statement) : op(op), identifier(nullopt),
 contExp(nullptr), exp(exp), statement(statement), es1(nullptr), es2(nullptr), statement2(nullptr),
 statementList(nullptr), declarationList(nullptr)
 {
 }
 */
-BaseStatement::BaseStatement(TokenType op, ExpressionNode* exp) : op(op), identifier(nullopt), contExp(nullptr), exp(exp),
+BaseStatement::BaseStatement(TokenType op, Expression* exp) : op(op), identifier(nullopt), contExp(nullptr), exp(exp),
 statement(nullptr), es1(nullptr), es2(nullptr),
 statement2(nullptr), statementList(nullptr),
 declarationList(nullptr)
@@ -131,12 +131,12 @@ optional<string> BaseStatement::getIdentifier() const
 	return identifier;
 }
 
-ExpressionNode* BaseStatement::getExp() const
+Expression* BaseStatement::getExp() const
 {
 	return exp;
 }
 
-ExpressionNode* BaseStatement::getContExp() const
+Expression* BaseStatement::getContExp() const
 {
 	return contExp;
 }

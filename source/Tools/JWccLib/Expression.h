@@ -9,7 +9,7 @@ namespace WadeSpace
 
 	typedef enum _NodeType { NT_NONE, SIZEOF_TYPE, INITIALZER_LIST, ARGUMENT_LIST, IDENTIFIER_TYPE, CONDITIONAL, CAST, STRING, CONSTANT } NodeType;
 
-	class ExpressionNode;
+	class Expression;
 	class AssignmentExpression;
 	class Initializer;
 	class TypeName;
@@ -20,33 +20,33 @@ namespace WadeSpace
 		string str;
 		Constant* const1;
 		int op;
-		ExpressionNode* exp;
-		ExpressionNode* exp2;
-		ExpressionNode* exp3;
-		vector<ExpressionNode*>* vectorAssignmentExpression;
+		Expression* exp;
+		Expression* exp2;
+		Expression* exp3;
+		vector<Expression*>* vectorAssignmentExpression;
 		vector<Initializer*>* vectorInitializer;
 		TypeName* typeName;
 		_Nodedata();
 		~_Nodedata();
 	}NodeData, * NodeDataPtr;
 
-	class ExpressionNode
+	class Expression
 	{
 	public:
-		ExpressionNode(string identifier, Constant* constant);
-		ExpressionNode(TypeName* typeName, ExpressionNode* exp);
-		ExpressionNode(TypeName* typeName, int op);
-		ExpressionNode(ExpressionNode* left, int op, ExpressionNode* right);
-		ExpressionNode(ExpressionNode* exp, int op, const string& identifier);
-		ExpressionNode(ExpressionNode* exp, ExpressionNode* exp2, ExpressionNode* exp3);
-		ExpressionNode(ExpressionNode* exp, vector<ExpressionNode*>* vectorAssignmentExpression);
-		ExpressionNode(TypeName* typeName, vector<Initializer*>* vectorInitializer);
-		ExpressionNode();
-		~ExpressionNode();
+		Expression(string identifier, Constant* constant);
+		Expression(TypeName* typeName, Expression* exp);
+		Expression(TypeName* typeName, int op);
+		Expression(Expression* left, int op, Expression* right);
+		Expression(Expression* exp, int op, const string& identifier);
+		Expression(Expression* exp, Expression* exp2, Expression* exp3);
+		Expression(Expression* exp, vector<Expression*>* vectorAssignmentExpression);
+		Expression(TypeName* typeName, vector<Initializer*>* vectorInitializer);
+		Expression();
+		~Expression();
 	private:
 		NodeDataPtr data;
-		ExpressionNode* left;
+		Expression* left;
 		int op;
-		ExpressionNode* right;
+		Expression* right;
 	};
 }

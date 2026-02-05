@@ -11,17 +11,17 @@ namespace WadeSpace
 	class AbstractDeclarator;
 	class ConstantExpression;
 	class ParameterTypeList;
-	class ExpressionNode;
+	class Expression;
 
 	class DirectAbstractDeclarator
 	{
 	public:
 		DirectAbstractDeclarator(DirectAbstractDeclarator* directAbstractDeclarator, ParameterTypeList* parameterTypeList, TokenType type);
 		DirectAbstractDeclarator(ParameterTypeList* parameterTypeList, TokenType type);
-		DirectAbstractDeclarator(DirectAbstractDeclarator* directAbstractDeclarator, ExpressionNode* constantExpression, TokenType type);
+		DirectAbstractDeclarator(DirectAbstractDeclarator* directAbstractDeclarator, Expression* constantExpression, TokenType type);
 		DirectAbstractDeclarator(DirectAbstractDeclarator* directAbstractDeclarator, TokenType type);
 		DirectAbstractDeclarator(AbstractDeclarator* abstractDeclarator);
-		DirectAbstractDeclarator(ExpressionNode* constantExpression);
+		DirectAbstractDeclarator(Expression* constantExpression);
 		DirectAbstractDeclarator(TokenType type);
 		DirectAbstractDeclarator();
 		virtual ~DirectAbstractDeclarator();
@@ -30,7 +30,7 @@ namespace WadeSpace
 		ParameterTypeList* parameterTypeList;
 		DirectAbstractDeclarator* directAbstractDeclarator;
 		AbstractDeclarator* abstractDeclarator;
-		ExpressionNode* constantExpression;
+		Expression* constantExpression;
 		TokenType type;
 	};
 }

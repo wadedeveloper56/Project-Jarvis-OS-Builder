@@ -185,25 +185,25 @@
 %token <int> MOD_OP "%"
 
 %type<Constant *> constant
-%type<vector<ExpressionNode *> *> argument_expression_list
-%type<ExpressionNode *> primary_expression
-%type<ExpressionNode *> expression
-%type<ExpressionNode *> postfix_expression
-%type<ExpressionNode *> unary_expression
-%type<ExpressionNode *> cast_expression
-%type<ExpressionNode *> multiplicative_expression
-%type<ExpressionNode *> additive_expression
-%type<ExpressionNode *> shift_expression
-%type<ExpressionNode *> relational_expression
-%type<ExpressionNode *> equality_expression
-%type<ExpressionNode *> and_expression
-%type<ExpressionNode *> exclusive_or_expression
-%type<ExpressionNode *> inclusive_or_expression
-%type<ExpressionNode *> logical_and_expression
-%type<ExpressionNode *> logical_or_expression
-%type<ExpressionNode *> conditional_expression
-%type<ExpressionNode *> assignment_expression
-%type<ExpressionNode *> constant_expression
+%type<vector<Expression *> *> argument_expression_list
+%type<Expression *> primary_expression
+%type<Expression *> expression
+%type<Expression *> postfix_expression
+%type<Expression *> unary_expression
+%type<Expression *> cast_expression
+%type<Expression *> multiplicative_expression
+%type<Expression *> additive_expression
+%type<Expression *> shift_expression
+%type<Expression *> relational_expression
+%type<Expression *> equality_expression
+%type<Expression *> and_expression
+%type<Expression *> exclusive_or_expression
+%type<Expression *> inclusive_or_expression
+%type<Expression *> logical_and_expression
+%type<Expression *> logical_or_expression
+%type<Expression *> conditional_expression
+%type<Expression *> assignment_expression
+%type<Expression *> constant_expression
 %type<int> unary_operator
 %type<int> assignment_operator
 %type<StorageClassSpecifier *> storage_class_specifier
@@ -268,27 +268,27 @@ constant
 
 postfix_expression
     : primary_expression                                           { $$ = $1;                                     cout << "primary_expression REDUCE to postfix_expression" << endl; }
-    | postfix_expression OBRACE expression CBRACE                  { $$ = new ExpressionNode($1,$2,nullptr);      cout << "postfix_expression OBRACE expression CBRACE REDUCE to postfix_expression" << endl; }
-    | postfix_expression OPAREN CPAREN                             { $$ = new ExpressionNode($1,nullptr,nullptr); cout << "postfix_expression OPAREN CPAREN REDUCE to postfix_expression" << endl; }
-    | postfix_expression OPAREN argument_expression_list CPAREN    { $$ = new ExpressionNode($1,$3);              cout << "postfix_expression OPAREN argument_expression_list CPAREN REDUCE to postfix_expression" << endl; }
-    | postfix_expression PERIOD IDENTIFIER                         { $$ = new ExpressionNode($1,$2,$3);           cout << "postfix_expression PERIOD_OP IDENTIFIER REDUCE to postfix_expression" << endl; }
-    | postfix_expression PTR_OP IDENTIFIER                         { $$ = new ExpressionNode($1,$2,$3);           cout << "postfix_expression PTR_OP IDENTIFIER REDUCE to postfix_expression" << endl; }
-    | postfix_expression INC_OP                                    { $$ = new ExpressionNode($1,$2,"");           cout << "postfix_expression INC_OP REDUCE to postfix_expression" << endl; }
-    | postfix_expression DEC_OP                                    { $$ = new ExpressionNode($1,$2,"");           cout << "postfix_expression DEC_OP REDUCE to postfix_expression" << endl; }
-    | OPAREN type_name CPAREN OCURLY initializer_list CCURLY       { $$ = new ExpressionNode($2,$5);              cout << "OPAREN type_name CPAREN_OP OCURLY_OP initializer_list CCURLY REDUCE to postfix_expression" << endl; }
-    | OPAREN type_name CPAREN OCURLY initializer_list COMMA CCURLY { $$ = new ExpressionNode($2,$5);              cout << "OPAREN type_name CPAREN_OP OCURLY_OP initializer_list COMMA CCURLY REDUCE to postfix_expression" << endl; }
+    | postfix_expression OBRACE expression CBRACE                  { $$ = new Expression($1,$2,nullptr);      cout << "postfix_expression OBRACE expression CBRACE REDUCE to postfix_expression" << endl; }
+    | postfix_expression OPAREN CPAREN                             { $$ = new Expression($1,nullptr,nullptr); cout << "postfix_expression OPAREN CPAREN REDUCE to postfix_expression" << endl; }
+    | postfix_expression OPAREN argument_expression_list CPAREN    { $$ = new Expression($1,$3);              cout << "postfix_expression OPAREN argument_expression_list CPAREN REDUCE to postfix_expression" << endl; }
+    | postfix_expression PERIOD IDENTIFIER                         { $$ = new Expression($1,$2,$3);           cout << "postfix_expression PERIOD_OP IDENTIFIER REDUCE to postfix_expression" << endl; }
+    | postfix_expression PTR_OP IDENTIFIER                         { $$ = new Expression($1,$2,$3);           cout << "postfix_expression PTR_OP IDENTIFIER REDUCE to postfix_expression" << endl; }
+    | postfix_expression INC_OP                                    { $$ = new Expression($1,$2,"");           cout << "postfix_expression INC_OP REDUCE to postfix_expression" << endl; }
+    | postfix_expression DEC_OP                                    { $$ = new Expression($1,$2,"");           cout << "postfix_expression DEC_OP REDUCE to postfix_expression" << endl; }
+    | OPAREN type_name CPAREN OCURLY initializer_list CCURLY       { $$ = new Expression($2,$5);              cout << "OPAREN type_name CPAREN_OP OCURLY_OP initializer_list CCURLY REDUCE to postfix_expression" << endl; }
+    | OPAREN type_name CPAREN OCURLY initializer_list COMMA CCURLY { $$ = new Expression($2,$5);              cout << "OPAREN type_name CPAREN_OP OCURLY_OP initializer_list COMMA CCURLY REDUCE to postfix_expression" << endl; }
 
 
 argument_expression_list
     : assignment_expression {
-                             ExpressionNode *exp = $1;
-                             $$ = new std::vector<ExpressionNode *>();
+                             Expression *exp = $1;
+                             $$ = new std::vector<Expression *>();
                              $$->push_back(exp);
                              cout << "assignment_expression REDUCE argument_expression_list" << endl;
                             }
     | argument_expression_list COMMA assignment_expression {
-            ExpressionNode* value1 = $3;
-            vector<ExpressionNode*>* value2 = $1;
+            Expression* value1 = $3;
+            vector<Expression*>* value2 = $1;
             value2->push_back(value1);
             $$ = value2;
             cout << "argument_expression_list COMMA assignment_expression REDUCE argument_expression_list" << endl;
@@ -296,12 +296,12 @@ argument_expression_list
     ;
 
 unary_expression
-    : postfix_expression             { $<ExpressionNode *>$ = $1; cout << "postfix_expression REDUCE unary_expression" << endl;}
-    | INC_OP unary_expression        { $<ExpressionNode *>$ = new ExpressionNode($2,$1,""); cout << "INC_OP unary_expression REDUCE unary_expression" << endl;}
-    | DEC_OP unary_expression        { $<ExpressionNode *>$ = new ExpressionNode($2,$1,""); cout << "DEC_OP unary_expression REDUCE unary_expression" << endl;}
-    | unary_operator cast_expression { $<ExpressionNode *>$ = new ExpressionNode($2,$1,""); cout << "unary_operator cast_expression REDUCE unary_expression" << endl;}
-    | SIZEOF unary_expression        { $<ExpressionNode *>$ = new ExpressionNode($2,$1,""); cout << "SIZEOF unary_expression REDUCE unary_expression" << endl;}
-    | SIZEOF OPAREN type_name CPAREN { $<ExpressionNode *>$ = new ExpressionNode($3,$1); cout << "SIZEOF OPAREN type_name CPAREN REDUCE unary_expression" << endl;}
+    : postfix_expression             { $<Expression *>$ = $1; cout << "postfix_expression REDUCE unary_expression" << endl;}
+    | INC_OP unary_expression        { $<Expression *>$ = new Expression($2,$1,""); cout << "INC_OP unary_expression REDUCE unary_expression" << endl;}
+    | DEC_OP unary_expression        { $<Expression *>$ = new Expression($2,$1,""); cout << "DEC_OP unary_expression REDUCE unary_expression" << endl;}
+    | unary_operator cast_expression { $<Expression *>$ = new Expression($2,$1,""); cout << "unary_operator cast_expression REDUCE unary_expression" << endl;}
+    | SIZEOF unary_expression        { $<Expression *>$ = new Expression($2,$1,""); cout << "SIZEOF unary_expression REDUCE unary_expression" << endl;}
+    | SIZEOF OPAREN type_name CPAREN { $<Expression *>$ = new Expression($3,$1); cout << "SIZEOF OPAREN type_name CPAREN REDUCE unary_expression" << endl;}
     ;
 
 unary_operator
@@ -314,76 +314,76 @@ unary_operator
     ;
 
 cast_expression
-    : unary_expression                         { $<ExpressionNode *>$ = $1;  cout << "unary_expression REDUCE to cast_expression" << endl;}
-    | OPAREN type_name CPAREN cast_expression  { $<ExpressionNode *>$ = new ExpressionNode($2,$4);  cout << "unary_expression REDUCE to cast_expression" << endl;}
+    : unary_expression                         { $<Expression *>$ = $1;  cout << "unary_expression REDUCE to cast_expression" << endl;}
+    | OPAREN type_name CPAREN cast_expression  { $<Expression *>$ = new Expression($2,$4);  cout << "unary_expression REDUCE to cast_expression" << endl;}
     ;
 
 multiplicative_expression
-    : cast_expression                                    { $<ExpressionNode *>$ = $1;  cout << "cast_expression REDUCE to multiplicative_expression" << endl;}
-    | multiplicative_expression TIMES_OP cast_expression { $<ExpressionNode *>$ = new ExpressionNode($1,$2,$3); cout << "multiplicative_expression TIMES_OP cast_expression REDUCE to multiplicative_expression" << endl;}
-    | multiplicative_expression DIV_OP cast_expression   { $<ExpressionNode *>$ = new ExpressionNode($1,$2,$3);cout << "multiplicative_expression DIV_OP cast_expression REDUCE to multiplicative_expression" << endl;}
-    | multiplicative_expression MOD_OP cast_expression   { $<ExpressionNode *>$ = new ExpressionNode($1,$2,$3); cout << "multiplicative_expression MOD_OP cast_expression REDUCE to multiplicative_expression" << endl;}
+    : cast_expression                                    { $<Expression *>$ = $1;  cout << "cast_expression REDUCE to multiplicative_expression" << endl;}
+    | multiplicative_expression TIMES_OP cast_expression { $<Expression *>$ = new Expression($1,$2,$3); cout << "multiplicative_expression TIMES_OP cast_expression REDUCE to multiplicative_expression" << endl;}
+    | multiplicative_expression DIV_OP cast_expression   { $<Expression *>$ = new Expression($1,$2,$3);cout << "multiplicative_expression DIV_OP cast_expression REDUCE to multiplicative_expression" << endl;}
+    | multiplicative_expression MOD_OP cast_expression   { $<Expression *>$ = new Expression($1,$2,$3); cout << "multiplicative_expression MOD_OP cast_expression REDUCE to multiplicative_expression" << endl;}
     ;
 
 additive_expression
-    : multiplicative_expression                               { $<ExpressionNode *>$ = $1;  cout << "multiplicative_expression REDUCE to additive_expression" << endl;}
-    | additive_expression PLUS_OP multiplicative_expression   { $<ExpressionNode *>$ = new ExpressionNode($1,$2,$3); cout << "additive_expression REDUCE to multiplicative_expression" << endl;}
-    | additive_expression MINUS_OP multiplicative_expression  { $<ExpressionNode *>$ = new ExpressionNode($1,$2,$3); cout << "additive_expression REDUCE to multiplicative_expression" << endl;}
+    : multiplicative_expression                               { $<Expression *>$ = $1;  cout << "multiplicative_expression REDUCE to additive_expression" << endl;}
+    | additive_expression PLUS_OP multiplicative_expression   { $<Expression *>$ = new Expression($1,$2,$3); cout << "additive_expression REDUCE to multiplicative_expression" << endl;}
+    | additive_expression MINUS_OP multiplicative_expression  { $<Expression *>$ = new Expression($1,$2,$3); cout << "additive_expression REDUCE to multiplicative_expression" << endl;}
     ;
 
 shift_expression
-    : additive_expression                           { $<ExpressionNode *>$ = $1;  cout << "additive_expression REDUCE to shift_expression" << endl;}
-    | shift_expression LEFT_OP additive_expression  { $<ExpressionNode *>$ = new ExpressionNode($1,$2,$3); cout << "shift_expression LEFT_OP additive_expression REDUCE to shift_expression" << endl;}
-    | shift_expression RIGHT_OP additive_expression { $<ExpressionNode *>$ = new ExpressionNode($1,$2,$3); cout << "shift_expression RIGHT_OP additive_expression REDUCE to shift_expression" << endl;}
+    : additive_expression                           { $<Expression *>$ = $1;  cout << "additive_expression REDUCE to shift_expression" << endl;}
+    | shift_expression LEFT_OP additive_expression  { $<Expression *>$ = new Expression($1,$2,$3); cout << "shift_expression LEFT_OP additive_expression REDUCE to shift_expression" << endl;}
+    | shift_expression RIGHT_OP additive_expression { $<Expression *>$ = new Expression($1,$2,$3); cout << "shift_expression RIGHT_OP additive_expression REDUCE to shift_expression" << endl;}
     ;
 
 relational_expression
-    : shift_expression                                       { $<ExpressionNode *>$ = $1;  cout << "shift_expression REDUCE to relational_expression" << endl;}
-    | relational_expression LESS shift_expression            { $<ExpressionNode *>$ = new ExpressionNode($1,$2,$3); cout << "relational_expression LESS shift_expression REDUCE to shift_expression" << endl;}
-    | relational_expression GREATER shift_expression         { $<ExpressionNode *>$ = new ExpressionNode($1,$2,$3); cout << "relational_expression GREATER shift_expression REDUCE to shift_expression" << endl;}
-    | relational_expression LESS_EQUAL shift_expression      { $<ExpressionNode *>$ = new ExpressionNode($1,$2,$3); cout << "relational_expression LESS_EQUAL shift_expression REDUCE to shift_expression" << endl;}
-    | relational_expression GREATER_EQUAL shift_expression   { $<ExpressionNode *>$ = new ExpressionNode($1,$2,$3); cout << "relational_expression GREATER_EQUAL shift_expression REDUCE to shift_expression" << endl;}
+    : shift_expression                                       { $<Expression *>$ = $1;  cout << "shift_expression REDUCE to relational_expression" << endl;}
+    | relational_expression LESS shift_expression            { $<Expression *>$ = new Expression($1,$2,$3); cout << "relational_expression LESS shift_expression REDUCE to shift_expression" << endl;}
+    | relational_expression GREATER shift_expression         { $<Expression *>$ = new Expression($1,$2,$3); cout << "relational_expression GREATER shift_expression REDUCE to shift_expression" << endl;}
+    | relational_expression LESS_EQUAL shift_expression      { $<Expression *>$ = new Expression($1,$2,$3); cout << "relational_expression LESS_EQUAL shift_expression REDUCE to shift_expression" << endl;}
+    | relational_expression GREATER_EQUAL shift_expression   { $<Expression *>$ = new Expression($1,$2,$3); cout << "relational_expression GREATER_EQUAL shift_expression REDUCE to shift_expression" << endl;}
     ;
 
 equality_expression
-    : relational_expression                                  { $<ExpressionNode *>$ = $1;  cout << "relational_expression REDUCE to equality_expression" << endl;}
-    | equality_expression EQUAL_EQUAL relational_expression  { $<ExpressionNode *>$ = new ExpressionNode($1,$2,$3); cout << "equality_expression EQUAL_EQUAL relational_expression REDUCE to equality_expression" << endl;}
-    | equality_expression NOT_EQUAL relational_expression    { $<ExpressionNode *>$ = new ExpressionNode($1,$2,$3); cout << "equality_expression NOT_EQUAL relational_expression REDUCE to equality_expression" << endl;}
+    : relational_expression                                  { $<Expression *>$ = $1;  cout << "relational_expression REDUCE to equality_expression" << endl;}
+    | equality_expression EQUAL_EQUAL relational_expression  { $<Expression *>$ = new Expression($1,$2,$3); cout << "equality_expression EQUAL_EQUAL relational_expression REDUCE to equality_expression" << endl;}
+    | equality_expression NOT_EQUAL relational_expression    { $<Expression *>$ = new Expression($1,$2,$3); cout << "equality_expression NOT_EQUAL relational_expression REDUCE to equality_expression" << endl;}
     ;
 
 and_expression
-    : equality_expression                         { $<ExpressionNode *>$ = $1;  cout << "equality_expression REDUCE to and_expression" << endl;}
-    | and_expression BIT_AND equality_expression  { $<ExpressionNode *>$ = new ExpressionNode($1,$2,$3); cout << "and_expression BIT_AND equality_expression REDUCE to and_expression" << endl;}
+    : equality_expression                         { $<Expression *>$ = $1;  cout << "equality_expression REDUCE to and_expression" << endl;}
+    | and_expression BIT_AND equality_expression  { $<Expression *>$ = new Expression($1,$2,$3); cout << "and_expression BIT_AND equality_expression REDUCE to and_expression" << endl;}
     ;
 
 exclusive_or_expression
-    : and_expression                                 { $<ExpressionNode *>$ = $1;  cout << "and_expression REDUCE to exclusive_or_expression" << endl;}
-    | exclusive_or_expression XOR_OP and_expression  { $<ExpressionNode *>$ = new ExpressionNode($1,$2,$3); cout << "exclusive_or_expression XOR_OP and_expression REDUCE to exclusive_or_expression" << endl;}
+    : and_expression                                 { $<Expression *>$ = $1;  cout << "and_expression REDUCE to exclusive_or_expression" << endl;}
+    | exclusive_or_expression XOR_OP and_expression  { $<Expression *>$ = new Expression($1,$2,$3); cout << "exclusive_or_expression XOR_OP and_expression REDUCE to exclusive_or_expression" << endl;}
     ;
 
 inclusive_or_expression
-    : exclusive_or_expression                                { $<ExpressionNode *>$ = $1;  cout << "exclusive_or_expression REDUCE to inclusive_or_expression" << endl;}
-    | inclusive_or_expression BIT_OR exclusive_or_expression { $<ExpressionNode *>$ = new ExpressionNode($1,$2,$3); cout << "inclusive_or_expression BIT_OR exclusive_or_expression REDUCE to inclusive_or_expression" << endl;}
+    : exclusive_or_expression                                { $<Expression *>$ = $1;  cout << "exclusive_or_expression REDUCE to inclusive_or_expression" << endl;}
+    | inclusive_or_expression BIT_OR exclusive_or_expression { $<Expression *>$ = new Expression($1,$2,$3); cout << "inclusive_or_expression BIT_OR exclusive_or_expression REDUCE to inclusive_or_expression" << endl;}
     ;
 
 logical_and_expression
-    : inclusive_or_expression                                { $<ExpressionNode *>$ = $1;  cout << "inclusive_or_expression REDUCE to logical_and_expression" << endl;}
-    | logical_and_expression AND_OP inclusive_or_expression  { $<ExpressionNode *>$ = new ExpressionNode($1,$2,$3); cout << "inclusive_or_expression REDUCE to logical_and_expression" << endl;}
+    : inclusive_or_expression                                { $<Expression *>$ = $1;  cout << "inclusive_or_expression REDUCE to logical_and_expression" << endl;}
+    | logical_and_expression AND_OP inclusive_or_expression  { $<Expression *>$ = new Expression($1,$2,$3); cout << "inclusive_or_expression REDUCE to logical_and_expression" << endl;}
     ;
 
 logical_or_expression
-    : logical_and_expression                              { $<ExpressionNode *>$ = $1;  cout << "inclusive_and_expression REDUCE to logical_or_expression" << endl;}
-    | logical_or_expression OR_OP logical_and_expression  { $<ExpressionNode *>$ = new ExpressionNode($1,$2,$3); cout << "logical_or_expression OR_OP logical_and_expression REDUCE to logical_or_expression" << endl;}
+    : logical_and_expression                              { $<Expression *>$ = $1;  cout << "inclusive_and_expression REDUCE to logical_or_expression" << endl;}
+    | logical_or_expression OR_OP logical_and_expression  { $<Expression *>$ = new Expression($1,$2,$3); cout << "logical_or_expression OR_OP logical_and_expression REDUCE to logical_or_expression" << endl;}
     ;
 
 conditional_expression
-    : logical_or_expression                                                   { $<ExpressionNode *>$ = $1;  cout << "logical_or_expression REDUCE to conditional_expression" << endl;}
-    | logical_or_expression QUESTION expression COLON conditional_expression  { $<ExpressionNode *>$ = new ExpressionNode($1,$2,$3); cout << "logical_or_expression QUESTION expression COLON conditional_expression REDUCE to conditional_expression" << endl;}
+    : logical_or_expression                                                   { $<Expression *>$ = $1;  cout << "logical_or_expression REDUCE to conditional_expression" << endl;}
+    | logical_or_expression QUESTION expression COLON conditional_expression  { $<Expression *>$ = new Expression($1,$2,$3); cout << "logical_or_expression QUESTION expression COLON conditional_expression REDUCE to conditional_expression" << endl;}
     ;
 
 assignment_expression
-    : conditional_expression                                      { $<ExpressionNode *>$ = $1;  cout << "conditional_expression REDUCE to assignment_expression" << endl;}
-    | unary_expression assignment_operator assignment_expression  { $<ExpressionNode *>$ = new ExpressionNode($1,$2,$3); cout << "unary_expression assignment_operator assignment_expression REDUCE to assignment_expression" << endl;}
+    : conditional_expression                                      { $<Expression *>$ = $1;  cout << "conditional_expression REDUCE to assignment_expression" << endl;}
+    | unary_expression assignment_operator assignment_expression  { $<Expression *>$ = new Expression($1,$2,$3); cout << "unary_expression assignment_operator assignment_expression REDUCE to assignment_expression" << endl;}
     ;
 
 assignment_operator
@@ -401,12 +401,12 @@ assignment_operator
     ;
 
 expression
-    : assignment_expression                   { $<ExpressionNode *>$ = $1;  cout << "asignment_expression REDUCE to expression" << endl;}
-    | expression COMMA assignment_expression  { $<ExpressionNode *>$ = new ExpressionNode($1,$2,$3); cout << "expression COMMA assignment_expression COMMA  REDUCE to expression" << endl;}
+    : assignment_expression                   { $<Expression *>$ = $1;  cout << "asignment_expression REDUCE to expression" << endl;}
+    | expression COMMA assignment_expression  { $<Expression *>$ = new Expression($1,$2,$3); cout << "expression COMMA assignment_expression COMMA  REDUCE to expression" << endl;}
     ;
 
 constant_expression
-    : conditional_expression  { $<ExpressionNode *>$ = $1;  cout << "conditional_expression REDUCE to constant_expression" << endl;}
+    : conditional_expression  { $<Expression *>$ = $1;  cout << "conditional_expression REDUCE to constant_expression" << endl;}
     ;
 
 declaration

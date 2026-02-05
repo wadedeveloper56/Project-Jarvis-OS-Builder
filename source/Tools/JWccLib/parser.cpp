@@ -286,7 +286,7 @@ namespace  WadeSpace  {
       case symbol_kind::S_assignment_expression: // assignment_expression
       case symbol_kind::S_expression: // expression
       case symbol_kind::S_constant_expression: // constant_expression
-        value.YY_MOVE_OR_COPY< ExpressionNode * > (YY_MOVE (that.value));
+        value.YY_MOVE_OR_COPY< Expression * > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_external_declaration: // external_declaration
@@ -502,7 +502,7 @@ namespace  WadeSpace  {
         break;
 
       case symbol_kind::S_argument_expression_list: // argument_expression_list
-        value.YY_MOVE_OR_COPY< vector<ExpressionNode *> * > (YY_MOVE (that.value));
+        value.YY_MOVE_OR_COPY< vector<Expression *> * > (YY_MOVE (that.value));
         break;
 
       default:
@@ -583,7 +583,7 @@ namespace  WadeSpace  {
       case symbol_kind::S_assignment_expression: // assignment_expression
       case symbol_kind::S_expression: // expression
       case symbol_kind::S_constant_expression: // constant_expression
-        value.move< ExpressionNode * > (YY_MOVE (that.value));
+        value.move< Expression * > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_external_declaration: // external_declaration
@@ -799,7 +799,7 @@ namespace  WadeSpace  {
         break;
 
       case symbol_kind::S_argument_expression_list: // argument_expression_list
-        value.move< vector<ExpressionNode *> * > (YY_MOVE (that.value));
+        value.move< vector<Expression *> * > (YY_MOVE (that.value));
         break;
 
       default:
@@ -880,7 +880,7 @@ namespace  WadeSpace  {
       case symbol_kind::S_assignment_expression: // assignment_expression
       case symbol_kind::S_expression: // expression
       case symbol_kind::S_constant_expression: // constant_expression
-        value.copy< ExpressionNode * > (that.value);
+        value.copy< Expression * > (that.value);
         break;
 
       case symbol_kind::S_external_declaration: // external_declaration
@@ -1096,7 +1096,7 @@ namespace  WadeSpace  {
         break;
 
       case symbol_kind::S_argument_expression_list: // argument_expression_list
-        value.copy< vector<ExpressionNode *> * > (that.value);
+        value.copy< vector<Expression *> * > (that.value);
         break;
 
       default:
@@ -1176,7 +1176,7 @@ namespace  WadeSpace  {
       case symbol_kind::S_assignment_expression: // assignment_expression
       case symbol_kind::S_expression: // expression
       case symbol_kind::S_constant_expression: // constant_expression
-        value.move< ExpressionNode * > (that.value);
+        value.move< Expression * > (that.value);
         break;
 
       case symbol_kind::S_external_declaration: // external_declaration
@@ -1392,7 +1392,7 @@ namespace  WadeSpace  {
         break;
 
       case symbol_kind::S_argument_expression_list: // argument_expression_list
-        value.move< vector<ExpressionNode *> * > (that.value);
+        value.move< vector<Expression *> * > (that.value);
         break;
 
       default:
@@ -1717,7 +1717,7 @@ namespace  WadeSpace  {
       case symbol_kind::S_assignment_expression: // assignment_expression
       case symbol_kind::S_expression: // expression
       case symbol_kind::S_constant_expression: // constant_expression
-        yylhs.value.emplace< ExpressionNode * > ();
+        yylhs.value.emplace< Expression * > ();
         break;
 
       case symbol_kind::S_external_declaration: // external_declaration
@@ -1933,7 +1933,7 @@ namespace  WadeSpace  {
         break;
 
       case symbol_kind::S_argument_expression_list: // argument_expression_list
-        yylhs.value.emplace< vector<ExpressionNode *> * > ();
+        yylhs.value.emplace< vector<Expression *> * > ();
         break;
 
       default:
@@ -1958,19 +1958,19 @@ namespace  WadeSpace  {
             {
   case 2: // primary_expression: "identifier"
 #line 259 "ansic.y"
-                                { yylhs.value.as < ExpressionNode * > () = createPrimaryExpression(yystack_[0].value.as < std::string > (),NULL); cout << "IDENTIFIER REDUCE to primary_expression" << endl; }
+                                { yylhs.value.as < Expression * > () = createPrimaryExpression(yystack_[0].value.as < std::string > (),NULL); cout << "IDENTIFIER REDUCE to primary_expression" << endl; }
 #line 1963 "parser.cpp"
     break;
 
   case 3: // primary_expression: constant
 #line 260 "ansic.y"
-                                { yylhs.value.as < ExpressionNode * > () = createPrimaryExpression("",yystack_[0].value.as < Constant * > ());   cout << "constant REDUCE to primary_expression" << endl; }
+                                { yylhs.value.as < Expression * > () = createPrimaryExpression("",yystack_[0].value.as < Constant * > ());   cout << "constant REDUCE to primary_expression" << endl; }
 #line 1969 "parser.cpp"
     break;
 
   case 4: // primary_expression: "(" expression ")"
 #line 261 "ansic.y"
-                                { yylhs.value.as < ExpressionNode * > () = yystack_[1].value.as < ExpressionNode * > ();                               cout << "OPAREN expression CPAREN REDUCE to primary_expression" << endl; }
+                                { yylhs.value.as < Expression * > () = yystack_[1].value.as < Expression * > ();                               cout << "OPAREN expression CPAREN REDUCE to primary_expression" << endl; }
 #line 1975 "parser.cpp"
     break;
 
@@ -1994,70 +1994,70 @@ namespace  WadeSpace  {
 
   case 8: // postfix_expression: primary_expression
 #line 270 "ansic.y"
-                                                                   { yylhs.value.as < ExpressionNode * > () = yystack_[0].value.as < ExpressionNode * > ();                                     cout << "primary_expression REDUCE to postfix_expression" << endl; }
+                                                                   { yylhs.value.as < Expression * > () = yystack_[0].value.as < Expression * > ();                                     cout << "primary_expression REDUCE to postfix_expression" << endl; }
 #line 1999 "parser.cpp"
     break;
 
   case 9: // postfix_expression: postfix_expression "[" expression "]"
 #line 271 "ansic.y"
-                                                                   { yylhs.value.as < ExpressionNode * > () = new ExpressionNode(yystack_[3].value.as < ExpressionNode * > (),yystack_[2].value.as < int > (),nullptr);      cout << "postfix_expression OBRACE expression CBRACE REDUCE to postfix_expression" << endl; }
+                                                                   { yylhs.value.as < Expression * > () = new Expression(yystack_[3].value.as < Expression * > (),yystack_[2].value.as < int > (),nullptr);      cout << "postfix_expression OBRACE expression CBRACE REDUCE to postfix_expression" << endl; }
 #line 2005 "parser.cpp"
     break;
 
   case 10: // postfix_expression: postfix_expression "(" ")"
 #line 272 "ansic.y"
-                                                                   { yylhs.value.as < ExpressionNode * > () = new ExpressionNode(yystack_[2].value.as < ExpressionNode * > (),nullptr,nullptr); cout << "postfix_expression OPAREN CPAREN REDUCE to postfix_expression" << endl; }
+                                                                   { yylhs.value.as < Expression * > () = new Expression(yystack_[2].value.as < Expression * > (),nullptr,nullptr); cout << "postfix_expression OPAREN CPAREN REDUCE to postfix_expression" << endl; }
 #line 2011 "parser.cpp"
     break;
 
   case 11: // postfix_expression: postfix_expression "(" argument_expression_list ")"
 #line 273 "ansic.y"
-                                                                   { yylhs.value.as < ExpressionNode * > () = new ExpressionNode(yystack_[3].value.as < ExpressionNode * > (),yystack_[1].value.as < vector<ExpressionNode *> * > ());              cout << "postfix_expression OPAREN argument_expression_list CPAREN REDUCE to postfix_expression" << endl; }
+                                                                   { yylhs.value.as < Expression * > () = new Expression(yystack_[3].value.as < Expression * > (),yystack_[1].value.as < vector<Expression *> * > ());              cout << "postfix_expression OPAREN argument_expression_list CPAREN REDUCE to postfix_expression" << endl; }
 #line 2017 "parser.cpp"
     break;
 
   case 12: // postfix_expression: postfix_expression "." "identifier"
 #line 274 "ansic.y"
-                                                                   { yylhs.value.as < ExpressionNode * > () = new ExpressionNode(yystack_[2].value.as < ExpressionNode * > (),yystack_[1].value.as < int > (),yystack_[0].value.as < std::string > ());           cout << "postfix_expression PERIOD_OP IDENTIFIER REDUCE to postfix_expression" << endl; }
+                                                                   { yylhs.value.as < Expression * > () = new Expression(yystack_[2].value.as < Expression * > (),yystack_[1].value.as < int > (),yystack_[0].value.as < std::string > ());           cout << "postfix_expression PERIOD_OP IDENTIFIER REDUCE to postfix_expression" << endl; }
 #line 2023 "parser.cpp"
     break;
 
   case 13: // postfix_expression: postfix_expression "->" "identifier"
 #line 275 "ansic.y"
-                                                                   { yylhs.value.as < ExpressionNode * > () = new ExpressionNode(yystack_[2].value.as < ExpressionNode * > (),yystack_[1].value.as < int > (),yystack_[0].value.as < std::string > ());           cout << "postfix_expression PTR_OP IDENTIFIER REDUCE to postfix_expression" << endl; }
+                                                                   { yylhs.value.as < Expression * > () = new Expression(yystack_[2].value.as < Expression * > (),yystack_[1].value.as < int > (),yystack_[0].value.as < std::string > ());           cout << "postfix_expression PTR_OP IDENTIFIER REDUCE to postfix_expression" << endl; }
 #line 2029 "parser.cpp"
     break;
 
   case 14: // postfix_expression: postfix_expression "++"
 #line 276 "ansic.y"
-                                                                   { yylhs.value.as < ExpressionNode * > () = new ExpressionNode(yystack_[1].value.as < ExpressionNode * > (),yystack_[0].value.as < int > (),"");           cout << "postfix_expression INC_OP REDUCE to postfix_expression" << endl; }
+                                                                   { yylhs.value.as < Expression * > () = new Expression(yystack_[1].value.as < Expression * > (),yystack_[0].value.as < int > (),"");           cout << "postfix_expression INC_OP REDUCE to postfix_expression" << endl; }
 #line 2035 "parser.cpp"
     break;
 
   case 15: // postfix_expression: postfix_expression "--"
 #line 277 "ansic.y"
-                                                                   { yylhs.value.as < ExpressionNode * > () = new ExpressionNode(yystack_[1].value.as < ExpressionNode * > (),yystack_[0].value.as < int > (),"");           cout << "postfix_expression DEC_OP REDUCE to postfix_expression" << endl; }
+                                                                   { yylhs.value.as < Expression * > () = new Expression(yystack_[1].value.as < Expression * > (),yystack_[0].value.as < int > (),"");           cout << "postfix_expression DEC_OP REDUCE to postfix_expression" << endl; }
 #line 2041 "parser.cpp"
     break;
 
   case 16: // postfix_expression: "(" type_name ")" "{" initializer_list "}"
 #line 278 "ansic.y"
-                                                                   { yylhs.value.as < ExpressionNode * > () = new ExpressionNode(yystack_[4].value.as < TypeName * > (),yystack_[1].value.as < std::vector<Initializer *> * > ());              cout << "OPAREN type_name CPAREN_OP OCURLY_OP initializer_list CCURLY REDUCE to postfix_expression" << endl; }
+                                                                   { yylhs.value.as < Expression * > () = new Expression(yystack_[4].value.as < TypeName * > (),yystack_[1].value.as < std::vector<Initializer *> * > ());              cout << "OPAREN type_name CPAREN_OP OCURLY_OP initializer_list CCURLY REDUCE to postfix_expression" << endl; }
 #line 2047 "parser.cpp"
     break;
 
   case 17: // postfix_expression: "(" type_name ")" "{" initializer_list "," "}"
 #line 279 "ansic.y"
-                                                                   { yylhs.value.as < ExpressionNode * > () = new ExpressionNode(yystack_[5].value.as < TypeName * > (),yystack_[2].value.as < std::vector<Initializer *> * > ());              cout << "OPAREN type_name CPAREN_OP OCURLY_OP initializer_list COMMA CCURLY REDUCE to postfix_expression" << endl; }
+                                                                   { yylhs.value.as < Expression * > () = new Expression(yystack_[5].value.as < TypeName * > (),yystack_[2].value.as < std::vector<Initializer *> * > ());              cout << "OPAREN type_name CPAREN_OP OCURLY_OP initializer_list COMMA CCURLY REDUCE to postfix_expression" << endl; }
 #line 2053 "parser.cpp"
     break;
 
   case 18: // argument_expression_list: assignment_expression
 #line 283 "ansic.y"
                             {
-                             ExpressionNode *exp = yystack_[0].value.as < ExpressionNode * > ();
-                             yylhs.value.as < vector<ExpressionNode *> * > () = new std::vector<ExpressionNode *>();
-                             yylhs.value.as < vector<ExpressionNode *> * > ()->push_back(exp);
+                             Expression *exp = yystack_[0].value.as < Expression * > ();
+                             yylhs.value.as < vector<Expression *> * > () = new std::vector<Expression *>();
+                             yylhs.value.as < vector<Expression *> * > ()->push_back(exp);
                              cout << "assignment_expression REDUCE argument_expression_list" << endl;
                             }
 #line 2064 "parser.cpp"
@@ -2066,10 +2066,10 @@ namespace  WadeSpace  {
   case 19: // argument_expression_list: argument_expression_list "," assignment_expression
 #line 289 "ansic.y"
                                                            {
-            ExpressionNode* value1 = yystack_[0].value.as < ExpressionNode * > ();
-            vector<ExpressionNode*>* value2 = yystack_[2].value.as < vector<ExpressionNode *> * > ();
+            Expression* value1 = yystack_[0].value.as < Expression * > ();
+            vector<Expression*>* value2 = yystack_[2].value.as < vector<Expression *> * > ();
             value2->push_back(value1);
-            yylhs.value.as < vector<ExpressionNode *> * > () = value2;
+            yylhs.value.as < vector<Expression *> * > () = value2;
             cout << "argument_expression_list COMMA assignment_expression REDUCE argument_expression_list" << endl;
         }
 #line 2076 "parser.cpp"
@@ -2077,37 +2077,37 @@ namespace  WadeSpace  {
 
   case 20: // unary_expression: postfix_expression
 #line 299 "ansic.y"
-                                     { yylhs.value.as< ExpressionNode * > () = yystack_[0].value.as < ExpressionNode * > (); cout << "postfix_expression REDUCE unary_expression" << endl;}
+                                     { yylhs.value.as< Expression * > () = yystack_[0].value.as < Expression * > (); cout << "postfix_expression REDUCE unary_expression" << endl;}
 #line 2082 "parser.cpp"
     break;
 
   case 21: // unary_expression: "++" unary_expression
 #line 300 "ansic.y"
-                                     { yylhs.value.as< ExpressionNode * > () = new ExpressionNode(yystack_[0].value.as < ExpressionNode * > (),yystack_[1].value.as < int > (),""); cout << "INC_OP unary_expression REDUCE unary_expression" << endl;}
+                                     { yylhs.value.as< Expression * > () = new Expression(yystack_[0].value.as < Expression * > (),yystack_[1].value.as < int > (),""); cout << "INC_OP unary_expression REDUCE unary_expression" << endl;}
 #line 2088 "parser.cpp"
     break;
 
   case 22: // unary_expression: "--" unary_expression
 #line 301 "ansic.y"
-                                     { yylhs.value.as< ExpressionNode * > () = new ExpressionNode(yystack_[0].value.as < ExpressionNode * > (),yystack_[1].value.as < int > (),""); cout << "DEC_OP unary_expression REDUCE unary_expression" << endl;}
+                                     { yylhs.value.as< Expression * > () = new Expression(yystack_[0].value.as < Expression * > (),yystack_[1].value.as < int > (),""); cout << "DEC_OP unary_expression REDUCE unary_expression" << endl;}
 #line 2094 "parser.cpp"
     break;
 
   case 23: // unary_expression: unary_operator cast_expression
 #line 302 "ansic.y"
-                                     { yylhs.value.as< ExpressionNode * > () = new ExpressionNode(yystack_[0].value.as < ExpressionNode * > (),yystack_[1].value.as < int > (),""); cout << "unary_operator cast_expression REDUCE unary_expression" << endl;}
+                                     { yylhs.value.as< Expression * > () = new Expression(yystack_[0].value.as < Expression * > (),yystack_[1].value.as < int > (),""); cout << "unary_operator cast_expression REDUCE unary_expression" << endl;}
 #line 2100 "parser.cpp"
     break;
 
   case 24: // unary_expression: "sizeof" unary_expression
 #line 303 "ansic.y"
-                                     { yylhs.value.as< ExpressionNode * > () = new ExpressionNode(yystack_[0].value.as < ExpressionNode * > (),yystack_[1].value.as < int > (),""); cout << "SIZEOF unary_expression REDUCE unary_expression" << endl;}
+                                     { yylhs.value.as< Expression * > () = new Expression(yystack_[0].value.as < Expression * > (),yystack_[1].value.as < int > (),""); cout << "SIZEOF unary_expression REDUCE unary_expression" << endl;}
 #line 2106 "parser.cpp"
     break;
 
   case 25: // unary_expression: "sizeof" "(" type_name ")"
 #line 304 "ansic.y"
-                                     { yylhs.value.as< ExpressionNode * > () = new ExpressionNode(yystack_[1].value.as < TypeName * > (),yystack_[3].value.as < int > ()); cout << "SIZEOF OPAREN type_name CPAREN REDUCE unary_expression" << endl;}
+                                     { yylhs.value.as< Expression * > () = new Expression(yystack_[1].value.as < TypeName * > (),yystack_[3].value.as < int > ()); cout << "SIZEOF OPAREN type_name CPAREN REDUCE unary_expression" << endl;}
 #line 2112 "parser.cpp"
     break;
 
@@ -2149,205 +2149,205 @@ namespace  WadeSpace  {
 
   case 32: // cast_expression: unary_expression
 #line 317 "ansic.y"
-                                               { yylhs.value.as< ExpressionNode * > () = yystack_[0].value.as < ExpressionNode * > ();  cout << "unary_expression REDUCE to cast_expression" << endl;}
+                                               { yylhs.value.as< Expression * > () = yystack_[0].value.as < Expression * > ();  cout << "unary_expression REDUCE to cast_expression" << endl;}
 #line 2154 "parser.cpp"
     break;
 
   case 33: // cast_expression: "(" type_name ")" cast_expression
 #line 318 "ansic.y"
-                                               { yylhs.value.as< ExpressionNode * > () = new ExpressionNode(yystack_[2].value.as < TypeName * > (),yystack_[0].value.as < ExpressionNode * > ());  cout << "unary_expression REDUCE to cast_expression" << endl;}
+                                               { yylhs.value.as< Expression * > () = new Expression(yystack_[2].value.as < TypeName * > (),yystack_[0].value.as < Expression * > ());  cout << "unary_expression REDUCE to cast_expression" << endl;}
 #line 2160 "parser.cpp"
     break;
 
   case 34: // multiplicative_expression: cast_expression
 #line 322 "ansic.y"
-                                                         { yylhs.value.as< ExpressionNode * > () = yystack_[0].value.as < ExpressionNode * > ();  cout << "cast_expression REDUCE to multiplicative_expression" << endl;}
+                                                         { yylhs.value.as< Expression * > () = yystack_[0].value.as < Expression * > ();  cout << "cast_expression REDUCE to multiplicative_expression" << endl;}
 #line 2166 "parser.cpp"
     break;
 
   case 35: // multiplicative_expression: multiplicative_expression "*" cast_expression
 #line 323 "ansic.y"
-                                                         { yylhs.value.as< ExpressionNode * > () = new ExpressionNode(yystack_[2].value.as < ExpressionNode * > (),yystack_[1].value.as < int > (),yystack_[0].value.as < ExpressionNode * > ()); cout << "multiplicative_expression TIMES_OP cast_expression REDUCE to multiplicative_expression" << endl;}
+                                                         { yylhs.value.as< Expression * > () = new Expression(yystack_[2].value.as < Expression * > (),yystack_[1].value.as < int > (),yystack_[0].value.as < Expression * > ()); cout << "multiplicative_expression TIMES_OP cast_expression REDUCE to multiplicative_expression" << endl;}
 #line 2172 "parser.cpp"
     break;
 
   case 36: // multiplicative_expression: multiplicative_expression "/" cast_expression
 #line 324 "ansic.y"
-                                                         { yylhs.value.as< ExpressionNode * > () = new ExpressionNode(yystack_[2].value.as < ExpressionNode * > (),yystack_[1].value.as < int > (),yystack_[0].value.as < ExpressionNode * > ());cout << "multiplicative_expression DIV_OP cast_expression REDUCE to multiplicative_expression" << endl;}
+                                                         { yylhs.value.as< Expression * > () = new Expression(yystack_[2].value.as < Expression * > (),yystack_[1].value.as < int > (),yystack_[0].value.as < Expression * > ());cout << "multiplicative_expression DIV_OP cast_expression REDUCE to multiplicative_expression" << endl;}
 #line 2178 "parser.cpp"
     break;
 
   case 37: // multiplicative_expression: multiplicative_expression "%" cast_expression
 #line 325 "ansic.y"
-                                                         { yylhs.value.as< ExpressionNode * > () = new ExpressionNode(yystack_[2].value.as < ExpressionNode * > (),yystack_[1].value.as < int > (),yystack_[0].value.as < ExpressionNode * > ()); cout << "multiplicative_expression MOD_OP cast_expression REDUCE to multiplicative_expression" << endl;}
+                                                         { yylhs.value.as< Expression * > () = new Expression(yystack_[2].value.as < Expression * > (),yystack_[1].value.as < int > (),yystack_[0].value.as < Expression * > ()); cout << "multiplicative_expression MOD_OP cast_expression REDUCE to multiplicative_expression" << endl;}
 #line 2184 "parser.cpp"
     break;
 
   case 38: // additive_expression: multiplicative_expression
 #line 329 "ansic.y"
-                                                              { yylhs.value.as< ExpressionNode * > () = yystack_[0].value.as < ExpressionNode * > ();  cout << "multiplicative_expression REDUCE to additive_expression" << endl;}
+                                                              { yylhs.value.as< Expression * > () = yystack_[0].value.as < Expression * > ();  cout << "multiplicative_expression REDUCE to additive_expression" << endl;}
 #line 2190 "parser.cpp"
     break;
 
   case 39: // additive_expression: additive_expression "+" multiplicative_expression
 #line 330 "ansic.y"
-                                                              { yylhs.value.as< ExpressionNode * > () = new ExpressionNode(yystack_[2].value.as < ExpressionNode * > (),yystack_[1].value.as < int > (),yystack_[0].value.as < ExpressionNode * > ()); cout << "additive_expression REDUCE to multiplicative_expression" << endl;}
+                                                              { yylhs.value.as< Expression * > () = new Expression(yystack_[2].value.as < Expression * > (),yystack_[1].value.as < int > (),yystack_[0].value.as < Expression * > ()); cout << "additive_expression REDUCE to multiplicative_expression" << endl;}
 #line 2196 "parser.cpp"
     break;
 
   case 40: // additive_expression: additive_expression "-" multiplicative_expression
 #line 331 "ansic.y"
-                                                              { yylhs.value.as< ExpressionNode * > () = new ExpressionNode(yystack_[2].value.as < ExpressionNode * > (),yystack_[1].value.as < int > (),yystack_[0].value.as < ExpressionNode * > ()); cout << "additive_expression REDUCE to multiplicative_expression" << endl;}
+                                                              { yylhs.value.as< Expression * > () = new Expression(yystack_[2].value.as < Expression * > (),yystack_[1].value.as < int > (),yystack_[0].value.as < Expression * > ()); cout << "additive_expression REDUCE to multiplicative_expression" << endl;}
 #line 2202 "parser.cpp"
     break;
 
   case 41: // shift_expression: additive_expression
 #line 335 "ansic.y"
-                                                    { yylhs.value.as< ExpressionNode * > () = yystack_[0].value.as < ExpressionNode * > ();  cout << "additive_expression REDUCE to shift_expression" << endl;}
+                                                    { yylhs.value.as< Expression * > () = yystack_[0].value.as < Expression * > ();  cout << "additive_expression REDUCE to shift_expression" << endl;}
 #line 2208 "parser.cpp"
     break;
 
   case 42: // shift_expression: shift_expression "<<" additive_expression
 #line 336 "ansic.y"
-                                                    { yylhs.value.as< ExpressionNode * > () = new ExpressionNode(yystack_[2].value.as < ExpressionNode * > (),yystack_[1].value.as < int > (),yystack_[0].value.as < ExpressionNode * > ()); cout << "shift_expression LEFT_OP additive_expression REDUCE to shift_expression" << endl;}
+                                                    { yylhs.value.as< Expression * > () = new Expression(yystack_[2].value.as < Expression * > (),yystack_[1].value.as < int > (),yystack_[0].value.as < Expression * > ()); cout << "shift_expression LEFT_OP additive_expression REDUCE to shift_expression" << endl;}
 #line 2214 "parser.cpp"
     break;
 
   case 43: // shift_expression: shift_expression ">>" additive_expression
 #line 337 "ansic.y"
-                                                    { yylhs.value.as< ExpressionNode * > () = new ExpressionNode(yystack_[2].value.as < ExpressionNode * > (),yystack_[1].value.as < int > (),yystack_[0].value.as < ExpressionNode * > ()); cout << "shift_expression RIGHT_OP additive_expression REDUCE to shift_expression" << endl;}
+                                                    { yylhs.value.as< Expression * > () = new Expression(yystack_[2].value.as < Expression * > (),yystack_[1].value.as < int > (),yystack_[0].value.as < Expression * > ()); cout << "shift_expression RIGHT_OP additive_expression REDUCE to shift_expression" << endl;}
 #line 2220 "parser.cpp"
     break;
 
   case 44: // relational_expression: shift_expression
 #line 341 "ansic.y"
-                                                             { yylhs.value.as< ExpressionNode * > () = yystack_[0].value.as < ExpressionNode * > ();  cout << "shift_expression REDUCE to relational_expression" << endl;}
+                                                             { yylhs.value.as< Expression * > () = yystack_[0].value.as < Expression * > ();  cout << "shift_expression REDUCE to relational_expression" << endl;}
 #line 2226 "parser.cpp"
     break;
 
   case 45: // relational_expression: relational_expression "<" shift_expression
 #line 342 "ansic.y"
-                                                             { yylhs.value.as< ExpressionNode * > () = new ExpressionNode(yystack_[2].value.as < ExpressionNode * > (),yystack_[1].value.as < int > (),yystack_[0].value.as < ExpressionNode * > ()); cout << "relational_expression LESS shift_expression REDUCE to shift_expression" << endl;}
+                                                             { yylhs.value.as< Expression * > () = new Expression(yystack_[2].value.as < Expression * > (),yystack_[1].value.as < int > (),yystack_[0].value.as < Expression * > ()); cout << "relational_expression LESS shift_expression REDUCE to shift_expression" << endl;}
 #line 2232 "parser.cpp"
     break;
 
   case 46: // relational_expression: relational_expression ">" shift_expression
 #line 343 "ansic.y"
-                                                             { yylhs.value.as< ExpressionNode * > () = new ExpressionNode(yystack_[2].value.as < ExpressionNode * > (),yystack_[1].value.as < int > (),yystack_[0].value.as < ExpressionNode * > ()); cout << "relational_expression GREATER shift_expression REDUCE to shift_expression" << endl;}
+                                                             { yylhs.value.as< Expression * > () = new Expression(yystack_[2].value.as < Expression * > (),yystack_[1].value.as < int > (),yystack_[0].value.as < Expression * > ()); cout << "relational_expression GREATER shift_expression REDUCE to shift_expression" << endl;}
 #line 2238 "parser.cpp"
     break;
 
   case 47: // relational_expression: relational_expression "<=" shift_expression
 #line 344 "ansic.y"
-                                                             { yylhs.value.as< ExpressionNode * > () = new ExpressionNode(yystack_[2].value.as < ExpressionNode * > (),yystack_[1].value.as < int > (),yystack_[0].value.as < ExpressionNode * > ()); cout << "relational_expression LESS_EQUAL shift_expression REDUCE to shift_expression" << endl;}
+                                                             { yylhs.value.as< Expression * > () = new Expression(yystack_[2].value.as < Expression * > (),yystack_[1].value.as < int > (),yystack_[0].value.as < Expression * > ()); cout << "relational_expression LESS_EQUAL shift_expression REDUCE to shift_expression" << endl;}
 #line 2244 "parser.cpp"
     break;
 
   case 48: // relational_expression: relational_expression ">=" shift_expression
 #line 345 "ansic.y"
-                                                             { yylhs.value.as< ExpressionNode * > () = new ExpressionNode(yystack_[2].value.as < ExpressionNode * > (),yystack_[1].value.as < int > (),yystack_[0].value.as < ExpressionNode * > ()); cout << "relational_expression GREATER_EQUAL shift_expression REDUCE to shift_expression" << endl;}
+                                                             { yylhs.value.as< Expression * > () = new Expression(yystack_[2].value.as < Expression * > (),yystack_[1].value.as < int > (),yystack_[0].value.as < Expression * > ()); cout << "relational_expression GREATER_EQUAL shift_expression REDUCE to shift_expression" << endl;}
 #line 2250 "parser.cpp"
     break;
 
   case 49: // equality_expression: relational_expression
 #line 349 "ansic.y"
-                                                             { yylhs.value.as< ExpressionNode * > () = yystack_[0].value.as < ExpressionNode * > ();  cout << "relational_expression REDUCE to equality_expression" << endl;}
+                                                             { yylhs.value.as< Expression * > () = yystack_[0].value.as < Expression * > ();  cout << "relational_expression REDUCE to equality_expression" << endl;}
 #line 2256 "parser.cpp"
     break;
 
   case 50: // equality_expression: equality_expression "==" relational_expression
 #line 350 "ansic.y"
-                                                             { yylhs.value.as< ExpressionNode * > () = new ExpressionNode(yystack_[2].value.as < ExpressionNode * > (),yystack_[1].value.as < int > (),yystack_[0].value.as < ExpressionNode * > ()); cout << "equality_expression EQUAL_EQUAL relational_expression REDUCE to equality_expression" << endl;}
+                                                             { yylhs.value.as< Expression * > () = new Expression(yystack_[2].value.as < Expression * > (),yystack_[1].value.as < int > (),yystack_[0].value.as < Expression * > ()); cout << "equality_expression EQUAL_EQUAL relational_expression REDUCE to equality_expression" << endl;}
 #line 2262 "parser.cpp"
     break;
 
   case 51: // equality_expression: equality_expression "!=" relational_expression
 #line 351 "ansic.y"
-                                                             { yylhs.value.as< ExpressionNode * > () = new ExpressionNode(yystack_[2].value.as < ExpressionNode * > (),yystack_[1].value.as < int > (),yystack_[0].value.as < ExpressionNode * > ()); cout << "equality_expression NOT_EQUAL relational_expression REDUCE to equality_expression" << endl;}
+                                                             { yylhs.value.as< Expression * > () = new Expression(yystack_[2].value.as < Expression * > (),yystack_[1].value.as < int > (),yystack_[0].value.as < Expression * > ()); cout << "equality_expression NOT_EQUAL relational_expression REDUCE to equality_expression" << endl;}
 #line 2268 "parser.cpp"
     break;
 
   case 52: // and_expression: equality_expression
 #line 355 "ansic.y"
-                                                  { yylhs.value.as< ExpressionNode * > () = yystack_[0].value.as < ExpressionNode * > ();  cout << "equality_expression REDUCE to and_expression" << endl;}
+                                                  { yylhs.value.as< Expression * > () = yystack_[0].value.as < Expression * > ();  cout << "equality_expression REDUCE to and_expression" << endl;}
 #line 2274 "parser.cpp"
     break;
 
   case 53: // and_expression: and_expression "&" equality_expression
 #line 356 "ansic.y"
-                                                  { yylhs.value.as< ExpressionNode * > () = new ExpressionNode(yystack_[2].value.as < ExpressionNode * > (),yystack_[1].value.as < int > (),yystack_[0].value.as < ExpressionNode * > ()); cout << "and_expression BIT_AND equality_expression REDUCE to and_expression" << endl;}
+                                                  { yylhs.value.as< Expression * > () = new Expression(yystack_[2].value.as < Expression * > (),yystack_[1].value.as < int > (),yystack_[0].value.as < Expression * > ()); cout << "and_expression BIT_AND equality_expression REDUCE to and_expression" << endl;}
 #line 2280 "parser.cpp"
     break;
 
   case 54: // exclusive_or_expression: and_expression
 #line 360 "ansic.y"
-                                                     { yylhs.value.as< ExpressionNode * > () = yystack_[0].value.as < ExpressionNode * > ();  cout << "and_expression REDUCE to exclusive_or_expression" << endl;}
+                                                     { yylhs.value.as< Expression * > () = yystack_[0].value.as < Expression * > ();  cout << "and_expression REDUCE to exclusive_or_expression" << endl;}
 #line 2286 "parser.cpp"
     break;
 
   case 55: // exclusive_or_expression: exclusive_or_expression "^" and_expression
 #line 361 "ansic.y"
-                                                     { yylhs.value.as< ExpressionNode * > () = new ExpressionNode(yystack_[2].value.as < ExpressionNode * > (),yystack_[1].value.as < int > (),yystack_[0].value.as < ExpressionNode * > ()); cout << "exclusive_or_expression XOR_OP and_expression REDUCE to exclusive_or_expression" << endl;}
+                                                     { yylhs.value.as< Expression * > () = new Expression(yystack_[2].value.as < Expression * > (),yystack_[1].value.as < int > (),yystack_[0].value.as < Expression * > ()); cout << "exclusive_or_expression XOR_OP and_expression REDUCE to exclusive_or_expression" << endl;}
 #line 2292 "parser.cpp"
     break;
 
   case 56: // inclusive_or_expression: exclusive_or_expression
 #line 365 "ansic.y"
-                                                             { yylhs.value.as< ExpressionNode * > () = yystack_[0].value.as < ExpressionNode * > ();  cout << "exclusive_or_expression REDUCE to inclusive_or_expression" << endl;}
+                                                             { yylhs.value.as< Expression * > () = yystack_[0].value.as < Expression * > ();  cout << "exclusive_or_expression REDUCE to inclusive_or_expression" << endl;}
 #line 2298 "parser.cpp"
     break;
 
   case 57: // inclusive_or_expression: inclusive_or_expression "|" exclusive_or_expression
 #line 366 "ansic.y"
-                                                             { yylhs.value.as< ExpressionNode * > () = new ExpressionNode(yystack_[2].value.as < ExpressionNode * > (),yystack_[1].value.as < int > (),yystack_[0].value.as < ExpressionNode * > ()); cout << "inclusive_or_expression BIT_OR exclusive_or_expression REDUCE to inclusive_or_expression" << endl;}
+                                                             { yylhs.value.as< Expression * > () = new Expression(yystack_[2].value.as < Expression * > (),yystack_[1].value.as < int > (),yystack_[0].value.as < Expression * > ()); cout << "inclusive_or_expression BIT_OR exclusive_or_expression REDUCE to inclusive_or_expression" << endl;}
 #line 2304 "parser.cpp"
     break;
 
   case 58: // logical_and_expression: inclusive_or_expression
 #line 370 "ansic.y"
-                                                             { yylhs.value.as< ExpressionNode * > () = yystack_[0].value.as < ExpressionNode * > ();  cout << "inclusive_or_expression REDUCE to logical_and_expression" << endl;}
+                                                             { yylhs.value.as< Expression * > () = yystack_[0].value.as < Expression * > ();  cout << "inclusive_or_expression REDUCE to logical_and_expression" << endl;}
 #line 2310 "parser.cpp"
     break;
 
   case 59: // logical_and_expression: logical_and_expression "&&" inclusive_or_expression
 #line 371 "ansic.y"
-                                                             { yylhs.value.as< ExpressionNode * > () = new ExpressionNode(yystack_[2].value.as < ExpressionNode * > (),yystack_[1].value.as < int > (),yystack_[0].value.as < ExpressionNode * > ()); cout << "inclusive_or_expression REDUCE to logical_and_expression" << endl;}
+                                                             { yylhs.value.as< Expression * > () = new Expression(yystack_[2].value.as < Expression * > (),yystack_[1].value.as < int > (),yystack_[0].value.as < Expression * > ()); cout << "inclusive_or_expression REDUCE to logical_and_expression" << endl;}
 #line 2316 "parser.cpp"
     break;
 
   case 60: // logical_or_expression: logical_and_expression
 #line 375 "ansic.y"
-                                                          { yylhs.value.as< ExpressionNode * > () = yystack_[0].value.as < ExpressionNode * > ();  cout << "inclusive_and_expression REDUCE to logical_or_expression" << endl;}
+                                                          { yylhs.value.as< Expression * > () = yystack_[0].value.as < Expression * > ();  cout << "inclusive_and_expression REDUCE to logical_or_expression" << endl;}
 #line 2322 "parser.cpp"
     break;
 
   case 61: // logical_or_expression: logical_or_expression "||" logical_and_expression
 #line 376 "ansic.y"
-                                                          { yylhs.value.as< ExpressionNode * > () = new ExpressionNode(yystack_[2].value.as < ExpressionNode * > (),yystack_[1].value.as < int > (),yystack_[0].value.as < ExpressionNode * > ()); cout << "logical_or_expression OR_OP logical_and_expression REDUCE to logical_or_expression" << endl;}
+                                                          { yylhs.value.as< Expression * > () = new Expression(yystack_[2].value.as < Expression * > (),yystack_[1].value.as < int > (),yystack_[0].value.as < Expression * > ()); cout << "logical_or_expression OR_OP logical_and_expression REDUCE to logical_or_expression" << endl;}
 #line 2328 "parser.cpp"
     break;
 
   case 62: // conditional_expression: logical_or_expression
 #line 380 "ansic.y"
-                                                                              { yylhs.value.as< ExpressionNode * > () = yystack_[0].value.as < ExpressionNode * > ();  cout << "logical_or_expression REDUCE to conditional_expression" << endl;}
+                                                                              { yylhs.value.as< Expression * > () = yystack_[0].value.as < Expression * > ();  cout << "logical_or_expression REDUCE to conditional_expression" << endl;}
 #line 2334 "parser.cpp"
     break;
 
   case 63: // conditional_expression: logical_or_expression "question" expression ":" conditional_expression
 #line 381 "ansic.y"
-                                                                              { yylhs.value.as< ExpressionNode * > () = new ExpressionNode(yystack_[4].value.as < ExpressionNode * > (),yystack_[3].value.as < int > (),yystack_[2].value.as < ExpressionNode * > ()); cout << "logical_or_expression QUESTION expression COLON conditional_expression REDUCE to conditional_expression" << endl;}
+                                                                              { yylhs.value.as< Expression * > () = new Expression(yystack_[4].value.as < Expression * > (),yystack_[3].value.as < int > (),yystack_[2].value.as < Expression * > ()); cout << "logical_or_expression QUESTION expression COLON conditional_expression REDUCE to conditional_expression" << endl;}
 #line 2340 "parser.cpp"
     break;
 
   case 64: // assignment_expression: conditional_expression
 #line 385 "ansic.y"
-                                                                  { yylhs.value.as< ExpressionNode * > () = yystack_[0].value.as < ExpressionNode * > ();  cout << "conditional_expression REDUCE to assignment_expression" << endl;}
+                                                                  { yylhs.value.as< Expression * > () = yystack_[0].value.as < Expression * > ();  cout << "conditional_expression REDUCE to assignment_expression" << endl;}
 #line 2346 "parser.cpp"
     break;
 
   case 65: // assignment_expression: unary_expression assignment_operator assignment_expression
 #line 386 "ansic.y"
-                                                                  { yylhs.value.as< ExpressionNode * > () = new ExpressionNode(yystack_[2].value.as < ExpressionNode * > (),yystack_[1].value.as < int > (),yystack_[0].value.as < ExpressionNode * > ()); cout << "unary_expression assignment_operator assignment_expression REDUCE to assignment_expression" << endl;}
+                                                                  { yylhs.value.as< Expression * > () = new Expression(yystack_[2].value.as < Expression * > (),yystack_[1].value.as < int > (),yystack_[0].value.as < Expression * > ()); cout << "unary_expression assignment_operator assignment_expression REDUCE to assignment_expression" << endl;}
 #line 2352 "parser.cpp"
     break;
 
@@ -2419,19 +2419,19 @@ namespace  WadeSpace  {
 
   case 77: // expression: assignment_expression
 #line 404 "ansic.y"
-                                              { yylhs.value.as< ExpressionNode * > () = yystack_[0].value.as < ExpressionNode * > ();  cout << "asignment_expression REDUCE to expression" << endl;}
+                                              { yylhs.value.as< Expression * > () = yystack_[0].value.as < Expression * > ();  cout << "asignment_expression REDUCE to expression" << endl;}
 #line 2424 "parser.cpp"
     break;
 
   case 78: // expression: expression "," assignment_expression
 #line 405 "ansic.y"
-                                              { yylhs.value.as< ExpressionNode * > () = new ExpressionNode(yystack_[2].value.as < ExpressionNode * > (),yystack_[1].value.as < int > (),yystack_[0].value.as < ExpressionNode * > ()); cout << "expression COMMA assignment_expression COMMA  REDUCE to expression" << endl;}
+                                              { yylhs.value.as< Expression * > () = new Expression(yystack_[2].value.as < Expression * > (),yystack_[1].value.as < int > (),yystack_[0].value.as < Expression * > ()); cout << "expression COMMA assignment_expression COMMA  REDUCE to expression" << endl;}
 #line 2430 "parser.cpp"
     break;
 
   case 79: // constant_expression: conditional_expression
 #line 409 "ansic.y"
-                              { yylhs.value.as< ExpressionNode * > () = yystack_[0].value.as < ExpressionNode * > ();  cout << "conditional_expression REDUCE to constant_expression" << endl;}
+                              { yylhs.value.as< Expression * > () = yystack_[0].value.as < Expression * > ();  cout << "conditional_expression REDUCE to constant_expression" << endl;}
 #line 2436 "parser.cpp"
     break;
 
@@ -2764,13 +2764,13 @@ namespace  WadeSpace  {
 
   case 129: // struct_declarator: ":" constant_expression
 #line 531 "ansic.y"
-                                           { yylhs.value.as< StructDeclarator * > () = new StructDeclarator(yystack_[0].value.as < ExpressionNode * > ()); cout << "COLON constant_expression REDUCE to struct_declarator" << endl;}
+                                           { yylhs.value.as< StructDeclarator * > () = new StructDeclarator(yystack_[0].value.as < Expression * > ()); cout << "COLON constant_expression REDUCE to struct_declarator" << endl;}
 #line 2769 "parser.cpp"
     break;
 
   case 130: // struct_declarator: declarator ":" constant_expression
 #line 532 "ansic.y"
-                                           { yylhs.value.as< StructDeclarator * > () = new StructDeclarator(yystack_[2].value.as < Declarator * > (),yystack_[0].value.as < ExpressionNode * > ()); cout << "declarator COLON constant_expression REDUCE to struct_declarator" << endl;}
+                                           { yylhs.value.as< StructDeclarator * > () = new StructDeclarator(yystack_[2].value.as < Declarator * > (),yystack_[0].value.as < Expression * > ()); cout << "declarator COLON constant_expression REDUCE to struct_declarator" << endl;}
 #line 2775 "parser.cpp"
     break;
 
@@ -2823,7 +2823,7 @@ namespace  WadeSpace  {
 
   case 137: // enumerator: "identifier" "=" constant_expression
 #line 559 "ansic.y"
-                                           { yylhs.value.as< Enumerator * > () = new Enumerator(yystack_[2].value.as < std::string > (),yystack_[0].value.as < ExpressionNode * > ()); cout << "IDENTIFIER EQUAL constant_expression REDUCE to ENUMERATOR" << endl;}
+                                           { yylhs.value.as< Enumerator * > () = new Enumerator(yystack_[2].value.as < std::string > (),yystack_[0].value.as < Expression * > ()); cout << "IDENTIFIER EQUAL constant_expression REDUCE to ENUMERATOR" << endl;}
 #line 2828 "parser.cpp"
     break;
 
@@ -2865,7 +2865,7 @@ namespace  WadeSpace  {
 
   case 144: // direct_declarator: direct_declarator "[" constant_expression "]"
 #line 575 "ansic.y"
-                                                            { yylhs.value.as< DirectDeclarator * > () = new DirectDeclarator(yystack_[3].value.as < DirectDeclarator * > (),yystack_[1].value.as < ExpressionNode * > ()); cout << "direct_declarator OBRACE constant_expression CBRACE REDUCE to direct_declarator" << endl;}
+                                                            { yylhs.value.as< DirectDeclarator * > () = new DirectDeclarator(yystack_[3].value.as < DirectDeclarator * > (),yystack_[1].value.as < Expression * > ()); cout << "direct_declarator OBRACE constant_expression CBRACE REDUCE to direct_declarator" << endl;}
 #line 2870 "parser.cpp"
     break;
 
@@ -3060,7 +3060,7 @@ namespace  WadeSpace  {
 
   case 171: // direct_abstract_declarator: "[" constant_expression "]"
 #line 663 "ansic.y"
-                                                                   { yylhs.value.as< DirectAbstractDeclarator * > () = new DirectAbstractDeclarator(yystack_[1].value.as < ExpressionNode * > ()); cout << "OBRACE constant_expression CBRACE REDUCE to direct_abstract_declarator" << endl; }
+                                                                   { yylhs.value.as< DirectAbstractDeclarator * > () = new DirectAbstractDeclarator(yystack_[1].value.as < Expression * > ()); cout << "OBRACE constant_expression CBRACE REDUCE to direct_abstract_declarator" << endl; }
 #line 3065 "parser.cpp"
     break;
 
@@ -3072,7 +3072,7 @@ namespace  WadeSpace  {
 
   case 173: // direct_abstract_declarator: direct_abstract_declarator "[" constant_expression "]"
 #line 665 "ansic.y"
-                                                                   { yylhs.value.as< DirectAbstractDeclarator * > () = new DirectAbstractDeclarator(yystack_[3].value.as < DirectAbstractDeclarator * > (),yystack_[1].value.as < ExpressionNode * > (),ARRAY); cout << "direct_abstract_declarator OBRACE constant_expression CBRACE REDUCE to direct_abstract_declarator" << endl; }
+                                                                   { yylhs.value.as< DirectAbstractDeclarator * > () = new DirectAbstractDeclarator(yystack_[3].value.as < DirectAbstractDeclarator * > (),yystack_[1].value.as < Expression * > (),ARRAY); cout << "direct_abstract_declarator OBRACE constant_expression CBRACE REDUCE to direct_abstract_declarator" << endl; }
 #line 3077 "parser.cpp"
     break;
 
@@ -3102,7 +3102,7 @@ namespace  WadeSpace  {
 
   case 178: // initializer: assignment_expression
 #line 673 "ansic.y"
-                                           { yylhs.value.as< Initializer * > () = new Initializer(yystack_[0].value.as < ExpressionNode * > ()); cout << "assignment_expression REDUCE to initializer" << endl; }
+                                           { yylhs.value.as< Initializer * > () = new Initializer(yystack_[0].value.as < Expression * > ()); cout << "assignment_expression REDUCE to initializer" << endl; }
 #line 3107 "parser.cpp"
     break;
 
@@ -3185,7 +3185,7 @@ namespace  WadeSpace  {
 
   case 190: // labeled_statement: "case" constant_expression ":" statement
 #line 705 "ansic.y"
-                                               { yylhs.value.as< BaseStatement * > () = new LabeledStatement(CASE,yystack_[2].value.as < ExpressionNode * > (),yystack_[0].value.as < BaseStatement * > ()); cout << "CASE constant_expression COLON statement REDUCE to label_statement" << endl; }
+                                               { yylhs.value.as< BaseStatement * > () = new LabeledStatement(CASE,yystack_[2].value.as < Expression * > (),yystack_[0].value.as < BaseStatement * > ()); cout << "CASE constant_expression COLON statement REDUCE to label_statement" << endl; }
 #line 3190 "parser.cpp"
     break;
 
@@ -3274,37 +3274,37 @@ namespace  WadeSpace  {
 
   case 201: // expression_statement: expression ";"
 #line 751 "ansic.y"
-                            { yylhs.value.as< BaseStatement * > () = new ExpressionStatement(yystack_[1].value.as < ExpressionNode * > ()); cout << "expression SEMICOLON REDUCE to expression_statement" << endl; }
+                            { yylhs.value.as< BaseStatement * > () = new ExpressionStatement(yystack_[1].value.as < Expression * > ()); cout << "expression SEMICOLON REDUCE to expression_statement" << endl; }
 #line 3279 "parser.cpp"
     break;
 
   case 202: // selection_statement: "if" "(" expression ")" statement
 #line 755 "ansic.y"
-                                                           { yylhs.value.as< BaseStatement * > () = new SelectionStatement(IF,yystack_[2].value.as < ExpressionNode * > (),yystack_[0].value.as < BaseStatement * > ()); cout << "IF OPAREN expression CPAREN statement REDUCE to selection_statement" << endl; }
+                                                           { yylhs.value.as< BaseStatement * > () = new SelectionStatement(IF,yystack_[2].value.as < Expression * > (),yystack_[0].value.as < BaseStatement * > ()); cout << "IF OPAREN expression CPAREN statement REDUCE to selection_statement" << endl; }
 #line 3285 "parser.cpp"
     break;
 
   case 203: // selection_statement: "if" "(" expression ")" statement "else" statement
 #line 756 "ansic.y"
-                                                           { yylhs.value.as< BaseStatement * > () = new SelectionStatement(IF,yystack_[4].value.as < ExpressionNode * > (),yystack_[2].value.as < BaseStatement * > (),yystack_[0].value.as < BaseStatement * > ()); cout << "IF OPAREN expression CPAREN statement ELSE statement REDUCE to selection_statement" << endl; }
+                                                           { yylhs.value.as< BaseStatement * > () = new SelectionStatement(IF,yystack_[4].value.as < Expression * > (),yystack_[2].value.as < BaseStatement * > (),yystack_[0].value.as < BaseStatement * > ()); cout << "IF OPAREN expression CPAREN statement ELSE statement REDUCE to selection_statement" << endl; }
 #line 3291 "parser.cpp"
     break;
 
   case 204: // selection_statement: "switch" "(" expression ")" statement
 #line 757 "ansic.y"
-                                                           { yylhs.value.as< BaseStatement * > () = new SelectionStatement(SWITCH,yystack_[2].value.as < ExpressionNode * > (),yystack_[0].value.as < BaseStatement * > ()); cout << "SWITCH OPAREN expression CPAREN statement REDUCE to selection_statement" << endl; }
+                                                           { yylhs.value.as< BaseStatement * > () = new SelectionStatement(SWITCH,yystack_[2].value.as < Expression * > (),yystack_[0].value.as < BaseStatement * > ()); cout << "SWITCH OPAREN expression CPAREN statement REDUCE to selection_statement" << endl; }
 #line 3297 "parser.cpp"
     break;
 
   case 205: // iteration_statement: "while" "(" expression ")" statement
 #line 761 "ansic.y"
-                                                                                       { yylhs.value.as< BaseStatement * > () = new IterationStatement(WHILE,yystack_[2].value.as < ExpressionNode * > (),yystack_[0].value.as < BaseStatement * > ()); cout << "WHILE OPAREN expression CPAREN statement REDUCE to iteration_statement" << endl; }
+                                                                                       { yylhs.value.as< BaseStatement * > () = new IterationStatement(WHILE,yystack_[2].value.as < Expression * > (),yystack_[0].value.as < BaseStatement * > ()); cout << "WHILE OPAREN expression CPAREN statement REDUCE to iteration_statement" << endl; }
 #line 3303 "parser.cpp"
     break;
 
   case 206: // iteration_statement: "do" statement "while" "(" expression ")" ";"
 #line 762 "ansic.y"
-                                                                                       { yylhs.value.as< BaseStatement * > () = new IterationStatement(DO,yystack_[2].value.as < ExpressionNode * > (),yystack_[5].value.as < BaseStatement * > ()); cout << "DO statement WHILE OPAREN expression CPAREN SEMICOLON REDUCE to iteration_statement" << endl; }
+                                                                                       { yylhs.value.as< BaseStatement * > () = new IterationStatement(DO,yystack_[2].value.as < Expression * > (),yystack_[5].value.as < BaseStatement * > ()); cout << "DO statement WHILE OPAREN expression CPAREN SEMICOLON REDUCE to iteration_statement" << endl; }
 #line 3309 "parser.cpp"
     break;
 
@@ -3316,7 +3316,7 @@ namespace  WadeSpace  {
 
   case 208: // iteration_statement: "for" "(" expression_statement expression_statement expression ")" statement
 #line 764 "ansic.y"
-                                                                                       { yylhs.value.as< BaseStatement * > () = new IterationStatement(FOR,yystack_[4].value.as < BaseStatement * > (),yystack_[3].value.as < BaseStatement * > (),yystack_[2].value.as < ExpressionNode * > (),yystack_[0].value.as < BaseStatement * > ()); cout << "FOR OPAREN expression_statement expression_statement expression CPAREN statement REDUCE to iteration_statement" << endl; }
+                                                                                       { yylhs.value.as< BaseStatement * > () = new IterationStatement(FOR,yystack_[4].value.as < BaseStatement * > (),yystack_[3].value.as < BaseStatement * > (),yystack_[2].value.as < Expression * > (),yystack_[0].value.as < BaseStatement * > ()); cout << "FOR OPAREN expression_statement expression_statement expression CPAREN statement REDUCE to iteration_statement" << endl; }
 #line 3321 "parser.cpp"
     break;
 
@@ -3346,7 +3346,7 @@ namespace  WadeSpace  {
 
   case 213: // jump_statement: "return" expression ";"
 #line 772 "ansic.y"
-                                  { yylhs.value.as< BaseStatement * > () = new JumpStatement(RETURN,yystack_[1].value.as < ExpressionNode * > ()); cout << "RETURN expression SEMICOLON REDUCE to jump_statement" << endl; }
+                                  { yylhs.value.as< BaseStatement * > () = new JumpStatement(RETURN,yystack_[1].value.as < Expression * > ()); cout << "RETURN expression SEMICOLON REDUCE to jump_statement" << endl; }
 #line 3351 "parser.cpp"
     break;
 

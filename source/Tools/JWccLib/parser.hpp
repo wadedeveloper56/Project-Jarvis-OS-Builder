@@ -507,7 +507,7 @@ namespace  WadeSpace  {
       // assignment_expression
       // expression
       // constant_expression
-      char dummy11[sizeof (ExpressionNode *)];
+      char dummy11[sizeof (Expression *)];
 
       // external_declaration
       char dummy12[sizeof (ExternalDeclaration *)];
@@ -691,7 +691,7 @@ namespace  WadeSpace  {
       char dummy42[sizeof (uint64_t)];
 
       // argument_expression_list
-      char dummy43[sizeof (vector<ExpressionNode *> *)];
+      char dummy43[sizeof (vector<Expression *> *)];
     };
 
     /// The size of the largest semantic type.
@@ -1110,7 +1110,7 @@ namespace  WadeSpace  {
       case symbol_kind::S_assignment_expression: // assignment_expression
       case symbol_kind::S_expression: // expression
       case symbol_kind::S_constant_expression: // constant_expression
-        value.move< ExpressionNode * > (std::move (that.value));
+        value.move< Expression * > (std::move (that.value));
         break;
 
       case symbol_kind::S_external_declaration: // external_declaration
@@ -1326,7 +1326,7 @@ namespace  WadeSpace  {
         break;
 
       case symbol_kind::S_argument_expression_list: // argument_expression_list
-        value.move< vector<ExpressionNode *> * > (std::move (that.value));
+        value.move< vector<Expression *> * > (std::move (that.value));
         break;
 
       default:
@@ -1493,13 +1493,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, ExpressionNode *&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, Expression *&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const ExpressionNode *& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const Expression *& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1941,13 +1941,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, vector<ExpressionNode *> *&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, vector<Expression *> *&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const vector<ExpressionNode *> *& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const vector<Expression *> *& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -2041,7 +2041,7 @@ switch (yykind)
       case symbol_kind::S_assignment_expression: // assignment_expression
       case symbol_kind::S_expression: // expression
       case symbol_kind::S_constant_expression: // constant_expression
-        value.template destroy< ExpressionNode * > ();
+        value.template destroy< Expression * > ();
         break;
 
       case symbol_kind::S_external_declaration: // external_declaration
@@ -2257,7 +2257,7 @@ switch (yykind)
         break;
 
       case symbol_kind::S_argument_expression_list: // argument_expression_list
-        value.template destroy< vector<ExpressionNode *> * > ();
+        value.template destroy< vector<Expression *> * > ();
         break;
 
       default:
@@ -4325,7 +4325,7 @@ switch (yykind)
       case symbol_kind::S_assignment_expression: // assignment_expression
       case symbol_kind::S_expression: // expression
       case symbol_kind::S_constant_expression: // constant_expression
-        value.copy< ExpressionNode * > (YY_MOVE (that.value));
+        value.copy< Expression * > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_external_declaration: // external_declaration
@@ -4541,7 +4541,7 @@ switch (yykind)
         break;
 
       case symbol_kind::S_argument_expression_list: // argument_expression_list
-        value.copy< vector<ExpressionNode *> * > (YY_MOVE (that.value));
+        value.copy< vector<Expression *> * > (YY_MOVE (that.value));
         break;
 
       default:
@@ -4638,7 +4638,7 @@ switch (yykind)
       case symbol_kind::S_assignment_expression: // assignment_expression
       case symbol_kind::S_expression: // expression
       case symbol_kind::S_constant_expression: // constant_expression
-        value.move< ExpressionNode * > (YY_MOVE (s.value));
+        value.move< Expression * > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_external_declaration: // external_declaration
@@ -4854,7 +4854,7 @@ switch (yykind)
         break;
 
       case symbol_kind::S_argument_expression_list: // argument_expression_list
-        value.move< vector<ExpressionNode *> * > (YY_MOVE (s.value));
+        value.move< vector<Expression *> * > (YY_MOVE (s.value));
         break;
 
       default:
