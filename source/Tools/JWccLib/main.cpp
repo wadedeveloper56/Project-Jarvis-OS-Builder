@@ -103,7 +103,7 @@ int main(int argc, char* argv[])
 		cleanup(filedata);
 		delete rawtokens;
 		rawtokens = nullptr;
-		cout << outputTokens.stringify() << endl;
+		//cout << outputTokens.stringify() << endl;
 		istringstream inStr(outputTokens.stringify());
 
 		Interpreter i;

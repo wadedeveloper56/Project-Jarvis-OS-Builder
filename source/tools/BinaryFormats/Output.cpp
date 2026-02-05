@@ -248,7 +248,7 @@ void DumpFileHeader(NTFileHeaderPtr pImageFileHeader)
 	printf("FILE HEADER VALUES\n");
 	printf("  % 16X Machine (%s)\n", pImageFileHeader->Machine, mt);
 	printf("  % 16X (%d) Number of Sections\n", pImageFileHeader->NumberOfSections, pImageFileHeader->NumberOfSections);
-	printf("  % 16X TimeDateStamp ->  %s", pImageFileHeader->TimeDateStamp, time);
+	printf("  % 16X TimeDateStamp ->  %s", pImageFileHeader->TimeDateStamp, (time==NULL)?("n/a\n") : (time));
 	printf("  % 16X PointerToSymbolTable\n", pImageFileHeader->PointerToSymbolTable);
 	printf("  % 16X (%d) NumberOfSymbols\n", pImageFileHeader->NumberOfSymbols, pImageFileHeader->NumberOfSymbols);
 	printf("  % 16X (%d) SizeOfOptionalHeader\n", pImageFileHeader->SizeOfOptionalHeader, pImageFileHeader->SizeOfOptionalHeader);
