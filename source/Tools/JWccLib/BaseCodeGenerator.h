@@ -3,7 +3,6 @@
 #include <fstream>
 #include <string>
 #include <vector>
-#include <stdint.h>
 #include <optional>
 #include "GlobalVars.h"
 
@@ -29,10 +28,19 @@ namespace WadeSpace
 	class BaseCodeGenerator
 	{
 	public:
-		BaseCodeGenerator();
-		BaseCodeGenerator(vector<VariableData*>* variableTable, vector<FunctionData*>* functionTable);
-		~BaseCodeGenerator();
+		BaseCodeGenerator() = default;
+		BaseCodeGenerator(vector<VariableData*>* const variable_table, vector<FunctionData*>* const function_table);
+		virtual ~BaseCodeGenerator() = default;
+		BaseCodeGenerator(const BaseCodeGenerator& other) = default;
+		BaseCodeGenerator(BaseCodeGenerator&& other) noexcept;
+		BaseCodeGenerator& operator=(const BaseCodeGenerator& other);
+		BaseCodeGenerator& operator=(BaseCodeGenerator&& other) noexcept;
+		vector<VariableData*>* getVariableTable() const;
+		vector<FunctionData*>* getFunctionTable() const;
+		bool isVariableTable() const;
+		bool isFunctionTable() const;
 		virtual void generateCode(ofstream& out) = 0;
+
 	protected:
 		vector<VariableData*>* variableTable;
 		vector<FunctionData*>* functionTable;

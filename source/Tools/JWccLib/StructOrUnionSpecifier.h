@@ -2,7 +2,6 @@
 
 #include <string>
 #include <vector>
-#include <stdint.h>
 #include <optional>
 #include "StructOrUnion.h"
 #include "StructDeclaration.h"

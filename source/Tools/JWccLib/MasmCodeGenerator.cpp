@@ -2,7 +2,6 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <stdint.h>
 #include <optional>
 #include "MasmCodeGenerator.h"
 #include "GlobalVars.h"

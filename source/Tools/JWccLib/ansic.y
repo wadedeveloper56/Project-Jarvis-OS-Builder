@@ -652,9 +652,9 @@ type_name
     ;
 
 abstract_declarator
-    : pointer                             { $<AbstractDeclarator *>$ = new AbstractDeclarator($1); cout << "pointer REDUCE to abstract_declarator" << endl; }
-    | direct_abstract_declarator          { $<AbstractDeclarator *>$ = new AbstractDeclarator($1); cout << "direct_abstract_declarator REDUCE to abstract_declarator" << endl; }
-    | pointer direct_abstract_declarator  { $<AbstractDeclarator *>$ = new AbstractDeclarator($1,$2); cout << "pointer direct_abstract_declarator REDUCE to abstract_declarator" << endl; }
+    : pointer                             { $$ = new AbstractDeclarator($1,nullptr); cout << "pointer REDUCE to abstract_declarator" << endl; }
+    | direct_abstract_declarator          { $$ = new AbstractDeclarator(nullptr,$1); cout << "direct_abstract_declarator REDUCE to abstract_declarator" << endl; }
+    | pointer direct_abstract_declarator  { $$ = new AbstractDeclarator($1,$2);      cout << "pointer direct_abstract_declarator REDUCE to abstract_declarator" << endl; }
     ;
 
 direct_abstract_declarator

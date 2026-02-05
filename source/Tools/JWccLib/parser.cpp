@@ -3030,19 +3030,19 @@ namespace  WadeSpace  {
 
   case 166: // abstract_declarator: pointer
 #line 655 "ansic.y"
-                                          { yylhs.value.as< AbstractDeclarator * > () = new AbstractDeclarator(yystack_[0].value.as < Pointer * > ()); cout << "pointer REDUCE to abstract_declarator" << endl; }
+                                          { yylhs.value.as < AbstractDeclarator * > () = new AbstractDeclarator(yystack_[0].value.as < Pointer * > (),nullptr); cout << "pointer REDUCE to abstract_declarator" << endl; }
 #line 3035 "parser.cpp"
     break;
 
   case 167: // abstract_declarator: direct_abstract_declarator
 #line 656 "ansic.y"
-                                          { yylhs.value.as< AbstractDeclarator * > () = new AbstractDeclarator(yystack_[0].value.as < DirectAbstractDeclarator * > ()); cout << "direct_abstract_declarator REDUCE to abstract_declarator" << endl; }
+                                          { yylhs.value.as < AbstractDeclarator * > () = new AbstractDeclarator(nullptr,yystack_[0].value.as < DirectAbstractDeclarator * > ()); cout << "direct_abstract_declarator REDUCE to abstract_declarator" << endl; }
 #line 3041 "parser.cpp"
     break;
 
   case 168: // abstract_declarator: pointer direct_abstract_declarator
 #line 657 "ansic.y"
-                                          { yylhs.value.as< AbstractDeclarator * > () = new AbstractDeclarator(yystack_[1].value.as < Pointer * > (),yystack_[0].value.as < DirectAbstractDeclarator * > ()); cout << "pointer direct_abstract_declarator REDUCE to abstract_declarator" << endl; }
+                                          { yylhs.value.as < AbstractDeclarator * > () = new AbstractDeclarator(yystack_[1].value.as < Pointer * > (),yystack_[0].value.as < DirectAbstractDeclarator * > ());      cout << "pointer direct_abstract_declarator REDUCE to abstract_declarator" << endl; }
 #line 3047 "parser.cpp"
     break;
 

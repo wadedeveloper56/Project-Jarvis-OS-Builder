@@ -14,7 +14,6 @@
 #include <string>
 #include <vector>
 #include <cstdlib>
-#include <cstdint>
 #include <optional>
 #include <cctype>
 #include <cstring>

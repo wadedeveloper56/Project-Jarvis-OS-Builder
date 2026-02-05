@@ -3,7 +3,6 @@
 #include <fstream>
 #include <string>
 #include <vector>
-#include <stdint.h>
 #include <optional>
 #include "ProgramData.h"
 #include "BaseCodeGenerator.h"

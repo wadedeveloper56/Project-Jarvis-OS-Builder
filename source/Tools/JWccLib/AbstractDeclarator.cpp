@@ -3,20 +3,22 @@
 
 using namespace WadeSpace;
 
-AbstractDeclarator::AbstractDeclarator(Pointer* pointer) : pointer(pointer), directAbstractDeclarator(nullptr)
+AbstractDeclarator::AbstractDeclarator(Pointer* pointer, DirectAbstractDeclarator* directAbstractDeclarator)
 {
+	this->pointer = pointer;
+	this->directAbstractDeclarator = directAbstractDeclarator;
 }
 
-AbstractDeclarator::AbstractDeclarator(DirectAbstractDeclarator* directAbstractDeclarator) : pointer(nullptr), directAbstractDeclarator(directAbstractDeclarator)
+AbstractDeclarator::AbstractDeclarator(const AbstractDeclarator& copy)
 {
+	this->pointer = copy.getPointer();
+	this->directAbstractDeclarator = copy.getDirectAbstractDeclarator();
 }
 
-AbstractDeclarator::AbstractDeclarator(Pointer* ptr, DirectAbstractDeclarator* directAbstractDeclarator) : pointer(ptr), directAbstractDeclarator(directAbstractDeclarator)
+AbstractDeclarator::AbstractDeclarator()
 {
-}
-
-AbstractDeclarator::AbstractDeclarator() : pointer(nullptr), directAbstractDeclarator(nullptr)
-{
+	this->pointer = nullptr;
+	this->directAbstractDeclarator = nullptr;
 }
 
 AbstractDeclarator::~AbstractDeclarator()
@@ -27,3 +29,5 @@ AbstractDeclarator::~AbstractDeclarator()
 
 Pointer* AbstractDeclarator::getPointer() const { return pointer; }
 DirectAbstractDeclarator* AbstractDeclarator::getDirectAbstractDeclarator() const { return directAbstractDeclarator; }
+bool AbstractDeclarator::isPointer() const { return pointer != nullptr; }
+bool AbstractDeclarator::isDirectAbstractDeclarator() const { return directAbstractDeclarator != nullptr; }
