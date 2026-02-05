@@ -19,19 +19,23 @@ namespace WadeSpace
 			BaseStatement* const statement, BaseStatement* const es1, BaseStatement* const es2,
 			BaseStatement* const statement2, vector<BaseStatement*>* const statementList,
 			vector<Declaration*>* const declarationList);
-		BaseStatement(TokenType op);
+		explicit BaseStatement(TokenType op);
 		BaseStatement(TokenType op, string& identifier);
 		BaseStatement(TokenType op, Expression* exp);
 		BaseStatement(TokenType op, Expression* exp, BaseStatement* statement);
 		BaseStatement(TokenType op, Expression* exp, BaseStatement* ifStatement, BaseStatement* elseStatement);
 		BaseStatement(TokenType op, BaseStatement* es1, BaseStatement* es2, BaseStatement* statement);
 		BaseStatement(TokenType op, BaseStatement* es1, BaseStatement* es2, Expression* exp, BaseStatement* statement);
-		BaseStatement(vector<BaseStatement*>* statementList);
-		BaseStatement(vector<Declaration*>* declarationList);
+		explicit BaseStatement(vector<BaseStatement*>* statementList);
+		explicit BaseStatement(vector<Declaration*>* declarationList);
 		BaseStatement(vector<BaseStatement*>* statementList, vector<Declaration*>* declarationList);
 		BaseStatement(string&  identifier, BaseStatement* statement);
 		BaseStatement(TokenType op, BaseStatement* statement);
-		BaseStatement();
+		BaseStatement() = default;
+		BaseStatement(const BaseStatement& other) = default;
+		BaseStatement(BaseStatement&& other) = default;
+		BaseStatement& operator=(const BaseStatement& other) = default;
+		BaseStatement& operator=(BaseStatement&& other) = default;
 		virtual ~BaseStatement();
 		[[nodiscard]]
 		optional<string> getIdentifier() const;

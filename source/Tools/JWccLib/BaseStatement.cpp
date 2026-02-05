@@ -114,11 +114,6 @@ BaseStatement::BaseStatement(TokenType op, string& identifier) : op(op), identif
 {
 }
 
-BaseStatement::BaseStatement() : op(NONE), identifier(nullopt), contExp(nullptr), exp(nullptr), statement(nullptr),
-                                 es1(nullptr), es2(nullptr), statement2(nullptr), statementList(nullptr),
-                                 declarationList(nullptr)
-{
-}
 
 BaseStatement::~BaseStatement()
 {
