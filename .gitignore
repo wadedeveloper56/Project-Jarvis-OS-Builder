@@ -32,3 +32,5 @@
 /source/tools-old/.vs
 /source/tools/out
 /source/tools/yacc/yacc/.vs
+/research/PreProcessor/.vs
+/source/Tools/PreProcessor/.vs

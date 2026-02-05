@@ -1,24 +1,25 @@
-BITS 32
-	SECTION .data
-	SECTION .bss
-var1:  resb 1
-var2:  resw 1
-var3:  resd 1
-var4:  resd 1
-var5:  resq 1
-var6:  resd 1
-var7:  resq 1
-var8:  rest 1
-var9:  resb 1
-var10:  resb 16
-var11:  resq 1
-var12:  resb 1
-	SECTION .text
-	 global _main
-_main:
-	ret
+.386
+.model flat, fastcall
 
-	 global _function2
-_function2:
+.data
+.data?
+var1 db ?
+var2 dw ?
+var3 dd ?
+var4 dd ?
+var5 dq ?
+var6 dd ?
+var7 dq ?
+var8 dt ?
+var9 db ?
+var10 db 16 dup(?)
+var11 dq ?
+var12 db ?
+
+.code
+_main proc  c
+	xor eax,eax
 	ret
+_main endp
+end _main
 

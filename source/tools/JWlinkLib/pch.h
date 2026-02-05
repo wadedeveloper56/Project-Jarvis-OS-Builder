@@ -10,4 +10,16 @@
 // add headers that you want to pre-compile here
 #include "framework.h"
 
+#pragma warning(disable:4267)
+#pragma warning(disable:4244)
+#pragma warning(disable:4018)
+#pragma warning(disable:4311)
+#pragma warning(disable:4146)
+#pragma warning(disable:4113)
+#pragma warning(disable:5286)
+#pragma warning(disable:4312)
+#pragma warning(disable:4477)
+#pragma warning(disable:5287)
+#pragma warning(disable:4603)
+
 #endif //PCH_H
