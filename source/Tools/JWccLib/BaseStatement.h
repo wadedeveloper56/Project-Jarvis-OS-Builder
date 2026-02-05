@@ -15,6 +15,10 @@ namespace WadeSpace
 	class BaseStatement
 	{
 	public:
+		BaseStatement(TokenType op, const string& identifier, Expression* const exp, Expression* const contExp,
+			BaseStatement* const statement, BaseStatement* const es1, BaseStatement* const es2,
+			BaseStatement* const statement2, vector<BaseStatement*>* const statementList,
+			vector<Declaration*>* const declarationList);
 		BaseStatement(TokenType op);
 		BaseStatement(TokenType op, string& identifier);
 		BaseStatement(TokenType op, Expression* exp);
@@ -26,18 +30,26 @@ namespace WadeSpace
 		BaseStatement(vector<Declaration*>* declarationList);
 		BaseStatement(vector<BaseStatement*>* statementList, vector<Declaration*>* declarationList);
 		BaseStatement(string&  identifier, BaseStatement* statement);
-		//BaseStatement(TokenType op, Expression* exp, BaseStatement* statement);
 		BaseStatement(TokenType op, BaseStatement* statement);
 		BaseStatement();
 		virtual ~BaseStatement();
+		[[nodiscard]]
 		optional<string> getIdentifier() const;
+		[[nodiscard]]
 		Expression* getExp() const;
+		[[nodiscard]]
 		Expression* getContExp() const;
+		[[nodiscard]]
 		BaseStatement* getStatement() const;
+		[[nodiscard]]
 		BaseStatement* getEs1() const;
+		[[nodiscard]]
 		BaseStatement* getEs2() const;
+		[[nodiscard]]
 		BaseStatement* getStatement2() const;
+		[[nodiscard]]
 		vector<BaseStatement*>* getStatementList() const;
+		[[nodiscard]]
 		vector<Declaration*>* getDeclarationList() const;
 
 	protected:
