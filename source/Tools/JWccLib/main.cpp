@@ -8,7 +8,7 @@
 #include "GlobalVars.h"
 #include "simplecpp.h"
 #include "BaseCodeGenerator.h"
-#include "NasmCodeGenerator.h"
+#include "MasmCodeGenerator.h"
 
 using namespace WadeSpace;
 using namespace std;
@@ -28,7 +28,7 @@ int main(int argc, char* argv[])
 	const char* progname = "Compiler";
 	int exitcode = 0, nerrors = 0;
 
-	printf("Compiler (x86/x64) v1.0 (C) Copyright 2025 Christopher D. Wade.\n");
+	printf("Compiler (x86/x64) v1.0 (C) Copyright 2025-2026 Christopher D. Wade.\n");
 	printf("All Rights Reserved\n"); 
 	
 	if (argNullCheck(argtable) != 0)

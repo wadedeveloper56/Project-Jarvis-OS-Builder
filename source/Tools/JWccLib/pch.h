@@ -37,5 +37,6 @@
 #pragma warning(disable:4477)
 #pragma warning(disable:5287)
 #pragma warning(disable:4047)
+#pragma warning(disable:4065)
 
 #endif //PCH_H

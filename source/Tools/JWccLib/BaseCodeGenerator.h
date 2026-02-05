@@ -30,12 +30,11 @@ namespace WadeSpace
 	{
 	public:
 		BaseCodeGenerator();
-		BaseCodeGenerator(vector<VariableData*>* variableTable, vector<FunctionData*>* functionTable, vector<FunctionData*>* functionPrototypeTable);
+		BaseCodeGenerator(vector<VariableData*>* variableTable, vector<FunctionData*>* functionTable);
 		~BaseCodeGenerator();
 		virtual void generateCode(ofstream& out) = 0;
 	protected:
 		vector<VariableData*>* variableTable;
 		vector<FunctionData*>* functionTable;
-		vector<FunctionData*>* functionPrototypeTable;
 	};
 }

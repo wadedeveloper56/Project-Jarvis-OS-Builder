@@ -4,7 +4,7 @@
 #include "ExternalDeclaration.h"
 #include "GlobalVars.h"
 #include "ParameterTypeList.h"
-#include "NasmCodeGenerator.h"
+#include "MasmCodeGenerator.h"
 
 using namespace WadeSpace;
 using namespace std;
@@ -47,7 +47,6 @@ BaseCodeGenerator* ProgramData::processGlobalVariables()
 {
 	vector<VariableData*>* variableTable = new vector<VariableData*>();
 	vector<FunctionData*>* functionTable = new vector<FunctionData*>();
-	vector<FunctionData*>* functionPrototypeTable = new vector<FunctionData*>();
 
 	for (ExternalDeclaration* ptr : *programData)
 	{
@@ -59,16 +58,8 @@ BaseCodeGenerator* ProgramData::processGlobalVariables()
 			{
 				VariableData* data = new VariableData();
 				DirectDeclarator* dd = initDecl->getDeclarator()->getDirectDeclarator();
-				if ((dd->getStr1() == OPAREN && dd->getStr2() == CPAREN) || (dd->getParameterTypeList() != nullptr))
+				if (!((dd->getStr1() == OPAREN && dd->getStr2() == CPAREN) || (dd->getParameterTypeList() != nullptr)))
 				{
-					optional<string> name = dd->getDirectDeclarator()->getIdentifier();
-					FunctionData* data = new FunctionData();
-					data->type = type;
-					data->name = name.value();
-					data->size = getSize(type);
-					functionPrototypeTable->push_back(data);
-				}
-				else {
 					data->name = initDecl->getVariableName();
 					data->type = type;
 					data->size = getSize(type);
@@ -99,6 +90,6 @@ BaseCodeGenerator* ProgramData::processGlobalVariables()
 			functionTable->push_back(data);
 		}
 	}
-	generator = new NasmCodeGenerator(variableTable, functionTable, functionPrototypeTable);
+	generator = new MasmCodeGenerator(variableTable, functionTable);
 	return generator;
 }

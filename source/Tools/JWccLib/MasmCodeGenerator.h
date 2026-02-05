@@ -12,12 +12,12 @@ using namespace std;
 
 namespace WadeSpace
 {
-	class NasmCodeGenerator : public BaseCodeGenerator
+	class MasmCodeGenerator : public BaseCodeGenerator
 	{
 	public:
-		NasmCodeGenerator();
-		NasmCodeGenerator(vector<VariableData*>* variableTable, vector<FunctionData*>* functionTable, vector<FunctionData*>* functionPrototypeTable);
-		~NasmCodeGenerator();
+		MasmCodeGenerator();
+		MasmCodeGenerator(vector<VariableData*>* variableTable, vector<FunctionData*>* functionTable);
+		~MasmCodeGenerator();
 		virtual void generateCode(ofstream& out);
 	};
 }
