@@ -28,3 +28,6 @@ Declaration::~Declaration()
 
 DeclarationSpecifiers* Declaration::getDeclarationSpecifiers() const { return declarationSpecifiers; }
 vector<InitDeclarator*>* Declaration::getVectorInitDeclarator() const { return vectorInitDeclarator; }
+bool Declaration::isDeclarationSpecifiers() const { return declarationSpecifiers != nullptr;  }
+bool Declaration::isVectorInitDeclarator() const { return vectorInitDeclarator != nullptr; }
+

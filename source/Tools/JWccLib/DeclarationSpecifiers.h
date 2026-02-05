@@ -25,7 +25,10 @@ namespace WadeSpace
 		TypeSpecifier* getTypeSpecifier() const;
 		TypeQualifier* getTypeQualifier() const;
 		DeclarationSpecifiers* getDeclarationSpecifiers() const;
-
+		bool isStorageClassSpecifier() const;
+		bool isTypeSpecifier() const;
+		bool isTypeQualifier() const;
+		bool isDeclarationSpecifiers() const;
 	private:
 		StorageClassSpecifier* storageClassSpecifier;
 		TypeSpecifier* typeSpecifier;

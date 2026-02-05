@@ -172,6 +172,7 @@
     <ClInclude Include="BaseStatement.h" />
     <ClInclude Include="CompoundStatement.h" />
     <ClInclude Include="Constant.h" />
+    <ClInclude Include="debug.h" />
     <ClInclude Include="Declaration.h" />
     <ClInclude Include="DeclarationSpecifiers.h" />
     <ClInclude Include="Declarator.h" />
@@ -179,7 +180,7 @@
     <ClInclude Include="DirectDeclarator.h" />
     <ClInclude Include="Enumerator.h" />
     <ClInclude Include="EnumSpecifier.h" />
-    <ClInclude Include="ExpressionNode.h" />
+    <ClInclude Include="Expression.h" />
     <ClInclude Include="ExpressionStatement.h" />
     <ClInclude Include="ExternalDeclaration.h" />
     <ClInclude Include="framework.h" />
@@ -221,6 +222,7 @@
     <ClCompile Include="BaseStatement.cpp" />
     <ClCompile Include="CompoundStatement.cpp" />
     <ClCompile Include="Constant.cpp" />
+    <ClCompile Include="debug.cpp" />
     <ClCompile Include="Declaration.cpp" />
     <ClCompile Include="DeclarationSpecifiers.cpp" />
     <ClCompile Include="Declarator.cpp" />
@@ -228,7 +230,7 @@
     <ClCompile Include="DirectDeclarator.cpp" />
     <ClCompile Include="Enumerator.cpp" />
     <ClCompile Include="EnumSpecifier.cpp" />
-    <ClCompile Include="ExpressionNode.cpp" />
+    <ClCompile Include="Expression.cpp" />
     <ClCompile Include="ExpressionStatement.cpp" />
     <ClCompile Include="ExternalDeclaration.cpp" />
     <ClCompile Include="FunctionDefinition.cpp" />

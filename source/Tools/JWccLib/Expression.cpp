@@ -1,27 +1,28 @@
 #include "pch.h"
-#include "ExpressionNode.h"
+#include "Expression.h"
 
 using namespace WadeSpace;
 
-_Nodedata::_Nodedata() :type(NONE2), str(""), const1(nullptr), op(0), exp(nullptr), exp2(nullptr), exp3(nullptr), vectorAssignmentExpression(nullptr), vectorInitializer(nullptr), typeName(nullptr)
+_Nodedata::_Nodedata() :type(NT_NONE), str(""), const1(nullptr), op(0), exp(nullptr), exp2(nullptr), exp3(nullptr), vectorAssignmentExpression(nullptr), vectorInitializer(nullptr), typeName(nullptr)
 {
 }
 
 _Nodedata::~_Nodedata() {}
 
 
-ExpressionNode::ExpressionNode(const string& identifier) :left(nullptr), op(0), right(nullptr)
+ExpressionNode::ExpressionNode(string identifier, Constant* constant) :left(nullptr), op(0), right(nullptr)
 {
 	data = new NodeData;
-	data->type = STRING;
-	data->str = identifier;
-}
-
-ExpressionNode::ExpressionNode(Constant* constant) :left(nullptr), op(0), right(nullptr)
-{
-	data = new NodeData;
-	data->type = CONSTANT;
-	data->const1 = constant;
+	if (identifier != "")
+	{
+		data->type = STRING;
+		data->str = identifier;
+	}
+	else
+	{
+		data->type = CONSTANT;
+		data->const1 = constant;
+	}
 }
 
 ExpressionNode::ExpressionNode(TypeName* typeName, ExpressionNode* exp) :left(nullptr), op(0), right(nullptr)

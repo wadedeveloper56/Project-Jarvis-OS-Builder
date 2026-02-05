@@ -180,7 +180,7 @@ WS  [ \t\v\n\f]
                 return WadeSpace::Parser::make_SWITCH(SWITCH, WadeSpace::location()); 
                }
 "typedef"      { 
-                //cout << "Scanner: token [" << yytext << "]" << endl;
+                cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_TYPEDEF(TYPEDEF, WadeSpace::location()); 
                }
 "union"        { 
@@ -217,7 +217,7 @@ WS  [ \t\v\n\f]
                }
 
 {L}{A}*        { 
-                //cout << "Scanner: identifier [" << yytext << "]" << endl;
+                cout << "Scanner: identifier [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_IDENTIFIER(yytext, WadeSpace::location()); 
                }
 {HP}{H}+{IS}?  {

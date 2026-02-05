@@ -1202,7 +1202,7 @@ case 31:
 YY_RULE_SETUP
 #line 182 "ansic.l"
 { 
-                //cout << "Scanner: token [" << yytext << "]" << endl;
+                cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_TYPEDEF(TYPEDEF, WadeSpace::location()); 
                }
 	YY_BREAK
@@ -1274,7 +1274,7 @@ case 40:
 YY_RULE_SETUP
 #line 219 "ansic.l"
 { 
-                //cout << "Scanner: identifier [" << yytext << "]" << endl;
+                cout << "Scanner: identifier [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_IDENTIFIER(yytext, WadeSpace::location()); 
                }
 	YY_BREAK

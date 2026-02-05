@@ -44,7 +44,8 @@
     #include "FunctionDefinition.h"
     #include "ExternalDeclaration.h"
     #include "ProgramData.h"
-    #include "ExpressionNode.h"
+    #include "Expression.h"
+    #include "debug.h"
 
     using namespace std;
 
@@ -255,39 +256,27 @@
 %%
 
 primary_expression
-    : IDENTIFIER                { $<ExpressionNode *>$ = new ExpressionNode($1); cout << "IDENTIFIER REDUCE to primary_expression" << endl; }
-    | constant                  { $<ExpressionNode *>$ = new ExpressionNode($1); cout << "constant REDUCE to primary_expression" << endl; }
-    | OPAREN expression CPAREN  { $<ExpressionNode *>$ = $2; cout << "OPAREN expression CPAREN REDUCE to primary_expression" << endl; }
+    : IDENTIFIER                { $$ = createPrimaryExpression($1,NULL); cout << "IDENTIFIER REDUCE to primary_expression" << endl; }
+    | constant                  { $$ = createPrimaryExpression("",$1);   cout << "constant REDUCE to primary_expression" << endl; }
+    | OPAREN expression CPAREN  { $$ = $2;                               cout << "OPAREN expression CPAREN REDUCE to primary_expression" << endl; }
     ;
 
 constant
-    : F_CONST         {
-                        long double id = $1;
-                        $<Constant *>$ = new Constant(id);
-                        cout << "F_CONST REDUCE to constant " << id << endl;
-                      }
-    | I_CONST         {
-                        uint64_t id = $1;
-                        $<Constant *>$ = new Constant(id);
-                        cout << "I_CONST REDUCE to constant " << id << endl;
-                      }
-    | STRING_LITERAL  {
-                        string id = $1;
-                        $<Constant *>$ = new Constant(id);
-                        cout << "STRING_LITERAL REDUCE to constant  " << id << endl;
-                      }
+    : F_CONST         { long double id = $1; $$ = new Constant(id); cout << "F_CONST REDUCE to constant " << id << endl; }
+    | I_CONST         { uint64_t id = $1;    $$ = new Constant(id); cout << "I_CONST REDUCE to constant " << id << endl; }
+    | STRING_LITERAL  { string id = $1;      $$ = new Constant(id); cout << "STRING_LITERAL REDUCE to constant  " << id << endl; }
 
 postfix_expression
-    : primary_expression                                           { $<ExpressionNode *>$ = $1; cout << "primary_expression REDUCE to postfix_expression" << endl; }
-    | postfix_expression OBRACE expression CBRACE                  { $<ExpressionNode *>$ = new ExpressionNode($1,$2,nullptr); cout << "postfix_expression OBRACE expression CBRACE REDUCE to postfix_expression" << endl; }
-    | postfix_expression OPAREN CPAREN                             { $<ExpressionNode *>$ = new ExpressionNode($1,nullptr,nullptr); cout << "postfix_expression OPAREN CPAREN REDUCE to postfix_expression" << endl; }
-    | postfix_expression OPAREN argument_expression_list CPAREN    { $<ExpressionNode *>$ = new ExpressionNode($1,$3); cout << "postfix_expression OPAREN argument_expression_list CPAREN REDUCE to postfix_expression" << endl; }
-    | postfix_expression PERIOD IDENTIFIER                         { $<ExpressionNode *>$ = new ExpressionNode($1,$2,$3); cout << "postfix_expression PERIOD_OP IDENTIFIER REDUCE to postfix_expression" << endl; }
-    | postfix_expression PTR_OP IDENTIFIER                         { $<ExpressionNode *>$ = new ExpressionNode($1,$2,$3); cout << "postfix_expression PTR_OP IDENTIFIER REDUCE to postfix_expression" << endl; }
-    | postfix_expression INC_OP                                    { $<ExpressionNode *>$ = new ExpressionNode($1,$2,""); cout << "postfix_expression INC_OP REDUCE to postfix_expression" << endl; }
-    | postfix_expression DEC_OP                                    { $<ExpressionNode *>$ = new ExpressionNode($1,$2,""); cout << "postfix_expression DEC_OP REDUCE to postfix_expression" << endl; }
-    | OPAREN type_name CPAREN OCURLY initializer_list CCURLY       { $<ExpressionNode *>$ = new ExpressionNode($2,$5); cout << "OPAREN type_name CPAREN_OP OCURLY_OP initializer_list CCURLY REDUCE to postfix_expression" << endl; }
-    | OPAREN type_name CPAREN OCURLY initializer_list COMMA CCURLY { $<ExpressionNode *>$ = new ExpressionNode($2,$5); cout << "OPAREN type_name CPAREN_OP OCURLY_OP initializer_list COMMA CCURLY REDUCE to postfix_expression" << endl; }
+    : primary_expression                                           { $$ = $1;                                     cout << "primary_expression REDUCE to postfix_expression" << endl; }
+    | postfix_expression OBRACE expression CBRACE                  { $$ = new ExpressionNode($1,$2,nullptr);      cout << "postfix_expression OBRACE expression CBRACE REDUCE to postfix_expression" << endl; }
+    | postfix_expression OPAREN CPAREN                             { $$ = new ExpressionNode($1,nullptr,nullptr); cout << "postfix_expression OPAREN CPAREN REDUCE to postfix_expression" << endl; }
+    | postfix_expression OPAREN argument_expression_list CPAREN    { $$ = new ExpressionNode($1,$3);              cout << "postfix_expression OPAREN argument_expression_list CPAREN REDUCE to postfix_expression" << endl; }
+    | postfix_expression PERIOD IDENTIFIER                         { $$ = new ExpressionNode($1,$2,$3);           cout << "postfix_expression PERIOD_OP IDENTIFIER REDUCE to postfix_expression" << endl; }
+    | postfix_expression PTR_OP IDENTIFIER                         { $$ = new ExpressionNode($1,$2,$3);           cout << "postfix_expression PTR_OP IDENTIFIER REDUCE to postfix_expression" << endl; }
+    | postfix_expression INC_OP                                    { $$ = new ExpressionNode($1,$2,"");           cout << "postfix_expression INC_OP REDUCE to postfix_expression" << endl; }
+    | postfix_expression DEC_OP                                    { $$ = new ExpressionNode($1,$2,"");           cout << "postfix_expression DEC_OP REDUCE to postfix_expression" << endl; }
+    | OPAREN type_name CPAREN OCURLY initializer_list CCURLY       { $$ = new ExpressionNode($2,$5);              cout << "OPAREN type_name CPAREN_OP OCURLY_OP initializer_list CCURLY REDUCE to postfix_expression" << endl; }
+    | OPAREN type_name CPAREN OCURLY initializer_list COMMA CCURLY { $$ = new ExpressionNode($2,$5);              cout << "OPAREN type_name CPAREN_OP OCURLY_OP initializer_list COMMA CCURLY REDUCE to postfix_expression" << endl; }
 
 
 argument_expression_list
@@ -725,17 +714,18 @@ compound_statement
     ;
 
 declaration_list
-    : declaration                   {
-                                     Declaration* exp = $1;
-                                     $$ = new std::vector<Declaration*>();
-                                     $$->push_back(exp);
+    : declaration                   { $$ = createDeclarationList($1,nullptr);
+                                     //Declaration* exp = $1;
+                                     //$$ = new std::vector<Declaration*>();
+                                     //$$->push_back(exp);
                                      cout << "declaration REDUCE to declaration_list" << endl;
                                     }
     | declaration_list declaration  {
-                                     Declaration* value1 = $2;
-                                     std::vector<Declaration*> *value2 = $1;
-                                     value2->push_back(value1);
-                                     $$ = value2;
+                                     $$ = createDeclarationList($2,$1);
+                                     //Declaration* value1 = $2;
+                                     //std::vector<Declaration*> *value2 = $1;
+                                     //value2->push_back(value1);
+                                     //$$ = value2;
                                      cout << "declaration_list declaration REDUCE to declaration_list" << endl;
                                     }
     ;

@@ -1,29 +1,7 @@
 JWasm v2.12pre, Feb  5 2026
 test1.asm
-                                .386
-                                .model flat, fastcall
-
-                                .data
-00000000                        .data?
-00000000  00                    var1 db ?
-00000001  0000                  var2 dw ?
-00000003  00000000              var3 dd ?
-00000007  00000000              var4 dd ?
-0000000B  0000000000000000      var5 dq ?
-00000013  00000000              var6 dd ?
-00000017  0000000000000000      var7 dq ?
-0000001F  000000000000000000    var8 dt ?
-00000029  00                    var9 db ?
-0000002A  000000000000000000    var10 db 16 dup(?)
-0000003A  0000000000000000      var11 dq ?
-00000042  00                    var12 db ?
-
-00000000                        .code
-00000000                        _main proc  c
-00000000  33C0                  	xor eax,eax
-00000002                        	ret
-00000003                        _main endp
-                                end _main
+                                
+                           Error A2099: END directive required at end of file
 
 
 Macros:
@@ -37,53 +15,17 @@ Macros:
 @SubStr  . . . . . . . . . . . .        Func     0
 
 
-Segments and Groups:
-
-                N a m e                 Size     Length   Align   Combine Class
-
-FLAT . . . . . . . . . . . . . .        GROUP
-_BSS . . . . . . . . . . . . . .        32 Bit   00000043 DWord   Public  'BSS'
-_DATA  . . . . . . . . . . . . .        32 Bit   00000000 DWord   Public  'DATA'
-_TEXT  . . . . . . . . . . . . .        32 Bit   00000003 DWord   Public  'CODE'
-
-
-Procedures, parameters and locals:
-
-                N a m e                 Type     Value    Segment  Length
-
-_main  . . . . . . . . . . . . .        P Near   00000000 _TEXT    00000003 Public   C
-
-
 Symbols:
 
                 N a m e                 Type       Value     Attr
 
-@CodeSize  . . . . . . . . . . .        Number             0h 
-@Cpu . . . . . . . . . . . . . .        Number           D0Fh 
+@Cpu . . . . . . . . . . . . . .        Number           101h 
 @CurSeg  . . . . . . . . . . . .        Text   
-@DataSize  . . . . . . . . . . .        Number             0h 
 @Date  . . . . . . . . . . . . .        Text   02/05/26
 @FileCur . . . . . . . . . . . .        Text   test1.asm
 @FileName  . . . . . . . . . . .        Text   TEST1
-@Interface . . . . . . . . . . .        Number             7h 
-@Model . . . . . . . . . . . . .        Number             7h 
-@Time  . . . . . . . . . . . . .        Text   08:47:26
+@Time  . . . . . . . . . . . . .        Text   09:23:42
 @Version . . . . . . . . . . . .        Text   800
-@code  . . . . . . . . . . . . .        Text   _TEXT
-@data  . . . . . . . . . . . . .        Text   FLAT
-@stack . . . . . . . . . . . . .        Text   FLAT
 __JWASM__  . . . . . . . . . . .        Number            D4h 
-var1 . . . . . . . . . . . . . .        Byte               0h _BSS FASTCALL
-var10  . . . . . . . . . . . . .        Byte[16]          2Ah _BSS FASTCALL
-var11  . . . . . . . . . . . . .        QWord             3Ah _BSS FASTCALL
-var12  . . . . . . . . . . . . .        Byte              42h _BSS FASTCALL
-var2 . . . . . . . . . . . . . .        Word               1h _BSS FASTCALL
-var3 . . . . . . . . . . . . . .        DWord              3h _BSS FASTCALL
-var4 . . . . . . . . . . . . . .        DWord              7h _BSS FASTCALL
-var5 . . . . . . . . . . . . . .        QWord              Bh _BSS FASTCALL
-var6 . . . . . . . . . . . . . .        DWord             13h _BSS FASTCALL
-var7 . . . . . . . . . . . . . .        QWord             17h _BSS FASTCALL
-var8 . . . . . . . . . . . . . .        TByte             1Fh _BSS FASTCALL
-var9 . . . . . . . . . . . . . .        Byte              29h _BSS FASTCALL
 
-test1.asm: 24 lines, 2 passes, 1 ms, 0 warnings, 0 errors
+test1.asm: 0 lines, 1 passes, 1 ms, 0 warnings, 1 errors

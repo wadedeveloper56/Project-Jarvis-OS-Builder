@@ -4,16 +4,18 @@
 #include "Constant.h"
 using namespace std;
 
-namespace WadeSpace {
+namespace WadeSpace
+{
 
-	typedef enum _NodeType { NONE2, SIZEOF_TYPE, INITIALZER_LIST, ARGUMENT_LIST, IDENTIFIER_TYPE, CONDITIONAL, CAST, STRING, CONSTANT } NodeType;
-	
+	typedef enum _NodeType { NT_NONE, SIZEOF_TYPE, INITIALZER_LIST, ARGUMENT_LIST, IDENTIFIER_TYPE, CONDITIONAL, CAST, STRING, CONSTANT } NodeType;
+
 	class ExpressionNode;
 	class AssignmentExpression;
 	class Initializer;
 	class TypeName;
 
-	typedef struct _Nodedata {
+	typedef struct _Nodedata
+	{
 		NodeType type;
 		string str;
 		Constant* const1;
@@ -31,8 +33,7 @@ namespace WadeSpace {
 	class ExpressionNode
 	{
 	public:
-		ExpressionNode(const string& identifier);
-		ExpressionNode(Constant* constant);
+		ExpressionNode(string identifier, Constant* constant);
 		ExpressionNode(TypeName* typeName, ExpressionNode* exp);
 		ExpressionNode(TypeName* typeName, int op);
 		ExpressionNode(ExpressionNode* left, int op, ExpressionNode* right);

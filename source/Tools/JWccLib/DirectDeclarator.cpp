@@ -2,7 +2,7 @@
 #include "DirectDeclarator.h"
 #include "ParameterTypeList.h"
 #include "Declarator.h"
-#include "ExpressionNode.h"
+#include "Expression.h"
 
 using namespace WadeSpace;
 using namespace std;

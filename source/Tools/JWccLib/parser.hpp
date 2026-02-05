@@ -82,7 +82,8 @@
     #include "FunctionDefinition.h"
     #include "ExternalDeclaration.h"
     #include "ProgramData.h"
-    #include "ExpressionNode.h"
+    #include "Expression.h"
+    #include "debug.h"
 
     using namespace std;
 
@@ -93,7 +94,7 @@
         class Interpreter;
     }
 
-#line 97 "parser.hpp"
+#line 98 "parser.hpp"
 
 # include <cassert>
 # include <cstdlib> // std::abort
@@ -234,7 +235,7 @@
 
 #line 9 "ansic.y"
 namespace  WadeSpace  {
-#line 238 "parser.hpp"
+#line 239 "parser.hpp"
 
 
 
@@ -4923,7 +4924,7 @@ switch (yykind)
 
 #line 9 "ansic.y"
 } //  WadeSpace 
-#line 4927 "parser.hpp"
+#line 4928 "parser.hpp"
 
 
 
