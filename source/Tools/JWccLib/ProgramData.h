@@ -22,7 +22,6 @@ namespace WadeSpace
 		void add(ExternalDeclaration* data);
 		BaseCodeGenerator* processGlobalVariables();
 		int getSize(TokenType type);
-		void test();
 
 	private:
 		void handleDeclaration(Declaration* declaration, vector<struct _VariableData*>* variableTable);

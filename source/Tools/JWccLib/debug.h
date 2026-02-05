@@ -6,6 +6,6 @@
 using namespace std;
 using namespace WadeSpace;
 
-Expression* createPrimaryExpression(string identifier, Constant* constant);
+Expression* createPrimaryExpression(const optional<string>& identifier, Constant* constant);
 vector<Declaration*>* createDeclarationList(Declaration* exp, vector<Declaration*>* list);
 

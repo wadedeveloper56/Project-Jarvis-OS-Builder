@@ -12,14 +12,18 @@ namespace WadeSpace
 	class Constant
 	{
 	public:
-		Constant(uint64_t value);
-		Constant(long double value);
-		Constant(const string& value);
+		explicit Constant(const uint64_t value);
+		explicit Constant(const long double value);
+		explicit Constant(const string& value);
 		Constant();
-		virtual ~Constant();
+		virtual ~Constant() = default;
+		[[nodiscard]]
 		uint64_t getIConst() const;
+		[[nodiscard]]
 		long double getFConst() const;
+		[[nodiscard]]
 		optional<string> getStrConst() const;
+		[[nodiscard]]
 		TokenType getType() const;
 
 	private:

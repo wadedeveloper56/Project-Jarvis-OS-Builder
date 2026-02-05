@@ -12,22 +12,24 @@ namespace WadeSpace
 	class DeclarationSpecifiers
 	{
 	public:
+		DeclarationSpecifiers() = default;
+		DeclarationSpecifiers(StorageClassSpecifier* const storageClassSpecifier, TypeSpecifier* const typeSpecifier, TypeQualifier* const typeQualifier, DeclarationSpecifiers* const declarationSpecifiers);
 		DeclarationSpecifiers(TypeQualifier* typeQualifier, DeclarationSpecifiers* declarationSpecifiers);
-		DeclarationSpecifiers(TypeQualifier* typeQualifier);
+		explicit DeclarationSpecifiers(TypeQualifier* typeQualifier);
 		DeclarationSpecifiers(TypeSpecifier* typeSpecifier, DeclarationSpecifiers* declarationSpecifiers);
-		DeclarationSpecifiers(TypeSpecifier* typeSpecifier);
-		DeclarationSpecifiers(StorageClassSpecifier* storageClassSpecifier);
+		explicit DeclarationSpecifiers(TypeSpecifier* typeSpecifier);
+		explicit DeclarationSpecifiers(StorageClassSpecifier* storageClassSpecifier);
 		DeclarationSpecifiers(StorageClassSpecifier* storageClassSpecifier, DeclarationSpecifiers* declarationSpecifiers);
-		DeclarationSpecifiers();
 		virtual ~DeclarationSpecifiers();
-		StorageClassSpecifier* getStorageClassSpecifier() const;
-		TypeSpecifier* getTypeSpecifier() const;
-		TypeQualifier* getTypeQualifier() const;
-		DeclarationSpecifiers* getDeclarationSpecifiers() const;
-		bool isStorageClassSpecifier() const;
-		bool isTypeSpecifier() const;
-		bool isTypeQualifier() const;
-		bool isDeclarationSpecifiers() const;
+		[[nodiscard]] StorageClassSpecifier* getStorageClassSpecifier() const;
+		[[nodiscard]] TypeSpecifier* getTypeSpecifier() const;
+		[[nodiscard]] TypeQualifier* getTypeQualifier() const;
+		[[nodiscard]] DeclarationSpecifiers* getDeclarationSpecifiers() const;
+		[[nodiscard]] bool isStorageClassSpecifier() const;
+		[[nodiscard]] bool isTypeSpecifier() const;
+		[[nodiscard]] bool isTypeQualifier() const;
+		[[nodiscard]] bool isDeclarationSpecifiers() const;
+
 	private:
 		StorageClassSpecifier* storageClassSpecifier;
 		TypeSpecifier* typeSpecifier;

@@ -19,9 +19,12 @@ Declaration::Declaration() : declarationSpecifiers(nullptr), vectorInitDeclarato
 Declaration::~Declaration()
 {
 	delete declarationSpecifiers;
-	for (InitDeclarator* ptr : *vectorInitDeclarator)
+	if (vectorInitDeclarator != nullptr)
 	{
-		delete ptr;
+		for (InitDeclarator* ptr : *vectorInitDeclarator)
+		{
+			delete ptr;
+		}
 	}
 	delete vectorInitDeclarator;
 }

@@ -257,7 +257,7 @@
 
 primary_expression
     : IDENTIFIER                { $$ = createPrimaryExpression($1,NULL); cout << "IDENTIFIER REDUCE to primary_expression" << endl; }
-    | constant                  { $$ = createPrimaryExpression("",$1);   cout << "constant REDUCE to primary_expression" << endl; }
+    | constant                  { $$ = createPrimaryExpression(nullopt,$1);   cout << "constant REDUCE to primary_expression" << endl; }
     | OPAREN expression CPAREN  { $$ = $2;                               cout << "OPAREN expression CPAREN REDUCE to primary_expression" << endl; }
     ;
 

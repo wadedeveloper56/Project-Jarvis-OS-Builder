@@ -1964,7 +1964,7 @@ namespace  WadeSpace  {
 
   case 3: // primary_expression: constant
 #line 260 "ansic.y"
-                                { yylhs.value.as < Expression * > () = createPrimaryExpression("",yystack_[0].value.as < Constant * > ());   cout << "constant REDUCE to primary_expression" << endl; }
+                                { yylhs.value.as < Expression * > () = createPrimaryExpression(nullopt,yystack_[0].value.as < Constant * > ());   cout << "constant REDUCE to primary_expression" << endl; }
 #line 1969 "parser.cpp"
     break;
 

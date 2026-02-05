@@ -1,5 +1,4 @@
 #include "pch.h"
-#include <iostream>
 #include "ProgramData.h"
 #include "ExternalDeclaration.h"
 #include "GlobalVars.h"
@@ -11,7 +10,8 @@ using namespace std;
 
 ProgramData::ProgramData()
 {
-	programData = new vector<ExternalDeclaration*>();
+	this->programData = new vector<ExternalDeclaration*>();
+	this->generator = nullptr;
 }
 
 ProgramData::~ProgramData()

@@ -3,17 +3,14 @@
 
 using namespace WadeSpace;
 
-_Nodedata::_Nodedata() :type(NT_NONE), str(""), const1(nullptr), op(0), exp(nullptr), exp2(nullptr), exp3(nullptr), vectorAssignmentExpression(nullptr), vectorInitializer(nullptr), typeName(nullptr)
+NodeData::NodeData() :type(NT_NONE), str(nullopt), const1(nullptr), op(0), exp(nullptr), exp2(nullptr), exp3(nullptr), vectorAssignmentExpression(nullptr), vectorInitializer(nullptr), typeName(nullptr)
 {
 }
 
-_Nodedata::~_Nodedata() {}
-
-
-Expression::Expression(string identifier, Constant* constant) :left(nullptr), op(0), right(nullptr)
+Expression::Expression(const optional<string>& identifier, Constant* constant) :left(nullptr), op(0), right(nullptr)
 {
 	data = new NodeData;
-	if (identifier != "")
+	if (identifier.has_value())
 	{
 		data->type = STRING;
 		data->str = identifier;

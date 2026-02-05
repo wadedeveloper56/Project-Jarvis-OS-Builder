@@ -4,11 +4,11 @@
 using namespace WadeSpace;
 using namespace std;
 
-Constant::Constant(uint64_t value) : iConst(value), fConst(0.0), strConst(nullopt), type(INTEGER_CONSTANT)
+Constant::Constant(const uint64_t value) : iConst(value), fConst(0.0), strConst(nullopt), type(INTEGER_CONSTANT)
 {
 }
 
-Constant::Constant(long double value) : iConst(0), fConst(value), strConst(nullopt), type(FLOAT_CONSTANT)
+Constant::Constant(const long double value) : iConst(0), fConst(value), strConst(nullopt), type(FLOAT_CONSTANT)
 {
 }
 
@@ -17,10 +17,6 @@ Constant::Constant(const string&  value) : iConst(0), fConst(0.0), strConst(valu
 }
 
 Constant::Constant() : iConst(0), fConst(0.0), strConst(nullopt), type(NONE)
-{
-}
-
-Constant::~Constant()
 {
 }
 

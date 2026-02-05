@@ -14,10 +14,10 @@ namespace WadeSpace
 	class Initializer;
 	class TypeName;
 
-	typedef struct _Nodedata
+	typedef struct NodeData
 	{
 		NodeType type;
-		string str;
+		optional<string> str;
 		Constant* const1;
 		int op;
 		Expression* exp;
@@ -26,14 +26,14 @@ namespace WadeSpace
 		vector<Expression*>* vectorAssignmentExpression;
 		vector<Initializer*>* vectorInitializer;
 		TypeName* typeName;
-		_Nodedata();
-		~_Nodedata();
-	}NodeData, * NodeDataPtr;
+		NodeData();
+		~NodeData() = default;
+	} * NodeDataPtr;
 
 	class Expression
 	{
 	public:
-		Expression(string identifier, Constant* constant);
+		Expression(const optional<string>& identifier, Constant* constant);
 		Expression(TypeName* typeName, Expression* exp);
 		Expression(TypeName* typeName, int op);
 		Expression(Expression* left, int op, Expression* right);

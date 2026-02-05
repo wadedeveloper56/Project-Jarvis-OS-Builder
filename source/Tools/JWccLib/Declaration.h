@@ -13,14 +13,14 @@ namespace WadeSpace
 	class Declaration
 	{
 	public:
-		Declaration(DeclarationSpecifiers* declarationSpecifiers);
+		explicit Declaration(DeclarationSpecifiers* declarationSpecifiers);
 		Declaration(DeclarationSpecifiers* declarationSpecifiers, vector<InitDeclarator*>* vectorInitDeclarator);
 		Declaration();
 		virtual ~Declaration();
-		DeclarationSpecifiers* getDeclarationSpecifiers() const;
-		vector<InitDeclarator*>* getVectorInitDeclarator() const;
-		bool isDeclarationSpecifiers() const;
-		bool isVectorInitDeclarator() const;
+		[[nodiscard]] DeclarationSpecifiers* getDeclarationSpecifiers() const;
+		[[nodiscard]] vector<InitDeclarator*>* getVectorInitDeclarator() const;
+		[[nodiscard]] bool isDeclarationSpecifiers() const;
+		[[nodiscard]] bool isVectorInitDeclarator() const;
 
 	private:
 		DeclarationSpecifiers* declarationSpecifiers;
