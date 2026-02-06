@@ -416,8 +416,8 @@ declaration
 
 declaration_specifiers
     : storage_class_specifier                         { $$ = createDeclarationSpecifiers($1,nullptr,nullptr,nullptr); cout << "storage_class_specifier REDUCE to declaration_specifiers" << endl;}
-    | storage_class_specifier declaration_specifiers  { $$ = createDeclarationSpecifiers($1,nullptr,nullptr,$2);      cout << "storage_class_specifier declaration_specifiers REDUCE to declaration_specifiers" << endl;}
-    | type_specifier                                  { $$ = createDeclarationSpecifiers(nullptr,$1,nullptr,nullptr); cout << "type_specifier REDUCE to declaration_specifiers" << endl;}
+    | storage_class_specifier declaration_specifiers  { $$ = createDeclarationSpecifiers($1,nullptr,nullptr,$2);      cout << "** storage_class_specifier declaration_specifiers REDUCE to declaration_specifiers" << endl;}
+    | type_specifier                                  { $$ = createDeclarationSpecifiers(nullptr,$1,nullptr,nullptr); cout << "** type_specifier REDUCE to declaration_specifiers" << endl;}
     | type_specifier declaration_specifiers           { $$ = createDeclarationSpecifiers(nullptr,$1,nullptr,$2);      cout << "type_specifier declaration_specifiers REDUCE to declaration_specifiers" << endl;}
     | type_qualifier                                  { $$ = createDeclarationSpecifiers(nullptr,nullptr,$1,nullptr); cout << "type_qualifier REDUCE to declaration_specifiers" << endl;}
     | type_qualifier declaration_specifiers           { $$ = createDeclarationSpecifiers(nullptr,nullptr,$1,$2);      cout << "type_qualifier declaration_specifiers REDUCE to declaration_specifiers" << endl;}
@@ -445,7 +445,7 @@ init_declarator
     ;
 
 storage_class_specifier
-    : TYPEDEF   { $$ = createStorageClassSpecifier($1,TYPEDEF); cout << "TYPEDEF REDUCE to storage_class_specifier" << endl;}
+    : TYPEDEF   { $$ = createStorageClassSpecifier($1,TYPEDEF); cout << "** TYPEDEF REDUCE to storage_class_specifier" << endl;}
     | EXTERN    { $$ = createStorageClassSpecifier($1,EXTERN); cout << "EXTERN REDUCE to storage_class_specifier" << endl;}
     | STATIC    { $$ = createStorageClassSpecifier($1,STATIC); cout << "STATIC REDUCE to storage_class_specifier" << endl;}
     | AUTO      { $$ = createStorageClassSpecifier($1,AUTO); cout << "AUTO REDUCE to storage_class_specifier" << endl;}
@@ -453,23 +453,23 @@ storage_class_specifier
     ;
 
 type_specifier
-    : VOID                      { $<TypeSpecifier *>$ = new TypeSpecifier(VOID); cout << "VOID REDUCE to type_specifier" << endl;}
-    | CHAR                      { $<TypeSpecifier *>$ = new TypeSpecifier(CHAR); cout << "CHAR REDUCE to type_specifier" << endl;}
-    | SHORT                     { $<TypeSpecifier *>$ = new TypeSpecifier(SHORT); cout << "SHORT REDUCE to type_specifier" << endl;}
-    | INT                       { $<TypeSpecifier *>$ = new TypeSpecifier(INT); cout << "INT REDUCE to type_specifier" << endl;}
-    | LONG                      { $<TypeSpecifier *>$ = new TypeSpecifier(LONG); cout << "LONG REDUCE to type_specifier" << endl;}
-    | LONG_LONG                 { $<TypeSpecifier *>$ = new TypeSpecifier(LONG_LONG); cout << "LONG_LONG REDUCE to type_specifier" << endl;}
-    | FLOAT                     { $<TypeSpecifier *>$ = new TypeSpecifier(FLOAT); cout << "FLOAT REDUCE to type_specifier" << endl;}
-    | DOUBLE                    { $<TypeSpecifier *>$ = new TypeSpecifier(DOUBLE); cout << "DOUBLE REDUCE to type_specifier" << endl;}
-    | LONG_DOUBLE               { $<TypeSpecifier *>$ = new TypeSpecifier(LONG_DOUBLE); cout << "LONG_DOUBLE REDUCE to type_specifier" << endl;}
-    | BOOL                      { $<TypeSpecifier *>$ = new TypeSpecifier(BOOL); cout << "BOOL REDUCE to type_specifier" << endl;}
-    | IMAGINARY                 { $<TypeSpecifier *>$ = new TypeSpecifier(IMAGINARY); cout << "IMAGINARY REDUCE to type_specifier" << endl;}
-    | COMPLEX                   { $<TypeSpecifier *>$ = new TypeSpecifier(COMPLEX); cout << "COMPLEX REDUCE to type_specifier" << endl;}
-    | SIGNED                    { $<TypeSpecifier *>$ = new TypeSpecifier(SIGNED); cout << "SIGNED REDUCE to type_specifier" << endl;}
-    | UNSIGNED                  { $<TypeSpecifier *>$ = new TypeSpecifier(UNSIGNED); cout << "UNIGNED REDUCE to type_specifier" << endl;}
-    | struct_or_union_specifier { $<TypeSpecifier *>$ = new TypeSpecifier($1); cout << "struct_or_union_specifier REDUCE to type_specifier" << endl;}
-    | enum_specifier            { $<TypeSpecifier *>$ = new TypeSpecifier($1); cout << "enum_specifier REDUCE to type_specifier" << endl;}
-    | TYPE_NAME                 { $<TypeSpecifier *>$ = new TypeSpecifier(TYPE_NAME); cout << "TYPE_NAME REDUCE to type_specifier" << endl;}
+    : VOID                      { $$ = new TypeSpecifier(VOID); cout << "VOID REDUCE to type_specifier" << endl;}
+    | CHAR                      { $$ = new TypeSpecifier(CHAR); cout << "CHAR REDUCE to type_specifier" << endl;}
+    | SHORT                     { $$ = new TypeSpecifier(SHORT); cout << "SHORT REDUCE to type_specifier" << endl;}
+    | INT                       { $$ = new TypeSpecifier(INT); cout << "** INT REDUCE to type_specifier" << endl;}
+    | LONG                      { $$ = new TypeSpecifier(LONG); cout << "LONG REDUCE to type_specifier" << endl;}
+    | LONG_LONG                 { $$ = new TypeSpecifier(LONG_LONG); cout << "LONG_LONG REDUCE to type_specifier" << endl;}
+    | FLOAT                     { $$ = new TypeSpecifier(FLOAT); cout << "FLOAT REDUCE to type_specifier" << endl;}
+    | DOUBLE                    { $$ = new TypeSpecifier(DOUBLE); cout << "DOUBLE REDUCE to type_specifier" << endl;}
+    | LONG_DOUBLE               { $$ = new TypeSpecifier(LONG_DOUBLE); cout << "LONG_DOUBLE REDUCE to type_specifier" << endl;}
+    | BOOL                      { $$ = new TypeSpecifier(BOOL); cout << "BOOL REDUCE to type_specifier" << endl;}
+    | IMAGINARY                 { $$ = new TypeSpecifier(IMAGINARY); cout << "IMAGINARY REDUCE to type_specifier" << endl;}
+    | COMPLEX                   { $$ = new TypeSpecifier(COMPLEX); cout << "COMPLEX REDUCE to type_specifier" << endl;}
+    | SIGNED                    { $$ = new TypeSpecifier(SIGNED); cout << "SIGNED REDUCE to type_specifier" << endl;}
+    | UNSIGNED                  { $$ = new TypeSpecifier(UNSIGNED); cout << "UNIGNED REDUCE to type_specifier" << endl;}
+    | struct_or_union_specifier { $$ = new TypeSpecifier($1); cout << "struct_or_union_specifier REDUCE to type_specifier" << endl;}
+    | enum_specifier            { $$ = new TypeSpecifier($1); cout << "enum_specifier REDUCE to type_specifier" << endl;}
+    | TYPE_NAME                 { $$ = new TypeSpecifier(TYPE_NAME); cout << "TYPE_NAME REDUCE to type_specifier" << endl;}
     ;
 
 struct_or_union_specifier

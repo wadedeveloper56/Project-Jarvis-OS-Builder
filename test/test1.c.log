@@ -1,16 +1,17 @@
 Compiler (x86/x64) v1.0 (C) Copyright 2025-2026 Christopher D. Wade.
 All Rights Reserved
-typedef integer int ;
+typedef int integer ;
 Scanner: token [typedef]
-TYPEDEF REDUCE to storage_class_specifier
+** TYPEDEF REDUCE to storage_class_specifier
+** INT REDUCE to type_specifier
 Scanner: identifier [integer]
-storage_class_specifier REDUCE to declaration_specifiers
+** type_specifier REDUCE to declaration_specifiers
+** storage_class_specifier declaration_specifiers REDUCE to declaration_specifiers
 IDENTIFIER REDUCE to direct_declarator
-direct_declarator REDUCE to declarator
-INT REDUCE to type_specifier
 Scanner: token [;]
-type_specifier REDUCE to declaration_specifiers
-declaration_specifiers SEMICOLON REDUCE to declaration
-declaration REDUCE to declaration_list
-Error: syntax error, unexpected end of file
-Error location: 21
+direct_declarator REDUCE to declarator
+declarator REDUCE to init_declarator
+init_declarator REDUCE to init_declarator_list
+declaration_specifiers init_declarator_list SEMICOLON REDUCE to declaration
+declaration REDUCE to external_declaration
+external_declaration REDUCE to translation_unit

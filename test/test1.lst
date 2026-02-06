@@ -24,7 +24,7 @@ Symbols:
 @Date  . . . . . . . . . . . . .        Text   02/06/26
 @FileCur . . . . . . . . . . . .        Text   test1.asm
 @FileName  . . . . . . . . . . .        Text   TEST1
-@Time  . . . . . . . . . . . . .        Text   09:54:53
+@Time  . . . . . . . . . . . . .        Text   10:55:33
 @Version . . . . . . . . . . . .        Text   800
 __JWASM__  . . . . . . . . . . .        Number            D4h 
 

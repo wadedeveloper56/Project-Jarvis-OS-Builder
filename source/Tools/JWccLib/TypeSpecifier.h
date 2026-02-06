@@ -13,18 +13,18 @@ namespace WadeSpace
 	class TypeSpecifier
 	{
 	public:
-		TypeSpecifier(TokenType type);
-		TypeSpecifier(EnumSpecifier* type);
-		TypeSpecifier(StructOrUnionSpecifier* type);
+		explicit TypeSpecifier(TokenType type);
+		explicit TypeSpecifier(EnumSpecifier* type);
+		explicit TypeSpecifier(StructOrUnionSpecifier* type);
 		TypeSpecifier();
 		virtual ~TypeSpecifier();
-		EnumSpecifier* getEnumSpec() const;
-		TokenType getType() const;
-		StructOrUnionSpecifier* getSuSpec() const;
+		[[nodiscard]] EnumSpecifier* getEnumSpec() const;
+		[[nodiscard]] optional<TokenType> getType() const;
+		[[nodiscard]] StructOrUnionSpecifier* getSuSpec() const;
 
 	private:
 		EnumSpecifier* enumSpec;
-		TokenType type;
+		optional<TokenType> type;
 		StructOrUnionSpecifier* suSpec;
 	};
 }

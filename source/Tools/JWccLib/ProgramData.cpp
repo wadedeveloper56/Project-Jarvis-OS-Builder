@@ -45,7 +45,7 @@ int ProgramData::getSize(TokenType type)
 
 void ProgramData::handleDeclaration(Declaration* declaration, vector<VariableData*>* variableTable)
 {
-	TokenType type = declaration->getDeclarationSpecifiers()->getTypeSpecifier()->getType();
+	TokenType type = declaration->getDeclarationSpecifiers()->getTypeSpecifier()->getType().value();
 	for (InitDeclarator* initDecl : *declaration->getVectorInitDeclarator())
 	{
 		VariableData* data = new VariableData();
@@ -63,7 +63,7 @@ void ProgramData::handleDeclaration(Declaration* declaration, vector<VariableDat
 void ProgramData::handleFunction(FunctionDefinition* declaration, vector<FunctionData*>* functionTable)
 {
 	FunctionData* data = new FunctionData();
-	data->type = declaration->getDeclarationSpecifiers()->getTypeSpecifier()->getType();
+	data->type = declaration->getDeclarationSpecifiers()->getTypeSpecifier()->getType().value();
 	data->name = declaration->getDeclarator()->getDirectDeclarator()->getDirectDeclarator()->getIdentifier().value();
 	ParameterTypeList* parameters = declaration->getDeclarator()->getDirectDeclarator()->getParameterTypeList();
 	if (parameters != nullptr && !parameters->getVectorParameterDeclaration()->empty())
@@ -73,7 +73,7 @@ void ProgramData::handleFunction(FunctionDefinition* declaration, vector<Functio
 		{
 			VariableData* functionData = new VariableData();
 			functionData->name = parameterDeclaration->getDeclarator()->getDirectDeclarator()->getIdentifier().value();
-			TokenType type = parameterDeclaration->getDeclarationSpecifiers()->getTypeSpecifier()->getType();
+			TokenType type = parameterDeclaration->getDeclarationSpecifiers()->getTypeSpecifier()->getType().value();
 			functionData->type = type;
 			functionData->size = getSize(type);
 			data->parameters->push_back(functionData);

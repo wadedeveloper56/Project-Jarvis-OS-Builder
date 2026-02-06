@@ -61,8 +61,8 @@ int main(int argc, char* argv[])
 
 	if (version->count > 0)
 	{
-		printf("'%s' c code to assember compiler.\n", progname);
-		printf("June 2025, (c) Christopher D. Wade\n");
+		printf("'%s' c code to assembler compiler.\n", progname);
+		printf("June 2025-2026, (c) Christopher D. Wade\n");
 		exitcode = 0;
 		goto exit;
 	}
@@ -109,8 +109,8 @@ int main(int argc, char* argv[])
 		Interpreter i;
 		i.setStreams(&inStr, &out);
 		exitcode = i.parse();
-		BaseCodeGenerator* generator = program->processGlobalVariables();
-		generator->generateCode(out);
+		//BaseCodeGenerator* generator = program->processGlobalVariables();
+		//generator->generateCode(out);
 		cout << "Parse complete. Result = " << exitcode << endl;
 	}
 	else

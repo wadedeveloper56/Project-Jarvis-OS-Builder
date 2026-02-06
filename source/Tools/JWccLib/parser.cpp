@@ -2455,13 +2455,13 @@ namespace  WadeSpace  {
 
   case 83: // declaration_specifiers: storage_class_specifier declaration_specifiers
 #line 419 "ansic.y"
-                                                      { yylhs.value.as < DeclarationSpecifiers * > () = createDeclarationSpecifiers(yystack_[1].value.as < StorageClassSpecifier * > (),nullptr,nullptr,yystack_[0].value.as < DeclarationSpecifiers * > ());      cout << "storage_class_specifier declaration_specifiers REDUCE to declaration_specifiers" << endl;}
+                                                      { yylhs.value.as < DeclarationSpecifiers * > () = createDeclarationSpecifiers(yystack_[1].value.as < StorageClassSpecifier * > (),nullptr,nullptr,yystack_[0].value.as < DeclarationSpecifiers * > ());      cout << "** storage_class_specifier declaration_specifiers REDUCE to declaration_specifiers" << endl;}
 #line 2460 "parser.cpp"
     break;
 
   case 84: // declaration_specifiers: type_specifier
 #line 420 "ansic.y"
-                                                      { yylhs.value.as < DeclarationSpecifiers * > () = createDeclarationSpecifiers(nullptr,yystack_[0].value.as < TypeSpecifier * > (),nullptr,nullptr); cout << "type_specifier REDUCE to declaration_specifiers" << endl;}
+                                                      { yylhs.value.as < DeclarationSpecifiers * > () = createDeclarationSpecifiers(nullptr,yystack_[0].value.as < TypeSpecifier * > (),nullptr,nullptr); cout << "** type_specifier REDUCE to declaration_specifiers" << endl;}
 #line 2466 "parser.cpp"
     break;
 
@@ -2520,7 +2520,7 @@ namespace  WadeSpace  {
 
   case 92: // storage_class_specifier: "typedef"
 #line 448 "ansic.y"
-                { yylhs.value.as < StorageClassSpecifier * > () = createStorageClassSpecifier(yystack_[0].value.as < int > (),TYPEDEF); cout << "TYPEDEF REDUCE to storage_class_specifier" << endl;}
+                { yylhs.value.as < StorageClassSpecifier * > () = createStorageClassSpecifier(yystack_[0].value.as < int > (),TYPEDEF); cout << "** TYPEDEF REDUCE to storage_class_specifier" << endl;}
 #line 2525 "parser.cpp"
     break;
 
@@ -2550,103 +2550,103 @@ namespace  WadeSpace  {
 
   case 97: // type_specifier: "void"
 #line 456 "ansic.y"
-                                { yylhs.value.as< TypeSpecifier * > () = new TypeSpecifier(VOID); cout << "VOID REDUCE to type_specifier" << endl;}
+                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(VOID); cout << "VOID REDUCE to type_specifier" << endl;}
 #line 2555 "parser.cpp"
     break;
 
   case 98: // type_specifier: "char"
 #line 457 "ansic.y"
-                                { yylhs.value.as< TypeSpecifier * > () = new TypeSpecifier(CHAR); cout << "CHAR REDUCE to type_specifier" << endl;}
+                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(CHAR); cout << "CHAR REDUCE to type_specifier" << endl;}
 #line 2561 "parser.cpp"
     break;
 
   case 99: // type_specifier: "short"
 #line 458 "ansic.y"
-                                { yylhs.value.as< TypeSpecifier * > () = new TypeSpecifier(SHORT); cout << "SHORT REDUCE to type_specifier" << endl;}
+                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(SHORT); cout << "SHORT REDUCE to type_specifier" << endl;}
 #line 2567 "parser.cpp"
     break;
 
   case 100: // type_specifier: INT
 #line 459 "ansic.y"
-                                { yylhs.value.as< TypeSpecifier * > () = new TypeSpecifier(INT); cout << "INT REDUCE to type_specifier" << endl;}
+                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(INT); cout << "** INT REDUCE to type_specifier" << endl;}
 #line 2573 "parser.cpp"
     break;
 
   case 101: // type_specifier: "long"
 #line 460 "ansic.y"
-                                { yylhs.value.as< TypeSpecifier * > () = new TypeSpecifier(LONG); cout << "LONG REDUCE to type_specifier" << endl;}
+                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(LONG); cout << "LONG REDUCE to type_specifier" << endl;}
 #line 2579 "parser.cpp"
     break;
 
   case 102: // type_specifier: "long long"
 #line 461 "ansic.y"
-                                { yylhs.value.as< TypeSpecifier * > () = new TypeSpecifier(LONG_LONG); cout << "LONG_LONG REDUCE to type_specifier" << endl;}
+                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(LONG_LONG); cout << "LONG_LONG REDUCE to type_specifier" << endl;}
 #line 2585 "parser.cpp"
     break;
 
   case 103: // type_specifier: "float"
 #line 462 "ansic.y"
-                                { yylhs.value.as< TypeSpecifier * > () = new TypeSpecifier(FLOAT); cout << "FLOAT REDUCE to type_specifier" << endl;}
+                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(FLOAT); cout << "FLOAT REDUCE to type_specifier" << endl;}
 #line 2591 "parser.cpp"
     break;
 
   case 104: // type_specifier: "double"
 #line 463 "ansic.y"
-                                { yylhs.value.as< TypeSpecifier * > () = new TypeSpecifier(DOUBLE); cout << "DOUBLE REDUCE to type_specifier" << endl;}
+                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(DOUBLE); cout << "DOUBLE REDUCE to type_specifier" << endl;}
 #line 2597 "parser.cpp"
     break;
 
   case 105: // type_specifier: "long double"
 #line 464 "ansic.y"
-                                { yylhs.value.as< TypeSpecifier * > () = new TypeSpecifier(LONG_DOUBLE); cout << "LONG_DOUBLE REDUCE to type_specifier" << endl;}
+                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(LONG_DOUBLE); cout << "LONG_DOUBLE REDUCE to type_specifier" << endl;}
 #line 2603 "parser.cpp"
     break;
 
   case 106: // type_specifier: "bool"
 #line 465 "ansic.y"
-                                { yylhs.value.as< TypeSpecifier * > () = new TypeSpecifier(BOOL); cout << "BOOL REDUCE to type_specifier" << endl;}
+                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(BOOL); cout << "BOOL REDUCE to type_specifier" << endl;}
 #line 2609 "parser.cpp"
     break;
 
   case 107: // type_specifier: "imaginary"
 #line 466 "ansic.y"
-                                { yylhs.value.as< TypeSpecifier * > () = new TypeSpecifier(IMAGINARY); cout << "IMAGINARY REDUCE to type_specifier" << endl;}
+                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(IMAGINARY); cout << "IMAGINARY REDUCE to type_specifier" << endl;}
 #line 2615 "parser.cpp"
     break;
 
   case 108: // type_specifier: "complex"
 #line 467 "ansic.y"
-                                { yylhs.value.as< TypeSpecifier * > () = new TypeSpecifier(COMPLEX); cout << "COMPLEX REDUCE to type_specifier" << endl;}
+                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(COMPLEX); cout << "COMPLEX REDUCE to type_specifier" << endl;}
 #line 2621 "parser.cpp"
     break;
 
   case 109: // type_specifier: "signed"
 #line 468 "ansic.y"
-                                { yylhs.value.as< TypeSpecifier * > () = new TypeSpecifier(SIGNED); cout << "SIGNED REDUCE to type_specifier" << endl;}
+                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(SIGNED); cout << "SIGNED REDUCE to type_specifier" << endl;}
 #line 2627 "parser.cpp"
     break;
 
   case 110: // type_specifier: "unsigned"
 #line 469 "ansic.y"
-                                { yylhs.value.as< TypeSpecifier * > () = new TypeSpecifier(UNSIGNED); cout << "UNIGNED REDUCE to type_specifier" << endl;}
+                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(UNSIGNED); cout << "UNIGNED REDUCE to type_specifier" << endl;}
 #line 2633 "parser.cpp"
     break;
 
   case 111: // type_specifier: struct_or_union_specifier
 #line 470 "ansic.y"
-                                { yylhs.value.as< TypeSpecifier * > () = new TypeSpecifier(yystack_[0].value.as < StructOrUnionSpecifier * > ()); cout << "struct_or_union_specifier REDUCE to type_specifier" << endl;}
+                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(yystack_[0].value.as < StructOrUnionSpecifier * > ()); cout << "struct_or_union_specifier REDUCE to type_specifier" << endl;}
 #line 2639 "parser.cpp"
     break;
 
   case 112: // type_specifier: enum_specifier
 #line 471 "ansic.y"
-                                { yylhs.value.as< TypeSpecifier * > () = new TypeSpecifier(yystack_[0].value.as < EnumSpecifier * > ()); cout << "enum_specifier REDUCE to type_specifier" << endl;}
+                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(yystack_[0].value.as < EnumSpecifier * > ()); cout << "enum_specifier REDUCE to type_specifier" << endl;}
 #line 2645 "parser.cpp"
     break;
 
   case 113: // type_specifier: "type name"
 #line 472 "ansic.y"
-                                { yylhs.value.as< TypeSpecifier * > () = new TypeSpecifier(TYPE_NAME); cout << "TYPE_NAME REDUCE to type_specifier" << endl;}
+                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(TYPE_NAME); cout << "TYPE_NAME REDUCE to type_specifier" << endl;}
 #line 2651 "parser.cpp"
     break;
 
