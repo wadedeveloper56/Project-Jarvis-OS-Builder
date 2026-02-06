@@ -111,7 +111,7 @@
 %token <int> LONG_DOUBLE "long double"
 %token <int> ELSE "else"
 %token <int> ENUM "enum"
-%token <int> EXTERN "extern"
+%token <TokenPtr> EXTERN "extern"
 %token <int> FLOAT "float"
 %token <int> FOR "for"
 %token <int> GOTO "goto"
@@ -120,16 +120,16 @@
 %token <int> INT
 %token <int> LONG "long"
 %token <int> LONG_LONG "long long"
-%token <int> REGISTER "register"
+%token <TokenPtr> REGISTER "register"
 %token <int> RESTRICT "restrict"
 %token <int> RETURN "return"
 %token <int> SHORT "short"
 %token <int> SIGNED "signed"
 %token <int> SIZEOF "sizeof"
-%token <int> STATIC "static"
+%token <TokenPtr> STATIC "static"
 %token <int> STRUCT "struct"
 %token <int> SWITCH "switch"
-%token <int> TYPEDEF "typedef"
+%token <TokenPtr> TYPEDEF "typedef"
 %token <int> UNION "union"
 %token <int> UNSIGNED "unsigned"
 %token <int> VOID "void"
@@ -446,11 +446,11 @@ init_declarator
     ;
 
 storage_class_specifier
-    : TYPEDEF   { $$ = createStorageClassSpecifier($1,TYPEDEF,nullptr); cout << "** TYPEDEF REDUCE to storage_class_specifier" << endl;}
-    | EXTERN    { $$ = createStorageClassSpecifier($1,EXTERN,nullptr); cout << "EXTERN REDUCE to storage_class_specifier" << endl;}
-    | STATIC    { $$ = createStorageClassSpecifier($1,STATIC,nullptr); cout << "STATIC REDUCE to storage_class_specifier" << endl;}
-    | AUTO      { $$ = createStorageClassSpecifier(nullopt,nullopt,$1); cout << "AUTO REDUCE to storage_class_specifier" << endl;}
-    | REGISTER  { $$ = createStorageClassSpecifier($1,REGISTER,nullptr); cout << "REGISTER REDUCE to storage_class_specifier" << endl;}
+    : TYPEDEF   { $$ = createStorageClassSpecifier($1); cout << "** TYPEDEF REDUCE to storage_class_specifier" << endl;}
+    | EXTERN    { $$ = createStorageClassSpecifier($1); cout << "EXTERN REDUCE to storage_class_specifier" << endl;}
+    | STATIC    { $$ = createStorageClassSpecifier($1); cout << "STATIC REDUCE to storage_class_specifier" << endl;}
+    | AUTO      { $$ = createStorageClassSpecifier($1); cout << "AUTO REDUCE to storage_class_specifier" << endl;}
+    | REGISTER  { $$ = createStorageClassSpecifier($1); cout << "REGISTER REDUCE to storage_class_specifier" << endl;}
     ;
 
 type_specifier

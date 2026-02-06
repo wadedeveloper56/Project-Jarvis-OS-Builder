@@ -314,7 +314,7 @@ Terminals, with rules where they appear
     "long double" <int> (272) 104
     "else" <int> (273) 202
     "enum" <int> (274) 130 131 132
-    "extern" <int> (275) 92
+    "extern" <TokenPtr> (275) 92
     "float" <int> (276) 102
     "for" <int> (277) 206 207
     "goto" <int> (278) 208
@@ -323,16 +323,16 @@ Terminals, with rules where they appear
     INT <int> (281) 99
     "long" <int> (282) 100
     "long long" <int> (283) 101
-    "register" <int> (284) 95
+    "register" <TokenPtr> (284) 95
     "restrict" <int> (285)
     "return" <int> (286) 211 212
     "short" <int> (287) 98
     "signed" <int> (288) 108
     "sizeof" <int> (289) 23 24
-    "static" <int> (290) 93
+    "static" <TokenPtr> (290) 93
     "struct" <int> (291) 116
     "switch" <int> (292) 203
-    "typedef" <int> (293) 91
+    "typedef" <TokenPtr> (293) 91
     "union" <int> (294) 117
     "unsigned" <int> (295) 109
     "void" <int> (296) 96

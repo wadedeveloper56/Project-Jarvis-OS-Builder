@@ -25,9 +25,9 @@ DeclarationSpecifiers* createDeclarationSpecifiers(StorageClassSpecifier* const 
 	return new DeclarationSpecifiers(storageClassSpecifier, typeSpecifier, typeQualifier, declarationSpecifiers);
 }
 
-StorageClassSpecifier* createStorageClassSpecifier(const optional<int>& value, const optional<TokenType> type, const TokenPtr token)
+StorageClassSpecifier* createStorageClassSpecifier(const TokenPtr token)
 {
-	return new StorageClassSpecifier(value, type);
+	return new StorageClassSpecifier(token);
 }
 
 Expression* createPrimaryExpression(const optional<string>& identifier, Constant* constant)

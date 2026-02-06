@@ -110,7 +110,7 @@ WS  [ \t\v\n\f]
                }
 "extern"       { 
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_EXTERN(EXTERN, WadeSpace::location()); 
+                return WadeSpace::Parser::make_EXTERN(createKeywordToken(yytext,EXTERN), WadeSpace::location()); 
                }
 "float"        { 
                 //cout << "Scanner: token [" << yytext << "]" << endl;
@@ -146,7 +146,7 @@ WS  [ \t\v\n\f]
                }
 "register"     { 
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_REGISTER(REGISTER, WadeSpace::location()); 
+                return WadeSpace::Parser::make_REGISTER(createKeywordToken(yytext,REGISTER), WadeSpace::location()); 
                }
 "restrict"     { 
                 //cout << "Scanner: token [" << yytext << "]" << endl;
@@ -170,7 +170,7 @@ WS  [ \t\v\n\f]
                }
 "static"       { 
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_STATIC(STATIC, WadeSpace::location()); 
+                return WadeSpace::Parser::make_STATIC(createKeywordToken(yytext,STATIC), WadeSpace::location()); 
                }
 "struct"       { 
                 //cout << "Scanner: token [" << yytext << "]" << endl;
@@ -182,7 +182,7 @@ WS  [ \t\v\n\f]
                }
 "typedef"      { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_TYPEDEF(TYPEDEF, WadeSpace::location()); 
+                return WadeSpace::Parser::make_TYPEDEF(createKeywordToken(yytext,TYPEDEF), WadeSpace::location()); 
                }
 "union"        { 
                 //cout << "Scanner: token [" << yytext << "]" << endl;

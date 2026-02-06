@@ -38,7 +38,7 @@ TokenPtr createConstantLDToken(long double num)
 
 TokenPtr createStringConstantToken(char* str)
 {
-	TokenPtr tok = createToken(createTokData());
+	const TokenPtr tok = createToken(createTokData());
 	tok->data->code = YC_STRING;
 	tok->data->repr.stringConstant.s = _strdup(str);
 	tok->data->repr.stringConstant.strLen = (int)strlen(str);
@@ -47,7 +47,7 @@ TokenPtr createStringConstantToken(char* str)
 
 TokenPtr createStringIDToken(char* str)
 {
-	TokenPtr tok = createToken(createTokData());
+	const TokenPtr tok = createToken(createTokData());
 	tok->data->code = YC_SYMBOL;
 	tok->data->repr.symbol.string = _strdup(str);
 	tok->data->repr.symbol.strLen = (int)strlen(str);

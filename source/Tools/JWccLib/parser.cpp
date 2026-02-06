@@ -346,6 +346,10 @@ namespace  WadeSpace  {
         break;
 
       case symbol_kind::S_AUTO: // "auto"
+      case symbol_kind::S_EXTERN: // "extern"
+      case symbol_kind::S_REGISTER: // "register"
+      case symbol_kind::S_STATIC: // "static"
+      case symbol_kind::S_TYPEDEF: // "typedef"
         value.YY_MOVE_OR_COPY< TokenPtr > (YY_MOVE (that.value));
         break;
 
@@ -373,7 +377,6 @@ namespace  WadeSpace  {
       case symbol_kind::S_LONG_DOUBLE: // "long double"
       case symbol_kind::S_ELSE: // "else"
       case symbol_kind::S_ENUM: // "enum"
-      case symbol_kind::S_EXTERN: // "extern"
       case symbol_kind::S_FLOAT: // "float"
       case symbol_kind::S_FOR: // "for"
       case symbol_kind::S_GOTO: // "goto"
@@ -382,16 +385,13 @@ namespace  WadeSpace  {
       case symbol_kind::S_INT: // INT
       case symbol_kind::S_LONG: // "long"
       case symbol_kind::S_LONG_LONG: // "long long"
-      case symbol_kind::S_REGISTER: // "register"
       case symbol_kind::S_RESTRICT: // "restrict"
       case symbol_kind::S_RETURN: // "return"
       case symbol_kind::S_SHORT: // "short"
       case symbol_kind::S_SIGNED: // "signed"
       case symbol_kind::S_SIZEOF: // "sizeof"
-      case symbol_kind::S_STATIC: // "static"
       case symbol_kind::S_STRUCT: // "struct"
       case symbol_kind::S_SWITCH: // "switch"
-      case symbol_kind::S_TYPEDEF: // "typedef"
       case symbol_kind::S_UNION: // "union"
       case symbol_kind::S_UNSIGNED: // "unsigned"
       case symbol_kind::S_VOID: // "void"
@@ -646,6 +646,10 @@ namespace  WadeSpace  {
         break;
 
       case symbol_kind::S_AUTO: // "auto"
+      case symbol_kind::S_EXTERN: // "extern"
+      case symbol_kind::S_REGISTER: // "register"
+      case symbol_kind::S_STATIC: // "static"
+      case symbol_kind::S_TYPEDEF: // "typedef"
         value.move< TokenPtr > (YY_MOVE (that.value));
         break;
 
@@ -673,7 +677,6 @@ namespace  WadeSpace  {
       case symbol_kind::S_LONG_DOUBLE: // "long double"
       case symbol_kind::S_ELSE: // "else"
       case symbol_kind::S_ENUM: // "enum"
-      case symbol_kind::S_EXTERN: // "extern"
       case symbol_kind::S_FLOAT: // "float"
       case symbol_kind::S_FOR: // "for"
       case symbol_kind::S_GOTO: // "goto"
@@ -682,16 +685,13 @@ namespace  WadeSpace  {
       case symbol_kind::S_INT: // INT
       case symbol_kind::S_LONG: // "long"
       case symbol_kind::S_LONG_LONG: // "long long"
-      case symbol_kind::S_REGISTER: // "register"
       case symbol_kind::S_RESTRICT: // "restrict"
       case symbol_kind::S_RETURN: // "return"
       case symbol_kind::S_SHORT: // "short"
       case symbol_kind::S_SIGNED: // "signed"
       case symbol_kind::S_SIZEOF: // "sizeof"
-      case symbol_kind::S_STATIC: // "static"
       case symbol_kind::S_STRUCT: // "struct"
       case symbol_kind::S_SWITCH: // "switch"
-      case symbol_kind::S_TYPEDEF: // "typedef"
       case symbol_kind::S_UNION: // "union"
       case symbol_kind::S_UNSIGNED: // "unsigned"
       case symbol_kind::S_VOID: // "void"
@@ -946,6 +946,10 @@ namespace  WadeSpace  {
         break;
 
       case symbol_kind::S_AUTO: // "auto"
+      case symbol_kind::S_EXTERN: // "extern"
+      case symbol_kind::S_REGISTER: // "register"
+      case symbol_kind::S_STATIC: // "static"
+      case symbol_kind::S_TYPEDEF: // "typedef"
         value.copy< TokenPtr > (that.value);
         break;
 
@@ -973,7 +977,6 @@ namespace  WadeSpace  {
       case symbol_kind::S_LONG_DOUBLE: // "long double"
       case symbol_kind::S_ELSE: // "else"
       case symbol_kind::S_ENUM: // "enum"
-      case symbol_kind::S_EXTERN: // "extern"
       case symbol_kind::S_FLOAT: // "float"
       case symbol_kind::S_FOR: // "for"
       case symbol_kind::S_GOTO: // "goto"
@@ -982,16 +985,13 @@ namespace  WadeSpace  {
       case symbol_kind::S_INT: // INT
       case symbol_kind::S_LONG: // "long"
       case symbol_kind::S_LONG_LONG: // "long long"
-      case symbol_kind::S_REGISTER: // "register"
       case symbol_kind::S_RESTRICT: // "restrict"
       case symbol_kind::S_RETURN: // "return"
       case symbol_kind::S_SHORT: // "short"
       case symbol_kind::S_SIGNED: // "signed"
       case symbol_kind::S_SIZEOF: // "sizeof"
-      case symbol_kind::S_STATIC: // "static"
       case symbol_kind::S_STRUCT: // "struct"
       case symbol_kind::S_SWITCH: // "switch"
-      case symbol_kind::S_TYPEDEF: // "typedef"
       case symbol_kind::S_UNION: // "union"
       case symbol_kind::S_UNSIGNED: // "unsigned"
       case symbol_kind::S_VOID: // "void"
@@ -1245,6 +1245,10 @@ namespace  WadeSpace  {
         break;
 
       case symbol_kind::S_AUTO: // "auto"
+      case symbol_kind::S_EXTERN: // "extern"
+      case symbol_kind::S_REGISTER: // "register"
+      case symbol_kind::S_STATIC: // "static"
+      case symbol_kind::S_TYPEDEF: // "typedef"
         value.move< TokenPtr > (that.value);
         break;
 
@@ -1272,7 +1276,6 @@ namespace  WadeSpace  {
       case symbol_kind::S_LONG_DOUBLE: // "long double"
       case symbol_kind::S_ELSE: // "else"
       case symbol_kind::S_ENUM: // "enum"
-      case symbol_kind::S_EXTERN: // "extern"
       case symbol_kind::S_FLOAT: // "float"
       case symbol_kind::S_FOR: // "for"
       case symbol_kind::S_GOTO: // "goto"
@@ -1281,16 +1284,13 @@ namespace  WadeSpace  {
       case symbol_kind::S_INT: // INT
       case symbol_kind::S_LONG: // "long"
       case symbol_kind::S_LONG_LONG: // "long long"
-      case symbol_kind::S_REGISTER: // "register"
       case symbol_kind::S_RESTRICT: // "restrict"
       case symbol_kind::S_RETURN: // "return"
       case symbol_kind::S_SHORT: // "short"
       case symbol_kind::S_SIGNED: // "signed"
       case symbol_kind::S_SIZEOF: // "sizeof"
-      case symbol_kind::S_STATIC: // "static"
       case symbol_kind::S_STRUCT: // "struct"
       case symbol_kind::S_SWITCH: // "switch"
-      case symbol_kind::S_TYPEDEF: // "typedef"
       case symbol_kind::S_UNION: // "union"
       case symbol_kind::S_UNSIGNED: // "unsigned"
       case symbol_kind::S_VOID: // "void"
@@ -1789,6 +1789,10 @@ namespace  WadeSpace  {
         break;
 
       case symbol_kind::S_AUTO: // "auto"
+      case symbol_kind::S_EXTERN: // "extern"
+      case symbol_kind::S_REGISTER: // "register"
+      case symbol_kind::S_STATIC: // "static"
+      case symbol_kind::S_TYPEDEF: // "typedef"
         yylhs.value.emplace< TokenPtr > ();
         break;
 
@@ -1816,7 +1820,6 @@ namespace  WadeSpace  {
       case symbol_kind::S_LONG_DOUBLE: // "long double"
       case symbol_kind::S_ELSE: // "else"
       case symbol_kind::S_ENUM: // "enum"
-      case symbol_kind::S_EXTERN: // "extern"
       case symbol_kind::S_FLOAT: // "float"
       case symbol_kind::S_FOR: // "for"
       case symbol_kind::S_GOTO: // "goto"
@@ -1825,16 +1828,13 @@ namespace  WadeSpace  {
       case symbol_kind::S_INT: // INT
       case symbol_kind::S_LONG: // "long"
       case symbol_kind::S_LONG_LONG: // "long long"
-      case symbol_kind::S_REGISTER: // "register"
       case symbol_kind::S_RESTRICT: // "restrict"
       case symbol_kind::S_RETURN: // "return"
       case symbol_kind::S_SHORT: // "short"
       case symbol_kind::S_SIGNED: // "signed"
       case symbol_kind::S_SIZEOF: // "sizeof"
-      case symbol_kind::S_STATIC: // "static"
       case symbol_kind::S_STRUCT: // "struct"
       case symbol_kind::S_SWITCH: // "switch"
-      case symbol_kind::S_TYPEDEF: // "typedef"
       case symbol_kind::S_UNION: // "union"
       case symbol_kind::S_UNSIGNED: // "unsigned"
       case symbol_kind::S_VOID: // "void"
@@ -2535,31 +2535,31 @@ namespace  WadeSpace  {
 
   case 92: // storage_class_specifier: "typedef"
 #line 449 "ansic.y"
-                { yylhs.value.as < StorageClassSpecifier * > () = createStorageClassSpecifier(yystack_[0].value.as < int > (),TYPEDEF,nullptr); cout << "** TYPEDEF REDUCE to storage_class_specifier" << endl;}
+                { yylhs.value.as < StorageClassSpecifier * > () = createStorageClassSpecifier(yystack_[0].value.as < TokenPtr > ()); cout << "** TYPEDEF REDUCE to storage_class_specifier" << endl;}
 #line 2540 "parser.cpp"
     break;
 
   case 93: // storage_class_specifier: "extern"
 #line 450 "ansic.y"
-                { yylhs.value.as < StorageClassSpecifier * > () = createStorageClassSpecifier(yystack_[0].value.as < int > (),EXTERN,nullptr); cout << "EXTERN REDUCE to storage_class_specifier" << endl;}
+                { yylhs.value.as < StorageClassSpecifier * > () = createStorageClassSpecifier(yystack_[0].value.as < TokenPtr > ()); cout << "EXTERN REDUCE to storage_class_specifier" << endl;}
 #line 2546 "parser.cpp"
     break;
 
   case 94: // storage_class_specifier: "static"
 #line 451 "ansic.y"
-                { yylhs.value.as < StorageClassSpecifier * > () = createStorageClassSpecifier(yystack_[0].value.as < int > (),STATIC,nullptr); cout << "STATIC REDUCE to storage_class_specifier" << endl;}
+                { yylhs.value.as < StorageClassSpecifier * > () = createStorageClassSpecifier(yystack_[0].value.as < TokenPtr > ()); cout << "STATIC REDUCE to storage_class_specifier" << endl;}
 #line 2552 "parser.cpp"
     break;
 
   case 95: // storage_class_specifier: "auto"
 #line 452 "ansic.y"
-                { yylhs.value.as < StorageClassSpecifier * > () = createStorageClassSpecifier(nullopt,nullopt,yystack_[0].value.as < TokenPtr > ()); cout << "AUTO REDUCE to storage_class_specifier" << endl;}
+                { yylhs.value.as < StorageClassSpecifier * > () = createStorageClassSpecifier(yystack_[0].value.as < TokenPtr > ()); cout << "AUTO REDUCE to storage_class_specifier" << endl;}
 #line 2558 "parser.cpp"
     break;
 
   case 96: // storage_class_specifier: "register"
 #line 453 "ansic.y"
-                { yylhs.value.as < StorageClassSpecifier * > () = createStorageClassSpecifier(yystack_[0].value.as < int > (),REGISTER,nullptr); cout << "REGISTER REDUCE to storage_class_specifier" << endl;}
+                { yylhs.value.as < StorageClassSpecifier * > () = createStorageClassSpecifier(yystack_[0].value.as < TokenPtr > ()); cout << "REGISTER REDUCE to storage_class_specifier" << endl;}
 #line 2564 "parser.cpp"
     break;
 

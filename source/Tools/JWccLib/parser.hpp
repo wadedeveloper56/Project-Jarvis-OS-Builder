@@ -553,6 +553,10 @@ namespace  WadeSpace  {
       char dummy25[sizeof (StructOrUnionSpecifier *)];
 
       // "auto"
+      // "extern"
+      // "register"
+      // "static"
+      // "typedef"
       char dummy26[sizeof (TokenPtr)];
 
       // type_name
@@ -576,7 +580,6 @@ namespace  WadeSpace  {
       // "long double"
       // "else"
       // "enum"
-      // "extern"
       // "float"
       // "for"
       // "goto"
@@ -585,16 +588,13 @@ namespace  WadeSpace  {
       // INT
       // "long"
       // "long long"
-      // "register"
       // "restrict"
       // "return"
       // "short"
       // "signed"
       // "sizeof"
-      // "static"
       // "struct"
       // "switch"
-      // "typedef"
       // "union"
       // "unsigned"
       // "void"
@@ -1173,6 +1173,10 @@ namespace  WadeSpace  {
         break;
 
       case symbol_kind::S_AUTO: // "auto"
+      case symbol_kind::S_EXTERN: // "extern"
+      case symbol_kind::S_REGISTER: // "register"
+      case symbol_kind::S_STATIC: // "static"
+      case symbol_kind::S_TYPEDEF: // "typedef"
         value.move< TokenPtr > (std::move (that.value));
         break;
 
@@ -1200,7 +1204,6 @@ namespace  WadeSpace  {
       case symbol_kind::S_LONG_DOUBLE: // "long double"
       case symbol_kind::S_ELSE: // "else"
       case symbol_kind::S_ENUM: // "enum"
-      case symbol_kind::S_EXTERN: // "extern"
       case symbol_kind::S_FLOAT: // "float"
       case symbol_kind::S_FOR: // "for"
       case symbol_kind::S_GOTO: // "goto"
@@ -1209,16 +1212,13 @@ namespace  WadeSpace  {
       case symbol_kind::S_INT: // INT
       case symbol_kind::S_LONG: // "long"
       case symbol_kind::S_LONG_LONG: // "long long"
-      case symbol_kind::S_REGISTER: // "register"
       case symbol_kind::S_RESTRICT: // "restrict"
       case symbol_kind::S_RETURN: // "return"
       case symbol_kind::S_SHORT: // "short"
       case symbol_kind::S_SIGNED: // "signed"
       case symbol_kind::S_SIZEOF: // "sizeof"
-      case symbol_kind::S_STATIC: // "static"
       case symbol_kind::S_STRUCT: // "struct"
       case symbol_kind::S_SWITCH: // "switch"
-      case symbol_kind::S_TYPEDEF: // "typedef"
       case symbol_kind::S_UNION: // "union"
       case symbol_kind::S_UNSIGNED: // "unsigned"
       case symbol_kind::S_VOID: // "void"
@@ -2121,6 +2121,10 @@ switch (yykind)
         break;
 
       case symbol_kind::S_AUTO: // "auto"
+      case symbol_kind::S_EXTERN: // "extern"
+      case symbol_kind::S_REGISTER: // "register"
+      case symbol_kind::S_STATIC: // "static"
+      case symbol_kind::S_TYPEDEF: // "typedef"
         value.template destroy< TokenPtr > ();
         break;
 
@@ -2148,7 +2152,6 @@ switch (yykind)
       case symbol_kind::S_LONG_DOUBLE: // "long double"
       case symbol_kind::S_ELSE: // "else"
       case symbol_kind::S_ENUM: // "enum"
-      case symbol_kind::S_EXTERN: // "extern"
       case symbol_kind::S_FLOAT: // "float"
       case symbol_kind::S_FOR: // "for"
       case symbol_kind::S_GOTO: // "goto"
@@ -2157,16 +2160,13 @@ switch (yykind)
       case symbol_kind::S_INT: // INT
       case symbol_kind::S_LONG: // "long"
       case symbol_kind::S_LONG_LONG: // "long long"
-      case symbol_kind::S_REGISTER: // "register"
       case symbol_kind::S_RESTRICT: // "restrict"
       case symbol_kind::S_RETURN: // "return"
       case symbol_kind::S_SHORT: // "short"
       case symbol_kind::S_SIGNED: // "signed"
       case symbol_kind::S_SIZEOF: // "sizeof"
-      case symbol_kind::S_STATIC: // "static"
       case symbol_kind::S_STRUCT: // "struct"
       case symbol_kind::S_SWITCH: // "switch"
-      case symbol_kind::S_TYPEDEF: // "typedef"
       case symbol_kind::S_UNION: // "union"
       case symbol_kind::S_UNSIGNED: // "unsigned"
       case symbol_kind::S_VOID: // "void"
@@ -2394,7 +2394,11 @@ switch (yykind)
 #endif
       {
 #if !defined _MSC_VER || defined __clang__
-        YY_ASSERT (tok == token::TOKEN_AUTO);
+        YY_ASSERT (tok == token::TOKEN_AUTO
+                   || tok == token::TOKEN_EXTERN
+                   || tok == token::TOKEN_REGISTER
+                   || tok == token::TOKEN_STATIC
+                   || tok == token::TOKEN_TYPEDEF);
 #endif
       }
 #if 201103L <= YY_CPLUSPLUS
@@ -2407,7 +2411,11 @@ switch (yykind)
       {
 #if !defined _MSC_VER || defined __clang__
         YY_ASSERT (tok == token::TOKEN_TYPE_NAME
-                   || (token::TOKEN_BREAK <= tok && tok <= token::TOKEN_MOD_OP));
+                   || (token::TOKEN_BREAK <= tok && tok <= token::TOKEN_ENUM)
+                   || (token::TOKEN_FLOAT <= tok && tok <= token::TOKEN_LONG_LONG)
+                   || (token::TOKEN_RESTRICT <= tok && tok <= token::TOKEN_SIZEOF)
+                   || (token::TOKEN_STRUCT <= tok && tok <= token::TOKEN_SWITCH)
+                   || (token::TOKEN_UNION <= tok && tok <= token::TOKEN_MOD_OP));
 #endif
       }
 #if 201103L <= YY_CPLUSPLUS
@@ -2798,14 +2806,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_EXTERN (int v, location_type l)
+      make_EXTERN (TokenPtr v, location_type l)
       {
         return symbol_type (token::TOKEN_EXTERN, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_EXTERN (const int& v, const location_type& l)
+      make_EXTERN (const TokenPtr& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_EXTERN, v, l);
       }
@@ -2933,14 +2941,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_REGISTER (int v, location_type l)
+      make_REGISTER (TokenPtr v, location_type l)
       {
         return symbol_type (token::TOKEN_REGISTER, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_REGISTER (const int& v, const location_type& l)
+      make_REGISTER (const TokenPtr& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_REGISTER, v, l);
       }
@@ -3023,14 +3031,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_STATIC (int v, location_type l)
+      make_STATIC (TokenPtr v, location_type l)
       {
         return symbol_type (token::TOKEN_STATIC, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_STATIC (const int& v, const location_type& l)
+      make_STATIC (const TokenPtr& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_STATIC, v, l);
       }
@@ -3068,14 +3076,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_TYPEDEF (int v, location_type l)
+      make_TYPEDEF (TokenPtr v, location_type l)
       {
         return symbol_type (token::TOKEN_TYPEDEF, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_TYPEDEF (const int& v, const location_type& l)
+      make_TYPEDEF (const TokenPtr& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_TYPEDEF, v, l);
       }
@@ -4421,6 +4429,10 @@ switch (yykind)
         break;
 
       case symbol_kind::S_AUTO: // "auto"
+      case symbol_kind::S_EXTERN: // "extern"
+      case symbol_kind::S_REGISTER: // "register"
+      case symbol_kind::S_STATIC: // "static"
+      case symbol_kind::S_TYPEDEF: // "typedef"
         value.copy< TokenPtr > (YY_MOVE (that.value));
         break;
 
@@ -4448,7 +4460,6 @@ switch (yykind)
       case symbol_kind::S_LONG_DOUBLE: // "long double"
       case symbol_kind::S_ELSE: // "else"
       case symbol_kind::S_ENUM: // "enum"
-      case symbol_kind::S_EXTERN: // "extern"
       case symbol_kind::S_FLOAT: // "float"
       case symbol_kind::S_FOR: // "for"
       case symbol_kind::S_GOTO: // "goto"
@@ -4457,16 +4468,13 @@ switch (yykind)
       case symbol_kind::S_INT: // INT
       case symbol_kind::S_LONG: // "long"
       case symbol_kind::S_LONG_LONG: // "long long"
-      case symbol_kind::S_REGISTER: // "register"
       case symbol_kind::S_RESTRICT: // "restrict"
       case symbol_kind::S_RETURN: // "return"
       case symbol_kind::S_SHORT: // "short"
       case symbol_kind::S_SIGNED: // "signed"
       case symbol_kind::S_SIZEOF: // "sizeof"
-      case symbol_kind::S_STATIC: // "static"
       case symbol_kind::S_STRUCT: // "struct"
       case symbol_kind::S_SWITCH: // "switch"
-      case symbol_kind::S_TYPEDEF: // "typedef"
       case symbol_kind::S_UNION: // "union"
       case symbol_kind::S_UNSIGNED: // "unsigned"
       case symbol_kind::S_VOID: // "void"
@@ -4737,6 +4745,10 @@ switch (yykind)
         break;
 
       case symbol_kind::S_AUTO: // "auto"
+      case symbol_kind::S_EXTERN: // "extern"
+      case symbol_kind::S_REGISTER: // "register"
+      case symbol_kind::S_STATIC: // "static"
+      case symbol_kind::S_TYPEDEF: // "typedef"
         value.move< TokenPtr > (YY_MOVE (s.value));
         break;
 
@@ -4764,7 +4776,6 @@ switch (yykind)
       case symbol_kind::S_LONG_DOUBLE: // "long double"
       case symbol_kind::S_ELSE: // "else"
       case symbol_kind::S_ENUM: // "enum"
-      case symbol_kind::S_EXTERN: // "extern"
       case symbol_kind::S_FLOAT: // "float"
       case symbol_kind::S_FOR: // "for"
       case symbol_kind::S_GOTO: // "goto"
@@ -4773,16 +4784,13 @@ switch (yykind)
       case symbol_kind::S_INT: // INT
       case symbol_kind::S_LONG: // "long"
       case symbol_kind::S_LONG_LONG: // "long long"
-      case symbol_kind::S_REGISTER: // "register"
       case symbol_kind::S_RESTRICT: // "restrict"
       case symbol_kind::S_RETURN: // "return"
       case symbol_kind::S_SHORT: // "short"
       case symbol_kind::S_SIGNED: // "signed"
       case symbol_kind::S_SIZEOF: // "sizeof"
-      case symbol_kind::S_STATIC: // "static"
       case symbol_kind::S_STRUCT: // "struct"
       case symbol_kind::S_SWITCH: // "switch"
-      case symbol_kind::S_TYPEDEF: // "typedef"
       case symbol_kind::S_UNION: // "union"
       case symbol_kind::S_UNSIGNED: // "unsigned"
       case symbol_kind::S_VOID: // "void"
@@ -4966,7 +4974,7 @@ switch (yykind)
 
 #line 9 "ansic.y"
 } //  WadeSpace 
-#line 4970 "parser.hpp"
+#line 4978 "parser.hpp"
 
 
 
