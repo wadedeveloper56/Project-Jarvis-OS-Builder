@@ -445,11 +445,11 @@ init_declarator
     ;
 
 storage_class_specifier
-    : TYPEDEF   { $<StorageClassSpecifier *>$ = new StorageClassSpecifier($1,TYPEDEF); cout << "TYPEDEF REDUCE to storage_class_specifier" << endl;}
-    | EXTERN    { $<StorageClassSpecifier *>$ = new StorageClassSpecifier($1,EXTERN); cout << "EXTERN REDUCE to storage_class_specifier" << endl;}
-    | STATIC    { $<StorageClassSpecifier *>$ = new StorageClassSpecifier($1,STATIC); cout << "STATIC REDUCE to storage_class_specifier" << endl;}
-    | AUTO      { $<StorageClassSpecifier *>$ = new StorageClassSpecifier($1,AUTO); cout << "AUTO REDUCE to storage_class_specifier" << endl;}
-    | REGISTER  { $<StorageClassSpecifier *>$ = new StorageClassSpecifier($1,REGISTER); cout << "REGISTER REDUCE to storage_class_specifier" << endl;}
+    : TYPEDEF   { $$ = createStorageClassSpecifier($1,TYPEDEF); cout << "TYPEDEF REDUCE to storage_class_specifier" << endl;}
+    | EXTERN    { $$ = createStorageClassSpecifier($1,EXTERN); cout << "EXTERN REDUCE to storage_class_specifier" << endl;}
+    | STATIC    { $$ = createStorageClassSpecifier($1,STATIC); cout << "STATIC REDUCE to storage_class_specifier" << endl;}
+    | AUTO      { $$ = createStorageClassSpecifier($1,AUTO); cout << "AUTO REDUCE to storage_class_specifier" << endl;}
+    | REGISTER  { $$ = createStorageClassSpecifier($1,REGISTER); cout << "REGISTER REDUCE to storage_class_specifier" << endl;}
     ;
 
 type_specifier

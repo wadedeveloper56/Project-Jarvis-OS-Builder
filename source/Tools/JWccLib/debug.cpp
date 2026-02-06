@@ -5,6 +5,11 @@
 using namespace std;
 using namespace WadeSpace;
 
+StorageClassSpecifier* createStorageClassSpecifier(const int& value, TokenType type)
+{
+	return new StorageClassSpecifier(value, type);
+}
+
 Expression* createPrimaryExpression(const optional<string>& identifier, Constant* constant)
 {
 	return new Expression(identifier, constant);

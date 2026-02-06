@@ -2520,31 +2520,31 @@ namespace  WadeSpace  {
 
   case 92: // storage_class_specifier: "typedef"
 #line 448 "ansic.y"
-                { yylhs.value.as< StorageClassSpecifier * > () = new StorageClassSpecifier(yystack_[0].value.as < int > (),TYPEDEF); cout << "TYPEDEF REDUCE to storage_class_specifier" << endl;}
+                { yylhs.value.as < StorageClassSpecifier * > () = createStorageClassSpecifier(yystack_[0].value.as < int > (),TYPEDEF); cout << "TYPEDEF REDUCE to storage_class_specifier" << endl;}
 #line 2525 "parser.cpp"
     break;
 
   case 93: // storage_class_specifier: "extern"
 #line 449 "ansic.y"
-                { yylhs.value.as< StorageClassSpecifier * > () = new StorageClassSpecifier(yystack_[0].value.as < int > (),EXTERN); cout << "EXTERN REDUCE to storage_class_specifier" << endl;}
+                { yylhs.value.as < StorageClassSpecifier * > () = createStorageClassSpecifier(yystack_[0].value.as < int > (),EXTERN); cout << "EXTERN REDUCE to storage_class_specifier" << endl;}
 #line 2531 "parser.cpp"
     break;
 
   case 94: // storage_class_specifier: "static"
 #line 450 "ansic.y"
-                { yylhs.value.as< StorageClassSpecifier * > () = new StorageClassSpecifier(yystack_[0].value.as < int > (),STATIC); cout << "STATIC REDUCE to storage_class_specifier" << endl;}
+                { yylhs.value.as < StorageClassSpecifier * > () = createStorageClassSpecifier(yystack_[0].value.as < int > (),STATIC); cout << "STATIC REDUCE to storage_class_specifier" << endl;}
 #line 2537 "parser.cpp"
     break;
 
   case 95: // storage_class_specifier: "auto"
 #line 451 "ansic.y"
-                { yylhs.value.as< StorageClassSpecifier * > () = new StorageClassSpecifier(yystack_[0].value.as < int > (),AUTO); cout << "AUTO REDUCE to storage_class_specifier" << endl;}
+                { yylhs.value.as < StorageClassSpecifier * > () = createStorageClassSpecifier(yystack_[0].value.as < int > (),AUTO); cout << "AUTO REDUCE to storage_class_specifier" << endl;}
 #line 2543 "parser.cpp"
     break;
 
   case 96: // storage_class_specifier: "register"
 #line 452 "ansic.y"
-                { yylhs.value.as< StorageClassSpecifier * > () = new StorageClassSpecifier(yystack_[0].value.as < int > (),REGISTER); cout << "REGISTER REDUCE to storage_class_specifier" << endl;}
+                { yylhs.value.as < StorageClassSpecifier * > () = createStorageClassSpecifier(yystack_[0].value.as < int > (),REGISTER); cout << "REGISTER REDUCE to storage_class_specifier" << endl;}
 #line 2549 "parser.cpp"
     break;
 

@@ -11,16 +11,24 @@ StorageClassSpecifier::StorageClassSpecifier() : operatorStr(nullopt), type(NONE
 {
 }
 
-StorageClassSpecifier::~StorageClassSpecifier()
-{
-}
-
 optional<int> StorageClassSpecifier::getOperatorStr() const
 {
 	return operatorStr;
 }
 
-TokenType StorageClassSpecifier::getType() const
+optional<TokenType> StorageClassSpecifier::getType() const
 {
 	return type;
 }
+
+bool StorageClassSpecifier::isOperatorStr() const
+{
+	return operatorStr.has_value();
+}
+
+bool StorageClassSpecifier::isType() const
+{
+	return type.has_value();
+}
+
+
