@@ -285,7 +285,7 @@ WS  [ \t\v\n\f]
                 return WadeSpace::Parser::make_QUESTION(QUESTION,WadeSpace::location());
                }
 ";"            {
-                //cout << "Scanner: token [" << yytext << "]" << endl;
+                cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_SEMICOLON(SEMICOLON,WadeSpace::location());
                }
 "{"            {

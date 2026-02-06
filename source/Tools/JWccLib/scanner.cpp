@@ -1397,7 +1397,7 @@ case 54:
 YY_RULE_SETUP
 #line 287 "ansic.l"
 {
-                //cout << "Scanner: token [" << yytext << "]" << endl;
+                cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_SEMICOLON(SEMICOLON,WadeSpace::location());
                }
 	YY_BREAK

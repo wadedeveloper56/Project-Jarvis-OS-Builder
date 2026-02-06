@@ -5,7 +5,17 @@
 using namespace std;
 using namespace WadeSpace;
 
-StorageClassSpecifier* createStorageClassSpecifier(const int& value, TokenType type)
+DirectDeclarator* createDirectDeclarator(const optional<string>& identifier,const optional<int>& token1,const optional<int>& token2,Declarator* const declarator,DirectDeclarator* const directDeclarator,Expression* const constantExpression,ParameterTypeList* const parameterTypeList,vector<string>* const vectorOfStrings)
+{
+	return new DirectDeclarator(identifier,token1,token2,declarator,directDeclarator,constantExpression,parameterTypeList,vectorOfStrings);
+}
+
+DeclarationSpecifiers* createDeclarationSpecifiers(StorageClassSpecifier* const storageClassSpecifier,TypeSpecifier* const typeSpecifier,TypeQualifier* const typeQualifier,DeclarationSpecifiers* const declarationSpecifiers)
+{
+	return new DeclarationSpecifiers(storageClassSpecifier, typeSpecifier, typeQualifier, declarationSpecifiers);
+}
+
+StorageClassSpecifier* createStorageClassSpecifier(const int& value, const TokenType type)
 {
 	return new StorageClassSpecifier(value, type);
 }

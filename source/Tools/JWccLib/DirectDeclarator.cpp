@@ -7,13 +7,18 @@
 using namespace WadeSpace;
 using namespace std;
 
-DirectDeclarator::DirectDeclarator(const optional<string>& identifier, const optional<int>& token1, const optional<int>& str2,
-	Declarator* const declarator, DirectDeclarator* const directDeclarator,
-	Expression* const constantExpression, ParameterTypeList* const parameterTypeList,
+DirectDeclarator::DirectDeclarator(
+	const optional<string>& identifier, 
+	const optional<int>& token1, 
+	const optional<int>& token2,
+	Declarator* const declarator, 
+	DirectDeclarator* const directDeclarator,
+	Expression* const constantExpression,
+	ParameterTypeList* const parameterTypeList,
 	vector<string>* const vectorOfStrings)
 	: identifier(identifier),
 	token1(token1),
-	token2(str2),
+	token2(token2),
 	declarator(declarator),
 	directDeclarator(directDeclarator),
 	constantExpression(constantExpression),

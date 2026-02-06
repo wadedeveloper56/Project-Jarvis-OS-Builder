@@ -2449,37 +2449,37 @@ namespace  WadeSpace  {
 
   case 82: // declaration_specifiers: storage_class_specifier
 #line 418 "ansic.y"
-                                                      { yylhs.value.as < DeclarationSpecifiers * > () = new DeclarationSpecifiers(yystack_[0].value.as < StorageClassSpecifier * > (),nullptr,nullptr,nullptr); cout << "storage_class_specifier REDUCE to declaration_specifiers" << endl;}
+                                                      { yylhs.value.as < DeclarationSpecifiers * > () = createDeclarationSpecifiers(yystack_[0].value.as < StorageClassSpecifier * > (),nullptr,nullptr,nullptr); cout << "storage_class_specifier REDUCE to declaration_specifiers" << endl;}
 #line 2454 "parser.cpp"
     break;
 
   case 83: // declaration_specifiers: storage_class_specifier declaration_specifiers
 #line 419 "ansic.y"
-                                                      { yylhs.value.as < DeclarationSpecifiers * > () = new DeclarationSpecifiers(yystack_[1].value.as < StorageClassSpecifier * > (),nullptr,nullptr,yystack_[0].value.as < DeclarationSpecifiers * > ());      cout << "storage_class_specifier declaration_specifiers REDUCE to declaration_specifiers" << endl;}
+                                                      { yylhs.value.as < DeclarationSpecifiers * > () = createDeclarationSpecifiers(yystack_[1].value.as < StorageClassSpecifier * > (),nullptr,nullptr,yystack_[0].value.as < DeclarationSpecifiers * > ());      cout << "storage_class_specifier declaration_specifiers REDUCE to declaration_specifiers" << endl;}
 #line 2460 "parser.cpp"
     break;
 
   case 84: // declaration_specifiers: type_specifier
 #line 420 "ansic.y"
-                                                      { yylhs.value.as < DeclarationSpecifiers * > () = new DeclarationSpecifiers(nullptr,yystack_[0].value.as < TypeSpecifier * > (),nullptr,nullptr); cout << "type_specifier REDUCE to declaration_specifiers" << endl;}
+                                                      { yylhs.value.as < DeclarationSpecifiers * > () = createDeclarationSpecifiers(nullptr,yystack_[0].value.as < TypeSpecifier * > (),nullptr,nullptr); cout << "type_specifier REDUCE to declaration_specifiers" << endl;}
 #line 2466 "parser.cpp"
     break;
 
   case 85: // declaration_specifiers: type_specifier declaration_specifiers
 #line 421 "ansic.y"
-                                                      { yylhs.value.as < DeclarationSpecifiers * > () = new DeclarationSpecifiers(nullptr,yystack_[1].value.as < TypeSpecifier * > (),nullptr,yystack_[0].value.as < DeclarationSpecifiers * > ());      cout << "type_specifier declaration_specifiers REDUCE to declaration_specifiers" << endl;}
+                                                      { yylhs.value.as < DeclarationSpecifiers * > () = createDeclarationSpecifiers(nullptr,yystack_[1].value.as < TypeSpecifier * > (),nullptr,yystack_[0].value.as < DeclarationSpecifiers * > ());      cout << "type_specifier declaration_specifiers REDUCE to declaration_specifiers" << endl;}
 #line 2472 "parser.cpp"
     break;
 
   case 86: // declaration_specifiers: type_qualifier
 #line 422 "ansic.y"
-                                                      { yylhs.value.as < DeclarationSpecifiers * > () = new DeclarationSpecifiers(nullptr,nullptr,yystack_[0].value.as < TypeQualifier * > (),nullptr); cout << "type_qualifier REDUCE to declaration_specifiers" << endl;}
+                                                      { yylhs.value.as < DeclarationSpecifiers * > () = createDeclarationSpecifiers(nullptr,nullptr,yystack_[0].value.as < TypeQualifier * > (),nullptr); cout << "type_qualifier REDUCE to declaration_specifiers" << endl;}
 #line 2478 "parser.cpp"
     break;
 
   case 87: // declaration_specifiers: type_qualifier declaration_specifiers
 #line 423 "ansic.y"
-                                                      { yylhs.value.as < DeclarationSpecifiers * > () = new DeclarationSpecifiers(nullptr,nullptr,yystack_[1].value.as < TypeQualifier * > (),yystack_[0].value.as < DeclarationSpecifiers * > ());      cout << "type_qualifier declaration_specifiers REDUCE to declaration_specifiers" << endl;}
+                                                      { yylhs.value.as < DeclarationSpecifiers * > () = createDeclarationSpecifiers(nullptr,nullptr,yystack_[1].value.as < TypeQualifier * > (),yystack_[0].value.as < DeclarationSpecifiers * > ());      cout << "type_qualifier declaration_specifiers REDUCE to declaration_specifiers" << endl;}
 #line 2484 "parser.cpp"
     break;
 
@@ -2853,43 +2853,43 @@ namespace  WadeSpace  {
 
   case 142: // direct_declarator: "identifier"
 #line 573 "ansic.y"
-                                                            { yylhs.value.as < DirectDeclarator * > () = new DirectDeclarator(yystack_[0].value.as < std::string > (),nullopt,nullopt,NULL,NULL,NULL,NULL,NULL); cout << "IDENTIFIER REDUCE to direct_declarator" << endl;}
+                                                            { yylhs.value.as < DirectDeclarator * > () = createDirectDeclarator(yystack_[0].value.as < std::string > (),nullopt,nullopt,NULL,NULL,NULL,NULL,NULL); cout << "IDENTIFIER REDUCE to direct_declarator" << endl;}
 #line 2858 "parser.cpp"
     break;
 
   case 143: // direct_declarator: "(" declarator ")"
 #line 574 "ansic.y"
-                                                            { yylhs.value.as < DirectDeclarator * > () = new DirectDeclarator(nullopt,yystack_[2].value.as < int > (),yystack_[0].value.as < int > (),yystack_[1].value.as < Declarator * > (),NULL,NULL,NULL,NULL); cout << "OPAREN declarator CPAREN REDUCE to direct_declarator" << endl;}
+                                                            { yylhs.value.as < DirectDeclarator * > () = createDirectDeclarator(nullopt,yystack_[2].value.as < int > (),yystack_[0].value.as < int > (),yystack_[1].value.as < Declarator * > (),NULL,NULL,NULL,NULL); cout << "OPAREN declarator CPAREN REDUCE to direct_declarator" << endl;}
 #line 2864 "parser.cpp"
     break;
 
   case 144: // direct_declarator: direct_declarator "[" constant_expression "]"
 #line 575 "ansic.y"
-                                                            { yylhs.value.as < DirectDeclarator * > () = new DirectDeclarator(nullopt,yystack_[2].value.as < int > (),yystack_[0].value.as < int > (),NULL,yystack_[3].value.as < DirectDeclarator * > (),yystack_[1].value.as < Expression * > (),NULL,NULL); cout << "direct_declarator OBRACE constant_expression CBRACE REDUCE to direct_declarator" << endl;}
+                                                            { yylhs.value.as < DirectDeclarator * > () = createDirectDeclarator(nullopt,yystack_[2].value.as < int > (),yystack_[0].value.as < int > (),NULL,yystack_[3].value.as < DirectDeclarator * > (),yystack_[1].value.as < Expression * > (),NULL,NULL); cout << "direct_declarator OBRACE constant_expression CBRACE REDUCE to direct_declarator" << endl;}
 #line 2870 "parser.cpp"
     break;
 
   case 145: // direct_declarator: direct_declarator "[" "]"
 #line 576 "ansic.y"
-                                                            { yylhs.value.as < DirectDeclarator * > () = new DirectDeclarator(nullopt,yystack_[1].value.as < int > (),yystack_[0].value.as < int > (),NULL,yystack_[2].value.as < DirectDeclarator * > (),NULL,NULL,NULL); cout << "direct_declarator OBRACE CBRACE REDUCE to direct_declarator" << endl;}
+                                                            { yylhs.value.as < DirectDeclarator * > () = createDirectDeclarator(nullopt,yystack_[1].value.as < int > (),yystack_[0].value.as < int > (),NULL,yystack_[2].value.as < DirectDeclarator * > (),NULL,NULL,NULL); cout << "direct_declarator OBRACE CBRACE REDUCE to direct_declarator" << endl;}
 #line 2876 "parser.cpp"
     break;
 
   case 146: // direct_declarator: direct_declarator "(" parameter_type_list ")"
 #line 577 "ansic.y"
-                                                            { yylhs.value.as < DirectDeclarator * > () = new DirectDeclarator(nullopt,yystack_[2].value.as < int > (),yystack_[0].value.as < int > (),NULL,yystack_[3].value.as < DirectDeclarator * > (),NULL,yystack_[1].value.as < ParameterTypeList * > (),NULL); cout << "direct_declarator OPAREN parameter_type_list CPAREN to direct_declarator" << endl;}
+                                                            { yylhs.value.as < DirectDeclarator * > () = createDirectDeclarator(nullopt,yystack_[2].value.as < int > (),yystack_[0].value.as < int > (),NULL,yystack_[3].value.as < DirectDeclarator * > (),NULL,yystack_[1].value.as < ParameterTypeList * > (),NULL); cout << "direct_declarator OPAREN parameter_type_list CPAREN to direct_declarator" << endl;}
 #line 2882 "parser.cpp"
     break;
 
   case 147: // direct_declarator: direct_declarator "(" identifier_list ")"
 #line 578 "ansic.y"
-                                                            { yylhs.value.as < DirectDeclarator * > () = new DirectDeclarator(nullopt,yystack_[2].value.as < int > (),yystack_[0].value.as < int > (),NULL,yystack_[3].value.as < DirectDeclarator * > (),NULL,NULL,yystack_[1].value.as < std::vector<std::string> * > ()); cout << "direct_declarator OPAREN identifier_list CPAREN REDUCE to direct_declarator" << endl;}
+                                                            { yylhs.value.as < DirectDeclarator * > () = createDirectDeclarator(nullopt,yystack_[2].value.as < int > (),yystack_[0].value.as < int > (),NULL,yystack_[3].value.as < DirectDeclarator * > (),NULL,NULL,yystack_[1].value.as < std::vector<std::string> * > ()); cout << "direct_declarator OPAREN identifier_list CPAREN REDUCE to direct_declarator" << endl;}
 #line 2888 "parser.cpp"
     break;
 
   case 148: // direct_declarator: direct_declarator "(" ")"
 #line 579 "ansic.y"
-                                                            { yylhs.value.as < DirectDeclarator * > () = new DirectDeclarator(nullopt,yystack_[1].value.as < int > (),yystack_[0].value.as < int > (),NULL,yystack_[2].value.as < DirectDeclarator * > (),NULL,NULL,NULL); cout << "direct_declarator OPAREN CPAREN REDUCE to direct_declarator" << endl;}
+                                                            { yylhs.value.as < DirectDeclarator * > () = createDirectDeclarator(nullopt,yystack_[1].value.as < int > (),yystack_[0].value.as < int > (),NULL,yystack_[2].value.as < DirectDeclarator * > (),NULL,NULL,NULL); cout << "direct_declarator OPAREN CPAREN REDUCE to direct_declarator" << endl;}
 #line 2894 "parser.cpp"
     break;
 

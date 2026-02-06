@@ -8,6 +8,7 @@ storage_class_specifier REDUCE to declaration_specifiers
 IDENTIFIER REDUCE to direct_declarator
 direct_declarator REDUCE to declarator
 INT REDUCE to type_specifier
+Scanner: token [;]
 type_specifier REDUCE to declaration_specifiers
 declaration_specifiers SEMICOLON REDUCE to declaration
 declaration REDUCE to declaration_list

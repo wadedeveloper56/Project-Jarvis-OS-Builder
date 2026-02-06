@@ -19,8 +19,8 @@ namespace WadeSpace
 	public:
 		DirectDeclarator(
 			const optional<string>& identifier, 
-			const optional<int>& str1, 
-			const optional<int>& str2,
+			const optional<int>& token1, 
+			const optional<int>& token2,
 			Declarator* const declarator, 
 			DirectDeclarator* const directDeclarator,
 			Expression* const constantExpression, 
