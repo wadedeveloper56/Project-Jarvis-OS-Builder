@@ -17,27 +17,44 @@ namespace WadeSpace
 	class DirectDeclarator
 	{
 	public:
-		DirectDeclarator(string id);
-		DirectDeclarator(string id, Declarator* declarator);
-		DirectDeclarator(DirectDeclarator* directDeclarator, int& str1, int& str2);
-		DirectDeclarator(DirectDeclarator* directDeclarator, Expression* constantExpression);
-		DirectDeclarator(DirectDeclarator* directDeclarator, ParameterTypeList* parameterTypeList);
-		DirectDeclarator(DirectDeclarator* directDeclarator, vector<string>* vectorOfStrings);
-		DirectDeclarator();
-		virtual ~DirectDeclarator();
-		optional<string> getIdentifier() const;
-		optional<int> getStr1() const;
-		optional<int> getStr2() const;
-		Declarator* getDeclarator() const;
-		DirectDeclarator* getDirectDeclarator() const;
-		Expression* getConstantExpression() const;
-		ParameterTypeList* getParameterTypeList() const;
-		vector<string>* getVectorOfStrings() const;
+		DirectDeclarator(
+			const optional<string>& identifier, 
+			const optional<int>& str1, 
+			const optional<int>& str2,
+			Declarator* const declarator, 
+			DirectDeclarator* const directDeclarator,
+			Expression* const constantExpression, 
+			ParameterTypeList* const parameterTypeList,
+			vector<string>* const vectorOfStrings
+		);
+		~DirectDeclarator() = default;
+		DirectDeclarator(const DirectDeclarator& other) = default;
+		DirectDeclarator(DirectDeclarator&& other) = default;
+		DirectDeclarator& operator=(const DirectDeclarator& other) = default;
+		DirectDeclarator& operator=(DirectDeclarator&& other) = default;
+
+		[[nodiscard]] optional<string> getIdentifier() const;
+		[[nodiscard]] optional<int> getToken1() const;
+		[[nodiscard]] optional<int> getToken2() const;
+		[[nodiscard]] Declarator* getDeclarator() const;
+		[[nodiscard]] DirectDeclarator* getDirectDeclarator() const;
+		[[nodiscard]] Expression* getConstantExpression() const;
+		[[nodiscard]] ParameterTypeList* getParameterTypeList() const;
+		[[nodiscard]] vector<string>* getVectorOfStrings() const;
+
+		[[nodiscard]] bool isIdentifier() const { return identifier.has_value(); }
+		[[nodiscard]] bool isToken1() const { return token1.has_value(); }
+		[[nodiscard]] bool isToken2() const { return token2.has_value(); }
+		[[nodiscard]] bool isDeclarator() const { return declarator != nullptr; }
+		[[nodiscard]] bool isDirectDeclarator() const { return directDeclarator != nullptr; }
+		[[nodiscard]] bool isConstantExpression() const { return constantExpression != nullptr; }
+		[[nodiscard]] bool isParameterTypeList() const { return parameterTypeList != nullptr; }
+		[[nodiscard]] bool isVectorOfStrings() const { return vectorOfStrings != nullptr; }
 
 	private:
 		optional<string> identifier;
-		optional<int> str1;
-		optional<int> str2;
+		optional<int> token1;
+		optional<int> token2;
 		Declarator* declarator;
 		DirectDeclarator* directDeclarator;
 		Expression* constantExpression;

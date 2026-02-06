@@ -50,7 +50,7 @@ void ProgramData::handleDeclaration(Declaration* declaration, vector<VariableDat
 	{
 		VariableData* data = new VariableData();
 		DirectDeclarator* dd = initDecl->getDeclarator()->getDirectDeclarator();
-		if (!((dd->getStr1() == OPAREN && dd->getStr2() == CPAREN) || (dd->getParameterTypeList() != nullptr)))
+		if (!((dd->getToken1() == OPAREN && dd->getToken2() == CPAREN) || (dd->getParameterTypeList() != nullptr)))
 		{
 			data->name = initDecl->getVariableName();
 			data->type = type;
