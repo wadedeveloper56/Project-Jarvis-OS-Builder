@@ -30,33 +30,37 @@ typedef enum _ConstType
 	CONSTT_MAX
 } ConstType;
 
-typedef struct _TokData
+struct Keyword
+{
+	int keyword;
+	int strLen;
+	char* string;
+};
+
+struct Symbol
+{
+	char* string;
+	int strLen;
+};
+
+typedef struct TokData
 {
 	TokenCode code;
-	union _Representation
+	union Representation
 	{
-		struct _Keyword
-		{
-			int keyword;
-			int strLen;
-			char* string;
-		} keyword;
-		struct _Symbol
-		{
-			char* string;
-			int strLen;
-		} symbol;
-		struct _NumericConstant
+		Keyword keyword;
+		Symbol symbol;
+		struct NumericConstant
 		{
 			ConstType type : 6;
 			RadixType radix : 2;
-			union _ConstRepr
+			union ConstRepr
 			{
 				unsigned long long lIntConst;
 				long double lDoubleConst;
 			} repr;
 		} numericConstant;
-		struct _StringConstant
+		struct StringConstant
 		{
 			char* s;
 			int strLen;

@@ -1,24 +1,24 @@
 #include "pch.h"
 #include "Token.h"
 
-TokenPtr createToken(TokDataPtr data)
+TokenPtr createToken(const TokDataPtr data)
 {
-	TokenPtr tok = new Token;
+	const auto tok = new Token;
 	tok->data = data;
 	return tok;
 }
 
 TokDataPtr createTokData(void)
 {
-	TokDataPtr newData = new TokData;
-	memset(newData, 0, sizeof(TokData));
-	newData->repr.symbol.string = NULL;
-	return newData;
+	const auto data = new TokData;
+	memset(data, 0, sizeof(TokData));
+	data->repr.symbol.string = nullptr;
+	return data;
 }
 
-TokenPtr createConstantULLToken(unsigned long long num)
+TokenPtr createConstantULLToken(const unsigned long long num)
 {
-	TokenPtr tok = createToken(createTokData());
+	const auto tok = createToken(createTokData());
 	tok->data->code = YC_NUMERIC;
 	tok->data->repr.numericConstant.type = CONSTT_UINT_CONST;
 	tok->data->repr.numericConstant.radix = RADT_DECIMAL;
@@ -26,9 +26,9 @@ TokenPtr createConstantULLToken(unsigned long long num)
 	return tok;
 }
 
-TokenPtr createConstantLDToken(long double num)
+TokenPtr createConstantLDToken(const long double num)
 {
-	TokenPtr tok = createToken(createTokData());
+	const auto tok = createToken(createTokData());
 	tok->data->code = YC_NUMERIC;
 	tok->data->repr.numericConstant.type = CONSTT_LDOUBLE_CONST;
 	tok->data->repr.numericConstant.radix = RADT_DECIMAL;
