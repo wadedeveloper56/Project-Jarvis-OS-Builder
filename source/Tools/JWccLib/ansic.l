@@ -29,6 +29,7 @@ WS  [ \t\v\n\f]
     #include "interpreter.h"
     #include "parser.hpp"
     #include "location.hh"
+    #include "Token.h"
 
     using namespace std;
 
@@ -61,7 +62,7 @@ WS  [ \t\v\n\f]
 
 "auto"         { 
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_AUTO(AUTO, WadeSpace::location()); 
+                return WadeSpace::Parser::make_AUTO(createKeywordToken(yytext,AUTO), WadeSpace::location()); 
                }               
 "break"        { 
                 //cout << "Scanner: token [" << yytext << "]" << endl;

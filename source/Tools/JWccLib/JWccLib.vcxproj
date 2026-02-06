@@ -211,6 +211,7 @@
     <ClInclude Include="StructDeclarator.h" />
     <ClInclude Include="StructOrUnion.h" />
     <ClInclude Include="StructOrUnionSpecifier.h" />
+    <ClInclude Include="Token.h" />
     <ClInclude Include="TokenType.h" />
     <ClInclude Include="TypeName.h" />
     <ClInclude Include="TypeQualifier.h" />
@@ -269,6 +270,7 @@
     <ClCompile Include="StructDeclarator.cpp" />
     <ClCompile Include="StructOrUnion.cpp" />
     <ClCompile Include="StructOrUnionSpecifier.cpp" />
+    <ClCompile Include="structures.cpp" />
     <ClCompile Include="TypeName.cpp" />
     <ClCompile Include="TypeQualifier.cpp" />
     <ClCompile Include="TypeSpecifier.cpp" />

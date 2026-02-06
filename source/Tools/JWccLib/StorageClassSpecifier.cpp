@@ -3,7 +3,7 @@
 
 using namespace WadeSpace;
 
-StorageClassSpecifier::StorageClassSpecifier(const int& value, TokenType type) : operatorStr(value), type(type)
+StorageClassSpecifier::StorageClassSpecifier(const optional<int>& value, const optional<TokenType> type) : operatorStr(value), type(type)
 {
 }
 

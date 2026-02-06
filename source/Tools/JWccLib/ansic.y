@@ -46,6 +46,7 @@
     #include "ProgramData.h"
     #include "Expression.h"
     #include "debug.h"
+    #include "Token.h"
 
     using namespace std;
 
@@ -98,7 +99,7 @@
 %token <long double> F_CONST "f_const"
 %token <std::string> STRING_LITERAL  "sting_literal"
 %token <int> TYPE_NAME "type name"
-%token <int> AUTO "auto"
+%token <TokenPtr> AUTO "auto"
 %token <int> BREAK "break"
 %token <int> CASE "case"
 %token <int> CHAR "char"
@@ -256,18 +257,18 @@
 %%
 
 primary_expression
-    : IDENTIFIER                { $$ = createPrimaryExpression($1,NULL); cout << "IDENTIFIER REDUCE to primary_expression" << endl; }
+    : IDENTIFIER                { $$ = createPrimaryExpression($1,NULL);      cout << "IDENTIFIER REDUCE to primary_expression" << endl; }
     | constant                  { $$ = createPrimaryExpression(nullopt,$1);   cout << "constant REDUCE to primary_expression" << endl; }
-    | OPAREN expression CPAREN  { $$ = $2;                               cout << "OPAREN expression CPAREN REDUCE to primary_expression" << endl; }
+    | OPAREN expression CPAREN  { $$ = $2;                                    cout << "OPAREN expression CPAREN REDUCE to primary_expression" << endl; }
     ;
 
 constant
-    : F_CONST         { long double id = $1; $$ = new Constant(id); cout << "F_CONST REDUCE to constant " << id << endl; }
-    | I_CONST         { uint64_t id = $1;    $$ = new Constant(id); cout << "I_CONST REDUCE to constant " << id << endl; }
-    | STRING_LITERAL  { string id = $1;      $$ = new Constant(id); cout << "STRING_LITERAL REDUCE to constant  " << id << endl; }
+    : F_CONST         { $$ = createConstant(nullopt,$1,nullopt,FLOAT_CONSTANT);   cout << "F_CONST REDUCE to constant " << endl; }
+    | I_CONST         { $$ = createConstant($1,nullopt,nullopt,INTEGER_CONSTANT); cout << "I_CONST REDUCE to constant " << endl; }
+    | STRING_LITERAL  { $$ = createConstant(nullopt,nullopt,$1,STRING_CONSTANT);  cout << "STRING_LITERAL REDUCE to constant  " << endl; }
 
 postfix_expression
-    : primary_expression                                           { $$ = $1;                                     cout << "primary_expression REDUCE to postfix_expression" << endl; }
+    : primary_expression                                           { $$ = $1;                                 cout << "primary_expression REDUCE to postfix_expression" << endl; }
     | postfix_expression OBRACE expression CBRACE                  { $$ = new Expression($1,$2,nullptr);      cout << "postfix_expression OBRACE expression CBRACE REDUCE to postfix_expression" << endl; }
     | postfix_expression OPAREN CPAREN                             { $$ = new Expression($1,nullptr,nullptr); cout << "postfix_expression OPAREN CPAREN REDUCE to postfix_expression" << endl; }
     | postfix_expression OPAREN argument_expression_list CPAREN    { $$ = new Expression($1,$3);              cout << "postfix_expression OPAREN argument_expression_list CPAREN REDUCE to postfix_expression" << endl; }
@@ -445,11 +446,11 @@ init_declarator
     ;
 
 storage_class_specifier
-    : TYPEDEF   { $$ = createStorageClassSpecifier($1,TYPEDEF); cout << "** TYPEDEF REDUCE to storage_class_specifier" << endl;}
-    | EXTERN    { $$ = createStorageClassSpecifier($1,EXTERN); cout << "EXTERN REDUCE to storage_class_specifier" << endl;}
-    | STATIC    { $$ = createStorageClassSpecifier($1,STATIC); cout << "STATIC REDUCE to storage_class_specifier" << endl;}
-    | AUTO      { $$ = createStorageClassSpecifier($1,AUTO); cout << "AUTO REDUCE to storage_class_specifier" << endl;}
-    | REGISTER  { $$ = createStorageClassSpecifier($1,REGISTER); cout << "REGISTER REDUCE to storage_class_specifier" << endl;}
+    : TYPEDEF   { $$ = createStorageClassSpecifier($1,TYPEDEF,nullptr); cout << "** TYPEDEF REDUCE to storage_class_specifier" << endl;}
+    | EXTERN    { $$ = createStorageClassSpecifier($1,EXTERN,nullptr); cout << "EXTERN REDUCE to storage_class_specifier" << endl;}
+    | STATIC    { $$ = createStorageClassSpecifier($1,STATIC,nullptr); cout << "STATIC REDUCE to storage_class_specifier" << endl;}
+    | AUTO      { $$ = createStorageClassSpecifier(nullopt,nullopt,$1); cout << "AUTO REDUCE to storage_class_specifier" << endl;}
+    | REGISTER  { $$ = createStorageClassSpecifier($1,REGISTER,nullptr); cout << "REGISTER REDUCE to storage_class_specifier" << endl;}
     ;
 
 type_specifier

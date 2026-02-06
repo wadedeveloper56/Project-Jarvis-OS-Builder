@@ -302,7 +302,7 @@ Terminals, with rules where they appear
     "f_const" <long double> (260) 4
     "sting_literal" <std::string> (261) 6
     "type name" <int> (262) 112
-    "auto" <int> (263) 94
+    "auto" <TokenPtr> (263) 94
     "break" <int> (264) 210
     "case" <int> (265) 189
     "char" <int> (266) 97

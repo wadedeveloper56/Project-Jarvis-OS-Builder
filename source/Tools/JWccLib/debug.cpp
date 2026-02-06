@@ -5,6 +5,11 @@
 using namespace std;
 using namespace WadeSpace;
 
+Constant* createConstant(const optional<uint64_t>& iConst, const optional<long double>& fConst,const optional<string>& strConst, const optional<TokenType>& type)
+{
+	return new Constant(iConst,fConst,strConst,type);
+}
+
 Declarator* createDeclarator(Pointer* pointer, DirectDeclarator* directDeclarator)
 {
 	return new Declarator(pointer, directDeclarator);
@@ -20,7 +25,7 @@ DeclarationSpecifiers* createDeclarationSpecifiers(StorageClassSpecifier* const 
 	return new DeclarationSpecifiers(storageClassSpecifier, typeSpecifier, typeQualifier, declarationSpecifiers);
 }
 
-StorageClassSpecifier* createStorageClassSpecifier(const int& value, const TokenType type)
+StorageClassSpecifier* createStorageClassSpecifier(const optional<int>& value, const optional<TokenType> type, const TokenPtr token)
 {
 	return new StorageClassSpecifier(value, type);
 }

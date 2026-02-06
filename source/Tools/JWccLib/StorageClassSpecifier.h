@@ -12,7 +12,7 @@ namespace WadeSpace
 	class StorageClassSpecifier
 	{
 	public:
-		StorageClassSpecifier(const int& value, TokenType type);
+		StorageClassSpecifier(const optional<int>& value, const optional<TokenType> type);
 		StorageClassSpecifier();
 		virtual ~StorageClassSpecifier() = default;
 		[[nodiscard]] optional<int> getOperatorStr() const;

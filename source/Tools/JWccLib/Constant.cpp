@@ -4,28 +4,25 @@
 using namespace WadeSpace;
 using namespace std;
 
-Constant::Constant(const uint64_t value) : iConst(value), fConst(0.0), strConst(nullopt), type(INTEGER_CONSTANT)
+Constant::Constant(const optional<uint64_t>& iConst, const optional<long double>& fConst,
+	const optional<string>& strConst, const optional<TokenType>& type)
+	: iConst(iConst),
+	fConst(fConst),
+	strConst(strConst),
+	type(type)
 {
 }
 
-Constant::Constant(const long double value) : iConst(0), fConst(value), strConst(nullopt), type(FLOAT_CONSTANT)
+Constant::Constant() : iConst(nullopt), fConst(nullopt), strConst(nullopt), type(nullopt)
 {
 }
 
-Constant::Constant(const string&  value) : iConst(0), fConst(0.0), strConst(value), type(STRING_CONSTANT)
-{
-}
-
-Constant::Constant() : iConst(0), fConst(0.0), strConst(nullopt), type(NONE)
-{
-}
-
-uint64_t Constant::getIConst() const
+optional<uint64_t> Constant::getIConst() const
 {
 	return iConst;
 }
 
-long double Constant::getFConst() const
+optional<long double> Constant::getFConst() const
 {
 	return fConst;
 }
@@ -35,7 +32,7 @@ optional<string> Constant::getStrConst() const
 	return strConst;
 }
 
-TokenType Constant::getType() const
+optional<TokenType> Constant::getType() const
 {
 	return type;
 }

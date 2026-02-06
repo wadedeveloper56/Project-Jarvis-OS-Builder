@@ -84,6 +84,7 @@
     #include "ProgramData.h"
     #include "Expression.h"
     #include "debug.h"
+    #include "Token.h"
 
     using namespace std;
 
@@ -94,7 +95,7 @@
         class Interpreter;
     }
 
-#line 98 "parser.hpp"
+#line 99 "parser.hpp"
 
 # include <cassert>
 # include <cstdlib> // std::abort
@@ -235,7 +236,7 @@
 
 #line 9 "ansic.y"
 namespace  WadeSpace  {
-#line 239 "parser.hpp"
+#line 240 "parser.hpp"
 
 
 
@@ -551,17 +552,19 @@ namespace  WadeSpace  {
       // struct_or_union_specifier
       char dummy25[sizeof (StructOrUnionSpecifier *)];
 
+      // "auto"
+      char dummy26[sizeof (TokenPtr)];
+
       // type_name
-      char dummy26[sizeof (TypeName *)];
+      char dummy27[sizeof (TypeName *)];
 
       // type_qualifier
-      char dummy27[sizeof (TypeQualifier *)];
+      char dummy28[sizeof (TypeQualifier *)];
 
       // type_specifier
-      char dummy28[sizeof (TypeSpecifier *)];
+      char dummy29[sizeof (TypeSpecifier *)];
 
       // "type name"
-      // "auto"
       // "break"
       // "case"
       // "char"
@@ -648,50 +651,50 @@ namespace  WadeSpace  {
       // "%"
       // unary_operator
       // assignment_operator
-      char dummy29[sizeof (int)];
+      char dummy30[sizeof (int)];
 
       // "f_const"
-      char dummy30[sizeof (long double)];
+      char dummy31[sizeof (long double)];
 
       // "identifier"
       // "sting_literal"
-      char dummy31[sizeof (std::string)];
+      char dummy32[sizeof (std::string)];
 
       // statement_list
-      char dummy32[sizeof (std::vector<BaseStatement *> *)];
+      char dummy33[sizeof (std::vector<BaseStatement *> *)];
 
       // declaration_list
-      char dummy33[sizeof (std::vector<Declaration *> *)];
+      char dummy34[sizeof (std::vector<Declaration *> *)];
 
       // enumerator_list
-      char dummy34[sizeof (std::vector<Enumerator *> *)];
+      char dummy35[sizeof (std::vector<Enumerator *> *)];
 
       // init_declarator_list
-      char dummy35[sizeof (std::vector<InitDeclarator *> *)];
+      char dummy36[sizeof (std::vector<InitDeclarator *> *)];
 
       // initializer_list
-      char dummy36[sizeof (std::vector<Initializer *> *)];
+      char dummy37[sizeof (std::vector<Initializer *> *)];
 
       // parameter_list
-      char dummy37[sizeof (std::vector<ParameterDeclaration *> *)];
+      char dummy38[sizeof (std::vector<ParameterDeclaration *> *)];
 
       // struct_declaration_list
-      char dummy38[sizeof (std::vector<StructDeclaration *> *)];
+      char dummy39[sizeof (std::vector<StructDeclaration *> *)];
 
       // struct_declarator_list
-      char dummy39[sizeof (std::vector<StructDeclarator *> *)];
+      char dummy40[sizeof (std::vector<StructDeclarator *> *)];
 
       // type_qualifier_list
-      char dummy40[sizeof (std::vector<TypeQualifier *> *)];
+      char dummy41[sizeof (std::vector<TypeQualifier *> *)];
 
       // identifier_list
-      char dummy41[sizeof (std::vector<std::string> *)];
+      char dummy42[sizeof (std::vector<std::string> *)];
 
       // "i_const"
-      char dummy42[sizeof (uint64_t)];
+      char dummy43[sizeof (uint64_t)];
 
       // argument_expression_list
-      char dummy43[sizeof (vector<Expression *> *)];
+      char dummy44[sizeof (vector<Expression *> *)];
     };
 
     /// The size of the largest semantic type.
@@ -1169,6 +1172,10 @@ namespace  WadeSpace  {
         value.move< StructOrUnionSpecifier * > (std::move (that.value));
         break;
 
+      case symbol_kind::S_AUTO: // "auto"
+        value.move< TokenPtr > (std::move (that.value));
+        break;
+
       case symbol_kind::S_type_name: // type_name
         value.move< TypeName * > (std::move (that.value));
         break;
@@ -1182,7 +1189,6 @@ namespace  WadeSpace  {
         break;
 
       case symbol_kind::S_TYPE_NAME: // "type name"
-      case symbol_kind::S_AUTO: // "auto"
       case symbol_kind::S_BREAK: // "break"
       case symbol_kind::S_CASE: // "case"
       case symbol_kind::S_CHAR: // "char"
@@ -1703,6 +1709,20 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
+      basic_symbol (typename Base::kind_type t, TokenPtr&& v, location_type&& l)
+        : Base (t)
+        , value (std::move (v))
+        , location (std::move (l))
+      {}
+#else
+      basic_symbol (typename Base::kind_type t, const TokenPtr& v, const location_type& l)
+        : Base (t)
+        , value (v)
+        , location (l)
+      {}
+#endif
+
+#if 201103L <= YY_CPLUSPLUS
       basic_symbol (typename Base::kind_type t, TypeName *&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
@@ -2100,6 +2120,10 @@ switch (yykind)
         value.template destroy< StructOrUnionSpecifier * > ();
         break;
 
+      case symbol_kind::S_AUTO: // "auto"
+        value.template destroy< TokenPtr > ();
+        break;
+
       case symbol_kind::S_type_name: // type_name
         value.template destroy< TypeName * > ();
         break;
@@ -2113,7 +2137,6 @@ switch (yykind)
         break;
 
       case symbol_kind::S_TYPE_NAME: // "type name"
-      case symbol_kind::S_AUTO: // "auto"
       case symbol_kind::S_BREAK: // "break"
       case symbol_kind::S_CASE: // "case"
       case symbol_kind::S_CHAR: // "char"
@@ -2363,6 +2386,18 @@ switch (yykind)
 #endif
       }
 #if 201103L <= YY_CPLUSPLUS
+      symbol_type (int tok, TokenPtr v, location_type l)
+        : super_type (token_kind_type (tok), std::move (v), std::move (l))
+#else
+      symbol_type (int tok, const TokenPtr& v, const location_type& l)
+        : super_type (token_kind_type (tok), v, l)
+#endif
+      {
+#if !defined _MSC_VER || defined __clang__
+        YY_ASSERT (tok == token::TOKEN_AUTO);
+#endif
+      }
+#if 201103L <= YY_CPLUSPLUS
       symbol_type (int tok, int v, location_type l)
         : super_type (token_kind_type (tok), std::move (v), std::move (l))
 #else
@@ -2371,7 +2406,8 @@ switch (yykind)
 #endif
       {
 #if !defined _MSC_VER || defined __clang__
-        YY_ASSERT ((token::TOKEN_TYPE_NAME <= tok && tok <= token::TOKEN_MOD_OP));
+        YY_ASSERT (tok == token::TOKEN_TYPE_NAME
+                   || (token::TOKEN_BREAK <= tok && tok <= token::TOKEN_MOD_OP));
 #endif
       }
 #if 201103L <= YY_CPLUSPLUS
@@ -2582,14 +2618,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_AUTO (int v, location_type l)
+      make_AUTO (TokenPtr v, location_type l)
       {
         return symbol_type (token::TOKEN_AUTO, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_AUTO (const int& v, const location_type& l)
+      make_AUTO (const TokenPtr& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_AUTO, v, l);
       }
@@ -4384,6 +4420,10 @@ switch (yykind)
         value.copy< StructOrUnionSpecifier * > (YY_MOVE (that.value));
         break;
 
+      case symbol_kind::S_AUTO: // "auto"
+        value.copy< TokenPtr > (YY_MOVE (that.value));
+        break;
+
       case symbol_kind::S_type_name: // type_name
         value.copy< TypeName * > (YY_MOVE (that.value));
         break;
@@ -4397,7 +4437,6 @@ switch (yykind)
         break;
 
       case symbol_kind::S_TYPE_NAME: // "type name"
-      case symbol_kind::S_AUTO: // "auto"
       case symbol_kind::S_BREAK: // "break"
       case symbol_kind::S_CASE: // "case"
       case symbol_kind::S_CHAR: // "char"
@@ -4697,6 +4736,10 @@ switch (yykind)
         value.move< StructOrUnionSpecifier * > (YY_MOVE (s.value));
         break;
 
+      case symbol_kind::S_AUTO: // "auto"
+        value.move< TokenPtr > (YY_MOVE (s.value));
+        break;
+
       case symbol_kind::S_type_name: // type_name
         value.move< TypeName * > (YY_MOVE (s.value));
         break;
@@ -4710,7 +4753,6 @@ switch (yykind)
         break;
 
       case symbol_kind::S_TYPE_NAME: // "type name"
-      case symbol_kind::S_AUTO: // "auto"
       case symbol_kind::S_BREAK: // "break"
       case symbol_kind::S_CASE: // "case"
       case symbol_kind::S_CHAR: // "char"
@@ -4924,7 +4966,7 @@ switch (yykind)
 
 #line 9 "ansic.y"
 } //  WadeSpace 
-#line 4928 "parser.hpp"
+#line 4970 "parser.hpp"
 
 
 
