@@ -565,8 +565,8 @@ type_qualifier
     ;
 
 declarator
-    : pointer direct_declarator { $<Declarator *>$ = new Declarator($1,$2); cout << "pointer direct_declarator REDUCE to declarator" << endl;}
-    | direct_declarator         { $<Declarator *>$ = new Declarator($1); cout << "direct_declarator REDUCE to declarator" << endl;}
+    : pointer direct_declarator { $$ = createDeclarator($1,$2); cout << "pointer direct_declarator REDUCE to declarator" << endl;}
+    | direct_declarator         { $$ = createDeclarator(nullptr,$1); cout << "direct_declarator REDUCE to declarator" << endl;}
     ;
 
 direct_declarator

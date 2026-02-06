@@ -2841,13 +2841,13 @@ namespace  WadeSpace  {
 
   case 140: // declarator: pointer direct_declarator
 #line 568 "ansic.y"
-                                { yylhs.value.as< Declarator * > () = new Declarator(yystack_[1].value.as < Pointer * > (),yystack_[0].value.as < DirectDeclarator * > ()); cout << "pointer direct_declarator REDUCE to declarator" << endl;}
+                                { yylhs.value.as < Declarator * > () = createDeclarator(yystack_[1].value.as < Pointer * > (),yystack_[0].value.as < DirectDeclarator * > ()); cout << "pointer direct_declarator REDUCE to declarator" << endl;}
 #line 2846 "parser.cpp"
     break;
 
   case 141: // declarator: direct_declarator
 #line 569 "ansic.y"
-                                { yylhs.value.as< Declarator * > () = new Declarator(yystack_[0].value.as < DirectDeclarator * > ()); cout << "direct_declarator REDUCE to declarator" << endl;}
+                                { yylhs.value.as < Declarator * > () = createDeclarator(nullptr,yystack_[0].value.as < DirectDeclarator * > ()); cout << "direct_declarator REDUCE to declarator" << endl;}
 #line 2852 "parser.cpp"
     break;
 
