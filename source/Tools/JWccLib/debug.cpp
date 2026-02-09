@@ -5,9 +5,26 @@
 using namespace std;
 using namespace WadeSpace;
 
-Constant* createConstant(const optional<uint64_t>& iConst, const optional<long double>& fConst,const optional<string>& strConst, const optional<TokenType>& type)
+Expression* createExpression(
+	NodeType type,
+	optional<int> token1,
+	optional<int> token2,
+	Expression* exp1,
+	Expression* exp2,
+	vector<Expression*>* argumentList,
+	optional<string> identifier,
+	vector<Initializer*>* initializerList,
+	TypeName* typeName,
+	Expression* left,
+	TokenPtr op,
+	Expression* right)
 {
-	return new Constant(iConst,fConst,strConst,type);
+	return new Expression(new NodeData(type, token1, token2, exp1, exp2, argumentList, identifier, initializerList, typeName), left, op, right);
+}
+
+Constant* createConstant(const optional<uint64_t>& iConst, const optional<long double>& fConst, const optional<string>& strConst, const optional<TokenType>& type)
+{
+	return new Constant(iConst, fConst, strConst, type);
 }
 
 Declarator* createDeclarator(Pointer* pointer, DirectDeclarator* directDeclarator)
@@ -15,12 +32,12 @@ Declarator* createDeclarator(Pointer* pointer, DirectDeclarator* directDeclarato
 	return new Declarator(pointer, directDeclarator);
 }
 
-DirectDeclarator* createDirectDeclarator(const optional<string>& identifier,const optional<int>& token1,const optional<int>& token2,Declarator* const declarator,DirectDeclarator* const directDeclarator,Expression* const constantExpression,ParameterTypeList* const parameterTypeList,vector<string>* const vectorOfStrings)
+DirectDeclarator* createDirectDeclarator(const optional<string>& identifier, const optional<int>& token1, const optional<int>& token2, Declarator* const declarator, DirectDeclarator* const directDeclarator, Expression* const constantExpression, ParameterTypeList* const parameterTypeList, vector<string>* const vectorOfStrings)
 {
-	return new DirectDeclarator(identifier,token1,token2,declarator,directDeclarator,constantExpression,parameterTypeList,vectorOfStrings);
+	return new DirectDeclarator(identifier, token1, token2, declarator, directDeclarator, constantExpression, parameterTypeList, vectorOfStrings);
 }
 
-DeclarationSpecifiers* createDeclarationSpecifiers(StorageClassSpecifier* const storageClassSpecifier,TypeSpecifier* const typeSpecifier,TypeQualifier* const typeQualifier,DeclarationSpecifiers* const declarationSpecifiers)
+DeclarationSpecifiers* createDeclarationSpecifiers(StorageClassSpecifier* const storageClassSpecifier, TypeSpecifier* const typeSpecifier, TypeQualifier* const typeQualifier, DeclarationSpecifiers* const declarationSpecifiers)
 {
 	return new DeclarationSpecifiers(storageClassSpecifier, typeSpecifier, typeQualifier, declarationSpecifiers);
 }
@@ -32,7 +49,7 @@ StorageClassSpecifier* createStorageClassSpecifier(const TokenPtr token)
 
 Expression* createPrimaryExpression(const optional<string>& identifier, Constant* constant)
 {
-	return new Expression(identifier, constant);
+	return new Expression();//FIX ME identifier, constant);
 }
 
 vector<Declaration*>* createDeclarationList(Declaration* exp, vector<Declaration*>* list)

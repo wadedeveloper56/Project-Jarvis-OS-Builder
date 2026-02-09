@@ -1,23 +1,25 @@
 #pragma once
 
-typedef enum _TokenCode
+enum TokenCode
 {
 	YC_KEYWORD,
 	YC_SYMBOL,
 	YC_NUMERIC,
 	YC_STRING
-} TokenCode;
+};
 
-typedef enum _RadixType
+enum RadixType
 {
+	RADT_NONE,
 	RADT_DECIMAL,
 	RADT_HEX,
 	RADT_OCTAL,
 	RADT_MAX
-} RadixType;
+};
 
-typedef enum _ConstType
+enum ConstType
 {
+	CONSTT_NONE,
 	CONSTT_CHAR_CONST,
 	CONSTT_INT_CONST,
 	CONSTT_UINT_CONST,
@@ -28,7 +30,7 @@ typedef enum _ConstType
 	CONSTT_LDOUBLE_CONST,   /* Long double const */
 	CONSTT_STRING_CONST,
 	CONSTT_MAX
-} ConstType;
+};
 
 struct Keyword
 {
@@ -43,6 +45,23 @@ struct Symbol
 	int strLen;
 };
 
+struct NumericConstant
+{
+	ConstType type : 6;
+	RadixType radix : 2;
+	union ConstRepr
+	{
+		unsigned long long lIntConst;
+		long double lDoubleConst;
+	} repr;
+};
+
+struct StringConstant
+{
+	char* s;
+	int strLen;
+};
+
 typedef struct TokData
 {
 	TokenCode code;
@@ -50,28 +69,15 @@ typedef struct TokData
 	{
 		Keyword keyword;
 		Symbol symbol;
-		struct NumericConstant
-		{
-			ConstType type : 6;
-			RadixType radix : 2;
-			union ConstRepr
-			{
-				unsigned long long lIntConst;
-				long double lDoubleConst;
-			} repr;
-		} numericConstant;
-		struct StringConstant
-		{
-			char* s;
-			int strLen;
-		} stringConstant;
+		NumericConstant numericConstant;
+		StringConstant stringConstant;
 	} repr;
-} TokData, * TokDataPtr;
+} * TokDataPtr;
 
-typedef struct _Token
+typedef struct Token
 {
 	TokDataPtr data;
-}Token, * TokenPtr, ** TokenPtrPtr;
+}* TokenPtr, ** TokenPtrPtr;
 
 TokenPtr createToken(TokDataPtr data);
 TokDataPtr createTokData(void);

@@ -2,12 +2,14 @@
 
 #include <string>
 #include "Constant.h"
+#include "Token.h"
+
 using namespace std;
 
 namespace WadeSpace
 {
 
-	typedef enum _NodeType { NT_NONE, SIZEOF_TYPE, INITIALZER_LIST, ARGUMENT_LIST, IDENTIFIER_TYPE, CONDITIONAL, CAST, STRING, CONSTANT } NodeType;
+	typedef enum NodeType { NT_NONE, NT_ARRAY, NT_FUNCTION_CALL,NT_VAR_ACCESS,NT_INC,NT_DEC,NT_TYPECAST,NT_SIZEOF,NT_UNARY,NT_OP};
 
 	class Expression;
 	class AssignmentExpression;
@@ -17,36 +19,38 @@ namespace WadeSpace
 	typedef struct NodeData
 	{
 		NodeType type;
-		optional<string> str;
-		Constant* const1;
-		int op;
-		Expression* exp;
+		optional<int> token1;
+		optional<int> token2;
+		Expression* exp1;
 		Expression* exp2;
-		Expression* exp3;
-		vector<Expression*>* vectorAssignmentExpression;
-		vector<Initializer*>* vectorInitializer;
+		vector<Expression*>* argumentList;
+		optional<string> identifier;
+		vector<Initializer*>* initializerList;
 		TypeName* typeName;
 		NodeData();
+		NodeData(
+			const NodeType type,
+			const optional<int> token1,
+			const optional<int> token2,
+			Expression* const exp1,
+			Expression* const exp2,
+			vector<Expression*>* argumentList,
+			optional<string> identifier,
+			vector<Initializer*>* initializerList,
+			TypeName* typeName
+			);
 		~NodeData() = default;
 	} * NodeDataPtr;
 
 	class Expression
 	{
 	public:
-		Expression(const optional<string>& identifier, Constant* constant);
-		Expression(TypeName* typeName, Expression* exp);
-		Expression(TypeName* typeName, int op);
-		Expression(Expression* left, int op, Expression* right);
-		Expression(Expression* exp, int op, const string& identifier);
-		Expression(Expression* exp, Expression* exp2, Expression* exp3);
-		Expression(Expression* exp, vector<Expression*>* vectorAssignmentExpression);
-		Expression(TypeName* typeName, vector<Initializer*>* vectorInitializer);
-		Expression();
-		~Expression();
+		Expression() = default;
+		Expression(const NodeDataPtr data, Expression* const left, const TokenPtr op, Expression* const right);
 	private:
 		NodeDataPtr data;
 		Expression* left;
-		int op;
+		TokenPtr op;
 		Expression* right;
 	};
 }
