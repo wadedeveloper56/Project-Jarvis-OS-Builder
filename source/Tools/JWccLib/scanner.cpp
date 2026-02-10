@@ -1687,7 +1687,7 @@ YY_RULE_SETUP
 #line 432 "ansic.l"
 {
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_XOR_OP(XOR_OP,WadeSpace::location());
+                return WadeSpace::Parser::make_XOR_OP(createKeywordToken(yytext,XOR_OP),WadeSpace::location());
                }
 	YY_BREAK
 case 91:
@@ -1695,7 +1695,7 @@ YY_RULE_SETUP
 #line 436 "ansic.l"
 {
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_BIT_AND(BIT_AND,WadeSpace::location());
+                return WadeSpace::Parser::make_BIT_AND(createKeywordToken(yytext,BIT_AND),WadeSpace::location());
                }
 	YY_BREAK
 case 92:

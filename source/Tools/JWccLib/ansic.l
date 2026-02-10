@@ -431,11 +431,11 @@ WS  [ \t\v\n\f]
                }
 "^"            {
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_XOR_OP(XOR_OP,WadeSpace::location());
+                return WadeSpace::Parser::make_XOR_OP(createKeywordToken(yytext,XOR_OP),WadeSpace::location());
                }
 "&"            {
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_BIT_AND(BIT_AND,WadeSpace::location());
+                return WadeSpace::Parser::make_BIT_AND(createKeywordToken(yytext,BIT_AND),WadeSpace::location());
                }
 "|"            {
                 //cout << "Scanner: token [" << yytext << "]" << endl;

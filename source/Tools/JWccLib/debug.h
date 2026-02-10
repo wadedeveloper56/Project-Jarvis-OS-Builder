@@ -23,6 +23,7 @@ Expression* createExpression(
 	optional<string> identifier,
 	vector<Initializer*>* initializerList,
 	TypeName* typeName,
+	TokenPtr token3,
 
 	Expression* left,
 	TokenPtr op,

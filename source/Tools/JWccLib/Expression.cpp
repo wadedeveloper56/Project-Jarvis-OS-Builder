@@ -17,7 +17,8 @@ NodeData::NodeData(
 	vector<Expression*>* argumentList,
 	optional<string> identifier,
 	vector<Initializer*>* initializerList,
-	TypeName* typeName
+	TypeName* typeName,
+	TokenPtr token3
 )
 	: type(type),
 	  token1(token1),
@@ -27,7 +28,8 @@ NodeData::NodeData(
 	  argumentList(argumentList),
       identifier(identifier),
       initializerList(initializerList),
-      typeName(typeName)
+      typeName(typeName),
+      token3(token3)
 {
 }
 

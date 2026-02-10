@@ -15,11 +15,12 @@ Expression* createExpression(
 	optional<string> identifier,
 	vector<Initializer*>* initializerList,
 	TypeName* typeName,
+	TokenPtr token3,
 	Expression* left,
 	TokenPtr op,
 	Expression* right)
 {
-	return new Expression(new NodeData(type, token1, token2, exp1, exp2, argumentList, identifier, initializerList, typeName), left, op, right);
+	return new Expression(new NodeData(type, token1, token2, exp1, exp2, argumentList, identifier, initializerList, typeName, token3), left, op, right);
 }
 
 Constant* createConstant(const optional<uint64_t>& iConst, const optional<long double>& fConst, const optional<string>& strConst, const optional<TokenType>& type)

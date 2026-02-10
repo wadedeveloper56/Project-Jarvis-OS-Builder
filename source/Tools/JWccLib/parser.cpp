@@ -370,11 +370,14 @@ namespace  WadeSpace  {
       case symbol_kind::S_LESS: // "<"
       case symbol_kind::S_EQUAL_EQUAL: // "=="
       case symbol_kind::S_NOT_EQUAL: // "!="
+      case symbol_kind::S_XOR_OP: // "^"
+      case symbol_kind::S_BIT_AND: // "&"
       case symbol_kind::S_MINUS_OP: // "-"
       case symbol_kind::S_PLUS_OP: // "+"
       case symbol_kind::S_TIMES_OP: // "*"
       case symbol_kind::S_DIV_OP: // "/"
       case symbol_kind::S_MOD_OP: // "%"
+      case symbol_kind::S_unary_operator: // unary_operator
       case symbol_kind::S_assignment_operator: // assignment_operator
         value.YY_MOVE_OR_COPY< TokenPtr > (YY_MOVE (that.value));
         break;
@@ -444,10 +447,7 @@ namespace  WadeSpace  {
       case symbol_kind::S_AND_OP: // "&&"
       case symbol_kind::S_OR_OP: // "||"
       case symbol_kind::S_NOT_OP: // "!"
-      case symbol_kind::S_XOR_OP: // "^"
-      case symbol_kind::S_BIT_AND: // "&"
       case symbol_kind::S_BIT_OR: // "|"
-      case symbol_kind::S_unary_operator: // unary_operator
         value.YY_MOVE_OR_COPY< int > (YY_MOVE (that.value));
         break;
 
@@ -670,11 +670,14 @@ namespace  WadeSpace  {
       case symbol_kind::S_LESS: // "<"
       case symbol_kind::S_EQUAL_EQUAL: // "=="
       case symbol_kind::S_NOT_EQUAL: // "!="
+      case symbol_kind::S_XOR_OP: // "^"
+      case symbol_kind::S_BIT_AND: // "&"
       case symbol_kind::S_MINUS_OP: // "-"
       case symbol_kind::S_PLUS_OP: // "+"
       case symbol_kind::S_TIMES_OP: // "*"
       case symbol_kind::S_DIV_OP: // "/"
       case symbol_kind::S_MOD_OP: // "%"
+      case symbol_kind::S_unary_operator: // unary_operator
       case symbol_kind::S_assignment_operator: // assignment_operator
         value.move< TokenPtr > (YY_MOVE (that.value));
         break;
@@ -744,10 +747,7 @@ namespace  WadeSpace  {
       case symbol_kind::S_AND_OP: // "&&"
       case symbol_kind::S_OR_OP: // "||"
       case symbol_kind::S_NOT_OP: // "!"
-      case symbol_kind::S_XOR_OP: // "^"
-      case symbol_kind::S_BIT_AND: // "&"
       case symbol_kind::S_BIT_OR: // "|"
-      case symbol_kind::S_unary_operator: // unary_operator
         value.move< int > (YY_MOVE (that.value));
         break;
 
@@ -970,11 +970,14 @@ namespace  WadeSpace  {
       case symbol_kind::S_LESS: // "<"
       case symbol_kind::S_EQUAL_EQUAL: // "=="
       case symbol_kind::S_NOT_EQUAL: // "!="
+      case symbol_kind::S_XOR_OP: // "^"
+      case symbol_kind::S_BIT_AND: // "&"
       case symbol_kind::S_MINUS_OP: // "-"
       case symbol_kind::S_PLUS_OP: // "+"
       case symbol_kind::S_TIMES_OP: // "*"
       case symbol_kind::S_DIV_OP: // "/"
       case symbol_kind::S_MOD_OP: // "%"
+      case symbol_kind::S_unary_operator: // unary_operator
       case symbol_kind::S_assignment_operator: // assignment_operator
         value.copy< TokenPtr > (that.value);
         break;
@@ -1044,10 +1047,7 @@ namespace  WadeSpace  {
       case symbol_kind::S_AND_OP: // "&&"
       case symbol_kind::S_OR_OP: // "||"
       case symbol_kind::S_NOT_OP: // "!"
-      case symbol_kind::S_XOR_OP: // "^"
-      case symbol_kind::S_BIT_AND: // "&"
       case symbol_kind::S_BIT_OR: // "|"
-      case symbol_kind::S_unary_operator: // unary_operator
         value.copy< int > (that.value);
         break;
 
@@ -1269,11 +1269,14 @@ namespace  WadeSpace  {
       case symbol_kind::S_LESS: // "<"
       case symbol_kind::S_EQUAL_EQUAL: // "=="
       case symbol_kind::S_NOT_EQUAL: // "!="
+      case symbol_kind::S_XOR_OP: // "^"
+      case symbol_kind::S_BIT_AND: // "&"
       case symbol_kind::S_MINUS_OP: // "-"
       case symbol_kind::S_PLUS_OP: // "+"
       case symbol_kind::S_TIMES_OP: // "*"
       case symbol_kind::S_DIV_OP: // "/"
       case symbol_kind::S_MOD_OP: // "%"
+      case symbol_kind::S_unary_operator: // unary_operator
       case symbol_kind::S_assignment_operator: // assignment_operator
         value.move< TokenPtr > (that.value);
         break;
@@ -1343,10 +1346,7 @@ namespace  WadeSpace  {
       case symbol_kind::S_AND_OP: // "&&"
       case symbol_kind::S_OR_OP: // "||"
       case symbol_kind::S_NOT_OP: // "!"
-      case symbol_kind::S_XOR_OP: // "^"
-      case symbol_kind::S_BIT_AND: // "&"
       case symbol_kind::S_BIT_OR: // "|"
-      case symbol_kind::S_unary_operator: // unary_operator
         value.move< int > (that.value);
         break;
 
@@ -1813,11 +1813,14 @@ namespace  WadeSpace  {
       case symbol_kind::S_LESS: // "<"
       case symbol_kind::S_EQUAL_EQUAL: // "=="
       case symbol_kind::S_NOT_EQUAL: // "!="
+      case symbol_kind::S_XOR_OP: // "^"
+      case symbol_kind::S_BIT_AND: // "&"
       case symbol_kind::S_MINUS_OP: // "-"
       case symbol_kind::S_PLUS_OP: // "+"
       case symbol_kind::S_TIMES_OP: // "*"
       case symbol_kind::S_DIV_OP: // "/"
       case symbol_kind::S_MOD_OP: // "%"
+      case symbol_kind::S_unary_operator: // unary_operator
       case symbol_kind::S_assignment_operator: // assignment_operator
         yylhs.value.emplace< TokenPtr > ();
         break;
@@ -1887,10 +1890,7 @@ namespace  WadeSpace  {
       case symbol_kind::S_AND_OP: // "&&"
       case symbol_kind::S_OR_OP: // "||"
       case symbol_kind::S_NOT_OP: // "!"
-      case symbol_kind::S_XOR_OP: // "^"
-      case symbol_kind::S_BIT_AND: // "&"
       case symbol_kind::S_BIT_OR: // "|"
-      case symbol_kind::S_unary_operator: // unary_operator
         yylhs.value.emplace< int > ();
         break;
 
@@ -2015,55 +2015,55 @@ namespace  WadeSpace  {
 
   case 9: // postfix_expression: postfix_expression "[" expression "]"
 #line 272 "ansic.y"
-                                                                   { yylhs.value.as < Expression * > () = createExpression(NT_ARRAY,yystack_[2].value.as < int > (),yystack_[0].value.as < int > (),yystack_[1].value.as < Expression * > (),nullptr,nullptr,nullopt,nullptr,nullptr,  yystack_[3].value.as < Expression * > (),nullptr,nullptr); cout << "postfix_expression OBRACE expression CBRACE REDUCE to postfix_expression" << endl; }
+                                                                   { yylhs.value.as < Expression * > () = createExpression(NT_ARRAY,yystack_[2].value.as < int > (),yystack_[0].value.as < int > (),yystack_[1].value.as < Expression * > (),nullptr,nullptr,nullopt,nullptr,nullptr,nullptr,  yystack_[3].value.as < Expression * > (),nullptr,nullptr); cout << "postfix_expression OBRACE expression CBRACE REDUCE to postfix_expression" << endl; }
 #line 2020 "parser.cpp"
     break;
 
   case 10: // postfix_expression: postfix_expression "(" ")"
 #line 273 "ansic.y"
-                                                                   { yylhs.value.as < Expression * > () = createExpression(NT_FUNCTION_CALL,yystack_[1].value.as < int > (),yystack_[0].value.as < int > (),nullptr,nullptr,nullptr,nullopt,nullptr,nullptr, yystack_[2].value.as < Expression * > (),nullptr,nullptr); cout << "postfix_expression OPAREN CPAREN REDUCE to postfix_expression" << endl; }
+                                                                   { yylhs.value.as < Expression * > () = createExpression(NT_FUNCTION_CALL,yystack_[1].value.as < int > (),yystack_[0].value.as < int > (),nullptr,nullptr,nullptr,nullopt,nullptr,nullptr,nullptr, yystack_[2].value.as < Expression * > (),nullptr,nullptr); cout << "postfix_expression OPAREN CPAREN REDUCE to postfix_expression" << endl; }
 #line 2026 "parser.cpp"
     break;
 
   case 11: // postfix_expression: postfix_expression "(" argument_expression_list ")"
 #line 274 "ansic.y"
-                                                                   { yylhs.value.as < Expression * > () = createExpression(NT_FUNCTION_CALL,yystack_[2].value.as < int > (),yystack_[0].value.as < int > (),nullptr,nullptr,yystack_[1].value.as < vector<Expression *> * > (),nullopt,nullptr,nullptr, yystack_[3].value.as < Expression * > (),nullptr,nullptr); cout << "postfix_expression OPAREN argument_expression_list CPAREN REDUCE to postfix_expression" << endl; }
+                                                                   { yylhs.value.as < Expression * > () = createExpression(NT_FUNCTION_CALL,yystack_[2].value.as < int > (),yystack_[0].value.as < int > (),nullptr,nullptr,yystack_[1].value.as < vector<Expression *> * > (),nullopt,nullptr,nullptr,nullptr, yystack_[3].value.as < Expression * > (),nullptr,nullptr); cout << "postfix_expression OPAREN argument_expression_list CPAREN REDUCE to postfix_expression" << endl; }
 #line 2032 "parser.cpp"
     break;
 
   case 12: // postfix_expression: postfix_expression "." "identifier"
 #line 275 "ansic.y"
-                                                                   { yylhs.value.as < Expression * > () = createExpression(NT_VAR_ACCESS,yystack_[1].value.as < int > (),nullopt,nullptr,nullptr,nullptr,yystack_[0].value.as < std::string > (),nullptr,nullptr, yystack_[2].value.as < Expression * > (),nullptr,nullptr); cout << "postfix_expression PERIOD_OP IDENTIFIER REDUCE to postfix_expression" << endl; }
+                                                                   { yylhs.value.as < Expression * > () = createExpression(NT_VAR_ACCESS,yystack_[1].value.as < int > (),nullopt,nullptr,nullptr,nullptr,yystack_[0].value.as < std::string > (),nullptr,nullptr,nullptr, yystack_[2].value.as < Expression * > (),nullptr,nullptr); cout << "postfix_expression PERIOD_OP IDENTIFIER REDUCE to postfix_expression" << endl; }
 #line 2038 "parser.cpp"
     break;
 
   case 13: // postfix_expression: postfix_expression "->" "identifier"
 #line 276 "ansic.y"
-                                                                   { yylhs.value.as < Expression * > () = createExpression(NT_VAR_ACCESS,yystack_[1].value.as < int > (),nullopt,nullptr,nullptr,nullptr,yystack_[0].value.as < std::string > (),nullptr,nullptr, yystack_[2].value.as < Expression * > (),nullptr,nullptr); cout << "postfix_expression PTR_OP IDENTIFIER REDUCE to postfix_expression" << endl; }
+                                                                   { yylhs.value.as < Expression * > () = createExpression(NT_VAR_ACCESS,yystack_[1].value.as < int > (),nullopt,nullptr,nullptr,nullptr,yystack_[0].value.as < std::string > (),nullptr,nullptr,nullptr, yystack_[2].value.as < Expression * > (),nullptr,nullptr); cout << "postfix_expression PTR_OP IDENTIFIER REDUCE to postfix_expression" << endl; }
 #line 2044 "parser.cpp"
     break;
 
   case 14: // postfix_expression: postfix_expression "++"
 #line 277 "ansic.y"
-                                                                   { yylhs.value.as < Expression * > () = createExpression(NT_INC,yystack_[0].value.as < int > (),nullopt,yystack_[1].value.as < Expression * > (),nullptr,nullptr,nullopt,nullptr,nullptr, nullptr,nullptr,nullptr); cout << "postfix_expression INC_OP REDUCE to postfix_expression" << endl; }
+                                                                   { yylhs.value.as < Expression * > () = createExpression(NT_INC,yystack_[0].value.as < int > (),nullopt,yystack_[1].value.as < Expression * > (),nullptr,nullptr,nullopt,nullptr,nullptr,nullptr, nullptr,nullptr,nullptr); cout << "postfix_expression INC_OP REDUCE to postfix_expression" << endl; }
 #line 2050 "parser.cpp"
     break;
 
   case 15: // postfix_expression: postfix_expression "--"
 #line 278 "ansic.y"
-                                                                   { yylhs.value.as < Expression * > () = createExpression(NT_DEC,yystack_[0].value.as < int > (),nullopt,yystack_[1].value.as < Expression * > (),nullptr,nullptr,nullopt,nullptr,nullptr, nullptr,nullptr,nullptr); cout << "postfix_expression DEC_OP REDUCE to postfix_expression" << endl; }
+                                                                   { yylhs.value.as < Expression * > () = createExpression(NT_DEC,yystack_[0].value.as < int > (),nullopt,yystack_[1].value.as < Expression * > (),nullptr,nullptr,nullopt,nullptr,nullptr,nullptr, nullptr,nullptr,nullptr); cout << "postfix_expression DEC_OP REDUCE to postfix_expression" << endl; }
 #line 2056 "parser.cpp"
     break;
 
   case 16: // postfix_expression: "(" type_name ")" "{" initializer_list "}"
 #line 279 "ansic.y"
-                                                                   { yylhs.value.as < Expression * > () = createExpression(NT_TYPECAST,nullopt,nullopt,nullptr,nullptr,nullptr,nullopt,yystack_[1].value.as < std::vector<Initializer *> * > (),yystack_[4].value.as < TypeName * > (), nullptr,nullptr,nullptr); cout << "OPAREN type_name CPAREN_OP OCURLY_OP initializer_list CCURLY REDUCE to postfix_expression" << endl; }
+                                                                   { yylhs.value.as < Expression * > () = createExpression(NT_TYPECAST,nullopt,nullopt,nullptr,nullptr,nullptr,nullopt,yystack_[1].value.as < std::vector<Initializer *> * > (),yystack_[4].value.as < TypeName * > (),nullptr, nullptr,nullptr,nullptr); cout << "OPAREN type_name CPAREN_OP OCURLY_OP initializer_list CCURLY REDUCE to postfix_expression" << endl; }
 #line 2062 "parser.cpp"
     break;
 
   case 17: // postfix_expression: "(" type_name ")" "{" initializer_list "," "}"
 #line 280 "ansic.y"
-                                                                   { yylhs.value.as < Expression * > () = createExpression(NT_TYPECAST,nullopt,nullopt,nullptr,nullptr,nullptr,nullopt,yystack_[2].value.as < std::vector<Initializer *> * > (),yystack_[5].value.as < TypeName * > (), nullptr,nullptr,nullptr); cout << "OPAREN type_name CPAREN_OP OCURLY_OP initializer_list COMMA CCURLY REDUCE to postfix_expression" << endl; }
+                                                                   { yylhs.value.as < Expression * > () = createExpression(NT_TYPECAST,nullopt,nullopt,nullptr,nullptr,nullptr,nullopt,yystack_[2].value.as < std::vector<Initializer *> * > (),yystack_[5].value.as < TypeName * > (),nullptr, nullptr,nullptr,nullptr); cout << "OPAREN type_name CPAREN_OP OCURLY_OP initializer_list COMMA CCURLY REDUCE to postfix_expression" << endl; }
 #line 2068 "parser.cpp"
     break;
 
@@ -2110,7 +2110,7 @@ namespace  WadeSpace  {
 
   case 23: // unary_expression: unary_operator cast_expression
 #line 303 "ansic.y"
-                                     { yylhs.value.as < Expression * > () = createExpression(NT_UNARY,yystack_[1].value.as < int > (),nullopt,yystack_[0].value.as < Expression * > (),nullptr,nullptr,"",nullptr,nullptr, nullptr,nullptr,nullptr); cout << "unary_operator cast_expression REDUCE unary_expression" << endl;}
+                                     { yylhs.value.as < Expression * > () = createExpression(NT_UNARY,nullopt,nullopt,yystack_[0].value.as < Expression * > (),nullptr,nullptr,"",nullptr,nullptr,nullptr, nullptr,nullptr,nullptr); cout << "unary_operator cast_expression REDUCE unary_expression" << endl;}
 #line 2115 "parser.cpp"
     break;
 
@@ -2128,359 +2128,377 @@ namespace  WadeSpace  {
 
   case 26: // unary_operator: "&"
 #line 309 "ansic.y"
-                {yylhs.value.as < int > () = yystack_[0].value.as < int > (); cout << "BIT_AND REDUCE to unary_operator" << endl;}
+                {yylhs.value.as < TokenPtr > () = yystack_[0].value.as < TokenPtr > (); cout << "BIT_AND REDUCE to unary_operator" << endl;}
 #line 2133 "parser.cpp"
     break;
 
-  case 27: // unary_operator: "~"
-#line 313 "ansic.y"
-                {yylhs.value.as < int > () = yystack_[0].value.as < int > (); cout << "TILDE REDUCE to unary_operator" << endl;}
+  case 27: // unary_operator: "*"
+#line 310 "ansic.y"
+                {yylhs.value.as < TokenPtr > () = yystack_[0].value.as < TokenPtr > (); cout << "TIMES_OP REDUCE to unary_operator" << endl;}
 #line 2139 "parser.cpp"
     break;
 
-  case 28: // unary_operator: "!"
-#line 314 "ansic.y"
-                {yylhs.value.as < int > () = yystack_[0].value.as < int > (); cout << "NOT_OP REDUCE to unary_operator" << endl;}
+  case 28: // unary_operator: "+"
+#line 311 "ansic.y"
+                {yylhs.value.as < TokenPtr > () = yystack_[0].value.as < TokenPtr > (); cout << "PLUS_OP REDUCE to unary_operator" << endl;}
 #line 2145 "parser.cpp"
     break;
 
-  case 29: // cast_expression: unary_expression
-#line 318 "ansic.y"
-                                               { yylhs.value.as < Expression * > () = yystack_[0].value.as < Expression * > ();  cout << "unary_expression REDUCE to cast_expression" << endl;}
+  case 29: // unary_operator: "-"
+#line 312 "ansic.y"
+                {yylhs.value.as < TokenPtr > () = yystack_[0].value.as < TokenPtr > (); cout << "MINUS_OP REDUCE to unary_operator" << endl;}
 #line 2151 "parser.cpp"
     break;
 
-  case 30: // cast_expression: "(" type_name ")" cast_expression
-#line 319 "ansic.y"
-                                               { yylhs.value.as < Expression * > () = createExpression(NT_TYPECAST,nullopt,nullopt,yystack_[0].value.as < Expression * > (),nullptr,nullptr,nullopt,nullptr,yystack_[2].value.as < TypeName * > (), nullptr,nullptr,nullptr);  cout << "unary_expression REDUCE to cast_expression" << endl;}
+  case 30: // unary_operator: "~"
+#line 313 "ansic.y"
+                {yylhs.value.as < TokenPtr > () = yystack_[0].value.as < int > (); cout << "TILDE REDUCE to unary_operator" << endl;}
 #line 2157 "parser.cpp"
     break;
 
-  case 31: // multiplicative_expression: cast_expression
-#line 323 "ansic.y"
-                                                         { yylhs.value.as < Expression * > () = yystack_[0].value.as < Expression * > ();  cout << "cast_expression REDUCE to multiplicative_expression" << endl;}
+  case 31: // unary_operator: "!"
+#line 314 "ansic.y"
+                {yylhs.value.as < TokenPtr > () = yystack_[0].value.as < int > (); cout << "NOT_OP REDUCE to unary_operator" << endl;}
 #line 2163 "parser.cpp"
     break;
 
-  case 32: // multiplicative_expression: multiplicative_expression "*" cast_expression
-#line 324 "ansic.y"
-                                                         { yylhs.value.as < Expression * > () = createExpression(NT_OP,nullopt,nullopt,nullptr,nullptr,nullptr,nullopt,nullptr,nullptr, yystack_[2].value.as < Expression * > (),yystack_[1].value.as < TokenPtr > (),yystack_[0].value.as < Expression * > ()); cout << "multiplicative_expression TIMES_OP cast_expression REDUCE to multiplicative_expression" << endl;}
+  case 32: // cast_expression: unary_expression
+#line 318 "ansic.y"
+                                               { yylhs.value.as < Expression * > () = yystack_[0].value.as < Expression * > ();  cout << "unary_expression REDUCE to cast_expression" << endl;}
 #line 2169 "parser.cpp"
     break;
 
-  case 33: // multiplicative_expression: multiplicative_expression "/" cast_expression
-#line 325 "ansic.y"
-                                                         { yylhs.value.as < Expression * > () = createExpression(NT_OP,nullopt,nullopt,nullptr,nullptr,nullptr,nullopt,nullptr,nullptr, yystack_[2].value.as < Expression * > (),yystack_[1].value.as < TokenPtr > (),yystack_[0].value.as < Expression * > ()); cout << "multiplicative_expression DIV_OP cast_expression REDUCE to multiplicative_expression" << endl;}
+  case 33: // cast_expression: "(" type_name ")" cast_expression
+#line 319 "ansic.y"
+                                               { yylhs.value.as < Expression * > () = createExpression(NT_TYPECAST,nullopt,nullopt,yystack_[0].value.as < Expression * > (),nullptr,nullptr,nullopt,nullptr,yystack_[2].value.as < TypeName * > (), nullptr,nullptr,nullptr);  cout << "unary_expression REDUCE to cast_expression" << endl;}
 #line 2175 "parser.cpp"
     break;
 
-  case 34: // multiplicative_expression: multiplicative_expression "%" cast_expression
-#line 326 "ansic.y"
-                                                         { yylhs.value.as < Expression * > () = createExpression(NT_OP,nullopt,nullopt,nullptr,nullptr,nullptr,nullopt,nullptr,nullptr, yystack_[2].value.as < Expression * > (),yystack_[1].value.as < TokenPtr > (),yystack_[0].value.as < Expression * > ()); cout << "multiplicative_expression MOD_OP cast_expression REDUCE to multiplicative_expression" << endl;}
+  case 34: // multiplicative_expression: cast_expression
+#line 323 "ansic.y"
+                                                         { yylhs.value.as < Expression * > () = yystack_[0].value.as < Expression * > ();  cout << "cast_expression REDUCE to multiplicative_expression" << endl;}
 #line 2181 "parser.cpp"
     break;
 
-  case 35: // additive_expression: multiplicative_expression
-#line 330 "ansic.y"
-                                                              { yylhs.value.as < Expression * > () = yystack_[0].value.as < Expression * > ();  cout << "multiplicative_expression REDUCE to additive_expression" << endl;}
+  case 35: // multiplicative_expression: multiplicative_expression "*" cast_expression
+#line 324 "ansic.y"
+                                                         { yylhs.value.as < Expression * > () = createExpression(NT_OP,nullopt,nullopt,nullptr,nullptr,nullptr,nullopt,nullptr,nullptr, yystack_[2].value.as < Expression * > (),yystack_[1].value.as < TokenPtr > (),yystack_[0].value.as < Expression * > ()); cout << "multiplicative_expression TIMES_OP cast_expression REDUCE to multiplicative_expression" << endl;}
 #line 2187 "parser.cpp"
     break;
 
-  case 36: // additive_expression: additive_expression "+" multiplicative_expression
-#line 331 "ansic.y"
-                                                              { yylhs.value.as < Expression * > () = createExpression(NT_OP,nullopt,nullopt,nullptr,nullptr,nullptr,nullopt,nullptr,nullptr, yystack_[2].value.as < Expression * > (),yystack_[1].value.as < TokenPtr > (),yystack_[0].value.as < Expression * > ()); cout << "additive_expression REDUCE to multiplicative_expression" << endl;}
+  case 36: // multiplicative_expression: multiplicative_expression "/" cast_expression
+#line 325 "ansic.y"
+                                                         { yylhs.value.as < Expression * > () = createExpression(NT_OP,nullopt,nullopt,nullptr,nullptr,nullptr,nullopt,nullptr,nullptr, yystack_[2].value.as < Expression * > (),yystack_[1].value.as < TokenPtr > (),yystack_[0].value.as < Expression * > ()); cout << "multiplicative_expression DIV_OP cast_expression REDUCE to multiplicative_expression" << endl;}
 #line 2193 "parser.cpp"
     break;
 
-  case 37: // additive_expression: additive_expression "-" multiplicative_expression
-#line 332 "ansic.y"
-                                                              { yylhs.value.as < Expression * > () = createExpression(NT_OP,nullopt,nullopt,nullptr,nullptr,nullptr,nullopt,nullptr,nullptr, yystack_[2].value.as < Expression * > (),yystack_[1].value.as < TokenPtr > (),yystack_[0].value.as < Expression * > ()); cout << "additive_expression REDUCE to multiplicative_expression" << endl;}
+  case 37: // multiplicative_expression: multiplicative_expression "%" cast_expression
+#line 326 "ansic.y"
+                                                         { yylhs.value.as < Expression * > () = createExpression(NT_OP,nullopt,nullopt,nullptr,nullptr,nullptr,nullopt,nullptr,nullptr, yystack_[2].value.as < Expression * > (),yystack_[1].value.as < TokenPtr > (),yystack_[0].value.as < Expression * > ()); cout << "multiplicative_expression MOD_OP cast_expression REDUCE to multiplicative_expression" << endl;}
 #line 2199 "parser.cpp"
     break;
 
-  case 38: // shift_expression: additive_expression
-#line 336 "ansic.y"
-                                                    { yylhs.value.as < Expression * > () = yystack_[0].value.as < Expression * > ();  cout << "additive_expression REDUCE to shift_expression" << endl;}
+  case 38: // additive_expression: multiplicative_expression
+#line 330 "ansic.y"
+                                                              { yylhs.value.as < Expression * > () = yystack_[0].value.as < Expression * > ();  cout << "multiplicative_expression REDUCE to additive_expression" << endl;}
 #line 2205 "parser.cpp"
     break;
 
-  case 39: // shift_expression: shift_expression "<<" additive_expression
-#line 337 "ansic.y"
-                                                    { yylhs.value.as < Expression * > () = createExpression(NT_OP,nullopt,nullopt,nullptr,nullptr,nullptr,nullopt,nullptr,nullptr, yystack_[2].value.as < Expression * > (),yystack_[1].value.as < TokenPtr > (),yystack_[0].value.as < Expression * > ());; cout << "shift_expression LEFT_OP additive_expression REDUCE to shift_expression" << endl;}
+  case 39: // additive_expression: additive_expression "+" multiplicative_expression
+#line 331 "ansic.y"
+                                                              { yylhs.value.as < Expression * > () = createExpression(NT_OP,nullopt,nullopt,nullptr,nullptr,nullptr,nullopt,nullptr,nullptr, yystack_[2].value.as < Expression * > (),yystack_[1].value.as < TokenPtr > (),yystack_[0].value.as < Expression * > ()); cout << "additive_expression REDUCE to multiplicative_expression" << endl;}
 #line 2211 "parser.cpp"
     break;
 
-  case 40: // shift_expression: shift_expression ">>" additive_expression
-#line 338 "ansic.y"
-                                                    { yylhs.value.as < Expression * > () = createExpression(NT_OP,nullopt,nullopt,nullptr,nullptr,nullptr,nullopt,nullptr,nullptr, yystack_[2].value.as < Expression * > (),yystack_[1].value.as < TokenPtr > (),yystack_[0].value.as < Expression * > ());; cout << "shift_expression RIGHT_OP additive_expression REDUCE to shift_expression" << endl;}
+  case 40: // additive_expression: additive_expression "-" multiplicative_expression
+#line 332 "ansic.y"
+                                                              { yylhs.value.as < Expression * > () = createExpression(NT_OP,nullopt,nullopt,nullptr,nullptr,nullptr,nullopt,nullptr,nullptr, yystack_[2].value.as < Expression * > (),yystack_[1].value.as < TokenPtr > (),yystack_[0].value.as < Expression * > ()); cout << "additive_expression REDUCE to multiplicative_expression" << endl;}
 #line 2217 "parser.cpp"
     break;
 
-  case 41: // relational_expression: shift_expression
-#line 342 "ansic.y"
-                                                             { yylhs.value.as < Expression * > () = yystack_[0].value.as < Expression * > ();  cout << "shift_expression REDUCE to relational_expression" << endl;}
+  case 41: // shift_expression: additive_expression
+#line 336 "ansic.y"
+                                                    { yylhs.value.as < Expression * > () = yystack_[0].value.as < Expression * > ();  cout << "additive_expression REDUCE to shift_expression" << endl;}
 #line 2223 "parser.cpp"
     break;
 
-  case 42: // relational_expression: relational_expression "<" shift_expression
-#line 343 "ansic.y"
-                                                             { yylhs.value.as < Expression * > () = createExpression(NT_OP,nullopt,nullopt,nullptr,nullptr,nullptr,nullopt,nullptr,nullptr, yystack_[2].value.as < Expression * > (),yystack_[1].value.as < TokenPtr > (),yystack_[0].value.as < Expression * > ()); cout << "relational_expression LESS shift_expression REDUCE to shift_expression" << endl;}
+  case 42: // shift_expression: shift_expression "<<" additive_expression
+#line 337 "ansic.y"
+                                                    { yylhs.value.as < Expression * > () = createExpression(NT_OP,nullopt,nullopt,nullptr,nullptr,nullptr,nullopt,nullptr,nullptr, yystack_[2].value.as < Expression * > (),yystack_[1].value.as < TokenPtr > (),yystack_[0].value.as < Expression * > ());; cout << "shift_expression LEFT_OP additive_expression REDUCE to shift_expression" << endl;}
 #line 2229 "parser.cpp"
     break;
 
-  case 43: // relational_expression: relational_expression ">" shift_expression
-#line 344 "ansic.y"
-                                                             { yylhs.value.as < Expression * > () = createExpression(NT_OP,nullopt,nullopt,nullptr,nullptr,nullptr,nullopt,nullptr,nullptr, yystack_[2].value.as < Expression * > (),yystack_[1].value.as < TokenPtr > (),yystack_[0].value.as < Expression * > ()); cout << "relational_expression GREATER shift_expression REDUCE to shift_expression" << endl;}
+  case 43: // shift_expression: shift_expression ">>" additive_expression
+#line 338 "ansic.y"
+                                                    { yylhs.value.as < Expression * > () = createExpression(NT_OP,nullopt,nullopt,nullptr,nullptr,nullptr,nullopt,nullptr,nullptr, yystack_[2].value.as < Expression * > (),yystack_[1].value.as < TokenPtr > (),yystack_[0].value.as < Expression * > ());; cout << "shift_expression RIGHT_OP additive_expression REDUCE to shift_expression" << endl;}
 #line 2235 "parser.cpp"
     break;
 
-  case 44: // relational_expression: relational_expression "<=" shift_expression
-#line 345 "ansic.y"
-                                                             { yylhs.value.as < Expression * > () = createExpression(NT_OP,nullopt,nullopt,nullptr,nullptr,nullptr,nullopt,nullptr,nullptr, yystack_[2].value.as < Expression * > (),yystack_[1].value.as < TokenPtr > (),yystack_[0].value.as < Expression * > ()); cout << "relational_expression LESS_EQUAL shift_expression REDUCE to shift_expression" << endl;}
+  case 44: // relational_expression: shift_expression
+#line 342 "ansic.y"
+                                                             { yylhs.value.as < Expression * > () = yystack_[0].value.as < Expression * > ();  cout << "shift_expression REDUCE to relational_expression" << endl;}
 #line 2241 "parser.cpp"
     break;
 
-  case 45: // relational_expression: relational_expression ">=" shift_expression
-#line 346 "ansic.y"
-                                                             { yylhs.value.as < Expression * > () = createExpression(NT_OP,nullopt,nullopt,nullptr,nullptr,nullptr,nullopt,nullptr,nullptr, yystack_[2].value.as < Expression * > (),yystack_[1].value.as < TokenPtr > (),yystack_[0].value.as < Expression * > ()); cout << "relational_expression GREATER_EQUAL shift_expression REDUCE to shift_expression" << endl;}
+  case 45: // relational_expression: relational_expression "<" shift_expression
+#line 343 "ansic.y"
+                                                             { yylhs.value.as < Expression * > () = createExpression(NT_OP,nullopt,nullopt,nullptr,nullptr,nullptr,nullopt,nullptr,nullptr, yystack_[2].value.as < Expression * > (),yystack_[1].value.as < TokenPtr > (),yystack_[0].value.as < Expression * > ()); cout << "relational_expression LESS shift_expression REDUCE to shift_expression" << endl;}
 #line 2247 "parser.cpp"
     break;
 
-  case 46: // equality_expression: relational_expression
-#line 350 "ansic.y"
-                                                             { yylhs.value.as < Expression * > () = yystack_[0].value.as < Expression * > ();  cout << "relational_expression REDUCE to equality_expression" << endl;}
+  case 46: // relational_expression: relational_expression ">" shift_expression
+#line 344 "ansic.y"
+                                                             { yylhs.value.as < Expression * > () = createExpression(NT_OP,nullopt,nullopt,nullptr,nullptr,nullptr,nullopt,nullptr,nullptr, yystack_[2].value.as < Expression * > (),yystack_[1].value.as < TokenPtr > (),yystack_[0].value.as < Expression * > ()); cout << "relational_expression GREATER shift_expression REDUCE to shift_expression" << endl;}
 #line 2253 "parser.cpp"
     break;
 
-  case 47: // equality_expression: equality_expression "==" relational_expression
-#line 351 "ansic.y"
-                                                             { yylhs.value.as < Expression * > () = createExpression(NT_OP,nullopt,nullopt,nullptr,nullptr,nullptr,nullopt,nullptr,nullptr, yystack_[2].value.as < Expression * > (),yystack_[1].value.as < TokenPtr > (),yystack_[0].value.as < Expression * > ()); cout << "equality_expression EQUAL_EQUAL relational_expression REDUCE to equality_expression" << endl;}
+  case 47: // relational_expression: relational_expression "<=" shift_expression
+#line 345 "ansic.y"
+                                                             { yylhs.value.as < Expression * > () = createExpression(NT_OP,nullopt,nullopt,nullptr,nullptr,nullptr,nullopt,nullptr,nullptr, yystack_[2].value.as < Expression * > (),yystack_[1].value.as < TokenPtr > (),yystack_[0].value.as < Expression * > ()); cout << "relational_expression LESS_EQUAL shift_expression REDUCE to shift_expression" << endl;}
 #line 2259 "parser.cpp"
     break;
 
-  case 48: // equality_expression: equality_expression "!=" relational_expression
-#line 352 "ansic.y"
-                                                             { yylhs.value.as < Expression * > () = createExpression(NT_OP,nullopt,nullopt,nullptr,nullptr,nullptr,nullopt,nullptr,nullptr, yystack_[2].value.as < Expression * > (),yystack_[1].value.as < TokenPtr > (),yystack_[0].value.as < Expression * > ()); cout << "equality_expression NOT_EQUAL relational_expression REDUCE to equality_expression" << endl;}
+  case 48: // relational_expression: relational_expression ">=" shift_expression
+#line 346 "ansic.y"
+                                                             { yylhs.value.as < Expression * > () = createExpression(NT_OP,nullopt,nullopt,nullptr,nullptr,nullptr,nullopt,nullptr,nullptr, yystack_[2].value.as < Expression * > (),yystack_[1].value.as < TokenPtr > (),yystack_[0].value.as < Expression * > ()); cout << "relational_expression GREATER_EQUAL shift_expression REDUCE to shift_expression" << endl;}
 #line 2265 "parser.cpp"
     break;
 
-  case 49: // and_expression: equality_expression
-#line 356 "ansic.y"
-                                                  { yylhs.value.as< Expression * > () = yystack_[0].value.as < Expression * > ();  cout << "equality_expression REDUCE to and_expression" << endl;}
+  case 49: // equality_expression: relational_expression
+#line 350 "ansic.y"
+                                                             { yylhs.value.as < Expression * > () = yystack_[0].value.as < Expression * > ();  cout << "relational_expression REDUCE to equality_expression" << endl;}
 #line 2271 "parser.cpp"
     break;
 
-  case 50: // and_expression: and_expression "&" equality_expression
-#line 357 "ansic.y"
-                                                  { yylhs.value.as< Expression * > () = new Expression(yystack_[2].value.as < Expression * > (),yystack_[1].value.as < int > (),yystack_[0].value.as < Expression * > ()); cout << "and_expression BIT_AND equality_expression REDUCE to and_expression" << endl;}
+  case 50: // equality_expression: equality_expression "==" relational_expression
+#line 351 "ansic.y"
+                                                             { yylhs.value.as < Expression * > () = createExpression(NT_OP,nullopt,nullopt,nullptr,nullptr,nullptr,nullopt,nullptr,nullptr, yystack_[2].value.as < Expression * > (),yystack_[1].value.as < TokenPtr > (),yystack_[0].value.as < Expression * > ()); cout << "equality_expression EQUAL_EQUAL relational_expression REDUCE to equality_expression" << endl;}
 #line 2277 "parser.cpp"
     break;
 
-  case 51: // exclusive_or_expression: and_expression
-#line 361 "ansic.y"
-                                                     { yylhs.value.as< Expression * > () = yystack_[0].value.as < Expression * > ();  cout << "and_expression REDUCE to exclusive_or_expression" << endl;}
+  case 51: // equality_expression: equality_expression "!=" relational_expression
+#line 352 "ansic.y"
+                                                             { yylhs.value.as < Expression * > () = createExpression(NT_OP,nullopt,nullopt,nullptr,nullptr,nullptr,nullopt,nullptr,nullptr, yystack_[2].value.as < Expression * > (),yystack_[1].value.as < TokenPtr > (),yystack_[0].value.as < Expression * > ()); cout << "equality_expression NOT_EQUAL relational_expression REDUCE to equality_expression" << endl;}
 #line 2283 "parser.cpp"
     break;
 
-  case 52: // exclusive_or_expression: exclusive_or_expression "^" and_expression
-#line 362 "ansic.y"
-                                                     { yylhs.value.as< Expression * > () = new Expression(yystack_[2].value.as < Expression * > (),yystack_[1].value.as < int > (),yystack_[0].value.as < Expression * > ()); cout << "exclusive_or_expression XOR_OP and_expression REDUCE to exclusive_or_expression" << endl;}
+  case 52: // and_expression: equality_expression
+#line 356 "ansic.y"
+                                                  { yylhs.value.as < Expression * > () = yystack_[0].value.as < Expression * > ();  cout << "equality_expression REDUCE to and_expression" << endl;}
 #line 2289 "parser.cpp"
     break;
 
-  case 53: // inclusive_or_expression: exclusive_or_expression
-#line 366 "ansic.y"
-                                                             { yylhs.value.as< Expression * > () = yystack_[0].value.as < Expression * > ();  cout << "exclusive_or_expression REDUCE to inclusive_or_expression" << endl;}
+  case 53: // and_expression: and_expression "&" equality_expression
+#line 357 "ansic.y"
+                                                  { yylhs.value.as < Expression * > () = createExpression(NT_OP,nullopt,nullopt,nullptr,nullptr,nullptr,nullopt,nullptr,nullptr, yystack_[2].value.as < Expression * > (),yystack_[1].value.as < TokenPtr > (),yystack_[0].value.as < Expression * > ()); cout << "and_expression BIT_AND equality_expression REDUCE to and_expression" << endl;}
 #line 2295 "parser.cpp"
     break;
 
-  case 54: // inclusive_or_expression: inclusive_or_expression "|" exclusive_or_expression
-#line 367 "ansic.y"
-                                                             { yylhs.value.as< Expression * > () = new Expression(yystack_[2].value.as < Expression * > (),yystack_[1].value.as < int > (),yystack_[0].value.as < Expression * > ()); cout << "inclusive_or_expression BIT_OR exclusive_or_expression REDUCE to inclusive_or_expression" << endl;}
+  case 54: // exclusive_or_expression: and_expression
+#line 361 "ansic.y"
+                                                     { yylhs.value.as < Expression * > () = yystack_[0].value.as < Expression * > ();  cout << "and_expression REDUCE to exclusive_or_expression" << endl;}
 #line 2301 "parser.cpp"
     break;
 
-  case 55: // logical_and_expression: inclusive_or_expression
-#line 371 "ansic.y"
-                                                             { yylhs.value.as< Expression * > () = yystack_[0].value.as < Expression * > ();  cout << "inclusive_or_expression REDUCE to logical_and_expression" << endl;}
+  case 55: // exclusive_or_expression: exclusive_or_expression "^" and_expression
+#line 362 "ansic.y"
+                                                     { yylhs.value.as < Expression * > () = createExpression(NT_OP,nullopt,nullopt,nullptr,nullptr,nullptr,nullopt,nullptr,nullptr, yystack_[2].value.as < Expression * > (),yystack_[1].value.as < TokenPtr > (),yystack_[0].value.as < Expression * > ()); cout << "exclusive_or_expression XOR_OP and_expression REDUCE to exclusive_or_expression" << endl;}
 #line 2307 "parser.cpp"
     break;
 
-  case 56: // logical_and_expression: logical_and_expression "&&" inclusive_or_expression
-#line 372 "ansic.y"
-                                                             { yylhs.value.as< Expression * > () = new Expression(yystack_[2].value.as < Expression * > (),yystack_[1].value.as < int > (),yystack_[0].value.as < Expression * > ()); cout << "inclusive_or_expression REDUCE to logical_and_expression" << endl;}
+  case 56: // inclusive_or_expression: exclusive_or_expression
+#line 366 "ansic.y"
+                                                             { yylhs.value.as< Expression * > () = yystack_[0].value.as < Expression * > ();  cout << "exclusive_or_expression REDUCE to inclusive_or_expression" << endl;}
 #line 2313 "parser.cpp"
     break;
 
-  case 57: // logical_or_expression: logical_and_expression
-#line 376 "ansic.y"
-                                                          { yylhs.value.as< Expression * > () = yystack_[0].value.as < Expression * > ();  cout << "inclusive_and_expression REDUCE to logical_or_expression" << endl;}
+  case 57: // inclusive_or_expression: inclusive_or_expression "|" exclusive_or_expression
+#line 367 "ansic.y"
+                                                             { yylhs.value.as< Expression * > () = new Expression(yystack_[2].value.as < Expression * > (),yystack_[1].value.as < int > (),yystack_[0].value.as < Expression * > ()); cout << "inclusive_or_expression BIT_OR exclusive_or_expression REDUCE to inclusive_or_expression" << endl;}
 #line 2319 "parser.cpp"
     break;
 
-  case 58: // logical_or_expression: logical_or_expression "||" logical_and_expression
-#line 377 "ansic.y"
-                                                          { yylhs.value.as< Expression * > () = new Expression(yystack_[2].value.as < Expression * > (),yystack_[1].value.as < int > (),yystack_[0].value.as < Expression * > ()); cout << "logical_or_expression OR_OP logical_and_expression REDUCE to logical_or_expression" << endl;}
+  case 58: // logical_and_expression: inclusive_or_expression
+#line 371 "ansic.y"
+                                                             { yylhs.value.as< Expression * > () = yystack_[0].value.as < Expression * > ();  cout << "inclusive_or_expression REDUCE to logical_and_expression" << endl;}
 #line 2325 "parser.cpp"
     break;
 
-  case 59: // conditional_expression: logical_or_expression
-#line 381 "ansic.y"
-                                                                              { yylhs.value.as< Expression * > () = yystack_[0].value.as < Expression * > ();  cout << "logical_or_expression REDUCE to conditional_expression" << endl;}
+  case 59: // logical_and_expression: logical_and_expression "&&" inclusive_or_expression
+#line 372 "ansic.y"
+                                                             { yylhs.value.as< Expression * > () = new Expression(yystack_[2].value.as < Expression * > (),yystack_[1].value.as < int > (),yystack_[0].value.as < Expression * > ()); cout << "inclusive_or_expression REDUCE to logical_and_expression" << endl;}
 #line 2331 "parser.cpp"
     break;
 
-  case 60: // conditional_expression: logical_or_expression "question" expression ":" conditional_expression
-#line 382 "ansic.y"
-                                                                              { yylhs.value.as< Expression * > () = new Expression(yystack_[4].value.as < Expression * > (),yystack_[3].value.as < int > (),yystack_[2].value.as < Expression * > ()); cout << "logical_or_expression QUESTION expression COLON conditional_expression REDUCE to conditional_expression" << endl;}
+  case 60: // logical_or_expression: logical_and_expression
+#line 376 "ansic.y"
+                                                          { yylhs.value.as< Expression * > () = yystack_[0].value.as < Expression * > ();  cout << "inclusive_and_expression REDUCE to logical_or_expression" << endl;}
 #line 2337 "parser.cpp"
     break;
 
-  case 61: // assignment_expression: conditional_expression
-#line 386 "ansic.y"
-                                                                  { yylhs.value.as< Expression * > () = yystack_[0].value.as < Expression * > ();  cout << "conditional_expression REDUCE to assignment_expression" << endl;}
+  case 61: // logical_or_expression: logical_or_expression "||" logical_and_expression
+#line 377 "ansic.y"
+                                                          { yylhs.value.as< Expression * > () = new Expression(yystack_[2].value.as < Expression * > (),yystack_[1].value.as < int > (),yystack_[0].value.as < Expression * > ()); cout << "logical_or_expression OR_OP logical_and_expression REDUCE to logical_or_expression" << endl;}
 #line 2343 "parser.cpp"
     break;
 
-  case 62: // assignment_expression: unary_expression assignment_operator assignment_expression
-#line 387 "ansic.y"
-                                                                  { yylhs.value.as< Expression * > () = new Expression(yystack_[2].value.as < Expression * > (),yystack_[1].value.as < TokenPtr > (),yystack_[0].value.as < Expression * > ()); cout << "unary_expression assignment_operator assignment_expression REDUCE to assignment_expression" << endl;}
+  case 62: // conditional_expression: logical_or_expression
+#line 381 "ansic.y"
+                                                                              { yylhs.value.as< Expression * > () = yystack_[0].value.as < Expression * > ();  cout << "logical_or_expression REDUCE to conditional_expression" << endl;}
 #line 2349 "parser.cpp"
     break;
 
-  case 63: // assignment_operator: "="
-#line 391 "ansic.y"
-                     { yylhs.value.as < TokenPtr > () = yystack_[0].value.as < TokenPtr > ();  cout << "EQUAL_OP REDUCE to assignment_operator" << endl;}
+  case 63: // conditional_expression: logical_or_expression "question" expression ":" conditional_expression
+#line 382 "ansic.y"
+                                                                              { yylhs.value.as< Expression * > () = new Expression(yystack_[4].value.as < Expression * > (),yystack_[3].value.as < int > (),yystack_[2].value.as < Expression * > ()); cout << "logical_or_expression QUESTION expression COLON conditional_expression REDUCE to conditional_expression" << endl;}
 #line 2355 "parser.cpp"
     break;
 
-  case 64: // assignment_operator: "*="
-#line 392 "ansic.y"
-                     { yylhs.value.as < TokenPtr > () = yystack_[0].value.as < TokenPtr > ();  cout << "MUL_ASSIGN REDUCE to assignment_operator" << endl;}
+  case 64: // assignment_expression: conditional_expression
+#line 386 "ansic.y"
+                                                                  { yylhs.value.as< Expression * > () = yystack_[0].value.as < Expression * > ();  cout << "conditional_expression REDUCE to assignment_expression" << endl;}
 #line 2361 "parser.cpp"
     break;
 
-  case 65: // assignment_operator: "/="
-#line 393 "ansic.y"
-                     { yylhs.value.as < TokenPtr > () = yystack_[0].value.as < TokenPtr > ();  cout << "DIV_ASSIGN REDUCE to assignment_operator" << endl;}
+  case 65: // assignment_expression: unary_expression assignment_operator assignment_expression
+#line 387 "ansic.y"
+                                                                  { yylhs.value.as< Expression * > () = new Expression(yystack_[2].value.as < Expression * > (),yystack_[1].value.as < TokenPtr > (),yystack_[0].value.as < Expression * > ()); cout << "unary_expression assignment_operator assignment_expression REDUCE to assignment_expression" << endl;}
 #line 2367 "parser.cpp"
     break;
 
-  case 66: // assignment_operator: "%="
-#line 394 "ansic.y"
-                     { yylhs.value.as < TokenPtr > () = yystack_[0].value.as < TokenPtr > ();  cout << "MOG_ASSIGN REDUCE to assignment_operator" << endl;}
+  case 66: // assignment_operator: "="
+#line 391 "ansic.y"
+                     { yylhs.value.as < TokenPtr > () = yystack_[0].value.as < TokenPtr > ();  cout << "EQUAL_OP REDUCE to assignment_operator" << endl;}
 #line 2373 "parser.cpp"
     break;
 
-  case 67: // assignment_operator: "+="
-#line 395 "ansic.y"
-                     { yylhs.value.as < TokenPtr > () = yystack_[0].value.as < TokenPtr > ();  cout << "ADD_ASSIGN REDUCE to assignment_operator" << endl;}
+  case 67: // assignment_operator: "*="
+#line 392 "ansic.y"
+                     { yylhs.value.as < TokenPtr > () = yystack_[0].value.as < TokenPtr > ();  cout << "MUL_ASSIGN REDUCE to assignment_operator" << endl;}
 #line 2379 "parser.cpp"
     break;
 
-  case 68: // assignment_operator: "-="
-#line 396 "ansic.y"
-                     { yylhs.value.as < TokenPtr > () = yystack_[0].value.as < TokenPtr > ();  cout << "SUB_ASSIGN REDUCE to assignment_operator" << endl;}
+  case 68: // assignment_operator: "/="
+#line 393 "ansic.y"
+                     { yylhs.value.as < TokenPtr > () = yystack_[0].value.as < TokenPtr > ();  cout << "DIV_ASSIGN REDUCE to assignment_operator" << endl;}
 #line 2385 "parser.cpp"
     break;
 
-  case 69: // assignment_operator: "<<="
-#line 397 "ansic.y"
-                     { yylhs.value.as < TokenPtr > () = yystack_[0].value.as < TokenPtr > ();  cout << "LEFT_ASSIGN REDUCE to assignment_operator" << endl;}
+  case 69: // assignment_operator: "%="
+#line 394 "ansic.y"
+                     { yylhs.value.as < TokenPtr > () = yystack_[0].value.as < TokenPtr > ();  cout << "MOG_ASSIGN REDUCE to assignment_operator" << endl;}
 #line 2391 "parser.cpp"
     break;
 
-  case 70: // assignment_operator: ">>="
-#line 398 "ansic.y"
-                     { yylhs.value.as < TokenPtr > () = yystack_[0].value.as < TokenPtr > ();  cout << "RIGHT_ASSIGN REDUCE to assignment_operator" << endl;}
+  case 70: // assignment_operator: "+="
+#line 395 "ansic.y"
+                     { yylhs.value.as < TokenPtr > () = yystack_[0].value.as < TokenPtr > ();  cout << "ADD_ASSIGN REDUCE to assignment_operator" << endl;}
 #line 2397 "parser.cpp"
     break;
 
-  case 71: // assignment_operator: "&="
-#line 399 "ansic.y"
-                     { yylhs.value.as < TokenPtr > () = yystack_[0].value.as < TokenPtr > ();  cout << "AND_ASSIGN REDUCE to assignment_operator" << endl;}
+  case 71: // assignment_operator: "-="
+#line 396 "ansic.y"
+                     { yylhs.value.as < TokenPtr > () = yystack_[0].value.as < TokenPtr > ();  cout << "SUB_ASSIGN REDUCE to assignment_operator" << endl;}
 #line 2403 "parser.cpp"
     break;
 
-  case 72: // assignment_operator: "^="
-#line 400 "ansic.y"
-                     { yylhs.value.as < TokenPtr > () = yystack_[0].value.as < TokenPtr > ();  cout << "XOR_ASSIGN REDUCE to assignment_operator" << endl;}
+  case 72: // assignment_operator: "<<="
+#line 397 "ansic.y"
+                     { yylhs.value.as < TokenPtr > () = yystack_[0].value.as < TokenPtr > ();  cout << "LEFT_ASSIGN REDUCE to assignment_operator" << endl;}
 #line 2409 "parser.cpp"
     break;
 
-  case 73: // assignment_operator: "|="
-#line 401 "ansic.y"
-                     { yylhs.value.as < TokenPtr > () = yystack_[0].value.as < TokenPtr > ();  cout << "OR_ASSIGN REDUCE to assignment_operator" << endl;}
+  case 73: // assignment_operator: ">>="
+#line 398 "ansic.y"
+                     { yylhs.value.as < TokenPtr > () = yystack_[0].value.as < TokenPtr > ();  cout << "RIGHT_ASSIGN REDUCE to assignment_operator" << endl;}
 #line 2415 "parser.cpp"
     break;
 
-  case 74: // expression: assignment_expression
-#line 405 "ansic.y"
-                                              { yylhs.value.as< Expression * > () = yystack_[0].value.as < Expression * > ();  cout << "asignment_expression REDUCE to expression" << endl;}
+  case 74: // assignment_operator: "&="
+#line 399 "ansic.y"
+                     { yylhs.value.as < TokenPtr > () = yystack_[0].value.as < TokenPtr > ();  cout << "AND_ASSIGN REDUCE to assignment_operator" << endl;}
 #line 2421 "parser.cpp"
     break;
 
-  case 75: // expression: expression "," assignment_expression
-#line 406 "ansic.y"
-                                              { yylhs.value.as< Expression * > () = new Expression(yystack_[2].value.as < Expression * > (),yystack_[1].value.as < int > (),yystack_[0].value.as < Expression * > ()); cout << "expression COMMA assignment_expression COMMA  REDUCE to expression" << endl;}
+  case 75: // assignment_operator: "^="
+#line 400 "ansic.y"
+                     { yylhs.value.as < TokenPtr > () = yystack_[0].value.as < TokenPtr > ();  cout << "XOR_ASSIGN REDUCE to assignment_operator" << endl;}
 #line 2427 "parser.cpp"
     break;
 
-  case 76: // constant_expression: conditional_expression
-#line 410 "ansic.y"
-                              { yylhs.value.as< Expression * > () = yystack_[0].value.as < Expression * > ();  cout << "conditional_expression REDUCE to constant_expression" << endl;}
+  case 76: // assignment_operator: "|="
+#line 401 "ansic.y"
+                     { yylhs.value.as < TokenPtr > () = yystack_[0].value.as < TokenPtr > ();  cout << "OR_ASSIGN REDUCE to assignment_operator" << endl;}
 #line 2433 "parser.cpp"
     break;
 
-  case 77: // declaration: declaration_specifiers ";"
-#line 414 "ansic.y"
-                                                             { yylhs.value.as< Declaration * > () = new Declaration(yystack_[1].value.as < DeclarationSpecifiers * > ()); cout << "declaration_specifiers SEMICOLON REDUCE to declaration" << endl;}
+  case 77: // expression: assignment_expression
+#line 405 "ansic.y"
+                                              { yylhs.value.as< Expression * > () = yystack_[0].value.as < Expression * > ();  cout << "asignment_expression REDUCE to expression" << endl;}
 #line 2439 "parser.cpp"
     break;
 
-  case 78: // declaration: declaration_specifiers init_declarator_list ";"
-#line 415 "ansic.y"
-                                                             { yylhs.value.as< Declaration * > () = new Declaration(yystack_[2].value.as < DeclarationSpecifiers * > (),yystack_[1].value.as < std::vector<InitDeclarator *> * > ()); cout << "declaration_specifiers init_declarator_list SEMICOLON REDUCE to declaration" << endl;}
+  case 78: // expression: expression "," assignment_expression
+#line 406 "ansic.y"
+                                              { yylhs.value.as< Expression * > () = new Expression(yystack_[2].value.as < Expression * > (),yystack_[1].value.as < int > (),yystack_[0].value.as < Expression * > ()); cout << "expression COMMA assignment_expression COMMA  REDUCE to expression" << endl;}
 #line 2445 "parser.cpp"
     break;
 
-  case 79: // declaration_specifiers: storage_class_specifier
-#line 419 "ansic.y"
-                                                      { yylhs.value.as < DeclarationSpecifiers * > () = createDeclarationSpecifiers(yystack_[0].value.as < StorageClassSpecifier * > (),nullptr,nullptr,nullptr); cout << "storage_class_specifier REDUCE to declaration_specifiers" << endl;}
+  case 79: // constant_expression: conditional_expression
+#line 410 "ansic.y"
+                              { yylhs.value.as< Expression * > () = yystack_[0].value.as < Expression * > ();  cout << "conditional_expression REDUCE to constant_expression" << endl;}
 #line 2451 "parser.cpp"
     break;
 
-  case 80: // declaration_specifiers: storage_class_specifier declaration_specifiers
-#line 420 "ansic.y"
-                                                      { yylhs.value.as < DeclarationSpecifiers * > () = createDeclarationSpecifiers(yystack_[1].value.as < StorageClassSpecifier * > (),nullptr,nullptr,yystack_[0].value.as < DeclarationSpecifiers * > ());      cout << "** storage_class_specifier declaration_specifiers REDUCE to declaration_specifiers" << endl;}
+  case 80: // declaration: declaration_specifiers ";"
+#line 414 "ansic.y"
+                                                             { yylhs.value.as< Declaration * > () = new Declaration(yystack_[1].value.as < DeclarationSpecifiers * > ()); cout << "declaration_specifiers SEMICOLON REDUCE to declaration" << endl;}
 #line 2457 "parser.cpp"
     break;
 
-  case 81: // declaration_specifiers: type_specifier
-#line 421 "ansic.y"
-                                                      { yylhs.value.as < DeclarationSpecifiers * > () = createDeclarationSpecifiers(nullptr,yystack_[0].value.as < TypeSpecifier * > (),nullptr,nullptr); cout << "** type_specifier REDUCE to declaration_specifiers" << endl;}
+  case 81: // declaration: declaration_specifiers init_declarator_list ";"
+#line 415 "ansic.y"
+                                                             { yylhs.value.as< Declaration * > () = new Declaration(yystack_[2].value.as < DeclarationSpecifiers * > (),yystack_[1].value.as < std::vector<InitDeclarator *> * > ()); cout << "declaration_specifiers init_declarator_list SEMICOLON REDUCE to declaration" << endl;}
 #line 2463 "parser.cpp"
     break;
 
-  case 82: // declaration_specifiers: type_specifier declaration_specifiers
-#line 422 "ansic.y"
-                                                      { yylhs.value.as < DeclarationSpecifiers * > () = createDeclarationSpecifiers(nullptr,yystack_[1].value.as < TypeSpecifier * > (),nullptr,yystack_[0].value.as < DeclarationSpecifiers * > ());      cout << "type_specifier declaration_specifiers REDUCE to declaration_specifiers" << endl;}
+  case 82: // declaration_specifiers: storage_class_specifier
+#line 419 "ansic.y"
+                                                      { yylhs.value.as < DeclarationSpecifiers * > () = createDeclarationSpecifiers(yystack_[0].value.as < StorageClassSpecifier * > (),nullptr,nullptr,nullptr); cout << "storage_class_specifier REDUCE to declaration_specifiers" << endl;}
 #line 2469 "parser.cpp"
     break;
 
-  case 83: // declaration_specifiers: type_qualifier
-#line 423 "ansic.y"
-                                                      { yylhs.value.as < DeclarationSpecifiers * > () = createDeclarationSpecifiers(nullptr,nullptr,yystack_[0].value.as < TypeQualifier * > (),nullptr); cout << "type_qualifier REDUCE to declaration_specifiers" << endl;}
+  case 83: // declaration_specifiers: storage_class_specifier declaration_specifiers
+#line 420 "ansic.y"
+                                                      { yylhs.value.as < DeclarationSpecifiers * > () = createDeclarationSpecifiers(yystack_[1].value.as < StorageClassSpecifier * > (),nullptr,nullptr,yystack_[0].value.as < DeclarationSpecifiers * > ());      cout << "** storage_class_specifier declaration_specifiers REDUCE to declaration_specifiers" << endl;}
 #line 2475 "parser.cpp"
     break;
 
-  case 84: // declaration_specifiers: type_qualifier declaration_specifiers
-#line 424 "ansic.y"
-                                                      { yylhs.value.as < DeclarationSpecifiers * > () = createDeclarationSpecifiers(nullptr,nullptr,yystack_[1].value.as < TypeQualifier * > (),yystack_[0].value.as < DeclarationSpecifiers * > ());      cout << "type_qualifier declaration_specifiers REDUCE to declaration_specifiers" << endl;}
+  case 84: // declaration_specifiers: type_specifier
+#line 421 "ansic.y"
+                                                      { yylhs.value.as < DeclarationSpecifiers * > () = createDeclarationSpecifiers(nullptr,yystack_[0].value.as < TypeSpecifier * > (),nullptr,nullptr); cout << "** type_specifier REDUCE to declaration_specifiers" << endl;}
 #line 2481 "parser.cpp"
     break;
 
-  case 85: // init_declarator_list: init_declarator
+  case 85: // declaration_specifiers: type_specifier declaration_specifiers
+#line 422 "ansic.y"
+                                                      { yylhs.value.as < DeclarationSpecifiers * > () = createDeclarationSpecifiers(nullptr,yystack_[1].value.as < TypeSpecifier * > (),nullptr,yystack_[0].value.as < DeclarationSpecifiers * > ());      cout << "type_specifier declaration_specifiers REDUCE to declaration_specifiers" << endl;}
+#line 2487 "parser.cpp"
+    break;
+
+  case 86: // declaration_specifiers: type_qualifier
+#line 423 "ansic.y"
+                                                      { yylhs.value.as < DeclarationSpecifiers * > () = createDeclarationSpecifiers(nullptr,nullptr,yystack_[0].value.as < TypeQualifier * > (),nullptr); cout << "type_qualifier REDUCE to declaration_specifiers" << endl;}
+#line 2493 "parser.cpp"
+    break;
+
+  case 87: // declaration_specifiers: type_qualifier declaration_specifiers
+#line 424 "ansic.y"
+                                                      { yylhs.value.as < DeclarationSpecifiers * > () = createDeclarationSpecifiers(nullptr,nullptr,yystack_[1].value.as < TypeQualifier * > (),yystack_[0].value.as < DeclarationSpecifiers * > ());      cout << "type_qualifier declaration_specifiers REDUCE to declaration_specifiers" << endl;}
+#line 2499 "parser.cpp"
+    break;
+
+  case 88: // init_declarator_list: init_declarator
 #line 428 "ansic.y"
                                                  {
                                                   InitDeclarator* exp = yystack_[0].value.as < InitDeclarator * > ();
@@ -2488,10 +2506,10 @@ namespace  WadeSpace  {
                                                   yylhs.value.as < std::vector<InitDeclarator *> * > ()->push_back(exp);
                                                   cout << "init_declarator REDUCE to init_declarator_list" << endl;
                                                  }
-#line 2492 "parser.cpp"
+#line 2510 "parser.cpp"
     break;
 
-  case 86: // init_declarator_list: init_declarator_list "," init_declarator
+  case 89: // init_declarator_list: init_declarator_list "," init_declarator
 #line 434 "ansic.y"
                                                  {
                                                   InitDeclarator* value1 = yystack_[0].value.as < InitDeclarator * > ();
@@ -2500,184 +2518,184 @@ namespace  WadeSpace  {
                                                   yylhs.value.as < std::vector<InitDeclarator *> * > () = value2;
                                                   cout << "init_declarator_list COMMA init_declarator REDUCE to init_declarator_list" << endl;
                                                  }
-#line 2504 "parser.cpp"
-    break;
-
-  case 87: // init_declarator: declarator
-#line 444 "ansic.y"
-                                    { yylhs.value.as< InitDeclarator * > () = new InitDeclarator(yystack_[0].value.as < Declarator * > ()); cout << "declarator REDUCE to init_declarator" << endl;}
-#line 2510 "parser.cpp"
-    break;
-
-  case 88: // init_declarator: declarator "=" initializer
-#line 445 "ansic.y"
-                                    { yylhs.value.as< InitDeclarator * > () = new InitDeclarator(yystack_[2].value.as < Declarator * > (),yystack_[0].value.as < Initializer * > ()); cout << "declarator EQUAL initializer REDUCE to init_declarator" << endl;}
-#line 2516 "parser.cpp"
-    break;
-
-  case 89: // storage_class_specifier: "typedef"
-#line 449 "ansic.y"
-                { yylhs.value.as < StorageClassSpecifier * > () = createStorageClassSpecifier(yystack_[0].value.as < TokenPtr > ()); cout << "** TYPEDEF REDUCE to storage_class_specifier" << endl;}
 #line 2522 "parser.cpp"
     break;
 
-  case 90: // storage_class_specifier: "extern"
-#line 450 "ansic.y"
-                { yylhs.value.as < StorageClassSpecifier * > () = createStorageClassSpecifier(yystack_[0].value.as < TokenPtr > ()); cout << "EXTERN REDUCE to storage_class_specifier" << endl;}
+  case 90: // init_declarator: declarator
+#line 444 "ansic.y"
+                                    { yylhs.value.as< InitDeclarator * > () = new InitDeclarator(yystack_[0].value.as < Declarator * > ()); cout << "declarator REDUCE to init_declarator" << endl;}
 #line 2528 "parser.cpp"
     break;
 
-  case 91: // storage_class_specifier: "static"
-#line 451 "ansic.y"
-                { yylhs.value.as < StorageClassSpecifier * > () = createStorageClassSpecifier(yystack_[0].value.as < TokenPtr > ()); cout << "STATIC REDUCE to storage_class_specifier" << endl;}
+  case 91: // init_declarator: declarator "=" initializer
+#line 445 "ansic.y"
+                                    { yylhs.value.as< InitDeclarator * > () = new InitDeclarator(yystack_[2].value.as < Declarator * > (),yystack_[0].value.as < Initializer * > ()); cout << "declarator EQUAL initializer REDUCE to init_declarator" << endl;}
 #line 2534 "parser.cpp"
     break;
 
-  case 92: // storage_class_specifier: "auto"
-#line 452 "ansic.y"
-                { yylhs.value.as < StorageClassSpecifier * > () = createStorageClassSpecifier(yystack_[0].value.as < TokenPtr > ()); cout << "AUTO REDUCE to storage_class_specifier" << endl;}
+  case 92: // storage_class_specifier: "typedef"
+#line 449 "ansic.y"
+                { yylhs.value.as < StorageClassSpecifier * > () = createStorageClassSpecifier(yystack_[0].value.as < TokenPtr > ()); cout << "** TYPEDEF REDUCE to storage_class_specifier" << endl;}
 #line 2540 "parser.cpp"
     break;
 
-  case 93: // storage_class_specifier: "register"
-#line 453 "ansic.y"
-                { yylhs.value.as < StorageClassSpecifier * > () = createStorageClassSpecifier(yystack_[0].value.as < TokenPtr > ()); cout << "REGISTER REDUCE to storage_class_specifier" << endl;}
+  case 93: // storage_class_specifier: "extern"
+#line 450 "ansic.y"
+                { yylhs.value.as < StorageClassSpecifier * > () = createStorageClassSpecifier(yystack_[0].value.as < TokenPtr > ()); cout << "EXTERN REDUCE to storage_class_specifier" << endl;}
 #line 2546 "parser.cpp"
     break;
 
-  case 94: // type_specifier: "void"
-#line 457 "ansic.y"
-                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(VOID); cout << "VOID REDUCE to type_specifier" << endl;}
+  case 94: // storage_class_specifier: "static"
+#line 451 "ansic.y"
+                { yylhs.value.as < StorageClassSpecifier * > () = createStorageClassSpecifier(yystack_[0].value.as < TokenPtr > ()); cout << "STATIC REDUCE to storage_class_specifier" << endl;}
 #line 2552 "parser.cpp"
     break;
 
-  case 95: // type_specifier: "char"
-#line 458 "ansic.y"
-                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(CHAR); cout << "CHAR REDUCE to type_specifier" << endl;}
+  case 95: // storage_class_specifier: "auto"
+#line 452 "ansic.y"
+                { yylhs.value.as < StorageClassSpecifier * > () = createStorageClassSpecifier(yystack_[0].value.as < TokenPtr > ()); cout << "AUTO REDUCE to storage_class_specifier" << endl;}
 #line 2558 "parser.cpp"
     break;
 
-  case 96: // type_specifier: "short"
-#line 459 "ansic.y"
-                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(SHORT); cout << "SHORT REDUCE to type_specifier" << endl;}
+  case 96: // storage_class_specifier: "register"
+#line 453 "ansic.y"
+                { yylhs.value.as < StorageClassSpecifier * > () = createStorageClassSpecifier(yystack_[0].value.as < TokenPtr > ()); cout << "REGISTER REDUCE to storage_class_specifier" << endl;}
 #line 2564 "parser.cpp"
     break;
 
-  case 97: // type_specifier: INT
-#line 460 "ansic.y"
-                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(INT); cout << "** INT REDUCE to type_specifier" << endl;}
+  case 97: // type_specifier: "void"
+#line 457 "ansic.y"
+                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(VOID); cout << "VOID REDUCE to type_specifier" << endl;}
 #line 2570 "parser.cpp"
     break;
 
-  case 98: // type_specifier: "long"
-#line 461 "ansic.y"
-                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(LONG); cout << "LONG REDUCE to type_specifier" << endl;}
+  case 98: // type_specifier: "char"
+#line 458 "ansic.y"
+                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(CHAR); cout << "CHAR REDUCE to type_specifier" << endl;}
 #line 2576 "parser.cpp"
     break;
 
-  case 99: // type_specifier: "long long"
-#line 462 "ansic.y"
-                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(LONG_LONG); cout << "LONG_LONG REDUCE to type_specifier" << endl;}
+  case 99: // type_specifier: "short"
+#line 459 "ansic.y"
+                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(SHORT); cout << "SHORT REDUCE to type_specifier" << endl;}
 #line 2582 "parser.cpp"
     break;
 
-  case 100: // type_specifier: "float"
-#line 463 "ansic.y"
-                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(FLOAT); cout << "FLOAT REDUCE to type_specifier" << endl;}
+  case 100: // type_specifier: INT
+#line 460 "ansic.y"
+                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(INT); cout << "** INT REDUCE to type_specifier" << endl;}
 #line 2588 "parser.cpp"
     break;
 
-  case 101: // type_specifier: "double"
-#line 464 "ansic.y"
-                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(DOUBLE); cout << "DOUBLE REDUCE to type_specifier" << endl;}
+  case 101: // type_specifier: "long"
+#line 461 "ansic.y"
+                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(LONG); cout << "LONG REDUCE to type_specifier" << endl;}
 #line 2594 "parser.cpp"
     break;
 
-  case 102: // type_specifier: "long double"
-#line 465 "ansic.y"
-                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(LONG_DOUBLE); cout << "LONG_DOUBLE REDUCE to type_specifier" << endl;}
+  case 102: // type_specifier: "long long"
+#line 462 "ansic.y"
+                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(LONG_LONG); cout << "LONG_LONG REDUCE to type_specifier" << endl;}
 #line 2600 "parser.cpp"
     break;
 
-  case 103: // type_specifier: "bool"
-#line 466 "ansic.y"
-                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(BOOL); cout << "BOOL REDUCE to type_specifier" << endl;}
+  case 103: // type_specifier: "float"
+#line 463 "ansic.y"
+                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(FLOAT); cout << "FLOAT REDUCE to type_specifier" << endl;}
 #line 2606 "parser.cpp"
     break;
 
-  case 104: // type_specifier: "imaginary"
-#line 467 "ansic.y"
-                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(IMAGINARY); cout << "IMAGINARY REDUCE to type_specifier" << endl;}
+  case 104: // type_specifier: "double"
+#line 464 "ansic.y"
+                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(DOUBLE); cout << "DOUBLE REDUCE to type_specifier" << endl;}
 #line 2612 "parser.cpp"
     break;
 
-  case 105: // type_specifier: "complex"
-#line 468 "ansic.y"
-                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(COMPLEX); cout << "COMPLEX REDUCE to type_specifier" << endl;}
+  case 105: // type_specifier: "long double"
+#line 465 "ansic.y"
+                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(LONG_DOUBLE); cout << "LONG_DOUBLE REDUCE to type_specifier" << endl;}
 #line 2618 "parser.cpp"
     break;
 
-  case 106: // type_specifier: "signed"
-#line 469 "ansic.y"
-                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(SIGNED); cout << "SIGNED REDUCE to type_specifier" << endl;}
+  case 106: // type_specifier: "bool"
+#line 466 "ansic.y"
+                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(BOOL); cout << "BOOL REDUCE to type_specifier" << endl;}
 #line 2624 "parser.cpp"
     break;
 
-  case 107: // type_specifier: "unsigned"
-#line 470 "ansic.y"
-                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(UNSIGNED); cout << "UNIGNED REDUCE to type_specifier" << endl;}
+  case 107: // type_specifier: "imaginary"
+#line 467 "ansic.y"
+                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(IMAGINARY); cout << "IMAGINARY REDUCE to type_specifier" << endl;}
 #line 2630 "parser.cpp"
     break;
 
-  case 108: // type_specifier: struct_or_union_specifier
-#line 471 "ansic.y"
-                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(yystack_[0].value.as < StructOrUnionSpecifier * > ()); cout << "struct_or_union_specifier REDUCE to type_specifier" << endl;}
+  case 108: // type_specifier: "complex"
+#line 468 "ansic.y"
+                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(COMPLEX); cout << "COMPLEX REDUCE to type_specifier" << endl;}
 #line 2636 "parser.cpp"
     break;
 
-  case 109: // type_specifier: enum_specifier
-#line 472 "ansic.y"
-                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(yystack_[0].value.as < EnumSpecifier * > ()); cout << "enum_specifier REDUCE to type_specifier" << endl;}
+  case 109: // type_specifier: "signed"
+#line 469 "ansic.y"
+                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(SIGNED); cout << "SIGNED REDUCE to type_specifier" << endl;}
 #line 2642 "parser.cpp"
     break;
 
-  case 110: // type_specifier: "type name"
-#line 473 "ansic.y"
-                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(TYPE_NAME); cout << "TYPE_NAME REDUCE to type_specifier" << endl;}
+  case 110: // type_specifier: "unsigned"
+#line 470 "ansic.y"
+                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(UNSIGNED); cout << "UNIGNED REDUCE to type_specifier" << endl;}
 #line 2648 "parser.cpp"
     break;
 
-  case 111: // struct_or_union_specifier: struct_or_union "identifier" "{" struct_declaration_list "}"
-#line 477 "ansic.y"
-                                                                         { yylhs.value.as< StructOrUnionSpecifier * > () = new StructOrUnionSpecifier(yystack_[4].value.as < StructOrUnion * > (),yystack_[3].value.as < std::string > (),yystack_[1].value.as < std::vector<StructDeclaration *> * > ()); cout << "struct_or_union IDENTIFIER OCURLY struct_declaration_list CCURLY REDUCE to struct_or_union_specifier" << endl;}
+  case 111: // type_specifier: struct_or_union_specifier
+#line 471 "ansic.y"
+                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(yystack_[0].value.as < StructOrUnionSpecifier * > ()); cout << "struct_or_union_specifier REDUCE to type_specifier" << endl;}
 #line 2654 "parser.cpp"
     break;
 
-  case 112: // struct_or_union_specifier: struct_or_union "{" struct_declaration_list "}"
-#line 478 "ansic.y"
-                                                                         { yylhs.value.as< StructOrUnionSpecifier * > () = new StructOrUnionSpecifier(yystack_[3].value.as < StructOrUnion * > (),yystack_[1].value.as < std::vector<StructDeclaration *> * > ()); cout << "struct_or_union OCURLY struct_declaration_list CCURLY REDUCE to struct_or_union_specifier" << endl;}
+  case 112: // type_specifier: enum_specifier
+#line 472 "ansic.y"
+                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(yystack_[0].value.as < EnumSpecifier * > ()); cout << "enum_specifier REDUCE to type_specifier" << endl;}
 #line 2660 "parser.cpp"
     break;
 
-  case 113: // struct_or_union_specifier: struct_or_union "identifier"
-#line 479 "ansic.y"
-                                                                         { yylhs.value.as< StructOrUnionSpecifier * > () = new StructOrUnionSpecifier(yystack_[1].value.as < StructOrUnion * > (),yystack_[0].value.as < std::string > ()); cout << "struct_or_union IDENTIFIER REDUCE to struct_or_union_specifier" << endl;}
+  case 113: // type_specifier: "type name"
+#line 473 "ansic.y"
+                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(TYPE_NAME); cout << "TYPE_NAME REDUCE to type_specifier" << endl;}
 #line 2666 "parser.cpp"
     break;
 
-  case 114: // struct_or_union: "struct"
-#line 483 "ansic.y"
-               { yylhs.value.as< StructOrUnion * > () = new StructOrUnion(STRUCT); cout << "STRUCT REDUCE to struct_or_union" << endl;}
+  case 114: // struct_or_union_specifier: struct_or_union "identifier" "{" struct_declaration_list "}"
+#line 477 "ansic.y"
+                                                                         { yylhs.value.as< StructOrUnionSpecifier * > () = new StructOrUnionSpecifier(yystack_[4].value.as < StructOrUnion * > (),yystack_[3].value.as < std::string > (),yystack_[1].value.as < std::vector<StructDeclaration *> * > ()); cout << "struct_or_union IDENTIFIER OCURLY struct_declaration_list CCURLY REDUCE to struct_or_union_specifier" << endl;}
 #line 2672 "parser.cpp"
     break;
 
-  case 115: // struct_or_union: "union"
-#line 484 "ansic.y"
-               { yylhs.value.as< StructOrUnion * > () = new StructOrUnion(UNION); cout << "UNION REDUCE to struct_or_union" << endl;}
+  case 115: // struct_or_union_specifier: struct_or_union "{" struct_declaration_list "}"
+#line 478 "ansic.y"
+                                                                         { yylhs.value.as< StructOrUnionSpecifier * > () = new StructOrUnionSpecifier(yystack_[3].value.as < StructOrUnion * > (),yystack_[1].value.as < std::vector<StructDeclaration *> * > ()); cout << "struct_or_union OCURLY struct_declaration_list CCURLY REDUCE to struct_or_union_specifier" << endl;}
 #line 2678 "parser.cpp"
     break;
 
-  case 116: // struct_declaration_list: struct_declaration
+  case 116: // struct_or_union_specifier: struct_or_union "identifier"
+#line 479 "ansic.y"
+                                                                         { yylhs.value.as< StructOrUnionSpecifier * > () = new StructOrUnionSpecifier(yystack_[1].value.as < StructOrUnion * > (),yystack_[0].value.as < std::string > ()); cout << "struct_or_union IDENTIFIER REDUCE to struct_or_union_specifier" << endl;}
+#line 2684 "parser.cpp"
+    break;
+
+  case 117: // struct_or_union: "struct"
+#line 483 "ansic.y"
+               { yylhs.value.as< StructOrUnion * > () = new StructOrUnion(STRUCT); cout << "STRUCT REDUCE to struct_or_union" << endl;}
+#line 2690 "parser.cpp"
+    break;
+
+  case 118: // struct_or_union: "union"
+#line 484 "ansic.y"
+               { yylhs.value.as< StructOrUnion * > () = new StructOrUnion(UNION); cout << "UNION REDUCE to struct_or_union" << endl;}
+#line 2696 "parser.cpp"
+    break;
+
+  case 119: // struct_declaration_list: struct_declaration
 #line 488 "ansic.y"
                             {
                              StructDeclaration* exp = yystack_[0].value.as < StructDeclaration * > ();
@@ -2685,10 +2703,10 @@ namespace  WadeSpace  {
                              yylhs.value.as < std::vector<StructDeclaration *> * > ()->push_back(exp);
                              cout << "struct_declaration REDUCE to struct_declaration_list" << endl;
                             }
-#line 2689 "parser.cpp"
+#line 2707 "parser.cpp"
     break;
 
-  case 117: // struct_declaration_list: struct_declaration_list struct_declaration
+  case 120: // struct_declaration_list: struct_declaration_list struct_declaration
 #line 494 "ansic.y"
                                                      {
                                                        StructDeclaration* value1 = yystack_[0].value.as < StructDeclaration * > ();
@@ -2697,40 +2715,40 @@ namespace  WadeSpace  {
                                                        yylhs.value.as < std::vector<StructDeclaration *> * > () = value2;
                                                        cout << "struct_declaration_list struct_declaration REDUCE to struct_declaration_list" << endl;
                                                      }
-#line 2701 "parser.cpp"
-    break;
-
-  case 118: // struct_declaration: specifier_qualifier_list struct_declarator_list ";"
-#line 504 "ansic.y"
-                                                                { yylhs.value.as< StructDeclaration * > () = new StructDeclaration(yystack_[2].value.as < SpecifierQualifierList * > (),yystack_[1].value.as < std::vector<StructDeclarator *> * > ()); cout << "specifier_qualifier_list struct_declarator_list SEMICOLON REDUCE to struct_declaration" << endl;}
-#line 2707 "parser.cpp"
-    break;
-
-  case 119: // specifier_qualifier_list: type_specifier specifier_qualifier_list
-#line 508 "ansic.y"
-                                              { yylhs.value.as< SpecifierQualifierList * > () = new SpecifierQualifierList(yystack_[0].value.as < SpecifierQualifierList * > (),yystack_[1].value.as < TypeSpecifier * > ()); cout << "type_specifier specifier_qualifier_list REDUCE to specifier_qualifier_list" << endl;}
-#line 2713 "parser.cpp"
-    break;
-
-  case 120: // specifier_qualifier_list: type_specifier
-#line 509 "ansic.y"
-                                              { yylhs.value.as< SpecifierQualifierList * > () = new SpecifierQualifierList(yystack_[0].value.as < TypeSpecifier * > ()); cout << "type_specifier REDUCE to specifier_qualifier_list" << endl;}
 #line 2719 "parser.cpp"
     break;
 
-  case 121: // specifier_qualifier_list: type_qualifier specifier_qualifier_list
-#line 510 "ansic.y"
-                                              { yylhs.value.as< SpecifierQualifierList * > () = new SpecifierQualifierList(yystack_[0].value.as < SpecifierQualifierList * > (),yystack_[1].value.as < TypeQualifier * > ()); cout << "type_qualifier specifier_qualifier_list REDUCE to specifier_qualifier_list" << endl;}
+  case 121: // struct_declaration: specifier_qualifier_list struct_declarator_list ";"
+#line 504 "ansic.y"
+                                                                { yylhs.value.as< StructDeclaration * > () = new StructDeclaration(yystack_[2].value.as < SpecifierQualifierList * > (),yystack_[1].value.as < std::vector<StructDeclarator *> * > ()); cout << "specifier_qualifier_list struct_declarator_list SEMICOLON REDUCE to struct_declaration" << endl;}
 #line 2725 "parser.cpp"
     break;
 
-  case 122: // specifier_qualifier_list: type_qualifier
-#line 511 "ansic.y"
-                                              { yylhs.value.as< SpecifierQualifierList * > () = new SpecifierQualifierList(yystack_[0].value.as < TypeQualifier * > ()); cout << "type_qualifier REDUCE to specifier_qualifier_list" << endl;}
+  case 122: // specifier_qualifier_list: type_specifier specifier_qualifier_list
+#line 508 "ansic.y"
+                                              { yylhs.value.as< SpecifierQualifierList * > () = new SpecifierQualifierList(yystack_[0].value.as < SpecifierQualifierList * > (),yystack_[1].value.as < TypeSpecifier * > ()); cout << "type_specifier specifier_qualifier_list REDUCE to specifier_qualifier_list" << endl;}
 #line 2731 "parser.cpp"
     break;
 
-  case 123: // struct_declarator_list: struct_declarator
+  case 123: // specifier_qualifier_list: type_specifier
+#line 509 "ansic.y"
+                                              { yylhs.value.as< SpecifierQualifierList * > () = new SpecifierQualifierList(yystack_[0].value.as < TypeSpecifier * > ()); cout << "type_specifier REDUCE to specifier_qualifier_list" << endl;}
+#line 2737 "parser.cpp"
+    break;
+
+  case 124: // specifier_qualifier_list: type_qualifier specifier_qualifier_list
+#line 510 "ansic.y"
+                                              { yylhs.value.as< SpecifierQualifierList * > () = new SpecifierQualifierList(yystack_[0].value.as < SpecifierQualifierList * > (),yystack_[1].value.as < TypeQualifier * > ()); cout << "type_qualifier specifier_qualifier_list REDUCE to specifier_qualifier_list" << endl;}
+#line 2743 "parser.cpp"
+    break;
+
+  case 125: // specifier_qualifier_list: type_qualifier
+#line 511 "ansic.y"
+                                              { yylhs.value.as< SpecifierQualifierList * > () = new SpecifierQualifierList(yystack_[0].value.as < TypeQualifier * > ()); cout << "type_qualifier REDUCE to specifier_qualifier_list" << endl;}
+#line 2749 "parser.cpp"
+    break;
+
+  case 126: // struct_declarator_list: struct_declarator
 #line 515 "ansic.y"
                                                      {
                                                        StructDeclarator* exp = yystack_[0].value.as < StructDeclarator * > ();
@@ -2738,10 +2756,10 @@ namespace  WadeSpace  {
                                                        yylhs.value.as < std::vector<StructDeclarator *> * > ()->push_back(exp);
                                                        cout << "struct_declarator REDUCE to struct_declarator_list" << endl;
                                                      }
-#line 2742 "parser.cpp"
+#line 2760 "parser.cpp"
     break;
 
-  case 124: // struct_declarator_list: struct_declarator_list "," struct_declarator
+  case 127: // struct_declarator_list: struct_declarator_list "," struct_declarator
 #line 521 "ansic.y"
                                                      {
                                                        StructDeclarator* value1 = yystack_[0].value.as < StructDeclarator * > ();
@@ -2750,46 +2768,46 @@ namespace  WadeSpace  {
                                                        yylhs.value.as < std::vector<StructDeclarator *> * > () = value2;
                                                        cout << "struct_declarator_list COMMA struct_declarator REDUCE to struct_declarator_list" << endl;
                                                      }
-#line 2754 "parser.cpp"
-    break;
-
-  case 125: // struct_declarator: declarator
-#line 531 "ansic.y"
-                                           { yylhs.value.as< StructDeclarator * > () = new StructDeclarator(yystack_[0].value.as < Declarator * > ()); cout << "declarator REDUCE to struct_declarator" << endl;}
-#line 2760 "parser.cpp"
-    break;
-
-  case 126: // struct_declarator: ":" constant_expression
-#line 532 "ansic.y"
-                                           { yylhs.value.as< StructDeclarator * > () = new StructDeclarator(yystack_[0].value.as < Expression * > ()); cout << "COLON constant_expression REDUCE to struct_declarator" << endl;}
-#line 2766 "parser.cpp"
-    break;
-
-  case 127: // struct_declarator: declarator ":" constant_expression
-#line 533 "ansic.y"
-                                           { yylhs.value.as< StructDeclarator * > () = new StructDeclarator(yystack_[2].value.as < Declarator * > (),yystack_[0].value.as < Expression * > ()); cout << "declarator COLON constant_expression REDUCE to struct_declarator" << endl;}
 #line 2772 "parser.cpp"
     break;
 
-  case 128: // enum_specifier: "enum" "{" enumerator_list "}"
-#line 537 "ansic.y"
-                                                     { yylhs.value.as< EnumSpecifier * > () = new EnumSpecifier(yystack_[1].value.as < std::vector<Enumerator *> * > ()); cout << "ENUM OCURLY enumerator_list CCURLY REDUCE to enum_specifier" << endl;}
+  case 128: // struct_declarator: declarator
+#line 531 "ansic.y"
+                                           { yylhs.value.as< StructDeclarator * > () = new StructDeclarator(yystack_[0].value.as < Declarator * > ()); cout << "declarator REDUCE to struct_declarator" << endl;}
 #line 2778 "parser.cpp"
     break;
 
-  case 129: // enum_specifier: "enum" "identifier" "{" enumerator_list "}"
-#line 538 "ansic.y"
-                                                     { yylhs.value.as< EnumSpecifier * > () = new EnumSpecifier(yystack_[3].value.as < std::string > (),yystack_[1].value.as < std::vector<Enumerator *> * > ()); cout << "ENUM IDENTIFIER OCURLY enumerator_list CCURLY REDUCE to enum_specifier" << endl;}
+  case 129: // struct_declarator: ":" constant_expression
+#line 532 "ansic.y"
+                                           { yylhs.value.as< StructDeclarator * > () = new StructDeclarator(yystack_[0].value.as < Expression * > ()); cout << "COLON constant_expression REDUCE to struct_declarator" << endl;}
 #line 2784 "parser.cpp"
     break;
 
-  case 130: // enum_specifier: "enum" "identifier"
-#line 539 "ansic.y"
-                                                     { yylhs.value.as< EnumSpecifier * > () = new EnumSpecifier(yystack_[0].value.as < std::string > ()); cout << "ENUM IDENTIFIER REDUCE to enum_specifier" << endl;}
+  case 130: // struct_declarator: declarator ":" constant_expression
+#line 533 "ansic.y"
+                                           { yylhs.value.as< StructDeclarator * > () = new StructDeclarator(yystack_[2].value.as < Declarator * > (),yystack_[0].value.as < Expression * > ()); cout << "declarator COLON constant_expression REDUCE to struct_declarator" << endl;}
 #line 2790 "parser.cpp"
     break;
 
-  case 131: // enumerator_list: enumerator
+  case 131: // enum_specifier: "enum" "{" enumerator_list "}"
+#line 537 "ansic.y"
+                                                     { yylhs.value.as< EnumSpecifier * > () = new EnumSpecifier(yystack_[1].value.as < std::vector<Enumerator *> * > ()); cout << "ENUM OCURLY enumerator_list CCURLY REDUCE to enum_specifier" << endl;}
+#line 2796 "parser.cpp"
+    break;
+
+  case 132: // enum_specifier: "enum" "identifier" "{" enumerator_list "}"
+#line 538 "ansic.y"
+                                                     { yylhs.value.as< EnumSpecifier * > () = new EnumSpecifier(yystack_[3].value.as < std::string > (),yystack_[1].value.as < std::vector<Enumerator *> * > ()); cout << "ENUM IDENTIFIER OCURLY enumerator_list CCURLY REDUCE to enum_specifier" << endl;}
+#line 2802 "parser.cpp"
+    break;
+
+  case 133: // enum_specifier: "enum" "identifier"
+#line 539 "ansic.y"
+                                                     { yylhs.value.as< EnumSpecifier * > () = new EnumSpecifier(yystack_[0].value.as < std::string > ()); cout << "ENUM IDENTIFIER REDUCE to enum_specifier" << endl;}
+#line 2808 "parser.cpp"
+    break;
+
+  case 134: // enumerator_list: enumerator
 #line 543 "ansic.y"
                                         {
                                           Enumerator* exp = yystack_[0].value.as < Enumerator * > ();
@@ -2797,10 +2815,10 @@ namespace  WadeSpace  {
                                           yylhs.value.as < std::vector<Enumerator *> * > ()->push_back(exp);
                                           cout << "enumerator REDUCE enumerator_list" << endl;
                                         }
-#line 2801 "parser.cpp"
+#line 2819 "parser.cpp"
     break;
 
-  case 132: // enumerator_list: enumerator_list "," enumerator
+  case 135: // enumerator_list: enumerator_list "," enumerator
 #line 549 "ansic.y"
                                         {
                                           Enumerator* value1 = yystack_[0].value.as < Enumerator * > ();
@@ -2809,112 +2827,112 @@ namespace  WadeSpace  {
                                           yylhs.value.as < std::vector<Enumerator *> * > () = value2;
                                           cout << "enumerator_list COMMA enumerator REDUCE enumerator_list" << endl;
                                         }
-#line 2813 "parser.cpp"
-    break;
-
-  case 133: // enumerator: "identifier"
-#line 559 "ansic.y"
-                                           { yylhs.value.as< Enumerator * > () = new Enumerator(yystack_[0].value.as < std::string > ()); cout << "IDENTIFIER REDUCE to ENUMERATOR" << endl;}
-#line 2819 "parser.cpp"
-    break;
-
-  case 134: // enumerator: "identifier" "=" constant_expression
-#line 560 "ansic.y"
-                                           { yylhs.value.as< Enumerator * > () = new Enumerator(yystack_[2].value.as < std::string > (),yystack_[0].value.as < Expression * > ()); cout << "IDENTIFIER EQUAL constant_expression REDUCE to ENUMERATOR" << endl;}
-#line 2825 "parser.cpp"
-    break;
-
-  case 135: // type_qualifier: "const"
-#line 564 "ansic.y"
-               { yylhs.value.as< TypeQualifier * > () = new TypeQualifier(yystack_[0].value.as < int > (),CONST); cout << "CONST REDUCE to type_qualifier" << endl;}
 #line 2831 "parser.cpp"
     break;
 
-  case 136: // type_qualifier: "volatile"
-#line 565 "ansic.y"
-               { yylhs.value.as< TypeQualifier * > () = new TypeQualifier(yystack_[0].value.as < int > (),VOLATILE); cout << "VOLATILE REDUCE to type_qualifier" << endl;}
+  case 136: // enumerator: "identifier"
+#line 559 "ansic.y"
+                                           { yylhs.value.as< Enumerator * > () = new Enumerator(yystack_[0].value.as < std::string > ()); cout << "IDENTIFIER REDUCE to ENUMERATOR" << endl;}
 #line 2837 "parser.cpp"
     break;
 
-  case 137: // declarator: pointer direct_declarator
-#line 569 "ansic.y"
-                                { yylhs.value.as < Declarator * > () = createDeclarator(yystack_[1].value.as < Pointer * > (),yystack_[0].value.as < DirectDeclarator * > ()); cout << "pointer direct_declarator REDUCE to declarator" << endl;}
+  case 137: // enumerator: "identifier" "=" constant_expression
+#line 560 "ansic.y"
+                                           { yylhs.value.as< Enumerator * > () = new Enumerator(yystack_[2].value.as < std::string > (),yystack_[0].value.as < Expression * > ()); cout << "IDENTIFIER EQUAL constant_expression REDUCE to ENUMERATOR" << endl;}
 #line 2843 "parser.cpp"
     break;
 
-  case 138: // declarator: direct_declarator
-#line 570 "ansic.y"
-                                { yylhs.value.as < Declarator * > () = createDeclarator(nullptr,yystack_[0].value.as < DirectDeclarator * > ()); cout << "direct_declarator REDUCE to declarator" << endl;}
+  case 138: // type_qualifier: "const"
+#line 564 "ansic.y"
+               { yylhs.value.as< TypeQualifier * > () = new TypeQualifier(yystack_[0].value.as < int > (),CONST); cout << "CONST REDUCE to type_qualifier" << endl;}
 #line 2849 "parser.cpp"
     break;
 
-  case 139: // direct_declarator: "identifier"
-#line 574 "ansic.y"
-                                                            { yylhs.value.as < DirectDeclarator * > () = createDirectDeclarator(yystack_[0].value.as < std::string > (),nullopt,nullopt,NULL,NULL,NULL,NULL,NULL); cout << "IDENTIFIER REDUCE to direct_declarator" << endl;}
+  case 139: // type_qualifier: "volatile"
+#line 565 "ansic.y"
+               { yylhs.value.as< TypeQualifier * > () = new TypeQualifier(yystack_[0].value.as < int > (),VOLATILE); cout << "VOLATILE REDUCE to type_qualifier" << endl;}
 #line 2855 "parser.cpp"
     break;
 
-  case 140: // direct_declarator: "(" declarator ")"
-#line 575 "ansic.y"
-                                                            { yylhs.value.as < DirectDeclarator * > () = createDirectDeclarator(nullopt,yystack_[2].value.as < int > (),yystack_[0].value.as < int > (),yystack_[1].value.as < Declarator * > (),NULL,NULL,NULL,NULL); cout << "OPAREN declarator CPAREN REDUCE to direct_declarator" << endl;}
+  case 140: // declarator: pointer direct_declarator
+#line 569 "ansic.y"
+                                { yylhs.value.as < Declarator * > () = createDeclarator(yystack_[1].value.as < Pointer * > (),yystack_[0].value.as < DirectDeclarator * > ()); cout << "pointer direct_declarator REDUCE to declarator" << endl;}
 #line 2861 "parser.cpp"
     break;
 
-  case 141: // direct_declarator: direct_declarator "[" constant_expression "]"
-#line 576 "ansic.y"
-                                                            { yylhs.value.as < DirectDeclarator * > () = createDirectDeclarator(nullopt,yystack_[2].value.as < int > (),yystack_[0].value.as < int > (),NULL,yystack_[3].value.as < DirectDeclarator * > (),yystack_[1].value.as < Expression * > (),NULL,NULL); cout << "direct_declarator OBRACE constant_expression CBRACE REDUCE to direct_declarator" << endl;}
+  case 141: // declarator: direct_declarator
+#line 570 "ansic.y"
+                                { yylhs.value.as < Declarator * > () = createDeclarator(nullptr,yystack_[0].value.as < DirectDeclarator * > ()); cout << "direct_declarator REDUCE to declarator" << endl;}
 #line 2867 "parser.cpp"
     break;
 
-  case 142: // direct_declarator: direct_declarator "[" "]"
-#line 577 "ansic.y"
-                                                            { yylhs.value.as < DirectDeclarator * > () = createDirectDeclarator(nullopt,yystack_[1].value.as < int > (),yystack_[0].value.as < int > (),NULL,yystack_[2].value.as < DirectDeclarator * > (),NULL,NULL,NULL); cout << "direct_declarator OBRACE CBRACE REDUCE to direct_declarator" << endl;}
+  case 142: // direct_declarator: "identifier"
+#line 574 "ansic.y"
+                                                            { yylhs.value.as < DirectDeclarator * > () = createDirectDeclarator(yystack_[0].value.as < std::string > (),nullopt,nullopt,NULL,NULL,NULL,NULL,NULL); cout << "IDENTIFIER REDUCE to direct_declarator" << endl;}
 #line 2873 "parser.cpp"
     break;
 
-  case 143: // direct_declarator: direct_declarator "(" parameter_type_list ")"
-#line 578 "ansic.y"
-                                                            { yylhs.value.as < DirectDeclarator * > () = createDirectDeclarator(nullopt,yystack_[2].value.as < int > (),yystack_[0].value.as < int > (),NULL,yystack_[3].value.as < DirectDeclarator * > (),NULL,yystack_[1].value.as < ParameterTypeList * > (),NULL); cout << "direct_declarator OPAREN parameter_type_list CPAREN to direct_declarator" << endl;}
+  case 143: // direct_declarator: "(" declarator ")"
+#line 575 "ansic.y"
+                                                            { yylhs.value.as < DirectDeclarator * > () = createDirectDeclarator(nullopt,yystack_[2].value.as < int > (),yystack_[0].value.as < int > (),yystack_[1].value.as < Declarator * > (),NULL,NULL,NULL,NULL); cout << "OPAREN declarator CPAREN REDUCE to direct_declarator" << endl;}
 #line 2879 "parser.cpp"
     break;
 
-  case 144: // direct_declarator: direct_declarator "(" identifier_list ")"
-#line 579 "ansic.y"
-                                                            { yylhs.value.as < DirectDeclarator * > () = createDirectDeclarator(nullopt,yystack_[2].value.as < int > (),yystack_[0].value.as < int > (),NULL,yystack_[3].value.as < DirectDeclarator * > (),NULL,NULL,yystack_[1].value.as < std::vector<std::string> * > ()); cout << "direct_declarator OPAREN identifier_list CPAREN REDUCE to direct_declarator" << endl;}
+  case 144: // direct_declarator: direct_declarator "[" constant_expression "]"
+#line 576 "ansic.y"
+                                                            { yylhs.value.as < DirectDeclarator * > () = createDirectDeclarator(nullopt,yystack_[2].value.as < int > (),yystack_[0].value.as < int > (),NULL,yystack_[3].value.as < DirectDeclarator * > (),yystack_[1].value.as < Expression * > (),NULL,NULL); cout << "direct_declarator OBRACE constant_expression CBRACE REDUCE to direct_declarator" << endl;}
 #line 2885 "parser.cpp"
     break;
 
-  case 145: // direct_declarator: direct_declarator "(" ")"
-#line 580 "ansic.y"
-                                                            { yylhs.value.as < DirectDeclarator * > () = createDirectDeclarator(nullopt,yystack_[1].value.as < int > (),yystack_[0].value.as < int > (),NULL,yystack_[2].value.as < DirectDeclarator * > (),NULL,NULL,NULL); cout << "direct_declarator OPAREN CPAREN REDUCE to direct_declarator" << endl;}
+  case 145: // direct_declarator: direct_declarator "[" "]"
+#line 577 "ansic.y"
+                                                            { yylhs.value.as < DirectDeclarator * > () = createDirectDeclarator(nullopt,yystack_[1].value.as < int > (),yystack_[0].value.as < int > (),NULL,yystack_[2].value.as < DirectDeclarator * > (),NULL,NULL,NULL); cout << "direct_declarator OBRACE CBRACE REDUCE to direct_declarator" << endl;}
 #line 2891 "parser.cpp"
     break;
 
-  case 146: // pointer: "*"
-#line 584 "ansic.y"
-                                            {yylhs.value.as< Pointer * > () = new Pointer(yystack_[0].value.as < TokenPtr > ()); cout << "TIMES_OP REDUCE to POINTER" << endl;}
+  case 146: // direct_declarator: direct_declarator "(" parameter_type_list ")"
+#line 578 "ansic.y"
+                                                            { yylhs.value.as < DirectDeclarator * > () = createDirectDeclarator(nullopt,yystack_[2].value.as < int > (),yystack_[0].value.as < int > (),NULL,yystack_[3].value.as < DirectDeclarator * > (),NULL,yystack_[1].value.as < ParameterTypeList * > (),NULL); cout << "direct_declarator OPAREN parameter_type_list CPAREN to direct_declarator" << endl;}
 #line 2897 "parser.cpp"
     break;
 
-  case 147: // pointer: "*" type_qualifier_list
-#line 585 "ansic.y"
-                                            {yylhs.value.as< Pointer * > () = new Pointer(yystack_[1].value.as < TokenPtr > (),yystack_[0].value.as < std::vector<TypeQualifier *> * > ()); cout << "TIMES_OP type_qualifier_list REDUCE to POINTER" << endl;}
+  case 147: // direct_declarator: direct_declarator "(" identifier_list ")"
+#line 579 "ansic.y"
+                                                            { yylhs.value.as < DirectDeclarator * > () = createDirectDeclarator(nullopt,yystack_[2].value.as < int > (),yystack_[0].value.as < int > (),NULL,yystack_[3].value.as < DirectDeclarator * > (),NULL,NULL,yystack_[1].value.as < std::vector<std::string> * > ()); cout << "direct_declarator OPAREN identifier_list CPAREN REDUCE to direct_declarator" << endl;}
 #line 2903 "parser.cpp"
     break;
 
-  case 148: // pointer: "*" pointer
-#line 586 "ansic.y"
-                                            {yylhs.value.as< Pointer * > () = new Pointer(yystack_[1].value.as < TokenPtr > (),yystack_[0].value.as < Pointer * > ()); yylhs.value.as< Pointer * > ()->inc(); cout << "TIMES_OP pointer REDUCE to POINTER" << endl;}
+  case 148: // direct_declarator: direct_declarator "(" ")"
+#line 580 "ansic.y"
+                                                            { yylhs.value.as < DirectDeclarator * > () = createDirectDeclarator(nullopt,yystack_[1].value.as < int > (),yystack_[0].value.as < int > (),NULL,yystack_[2].value.as < DirectDeclarator * > (),NULL,NULL,NULL); cout << "direct_declarator OPAREN CPAREN REDUCE to direct_declarator" << endl;}
 #line 2909 "parser.cpp"
     break;
 
-  case 149: // pointer: "*" type_qualifier_list pointer
-#line 587 "ansic.y"
-                                            {yylhs.value.as< Pointer * > () = new Pointer(yystack_[2].value.as < TokenPtr > (),yystack_[1].value.as < std::vector<TypeQualifier *> * > (),yystack_[0].value.as < Pointer * > ()); yylhs.value.as< Pointer * > ()->inc(); cout << "TIMES_OP type_qualifier_list pointer REDUCE to POINTER" << endl;}
+  case 149: // pointer: "*"
+#line 584 "ansic.y"
+                                            {yylhs.value.as< Pointer * > () = new Pointer(yystack_[0].value.as < TokenPtr > ()); cout << "TIMES_OP REDUCE to POINTER" << endl;}
 #line 2915 "parser.cpp"
     break;
 
-  case 150: // type_qualifier_list: type_qualifier
+  case 150: // pointer: "*" type_qualifier_list
+#line 585 "ansic.y"
+                                            {yylhs.value.as< Pointer * > () = new Pointer(yystack_[1].value.as < TokenPtr > (),yystack_[0].value.as < std::vector<TypeQualifier *> * > ()); cout << "TIMES_OP type_qualifier_list REDUCE to POINTER" << endl;}
+#line 2921 "parser.cpp"
+    break;
+
+  case 151: // pointer: "*" pointer
+#line 586 "ansic.y"
+                                            {yylhs.value.as< Pointer * > () = new Pointer(yystack_[1].value.as < TokenPtr > (),yystack_[0].value.as < Pointer * > ()); yylhs.value.as< Pointer * > ()->inc(); cout << "TIMES_OP pointer REDUCE to POINTER" << endl;}
+#line 2927 "parser.cpp"
+    break;
+
+  case 152: // pointer: "*" type_qualifier_list pointer
+#line 587 "ansic.y"
+                                            {yylhs.value.as< Pointer * > () = new Pointer(yystack_[2].value.as < TokenPtr > (),yystack_[1].value.as < std::vector<TypeQualifier *> * > (),yystack_[0].value.as < Pointer * > ()); yylhs.value.as< Pointer * > ()->inc(); cout << "TIMES_OP type_qualifier_list pointer REDUCE to POINTER" << endl;}
+#line 2933 "parser.cpp"
+    break;
+
+  case 153: // type_qualifier_list: type_qualifier
 #line 591 "ansic.y"
                             {
                              TypeQualifier* exp = yystack_[0].value.as < TypeQualifier * > ();
@@ -2922,10 +2940,10 @@ namespace  WadeSpace  {
                              yylhs.value.as < std::vector<TypeQualifier *> * > ()->push_back(exp);
                              cout << "type_qualifier REDUCE type_qualifier_list" << endl;
                             }
-#line 2926 "parser.cpp"
+#line 2944 "parser.cpp"
     break;
 
-  case 151: // type_qualifier_list: type_qualifier_list type_qualifier
+  case 154: // type_qualifier_list: type_qualifier_list type_qualifier
 #line 597 "ansic.y"
                                          {
                                           TypeQualifier* value1 = yystack_[0].value.as < TypeQualifier * > ();
@@ -2934,22 +2952,22 @@ namespace  WadeSpace  {
                                           yylhs.value.as < std::vector<TypeQualifier *> * > () = value2;
                                           cout << "type_qualifier_list type_qualifier REDUCE type_qualifier_list" << endl;
                                         }
-#line 2938 "parser.cpp"
+#line 2956 "parser.cpp"
     break;
 
-  case 152: // parameter_type_list: parameter_list
+  case 155: // parameter_type_list: parameter_list
 #line 608 "ansic.y"
                                       { yylhs.value.as< ParameterTypeList * > () = new ParameterTypeList(yystack_[0].value.as < std::vector<ParameterDeclaration *> * > (),NONE); cout << "parameter_list REDUCE to parameter_type_list" << endl; }
-#line 2944 "parser.cpp"
+#line 2962 "parser.cpp"
     break;
 
-  case 153: // parameter_type_list: parameter_list "," "ellipsis"
+  case 156: // parameter_type_list: parameter_list "," "ellipsis"
 #line 609 "ansic.y"
                                       { yylhs.value.as< ParameterTypeList * > () = new ParameterTypeList(yystack_[2].value.as < std::vector<ParameterDeclaration *> * > (),yystack_[1].value.as < int > ()); cout << "parameter_list COMMA ELLIPSIS REDUCE to parameter_type_list" << endl; }
-#line 2950 "parser.cpp"
+#line 2968 "parser.cpp"
     break;
 
-  case 154: // parameter_list: parameter_declaration
+  case 157: // parameter_list: parameter_declaration
 #line 613 "ansic.y"
                                                   {
                                                     ParameterDeclaration* exp = yystack_[0].value.as < ParameterDeclaration * > ();
@@ -2957,10 +2975,10 @@ namespace  WadeSpace  {
                                                     yylhs.value.as < std::vector<ParameterDeclaration *> * > ()->push_back(exp);
                                                     cout << "parameter_declaration REDUCE to parameter_list" << endl;
                                                   }
-#line 2961 "parser.cpp"
+#line 2979 "parser.cpp"
     break;
 
-  case 155: // parameter_list: parameter_list "," parameter_declaration
+  case 158: // parameter_list: parameter_list "," parameter_declaration
 #line 619 "ansic.y"
                                                   {
                                                     ParameterDeclaration* value1 = yystack_[0].value.as < ParameterDeclaration * > ();
@@ -2969,28 +2987,28 @@ namespace  WadeSpace  {
                                                     yylhs.value.as < std::vector<ParameterDeclaration *> * > () = value2;
                                                     cout << "parameter_list COMMA parameter_declaration REDUCE to parameter_list" << endl;
                                                   }
-#line 2973 "parser.cpp"
-    break;
-
-  case 156: // parameter_declaration: declaration_specifiers declarator
-#line 629 "ansic.y"
-                                                  { yylhs.value.as< ParameterDeclaration * > () = new ParameterDeclaration(yystack_[1].value.as < DeclarationSpecifiers * > (),yystack_[0].value.as < Declarator * > ()); cout << "declaration_specifiers declarator REDUCE to parameter_declaration" << endl; }
-#line 2979 "parser.cpp"
-    break;
-
-  case 157: // parameter_declaration: declaration_specifiers abstract_declarator
-#line 630 "ansic.y"
-                                                  { yylhs.value.as< ParameterDeclaration * > () = new ParameterDeclaration(yystack_[1].value.as < DeclarationSpecifiers * > (),yystack_[0].value.as < AbstractDeclarator * > ()); cout << "declaration_specifiers abstract_declarator REDUCE to parameter_declaration" << endl; }
-#line 2985 "parser.cpp"
-    break;
-
-  case 158: // parameter_declaration: declaration_specifiers
-#line 631 "ansic.y"
-                                                  { yylhs.value.as< ParameterDeclaration * > () = new ParameterDeclaration(yystack_[0].value.as < DeclarationSpecifiers * > ()); cout << "declaration_specifiers REDUCE to parameter_declaration" << endl; }
 #line 2991 "parser.cpp"
     break;
 
-  case 159: // identifier_list: "identifier"
+  case 159: // parameter_declaration: declaration_specifiers declarator
+#line 629 "ansic.y"
+                                                  { yylhs.value.as< ParameterDeclaration * > () = new ParameterDeclaration(yystack_[1].value.as < DeclarationSpecifiers * > (),yystack_[0].value.as < Declarator * > ()); cout << "declaration_specifiers declarator REDUCE to parameter_declaration" << endl; }
+#line 2997 "parser.cpp"
+    break;
+
+  case 160: // parameter_declaration: declaration_specifiers abstract_declarator
+#line 630 "ansic.y"
+                                                  { yylhs.value.as< ParameterDeclaration * > () = new ParameterDeclaration(yystack_[1].value.as < DeclarationSpecifiers * > (),yystack_[0].value.as < AbstractDeclarator * > ()); cout << "declaration_specifiers abstract_declarator REDUCE to parameter_declaration" << endl; }
+#line 3003 "parser.cpp"
+    break;
+
+  case 161: // parameter_declaration: declaration_specifiers
+#line 631 "ansic.y"
+                                                  { yylhs.value.as< ParameterDeclaration * > () = new ParameterDeclaration(yystack_[0].value.as < DeclarationSpecifiers * > ()); cout << "declaration_specifiers REDUCE to parameter_declaration" << endl; }
+#line 3009 "parser.cpp"
+    break;
+
+  case 162: // identifier_list: "identifier"
 #line 635 "ansic.y"
                                        {
                                           std::string exp = yystack_[0].value.as < std::string > ();
@@ -2998,10 +3016,10 @@ namespace  WadeSpace  {
                                           yylhs.value.as < std::vector<std::string> * > ()->push_back(exp);
                                           cout << "IDENTIFIER REDUCE to identifier_list" << endl;
                                        }
-#line 3002 "parser.cpp"
+#line 3020 "parser.cpp"
     break;
 
-  case 160: // identifier_list: identifier_list "," "identifier"
+  case 163: // identifier_list: identifier_list "," "identifier"
 #line 641 "ansic.y"
                                        {
                                           std::string value1 = yystack_[0].value.as < std::string > ();
@@ -3010,112 +3028,112 @@ namespace  WadeSpace  {
                                           yylhs.value.as < std::vector<std::string> * > () = value2;
                                           cout << "identifier_list COMMA IDENTIFIER REDUCE to identifier_list" << endl; 
                                         }
-#line 3014 "parser.cpp"
-    break;
-
-  case 161: // type_name: specifier_qualifier_list
-#line 651 "ansic.y"
-                                                   { yylhs.value.as< TypeName * > () = new TypeName(yystack_[0].value.as < SpecifierQualifierList * > ()); cout << "specifier_qualifier_list REDUCE to type_name" << endl; }
-#line 3020 "parser.cpp"
-    break;
-
-  case 162: // type_name: specifier_qualifier_list abstract_declarator
-#line 652 "ansic.y"
-                                                   { yylhs.value.as< TypeName * > () = new TypeName(yystack_[1].value.as < SpecifierQualifierList * > (),yystack_[0].value.as < AbstractDeclarator * > ()); cout << "specifier_qualifier_list abstract_declarator REDUCE to type_name" << endl; }
-#line 3026 "parser.cpp"
-    break;
-
-  case 163: // abstract_declarator: pointer
-#line 656 "ansic.y"
-                                          { yylhs.value.as < AbstractDeclarator * > () = new AbstractDeclarator(yystack_[0].value.as < Pointer * > (),nullptr); cout << "pointer REDUCE to abstract_declarator" << endl; }
 #line 3032 "parser.cpp"
     break;
 
-  case 164: // abstract_declarator: direct_abstract_declarator
-#line 657 "ansic.y"
-                                          { yylhs.value.as < AbstractDeclarator * > () = new AbstractDeclarator(nullptr,yystack_[0].value.as < DirectAbstractDeclarator * > ()); cout << "direct_abstract_declarator REDUCE to abstract_declarator" << endl; }
+  case 164: // type_name: specifier_qualifier_list
+#line 651 "ansic.y"
+                                                   { yylhs.value.as< TypeName * > () = new TypeName(yystack_[0].value.as < SpecifierQualifierList * > ()); cout << "specifier_qualifier_list REDUCE to type_name" << endl; }
 #line 3038 "parser.cpp"
     break;
 
-  case 165: // abstract_declarator: pointer direct_abstract_declarator
-#line 658 "ansic.y"
-                                          { yylhs.value.as < AbstractDeclarator * > () = new AbstractDeclarator(yystack_[1].value.as < Pointer * > (),yystack_[0].value.as < DirectAbstractDeclarator * > ());      cout << "pointer direct_abstract_declarator REDUCE to abstract_declarator" << endl; }
+  case 165: // type_name: specifier_qualifier_list abstract_declarator
+#line 652 "ansic.y"
+                                                   { yylhs.value.as< TypeName * > () = new TypeName(yystack_[1].value.as < SpecifierQualifierList * > (),yystack_[0].value.as < AbstractDeclarator * > ()); cout << "specifier_qualifier_list abstract_declarator REDUCE to type_name" << endl; }
 #line 3044 "parser.cpp"
     break;
 
-  case 166: // direct_abstract_declarator: "(" abstract_declarator ")"
-#line 662 "ansic.y"
-                                                                   { yylhs.value.as< DirectAbstractDeclarator * > () = new DirectAbstractDeclarator(yystack_[1].value.as < AbstractDeclarator * > ()); cout << "OPAREN abstract_declarator CPAREN REDUCE to direct_abstract_declarator" << endl; }
+  case 166: // abstract_declarator: pointer
+#line 656 "ansic.y"
+                                          { yylhs.value.as < AbstractDeclarator * > () = new AbstractDeclarator(yystack_[0].value.as < Pointer * > (),nullptr); cout << "pointer REDUCE to abstract_declarator" << endl; }
 #line 3050 "parser.cpp"
     break;
 
-  case 167: // direct_abstract_declarator: "[" "]"
-#line 663 "ansic.y"
-                                                                   { yylhs.value.as< DirectAbstractDeclarator * > () = new DirectAbstractDeclarator(ARRAY); cout << "OBRACE CBRACE REDUCE to direct_abstract_declarator" << endl; }
+  case 167: // abstract_declarator: direct_abstract_declarator
+#line 657 "ansic.y"
+                                          { yylhs.value.as < AbstractDeclarator * > () = new AbstractDeclarator(nullptr,yystack_[0].value.as < DirectAbstractDeclarator * > ()); cout << "direct_abstract_declarator REDUCE to abstract_declarator" << endl; }
 #line 3056 "parser.cpp"
     break;
 
-  case 168: // direct_abstract_declarator: "[" constant_expression "]"
-#line 664 "ansic.y"
-                                                                   { yylhs.value.as< DirectAbstractDeclarator * > () = new DirectAbstractDeclarator(yystack_[1].value.as < Expression * > ()); cout << "OBRACE constant_expression CBRACE REDUCE to direct_abstract_declarator" << endl; }
+  case 168: // abstract_declarator: pointer direct_abstract_declarator
+#line 658 "ansic.y"
+                                          { yylhs.value.as < AbstractDeclarator * > () = new AbstractDeclarator(yystack_[1].value.as < Pointer * > (),yystack_[0].value.as < DirectAbstractDeclarator * > ());      cout << "pointer direct_abstract_declarator REDUCE to abstract_declarator" << endl; }
 #line 3062 "parser.cpp"
     break;
 
-  case 169: // direct_abstract_declarator: direct_abstract_declarator "[" "]"
-#line 665 "ansic.y"
-                                                                   { yylhs.value.as< DirectAbstractDeclarator * > () = new DirectAbstractDeclarator(yystack_[2].value.as < DirectAbstractDeclarator * > (),ARRAY); cout << "direct_abstract_declarator OBRACE CBRACE REDUCE to direct_abstract_declarator" << endl; }
+  case 169: // direct_abstract_declarator: "(" abstract_declarator ")"
+#line 662 "ansic.y"
+                                                                   { yylhs.value.as< DirectAbstractDeclarator * > () = new DirectAbstractDeclarator(yystack_[1].value.as < AbstractDeclarator * > ()); cout << "OPAREN abstract_declarator CPAREN REDUCE to direct_abstract_declarator" << endl; }
 #line 3068 "parser.cpp"
     break;
 
-  case 170: // direct_abstract_declarator: direct_abstract_declarator "[" constant_expression "]"
-#line 666 "ansic.y"
-                                                                   { yylhs.value.as< DirectAbstractDeclarator * > () = new DirectAbstractDeclarator(yystack_[3].value.as < DirectAbstractDeclarator * > (),yystack_[1].value.as < Expression * > (),ARRAY); cout << "direct_abstract_declarator OBRACE constant_expression CBRACE REDUCE to direct_abstract_declarator" << endl; }
+  case 170: // direct_abstract_declarator: "[" "]"
+#line 663 "ansic.y"
+                                                                   { yylhs.value.as< DirectAbstractDeclarator * > () = new DirectAbstractDeclarator(ARRAY); cout << "OBRACE CBRACE REDUCE to direct_abstract_declarator" << endl; }
 #line 3074 "parser.cpp"
     break;
 
-  case 171: // direct_abstract_declarator: "(" ")"
-#line 667 "ansic.y"
-                                                                   { yylhs.value.as< DirectAbstractDeclarator * > () = new DirectAbstractDeclarator(FUNCTION); cout << "OPAREN CPAREN REDUCE to direct_abstract_declarator" << endl; }
+  case 171: // direct_abstract_declarator: "[" constant_expression "]"
+#line 664 "ansic.y"
+                                                                   { yylhs.value.as< DirectAbstractDeclarator * > () = new DirectAbstractDeclarator(yystack_[1].value.as < Expression * > ()); cout << "OBRACE constant_expression CBRACE REDUCE to direct_abstract_declarator" << endl; }
 #line 3080 "parser.cpp"
     break;
 
-  case 172: // direct_abstract_declarator: "(" parameter_type_list ")"
-#line 668 "ansic.y"
-                                                                   { yylhs.value.as< DirectAbstractDeclarator * > () = new DirectAbstractDeclarator(yystack_[1].value.as < ParameterTypeList * > (),FUNCTION); cout << "OPAREN parameter_type_list CPAREN REDUCE to direct_abstract_declarator" << endl; }
+  case 172: // direct_abstract_declarator: direct_abstract_declarator "[" "]"
+#line 665 "ansic.y"
+                                                                   { yylhs.value.as< DirectAbstractDeclarator * > () = new DirectAbstractDeclarator(yystack_[2].value.as < DirectAbstractDeclarator * > (),ARRAY); cout << "direct_abstract_declarator OBRACE CBRACE REDUCE to direct_abstract_declarator" << endl; }
 #line 3086 "parser.cpp"
     break;
 
-  case 173: // direct_abstract_declarator: direct_abstract_declarator "(" ")"
-#line 669 "ansic.y"
-                                                                   { yylhs.value.as< DirectAbstractDeclarator * > () = new DirectAbstractDeclarator(yystack_[2].value.as < DirectAbstractDeclarator * > (),FUNCTION); cout << "direct_abstract_declarator OPAREN CPAREN REDUCE to direct_abstract_declarator" << endl; }
+  case 173: // direct_abstract_declarator: direct_abstract_declarator "[" constant_expression "]"
+#line 666 "ansic.y"
+                                                                   { yylhs.value.as< DirectAbstractDeclarator * > () = new DirectAbstractDeclarator(yystack_[3].value.as < DirectAbstractDeclarator * > (),yystack_[1].value.as < Expression * > (),ARRAY); cout << "direct_abstract_declarator OBRACE constant_expression CBRACE REDUCE to direct_abstract_declarator" << endl; }
 #line 3092 "parser.cpp"
     break;
 
-  case 174: // direct_abstract_declarator: direct_abstract_declarator "(" parameter_type_list ")"
-#line 670 "ansic.y"
-                                                                   { yylhs.value.as< DirectAbstractDeclarator * > () = new DirectAbstractDeclarator(yystack_[3].value.as < DirectAbstractDeclarator * > (),yystack_[1].value.as < ParameterTypeList * > (),FUNCTION); cout << "direct_abstract_declarator OPAREN parameter_type_list CPAREN REDUCE to direct_abstract_declarator" << endl; }
+  case 174: // direct_abstract_declarator: "(" ")"
+#line 667 "ansic.y"
+                                                                   { yylhs.value.as< DirectAbstractDeclarator * > () = new DirectAbstractDeclarator(FUNCTION); cout << "OPAREN CPAREN REDUCE to direct_abstract_declarator" << endl; }
 #line 3098 "parser.cpp"
     break;
 
-  case 175: // initializer: assignment_expression
-#line 674 "ansic.y"
-                                           { yylhs.value.as< Initializer * > () = new Initializer(yystack_[0].value.as < Expression * > ()); cout << "assignment_expression REDUCE to initializer" << endl; }
+  case 175: // direct_abstract_declarator: "(" parameter_type_list ")"
+#line 668 "ansic.y"
+                                                                   { yylhs.value.as< DirectAbstractDeclarator * > () = new DirectAbstractDeclarator(yystack_[1].value.as < ParameterTypeList * > (),FUNCTION); cout << "OPAREN parameter_type_list CPAREN REDUCE to direct_abstract_declarator" << endl; }
 #line 3104 "parser.cpp"
     break;
 
-  case 176: // initializer: "{" initializer_list "}"
-#line 675 "ansic.y"
-                                           { yylhs.value.as< Initializer * > () = new Initializer(yystack_[1].value.as < std::vector<Initializer *> * > ()); cout << "OCURLY initializer_list CCURLY REDUCE to initializer" << endl; }
+  case 176: // direct_abstract_declarator: direct_abstract_declarator "(" ")"
+#line 669 "ansic.y"
+                                                                   { yylhs.value.as< DirectAbstractDeclarator * > () = new DirectAbstractDeclarator(yystack_[2].value.as < DirectAbstractDeclarator * > (),FUNCTION); cout << "direct_abstract_declarator OPAREN CPAREN REDUCE to direct_abstract_declarator" << endl; }
 #line 3110 "parser.cpp"
     break;
 
-  case 177: // initializer: "{" initializer_list "," "}"
-#line 676 "ansic.y"
-                                           { yylhs.value.as< Initializer * > () = new Initializer(yystack_[2].value.as < std::vector<Initializer *> * > ()); cout << "OCURLY initializer_list COMMA CCURLY REDUCE to initializer" << endl; }
+  case 177: // direct_abstract_declarator: direct_abstract_declarator "(" parameter_type_list ")"
+#line 670 "ansic.y"
+                                                                   { yylhs.value.as< DirectAbstractDeclarator * > () = new DirectAbstractDeclarator(yystack_[3].value.as < DirectAbstractDeclarator * > (),yystack_[1].value.as < ParameterTypeList * > (),FUNCTION); cout << "direct_abstract_declarator OPAREN parameter_type_list CPAREN REDUCE to direct_abstract_declarator" << endl; }
 #line 3116 "parser.cpp"
     break;
 
-  case 178: // initializer_list: initializer
+  case 178: // initializer: assignment_expression
+#line 674 "ansic.y"
+                                           { yylhs.value.as< Initializer * > () = new Initializer(yystack_[0].value.as < Expression * > ()); cout << "assignment_expression REDUCE to initializer" << endl; }
+#line 3122 "parser.cpp"
+    break;
+
+  case 179: // initializer: "{" initializer_list "}"
+#line 675 "ansic.y"
+                                           { yylhs.value.as< Initializer * > () = new Initializer(yystack_[1].value.as < std::vector<Initializer *> * > ()); cout << "OCURLY initializer_list CCURLY REDUCE to initializer" << endl; }
+#line 3128 "parser.cpp"
+    break;
+
+  case 180: // initializer: "{" initializer_list "," "}"
+#line 676 "ansic.y"
+                                           { yylhs.value.as< Initializer * > () = new Initializer(yystack_[2].value.as < std::vector<Initializer *> * > ()); cout << "OCURLY initializer_list COMMA CCURLY REDUCE to initializer" << endl; }
+#line 3134 "parser.cpp"
+    break;
+
+  case 181: // initializer_list: initializer
 #line 680 "ansic.y"
                                           {
                                            Initializer* exp = yystack_[0].value.as < Initializer * > ();
@@ -3123,10 +3141,10 @@ namespace  WadeSpace  {
                                            yylhs.value.as < std::vector<Initializer *> * > ()->push_back(exp);
                                            cout << "initializer REDUCE to initializer_list" << endl;
                                           }
-#line 3127 "parser.cpp"
+#line 3145 "parser.cpp"
     break;
 
-  case 179: // initializer_list: initializer_list "," initializer
+  case 182: // initializer_list: initializer_list "," initializer
 #line 686 "ansic.y"
                                           {
                                            Initializer* value1 = yystack_[0].value.as < Initializer * > ();
@@ -3135,88 +3153,88 @@ namespace  WadeSpace  {
                                            yylhs.value.as < std::vector<Initializer *> * > () = value2;
                                            cout << "initializer_list COMMA initializer REDUCE to initializer_list" << endl;
                                           }
-#line 3139 "parser.cpp"
-    break;
-
-  case 180: // statement: labeled_statement
-#line 696 "ansic.y"
-                           { yylhs.value.as< BaseStatement * > () = new Statement(labeled_statement,yystack_[0].value.as < LabeledStatement * > ()); cout << "labeled_statement REDUCE to statement" << endl; }
-#line 3145 "parser.cpp"
-    break;
-
-  case 181: // statement: compound_statement
-#line 697 "ansic.y"
-                           { yylhs.value.as< BaseStatement * > () = new Statement(compound_statement,yystack_[0].value.as < BaseStatement * > ()); cout << "compound_statement REDUCE to statement" << endl; }
-#line 3151 "parser.cpp"
-    break;
-
-  case 182: // statement: expression_statement
-#line 698 "ansic.y"
-                           { yylhs.value.as< BaseStatement * > () = new Statement(expression_statement,yystack_[0].value.as < BaseStatement * > ()); cout << "expression_statement REDUCE to statement" << endl; }
 #line 3157 "parser.cpp"
     break;
 
-  case 183: // statement: selection_statement
-#line 699 "ansic.y"
-                           { yylhs.value.as< BaseStatement * > () = new Statement(selection_statement,yystack_[0].value.as < BaseStatement * > ()); cout << "selection_statement REDUCE to statement" << endl; }
+  case 183: // statement: labeled_statement
+#line 696 "ansic.y"
+                           { yylhs.value.as< BaseStatement * > () = new Statement(labeled_statement,yystack_[0].value.as < LabeledStatement * > ()); cout << "labeled_statement REDUCE to statement" << endl; }
 #line 3163 "parser.cpp"
     break;
 
-  case 184: // statement: iteration_statement
-#line 700 "ansic.y"
-                           { yylhs.value.as< BaseStatement * > () = new Statement(iteration_statement,yystack_[0].value.as < BaseStatement * > ()); cout << "iteration_statement REDUCE to statement" << endl; }
+  case 184: // statement: compound_statement
+#line 697 "ansic.y"
+                           { yylhs.value.as< BaseStatement * > () = new Statement(compound_statement,yystack_[0].value.as < BaseStatement * > ()); cout << "compound_statement REDUCE to statement" << endl; }
 #line 3169 "parser.cpp"
     break;
 
-  case 185: // statement: jump_statement
-#line 701 "ansic.y"
-                           { yylhs.value.as< BaseStatement * > () = new Statement(jump_statement,yystack_[0].value.as < BaseStatement * > ()); cout << "jump_statement REDUCE to statement" << endl; }
+  case 185: // statement: expression_statement
+#line 698 "ansic.y"
+                           { yylhs.value.as< BaseStatement * > () = new Statement(expression_statement,yystack_[0].value.as < BaseStatement * > ()); cout << "expression_statement REDUCE to statement" << endl; }
 #line 3175 "parser.cpp"
     break;
 
-  case 186: // labeled_statement: "identifier" ":" statement
-#line 705 "ansic.y"
-                                               { yylhs.value.as< BaseStatement * > () = new LabeledStatement(yystack_[2].value.as < std::string > (),yystack_[0].value.as < BaseStatement * > ()); cout << "IDENTIFIER COLON statement REDUCE to label_statement" << endl; }
+  case 186: // statement: selection_statement
+#line 699 "ansic.y"
+                           { yylhs.value.as< BaseStatement * > () = new Statement(selection_statement,yystack_[0].value.as < BaseStatement * > ()); cout << "selection_statement REDUCE to statement" << endl; }
 #line 3181 "parser.cpp"
     break;
 
-  case 187: // labeled_statement: "case" constant_expression ":" statement
-#line 706 "ansic.y"
-                                               { yylhs.value.as< BaseStatement * > () = new LabeledStatement(CASE,yystack_[2].value.as < Expression * > (),yystack_[0].value.as < BaseStatement * > ()); cout << "CASE constant_expression COLON statement REDUCE to label_statement" << endl; }
+  case 187: // statement: iteration_statement
+#line 700 "ansic.y"
+                           { yylhs.value.as< BaseStatement * > () = new Statement(iteration_statement,yystack_[0].value.as < BaseStatement * > ()); cout << "iteration_statement REDUCE to statement" << endl; }
 #line 3187 "parser.cpp"
     break;
 
-  case 188: // labeled_statement: "default" ":" statement
-#line 707 "ansic.y"
-                                               { yylhs.value.as< BaseStatement * > () = new LabeledStatement(DEFAULT,yystack_[0].value.as < BaseStatement * > ()); cout << "DEFAULT COLON statement REDUCE to label_statement" << endl; }
+  case 188: // statement: jump_statement
+#line 701 "ansic.y"
+                           { yylhs.value.as< BaseStatement * > () = new Statement(jump_statement,yystack_[0].value.as < BaseStatement * > ()); cout << "jump_statement REDUCE to statement" << endl; }
 #line 3193 "parser.cpp"
     break;
 
-  case 189: // compound_statement: "{" "}"
-#line 711 "ansic.y"
-                                                    { yylhs.value.as< BaseStatement * > () = new CompoundStatement(); cout << "OCURLY CCURLY REDUCE to compound_statement" << endl; }
+  case 189: // labeled_statement: "identifier" ":" statement
+#line 705 "ansic.y"
+                                               { yylhs.value.as< BaseStatement * > () = new LabeledStatement(yystack_[2].value.as < std::string > (),yystack_[0].value.as < BaseStatement * > ()); cout << "IDENTIFIER COLON statement REDUCE to label_statement" << endl; }
 #line 3199 "parser.cpp"
     break;
 
-  case 190: // compound_statement: "{" statement_list "}"
-#line 712 "ansic.y"
-                                                    { yylhs.value.as< BaseStatement * > () = new CompoundStatement(yystack_[1].value.as < std::vector<BaseStatement *> * > ()); cout << "OCURLY statement_list CCURLY REDUCE to compound_statement" << endl; }
+  case 190: // labeled_statement: "case" constant_expression ":" statement
+#line 706 "ansic.y"
+                                               { yylhs.value.as< BaseStatement * > () = new LabeledStatement(CASE,yystack_[2].value.as < Expression * > (),yystack_[0].value.as < BaseStatement * > ()); cout << "CASE constant_expression COLON statement REDUCE to label_statement" << endl; }
 #line 3205 "parser.cpp"
     break;
 
-  case 191: // compound_statement: "{" declaration_list "}"
-#line 713 "ansic.y"
-                                                    { yylhs.value.as< BaseStatement * > () = new CompoundStatement(yystack_[1].value.as < std::vector<Declaration *> * > ()); cout << "OCURLY declaration_list CCURLY REDUCE to compound_statement" << endl; }
+  case 191: // labeled_statement: "default" ":" statement
+#line 707 "ansic.y"
+                                               { yylhs.value.as< BaseStatement * > () = new LabeledStatement(DEFAULT,yystack_[0].value.as < BaseStatement * > ()); cout << "DEFAULT COLON statement REDUCE to label_statement" << endl; }
 #line 3211 "parser.cpp"
     break;
 
-  case 192: // compound_statement: "{" declaration_list statement_list "}"
-#line 714 "ansic.y"
-                                                    { yylhs.value.as< BaseStatement * > () = new CompoundStatement(yystack_[1].value.as < std::vector<BaseStatement *> * > (),yystack_[2].value.as < std::vector<Declaration *> * > ()); cout << "OCURLY declaration_list statement_list CCURLY REDUCE to compound_statement" << endl; }
+  case 192: // compound_statement: "{" "}"
+#line 711 "ansic.y"
+                                                    { yylhs.value.as< BaseStatement * > () = new CompoundStatement(); cout << "OCURLY CCURLY REDUCE to compound_statement" << endl; }
 #line 3217 "parser.cpp"
     break;
 
-  case 193: // declaration_list: declaration
+  case 193: // compound_statement: "{" statement_list "}"
+#line 712 "ansic.y"
+                                                    { yylhs.value.as< BaseStatement * > () = new CompoundStatement(yystack_[1].value.as < std::vector<BaseStatement *> * > ()); cout << "OCURLY statement_list CCURLY REDUCE to compound_statement" << endl; }
+#line 3223 "parser.cpp"
+    break;
+
+  case 194: // compound_statement: "{" declaration_list "}"
+#line 713 "ansic.y"
+                                                    { yylhs.value.as< BaseStatement * > () = new CompoundStatement(yystack_[1].value.as < std::vector<Declaration *> * > ()); cout << "OCURLY declaration_list CCURLY REDUCE to compound_statement" << endl; }
+#line 3229 "parser.cpp"
+    break;
+
+  case 195: // compound_statement: "{" declaration_list statement_list "}"
+#line 714 "ansic.y"
+                                                    { yylhs.value.as< BaseStatement * > () = new CompoundStatement(yystack_[1].value.as < std::vector<BaseStatement *> * > (),yystack_[2].value.as < std::vector<Declaration *> * > ()); cout << "OCURLY declaration_list statement_list CCURLY REDUCE to compound_statement" << endl; }
+#line 3235 "parser.cpp"
+    break;
+
+  case 196: // declaration_list: declaration
 #line 718 "ansic.y"
                                     { yylhs.value.as < std::vector<Declaration *> * > () = createDeclarationList(yystack_[0].value.as < Declaration * > (),nullptr);
                                      //Declaration* exp = $1;
@@ -3224,10 +3242,10 @@ namespace  WadeSpace  {
                                      //$$->push_back(exp);
                                      cout << "declaration REDUCE to declaration_list" << endl;
                                     }
-#line 3228 "parser.cpp"
+#line 3246 "parser.cpp"
     break;
 
-  case 194: // declaration_list: declaration_list declaration
+  case 197: // declaration_list: declaration_list declaration
 #line 724 "ansic.y"
                                     {
                                      yylhs.value.as < std::vector<Declaration *> * > () = createDeclarationList(yystack_[0].value.as < Declaration * > (),yystack_[1].value.as < std::vector<Declaration *> * > ());
@@ -3237,10 +3255,10 @@ namespace  WadeSpace  {
                                      //$$ = value2;
                                      cout << "declaration_list declaration REDUCE to declaration_list" << endl;
                                     }
-#line 3241 "parser.cpp"
+#line 3259 "parser.cpp"
     break;
 
-  case 195: // statement_list: statement
+  case 198: // statement_list: statement
 #line 735 "ansic.y"
                                   {
                                     BaseStatement* exp = yystack_[0].value.as < BaseStatement * > ();
@@ -3248,10 +3266,10 @@ namespace  WadeSpace  {
                                     yylhs.value.as < std::vector<BaseStatement *> * > ()->push_back(exp);
                                     cout << "statement REDUCE to statement_list" << endl;
                                   }
-#line 3252 "parser.cpp"
+#line 3270 "parser.cpp"
     break;
 
-  case 196: // statement_list: statement_list statement
+  case 199: // statement_list: statement_list statement
 #line 741 "ansic.y"
                                   {
                                     BaseStatement* value1 = yystack_[0].value.as < BaseStatement * > ();
@@ -3260,143 +3278,143 @@ namespace  WadeSpace  {
                                     yylhs.value.as < std::vector<BaseStatement *> * > () = value2;
                                     cout << "statement_list statement REDUCE to statement_list" << endl;
                                   }
-#line 3264 "parser.cpp"
-    break;
-
-  case 197: // expression_statement: ";"
-#line 751 "ansic.y"
-                            { yylhs.value.as< BaseStatement * > () = new ExpressionStatement(); cout << "SEMICOLON REDUCE to expression_statement" << endl; }
-#line 3270 "parser.cpp"
-    break;
-
-  case 198: // expression_statement: expression ";"
-#line 752 "ansic.y"
-                            { yylhs.value.as< BaseStatement * > () = new ExpressionStatement(yystack_[1].value.as < Expression * > ()); cout << "expression SEMICOLON REDUCE to expression_statement" << endl; }
-#line 3276 "parser.cpp"
-    break;
-
-  case 199: // selection_statement: "if" "(" expression ")" statement
-#line 756 "ansic.y"
-                                                           { yylhs.value.as< BaseStatement * > () = new SelectionStatement(IF,yystack_[2].value.as < Expression * > (),yystack_[0].value.as < BaseStatement * > ()); cout << "IF OPAREN expression CPAREN statement REDUCE to selection_statement" << endl; }
 #line 3282 "parser.cpp"
     break;
 
-  case 200: // selection_statement: "if" "(" expression ")" statement "else" statement
-#line 757 "ansic.y"
-                                                           { yylhs.value.as< BaseStatement * > () = new SelectionStatement(IF,yystack_[4].value.as < Expression * > (),yystack_[2].value.as < BaseStatement * > (),yystack_[0].value.as < BaseStatement * > ()); cout << "IF OPAREN expression CPAREN statement ELSE statement REDUCE to selection_statement" << endl; }
+  case 200: // expression_statement: ";"
+#line 751 "ansic.y"
+                            { yylhs.value.as< BaseStatement * > () = new ExpressionStatement(); cout << "SEMICOLON REDUCE to expression_statement" << endl; }
 #line 3288 "parser.cpp"
     break;
 
-  case 201: // selection_statement: "switch" "(" expression ")" statement
-#line 758 "ansic.y"
-                                                           { yylhs.value.as< BaseStatement * > () = new SelectionStatement(SWITCH,yystack_[2].value.as < Expression * > (),yystack_[0].value.as < BaseStatement * > ()); cout << "SWITCH OPAREN expression CPAREN statement REDUCE to selection_statement" << endl; }
+  case 201: // expression_statement: expression ";"
+#line 752 "ansic.y"
+                            { yylhs.value.as< BaseStatement * > () = new ExpressionStatement(yystack_[1].value.as < Expression * > ()); cout << "expression SEMICOLON REDUCE to expression_statement" << endl; }
 #line 3294 "parser.cpp"
     break;
 
-  case 202: // iteration_statement: "while" "(" expression ")" statement
-#line 762 "ansic.y"
-                                                                                       { yylhs.value.as< BaseStatement * > () = new IterationStatement(WHILE,yystack_[2].value.as < Expression * > (),yystack_[0].value.as < BaseStatement * > ()); cout << "WHILE OPAREN expression CPAREN statement REDUCE to iteration_statement" << endl; }
+  case 202: // selection_statement: "if" "(" expression ")" statement
+#line 756 "ansic.y"
+                                                           { yylhs.value.as< BaseStatement * > () = new SelectionStatement(IF,yystack_[2].value.as < Expression * > (),yystack_[0].value.as < BaseStatement * > ()); cout << "IF OPAREN expression CPAREN statement REDUCE to selection_statement" << endl; }
 #line 3300 "parser.cpp"
     break;
 
-  case 203: // iteration_statement: "do" statement "while" "(" expression ")" ";"
-#line 763 "ansic.y"
-                                                                                       { yylhs.value.as< BaseStatement * > () = new IterationStatement(DO,yystack_[2].value.as < Expression * > (),yystack_[5].value.as < BaseStatement * > ()); cout << "DO statement WHILE OPAREN expression CPAREN SEMICOLON REDUCE to iteration_statement" << endl; }
+  case 203: // selection_statement: "if" "(" expression ")" statement "else" statement
+#line 757 "ansic.y"
+                                                           { yylhs.value.as< BaseStatement * > () = new SelectionStatement(IF,yystack_[4].value.as < Expression * > (),yystack_[2].value.as < BaseStatement * > (),yystack_[0].value.as < BaseStatement * > ()); cout << "IF OPAREN expression CPAREN statement ELSE statement REDUCE to selection_statement" << endl; }
 #line 3306 "parser.cpp"
     break;
 
-  case 204: // iteration_statement: "for" "(" expression_statement expression_statement ")" statement
-#line 764 "ansic.y"
-                                                                                       { yylhs.value.as< BaseStatement * > () = new IterationStatement(FOR,yystack_[3].value.as < BaseStatement * > (),yystack_[2].value.as < BaseStatement * > (),yystack_[0].value.as < BaseStatement * > ()); cout << "FOR OPAREN expression_statement expression_statement CPAREN statement REDUCE to iteration_statement" << endl; }
+  case 204: // selection_statement: "switch" "(" expression ")" statement
+#line 758 "ansic.y"
+                                                           { yylhs.value.as< BaseStatement * > () = new SelectionStatement(SWITCH,yystack_[2].value.as < Expression * > (),yystack_[0].value.as < BaseStatement * > ()); cout << "SWITCH OPAREN expression CPAREN statement REDUCE to selection_statement" << endl; }
 #line 3312 "parser.cpp"
     break;
 
-  case 205: // iteration_statement: "for" "(" expression_statement expression_statement expression ")" statement
-#line 765 "ansic.y"
-                                                                                       { yylhs.value.as< BaseStatement * > () = new IterationStatement(FOR,yystack_[4].value.as < BaseStatement * > (),yystack_[3].value.as < BaseStatement * > (),yystack_[2].value.as < Expression * > (),yystack_[0].value.as < BaseStatement * > ()); cout << "FOR OPAREN expression_statement expression_statement expression CPAREN statement REDUCE to iteration_statement" << endl; }
+  case 205: // iteration_statement: "while" "(" expression ")" statement
+#line 762 "ansic.y"
+                                                                                       { yylhs.value.as< BaseStatement * > () = new IterationStatement(WHILE,yystack_[2].value.as < Expression * > (),yystack_[0].value.as < BaseStatement * > ()); cout << "WHILE OPAREN expression CPAREN statement REDUCE to iteration_statement" << endl; }
 #line 3318 "parser.cpp"
     break;
 
-  case 206: // jump_statement: "goto" "identifier" ";"
-#line 769 "ansic.y"
-                                  { yylhs.value.as< BaseStatement * > () = new JumpStatement(GOTO,yystack_[1].value.as < std::string > ()); cout << "GOTO IDENTIFIER SEMICOLON REDUCE to jump_statement" << endl; }
+  case 206: // iteration_statement: "do" statement "while" "(" expression ")" ";"
+#line 763 "ansic.y"
+                                                                                       { yylhs.value.as< BaseStatement * > () = new IterationStatement(DO,yystack_[2].value.as < Expression * > (),yystack_[5].value.as < BaseStatement * > ()); cout << "DO statement WHILE OPAREN expression CPAREN SEMICOLON REDUCE to iteration_statement" << endl; }
 #line 3324 "parser.cpp"
     break;
 
-  case 207: // jump_statement: "continue" ";"
-#line 770 "ansic.y"
-                                  { yylhs.value.as< BaseStatement * > () = new JumpStatement(CONTINUE); cout << "CONTINUE SEMICOLON REDUCE to jump_statement" << endl; }
+  case 207: // iteration_statement: "for" "(" expression_statement expression_statement ")" statement
+#line 764 "ansic.y"
+                                                                                       { yylhs.value.as< BaseStatement * > () = new IterationStatement(FOR,yystack_[3].value.as < BaseStatement * > (),yystack_[2].value.as < BaseStatement * > (),yystack_[0].value.as < BaseStatement * > ()); cout << "FOR OPAREN expression_statement expression_statement CPAREN statement REDUCE to iteration_statement" << endl; }
 #line 3330 "parser.cpp"
     break;
 
-  case 208: // jump_statement: "break" ";"
-#line 771 "ansic.y"
-                                  { yylhs.value.as< BaseStatement * > () = new JumpStatement(BREAK); cout << "BREAK SEMICOLON REDUCE to jump_statement" << endl; }
+  case 208: // iteration_statement: "for" "(" expression_statement expression_statement expression ")" statement
+#line 765 "ansic.y"
+                                                                                       { yylhs.value.as< BaseStatement * > () = new IterationStatement(FOR,yystack_[4].value.as < BaseStatement * > (),yystack_[3].value.as < BaseStatement * > (),yystack_[2].value.as < Expression * > (),yystack_[0].value.as < BaseStatement * > ()); cout << "FOR OPAREN expression_statement expression_statement expression CPAREN statement REDUCE to iteration_statement" << endl; }
 #line 3336 "parser.cpp"
     break;
 
-  case 209: // jump_statement: "return" ";"
-#line 772 "ansic.y"
-                                  { yylhs.value.as< BaseStatement * > () = new JumpStatement(RETURN); cout << "RETURN SEMICOLON REDUCE to jump_statement" << endl; }
+  case 209: // jump_statement: "goto" "identifier" ";"
+#line 769 "ansic.y"
+                                  { yylhs.value.as< BaseStatement * > () = new JumpStatement(GOTO,yystack_[1].value.as < std::string > ()); cout << "GOTO IDENTIFIER SEMICOLON REDUCE to jump_statement" << endl; }
 #line 3342 "parser.cpp"
     break;
 
-  case 210: // jump_statement: "return" expression ";"
-#line 773 "ansic.y"
-                                  { yylhs.value.as< BaseStatement * > () = new JumpStatement(RETURN,yystack_[1].value.as < Expression * > ()); cout << "RETURN expression SEMICOLON REDUCE to jump_statement" << endl; }
+  case 210: // jump_statement: "continue" ";"
+#line 770 "ansic.y"
+                                  { yylhs.value.as< BaseStatement * > () = new JumpStatement(CONTINUE); cout << "CONTINUE SEMICOLON REDUCE to jump_statement" << endl; }
 #line 3348 "parser.cpp"
     break;
 
-  case 211: // translation_unit: external_declaration
-#line 777 "ansic.y"
-                                            { program = new ProgramData(); program->add(yystack_[0].value.as < ExternalDeclaration * > ()); cout << "external_declaration REDUCE to translation_unit" << endl; }
+  case 211: // jump_statement: "break" ";"
+#line 771 "ansic.y"
+                                  { yylhs.value.as< BaseStatement * > () = new JumpStatement(BREAK); cout << "BREAK SEMICOLON REDUCE to jump_statement" << endl; }
 #line 3354 "parser.cpp"
     break;
 
-  case 212: // translation_unit: translation_unit external_declaration
-#line 778 "ansic.y"
-                                            { program->add(yystack_[0].value.as < ExternalDeclaration * > ()); cout << "translation_unit external_declaration REDUCE to translation_unit" << endl; }
+  case 212: // jump_statement: "return" ";"
+#line 772 "ansic.y"
+                                  { yylhs.value.as< BaseStatement * > () = new JumpStatement(RETURN); cout << "RETURN SEMICOLON REDUCE to jump_statement" << endl; }
 #line 3360 "parser.cpp"
     break;
 
-  case 213: // external_declaration: function_definition
-#line 782 "ansic.y"
-                           { yylhs.value.as< ExternalDeclaration * > () = new ExternalDeclaration(yystack_[0].value.as < FunctionDefinition * > ()); cout << "function_definition REDUCE to external_declaration" << endl; }
+  case 213: // jump_statement: "return" expression ";"
+#line 773 "ansic.y"
+                                  { yylhs.value.as< BaseStatement * > () = new JumpStatement(RETURN,yystack_[1].value.as < Expression * > ()); cout << "RETURN expression SEMICOLON REDUCE to jump_statement" << endl; }
 #line 3366 "parser.cpp"
     break;
 
-  case 214: // external_declaration: declaration
-#line 783 "ansic.y"
-                           { yylhs.value.as< ExternalDeclaration * > () = new ExternalDeclaration(yystack_[0].value.as < Declaration * > ()); cout << "declaration REDUCE to external_declaration" << endl; }
+  case 214: // translation_unit: external_declaration
+#line 777 "ansic.y"
+                                            { program = new ProgramData(); program->add(yystack_[0].value.as < ExternalDeclaration * > ()); cout << "external_declaration REDUCE to translation_unit" << endl; }
 #line 3372 "parser.cpp"
     break;
 
-  case 215: // function_definition: declaration_specifiers declarator declaration_list compound_statement
-#line 787 "ansic.y"
-                                                                            { yylhs.value.as< FunctionDefinition * > () = new FunctionDefinition(yystack_[3].value.as < DeclarationSpecifiers * > (),yystack_[2].value.as < Declarator * > (),yystack_[1].value.as < std::vector<Declaration *> * > (),yystack_[0].value.as < BaseStatement * > ()); cout << "declaration_specifiers declarator declaration_list compound_statement REDUCE to function_definition" << endl; }
+  case 215: // translation_unit: translation_unit external_declaration
+#line 778 "ansic.y"
+                                            { program->add(yystack_[0].value.as < ExternalDeclaration * > ()); cout << "translation_unit external_declaration REDUCE to translation_unit" << endl; }
 #line 3378 "parser.cpp"
     break;
 
-  case 216: // function_definition: declaration_specifiers declarator compound_statement
-#line 788 "ansic.y"
-                                                                            { yylhs.value.as< FunctionDefinition * > () = new FunctionDefinition(yystack_[2].value.as < DeclarationSpecifiers * > (),yystack_[1].value.as < Declarator * > (),yystack_[0].value.as < BaseStatement * > ()); cout << "declaration_specifiers declarator compound_statement REDUCE to function_definition" << endl; }
+  case 216: // external_declaration: function_definition
+#line 782 "ansic.y"
+                           { yylhs.value.as< ExternalDeclaration * > () = new ExternalDeclaration(yystack_[0].value.as < FunctionDefinition * > ()); cout << "function_definition REDUCE to external_declaration" << endl; }
 #line 3384 "parser.cpp"
     break;
 
-  case 217: // function_definition: declarator declaration_list compound_statement
-#line 789 "ansic.y"
-                                                                            { yylhs.value.as< FunctionDefinition * > () = new FunctionDefinition(yystack_[2].value.as < Declarator * > (),yystack_[1].value.as < std::vector<Declaration *> * > (),yystack_[0].value.as < BaseStatement * > ()); cout << "declarator declaration_list compound_statement REDUCE to function_definition" << endl; }
+  case 217: // external_declaration: declaration
+#line 783 "ansic.y"
+                           { yylhs.value.as< ExternalDeclaration * > () = new ExternalDeclaration(yystack_[0].value.as < Declaration * > ()); cout << "declaration REDUCE to external_declaration" << endl; }
 #line 3390 "parser.cpp"
     break;
 
-  case 218: // function_definition: declarator compound_statement
-#line 790 "ansic.y"
-                                                                            { yylhs.value.as< FunctionDefinition * > () = new FunctionDefinition(yystack_[1].value.as < Declarator * > (),yystack_[0].value.as < BaseStatement * > ()); cout << "declarator compound_statement REDUCE to function_definition" << endl; }
+  case 218: // function_definition: declaration_specifiers declarator declaration_list compound_statement
+#line 787 "ansic.y"
+                                                                            { yylhs.value.as< FunctionDefinition * > () = new FunctionDefinition(yystack_[3].value.as < DeclarationSpecifiers * > (),yystack_[2].value.as < Declarator * > (),yystack_[1].value.as < std::vector<Declaration *> * > (),yystack_[0].value.as < BaseStatement * > ()); cout << "declaration_specifiers declarator declaration_list compound_statement REDUCE to function_definition" << endl; }
 #line 3396 "parser.cpp"
     break;
 
+  case 219: // function_definition: declaration_specifiers declarator compound_statement
+#line 788 "ansic.y"
+                                                                            { yylhs.value.as< FunctionDefinition * > () = new FunctionDefinition(yystack_[2].value.as < DeclarationSpecifiers * > (),yystack_[1].value.as < Declarator * > (),yystack_[0].value.as < BaseStatement * > ()); cout << "declaration_specifiers declarator compound_statement REDUCE to function_definition" << endl; }
+#line 3402 "parser.cpp"
+    break;
 
-#line 3400 "parser.cpp"
+  case 220: // function_definition: declarator declaration_list compound_statement
+#line 789 "ansic.y"
+                                                                            { yylhs.value.as< FunctionDefinition * > () = new FunctionDefinition(yystack_[2].value.as < Declarator * > (),yystack_[1].value.as < std::vector<Declaration *> * > (),yystack_[0].value.as < BaseStatement * > ()); cout << "declarator declaration_list compound_statement REDUCE to function_definition" << endl; }
+#line 3408 "parser.cpp"
+    break;
+
+  case 221: // function_definition: declarator compound_statement
+#line 790 "ansic.y"
+                                                                            { yylhs.value.as< FunctionDefinition * > () = new FunctionDefinition(yystack_[1].value.as < Declarator * > (),yystack_[0].value.as < BaseStatement * > ()); cout << "declarator compound_statement REDUCE to function_definition" << endl; }
+#line 3414 "parser.cpp"
+    break;
+
+
+#line 3418 "parser.cpp"
 
             default:
               break;
@@ -3748,450 +3766,474 @@ namespace  WadeSpace  {
   }
 
 
-  const short  Parser ::yypact_ninf_ = -223;
+  const short  Parser ::yypact_ninf_ = -230;
 
   const signed char  Parser ::yytable_ninf_ = -1;
 
   const short
    Parser ::yypact_[] =
   {
-     400,  -223,  -223,  -223,  -223,  -223,  -223,  -223,    21,  -223,
-    -223,  -223,  -223,  -223,  -223,  -223,  -223,  -223,  -223,  -223,
-    -223,  -223,  -223,  -223,  -223,  -223,  -223,    24,     2,  -223,
-      15,  1531,  1531,  -223,    27,  -223,  1531,  1450,    -5,    16,
-     304,  -223,  -223,   -37,    38,    10,  -223,  -223,     2,  -223,
-      35,  -223,  1248,  -223,  -223,    11,  1567,  -223,   460,  -223,
-      15,  -223,  1450,  1293,   910,    -5,  -223,  -223,    38,    42,
-      28,  -223,  -223,  -223,  -223,  -223,    24,   947,  -223,  1450,
-    1567,  1567,  1373,  -223,    13,  1567,    23,  -223,  -223,  -223,
-      69,  1118,    75,    78,   847,    95,   153,   122,   983,  1151,
-     136,   143,  -223,  -223,   608,  -223,  1177,  1177,  -223,  -223,
-    -223,  -223,   171,   461,  1118,  -223,   104,   116,   144,    56,
-     148,   114,   126,   135,   150,   -20,  -223,  -223,    37,  -223,
-    -223,  -223,   544,   733,  -223,  -223,  -223,  -223,   160,  -223,
-    -223,  -223,  -223,    18,   169,   176,  -223,     3,  -223,  -223,
-    -223,  -223,   178,   202,  1118,  -223,    38,  -223,   947,  -223,
-    -223,  -223,  1409,  -223,  -223,  -223,  1118,    46,  -223,   184,
-    -223,   847,  -223,   189,  -223,   847,   204,  1004,   201,  1118,
-    -223,    47,   608,  -223,  1118,  1118,    65,   -31,   209,   608,
-    -223,  -223,  1020,  1118,   269,  -223,  -223,   279,  -223,  -223,
-    -223,  -223,  -223,  -223,  -223,  -223,  -223,  -223,  -223,  1118,
-    -223,  1118,  1118,  1118,  1118,  1118,  1118,  1118,  1118,  1118,
-    1118,  1118,  1118,  1118,  1118,  1118,  1118,  1118,  1118,  1118,
-    -223,  1118,  -223,   790,  -223,  -223,   344,  1042,  -223,    19,
-    -223,    98,  -223,  1490,   280,  -223,  -223,  -223,  -223,  -223,
-    -223,   206,  -223,  -223,  -223,    13,  1118,  -223,   847,  -223,
-     230,  1004,  -223,    77,  -223,   232,    91,    92,  -223,   679,
-     165,  -223,  1077,   233,  -223,    96,  -223,    31,  -223,  -223,
-    -223,  -223,  -223,  -223,   104,   104,   116,   116,   144,   144,
-     144,   144,    56,    56,   148,   114,   126,   135,   208,   150,
-    -223,  -223,  -223,   236,   237,  -223,   228,    98,  1333,  1114,
-    -223,  -223,  -223,  -223,   888,  -223,  -223,  -223,  1118,  1135,
-     847,   243,   847,   847,   947,  -223,   243,  1118,  -223,  -223,
-    1118,  -223,  -223,  -223,  -223,   239,  -223,   238,  -223,  -223,
-     133,   847,   134,   278,  -223,  -223,   211,  -223,  -223,  -223,
-    -223,   248,  -223,   847,   847,  -223,   906,  -223,  -223,  -223,
-    -223
+     682,  -230,  -230,  -230,  -230,  -230,  -230,  -230,    15,  -230,
+    -230,  -230,  -230,  -230,  -230,  -230,  -230,  -230,  -230,  -230,
+    -230,  -230,  -230,  -230,  -230,  -230,  -230,    24,    17,  -230,
+      21,  1653,  1653,  -230,    30,  -230,  1653,  1572,     4,    13,
+     306,  -230,  -230,   -41,    14,   -14,  -230,  -230,    17,  -230,
+      71,  -230,  1370,  -230,  -230,     1,  1689,  -230,   366,  -230,
+      21,  -230,  1572,  1415,  1004,     4,  -230,  -230,    14,    -5,
+      31,  -230,  -230,  -230,  -230,  -230,    24,  1022,  -230,  1572,
+    1689,  1689,  1495,  -230,     3,  1689,     9,  -230,  -230,  -230,
+      27,  1155,    50,    20,   904,    54,   122,    76,   518,  1227,
+     106,   126,  -230,  -230,   542,  -230,  1245,  1245,  -230,  -230,
+    -230,  -230,  -230,  -230,  -230,   138,   233,  1155,  -230,   137,
+     101,   176,    70,   167,   109,   114,   128,   161,    69,  -230,
+    -230,    90,  -230,  -230,  -230,   454,   728,  -230,  -230,  -230,
+    -230,   165,  -230,  -230,  -230,  -230,    23,   166,   188,  -230,
+      66,  -230,  -230,  -230,  -230,   187,   205,  1155,  -230,    14,
+    -230,  1022,  -230,  -230,  -230,  1531,  -230,  -230,  -230,  1155,
+      91,  -230,   200,  -230,   904,  -230,   217,  -230,   904,   219,
+    1064,   226,  1155,  -230,    95,   542,  -230,  1155,  1155,   130,
+      34,   224,   542,  -230,  -230,   790,  1155,   282,  -230,  -230,
+     283,  -230,  -230,  -230,  -230,  -230,  -230,  -230,  -230,  -230,
+    -230,  -230,  1155,  -230,  1155,  1155,  1155,  1155,  1155,  1155,
+    1155,  1155,  1155,  1155,  1155,  1155,  1155,  1155,  1155,  1155,
+    1155,  1155,  1155,  -230,  1155,  -230,   816,  -230,  -230,   626,
+    1111,  -230,    40,  -230,   179,  -230,  1612,   284,  -230,  -230,
+    -230,  -230,  -230,  -230,   209,  -230,  -230,  -230,     3,  1155,
+    -230,   904,  -230,   234,  1064,  -230,   145,  -230,   235,   149,
+     155,  -230,  1329,   180,  -230,  1129,   236,  -230,   162,  -230,
+     -32,  -230,  -230,  -230,  -230,  -230,  -230,   137,   137,   101,
+     101,   176,   176,   176,   176,    70,    70,   167,   109,   114,
+     128,   212,   161,  -230,  -230,  -230,   252,   253,  -230,   232,
+     179,  1455,  1137,  -230,  -230,  -230,  -230,   945,  -230,  -230,
+    -230,  1155,  1201,   904,   260,   904,   904,  1022,  -230,   260,
+    1155,  -230,  -230,  1155,  -230,  -230,  -230,  -230,   257,  -230,
+     258,  -230,  -230,   164,   904,   171,   298,  -230,  -230,   215,
+    -230,  -230,  -230,  -230,   270,  -230,   904,   904,  -230,   963,
+    -230,  -230,  -230,  -230
   };
 
   const unsigned char
    Parser ::yydefact_[] =
   {
-       0,   139,   110,    92,    95,   135,   101,   102,     0,    90,
-     100,    97,    98,    99,    93,    96,   106,    91,   114,    89,
-     115,   107,    94,   136,   103,   105,   104,     0,   146,   214,
-       0,    79,    81,   108,     0,   109,    83,     0,   138,     0,
-       0,   211,   213,   130,     0,     0,   150,   148,   147,    77,
-       0,    85,    87,    80,    82,   113,     0,    84,     0,   193,
-       0,   218,     0,     0,     0,   137,     1,   212,     0,   133,
-       0,   131,   140,   151,   149,    78,     0,     0,   216,     0,
-       0,   120,     0,   116,     0,   122,     2,     6,     5,     7,
+       0,   142,   113,    95,    98,   138,   104,   105,     0,    93,
+     103,   100,   101,   102,    96,    99,   109,    94,   117,    92,
+     118,   110,    97,   139,   106,   108,   107,     0,   149,   217,
+       0,    82,    84,   111,     0,   112,    86,     0,   141,     0,
+       0,   214,   216,   133,     0,     0,   153,   151,   150,    80,
+       0,    88,    90,    83,    85,   116,     0,    87,     0,   196,
+       0,   221,     0,     0,     0,   140,     1,   215,     0,   136,
+       0,   134,   143,   154,   152,    81,     0,     0,   219,     0,
+       0,   123,     0,   119,     0,   125,     2,     6,     5,     7,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,   197,   189,     0,    27,     0,     0,    28,    26,
-       8,     3,    20,    29,     0,    31,    35,    38,    41,    46,
-      49,    51,    53,    55,    57,    59,    61,    74,     0,   195,
-     180,   181,     0,     0,   182,   183,   184,   185,    87,   194,
-     217,   159,   145,   158,     0,   152,   154,     0,     2,   142,
-      29,    76,     0,     0,     0,   128,     0,    86,     0,   175,
-      88,   215,     0,   119,   112,   117,     0,     0,   123,   125,
-     121,     0,   208,     0,   207,     0,     0,     0,     0,     0,
-     209,     0,     0,    24,     0,     0,     0,   161,     0,     0,
-      21,    22,     0,     0,     0,    14,    15,     0,    63,    70,
-      69,    67,    68,    64,    65,    66,    71,    72,    73,     0,
-      23,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,   200,   192,     0,    30,     0,     0,    31,    26,
+      29,    28,    27,     8,     3,    20,    32,     0,    34,    38,
+      41,    44,    49,    52,    54,    56,    58,    60,    62,    64,
+      77,     0,   198,   183,   184,     0,     0,   185,   186,   187,
+     188,    90,   197,   220,   162,   148,   161,     0,   155,   157,
+       0,     2,   145,    32,    79,     0,     0,     0,   131,     0,
+      89,     0,   178,    91,   218,     0,   122,   115,   120,     0,
+       0,   126,   128,   124,     0,   211,     0,   210,     0,     0,
+       0,     0,     0,   212,     0,     0,    24,     0,     0,     0,
+     164,     0,     0,    21,    22,     0,     0,     0,    14,    15,
+       0,    66,    73,    72,    70,    71,    67,    68,    69,    74,
+      75,    76,     0,    23,     0,     0,     0,     0,     0,     0,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-     198,     0,   191,     0,   190,   196,     0,     0,   156,   163,
-     157,   164,   143,     0,     0,   144,   141,   129,   134,   132,
-     178,     0,   111,   126,   118,     0,     0,   186,     0,   188,
-       0,     0,   206,     0,   210,     0,     0,     0,     4,     0,
-     163,   162,     0,     0,    10,     0,    18,     0,    12,    13,
-      62,    32,    33,    34,    37,    36,    40,    39,    45,    44,
-      43,    42,    47,    48,    50,    52,    54,    56,     0,    58,
-      75,   192,   171,     0,     0,   167,     0,   165,     0,     0,
-     153,   155,   160,   176,     0,   124,   127,   187,     0,     0,
-       0,    25,     0,     0,     0,    30,     0,     0,    11,     9,
-       0,   172,   166,   168,   173,     0,   169,     0,   177,   179,
-       0,     0,     0,   199,   201,   202,     0,    19,    60,   174,
-     170,     0,   204,     0,     0,    16,     0,   203,   205,   200,
-      17
+       0,     0,     0,   201,     0,   194,     0,   193,   199,     0,
+       0,   159,   166,   160,   167,   146,     0,     0,   147,   144,
+     132,   137,   135,   181,     0,   114,   129,   121,     0,     0,
+     189,     0,   191,     0,     0,   209,     0,   213,     0,     0,
+       0,     4,     0,   166,   165,     0,     0,    10,     0,    18,
+       0,    12,    13,    65,    35,    36,    37,    40,    39,    43,
+      42,    48,    47,    46,    45,    50,    51,    53,    55,    57,
+      59,     0,    61,    78,   195,   174,     0,     0,   170,     0,
+     168,     0,     0,   156,   158,   163,   179,     0,   127,   130,
+     190,     0,     0,     0,    25,     0,     0,     0,    33,     0,
+       0,    11,     9,     0,   175,   169,   171,   176,     0,   172,
+       0,   180,   182,     0,     0,     0,   202,   204,   205,     0,
+      19,    63,   177,   173,     0,   207,     0,     0,    16,     0,
+     206,   208,   203,    17
   };
 
   const short
    Parser ::yypgoto_[] =
   {
-    -223,  -223,  -223,  -223,  -223,   -54,  -223,   -85,    52,    58,
-     -79,    55,    74,    80,    73,    76,    71,  -223,   -57,   -76,
-    -223,   -78,   -44,     6,     0,  -223,   242,  -223,   128,  -223,
-    -223,   226,   -71,     9,  -223,    54,  -223,   245,   158,    97,
-     -22,   -36,   -13,  -223,   -59,  -223,    79,  -223,  -139,  -131,
-    -222,   -75,     4,   -52,  -223,   155,   -19,   187,  -168,  -223,
-    -223,  -223,  -223,   286,  -223
+    -230,  -230,  -230,  -230,  -230,   -53,  -230,   -87,    51,    58,
+     -68,    56,    93,    96,    92,    98,    97,  -230,   -57,   -76,
+    -230,   -90,   -54,    10,     0,  -230,   254,  -230,   -33,  -230,
+    -230,   251,   -79,     6,  -230,    78,  -230,   269,   181,    53,
+     -15,   -34,    -9,  -230,   -59,  -230,   103,  -230,  -157,  -124,
+    -229,   -75,    26,   -52,  -230,   141,    16,   208,  -159,  -230,
+    -230,  -230,  -230,   314,  -230
   };
 
   const short
    Parser ::yydefgoto_[] =
   {
-       0,   110,   111,   112,   275,   113,   114,   115,   116,   117,
-     118,   119,   120,   121,   122,   123,   124,   125,   126,   127,
-     209,   128,   152,    59,    60,    50,    51,    31,    32,    33,
-      34,    82,    83,    84,   167,   168,    35,    70,    71,    36,
-      37,    38,    39,    48,   303,   145,   146,   147,   188,   304,
-     241,   250,   251,   129,   130,   131,    62,   133,   134,   135,
-     136,   137,    40,    41,    42
+       0,   113,   114,   115,   278,   116,   117,   118,   119,   120,
+     121,   122,   123,   124,   125,   126,   127,   128,   129,   130,
+     212,   131,   155,    59,    60,    50,    51,    31,    32,    33,
+      34,    82,    83,    84,   170,   171,    35,    70,    71,    36,
+      37,    38,    39,    48,   306,   148,   149,   150,   191,   307,
+     244,   253,   254,   132,   133,   134,    62,   136,   137,   138,
+     139,   140,    40,    41,    42
   };
 
   const short
    Parser ::yytable_[] =
   {
-      30,   159,   160,    65,   144,    45,    29,   151,    52,   261,
-     150,   165,   240,    68,     5,    47,     1,   307,     1,     1,
-     181,     1,     1,   269,    43,   237,   186,     1,   228,   210,
-      55,    53,    54,    79,   151,    74,    57,   150,   138,   132,
-      30,    69,   176,   265,    23,   183,    29,   173,   307,    63,
-     273,    64,   190,   191,   138,   244,   271,   229,   245,    28,
-     150,    80,   169,   143,    49,    72,   166,    27,   139,    27,
-      27,    44,   236,   236,   237,   237,   171,    56,    27,   155,
-     156,   235,   159,   231,    75,   139,   230,    76,   329,   231,
-     163,   165,    28,   319,   170,   254,   264,   151,   255,   231,
-     150,   263,   154,    28,   186,    28,   266,   267,    28,   151,
-     248,   186,   150,   187,    28,   277,   276,   231,   172,   257,
-     268,   238,   253,   259,   174,    46,   281,   282,   283,   231,
-     239,   175,   320,   280,   218,   219,   220,   221,   139,   288,
-     289,   290,   291,   231,   231,    73,   322,   323,   327,   177,
-     298,   328,   308,    85,   309,   300,   178,   150,   150,   150,
-     150,   150,   150,   150,   150,   150,   150,   150,   150,   150,
-     150,   150,   150,   150,   270,   150,   179,    85,    85,    85,
-     151,   235,    85,   150,    81,   231,   231,   325,   351,   353,
-     184,   187,    61,   306,   211,   212,   213,   185,   187,   151,
-     224,    85,   150,    65,   214,   215,   317,    78,    81,    81,
-      81,   225,   316,    81,    45,   216,   217,   140,   150,   269,
-      77,   237,   226,   239,   242,   192,   227,   193,   243,   194,
-     222,   223,    81,   169,   161,   246,   143,   256,   159,   339,
-     340,   342,   258,   143,   195,   196,   197,   260,   159,   335,
-     262,   347,   151,   247,   156,   150,   270,   313,   314,    85,
-     231,   330,   355,   356,   272,   337,   284,   285,   343,   143,
-     344,   345,   278,   348,   286,   287,   150,   292,   293,    85,
-     159,   339,   279,   312,   318,   333,    85,   321,   326,   352,
-      81,   331,   332,   324,   349,   350,   354,   357,   294,   296,
-     299,   358,   359,   297,    66,   295,   162,     1,   143,   315,
-      81,     2,     3,   153,   249,     4,     5,    81,   157,   233,
-       6,     7,   311,     8,     9,    10,    67,     0,   346,     0,
-      11,    12,    13,    14,     0,     0,    15,    16,     0,    17,
-      18,     0,    19,    20,    21,    22,    23,     1,    24,    25,
-      26,     2,     3,     0,     0,     4,     5,     0,    27,     0,
-       6,     7,     0,     8,     9,    10,     0,     0,     0,     0,
-      11,    12,    13,    14,     0,     0,    15,    16,     0,    17,
-      18,     0,    19,    20,    21,    22,    23,     0,    24,    25,
-      26,     0,     0,     0,    28,     0,     0,     0,   236,   302,
-     237,     0,     0,     1,     0,     0,     0,     2,     3,     0,
-       0,     4,     5,     0,     0,     0,     6,     7,     0,     8,
-       9,    10,     0,     0,     0,     0,    11,    12,    13,    14,
-       0,     0,    15,    16,    28,    17,    18,     0,    19,    20,
-      21,    22,    23,     0,    24,    25,    26,     0,     0,     0,
-       0,     0,     0,     0,    27,     0,     0,     0,     0,     0,
-       0,     0,     0,    86,    87,    88,    89,     2,     3,    90,
-      91,     4,     5,    92,    93,    94,     6,     7,     0,     8,
-       9,    10,    95,    96,    97,     0,    11,    12,    13,    14,
-      28,    98,    15,    16,    99,    17,    18,   100,    19,    20,
-      21,    22,    23,   101,    24,    25,    26,     0,     0,   102,
-      58,   103,     0,     0,   104,     0,     0,     0,     0,   105,
-       0,   198,   199,   200,   201,   202,   203,   204,   205,   206,
-     207,   208,     0,   106,   107,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,   108,     0,   109,    86,    87,    88,
+      30,   162,   163,   168,   147,    65,     1,   154,   184,    68,
+      29,   153,    45,   310,   189,    52,     1,    69,    43,    47,
+     234,   264,   243,    81,     1,   332,     1,     1,   268,     5,
+     213,    53,    54,    55,   154,   276,    57,   176,   153,    74,
+      30,    72,   179,     1,   310,   141,   186,    81,    81,    81,
+      29,    80,    81,   193,   194,   157,   169,    27,    63,    23,
+      64,   141,   174,   146,   153,    44,   274,    27,    79,   172,
+      49,    81,   142,   178,   135,    27,   175,   239,    27,   240,
+      56,    46,   158,   159,   238,   162,   168,   166,   272,   142,
+     240,   173,   266,    28,   239,   189,   240,   269,   270,   177,
+     154,    73,   189,   251,   153,   322,   280,    28,   180,    85,
+     190,    28,   154,    28,    28,   256,   153,   231,   247,   279,
+      75,   248,   260,    76,    28,   181,   262,   284,   285,   286,
+     182,   241,    81,    85,    85,    85,   283,   242,    85,   233,
+     257,   301,   234,   258,   267,   142,   232,   234,   221,   222,
+     223,   224,    81,   291,   292,   293,   294,    85,   303,    81,
+     187,   153,   153,   153,   153,   153,   153,   153,   153,   153,
+     153,   153,   153,   153,   153,   153,   153,   153,    61,   153,
+     188,   273,   234,   154,   238,   271,   309,   153,   328,   217,
+     218,   190,   195,    78,   196,   227,   197,   234,   190,   228,
+     323,   234,   154,   143,   325,   319,   153,   234,    65,   320,
+     326,   198,   199,   200,   330,   229,   234,   331,    85,   354,
+     164,   245,   153,   234,    45,    77,   356,   214,   215,   216,
+     242,   343,   345,   311,   272,   312,   240,   230,    85,   146,
+     246,   162,   342,   172,   249,    85,   146,   219,   220,   225,
+     226,   162,   338,   259,   350,   154,   250,   159,   340,   153,
+     316,   317,   263,   273,   234,   333,   358,   359,   287,   288,
+     261,   346,   146,   347,   348,   265,   351,   289,   290,   275,
+     153,   295,   296,   162,   342,   281,   282,   315,   321,   336,
+     324,   329,   355,   201,   202,   203,   204,   205,   206,   207,
+     208,   209,   210,   211,   361,   362,    66,   334,   335,     1,
+     327,   146,   352,     2,     3,   353,   357,     4,     5,   360,
+     297,   299,     6,     7,   298,     8,     9,    10,   300,   302,
+     160,   165,    11,    12,    13,    14,   318,   156,    15,    16,
+     252,    17,    18,   236,    19,    20,    21,    22,    23,   314,
+      24,    25,    26,   349,    67,     0,     0,     0,     0,     0,
+      27,     0,     0,     0,     0,     0,     0,     0,     0,    86,
+      87,    88,    89,     2,     3,    90,    91,     4,     5,    92,
+      93,    94,     6,     7,     0,     8,     9,    10,    95,    96,
+      97,     0,    11,    12,    13,    14,    28,    98,    15,    16,
+      99,    17,    18,   100,    19,    20,    21,    22,    23,   101,
+      24,    25,    26,     0,     0,   102,    58,   103,     0,     0,
+     104,     0,     0,     0,     0,   105,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,   106,
+     107,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+     108,     0,   109,     0,   110,   111,   112,    86,    87,    88,
       89,     2,     3,    90,    91,     4,     5,    92,    93,    94,
        6,     7,     0,     8,     9,    10,    95,    96,    97,     0,
       11,    12,    13,    14,     0,    98,    15,    16,    99,    17,
       18,   100,    19,    20,    21,    22,    23,   101,    24,    25,
-      26,     0,     0,   102,    58,   232,     0,     0,   104,     0,
+      26,     0,     0,   102,    58,   235,     0,     0,   104,     0,
        0,     0,     0,   105,     0,     0,     0,     0,     0,     0,
-       0,   148,    87,    88,    89,     2,     0,   106,   107,     4,
-       5,     0,     0,     0,     6,     7,     0,     8,   108,    10,
-     109,     0,     0,     0,    11,    12,    13,     0,     0,     0,
-      15,    16,    99,     0,    18,     0,     0,    20,    21,    22,
-      23,     0,    24,    25,    26,     0,     0,     0,     0,     0,
+       0,   151,    87,    88,    89,     0,     0,   106,   107,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,   108,     0,
+     109,     0,   110,   111,   112,   151,    87,    88,    89,     2,
+       0,     0,    99,     4,     5,     0,     0,     0,     6,     7,
+       0,     8,     0,    10,     0,     0,     0,   183,    11,    12,
+      13,     0,   104,     0,    15,    16,    99,   105,    18,     0,
+       0,    20,    21,    22,    23,     0,    24,    25,    26,     0,
+       0,   106,   107,     0,     0,     0,   104,     0,     0,     0,
+       0,   105,   108,     0,   109,     0,   110,   111,   112,     0,
+       0,     0,     0,     0,     0,   106,   107,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,   108,     0,   109,     1,
+     110,   111,   112,     2,     3,     0,     0,     4,     5,     0,
+       0,     0,     6,     7,     0,     8,     9,    10,     0,     0,
+       0,     0,    11,    12,    13,    14,     0,     0,    15,    16,
+       0,    17,    18,     0,    19,    20,    21,    22,    23,     0,
+      24,    25,    26,     0,     0,     0,     0,     0,     0,     0,
+     239,   305,   240,     0,     0,     1,     0,     0,     0,     2,
+       3,     0,     0,     4,     5,     0,     0,     0,     6,     7,
+       0,     8,     9,    10,     0,     0,     0,     0,    11,    12,
+      13,    14,     0,     0,    15,    16,    28,    17,    18,     0,
+      19,    20,    21,    22,    23,     0,    24,    25,    26,     0,
+       0,    86,    87,    88,    89,     0,    27,    90,    91,     0,
+       0,    92,    93,    94,     0,     0,     0,     0,     0,     0,
+      95,    96,    97,     0,     0,     0,     0,     0,     0,    98,
+       0,     0,    99,     0,     0,   100,     0,     0,     0,     0,
+       0,   101,    28,     0,     0,     0,     0,   102,    58,   237,
        0,     0,   104,     0,     0,     0,     0,   105,     0,     0,
-       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,   106,   107,     0,     0,     0,     2,     3,     0,     0,
-       4,     5,   108,     0,   109,     6,     7,     0,     8,     9,
+       0,     0,     0,   151,    87,    88,    89,     0,     0,     0,
+       0,   106,   107,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,   108,     0,   109,     0,   110,   111,   112,    86,
+      87,    88,    89,     0,    99,    90,    91,     0,     0,    92,
+      93,    94,     0,     0,     0,     0,     0,     0,    95,    96,
+      97,     0,     0,     0,   104,   277,     0,    98,     0,   105,
+      99,     0,     0,   100,     0,     0,     0,     0,     0,   101,
+       0,     0,     0,   106,   107,   102,    58,   304,     0,     0,
+     104,     0,     0,     0,   108,   105,   109,     0,   110,   111,
+     112,     0,     0,     0,     0,     0,     0,     0,     0,   106,
+     107,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+     108,     0,   109,     0,   110,   111,   112,    86,    87,    88,
+      89,     0,     0,    90,    91,     0,     0,    92,    93,    94,
+       0,     0,     0,     0,     0,     0,    95,    96,    97,     0,
+       0,     0,     0,     0,     0,    98,     0,     0,    99,     0,
+       0,   100,     0,     0,     0,     0,     0,   101,   151,    87,
+      88,    89,     0,   102,    58,     0,     0,     0,   104,     0,
+       0,     0,     0,   105,     0,     0,   151,    87,    88,    89,
+       0,     0,     0,     0,     0,     0,     0,   106,   107,    99,
+       0,     0,     0,     0,     0,     0,     0,     0,   108,     0,
+     109,     0,   110,   111,   112,   161,   341,    99,     0,   104,
+       0,     0,     0,     0,   105,     0,     0,   151,    87,    88,
+      89,     0,     0,   161,   363,     0,     0,   104,   106,   107,
+       0,     0,   105,     0,     0,   151,    87,    88,    89,   108,
+       0,   109,     0,   110,   111,   112,   106,   107,    99,     0,
+       0,     0,     0,     0,     0,     0,     0,   108,     0,   109,
+       0,   110,   111,   112,     0,     0,    99,     0,   104,     0,
+       0,   152,     0,   105,     0,     0,     0,   151,    87,    88,
+      89,     0,   161,     0,     0,     0,   104,   106,   107,     0,
+       0,   105,     0,     0,     0,     0,     0,     0,   108,     0,
+     109,     0,   110,   111,   112,   106,   107,     0,    99,     0,
+       0,     0,     0,     0,     0,     0,   108,     0,   109,     0,
+     110,   111,   112,   102,   151,    87,    88,    89,   104,     0,
+       0,     0,     0,   105,     0,     0,     0,     0,     0,     0,
+       0,     0,   151,    87,    88,    89,     0,   106,   107,     0,
+     151,    87,    88,    89,     0,    99,     0,     0,   108,     0,
+     109,     0,   110,   111,   112,     0,     0,     0,   151,    87,
+      88,    89,     0,    99,     0,   104,     0,     0,   308,     0,
+     105,    99,     0,     0,     0,     0,     0,     0,     0,   327,
+       0,     0,     0,   104,   106,   107,     0,     0,   105,    99,
+       0,   104,     0,     0,   339,   108,   105,   109,     0,   110,
+     111,   112,   106,   107,   151,    87,    88,    89,     0,   104,
+     106,   107,     0,   108,   105,   109,     0,   110,   111,   112,
+       0,   108,     0,   109,     0,   110,   111,   112,   106,   107,
+     151,    87,    88,    89,     0,    99,     0,     0,     0,   108,
+       0,   109,     0,   110,   111,   112,     0,     0,   151,    87,
+      88,    89,     0,     0,     0,   104,   344,     0,     0,     0,
+     105,    99,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,   106,   107,     0,     0,     0,    99,
+       0,   185,     0,     0,     0,   108,   105,   109,     0,   110,
+     111,   112,     0,     0,     0,     0,     0,     0,     0,   192,
+     106,   107,     0,     0,   105,     0,     0,     0,     0,     0,
+       0,   108,     0,   109,     0,   110,   111,   112,   106,   107,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,   108,
+       0,   109,     0,   110,   111,   112,     2,     3,     0,     0,
+       4,     5,     0,     0,     0,     6,     7,     0,     8,     9,
       10,     0,     0,     0,     0,    11,    12,    13,    14,     0,
        0,    15,    16,     0,    17,    18,     0,    19,    20,    21,
-      22,    23,     0,    24,    25,    26,     0,     0,     0,     0,
-       0,     0,     0,   269,   302,   237,    86,    87,    88,    89,
-       0,     0,    90,    91,     0,     0,    92,    93,    94,     0,
-       0,     0,     0,     0,     0,    95,    96,    97,     0,     0,
-       0,     0,     0,     0,    98,     0,     0,    99,     0,    28,
-     100,     0,     0,     0,     0,     0,   101,     0,     0,     0,
-       0,     0,   102,    58,   234,     0,     0,   104,     0,     0,
-       0,     0,   105,    86,    87,    88,    89,     0,     0,    90,
-      91,     0,     0,    92,    93,    94,   106,   107,     0,     0,
-       0,     0,    95,    96,    97,     0,     0,   108,     0,   109,
-       0,    98,     0,     0,    99,     0,     0,   100,     0,     0,
-       0,     0,     0,   101,     0,     0,     0,     0,     0,   102,
-      58,   301,     0,     0,   104,     0,     0,     0,     0,   105,
-      86,    87,    88,    89,     0,     0,    90,    91,     0,     0,
-      92,    93,    94,   106,   107,     0,     0,     0,     0,    95,
-      96,    97,     0,     0,   108,     0,   109,     0,    98,     0,
-       0,    99,     0,     0,   100,     0,     0,     0,     0,     0,
-     101,   148,    87,    88,    89,     0,   102,    58,     0,     0,
-       0,   104,     0,     0,     0,     0,   105,     0,     0,   148,
-      87,    88,    89,   148,    87,    88,    89,     0,     0,     0,
-     106,   107,    99,     0,     0,     0,     0,     0,     0,     0,
-       0,   108,     0,   109,     0,     0,     0,     0,   158,   338,
-      99,     0,   104,     0,    99,     0,     0,   105,     0,     0,
-     148,    87,    88,    89,     0,     0,   158,   360,     0,     0,
-     104,   106,   107,     0,   104,   105,     0,   149,     0,   105,
-       0,     0,   108,     0,   109,     0,     0,     0,     0,   106,
-     107,    99,     0,   106,   107,     0,   148,    87,    88,    89,
-     108,     0,   109,     0,   108,     0,   109,   158,     0,     0,
-       0,   104,     0,     0,     0,     0,   105,   148,    87,    88,
-      89,     0,     0,     0,     0,     0,     0,    99,     0,     0,
-     106,   107,     0,   148,    87,    88,    89,     0,     0,     0,
-       0,   108,   180,   109,     0,     0,     0,   104,    99,     0,
-       0,     0,   105,     0,     0,   148,    87,    88,    89,     0,
-       0,     0,     0,   102,    99,     0,   106,   107,   104,     0,
-       0,     0,     0,   105,     0,     0,     0,   108,     0,   109,
-       0,     0,     0,     0,   104,   274,    99,   106,   107,   105,
-     148,    87,    88,    89,     0,     0,     0,     0,   108,     0,
-     109,     0,     0,   106,   107,     0,   104,     0,     0,   305,
-       0,   105,     0,     0,   108,     0,   109,     0,     0,     0,
-       0,    99,     0,     0,     0,   106,   107,   148,    87,    88,
-      89,   148,    87,    88,    89,     0,   108,   324,   109,     0,
-       0,   104,     0,     0,     0,     0,   105,     0,   148,    87,
-      88,    89,     0,     0,     0,     0,     0,     0,    99,     0,
-     106,   107,    99,     0,   148,    87,    88,    89,     0,     0,
-       0,   108,     0,   109,     0,     0,     0,     0,   104,    99,
-       0,   336,   104,   105,     0,     0,     0,   105,     0,     0,
-     148,    87,    88,    89,     0,    99,     0,   106,   107,   104,
-     341,   106,   107,     0,   105,     0,     0,     0,   108,     0,
-     109,     0,   108,     0,   109,   182,     0,     0,   106,   107,
-     105,    99,     0,     0,     0,     0,     0,     0,     0,   108,
-       0,   109,     0,     0,   106,   107,     0,     0,     0,     0,
-       0,   189,     0,     0,     0,   108,   105,   109,     0,     0,
-       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-     106,   107,     0,     0,     0,     2,     3,     0,     0,     4,
-       5,   108,     0,   109,     6,     7,     0,     8,     9,    10,
-       0,     0,     0,     0,    11,    12,    13,    14,     0,     0,
-      15,    16,     0,    17,    18,     0,    19,    20,    21,    22,
-      23,     0,    24,    25,    26,     0,   141,     0,    58,     0,
-       2,     3,     0,     0,     4,     5,     0,     0,    77,     6,
+      22,    23,     0,    24,    25,    26,     0,     2,     3,     0,
+       0,     4,     5,   272,   305,   240,     6,     7,     0,     8,
+       9,    10,     0,     0,     0,     0,    11,    12,    13,    14,
+       0,     0,    15,    16,     0,    17,    18,     0,    19,    20,
+      21,    22,    23,     0,    24,    25,    26,     0,   144,    28,
+      58,     0,     2,     3,     0,     0,     4,     5,     0,     0,
+      77,     6,     7,     0,     8,     9,    10,     0,     0,     0,
+       0,    11,    12,    13,    14,     0,     0,    15,    16,     0,
+      17,    18,     0,    19,    20,    21,    22,    23,     0,    24,
+      25,    26,     2,     3,     0,     0,     4,     5,     0,     0,
+     145,     6,     7,     0,     8,     9,    10,     0,     0,     0,
+       0,    11,    12,    13,    14,     0,     0,    15,    16,     0,
+      17,    18,     0,    19,    20,    21,    22,    23,     0,    24,
+      25,    26,     2,     0,     0,     0,     4,     5,     0,     0,
+     337,     6,     7,     0,     8,     0,    10,     0,     0,     0,
+       0,    11,    12,    13,     0,     0,     0,    15,    16,     0,
+       0,    18,     0,     0,    20,    21,    22,    23,     2,    24,
+      25,    26,     4,     5,     0,     0,   167,     6,     7,     0,
+       8,     0,    10,     0,     0,     0,     0,    11,    12,    13,
+       0,     0,     0,    15,    16,     0,     0,    18,     0,     0,
+      20,    21,    22,    23,     0,    24,    25,    26,     0,     2,
+       3,     0,   255,     4,     5,     0,     0,     0,     6,     7,
+       0,     8,     9,    10,     0,     0,     0,     0,    11,    12,
+      13,    14,     0,     0,    15,    16,     0,    17,    18,     0,
+      19,    20,    21,    22,    23,     0,    24,    25,    26,     2,
+       3,     0,    58,     4,     5,     0,     0,     0,     6,     7,
+       0,     8,     9,    10,     0,     0,     0,     0,    11,    12,
+      13,    14,     0,     0,    15,    16,     0,    17,    18,     0,
+      19,    20,    21,    22,    23,     0,    24,    25,    26,   313,
+       2,     3,     0,     0,     4,     5,     0,     0,     0,     6,
        7,     0,     8,     9,    10,     0,     0,     0,     0,    11,
       12,    13,    14,     0,     0,    15,    16,     0,    17,    18,
-       0,    19,    20,    21,    22,    23,     0,    24,    25,    26,
-       2,     3,     0,     0,     4,     5,     0,     0,   142,     6,
-       7,     0,     8,     9,    10,     0,     0,     0,     0,    11,
-      12,    13,    14,     0,     0,    15,    16,     0,    17,    18,
-       0,    19,    20,    21,    22,    23,     0,    24,    25,    26,
-       2,     0,     0,     0,     4,     5,     0,     0,   334,     6,
-       7,     0,     8,     0,    10,     0,     0,     0,     0,    11,
-      12,    13,     0,     0,     0,    15,    16,     0,     0,    18,
-       0,     0,    20,    21,    22,    23,     2,    24,    25,    26,
-       4,     5,     0,     0,   164,     6,     7,     0,     8,     0,
+       0,    19,    20,    21,    22,    23,     2,    24,    25,    26,
+       4,     5,     0,     0,     0,     6,     7,     0,     8,     0,
       10,     0,     0,     0,     0,    11,    12,    13,     0,     0,
        0,    15,    16,     0,     0,    18,     0,     0,    20,    21,
-      22,    23,     0,    24,    25,    26,     0,     2,     3,     0,
-     252,     4,     5,     0,     0,     0,     6,     7,     0,     8,
-       9,    10,     0,     0,     0,     0,    11,    12,    13,    14,
-       0,     0,    15,    16,     0,    17,    18,     0,    19,    20,
-      21,    22,    23,     0,    24,    25,    26,     2,     3,     0,
-      58,     4,     5,     0,     0,     0,     6,     7,     0,     8,
-       9,    10,     0,     0,     0,     0,    11,    12,    13,    14,
-       0,     0,    15,    16,     0,    17,    18,     0,    19,    20,
-      21,    22,    23,     0,    24,    25,    26,   310,     2,     3,
-       0,     0,     4,     5,     0,     0,     0,     6,     7,     0,
-       8,     9,    10,     0,     0,     0,     0,    11,    12,    13,
-      14,     0,     0,    15,    16,     0,    17,    18,     0,    19,
-      20,    21,    22,    23,     2,    24,    25,    26,     4,     5,
-       0,     0,     0,     6,     7,     0,     8,     0,    10,     0,
-       0,     0,     0,    11,    12,    13,     0,     0,     0,    15,
-      16,     0,     0,    18,     0,     0,    20,    21,    22,    23,
-       0,    24,    25,    26
+      22,    23,     0,    24,    25,    26
   };
 
   const short
    Parser ::yycheck_[] =
   {
-       0,    77,    77,    39,    63,    27,     0,    64,    30,   177,
-      64,    82,   143,    50,    12,    28,     3,   239,     3,     3,
-      98,     3,     3,    54,     3,    56,   104,     3,    48,   114,
-       3,    31,    32,    52,    91,    48,    36,    91,    60,    58,
-      40,     3,    94,   182,    42,    99,    40,    91,   270,    54,
-     189,    56,   106,   107,    76,    52,   187,    77,    55,    90,
-     114,    50,    84,    63,    49,    55,    53,    54,    62,    54,
-      54,    50,    54,    54,    56,    56,    53,    50,    54,    51,
-      52,   133,   158,    52,    49,    79,    49,    52,    57,    52,
-      81,   162,    90,   261,    85,    49,    49,   154,    52,    52,
-     154,   179,    60,    90,   182,    90,   184,   185,    90,   166,
-     154,   189,   166,   104,    90,   193,   192,    52,    49,   171,
-      55,   143,   166,   175,    49,    28,   211,   212,   213,    52,
-     143,    53,    55,   209,    78,    79,    80,    81,   132,   218,
-     219,   220,   221,    52,    52,    48,    55,    55,    52,    54,
-     228,    55,    54,    56,    56,   231,     3,   211,   212,   213,
-     214,   215,   216,   217,   218,   219,   220,   221,   222,   223,
-     224,   225,   226,   227,   187,   229,    54,    80,    81,    82,
-     237,   233,    85,   237,    56,    52,    52,   272,    55,    55,
-      54,   182,    37,   237,    90,    91,    92,    54,   189,   256,
-      86,   104,   256,   239,    88,    89,   258,    52,    80,    81,
-      82,    85,   256,    85,   236,    71,    72,    62,   272,    54,
-      60,    56,    87,   236,    55,    54,    76,    56,    52,    58,
-      82,    83,   104,   255,    79,    57,   236,    53,   314,   314,
-     318,   319,    53,   243,    73,    74,    75,    43,   324,   308,
-      49,   327,   309,    51,    52,   309,   269,    51,    52,   162,
-      52,    53,    51,    52,    55,   309,   214,   215,   320,   269,
-     322,   323,     3,   330,   216,   217,   330,   222,   223,   182,
-     356,   356,     3,     3,    54,    57,   189,    55,    55,   341,
-     162,    55,    55,    50,    55,    57,    18,    49,   224,   226,
-     229,   353,   354,   227,     0,   225,    80,     3,   308,   255,
-     182,     7,     8,    68,   156,    11,    12,   189,    76,   132,
-      16,    17,   243,    19,    20,    21,    40,    -1,   324,    -1,
-      26,    27,    28,    29,    -1,    -1,    32,    33,    -1,    35,
-      36,    -1,    38,    39,    40,    41,    42,     3,    44,    45,
-      46,     7,     8,    -1,    -1,    11,    12,    -1,    54,    -1,
-      16,    17,    -1,    19,    20,    21,    -1,    -1,    -1,    -1,
-      26,    27,    28,    29,    -1,    -1,    32,    33,    -1,    35,
-      36,    -1,    38,    39,    40,    41,    42,    -1,    44,    45,
-      46,    -1,    -1,    -1,    90,    -1,    -1,    -1,    54,    55,
-      56,    -1,    -1,     3,    -1,    -1,    -1,     7,     8,    -1,
-      -1,    11,    12,    -1,    -1,    -1,    16,    17,    -1,    19,
-      20,    21,    -1,    -1,    -1,    -1,    26,    27,    28,    29,
-      -1,    -1,    32,    33,    90,    35,    36,    -1,    38,    39,
-      40,    41,    42,    -1,    44,    45,    46,    -1,    -1,    -1,
-      -1,    -1,    -1,    -1,    54,    -1,    -1,    -1,    -1,    -1,
-      -1,    -1,    -1,     3,     4,     5,     6,     7,     8,     9,
-      10,    11,    12,    13,    14,    15,    16,    17,    -1,    19,
-      20,    21,    22,    23,    24,    -1,    26,    27,    28,    29,
-      90,    31,    32,    33,    34,    35,    36,    37,    38,    39,
-      40,    41,    42,    43,    44,    45,    46,    -1,    -1,    49,
-      50,    51,    -1,    -1,    54,    -1,    -1,    -1,    -1,    59,
-      -1,    60,    61,    62,    63,    64,    65,    66,    67,    68,
-      69,    70,    -1,    73,    74,    -1,    -1,    -1,    -1,    -1,
-      -1,    -1,    -1,    -1,    84,    -1,    86,     3,     4,     5,
+       0,    77,    77,    82,    63,    39,     3,    64,    98,    50,
+       0,    64,    27,   242,   104,    30,     3,     3,     3,    28,
+      52,   180,   146,    56,     3,    57,     3,     3,   185,    12,
+     117,    31,    32,     3,    91,   192,    36,    91,    91,    48,
+      40,    55,    94,     3,   273,    60,    99,    80,    81,    82,
+      40,    50,    85,   106,   107,    60,    53,    54,    54,    42,
+      56,    76,    53,    63,   117,    50,   190,    54,    52,    84,
+      49,   104,    62,    53,    58,    54,    49,    54,    54,    56,
+      50,    28,    51,    52,   136,   161,   165,    81,    54,    79,
+      56,    85,   182,    90,    54,   185,    56,   187,   188,    49,
+     157,    48,   192,   157,   157,   264,   196,    90,    54,    56,
+     104,    90,   169,    90,    90,   169,   169,    48,    52,   195,
+      49,    55,   174,    52,    90,     3,   178,   214,   215,   216,
+      54,   146,   165,    80,    81,    82,   212,   146,    85,    49,
+      49,   231,    52,    52,    49,   135,    77,    52,    78,    79,
+      80,    81,   185,   221,   222,   223,   224,   104,   234,   192,
+      54,   214,   215,   216,   217,   218,   219,   220,   221,   222,
+     223,   224,   225,   226,   227,   228,   229,   230,    37,   232,
+      54,   190,    52,   240,   236,    55,   240,   240,   275,    88,
+      89,   185,    54,    52,    56,    86,    58,    52,   192,    85,
+      55,    52,   259,    62,    55,   259,   259,    52,   242,   261,
+      55,    73,    74,    75,    52,    87,    52,    55,   165,    55,
+      79,    55,   275,    52,   239,    60,    55,    90,    91,    92,
+     239,   321,   322,    54,    54,    56,    56,    76,   185,   239,
+      52,   317,   317,   258,    57,   192,   246,    71,    72,    82,
+      83,   327,   311,    53,   330,   312,    51,    52,   312,   312,
+      51,    52,    43,   272,    52,    53,    51,    52,   217,   218,
+      53,   323,   272,   325,   326,    49,   333,   219,   220,    55,
+     333,   225,   226,   359,   359,     3,     3,     3,    54,    57,
+      55,    55,   344,    60,    61,    62,    63,    64,    65,    66,
+      67,    68,    69,    70,   356,   357,     0,    55,    55,     3,
+      50,   311,    55,     7,     8,    57,    18,    11,    12,    49,
+     227,   229,    16,    17,   228,    19,    20,    21,   230,   232,
+      76,    80,    26,    27,    28,    29,   258,    68,    32,    33,
+     159,    35,    36,   135,    38,    39,    40,    41,    42,   246,
+      44,    45,    46,   327,    40,    -1,    -1,    -1,    -1,    -1,
+      54,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,     3,
+       4,     5,     6,     7,     8,     9,    10,    11,    12,    13,
+      14,    15,    16,    17,    -1,    19,    20,    21,    22,    23,
+      24,    -1,    26,    27,    28,    29,    90,    31,    32,    33,
+      34,    35,    36,    37,    38,    39,    40,    41,    42,    43,
+      44,    45,    46,    -1,    -1,    49,    50,    51,    -1,    -1,
+      54,    -1,    -1,    -1,    -1,    59,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    73,
+      74,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      84,    -1,    86,    -1,    88,    89,    90,     3,     4,     5,
        6,     7,     8,     9,    10,    11,    12,    13,    14,    15,
       16,    17,    -1,    19,    20,    21,    22,    23,    24,    -1,
       26,    27,    28,    29,    -1,    31,    32,    33,    34,    35,
       36,    37,    38,    39,    40,    41,    42,    43,    44,    45,
       46,    -1,    -1,    49,    50,    51,    -1,    -1,    54,    -1,
       -1,    -1,    -1,    59,    -1,    -1,    -1,    -1,    -1,    -1,
-      -1,     3,     4,     5,     6,     7,    -1,    73,    74,    11,
-      12,    -1,    -1,    -1,    16,    17,    -1,    19,    84,    21,
-      86,    -1,    -1,    -1,    26,    27,    28,    -1,    -1,    -1,
-      32,    33,    34,    -1,    36,    -1,    -1,    39,    40,    41,
-      42,    -1,    44,    45,    46,    -1,    -1,    -1,    -1,    -1,
+      -1,     3,     4,     5,     6,    -1,    -1,    73,    74,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    84,    -1,
+      86,    -1,    88,    89,    90,     3,     4,     5,     6,     7,
+      -1,    -1,    34,    11,    12,    -1,    -1,    -1,    16,    17,
+      -1,    19,    -1,    21,    -1,    -1,    -1,    49,    26,    27,
+      28,    -1,    54,    -1,    32,    33,    34,    59,    36,    -1,
+      -1,    39,    40,    41,    42,    -1,    44,    45,    46,    -1,
+      -1,    73,    74,    -1,    -1,    -1,    54,    -1,    -1,    -1,
+      -1,    59,    84,    -1,    86,    -1,    88,    89,    90,    -1,
+      -1,    -1,    -1,    -1,    -1,    73,    74,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    84,    -1,    86,     3,
+      88,    89,    90,     7,     8,    -1,    -1,    11,    12,    -1,
+      -1,    -1,    16,    17,    -1,    19,    20,    21,    -1,    -1,
+      -1,    -1,    26,    27,    28,    29,    -1,    -1,    32,    33,
+      -1,    35,    36,    -1,    38,    39,    40,    41,    42,    -1,
+      44,    45,    46,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      54,    55,    56,    -1,    -1,     3,    -1,    -1,    -1,     7,
+       8,    -1,    -1,    11,    12,    -1,    -1,    -1,    16,    17,
+      -1,    19,    20,    21,    -1,    -1,    -1,    -1,    26,    27,
+      28,    29,    -1,    -1,    32,    33,    90,    35,    36,    -1,
+      38,    39,    40,    41,    42,    -1,    44,    45,    46,    -1,
+      -1,     3,     4,     5,     6,    -1,    54,     9,    10,    -1,
+      -1,    13,    14,    15,    -1,    -1,    -1,    -1,    -1,    -1,
+      22,    23,    24,    -1,    -1,    -1,    -1,    -1,    -1,    31,
+      -1,    -1,    34,    -1,    -1,    37,    -1,    -1,    -1,    -1,
+      -1,    43,    90,    -1,    -1,    -1,    -1,    49,    50,    51,
       -1,    -1,    54,    -1,    -1,    -1,    -1,    59,    -1,    -1,
-      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
-      -1,    73,    74,    -1,    -1,    -1,     7,     8,    -1,    -1,
-      11,    12,    84,    -1,    86,    16,    17,    -1,    19,    20,
+      -1,    -1,    -1,     3,     4,     5,     6,    -1,    -1,    -1,
+      -1,    73,    74,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    84,    -1,    86,    -1,    88,    89,    90,     3,
+       4,     5,     6,    -1,    34,     9,    10,    -1,    -1,    13,
+      14,    15,    -1,    -1,    -1,    -1,    -1,    -1,    22,    23,
+      24,    -1,    -1,    -1,    54,    55,    -1,    31,    -1,    59,
+      34,    -1,    -1,    37,    -1,    -1,    -1,    -1,    -1,    43,
+      -1,    -1,    -1,    73,    74,    49,    50,    51,    -1,    -1,
+      54,    -1,    -1,    -1,    84,    59,    86,    -1,    88,    89,
+      90,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    73,
+      74,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      84,    -1,    86,    -1,    88,    89,    90,     3,     4,     5,
+       6,    -1,    -1,     9,    10,    -1,    -1,    13,    14,    15,
+      -1,    -1,    -1,    -1,    -1,    -1,    22,    23,    24,    -1,
+      -1,    -1,    -1,    -1,    -1,    31,    -1,    -1,    34,    -1,
+      -1,    37,    -1,    -1,    -1,    -1,    -1,    43,     3,     4,
+       5,     6,    -1,    49,    50,    -1,    -1,    -1,    54,    -1,
+      -1,    -1,    -1,    59,    -1,    -1,     3,     4,     5,     6,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    73,    74,    34,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    84,    -1,
+      86,    -1,    88,    89,    90,    50,    51,    34,    -1,    54,
+      -1,    -1,    -1,    -1,    59,    -1,    -1,     3,     4,     5,
+       6,    -1,    -1,    50,    51,    -1,    -1,    54,    73,    74,
+      -1,    -1,    59,    -1,    -1,     3,     4,     5,     6,    84,
+      -1,    86,    -1,    88,    89,    90,    73,    74,    34,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    84,    -1,    86,
+      -1,    88,    89,    90,    -1,    -1,    34,    -1,    54,    -1,
+      -1,    57,    -1,    59,    -1,    -1,    -1,     3,     4,     5,
+       6,    -1,    50,    -1,    -1,    -1,    54,    73,    74,    -1,
+      -1,    59,    -1,    -1,    -1,    -1,    -1,    -1,    84,    -1,
+      86,    -1,    88,    89,    90,    73,    74,    -1,    34,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    84,    -1,    86,    -1,
+      88,    89,    90,    49,     3,     4,     5,     6,    54,    -1,
+      -1,    -1,    -1,    59,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,     3,     4,     5,     6,    -1,    73,    74,    -1,
+       3,     4,     5,     6,    -1,    34,    -1,    -1,    84,    -1,
+      86,    -1,    88,    89,    90,    -1,    -1,    -1,     3,     4,
+       5,     6,    -1,    34,    -1,    54,    -1,    -1,    57,    -1,
+      59,    34,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    50,
+      -1,    -1,    -1,    54,    73,    74,    -1,    -1,    59,    34,
+      -1,    54,    -1,    -1,    57,    84,    59,    86,    -1,    88,
+      89,    90,    73,    74,     3,     4,     5,     6,    -1,    54,
+      73,    74,    -1,    84,    59,    86,    -1,    88,    89,    90,
+      -1,    84,    -1,    86,    -1,    88,    89,    90,    73,    74,
+       3,     4,     5,     6,    -1,    34,    -1,    -1,    -1,    84,
+      -1,    86,    -1,    88,    89,    90,    -1,    -1,     3,     4,
+       5,     6,    -1,    -1,    -1,    54,    55,    -1,    -1,    -1,
+      59,    34,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    73,    74,    -1,    -1,    -1,    34,
+      -1,    54,    -1,    -1,    -1,    84,    59,    86,    -1,    88,
+      89,    90,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    54,
+      73,    74,    -1,    -1,    59,    -1,    -1,    -1,    -1,    -1,
+      -1,    84,    -1,    86,    -1,    88,    89,    90,    73,    74,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    84,
+      -1,    86,    -1,    88,    89,    90,     7,     8,    -1,    -1,
+      11,    12,    -1,    -1,    -1,    16,    17,    -1,    19,    20,
       21,    -1,    -1,    -1,    -1,    26,    27,    28,    29,    -1,
       -1,    32,    33,    -1,    35,    36,    -1,    38,    39,    40,
-      41,    42,    -1,    44,    45,    46,    -1,    -1,    -1,    -1,
-      -1,    -1,    -1,    54,    55,    56,     3,     4,     5,     6,
-      -1,    -1,     9,    10,    -1,    -1,    13,    14,    15,    -1,
-      -1,    -1,    -1,    -1,    -1,    22,    23,    24,    -1,    -1,
-      -1,    -1,    -1,    -1,    31,    -1,    -1,    34,    -1,    90,
-      37,    -1,    -1,    -1,    -1,    -1,    43,    -1,    -1,    -1,
-      -1,    -1,    49,    50,    51,    -1,    -1,    54,    -1,    -1,
-      -1,    -1,    59,     3,     4,     5,     6,    -1,    -1,     9,
-      10,    -1,    -1,    13,    14,    15,    73,    74,    -1,    -1,
-      -1,    -1,    22,    23,    24,    -1,    -1,    84,    -1,    86,
-      -1,    31,    -1,    -1,    34,    -1,    -1,    37,    -1,    -1,
-      -1,    -1,    -1,    43,    -1,    -1,    -1,    -1,    -1,    49,
-      50,    51,    -1,    -1,    54,    -1,    -1,    -1,    -1,    59,
-       3,     4,     5,     6,    -1,    -1,     9,    10,    -1,    -1,
-      13,    14,    15,    73,    74,    -1,    -1,    -1,    -1,    22,
-      23,    24,    -1,    -1,    84,    -1,    86,    -1,    31,    -1,
-      -1,    34,    -1,    -1,    37,    -1,    -1,    -1,    -1,    -1,
-      43,     3,     4,     5,     6,    -1,    49,    50,    -1,    -1,
-      -1,    54,    -1,    -1,    -1,    -1,    59,    -1,    -1,     3,
-       4,     5,     6,     3,     4,     5,     6,    -1,    -1,    -1,
-      73,    74,    34,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
-      -1,    84,    -1,    86,    -1,    -1,    -1,    -1,    50,    51,
-      34,    -1,    54,    -1,    34,    -1,    -1,    59,    -1,    -1,
-       3,     4,     5,     6,    -1,    -1,    50,    51,    -1,    -1,
-      54,    73,    74,    -1,    54,    59,    -1,    57,    -1,    59,
-      -1,    -1,    84,    -1,    86,    -1,    -1,    -1,    -1,    73,
-      74,    34,    -1,    73,    74,    -1,     3,     4,     5,     6,
-      84,    -1,    86,    -1,    84,    -1,    86,    50,    -1,    -1,
-      -1,    54,    -1,    -1,    -1,    -1,    59,     3,     4,     5,
-       6,    -1,    -1,    -1,    -1,    -1,    -1,    34,    -1,    -1,
-      73,    74,    -1,     3,     4,     5,     6,    -1,    -1,    -1,
-      -1,    84,    49,    86,    -1,    -1,    -1,    54,    34,    -1,
-      -1,    -1,    59,    -1,    -1,     3,     4,     5,     6,    -1,
-      -1,    -1,    -1,    49,    34,    -1,    73,    74,    54,    -1,
-      -1,    -1,    -1,    59,    -1,    -1,    -1,    84,    -1,    86,
-      -1,    -1,    -1,    -1,    54,    55,    34,    73,    74,    59,
-       3,     4,     5,     6,    -1,    -1,    -1,    -1,    84,    -1,
-      86,    -1,    -1,    73,    74,    -1,    54,    -1,    -1,    57,
-      -1,    59,    -1,    -1,    84,    -1,    86,    -1,    -1,    -1,
-      -1,    34,    -1,    -1,    -1,    73,    74,     3,     4,     5,
-       6,     3,     4,     5,     6,    -1,    84,    50,    86,    -1,
-      -1,    54,    -1,    -1,    -1,    -1,    59,    -1,     3,     4,
-       5,     6,    -1,    -1,    -1,    -1,    -1,    -1,    34,    -1,
-      73,    74,    34,    -1,     3,     4,     5,     6,    -1,    -1,
-      -1,    84,    -1,    86,    -1,    -1,    -1,    -1,    54,    34,
-      -1,    57,    54,    59,    -1,    -1,    -1,    59,    -1,    -1,
-       3,     4,     5,     6,    -1,    34,    -1,    73,    74,    54,
-      55,    73,    74,    -1,    59,    -1,    -1,    -1,    84,    -1,
-      86,    -1,    84,    -1,    86,    54,    -1,    -1,    73,    74,
-      59,    34,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    84,
-      -1,    86,    -1,    -1,    73,    74,    -1,    -1,    -1,    -1,
-      -1,    54,    -1,    -1,    -1,    84,    59,    86,    -1,    -1,
-      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
-      73,    74,    -1,    -1,    -1,     7,     8,    -1,    -1,    11,
-      12,    84,    -1,    86,    16,    17,    -1,    19,    20,    21,
-      -1,    -1,    -1,    -1,    26,    27,    28,    29,    -1,    -1,
-      32,    33,    -1,    35,    36,    -1,    38,    39,    40,    41,
-      42,    -1,    44,    45,    46,    -1,     3,    -1,    50,    -1,
-       7,     8,    -1,    -1,    11,    12,    -1,    -1,    60,    16,
+      41,    42,    -1,    44,    45,    46,    -1,     7,     8,    -1,
+      -1,    11,    12,    54,    55,    56,    16,    17,    -1,    19,
+      20,    21,    -1,    -1,    -1,    -1,    26,    27,    28,    29,
+      -1,    -1,    32,    33,    -1,    35,    36,    -1,    38,    39,
+      40,    41,    42,    -1,    44,    45,    46,    -1,     3,    90,
+      50,    -1,     7,     8,    -1,    -1,    11,    12,    -1,    -1,
+      60,    16,    17,    -1,    19,    20,    21,    -1,    -1,    -1,
+      -1,    26,    27,    28,    29,    -1,    -1,    32,    33,    -1,
+      35,    36,    -1,    38,    39,    40,    41,    42,    -1,    44,
+      45,    46,     7,     8,    -1,    -1,    11,    12,    -1,    -1,
+      55,    16,    17,    -1,    19,    20,    21,    -1,    -1,    -1,
+      -1,    26,    27,    28,    29,    -1,    -1,    32,    33,    -1,
+      35,    36,    -1,    38,    39,    40,    41,    42,    -1,    44,
+      45,    46,     7,    -1,    -1,    -1,    11,    12,    -1,    -1,
+      55,    16,    17,    -1,    19,    -1,    21,    -1,    -1,    -1,
+      -1,    26,    27,    28,    -1,    -1,    -1,    32,    33,    -1,
+      -1,    36,    -1,    -1,    39,    40,    41,    42,     7,    44,
+      45,    46,    11,    12,    -1,    -1,    51,    16,    17,    -1,
+      19,    -1,    21,    -1,    -1,    -1,    -1,    26,    27,    28,
+      -1,    -1,    -1,    32,    33,    -1,    -1,    36,    -1,    -1,
+      39,    40,    41,    42,    -1,    44,    45,    46,    -1,     7,
+       8,    -1,    51,    11,    12,    -1,    -1,    -1,    16,    17,
+      -1,    19,    20,    21,    -1,    -1,    -1,    -1,    26,    27,
+      28,    29,    -1,    -1,    32,    33,    -1,    35,    36,    -1,
+      38,    39,    40,    41,    42,    -1,    44,    45,    46,     7,
+       8,    -1,    50,    11,    12,    -1,    -1,    -1,    16,    17,
+      -1,    19,    20,    21,    -1,    -1,    -1,    -1,    26,    27,
+      28,    29,    -1,    -1,    32,    33,    -1,    35,    36,    -1,
+      38,    39,    40,    41,    42,    -1,    44,    45,    46,    47,
+       7,     8,    -1,    -1,    11,    12,    -1,    -1,    -1,    16,
       17,    -1,    19,    20,    21,    -1,    -1,    -1,    -1,    26,
       27,    28,    29,    -1,    -1,    32,    33,    -1,    35,    36,
-      -1,    38,    39,    40,    41,    42,    -1,    44,    45,    46,
-       7,     8,    -1,    -1,    11,    12,    -1,    -1,    55,    16,
-      17,    -1,    19,    20,    21,    -1,    -1,    -1,    -1,    26,
-      27,    28,    29,    -1,    -1,    32,    33,    -1,    35,    36,
-      -1,    38,    39,    40,    41,    42,    -1,    44,    45,    46,
-       7,    -1,    -1,    -1,    11,    12,    -1,    -1,    55,    16,
-      17,    -1,    19,    -1,    21,    -1,    -1,    -1,    -1,    26,
-      27,    28,    -1,    -1,    -1,    32,    33,    -1,    -1,    36,
-      -1,    -1,    39,    40,    41,    42,     7,    44,    45,    46,
-      11,    12,    -1,    -1,    51,    16,    17,    -1,    19,    -1,
+      -1,    38,    39,    40,    41,    42,     7,    44,    45,    46,
+      11,    12,    -1,    -1,    -1,    16,    17,    -1,    19,    -1,
       21,    -1,    -1,    -1,    -1,    26,    27,    28,    -1,    -1,
       -1,    32,    33,    -1,    -1,    36,    -1,    -1,    39,    40,
-      41,    42,    -1,    44,    45,    46,    -1,     7,     8,    -1,
-      51,    11,    12,    -1,    -1,    -1,    16,    17,    -1,    19,
-      20,    21,    -1,    -1,    -1,    -1,    26,    27,    28,    29,
-      -1,    -1,    32,    33,    -1,    35,    36,    -1,    38,    39,
-      40,    41,    42,    -1,    44,    45,    46,     7,     8,    -1,
-      50,    11,    12,    -1,    -1,    -1,    16,    17,    -1,    19,
-      20,    21,    -1,    -1,    -1,    -1,    26,    27,    28,    29,
-      -1,    -1,    32,    33,    -1,    35,    36,    -1,    38,    39,
-      40,    41,    42,    -1,    44,    45,    46,    47,     7,     8,
-      -1,    -1,    11,    12,    -1,    -1,    -1,    16,    17,    -1,
-      19,    20,    21,    -1,    -1,    -1,    -1,    26,    27,    28,
-      29,    -1,    -1,    32,    33,    -1,    35,    36,    -1,    38,
-      39,    40,    41,    42,     7,    44,    45,    46,    11,    12,
-      -1,    -1,    -1,    16,    17,    -1,    19,    -1,    21,    -1,
-      -1,    -1,    -1,    26,    27,    28,    -1,    -1,    -1,    32,
-      33,    -1,    -1,    36,    -1,    -1,    39,    40,    41,    42,
-      -1,    44,    45,    46
+      41,    42,    -1,    44,    45,    46
   };
 
   const unsigned char
@@ -4208,32 +4250,32 @@ namespace  WadeSpace  {
       50,   122,   125,   126,   127,   133,     3,     4,     5,     6,
        9,    10,    13,    14,    15,    22,    23,    24,    31,    34,
       37,    43,    49,    51,    54,    59,    73,    74,    84,    86,
-      95,    96,    97,    99,   100,   101,   102,   103,   104,   105,
-     106,   107,   108,   109,   110,   111,   112,   113,   115,   147,
-     148,   149,   150,   151,   152,   153,   154,   155,   134,   117,
-     149,     3,    55,   118,   138,   139,   140,   141,     3,    57,
-      99,   112,   116,   131,    60,    51,    52,   120,    50,   113,
-     145,   149,   125,   127,    51,   126,    53,   128,   129,   134,
-     127,    53,    49,   116,    49,    53,   147,    54,     3,    54,
-      49,   115,    54,    99,    54,    54,   115,   127,   142,    54,
-      99,    99,    54,    56,    58,    73,    74,    75,    60,    61,
-      62,    63,    64,    65,    66,    67,    68,    69,    70,   114,
-     101,    90,    91,    92,    88,    89,    71,    72,    78,    79,
-      80,    81,    82,    83,    86,    85,    87,    76,    48,    77,
-      49,    52,    51,   151,    51,   147,    54,    56,   134,   136,
-     143,   144,    55,    52,    52,    55,    57,    51,   116,   132,
-     145,   146,    51,   116,    49,    52,    53,   147,    53,   147,
-      43,   152,    49,   115,    49,   142,   115,   115,    55,    54,
-     136,   143,    55,   142,    55,    98,   113,   115,     3,     3,
-     113,   101,   101,   101,   102,   102,   103,   103,   104,   104,
-     104,   104,   105,   105,   106,   107,   108,   109,   115,   110,
-     113,    51,    55,   138,   143,    57,   116,   144,    54,    56,
-      47,   140,     3,    51,    52,   129,   116,   147,    54,   152,
-      55,    55,    55,    55,    50,   101,    55,    52,    55,    57,
-      53,    55,    55,    57,    55,   138,    57,   116,    51,   145,
-     115,    55,   115,   147,   147,   147,   146,   113,   112,    55,
-      57,    55,   147,    55,    18,    51,    52,    49,   147,   147,
-      51
+      88,    89,    90,    95,    96,    97,    99,   100,   101,   102,
+     103,   104,   105,   106,   107,   108,   109,   110,   111,   112,
+     113,   115,   147,   148,   149,   150,   151,   152,   153,   154,
+     155,   134,   117,   149,     3,    55,   118,   138,   139,   140,
+     141,     3,    57,    99,   112,   116,   131,    60,    51,    52,
+     120,    50,   113,   145,   149,   125,   127,    51,   126,    53,
+     128,   129,   134,   127,    53,    49,   116,    49,    53,   147,
+      54,     3,    54,    49,   115,    54,    99,    54,    54,   115,
+     127,   142,    54,    99,    99,    54,    56,    58,    73,    74,
+      75,    60,    61,    62,    63,    64,    65,    66,    67,    68,
+      69,    70,   114,   101,    90,    91,    92,    88,    89,    71,
+      72,    78,    79,    80,    81,    82,    83,    86,    85,    87,
+      76,    48,    77,    49,    52,    51,   151,    51,   147,    54,
+      56,   134,   136,   143,   144,    55,    52,    52,    55,    57,
+      51,   116,   132,   145,   146,    51,   116,    49,    52,    53,
+     147,    53,   147,    43,   152,    49,   115,    49,   142,   115,
+     115,    55,    54,   136,   143,    55,   142,    55,    98,   113,
+     115,     3,     3,   113,   101,   101,   101,   102,   102,   103,
+     103,   104,   104,   104,   104,   105,   105,   106,   107,   108,
+     109,   115,   110,   113,    51,    55,   138,   143,    57,   116,
+     144,    54,    56,    47,   140,     3,    51,    52,   129,   116,
+     147,    54,   152,    55,    55,    55,    55,    50,   101,    55,
+      52,    55,    57,    53,    55,    55,    57,    55,   138,    57,
+     116,    51,   145,   115,    55,   115,   147,   147,   147,   146,
+     113,   112,    55,    57,    55,   147,    55,    18,    51,    52,
+      49,   147,   147,    51
   };
 
   const unsigned char
@@ -4241,26 +4283,27 @@ namespace  WadeSpace  {
   {
        0,    94,    95,    95,    95,    96,    96,    96,    97,    97,
       97,    97,    97,    97,    97,    97,    97,    97,    98,    98,
-      99,    99,    99,    99,    99,    99,   100,   100,   100,   101,
-     101,   102,   102,   102,   102,   103,   103,   103,   104,   104,
-     104,   105,   105,   105,   105,   105,   106,   106,   106,   107,
-     107,   108,   108,   109,   109,   110,   110,   111,   111,   112,
-     112,   113,   113,   114,   114,   114,   114,   114,   114,   114,
-     114,   114,   114,   114,   115,   115,   116,   117,   117,   118,
-     118,   118,   118,   118,   118,   119,   119,   120,   120,   121,
-     121,   121,   121,   121,   122,   122,   122,   122,   122,   122,
+      99,    99,    99,    99,    99,    99,   100,   100,   100,   100,
+     100,   100,   101,   101,   102,   102,   102,   102,   103,   103,
+     103,   104,   104,   104,   105,   105,   105,   105,   105,   106,
+     106,   106,   107,   107,   108,   108,   109,   109,   110,   110,
+     111,   111,   112,   112,   113,   113,   114,   114,   114,   114,
+     114,   114,   114,   114,   114,   114,   114,   115,   115,   116,
+     117,   117,   118,   118,   118,   118,   118,   118,   119,   119,
+     120,   120,   121,   121,   121,   121,   121,   122,   122,   122,
      122,   122,   122,   122,   122,   122,   122,   122,   122,   122,
-     122,   123,   123,   123,   124,   124,   125,   125,   126,   127,
-     127,   127,   127,   128,   128,   129,   129,   129,   130,   130,
-     130,   131,   131,   132,   132,   133,   133,   134,   134,   135,
-     135,   135,   135,   135,   135,   135,   136,   136,   136,   136,
-     137,   137,   138,   138,   139,   139,   140,   140,   140,   141,
-     141,   142,   142,   143,   143,   143,   144,   144,   144,   144,
-     144,   144,   144,   144,   144,   145,   145,   145,   146,   146,
-     147,   147,   147,   147,   147,   147,   148,   148,   148,   149,
-     149,   149,   149,   150,   150,   151,   151,   152,   152,   153,
-     153,   153,   154,   154,   154,   154,   155,   155,   155,   155,
-     155,   156,   156,   157,   157,   158,   158,   158,   158
+     122,   122,   122,   122,   123,   123,   123,   124,   124,   125,
+     125,   126,   127,   127,   127,   127,   128,   128,   129,   129,
+     129,   130,   130,   130,   131,   131,   132,   132,   133,   133,
+     134,   134,   135,   135,   135,   135,   135,   135,   135,   136,
+     136,   136,   136,   137,   137,   138,   138,   139,   139,   140,
+     140,   140,   141,   141,   142,   142,   143,   143,   143,   144,
+     144,   144,   144,   144,   144,   144,   144,   144,   145,   145,
+     145,   146,   146,   147,   147,   147,   147,   147,   147,   148,
+     148,   148,   149,   149,   149,   149,   150,   150,   151,   151,
+     152,   152,   153,   153,   153,   154,   154,   154,   154,   155,
+     155,   155,   155,   155,   156,   156,   157,   157,   158,   158,
+     158,   158
   };
 
   const signed char
@@ -4269,25 +4312,26 @@ namespace  WadeSpace  {
        0,     2,     1,     1,     3,     1,     1,     1,     1,     4,
        3,     4,     3,     3,     2,     2,     6,     7,     1,     3,
        1,     2,     2,     2,     2,     4,     1,     1,     1,     1,
-       4,     1,     3,     3,     3,     1,     3,     3,     1,     3,
-       3,     1,     3,     3,     3,     3,     1,     3,     3,     1,
-       3,     1,     3,     1,     3,     1,     3,     1,     3,     1,
-       5,     1,     3,     1,     1,     1,     1,     1,     1,     1,
-       1,     1,     1,     1,     1,     3,     1,     2,     3,     1,
-       2,     1,     2,     1,     2,     1,     3,     1,     3,     1,
+       1,     1,     1,     4,     1,     3,     3,     3,     1,     3,
+       3,     1,     3,     3,     1,     3,     3,     3,     3,     1,
+       3,     3,     1,     3,     1,     3,     1,     3,     1,     3,
+       1,     3,     1,     5,     1,     3,     1,     1,     1,     1,
+       1,     1,     1,     1,     1,     1,     1,     1,     3,     1,
+       2,     3,     1,     2,     1,     2,     1,     2,     1,     3,
+       1,     3,     1,     1,     1,     1,     1,     1,     1,     1,
        1,     1,     1,     1,     1,     1,     1,     1,     1,     1,
-       1,     1,     1,     1,     1,     1,     1,     1,     1,     1,
-       1,     5,     4,     2,     1,     1,     1,     2,     3,     2,
-       1,     2,     1,     1,     3,     1,     2,     3,     4,     5,
-       2,     1,     3,     1,     3,     1,     1,     2,     1,     1,
-       3,     4,     3,     4,     4,     3,     1,     2,     2,     3,
-       1,     2,     1,     3,     1,     3,     2,     2,     1,     1,
-       3,     1,     2,     1,     1,     2,     3,     2,     3,     3,
-       4,     2,     3,     3,     4,     1,     3,     4,     1,     3,
-       1,     1,     1,     1,     1,     1,     3,     4,     3,     2,
-       3,     3,     4,     1,     2,     1,     2,     1,     2,     5,
-       7,     5,     5,     7,     6,     7,     3,     2,     2,     2,
-       3,     1,     2,     1,     1,     4,     3,     3,     2
+       1,     1,     1,     1,     5,     4,     2,     1,     1,     1,
+       2,     3,     2,     1,     2,     1,     1,     3,     1,     2,
+       3,     4,     5,     2,     1,     3,     1,     3,     1,     1,
+       2,     1,     1,     3,     4,     3,     4,     4,     3,     1,
+       2,     2,     3,     1,     2,     1,     3,     1,     3,     2,
+       2,     1,     1,     3,     1,     2,     1,     1,     2,     3,
+       2,     3,     3,     4,     2,     3,     3,     4,     1,     3,
+       4,     1,     3,     1,     1,     1,     1,     1,     1,     3,
+       4,     3,     2,     3,     3,     4,     1,     2,     1,     2,
+       1,     2,     5,     7,     5,     5,     7,     6,     7,     3,
+       2,     2,     2,     3,     1,     2,     1,     1,     4,     3,
+       3,     2
   };
 
 
@@ -4346,26 +4390,27 @@ namespace  WadeSpace  {
   {
        0,   260,   260,   261,   262,   266,   267,   268,   271,   272,
      273,   274,   275,   276,   277,   278,   279,   280,   284,   290,
-     300,   301,   302,   303,   304,   305,   309,   313,   314,   318,
-     319,   323,   324,   325,   326,   330,   331,   332,   336,   337,
-     338,   342,   343,   344,   345,   346,   350,   351,   352,   356,
-     357,   361,   362,   366,   367,   371,   372,   376,   377,   381,
-     382,   386,   387,   391,   392,   393,   394,   395,   396,   397,
-     398,   399,   400,   401,   405,   406,   410,   414,   415,   419,
-     420,   421,   422,   423,   424,   428,   434,   444,   445,   449,
-     450,   451,   452,   453,   457,   458,   459,   460,   461,   462,
-     463,   464,   465,   466,   467,   468,   469,   470,   471,   472,
-     473,   477,   478,   479,   483,   484,   488,   494,   504,   508,
-     509,   510,   511,   515,   521,   531,   532,   533,   537,   538,
-     539,   543,   549,   559,   560,   564,   565,   569,   570,   574,
-     575,   576,   577,   578,   579,   580,   584,   585,   586,   587,
-     591,   597,   608,   609,   613,   619,   629,   630,   631,   635,
-     641,   651,   652,   656,   657,   658,   662,   663,   664,   665,
-     666,   667,   668,   669,   670,   674,   675,   676,   680,   686,
-     696,   697,   698,   699,   700,   701,   705,   706,   707,   711,
-     712,   713,   714,   718,   724,   735,   741,   751,   752,   756,
-     757,   758,   762,   763,   764,   765,   769,   770,   771,   772,
-     773,   777,   778,   782,   783,   787,   788,   789,   790
+     300,   301,   302,   303,   304,   305,   309,   310,   311,   312,
+     313,   314,   318,   319,   323,   324,   325,   326,   330,   331,
+     332,   336,   337,   338,   342,   343,   344,   345,   346,   350,
+     351,   352,   356,   357,   361,   362,   366,   367,   371,   372,
+     376,   377,   381,   382,   386,   387,   391,   392,   393,   394,
+     395,   396,   397,   398,   399,   400,   401,   405,   406,   410,
+     414,   415,   419,   420,   421,   422,   423,   424,   428,   434,
+     444,   445,   449,   450,   451,   452,   453,   457,   458,   459,
+     460,   461,   462,   463,   464,   465,   466,   467,   468,   469,
+     470,   471,   472,   473,   477,   478,   479,   483,   484,   488,
+     494,   504,   508,   509,   510,   511,   515,   521,   531,   532,
+     533,   537,   538,   539,   543,   549,   559,   560,   564,   565,
+     569,   570,   574,   575,   576,   577,   578,   579,   580,   584,
+     585,   586,   587,   591,   597,   608,   609,   613,   619,   629,
+     630,   631,   635,   641,   651,   652,   656,   657,   658,   662,
+     663,   664,   665,   666,   667,   668,   669,   670,   674,   675,
+     676,   680,   686,   696,   697,   698,   699,   700,   701,   705,
+     706,   707,   711,   712,   713,   714,   718,   724,   735,   741,
+     751,   752,   756,   757,   758,   762,   763,   764,   765,   769,
+     770,   771,   772,   773,   777,   778,   782,   783,   787,   788,
+     789,   790
   };
 
   void
@@ -4398,7 +4443,7 @@ namespace  WadeSpace  {
 
 #line 9 "ansic.y"
 } //  WadeSpace 
-#line 4402 "parser.cpp"
+#line 4447 "parser.cpp"
 
 #line 793 "ansic.y"
 
