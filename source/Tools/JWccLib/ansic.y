@@ -281,37 +281,26 @@ postfix_expression
 
 
 argument_expression_list
-    : assignment_expression {
-                             Expression *exp = $1;
-                             $$ = new std::vector<Expression *>();
-                             $$->push_back(exp);
-                             cout << "assignment_expression REDUCE argument_expression_list" << endl;
-                            }
-    | argument_expression_list COMMA assignment_expression {
-            Expression* value1 = $3;
-            vector<Expression*>* value2 = $1;
-            value2->push_back(value1);
-            $$ = value2;
-            cout << "argument_expression_list COMMA assignment_expression REDUCE argument_expression_list" << endl;
-        }
+    : assignment_expression                                { $$ = createArgumentExpressionList($1,nullptr); cout << "assignment_expression REDUCE argument_expression_list" << endl; }
+    | argument_expression_list COMMA assignment_expression { $$ = createArgumentExpressionList($3,$1); cout << "argument_expression_list COMMA assignment_expression REDUCE argument_expression_list" << endl; }
     ;
 
 unary_expression
     : postfix_expression             { $$ = $1; cout << "postfix_expression REDUCE unary_expression" << endl;}
-    | INC_OP unary_expression        { $$ = createExpression(NT_INC,nullopt,nullopt,nullptr,$2,nullptr,nullptr,"",nullptr,nullptr,$1, nullptr,nullptr,nullptr); cout << "INC_OP unary_expression REDUCE unary_expression" << endl;}
-    | DEC_OP unary_expression        { $$ = createExpression(NT_DEC,nullopt,nullopt,nullptr,$2,nullptr,nullptr,"",nullptr,nullptr,$1, nullptr,nullptr,nullptr); cout << "DEC_OP unary_expression REDUCE unary_expression" << endl;}
-    | unary_operator cast_expression { $$ = createExpression(NT_UNARY,nullopt,nullopt,nullptr,$2,nullptr,nullptr,"",nullptr,nullptr,nullptr, nullptr,nullptr,nullptr); cout << "unary_operator cast_expression REDUCE unary_expression" << endl;}
-    | SIZEOF unary_expression        { $$ = createExpression(NT_SIZEOF,$1,nullopt,nullptr,$2,nullptr,nullptr,"",nullptr,nullptr,nullptr, nullptr,nullptr,nullptr); cout << "SIZEOF unary_expression REDUCE unary_expression" << endl;}
-    | SIZEOF OPAREN type_name CPAREN { $$ = createExpression(NT_SIZEOF,$1,nullopt,nullptr,nullptr,nullptr,nullptr,"",nullptr,$3,nullptr, nullptr,nullptr,nullptr); cout << "SIZEOF OPAREN type_name CPAREN REDUCE unary_expression" << endl;}
+    | INC_OP unary_expression        { $$ = createExpression(NT_INC,nullopt,nullopt,nullptr,$2,nullptr,nullptr,nullopt,nullptr,nullptr,$1, nullptr,nullptr,nullptr); cout << "INC_OP unary_expression REDUCE unary_expression" << endl;}
+    | DEC_OP unary_expression        { $$ = createExpression(NT_DEC,nullopt,nullopt,nullptr,$2,nullptr,nullptr,nullopt,nullptr,nullptr,$1, nullptr,nullptr,nullptr); cout << "DEC_OP unary_expression REDUCE unary_expression" << endl;}
+    | unary_operator cast_expression { $$ = createExpression(NT_UNARY,nullopt,nullopt,nullptr,$2,nullptr,nullptr,nullopt,nullptr,nullptr,nullptr, nullptr,nullptr,nullptr); cout << "unary_operator cast_expression REDUCE unary_expression" << endl;}
+    | SIZEOF unary_expression        { $$ = createExpression(NT_SIZEOF,$1,nullopt,nullptr,$2,nullptr,nullptr,nullopt,nullptr,nullptr,nullptr, nullptr,nullptr,nullptr); cout << "SIZEOF unary_expression REDUCE unary_expression" << endl;}
+    | SIZEOF OPAREN type_name CPAREN { $$ = createExpression(NT_SIZEOF,$1,nullopt,nullptr,nullptr,nullptr,nullptr,nullopt,nullptr,$3,nullptr, nullptr,nullptr,nullptr); cout << "SIZEOF OPAREN type_name CPAREN REDUCE unary_expression" << endl;}
     ;
 
 unary_operator
-    : BIT_AND   {$$ = $1; cout << "BIT_AND REDUCE to unary_operator" << endl;}
-    | TIMES_OP  {$$ = $1; cout << "TIMES_OP REDUCE to unary_operator" << endl;}
-    | PLUS_OP   {$$ = $1; cout << "PLUS_OP REDUCE to unary_operator" << endl;}
-    | MINUS_OP  {$$ = $1; cout << "MINUS_OP REDUCE to unary_operator" << endl;}
-    | TILDE     {$$ = $1; cout << "TILDE REDUCE to unary_operator" << endl;}
-    | NOT_OP    {$$ = $1; cout << "NOT_OP REDUCE to unary_operator" << endl;}
+    : BIT_AND   { $$ = $1; cout << "BIT_AND REDUCE to unary_operator" << endl;}
+    | TIMES_OP  { $$ = $1; cout << "TIMES_OP REDUCE to unary_operator" << endl;}
+    | PLUS_OP   { $$ = $1; cout << "PLUS_OP REDUCE to unary_operator" << endl;}
+    | MINUS_OP  { $$ = $1; cout << "MINUS_OP REDUCE to unary_operator" << endl;}
+    | TILDE     { $$ = $1; cout << "TILDE REDUCE to unary_operator" << endl;}
+    | NOT_OP    { $$ = $1; cout << "NOT_OP REDUCE to unary_operator" << endl;}
     ;
 
 cast_expression
@@ -411,8 +400,8 @@ constant_expression
     ;
 
 declaration
-    : declaration_specifiers SEMICOLON                       { $<Declaration *>$ = new Declaration($1); cout << "declaration_specifiers SEMICOLON REDUCE to declaration" << endl;}
-    | declaration_specifiers init_declarator_list SEMICOLON  { $<Declaration *>$ = new Declaration($1,$2); cout << "declaration_specifiers init_declarator_list SEMICOLON REDUCE to declaration" << endl;}
+    : declaration_specifiers SEMICOLON                       { $$ = new Declaration($1); cout << "declaration_specifiers SEMICOLON REDUCE to declaration" << endl;}
+    | declaration_specifiers init_declarator_list SEMICOLON  { $$ = new Declaration($1,$2); cout << "declaration_specifiers init_declarator_list SEMICOLON REDUCE to declaration" << endl;}
     ;
 
 declaration_specifiers

@@ -13,6 +13,7 @@
 using namespace std;
 using namespace WadeSpace;
 
+vector<Expression*>* createArgumentExpressionList(Expression* exp, vector<Expression*>* list);
 Expression* createExpression(
 	NodeType type,
 	optional<int> token1,

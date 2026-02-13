@@ -5,6 +5,17 @@
 using namespace std;
 using namespace WadeSpace;
 
+
+vector<Expression*>* createArgumentExpressionList(Expression* exp, vector<Expression*>* list)
+{
+	if (list == nullptr)
+	{
+		list = new vector<Expression*>();
+	}
+	list->push_back(exp);
+	return list;
+}
+
 Expression* createExpression(
 	NodeType type,
 	optional<int> token1,
