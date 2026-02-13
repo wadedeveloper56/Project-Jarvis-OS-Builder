@@ -5,6 +5,11 @@
 using namespace std;
 using namespace WadeSpace;
 
+Declaration* createDeclaration(DeclarationSpecifiers* declarationSpecifiers, vector<InitDeclarator*>* vectorInitDeclarator)
+{
+	return new Declaration(declarationSpecifiers, vectorInitDeclarator);
+}
+
 vector<InitDeclarator*>* createInitDeclaratorList(InitDeclarator* value1, vector<InitDeclarator*>* list)
 {
 	if (list == nullptr)

@@ -396,12 +396,12 @@ expression
     ;
 
 constant_expression
-    : conditional_expression  { $<Expression *>$ = $1;  cout << "conditional_expression REDUCE to constant_expression" << endl;}
+    : conditional_expression  { $$ = $1;  cout << "conditional_expression REDUCE to constant_expression" << endl;}
     ;
 
 declaration
-    : declaration_specifiers SEMICOLON                       { $$ = new Declaration($1); cout << "declaration_specifiers SEMICOLON REDUCE to declaration" << endl;}
-    | declaration_specifiers init_declarator_list SEMICOLON  { $$ = new Declaration($1,$2); cout << "declaration_specifiers init_declarator_list SEMICOLON REDUCE to declaration" << endl;}
+    : declaration_specifiers SEMICOLON                       { $$ = createDeclaration($1,nullptr); cout << "declaration_specifiers SEMICOLON REDUCE to declaration" << endl;}
+    | declaration_specifiers init_declarator_list SEMICOLON  { $$ = createDeclaration($1,$2); cout << "declaration_specifiers init_declarator_list SEMICOLON REDUCE to declaration" << endl;}
     ;
 
 declaration_specifiers
@@ -419,8 +419,8 @@ init_declarator_list
     ;
 
 init_declarator
-    : declarator                    { $<InitDeclarator *>$ = new InitDeclarator($1); cout << "declarator REDUCE to init_declarator" << endl;}
-    | declarator EQUAL initializer  { $<InitDeclarator *>$ = new InitDeclarator($1,$3); cout << "declarator EQUAL initializer REDUCE to init_declarator" << endl;}
+    : declarator                    { $$ = new InitDeclarator($1); cout << "declarator REDUCE to init_declarator" << endl;}
+    | declarator EQUAL initializer  { $$ = new InitDeclarator($1,$3); cout << "declarator EQUAL initializer REDUCE to init_declarator" << endl;}
     ;
 
 storage_class_specifier

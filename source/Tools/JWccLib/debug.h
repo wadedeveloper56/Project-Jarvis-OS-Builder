@@ -13,6 +13,7 @@
 using namespace std;
 using namespace WadeSpace;
 
+Declaration *createDeclaration(DeclarationSpecifiers* declarationSpecifiers, vector<InitDeclarator*>* vectorInitDeclarator);
 vector<InitDeclarator*>* createInitDeclaratorList(InitDeclarator* value1, vector<InitDeclarator*>* list);
 vector<Expression*>* createArgumentExpressionList(Expression* exp, vector<Expression*>* list);
 Expression* createExpression(

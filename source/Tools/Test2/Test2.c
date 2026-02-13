@@ -1,5 +1,3 @@
-#include <stdio.h>
-
 char var1;
 short var2;
 int var3;
@@ -9,11 +7,11 @@ float var6;
 double var7;
 long double var8;
 //bool var9;
-//complex var10;
+//_Fcomplex var10;
 //imaginary var11;
 char* var12[];
 
-int main(int argc, char* argv[]) {
-    printf("",argc,argv);
+int main(int argc, char* argv[])
+{
     return 0;
 }

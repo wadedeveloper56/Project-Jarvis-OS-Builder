@@ -2435,19 +2435,19 @@ namespace  WadeSpace  {
 
   case 79: // constant_expression: conditional_expression
 #line 399 "ansic.y"
-                              { yylhs.value.as< Expression * > () = yystack_[0].value.as < Expression * > ();  cout << "conditional_expression REDUCE to constant_expression" << endl;}
+                              { yylhs.value.as < Expression * > () = yystack_[0].value.as < Expression * > ();  cout << "conditional_expression REDUCE to constant_expression" << endl;}
 #line 2440 "parser.cpp"
     break;
 
   case 80: // declaration: declaration_specifiers ";"
 #line 403 "ansic.y"
-                                                             { yylhs.value.as < Declaration * > () = new Declaration(yystack_[1].value.as < DeclarationSpecifiers * > ()); cout << "declaration_specifiers SEMICOLON REDUCE to declaration" << endl;}
+                                                             { yylhs.value.as < Declaration * > () = createDeclaration(yystack_[1].value.as < DeclarationSpecifiers * > (),nullptr); cout << "declaration_specifiers SEMICOLON REDUCE to declaration" << endl;}
 #line 2446 "parser.cpp"
     break;
 
   case 81: // declaration: declaration_specifiers init_declarator_list ";"
 #line 404 "ansic.y"
-                                                             { yylhs.value.as < Declaration * > () = new Declaration(yystack_[2].value.as < DeclarationSpecifiers * > (),yystack_[1].value.as < std::vector<InitDeclarator *> * > ()); cout << "declaration_specifiers init_declarator_list SEMICOLON REDUCE to declaration" << endl;}
+                                                             { yylhs.value.as < Declaration * > () = createDeclaration(yystack_[2].value.as < DeclarationSpecifiers * > (),yystack_[1].value.as < std::vector<InitDeclarator *> * > ()); cout << "declaration_specifiers init_declarator_list SEMICOLON REDUCE to declaration" << endl;}
 #line 2452 "parser.cpp"
     break;
 
