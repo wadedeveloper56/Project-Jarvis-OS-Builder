@@ -5,6 +5,15 @@
 using namespace std;
 using namespace WadeSpace;
 
+vector<InitDeclarator*>* createInitDeclaratorList(InitDeclarator* value1, vector<InitDeclarator*>* list)
+{
+	if (list == nullptr)
+	{
+		list = new vector<InitDeclarator*>();
+	}
+	list->push_back(value1);
+	return list;
+}
 
 vector<Expression*>* createArgumentExpressionList(Expression* exp, vector<Expression*>* list)
 {

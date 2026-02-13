@@ -414,19 +414,8 @@ declaration_specifiers
     ;
 
 init_declarator_list
-    : init_declarator                            {
-                                                  InitDeclarator* exp = $1;
-                                                  $$ = new std::vector<InitDeclarator*>();
-                                                  $$->push_back(exp);
-                                                  cout << "init_declarator REDUCE to init_declarator_list" << endl;
-                                                 }
-    | init_declarator_list COMMA init_declarator {
-                                                  InitDeclarator* value1 = $3;
-                                                  std::vector<InitDeclarator*>* value2 = $1;
-                                                  value2->push_back(value1);
-                                                  $$ = value2;
-                                                  cout << "init_declarator_list COMMA init_declarator REDUCE to init_declarator_list" << endl;
-                                                 }
+    : init_declarator                            { $$ = createInitDeclaratorList($1,nullptr); cout << "init_declarator REDUCE to init_declarator_list" << endl;}
+    | init_declarator_list COMMA init_declarator { $$ = createInitDeclaratorList($3,$1); cout << "init_declarator_list COMMA init_declarator REDUCE to init_declarator_list" << endl;}
     ;
 
 init_declarator
