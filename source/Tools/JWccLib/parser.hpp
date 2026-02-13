@@ -558,6 +558,8 @@ namespace  WadeSpace  {
       // "register"
       // "static"
       // "typedef"
+      // ","
+      // "~"
       // "="
       // ">>="
       // "<<="
@@ -571,14 +573,21 @@ namespace  WadeSpace  {
       // "|="
       // ">>"
       // "<<"
+      // "++"
+      // "--"
+      // "->"
+      // "&&"
+      // "||"
       // ">="
       // "<="
       // ">"
       // "<"
       // "=="
       // "!="
+      // "!"
       // "^"
       // "&"
+      // "|"
       // "-"
       // "+"
       // "*"
@@ -636,21 +645,12 @@ namespace  WadeSpace  {
       // ";"
       // "{"
       // "}"
-      // ","
       // ":"
       // "("
       // ")"
       // "["
       // "]"
       // "."
-      // "~"
-      // "++"
-      // "--"
-      // "->"
-      // "&&"
-      // "||"
-      // "!"
-      // "|"
       char dummy30[sizeof (int)];
 
       // "f_const"
@@ -1178,6 +1178,8 @@ namespace  WadeSpace  {
       case symbol_kind::S_REGISTER: // "register"
       case symbol_kind::S_STATIC: // "static"
       case symbol_kind::S_TYPEDEF: // "typedef"
+      case symbol_kind::S_COMMA: // ","
+      case symbol_kind::S_TILDE: // "~"
       case symbol_kind::S_EQUAL: // "="
       case symbol_kind::S_RIGHT_ASSIGN: // ">>="
       case symbol_kind::S_LEFT_ASSIGN: // "<<="
@@ -1191,14 +1193,21 @@ namespace  WadeSpace  {
       case symbol_kind::S_OR_ASSIGN: // "|="
       case symbol_kind::S_RIGHT_OP: // ">>"
       case symbol_kind::S_LEFT_OP: // "<<"
+      case symbol_kind::S_INC_OP: // "++"
+      case symbol_kind::S_DEC_OP: // "--"
+      case symbol_kind::S_PTR_OP: // "->"
+      case symbol_kind::S_AND_OP: // "&&"
+      case symbol_kind::S_OR_OP: // "||"
       case symbol_kind::S_GREATER_EQUAL: // ">="
       case symbol_kind::S_LESS_EQUAL: // "<="
       case symbol_kind::S_GREATER: // ">"
       case symbol_kind::S_LESS: // "<"
       case symbol_kind::S_EQUAL_EQUAL: // "=="
       case symbol_kind::S_NOT_EQUAL: // "!="
+      case symbol_kind::S_NOT_OP: // "!"
       case symbol_kind::S_XOR_OP: // "^"
       case symbol_kind::S_BIT_AND: // "&"
+      case symbol_kind::S_BIT_OR: // "|"
       case symbol_kind::S_MINUS_OP: // "-"
       case symbol_kind::S_PLUS_OP: // "+"
       case symbol_kind::S_TIMES_OP: // "*"
@@ -1260,21 +1269,12 @@ namespace  WadeSpace  {
       case symbol_kind::S_SEMICOLON: // ";"
       case symbol_kind::S_OCURLY: // "{"
       case symbol_kind::S_CCURLY: // "}"
-      case symbol_kind::S_COMMA: // ","
       case symbol_kind::S_COLON: // ":"
       case symbol_kind::S_OPAREN: // "("
       case symbol_kind::S_CPAREN: // ")"
       case symbol_kind::S_OBRACE: // "["
       case symbol_kind::S_CBRACE: // "]"
       case symbol_kind::S_PERIOD: // "."
-      case symbol_kind::S_TILDE: // "~"
-      case symbol_kind::S_INC_OP: // "++"
-      case symbol_kind::S_DEC_OP: // "--"
-      case symbol_kind::S_PTR_OP: // "->"
-      case symbol_kind::S_AND_OP: // "&&"
-      case symbol_kind::S_OR_OP: // "||"
-      case symbol_kind::S_NOT_OP: // "!"
-      case symbol_kind::S_BIT_OR: // "|"
         value.move< int > (std::move (that.value));
         break;
 
@@ -2126,6 +2126,8 @@ switch (yykind)
       case symbol_kind::S_REGISTER: // "register"
       case symbol_kind::S_STATIC: // "static"
       case symbol_kind::S_TYPEDEF: // "typedef"
+      case symbol_kind::S_COMMA: // ","
+      case symbol_kind::S_TILDE: // "~"
       case symbol_kind::S_EQUAL: // "="
       case symbol_kind::S_RIGHT_ASSIGN: // ">>="
       case symbol_kind::S_LEFT_ASSIGN: // "<<="
@@ -2139,14 +2141,21 @@ switch (yykind)
       case symbol_kind::S_OR_ASSIGN: // "|="
       case symbol_kind::S_RIGHT_OP: // ">>"
       case symbol_kind::S_LEFT_OP: // "<<"
+      case symbol_kind::S_INC_OP: // "++"
+      case symbol_kind::S_DEC_OP: // "--"
+      case symbol_kind::S_PTR_OP: // "->"
+      case symbol_kind::S_AND_OP: // "&&"
+      case symbol_kind::S_OR_OP: // "||"
       case symbol_kind::S_GREATER_EQUAL: // ">="
       case symbol_kind::S_LESS_EQUAL: // "<="
       case symbol_kind::S_GREATER: // ">"
       case symbol_kind::S_LESS: // "<"
       case symbol_kind::S_EQUAL_EQUAL: // "=="
       case symbol_kind::S_NOT_EQUAL: // "!="
+      case symbol_kind::S_NOT_OP: // "!"
       case symbol_kind::S_XOR_OP: // "^"
       case symbol_kind::S_BIT_AND: // "&"
+      case symbol_kind::S_BIT_OR: // "|"
       case symbol_kind::S_MINUS_OP: // "-"
       case symbol_kind::S_PLUS_OP: // "+"
       case symbol_kind::S_TIMES_OP: // "*"
@@ -2208,21 +2217,12 @@ switch (yykind)
       case symbol_kind::S_SEMICOLON: // ";"
       case symbol_kind::S_OCURLY: // "{"
       case symbol_kind::S_CCURLY: // "}"
-      case symbol_kind::S_COMMA: // ","
       case symbol_kind::S_COLON: // ":"
       case symbol_kind::S_OPAREN: // "("
       case symbol_kind::S_CPAREN: // ")"
       case symbol_kind::S_OBRACE: // "["
       case symbol_kind::S_CBRACE: // "]"
       case symbol_kind::S_PERIOD: // "."
-      case symbol_kind::S_TILDE: // "~"
-      case symbol_kind::S_INC_OP: // "++"
-      case symbol_kind::S_DEC_OP: // "--"
-      case symbol_kind::S_PTR_OP: // "->"
-      case symbol_kind::S_AND_OP: // "&&"
-      case symbol_kind::S_OR_OP: // "||"
-      case symbol_kind::S_NOT_OP: // "!"
-      case symbol_kind::S_BIT_OR: // "|"
         value.template destroy< int > ();
         break;
 
@@ -2399,10 +2399,8 @@ switch (yykind)
                    || tok == token::TOKEN_REGISTER
                    || tok == token::TOKEN_STATIC
                    || tok == token::TOKEN_TYPEDEF
-                   || (token::TOKEN_EQUAL <= tok && tok <= token::TOKEN_LEFT_OP)
-                   || (token::TOKEN_GREATER_EQUAL <= tok && tok <= token::TOKEN_NOT_EQUAL)
-                   || (token::TOKEN_XOR_OP <= tok && tok <= token::TOKEN_BIT_AND)
-                   || (token::TOKEN_MINUS_OP <= tok && tok <= token::TOKEN_MOD_OP));
+                   || tok == token::TOKEN_COMMA
+                   || (token::TOKEN_TILDE <= tok && tok <= token::TOKEN_MOD_OP));
 #endif
       }
 #if 201103L <= YY_CPLUSPLUS
@@ -2419,10 +2417,8 @@ switch (yykind)
                    || (token::TOKEN_FLOAT <= tok && tok <= token::TOKEN_LONG_LONG)
                    || (token::TOKEN_RESTRICT <= tok && tok <= token::TOKEN_SIZEOF)
                    || (token::TOKEN_STRUCT <= tok && tok <= token::TOKEN_SWITCH)
-                   || (token::TOKEN_UNION <= tok && tok <= token::TOKEN_TILDE)
-                   || (token::TOKEN_INC_OP <= tok && tok <= token::TOKEN_OR_OP)
-                   || tok == token::TOKEN_NOT_OP
-                   || tok == token::TOKEN_BIT_OR);
+                   || (token::TOKEN_UNION <= tok && tok <= token::TOKEN_CCURLY)
+                   || (token::TOKEN_COLON <= tok && tok <= token::TOKEN_PERIOD));
 #endif
       }
 #if 201103L <= YY_CPLUSPLUS
@@ -3293,14 +3289,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_COMMA (int v, location_type l)
+      make_COMMA (TokenPtr v, location_type l)
       {
         return symbol_type (token::TOKEN_COMMA, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_COMMA (const int& v, const location_type& l)
+      make_COMMA (const TokenPtr& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_COMMA, v, l);
       }
@@ -3398,14 +3394,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_TILDE (int v, location_type l)
+      make_TILDE (TokenPtr v, location_type l)
       {
         return symbol_type (token::TOKEN_TILDE, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_TILDE (const int& v, const location_type& l)
+      make_TILDE (const TokenPtr& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_TILDE, v, l);
       }
@@ -3608,14 +3604,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_INC_OP (int v, location_type l)
+      make_INC_OP (TokenPtr v, location_type l)
       {
         return symbol_type (token::TOKEN_INC_OP, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_INC_OP (const int& v, const location_type& l)
+      make_INC_OP (const TokenPtr& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_INC_OP, v, l);
       }
@@ -3623,14 +3619,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_DEC_OP (int v, location_type l)
+      make_DEC_OP (TokenPtr v, location_type l)
       {
         return symbol_type (token::TOKEN_DEC_OP, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_DEC_OP (const int& v, const location_type& l)
+      make_DEC_OP (const TokenPtr& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_DEC_OP, v, l);
       }
@@ -3638,14 +3634,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_PTR_OP (int v, location_type l)
+      make_PTR_OP (TokenPtr v, location_type l)
       {
         return symbol_type (token::TOKEN_PTR_OP, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_PTR_OP (const int& v, const location_type& l)
+      make_PTR_OP (const TokenPtr& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_PTR_OP, v, l);
       }
@@ -3653,14 +3649,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_AND_OP (int v, location_type l)
+      make_AND_OP (TokenPtr v, location_type l)
       {
         return symbol_type (token::TOKEN_AND_OP, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_AND_OP (const int& v, const location_type& l)
+      make_AND_OP (const TokenPtr& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_AND_OP, v, l);
       }
@@ -3668,14 +3664,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_OR_OP (int v, location_type l)
+      make_OR_OP (TokenPtr v, location_type l)
       {
         return symbol_type (token::TOKEN_OR_OP, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_OR_OP (const int& v, const location_type& l)
+      make_OR_OP (const TokenPtr& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_OR_OP, v, l);
       }
@@ -3773,14 +3769,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_NOT_OP (int v, location_type l)
+      make_NOT_OP (TokenPtr v, location_type l)
       {
         return symbol_type (token::TOKEN_NOT_OP, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_NOT_OP (const int& v, const location_type& l)
+      make_NOT_OP (const TokenPtr& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_NOT_OP, v, l);
       }
@@ -3818,14 +3814,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_BIT_OR (int v, location_type l)
+      make_BIT_OR (TokenPtr v, location_type l)
       {
         return symbol_type (token::TOKEN_BIT_OR, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_BIT_OR (const int& v, const location_type& l)
+      make_BIT_OR (const TokenPtr& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_BIT_OR, v, l);
       }
@@ -4441,6 +4437,8 @@ switch (yykind)
       case symbol_kind::S_REGISTER: // "register"
       case symbol_kind::S_STATIC: // "static"
       case symbol_kind::S_TYPEDEF: // "typedef"
+      case symbol_kind::S_COMMA: // ","
+      case symbol_kind::S_TILDE: // "~"
       case symbol_kind::S_EQUAL: // "="
       case symbol_kind::S_RIGHT_ASSIGN: // ">>="
       case symbol_kind::S_LEFT_ASSIGN: // "<<="
@@ -4454,14 +4452,21 @@ switch (yykind)
       case symbol_kind::S_OR_ASSIGN: // "|="
       case symbol_kind::S_RIGHT_OP: // ">>"
       case symbol_kind::S_LEFT_OP: // "<<"
+      case symbol_kind::S_INC_OP: // "++"
+      case symbol_kind::S_DEC_OP: // "--"
+      case symbol_kind::S_PTR_OP: // "->"
+      case symbol_kind::S_AND_OP: // "&&"
+      case symbol_kind::S_OR_OP: // "||"
       case symbol_kind::S_GREATER_EQUAL: // ">="
       case symbol_kind::S_LESS_EQUAL: // "<="
       case symbol_kind::S_GREATER: // ">"
       case symbol_kind::S_LESS: // "<"
       case symbol_kind::S_EQUAL_EQUAL: // "=="
       case symbol_kind::S_NOT_EQUAL: // "!="
+      case symbol_kind::S_NOT_OP: // "!"
       case symbol_kind::S_XOR_OP: // "^"
       case symbol_kind::S_BIT_AND: // "&"
+      case symbol_kind::S_BIT_OR: // "|"
       case symbol_kind::S_MINUS_OP: // "-"
       case symbol_kind::S_PLUS_OP: // "+"
       case symbol_kind::S_TIMES_OP: // "*"
@@ -4523,21 +4528,12 @@ switch (yykind)
       case symbol_kind::S_SEMICOLON: // ";"
       case symbol_kind::S_OCURLY: // "{"
       case symbol_kind::S_CCURLY: // "}"
-      case symbol_kind::S_COMMA: // ","
       case symbol_kind::S_COLON: // ":"
       case symbol_kind::S_OPAREN: // "("
       case symbol_kind::S_CPAREN: // ")"
       case symbol_kind::S_OBRACE: // "["
       case symbol_kind::S_CBRACE: // "]"
       case symbol_kind::S_PERIOD: // "."
-      case symbol_kind::S_TILDE: // "~"
-      case symbol_kind::S_INC_OP: // "++"
-      case symbol_kind::S_DEC_OP: // "--"
-      case symbol_kind::S_PTR_OP: // "->"
-      case symbol_kind::S_AND_OP: // "&&"
-      case symbol_kind::S_OR_OP: // "||"
-      case symbol_kind::S_NOT_OP: // "!"
-      case symbol_kind::S_BIT_OR: // "|"
         value.copy< int > (YY_MOVE (that.value));
         break;
 
@@ -4757,6 +4753,8 @@ switch (yykind)
       case symbol_kind::S_REGISTER: // "register"
       case symbol_kind::S_STATIC: // "static"
       case symbol_kind::S_TYPEDEF: // "typedef"
+      case symbol_kind::S_COMMA: // ","
+      case symbol_kind::S_TILDE: // "~"
       case symbol_kind::S_EQUAL: // "="
       case symbol_kind::S_RIGHT_ASSIGN: // ">>="
       case symbol_kind::S_LEFT_ASSIGN: // "<<="
@@ -4770,14 +4768,21 @@ switch (yykind)
       case symbol_kind::S_OR_ASSIGN: // "|="
       case symbol_kind::S_RIGHT_OP: // ">>"
       case symbol_kind::S_LEFT_OP: // "<<"
+      case symbol_kind::S_INC_OP: // "++"
+      case symbol_kind::S_DEC_OP: // "--"
+      case symbol_kind::S_PTR_OP: // "->"
+      case symbol_kind::S_AND_OP: // "&&"
+      case symbol_kind::S_OR_OP: // "||"
       case symbol_kind::S_GREATER_EQUAL: // ">="
       case symbol_kind::S_LESS_EQUAL: // "<="
       case symbol_kind::S_GREATER: // ">"
       case symbol_kind::S_LESS: // "<"
       case symbol_kind::S_EQUAL_EQUAL: // "=="
       case symbol_kind::S_NOT_EQUAL: // "!="
+      case symbol_kind::S_NOT_OP: // "!"
       case symbol_kind::S_XOR_OP: // "^"
       case symbol_kind::S_BIT_AND: // "&"
+      case symbol_kind::S_BIT_OR: // "|"
       case symbol_kind::S_MINUS_OP: // "-"
       case symbol_kind::S_PLUS_OP: // "+"
       case symbol_kind::S_TIMES_OP: // "*"
@@ -4839,21 +4844,12 @@ switch (yykind)
       case symbol_kind::S_SEMICOLON: // ";"
       case symbol_kind::S_OCURLY: // "{"
       case symbol_kind::S_CCURLY: // "}"
-      case symbol_kind::S_COMMA: // ","
       case symbol_kind::S_COLON: // ":"
       case symbol_kind::S_OPAREN: // "("
       case symbol_kind::S_CPAREN: // ")"
       case symbol_kind::S_OBRACE: // "["
       case symbol_kind::S_CBRACE: // "]"
       case symbol_kind::S_PERIOD: // "."
-      case symbol_kind::S_TILDE: // "~"
-      case symbol_kind::S_INC_OP: // "++"
-      case symbol_kind::S_DEC_OP: // "--"
-      case symbol_kind::S_PTR_OP: // "->"
-      case symbol_kind::S_AND_OP: // "&&"
-      case symbol_kind::S_OR_OP: // "||"
-      case symbol_kind::S_NOT_OP: // "!"
-      case symbol_kind::S_BIT_OR: // "|"
         value.move< int > (YY_MOVE (s.value));
         break;
 
@@ -4981,7 +4977,7 @@ switch (yykind)
 
 #line 9 "ansic.y"
 } //  WadeSpace 
-#line 4985 "parser.hpp"
+#line 4981 "parser.hpp"
 
 
 

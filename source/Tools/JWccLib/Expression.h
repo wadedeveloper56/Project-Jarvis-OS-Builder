@@ -9,7 +9,7 @@ using namespace std;
 namespace WadeSpace
 {
 
-	typedef enum NodeType { NT_NONE, NT_ARRAY, NT_FUNCTION_CALL,NT_VAR_ACCESS,NT_INC,NT_DEC,NT_TYPECAST,NT_SIZEOF,NT_UNARY,NT_OP};
+	typedef enum NodeType { NT_NONE, NT_ARRAY, NT_FUNCTION_CALL,NT_VAR_ACCESS,NT_INC,NT_DEC,NT_TYPECAST,NT_SIZEOF,NT_UNARY,NT_OP,NT_QUESTION};
 
 	class Expression;
 	class AssignmentExpression;
@@ -21,6 +21,7 @@ namespace WadeSpace
 		NodeType type;
 		optional<int> token1;
 		optional<int> token2;
+		Expression* lexp;
 		Expression* exp1;
 		Expression* exp2;
 		vector<Expression*>* argumentList;
@@ -33,6 +34,7 @@ namespace WadeSpace
 			const NodeType type,
 			const optional<int> token1,
 			const optional<int> token2,
+			Expression* const lexp,
 			Expression* const exp1,
 			Expression* const exp2,
 			vector<Expression*>* argumentList,

@@ -17,6 +17,7 @@ Expression* createExpression(
 	NodeType type,
 	optional<int> token1,
 	optional<int> token2,
+	Expression* const lexp,
 	Expression* exp1,
 	Expression* exp2,
 	vector<Expression*>* argumentList,

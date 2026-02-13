@@ -9,6 +9,7 @@ Expression* createExpression(
 	NodeType type,
 	optional<int> token1,
 	optional<int> token2,
+	Expression* const lexp,
 	Expression* exp1,
 	Expression* exp2,
 	vector<Expression*>* argumentList,
@@ -20,7 +21,7 @@ Expression* createExpression(
 	TokenPtr op,
 	Expression* right)
 {
-	return new Expression(new NodeData(type, token1, token2, exp1, exp2, argumentList, identifier, initializerList, typeName, token3), left, op, right);
+	return new Expression(new NodeData(type, token1, token2, lexp, exp1, exp2, argumentList, identifier, initializerList, typeName, token3), left, op, right);
 }
 
 Constant* createConstant(const optional<uint64_t>& iConst, const optional<long double>& fConst, const optional<string>& strConst, const optional<TokenType>& type)
