@@ -17,6 +17,7 @@ int main ( int argc , char * argv [ ] )
 {
 return 0 ;
 }
+
 CHAR REDUCE to type_specifier
 Scanner: identifier [var1]
 type_specifier REDUCE to declaration_specifiers

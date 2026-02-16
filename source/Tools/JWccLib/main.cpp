@@ -103,14 +103,14 @@ int main(int argc, char* argv[])
 		cleanup(filedata);
 		delete rawtokens;
 		rawtokens = nullptr;
-		cout << outputTokens.stringify() << endl;
+		cout << outputTokens.stringify() << endl << endl;;
 		istringstream inStr(outputTokens.stringify());
 
 		Interpreter i;
 		i.setStreams(&inStr, &out);
 		exitcode = i.parse();
-		//BaseCodeGenerator* generator = program->processGlobalVariables();
-		//generator->generateCode(out);
+		BaseCodeGenerator* generator = program->processGlobalVariables();
+		generator->generateCode(out);
 		cout << "Parse complete. Result = " << exitcode << endl;
 	}
 	else
@@ -122,6 +122,6 @@ exit:
 	argFreeTable(argtable, sizeof(argtable) / sizeof(argtable[0]));
 	in.close();
 	out.close();
-	delete program;
+	delete WadeSpace::program;
 	return exitcode;
 }

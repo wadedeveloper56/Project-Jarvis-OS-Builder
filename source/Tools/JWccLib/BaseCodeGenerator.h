@@ -5,6 +5,7 @@
 #include <vector>
 #include <optional>
 #include "GlobalVars.h"
+#include "TokenType.h"
 
 using namespace std;
 
@@ -15,6 +16,7 @@ namespace WadeSpace
 		string name;
 		TokenType type;
 		int size;
+		bool pointer;
 	} VariableData;
 
 	typedef struct _FunctionData
