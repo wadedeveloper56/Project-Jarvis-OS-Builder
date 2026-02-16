@@ -16,7 +16,7 @@ namespace WadeSpace
 	public:
 		TypeQualifier(TokenPtr type);
 		TypeQualifier() = default;
-		virtual ~TypeQualifier();
+		virtual ~TypeQualifier()=default;
 		TokenPtr getType() const;
 
 	private:
