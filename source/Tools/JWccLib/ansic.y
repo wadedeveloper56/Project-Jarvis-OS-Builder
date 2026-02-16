@@ -94,62 +94,62 @@
 %define api.token.prefix {TOKEN_}
 
 %token END 0 "end of file"
-%token <std::string> IDENTIFIER  "identifier"
-%token <uint64_t> I_CONST "i_const"
-%token <long double> F_CONST "f_const"
-%token <std::string> STRING_LITERAL  "sting_literal"
-%token <int> TYPE_NAME "type name"
+%token <TokenPtr> IDENTIFIER  "identifier"
+%token <TokenPtr> I_CONST "i_const"
+%token <TokenPtr> F_CONST "f_const"
+%token <TokenPtr> STRING_LITERAL  "sting_literal"
+%token <TokenPtr> TYPE_NAME "type name"
 %token <TokenPtr> AUTO "auto"
 %token <TokenPtr> BREAK "break"
-%token <int> CASE "case"
-%token <int> CHAR "char"
-%token <int> CONST "const"
-%token <int> CONTINUE "continue"
-%token <int> DEFAULT "default"
-%token <int> DO "do"
-%token <int> DOUBLE "double"
-%token <int> LONG_DOUBLE "long double"
-%token <int> ELSE "else"
-%token <int> ENUM "enum"
+%token <TokenPtr> CASE "case"
+%token <TokenPtr> CHAR "char"
+%token <TokenPtr> CONST "const"
+%token <TokenPtr> CONTINUE "continue"
+%token <TokenPtr> DEFAULT "default"
+%token <TokenPtr> DO "do"
+%token <TokenPtr> DOUBLE "double"
+%token <TokenPtr> LONG_DOUBLE "long double"
+%token <TokenPtr> ELSE "else"
+%token <TokenPtr> ENUM "enum"
 %token <TokenPtr> EXTERN "extern"
-%token <int> FLOAT "float"
-%token <int> FOR "for"
-%token <int> GOTO "goto"
-%token <int> IF "if"
-%token <int> INLINE "inline"
-%token <int> INT
-%token <int> LONG "long"
-%token <int> LONG_LONG "long long"
+%token <TokenPtr> FLOAT "float"
+%token <TokenPtr> FOR "for"
+%token <TokenPtr> GOTO "goto"
+%token <TokenPtr> IF "if"
+%token <TokenPtr> INLINE "inline"
+%token <TokenPtr> INT
+%token <TokenPtr> LONG "long"
+%token <TokenPtr> LONG_LONG "long long"
 %token <TokenPtr> REGISTER "register"
-%token <int> RESTRICT "restrict"
-%token <int> RETURN "return"
-%token <int> SHORT "short"
-%token <int> SIGNED "signed"
-%token <int> SIZEOF "sizeof"
+%token <TokenPtr> RESTRICT "restrict"
+%token <TokenPtr> RETURN "return"
+%token <TokenPtr> SHORT "short"
+%token <TokenPtr> SIGNED "signed"
+%token <TokenPtr> SIZEOF "sizeof"
 %token <TokenPtr> STATIC "static"
-%token <int> STRUCT "struct"
-%token <int> SWITCH "switch"
+%token <TokenPtr> STRUCT "struct"
+%token <TokenPtr> SWITCH "switch"
 %token <TokenPtr> TYPEDEF "typedef"
-%token <int> UNION "union"
-%token <int> UNSIGNED "unsigned"
-%token <int> VOID "void"
-%token <int> VOLATILE "volatile"
-%token <int> WHILE "while"
-%token <int> BOOL "bool"
-%token <int> COMPLEX "complex"
-%token <int> IMAGINARY "imaginary"
-%token <int> ELLIPSIS "ellipsis"
-%token <int> QUESTION "question"
-%token <int> SEMICOLON ";"
-%token <int> OCURLY "{"
-%token <int> CCURLY "}"
+%token <TokenPtr> UNION "union"
+%token <TokenPtr> UNSIGNED "unsigned"
+%token <TokenPtr> VOID "void"
+%token <TokenPtr> VOLATILE "volatile"
+%token <TokenPtr> WHILE "while"
+%token <TokenPtr> BOOL "bool"
+%token <TokenPtr> COMPLEX "complex"
+%token <TokenPtr> IMAGINARY "imaginary"
+%token <TokenPtr> ELLIPSIS "ellipsis"
+%token <TokenPtr> QUESTION "question"
+%token <TokenPtr> SEMICOLON ";"
+%token <TokenPtr> OCURLY "{"
+%token <TokenPtr> CCURLY "}"
 %token <TokenPtr> COMMA ","
-%token <int> COLON ":"
-%token <int> OPAREN "("
-%token <int> CPAREN ")"
-%token <int> OBRACE "["
-%token <int> CBRACE "]"
-%token <int> PERIOD "."
+%token <TokenPtr> COLON ":"
+%token <TokenPtr> OPAREN "("
+%token <TokenPtr> CPAREN ")"
+%token <TokenPtr> OBRACE "["
+%token <TokenPtr> CBRACE "]"
+%token <TokenPtr> PERIOD "."
 %token <TokenPtr> TILDE "~"
 %token <TokenPtr> EQUAL "="
 %token <TokenPtr> RIGHT_ASSIGN ">>="
@@ -258,26 +258,26 @@
 
 primary_expression
     : IDENTIFIER                { $$ = createPrimaryExpression($1,NULL);      cout << "IDENTIFIER REDUCE to primary_expression" << endl; }
-    | constant                  { $$ = createPrimaryExpression(nullopt,$1);   cout << "constant REDUCE to primary_expression" << endl; }
+    | constant                  { $$ = createPrimaryExpression(nullptr,$1);   cout << "constant REDUCE to primary_expression" << endl; }
     | OPAREN expression CPAREN  { $$ = $2;                                    cout << "OPAREN expression CPAREN REDUCE to primary_expression" << endl; }
     ;
 
 constant
-    : F_CONST         { $$ = createConstant(nullopt,$1,nullopt,FLOAT_CONSTANT);   cout << "F_CONST REDUCE to constant " << endl; }
-    | I_CONST         { $$ = createConstant($1,nullopt,nullopt,INTEGER_CONSTANT); cout << "I_CONST REDUCE to constant " << endl; }
-    | STRING_LITERAL  { $$ = createConstant(nullopt,nullopt,$1,STRING_CONSTANT);  cout << "STRING_LITERAL REDUCE to constant  " << endl; }
+    : F_CONST         { $$ = createConstant(nullptr,$1,nullptr,FLOAT_CONSTANT);   cout << "F_CONST REDUCE to constant " << endl; }
+    | I_CONST         { $$ = createConstant($1,nullptr,nullptr,INTEGER_CONSTANT); cout << "I_CONST REDUCE to constant " << endl; }
+    | STRING_LITERAL  { $$ = createConstant(nullptr,nullptr,$1,STRING_CONSTANT);  cout << "STRING_LITERAL REDUCE to constant  " << endl; }
 
 postfix_expression
     : primary_expression                                           { $$ = $1;  cout << "primary_expression REDUCE to postfix_expression" << endl; }
-    | postfix_expression OBRACE expression CBRACE                  { $$ = createExpression(NT_ARRAY,$2,$4,$3,nullptr,nullptr,nullptr,nullopt,nullptr,nullptr,nullptr,  $1,nullptr,nullptr); cout << "postfix_expression OBRACE expression CBRACE REDUCE to postfix_expression" << endl; }
-    | postfix_expression OPAREN CPAREN                             { $$ = createExpression(NT_FUNCTION_CALL,$2,$3,nullptr,nullptr,nullptr,nullptr,nullopt,nullptr,nullptr,nullptr, $1,nullptr,nullptr); cout << "postfix_expression OPAREN CPAREN REDUCE to postfix_expression" << endl; }
-    | postfix_expression OPAREN argument_expression_list CPAREN    { $$ = createExpression(NT_FUNCTION_CALL,$2,$4,nullptr,nullptr,nullptr,$3,nullopt,nullptr,nullptr,nullptr, $1,nullptr,nullptr); cout << "postfix_expression OPAREN argument_expression_list CPAREN REDUCE to postfix_expression" << endl; }
-    | postfix_expression PERIOD IDENTIFIER                         { $$ = createExpression(NT_VAR_ACCESS,$2,nullopt,nullptr,nullptr,nullptr,nullptr,$3,nullptr,nullptr,nullptr, $1,nullptr,nullptr); cout << "postfix_expression PERIOD_OP IDENTIFIER REDUCE to postfix_expression" << endl; }
-    | postfix_expression PTR_OP IDENTIFIER                         { $$ = createExpression(NT_VAR_ACCESS,nullopt,nullopt,nullptr,nullptr,nullptr,nullptr,$3,nullptr,nullptr,$2, $1,nullptr,nullptr); cout << "postfix_expression PTR_OP IDENTIFIER REDUCE to postfix_expression" << endl; }
-    | postfix_expression INC_OP                                    { $$ = createExpression(NT_INC,nullopt,nullopt,nullptr,$1,nullptr,nullptr,nullopt,nullptr,nullptr,$2, nullptr,nullptr,nullptr); cout << "postfix_expression INC_OP REDUCE to postfix_expression" << endl; }
-    | postfix_expression DEC_OP                                    { $$ = createExpression(NT_DEC,nullopt,nullopt,nullptr,$1,nullptr,nullptr,nullopt,nullptr,nullptr,$2, nullptr,nullptr,nullptr); cout << "postfix_expression DEC_OP REDUCE to postfix_expression" << endl; }
-    | OPAREN type_name CPAREN OCURLY initializer_list CCURLY       { $$ = createExpression(NT_TYPECAST,nullopt,nullopt,nullptr,nullptr,nullptr,nullptr,nullopt,$5,$2,nullptr, nullptr,nullptr,nullptr); cout << "OPAREN type_name CPAREN_OP OCURLY_OP initializer_list CCURLY REDUCE to postfix_expression" << endl; }
-    | OPAREN type_name CPAREN OCURLY initializer_list COMMA CCURLY { $$ = createExpression(NT_TYPECAST,nullopt,nullopt,nullptr,nullptr,nullptr,nullptr,nullopt,$5,$2,nullptr, nullptr,nullptr,nullptr); cout << "OPAREN type_name CPAREN_OP OCURLY_OP initializer_list COMMA CCURLY REDUCE to postfix_expression" << endl; }
+    | postfix_expression OBRACE expression CBRACE                  { $$ = createExpression(NT_ARRAY,$2,$4,$3,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,  $1,nullptr,nullptr); cout << "postfix_expression OBRACE expression CBRACE REDUCE to postfix_expression" << endl; }
+    | postfix_expression OPAREN CPAREN                             { $$ = createExpression(NT_FUNCTION_CALL,$2,$3,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr, $1,nullptr,nullptr); cout << "postfix_expression OPAREN CPAREN REDUCE to postfix_expression" << endl; }
+    | postfix_expression OPAREN argument_expression_list CPAREN    { $$ = createExpression(NT_FUNCTION_CALL,$2,$4,nullptr,nullptr,nullptr,$3,nullptr,nullptr,nullptr,nullptr, $1,nullptr,nullptr); cout << "postfix_expression OPAREN argument_expression_list CPAREN REDUCE to postfix_expression" << endl; }
+    | postfix_expression PERIOD IDENTIFIER                         { $$ = createExpression(NT_VAR_ACCESS,$2,nullptr,nullptr,nullptr,nullptr,nullptr,$3,nullptr,nullptr,nullptr, $1,nullptr,nullptr); cout << "postfix_expression PERIOD_OP IDENTIFIER REDUCE to postfix_expression" << endl; }
+    | postfix_expression PTR_OP IDENTIFIER                         { $$ = createExpression(NT_VAR_ACCESS,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,$3,nullptr,nullptr,$2, $1,nullptr,nullptr); cout << "postfix_expression PTR_OP IDENTIFIER REDUCE to postfix_expression" << endl; }
+    | postfix_expression INC_OP                                    { $$ = createExpression(NT_INC,nullptr,nullptr,nullptr,$1,nullptr,nullptr,nullptr,nullptr,nullptr,$2, nullptr,nullptr,nullptr); cout << "postfix_expression INC_OP REDUCE to postfix_expression" << endl; }
+    | postfix_expression DEC_OP                                    { $$ = createExpression(NT_DEC,nullptr,nullptr,nullptr,$1,nullptr,nullptr,nullptr,nullptr,nullptr,$2, nullptr,nullptr,nullptr); cout << "postfix_expression DEC_OP REDUCE to postfix_expression" << endl; }
+    | OPAREN type_name CPAREN OCURLY initializer_list CCURLY       { $$ = createExpression(NT_TYPECAST,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,$5,$2,nullptr, nullptr,nullptr,nullptr); cout << "OPAREN type_name CPAREN_OP OCURLY_OP initializer_list CCURLY REDUCE to postfix_expression" << endl; }
+    | OPAREN type_name CPAREN OCURLY initializer_list COMMA CCURLY { $$ = createExpression(NT_TYPECAST,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,$5,$2,nullptr, nullptr,nullptr,nullptr); cout << "OPAREN type_name CPAREN_OP OCURLY_OP initializer_list COMMA CCURLY REDUCE to postfix_expression" << endl; }
 
 
 argument_expression_list
@@ -287,11 +287,11 @@ argument_expression_list
 
 unary_expression
     : postfix_expression             { $$ = $1; cout << "postfix_expression REDUCE unary_expression" << endl;}
-    | INC_OP unary_expression        { $$ = createExpression(NT_INC,nullopt,nullopt,nullptr,$2,nullptr,nullptr,nullopt,nullptr,nullptr,$1, nullptr,nullptr,nullptr); cout << "INC_OP unary_expression REDUCE unary_expression" << endl;}
-    | DEC_OP unary_expression        { $$ = createExpression(NT_DEC,nullopt,nullopt,nullptr,$2,nullptr,nullptr,nullopt,nullptr,nullptr,$1, nullptr,nullptr,nullptr); cout << "DEC_OP unary_expression REDUCE unary_expression" << endl;}
-    | unary_operator cast_expression { $$ = createExpression(NT_UNARY,nullopt,nullopt,nullptr,$2,nullptr,nullptr,nullopt,nullptr,nullptr,nullptr, nullptr,nullptr,nullptr); cout << "unary_operator cast_expression REDUCE unary_expression" << endl;}
-    | SIZEOF unary_expression        { $$ = createExpression(NT_SIZEOF,$1,nullopt,nullptr,$2,nullptr,nullptr,nullopt,nullptr,nullptr,nullptr, nullptr,nullptr,nullptr); cout << "SIZEOF unary_expression REDUCE unary_expression" << endl;}
-    | SIZEOF OPAREN type_name CPAREN { $$ = createExpression(NT_SIZEOF,$1,nullopt,nullptr,nullptr,nullptr,nullptr,nullopt,nullptr,$3,nullptr, nullptr,nullptr,nullptr); cout << "SIZEOF OPAREN type_name CPAREN REDUCE unary_expression" << endl;}
+    | INC_OP unary_expression        { $$ = createExpression(NT_INC,nullptr,nullptr,nullptr,$2,nullptr,nullptr,nullptr,nullptr,nullptr,$1, nullptr,nullptr,nullptr); cout << "INC_OP unary_expression REDUCE unary_expression" << endl;}
+    | DEC_OP unary_expression        { $$ = createExpression(NT_DEC,nullptr,nullptr,nullptr,$2,nullptr,nullptr,nullptr,nullptr,nullptr,$1, nullptr,nullptr,nullptr); cout << "DEC_OP unary_expression REDUCE unary_expression" << endl;}
+    | unary_operator cast_expression { $$ = createExpression(NT_UNARY,nullptr,nullptr,nullptr,$2,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr, nullptr,nullptr,nullptr); cout << "unary_operator cast_expression REDUCE unary_expression" << endl;}
+    | SIZEOF unary_expression        { $$ = createExpression(NT_SIZEOF,$1,nullptr,nullptr,$2,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr, nullptr,nullptr,nullptr); cout << "SIZEOF unary_expression REDUCE unary_expression" << endl;}
+    | SIZEOF OPAREN type_name CPAREN { $$ = createExpression(NT_SIZEOF,$1,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,$3,nullptr, nullptr,nullptr,nullptr); cout << "SIZEOF OPAREN type_name CPAREN REDUCE unary_expression" << endl;}
     ;
 
 unary_operator
@@ -305,75 +305,75 @@ unary_operator
 
 cast_expression
     : unary_expression                         { $$ = $1;  cout << "unary_expression REDUCE to cast_expression" << endl;}
-    | OPAREN type_name CPAREN cast_expression  { $$ = createExpression(NT_TYPECAST,nullopt,nullopt,nullptr,$4,nullptr,nullptr,nullopt,nullptr,$2,nullptr, nullptr,nullptr,nullptr);  cout << "unary_expression REDUCE to cast_expression" << endl;}
+    | OPAREN type_name CPAREN cast_expression  { $$ = createExpression(NT_TYPECAST,nullptr,nullptr,nullptr,$4,nullptr,nullptr,nullptr,nullptr,$2,nullptr, nullptr,nullptr,nullptr);  cout << "unary_expression REDUCE to cast_expression" << endl;}
     ;
 
 multiplicative_expression
     : cast_expression                                    { $$ = $1;  cout << "cast_expression REDUCE to multiplicative_expression" << endl;}
-    | multiplicative_expression TIMES_OP cast_expression { $$ = createExpression(NT_OP,nullopt,nullopt,nullptr,nullptr,nullptr,nullptr,nullopt,nullptr,nullptr,nullptr, $1,$2,$3); cout << "multiplicative_expression TIMES_OP cast_expression REDUCE to multiplicative_expression" << endl;}
-    | multiplicative_expression DIV_OP cast_expression   { $$ = createExpression(NT_OP,nullopt,nullopt,nullptr,nullptr,nullptr,nullptr,nullopt,nullptr,nullptr,nullptr, $1,$2,$3); cout << "multiplicative_expression DIV_OP cast_expression REDUCE to multiplicative_expression" << endl;}
-    | multiplicative_expression MOD_OP cast_expression   { $$ = createExpression(NT_OP,nullopt,nullopt,nullptr,nullptr,nullptr,nullptr,nullopt,nullptr,nullptr,nullptr, $1,$2,$3); cout << "multiplicative_expression MOD_OP cast_expression REDUCE to multiplicative_expression" << endl;}
+    | multiplicative_expression TIMES_OP cast_expression { $$ = createExpression(NT_OP,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr, $1,$2,$3); cout << "multiplicative_expression TIMES_OP cast_expression REDUCE to multiplicative_expression" << endl;}
+    | multiplicative_expression DIV_OP cast_expression   { $$ = createExpression(NT_OP,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr, $1,$2,$3); cout << "multiplicative_expression DIV_OP cast_expression REDUCE to multiplicative_expression" << endl;}
+    | multiplicative_expression MOD_OP cast_expression   { $$ = createExpression(NT_OP,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr, $1,$2,$3); cout << "multiplicative_expression MOD_OP cast_expression REDUCE to multiplicative_expression" << endl;}
     ;
 
 additive_expression
     : multiplicative_expression                               { $$ = $1;  cout << "multiplicative_expression REDUCE to additive_expression" << endl;}
-    | additive_expression PLUS_OP multiplicative_expression   { $$ = createExpression(NT_OP,nullopt,nullopt,nullptr,nullptr,nullptr,nullptr,nullopt,nullptr,nullptr,nullptr, $1,$2,$3); cout << "additive_expression REDUCE to multiplicative_expression" << endl;}
-    | additive_expression MINUS_OP multiplicative_expression  { $$ = createExpression(NT_OP,nullopt,nullopt,nullptr,nullptr,nullptr,nullptr,nullopt,nullptr,nullptr,nullptr, $1,$2,$3); cout << "additive_expression REDUCE to multiplicative_expression" << endl;}
+    | additive_expression PLUS_OP multiplicative_expression   { $$ = createExpression(NT_OP,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr, $1,$2,$3); cout << "additive_expression REDUCE to multiplicative_expression" << endl;}
+    | additive_expression MINUS_OP multiplicative_expression  { $$ = createExpression(NT_OP,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr, $1,$2,$3); cout << "additive_expression REDUCE to multiplicative_expression" << endl;}
     ;
 
 shift_expression
     : additive_expression                           { $$ = $1;  cout << "additive_expression REDUCE to shift_expression" << endl;}
-    | shift_expression LEFT_OP additive_expression  { $$ = createExpression(NT_OP,nullopt,nullopt,nullptr,nullptr,nullptr,nullptr,nullopt,nullptr,nullptr,nullptr, $1,$2,$3);; cout << "shift_expression LEFT_OP additive_expression REDUCE to shift_expression" << endl;}
-    | shift_expression RIGHT_OP additive_expression { $$ = createExpression(NT_OP,nullopt,nullopt,nullptr,nullptr,nullptr,nullptr,nullopt,nullptr,nullptr,nullptr, $1,$2,$3);; cout << "shift_expression RIGHT_OP additive_expression REDUCE to shift_expression" << endl;}
+    | shift_expression LEFT_OP additive_expression  { $$ = createExpression(NT_OP,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr, $1,$2,$3);; cout << "shift_expression LEFT_OP additive_expression REDUCE to shift_expression" << endl;}
+    | shift_expression RIGHT_OP additive_expression { $$ = createExpression(NT_OP,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr, $1,$2,$3);; cout << "shift_expression RIGHT_OP additive_expression REDUCE to shift_expression" << endl;}
     ;
 
 relational_expression
     : shift_expression                                       { $$ = $1;  cout << "shift_expression REDUCE to relational_expression" << endl;}
-    | relational_expression LESS shift_expression            { $$ = createExpression(NT_OP,nullopt,nullopt,nullptr,nullptr,nullptr,nullptr,nullopt,nullptr,nullptr,nullptr, $1,$2,$3); cout << "relational_expression LESS shift_expression REDUCE to shift_expression" << endl;}
-    | relational_expression GREATER shift_expression         { $$ = createExpression(NT_OP,nullopt,nullopt,nullptr,nullptr,nullptr,nullptr,nullopt,nullptr,nullptr,nullptr, $1,$2,$3); cout << "relational_expression GREATER shift_expression REDUCE to shift_expression" << endl;}
-    | relational_expression LESS_EQUAL shift_expression      { $$ = createExpression(NT_OP,nullopt,nullopt,nullptr,nullptr,nullptr,nullptr,nullopt,nullptr,nullptr,nullptr, $1,$2,$3); cout << "relational_expression LESS_EQUAL shift_expression REDUCE to shift_expression" << endl;}
-    | relational_expression GREATER_EQUAL shift_expression   { $$ = createExpression(NT_OP,nullopt,nullopt,nullptr,nullptr,nullptr,nullptr,nullopt,nullptr,nullptr,nullptr, $1,$2,$3); cout << "relational_expression GREATER_EQUAL shift_expression REDUCE to shift_expression" << endl;}
+    | relational_expression LESS shift_expression            { $$ = createExpression(NT_OP,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr, $1,$2,$3); cout << "relational_expression LESS shift_expression REDUCE to shift_expression" << endl;}
+    | relational_expression GREATER shift_expression         { $$ = createExpression(NT_OP,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr, $1,$2,$3); cout << "relational_expression GREATER shift_expression REDUCE to shift_expression" << endl;}
+    | relational_expression LESS_EQUAL shift_expression      { $$ = createExpression(NT_OP,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr, $1,$2,$3); cout << "relational_expression LESS_EQUAL shift_expression REDUCE to shift_expression" << endl;}
+    | relational_expression GREATER_EQUAL shift_expression   { $$ = createExpression(NT_OP,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr, $1,$2,$3); cout << "relational_expression GREATER_EQUAL shift_expression REDUCE to shift_expression" << endl;}
     ;
 
 equality_expression
     : relational_expression                                  { $$ = $1;  cout << "relational_expression REDUCE to equality_expression" << endl;}
-    | equality_expression EQUAL_EQUAL relational_expression  { $$ = createExpression(NT_OP,nullopt,nullopt,nullptr,nullptr,nullptr,nullptr,nullopt,nullptr,nullptr,nullptr, $1,$2,$3); cout << "equality_expression EQUAL_EQUAL relational_expression REDUCE to equality_expression" << endl;}
-    | equality_expression NOT_EQUAL relational_expression    { $$ = createExpression(NT_OP,nullopt,nullopt,nullptr,nullptr,nullptr,nullptr,nullopt,nullptr,nullptr,nullptr, $1,$2,$3); cout << "equality_expression NOT_EQUAL relational_expression REDUCE to equality_expression" << endl;}
+    | equality_expression EQUAL_EQUAL relational_expression  { $$ = createExpression(NT_OP,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr, $1,$2,$3); cout << "equality_expression EQUAL_EQUAL relational_expression REDUCE to equality_expression" << endl;}
+    | equality_expression NOT_EQUAL relational_expression    { $$ = createExpression(NT_OP,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr, $1,$2,$3); cout << "equality_expression NOT_EQUAL relational_expression REDUCE to equality_expression" << endl;}
     ;
 
 and_expression     
     : equality_expression                         { $$ = $1;  cout << "equality_expression REDUCE to and_expression" << endl;}
-    | and_expression BIT_AND equality_expression  { $$ = createExpression(NT_OP,nullopt,nullopt,nullptr,nullptr,nullptr,nullptr,nullopt,nullptr,nullptr,nullptr, $1,$2,$3); cout << "and_expression BIT_AND equality_expression REDUCE to and_expression" << endl;}
+    | and_expression BIT_AND equality_expression  { $$ = createExpression(NT_OP,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr, $1,$2,$3); cout << "and_expression BIT_AND equality_expression REDUCE to and_expression" << endl;}
     ;
 
 exclusive_or_expression
     : and_expression                                 { $$ = $1;  cout << "and_expression REDUCE to exclusive_or_expression" << endl;}
-    | exclusive_or_expression XOR_OP and_expression  { $$ = createExpression(NT_OP,nullopt,nullopt,nullptr,nullptr,nullptr,nullptr,nullopt,nullptr,nullptr,nullptr, $1,$2,$3); cout << "exclusive_or_expression XOR_OP and_expression REDUCE to exclusive_or_expression" << endl;}
+    | exclusive_or_expression XOR_OP and_expression  { $$ = createExpression(NT_OP,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr, $1,$2,$3); cout << "exclusive_or_expression XOR_OP and_expression REDUCE to exclusive_or_expression" << endl;}
     ;
 
 inclusive_or_expression
     : exclusive_or_expression                                { $$ = $1;  cout << "exclusive_or_expression REDUCE to inclusive_or_expression" << endl;}
-    | inclusive_or_expression BIT_OR exclusive_or_expression { $$ = createExpression(NT_OP,nullopt,nullopt,nullptr,nullptr,nullptr,nullptr,nullopt,nullptr,nullptr,nullptr, $1,$2,$3); cout << "inclusive_or_expression BIT_OR exclusive_or_expression REDUCE to inclusive_or_expression" << endl;}
+    | inclusive_or_expression BIT_OR exclusive_or_expression { $$ = createExpression(NT_OP,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr, $1,$2,$3); cout << "inclusive_or_expression BIT_OR exclusive_or_expression REDUCE to inclusive_or_expression" << endl;}
     ;
 
 logical_and_expression
     : inclusive_or_expression                                { $$ = $1;  cout << "inclusive_or_expression REDUCE to logical_and_expression" << endl;}
-    | logical_and_expression AND_OP inclusive_or_expression  { $$ = createExpression(NT_OP,nullopt,nullopt,nullptr,nullptr,nullptr,nullptr,nullopt,nullptr,nullptr,nullptr, $1,$2,$3); cout << "inclusive_or_expression REDUCE to logical_and_expression" << endl;}
+    | logical_and_expression AND_OP inclusive_or_expression  { $$ = createExpression(NT_OP,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr, $1,$2,$3); cout << "inclusive_or_expression REDUCE to logical_and_expression" << endl;}
     ;
 
 logical_or_expression
     : logical_and_expression                              { $$ = $1;  cout << "inclusive_and_expression REDUCE to logical_or_expression" << endl;}
-    | logical_or_expression OR_OP logical_and_expression  { $$ = createExpression(NT_OP,nullopt,nullopt,nullptr,nullptr,nullptr,nullptr,nullopt,nullptr,nullptr,nullptr, $1,$2,$3); cout << "logical_or_expression OR_OP logical_and_expression REDUCE to logical_or_expression" << endl;}
+    | logical_or_expression OR_OP logical_and_expression  { $$ = createExpression(NT_OP,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr, $1,$2,$3); cout << "logical_or_expression OR_OP logical_and_expression REDUCE to logical_or_expression" << endl;}
     ;
 
 conditional_expression
     : logical_or_expression                                                   { $$ = $1;  cout << "logical_or_expression REDUCE to conditional_expression" << endl;}
-    | logical_or_expression QUESTION expression COLON conditional_expression  { $$ = createExpression(NT_QUESTION,nullopt,nullopt,$1,$3,$5,nullptr,nullopt,nullptr,nullptr,nullptr,  nullptr,nullptr,nullptr); cout << "logical_or_expression QUESTION expression COLON conditional_expression REDUCE to conditional_expression" << endl;}
+    | logical_or_expression QUESTION expression COLON conditional_expression  { $$ = createExpression(NT_QUESTION,nullptr,nullptr,$1,$3,$5,nullptr,nullptr,nullptr,nullptr,nullptr,  nullptr,nullptr,nullptr); cout << "logical_or_expression QUESTION expression COLON conditional_expression REDUCE to conditional_expression" << endl;}
     ;
 
 assignment_expression
     : conditional_expression                                      { $$ = $1;  cout << "conditional_expression REDUCE to assignment_expression" << endl;}
-    | unary_expression assignment_operator assignment_expression  { $$ = createExpression(NT_OP,nullopt,nullopt,nullptr,nullptr,nullptr,nullptr,nullopt,nullptr,nullptr,nullptr, $1,$2,$3); cout << "unary_expression assignment_operator assignment_expression REDUCE to assignment_expression" << endl;}
+    | unary_expression assignment_operator assignment_expression  { $$ = createExpression(NT_OP,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr, $1,$2,$3); cout << "unary_expression assignment_operator assignment_expression REDUCE to assignment_expression" << endl;}
     ;
 
 assignment_operator
@@ -392,7 +392,7 @@ assignment_operator
 
 expression
     : assignment_expression                   { $$ = $1;  cout << "asignment_expression REDUCE to expression" << endl;}
-    | expression COMMA assignment_expression  { $$ = createExpression(NT_OP,nullopt,nullopt,nullptr,nullptr,nullptr,nullptr,nullopt,nullptr,nullptr,nullptr, $1,$2,$3); cout << "expression COMMA assignment_expression COMMA  REDUCE to expression" << endl;}
+    | expression COMMA assignment_expression  { $$ = createExpression(NT_OP,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr, $1,$2,$3); cout << "expression COMMA assignment_expression COMMA  REDUCE to expression" << endl;}
     ;
 
 constant_expression
@@ -452,9 +452,9 @@ type_specifier
     ;
 
 struct_or_union_specifier
-    : struct_or_union IDENTIFIER OCURLY struct_declaration_list CCURLY   { $<StructOrUnionSpecifier *>$ = new StructOrUnionSpecifier($1,$2,$4); cout << "struct_or_union IDENTIFIER OCURLY struct_declaration_list CCURLY REDUCE to struct_or_union_specifier" << endl;}
-    | struct_or_union OCURLY struct_declaration_list CCURLY              { $<StructOrUnionSpecifier *>$ = new StructOrUnionSpecifier($1,$3); cout << "struct_or_union OCURLY struct_declaration_list CCURLY REDUCE to struct_or_union_specifier" << endl;}
-    | struct_or_union IDENTIFIER                                         { $<StructOrUnionSpecifier *>$ = new StructOrUnionSpecifier($1,$2); cout << "struct_or_union IDENTIFIER REDUCE to struct_or_union_specifier" << endl;}
+    : struct_or_union IDENTIFIER OCURLY struct_declaration_list CCURLY   { $$ = new StructOrUnionSpecifier($1,$2,$4); cout << "struct_or_union IDENTIFIER OCURLY struct_declaration_list CCURLY REDUCE to struct_or_union_specifier" << endl;}
+    | struct_or_union OCURLY struct_declaration_list CCURLY              { $$ = new StructOrUnionSpecifier($1,$3); cout << "struct_or_union OCURLY struct_declaration_list CCURLY REDUCE to struct_or_union_specifier" << endl;}
+    | struct_or_union IDENTIFIER                                         { $$ = new StructOrUnionSpecifier($1,$2); cout << "struct_or_union IDENTIFIER REDUCE to struct_or_union_specifier" << endl;}
     ;
 
 struct_or_union
@@ -512,9 +512,9 @@ struct_declarator
     ;
 
 enum_specifier
-    : ENUM OCURLY enumerator_list CCURLY             { $<EnumSpecifier *>$ = new EnumSpecifier($3); cout << "ENUM OCURLY enumerator_list CCURLY REDUCE to enum_specifier" << endl;}
+    : ENUM OCURLY enumerator_list CCURLY             { $<EnumSpecifier *>$ = new EnumSpecifier(nullptr,$3); cout << "ENUM OCURLY enumerator_list CCURLY REDUCE to enum_specifier" << endl;}
     | ENUM IDENTIFIER OCURLY enumerator_list CCURLY  { $<EnumSpecifier *>$ = new EnumSpecifier($2,$4); cout << "ENUM IDENTIFIER OCURLY enumerator_list CCURLY REDUCE to enum_specifier" << endl;}
-    | ENUM IDENTIFIER                                { $<EnumSpecifier *>$ = new EnumSpecifier($2); cout << "ENUM IDENTIFIER REDUCE to enum_specifier" << endl;}
+    | ENUM IDENTIFIER                                { $<EnumSpecifier *>$ = new EnumSpecifier($2,nullptr); cout << "ENUM IDENTIFIER REDUCE to enum_specifier" << endl;}
     ;
 
 enumerator_list

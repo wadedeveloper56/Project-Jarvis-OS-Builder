@@ -297,62 +297,62 @@ Terminals, with rules where they appear
 
     "end of file" (0) 0
     error (256)
-    "identifier" <std::string> (258) 1 11 12 113 115 131 132 135 136 141 161 162 188 208
-    "i_const" <uint64_t> (259) 5
-    "f_const" <long double> (260) 4
-    "sting_literal" <std::string> (261) 6
-    "type name" <int> (262) 112
+    "identifier" <TokenPtr> (258) 1 11 12 113 115 131 132 135 136 141 161 162 188 208
+    "i_const" <TokenPtr> (259) 5
+    "f_const" <TokenPtr> (260) 4
+    "sting_literal" <TokenPtr> (261) 6
+    "type name" <TokenPtr> (262) 112
     "auto" <TokenPtr> (263) 94
     "break" <TokenPtr> (264) 210
-    "case" <int> (265) 189
-    "char" <int> (266) 97
-    "const" <int> (267) 137
-    "continue" <int> (268) 209
-    "default" <int> (269) 190
-    "do" <int> (270) 205
-    "double" <int> (271) 103
-    "long double" <int> (272) 104
-    "else" <int> (273) 202
-    "enum" <int> (274) 130 131 132
+    "case" <TokenPtr> (265) 189
+    "char" <TokenPtr> (266) 97
+    "const" <TokenPtr> (267) 137
+    "continue" <TokenPtr> (268) 209
+    "default" <TokenPtr> (269) 190
+    "do" <TokenPtr> (270) 205
+    "double" <TokenPtr> (271) 103
+    "long double" <TokenPtr> (272) 104
+    "else" <TokenPtr> (273) 202
+    "enum" <TokenPtr> (274) 130 131 132
     "extern" <TokenPtr> (275) 92
-    "float" <int> (276) 102
-    "for" <int> (277) 206 207
-    "goto" <int> (278) 208
-    "if" <int> (279) 201 202
-    "inline" <int> (280)
-    INT <int> (281) 99
-    "long" <int> (282) 100
-    "long long" <int> (283) 101
+    "float" <TokenPtr> (276) 102
+    "for" <TokenPtr> (277) 206 207
+    "goto" <TokenPtr> (278) 208
+    "if" <TokenPtr> (279) 201 202
+    "inline" <TokenPtr> (280)
+    INT <TokenPtr> (281) 99
+    "long" <TokenPtr> (282) 100
+    "long long" <TokenPtr> (283) 101
     "register" <TokenPtr> (284) 95
-    "restrict" <int> (285)
-    "return" <int> (286) 211 212
-    "short" <int> (287) 98
-    "signed" <int> (288) 108
-    "sizeof" <int> (289) 23 24
+    "restrict" <TokenPtr> (285)
+    "return" <TokenPtr> (286) 211 212
+    "short" <TokenPtr> (287) 98
+    "signed" <TokenPtr> (288) 108
+    "sizeof" <TokenPtr> (289) 23 24
     "static" <TokenPtr> (290) 93
-    "struct" <int> (291) 116
-    "switch" <int> (292) 203
+    "struct" <TokenPtr> (291) 116
+    "switch" <TokenPtr> (292) 203
     "typedef" <TokenPtr> (293) 91
-    "union" <int> (294) 117
-    "unsigned" <int> (295) 109
-    "void" <int> (296) 96
-    "volatile" <int> (297) 138
-    "while" <int> (298) 204 205
-    "bool" <int> (299) 105
-    "complex" <int> (300) 107
-    "imaginary" <int> (301) 106
-    "ellipsis" <int> (302) 155
-    "question" <int> (303) 62
-    ";" <int> (304) 79 80 120 199 200 205 208 209 210 211 212
-    "{" <int> (305) 15 16 113 114 130 131 178 179 191 192 193 194
-    "}" <int> (306) 15 16 113 114 130 131 178 179 191 192 193 194
+    "union" <TokenPtr> (294) 117
+    "unsigned" <TokenPtr> (295) 109
+    "void" <TokenPtr> (296) 96
+    "volatile" <TokenPtr> (297) 138
+    "while" <TokenPtr> (298) 204 205
+    "bool" <TokenPtr> (299) 105
+    "complex" <TokenPtr> (300) 107
+    "imaginary" <TokenPtr> (301) 106
+    "ellipsis" <TokenPtr> (302) 155
+    "question" <TokenPtr> (303) 62
+    ";" <TokenPtr> (304) 79 80 120 199 200 205 208 209 210 211 212
+    "{" <TokenPtr> (305) 15 16 113 114 130 131 178 179 191 192 193 194
+    "}" <TokenPtr> (306) 15 16 113 114 130 131 178 179 191 192 193 194
     "," <TokenPtr> (307) 16 18 77 88 126 134 155 157 162 179 181
-    ":" <int> (308) 62 128 129 188 189 190
-    "(" <int> (309) 3 9 10 15 16 24 32 142 145 146 147 168 173 174 175 176 201 202 203 204 205 206 207
-    ")" <int> (310) 3 9 10 15 16 24 32 142 145 146 147 168 173 174 175 176 201 202 203 204 205 206 207
-    "[" <int> (311) 8 143 144 169 170 171 172
-    "]" <int> (312) 8 143 144 169 170 171 172
-    "." <int> (313) 11
+    ":" <TokenPtr> (308) 62 128 129 188 189 190
+    "(" <TokenPtr> (309) 3 9 10 15 16 24 32 142 145 146 147 168 173 174 175 176 201 202 203 204 205 206 207
+    ")" <TokenPtr> (310) 3 9 10 15 16 24 32 142 145 146 147 168 173 174 175 176 201 202 203 204 205 206 207
+    "[" <TokenPtr> (311) 8 143 144 169 170 171 172
+    "]" <TokenPtr> (312) 8 143 144 169 170 171 172
+    "." <TokenPtr> (313) 11
     "~" <TokenPtr> (314) 29
     "=" <TokenPtr> (315) 65 90 136
     ">>=" <TokenPtr> (316) 72

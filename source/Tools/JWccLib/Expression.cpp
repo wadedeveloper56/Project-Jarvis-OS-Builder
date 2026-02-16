@@ -4,19 +4,19 @@
 using namespace std;
 using namespace WadeSpace;
 
-NodeData::NodeData() : type(NT_NONE), token1(0), token2(0), exp1(nullptr), exp2(nullptr), argumentList(nullptr)
+NodeData::NodeData() : type(NT_NONE), token1(nullptr), token2(nullptr), exp1(nullptr), exp2(nullptr), argumentList(nullptr)
 {
 }
 
 NodeData::NodeData(
 	const NodeType type, 
-	const optional<int> token1, 
-	const optional<int> token2, 
+	TokenPtr token1,
+	TokenPtr token2,
 	Expression* const lexp,
 	Expression* const exp1,
 	Expression* const exp2,
 	vector<Expression*>* argumentList,
-	optional<string> identifier,
+	TokenPtr identifier,
 	vector<Initializer*>* initializerList,
 	TypeName* typeName,
 	TokenPtr token3

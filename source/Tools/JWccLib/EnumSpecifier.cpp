@@ -1,21 +1,15 @@
 #include "pch.h"
 #include "EnumSpecifier.h"
 
+#include "Token.h"
+
 using namespace WadeSpace;
 
-EnumSpecifier::EnumSpecifier(vector<Enumerator*>* vectorEnumerator) : nameStr(nullopt), vectorEnumerator(vectorEnumerator)
+EnumSpecifier::EnumSpecifier(TokenPtr nameStr, vector<Enumerator*>* vectorEnumerator) : nameStr(nameStr), vectorEnumerator(vectorEnumerator)
 {
 }
 
-EnumSpecifier::EnumSpecifier(string& nameStr, vector<Enumerator*>* vectorEnumerator) : nameStr(nameStr), vectorEnumerator(vectorEnumerator)
-{
-}
-
-EnumSpecifier::EnumSpecifier(string& nameStr) : nameStr(nameStr), vectorEnumerator(nullptr)
-{
-}
-
-EnumSpecifier::EnumSpecifier() : nameStr(nullopt), vectorEnumerator(nullptr)
+EnumSpecifier::EnumSpecifier() : nameStr(nullptr), vectorEnumerator(nullptr)
 {
 }
 

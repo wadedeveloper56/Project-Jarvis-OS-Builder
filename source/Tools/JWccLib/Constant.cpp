@@ -4,8 +4,7 @@
 using namespace WadeSpace;
 using namespace std;
 
-Constant::Constant(const optional<uint64_t>& iConst, const optional<long double>& fConst,
-	const optional<string>& strConst, const optional<TokenType>& type)
+Constant::Constant(const TokenPtr iConst, const TokenPtr fConst, const TokenPtr strConst, const optional<TokenType>& type)
 	: iConst(iConst),
 	fConst(fConst),
 	strConst(strConst),
@@ -13,21 +12,21 @@ Constant::Constant(const optional<uint64_t>& iConst, const optional<long double>
 {
 }
 
-Constant::Constant() : iConst(nullopt), fConst(nullopt), strConst(nullopt), type(nullopt)
+Constant::Constant() : iConst(nullptr), fConst(nullptr), strConst(nullptr), type(nullopt)
 {
 }
 
-optional<uint64_t> Constant::getIConst() const
+TokenPtr Constant::getIConst() const
 {
 	return iConst;
 }
 
-optional<long double> Constant::getFConst() const
+TokenPtr Constant::getFConst() const
 {
 	return fConst;
 }
 
-optional<string> Constant::getStrConst() const
+TokenPtr Constant::getStrConst() const
 {
 	return strConst;
 }

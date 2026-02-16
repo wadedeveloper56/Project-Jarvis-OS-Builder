@@ -13,17 +13,17 @@ namespace WadeSpace
 	class StructOrUnionSpecifier
 	{
 	public:
-		StructOrUnionSpecifier(StructOrUnion* structOrUnion, const string& name, vector<StructDeclaration*>* vectorStructDeclaration);
+		StructOrUnionSpecifier(StructOrUnion* structOrUnion, TokenPtr name, vector<StructDeclaration*>* vectorStructDeclaration);
 		StructOrUnionSpecifier(StructOrUnion* structOrUnion, vector<StructDeclaration*>* vectorStructDeclaration);
-		StructOrUnionSpecifier(StructOrUnion* structOrUnion, const string& name);
+		StructOrUnionSpecifier(StructOrUnion* structOrUnion, TokenPtr name);
 		StructOrUnionSpecifier();
 		virtual ~StructOrUnionSpecifier();
-		optional<string> getName() const;
+		TokenPtr getName() const;
 		StructOrUnion* getStructOrUnion() const;
 		vector<StructDeclaration*>* getVectorStructDeclaration() const;
 
 	private:
-		optional<string> name;
+		TokenPtr name;
 		StructOrUnion* structOrUnion;
 		vector<StructDeclaration*>* vectorStructDeclaration;
 	};

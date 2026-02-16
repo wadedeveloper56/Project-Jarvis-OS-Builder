@@ -4,6 +4,7 @@
 #include <vector>
 #include <optional>
 #include "Enumerator.h"
+#include "Token.h"
 
 using namespace std;
 
@@ -12,15 +13,13 @@ namespace WadeSpace
 	class EnumSpecifier
 	{
 	public:
-		EnumSpecifier(vector<Enumerator*>* vectorEnumerator);
-		EnumSpecifier(string& nameStr, vector<Enumerator*>* vectorEnumerator);
-		EnumSpecifier(string& nameStr);
+		EnumSpecifier(TokenPtr nameStr, vector<Enumerator*>* vectorEnumerator);
 		EnumSpecifier();
 		virtual ~EnumSpecifier();
 		vector<Enumerator*>* getVectorEnumerator() const;
 
 	private:
-		optional<string>  nameStr;
+		TokenPtr  nameStr;
 		vector<Enumerator*>* vectorEnumerator;
 	};
 }

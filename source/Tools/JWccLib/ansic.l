@@ -70,43 +70,43 @@ WS  [ \t\v\n\f]
                }
 "case"         { 
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_CASE(CASE, WadeSpace::location()); 
+                return WadeSpace::Parser::make_CASE(createKeywordToken(yytext,CASE), WadeSpace::location()); 
                }
 "char"         { 
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_CHAR(CHAR, WadeSpace::location()); 
+                return WadeSpace::Parser::make_CHAR(createKeywordToken(yytext,CHAR), WadeSpace::location()); 
                }
 "const"        { 
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_CONST(CONST, WadeSpace::location()); 
+                return WadeSpace::Parser::make_CONST(createKeywordToken(yytext,CONST), WadeSpace::location()); 
                }
 "continue"     { 
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_CONTINUE(CONTINUE, WadeSpace::location()); 
+                return WadeSpace::Parser::make_CONTINUE(createKeywordToken(yytext,CONTINUE), WadeSpace::location()); 
                }
 "default"      { 
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_DEFAULT(DEFAULT, WadeSpace::location()); 
+                return WadeSpace::Parser::make_DEFAULT(createKeywordToken(yytext,DEFAULT), WadeSpace::location()); 
                }
 "do"           { 
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_DO(DO, WadeSpace::location()); 
+                return WadeSpace::Parser::make_DO(createKeywordToken(yytext,DO), WadeSpace::location()); 
                }
 "double"       { 
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_DOUBLE(DOUBLE, WadeSpace::location()); 
+                return WadeSpace::Parser::make_DOUBLE(createKeywordToken(yytext,DOUBLE), WadeSpace::location()); 
                }
 "long double"  { 
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_LONG_DOUBLE(LONG_DOUBLE, WadeSpace::location()); 
+                return WadeSpace::Parser::make_LONG_DOUBLE(createKeywordToken(yytext,LONG_DOUBLE), WadeSpace::location()); 
                }
 "else"         { 
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_ELSE(ELSE, WadeSpace::location()); 
+                return WadeSpace::Parser::make_ELSE(createKeywordToken(yytext,ELSE), WadeSpace::location()); 
                }
 "enum"         { 
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                //return WadeSpace::Parser::make_ENUM(ENUM, WadeSpace::location()); 
+                //return WadeSpace::Parser::make_ENUM(createKeywordToken(yytext,ENUM), WadeSpace::location()); 
                }
 "extern"       { 
                 //cout << "Scanner: token [" << yytext << "]" << endl;
@@ -114,35 +114,35 @@ WS  [ \t\v\n\f]
                }
 "float"        { 
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_FLOAT(FLOAT, WadeSpace::location()); 
+                return WadeSpace::Parser::make_FLOAT(createKeywordToken(yytext,FLOAT), WadeSpace::location()); 
                }
 "for"          { 
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_FOR(FOR, WadeSpace::location()); 
+                return WadeSpace::Parser::make_FOR(createKeywordToken(yytext,FOR), WadeSpace::location()); 
                }
 "goto"         { 
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_GOTO(GOTO, WadeSpace::location()); 
+                return WadeSpace::Parser::make_GOTO(createKeywordToken(yytext,GOTO), WadeSpace::location()); 
                }
 "if"           { 
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_IF(IF, WadeSpace::location()); 
+                return WadeSpace::Parser::make_IF(createKeywordToken(yytext,IF), WadeSpace::location()); 
                }
 "inline"       { 
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_INLINE(INLINE, WadeSpace::location()); 
+                return WadeSpace::Parser::make_INLINE(createKeywordToken(yytext,INLINE), WadeSpace::location()); 
                }
 "int"          { 
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_INT(INT, WadeSpace::location()); 
+                return WadeSpace::Parser::make_INT(createKeywordToken(yytext,INT), WadeSpace::location()); 
                }
 "long"         { 
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_LONG(LONG, WadeSpace::location()); 
+                return WadeSpace::Parser::make_LONG(createKeywordToken(yytext,LONG), WadeSpace::location()); 
                }
 "long long"    { 
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_LONG_LONG(LONG_LONG, WadeSpace::location()); 
+                return WadeSpace::Parser::make_LONG_LONG(createKeywordToken(yytext,LONG_LONG), WadeSpace::location()); 
                }
 "register"     { 
                 //cout << "Scanner: token [" << yytext << "]" << endl;
@@ -150,23 +150,23 @@ WS  [ \t\v\n\f]
                }
 "restrict"     { 
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_RESTRICT(RESTRICT, WadeSpace::location()); 
+                return WadeSpace::Parser::make_RESTRICT(createKeywordToken(yytext,RESTRICT), WadeSpace::location()); 
                }
 "return"       { 
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_RETURN(RETURN, WadeSpace::location()); 
+                return WadeSpace::Parser::make_RETURN(createKeywordToken(yytext,RETURN), WadeSpace::location()); 
                }
 "short"        { 
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_SHORT(SHORT, WadeSpace::location()); 
+                return WadeSpace::Parser::make_SHORT(createKeywordToken(yytext,SHORT), WadeSpace::location()); 
                }
 "signed"       { 
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_SIGNED(SIGNED, WadeSpace::location()); 
+                return WadeSpace::Parser::make_SIGNED(createKeywordToken(yytext,SIGNED), WadeSpace::location()); 
                }
 "sizeof"       { 
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_SIZEOF(SIZEOF, WadeSpace::location()); 
+                return WadeSpace::Parser::make_SIZEOF(createKeywordToken(yytext,SIZEOF), WadeSpace::location()); 
                }
 "static"       { 
                 //cout << "Scanner: token [" << yytext << "]" << endl;
@@ -174,11 +174,11 @@ WS  [ \t\v\n\f]
                }
 "struct"       { 
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_STRUCT(STRUCT, WadeSpace::location()); 
+                return WadeSpace::Parser::make_STRUCT(createKeywordToken(yytext,STRUCT), WadeSpace::location()); 
                }
 "switch"       { 
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_SWITCH(SWITCH, WadeSpace::location()); 
+                return WadeSpace::Parser::make_SWITCH(createKeywordToken(yytext,SWITCH), WadeSpace::location()); 
                }
 "typedef"      { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
@@ -186,116 +186,116 @@ WS  [ \t\v\n\f]
                }
 "union"        { 
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_UNION(UNION, WadeSpace::location()); 
+                return WadeSpace::Parser::make_UNION(createKeywordToken(yytext,UNION), WadeSpace::location()); 
                }
 "unsigned"     { 
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_UNSIGNED(UNSIGNED, WadeSpace::location()); 
+                return WadeSpace::Parser::make_UNSIGNED(createKeywordToken(yytext,UNSIGNED), WadeSpace::location()); 
                }
 "void"         { 
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_VOID(VOID, WadeSpace::location()); 
+                return WadeSpace::Parser::make_VOID(createKeywordToken(yytext,VOID), WadeSpace::location()); 
                }
 "volatile"     { 
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_VOLATILE(VOLATILE, WadeSpace::location()); 
+                return WadeSpace::Parser::make_VOLATILE(createKeywordToken(yytext,VOLATILE), WadeSpace::location()); 
                }
 "while"        { 
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_WHILE(WHILE, WadeSpace::location()); 
+                return WadeSpace::Parser::make_WHILE(createKeywordToken(yytext,WHILE), WadeSpace::location()); 
                }
 "bool"         { 
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_BOOL(BOOL, WadeSpace::location()); 
+                return WadeSpace::Parser::make_BOOL(createKeywordToken(yytext,BOOL), WadeSpace::location()); 
                }
 "complex"      { 
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_COMPLEX(COMPLEX, WadeSpace::location()); 
+                return WadeSpace::Parser::make_COMPLEX(createKeywordToken(yytext,COMPLEX), WadeSpace::location()); 
                }
 "imaginary"    { 
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_IMAGINARY(IMAGINARY, WadeSpace::location()); 
+                return WadeSpace::Parser::make_IMAGINARY(createKeywordToken(yytext,IMAGINARY), WadeSpace::location()); 
                }
 
 {L}{A}*        { 
                 cout << "Scanner: identifier [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_IDENTIFIER(yytext, WadeSpace::location()); 
+                return WadeSpace::Parser::make_IDENTIFIER(createStringIDToken(yytext), WadeSpace::location()); 
                }
 {HP}{H}+{IS}?  {
                 //cout << "Scanner: decimal number: " << yytext << endl;
                 uint64_t number = strtoull(yytext, 0, 10);
-                return WadeSpace::Parser::make_I_CONST(number, WadeSpace::location());
+                return WadeSpace::Parser::make_I_CONST(createConstantULLToken(number), WadeSpace::location());
                }
 {NZ}{D}*{IS}?  {
                 //cout << "Scanner: decimal number: " << yytext << endl;
                 uint64_t number = strtoull(yytext, 0, 10);
-                return WadeSpace::Parser::make_I_CONST(number, WadeSpace::location());
+                return WadeSpace::Parser::make_I_CONST(createConstantULLToken(number), WadeSpace::location());
                }
 "0"{O}*{IS}?   {
                 //cout << "Scanner: decimal number: " << yytext << endl;
                 uint64_t number = strtoull(yytext, 0, 10);
-                return WadeSpace::Parser::make_I_CONST(number, WadeSpace::location());
+                return WadeSpace::Parser::make_I_CONST(createConstantULLToken(number), WadeSpace::location());
                }
 {CP}?"'"([^'\\\n]|{ES})+"'"  {
                 //cout << "Scanner: decimal number: " << yytext << endl;
                 uint64_t number = strtoull(yytext, 0, 10);
-                return WadeSpace::Parser::make_I_CONST(number, WadeSpace::location());
+                return WadeSpace::Parser::make_I_CONST(createConstantULLToken(number), WadeSpace::location());
                }
 {D}+{E}{FS}?  {              
                 //cout << "Scanner: decimal number: " << yytext << endl;
                 long double number = strtold(yytext, NULL);
-                return WadeSpace::Parser::make_F_CONST(number, WadeSpace::location());
+                return WadeSpace::Parser::make_F_CONST(createConstantLDToken(number), WadeSpace::location());
                }
 {D}*"."{D}+{E}?{FS}? {              
                 //cout << "Scanner: decimal number: " << yytext << endl;
                 long double number = strtold(yytext, NULL);
-                return WadeSpace::Parser::make_F_CONST(number, WadeSpace::location());
+                return WadeSpace::Parser::make_F_CONST(createConstantLDToken(number), WadeSpace::location());
                }
 {D}+"."{E}?{FS}? {              
                 //cout << "Scanner: decimal number: " << yytext << endl;
                 long double number = strtold(yytext, NULL);
-                return WadeSpace::Parser::make_F_CONST(number, WadeSpace::location());
+                return WadeSpace::Parser::make_F_CONST(createConstantLDToken(number), WadeSpace::location());
                }
 {HP}{H}+{P}{FS}? {              
                 //cout << "Scanner: decimal number: " << yytext << endl;
                 long double number = strtold(yytext, NULL);
-                return WadeSpace::Parser::make_F_CONST(number, WadeSpace::location());
+                return WadeSpace::Parser::make_F_CONST(createConstantLDToken(number), WadeSpace::location());
                }
 {HP}{H}*"."{H}+{P}{FS}? {              
                 //cout << "Scanner: decimal number: " << yytext << endl;
                 long double number = strtold(yytext, NULL);
-                return WadeSpace::Parser::make_F_CONST(number, WadeSpace::location());
+                return WadeSpace::Parser::make_F_CONST(createConstantLDToken(number), WadeSpace::location());
                }
 {HP}{H}+"."{P}{FS}? {              
                 //cout << "Scanner: decimal number: " << yytext << endl;
                 long double number = strtold(yytext, NULL);
-                return WadeSpace::Parser::make_F_CONST(number, WadeSpace::location());
+                return WadeSpace::Parser::make_F_CONST(createConstantLDToken(number), WadeSpace::location());
                }
 
 ({SP}?\"([^"\\\n]|{ES})*\"{WS}*)+   { 
                 //cout << "Scanner: string literal [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_STRING_LITERAL(yytext, WadeSpace::location()); 
+                return WadeSpace::Parser::make_STRING_LITERAL(createStringConstantToken(yytext), WadeSpace::location()); 
                }               
 
 "..."          {
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_ELLIPSIS(ELLIPSIS,WadeSpace::location());
+                return WadeSpace::Parser::make_ELLIPSIS(createKeywordToken(yytext,ELLIPSIS),WadeSpace::location());
                }
 "?"            {
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_QUESTION(QUESTION,WadeSpace::location());
+                return WadeSpace::Parser::make_QUESTION(createKeywordToken(yytext,QUESTION),WadeSpace::location());
                }
 ";"            {
                 cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_SEMICOLON(SEMICOLON,WadeSpace::location());
+                return WadeSpace::Parser::make_SEMICOLON(createKeywordToken(yytext,SEMICOLON),WadeSpace::location());
                }
 "{"            {
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_OCURLY(OCURLY,WadeSpace::location());
+                return WadeSpace::Parser::make_OCURLY(createKeywordToken(yytext,OCURLY),WadeSpace::location());
                }
 "}"            {
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_CCURLY(CCURLY,WadeSpace::location());
+                return WadeSpace::Parser::make_CCURLY(createKeywordToken(yytext,CCURLY),WadeSpace::location());
                }
 ","            {
                 //cout << "Scanner: token [" << yytext << "]" << endl;
@@ -303,27 +303,27 @@ WS  [ \t\v\n\f]
                }
 ":"            {
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_COLON(COLON,WadeSpace::location());
+                return WadeSpace::Parser::make_COLON(createKeywordToken(yytext,COLON),WadeSpace::location());
                }
 "("            {
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_OPAREN(OPAREN,WadeSpace::location());
+                return WadeSpace::Parser::make_OPAREN(createKeywordToken(yytext,OPAREN),WadeSpace::location());
                }
 ")"            {
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_CPAREN(CPAREN,WadeSpace::location());
+                return WadeSpace::Parser::make_CPAREN(createKeywordToken(yytext,CPAREN),WadeSpace::location());
                }
 "["            {
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_OBRACE(OBRACE,WadeSpace::location());
+                return WadeSpace::Parser::make_OBRACE(createKeywordToken(yytext,OBRACE),WadeSpace::location());
                }
 "]"            {
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_CBRACE(CBRACE,WadeSpace::location());
+                return WadeSpace::Parser::make_CBRACE(createKeywordToken(yytext,CBRACE),WadeSpace::location());
                }
 "."            {
                 //cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_PERIOD(PERIOD,WadeSpace::location());
+                return WadeSpace::Parser::make_PERIOD(createKeywordToken(yytext,PERIOD),WadeSpace::location());
                }
 "~"            {
                 //cout << "Scanner: token [" << yytext << "]" << endl;

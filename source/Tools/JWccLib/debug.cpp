@@ -32,13 +32,13 @@ vector<Expression*>* createArgumentExpressionList(Expression* exp, vector<Expres
 
 Expression* createExpression(
 	NodeType type,
-	optional<int> token1,
-	optional<int> token2,
-	Expression* const lexp,
+	TokenPtr token1,
+	TokenPtr token2,
+	Expression* lexp,
 	Expression* exp1,
 	Expression* exp2,
 	vector<Expression*>* argumentList,
-	optional<string> identifier,
+	TokenPtr identifier,
 	vector<Initializer*>* initializerList,
 	TypeName* typeName,
 	TokenPtr token3,
@@ -49,7 +49,7 @@ Expression* createExpression(
 	return new Expression(new NodeData(type, token1, token2, lexp, exp1, exp2, argumentList, identifier, initializerList, typeName, token3), left, op, right);
 }
 
-Constant* createConstant(const optional<uint64_t>& iConst, const optional<long double>& fConst, const optional<string>& strConst, const optional<TokenType>& type)
+Constant* createConstant(const TokenPtr iConst, const TokenPtr fConst, const TokenPtr strConst, const optional<TokenType>& type)
 {
 	return new Constant(iConst, fConst, strConst, type);
 }
@@ -74,7 +74,7 @@ StorageClassSpecifier* createStorageClassSpecifier(const TokenPtr token)
 	return new StorageClassSpecifier(token);
 }
 
-Expression* createPrimaryExpression(const optional<string>& identifier, Constant* constant)
+Expression* createPrimaryExpression(const TokenPtr identifier, Constant* constant)
 {
 	return new Expression();//FIX ME identifier, constant);
 }

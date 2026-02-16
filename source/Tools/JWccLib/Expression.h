@@ -19,26 +19,26 @@ namespace WadeSpace
 	typedef struct NodeData
 	{
 		NodeType type;
-		optional<int> token1;
-		optional<int> token2;
+		TokenPtr token1;
+		TokenPtr token2;
 		Expression* lexp;
 		Expression* exp1;
 		Expression* exp2;
 		vector<Expression*>* argumentList;
-		optional<string> identifier;
+		TokenPtr identifier;
 		vector<Initializer*>* initializerList;
 		TypeName* typeName;
 		TokenPtr token3;
 		NodeData();
 		NodeData(
 			const NodeType type,
-			const optional<int> token1,
-			const optional<int> token2,
+			const TokenPtr token1,
+			const TokenPtr token2,
 			Expression* const lexp,
 			Expression* const exp1,
 			Expression* const exp2,
 			vector<Expression*>* argumentList,
-			optional<string> identifier,
+			TokenPtr identifier,
 			vector<Initializer*>* initializerList,
 			TypeName* typeName,
 			TokenPtr token3
