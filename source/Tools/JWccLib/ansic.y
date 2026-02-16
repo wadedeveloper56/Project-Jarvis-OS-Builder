@@ -592,21 +592,21 @@ abstract_declarator
     ;
 
 direct_abstract_declarator
-    : OPAREN abstract_declarator CPAREN                            { $<DirectAbstractDeclarator *>$ = new DirectAbstractDeclarator($2); cout << "OPAREN abstract_declarator CPAREN REDUCE to direct_abstract_declarator" << endl; }
-    | OBRACE CBRACE                                                { $<DirectAbstractDeclarator *>$ = new DirectAbstractDeclarator(ARRAY); cout << "OBRACE CBRACE REDUCE to direct_abstract_declarator" << endl; }
-    | OBRACE constant_expression CBRACE                            { $<DirectAbstractDeclarator *>$ = new DirectAbstractDeclarator($2); cout << "OBRACE constant_expression CBRACE REDUCE to direct_abstract_declarator" << endl; }
-    | direct_abstract_declarator OBRACE CBRACE                     { $<DirectAbstractDeclarator *>$ = new DirectAbstractDeclarator($1,ARRAY); cout << "direct_abstract_declarator OBRACE CBRACE REDUCE to direct_abstract_declarator" << endl; }
-    | direct_abstract_declarator OBRACE constant_expression CBRACE { $<DirectAbstractDeclarator *>$ = new DirectAbstractDeclarator($1,$3,ARRAY); cout << "direct_abstract_declarator OBRACE constant_expression CBRACE REDUCE to direct_abstract_declarator" << endl; }
-    | OPAREN CPAREN                                                { $<DirectAbstractDeclarator *>$ = new DirectAbstractDeclarator(FUNCTION); cout << "OPAREN CPAREN REDUCE to direct_abstract_declarator" << endl; }
-    | OPAREN parameter_type_list CPAREN                            { $<DirectAbstractDeclarator *>$ = new DirectAbstractDeclarator($2,FUNCTION); cout << "OPAREN parameter_type_list CPAREN REDUCE to direct_abstract_declarator" << endl; }
-    | direct_abstract_declarator OPAREN CPAREN                     { $<DirectAbstractDeclarator *>$ = new DirectAbstractDeclarator($1,FUNCTION); cout << "direct_abstract_declarator OPAREN CPAREN REDUCE to direct_abstract_declarator" << endl; }
-    | direct_abstract_declarator OPAREN parameter_type_list CPAREN { $<DirectAbstractDeclarator *>$ = new DirectAbstractDeclarator($1,$3,FUNCTION); cout << "direct_abstract_declarator OPAREN parameter_type_list CPAREN REDUCE to direct_abstract_declarator" << endl; }
+    : OPAREN abstract_declarator CPAREN                            { $$ = new DirectAbstractDeclarator($2); cout << "OPAREN abstract_declarator CPAREN REDUCE to direct_abstract_declarator" << endl; }
+    | OBRACE CBRACE                                                { $$ = new DirectAbstractDeclarator(ARRAY); cout << "OBRACE CBRACE REDUCE to direct_abstract_declarator" << endl; }
+    | OBRACE constant_expression CBRACE                            { $$ = new DirectAbstractDeclarator($2); cout << "OBRACE constant_expression CBRACE REDUCE to direct_abstract_declarator" << endl; }
+    | direct_abstract_declarator OBRACE CBRACE                     { $$ = new DirectAbstractDeclarator($1,ARRAY); cout << "direct_abstract_declarator OBRACE CBRACE REDUCE to direct_abstract_declarator" << endl; }
+    | direct_abstract_declarator OBRACE constant_expression CBRACE { $$ = new DirectAbstractDeclarator($1,$3,ARRAY); cout << "direct_abstract_declarator OBRACE constant_expression CBRACE REDUCE to direct_abstract_declarator" << endl; }
+    | OPAREN CPAREN                                                { $$ = new DirectAbstractDeclarator(FUNCTION); cout << "OPAREN CPAREN REDUCE to direct_abstract_declarator" << endl; }
+    | OPAREN parameter_type_list CPAREN                            { $$ = new DirectAbstractDeclarator($2,FUNCTION); cout << "OPAREN parameter_type_list CPAREN REDUCE to direct_abstract_declarator" << endl; }
+    | direct_abstract_declarator OPAREN CPAREN                     { $$ = new DirectAbstractDeclarator($1,FUNCTION); cout << "direct_abstract_declarator OPAREN CPAREN REDUCE to direct_abstract_declarator" << endl; }
+    | direct_abstract_declarator OPAREN parameter_type_list CPAREN { $$ = new DirectAbstractDeclarator($1,$3,FUNCTION); cout << "direct_abstract_declarator OPAREN parameter_type_list CPAREN REDUCE to direct_abstract_declarator" << endl; }
     ;
 
 initializer
-    : assignment_expression                { $<Initializer *>$ = new Initializer($1); cout << "assignment_expression REDUCE to initializer" << endl; }
-    | OCURLY initializer_list CCURLY       { $<Initializer *>$ = new Initializer($2); cout << "OCURLY initializer_list CCURLY REDUCE to initializer" << endl; }
-    | OCURLY initializer_list COMMA CCURLY { $<Initializer *>$ = new Initializer($2); cout << "OCURLY initializer_list COMMA CCURLY REDUCE to initializer" << endl; }
+    : assignment_expression                { $$ = new Initializer($1); cout << "assignment_expression REDUCE to initializer" << endl; }
+    | OCURLY initializer_list CCURLY       { $$ = new Initializer($2); cout << "OCURLY initializer_list CCURLY REDUCE to initializer" << endl; }
+    | OCURLY initializer_list COMMA CCURLY { $$ = new Initializer($2); cout << "OCURLY initializer_list COMMA CCURLY REDUCE to initializer" << endl; }
     ;
 
 initializer_list
@@ -626,18 +626,18 @@ initializer_list
     ;
 
 statement
-    : labeled_statement    { $<BaseStatement *>$ = new Statement(labeled_statement,$1); cout << "labeled_statement REDUCE to statement" << endl; }
-    | compound_statement   { $<BaseStatement *>$ = new Statement(compound_statement,$1); cout << "compound_statement REDUCE to statement" << endl; }
-    | expression_statement { $<BaseStatement *>$ = new Statement(expression_statement,$1); cout << "expression_statement REDUCE to statement" << endl; }
-    | selection_statement  { $<BaseStatement *>$ = new Statement(selection_statement,$1); cout << "selection_statement REDUCE to statement" << endl; }
-    | iteration_statement  { $<BaseStatement *>$ = new Statement(iteration_statement,$1); cout << "iteration_statement REDUCE to statement" << endl; }
-    | jump_statement       { $<BaseStatement *>$ = new Statement(jump_statement,$1); cout << "jump_statement REDUCE to statement" << endl; }
+    : labeled_statement    { $$ = new Statement(labeled_statement,$1); cout << "labeled_statement REDUCE to statement" << endl; }
+    | compound_statement   { $$ = new Statement(compound_statement,$1); cout << "compound_statement REDUCE to statement" << endl; }
+    | expression_statement { $$ = new Statement(expression_statement,$1); cout << "expression_statement REDUCE to statement" << endl; }
+    | selection_statement  { $$ = new Statement(selection_statement,$1); cout << "selection_statement REDUCE to statement" << endl; }
+    | iteration_statement  { $$ = new Statement(iteration_statement,$1); cout << "iteration_statement REDUCE to statement" << endl; }
+    | jump_statement       { $$ = new Statement(jump_statement,$1); cout << "jump_statement REDUCE to statement" << endl; }
     ;
 
 labeled_statement
-    : IDENTIFIER COLON statement               { $<BaseStatement *>$ = new LabeledStatement($1,$3); cout << "IDENTIFIER COLON statement REDUCE to label_statement" << endl; }
-    | CASE constant_expression COLON statement { $<BaseStatement *>$ = new LabeledStatement(CASE,$2,$4); cout << "CASE constant_expression COLON statement REDUCE to label_statement" << endl; }
-    | DEFAULT COLON statement                  { $<BaseStatement *>$ = new LabeledStatement(DEFAULT,$3); cout << "DEFAULT COLON statement REDUCE to label_statement" << endl; }
+    : IDENTIFIER COLON statement               { $$ = new LabeledStatement($1,$3); cout << "IDENTIFIER COLON statement REDUCE to label_statement" << endl; }
+    | CASE constant_expression COLON statement { $$ = new LabeledStatement(CASE,$2,$4); cout << "CASE constant_expression COLON statement REDUCE to label_statement" << endl; }
+    | DEFAULT COLON statement                  { $$ = new LabeledStatement(DEFAULT,$3); cout << "DEFAULT COLON statement REDUCE to label_statement" << endl; }
     ;
 
 compound_statement
