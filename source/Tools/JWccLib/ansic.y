@@ -468,30 +468,19 @@ struct_declaration_list
     ;
 
 struct_declaration
-    : specifier_qualifier_list struct_declarator_list SEMICOLON { $<StructDeclaration *>$ = new StructDeclaration($1,$2); cout << "specifier_qualifier_list struct_declarator_list SEMICOLON REDUCE to struct_declaration" << endl;}
+    : specifier_qualifier_list struct_declarator_list SEMICOLON { $$ = new StructDeclaration($1,$2); cout << "specifier_qualifier_list struct_declarator_list SEMICOLON REDUCE to struct_declaration" << endl;}
     ;
 
 specifier_qualifier_list
-    : type_specifier specifier_qualifier_list { $<SpecifierQualifierList *>$ = new SpecifierQualifierList($2,$1); cout << "type_specifier specifier_qualifier_list REDUCE to specifier_qualifier_list" << endl;}
-    | type_specifier                          { $<SpecifierQualifierList *>$ = new SpecifierQualifierList($1); cout << "type_specifier REDUCE to specifier_qualifier_list" << endl;}
-    | type_qualifier specifier_qualifier_list { $<SpecifierQualifierList *>$ = new SpecifierQualifierList($2,$1); cout << "type_qualifier specifier_qualifier_list REDUCE to specifier_qualifier_list" << endl;}
-    | type_qualifier                          { $<SpecifierQualifierList *>$ = new SpecifierQualifierList($1); cout << "type_qualifier REDUCE to specifier_qualifier_list" << endl;}
+    : type_specifier specifier_qualifier_list { $$ = new SpecifierQualifierList($2,$1); cout << "type_specifier specifier_qualifier_list REDUCE to specifier_qualifier_list" << endl;}
+    | type_specifier                          { $$ = new SpecifierQualifierList($1); cout << "type_specifier REDUCE to specifier_qualifier_list" << endl;}
+    | type_qualifier specifier_qualifier_list { $$ = new SpecifierQualifierList($2,$1); cout << "type_qualifier specifier_qualifier_list REDUCE to specifier_qualifier_list" << endl;}
+    | type_qualifier                          { $$ = new SpecifierQualifierList($1); cout << "type_qualifier REDUCE to specifier_qualifier_list" << endl;}
     ;
 
 struct_declarator_list
-    : struct_declarator                              {
-                                                       StructDeclarator* exp = $1;
-                                                       $$ = new std::vector<StructDeclarator *>();
-                                                       $$->push_back(exp);
-                                                       cout << "struct_declarator REDUCE to struct_declarator_list" << endl;
-                                                     }
-    | struct_declarator_list COMMA struct_declarator {
-                                                       StructDeclarator* value1 = $3;
-                                                       std::vector<StructDeclarator*>* value2 = $1;
-                                                       value2->push_back(value1);
-                                                       $$ = value2;
-                                                       cout << "struct_declarator_list COMMA struct_declarator REDUCE to struct_declarator_list" << endl;
-                                                     }
+    : struct_declarator                              { $$ = createStructDeclaratorList($1,nullptr); cout << "struct_declarator REDUCE to struct_declarator_list" << endl; }
+    | struct_declarator_list COMMA struct_declarator { $$ = createStructDeclaratorList($3,$1); cout << "struct_declarator_list COMMA struct_declarator REDUCE to struct_declarator_list" << endl; }
     ;
 
 struct_declarator
@@ -507,19 +496,8 @@ enum_specifier
     ;
 
 enumerator_list
-    : enumerator                        {
-                                          Enumerator* exp = $1;
-                                          $$ = new std::vector<Enumerator *>();
-                                          $$->push_back(exp);
-                                          cout << "enumerator REDUCE enumerator_list" << endl;
-                                        }
-    | enumerator_list COMMA enumerator  {
-                                          Enumerator* value1 = $3;
-                                          std::vector<Enumerator*>* value2 = $1;
-                                          value2->push_back(value1);
-                                          $$ = value2;
-                                          cout << "enumerator_list COMMA enumerator REDUCE enumerator_list" << endl;
-                                        }
+    : enumerator                        { $$ = createEnumeratorList($1,nullptr); cout << "enumerator REDUCE enumerator_list" << endl;}
+    | enumerator_list COMMA enumerator  { $$ = createEnumeratorList($3,$1); cout << "enumerator_list COMMA enumerator REDUCE enumerator_list" << endl; }
     ;
 
 enumerator
@@ -548,28 +526,16 @@ direct_declarator
     ;
 
 pointer
-    : TIMES_OP                              {$<Pointer *>$ = new Pointer($1); cout << "TIMES_OP REDUCE to POINTER" << endl;}
-    | TIMES_OP type_qualifier_list          {$<Pointer *>$ = new Pointer($1,$2); cout << "TIMES_OP type_qualifier_list REDUCE to POINTER" << endl;}
-    | TIMES_OP pointer                      {$<Pointer *>$ = new Pointer($1,$2); $<Pointer *>$->inc(); cout << "TIMES_OP pointer REDUCE to POINTER" << endl;}
-    | TIMES_OP type_qualifier_list pointer  {$<Pointer *>$ = new Pointer($1,$2,$3); $<Pointer *>$->inc(); cout << "TIMES_OP type_qualifier_list pointer REDUCE to POINTER" << endl;}
+    : TIMES_OP                              {$$ = new Pointer($1); cout << "TIMES_OP REDUCE to POINTER" << endl;}
+    | TIMES_OP type_qualifier_list          {$$ = new Pointer($1,$2); cout << "TIMES_OP type_qualifier_list REDUCE to POINTER" << endl;}
+    | TIMES_OP pointer                      {$$ = new Pointer($1,$2); $$->inc(); cout << "TIMES_OP pointer REDUCE to POINTER" << endl;}
+    | TIMES_OP type_qualifier_list pointer  {$$ = new Pointer($1,$2,$3); $$->inc(); cout << "TIMES_OP type_qualifier_list pointer REDUCE to POINTER" << endl;}
     ;
 
 type_qualifier_list
-    : type_qualifier        {
-                             TypeQualifier* exp = $1;
-                             $$ = new std::vector<TypeQualifier*>();
-                             $$->push_back(exp);
-                             cout << "type_qualifier REDUCE type_qualifier_list" << endl;
-                            }
-    | type_qualifier_list type_qualifier {
-                                          TypeQualifier* value1 = $2;
-                                          std::vector<TypeQualifier *>* value2 = $1;
-                                          value2->push_back(value1);
-                                          $$ = value2;
-                                          cout << "type_qualifier_list type_qualifier REDUCE type_qualifier_list" << endl;
-                                        }
+    : type_qualifier                     { $$ = createTypeQualifierList($1,nullptr);cout << "type_qualifier REDUCE type_qualifier_list" << endl; }
+    | type_qualifier_list type_qualifier { $$ = createTypeQualifierList($2,$1); cout << "type_qualifier_list type_qualifier REDUCE type_qualifier_list" << endl; }
     ;
-
 
 parameter_type_list
     : parameter_list                  { $$ = new ParameterTypeList($1,false); cout << "parameter_list REDUCE to parameter_type_list" << endl; }

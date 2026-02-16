@@ -5,6 +5,36 @@
 using namespace std;
 using namespace WadeSpace;
 
+vector<TypeQualifier*>* createTypeQualifierList(TypeQualifier* value1, vector<TypeQualifier*>* list)
+{
+	if (list == nullptr)
+	{
+		list = new vector<TypeQualifier*>();
+	}
+	list->push_back(value1);
+	return list;
+}
+
+vector<Enumerator*>* createEnumeratorList(Enumerator* value1, vector<Enumerator*>* list)
+{
+	if (list == nullptr)
+	{
+		list = new vector<Enumerator*>();
+	}
+	list->push_back(value1);
+	return list;
+}
+
+vector<StructDeclarator*>* createStructDeclaratorList(StructDeclarator* value1, vector<StructDeclarator*>* list)
+{
+	if (list == nullptr)
+	{
+		list = new vector<StructDeclarator*>();
+	}
+	list->push_back(value1);
+	return list;
+}
+
 vector<StructDeclaration*>* createStructDeclarationList(StructDeclaration* value1, vector<StructDeclaration*>* list)
 {
 	if (list == nullptr)

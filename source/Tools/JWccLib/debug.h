@@ -42,3 +42,6 @@ Expression* createPrimaryExpression(const TokenPtr identifier, Constant* constan
 vector<Declaration*>* createDeclarationList(Declaration* exp, vector<Declaration*>* list);
 InitDeclarator* createInitDeclarator(Declarator* declarator, Initializer* initializer);
 vector<StructDeclaration*>* createStructDeclarationList(StructDeclaration* value1, vector<StructDeclaration*>* list);
+vector<StructDeclarator*>* createStructDeclaratorList(StructDeclarator* value1, vector<StructDeclarator*>* list);
+vector<Enumerator*>* createEnumeratorList(Enumerator* value1, vector<Enumerator*>* list);
+vector<TypeQualifier*>* createTypeQualifierList(TypeQualifier* value1, vector<TypeQualifier*>* list);
