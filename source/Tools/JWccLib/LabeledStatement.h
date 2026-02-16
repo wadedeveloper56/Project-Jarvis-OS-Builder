@@ -13,7 +13,7 @@ namespace WadeSpace
 	class LabeledStatement : public BaseStatement
 	{
 	public:
-		LabeledStatement(string&  identifier, BaseStatement* statement);
+		LabeledStatement(TokenPtr identifier, BaseStatement* statement);
 		LabeledStatement(TokenType op, Expression* exp, BaseStatement* statement);
 		LabeledStatement(TokenType op, BaseStatement* statement);
 		LabeledStatement();

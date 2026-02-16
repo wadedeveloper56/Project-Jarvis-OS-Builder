@@ -3,11 +3,11 @@
 
 using namespace WadeSpace;
 
-ParameterTypeList::ParameterTypeList(vector<ParameterDeclaration*>* vectorParameterDeclaration, const int& ellipsis) : vectorParameterDeclaration(vectorParameterDeclaration), ellipsis(ellipsis)
+ParameterTypeList::ParameterTypeList(vector<ParameterDeclaration*>* vectorParameterDeclaration, bool ellipsis) : vectorParameterDeclaration(vectorParameterDeclaration), ellipsis(ellipsis)
 {
 }
 
-ParameterTypeList::ParameterTypeList() : vectorParameterDeclaration(nullptr), ellipsis(nullopt)
+ParameterTypeList::ParameterTypeList() : vectorParameterDeclaration(nullptr), ellipsis(false)
 {
 }
 
@@ -21,7 +21,7 @@ vector<ParameterDeclaration*>* ParameterTypeList::getVectorParameterDeclaration(
 	return vectorParameterDeclaration;
 }
 
-optional<int> ParameterTypeList::getEllipsis() const
+bool ParameterTypeList::getEllipsis() const
 {
 	return ellipsis;
 }

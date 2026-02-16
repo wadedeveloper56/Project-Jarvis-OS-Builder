@@ -506,15 +506,15 @@ struct_declarator_list
     ;
 
 struct_declarator
-    : declarator                           { $<StructDeclarator *>$ = new StructDeclarator($1); cout << "declarator REDUCE to struct_declarator" << endl;}
-    | COLON constant_expression            { $<StructDeclarator *>$ = new StructDeclarator($2); cout << "COLON constant_expression REDUCE to struct_declarator" << endl;}
-    | declarator COLON constant_expression { $<StructDeclarator *>$ = new StructDeclarator($1,$3); cout << "declarator COLON constant_expression REDUCE to struct_declarator" << endl;}
+    : declarator                           { $$ = new StructDeclarator($1); cout << "declarator REDUCE to struct_declarator" << endl;}
+    | COLON constant_expression            { $$ = new StructDeclarator($2); cout << "COLON constant_expression REDUCE to struct_declarator" << endl;}
+    | declarator COLON constant_expression { $$ = new StructDeclarator($1,$3); cout << "declarator COLON constant_expression REDUCE to struct_declarator" << endl;}
     ;
 
 enum_specifier
-    : ENUM OCURLY enumerator_list CCURLY             { $<EnumSpecifier *>$ = new EnumSpecifier(nullptr,$3); cout << "ENUM OCURLY enumerator_list CCURLY REDUCE to enum_specifier" << endl;}
-    | ENUM IDENTIFIER OCURLY enumerator_list CCURLY  { $<EnumSpecifier *>$ = new EnumSpecifier($2,$4); cout << "ENUM IDENTIFIER OCURLY enumerator_list CCURLY REDUCE to enum_specifier" << endl;}
-    | ENUM IDENTIFIER                                { $<EnumSpecifier *>$ = new EnumSpecifier($2,nullptr); cout << "ENUM IDENTIFIER REDUCE to enum_specifier" << endl;}
+    : ENUM OCURLY enumerator_list CCURLY             { $$ = new EnumSpecifier(nullptr,$3); cout << "ENUM OCURLY enumerator_list CCURLY REDUCE to enum_specifier" << endl;}
+    | ENUM IDENTIFIER OCURLY enumerator_list CCURLY  { $$ = new EnumSpecifier($2,$4); cout << "ENUM IDENTIFIER OCURLY enumerator_list CCURLY REDUCE to enum_specifier" << endl;}
+    | ENUM IDENTIFIER                                { $$ = new EnumSpecifier($2,nullptr); cout << "ENUM IDENTIFIER REDUCE to enum_specifier" << endl;}
     ;
 
 enumerator_list
@@ -534,13 +534,13 @@ enumerator_list
     ;
 
 enumerator
-    : IDENTIFIER                           { $<Enumerator *>$ = new Enumerator($1); cout << "IDENTIFIER REDUCE to ENUMERATOR" << endl;}
-    | IDENTIFIER EQUAL constant_expression { $<Enumerator *>$ = new Enumerator($1,$3); cout << "IDENTIFIER EQUAL constant_expression REDUCE to ENUMERATOR" << endl;}
+    : IDENTIFIER                           { $$ = new Enumerator($1,nullptr); cout << "IDENTIFIER REDUCE to ENUMERATOR" << endl;}
+    | IDENTIFIER EQUAL constant_expression { $$ = new Enumerator($1,$3); cout << "IDENTIFIER EQUAL constant_expression REDUCE to ENUMERATOR" << endl;}
     ;
 
 type_qualifier
-    : CONST    { $<TypeQualifier *>$ = new TypeQualifier($1,CONST); cout << "CONST REDUCE to type_qualifier" << endl;}
-    | VOLATILE { $<TypeQualifier *>$ = new TypeQualifier($1,VOLATILE); cout << "VOLATILE REDUCE to type_qualifier" << endl;}
+    : CONST    { $$ = new TypeQualifier($1); cout << "CONST REDUCE to type_qualifier" << endl;}
+    | VOLATILE { $$ = new TypeQualifier($1); cout << "VOLATILE REDUCE to type_qualifier" << endl;}
     ;
 
 declarator
@@ -549,13 +549,13 @@ declarator
     ;
 
 direct_declarator
-    : IDENTIFIER                                            { $$ = createDirectDeclarator($1,nullopt,nullopt,NULL,NULL,NULL,NULL,NULL); cout << "IDENTIFIER REDUCE to direct_declarator" << endl;}
-    | OPAREN declarator CPAREN                              { $$ = createDirectDeclarator(nullopt,$1,$3,$2,NULL,NULL,NULL,NULL); cout << "OPAREN declarator CPAREN REDUCE to direct_declarator" << endl;}
-    | direct_declarator OBRACE constant_expression CBRACE   { $$ = createDirectDeclarator(nullopt,$2,$4,NULL,$1,$3,NULL,NULL); cout << "direct_declarator OBRACE constant_expression CBRACE REDUCE to direct_declarator" << endl;}
-    | direct_declarator OBRACE CBRACE                       { $$ = createDirectDeclarator(nullopt,$2,$3,NULL,$1,NULL,NULL,NULL); cout << "direct_declarator OBRACE CBRACE REDUCE to direct_declarator" << endl;}
-    | direct_declarator OPAREN parameter_type_list CPAREN   { $$ = createDirectDeclarator(nullopt,$2,$4,NULL,$1,NULL,$3,NULL); cout << "direct_declarator OPAREN parameter_type_list CPAREN to direct_declarator" << endl;}
-    | direct_declarator OPAREN identifier_list CPAREN       { $$ = createDirectDeclarator(nullopt,$2,$4,NULL,$1,NULL,NULL,$3); cout << "direct_declarator OPAREN identifier_list CPAREN REDUCE to direct_declarator" << endl;}
-    | direct_declarator OPAREN CPAREN                       { $$ = createDirectDeclarator(nullopt,$2,$3,NULL,$1,NULL,NULL,NULL); cout << "direct_declarator OPAREN CPAREN REDUCE to direct_declarator" << endl;}
+    : IDENTIFIER                                            { $$ = createDirectDeclarator($1,nullptr,nullptr,NULL,NULL,NULL,NULL,NULL); cout << "IDENTIFIER REDUCE to direct_declarator" << endl;}
+    | OPAREN declarator CPAREN                              { $$ = createDirectDeclarator(nullptr,$1,$3,$2,NULL,NULL,NULL,NULL); cout << "OPAREN declarator CPAREN REDUCE to direct_declarator" << endl;}
+    | direct_declarator OBRACE constant_expression CBRACE   { $$ = createDirectDeclarator(nullptr,$2,$4,NULL,$1,$3,NULL,NULL); cout << "direct_declarator OBRACE constant_expression CBRACE REDUCE to direct_declarator" << endl;}
+    | direct_declarator OBRACE CBRACE                       { $$ = createDirectDeclarator(nullptr,$2,$3,NULL,$1,NULL,NULL,NULL); cout << "direct_declarator OBRACE CBRACE REDUCE to direct_declarator" << endl;}
+    | direct_declarator OPAREN parameter_type_list CPAREN   { $$ = createDirectDeclarator(nullptr,$2,$4,NULL,$1,NULL,$3,NULL); cout << "direct_declarator OPAREN parameter_type_list CPAREN to direct_declarator" << endl;}
+    | direct_declarator OPAREN identifier_list CPAREN       { $$ = createDirectDeclarator(nullptr,$2,$4,NULL,$1,NULL,NULL,$3); cout << "direct_declarator OPAREN identifier_list CPAREN REDUCE to direct_declarator" << endl;}
+    | direct_declarator OPAREN CPAREN                       { $$ = createDirectDeclarator(nullptr,$2,$3,NULL,$1,NULL,NULL,NULL); cout << "direct_declarator OPAREN CPAREN REDUCE to direct_declarator" << endl;}
     ;
 
 pointer
@@ -583,8 +583,8 @@ type_qualifier_list
 
 
 parameter_type_list
-    : parameter_list                  { $<ParameterTypeList *>$ = new ParameterTypeList($1,NONE); cout << "parameter_list REDUCE to parameter_type_list" << endl; }
-    | parameter_list COMMA ELLIPSIS   { $<ParameterTypeList *>$ = new ParameterTypeList($1,$3); cout << "parameter_list COMMA ELLIPSIS REDUCE to parameter_type_list" << endl; }
+    : parameter_list                  { $$ = new ParameterTypeList($1,false); cout << "parameter_list REDUCE to parameter_type_list" << endl; }
+    | parameter_list COMMA ELLIPSIS   { $$ = new ParameterTypeList($1,true); cout << "parameter_list COMMA ELLIPSIS REDUCE to parameter_type_list" << endl; }
     ;
 
 parameter_list
@@ -611,15 +611,15 @@ parameter_declaration
 
 identifier_list
     : IDENTIFIER                       {
-                                          std::string exp = $1;
+                                          TokenPtr exp = $1;
                                           $$ = new std::vector<std::string>();
-                                          $$->push_back(exp);
+                                          $$->push_back(exp->data->repr.symbol.string);
                                           cout << "IDENTIFIER REDUCE to identifier_list" << endl;
                                        }
     | identifier_list COMMA IDENTIFIER {
-                                          std::string value1 = $3;
+                                          TokenPtr exp = $3;
                                           std::vector<std::string> *value2 = $1;
-                                          value2->push_back(value1);
+                                          value2->push_back(exp->data->repr.symbol.string);
                                           $$ = value2;
                                           cout << "identifier_list COMMA IDENTIFIER REDUCE to identifier_list" << endl; 
                                         }

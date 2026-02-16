@@ -34,7 +34,7 @@ Expression* createExpression(
 	Expression* right);
 Constant* createConstant(const TokenPtr iConst, const TokenPtr fConst, const TokenPtr strConst, const optional<TokenType>& type);
 Declarator* createDeclarator(Pointer* pointer, DirectDeclarator* directDeclarator);
-DirectDeclarator* createDirectDeclarator(const optional<string>& identifier, const optional<int>& token1, const optional<int>& token2, Declarator* const declarator, DirectDeclarator* const directDeclarator, Expression* const constantExpression, ParameterTypeList* const parameterTypeList, vector<string>* const vectorOfStrings);
+DirectDeclarator* createDirectDeclarator(TokenPtr identifier, TokenPtr token1, TokenPtr token2, Declarator* const declarator, DirectDeclarator* const directDeclarator, Expression* const constantExpression, ParameterTypeList* const parameterTypeList, vector<string>* const vectorOfStrings);
 DeclarationSpecifiers* createDeclarationSpecifiers(StorageClassSpecifier* const storageClassSpecifier, TypeSpecifier* const typeSpecifier, TypeQualifier* const typeQualifier, DeclarationSpecifiers* const declarationSpecifiers);
 StorageClassSpecifier* createStorageClassSpecifier(const TokenPtr token);
 Expression* createPrimaryExpression(const TokenPtr identifier, Constant* constant);

@@ -24,9 +24,9 @@ InitDeclarator::~InitDeclarator()
 Declarator* InitDeclarator::getDeclarator() const { return declarator; }
 Initializer* InitDeclarator::getInitializer() const { return initializer; }
 
-string InitDeclarator::getVariableName()
+string InitDeclarator::getVariableName() const
 {
-	optional<string> name = getDeclarator()->getDirectDeclarator()->getIdentifier();
-	if (!name.has_value()) name = getDeclarator()->getDirectDeclarator()->getDirectDeclarator()->getIdentifier();
-	return (name.has_value()) ? name.value() : "";
+	TokenPtr identifier = getDeclarator()->getDirectDeclarator()->getIdentifier();
+	if (!identifier) identifier = getDeclarator()->getDirectDeclarator()->getDirectDeclarator()->getIdentifier();
+	return (identifier) ? identifier->data->repr.symbol.string : "";
 }

@@ -8,9 +8,9 @@ using namespace WadeSpace;
 using namespace std;
 
 DirectDeclarator::DirectDeclarator(
-	const optional<string>& identifier, 
-	const optional<int>& token1, 
-	const optional<int>& token2,
+	TokenPtr identifier, 
+	TokenPtr token1,
+	TokenPtr token2,
 	Declarator* const declarator, 
 	DirectDeclarator* const directDeclarator,
 	Expression* const constantExpression,
@@ -27,17 +27,17 @@ DirectDeclarator::DirectDeclarator(
 {
 }
 
-optional<string> DirectDeclarator::getIdentifier() const
+TokenPtr DirectDeclarator::getIdentifier() const
 {
 	return identifier;
 }
 
-optional<int> DirectDeclarator::getToken1() const
+TokenPtr DirectDeclarator::getToken1() const
 {
 	return token1;
 }
 
-optional<int> DirectDeclarator::getToken2() const
+TokenPtr DirectDeclarator::getToken2() const
 {
 	return token2;
 }

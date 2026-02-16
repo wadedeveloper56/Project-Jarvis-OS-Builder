@@ -4,6 +4,8 @@
 #include <vector>
 #include <optional>
 
+#include "Token.h"
+
 using namespace std;
 
 namespace WadeSpace
@@ -13,15 +15,14 @@ namespace WadeSpace
 	class Enumerator
 	{
 	public:
-		Enumerator(string&  operatorStr, Expression* constantExpression);
-		Enumerator(string&  operatorStr);
+		Enumerator(TokenPtr identifier, Expression* constantExpression);
 		Enumerator();
 		virtual ~Enumerator();
-		optional<string> getOperatorStr() const;
+		TokenPtr getIdentifier() const;
 		Expression* getConstantExpression() const;
 
 	private:
-		optional<string> operatorStr;
+		TokenPtr identifier;
 		Expression* constantExpression;
 	};
 }

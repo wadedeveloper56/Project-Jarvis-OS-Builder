@@ -3,6 +3,8 @@
 #include <string>
 #include <vector>
 #include <optional>
+
+#include "Token.h"
 #include "TokenType.h"
 
 using namespace std;
@@ -12,14 +14,12 @@ namespace WadeSpace
 	class TypeQualifier
 	{
 	public:
-		TypeQualifier(const int& value, TokenType type);
-		TypeQualifier();
+		TypeQualifier(TokenPtr type);
+		TypeQualifier() = default;
 		virtual ~TypeQualifier();
-		optional<int> getOperatorStr() const;
-		TokenType getType() const;
+		TokenPtr getType() const;
 
 	private:
-		optional<int> operatorStr;
-		TokenType type;
+		TokenPtr type;
 	};
 }

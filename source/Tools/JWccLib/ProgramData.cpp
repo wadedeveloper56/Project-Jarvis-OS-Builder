@@ -50,13 +50,15 @@ void ProgramData::handleDeclaration(Declaration* declaration, vector<VariableDat
 	{
 		VariableData* data = new VariableData();
 		DirectDeclarator* dd = initDecl->getDeclarator()->getDirectDeclarator();
-		if (!((dd->getToken1() == OPAREN && dd->getToken2() == CPAREN) || (dd->getParameterTypeList() != nullptr)))
+		/*
+		if (!((dd->getToken1() != nullptr && dd->getToken1()->data->repr.symbol.string == "(" && dd->getToken2() != nullptr && dd->getToken2()->data->repr.symbol.string == ")") || (dd->getParameterTypeList() != nullptr)))
 		{
 			data->name = initDecl->getVariableName();
 			data->type = type;
 			data->size = getSize(type);
 			variableTable->push_back(data);
 		}
+		*/
 	}
 }
 
@@ -64,7 +66,7 @@ void ProgramData::handleFunction(FunctionDefinition* declaration, vector<Functio
 {
 	FunctionData* data = new FunctionData();
 	data->type = declaration->getDeclarationSpecifiers()->getTypeSpecifier()->getType().value();
-	data->name = declaration->getDeclarator()->getDirectDeclarator()->getDirectDeclarator()->getIdentifier().value();
+	data->name = declaration->getDeclarator()->getDirectDeclarator()->getDirectDeclarator()->getIdentifier()->data->repr.symbol.string;
 	ParameterTypeList* parameters = declaration->getDeclarator()->getDirectDeclarator()->getParameterTypeList();
 	if (parameters != nullptr && !parameters->getVectorParameterDeclaration()->empty())
 	{
@@ -72,7 +74,7 @@ void ProgramData::handleFunction(FunctionDefinition* declaration, vector<Functio
 		for (ParameterDeclaration* parameterDeclaration : *parameters->getVectorParameterDeclaration())
 		{
 			VariableData* functionData = new VariableData();
-			functionData->name = parameterDeclaration->getDeclarator()->getDirectDeclarator()->getIdentifier().value();
+			functionData->name = parameterDeclaration->getDeclarator()->getDirectDeclarator()->getIdentifier()->data->repr.symbol.string;
 			TokenType type = parameterDeclaration->getDeclarationSpecifiers()->getTypeSpecifier()->getType().value();
 			functionData->type = type;
 			functionData->size = getSize(type);

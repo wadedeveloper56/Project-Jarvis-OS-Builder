@@ -17,7 +17,7 @@ namespace WadeSpace
 		virtual ~InitDeclarator();
 		Declarator* getDeclarator() const;
 		Initializer* getInitializer() const;
-		string getVariableName();
+		string getVariableName() const;
 
 	private:
 		Declarator* declarator;

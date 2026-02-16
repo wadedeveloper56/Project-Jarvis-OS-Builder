@@ -3,6 +3,8 @@
 #include <string>
 #include <vector>
 #include <optional>
+
+#include "Token.h"
 #include "TokenType.h"
 
 using namespace std;
@@ -18,9 +20,9 @@ namespace WadeSpace
 	{
 	public:
 		DirectDeclarator(
-			const optional<string>& identifier, 
-			const optional<int>& token1, 
-			const optional<int>& token2,
+			TokenPtr identifier, 
+			TokenPtr token1,
+			TokenPtr token2,
 			Declarator* const declarator, 
 			DirectDeclarator* const directDeclarator,
 			Expression* const constantExpression, 
@@ -33,18 +35,18 @@ namespace WadeSpace
 		DirectDeclarator& operator=(const DirectDeclarator& other) = default;
 		DirectDeclarator& operator=(DirectDeclarator&& other) = default;
 
-		[[nodiscard]] optional<string> getIdentifier() const;
-		[[nodiscard]] optional<int> getToken1() const;
-		[[nodiscard]] optional<int> getToken2() const;
+		[[nodiscard]] TokenPtr getIdentifier() const;
+		[[nodiscard]] TokenPtr getToken1() const;
+		[[nodiscard]] TokenPtr getToken2() const;
 		[[nodiscard]] Declarator* getDeclarator() const;
 		[[nodiscard]] DirectDeclarator* getDirectDeclarator() const;
 		[[nodiscard]] Expression* getConstantExpression() const;
 		[[nodiscard]] ParameterTypeList* getParameterTypeList() const;
 		[[nodiscard]] vector<string>* getVectorOfStrings() const;
 
-		[[nodiscard]] bool isIdentifier() const { return identifier.has_value(); }
-		[[nodiscard]] bool isToken1() const { return token1.has_value(); }
-		[[nodiscard]] bool isToken2() const { return token2.has_value(); }
+		[[nodiscard]] bool isIdentifier() const { return identifier != nullptr; }
+		[[nodiscard]] bool isToken1() const { return token1 != nullptr; }
+		[[nodiscard]] bool isToken2() const { return token2 != nullptr; }
 		[[nodiscard]] bool isDeclarator() const { return declarator != nullptr; }
 		[[nodiscard]] bool isDirectDeclarator() const { return directDeclarator != nullptr; }
 		[[nodiscard]] bool isConstantExpression() const { return constantExpression != nullptr; }
@@ -52,9 +54,9 @@ namespace WadeSpace
 		[[nodiscard]] bool isVectorOfStrings() const { return vectorOfStrings != nullptr; }
 
 	private:
-		optional<string> identifier;
-		optional<int> token1;
-		optional<int> token2;
+		TokenPtr identifier;
+		TokenPtr token1;
+		TokenPtr token2;
 		Declarator* declarator;
 		DirectDeclarator* directDeclarator;
 		Expression* constantExpression;
