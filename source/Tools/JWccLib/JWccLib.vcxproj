@@ -271,6 +271,7 @@
     <ClCompile Include="StructOrUnion.cpp" />
     <ClCompile Include="StructOrUnionSpecifier.cpp" />
     <ClCompile Include="structures.cpp" />
+    <ClCompile Include="Token.cpp" />
     <ClCompile Include="TypeName.cpp" />
     <ClCompile Include="TypeQualifier.cpp" />
     <ClCompile Include="TypeSpecifier.cpp" />

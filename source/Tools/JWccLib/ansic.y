@@ -227,7 +227,7 @@
 %type<std::vector<StructDeclarator *> *> struct_declarator_list
 %type<StructDeclaration *> struct_declaration
 %type<std::vector<StructDeclaration *> *> struct_declaration_list
-%type<StructOrUnion *> struct_or_union
+%type<TokenPtr> struct_or_union
 %type<StructOrUnionSpecifier *> struct_or_union_specifier
 %type<Initializer *> initializer
 %type<std::vector<Initializer *> *> initializer_list
@@ -406,8 +406,8 @@ declaration
 
 declaration_specifiers
     : storage_class_specifier                         { $$ = createDeclarationSpecifiers($1,nullptr,nullptr,nullptr); cout << "storage_class_specifier REDUCE to declaration_specifiers" << endl;}
-    | storage_class_specifier declaration_specifiers  { $$ = createDeclarationSpecifiers($1,nullptr,nullptr,$2);      cout << "** storage_class_specifier declaration_specifiers REDUCE to declaration_specifiers" << endl;}
-    | type_specifier                                  { $$ = createDeclarationSpecifiers(nullptr,$1,nullptr,nullptr); cout << "** type_specifier REDUCE to declaration_specifiers" << endl;}
+    | storage_class_specifier declaration_specifiers  { $$ = createDeclarationSpecifiers($1,nullptr,nullptr,$2);      cout << "storage_class_specifier declaration_specifiers REDUCE to declaration_specifiers" << endl;}
+    | type_specifier                                  { $$ = createDeclarationSpecifiers(nullptr,$1,nullptr,nullptr); cout << "type_specifier REDUCE to declaration_specifiers" << endl;}
     | type_specifier declaration_specifiers           { $$ = createDeclarationSpecifiers(nullptr,$1,nullptr,$2);      cout << "type_specifier declaration_specifiers REDUCE to declaration_specifiers" << endl;}
     | type_qualifier                                  { $$ = createDeclarationSpecifiers(nullptr,nullptr,$1,nullptr); cout << "type_qualifier REDUCE to declaration_specifiers" << endl;}
     | type_qualifier declaration_specifiers           { $$ = createDeclarationSpecifiers(nullptr,nullptr,$1,$2);      cout << "type_qualifier declaration_specifiers REDUCE to declaration_specifiers" << endl;}
@@ -419,12 +419,12 @@ init_declarator_list
     ;
 
 init_declarator
-    : declarator                    { $$ = new InitDeclarator($1); cout << "declarator REDUCE to init_declarator" << endl;}
-    | declarator EQUAL initializer  { $$ = new InitDeclarator($1,$3); cout << "declarator EQUAL initializer REDUCE to init_declarator" << endl;}
+    : declarator                    { $$ = createInitDeclarator($1,nullptr); cout << "declarator REDUCE to init_declarator" << endl;}
+    | declarator EQUAL initializer  { $$ = createInitDeclarator($1,$3); cout << "declarator EQUAL initializer REDUCE to init_declarator" << endl;}
     ;
 
 storage_class_specifier
-    : TYPEDEF   { $$ = createStorageClassSpecifier($1); cout << "** TYPEDEF REDUCE to storage_class_specifier" << endl;}
+    : TYPEDEF   { $$ = createStorageClassSpecifier($1); cout << "TYPEDEF REDUCE to storage_class_specifier" << endl;}
     | EXTERN    { $$ = createStorageClassSpecifier($1); cout << "EXTERN REDUCE to storage_class_specifier" << endl;}
     | STATIC    { $$ = createStorageClassSpecifier($1); cout << "STATIC REDUCE to storage_class_specifier" << endl;}
     | AUTO      { $$ = createStorageClassSpecifier($1); cout << "AUTO REDUCE to storage_class_specifier" << endl;}
@@ -435,7 +435,7 @@ type_specifier
     : VOID                      { $$ = new TypeSpecifier(VOID); cout << "VOID REDUCE to type_specifier" << endl;}
     | CHAR                      { $$ = new TypeSpecifier(CHAR); cout << "CHAR REDUCE to type_specifier" << endl;}
     | SHORT                     { $$ = new TypeSpecifier(SHORT); cout << "SHORT REDUCE to type_specifier" << endl;}
-    | INT                       { $$ = new TypeSpecifier(INT); cout << "** INT REDUCE to type_specifier" << endl;}
+    | INT                       { $$ = new TypeSpecifier(INT); cout << "INT REDUCE to type_specifier" << endl;}
     | LONG                      { $$ = new TypeSpecifier(LONG); cout << "LONG REDUCE to type_specifier" << endl;}
     | LONG_LONG                 { $$ = new TypeSpecifier(LONG_LONG); cout << "LONG_LONG REDUCE to type_specifier" << endl;}
     | FLOAT                     { $$ = new TypeSpecifier(FLOAT); cout << "FLOAT REDUCE to type_specifier" << endl;}
@@ -458,24 +458,13 @@ struct_or_union_specifier
     ;
 
 struct_or_union
-    : STRUCT   { $<StructOrUnion *>$ = new StructOrUnion(STRUCT); cout << "STRUCT REDUCE to struct_or_union" << endl;}
-    | UNION    { $<StructOrUnion *>$ = new StructOrUnion(UNION); cout << "UNION REDUCE to struct_or_union" << endl;}
+    : STRUCT   { $$ = $1; cout << "STRUCT REDUCE to struct_or_union" << endl;}
+    | UNION    { $$ = $1; cout << "UNION REDUCE to struct_or_union" << endl;}
     ;
 
 struct_declaration_list
-    : struct_declaration    {
-                             StructDeclaration* exp = $1;
-                             $$ = new std::vector<StructDeclaration *>();
-                             $$->push_back(exp);
-                             cout << "struct_declaration REDUCE to struct_declaration_list" << endl;
-                            }
-    | struct_declaration_list struct_declaration     {
-                                                       StructDeclaration* value1 = $2;
-                                                       std::vector<StructDeclaration *>* value2 = $1;
-                                                       value2->push_back(value1);
-                                                       $$ = value2;
-                                                       cout << "struct_declaration_list struct_declaration REDUCE to struct_declaration_list" << endl;
-                                                     }
+    : struct_declaration                          { $$ = createStructDeclarationList($1,nullptr); cout << "struct_declaration REDUCE to struct_declaration_list" << endl;}                          
+    | struct_declaration_list struct_declaration  { $$ = createStructDeclarationList($2,$1); cout << "struct_declaration_list struct_declaration REDUCE to struct_declaration_list" << endl;}
     ;
 
 struct_declaration
@@ -693,20 +682,8 @@ compound_statement
     ;
 
 declaration_list
-    : declaration                   { $$ = createDeclarationList($1,nullptr);
-                                     //Declaration* exp = $1;
-                                     //$$ = new std::vector<Declaration*>();
-                                     //$$->push_back(exp);
-                                     cout << "declaration REDUCE to declaration_list" << endl;
-                                    }
-    | declaration_list declaration  {
-                                     $$ = createDeclarationList($2,$1);
-                                     //Declaration* value1 = $2;
-                                     //std::vector<Declaration*> *value2 = $1;
-                                     //value2->push_back(value1);
-                                     //$$ = value2;
-                                     cout << "declaration_list declaration REDUCE to declaration_list" << endl;
-                                    }
+    : declaration                   { $$ = createDeclarationList($1,nullptr); cout << "declaration REDUCE to declaration_list" << endl; }
+    | declaration_list declaration  { $$ = createDeclarationList($2,$1); cout << "declaration_list declaration REDUCE to declaration_list" << endl; }
     ;
 
 statement_list
@@ -752,8 +729,8 @@ jump_statement
     ;
 
 translation_unit 
-    : external_declaration                  { program = new ProgramData(); program->add($1); cout << "external_declaration REDUCE to translation_unit" << endl; }
-    | translation_unit external_declaration { program->add($2); cout << "translation_unit external_declaration REDUCE to translation_unit" << endl; }
+    : external_declaration                  { program = new ProgramData(); program->add($1); cout << "external_declaration REDUCE to translation_unit" << endl << endl; }
+    | translation_unit external_declaration { program->add($2); cout << "translation_unit external_declaration REDUCE to translation_unit" << endl << endl; }
     ;
 
 external_declaration

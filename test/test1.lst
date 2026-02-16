@@ -1,4 +1,4 @@
-JWasm v2.12pre, Feb  5 2026
+JWasm v2.12pre, Feb 16 2026
 test1.asm
                                 
                            Error A2099: END directive required at end of file
@@ -21,10 +21,10 @@ Symbols:
 
 @Cpu . . . . . . . . . . . . . .        Number           101h 
 @CurSeg  . . . . . . . . . . . .        Text   
-@Date  . . . . . . . . . . . . .        Text   02/06/26
+@Date  . . . . . . . . . . . . .        Text   02/16/26
 @FileCur . . . . . . . . . . . .        Text   test1.asm
 @FileName  . . . . . . . . . . .        Text   TEST1
-@Time  . . . . . . . . . . . . .        Text   10:55:33
+@Time  . . . . . . . . . . . . .        Text   10:32:25
 @Version . . . . . . . . . . . .        Text   800
 __JWASM__  . . . . . . . . . . .        Number            D4h 
 

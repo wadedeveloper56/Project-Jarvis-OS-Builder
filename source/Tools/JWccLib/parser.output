@@ -481,7 +481,7 @@ Nonterminals, with rules where they appear
     struct_or_union_specifier <StructOrUnionSpecifier *> (123)
         on left: 113 114 115
         on right: 110
-    struct_or_union <StructOrUnion *> (124)
+    struct_or_union <TokenPtr> (124)
         on left: 116 117
         on right: 113 114 115
     struct_declaration_list <std::vector<StructDeclaration *> *> (125)

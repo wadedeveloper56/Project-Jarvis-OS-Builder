@@ -77,6 +77,7 @@ typedef struct TokData
 typedef struct Token
 {
 	TokDataPtr data;
+	std::string getSymbolName() const;
 }* TokenPtr, ** TokenPtrPtr;
 
 TokenPtr createToken(TokDataPtr data);

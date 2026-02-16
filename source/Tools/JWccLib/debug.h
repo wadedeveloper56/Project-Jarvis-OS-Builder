@@ -8,6 +8,7 @@
 #include "Declaration.h"
 #include "DeclarationSpecifiers.h"
 #include "Declarator.h"
+#include "StructDeclaration.h"
 #include "Token.h"
 
 using namespace std;
@@ -39,4 +40,5 @@ DeclarationSpecifiers* createDeclarationSpecifiers(StorageClassSpecifier* const 
 StorageClassSpecifier* createStorageClassSpecifier(const TokenPtr token);
 Expression* createPrimaryExpression(const TokenPtr identifier, Constant* constant);
 vector<Declaration*>* createDeclarationList(Declaration* exp, vector<Declaration*>* list);
-
+InitDeclarator* createInitDeclarator(Declarator* declarator, Initializer* initializer);
+vector<StructDeclaration*>* createStructDeclarationList(StructDeclaration* value1, vector<StructDeclaration*>* list);

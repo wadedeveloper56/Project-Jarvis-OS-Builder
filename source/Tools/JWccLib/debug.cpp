@@ -5,6 +5,21 @@
 using namespace std;
 using namespace WadeSpace;
 
+vector<StructDeclaration*>* createStructDeclarationList(StructDeclaration* value1, vector<StructDeclaration*>* list)
+{
+	if (list == nullptr)
+	{
+		list = new vector<StructDeclaration*>();
+	}
+	list->push_back(value1);
+	return list;
+}
+
+InitDeclarator* createInitDeclarator(Declarator* declarator, Initializer* initializer)
+{
+	return new InitDeclarator(declarator, initializer);
+}
+
 Declaration* createDeclaration(DeclarationSpecifiers* declarationSpecifiers, vector<InitDeclarator*>* vectorInitDeclarator)
 {
 	return new Declaration(declarationSpecifiers, vectorInitDeclarator);
