@@ -5,6 +5,26 @@
 using namespace std;
 using namespace WadeSpace;
 
+vector<TokenPtr>* createIdentifierList(const TokenPtr identifier, vector<TokenPtr>* list)
+{
+	if (list == nullptr)
+	{
+		list = new vector<TokenPtr>();
+	}
+	list->push_back(identifier);
+	return list;
+}
+
+vector<ParameterDeclaration*>* createParameterList(ParameterDeclaration* value1, vector<ParameterDeclaration*>* list)
+{
+	if (list == nullptr)
+	{
+		list = new vector<ParameterDeclaration*>();
+	}
+	list->push_back(value1);
+	return list;
+}
+
 vector<TypeQualifier*>* createTypeQualifierList(TypeQualifier* value1, vector<TypeQualifier*>* list)
 {
 	if (list == nullptr)
@@ -104,7 +124,7 @@ Declarator* createDeclarator(Pointer* pointer, DirectDeclarator* directDeclarato
 	return new Declarator(pointer, directDeclarator);
 }
 
-DirectDeclarator* createDirectDeclarator(TokenPtr identifier, TokenPtr token1, TokenPtr token2, Declarator* const declarator, DirectDeclarator* const directDeclarator, Expression* const constantExpression, ParameterTypeList* const parameterTypeList, vector<string>* const vectorOfStrings)
+DirectDeclarator* createDirectDeclarator(TokenPtr identifier, TokenPtr token1, TokenPtr token2, Declarator* const declarator, DirectDeclarator* const directDeclarator, Expression* const constantExpression, ParameterTypeList* const parameterTypeList, vector<TokenPtr>* const vectorOfStrings)
 {
 	return new DirectDeclarator(identifier, token1, token2, declarator, directDeclarator, constantExpression, parameterTypeList, vectorOfStrings);
 }

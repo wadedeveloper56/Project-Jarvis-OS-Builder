@@ -27,7 +27,7 @@ namespace WadeSpace
 			DirectDeclarator* const directDeclarator,
 			Expression* const constantExpression, 
 			ParameterTypeList* const parameterTypeList,
-			vector<string>* const vectorOfStrings
+			vector<TokenPtr>* const vectorOfStrings
 		);
 		~DirectDeclarator() = default;
 		DirectDeclarator(const DirectDeclarator& other) = default;
@@ -42,7 +42,7 @@ namespace WadeSpace
 		[[nodiscard]] DirectDeclarator* getDirectDeclarator() const;
 		[[nodiscard]] Expression* getConstantExpression() const;
 		[[nodiscard]] ParameterTypeList* getParameterTypeList() const;
-		[[nodiscard]] vector<string>* getVectorOfStrings() const;
+		[[nodiscard]] vector<TokenPtr>* getVectorOfStrings() const;
 
 		[[nodiscard]] bool isIdentifier() const { return identifier != nullptr; }
 		[[nodiscard]] bool isToken1() const { return token1 != nullptr; }
@@ -61,6 +61,6 @@ namespace WadeSpace
 		DirectDeclarator* directDeclarator;
 		Expression* constantExpression;
 		ParameterTypeList* parameterTypeList;
-		vector<string>* vectorOfStrings;
+		vector<TokenPtr>* vectorOfStrings;
 	};
 }

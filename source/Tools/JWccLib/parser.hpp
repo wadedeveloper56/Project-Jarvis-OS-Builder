@@ -677,11 +677,11 @@ namespace  WadeSpace  {
       // struct_declarator_list
       char dummy36[sizeof (std::vector<StructDeclarator *> *)];
 
-      // type_qualifier_list
-      char dummy37[sizeof (std::vector<TypeQualifier *> *)];
-
       // identifier_list
-      char dummy38[sizeof (std::vector<std::string> *)];
+      char dummy37[sizeof (std::vector<TokenPtr> *)];
+
+      // type_qualifier_list
+      char dummy38[sizeof (std::vector<TypeQualifier *> *)];
 
       // argument_expression_list
       char dummy39[sizeof (vector<Expression *> *)];
@@ -1298,12 +1298,12 @@ namespace  WadeSpace  {
         value.move< std::vector<StructDeclarator *> * > (std::move (that.value));
         break;
 
-      case symbol_kind::S_type_qualifier_list: // type_qualifier_list
-        value.move< std::vector<TypeQualifier *> * > (std::move (that.value));
+      case symbol_kind::S_identifier_list: // identifier_list
+        value.move< std::vector<TokenPtr> * > (std::move (that.value));
         break;
 
-      case symbol_kind::S_identifier_list: // identifier_list
-        value.move< std::vector<std::string> * > (std::move (that.value));
+      case symbol_kind::S_type_qualifier_list: // type_qualifier_list
+        value.move< std::vector<TypeQualifier *> * > (std::move (that.value));
         break;
 
       case symbol_kind::S_argument_expression_list: // argument_expression_list
@@ -1838,13 +1838,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, std::vector<TypeQualifier *> *&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, std::vector<TokenPtr> *&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const std::vector<TypeQualifier *> *& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const std::vector<TokenPtr> *& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1852,13 +1852,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, std::vector<std::string> *&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, std::vector<TypeQualifier *> *&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const std::vector<std::string> *& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const std::vector<TypeQualifier *> *& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -2161,12 +2161,12 @@ switch (yykind)
         value.template destroy< std::vector<StructDeclarator *> * > ();
         break;
 
-      case symbol_kind::S_type_qualifier_list: // type_qualifier_list
-        value.template destroy< std::vector<TypeQualifier *> * > ();
+      case symbol_kind::S_identifier_list: // identifier_list
+        value.template destroy< std::vector<TokenPtr> * > ();
         break;
 
-      case symbol_kind::S_identifier_list: // identifier_list
-        value.template destroy< std::vector<std::string> * > ();
+      case symbol_kind::S_type_qualifier_list: // type_qualifier_list
+        value.template destroy< std::vector<TypeQualifier *> * > ();
         break;
 
       case symbol_kind::S_argument_expression_list: // argument_expression_list
@@ -4396,12 +4396,12 @@ switch (yykind)
         value.copy< std::vector<StructDeclarator *> * > (YY_MOVE (that.value));
         break;
 
-      case symbol_kind::S_type_qualifier_list: // type_qualifier_list
-        value.copy< std::vector<TypeQualifier *> * > (YY_MOVE (that.value));
+      case symbol_kind::S_identifier_list: // identifier_list
+        value.copy< std::vector<TokenPtr> * > (YY_MOVE (that.value));
         break;
 
-      case symbol_kind::S_identifier_list: // identifier_list
-        value.copy< std::vector<std::string> * > (YY_MOVE (that.value));
+      case symbol_kind::S_type_qualifier_list: // type_qualifier_list
+        value.copy< std::vector<TypeQualifier *> * > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_argument_expression_list: // argument_expression_list
@@ -4697,12 +4697,12 @@ switch (yykind)
         value.move< std::vector<StructDeclarator *> * > (YY_MOVE (s.value));
         break;
 
-      case symbol_kind::S_type_qualifier_list: // type_qualifier_list
-        value.move< std::vector<TypeQualifier *> * > (YY_MOVE (s.value));
+      case symbol_kind::S_identifier_list: // identifier_list
+        value.move< std::vector<TokenPtr> * > (YY_MOVE (s.value));
         break;
 
-      case symbol_kind::S_identifier_list: // identifier_list
-        value.move< std::vector<std::string> * > (YY_MOVE (s.value));
+      case symbol_kind::S_type_qualifier_list: // type_qualifier_list
+        value.move< std::vector<TypeQualifier *> * > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_argument_expression_list: // argument_expression_list

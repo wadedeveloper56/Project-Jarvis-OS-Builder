@@ -15,7 +15,7 @@ DirectDeclarator::DirectDeclarator(
 	DirectDeclarator* const directDeclarator,
 	Expression* const constantExpression,
 	ParameterTypeList* const parameterTypeList,
-	vector<string>* const vectorOfStrings)
+	vector<TokenPtr>* const vectorOfStrings)
 	: identifier(identifier),
 	token1(token1),
 	token2(token2),
@@ -62,7 +62,7 @@ ParameterTypeList* DirectDeclarator::getParameterTypeList() const
 	return parameterTypeList;
 }
 
-vector<string>* DirectDeclarator::getVectorOfStrings() const
+vector<TokenPtr>* DirectDeclarator::getVectorOfStrings() const
 {
 	return vectorOfStrings;
 }

@@ -226,12 +226,12 @@ Grammar
 
   168 direct_abstract_declarator: "(" abstract_declarator ")"
   169                           | "[" "]"
-  170                           | "[" constant_expression "]"
-  171                           | direct_abstract_declarator "[" "]"
-  172                           | direct_abstract_declarator "[" constant_expression "]"
-  173                           | "(" ")"
-  174                           | "(" parameter_type_list ")"
-  175                           | direct_abstract_declarator "(" ")"
+  170                           | "(" ")"
+  171                           | "[" constant_expression "]"
+  172                           | "(" parameter_type_list ")"
+  173                           | direct_abstract_declarator "[" "]"
+  174                           | direct_abstract_declarator "(" ")"
+  175                           | direct_abstract_declarator "[" constant_expression "]"
   176                           | direct_abstract_declarator "(" parameter_type_list ")"
 
   177 initializer: assignment_expression
@@ -348,10 +348,10 @@ Terminals, with rules where they appear
     "}" <TokenPtr> (306) 15 16 113 114 130 131 178 179 191 192 193 194
     "," <TokenPtr> (307) 16 18 77 88 126 134 155 157 162 179 181
     ":" <TokenPtr> (308) 62 128 129 188 189 190
-    "(" <TokenPtr> (309) 3 9 10 15 16 24 32 142 145 146 147 168 173 174 175 176 201 202 203 204 205 206 207
-    ")" <TokenPtr> (310) 3 9 10 15 16 24 32 142 145 146 147 168 173 174 175 176 201 202 203 204 205 206 207
-    "[" <TokenPtr> (311) 8 143 144 169 170 171 172
-    "]" <TokenPtr> (312) 8 143 144 169 170 171 172
+    "(" <TokenPtr> (309) 3 9 10 15 16 24 32 142 145 146 147 168 170 172 174 176 201 202 203 204 205 206 207
+    ")" <TokenPtr> (310) 3 9 10 15 16 24 32 142 145 146 147 168 170 172 174 176 201 202 203 204 205 206 207
+    "[" <TokenPtr> (311) 8 143 144 169 171 173 175
+    "]" <TokenPtr> (312) 8 143 144 169 171 173 175
     "." <TokenPtr> (313) 11
     "~" <TokenPtr> (314) 29
     "=" <TokenPtr> (315) 65 90 136
@@ -459,7 +459,7 @@ Nonterminals, with rules where they appear
         on right: 3 8 62 77 200 201 202 203 204 205 207 212
     constant_expression <Expression *> (116)
         on left: 78
-        on right: 128 129 136 143 170 172 189
+        on right: 128 129 136 143 171 175 189
     declaration <Declaration *> (117)
         on left: 79 80
         on right: 195 196 216
@@ -525,14 +525,14 @@ Nonterminals, with rules where they appear
         on right: 149 151 153
     parameter_type_list <ParameterTypeList *> (138)
         on left: 154 155
-        on right: 145 174 176
+        on right: 145 172 176
     parameter_list <std::vector<ParameterDeclaration *> *> (139)
         on left: 156 157
         on right: 154 155 157
     parameter_declaration <ParameterDeclaration *> (140)
         on left: 158 159 160
         on right: 156 157
-    identifier_list <std::vector<std::string> *> (141)
+    identifier_list <std::vector<TokenPtr> *> (141)
         on left: 161 162
         on right: 146 162
     type_name <TypeName *> (142)
@@ -543,7 +543,7 @@ Nonterminals, with rules where they appear
         on right: 159 164 168
     direct_abstract_declarator <DirectAbstractDeclarator *> (144)
         on left: 168 169 170 171 172 173 174 175 176
-        on right: 166 167 171 172 175 176
+        on right: 166 167 173 174 175 176
     initializer <Initializer *> (145)
         on left: 177 178 179
         on right: 90 180 181
@@ -4730,8 +4730,8 @@ State 239
 
   142 direct_declarator: "(" . declarator ")"
   168 direct_abstract_declarator: "(" . abstract_declarator ")"
-  173                           | "(" . ")"
-  174                           | "(" . parameter_type_list ")"
+  170                           | "(" . ")"
+  172                           | "(" . parameter_type_list ")"
 
     "identifier"   shift, and go to state 1
     "type name"    shift, and go to state 2
@@ -4784,7 +4784,7 @@ State 239
 State 240
 
   169 direct_abstract_declarator: "[" . "]"
-  170                           | "[" . constant_expression "]"
+  171                           | "[" . constant_expression "]"
 
     "identifier"     shift, and go to state 151
     "i_const"        shift, and go to state 87
@@ -4855,9 +4855,9 @@ State 243
 State 244
 
   166 abstract_declarator: direct_abstract_declarator .
-  171 direct_abstract_declarator: direct_abstract_declarator . "[" "]"
-  172                           | direct_abstract_declarator . "[" constant_expression "]"
-  175                           | direct_abstract_declarator . "(" ")"
+  173 direct_abstract_declarator: direct_abstract_declarator . "[" "]"
+  174                           | direct_abstract_declarator . "(" ")"
+  175                           | direct_abstract_declarator . "[" constant_expression "]"
   176                           | direct_abstract_declarator . "(" parameter_type_list ")"
 
     "("  shift, and go to state 311
@@ -5234,8 +5234,8 @@ State 271
 State 272
 
   168 direct_abstract_declarator: "(" . abstract_declarator ")"
-  173                           | "(" . ")"
-  174                           | "(" . parameter_type_list ")"
+  170                           | "(" . ")"
+  172                           | "(" . parameter_type_list ")"
 
     "type name"    shift, and go to state 2
     "auto"         shift, and go to state 3
@@ -5623,14 +5623,14 @@ State 304
 
 State 305
 
-  173 direct_abstract_declarator: "(" ")" .
+  170 direct_abstract_declarator: "(" ")" .
 
-    $default  reduce using rule 173 (direct_abstract_declarator)
+    $default  reduce using rule 170 (direct_abstract_declarator)
 
 
 State 306
 
-  174 direct_abstract_declarator: "(" parameter_type_list . ")"
+  172 direct_abstract_declarator: "(" parameter_type_list . ")"
 
     ")"  shift, and go to state 334
 
@@ -5651,7 +5651,7 @@ State 308
 
 State 309
 
-  170 direct_abstract_declarator: "[" constant_expression . "]"
+  171 direct_abstract_declarator: "[" constant_expression . "]"
 
     "]"  shift, and go to state 336
 
@@ -5659,9 +5659,9 @@ State 309
 State 310
 
   167 abstract_declarator: pointer direct_abstract_declarator .
-  171 direct_abstract_declarator: direct_abstract_declarator . "[" "]"
-  172                           | direct_abstract_declarator . "[" constant_expression "]"
-  175                           | direct_abstract_declarator . "(" ")"
+  173 direct_abstract_declarator: direct_abstract_declarator . "[" "]"
+  174                           | direct_abstract_declarator . "(" ")"
+  175                           | direct_abstract_declarator . "[" constant_expression "]"
   176                           | direct_abstract_declarator . "(" parameter_type_list ")"
 
     "("  shift, and go to state 311
@@ -5672,7 +5672,7 @@ State 310
 
 State 311
 
-  175 direct_abstract_declarator: direct_abstract_declarator "(" . ")"
+  174 direct_abstract_declarator: direct_abstract_declarator "(" . ")"
   176                           | direct_abstract_declarator "(" . parameter_type_list ")"
 
     "type name"    shift, and go to state 2
@@ -5716,8 +5716,8 @@ State 311
 
 State 312
 
-  171 direct_abstract_declarator: direct_abstract_declarator "[" . "]"
-  172                           | direct_abstract_declarator "[" . constant_expression "]"
+  173 direct_abstract_declarator: direct_abstract_declarator "[" . "]"
+  175                           | direct_abstract_declarator "[" . constant_expression "]"
 
     "identifier"     shift, and go to state 151
     "i_const"        shift, and go to state 87
@@ -6272,9 +6272,9 @@ State 333
 
 State 334
 
-  174 direct_abstract_declarator: "(" parameter_type_list ")" .
+  172 direct_abstract_declarator: "(" parameter_type_list ")" .
 
-    $default  reduce using rule 174 (direct_abstract_declarator)
+    $default  reduce using rule 172 (direct_abstract_declarator)
 
 
 State 335
@@ -6286,16 +6286,16 @@ State 335
 
 State 336
 
-  170 direct_abstract_declarator: "[" constant_expression "]" .
+  171 direct_abstract_declarator: "[" constant_expression "]" .
 
-    $default  reduce using rule 170 (direct_abstract_declarator)
+    $default  reduce using rule 171 (direct_abstract_declarator)
 
 
 State 337
 
-  175 direct_abstract_declarator: direct_abstract_declarator "(" ")" .
+  174 direct_abstract_declarator: direct_abstract_declarator "(" ")" .
 
-    $default  reduce using rule 175 (direct_abstract_declarator)
+    $default  reduce using rule 174 (direct_abstract_declarator)
 
 
 State 338
@@ -6307,14 +6307,14 @@ State 338
 
 State 339
 
-  171 direct_abstract_declarator: direct_abstract_declarator "[" "]" .
+  173 direct_abstract_declarator: direct_abstract_declarator "[" "]" .
 
-    $default  reduce using rule 171 (direct_abstract_declarator)
+    $default  reduce using rule 173 (direct_abstract_declarator)
 
 
 State 340
 
-  172 direct_abstract_declarator: direct_abstract_declarator "[" constant_expression . "]"
+  175 direct_abstract_declarator: direct_abstract_declarator "[" constant_expression . "]"
 
     "]"  shift, and go to state 353
 
@@ -6468,9 +6468,9 @@ State 352
 
 State 353
 
-  172 direct_abstract_declarator: direct_abstract_declarator "[" constant_expression "]" .
+  175 direct_abstract_declarator: direct_abstract_declarator "[" constant_expression "]" .
 
-    $default  reduce using rule 172 (direct_abstract_declarator)
+    $default  reduce using rule 175 (direct_abstract_declarator)
 
 
 State 354

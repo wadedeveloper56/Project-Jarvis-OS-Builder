@@ -222,7 +222,7 @@
 %type<AbstractDeclarator *> abstract_declarator
 %type<TypeName *> type_name
 %type<SpecifierQualifierList *> specifier_qualifier_list
-%type<std::vector<std::string> *> identifier_list
+%type<std::vector<TokenPtr> *> identifier_list
 %type<StructDeclarator *> struct_declarator
 %type<std::vector<StructDeclarator *> *> struct_declarator_list
 %type<StructDeclaration *> struct_declaration
@@ -543,19 +543,8 @@ parameter_type_list
     ;
 
 parameter_list
-    : parameter_declaration                       {
-                                                    ParameterDeclaration* exp = $1;
-                                                    $$ = new std::vector<ParameterDeclaration*>();
-                                                    $$->push_back(exp);
-                                                    cout << "parameter_declaration REDUCE to parameter_list" << endl;
-                                                  }
-    | parameter_list COMMA parameter_declaration  {
-                                                    ParameterDeclaration* value1 = $3;
-                                                    std::vector<ParameterDeclaration*>* value2 = $1;
-                                                    value2->push_back(value1);
-                                                    $$ = value2;
-                                                    cout << "parameter_list COMMA parameter_declaration REDUCE to parameter_list" << endl;
-                                                  }
+    : parameter_declaration                       { $$ = createParameterList($1,nullptr); cout << "parameter_declaration REDUCE to parameter_list" << endl; }
+    | parameter_list COMMA parameter_declaration  { $$ = createParameterList($3,$1); cout << "parameter_list COMMA parameter_declaration REDUCE to parameter_list" << endl; }
     ;
 
 parameter_declaration
@@ -565,24 +554,13 @@ parameter_declaration
     ;
 
 identifier_list
-    : IDENTIFIER                       {
-                                          TokenPtr exp = $1;
-                                          $$ = new std::vector<std::string>();
-                                          $$->push_back(exp->data->repr.symbol.string);
-                                          cout << "IDENTIFIER REDUCE to identifier_list" << endl;
-                                       }
-    | identifier_list COMMA IDENTIFIER {
-                                          TokenPtr exp = $3;
-                                          std::vector<std::string> *value2 = $1;
-                                          value2->push_back(exp->data->repr.symbol.string);
-                                          $$ = value2;
-                                          cout << "identifier_list COMMA IDENTIFIER REDUCE to identifier_list" << endl; 
-                                        }
+    : IDENTIFIER                       { $$ = createIdentifierList($1,nullptr); cout << "IDENTIFIER REDUCE to identifier_list" << endl; }
+    | identifier_list COMMA IDENTIFIER { $$ = createIdentifierList($3,$1); cout << "identifier_list COMMA IDENTIFIER REDUCE to identifier_list" << endl; }
     ;
 
 type_name
-    : specifier_qualifier_list                     { $<TypeName *>$ = new TypeName($1); cout << "specifier_qualifier_list REDUCE to type_name" << endl; }
-    | specifier_qualifier_list abstract_declarator { $<TypeName *>$ = new TypeName($1,$2); cout << "specifier_qualifier_list abstract_declarator REDUCE to type_name" << endl; }
+    : specifier_qualifier_list                     { $$ = new TypeName($1); cout << "specifier_qualifier_list REDUCE to type_name" << endl; }
+    | specifier_qualifier_list abstract_declarator { $$ = new TypeName($1,$2); cout << "specifier_qualifier_list abstract_declarator REDUCE to type_name" << endl; }
     ;
 
 abstract_declarator
@@ -594,12 +572,12 @@ abstract_declarator
 direct_abstract_declarator
     : OPAREN abstract_declarator CPAREN                            { $$ = new DirectAbstractDeclarator($2); cout << "OPAREN abstract_declarator CPAREN REDUCE to direct_abstract_declarator" << endl; }
     | OBRACE CBRACE                                                { $$ = new DirectAbstractDeclarator(ARRAY); cout << "OBRACE CBRACE REDUCE to direct_abstract_declarator" << endl; }
-    | OBRACE constant_expression CBRACE                            { $$ = new DirectAbstractDeclarator($2); cout << "OBRACE constant_expression CBRACE REDUCE to direct_abstract_declarator" << endl; }
-    | direct_abstract_declarator OBRACE CBRACE                     { $$ = new DirectAbstractDeclarator($1,ARRAY); cout << "direct_abstract_declarator OBRACE CBRACE REDUCE to direct_abstract_declarator" << endl; }
-    | direct_abstract_declarator OBRACE constant_expression CBRACE { $$ = new DirectAbstractDeclarator($1,$3,ARRAY); cout << "direct_abstract_declarator OBRACE constant_expression CBRACE REDUCE to direct_abstract_declarator" << endl; }
     | OPAREN CPAREN                                                { $$ = new DirectAbstractDeclarator(FUNCTION); cout << "OPAREN CPAREN REDUCE to direct_abstract_declarator" << endl; }
+    | OBRACE constant_expression CBRACE                            { $$ = new DirectAbstractDeclarator($2); cout << "OBRACE constant_expression CBRACE REDUCE to direct_abstract_declarator" << endl; }
     | OPAREN parameter_type_list CPAREN                            { $$ = new DirectAbstractDeclarator($2,FUNCTION); cout << "OPAREN parameter_type_list CPAREN REDUCE to direct_abstract_declarator" << endl; }
+    | direct_abstract_declarator OBRACE CBRACE                     { $$ = new DirectAbstractDeclarator($1,ARRAY); cout << "direct_abstract_declarator OBRACE CBRACE REDUCE to direct_abstract_declarator" << endl; }
     | direct_abstract_declarator OPAREN CPAREN                     { $$ = new DirectAbstractDeclarator($1,FUNCTION); cout << "direct_abstract_declarator OPAREN CPAREN REDUCE to direct_abstract_declarator" << endl; }
+    | direct_abstract_declarator OBRACE constant_expression CBRACE { $$ = new DirectAbstractDeclarator($1,$3,ARRAY); cout << "direct_abstract_declarator OBRACE constant_expression CBRACE REDUCE to direct_abstract_declarator" << endl; }
     | direct_abstract_declarator OPAREN parameter_type_list CPAREN { $$ = new DirectAbstractDeclarator($1,$3,FUNCTION); cout << "direct_abstract_declarator OPAREN parameter_type_list CPAREN REDUCE to direct_abstract_declarator" << endl; }
     ;
 
