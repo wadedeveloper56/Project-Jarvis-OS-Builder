@@ -6,42 +6,22 @@
 
 using namespace WadeSpace;
 
-DirectAbstractDeclarator::DirectAbstractDeclarator(DirectAbstractDeclarator* directAbstractDeclarator, ParameterTypeList* parameterTypeList, TokenType type) : abstractDeclarator(nullptr), constantExpression(nullptr), type(type), directAbstractDeclarator(directAbstractDeclarator), parameterTypeList(parameterTypeList)
+
+DirectAbstractDeclarator::DirectAbstractDeclarator(AbstractDeclarator* abstractDeclarator, vector<DirectAbstractDeclaratorNode*>* list) : abstractDeclarator(abstractDeclarator), list(list)
 {
 }
 
-DirectAbstractDeclarator::DirectAbstractDeclarator(ParameterTypeList* parameterTypeList, TokenType type) : abstractDeclarator(nullptr), constantExpression(nullptr), type(type), directAbstractDeclarator(nullptr), parameterTypeList(parameterTypeList)
+DirectAbstractDeclarator::DirectAbstractDeclarator() : abstractDeclarator(nullptr), list(nullptr)
 {
 }
 
-DirectAbstractDeclarator::DirectAbstractDeclarator(DirectAbstractDeclarator* directAbstractDeclarator, Expression* constantExpression, TokenType type) : abstractDeclarator(nullptr), constantExpression(constantExpression), type(type), directAbstractDeclarator(directAbstractDeclarator), parameterTypeList(nullptr)
+AbstractDeclarator* DirectAbstractDeclarator::getAbstractDeclarator() const
 {
+	return abstractDeclarator;
 }
 
-DirectAbstractDeclarator::DirectAbstractDeclarator(DirectAbstractDeclarator* directAbstractDeclarator, TokenType type) : abstractDeclarator(nullptr), constantExpression(nullptr), type(type), directAbstractDeclarator(directAbstractDeclarator), parameterTypeList(nullptr)
+vector<DirectAbstractDeclaratorNode*>* DirectAbstractDeclarator::getList() const
 {
+	return list;
 }
 
-DirectAbstractDeclarator::DirectAbstractDeclarator(TokenType type) : abstractDeclarator(nullptr), constantExpression(nullptr), type(type), directAbstractDeclarator(nullptr), parameterTypeList(nullptr)
-{
-}
-
-DirectAbstractDeclarator::DirectAbstractDeclarator(Expression* constantExpression) : abstractDeclarator(nullptr), constantExpression(constantExpression), type(NONE), directAbstractDeclarator(nullptr), parameterTypeList(nullptr)
-{
-}
-
-DirectAbstractDeclarator::DirectAbstractDeclarator(AbstractDeclarator* abstractDeclarator) : abstractDeclarator(abstractDeclarator), constantExpression(nullptr), type(NONE), directAbstractDeclarator(nullptr), parameterTypeList(nullptr)
-{
-}
-
-DirectAbstractDeclarator::DirectAbstractDeclarator() : abstractDeclarator(nullptr), constantExpression(nullptr), type(NONE), directAbstractDeclarator(nullptr), parameterTypeList(nullptr)
-{
-}
-
-DirectAbstractDeclarator::~DirectAbstractDeclarator()
-{
-	delete abstractDeclarator;
-	delete constantExpression;
-	delete directAbstractDeclarator;
-	delete parameterTypeList;
-}

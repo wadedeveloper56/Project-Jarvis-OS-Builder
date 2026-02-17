@@ -5,31 +5,43 @@
 #include <optional>
 #include "TokenType.h"
 
+using namespace std;
+
 namespace WadeSpace
 {
+	class DirectAbstractDeclarator;
 	class AbstractDeclarator;
 	class ConstantExpression;
 	class ParameterTypeList;
 	class Expression;
 
+	typedef struct DirectAbstractDeclaratorNode
+	{
+		ParameterTypeList* parameterTypeList;
+		Expression* constantExpression;
+		TokenType type;
+		
+		DirectAbstractDeclaratorNode() = default;
+
+		DirectAbstractDeclaratorNode(ParameterTypeList* const parameterTypeList, Expression* const constantExpression, TokenType type)
+			: parameterTypeList(parameterTypeList),
+		      constantExpression(constantExpression), 
+		      type(type)
+		{
+		}
+	}* DirectAbstractDeclaratorNodePtr;
+
 	class DirectAbstractDeclarator
 	{
 	public:
-		DirectAbstractDeclarator(DirectAbstractDeclarator* directAbstractDeclarator, ParameterTypeList* parameterTypeList, TokenType type);
-		DirectAbstractDeclarator(ParameterTypeList* parameterTypeList, TokenType type);
-		DirectAbstractDeclarator(DirectAbstractDeclarator* directAbstractDeclarator, Expression* constantExpression, TokenType type);
-		DirectAbstractDeclarator(DirectAbstractDeclarator* directAbstractDeclarator, TokenType type);
-		DirectAbstractDeclarator(AbstractDeclarator* abstractDeclarator);
-		DirectAbstractDeclarator(Expression* constantExpression);
-		DirectAbstractDeclarator(TokenType type);
+		DirectAbstractDeclarator(const DirectAbstractDeclarator& copy) = default;
+		DirectAbstractDeclarator(AbstractDeclarator* abstractDeclarator, vector<DirectAbstractDeclaratorNode*>* list);
 		DirectAbstractDeclarator();
-		virtual ~DirectAbstractDeclarator();
-
+		virtual ~DirectAbstractDeclarator() = default;
+		[[nodiscard]] AbstractDeclarator* getAbstractDeclarator() const;
+		[[nodiscard]] vector<DirectAbstractDeclaratorNode*>* getList() const;
 	private:
-		ParameterTypeList* parameterTypeList;
-		DirectAbstractDeclarator* directAbstractDeclarator;
 		AbstractDeclarator* abstractDeclarator;
-		Expression* constantExpression;
-		TokenType type;
+		vector<DirectAbstractDeclaratorNode*>* list;
 	};
 }

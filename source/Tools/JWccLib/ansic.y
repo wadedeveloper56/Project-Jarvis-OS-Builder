@@ -548,9 +548,9 @@ parameter_list
     ;
 
 parameter_declaration
-    : declaration_specifiers declarator           { $<ParameterDeclaration *>$ = new ParameterDeclaration($1,$2); cout << "declaration_specifiers declarator REDUCE to parameter_declaration" << endl; }
-    | declaration_specifiers abstract_declarator  { $<ParameterDeclaration *>$ = new ParameterDeclaration($1,$2); cout << "declaration_specifiers abstract_declarator REDUCE to parameter_declaration" << endl; }
-    | declaration_specifiers                      { $<ParameterDeclaration *>$ = new ParameterDeclaration($1); cout << "declaration_specifiers REDUCE to parameter_declaration" << endl; }
+    : declaration_specifiers declarator           { $$ = new ParameterDeclaration($1,$2); cout << "declaration_specifiers declarator REDUCE to parameter_declaration" << endl; }
+    | declaration_specifiers abstract_declarator  { $$ = new ParameterDeclaration($1,$2); cout << "declaration_specifiers abstract_declarator REDUCE to parameter_declaration" << endl; }
+    | declaration_specifiers                      { $$ = new ParameterDeclaration($1); cout << "declaration_specifiers REDUCE to parameter_declaration" << endl; }
     ;
 
 identifier_list
@@ -570,15 +570,15 @@ abstract_declarator
     ;
 
 direct_abstract_declarator
-    : OPAREN abstract_declarator CPAREN                            { $$ = new DirectAbstractDeclarator($2); cout << "OPAREN abstract_declarator CPAREN REDUCE to direct_abstract_declarator" << endl; }
-    | OBRACE CBRACE                                                { $$ = new DirectAbstractDeclarator(ARRAY); cout << "OBRACE CBRACE REDUCE to direct_abstract_declarator" << endl; }
-    | OPAREN CPAREN                                                { $$ = new DirectAbstractDeclarator(FUNCTION); cout << "OPAREN CPAREN REDUCE to direct_abstract_declarator" << endl; }
-    | OBRACE constant_expression CBRACE                            { $$ = new DirectAbstractDeclarator($2); cout << "OBRACE constant_expression CBRACE REDUCE to direct_abstract_declarator" << endl; }
-    | OPAREN parameter_type_list CPAREN                            { $$ = new DirectAbstractDeclarator($2,FUNCTION); cout << "OPAREN parameter_type_list CPAREN REDUCE to direct_abstract_declarator" << endl; }
-    | direct_abstract_declarator OBRACE CBRACE                     { $$ = new DirectAbstractDeclarator($1,ARRAY); cout << "direct_abstract_declarator OBRACE CBRACE REDUCE to direct_abstract_declarator" << endl; }
-    | direct_abstract_declarator OPAREN CPAREN                     { $$ = new DirectAbstractDeclarator($1,FUNCTION); cout << "direct_abstract_declarator OPAREN CPAREN REDUCE to direct_abstract_declarator" << endl; }
-    | direct_abstract_declarator OBRACE constant_expression CBRACE { $$ = new DirectAbstractDeclarator($1,$3,ARRAY); cout << "direct_abstract_declarator OBRACE constant_expression CBRACE REDUCE to direct_abstract_declarator" << endl; }
-    | direct_abstract_declarator OPAREN parameter_type_list CPAREN { $$ = new DirectAbstractDeclarator($1,$3,FUNCTION); cout << "direct_abstract_declarator OPAREN parameter_type_list CPAREN REDUCE to direct_abstract_declarator" << endl; }
+    : OPAREN abstract_declarator CPAREN                            { $$ = createDirectAbstractDeclarator($2, nullptr); cout << "OPAREN abstract_declarator CPAREN REDUCE to direct_abstract_declarator" << endl; }
+    | OBRACE CBRACE                                                { $$ = createDirectAbstractDeclarator(nullptr, nullptr, nullptr, nullptr, ARRAY); cout << "OBRACE CBRACE REDUCE to direct_abstract_declarator" << endl; }
+    | OPAREN CPAREN                                                { $$ = createDirectAbstractDeclarator(nullptr, nullptr, nullptr, nullptr, FUNCTION); cout << "OPAREN CPAREN REDUCE to direct_abstract_declarator" << endl; }
+    | OBRACE constant_expression CBRACE                            { $$ = createDirectAbstractDeclarator(nullptr, nullptr, nullptr, $2, NONE); cout << "OBRACE constant_expression CBRACE REDUCE to direct_abstract_declarator" << endl; }
+    | OPAREN parameter_type_list CPAREN                            { $$ = createDirectAbstractDeclarator(nullptr, nullptr, $2, nullptr, FUNCTION); cout << "OPAREN parameter_type_list CPAREN REDUCE to direct_abstract_declarator" << endl; }
+    | direct_abstract_declarator OBRACE CBRACE                     { $$ = createDirectAbstractDeclarator($1, nullptr, nullptr, nullptr, ARRAY); cout << "direct_abstract_declarator OBRACE CBRACE REDUCE to direct_abstract_declarator" << endl; }
+    | direct_abstract_declarator OPAREN CPAREN                     { $$ = createDirectAbstractDeclarator($1, nullptr, nullptr, nullptr, FUNCTION); cout << "direct_abstract_declarator OPAREN CPAREN REDUCE to direct_abstract_declarator" << endl; }
+    | direct_abstract_declarator OBRACE constant_expression CBRACE { $$ = createDirectAbstractDeclarator($1, nullptr, nullptr, $3, ARRAY); cout << "direct_abstract_declarator OBRACE constant_expression CBRACE REDUCE to direct_abstract_declarator" << endl; }
+    | direct_abstract_declarator OPAREN parameter_type_list CPAREN { $$ = createDirectAbstractDeclarator($1, nullptr, $3, nullptr, FUNCTION); cout << "direct_abstract_declarator OPAREN parameter_type_list CPAREN REDUCE to direct_abstract_declarator" << endl; }
     ;
 
 initializer

@@ -2840,19 +2840,19 @@ namespace  WadeSpace  {
 
   case 159: // parameter_declaration: declaration_specifiers declarator
 #line 551 "ansic.y"
-                                                  { yylhs.value.as< ParameterDeclaration * > () = new ParameterDeclaration(yystack_[1].value.as < DeclarationSpecifiers * > (),yystack_[0].value.as < Declarator * > ()); cout << "declaration_specifiers declarator REDUCE to parameter_declaration" << endl; }
+                                                  { yylhs.value.as < ParameterDeclaration * > () = new ParameterDeclaration(yystack_[1].value.as < DeclarationSpecifiers * > (),yystack_[0].value.as < Declarator * > ()); cout << "declaration_specifiers declarator REDUCE to parameter_declaration" << endl; }
 #line 2845 "parser.cpp"
     break;
 
   case 160: // parameter_declaration: declaration_specifiers abstract_declarator
 #line 552 "ansic.y"
-                                                  { yylhs.value.as< ParameterDeclaration * > () = new ParameterDeclaration(yystack_[1].value.as < DeclarationSpecifiers * > (),yystack_[0].value.as < AbstractDeclarator * > ()); cout << "declaration_specifiers abstract_declarator REDUCE to parameter_declaration" << endl; }
+                                                  { yylhs.value.as < ParameterDeclaration * > () = new ParameterDeclaration(yystack_[1].value.as < DeclarationSpecifiers * > (),yystack_[0].value.as < AbstractDeclarator * > ()); cout << "declaration_specifiers abstract_declarator REDUCE to parameter_declaration" << endl; }
 #line 2851 "parser.cpp"
     break;
 
   case 161: // parameter_declaration: declaration_specifiers
 #line 553 "ansic.y"
-                                                  { yylhs.value.as< ParameterDeclaration * > () = new ParameterDeclaration(yystack_[0].value.as < DeclarationSpecifiers * > ()); cout << "declaration_specifiers REDUCE to parameter_declaration" << endl; }
+                                                  { yylhs.value.as < ParameterDeclaration * > () = new ParameterDeclaration(yystack_[0].value.as < DeclarationSpecifiers * > ()); cout << "declaration_specifiers REDUCE to parameter_declaration" << endl; }
 #line 2857 "parser.cpp"
     break;
 
@@ -2900,55 +2900,55 @@ namespace  WadeSpace  {
 
   case 169: // direct_abstract_declarator: "(" abstract_declarator ")"
 #line 573 "ansic.y"
-                                                                   { yylhs.value.as < DirectAbstractDeclarator * > () = new DirectAbstractDeclarator(yystack_[1].value.as < AbstractDeclarator * > ()); cout << "OPAREN abstract_declarator CPAREN REDUCE to direct_abstract_declarator" << endl; }
+                                                                   { yylhs.value.as < DirectAbstractDeclarator * > () = createDirectAbstractDeclarator(yystack_[1].value.as < AbstractDeclarator * > (), nullptr); cout << "OPAREN abstract_declarator CPAREN REDUCE to direct_abstract_declarator" << endl; }
 #line 2905 "parser.cpp"
     break;
 
   case 170: // direct_abstract_declarator: "[" "]"
 #line 574 "ansic.y"
-                                                                   { yylhs.value.as < DirectAbstractDeclarator * > () = new DirectAbstractDeclarator(ARRAY); cout << "OBRACE CBRACE REDUCE to direct_abstract_declarator" << endl; }
+                                                                   { yylhs.value.as < DirectAbstractDeclarator * > () = createDirectAbstractDeclarator(nullptr, nullptr, nullptr, nullptr, ARRAY); cout << "OBRACE CBRACE REDUCE to direct_abstract_declarator" << endl; }
 #line 2911 "parser.cpp"
     break;
 
   case 171: // direct_abstract_declarator: "(" ")"
 #line 575 "ansic.y"
-                                                                   { yylhs.value.as < DirectAbstractDeclarator * > () = new DirectAbstractDeclarator(FUNCTION); cout << "OPAREN CPAREN REDUCE to direct_abstract_declarator" << endl; }
+                                                                   { yylhs.value.as < DirectAbstractDeclarator * > () = createDirectAbstractDeclarator(nullptr, nullptr, nullptr, nullptr, FUNCTION); cout << "OPAREN CPAREN REDUCE to direct_abstract_declarator" << endl; }
 #line 2917 "parser.cpp"
     break;
 
   case 172: // direct_abstract_declarator: "[" constant_expression "]"
 #line 576 "ansic.y"
-                                                                   { yylhs.value.as < DirectAbstractDeclarator * > () = new DirectAbstractDeclarator(yystack_[1].value.as < Expression * > ()); cout << "OBRACE constant_expression CBRACE REDUCE to direct_abstract_declarator" << endl; }
+                                                                   { yylhs.value.as < DirectAbstractDeclarator * > () = createDirectAbstractDeclarator(nullptr, nullptr, nullptr, yystack_[1].value.as < Expression * > (), NONE); cout << "OBRACE constant_expression CBRACE REDUCE to direct_abstract_declarator" << endl; }
 #line 2923 "parser.cpp"
     break;
 
   case 173: // direct_abstract_declarator: "(" parameter_type_list ")"
 #line 577 "ansic.y"
-                                                                   { yylhs.value.as < DirectAbstractDeclarator * > () = new DirectAbstractDeclarator(yystack_[1].value.as < ParameterTypeList * > (),FUNCTION); cout << "OPAREN parameter_type_list CPAREN REDUCE to direct_abstract_declarator" << endl; }
+                                                                   { yylhs.value.as < DirectAbstractDeclarator * > () = createDirectAbstractDeclarator(nullptr, nullptr, yystack_[1].value.as < ParameterTypeList * > (), nullptr, FUNCTION); cout << "OPAREN parameter_type_list CPAREN REDUCE to direct_abstract_declarator" << endl; }
 #line 2929 "parser.cpp"
     break;
 
   case 174: // direct_abstract_declarator: direct_abstract_declarator "[" "]"
 #line 578 "ansic.y"
-                                                                   { yylhs.value.as < DirectAbstractDeclarator * > () = new DirectAbstractDeclarator(yystack_[2].value.as < DirectAbstractDeclarator * > (),ARRAY); cout << "direct_abstract_declarator OBRACE CBRACE REDUCE to direct_abstract_declarator" << endl; }
+                                                                   { yylhs.value.as < DirectAbstractDeclarator * > () = createDirectAbstractDeclarator(yystack_[2].value.as < DirectAbstractDeclarator * > (), nullptr, nullptr, nullptr, ARRAY); cout << "direct_abstract_declarator OBRACE CBRACE REDUCE to direct_abstract_declarator" << endl; }
 #line 2935 "parser.cpp"
     break;
 
   case 175: // direct_abstract_declarator: direct_abstract_declarator "(" ")"
 #line 579 "ansic.y"
-                                                                   { yylhs.value.as < DirectAbstractDeclarator * > () = new DirectAbstractDeclarator(yystack_[2].value.as < DirectAbstractDeclarator * > (),FUNCTION); cout << "direct_abstract_declarator OPAREN CPAREN REDUCE to direct_abstract_declarator" << endl; }
+                                                                   { yylhs.value.as < DirectAbstractDeclarator * > () = createDirectAbstractDeclarator(yystack_[2].value.as < DirectAbstractDeclarator * > (), nullptr, nullptr, nullptr, FUNCTION); cout << "direct_abstract_declarator OPAREN CPAREN REDUCE to direct_abstract_declarator" << endl; }
 #line 2941 "parser.cpp"
     break;
 
   case 176: // direct_abstract_declarator: direct_abstract_declarator "[" constant_expression "]"
 #line 580 "ansic.y"
-                                                                   { yylhs.value.as < DirectAbstractDeclarator * > () = new DirectAbstractDeclarator(yystack_[3].value.as < DirectAbstractDeclarator * > (),yystack_[1].value.as < Expression * > (),ARRAY); cout << "direct_abstract_declarator OBRACE constant_expression CBRACE REDUCE to direct_abstract_declarator" << endl; }
+                                                                   { yylhs.value.as < DirectAbstractDeclarator * > () = createDirectAbstractDeclarator(yystack_[3].value.as < DirectAbstractDeclarator * > (), nullptr, nullptr, yystack_[1].value.as < Expression * > (), ARRAY); cout << "direct_abstract_declarator OBRACE constant_expression CBRACE REDUCE to direct_abstract_declarator" << endl; }
 #line 2947 "parser.cpp"
     break;
 
   case 177: // direct_abstract_declarator: direct_abstract_declarator "(" parameter_type_list ")"
 #line 581 "ansic.y"
-                                                                   { yylhs.value.as < DirectAbstractDeclarator * > () = new DirectAbstractDeclarator(yystack_[3].value.as < DirectAbstractDeclarator * > (),yystack_[1].value.as < ParameterTypeList * > (),FUNCTION); cout << "direct_abstract_declarator OPAREN parameter_type_list CPAREN REDUCE to direct_abstract_declarator" << endl; }
+                                                                   { yylhs.value.as < DirectAbstractDeclarator * > () = createDirectAbstractDeclarator(yystack_[3].value.as < DirectAbstractDeclarator * > (), nullptr, yystack_[1].value.as < ParameterTypeList * > (), nullptr, FUNCTION); cout << "direct_abstract_declarator OPAREN parameter_type_list CPAREN REDUCE to direct_abstract_declarator" << endl; }
 #line 2953 "parser.cpp"
     break;
 

@@ -5,6 +5,29 @@
 using namespace std;
 using namespace WadeSpace;
 
+DirectAbstractDeclarator* createDirectAbstractDeclarator(AbstractDeclarator* abstractDeclarator, vector<DirectAbstractDeclaratorNode*>* list)
+{
+	return new DirectAbstractDeclarator(abstractDeclarator, list);
+}
+
+DirectAbstractDeclarator* createDirectAbstractDeclarator(DirectAbstractDeclarator* dad, AbstractDeclarator* abstractDeclarator, ParameterTypeList* parameterTypeList, Expression* constantExpression, TokenType type)
+{
+	if (dad != nullptr)
+	{
+		vector<DirectAbstractDeclaratorNode*>* list = dad->getList();
+		DirectAbstractDeclaratorNode* node = new DirectAbstractDeclaratorNode(parameterTypeList, constantExpression, type);
+		list->push_back(node);
+		return new DirectAbstractDeclarator(dad->getAbstractDeclarator(), list);
+	}
+	else
+	{
+		vector<DirectAbstractDeclaratorNode*>* list = new vector<DirectAbstractDeclaratorNode*>();
+		DirectAbstractDeclaratorNode* node = new DirectAbstractDeclaratorNode(parameterTypeList, constantExpression, type);
+		list->push_back(node);
+		return new DirectAbstractDeclarator(abstractDeclarator, list);
+	}
+}
+
 vector<TokenPtr>* createIdentifierList(const TokenPtr identifier, vector<TokenPtr>* list)
 {
 	if (list == nullptr)

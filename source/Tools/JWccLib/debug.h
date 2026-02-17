@@ -48,3 +48,9 @@ vector<Enumerator*>* createEnumeratorList(Enumerator* value1, vector<Enumerator*
 vector<TypeQualifier*>* createTypeQualifierList(TypeQualifier* value1, vector<TypeQualifier*>* list);
 vector<ParameterDeclaration*>* createParameterList(ParameterDeclaration* value1, vector<ParameterDeclaration*>* list);
 vector<TokenPtr>* createIdentifierList(const TokenPtr identifier, vector<TokenPtr>* list);
+DirectAbstractDeclarator* createDirectAbstractDeclarator(AbstractDeclarator* abstractDeclarator, vector<DirectAbstractDeclaratorNode*>* list);
+DirectAbstractDeclarator* createDirectAbstractDeclarator(DirectAbstractDeclarator* dad, 
+                                                         AbstractDeclarator* abstractDeclarator, 
+	                                                     ParameterTypeList* parameterTypeList, 
+	                                                     Expression* constantExpression, 
+	                                                     TokenType type);
