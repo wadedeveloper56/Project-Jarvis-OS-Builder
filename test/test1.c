@@ -1,3 +1,4 @@
+typedef int integer;
 char var1;
 short var2;
 int var3;

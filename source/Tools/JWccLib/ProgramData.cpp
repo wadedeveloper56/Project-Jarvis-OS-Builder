@@ -75,6 +75,14 @@ void ProgramData::handleFunction(FunctionDefinition* declaration, vector<Functio
 
 void ProgramData::handleDeclaration(Declaration* declaration, vector<VariableData*>* variableTable)
 {
+	if (declaration->getDeclarationSpecifiers()->getStorageClassSpecifier() != nullptr)
+	{
+		string keyword = declaration->getDeclarationSpecifiers()->getStorageClassSpecifier()->getType()->data->repr.keyword.string;
+		if (keyword == "typedef" || keyword == "extern" || keyword == "static" || keyword == "register" || keyword == "auto")
+		{
+			return;
+		}
+	}
 	TokenType type = declaration->getDeclarationSpecifiers()->getTypeSpecifier()->getType().value();
 	for (InitDeclarator* initDecl : *declaration->getVectorInitDeclarator())
 	{

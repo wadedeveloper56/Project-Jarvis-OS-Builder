@@ -1,5 +1,6 @@
 Compiler (x86/x64) v1.0 (C) Copyright 2025-2026 Christopher D. Wade.
 All Rights Reserved
+typedef int integer ;
 char var1 ;
 short var2 ;
 int var3 ;
@@ -18,6 +19,21 @@ int main ( int argc , char * argv [ ] )
 return 0 ;
 }
 
+Scanner: token [typedef]
+TYPEDEF REDUCE to storage_class_specifier
+INT REDUCE to type_specifier
+Scanner: identifier [integer]
+type_specifier REDUCE to declaration_specifiers
+storage_class_specifier declaration_specifiers REDUCE to declaration_specifiers
+IDENTIFIER REDUCE to direct_declarator
+Scanner: token [;]
+direct_declarator REDUCE to declarator
+declarator REDUCE to init_declarator
+init_declarator REDUCE to init_declarator_list
+declaration_specifiers init_declarator_list SEMICOLON REDUCE to declaration
+declaration REDUCE to external_declaration
+external_declaration REDUCE to translation_unit
+
 CHAR REDUCE to type_specifier
 Scanner: identifier [var1]
 type_specifier REDUCE to declaration_specifiers
@@ -28,7 +44,7 @@ declarator REDUCE to init_declarator
 init_declarator REDUCE to init_declarator_list
 declaration_specifiers init_declarator_list SEMICOLON REDUCE to declaration
 declaration REDUCE to external_declaration
-external_declaration REDUCE to translation_unit
+translation_unit external_declaration REDUCE to translation_unit
 
 SHORT REDUCE to type_specifier
 Scanner: identifier [var2]

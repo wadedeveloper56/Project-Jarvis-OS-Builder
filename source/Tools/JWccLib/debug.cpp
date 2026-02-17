@@ -5,6 +5,26 @@
 using namespace std;
 using namespace WadeSpace;
 
+vector<BaseStatement*>* createStatementList(BaseStatement* statement, vector<BaseStatement*>* list)
+{
+	if (list == nullptr)
+	{
+		list = new vector<BaseStatement*>();
+	}
+	list->push_back(statement);
+	return list;
+}
+
+vector<Initializer*>* createInitializerList(Initializer* initializer, vector<Initializer*>* list)
+{
+	if (list == nullptr)
+	{
+		list = new vector<Initializer*>();
+	}
+	list->push_back(initializer);
+	return list;
+}
+
 DirectAbstractDeclarator* createDirectAbstractDeclarator(AbstractDeclarator* abstractDeclarator, vector<DirectAbstractDeclaratorNode*>* list)
 {
 	return new DirectAbstractDeclarator(abstractDeclarator, list);

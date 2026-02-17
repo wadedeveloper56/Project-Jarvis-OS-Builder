@@ -1,5 +1,6 @@
 #pragma once
 
+#include "BaseStatement.h"
 #include "Declaration.h"
 #include "Constant.h"
 #include "Token.h"
@@ -54,3 +55,6 @@ DirectAbstractDeclarator* createDirectAbstractDeclarator(DirectAbstractDeclarato
 	                                                     ParameterTypeList* parameterTypeList, 
 	                                                     Expression* constantExpression, 
 	                                                     TokenType type);
+vector<Initializer*>* createInitializerList(Initializer* initializer, vector<Initializer*>* list);
+vector<BaseStatement*>* createStatementList(BaseStatement* statement, vector<BaseStatement*>* list);
+
