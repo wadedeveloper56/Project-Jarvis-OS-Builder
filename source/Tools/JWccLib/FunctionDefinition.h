@@ -16,9 +16,12 @@ namespace WadeSpace
 	class FunctionDefinition
 	{
 	public:
-		FunctionDefinition(DeclarationSpecifiers* declarationSpecifiers, Declarator* declarator, vector<Declaration*>* vectorDeclaration, BaseStatement* baseStatement);
-		FunctionDefinition(DeclarationSpecifiers* declarationSpecifiers, Declarator* declarator, BaseStatement* baseStatement);
-		FunctionDefinition(Declarator* declarator, vector<Declaration*>* vectorDeclaration, BaseStatement* baseStatement);
+		FunctionDefinition(DeclarationSpecifiers* declarationSpecifiers, Declarator* declarator,
+		                   vector<Declaration*>* vectorDeclaration, BaseStatement* baseStatement);
+		FunctionDefinition(DeclarationSpecifiers* declarationSpecifiers, Declarator* declarator,
+		                   BaseStatement* baseStatement);
+		FunctionDefinition(Declarator* declarator, vector<Declaration*>* vectorDeclaration,
+		                   BaseStatement* baseStatement);
 		FunctionDefinition(Declarator* declarator, BaseStatement* baseStatement);
 		FunctionDefinition();
 		virtual ~FunctionDefinition();

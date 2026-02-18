@@ -15,6 +15,6 @@ namespace WadeSpace
 	public:
 		ExpressionStatement(Expression* exp);
 		ExpressionStatement();
-		virtual ~ExpressionStatement();
+		virtual ~ExpressionStatement()=default;
 	};
 }

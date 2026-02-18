@@ -19,16 +19,12 @@ namespace WadeSpace
 	{
 		ParameterTypeList* parameterTypeList;
 		Expression* constantExpression;
-		TokenType type;
-		
-		DirectAbstractDeclaratorNode() = default;
+		optional<TokenType> type;
 
-		DirectAbstractDeclaratorNode(ParameterTypeList* const parameterTypeList, Expression* const constantExpression, TokenType type)
-			: parameterTypeList(parameterTypeList),
-		      constantExpression(constantExpression), 
-		      type(type)
-		{
-		}
+		DirectAbstractDeclaratorNode();
+		DirectAbstractDeclaratorNode(ParameterTypeList* const parameterTypeList, Expression* const constantExpression,
+		                             optional<TokenType> type);
+		~DirectAbstractDeclaratorNode();
 	}* DirectAbstractDeclaratorNodePtr;
 
 	class DirectAbstractDeclarator
@@ -37,9 +33,10 @@ namespace WadeSpace
 		DirectAbstractDeclarator(const DirectAbstractDeclarator& copy) = default;
 		DirectAbstractDeclarator(AbstractDeclarator* abstractDeclarator, vector<DirectAbstractDeclaratorNode*>* list);
 		DirectAbstractDeclarator();
-		virtual ~DirectAbstractDeclarator() = default;
+		virtual ~DirectAbstractDeclarator();
 		[[nodiscard]] AbstractDeclarator* getAbstractDeclarator() const;
 		[[nodiscard]] vector<DirectAbstractDeclaratorNode*>* getList() const;
+
 	private:
 		AbstractDeclarator* abstractDeclarator;
 		vector<DirectAbstractDeclaratorNode*>* list;

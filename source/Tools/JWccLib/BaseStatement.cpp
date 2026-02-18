@@ -85,13 +85,6 @@ BaseStatement::BaseStatement(TokenType op, Expression* exp, BaseStatement* ifSta
 {
 }
 
-/*
-BaseStatement::BaseStatement(TokenType op, Expression* exp, BaseStatement* statement) : op(op), identifier(nullopt),
-contExp(nullptr), exp(exp), statement(statement), es1(nullptr), es2(nullptr), statement2(nullptr),
-statementList(nullptr), declarationList(nullptr)
-{
-}
-*/
 BaseStatement::BaseStatement(TokenType op, Expression* exp) : op(op), identifier(nullptr), contExp(nullptr), exp(exp),
                                                               statement(nullptr), es1(nullptr), es2(nullptr),
                                                               statement2(nullptr), statementList(nullptr),
@@ -123,17 +116,18 @@ BaseStatement::~BaseStatement()
 	delete es1;
 	delete es2;
 	delete statement2;
-	if (statementList != NULL)
+	delete identifier;
+	if (statementList != nullptr)
 	{
-		for (BaseStatement* obj : *statementList)
+		for (auto obj : *statementList)
 		{
 			delete obj;
 		}
 	}
 	delete statementList;
-	if (declarationList != NULL)
+	if (declarationList != nullptr)
 	{
-		for (Declaration* obj : *declarationList)
+		for (auto obj : *declarationList)
 		{
 			delete obj;
 		}

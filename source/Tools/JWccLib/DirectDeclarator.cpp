@@ -8,23 +8,42 @@ using namespace WadeSpace;
 using namespace std;
 
 DirectDeclarator::DirectDeclarator(
-	TokenPtr identifier, 
+	TokenPtr identifier,
 	TokenPtr token1,
 	TokenPtr token2,
-	Declarator* const declarator, 
+	Declarator* const declarator,
 	DirectDeclarator* const directDeclarator,
 	Expression* const constantExpression,
 	ParameterTypeList* const parameterTypeList,
 	vector<TokenPtr>* const vectorOfStrings)
 	: identifier(identifier),
-	token1(token1),
-	token2(token2),
-	declarator(declarator),
-	directDeclarator(directDeclarator),
-	constantExpression(constantExpression),
-	parameterTypeList(parameterTypeList),
-	vectorOfStrings(vectorOfStrings)
+	  token1(token1),
+	  token2(token2),
+	  declarator(declarator),
+	  directDeclarator(directDeclarator),
+	  constantExpression(constantExpression),
+	  parameterTypeList(parameterTypeList),
+	  vectorOfStrings(vectorOfStrings)
 {
+}
+
+DirectDeclarator::~DirectDeclarator()
+{
+	delete declarator;
+	delete directDeclarator;
+	delete constantExpression;
+	delete parameterTypeList;
+	delete identifier;
+	delete token1;
+	delete token2;
+	if (vectorOfStrings != nullptr)
+	{
+		for (auto token : *vectorOfStrings)
+		{
+			delete token;
+		}
+		delete vectorOfStrings;
+	}
 }
 
 TokenPtr DirectDeclarator::getIdentifier() const

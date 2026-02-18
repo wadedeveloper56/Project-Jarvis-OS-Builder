@@ -16,6 +16,13 @@ Constant::Constant() : iConst(nullptr), fConst(nullptr), strConst(nullptr), type
 {
 }
 
+Constant::~Constant()
+{
+	delete iConst;
+	delete fConst;
+	delete strConst;
+}
+
 TokenPtr Constant::getIConst() const
 {
 	return iConst;

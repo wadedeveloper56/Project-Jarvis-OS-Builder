@@ -15,6 +15,7 @@ Enumerator::Enumerator() : identifier(nullptr), constantExpression(nullptr)
 Enumerator::~Enumerator()
 {
 	delete constantExpression;
+	delete identifier;
 }
 
 Expression* Enumerator::getConstantExpression() const

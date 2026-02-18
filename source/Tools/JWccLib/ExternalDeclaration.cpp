@@ -4,7 +4,7 @@
 
 using namespace WadeSpace;
 using namespace std;
-
+ 
 ExternalDeclaration::ExternalDeclaration(FunctionDefinition* functionDefinition) : functionDefinition(functionDefinition), declaration(nullptr)
 {
 }

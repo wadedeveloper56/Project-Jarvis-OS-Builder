@@ -29,7 +29,7 @@ namespace WadeSpace
 			ParameterTypeList* const parameterTypeList,
 			vector<TokenPtr>* const vectorOfStrings
 		);
-		~DirectDeclarator() = default;
+		~DirectDeclarator();
 		DirectDeclarator(const DirectDeclarator& other) = default;
 		DirectDeclarator(DirectDeclarator&& other) = default;
 		DirectDeclarator& operator=(const DirectDeclarator& other) = default;

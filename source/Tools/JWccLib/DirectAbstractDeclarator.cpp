@@ -6,13 +6,49 @@
 
 using namespace WadeSpace;
 
-
-DirectAbstractDeclarator::DirectAbstractDeclarator(AbstractDeclarator* abstractDeclarator, vector<DirectAbstractDeclaratorNode*>* list) : abstractDeclarator(abstractDeclarator), list(list)
+DirectAbstractDeclaratorNode::DirectAbstractDeclaratorNode()
+	: parameterTypeList(nullptr),
+	  constantExpression(nullptr),
+	  type(nullopt)
 {
+}
+
+DirectAbstractDeclaratorNode::DirectAbstractDeclaratorNode(ParameterTypeList* const parameterTypeList,
+                                                           Expression* const constantExpression,
+                                                           optional<TokenType> type)
+	: parameterTypeList(parameterTypeList),
+	  constantExpression(constantExpression),
+	  type(type)
+{
+}
+
+DirectAbstractDeclaratorNode::~DirectAbstractDeclaratorNode()
+{
+	delete parameterTypeList;
+	delete constantExpression;
 }
 
 DirectAbstractDeclarator::DirectAbstractDeclarator() : abstractDeclarator(nullptr), list(nullptr)
 {
+}
+
+DirectAbstractDeclarator::DirectAbstractDeclarator(AbstractDeclarator* abstractDeclarator,
+                                                   vector<DirectAbstractDeclaratorNode*>* list) :
+	abstractDeclarator(abstractDeclarator), list(list)
+{
+}
+
+DirectAbstractDeclarator::~DirectAbstractDeclarator()
+{
+	delete abstractDeclarator;
+	if (list != nullptr)
+	{
+		for (auto node : *list)
+		{
+			delete node;
+		}
+		delete list;
+	}
 }
 
 AbstractDeclarator* DirectAbstractDeclarator::getAbstractDeclarator() const
@@ -24,4 +60,3 @@ vector<DirectAbstractDeclaratorNode*>* DirectAbstractDeclarator::getList() const
 {
 	return list;
 }
-

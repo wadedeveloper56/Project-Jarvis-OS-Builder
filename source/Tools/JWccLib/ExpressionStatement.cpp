@@ -12,7 +12,3 @@ ExpressionStatement::ExpressionStatement(Expression* exp) : BaseStatement(NONE, 
 ExpressionStatement::ExpressionStatement() : BaseStatement()
 {
 }
-
-ExpressionStatement::~ExpressionStatement()
-{
-}

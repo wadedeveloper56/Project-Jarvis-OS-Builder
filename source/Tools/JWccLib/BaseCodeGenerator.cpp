@@ -3,11 +3,32 @@
 
 using namespace WadeSpace;
 
-BaseCodeGenerator::BaseCodeGenerator(vector<VariableData*>* const variable_table,
-                                     vector<FunctionData*>* const function_table)
-	: variableTable(variable_table),
-	  functionTable(function_table)
+BaseCodeGenerator::BaseCodeGenerator(): variableTable(nullptr), functionTable(nullptr)
 {
+}
+
+BaseCodeGenerator::BaseCodeGenerator(vector<VariableData*>* const variable_table, vector<FunctionData*>* const function_table): variableTable(variable_table), functionTable(function_table)
+{
+}
+
+BaseCodeGenerator::~BaseCodeGenerator()
+{
+	if (variableTable != nullptr)
+	{
+		for (auto ptr : *variableTable)
+		{
+			delete ptr;
+		}
+	}
+	delete variableTable;
+	if (functionTable != nullptr)
+	{
+		for (auto ptr : *functionTable)
+		{
+			delete ptr;
+		}
+	}
+	delete functionTable;
 }
 
 vector<VariableData*>* BaseCodeGenerator::getVariableTable() const

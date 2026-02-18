@@ -1,7 +1,10 @@
 #pragma once
 
+using namespace std;
+
 enum TokenCode
 {
+	YC_NONE,
 	YC_KEYWORD,
 	YC_SYMBOL,
 	YC_NUMERIC,
@@ -72,13 +75,18 @@ typedef struct TokData
 		NumericConstant numericConstant;
 		StringConstant stringConstant;
 	} repr;
+
+	TokData() = default;
+	~TokData() = default;
 } * TokDataPtr;
 
 typedef struct Token
 {
 	TokDataPtr data;
-	std::string getSymbolName() const;
-	std::string getKeywordName() const;
+	Token();
+	~Token();
+	string getSymbolName() const;
+	string getKeywordName() const;
 }* TokenPtr, ** TokenPtrPtr;
 
 TokenPtr createToken(TokDataPtr data);

@@ -10,11 +10,11 @@ using namespace WadeSpace;
 void createTranslationUnit(ExternalDeclaration* externalDeclaration)
 {
 	bool isTypedef = false;
-	if (programData == nullptr) 
+	if (programData == nullptr)
 	{
-		programData = new ProgramData(); 
+		programData = new ProgramData();
 	}
-	if (typedefList == nullptr) 
+	if (typedefList == nullptr)
 	{
 		typedefList = new map<string, ExternalDeclaration*>();
 	}
@@ -22,12 +22,25 @@ void createTranslationUnit(ExternalDeclaration* externalDeclaration)
 	if (declaration != nullptr && declaration->isStorageClassSpecifier())
 	{
 		string keyword = declaration->getStorageClassSpecifier()->getType()->getKeywordName();
-		if (keyword == "typedef")
+		for (InitDeclarator* initDecl : *declaration->getVectorInitDeclarator())
 		{
-			typedefList->insert({"", externalDeclaration});
-			isTypedef = true;
+			auto declarator = initDecl->getDeclarator();
+			DirectDeclarator* dd = declarator->getDirectDeclarator();
+			string name;
+			if (dd->getIdentifier() != nullptr)
+			{
+				name = dd->getIdentifier()->getSymbolName();
+			}
+			else
+			{
+				name = dd->getDirectDeclarator()->getIdentifier()->getSymbolName();
+			}
+			if (keyword == "typedef")
+			{
+				typedefList->insert({ name, externalDeclaration });
+				isTypedef = true;
+			}
 		}
-		
 	}
 	if (!isTypedef) programData->add(externalDeclaration);
 }

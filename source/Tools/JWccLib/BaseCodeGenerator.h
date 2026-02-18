@@ -30,9 +30,9 @@ namespace WadeSpace
 	class BaseCodeGenerator
 	{
 	public:
-		BaseCodeGenerator() = default;
+		BaseCodeGenerator();
 		BaseCodeGenerator(vector<VariableData*>* const variable_table, vector<FunctionData*>* const function_table);
-		virtual ~BaseCodeGenerator() = default;
+		virtual ~BaseCodeGenerator();
 		BaseCodeGenerator(const BaseCodeGenerator& other) = default;
 		BaseCodeGenerator(BaseCodeGenerator&& other) noexcept;
 		BaseCodeGenerator& operator=(const BaseCodeGenerator& other);

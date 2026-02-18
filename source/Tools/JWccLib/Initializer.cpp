@@ -4,11 +4,13 @@
 
 using namespace WadeSpace;
 
-Initializer::Initializer(Expression* assignmentExpression) : assignmentExpression(assignmentExpression), initializerList(nullptr)
+Initializer::Initializer(Expression* assignmentExpression) : assignmentExpression(assignmentExpression),
+                                                             initializerList(nullptr)
 {
 }
 
-Initializer::Initializer(vector<Initializer*>* initializerList) : assignmentExpression(nullptr), initializerList(initializerList)
+Initializer::Initializer(vector<Initializer*>* initializerList) : assignmentExpression(nullptr),
+                                                                  initializerList(initializerList)
 {
 }
 

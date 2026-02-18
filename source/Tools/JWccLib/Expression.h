@@ -8,8 +8,11 @@ using namespace std;
 
 namespace WadeSpace
 {
-
-	typedef enum _NodeType { NT_NONE, NT_ARRAY, NT_FUNCTION_CALL,NT_VAR_ACCESS,NT_INC,NT_DEC,NT_TYPECAST,NT_SIZEOF,NT_UNARY,NT_OP,NT_QUESTION} NodeType;
+	typedef enum _NodeType
+	{
+		NT_NONE, NT_ARRAY, NT_FUNCTION_CALL, NT_VAR_ACCESS, NT_INC, NT_DEC, NT_TYPECAST, NT_SIZEOF, NT_UNARY, NT_OP,
+		NT_QUESTION
+	} NodeType;
 
 	class Expression;
 	class AssignmentExpression;
@@ -42,15 +45,17 @@ namespace WadeSpace
 			vector<Initializer*>* initializerList,
 			TypeName* typeName,
 			TokenPtr token3
-			);
-		~NodeData() = default;
-	} * NodeDataPtr;
+		);
+		~NodeData();
+	}* NodeDataPtr;
 
 	class Expression
 	{
 	public:
-		Expression() = default;
+		Expression();
 		Expression(const NodeDataPtr data, Expression* const left, const TokenPtr op, Expression* const right);
+		~Expression();
+
 	private:
 		NodeDataPtr data;
 		Expression* left;

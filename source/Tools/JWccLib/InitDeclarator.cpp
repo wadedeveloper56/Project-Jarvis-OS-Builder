@@ -7,7 +7,8 @@ InitDeclarator::InitDeclarator(Declarator* declarator) : declarator(declarator),
 {
 }
 
-InitDeclarator::InitDeclarator(Declarator* declarator, Initializer* initializer) : declarator(declarator), initializer(initializer)
+InitDeclarator::InitDeclarator(Declarator* declarator, Initializer* initializer) : declarator(declarator),
+	initializer(initializer)
 {
 }
 
@@ -21,8 +22,15 @@ InitDeclarator::~InitDeclarator()
 	delete initializer;
 }
 
-Declarator* InitDeclarator::getDeclarator() const { return declarator; }
-Initializer* InitDeclarator::getInitializer() const { return initializer; }
+Declarator* InitDeclarator::getDeclarator() const
+{
+	return declarator;
+}
+
+Initializer* InitDeclarator::getInitializer() const
+{
+	return initializer;
+}
 
 string InitDeclarator::getVariableName() const
 {

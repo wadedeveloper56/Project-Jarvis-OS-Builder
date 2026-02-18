@@ -4,6 +4,10 @@
 using namespace WadeSpace;
 using namespace std;
 
+Declaration::Declaration() : declarationSpecifiers(nullptr), vectorInitDeclarator(nullptr)
+{
+}
+
 Declaration::Declaration(DeclarationSpecifiers* declarationSpecifiers) : declarationSpecifiers(declarationSpecifiers), vectorInitDeclarator(nullptr)
 {
 }
@@ -12,16 +16,12 @@ Declaration::Declaration(DeclarationSpecifiers* declarationSpecifiers, vector<In
 {
 }
 
-Declaration::Declaration() : declarationSpecifiers(nullptr), vectorInitDeclarator(nullptr)
-{
-}
-
 Declaration::~Declaration()
 {
 	delete declarationSpecifiers;
 	if (vectorInitDeclarator != nullptr)
 	{
-		for (InitDeclarator* ptr : *vectorInitDeclarator)
+		for (auto ptr : *vectorInitDeclarator)
 		{
 			delete ptr;
 		}

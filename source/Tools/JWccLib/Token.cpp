@@ -3,6 +3,37 @@
 
 using namespace std;
 
+void zapTokData(TokDataPtr elem) 
+{
+	if (elem == nullptr)
+	{
+		return;
+	}
+	if (elem->code == YC_NUMERIC)
+	{
+		// Nothing to free
+	}
+	else if (elem->code == YC_STRING)
+	{
+		delete[] elem->repr.stringConstant.s;
+	}
+	else
+	{
+		delete[] elem->repr.symbol.string;
+	}
+	delete elem;
+}
+
+Token::Token()
+{
+	data = nullptr;
+}
+
+Token::~Token()
+{
+	zapTokData(data);
+}
+
 string Token::getSymbolName() const
 {
 	if (data->code == YC_SYMBOL)
@@ -26,4 +57,3 @@ string Token::getKeywordName() const
 		throw logic_error("Token is not a keyword");
 	}
 }
-

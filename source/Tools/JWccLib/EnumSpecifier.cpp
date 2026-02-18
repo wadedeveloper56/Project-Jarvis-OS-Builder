@@ -5,7 +5,8 @@
 
 using namespace WadeSpace;
 
-EnumSpecifier::EnumSpecifier(TokenPtr nameStr, vector<Enumerator*>* vectorEnumerator) : nameStr(nameStr), vectorEnumerator(vectorEnumerator)
+EnumSpecifier::EnumSpecifier(TokenPtr nameStr, vector<Enumerator*>* vectorEnumerator) : nameStr(nameStr),
+	vectorEnumerator(vectorEnumerator)
 {
 }
 
@@ -15,11 +16,15 @@ EnumSpecifier::EnumSpecifier() : nameStr(nullptr), vectorEnumerator(nullptr)
 
 EnumSpecifier::~EnumSpecifier()
 {
-	for (Enumerator* ptr : *vectorEnumerator)
+	delete nameStr;
+	if (vectorEnumerator != nullptr)
 	{
-		delete ptr;
+		for (auto ptr : *vectorEnumerator)
+		{
+			delete ptr;
+		}
+		delete vectorEnumerator;
 	}
-	delete vectorEnumerator;
 }
 
 vector<Enumerator*>* EnumSpecifier::getVectorEnumerator() const
