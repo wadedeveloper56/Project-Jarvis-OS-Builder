@@ -57,11 +57,11 @@ void ProgramData::handleFunction(FunctionDefinition* declaration, vector<Functio
 			VariableData* functionData = new VariableData();
 			if (parameterDeclaration->getDeclarator()->getDirectDeclarator()->getIdentifier() != nullptr)
 			{
-				functionData->name = parameterDeclaration->getDeclarator()->getDirectDeclarator()->getIdentifier()->data->repr.symbol.string;
+				functionData->name = parameterDeclaration->getDeclarator()->getDirectDeclarator()->getIdentifier()->getSymbolName();
 			}
 			else
 			{
-				functionData->name = parameterDeclaration->getDeclarator()->getDirectDeclarator()->getDirectDeclarator()->getIdentifier()->data->repr.symbol.string;
+				functionData->name = parameterDeclaration->getDeclarator()->getDirectDeclarator()->getDirectDeclarator()->getIdentifier()->getSymbolName();
 			}
 			TokenType type = parameterDeclaration->getDeclarationSpecifiers()->getTypeSpecifier()->getType().value();
 			functionData->pointer = parameterDeclaration->getDeclarator()->isPointer();
@@ -79,7 +79,8 @@ void ProgramData::handleDeclaration(Declaration* declaration, vector<VariableDat
 	for (InitDeclarator* initDecl : *declaration->getVectorInitDeclarator())
 	{
 		VariableData* data = new VariableData();
-		DirectDeclarator* dd = initDecl->getDeclarator()->getDirectDeclarator();
+		auto declarator = initDecl->getDeclarator();
+		DirectDeclarator* dd = declarator->getDirectDeclarator();
 		if (dd->getIdentifier() != nullptr)
 		{
 			data->name = dd->getIdentifier()->getSymbolName();
@@ -90,7 +91,7 @@ void ProgramData::handleDeclaration(Declaration* declaration, vector<VariableDat
 		}
 		data->type = type;
 		data->size = getSize(type);
-		data->pointer = initDecl->getDeclarator()->isPointer();
+		data->pointer = declarator->isPointer();
 		variableTable->push_back(data);
 	}
 }

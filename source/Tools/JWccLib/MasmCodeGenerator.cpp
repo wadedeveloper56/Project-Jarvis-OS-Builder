@@ -81,5 +81,5 @@ void MasmCodeGenerator::generateCode(ofstream& out)
 		out << "\tret" << endl;
 		out << "_" << ptr->name << " endp" << endl;
 	}
-	out << "end _main" << endl << endl;;
+	out << "end" << endl << endl;;
 }

@@ -1,15 +1,15 @@
 PEDUMP - Win32/Win64 COFF EXE/OBJ/LIB file dumper v1.0 (C) Copyright 2025-2026 Christopher D. Wade.
 All Rights Reserved
 Dump of file test1.obj
-File Size 398 bytes
+File Size 309 bytes
 File Type: 32-bit COFF OBJECT
 
 FILE HEADER VALUES
                14C Machine (Intel 386 or later processors and compatible processors)
-                 4 (4) Number of Sections
-          6995180F TimeDateStamp ->  n/a
-                C4 PointerToSymbolTable
-                 B (11) NumberOfSymbols
+                 3 (3) Number of Sections
+          699521F8 TimeDateStamp ->  n/a
+                8F PointerToSymbolTable
+                 9 (9) NumberOfSymbols
                  0 (0) SizeOfOptionalHeader
                  0 Flags
 
@@ -19,7 +19,7 @@ SECTION HEADER #0 (0)
        0 physical address
        0 virtual address
        3 (3) size of raw data
-      B4 file pointer to raw data (000000B4 to 000000B6)
+      8C file pointer to raw data (0000008C to 0000008E)
        0 file pointer to relocation table
        0 file pointer to line numbers
        0 number of relocations
@@ -71,23 +71,7 @@ C0300080 flags
 
 
 
-SECTION HEADER #3 (3)
-.drectve name
-       0 physical address
-       0 virtual address
-       D (13) size of raw data
-      B7 file pointer to raw data (000000B7 to 000000C3)
-       0 file pointer to relocation table
-       0 file pointer to line numbers
-       0 number of relocations
-       0 number of line numbers
-     A00 flags
-         Informataion
-         Remove
-
-
-
-Symbol Table - 11 entries  (* = auxillary symbol)
+Symbol Table - 9 entries  (* = auxillary symbol)
 Indx Sectn   Value   Type  Storage Name
 ---- ----- -------- ----- -------  --------
 0000 DEBUG 00000000  0000 FILE     .file
@@ -98,8 +82,6 @@ Indx Sectn   Value   Type  Storage Name
      * Section: 0000  Len: 00000  Relocs: 0000  LineNums: 0000 checksum:00000000
 0006     3 00000000  0000 STATIC   .bss
      * Section: 0000  Len: 00043  Relocs: 0000  LineNums: 0000 checksum:00000000
-0008     4 00000000  0000 STATIC   .drectve
-     * Section: 0000  Len: 0000D  Relocs: 0000  LineNums: 0000 checksum:00000000
-000A     1 00000000  0020 EXTERNAL __main
+0008     1 00000000  0020 EXTERNAL __main
 
 String Table Size = 0x4 (4) bytes 0 entries

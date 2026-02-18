@@ -21,5 +21,5 @@ _main proc  c
 	xor eax,eax
 	ret
 _main endp
-end _main
+end
 

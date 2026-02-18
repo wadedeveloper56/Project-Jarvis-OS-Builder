@@ -289,7 +289,7 @@ unary_expression
     : postfix_expression             { $$ = $1; cout << "postfix_expression REDUCE unary_expression" << endl;}
     | INC_OP unary_expression        { $$ = createExpression(NT_INC,nullptr,nullptr,nullptr,$2,nullptr,nullptr,nullptr,nullptr,nullptr,$1, nullptr,nullptr,nullptr); cout << "INC_OP unary_expression REDUCE unary_expression" << endl;}
     | DEC_OP unary_expression        { $$ = createExpression(NT_DEC,nullptr,nullptr,nullptr,$2,nullptr,nullptr,nullptr,nullptr,nullptr,$1, nullptr,nullptr,nullptr); cout << "DEC_OP unary_expression REDUCE unary_expression" << endl;}
-    | unary_operator cast_expression { $$ = createExpression(NT_UNARY,nullptr,nullptr,nullptr,$2,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr, nullptr,nullptr,nullptr); cout << "unary_operator cast_expression REDUCE unary_expression" << endl;}
+    | unary_operator cast_expression { $$ = createExpression(NT_UNARY,nullptr,nullptr,nullptr,$2,nullptr,nullptr,nullptr,nullptr,nullptr,$1, nullptr,nullptr,nullptr); cout << "unary_operator cast_expression REDUCE unary_expression" << endl;}
     | SIZEOF unary_expression        { $$ = createExpression(NT_SIZEOF,$1,nullptr,nullptr,$2,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr, nullptr,nullptr,nullptr); cout << "SIZEOF unary_expression REDUCE unary_expression" << endl;}
     | SIZEOF OPAREN type_name CPAREN { $$ = createExpression(NT_SIZEOF,$1,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,nullptr,$3,nullptr, nullptr,nullptr,nullptr); cout << "SIZEOF OPAREN type_name CPAREN REDUCE unary_expression" << endl;}
     ;

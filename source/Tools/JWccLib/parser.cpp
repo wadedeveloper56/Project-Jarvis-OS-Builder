@@ -2024,7 +2024,7 @@ namespace  WadeSpace  {
 
   case 23: // unary_expression: unary_operator cast_expression
 #line 292 "ansic.y"
-                                     { yylhs.value.as < Expression * > () = createExpression(NT_UNARY,nullptr,nullptr,nullptr,yystack_[0].value.as < Expression * > (),nullptr,nullptr,nullptr,nullptr,nullptr,nullptr, nullptr,nullptr,nullptr); cout << "unary_operator cast_expression REDUCE unary_expression" << endl;}
+                                     { yylhs.value.as < Expression * > () = createExpression(NT_UNARY,nullptr,nullptr,nullptr,yystack_[0].value.as < Expression * > (),nullptr,nullptr,nullptr,nullptr,nullptr,yystack_[1].value.as < TokenPtr > (), nullptr,nullptr,nullptr); cout << "unary_operator cast_expression REDUCE unary_expression" << endl;}
 #line 2029 "parser.cpp"
     break;
 
