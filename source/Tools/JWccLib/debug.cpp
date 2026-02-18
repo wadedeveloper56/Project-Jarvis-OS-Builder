@@ -19,9 +19,9 @@ void createTranslationUnit(ExternalDeclaration* externalDeclaration)
 		typedefList = new map<string, ExternalDeclaration*>();
 	}
 	Declaration* declaration = externalDeclaration->getDeclaration();
-	if (declaration != nullptr && declaration->getDeclarationSpecifiers() != nullptr && declaration->getDeclarationSpecifiers()->getStorageClassSpecifier() != nullptr)
+	if (declaration != nullptr && declaration->isStorageClassSpecifier())
 	{
-		string keyword = declaration->getDeclarationSpecifiers()->getStorageClassSpecifier()->getType()->getKeywordName();
+		string keyword = declaration->getStorageClassSpecifier()->getType()->getKeywordName();
 		if (keyword == "typedef")
 		{
 			typedefList->insert({"", externalDeclaration});
