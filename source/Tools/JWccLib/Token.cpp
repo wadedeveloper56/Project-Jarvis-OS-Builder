@@ -14,3 +14,16 @@ string Token::getSymbolName() const
 		throw logic_error("Token is not an identifier");
 	}
 }
+
+string Token::getKeywordName() const
+{
+	if (data->code == YC_KEYWORD)
+	{
+		return string(data->repr.keyword.string, data->repr.keyword.strLen);
+	}
+	else
+	{
+		throw logic_error("Token is not a keyword");
+	}
+}
+

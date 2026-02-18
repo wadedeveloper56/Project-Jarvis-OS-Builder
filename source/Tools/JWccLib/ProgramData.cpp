@@ -47,7 +47,7 @@ void ProgramData::handleFunction(FunctionDefinition* declaration, vector<Functio
 {
 	FunctionData* data = new FunctionData();
 	data->type = declaration->getDeclarationSpecifiers()->getTypeSpecifier()->getType().value();
-	data->name = declaration->getDeclarator()->getDirectDeclarator()->getDirectDeclarator()->getIdentifier()->data->repr.symbol.string;
+	data->name = declaration->getDeclarator()->getDirectDeclarator()->getDirectDeclarator()->getIdentifier()->getSymbolName();// ->data->repr.symbol.string;
 	ParameterTypeList* parameters = declaration->getDeclarator()->getDirectDeclarator()->getParameterTypeList();
 	if (parameters != nullptr && !parameters->getVectorParameterDeclaration()->empty())
 	{
@@ -75,9 +75,9 @@ void ProgramData::handleFunction(FunctionDefinition* declaration, vector<Functio
 
 void ProgramData::handleDeclaration(Declaration* declaration, vector<VariableData*>* variableTable)
 {
-	if (declaration->getDeclarationSpecifiers()->getStorageClassSpecifier() != nullptr)
+	if (declaration->isStorageClassSpecifier())
 	{
-		string keyword = declaration->getDeclarationSpecifiers()->getStorageClassSpecifier()->getType()->data->repr.keyword.string;
+		string keyword = declaration->getStorageClassSpecifier()->getType()->getKeywordName();
 		if (keyword == "typedef" || keyword == "extern" || keyword == "static" || keyword == "register" || keyword == "auto")
 		{
 			return;
@@ -90,11 +90,11 @@ void ProgramData::handleDeclaration(Declaration* declaration, vector<VariableDat
 		DirectDeclarator* dd = initDecl->getDeclarator()->getDirectDeclarator();
 		if (dd->getIdentifier() != nullptr)
 		{
-			data->name = dd->getIdentifier()->data->repr.symbol.string;
+			data->name = dd->getIdentifier()->getSymbolName();
 		}
 		else
 		{
-			data->name = dd->getDirectDeclarator()->getIdentifier()->data->repr.symbol.string;
+			data->name = dd->getDirectDeclarator()->getIdentifier()->getSymbolName();
 		}
 		data->type = type;
 		data->size = getSize(type);
