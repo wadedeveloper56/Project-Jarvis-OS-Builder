@@ -651,8 +651,8 @@ jump_statement
     ;
 
 translation_unit 
-    : external_declaration                  { program = new ProgramData(); program->add($1); cout << "external_declaration REDUCE to translation_unit" << endl << endl; }
-    | translation_unit external_declaration { program->add($2); cout << "translation_unit external_declaration REDUCE to translation_unit" << endl << endl; }
+    : external_declaration                  { createTranslationUnit($1); cout << "external_declaration REDUCE to translation_unit" << endl << endl; }
+    | translation_unit external_declaration { createTranslationUnit($2); cout << "translation_unit external_declaration REDUCE to translation_unit" << endl << endl; }
     ;
 
 external_declaration

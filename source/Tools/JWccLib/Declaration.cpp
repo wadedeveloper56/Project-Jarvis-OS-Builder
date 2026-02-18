@@ -33,20 +33,3 @@ DeclarationSpecifiers* Declaration::getDeclarationSpecifiers() const { return de
 vector<InitDeclarator*>* Declaration::getVectorInitDeclarator() const { return vectorInitDeclarator; }
 bool Declaration::isDeclarationSpecifiers() const { return declarationSpecifiers != nullptr;  }
 bool Declaration::isVectorInitDeclarator() const { return vectorInitDeclarator != nullptr; }
-bool Declaration::isStorageClassSpecifier() const
-{
-	if (declarationSpecifiers != nullptr)
-	{
-		return declarationSpecifiers->isStorageClassSpecifier();
-	}
-	return false;
-}
-
-StorageClassSpecifier* Declaration::getStorageClassSpecifier() const
-{
-	if (declarationSpecifiers != nullptr)
-	{
-		return declarationSpecifiers->getStorageClassSpecifier();
-	}
-	return nullptr;
-}

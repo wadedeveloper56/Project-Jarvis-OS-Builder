@@ -9,6 +9,7 @@
 #include "Declaration.h"
 #include "DeclarationSpecifiers.h"
 #include "Declarator.h"
+#include "ExternalDeclaration.h"
 #include "ParameterDeclaration.h"
 #include "StructDeclaration.h"
 #include "Token.h"
@@ -57,4 +58,4 @@ DirectAbstractDeclarator* createDirectAbstractDeclarator(DirectAbstractDeclarato
 	                                                     TokenType type);
 vector<Initializer*>* createInitializerList(Initializer* initializer, vector<Initializer*>* list);
 vector<BaseStatement*>* createStatementList(BaseStatement* statement, vector<BaseStatement*>* list);
-
+void createTranslationUnit(ExternalDeclaration* externalDeclaration);

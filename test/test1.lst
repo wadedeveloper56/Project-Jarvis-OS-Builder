@@ -1,4 +1,4 @@
-JWasm v2.12pre, Feb 16 2026
+JWasm v2.12pre, Feb 17 2026
 test1.asm
                                 .386
                                 .model flat, fastcall
@@ -67,7 +67,7 @@ Symbols:
 @FileName  . . . . . . . . . . .        Text   TEST1
 @Interface . . . . . . . . . . .        Number             7h 
 @Model . . . . . . . . . . . . .        Number             7h 
-@Time  . . . . . . . . . . . . .        Text   17:39:35
+@Time  . . . . . . . . . . . . .        Text   19:04:45
 @Version . . . . . . . . . . . .        Text   800
 @code  . . . . . . . . . . . . .        Text   _TEXT
 @data  . . . . . . . . . . . . .        Text   FLAT
@@ -86,4 +86,4 @@ var7 . . . . . . . . . . . . . .        QWord             17h _BSS FASTCALL
 var8 . . . . . . . . . . . . . .        TByte             1Fh _BSS FASTCALL
 var9 . . . . . . . . . . . . . .        Byte              29h _BSS FASTCALL
 
-test1.asm: 24 lines, 2 passes, 1 ms, 0 warnings, 0 errors
+test1.asm: 24 lines, 2 passes, 2 ms, 0 warnings, 0 errors

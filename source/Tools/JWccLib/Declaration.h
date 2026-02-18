@@ -19,11 +19,9 @@ namespace WadeSpace
 		virtual ~Declaration();
 		[[nodiscard]] DeclarationSpecifiers* getDeclarationSpecifiers() const;
 		[[nodiscard]] vector<InitDeclarator*>* getVectorInitDeclarator() const;
-		[[nodiscard]] StorageClassSpecifier* getStorageClassSpecifier() const;
 		
 		[[nodiscard]] bool isDeclarationSpecifiers() const;
 		[[nodiscard]] bool isVectorInitDeclarator() const;
-		[[nodiscard]] bool isStorageClassSpecifier() const;
 
 	private:
 		DeclarationSpecifiers* declarationSpecifiers;

@@ -1,9 +1,36 @@
 #include "pch.h"
 #include "debug.h"
 #include "Expression.h"
+#include "ProgramData.h"
+#include "GlobalVars.h"
 
 using namespace std;
 using namespace WadeSpace;
+
+void createTranslationUnit(ExternalDeclaration* externalDeclaration)
+{
+	bool isTypedef = false;
+	if (programData == nullptr) 
+	{
+		programData = new ProgramData(); 
+	}
+	if (typedefList == nullptr) 
+	{
+		typedefList = new map<string, ExternalDeclaration*>();
+	}
+	Declaration* declaration = externalDeclaration->getDeclaration();
+	if (declaration != nullptr && declaration->getDeclarationSpecifiers() != nullptr && declaration->getDeclarationSpecifiers()->getStorageClassSpecifier() != nullptr)
+	{
+		string keyword = declaration->getDeclarationSpecifiers()->getStorageClassSpecifier()->getType()->getKeywordName();
+		if (keyword == "typedef")
+		{
+			typedefList->insert({"", externalDeclaration});
+			isTypedef = true;
+		}
+		
+	}
+	if (!isTypedef) programData->add(externalDeclaration);
+}
 
 vector<BaseStatement*>* createStatementList(BaseStatement* statement, vector<BaseStatement*>* list)
 {

@@ -109,7 +109,7 @@ int main(int argc, char* argv[])
 		Interpreter i;
 		i.setStreams(&inStr, &out);
 		exitcode = i.parse();
-		BaseCodeGenerator* generator = program->processGlobalVariables();
+		BaseCodeGenerator* generator = programData->processGlobalVariables();
 		generator->generateCode(out);
 		cout << "Parse complete. Result = " << exitcode << endl;
 	}
@@ -122,6 +122,6 @@ exit:
 	argFreeTable(argtable, sizeof(argtable) / sizeof(argtable[0]));
 	in.close();
 	out.close();
-	delete WadeSpace::program;
+	delete WadeSpace::programData;
 	return exitcode;
 }

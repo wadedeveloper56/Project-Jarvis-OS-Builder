@@ -5,7 +5,8 @@ using namespace std;
 
 namespace WadeSpace
 {
-	ProgramData *program;
+	ProgramData *programData = nullptr;
+	map<string,ExternalDeclaration*>* typedefList = nullptr;
 	bool bit16 = false;
 	bool bit32 = false;
 	bool bit64 = false;
