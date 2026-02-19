@@ -24,6 +24,7 @@ namespace WadeSpace
 		[[nodiscard]] optional<TokenType> getType() const;
 		[[nodiscard]] StructOrUnionSpecifier* getSuSpec() const;
 		[[nodiscard]] TokenPtr getTypePtr() const;
+		[[nodiscard]] ExternalDeclaration* getTypedefInfo() const;
 
 	private:
 		EnumSpecifier* enumSpec;

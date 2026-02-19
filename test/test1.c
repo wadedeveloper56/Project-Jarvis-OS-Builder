@@ -1,5 +1,5 @@
 typedef int integer;
-integer data;
+integer test;
 char var1;
 short var2;
 int var3;

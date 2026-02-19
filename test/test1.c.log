@@ -1,7 +1,7 @@
 Compiler (x86/x64) v1.0 (C) Copyright 2025-2026 Christopher D. Wade.
 All Rights Reserved
 typedef int integer ;
-integer data ;
+integer test ;
 char var1 ;
 short var2 ;
 int var3 ;
@@ -13,9 +13,8 @@ long double var8 ;
 bool var9 ;
 complex var10 ;
 imaginary var11 ;
-char * var12 [ ] ;
 
-int main ( int argc , char * argv [ ] )
+int main ( int argc )
 {
 return 0 ;
 }
@@ -38,7 +37,7 @@ external_declaration REDUCE to translation_unit
 
 Scanner: typedef name [integer]
 TYPE_NAME REDUCE to type_specifier
-Scanner: identifier [data]
+Scanner: identifier [test]
 type_specifier REDUCE to declaration_specifiers
 IDENTIFIER REDUCE to direct_declarator
 Scanner: token [;]
@@ -192,24 +191,6 @@ declaration_specifiers init_declarator_list SEMICOLON REDUCE to declaration
 declaration REDUCE to external_declaration
 translation_unit external_declaration REDUCE to translation_unit
 
-Scanner: token [char]
-CHAR REDUCE to type_specifier
-Scanner: token [*]
-type_specifier REDUCE to declaration_specifiers
-Scanner: identifier [var12]
-TIMES_OP REDUCE to POINTER
-IDENTIFIER REDUCE to direct_declarator
-Scanner: token [[]
-Scanner: token []]
-direct_declarator OBRACE CBRACE REDUCE to direct_declarator
-Scanner: token [;]
-pointer direct_declarator REDUCE to declarator
-declarator REDUCE to init_declarator
-init_declarator REDUCE to init_declarator_list
-declaration_specifiers init_declarator_list SEMICOLON REDUCE to declaration
-declaration REDUCE to external_declaration
-translation_unit external_declaration REDUCE to translation_unit
-
 Scanner: token [int]
 INT REDUCE to type_specifier
 Scanner: identifier [main]
@@ -221,24 +202,10 @@ INT REDUCE to type_specifier
 Scanner: identifier [argc]
 type_specifier REDUCE to declaration_specifiers
 IDENTIFIER REDUCE to direct_declarator
-Scanner: token [,]
+Scanner: token [)]
 direct_declarator REDUCE to declarator
 declaration_specifiers declarator REDUCE to parameter_declaration
 parameter_declaration REDUCE to parameter_list
-Scanner: token [char]
-CHAR REDUCE to type_specifier
-Scanner: token [*]
-type_specifier REDUCE to declaration_specifiers
-Scanner: identifier [argv]
-TIMES_OP REDUCE to POINTER
-IDENTIFIER REDUCE to direct_declarator
-Scanner: token [[]
-Scanner: token []]
-direct_declarator OBRACE CBRACE REDUCE to direct_declarator
-Scanner: token [)]
-pointer direct_declarator REDUCE to declarator
-declaration_specifiers declarator REDUCE to parameter_declaration
-parameter_list COMMA parameter_declaration REDUCE to parameter_list
 parameter_list REDUCE to parameter_type_list
 direct_declarator OPAREN parameter_type_list CPAREN to direct_declarator
 Scanner: token [{]

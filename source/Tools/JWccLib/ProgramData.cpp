@@ -75,7 +75,16 @@ void ProgramData::handleFunction(FunctionDefinition* declaration, vector<Functio
 
 void ProgramData::handleDeclaration(Declaration* declaration, vector<VariableData*>* variableTable)
 {
-	TokenType type = declaration->getDeclarationSpecifiers()->getTypeSpecifier()->getType().value();
+	TokenType type;
+	if (declaration->getDeclarationSpecifiers()->getTypeSpecifier()->getType().has_value())
+	{
+		type = declaration->getDeclarationSpecifiers()->getTypeSpecifier()->getType().value();
+	}
+	else
+	{
+		auto temp = declaration->getDeclarationSpecifiers()->getTypeSpecifier()->getTypedefInfo()->getDeclaration();
+		type = temp->getDeclarationSpecifiers()->getDeclarationSpecifiers()->getTypeSpecifier()->getType().value();
+	}
 	for (InitDeclarator* initDecl : *declaration->getVectorInitDeclarator())
 	{
 		VariableData* data = new VariableData();

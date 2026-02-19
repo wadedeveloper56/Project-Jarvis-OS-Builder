@@ -1,8 +1,8 @@
 #include "pch.h"
 #include "TypeSpecifier.h"
-
 #include "GlobalVars.h"
 #include "StructOrUnionSpecifier.h"
+#include "ExternalDeclaration.h"
 
 using namespace WadeSpace;
 
@@ -40,9 +40,12 @@ TypeSpecifier::~TypeSpecifier()
 {
 	delete enumSpec;
 	delete suSpec;
+	delete typedefInfo;
+	delete typePtr;
 }
 
 EnumSpecifier* TypeSpecifier::getEnumSpec() const { return enumSpec; }
 optional<TokenType> TypeSpecifier::getType() const { return type; }
 StructOrUnionSpecifier* TypeSpecifier::getSuSpec() const { return suSpec; }
 TokenPtr TypeSpecifier::getTypePtr() const { return typePtr; }
+ExternalDeclaration* TypeSpecifier::getTypedefInfo() const { return typedefInfo; }
