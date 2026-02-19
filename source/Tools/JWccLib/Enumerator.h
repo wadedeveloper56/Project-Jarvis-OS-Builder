@@ -2,27 +2,27 @@
 
 #include <string>
 #include <vector>
-#include <stdint.h>
 #include <optional>
+
+#include "Token.h"
 
 using namespace std;
 
 namespace WadeSpace
 {
-	class ExpressionNode;
+	class Expression;
 
 	class Enumerator
 	{
 	public:
-		Enumerator(string&  operatorStr, ExpressionNode* constantExpression);
-		Enumerator(string&  operatorStr);
+		Enumerator(TokenPtr identifier, Expression* constantExpression);
 		Enumerator();
 		virtual ~Enumerator();
-		optional<string> getOperatorStr() const;
-		ExpressionNode* getConstantExpression() const;
+		TokenPtr getIdentifier() const;
+		Expression* getConstantExpression() const;
 
 	private:
-		optional<string> operatorStr;
-		ExpressionNode* constantExpression;
+		TokenPtr identifier;
+		Expression* constantExpression;
 	};
 }

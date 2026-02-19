@@ -69,7 +69,7 @@
     <ClInclude Include="EnumSpecifier.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ExpressionNode.h">
+    <ClInclude Include="Expression.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ExpressionStatement.h">
@@ -156,6 +156,12 @@
     <ClInclude Include="TypeSpecifier.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="debug.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Token.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="JWccLib.cpp">
@@ -206,7 +212,7 @@
     <ClCompile Include="EnumSpecifier.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ExpressionNode.cpp">
+    <ClCompile Include="Expression.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ExpressionStatement.cpp">
@@ -285,6 +291,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TypeSpecifier.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="debug.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="structures.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Token.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

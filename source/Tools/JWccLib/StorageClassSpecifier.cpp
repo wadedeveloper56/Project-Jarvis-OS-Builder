@@ -3,24 +3,22 @@
 
 using namespace WadeSpace;
 
-StorageClassSpecifier::StorageClassSpecifier(const int& value, TokenType type) : operatorStr(value), type(type)
+StorageClassSpecifier::StorageClassSpecifier(TokenPtr type) : type(type)
 {
 }
 
-StorageClassSpecifier::StorageClassSpecifier() : operatorStr(nullopt), type(NONE)
+StorageClassSpecifier::StorageClassSpecifier() : type(nullptr)
 {
 }
 
-StorageClassSpecifier::~StorageClassSpecifier()
-{
-}
-
-optional<int> StorageClassSpecifier::getOperatorStr() const
-{
-	return operatorStr;
-}
-
-TokenType StorageClassSpecifier::getType() const
+TokenPtr StorageClassSpecifier::getType() const
 {
 	return type;
 }
+
+bool StorageClassSpecifier::isType() const
+{
+	return type!=nullptr;
+}
+
+

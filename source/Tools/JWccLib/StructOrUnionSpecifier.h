@@ -2,7 +2,6 @@
 
 #include <string>
 #include <vector>
-#include <stdint.h>
 #include <optional>
 #include "StructOrUnion.h"
 #include "StructDeclaration.h"
@@ -14,18 +13,18 @@ namespace WadeSpace
 	class StructOrUnionSpecifier
 	{
 	public:
-		StructOrUnionSpecifier(StructOrUnion* structOrUnion, const string& name, vector<StructDeclaration*>* vectorStructDeclaration);
-		StructOrUnionSpecifier(StructOrUnion* structOrUnion, vector<StructDeclaration*>* vectorStructDeclaration);
-		StructOrUnionSpecifier(StructOrUnion* structOrUnion, const string& name);
+		StructOrUnionSpecifier(TokenPtr structOrUnion, TokenPtr name, vector<StructDeclaration*>* vectorStructDeclaration);
+		StructOrUnionSpecifier(TokenPtr structOrUnion, vector<StructDeclaration*>* vectorStructDeclaration);
+		StructOrUnionSpecifier(TokenPtr structOrUnion, TokenPtr name);
 		StructOrUnionSpecifier();
 		virtual ~StructOrUnionSpecifier();
-		optional<string> getName() const;
-		StructOrUnion* getStructOrUnion() const;
+		TokenPtr getName() const;
+		TokenPtr getStructOrUnion() const;
 		vector<StructDeclaration*>* getVectorStructDeclaration() const;
 
 	private:
-		optional<string> name;
-		StructOrUnion* structOrUnion;
+		TokenPtr name;
+		TokenPtr structOrUnion;
 		vector<StructDeclaration*>* vectorStructDeclaration;
 	};
 }

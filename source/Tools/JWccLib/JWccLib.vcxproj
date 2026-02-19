@@ -117,7 +117,7 @@
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
@@ -155,7 +155,7 @@
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
@@ -172,6 +172,7 @@
     <ClInclude Include="BaseStatement.h" />
     <ClInclude Include="CompoundStatement.h" />
     <ClInclude Include="Constant.h" />
+    <ClInclude Include="debug.h" />
     <ClInclude Include="Declaration.h" />
     <ClInclude Include="DeclarationSpecifiers.h" />
     <ClInclude Include="Declarator.h" />
@@ -179,7 +180,7 @@
     <ClInclude Include="DirectDeclarator.h" />
     <ClInclude Include="Enumerator.h" />
     <ClInclude Include="EnumSpecifier.h" />
-    <ClInclude Include="ExpressionNode.h" />
+    <ClInclude Include="Expression.h" />
     <ClInclude Include="ExpressionStatement.h" />
     <ClInclude Include="ExternalDeclaration.h" />
     <ClInclude Include="framework.h" />
@@ -210,6 +211,7 @@
     <ClInclude Include="StructDeclarator.h" />
     <ClInclude Include="StructOrUnion.h" />
     <ClInclude Include="StructOrUnionSpecifier.h" />
+    <ClInclude Include="Token.h" />
     <ClInclude Include="TokenType.h" />
     <ClInclude Include="TypeName.h" />
     <ClInclude Include="TypeQualifier.h" />
@@ -221,6 +223,7 @@
     <ClCompile Include="BaseStatement.cpp" />
     <ClCompile Include="CompoundStatement.cpp" />
     <ClCompile Include="Constant.cpp" />
+    <ClCompile Include="debug.cpp" />
     <ClCompile Include="Declaration.cpp" />
     <ClCompile Include="DeclarationSpecifiers.cpp" />
     <ClCompile Include="Declarator.cpp" />
@@ -228,7 +231,7 @@
     <ClCompile Include="DirectDeclarator.cpp" />
     <ClCompile Include="Enumerator.cpp" />
     <ClCompile Include="EnumSpecifier.cpp" />
-    <ClCompile Include="ExpressionNode.cpp" />
+    <ClCompile Include="Expression.cpp" />
     <ClCompile Include="ExpressionStatement.cpp" />
     <ClCompile Include="ExternalDeclaration.cpp" />
     <ClCompile Include="FunctionDefinition.cpp" />
@@ -243,7 +246,10 @@
     <ClCompile Include="MasmCodeGenerator.cpp" />
     <ClCompile Include="ParameterDeclaration.cpp" />
     <ClCompile Include="ParameterTypeList.cpp" />
-    <ClCompile Include="parser.cpp" />
+    <ClCompile Include="parser.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -252,7 +258,10 @@
     </ClCompile>
     <ClCompile Include="Pointer.cpp" />
     <ClCompile Include="ProgramData.cpp" />
-    <ClCompile Include="scanner.cpp" />
+    <ClCompile Include="scanner.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="SelectionStatement.cpp" />
     <ClCompile Include="SpecifierQualifierList.cpp" />
     <ClCompile Include="Statement.cpp" />
@@ -261,6 +270,8 @@
     <ClCompile Include="StructDeclarator.cpp" />
     <ClCompile Include="StructOrUnion.cpp" />
     <ClCompile Include="StructOrUnionSpecifier.cpp" />
+    <ClCompile Include="structures.cpp" />
+    <ClCompile Include="Token.cpp" />
     <ClCompile Include="TypeName.cpp" />
     <ClCompile Include="TypeQualifier.cpp" />
     <ClCompile Include="TypeSpecifier.cpp" />

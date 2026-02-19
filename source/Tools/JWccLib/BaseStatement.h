@@ -2,7 +2,6 @@
 
 #include <string>
 #include <vector>
-#include <stdint.h>
 #include <optional>
 #include "TokenType.h"
 #include "Declaration.h"
@@ -11,41 +10,48 @@ using namespace std;
 
 namespace WadeSpace
 {
-	class ExpressionNode;
+	class Expression;
 
 	class BaseStatement
 	{
 	public:
-		BaseStatement(TokenType op);
-		BaseStatement(TokenType op, string& identifier);
-		BaseStatement(TokenType op, ExpressionNode* exp);
-		BaseStatement(TokenType op, ExpressionNode* exp, BaseStatement* statement);
-		BaseStatement(TokenType op, ExpressionNode* exp, BaseStatement* ifStatement, BaseStatement* elseStatement);
+		BaseStatement(TokenType op, TokenPtr identifier, Expression* const exp, Expression* const contExp,
+			BaseStatement* const statement, BaseStatement* const es1, BaseStatement* const es2,
+			BaseStatement* const statement2, vector<BaseStatement*>* const statementList,
+			vector<Declaration*>* const declarationList);
+		explicit BaseStatement(TokenType op);
+		BaseStatement(TokenType op, TokenPtr identifier);
+		BaseStatement(TokenType op, Expression* exp);
+		BaseStatement(TokenType op, Expression* exp, BaseStatement* statement);
+		BaseStatement(TokenType op, Expression* exp, BaseStatement* ifStatement, BaseStatement* elseStatement);
 		BaseStatement(TokenType op, BaseStatement* es1, BaseStatement* es2, BaseStatement* statement);
-		BaseStatement(TokenType op, BaseStatement* es1, BaseStatement* es2, ExpressionNode* exp, BaseStatement* statement);
-		BaseStatement(vector<BaseStatement*>* statementList);
-		BaseStatement(vector<Declaration*>* declarationList);
+		BaseStatement(TokenType op, BaseStatement* es1, BaseStatement* es2, Expression* exp, BaseStatement* statement);
+		explicit BaseStatement(vector<BaseStatement*>* statementList);
+		explicit BaseStatement(vector<Declaration*>* declarationList);
 		BaseStatement(vector<BaseStatement*>* statementList, vector<Declaration*>* declarationList);
-		BaseStatement(string&  identifier, BaseStatement* statement);
-		//BaseStatement(TokenType op, ExpressionNode* exp, BaseStatement* statement);
+		BaseStatement(TokenPtr identifier, BaseStatement* statement);
 		BaseStatement(TokenType op, BaseStatement* statement);
-		BaseStatement();
+		BaseStatement() = default;
+		BaseStatement(const BaseStatement& other) = default;
+		BaseStatement(BaseStatement&& other) = default;
+		BaseStatement& operator=(const BaseStatement& other) = default;
+		BaseStatement& operator=(BaseStatement&& other) = default;
 		virtual ~BaseStatement();
-		optional<string> getIdentifier() const;
-		ExpressionNode* getExp() const;
-		ExpressionNode* getContExp() const;
-		BaseStatement* getStatement() const;
-		BaseStatement* getEs1() const;
-		BaseStatement* getEs2() const;
-		BaseStatement* getStatement2() const;
-		vector<BaseStatement*>* getStatementList() const;
-		vector<Declaration*>* getDeclarationList() const;
+		[[nodiscard]] TokenPtr getIdentifier() const;
+		[[nodiscard]] Expression* getExp() const;
+		[[nodiscard]] Expression* getContExp() const;
+		[[nodiscard]] BaseStatement* getStatement() const;
+		[[nodiscard]] BaseStatement* getEs1() const;
+		[[nodiscard]] BaseStatement* getEs2() const;
+		[[nodiscard]] BaseStatement* getStatement2() const;
+		[[nodiscard]] vector<BaseStatement*>* getStatementList() const;
+		[[nodiscard]] vector<Declaration*>* getDeclarationList() const;
 
 	protected:
 		TokenType op;
-		optional<string> identifier;
-		ExpressionNode* exp;
-		ExpressionNode* contExp;
+		TokenPtr identifier;
+		Expression* exp;
+		Expression* contExp;
 		BaseStatement* statement;
 		BaseStatement* es1;
 		BaseStatement* es2;

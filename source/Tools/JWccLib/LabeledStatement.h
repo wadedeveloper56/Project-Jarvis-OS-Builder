@@ -2,7 +2,6 @@
 
 #include <string>
 #include <vector>
-#include <stdint.h>
 #include <optional>
 #include "TokenType.h"
 #include "BaseStatement.h"
@@ -14,8 +13,8 @@ namespace WadeSpace
 	class LabeledStatement : public BaseStatement
 	{
 	public:
-		LabeledStatement(string&  identifier, BaseStatement* statement);
-		LabeledStatement(TokenType op, ExpressionNode* exp, BaseStatement* statement);
+		LabeledStatement(TokenPtr identifier, BaseStatement* statement);
+		LabeledStatement(TokenType op, Expression* exp, BaseStatement* statement);
 		LabeledStatement(TokenType op, BaseStatement* statement);
 		LabeledStatement();
 		virtual ~LabeledStatement();

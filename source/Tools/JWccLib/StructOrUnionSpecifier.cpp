@@ -3,19 +3,19 @@
 
 using namespace WadeSpace;
 
-StructOrUnionSpecifier::StructOrUnionSpecifier(StructOrUnion* structOrUnion, const string& name, vector<StructDeclaration*>* vectorStructDeclaration) : structOrUnion(structOrUnion), name(name), vectorStructDeclaration(vectorStructDeclaration)
+StructOrUnionSpecifier::StructOrUnionSpecifier(TokenPtr structOrUnion, TokenPtr name, vector<StructDeclaration*>* vectorStructDeclaration) : structOrUnion(structOrUnion), name(name), vectorStructDeclaration(vectorStructDeclaration)
 {
 }
 
-StructOrUnionSpecifier::StructOrUnionSpecifier(StructOrUnion* structOrUnion, vector<StructDeclaration*>* vectorStructDeclaration) : structOrUnion(structOrUnion), name(nullopt),	vectorStructDeclaration(vectorStructDeclaration)
+StructOrUnionSpecifier::StructOrUnionSpecifier(TokenPtr structOrUnion, vector<StructDeclaration*>* vectorStructDeclaration) : structOrUnion(structOrUnion), name(nullptr),	vectorStructDeclaration(vectorStructDeclaration)
 {
 }
 
-StructOrUnionSpecifier::StructOrUnionSpecifier(StructOrUnion* structOrUnion, const string& name) : structOrUnion(structOrUnion), name(name), vectorStructDeclaration(nullptr)
+StructOrUnionSpecifier::StructOrUnionSpecifier(TokenPtr structOrUnion, TokenPtr name) : structOrUnion(structOrUnion), name(name), vectorStructDeclaration(nullptr)
 {
 }
 
-StructOrUnionSpecifier::StructOrUnionSpecifier() : structOrUnion(nullptr), name(nullopt), vectorStructDeclaration(nullptr)
+StructOrUnionSpecifier::StructOrUnionSpecifier() : structOrUnion(nullptr), name(nullptr), vectorStructDeclaration(nullptr)
 {
 }
 
@@ -29,12 +29,12 @@ StructOrUnionSpecifier::~StructOrUnionSpecifier()
 	delete vectorStructDeclaration;
 }
 
-optional<string> StructOrUnionSpecifier::getName() const
+TokenPtr StructOrUnionSpecifier::getName() const
 {
 	return name;
 }
 
-StructOrUnion* StructOrUnionSpecifier::getStructOrUnion() const
+TokenPtr StructOrUnionSpecifier::getStructOrUnion() const
 {
 	return structOrUnion;
 }

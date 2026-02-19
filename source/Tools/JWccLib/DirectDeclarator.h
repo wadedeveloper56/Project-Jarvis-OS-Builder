@@ -2,8 +2,9 @@
 
 #include <string>
 #include <vector>
-#include <stdint.h>
 #include <optional>
+
+#include "Token.h"
 #include "TokenType.h"
 
 using namespace std;
@@ -13,36 +14,53 @@ namespace WadeSpace
 	class ConstantExpression;
 	class ParameterTypeList;
 	class Declarator;
-	class ExpressionNode;
+	class Expression;
 
 	class DirectDeclarator
 	{
 	public:
-		DirectDeclarator(string id);
-		DirectDeclarator(string id, Declarator* declarator);
-		DirectDeclarator(DirectDeclarator* directDeclarator, int& str1, int& str2);
-		DirectDeclarator(DirectDeclarator* directDeclarator, ExpressionNode* constantExpression);
-		DirectDeclarator(DirectDeclarator* directDeclarator, ParameterTypeList* parameterTypeList);
-		DirectDeclarator(DirectDeclarator* directDeclarator, vector<string>* vectorOfStrings);
-		DirectDeclarator();
-		virtual ~DirectDeclarator();
-		optional<string> getIdentifier() const;
-		optional<int> getStr1() const;
-		optional<int> getStr2() const;
-		Declarator* getDeclarator() const;
-		DirectDeclarator* getDirectDeclarator() const;
-		ExpressionNode* getConstantExpression() const;
-		ParameterTypeList* getParameterTypeList() const;
-		vector<string>* getVectorOfStrings() const;
+		DirectDeclarator(
+			TokenPtr identifier, 
+			TokenPtr token1,
+			TokenPtr token2,
+			Declarator* const declarator, 
+			DirectDeclarator* const directDeclarator,
+			Expression* const constantExpression, 
+			ParameterTypeList* const parameterTypeList,
+			vector<TokenPtr>* const vectorOfStrings
+		);
+		~DirectDeclarator();
+		DirectDeclarator(const DirectDeclarator& other) = default;
+		DirectDeclarator(DirectDeclarator&& other) = default;
+		DirectDeclarator& operator=(const DirectDeclarator& other) = default;
+		DirectDeclarator& operator=(DirectDeclarator&& other) = default;
+
+		[[nodiscard]] TokenPtr getIdentifier() const;
+		[[nodiscard]] TokenPtr getToken1() const;
+		[[nodiscard]] TokenPtr getToken2() const;
+		[[nodiscard]] Declarator* getDeclarator() const;
+		[[nodiscard]] DirectDeclarator* getDirectDeclarator() const;
+		[[nodiscard]] Expression* getConstantExpression() const;
+		[[nodiscard]] ParameterTypeList* getParameterTypeList() const;
+		[[nodiscard]] vector<TokenPtr>* getVectorOfStrings() const;
+
+		[[nodiscard]] bool isIdentifier() const { return identifier != nullptr; }
+		[[nodiscard]] bool isToken1() const { return token1 != nullptr; }
+		[[nodiscard]] bool isToken2() const { return token2 != nullptr; }
+		[[nodiscard]] bool isDeclarator() const { return declarator != nullptr; }
+		[[nodiscard]] bool isDirectDeclarator() const { return directDeclarator != nullptr; }
+		[[nodiscard]] bool isConstantExpression() const { return constantExpression != nullptr; }
+		[[nodiscard]] bool isParameterTypeList() const { return parameterTypeList != nullptr; }
+		[[nodiscard]] bool isVectorOfStrings() const { return vectorOfStrings != nullptr; }
 
 	private:
-		optional<string> identifier;
-		optional<int> str1;
-		optional<int> str2;
+		TokenPtr identifier;
+		TokenPtr token1;
+		TokenPtr token2;
 		Declarator* declarator;
 		DirectDeclarator* directDeclarator;
-		ExpressionNode* constantExpression;
+		Expression* constantExpression;
 		ParameterTypeList* parameterTypeList;
-		vector<string>* vectorOfStrings;
+		vector<TokenPtr>* vectorOfStrings;
 	};
 }

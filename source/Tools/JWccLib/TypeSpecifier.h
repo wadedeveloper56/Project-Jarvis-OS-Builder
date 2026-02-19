@@ -2,30 +2,34 @@
 
 #include <string>
 #include <vector>
-#include <stdint.h>
 #include <optional>
 #include "TokenType.h"
 #include "EnumSpecifier.h"
 
 namespace WadeSpace
 {
+	class ExternalDeclaration;
 	class StructOrUnionSpecifier;
 
 	class TypeSpecifier
 	{
 	public:
-		TypeSpecifier(TokenType type);
-		TypeSpecifier(EnumSpecifier* type);
-		TypeSpecifier(StructOrUnionSpecifier* type);
+		explicit TypeSpecifier(TokenType type);
+		explicit TypeSpecifier(TokenPtr type);
+		explicit TypeSpecifier(EnumSpecifier* type);
+		explicit TypeSpecifier(StructOrUnionSpecifier* type);
 		TypeSpecifier();
 		virtual ~TypeSpecifier();
-		EnumSpecifier* getEnumSpec() const;
-		TokenType getType() const;
-		StructOrUnionSpecifier* getSuSpec() const;
+		[[nodiscard]] EnumSpecifier* getEnumSpec() const;
+		[[nodiscard]] optional<TokenType> getType() const;
+		[[nodiscard]] StructOrUnionSpecifier* getSuSpec() const;
+		[[nodiscard]] TokenPtr getTypePtr() const;
 
 	private:
 		EnumSpecifier* enumSpec;
-		TokenType type;
+		optional<TokenType> type;
+		TokenPtr typePtr;
 		StructOrUnionSpecifier* suSpec;
+		ExternalDeclaration* typedefInfo;
 	};
 }

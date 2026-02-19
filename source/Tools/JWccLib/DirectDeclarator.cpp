@@ -2,55 +2,28 @@
 #include "DirectDeclarator.h"
 #include "ParameterTypeList.h"
 #include "Declarator.h"
-#include "ExpressionNode.h"
+#include "Expression.h"
 
 using namespace WadeSpace;
 using namespace std;
 
-DirectDeclarator::DirectDeclarator(string id) : identifier(id), str1(nullopt), str2(nullopt), directDeclarator(nullptr),
-constantExpression(nullptr), parameterTypeList(nullptr),
-vectorOfStrings(nullptr), declarator(nullptr)
-{
-}
-
-DirectDeclarator::DirectDeclarator() : identifier(nullopt), str1(nullopt), str2(nullopt), directDeclarator(nullptr),
-constantExpression(nullptr), parameterTypeList(nullptr),
-vectorOfStrings(nullptr), declarator(nullptr)
-{
-}
-
-DirectDeclarator::DirectDeclarator(string id, Declarator* d) : identifier(id), str1(nullopt), str2(nullopt),
-directDeclarator(nullptr),
-constantExpression(nullptr), parameterTypeList(nullptr),
-vectorOfStrings(nullptr), declarator(d)
-{
-}
-
-DirectDeclarator::DirectDeclarator(DirectDeclarator* directDeclarator, ExpressionNode* constantExpression) :
-	identifier(nullopt), str1(nullopt), str2(nullopt), directDeclarator(directDeclarator),
-	constantExpression(constantExpression),
-	parameterTypeList(nullptr), vectorOfStrings(nullptr), declarator(nullptr)
-{
-}
-
-DirectDeclarator::DirectDeclarator(DirectDeclarator* directDeclarator, int& str1, int& str2) : identifier(nullopt),
-str1(str1),
-str2(str2), directDeclarator(directDeclarator), constantExpression(nullptr), parameterTypeList(nullptr),
-vectorOfStrings(nullptr), declarator(nullptr)
-{
-}
-
-DirectDeclarator::DirectDeclarator(DirectDeclarator* directDeclarator, ParameterTypeList* parameterTypeList) :
-	identifier(nullopt), str1(nullopt), str2(nullopt), directDeclarator(directDeclarator), constantExpression(nullptr),
-	parameterTypeList(parameterTypeList), vectorOfStrings(nullptr), declarator(nullptr)
-{
-}
-
-DirectDeclarator::DirectDeclarator(DirectDeclarator* directDeclarator, vector<string>* vectorOfStrings) : identifier(nullopt),
-str1(nullopt), str2(nullopt),
-directDeclarator(directDeclarator), constantExpression(nullptr), parameterTypeList(nullptr),
-vectorOfStrings(vectorOfStrings),
-declarator(nullptr)
+DirectDeclarator::DirectDeclarator(
+	TokenPtr identifier,
+	TokenPtr token1,
+	TokenPtr token2,
+	Declarator* const declarator,
+	DirectDeclarator* const directDeclarator,
+	Expression* const constantExpression,
+	ParameterTypeList* const parameterTypeList,
+	vector<TokenPtr>* const vectorOfStrings)
+	: identifier(identifier),
+	  token1(token1),
+	  token2(token2),
+	  declarator(declarator),
+	  directDeclarator(directDeclarator),
+	  constantExpression(constantExpression),
+	  parameterTypeList(parameterTypeList),
+	  vectorOfStrings(vectorOfStrings)
 {
 }
 
@@ -60,14 +33,55 @@ DirectDeclarator::~DirectDeclarator()
 	delete directDeclarator;
 	delete constantExpression;
 	delete parameterTypeList;
-	delete vectorOfStrings;
+	delete identifier;
+	delete token1;
+	delete token2;
+	if (vectorOfStrings != nullptr)
+	{
+		for (auto token : *vectorOfStrings)
+		{
+			delete token;
+		}
+		delete vectorOfStrings;
+	}
 }
 
-optional<string> DirectDeclarator::getIdentifier() const { return identifier; }
-optional<int> DirectDeclarator::getStr1() const { return str1; }
-optional<int> DirectDeclarator::getStr2() const { return str2; }
-Declarator* DirectDeclarator::getDeclarator() const { return declarator; }
-DirectDeclarator* DirectDeclarator::getDirectDeclarator() const { return directDeclarator; }
-ExpressionNode* DirectDeclarator::getConstantExpression() const { return constantExpression; }
-ParameterTypeList* DirectDeclarator::getParameterTypeList() const { return parameterTypeList; }
-vector<string>* DirectDeclarator::getVectorOfStrings() const { return vectorOfStrings; }
+TokenPtr DirectDeclarator::getIdentifier() const
+{
+	return identifier;
+}
+
+TokenPtr DirectDeclarator::getToken1() const
+{
+	return token1;
+}
+
+TokenPtr DirectDeclarator::getToken2() const
+{
+	return token2;
+}
+
+Declarator* DirectDeclarator::getDeclarator() const
+{
+	return declarator;
+}
+
+DirectDeclarator* DirectDeclarator::getDirectDeclarator() const
+{
+	return directDeclarator;
+}
+
+Expression* DirectDeclarator::getConstantExpression() const
+{
+	return constantExpression;
+}
+
+ParameterTypeList* DirectDeclarator::getParameterTypeList() const
+{
+	return parameterTypeList;
+}
+
+vector<TokenPtr>* DirectDeclarator::getVectorOfStrings() const
+{
+	return vectorOfStrings;
+}

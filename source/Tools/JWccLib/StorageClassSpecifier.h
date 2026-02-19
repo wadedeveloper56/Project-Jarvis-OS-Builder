@@ -2,8 +2,9 @@
 
 #include <string>
 #include <vector>
-#include <stdint.h>
 #include <optional>
+
+#include "Token.h"
 #include "TokenType.h"
 
 using namespace std;
@@ -13,14 +14,13 @@ namespace WadeSpace
 	class StorageClassSpecifier
 	{
 	public:
-		StorageClassSpecifier(const int& value, TokenType type);
+		explicit StorageClassSpecifier(const TokenPtr type);
 		StorageClassSpecifier();
-		virtual ~StorageClassSpecifier();
-		optional<int> getOperatorStr() const;
-		TokenType getType() const;
+		virtual ~StorageClassSpecifier() = default;
+		[[nodiscard]] TokenPtr getType() const;
+		[[nodiscard]] bool isType() const;
 
 	private:
-		optional<int> operatorStr;
-		TokenType type;
+		TokenPtr type;
 	};
 }

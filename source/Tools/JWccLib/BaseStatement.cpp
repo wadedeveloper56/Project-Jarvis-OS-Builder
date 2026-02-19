@@ -1,104 +1,112 @@
 #include "pch.h"
 #include "BaseStatement.h"
-#include "ExpressionNode.h"
+#include "Expression.h"
 
 using namespace WadeSpace;
 using namespace std;
 
-BaseStatement::BaseStatement(string& identifier, BaseStatement* statement) : op(NONE), identifier(identifier),
-contExp(nullptr), exp(nullptr),
-statement(statement), es1(nullptr),
-es2(nullptr), statement2(nullptr),
-statementList(nullptr),
-declarationList(nullptr)
+BaseStatement::BaseStatement(TokenType op, TokenPtr identifier, Expression* const exp, Expression* const contExp,
+	BaseStatement* const statement, BaseStatement* const es1, BaseStatement* const es2,
+	BaseStatement* const statement2, vector<BaseStatement*>* const statementList,
+	vector<Declaration*>* const declarationList)
+	: op(op),
+    identifier(identifier),
+	exp(exp),
+	contExp(contExp),
+	statement(statement),
+	es1(es1),
+	es2(es2),
+	statement2(statement2),
+	statementList(statementList),
+	declarationList(declarationList)
 {
 }
 
-BaseStatement::BaseStatement(TokenType op, ExpressionNode* exp, BaseStatement* statement) : op(op), identifier(nullopt),
-contExp(exp), exp(nullptr), statement(statement), es1(nullptr), es2(nullptr), statement2(nullptr),
-statementList(nullptr), declarationList(nullptr)
+BaseStatement::BaseStatement(TokenPtr identifier, BaseStatement* statement) : op(NONE), identifier(identifier),
+                                                                             contExp(nullptr), exp(nullptr),
+                                                                             statement(statement), es1(nullptr),
+                                                                             es2(nullptr), statement2(nullptr),
+                                                                             statementList(nullptr),
+                                                                             declarationList(nullptr)
 {
 }
 
-BaseStatement::BaseStatement(TokenType op, BaseStatement* statement) : op(op), identifier(nullopt), contExp(nullptr),
-exp(nullptr), statement(statement), es1(nullptr),
-es2(nullptr), statement2(nullptr),
-statementList(nullptr), declarationList(nullptr)
-{
-}
-
-BaseStatement::BaseStatement(vector<BaseStatement*>* statementList) : op(NONE), identifier(nullopt), contExp(nullptr),
-exp(nullptr), statement(nullptr), es1(nullptr),
-es2(nullptr), statement2(nullptr),
-statementList(statementList),
-declarationList(nullptr)
-{
-}
-
-BaseStatement::BaseStatement(vector<Declaration*>* declarationList) : op(NONE), identifier(nullopt), contExp(nullptr),
-exp(nullptr), statement(nullptr), es1(nullptr),
-es2(nullptr), statement2(nullptr),
-statementList(nullptr),
-declarationList(declarationList)
-{
-}
-
-BaseStatement::BaseStatement(vector<BaseStatement*>* statementList, vector<Declaration*>* declarationList) :
-	op(NONE), identifier(nullopt), contExp(nullptr), exp(nullptr), statement(nullptr), es1(nullptr), es2(nullptr),
-	statement2(nullptr), statementList(statementList), declarationList(declarationList)
-{
-}
-
-BaseStatement::BaseStatement(TokenType op, BaseStatement* es1, BaseStatement* es2, ExpressionNode* exp,
-	BaseStatement* statement) : op(op), identifier(nullopt), contExp(nullptr), exp(exp),
-	statement(statement), es1(es1), es2(es2), statement2(nullptr),
+BaseStatement::BaseStatement(TokenType op, Expression* exp, BaseStatement* statement) : op(op), identifier(nullptr),
+	contExp(exp), exp(nullptr), statement(statement), es1(nullptr), es2(nullptr), statement2(nullptr),
 	statementList(nullptr), declarationList(nullptr)
 {
 }
 
+BaseStatement::BaseStatement(TokenType op, BaseStatement* statement) : op(op), identifier(nullptr), contExp(nullptr),
+                                                                       exp(nullptr), statement(statement), es1(nullptr),
+                                                                       es2(nullptr), statement2(nullptr),
+                                                                       statementList(nullptr), declarationList(nullptr)
+{
+}
+
+BaseStatement::BaseStatement(vector<BaseStatement*>* statementList) : op(NONE), identifier(nullptr), contExp(nullptr),
+                                                                      exp(nullptr), statement(nullptr), es1(nullptr),
+                                                                      es2(nullptr), statement2(nullptr),
+                                                                      statementList(statementList),
+                                                                      declarationList(nullptr)
+{
+}
+
+BaseStatement::BaseStatement(vector<Declaration*>* declarationList) : op(NONE), identifier(nullptr), contExp(nullptr),
+                                                                      exp(nullptr), statement(nullptr), es1(nullptr),
+                                                                      es2(nullptr), statement2(nullptr),
+                                                                      statementList(nullptr),
+                                                                      declarationList(declarationList)
+{
+}
+
+BaseStatement::BaseStatement(vector<BaseStatement*>* statementList, vector<Declaration*>* declarationList) :
+	op(NONE), identifier(nullptr), contExp(nullptr), exp(nullptr), statement(nullptr), es1(nullptr), es2(nullptr),
+	statement2(nullptr), statementList(statementList), declarationList(declarationList)
+{
+}
+
+BaseStatement::BaseStatement(TokenType op, BaseStatement* es1, BaseStatement* es2, Expression* exp,
+                             BaseStatement* statement) : op(op), identifier(nullptr), contExp(nullptr), exp(exp),
+                                                         statement(statement), es1(es1), es2(es2), statement2(nullptr),
+                                                         statementList(nullptr), declarationList(nullptr)
+{
+}
+
 BaseStatement::BaseStatement(TokenType op, BaseStatement* es1, BaseStatement* es2, BaseStatement* statement) :
-	op(op), identifier(nullopt), contExp(nullptr), exp(nullptr), statement(statement), es1(nullptr), es2(nullptr),
+	op(op), identifier(nullptr), contExp(nullptr), exp(nullptr), statement(statement), es1(nullptr), es2(nullptr),
 	statement2(nullptr), statementList(nullptr), declarationList(nullptr)
 {
 }
 
-BaseStatement::BaseStatement(TokenType op, ExpressionNode* exp, BaseStatement* ifStatement, BaseStatement* elseStatement) :
-	op(op), identifier(nullopt), contExp(nullptr), exp(exp), statement(ifStatement), es1(nullptr), es2(nullptr),
+BaseStatement::BaseStatement(TokenType op, Expression* exp, BaseStatement* ifStatement, BaseStatement* elseStatement) :
+	op(op), identifier(nullptr), contExp(nullptr), exp(exp), statement(ifStatement), es1(nullptr), es2(nullptr),
 	statement2(elseStatement), statementList(nullptr), declarationList(nullptr)
 {
 }
-/*
-BaseStatement::BaseStatement(TokenType op, ExpressionNode* exp, BaseStatement* statement) : op(op), identifier(nullopt),
-contExp(nullptr), exp(exp), statement(statement), es1(nullptr), es2(nullptr), statement2(nullptr),
-statementList(nullptr), declarationList(nullptr)
-{
-}
-*/
-BaseStatement::BaseStatement(TokenType op, ExpressionNode* exp) : op(op), identifier(nullopt), contExp(nullptr), exp(exp),
-statement(nullptr), es1(nullptr), es2(nullptr),
-statement2(nullptr), statementList(nullptr),
-declarationList(nullptr)
+
+BaseStatement::BaseStatement(TokenType op, Expression* exp) : op(op), identifier(nullptr), contExp(nullptr), exp(exp),
+                                                              statement(nullptr), es1(nullptr), es2(nullptr),
+                                                              statement2(nullptr), statementList(nullptr),
+                                                              declarationList(nullptr)
 {
 }
 
-BaseStatement::BaseStatement(TokenType op) : op(op), identifier(nullopt), contExp(nullptr), exp(nullptr), statement(nullptr),
-es1(nullptr), es2(nullptr), statement2(nullptr), statementList(nullptr),
-declarationList(nullptr)
+BaseStatement::BaseStatement(TokenType op) : op(op), identifier(nullptr), contExp(nullptr), exp(nullptr),
+                                             statement(nullptr),
+                                             es1(nullptr), es2(nullptr), statement2(nullptr), statementList(nullptr),
+                                             declarationList(nullptr)
 {
 }
 
-BaseStatement::BaseStatement(TokenType op, string& identifier) : op(op), identifier(identifier), contExp(nullptr), exp(nullptr),
-statement(nullptr), es1(nullptr), es2(nullptr),
-statement2(nullptr), statementList(nullptr),
-declarationList(nullptr)
+BaseStatement::BaseStatement(TokenType op, TokenPtr identifier) : op(op), identifier(identifier), contExp(nullptr),
+                                                                 exp(nullptr),
+                                                                 statement(nullptr), es1(nullptr), es2(nullptr),
+                                                                 statement2(nullptr), statementList(nullptr),
+                                                                 declarationList(nullptr)
 {
 }
 
-BaseStatement::BaseStatement() : op(NONE), identifier(nullopt), contExp(nullptr), exp(nullptr), statement(nullptr),
-es1(nullptr), es2(nullptr), statement2(nullptr), statementList(nullptr),
-declarationList(nullptr)
-{
-}
 
 BaseStatement::~BaseStatement()
 {
@@ -108,17 +116,18 @@ BaseStatement::~BaseStatement()
 	delete es1;
 	delete es2;
 	delete statement2;
-	if (statementList != NULL)
+	delete identifier;
+	if (statementList != nullptr)
 	{
-		for (BaseStatement* obj : *statementList)
+		for (auto obj : *statementList)
 		{
 			delete obj;
 		}
 	}
 	delete statementList;
-	if (declarationList != NULL)
+	if (declarationList != nullptr)
 	{
-		for (Declaration* obj : *declarationList)
+		for (auto obj : *declarationList)
 		{
 			delete obj;
 		}
@@ -126,17 +135,17 @@ BaseStatement::~BaseStatement()
 	delete declarationList;
 }
 
-optional<string> BaseStatement::getIdentifier() const
+TokenPtr BaseStatement::getIdentifier() const
 {
 	return identifier;
 }
 
-ExpressionNode* BaseStatement::getExp() const
+Expression* BaseStatement::getExp() const
 {
 	return exp;
 }
 
-ExpressionNode* BaseStatement::getContExp() const
+Expression* BaseStatement::getContExp() const
 {
 	return contExp;
 }
@@ -170,4 +179,3 @@ vector<Declaration*>* BaseStatement::getDeclarationList() const
 {
 	return declarationList;
 }
-

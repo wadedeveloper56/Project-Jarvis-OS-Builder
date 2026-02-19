@@ -2,7 +2,6 @@
 
 #include <string>
 #include <vector>
-#include <stdint.h>
 #include <optional>
 #include "ParameterDeclaration.h"
 
@@ -13,14 +12,13 @@ namespace WadeSpace
 	class ParameterTypeList
 	{
 	public:
-		ParameterTypeList(vector<ParameterDeclaration*>* vectorParameterDeclaration, const int& ellipsis);
+		ParameterTypeList(vector<ParameterDeclaration*>* vectorParameterDeclaration, bool ellipsis);
 		ParameterTypeList();
 		virtual ~ParameterTypeList();
 		vector<ParameterDeclaration*>* getVectorParameterDeclaration() const;
-		optional<int> getEllipsis() const;
-
+		bool getEllipsis() const;
 	private:
 		vector<ParameterDeclaration*>* vectorParameterDeclaration;
-		optional<int> ellipsis;
+		bool ellipsis;
 	};
 }

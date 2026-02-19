@@ -2,7 +2,6 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <stdint.h>
 #include <optional>
 #include "MasmCodeGenerator.h"
 #include "GlobalVars.h"
@@ -60,12 +59,12 @@ void MasmCodeGenerator::generateCode(ofstream& out)
 	out << ".data?" << endl;
 	for (VariableData* ptr : *variableTable)
 	{
-		if (ptr->size == 1)  out << ptr->name << " db ?" << endl;
-		if (ptr->size == 2)  out << ptr->name << " dw ?" << endl;
-		if (ptr->size == 4)  out << ptr->name << " dd ?" << endl;
-		if (ptr->size == 8)  out << ptr->name << " dq ?" << endl;
-		if (ptr->size == 10) out << ptr->name << " dt ?" << endl;
-		if (ptr->size == 16) out << ptr->name << " db 16 dup(?)" << endl;
+		if (ptr->size == 1)  out << "_" << ptr->name << " db ?" << endl;
+		if (ptr->size == 2)  out << "_" << ptr->name << " dw ?" << endl;
+		if (ptr->size == 4)  out << "_" << ptr->name << " dd ?" << endl;
+		if (ptr->size == 8)  out << "_" << ptr->name << " dq ?" << endl;
+		if (ptr->size == 10) out << "_" << ptr->name << " dt ?" << endl;
+		if (ptr->size == 16) out << "_" << ptr->name << " db 16 dup(?)" << endl;
 	}
 	out << endl << ".code" << endl;
 	for (FunctionData* ptr : *functionTable)
@@ -82,5 +81,5 @@ void MasmCodeGenerator::generateCode(ofstream& out)
 		out << "\tret" << endl;
 		out << "_" << ptr->name << " endp" << endl;
 	}
-	out << "end _main" << endl << endl;;
+	out << "end" << endl << endl;;
 }

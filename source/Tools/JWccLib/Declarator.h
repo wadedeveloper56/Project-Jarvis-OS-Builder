@@ -2,7 +2,6 @@
 
 #include <string>
 #include <vector>
-#include <stdint.h>
 #include <optional>
 #include "Pointer.h"
 #include "DirectDeclarator.h"
@@ -15,11 +14,12 @@ namespace WadeSpace
 	{
 	public:
 		Declarator(Pointer* pointer, DirectDeclarator* directDeclarator);
-		Declarator(DirectDeclarator* directDeclarator);
 		Declarator();
 		virtual ~Declarator();
-		DirectDeclarator* getDirectDeclarator() const;
-		Pointer* getPointer() const;
+		[[nodiscard]] DirectDeclarator* getDirectDeclarator() const;
+		[[nodiscard]] Pointer* getPointer() const;
+		[[nodiscard]] bool isDirectDeclarator() const;
+		[[nodiscard]] bool isPointer() const;
 
 	private:
 		DirectDeclarator* directDeclarator;

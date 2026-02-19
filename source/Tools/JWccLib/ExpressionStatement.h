@@ -2,7 +2,6 @@
 
 #include <string>
 #include <vector>
-#include <stdint.h>
 #include <optional>
 #include "TokenType.h"
 #include "BaseStatement.h"
@@ -14,8 +13,8 @@ namespace WadeSpace
 	class ExpressionStatement : public BaseStatement
 	{
 	public:
-		ExpressionStatement(ExpressionNode* exp);
+		ExpressionStatement(Expression* exp);
 		ExpressionStatement();
-		virtual ~ExpressionStatement();
+		virtual ~ExpressionStatement()=default;
 	};
 }

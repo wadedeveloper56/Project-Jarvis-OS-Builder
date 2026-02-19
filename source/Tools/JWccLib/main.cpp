@@ -61,8 +61,8 @@ int main(int argc, char* argv[])
 
 	if (version->count > 0)
 	{
-		printf("'%s' c code to assember compiler.\n", progname);
-		printf("June 2025, (c) Christopher D. Wade\n");
+		printf("'%s' c code to assembler compiler.\n", progname);
+		printf("June 2025-2026, (c) Christopher D. Wade\n");
 		exitcode = 0;
 		goto exit;
 	}
@@ -103,13 +103,13 @@ int main(int argc, char* argv[])
 		cleanup(filedata);
 		delete rawtokens;
 		rawtokens = nullptr;
-		//cout << outputTokens.stringify() << endl;
+		cout << outputTokens.stringify() << endl << endl;;
 		istringstream inStr(outputTokens.stringify());
 
 		Interpreter i;
 		i.setStreams(&inStr, &out);
 		exitcode = i.parse();
-		BaseCodeGenerator* generator = program->processGlobalVariables();
+		BaseCodeGenerator* generator = programData->processGlobalVariables();
 		generator->generateCode(out);
 		cout << "Parse complete. Result = " << exitcode << endl;
 	}
@@ -122,6 +122,6 @@ exit:
 	argFreeTable(argtable, sizeof(argtable) / sizeof(argtable[0]));
 	in.close();
 	out.close();
-	delete program;
+	delete WadeSpace::programData;
 	return exitcode;
 }

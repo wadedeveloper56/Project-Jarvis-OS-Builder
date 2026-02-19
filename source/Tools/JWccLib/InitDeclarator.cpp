@@ -7,7 +7,8 @@ InitDeclarator::InitDeclarator(Declarator* declarator) : declarator(declarator),
 {
 }
 
-InitDeclarator::InitDeclarator(Declarator* declarator, Initializer* initializer) : declarator(declarator), initializer(initializer)
+InitDeclarator::InitDeclarator(Declarator* declarator, Initializer* initializer) : declarator(declarator),
+	initializer(initializer)
 {
 }
 
@@ -21,12 +22,19 @@ InitDeclarator::~InitDeclarator()
 	delete initializer;
 }
 
-Declarator* InitDeclarator::getDeclarator() const { return declarator; }
-Initializer* InitDeclarator::getInitializer() const { return initializer; }
-
-string InitDeclarator::getVariableName()
+Declarator* InitDeclarator::getDeclarator() const
 {
-	optional<string> name = getDeclarator()->getDirectDeclarator()->getIdentifier();
-	if (!name.has_value()) name = getDeclarator()->getDirectDeclarator()->getDirectDeclarator()->getIdentifier();
-	return (name.has_value()) ? name.value() : "";
+	return declarator;
+}
+
+Initializer* InitDeclarator::getInitializer() const
+{
+	return initializer;
+}
+
+string InitDeclarator::getVariableName() const
+{
+	TokenPtr identifier = getDeclarator()->getDirectDeclarator()->getIdentifier();
+	if (!identifier) identifier = getDeclarator()->getDirectDeclarator()->getDirectDeclarator()->getIdentifier();
+	return (identifier) ? identifier->data->repr.symbol.string : "";
 }

@@ -1,32 +1,29 @@
 #include "pch.h"
 #include "Enumerator.h"
-#include "ExpressionNode.h"
+#include "Expression.h"
 
 using namespace WadeSpace;
 
-Enumerator::Enumerator(string&  operatorStr, ExpressionNode* constantExpression) : operatorStr(operatorStr), constantExpression(constantExpression)
+Enumerator::Enumerator(TokenPtr identifier, Expression* constantExpression) : identifier(identifier), constantExpression(constantExpression)
 {
 }
 
-Enumerator::Enumerator(string&  operatorStr) : operatorStr(operatorStr), constantExpression(nullptr)
-{
-}
-
-Enumerator::Enumerator() : operatorStr(nullopt), constantExpression(nullptr)
+Enumerator::Enumerator() : identifier(nullptr), constantExpression(nullptr)
 {
 }
 
 Enumerator::~Enumerator()
 {
 	delete constantExpression;
+	delete identifier;
 }
 
-ExpressionNode* Enumerator::getConstantExpression() const
+Expression* Enumerator::getConstantExpression() const
 {
 	return constantExpression;
 }
 
-optional<string> Enumerator::getOperatorStr() const
+TokenPtr Enumerator::getIdentifier() const
 {
-	return operatorStr;
+	return identifier;
 }

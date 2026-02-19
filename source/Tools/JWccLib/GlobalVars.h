@@ -1,14 +1,13 @@
 #pragma once
 
-#include "ProgramData.h"
-
 using namespace std;
 
 namespace WadeSpace
 {
 	class ProgramData;
-
-	extern ProgramData *program;
+	class ExternalDeclaration;
+	extern ProgramData *programData;
+	extern map<string, ExternalDeclaration*>* typedefList;
 	extern bool bit16;
 	extern bool bit32;
 	extern bool bit64;

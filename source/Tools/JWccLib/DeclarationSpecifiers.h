@@ -2,7 +2,6 @@
 
 #include <string>
 #include <vector>
-#include <stdint.h>
 #include <optional>
 #include "StorageClassSpecifier.h"
 #include "TypeSpecifier.h"
@@ -13,18 +12,17 @@ namespace WadeSpace
 	class DeclarationSpecifiers
 	{
 	public:
-		DeclarationSpecifiers(TypeQualifier* typeQualifier, DeclarationSpecifiers* declarationSpecifiers);
-		DeclarationSpecifiers(TypeQualifier* typeQualifier);
-		DeclarationSpecifiers(TypeSpecifier* typeSpecifier, DeclarationSpecifiers* declarationSpecifiers);
-		DeclarationSpecifiers(TypeSpecifier* typeSpecifier);
-		DeclarationSpecifiers(StorageClassSpecifier* storageClassSpecifier);
-		DeclarationSpecifiers(StorageClassSpecifier* storageClassSpecifier, DeclarationSpecifiers* declarationSpecifiers);
-		DeclarationSpecifiers();
+		DeclarationSpecifiers() = default;
+		DeclarationSpecifiers(StorageClassSpecifier* const storageClassSpecifier, TypeSpecifier* const typeSpecifier, TypeQualifier* const typeQualifier, DeclarationSpecifiers* const declarationSpecifiers);
 		virtual ~DeclarationSpecifiers();
-		StorageClassSpecifier* getStorageClassSpecifier() const;
-		TypeSpecifier* getTypeSpecifier() const;
-		TypeQualifier* getTypeQualifier() const;
-		DeclarationSpecifiers* getDeclarationSpecifiers() const;
+		[[nodiscard]] StorageClassSpecifier* getStorageClassSpecifier() const;
+		[[nodiscard]] TypeSpecifier* getTypeSpecifier() const;
+		[[nodiscard]] TypeQualifier* getTypeQualifier() const;
+		[[nodiscard]] DeclarationSpecifiers* getDeclarationSpecifiers() const;
+		[[nodiscard]] bool isStorageClassSpecifier() const;
+		[[nodiscard]] bool isTypeSpecifier() const;
+		[[nodiscard]] bool isTypeQualifier() const;
+		[[nodiscard]] bool isDeclarationSpecifiers() const;
 
 	private:
 		StorageClassSpecifier* storageClassSpecifier;

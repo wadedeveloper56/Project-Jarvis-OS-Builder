@@ -2,7 +2,6 @@
 
 #include <string>
 #include <vector>
-#include <stdint.h>
 #include <optional>
 #include "TokenType.h"
 #include "BaseStatement.h"
@@ -17,8 +16,8 @@ namespace WadeSpace
 	{
 	public:
 		JumpStatement(TokenType op);
-		JumpStatement(TokenType op, string& identifier);
-		JumpStatement(TokenType op, ExpressionNode* identifier);
+		JumpStatement(TokenType op, TokenPtr identifier);
+		JumpStatement(TokenType op, Expression* identifier);
 		JumpStatement();
 		virtual ~JumpStatement();
 	};

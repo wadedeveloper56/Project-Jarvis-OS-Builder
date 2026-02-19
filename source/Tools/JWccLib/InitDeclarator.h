@@ -2,7 +2,6 @@
 
 #include <string>
 #include <vector>
-#include <stdint.h>
 #include <optional>
 #include "Declarator.h"
 #include "Initializer.h"
@@ -18,7 +17,7 @@ namespace WadeSpace
 		virtual ~InitDeclarator();
 		Declarator* getDeclarator() const;
 		Initializer* getInitializer() const;
-		string getVariableName();
+		string getVariableName() const;
 
 	private:
 		Declarator* declarator;

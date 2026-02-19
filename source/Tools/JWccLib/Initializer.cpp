@@ -1,14 +1,16 @@
 #include "pch.h"
 #include "Initializer.h"
-#include "ExpressionNode.h"
+#include "Expression.h"
 
 using namespace WadeSpace;
 
-Initializer::Initializer(ExpressionNode* assignmentExpression) : assignmentExpression(assignmentExpression), initializerList(nullptr)
+Initializer::Initializer(Expression* assignmentExpression) : assignmentExpression(assignmentExpression),
+                                                             initializerList(nullptr)
 {
 }
 
-Initializer::Initializer(vector<Initializer*>* initializerList) : assignmentExpression(nullptr), initializerList(initializerList)
+Initializer::Initializer(vector<Initializer*>* initializerList) : assignmentExpression(nullptr),
+                                                                  initializerList(initializerList)
 {
 }
 
@@ -26,7 +28,7 @@ Initializer::~Initializer()
 	delete initializerList;
 }
 
-ExpressionNode* Initializer::getAssignmentExpression() const
+Expression* Initializer::getAssignmentExpression() const
 {
 	return assignmentExpression;
 }

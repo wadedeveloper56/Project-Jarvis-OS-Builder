@@ -3,49 +3,14 @@
 
 using namespace WadeSpace;
 
-DeclarationSpecifiers::DeclarationSpecifiers(TypeQualifier* typeQualifier,
-	DeclarationSpecifiers* declarationSpecifiers) :
-	storageClassSpecifier(nullptr), typeSpecifier(nullptr), declarationSpecifiers(declarationSpecifiers),
-	typeQualifier(typeQualifier)
-{
-}
-
-DeclarationSpecifiers::DeclarationSpecifiers(TypeQualifier* typeQualifier) : storageClassSpecifier(nullptr),
-typeSpecifier(nullptr),
-declarationSpecifiers(nullptr),
-typeQualifier(typeQualifier)
-{
-}
-
-DeclarationSpecifiers::DeclarationSpecifiers(TypeSpecifier* typeSpecifier,
-	DeclarationSpecifiers* declarationSpecifiers) :
-	storageClassSpecifier(nullptr), typeSpecifier(typeSpecifier), declarationSpecifiers(declarationSpecifiers),
-	typeQualifier(nullptr)
-{
-}
-
-DeclarationSpecifiers::DeclarationSpecifiers(TypeSpecifier* typeSpecifier) : storageClassSpecifier(nullptr),
-typeSpecifier(typeSpecifier),
-declarationSpecifiers(nullptr),
-typeQualifier(nullptr)
-{
-}
-
-DeclarationSpecifiers::DeclarationSpecifiers(StorageClassSpecifier* storageClassSpecifier,
-	DeclarationSpecifiers* declarationSpecifiers) :
-	storageClassSpecifier(storageClassSpecifier), typeSpecifier(nullptr), declarationSpecifiers(declarationSpecifiers),
-	typeQualifier(nullptr)
-{
-}
-
-DeclarationSpecifiers::DeclarationSpecifiers(StorageClassSpecifier* storageClassSpecifier) :
-	storageClassSpecifier(storageClassSpecifier), typeSpecifier(nullptr), declarationSpecifiers(nullptr),
-	typeQualifier(nullptr)
-{
-}
-
-DeclarationSpecifiers::DeclarationSpecifiers() : storageClassSpecifier(nullptr), typeSpecifier(nullptr),
-declarationSpecifiers(nullptr), typeQualifier(nullptr)
+DeclarationSpecifiers::DeclarationSpecifiers(StorageClassSpecifier* const storageClassSpecifier,
+                                             TypeSpecifier* const typeSpecifier,
+                                             TypeQualifier* const typeQualifier,
+                                             DeclarationSpecifiers* const declarationSpecifiers)
+	: storageClassSpecifier(storageClassSpecifier),
+	  typeSpecifier(typeSpecifier),
+	  typeQualifier(typeQualifier),
+	  declarationSpecifiers(declarationSpecifiers)
 {
 }
 
@@ -57,7 +22,42 @@ DeclarationSpecifiers::~DeclarationSpecifiers()
 	delete declarationSpecifiers;
 }
 
-StorageClassSpecifier* DeclarationSpecifiers::getStorageClassSpecifier() const { return storageClassSpecifier; }
-TypeSpecifier* DeclarationSpecifiers::getTypeSpecifier() const { return typeSpecifier; }
-TypeQualifier* DeclarationSpecifiers::getTypeQualifier() const { return typeQualifier; }
-DeclarationSpecifiers* DeclarationSpecifiers::getDeclarationSpecifiers() const { return declarationSpecifiers; }
+StorageClassSpecifier* DeclarationSpecifiers::getStorageClassSpecifier() const
+{
+	return storageClassSpecifier;
+}
+
+TypeSpecifier* DeclarationSpecifiers::getTypeSpecifier() const
+{
+	return typeSpecifier;
+}
+
+TypeQualifier* DeclarationSpecifiers::getTypeQualifier() const
+{
+	return typeQualifier;
+}
+
+DeclarationSpecifiers* DeclarationSpecifiers::getDeclarationSpecifiers() const
+{
+	return declarationSpecifiers;
+}
+
+bool DeclarationSpecifiers::isStorageClassSpecifier() const
+{
+	return storageClassSpecifier != nullptr;
+}
+
+bool DeclarationSpecifiers::isTypeSpecifier() const
+{
+	return typeSpecifier != nullptr;
+}
+
+bool DeclarationSpecifiers::isTypeQualifier() const
+{
+	return typeQualifier != nullptr;
+}
+
+bool DeclarationSpecifiers::isDeclarationSpecifiers() const
+{
+	return declarationSpecifiers != nullptr;
+}

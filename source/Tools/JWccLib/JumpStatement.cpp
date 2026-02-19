@@ -1,11 +1,11 @@
 #include "pch.h"
 #include "JumpStatement.h"
-#include "ExpressionNode.h"
+#include "Expression.h"
 
 using namespace WadeSpace;
 using namespace std;
 
-JumpStatement::JumpStatement(TokenType op, ExpressionNode* exp) : BaseStatement(op, exp)
+JumpStatement::JumpStatement(TokenType op, Expression* exp) : BaseStatement(op, exp)
 {
 }
 
@@ -13,7 +13,7 @@ JumpStatement::JumpStatement(TokenType op) : BaseStatement(op)
 {
 }
 
-JumpStatement::JumpStatement(TokenType op, string& identifier) : BaseStatement(op, identifier)
+JumpStatement::JumpStatement(TokenType op, TokenPtr identifier) : BaseStatement(op, identifier)
 {
 }
 

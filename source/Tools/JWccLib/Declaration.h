@@ -2,7 +2,6 @@
 
 #include <string>
 #include <vector>
-#include <stdint.h>
 #include <optional>
 #include "DeclarationSpecifiers.h"
 #include "InitDeclarator.h"
@@ -14,12 +13,17 @@ namespace WadeSpace
 	class Declaration
 	{
 	public:
-		Declaration(DeclarationSpecifiers* declarationSpecifiers);
+		explicit Declaration(DeclarationSpecifiers* declarationSpecifiers);
 		Declaration(DeclarationSpecifiers* declarationSpecifiers, vector<InitDeclarator*>* vectorInitDeclarator);
 		Declaration();
 		virtual ~Declaration();
-		DeclarationSpecifiers* getDeclarationSpecifiers() const;
-		vector<InitDeclarator*>* getVectorInitDeclarator() const;
+		[[nodiscard]] DeclarationSpecifiers* getDeclarationSpecifiers() const;
+		[[nodiscard]] vector<InitDeclarator*>* getVectorInitDeclarator() const;
+		[[nodiscard]] StorageClassSpecifier* getStorageClassSpecifier() const { return getDeclarationSpecifiers()->getStorageClassSpecifier(); }
+		
+		[[nodiscard]] bool isDeclarationSpecifiers() const;
+		[[nodiscard]] bool isVectorInitDeclarator() const;
+		[[nodiscard]] bool isStorageClassSpecifier() const { return getDeclarationSpecifiers() != nullptr && getDeclarationSpecifiers()->getStorageClassSpecifier() != nullptr; }
 
 	private:
 		DeclarationSpecifiers* declarationSpecifiers;

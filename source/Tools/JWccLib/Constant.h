@@ -2,8 +2,9 @@
 
 #include <string>
 #include <vector>
-#include <stdint.h>
 #include <optional>
+
+#include "Token.h"
 #include "TokenType.h"
 
 using namespace std;
@@ -13,20 +14,18 @@ namespace WadeSpace
 	class Constant
 	{
 	public:
-		Constant(uint64_t value);
-		Constant(long double value);
-		Constant(const string& value);
+		Constant(const TokenPtr iConst, const TokenPtr fConst, const TokenPtr strConst, const optional<TokenType>& type);
 		Constant();
 		virtual ~Constant();
-		uint64_t getIConst() const;
-		long double getFConst() const;
-		optional<string> getStrConst() const;
-		TokenType getType() const;
+		[[nodiscard]] TokenPtr getIConst() const;
+		[[nodiscard]] TokenPtr getFConst() const;
+		[[nodiscard]] TokenPtr getStrConst() const;
+		[[nodiscard]] optional<TokenType> getType() const;
 
 	private:
-		uint64_t iConst;
-		long double fConst;
-		optional<string> strConst;
-		TokenType type;
+		TokenPtr iConst;
+		TokenPtr fConst;
+		TokenPtr strConst;
+		optional<TokenType> type;
 	};
 }

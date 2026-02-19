@@ -2,27 +2,26 @@
 
 #include <string>
 #include <vector>
-#include <stdint.h>
 #include <optional>
 #include "Declarator.h"
 
 namespace WadeSpace
 {
-	class ExpressionNode;
+	class Expression;
 
 	class StructDeclarator
 	{
 	public:
 		StructDeclarator(Declarator* declarator);
-		StructDeclarator(ExpressionNode* constantExpression);
-		StructDeclarator(Declarator* declarator, ExpressionNode* constantExpression);
+		StructDeclarator(Expression* constantExpression);
+		StructDeclarator(Declarator* declarator, Expression* constantExpression);
 		StructDeclarator();
 		virtual ~StructDeclarator();
 		Declarator* getDeclarator() const;
-		ExpressionNode* getConstantExpression() const;
+		Expression* getConstantExpression() const;
 
 	private:
 		Declarator* declarator;
-		ExpressionNode* constantExpression;
+		Expression* constantExpression;
 	};
 }
