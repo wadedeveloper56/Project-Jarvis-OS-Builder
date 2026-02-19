@@ -1,15 +1,8 @@
-typedef int integer;
-integer test;
-char var1;
-short var2;
-int var3;
-long var4;
-long long var5;
-float var6;
-double var7;
-long double var8;
-
-int main(int argc)
-{
-    return 0;
-}
+char var1[3];
+short var2[3];
+int var3[3];
+long var4[3];
+long long var5[3];
+float var6[3];
+double var7[3];
+long double var8[3];

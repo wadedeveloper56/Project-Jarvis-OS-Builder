@@ -209,12 +209,14 @@ Expression* createExpression(
 	vector<Initializer*>* initializerList,
 	TypeName* typeName,
 	TokenPtr token3,
+	Constant* constant,
 	Expression* left,
 	TokenPtr op,
-	Expression* right)
+	Expression* right
+	)
 {
 	return new Expression(new NodeData(type, token1, token2, lexp, exp1, exp2, argumentList, identifier,
-	                                   initializerList, typeName, token3), left, op, right);
+	                                   initializerList, typeName, token3, constant), left, op, right);
 }
 
 Constant* createConstant(const TokenPtr iConst, const TokenPtr fConst, const TokenPtr strConst,
@@ -253,7 +255,7 @@ StorageClassSpecifier* createStorageClassSpecifier(const TokenPtr token)
 
 Expression* createPrimaryExpression(const TokenPtr identifier, Constant* constant)
 {
-	return new Expression(); //FIX ME identifier, constant);
+	return createExpression(NT_NONE, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, identifier, constant, nullptr, nullptr, nullptr);
 }
 
 vector<Declaration*>* createDeclarationList(Declaration* exp, vector<Declaration*>* list)

@@ -5,21 +5,16 @@ test1.asm
 
                                 .data
 00000000                        .data?
-00000000  00000000              _test dd ?
-00000004  00                    _var1 db ?
-00000005  0000                  _var2 dw ?
-00000007  00000000              _var3 dd ?
-0000000B  00000000              _var4 dd ?
-0000000F  0000000000000000      _var5 dq ?
-00000017  00000000              _var6 dd ?
-0000001B  0000000000000000      _var7 dq ?
-00000023  000000000000000000    _var8 dt ?
+00000000  00                    _var1 db ?
+00000001  0000                  _var2 dw ?
+00000003  00000000              _var3 dd ?
+00000007  00000000              _var4 dd ?
+0000000B  0000000000000000      _var5 dq ?
+00000013  00000000              _var6 dd ?
+00000017  0000000000000000      _var7 dq ?
+0000001F  000000000000000000    _var8 dt ?
 
 00000000                        .code
-00000000                        _main proc  c
-00000000  33C0                  	xor eax,eax
-00000002                        	ret
-00000003                        _main endp
                                 end
 
 
@@ -39,16 +34,9 @@ Segments and Groups:
                 N a m e                 Size     Length   Align   Combine Class
 
 FLAT . . . . . . . . . . . . . .        GROUP
-_BSS . . . . . . . . . . . . . .        64 Bit   0000002D Para    Public  'BSS'
+_BSS . . . . . . . . . . . . . .        64 Bit   00000029 Para    Public  'BSS'
 _DATA  . . . . . . . . . . . . .        64 Bit   00000000 Para    Public  'DATA'
-_TEXT  . . . . . . . . . . . . .        64 Bit   00000003 Para    Public  'CODE'
-
-
-Procedures, parameters and locals:
-
-                N a m e                 Type     Value    Segment  Length
-
-_main  . . . . . . . . . . . . .        P Near   00000000 _TEXT    00000003 Public   C
+_TEXT  . . . . . . . . . . . . .        64 Bit   00000000 Para    Public  'CODE'
 
 
 Symbols:
@@ -65,20 +53,19 @@ Symbols:
 @Interface . . . . . . . . . . .        Number             7h 
 @Model . . . . . . . . . . . . .        Number             7h 
 @ReservedStack . . . . . . . . .        Number             0h 
-@Time  . . . . . . . . . . . . .        Text   09:45:22
+@Time  . . . . . . . . . . . . .        Text   13:34:07
 @Version . . . . . . . . . . . .        Text   800
 @code  . . . . . . . . . . . . .        Text   _TEXT
 @data  . . . . . . . . . . . . .        Text   FLAT
 @stack . . . . . . . . . . . . .        Text   FLAT
 __JWASM__  . . . . . . . . . . .        Number            D4h 
-_test  . . . . . . . . . . . . .        DWord              0h _BSS FASTCALL
-_var1  . . . . . . . . . . . . .        Byte               4h _BSS FASTCALL
-_var2  . . . . . . . . . . . . .        Word               5h _BSS FASTCALL
-_var3  . . . . . . . . . . . . .        DWord              7h _BSS FASTCALL
-_var4  . . . . . . . . . . . . .        DWord              Bh _BSS FASTCALL
-_var5  . . . . . . . . . . . . .        QWord              Fh _BSS FASTCALL
-_var6  . . . . . . . . . . . . .        DWord             17h _BSS FASTCALL
-_var7  . . . . . . . . . . . . .        QWord             1Bh _BSS FASTCALL
-_var8  . . . . . . . . . . . . .        TByte             23h _BSS FASTCALL
+_var1  . . . . . . . . . . . . .        Byte               0h _BSS FASTCALL
+_var2  . . . . . . . . . . . . .        Word               1h _BSS FASTCALL
+_var3  . . . . . . . . . . . . .        DWord              3h _BSS FASTCALL
+_var4  . . . . . . . . . . . . .        DWord              7h _BSS FASTCALL
+_var5  . . . . . . . . . . . . .        QWord              Bh _BSS FASTCALL
+_var6  . . . . . . . . . . . . .        DWord             13h _BSS FASTCALL
+_var7  . . . . . . . . . . . . .        QWord             17h _BSS FASTCALL
+_var8  . . . . . . . . . . . . .        TByte             1Fh _BSS FASTCALL
 
-test1.asm: 21 lines, 2 passes, 1 ms, 0 warnings, 0 errors
+test1.asm: 16 lines, 2 passes, 0 ms, 0 warnings, 0 errors

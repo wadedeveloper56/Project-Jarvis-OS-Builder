@@ -32,6 +32,7 @@ namespace WadeSpace
 		vector<Initializer*>* initializerList;
 		TypeName* typeName;
 		TokenPtr token3;
+		Constant* constant;
 		NodeData();
 		NodeData(
 			const NodeType type,
@@ -44,7 +45,8 @@ namespace WadeSpace
 			TokenPtr identifier,
 			vector<Initializer*>* initializerList,
 			TypeName* typeName,
-			TokenPtr token3
+			TokenPtr token3,
+			Constant* constant
 		);
 		~NodeData();
 	}* NodeDataPtr;

@@ -6,7 +6,7 @@
 using namespace std;
 using namespace WadeSpace;
 
-NodeData::NodeData() : type(NT_NONE), token1(nullptr), token2(nullptr), exp1(nullptr), exp2(nullptr), argumentList(nullptr), identifier(nullptr), initializerList(nullptr), typeName(nullptr), token3(nullptr), lexp(nullptr)
+NodeData::NodeData() : type(NT_NONE), token1(nullptr), token2(nullptr), exp1(nullptr), exp2(nullptr), argumentList(nullptr), identifier(nullptr), initializerList(nullptr), typeName(nullptr), token3(nullptr), lexp(nullptr), constant(nullptr)
 {
 }
 
@@ -21,7 +21,8 @@ NodeData::NodeData(
 	TokenPtr identifier,
 	vector<Initializer*>* initializerList,
 	TypeName* typeName,
-	TokenPtr token3
+	TokenPtr token3, 
+	Constant* constant
 )
 	: type(type),
 	token1(token1),
@@ -33,7 +34,7 @@ NodeData::NodeData(
 	identifier(identifier),
 	initializerList(initializerList),
 	typeName(typeName),
-	token3(token3)
+	token3(token3), constant(constant)
 {
 }
 
@@ -64,6 +65,7 @@ NodeData::~NodeData()
 	delete typeName;
 	delete token3;
 	delete lexp;
+	delete constant;
 }
 
 Expression::Expression() : data(nullptr), left(nullptr), op(nullptr), right(nullptr)

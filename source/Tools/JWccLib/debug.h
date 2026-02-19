@@ -32,6 +32,7 @@ Expression* createExpression(
 	vector<Initializer*>* initializerList,
 	TypeName* typeName,
 	TokenPtr token3,
+	Constant* constant,
 
 	Expression* left,
 	TokenPtr op,
