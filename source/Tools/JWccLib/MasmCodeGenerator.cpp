@@ -51,7 +51,7 @@ void MasmCodeGenerator::generateCode(ofstream& out)
 	}
 	else
 	{
-		out << ".x64" << endl;
+		out << ".x64p" << endl;
 		out << ".model flat, fastcall" << endl;
 	}
 	out << endl;
@@ -59,12 +59,24 @@ void MasmCodeGenerator::generateCode(ofstream& out)
 	out << ".data?" << endl;
 	for (VariableData* ptr : *variableTable)
 	{
-		if (ptr->size == 1)  out << "_" << ptr->name << " db ?" << endl;
-		if (ptr->size == 2)  out << "_" << ptr->name << " dw ?" << endl;
-		if (ptr->size == 4)  out << "_" << ptr->name << " dd ?" << endl;
-		if (ptr->size == 8)  out << "_" << ptr->name << " dq ?" << endl;
-		if (ptr->size == 10) out << "_" << ptr->name << " dt ?" << endl;
-		if (ptr->size == 16) out << "_" << ptr->name << " db 16 dup(?)" << endl;
+		if (ptr->arraySize > 1)
+		{
+			if (ptr->size == 1)  out << "_" << ptr->name << " db " << ptr->arraySize << " dup(?)" << endl;
+			if (ptr->size == 2)  out << "_" << ptr->name << " dw " << ptr->arraySize << " dup(?)" << endl;
+			if (ptr->size == 4)  out << "_" << ptr->name << " dd " << ptr->arraySize << " dup(?)" << endl;
+			if (ptr->size == 8)  out << "_" << ptr->name << " dq " << ptr->arraySize << " dup(?)" << endl;
+			if (ptr->size == 10) out << "_" << ptr->name << " dt " << ptr->arraySize << " dup(?)" << endl;
+			if (ptr->size == 16) out << "_" << ptr->name << " db " << ptr->arraySize * 16 << " dup(?))" << endl;
+		}
+		else
+		{
+			if (ptr->size == 1)  out << "_" << ptr->name << " db ?" << endl;
+			if (ptr->size == 2)  out << "_" << ptr->name << " dw ?" << endl;
+			if (ptr->size == 4)  out << "_" << ptr->name << " dd ?" << endl;
+			if (ptr->size == 8)  out << "_" << ptr->name << " dq ?" << endl;
+			if (ptr->size == 10) out << "_" << ptr->name << " dt ?" << endl;
+			if (ptr->size == 16) out << "_" << ptr->name << " db 16 dup(?)" << endl;
+		}
 	}
 	out << endl << ".code" << endl;
 	for (FunctionData* ptr : *functionTable)

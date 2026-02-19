@@ -49,6 +49,18 @@ namespace WadeSpace
 			Constant* constant
 		);
 		~NodeData();
+		[[nodiscard]] NodeType getType() const;
+		[[nodiscard]] TokenPtr getToken1() const;
+		[[nodiscard]] TokenPtr getToken2() const;
+		[[nodiscard]] Expression* getLexp() const;
+		[[nodiscard]] Expression* getExp1() const;
+		[[nodiscard]] Expression* getExp2() const;
+		[[nodiscard]] vector<Expression*>* getArgumentList() const;
+		[[nodiscard]] TokenPtr getIdentifier() const;
+		[[nodiscard]] vector<Initializer*>* getInitializerList() const;
+		[[nodiscard]] TypeName* getTypeName() const;
+		[[nodiscard]] TokenPtr getToken3() const;
+		[[nodiscard]] Constant* getConstant() const;
 	}* NodeDataPtr;
 
 	class Expression
@@ -57,6 +69,10 @@ namespace WadeSpace
 		Expression();
 		Expression(const NodeDataPtr data, Expression* const left, const TokenPtr op, Expression* const right);
 		~Expression();
+		[[nodiscard]] NodeDataPtr getData() const;
+		[[nodiscard]] Expression* getLeft() const;
+		[[nodiscard]] TokenPtr getOp() const;
+		[[nodiscard]] Expression* getRight() const;
 
 	private:
 		NodeDataPtr data;

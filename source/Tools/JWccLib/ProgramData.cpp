@@ -1,5 +1,7 @@
 #include "pch.h"
 #include "ProgramData.h"
+
+#include "Expression.h"
 #include "ExternalDeclaration.h"
 #include "GlobalVars.h"
 #include "ParameterTypeList.h"
@@ -107,6 +109,8 @@ void ProgramData::handleDeclaration(Declaration* declaration, vector<VariableDat
 		{
 			data->name = dd->getDirectDeclarator()->getIdentifier()->getSymbolName();
 		}
+		data->arraySize = 1;
+		if (dd->isConstantExpression()) data->arraySize = dd->getConstantExpression()->getData()->getConstant()->getIConst()->data->repr.numericConstant.repr.lIntConst;
 		data->type = type;
 		data->pointer = declarator->isPointer();
 		data->size = getSize(type, data->pointer);

@@ -17,6 +17,7 @@ namespace WadeSpace
 		TokenType type;
 		int size;
 		bool pointer;
+		unsigned long long arraySize;
 	} VariableData;
 
 	typedef struct _FunctionData

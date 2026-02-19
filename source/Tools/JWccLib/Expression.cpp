@@ -68,6 +68,66 @@ NodeData::~NodeData()
 	delete constant;
 }
 
+NodeType NodeData::getType() const
+{
+	return type;
+}
+
+TokenPtr NodeData::getToken1() const
+{
+	return token1;
+}
+
+TokenPtr NodeData::getToken2() const
+{
+	return token2;
+}
+
+Expression* NodeData::getLexp() const
+{
+	return lexp;
+}
+
+Expression* NodeData::getExp1() const
+{
+	return exp1;
+}
+
+Expression* NodeData::getExp2() const
+{
+	return exp2;
+}
+
+vector<Expression*>* NodeData::getArgumentList() const
+{
+	return argumentList;
+}
+
+TokenPtr NodeData::getIdentifier() const
+{
+	return identifier;
+}
+
+vector<Initializer*>* NodeData::getInitializerList() const
+{
+	return initializerList;
+}
+
+TypeName* NodeData::getTypeName() const
+{
+	return typeName;
+}
+
+TokenPtr NodeData::getToken3() const
+{
+	return token3;
+}
+
+Constant* NodeData::getConstant() const
+{
+	return constant;
+}
+
 Expression::Expression() : data(nullptr), left(nullptr), op(nullptr), right(nullptr)
 {
 }
@@ -86,4 +146,24 @@ Expression::~Expression()
 	delete left;
 	delete op;
 	delete right;
+}
+
+NodeDataPtr Expression::getData() const
+{
+	return data;
+}
+
+Expression* Expression::getLeft() const
+{
+	return left;
+}
+
+TokenPtr Expression::getOp() const
+{
+	return op;
+}
+
+Expression* Expression::getRight() const
+{
+	return right;
 }
