@@ -1,6 +1,7 @@
 Compiler (x86/x64) v1.0 (C) Copyright 2025-2026 Christopher D. Wade.
 All Rights Reserved
 typedef int integer ;
+integer data ;
 char var1 ;
 short var2 ;
 int var3 ;
@@ -34,6 +35,19 @@ init_declarator REDUCE to init_declarator_list
 declaration_specifiers init_declarator_list SEMICOLON REDUCE to declaration
 declaration REDUCE to external_declaration
 external_declaration REDUCE to translation_unit
+
+Scanner: typedef name [integer]
+TYPE_NAME REDUCE to type_specifier
+Scanner: identifier [data]
+type_specifier REDUCE to declaration_specifiers
+IDENTIFIER REDUCE to direct_declarator
+Scanner: token [;]
+direct_declarator REDUCE to declarator
+declarator REDUCE to init_declarator
+init_declarator REDUCE to init_declarator_list
+declaration_specifiers init_declarator_list SEMICOLON REDUCE to declaration
+declaration REDUCE to external_declaration
+translation_unit external_declaration REDUCE to translation_unit
 
 Scanner: token [char]
 CHAR REDUCE to type_specifier

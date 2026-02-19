@@ -448,7 +448,7 @@ type_specifier
     | UNSIGNED                  { $$ = new TypeSpecifier(UNSIGNED); cout << "UNIGNED REDUCE to type_specifier" << endl;}
     | struct_or_union_specifier { $$ = new TypeSpecifier($1); cout << "struct_or_union_specifier REDUCE to type_specifier" << endl;}
     | enum_specifier            { $$ = new TypeSpecifier($1); cout << "enum_specifier REDUCE to type_specifier" << endl;}
-    | TYPE_NAME                 { $$ = new TypeSpecifier(TYPE_NAME); cout << "TYPE_NAME REDUCE to type_specifier" << endl;}
+    | TYPE_NAME                 { $$ = new TypeSpecifier($1); cout << "TYPE_NAME REDUCE to type_specifier" << endl;}
     ;
 
 struct_or_union_specifier

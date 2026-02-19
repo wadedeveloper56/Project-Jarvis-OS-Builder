@@ -1,4 +1,4 @@
-JWasm v2.12pre, Feb 17 2026
+JWasm v2.12pre, Feb 18 2026
 test1.asm
                                 .386
                                 .model flat, fastcall
@@ -62,12 +62,12 @@ Symbols:
 @Cpu . . . . . . . . . . . . . .        Number           D0Fh 
 @CurSeg  . . . . . . . . . . . .        Text   
 @DataSize  . . . . . . . . . . .        Number             0h 
-@Date  . . . . . . . . . . . . .        Text   02/18/26
+@Date  . . . . . . . . . . . . .        Text   02/19/26
 @FileCur . . . . . . . . . . . .        Text   test1.asm
 @FileName  . . . . . . . . . . .        Text   TEST1
 @Interface . . . . . . . . . . .        Number             7h 
 @Model . . . . . . . . . . . . .        Number             7h 
-@Time  . . . . . . . . . . . . .        Text   07:39:09
+@Time  . . . . . . . . . . . . .        Text   07:44:14
 @Version . . . . . . . . . . . .        Text   800
 @code  . . . . . . . . . . . . .        Text   _TEXT
 @data  . . . . . . . . . . . . .        Text   FLAT
@@ -86,4 +86,4 @@ _var7  . . . . . . . . . . . . .        QWord             17h _BSS FASTCALL
 _var8  . . . . . . . . . . . . .        TByte             1Fh _BSS FASTCALL
 _var9  . . . . . . . . . . . . .        Byte              29h _BSS FASTCALL
 
-test1.asm: 24 lines, 2 passes, 1 ms, 0 warnings, 0 errors
+test1.asm: 24 lines, 2 passes, 0 ms, 0 warnings, 0 errors

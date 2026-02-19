@@ -23,6 +23,7 @@ WS  [ \t\v\n\f]
 
 %{
     #include "pch.h"
+    #include "GlobalVars.h"
     #include "TokenType.h"
     #define YY_NO_UNISTD_H
     #include "scanner.h"
@@ -218,6 +219,15 @@ WS  [ \t\v\n\f]
                }
 
 {L}{A}*        { 
+                if (WadeSpace::typedefList != nullptr) 
+                {
+                  auto typedefEntry = WadeSpace::typedefList->find(yytext);
+                  if (typedefEntry != WadeSpace::typedefList->end()) 
+                  {
+                        cout << "Scanner: typedef name [" << yytext << "]" << endl;
+                        return WadeSpace::Parser::make_TYPE_NAME(createStringIDToken(yytext), WadeSpace::location()); 
+                   }
+                }
                 cout << "Scanner: identifier [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_IDENTIFIER(createStringIDToken(yytext), WadeSpace::location()); 
                }

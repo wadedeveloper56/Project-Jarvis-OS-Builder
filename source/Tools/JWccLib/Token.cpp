@@ -15,11 +15,11 @@ void zapTokData(TokDataPtr elem)
 	}
 	else if (elem->code == YC_STRING)
 	{
-		delete[] elem->repr.stringConstant.s;
+		free(elem->repr.stringConstant.s);
 	}
 	else
 	{
-		delete[] elem->repr.symbol.string;
+		free(elem->repr.symbol.string);
 	}
 	delete elem;
 }

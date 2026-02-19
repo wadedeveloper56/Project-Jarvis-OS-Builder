@@ -1,4 +1,5 @@
 typedef int integer;
+integer data;
 char var1;
 short var2;
 int var3;
@@ -10,9 +11,8 @@ long double var8;
 bool var9;
 complex var10;
 imaginary var11;
-char* var12[];
 
-int main(int argc, char* argv[])
+int main(int argc)
 {
     return 0;
 }

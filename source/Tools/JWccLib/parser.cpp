@@ -2564,7 +2564,7 @@ namespace  WadeSpace  {
 
   case 113: // type_specifier: "type name"
 #line 451 "ansic.y"
-                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(TYPE_NAME); cout << "TYPE_NAME REDUCE to type_specifier" << endl;}
+                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(yystack_[0].value.as < TokenPtr > ()); cout << "TYPE_NAME REDUCE to type_specifier" << endl;}
 #line 2569 "parser.cpp"
     break;
 
