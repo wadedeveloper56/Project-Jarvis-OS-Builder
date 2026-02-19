@@ -8,9 +8,6 @@ long long var5;
 float var6;
 double var7;
 long double var8;
-bool var9;
-complex var10;
-imaginary var11;
 
 int main(int argc)
 {
