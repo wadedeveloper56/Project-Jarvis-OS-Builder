@@ -16,11 +16,14 @@ ProgramData::ProgramData()
 
 ProgramData::~ProgramData()
 {
-	for (ExternalDeclaration* ptr : *program)
+	if (program != nullptr)
 	{
-		delete ptr;
+		for (ExternalDeclaration* ptr : *program)
+		{
+			delete ptr;
+		}
+		delete program;
 	}
-	delete program;
 }
 
 void ProgramData::add(ExternalDeclaration* data)
@@ -28,8 +31,14 @@ void ProgramData::add(ExternalDeclaration* data)
 	program->push_back(data);
 }
 
-int ProgramData::getSize(TokenType type)
+int ProgramData::getSize(TokenType type, bool isPointer)
 {
+	if (isPointer)
+	{
+		if (bit64) return 8;
+		else if (bit32) return 4;
+		else return 2;
+	}
 	if (type == CHAR || type == BOOL) return 1;
 	if (type == SHORT) return 2;
 	if (type == INT) return 4;
@@ -47,7 +56,7 @@ void ProgramData::handleFunction(FunctionDefinition* declaration, vector<Functio
 {
 	FunctionData* data = new FunctionData();
 	data->type = declaration->getDeclarationSpecifiers()->getTypeSpecifier()->getType().value();
-	data->name = declaration->getDeclarator()->getDirectDeclarator()->getDirectDeclarator()->getIdentifier()->getSymbolName();// ->data->repr.symbol.string;
+	data->name = declaration->getDeclarator()->getDirectDeclarator()->getDirectDeclarator()->getIdentifier()->getSymbolName();
 	ParameterTypeList* parameters = declaration->getDeclarator()->getDirectDeclarator()->getParameterTypeList();
 	if (parameters != nullptr && !parameters->getVectorParameterDeclaration()->empty())
 	{
@@ -66,7 +75,7 @@ void ProgramData::handleFunction(FunctionDefinition* declaration, vector<Functio
 			TokenType type = parameterDeclaration->getDeclarationSpecifiers()->getTypeSpecifier()->getType().value();
 			functionData->pointer = parameterDeclaration->getDeclarator()->isPointer();
 			functionData->type = type;
-			functionData->size = getSize(type);
+			functionData->size = getSize(type, functionData->pointer);
 			data->parameters->push_back(functionData);
 		}
 	}
@@ -99,8 +108,8 @@ void ProgramData::handleDeclaration(Declaration* declaration, vector<VariableDat
 			data->name = dd->getDirectDeclarator()->getIdentifier()->getSymbolName();
 		}
 		data->type = type;
-		data->size = getSize(type);
 		data->pointer = declarator->isPointer();
+		data->size = getSize(type, data->pointer);
 		variableTable->push_back(data);
 	}
 }
@@ -110,7 +119,7 @@ BaseCodeGenerator* ProgramData::processGlobalVariables()
 	vector<VariableData*>* variableTable = new vector<VariableData*>();
 	vector<FunctionData*>* functionTable = new vector<FunctionData*>();
 
-	if (program	 != nullptr)
+	if (program != nullptr)
 	{
 		for (ExternalDeclaration* ptr : *program)
 		{

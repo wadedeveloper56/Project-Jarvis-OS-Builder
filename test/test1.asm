@@ -1,4 +1,4 @@
-.386
+.x64
 .model flat, fastcall
 
 .data

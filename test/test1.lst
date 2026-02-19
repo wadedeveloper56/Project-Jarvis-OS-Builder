@@ -1,6 +1,6 @@
 JWasm v2.12pre, Feb 19 2026
 test1.asm
-                                .386
+                                .x64
                                 .model flat, fastcall
 
                                 .data
@@ -42,9 +42,9 @@ Segments and Groups:
                 N a m e                 Size     Length   Align   Combine Class
 
 FLAT . . . . . . . . . . . . . .        GROUP
-_BSS . . . . . . . . . . . . . .        32 Bit   00000046 DWord   Public  'BSS'
-_DATA  . . . . . . . . . . . . .        32 Bit   00000000 DWord   Public  'DATA'
-_TEXT  . . . . . . . . . . . . .        32 Bit   00000003 DWord   Public  'CODE'
+_BSS . . . . . . . . . . . . . .        64 Bit   00000046 Para    Public  'BSS'
+_DATA  . . . . . . . . . . . . .        64 Bit   00000000 Para    Public  'DATA'
+_TEXT  . . . . . . . . . . . . .        64 Bit   00000003 Para    Public  'CODE'
 
 
 Procedures, parameters and locals:
@@ -59,7 +59,7 @@ Symbols:
                 N a m e                 Type       Value     Attr
 
 @CodeSize  . . . . . . . . . . .        Number             0h 
-@Cpu . . . . . . . . . . . . . .        Number           D0Fh 
+@Cpu . . . . . . . . . . . . . .        Number           D5Fh 
 @CurSeg  . . . . . . . . . . . .        Text   
 @DataSize  . . . . . . . . . . .        Number             0h 
 @Date  . . . . . . . . . . . . .        Text   02/19/26
@@ -67,7 +67,8 @@ Symbols:
 @FileName  . . . . . . . . . . .        Text   TEST1
 @Interface . . . . . . . . . . .        Number             7h 
 @Model . . . . . . . . . . . . .        Number             7h 
-@Time  . . . . . . . . . . . . .        Text   09:09:12
+@ReservedStack . . . . . . . . .        Number             0h 
+@Time  . . . . . . . . . . . . .        Text   09:31:56
 @Version . . . . . . . . . . . .        Text   800
 @code  . . . . . . . . . . . . .        Text   _TEXT
 @data  . . . . . . . . . . . . .        Text   FLAT
@@ -86,4 +87,4 @@ _var7  . . . . . . . . . . . . .        QWord             1Bh _BSS FASTCALL
 _var8  . . . . . . . . . . . . .        TByte             23h _BSS FASTCALL
 _var9  . . . . . . . . . . . . .        Byte              2Dh _BSS FASTCALL
 
-test1.asm: 24 lines, 2 passes, 1 ms, 0 warnings, 0 errors
+test1.asm: 24 lines, 2 passes, 0 ms, 0 warnings, 0 errors

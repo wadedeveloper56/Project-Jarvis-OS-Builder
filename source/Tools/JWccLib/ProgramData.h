@@ -21,7 +21,7 @@ namespace WadeSpace
 		virtual ~ProgramData();
 		void add(ExternalDeclaration* data);
 		BaseCodeGenerator* processGlobalVariables();
-		int getSize(TokenType type);
+		int getSize(TokenType type, bool isPointer);
 
 	private:
 		void handleDeclaration(Declaration* declaration, vector<struct _VariableData*>* variableTable);
