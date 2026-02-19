@@ -7,9 +7,38 @@
 using namespace std;
 using namespace WadeSpace;
 
+void handleDeclaration(ExternalDeclaration* externalDeclaration)
+{
+	bool isTypedef = externalDeclaration->isTypedef();
+	Declaration* declaration = externalDeclaration->getDeclaration();
+	if (declaration != nullptr)
+	{
+		for (InitDeclarator* initDecl : *declaration->getVectorInitDeclarator())
+		{
+			DirectDeclarator* dd = initDecl->getDeclarator()->getDirectDeclarator();
+			if (dd != nullptr)
+			{
+			    string name;
+				if (dd->getIdentifier() != nullptr)
+				{
+					name = dd->getIdentifier()->getSymbolName();
+				}
+				else
+				{
+					name = dd->getDirectDeclarator()->getIdentifier()->getSymbolName();
+				}
+				if (isTypedef)
+				{
+					typedefList->insert({name, externalDeclaration});
+				}
+			}
+		}
+	}
+	if (!isTypedef) programData->add(externalDeclaration);
+}
+
 void createTranslationUnit(ExternalDeclaration* externalDeclaration)
 {
-	bool isTypedef = false;
 	if (programData == nullptr)
 	{
 		programData = new ProgramData();
@@ -18,31 +47,14 @@ void createTranslationUnit(ExternalDeclaration* externalDeclaration)
 	{
 		typedefList = new map<string, ExternalDeclaration*>();
 	}
-	Declaration* declaration = externalDeclaration->getDeclaration();
-	if (declaration != nullptr && declaration->isStorageClassSpecifier())
+	if (externalDeclaration != nullptr && externalDeclaration->isDeclaration())
 	{
-		string keyword = declaration->getStorageClassSpecifier()->getType()->getKeywordName();
-		for (InitDeclarator* initDecl : *declaration->getVectorInitDeclarator())
-		{
-			auto declarator = initDecl->getDeclarator();
-			DirectDeclarator* dd = declarator->getDirectDeclarator();
-			string name;
-			if (dd->getIdentifier() != nullptr)
-			{
-				name = dd->getIdentifier()->getSymbolName();
-			}
-			else
-			{
-				name = dd->getDirectDeclarator()->getIdentifier()->getSymbolName();
-			}
-			if (keyword == "typedef")
-			{
-				typedefList->insert({ name, externalDeclaration });
-				isTypedef = true;
-			}
-		}
+		handleDeclaration(externalDeclaration);
 	}
-	if (!isTypedef) programData->add(externalDeclaration);
+	if (externalDeclaration != nullptr && externalDeclaration->isFunction())
+	{
+		programData->add(externalDeclaration);
+	}
 }
 
 vector<BaseStatement*>* createStatementList(BaseStatement* statement, vector<BaseStatement*>* list)
@@ -65,24 +77,30 @@ vector<Initializer*>* createInitializerList(Initializer* initializer, vector<Ini
 	return list;
 }
 
-DirectAbstractDeclarator* createDirectAbstractDeclarator(AbstractDeclarator* abstractDeclarator, vector<DirectAbstractDeclaratorNode*>* list)
+DirectAbstractDeclarator* createDirectAbstractDeclarator(AbstractDeclarator* abstractDeclarator,
+                                                         vector<DirectAbstractDeclaratorNode*>* list)
 {
 	return new DirectAbstractDeclarator(abstractDeclarator, list);
 }
 
-DirectAbstractDeclarator* createDirectAbstractDeclarator(DirectAbstractDeclarator* dad, AbstractDeclarator* abstractDeclarator, ParameterTypeList* parameterTypeList, Expression* constantExpression, TokenType type)
+DirectAbstractDeclarator* createDirectAbstractDeclarator(DirectAbstractDeclarator* dad,
+                                                         AbstractDeclarator* abstractDeclarator,
+                                                         ParameterTypeList* parameterTypeList,
+                                                         Expression* constantExpression, TokenType type)
 {
 	if (dad != nullptr)
 	{
 		vector<DirectAbstractDeclaratorNode*>* list = dad->getList();
-		DirectAbstractDeclaratorNode* node = new DirectAbstractDeclaratorNode(parameterTypeList, constantExpression, type);
+		DirectAbstractDeclaratorNode* node = new DirectAbstractDeclaratorNode(
+			parameterTypeList, constantExpression, type);
 		list->push_back(node);
 		return new DirectAbstractDeclarator(dad->getAbstractDeclarator(), list);
 	}
 	else
 	{
 		vector<DirectAbstractDeclaratorNode*>* list = new vector<DirectAbstractDeclaratorNode*>();
-		DirectAbstractDeclaratorNode* node = new DirectAbstractDeclaratorNode(parameterTypeList, constantExpression, type);
+		DirectAbstractDeclaratorNode* node = new DirectAbstractDeclaratorNode(
+			parameterTypeList, constantExpression, type);
 		list->push_back(node);
 		return new DirectAbstractDeclarator(abstractDeclarator, list);
 	}
@@ -153,7 +171,8 @@ InitDeclarator* createInitDeclarator(Declarator* declarator, Initializer* initia
 	return new InitDeclarator(declarator, initializer);
 }
 
-Declaration* createDeclaration(DeclarationSpecifiers* declarationSpecifiers, vector<InitDeclarator*>* vectorInitDeclarator)
+Declaration* createDeclaration(DeclarationSpecifiers* declarationSpecifiers,
+                               vector<InitDeclarator*>* vectorInitDeclarator)
 {
 	return new Declaration(declarationSpecifiers, vectorInitDeclarator);
 }
@@ -194,10 +213,12 @@ Expression* createExpression(
 	TokenPtr op,
 	Expression* right)
 {
-	return new Expression(new NodeData(type, token1, token2, lexp, exp1, exp2, argumentList, identifier, initializerList, typeName, token3), left, op, right);
+	return new Expression(new NodeData(type, token1, token2, lexp, exp1, exp2, argumentList, identifier,
+	                                   initializerList, typeName, token3), left, op, right);
 }
 
-Constant* createConstant(const TokenPtr iConst, const TokenPtr fConst, const TokenPtr strConst, const optional<TokenType>& type)
+Constant* createConstant(const TokenPtr iConst, const TokenPtr fConst, const TokenPtr strConst,
+                         const optional<TokenType>& type)
 {
 	return new Constant(iConst, fConst, strConst, type);
 }
@@ -207,12 +228,20 @@ Declarator* createDeclarator(Pointer* pointer, DirectDeclarator* directDeclarato
 	return new Declarator(pointer, directDeclarator);
 }
 
-DirectDeclarator* createDirectDeclarator(TokenPtr identifier, TokenPtr token1, TokenPtr token2, Declarator* const declarator, DirectDeclarator* const directDeclarator, Expression* const constantExpression, ParameterTypeList* const parameterTypeList, vector<TokenPtr>* const vectorOfStrings)
+DirectDeclarator* createDirectDeclarator(TokenPtr identifier, TokenPtr token1, TokenPtr token2,
+                                         Declarator* const declarator, DirectDeclarator* const directDeclarator,
+                                         Expression* const constantExpression,
+                                         ParameterTypeList* const parameterTypeList,
+                                         vector<TokenPtr>* const vectorOfStrings)
 {
-	return new DirectDeclarator(identifier, token1, token2, declarator, directDeclarator, constantExpression, parameterTypeList, vectorOfStrings);
+	return new DirectDeclarator(identifier, token1, token2, declarator, directDeclarator, constantExpression,
+	                            parameterTypeList, vectorOfStrings);
 }
 
-DeclarationSpecifiers* createDeclarationSpecifiers(StorageClassSpecifier* const storageClassSpecifier, TypeSpecifier* const typeSpecifier, TypeQualifier* const typeQualifier, DeclarationSpecifiers* const declarationSpecifiers)
+DeclarationSpecifiers* createDeclarationSpecifiers(StorageClassSpecifier* const storageClassSpecifier,
+                                                   TypeSpecifier* const typeSpecifier,
+                                                   TypeQualifier* const typeQualifier,
+                                                   DeclarationSpecifiers* const declarationSpecifiers)
 {
 	return new DeclarationSpecifiers(storageClassSpecifier, typeSpecifier, typeQualifier, declarationSpecifiers);
 }
@@ -224,7 +253,7 @@ StorageClassSpecifier* createStorageClassSpecifier(const TokenPtr token)
 
 Expression* createPrimaryExpression(const TokenPtr identifier, Constant* constant)
 {
-	return new Expression();//FIX ME identifier, constant);
+	return new Expression(); //FIX ME identifier, constant);
 }
 
 vector<Declaration*>* createDeclarationList(Declaration* exp, vector<Declaration*>* list)

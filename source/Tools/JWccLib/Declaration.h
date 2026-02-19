@@ -23,7 +23,8 @@ namespace WadeSpace
 		
 		[[nodiscard]] bool isDeclarationSpecifiers() const;
 		[[nodiscard]] bool isVectorInitDeclarator() const;
-		[[nodiscard]] bool isStorageClassSpecifier() const { return getDeclarationSpecifiers() != nullptr && getDeclarationSpecifiers()->getStorageClassSpecifier() != nullptr; }
+		[[nodiscard]] bool isStorageClassSpecifier() const;
+		[[nodiscard]] bool isTypedef() const;
 
 	private:
 		DeclarationSpecifiers* declarationSpecifiers;

@@ -33,3 +33,13 @@ DeclarationSpecifiers* Declaration::getDeclarationSpecifiers() const { return de
 vector<InitDeclarator*>* Declaration::getVectorInitDeclarator() const { return vectorInitDeclarator; }
 bool Declaration::isDeclarationSpecifiers() const { return declarationSpecifiers != nullptr;  }
 bool Declaration::isVectorInitDeclarator() const { return vectorInitDeclarator != nullptr; }
+bool Declaration::isStorageClassSpecifier() const { return isDeclarationSpecifiers() && getDeclarationSpecifiers()->getStorageClassSpecifier() != nullptr; }
+bool Declaration::isTypedef() const
+{
+		if (isStorageClassSpecifier())
+		{
+			string keyword = getStorageClassSpecifier()->getType()->getKeywordName();
+			return keyword == "typedef";
+		}
+	return false;
+}

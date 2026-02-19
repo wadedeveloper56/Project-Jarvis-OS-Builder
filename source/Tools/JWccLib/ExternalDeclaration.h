@@ -23,7 +23,7 @@ namespace WadeSpace
 		bool isDeclaration() const;
 		FunctionDefinition* getFunction() const;
 		Declaration* getDeclaration() const;
-
+		bool isTypedef() const;
 	private:
 		FunctionDefinition* functionDefinition;
 		Declaration* declaration;

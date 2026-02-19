@@ -33,3 +33,18 @@ bool ExternalDeclaration::isFunction() const { return functionDefinition != null
 bool ExternalDeclaration::isDeclaration() const { return declaration != nullptr; }
 FunctionDefinition* ExternalDeclaration::getFunction() const { return functionDefinition; }
 Declaration* ExternalDeclaration::getDeclaration() const { return declaration; }
+
+bool ExternalDeclaration::isTypedef() const
+{
+	if (isDeclaration())
+	{
+		Declaration* declaration = getDeclaration();
+		if (declaration != nullptr && declaration->isStorageClassSpecifier())
+		{
+			string keyword = declaration->getStorageClassSpecifier()->getType()->getKeywordName();
+			return keyword == "typedef";
+		}
+	}
+	return false;
+}
+
