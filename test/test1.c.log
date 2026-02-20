@@ -1,14 +1,14 @@
 Compiler (x86/x64) v1.0 (C) Copyright 2025-2026 Christopher D. Wade.
 All Rights Reserved
-char var1 [ 3 ] ;
-short var2 [ 3 ] ;
-int var3 [ 3 ] ;
-long var4 [ 3 ] ;
-long long var5 [ 3 ] ;
-float var6 [ 3 ] ;
-double var = 2.0 ;
-long double var8 [ 3 ] ;
-int init = 9 ;
+char var1 = 5 ;
+short var2 ;
+int var3 ;
+long var4 ;
+long long var5 ;
+float var6 ;
+double var ;
+long double var8 ;
+int init ;
 
 void main ( )
 {
@@ -20,12 +20,13 @@ CHAR REDUCE to type_specifier
 Scanner: identifier [var1]
 type_specifier REDUCE to declaration_specifiers
 IDENTIFIER REDUCE to direct_declarator
-Scanner: token [[]
-Scanner: decimal number: 3
+Scanner: token [=]
+direct_declarator REDUCE to declarator
+Scanner: decimal number: 5
 I_CONST REDUCE to constant 
 constant REDUCE to primary_expression
 primary_expression REDUCE to postfix_expression
-Scanner: token []]
+Scanner: token [;]
 postfix_expression REDUCE unary_expression
 unary_expression REDUCE to cast_expression
 cast_expression REDUCE to multiplicative_expression
@@ -39,11 +40,9 @@ exclusive_or_expression REDUCE to inclusive_or_expression
 inclusive_or_expression REDUCE to logical_and_expression
 inclusive_and_expression REDUCE to logical_or_expression
 logical_or_expression REDUCE to conditional_expression
-conditional_expression REDUCE to constant_expression
-direct_declarator OBRACE constant_expression CBRACE REDUCE to direct_declarator
-Scanner: token [;]
-direct_declarator REDUCE to declarator
-declarator REDUCE to init_declarator
+conditional_expression REDUCE to assignment_expression
+assignment_expression REDUCE to initializer
+declarator EQUAL initializer REDUCE to init_declarator
 init_declarator REDUCE to init_declarator_list
 declaration_specifiers init_declarator_list SEMICOLON REDUCE to declaration
 declaration REDUCE to external_declaration
@@ -54,27 +53,6 @@ SHORT REDUCE to type_specifier
 Scanner: identifier [var2]
 type_specifier REDUCE to declaration_specifiers
 IDENTIFIER REDUCE to direct_declarator
-Scanner: token [[]
-Scanner: decimal number: 3
-I_CONST REDUCE to constant 
-constant REDUCE to primary_expression
-primary_expression REDUCE to postfix_expression
-Scanner: token []]
-postfix_expression REDUCE unary_expression
-unary_expression REDUCE to cast_expression
-cast_expression REDUCE to multiplicative_expression
-multiplicative_expression REDUCE to additive_expression
-additive_expression REDUCE to shift_expression
-shift_expression REDUCE to relational_expression
-relational_expression REDUCE to equality_expression
-equality_expression REDUCE to and_expression
-and_expression REDUCE to exclusive_or_expression
-exclusive_or_expression REDUCE to inclusive_or_expression
-inclusive_or_expression REDUCE to logical_and_expression
-inclusive_and_expression REDUCE to logical_or_expression
-logical_or_expression REDUCE to conditional_expression
-conditional_expression REDUCE to constant_expression
-direct_declarator OBRACE constant_expression CBRACE REDUCE to direct_declarator
 Scanner: token [;]
 direct_declarator REDUCE to declarator
 declarator REDUCE to init_declarator
@@ -88,27 +66,6 @@ INT REDUCE to type_specifier
 Scanner: identifier [var3]
 type_specifier REDUCE to declaration_specifiers
 IDENTIFIER REDUCE to direct_declarator
-Scanner: token [[]
-Scanner: decimal number: 3
-I_CONST REDUCE to constant 
-constant REDUCE to primary_expression
-primary_expression REDUCE to postfix_expression
-Scanner: token []]
-postfix_expression REDUCE unary_expression
-unary_expression REDUCE to cast_expression
-cast_expression REDUCE to multiplicative_expression
-multiplicative_expression REDUCE to additive_expression
-additive_expression REDUCE to shift_expression
-shift_expression REDUCE to relational_expression
-relational_expression REDUCE to equality_expression
-equality_expression REDUCE to and_expression
-and_expression REDUCE to exclusive_or_expression
-exclusive_or_expression REDUCE to inclusive_or_expression
-inclusive_or_expression REDUCE to logical_and_expression
-inclusive_and_expression REDUCE to logical_or_expression
-logical_or_expression REDUCE to conditional_expression
-conditional_expression REDUCE to constant_expression
-direct_declarator OBRACE constant_expression CBRACE REDUCE to direct_declarator
 Scanner: token [;]
 direct_declarator REDUCE to declarator
 declarator REDUCE to init_declarator
@@ -122,27 +79,6 @@ LONG REDUCE to type_specifier
 Scanner: identifier [var4]
 type_specifier REDUCE to declaration_specifiers
 IDENTIFIER REDUCE to direct_declarator
-Scanner: token [[]
-Scanner: decimal number: 3
-I_CONST REDUCE to constant 
-constant REDUCE to primary_expression
-primary_expression REDUCE to postfix_expression
-Scanner: token []]
-postfix_expression REDUCE unary_expression
-unary_expression REDUCE to cast_expression
-cast_expression REDUCE to multiplicative_expression
-multiplicative_expression REDUCE to additive_expression
-additive_expression REDUCE to shift_expression
-shift_expression REDUCE to relational_expression
-relational_expression REDUCE to equality_expression
-equality_expression REDUCE to and_expression
-and_expression REDUCE to exclusive_or_expression
-exclusive_or_expression REDUCE to inclusive_or_expression
-inclusive_or_expression REDUCE to logical_and_expression
-inclusive_and_expression REDUCE to logical_or_expression
-logical_or_expression REDUCE to conditional_expression
-conditional_expression REDUCE to constant_expression
-direct_declarator OBRACE constant_expression CBRACE REDUCE to direct_declarator
 Scanner: token [;]
 direct_declarator REDUCE to declarator
 declarator REDUCE to init_declarator
@@ -156,27 +92,6 @@ LONG_LONG REDUCE to type_specifier
 Scanner: identifier [var5]
 type_specifier REDUCE to declaration_specifiers
 IDENTIFIER REDUCE to direct_declarator
-Scanner: token [[]
-Scanner: decimal number: 3
-I_CONST REDUCE to constant 
-constant REDUCE to primary_expression
-primary_expression REDUCE to postfix_expression
-Scanner: token []]
-postfix_expression REDUCE unary_expression
-unary_expression REDUCE to cast_expression
-cast_expression REDUCE to multiplicative_expression
-multiplicative_expression REDUCE to additive_expression
-additive_expression REDUCE to shift_expression
-shift_expression REDUCE to relational_expression
-relational_expression REDUCE to equality_expression
-equality_expression REDUCE to and_expression
-and_expression REDUCE to exclusive_or_expression
-exclusive_or_expression REDUCE to inclusive_or_expression
-inclusive_or_expression REDUCE to logical_and_expression
-inclusive_and_expression REDUCE to logical_or_expression
-logical_or_expression REDUCE to conditional_expression
-conditional_expression REDUCE to constant_expression
-direct_declarator OBRACE constant_expression CBRACE REDUCE to direct_declarator
 Scanner: token [;]
 direct_declarator REDUCE to declarator
 declarator REDUCE to init_declarator
@@ -190,27 +105,6 @@ FLOAT REDUCE to type_specifier
 Scanner: identifier [var6]
 type_specifier REDUCE to declaration_specifiers
 IDENTIFIER REDUCE to direct_declarator
-Scanner: token [[]
-Scanner: decimal number: 3
-I_CONST REDUCE to constant 
-constant REDUCE to primary_expression
-primary_expression REDUCE to postfix_expression
-Scanner: token []]
-postfix_expression REDUCE unary_expression
-unary_expression REDUCE to cast_expression
-cast_expression REDUCE to multiplicative_expression
-multiplicative_expression REDUCE to additive_expression
-additive_expression REDUCE to shift_expression
-shift_expression REDUCE to relational_expression
-relational_expression REDUCE to equality_expression
-equality_expression REDUCE to and_expression
-and_expression REDUCE to exclusive_or_expression
-exclusive_or_expression REDUCE to inclusive_or_expression
-inclusive_or_expression REDUCE to logical_and_expression
-inclusive_and_expression REDUCE to logical_or_expression
-logical_or_expression REDUCE to conditional_expression
-conditional_expression REDUCE to constant_expression
-direct_declarator OBRACE constant_expression CBRACE REDUCE to direct_declarator
 Scanner: token [;]
 direct_declarator REDUCE to declarator
 declarator REDUCE to init_declarator
@@ -224,29 +118,9 @@ DOUBLE REDUCE to type_specifier
 Scanner: identifier [var]
 type_specifier REDUCE to declaration_specifiers
 IDENTIFIER REDUCE to direct_declarator
-Scanner: token [=]
-direct_declarator REDUCE to declarator
-Scanner: decimal number: 2.0
-F_CONST REDUCE to constant 
-constant REDUCE to primary_expression
-primary_expression REDUCE to postfix_expression
 Scanner: token [;]
-postfix_expression REDUCE unary_expression
-unary_expression REDUCE to cast_expression
-cast_expression REDUCE to multiplicative_expression
-multiplicative_expression REDUCE to additive_expression
-additive_expression REDUCE to shift_expression
-shift_expression REDUCE to relational_expression
-relational_expression REDUCE to equality_expression
-equality_expression REDUCE to and_expression
-and_expression REDUCE to exclusive_or_expression
-exclusive_or_expression REDUCE to inclusive_or_expression
-inclusive_or_expression REDUCE to logical_and_expression
-inclusive_and_expression REDUCE to logical_or_expression
-logical_or_expression REDUCE to conditional_expression
-conditional_expression REDUCE to assignment_expression
-assignment_expression REDUCE to initializer
-declarator EQUAL initializer REDUCE to init_declarator
+direct_declarator REDUCE to declarator
+declarator REDUCE to init_declarator
 init_declarator REDUCE to init_declarator_list
 declaration_specifiers init_declarator_list SEMICOLON REDUCE to declaration
 declaration REDUCE to external_declaration
@@ -257,27 +131,6 @@ LONG_DOUBLE REDUCE to type_specifier
 Scanner: identifier [var8]
 type_specifier REDUCE to declaration_specifiers
 IDENTIFIER REDUCE to direct_declarator
-Scanner: token [[]
-Scanner: decimal number: 3
-I_CONST REDUCE to constant 
-constant REDUCE to primary_expression
-primary_expression REDUCE to postfix_expression
-Scanner: token []]
-postfix_expression REDUCE unary_expression
-unary_expression REDUCE to cast_expression
-cast_expression REDUCE to multiplicative_expression
-multiplicative_expression REDUCE to additive_expression
-additive_expression REDUCE to shift_expression
-shift_expression REDUCE to relational_expression
-relational_expression REDUCE to equality_expression
-equality_expression REDUCE to and_expression
-and_expression REDUCE to exclusive_or_expression
-exclusive_or_expression REDUCE to inclusive_or_expression
-inclusive_or_expression REDUCE to logical_and_expression
-inclusive_and_expression REDUCE to logical_or_expression
-logical_or_expression REDUCE to conditional_expression
-conditional_expression REDUCE to constant_expression
-direct_declarator OBRACE constant_expression CBRACE REDUCE to direct_declarator
 Scanner: token [;]
 direct_declarator REDUCE to declarator
 declarator REDUCE to init_declarator
@@ -291,29 +144,9 @@ INT REDUCE to type_specifier
 Scanner: identifier [init]
 type_specifier REDUCE to declaration_specifiers
 IDENTIFIER REDUCE to direct_declarator
-Scanner: token [=]
-direct_declarator REDUCE to declarator
-Scanner: decimal number: 9
-I_CONST REDUCE to constant 
-constant REDUCE to primary_expression
-primary_expression REDUCE to postfix_expression
 Scanner: token [;]
-postfix_expression REDUCE unary_expression
-unary_expression REDUCE to cast_expression
-cast_expression REDUCE to multiplicative_expression
-multiplicative_expression REDUCE to additive_expression
-additive_expression REDUCE to shift_expression
-shift_expression REDUCE to relational_expression
-relational_expression REDUCE to equality_expression
-equality_expression REDUCE to and_expression
-and_expression REDUCE to exclusive_or_expression
-exclusive_or_expression REDUCE to inclusive_or_expression
-inclusive_or_expression REDUCE to logical_and_expression
-inclusive_and_expression REDUCE to logical_or_expression
-logical_or_expression REDUCE to conditional_expression
-conditional_expression REDUCE to assignment_expression
-assignment_expression REDUCE to initializer
-declarator EQUAL initializer REDUCE to init_declarator
+direct_declarator REDUCE to declarator
+declarator REDUCE to init_declarator
 init_declarator REDUCE to init_declarator_list
 declaration_specifiers init_declarator_list SEMICOLON REDUCE to declaration
 declaration REDUCE to external_declaration
