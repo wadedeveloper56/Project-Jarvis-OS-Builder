@@ -128,6 +128,77 @@ Constant* NodeData::getConstant() const
 	return constant;
 }
 
+NodeData::NodeData(const NodeData& other)
+	: type(other.type),
+	token1(new Token(*other.token1)),
+	token2(new Token(*other.token2)),
+	lexp(new Expression(*other.lexp)),
+	exp1(new Expression(*other.exp1)),
+	exp2(new Expression(*other.exp2)),
+	argumentList(new vector<Expression*>(*other.argumentList)),
+	identifier(new Token(*other.identifier)),
+	initializerList(new vector<Initializer*>(*other.initializerList)),
+	typeName(new TypeName(*other.typeName)),
+	token3(new Token(*other.token3)),
+	constant(new Constant(*other.constant))
+{
+}
+
+NodeData::NodeData(NodeData&& other) noexcept
+	: type(other.type),
+	token1(new Token(*other.token1)),
+	token2(new Token(*other.token2)),
+	lexp(new Expression(*other.lexp)),
+	exp1(new Expression(*other.exp1)),
+	exp2(new Expression(*other.exp2)),
+	argumentList(new vector<Expression*>(*other.argumentList)),
+	identifier(new Token(*other.identifier)),
+	initializerList(new vector<Initializer*>(*other.initializerList)),
+	typeName(new TypeName(*other.typeName)),
+	token3(new Token(*other.token3)),
+	constant(new Constant(*other.constant))
+{
+}
+
+NodeData& NodeData::operator=(const NodeData& other)
+{
+	if (this == &other)
+		return *this;
+	type = other.type;
+	token1 = new Token(*other.token1);
+	token2 = new Token(*other.token2);
+	lexp = new Expression(*other.lexp);
+	exp1 = new Expression(*other.exp1);
+	exp2 = new Expression(*other.exp2);
+	argumentList = new vector<Expression*>(*other.argumentList);
+	identifier = new Token(*other.identifier);
+	initializerList = new vector<Initializer*>(*other.initializerList);
+	typeName = new TypeName(*other.typeName);
+	token3 = new Token(*other.token3);
+	constant = new Constant(*other.constant);
+	return *this;
+}
+
+NodeData& NodeData::operator=(NodeData&& other) noexcept
+{
+	if (this == &other)
+		return *this;
+	type = other.type;
+	token1 = new Token(*other.token1);
+	token2 = new Token(*other.token2);
+	lexp = new Expression(*other.lexp);
+	exp1 = new Expression(*other.exp1);
+	exp2 = new Expression(*other.exp2);
+	argumentList = new vector<Expression*>(*other.argumentList);
+	identifier = new Token(*other.identifier);
+	initializerList = new vector<Initializer*>(*other.initializerList);
+	typeName = new TypeName(*other.typeName);
+	token3 = new Token(*other.token3);
+	constant = new Constant(*other.constant);
+	return *this;
+}
+
+
 Expression::Expression() : data(nullptr), left(nullptr), op(nullptr), right(nullptr)
 {
 }
@@ -167,3 +238,43 @@ Expression* Expression::getRight() const
 {
 	return right;
 }
+
+
+Expression::Expression(const Expression& other)
+	: data(new NodeData(*other.data)),
+	left(new Expression(*other.left)),
+	op(new Token(*other.op)),
+	right(new Expression(*other.right))
+{
+}
+
+Expression::Expression(Expression&& other) noexcept
+	: data(new NodeData(*other.data)),
+	left(new Expression(*other.left)),
+	op(new Token(*other.op)),
+	right(new Expression(*other.right))
+{
+}
+
+Expression& Expression::operator=(const Expression& other)
+{
+	if (this == &other)
+		return *this;
+	data = new NodeData(*other.data);
+	left = new Expression(*other.left);
+	op = new Token(*other.op);
+	right = new Expression(*other.right);
+	return *this;
+}
+
+Expression& Expression::operator=(Expression&& other) noexcept
+{
+	if (this == &other)
+		return *this;
+	data = new NodeData(*other.data);
+	left = new Expression(*other.left);
+	op = new Token(*other.op);
+	right = new Expression(*other.right);
+	return *this;
+}
+

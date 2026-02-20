@@ -27,7 +27,23 @@ EnumSpecifier::~EnumSpecifier()
 	}
 }
 
+TokenPtr EnumSpecifier::getNameStr() const
+{
+	return nameStr;
+}
+
 vector<Enumerator*>* EnumSpecifier::getVectorEnumerator() const
 {
 	return vectorEnumerator;
 }
+
+bool EnumSpecifier::isNameStr() const
+{
+	return nameStr != nullptr;
+}
+
+bool EnumSpecifier::isVectorEnumerator() const
+{
+	return vectorEnumerator != nullptr;
+}
+

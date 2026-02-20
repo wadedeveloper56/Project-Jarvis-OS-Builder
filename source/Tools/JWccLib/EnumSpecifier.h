@@ -16,7 +16,41 @@ namespace WadeSpace
 		EnumSpecifier(TokenPtr nameStr, vector<Enumerator*>* vectorEnumerator);
 		EnumSpecifier();
 		virtual ~EnumSpecifier();
-		vector<Enumerator*>* getVectorEnumerator() const;
+
+		EnumSpecifier(const EnumSpecifier& other)
+			: nameStr(new Token(*other.nameStr)),
+			  vectorEnumerator(new vector<Enumerator*>(*other.vectorEnumerator))
+		{
+		}
+
+		EnumSpecifier(EnumSpecifier&& other) noexcept
+			: nameStr(new Token(*other.nameStr)),
+			  vectorEnumerator(new vector<Enumerator*>(*other.vectorEnumerator))
+		{
+		}
+
+		EnumSpecifier& operator=(const EnumSpecifier& other)
+		{
+			if (this == &other)
+				return *this;
+			nameStr = new Token(*other.nameStr);
+			vectorEnumerator = new vector<Enumerator*>(*other.vectorEnumerator);
+			return *this;
+		}
+
+		EnumSpecifier& operator=(EnumSpecifier&& other) noexcept
+		{
+			if (this == &other)
+				return *this;
+			nameStr = new Token(*other.nameStr);
+			vectorEnumerator = new vector<Enumerator*>(*other.vectorEnumerator);
+			return *this;
+		}
+
+		[[nodiscard]] TokenPtr getNameStr() const;
+		[[nodiscard]] vector<Enumerator*>* getVectorEnumerator() const;
+		[[nodiscard]] bool isNameStr() const;
+		[[nodiscard]] bool isVectorEnumerator() const;
 
 	private:
 		TokenPtr  nameStr;
