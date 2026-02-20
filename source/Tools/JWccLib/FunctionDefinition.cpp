@@ -74,3 +74,42 @@ BaseStatement* FunctionDefinition::getBaseStatement() const
 {
 	return baseStatement;
 }
+
+FunctionDefinition::FunctionDefinition(const FunctionDefinition& other)
+	: declarationSpecifiers(new DeclarationSpecifiers(*other.declarationSpecifiers)),
+	declarator(new Declarator(*other.declarator)),
+	vectorDeclaration(new vector<Declaration*>(*other.vectorDeclaration)),
+	baseStatement(new BaseStatement(*other.baseStatement))
+{
+}
+
+FunctionDefinition::FunctionDefinition(FunctionDefinition&& other) noexcept
+	: declarationSpecifiers(new DeclarationSpecifiers(*other.declarationSpecifiers)),
+	declarator(new Declarator(*other.declarator)),
+	vectorDeclaration(new vector<Declaration*>(*other.vectorDeclaration)),
+	baseStatement(new BaseStatement(*other.baseStatement))
+{
+}
+
+FunctionDefinition& FunctionDefinition::operator=(const FunctionDefinition& other)
+{
+	if (this == &other)
+		return *this;
+	declarationSpecifiers = new DeclarationSpecifiers(*other.declarationSpecifiers);
+	declarator = new Declarator(*other.declarator);
+	vectorDeclaration = new vector<Declaration*>(*other.vectorDeclaration);
+	baseStatement = new BaseStatement(*other.baseStatement);
+	return *this;
+}
+
+FunctionDefinition& FunctionDefinition::operator=(FunctionDefinition&& other) noexcept
+{
+	if (this == &other)
+		return *this;
+	declarationSpecifiers = new DeclarationSpecifiers(*other.declarationSpecifiers);
+	declarator = new Declarator(*other.declarator);
+	vectorDeclaration = new vector<Declaration*>(*other.vectorDeclaration);
+	baseStatement = new BaseStatement(*other.baseStatement);
+	return *this;
+}
+
