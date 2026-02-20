@@ -3,11 +3,11 @@
 
 using namespace WadeSpace;
 
-BaseCodeGenerator::BaseCodeGenerator(): variableTable(nullptr), functionTable(nullptr)
+BaseCodeGenerator::BaseCodeGenerator() : variableTable(nullptr), functionTable(nullptr)
 {
 }
 
-BaseCodeGenerator::BaseCodeGenerator(vector<VariableData*>* const variable_table, vector<FunctionData*>* const function_table): variableTable(variable_table), functionTable(function_table)
+BaseCodeGenerator::BaseCodeGenerator(vector<VariableData*>* const variable_table, vector<FunctionData*>* const function_table) : variableTable(variable_table),	functionTable(function_table)
 {
 }
 
@@ -19,16 +19,16 @@ BaseCodeGenerator::~BaseCodeGenerator()
 		{
 			delete ptr;
 		}
+		delete variableTable;
 	}
-	delete variableTable;
 	if (functionTable != nullptr)
 	{
 		for (auto ptr : *functionTable)
 		{
 			delete ptr;
 		}
+		delete functionTable;
 	}
-	delete functionTable;
 }
 
 vector<VariableData*>* BaseCodeGenerator::getVariableTable() const
@@ -49,28 +49,4 @@ bool BaseCodeGenerator::isVariableTable() const
 bool BaseCodeGenerator::isFunctionTable() const
 {
 	return functionTable != nullptr;
-}
-
-BaseCodeGenerator::BaseCodeGenerator(BaseCodeGenerator&& other) noexcept
-	: variableTable(other.variableTable),
-	  functionTable(other.functionTable)
-{
-}
-
-BaseCodeGenerator& BaseCodeGenerator::operator=(const BaseCodeGenerator& other)
-{
-	if (this == &other)
-		return *this;
-	variableTable = other.variableTable;
-	functionTable = other.functionTable;
-	return *this;
-}
-
-BaseCodeGenerator& BaseCodeGenerator::operator=(BaseCodeGenerator&& other) noexcept
-{
-	if (this == &other)
-		return *this;
-	variableTable = other.variableTable;
-	functionTable = other.functionTable;
-	return *this;
 }

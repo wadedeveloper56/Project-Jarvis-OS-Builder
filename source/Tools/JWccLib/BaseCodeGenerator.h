@@ -35,9 +35,9 @@ namespace WadeSpace
 		BaseCodeGenerator(vector<VariableData*>* const variable_table, vector<FunctionData*>* const function_table);
 		virtual ~BaseCodeGenerator();
 		BaseCodeGenerator(const BaseCodeGenerator& other) = default;
-		BaseCodeGenerator(BaseCodeGenerator&& other) noexcept;
-		BaseCodeGenerator& operator=(const BaseCodeGenerator& other);
-		BaseCodeGenerator& operator=(BaseCodeGenerator&& other) noexcept;
+		BaseCodeGenerator(BaseCodeGenerator&& other) noexcept = default;
+		BaseCodeGenerator& operator=(const BaseCodeGenerator& other) = default;
+		BaseCodeGenerator& operator=(BaseCodeGenerator&& other) noexcept = default;
 		vector<VariableData*>* getVariableTable() const;
 		vector<FunctionData*>* getFunctionTable() const;
 		bool isVariableTable() const;
