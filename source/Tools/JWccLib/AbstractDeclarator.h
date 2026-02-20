@@ -8,18 +8,17 @@ namespace WadeSpace
 	class AbstractDeclarator
 	{
 	public:
-		AbstractDeclarator(const AbstractDeclarator& copy);
-		AbstractDeclarator(Pointer* pointer, DirectAbstractDeclarator* directAbstractDeclarator);
 		AbstractDeclarator();
+		AbstractDeclarator(const AbstractDeclarator& other) = default;
+		AbstractDeclarator(AbstractDeclarator&& other) = default;
+		AbstractDeclarator& operator=(const AbstractDeclarator& other) = default;
+		AbstractDeclarator& operator=(AbstractDeclarator&& other) = default;
+		AbstractDeclarator(Pointer* pointer, DirectAbstractDeclarator* directAbstractDeclarator);
 		virtual ~AbstractDeclarator();
-		[[nodiscard]]
-		Pointer* getPointer() const;
-		[[nodiscard]]
-		DirectAbstractDeclarator* getDirectAbstractDeclarator() const;
-		[[nodiscard]]
-		bool isPointer() const;
-		[[nodiscard]]
-		bool isDirectAbstractDeclarator() const;
+		[[nodiscard]] Pointer* getPointer() const;
+		[[nodiscard]] DirectAbstractDeclarator* getDirectAbstractDeclarator() const;
+		[[nodiscard]] bool isPointer() const;
+		[[nodiscard]] bool isDirectAbstractDeclarator() const;
 
 	private:
 		Pointer* pointer;

@@ -9,11 +9,6 @@ AbstractDeclarator::AbstractDeclarator(Pointer* pointer, DirectAbstractDeclarato
 	this->directAbstractDeclarator = directAbstractDeclarator;
 }
 
-AbstractDeclarator::AbstractDeclarator(const AbstractDeclarator& copy)
-{
-	this->pointer = copy.getPointer();
-	this->directAbstractDeclarator = copy.getDirectAbstractDeclarator();
-}
 
 AbstractDeclarator::AbstractDeclarator()
 {
