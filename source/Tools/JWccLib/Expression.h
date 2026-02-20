@@ -69,6 +69,45 @@ namespace WadeSpace
 		Expression();
 		Expression(const NodeDataPtr data, Expression* const left, const TokenPtr op, Expression* const right);
 		~Expression();
+
+		Expression(const Expression& other)
+			: data(other.data),
+			  left(other.left),
+			  op(other.op),
+			  right(other.right)
+		{
+		}
+
+		Expression(Expression&& other) noexcept
+			: data(other.data),
+			  left(other.left),
+			  op(other.op),
+			  right(other.right)
+		{
+		}
+
+		Expression& operator=(const Expression& other)
+		{
+			if (this == &other)
+				return *this;
+			data = other.data;
+			left = other.left;
+			op = other.op;
+			right = other.right;
+			return *this;
+		}
+
+		Expression& operator=(Expression&& other) noexcept
+		{
+			if (this == &other)
+				return *this;
+			data = other.data;
+			left = other.left;
+			op = other.op;
+			right = other.right;
+			return *this;
+		}
+
 		[[nodiscard]] NodeDataPtr getData() const;
 		[[nodiscard]] Expression* getLeft() const;
 		[[nodiscard]] TokenPtr getOp() const;

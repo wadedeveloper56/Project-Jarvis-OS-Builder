@@ -27,3 +27,34 @@ TokenPtr Enumerator::getIdentifier() const
 {
 	return identifier;
 }
+
+Enumerator::Enumerator(const Enumerator& other)
+	: identifier(new Token(*other.identifier)),
+	constantExpression(new Expression(*other.constantExpression))
+{
+}
+
+Enumerator::Enumerator(Enumerator&& other) noexcept
+	: identifier(new Token(*other.identifier)),
+	constantExpression(new Expression(*other.constantExpression))
+{
+}
+
+Enumerator& Enumerator::operator=(const Enumerator& other)
+{
+	if (this == &other)
+		return *this;
+	identifier = new Token(*other.identifier);
+	constantExpression = new Expression(*other.constantExpression);
+	return *this;
+}
+
+Enumerator& Enumerator::operator=(Enumerator&& other) noexcept
+{
+	if (this == &other)
+		return *this;
+	identifier = new Token(*other.identifier);
+	constantExpression = new Expression(*other.constantExpression);
+	return *this;
+}
+

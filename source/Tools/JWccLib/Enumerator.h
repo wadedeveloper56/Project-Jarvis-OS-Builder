@@ -18,6 +18,12 @@ namespace WadeSpace
 		Enumerator(TokenPtr identifier, Expression* constantExpression);
 		Enumerator();
 		virtual ~Enumerator();
+
+		Enumerator(const Enumerator& other);
+		Enumerator(Enumerator&& other) noexcept;
+		Enumerator& operator=(const Enumerator& other);
+		Enumerator& operator=(Enumerator&& other) noexcept;
+
 		TokenPtr getIdentifier() const;
 		Expression* getConstantExpression() const;
 
