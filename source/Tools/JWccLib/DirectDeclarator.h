@@ -1,9 +1,5 @@
 #pragma once
 
-#include <string>
-#include <vector>
-#include <optional>
-
 #include "Token.h"
 #include "TokenType.h"
 
@@ -30,10 +26,11 @@ namespace WadeSpace
 			vector<TokenPtr>* const vectorOfStrings
 		);
 		~DirectDeclarator();
-		DirectDeclarator(const DirectDeclarator& other) = default;
-		DirectDeclarator(DirectDeclarator&& other) = default;
-		DirectDeclarator& operator=(const DirectDeclarator& other) = default;
-		DirectDeclarator& operator=(DirectDeclarator&& other) = default;
+
+		DirectDeclarator(const DirectDeclarator& other);
+		DirectDeclarator(DirectDeclarator&& other) noexcept;
+		DirectDeclarator& operator=(const DirectDeclarator& other);
+		DirectDeclarator& operator=(DirectDeclarator&& other) noexcept;
 
 		[[nodiscard]] TokenPtr getIdentifier() const;
 		[[nodiscard]] TokenPtr getToken1() const;

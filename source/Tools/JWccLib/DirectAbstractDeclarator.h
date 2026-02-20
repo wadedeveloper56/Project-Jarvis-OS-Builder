@@ -22,18 +22,22 @@ namespace WadeSpace
 		optional<TokenType> type;
 
 		DirectAbstractDeclaratorNode();
-		DirectAbstractDeclaratorNode(ParameterTypeList* const parameterTypeList, Expression* const constantExpression,
-		                             optional<TokenType> type);
+		DirectAbstractDeclaratorNode(ParameterTypeList* const parameterTypeList, Expression* const constantExpression, optional<TokenType> type);
 		~DirectAbstractDeclaratorNode();
 	}* DirectAbstractDeclaratorNodePtr;
 
 	class DirectAbstractDeclarator
 	{
 	public:
-		DirectAbstractDeclarator(const DirectAbstractDeclarator& copy) = default;
 		DirectAbstractDeclarator(AbstractDeclarator* abstractDeclarator, vector<DirectAbstractDeclaratorNode*>* list);
 		DirectAbstractDeclarator();
 		virtual ~DirectAbstractDeclarator();
+
+		DirectAbstractDeclarator(const DirectAbstractDeclarator& other);
+		DirectAbstractDeclarator(DirectAbstractDeclarator&& other) noexcept;
+		DirectAbstractDeclarator& operator=(const DirectAbstractDeclarator& other);
+		DirectAbstractDeclarator& operator=(DirectAbstractDeclarator&& other) noexcept;
+
 		[[nodiscard]] AbstractDeclarator* getAbstractDeclarator() const;
 		[[nodiscard]] vector<DirectAbstractDeclaratorNode*>* getList() const;
 

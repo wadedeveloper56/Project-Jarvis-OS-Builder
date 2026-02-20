@@ -85,3 +85,58 @@ vector<TokenPtr>* DirectDeclarator::getVectorOfStrings() const
 {
 	return vectorOfStrings;
 }
+
+DirectDeclarator::DirectDeclarator(const DirectDeclarator& other)
+	: identifier(new Token(*other.identifier)),
+	token1(new Token(*other.token1)),
+	token2(new Token(*other.token2)),
+	declarator(new Declarator(*other.declarator)),
+	directDeclarator(new DirectDeclarator(*other.directDeclarator)),
+	constantExpression(new Expression(*other.constantExpression)),
+	parameterTypeList(new ParameterTypeList(*other.parameterTypeList)),
+	vectorOfStrings(new vector<TokenPtr>(*other.vectorOfStrings))
+{
+}
+
+DirectDeclarator::DirectDeclarator(DirectDeclarator&& other) noexcept
+	: identifier(new Token(*other.identifier)),
+	token1(new Token(*other.token1)),
+	token2(new Token(*other.token2)),
+	declarator(new Declarator(*other.declarator)),
+	directDeclarator(new DirectDeclarator(*other.directDeclarator)),
+	constantExpression(new Expression(*other.constantExpression)),
+	parameterTypeList(new ParameterTypeList(*other.parameterTypeList)),
+	vectorOfStrings(new vector<TokenPtr>(*other.vectorOfStrings))
+{
+}
+
+DirectDeclarator& DirectDeclarator::operator=(const DirectDeclarator& other)
+{
+	if (this == &other)
+		return *this;
+	identifier = new Token(*other.identifier);
+	token1 = new Token(*other.token1);
+	token2 = new Token(*other.token2);
+	declarator = new Declarator(*other.declarator);
+	directDeclarator = new DirectDeclarator(*other.directDeclarator);
+	constantExpression = new Expression(*other.constantExpression);
+	parameterTypeList = new ParameterTypeList(*other.parameterTypeList);
+	vectorOfStrings = new vector<TokenPtr>(*other.vectorOfStrings);
+	return *this;
+}
+
+DirectDeclarator& DirectDeclarator::operator=(DirectDeclarator&& other) noexcept
+{
+	if (this == &other)
+		return *this;
+	identifier = new Token(*other.identifier);
+	token1 = new Token(*other.token1);
+	token2 = new Token(*other.token2);
+	declarator = new Declarator(*other.declarator);
+	directDeclarator = new DirectDeclarator(*other.directDeclarator);
+	constantExpression = new Expression(*other.constantExpression);
+	parameterTypeList = new ParameterTypeList(*other.parameterTypeList);
+	vectorOfStrings = new vector<TokenPtr>(*other.vectorOfStrings);
+	return *this;
+}
+

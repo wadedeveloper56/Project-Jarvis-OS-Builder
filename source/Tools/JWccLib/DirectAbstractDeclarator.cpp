@@ -60,3 +60,34 @@ vector<DirectAbstractDeclaratorNode*>* DirectAbstractDeclarator::getList() const
 {
 	return list;
 }
+
+DirectAbstractDeclarator::DirectAbstractDeclarator(const DirectAbstractDeclarator& other)
+	: abstractDeclarator(new AbstractDeclarator(*other.abstractDeclarator)),
+	list(new vector<DirectAbstractDeclaratorNode*>(*other.list))
+{
+}
+
+DirectAbstractDeclarator::DirectAbstractDeclarator(DirectAbstractDeclarator&& other) noexcept
+	: abstractDeclarator(new AbstractDeclarator(*other.abstractDeclarator)),
+	list(new vector<DirectAbstractDeclaratorNode*>(*other.list))
+{
+}
+
+DirectAbstractDeclarator& DirectAbstractDeclarator::operator=(const DirectAbstractDeclarator& other)
+{
+	if (this == &other)
+		return *this;
+	abstractDeclarator = new AbstractDeclarator(*other.abstractDeclarator);
+	list = new vector<DirectAbstractDeclaratorNode*>(*other.list);
+	return *this;
+}
+
+DirectAbstractDeclarator& DirectAbstractDeclarator::operator=(DirectAbstractDeclarator&& other) noexcept
+{
+	if (this == &other)
+		return *this;
+	abstractDeclarator = new AbstractDeclarator(*other.abstractDeclarator);
+	list = new vector<DirectAbstractDeclaratorNode*>(*other.list);
+	return *this;
+}
+

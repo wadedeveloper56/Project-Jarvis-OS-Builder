@@ -18,10 +18,35 @@ namespace WadeSpace
 		Declaration();
 		virtual ~Declaration();
 
-		Declaration(const Declaration& other) = default;
-		Declaration(Declaration&& other) = default;
-		Declaration& operator=(const Declaration& other) = default;
-		Declaration& operator=(Declaration&& other) = default;
+		Declaration(const Declaration& other)
+			: declarationSpecifiers(new DeclarationSpecifiers(*other.declarationSpecifiers)),
+			  vectorInitDeclarator(new vector<InitDeclarator*>(*other.vectorInitDeclarator))
+		{
+		}
+
+		Declaration(Declaration&& other) noexcept
+			: declarationSpecifiers(new DeclarationSpecifiers(*other.declarationSpecifiers)),
+			vectorInitDeclarator(new vector<InitDeclarator*>(*other.vectorInitDeclarator))
+		{
+		}
+
+		Declaration& operator=(const Declaration& other)
+		{
+			if (this == &other)
+				return *this;
+			declarationSpecifiers = new DeclarationSpecifiers(*other.declarationSpecifiers);
+			vectorInitDeclarator = new vector<InitDeclarator*>(*other.vectorInitDeclarator);
+			return *this;
+		}
+
+		Declaration& operator=(Declaration&& other) noexcept
+		{
+			if (this == &other)
+				return *this;
+			declarationSpecifiers = new DeclarationSpecifiers(*other.declarationSpecifiers);
+			vectorInitDeclarator = new vector<InitDeclarator*>(*other.vectorInitDeclarator);
+			return *this;
+		}
 
 		[[nodiscard]] DeclarationSpecifiers* getDeclarationSpecifiers() const;
 		[[nodiscard]] vector<InitDeclarator*>* getVectorInitDeclarator() const;
