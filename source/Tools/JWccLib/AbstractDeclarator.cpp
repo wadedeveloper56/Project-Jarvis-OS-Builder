@@ -22,6 +22,38 @@ AbstractDeclarator::~AbstractDeclarator()
 	delete directAbstractDeclarator;
 }
 
+AbstractDeclarator::AbstractDeclarator(const AbstractDeclarator& other)
+{
+	pointer = other.pointer ? new Pointer(*other.pointer) : nullptr;
+	directAbstractDeclarator = other.directAbstractDeclarator ? new DirectAbstractDeclarator(*other.directAbstractDeclarator) : nullptr;
+}
+
+AbstractDeclarator::AbstractDeclarator(AbstractDeclarator&& other) noexcept
+{
+	pointer = other.pointer ? new Pointer(*other.pointer) : nullptr;
+	directAbstractDeclarator = other.directAbstractDeclarator ? new DirectAbstractDeclarator(*other.directAbstractDeclarator) : nullptr;
+}
+
+AbstractDeclarator& AbstractDeclarator::operator=(const AbstractDeclarator& other)
+{
+	if (this == &other)
+		return *this;
+	pointer = other.pointer ? new Pointer(*other.pointer) : nullptr;
+	directAbstractDeclarator = other.directAbstractDeclarator ? new DirectAbstractDeclarator(*other.directAbstractDeclarator) : nullptr;
+	return *this;
+}
+
+AbstractDeclarator& AbstractDeclarator::operator=(AbstractDeclarator&& other) noexcept
+{
+	if (this == &other)
+		return *this;
+	pointer = other.pointer ? new Pointer(*other.pointer) : nullptr;
+	directAbstractDeclarator = other.directAbstractDeclarator ? new DirectAbstractDeclarator(*other.directAbstractDeclarator) : nullptr;
+	return *this;
+}
+
+
+
 Pointer* AbstractDeclarator::getPointer() const { return pointer; }
 DirectAbstractDeclarator* AbstractDeclarator::getDirectAbstractDeclarator() const { return directAbstractDeclarator; }
 bool AbstractDeclarator::isPointer() const { return pointer != nullptr; }

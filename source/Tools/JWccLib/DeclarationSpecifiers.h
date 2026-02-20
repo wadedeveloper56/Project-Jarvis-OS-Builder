@@ -1,8 +1,5 @@
 #pragma once
 
-#include <string>
-#include <vector>
-#include <optional>
 #include "StorageClassSpecifier.h"
 #include "TypeSpecifier.h"
 #include "TypeQualifier.h"
@@ -15,10 +12,17 @@ namespace WadeSpace
 		DeclarationSpecifiers() = default;
 		DeclarationSpecifiers(StorageClassSpecifier* const storageClassSpecifier, TypeSpecifier* const typeSpecifier, TypeQualifier* const typeQualifier, DeclarationSpecifiers* const declarationSpecifiers);
 		virtual ~DeclarationSpecifiers();
+
+		DeclarationSpecifiers(const DeclarationSpecifiers& other) = default;
+		DeclarationSpecifiers(DeclarationSpecifiers&& other) = default;
+		DeclarationSpecifiers& operator=(const DeclarationSpecifiers& other) = default;
+		DeclarationSpecifiers& operator=(DeclarationSpecifiers&& other) = default;
+
 		[[nodiscard]] StorageClassSpecifier* getStorageClassSpecifier() const;
 		[[nodiscard]] TypeSpecifier* getTypeSpecifier() const;
 		[[nodiscard]] TypeQualifier* getTypeQualifier() const;
 		[[nodiscard]] DeclarationSpecifiers* getDeclarationSpecifiers() const;
+
 		[[nodiscard]] bool isStorageClassSpecifier() const;
 		[[nodiscard]] bool isTypeSpecifier() const;
 		[[nodiscard]] bool isTypeQualifier() const;

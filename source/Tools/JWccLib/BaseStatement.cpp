@@ -179,3 +179,62 @@ vector<Declaration*>* BaseStatement::getDeclarationList() const
 {
 	return declarationList;
 }
+
+BaseStatement::BaseStatement(const BaseStatement& other)
+	: identifier(other.identifier ? new Token(*other.identifier) : nullptr),
+	exp(other.exp ? new Expression(*other.exp) : nullptr),
+	contExp(other.contExp ? new Expression(*other.contExp) : nullptr),
+	statement(other.statement ? new BaseStatement(*other.statement) : nullptr),
+	es1(other.es1 ? new BaseStatement(*other.es1) : nullptr),
+	es2(other.es2 ? new BaseStatement(*other.es2) : nullptr),
+	statement2(other.statement2 ? new BaseStatement(*other.statement2) : nullptr),
+	statementList(other.statementList ? new vector<BaseStatement*>(*other.statementList) : nullptr),
+	declarationList(other.declarationList ? new vector<Declaration*>(*other.declarationList) : nullptr)
+{
+}
+
+BaseStatement::BaseStatement(BaseStatement&& other) noexcept
+	: identifier(other.identifier ? new Token(*other.identifier) : nullptr),
+	exp(other.exp ? new Expression(*other.exp) : nullptr),
+	contExp(other.contExp ? new Expression(*other.contExp) : nullptr),
+	statement(other.statement ? new BaseStatement(*other.statement) : nullptr),
+	es1(other.es1 ? new BaseStatement(*other.es1) : nullptr),
+	es2(other.es2 ? new BaseStatement(*other.es2) : nullptr),
+	statement2(other.statement2 ? new BaseStatement(*other.statement2) : nullptr),
+	statementList(other.statementList ? new vector<BaseStatement*>(*other.statementList) : nullptr),
+	declarationList(other.declarationList ? new vector<Declaration*>(*other.declarationList) : nullptr)
+{
+}
+
+BaseStatement& BaseStatement::operator=(const BaseStatement& other)
+{
+	if (this == &other)
+		return *this;
+	identifier = other.identifier ? new Token(*other.identifier) : nullptr;
+	exp = other.exp ? new Expression(*other.exp) : nullptr;
+	contExp = other.contExp ? new Expression(*other.contExp) : nullptr;
+	statement = other.statement ? new BaseStatement(*other.statement) : nullptr;
+	es1 = other.es1 ? new BaseStatement(*other.es1) : nullptr;
+	es2 = other.es2 ? new BaseStatement(*other.es2) : nullptr;
+	statement2 = other.statement2 ? new BaseStatement(*other.statement2) : nullptr;
+	statementList = other.statementList ? new vector<BaseStatement*>(*other.statementList) : nullptr;
+	declarationList = other.declarationList ? new vector<Declaration*>(*other.declarationList) : nullptr;
+	return *this;
+}
+
+BaseStatement& BaseStatement::operator=(BaseStatement&& other) noexcept
+{
+	if (this == &other)
+		return *this;
+	identifier = other.identifier ? new Token(*other.identifier) : nullptr;
+	exp = other.exp ? new Expression(*other.exp) : nullptr;
+	contExp = other.contExp ? new Expression(*other.contExp) : nullptr;
+	statement = other.statement ? new BaseStatement(*other.statement) : nullptr;
+	es1 = other.es1 ? new BaseStatement(*other.es1) : nullptr;
+	es2 = other.es2 ? new BaseStatement(*other.es2) : nullptr;
+	statement2 = other.statement2 ? new BaseStatement(*other.statement2) : nullptr;
+	statementList = other.statementList ? new vector<BaseStatement*>(*other.statementList) : nullptr;
+	declarationList = other.declarationList ? new vector<Declaration*>(*other.declarationList) : nullptr;
+	return *this;
+}
+

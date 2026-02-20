@@ -17,10 +17,45 @@ namespace WadeSpace
 		Constant(const TokenPtr iConst, const TokenPtr fConst, const TokenPtr strConst, const optional<TokenType>& type);
 		Constant();
 		virtual ~Constant();
-		Constant(const Constant& other) = default;
-		Constant(Constant&& other) = default;
-		Constant& operator=(const Constant& other) = default;
-		Constant& operator=(Constant&& other) = default;
+
+		Constant(const Constant& other)
+			: iConst(other.iConst),
+			  fConst(other.fConst),
+			  strConst(other.strConst),
+			  type(other.type)
+		{
+		}
+
+		Constant(Constant&& other) noexcept
+			: iConst(other.iConst),
+			  fConst(other.fConst),
+			  strConst(other.strConst),
+			  type(std::move(other.type))
+		{
+		}
+
+		Constant& operator=(const Constant& other)
+		{
+			if (this == &other)
+				return *this;
+			iConst = other.iConst;
+			fConst = other.fConst;
+			strConst = other.strConst;
+			type = other.type;
+			return *this;
+		}
+
+		Constant& operator=(Constant&& other) noexcept
+		{
+			if (this == &other)
+				return *this;
+			iConst = other.iConst;
+			fConst = other.fConst;
+			strConst = other.strConst;
+			type = std::move(other.type);
+			return *this;
+		}
+
 		[[nodiscard]] TokenPtr getIConst() const;
 		[[nodiscard]] TokenPtr getFConst() const;
 		[[nodiscard]] TokenPtr getStrConst() const;

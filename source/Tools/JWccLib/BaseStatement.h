@@ -32,10 +32,12 @@ namespace WadeSpace
 		BaseStatement(TokenPtr identifier, BaseStatement* statement);
 		BaseStatement(TokenType op, BaseStatement* statement);
 		BaseStatement() = default;
-		BaseStatement(const BaseStatement& other) = default;
-		BaseStatement(BaseStatement&& other) = default;
-		BaseStatement& operator=(const BaseStatement& other) = default; 
-		BaseStatement& operator=(BaseStatement&& other) = default;
+
+		BaseStatement(const BaseStatement& other);
+		BaseStatement(BaseStatement&& other) noexcept;
+		BaseStatement& operator=(const BaseStatement& other);
+		BaseStatement& operator=(BaseStatement&& other) noexcept;
+
 		virtual ~BaseStatement();
 		[[nodiscard]] TokenPtr getIdentifier() const;
 		[[nodiscard]] Expression* getExp() const;

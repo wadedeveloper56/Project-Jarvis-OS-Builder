@@ -16,6 +16,44 @@ namespace WadeSpace
 		unsigned long long arraySize;
 		_VariableData() = default;
 		~_VariableData() = default;
+
+		_VariableData(const _VariableData& other)
+			: name(other.name),
+			  size(other.size),
+			  pointer(other.pointer),
+			  arraySize(other.arraySize)
+		{
+		}
+
+		_VariableData(_VariableData&& other) noexcept
+			: name(std::move(other.name)),
+			  size(other.size),
+			  pointer(other.pointer),
+			  arraySize(other.arraySize)
+		{
+		}
+
+		_VariableData& operator=(const _VariableData& other)
+		{
+			if (this == &other)
+				return *this;
+			name = other.name;
+			size = other.size;
+			pointer = other.pointer;
+			arraySize = other.arraySize;
+			return *this;
+		}
+
+		_VariableData& operator=(_VariableData&& other) noexcept
+		{
+			if (this == &other)
+				return *this;
+			name = std::move(other.name);
+			size = other.size;
+			pointer = other.pointer;
+			arraySize = other.arraySize;
+			return *this;
+		}
 	} VariableData;
 
 	typedef struct _FunctionData
@@ -26,6 +64,44 @@ namespace WadeSpace
 		vector<VariableData*>* parameters;
 		_FunctionData() = default;
 		~_FunctionData() = default;
+
+		_FunctionData(const _FunctionData& other)
+			: name(other.name),
+			  size(other.size),
+			  type(other.type),
+			  parameters(new vector<VariableData*>(*other.parameters))
+		{
+		}
+
+		_FunctionData(_FunctionData&& other) noexcept
+			: name(std::move(other.name)),
+			  size(other.size),
+		      type(other.type),
+			parameters(new vector<VariableData*>(*other.parameters))
+		{
+		}
+
+		_FunctionData& operator=(const _FunctionData& other)
+		{
+			if (this == &other)
+				return *this;
+			name = other.name;
+			size = other.size;
+			type = other.type;
+			parameters = other.parameters;
+			return *this;
+		}
+
+		_FunctionData& operator=(_FunctionData&& other) noexcept
+		{
+			if (this == &other)
+				return *this;
+			name = std::move(other.name);
+			size = other.size;
+			type = other.type;		
+			parameters = other.parameters;
+			return *this;
+		}
 	} FunctionData;
 
 	class BaseCodeGenerator
@@ -33,12 +109,37 @@ namespace WadeSpace
 	public:
 		BaseCodeGenerator();
 		BaseCodeGenerator(vector<VariableData*>* const variable_table, vector<FunctionData*>* const function_table);
-		BaseCodeGenerator(const BaseCodeGenerator& other) = default;
-		BaseCodeGenerator(BaseCodeGenerator&& other) noexcept = default;
 		virtual ~BaseCodeGenerator();
 
-		BaseCodeGenerator& operator=(const BaseCodeGenerator& other) = default;
-		BaseCodeGenerator& operator=(BaseCodeGenerator&& other) noexcept = default;
+		BaseCodeGenerator(const BaseCodeGenerator& other)
+			: variableTable(new vector<VariableData*>(*other.variableTable)),
+			  functionTable(new vector<FunctionData*>(*other.functionTable))
+		{
+		}
+
+		BaseCodeGenerator(BaseCodeGenerator&& other) noexcept
+			: variableTable(new vector<VariableData*>(*other.variableTable)),
+			  functionTable(new vector<FunctionData*>(*other.functionTable))
+		{
+		}
+
+		BaseCodeGenerator& operator=(const BaseCodeGenerator& other)
+		{
+			if (this == &other)
+				return *this;
+			variableTable = new vector<VariableData*>(*other.variableTable);
+			functionTable = new vector<FunctionData*>(*other.functionTable);
+			return *this;
+		}
+
+		BaseCodeGenerator& operator=(BaseCodeGenerator&& other) noexcept
+		{
+			if (this == &other)
+				return *this;
+			variableTable = new vector<VariableData*>(*other.variableTable);
+			functionTable = new vector<FunctionData*>(*other.functionTable);
+			return *this;
+		}
 
 		vector<VariableData*>* getVariableTable() const;
 		vector<FunctionData*>* getFunctionTable() const;
