@@ -1,9 +1,5 @@
 #pragma once
 
-#include <fstream>
-#include <string>
-#include <vector>
-#include <optional>
 #include "GlobalVars.h"
 #include "TokenType.h"
 
@@ -18,6 +14,8 @@ namespace WadeSpace
 		int size;
 		bool pointer;
 		unsigned long long arraySize;
+		_VariableData() = default;
+		~_VariableData() = default;
 	} VariableData;
 
 	typedef struct _FunctionData
@@ -26,6 +24,8 @@ namespace WadeSpace
 		TokenType type;
 		int size;
 		vector<VariableData*>* parameters;
+		_FunctionData() = default;
+		~_FunctionData() = default;
 	} FunctionData;
 
 	class BaseCodeGenerator
@@ -33,11 +33,13 @@ namespace WadeSpace
 	public:
 		BaseCodeGenerator();
 		BaseCodeGenerator(vector<VariableData*>* const variable_table, vector<FunctionData*>* const function_table);
-		virtual ~BaseCodeGenerator();
 		BaseCodeGenerator(const BaseCodeGenerator& other) = default;
 		BaseCodeGenerator(BaseCodeGenerator&& other) noexcept = default;
+		virtual ~BaseCodeGenerator();
+
 		BaseCodeGenerator& operator=(const BaseCodeGenerator& other) = default;
 		BaseCodeGenerator& operator=(BaseCodeGenerator&& other) noexcept = default;
+
 		vector<VariableData*>* getVariableTable() const;
 		vector<FunctionData*>* getFunctionTable() const;
 		bool isVariableTable() const;

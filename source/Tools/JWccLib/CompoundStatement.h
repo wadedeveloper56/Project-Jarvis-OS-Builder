@@ -20,20 +20,7 @@ namespace WadeSpace
 		~CompoundStatement() override = default;
 		CompoundStatement(const CompoundStatement& other) = default;
 		CompoundStatement(CompoundStatement&& other) noexcept = default;
-		CompoundStatement& operator=(const CompoundStatement& other)
-		{
-			if (this == &other)
-				return *this;
-			BaseStatement::operator =(other);
-			return *this;
-		}
-
-		CompoundStatement& operator=(CompoundStatement&& other) noexcept
-		{
-			if (this == &other)
-				return *this;
-			BaseStatement::operator =(std::move(other));
-			return *this;
-		}
+		CompoundStatement& operator=(const CompoundStatement& other) = default;
+		CompoundStatement& operator=(CompoundStatement&& other) noexcept = default;
 	};
 }

@@ -34,7 +34,7 @@ namespace WadeSpace
 		BaseStatement() = default;
 		BaseStatement(const BaseStatement& other) = default;
 		BaseStatement(BaseStatement&& other) = default;
-		BaseStatement& operator=(const BaseStatement& other) = default;
+		BaseStatement& operator=(const BaseStatement& other) = default; 
 		BaseStatement& operator=(BaseStatement&& other) = default;
 		virtual ~BaseStatement();
 		[[nodiscard]] TokenPtr getIdentifier() const;
