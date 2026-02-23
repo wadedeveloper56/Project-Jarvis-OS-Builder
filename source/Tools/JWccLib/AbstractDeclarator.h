@@ -11,12 +11,10 @@ namespace WadeSpace
 		AbstractDeclarator();
 		AbstractDeclarator(Pointer* pointer, DirectAbstractDeclarator* directAbstractDeclarator);
 		virtual ~AbstractDeclarator();
-
-		AbstractDeclarator(const AbstractDeclarator& other);
+		AbstractDeclarator(const AbstractDeclarator& other); 
 		AbstractDeclarator(AbstractDeclarator&& other) noexcept;
 		AbstractDeclarator& operator=(const AbstractDeclarator& other);
 		AbstractDeclarator& operator=(AbstractDeclarator&& other) noexcept;
-
 		[[nodiscard]] Pointer* getPointer() const;
 		[[nodiscard]] DirectAbstractDeclarator* getDirectAbstractDeclarator() const;
 		[[nodiscard]] bool isPointer() const;

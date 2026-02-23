@@ -23,6 +23,34 @@ Constant::~Constant()
 	delete strConst;
 }
 
+
+Constant::Constant(const Constant& other)
+	: iConst(other.iConst),
+	fConst(other.fConst),
+	strConst(other.strConst),
+	type(other.type)
+{
+}
+
+Constant::Constant(Constant&& other) noexcept
+	: iConst(other.iConst),
+	fConst(other.fConst),
+	strConst(other.strConst),
+	type(std::move(other.type))
+{
+}
+
+Constant& Constant::operator=(const Constant& other)
+{
+	if (this == &other)
+		return *this;
+	iConst = other.iConst;
+	fConst = other.fConst;
+	strConst = other.strConst;
+	type = other.type;
+	return *this;
+}
+
 TokenPtr Constant::getIConst() const
 {
 	return iConst;

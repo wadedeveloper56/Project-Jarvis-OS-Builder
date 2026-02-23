@@ -127,6 +127,8 @@ namespace WadeSpace
 		{
 			if (this == &other)
 				return *this;
+			delete variableTable;
+			delete functionTable;
 			variableTable = new vector<VariableData*>(*other.variableTable);
 			functionTable = new vector<FunctionData*>(*other.functionTable);
 			return *this;
@@ -136,6 +138,8 @@ namespace WadeSpace
 		{
 			if (this == &other)
 				return *this;
+			delete variableTable;
+			delete functionTable;
 			variableTable = new vector<VariableData*>(*other.variableTable);
 			functionTable = new vector<FunctionData*>(*other.functionTable);
 			return *this;
