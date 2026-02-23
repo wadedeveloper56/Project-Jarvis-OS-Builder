@@ -19,7 +19,7 @@ namespace WadeSpace
 		IterationStatement();
 		virtual ~IterationStatement();
 
-		IterationStatement(const IterationStatement& other)
+		IterationStatement(const IterationStatement& other)  
 			: BaseStatement(other)
 		{
 		}

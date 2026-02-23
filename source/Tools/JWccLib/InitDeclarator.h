@@ -15,6 +15,10 @@ namespace WadeSpace
 		InitDeclarator(Declarator* declarator, Initializer* initializer);
 		InitDeclarator();
 		virtual ~InitDeclarator();
+		InitDeclarator(const InitDeclarator& other);
+		InitDeclarator(InitDeclarator&& other) noexcept;
+		InitDeclarator& operator=(const InitDeclarator& other);
+		InitDeclarator& operator=(InitDeclarator&& other) noexcept;
 		Declarator* getDeclarator() const;
 		Initializer* getInitializer() const;
 		string getVariableName() const;

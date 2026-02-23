@@ -22,6 +22,40 @@ InitDeclarator::~InitDeclarator()
 	delete initializer;
 }
 
+InitDeclarator::InitDeclarator(const InitDeclarator& other)
+	: declarator(new Declarator(*other.declarator)),
+	  initializer(new Initializer(*other.initializer))
+{
+}
+
+InitDeclarator::InitDeclarator(InitDeclarator&& other) noexcept
+	: declarator(new Declarator(*other.declarator)),
+	  initializer(new Initializer(*other.initializer))
+{
+}
+
+InitDeclarator& InitDeclarator::operator=(const InitDeclarator& other)
+{
+	if (this == &other)
+		return *this;
+	delete declarator;
+	delete initializer;
+	declarator = new Declarator(*other.declarator);
+	initializer = new Initializer(*other.initializer);
+	return *this;
+}
+
+InitDeclarator& InitDeclarator::operator=(InitDeclarator&& other) noexcept
+{
+	if (this == &other)
+		return *this;
+	delete declarator;
+	delete initializer;
+	declarator = new Declarator(*other.declarator);
+	initializer = new Initializer(*other.initializer);
+	return *this;
+}
+
 Declarator* InitDeclarator::getDeclarator() const
 {
 	return declarator;

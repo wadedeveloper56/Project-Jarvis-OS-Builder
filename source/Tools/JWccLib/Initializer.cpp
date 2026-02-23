@@ -18,6 +18,36 @@ Initializer::Initializer() : assignmentExpression(nullptr), initializerList(null
 {
 }
 
+Initializer::Initializer(const Initializer& other)
+	: assignmentExpression(new Expression(*other.assignmentExpression)),
+	initializerList(new vector<Initializer*>(*other.initializerList))
+{
+}
+
+Initializer::Initializer(Initializer&& other) noexcept
+	: assignmentExpression(new Expression(*other.assignmentExpression)),
+	initializerList(new vector<Initializer*>(*other.initializerList))
+{
+}
+
+Initializer& Initializer::operator=(const Initializer& other)
+{
+	if (this == &other)
+		return *this;
+	assignmentExpression = new Expression(*other.assignmentExpression);
+	initializerList = new vector<Initializer*>(*other.initializerList);
+	return *this;
+}
+
+Initializer& Initializer::operator=(Initializer&& other) noexcept
+{
+	if (this == &other)
+		return *this;
+	assignmentExpression = new Expression(*other.assignmentExpression);
+	initializerList = new vector<Initializer*>(*other.initializerList);
+	return *this;
+}
+
 Initializer::~Initializer()
 {
 	delete assignmentExpression;
