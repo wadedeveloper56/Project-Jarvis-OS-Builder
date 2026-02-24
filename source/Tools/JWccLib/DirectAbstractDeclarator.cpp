@@ -62,23 +62,29 @@ vector<DirectAbstractDeclaratorNode*>* DirectAbstractDeclarator::getList() const
 }
 
 DirectAbstractDeclarator::DirectAbstractDeclarator(const DirectAbstractDeclarator& other)
-	: abstractDeclarator(new AbstractDeclarator(*other.abstractDeclarator)),
-	list(new vector<DirectAbstractDeclaratorNode*>(*other.list))
 {
+	delete abstractDeclarator;
+	delete list;
+	abstractDeclarator = other.abstractDeclarator ? new AbstractDeclarator(*other.abstractDeclarator) : nullptr;
+	list = other.list ? new vector<DirectAbstractDeclaratorNode*>(*other.list) : nullptr;
 }
 
 DirectAbstractDeclarator::DirectAbstractDeclarator(DirectAbstractDeclarator&& other) noexcept
-	: abstractDeclarator(new AbstractDeclarator(*other.abstractDeclarator)),
-	list(new vector<DirectAbstractDeclaratorNode*>(*other.list))
 {
+	delete abstractDeclarator;
+	delete list;
+	abstractDeclarator = other.abstractDeclarator ? new AbstractDeclarator(*other.abstractDeclarator) : nullptr;
+	list = other.list ? new vector<DirectAbstractDeclaratorNode*>(*other.list) : nullptr;
 }
 
 DirectAbstractDeclarator& DirectAbstractDeclarator::operator=(const DirectAbstractDeclarator& other)
 {
 	if (this == &other)
 		return *this;
-	abstractDeclarator = new AbstractDeclarator(*other.abstractDeclarator);
-	list = new vector<DirectAbstractDeclaratorNode*>(*other.list);
+	delete abstractDeclarator;
+	delete list;
+	abstractDeclarator = other.abstractDeclarator ? new AbstractDeclarator(*other.abstractDeclarator) : nullptr;
+	list = other.list ? new vector<DirectAbstractDeclaratorNode*>(*other.list) : nullptr;
 	return *this;
 }
 
@@ -86,8 +92,10 @@ DirectAbstractDeclarator& DirectAbstractDeclarator::operator=(DirectAbstractDecl
 {
 	if (this == &other)
 		return *this;
-	abstractDeclarator = new AbstractDeclarator(*other.abstractDeclarator);
-	list = new vector<DirectAbstractDeclaratorNode*>(*other.list);
+	delete abstractDeclarator;
+	delete list;
+	abstractDeclarator = other.abstractDeclarator ? new AbstractDeclarator(*other.abstractDeclarator) : nullptr;
+	list = other.list ? new vector<DirectAbstractDeclaratorNode*>(*other.list) : nullptr;
 	return *this;
 }
 

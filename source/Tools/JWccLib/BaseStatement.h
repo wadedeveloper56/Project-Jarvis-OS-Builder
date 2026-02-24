@@ -12,7 +12,7 @@ namespace WadeSpace
 	class BaseStatement
 	{
 	public:
-		BaseStatement(TokenType op, TokenPtr identifier, Expression* const exp, Expression* const contExp,
+		BaseStatement(TokenType op, TokenPtr identifier, Expression* const exp, Expression* const contExp, 
 			BaseStatement* const statement, BaseStatement* const es1, BaseStatement* const es2,
 			BaseStatement* const statement2, vector<BaseStatement*>* const statementList,
 			vector<Declaration*>* const declarationList);

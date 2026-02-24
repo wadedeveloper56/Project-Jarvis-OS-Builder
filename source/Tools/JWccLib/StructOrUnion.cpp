@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "StructOrUnion.h"
 
-using namespace WadeSpace;
+using namespace WadeSpace; 
 
 StructOrUnion::StructOrUnion(TokenType type): type(type)
 {

@@ -13,7 +13,75 @@ ParameterTypeList::ParameterTypeList() : vectorParameterDeclaration(nullptr), el
 
 ParameterTypeList::~ParameterTypeList()
 {
-	delete vectorParameterDeclaration;
+	if (vectorParameterDeclaration != nullptr)
+	{
+		for (auto paramDecl : *vectorParameterDeclaration)
+		{
+			delete paramDecl;
+		}
+		delete vectorParameterDeclaration;
+	}
+}
+
+ParameterTypeList::ParameterTypeList(const ParameterTypeList& other)
+{
+	if (vectorParameterDeclaration != nullptr)
+	{
+		for (auto paramDecl : *vectorParameterDeclaration)
+		{
+			delete paramDecl;
+		}
+		delete vectorParameterDeclaration;
+	}
+	vectorParameterDeclaration = other.vectorParameterDeclaration ? new vector<ParameterDeclaration*>(*other.vectorParameterDeclaration) : nullptr;
+	ellipsis = other.ellipsis;
+}
+
+ParameterTypeList::ParameterTypeList(ParameterTypeList&& other) noexcept
+{
+	if (vectorParameterDeclaration != nullptr)
+	{
+		for (auto paramDecl : *vectorParameterDeclaration)
+		{
+			delete paramDecl;
+		}
+		delete vectorParameterDeclaration;
+	}
+	vectorParameterDeclaration = other.vectorParameterDeclaration ? new vector<ParameterDeclaration*>(*other.vectorParameterDeclaration) : nullptr;
+	ellipsis = other.ellipsis;
+}
+
+ParameterTypeList& ParameterTypeList::operator=(const ParameterTypeList& other)
+{
+	if (this == &other)
+		return *this;
+	if (vectorParameterDeclaration != nullptr)
+	{
+		for (auto paramDecl : *vectorParameterDeclaration)
+		{
+			delete paramDecl;
+		}
+		delete vectorParameterDeclaration;
+	}
+	vectorParameterDeclaration = other.vectorParameterDeclaration ? new vector<ParameterDeclaration*>(*other.vectorParameterDeclaration) : nullptr;
+	ellipsis = other.ellipsis;
+	return *this;
+}
+
+ParameterTypeList& ParameterTypeList::operator=(ParameterTypeList&& other) noexcept
+{
+	if (this == &other)
+		return *this;
+	if (vectorParameterDeclaration != nullptr)
+	{
+		for (auto paramDecl : *vectorParameterDeclaration)
+		{
+			delete paramDecl;
+		}
+		delete vectorParameterDeclaration;
+	}	vectorParameterDeclaration = other.vectorParameterDeclaration ? new vector<ParameterDeclaration*>(*other.vectorParameterDeclaration) : nullptr;
+	ellipsis = other.ellipsis;
+	return *this;
 }
 
 vector<ParameterDeclaration*>* ParameterTypeList::getVectorParameterDeclaration() const

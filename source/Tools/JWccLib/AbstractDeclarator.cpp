@@ -18,7 +18,7 @@ AbstractDeclarator::AbstractDeclarator()
 
 AbstractDeclarator::~AbstractDeclarator()
 {
-	delete pointer;
+	delete pointer;   
 	delete directAbstractDeclarator;
 }
 

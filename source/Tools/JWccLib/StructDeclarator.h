@@ -19,6 +19,10 @@ namespace WadeSpace
 		virtual ~StructDeclarator();
 		Declarator* getDeclarator() const;
 		Expression* getConstantExpression() const;
+		StructDeclarator(const StructDeclarator& other);
+		StructDeclarator(StructDeclarator&& other) noexcept;
+		StructDeclarator& operator=(const StructDeclarator& other);
+		StructDeclarator& operator=(StructDeclarator&& other) noexcept;
 
 	private:
 		Declarator* declarator;

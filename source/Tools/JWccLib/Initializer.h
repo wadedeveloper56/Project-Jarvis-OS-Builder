@@ -12,12 +12,10 @@ namespace WadeSpace
 		Initializer(Expression* assignmentExpression);
 		Initializer(vector<Initializer*>* initializerList);
 		Initializer();
-
 		Initializer(const Initializer& other);
 		Initializer(Initializer&& other) noexcept;
 		Initializer& operator=(const Initializer& other);
 		Initializer& operator=(Initializer&& other) noexcept;
-		
 		virtual ~Initializer();
 		Expression* getAssignmentExpression() const;
 		vector<Initializer*>* getInitializerList() const;

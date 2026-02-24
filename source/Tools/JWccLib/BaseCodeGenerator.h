@@ -11,7 +11,7 @@ namespace WadeSpace
 	{
 		string name;
 		TokenType type;
-		int size;
+		int size; 
 		bool pointer;
 		unsigned long long arraySize;
 		_VariableData() = default;
@@ -110,41 +110,10 @@ namespace WadeSpace
 		BaseCodeGenerator();
 		BaseCodeGenerator(vector<VariableData*>* const variable_table, vector<FunctionData*>* const function_table);
 		virtual ~BaseCodeGenerator();
-
-		BaseCodeGenerator(const BaseCodeGenerator& other)
-			: variableTable(new vector<VariableData*>(*other.variableTable)),
-			  functionTable(new vector<FunctionData*>(*other.functionTable))
-		{
-		}
-
-		BaseCodeGenerator(BaseCodeGenerator&& other) noexcept
-			: variableTable(new vector<VariableData*>(*other.variableTable)),
-			  functionTable(new vector<FunctionData*>(*other.functionTable))
-		{
-		}
-
-		BaseCodeGenerator& operator=(const BaseCodeGenerator& other)
-		{
-			if (this == &other)
-				return *this;
-			delete variableTable;
-			delete functionTable;
-			variableTable = new vector<VariableData*>(*other.variableTable);
-			functionTable = new vector<FunctionData*>(*other.functionTable);
-			return *this;
-		}
-
-		BaseCodeGenerator& operator=(BaseCodeGenerator&& other) noexcept
-		{
-			if (this == &other)
-				return *this;
-			delete variableTable;
-			delete functionTable;
-			variableTable = new vector<VariableData*>(*other.variableTable);
-			functionTable = new vector<FunctionData*>(*other.functionTable);
-			return *this;
-		}
-
+		BaseCodeGenerator(const BaseCodeGenerator& other);
+		BaseCodeGenerator(BaseCodeGenerator&& other) noexcept;
+		BaseCodeGenerator& operator=(const BaseCodeGenerator& other);
+		BaseCodeGenerator& operator=(BaseCodeGenerator&& other) noexcept;
 		vector<VariableData*>* getVariableTable() const;
 		vector<FunctionData*>* getFunctionTable() const;
 		bool isVariableTable() const;

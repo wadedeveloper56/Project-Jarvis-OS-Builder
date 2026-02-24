@@ -1,8 +1,5 @@
 #pragma once
 
-#include <string>
-#include <vector>
-#include <optional>
 #include "TokenType.h"
 #include "FunctionDefinition.h"
 #include "Declaration.h"
@@ -19,37 +16,10 @@ namespace WadeSpace
 		ExternalDeclaration();
 		virtual ~ExternalDeclaration();
 		string toString();
-
-		ExternalDeclaration(const ExternalDeclaration& other)
-			: functionDefinition(new FunctionDefinition(*other.functionDefinition)),
-			  declaration(new Declaration(*other.declaration))
-		{
-		}
-
-		ExternalDeclaration(ExternalDeclaration&& other) noexcept
-			: functionDefinition(new FunctionDefinition(*other.functionDefinition)),
-			  declaration(new Declaration(*other.declaration))
-		{
-		}
-
-		ExternalDeclaration& operator=(const ExternalDeclaration& other)
-		{
-			if (this == &other)
-				return *this;
-			functionDefinition = new FunctionDefinition(*other.functionDefinition);
-			declaration = new Declaration(*other.declaration);
-			return *this;
-		}
-
-		ExternalDeclaration& operator=(ExternalDeclaration&& other) noexcept
-		{
-			if (this == &other)
-				return *this;
-			functionDefinition = new FunctionDefinition(*other.functionDefinition);
-			declaration = new Declaration(*other.declaration);
-			return *this;
-		}
-
+		ExternalDeclaration(const ExternalDeclaration& other);
+		ExternalDeclaration(ExternalDeclaration&& other) noexcept;
+		ExternalDeclaration& operator=(const ExternalDeclaration& other);
+		ExternalDeclaration& operator=(ExternalDeclaration&& other) noexcept;
 		bool isFunction() const;
 		bool isDeclaration() const;
 		FunctionDefinition* getFunction() const;

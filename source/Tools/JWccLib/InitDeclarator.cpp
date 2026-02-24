@@ -7,8 +7,7 @@ InitDeclarator::InitDeclarator(Declarator* declarator) : declarator(declarator),
 {
 }
 
-InitDeclarator::InitDeclarator(Declarator* declarator, Initializer* initializer) : declarator(declarator),
-	initializer(initializer)
+InitDeclarator::InitDeclarator(Declarator* declarator, Initializer* initializer) : declarator(declarator), initializer(initializer)
 {
 }
 
@@ -23,15 +22,19 @@ InitDeclarator::~InitDeclarator()
 }
 
 InitDeclarator::InitDeclarator(const InitDeclarator& other)
-	: declarator(new Declarator(*other.declarator)),
-	  initializer(new Initializer(*other.initializer))
 {
+	delete declarator;
+	delete initializer;
+	declarator = other.declarator ? new Declarator(*other.declarator) : nullptr;
+	initializer = other.initializer ? new Initializer(*other.initializer) : nullptr;
 }
 
 InitDeclarator::InitDeclarator(InitDeclarator&& other) noexcept
-	: declarator(new Declarator(*other.declarator)),
-	  initializer(new Initializer(*other.initializer))
 {
+	delete declarator;
+	delete initializer;
+	declarator = other.declarator ? new Declarator(*other.declarator) : nullptr;
+	initializer = other.initializer ? new Initializer(*other.initializer) : nullptr;
 }
 
 InitDeclarator& InitDeclarator::operator=(const InitDeclarator& other)
@@ -40,8 +43,8 @@ InitDeclarator& InitDeclarator::operator=(const InitDeclarator& other)
 		return *this;
 	delete declarator;
 	delete initializer;
-	declarator = new Declarator(*other.declarator);
-	initializer = new Initializer(*other.initializer);
+	declarator = other.declarator ? new Declarator(*other.declarator) : nullptr;
+	initializer = other.initializer ? new Initializer(*other.initializer) : nullptr;
 	return *this;
 }
 
@@ -51,8 +54,8 @@ InitDeclarator& InitDeclarator::operator=(InitDeclarator&& other) noexcept
 		return *this;
 	delete declarator;
 	delete initializer;
-	declarator = new Declarator(*other.declarator);
-	initializer = new Initializer(*other.initializer);
+	declarator = other.declarator ? new Declarator(*other.declarator) : nullptr;
+	initializer = other.initializer ? new Initializer(*other.initializer) : nullptr;
 	return *this;
 }
 

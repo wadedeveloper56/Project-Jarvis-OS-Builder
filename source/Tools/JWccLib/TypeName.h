@@ -1,8 +1,5 @@
 #pragma once
 
-#include <string>
-#include <vector>
-#include <optional>
 #include "SpecifierQualifierList.h"
 #include "AbstractDeclarator.h"
 
@@ -17,6 +14,10 @@ namespace WadeSpace
 		virtual ~TypeName();
 		SpecifierQualifierList* getSpecifierQualifierList() const;
 		AbstractDeclarator* getAbstractDeclarator() const;
+		TypeName(const TypeName& other);
+		TypeName(TypeName&& other) noexcept;
+		TypeName& operator=(const TypeName& other);
+		TypeName& operator=(TypeName&& other) noexcept;
 
 	private:
 		SpecifierQualifierList* specifierQualifierList;

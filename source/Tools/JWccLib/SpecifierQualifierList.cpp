@@ -3,8 +3,7 @@
 
 using namespace WadeSpace;
 
-SpecifierQualifierList::SpecifierQualifierList(SpecifierQualifierList* specifierQualifierList, TypeSpecifier* typeSpecifier) : specifierQualifierList(specifierQualifierList), typeSpecifier(typeSpecifier),
-typeQualifier(nullptr)
+SpecifierQualifierList::SpecifierQualifierList(SpecifierQualifierList* specifierQualifierList, TypeSpecifier* typeSpecifier) : specifierQualifierList(specifierQualifierList), typeSpecifier(typeSpecifier), typeQualifier(nullptr)
 {
 }
 
@@ -45,3 +44,50 @@ TypeQualifier* SpecifierQualifierList::getTypeQualifier() const
 {
 	return typeQualifier;
 }
+
+SpecifierQualifierList::SpecifierQualifierList(const SpecifierQualifierList& other)
+{
+	delete specifierQualifierList;
+	delete typeSpecifier;
+	delete typeQualifier;
+	specifierQualifierList = other.specifierQualifierList ? new SpecifierQualifierList(*other.specifierQualifierList) : nullptr;
+	typeSpecifier = other.typeSpecifier ? new TypeSpecifier(*other.typeSpecifier) : nullptr;
+	typeQualifier = other.typeQualifier ? new TypeQualifier(*other.typeQualifier) : nullptr;;
+}
+
+SpecifierQualifierList::SpecifierQualifierList(SpecifierQualifierList&& other) noexcept
+{
+	delete specifierQualifierList;
+	delete typeSpecifier;
+	delete typeQualifier;
+	specifierQualifierList = other.specifierQualifierList ? new SpecifierQualifierList(*other.specifierQualifierList) : nullptr;
+	typeSpecifier = other.typeSpecifier ? new TypeSpecifier(*other.typeSpecifier) : nullptr;
+	typeQualifier = other.typeQualifier ? new TypeQualifier(*other.typeQualifier) : nullptr;;
+}
+
+SpecifierQualifierList& SpecifierQualifierList::operator=(const SpecifierQualifierList& other)
+{
+	if (this == &other)
+		return *this;
+	delete specifierQualifierList;
+	delete typeSpecifier;
+	delete typeQualifier;
+	specifierQualifierList = other.specifierQualifierList ? new SpecifierQualifierList(*other.specifierQualifierList) : nullptr;
+	typeSpecifier = other.typeSpecifier ? new TypeSpecifier(*other.typeSpecifier) : nullptr;
+	typeQualifier = other.typeQualifier ? new TypeQualifier(*other.typeQualifier) : nullptr;
+	return *this;
+}
+
+SpecifierQualifierList& SpecifierQualifierList::operator=(SpecifierQualifierList&& other) noexcept
+{
+	if (this == &other)
+		return *this;
+	delete specifierQualifierList;
+	delete typeSpecifier;
+	delete typeQualifier;
+	specifierQualifierList = other.specifierQualifierList ? new SpecifierQualifierList(*other.specifierQualifierList) : nullptr;
+	typeSpecifier = other.typeSpecifier ? new TypeSpecifier(*other.typeSpecifier) : nullptr;
+	typeQualifier = other.typeQualifier ? new TypeQualifier(*other.typeQualifier) : nullptr;;
+	return *this;
+}
+

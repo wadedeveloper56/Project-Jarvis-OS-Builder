@@ -4,7 +4,7 @@
 using namespace WadeSpace;
 using namespace std;
 
-Constant::Constant(const TokenPtr iConst, const TokenPtr fConst, const TokenPtr strConst, const optional<TokenType>& type)
+Constant::Constant(const TokenPtr iConst, const TokenPtr fConst, const TokenPtr strConst, const optional<TokenType>& type) 
 	: iConst(iConst),
 	fConst(fConst),
 	strConst(strConst),
@@ -22,7 +22,6 @@ Constant::~Constant()
 	delete fConst;
 	delete strConst;
 }
-
 
 Constant::Constant(const Constant& other)
 	: iConst(other.iConst),

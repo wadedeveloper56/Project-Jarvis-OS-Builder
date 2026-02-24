@@ -23,3 +23,28 @@ LabeledStatement::LabeledStatement() : BaseStatement()
 LabeledStatement::~LabeledStatement()
 {
 }
+
+LabeledStatement::LabeledStatement(const LabeledStatement& other) : BaseStatement(other)
+{
+}
+
+LabeledStatement::LabeledStatement(LabeledStatement&& other) noexcept : BaseStatement(std::move(other))
+{
+}
+
+LabeledStatement& LabeledStatement::operator=(const LabeledStatement& other)
+{
+	if (this == &other)
+		return *this;
+	BaseStatement::operator =(other);
+	return *this;
+}
+
+LabeledStatement& LabeledStatement::operator=(LabeledStatement&& other) noexcept
+{
+	if (this == &other)
+		return *this;
+	BaseStatement::operator =(std::move(other));
+	return *this;
+}
+

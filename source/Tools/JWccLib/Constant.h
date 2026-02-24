@@ -18,7 +18,7 @@ namespace WadeSpace
 		Constant(const TokenPtr iConst, const TokenPtr fConst, const TokenPtr strConst, const optional<TokenType>& type);
 		Constant(const Constant& other);
 		Constant(Constant&& other) noexcept;
-		virtual ~Constant();
+		virtual ~Constant(); 
 		Constant& operator=(const Constant& other);
 		Constant& operator=(Constant&& other) noexcept;
 		[[nodiscard]] TokenPtr getIConst() const;

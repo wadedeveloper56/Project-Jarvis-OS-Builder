@@ -15,7 +15,7 @@ namespace WadeSpace
 	class DirectDeclarator
 	{
 	public:
-		DirectDeclarator(
+		DirectDeclarator( 
 			TokenPtr identifier, 
 			TokenPtr token1,
 			TokenPtr token2,

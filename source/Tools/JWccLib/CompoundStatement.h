@@ -15,7 +15,7 @@ namespace WadeSpace
 	public:
 		CompoundStatement() = default;
 		explicit CompoundStatement(vector<BaseStatement*>* const list);
-		explicit CompoundStatement(vector<Declaration*>* list);
+		explicit CompoundStatement(vector<Declaration*>* list); 
 		explicit CompoundStatement(vector<BaseStatement*>* sList, vector<Declaration*>* dList);
 		~CompoundStatement() override = default;
 		CompoundStatement(const CompoundStatement& other);

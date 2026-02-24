@@ -93,13 +93,13 @@ typedef struct Token
 	Token(const Token& other)
 	{
 		delete data;
-		data = new TokData(*other.data);
+		data = other.data ? new TokData(*other.data) : nullptr;
 	}
 
 	Token(Token&& other) noexcept
 	{
 		delete data;
-		data = new TokData(*other.data);
+		data = other.data ? new TokData(*other.data) : nullptr;;
 	}
 
 	Token& operator=(const Token& other)
@@ -107,16 +107,16 @@ typedef struct Token
 		if (this == &other)
 			return *this;
 		delete data;
-		data = new TokData(*other.data);
+		data = other.data ? new TokData(*other.data) : nullptr;
 		return *this;
 	}
-
+ 
 	Token& operator=(Token&& other) noexcept
 	{
 		if (this == &other)
 			return *this;
 		delete data;
-		data = new TokData(*other.data);
+		data = other.data ? new TokData(*other.data) : nullptr;
 		return *this;
 	}
 

@@ -10,8 +10,7 @@ SelectionStatement::SelectionStatement(TokenType op, Expression* exp, BaseStatem
 {
 }
 
-SelectionStatement::SelectionStatement(TokenType op, Expression* exp, BaseStatement* statement) : BaseStatement(
-	op, exp, statement)
+SelectionStatement::SelectionStatement(TokenType op, Expression* exp, BaseStatement* statement) : BaseStatement(op, exp, statement)
 {
 }
 
@@ -22,3 +21,28 @@ SelectionStatement::SelectionStatement() : BaseStatement()
 SelectionStatement::~SelectionStatement()
 {
 }
+
+SelectionStatement::SelectionStatement(const SelectionStatement& other): BaseStatement(other)
+{
+}
+
+SelectionStatement::SelectionStatement(SelectionStatement&& other) noexcept: BaseStatement(std::move(other))
+{
+}
+
+SelectionStatement& SelectionStatement::operator=(const SelectionStatement& other)
+{
+	if (this == &other)
+		return *this;
+	BaseStatement::operator =(other);
+	return *this;
+}
+
+SelectionStatement& SelectionStatement::operator=(SelectionStatement&& other) noexcept
+{
+	if (this == &other)
+		return *this;
+	BaseStatement::operator =(std::move(other));
+	return *this;
+}
+

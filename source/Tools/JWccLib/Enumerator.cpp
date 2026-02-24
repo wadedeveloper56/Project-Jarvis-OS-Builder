@@ -29,23 +29,29 @@ TokenPtr Enumerator::getIdentifier() const
 }
 
 Enumerator::Enumerator(const Enumerator& other)
-	: identifier(new Token(*other.identifier)),
-	constantExpression(new Expression(*other.constantExpression))
 {
+	delete identifier;
+	delete constantExpression;
+	identifier = other.identifier ? new Token(*other.identifier) : nullptr;
+	constantExpression = other.constantExpression ? new Expression(*other.constantExpression) : nullptr;
 }
 
 Enumerator::Enumerator(Enumerator&& other) noexcept
-	: identifier(new Token(*other.identifier)),
-	constantExpression(new Expression(*other.constantExpression))
 {
+	delete identifier;
+	delete constantExpression;
+	identifier = other.identifier ? new Token(*other.identifier) : nullptr;
+	constantExpression = other.constantExpression ? new Expression(*other.constantExpression) : nullptr;
 }
 
 Enumerator& Enumerator::operator=(const Enumerator& other)
 {
 	if (this == &other)
 		return *this;
-	identifier = new Token(*other.identifier);
-	constantExpression = new Expression(*other.constantExpression);
+	delete identifier;
+	delete constantExpression;
+	identifier = other.identifier ? new Token(*other.identifier) : nullptr;
+	constantExpression = other.constantExpression ? new Expression(*other.constantExpression) : nullptr;
 	return *this;
 }
 
@@ -53,8 +59,10 @@ Enumerator& Enumerator::operator=(Enumerator&& other) noexcept
 {
 	if (this == &other)
 		return *this;
-	identifier = new Token(*other.identifier);
-	constantExpression = new Expression(*other.constantExpression);
+	delete identifier;
+	delete constantExpression;
+	identifier = other.identifier ? new Token(*other.identifier) : nullptr;
+	constantExpression = other.constantExpression ? new Expression(*other.constantExpression) : nullptr;
 	return *this;
 }
 

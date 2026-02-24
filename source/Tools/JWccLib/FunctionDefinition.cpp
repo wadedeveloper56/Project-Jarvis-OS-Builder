@@ -76,29 +76,62 @@ BaseStatement* FunctionDefinition::getBaseStatement() const
 }
 
 FunctionDefinition::FunctionDefinition(const FunctionDefinition& other)
-	: declarationSpecifiers(new DeclarationSpecifiers(*other.declarationSpecifiers)),
-	declarator(new Declarator(*other.declarator)),
-	vectorDeclaration(new vector<Declaration*>(*other.vectorDeclaration)),
-	baseStatement(new BaseStatement(*other.baseStatement))
 {
+	delete declarationSpecifiers;
+	delete declarator;
+	if (vectorDeclaration != NULL)
+	{
+		for (Declaration* ptr : *vectorDeclaration)
+		{
+			delete ptr;
+		}
+	}
+	delete vectorDeclaration;
+	delete baseStatement;
+	declarationSpecifiers = other.declarationSpecifiers ? new DeclarationSpecifiers(*other.declarationSpecifiers) : nullptr;
+	declarator = other.declarator ? new Declarator(*other.declarator) : nullptr;
+	vectorDeclaration = other.vectorDeclaration ? new vector<Declaration*>(*other.vectorDeclaration) : nullptr;
+	baseStatement = other.baseStatement ? new BaseStatement(*other.baseStatement) : nullptr;
 }
 
 FunctionDefinition::FunctionDefinition(FunctionDefinition&& other) noexcept
-	: declarationSpecifiers(new DeclarationSpecifiers(*other.declarationSpecifiers)),
-	declarator(new Declarator(*other.declarator)),
-	vectorDeclaration(new vector<Declaration*>(*other.vectorDeclaration)),
-	baseStatement(new BaseStatement(*other.baseStatement))
 {
+	delete declarationSpecifiers;
+	delete declarator;
+	if (vectorDeclaration != NULL)
+	{
+		for (Declaration* ptr : *vectorDeclaration)
+		{
+			delete ptr;
+		}
+	}
+	delete vectorDeclaration;
+	delete baseStatement;
+	declarationSpecifiers = other.declarationSpecifiers ? new DeclarationSpecifiers(*other.declarationSpecifiers) : nullptr;
+	declarator = other.declarator ? new Declarator(*other.declarator) : nullptr;
+	vectorDeclaration = other.vectorDeclaration ? new vector<Declaration*>(*other.vectorDeclaration) : nullptr;
+	baseStatement = other.baseStatement ? new BaseStatement(*other.baseStatement) : nullptr;
 }
 
 FunctionDefinition& FunctionDefinition::operator=(const FunctionDefinition& other)
 {
 	if (this == &other)
 		return *this;
-	declarationSpecifiers = new DeclarationSpecifiers(*other.declarationSpecifiers);
-	declarator = new Declarator(*other.declarator);
-	vectorDeclaration = new vector<Declaration*>(*other.vectorDeclaration);
-	baseStatement = new BaseStatement(*other.baseStatement);
+	delete declarationSpecifiers;
+	delete declarator;
+	if (vectorDeclaration != NULL)
+	{
+		for (Declaration* ptr : *vectorDeclaration)
+		{
+			delete ptr;
+		}
+	}
+	delete vectorDeclaration;
+	delete baseStatement;
+	declarationSpecifiers = other.declarationSpecifiers ? new DeclarationSpecifiers(*other.declarationSpecifiers) : nullptr;
+	declarator = other.declarator ? new Declarator(*other.declarator) : nullptr;
+	vectorDeclaration = other.vectorDeclaration ? new vector<Declaration*>(*other.vectorDeclaration) : nullptr;
+	baseStatement = other.baseStatement ? new BaseStatement(*other.baseStatement) : nullptr;
 	return *this;
 }
 
@@ -106,10 +139,21 @@ FunctionDefinition& FunctionDefinition::operator=(FunctionDefinition&& other) no
 {
 	if (this == &other)
 		return *this;
-	declarationSpecifiers = new DeclarationSpecifiers(*other.declarationSpecifiers);
-	declarator = new Declarator(*other.declarator);
-	vectorDeclaration = new vector<Declaration*>(*other.vectorDeclaration);
-	baseStatement = new BaseStatement(*other.baseStatement);
+	delete declarationSpecifiers;
+	delete declarator;
+	if (vectorDeclaration != NULL)
+	{
+		for (Declaration* ptr : *vectorDeclaration)
+		{
+			delete ptr;
+		}
+	}
+	delete vectorDeclaration;
+	delete baseStatement;
+	declarationSpecifiers = other.declarationSpecifiers ? new DeclarationSpecifiers(*other.declarationSpecifiers) : nullptr;
+	declarator = other.declarator ? new Declarator(*other.declarator) : nullptr;
+	vectorDeclaration = other.vectorDeclaration ? new vector<Declaration*>(*other.vectorDeclaration) : nullptr;
+	baseStatement = other.baseStatement ? new BaseStatement(*other.baseStatement) : nullptr;
 	return *this;
 }
 

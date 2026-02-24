@@ -9,7 +9,7 @@ namespace WadeSpace
 	{
 	public:
 		AbstractDeclarator();
-		AbstractDeclarator(Pointer* pointer, DirectAbstractDeclarator* directAbstractDeclarator);
+		AbstractDeclarator(Pointer* pointer, DirectAbstractDeclarator* directAbstractDeclarator); 
 		virtual ~AbstractDeclarator();
 		AbstractDeclarator(const AbstractDeclarator& other); 
 		AbstractDeclarator(AbstractDeclarator&& other) noexcept;

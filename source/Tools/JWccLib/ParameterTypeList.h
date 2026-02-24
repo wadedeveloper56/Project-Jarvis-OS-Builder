@@ -12,42 +12,13 @@ namespace WadeSpace
 	class ParameterTypeList
 	{
 	public:
-		ParameterTypeList(vector<ParameterDeclaration*>* vectorParameterDeclaration, bool ellipsis);
 		ParameterTypeList();
+		ParameterTypeList(vector<ParameterDeclaration*>* vectorParameterDeclaration, bool ellipsis);
 		virtual ~ParameterTypeList();
-
-		ParameterTypeList(const ParameterTypeList& other)
-			: vectorParameterDeclaration(new vector<ParameterDeclaration*>(*other.vectorParameterDeclaration)),
-			  ellipsis(other.ellipsis)
-		{
-		}
-
-		ParameterTypeList(ParameterTypeList&& other) noexcept
-			: vectorParameterDeclaration(new vector<ParameterDeclaration*>(*other.vectorParameterDeclaration)),
-			  ellipsis(other.ellipsis)
-		{
-		}
-
-		ParameterTypeList& operator=(const ParameterTypeList& other)
-		{
-			if (this == &other)
-				return *this;
-			delete vectorParameterDeclaration;
-			vectorParameterDeclaration = new vector<ParameterDeclaration*>(*other.vectorParameterDeclaration);
-			ellipsis = other.ellipsis;
-			return *this;
-		}
-
-		ParameterTypeList& operator=(ParameterTypeList&& other) noexcept
-		{
-			if (this == &other)
-				return *this;
-			delete vectorParameterDeclaration;
-			vectorParameterDeclaration = new vector<ParameterDeclaration*>(*other.vectorParameterDeclaration);
-			ellipsis = other.ellipsis;
-			return *this;
-		}
-
+		ParameterTypeList(const ParameterTypeList& other);
+		ParameterTypeList(ParameterTypeList&& other) noexcept;
+		ParameterTypeList& operator=(const ParameterTypeList& other);
+		ParameterTypeList& operator=(ParameterTypeList&& other) noexcept;
 		vector<ParameterDeclaration*>* getVectorParameterDeclaration() const;
 		bool getEllipsis() const;
 	private:

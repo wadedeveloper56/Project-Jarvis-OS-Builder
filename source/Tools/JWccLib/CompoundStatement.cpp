@@ -6,7 +6,7 @@ using namespace std;
 
 CompoundStatement::CompoundStatement(vector<BaseStatement*>* const list) : BaseStatement(list)
 {
-}
+} 
 
 CompoundStatement::CompoundStatement(vector<Declaration*>* list) : BaseStatement(list)
 {

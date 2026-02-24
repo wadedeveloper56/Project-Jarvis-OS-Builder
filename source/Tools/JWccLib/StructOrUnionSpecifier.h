@@ -21,6 +21,10 @@ namespace WadeSpace
 		TokenPtr getName() const;
 		TokenPtr getStructOrUnion() const;
 		vector<StructDeclaration*>* getVectorStructDeclaration() const;
+		StructOrUnionSpecifier(const StructOrUnionSpecifier& other);
+		StructOrUnionSpecifier(StructOrUnionSpecifier&& other) noexcept;
+		StructOrUnionSpecifier& operator=(const StructOrUnionSpecifier& other);
+		StructOrUnionSpecifier& operator=(StructOrUnionSpecifier&& other) noexcept;
 
 	private:
 		TokenPtr name;

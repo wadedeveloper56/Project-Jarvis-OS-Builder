@@ -15,7 +15,7 @@ BaseStatement::BaseStatement(TokenType op, TokenPtr identifier, Expression* cons
 	contExp(contExp),
 	statement(statement),
 	es1(es1),
-	es2(es2),
+	es2(es2), 
 	statement2(statement2),
 	statementList(statementList),
 	declarationList(declarationList)
@@ -123,16 +123,16 @@ BaseStatement::~BaseStatement()
 		{
 			delete obj;
 		}
-	}
 	delete statementList;
+	}
 	if (declarationList != nullptr)
 	{
 		for (auto obj : *declarationList)
 		{
 			delete obj;
 		}
-	}
 	delete declarationList;
+	}
 }
 
 TokenPtr BaseStatement::getIdentifier() const
@@ -181,35 +181,104 @@ vector<Declaration*>* BaseStatement::getDeclarationList() const
 }
 
 BaseStatement::BaseStatement(const BaseStatement& other)
-	: identifier(other.identifier ? new Token(*other.identifier) : nullptr),
-	exp(other.exp ? new Expression(*other.exp) : nullptr),
-	contExp(other.contExp ? new Expression(*other.contExp) : nullptr),
-	statement(other.statement ? new BaseStatement(*other.statement) : nullptr),
-	es1(other.es1 ? new BaseStatement(*other.es1) : nullptr),
-	es2(other.es2 ? new BaseStatement(*other.es2) : nullptr),
-	statement2(other.statement2 ? new BaseStatement(*other.statement2) : nullptr),
-	statementList(other.statementList ? new vector<BaseStatement*>(*other.statementList) : nullptr),
-	declarationList(other.declarationList ? new vector<Declaration*>(*other.declarationList) : nullptr)
 {
+	delete exp;
+	delete contExp;
+	delete statement;
+	delete es1;
+	delete es2;
+	delete statement2;
+	delete identifier;
+	if (statementList != nullptr)
+	{
+		for (auto obj : *statementList)
+		{
+			delete obj;
+		}
+		delete statementList;
+	}
+	if (declarationList != nullptr)
+	{
+		for (auto obj : *declarationList)
+		{
+			delete obj;
+		}
+		delete declarationList;
+	}
+	identifier = other.identifier ? new Token(*other.identifier) : nullptr;
+	exp = other.exp ? new Expression(*other.exp) : nullptr;
+	contExp = other.contExp ? new Expression(*other.contExp) : nullptr;
+	statement = other.statement ? new BaseStatement(*other.statement) : nullptr;
+	es1 = other.es1 ? new BaseStatement(*other.es1) : nullptr;
+	es2 = other.es2 ? new BaseStatement(*other.es2) : nullptr;
+	statement2 = other.statement2 ? new BaseStatement(*other.statement2) : nullptr;
+	statementList = other.statementList ? new vector<BaseStatement*>(*other.statementList) : nullptr;
+	declarationList = other.declarationList ? new vector<Declaration*>(*other.declarationList) : nullptr;
 }
 
 BaseStatement::BaseStatement(BaseStatement&& other) noexcept
-	: identifier(other.identifier ? new Token(*other.identifier) : nullptr),
-	exp(other.exp ? new Expression(*other.exp) : nullptr),
-	contExp(other.contExp ? new Expression(*other.contExp) : nullptr),
-	statement(other.statement ? new BaseStatement(*other.statement) : nullptr),
-	es1(other.es1 ? new BaseStatement(*other.es1) : nullptr),
-	es2(other.es2 ? new BaseStatement(*other.es2) : nullptr),
-	statement2(other.statement2 ? new BaseStatement(*other.statement2) : nullptr),
-	statementList(other.statementList ? new vector<BaseStatement*>(*other.statementList) : nullptr),
-	declarationList(other.declarationList ? new vector<Declaration*>(*other.declarationList) : nullptr)
 {
+	delete exp;
+	delete contExp;
+	delete statement;
+	delete es1;
+	delete es2;
+	delete statement2;
+	delete identifier;
+	if (statementList != nullptr)
+	{
+		for (auto obj : *statementList)
+		{
+			delete obj;
+		}
+		delete statementList;
+	}
+	if (declarationList != nullptr)
+	{
+		for (auto obj : *declarationList)
+		{
+			delete obj;
+		}
+		delete declarationList;
+	}
+	identifier = other.identifier ? new Token(*other.identifier) : nullptr;
+	exp = other.exp ? new Expression(*other.exp) : nullptr;
+	contExp = other.contExp ? new Expression(*other.contExp) : nullptr;
+	statement = other.statement ? new BaseStatement(*other.statement) : nullptr;
+	es1 = other.es1 ? new BaseStatement(*other.es1) : nullptr;
+	es2 = other.es2 ? new BaseStatement(*other.es2) : nullptr;
+	statement2 = other.statement2 ? new BaseStatement(*other.statement2) : nullptr;
+	statementList = other.statementList ? new vector<BaseStatement*>(*other.statementList) : nullptr;
+	declarationList = other.declarationList ? new vector<Declaration*>(*other.declarationList) : nullptr;
 }
 
 BaseStatement& BaseStatement::operator=(const BaseStatement& other)
 {
 	if (this == &other)
 		return *this;
+	delete exp;
+	delete contExp;
+	delete statement;
+	delete es1;
+	delete es2;
+	delete statement2;
+	delete identifier;
+	if (statementList != nullptr)
+	{
+		for (auto obj : *statementList)
+		{
+			delete obj;
+		}
+		delete statementList;
+	}
+	if (declarationList != nullptr)
+	{
+		for (auto obj : *declarationList)
+		{
+			delete obj;
+		}
+		delete declarationList;
+	}
 	identifier = other.identifier ? new Token(*other.identifier) : nullptr;
 	exp = other.exp ? new Expression(*other.exp) : nullptr;
 	contExp = other.contExp ? new Expression(*other.contExp) : nullptr;
@@ -226,6 +295,29 @@ BaseStatement& BaseStatement::operator=(BaseStatement&& other) noexcept
 {
 	if (this == &other)
 		return *this;
+	delete exp;
+	delete contExp;
+	delete statement;
+	delete es1;
+	delete es2;
+	delete statement2;
+	delete identifier;
+	if (statementList != nullptr)
+	{
+		for (auto obj : *statementList)
+		{
+			delete obj;
+		}
+		delete statementList;
+	}
+	if (declarationList != nullptr)
+	{
+		for (auto obj : *declarationList)
+		{
+			delete obj;
+		}
+		delete declarationList;
+	}
 	identifier = other.identifier ? new Token(*other.identifier) : nullptr;
 	exp = other.exp ? new Expression(*other.exp) : nullptr;
 	contExp = other.contExp ? new Expression(*other.contExp) : nullptr;
