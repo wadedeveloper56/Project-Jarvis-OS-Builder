@@ -18,31 +18,9 @@ namespace WadeSpace
 		IterationStatement(TokenType op, Expression* identifier, BaseStatement* statement);
 		IterationStatement();
 		virtual ~IterationStatement();
-
-		IterationStatement(const IterationStatement& other)
-			: BaseStatement(other)
-		{
-		}
-
-		IterationStatement(IterationStatement&& other) noexcept
-			: BaseStatement(std::move(other))
-		{
-		}
-
-		IterationStatement& operator=(const IterationStatement& other)
-		{
-			if (this == &other)
-				return *this;
-			BaseStatement::operator =(other);
-			return *this;
-		}
-
-		IterationStatement& operator=(IterationStatement&& other) noexcept
-		{
-			if (this == &other)
-				return *this;
-			BaseStatement::operator =(std::move(other));
-			return *this;
-		}
+		IterationStatement(const IterationStatement& other);
+		IterationStatement(IterationStatement&& other) noexcept;
+		IterationStatement& operator=(const IterationStatement& other);
+		IterationStatement& operator=(IterationStatement&& other) noexcept;
 	};
 }

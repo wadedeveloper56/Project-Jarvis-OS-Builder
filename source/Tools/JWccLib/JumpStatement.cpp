@@ -24,3 +24,28 @@ JumpStatement::JumpStatement() : BaseStatement()
 JumpStatement::~JumpStatement()
 {
 }
+
+JumpStatement::JumpStatement(const JumpStatement& other) : BaseStatement(other)
+{
+}
+
+JumpStatement::JumpStatement(JumpStatement&& other) noexcept : BaseStatement(std::move(other))
+{
+}
+
+JumpStatement& JumpStatement::operator=(const JumpStatement& other)
+{
+	if (this == &other)
+		return *this;
+	BaseStatement::operator =(other);
+	return *this;
+}
+
+JumpStatement& JumpStatement::operator=(JumpStatement&& other) noexcept
+{
+	if (this == &other)
+		return *this;
+	BaseStatement::operator =(std::move(other));
+	return *this;
+}
+

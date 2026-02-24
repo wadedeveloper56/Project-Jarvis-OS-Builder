@@ -49,3 +49,61 @@ optional<TokenType> TypeSpecifier::getType() const { return type; }
 StructOrUnionSpecifier* TypeSpecifier::getSuSpec() const { return suSpec; }
 TokenPtr TypeSpecifier::getTypePtr() const { return typePtr; }
 ExternalDeclaration* TypeSpecifier::getTypedefInfo() const { return typedefInfo; }
+
+TypeSpecifier::TypeSpecifier(const TypeSpecifier& other)
+{
+	delete enumSpec;
+	delete suSpec;
+	delete typedefInfo;
+	delete typePtr;
+	enumSpec = other.enumSpec ? new EnumSpecifier(*other.enumSpec) : nullptr;
+	type = std::move(other.type);
+	typePtr = other.typePtr ? new Token(*other.typePtr) : nullptr;
+	suSpec = other.suSpec ? new StructOrUnionSpecifier(*other.suSpec) : nullptr;
+	typedefInfo = other.typedefInfo ? new ExternalDeclaration(*other.typedefInfo) : nullptr;
+}
+
+TypeSpecifier::TypeSpecifier(TypeSpecifier&& other) noexcept
+{
+	delete enumSpec;
+	delete suSpec;
+	delete typedefInfo;
+	delete typePtr;
+	enumSpec = other.enumSpec ? new EnumSpecifier(*other.enumSpec) : nullptr;
+	type = std::move(other.type);
+	typePtr = other.typePtr ? new Token(*other.typePtr) : nullptr;
+	suSpec = other.suSpec ? new StructOrUnionSpecifier(*other.suSpec) : nullptr;
+	typedefInfo = other.typedefInfo ? new ExternalDeclaration(*other.typedefInfo) : nullptr;
+}
+
+TypeSpecifier& TypeSpecifier::operator=(const TypeSpecifier& other)
+{
+	if (this == &other)
+		return *this;
+	delete enumSpec;
+	delete suSpec;
+	delete typedefInfo;
+	delete typePtr;
+	enumSpec = other.enumSpec ? new EnumSpecifier(*other.enumSpec) : nullptr;
+	type = std::move(other.type);
+	typePtr = other.typePtr ? new Token(*other.typePtr) : nullptr;
+	suSpec = other.suSpec ? new StructOrUnionSpecifier(*other.suSpec) : nullptr;
+	typedefInfo = other.typedefInfo ? new ExternalDeclaration(*other.typedefInfo) : nullptr;
+	return *this;
+}
+
+TypeSpecifier& TypeSpecifier::operator=(TypeSpecifier&& other) noexcept
+{
+	if (this == &other)
+		return *this;
+	delete enumSpec;
+	delete suSpec;
+	delete typedefInfo;
+	delete typePtr;
+	enumSpec = other.enumSpec ? new EnumSpecifier(*other.enumSpec) : nullptr;
+	type = std::move(other.type);
+	typePtr = other.typePtr ? new Token(*other.typePtr) : nullptr;
+	suSpec = other.suSpec ? new StructOrUnionSpecifier(*other.suSpec) : nullptr;
+	typedefInfo = other.typedefInfo ? new ExternalDeclaration(*other.typedefInfo) : nullptr;
+	return *this;
+}

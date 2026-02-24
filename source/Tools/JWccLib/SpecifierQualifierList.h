@@ -17,6 +17,10 @@ namespace WadeSpace
 		SpecifierQualifierList(TypeQualifier* typeQualifier);
 		SpecifierQualifierList();
 		virtual ~SpecifierQualifierList();
+		SpecifierQualifierList(const SpecifierQualifierList& other);
+		SpecifierQualifierList(SpecifierQualifierList&& other) noexcept;
+		SpecifierQualifierList& operator=(const SpecifierQualifierList& other);
+		SpecifierQualifierList& operator=(SpecifierQualifierList&& other) noexcept;
 		SpecifierQualifierList* getSpecifierQualifierList() const;
 		TypeSpecifier* getTypeSpecifier() const;
 		TypeQualifier* getTypeQualifier() const;

@@ -16,5 +16,9 @@ namespace WadeSpace
 		SelectionStatement(TokenType op, Expression* exp, BaseStatement* ifStatement, BaseStatement* elseStatement);
 		SelectionStatement();
 		virtual ~SelectionStatement();
+		SelectionStatement(const SelectionStatement& other);
+		SelectionStatement(SelectionStatement&& other) noexcept;
+		SelectionStatement& operator=(const SelectionStatement& other);
+		SelectionStatement& operator=(SelectionStatement&& other) noexcept;
 	};
 }

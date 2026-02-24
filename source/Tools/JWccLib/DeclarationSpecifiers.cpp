@@ -22,6 +22,57 @@ DeclarationSpecifiers::~DeclarationSpecifiers()
 	delete declarationSpecifiers;
 }
 
+DeclarationSpecifiers::DeclarationSpecifiers(const DeclarationSpecifiers& other)
+{
+	delete storageClassSpecifier;
+	delete typeSpecifier;
+	delete typeQualifier;
+	delete declarationSpecifiers;
+	storageClassSpecifier = other.storageClassSpecifier ? new StorageClassSpecifier(*other.storageClassSpecifier) : nullptr;
+	typeSpecifier = other.typeSpecifier ? new TypeSpecifier(*other.typeSpecifier) : nullptr;
+	typeQualifier = other.typeQualifier ? new TypeQualifier(*other.typeQualifier) : nullptr;
+	declarationSpecifiers = other.declarationSpecifiers ? new DeclarationSpecifiers(*other.declarationSpecifiers) : nullptr;
+}
+
+DeclarationSpecifiers::DeclarationSpecifiers(DeclarationSpecifiers&& other) noexcept
+{
+	delete storageClassSpecifier;
+	delete typeSpecifier;
+	delete typeQualifier;
+	delete declarationSpecifiers;
+	storageClassSpecifier = other.storageClassSpecifier ? new StorageClassSpecifier(*other.storageClassSpecifier) : nullptr;
+	typeSpecifier = other.typeSpecifier ? new TypeSpecifier(*other.typeSpecifier) : nullptr;
+	typeQualifier = other.typeQualifier ? new TypeQualifier(*other.typeQualifier) : nullptr;
+	declarationSpecifiers = other.declarationSpecifiers ? new DeclarationSpecifiers(*other.declarationSpecifiers) : nullptr;
+
+}
+
+DeclarationSpecifiers& DeclarationSpecifiers::operator=(const DeclarationSpecifiers& other)
+{
+	if (this == &other)
+		return *this;
+	delete storageClassSpecifier;
+	delete typeSpecifier;
+	delete typeQualifier;
+	delete declarationSpecifiers;
+	storageClassSpecifier = other.storageClassSpecifier ? new StorageClassSpecifier(*other.storageClassSpecifier) : nullptr;
+	typeSpecifier = other.typeSpecifier ? new TypeSpecifier(*other.typeSpecifier) : nullptr;
+	typeQualifier = other.typeQualifier ? new TypeQualifier(*other.typeQualifier) : nullptr;
+	declarationSpecifiers = other.declarationSpecifiers ? new DeclarationSpecifiers(*other.declarationSpecifiers) : nullptr;
+	return *this;
+}
+
+DeclarationSpecifiers& DeclarationSpecifiers::operator=(DeclarationSpecifiers&& other) noexcept
+{
+	if (this == &other)
+		return *this;
+	storageClassSpecifier = other.storageClassSpecifier ? new StorageClassSpecifier(*other.storageClassSpecifier) : nullptr;
+	typeSpecifier = other.typeSpecifier ? new TypeSpecifier(*other.typeSpecifier) : nullptr;
+	typeQualifier = other.typeQualifier ? new TypeQualifier(*other.typeQualifier) : nullptr;
+	declarationSpecifiers = other.declarationSpecifiers ? new DeclarationSpecifiers(*other.declarationSpecifiers) : nullptr;
+	return *this;
+}
+
 StorageClassSpecifier* DeclarationSpecifiers::getStorageClassSpecifier() const
 {
 	return storageClassSpecifier;

@@ -16,5 +16,9 @@ namespace WadeSpace
 		Statement(TokenType op, BaseStatement* statement);
 		Statement();
 		virtual ~Statement();
+		Statement(const Statement& other);
+		Statement(Statement&& other) noexcept;
+		Statement& operator=(const Statement& other);
+		Statement& operator=(Statement&& other) noexcept;
 	};
 }

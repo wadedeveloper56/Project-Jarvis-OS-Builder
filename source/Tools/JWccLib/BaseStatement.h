@@ -1,8 +1,5 @@
 #pragma once
 
-#include <string>
-#include <vector>
-#include <optional>
 #include "TokenType.h"
 #include "Declaration.h"
 
@@ -15,7 +12,7 @@ namespace WadeSpace
 	class BaseStatement
 	{
 	public:
-		BaseStatement(TokenType op, TokenPtr identifier, Expression* const exp, Expression* const contExp,
+		BaseStatement(TokenType op, TokenPtr identifier, Expression* const exp, Expression* const contExp, 
 			BaseStatement* const statement, BaseStatement* const es1, BaseStatement* const es2,
 			BaseStatement* const statement2, vector<BaseStatement*>* const statementList,
 			vector<Declaration*>* const declarationList);
@@ -32,12 +29,10 @@ namespace WadeSpace
 		BaseStatement(TokenPtr identifier, BaseStatement* statement);
 		BaseStatement(TokenType op, BaseStatement* statement);
 		BaseStatement() = default;
-
 		BaseStatement(const BaseStatement& other);
 		BaseStatement(BaseStatement&& other) noexcept;
 		BaseStatement& operator=(const BaseStatement& other);
 		BaseStatement& operator=(BaseStatement&& other) noexcept;
-
 		virtual ~BaseStatement();
 		[[nodiscard]] TokenPtr getIdentifier() const;
 		[[nodiscard]] Expression* getExp() const;

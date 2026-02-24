@@ -27,3 +27,29 @@ IterationStatement::IterationStatement() : BaseStatement()
 IterationStatement::~IterationStatement()
 {
 }
+
+IterationStatement::IterationStatement(const IterationStatement& other)
+	: BaseStatement(other)
+{
+}
+
+IterationStatement::IterationStatement(IterationStatement&& other) noexcept
+	: BaseStatement(std::move(other))
+{
+}
+
+IterationStatement& IterationStatement::operator=(const IterationStatement& other)
+{
+	if (this == &other)
+		return *this;
+	BaseStatement::operator =(other);
+	return *this;
+}
+
+IterationStatement& IterationStatement::operator=(IterationStatement&& other) noexcept
+{
+	if (this == &other)
+		return *this;
+	BaseStatement::operator =(std::move(other));
+	return *this;
+}

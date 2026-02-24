@@ -20,6 +20,10 @@ namespace WadeSpace
 		Pointer(const TokenPtr name);
 		Pointer();
 		virtual ~Pointer();
+		Pointer(const Pointer& other);
+		Pointer(Pointer&& other) noexcept;
+		Pointer& operator=(const Pointer& other);
+		Pointer& operator=(Pointer&& other) noexcept;
 		void inc();
 
 	private:

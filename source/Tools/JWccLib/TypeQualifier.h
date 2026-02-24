@@ -1,9 +1,5 @@
 #pragma once
 
-#include <string>
-#include <vector>
-#include <optional>
-
 #include "Token.h"
 #include "TokenType.h"
 
@@ -15,9 +11,13 @@ namespace WadeSpace
 	{
 	public:
 		TypeQualifier(TokenPtr type);
-		TypeQualifier() = default;
-		virtual ~TypeQualifier()=default;
+		TypeQualifier();
+		~TypeQualifier();
 		TokenPtr getType() const;
+		TypeQualifier(const TypeQualifier& other);
+		TypeQualifier(TypeQualifier&& other) noexcept;
+		TypeQualifier& operator=(const TypeQualifier& other);
+		TypeQualifier& operator=(TypeQualifier&& other) noexcept;
 
 	private:
 		TokenPtr type;

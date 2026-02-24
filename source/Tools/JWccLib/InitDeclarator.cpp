@@ -7,8 +7,7 @@ InitDeclarator::InitDeclarator(Declarator* declarator) : declarator(declarator),
 {
 }
 
-InitDeclarator::InitDeclarator(Declarator* declarator, Initializer* initializer) : declarator(declarator),
-	initializer(initializer)
+InitDeclarator::InitDeclarator(Declarator* declarator, Initializer* initializer) : declarator(declarator), initializer(initializer)
 {
 }
 
@@ -20,6 +19,44 @@ InitDeclarator::~InitDeclarator()
 {
 	delete declarator;
 	delete initializer;
+}
+
+InitDeclarator::InitDeclarator(const InitDeclarator& other)
+{
+	delete declarator;
+	delete initializer;
+	declarator = other.declarator ? new Declarator(*other.declarator) : nullptr;
+	initializer = other.initializer ? new Initializer(*other.initializer) : nullptr;
+}
+
+InitDeclarator::InitDeclarator(InitDeclarator&& other) noexcept
+{
+	delete declarator;
+	delete initializer;
+	declarator = other.declarator ? new Declarator(*other.declarator) : nullptr;
+	initializer = other.initializer ? new Initializer(*other.initializer) : nullptr;
+}
+
+InitDeclarator& InitDeclarator::operator=(const InitDeclarator& other)
+{
+	if (this == &other)
+		return *this;
+	delete declarator;
+	delete initializer;
+	declarator = other.declarator ? new Declarator(*other.declarator) : nullptr;
+	initializer = other.initializer ? new Initializer(*other.initializer) : nullptr;
+	return *this;
+}
+
+InitDeclarator& InitDeclarator::operator=(InitDeclarator&& other) noexcept
+{
+	if (this == &other)
+		return *this;
+	delete declarator;
+	delete initializer;
+	declarator = other.declarator ? new Declarator(*other.declarator) : nullptr;
+	initializer = other.initializer ? new Initializer(*other.initializer) : nullptr;
+	return *this;
 }
 
 Declarator* InitDeclarator::getDeclarator() const

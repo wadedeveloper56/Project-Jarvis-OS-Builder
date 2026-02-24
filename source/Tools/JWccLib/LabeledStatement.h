@@ -18,5 +18,9 @@ namespace WadeSpace
 		LabeledStatement(TokenType op, BaseStatement* statement);
 		LabeledStatement();
 		virtual ~LabeledStatement();
+		LabeledStatement(const LabeledStatement& other);
+		LabeledStatement(LabeledStatement&& other) noexcept;
+		LabeledStatement& operator=(const LabeledStatement& other);
+		LabeledStatement& operator=(LabeledStatement&& other) noexcept;
 	};
 }

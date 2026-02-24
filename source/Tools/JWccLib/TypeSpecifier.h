@@ -25,6 +25,10 @@ namespace WadeSpace
 		[[nodiscard]] StructOrUnionSpecifier* getSuSpec() const;
 		[[nodiscard]] TokenPtr getTypePtr() const;
 		[[nodiscard]] ExternalDeclaration* getTypedefInfo() const;
+		TypeSpecifier(const TypeSpecifier& other);
+		TypeSpecifier(TypeSpecifier&& other) noexcept;
+		TypeSpecifier& operator=(const TypeSpecifier& other);
+		TypeSpecifier& operator=(TypeSpecifier&& other) noexcept;
 
 	private:
 		EnumSpecifier* enumSpec;

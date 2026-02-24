@@ -17,6 +17,10 @@ namespace WadeSpace
 		ParameterDeclaration(DeclarationSpecifiers* declarationSpecifiers, Declarator* declarator);
 		ParameterDeclaration();
 		virtual ~ParameterDeclaration();
+		ParameterDeclaration(const ParameterDeclaration& other);
+		ParameterDeclaration(ParameterDeclaration&& other) noexcept;
+		ParameterDeclaration& operator=(const ParameterDeclaration& other);
+		ParameterDeclaration& operator=(ParameterDeclaration&& other) noexcept;
 		DeclarationSpecifiers* getDeclarationSpecifiers() const;
 		Declarator* getDeclarator() const;
 		AbstractDeclarator* getAbstractDeclarator() const;

@@ -14,11 +14,14 @@ StructDeclaration::StructDeclaration() : specifierQualifierList(nullptr), vector
 StructDeclaration::~StructDeclaration()
 {
     delete specifierQualifierList;
-    for (StructDeclarator* ptr : *vectorStructDeclarator)
-    {
-        delete ptr;
-    }
-    delete vectorStructDeclarator;
+	if (vectorStructDeclarator != nullptr)
+	{
+		for (StructDeclarator* ptr : *vectorStructDeclarator)
+		{
+			delete ptr;
+		}
+		delete vectorStructDeclarator;
+	}
 }
 
 SpecifierQualifierList* StructDeclaration::getSpecifierQualifierList() const
@@ -29,4 +32,70 @@ SpecifierQualifierList* StructDeclaration::getSpecifierQualifierList() const
 vector<StructDeclarator*>* StructDeclaration::getVectorStructDeclarator() const
 {
 	return vectorStructDeclarator;
+}
+
+StructDeclaration::StructDeclaration(const StructDeclaration& other)
+{
+	delete specifierQualifierList;
+	if (vectorStructDeclarator != nullptr)
+	{
+		for (StructDeclarator* ptr : *vectorStructDeclarator)
+		{
+			delete ptr;
+		}
+		delete vectorStructDeclarator;
+	}
+	specifierQualifierList = other.specifierQualifierList ? new SpecifierQualifierList(*other.specifierQualifierList) : nullptr;
+	vectorStructDeclarator = other.vectorStructDeclarator ? new vector<StructDeclarator*>(*other.vectorStructDeclarator) : nullptr;
+}
+
+StructDeclaration::StructDeclaration(StructDeclaration&& other) noexcept
+{
+	delete specifierQualifierList;
+	if (vectorStructDeclarator != nullptr)
+	{
+		for (StructDeclarator* ptr : *vectorStructDeclarator)
+		{
+			delete ptr;
+		}
+		delete vectorStructDeclarator;
+	}
+	specifierQualifierList = other.specifierQualifierList ? new SpecifierQualifierList(*other.specifierQualifierList) : nullptr;
+	vectorStructDeclarator = other.vectorStructDeclarator ? new vector<StructDeclarator*>(*other.vectorStructDeclarator) : nullptr;
+}
+
+StructDeclaration& StructDeclaration::operator=(const StructDeclaration& other)
+{
+	if (this == &other)
+		return *this;
+	delete specifierQualifierList;
+	if (vectorStructDeclarator != nullptr)
+	{
+		for (StructDeclarator* ptr : *vectorStructDeclarator)
+		{
+			delete ptr;
+		}
+		delete vectorStructDeclarator;
+	}
+	specifierQualifierList = other.specifierQualifierList ? new SpecifierQualifierList(*other.specifierQualifierList) : nullptr;
+	vectorStructDeclarator = other.vectorStructDeclarator ? new vector<StructDeclarator*>(*other.vectorStructDeclarator) : nullptr;
+	return *this;
+}
+
+StructDeclaration& StructDeclaration::operator=(StructDeclaration&& other) noexcept
+{
+	if (this == &other)
+		return *this;
+	delete specifierQualifierList;
+	if (vectorStructDeclarator != nullptr)
+	{
+		for (StructDeclarator* ptr : *vectorStructDeclarator)
+		{
+			delete ptr;
+		}
+		delete vectorStructDeclarator;
+	}
+	specifierQualifierList = other.specifierQualifierList ? new SpecifierQualifierList(*other.specifierQualifierList) : nullptr;
+	vectorStructDeclarator = other.vectorStructDeclarator ? new vector<StructDeclarator*>(*other.vectorStructDeclarator) : nullptr		;
+	return *this;
 }

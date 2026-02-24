@@ -78,6 +78,10 @@ typedef struct TokData
 
 	TokData() = default;
 	~TokData() = default;
+	TokData(const TokData& other) = default;
+	TokData(TokData&& other) noexcept = default;
+	TokData& operator=(const TokData& other) = default;
+	TokData& operator=(TokData&& other) noexcept = default;
 } * TokDataPtr;
 
 typedef struct Token
@@ -85,6 +89,37 @@ typedef struct Token
 	TokDataPtr data;
 	Token();
 	~Token();
+
+	Token(const Token& other)
+	{
+		delete data;
+		data = other.data ? new TokData(*other.data) : nullptr;
+	}
+
+	Token(Token&& other) noexcept
+	{
+		delete data;
+		data = other.data ? new TokData(*other.data) : nullptr;;
+	}
+
+	Token& operator=(const Token& other)
+	{
+		if (this == &other)
+			return *this;
+		delete data;
+		data = other.data ? new TokData(*other.data) : nullptr;
+		return *this;
+	}
+ 
+	Token& operator=(Token&& other) noexcept
+	{
+		if (this == &other)
+			return *this;
+		delete data;
+		data = other.data ? new TokData(*other.data) : nullptr;
+		return *this;
+	}
+
 	string getSymbolName() const;
 	string getKeywordName() const;
 }* TokenPtr, ** TokenPtrPtr;

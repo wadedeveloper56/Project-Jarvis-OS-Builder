@@ -29,6 +29,44 @@ string ExternalDeclaration::toString()
 	else return "Declaration";
 }
 
+ExternalDeclaration::ExternalDeclaration(const ExternalDeclaration& other)
+{
+	delete functionDefinition;
+	delete declaration;
+	functionDefinition = other.functionDefinition ? new FunctionDefinition(*other.functionDefinition) : nullptr;
+	declaration = other.declaration ? new Declaration(*other.declaration) : nullptr;
+}
+
+ExternalDeclaration::ExternalDeclaration(ExternalDeclaration&& other) noexcept
+{
+	delete functionDefinition;
+	delete declaration;
+	functionDefinition = other.functionDefinition ? new FunctionDefinition(*other.functionDefinition) : nullptr;
+	declaration = other.declaration ? new Declaration(*other.declaration) : nullptr;
+}
+
+ExternalDeclaration& ExternalDeclaration::operator=(const ExternalDeclaration& other)
+{
+	if (this == &other)
+		return *this;
+	delete functionDefinition;
+	delete declaration;
+	functionDefinition = other.functionDefinition ? new FunctionDefinition(*other.functionDefinition) : nullptr;
+	declaration = other.declaration ? new Declaration(*other.declaration) : nullptr;
+	return *this;
+}
+
+ExternalDeclaration& ExternalDeclaration::operator=(ExternalDeclaration&& other) noexcept
+{
+	if (this == &other)
+		return *this;
+	delete functionDefinition;
+	delete declaration;
+	functionDefinition = other.functionDefinition ? new FunctionDefinition(*other.functionDefinition) : nullptr;
+	declaration = other.declaration ? new Declaration(*other.declaration) : nullptr;
+	return *this;
+}
+
 bool ExternalDeclaration::isFunction() const { return functionDefinition != nullptr; }
 bool ExternalDeclaration::isDeclaration() const { return declaration != nullptr; }
 FunctionDefinition* ExternalDeclaration::getFunction() const { return functionDefinition; }

@@ -15,8 +15,7 @@ namespace WadeSpace
 	public:
 		ExpressionStatement(Expression* exp);
 		ExpressionStatement();
-		virtual ~ExpressionStatement()=default;
-
+		virtual ~ExpressionStatement() = default;
 		ExpressionStatement(const ExpressionStatement& other);
 		ExpressionStatement(ExpressionStatement&& other) noexcept;
 		ExpressionStatement& operator=(const ExpressionStatement& other);
