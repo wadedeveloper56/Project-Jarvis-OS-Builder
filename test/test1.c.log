@@ -10,9 +10,9 @@ double var7 = 11.0 ;
 long double var8 = 12.0 ;
 int init ;
 
-void main ( )
+int main ( int argv , char * argv [ ] )
 {
-return ;
+return 0 ;
 }
 
 CHAR REDUCE to type_specifier
@@ -231,12 +231,45 @@ declaration_specifiers init_declarator_list SEMICOLON REDUCE to declaration
 declaration REDUCE to external_declaration
 translation_unit external_declaration REDUCE to translation_unit
 
-VOID REDUCE to type_specifier
+INT REDUCE to type_specifier
 type_specifier REDUCE to declaration_specifiers
 IDENTIFIER REDUCE to direct_declarator
-direct_declarator OPAREN CPAREN REDUCE to direct_declarator
+INT REDUCE to type_specifier
+type_specifier REDUCE to declaration_specifiers
+IDENTIFIER REDUCE to direct_declarator
 direct_declarator REDUCE to declarator
-RETURN SEMICOLON REDUCE to jump_statement
+declaration_specifiers declarator REDUCE to parameter_declaration
+parameter_declaration REDUCE to parameter_list
+CHAR REDUCE to type_specifier
+type_specifier REDUCE to declaration_specifiers
+TIMES_OP REDUCE to POINTER
+IDENTIFIER REDUCE to direct_declarator
+direct_declarator OBRACE CBRACE REDUCE to direct_declarator
+pointer direct_declarator REDUCE to declarator
+declaration_specifiers declarator REDUCE to parameter_declaration
+parameter_list COMMA parameter_declaration REDUCE to parameter_list
+parameter_list REDUCE to parameter_type_list
+direct_declarator OPAREN parameter_type_list CPAREN to direct_declarator
+direct_declarator REDUCE to declarator
+I_CONST REDUCE to constant 
+constant REDUCE to primary_expression
+primary_expression REDUCE to postfix_expression
+postfix_expression REDUCE unary_expression
+unary_expression REDUCE to cast_expression
+cast_expression REDUCE to multiplicative_expression
+multiplicative_expression REDUCE to additive_expression
+additive_expression REDUCE to shift_expression
+shift_expression REDUCE to relational_expression
+relational_expression REDUCE to equality_expression
+equality_expression REDUCE to and_expression
+and_expression REDUCE to exclusive_or_expression
+exclusive_or_expression REDUCE to inclusive_or_expression
+inclusive_or_expression REDUCE to logical_and_expression
+inclusive_and_expression REDUCE to logical_or_expression
+logical_or_expression REDUCE to conditional_expression
+conditional_expression REDUCE to assignment_expression
+asignment_expression REDUCE to expression
+RETURN expression SEMICOLON REDUCE to jump_statement
 jump_statement REDUCE to statement
 statement REDUCE to statement_list
 OCURLY statement_list CCURLY REDUCE to compound_statement

@@ -8,7 +8,7 @@ double var7 = 11.0;
 long double var8 = 12.0;
 int init;
 
-void main()
+int main(int argv, char* argv[])
 {
-	return;
+	return 0;
 }

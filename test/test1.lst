@@ -1,9 +1,16 @@
 JWasm v2.12pre, Feb 26 2026
 test1.asm
-                                .x64p
-                                .model flat, fastcall
+                                .386
+                                .model flat, c
+00000000                    *   _TEXT segment DWORD FLAT PUBLIC 'CODE'
+                            *   _TEXT ends
+00000000                    *   _DATA segment DWORD FLAT PUBLIC 'DATA'
+                            *   _DATA ends
+                            *   assume cs:flat,ds:flat,ss:flat,es:flat,fs:ERROR,gs:ERROR
 
                                 .data
+00000000                    *   _DATA segment
+                            *   assume cs:ERROR
 00000000  0600                  _var2 SWORD 6
 00000002  07000000              _var3 SDWORD 7
 00000006  08000000              _var4 SDWORD 8
@@ -12,15 +19,27 @@ test1.asm
 00000016  0000000000002640      _var7 SQWORD 11.000000
 0000001E  00000000000000C002    _var8 TBYTE 12.000000
 00000000                        .data?
+00000028                    *   _DATA ends
+00000000                    *   _BSS segment DWORD FLAT PUBLIC 'BSS'
+                            *   assume cs:ERROR
 00000000  00                    _var1 SBYTE ?
 00000001  00000000              _init SDWORD ?
 
 00000000                        .code
-00000000                        _main proc  c
-00000000  33C0                  	xor eax,eax
-00000002                        	ret
-00000003                        _main endp
+00000005                    *   _BSS ends
+00000000                    *   _TEXT segment
+                            *   assume cs:FLAT
+00000000                        _main PROC C, _argc:DWORD, _argv:QWORD
+00000000  55                *   push ebp
+00000001  8BEC              *   mov ebp, esp
+00000003  8B4508                	mov eax, [_argc]
+00000006  33C0                  	xor eax,eax
+00000008                        	ret
+00000008  C9                *   leave
+00000009  C3                *   retn 
+0000000A                        _main endp
                                 end
+0000000A                    *   _TEXT ends
 
 
 Macros:
@@ -39,16 +58,18 @@ Segments and Groups:
                 N a m e                 Size     Length   Align   Combine Class
 
 FLAT . . . . . . . . . . . . . .        GROUP
-_BSS . . . . . . . . . . . . . .        64 Bit   00000005 Para    Public  'BSS'
-_DATA  . . . . . . . . . . . . .        64 Bit   00000028 Para    Public  'DATA'
-_TEXT  . . . . . . . . . . . . .        64 Bit   00000003 Para    Public  'CODE'
+_BSS . . . . . . . . . . . . . .        32 Bit   00000005 DWord   Public  'BSS'
+_DATA  . . . . . . . . . . . . .        32 Bit   00000028 DWord   Public  'DATA'
+_TEXT  . . . . . . . . . . . . .        32 Bit   0000000A DWord   Public  'CODE'
 
 
 Procedures, parameters and locals:
 
                 N a m e                 Type     Value    Segment  Length
 
-_main  . . . . . . . . . . . . .        P Near   00000000 _TEXT    00000003 Public   C
+_main  . . . . . . . . . . . . .        P Near   00000000 _TEXT    0000000A Public   C
+  _argc  . . . . . . . . . . . .        DWord             ebp + 0008
+  _argv  . . . . . . . . . . . .        QWord             ebp + 000C
 
 
 Symbols:
@@ -56,29 +77,28 @@ Symbols:
                 N a m e                 Type       Value     Attr
 
 @CodeSize  . . . . . . . . . . .        Number             0h 
-@Cpu . . . . . . . . . . . . . .        Number           DDFh 
+@Cpu . . . . . . . . . . . . . .        Number           D0Fh 
 @CurSeg  . . . . . . . . . . . .        Text   
 @DataSize  . . . . . . . . . . .        Number             0h 
 @Date  . . . . . . . . . . . . .        Text   02/26/26
 @FileCur . . . . . . . . . . . .        Text   test1.asm
 @FileName  . . . . . . . . . . .        Text   TEST1
-@Interface . . . . . . . . . . .        Number             7h 
+@Interface . . . . . . . . . . .        Number             1h 
 @Model . . . . . . . . . . . . .        Number             7h 
-@ReservedStack . . . . . . . . .        Number             0h 
-@Time  . . . . . . . . . . . . .        Text   12:50:31
+@Time  . . . . . . . . . . . . .        Text   13:48:50
 @Version . . . . . . . . . . . .        Text   800
 @code  . . . . . . . . . . . . .        Text   _TEXT
 @data  . . . . . . . . . . . . .        Text   FLAT
 @stack . . . . . . . . . . . . .        Text   FLAT
 __JWASM__  . . . . . . . . . . .        Number            D4h 
-_init  . . . . . . . . . . . . .        DWord              1h _BSS FASTCALL
-_var1  . . . . . . . . . . . . .        Byte               0h _BSS FASTCALL
-_var2  . . . . . . . . . . . . .        Word               0h _DATA FASTCALL
-_var3  . . . . . . . . . . . . .        DWord              2h _DATA FASTCALL
-_var4  . . . . . . . . . . . . .        DWord              6h _DATA FASTCALL
-_var5  . . . . . . . . . . . . .        QWord              Ah _DATA FASTCALL
-_var6  . . . . . . . . . . . . .        DWord             12h _DATA FASTCALL
-_var7  . . . . . . . . . . . . .        QWord             16h _DATA FASTCALL
-_var8  . . . . . . . . . . . . .        TByte             1Eh _DATA FASTCALL
+_init  . . . . . . . . . . . . .        DWord              1h _BSS C
+_var1  . . . . . . . . . . . . .        Byte               0h _BSS C
+_var2  . . . . . . . . . . . . .        Word               0h _DATA C
+_var3  . . . . . . . . . . . . .        DWord              2h _DATA C
+_var4  . . . . . . . . . . . . .        DWord              6h _DATA C
+_var5  . . . . . . . . . . . . .        QWord              Ah _DATA C
+_var6  . . . . . . . . . . . . .        DWord             12h _DATA C
+_var7  . . . . . . . . . . . . .        QWord             16h _DATA C
+_var8  . . . . . . . . . . . . .        TByte             1Eh _DATA C
 
-test1.asm: 21 lines, 2 passes, 1 ms, 0 warnings, 0 errors
+test1.asm: 22 lines, 2 passes, 1 ms, 0 warnings, 0 errors

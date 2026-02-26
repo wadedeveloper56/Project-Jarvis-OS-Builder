@@ -44,17 +44,17 @@ void MasmCodeGenerator::generateCode(ofstream& out)
 	if (bit16)
 	{
 		out << ".286" << endl;
-		out << ".model small" << endl;
+		out << ".model small;" << endl;
 	}
 	else if (bit32)
 	{
 		out << ".386" << endl;
-		out << ".model flat, fastcall" << endl;
+		out << ".model flat, c;" << endl;
 	}
 	else
 	{
 		out << ".x64p" << endl;
-		out << ".model flat, fastcall" << endl;
+		out << ".model flat, c;" << endl;
 	}
 	out << endl;
 	out << ".data" << endl;
@@ -121,15 +121,16 @@ void MasmCodeGenerator::generateCode(ofstream& out)
 	out << endl << ".code" << endl;
 	for (FunctionData* ptr : *functionTable)
 	{
-		out << "_" << ptr->name << " proc  c" << endl;
-		if (bit16)
+		if (ptr->parameters != nullptr && ptr->parameters->size() > 0)
 		{
-			out << "xor ax,ax" << endl;
+			out << "_" << ptr->name << " PROC C, _argc:DWORD, _argv:QWORD" << endl;
 		}
 		else
 		{
-			out << "\t" << "xor eax,eax" << endl;
+			out << "_" << ptr->name << " PROC C" << endl;
 		}
+		out << "\t" << "mov eax, [_argc]" << endl;
+		out << "\t" << "xor eax,eax" << endl;
 		out << "\tret" << endl;
 		out << "_" << ptr->name << " endp" << endl;
 	}
