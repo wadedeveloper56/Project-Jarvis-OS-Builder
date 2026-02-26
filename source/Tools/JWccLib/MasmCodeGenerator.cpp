@@ -123,7 +123,9 @@ void MasmCodeGenerator::generateCode(ofstream& out)
 	{
 		if (ptr->parameters != nullptr && ptr->parameters->size() > 0)
 		{
-			out << "_" << ptr->name << " PROC C, _argc:DWORD, _argv:QWORD" << endl;
+			if (bit64) out << "_" << ptr->name << " PROC C, _argc:DWORD, _argv:QWORD" << endl;
+			else if (bit32) out << "_" << ptr->name << " PROC C, _argc:DWORD, _argv:DWORD" << endl;
+			else out << "_" << ptr->name << " PROC C, _argc:DWORD, _argv:WORD" << endl;
 		}
 		else
 		{

@@ -1,7 +1,7 @@
 JWasm v2.12pre, Feb 26 2026
 test1.asm
                                 .386
-                                .model flat, c
+                                .model flat, c;
 00000000                    *   _TEXT segment DWORD FLAT PUBLIC 'CODE'
                             *   _TEXT ends
 00000000                    *   _DATA segment DWORD FLAT PUBLIC 'DATA'
@@ -29,7 +29,7 @@ test1.asm
 00000005                    *   _BSS ends
 00000000                    *   _TEXT segment
                             *   assume cs:FLAT
-00000000                        _main PROC C, _argc:DWORD, _argv:QWORD
+00000000                        _main PROC C, _argc:DWORD, _argv:DWORD
 00000000  55                *   push ebp
 00000001  8BEC              *   mov ebp, esp
 00000003  8B4508                	mov eax, [_argc]
@@ -69,7 +69,7 @@ Procedures, parameters and locals:
 
 _main  . . . . . . . . . . . . .        P Near   00000000 _TEXT    0000000A Public   C
   _argc  . . . . . . . . . . . .        DWord             ebp + 0008
-  _argv  . . . . . . . . . . . .        QWord             ebp + 000C
+  _argv  . . . . . . . . . . . .        DWord             ebp + 000C
 
 
 Symbols:
@@ -85,7 +85,7 @@ Symbols:
 @FileName  . . . . . . . . . . .        Text   TEST1
 @Interface . . . . . . . . . . .        Number             1h 
 @Model . . . . . . . . . . . . .        Number             7h 
-@Time  . . . . . . . . . . . . .        Text   13:48:50
+@Time  . . . . . . . . . . . . .        Text   14:06:47
 @Version . . . . . . . . . . . .        Text   800
 @code  . . . . . . . . . . . . .        Text   _TEXT
 @data  . . . . . . . . . . . . .        Text   FLAT

@@ -143,8 +143,8 @@ void DumpSection(int i, OBJSectionPtr ptr)
 	printf("\n");
 	if (section->PointerToRawData > 0 && section->SizeOfRawData > 0 && ptr->sectionBuffer != nullptr)
 	{
-		//printf("RAW DATA #%X (%d)\n", i, i);
-		//hexdump(ptr->sectionBuffer, section->SizeOfRawData);
+		printf("RAW DATA #%X (%d)\n", i, i);
+		hexdump(ptr->sectionBuffer, section->SizeOfRawData, 0);
 	}
 	if (section->PointerToRelocations > 0 && section->NumberOfRelocations > 0 && ptr->relocation != nullptr)
 	{
