@@ -39,6 +39,108 @@ MasmCodeGenerator::~MasmCodeGenerator() {
 
 }
 
+void MasmCodeGenerator::handleIndividualFunction(ofstream& out, FunctionData* ptr)
+{
+	if (ptr->parameters != nullptr && !ptr->parameters->empty())
+	{
+		if (bit64) out << "_" << ptr->name << " PROC C, _argc:DWORD, _argv:QWORD" << endl;
+		else if (bit32) out << "_" << ptr->name << " PROC C, _argc:DWORD, _argv:DWORD" << endl;
+		else out << "_" << ptr->name << " PROC C, _argc:DWORD, _argv:WORD" << endl;
+	}
+	else
+	{
+		out << "_" << ptr->name << " PROC C" << endl;
+	}
+	out << "\t" << "mov eax, [_argc]" << endl;
+	out << "\t" << "xor eax,eax" << endl;
+	out << "\tret" << endl;
+	out << "_" << ptr->name << " endp" << endl;
+}
+
+void MasmCodeGenerator::handleInitializedVarible(ofstream& out, vector<_VariableData*>::value_type ptr)
+{
+	if (ptr->initializer != nullptr)
+	{
+		if (ptr->arraySize > 1)
+		{
+			//fix me
+			if (ptr->size == 1)  out << "_" << ptr->name << " SBYTE " << ptr->arraySize << " dup(?)" << endl;
+			if (ptr->size == 2)  out << "_" << ptr->name << " SWORD " << ptr->arraySize << " dup(?)" << endl;
+			if (ptr->size == 4)  out << "_" << ptr->name << " SDWORD " << ptr->arraySize << " dup(?)" << endl;
+			if (ptr->size == 8)  out << "_" << ptr->name << " SQWORD " << ptr->arraySize << " dup(?)" << endl;
+			if (ptr->size == 10) out << "_" << ptr->name << " TBYTE " << ptr->arraySize << " dup(?)" << endl;
+		}
+		else
+		{
+			if (ptr->initializer->getAssignmentExpression()->getData()->getConstant()->getIConst() != nullptr)
+			{
+				long long int value = ptr->initializer->getAssignmentExpression()->getData()->getConstant()->getIConst()->data->repr.numericConstant.repr.lIntConst;
+				if (ptr->size == 1)  out << "_" << ptr->name << " SBYTE " << value << endl;
+				if (ptr->size == 2)  out << "_" << ptr->name << " SWORD " << value << endl;
+				if (ptr->size == 4)  out << "_" << ptr->name << " SDWORD " << value << endl;
+				if (ptr->size == 8)  out << "_" << ptr->name << " SQWORD " << value << endl;
+				if (ptr->size == 10) out << "_" << ptr->name << " TBYTE " << value << endl;
+			}
+			if (ptr->initializer->getAssignmentExpression()->getData()->getConstant()->getFConst() != nullptr)
+			{
+				long double value = ptr->initializer->getAssignmentExpression()->getData()->getConstant()->getFConst()->data->repr.numericConstant.repr.lDoubleConst;
+				if (ptr->size == 1)  out << "_" << ptr->name << " SBYTE " << fixed << (long double)value << endl;
+				if (ptr->size == 2)  out << "_" << ptr->name << " SWORD " << fixed << (long double)value << endl;
+				if (ptr->size == 4)  out << "_" << ptr->name << " SDWORD " << fixed << (long double)value << endl;
+				if (ptr->size == 8)  out << "_" << ptr->name << " SQWORD " << fixed << (long double)value << endl;
+				if (ptr->size == 10) out << "_" << ptr->name << " TBYTE " << fixed << (long double)value << endl;
+			}
+		}
+	}
+}
+
+void MasmCodeGenerator::handleUUninitializedVariable(ofstream& out, vector<_VariableData*>::value_type ptr)
+{
+	if (ptr->initializer == nullptr)
+	{
+		if (ptr->arraySize > 1)
+		{
+			//fix me:
+			if (ptr->size == 1)  out << "_" << ptr->name << " SBYTE " << ptr->arraySize << " dup(?)" << endl;
+			if (ptr->size == 2)  out << "_" << ptr->name << " SWORD " << ptr->arraySize << " dup(?)" << endl;
+			if (ptr->size == 4)  out << "_" << ptr->name << " SDWORD " << ptr->arraySize << " dup(?)" << endl;
+			if (ptr->size == 8)  out << "_" << ptr->name << " SQWORD " << ptr->arraySize << " dup(?)" << endl;
+			if (ptr->size == 10) out << "_" << ptr->name << " TBYTE " << ptr->arraySize << " dup(?)" << endl;
+		}
+		else
+		{
+			if (ptr->size == 1)  out << "_" << ptr->name << " SBYTE ?" << endl;
+			if (ptr->size == 2)  out << "_" << ptr->name << " SWORD ?" << endl;
+			if (ptr->size == 4)  out << "_" << ptr->name << " SDWORD ?" << endl;
+			if (ptr->size == 8)  out << "_" << ptr->name << " SQWORD ?" << endl;
+			if (ptr->size == 10) out << "_" << ptr->name << " TBYTE ?" << endl;
+		}
+	}
+}
+
+void MasmCodeGenerator::handleVaribleTable(ofstream& out)
+{
+	out << ".data" << endl;
+	for (auto ptr : *variableTable)
+	{
+		handleInitializedVarible(out, ptr);
+	}
+	out << ".data?" << endl;
+	for (auto ptr : *variableTable)
+	{
+		handleUUninitializedVariable(out, ptr);
+	}
+}
+
+void MasmCodeGenerator::handleFunctionTable(ofstream& out)
+{
+	out << endl << ".code" << endl;
+	for (FunctionData* ptr : *functionTable)
+	{
+		handleIndividualFunction(out, ptr);
+	}
+}
+
 void MasmCodeGenerator::generateCode(ofstream& out) 
 {
 	if (bit16)
@@ -57,84 +159,31 @@ void MasmCodeGenerator::generateCode(ofstream& out)
 		out << ".model flat, c;" << endl;
 	}
 	out << endl;
-	out << ".data" << endl;
-	for (auto ptr : *variableTable)
-	{
-		if (ptr->initializer != nullptr)
-		{
-			if (ptr->arraySize > 1)
-			{
-				//fix me
-				if (ptr->size == 1)  out << "_" << ptr->name << " SBYTE " << ptr->arraySize << " dup(?)" << endl;
-				if (ptr->size == 2)  out << "_" << ptr->name << " SWORD " << ptr->arraySize << " dup(?)" << endl;
-				if (ptr->size == 4)  out << "_" << ptr->name << " SDWORD " << ptr->arraySize << " dup(?)" << endl;
-				if (ptr->size == 8)  out << "_" << ptr->name << " SQWORD " << ptr->arraySize << " dup(?)" << endl;
-				if (ptr->size == 10) out << "_" << ptr->name << " TBYTE " << ptr->arraySize << " dup(?)" << endl;
-			}
-			else
-			{
-				if (ptr->initializer->getAssignmentExpression()->getData()->getConstant()->getIConst() != nullptr)
-				{
-					long long int value = ptr->initializer->getAssignmentExpression()->getData()->getConstant()->getIConst()->data->repr.numericConstant.repr.lIntConst;
-					if (ptr->size == 1)  out << "_" << ptr->name << " SBYTE " << value << endl;
-					if (ptr->size == 2)  out << "_" << ptr->name << " SWORD " << value << endl;
-					if (ptr->size == 4)  out << "_" << ptr->name << " SDWORD " << value << endl;
-					if (ptr->size == 8)  out << "_" << ptr->name << " SQWORD " << value << endl;
-					if (ptr->size == 10) out << "_" << ptr->name << " TBYTE " << value << endl;
-				}
-				if (ptr->initializer->getAssignmentExpression()->getData()->getConstant()->getFConst() != nullptr)
-				{
-					long double value = ptr->initializer->getAssignmentExpression()->getData()->getConstant()->getFConst()->data->repr.numericConstant.repr.lDoubleConst;
-					if (ptr->size == 1)  out << "_" << ptr->name << " SBYTE " << fixed << (long double)value << endl;
-					if (ptr->size == 2)  out << "_" << ptr->name << " SWORD " << fixed << (long double)value << endl;
-					if (ptr->size == 4)  out << "_" << ptr->name << " SDWORD " << fixed << (long double)value << endl;
-					if (ptr->size == 8)  out << "_" << ptr->name << " SQWORD " << fixed << (long double)value << endl;
-					if (ptr->size == 10) out << "_" << ptr->name << " TBYTE " << fixed << (long double)value << endl;
-				}
-			}
-		}
-	}
-	out << ".data?" << endl;
-	for (auto ptr : *variableTable)
-	{
-		if (ptr->initializer == nullptr)
-		{
-			if (ptr->arraySize > 1)
-			{
-				//fix me:
-				if (ptr->size == 1)  out << "_" << ptr->name << " SBYTE " << ptr->arraySize << " dup(?)" << endl;
-				if (ptr->size == 2)  out << "_" << ptr->name << " SWORD " << ptr->arraySize << " dup(?)" << endl;
-				if (ptr->size == 4)  out << "_" << ptr->name << " SDWORD " << ptr->arraySize << " dup(?)" << endl;
-				if (ptr->size == 8)  out << "_" << ptr->name << " SQWORD " << ptr->arraySize << " dup(?)" << endl;
-				if (ptr->size == 10) out << "_" << ptr->name << " TBYTE " << ptr->arraySize << " dup(?)" << endl;
-			}
-			else
-			{
-				if (ptr->size == 1)  out << "_" << ptr->name << " SBYTE ?" << endl;
-				if (ptr->size == 2)  out << "_" << ptr->name << " SWORD ?" << endl;
-				if (ptr->size == 4)  out << "_" << ptr->name << " SDWORD ?" << endl;
-				if (ptr->size == 8)  out << "_" << ptr->name << " SQWORD ?" << endl;
-				if (ptr->size == 10) out << "_" << ptr->name << " TBYTE ?" << endl;
-			}
-		}
-	}
-	out << endl << ".code" << endl;
-	for (FunctionData* ptr : *functionTable)
-	{
-		if (ptr->parameters != nullptr && ptr->parameters->size() > 0)
-		{
-			if (bit64) out << "_" << ptr->name << " PROC C, _argc:DWORD, _argv:QWORD" << endl;
-			else if (bit32) out << "_" << ptr->name << " PROC C, _argc:DWORD, _argv:DWORD" << endl;
-			else out << "_" << ptr->name << " PROC C, _argc:DWORD, _argv:WORD" << endl;
-		}
-		else
-		{
-			out << "_" << ptr->name << " PROC C" << endl;
-		}
-		out << "\t" << "mov eax, [_argc]" << endl;
-		out << "\t" << "xor eax,eax" << endl;
-		out << "\tret" << endl;
-		out << "_" << ptr->name << " endp" << endl;
-	}
+	handleVaribleTable(out);
+	handleFunctionTable(out);
 	out << "end" << endl << endl;;
+}
+
+MasmCodeGenerator::MasmCodeGenerator(const MasmCodeGenerator& other): BaseCodeGenerator(other)
+{
+}
+
+MasmCodeGenerator::MasmCodeGenerator(MasmCodeGenerator&& other) noexcept: BaseCodeGenerator(std::move(other))
+{
+}
+
+MasmCodeGenerator& MasmCodeGenerator::operator=(const MasmCodeGenerator& other)
+{
+	if (this == &other)
+		return *this;
+	BaseCodeGenerator::operator =(other);
+	return *this;
+}
+
+MasmCodeGenerator& MasmCodeGenerator::operator=(MasmCodeGenerator&& other) noexcept
+{
+	if (this == &other)
+		return *this;
+	BaseCodeGenerator::operator =(std::move(other));
+	return *this;
 }
