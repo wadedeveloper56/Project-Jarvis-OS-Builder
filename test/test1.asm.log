@@ -1,14 +1,14 @@
 PEDUMP - Win32/Win64 COFF EXE/OBJ/LIB file dumper v1.0 (C) Copyright 2025-2026 Christopher D. Wade.
 All Rights Reserved
 Dump of file test1.obj
-File Size 309 bytes
+File Size 349 bytes
 File Type: 64-bit COFF OBJECT
 
 FILE HEADER VALUES
               8664 Machine (x64)
                  3 (3) Number of Sections
-          69A06740 TimeDateStamp ->  n/a
-                8F PointerToSymbolTable
+          69A095F7 TimeDateStamp ->  n/a
+                B7 PointerToSymbolTable
                  9 (9) NumberOfSymbols
                  0 (0) SizeOfOptionalHeader
                  0 Flags
@@ -37,8 +37,8 @@ SECTION HEADER #1 (1)
    .data name
        0 physical address
        0 virtual address
-       0 (0) size of raw data
-       0 file pointer to raw data (00000000 to FFFFFFFF)
+      28 (40) size of raw data
+      8F file pointer to raw data (0000008F to 000000B6)
        0 file pointer to relocation table
        0 file pointer to line numbers
        0 number of relocations
@@ -56,8 +56,8 @@ SECTION HEADER #2 (2)
     .bss name
        0 physical address
        0 virtual address
-      2D (45) size of raw data
-       0 file pointer to raw data (00000000 to 0000002C)
+       5 (5) size of raw data
+       0 file pointer to raw data (00000000 to 00000004)
        0 file pointer to relocation table
        0 file pointer to line numbers
        0 number of relocations
@@ -79,9 +79,9 @@ Indx Sectn   Value   Type  Storage Name
 0002     1 00000000  0000 STATIC   .text
      * Section: 0000  Len: 00003  Relocs: 0000  LineNums: 0000 checksum:00000000
 0004     2 00000000  0000 STATIC   .data
-     * Section: 0000  Len: 00000  Relocs: 0000  LineNums: 0000 checksum:00000000
+     * Section: 0000  Len: 00028  Relocs: 0000  LineNums: 0000 checksum:00000000
 0006     3 00000000  0000 STATIC   .bss
-     * Section: 0000  Len: 0002D  Relocs: 0000  LineNums: 0000 checksum:00000000
+     * Section: 0000  Len: 00005  Relocs: 0000  LineNums: 0000 checksum:00000000
 0008     1 00000000  0020 EXTERNAL __main
 
 String Table Size = 0x4 (4) bytes 0 entries

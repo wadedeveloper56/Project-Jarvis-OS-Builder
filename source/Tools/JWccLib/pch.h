@@ -10,7 +10,10 @@
 // add headers that you want to pre-compile here
 #include "framework.h"
 
+#include <fstream>
 #include <iostream>
+#include <iomanip>
+#include <limits>
 #include <string>
 #include <vector>
 #include <cstdlib>

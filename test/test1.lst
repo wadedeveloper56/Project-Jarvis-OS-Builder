@@ -4,16 +4,16 @@ test1.asm
                                 .model flat, fastcall
 
                                 .data
+00000000  0600                  _var2 SWORD 6
+00000002  07000000              _var3 SDWORD 7
+00000006  08000000              _var4 SDWORD 8
+0000000A  0900000000000000      _var5 SQWORD 9
+00000012  00002041              _var6 SDWORD 10.000000
+00000016  0000000000002640      _var7 SQWORD 11.000000
+0000001E  00000000000000C002    _var8 TBYTE 12.000000
 00000000                        .data?
-00000000  00                    _var1 db ?
-00000001  0000                  _var2 dw ?
-00000003  00000000              _var3 dd ?
-00000007  00000000              _var4 dd ?
-0000000B  0000000000000000      _var5 dq ?
-00000013  00000000              _var6 dd ?
-00000017  0000000000000000      _var7 dq ?
-0000001F  000000000000000000    _var8 dt ?
-00000029  00000000              _init dd ?
+00000000  00                    _var1 SBYTE ?
+00000001  00000000              _init SDWORD ?
 
 00000000                        .code
 00000000                        _main proc  c
@@ -39,8 +39,8 @@ Segments and Groups:
                 N a m e                 Size     Length   Align   Combine Class
 
 FLAT . . . . . . . . . . . . . .        GROUP
-_BSS . . . . . . . . . . . . . .        64 Bit   0000002D Para    Public  'BSS'
-_DATA  . . . . . . . . . . . . .        64 Bit   00000000 Para    Public  'DATA'
+_BSS . . . . . . . . . . . . . .        64 Bit   00000005 Para    Public  'BSS'
+_DATA  . . . . . . . . . . . . .        64 Bit   00000028 Para    Public  'DATA'
 _TEXT  . . . . . . . . . . . . .        64 Bit   00000003 Para    Public  'CODE'
 
 
@@ -65,20 +65,20 @@ Symbols:
 @Interface . . . . . . . . . . .        Number             7h 
 @Model . . . . . . . . . . . . .        Number             7h 
 @ReservedStack . . . . . . . . .        Number             0h 
-@Time  . . . . . . . . . . . . .        Text   09:31:12
+@Time  . . . . . . . . . . . . .        Text   12:50:31
 @Version . . . . . . . . . . . .        Text   800
 @code  . . . . . . . . . . . . .        Text   _TEXT
 @data  . . . . . . . . . . . . .        Text   FLAT
 @stack . . . . . . . . . . . . .        Text   FLAT
 __JWASM__  . . . . . . . . . . .        Number            D4h 
-_init  . . . . . . . . . . . . .        DWord             29h _BSS FASTCALL
+_init  . . . . . . . . . . . . .        DWord              1h _BSS FASTCALL
 _var1  . . . . . . . . . . . . .        Byte               0h _BSS FASTCALL
-_var2  . . . . . . . . . . . . .        Word               1h _BSS FASTCALL
-_var3  . . . . . . . . . . . . .        DWord              3h _BSS FASTCALL
-_var4  . . . . . . . . . . . . .        DWord              7h _BSS FASTCALL
-_var5  . . . . . . . . . . . . .        QWord              Bh _BSS FASTCALL
-_var6  . . . . . . . . . . . . .        DWord             13h _BSS FASTCALL
-_var7  . . . . . . . . . . . . .        QWord             17h _BSS FASTCALL
-_var8  . . . . . . . . . . . . .        TByte             1Fh _BSS FASTCALL
+_var2  . . . . . . . . . . . . .        Word               0h _DATA FASTCALL
+_var3  . . . . . . . . . . . . .        DWord              2h _DATA FASTCALL
+_var4  . . . . . . . . . . . . .        DWord              6h _DATA FASTCALL
+_var5  . . . . . . . . . . . . .        QWord              Ah _DATA FASTCALL
+_var6  . . . . . . . . . . . . .        DWord             12h _DATA FASTCALL
+_var7  . . . . . . . . . . . . .        QWord             16h _DATA FASTCALL
+_var8  . . . . . . . . . . . . .        TByte             1Eh _DATA FASTCALL
 
 test1.asm: 21 lines, 2 passes, 1 ms, 0 warnings, 0 errors

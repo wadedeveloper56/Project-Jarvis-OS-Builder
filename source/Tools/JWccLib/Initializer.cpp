@@ -60,7 +60,7 @@ Initializer::~Initializer()
 	delete assignmentExpression;
 	if (initializerList != nullptr)
 	{
-		for (Initializer* ptr : *initializerList)
+		for (auto ptr : *initializerList)
 		{
 			delete ptr;
 		}

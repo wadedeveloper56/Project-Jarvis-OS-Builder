@@ -312,7 +312,7 @@ WS  [ \t\v\n\f]
                 return WadeSpace::Parser::make_COMMA(createKeywordToken(yytext,COMMA),WadeSpace::location());
                }
 ":"            {
-                cout << "Scanner: token [" << yytext << "]" << endl;
+                //cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_COLON(createKeywordToken(yytext,COLON),WadeSpace::location());
                }
 "("            {

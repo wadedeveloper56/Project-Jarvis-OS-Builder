@@ -20,7 +20,7 @@ ProgramData::~ProgramData()
 {
 	if (program != nullptr)
 	{
-		for (ExternalDeclaration* ptr : *program)
+		for (auto ptr : *program)
 		{
 			delete ptr;
 		}

@@ -5,6 +5,8 @@
 #include <optional>
 #include "MasmCodeGenerator.h"
 #include "GlobalVars.h"
+#include "Initializer.h"
+#include "Expression.h"
 
 using namespace WadeSpace;
 using namespace std;
@@ -56,26 +58,64 @@ void MasmCodeGenerator::generateCode(ofstream& out)
 	}
 	out << endl;
 	out << ".data" << endl;
-	out << ".data?" << endl;
-	for (VariableData* ptr : *variableTable)
+	for (auto ptr : *variableTable)
 	{
-		if (ptr->arraySize > 1)
+		if (ptr->initializer != nullptr)
 		{
-			if (ptr->size == 1)  out << "_" << ptr->name << " db " << ptr->arraySize << " dup(?)" << endl;
-			if (ptr->size == 2)  out << "_" << ptr->name << " dw " << ptr->arraySize << " dup(?)" << endl;
-			if (ptr->size == 4)  out << "_" << ptr->name << " dd " << ptr->arraySize << " dup(?)" << endl;
-			if (ptr->size == 8)  out << "_" << ptr->name << " dq " << ptr->arraySize << " dup(?)" << endl;
-			if (ptr->size == 10) out << "_" << ptr->name << " dt " << ptr->arraySize << " dup(?)" << endl;
-			if (ptr->size == 16) out << "_" << ptr->name << " db " << ptr->arraySize * 16 << " dup(?))" << endl;
+			if (ptr->arraySize > 1)
+			{
+				//fix me
+				if (ptr->size == 1)  out << "_" << ptr->name << " SBYTE " << ptr->arraySize << " dup(?)" << endl;
+				if (ptr->size == 2)  out << "_" << ptr->name << " SWORD " << ptr->arraySize << " dup(?)" << endl;
+				if (ptr->size == 4)  out << "_" << ptr->name << " SDWORD " << ptr->arraySize << " dup(?)" << endl;
+				if (ptr->size == 8)  out << "_" << ptr->name << " SQWORD " << ptr->arraySize << " dup(?)" << endl;
+				if (ptr->size == 10) out << "_" << ptr->name << " TBYTE " << ptr->arraySize << " dup(?)" << endl;
+			}
+			else
+			{
+				if (ptr->initializer->getAssignmentExpression()->getData()->getConstant()->getIConst() != nullptr)
+				{
+					long long int value = ptr->initializer->getAssignmentExpression()->getData()->getConstant()->getIConst()->data->repr.numericConstant.repr.lIntConst;
+					if (ptr->size == 1)  out << "_" << ptr->name << " SBYTE " << value << endl;
+					if (ptr->size == 2)  out << "_" << ptr->name << " SWORD " << value << endl;
+					if (ptr->size == 4)  out << "_" << ptr->name << " SDWORD " << value << endl;
+					if (ptr->size == 8)  out << "_" << ptr->name << " SQWORD " << value << endl;
+					if (ptr->size == 10) out << "_" << ptr->name << " TBYTE " << value << endl;
+				}
+				if (ptr->initializer->getAssignmentExpression()->getData()->getConstant()->getFConst() != nullptr)
+				{
+					long double value = ptr->initializer->getAssignmentExpression()->getData()->getConstant()->getFConst()->data->repr.numericConstant.repr.lDoubleConst;
+					if (ptr->size == 1)  out << "_" << ptr->name << " SBYTE " << fixed << (long double)value << endl;
+					if (ptr->size == 2)  out << "_" << ptr->name << " SWORD " << fixed << (long double)value << endl;
+					if (ptr->size == 4)  out << "_" << ptr->name << " SDWORD " << fixed << (long double)value << endl;
+					if (ptr->size == 8)  out << "_" << ptr->name << " SQWORD " << fixed << (long double)value << endl;
+					if (ptr->size == 10) out << "_" << ptr->name << " TBYTE " << fixed << (long double)value << endl;
+				}
+			}
 		}
-		else
+	}
+	out << ".data?" << endl;
+	for (auto ptr : *variableTable)
+	{
+		if (ptr->initializer == nullptr)
 		{
-			if (ptr->size == 1)  out << "_" << ptr->name << " db ?" << endl;
-			if (ptr->size == 2)  out << "_" << ptr->name << " dw ?" << endl;
-			if (ptr->size == 4)  out << "_" << ptr->name << " dd ?" << endl;
-			if (ptr->size == 8)  out << "_" << ptr->name << " dq ?" << endl;
-			if (ptr->size == 10) out << "_" << ptr->name << " dt ?" << endl;
-			if (ptr->size == 16) out << "_" << ptr->name << " db 16 dup(?)" << endl;
+			if (ptr->arraySize > 1)
+			{
+				//fix me:
+				if (ptr->size == 1)  out << "_" << ptr->name << " SBYTE " << ptr->arraySize << " dup(?)" << endl;
+				if (ptr->size == 2)  out << "_" << ptr->name << " SWORD " << ptr->arraySize << " dup(?)" << endl;
+				if (ptr->size == 4)  out << "_" << ptr->name << " SDWORD " << ptr->arraySize << " dup(?)" << endl;
+				if (ptr->size == 8)  out << "_" << ptr->name << " SQWORD " << ptr->arraySize << " dup(?)" << endl;
+				if (ptr->size == 10) out << "_" << ptr->name << " TBYTE " << ptr->arraySize << " dup(?)" << endl;
+			}
+			else
+			{
+				if (ptr->size == 1)  out << "_" << ptr->name << " SBYTE ?" << endl;
+				if (ptr->size == 2)  out << "_" << ptr->name << " SWORD ?" << endl;
+				if (ptr->size == 4)  out << "_" << ptr->name << " SDWORD ?" << endl;
+				if (ptr->size == 8)  out << "_" << ptr->name << " SQWORD ?" << endl;
+				if (ptr->size == 10) out << "_" << ptr->name << " TBYTE ?" << endl;
+			}
 		}
 	}
 	out << endl << ".code" << endl;
