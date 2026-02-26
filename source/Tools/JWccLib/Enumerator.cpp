@@ -30,16 +30,12 @@ TokenPtr Enumerator::getIdentifier() const
 
 Enumerator::Enumerator(const Enumerator& other)
 {
-	delete identifier;
-	delete constantExpression;
 	identifier = other.identifier ? new Token(*other.identifier) : nullptr;
 	constantExpression = other.constantExpression ? new Expression(*other.constantExpression) : nullptr;
 }
 
 Enumerator::Enumerator(Enumerator&& other) noexcept
 {
-	delete identifier;
-	delete constantExpression;
 	identifier = other.identifier ? new Token(*other.identifier) : nullptr;
 	constantExpression = other.constantExpression ? new Expression(*other.constantExpression) : nullptr;
 }
@@ -48,8 +44,6 @@ Enumerator& Enumerator::operator=(const Enumerator& other)
 {
 	if (this == &other)
 		return *this;
-	delete identifier;
-	delete constantExpression;
 	identifier = other.identifier ? new Token(*other.identifier) : nullptr;
 	constantExpression = other.constantExpression ? new Expression(*other.constantExpression) : nullptr;
 	return *this;
@@ -59,8 +53,6 @@ Enumerator& Enumerator::operator=(Enumerator&& other) noexcept
 {
 	if (this == &other)
 		return *this;
-	delete identifier;
-	delete constantExpression;
 	identifier = other.identifier ? new Token(*other.identifier) : nullptr;
 	constantExpression = other.constantExpression ? new Expression(*other.constantExpression) : nullptr;
 	return *this;

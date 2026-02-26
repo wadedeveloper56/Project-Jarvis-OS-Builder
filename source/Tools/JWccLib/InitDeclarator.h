@@ -21,6 +21,8 @@ namespace WadeSpace
 		InitDeclarator& operator=(InitDeclarator&& other) noexcept;
 		Declarator* getDeclarator() const;
 		Initializer* getInitializer() const;
+		bool isDeclarator() const;
+		bool isInitializer() const;
 		string getVariableName() const;
 
 	private:

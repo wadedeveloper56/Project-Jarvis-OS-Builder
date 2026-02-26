@@ -24,10 +24,6 @@ DeclarationSpecifiers::~DeclarationSpecifiers()
 
 DeclarationSpecifiers::DeclarationSpecifiers(const DeclarationSpecifiers& other)
 {
-	delete storageClassSpecifier;
-	delete typeSpecifier;
-	delete typeQualifier;
-	delete declarationSpecifiers;
 	storageClassSpecifier = other.storageClassSpecifier ? new StorageClassSpecifier(*other.storageClassSpecifier) : nullptr;
 	typeSpecifier = other.typeSpecifier ? new TypeSpecifier(*other.typeSpecifier) : nullptr;
 	typeQualifier = other.typeQualifier ? new TypeQualifier(*other.typeQualifier) : nullptr;
@@ -36,10 +32,6 @@ DeclarationSpecifiers::DeclarationSpecifiers(const DeclarationSpecifiers& other)
 
 DeclarationSpecifiers::DeclarationSpecifiers(DeclarationSpecifiers&& other) noexcept
 {
-	delete storageClassSpecifier;
-	delete typeSpecifier;
-	delete typeQualifier;
-	delete declarationSpecifiers;
 	storageClassSpecifier = other.storageClassSpecifier ? new StorageClassSpecifier(*other.storageClassSpecifier) : nullptr;
 	typeSpecifier = other.typeSpecifier ? new TypeSpecifier(*other.typeSpecifier) : nullptr;
 	typeQualifier = other.typeQualifier ? new TypeQualifier(*other.typeQualifier) : nullptr;
@@ -51,10 +43,6 @@ DeclarationSpecifiers& DeclarationSpecifiers::operator=(const DeclarationSpecifi
 {
 	if (this == &other)
 		return *this;
-	delete storageClassSpecifier;
-	delete typeSpecifier;
-	delete typeQualifier;
-	delete declarationSpecifiers;
 	storageClassSpecifier = other.storageClassSpecifier ? new StorageClassSpecifier(*other.storageClassSpecifier) : nullptr;
 	typeSpecifier = other.typeSpecifier ? new TypeSpecifier(*other.typeSpecifier) : nullptr;
 	typeQualifier = other.typeQualifier ? new TypeQualifier(*other.typeQualifier) : nullptr;

@@ -23,13 +23,11 @@ bool StorageClassSpecifier::isType() const
 
 StorageClassSpecifier::StorageClassSpecifier(const StorageClassSpecifier& other)
 {
-	delete type;
 	type = other.type ? new Token(*other.type) : nullptr;
 }
 
 StorageClassSpecifier::StorageClassSpecifier(StorageClassSpecifier&& other) noexcept
 {
-	delete type;
 	type = other.type ? new Token(*other.type) : nullptr;
 }
 
@@ -37,7 +35,6 @@ StorageClassSpecifier& StorageClassSpecifier::operator=(const StorageClassSpecif
 {
 	if (this == &other)
 		return *this;
-	delete type;
 	type = other.type ? new Token(*other.type) : nullptr;
 	return *this;
 }
@@ -46,7 +43,6 @@ StorageClassSpecifier& StorageClassSpecifier::operator=(StorageClassSpecifier&& 
 {
 	if (this == &other)
 		return *this;
-	delete type;
 	type = other.type ? new Token(*other.type) : nullptr;
 	return *this;
 }

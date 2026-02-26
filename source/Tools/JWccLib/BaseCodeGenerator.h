@@ -1,6 +1,7 @@
 #pragma once
 
 #include "GlobalVars.h"
+#include "Initializer.h"
 #include "TokenType.h"
 
 using namespace std;
@@ -14,6 +15,8 @@ namespace WadeSpace
 		int size; 
 		bool pointer;
 		unsigned long long arraySize;
+		Initializer* initializer;
+
 		_VariableData() = default;
 		~_VariableData() = default;
 

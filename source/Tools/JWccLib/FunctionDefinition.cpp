@@ -77,17 +77,6 @@ BaseStatement* FunctionDefinition::getBaseStatement() const
 
 FunctionDefinition::FunctionDefinition(const FunctionDefinition& other)
 {
-	delete declarationSpecifiers;
-	delete declarator;
-	if (vectorDeclaration != NULL)
-	{
-		for (Declaration* ptr : *vectorDeclaration)
-		{
-			delete ptr;
-		}
-	}
-	delete vectorDeclaration;
-	delete baseStatement;
 	declarationSpecifiers = other.declarationSpecifiers ? new DeclarationSpecifiers(*other.declarationSpecifiers) : nullptr;
 	declarator = other.declarator ? new Declarator(*other.declarator) : nullptr;
 	vectorDeclaration = other.vectorDeclaration ? new vector<Declaration*>(*other.vectorDeclaration) : nullptr;
@@ -96,17 +85,6 @@ FunctionDefinition::FunctionDefinition(const FunctionDefinition& other)
 
 FunctionDefinition::FunctionDefinition(FunctionDefinition&& other) noexcept
 {
-	delete declarationSpecifiers;
-	delete declarator;
-	if (vectorDeclaration != NULL)
-	{
-		for (Declaration* ptr : *vectorDeclaration)
-		{
-			delete ptr;
-		}
-	}
-	delete vectorDeclaration;
-	delete baseStatement;
 	declarationSpecifiers = other.declarationSpecifiers ? new DeclarationSpecifiers(*other.declarationSpecifiers) : nullptr;
 	declarator = other.declarator ? new Declarator(*other.declarator) : nullptr;
 	vectorDeclaration = other.vectorDeclaration ? new vector<Declaration*>(*other.vectorDeclaration) : nullptr;
@@ -117,17 +95,6 @@ FunctionDefinition& FunctionDefinition::operator=(const FunctionDefinition& othe
 {
 	if (this == &other)
 		return *this;
-	delete declarationSpecifiers;
-	delete declarator;
-	if (vectorDeclaration != NULL)
-	{
-		for (Declaration* ptr : *vectorDeclaration)
-		{
-			delete ptr;
-		}
-	}
-	delete vectorDeclaration;
-	delete baseStatement;
 	declarationSpecifiers = other.declarationSpecifiers ? new DeclarationSpecifiers(*other.declarationSpecifiers) : nullptr;
 	declarator = other.declarator ? new Declarator(*other.declarator) : nullptr;
 	vectorDeclaration = other.vectorDeclaration ? new vector<Declaration*>(*other.vectorDeclaration) : nullptr;
@@ -139,17 +106,6 @@ FunctionDefinition& FunctionDefinition::operator=(FunctionDefinition&& other) no
 {
 	if (this == &other)
 		return *this;
-	delete declarationSpecifiers;
-	delete declarator;
-	if (vectorDeclaration != NULL)
-	{
-		for (Declaration* ptr : *vectorDeclaration)
-		{
-			delete ptr;
-		}
-	}
-	delete vectorDeclaration;
-	delete baseStatement;
 	declarationSpecifiers = other.declarationSpecifiers ? new DeclarationSpecifiers(*other.declarationSpecifiers) : nullptr;
 	declarator = other.declarator ? new Declarator(*other.declarator) : nullptr;
 	vectorDeclaration = other.vectorDeclaration ? new vector<Declaration*>(*other.vectorDeclaration) : nullptr;

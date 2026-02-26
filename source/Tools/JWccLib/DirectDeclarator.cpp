@@ -88,22 +88,6 @@ vector<TokenPtr>* DirectDeclarator::getVectorOfStrings() const
 
 DirectDeclarator::DirectDeclarator(const DirectDeclarator& other)
 {
-	delete declarator;
-	delete directDeclarator;
-	delete constantExpression;
-	delete parameterTypeList;
-	delete identifier;
-	delete token1;
-	delete token2;
-	if (vectorOfStrings != nullptr)
-	{
-		for (auto token : *vectorOfStrings)
-		{
-			delete token;
-		}
-		delete vectorOfStrings;
-	}
-
 	identifier = other.identifier ? new Token(*other.identifier) : nullptr;
 	token1 = other.token1 ? new Token(*other.token1) : nullptr;
 	token2 = other.token2 ? new Token(*other.token2) : nullptr;
@@ -116,22 +100,6 @@ DirectDeclarator::DirectDeclarator(const DirectDeclarator& other)
 
 DirectDeclarator::DirectDeclarator(DirectDeclarator&& other) noexcept
 {
-	delete declarator;
-	delete directDeclarator;
-	delete constantExpression;
-	delete parameterTypeList;
-	delete identifier;
-	delete token1;
-	delete token2;
-	if (vectorOfStrings != nullptr)
-	{
-		for (auto token : *vectorOfStrings)
-		{
-			delete token;
-		}
-		delete vectorOfStrings;
-	}
-
 	identifier = other.identifier ? new Token(*other.identifier) : nullptr;
 	token1 = other.token1 ? new Token(*other.token1) : nullptr;
 	token2 = other.token2 ? new Token(*other.token2) : nullptr;
@@ -146,22 +114,6 @@ DirectDeclarator& DirectDeclarator::operator=(const DirectDeclarator& other)
 {
 	if (this == &other)
 		return *this;
-	delete declarator;
-	delete directDeclarator;
-	delete constantExpression;
-	delete parameterTypeList;
-	delete identifier;
-	delete token1;
-	delete token2;
-	if (vectorOfStrings != nullptr)
-	{
-		for (auto token : *vectorOfStrings)
-		{
-			delete token;
-		}
-		delete vectorOfStrings;
-	}
-
 	identifier = other.identifier ? new Token(*other.identifier) : nullptr;
 	token1 = other.token1 ? new Token(*other.token1) : nullptr;
 	token2 = other.token2 ? new Token(*other.token2) : nullptr;
@@ -177,21 +129,6 @@ DirectDeclarator& DirectDeclarator::operator=(DirectDeclarator&& other) noexcept
 {
 	if (this == &other)
 		return *this;
-	delete declarator;
-	delete directDeclarator;
-	delete constantExpression;
-	delete parameterTypeList;
-	delete identifier;
-	delete token1;
-	delete token2;
-	if (vectorOfStrings != nullptr)
-	{
-		for (auto token : *vectorOfStrings)
-		{
-			delete token;
-		}
-		delete vectorOfStrings;
-	}	
 	identifier = other.identifier ? new Token(*other.identifier) : nullptr;
 	token1 = other.token1 ? new Token(*other.token1) : nullptr;
 	token2 = other.token2 ? new Token(*other.token2) : nullptr;

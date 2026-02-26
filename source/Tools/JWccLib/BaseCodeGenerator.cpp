@@ -53,44 +53,12 @@ bool BaseCodeGenerator::isFunctionTable() const
 
 BaseCodeGenerator::BaseCodeGenerator(const BaseCodeGenerator& other)
 {
-	if (variableTable != nullptr)
-	{
-		for (auto ptr : *variableTable)
-		{
-			delete ptr;
-		}
-		delete variableTable;
-	}
-	if (functionTable != nullptr)
-	{
-		for (auto ptr : *functionTable)
-		{
-			delete ptr;
-		}
-		delete functionTable;
-	}
 	variableTable = other.variableTable ? new vector<VariableData*>(*other.variableTable) : nullptr;
 	functionTable = other.functionTable ? new vector<FunctionData*>(*other.functionTable) : nullptr;
 }
 
 BaseCodeGenerator::BaseCodeGenerator(BaseCodeGenerator&& other) noexcept
 {
-	if (variableTable != nullptr)
-	{
-		for (auto ptr : *variableTable)
-		{
-			delete ptr;
-		}
-		delete variableTable;
-	}
-	if (functionTable != nullptr)
-	{
-		for (auto ptr : *functionTable)
-		{
-			delete ptr;
-		}
-		delete functionTable;
-	}
 	variableTable = other.variableTable ? new vector<VariableData*>(*other.variableTable) : nullptr;
 	functionTable = other.functionTable ? new vector<FunctionData*>(*other.functionTable) : nullptr;
 }
@@ -99,22 +67,6 @@ BaseCodeGenerator& BaseCodeGenerator::operator=(const BaseCodeGenerator& other)
 {
 	if (this == &other)
 		return *this;
-	if (variableTable != nullptr)
-	{
-		for (auto ptr : *variableTable)
-		{
-			delete ptr;
-		}
-		delete variableTable;
-	}
-	if (functionTable != nullptr)
-	{
-		for (auto ptr : *functionTable)
-		{
-			delete ptr;
-		}
-		delete functionTable;
-	}
 	variableTable = other.variableTable ? new vector<VariableData*>(*other.variableTable) : nullptr;
 	functionTable = other.functionTable ? new vector<FunctionData*>(*other.functionTable) : nullptr;
 	return *this;
@@ -124,22 +76,6 @@ BaseCodeGenerator& BaseCodeGenerator::operator=(BaseCodeGenerator&& other) noexc
 {
 	if (this == &other)
 		return *this;
-	if (variableTable != nullptr)
-	{
-		for (auto ptr : *variableTable)
-		{
-			delete ptr;
-		}
-		delete variableTable;
-	}
-	if (functionTable != nullptr)
-	{
-		for (auto ptr : *functionTable)
-		{
-			delete ptr;
-		}
-		delete functionTable;
-	}
 	variableTable = other.variableTable ? new vector<VariableData*>(*other.variableTable) : nullptr;
 	functionTable = other.functionTable ? new vector<FunctionData*>(*other.functionTable) : nullptr;
 	return *this;

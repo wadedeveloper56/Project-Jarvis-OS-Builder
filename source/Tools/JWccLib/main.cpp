@@ -1,3 +1,4 @@
+#define _CRTDBG_MAP_ALLOC
 #include "pch.h"
 #include <fstream>
 #include <sstream>
@@ -16,6 +17,7 @@ using namespace simplecpp;
 
 int main(int argc, char* argv[])
 {
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 	ifstream in;
 	ofstream out;
 	ArgIntPtr bitsize = argInt0("bB", "bitsize", NULL, "define bit size to be 16, 32 or 64 bits (default is 32)");

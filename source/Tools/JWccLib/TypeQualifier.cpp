@@ -27,13 +27,11 @@ TokenPtr TypeQualifier::getType() const
 
 TypeQualifier::TypeQualifier(const TypeQualifier& other)
 {
-	delete type;
 	type = other.type ? new Token(*other.type) : nullptr;
 }
 
 TypeQualifier::TypeQualifier(TypeQualifier&& other) noexcept
 {
-	delete type;
 	type = other.type ? new Token(*other.type) : nullptr;
 }
 
@@ -41,7 +39,6 @@ TypeQualifier& TypeQualifier::operator=(const TypeQualifier& other)
 {
 	if (this == &other)
 		return *this;
-	delete type;
 	type = other.type ? new Token(*other.type) : nullptr;
 	return *this;
 }
@@ -50,7 +47,6 @@ TypeQualifier& TypeQualifier::operator=(TypeQualifier&& other) noexcept
 {
 	if (this == &other)
 		return *this;
-	delete type;
 	type = other.type ? new Token(*other.type) : nullptr;
 	return *this;
 }

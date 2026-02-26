@@ -109,6 +109,8 @@ void ProgramData::handleDeclaration(Declaration* declaration, vector<VariableDat
 		{
 			data->name = dd->getDirectDeclarator()->getIdentifier()->getSymbolName();
 		}
+		data->initializer = nullptr;
+		if (initDecl->isInitializer()) data->initializer = new Initializer(*initDecl->getInitializer());
 		data->arraySize = 1;
 		if (dd->isConstantExpression()) data->arraySize = dd->getConstantExpression()->getData()->getConstant()->getIConst()->data->repr.numericConstant.repr.lIntConst;
 		data->type = type;

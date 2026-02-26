@@ -1,4 +1,4 @@
-JWasm v2.12pre, Feb 19 2026
+JWasm v2.12pre, Feb 26 2026
 test1.asm
                                 .x64p
                                 .model flat, fastcall
@@ -11,7 +11,7 @@ test1.asm
 00000007  00000000              _var4 dd ?
 0000000B  0000000000000000      _var5 dq ?
 00000013  00000000              _var6 dd ?
-00000017  0000000000000000      _var dq ?
+00000017  0000000000000000      _var7 dq ?
 0000001F  000000000000000000    _var8 dt ?
 00000029  00000000              _init dd ?
 
@@ -59,26 +59,26 @@ Symbols:
 @Cpu . . . . . . . . . . . . . .        Number           DDFh 
 @CurSeg  . . . . . . . . . . . .        Text   
 @DataSize  . . . . . . . . . . .        Number             0h 
-@Date  . . . . . . . . . . . . .        Text   02/20/26
+@Date  . . . . . . . . . . . . .        Text   02/26/26
 @FileCur . . . . . . . . . . . .        Text   test1.asm
 @FileName  . . . . . . . . . . .        Text   TEST1
 @Interface . . . . . . . . . . .        Number             7h 
 @Model . . . . . . . . . . . . .        Number             7h 
 @ReservedStack . . . . . . . . .        Number             0h 
-@Time  . . . . . . . . . . . . .        Text   07:40:47
+@Time  . . . . . . . . . . . . .        Text   09:31:12
 @Version . . . . . . . . . . . .        Text   800
 @code  . . . . . . . . . . . . .        Text   _TEXT
 @data  . . . . . . . . . . . . .        Text   FLAT
 @stack . . . . . . . . . . . . .        Text   FLAT
 __JWASM__  . . . . . . . . . . .        Number            D4h 
 _init  . . . . . . . . . . . . .        DWord             29h _BSS FASTCALL
-_var . . . . . . . . . . . . . .        QWord             17h _BSS FASTCALL
 _var1  . . . . . . . . . . . . .        Byte               0h _BSS FASTCALL
 _var2  . . . . . . . . . . . . .        Word               1h _BSS FASTCALL
 _var3  . . . . . . . . . . . . .        DWord              3h _BSS FASTCALL
 _var4  . . . . . . . . . . . . .        DWord              7h _BSS FASTCALL
 _var5  . . . . . . . . . . . . .        QWord              Bh _BSS FASTCALL
 _var6  . . . . . . . . . . . . .        DWord             13h _BSS FASTCALL
+_var7  . . . . . . . . . . . . .        QWord             17h _BSS FASTCALL
 _var8  . . . . . . . . . . . . .        TByte             1Fh _BSS FASTCALL
 
-test1.asm: 21 lines, 2 passes, 0 ms, 0 warnings, 0 errors
+test1.asm: 21 lines, 2 passes, 1 ms, 0 warnings, 0 errors

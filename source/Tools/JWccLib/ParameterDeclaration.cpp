@@ -44,9 +44,6 @@ AbstractDeclarator* ParameterDeclaration::getAbstractDeclarator() const
 
 ParameterDeclaration::ParameterDeclaration(const ParameterDeclaration& other)
 {
-	delete declarationSpecifiers;
-	delete declarator;
-	delete abstractDeclarator;
 	declarationSpecifiers = other.declarationSpecifiers ? new DeclarationSpecifiers(*other.declarationSpecifiers) : nullptr;
 	declarator = other.declarator ? new Declarator(*other.declarator) : nullptr;
 	abstractDeclarator = other.abstractDeclarator ? new AbstractDeclarator(*other.abstractDeclarator) : nullptr;
@@ -54,9 +51,6 @@ ParameterDeclaration::ParameterDeclaration(const ParameterDeclaration& other)
 
 ParameterDeclaration::ParameterDeclaration(ParameterDeclaration&& other) noexcept
 {
-	delete declarationSpecifiers;
-	delete declarator;
-	delete abstractDeclarator;
 	declarationSpecifiers = other.declarationSpecifiers ? new DeclarationSpecifiers(*other.declarationSpecifiers) : nullptr;
 	declarator = other.declarator ? new Declarator(*other.declarator) : nullptr;
 	abstractDeclarator = other.abstractDeclarator ? new AbstractDeclarator(*other.abstractDeclarator) : nullptr;
@@ -66,9 +60,6 @@ ParameterDeclaration& ParameterDeclaration::operator=(const ParameterDeclaration
 {
 	if (this == &other)
 		return *this;
-	delete declarationSpecifiers;
-	delete declarator;
-	delete abstractDeclarator;
 	declarationSpecifiers = other.declarationSpecifiers ? new DeclarationSpecifiers(*other.declarationSpecifiers) : nullptr;
 	declarator = other.declarator ? new Declarator(*other.declarator) : nullptr;
 	abstractDeclarator = other.abstractDeclarator ? new AbstractDeclarator(*other.abstractDeclarator) : nullptr;
@@ -79,9 +70,6 @@ ParameterDeclaration& ParameterDeclaration::operator=(ParameterDeclaration&& oth
 {
 	if (this == &other)
 		return *this;
-	delete declarationSpecifiers;
-	delete declarator;
-	delete abstractDeclarator;
 	declarationSpecifiers = other.declarationSpecifiers ? new DeclarationSpecifiers(*other.declarationSpecifiers) : nullptr;
 	declarator = other.declarator ? new Declarator(*other.declarator) : nullptr;
 	abstractDeclarator = other.abstractDeclarator ? new AbstractDeclarator(*other.abstractDeclarator) : nullptr;

@@ -33,16 +33,12 @@ AbstractDeclarator* TypeName::getAbstractDeclarator() const
 
 TypeName::TypeName(const TypeName& other)
 {
-	delete specifierQualifierList;
-	delete abstractDeclarator;
 	specifierQualifierList = other.specifierQualifierList ? new SpecifierQualifierList(*other.specifierQualifierList) : nullptr;
 	abstractDeclarator = other.abstractDeclarator ? new AbstractDeclarator(*other.abstractDeclarator) : nullptr;
 }
 
 TypeName::TypeName(TypeName&& other) noexcept
 {
-	delete specifierQualifierList;
-	delete abstractDeclarator;
 	specifierQualifierList = other.specifierQualifierList ? new SpecifierQualifierList(*other.specifierQualifierList) : nullptr;
 	abstractDeclarator = other.abstractDeclarator ? new AbstractDeclarator(*other.abstractDeclarator) : nullptr;
 }
@@ -51,8 +47,6 @@ TypeName& TypeName::operator=(const TypeName& other)
 {
 	if (this == &other)
 		return *this;
-	delete specifierQualifierList;
-	delete abstractDeclarator;
 	specifierQualifierList = other.specifierQualifierList ? new SpecifierQualifierList(*other.specifierQualifierList) : nullptr;
 	abstractDeclarator = other.abstractDeclarator ? new AbstractDeclarator(*other.abstractDeclarator) : nullptr;
 	return *this;
@@ -62,8 +56,6 @@ TypeName& TypeName::operator=(TypeName&& other) noexcept
 {
 	if (this == &other)
 		return *this;
-	delete specifierQualifierList;
-	delete abstractDeclarator;
 	specifierQualifierList = other.specifierQualifierList ? new SpecifierQualifierList(*other.specifierQualifierList) : nullptr;
 	abstractDeclarator = other.abstractDeclarator ? new AbstractDeclarator(*other.abstractDeclarator) : nullptr;
 	return *this;

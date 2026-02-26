@@ -47,9 +47,6 @@ TypeQualifier* SpecifierQualifierList::getTypeQualifier() const
 
 SpecifierQualifierList::SpecifierQualifierList(const SpecifierQualifierList& other)
 {
-	delete specifierQualifierList;
-	delete typeSpecifier;
-	delete typeQualifier;
 	specifierQualifierList = other.specifierQualifierList ? new SpecifierQualifierList(*other.specifierQualifierList) : nullptr;
 	typeSpecifier = other.typeSpecifier ? new TypeSpecifier(*other.typeSpecifier) : nullptr;
 	typeQualifier = other.typeQualifier ? new TypeQualifier(*other.typeQualifier) : nullptr;;
@@ -57,9 +54,6 @@ SpecifierQualifierList::SpecifierQualifierList(const SpecifierQualifierList& oth
 
 SpecifierQualifierList::SpecifierQualifierList(SpecifierQualifierList&& other) noexcept
 {
-	delete specifierQualifierList;
-	delete typeSpecifier;
-	delete typeQualifier;
 	specifierQualifierList = other.specifierQualifierList ? new SpecifierQualifierList(*other.specifierQualifierList) : nullptr;
 	typeSpecifier = other.typeSpecifier ? new TypeSpecifier(*other.typeSpecifier) : nullptr;
 	typeQualifier = other.typeQualifier ? new TypeQualifier(*other.typeQualifier) : nullptr;;
@@ -69,9 +63,6 @@ SpecifierQualifierList& SpecifierQualifierList::operator=(const SpecifierQualifi
 {
 	if (this == &other)
 		return *this;
-	delete specifierQualifierList;
-	delete typeSpecifier;
-	delete typeQualifier;
 	specifierQualifierList = other.specifierQualifierList ? new SpecifierQualifierList(*other.specifierQualifierList) : nullptr;
 	typeSpecifier = other.typeSpecifier ? new TypeSpecifier(*other.typeSpecifier) : nullptr;
 	typeQualifier = other.typeQualifier ? new TypeQualifier(*other.typeQualifier) : nullptr;
@@ -82,9 +73,6 @@ SpecifierQualifierList& SpecifierQualifierList::operator=(SpecifierQualifierList
 {
 	if (this == &other)
 		return *this;
-	delete specifierQualifierList;
-	delete typeSpecifier;
-	delete typeQualifier;
 	specifierQualifierList = other.specifierQualifierList ? new SpecifierQualifierList(*other.specifierQualifierList) : nullptr;
 	typeSpecifier = other.typeSpecifier ? new TypeSpecifier(*other.typeSpecifier) : nullptr;
 	typeQualifier = other.typeQualifier ? new TypeQualifier(*other.typeQualifier) : nullptr;;

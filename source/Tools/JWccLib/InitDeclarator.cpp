@@ -69,6 +69,16 @@ Initializer* InitDeclarator::getInitializer() const
 	return initializer;
 }
 
+bool InitDeclarator::isDeclarator() const
+{
+	return declarator != nullptr;
+}
+
+bool InitDeclarator::isInitializer() const
+{
+	return initializer != nullptr;
+}
+
 string InitDeclarator::getVariableName() const
 {
 	TokenPtr identifier = getDeclarator()->getDirectDeclarator()->getIdentifier();

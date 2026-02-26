@@ -52,10 +52,6 @@ ExternalDeclaration* TypeSpecifier::getTypedefInfo() const { return typedefInfo;
 
 TypeSpecifier::TypeSpecifier(const TypeSpecifier& other)
 {
-	delete enumSpec;
-	delete suSpec;
-	delete typedefInfo;
-	delete typePtr;
 	enumSpec = other.enumSpec ? new EnumSpecifier(*other.enumSpec) : nullptr;
 	type = std::move(other.type);
 	typePtr = other.typePtr ? new Token(*other.typePtr) : nullptr;
@@ -65,10 +61,6 @@ TypeSpecifier::TypeSpecifier(const TypeSpecifier& other)
 
 TypeSpecifier::TypeSpecifier(TypeSpecifier&& other) noexcept
 {
-	delete enumSpec;
-	delete suSpec;
-	delete typedefInfo;
-	delete typePtr;
 	enumSpec = other.enumSpec ? new EnumSpecifier(*other.enumSpec) : nullptr;
 	type = std::move(other.type);
 	typePtr = other.typePtr ? new Token(*other.typePtr) : nullptr;
@@ -80,10 +72,6 @@ TypeSpecifier& TypeSpecifier::operator=(const TypeSpecifier& other)
 {
 	if (this == &other)
 		return *this;
-	delete enumSpec;
-	delete suSpec;
-	delete typedefInfo;
-	delete typePtr;
 	enumSpec = other.enumSpec ? new EnumSpecifier(*other.enumSpec) : nullptr;
 	type = std::move(other.type);
 	typePtr = other.typePtr ? new Token(*other.typePtr) : nullptr;
@@ -96,10 +84,6 @@ TypeSpecifier& TypeSpecifier::operator=(TypeSpecifier&& other) noexcept
 {
 	if (this == &other)
 		return *this;
-	delete enumSpec;
-	delete suSpec;
-	delete typedefInfo;
-	delete typePtr;
 	enumSpec = other.enumSpec ? new EnumSpecifier(*other.enumSpec) : nullptr;
 	type = std::move(other.type);
 	typePtr = other.typePtr ? new Token(*other.typePtr) : nullptr;

@@ -50,16 +50,6 @@ vector<StructDeclaration*>* StructOrUnionSpecifier::getVectorStructDeclaration()
 
 StructOrUnionSpecifier::StructOrUnionSpecifier(const StructOrUnionSpecifier& other)
 {
-	delete structOrUnion;
-	if (vectorStructDeclaration != nullptr)
-	{
-		for (StructDeclaration* ptr : *vectorStructDeclaration)
-		{
-			delete ptr;
-		}
-		delete vectorStructDeclaration;
-	}
-	delete name;
 	name = other.name;
 	structOrUnion = other.structOrUnion ? new Token(*other.structOrUnion) : nullptr;
 	vectorStructDeclaration = other.vectorStructDeclaration ? new vector<StructDeclaration*>(*other.vectorStructDeclaration) : nullptr;
@@ -67,16 +57,6 @@ StructOrUnionSpecifier::StructOrUnionSpecifier(const StructOrUnionSpecifier& oth
 
 StructOrUnionSpecifier::StructOrUnionSpecifier(StructOrUnionSpecifier&& other) noexcept
 {
-	delete structOrUnion;
-	if (vectorStructDeclaration != nullptr)
-	{
-		for (StructDeclaration* ptr : *vectorStructDeclaration)
-		{
-			delete ptr;
-		}
-		delete vectorStructDeclaration;
-	}
-	delete name;
 	name = other.name;
 	structOrUnion = other.structOrUnion ? new Token(*other.structOrUnion) : nullptr;
 	vectorStructDeclaration = other.vectorStructDeclaration ? new vector<StructDeclaration*>(*other.vectorStructDeclaration) : nullptr;
@@ -86,16 +66,6 @@ StructOrUnionSpecifier& StructOrUnionSpecifier::operator=(const StructOrUnionSpe
 {
 	if (this == &other)
 		return *this;
-	delete structOrUnion;
-	if (vectorStructDeclaration != nullptr)
-	{
-		for (StructDeclaration* ptr : *vectorStructDeclaration)
-		{
-			delete ptr;
-		}
-		delete vectorStructDeclaration;
-	}
-	delete name;
 	name = other.name;
 	structOrUnion = other.structOrUnion ? new Token(*other.structOrUnion) : nullptr;
 	vectorStructDeclaration = other.vectorStructDeclaration ? new vector<StructDeclaration*>(*other.vectorStructDeclaration) : nullptr;
@@ -106,16 +76,6 @@ StructOrUnionSpecifier& StructOrUnionSpecifier::operator=(StructOrUnionSpecifier
 {
 	if (this == &other)
 		return *this;
-	delete structOrUnion;
-	if (vectorStructDeclaration != nullptr)
-	{
-		for (StructDeclaration* ptr : *vectorStructDeclaration)
-		{
-			delete ptr;
-		}
-		delete vectorStructDeclaration;
-	}
-	delete name;
 	name = other.name;
 	structOrUnion = other.structOrUnion ? new Token(*other.structOrUnion) : nullptr;
 	vectorStructDeclaration = other.vectorStructDeclaration ? new vector<StructDeclaration*>(*other.vectorStructDeclaration) : nullptr;

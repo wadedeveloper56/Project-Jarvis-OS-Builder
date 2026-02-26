@@ -130,32 +130,6 @@ Constant* NodeData::getConstant() const
 
 NodeData::NodeData(const NodeData& other)
 {
-	delete token1;
-	delete token2;
-	delete lexp;
-	delete exp1;
-	delete exp2;
-	if (argumentList != nullptr)
-	{
-		for (auto ptr : *argumentList)
-		{
-			delete ptr;
-		}
-		delete argumentList;
-	}
-	delete identifier;
-	if (initializerList != nullptr)
-	{
-		for (auto ptr : *initializerList)
-		{
-			delete ptr;
-		}
-		delete initializerList;
-	}
-	delete typeName;
-	delete token3;
-	delete lexp;
-	delete constant;
 	type = other.type;
 	token1 = other.token1 ? new Token(*other.token1) : nullptr;
 	token2 = other.token2 ? new Token(*other.token2) : nullptr;

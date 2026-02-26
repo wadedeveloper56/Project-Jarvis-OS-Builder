@@ -22,16 +22,12 @@ Declarator::~Declarator()
 
 Declarator::Declarator(const Declarator& other)
 {
-	delete directDeclarator;
-	delete pointer;
 	directDeclarator = other.directDeclarator ? new DirectDeclarator(*other.directDeclarator) : nullptr;
 	pointer = other.pointer ? new Pointer(*other.pointer) : nullptr;
 }
 
 Declarator::Declarator(Declarator&& other) noexcept
 {
-	delete directDeclarator;
-	delete pointer;
 	directDeclarator = other.directDeclarator ? new DirectDeclarator(*other.directDeclarator) : nullptr;
 	pointer = other.pointer ? new Pointer(*other.pointer) : nullptr;
 }
@@ -40,8 +36,6 @@ Declarator& Declarator::operator=(const Declarator& other)
 {
 	if (this == &other)
 		return *this;
-	delete directDeclarator;
-	delete pointer;
 	directDeclarator = other.directDeclarator ? new DirectDeclarator(*other.directDeclarator) : nullptr;
 	pointer = other.pointer ? new Pointer(*other.pointer) : nullptr;
 	return *this;
@@ -51,8 +45,6 @@ Declarator& Declarator::operator=(Declarator&& other) noexcept
 {
 	if (this == &other)
 		return *this;
-	delete directDeclarator;
-	delete pointer;
 	directDeclarator = other.directDeclarator ? new DirectDeclarator(*other.directDeclarator) : nullptr;
 	pointer = other.pointer ? new Pointer(*other.pointer) : nullptr;
 	return *this;

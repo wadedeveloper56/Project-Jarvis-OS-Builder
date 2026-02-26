@@ -1,9 +1,9 @@
 #include "pch.h"
 #include "Token.h"
- 
+
 using namespace std;
 
-void zapTokData(TokDataPtr elem) 
+void zapTokData(TokDataPtr elem)
 {
 	if (elem == nullptr)
 	{
@@ -31,7 +31,7 @@ Token::Token()
 
 Token::~Token()
 {
-	zapTokData(data);
+	//if (data != nullptr) zapTokData(data);
 }
 
 string Token::getSymbolName() const
