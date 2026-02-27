@@ -58,7 +58,8 @@ void ProgramData::handleFunction(FunctionDefinition* declaration, vector<Functio
 {
 	FunctionData* data = new FunctionData();
 	data->type = declaration->getDeclarationSpecifiers()->getTypeSpecifier()->getType().value();
-	data->name = declaration->getDeclarator()->getDirectDeclarator()->getDirectDeclarator()->getIdentifier()->getSymbolName();
+	data->name = declaration->getDeclarator()->getDirectDeclarator()->getDirectDeclarator()->getIdentifier()->
+	                          getSymbolName();
 	ParameterTypeList* parameters = declaration->getDeclarator()->getDirectDeclarator()->getParameterTypeList();
 	if (parameters != nullptr && !parameters->getVectorParameterDeclaration()->empty())
 	{
@@ -68,11 +69,13 @@ void ProgramData::handleFunction(FunctionDefinition* declaration, vector<Functio
 			VariableData* functionData = new VariableData();
 			if (parameterDeclaration->getDeclarator()->getDirectDeclarator()->getIdentifier() != nullptr)
 			{
-				functionData->name = parameterDeclaration->getDeclarator()->getDirectDeclarator()->getIdentifier()->getSymbolName();
+				functionData->name = parameterDeclaration->getDeclarator()->getDirectDeclarator()->getIdentifier()->
+				                                           getSymbolName();
 			}
 			else
 			{
-				functionData->name = parameterDeclaration->getDeclarator()->getDirectDeclarator()->getDirectDeclarator()->getIdentifier()->getSymbolName();
+				functionData->name = parameterDeclaration->getDeclarator()->getDirectDeclarator()->getDirectDeclarator()
+				                                         ->getIdentifier()->getSymbolName();
 			}
 			TokenType type = parameterDeclaration->getDeclarationSpecifiers()->getTypeSpecifier()->getType().value();
 			functionData->pointer = parameterDeclaration->getDeclarator()->isPointer();
@@ -93,30 +96,38 @@ void ProgramData::handleDeclaration(Declaration* declaration, vector<VariableDat
 	}
 	else
 	{
-		auto temp = declaration->getDeclarationSpecifiers()->getTypeSpecifier()->getTypedefInfo()->getDeclaration();
-		type = temp->getDeclarationSpecifiers()->getDeclarationSpecifiers()->getTypeSpecifier()->getType().value();
+		if (declaration->getDeclarationSpecifiers()->getTypeSpecifier()->getTypedefInfo() != nullptr)
+		{
+			auto temp = declaration->getDeclarationSpecifiers()->getTypeSpecifier()->getTypedefInfo()->getDeclaration();
+			type = temp->getDeclarationSpecifiers()->getDeclarationSpecifiers()->getTypeSpecifier()->getType().value();
+		}
 	}
-	for (InitDeclarator* initDecl : *declaration->getVectorInitDeclarator())
+	if (declaration != nullptr && declaration->getVectorInitDeclarator() != nullptr)
 	{
-		VariableData* data = new VariableData();
-		auto declarator = initDecl->getDeclarator();
-		DirectDeclarator* dd = declarator->getDirectDeclarator();
-		if (dd->getIdentifier() != nullptr)
+		for (InitDeclarator* initDecl : *declaration->getVectorInitDeclarator())
 		{
-			data->name = dd->getIdentifier()->getSymbolName();
+			VariableData* data = new VariableData();
+			auto declarator = initDecl->getDeclarator();
+			DirectDeclarator* dd = declarator->getDirectDeclarator();
+			if (dd->getIdentifier() != nullptr)
+			{
+				data->name = dd->getIdentifier()->getSymbolName();
+			}
+			else
+			{
+				data->name = dd->getDirectDeclarator()->getIdentifier()->getSymbolName();
+			}
+			data->initializer = nullptr;
+			if (initDecl->isInitializer()) data->initializer = new Initializer(*initDecl->getInitializer());
+			data->arraySize = 1;
+			if (dd->isConstantExpression()) data->arraySize = dd->getConstantExpression()->getData()->getConstant()->
+			                                                      getIConst()->data->repr.numericConstant.repr.
+			                                                      lIntConst;
+			data->type = type;
+			data->pointer = declarator->isPointer();
+			data->size = getSize(type, data->pointer);
+			variableTable->push_back(data);
 		}
-		else
-		{
-			data->name = dd->getDirectDeclarator()->getIdentifier()->getSymbolName();
-		}
-		data->initializer = nullptr;
-		if (initDecl->isInitializer()) data->initializer = new Initializer(*initDecl->getInitializer());
-		data->arraySize = 1;
-		if (dd->isConstantExpression()) data->arraySize = dd->getConstantExpression()->getData()->getConstant()->getIConst()->data->repr.numericConstant.repr.lIntConst;
-		data->type = type;
-		data->pointer = declarator->isPointer();
-		data->size = getSize(type, data->pointer);
-		variableTable->push_back(data);
 	}
 }
 

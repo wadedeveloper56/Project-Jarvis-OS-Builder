@@ -1,14 +1,14 @@
 PEDUMP - Win32/Win64 COFF EXE/OBJ/LIB file dumper v1.0 (C) Copyright 2025-2026 Christopher D. Wade.
 All Rights Reserved
 Dump of file test1.obj
-File Size 356 bytes
+File Size 318 bytes
 File Type: 32-bit COFF OBJECT
 
 FILE HEADER VALUES
                14C Machine (Intel 386 or later processors and compatible processors)
                  3 (3) Number of Sections
-          69A0D5AD TimeDateStamp ->  n/a
-                BE PointerToSymbolTable
+          69A0DF49 TimeDateStamp ->  n/a
+                98 PointerToSymbolTable
                  9 (9) NumberOfSymbols
                  0 (0) SizeOfOptionalHeader
                  0 Flags
@@ -39,8 +39,8 @@ SECTION HEADER #1 (1)
    .data name
        0 physical address
        0 virtual address
-      28 (40) size of raw data
-      96 file pointer to raw data (00000096 to 000000BD)
+       2 (2) size of raw data
+      96 file pointer to raw data (00000096 to 00000097)
        0 file pointer to relocation table
        0 file pointer to line numbers
        0 number of relocations
@@ -53,9 +53,7 @@ C0300040 flags
          Writeable
 
 RAW DATA #1 (1)
-00000000  06 00 07 00 00 00 08 00  00 00 09 00 00 00 00 00  ................
-00000010  00 00 00 00 20 41 00 00  00 00 00 00 26 40 00 00  .... A......&@..
-00000020  00 00 00 00 00 c0 02 40                           .......@
+00000000  06 00                                             ..
 
 
 SECTION HEADER #2 (2)
@@ -85,7 +83,7 @@ Indx Sectn   Value   Type  Storage Name
 0002     1 00000000  0000 STATIC   .text
      * Section: 0000  Len: 0000A  Relocs: 0000  LineNums: 0000 checksum:00000000
 0004     2 00000000  0000 STATIC   .data
-     * Section: 0000  Len: 00028  Relocs: 0000  LineNums: 0000 checksum:00000000
+     * Section: 0000  Len: 00002  Relocs: 0000  LineNums: 0000 checksum:00000000
 0006     3 00000000  0000 STATIC   .bss
      * Section: 0000  Len: 00005  Relocs: 0000  LineNums: 0000 checksum:00000000
 0008     1 00000000  0020 EXTERNAL __main

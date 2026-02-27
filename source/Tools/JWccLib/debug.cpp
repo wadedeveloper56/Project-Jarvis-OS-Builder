@@ -11,7 +11,7 @@ void handleDeclaration(ExternalDeclaration* externalDeclaration)
 {
 	bool isTypedef = externalDeclaration->isTypedef();
 	Declaration* declaration = externalDeclaration->getDeclaration();
-	if (declaration != nullptr)
+	if (declaration != nullptr && declaration->getVectorInitDeclarator() != nullptr)
 	{
 		for (InitDeclarator* initDecl : *declaration->getVectorInitDeclarator())
 		{
