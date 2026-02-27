@@ -453,7 +453,7 @@ type_specifier
 
 struct_or_union_specifier
     : struct_or_union IDENTIFIER OCURLY struct_declaration_list CCURLY   { $$ = new StructOrUnionSpecifier($1,$2,$4); cout << "struct_or_union IDENTIFIER OCURLY struct_declaration_list CCURLY REDUCE to struct_or_union_specifier" << endl;}
-    | struct_or_union OCURLY struct_declaration_list CCURLY              { $$ = new StructOrUnionSpecifier($1,nullptr,$3); cout << "struct_or_union OCURLY struct_declaration_list CCURLY REDUCE to struct_or_union_specifier" << endl;}
+    | struct_or_union OCURLY struct_declaration_list CCURLY              { $$ = new StructOrUnionSpecifier($1,nullptr,$3);  cout << "struct_or_union OCURLY struct_declaration_list CCURLY REDUCE to struct_or_union_specifier" << endl;}
     | struct_or_union IDENTIFIER                                         { $$ = new StructOrUnionSpecifier($1,$2,nullptr); cout << "struct_or_union IDENTIFIER REDUCE to struct_or_union_specifier" << endl;}
     ;
 

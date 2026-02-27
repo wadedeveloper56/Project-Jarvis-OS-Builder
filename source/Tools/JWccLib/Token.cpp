@@ -31,7 +31,7 @@ Token::Token()
 
 Token::~Token()
 {
-	//if (data != nullptr) zapTokData(data);
+	if (data != nullptr) zapTokData(data);
 }
 
 string Token::getSymbolName() const

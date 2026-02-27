@@ -21,19 +21,23 @@ namespace WadeSpace
 		~_VariableData() = default;
 
 		_VariableData(const _VariableData& other)
-			: name(other.name),
-			  size(other.size),
-			  pointer(other.pointer),
-			  arraySize(other.arraySize)
 		{
+			name = other.name;
+			size = other.size;
+			pointer = other.pointer;
+			arraySize = other.arraySize;
+			type = other.type;
+			initializer = other.initializer ? new Initializer(*other.initializer) : nullptr;
 		}
 
 		_VariableData(_VariableData&& other) noexcept
-			: name(std::move(other.name)),
-			  size(other.size),
-			  pointer(other.pointer),
-			  arraySize(other.arraySize)
 		{
+			name = other.name;
+			size = other.size;
+			pointer = other.pointer;
+			arraySize = other.arraySize;
+			type = other.type;
+			initializer = other.initializer ? new Initializer(*other.initializer) : nullptr;
 		}
 
 		_VariableData& operator=(const _VariableData& other)
@@ -44,6 +48,8 @@ namespace WadeSpace
 			size = other.size;
 			pointer = other.pointer;
 			arraySize = other.arraySize;
+			type = other.type;
+			initializer = other.initializer ? new Initializer(*other.initializer) : nullptr;
 			return *this;
 		}
 
@@ -55,6 +61,8 @@ namespace WadeSpace
 			size = other.size;
 			pointer = other.pointer;
 			arraySize = other.arraySize;
+			type = other.type;
+			initializer = other.initializer ? new Initializer(*other.initializer) : nullptr;
 			return *this;
 		}
 	} VariableData;
@@ -69,19 +77,19 @@ namespace WadeSpace
 		~_FunctionData() = default;
 
 		_FunctionData(const _FunctionData& other)
-			: name(other.name),
-			  size(other.size),
-			  type(other.type),
-			  parameters(new vector<VariableData*>(*other.parameters))
 		{
+			name = other.name;
+			size = other.size;
+			type = other.type;
+			parameters = other.parameters ? new vector<VariableData*>(*other.parameters) : nullptr;
 		}
 
 		_FunctionData(_FunctionData&& other) noexcept
-			: name(std::move(other.name)),
-			  size(other.size),
-		      type(other.type),
-			parameters(new vector<VariableData*>(*other.parameters))
 		{
+			name = other.name;
+			size = other.size;
+			type = other.type;
+			parameters = other.parameters ? new vector<VariableData*>(*other.parameters) : nullptr;
 		}
 
 		_FunctionData& operator=(const _FunctionData& other)
@@ -91,7 +99,7 @@ namespace WadeSpace
 			name = other.name;
 			size = other.size;
 			type = other.type;
-			parameters = other.parameters;
+			parameters = other.parameters ? new vector<VariableData*>(*other.parameters) : nullptr;
 			return *this;
 		}
 
@@ -102,7 +110,7 @@ namespace WadeSpace
 			name = std::move(other.name);
 			size = other.size;
 			type = other.type;		
-			parameters = other.parameters;
+			parameters = other.parameters ? new vector<VariableData*>(*other.parameters) : nullptr;
 			return *this;
 		}
 	} FunctionData;

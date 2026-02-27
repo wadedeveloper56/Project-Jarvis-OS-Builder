@@ -2576,7 +2576,7 @@ namespace  WadeSpace  {
 
   case 115: // struct_or_union_specifier: struct_or_union "{" struct_declaration_list "}"
 #line 456 "ansic.y"
-                                                                         { yylhs.value.as < StructOrUnionSpecifier * > () = new StructOrUnionSpecifier(yystack_[3].value.as < TokenPtr > (),nullptr,yystack_[1].value.as < std::vector<StructDeclaration *> * > ()); cout << "struct_or_union OCURLY struct_declaration_list CCURLY REDUCE to struct_or_union_specifier" << endl;}
+                                                                         { yylhs.value.as < StructOrUnionSpecifier * > () = new StructOrUnionSpecifier(yystack_[3].value.as < TokenPtr > (),nullptr,yystack_[1].value.as < std::vector<StructDeclaration *> * > ());  cout << "struct_or_union OCURLY struct_declaration_list CCURLY REDUCE to struct_or_union_specifier" << endl;}
 #line 2581 "parser.cpp"
     break;
 

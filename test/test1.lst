@@ -1,4 +1,4 @@
-JWasm v2.12pre, Feb 26 2026
+JWasm v2.12pre, Feb 27 2026
 test1.asm
                                 .x64p
                                 .model flat, c;
@@ -79,7 +79,7 @@ Symbols:
 @FileName  . . . . . . . . . . .        Text   TEST1
 @Interface . . . . . . . . . . .        Number             1h 
 @Model . . . . . . . . . . . . .        Number             7h 
-@Time  . . . . . . . . . . . . .        Text   10:32:40
+@Time  . . . . . . . . . . . . .        Text   11:03:33
 @Version . . . . . . . . . . . .        Text   800
 @code  . . . . . . . . . . . . .        Text   _TEXT
 @data  . . . . . . . . . . . . .        Text   FLAT

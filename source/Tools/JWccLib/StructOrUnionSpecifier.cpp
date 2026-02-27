@@ -3,11 +3,13 @@
 
 using namespace WadeSpace;
 
-StructOrUnionSpecifier::StructOrUnionSpecifier(TokenPtr structOrUnion, TokenPtr name, vector<StructDeclaration*>* vectorStructDeclaration) : structOrUnion(structOrUnion), name(name), vectorStructDeclaration(vectorStructDeclaration)
+StructOrUnionSpecifier::StructOrUnionSpecifier(TokenPtr structOrUnion, TokenPtr name, vector<StructDeclaration*>* vectorStructDeclaration) : 
+structOrUnion(structOrUnion), name(name), vectorStructDeclaration(vectorStructDeclaration)
 {
 }
 
-StructOrUnionSpecifier::StructOrUnionSpecifier() : structOrUnion(nullptr), name(nullptr), vectorStructDeclaration(nullptr)
+StructOrUnionSpecifier::StructOrUnionSpecifier() : 
+structOrUnion(nullptr), name(nullptr), vectorStructDeclaration(nullptr)
 {
 }
 
