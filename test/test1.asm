@@ -1,4 +1,4 @@
-.386
+.x64p
 .model flat, c;
 
 .data
@@ -8,7 +8,7 @@ _var1 SBYTE ?
 _init SDWORD ?
 
 .code
-_main PROC C, _argc:DWORD, _argv:DWORD
+_main PROC C, _argc:DWORD, _argv:QWORD
 	mov eax, [_argc]
 	xor eax,eax
 	ret

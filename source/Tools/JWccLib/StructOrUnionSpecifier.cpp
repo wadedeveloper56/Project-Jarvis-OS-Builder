@@ -7,14 +7,6 @@ StructOrUnionSpecifier::StructOrUnionSpecifier(TokenPtr structOrUnion, TokenPtr 
 {
 }
 
-StructOrUnionSpecifier::StructOrUnionSpecifier(TokenPtr structOrUnion, vector<StructDeclaration*>* vectorStructDeclaration) : structOrUnion(structOrUnion), name(nullptr),	vectorStructDeclaration(vectorStructDeclaration)
-{
-}
-
-StructOrUnionSpecifier::StructOrUnionSpecifier(TokenPtr structOrUnion, TokenPtr name) : structOrUnion(structOrUnion), name(name), vectorStructDeclaration(nullptr)
-{
-}
-
 StructOrUnionSpecifier::StructOrUnionSpecifier() : structOrUnion(nullptr), name(nullptr), vectorStructDeclaration(nullptr)
 {
 }

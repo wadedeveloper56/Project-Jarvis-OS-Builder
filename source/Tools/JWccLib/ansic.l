@@ -228,6 +228,15 @@ WS  [ \t\v\n\f]
                         return WadeSpace::Parser::make_TYPE_NAME(createStringIDToken(yytext), WadeSpace::location()); 
                    }
                 }
+                if (WadeSpace::structList != nullptr) 
+                {
+                  auto structEntry = WadeSpace::structList->find(yytext);
+                  if (structEntry != WadeSpace::structList->end()) 
+                  {
+                        cout << "Scanner: struct name [" << yytext << "]" << endl;
+                        return WadeSpace::Parser::make_IDENTIFIER(createStringIDToken(yytext), WadeSpace::location()); 
+                   }
+                }
                 cout << "Scanner: identifier [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_IDENTIFIER(createStringIDToken(yytext), WadeSpace::location()); 
                }

@@ -106,6 +106,7 @@ namespace WadeSpace
 	    expression_statement,
 	    selection_statement,
 	    iteration_statement,
-	    jump_statement 
+	    jump_statement,
+		UNKNOWN
 	} TokenType;
 }

@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "Declaration.h"
+#include "ExternalDeclaration.h"
 
 using namespace WadeSpace;
 using namespace std;
@@ -64,6 +65,8 @@ vector<InitDeclarator*>* Declaration::getVectorInitDeclarator() const { return v
 bool Declaration::isDeclarationSpecifiers() const { return declarationSpecifiers != nullptr;  }
 bool Declaration::isVectorInitDeclarator() const { return vectorInitDeclarator != nullptr; }
 bool Declaration::isStorageClassSpecifier() const { return isDeclarationSpecifiers() && getDeclarationSpecifiers()->getStorageClassSpecifier() != nullptr; }
+StorageClassSpecifier* Declaration::getStorageClassSpecifier() const { return getDeclarationSpecifiers()->getStorageClassSpecifier(); }
+
 bool Declaration::isTypedef() const
 {
 		if (isStorageClassSpecifier())
@@ -72,4 +75,24 @@ bool Declaration::isTypedef() const
 			return keyword == "typedef";
 		}
 	return false;
+}
+
+TokenType Declaration::getType() const
+{
+	auto declaration_specifiers = getDeclarationSpecifiers();
+	if (declaration_specifiers != nullptr)
+	{
+		if (declaration_specifiers->getTypeSpecifier()->getType().has_value())
+		{
+			return declaration_specifiers->getTypeSpecifier()->getType().value();
+		}
+		else
+		{
+			if (declaration_specifiers->getTypeSpecifier()->getTypedefInfo() != nullptr)
+			{
+				auto temp = declaration_specifiers->getTypeSpecifier()->getTypedefInfo()->getDeclaration();
+				return temp->getDeclarationSpecifiers()->getDeclarationSpecifiers()->getTypeSpecifier()->getType().value();
+			}
+		}
+	}	return UNKNOWN;
 }

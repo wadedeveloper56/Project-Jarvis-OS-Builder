@@ -3,33 +3,61 @@
 #include "Expression.h"
 #include "ProgramData.h"
 #include "GlobalVars.h"
+#include "StructOrUnionSpecifier.h"
 
 using namespace std;
 using namespace WadeSpace;
+
+void handleStructDefinition(Declaration* declaration)
+{
+	auto declaration_specifiers = declaration->getDeclarationSpecifiers();
+	if (declaration_specifiers != nullptr)
+	{
+		auto type_specifier = declaration_specifiers->getTypeSpecifier();
+		if (type_specifier != nullptr && type_specifier->getType().has_value())
+		{
+			auto token = type_specifier->getType().value();
+			if (token == STRUCT && type_specifier->getStructOrUnionSpecifier() != nullptr)
+			{
+				if (structList == nullptr) structList = new map<string, StructOrUnionSpecifier*>();
+				StructOrUnionSpecifier* temp = type_specifier->getStructOrUnionSpecifier();
+				if (temp->getVectorStructDeclaration() != nullptr)
+				{
+					string name = temp->getName()->getSymbolName();
+					structList->insert({ name, temp });
+				}
+			}
+		}
+	}
+}
 
 void handleDeclaration(ExternalDeclaration* externalDeclaration)
 {
 	bool isTypedef = externalDeclaration->isTypedef();
 	Declaration* declaration = externalDeclaration->getDeclaration();
-	if (declaration != nullptr && declaration->getVectorInitDeclarator() != nullptr)
+	if (declaration != nullptr)
 	{
-		for (InitDeclarator* initDecl : *declaration->getVectorInitDeclarator())
+	    handleStructDefinition(declaration);
+		if (declaration->getVectorInitDeclarator() != nullptr)
 		{
-			DirectDeclarator* dd = initDecl->getDeclarator()->getDirectDeclarator();
-			if (dd != nullptr)
+			for (InitDeclarator* initDecl : *declaration->getVectorInitDeclarator())
 			{
-			    string name;
-				if (dd->getIdentifier() != nullptr)
+				DirectDeclarator* dd = initDecl->getDeclarator()->getDirectDeclarator();
+				if (dd != nullptr)
 				{
-					name = dd->getIdentifier()->getSymbolName();
-				}
-				else
-				{
-					name = dd->getDirectDeclarator()->getIdentifier()->getSymbolName();
-				}
-				if (isTypedef)
-				{
-					typedefList->insert({name, externalDeclaration});
+					string name;
+					if (dd->getIdentifier() != nullptr)
+					{
+						name = dd->getIdentifier()->getSymbolName();
+					}
+					else
+					{
+						name = dd->getDirectDeclarator()->getIdentifier()->getSymbolName();
+					}
+					if (isTypedef)
+					{
+						typedefList->insert({ name, externalDeclaration });
+					}
 				}
 			}
 		}
@@ -46,6 +74,10 @@ void createTranslationUnit(ExternalDeclaration* externalDeclaration)
 	if (typedefList == nullptr)
 	{
 		typedefList = new map<string, ExternalDeclaration*>();
+	}
+	if (structList == nullptr)
+	{
+		structList = new map<string, StructOrUnionSpecifier*>();
 	}
 	if (externalDeclaration != nullptr && externalDeclaration->isDeclaration())
 	{

@@ -23,11 +23,12 @@ namespace WadeSpace
 		Declaration& operator=(Declaration&& other) noexcept;
 		[[nodiscard]] DeclarationSpecifiers* getDeclarationSpecifiers() const;
 		[[nodiscard]] vector<InitDeclarator*>* getVectorInitDeclarator() const;
-		[[nodiscard]] StorageClassSpecifier* getStorageClassSpecifier() const { return getDeclarationSpecifiers()->getStorageClassSpecifier(); }
+		[[nodiscard]] StorageClassSpecifier* getStorageClassSpecifier() const;
 		[[nodiscard]] bool isDeclarationSpecifiers() const;
 		[[nodiscard]] bool isVectorInitDeclarator() const;
 		[[nodiscard]] bool isStorageClassSpecifier() const;
 		[[nodiscard]] bool isTypedef() const;
+		[[nodiscard]] TokenType getType() const;
 
 	private:
 		DeclarationSpecifiers* declarationSpecifiers;

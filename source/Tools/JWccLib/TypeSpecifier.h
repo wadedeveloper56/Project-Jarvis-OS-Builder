@@ -14,17 +14,15 @@ namespace WadeSpace
 	class TypeSpecifier
 	{
 	public:
-		explicit TypeSpecifier(TokenType type);
-		explicit TypeSpecifier(TokenPtr type);
-		explicit TypeSpecifier(EnumSpecifier* type);
-		explicit TypeSpecifier(StructOrUnionSpecifier* type);
+		explicit TypeSpecifier(TokenType type, TokenPtr token, StructOrUnionSpecifier* structOrUnion, EnumSpecifier* enumSpec);
 		TypeSpecifier();
 		virtual ~TypeSpecifier();
 		[[nodiscard]] EnumSpecifier* getEnumSpec() const;
 		[[nodiscard]] optional<TokenType> getType() const;
-		[[nodiscard]] StructOrUnionSpecifier* getSuSpec() const;
+		[[nodiscard]] StructOrUnionSpecifier* getStructOrUnionSpecifier() const;
 		[[nodiscard]] TokenPtr getTypePtr() const;
 		[[nodiscard]] ExternalDeclaration* getTypedefInfo() const;
+
 		TypeSpecifier(const TypeSpecifier& other);
 		TypeSpecifier(TypeSpecifier&& other) noexcept;
 		TypeSpecifier& operator=(const TypeSpecifier& other);
@@ -34,7 +32,7 @@ namespace WadeSpace
 		EnumSpecifier* enumSpec;
 		optional<TokenType> type;
 		TokenPtr typePtr;
-		StructOrUnionSpecifier* suSpec;
+		StructOrUnionSpecifier* structOrUnionSpecifier;
 		ExternalDeclaration* typedefInfo;
 	};
 }

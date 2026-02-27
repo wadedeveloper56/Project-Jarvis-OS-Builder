@@ -36,14 +36,14 @@ Token::~Token()
 
 string Token::getSymbolName() const
 {
-	if (data->code == YC_SYMBOL)
+	if (data != nullptr)
 	{
-		return string(data->repr.symbol.string, data->repr.symbol.strLen);
+		if (data->code == YC_SYMBOL)
+		{
+			return string(data->repr.symbol.string, data->repr.symbol.strLen);
+		}
 	}
-	else
-	{
-		throw logic_error("Token is not an identifier");
-	}
+	return "";
 }
 
 string Token::getKeywordName() const
