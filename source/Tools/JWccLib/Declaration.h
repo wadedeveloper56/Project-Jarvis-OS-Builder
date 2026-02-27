@@ -13,16 +13,19 @@ namespace WadeSpace
 	class Declaration
 	{
 	public:
-		explicit Declaration(DeclarationSpecifiers* declarationSpecifiers);
-		Declaration(DeclarationSpecifiers* declarationSpecifiers, vector<InitDeclarator*>* vectorInitDeclarator);
 		Declaration();
+		Declaration(DeclarationSpecifiers* declarationSpecifiers);
+		Declaration(DeclarationSpecifiers* declarationSpecifiers, vector<InitDeclarator*>* vectorInitDeclarator);
 		virtual ~Declaration();
+
 		Declaration(const Declaration& other);
 		Declaration(Declaration&& other) noexcept;
 		Declaration& operator=(const Declaration& other);
 		Declaration& operator=(Declaration&& other) noexcept;
+
 		[[nodiscard]] DeclarationSpecifiers* getDeclarationSpecifiers() const;
 		[[nodiscard]] vector<InitDeclarator*>* getVectorInitDeclarator() const;
+		
 		[[nodiscard]] StorageClassSpecifier* getStorageClassSpecifier() const;
 		[[nodiscard]] bool isDeclarationSpecifiers() const;
 		[[nodiscard]] bool isVectorInitDeclarator() const;

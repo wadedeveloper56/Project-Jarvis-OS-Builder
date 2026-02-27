@@ -203,8 +203,7 @@ InitDeclarator* createInitDeclarator(Declarator* declarator, Initializer* initia
 	return new InitDeclarator(declarator, initializer);
 }
 
-Declaration* createDeclaration(DeclarationSpecifiers* declarationSpecifiers,
-                               vector<InitDeclarator*>* vectorInitDeclarator)
+Declaration* createDeclaration(DeclarationSpecifiers* declarationSpecifiers, vector<InitDeclarator*>* vectorInitDeclarator)
 {
 	return new Declaration(declarationSpecifiers, vectorInitDeclarator);
 }

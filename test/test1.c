@@ -5,12 +5,12 @@ struct Data
 	int var5;
 };
 struct Data var6;
-char var1;
-short var2 = 6;
-int init;
+//char var1;
+//short var2 = 6;
+//int init;
 
-int main(int argc, char* argv[])
-{
-	return 0;
-}
+//int main(int argc, char* argv[])
+//{
+	//return 0;
+//}
 

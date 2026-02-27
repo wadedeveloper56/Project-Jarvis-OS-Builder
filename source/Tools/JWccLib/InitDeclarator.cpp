@@ -83,5 +83,5 @@ string InitDeclarator::getVariableName() const
 {
 	TokenPtr identifier = getDeclarator()->getDirectDeclarator()->getIdentifier();
 	if (!identifier) identifier = getDeclarator()->getDirectDeclarator()->getDirectDeclarator()->getIdentifier();
-	return (identifier) ? identifier->data->repr.symbol.string : "";
+	return (identifier) ? identifier->getSymbolName() : "";
 }

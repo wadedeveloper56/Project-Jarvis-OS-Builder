@@ -13,7 +13,8 @@ Declaration::Declaration(DeclarationSpecifiers* declarationSpecifiers) : declara
 {
 }
 
-Declaration::Declaration(DeclarationSpecifiers* declarationSpecifiers, vector<InitDeclarator*>* vectorInitDeclarator) : declarationSpecifiers(declarationSpecifiers), vectorInitDeclarator(vectorInitDeclarator)
+Declaration::Declaration(DeclarationSpecifiers* declarationSpecifiers, vector<InitDeclarator*>* vectorInitDeclarator) : 
+declarationSpecifiers(declarationSpecifiers), vectorInitDeclarator(vectorInitDeclarator)
 {
 }
 

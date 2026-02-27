@@ -3,6 +3,7 @@
 #include "GlobalVars.h"
 #include "Initializer.h"
 #include "TokenType.h"
+#include "StructOrUnionSpecifier.h"
 
 using namespace std;
 
@@ -16,6 +17,8 @@ namespace WadeSpace
 		bool pointer;
 		unsigned long long arraySize;
 		Initializer* initializer;
+		string structName;
+		StructOrUnionSpecifier* suSpec;
 
 		_VariableData() = default;
 		~_VariableData() = default;
@@ -28,6 +31,8 @@ namespace WadeSpace
 			arraySize = other.arraySize;
 			type = other.type;
 			initializer = other.initializer ? new Initializer(*other.initializer) : nullptr;
+			structName = other.structName;
+			suSpec = other.suSpec ? new StructOrUnionSpecifier(*other.suSpec) : nullptr;
 		}
 
 		_VariableData(_VariableData&& other) noexcept
@@ -38,6 +43,8 @@ namespace WadeSpace
 			arraySize = other.arraySize;
 			type = other.type;
 			initializer = other.initializer ? new Initializer(*other.initializer) : nullptr;
+			structName = other.structName;
+			suSpec = other.suSpec ? new StructOrUnionSpecifier(*other.suSpec) : nullptr;
 		}
 
 		_VariableData& operator=(const _VariableData& other)
@@ -50,6 +57,8 @@ namespace WadeSpace
 			arraySize = other.arraySize;
 			type = other.type;
 			initializer = other.initializer ? new Initializer(*other.initializer) : nullptr;
+			structName = other.structName;
+			suSpec = other.suSpec ? new StructOrUnionSpecifier(*other.suSpec) : nullptr;
 			return *this;
 		}
 
@@ -63,6 +72,8 @@ namespace WadeSpace
 			arraySize = other.arraySize;
 			type = other.type;
 			initializer = other.initializer ? new Initializer(*other.initializer) : nullptr;
+			structName = other.structName;
+			suSpec = other.suSpec ? new StructOrUnionSpecifier(*other.suSpec) : nullptr;	
 			return *this;
 		}
 	} VariableData;

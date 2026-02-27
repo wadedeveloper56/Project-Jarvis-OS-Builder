@@ -5,8 +5,8 @@
 using namespace WadeSpace;
 using namespace std;
 
-Declarator::Declarator(Pointer* pointer, DirectDeclarator* directDeclarator) : directDeclarator(directDeclarator),
-                                                                               pointer(pointer)
+Declarator::Declarator(Pointer* pointer, DirectDeclarator* directDeclarator) 
+                     : directDeclarator(directDeclarator), pointer(pointer)
 {
 }
 
