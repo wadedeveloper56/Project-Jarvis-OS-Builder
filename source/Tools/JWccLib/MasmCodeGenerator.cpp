@@ -58,29 +58,44 @@ void MasmCodeGenerator::outputVariable(ofstream& out, _VariableData* ptr)
 	auto type = ptr->type;
 	auto variableName = "_" + ptr->name;
 	bool isInitialized = ptr->initializer != nullptr;
+	bool isPointer = ptr->pointer;
+	bool isArray = ptr->arraySize > 1;
+	bool isStruct = type == STRUCT;
 
 	if (!isInitialized)
 	{
-		if (type == STRUCT)
+		if (isStruct)
 		{
 			auto suSpec = ptr->suSpec;
 			auto structName = suSpec->getName()->getSymbolName();
 			out << variableName << " " << structName << " <>" << endl;
 		}
-		else if (ptr->arraySize > 1)
+		else if (isArray)
 		{
-			if (type == CHAR)        out << variableName << " SBYTE " << ptr->arraySize << " dup(?)" << endl;
-			if (type == BOOL)        out << variableName << " SBYTE " << ptr->arraySize << " dup(?)" << endl;
-			if (type == SHORT)       out << variableName << " SWORD " << ptr->arraySize << " dup(?)" << endl;
-			if (type == INT)         out << variableName << " SDWORD " << ptr->arraySize << " dup(?)" << endl;
-			if (type == LONG)        out << variableName << " SDWORD " << ptr->arraySize << " dup(?)" << endl;
-			if (type == FLOAT)       out << variableName << " SDWORD " << ptr->arraySize << " dup(?)" << endl;
-			if (type == LONG_LONG)   out << variableName << " SQWORD " << ptr->arraySize << " dup(?)" << endl;
-			if (type == DOUBLE)      out << variableName << " SQWORD " << ptr->arraySize << " dup(?)" << endl;
-			if (type == LONG_DOUBLE) out << variableName << " TBYTE " << ptr->arraySize << " dup(?)" << endl;
+			if (isPointer)
+			{
+			  if (bit16)      out << variableName << " WORD " << ptr->arraySize << " dup(?)" << endl;
+			  else if (bit32) out << variableName << " DWORD " << ptr->arraySize << " dup(?)" << endl;
+			  else            out << variableName << " QWORD " << ptr->arraySize << " dup(?)" << endl;
+			}
+			else if (type == CHAR)        out << variableName << " SBYTE " << ptr->arraySize << " dup(?)" << endl;
+			else if (type == BOOL)        out << variableName << " SBYTE " << ptr->arraySize << " dup(?)" << endl;
+			else if (type == SHORT)       out << variableName << " SWORD " << ptr->arraySize << " dup(?)" << endl;
+			else if (type == INT)         out << variableName << " SDWORD " << ptr->arraySize << " dup(?)" << endl;
+			else if (type == LONG)        out << variableName << " SDWORD " << ptr->arraySize << " dup(?)" << endl;
+			else if (type == FLOAT)       out << variableName << " SDWORD " << ptr->arraySize << " dup(?)" << endl;
+			else if (type == LONG_LONG)   out << variableName << " SQWORD " << ptr->arraySize << " dup(?)" << endl;
+			else if (type == DOUBLE)      out << variableName << " SQWORD " << ptr->arraySize << " dup(?)" << endl;
+			else if (type == LONG_DOUBLE) out << variableName << " TBYTE " << ptr->arraySize << " dup(?)" << endl;
 		}
 		else
 		{
+			if (isPointer)
+			{
+				if (bit16)      out << variableName << " WORD " << " ?" << endl;
+				else if (bit32) out << variableName << " DWORD " << " ?" << endl;
+				else            out << variableName << " QWORD " << " ?" << endl;
+			}
 			if (type == CHAR)        out << variableName << " SBYTE " << " ?" << endl;
 			if (type == BOOL)        out << variableName << " SBYTE " << " ?" << endl;
 			if (type == SHORT)       out << variableName << " SWORD " << " ?" << endl;
