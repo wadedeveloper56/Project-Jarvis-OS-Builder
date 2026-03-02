@@ -28,6 +28,7 @@ namespace WadeSpace
 		void handleUUninitializedVariable(ofstream& out, vector<_VariableData*>::value_type ptr);
 		void handleVaribleTable(ofstream& out);
 		void handleFunctionTable(ofstream& out);
+		void handleStructs(ofstream& out);
 	};
 }
 

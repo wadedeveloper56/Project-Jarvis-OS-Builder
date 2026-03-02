@@ -11,8 +11,8 @@
 using namespace WadeSpace;
 using namespace std;
 
-MasmCodeGenerator::MasmCodeGenerator() :BaseCodeGenerator() {
-
+MasmCodeGenerator::MasmCodeGenerator() : BaseCodeGenerator()
+{
 }
 
 MasmCodeGenerator::MasmCodeGenerator(vector<VariableData*>* variableTable, vector<FunctionData*>* functionTable)
@@ -20,7 +20,8 @@ MasmCodeGenerator::MasmCodeGenerator(vector<VariableData*>* variableTable, vecto
 {
 }
 
-MasmCodeGenerator::~MasmCodeGenerator() {
+MasmCodeGenerator::~MasmCodeGenerator()
+{
 	for (FunctionData* ptr : *functionTable)
 	{
 		for (VariableData* data : *ptr->parameters)
@@ -36,7 +37,6 @@ MasmCodeGenerator::~MasmCodeGenerator() {
 		delete ptr;
 	}
 	delete variableTable;
-
 }
 
 void MasmCodeGenerator::handleIndividualFunction(ofstream& out, FunctionData* ptr)
@@ -64,30 +64,32 @@ void MasmCodeGenerator::handleInitializedVarible(ofstream& out, vector<_Variable
 		if (ptr->arraySize > 1)
 		{
 			//fix me
-			if (ptr->size == 1)  out << "_" << ptr->name << " SBYTE " << ptr->arraySize << " dup(?)" << endl;
-			if (ptr->size == 2)  out << "_" << ptr->name << " SWORD " << ptr->arraySize << " dup(?)" << endl;
-			if (ptr->size == 4)  out << "_" << ptr->name << " SDWORD " << ptr->arraySize << " dup(?)" << endl;
-			if (ptr->size == 8)  out << "_" << ptr->name << " SQWORD " << ptr->arraySize << " dup(?)" << endl;
+			if (ptr->size == 1) out << "_" << ptr->name << " SBYTE " << ptr->arraySize << " dup(?)" << endl;
+			if (ptr->size == 2) out << "_" << ptr->name << " SWORD " << ptr->arraySize << " dup(?)" << endl;
+			if (ptr->size == 4) out << "_" << ptr->name << " SDWORD " << ptr->arraySize << " dup(?)" << endl;
+			if (ptr->size == 8) out << "_" << ptr->name << " SQWORD " << ptr->arraySize << " dup(?)" << endl;
 			if (ptr->size == 10) out << "_" << ptr->name << " TBYTE " << ptr->arraySize << " dup(?)" << endl;
 		}
 		else
 		{
 			if (ptr->initializer->getAssignmentExpression()->getData()->getConstant()->getIConst() != nullptr)
 			{
-				long long int value = ptr->initializer->getAssignmentExpression()->getData()->getConstant()->getIConst()->data->repr.numericConstant.repr.lIntConst;
-				if (ptr->size == 1)  out << "_" << ptr->name << " SBYTE " << value << endl;
-				if (ptr->size == 2)  out << "_" << ptr->name << " SWORD " << value << endl;
-				if (ptr->size == 4)  out << "_" << ptr->name << " SDWORD " << value << endl;
-				if (ptr->size == 8)  out << "_" << ptr->name << " SQWORD " << value << endl;
+				long long int value = ptr->initializer->getAssignmentExpression()->getData()->getConstant()->getIConst()
+				                         ->data->repr.numericConstant.repr.lIntConst;
+				if (ptr->size == 1) out << "_" << ptr->name << " SBYTE " << value << endl;
+				if (ptr->size == 2) out << "_" << ptr->name << " SWORD " << value << endl;
+				if (ptr->size == 4) out << "_" << ptr->name << " SDWORD " << value << endl;
+				if (ptr->size == 8) out << "_" << ptr->name << " SQWORD " << value << endl;
 				if (ptr->size == 10) out << "_" << ptr->name << " TBYTE " << value << endl;
 			}
 			if (ptr->initializer->getAssignmentExpression()->getData()->getConstant()->getFConst() != nullptr)
 			{
-				long double value = ptr->initializer->getAssignmentExpression()->getData()->getConstant()->getFConst()->data->repr.numericConstant.repr.lDoubleConst;
-				if (ptr->size == 1)  out << "_" << ptr->name << " SBYTE " << fixed << (long double)value << endl;
-				if (ptr->size == 2)  out << "_" << ptr->name << " SWORD " << fixed << (long double)value << endl;
-				if (ptr->size == 4)  out << "_" << ptr->name << " SDWORD " << fixed << (long double)value << endl;
-				if (ptr->size == 8)  out << "_" << ptr->name << " SQWORD " << fixed << (long double)value << endl;
+				long double value = ptr->initializer->getAssignmentExpression()->getData()->getConstant()->getFConst()->
+				                         data->repr.numericConstant.repr.lDoubleConst;
+				if (ptr->size == 1) out << "_" << ptr->name << " SBYTE " << fixed << (long double)value << endl;
+				if (ptr->size == 2) out << "_" << ptr->name << " SWORD " << fixed << (long double)value << endl;
+				if (ptr->size == 4) out << "_" << ptr->name << " SDWORD " << fixed << (long double)value << endl;
+				if (ptr->size == 8) out << "_" << ptr->name << " SQWORD " << fixed << (long double)value << endl;
 				if (ptr->size == 10) out << "_" << ptr->name << " TBYTE " << fixed << (long double)value << endl;
 			}
 		}
@@ -101,19 +103,25 @@ void MasmCodeGenerator::handleUUninitializedVariable(ofstream& out, vector<_Vari
 		if (ptr->arraySize > 1)
 		{
 			//fix me:
-			if (ptr->size == 1)  out << "_" << ptr->name << " SBYTE " << ptr->arraySize << " dup(?)" << endl;
-			if (ptr->size == 2)  out << "_" << ptr->name << " SWORD " << ptr->arraySize << " dup(?)" << endl;
-			if (ptr->size == 4)  out << "_" << ptr->name << " SDWORD " << ptr->arraySize << " dup(?)" << endl;
-			if (ptr->size == 8)  out << "_" << ptr->name << " SQWORD " << ptr->arraySize << " dup(?)" << endl;
+			if (ptr->size == 1) out << "_" << ptr->name << " SBYTE " << ptr->arraySize << " dup(?)" << endl;
+			if (ptr->size == 2) out << "_" << ptr->name << " SWORD " << ptr->arraySize << " dup(?)" << endl;
+			if (ptr->size == 4) out << "_" << ptr->name << " SDWORD " << ptr->arraySize << " dup(?)" << endl;
+			if (ptr->size == 8) out << "_" << ptr->name << " SQWORD " << ptr->arraySize << " dup(?)" << endl;
 			if (ptr->size == 10) out << "_" << ptr->name << " TBYTE " << ptr->arraySize << " dup(?)" << endl;
 		}
 		else
 		{
-			if (ptr->size == 1)  out << "_" << ptr->name << " SBYTE ?" << endl;
-			if (ptr->size == 2)  out << "_" << ptr->name << " SWORD ?" << endl;
-			if (ptr->size == 4)  out << "_" << ptr->name << " SDWORD ?" << endl;
-			if (ptr->size == 8)  out << "_" << ptr->name << " SQWORD ?" << endl;
-			if (ptr->size == 10) out << "_" << ptr->name << " TBYTE ?" << endl;
+			if (ptr->type == STRUCT)
+			{
+				auto suSpec = ptr->suSpec;
+				auto name = suSpec->getName()->getSymbolName();
+				out << "_" << ptr->name << " " << name << " <>" << endl;
+			}
+			else if (ptr->size == 1) out << "_" << ptr->name << " SBYTE ?" << endl;
+			else if (ptr->size == 2) out << "_" << ptr->name << " SWORD ?" << endl;
+			else if (ptr->size == 4) out << "_" << ptr->name << " SDWORD ?" << endl;
+			else if (ptr->size == 8) out << "_" << ptr->name << " SQWORD ?" << endl;
+			else if (ptr->size == 10) out << "_" << ptr->name << " TBYTE ?" << endl;
 		}
 	}
 }
@@ -141,7 +149,41 @@ void MasmCodeGenerator::handleFunctionTable(ofstream& out)
 	}
 }
 
-void MasmCodeGenerator::generateCode(ofstream& out) 
+void MasmCodeGenerator::handleStructs(ofstream& out)
+{
+	for (auto ptr : *variableTable)
+	{
+		if (ptr->type == STRUCT)
+		{
+			auto suSpec = ptr->suSpec;
+			auto name = suSpec->getName()->getSymbolName();
+			auto vars = suSpec->getVectorStructDeclaration();
+			out << name << " STRUCT" << endl;
+			for (StructDeclaration* var : *vars)
+			{
+				auto type = var->getSpecifierQualifierList()->getTypeSpecifier()->getType().value();
+				auto structDecl  = var->getVectorStructDeclarator();
+				for (auto decl : *structDecl)
+				{
+					auto varName = decl->getDeclarator()->getDirectDeclarator()->getIdentifier()->getSymbolName();
+					if (type == CHAR || type == BOOL) out << "\t" << varName << " SBYTE ?"  << endl;
+					else if (type == SHORT) out << "\t" << varName << " SWORD ?"  << endl;
+					else if (type == INT) out << "\t" << varName << " SDWORD ?" << endl;
+					else if (type == LONG) out << "\t" << varName << " SDWORD ?" << endl;
+					else if (type == LONG_LONG) out << "\t" << varName << " SQWORD ?" << endl;
+					else if (type == FLOAT) out << "\t" << varName << " SDWORD ?" << endl;
+					else if (type == DOUBLE) out << "\t" << varName << " SQWORD ?" << endl;
+					else if (type == LONG_DOUBLE) out << "\t" << varName << " TBYTE ?" << endl;
+					else if (type == IMAGINARY) out << "\t" << varName << " SQWORD ?" << endl;
+					else if (type == COMPLEX) out << "\t" << varName << " TBYTE ?" << endl;
+				}
+			}
+			out << name << " ENDS" << endl;
+		}
+	}
+}
+
+void MasmCodeGenerator::generateCode(ofstream& out)
 {
 	if (bit16)
 	{
@@ -159,16 +201,17 @@ void MasmCodeGenerator::generateCode(ofstream& out)
 		out << ".model flat, c;" << endl;
 	}
 	out << endl;
+	handleStructs(out);
 	handleVaribleTable(out);
 	handleFunctionTable(out);
 	out << "end" << endl << endl;;
 }
 
-MasmCodeGenerator::MasmCodeGenerator(const MasmCodeGenerator& other): BaseCodeGenerator(other)
+MasmCodeGenerator::MasmCodeGenerator(const MasmCodeGenerator& other) : BaseCodeGenerator(other)
 {
 }
 
-MasmCodeGenerator::MasmCodeGenerator(MasmCodeGenerator&& other) noexcept: BaseCodeGenerator(std::move(other))
+MasmCodeGenerator::MasmCodeGenerator(MasmCodeGenerator&& other) noexcept : BaseCodeGenerator(std::move(other))
 {
 }
 
