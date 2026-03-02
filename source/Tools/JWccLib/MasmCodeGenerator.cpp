@@ -11,10 +11,6 @@
 using namespace WadeSpace;
 using namespace std;
 
-MasmCodeGenerator::MasmCodeGenerator() : BaseCodeGenerator()
-{
-}
-
 MasmCodeGenerator::MasmCodeGenerator(vector<VariableData*>* variableTable, vector<FunctionData*>* functionTable)
 	: BaseCodeGenerator(variableTable, functionTable)
 {
@@ -57,42 +53,81 @@ void MasmCodeGenerator::handleIndividualFunction(ofstream& out, FunctionData* pt
 	out << "_" << ptr->name << " endp" << endl;
 }
 
-void MasmCodeGenerator::handleInitializedVarible(ofstream& out, vector<_VariableData*>::value_type ptr)
+void MasmCodeGenerator::outputVariable(ofstream& out, _VariableData* ptr)
 {
-	if (ptr->initializer != nullptr)
+	auto type = ptr->type;
+	auto variableName = "_" + ptr->name;
+	bool isInitialized = ptr->initializer != nullptr;
+
+	if (!isInitialized)
 	{
-		if (ptr->arraySize > 1)
+		if (type == STRUCT)
 		{
-			//fix me
-			if (ptr->size == 1) out << "_" << ptr->name << " SBYTE " << ptr->arraySize << " dup(?)" << endl;
-			if (ptr->size == 2) out << "_" << ptr->name << " SWORD " << ptr->arraySize << " dup(?)" << endl;
-			if (ptr->size == 4) out << "_" << ptr->name << " SDWORD " << ptr->arraySize << " dup(?)" << endl;
-			if (ptr->size == 8) out << "_" << ptr->name << " SQWORD " << ptr->arraySize << " dup(?)" << endl;
-			if (ptr->size == 10) out << "_" << ptr->name << " TBYTE " << ptr->arraySize << " dup(?)" << endl;
+			auto suSpec = ptr->suSpec;
+			auto structName = suSpec->getName()->getSymbolName();
+			out << variableName << " " << structName << " <>" << endl;
+		}
+		else if (ptr->arraySize > 1)
+		{
+			if (type == CHAR)        out << variableName << " SBYTE " << ptr->arraySize << " dup(?)" << endl;
+			if (type == BOOL)        out << variableName << " SBYTE " << ptr->arraySize << " dup(?)" << endl;
+			if (type == SHORT)       out << variableName << " SWORD " << ptr->arraySize << " dup(?)" << endl;
+			if (type == INT)         out << variableName << " SDWORD " << ptr->arraySize << " dup(?)" << endl;
+			if (type == LONG)        out << variableName << " SDWORD " << ptr->arraySize << " dup(?)" << endl;
+			if (type == FLOAT)       out << variableName << " SDWORD " << ptr->arraySize << " dup(?)" << endl;
+			if (type == LONG_LONG)   out << variableName << " SQWORD " << ptr->arraySize << " dup(?)" << endl;
+			if (type == DOUBLE)      out << variableName << " SQWORD " << ptr->arraySize << " dup(?)" << endl;
+			if (type == LONG_DOUBLE) out << variableName << " TBYTE " << ptr->arraySize << " dup(?)" << endl;
 		}
 		else
 		{
-			if (ptr->initializer->getAssignmentExpression()->getData()->getConstant()->getIConst() != nullptr)
-			{
-				long long int value = ptr->initializer->getAssignmentExpression()->getData()->getConstant()->getIConst()
-				                         ->data->repr.numericConstant.repr.lIntConst;
-				if (ptr->size == 1) out << "_" << ptr->name << " SBYTE " << value << endl;
-				if (ptr->size == 2) out << "_" << ptr->name << " SWORD " << value << endl;
-				if (ptr->size == 4) out << "_" << ptr->name << " SDWORD " << value << endl;
-				if (ptr->size == 8) out << "_" << ptr->name << " SQWORD " << value << endl;
-				if (ptr->size == 10) out << "_" << ptr->name << " TBYTE " << value << endl;
-			}
-			if (ptr->initializer->getAssignmentExpression()->getData()->getConstant()->getFConst() != nullptr)
-			{
-				long double value = ptr->initializer->getAssignmentExpression()->getData()->getConstant()->getFConst()->
-				                         data->repr.numericConstant.repr.lDoubleConst;
-				if (ptr->size == 1) out << "_" << ptr->name << " SBYTE " << fixed << (long double)value << endl;
-				if (ptr->size == 2) out << "_" << ptr->name << " SWORD " << fixed << (long double)value << endl;
-				if (ptr->size == 4) out << "_" << ptr->name << " SDWORD " << fixed << (long double)value << endl;
-				if (ptr->size == 8) out << "_" << ptr->name << " SQWORD " << fixed << (long double)value << endl;
-				if (ptr->size == 10) out << "_" << ptr->name << " TBYTE " << fixed << (long double)value << endl;
-			}
+			if (type == CHAR)        out << variableName << " SBYTE " << " ?" << endl;
+			if (type == BOOL)        out << variableName << " SBYTE " << " ?" << endl;
+			if (type == SHORT)       out << variableName << " SWORD " << " ?" << endl;
+			if (type == INT)         out << variableName << " SDWORD " << " ?" << endl;
+			if (type == LONG)        out << variableName << " SDWORD " << " ?" << endl;
+			if (type == FLOAT)       out << variableName << " SDWORD " << " ?" << endl;
+			if (type == LONG_LONG)   out << variableName << " SQWORD " << " ?" << endl;
+			if (type == DOUBLE)      out << variableName << " SQWORD " << " ?" << endl;
+			if (type == LONG_DOUBLE) out << variableName << " TBYTE " << " ?" << endl;
 		}
+	}
+	else
+	{
+		if (ptr->initializer->getAssignmentExpression()->getData()->getConstant()->getIConst() != nullptr)
+		{
+			long long int value = ptr->initializer->getAssignmentExpression()->getData()->getConstant()->getIConst()->data->repr.numericConstant.repr.lIntConst;
+			if (type == CHAR)        out << variableName << " SBYTE " << value << endl;
+			if (type == BOOL)        out << variableName << " SBYTE " << value << endl;
+			if (type == SHORT)       out << variableName << " SWORD " << value << endl;
+			if (type == INT)         out << variableName << " SDWORD " << value << endl;
+			if (type == LONG)        out << variableName << " SDWORD " << value << endl;
+			if (type == FLOAT)       out << variableName << " SDWORD " << value << endl;
+			if (type == LONG_LONG)   out << variableName << " SQWORD " << value << endl;
+			if (type == DOUBLE)      out << variableName << " SQWORD " << value << endl;
+			if (type == LONG_DOUBLE) out << variableName << " TBYTE " << value << endl;
+		}
+		if (ptr->initializer->getAssignmentExpression()->getData()->getConstant()->getFConst() != nullptr)
+		{
+			long double value = ptr->initializer->getAssignmentExpression()->getData()->getConstant()->getFConst()->data->repr.numericConstant.repr.lDoubleConst;
+			if (type == CHAR)        out << variableName << " SBYTE " << (long double)value << endl;
+			if (type == BOOL)        out << variableName << " SBYTE " << (long double)value << endl;
+			if (type == SHORT)       out << variableName << " SWORD " << (long double)value << endl;
+			if (type == INT)         out << variableName << " SDWORD " << (long double)value << endl;
+			if (type == LONG)        out << variableName << " SDWORD " << (long double)value << endl;
+			if (type == FLOAT)       out << variableName << " SDWORD " << (long double)value << endl;
+			if (type == LONG_LONG)   out << variableName << " SQWORD " << (long double)value << endl;
+			if (type == DOUBLE)      out << variableName << " SQWORD " << (long double)value << endl;
+			if (type == LONG_DOUBLE) out << variableName << " TBYTE " << (long double)	value << endl;
+		}
+	}
+}
+
+void MasmCodeGenerator::handleInitializedVariable(ofstream& out, vector<_VariableData*>::value_type ptr)
+{
+	if (ptr->initializer != nullptr)
+	{
+		outputVariable(out, ptr);
 	}
 }
 
@@ -100,38 +135,16 @@ void MasmCodeGenerator::handleUUninitializedVariable(ofstream& out, vector<_Vari
 {
 	if (ptr->initializer == nullptr)
 	{
-		if (ptr->arraySize > 1)
-		{
-			//fix me:
-			if (ptr->size == 1) out << "_" << ptr->name << " SBYTE " << ptr->arraySize << " dup(?)" << endl;
-			if (ptr->size == 2) out << "_" << ptr->name << " SWORD " << ptr->arraySize << " dup(?)" << endl;
-			if (ptr->size == 4) out << "_" << ptr->name << " SDWORD " << ptr->arraySize << " dup(?)" << endl;
-			if (ptr->size == 8) out << "_" << ptr->name << " SQWORD " << ptr->arraySize << " dup(?)" << endl;
-			if (ptr->size == 10) out << "_" << ptr->name << " TBYTE " << ptr->arraySize << " dup(?)" << endl;
-		}
-		else
-		{
-			if (ptr->type == STRUCT)
-			{
-				auto suSpec = ptr->suSpec;
-				auto name = suSpec->getName()->getSymbolName();
-				out << "_" << ptr->name << " " << name << " <>" << endl;
-			}
-			else if (ptr->size == 1) out << "_" << ptr->name << " SBYTE ?" << endl;
-			else if (ptr->size == 2) out << "_" << ptr->name << " SWORD ?" << endl;
-			else if (ptr->size == 4) out << "_" << ptr->name << " SDWORD ?" << endl;
-			else if (ptr->size == 8) out << "_" << ptr->name << " SQWORD ?" << endl;
-			else if (ptr->size == 10) out << "_" << ptr->name << " TBYTE ?" << endl;
-		}
+		outputVariable(out, ptr);
 	}
 }
 
-void MasmCodeGenerator::handleVaribleTable(ofstream& out)
+void MasmCodeGenerator::handleVariableTable(ofstream& out)
 {
 	out << ".data" << endl;
 	for (auto ptr : *variableTable)
 	{
-		handleInitializedVarible(out, ptr);
+		handleInitializedVariable(out, ptr);
 	}
 	out << ".data?" << endl;
 	for (auto ptr : *variableTable)
@@ -202,13 +215,9 @@ void MasmCodeGenerator::generateCode(ofstream& out)
 	}
 	out << endl;
 	handleStructs(out);
-	handleVaribleTable(out);
+	handleVariableTable(out);
 	handleFunctionTable(out);
 	out << "end" << endl << endl;;
-}
-
-MasmCodeGenerator::MasmCodeGenerator(const MasmCodeGenerator& other) : BaseCodeGenerator(other)
-{
 }
 
 MasmCodeGenerator::MasmCodeGenerator(MasmCodeGenerator&& other) noexcept : BaseCodeGenerator(std::move(other))

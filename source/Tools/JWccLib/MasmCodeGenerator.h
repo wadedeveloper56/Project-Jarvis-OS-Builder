@@ -14,7 +14,7 @@ namespace WadeSpace
 	class MasmCodeGenerator : public BaseCodeGenerator
 	{
 	public:
-		MasmCodeGenerator();
+		MasmCodeGenerator() = default;
 		MasmCodeGenerator(vector<VariableData*>* variableTable, vector<FunctionData*>* functionTable);
 		~MasmCodeGenerator();
 		virtual void generateCode(ofstream& out);
@@ -24,11 +24,12 @@ namespace WadeSpace
 		MasmCodeGenerator& operator=(MasmCodeGenerator&& other) noexcept;
 	private:
 		void handleIndividualFunction(ofstream& out, FunctionData* ptr);
-		void handleInitializedVarible(ofstream& out, vector<_VariableData*>::value_type ptr);
+		void handleInitializedVariable(ofstream& out, vector<_VariableData*>::value_type ptr);
 		void handleUUninitializedVariable(ofstream& out, vector<_VariableData*>::value_type ptr);
-		void handleVaribleTable(ofstream& out);
+		void handleVariableTable(ofstream& out);
 		void handleFunctionTable(ofstream& out);
 		void handleStructs(ofstream& out);
+		void outputVariable(ofstream& out, _VariableData* ptr);
 	};
 }
 

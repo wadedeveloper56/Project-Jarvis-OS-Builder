@@ -34,26 +34,6 @@ void ProgramData::add(ExternalDeclaration* data)
 	program->push_back(data);
 }
 
-int ProgramData::getSize(TokenType type, bool isPointer)
-{
-	if (isPointer)
-	{
-		if (bit64) return 8;
-		else if (bit32) return 4;
-		else return 2;
-	}
-	if (type == CHAR || type == BOOL) return 1;
-	if (type == SHORT) return 2;
-	if (type == INT) return 4;
-	if (type == LONG) return 4;
-	if (type == LONG_LONG) return 8;
-	if (type == FLOAT) return 4;
-	if (type == DOUBLE) return 8;
-	if (type == LONG_DOUBLE) return 10;
-	if (type == IMAGINARY) return 8;
-	if (type == COMPLEX) return 16;
-	return 0;
-}
 
 void ProgramData::handleFunction(FunctionDefinition* declaration, vector<FunctionData*>* functionTable)
 {
@@ -80,7 +60,6 @@ void ProgramData::handleFunction(FunctionDefinition* declaration, vector<Functio
 			TokenType type = parameterDeclaration->getDeclarationSpecifiers()->getTypeSpecifier()->getType().value();
 			functionData->pointer = parameterDeclaration->getDeclarator()->isPointer();
 			functionData->type = type;
-			functionData->size = getSize(type, functionData->pointer);
 			data->parameters->push_back(functionData);
 		}
 	}
@@ -123,7 +102,6 @@ void ProgramData::handleDeclaration(Declaration* declaration, vector<VariableDat
 				data->arraySize = 1;
 				data->type = type;
 				data->pointer = declarator->isPointer();
-				data->size = getSize(type, data->pointer);
 				data->name = initDecl->getVariableName();
 				
 				if (type == STRUCT)
