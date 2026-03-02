@@ -96,22 +96,22 @@ void MasmCodeGenerator::outputVariable(ofstream& out, _VariableData* ptr)
 				else if (bit32) out << variableName << " DWORD " << " ?" << endl;
 				else            out << variableName << " QWORD " << " ?" << endl;
 			}
-			if (type == CHAR)        out << variableName << " SBYTE " << " ?" << endl;
-			if (type == BOOL)        out << variableName << " SBYTE " << " ?" << endl;
-			if (type == SHORT)       out << variableName << " SWORD " << " ?" << endl;
-			if (type == INT)         out << variableName << " SDWORD " << " ?" << endl;
-			if (type == LONG)        out << variableName << " SDWORD " << " ?" << endl;
-			if (type == FLOAT)       out << variableName << " SDWORD " << " ?" << endl;
-			if (type == LONG_LONG)   out << variableName << " SQWORD " << " ?" << endl;
-			if (type == DOUBLE)      out << variableName << " SQWORD " << " ?" << endl;
-			if (type == LONG_DOUBLE) out << variableName << " TBYTE " << " ?" << endl;
+			else if (type == CHAR)        out << variableName << " SBYTE " << " ?" << endl;
+			else if (type == BOOL)        out << variableName << " SBYTE " << " ?" << endl;
+			else if (type == SHORT)       out << variableName << " SWORD " << " ?" << endl;
+			else if (type == INT)         out << variableName << " SDWORD " << " ?" << endl;
+			else if (type == LONG)        out << variableName << " SDWORD " << " ?" << endl;
+			else if (type == FLOAT)       out << variableName << " SDWORD " << " ?" << endl;
+			else if (type == LONG_LONG)   out << variableName << " SQWORD " << " ?" << endl;
+			else if (type == DOUBLE)      out << variableName << " SQWORD " << " ?" << endl;
+			else if (type == LONG_DOUBLE) out << variableName << " TBYTE " << " ?" << endl;
 		}
 	}
 	else
 	{
 		if (ptr->initializer->getAssignmentExpression()->getData()->getConstant()->getIConst() != nullptr)
 		{
-			long long int value = ptr->initializer->getAssignmentExpression()->getData()->getConstant()->getIConst()->data->repr.numericConstant.repr.lIntConst;
+			long long int value = ptr->initializer->getAssignmentExpression()->getData()->getConstant()->getIConst()->getIntegerConst();
 			if (type == CHAR)        out << variableName << " SBYTE " << value << endl;
 			if (type == BOOL)        out << variableName << " SBYTE " << value << endl;
 			if (type == SHORT)       out << variableName << " SWORD " << value << endl;
@@ -124,7 +124,7 @@ void MasmCodeGenerator::outputVariable(ofstream& out, _VariableData* ptr)
 		}
 		if (ptr->initializer->getAssignmentExpression()->getData()->getConstant()->getFConst() != nullptr)
 		{
-			long double value = ptr->initializer->getAssignmentExpression()->getData()->getConstant()->getFConst()->data->repr.numericConstant.repr.lDoubleConst;
+			long double value = ptr->initializer->getAssignmentExpression()->getData()->getConstant()->getFConst()->getDoubleConst();
 			if (type == CHAR)        out << variableName << " SBYTE " << (long double)value << endl;
 			if (type == BOOL)        out << variableName << " SBYTE " << (long double)value << endl;
 			if (type == SHORT)       out << variableName << " SWORD " << (long double)value << endl;

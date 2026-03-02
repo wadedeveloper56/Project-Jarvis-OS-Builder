@@ -118,6 +118,8 @@ typedef struct Token
 
 	string getSymbolName() const;
 	string getKeywordName() const;
+	unsigned long long getIntegerConst() const;
+	long double getDoubleConst() const;
 }* TokenPtr, ** TokenPtrPtr;
 
 TokenPtr createToken(TokDataPtr data);

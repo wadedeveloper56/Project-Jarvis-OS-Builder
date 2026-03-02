@@ -19,6 +19,8 @@ namespace WadeSpace
 		virtual ~Initializer();
 		Expression* getAssignmentExpression() const;
 		vector<Initializer*>* getInitializerList() const;
+		bool hasAssignmentExpression() const;
+		bool hasInitializerList() const;
 
 	private:
 		Expression* assignmentExpression;

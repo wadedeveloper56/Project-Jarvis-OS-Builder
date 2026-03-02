@@ -32,8 +32,7 @@ DirectAbstractDeclarator::DirectAbstractDeclarator() : abstractDeclarator(nullpt
 {
 }
 
-DirectAbstractDeclarator::DirectAbstractDeclarator(AbstractDeclarator* abstractDeclarator,
-                                                   vector<DirectAbstractDeclaratorNode*>* list) :
+DirectAbstractDeclarator::DirectAbstractDeclarator(AbstractDeclarator* abstractDeclarator, vector<DirectAbstractDeclaratorNode*>* list) :
 	abstractDeclarator(abstractDeclarator), list(list)
 {
 }
@@ -91,3 +90,12 @@ DirectAbstractDeclarator& DirectAbstractDeclarator::operator=(DirectAbstractDecl
 	return *this;
 }
 
+bool DirectAbstractDeclarator::isAbstractDeclarator() const
+{
+	return abstractDeclarator != nullptr;
+}
+
+bool DirectAbstractDeclarator::isList() const
+{
+	return list != nullptr;
+}

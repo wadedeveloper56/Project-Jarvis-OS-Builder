@@ -77,3 +77,13 @@ vector<Initializer*>* Initializer::getInitializerList() const
 {
 	return initializerList;
 }
+
+bool Initializer::hasAssignmentExpression() const
+{
+	return assignmentExpression != nullptr;
+}
+
+bool Initializer::hasInitializerList() const
+{
+	return initializerList != nullptr;
+}

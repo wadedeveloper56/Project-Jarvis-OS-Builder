@@ -29,15 +29,20 @@ namespace WadeSpace
 	class DirectAbstractDeclarator
 	{
 	public:
-		DirectAbstractDeclarator(AbstractDeclarator* abstractDeclarator, vector<DirectAbstractDeclaratorNode*>* list);
 		DirectAbstractDeclarator();
+		DirectAbstractDeclarator(AbstractDeclarator* abstractDeclarator, vector<DirectAbstractDeclaratorNode*>* list);
 		virtual ~DirectAbstractDeclarator();
+
 		DirectAbstractDeclarator(const DirectAbstractDeclarator& other);
 		DirectAbstractDeclarator(DirectAbstractDeclarator&& other) noexcept;
 		DirectAbstractDeclarator& operator=(const DirectAbstractDeclarator& other);
 		DirectAbstractDeclarator& operator=(DirectAbstractDeclarator&& other) noexcept;
+
 		[[nodiscard]] AbstractDeclarator* getAbstractDeclarator() const;
 		[[nodiscard]] vector<DirectAbstractDeclaratorNode*>* getList() const;
+
+		[[nodiscard]] bool isAbstractDeclarator() const;
+		[[nodiscard]] bool isList() const;
 
 	private:
 		AbstractDeclarator* abstractDeclarator;
