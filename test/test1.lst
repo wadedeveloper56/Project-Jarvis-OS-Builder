@@ -90,12 +90,12 @@ Symbols:
 @Cpu . . . . . . . . . . . . . .        Number           DDFh 
 @CurSeg  . . . . . . . . . . . .        Text   
 @DataSize  . . . . . . . . . . .        Number             0h 
-@Date  . . . . . . . . . . . . .        Text   03/02/26
+@Date  . . . . . . . . . . . . .        Text   03/03/26
 @FileCur . . . . . . . . . . . .        Text   test1.asm
 @FileName  . . . . . . . . . . .        Text   TEST1
 @Interface . . . . . . . . . . .        Number             1h 
 @Model . . . . . . . . . . . . .        Number             7h 
-@Time  . . . . . . . . . . . . .        Text   13:30:02
+@Time  . . . . . . . . . . . . .        Text   09:33:53
 @Version . . . . . . . . . . . .        Text   800
 @code  . . . . . . . . . . . . .        Text   _TEXT
 @data  . . . . . . . . . . . . .        Text   FLAT
@@ -106,4 +106,4 @@ _var1  . . . . . . . . . . . . .        Byte               Fh _BSS C
 _var2  . . . . . . . . . . . . .        Word               0h _DATA C
 _var6  . . . . . . . . . . . . .        NewData            0h _BSS C
 
-test1.asm: 22 lines, 2 passes, 1 ms, 0 warnings, 0 errors
+test1.asm: 22 lines, 2 passes, 0 ms, 0 warnings, 0 errors
