@@ -61,39 +61,24 @@ Declaration& Declaration::operator=(Declaration&& other) noexcept
 	return *this;
 }
 
-DeclarationSpecifiers* Declaration::getDeclarationSpecifiers() const { return declarationSpecifiers; }
-vector<InitDeclarator*>* Declaration::getVectorInitDeclarator() const { return vectorInitDeclarator; }
-bool Declaration::isDeclarationSpecifiers() const { return declarationSpecifiers != nullptr;  }
-bool Declaration::isVectorInitDeclarator() const { return vectorInitDeclarator != nullptr; }
-bool Declaration::isStorageClassSpecifier() const { return isDeclarationSpecifiers() && getDeclarationSpecifiers()->getStorageClassSpecifier() != nullptr; }
-StorageClassSpecifier* Declaration::getStorageClassSpecifier() const { return getDeclarationSpecifiers()->getStorageClassSpecifier(); }
-
-bool Declaration::isTypedef() const
+DeclarationSpecifiers* Declaration::getDeclarationSpecifiers() const
 {
-		if (isStorageClassSpecifier())
-		{
-			string keyword = getStorageClassSpecifier()->getType()->getKeywordName();
-			return keyword == "typedef";
-		}
-	return false;
+	return declarationSpecifiers;
 }
 
-TokenType Declaration::getType() const
+vector<InitDeclarator*>* Declaration::getVectorInitDeclarator() const
 {
-	auto declaration_specifiers = getDeclarationSpecifiers();
-	if (declaration_specifiers != nullptr)
-	{
-		if (declaration_specifiers->getTypeSpecifier()->getType().has_value())
-		{
-			return declaration_specifiers->getTypeSpecifier()->getType().value();
-		}
-		else
-		{
-			if (declaration_specifiers->getTypeSpecifier()->getTypedefInfo() != nullptr)
-			{
-				auto temp = declaration_specifiers->getTypeSpecifier()->getTypedefInfo()->getDeclaration();
-				return temp->getDeclarationSpecifiers()->getDeclarationSpecifiers()->getTypeSpecifier()->getType().value();
-			}
-		}
-	}	return UNKNOWN;
+	return vectorInitDeclarator;
 }
+
+bool Declaration::isDeclarationSpecifiers() const
+{
+	return declarationSpecifiers != nullptr;
+}
+
+bool Declaration::isVectorInitDeclarator() const
+{
+	return vectorInitDeclarator != nullptr;
+}
+
+

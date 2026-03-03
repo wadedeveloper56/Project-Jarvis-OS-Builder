@@ -38,6 +38,7 @@ void ProgramData::add(ExternalDeclaration* data)
 void ProgramData::handleFunction(FunctionDefinition* declaration, vector<FunctionData*>* functionTable)
 {
 	FunctionData* data = new FunctionData();
+	/* FIX ME: Handle typedefs 
 	data->type = declaration->getDeclarationSpecifiers()->getTypeSpecifier()->getType().value();
 	auto direct_declarator = declaration->getDeclarator()->getDirectDeclarator();
 	data->name = direct_declarator->getDirectDeclarator()->getIdentifier()->getSymbolName();
@@ -64,12 +65,14 @@ void ProgramData::handleFunction(FunctionDefinition* declaration, vector<Functio
 		}
 	}
 	functionTable->push_back(data);
+	*/
 }
 
 void ProgramData::handleDeclaration(Declaration* declaration, vector<VariableData*>* variableTable)
 {
 	if (declaration != nullptr)
 	{
+		/* FIX ME: Handle typedefs
 		TokenType type = declaration->getType();
 		bool unsign = false;
 		string structName;
@@ -122,6 +125,7 @@ void ProgramData::handleDeclaration(Declaration* declaration, vector<VariableDat
 				variableTable->push_back(data);
 			}
 		}
+		*/
 	}
 }
 

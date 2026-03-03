@@ -11,8 +11,9 @@ test1.asm
                                 .data
 00000000                    *   _DATA segment
                             *   assume cs:ERROR
+00000000  6300000000000000      _var3 SQWORD 99
 00000000                        .data?
-                            *   _DATA ends
+00000008                    *   _DATA ends
 00000000                    *   _BSS segment PARA FLAT PUBLIC 'BSS'
                             *   assume cs:ERROR
 00000000  00000000              _var1 DWORD  ?
@@ -52,7 +53,7 @@ Segments and Groups:
 
 FLAT . . . . . . . . . . . . . .        GROUP
 _BSS . . . . . . . . . . . . . .        64 Bit   00000008 Para    Public  'BSS'
-_DATA  . . . . . . . . . . . . .        64 Bit   00000000 Para    Public  'DATA'
+_DATA  . . . . . . . . . . . . .        64 Bit   00000008 Para    Public  'DATA'
 _TEXT  . . . . . . . . . . . . .        64 Bit   0000000B Para    Public  'CODE'
 
 
@@ -78,7 +79,7 @@ Symbols:
 @FileName  . . . . . . . . . . .        Text   TEST1
 @Interface . . . . . . . . . . .        Number             1h 
 @Model . . . . . . . . . . . . .        Number             7h 
-@Time  . . . . . . . . . . . . .        Text   11:44:43
+@Time  . . . . . . . . . . . . .        Text   11:55:00
 @Version . . . . . . . . . . . .        Text   800
 @code  . . . . . . . . . . . . .        Text   _TEXT
 @data  . . . . . . . . . . . . .        Text   FLAT
@@ -86,5 +87,6 @@ Symbols:
 __JWASM__  . . . . . . . . . . .        Number            D4h 
 _var1  . . . . . . . . . . . . .        DWord              0h _BSS C
 _var2  . . . . . . . . . . . . .        DWord              4h _BSS C
+_var3  . . . . . . . . . . . . .        QWord              0h _DATA C
 
-test1.asm: 15 lines, 2 passes, 0 ms, 0 warnings, 0 errors
+test1.asm: 16 lines, 2 passes, 1 ms, 0 warnings, 0 errors

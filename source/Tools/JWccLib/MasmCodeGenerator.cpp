@@ -49,6 +49,36 @@ string MasmCodeGenerator::vectorToCommaSeparatedList(const vector<string>& vec)
 	return result;
 }
 
+string MasmCodeGenerator::getAsmType(TokenType type, bool isPointer, bool isUnsigned)
+{
+	string asmType;
+	if (isPointer)
+	{
+		if (bit16)      asmType = "WORD ";
+		else if (bit32) asmType = "DWORD ";
+		else            asmType = "QWORD ";
+	}
+	else if (!isUnsigned && type == CHAR)        asmType = "SBYTE ";
+	else if (!isUnsigned && type == BOOL)        asmType = "SBYTE ";
+	else if (!isUnsigned && type == SHORT)       asmType = "SWORD ";
+	else if (!isUnsigned && type == INT)         asmType = "SDWORD ";
+	else if (!isUnsigned && type == LONG)        asmType = "SDWORD ";
+	else if (!isUnsigned && type == FLOAT)       asmType = "SDWORD ";
+	else if (!isUnsigned && type == LONG_LONG)   asmType = "SQWORD ";
+	else if (!isUnsigned && type == DOUBLE)      asmType = "SQWORD ";
+	else if (!isUnsigned && type == LONG_DOUBLE) asmType = "TBYTE ";
+	else if (isUnsigned && type == CHAR)        asmType = "BYTE ";
+	else if (isUnsigned && type == BOOL)        asmType = "BYTE ";
+	else if (isUnsigned && type == SHORT)       asmType = "WORD ";
+	else if (isUnsigned && type == INT)         asmType = "DWORD ";
+	else if (isUnsigned && type == LONG)        asmType = "DWORD ";
+	else if (isUnsigned && type == FLOAT)       asmType = "DWORD ";
+	else if (isUnsigned && type == LONG_LONG)   asmType = "QWORD ";
+	else if (isUnsigned && type == DOUBLE)      asmType = "QWORD ";
+	else if (isUnsigned && type == LONG_DOUBLE) asmType = "TBYTE ";
+	return asmType;
+}
+
 void MasmCodeGenerator::handleFunctionWithParameters(ofstream& out, string name, vector<VariableData*>* list)
 {
 	vector<string> paramList;
@@ -62,31 +92,7 @@ void MasmCodeGenerator::handleFunctionWithParameters(ofstream& out, string name,
 		bool isStruct = type == STRUCT;
 		bool isUnsigned = ptr->unsign == true;
 
-		string asmType = "";
-		if (isPointer)
-		{
-			if (bit16)      asmType = "WORD ";
-			else if (bit32) asmType = "DWORD ";
-			else            asmType = "QWORD ";
-		}
-		else if (!isUnsigned && type == CHAR)        asmType = "SBYTE ";
-		else if (!isUnsigned && type == BOOL)        asmType = "SBYTE ";
-		else if (!isUnsigned && type == SHORT)       asmType = "SWORD ";
-		else if (!isUnsigned && type == INT)         asmType = "SDWORD ";
-		else if (!isUnsigned && type == LONG)        asmType = "SDWORD ";
-		else if (!isUnsigned && type == FLOAT)       asmType = "SDWORD ";
-		else if (!isUnsigned && type == LONG_LONG)   asmType = "SQWORD ";
-		else if (!isUnsigned && type == DOUBLE)      asmType = "SQWORD ";
-		else if (!isUnsigned && type == LONG_DOUBLE) asmType = "TBYTE ";
-		else if (isUnsigned && type == CHAR)        asmType = "BYTE ";
-		else if (isUnsigned && type == BOOL)        asmType = "BYTE ";
-		else if (isUnsigned && type == SHORT)       asmType = "WORD ";
-		else if (isUnsigned && type == INT)         asmType = "DWORD ";
-		else if (isUnsigned && type == LONG)        asmType = "DWORD ";
-		else if (isUnsigned && type == FLOAT)       asmType = "DWORD ";
-		else if (isUnsigned && type == LONG_LONG)   asmType = "QWORD ";
-		else if (isUnsigned && type == DOUBLE)      asmType = "QWORD ";
-		else if (isUnsigned && type == LONG_DOUBLE) asmType = "TBYTE ";
+		string asmType = getAsmType(type, isPointer, isUnsigned);
 		paramList.push_back(variableName + ":" + asmType);
 	}
 	string paramListStr = vectorToCommaSeparatedList(paramList);

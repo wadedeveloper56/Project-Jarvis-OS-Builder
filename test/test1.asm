@@ -2,6 +2,7 @@
 .model flat, c;
 
 .data
+_var3 SQWORD 99
 .data?
 _var1 DWORD  ?
 _var2 SDWORD  ?

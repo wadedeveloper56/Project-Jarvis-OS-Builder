@@ -11,20 +11,23 @@ using namespace WadeSpace;
 void handleStructDefinition(Declaration* declaration)
 {
 	auto declaration_specifiers = declaration->getDeclarationSpecifiers();
-	if (declaration_specifiers != nullptr)
+	if (declaration_specifiers != nullptr && declaration_specifiers->isDeclarationSpecifiers())
 	{
-		auto type_specifier = declaration_specifiers->getTypeSpecifier();
-		if (type_specifier != nullptr && type_specifier->getType().has_value())
+		for (auto node : *declaration_specifiers->getDeclarationSpecifiers())
 		{
-			auto token = type_specifier->getType().value();
-			if (token == STRUCT && type_specifier->getStructOrUnionSpecifier() != nullptr)
+			auto type_specifier = node->typeSpecifier;
+			if (type_specifier != nullptr && type_specifier->getType().has_value())
 			{
-				if (structList == nullptr) structList = new map<string, StructOrUnionSpecifier*>();
-				StructOrUnionSpecifier* temp = type_specifier->getStructOrUnionSpecifier();
-				if (temp->getVectorStructDeclaration() != nullptr)
+				auto token = type_specifier->getType().value();
+				if (token == STRUCT && type_specifier->getStructOrUnionSpecifier() != nullptr)
 				{
-					string name = temp->getName()->getSymbolName();
-					structList->insert({ name, temp });
+					if (structList == nullptr) structList = new map<string, StructOrUnionSpecifier*>();
+					StructOrUnionSpecifier* temp = type_specifier->getStructOrUnionSpecifier();
+					if (temp->getVectorStructDeclaration() != nullptr)
+					{
+						string name = temp->getName()->getSymbolName();
+						structList->insert({ name, temp });
+					}
 				}
 			}
 		}
@@ -33,7 +36,7 @@ void handleStructDefinition(Declaration* declaration)
 
 void handleDeclaration(ExternalDeclaration* externalDeclaration)
 {
-	bool isTypedef = externalDeclaration->isTypedef();
+	bool isTypedef = false;//FIX ME externalDeclaration->isTypedef();
 	Declaration* declaration = externalDeclaration->getDeclaration();
 	if (declaration != nullptr)
 	{
@@ -274,9 +277,20 @@ DirectDeclarator* createDirectDeclarator(TokenPtr identifier, TokenPtr token1, T
 DeclarationSpecifiers* createDeclarationSpecifiers(StorageClassSpecifier* const storageClassSpecifier,
                                                    TypeSpecifier* const typeSpecifier,
                                                    TypeQualifier* const typeQualifier,
-                                                   DeclarationSpecifiers* const declarationSpecifiers)
+                                                   DeclarationSpecifiers* declarationSpecifiers)
 {
-	return new DeclarationSpecifiers(storageClassSpecifier, typeSpecifier, typeQualifier, declarationSpecifiers);
+	auto node = new DeclarationSpecifiersNode(storageClassSpecifier, typeSpecifier, typeQualifier);
+	if (declarationSpecifiers != nullptr)
+	{
+		declarationSpecifiers->addDeclarationSpecifiersNode(storageClassSpecifier, typeSpecifier, typeQualifier);
+		return declarationSpecifiers;
+	}
+	else
+	{
+		DeclarationSpecifiers* declarationSpecifiers = new DeclarationSpecifiers();
+		declarationSpecifiers->addDeclarationSpecifiersNode(storageClassSpecifier, typeSpecifier, typeQualifier);
+		return declarationSpecifiers;
+	}
 }
 
 StorageClassSpecifier* createStorageClassSpecifier(const TokenPtr token)
