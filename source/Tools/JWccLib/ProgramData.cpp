@@ -72,17 +72,58 @@ void ProgramData::handleDeclaration(Declaration* declaration, vector<VariableDat
 {
 	if (declaration != nullptr)
 	{
-		/* FIX ME: Handle typedefs
-		TokenType type = declaration->getType();
+		TokenType type;
 		bool unsign = false;
 		string structName;
 		StructOrUnionSpecifier* suSpec = nullptr;
-		if (type == UNSIGNED)
+
+		DeclarationSpecifiers* declSpecifiers = declaration->getDeclarationSpecifiers();
+		vector<InitDeclarator*>* initDeclaratorsList = declaration->getVectorInitDeclarator();
+		vector<DeclarationSpecifiersNode*>* list = declSpecifiers->getDeclarationSpecifiersNodeList();
+		for (auto ptr : *list)
 		{
-			auto declaration_specifiers = declaration->getDeclarationSpecifiers()->getDeclarationSpecifiers();
-			type = declaration_specifiers->getTypeSpecifier()->getType().value();
-			unsign = true;
+			if (ptr->typeSpecifier)
+			{
+				TokenType temp = ptr->typeSpecifier->getType().value();
+				if (temp == UNSIGNED)
+				{
+					unsign = true;
+				}
+				else if (temp == STRUCT)
+				{
+				}
+				else
+				{
+					type = temp;
+				}
+			}
 		}
+		if (initDeclaratorsList != nullptr)
+		{
+			for (InitDeclarator* initDecl : *initDeclaratorsList)
+			{
+				Declarator* declarator = initDecl->getDeclarator();
+				DirectDeclarator* dd = declarator->getDirectDeclarator();
+
+				VariableData* data = new VariableData();
+				data->initializer = nullptr;
+				data->arraySize = 1;
+				data->type = type;
+				data->pointer = declarator->isPointer();
+				data->name = initDecl->getVariableName();
+				data->unsign = unsign;
+
+				if (type == STRUCT)
+				{
+					data->structName = structName;
+					data->suSpec = suSpec ? new StructOrUnionSpecifier(*suSpec) : nullptr;
+				}
+				if (initDecl->isInitializer()) data->initializer = new Initializer(*initDecl->getInitializer());
+				if (dd->isConstantExpression()) data->arraySize = dd->getConstantExpression()->getData()->getConstant()->getIConst()->data->repr.numericConstant.repr.lIntConst;
+				variableTable->push_back(data);
+			}
+		}
+		/* FIX ME: Handle typedefs
 		else if (type == STRUCT)
 		{
 			auto declaration_specifiers = declaration->getDeclarationSpecifiers();

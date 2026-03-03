@@ -11,9 +11,9 @@ using namespace WadeSpace;
 void handleStructDefinition(Declaration* declaration)
 {
 	auto declaration_specifiers = declaration->getDeclarationSpecifiers();
-	if (declaration_specifiers != nullptr && declaration_specifiers->isDeclarationSpecifiers())
+	if (declaration_specifiers != nullptr && declaration_specifiers->isDeclarationSpecifiersNodeList())
 	{
-		for (auto node : *declaration_specifiers->getDeclarationSpecifiers())
+		for (auto node : *declaration_specifiers->getDeclarationSpecifiersNodeList())
 		{
 			auto type_specifier = node->typeSpecifier;
 			if (type_specifier != nullptr && type_specifier->getType().has_value())

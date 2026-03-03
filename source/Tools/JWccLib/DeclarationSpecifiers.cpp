@@ -17,55 +17,55 @@ DeclarationSpecifiersNode::~DeclarationSpecifiersNode()
 
 DeclarationSpecifiers::DeclarationSpecifiers()
 {
-	declarationSpecifiers = nullptr;
+	declarationSpecifiersNodeList = nullptr;
 }
 
 DeclarationSpecifiers::~DeclarationSpecifiers()
 {
-	if (declarationSpecifiers != nullptr)
+	if (declarationSpecifiersNodeList != nullptr)
 	{
-		for (DeclarationSpecifiersNode* node : *declarationSpecifiers)
+		for (DeclarationSpecifiersNode* node : *declarationSpecifiersNodeList)
 		{
 			delete node;
 		}
-		delete declarationSpecifiers;
+		delete declarationSpecifiersNodeList;
 	}
 }
 
 void DeclarationSpecifiers::addDeclarationSpecifiersNode(StorageClassSpecifier* const storageClassSpecifier, TypeSpecifier* const typeSpecifier, TypeQualifier* const typeQualifier)
 {
-	if (declarationSpecifiers == nullptr)
+	if (declarationSpecifiersNodeList == nullptr)
 	{
-		declarationSpecifiers = new vector<DeclarationSpecifiersNode*>();
+		declarationSpecifiersNodeList = new vector<DeclarationSpecifiersNode*>();
 	}
-	declarationSpecifiers->push_back(new DeclarationSpecifiersNode(storageClassSpecifier, typeSpecifier, typeQualifier));
+	declarationSpecifiersNodeList->push_back(new DeclarationSpecifiersNode(storageClassSpecifier, typeSpecifier, typeQualifier));
 }
 
-vector<DeclarationSpecifiersNode*>* DeclarationSpecifiers::getDeclarationSpecifiers() const
+vector<DeclarationSpecifiersNode*>* DeclarationSpecifiers::getDeclarationSpecifiersNodeList() const
 {
-	return declarationSpecifiers;
+	return declarationSpecifiersNodeList;
 }
 
-bool DeclarationSpecifiers::isDeclarationSpecifiers() const
+bool DeclarationSpecifiers::isDeclarationSpecifiersNodeList() const
 {
-	return declarationSpecifiers != nullptr;
+	return declarationSpecifiersNodeList != nullptr;
 }
 
 DeclarationSpecifiers::DeclarationSpecifiers(const DeclarationSpecifiers& other)
 {
-	declarationSpecifiers = other.declarationSpecifiers ? new vector<DeclarationSpecifiersNode*>(*other.declarationSpecifiers) : nullptr;
+	declarationSpecifiersNodeList = other.declarationSpecifiersNodeList ? new vector<DeclarationSpecifiersNode*>(*other.declarationSpecifiersNodeList) : nullptr;
 }
 
 DeclarationSpecifiers::DeclarationSpecifiers(DeclarationSpecifiers&& other) noexcept
 {
-	declarationSpecifiers = other.declarationSpecifiers ? new vector<DeclarationSpecifiersNode*>(*other.declarationSpecifiers) : nullptr;
+	declarationSpecifiersNodeList = other.declarationSpecifiersNodeList ? new vector<DeclarationSpecifiersNode*>(*other.declarationSpecifiersNodeList) : nullptr;
 }
 
 DeclarationSpecifiers& DeclarationSpecifiers::operator=(const DeclarationSpecifiers& other)
 {
 	if (this == &other)
 		return *this;
-	declarationSpecifiers = other.declarationSpecifiers ? new vector<DeclarationSpecifiersNode*>(*other.declarationSpecifiers) : nullptr;
+	declarationSpecifiersNodeList = other.declarationSpecifiersNodeList ? new vector<DeclarationSpecifiersNode*>(*other.declarationSpecifiersNodeList) : nullptr;
 	return *this;
 }
 
@@ -73,7 +73,7 @@ DeclarationSpecifiers& DeclarationSpecifiers::operator=(DeclarationSpecifiers&& 
 {
 	if (this == &other)
 		return *this;
-	declarationSpecifiers = other.declarationSpecifiers ? new vector<DeclarationSpecifiersNode*>(*other.declarationSpecifiers) : nullptr;
+	declarationSpecifiersNodeList = other.declarationSpecifiersNodeList ? new vector<DeclarationSpecifiersNode*>(*other.declarationSpecifiersNodeList) : nullptr;
 	return *this;
 }
 

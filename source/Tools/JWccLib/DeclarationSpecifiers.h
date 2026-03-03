@@ -26,8 +26,8 @@ namespace WadeSpace
 		DeclarationSpecifiers();
 		virtual ~DeclarationSpecifiers();
 		void addDeclarationSpecifiersNode(StorageClassSpecifier* const storageClassSpecifier, TypeSpecifier* const typeSpecifier, TypeQualifier* const typeQualifier);
-		[[nodiscard]] vector<DeclarationSpecifiersNode*>* getDeclarationSpecifiers() const;
-		[[nodiscard]] bool isDeclarationSpecifiers() const;
+		[[nodiscard]] vector<DeclarationSpecifiersNode*>* getDeclarationSpecifiersNodeList() const;
+		[[nodiscard]] bool isDeclarationSpecifiersNodeList() const;
 
 		DeclarationSpecifiers(const DeclarationSpecifiers& other);
 		DeclarationSpecifiers(DeclarationSpecifiers&& other) noexcept;
@@ -35,6 +35,6 @@ namespace WadeSpace
 		DeclarationSpecifiers& operator=(DeclarationSpecifiers&& other) noexcept;
 
 	private:
-		vector<DeclarationSpecifiersNode*>* declarationSpecifiers;
+		vector<DeclarationSpecifiersNode*>* declarationSpecifiersNodeList;
 	};
 }
