@@ -50,6 +50,17 @@ Constant& Constant::operator=(const Constant& other)
 	return *this;
 }
 
+Constant& Constant::operator=(Constant&& other) noexcept
+{
+	if (this == &other)
+		return *this;
+	iConst = other.iConst;
+	fConst = other.fConst;
+	strConst = other.strConst;
+	type = other.type;
+	return *this;
+}
+
 TokenPtr Constant::getIConst() const
 {
 	return iConst;

@@ -1,10 +1,10 @@
-struct Data
+struct NewData
 {
 	char var3;
 	long double var4;
 	int var5;
 };
-struct Data var6;
+struct NewData var6;
 char var1;
 short var2 = 6;
 int init;

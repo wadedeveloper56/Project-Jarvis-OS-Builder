@@ -13,7 +13,6 @@ namespace WadeSpace
 	{
 		string name;
 		TokenType type;
-		int size; 
 		bool pointer;
 		unsigned long long arraySize;
 		Initializer* initializer;
@@ -26,7 +25,6 @@ namespace WadeSpace
 		_VariableData(const _VariableData& other)
 		{
 			name = other.name;
-			size = other.size;
 			pointer = other.pointer;
 			arraySize = other.arraySize;
 			type = other.type;
@@ -38,7 +36,6 @@ namespace WadeSpace
 		_VariableData(_VariableData&& other) noexcept
 		{
 			name = other.name;
-			size = other.size;
 			pointer = other.pointer;
 			arraySize = other.arraySize;
 			type = other.type;
@@ -52,7 +49,6 @@ namespace WadeSpace
 			if (this == &other)
 				return *this;
 			name = other.name;
-			size = other.size;
 			pointer = other.pointer;
 			arraySize = other.arraySize;
 			type = other.type;
@@ -67,7 +63,6 @@ namespace WadeSpace
 			if (this == &other)
 				return *this;
 			name = std::move(other.name);
-			size = other.size;
 			pointer = other.pointer;
 			arraySize = other.arraySize;
 			type = other.type;
@@ -82,7 +77,6 @@ namespace WadeSpace
 	{
 		string name;
 		TokenType type;
-		int size;
 		vector<VariableData*>* parameters;
 		_FunctionData() = default;
 		~_FunctionData() = default;
@@ -90,7 +84,6 @@ namespace WadeSpace
 		_FunctionData(const _FunctionData& other)
 		{
 			name = other.name;
-			size = other.size;
 			type = other.type;
 			parameters = other.parameters ? new vector<VariableData*>(*other.parameters) : nullptr;
 		}
@@ -98,7 +91,6 @@ namespace WadeSpace
 		_FunctionData(_FunctionData&& other) noexcept
 		{
 			name = other.name;
-			size = other.size;
 			type = other.type;
 			parameters = other.parameters ? new vector<VariableData*>(*other.parameters) : nullptr;
 		}
@@ -108,7 +100,6 @@ namespace WadeSpace
 			if (this == &other)
 				return *this;
 			name = other.name;
-			size = other.size;
 			type = other.type;
 			parameters = other.parameters ? new vector<VariableData*>(*other.parameters) : nullptr;
 			return *this;
@@ -119,7 +110,6 @@ namespace WadeSpace
 			if (this == &other)
 				return *this;
 			name = std::move(other.name);
-			size = other.size;
 			type = other.type;		
 			parameters = other.parameters ? new vector<VariableData*>(*other.parameters) : nullptr;
 			return *this;

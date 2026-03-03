@@ -48,12 +48,36 @@ string Token::getSymbolName() const
 
 string Token::getKeywordName() const
 {
-	if (data->code == YC_KEYWORD)
+	if (data != nullptr)
 	{
-		return string(data->repr.keyword.string, data->repr.keyword.strLen);
+		if (data->code == YC_KEYWORD)
+		{
+			return string(data->repr.keyword.string, data->repr.keyword.strLen);
+		}
 	}
-	else
+	return "";
+}
+
+unsigned long long Token::getIntegerConst() const
+{
+	if (data != nullptr)
 	{
-		throw logic_error("Token is not a keyword");
+		if (data->code == YC_NUMERIC)
+		{
+			return data->repr.numericConstant.repr.lIntConst;
+		}
 	}
+	return 0;
+}
+
+long double Token::getDoubleConst() const
+{
+	if (data != nullptr)
+	{
+		if (data->code == YC_NUMERIC)
+		{
+			return data->repr.numericConstant.repr.lDoubleConst;
+		}
+	}
+	return 0.0;
 }

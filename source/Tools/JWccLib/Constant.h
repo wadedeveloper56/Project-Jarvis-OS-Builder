@@ -1,9 +1,6 @@
 #pragma once
 
-#include <string>
-#include <vector>
 #include <optional>
-
 #include "Token.h"
 #include "TokenType.h"
 
@@ -17,10 +14,12 @@ namespace WadeSpace
 		Constant();
 		Constant(const TokenPtr iConst, const TokenPtr fConst, const TokenPtr strConst, const optional<TokenType>& type);
 		Constant(const Constant& other);
-		Constant(Constant&& other) noexcept;
 		virtual ~Constant(); 
+
+		Constant(Constant&& other) noexcept;
 		Constant& operator=(const Constant& other);
 		Constant& operator=(Constant&& other) noexcept;
+
 		[[nodiscard]] TokenPtr getIConst() const;
 		[[nodiscard]] TokenPtr getFConst() const;
 		[[nodiscard]] TokenPtr getStrConst() const;

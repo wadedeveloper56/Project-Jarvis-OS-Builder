@@ -1,12 +1,12 @@
 Compiler (x86/x64) v1.0 (C) Copyright 2025-2026 Christopher D. Wade.
 All Rights Reserved
-struct Data
+struct NewData
 {
 char var3 ;
 long double var4 ;
 int var5 ;
 } ;
-struct Data var6 ;
+struct NewData var6 ;
 char var1 ;
 short var2 = 6 ;
 int init ;
@@ -18,7 +18,7 @@ return 0 ;
 
 Scanner: token [struct]
 STRUCT REDUCE to struct_or_union
-Scanner: identifier [Data]
+Scanner: identifier [NewData]
 Scanner: token [{]
 Scanner: token [char]
 CHAR REDUCE to type_specifier
@@ -64,7 +64,7 @@ external_declaration REDUCE to translation_unit
 
 Scanner: token [struct]
 STRUCT REDUCE to struct_or_union
-Scanner: struct name [Data]
+Scanner: struct name [NewData]
 Scanner: identifier [var6]
 struct_or_union IDENTIFIER REDUCE to struct_or_union_specifier
 struct_or_union_specifier REDUCE to type_specifier

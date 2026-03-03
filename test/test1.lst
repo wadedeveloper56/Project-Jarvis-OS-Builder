@@ -1,4 +1,4 @@
-JWasm v2.12pre, Feb 27 2026
+JWasm v2.12pre, Mar  2 2026
 test1.asm
                                 .x64p
                                 .model flat, c;
@@ -8,11 +8,11 @@ test1.asm
                             *   _DATA ends
                             *   assume cs:flat,ds:flat,ss:flat,es:flat,fs:ERROR,gs:ERROR
 
-00000000                        Data STRUCT
+00000000                        NewData STRUCT
 00000000                        	var3 SBYTE ?
 00000001                        	var4 TBYTE ?
 0000000B                        	var5 SDWORD ?
-0000000F                        Data ENDS
+0000000F                        NewData ENDS
                                 .data
 00000000                    *   _DATA segment
                             *   assume cs:ERROR
@@ -21,9 +21,9 @@ test1.asm
 00000002                    *   _DATA ends
 00000000                    *   _BSS segment PARA FLAT PUBLIC 'BSS'
                             *   assume cs:ERROR
-00000000  000000000000000000    _var6 Data <>
-0000000F  00                    _var1 SBYTE ?
-00000010  00000000              _init SDWORD ?
+00000000  000000000000000000    _var6 NewData <>
+0000000F  00                    _var1 SBYTE  ?
+00000010  00000000              _init SDWORD  ?
 
 00000000                        .code
 00000014                    *   _BSS ends
@@ -57,7 +57,7 @@ Structures and Unions:
 
                 N a m e                 Size/Ofs   Type
 
-Data . . . . . . . . . . . . . .               F
+NewData  . . . . . . . . . . . .               F
   var3 . . . . . . . . . . . . .               0   Byte
   var4 . . . . . . . . . . . . .               1   TByte
   var5 . . . . . . . . . . . . .               B   DWord
@@ -90,12 +90,12 @@ Symbols:
 @Cpu . . . . . . . . . . . . . .        Number           DDFh 
 @CurSeg  . . . . . . . . . . . .        Text   
 @DataSize  . . . . . . . . . . .        Number             0h 
-@Date  . . . . . . . . . . . . .        Text   03/02/26
+@Date  . . . . . . . . . . . . .        Text   03/03/26
 @FileCur . . . . . . . . . . . .        Text   test1.asm
 @FileName  . . . . . . . . . . .        Text   TEST1
 @Interface . . . . . . . . . . .        Number             1h 
 @Model . . . . . . . . . . . . .        Number             7h 
-@Time  . . . . . . . . . . . . .        Text   10:14:23
+@Time  . . . . . . . . . . . . .        Text   09:33:53
 @Version . . . . . . . . . . . .        Text   800
 @code  . . . . . . . . . . . . .        Text   _TEXT
 @data  . . . . . . . . . . . . .        Text   FLAT
@@ -104,6 +104,6 @@ __JWASM__  . . . . . . . . . . .        Number            D4h
 _init  . . . . . . . . . . . . .        DWord             10h _BSS C
 _var1  . . . . . . . . . . . . .        Byte               Fh _BSS C
 _var2  . . . . . . . . . . . . .        Word               0h _DATA C
-_var6  . . . . . . . . . . . . .        Data               0h _BSS C
+_var6  . . . . . . . . . . . . .        NewData            0h _BSS C
 
-test1.asm: 22 lines, 2 passes, 1 ms, 0 warnings, 0 errors
+test1.asm: 22 lines, 2 passes, 0 ms, 0 warnings, 0 errors
