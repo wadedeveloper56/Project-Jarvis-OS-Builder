@@ -1,13 +1,5 @@
-struct NewData
-{
-	char var3;
-	long double var4;
-	int var5;
-};
-struct NewData var6;
-char var1;
-short var2 = 6;
-int init;
+unsigned int var1;
+int var2;
 
 int main(int argc, char* argv[])
 {

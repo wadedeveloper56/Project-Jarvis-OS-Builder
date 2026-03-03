@@ -18,6 +18,7 @@ namespace WadeSpace
 		Initializer* initializer;
 		string structName;
 		StructOrUnionSpecifier* suSpec;
+		bool unsign;
 
 		_VariableData() = default;
 		~_VariableData() = default;
@@ -31,6 +32,7 @@ namespace WadeSpace
 			initializer = other.initializer ? new Initializer(*other.initializer) : nullptr;
 			structName = other.structName;
 			suSpec = other.suSpec ? new StructOrUnionSpecifier(*other.suSpec) : nullptr;
+			unsign = other.unsign;
 		}
 
 		_VariableData(_VariableData&& other) noexcept
@@ -42,6 +44,7 @@ namespace WadeSpace
 			initializer = other.initializer ? new Initializer(*other.initializer) : nullptr;
 			structName = other.structName;
 			suSpec = other.suSpec ? new StructOrUnionSpecifier(*other.suSpec) : nullptr;
+			unsign = other.unsign;
 		}
 
 		_VariableData& operator=(const _VariableData& other)
@@ -55,6 +58,7 @@ namespace WadeSpace
 			initializer = other.initializer ? new Initializer(*other.initializer) : nullptr;
 			structName = other.structName;
 			suSpec = other.suSpec ? new StructOrUnionSpecifier(*other.suSpec) : nullptr;
+			unsign = other.unsign;
 			return *this;
 		}
 
@@ -69,6 +73,7 @@ namespace WadeSpace
 			initializer = other.initializer ? new Initializer(*other.initializer) : nullptr;
 			structName = other.structName;
 			suSpec = other.suSpec ? new StructOrUnionSpecifier(*other.suSpec) : nullptr;	
+			unsign = other.unsign;
 			return *this;
 		}
 	} VariableData;

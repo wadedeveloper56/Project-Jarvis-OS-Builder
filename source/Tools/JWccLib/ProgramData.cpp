@@ -71,9 +71,16 @@ void ProgramData::handleDeclaration(Declaration* declaration, vector<VariableDat
 	if (declaration != nullptr)
 	{
 		TokenType type = declaration->getType();
+		bool unsign = false;
 		string structName;
 		StructOrUnionSpecifier* suSpec = nullptr;
-		if (type == STRUCT)
+		if (type == UNSIGNED)
+		{
+			auto declaration_specifiers = declaration->getDeclarationSpecifiers()->getDeclarationSpecifiers();
+			type = declaration_specifiers->getTypeSpecifier()->getType().value();
+			unsign = true;
+		}
+		else if (type == STRUCT)
 		{
 			auto declaration_specifiers = declaration->getDeclarationSpecifiers();
 			if (declaration_specifiers != nullptr)
@@ -103,7 +110,8 @@ void ProgramData::handleDeclaration(Declaration* declaration, vector<VariableDat
 				data->type = type;
 				data->pointer = declarator->isPointer();
 				data->name = initDecl->getVariableName();
-				
+				data->unsign = unsign;
+
 				if (type == STRUCT)
 				{
 					data->structName = structName;

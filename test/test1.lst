@@ -1,4 +1,4 @@
-JWasm v2.12pre, Mar  2 2026
+JWasm v2.12pre, Mar  3 2026
 test1.asm
                                 .x64p
                                 .model flat, c;
@@ -8,25 +8,18 @@ test1.asm
                             *   _DATA ends
                             *   assume cs:flat,ds:flat,ss:flat,es:flat,fs:ERROR,gs:ERROR
 
-00000000                        NewData STRUCT
-00000000                        	var3 SBYTE ?
-00000001                        	var4 TBYTE ?
-0000000B                        	var5 SDWORD ?
-0000000F                        NewData ENDS
                                 .data
 00000000                    *   _DATA segment
                             *   assume cs:ERROR
-00000000  0600                  _var2 SWORD 6
 00000000                        .data?
-00000002                    *   _DATA ends
+                            *   _DATA ends
 00000000                    *   _BSS segment PARA FLAT PUBLIC 'BSS'
                             *   assume cs:ERROR
-00000000  000000000000000000    _var6 NewData <>
-0000000F  00                    _var1 SBYTE  ?
-00000010  00000000              _init SDWORD  ?
+00000000  00000000              _var1 DWORD  ?
+00000004  00000000              _var2 SDWORD  ?
 
 00000000                        .code
-00000014                    *   _BSS ends
+00000008                    *   _BSS ends
 00000000                    *   _TEXT segment
                             *   assume cs:FLAT
 00000000                        _main PROC C, _argc:DWORD, _argv:QWORD
@@ -53,23 +46,13 @@ Macros:
 @SubStr  . . . . . . . . . . . .        Func     0
 
 
-Structures and Unions:
-
-                N a m e                 Size/Ofs   Type
-
-NewData  . . . . . . . . . . . .               F
-  var3 . . . . . . . . . . . . .               0   Byte
-  var4 . . . . . . . . . . . . .               1   TByte
-  var5 . . . . . . . . . . . . .               B   DWord
-
-
 Segments and Groups:
 
                 N a m e                 Size     Length   Align   Combine Class
 
 FLAT . . . . . . . . . . . . . .        GROUP
-_BSS . . . . . . . . . . . . . .        64 Bit   00000014 Para    Public  'BSS'
-_DATA  . . . . . . . . . . . . .        64 Bit   00000002 Para    Public  'DATA'
+_BSS . . . . . . . . . . . . . .        64 Bit   00000008 Para    Public  'BSS'
+_DATA  . . . . . . . . . . . . .        64 Bit   00000000 Para    Public  'DATA'
 _TEXT  . . . . . . . . . . . . .        64 Bit   0000000B Para    Public  'CODE'
 
 
@@ -95,15 +78,13 @@ Symbols:
 @FileName  . . . . . . . . . . .        Text   TEST1
 @Interface . . . . . . . . . . .        Number             1h 
 @Model . . . . . . . . . . . . .        Number             7h 
-@Time  . . . . . . . . . . . . .        Text   09:33:53
+@Time  . . . . . . . . . . . . .        Text   11:04:59
 @Version . . . . . . . . . . . .        Text   800
 @code  . . . . . . . . . . . . .        Text   _TEXT
 @data  . . . . . . . . . . . . .        Text   FLAT
 @stack . . . . . . . . . . . . .        Text   FLAT
 __JWASM__  . . . . . . . . . . .        Number            D4h 
-_init  . . . . . . . . . . . . .        DWord             10h _BSS C
-_var1  . . . . . . . . . . . . .        Byte               Fh _BSS C
-_var2  . . . . . . . . . . . . .        Word               0h _DATA C
-_var6  . . . . . . . . . . . . .        NewData            0h _BSS C
+_var1  . . . . . . . . . . . . .        DWord              0h _BSS C
+_var2  . . . . . . . . . . . . .        DWord              4h _BSS C
 
-test1.asm: 22 lines, 2 passes, 0 ms, 0 warnings, 0 errors
+test1.asm: 15 lines, 2 passes, 1 ms, 0 warnings, 0 errors
