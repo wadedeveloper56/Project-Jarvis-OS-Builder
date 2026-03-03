@@ -35,13 +35,69 @@ MasmCodeGenerator::~MasmCodeGenerator()
 	delete variableTable;
 }
 
+string MasmCodeGenerator::vectorToCommaSeparatedList(const vector<string>& vec)
+{
+	string result;
+	for (size_t i = 0; i < vec.size(); ++i)
+	{
+		result += vec[i];
+		if (i < vec.size() - 1)
+		{
+			result += ", ";
+		}
+	}
+	return result;
+}
+
+void MasmCodeGenerator::handleFunctionWithParameters(ofstream& out, string name, vector<VariableData*>* list)
+{
+	vector<string> paramList;
+	for (auto ptr : *list)
+	{
+		auto type = ptr->type;
+		auto variableName = "_" + ptr->name;
+		bool isInitialized = ptr->initializer != nullptr;
+		bool isPointer = ptr->pointer;
+		bool isArray = ptr->arraySize > 1;
+		bool isStruct = type == STRUCT;
+		bool isUnsigned = ptr->unsign == true;
+
+		string asmType = "";
+		if (isPointer)
+		{
+			if (bit16)      asmType = "WORD ";
+			else if (bit32) asmType = "DWORD ";
+			else            asmType = "QWORD ";
+		}
+		else if (!isUnsigned && type == CHAR)        asmType = "SBYTE ";
+		else if (!isUnsigned && type == BOOL)        asmType = "SBYTE ";
+		else if (!isUnsigned && type == SHORT)       asmType = "SWORD ";
+		else if (!isUnsigned && type == INT)         asmType = "SDWORD ";
+		else if (!isUnsigned && type == LONG)        asmType = "SDWORD ";
+		else if (!isUnsigned && type == FLOAT)       asmType = "SDWORD ";
+		else if (!isUnsigned && type == LONG_LONG)   asmType = "SQWORD ";
+		else if (!isUnsigned && type == DOUBLE)      asmType = "SQWORD ";
+		else if (!isUnsigned && type == LONG_DOUBLE) asmType = "TBYTE ";
+		else if (isUnsigned && type == CHAR)        asmType = "BYTE ";
+		else if (isUnsigned && type == BOOL)        asmType = "BYTE ";
+		else if (isUnsigned && type == SHORT)       asmType = "WORD ";
+		else if (isUnsigned && type == INT)         asmType = "DWORD ";
+		else if (isUnsigned && type == LONG)        asmType = "DWORD ";
+		else if (isUnsigned && type == FLOAT)       asmType = "DWORD ";
+		else if (isUnsigned && type == LONG_LONG)   asmType = "QWORD ";
+		else if (isUnsigned && type == DOUBLE)      asmType = "QWORD ";
+		else if (isUnsigned && type == LONG_DOUBLE) asmType = "TBYTE ";
+		paramList.push_back(variableName + ":" + asmType);
+	}
+	string paramListStr = vectorToCommaSeparatedList(paramList);
+	out << "_" << name << " PROC C, " << paramListStr << endl;
+}
+
 void MasmCodeGenerator::handleIndividualFunction(ofstream& out, FunctionData* ptr)
 {
 	if (ptr->parameters != nullptr && !ptr->parameters->empty())
 	{
-		if (bit64) out << "_" << ptr->name << " PROC C, _argc:DWORD, _argv:QWORD" << endl;
-		else if (bit32) out << "_" << ptr->name << " PROC C, _argc:DWORD, _argv:DWORD" << endl;
-		else out << "_" << ptr->name << " PROC C, _argc:DWORD, _argv:WORD" << endl;
+		handleFunctionWithParameters(out, ptr->name, ptr->parameters);
 	}
 	else
 	{

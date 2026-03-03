@@ -22,7 +22,7 @@ test1.asm
 00000008                    *   _BSS ends
 00000000                    *   _TEXT segment
                             *   assume cs:FLAT
-00000000                        _main PROC C, _argc:DWORD, _argv:QWORD
+00000000                        _main PROC C, _argc:SDWORD , _argv:QWORD 
 00000000  55                *   push rbp
 00000001  488BEC            *   mov rbp, rsp
 00000004  8B4510                	mov eax, [_argc]
@@ -78,7 +78,7 @@ Symbols:
 @FileName  . . . . . . . . . . .        Text   TEST1
 @Interface . . . . . . . . . . .        Number             1h 
 @Model . . . . . . . . . . . . .        Number             7h 
-@Time  . . . . . . . . . . . . .        Text   11:04:59
+@Time  . . . . . . . . . . . . .        Text   11:44:43
 @Version . . . . . . . . . . . .        Text   800
 @code  . . . . . . . . . . . . .        Text   _TEXT
 @data  . . . . . . . . . . . . .        Text   FLAT
@@ -87,4 +87,4 @@ __JWASM__  . . . . . . . . . . .        Number            D4h
 _var1  . . . . . . . . . . . . .        DWord              0h _BSS C
 _var2  . . . . . . . . . . . . .        DWord              4h _BSS C
 
-test1.asm: 15 lines, 2 passes, 1 ms, 0 warnings, 0 errors
+test1.asm: 15 lines, 2 passes, 0 ms, 0 warnings, 0 errors

@@ -7,7 +7,7 @@ File Type: 64-bit COFF OBJECT
 FILE HEADER VALUES
               8664 Machine (x64)
                  3 (3) Number of Sections
-          69A714BB TimeDateStamp ->  n/a
+          69A71E0B TimeDateStamp ->  n/a
                 97 PointerToSymbolTable
                  9 (9) NumberOfSymbols
                  0 (0) SizeOfOptionalHeader

@@ -30,6 +30,8 @@ namespace WadeSpace
 		void handleFunctionTable(ofstream& out);
 		void handleStructs(ofstream& out);
 		void outputVariable(ofstream& out, _VariableData* ptr);
+		void handleFunctionWithParameters(ofstream& out, string name, vector<VariableData*>* list);
+		string vectorToCommaSeparatedList(const vector<string>& vec);
 	};
 }
 
