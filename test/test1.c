@@ -1,8 +1,13 @@
-unsigned char var1;
-short var2;
-int var3;
-long var4;
-long long var5;
+struct Data
+{
+	char var3;
+	long double var4;
+	int var5;
+};
+struct Data var6;
+char var1;
+short var2 = 6;
+int init;
 
 int main(int argc, char* argv[])
 {

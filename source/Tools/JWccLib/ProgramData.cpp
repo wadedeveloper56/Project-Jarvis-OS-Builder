@@ -67,9 +67,9 @@ void ProgramData::handleFunction(FunctionDefinition* declaration, vector<Functio
 				{
 					functionData->name = direct_declarator->getDirectDeclarator()->getIdentifier()->getSymbolName();
 				}
-				auto declaration_specifiers = parameterDeclaration->getDeclarationSpecifiers()->getDeclarationSpecifiersNodeList();
+				auto declaration_specifiers_list = parameterDeclaration->getDeclarationSpecifiers()->getDeclarationSpecifiersNodeList();
 				TokenType type = UNKNOWN;
-				for (auto ptr : *declaration_specifiers)
+				for (auto ptr : *declaration_specifiers_list)
 				{
 					if (ptr->typeSpecifier != nullptr)
 					{
@@ -83,34 +83,6 @@ void ProgramData::handleFunction(FunctionDefinition* declaration, vector<Functio
 		}
 		functionTable->push_back(data);
 	}
-	/* FIX ME: Handle typedefs 
-	data->type = declaration->getDeclarationSpecifiers()->getTypeSpecifier()->getType().value();
-	auto direct_declarator = declaration->getDeclarator()->getDirectDeclarator();
-	data->name = direct_declarator->getDirectDeclarator()->getIdentifier()->getSymbolName();
-	ParameterTypeList* parameters = direct_declarator->getParameterTypeList();
-	if (parameters != nullptr && !parameters->getVectorParameterDeclaration()->empty())
-	{
-		data->parameters = new vector<VariableData*>();
-		for (ParameterDeclaration* parameterDeclaration : *parameters->getVectorParameterDeclaration())
-		{
-			VariableData* functionData = new VariableData();
-			auto direct_declarator = parameterDeclaration->getDeclarator()->getDirectDeclarator();
-			if (direct_declarator->getIdentifier() != nullptr)
-			{
-				functionData->name = direct_declarator->getIdentifier()->getSymbolName();
-			}
-			else
-			{
-				functionData->name = direct_declarator->getDirectDeclarator()->getIdentifier()->getSymbolName();
-			}
-			TokenType type = parameterDeclaration->getDeclarationSpecifiers()->getTypeSpecifier()->getType().value();
-			functionData->pointer = parameterDeclaration->getDeclarator()->isPointer();
-			functionData->type = type;
-			data->parameters->push_back(functionData);
-		}
-	}
-	functionTable->push_back(data);
-	*/
 }
 
 void ProgramData::handleDeclaration(Declaration* declaration, vector<VariableData*>* variableTable)
@@ -136,6 +108,25 @@ void ProgramData::handleDeclaration(Declaration* declaration, vector<VariableDat
 				}
 				else if (temp == STRUCT)
 				{
+					auto declaration_specifiers = declaration->getDeclarationSpecifiers();
+					if (declaration_specifiers != nullptr)
+					{
+						auto declaration_specifiers_list = declaration_specifiers->getDeclarationSpecifiersNodeList();
+						for (auto ptr : *declaration_specifiers_list)
+						{
+							auto type_specifier = ptr->typeSpecifier;
+							if (type_specifier != nullptr)
+							{
+								structName = type_specifier->getStructOrUnionSpecifier()->getName()->getSymbolName();
+								auto typedefEntry = structList->find(structName);
+								if (typedefEntry != structList->end())
+								{
+									suSpec = typedefEntry->second;
+								}
+							}
+						}
+					}
+					type = temp;
 				}
 				else
 				{
@@ -168,50 +159,6 @@ void ProgramData::handleDeclaration(Declaration* declaration, vector<VariableDat
 				variableTable->push_back(data);
 			}
 		}
-		/* FIX ME: Handle typedefs
-		else if (type == STRUCT)
-		{
-			auto declaration_specifiers = declaration->getDeclarationSpecifiers();
-			if (declaration_specifiers != nullptr)
-			{
-				auto type_specifier = declaration_specifiers->getTypeSpecifier();
-				if (type_specifier != nullptr)
-				{
-					structName = type_specifier->getStructOrUnionSpecifier()->getName()->getSymbolName();
-					auto typedefEntry = structList->find(structName);
-					if (typedefEntry != structList->end())
-					{
-						suSpec = typedefEntry->second;
-					}
-				}
-			}
-		}
-		if (declaration->getVectorInitDeclarator() != nullptr)
-		{
-			for (InitDeclarator* initDecl : *declaration->getVectorInitDeclarator())
-			{
-				auto declarator = initDecl->getDeclarator();
-				DirectDeclarator* dd = declarator->getDirectDeclarator();
-
-				VariableData* data = new VariableData();
-				data->initializer = nullptr;
-				data->arraySize = 1;
-				data->type = type;
-				data->pointer = declarator->isPointer();
-				data->name = initDecl->getVariableName();
-				data->unsign = unsign;
-
-				if (type == STRUCT)
-				{
-					data->structName = structName;
-					data->suSpec = suSpec ? new StructOrUnionSpecifier(*suSpec) : nullptr;
-				}
-				if (initDecl->isInitializer()) data->initializer = new Initializer(*initDecl->getInitializer());
-				if (dd->isConstantExpression()) data->arraySize = dd->getConstantExpression()->getData()->getConstant()->getIConst()->data->repr.numericConstant.repr.lIntConst;
-				variableTable->push_back(data);
-			}
-		}
-		*/
 	}
 }
 
