@@ -79,3 +79,18 @@ Declaration* ExternalDeclaration::getDeclaration() const
 	return declaration;
 }
 
+bool ExternalDeclaration::isTypedef() const
+{
+	if (declaration != nullptr)
+	{
+		vector<DeclarationSpecifiersNode*>* temp = declaration->getDeclarationSpecifiers()->getDeclarationSpecifiersNodeList();
+		for (DeclarationSpecifiersNode* node : *temp)
+		{
+			if (node->storageClassSpecifier != nullptr && node->storageClassSpecifier->getType()->getKeywordName() == "typedef")
+			{
+				return true;
+			}
+		}
+	}
+	return false;
+}

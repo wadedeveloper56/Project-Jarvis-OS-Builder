@@ -1,13 +1,5 @@
-struct Data
-{
-	char var3;
-	long double var4;
-	int var5;
-};
-struct Data var6;
-char var1;
-short var2 = 6;
-int init;
+typedef int integer;
+integer init;
 
 int main(int argc, char* argv[])
 {

@@ -28,6 +28,7 @@ namespace WadeSpace
 
 		bool isFunction() const;
 		bool isDeclaration() const;
+		bool isTypedef() const;
 		
 	private:
 		FunctionDefinition* functionDefinition;

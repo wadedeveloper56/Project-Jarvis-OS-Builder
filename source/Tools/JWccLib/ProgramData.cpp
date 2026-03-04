@@ -128,6 +128,17 @@ void ProgramData::handleDeclaration(Declaration* declaration, vector<VariableDat
 					}
 					type = temp;
 				}
+				else if (temp == TYPE_NAME)
+				{
+					vector<DeclarationSpecifiersNode*>* temp2 = ptr->typeSpecifier->getTypedefInfo()->getDeclaration()->getDeclarationSpecifiers()->getDeclarationSpecifiersNodeList();
+					for (DeclarationSpecifiersNode* node : *temp2)
+					{
+						if (node->typeSpecifier != nullptr)
+						{
+							type = node->typeSpecifier->getType().value();
+						}
+					}
+				}
 				else
 				{
 					type = temp;

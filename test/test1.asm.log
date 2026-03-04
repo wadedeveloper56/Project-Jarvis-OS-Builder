@@ -1,14 +1,14 @@
 PEDUMP - Win32/Win64 COFF EXE/OBJ/LIB file dumper v1.0 (C) Copyright 2025-2026 Christopher D. Wade.
 All Rights Reserved
 Dump of file test1.obj
-File Size 319 bytes
+File Size 317 bytes
 File Type: 64-bit COFF OBJECT
 
 FILE HEADER VALUES
               8664 Machine (x64)
                  3 (3) Number of Sections
-          69A8421C TimeDateStamp ->  n/a
-                99 PointerToSymbolTable
+          69A8681B TimeDateStamp ->  n/a
+                97 PointerToSymbolTable
                  9 (9) NumberOfSymbols
                  0 (0) SizeOfOptionalHeader
                  0 Flags
@@ -39,8 +39,8 @@ SECTION HEADER #1 (1)
    .data name
        0 physical address
        0 virtual address
-       2 (2) size of raw data
-      97 file pointer to raw data (00000097 to 00000098)
+       0 (0) size of raw data
+       0 file pointer to raw data (00000000 to FFFFFFFF)
        0 file pointer to relocation table
        0 file pointer to line numbers
        0 number of relocations
@@ -52,16 +52,14 @@ C0500040 flags
          Readable
          Writeable
 
-RAW DATA #1 (1)
-00000000  06 00                                             ..
 
 
 SECTION HEADER #2 (2)
     .bss name
        0 physical address
        0 virtual address
-      14 (20) size of raw data
-       0 file pointer to raw data (00000000 to 00000013)
+       4 (4) size of raw data
+       0 file pointer to raw data (00000000 to 00000003)
        0 file pointer to relocation table
        0 file pointer to line numbers
        0 number of relocations
@@ -83,9 +81,9 @@ Indx Sectn   Value   Type  Storage Name
 0002     1 00000000  0000 STATIC   .text
      * Section: 0000  Len: 0000B  Relocs: 0000  LineNums: 0000 checksum:00000000
 0004     2 00000000  0000 STATIC   .data
-     * Section: 0000  Len: 00002  Relocs: 0000  LineNums: 0000 checksum:00000000
+     * Section: 0000  Len: 00000  Relocs: 0000  LineNums: 0000 checksum:00000000
 0006     3 00000000  0000 STATIC   .bss
-     * Section: 0000  Len: 00014  Relocs: 0000  LineNums: 0000 checksum:00000000
+     * Section: 0000  Len: 00004  Relocs: 0000  LineNums: 0000 checksum:00000000
 0008     1 00000000  0020 EXTERNAL __main
 
 String Table Size = 0x4 (4) bytes 0 entries

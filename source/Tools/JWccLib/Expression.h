@@ -73,10 +73,12 @@ namespace WadeSpace
 		Expression();
 		Expression(const NodeDataPtr data, Expression* const left, const TokenPtr op, Expression* const right);
 		~Expression();
+
 		Expression(const Expression& other);
 		Expression(Expression&& other) noexcept;
 		Expression& operator=(const Expression& other);
 		Expression& operator=(Expression&& other) noexcept;
+
 		[[nodiscard]] NodeDataPtr getData() const;
 		[[nodiscard]] Expression* getLeft() const;
 		[[nodiscard]] TokenPtr getOp() const;

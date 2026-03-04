@@ -36,7 +36,7 @@ void handleStructDefinition(Declaration* declaration)
 
 void handleDeclaration(ExternalDeclaration* externalDeclaration)
 {
-	bool isTypedef = false;//FIX ME externalDeclaration->isTypedef();
+	bool isTypedef = externalDeclaration->isTypedef();
 	Declaration* declaration = externalDeclaration->getDeclaration();
 	if (declaration != nullptr)
 	{
