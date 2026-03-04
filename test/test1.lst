@@ -11,16 +11,18 @@ test1.asm
                                 .data
 00000000                    *   _DATA segment
                             *   assume cs:ERROR
-00000000  6300000000000000      _var3 SQWORD 99
 00000000                        .data?
-00000008                    *   _DATA ends
+                            *   _DATA ends
 00000000                    *   _BSS segment PARA FLAT PUBLIC 'BSS'
                             *   assume cs:ERROR
-00000000  00000000              _var1 DWORD  ?
-00000004  00000000              _var2 SDWORD  ?
+00000000  00                    _var1 BYTE  ?
+00000001  0000                  _var2 SWORD  ?
+00000003  00000000              _var3 SDWORD  ?
+00000007  00000000              _var4 SDWORD  ?
+0000000B  0000000000000000      _var5 SQWORD  ?
 
 00000000                        .code
-00000008                    *   _BSS ends
+00000013                    *   _BSS ends
 00000000                    *   _TEXT segment
                             *   assume cs:FLAT
 00000000                        _main PROC C, _argc:SDWORD , _argv:QWORD 
@@ -52,8 +54,8 @@ Segments and Groups:
                 N a m e                 Size     Length   Align   Combine Class
 
 FLAT . . . . . . . . . . . . . .        GROUP
-_BSS . . . . . . . . . . . . . .        64 Bit   00000008 Para    Public  'BSS'
-_DATA  . . . . . . . . . . . . .        64 Bit   00000008 Para    Public  'DATA'
+_BSS . . . . . . . . . . . . . .        64 Bit   00000013 Para    Public  'BSS'
+_DATA  . . . . . . . . . . . . .        64 Bit   00000000 Para    Public  'DATA'
 _TEXT  . . . . . . . . . . . . .        64 Bit   0000000B Para    Public  'CODE'
 
 
@@ -79,14 +81,16 @@ Symbols:
 @FileName  . . . . . . . . . . .        Text   TEST1
 @Interface . . . . . . . . . . .        Number             1h 
 @Model . . . . . . . . . . . . .        Number             7h 
-@Time  . . . . . . . . . . . . .        Text   11:55:00
+@Time  . . . . . . . . . . . . .        Text   18:03:37
 @Version . . . . . . . . . . . .        Text   800
 @code  . . . . . . . . . . . . .        Text   _TEXT
 @data  . . . . . . . . . . . . .        Text   FLAT
 @stack . . . . . . . . . . . . .        Text   FLAT
 __JWASM__  . . . . . . . . . . .        Number            D4h 
-_var1  . . . . . . . . . . . . .        DWord              0h _BSS C
-_var2  . . . . . . . . . . . . .        DWord              4h _BSS C
-_var3  . . . . . . . . . . . . .        QWord              0h _DATA C
+_var1  . . . . . . . . . . . . .        Byte               0h _BSS C
+_var2  . . . . . . . . . . . . .        Word               1h _BSS C
+_var3  . . . . . . . . . . . . .        DWord              3h _BSS C
+_var4  . . . . . . . . . . . . .        DWord              7h _BSS C
+_var5  . . . . . . . . . . . . .        QWord              Bh _BSS C
 
-test1.asm: 16 lines, 2 passes, 1 ms, 0 warnings, 0 errors
+test1.asm: 18 lines, 2 passes, 1 ms, 0 warnings, 0 errors

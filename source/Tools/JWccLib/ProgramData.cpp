@@ -38,6 +38,51 @@ void ProgramData::add(ExternalDeclaration* data)
 void ProgramData::handleFunction(FunctionDefinition* declaration, vector<FunctionData*>* functionTable)
 {
 	FunctionData* data = new FunctionData();
+	DeclarationSpecifiers* declaration_specifiers = declaration->getDeclarationSpecifiers();
+	if (declaration_specifiers != nullptr && declaration_specifiers->getDeclarationSpecifiersNodeList() != nullptr)
+	{
+		auto type_specifierList = declaration_specifiers->getDeclarationSpecifiersNodeList();
+		for (auto ptr : *type_specifierList)
+		{
+			if (ptr->typeSpecifier != nullptr)
+			{
+				data->type = ptr->typeSpecifier->getType().value();
+			}
+		}
+		DirectDeclarator* direct_declarator = declaration->getDeclarator()->getDirectDeclarator();
+		data->name = direct_declarator->getDirectDeclarator()->getIdentifier()->getSymbolName();
+		ParameterTypeList* parameters = direct_declarator->getParameterTypeList();
+		if (parameters != nullptr && !parameters->getVectorParameterDeclaration()->empty())
+		{
+			data->parameters = new vector<VariableData*>();
+			for (ParameterDeclaration* parameterDeclaration : *parameters->getVectorParameterDeclaration())
+			{
+				VariableData* functionData = new VariableData();
+				auto direct_declarator = parameterDeclaration->getDeclarator()->getDirectDeclarator();
+				if (direct_declarator->getIdentifier() != nullptr)
+				{
+					functionData->name = direct_declarator->getIdentifier()->getSymbolName();
+				}
+				else
+				{
+					functionData->name = direct_declarator->getDirectDeclarator()->getIdentifier()->getSymbolName();
+				}
+				auto declaration_specifiers = parameterDeclaration->getDeclarationSpecifiers()->getDeclarationSpecifiersNodeList();
+				TokenType type = UNKNOWN;
+				for (auto ptr : *declaration_specifiers)
+				{
+					if (ptr->typeSpecifier != nullptr)
+					{
+						type = ptr->typeSpecifier->getType().value();
+					}
+				}
+				functionData->pointer = parameterDeclaration->getDeclarator()->isPointer();
+				functionData->type = type;
+				data->parameters->push_back(functionData);
+			}
+		}
+		functionTable->push_back(data);
+	}
 	/* FIX ME: Handle typedefs 
 	data->type = declaration->getDeclarationSpecifiers()->getTypeSpecifier()->getType().value();
 	auto direct_declarator = declaration->getDeclarator()->getDirectDeclarator();
