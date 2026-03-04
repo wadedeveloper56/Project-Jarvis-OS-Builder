@@ -32,6 +32,7 @@ namespace WadeSpace
 		void outputVariable(ofstream& out, _VariableData* ptr);
 		void handleFunctionWithParameters(ofstream& out, string name, vector<VariableData*>* list);
 		string vectorToCommaSeparatedList(const vector<string>& vec);
+		string getAsmType(TokenType type, bool isPointer, bool isUnsigned);
 	};
 }
 

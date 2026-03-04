@@ -3,50 +3,69 @@
 
 using namespace WadeSpace;
 
-DeclarationSpecifiers::DeclarationSpecifiers(StorageClassSpecifier* const storageClassSpecifier,
-                                             TypeSpecifier* const typeSpecifier,
-                                             TypeQualifier* const typeQualifier,
-                                             DeclarationSpecifiers* const declarationSpecifiers)
-	: storageClassSpecifier(storageClassSpecifier),
-	  typeSpecifier(typeSpecifier),
-	  typeQualifier(typeQualifier),
-	  declarationSpecifiers(declarationSpecifiers)
+DeclarationSpecifiersNode::DeclarationSpecifiersNode(StorageClassSpecifier* const storageClassSpecifier, TypeSpecifier* const typeSpecifier, TypeQualifier* const typeQualifier)
+	: storageClassSpecifier(storageClassSpecifier), typeSpecifier(typeSpecifier), typeQualifier(typeQualifier) 
 {
 }
 
-DeclarationSpecifiers::~DeclarationSpecifiers()
+DeclarationSpecifiersNode::~DeclarationSpecifiersNode()
 {
 	delete storageClassSpecifier;
 	delete typeSpecifier;
 	delete typeQualifier;
-	delete declarationSpecifiers;
+}
+
+DeclarationSpecifiers::DeclarationSpecifiers()
+{
+	declarationSpecifiersNodeList = nullptr;
+}
+
+DeclarationSpecifiers::~DeclarationSpecifiers()
+{
+	if (declarationSpecifiersNodeList != nullptr)
+	{
+		for (DeclarationSpecifiersNode* node : *declarationSpecifiersNodeList)
+		{
+			delete node;
+		}
+		delete declarationSpecifiersNodeList;
+	}
+}
+
+void DeclarationSpecifiers::addDeclarationSpecifiersNode(StorageClassSpecifier* const storageClassSpecifier, TypeSpecifier* const typeSpecifier, TypeQualifier* const typeQualifier)
+{
+	if (declarationSpecifiersNodeList == nullptr)
+	{
+		declarationSpecifiersNodeList = new vector<DeclarationSpecifiersNode*>();
+	}
+	declarationSpecifiersNodeList->push_back(new DeclarationSpecifiersNode(storageClassSpecifier, typeSpecifier, typeQualifier));
+}
+
+vector<DeclarationSpecifiersNode*>* DeclarationSpecifiers::getDeclarationSpecifiersNodeList() const
+{
+	return declarationSpecifiersNodeList;
+}
+
+bool DeclarationSpecifiers::isDeclarationSpecifiersNodeList() const
+{
+	return declarationSpecifiersNodeList != nullptr;
 }
 
 DeclarationSpecifiers::DeclarationSpecifiers(const DeclarationSpecifiers& other)
 {
-	storageClassSpecifier = other.storageClassSpecifier ? new StorageClassSpecifier(*other.storageClassSpecifier) : nullptr;
-	typeSpecifier = other.typeSpecifier ? new TypeSpecifier(*other.typeSpecifier) : nullptr;
-	typeQualifier = other.typeQualifier ? new TypeQualifier(*other.typeQualifier) : nullptr;
-	declarationSpecifiers = other.declarationSpecifiers ? new DeclarationSpecifiers(*other.declarationSpecifiers) : nullptr;
+	declarationSpecifiersNodeList = other.declarationSpecifiersNodeList ? new vector<DeclarationSpecifiersNode*>(*other.declarationSpecifiersNodeList) : nullptr;
 }
 
 DeclarationSpecifiers::DeclarationSpecifiers(DeclarationSpecifiers&& other) noexcept
 {
-	storageClassSpecifier = other.storageClassSpecifier ? new StorageClassSpecifier(*other.storageClassSpecifier) : nullptr;
-	typeSpecifier = other.typeSpecifier ? new TypeSpecifier(*other.typeSpecifier) : nullptr;
-	typeQualifier = other.typeQualifier ? new TypeQualifier(*other.typeQualifier) : nullptr;
-	declarationSpecifiers = other.declarationSpecifiers ? new DeclarationSpecifiers(*other.declarationSpecifiers) : nullptr;
-
+	declarationSpecifiersNodeList = other.declarationSpecifiersNodeList ? new vector<DeclarationSpecifiersNode*>(*other.declarationSpecifiersNodeList) : nullptr;
 }
 
 DeclarationSpecifiers& DeclarationSpecifiers::operator=(const DeclarationSpecifiers& other)
 {
 	if (this == &other)
 		return *this;
-	storageClassSpecifier = other.storageClassSpecifier ? new StorageClassSpecifier(*other.storageClassSpecifier) : nullptr;
-	typeSpecifier = other.typeSpecifier ? new TypeSpecifier(*other.typeSpecifier) : nullptr;
-	typeQualifier = other.typeQualifier ? new TypeQualifier(*other.typeQualifier) : nullptr;
-	declarationSpecifiers = other.declarationSpecifiers ? new DeclarationSpecifiers(*other.declarationSpecifiers) : nullptr;
+	declarationSpecifiersNodeList = other.declarationSpecifiersNodeList ? new vector<DeclarationSpecifiersNode*>(*other.declarationSpecifiersNodeList) : nullptr;
 	return *this;
 }
 
@@ -54,49 +73,7 @@ DeclarationSpecifiers& DeclarationSpecifiers::operator=(DeclarationSpecifiers&& 
 {
 	if (this == &other)
 		return *this;
-	storageClassSpecifier = other.storageClassSpecifier ? new StorageClassSpecifier(*other.storageClassSpecifier) : nullptr;
-	typeSpecifier = other.typeSpecifier ? new TypeSpecifier(*other.typeSpecifier) : nullptr;
-	typeQualifier = other.typeQualifier ? new TypeQualifier(*other.typeQualifier) : nullptr;
-	declarationSpecifiers = other.declarationSpecifiers ? new DeclarationSpecifiers(*other.declarationSpecifiers) : nullptr;
+	declarationSpecifiersNodeList = other.declarationSpecifiersNodeList ? new vector<DeclarationSpecifiersNode*>(*other.declarationSpecifiersNodeList) : nullptr;
 	return *this;
 }
 
-StorageClassSpecifier* DeclarationSpecifiers::getStorageClassSpecifier() const
-{
-	return storageClassSpecifier;
-}
-
-TypeSpecifier* DeclarationSpecifiers::getTypeSpecifier() const
-{
-	return typeSpecifier;
-}
-
-TypeQualifier* DeclarationSpecifiers::getTypeQualifier() const
-{
-	return typeQualifier;
-}
-
-DeclarationSpecifiers* DeclarationSpecifiers::getDeclarationSpecifiers() const
-{
-	return declarationSpecifiers;
-}
-
-bool DeclarationSpecifiers::isStorageClassSpecifier() const
-{
-	return storageClassSpecifier != nullptr;
-}
-
-bool DeclarationSpecifiers::isTypeSpecifier() const
-{
-	return typeSpecifier != nullptr;
-}
-
-bool DeclarationSpecifiers::isTypeQualifier() const
-{
-	return typeQualifier != nullptr;
-}
-
-bool DeclarationSpecifiers::isDeclarationSpecifiers() const
-{
-	return declarationSpecifiers != nullptr;
-}

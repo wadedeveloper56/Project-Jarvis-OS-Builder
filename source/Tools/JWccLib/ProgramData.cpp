@@ -38,70 +38,107 @@ void ProgramData::add(ExternalDeclaration* data)
 void ProgramData::handleFunction(FunctionDefinition* declaration, vector<FunctionData*>* functionTable)
 {
 	FunctionData* data = new FunctionData();
-	data->type = declaration->getDeclarationSpecifiers()->getTypeSpecifier()->getType().value();
-	auto direct_declarator = declaration->getDeclarator()->getDirectDeclarator();
-	data->name = direct_declarator->getDirectDeclarator()->getIdentifier()->getSymbolName();
-	ParameterTypeList* parameters = direct_declarator->getParameterTypeList();
-	if (parameters != nullptr && !parameters->getVectorParameterDeclaration()->empty())
+	DeclarationSpecifiers* declaration_specifiers = declaration->getDeclarationSpecifiers();
+	if (declaration_specifiers != nullptr && declaration_specifiers->getDeclarationSpecifiersNodeList() != nullptr)
 	{
-		data->parameters = new vector<VariableData*>();
-		for (ParameterDeclaration* parameterDeclaration : *parameters->getVectorParameterDeclaration())
+		auto type_specifierList = declaration_specifiers->getDeclarationSpecifiersNodeList();
+		for (auto ptr : *type_specifierList)
 		{
-			VariableData* functionData = new VariableData();
-			auto direct_declarator = parameterDeclaration->getDeclarator()->getDirectDeclarator();
-			if (direct_declarator->getIdentifier() != nullptr)
+			if (ptr->typeSpecifier != nullptr)
 			{
-				functionData->name = direct_declarator->getIdentifier()->getSymbolName();
+				data->type = ptr->typeSpecifier->getType().value();
 			}
-			else
-			{
-				functionData->name = direct_declarator->getDirectDeclarator()->getIdentifier()->getSymbolName();
-			}
-			TokenType type = parameterDeclaration->getDeclarationSpecifiers()->getTypeSpecifier()->getType().value();
-			functionData->pointer = parameterDeclaration->getDeclarator()->isPointer();
-			functionData->type = type;
-			data->parameters->push_back(functionData);
 		}
+		DirectDeclarator* direct_declarator = declaration->getDeclarator()->getDirectDeclarator();
+		data->name = direct_declarator->getDirectDeclarator()->getIdentifier()->getSymbolName();
+		ParameterTypeList* parameters = direct_declarator->getParameterTypeList();
+		if (parameters != nullptr && !parameters->getVectorParameterDeclaration()->empty())
+		{
+			data->parameters = new vector<VariableData*>();
+			for (ParameterDeclaration* parameterDeclaration : *parameters->getVectorParameterDeclaration())
+			{
+				VariableData* functionData = new VariableData();
+				auto direct_declarator = parameterDeclaration->getDeclarator()->getDirectDeclarator();
+				if (direct_declarator->getIdentifier() != nullptr)
+				{
+					functionData->name = direct_declarator->getIdentifier()->getSymbolName();
+				}
+				else
+				{
+					functionData->name = direct_declarator->getDirectDeclarator()->getIdentifier()->getSymbolName();
+				}
+				auto declaration_specifiers_list = parameterDeclaration->getDeclarationSpecifiers()->getDeclarationSpecifiersNodeList();
+				TokenType type = UNKNOWN;
+				for (auto ptr : *declaration_specifiers_list)
+				{
+					if (ptr->typeSpecifier != nullptr)
+					{
+						type = ptr->typeSpecifier->getType().value();
+					}
+				}
+				functionData->pointer = parameterDeclaration->getDeclarator()->isPointer();
+				functionData->type = type;
+				data->parameters->push_back(functionData);
+			}
+		}
+		functionTable->push_back(data);
 	}
-	functionTable->push_back(data);
 }
 
 void ProgramData::handleDeclaration(Declaration* declaration, vector<VariableData*>* variableTable)
 {
 	if (declaration != nullptr)
 	{
-		TokenType type = declaration->getType();
+		TokenType type;
 		bool unsign = false;
 		string structName;
 		StructOrUnionSpecifier* suSpec = nullptr;
-		if (type == UNSIGNED)
+
+		DeclarationSpecifiers* declSpecifiers = declaration->getDeclarationSpecifiers();
+		vector<InitDeclarator*>* initDeclaratorsList = declaration->getVectorInitDeclarator();
+		vector<DeclarationSpecifiersNode*>* list = declSpecifiers->getDeclarationSpecifiersNodeList();
+		for (auto ptr : *list)
 		{
-			auto declaration_specifiers = declaration->getDeclarationSpecifiers()->getDeclarationSpecifiers();
-			type = declaration_specifiers->getTypeSpecifier()->getType().value();
-			unsign = true;
-		}
-		else if (type == STRUCT)
-		{
-			auto declaration_specifiers = declaration->getDeclarationSpecifiers();
-			if (declaration_specifiers != nullptr)
+			if (ptr->typeSpecifier)
 			{
-				auto type_specifier = declaration_specifiers->getTypeSpecifier();
-				if (type_specifier != nullptr)
+				TokenType temp = ptr->typeSpecifier->getType().value();
+				if (temp == UNSIGNED)
 				{
-					structName = type_specifier->getStructOrUnionSpecifier()->getName()->getSymbolName();
-					auto typedefEntry = structList->find(structName);
-					if (typedefEntry != structList->end())
+					unsign = true;
+				}
+				else if (temp == STRUCT)
+				{
+					auto declaration_specifiers = declaration->getDeclarationSpecifiers();
+					if (declaration_specifiers != nullptr)
 					{
-						suSpec = typedefEntry->second;
+						auto declaration_specifiers_list = declaration_specifiers->getDeclarationSpecifiersNodeList();
+						for (auto ptr : *declaration_specifiers_list)
+						{
+							auto type_specifier = ptr->typeSpecifier;
+							if (type_specifier != nullptr)
+							{
+								structName = type_specifier->getStructOrUnionSpecifier()->getName()->getSymbolName();
+								auto typedefEntry = structList->find(structName);
+								if (typedefEntry != structList->end())
+								{
+									suSpec = typedefEntry->second;
+								}
+							}
+						}
 					}
+					type = temp;
+				}
+				else
+				{
+					type = temp;
 				}
 			}
 		}
-		if (declaration->getVectorInitDeclarator() != nullptr)
+		if (initDeclaratorsList != nullptr)
 		{
-			for (InitDeclarator* initDecl : *declaration->getVectorInitDeclarator())
+			for (InitDeclarator* initDecl : *initDeclaratorsList)
 			{
-				auto declarator = initDecl->getDeclarator();
+				Declarator* declarator = initDecl->getDeclarator();
 				DirectDeclarator* dd = declarator->getDirectDeclarator();
 
 				VariableData* data = new VariableData();
