@@ -99,19 +99,8 @@ void MasmCodeGenerator::handleFunctionWithParameters(ofstream& out, string name,
 	out << "_" << name << " PROC C, " << paramListStr << endl;
 }
 
-void MasmCodeGenerator::handleIndividualFunction(ofstream& out, FunctionData* ptr)
+void MasmCodeGenerator::handleIndividualFunctionStatements(ofstream& out, BaseStatement* statements)
 {
-	auto returnType = ptr->type;
-	auto parameters = ptr->parameters;
-	auto statements = ptr->statements;
-	if (ptr->parameters != nullptr && !ptr->parameters->empty())
-	{
-		handleFunctionWithParameters(out, ptr->name, ptr->parameters);
-	}
-	else
-	{
-		out << "_" << ptr->name << " PROC C" << endl;
-	}
 	for (BaseStatement* node : *statements->getStatementList())
 	{
 		auto base_statement = node->getStatement();
@@ -128,6 +117,22 @@ void MasmCodeGenerator::handleIndividualFunction(ofstream& out, FunctionData* pt
 			break;
 		}
 	}
+}
+
+void MasmCodeGenerator::handleIndividualFunction(ofstream& out, FunctionData* ptr)
+{
+	auto returnType = ptr->type;
+	auto parameters = ptr->parameters;
+	auto statements = ptr->statements;
+	if (ptr->parameters != nullptr && !ptr->parameters->empty())
+	{
+		handleFunctionWithParameters(out, ptr->name, ptr->parameters);
+	}
+	else
+	{
+		out << "_" << ptr->name << " PROC C" << endl;
+	}
+	handleIndividualFunctionStatements(out, statements);
 	out << "_" << ptr->name << " endp" << endl;
 }
 
