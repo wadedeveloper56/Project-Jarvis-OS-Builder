@@ -446,7 +446,7 @@ type_specifier
     | COMPLEX                   { $$ = new TypeSpecifier(COMPLEX, $1, nullptr, nullptr); cout << "COMPLEX REDUCE to type_specifier" << endl;}
     | SIGNED                    { $$ = new TypeSpecifier(SIGNED, $1, nullptr, nullptr); cout << "SIGNED REDUCE to type_specifier" << endl;}
     | UNSIGNED                  { $$ = new TypeSpecifier(UNSIGNED, $1, nullptr, nullptr); cout << "UNIGNED REDUCE to type_specifier" << endl;}
-    | struct_or_union_specifier { $$ = new TypeSpecifier(STRUCT, nullptr, $1, nullptr); cout << "struct_or_union_specifier REDUCE to type_specifier" << endl;}
+    | struct_or_union_specifier { $$ = new TypeSpecifier(UNKNOWN, nullptr, $1, nullptr); cout << "struct_or_union_specifier REDUCE to type_specifier" << endl;}
     | enum_specifier            { $$ = new TypeSpecifier(ENUM, nullptr, nullptr, $1); cout << "enum_specifier REDUCE to type_specifier" << endl;}
     | TYPE_NAME                 { $$ = new TypeSpecifier(TYPE_NAME, $1, nullptr, nullptr); cout << "TYPE_NAME REDUCE to type_specifier" << endl;}
     ;

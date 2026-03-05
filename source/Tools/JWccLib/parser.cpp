@@ -2552,7 +2552,7 @@ namespace  WadeSpace  {
 
   case 111: // type_specifier: struct_or_union_specifier
 #line 449 "ansic.y"
-                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(STRUCT, nullptr, yystack_[0].value.as < StructOrUnionSpecifier * > (), nullptr); cout << "struct_or_union_specifier REDUCE to type_specifier" << endl;}
+                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(UNKNOWN, nullptr, yystack_[0].value.as < StructOrUnionSpecifier * > (), nullptr); cout << "struct_or_union_specifier REDUCE to type_specifier" << endl;}
 #line 2557 "parser.cpp"
     break;
 

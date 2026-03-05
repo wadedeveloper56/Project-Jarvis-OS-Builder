@@ -126,7 +126,7 @@ void ProgramData::handleDeclaration(Declaration* declaration, vector<VariableDat
 				{
 					unsign = true;
 				}
-				else if (temp == STRUCT)
+				else if (temp == STRUCT || temp == UNION)
 				{
 					auto declaration_specifiers = declaration->getDeclarationSpecifiers();
 					if (declaration_specifiers != nullptr)
@@ -180,7 +180,7 @@ void ProgramData::handleDeclaration(Declaration* declaration, vector<VariableDat
 				data->name = initDecl->getVariableName();
 				data->unsign = unsign;
 
-				if (type == STRUCT)
+				if (type == STRUCT || type == UNION)
 				{
 					data->structName = structName;
 					data->suSpec = suSpec ? new StructOrUnionSpecifier(*suSpec) : nullptr;

@@ -22,6 +22,11 @@ TypeSpecifier::TypeSpecifier(TokenType type, TokenPtr token, StructOrUnionSpecif
 			}
 		}
 	}
+	if (structOrUnion != nullptr)
+	{
+		auto struct_or_union = structOrUnion->getStructOrUnion();
+		this->setType(struct_or_union->getKeywordName() == "struct" ? STRUCT : UNION);
+	}
 }
 
 TypeSpecifier::TypeSpecifier() : type(nullopt), enumSpec(nullptr), structOrUnionSpecifier(nullptr), typePtr(nullptr),

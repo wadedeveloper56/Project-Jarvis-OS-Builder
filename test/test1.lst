@@ -1,37 +1,45 @@
-JWasm v2.12pre, Mar  4 2026
+JWasm v2.12pre, Mar  5 2026
 test1.asm
-                                .x64p
+                                .386
                                 .model flat, c;
-00000000                    *   _TEXT segment PARA FLAT PUBLIC 'CODE'
+00000000                    *   _TEXT segment DWORD FLAT PUBLIC 'CODE'
                             *   _TEXT ends
-00000000                    *   _DATA segment PARA FLAT PUBLIC 'DATA'
+00000000                    *   _DATA segment DWORD FLAT PUBLIC 'DATA'
                             *   _DATA ends
                             *   assume cs:flat,ds:flat,ss:flat,es:flat,fs:ERROR,gs:ERROR
 
+00000000                        Data UNION
+00000000                        	var3 SBYTE ?
+00000000                        	var4 TBYTE ?
+00000000                        	var5 SDWORD ?
+0000000A                        Data ENDS
                                 .data
 00000000                    *   _DATA segment
                             *   assume cs:ERROR
+00000000  0600                  _var2 SWORD 6
 00000000                        .data?
-                            *   _DATA ends
-00000000                    *   _BSS segment PARA FLAT PUBLIC 'BSS'
+00000002                    *   _DATA ends
+00000000                    *   _BSS segment DWORD FLAT PUBLIC 'BSS'
                             *   assume cs:ERROR
-00000000  00000000              _init SDWORD  ?
+00000000  000000000000000000    _var6 Data <>
+0000000A  00                    _var1 SBYTE  ?
+0000000B  00000000              _init SDWORD  ?
 
 00000000                        .code
-00000004                    *   _BSS ends
+0000000F                    *   _BSS ends
 00000000                    *   _TEXT segment
                             *   assume cs:FLAT
-00000000                        _main PROC C, _argc:SDWORD , _argv:QWORD 
-00000000  55                *   push rbp
-00000001  488BEC            *   mov rbp, rsp
-00000004  8B4510                	mov eax, [_argc]
-00000007  33C0                  	xor eax,eax
-00000009                        	ret
-00000009  C9                *   leave
-0000000A  C3                *   retn 
-0000000B                        _main endp
+00000000                        _main PROC C, _argc:SDWORD , _argv:DWORD 
+00000000  55                *   push ebp
+00000001  8BEC              *   mov ebp, esp
+00000003  8B4508                	mov eax, [_argc]
+00000006  33C0                  	xor eax,eax
+00000008                        	ret
+00000008  C9                *   leave
+00000009  C3                *   retn 
+0000000A                        _main endp
                                 end
-0000000B                    *   _TEXT ends
+0000000A                    *   _TEXT ends
 
 
 Macros:
@@ -45,23 +53,33 @@ Macros:
 @SubStr  . . . . . . . . . . . .        Func     0
 
 
+Structures and Unions:
+
+                N a m e                 Size/Ofs   Type
+
+Data . . . . . . . . . . . . . .               A
+  var3 . . . . . . . . . . . . .               0   Byte
+  var4 . . . . . . . . . . . . .               0   TByte
+  var5 . . . . . . . . . . . . .               0   DWord
+
+
 Segments and Groups:
 
                 N a m e                 Size     Length   Align   Combine Class
 
 FLAT . . . . . . . . . . . . . .        GROUP
-_BSS . . . . . . . . . . . . . .        64 Bit   00000004 Para    Public  'BSS'
-_DATA  . . . . . . . . . . . . .        64 Bit   00000000 Para    Public  'DATA'
-_TEXT  . . . . . . . . . . . . .        64 Bit   0000000B Para    Public  'CODE'
+_BSS . . . . . . . . . . . . . .        32 Bit   0000000F DWord   Public  'BSS'
+_DATA  . . . . . . . . . . . . .        32 Bit   00000002 DWord   Public  'DATA'
+_TEXT  . . . . . . . . . . . . .        32 Bit   0000000A DWord   Public  'CODE'
 
 
 Procedures, parameters and locals:
 
                 N a m e                 Type     Value    Segment  Length
 
-_main  . . . . . . . . . . . . .        P Near   00000000 _TEXT    0000000B Public   C
-  _argc  . . . . . . . . . . . .        DWord             rbp + 0010
-  _argv  . . . . . . . . . . . .        QWord             rbp + 0018
+_main  . . . . . . . . . . . . .        P Near   00000000 _TEXT    0000000A Public   C
+  _argc  . . . . . . . . . . . .        DWord             ebp + 0008
+  _argv  . . . . . . . . . . . .        DWord             ebp + 000C
 
 
 Symbols:
@@ -69,20 +87,23 @@ Symbols:
                 N a m e                 Type       Value     Attr
 
 @CodeSize  . . . . . . . . . . .        Number             0h 
-@Cpu . . . . . . . . . . . . . .        Number           DDFh 
+@Cpu . . . . . . . . . . . . . .        Number           D0Fh 
 @CurSeg  . . . . . . . . . . . .        Text   
 @DataSize  . . . . . . . . . . .        Number             0h 
-@Date  . . . . . . . . . . . . .        Text   03/04/26
+@Date  . . . . . . . . . . . . .        Text   03/05/26
 @FileCur . . . . . . . . . . . .        Text   test1.asm
 @FileName  . . . . . . . . . . .        Text   TEST1
 @Interface . . . . . . . . . . .        Number             1h 
 @Model . . . . . . . . . . . . .        Number             7h 
-@Time  . . . . . . . . . . . . .        Text   11:12:59
+@Time  . . . . . . . . . . . . .        Text   14:16:37
 @Version . . . . . . . . . . . .        Text   800
 @code  . . . . . . . . . . . . .        Text   _TEXT
 @data  . . . . . . . . . . . . .        Text   FLAT
 @stack . . . . . . . . . . . . .        Text   FLAT
 __JWASM__  . . . . . . . . . . .        Number            D4h 
-_init  . . . . . . . . . . . . .        DWord              0h _BSS C
+_init  . . . . . . . . . . . . .        DWord              Bh _BSS C
+_var1  . . . . . . . . . . . . .        Byte               Ah _BSS C
+_var2  . . . . . . . . . . . . .        Word               0h _DATA C
+_var6  . . . . . . . . . . . . .        Data               0h _BSS C
 
-test1.asm: 14 lines, 2 passes, 1 ms, 0 warnings, 0 errors
+test1.asm: 22 lines, 2 passes, 1 ms, 0 warnings, 0 errors

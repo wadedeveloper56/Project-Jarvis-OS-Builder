@@ -89,7 +89,7 @@ void MasmCodeGenerator::handleFunctionWithParameters(ofstream& out, string name,
 		bool isInitialized = ptr->initializer != nullptr;
 		bool isPointer = ptr->pointer;
 		bool isArray = ptr->arraySize > 1;
-		bool isStruct = type == STRUCT;
+		bool isStruct = type == STRUCT || type == UNION;
 		bool isUnsigned = ptr->unsign == true;
 
 		string asmType = getAsmType(type, isPointer, isUnsigned);
@@ -122,7 +122,7 @@ void MasmCodeGenerator::outputVariable(ofstream& out, _VariableData* ptr)
 	bool isInitialized = ptr->initializer != nullptr;
 	bool isPointer = ptr->pointer;
 	bool isArray = ptr->arraySize > 1;
-	bool isStruct = type == STRUCT;
+	bool isStruct = type == STRUCT || type == UNION;
 	bool isUnsigned = ptr->unsign == true;
 
 	string asmType="";
@@ -226,12 +226,12 @@ void MasmCodeGenerator::handleStructs(ofstream& out)
 {
 	for (auto ptr : *variableTable)
 	{
-		if (ptr->type == STRUCT)
+		if (ptr->type == STRUCT || ptr->type == UNION)
 		{
 			auto suSpec = ptr->suSpec;
 			auto name = suSpec->getName()->getSymbolName();
 			auto vars = suSpec->getVectorStructDeclaration();
-			out << name << " STRUCT" << endl;
+			out << name << (ptr->type == STRUCT ? " STRUCT" : " UNION") << endl;
 			for (StructDeclaration* var : *vars)
 			{
 				auto type = var->getSpecifierQualifierList()->getTypeSpecifier()->getType().value();

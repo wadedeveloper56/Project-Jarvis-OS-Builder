@@ -29,6 +29,11 @@ namespace WadeSpace
 		[[nodiscard]] TokenPtr getTypePtr() const;
 		[[nodiscard]] ExternalDeclaration* getTypedefInfo() const;
 
+		void setType(const optional<TokenType>& type)
+		{
+			this->type = type;
+		}
+
 		[[nodiscard]] bool hasEnumSpec() const;
 		[[nodiscard]] bool hasType() const;
 		[[nodiscard]] bool hasStructOrUnionSpecifier() const;

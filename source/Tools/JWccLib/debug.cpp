@@ -19,7 +19,7 @@ void handleStructDefinition(Declaration* declaration)
 			if (type_specifier != nullptr && type_specifier->getType().has_value())
 			{
 				auto token = type_specifier->getType().value();
-				if (token == STRUCT && type_specifier->getStructOrUnionSpecifier() != nullptr)
+				if ((token == STRUCT || token == UNION) && type_specifier->getStructOrUnionSpecifier() != nullptr)
 				{
 					if (structList == nullptr) structList = new map<string, StructOrUnionSpecifier*>();
 					StructOrUnionSpecifier* temp = type_specifier->getStructOrUnionSpecifier();
