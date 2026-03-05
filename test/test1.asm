@@ -1,15 +1,21 @@
 .386
 .model flat, c;
 
-Data UNION
+Data1 UNION
 	var3 SBYTE ?
 	var4 TBYTE ?
 	var5 SDWORD ?
-Data ENDS
+Data1 ENDS
+Data2 STRUCT
+	var3 SBYTE ?
+	var4 TBYTE ?
+	var5 SDWORD ?
+Data2 ENDS
 .data
 _var2 SWORD 6
 .data?
-_var6 Data <>
+_var6 Data1 <>
+_var7 Data2 <>
 _var1 SBYTE  ?
 _init SDWORD  ?
 
