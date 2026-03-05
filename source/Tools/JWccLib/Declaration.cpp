@@ -71,12 +71,12 @@ vector<InitDeclarator*>* Declaration::getVectorInitDeclarator() const
 	return vectorInitDeclarator;
 }
 
-bool Declaration::isDeclarationSpecifiers() const
+bool Declaration::hasDeclarationSpecifiers() const
 {
 	return declarationSpecifiers != nullptr;
 }
 
-bool Declaration::isVectorInitDeclarator() const
+bool Declaration::hasVectorInitDeclarator() const
 {
 	return vectorInitDeclarator != nullptr;
 }

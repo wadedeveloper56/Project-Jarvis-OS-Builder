@@ -237,3 +237,53 @@ BaseStatement& BaseStatement::operator=(BaseStatement&& other) noexcept
 	declarationList = other.declarationList ? new vector<Declaration*>(*other.declarationList) : nullptr;
 	return *this;
 }
+
+bool BaseStatement::hasIdentifier() const
+{
+	return identifier != nullptr;
+}
+
+bool BaseStatement::hasExp() const
+{
+	return exp != nullptr;
+}
+
+bool BaseStatement::hasContExp() const
+{
+	return contExp != nullptr;
+}
+
+bool BaseStatement::hasStatement() const
+{
+	return statement != nullptr;
+}
+
+bool BaseStatement::hasEs1() const
+{
+	return es1 != nullptr;
+}
+
+bool BaseStatement::hasEs2() const
+{
+	return es2 != nullptr;
+}
+
+bool BaseStatement::hasStatement2() const
+{
+	return statement2 != nullptr;
+}
+
+bool BaseStatement::hasStatementList() const
+{
+	return statementList != nullptr;
+}
+
+bool BaseStatement::hasDeclarationList() const
+{
+	return declarationList != nullptr;
+}
+
+TokenType BaseStatement::getOp() const
+{
+	return op;
+}

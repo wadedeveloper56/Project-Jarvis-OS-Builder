@@ -36,12 +36,12 @@ vector<Enumerator*>* EnumSpecifier::getVectorEnumerator() const
 	return vectorEnumerator;
 }
 
-bool EnumSpecifier::isNameStr() const
+bool EnumSpecifier::hasNameStr() const
 {
 	return nameStr != nullptr;
 }
 
-bool EnumSpecifier::isVectorEnumerator() const
+bool EnumSpecifier::hasVectorEnumerator() const
 {
 	return vectorEnumerator != nullptr;
 }

@@ -372,3 +372,22 @@ Expression& Expression::operator=(Expression&& other) noexcept
 	return *this;
 }
 
+bool Expression::hasData() const
+{
+	return data != nullptr;
+}
+
+bool Expression::hasLeft() const
+{
+	return left != nullptr;
+}
+
+bool Expression::hasOp() const
+{
+	return op != nullptr;
+}
+
+bool Expression::hasRight() const
+{
+	return right != nullptr;
+}

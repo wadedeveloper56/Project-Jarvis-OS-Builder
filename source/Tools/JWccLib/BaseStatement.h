@@ -36,6 +36,7 @@ namespace WadeSpace
 		BaseStatement& operator=(const BaseStatement& other);
 		BaseStatement& operator=(BaseStatement&& other) noexcept;
 
+		[[nodiscard]] TokenType getOp() const;
 		[[nodiscard]] TokenPtr getIdentifier() const;
 		[[nodiscard]] Expression* getExp() const;
 		[[nodiscard]] Expression* getContExp() const;
@@ -45,6 +46,16 @@ namespace WadeSpace
 		[[nodiscard]] BaseStatement* getStatement2() const;
 		[[nodiscard]] vector<BaseStatement*>* getStatementList() const;
 		[[nodiscard]] vector<Declaration*>* getDeclarationList() const;
+
+		[[nodiscard]] bool hasIdentifier() const;
+		[[nodiscard]] bool hasExp() const;
+		[[nodiscard]] bool hasContExp() const;
+		[[nodiscard]] bool hasStatement() const;
+		[[nodiscard]] bool hasEs1() const;
+		[[nodiscard]] bool hasEs2() const;
+		[[nodiscard]] bool hasStatement2() const;
+		[[nodiscard]] bool hasStatementList() const;
+		[[nodiscard]] bool hasDeclarationList() const;
 
 	protected:
 		TokenType op;

@@ -60,12 +60,12 @@ Pointer* Declarator::getPointer() const
 	return pointer;
 }
 
-bool Declarator::isDirectDeclarator() const
+bool Declarator::hasDirectDeclarator() const
 {
 	return directDeclarator != nullptr;
 }
 
-bool Declarator::isPointer() const
+bool Declarator::hasPointer() const
 {
 	return pointer != nullptr;
 }

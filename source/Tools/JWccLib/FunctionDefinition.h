@@ -22,15 +22,22 @@ namespace WadeSpace
 		FunctionDefinition(Declarator* declarator, vector<Declaration*>* vectorDeclaration,BaseStatement* baseStatement);
 		FunctionDefinition(Declarator* declarator, BaseStatement* baseStatement);
 		FunctionDefinition();
+		virtual ~FunctionDefinition();
+
 		FunctionDefinition(const FunctionDefinition& other);
 		FunctionDefinition(FunctionDefinition&& other) noexcept;
 		FunctionDefinition& operator=(const FunctionDefinition& other);
 		FunctionDefinition& operator=(FunctionDefinition&& other) noexcept;
-		virtual ~FunctionDefinition();
-		DeclarationSpecifiers* getDeclarationSpecifiers() const;
-		Declarator* getDeclarator() const;
-		vector<Declaration*>* getVectorDeclaration() const;
-		BaseStatement* getBaseStatement() const;
+
+		[[nodiscard]] DeclarationSpecifiers* getDeclarationSpecifiers() const;
+		[[nodiscard]] Declarator* getDeclarator() const;
+		[[nodiscard]] vector<Declaration*>* getVectorDeclaration() const;
+		[[nodiscard]] BaseStatement* getBaseStatement() const;
+
+		[[nodiscard]] bool hasDeclarationSpecifiers() const;
+		[[nodiscard]] bool hasDeclarator() const;
+		[[nodiscard]] bool hasVectorDeclaration() const;
+		[[nodiscard]] bool hasBaseStatement() const;
 
 	private:
 		DeclarationSpecifiers* declarationSpecifiers;

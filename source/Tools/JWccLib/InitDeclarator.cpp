@@ -69,12 +69,12 @@ Initializer* InitDeclarator::getInitializer() const
 	return initializer;
 }
 
-bool InitDeclarator::isDeclarator() const
+bool InitDeclarator::hasDeclarator() const
 {
 	return declarator != nullptr;
 }
 
-bool InitDeclarator::isInitializer() const
+bool InitDeclarator::hasInitializer() const
 {
 	return initializer != nullptr;
 }

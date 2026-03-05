@@ -15,12 +15,18 @@ namespace WadeSpace
 		ParameterTypeList();
 		ParameterTypeList(vector<ParameterDeclaration*>* vectorParameterDeclaration, bool ellipsis);
 		virtual ~ParameterTypeList();
+
 		ParameterTypeList(const ParameterTypeList& other);
 		ParameterTypeList(ParameterTypeList&& other) noexcept;
 		ParameterTypeList& operator=(const ParameterTypeList& other);
 		ParameterTypeList& operator=(ParameterTypeList&& other) noexcept;
-		vector<ParameterDeclaration*>* getVectorParameterDeclaration() const;
-		bool getEllipsis() const;
+
+		[[nodiscard]] vector<ParameterDeclaration*>* getVectorParameterDeclaration() const;
+		[[nodiscard]] bool getEllipsis() const;
+
+		[[nodiscard]] bool hasVectorParameterDeclaration() const;
+		
+
 	private:
 		vector<ParameterDeclaration*>* vectorParameterDeclaration;
 		bool ellipsis;

@@ -75,3 +75,18 @@ ParameterDeclaration& ParameterDeclaration::operator=(ParameterDeclaration&& oth
 	abstractDeclarator = other.abstractDeclarator ? new AbstractDeclarator(*other.abstractDeclarator) : nullptr;
 	return *this;
 }
+
+bool ParameterDeclaration::hasDeclarationSpecifiers() const
+{
+	return declarationSpecifiers != nullptr;
+}
+
+bool ParameterDeclaration::hasDeclarator() const
+{
+	return declarator != nullptr;
+}
+
+bool ParameterDeclaration::hasAbstractDeclarator() const
+{
+	return abstractDeclarator != nullptr;
+}

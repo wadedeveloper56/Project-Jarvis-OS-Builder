@@ -13,9 +13,10 @@ namespace WadeSpace
 	class Statement : public BaseStatement
 	{
 	public:
-		Statement(TokenType op, BaseStatement* statement);
 		Statement();
+		Statement(TokenType op, BaseStatement* statement);
 		virtual ~Statement();
+
 		Statement(const Statement& other);
 		Statement(Statement&& other) noexcept;
 		Statement& operator=(const Statement& other);

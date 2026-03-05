@@ -27,6 +27,14 @@ namespace WadeSpace
 		void handleFunction(FunctionDefinition* declaration, vector<struct _FunctionData*>* functionTable);
 		void handleInitDeclaratorForDeclaratation(Declaration* declaration, vector<VariableData*>* variableTable, TokenType type);
 
+	public:
+		[[nodiscard]] vector<ExternalDeclaration*>* getProgram() const;
+		[[nodiscard]] BaseCodeGenerator* getGenerator() const;
+
+		[[nodiscard]] bool hasProgram() const;
+		[[nodiscard]] bool hasGenerator() const;
+
+	private:
 		vector<ExternalDeclaration*> *program;
 		BaseCodeGenerator* generator;
 	};

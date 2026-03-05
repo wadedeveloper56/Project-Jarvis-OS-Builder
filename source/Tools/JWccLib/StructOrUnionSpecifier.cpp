@@ -75,3 +75,18 @@ StructOrUnionSpecifier& StructOrUnionSpecifier::operator=(StructOrUnionSpecifier
 	vectorStructDeclaration = other.vectorStructDeclaration ? new vector<StructDeclaration*>(*other.vectorStructDeclaration) : nullptr;
 	return *this;
 }
+
+bool StructOrUnionSpecifier::hasName() const
+{
+	return name != nullptr;
+}
+
+bool StructOrUnionSpecifier::hasStructOrUnion() const
+{
+	return structOrUnion != nullptr;
+}
+
+bool StructOrUnionSpecifier::hasVectorStructDeclaration() const
+{
+	return vectorStructDeclaration != nullptr;
+}

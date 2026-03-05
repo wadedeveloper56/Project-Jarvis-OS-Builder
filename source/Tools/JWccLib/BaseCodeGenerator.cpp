@@ -41,12 +41,12 @@ vector<FunctionData*>* BaseCodeGenerator::getFunctionTable() const
 	return functionTable;
 }
 
-bool BaseCodeGenerator::isVariableTable() const
+bool BaseCodeGenerator::hasVariableTable() const
 {
 	return variableTable != nullptr;
 }
 
-bool BaseCodeGenerator::isFunctionTable() const
+bool BaseCodeGenerator::hasFunctionTable() const
 {
 	return functionTable != nullptr;
 }

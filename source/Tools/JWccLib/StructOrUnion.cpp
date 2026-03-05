@@ -11,11 +11,13 @@ StructOrUnion::StructOrUnion(): type(NONE)
 {
 }
 
-StructOrUnion::~StructOrUnion()
-{
-}
-
 TokenType StructOrUnion::getType() const
 {
 	return type;
 }
+
+bool StructOrUnion::hasType() const
+{
+	return type != NONE;
+}
+

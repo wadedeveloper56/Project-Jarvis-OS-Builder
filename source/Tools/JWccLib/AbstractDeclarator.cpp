@@ -54,5 +54,5 @@ AbstractDeclarator& AbstractDeclarator::operator=(AbstractDeclarator&& other) no
 
 Pointer* AbstractDeclarator::getPointer() const { return pointer; }
 DirectAbstractDeclarator* AbstractDeclarator::getDirectAbstractDeclarator() const { return directAbstractDeclarator; }
-bool AbstractDeclarator::isPointer() const { return pointer != nullptr; }
-bool AbstractDeclarator::isDirectAbstractDeclarator() const { return directAbstractDeclarator != nullptr; }
+bool AbstractDeclarator::hasPointer() const { return pointer != nullptr; }
+bool AbstractDeclarator::hasDirectAbstractDeclarator() const { return directAbstractDeclarator != nullptr; }

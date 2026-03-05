@@ -63,3 +63,13 @@ StructDeclaration& StructDeclaration::operator=(StructDeclaration&& other) noexc
 	vectorStructDeclarator = other.vectorStructDeclarator ? new vector<StructDeclarator*>(*other.vectorStructDeclarator) : nullptr		;
 	return *this;
 }
+
+bool StructDeclaration::hasSpecifierQualifierList() const
+{
+	return specifierQualifierList != nullptr;
+}
+
+bool StructDeclaration::hasVectorStructDeclarator() const
+{
+	return vectorStructDeclarator != nullptr;
+}	

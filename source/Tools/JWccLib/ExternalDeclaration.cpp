@@ -59,12 +59,12 @@ ExternalDeclaration& ExternalDeclaration::operator=(ExternalDeclaration&& other)
 	return *this;
 }
 
-bool ExternalDeclaration::isFunction() const
+bool ExternalDeclaration::hasFunction() const
 {
 	return functionDefinition != nullptr;
 }
 
-bool ExternalDeclaration::isDeclaration() const
+bool ExternalDeclaration::hasDeclaration() const
 {
 	return declaration != nullptr;
 }

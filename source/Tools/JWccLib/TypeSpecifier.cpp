@@ -111,3 +111,29 @@ TypeSpecifier& TypeSpecifier::operator=(TypeSpecifier&& other) noexcept
 	typedefInfo = other.typedefInfo ? new ExternalDeclaration(*other.typedefInfo) : nullptr;
 	return *this;
 }
+
+bool TypeSpecifier::hasEnumSpec() const
+{
+	return enumSpec != nullptr;
+}
+
+bool TypeSpecifier::hasType() const
+{
+	return type.has_value();
+}
+
+bool TypeSpecifier::hasStructOrUnionSpecifier() const
+{
+	return structOrUnionSpecifier != nullptr;
+}
+
+bool TypeSpecifier::hasTypePtr() const
+{
+	return typePtr != nullptr;
+}
+
+bool TypeSpecifier::hasTypedefInfo() const
+{
+	return typedefInfo != nullptr;
+}
+

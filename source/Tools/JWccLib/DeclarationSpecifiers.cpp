@@ -46,7 +46,7 @@ vector<DeclarationSpecifiersNode*>* DeclarationSpecifiers::getDeclarationSpecifi
 	return declarationSpecifiersNodeList;
 }
 
-bool DeclarationSpecifiers::isDeclarationSpecifiersNodeList() const
+bool DeclarationSpecifiers::hasDeclarationSpecifiersNodeList() const
 {
 	return declarationSpecifiersNodeList != nullptr;
 }

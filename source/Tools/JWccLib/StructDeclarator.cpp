@@ -65,3 +65,13 @@ StructDeclarator& StructDeclarator::operator=(StructDeclarator&& other) noexcept
 	constantExpression = other.constantExpression ? new Expression(*other.constantExpression) : nullptr;
 	return *this;
 }
+
+bool StructDeclarator::hasDeclarator() const
+{
+	return declarator != nullptr;
+}
+
+bool StructDeclarator::hasConstantExpression() const
+{
+	return constantExpression != nullptr;
+}

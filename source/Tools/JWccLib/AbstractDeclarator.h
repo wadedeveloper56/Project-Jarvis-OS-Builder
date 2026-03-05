@@ -6,7 +6,7 @@
 namespace WadeSpace
 {
 	class AbstractDeclarator
-	{
+	{ 
 	public:
 		AbstractDeclarator();
 		AbstractDeclarator(Pointer* pointer, DirectAbstractDeclarator* directAbstractDeclarator); 
@@ -20,8 +20,8 @@ namespace WadeSpace
 		[[nodiscard]] Pointer* getPointer() const;
 		[[nodiscard]] DirectAbstractDeclarator* getDirectAbstractDeclarator() const;
 
-		[[nodiscard]] bool isPointer() const;
-		[[nodiscard]] bool isDirectAbstractDeclarator() const;
+		[[nodiscard]] bool hasPointer() const;
+		[[nodiscard]] bool hasDirectAbstractDeclarator() const;
 
 	private:
 		Pointer* pointer;

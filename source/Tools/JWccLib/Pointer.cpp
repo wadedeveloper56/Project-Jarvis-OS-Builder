@@ -75,3 +75,43 @@ Pointer& Pointer::operator=(Pointer&& other) noexcept
 	pointer = other.pointer ? new Pointer(*other.pointer) : nullptr;
 	return *this;
 }
+
+TokenPtr Pointer::getName() const
+{
+	return name;
+}
+
+vector<TypeQualifier*>* Pointer::getTypeQualifierList() const
+{
+	return typeQualifierList;
+}
+
+int Pointer::getLevel() const
+{
+	return level;
+}
+
+Pointer* Pointer::getPointer() const
+{
+	return pointer;
+}
+
+bool Pointer::hasName() const
+{
+	return name != nullptr;
+}
+
+bool Pointer::hasTypeQualifierList() const
+{
+	return typeQualifierList != nullptr;
+}
+
+bool Pointer::hasLevel() const
+{
+	return level > 0;
+}
+
+bool Pointer::hasPointer() const
+{
+	return pointer != nullptr;
+}

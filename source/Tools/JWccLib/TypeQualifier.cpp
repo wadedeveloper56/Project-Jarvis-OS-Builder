@@ -25,6 +25,11 @@ TokenPtr TypeQualifier::getType() const
 	return type;
 }
 
+bool TypeQualifier::hasType() const
+{
+	return type != nullptr;
+}
+
 TypeQualifier::TypeQualifier(const TypeQualifier& other)
 {
 	type = other.type ? new Token(*other.type) : nullptr;

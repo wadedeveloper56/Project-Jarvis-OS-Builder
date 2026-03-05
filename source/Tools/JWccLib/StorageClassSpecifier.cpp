@@ -16,7 +16,7 @@ TokenPtr StorageClassSpecifier::getType() const
 	return type;
 }
 
-bool StorageClassSpecifier::isType() const
+bool StorageClassSpecifier::hasType() const
 {
 	return type!=nullptr;
 }

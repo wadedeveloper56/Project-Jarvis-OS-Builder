@@ -9,18 +9,21 @@ namespace WadeSpace
 	class Initializer
 	{
 	public:
+		Initializer();
 		Initializer(Expression* assignmentExpression);
 		Initializer(vector<Initializer*>* initializerList);
-		Initializer();
-		Initializer(const Initializer& other);
+		virtual ~Initializer();
+
 		Initializer(Initializer&& other) noexcept;
+		Initializer(const Initializer& other);
 		Initializer& operator=(const Initializer& other);
 		Initializer& operator=(Initializer&& other) noexcept;
-		virtual ~Initializer();
-		Expression* getAssignmentExpression() const;
-		vector<Initializer*>* getInitializerList() const;
-		bool hasAssignmentExpression() const;
-		bool hasInitializerList() const;
+
+		[[nodiscard]] Expression* getAssignmentExpression() const;
+		[[nodiscard]] vector<Initializer*>* getInitializerList() const;
+
+		[[nodiscard]] bool hasAssignmentExpression() const;
+		[[nodiscard]] bool hasInitializerList() const;
 
 	private:
 		Expression* assignmentExpression;

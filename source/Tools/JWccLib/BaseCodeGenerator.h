@@ -136,8 +136,8 @@ namespace WadeSpace
 		vector<VariableData*>* getVariableTable() const;
 		vector<FunctionData*>* getFunctionTable() const;
 
-		bool isVariableTable() const;
-		bool isFunctionTable() const;
+		bool hasVariableTable() const;
+		bool hasFunctionTable() const;
 		virtual void generateCode(ofstream& out) = 0;
 
 	protected:

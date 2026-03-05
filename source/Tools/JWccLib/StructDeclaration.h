@@ -13,15 +13,20 @@ namespace WadeSpace
 	class StructDeclaration
 	{
 	public:
-		StructDeclaration(SpecifierQualifierList* specifierQualifierList, vector<StructDeclarator*>* vectorStructDeclarator);
 		StructDeclaration();
+		StructDeclaration(SpecifierQualifierList* specifierQualifierList, vector<StructDeclarator*>* vectorStructDeclarator);
 		virtual ~StructDeclaration();
-		SpecifierQualifierList* getSpecifierQualifierList() const;
-		vector<StructDeclarator*>* getVectorStructDeclarator() const;
+
 		StructDeclaration(const StructDeclaration& other);
 		StructDeclaration(StructDeclaration&& other) noexcept;
 		StructDeclaration& operator=(const StructDeclaration& other);
 		StructDeclaration& operator=(StructDeclaration&& other) noexcept;
+
+		[[nodiscard]] SpecifierQualifierList* getSpecifierQualifierList() const;
+		[[nodiscard]] vector<StructDeclarator*>* getVectorStructDeclarator() const;
+
+		[[nodiscard]] bool hasSpecifierQualifierList() const;
+		[[nodiscard]] bool hasVectorStructDeclarator() const;
 
 	private:
 		SpecifierQualifierList* specifierQualifierList;

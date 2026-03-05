@@ -24,10 +24,11 @@ namespace WadeSpace
 	{
 	public:
 		DeclarationSpecifiers();
-		virtual ~DeclarationSpecifiers();
+		virtual ~DeclarationSpecifiers(); 
 		void addDeclarationSpecifiersNode(StorageClassSpecifier* const storageClassSpecifier, TypeSpecifier* const typeSpecifier, TypeQualifier* const typeQualifier);
+		
 		[[nodiscard]] vector<DeclarationSpecifiersNode*>* getDeclarationSpecifiersNodeList() const;
-		[[nodiscard]] bool isDeclarationSpecifiersNodeList() const;
+		[[nodiscard]] bool hasDeclarationSpecifiersNodeList() const;
 
 		DeclarationSpecifiers(const DeclarationSpecifiers& other);
 		DeclarationSpecifiers(DeclarationSpecifiers&& other) noexcept;

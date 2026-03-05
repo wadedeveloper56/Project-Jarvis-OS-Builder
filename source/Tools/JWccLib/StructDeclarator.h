@@ -1,8 +1,5 @@
 #pragma once
 
-#include <string>
-#include <vector>
-#include <optional>
 #include "Declarator.h"
 
 namespace WadeSpace
@@ -12,17 +9,22 @@ namespace WadeSpace
 	class StructDeclarator
 	{
 	public:
+		StructDeclarator();
 		StructDeclarator(Declarator* declarator);
 		StructDeclarator(Expression* constantExpression);
 		StructDeclarator(Declarator* declarator, Expression* constantExpression);
-		StructDeclarator();
 		virtual ~StructDeclarator();
-		Declarator* getDeclarator() const;
-		Expression* getConstantExpression() const;
+
 		StructDeclarator(const StructDeclarator& other);
 		StructDeclarator(StructDeclarator&& other) noexcept;
 		StructDeclarator& operator=(const StructDeclarator& other);
 		StructDeclarator& operator=(StructDeclarator&& other) noexcept;
+
+		[[nodiscard]] Declarator* getDeclarator() const;
+		[[nodiscard]] Expression* getConstantExpression() const;
+
+		[[nodiscard]] bool hasDeclarator() const;
+		[[nodiscard]] bool hasConstantExpression() const;
 
 	private:
 		Declarator* declarator;

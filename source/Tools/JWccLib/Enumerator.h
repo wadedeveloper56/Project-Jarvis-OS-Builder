@@ -18,12 +18,17 @@ namespace WadeSpace
 		Enumerator(TokenPtr identifier, Expression* constantExpression);
 		Enumerator();
 		virtual ~Enumerator();
+
 		Enumerator(const Enumerator& other);
 		Enumerator(Enumerator&& other) noexcept;
 		Enumerator& operator=(const Enumerator& other);
 		Enumerator& operator=(Enumerator&& other) noexcept;
-		TokenPtr getIdentifier() const;
-		Expression* getConstantExpression() const;
+	
+		[[nodiscard]] TokenPtr getIdentifier() const;
+		[[nodiscard]] Expression* getConstantExpression() const;
+
+		[[nodiscard]] bool hasIdentifier() const { return identifier != nullptr; }
+		[[nodiscard]] bool hasConstantExpression() const { return constantExpression != nullptr; }
 
 	private:
 		TokenPtr identifier;

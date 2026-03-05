@@ -80,3 +80,18 @@ optional<TokenType> Constant::getType() const
 {
 	return type;
 }
+
+bool Constant::hasIConst() const
+{
+	return iConst != nullptr;
+}
+
+bool Constant::hasFConst() const
+{
+	return fConst != nullptr;
+}
+
+bool Constant::hasStrConst() const
+{
+	return strConst != nullptr;
+}

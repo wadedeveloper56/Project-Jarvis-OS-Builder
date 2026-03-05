@@ -11,7 +11,7 @@ using namespace WadeSpace;
 void handleStructDefinition(Declaration* declaration)
 {
 	auto declaration_specifiers = declaration->getDeclarationSpecifiers();
-	if (declaration_specifiers != nullptr && declaration_specifiers->isDeclarationSpecifiersNodeList())
+	if (declaration_specifiers != nullptr && declaration_specifiers->hasDeclarationSpecifiersNodeList())
 	{
 		for (auto node : *declaration_specifiers->getDeclarationSpecifiersNodeList())
 		{
@@ -82,11 +82,11 @@ void createTranslationUnit(ExternalDeclaration* externalDeclaration)
 	{
 		structList = new map<string, StructOrUnionSpecifier*>();
 	}
-	if (externalDeclaration != nullptr && externalDeclaration->isDeclaration())
+	if (externalDeclaration != nullptr && externalDeclaration->hasDeclaration())
 	{
 		handleDeclaration(externalDeclaration);
 	}
-	if (externalDeclaration != nullptr && externalDeclaration->isFunction())
+	if (externalDeclaration != nullptr && externalDeclaration->hasFunction())
 	{
 		programData->add(externalDeclaration);
 	}

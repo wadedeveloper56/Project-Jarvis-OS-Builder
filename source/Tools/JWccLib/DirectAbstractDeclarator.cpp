@@ -90,12 +90,12 @@ DirectAbstractDeclarator& DirectAbstractDeclarator::operator=(DirectAbstractDecl
 	return *this;
 }
 
-bool DirectAbstractDeclarator::isAbstractDeclarator() const
+bool DirectAbstractDeclarator::hasAbstractDeclarator() const
 {
 	return abstractDeclarator != nullptr;
 }
 
-bool DirectAbstractDeclarator::isList() const
+bool DirectAbstractDeclarator::hasList() const
 {
 	return list != nullptr;
 }

@@ -41,14 +41,14 @@ namespace WadeSpace
 		[[nodiscard]] ParameterTypeList* getParameterTypeList() const;
 		[[nodiscard]] vector<TokenPtr>* getVectorOfStrings() const;
 
-		[[nodiscard]] bool isIdentifier() const { return identifier != nullptr; }
-		[[nodiscard]] bool isToken1() const { return token1 != nullptr; }
-		[[nodiscard]] bool isToken2() const { return token2 != nullptr; }
-		[[nodiscard]] bool isDeclarator() const { return declarator != nullptr; }
-		[[nodiscard]] bool isDirectDeclarator() const { return directDeclarator != nullptr; }
-		[[nodiscard]] bool isConstantExpression() const { return constantExpression != nullptr; }
-		[[nodiscard]] bool isParameterTypeList() const { return parameterTypeList != nullptr; }
-		[[nodiscard]] bool isVectorOfStrings() const { return vectorOfStrings != nullptr; }
+		[[nodiscard]] bool hasIdentifier() const { return identifier != nullptr; }
+		[[nodiscard]] bool hasToken1() const { return token1 != nullptr; }
+		[[nodiscard]] bool hasToken2() const { return token2 != nullptr; }
+		[[nodiscard]] bool hasDeclarator() const { return declarator != nullptr; }
+		[[nodiscard]] bool hasDirectDeclarator() const { return directDeclarator != nullptr; }
+		[[nodiscard]] bool hasConstantExpression() const { return constantExpression != nullptr; }
+		[[nodiscard]] bool hasParameterTypeList() const { return parameterTypeList != nullptr; }
+		[[nodiscard]] bool hasVectorOfStrings() const { return vectorOfStrings != nullptr; }
 
 	private:
 		TokenPtr identifier;

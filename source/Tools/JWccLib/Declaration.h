@@ -26,8 +26,8 @@ namespace WadeSpace
 		[[nodiscard]] DeclarationSpecifiers* getDeclarationSpecifiers() const;
 		[[nodiscard]] vector<InitDeclarator*>* getVectorInitDeclarator() const;
 		
-		[[nodiscard]] bool isDeclarationSpecifiers() const;
-		[[nodiscard]] bool isVectorInitDeclarator() const;
+		[[nodiscard]] bool hasDeclarationSpecifiers() const;
+		[[nodiscard]] bool hasVectorInitDeclarator() const;
 		
 	private:
 		DeclarationSpecifiers* declarationSpecifiers;

@@ -25,6 +25,10 @@ namespace WadeSpace
 		[[nodiscard]] TokenPtr getStrConst() const;
 		[[nodiscard]] optional<TokenType> getType() const;
 
+		[[nodiscard]] bool hasIConst() const;
+		[[nodiscard]] bool hasFConst() const;
+		[[nodiscard]] bool hasStrConst() const;
+
 	private:
 		TokenPtr iConst;
 		TokenPtr fConst;

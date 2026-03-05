@@ -110,7 +110,7 @@ typedef struct Token
  
 	Token& operator=(Token&& other) noexcept
 	{
-		if (this == &other)
+		if (this == &other) 
 			return *this;
 		data = other.data ? new TokData(*other.data) : nullptr;
 		return *this;

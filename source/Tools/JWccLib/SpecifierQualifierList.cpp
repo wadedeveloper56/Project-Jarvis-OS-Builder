@@ -79,3 +79,17 @@ SpecifierQualifierList& SpecifierQualifierList::operator=(SpecifierQualifierList
 	return *this;
 }
 
+bool SpecifierQualifierList::hasSpecifierQualifierList() const
+{
+	return specifierQualifierList != nullptr;
+}
+
+bool SpecifierQualifierList::hasTypeSpecifier() const
+{
+	return typeSpecifier != nullptr;
+}
+
+bool SpecifierQualifierList::hasTypeQualifier() const
+{
+	return typeQualifier != nullptr;
+}

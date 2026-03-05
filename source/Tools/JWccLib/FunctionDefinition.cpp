@@ -113,3 +113,22 @@ FunctionDefinition& FunctionDefinition::operator=(FunctionDefinition&& other) no
 	return *this;
 }
 
+bool FunctionDefinition::hasDeclarationSpecifiers() const
+{
+	return declarationSpecifiers != nullptr;
+}
+
+bool FunctionDefinition::hasDeclarator() const
+{
+	return declarator != nullptr;
+}
+
+bool FunctionDefinition::hasVectorDeclaration() const
+{
+	return vectorDeclaration != nullptr;
+}
+
+bool FunctionDefinition::hasBaseStatement() const
+{
+	return baseStatement != nullptr;
+}

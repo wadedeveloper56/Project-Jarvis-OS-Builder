@@ -1,8 +1,6 @@
 #pragma once
 
 #include <string>
-#include <vector>
-#include <optional>
 #include "Declarator.h"
 #include "Initializer.h"
 
@@ -21,11 +19,13 @@ namespace WadeSpace
 		InitDeclarator& operator=(const InitDeclarator& other);
 		InitDeclarator& operator=(InitDeclarator&& other) noexcept;
 
-		Declarator* getDeclarator() const;
-		Initializer* getInitializer() const;
-		bool isDeclarator() const;
-		bool isInitializer() const;
-		string getVariableName() const;
+		[[nodiscard]] Declarator* getDeclarator() const;
+		[[nodiscard]] Initializer* getInitializer() const;
+
+		[[nodiscard]] bool hasDeclarator() const;
+		[[nodiscard]] bool hasInitializer() const;
+
+		[[nodiscard]] string getVariableName() const;
 
 	private:
 		Declarator* declarator;

@@ -10,10 +10,13 @@ namespace WadeSpace
 	class TypeQualifier
 	{
 	public:
-		TypeQualifier(TokenPtr type);
 		TypeQualifier();
+		TypeQualifier(TokenPtr type);
 		~TypeQualifier();
-		TokenPtr getType() const;
+
+		[[nodiscard]] TokenPtr getType() const;
+		[[nodiscard]] bool hasType() const;
+
 		TypeQualifier(const TypeQualifier& other);
 		TypeQualifier(TypeQualifier&& other) noexcept;
 		TypeQualifier& operator=(const TypeQualifier& other);

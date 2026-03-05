@@ -60,3 +60,13 @@ TypeName& TypeName::operator=(TypeName&& other) noexcept
 	abstractDeclarator = other.abstractDeclarator ? new AbstractDeclarator(*other.abstractDeclarator) : nullptr;
 	return *this;
 }
+
+bool TypeName::hasSpecifierQualifierList() const
+{
+	return specifierQualifierList != nullptr;
+}
+
+bool TypeName::hasAbstractDeclarator() const
+{
+	return abstractDeclarator != nullptr;
+}

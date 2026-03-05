@@ -1,9 +1,6 @@
 #pragma once
 
-#include <string>
 #include <vector>
-#include <optional>
-#include "StructOrUnion.h"
 #include "StructDeclaration.h"
 
 using namespace std;
@@ -17,14 +14,18 @@ namespace WadeSpace
 		StructOrUnionSpecifier(TokenPtr structOrUnion, TokenPtr name, vector<StructDeclaration*>* vectorStructDeclaration);
 		virtual ~StructOrUnionSpecifier();
 
-		TokenPtr getName() const;
-		TokenPtr getStructOrUnion() const;
-		vector<StructDeclaration*>* getVectorStructDeclaration() const;
-
 		StructOrUnionSpecifier(const StructOrUnionSpecifier& other);
 		StructOrUnionSpecifier(StructOrUnionSpecifier&& other) noexcept;
 		StructOrUnionSpecifier& operator=(const StructOrUnionSpecifier& other);
 		StructOrUnionSpecifier& operator=(StructOrUnionSpecifier&& other) noexcept;
+
+		[[nodiscard]] TokenPtr getName() const;
+		[[nodiscard]] TokenPtr getStructOrUnion() const;
+		[[nodiscard]] vector<StructDeclaration*>* getVectorStructDeclaration() const;
+
+		[[nodiscard]] bool hasName() const;
+		[[nodiscard]] bool hasStructOrUnion() const;
+		[[nodiscard]] bool hasVectorStructDeclaration() const;
 
 	private:
 		TokenPtr name;

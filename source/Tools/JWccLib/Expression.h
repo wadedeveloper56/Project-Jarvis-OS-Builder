@@ -84,6 +84,11 @@ namespace WadeSpace
 		[[nodiscard]] TokenPtr getOp() const;
 		[[nodiscard]] Expression* getRight() const;
 
+		[[nodiscard]] bool hasData() const;
+		[[nodiscard]] bool hasLeft() const;
+		[[nodiscard]] bool hasOp() const;
+		[[nodiscard]] bool hasRight() const;
+
 	private:
 		NodeDataPtr data;
 		Expression* left;

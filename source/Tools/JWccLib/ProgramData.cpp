@@ -76,13 +76,33 @@ void ProgramData::handleFunction(FunctionDefinition* declaration, vector<Functio
 						type = ptr->typeSpecifier->getType().value();
 					}
 				}
-				functionData->pointer = parameterDeclaration->getDeclarator()->isPointer();
+				functionData->pointer = parameterDeclaration->getDeclarator()->hasPointer();
 				functionData->type = type;
 				data->parameters->push_back(functionData);
 			}
 		}
 		functionTable->push_back(data);
 	}
+}
+
+vector<ExternalDeclaration*>* ProgramData::getProgram() const
+{
+	return program;
+}
+
+BaseCodeGenerator* ProgramData::getGenerator() const
+{
+	return generator;
+}
+
+bool ProgramData::hasProgram() const
+{
+	return program != nullptr;
+}
+
+bool ProgramData::hasGenerator() const
+{
+	return generator != nullptr;
 }
 
 void ProgramData::handleDeclaration(Declaration* declaration, vector<VariableData*>* variableTable)
@@ -156,7 +176,7 @@ void ProgramData::handleDeclaration(Declaration* declaration, vector<VariableDat
 				data->initializer = nullptr;
 				data->arraySize = 1;
 				data->type = type;
-				data->pointer = declarator->isPointer();
+				data->pointer = declarator->hasPointer();
 				data->name = initDecl->getVariableName();
 				data->unsign = unsign;
 
@@ -165,8 +185,8 @@ void ProgramData::handleDeclaration(Declaration* declaration, vector<VariableDat
 					data->structName = structName;
 					data->suSpec = suSpec ? new StructOrUnionSpecifier(*suSpec) : nullptr;
 				}
-				if (initDecl->isInitializer()) data->initializer = new Initializer(*initDecl->getInitializer());
-				if (dd->isConstantExpression()) data->arraySize = dd->getConstantExpression()->getData()->getConstant()->getIConst()->data->repr.numericConstant.repr.lIntConst;
+				if (initDecl->hasInitializer()) data->initializer = new Initializer(*initDecl->getInitializer());
+				if (dd->hasConstantExpression()) data->arraySize = dd->getConstantExpression()->getData()->getConstant()->getIConst()->getIntegerConst();
 				variableTable->push_back(data);
 			}
 		}
@@ -182,11 +202,11 @@ BaseCodeGenerator* ProgramData::processGlobalVariables()
 	{
 		for (ExternalDeclaration* ptr : *program)
 		{
-			if (ptr->isDeclaration())
+			if (ptr->hasDeclaration())
 			{
 				handleDeclaration(ptr->getDeclaration(), variableTable);
 			}
-			else if (ptr->isFunction())
+			else if (ptr->hasFunction())
 			{
 				handleFunction(ptr->getFunction(), functionTable);
 			}

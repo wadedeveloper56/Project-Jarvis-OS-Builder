@@ -41,8 +41,8 @@ namespace WadeSpace
 		[[nodiscard]] AbstractDeclarator* getAbstractDeclarator() const;
 		[[nodiscard]] vector<DirectAbstractDeclaratorNode*>* getList() const;
 
-		[[nodiscard]] bool isAbstractDeclarator() const;
-		[[nodiscard]] bool isList() const;
+		[[nodiscard]] bool hasAbstractDeclarator() const;
+		[[nodiscard]] bool hasList() const;
 
 	private:
 		AbstractDeclarator* abstractDeclarator;

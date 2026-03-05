@@ -62,3 +62,9 @@ bool ParameterTypeList::getEllipsis() const
 {
 	return ellipsis;
 }
+
+bool ParameterTypeList::hasVectorParameterDeclaration() const
+{
+	return vectorParameterDeclaration != nullptr;
+}
+

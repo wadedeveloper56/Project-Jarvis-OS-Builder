@@ -12,18 +12,24 @@ namespace WadeSpace
 	class ParameterDeclaration
 	{
 	public:
+		ParameterDeclaration();
 		ParameterDeclaration(DeclarationSpecifiers* declarationSpecifiers);
 		ParameterDeclaration(DeclarationSpecifiers* declarationSpecifiers, AbstractDeclarator* abstractDeclarator);
 		ParameterDeclaration(DeclarationSpecifiers* declarationSpecifiers, Declarator* declarator);
-		ParameterDeclaration();
 		virtual ~ParameterDeclaration();
+
 		ParameterDeclaration(const ParameterDeclaration& other);
 		ParameterDeclaration(ParameterDeclaration&& other) noexcept;
 		ParameterDeclaration& operator=(const ParameterDeclaration& other);
 		ParameterDeclaration& operator=(ParameterDeclaration&& other) noexcept;
-		DeclarationSpecifiers* getDeclarationSpecifiers() const;
-		Declarator* getDeclarator() const;
-		AbstractDeclarator* getAbstractDeclarator() const;
+
+		[[nodiscard]] DeclarationSpecifiers* getDeclarationSpecifiers() const;
+		[[nodiscard]] Declarator* getDeclarator() const;
+		[[nodiscard]] AbstractDeclarator* getAbstractDeclarator() const;
+
+		[[nodiscard]] bool hasDeclarationSpecifiers() const;
+		[[nodiscard]] bool hasDeclarator() const;
+		[[nodiscard]] bool hasAbstractDeclarator() const;
 
 	private:
 		DeclarationSpecifiers* declarationSpecifiers;
