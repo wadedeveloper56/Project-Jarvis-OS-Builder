@@ -101,6 +101,9 @@ void MasmCodeGenerator::handleFunctionWithParameters(ofstream& out, string name,
 
 void MasmCodeGenerator::handleIndividualFunction(ofstream& out, FunctionData* ptr)
 {
+	auto returnType = ptr->type;
+	auto parameters = ptr->parameters;
+	auto statements = ptr->statements;
 	if (ptr->parameters != nullptr && !ptr->parameters->empty())
 	{
 		handleFunctionWithParameters(out, ptr->name, ptr->parameters);
@@ -109,9 +112,22 @@ void MasmCodeGenerator::handleIndividualFunction(ofstream& out, FunctionData* pt
 	{
 		out << "_" << ptr->name << " PROC C" << endl;
 	}
-	out << "\t" << "mov eax, [_argc]" << endl;
-	out << "\t" << "xor eax,eax" << endl;
-	out << "\tret" << endl;
+	for (BaseStatement* node : *statements->getStatementList())
+	{
+		auto base_statement = node->getStatement();
+		auto op = base_statement->getOp();
+		switch (op)
+		{
+		case RETURN:
+			auto exp = base_statement->getExp();
+			if (exp->getData()->getConstant() != nullptr)
+			{
+				out << "\t" << "mov eax," << exp->getData()->getConstant()->getIConst()->getIntegerConst() << endl;
+				out << "\tret" << endl;
+			}
+			break;
+		}
+	}
 	out << "_" << ptr->name << " endp" << endl;
 }
 

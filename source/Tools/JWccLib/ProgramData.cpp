@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "ProgramData.h"
 
+#include "CompoundStatement.h"
 #include "Expression.h"
 #include "ExternalDeclaration.h"
 #include "GlobalVars.h"
@@ -13,8 +14,8 @@ using namespace std;
 
 ProgramData::ProgramData()
 {
-	this->program = new vector<ExternalDeclaration*>();
-	this->generator = nullptr;
+	program = new vector<ExternalDeclaration*>();
+	generator = nullptr;
 }
 
 ProgramData::~ProgramData()
@@ -38,6 +39,7 @@ void ProgramData::add(ExternalDeclaration* data)
 void ProgramData::handleFunction(FunctionDefinition* declaration, vector<FunctionData*>* functionTable)
 {
 	FunctionData* data = new FunctionData();
+	data->statements = new BaseStatement(*declaration->getBaseStatement());
 	DeclarationSpecifiers* declaration_specifiers = declaration->getDeclarationSpecifiers();
 	if (declaration_specifiers != nullptr && declaration_specifiers->getDeclarationSpecifiersNodeList() != nullptr)
 	{

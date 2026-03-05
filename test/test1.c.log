@@ -20,7 +20,7 @@ int init ;
 
 int main ( int argc , char * argv [ ] )
 {
-return 0 ;
+return 5 ;
 }
 
 Scanner: token [union]
@@ -240,7 +240,7 @@ direct_declarator OPAREN parameter_type_list CPAREN to direct_declarator
 Scanner: token [{]
 direct_declarator REDUCE to declarator
 Scanner: token [return]
-Scanner: decimal number: 0
+Scanner: decimal number: 5
 I_CONST REDUCE to constant 
 constant REDUCE to primary_expression
 primary_expression REDUCE to postfix_expression

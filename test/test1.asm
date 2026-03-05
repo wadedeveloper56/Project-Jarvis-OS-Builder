@@ -21,8 +21,7 @@ _init SDWORD  ?
 
 .code
 _main PROC C, _argc:SDWORD , _argv:DWORD 
-	mov eax, [_argc]
-	xor eax,eax
+	mov eax,5
 	ret
 _main endp
 end

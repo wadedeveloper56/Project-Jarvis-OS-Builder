@@ -1,5 +1,6 @@
 #pragma once
 
+#include "BaseStatement.h"
 #include "GlobalVars.h"
 #include "Initializer.h"
 #include "TokenType.h"
@@ -83,6 +84,8 @@ namespace WadeSpace
 		string name;
 		TokenType type;
 		vector<VariableData*>* parameters;
+		BaseStatement* statements;
+
 		_FunctionData() = default;
 		~_FunctionData() = default;
 

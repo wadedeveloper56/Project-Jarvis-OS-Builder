@@ -38,8 +38,7 @@ test1.asm
 00000000                        _main PROC C, _argc:SDWORD , _argv:DWORD 
 00000000  55                *   push ebp
 00000001  8BEC              *   mov ebp, esp
-00000003  8B4508                	mov eax, [_argc]
-00000006  33C0                  	xor eax,eax
+00000003  B805000000            	mov eax,5
 00000008                        	ret
 00000008  C9                *   leave
 00000009  C3                *   retn 
@@ -105,7 +104,7 @@ Symbols:
 @FileName  . . . . . . . . . . .        Text   TEST1
 @Interface . . . . . . . . . . .        Number             1h 
 @Model . . . . . . . . . . . . .        Number             7h 
-@Time  . . . . . . . . . . . . .        Text   14:25:44
+@Time  . . . . . . . . . . . . .        Text   15:15:38
 @Version . . . . . . . . . . . .        Text   800
 @code  . . . . . . . . . . . . .        Text   _TEXT
 @data  . . . . . . . . . . . . .        Text   FLAT
@@ -117,4 +116,4 @@ _var2  . . . . . . . . . . . . .        Word               0h _DATA C
 _var6  . . . . . . . . . . . . .        Data1              0h _BSS C
 _var7  . . . . . . . . . . . . .        Data2              Ah _BSS C
 
-test1.asm: 28 lines, 2 passes, 1 ms, 0 warnings, 0 errors
+test1.asm: 27 lines, 2 passes, 1 ms, 0 warnings, 0 errors
