@@ -1,7 +1,7 @@
 .x64p
 .model flat, c;
 
-extrn funct : PROC
+extrn _funct : PROC
 Data STRUCT
 	var3 SBYTE ?
 	var4 TBYTE ?
@@ -16,6 +16,7 @@ _init SDWORD  ?
 
 .code
 _main PROC C, _argc:SDWORD , _argv:QWORD 
+	call _funct
 	mov eax,5
 	ret
 _main endp

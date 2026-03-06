@@ -13,5 +13,6 @@ int init;
 
 int main(int argc, char* argv[])
 {
+	funct(77);
 	return 5;
 }

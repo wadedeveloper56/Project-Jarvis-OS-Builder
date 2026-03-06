@@ -15,6 +15,7 @@ int init ;
 
 int main ( int argc , char * argv [ ] )
 {
+funct ( 77 ) ;
 return 5 ;
 }
 
@@ -197,6 +198,50 @@ parameter_list REDUCE to parameter_type_list
 direct_declarator OPAREN parameter_type_list CPAREN to direct_declarator
 Scanner: token [{]
 direct_declarator REDUCE to declarator
+Scanner: identifier [funct]
+Scanner: token [(]
+IDENTIFIER REDUCE to primary_expression
+primary_expression REDUCE to postfix_expression
+Scanner: decimal number: 77
+I_CONST REDUCE to constant 
+constant REDUCE to primary_expression
+primary_expression REDUCE to postfix_expression
+Scanner: token [)]
+postfix_expression REDUCE unary_expression
+unary_expression REDUCE to cast_expression
+cast_expression REDUCE to multiplicative_expression
+multiplicative_expression REDUCE to additive_expression
+additive_expression REDUCE to shift_expression
+shift_expression REDUCE to relational_expression
+relational_expression REDUCE to equality_expression
+equality_expression REDUCE to and_expression
+and_expression REDUCE to exclusive_or_expression
+exclusive_or_expression REDUCE to inclusive_or_expression
+inclusive_or_expression REDUCE to logical_and_expression
+inclusive_and_expression REDUCE to logical_or_expression
+logical_or_expression REDUCE to conditional_expression
+conditional_expression REDUCE to assignment_expression
+assignment_expression REDUCE argument_expression_list
+postfix_expression OPAREN argument_expression_list CPAREN REDUCE to postfix_expression
+Scanner: token [;]
+postfix_expression REDUCE unary_expression
+unary_expression REDUCE to cast_expression
+cast_expression REDUCE to multiplicative_expression
+multiplicative_expression REDUCE to additive_expression
+additive_expression REDUCE to shift_expression
+shift_expression REDUCE to relational_expression
+relational_expression REDUCE to equality_expression
+equality_expression REDUCE to and_expression
+and_expression REDUCE to exclusive_or_expression
+exclusive_or_expression REDUCE to inclusive_or_expression
+inclusive_or_expression REDUCE to logical_and_expression
+inclusive_and_expression REDUCE to logical_or_expression
+logical_or_expression REDUCE to conditional_expression
+conditional_expression REDUCE to assignment_expression
+asignment_expression REDUCE to expression
+expression SEMICOLON REDUCE to expression_statement
+expression_statement REDUCE to statement
+statement REDUCE to statement_list
 Scanner: token [return]
 Scanner: decimal number: 5
 I_CONST REDUCE to constant 
@@ -220,7 +265,7 @@ conditional_expression REDUCE to assignment_expression
 asignment_expression REDUCE to expression
 RETURN expression SEMICOLON REDUCE to jump_statement
 jump_statement REDUCE to statement
-statement REDUCE to statement_list
+statement_list statement REDUCE to statement_list
 Scanner: token [}]
 OCURLY statement_list CCURLY REDUCE to compound_statement
 declaration_specifiers declarator compound_statement REDUCE to function_definition

@@ -103,18 +103,34 @@ void MasmCodeGenerator::handleIndividualFunctionStatements(ofstream& out, BaseSt
 {
 	for (BaseStatement* node : *statements->getStatementList())
 	{
-		auto base_statement = node->getStatement();
-		auto op = base_statement->getOp();
-		switch (op)
+		if (node->getOp() == expression_statement)
 		{
-		case RETURN:
-			auto exp = base_statement->getExp();
-			if (exp != nullptr && exp->getData() != nullptr && exp->getData()->getConstant() != nullptr)
+			BaseStatement* base_statement = node->getStatement();
+			Expression* exp = base_statement->getExp();
+			NodeType nt = exp->getData()->getType();
+			if (nt == NT_FUNCTION_CALL)
 			{
-				out << "\t" << "mov eax," << exp->getData()->getConstant()->getIConst()->getIntegerConst() << endl;
-				out << "\tret" << endl;
+				vector<Expression*>* parameters = exp->getData()->argumentList;
+				string functionName = exp->getLeft()->getData()->getToken3()->getSymbolName();
+				out << "\t" << "call _" << functionName << endl;
+
 			}
-			break;
+		}
+		else if (node->getOp() == jump_statement)
+		{
+			BaseStatement* base_statement = node->getStatement();
+			TokenType op = base_statement->getOp();
+			switch (op)
+			{
+				case RETURN:
+					auto exp = base_statement->getExp();
+					if (exp != nullptr && exp->getData() != nullptr && exp->getData()->getConstant() != nullptr)
+					{
+						out << "\t" << "mov eax," << exp->getData()->getConstant()->getIConst()->getIntegerConst() << endl;
+						out << "\tret" << endl;
+					}
+					break;
+			}
 		}
 	}
 }
