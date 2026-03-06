@@ -30,27 +30,61 @@ ProgramData::~ProgramData()
 	}
 }
 
-void ProgramData::add(ExternalDeclaration* data)
+void ProgramData::add(ExternalDeclaration* data) const
 {
 	program->push_back(data);
 }
 
 
-void ProgramData::handleFunction(FunctionDefinition* declaration, vector<FunctionData*>* functionTable)
+TokenType ProgramData::getFunctionParameterType(ParameterDeclaration* parameterDeclaration)
+{
+	TokenType type = UNKNOWN;
+	auto declaration_specifiers_list = parameterDeclaration->getDeclarationSpecifiers()->getDeclarationSpecifiersNodeList();
+	for (auto ptr : *declaration_specifiers_list)
+	{
+		if (ptr->typeSpecifier != nullptr)
+		{
+			type = ptr->typeSpecifier->getType().value();
+		}
+	}
+	return type;
+}
+
+string ProgramData::getParameterDeclarationName(ParameterDeclaration const * parameterDeclaration)
+{
+	auto direct_declarator = parameterDeclaration->getDeclarator()->getDirectDeclarator();
+	if (direct_declarator->getIdentifier() != nullptr)
+	{
+		return direct_declarator->getIdentifier()->getSymbolName();
+	}
+	else
+	{
+		return direct_declarator->getDirectDeclarator()->getIdentifier()->getSymbolName();
+	}
+}
+
+TokenType ProgramData::getDeclarationSpecifiersType(DeclarationSpecifiers const* declaration_specifiers)
+{
+	TokenType type = UNKNOWN;
+	auto type_specifierList = declaration_specifiers->getDeclarationSpecifiersNodeList();
+	for (auto ptr : *type_specifierList)
+	{
+		if (ptr->typeSpecifier != nullptr)
+		{
+			type = ptr->typeSpecifier->getType().value();
+		}
+	}
+	return type;
+}
+
+void ProgramData::handleFunction(FunctionDefinition const * declaration, vector<FunctionData*>* functionTable)
 {
 	FunctionData* data = new FunctionData();
 	data->statements = new BaseStatement(*declaration->getBaseStatement());
 	DeclarationSpecifiers* declaration_specifiers = declaration->getDeclarationSpecifiers();
 	if (declaration_specifiers != nullptr && declaration_specifiers->getDeclarationSpecifiersNodeList() != nullptr)
 	{
-		auto type_specifierList = declaration_specifiers->getDeclarationSpecifiersNodeList();
-		for (auto ptr : *type_specifierList)
-		{
-			if (ptr->typeSpecifier != nullptr)
-			{
-				data->type = ptr->typeSpecifier->getType().value();
-			}
-		}
+		data->type = getDeclarationSpecifiersType(declaration_specifiers);
 		DirectDeclarator* direct_declarator = declaration->getDeclarator()->getDirectDeclarator();
 		data->name = direct_declarator->getDirectDeclarator()->getIdentifier()->getSymbolName();
 		ParameterTypeList* parameters = direct_declarator->getParameterTypeList();
@@ -60,26 +94,9 @@ void ProgramData::handleFunction(FunctionDefinition* declaration, vector<Functio
 			for (ParameterDeclaration* parameterDeclaration : *parameters->getVectorParameterDeclaration())
 			{
 				VariableData* functionData = new VariableData();
-				auto direct_declarator = parameterDeclaration->getDeclarator()->getDirectDeclarator();
-				if (direct_declarator->getIdentifier() != nullptr)
-				{
-					functionData->name = direct_declarator->getIdentifier()->getSymbolName();
-				}
-				else
-				{
-					functionData->name = direct_declarator->getDirectDeclarator()->getIdentifier()->getSymbolName();
-				}
-				auto declaration_specifiers_list = parameterDeclaration->getDeclarationSpecifiers()->getDeclarationSpecifiersNodeList();
-				TokenType type = UNKNOWN;
-				for (auto ptr : *declaration_specifiers_list)
-				{
-					if (ptr->typeSpecifier != nullptr)
-					{
-						type = ptr->typeSpecifier->getType().value();
-					}
-				}
+				functionData->name = getParameterDeclarationName(parameterDeclaration);
 				functionData->pointer = parameterDeclaration->getDeclarator()->hasPointer();
-				functionData->type = type;
+				functionData->type = getFunctionParameterType(parameterDeclaration);
 				data->parameters->push_back(functionData);
 			}
 		}
@@ -107,7 +124,21 @@ bool ProgramData::hasGenerator() const
 	return generator != nullptr;
 }
 
-void ProgramData::handleDeclaration(Declaration* declaration, vector<VariableData*>* variableTable)
+ParameterTypeList* ProgramData::getDeclarationParameterList(vector<InitDeclarator*> const * initDeclaratorsList)
+{
+	ParameterTypeList* plist = nullptr;
+	if (initDeclaratorsList != nullptr)
+	{
+		for (auto node : *initDeclaratorsList)
+		{
+			auto init_decl = node->getDeclarator()->getDirectDeclarator();
+			plist = init_decl->getParameterTypeList();
+		}
+	}
+	return plist;
+}
+
+void ProgramData::handleDeclaration(Declaration const * declaration, vector<VariableData*>* variableTable)
 {
 	if (declaration != nullptr)
 	{
@@ -119,14 +150,7 @@ void ProgramData::handleDeclaration(Declaration* declaration, vector<VariableDat
 
 		DeclarationSpecifiers* declSpecifiers = declaration->getDeclarationSpecifiers();
 		vector<InitDeclarator*>* initDeclaratorsList = declaration->getVectorInitDeclarator();
-		if (initDeclaratorsList != nullptr)
-		{
-			for (auto node : *initDeclaratorsList)
-			{
-				auto init_decl = node->getDeclarator()->getDirectDeclarator();
-				plist = init_decl->getParameterTypeList();
-			}
-		}
+		plist = getDeclarationParameterList(initDeclaratorsList);
 		vector<DeclarationSpecifiersNode*>* list = declSpecifiers->getDeclarationSpecifiersNodeList();
 		for (auto ptr : *list)
 		{

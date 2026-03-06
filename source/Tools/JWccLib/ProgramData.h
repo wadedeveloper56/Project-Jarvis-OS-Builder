@@ -19,13 +19,16 @@ namespace WadeSpace
 	public:
 		ProgramData();
 		virtual ~ProgramData();
-		void add(ExternalDeclaration* data);
+		void add(ExternalDeclaration* data) const;
 		BaseCodeGenerator* processGlobalVariables();
 
 	private:
-		void handleDeclaration(Declaration* declaration, vector<struct _VariableData*>* variableTable);
-		void handleFunction(FunctionDefinition* declaration, vector<struct _FunctionData*>* functionTable);
-		void handleInitDeclaratorForDeclaratation(Declaration* declaration, vector<VariableData*>* variableTable, TokenType type);
+		void handleDeclaration(Declaration const* declaration, vector<struct _VariableData*>* variableTable);
+		void handleFunction(FunctionDefinition const* declaration, vector<struct _FunctionData*>* functionTable);
+		ParameterTypeList* getDeclarationParameterList(vector<InitDeclarator*> const * initDeclaratorsList);
+		TokenType getFunctionParameterType(ParameterDeclaration* parameterDeclaration);
+		string getParameterDeclarationName(ParameterDeclaration const * parameterDeclaration);
+		TokenType getDeclarationSpecifiersType(DeclarationSpecifiers const * declaration_specifiers);
 
 	public:
 		[[nodiscard]] vector<ExternalDeclaration*>* getProgram() const;

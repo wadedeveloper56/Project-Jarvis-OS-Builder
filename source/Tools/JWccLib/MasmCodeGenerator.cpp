@@ -291,7 +291,7 @@ void MasmCodeGenerator::handlePrototype(ofstream& out)
 		if (ptr->plist != nullptr)
 		{
 			auto name = ptr->name;
-			out << "extrn " << name << " : PROC" << endl;
+			out << "extrn _" << name << " : PROC" << endl;
 		}
 	}
 }
