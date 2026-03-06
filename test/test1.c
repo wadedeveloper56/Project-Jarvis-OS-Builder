@@ -1,17 +1,12 @@
-union Data1
+void funct(int value);
+
+struct Data
 {
 	char var3;
 	long double var4;
 	int var5;
 };
-struct Data2
-{
-	char var3;
-	long double var4;
-	int var5;
-};
-union Data1 var6;
-struct Data2 var7;
+struct Data var6;
 char var1;
 short var2 = 6;
 int init;

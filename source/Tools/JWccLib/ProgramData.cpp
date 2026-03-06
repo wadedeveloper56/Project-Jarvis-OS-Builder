@@ -115,9 +115,18 @@ void ProgramData::handleDeclaration(Declaration* declaration, vector<VariableDat
 		bool unsign = false;
 		string structName;
 		StructOrUnionSpecifier* suSpec = nullptr;
+		ParameterTypeList* plist = nullptr;
 
 		DeclarationSpecifiers* declSpecifiers = declaration->getDeclarationSpecifiers();
 		vector<InitDeclarator*>* initDeclaratorsList = declaration->getVectorInitDeclarator();
+		if (initDeclaratorsList != nullptr)
+		{
+			for (auto node : *initDeclaratorsList)
+			{
+				auto init_decl = node->getDeclarator()->getDirectDeclarator();
+				plist = init_decl->getParameterTypeList();
+			}
+		}
 		vector<DeclarationSpecifiersNode*>* list = declSpecifiers->getDeclarationSpecifiersNodeList();
 		for (auto ptr : *list)
 		{
@@ -181,6 +190,7 @@ void ProgramData::handleDeclaration(Declaration* declaration, vector<VariableDat
 				data->pointer = declarator->hasPointer();
 				data->name = initDecl->getVariableName();
 				data->unsign = unsign;
+				data->plist = plist;
 
 				if (type == STRUCT || type == UNION)
 				{

@@ -5,6 +5,7 @@
 #include "Initializer.h"
 #include "TokenType.h"
 #include "StructOrUnionSpecifier.h"
+#include "ParameterTypeList.h"
 
 using namespace std;
 
@@ -20,6 +21,7 @@ namespace WadeSpace
 		string structName;
 		StructOrUnionSpecifier* suSpec;
 		bool unsign;
+		ParameterTypeList* plist;
 
 		_VariableData() = default;
 		~_VariableData() = default;
@@ -34,6 +36,7 @@ namespace WadeSpace
 			structName = other.structName;
 			suSpec = other.suSpec ? new StructOrUnionSpecifier(*other.suSpec) : nullptr;
 			unsign = other.unsign;
+			plist = other.plist ? new ParameterTypeList(*other.plist) : nullptr;
 		}
 
 		_VariableData(_VariableData&& other) noexcept
@@ -46,6 +49,7 @@ namespace WadeSpace
 			structName = other.structName;
 			suSpec = other.suSpec ? new StructOrUnionSpecifier(*other.suSpec) : nullptr;
 			unsign = other.unsign;
+			plist = other.plist ? new ParameterTypeList(*other.plist) : nullptr;
 		}
 
 		_VariableData& operator=(const _VariableData& other)
@@ -60,6 +64,7 @@ namespace WadeSpace
 			structName = other.structName;
 			suSpec = other.suSpec ? new StructOrUnionSpecifier(*other.suSpec) : nullptr;
 			unsign = other.unsign;
+			plist = other.plist ? new ParameterTypeList(*other.plist) : nullptr;
 			return *this;
 		}
 
@@ -75,6 +80,7 @@ namespace WadeSpace
 			structName = other.structName;
 			suSpec = other.suSpec ? new StructOrUnionSpecifier(*other.suSpec) : nullptr;	
 			unsign = other.unsign;
+			plist = other.plist ? new ParameterTypeList(*other.plist) : nullptr;
 			return *this;
 		}
 	} VariableData;
@@ -94,6 +100,7 @@ namespace WadeSpace
 			name = other.name;
 			type = other.type;
 			parameters = other.parameters ? new vector<VariableData*>(*other.parameters) : nullptr;
+			statements = other.statements ? new BaseStatement(*other.statements) : nullptr;
 		}
 
 		_FunctionData(_FunctionData&& other) noexcept
@@ -101,6 +108,7 @@ namespace WadeSpace
 			name = other.name;
 			type = other.type;
 			parameters = other.parameters ? new vector<VariableData*>(*other.parameters) : nullptr;
+			statements = other.statements ? new BaseStatement(*other.statements) : nullptr;
 		}
 
 		_FunctionData& operator=(const _FunctionData& other)
@@ -110,6 +118,7 @@ namespace WadeSpace
 			name = other.name;
 			type = other.type;
 			parameters = other.parameters ? new vector<VariableData*>(*other.parameters) : nullptr;
+			statements = other.statements ? new BaseStatement(*other.statements) : nullptr;
 			return *this;
 		}
 
@@ -120,6 +129,7 @@ namespace WadeSpace
 			name = std::move(other.name);
 			type = other.type;		
 			parameters = other.parameters ? new vector<VariableData*>(*other.parameters) : nullptr;
+			statements = other.statements ? new BaseStatement(*other.statements) : nullptr;
 			return *this;
 		}
 	} FunctionData;

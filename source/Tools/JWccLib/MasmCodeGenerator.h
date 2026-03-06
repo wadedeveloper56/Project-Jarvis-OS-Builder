@@ -27,8 +27,8 @@ namespace WadeSpace
 
 	private:
 		void handleIndividualFunction(ofstream& out, FunctionData* ptr);
-		void handleInitializedVariable(ofstream& out, vector<_VariableData*>::value_type ptr);
-		void handleUUninitializedVariable(ofstream& out, vector<_VariableData*>::value_type ptr);
+		void handleInitializedVariable(ofstream& out, _VariableData* ptr);
+		void handleUUninitializedVariable(ofstream& out, _VariableData* ptr);
 		void handleVariableTable(ofstream& out);
 		void handleFunctionTable(ofstream& out);
 		void handleStructs(ofstream& out);
@@ -37,6 +37,7 @@ namespace WadeSpace
 		void handleIndividualFunctionStatements(ofstream& out, BaseStatement* statements);
 		string vectorToCommaSeparatedList(const vector<string>& vec);
 		string getAsmType(TokenType type, bool isPointer, bool isUnsigned);
+		void handlePrototype(ofstream& out);
 	};
 }
 

@@ -1,26 +1,21 @@
-.386
+.x64p
 .model flat, c;
 
-Data1 UNION
+extrn funct : PROC
+Data STRUCT
 	var3 SBYTE ?
 	var4 TBYTE ?
 	var5 SDWORD ?
-Data1 ENDS
-Data2 STRUCT
-	var3 SBYTE ?
-	var4 TBYTE ?
-	var5 SDWORD ?
-Data2 ENDS
+Data ENDS
 .data
 _var2 SWORD 6
 .data?
-_var6 Data1 <>
-_var7 Data2 <>
+_var6 Data <>
 _var1 SBYTE  ?
 _init SDWORD  ?
 
 .code
-_main PROC C, _argc:SDWORD , _argv:DWORD 
+_main PROC C, _argc:SDWORD , _argv:QWORD 
 	mov eax,5
 	ret
 _main endp

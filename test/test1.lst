@@ -1,50 +1,45 @@
 JWasm v2.12pre, Mar  5 2026
 test1.asm
-                                .386
+                                .x64p
                                 .model flat, c;
-00000000                    *   _TEXT segment DWORD FLAT PUBLIC 'CODE'
+00000000                    *   _TEXT segment PARA FLAT PUBLIC 'CODE'
                             *   _TEXT ends
-00000000                    *   _DATA segment DWORD FLAT PUBLIC 'DATA'
+00000000                    *   _DATA segment PARA FLAT PUBLIC 'DATA'
                             *   _DATA ends
                             *   assume cs:flat,ds:flat,ss:flat,es:flat,fs:ERROR,gs:ERROR
 
-00000000                        Data1 UNION
-00000000                        	var3 SBYTE ?
-00000000                        	var4 TBYTE ?
-00000000                        	var5 SDWORD ?
-0000000A                        Data1 ENDS
-00000000                        Data2 STRUCT
+                                extrn funct : PROC
+00000000                        Data STRUCT
 00000000                        	var3 SBYTE ?
 00000001                        	var4 TBYTE ?
 0000000B                        	var5 SDWORD ?
-0000000F                        Data2 ENDS
+0000000F                        Data ENDS
                                 .data
 00000000                    *   _DATA segment
                             *   assume cs:ERROR
 00000000  0600                  _var2 SWORD 6
 00000000                        .data?
 00000002                    *   _DATA ends
-00000000                    *   _BSS segment DWORD FLAT PUBLIC 'BSS'
+00000000                    *   _BSS segment PARA FLAT PUBLIC 'BSS'
                             *   assume cs:ERROR
-00000000  000000000000000000    _var6 Data1 <>
-0000000A  000000000000000000    _var7 Data2 <>
-00000019  00                    _var1 SBYTE  ?
-0000001A  00000000              _init SDWORD  ?
+00000000  000000000000000000    _var6 Data <>
+0000000F  00                    _var1 SBYTE  ?
+00000010  00000000              _init SDWORD  ?
 
 00000000                        .code
-0000001E                    *   _BSS ends
+00000014                    *   _BSS ends
 00000000                    *   _TEXT segment
                             *   assume cs:FLAT
-00000000                        _main PROC C, _argc:SDWORD , _argv:DWORD 
-00000000  55                *   push ebp
-00000001  8BEC              *   mov ebp, esp
-00000003  B805000000            	mov eax,5
-00000008                        	ret
-00000008  C9                *   leave
-00000009  C3                *   retn 
-0000000A                        _main endp
+00000000                        _main PROC C, _argc:SDWORD , _argv:QWORD 
+00000000  55                *   push rbp
+00000001  488BEC            *   mov rbp, rsp
+00000004  B805000000            	mov eax,5
+00000009                        	ret
+00000009  C9                *   leave
+0000000A  C3                *   retn 
+0000000B                        _main endp
                                 end
-0000000A                    *   _TEXT ends
+0000000B                    *   _TEXT ends
 
 
 Macros:
@@ -62,11 +57,7 @@ Structures and Unions:
 
                 N a m e                 Size/Ofs   Type
 
-Data1  . . . . . . . . . . . . .               A
-  var3 . . . . . . . . . . . . .               0   Byte
-  var4 . . . . . . . . . . . . .               0   TByte
-  var5 . . . . . . . . . . . . .               0   DWord
-Data2  . . . . . . . . . . . . .               F
+Data . . . . . . . . . . . . . .               F
   var3 . . . . . . . . . . . . .               0   Byte
   var4 . . . . . . . . . . . . .               1   TByte
   var5 . . . . . . . . . . . . .               B   DWord
@@ -77,18 +68,18 @@ Segments and Groups:
                 N a m e                 Size     Length   Align   Combine Class
 
 FLAT . . . . . . . . . . . . . .        GROUP
-_BSS . . . . . . . . . . . . . .        32 Bit   0000001E DWord   Public  'BSS'
-_DATA  . . . . . . . . . . . . .        32 Bit   00000002 DWord   Public  'DATA'
-_TEXT  . . . . . . . . . . . . .        32 Bit   0000000A DWord   Public  'CODE'
+_BSS . . . . . . . . . . . . . .        64 Bit   00000014 Para    Public  'BSS'
+_DATA  . . . . . . . . . . . . .        64 Bit   00000002 Para    Public  'DATA'
+_TEXT  . . . . . . . . . . . . .        64 Bit   0000000B Para    Public  'CODE'
 
 
 Procedures, parameters and locals:
 
                 N a m e                 Type     Value    Segment  Length
 
-_main  . . . . . . . . . . . . .        P Near   00000000 _TEXT    0000000A Public   C
-  _argc  . . . . . . . . . . . .        DWord             ebp + 0008
-  _argv  . . . . . . . . . . . .        DWord             ebp + 000C
+_main  . . . . . . . . . . . . .        P Near   00000000 _TEXT    0000000B Public   C
+  _argc  . . . . . . . . . . . .        DWord             rbp + 0010
+  _argv  . . . . . . . . . . . .        QWord             rbp + 0018
 
 
 Symbols:
@@ -96,24 +87,24 @@ Symbols:
                 N a m e                 Type       Value     Attr
 
 @CodeSize  . . . . . . . . . . .        Number             0h 
-@Cpu . . . . . . . . . . . . . .        Number           D0Fh 
+@Cpu . . . . . . . . . . . . . .        Number           DDFh 
 @CurSeg  . . . . . . . . . . . .        Text   
 @DataSize  . . . . . . . . . . .        Number             0h 
-@Date  . . . . . . . . . . . . .        Text   03/05/26
+@Date  . . . . . . . . . . . . .        Text   03/06/26
 @FileCur . . . . . . . . . . . .        Text   test1.asm
 @FileName  . . . . . . . . . . .        Text   TEST1
 @Interface . . . . . . . . . . .        Number             1h 
 @Model . . . . . . . . . . . . .        Number             7h 
-@Time  . . . . . . . . . . . . .        Text   15:15:38
+@Time  . . . . . . . . . . . . .        Text   10:25:25
 @Version . . . . . . . . . . . .        Text   800
 @code  . . . . . . . . . . . . .        Text   _TEXT
 @data  . . . . . . . . . . . . .        Text   FLAT
 @stack . . . . . . . . . . . . .        Text   FLAT
 __JWASM__  . . . . . . . . . . .        Number            D4h 
-_init  . . . . . . . . . . . . .        DWord             1Ah _BSS C
-_var1  . . . . . . . . . . . . .        Byte              19h _BSS C
+_init  . . . . . . . . . . . . .        DWord             10h _BSS C
+_var1  . . . . . . . . . . . . .        Byte               Fh _BSS C
 _var2  . . . . . . . . . . . . .        Word               0h _DATA C
-_var6  . . . . . . . . . . . . .        Data1              0h _BSS C
-_var7  . . . . . . . . . . . . .        Data2              Ah _BSS C
+_var6  . . . . . . . . . . . . .        Data               0h _BSS C
+funct  . . . . . . . . . . . . .        L Near64           0h External C
 
-test1.asm: 27 lines, 2 passes, 1 ms, 0 warnings, 0 errors
+test1.asm: 22 lines, 2 passes, 1 ms, 0 warnings, 0 errors
