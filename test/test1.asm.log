@@ -1,13 +1,13 @@
 PEDUMP - Win32/Win64 COFF EXE/OBJ/LIB file dumper v1.0 (C) Copyright 2025-2026 Christopher D. Wade.
 All Rights Reserved
 Dump of file test1.obj
-File Size 352 bytes
+File Size 362 bytes
 File Type: 64-bit COFF OBJECT
 
 FILE HEADER VALUES
               8664 Machine (x64)
                  3 (3) Number of Sections
-          69AB3D3A TimeDateStamp ->  n/a
+          69AB42B5 TimeDateStamp ->  n/a
                 A8 PointerToSymbolTable
                  A (10) NumberOfSymbols
                  0 (0) SizeOfOptionalHeader
@@ -88,7 +88,8 @@ Indx Sectn   Value   Type  Storage Name
      * Section: 0000  Len: 00002  Relocs: 0000  LineNums: 0000 checksum:00000000
 0006     3 00000000  0000 STATIC   .bss
      * Section: 0000  Len: 00014  Relocs: 0000  LineNums: 0000 checksum:00000000
-0008 UNDEF 00000000  0000 EXTERNAL __funct
+0008 UNDEF 00000000  0020 EXTERNAL __funct@0
 0009     1 00000000  0020 EXTERNAL __main
 
-String Table Size = 0x4 (4) bytes 0 entries
+String Table Size = 0xE (14) bytes 1 entries
+stringtable[   0] = __funct@0

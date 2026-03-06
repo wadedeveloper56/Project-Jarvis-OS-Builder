@@ -1,12 +1,16 @@
 .x64p
 .model flat, c;
+option casemap : none
 
-extrn _funct : PROC
+_funct PROTO STDCALL
+externdef _funct : PROC
+
 Data STRUCT
 	var3 SBYTE ?
 	var4 TBYTE ?
 	var5 SDWORD ?
 Data ENDS
+
 .data
 _var2 SWORD 6
 .data?
@@ -16,7 +20,7 @@ _init SDWORD  ?
 
 .code
 _main PROC C, _argc:SDWORD , _argv:QWORD 
-	call _funct
+	invoke _funct
 	mov eax,5
 	ret
 _main endp

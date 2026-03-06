@@ -34,7 +34,7 @@ namespace WadeSpace
 		void handleStructs(ofstream& out);
 		void outputVariable(ofstream& out, _VariableData* ptr);
 		void handleFunctionWithParameters(ofstream& out, string name, vector<VariableData*>* list);
-		void handleIndividualFunctionStatements(ofstream& out, BaseStatement* statements);
+		void handleIndividualFunctionStatements(ofstream& out, BaseStatement const * statements);
 		string vectorToCommaSeparatedList(const vector<string>& vec);
 		string getAsmType(TokenType type, bool isPointer, bool isUnsigned);
 		void handlePrototype(ofstream& out);

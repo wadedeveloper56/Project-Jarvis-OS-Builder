@@ -99,7 +99,7 @@ void MasmCodeGenerator::handleFunctionWithParameters(ofstream& out, string name,
 	out << "_" << name << " PROC C, " << paramListStr << endl;
 }
 
-void MasmCodeGenerator::handleIndividualFunctionStatements(ofstream& out, BaseStatement* statements)
+void MasmCodeGenerator::handleIndividualFunctionStatements(ofstream& out, BaseStatement const* statements)
 {
 	for (BaseStatement* node : *statements->getStatementList())
 	{
@@ -112,8 +112,7 @@ void MasmCodeGenerator::handleIndividualFunctionStatements(ofstream& out, BaseSt
 			{
 				vector<Expression*>* parameters = exp->getData()->argumentList;
 				string functionName = exp->getLeft()->getData()->getToken3()->getSymbolName();
-				out << "\t" << "call _" << functionName << endl;
-
+				out << "\t" << "invoke _" << functionName << endl;
 			}
 		}
 		else if (node->getOp() == jump_statement)
@@ -307,7 +306,8 @@ void MasmCodeGenerator::handlePrototype(ofstream& out)
 		if (ptr->plist != nullptr)
 		{
 			auto name = ptr->name;
-			out << "extrn _" << name << " : PROC" << endl;
+			out << "_" << name << " PROTO STDCALL" << endl;
+			out << "externdef _" << name << " : PROC" << endl;
 		}
 	}
 }
@@ -329,9 +329,12 @@ void MasmCodeGenerator::generateCode(ofstream& out)
 		out << ".x64p" << endl;
 		out << ".model flat, c;" << endl;
 	}
+	out << "option casemap : none" << endl;
 	out << endl;
 	handlePrototype(out);
+	out << endl;
 	handleStructs(out);
+	out << endl;
 	handleVariableTable(out);
 	handleFunctionTable(out);
 	out << "end" << endl << endl;;

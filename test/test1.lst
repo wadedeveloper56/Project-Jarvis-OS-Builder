@@ -7,13 +7,17 @@ test1.asm
 00000000                    *   _DATA segment PARA FLAT PUBLIC 'DATA'
                             *   _DATA ends
                             *   assume cs:flat,ds:flat,ss:flat,es:flat,fs:ERROR,gs:ERROR
+                                option casemap : none
 
-                                extrn _funct : PROC
+                                _funct PROTO STDCALL
+                                externdef _funct : PROC
+
 00000000                        Data STRUCT
 00000000                        	var3 SBYTE ?
 00000001                        	var4 TBYTE ?
 0000000B                        	var5 SDWORD ?
 0000000F                        Data ENDS
+
                                 .data
 00000000                    *   _DATA segment
                             *   assume cs:ERROR
@@ -33,7 +37,8 @@ test1.asm
 00000000                        _main PROC C, _argc:SDWORD , _argv:QWORD 
 00000000  55                *   push rbp
 00000001  488BEC            *   mov rbp, rsp
-00000004  E800000000            	call _funct
+00000004                        	invoke _funct
+00000004  E800000000        *    call _funct
 00000009  B805000000            	mov eax,5
 0000000E                        	ret
 0000000E  C9                *   leave
@@ -78,6 +83,7 @@ Procedures, parameters and locals:
 
                 N a m e                 Type     Value    Segment  Length
 
+_funct . . . . . . . . . . . . .        P Near64 00000000 No Seg   00000000 External  STDCALL
 _main  . . . . . . . . . . . . .        P Near   00000000 _TEXT    00000010 Public   C
   _argc  . . . . . . . . . . . .        DWord             rbp + 0010
   _argv  . . . . . . . . . . . .        QWord             rbp + 0018
@@ -96,16 +102,15 @@ Symbols:
 @FileName  . . . . . . . . . . .        Text   TEST1
 @Interface . . . . . . . . . . .        Number             1h 
 @Model . . . . . . . . . . . . .        Number             7h 
-@Time  . . . . . . . . . . . . .        Text   14:46:50
+@Time  . . . . . . . . . . . . .        Text   15:10:13
 @Version . . . . . . . . . . . .        Text   800
 @code  . . . . . . . . . . . . .        Text   _TEXT
 @data  . . . . . . . . . . . . .        Text   FLAT
 @stack . . . . . . . . . . . . .        Text   FLAT
 __JWASM__  . . . . . . . . . . .        Number            D4h 
-_funct . . . . . . . . . . . . .        L Near64           0h External C
 _init  . . . . . . . . . . . . .        DWord             10h _BSS C
 _var1  . . . . . . . . . . . . .        Byte               Fh _BSS C
 _var2  . . . . . . . . . . . . .        Word               0h _DATA C
 _var6  . . . . . . . . . . . . .        Data               0h _BSS C
 
-test1.asm: 23 lines, 2 passes, 1 ms, 0 warnings, 0 errors
+test1.asm: 27 lines, 2 passes, 1 ms, 0 warnings, 0 errors
