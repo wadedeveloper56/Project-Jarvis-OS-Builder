@@ -112,7 +112,7 @@ void MasmCodeGenerator::handleIndividualFunctionStatements(ofstream& out, BaseSt
 			{
 				vector<Expression*>* parameters = exp->getData()->argumentList;
 				string functionName = exp->getLeft()->getData()->getToken3()->getSymbolName();
-				out << "\t" << "invoke _" << functionName << endl;
+				out << "\t" << "invoke _" << functionName << ", 77" << endl;
 			}
 		}
 		else if (node->getOp() == jump_statement)
@@ -305,9 +305,8 @@ void MasmCodeGenerator::handlePrototype(ofstream& out)
 	{
 		if (ptr->plist != nullptr)
 		{
-			auto name = ptr->name;
-			out << "_" << name << " PROTO STDCALL" << endl;
-			out << "externdef _" << name << " : PROC" << endl;
+			auto name = "_" + ptr->name;
+			out << "EXTERN " << name << " :PROTO :DWORD;" << endl;
 		}
 	}
 }

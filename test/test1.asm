@@ -2,8 +2,7 @@
 .model flat, c;
 option casemap : none
 
-_funct PROTO STDCALL
-externdef _funct : PROC
+EXTERN _funct :PROTO :DWORD;
 
 Data STRUCT
 	var3 SBYTE ?
@@ -20,7 +19,7 @@ _init SDWORD  ?
 
 .code
 _main PROC C, _argc:SDWORD , _argv:QWORD 
-	invoke _funct
+	invoke _funct, 77
 	mov eax,5
 	ret
 _main endp
