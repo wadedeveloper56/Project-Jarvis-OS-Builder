@@ -305,8 +305,68 @@ void MasmCodeGenerator::handlePrototype(ofstream& out)
 	{
 		if (ptr->plist != nullptr)
 		{
+			vector<string> paramList;
+			for (ParameterDeclaration *node : *ptr->plist->getVectorParameterDeclaration())
+			{
+				DeclarationSpecifiers *temp1 = node->getDeclarationSpecifiers();
+				Declarator *temp2 = node->getDeclarator();
+				vector<DeclarationSpecifiersNode*>* temp3 = temp1->getDeclarationSpecifiersNodeList();
+
+				auto name = temp2->getDirectDeclarator()->getIdentifier()->getSymbolName();
+				bool isUnsigned = false;
+				TokenType type = UNKNOWN;
+				bool isPointer = temp2->hasPointer();
+
+				for (DeclarationSpecifiersNode* node2 : *temp3)
+				{
+					TokenType temp = node2->typeSpecifier->getType().value();
+					if (temp == CHAR || temp == BOOL) type = temp;
+					else if (temp == SHORT) type = temp;
+					else if (temp == INT) type = temp;
+					else if (temp == LONG) type = temp;
+					else if (temp == LONG_LONG) type = temp;
+					else if (temp == FLOAT) type = temp;
+					else if (temp == DOUBLE) type = temp;
+					else if (temp == LONG_DOUBLE)  type = temp;
+					else if (temp == UNSIGNED)
+					{
+						isUnsigned = true; 
+						//type =temp;
+					}
+				}
+				if (type != UNKNOWN)
+				{
+					string asmType = "";
+					if (isPointer)
+					{
+						if (bit16) asmType = " WORD ";
+						else if (bit32) asmType = " DWORD ";
+						else asmType = " QWORD ";
+					}
+					else if (!isUnsigned && type == CHAR) asmType = " SBYTE ";
+					else if (!isUnsigned && type == BOOL) asmType = " SBYTE ";
+					else if (!isUnsigned && type == SHORT) asmType = " SWORD ";
+					else if (!isUnsigned && type == INT) asmType = " SDWORD ";
+					else if (!isUnsigned && type == LONG) asmType = " SDWORD ";
+					else if (!isUnsigned && type == FLOAT) asmType = " SDWORD ";
+					else if (!isUnsigned && type == LONG_LONG) asmType = " SQWORD ";
+					else if (!isUnsigned && type == DOUBLE) asmType = " SQWORD ";
+					else if (!isUnsigned && type == LONG_DOUBLE) asmType = " TBYTE ";
+					else if (isUnsigned && type == CHAR) asmType = " BYTE ";
+					else if (isUnsigned && type == BOOL) asmType = " BYTE ";
+					else if (isUnsigned && type == SHORT) asmType = " WORD ";
+					else if (isUnsigned && type == INT) asmType = " DWORD ";
+					else if (isUnsigned && type == LONG) asmType = " DWORD ";
+					else if (isUnsigned && type == FLOAT) asmType = " DWORD ";
+					else if (isUnsigned && type == LONG_LONG) asmType = " QWORD ";
+					else if (isUnsigned && type == DOUBLE) asmType = " QWORD ";
+					else if (isUnsigned && type == LONG_DOUBLE) asmType = " TBYTE ";
+					paramList.push_back(name + ":" + asmType);
+				}
+			}
 			auto name = "_" + ptr->name;
-			out << "EXTERN " << name << " :PROTO :DWORD;" << endl;
+			string paramListStr = vectorToCommaSeparatedList(paramList);
+			out << "EXTERN " << name << " :PROTO " << paramListStr << ";" << endl;
 		}
 	}
 }

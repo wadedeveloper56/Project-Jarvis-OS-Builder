@@ -9,7 +9,7 @@ test1.asm
                             *   assume cs:flat,ds:flat,ss:flat,es:flat,fs:ERROR,gs:ERROR
                                 option casemap : none
 
-                                EXTERN _funct :PROTO :DWORD;
+                                EXTERN _funct :PROTO value: DWORD ;
 
 00000000                        Data STRUCT
 00000000                        	var3 SBYTE ?
@@ -103,7 +103,7 @@ Symbols:
 @FileName  . . . . . . . . . . .        Text   TEST1
 @Interface . . . . . . . . . . .        Number             1h 
 @Model . . . . . . . . . . . . .        Number             7h 
-@Time  . . . . . . . . . . . . .        Text   08:26:33
+@Time  . . . . . . . . . . . . .        Text   09:45:07
 @Version . . . . . . . . . . . .        Text   800
 @code  . . . . . . . . . . . . .        Text   _TEXT
 @data  . . . . . . . . . . . . .        Text   FLAT

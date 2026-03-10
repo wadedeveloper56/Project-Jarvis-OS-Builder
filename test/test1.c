@@ -1,4 +1,4 @@
-void funct(int value);
+void funct(unsigned int value);
 
 struct Data
 {

@@ -2,7 +2,7 @@
 .model flat, c;
 option casemap : none
 
-EXTERN _funct :PROTO :DWORD;
+EXTERN _funct :PROTO value: DWORD ;
 
 Data STRUCT
 	var3 SBYTE ?

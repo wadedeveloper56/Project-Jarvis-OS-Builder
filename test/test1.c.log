@@ -1,6 +1,6 @@
 Compiler (x86/x64) v1.0 (C) Copyright 2025-2026 Christopher D. Wade.
 All Rights Reserved
-void funct ( int value ) ;
+void funct ( unsigned int value ) ;
 
 struct Data
 {
@@ -25,10 +25,13 @@ Scanner: identifier [funct]
 type_specifier REDUCE to declaration_specifiers
 IDENTIFIER REDUCE to direct_declarator
 Scanner: token [(]
+Scanner: token [unsigned]
+UNIGNED REDUCE to type_specifier
 Scanner: token [int]
 INT REDUCE to type_specifier
 Scanner: identifier [value]
 type_specifier REDUCE to declaration_specifiers
+type_specifier declaration_specifiers REDUCE to declaration_specifiers
 IDENTIFIER REDUCE to direct_declarator
 Scanner: token [)]
 direct_declarator REDUCE to declarator
