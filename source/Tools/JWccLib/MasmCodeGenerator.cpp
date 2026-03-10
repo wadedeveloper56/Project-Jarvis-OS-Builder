@@ -151,16 +151,8 @@ void MasmCodeGenerator::handleIndividualFunction(ofstream& out, FunctionData* pt
 	out << "_" << ptr->name << " endp" << endl;
 }
 
-void MasmCodeGenerator::outputVariable(ofstream& out, _VariableData* ptr)
+string MasmCodeGenerator::convertToAsmType(bool isUnsigned, bool isPointer, TokenType type)
 {
-	auto type = ptr->type;
-	auto variableName = "_" + ptr->name;
-	bool isInitialized = ptr->initializer != nullptr;
-	bool isPointer = ptr->pointer;
-	bool isArray = ptr->arraySize > 1;
-	bool isStruct = type == STRUCT || type == UNION;
-	bool isUnsigned = ptr->unsign == true;
-
 	string asmType = "";
 	if (isPointer)
 	{
@@ -186,6 +178,20 @@ void MasmCodeGenerator::outputVariable(ofstream& out, _VariableData* ptr)
 	else if (isUnsigned && type == LONG_LONG) asmType = " QWORD ";
 	else if (isUnsigned && type == DOUBLE) asmType = " QWORD ";
 	else if (isUnsigned && type == LONG_DOUBLE) asmType = " TBYTE ";
+	return asmType;
+}
+
+void MasmCodeGenerator::outputVariable(ofstream& out, _VariableData* ptr)
+{
+	auto type = ptr->type;
+	auto variableName = "_" + ptr->name;
+	bool isInitialized = ptr->initializer != nullptr;
+	bool isPointer = ptr->pointer;
+	bool isArray = ptr->arraySize > 1;
+	bool isStruct = type == STRUCT || type == UNION;
+	bool isUnsigned = ptr->unsign == true;
+
+	string asmType = convertToAsmType(isUnsigned, isPointer, type);
 
 	if (!isInitialized)
 	{
@@ -328,39 +334,11 @@ void MasmCodeGenerator::handlePrototype(ofstream& out)
 					else if (temp == FLOAT) type = temp;
 					else if (temp == DOUBLE) type = temp;
 					else if (temp == LONG_DOUBLE)  type = temp;
-					else if (temp == UNSIGNED)
-					{
-						isUnsigned = true; 
-						//type =temp;
-					}
+					else if (temp == UNSIGNED) isUnsigned = true; 
 				}
 				if (type != UNKNOWN)
 				{
-					string asmType = "";
-					if (isPointer)
-					{
-						if (bit16) asmType = " WORD ";
-						else if (bit32) asmType = " DWORD ";
-						else asmType = " QWORD ";
-					}
-					else if (!isUnsigned && type == CHAR) asmType = " SBYTE ";
-					else if (!isUnsigned && type == BOOL) asmType = " SBYTE ";
-					else if (!isUnsigned && type == SHORT) asmType = " SWORD ";
-					else if (!isUnsigned && type == INT) asmType = " SDWORD ";
-					else if (!isUnsigned && type == LONG) asmType = " SDWORD ";
-					else if (!isUnsigned && type == FLOAT) asmType = " SDWORD ";
-					else if (!isUnsigned && type == LONG_LONG) asmType = " SQWORD ";
-					else if (!isUnsigned && type == DOUBLE) asmType = " SQWORD ";
-					else if (!isUnsigned && type == LONG_DOUBLE) asmType = " TBYTE ";
-					else if (isUnsigned && type == CHAR) asmType = " BYTE ";
-					else if (isUnsigned && type == BOOL) asmType = " BYTE ";
-					else if (isUnsigned && type == SHORT) asmType = " WORD ";
-					else if (isUnsigned && type == INT) asmType = " DWORD ";
-					else if (isUnsigned && type == LONG) asmType = " DWORD ";
-					else if (isUnsigned && type == FLOAT) asmType = " DWORD ";
-					else if (isUnsigned && type == LONG_LONG) asmType = " QWORD ";
-					else if (isUnsigned && type == DOUBLE) asmType = " QWORD ";
-					else if (isUnsigned && type == LONG_DOUBLE) asmType = " TBYTE ";
+					string asmType = convertToAsmType(isUnsigned, isPointer, type);
 					paramList.push_back(name + ":" + asmType);
 				}
 			}

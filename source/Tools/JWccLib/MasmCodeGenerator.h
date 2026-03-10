@@ -38,6 +38,7 @@ namespace WadeSpace
 		string vectorToCommaSeparatedList(const vector<string>& vec);
 		string getAsmType(TokenType type, bool isPointer, bool isUnsigned);
 		void handlePrototype(ofstream& out);
+		string convertToAsmType(bool isUnsigned, bool isPointer, TokenType type);
 	};
 }
 
