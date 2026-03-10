@@ -1,14 +1,14 @@
 PEDUMP - Win32/Win64 COFF EXE/OBJ/LIB file dumper v1.0 (C) Copyright 2025-2026 Christopher D. Wade.
 All Rights Reserved
 Dump of file test1.obj
-File Size 358 bytes
-File Type: 64-bit COFF OBJECT
+File Size 356 bytes
+File Type: 32-bit COFF OBJECT
 
 FILE HEADER VALUES
-              8664 Machine (x64)
+               14C Machine (Intel 386 or later processors and compatible processors)
                  3 (3) Number of Sections
-          69B02E73 TimeDateStamp ->  n/a
-                AE PointerToSymbolTable
+          69B05C81 TimeDateStamp ->  n/a
+                AC PointerToSymbolTable
                  A (10) NumberOfSymbols
                  0 (0) SizeOfOptionalHeader
                  0 Flags
@@ -18,24 +18,24 @@ SECTION HEADER #0 (0)
    .text name
        0 physical address
        0 virtual address
-      16 (22) size of raw data
-      8C file pointer to raw data (0000008C to 000000A1)
-      A2 file pointer to relocation table
+      14 (20) size of raw data
+      8C file pointer to raw data (0000008C to 0000009F)
+      A0 file pointer to relocation table
        0 file pointer to line numbers
        1 number of relocations
        0 number of line numbers
-60500020 flags
+60300020 flags
          Code
          1_BYTE_ALIGN
-         8_BYTE_ALIGN
+         2_BYTE_ALIGN
          Executable
          Readable
 
 RAW DATA #0 (0)
-00000000  55 48 8b ec 6a 4d e8 00  00 00 00 48 83 c4 08 b8  UH..jM.....H....
-00000010  05 00 00 00 c9 c3                                 ......
+00000000  55 8b ec 6a 4d e8 00 00  00 00 83 c4 04 b8 05 00  U..jM...........
+00000010  00 00 c9 c3                                       ....
 SECTION HEADER #0 (0) RELOCATIONS
-  Address: 00000007  SymIndex: 00000008  Type: ???_4
+  Address: 00000006  SymIndex: 00000008  Type: REL32
 
 
 SECTION HEADER #1 (1)
@@ -43,15 +43,15 @@ SECTION HEADER #1 (1)
        0 physical address
        0 virtual address
        2 (2) size of raw data
-      AC file pointer to raw data (000000AC to 000000AD)
+      AA file pointer to raw data (000000AA to 000000AB)
        0 file pointer to relocation table
        0 file pointer to line numbers
        0 number of relocations
        0 number of line numbers
-C0500040 flags
+C0300040 flags
          Initialized Data
          1_BYTE_ALIGN
-         8_BYTE_ALIGN
+         2_BYTE_ALIGN
          Readable
          Writeable
 
@@ -69,10 +69,10 @@ SECTION HEADER #2 (2)
        0 file pointer to line numbers
        0 number of relocations
        0 number of line numbers
-C0500080 flags
+C0300080 flags
          Unnitialized Data
          1_BYTE_ALIGN
-         8_BYTE_ALIGN
+         2_BYTE_ALIGN
          Readable
          Writeable
 
@@ -84,7 +84,7 @@ Indx Sectn   Value   Type  Storage Name
 0000 DEBUG 00000000  0000 FILE     .file
      * test1.asm
 0002     1 00000000  0000 STATIC   .text
-     * Section: 0000  Len: 00016  Relocs: 0001  LineNums: 0000 checksum:00000000
+     * Section: 0000  Len: 00014  Relocs: 0001  LineNums: 0000 checksum:00000000
 0004     2 00000000  0000 STATIC   .data
      * Section: 0000  Len: 00002  Relocs: 0000  LineNums: 0000 checksum:00000000
 0006     3 00000000  0000 STATIC   .bss

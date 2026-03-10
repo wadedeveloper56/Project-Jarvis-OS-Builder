@@ -1,4 +1,4 @@
-.x64p
+.386
 .model flat, c;
 option casemap : none
 
@@ -18,7 +18,7 @@ _var1 SBYTE  ?
 _init SDWORD  ?
 
 .code
-_main PROC C, _argc:SDWORD , _argv:QWORD 
+_main PROC C, _argc:SDWORD , _argv:DWORD 
 	invoke _funct, 77
 	mov eax,5
 	ret
