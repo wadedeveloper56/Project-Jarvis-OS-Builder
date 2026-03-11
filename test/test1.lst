@@ -1,10 +1,10 @@
 JWasm v2.12pre, Mar 11 2026
 test1.asm
-                                .x64p
+                                .386
                                 .model flat, c;
-00000000                    *   _TEXT segment PARA FLAT PUBLIC 'CODE'
+00000000                    *   _TEXT segment DWORD FLAT PUBLIC 'CODE'
                             *   _TEXT ends
-00000000                    *   _DATA segment PARA FLAT PUBLIC 'DATA'
+00000000                    *   _DATA segment DWORD FLAT PUBLIC 'DATA'
                             *   _DATA ends
                             *   assume cs:flat,ds:flat,ss:flat,es:flat,fs:ERROR,gs:ERROR
                                 option casemap : none
@@ -18,7 +18,7 @@ test1.asm
 00000000  0600                  _var2 SWORD 6
 00000000                        .data?
 00000002                    *   _DATA ends
-00000000                    *   _BSS segment PARA FLAT PUBLIC 'BSS'
+00000000                    *   _BSS segment DWORD FLAT PUBLIC 'BSS'
                             *   assume cs:ERROR
 00000000  00                    _var1 SBYTE  ?
 00000001  00000000              _var3 SDWORD  ?
@@ -27,36 +27,36 @@ test1.asm
 00000005                    *   _BSS ends
 00000000                    *   _TEXT segment
                             *   assume cs:FLAT
-                                _main PROTO C _argc:SDWORD , _argv:QWORD ;
+                                _main PROTO C _argc:SDWORD , _argv:DWORD ;
                                 _priceless PROTO C _value:SDWORD ;
 
-00000000                        _main PROC C, _argc:SDWORD , _argv:QWORD 
-00000000  55                *   push rbp
-00000001  488BEC            *   mov rbp, rsp
-00000004                        	invoke _funct, 77
-00000004  6A4D              *    push 77
-00000006  E800000000        *    call _funct
-0000000B  4883C408          *    add rsp, 8
-0000000F                        	invoke _priceless, 88
-0000000F  6A58              *    push 88
-00000011  E80B000000        *    call _priceless
-00000016  4883C408          *    add rsp, 8
-0000001A  B805000000            	mov eax,5
-0000001F                        	ret
-0000001F  C9                *   leave
-00000020  C3                *   retn 
-00000021                        _main endp
+00000000                        _main PROC C, _argc:SDWORD , _argv:DWORD 
+00000000  55                *   push ebp
+00000001  8BEC              *   mov ebp, esp
+00000003                        	invoke _funct, 77
+00000003  6A4D              *    push 77
+00000005  E800000000        *    call _funct
+0000000A  83C404            *    add esp, 4
+0000000D                        	invoke _priceless, 88
+0000000D  6A58              *    push 88
+0000000F  E80A000000        *    call _priceless
+00000014  83C404            *    add esp, 4
+00000017  B805000000            	mov eax,5
+0000001C                        	ret
+0000001C  C9                *   leave
+0000001D  C3                *   retn 
+0000001E                        _main endp
 
-00000021                        _priceless PROC C, _value:SDWORD 
-00000021  55                *   push rbp
-00000022  488BEC            *   mov rbp, rsp
-00000025  B863000000            	mov eax,99
-0000002A                        	ret
-0000002A  C9                *   leave
-0000002B  C3                *   retn 
-0000002C                        _priceless endp
+0000001E                        _priceless PROC C, _value:SDWORD 
+0000001E  55                *   push ebp
+0000001F  8BEC              *   mov ebp, esp
+00000021  B863000000            	mov eax,99
+00000026                        	ret
+00000026  C9                *   leave
+00000027  C3                *   retn 
+00000028                        _priceless endp
                                 end
-0000002C                    *   _TEXT ends
+00000028                    *   _TEXT ends
 
 
 Macros:
@@ -75,21 +75,21 @@ Segments and Groups:
                 N a m e                 Size     Length   Align   Combine Class
 
 FLAT . . . . . . . . . . . . . .        GROUP
-_BSS . . . . . . . . . . . . . .        64 Bit   00000005 Para    Public  'BSS'
-_DATA  . . . . . . . . . . . . .        64 Bit   00000002 Para    Public  'DATA'
-_TEXT  . . . . . . . . . . . . .        64 Bit   0000002C Para    Public  'CODE'
+_BSS . . . . . . . . . . . . . .        32 Bit   00000005 DWord   Public  'BSS'
+_DATA  . . . . . . . . . . . . .        32 Bit   00000002 DWord   Public  'DATA'
+_TEXT  . . . . . . . . . . . . .        32 Bit   00000028 DWord   Public  'CODE'
 
 
 Procedures, parameters and locals:
 
                 N a m e                 Type     Value    Segment  Length
 
-_funct . . . . . . . . . . . . .        P Near64 00000000 No Seg   00000000 External  C
-_main  . . . . . . . . . . . . .        P Near   00000000 _TEXT    00000021 Public   C
-  _argc  . . . . . . . . . . . .        DWord             rbp + 0010
-  _argv  . . . . . . . . . . . .        QWord             rbp + 0018
-_priceless . . . . . . . . . . .        P Near   00000021 _TEXT    0000000B Public   C
-  _value . . . . . . . . . . . .        DWord             rbp + 0010
+_funct . . . . . . . . . . . . .        P Near32 00000000 No Seg   00000000 External  C
+_main  . . . . . . . . . . . . .        P Near   00000000 _TEXT    0000001E Public   C
+  _argc  . . . . . . . . . . . .        DWord             ebp + 0008
+  _argv  . . . . . . . . . . . .        DWord             ebp + 000C
+_priceless . . . . . . . . . . .        P Near   0000001E _TEXT    0000000A Public   C
+  _value . . . . . . . . . . . .        DWord             ebp + 0008
 
 
 Symbols:
@@ -97,7 +97,7 @@ Symbols:
                 N a m e                 Type       Value     Attr
 
 @CodeSize  . . . . . . . . . . .        Number             0h 
-@Cpu . . . . . . . . . . . . . .        Number           DDFh 
+@Cpu . . . . . . . . . . . . . .        Number           D0Fh 
 @CurSeg  . . . . . . . . . . . .        Text   
 @DataSize  . . . . . . . . . . .        Number             0h 
 @Date  . . . . . . . . . . . . .        Text   03/11/26
@@ -105,7 +105,7 @@ Symbols:
 @FileName  . . . . . . . . . . .        Text   TEST1
 @Interface . . . . . . . . . . .        Number             1h 
 @Model . . . . . . . . . . . . .        Number             7h 
-@Time  . . . . . . . . . . . . .        Text   09:59:37
+@Time  . . . . . . . . . . . . .        Text   17:43:39
 @Version . . . . . . . . . . . .        Text   800
 @code  . . . . . . . . . . . . .        Text   _TEXT
 @data  . . . . . . . . . . . . .        Text   FLAT

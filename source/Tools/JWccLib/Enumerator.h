@@ -10,12 +10,12 @@ using namespace std;
 
 namespace WadeSpace
 {
-	class Expression;
+	class ExpressionTree;
 
 	class Enumerator
 	{
 	public:
-		Enumerator(TokenPtr identifier, Expression* constantExpression);
+		Enumerator(TokenPtr identifier, ExpressionTree* constantExpression);
 		Enumerator();
 		virtual ~Enumerator();
 
@@ -25,13 +25,13 @@ namespace WadeSpace
 		Enumerator& operator=(Enumerator&& other) noexcept;
 	
 		[[nodiscard]] TokenPtr getIdentifier() const;
-		[[nodiscard]] Expression* getConstantExpression() const;
+		[[nodiscard]] ExpressionTree* getConstantExpression() const;
 
 		[[nodiscard]] bool hasIdentifier() const { return identifier != nullptr; }
 		[[nodiscard]] bool hasConstantExpression() const { return constantExpression != nullptr; }
 
 	private:
 		TokenPtr identifier;
-		Expression* constantExpression;
+		ExpressionTree* constantExpression;
 	};
 }

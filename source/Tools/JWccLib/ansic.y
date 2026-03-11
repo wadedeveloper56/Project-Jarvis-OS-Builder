@@ -44,7 +44,7 @@
     #include "FunctionDefinition.h"
     #include "ExternalDeclaration.h"
     #include "ProgramData.h"
-    #include "Expression.h"
+    #include "ExpressionTree.h"
     #include "debug.h"
     #include "Token.h"
 
@@ -184,25 +184,25 @@
 %token <TokenPtr> MOD_OP "%"
 
 %type<Constant *> constant
-%type<vector<Expression *> *> argument_expression_list
-%type<Expression *> primary_expression
-%type<Expression *> expression
-%type<Expression *> postfix_expression
-%type<Expression *> unary_expression
-%type<Expression *> cast_expression
-%type<Expression *> multiplicative_expression
-%type<Expression *> additive_expression
-%type<Expression *> shift_expression
-%type<Expression *> relational_expression
-%type<Expression *> equality_expression
-%type<Expression *> and_expression
-%type<Expression *> exclusive_or_expression
-%type<Expression *> inclusive_or_expression
-%type<Expression *> logical_and_expression
-%type<Expression *> logical_or_expression
-%type<Expression *> conditional_expression
-%type<Expression *> assignment_expression
-%type<Expression *> constant_expression
+%type<vector<ExpressionTree *> *> argument_expression_list
+%type<ExpressionTree *> primary_expression
+%type<ExpressionTree *> expression
+%type<ExpressionTree *> postfix_expression
+%type<ExpressionTree *> unary_expression
+%type<ExpressionTree *> cast_expression
+%type<ExpressionTree *> multiplicative_expression
+%type<ExpressionTree *> additive_expression
+%type<ExpressionTree *> shift_expression
+%type<ExpressionTree *> relational_expression
+%type<ExpressionTree *> equality_expression
+%type<ExpressionTree *> and_expression
+%type<ExpressionTree *> exclusive_or_expression
+%type<ExpressionTree *> inclusive_or_expression
+%type<ExpressionTree *> logical_and_expression
+%type<ExpressionTree *> logical_or_expression
+%type<ExpressionTree *> conditional_expression
+%type<ExpressionTree *> assignment_expression
+%type<ExpressionTree *> constant_expression
 %type<TokenPtr> unary_operator
 %type<TokenPtr> assignment_operator
 %type<StorageClassSpecifier *> storage_class_specifier

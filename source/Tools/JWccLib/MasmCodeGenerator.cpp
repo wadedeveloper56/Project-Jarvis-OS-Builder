@@ -6,7 +6,7 @@
 #include "MasmCodeGenerator.h"
 #include "GlobalVars.h"
 #include "Initializer.h"
-#include "Expression.h"
+#include "ExpressionTree.h"
 
 using namespace WadeSpace;
 using namespace std;
@@ -106,14 +106,14 @@ void MasmCodeGenerator::handleIndividualFunctionStatements(ofstream& out, BaseSt
 		if (node->getOp() == expression_statement)
 		{
 			BaseStatement* base_statement = node->getStatement();
-			Expression* exp = base_statement->getExp();
+			ExpressionTree* exp = base_statement->getExp();
 			NodeType nt = exp->getData()->getType();
 			if (nt == NT_FUNCTION_CALL)
 			{
-				vector<Expression*>* parameters = exp->getData()->argumentList;
+				vector<ExpressionTree*>* parameters = exp->getData()->getArgumentList();
 				string functionName = exp->getLeft()->getData()->getToken3()->getSymbolName();
 				vector<string> list;
-				for (Expression* node2 : *parameters)
+				for (ExpressionTree* node2 : *parameters)
 				{
 					string str = to_string(node2->getData()->getConstant()->getIConst()->getIntegerConst());
 					list.push_back(str);

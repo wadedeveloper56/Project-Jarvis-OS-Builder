@@ -13,16 +13,16 @@ namespace WadeSpace
 	class AbstractDeclarator;
 	class ConstantExpression;
 	class ParameterTypeList;
-	class Expression;
+	class ExpressionTree;
 
 	typedef struct DirectAbstractDeclaratorNode
 	{
 		ParameterTypeList* parameterTypeList;
-		Expression* constantExpression;
+		ExpressionTree* constantExpression;
 		optional<TokenType> type;
 
 		DirectAbstractDeclaratorNode();
-		DirectAbstractDeclaratorNode(ParameterTypeList* const parameterTypeList, Expression* const constantExpression, optional<TokenType> type);
+		DirectAbstractDeclaratorNode(ParameterTypeList* const parameterTypeList, ExpressionTree* const constantExpression, optional<TokenType> type);
 		~DirectAbstractDeclaratorNode();
 	}* DirectAbstractDeclaratorNodePtr;
 

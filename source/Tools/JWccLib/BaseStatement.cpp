@@ -1,11 +1,11 @@
 #include "pch.h"
 #include "BaseStatement.h"
-#include "Expression.h"
+#include "ExpressionTree.h"
 
 using namespace WadeSpace;
 using namespace std;
 
-BaseStatement::BaseStatement(TokenType op, TokenPtr identifier, Expression* const exp, Expression* const contExp,
+BaseStatement::BaseStatement(TokenType op, TokenPtr identifier, ExpressionTree* const exp, ExpressionTree* const contExp,
                              BaseStatement* const statement, BaseStatement* const es1, BaseStatement* const es2,
                              BaseStatement* const statement2, vector<BaseStatement*>* const statementList,
                              vector<Declaration*>* const declarationList)
@@ -31,7 +31,7 @@ BaseStatement::BaseStatement(TokenPtr identifier, BaseStatement* statement) : op
 {
 }
 
-BaseStatement::BaseStatement(TokenType op, Expression* exp, BaseStatement* statement) : op(op), identifier(nullptr),
+BaseStatement::BaseStatement(TokenType op, ExpressionTree* exp, BaseStatement* statement) : op(op), identifier(nullptr),
 	contExp(exp), exp(nullptr), statement(statement), es1(nullptr), es2(nullptr), statement2(nullptr),
 	statementList(nullptr), declarationList(nullptr)
 {
@@ -66,7 +66,7 @@ BaseStatement::BaseStatement(vector<BaseStatement*>* statementList, vector<Decla
 {
 }
 
-BaseStatement::BaseStatement(TokenType op, BaseStatement* es1, BaseStatement* es2, Expression* exp,
+BaseStatement::BaseStatement(TokenType op, BaseStatement* es1, BaseStatement* es2, ExpressionTree* exp,
                              BaseStatement* statement) : op(op), identifier(nullptr), contExp(nullptr), exp(exp),
                                                          statement(statement), es1(es1), es2(es2), statement2(nullptr),
                                                          statementList(nullptr), declarationList(nullptr)
@@ -79,13 +79,13 @@ BaseStatement::BaseStatement(TokenType op, BaseStatement* es1, BaseStatement* es
 {
 }
 
-BaseStatement::BaseStatement(TokenType op, Expression* exp, BaseStatement* ifStatement, BaseStatement* elseStatement) :
+BaseStatement::BaseStatement(TokenType op, ExpressionTree* exp, BaseStatement* ifStatement, BaseStatement* elseStatement) :
 	op(op), identifier(nullptr), contExp(nullptr), exp(exp), statement(ifStatement), es1(nullptr), es2(nullptr),
 	statement2(elseStatement), statementList(nullptr), declarationList(nullptr)
 {
 }
 
-BaseStatement::BaseStatement(TokenType op, Expression* exp) : op(op), identifier(nullptr), contExp(nullptr), exp(exp),
+BaseStatement::BaseStatement(TokenType op, ExpressionTree* exp) : op(op), identifier(nullptr), contExp(nullptr), exp(exp),
                                                               statement(nullptr), es1(nullptr), es2(nullptr),
                                                               statement2(nullptr), statementList(nullptr),
                                                               declarationList(nullptr)
@@ -140,12 +140,12 @@ TokenPtr BaseStatement::getIdentifier() const
 	return identifier;
 }
 
-Expression* BaseStatement::getExp() const
+ExpressionTree* BaseStatement::getExp() const
 {
 	return exp;
 }
 
-Expression* BaseStatement::getContExp() const
+ExpressionTree* BaseStatement::getContExp() const
 {
 	return contExp;
 }
@@ -183,8 +183,8 @@ vector<Declaration*>* BaseStatement::getDeclarationList() const
 BaseStatement::BaseStatement(const BaseStatement& other)
 {
 	identifier = other.identifier ? new Token(*other.identifier) : nullptr;
-	exp = other.exp ? new Expression(*other.exp) : nullptr;
-	contExp = other.contExp ? new Expression(*other.contExp) : nullptr;
+	exp = other.exp ? new ExpressionTree(*other.exp) : nullptr;
+	contExp = other.contExp ? new ExpressionTree(*other.contExp) : nullptr;
 	statement = other.statement ? new BaseStatement(*other.statement) : nullptr;
 	es1 = other.es1 ? new BaseStatement(*other.es1) : nullptr;
 	es2 = other.es2 ? new BaseStatement(*other.es2) : nullptr;
@@ -196,8 +196,8 @@ BaseStatement::BaseStatement(const BaseStatement& other)
 BaseStatement::BaseStatement(BaseStatement&& other) noexcept
 {
 	identifier = other.identifier ? new Token(*other.identifier) : nullptr;
-	exp = other.exp ? new Expression(*other.exp) : nullptr;
-	contExp = other.contExp ? new Expression(*other.contExp) : nullptr;
+	exp = other.exp ? new ExpressionTree(*other.exp) : nullptr;
+	contExp = other.contExp ? new ExpressionTree(*other.contExp) : nullptr;
 	statement = other.statement ? new BaseStatement(*other.statement) : nullptr;
 	es1 = other.es1 ? new BaseStatement(*other.es1) : nullptr;
 	es2 = other.es2 ? new BaseStatement(*other.es2) : nullptr;
@@ -211,8 +211,8 @@ BaseStatement& BaseStatement::operator=(const BaseStatement& other)
 	if (this == &other)
 		return *this;
 	identifier = other.identifier ? new Token(*other.identifier) : nullptr;
-	exp = other.exp ? new Expression(*other.exp) : nullptr;
-	contExp = other.contExp ? new Expression(*other.contExp) : nullptr;
+	exp = other.exp ? new ExpressionTree(*other.exp) : nullptr;
+	contExp = other.contExp ? new ExpressionTree(*other.contExp) : nullptr;
 	statement = other.statement ? new BaseStatement(*other.statement) : nullptr;
 	es1 = other.es1 ? new BaseStatement(*other.es1) : nullptr;
 	es2 = other.es2 ? new BaseStatement(*other.es2) : nullptr;
@@ -227,8 +227,8 @@ BaseStatement& BaseStatement::operator=(BaseStatement&& other) noexcept
 	if (this == &other)
 		return *this;
 	identifier = other.identifier ? new Token(*other.identifier) : nullptr;
-	exp = other.exp ? new Expression(*other.exp) : nullptr;
-	contExp = other.contExp ? new Expression(*other.contExp) : nullptr;
+	exp = other.exp ? new ExpressionTree(*other.exp) : nullptr;
+	contExp = other.contExp ? new ExpressionTree(*other.contExp) : nullptr;
 	statement = other.statement ? new BaseStatement(*other.statement) : nullptr;
 	es1 = other.es1 ? new BaseStatement(*other.es1) : nullptr;
 	es2 = other.es2 ? new BaseStatement(*other.es2) : nullptr;

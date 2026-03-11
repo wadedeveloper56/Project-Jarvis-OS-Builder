@@ -7,7 +7,7 @@ using namespace std;
 
 namespace WadeSpace
 {
-	class Expression;
+	class ExpressionTree;
 
 	class JumpStatement : public BaseStatement
 	{
@@ -15,7 +15,7 @@ namespace WadeSpace
 		JumpStatement();       
 		JumpStatement(TokenType op);
 		JumpStatement(TokenType op, TokenPtr identifier);
-		JumpStatement(TokenType op, Expression* identifier);
+		JumpStatement(TokenType op, ExpressionTree* identifier);
 		virtual ~JumpStatement();
 
 		JumpStatement(const JumpStatement& other);

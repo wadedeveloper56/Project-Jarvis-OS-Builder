@@ -195,6 +195,7 @@
     <ClInclude Include="LabeledStatement.h" />
     <ClInclude Include="location.hh" />
     <ClInclude Include="MasmCodeGenerator.h" />
+    <ClInclude Include="NodeType.h" />
     <ClInclude Include="ParameterDeclaration.h" />
     <ClInclude Include="ParameterTypeList.h" />
     <ClInclude Include="parser.hpp" />

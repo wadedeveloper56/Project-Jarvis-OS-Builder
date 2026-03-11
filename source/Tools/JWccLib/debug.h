@@ -4,7 +4,7 @@
 #include "Declaration.h"
 #include "Constant.h"
 #include "Token.h"
-#include "Expression.h"
+#include "ExpressionTree.h"
 #include "Pointer.h"
 #include "Declaration.h"
 #include "DeclarationSpecifiers.h"
@@ -19,30 +19,30 @@ using namespace WadeSpace;
 
 Declaration *createDeclaration(DeclarationSpecifiers* declarationSpecifiers, vector<InitDeclarator*>* vectorInitDeclarator);
 vector<InitDeclarator*>* createInitDeclaratorList(InitDeclarator* value1, vector<InitDeclarator*>* list);
-vector<Expression*>* createArgumentExpressionList(Expression* exp, vector<Expression*>* list);
-Expression* createExpression(
+vector<ExpressionTree*>* createArgumentExpressionList(ExpressionTree* exp, vector<ExpressionTree*>* list);
+ExpressionTree* createExpression(
 	NodeType type,
 	TokenPtr token1,
 	TokenPtr token2,
-	Expression* lexp,
-	Expression* exp1,
-	Expression* exp2,
-	vector<Expression*>* argumentList,
+	ExpressionTree* lexp,
+	ExpressionTree* exp1,
+	ExpressionTree* exp2,
+	vector<ExpressionTree*>* argumentList,
 	TokenPtr identifier,
 	vector<Initializer*>* initializerList,
 	TypeName* typeName,
 	TokenPtr token3,
 	Constant* constant,
-
-	Expression* left,
+	ExpressionTree* left,
 	TokenPtr op,
-	Expression* right);
+	ExpressionTree* right
+);
 Constant* createConstant(const TokenPtr iConst, const TokenPtr fConst, const TokenPtr strConst, const optional<TokenType>& type);
 Declarator* createDeclarator(Pointer* pointer, DirectDeclarator* directDeclarator);
-DirectDeclarator* createDirectDeclarator(TokenPtr identifier, TokenPtr token1, TokenPtr token2, Declarator* const declarator, DirectDeclarator* const directDeclarator, Expression* const constantExpression, ParameterTypeList* const parameterTypeList, vector<TokenPtr>* const vectorOfStrings);
+DirectDeclarator* createDirectDeclarator(TokenPtr identifier, TokenPtr token1, TokenPtr token2, Declarator* const declarator, DirectDeclarator* const directDeclarator, ExpressionTree* const constantExpression, ParameterTypeList* const parameterTypeList, vector<TokenPtr>* const vectorOfStrings);
 DeclarationSpecifiers* createDeclarationSpecifiers(StorageClassSpecifier* const storageClassSpecifier, TypeSpecifier* const typeSpecifier, TypeQualifier* const typeQualifier, DeclarationSpecifiers* declarationSpecifiers);
 StorageClassSpecifier* createStorageClassSpecifier(const TokenPtr token);
-Expression* createPrimaryExpression(const TokenPtr identifier, Constant* constant);
+ExpressionTree* createPrimaryExpression(const TokenPtr identifier, Constant* constant);
 vector<Declaration*>* createDeclarationList(Declaration* exp, vector<Declaration*>* list);
 InitDeclarator* createInitDeclarator(Declarator* declarator, Initializer* initializer);
 vector<StructDeclaration*>* createStructDeclarationList(StructDeclaration* value1, vector<StructDeclaration*>* list);
@@ -55,7 +55,7 @@ DirectAbstractDeclarator* createDirectAbstractDeclarator(AbstractDeclarator* abs
 DirectAbstractDeclarator* createDirectAbstractDeclarator(DirectAbstractDeclarator* dad, 
                                                          AbstractDeclarator* abstractDeclarator, 
 	                                                     ParameterTypeList* parameterTypeList, 
-	                                                     Expression* constantExpression, 
+	                                                     ExpressionTree* constantExpression, 
 	                                                     TokenType type);
 vector<Initializer*>* createInitializerList(Initializer* initializer, vector<Initializer*>* list);
 vector<BaseStatement*>* createStatementList(BaseStatement* statement, vector<BaseStatement*>* list);

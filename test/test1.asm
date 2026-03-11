@@ -1,4 +1,4 @@
-.x64p
+.386
 .model flat, c;
 option casemap : none
 
@@ -12,10 +12,10 @@ _var1 SBYTE  ?
 _var3 SDWORD  ?
 
 .code
-_main PROTO C _argc:SDWORD , _argv:QWORD ;
+_main PROTO C _argc:SDWORD , _argv:DWORD ;
 _priceless PROTO C _value:SDWORD ;
 
-_main PROC C, _argc:SDWORD , _argv:QWORD 
+_main PROC C, _argc:SDWORD , _argv:DWORD 
 	invoke _funct, 77
 	invoke _priceless, 88
 	mov eax,5

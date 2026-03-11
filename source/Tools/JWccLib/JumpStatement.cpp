@@ -5,7 +5,7 @@
 using namespace WadeSpace;
 using namespace std;
 
-JumpStatement::JumpStatement(TokenType op, Expression* exp) : BaseStatement(op, exp)
+JumpStatement::JumpStatement(TokenType op, ExpressionTree* exp) : BaseStatement(op, exp)
 {
 }
 

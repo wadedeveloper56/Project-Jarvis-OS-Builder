@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "debug.h"
-#include "Expression.h"
+#include "ExpressionTree.h"
 #include "ProgramData.h"
 #include "GlobalVars.h"
 #include "StructOrUnionSpecifier.h"
@@ -121,21 +121,19 @@ DirectAbstractDeclarator* createDirectAbstractDeclarator(AbstractDeclarator* abs
 DirectAbstractDeclarator* createDirectAbstractDeclarator(DirectAbstractDeclarator* dad,
                                                          AbstractDeclarator* abstractDeclarator,
                                                          ParameterTypeList* parameterTypeList,
-                                                         Expression* constantExpression, TokenType type)
+                                                         ExpressionTree* constantExpression, TokenType type)
 {
 	if (dad != nullptr)
 	{
 		vector<DirectAbstractDeclaratorNode*>* list = dad->getList();
-		DirectAbstractDeclaratorNode* node = new DirectAbstractDeclaratorNode(
-			parameterTypeList, constantExpression, type);
+		DirectAbstractDeclaratorNode* node = new DirectAbstractDeclaratorNode(parameterTypeList, constantExpression, type);
 		list->push_back(node);
 		return new DirectAbstractDeclarator(dad->getAbstractDeclarator(), list);
 	}
 	else
 	{
 		vector<DirectAbstractDeclaratorNode*>* list = new vector<DirectAbstractDeclaratorNode*>();
-		DirectAbstractDeclaratorNode* node = new DirectAbstractDeclaratorNode(
-			parameterTypeList, constantExpression, type);
+		DirectAbstractDeclaratorNode* node = new DirectAbstractDeclaratorNode(parameterTypeList, constantExpression, type);
 		list->push_back(node);
 		return new DirectAbstractDeclarator(abstractDeclarator, list);
 	}
@@ -221,40 +219,40 @@ vector<InitDeclarator*>* createInitDeclaratorList(InitDeclarator* value1, vector
 	return list;
 }
 
-vector<Expression*>* createArgumentExpressionList(Expression* exp, vector<Expression*>* list)
+vector<ExpressionTree*>* createArgumentExpressionList(ExpressionTree* exp, vector<ExpressionTree*>* list)
 {
 	if (list == nullptr)
 	{
-		list = new vector<Expression*>();
+		list = new vector<ExpressionTree*>();
 	}
 	list->push_back(exp);
 	return list;
 }
 
-Expression* createExpression(
+ExpressionTree* createExpression(
 	NodeType type,
 	TokenPtr token1,
 	TokenPtr token2,
-	Expression* lexp,
-	Expression* exp1,
-	Expression* exp2,
-	vector<Expression*>* argumentList,
+	ExpressionTree* lexp,
+	ExpressionTree* exp1,
+	ExpressionTree* exp2,
+	vector<ExpressionTree*>* argumentList,
 	TokenPtr identifier,
 	vector<Initializer*>* initializerList,
 	TypeName* typeName,
 	TokenPtr token3,
 	Constant* constant,
-	Expression* left,
+	ExpressionTree* left,
 	TokenPtr op,
-	Expression* right
+	ExpressionTree* right
 	)
 {
-	return new Expression(new NodeData(type, token1, token2, lexp, exp1, exp2, argumentList, identifier,
-	                                   initializerList, typeName, token3, constant), left, op, right);
+	TreeNodeData* nodeData = new TreeNodeData(type, token1, token2, lexp, exp1, exp2, argumentList, identifier, initializerList, typeName, token3, constant, op);
+	TreeNode* node = new TreeNode(nodeData, left ? left->getTree() : nullptr, right ? right->getTree() : nullptr);
+	return new ExpressionTree(node);
 }
 
-Constant* createConstant(const TokenPtr iConst, const TokenPtr fConst, const TokenPtr strConst,
-                         const optional<TokenType>& type)
+Constant* createConstant(const TokenPtr iConst, const TokenPtr fConst, const TokenPtr strConst, const optional<TokenType>& type)
 {
 	return new Constant(iConst, fConst, strConst, type);
 }
@@ -266,12 +264,11 @@ Declarator* createDeclarator(Pointer* pointer, DirectDeclarator* directDeclarato
 
 DirectDeclarator* createDirectDeclarator(TokenPtr identifier, TokenPtr token1, TokenPtr token2,
                                          Declarator* const declarator, DirectDeclarator* const directDeclarator,
-                                         Expression* const constantExpression,
+                                         ExpressionTree* const constantExpression,
                                          ParameterTypeList* const parameterTypeList,
                                          vector<TokenPtr>* const vectorOfStrings)
 {
-	return new DirectDeclarator(identifier, token1, token2, declarator, directDeclarator, constantExpression,
-	                            parameterTypeList, vectorOfStrings);
+	return new DirectDeclarator(identifier, token1, token2, declarator, directDeclarator, constantExpression, parameterTypeList, vectorOfStrings);
 }
 
 DeclarationSpecifiers* createDeclarationSpecifiers(StorageClassSpecifier* const storageClassSpecifier,
@@ -298,7 +295,7 @@ StorageClassSpecifier* createStorageClassSpecifier(const TokenPtr token)
 	return new StorageClassSpecifier(token);
 }
 
-Expression* createPrimaryExpression(const TokenPtr identifier, Constant* constant)
+ExpressionTree* createPrimaryExpression(const TokenPtr identifier, Constant* constant)
 {
 	return createExpression(NT_NONE, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, identifier, constant, nullptr, nullptr, nullptr);
 }

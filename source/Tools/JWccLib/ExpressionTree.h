@@ -2,16 +2,12 @@
 
 #include "Token.h"
 #include "Constant.h"
+#include "NodeType.h"
 
 using namespace std;
 
 namespace WadeSpace
 {
-	typedef enum _NodeType
-	{
-		NT_NONE, NT_ARRAY, NT_FUNCTION_CALL, NT_VAR_ACCESS, NT_INC, NT_DEC, NT_TYPECAST, NT_SIZEOF, NT_UNARY, NT_OP, NT_QUESTION
-	} NodeType;
-
 	class ExpressionTree;
 	class AssignmentExpression;
 	class Initializer;
@@ -19,7 +15,6 @@ namespace WadeSpace
 
 	class TreeNodeData
 	{
-	public:
 		NodeType type;
 		TokenPtr token1;
 		TokenPtr token2;
@@ -32,6 +27,8 @@ namespace WadeSpace
 		TypeName* typeName;
 		TokenPtr token3;
 		Constant* constant;
+		TokenPtr op;
+	public:
 		TreeNodeData();
 		TreeNodeData(
 			const NodeType type,
@@ -45,20 +42,30 @@ namespace WadeSpace
 			vector<Initializer*>* initializerList,
 			TypeName* typeName,
 			TokenPtr token3,
-			Constant* constant
+			Constant* constant,
+			TokenPtr op
 		);
 		~TreeNodeData();
+		NodeType getType() const { return type; }
+		TokenPtr getToken1() const { return token1; }
+		TokenPtr getToken2() const { return token2; }
+		TokenPtr getToken3() const { return token3; }
+		vector<ExpressionTree*>* getArgumentList() const { return argumentList; }
+		Constant* getConstant() const { return constant; }
 	};
 
 	class TreeNode
 	{
-	public:
 		TreeNodeData* data;
 		TreeNode* left;
 		TreeNode* right;
+	public:
 		TreeNode();
 		TreeNode(TreeNodeData* data, TreeNode* left = nullptr, TreeNode* right = nullptr);
 		~TreeNode();
+		TreeNodeData* getData() const { return data; }
+		TreeNode* getLeft() const { return left; }
+		TreeNode* getRight() const { return right; }
 	};
 
 	class ExpressionTree
@@ -67,6 +74,12 @@ namespace WadeSpace
 		TreeNode* tree;
 	public:
 		ExpressionTree();
+		ExpressionTree(TreeNode* data);
 		~ExpressionTree();
+		TreeNode* getTree() const { return tree; }
+		void setTree(TreeNode* tree) { this->tree = tree; }
+		TreeNodeData* getData() const { return tree ? tree->getData() : nullptr; }
+		TreeNode* getLeft() const { return tree ? tree->getLeft() : nullptr; }
+		TreeNode* getRight() const { return tree ? tree->getRight() : nullptr; }
 	};
 }

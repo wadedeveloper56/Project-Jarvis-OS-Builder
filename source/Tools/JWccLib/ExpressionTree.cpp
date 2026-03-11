@@ -31,7 +31,8 @@ TreeNodeData::TreeNodeData(
     vector<Initializer*>* initializerList,
     TypeName* typeName,
     TokenPtr token3,
-    Constant* constant
+    Constant* constant,
+	TokenPtr op
 )
 {
     this->type = type;
@@ -46,6 +47,7 @@ TreeNodeData::TreeNodeData(
     this->typeName = typeName;
     this->token3 = token3;
     this->constant = constant;
+	this->op = op;
 }
 
 TreeNodeData::~TreeNodeData()
@@ -88,6 +90,12 @@ ExpressionTree::ExpressionTree()
 {
     stak = new stack<TreeNode*>();
 	tree = nullptr;
+}
+
+ExpressionTree::ExpressionTree(TreeNode* data)
+{
+    stak = new stack<TreeNode*>();
+    tree = data;
 }
 
 ExpressionTree::~ExpressionTree()

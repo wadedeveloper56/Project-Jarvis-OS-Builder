@@ -5,11 +5,11 @@
 using namespace WadeSpace;
 using namespace std;
  
-ExpressionStatement::ExpressionStatement(Expression* exp) : BaseStatement(NONE, exp)
+ExpressionStatement::ExpressionStatement(ExpressionTree* exp) : BaseStatement(NONE, exp)
 {
 }
 
-ExpressionStatement::ExpressionStatement():BaseStatement(NONE, (Expression*)nullptr)
+ExpressionStatement::ExpressionStatement():BaseStatement(NONE, (ExpressionTree*)nullptr)
 {
 }
 

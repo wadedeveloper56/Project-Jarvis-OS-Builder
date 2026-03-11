@@ -13,8 +13,8 @@ namespace WadeSpace
 	{
 	public:
 		SelectionStatement();
-		SelectionStatement(TokenType op, Expression* exp, BaseStatement* statement);
-		SelectionStatement(TokenType op, Expression* exp, BaseStatement* ifStatement, BaseStatement* elseStatement);
+		SelectionStatement(TokenType op, ExpressionTree* exp, BaseStatement* statement);
+		SelectionStatement(TokenType op, ExpressionTree* exp, BaseStatement* ifStatement, BaseStatement* elseStatement);
 		virtual ~SelectionStatement();
 
 		SelectionStatement(const SelectionStatement& other);
