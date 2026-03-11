@@ -4,13 +4,13 @@ using namespace std;
 
 namespace WadeSpace
 {
-	class Expression;
+	class ExpressionTree;
 
 	class Initializer
 	{
 	public:
 		Initializer();
-		Initializer(Expression* assignmentExpression);
+		Initializer(ExpressionTree* assignmentExpression);
 		Initializer(vector<Initializer*>* initializerList);
 		virtual ~Initializer();
 
@@ -19,14 +19,14 @@ namespace WadeSpace
 		Initializer& operator=(const Initializer& other);
 		Initializer& operator=(Initializer&& other) noexcept;
 
-		[[nodiscard]] Expression* getAssignmentExpression() const;
+		[[nodiscard]] ExpressionTree* getAssignmentExpression() const;
 		[[nodiscard]] vector<Initializer*>* getInitializerList() const;
 
 		[[nodiscard]] bool hasAssignmentExpression() const;
 		[[nodiscard]] bool hasInitializerList() const;
 
 	private:
-		Expression* assignmentExpression;
+		ExpressionTree* assignmentExpression;
 		vector<Initializer*>* initializerList;
 	};
 }

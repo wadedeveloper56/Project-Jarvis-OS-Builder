@@ -26,6 +26,7 @@
 #include <memory>
 #include <set>
 #include <unordered_map>
+#include <stack>
 
 #pragma warning(disable:4267)
 #pragma warning(disable:4244)

@@ -2,7 +2,7 @@
 #include "DirectAbstractDeclarator.h"
 #include "AbstractDeclarator.h"
 #include "ParameterTypeList.h"
-#include "Expression.h"
+#include "ExpressionTree.h"
 
 using namespace WadeSpace;
 
@@ -14,7 +14,7 @@ DirectAbstractDeclaratorNode::DirectAbstractDeclaratorNode()
 }
 
 DirectAbstractDeclaratorNode::DirectAbstractDeclaratorNode(ParameterTypeList* const parameterTypeList,
-                                                           Expression* const constantExpression,
+                                                           ExpressionTree* const constantExpression,
                                                            optional<TokenType> type)
 	: parameterTypeList(parameterTypeList),
 	  constantExpression(constantExpression),

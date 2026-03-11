@@ -4,15 +4,15 @@
 
 namespace WadeSpace
 {
-	class Expression;
+	class ExpressionTree;
 
 	class StructDeclarator
 	{
 	public:
 		StructDeclarator();
 		StructDeclarator(Declarator* declarator);
-		StructDeclarator(Expression* constantExpression);
-		StructDeclarator(Declarator* declarator, Expression* constantExpression);
+		StructDeclarator(ExpressionTree* constantExpression);
+		StructDeclarator(Declarator* declarator, ExpressionTree* constantExpression);
 		virtual ~StructDeclarator();
 
 		StructDeclarator(const StructDeclarator& other);
@@ -21,13 +21,13 @@ namespace WadeSpace
 		StructDeclarator& operator=(StructDeclarator&& other) noexcept;
 
 		[[nodiscard]] Declarator* getDeclarator() const;
-		[[nodiscard]] Expression* getConstantExpression() const;
+		[[nodiscard]] ExpressionTree* getConstantExpression() const;
 
 		[[nodiscard]] bool hasDeclarator() const;
 		[[nodiscard]] bool hasConstantExpression() const;
 
 	private:
 		Declarator* declarator;
-		Expression* constantExpression;
+		ExpressionTree* constantExpression;
 	};
 }

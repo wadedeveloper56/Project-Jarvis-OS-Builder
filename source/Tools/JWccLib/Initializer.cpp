@@ -1,10 +1,10 @@
 #include "pch.h"
 #include "Initializer.h"
-#include "Expression.h"
+#include "ExpressionTree.h"
 
 using namespace WadeSpace;
 
-Initializer::Initializer(Expression* assignmentExpression) : assignmentExpression(assignmentExpression), initializerList(nullptr)
+Initializer::Initializer(ExpressionTree* assignmentExpression) : assignmentExpression(assignmentExpression), initializerList(nullptr)
 {
 }
 
@@ -27,13 +27,13 @@ Initializer::Initializer(const Initializer& other)
 		}
 		delete initializerList;
 	}
-	assignmentExpression = other.assignmentExpression ? new Expression(*other.assignmentExpression) : nullptr;
+	assignmentExpression = other.assignmentExpression ? new ExpressionTree(*other.assignmentExpression) : nullptr;
 	initializerList = other.initializerList ? new vector<Initializer*>(*other.initializerList) : nullptr;
 }
 
 Initializer::Initializer(Initializer&& other) noexcept
 {
-	assignmentExpression = other.assignmentExpression ? new Expression(*other.assignmentExpression) : nullptr;
+	assignmentExpression = other.assignmentExpression ? new ExpressionTree(*other.assignmentExpression) : nullptr;
 	initializerList = other.initializerList ? new vector<Initializer*>(*other.initializerList) : nullptr;
 }
 
@@ -41,7 +41,7 @@ Initializer& Initializer::operator=(const Initializer& other)
 {
 	if (this == &other)
 		return *this;
-	assignmentExpression = other.assignmentExpression ? new Expression(*other.assignmentExpression) : nullptr;
+	assignmentExpression = other.assignmentExpression ? new ExpressionTree(*other.assignmentExpression) : nullptr;
 	initializerList = other.initializerList ? new vector<Initializer*>(*other.initializerList) : nullptr;
 	return *this;
 }
@@ -50,7 +50,7 @@ Initializer& Initializer::operator=(Initializer&& other) noexcept
 {
 	if (this == &other)
 		return *this;
-	assignmentExpression = other.assignmentExpression ? new Expression(*other.assignmentExpression) : nullptr;
+	assignmentExpression = other.assignmentExpression ? new ExpressionTree(*other.assignmentExpression) : nullptr;
 	initializerList = other.initializerList ? new vector<Initializer*>(*other.initializerList) : nullptr;
 	return *this;
 }
@@ -68,7 +68,7 @@ Initializer::~Initializer()
 	}
 }
 
-Expression* Initializer::getAssignmentExpression() const
+ExpressionTree* Initializer::getAssignmentExpression() const
 {
 	return assignmentExpression;
 }

@@ -10,7 +10,7 @@ namespace WadeSpace
 	class ConstantExpression;
 	class ParameterTypeList;
 	class Declarator;
-	class Expression;
+	class ExpressionTree;
 
 	class DirectDeclarator
 	{
@@ -21,7 +21,7 @@ namespace WadeSpace
 			TokenPtr token2,
 			Declarator* const declarator, 
 			DirectDeclarator* const directDeclarator,
-			Expression* const constantExpression, 
+			ExpressionTree* const constantExpression, 
 			ParameterTypeList* const parameterTypeList,
 			vector<TokenPtr>* const vectorOfStrings
 		);
@@ -37,7 +37,7 @@ namespace WadeSpace
 		[[nodiscard]] TokenPtr getToken2() const;
 		[[nodiscard]] Declarator* getDeclarator() const;
 		[[nodiscard]] DirectDeclarator* getDirectDeclarator() const;
-		[[nodiscard]] Expression* getConstantExpression() const;
+		[[nodiscard]] ExpressionTree* getConstantExpression() const;
 		[[nodiscard]] ParameterTypeList* getParameterTypeList() const;
 		[[nodiscard]] vector<TokenPtr>* getVectorOfStrings() const;
 
@@ -56,7 +56,7 @@ namespace WadeSpace
 		TokenPtr token2;
 		Declarator* declarator;
 		DirectDeclarator* directDeclarator;
-		Expression* constantExpression;
+		ExpressionTree* constantExpression;
 		ParameterTypeList* parameterTypeList;
 		vector<TokenPtr>* vectorOfStrings;
 	};
