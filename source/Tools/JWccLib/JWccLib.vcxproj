@@ -182,6 +182,7 @@
     <ClInclude Include="EnumSpecifier.h" />
     <ClInclude Include="Expression.h" />
     <ClInclude Include="ExpressionStatement.h" />
+    <ClInclude Include="ExpressionTree.h" />
     <ClInclude Include="ExternalDeclaration.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="FunctionDefinition.h" />
@@ -233,6 +234,7 @@
     <ClCompile Include="EnumSpecifier.cpp" />
     <ClCompile Include="Expression.cpp" />
     <ClCompile Include="ExpressionStatement.cpp" />
+    <ClCompile Include="ExpressionTree.cpp" />
     <ClCompile Include="ExternalDeclaration.cpp" />
     <ClCompile Include="FunctionDefinition.cpp" />
     <ClCompile Include="GlobalVars.cpp" />
