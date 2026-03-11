@@ -209,15 +209,6 @@ WS  [ \t\v\n\f]
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_BOOL(createKeywordToken(yytext,BOOL), WadeSpace::location()); 
                }
-"complex"      { 
-                cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_COMPLEX(createKeywordToken(yytext,COMPLEX), WadeSpace::location()); 
-               }
-"imaginary"    { 
-                cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_IMAGINARY(createKeywordToken(yytext,IMAGINARY), WadeSpace::location()); 
-               }
-
 {L}{A}*        { 
                 if (WadeSpace::typedefList != nullptr) 
                 {

@@ -591,8 +591,6 @@ namespace  WadeSpace  {
       // "volatile"
       // "while"
       // "bool"
-      // "complex"
-      // "imaginary"
       // "ellipsis"
       // "question"
       // ";"
@@ -779,54 +777,52 @@ namespace  WadeSpace  {
     TOKEN_VOLATILE = 297,          // "volatile"
     TOKEN_WHILE = 298,             // "while"
     TOKEN_BOOL = 299,              // "bool"
-    TOKEN_COMPLEX = 300,           // "complex"
-    TOKEN_IMAGINARY = 301,         // "imaginary"
-    TOKEN_ELLIPSIS = 302,          // "ellipsis"
-    TOKEN_QUESTION = 303,          // "question"
-    TOKEN_SEMICOLON = 304,         // ";"
-    TOKEN_OCURLY = 305,            // "{"
-    TOKEN_CCURLY = 306,            // "}"
-    TOKEN_COMMA = 307,             // ","
-    TOKEN_COLON = 308,             // ":"
-    TOKEN_OPAREN = 309,            // "("
-    TOKEN_CPAREN = 310,            // ")"
-    TOKEN_OBRACE = 311,            // "["
-    TOKEN_CBRACE = 312,            // "]"
-    TOKEN_PERIOD = 313,            // "."
-    TOKEN_TILDE = 314,             // "~"
-    TOKEN_EQUAL = 315,             // "="
-    TOKEN_RIGHT_ASSIGN = 316,      // ">>="
-    TOKEN_LEFT_ASSIGN = 317,       // "<<="
-    TOKEN_ADD_ASSIGN = 318,        // "+="
-    TOKEN_SUB_ASSIGN = 319,        // "-="
-    TOKEN_MUL_ASSIGN = 320,        // "*="
-    TOKEN_DIV_ASSIGN = 321,        // "/="
-    TOKEN_MOD_ASSIGN = 322,        // "%="
-    TOKEN_AND_ASSIGN = 323,        // "&="
-    TOKEN_XOR_ASSIGN = 324,        // "^="
-    TOKEN_OR_ASSIGN = 325,         // "|="
-    TOKEN_RIGHT_OP = 326,          // ">>"
-    TOKEN_LEFT_OP = 327,           // "<<"
-    TOKEN_INC_OP = 328,            // "++"
-    TOKEN_DEC_OP = 329,            // "--"
-    TOKEN_PTR_OP = 330,            // "->"
-    TOKEN_AND_OP = 331,            // "&&"
-    TOKEN_OR_OP = 332,             // "||"
-    TOKEN_GREATER_EQUAL = 333,     // ">="
-    TOKEN_LESS_EQUAL = 334,        // "<="
-    TOKEN_GREATER = 335,           // ">"
-    TOKEN_LESS = 336,              // "<"
-    TOKEN_EQUAL_EQUAL = 337,       // "=="
-    TOKEN_NOT_EQUAL = 338,         // "!="
-    TOKEN_NOT_OP = 339,            // "!"
-    TOKEN_XOR_OP = 340,            // "^"
-    TOKEN_BIT_AND = 341,           // "&"
-    TOKEN_BIT_OR = 342,            // "|"
-    TOKEN_MINUS_OP = 343,          // "-"
-    TOKEN_PLUS_OP = 344,           // "+"
-    TOKEN_TIMES_OP = 345,          // "*"
-    TOKEN_DIV_OP = 346,            // "/"
-    TOKEN_MOD_OP = 347             // "%"
+    TOKEN_ELLIPSIS = 300,          // "ellipsis"
+    TOKEN_QUESTION = 301,          // "question"
+    TOKEN_SEMICOLON = 302,         // ";"
+    TOKEN_OCURLY = 303,            // "{"
+    TOKEN_CCURLY = 304,            // "}"
+    TOKEN_COMMA = 305,             // ","
+    TOKEN_COLON = 306,             // ":"
+    TOKEN_OPAREN = 307,            // "("
+    TOKEN_CPAREN = 308,            // ")"
+    TOKEN_OBRACE = 309,            // "["
+    TOKEN_CBRACE = 310,            // "]"
+    TOKEN_PERIOD = 311,            // "."
+    TOKEN_TILDE = 312,             // "~"
+    TOKEN_EQUAL = 313,             // "="
+    TOKEN_RIGHT_ASSIGN = 314,      // ">>="
+    TOKEN_LEFT_ASSIGN = 315,       // "<<="
+    TOKEN_ADD_ASSIGN = 316,        // "+="
+    TOKEN_SUB_ASSIGN = 317,        // "-="
+    TOKEN_MUL_ASSIGN = 318,        // "*="
+    TOKEN_DIV_ASSIGN = 319,        // "/="
+    TOKEN_MOD_ASSIGN = 320,        // "%="
+    TOKEN_AND_ASSIGN = 321,        // "&="
+    TOKEN_XOR_ASSIGN = 322,        // "^="
+    TOKEN_OR_ASSIGN = 323,         // "|="
+    TOKEN_RIGHT_OP = 324,          // ">>"
+    TOKEN_LEFT_OP = 325,           // "<<"
+    TOKEN_INC_OP = 326,            // "++"
+    TOKEN_DEC_OP = 327,            // "--"
+    TOKEN_PTR_OP = 328,            // "->"
+    TOKEN_AND_OP = 329,            // "&&"
+    TOKEN_OR_OP = 330,             // "||"
+    TOKEN_GREATER_EQUAL = 331,     // ">="
+    TOKEN_LESS_EQUAL = 332,        // "<="
+    TOKEN_GREATER = 333,           // ">"
+    TOKEN_LESS = 334,              // "<"
+    TOKEN_EQUAL_EQUAL = 335,       // "=="
+    TOKEN_NOT_EQUAL = 336,         // "!="
+    TOKEN_NOT_OP = 337,            // "!"
+    TOKEN_XOR_OP = 338,            // "^"
+    TOKEN_BIT_AND = 339,           // "&"
+    TOKEN_BIT_OR = 340,            // "|"
+    TOKEN_MINUS_OP = 341,          // "-"
+    TOKEN_PLUS_OP = 342,           // "+"
+    TOKEN_TIMES_OP = 343,          // "*"
+    TOKEN_DIV_OP = 344,            // "/"
+    TOKEN_MOD_OP = 345             // "%"
       };
       /// Backward compatibility alias (Bison 3.6).
       typedef token_kind_type yytokentype;
@@ -843,7 +839,7 @@ namespace  WadeSpace  {
     {
       enum symbol_kind_type
       {
-        YYNTOKENS = 94, ///< Number of tokens.
+        YYNTOKENS = 92, ///< Number of tokens.
         S_YYEMPTY = -2,
         S_YYEOF = 0,                             // "end of file"
         S_YYerror = 1,                           // error
@@ -890,120 +886,118 @@ namespace  WadeSpace  {
         S_VOLATILE = 42,                         // "volatile"
         S_WHILE = 43,                            // "while"
         S_BOOL = 44,                             // "bool"
-        S_COMPLEX = 45,                          // "complex"
-        S_IMAGINARY = 46,                        // "imaginary"
-        S_ELLIPSIS = 47,                         // "ellipsis"
-        S_QUESTION = 48,                         // "question"
-        S_SEMICOLON = 49,                        // ";"
-        S_OCURLY = 50,                           // "{"
-        S_CCURLY = 51,                           // "}"
-        S_COMMA = 52,                            // ","
-        S_COLON = 53,                            // ":"
-        S_OPAREN = 54,                           // "("
-        S_CPAREN = 55,                           // ")"
-        S_OBRACE = 56,                           // "["
-        S_CBRACE = 57,                           // "]"
-        S_PERIOD = 58,                           // "."
-        S_TILDE = 59,                            // "~"
-        S_EQUAL = 60,                            // "="
-        S_RIGHT_ASSIGN = 61,                     // ">>="
-        S_LEFT_ASSIGN = 62,                      // "<<="
-        S_ADD_ASSIGN = 63,                       // "+="
-        S_SUB_ASSIGN = 64,                       // "-="
-        S_MUL_ASSIGN = 65,                       // "*="
-        S_DIV_ASSIGN = 66,                       // "/="
-        S_MOD_ASSIGN = 67,                       // "%="
-        S_AND_ASSIGN = 68,                       // "&="
-        S_XOR_ASSIGN = 69,                       // "^="
-        S_OR_ASSIGN = 70,                        // "|="
-        S_RIGHT_OP = 71,                         // ">>"
-        S_LEFT_OP = 72,                          // "<<"
-        S_INC_OP = 73,                           // "++"
-        S_DEC_OP = 74,                           // "--"
-        S_PTR_OP = 75,                           // "->"
-        S_AND_OP = 76,                           // "&&"
-        S_OR_OP = 77,                            // "||"
-        S_GREATER_EQUAL = 78,                    // ">="
-        S_LESS_EQUAL = 79,                       // "<="
-        S_GREATER = 80,                          // ">"
-        S_LESS = 81,                             // "<"
-        S_EQUAL_EQUAL = 82,                      // "=="
-        S_NOT_EQUAL = 83,                        // "!="
-        S_NOT_OP = 84,                           // "!"
-        S_XOR_OP = 85,                           // "^"
-        S_BIT_AND = 86,                          // "&"
-        S_BIT_OR = 87,                           // "|"
-        S_MINUS_OP = 88,                         // "-"
-        S_PLUS_OP = 89,                          // "+"
-        S_TIMES_OP = 90,                         // "*"
-        S_DIV_OP = 91,                           // "/"
-        S_MOD_OP = 92,                           // "%"
-        S_93_then_ = 93,                         // "then"
-        S_YYACCEPT = 94,                         // $accept
-        S_primary_expression = 95,               // primary_expression
-        S_constant = 96,                         // constant
-        S_postfix_expression = 97,               // postfix_expression
-        S_argument_expression_list = 98,         // argument_expression_list
-        S_unary_expression = 99,                 // unary_expression
-        S_unary_operator = 100,                  // unary_operator
-        S_cast_expression = 101,                 // cast_expression
-        S_multiplicative_expression = 102,       // multiplicative_expression
-        S_additive_expression = 103,             // additive_expression
-        S_shift_expression = 104,                // shift_expression
-        S_relational_expression = 105,           // relational_expression
-        S_equality_expression = 106,             // equality_expression
-        S_and_expression = 107,                  // and_expression
-        S_exclusive_or_expression = 108,         // exclusive_or_expression
-        S_inclusive_or_expression = 109,         // inclusive_or_expression
-        S_logical_and_expression = 110,          // logical_and_expression
-        S_logical_or_expression = 111,           // logical_or_expression
-        S_conditional_expression = 112,          // conditional_expression
-        S_assignment_expression = 113,           // assignment_expression
-        S_assignment_operator = 114,             // assignment_operator
-        S_expression = 115,                      // expression
-        S_constant_expression = 116,             // constant_expression
-        S_declaration = 117,                     // declaration
-        S_declaration_specifiers = 118,          // declaration_specifiers
-        S_init_declarator_list = 119,            // init_declarator_list
-        S_init_declarator = 120,                 // init_declarator
-        S_storage_class_specifier = 121,         // storage_class_specifier
-        S_type_specifier = 122,                  // type_specifier
-        S_struct_or_union_specifier = 123,       // struct_or_union_specifier
-        S_struct_or_union = 124,                 // struct_or_union
-        S_struct_declaration_list = 125,         // struct_declaration_list
-        S_struct_declaration = 126,              // struct_declaration
-        S_specifier_qualifier_list = 127,        // specifier_qualifier_list
-        S_struct_declarator_list = 128,          // struct_declarator_list
-        S_struct_declarator = 129,               // struct_declarator
-        S_enum_specifier = 130,                  // enum_specifier
-        S_enumerator_list = 131,                 // enumerator_list
-        S_enumerator = 132,                      // enumerator
-        S_type_qualifier = 133,                  // type_qualifier
-        S_declarator = 134,                      // declarator
-        S_direct_declarator = 135,               // direct_declarator
-        S_pointer = 136,                         // pointer
-        S_type_qualifier_list = 137,             // type_qualifier_list
-        S_parameter_type_list = 138,             // parameter_type_list
-        S_parameter_list = 139,                  // parameter_list
-        S_parameter_declaration = 140,           // parameter_declaration
-        S_identifier_list = 141,                 // identifier_list
-        S_type_name = 142,                       // type_name
-        S_abstract_declarator = 143,             // abstract_declarator
-        S_direct_abstract_declarator = 144,      // direct_abstract_declarator
-        S_initializer = 145,                     // initializer
-        S_initializer_list = 146,                // initializer_list
-        S_statement = 147,                       // statement
-        S_labeled_statement = 148,               // labeled_statement
-        S_compound_statement = 149,              // compound_statement
-        S_declaration_list = 150,                // declaration_list
-        S_statement_list = 151,                  // statement_list
-        S_expression_statement = 152,            // expression_statement
-        S_selection_statement = 153,             // selection_statement
-        S_iteration_statement = 154,             // iteration_statement
-        S_jump_statement = 155,                  // jump_statement
-        S_translation_unit = 156,                // translation_unit
-        S_external_declaration = 157,            // external_declaration
-        S_function_definition = 158              // function_definition
+        S_ELLIPSIS = 45,                         // "ellipsis"
+        S_QUESTION = 46,                         // "question"
+        S_SEMICOLON = 47,                        // ";"
+        S_OCURLY = 48,                           // "{"
+        S_CCURLY = 49,                           // "}"
+        S_COMMA = 50,                            // ","
+        S_COLON = 51,                            // ":"
+        S_OPAREN = 52,                           // "("
+        S_CPAREN = 53,                           // ")"
+        S_OBRACE = 54,                           // "["
+        S_CBRACE = 55,                           // "]"
+        S_PERIOD = 56,                           // "."
+        S_TILDE = 57,                            // "~"
+        S_EQUAL = 58,                            // "="
+        S_RIGHT_ASSIGN = 59,                     // ">>="
+        S_LEFT_ASSIGN = 60,                      // "<<="
+        S_ADD_ASSIGN = 61,                       // "+="
+        S_SUB_ASSIGN = 62,                       // "-="
+        S_MUL_ASSIGN = 63,                       // "*="
+        S_DIV_ASSIGN = 64,                       // "/="
+        S_MOD_ASSIGN = 65,                       // "%="
+        S_AND_ASSIGN = 66,                       // "&="
+        S_XOR_ASSIGN = 67,                       // "^="
+        S_OR_ASSIGN = 68,                        // "|="
+        S_RIGHT_OP = 69,                         // ">>"
+        S_LEFT_OP = 70,                          // "<<"
+        S_INC_OP = 71,                           // "++"
+        S_DEC_OP = 72,                           // "--"
+        S_PTR_OP = 73,                           // "->"
+        S_AND_OP = 74,                           // "&&"
+        S_OR_OP = 75,                            // "||"
+        S_GREATER_EQUAL = 76,                    // ">="
+        S_LESS_EQUAL = 77,                       // "<="
+        S_GREATER = 78,                          // ">"
+        S_LESS = 79,                             // "<"
+        S_EQUAL_EQUAL = 80,                      // "=="
+        S_NOT_EQUAL = 81,                        // "!="
+        S_NOT_OP = 82,                           // "!"
+        S_XOR_OP = 83,                           // "^"
+        S_BIT_AND = 84,                          // "&"
+        S_BIT_OR = 85,                           // "|"
+        S_MINUS_OP = 86,                         // "-"
+        S_PLUS_OP = 87,                          // "+"
+        S_TIMES_OP = 88,                         // "*"
+        S_DIV_OP = 89,                           // "/"
+        S_MOD_OP = 90,                           // "%"
+        S_91_then_ = 91,                         // "then"
+        S_YYACCEPT = 92,                         // $accept
+        S_primary_expression = 93,               // primary_expression
+        S_constant = 94,                         // constant
+        S_postfix_expression = 95,               // postfix_expression
+        S_argument_expression_list = 96,         // argument_expression_list
+        S_unary_expression = 97,                 // unary_expression
+        S_unary_operator = 98,                   // unary_operator
+        S_cast_expression = 99,                  // cast_expression
+        S_multiplicative_expression = 100,       // multiplicative_expression
+        S_additive_expression = 101,             // additive_expression
+        S_shift_expression = 102,                // shift_expression
+        S_relational_expression = 103,           // relational_expression
+        S_equality_expression = 104,             // equality_expression
+        S_and_expression = 105,                  // and_expression
+        S_exclusive_or_expression = 106,         // exclusive_or_expression
+        S_inclusive_or_expression = 107,         // inclusive_or_expression
+        S_logical_and_expression = 108,          // logical_and_expression
+        S_logical_or_expression = 109,           // logical_or_expression
+        S_conditional_expression = 110,          // conditional_expression
+        S_assignment_expression = 111,           // assignment_expression
+        S_assignment_operator = 112,             // assignment_operator
+        S_expression = 113,                      // expression
+        S_constant_expression = 114,             // constant_expression
+        S_declaration = 115,                     // declaration
+        S_declaration_specifiers = 116,          // declaration_specifiers
+        S_init_declarator_list = 117,            // init_declarator_list
+        S_init_declarator = 118,                 // init_declarator
+        S_storage_class_specifier = 119,         // storage_class_specifier
+        S_type_specifier = 120,                  // type_specifier
+        S_struct_or_union_specifier = 121,       // struct_or_union_specifier
+        S_struct_or_union = 122,                 // struct_or_union
+        S_struct_declaration_list = 123,         // struct_declaration_list
+        S_struct_declaration = 124,              // struct_declaration
+        S_specifier_qualifier_list = 125,        // specifier_qualifier_list
+        S_struct_declarator_list = 126,          // struct_declarator_list
+        S_struct_declarator = 127,               // struct_declarator
+        S_enum_specifier = 128,                  // enum_specifier
+        S_enumerator_list = 129,                 // enumerator_list
+        S_enumerator = 130,                      // enumerator
+        S_type_qualifier = 131,                  // type_qualifier
+        S_declarator = 132,                      // declarator
+        S_direct_declarator = 133,               // direct_declarator
+        S_pointer = 134,                         // pointer
+        S_type_qualifier_list = 135,             // type_qualifier_list
+        S_parameter_type_list = 136,             // parameter_type_list
+        S_parameter_list = 137,                  // parameter_list
+        S_parameter_declaration = 138,           // parameter_declaration
+        S_identifier_list = 139,                 // identifier_list
+        S_type_name = 140,                       // type_name
+        S_abstract_declarator = 141,             // abstract_declarator
+        S_direct_abstract_declarator = 142,      // direct_abstract_declarator
+        S_initializer = 143,                     // initializer
+        S_initializer_list = 144,                // initializer_list
+        S_statement = 145,                       // statement
+        S_labeled_statement = 146,               // labeled_statement
+        S_compound_statement = 147,              // compound_statement
+        S_declaration_list = 148,                // declaration_list
+        S_statement_list = 149,                  // statement_list
+        S_expression_statement = 150,            // expression_statement
+        S_selection_statement = 151,             // selection_statement
+        S_iteration_statement = 152,             // iteration_statement
+        S_jump_statement = 153,                  // jump_statement
+        S_translation_unit = 154,                // translation_unit
+        S_external_declaration = 155,            // external_declaration
+        S_function_definition = 156              // function_definition
       };
     };
 
@@ -1200,8 +1194,6 @@ namespace  WadeSpace  {
       case symbol_kind::S_VOLATILE: // "volatile"
       case symbol_kind::S_WHILE: // "while"
       case symbol_kind::S_BOOL: // "bool"
-      case symbol_kind::S_COMPLEX: // "complex"
-      case symbol_kind::S_IMAGINARY: // "imaginary"
       case symbol_kind::S_ELLIPSIS: // "ellipsis"
       case symbol_kind::S_QUESTION: // "question"
       case symbol_kind::S_SEMICOLON: // ";"
@@ -2063,8 +2055,6 @@ switch (yykind)
       case symbol_kind::S_VOLATILE: // "volatile"
       case symbol_kind::S_WHILE: // "while"
       case symbol_kind::S_BOOL: // "bool"
-      case symbol_kind::S_COMPLEX: // "complex"
-      case symbol_kind::S_IMAGINARY: // "imaginary"
       case symbol_kind::S_ELLIPSIS: // "ellipsis"
       case symbol_kind::S_QUESTION: // "question"
       case symbol_kind::S_SEMICOLON: // ";"
@@ -2272,7 +2262,7 @@ switch (yykind)
 #if !defined _MSC_VER || defined __clang__
         YY_ASSERT (tok == token::TOKEN_END
                    || (token::TOKEN_YYerror <= tok && tok <= token::TOKEN_YYUNDEF)
-                   || tok == 348);
+                   || tok == 346);
 #endif
       }
 #if 201103L <= YY_CPLUSPLUS
@@ -3008,36 +2998,6 @@ switch (yykind)
       make_BOOL (const TokenPtr& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_BOOL, v, l);
-      }
-#endif
-#if 201103L <= YY_CPLUSPLUS
-      static
-      symbol_type
-      make_COMPLEX (TokenPtr v, location_type l)
-      {
-        return symbol_type (token::TOKEN_COMPLEX, std::move (v), std::move (l));
-      }
-#else
-      static
-      symbol_type
-      make_COMPLEX (const TokenPtr& v, const location_type& l)
-      {
-        return symbol_type (token::TOKEN_COMPLEX, v, l);
-      }
-#endif
-#if 201103L <= YY_CPLUSPLUS
-      static
-      symbol_type
-      make_IMAGINARY (TokenPtr v, location_type l)
-      {
-        return symbol_type (token::TOKEN_IMAGINARY, std::move (v), std::move (l));
-      }
-#else
-      static
-      symbol_type
-      make_IMAGINARY (const TokenPtr& v, const location_type& l)
-      {
-        return symbol_type (token::TOKEN_IMAGINARY, v, l);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
@@ -4060,9 +4020,9 @@ switch (yykind)
     /// Constants.
     enum
     {
-      yylast_ = 1735,     ///< Last index in yytable_.
+      yylast_ = 1677,     ///< Last index in yytable_.
       yynnts_ = 65,  ///< Number of nonterminal symbols.
-      yyfinal_ = 66 ///< Termination state number.
+      yyfinal_ = 64 ///< Termination state number.
     };
 
 
@@ -4116,10 +4076,10 @@ switch (yykind)
       55,    56,    57,    58,    59,    60,    61,    62,    63,    64,
       65,    66,    67,    68,    69,    70,    71,    72,    73,    74,
       75,    76,    77,    78,    79,    80,    81,    82,    83,    84,
-      85,    86,    87,    88,    89,    90,    91,    92,    93
+      85,    86,    87,    88,    89,    90,    91
     };
     // Last valid token kind.
-    const int code_max = 348;
+    const int code_max = 346;
 
     if (t <= 0)
       return symbol_kind::S_YYEOF;
@@ -4298,8 +4258,6 @@ switch (yykind)
       case symbol_kind::S_VOLATILE: // "volatile"
       case symbol_kind::S_WHILE: // "while"
       case symbol_kind::S_BOOL: // "bool"
-      case symbol_kind::S_COMPLEX: // "complex"
-      case symbol_kind::S_IMAGINARY: // "imaginary"
       case symbol_kind::S_ELLIPSIS: // "ellipsis"
       case symbol_kind::S_QUESTION: // "question"
       case symbol_kind::S_SEMICOLON: // ";"
@@ -4599,8 +4557,6 @@ switch (yykind)
       case symbol_kind::S_VOLATILE: // "volatile"
       case symbol_kind::S_WHILE: // "while"
       case symbol_kind::S_BOOL: // "bool"
-      case symbol_kind::S_COMPLEX: // "complex"
-      case symbol_kind::S_IMAGINARY: // "imaginary"
       case symbol_kind::S_ELLIPSIS: // "ellipsis"
       case symbol_kind::S_QUESTION: // "question"
       case symbol_kind::S_SEMICOLON: // ";"
@@ -4776,7 +4732,7 @@ switch (yykind)
 
 #line 9 "ansic.y"
 } //  WadeSpace 
-#line 4780 "parser.hpp"
+#line 4736 "parser.hpp"
 
 
 

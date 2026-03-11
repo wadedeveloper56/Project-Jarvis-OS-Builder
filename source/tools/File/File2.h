@@ -1,5 +1,9 @@
 #pragma once
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include <stdio.h>
 
 typedef FILE *FileHandle;
@@ -13,3 +17,7 @@ int WriteFile2(FileHandle handle, void* buffer, size_t size, size_t count);
 __int64 FileTell2(FileHandle handle);
 __int64 FileSeek2(FileHandle handle, __int64 offset, int origin);
 __int64 FileSize2(FileHandle handle);
+
+#ifdef __cplusplus
+}
+#endif

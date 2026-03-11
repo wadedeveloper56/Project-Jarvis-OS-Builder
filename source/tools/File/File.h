@@ -1,5 +1,9 @@
 #pragma once
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef int f_handle;
 #define NIL_HANDLE -1
 
@@ -36,3 +40,7 @@ int WriteFile(f_handle handle, void* const buffer, unsigned const buffer_size);
 __int64 FileTell(f_handle handle);
 __int64 FileSeek(f_handle handle, __int64 offset, int origin);
 __int64 FileSize(f_handle handle);
+
+#ifdef __cplusplus
+}
+#endif

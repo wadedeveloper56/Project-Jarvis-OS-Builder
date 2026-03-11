@@ -330,8 +330,6 @@ void MasmCodeGenerator::handleStructs(ofstream& out)
 					else if (type == FLOAT) out << "\t" << varName << " SDWORD ?" << endl;
 					else if (type == DOUBLE) out << "\t" << varName << " SQWORD ?" << endl;
 					else if (type == LONG_DOUBLE) out << "\t" << varName << " TBYTE ?" << endl;
-					else if (type == IMAGINARY) out << "\t" << varName << " SQWORD ?" << endl;
-					else if (type == COMPLEX) out << "\t" << varName << " TBYTE ?" << endl;
 				}
 			}
 			out << name << " ENDS" << endl;
@@ -369,6 +367,7 @@ void MasmCodeGenerator::handlePrototype(ofstream& out)
 					else if (temp == DOUBLE) type = temp;
 					else if (temp == LONG_DOUBLE)  type = temp;
 					else if (temp == UNSIGNED) isUnsigned = true; 
+					else if (temp == SIGNED) isUnsigned = false;
 				}
 				if (type != UNKNOWN)
 				{

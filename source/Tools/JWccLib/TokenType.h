@@ -53,8 +53,6 @@ namespace WadeSpace
 		VOLATILE,
 		WHILE,
 		BOOL,
-		COMPLEX,
-		IMAGINARY,
 		ELLIPSIS,
 		QUESTION,
 		SEMICOLON,

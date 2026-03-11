@@ -136,8 +136,6 @@
 %token <TokenPtr> VOLATILE "volatile"
 %token <TokenPtr> WHILE "while"
 %token <TokenPtr> BOOL "bool"
-%token <TokenPtr> COMPLEX "complex"
-%token <TokenPtr> IMAGINARY "imaginary"
 %token <TokenPtr> ELLIPSIS "ellipsis"
 %token <TokenPtr> QUESTION "question"
 %token <TokenPtr> SEMICOLON ";"
@@ -442,8 +440,6 @@ type_specifier
     | DOUBLE                    { $$ = new TypeSpecifier(DOUBLE, $1, nullptr, nullptr); cout << "DOUBLE REDUCE to type_specifier" << endl;}
     | LONG_DOUBLE               { $$ = new TypeSpecifier(LONG_DOUBLE, $1, nullptr, nullptr); cout << "LONG_DOUBLE REDUCE to type_specifier" << endl;}
     | BOOL                      { $$ = new TypeSpecifier(BOOL, $1, nullptr, nullptr); cout << "BOOL REDUCE to type_specifier" << endl;}
-    | IMAGINARY                 { $$ = new TypeSpecifier(IMAGINARY, $1, nullptr, nullptr); cout << "IMAGINARY REDUCE to type_specifier" << endl;}
-    | COMPLEX                   { $$ = new TypeSpecifier(COMPLEX, $1, nullptr, nullptr); cout << "COMPLEX REDUCE to type_specifier" << endl;}
     | SIGNED                    { $$ = new TypeSpecifier(SIGNED, $1, nullptr, nullptr); cout << "SIGNED REDUCE to type_specifier" << endl;}
     | UNSIGNED                  { $$ = new TypeSpecifier(UNSIGNED, $1, nullptr, nullptr); cout << "UNIGNED REDUCE to type_specifier" << endl;}
     | struct_or_union_specifier { $$ = new TypeSpecifier(UNKNOWN, nullptr, $1, nullptr); cout << "struct_or_union_specifier REDUCE to type_specifier" << endl;}
