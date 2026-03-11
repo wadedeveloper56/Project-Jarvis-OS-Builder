@@ -46,6 +46,12 @@ namespace WadeSpace
 			TokenPtr op
 		);
 		~TreeNodeData();
+
+		TreeNodeData(const TreeNodeData& other) = default;
+		TreeNodeData(TreeNodeData&& other) noexcept = default;
+		TreeNodeData& operator=(const TreeNodeData& other) = default;
+		TreeNodeData& operator=(TreeNodeData&& other) noexcept = default;
+
 		NodeType getType() const { return type; }
 		TokenPtr getToken1() const { return token1; }
 		TokenPtr getToken2() const { return token2; }
@@ -63,6 +69,12 @@ namespace WadeSpace
 		TreeNode();
 		TreeNode(TreeNodeData* data, TreeNode* left = nullptr, TreeNode* right = nullptr);
 		~TreeNode();
+
+		TreeNode(const TreeNode& other) = default;
+		TreeNode(TreeNode&& other) noexcept = default;
+		TreeNode& operator=(const TreeNode& other) = default;
+		TreeNode& operator=(TreeNode&& other) noexcept = default;
+
 		TreeNodeData* getData() const { return data; }
 		TreeNode* getLeft() const { return left; }
 		TreeNode* getRight() const { return right; }
@@ -76,6 +88,12 @@ namespace WadeSpace
 		ExpressionTree();
 		ExpressionTree(TreeNode* data);
 		~ExpressionTree();
+
+		ExpressionTree(const ExpressionTree& other) = default;
+		ExpressionTree(ExpressionTree&& other) noexcept = default;
+		ExpressionTree& operator=(const ExpressionTree& other) = default;
+		ExpressionTree& operator=(ExpressionTree&& other) noexcept = default;
+
 		TreeNode* getTree() const { return tree; }
 		void setTree(TreeNode* tree) { this->tree = tree; }
 		TreeNodeData* getData() const { return tree ? tree->getData() : nullptr; }
