@@ -32,14 +32,14 @@ enum perms {// names for permissions
 	resolve_symlinks = 0x40000
 };
 
-errno_t OpenFile(f_handle* pfh, const char* filename, int oflag, int shflag, int pmode);
-int CloseFile(f_handle handle);
-int FlushFile(f_handle handle);
-int ReadFile(f_handle handle, void* const buffer, unsigned const buffer_size);
-int WriteFile(f_handle handle, void* const buffer, unsigned const buffer_size);
-__int64 FileTell(f_handle handle);
-__int64 FileSeek(f_handle handle, __int64 offset, int origin);
-__int64 FileSize(f_handle handle);
+errno_t OpenFile2(f_handle* pfh, const char* filename, int oflag, int shflag, int pmode);
+int CloseFile2(f_handle handle);
+int FlushFile2(f_handle handle);
+int ReadFile2(f_handle handle, void* const buffer, unsigned const buffer_size);
+int WriteFile2(f_handle handle, void* const buffer, unsigned const buffer_size);
+__int64 FileTell2(f_handle handle);
+__int64 FileSeek2(f_handle handle, __int64 offset, int origin);
+__int64 FileSize2(f_handle handle);
 
 #ifdef __cplusplus
 }

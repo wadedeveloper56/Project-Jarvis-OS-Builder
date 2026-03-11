@@ -9,4 +9,11 @@
 
 // add headers that you want to pre-compile here
 
+#include <windows.h>
+#include <iostream>
+#include <fcntl.h>   // Required for file control constants like _O_CREAT, _O_WRONLY
+#include <sys/stat.h> // Required for permission constants like _S_IREAD, _S_IWRITE
+#include <share.h>   // Required for file sharing constants like _SH_DENYNO
+#include <errno.h>   // Required for errno_t and error handling
+
 #endif //PCH_H
