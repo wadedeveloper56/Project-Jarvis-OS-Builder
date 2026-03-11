@@ -273,6 +273,29 @@ void MasmCodeGenerator::handleFunctionTable(ofstream& out)
 	out << endl << ".code" << endl;
 	for (FunctionData* ptr : *functionTable)
 	{
+		auto returnType = ptr->type;
+		auto parameters = ptr->parameters;
+		auto name = "_" + ptr->name;
+		vector<string> paramList;
+		for (auto ptr : *parameters)
+		{
+			auto type = ptr->type;
+			auto variableName = "_" + ptr->name;
+			bool isInitialized = ptr->initializer != nullptr;
+			bool isPointer = ptr->pointer;
+			bool isArray = ptr->arraySize > 1;
+			bool isStruct = type == STRUCT || type == UNION;
+			bool isUnsigned = ptr->unsign == true;
+
+			string asmType = getAsmType(type, isPointer, isUnsigned);
+			paramList.push_back(variableName + ":" + asmType);
+		}
+		string paramListStr = vectorToCommaSeparatedList(paramList);
+		out << name << " PROTO C " << paramListStr << ";" << endl;
+	}
+	for (FunctionData* ptr : *functionTable)
+	{
+		out << endl;
 		handleIndividualFunction(out, ptr);
 	}
 }

@@ -14,5 +14,11 @@ int init;
 int main(int argc, char* argv[])
 {
 	funct(77);
+	priceless(99);
 	return 5;
+}
+
+int priceless(int value)
+{
+	return 99;
 }
