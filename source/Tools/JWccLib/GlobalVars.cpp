@@ -8,6 +8,7 @@ namespace WadeSpace
 	ProgramData *programData = nullptr;
 	map<string,ExternalDeclaration*>* typedefList = nullptr;
 	map<string, StructOrUnionSpecifier*>* structList = nullptr;
+	vector<string>* functionList = nullptr;
 	bool bit16 = false;
 	bool bit32 = false;
 	bool bit64 = false;

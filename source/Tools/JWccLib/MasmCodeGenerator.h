@@ -39,6 +39,7 @@ namespace WadeSpace
 		string getAsmType(TokenType type, bool isPointer, bool isUnsigned);
 		void handlePrototype(ofstream& out);
 		string convertToAsmType(bool isUnsigned, bool isPointer, TokenType type);
+		void handleFunctionTablePrototypes(ofstream& out);
 	};
 }
 

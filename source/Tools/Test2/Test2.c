@@ -1,15 +1,16 @@
-struct Data
-{
-	char var3;
-	long double var4;
-	int var5;
-};
-struct Data var6;
+int priceless(int value);
+
 char var1;
 short var2 = 6;
-int init;
+int var3;
 
 int main(int argc, char* argv[])
 {
+	priceless(88);
 	return 5;
+}
+
+int priceless(int value)
+{
+	return 99;
 }

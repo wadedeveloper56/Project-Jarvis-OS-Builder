@@ -268,9 +268,8 @@ void MasmCodeGenerator::handleVariableTable(ofstream& out)
 	}
 }
 
-void MasmCodeGenerator::handleFunctionTable(ofstream& out)
+void MasmCodeGenerator::handleFunctionTablePrototypes(ofstream& out)
 {
-	out << endl << ".code" << endl;
 	for (FunctionData* ptr : *functionTable)
 	{
 		auto returnType = ptr->type;
@@ -293,6 +292,12 @@ void MasmCodeGenerator::handleFunctionTable(ofstream& out)
 		string paramListStr = vectorToCommaSeparatedList(paramList);
 		out << name << " PROTO C " << paramListStr << ";" << endl;
 	}
+}
+
+void MasmCodeGenerator::handleFunctionTable(ofstream& out)
+{
+	out << endl << ".code" << endl;
+	handleFunctionTablePrototypes(out);
 	for (FunctionData* ptr : *functionTable)
 	{
 		out << endl;
@@ -373,7 +378,8 @@ void MasmCodeGenerator::handlePrototype(ofstream& out)
 			}
 			auto name = "_" + ptr->name;
 			string paramListStr = vectorToCommaSeparatedList(paramList);
-			out << "EXTERN " << name << " :PROTO " << paramListStr << ";" << endl;
+			vector<string>::iterator it = find(functionList->begin(), functionList->end(), name);
+			if (it == functionList->end()) out << "EXTERN " << name << " :PROTO " << paramListStr << ";" << endl;
 		}
 	}
 }

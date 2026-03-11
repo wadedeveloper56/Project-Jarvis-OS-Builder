@@ -1,20 +1,14 @@
-void funct(unsigned int value);
+int funct(int value);
+int priceless(int value);
 
-struct Data
-{
-	char var3;
-	long double var4;
-	int var5;
-};
-struct Data var6;
 char var1;
 short var2 = 6;
-int init;
+int var3;
 
 int main(int argc, char* argv[])
 {
 	funct(77);
-	priceless(99);
+	priceless(88);
 	return 5;
 }
 

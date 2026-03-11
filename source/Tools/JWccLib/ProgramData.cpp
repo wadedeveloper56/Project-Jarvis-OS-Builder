@@ -80,6 +80,7 @@ TokenType ProgramData::getDeclarationSpecifiersType(DeclarationSpecifiers const*
 void ProgramData::handleFunction(FunctionDefinition const * declaration, vector<FunctionData*>* functionTable)
 {
 	FunctionData* data = new FunctionData();
+	functionList = new vector<string>();
 	data->statements = new BaseStatement(*declaration->getBaseStatement());
 	DeclarationSpecifiers* declaration_specifiers = declaration->getDeclarationSpecifiers();
 	if (declaration_specifiers != nullptr && declaration_specifiers->getDeclarationSpecifiersNodeList() != nullptr)
@@ -101,6 +102,7 @@ void ProgramData::handleFunction(FunctionDefinition const * declaration, vector<
 			}
 		}
 		functionTable->push_back(data);
+		functionList->push_back("_"+data->name);
 	}
 }
 
