@@ -47,17 +47,17 @@ namespace WadeSpace
 		);
 		~TreeNodeData();
 
-		TreeNodeData(const TreeNodeData& other) = default;
-		TreeNodeData(TreeNodeData&& other) noexcept = default;
-		TreeNodeData& operator=(const TreeNodeData& other) = default;
-		TreeNodeData& operator=(TreeNodeData&& other) noexcept = default;
+		TreeNodeData(const TreeNodeData& other);
+		TreeNodeData(TreeNodeData&& other) noexcept;
+		TreeNodeData& operator=(const TreeNodeData& other);
+		TreeNodeData& operator=(TreeNodeData&& other) noexcept;
 
-		NodeType getType() const { return type; }
-		TokenPtr getToken1() const { return token1; }
-		TokenPtr getToken2() const { return token2; }
-		TokenPtr getToken3() const { return token3; }
-		vector<ExpressionTree*>* getArgumentList() const { return argumentList; }
-		Constant* getConstant() const { return constant; }
+		NodeType getType() const;
+		TokenPtr getToken1() const;
+		TokenPtr getToken2() const;
+		TokenPtr getToken3() const;
+		vector<ExpressionTree*>* getArgumentList() const;
+		Constant* getConstant() const;
 	};
 
 	class TreeNode
@@ -70,14 +70,14 @@ namespace WadeSpace
 		TreeNode(TreeNodeData* data, TreeNode* left = nullptr, TreeNode* right = nullptr);
 		~TreeNode();
 
-		TreeNode(const TreeNode& other) = default;
-		TreeNode(TreeNode&& other) noexcept = default;
-		TreeNode& operator=(const TreeNode& other) = default;
-		TreeNode& operator=(TreeNode&& other) noexcept = default;
+		TreeNode(const TreeNode& other);
+		TreeNode(TreeNode&& other) noexcept;
+		TreeNode& operator=(const TreeNode& other);
+		TreeNode& operator=(TreeNode&& other) noexcept;
 
-		TreeNodeData* getData() const { return data; }
-		TreeNode* getLeft() const { return left; }
-		TreeNode* getRight() const { return right; }
+		TreeNodeData* getData() const;
+		TreeNode* getLeft() const;
+		TreeNode* getRight() const;
 	};
 
 	class ExpressionTree
@@ -89,15 +89,15 @@ namespace WadeSpace
 		ExpressionTree(TreeNode* data);
 		~ExpressionTree();
 
-		ExpressionTree(const ExpressionTree& other) = default;
-		ExpressionTree(ExpressionTree&& other) noexcept = default;
-		ExpressionTree& operator=(const ExpressionTree& other) = default;
-		ExpressionTree& operator=(ExpressionTree&& other) noexcept = default;
+		ExpressionTree(const ExpressionTree& other);
+		ExpressionTree(ExpressionTree&& other) noexcept;
+		ExpressionTree& operator=(const ExpressionTree& other);
+		ExpressionTree& operator=(ExpressionTree&& other) noexcept;
 
-		TreeNode* getTree() const { return tree; }
-		void setTree(TreeNode* tree) { this->tree = tree; }
-		TreeNodeData* getData() const { return tree ? tree->getData() : nullptr; }
-		TreeNode* getLeft() const { return tree ? tree->getLeft() : nullptr; }
-		TreeNode* getRight() const { return tree ? tree->getRight() : nullptr; }
+		TreeNode* getTree() const;
+		void setTree(TreeNode* tree);
+		TreeNodeData* getData() const;
+		TreeNode* getLeft() const;
+		TreeNode* getRight() const;
 	};
 }
