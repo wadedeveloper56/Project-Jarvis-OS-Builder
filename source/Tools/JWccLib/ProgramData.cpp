@@ -40,11 +40,14 @@ TokenType ProgramData::getFunctionParameterType(ParameterDeclaration* parameterD
 {
 	TokenType type = UNKNOWN;
 	auto declaration_specifiers_list = parameterDeclaration->getDeclarationSpecifiers()->getDeclarationSpecifiersNodeList();
-	for (auto ptr : *declaration_specifiers_list)
+	if (declaration_specifiers_list != nullptr)
 	{
-		if (ptr->typeSpecifier != nullptr)
+		for (auto ptr : *declaration_specifiers_list)
 		{
-			type = ptr->typeSpecifier->getType().value();
+			if (ptr->typeSpecifier != nullptr)
+			{
+				type = ptr->typeSpecifier->getType().value();
+			}
 		}
 	}
 	return type;
@@ -53,25 +56,32 @@ TokenType ProgramData::getFunctionParameterType(ParameterDeclaration* parameterD
 string ProgramData::getParameterDeclarationName(ParameterDeclaration const * parameterDeclaration)
 {
 	auto direct_declarator = parameterDeclaration->getDeclarator()->getDirectDeclarator();
-	if (direct_declarator->getIdentifier() != nullptr)
+	if (direct_declarator != nullptr)
 	{
-		return direct_declarator->getIdentifier()->getSymbolName();
+		if (direct_declarator->getIdentifier() != nullptr)
+		{
+			return direct_declarator->getIdentifier()->getSymbolName();
+		}
+		else if (direct_declarator->getDirectDeclarator() != nullptr && direct_declarator->getDirectDeclarator()->getIdentifier() != nullptr)
+		{
+			return direct_declarator->getDirectDeclarator()->getIdentifier()->getSymbolName();
+		}
 	}
-	else
-	{
-		return direct_declarator->getDirectDeclarator()->getIdentifier()->getSymbolName();
-	}
+	return "";
 }
 
 TokenType ProgramData::getDeclarationSpecifiersType(DeclarationSpecifiers const* declaration_specifiers)
 {
 	TokenType type = UNKNOWN;
 	auto type_specifierList = declaration_specifiers->getDeclarationSpecifiersNodeList();
-	for (auto ptr : *type_specifierList)
+	if (type_specifierList != nullptr)
 	{
-		if (ptr->typeSpecifier != nullptr)
+		for (auto ptr : *type_specifierList)
 		{
-			type = ptr->typeSpecifier->getType().value();
+			if (ptr->typeSpecifier != nullptr)
+			{
+				type = ptr->typeSpecifier->getType().value();
+			}
 		}
 	}
 	return type;
@@ -80,7 +90,6 @@ TokenType ProgramData::getDeclarationSpecifiersType(DeclarationSpecifiers const*
 void ProgramData::handleFunction(FunctionDefinition const * declaration, vector<FunctionData*>* functionTable)
 {
 	FunctionData* data = new FunctionData();
-	functionList = new vector<string>();
 	data->statements = new BaseStatement(*declaration->getBaseStatement());
 	DeclarationSpecifiers* declaration_specifiers = declaration->getDeclarationSpecifiers();
 	if (declaration_specifiers != nullptr && declaration_specifiers->getDeclarationSpecifiersNodeList() != nullptr)
@@ -154,51 +163,57 @@ void ProgramData::handleDeclaration(Declaration const * declaration, vector<Vari
 		vector<InitDeclarator*>* initDeclaratorsList = declaration->getVectorInitDeclarator();
 		plist = getDeclarationParameterList(initDeclaratorsList);
 		vector<DeclarationSpecifiersNode*>* list = declSpecifiers->getDeclarationSpecifiersNodeList();
-		for (auto ptr : *list)
+		if (list != nullptr)
 		{
-			if (ptr->typeSpecifier)
+			for (auto ptr : *list)
 			{
-				TokenType temp = ptr->typeSpecifier->getType().value();
-				if (temp == UNSIGNED)
+				if (ptr->typeSpecifier)
 				{
-					unsign = true;
-				}
-				else if (temp == STRUCT || temp == UNION)
-				{
-					auto declaration_specifiers = declaration->getDeclarationSpecifiers();
-					if (declaration_specifiers != nullptr)
+					TokenType temp = ptr->typeSpecifier->getType().value();
+					if (temp == UNSIGNED)
 					{
-						auto declaration_specifiers_list = declaration_specifiers->getDeclarationSpecifiersNodeList();
-						for (auto ptr : *declaration_specifiers_list)
+						unsign = true;
+					}
+					else if (temp == STRUCT || temp == UNION)
+					{
+						auto declaration_specifiers = declaration->getDeclarationSpecifiers();
+						if (declaration_specifiers != nullptr)
 						{
-							auto type_specifier = ptr->typeSpecifier;
-							if (type_specifier != nullptr)
+							auto declaration_specifiers_list = declaration_specifiers->getDeclarationSpecifiersNodeList();
+							if (declaration_specifiers_list != nullptr)
 							{
-								structName = type_specifier->getStructOrUnionSpecifier()->getName()->getSymbolName();
-								auto typedefEntry = structList->find(structName);
-								if (typedefEntry != structList->end())
+								for (auto ptr : *declaration_specifiers_list)
 								{
-									suSpec = typedefEntry->second;
+									auto type_specifier = ptr->typeSpecifier;
+									if (type_specifier != nullptr)
+									{
+										structName = type_specifier->getStructOrUnionSpecifier()->getName()->getSymbolName();
+										auto typedefEntry = structList->find(structName);
+										if (typedefEntry != structList->end())
+										{
+											suSpec = typedefEntry->second;
+										}
+									}
 								}
 							}
 						}
+						type = temp;
 					}
-					type = temp;
-				}
-				else if (temp == TYPE_NAME)
-				{
-					vector<DeclarationSpecifiersNode*>* temp2 = ptr->typeSpecifier->getTypedefInfo()->getDeclaration()->getDeclarationSpecifiers()->getDeclarationSpecifiersNodeList();
-					for (DeclarationSpecifiersNode* node : *temp2)
+					else if (temp == TYPE_NAME)
 					{
-						if (node->typeSpecifier != nullptr)
+						vector<DeclarationSpecifiersNode*>* temp2 = ptr->typeSpecifier->getTypedefInfo()->getDeclaration()->getDeclarationSpecifiers()->getDeclarationSpecifiersNodeList();
+						for (DeclarationSpecifiersNode* node : *temp2)
 						{
-							type = node->typeSpecifier->getType().value();
+							if (node->typeSpecifier != nullptr)
+							{
+								type = node->typeSpecifier->getType().value();
+							}
 						}
 					}
-				}
-				else
-				{
-					type = temp;
+					else
+					{
+						type = temp;
+					}
 				}
 			}
 		}
@@ -250,6 +265,7 @@ BaseCodeGenerator* ProgramData::processGlobalVariables()
 			}
 		}
 	}
+	functionList = new vector<string>();
 	generator = new MasmCodeGenerator(variableTable, functionTable);
 	return generator;
 }

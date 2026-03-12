@@ -13,26 +13,34 @@ using namespace std;
 
 MasmCodeGenerator::MasmCodeGenerator(vector<VariableData*>* variableTable, vector<FunctionData*>* functionTable)
 	: BaseCodeGenerator(variableTable, functionTable)
-{
-}
+{}
 
 MasmCodeGenerator::~MasmCodeGenerator()
 {
-	for (FunctionData* ptr : *functionTable)
+	if (functionTable != nullptr)
 	{
-		for (VariableData* data : *ptr->parameters)
+		for (FunctionData* ptr : *functionTable)
 		{
-			delete data;
+			if (ptr->parameters != nullptr)
+			{
+				for (VariableData* data : *ptr->parameters)
+				{
+					delete data;
+				}
+				delete ptr->parameters;
+			}
+			delete ptr;
 		}
-		delete ptr->parameters;
-		delete ptr;
+		delete functionTable;
 	}
-	delete functionTable;
-	for (VariableData* ptr : *variableTable)
+	if (variableTable != nullptr)
 	{
-		delete ptr;
+		for (VariableData* ptr : *variableTable)
+		{
+			delete ptr;
+		}
+		delete variableTable;
 	}
-	delete variableTable;
 }
 
 string MasmCodeGenerator::vectorToCommaSeparatedList(const vector<string>& vec)
@@ -344,10 +352,10 @@ void MasmCodeGenerator::handlePrototype(ofstream& out)
 		if (ptr->plist != nullptr)
 		{
 			vector<string> paramList;
-			for (ParameterDeclaration *node : *ptr->plist->getVectorParameterDeclaration())
+			for (ParameterDeclaration* node : *ptr->plist->getVectorParameterDeclaration())
 			{
-				DeclarationSpecifiers *temp1 = node->getDeclarationSpecifiers();
-				Declarator *temp2 = node->getDeclarator();
+				DeclarationSpecifiers* temp1 = node->getDeclarationSpecifiers();
+				Declarator* temp2 = node->getDeclarator();
 				vector<DeclarationSpecifiersNode*>* temp3 = temp1->getDeclarationSpecifiersNodeList();
 
 				auto name = temp2->getDirectDeclarator()->getIdentifier()->getSymbolName();
@@ -366,7 +374,7 @@ void MasmCodeGenerator::handlePrototype(ofstream& out)
 					else if (temp == FLOAT) type = temp;
 					else if (temp == DOUBLE) type = temp;
 					else if (temp == LONG_DOUBLE)  type = temp;
-					else if (temp == UNSIGNED) isUnsigned = true; 
+					else if (temp == UNSIGNED) isUnsigned = true;
 					else if (temp == SIGNED) isUnsigned = false;
 				}
 				if (type != UNKNOWN)
@@ -412,8 +420,7 @@ void MasmCodeGenerator::generateCode(ofstream& out)
 }
 
 MasmCodeGenerator::MasmCodeGenerator(MasmCodeGenerator&& other) noexcept : BaseCodeGenerator(std::move(other))
-{
-}
+{}
 
 MasmCodeGenerator& MasmCodeGenerator::operator=(const MasmCodeGenerator& other)
 {
