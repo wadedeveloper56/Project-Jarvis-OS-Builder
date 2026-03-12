@@ -1,5 +1,7 @@
 #pragma once
 
+#include <vector>
+#include <stack>
 #include "Token.h"
 #include "Constant.h"
 #include "NodeType.h"
