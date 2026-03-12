@@ -1,4 +1,4 @@
-JWasm v2.12pre, Mar 11 2026
+JWasm v2.12pre, Mar 12 2026
 test1.asm
                                 .386
                                 .model flat, c;
@@ -9,54 +9,28 @@ test1.asm
                             *   assume cs:flat,ds:flat,ss:flat,es:flat,fs:ERROR,gs:ERROR
                                 option casemap : none
 
-                                EXTERN _funct :PROTO value: SDWORD ;
+                                EXTERN _printf :PROTO format: DWORD ;
 
 
                                 .data
 00000000                    *   _DATA segment
                             *   assume cs:ERROR
-00000000  0600                  _var2 SWORD 6
+                                _var2 SWORD 6
 00000000                        .data?
-00000002                    *   _DATA ends
+                            *   _DATA ends
 00000000                    *   _BSS segment DWORD FLAT PUBLIC 'BSS'
                             *   assume cs:ERROR
-00000000  00                    _var1 SBYTE  ?
-00000001  00000000              _var3 SDWORD  ?
+                                _var1 SBYTE  ?
+                                _var3 SDWORD  ?
 
 00000000                        .code
-00000005                    *   _BSS ends
+                            *   _BSS ends
 00000000                    *   _TEXT segment
                             *   assume cs:FLAT
                                 _main PROTO C _argc:SDWORD , _argv:DWORD ;
-                                _priceless PROTO C _value:SDWORD ;
 
 00000000                        _main PROC C, _argc:SDWORD , _argv:DWORD 
-00000000  55                *   push ebp
-00000001  8BEC              *   mov ebp, esp
-00000003                        	invoke _funct, 77
-00000003  6A4D              *    push 77
-00000005  E800000000        *    call _funct
-0000000A  83C404            *    add esp, 4
-0000000D                        	invoke _priceless, 88
-0000000D  6A58              *    push 88
-0000000F  E80A000000        *    call _priceless
-00000014  83C404            *    add esp, 4
-00000017  B805000000            	mov eax,5
-0000001C                        	ret
-0000001C  C9                *   leave
-0000001D  C3                *   retn 
-0000001E                        _main endp
-
-0000001E                        _priceless PROC C, _value:SDWORD 
-0000001E  55                *   push ebp
-0000001F  8BEC              *   mov ebp, esp
-00000021  B863000000            	mov eax,99
-00000026                        	ret
-00000026  C9                *   leave
-00000027  C3                *   retn 
-00000028                        _priceless endp
-                                end
-00000028                    *   _TEXT ends
+                           Error A2099: END directive required at end of file
 
 
 Macros:
@@ -77,19 +51,17 @@ Segments and Groups:
 FLAT . . . . . . . . . . . . . .        GROUP
 _BSS . . . . . . . . . . . . . .        32 Bit   00000005 DWord   Public  'BSS'
 _DATA  . . . . . . . . . . . . .        32 Bit   00000002 DWord   Public  'DATA'
-_TEXT  . . . . . . . . . . . . .        32 Bit   00000028 DWord   Public  'CODE'
+_TEXT  . . . . . . . . . . . . .        32 Bit   00000000 DWord   Public  'CODE'
 
 
 Procedures, parameters and locals:
 
                 N a m e                 Type     Value    Segment  Length
 
-_funct . . . . . . . . . . . . .        P Near32 00000000 No Seg   00000000 External  C
-_main  . . . . . . . . . . . . .        P Near   00000000 _TEXT    0000001E Public   C
+_main  . . . . . . . . . . . . .        P Near   00000000 _TEXT    00000000 Public   C
   _argc  . . . . . . . . . . . .        DWord             ebp + 0008
   _argv  . . . . . . . . . . . .        DWord             ebp + 000C
-_priceless . . . . . . . . . . .        P Near   0000001E _TEXT    0000000A Public   C
-  _value . . . . . . . . . . . .        DWord             ebp + 0008
+_printf  . . . . . . . . . . . .        P Near32 00000000 No Seg   00000000 External  C
 
 
 Symbols:
@@ -98,14 +70,14 @@ Symbols:
 
 @CodeSize  . . . . . . . . . . .        Number             0h 
 @Cpu . . . . . . . . . . . . . .        Number           D0Fh 
-@CurSeg  . . . . . . . . . . . .        Text   
+@CurSeg  . . . . . . . . . . . .        Text   _TEXT
 @DataSize  . . . . . . . . . . .        Number             0h 
-@Date  . . . . . . . . . . . . .        Text   03/11/26
+@Date  . . . . . . . . . . . . .        Text   03/12/26
 @FileCur . . . . . . . . . . . .        Text   test1.asm
 @FileName  . . . . . . . . . . .        Text   TEST1
 @Interface . . . . . . . . . . .        Number             1h 
 @Model . . . . . . . . . . . . .        Number             7h 
-@Time  . . . . . . . . . . . . .        Text   18:21:13
+@Time  . . . . . . . . . . . . .        Text   09:47:48
 @Version . . . . . . . . . . . .        Text   800
 @code  . . . . . . . . . . . . .        Text   _TEXT
 @data  . . . . . . . . . . . . .        Text   FLAT
@@ -115,4 +87,4 @@ _var1  . . . . . . . . . . . . .        Byte               0h _BSS C
 _var2  . . . . . . . . . . . . .        Word               0h _DATA C
 _var3  . . . . . . . . . . . . .        DWord              1h _BSS C
 
-test1.asm: 29 lines, 2 passes, 1 ms, 0 warnings, 0 errors
+test1.asm: 17 lines, 1 passes, 1 ms, 0 warnings, 1 errors

@@ -250,6 +250,7 @@ BaseCodeGenerator* ProgramData::processGlobalVariables()
 {
 	vector<VariableData*>* variableTable = new vector<VariableData*>();
 	vector<FunctionData*>* functionTable = new vector<FunctionData*>();
+	functionList = new vector<string>();
 
 	if (program != nullptr)
 	{
@@ -265,7 +266,7 @@ BaseCodeGenerator* ProgramData::processGlobalVariables()
 			}
 		}
 	}
-	functionList = new vector<string>();
+
 	generator = new MasmCodeGenerator(variableTable, functionTable);
 	return generator;
 }

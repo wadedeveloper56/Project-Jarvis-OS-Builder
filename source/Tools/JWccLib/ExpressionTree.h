@@ -99,5 +99,9 @@ namespace WadeSpace
 		TreeNodeData* getData() const;
 		TreeNode* getLeft() const;
 		TreeNode* getRight() const;
+
+		void evaluate();
+		void process(TreeNodeData* left, TreeNodeData* right, TreeNodeData* current);
+		TreeNode* postOrderTraversal(TreeNode* node, void (ExpressionTree::*process)(TreeNodeData* left, TreeNodeData* right, TreeNodeData* current));
 	};
 }

@@ -121,12 +121,19 @@ void MasmCodeGenerator::handleIndividualFunctionStatements(ofstream& out, BaseSt
 				vector<ExpressionTree*>* parameters = exp->getData()->getArgumentList();
 				string functionName = exp->getLeft()->getData()->getToken3()->getSymbolName();
 				vector<string> list;
-				for (ExpressionTree* node2 : *parameters)
+				if (parameters != nullptr)
 				{
-					string str = to_string(node2->getData()->getConstant()->getIConst()->getIntegerConst());
-					list.push_back(str);
+					for (ExpressionTree* node2 : *parameters)
+					{
+						string str = to_string(node2->getData()->getConstant()->getIConst()->getIntegerConst());
+						list.push_back(str);
+					}
+					out << "\t" << "invoke _" << functionName << ", " << vectorToCommaSeparatedList(list) << endl;
 				}
-				out << "\t" << "invoke _" << functionName << ", " << vectorToCommaSeparatedList(list) << endl;
+				else
+				{
+					out << "\t" << "invoke _" << functionName << endl;
+				}
 			}
 		}
 		else if (node->getOp() == jump_statement)
