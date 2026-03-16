@@ -269,12 +269,10 @@ BaseCodeGenerator* ProgramData::processGlobalVariables()
 			if (ptr->hasDeclaration())
 			{
 				auto decl = ptr->getDeclaration();
-				bool isStruct = findType(decl)->getType().value() == STRUCT;
+				auto type = findType(decl)->getType().value();
+				bool isStruct = type == STRUCT || type == UNION;
 				bool hasInitDecl = decl->getVectorInitDeclarator() != nullptr;
-				if (isStruct && !hasInitDecl)
-				{
-				}
-				else
+				if (!(isStruct && !hasInitDecl))
 				{
 					handleDeclaration(decl, variableTable);
 				}

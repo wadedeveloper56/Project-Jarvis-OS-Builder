@@ -345,7 +345,7 @@ void MasmCodeGenerator::handleStructs(ofstream& out)
 		auto suSpec = value;
 		auto name = suSpec->getName()->getSymbolName();
 		auto vars = suSpec->getVectorStructDeclaration();
-		out << name << " STRUCT" << endl;
+		out << name << (value->getStructOrUnion()->getKeywordName()=="struct" ? " STRUCT" : " UNION") << endl;
 		for (StructDeclaration* var : *vars)
 		{
 			auto type = var->getSpecifierQualifierList()->getTypeSpecifier()->getType().value();
