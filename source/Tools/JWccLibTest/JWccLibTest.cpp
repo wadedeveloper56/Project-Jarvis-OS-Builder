@@ -48,7 +48,28 @@ namespace JWccLibTest
 			delete root;
 		}
 
-		TEST_METHOD(ExpressionTree_TraversalTest1)
+		TEST_METHOD(ExpressionTree_SingleNode_TraversalTest1)
+		{
+			const auto token1 = createConstantULLToken(5LL);
+			Constant* constant1 = new Constant(token1, nullptr, nullptr, TokenType::INTEGER_CONSTANT);
+			ExpressionTree* root = createExpression(NodeType::NT_OP, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, constant1, nullptr, nullptr, nullptr);
+
+			Assert::IsNotNull(root);
+			Assert::IsNotNull(root->getData());
+			Assert::IsNull(root->getLeft());
+			Assert::IsNull(root->getRight());
+
+			TreeNode* result = root->postOrderTraversal(root->getTree(), testprocess);
+
+			Assert::IsNotNull(result);
+			Assert::IsNotNull(result->getData());
+			Assert::IsNull(result->getLeft());
+			Assert::IsNull(result->getRight());
+
+			delete root;
+		}
+
+		TEST_METHOD(ExpressionTree_MultiNode_TraversalTest1)
 		{
 			const auto token1 = createConstantULLToken(5LL);
 			Constant* constant1 = new Constant(token1, nullptr, nullptr, TokenType::INTEGER_CONSTANT);

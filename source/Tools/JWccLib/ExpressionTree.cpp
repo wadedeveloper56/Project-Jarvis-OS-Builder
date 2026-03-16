@@ -13,11 +13,11 @@ TreeNode* ExpressionTree::postOrderTraversal(TreeNode* node, void (*process)(Tre
 	TreeNode* left = postOrderTraversal(node->getLeft(), process);
 	TreeNode* right = postOrderTraversal(node->getRight(), process);
 	TreeNodeData* data = node->getData();
-	if (data)
+	if (data && process)
 	{
 		(*process)(left ? left->getData() : nullptr, right ? right->getData() : nullptr, data);
 	}
-	return nullptr;
+	return node;
 }
 
 
