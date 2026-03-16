@@ -1,13 +1,13 @@
-char var1;
-short var2 = 6;
-int var3;
+struct data1
+{
+  float var1;
+  double var2;
+  long double var3;
+};
 
-int test1()
+struct data1 var4;
+
+int main(int argc, char* argv[])
 {
 	return 5;
-}           
-
-long long test2()
-{
-	return 5;
-}           
+}   

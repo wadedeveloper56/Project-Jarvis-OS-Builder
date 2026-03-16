@@ -3,25 +3,22 @@
 option casemap : none
 
 
+data1 STRUCT
+	var1 REAL4 ?
+	var2 REAL8 ?
+	var3 REAL10 ?
+data1 ENDS
 
 .data
-_var2 SWORD 6
 .data?
-_var1 SBYTE  ?
-_var3 SDWORD  ?
+_var4 data1 <>
 
 .code
-_test1 PROTO C;
-_test2 PROTO C;
+_main PROTO C _argc:SDWORD , _argv:DWORD ;
 
-_test1 PROC C
+_main PROC C, _argc:SDWORD , _argv:DWORD 
 	mov eax,5
 	ret
-_test1 endp
-
-_test2 PROC C
-	mov eax,5
-	ret
-_test2 endp
+_main endp
 end
 

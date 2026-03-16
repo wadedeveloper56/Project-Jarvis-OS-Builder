@@ -171,6 +171,12 @@ TokenPtr TreeNodeData::getToken3() const { return token3; }
 vector<ExpressionTree*>* TreeNodeData::getArgumentList() const { return argumentList; }
 Constant* TreeNodeData::getConstant() const { return constant; }
 
+[[nodiscard]] TokenPtr TreeNodeData::getIConst() const { return constant ? constant->getIConst() : nullptr; }
+[[nodiscard]] TokenPtr TreeNodeData::getFConst() const { return constant ? constant->getFConst() : nullptr; }
+[[nodiscard]] TokenPtr TreeNodeData::getStrConst() const { return constant ? constant->getStrConst() : nullptr; }
+[[nodiscard]] optional<TokenType> TreeNodeData::getTokenType() const { return constant ? constant->getType() : nullopt; }
+
+
 
 TreeNode::TreeNode()
 {

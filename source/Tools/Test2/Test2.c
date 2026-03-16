@@ -1,8 +1,6 @@
-#include <stdio.h>
-
-char var1;
-short var2 = 6;
-int var3;
+float var1 = 1.5;
+double var2 = 9.5;
+long double var3 = 99.8;
 
 int test1()
 {
@@ -17,4 +15,5 @@ long long test2()
 int main(int argc, char* argv[])
 {
 	return 5;
-}           
+}
+

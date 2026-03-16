@@ -10,38 +10,37 @@ test1.asm
                                 option casemap : none
 
 
+00000000                        data1 STRUCT
+00000000                        	var1 REAL4 ?
+00000004                        	var2 REAL8 ?
+0000000C                        	var3 REAL10 ?
+00000016                        data1 ENDS
 
                                 .data
 00000000                    *   _DATA segment
                             *   assume cs:ERROR
-00000000  0600                  _var2 SWORD 6
 00000000                        .data?
-00000002                    *   _DATA ends
+                            *   _DATA ends
 00000000                    *   _BSS segment DWORD FLAT PUBLIC 'BSS'
                             *   assume cs:ERROR
-00000000  00                    _var1 SBYTE  ?
-00000001  00000000              _var3 SDWORD  ?
+00000000  000000000000000000    _var4 data1 <>
 
 00000000                        .code
-00000005                    *   _BSS ends
+00000016                    *   _BSS ends
 00000000                    *   _TEXT segment
                             *   assume cs:FLAT
-                                _test1 PROTO C;
-                                _test2 PROTO C;
+                                _main PROTO C _argc:SDWORD , _argv:DWORD ;
 
-00000000                        _test1 PROC C
-00000000  B805000000            	mov eax,5
-00000005                        	ret
-00000005  C3                *   retn
-00000006                        _test1 endp
-
-00000006                        _test2 PROC C
-00000006  B805000000            	mov eax,5
-0000000B                        	ret
-0000000B  C3                *   retn
-0000000C                        _test2 endp
+00000000                        _main PROC C, _argc:SDWORD , _argv:DWORD 
+00000000  55                *   push ebp
+00000001  8BEC              *   mov ebp, esp
+00000003  B805000000            	mov eax,5
+00000008                        	ret
+00000008  C9                *   leave
+00000009  C3                *   retn 
+0000000A                        _main endp
                                 end
-0000000C                    *   _TEXT ends
+0000000A                    *   _TEXT ends
 
 
 Macros:
@@ -55,22 +54,33 @@ Macros:
 @SubStr  . . . . . . . . . . . .        Func     0
 
 
+Structures and Unions:
+
+                N a m e                 Size/Ofs   Type
+
+data1  . . . . . . . . . . . . .              16
+  var1 . . . . . . . . . . . . .               0   DWord
+  var2 . . . . . . . . . . . . .               4   QWord
+  var3 . . . . . . . . . . . . .               C   TByte
+
+
 Segments and Groups:
 
                 N a m e                 Size     Length   Align   Combine Class
 
 FLAT . . . . . . . . . . . . . .        GROUP
-_BSS . . . . . . . . . . . . . .        32 Bit   00000005 DWord   Public  'BSS'
-_DATA  . . . . . . . . . . . . .        32 Bit   00000002 DWord   Public  'DATA'
-_TEXT  . . . . . . . . . . . . .        32 Bit   0000000C DWord   Public  'CODE'
+_BSS . . . . . . . . . . . . . .        32 Bit   00000016 DWord   Public  'BSS'
+_DATA  . . . . . . . . . . . . .        32 Bit   00000000 DWord   Public  'DATA'
+_TEXT  . . . . . . . . . . . . .        32 Bit   0000000A DWord   Public  'CODE'
 
 
 Procedures, parameters and locals:
 
                 N a m e                 Type     Value    Segment  Length
 
-_test1 . . . . . . . . . . . . .        P Near   00000000 _TEXT    00000006 Public   C
-_test2 . . . . . . . . . . . . .        P Near   00000006 _TEXT    00000006 Public   C
+_main  . . . . . . . . . . . . .        P Near   00000000 _TEXT    0000000A Public   C
+  _argc  . . . . . . . . . . . .        DWord             ebp + 0008
+  _argv  . . . . . . . . . . . .        DWord             ebp + 000C
 
 
 Symbols:
@@ -86,14 +96,12 @@ Symbols:
 @FileName  . . . . . . . . . . .        Text   TEST1
 @Interface . . . . . . . . . . .        Number             1h 
 @Model . . . . . . . . . . . . .        Number             7h 
-@Time  . . . . . . . . . . . . .        Text   11:29:17
+@Time  . . . . . . . . . . . . .        Text   17:17:35
 @Version . . . . . . . . . . . .        Text   800
 @code  . . . . . . . . . . . . .        Text   _TEXT
 @data  . . . . . . . . . . . . .        Text   FLAT
 @stack . . . . . . . . . . . . .        Text   FLAT
 __JWASM__  . . . . . . . . . . .        Number            D4h 
-_var1  . . . . . . . . . . . . .        Byte               0h _BSS C
-_var2  . . . . . . . . . . . . .        Word               0h _DATA C
-_var3  . . . . . . . . . . . . .        DWord              1h _BSS C
+_var4  . . . . . . . . . . . . .        data1              0h _BSS C
 
-test1.asm: 26 lines, 2 passes, 1 ms, 0 warnings, 0 errors
+test1.asm: 23 lines, 2 passes, 0 ms, 0 warnings, 0 errors

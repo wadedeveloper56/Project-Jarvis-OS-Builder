@@ -109,19 +109,19 @@ void MasmCodeGenerator::handleFunctionWithParameters(ofstream& out, string name,
 
 void jumpProcess(ostream& out, TreeNodeData* left, TreeNodeData* right, TreeNodeData* current)
 {
-	if (current != nullptr)
+	if (current != nullptr && left == nullptr && right == nullptr)
 	{
 		if (current->getConstant() != nullptr)
 		{
-			if (current->getConstant()->hasIConst())
+			if (current->getIConst() != nullptr)
 			{
-				out << "\t" << "mov eax," << current->getConstant()->getIConst()->getIntegerConst() << endl;
+				out << "\t" << "mov eax," << current->getIConst()->getIntegerConst() << endl;
 			}
 		}
 	}
 }
 
-void MasmCodeGenerator::handleIndividualFunctionStatements(ofstream& out, BaseStatement const* statements)
+void MasmCodeGenerator::handleIndividualFunctionStatements(ofstream& out, TokenType returnType, BaseStatement const* statements)
 {
 	for (BaseStatement* node : *statements->getStatementList())
 	{
@@ -178,7 +178,7 @@ void MasmCodeGenerator::handleIndividualFunction(ofstream& out, FunctionData* pt
 	{
 		out << "_" << ptr->name << " PROC C" << endl;
 	}
-	handleIndividualFunctionStatements(out, statements);
+	handleIndividualFunctionStatements(out, returnType, statements);
 	out << "_" << ptr->name << " endp" << endl;
 }
 
@@ -196,19 +196,19 @@ string MasmCodeGenerator::convertToAsmType(bool isUnsigned, bool isPointer, Toke
 	else if (!isUnsigned && type == SHORT) asmType = " SWORD ";
 	else if (!isUnsigned && type == INT) asmType = " SDWORD ";
 	else if (!isUnsigned && type == LONG) asmType = " SDWORD ";
-	else if (!isUnsigned && type == FLOAT) asmType = " SDWORD ";
 	else if (!isUnsigned && type == LONG_LONG) asmType = " SQWORD ";
-	else if (!isUnsigned && type == DOUBLE) asmType = " SQWORD ";
-	else if (!isUnsigned && type == LONG_DOUBLE) asmType = " TBYTE ";
+	else if (!isUnsigned && type == FLOAT) asmType = " REAL4 ";
+	else if (!isUnsigned && type == DOUBLE) asmType = " REAL8 ";
+	else if (!isUnsigned && type == LONG_DOUBLE) asmType = " REAL10 ";
 	else if (isUnsigned && type == CHAR) asmType = " BYTE ";
 	else if (isUnsigned && type == BOOL) asmType = " BYTE ";
 	else if (isUnsigned && type == SHORT) asmType = " WORD ";
 	else if (isUnsigned && type == INT) asmType = " DWORD ";
 	else if (isUnsigned && type == LONG) asmType = " DWORD ";
-	else if (isUnsigned && type == FLOAT) asmType = " DWORD ";
 	else if (isUnsigned && type == LONG_LONG) asmType = " QWORD ";
-	else if (isUnsigned && type == DOUBLE) asmType = " QWORD ";
-	else if (isUnsigned && type == LONG_DOUBLE) asmType = " TBYTE ";
+	else if (isUnsigned && type == FLOAT) asmType = " REAL4 ";
+	else if (isUnsigned && type == DOUBLE) asmType = " REAL8 ";
+	else if (isUnsigned && type == LONG_DOUBLE) asmType = " REAL10 ";
 	return asmType;
 }
 
@@ -228,8 +228,7 @@ void MasmCodeGenerator::outputVariable(ofstream& out, _VariableData* ptr)
 	{
 		if (isStruct && !isArray)
 		{
-			auto suSpec = ptr->suSpec;
-			auto structName = suSpec->getName()->getSymbolName();
+			auto structName = ptr->structName;
 			out << variableName << " " << structName << " <>" << endl;
 		}
 		else if (!isStruct && isArray)
@@ -339,33 +338,33 @@ void MasmCodeGenerator::handleFunctionTable(ofstream& out)
 
 void MasmCodeGenerator::handleStructs(ofstream& out)
 {
-	for (auto ptr : *variableTable)
+	for (map<string, StructOrUnionSpecifier*>::iterator iterator = structList->begin(); iterator != structList->end(); ++iterator)
 	{
-		if (ptr->type == STRUCT || ptr->type == UNION)
+		auto key = iterator->first;
+		auto value = iterator->second;
+		auto suSpec = value;
+		auto name = suSpec->getName()->getSymbolName();
+		auto vars = suSpec->getVectorStructDeclaration();
+		out << name << " STRUCT" << endl;
+		for (StructDeclaration* var : *vars)
 		{
-			auto suSpec = ptr->suSpec;
-			auto name = suSpec->getName()->getSymbolName();
-			auto vars = suSpec->getVectorStructDeclaration();
-			out << name << (ptr->type == STRUCT ? " STRUCT" : " UNION") << endl;
-			for (StructDeclaration* var : *vars)
+			auto type = var->getSpecifierQualifierList()->getTypeSpecifier()->getType().value();
+			auto structDecl = var->getVectorStructDeclarator();
+			for (auto decl : *structDecl)
 			{
-				auto type = var->getSpecifierQualifierList()->getTypeSpecifier()->getType().value();
-				auto structDecl = var->getVectorStructDeclarator();
-				for (auto decl : *structDecl)
-				{
-					auto varName = decl->getDeclarator()->getDirectDeclarator()->getIdentifier()->getSymbolName();
-					if (type == CHAR || type == BOOL) out << "\t" << varName << " SBYTE ?" << endl;
-					else if (type == SHORT) out << "\t" << varName << " SWORD ?" << endl;
-					else if (type == INT) out << "\t" << varName << " SDWORD ?" << endl;
-					else if (type == LONG) out << "\t" << varName << " SDWORD ?" << endl;
-					else if (type == LONG_LONG) out << "\t" << varName << " SQWORD ?" << endl;
-					else if (type == FLOAT) out << "\t" << varName << " SDWORD ?" << endl;
-					else if (type == DOUBLE) out << "\t" << varName << " SQWORD ?" << endl;
-					else if (type == LONG_DOUBLE) out << "\t" << varName << " TBYTE ?" << endl;
-				}
+				auto varName = decl->getDeclarator()->getDirectDeclarator()->getIdentifier()->getSymbolName();
+				if (type == CHAR || type == BOOL) out << "\t" << varName << " SBYTE ?" << endl;
+				else if (type == SHORT) out << "\t" << varName << " SWORD ?" << endl;
+				else if (type == INT) out << "\t" << varName << " SDWORD ?" << endl;
+				else if (type == LONG) out << "\t" << varName << " SDWORD ?" << endl;
+				else if (type == LONG_LONG) out << "\t" << varName << " SQWORD ?" << endl;
+				else if (type == FLOAT) out << "\t" << varName << " REAL4 ?" << endl;
+				else if (type == DOUBLE) out << "\t" << varName << " REAL8 ?" << endl;
+				else if (type == LONG_DOUBLE) out << "\t" << varName << " REAL10 ?" << endl;
 			}
-			out << name << " ENDS" << endl;
 		}
+		out << name << " ENDS" << endl;
+
 	}
 }
 

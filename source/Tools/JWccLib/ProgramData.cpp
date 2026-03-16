@@ -149,101 +149,111 @@ ParameterTypeList* ProgramData::getDeclarationParameterList(vector<InitDeclarato
 	return plist;
 }
 
-void ProgramData::handleDeclaration(Declaration const * declaration, vector<VariableData*>* variableTable)
+void ProgramData::handleDeclaration(Declaration const* declaration, vector<VariableData*>* variableTable)
 {
-	if (declaration != nullptr)
-	{
-		TokenType type;
-		bool unsign = false;
-		string structName;
-		StructOrUnionSpecifier* suSpec = nullptr;
-		ParameterTypeList* plist = nullptr;
+	TokenType type;
+	bool unsign = false;
+	string structName;
+	StructOrUnionSpecifier* suSpec = nullptr;
+	ParameterTypeList* plist = nullptr;
 
-		DeclarationSpecifiers* declSpecifiers = declaration->getDeclarationSpecifiers();
-		vector<InitDeclarator*>* initDeclaratorsList = declaration->getVectorInitDeclarator();
-		plist = getDeclarationParameterList(initDeclaratorsList);
-		vector<DeclarationSpecifiersNode*>* list = declSpecifiers->getDeclarationSpecifiersNodeList();
-		if (list != nullptr)
+	DeclarationSpecifiers* declSpecifiers = declaration->getDeclarationSpecifiers();
+	vector<InitDeclarator*>* initDeclaratorsList = declaration->getVectorInitDeclarator();
+	plist = getDeclarationParameterList(initDeclaratorsList);
+	vector<DeclarationSpecifiersNode*>* list = declSpecifiers->getDeclarationSpecifiersNodeList();
+	if (list != nullptr)
+	{
+		for (auto ptr : *list)
 		{
-			for (auto ptr : *list)
+			if (ptr->typeSpecifier)
 			{
-				if (ptr->typeSpecifier)
+				TokenType temp = ptr->typeSpecifier->getType().value();
+				if (temp == UNSIGNED)
 				{
-					TokenType temp = ptr->typeSpecifier->getType().value();
-					if (temp == UNSIGNED)
+					unsign = true;
+				}
+				else if (temp == STRUCT || temp == UNION)
+				{
+					auto declaration_specifiers = declaration->getDeclarationSpecifiers();
+					if (declaration_specifiers != nullptr)
 					{
-						unsign = true;
-					}
-					else if (temp == STRUCT || temp == UNION)
-					{
-						auto declaration_specifiers = declaration->getDeclarationSpecifiers();
-						if (declaration_specifiers != nullptr)
+						auto declaration_specifiers_list = declaration_specifiers->getDeclarationSpecifiersNodeList();
+						if (declaration_specifiers_list != nullptr)
 						{
-							auto declaration_specifiers_list = declaration_specifiers->getDeclarationSpecifiersNodeList();
-							if (declaration_specifiers_list != nullptr)
+							for (auto ptr : *declaration_specifiers_list)
 							{
-								for (auto ptr : *declaration_specifiers_list)
+								auto type_specifier = ptr->typeSpecifier;
+								if (type_specifier != nullptr)
 								{
-									auto type_specifier = ptr->typeSpecifier;
-									if (type_specifier != nullptr)
+									structName = type_specifier->getStructOrUnionSpecifier()->getName()->getSymbolName();
+									auto typedefEntry = structList->find(structName);
+									if (typedefEntry != structList->end())
 									{
-										structName = type_specifier->getStructOrUnionSpecifier()->getName()->getSymbolName();
-										auto typedefEntry = structList->find(structName);
-										if (typedefEntry != structList->end())
-										{
-											suSpec = typedefEntry->second;
-										}
+										suSpec = typedefEntry->second;
 									}
 								}
 							}
 						}
-						type = temp;
 					}
-					else if (temp == TYPE_NAME)
+					type = temp;
+				}
+				else if (temp == TYPE_NAME)
+				{
+					vector<DeclarationSpecifiersNode*>* temp2 = ptr->typeSpecifier->getTypedefInfo()->getDeclaration()->getDeclarationSpecifiers()->getDeclarationSpecifiersNodeList();
+					for (DeclarationSpecifiersNode* node : *temp2)
 					{
-						vector<DeclarationSpecifiersNode*>* temp2 = ptr->typeSpecifier->getTypedefInfo()->getDeclaration()->getDeclarationSpecifiers()->getDeclarationSpecifiersNodeList();
-						for (DeclarationSpecifiersNode* node : *temp2)
+						if (node->typeSpecifier != nullptr)
 						{
-							if (node->typeSpecifier != nullptr)
-							{
-								type = node->typeSpecifier->getType().value();
-							}
+							type = node->typeSpecifier->getType().value();
 						}
 					}
-					else
-					{
-						type = temp;
-					}
 				}
-			}
-		}
-		if (initDeclaratorsList != nullptr)
-		{
-			for (InitDeclarator* initDecl : *initDeclaratorsList)
-			{
-				Declarator* declarator = initDecl->getDeclarator();
-				DirectDeclarator* dd = declarator->getDirectDeclarator();
-
-				VariableData* data = new VariableData();
-				data->initializer = nullptr;
-				data->arraySize = 1;
-				data->type = type;
-				data->pointer = declarator->hasPointer();
-				data->name = initDecl->getVariableName();
-				data->unsign = unsign;
-				data->plist = plist;
-
-				if (type == STRUCT || type == UNION)
+				else
 				{
-					data->structName = structName;
-					data->suSpec = suSpec ? new StructOrUnionSpecifier(*suSpec) : nullptr;
+					type = temp;
 				}
-				if (initDecl->hasInitializer()) data->initializer = new Initializer(*initDecl->getInitializer());
-				if (dd->hasConstantExpression()) data->arraySize = dd->getConstantExpression()->getData()->getConstant()->getIConst()->getIntegerConst();
-				variableTable->push_back(data);
 			}
 		}
 	}
+
+	for (InitDeclarator* initDecl : *initDeclaratorsList)
+	{
+		Declarator* declarator = initDecl->getDeclarator();
+		DirectDeclarator* dd = declarator->getDirectDeclarator();
+
+		VariableData* data = new VariableData();
+		data->initializer = nullptr;
+		data->arraySize = 1;
+		data->type = type;
+		data->pointer = declarator->hasPointer();
+		data->name = initDecl->getVariableName();
+		data->unsign = unsign;
+		data->plist = plist;
+
+		if (type == STRUCT || type == UNION)
+		{
+			data->structName = structName;
+			data->suSpec = suSpec ? new StructOrUnionSpecifier(*suSpec) : nullptr;
+		}
+		if (initDecl->hasInitializer()) data->initializer = new Initializer(*initDecl->getInitializer());
+		if (dd->hasConstantExpression()) data->arraySize = dd->getConstantExpression()->getData()->getConstant()->getIConst()->getIntegerConst();
+		variableTable->push_back(data);
+	}
+
+}
+
+TypeSpecifier* ProgramData::findType(Declaration* decl)
+{
+	auto specifiers = decl->getDeclarationSpecifiers();
+	auto list = specifiers->getDeclarationSpecifiersNodeList();
+	for (DeclarationSpecifiersNode* node : *list)
+	{
+		if (node->typeSpecifier != nullptr)
+		{
+			return node->typeSpecifier;
+		}
+	}
+	return nullptr;
 }
 
 BaseCodeGenerator* ProgramData::processGlobalVariables()
@@ -258,7 +268,16 @@ BaseCodeGenerator* ProgramData::processGlobalVariables()
 		{
 			if (ptr->hasDeclaration())
 			{
-				handleDeclaration(ptr->getDeclaration(), variableTable);
+				auto decl = ptr->getDeclaration();
+				bool isStruct = findType(decl)->getType().value() == STRUCT;
+				bool hasInitDecl = decl->getVectorInitDeclarator() != nullptr;
+				if (isStruct && !hasInitDecl)
+				{
+				}
+				else
+				{
+					handleDeclaration(decl, variableTable);
+				}
 			}
 			else if (ptr->hasFunction())
 			{

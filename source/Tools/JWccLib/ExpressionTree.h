@@ -60,6 +60,11 @@ namespace WadeSpace
 		TokenPtr getToken3() const;
 		vector<ExpressionTree*>* getArgumentList() const;
 		Constant* getConstant() const;
+
+		[[nodiscard]] TokenPtr getIConst() const;
+		[[nodiscard]] TokenPtr getFConst() const;
+		[[nodiscard]] TokenPtr getStrConst() const;
+		[[nodiscard]] optional<TokenType> getTokenType() const;
 	};
 
 	class TreeNode
