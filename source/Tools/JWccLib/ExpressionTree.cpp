@@ -4,15 +4,6 @@
 
 using namespace WadeSpace;
 
-void process(TreeNodeData* left, TreeNodeData* right, TreeNodeData* current)
-{
-}
-
-void ExpressionTree::evaluate()
-{
-	postOrderTraversal(tree, process);
-}
-
 TreeNode* ExpressionTree::postOrderTraversal(TreeNode* node, void (*process)(TreeNodeData* left, TreeNodeData* right, TreeNodeData* current))
 {
 	if (node == nullptr)
@@ -26,6 +17,7 @@ TreeNode* ExpressionTree::postOrderTraversal(TreeNode* node, void (*process)(Tre
 	{
 		(*process)(left ? left->getData() : nullptr, right ? right->getData() : nullptr, data);
 	}
+	return nullptr;
 }
 
 

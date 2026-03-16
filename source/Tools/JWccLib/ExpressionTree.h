@@ -102,7 +102,6 @@ namespace WadeSpace
 		TreeNode* getLeft() const;
 		TreeNode* getRight() const;
 
-		void evaluate();
 		TreeNode* postOrderTraversal(TreeNode* node, void (*process)(TreeNodeData* left, TreeNodeData* right, TreeNodeData* current));
 	};
 }
