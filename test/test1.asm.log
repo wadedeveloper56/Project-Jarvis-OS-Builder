@@ -1,0 +1,92 @@
+PEDUMP - Win32/Win64 COFF EXE/OBJ/LIB file dumper v1.0 (C) Copyright 2025-2026 Christopher D. Wade.
+All Rights Reserved
+Dump of file test1.obj
+File Size 338 bytes
+File Type: 32-bit COFF OBJECT
+
+FILE HEADER VALUES
+               14C Machine (Intel 386 or later processors and compatible processors)
+                 3 (3) Number of Sections
+          69B82FDD TimeDateStamp ->  n/a
+                9A PointerToSymbolTable
+                 A (10) NumberOfSymbols
+                 0 (0) SizeOfOptionalHeader
+                 0 Flags
+
+
+SECTION HEADER #0 (0)
+   .text name
+       0 physical address
+       0 virtual address
+       C (12) size of raw data
+      8C file pointer to raw data (0000008C to 00000097)
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+60300020 flags
+         Code
+         1_BYTE_ALIGN
+         2_BYTE_ALIGN
+         Executable
+         Readable
+
+RAW DATA #0 (0)
+00000000  b8 05 00 00 00 c3 b8 05  00 00 00 c3              ............
+
+
+SECTION HEADER #1 (1)
+   .data name
+       0 physical address
+       0 virtual address
+       2 (2) size of raw data
+      98 file pointer to raw data (00000098 to 00000099)
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+C0300040 flags
+         Initialized Data
+         1_BYTE_ALIGN
+         2_BYTE_ALIGN
+         Readable
+         Writeable
+
+RAW DATA #1 (1)
+00000000  06 00                                             ..
+
+
+SECTION HEADER #2 (2)
+    .bss name
+       0 physical address
+       0 virtual address
+       5 (5) size of raw data
+       0 file pointer to raw data (00000000 to 00000004)
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+C0300080 flags
+         Unnitialized Data
+         1_BYTE_ALIGN
+         2_BYTE_ALIGN
+         Readable
+         Writeable
+
+
+
+Symbol Table - 10 entries  (* = auxillary symbol)
+Indx Sectn   Value   Type  Storage Name
+---- ----- -------- ----- -------  --------
+0000 DEBUG 00000000  0000 FILE     .file
+     * test1.asm
+0002     1 00000000  0000 STATIC   .text
+     * Section: 0000  Len: 0000C  Relocs: 0000  LineNums: 0000 checksum:00000000
+0004     2 00000000  0000 STATIC   .data
+     * Section: 0000  Len: 00002  Relocs: 0000  LineNums: 0000 checksum:00000000
+0006     3 00000000  0000 STATIC   .bss
+     * Section: 0000  Len: 00005  Relocs: 0000  LineNums: 0000 checksum:00000000
+0008     1 00000000  0020 EXTERNAL __test1
+0009     1 00000006  0020 EXTERNAL __test2
+
+String Table Size = 0x4 (4) bytes 0 entries

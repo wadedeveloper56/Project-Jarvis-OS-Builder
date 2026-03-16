@@ -11,7 +11,7 @@ using namespace WadeSpace;
 
 namespace JWccLibTest
 {
-	void testprocess(TreeNodeData* left, TreeNodeData* right, TreeNodeData* current)
+	void testprocess(ostream& out, TreeNodeData* left, TreeNodeData* right, TreeNodeData* current)
 	{
 		Assert::IsNotNull(current);
 		Assert::IsNotNull(left);
@@ -59,7 +59,8 @@ namespace JWccLibTest
 			Assert::IsNull(root->getLeft());
 			Assert::IsNull(root->getRight());
 
-			TreeNode* result = root->postOrderTraversal(root->getTree(), testprocess);
+			ostringstream oss;
+			TreeNode* result = root->postOrderTraversal(oss, root->getTree(), testprocess);
 
 			Assert::IsNotNull(result);
 			Assert::IsNotNull(result->getData());
@@ -92,7 +93,8 @@ namespace JWccLibTest
 			Assert::IsNull(root->getRight()->getLeft());
 			Assert::IsNull(root->getRight()->getRight());
 
-			root->postOrderTraversal(root->getTree(), testprocess);
+			ostringstream oss;
+			root->postOrderTraversal(oss, root->getTree(), testprocess);
 			
 			delete root;
 		}

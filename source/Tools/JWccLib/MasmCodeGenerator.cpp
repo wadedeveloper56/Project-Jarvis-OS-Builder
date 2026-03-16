@@ -107,6 +107,20 @@ void MasmCodeGenerator::handleFunctionWithParameters(ofstream& out, string name,
 	out << "_" << name << " PROC C, " << paramListStr << endl;
 }
 
+void jumpProcess(ostream& out, TreeNodeData* left, TreeNodeData* right, TreeNodeData* current)
+{
+	if (current != nullptr)
+	{
+		if (current->getConstant() != nullptr)
+		{
+			if (current->getConstant()->hasIConst())
+			{
+				out << "\t" << "mov eax," << current->getConstant()->getIConst()->getIntegerConst() << endl;
+			}
+		}
+	}
+}
+
 void MasmCodeGenerator::handleIndividualFunctionStatements(ofstream& out, BaseStatement const* statements)
 {
 	for (BaseStatement* node : *statements->getStatementList())
@@ -143,12 +157,8 @@ void MasmCodeGenerator::handleIndividualFunctionStatements(ofstream& out, BaseSt
 			switch (op)
 			{
 				case RETURN:
-					auto exp = base_statement->getExp();
-					if (exp != nullptr && exp->getData() != nullptr && exp->getData()->getConstant() != nullptr)
-					{
-						out << "\t" << "mov eax," << exp->getData()->getConstant()->getIConst()->getIntegerConst() << endl;
-						out << "\tret" << endl;
-					}
+					base_statement->getExp()->evaluate(out, jumpProcess);
+					out << "\tret" << endl;
 					break;
 			}
 		}
@@ -291,21 +301,28 @@ void MasmCodeGenerator::handleFunctionTablePrototypes(ofstream& out)
 		auto parameters = ptr->parameters;
 		auto name = "_" + ptr->name;
 		vector<string> paramList;
-		for (auto ptr : *parameters)
+		if (parameters != nullptr)
 		{
-			auto type = ptr->type;
-			auto variableName = "_" + ptr->name;
-			bool isInitialized = ptr->initializer != nullptr;
-			bool isPointer = ptr->pointer;
-			bool isArray = ptr->arraySize > 1;
-			bool isStruct = type == STRUCT || type == UNION;
-			bool isUnsigned = ptr->unsign == true;
+			for (auto ptr : *parameters)
+			{
+				auto type = ptr->type;
+				auto variableName = "_" + ptr->name;
+				bool isInitialized = ptr->initializer != nullptr;
+				bool isPointer = ptr->pointer;
+				bool isArray = ptr->arraySize > 1;
+				bool isStruct = type == STRUCT || type == UNION;
+				bool isUnsigned = ptr->unsign == true;
 
-			string asmType = getAsmType(type, isPointer, isUnsigned);
-			paramList.push_back(variableName + ":" + asmType);
+				string asmType = getAsmType(type, isPointer, isUnsigned);
+				paramList.push_back(variableName + ":" + asmType);
+			}
+			string paramListStr = vectorToCommaSeparatedList(paramList);
+			out << name << " PROTO C " << paramListStr << ";" << endl;
 		}
-		string paramListStr = vectorToCommaSeparatedList(paramList);
-		out << name << " PROTO C " << paramListStr << ";" << endl;
+		else
+		{
+			out << name << " PROTO C;" << endl;
+		}
 	}
 }
 

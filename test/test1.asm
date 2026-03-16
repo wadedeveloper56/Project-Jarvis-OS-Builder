@@ -2,7 +2,6 @@
 .model flat, c;
 option casemap : none
 
-EXTERN _printf :PROTO format: DWORD ;
 
 
 .data
@@ -12,6 +11,17 @@ _var1 SBYTE  ?
 _var3 SDWORD  ?
 
 .code
-_main PROTO C _argc:SDWORD , _argv:DWORD ;
+_test1 PROTO C;
+_test2 PROTO C;
 
-_main PROC C, _argc:SDWORD , _argv:DWORD 
+_test1 PROC C
+	mov eax,5
+	ret
+_test1 endp
+
+_test2 PROC C
+	mov eax,5
+	ret
+_test2 endp
+end
+
