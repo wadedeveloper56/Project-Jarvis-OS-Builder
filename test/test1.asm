@@ -8,16 +8,11 @@ data1 STRUCT
 	var2 REAL8 ?
 	var3 REAL10 ?
 data1 ENDS
-data2 UNION
-	var1 REAL4 ?
-	var2 REAL8 ?
-	var3 REAL10 ?
-data2 ENDS
 
 .data
 .data?
 _var4 data1 <>
-_var5 data2 <>
+_var5 QWORD  ?
 
 .code
 _main PROTO C _argc:SDWORD , _argv:QWORD ;

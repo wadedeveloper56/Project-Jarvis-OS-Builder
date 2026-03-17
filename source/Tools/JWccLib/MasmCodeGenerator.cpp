@@ -226,20 +226,27 @@ void MasmCodeGenerator::outputVariable(ostream& out, _VariableData* ptr)
 
 	if (!isInitialized)
 	{
-		if (isStruct && !isArray)
+		if (!isPointer)
 		{
-			auto structName = ptr->structName;
-			out << variableName << " " << structName << " <>" << endl;
-		}
-		else if (!isStruct && isArray)
-		{
-			out << variableName << asmType << ptr->arraySize << " dup(?)" << endl;
-		}
-		else if (isStruct && isArray)
-		{
-			auto suSpec = ptr->suSpec;
-			auto structName = suSpec->getName()->getSymbolName();
-			out << variableName << " " << structName << " " << ptr->arraySize << " dup(<>)" << endl;
+			if (isStruct && !isArray)
+			{
+				auto structName = ptr->structName;
+				out << variableName << " " << structName << " <>" << endl;
+			}
+			else if (!isStruct && isArray)
+			{
+				out << variableName << asmType << ptr->arraySize << " dup(?)" << endl;
+			}
+			else if (isStruct && isArray)
+			{
+				auto suSpec = ptr->suSpec;
+				auto structName = suSpec->getName()->getSymbolName();
+				out << variableName << " " << structName << " " << ptr->arraySize << " dup(<>)" << endl;
+			}
+			else
+			{
+				out << variableName << asmType << " ?" << endl;
+			}
 		}
 		else
 		{
