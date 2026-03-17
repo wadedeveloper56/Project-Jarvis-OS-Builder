@@ -1,5 +1,7 @@
 #pragma once
 
+#include <vector>
+#include <stack>
 #include "Token.h"
 #include "Constant.h"
 #include "NodeType.h"
@@ -58,6 +60,11 @@ namespace WadeSpace
 		TokenPtr getToken3() const;
 		vector<ExpressionTree*>* getArgumentList() const;
 		Constant* getConstant() const;
+
+		[[nodiscard]] TokenPtr getIConst() const;
+		[[nodiscard]] TokenPtr getFConst() const;
+		[[nodiscard]] TokenPtr getStrConst() const;
+		[[nodiscard]] optional<TokenType> getTokenType() const;
 	};
 
 	class TreeNode
@@ -99,5 +106,8 @@ namespace WadeSpace
 		TreeNodeData* getData() const;
 		TreeNode* getLeft() const;
 		TreeNode* getRight() const;
+
+		TreeNode* evaluate(ostream& out, void (*process)(ostream& out, TreeNodeData* left, TreeNodeData* right, TreeNodeData* current));
+		TreeNode* postOrderTraversal(ostream& out, TreeNode* node, void (*process)(ostream& out, TreeNodeData* left, TreeNodeData* right, TreeNodeData* current));
 	};
 }

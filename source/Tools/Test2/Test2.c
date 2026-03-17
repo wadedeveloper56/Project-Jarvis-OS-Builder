@@ -1,16 +1,19 @@
-int priceless(int value);
+float var1 = 1.5;
+double var2 = 9.5;
+long double var3 = 99.8;
 
-char var1;
-short var2 = 6;
-int var3;
-
-int main(int argc, char* argv[])
+int test1()
 {
-	priceless(88);
 	return 5;
 }
 
-int priceless(int value)
+long long test2()
 {
-	return 99;
+	return 5;
 }
+
+int main(int argc, char* argv[])
+{
+	return 5;
+}
+

@@ -18,7 +18,7 @@ namespace WadeSpace
 		MasmCodeGenerator(vector<VariableData*>* variableTable, vector<FunctionData*>* functionTable);
 		~MasmCodeGenerator();
 
-		virtual void generateCode(ofstream& out);
+		virtual void generateCode(ostream& out);
 
 		MasmCodeGenerator(const MasmCodeGenerator& other);
 		MasmCodeGenerator(MasmCodeGenerator&& other) noexcept;
@@ -26,20 +26,20 @@ namespace WadeSpace
 		MasmCodeGenerator& operator=(MasmCodeGenerator&& other) noexcept;
 
 	private:
-		void handleIndividualFunction(ofstream& out, FunctionData* ptr);
-		void handleInitializedVariable(ofstream& out, _VariableData* ptr);
-		void handleUUninitializedVariable(ofstream& out, _VariableData* ptr);
-		void handleVariableTable(ofstream& out);
-		void handleFunctionTable(ofstream& out);
-		void handleStructs(ofstream& out);
-		void outputVariable(ofstream& out, _VariableData* ptr);
-		void handleFunctionWithParameters(ofstream& out, string name, vector<VariableData*>* list);
-		void handleIndividualFunctionStatements(ofstream& out, BaseStatement const * statements);
+		void handleIndividualFunction(ostream& out, FunctionData* ptr);
+		void handleInitializedVariable(ostream& out, _VariableData* ptr);
+		void handleUUninitializedVariable(ostream& out, _VariableData* ptr);
+		void handleVariableTable(ostream& out);
+		void handleFunctionTable(ostream& out);
+		void handleStructs(ostream& out);
+		void outputVariable(ostream& out, _VariableData* ptr);
+		void handleFunctionWithParameters(ostream& out, string name, vector<VariableData*>* list);
+		void handleIndividualFunctionStatements(ostream& out, TokenType returnType, BaseStatement const * statements);
 		string vectorToCommaSeparatedList(const vector<string>& vec);
 		string getAsmType(TokenType type, bool isPointer, bool isUnsigned);
-		void handlePrototype(ofstream& out);
+		void handlePrototype(ostream& out);
 		string convertToAsmType(bool isUnsigned, bool isPointer, TokenType type);
-		void handleFunctionTablePrototypes(ofstream& out);
+		void handleFunctionTablePrototypes(ostream& out);
 	};
 }
 

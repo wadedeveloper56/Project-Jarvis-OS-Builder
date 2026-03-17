@@ -1,30 +1,30 @@
-.386
+.x64p
 .model flat, c;
 option casemap : none
 
-EXTERN _funct :PROTO value: SDWORD ;
 
+data1 STRUCT
+	var1 REAL4 ?
+	var2 REAL8 ?
+	var3 REAL10 ?
+data1 ENDS
+data2 UNION
+	var1 REAL4 ?
+	var2 REAL8 ?
+	var3 REAL10 ?
+data2 ENDS
 
 .data
-_var2 SWORD 6
 .data?
-_var1 SBYTE  ?
-_var3 SDWORD  ?
+_var4 data1 <>
+_var5 data2 <>
 
 .code
-_main PROTO C _argc:SDWORD , _argv:DWORD ;
-_priceless PROTO C _value:SDWORD ;
+_main PROTO C _argc:SDWORD , _argv:QWORD ;
 
-_main PROC C, _argc:SDWORD , _argv:DWORD 
-	invoke _funct, 77
-	invoke _priceless, 88
+_main PROC C, _argc:SDWORD , _argv:QWORD 
 	mov eax,5
 	ret
 _main endp
-
-_priceless PROC C, _value:SDWORD 
-	mov eax,99
-	ret
-_priceless endp
 end
 

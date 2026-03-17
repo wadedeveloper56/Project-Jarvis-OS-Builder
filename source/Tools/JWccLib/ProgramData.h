@@ -29,6 +29,7 @@ namespace WadeSpace
 		TokenType getFunctionParameterType(ParameterDeclaration* parameterDeclaration);
 		string getParameterDeclarationName(ParameterDeclaration const * parameterDeclaration);
 		TokenType getDeclarationSpecifiersType(DeclarationSpecifiers const * declaration_specifiers);
+		TypeSpecifier* findType(Declaration* decl);
 
 	public:
 		[[nodiscard]] vector<ExternalDeclaration*>* getProgram() const;

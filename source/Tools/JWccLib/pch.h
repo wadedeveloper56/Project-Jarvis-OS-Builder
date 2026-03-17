@@ -27,6 +27,7 @@
 #include <set>
 #include <unordered_map>
 #include <stack>
+#include <sstream>
 
 #pragma warning(disable:4267)
 #pragma warning(disable:4244)

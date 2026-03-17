@@ -1,18 +1,21 @@
-int funct(int value);
-int priceless(int value);
+struct data1
+{
+  float var1;
+  double var2;
+  long double var3;
+};
 
-char var1;
-short var2 = 6;
-int var3;
+union data2
+{
+  float var1;
+  double var2;
+  long double var3;
+};
+
+struct data1 var4;
+union data2 var5;
 
 int main(int argc, char* argv[])
 {
-	funct(77);
-	priceless(88);
 	return 5;
-}
-
-int priceless(int value)
-{
-	return 99;
-}
+}   

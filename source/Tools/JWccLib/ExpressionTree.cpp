@@ -4,66 +4,94 @@
 
 using namespace WadeSpace;
 
+TreeNode* ExpressionTree::evaluate(ostream& out, void (*process)(ostream& out, TreeNodeData* left, TreeNodeData* right, TreeNodeData* current))
+{
+	return postOrderTraversal(out, tree, process);
+}
+
+TreeNode* ExpressionTree::postOrderTraversal(ostream& out, TreeNode* node, void (*process)(ostream& out, TreeNodeData* left, TreeNodeData* right, TreeNodeData* current))
+{
+	if (node == nullptr)
+		return nullptr;
+	if (node->getLeft() == nullptr && node->getRight() == nullptr)
+	{
+		if (process)
+		{
+			(*process)(out, nullptr, nullptr, node->getData());
+		}
+		return node;
+	}
+	TreeNode* left = postOrderTraversal(out, node->getLeft(), process);
+	TreeNode* right = postOrderTraversal(out, node->getRight(), process);
+	TreeNodeData* data = node->getData();
+	if (data && process)
+	{
+		(*process)(out, left ? left->getData() : nullptr, right ? right->getData() : nullptr, data);
+	}
+	return node;
+}
+
+
 TreeNodeData::TreeNodeData()
 {
-    type = NT_NONE;
-    token1 = nullptr;
-    token2 = nullptr;
-    lexp = nullptr;
-    exp1 = nullptr;
-    exp2 = nullptr;
-    argumentList = nullptr;
-    identifier = nullptr;
-    initializerList = nullptr;
-    typeName = nullptr;
-    token3 = nullptr;
-    constant = nullptr;
+	type = NT_NONE;
+	token1 = nullptr;
+	token2 = nullptr;
+	lexp = nullptr;
+	exp1 = nullptr;
+	exp2 = nullptr;
+	argumentList = nullptr;
+	identifier = nullptr;
+	initializerList = nullptr;
+	typeName = nullptr;
+	token3 = nullptr;
+	constant = nullptr;
 }
 
 TreeNodeData::TreeNodeData(
-    const NodeType type,
-    const TokenPtr token1,
-    const TokenPtr token2,
-    ExpressionTree* const lexp,
-    ExpressionTree* const exp1,
-    ExpressionTree* const exp2,
-    vector<ExpressionTree*>* argumentList,
-    TokenPtr identifier,
-    vector<Initializer*>* initializerList,
-    TypeName* typeName,
-    TokenPtr token3,
-    Constant* constant,
+	const NodeType type,
+	const TokenPtr token1,
+	const TokenPtr token2,
+	ExpressionTree* const lexp,
+	ExpressionTree* const exp1,
+	ExpressionTree* const exp2,
+	vector<ExpressionTree*>* argumentList,
+	TokenPtr identifier,
+	vector<Initializer*>* initializerList,
+	TypeName* typeName,
+	TokenPtr token3,
+	Constant* constant,
 	TokenPtr op
 )
 {
-    this->type = type;
-    this->token1 = token1;
-    this->token2 = token2;
-    this->lexp = lexp;
-    this->exp1 = exp1;
-    this->exp2 = exp2;
-    this->argumentList = argumentList;
-    this->identifier = identifier;
-    this->initializerList = initializerList;
-    this->typeName = typeName;
-    this->token3 = token3;
-    this->constant = constant;
+	this->type = type;
+	this->token1 = token1;
+	this->token2 = token2;
+	this->lexp = lexp;
+	this->exp1 = exp1;
+	this->exp2 = exp2;
+	this->argumentList = argumentList;
+	this->identifier = identifier;
+	this->initializerList = initializerList;
+	this->typeName = typeName;
+	this->token3 = token3;
+	this->constant = constant;
 	this->op = op;
 }
 
 TreeNodeData::~TreeNodeData()
 {
-    delete token1;
-    delete token2;
-    delete lexp;
-    delete exp1;
-    delete exp2;
-    delete argumentList;
-    delete identifier;
-    delete initializerList;
-    delete typeName;
-    delete token3;
-    delete constant;
+	delete token1;
+	delete token2;
+	delete lexp;
+	delete exp1;
+	delete exp2;
+	delete argumentList;
+	delete identifier;
+	delete initializerList;
+	delete typeName;
+	delete token3;
+	delete constant;
 }
 
 TreeNodeData::TreeNodeData(const TreeNodeData& other)
@@ -72,68 +100,68 @@ TreeNodeData::TreeNodeData(const TreeNodeData& other)
 	token2 = other.token2 ? new Token(*other.token2) : nullptr;
 	lexp = other.lexp ? new ExpressionTree(*other.lexp) : nullptr;
 	exp1 = other.exp1 ? new ExpressionTree(*other.exp1) : nullptr;
-   	exp2 = other.exp2 ? new ExpressionTree(*other.exp2) : nullptr;
-   	argumentList = other.argumentList ? new vector<ExpressionTree*>(*other.argumentList) : nullptr;
-   	identifier = other.identifier ? new Token(*other.identifier) : nullptr;
-   	initializerList = other.initializerList ? new vector<Initializer*>(*other.initializerList) : nullptr;
-   	typeName = other.typeName ? new TypeName(*other.typeName) : nullptr;
-   	token3 = other.token3 ? new Token(*other.token3) : nullptr;
-   	constant = other.constant ? new Constant(*other.constant) : nullptr;
-   	op = other.op ? new Token(*other.op) : nullptr;
+	exp2 = other.exp2 ? new ExpressionTree(*other.exp2) : nullptr;
+	argumentList = other.argumentList ? new vector<ExpressionTree*>(*other.argumentList) : nullptr;
+	identifier = other.identifier ? new Token(*other.identifier) : nullptr;
+	initializerList = other.initializerList ? new vector<Initializer*>(*other.initializerList) : nullptr;
+	typeName = other.typeName ? new TypeName(*other.typeName) : nullptr;
+	token3 = other.token3 ? new Token(*other.token3) : nullptr;
+	constant = other.constant ? new Constant(*other.constant) : nullptr;
+	op = other.op ? new Token(*other.op) : nullptr;
 }
 
 TreeNodeData::TreeNodeData(TreeNodeData&& other) noexcept
 {
-    token1 = other.token1 ? new Token(*other.token1) : nullptr;
-    token2 = other.token2 ? new Token(*other.token2) : nullptr;
-    lexp = other.lexp ? new ExpressionTree(*other.lexp) : nullptr;
-    exp1 = other.exp1 ? new ExpressionTree(*other.exp1) : nullptr;
-    exp2 = other.exp2 ? new ExpressionTree(*other.exp2) : nullptr;
-    argumentList = other.argumentList ? new vector<ExpressionTree*>(*other.argumentList) : nullptr;
-    identifier = other.identifier ? new Token(*other.identifier) : nullptr;
-    initializerList = other.initializerList ? new vector<Initializer*>(*other.initializerList) : nullptr;
-    typeName = other.typeName ? new TypeName(*other.typeName) : nullptr;
-    token3 = other.token3 ? new Token(*other.token3) : nullptr;
-    constant = other.constant ? new Constant(*other.constant) : nullptr;
-    op = other.op ? new Token(*other.op) : nullptr;
+	token1 = other.token1 ? new Token(*other.token1) : nullptr;
+	token2 = other.token2 ? new Token(*other.token2) : nullptr;
+	lexp = other.lexp ? new ExpressionTree(*other.lexp) : nullptr;
+	exp1 = other.exp1 ? new ExpressionTree(*other.exp1) : nullptr;
+	exp2 = other.exp2 ? new ExpressionTree(*other.exp2) : nullptr;
+	argumentList = other.argumentList ? new vector<ExpressionTree*>(*other.argumentList) : nullptr;
+	identifier = other.identifier ? new Token(*other.identifier) : nullptr;
+	initializerList = other.initializerList ? new vector<Initializer*>(*other.initializerList) : nullptr;
+	typeName = other.typeName ? new TypeName(*other.typeName) : nullptr;
+	token3 = other.token3 ? new Token(*other.token3) : nullptr;
+	constant = other.constant ? new Constant(*other.constant) : nullptr;
+	op = other.op ? new Token(*other.op) : nullptr;
 }
 
 TreeNodeData& TreeNodeData::operator=(const TreeNodeData& other)
 {
-    if (this != &other)
+	if (this != &other)
 		return *this;
-    token1 = other.token1 ? new Token(*other.token1) : nullptr;
-    token2 = other.token2 ? new Token(*other.token2) : nullptr;
-    lexp = other.lexp ? new ExpressionTree(*other.lexp) : nullptr;
-    exp1 = other.exp1 ? new ExpressionTree(*other.exp1) : nullptr;
-    exp2 = other.exp2 ? new ExpressionTree(*other.exp2) : nullptr;
-    argumentList = other.argumentList ? new vector<ExpressionTree*>(*other.argumentList) : nullptr;
-    identifier = other.identifier ? new Token(*other.identifier) : nullptr;
-    initializerList = other.initializerList ? new vector<Initializer*>(*other.initializerList) : nullptr;
-    typeName = other.typeName ? new TypeName(*other.typeName) : nullptr;
-    token3 = other.token3 ? new Token(*other.token3) : nullptr;
-    constant = other.constant ? new Constant(*other.constant) : nullptr;
-    op = other.op ? new Token(*other.op) : nullptr;
-    return *this;
+	token1 = other.token1 ? new Token(*other.token1) : nullptr;
+	token2 = other.token2 ? new Token(*other.token2) : nullptr;
+	lexp = other.lexp ? new ExpressionTree(*other.lexp) : nullptr;
+	exp1 = other.exp1 ? new ExpressionTree(*other.exp1) : nullptr;
+	exp2 = other.exp2 ? new ExpressionTree(*other.exp2) : nullptr;
+	argumentList = other.argumentList ? new vector<ExpressionTree*>(*other.argumentList) : nullptr;
+	identifier = other.identifier ? new Token(*other.identifier) : nullptr;
+	initializerList = other.initializerList ? new vector<Initializer*>(*other.initializerList) : nullptr;
+	typeName = other.typeName ? new TypeName(*other.typeName) : nullptr;
+	token3 = other.token3 ? new Token(*other.token3) : nullptr;
+	constant = other.constant ? new Constant(*other.constant) : nullptr;
+	op = other.op ? new Token(*other.op) : nullptr;
+	return *this;
 }
 
 TreeNodeData& TreeNodeData::operator=(TreeNodeData&& other) noexcept
 {
-    if (this != &other)
-        return *this;
-    token1 = other.token1 ? new Token(*other.token1) : nullptr;
-    token2 = other.token2 ? new Token(*other.token2) : nullptr;
-    lexp = other.lexp ? new ExpressionTree(*other.lexp) : nullptr;
-    exp1 = other.exp1 ? new ExpressionTree(*other.exp1) : nullptr;
-    exp2 = other.exp2 ? new ExpressionTree(*other.exp2) : nullptr;
-    argumentList = other.argumentList ? new vector<ExpressionTree*>(*other.argumentList) : nullptr;
-    identifier = other.identifier ? new Token(*other.identifier) : nullptr;
-    initializerList = other.initializerList ? new vector<Initializer*>(*other.initializerList) : nullptr;
-    typeName = other.typeName ? new TypeName(*other.typeName) : nullptr;
-    token3 = other.token3 ? new Token(*other.token3) : nullptr;
-    constant = other.constant ? new Constant(*other.constant) : nullptr;
-    op = other.op ? new Token(*other.op) : nullptr;
-    return *this;
+	if (this != &other)
+		return *this;
+	token1 = other.token1 ? new Token(*other.token1) : nullptr;
+	token2 = other.token2 ? new Token(*other.token2) : nullptr;
+	lexp = other.lexp ? new ExpressionTree(*other.lexp) : nullptr;
+	exp1 = other.exp1 ? new ExpressionTree(*other.exp1) : nullptr;
+	exp2 = other.exp2 ? new ExpressionTree(*other.exp2) : nullptr;
+	argumentList = other.argumentList ? new vector<ExpressionTree*>(*other.argumentList) : nullptr;
+	identifier = other.identifier ? new Token(*other.identifier) : nullptr;
+	initializerList = other.initializerList ? new vector<Initializer*>(*other.initializerList) : nullptr;
+	typeName = other.typeName ? new TypeName(*other.typeName) : nullptr;
+	token3 = other.token3 ? new Token(*other.token3) : nullptr;
+	constant = other.constant ? new Constant(*other.constant) : nullptr;
+	op = other.op ? new Token(*other.op) : nullptr;
+	return *this;
 }
 
 NodeType TreeNodeData::getType() const { return type; }
@@ -143,60 +171,66 @@ TokenPtr TreeNodeData::getToken3() const { return token3; }
 vector<ExpressionTree*>* TreeNodeData::getArgumentList() const { return argumentList; }
 Constant* TreeNodeData::getConstant() const { return constant; }
 
+[[nodiscard]] TokenPtr TreeNodeData::getIConst() const { return constant ? constant->getIConst() : nullptr; }
+[[nodiscard]] TokenPtr TreeNodeData::getFConst() const { return constant ? constant->getFConst() : nullptr; }
+[[nodiscard]] TokenPtr TreeNodeData::getStrConst() const { return constant ? constant->getStrConst() : nullptr; }
+[[nodiscard]] optional<TokenType> TreeNodeData::getTokenType() const { return constant ? constant->getType() : nullopt; }
+
+
 
 TreeNode::TreeNode()
 {
-    data = nullptr;
-    left = nullptr;
-    right = nullptr;
+	data = nullptr;
+	left = nullptr;
+	right = nullptr;
 }
 
 TreeNode::TreeNode(TreeNodeData* data, TreeNode* left, TreeNode* right)
 {
-    this->data = data;
-    this->left = left;
-    this->right = right;
+	this->data = data;
+	this->left = left;
+	this->right = right;
 }
 
 TreeNode::~TreeNode()
 {
-    delete data;
-    delete left;
-    delete right;
+	delete data;
+	delete left;
+	delete right;
 }
 
 TreeNode::TreeNode(const TreeNode& other)
 {
-    data = other.data ? new TreeNodeData(*other.data) : nullptr;
-    left = other.left ? new TreeNode(*other.left) : nullptr;
-    right = other.right ? new TreeNode(*other.right) : nullptr;
+	data = other.data ? new TreeNodeData(*other.data) : nullptr;
+	left = other.left ? new TreeNode(*other.left) : nullptr;
+	right = other.right ? new TreeNode(*other.right) : nullptr;
 }
 
 TreeNode::TreeNode(TreeNode&& other) noexcept
 {
-    data = other.data ? new TreeNodeData(*other.data) : nullptr;
-    left = other.left ? new TreeNode(*other.left) : nullptr;
-    right = other.right ? new TreeNode(*other.right) : nullptr;
+	data = other.data ? new TreeNodeData(*other.data) : nullptr;
+	left = other.left ? new TreeNode(*other.left) : nullptr;
+	right = other.right ? new TreeNode(*other.right) : nullptr;
 }
 
 TreeNode& TreeNode::operator=(const TreeNode& other)
 {
-    if (this != &other)
+	if (this != &other)
 		return *this;
-    data = other.data ? new TreeNodeData(*other.data) : nullptr;
-    left = other.left ? new TreeNode(*other.left) : nullptr;
-    right = other.right ? new TreeNode(*other.right) : nullptr;
-    return *this;
+	data = other.data ? new TreeNodeData(*other.data) : nullptr;
+	left = other.left ? new TreeNode(*other.left) : nullptr;
+	right = other.right ? new TreeNode(*other.right) : nullptr;
+	return *this;
 }
 
 TreeNode& TreeNode::operator=(TreeNode&& other) noexcept
 {
-    if (this != &other)
-        return *this;
-    data = other.data ? new TreeNodeData(*other.data) : nullptr;
-    left = other.left ? new TreeNode(*other.left) : nullptr;
-    right = other.right ? new TreeNode(*other.right) : nullptr;
-    return *this;
+	if (this != &other)
+		return *this;
+	data = other.data ? new TreeNodeData(*other.data) : nullptr;
+	left = other.left ? new TreeNode(*other.left) : nullptr;
+	right = other.right ? new TreeNode(*other.right) : nullptr;
+	return *this;
 }
 
 TreeNodeData* TreeNode::getData() const { return data; }
@@ -205,58 +239,60 @@ TreeNode* TreeNode::getRight() const { return right; }
 
 ExpressionTree::ExpressionTree()
 {
-    stak = new stack<TreeNode*>();
+	stak = new stack<TreeNode*>();
 	tree = nullptr;
 }
 
 ExpressionTree::ExpressionTree(TreeNode* data)
 {
-    stak = new stack<TreeNode*>();
-    tree = data;
+	stak = new stack<TreeNode*>();
+	tree = data;
 }
 
 ExpressionTree::~ExpressionTree()
 {
-    if (stak) {
-        while (!stak->empty()) {
-            TreeNode* node = stak->top();
-            stak->pop();
-            delete node;
-        }
+	if (stak)
+	{
+		while (!stak->empty())
+		{
+			TreeNode* node = stak->top();
+			stak->pop();
+			delete node;
+		}
 	}
-    delete stak;
-    delete tree;
+	delete stak;
+	delete tree;
 }
 
 
 ExpressionTree::ExpressionTree(const ExpressionTree& other)
 {
-    stak = other.stak ? new stack<TreeNode*>(*other.stak) : nullptr;
-    tree = other.tree ? new TreeNode(*other.tree) : nullptr;
+	stak = other.stak ? new stack<TreeNode*>(*other.stak) : nullptr;
+	tree = other.tree ? new TreeNode(*other.tree) : nullptr;
 }
 
 ExpressionTree::ExpressionTree(ExpressionTree&& other) noexcept
 {
-    stak = other.stak ? new stack<TreeNode*>(*other.stak) : nullptr;
-    tree = other.tree ? new TreeNode(*other.tree) : nullptr;
+	stak = other.stak ? new stack<TreeNode*>(*other.stak) : nullptr;
+	tree = other.tree ? new TreeNode(*other.tree) : nullptr;
 }
 
 ExpressionTree& ExpressionTree::operator=(const ExpressionTree& other)
 {
-    if (this != &other)
+	if (this != &other)
 		return *this;
-    stak = other.stak ? new stack<TreeNode*>(*other.stak) : nullptr;
-    tree = other.tree ? new TreeNode(*other.tree) : nullptr;
-    return *this;
+	stak = other.stak ? new stack<TreeNode*>(*other.stak) : nullptr;
+	tree = other.tree ? new TreeNode(*other.tree) : nullptr;
+	return *this;
 }
 
 ExpressionTree& ExpressionTree::operator=(ExpressionTree&& other) noexcept
 {
-    if (this != &other)
-        return *this;
-    stak = other.stak ? new stack<TreeNode*>(*other.stak) : nullptr;
-    tree = other.tree ? new TreeNode(*other.tree) : nullptr;
-    return *this;
+	if (this != &other)
+		return *this;
+	stak = other.stak ? new stack<TreeNode*>(*other.stak) : nullptr;
+	tree = other.tree ? new TreeNode(*other.tree) : nullptr;
+	return *this;
 }
 
 TreeNode* ExpressionTree::getTree() const { return tree; }
