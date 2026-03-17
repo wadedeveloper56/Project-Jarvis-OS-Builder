@@ -1,4 +1,4 @@
-.386
+.x64p
 .model flat, c;
 option casemap : none
 
@@ -20,9 +20,9 @@ _var4 data1 <>
 _var5 data2 <>
 
 .code
-_main PROTO C _argc:SDWORD , _argv:DWORD ;
+_main PROTO C _argc:SDWORD , _argv:QWORD ;
 
-_main PROC C, _argc:SDWORD , _argv:DWORD 
+_main PROC C, _argc:SDWORD , _argv:QWORD 
 	mov eax,5
 	ret
 _main endp
