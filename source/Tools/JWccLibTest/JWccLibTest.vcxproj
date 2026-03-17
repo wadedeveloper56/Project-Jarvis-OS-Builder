@@ -192,8 +192,14 @@
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Arguments\Arguments.vcxproj">
+      <Project>{9f695958-67a8-42be-884f-2f9d616e6ab5}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\JWccLib\JWccLib.vcxproj">
       <Project>{55e11707-51c1-4126-9ce7-1d3ef7e9d7f0}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\PreProcessor\Preprocessor.vcxproj">
+      <Project>{3b55590c-3e30-413c-b121-c80fbe2d2c77}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

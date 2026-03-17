@@ -5,6 +5,7 @@
 #include "../JWccLib/ExpressionTree.h"
 #include "../JWccLib/Constant.h"
 #include "../JWccLib/debug.h"
+#include "../JWccLib/main.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace WadeSpace;
@@ -97,6 +98,15 @@ namespace JWccLibTest
 			root->postOrderTraversal(oss, root->getTree(), testprocess);
 			
 			delete root;
+		}
+
+		TEST_METHOD(Compile_Test1)
+		{
+			istringstream inStr("int main() { return 5; }");
+			ostringstream outStr;
+			int exitcode = 0;
+			compileFile(inStr, outStr, exitcode);
+			Assert::AreEqual(0, exitcode);	
 		}
 	};
 }
