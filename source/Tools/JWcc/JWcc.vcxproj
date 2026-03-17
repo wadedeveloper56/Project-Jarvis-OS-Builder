@@ -32,6 +32,9 @@
   <ItemGroup>
     <ClCompile Include="..\JWccLib\main.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\JWccLib\main.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>18.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>

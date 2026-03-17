@@ -87,7 +87,7 @@ string MasmCodeGenerator::getAsmType(TokenType type, bool isPointer, bool isUnsi
 	return asmType;
 }
 
-void MasmCodeGenerator::handleFunctionWithParameters(ofstream& out, string name, vector<VariableData*>* list)
+void MasmCodeGenerator::handleFunctionWithParameters(ostream& out, string name, vector<VariableData*>* list)
 {
 	vector<string> paramList;
 	for (auto ptr : *list)
@@ -121,7 +121,7 @@ void jumpProcess(ostream& out, TreeNodeData* left, TreeNodeData* right, TreeNode
 	}
 }
 
-void MasmCodeGenerator::handleIndividualFunctionStatements(ofstream& out, TokenType returnType, BaseStatement const* statements)
+void MasmCodeGenerator::handleIndividualFunctionStatements(ostream	& out, TokenType returnType, BaseStatement const* statements)
 {
 	for (BaseStatement* node : *statements->getStatementList())
 	{
@@ -165,7 +165,7 @@ void MasmCodeGenerator::handleIndividualFunctionStatements(ofstream& out, TokenT
 	}
 }
 
-void MasmCodeGenerator::handleIndividualFunction(ofstream& out, FunctionData* ptr)
+void MasmCodeGenerator::handleIndividualFunction(ostream& out, FunctionData* ptr)
 {
 	auto returnType = ptr->type;
 	auto parameters = ptr->parameters;
@@ -212,7 +212,7 @@ string MasmCodeGenerator::convertToAsmType(bool isUnsigned, bool isPointer, Toke
 	return asmType;
 }
 
-void MasmCodeGenerator::outputVariable(ofstream& out, _VariableData* ptr)
+void MasmCodeGenerator::outputVariable(ostream& out, _VariableData* ptr)
 {
 	auto type = ptr->type;
 	auto variableName = "_" + ptr->name;
@@ -262,7 +262,7 @@ void MasmCodeGenerator::outputVariable(ofstream& out, _VariableData* ptr)
 	}
 }
 
-void MasmCodeGenerator::handleInitializedVariable(ofstream& out, _VariableData* ptr)
+void MasmCodeGenerator::handleInitializedVariable(ostream& out, _VariableData* ptr)
 {
 	if (ptr->initializer != nullptr && ptr->plist == nullptr)
 	{
@@ -270,7 +270,7 @@ void MasmCodeGenerator::handleInitializedVariable(ofstream& out, _VariableData* 
 	}
 }
 
-void MasmCodeGenerator::handleUUninitializedVariable(ofstream& out, _VariableData* ptr)
+void MasmCodeGenerator::handleUUninitializedVariable(ostream& out, _VariableData* ptr)
 {
 	if (ptr->initializer == nullptr && ptr->plist == nullptr)
 	{
@@ -278,7 +278,7 @@ void MasmCodeGenerator::handleUUninitializedVariable(ofstream& out, _VariableDat
 	}
 }
 
-void MasmCodeGenerator::handleVariableTable(ofstream& out)
+void MasmCodeGenerator::handleVariableTable(ostream& out)
 {
 	out << ".data" << endl;
 	for (auto ptr : *variableTable)
@@ -292,7 +292,7 @@ void MasmCodeGenerator::handleVariableTable(ofstream& out)
 	}
 }
 
-void MasmCodeGenerator::handleFunctionTablePrototypes(ofstream& out)
+void MasmCodeGenerator::handleFunctionTablePrototypes(ostream& out)
 {
 	for (FunctionData* ptr : *functionTable)
 	{
@@ -325,7 +325,7 @@ void MasmCodeGenerator::handleFunctionTablePrototypes(ofstream& out)
 	}
 }
 
-void MasmCodeGenerator::handleFunctionTable(ofstream& out)
+void MasmCodeGenerator::handleFunctionTable(ostream& out)
 {
 	out << endl << ".code" << endl;
 	handleFunctionTablePrototypes(out);
@@ -336,7 +336,7 @@ void MasmCodeGenerator::handleFunctionTable(ofstream& out)
 	}
 }
 
-void MasmCodeGenerator::handleStructs(ofstream& out)
+void MasmCodeGenerator::handleStructs(ostream& out)
 {
 	for (map<string, StructOrUnionSpecifier*>::iterator iterator = structList->begin(); iterator != structList->end(); ++iterator)
 	{
@@ -368,7 +368,7 @@ void MasmCodeGenerator::handleStructs(ofstream& out)
 	}
 }
 
-void MasmCodeGenerator::handlePrototype(ofstream& out)
+void MasmCodeGenerator::handlePrototype(ostream& out)
 {
 	for (auto ptr : *variableTable)
 	{
@@ -414,7 +414,7 @@ void MasmCodeGenerator::handlePrototype(ofstream& out)
 	}
 }
 
-void MasmCodeGenerator::generateCode(ofstream& out)
+void MasmCodeGenerator::generateCode(ostream& out)
 {
 	if (bit16)
 	{
