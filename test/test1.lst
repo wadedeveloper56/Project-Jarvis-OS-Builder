@@ -97,7 +97,7 @@ Symbols:
 @FileName  . . . . . . . . . . .        Text   TEST1
 @Interface . . . . . . . . . . .        Number             1h 
 @Model . . . . . . . . . . . . .        Number             7h 
-@Time  . . . . . . . . . . . . .        Text   08:42:12
+@Time  . . . . . . . . . . . . .        Text   09:41:45
 @Version . . . . . . . . . . . .        Text   800
 @code  . . . . . . . . . . . . .        Text   _TEXT
 @data  . . . . . . . . . . . . .        Text   FLAT
@@ -106,4 +106,4 @@ __JWASM__  . . . . . . . . . . .        Number            D4h
 _var4  . . . . . . . . . . . . .        data1              0h _BSS C
 _var5  . . . . . . . . . . . . .        QWord             16h _BSS C
 
-test1.asm: 24 lines, 2 passes, 1 ms, 0 warnings, 0 errors
+test1.asm: 24 lines, 2 passes, 4 ms, 0 warnings, 0 errors

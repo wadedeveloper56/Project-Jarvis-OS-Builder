@@ -107,6 +107,7 @@ namespace JWccLibTest
 
 		TEST_METHOD(Compile_Function_Test1)
 		{
+			if (WadeSpace::programData) delete WadeSpace::programData;
 			istringstream inStr("int main() { return 5; }");
 			ostringstream outStr;
 			int exitcode = 0;
@@ -122,14 +123,43 @@ namespace JWccLibTest
 			Assert::AreEqual(0, (int)generator->getVariableTable()->size());
 
 			FunctionData* function = generator->getFunctionTable()->at(0);
+			Assert::IsNotNull(function);
 			Assert::AreEqual("main", function->name.c_str());
 			Assert::IsTrue(TokenType::INT == function->type);
 			Assert::IsNotNull(function->statements);
+			Assert::IsNotNull(function->statements->getStatementList());
 			Assert::IsTrue(function->statements->getStatementList()->size() == 1);
 
 			BaseStatement* statement = function->statements->getStatementList()->at(0);
 			Assert::IsTrue(statement->getOp() == jump_statement);
 			Assert::IsNotNull(dynamic_cast<JumpStatement*>(statement->getStatement()));
+
+			//delete WadeSpace::programData;
+		}
+
+		TEST_METHOD(Compile_Variable_Test1)
+		{
+//			if (WadeSpace::programData) delete WadeSpace::programData;
+			istringstream inStr("char var1;");
+			ostringstream outStr;
+			int exitcode = 0;
+			compileFile(inStr, outStr, exitcode);
+			Assert::AreEqual(0, exitcode);
+			Assert::IsNotNull(WadeSpace::programData);
+			Assert::IsNotNull(WadeSpace::programData->getGenerator());
+
+			auto generator = WadeSpace::programData->getGenerator();
+			auto variableTable = generator->getVariableTable();
+			auto functionTable = generator->getFunctionTable();
+			Assert::IsNotNull(functionTable);
+			Assert::IsNotNull(variableTable);
+			auto varSize = variableTable->size();
+			auto funcSize = functionTable->size();
+			bool ve = varSize == 1;
+			bool fe = funcSize == 0;
+			Assert::IsTrue(fe,L"function table size");
+			Assert::IsTrue(ve,L"variable table size");
+
 		}
 	};
 }

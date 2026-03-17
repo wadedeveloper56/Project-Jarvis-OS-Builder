@@ -22,11 +22,12 @@ ProgramData::~ProgramData()
 {
 	if (program != nullptr)
 	{
-		for (auto ptr : *program)
-		{
-			delete ptr;
-		}
+		program->clear();
 		delete program;
+	}
+	if (generator != nullptr)
+	{
+		delete generator;
 	}
 }
 
@@ -34,7 +35,6 @@ void ProgramData::add(ExternalDeclaration* data) const
 {
 	program->push_back(data);
 }
-
 
 TokenType ProgramData::getFunctionParameterType(ParameterDeclaration* parameterDeclaration)
 {

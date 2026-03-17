@@ -15,18 +15,12 @@ BaseCodeGenerator::~BaseCodeGenerator()
 {
 	if (variableTable != nullptr)
 	{
-		for (auto ptr : *variableTable)
-		{
-			delete ptr;
-		}
+		variableTable->clear();
 		delete variableTable;   
 	}
 	if (functionTable != nullptr)
 	{
-		for (auto ptr : *functionTable)
-		{
-			delete ptr;
-		}
+		functionTable->clear();
 		delete functionTable;
 	}
 }
