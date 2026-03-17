@@ -1255,19 +1255,19 @@ case 38:
 YY_RULE_SETUP
 #line 212 "ansic.l"
 { 
-                if (WadeSpace::typedefList != nullptr) 
+                if (WadeSpace::compile.getTypedefList() != nullptr) 
                 {
-                  auto typedefEntry = WadeSpace::typedefList->find(yytext);
-                  if (typedefEntry != WadeSpace::typedefList->end()) 
+                  auto typedefEntry = WadeSpace::compile.getTypedefList()->find(yytext);
+                  if (typedefEntry != WadeSpace::compile.getTypedefList()->end()) 
                   {
                         cout << "Scanner: typedef name [" << yytext << "]" << endl;
                         return WadeSpace::Parser::make_TYPE_NAME(createStringIDToken(yytext), WadeSpace::location()); 
                    }
                 }
-                if (WadeSpace::structList != nullptr) 
+                if (WadeSpace::compile.getStructList() != nullptr) 
                 {
-                  auto structEntry = WadeSpace::structList->find(yytext);
-                  if (structEntry != WadeSpace::structList->end()) 
+                  auto structEntry = WadeSpace::compile.getStructList()->find(yytext);
+                  if (structEntry != WadeSpace::compile.getStructList()->end()) 
                   {
                         cout << "Scanner: struct name [" << yytext << "]" << endl;
                         return WadeSpace::Parser::make_IDENTIFIER(createStringIDToken(yytext), WadeSpace::location()); 

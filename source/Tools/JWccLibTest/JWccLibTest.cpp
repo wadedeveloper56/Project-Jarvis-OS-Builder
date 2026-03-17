@@ -9,11 +9,10 @@
 #include "../JWccLib/GlobalVars.h"
 #include "../JWccLib/ProgramData.h"
 #include "../JWccLib/JumpStatement.h"
+#include "../JWccLib/Compile.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace WadeSpace;
-
-extern ProgramData* programData;
 
 namespace JWccLibTest
 {
@@ -107,16 +106,16 @@ namespace JWccLibTest
 
 		TEST_METHOD(Compile_Function_Test1)
 		{
-			if (WadeSpace::programData) delete WadeSpace::programData;
+			if (WadeSpace::compile.getProgramData()) delete WadeSpace::compile.getProgramData();
 			istringstream inStr("int main() { return 5; }");
 			ostringstream outStr;
 			int exitcode = 0;
-			compileFile(inStr, outStr, exitcode);
+			WadeSpace::compile.compileFile(inStr, outStr, exitcode);
 			Assert::AreEqual(0, exitcode);	
-			Assert::IsNotNull(WadeSpace::programData);
-			Assert::IsNotNull(WadeSpace::programData->getGenerator());
+			Assert::IsNotNull(WadeSpace::compile.getProgramData());
+			Assert::IsNotNull(WadeSpace::compile.getProgramData()->getGenerator());
 
-			auto generator = WadeSpace::programData->getGenerator();
+			auto generator = WadeSpace::compile.getProgramData()->getGenerator();
 			Assert::IsNotNull(generator->getFunctionTable());
 			Assert::IsNotNull(generator->getVariableTable());
 			Assert::AreEqual(1, (int)generator->getFunctionTable()->size());
@@ -139,16 +138,16 @@ namespace JWccLibTest
 
 		TEST_METHOD(Compile_Variable_Test1)
 		{
-//			if (WadeSpace::programData) delete WadeSpace::programData;
+			if (WadeSpace::compile.getProgramData()) delete WadeSpace::compile.getProgramData();
 			istringstream inStr("char var1;");
 			ostringstream outStr;
 			int exitcode = 0;
-			compileFile(inStr, outStr, exitcode);
+			WadeSpace::compile.compileFile(inStr, outStr, exitcode);
 			Assert::AreEqual(0, exitcode);
-			Assert::IsNotNull(WadeSpace::programData);
-			Assert::IsNotNull(WadeSpace::programData->getGenerator());
+			Assert::IsNotNull(WadeSpace::compile.getProgramData());
+			Assert::IsNotNull(WadeSpace::compile.getProgramData()->getGenerator());
 
-			auto generator = WadeSpace::programData->getGenerator();
+			auto generator = WadeSpace::compile.getProgramData()->getGenerator();
 			auto variableTable = generator->getVariableTable();
 			auto functionTable = generator->getFunctionTable();
 			Assert::IsNotNull(functionTable);

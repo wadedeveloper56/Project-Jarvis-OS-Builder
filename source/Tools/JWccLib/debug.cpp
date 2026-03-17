@@ -21,12 +21,11 @@ void handleStructDefinition(Declaration* declaration)
 				auto token = type_specifier->getType().value();
 				if ((token == STRUCT || token == UNION) && type_specifier->getStructOrUnionSpecifier() != nullptr)
 				{
-					if (structList == nullptr) structList = new map<string, StructOrUnionSpecifier*>();
 					StructOrUnionSpecifier* temp = type_specifier->getStructOrUnionSpecifier();
 					if (temp->getVectorStructDeclaration() != nullptr)
 					{
 						string name = temp->getName()->getSymbolName();
-						structList->insert({ name, temp });
+						compile.getStructList()->insert({ name, temp });
 					}
 				}
 			}
@@ -59,36 +58,24 @@ void handleDeclaration(ExternalDeclaration* externalDeclaration)
 					}
 					if (isTypedef)
 					{
-						typedefList->insert({ name, externalDeclaration });
+						compile.getTypedefList()->insert({ name, externalDeclaration });
 					}
 				}
 			}
 		}
 	}
-	if (!isTypedef) programData->add(externalDeclaration);
+	if (!isTypedef) compile.getProgramData()->add(externalDeclaration);
 }
 
 void createTranslationUnit(ExternalDeclaration* externalDeclaration)
 {
-	if (programData == nullptr)
-	{
-		programData = new ProgramData();
-	}
-	if (typedefList == nullptr)
-	{
-		typedefList = new map<string, ExternalDeclaration*>();
-	}
-	if (structList == nullptr)
-	{
-		structList = new map<string, StructOrUnionSpecifier*>();
-	}
 	if (externalDeclaration != nullptr && externalDeclaration->hasDeclaration())
 	{
 		handleDeclaration(externalDeclaration);
 	}
 	if (externalDeclaration != nullptr && externalDeclaration->hasFunction())
 	{
-		programData->add(externalDeclaration);
+		compile.getProgramData()->add(externalDeclaration);
 	}
 }
 

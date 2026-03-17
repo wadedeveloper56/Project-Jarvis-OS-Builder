@@ -11,6 +11,7 @@
 #include "BaseCodeGenerator.h"
 #include "MasmCodeGenerator.h"
 #include "main.h"
+#include "Compile.h"
 
 using namespace WadeSpace;
 using namespace std;
@@ -93,7 +94,7 @@ int main(int argc, char* argv[])
 
 	if (in.is_open() && out.is_open())
 	{
-		compile(in, infiles, out, exitcode);
+		WadeSpace::compile.compile(in, infiles, out, exitcode);
 	}
 	else
 	{
@@ -104,6 +105,5 @@ exit:
 	argFreeTable(argtable, sizeof(argtable) / sizeof(argtable[0]));
 	in.close();
 	out.close();
-	delete WadeSpace::programData;
 	return exitcode;
 }

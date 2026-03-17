@@ -111,7 +111,7 @@ void ProgramData::handleFunction(FunctionDefinition const * declaration, vector<
 			}
 		}
 		functionTable->push_back(data);
-		functionList->push_back("_"+data->name);
+		compile.getFunctionList()->push_back("_"+data->name);
 	}
 }
 
@@ -186,8 +186,8 @@ void ProgramData::handleDeclaration(Declaration const* declaration, vector<Varia
 								if (type_specifier != nullptr)
 								{
 									structName = type_specifier->getStructOrUnionSpecifier()->getName()->getSymbolName();
-									auto typedefEntry = structList->find(structName);
-									if (typedefEntry != structList->end())
+									auto typedefEntry = compile.getStructList()->find(structName);
+									if (typedefEntry != compile.getStructList()->end())
 									{
 										suSpec = typedefEntry->second;
 									}
@@ -260,7 +260,6 @@ BaseCodeGenerator* ProgramData::processGlobalVariables()
 {
 	vector<VariableData*>* variableTable = new vector<VariableData*>();
 	vector<FunctionData*>* functionTable = new vector<FunctionData*>();
-	functionList = new vector<string>();
 
 	if (program != nullptr)
 	{
