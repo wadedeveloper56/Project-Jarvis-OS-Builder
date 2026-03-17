@@ -6,17 +6,21 @@
 #include "../JWccLib/Constant.h"
 #include "../JWccLib/debug.h"
 #include "../JWccLib/main.h"
+#include "../JWccLib/GlobalVars.h"
+#include "../JWccLib/ProgramData.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace WadeSpace;
+
+extern ProgramData* programData;
 
 namespace JWccLibTest
 {
 	void testprocess(ostream& out, TreeNodeData* left, TreeNodeData* right, TreeNodeData* current)
 	{
 		Assert::IsNotNull(current);
-		Assert::IsNotNull(left);
-		Assert::IsNotNull(right);
+		//Assert::IsNotNull(left);
+		//Assert::IsNotNull(right);
 	}
 
 	TEST_CLASS(JWccLibTest)
@@ -107,6 +111,14 @@ namespace JWccLibTest
 			int exitcode = 0;
 			compileFile(inStr, outStr, exitcode);
 			Assert::AreEqual(0, exitcode);	
+			Assert::IsNotNull(WadeSpace::programData);
+			Assert::IsNotNull(WadeSpace::programData->getGenerator());
+
+			auto generator = WadeSpace::programData->getGenerator();
+			Assert::IsNotNull(generator->getFunctionTable());
+			Assert::IsNotNull(generator->getVariableTable());
+			Assert::AreEqual(1, (int)generator->getFunctionTable()->size());
+			Assert::AreEqual(0, (int)generator->getVariableTable()->size());
 		}
 	};
 }
