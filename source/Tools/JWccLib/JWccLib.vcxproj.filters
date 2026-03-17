@@ -168,6 +168,9 @@
     <ClInclude Include="NodeType.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="main.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="JWccLib.cpp">
@@ -309,6 +312,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ExpressionTree.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="compile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

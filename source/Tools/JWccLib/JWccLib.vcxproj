@@ -194,6 +194,7 @@
     <ClInclude Include="JumpStatement.h" />
     <ClInclude Include="LabeledStatement.h" />
     <ClInclude Include="location.hh" />
+    <ClInclude Include="main.h" />
     <ClInclude Include="MasmCodeGenerator.h" />
     <ClInclude Include="NodeType.h" />
     <ClInclude Include="ParameterDeclaration.h" />
@@ -223,6 +224,7 @@
     <ClCompile Include="AbstractDeclarator.cpp" />
     <ClCompile Include="BaseCodeGenerator.cpp" />
     <ClCompile Include="BaseStatement.cpp" />
+    <ClCompile Include="compile.cpp" />
     <ClCompile Include="CompoundStatement.cpp" />
     <ClCompile Include="Constant.cpp" />
     <ClCompile Include="debug.cpp" />
