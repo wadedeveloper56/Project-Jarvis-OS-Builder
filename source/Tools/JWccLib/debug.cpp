@@ -69,14 +69,7 @@ void handleDeclaration(ExternalDeclaration* externalDeclaration)
 
 void createTranslationUnit(ExternalDeclaration* externalDeclaration)
 {
-	if (externalDeclaration != nullptr && externalDeclaration->hasDeclaration())
-	{
-		handleDeclaration(externalDeclaration);
-	}
-	if (externalDeclaration != nullptr && externalDeclaration->hasFunction())
-	{
-		compile.getProgramData()->add(externalDeclaration);
-	}
+	compile.getProgramData()->add(externalDeclaration);
 }
 
 vector<BaseStatement*>* createStatementList(BaseStatement* statement, vector<BaseStatement*>* list)

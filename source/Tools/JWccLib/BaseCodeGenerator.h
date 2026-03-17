@@ -138,7 +138,7 @@ namespace WadeSpace
 	{
 	public:
 		BaseCodeGenerator();
-		BaseCodeGenerator(vector<VariableData*>* const variable_table, vector<FunctionData*>* const function_table);
+		BaseCodeGenerator(vector<VariableData*>& variable_table, vector<FunctionData*>& function_table);
 		virtual ~BaseCodeGenerator();
 
 		BaseCodeGenerator(const BaseCodeGenerator& other);
@@ -146,15 +146,15 @@ namespace WadeSpace
 		BaseCodeGenerator& operator=(const BaseCodeGenerator& other);
 		BaseCodeGenerator& operator=(BaseCodeGenerator&& other) noexcept;
 
-		vector<VariableData*>* getVariableTable() const;
-		vector<FunctionData*>* getFunctionTable() const;
+		vector<VariableData*> getVariableTable() const;
+		vector<FunctionData*> getFunctionTable() const;
 
 		bool hasVariableTable() const;
 		bool hasFunctionTable() const;
 		virtual void generateCode(ostream& out) = 0;
 
 	protected:
-		vector<VariableData*>* variableTable;
-		vector<FunctionData*>* functionTable;
+		vector<VariableData*> variableTable;
+		vector<FunctionData*> functionTable;
 	};
 }

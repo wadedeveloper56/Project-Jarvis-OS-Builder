@@ -17,28 +17,10 @@ using namespace simplecpp;
 
 Compile::Compile()
 {
-	programData = new ProgramData();
-	typedefList = new map<string, ExternalDeclaration*>();
-	structList = new map<string, StructOrUnionSpecifier*>();
-	functionList = new vector<string>();
 }
 
 Compile::~Compile()
 {
-	delete programData;
-	programData = nullptr;
-
-	typedefList->clear();
-	delete typedefList;
-	typedefList = nullptr;
-
-	structList->clear();
-	delete structList;
-	structList = nullptr;
-	
-	functionList->clear();
-	delete functionList;
-	functionList = nullptr;
 }
 
 void Compile::compileFile(istringstream& inStr, ostream& out, int& exitcode)
@@ -46,7 +28,7 @@ void Compile::compileFile(istringstream& inStr, ostream& out, int& exitcode)
 	Interpreter i;
 	i.setStreams(&inStr, &out);
 	exitcode = i.parse();
-	BaseCodeGenerator* generator = programData->processGlobalVariables();
+	BaseCodeGenerator* generator = programData.processGlobalVariables();
 	generator->generateCode(out);
 }
 

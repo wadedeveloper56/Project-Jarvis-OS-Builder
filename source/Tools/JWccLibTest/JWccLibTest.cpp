@@ -106,7 +106,6 @@ namespace JWccLibTest
 
 		TEST_METHOD(Compile_Function_Test1)
 		{
-			if (WadeSpace::compile.getProgramData()) delete WadeSpace::compile.getProgramData();
 			istringstream inStr("int main() { return 5; }");
 			ostringstream outStr;
 			int exitcode = 0;
@@ -116,12 +115,10 @@ namespace JWccLibTest
 			Assert::IsNotNull(WadeSpace::compile.getProgramData()->getGenerator());
 
 			auto generator = WadeSpace::compile.getProgramData()->getGenerator();
-			Assert::IsNotNull(generator->getFunctionTable());
-			Assert::IsNotNull(generator->getVariableTable());
-			Assert::AreEqual(1, (int)generator->getFunctionTable()->size());
-			Assert::AreEqual(0, (int)generator->getVariableTable()->size());
+			Assert::AreEqual(1, (int)generator->getFunctionTable().size());
+			Assert::AreEqual(0, (int)generator->getVariableTable().size());
 
-			FunctionData* function = generator->getFunctionTable()->at(0);
+			FunctionData* function = generator->getFunctionTable().at(0);
 			Assert::IsNotNull(function);
 			Assert::AreEqual("main", function->name.c_str());
 			Assert::IsTrue(TokenType::INT == function->type);
@@ -133,12 +130,11 @@ namespace JWccLibTest
 			Assert::IsTrue(statement->getOp() == jump_statement);
 			Assert::IsNotNull(dynamic_cast<JumpStatement*>(statement->getStatement()));
 
-			//delete WadeSpace::programData;
+			WadeSpace::compile.~Compile();
 		}
 
 		TEST_METHOD(Compile_Variable_Test1)
 		{
-			if (WadeSpace::compile.getProgramData()) delete WadeSpace::compile.getProgramData();
 			istringstream inStr("char var1;");
 			ostringstream outStr;
 			int exitcode = 0;
@@ -150,15 +146,14 @@ namespace JWccLibTest
 			auto generator = WadeSpace::compile.getProgramData()->getGenerator();
 			auto variableTable = generator->getVariableTable();
 			auto functionTable = generator->getFunctionTable();
-			Assert::IsNotNull(functionTable);
-			Assert::IsNotNull(variableTable);
-			auto varSize = variableTable->size();
-			auto funcSize = functionTable->size();
+			auto varSize = variableTable.size();
+			auto funcSize = functionTable.size();
 			bool ve = varSize == 1;
 			bool fe = funcSize == 0;
 			Assert::IsTrue(fe,L"function table size");
 			Assert::IsTrue(ve,L"variable table size");
 
+			WadeSpace::compile.~Compile();
 		}
 	};
 }
