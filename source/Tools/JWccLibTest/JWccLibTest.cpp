@@ -8,6 +8,7 @@
 #include "../JWccLib/main.h"
 #include "../JWccLib/GlobalVars.h"
 #include "../JWccLib/ProgramData.h"
+#include "../JWccLib/JumpStatement.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace WadeSpace;
@@ -104,7 +105,7 @@ namespace JWccLibTest
 			delete root;
 		}
 
-		TEST_METHOD(Compile_Test1)
+		TEST_METHOD(Compile_Function_Test1)
 		{
 			istringstream inStr("int main() { return 5; }");
 			ostringstream outStr;
@@ -119,6 +120,16 @@ namespace JWccLibTest
 			Assert::IsNotNull(generator->getVariableTable());
 			Assert::AreEqual(1, (int)generator->getFunctionTable()->size());
 			Assert::AreEqual(0, (int)generator->getVariableTable()->size());
+
+			FunctionData* function = generator->getFunctionTable()->at(0);
+			Assert::AreEqual("main", function->name.c_str());
+			Assert::IsTrue(TokenType::INT == function->type);
+			Assert::IsNotNull(function->statements);
+			Assert::IsTrue(function->statements->getStatementList()->size() == 1);
+
+			BaseStatement* statement = function->statements->getStatementList()->at(0);
+			Assert::IsTrue(statement->getOp() == jump_statement);
+			Assert::IsNotNull(dynamic_cast<JumpStatement*>(statement->getStatement()));
 		}
 	};
 }
