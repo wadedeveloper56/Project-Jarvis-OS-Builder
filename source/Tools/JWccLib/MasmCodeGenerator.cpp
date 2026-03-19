@@ -11,14 +11,11 @@
 using namespace WadeSpace;
 using namespace std;
 
-MasmCodeGenerator::MasmCodeGenerator(vector<VariableData*>& variableTable, vector<FunctionData*>& functionTable)
-	: BaseCodeGenerator(variableTable, functionTable)
+MasmCodeGenerator::MasmCodeGenerator(vector<VariableData*>* variableTable, vector<FunctionData*>* functionTable): BaseCodeGenerator(variableTable, functionTable)
 {}
 
 MasmCodeGenerator::~MasmCodeGenerator()
 {
-	functionTable.clear();
-	variableTable.clear();
 }
 
 string MasmCodeGenerator::vectorToCommaSeparatedList(const vector<string>& vec)
@@ -266,12 +263,12 @@ void MasmCodeGenerator::handleUUninitializedVariable(ostream& out, _VariableData
 void MasmCodeGenerator::handleVariableTable(ostream& out)
 {
 	out << ".data" << endl;
-	for (auto ptr : variableTable)
+	for (auto ptr : *variableTable)
 	{
 		handleInitializedVariable(out, ptr);
 	}
 	out << ".data?" << endl;
-	for (auto ptr : variableTable)
+	for (auto ptr : *variableTable)
 	{
 		handleUUninitializedVariable(out, ptr);
 	}
@@ -279,7 +276,7 @@ void MasmCodeGenerator::handleVariableTable(ostream& out)
 
 void MasmCodeGenerator::handleFunctionTablePrototypes(ostream& out)
 {
-	for (FunctionData* ptr : functionTable)
+	for (FunctionData* ptr : *functionTable)
 	{
 		auto returnType = ptr->type;
 		auto parameters = ptr->parameters;
@@ -314,7 +311,7 @@ void MasmCodeGenerator::handleFunctionTable(ostream& out)
 {
 	out << endl << ".code" << endl;
 	handleFunctionTablePrototypes(out);
-	for (FunctionData* ptr : functionTable)
+	for (FunctionData* ptr : *functionTable)
 	{
 		out << endl;
 		handleIndividualFunction(out, ptr);
@@ -355,7 +352,7 @@ void MasmCodeGenerator::handleStructs(ostream& out)
 
 void MasmCodeGenerator::handlePrototype(ostream& out)
 {
-	for (auto ptr : variableTable)
+	for (auto ptr : *variableTable)
 	{
 		if (ptr->plist != nullptr)
 		{

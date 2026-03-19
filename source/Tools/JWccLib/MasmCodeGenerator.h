@@ -15,8 +15,8 @@ namespace WadeSpace
 	{
 	public:
 		MasmCodeGenerator() = default;
-		MasmCodeGenerator(vector<VariableData*>& variableTable, vector<FunctionData*>& functionTable);
-		~MasmCodeGenerator();
+		MasmCodeGenerator(vector<VariableData*>* variableTable, vector<FunctionData*>* functionTable);
+		virtual ~MasmCodeGenerator();
 
 		virtual void generateCode(ostream& out);
 

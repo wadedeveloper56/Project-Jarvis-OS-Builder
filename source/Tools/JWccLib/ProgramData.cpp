@@ -258,8 +258,8 @@ TypeSpecifier* ProgramData::findType(Declaration* decl)
 
 BaseCodeGenerator* ProgramData::processGlobalVariables()
 {
-	vector<VariableData*> variableTable;
-	vector<FunctionData*> functionTable;
+	vector<VariableData*>* variableTable = new vector<VariableData*>();
+	vector<FunctionData*>* functionTable = new vector<FunctionData*>();
 
 	if (program != nullptr)
 	{
@@ -273,12 +273,12 @@ BaseCodeGenerator* ProgramData::processGlobalVariables()
 				bool hasInitDecl = decl->getVectorInitDeclarator() != nullptr;
 				if (!(isStruct && !hasInitDecl))
 				{
-					handleDeclaration(decl, &variableTable);
+					handleDeclaration(decl, variableTable);
 				}
 			}
 			else if (ptr->hasFunction())
 			{
-				handleFunction(ptr->getFunction(), &functionTable);
+				handleFunction(ptr->getFunction(), functionTable);
 			}
 		}
 	}
