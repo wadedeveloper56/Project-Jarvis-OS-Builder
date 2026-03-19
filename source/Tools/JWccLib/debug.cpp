@@ -25,7 +25,7 @@ void handleStructDefinition(Declaration* declaration)
 					if (temp->getVectorStructDeclaration() != nullptr)
 					{
 						string name = temp->getName()->getSymbolName();
-						compile.getStructList()->insert({ name, temp });
+						structList->insert({ name, temp });
 					}
 				}
 			}
@@ -58,18 +58,18 @@ void handleDeclaration(ExternalDeclaration* externalDeclaration)
 					}
 					if (isTypedef)
 					{
-						compile.getTypedefList()->insert({ name, externalDeclaration });
+						typedefList->insert({ name, externalDeclaration });
 					}
 				}
 			}
 		}
 	}
-	if (!isTypedef) compile.getProgramData()->add(externalDeclaration);
+	if (!isTypedef) programData->add(externalDeclaration);
 }
 
 void createTranslationUnit(ExternalDeclaration* externalDeclaration)
 {
-	compile.getProgramData()->add(externalDeclaration);
+	programData->add(externalDeclaration);
 }
 
 vector<BaseStatement*>* createStatementList(BaseStatement* statement, vector<BaseStatement*>* list)

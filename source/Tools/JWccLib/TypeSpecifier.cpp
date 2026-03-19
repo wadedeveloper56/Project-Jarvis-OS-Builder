@@ -13,10 +13,10 @@ TypeSpecifier::TypeSpecifier(TokenType type, TokenPtr token, StructOrUnionSpecif
 	{
 		string keyword = token->getSymbolName();
 		typedefInfo = nullptr;
-		if (compile.getTypedefList() != nullptr)
+		if (typedefList != nullptr)
 		{
-			auto typedefEntry = compile.getTypedefList()->find(keyword);
-			if (typedefEntry != compile.getTypedefList()->end())
+			auto typedefEntry = typedefList->find(keyword);
+			if (typedefEntry != typedefList->end())
 			{
 				typedefInfo = typedefEntry->second;
 			}

@@ -210,14 +210,14 @@ WS  [ \t\v\n\f]
                 return WadeSpace::Parser::make_BOOL(createKeywordToken(yytext,BOOL), WadeSpace::location()); 
                }
 {L}{A}*        { 
-                auto typedefEntry = WadeSpace::compile.getTypedefList().find(yytext);
-                if (typedefEntry != WadeSpace::compile.getTypedefList().end()) 
+                auto typedefEntry = typedefList->find(yytext);
+                if (typedefEntry != typedefList->end()) 
                 {
                       cout << "Scanner: typedef name [" << yytext << "]" << endl;
                       return WadeSpace::Parser::make_TYPE_NAME(createStringIDToken(yytext), WadeSpace::location()); 
                 }
-                auto structEntry = WadeSpace::compile.getStructList().find(yytext);
-                if (structEntry != WadeSpace::compile.getStructList().end()) 
+                auto structEntry = structList->find(yytext);
+                if (structEntry != structList->end()) 
                 {
                       cout << "Scanner: struct name [" << yytext << "]" << endl;
                       return WadeSpace::Parser::make_IDENTIFIER(createStringIDToken(yytext), WadeSpace::location()); 

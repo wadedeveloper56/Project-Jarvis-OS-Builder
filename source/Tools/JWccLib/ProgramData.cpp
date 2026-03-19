@@ -111,7 +111,7 @@ void ProgramData::handleFunction(FunctionDefinition const * declaration, vector<
 			}
 		}
 		functionTable->push_back(data);
-		compile.getFunctionList()->push_back("_"+data->name);
+		functionList->push_back("_"+data->name);
 	}
 }
 
@@ -186,8 +186,8 @@ void ProgramData::handleDeclaration(Declaration const* declaration, vector<Varia
 								if (type_specifier != nullptr)
 								{
 									structName = type_specifier->getStructOrUnionSpecifier()->getName()->getSymbolName();
-									auto typedefEntry = compile.getStructList()->find(structName);
-									if (typedefEntry != compile.getStructList()->end())
+									auto typedefEntry = structList->find(structName);
+									if (typedefEntry != structList->end())
 									{
 										suSpec = typedefEntry->second;
 									}

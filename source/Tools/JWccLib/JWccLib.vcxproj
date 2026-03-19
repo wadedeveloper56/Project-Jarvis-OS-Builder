@@ -170,7 +170,6 @@
     <ClInclude Include="AbstractDeclarator.h" />
     <ClInclude Include="BaseCodeGenerator.h" />
     <ClInclude Include="BaseStatement.h" />
-    <ClInclude Include="Compile.h" />
     <ClInclude Include="CompoundStatement.h" />
     <ClInclude Include="Constant.h" />
     <ClInclude Include="debug.h" />
@@ -225,7 +224,6 @@
     <ClCompile Include="AbstractDeclarator.cpp" />
     <ClCompile Include="BaseCodeGenerator.cpp" />
     <ClCompile Include="BaseStatement.cpp" />
-    <ClCompile Include="Compile.cpp" />
     <ClCompile Include="CompoundStatement.cpp" />
     <ClCompile Include="Constant.cpp" />
     <ClCompile Include="debug.cpp" />

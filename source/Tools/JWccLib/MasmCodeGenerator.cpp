@@ -323,7 +323,7 @@ void MasmCodeGenerator::handleFunctionTable(ostream& out)
 
 void MasmCodeGenerator::handleStructs(ostream& out)
 {
-	for (map<string, StructOrUnionSpecifier*>::iterator iterator = compile.getStructList()->begin(); iterator != compile.getStructList()->end(); ++iterator)
+	for (map<string, StructOrUnionSpecifier*>::iterator iterator = structList->begin(); iterator != structList->end(); ++iterator)
 	{
 		auto key = iterator->first;
 		auto value = iterator->second;
@@ -393,8 +393,8 @@ void MasmCodeGenerator::handlePrototype(ostream& out)
 			}
 			auto name = "_" + ptr->name;
 			string paramListStr = vectorToCommaSeparatedList(paramList);
-			vector<string>::iterator it = find(compile.getFunctionList()->begin(), compile.getFunctionList()->end(), name);
-			if (it == compile.getFunctionList()->end()) out << "EXTERN " << name << " :PROTO " << paramListStr << ";" << endl;
+			vector<string>::iterator it = find(functionList->begin(), functionList->end(), name);
+			if (it == functionList->end()) out << "EXTERN " << name << " :PROTO " << paramListStr << ";" << endl;
 		}
 	}
 }

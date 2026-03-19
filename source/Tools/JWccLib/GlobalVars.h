@@ -1,12 +1,16 @@
 #pragma once
 
-#include "Compile.h"
-
 using namespace std;
 
 namespace WadeSpace
 {
-	extern Compile compile;
+	class ProgramData;
+	class ExternalDeclaration;
+	class StructOrUnionSpecifier;
+	extern ProgramData* programData;
+	extern map<string, ExternalDeclaration*>* typedefList;
+	extern map<string, StructOrUnionSpecifier*>* structList;
+	extern vector<string>* functionList;
 	extern bool bit16;
 	extern bool bit32;
 	extern bool bit64;
