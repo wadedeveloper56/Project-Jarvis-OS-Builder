@@ -27,6 +27,11 @@ void compileFile(istringstream& inStr, ostream& out, int& exitcode)
 
 void compile(istream& in, ArgFilePtr infiles, ostream& out, int& exitcode)
 {
+	typedefList = new map<string, ExternalDeclaration*>();
+	structList = new map<string, StructOrUnionSpecifier*>();
+	programData = new ProgramData();
+	functionList = new vector<string>();
+
 	DUI dui;
 	OutputList outputList;
 	vector<string> files;
