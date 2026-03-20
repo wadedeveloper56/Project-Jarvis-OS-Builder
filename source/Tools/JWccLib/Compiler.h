@@ -6,7 +6,7 @@
 #include "ProgramData.h"
 #include "ExternalDeclaration.h"
 #include "StructOrUnionSpecifier.h"
-#include "ArgumentTable.h"
+#include "..\Arguments\ArgumentTable.h"
 
 namespace WadeSpace
 {
@@ -21,6 +21,7 @@ namespace WadeSpace
 		~Compiler();
 		void compileFile(istringstream& inStr, ostream& out, int& exitcode);
 		void compile(istream& in, ArgFilePtr infiles, ostream& out, int& exitcode);
+
 		[[nodiscard]] ProgramData* getProgramData() const { return programData; }
 		[[nodiscard]] map<string, ExternalDeclaration*>* getTypedefList() const { return typedefList; }
 		[[nodiscard]] map<string, StructOrUnionSpecifier*>* getStructList() const { return structList; }
