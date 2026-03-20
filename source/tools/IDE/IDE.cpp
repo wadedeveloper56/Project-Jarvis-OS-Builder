@@ -38,6 +38,15 @@ CIDEApp::CIDEApp() noexcept
 
 
 	m_nAppLook = 0;
+	// support Restart Manager
+	m_dwRestartManagerSupportFlags = AFX_RESTART_MANAGER_SUPPORT_ALL_ASPECTS;
+#ifdef _MANAGED
+	// If the application is built using Common Language Runtime support (/clr):
+	//     1) This additional setting is needed for Restart Manager support to work properly.
+	//     2) In your project, you must add a reference to System.Windows.Forms in order to build.
+	System::Windows::Forms::Application::SetUnhandledExceptionMode(System::Windows::Forms::UnhandledExceptionMode::ThrowException);
+#endif
+
 	// TODO: replace application ID string below with unique ID string; recommended
 	// format for string is CompanyName.ProductName.SubProduct.VersionInformation
 	SetAppID(_T("IDE.AppID.NoVersion"));
@@ -55,8 +64,27 @@ CIDEApp theApp;
 
 BOOL CIDEApp::InitInstance()
 {
+	// InitCommonControlsEx() is required on Windows XP if an application
+	// manifest specifies use of ComCtl32.dll version 6 or later to enable
+	// visual styles.  Otherwise, any window creation will fail.
+	INITCOMMONCONTROLSEX InitCtrls;
+	InitCtrls.dwSize = sizeof(InitCtrls);
+	// Set this to include all the common control classes you want to use
+	// in your application.
+	InitCtrls.dwICC = ICC_WIN95_CLASSES;
+	InitCommonControlsEx(&InitCtrls);
+
 	CWinAppEx::InitInstance();
 
+
+	// Initialize OLE libraries
+	if (!AfxOleInit())
+	{
+		AfxMessageBox(IDP_OLE_INIT_FAILED);
+		return FALSE;
+	}
+
+	AfxEnableControlContainer();
 
 	EnableTaskbarInteraction();
 
@@ -71,10 +99,11 @@ BOOL CIDEApp::InitInstance()
 	// TODO: You should modify this string to be something appropriate
 	// such as the name of your company or organization
 	SetRegistryKey(_T("Local AppWizard-Generated Applications"));
-	LoadStdProfileSettings(4);  // Load standard INI file options (including MRU)
+	LoadStdProfileSettings(16);  // Load standard INI file options (including MRU)
 
 
 	InitContextMenuManager();
+	InitShellManager();
 
 	InitKeyboardManager();
 
@@ -123,7 +152,7 @@ BOOL CIDEApp::InitInstance()
 	if (!ProcessShellCommand(cmdInfo))
 		return FALSE;
 	// The main window has been initialized, so show and update it
-	pMainFrame->ShowWindow(m_nCmdShow);
+	pMainFrame->ShowWindow(SW_SHOWMAXIMIZED);
 	pMainFrame->UpdateWindow();
 
 	return TRUE;
@@ -132,6 +161,8 @@ BOOL CIDEApp::InitInstance()
 int CIDEApp::ExitInstance()
 {
 	//TODO: handle additional resources you may have added
+	AfxOleTerm(FALSE);
+
 	return CWinAppEx::ExitInstance();
 }
 
