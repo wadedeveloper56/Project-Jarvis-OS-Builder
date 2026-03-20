@@ -3,6 +3,7 @@
 #include "GlobalVars.h"
 #include "StructOrUnionSpecifier.h"
 #include "ExternalDeclaration.h"
+#include "Compiler.h"
 
 using namespace WadeSpace;
 
@@ -13,10 +14,10 @@ TypeSpecifier::TypeSpecifier(TokenType type, TokenPtr token, StructOrUnionSpecif
 	{
 		string keyword = token->getSymbolName();
 		typedefInfo = nullptr;
-		if (typedefList != nullptr)
+		if (compiler->getTypedefList() != nullptr)
 		{
-			auto typedefEntry = typedefList->find(keyword);
-			if (typedefEntry != typedefList->end())
+			auto typedefEntry = compiler->getTypedefList()->find(keyword);
+			if (typedefEntry != compiler->getTypedefList()->end())
 			{
 				typedefInfo = typedefEntry->second;
 			}

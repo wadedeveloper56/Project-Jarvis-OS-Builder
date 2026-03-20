@@ -4,6 +4,7 @@
 #include "ProgramData.h"
 #include "GlobalVars.h"
 #include "StructOrUnionSpecifier.h"
+#include "Compiler.h"
 
 using namespace std;
 using namespace WadeSpace;
@@ -25,7 +26,7 @@ void handleStructDefinition(Declaration* declaration)
 					if (temp->getVectorStructDeclaration() != nullptr)
 					{
 						string name = temp->getName()->getSymbolName();
-						structList->insert({ name, temp });
+						compiler->getStructList()->insert({ name, temp });
 					}
 				}
 			}
@@ -58,18 +59,18 @@ void handleDeclaration(ExternalDeclaration* externalDeclaration)
 					}
 					if (isTypedef)
 					{
-						typedefList->insert({ name, externalDeclaration });
+						compiler->getTypedefList()->insert({name, externalDeclaration});
 					}
 				}
 			}
 		}
 	}
-	if (!isTypedef) programData->add(externalDeclaration);
+	if (!isTypedef) compiler->getProgramData()->add(externalDeclaration);
 }
 
 void createTranslationUnit(ExternalDeclaration* externalDeclaration)
 {
-	programData->add(externalDeclaration);
+	compiler->getProgramData()->add(externalDeclaration);
 }
 
 vector<BaseStatement*>* createStatementList(BaseStatement* statement, vector<BaseStatement*>* list)

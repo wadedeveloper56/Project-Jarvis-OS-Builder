@@ -7,6 +7,7 @@
 #include "GlobalVars.h"
 #include "Initializer.h"
 #include "ExpressionTree.h"
+#include "Compiler.h"
 
 using namespace WadeSpace;
 using namespace std;
@@ -320,7 +321,7 @@ void MasmCodeGenerator::handleFunctionTable(ostream& out)
 
 void MasmCodeGenerator::handleStructs(ostream& out)
 {
-	for (map<string, StructOrUnionSpecifier*>::iterator iterator = structList->begin(); iterator != structList->end(); ++iterator)
+	for (map<string, StructOrUnionSpecifier*>::iterator iterator = compiler->getStructList()->begin(); iterator != compiler->getStructList()->end(); ++iterator)
 	{
 		auto key = iterator->first;
 		auto value = iterator->second;
@@ -390,8 +391,8 @@ void MasmCodeGenerator::handlePrototype(ostream& out)
 			}
 			auto name = "_" + ptr->name;
 			string paramListStr = vectorToCommaSeparatedList(paramList);
-			vector<string>::iterator it = find(functionList->begin(), functionList->end(), name);
-			if (it == functionList->end()) out << "EXTERN " << name << " :PROTO " << paramListStr << ";" << endl;
+			vector<string>::iterator it = find(compiler->getFunctionList()->begin(), compiler->getFunctionList()->end(), name);
+			if (it == compiler->getFunctionList()->end()) out << "EXTERN " << name << " :PROTO " << paramListStr << ";" << endl;
 		}
 	}
 }

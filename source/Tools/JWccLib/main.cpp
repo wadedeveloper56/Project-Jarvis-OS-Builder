@@ -11,45 +11,11 @@
 #include "BaseCodeGenerator.h"
 #include "MasmCodeGenerator.h"
 #include "output.h"
+#include "Compiler.h"
 
 using namespace WadeSpace;
 using namespace std;
 using namespace simplecpp;
-
-void compileFile(istringstream& inStr, ostream& out, int& exitcode)
-{
-	Interpreter i;
-	i.setStreams(&inStr, &out);
-	exitcode = i.parse();
-	BaseCodeGenerator* generator = programData->processGlobalVariables();
-	generator->generateCode(out);
-}
-
-void compile(istream& in, ArgFilePtr infiles, ostream& out, int& exitcode)
-{
-	typedefList = new map<string, ExternalDeclaration*>();
-	structList = new map<string, StructOrUnionSpecifier*>();
-	programData = new ProgramData();
-	functionList = new vector<string>();
-
-	DUI dui;
-	OutputList outputList;
-	vector<string> files;
-	TokenList* rawtokens;
-	FileDataCache filedata;
-
-	rawtokens = new TokenList(in, files, infiles->filename[0], &outputList);
-	rawtokens->removeComments();
-	TokenList outputTokens(files);
-	preprocess(outputTokens, *rawtokens, files, filedata, dui, &outputList);
-	cleanup(filedata);
-	delete rawtokens;
-	rawtokens = nullptr;
-	cout << outputTokens.stringify() << endl << endl;;
-	istringstream inStr(outputTokens.stringify());
-
-	compileFile(inStr, out, exitcode);
-}
 
 int main(int argc, char* argv[])
 {
@@ -129,8 +95,10 @@ int main(int argc, char* argv[])
 	if (in.is_open() && out.is_open())
 	{
 		debug_printf("Parse starting");
-		compile(in, infiles, out, exitcode);
+		compiler = new WadeSpace::Compiler();
+		compiler->compile(in, infiles, out, exitcode);
 		cout << "Parse complete. Result = " << exitcode << endl;
+		delete compiler;
 	}
 	else
 	{

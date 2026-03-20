@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "ProgramData.h"
-
 #include "CompoundStatement.h"
 #include "ExpressionTree.h"
 #include "ExternalDeclaration.h"
@@ -8,6 +7,7 @@
 #include "ParameterTypeList.h"
 #include "MasmCodeGenerator.h"
 #include "StructOrUnionSpecifier.h"
+#include "Compiler.h"
 
 using namespace WadeSpace;
 using namespace std;
@@ -111,7 +111,7 @@ void ProgramData::handleFunction(FunctionDefinition const * declaration, vector<
 			}
 		}
 		functionTable->push_back(data);
-		functionList->push_back("_"+data->name);
+		compiler->getFunctionList()->push_back("_"+data->name);
 	}
 }
 
@@ -186,8 +186,8 @@ void ProgramData::handleDeclaration(Declaration const* declaration, vector<Varia
 								if (type_specifier != nullptr)
 								{
 									structName = type_specifier->getStructOrUnionSpecifier()->getName()->getSymbolName();
-									auto typedefEntry = structList->find(structName);
-									if (typedefEntry != structList->end())
+									auto typedefEntry = compiler->getStructList()->find(structName);
+									if (typedefEntry != compiler->getStructList()->end())
 									{
 										suSpec = typedefEntry->second;
 									}

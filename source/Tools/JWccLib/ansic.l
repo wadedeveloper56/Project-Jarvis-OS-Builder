@@ -31,8 +31,10 @@ WS  [ \t\v\n\f]
     #include "parser.hpp"
     #include "location.hh"
     #include "Token.h"
+    #include "Compiler.h"
 
     using namespace std;
+    using namespace WadeSpace;
 
     // Original yyterminate() macro returns int. Since we're using Bison 3 variants
     // as tokens, we must redefine it to change type from `int` to `Parser::semantic_type`
@@ -210,14 +212,14 @@ WS  [ \t\v\n\f]
                 return WadeSpace::Parser::make_BOOL(createKeywordToken(yytext,BOOL), WadeSpace::location()); 
                }
 {L}{A}*        { 
-                auto typedefEntry = typedefList->find(yytext);
-                if (typedefEntry != typedefList->end()) 
+                auto typedefEntry = compiler->getTypedefList()->find(yytext);
+                if (typedefEntry != compiler->getTypedefList()->end()) 
                 {
                       cout << "Scanner: typedef name [" << yytext << "]" << endl;
                       return WadeSpace::Parser::make_TYPE_NAME(createStringIDToken(yytext), WadeSpace::location()); 
                 }
-                auto structEntry = structList->find(yytext);
-                if (structEntry != structList->end()) 
+                auto structEntry = compiler->getStructList()->find(yytext);
+                if (structEntry != compiler->getStructList()->end()) 
                 {
                       cout << "Scanner: struct name [" << yytext << "]" << endl;
                       return WadeSpace::Parser::make_IDENTIFIER(createStringIDToken(yytext), WadeSpace::location()); 
