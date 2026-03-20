@@ -111,7 +111,7 @@ void ProgramData::handleFunction(FunctionDefinition const * declaration, vector<
 			}
 		}
 		functionTable->push_back(data);
-		compiler->getFunctionList()->push_back("_"+data->name);
+		//compiler->getFunctionList()->push_back("_"+data->name);
 	}
 }
 
@@ -186,11 +186,12 @@ void ProgramData::handleDeclaration(Declaration const* declaration, vector<Varia
 								if (type_specifier != nullptr)
 								{
 									structName = type_specifier->getStructOrUnionSpecifier()->getName()->getSymbolName();
-									auto typedefEntry = compiler->getStructList()->find(structName);
-									if (typedefEntry != compiler->getStructList()->end())
-									{
-										suSpec = typedefEntry->second;
-									}
+									//map<string, StructOrUnionSpecifier*>* temp = compiler->getStructList();
+									//auto typedefEntry = temp->find(structName);
+									//if (typedefEntry != temp->end())
+									//{
+									//	suSpec = typedefEntry->second;
+									//}
 								}
 							}
 						}
@@ -267,14 +268,7 @@ BaseCodeGenerator* ProgramData::processGlobalVariables()
 		{
 			if (ptr->hasDeclaration())
 			{
-				auto decl = ptr->getDeclaration();
-				auto type = findType(decl)->getType().value();
-				bool isStruct = type == STRUCT || type == UNION;
-				bool hasInitDecl = decl->getVectorInitDeclarator() != nullptr;
-				if (!(isStruct && !hasInitDecl))
-				{
-					handleDeclaration(decl, variableTable);
-				}
+				handleDeclaration(ptr->getDeclaration(), variableTable);
 			}
 			else if (ptr->hasFunction())
 			{

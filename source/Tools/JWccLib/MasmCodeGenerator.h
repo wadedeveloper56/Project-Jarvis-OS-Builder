@@ -31,7 +31,7 @@ namespace WadeSpace
 		void handleUUninitializedVariable(ostream& out, _VariableData* ptr);
 		void handleVariableTable(ostream& out);
 		void handleFunctionTable(ostream& out);
-		void handleStructs(ostream& out);
+		//void handleStructs(ostream& out);
 		void outputVariable(ostream& out, _VariableData* ptr);
 		void handleFunctionWithParameters(ostream& out, string name, vector<VariableData*>* list);
 		void handleIndividualFunctionStatements(ostream& out, TokenType returnType, BaseStatement const * statements);

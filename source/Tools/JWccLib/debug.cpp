@@ -9,6 +9,7 @@
 using namespace std;
 using namespace WadeSpace;
 
+/*
 void handleStructDefinition(Declaration* declaration)
 {
 	auto declaration_specifiers = declaration->getDeclarationSpecifiers();
@@ -26,13 +27,15 @@ void handleStructDefinition(Declaration* declaration)
 					if (temp->getVectorStructDeclaration() != nullptr)
 					{
 						string name = temp->getName()->getSymbolName();
-						compiler->getStructList()->insert({ name, temp });
+						map<string, StructOrUnionSpecifier*>* smap = compiler->getStructList();
+						smap->insert({ name, temp });
 					}
 				}
 			}
 		}
 	}
 }
+*/
 
 void handleDeclaration(ExternalDeclaration* externalDeclaration)
 {
@@ -40,7 +43,7 @@ void handleDeclaration(ExternalDeclaration* externalDeclaration)
 	Declaration* declaration = externalDeclaration->getDeclaration();
 	if (declaration != nullptr)
 	{
-	    handleStructDefinition(declaration);
+	    //handleStructDefinition(declaration);
 		if (declaration->getVectorInitDeclarator() != nullptr)
 		{
 			for (InitDeclarator* initDecl : *declaration->getVectorInitDeclarator())
@@ -57,10 +60,11 @@ void handleDeclaration(ExternalDeclaration* externalDeclaration)
 					{
 						name = dd->getDirectDeclarator()->getIdentifier()->getSymbolName();
 					}
-					if (isTypedef)
+/*					if (isTypedef)
 					{
 						compiler->getTypedefList()->insert({name, externalDeclaration});
 					}
+*/
 				}
 			}
 		}

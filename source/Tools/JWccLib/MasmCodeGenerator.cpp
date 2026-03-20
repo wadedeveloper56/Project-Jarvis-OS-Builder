@@ -319,9 +319,11 @@ void MasmCodeGenerator::handleFunctionTable(ostream& out)
 	}
 }
 
+/*
 void MasmCodeGenerator::handleStructs(ostream& out)
 {
-	for (map<string, StructOrUnionSpecifier*>::iterator iterator = compiler->getStructList()->begin(); iterator != compiler->getStructList()->end(); ++iterator)
+	map<string, StructOrUnionSpecifier*>* temp = compiler->getStructList();
+	for (map<string, StructOrUnionSpecifier*>::iterator iterator = temp->begin(); iterator != temp->end(); ++iterator)
 	{
 		auto key = iterator->first;
 		auto value = iterator->second;
@@ -350,7 +352,7 @@ void MasmCodeGenerator::handleStructs(ostream& out)
 
 	}
 }
-
+*/
 void MasmCodeGenerator::handlePrototype(ostream& out)
 {
 	for (auto ptr : *variableTable)
@@ -391,8 +393,9 @@ void MasmCodeGenerator::handlePrototype(ostream& out)
 			}
 			auto name = "_" + ptr->name;
 			string paramListStr = vectorToCommaSeparatedList(paramList);
-			vector<string>::iterator it = find(compiler->getFunctionList()->begin(), compiler->getFunctionList()->end(), name);
-			if (it == compiler->getFunctionList()->end()) out << "EXTERN " << name << " :PROTO " << paramListStr << ";" << endl;
+			//vector<string>::iterator it = find(compiler->getFunctionList()->begin(), compiler->getFunctionList()->end(), name);
+			//if (it == compiler->getFunctionList()->end()) 
+				out << "EXTERN " << name << " :PROTO " << paramListStr << ";" << endl;
 		}
 	}
 }
@@ -418,7 +421,7 @@ void MasmCodeGenerator::generateCode(ostream& out)
 	out << endl;
 	handlePrototype(out);
 	out << endl;
-	handleStructs(out);
+//	handleStructs(out);
 	out << endl;
 	handleVariableTable(out);
 	handleFunctionTable(out);

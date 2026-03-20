@@ -212,19 +212,7 @@ WS  [ \t\v\n\f]
                 return WadeSpace::Parser::make_BOOL(createKeywordToken(yytext,BOOL), WadeSpace::location()); 
                }
 {L}{A}*        { 
-                auto typedefEntry = compiler->getTypedefList()->find(yytext);
-                if (typedefEntry != compiler->getTypedefList()->end()) 
-                {
-                      cout << "Scanner: typedef name [" << yytext << "]" << endl;
-                      return WadeSpace::Parser::make_TYPE_NAME(createStringIDToken(yytext), WadeSpace::location()); 
-                }
-                auto structEntry = compiler->getStructList()->find(yytext);
-                if (structEntry != compiler->getStructList()->end()) 
-                {
-                      cout << "Scanner: struct name [" << yytext << "]" << endl;
-                      return WadeSpace::Parser::make_IDENTIFIER(createStringIDToken(yytext), WadeSpace::location()); 
-                }
-                cout << "Scanner: identifier [" << yytext << "]" << endl;
+                cout << "Scanner: struct name [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_IDENTIFIER(createStringIDToken(yytext), WadeSpace::location()); 
                }
 {HP}{H}+{IS}?  {

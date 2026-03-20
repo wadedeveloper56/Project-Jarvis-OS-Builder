@@ -10,19 +10,19 @@ using namespace WadeSpace;
 TypeSpecifier::TypeSpecifier(TokenType type, TokenPtr token, StructOrUnionSpecifier* structOrUnion, EnumSpecifier* enumSpec) 
                                  : type(type), enumSpec(enumSpec), structOrUnionSpecifier(structOrUnion), typePtr(token)
 {
-	if (token != nullptr)
-	{
-		string keyword = token->getSymbolName();
-		typedefInfo = nullptr;
-		if (compiler->getTypedefList() != nullptr)
-		{
-			auto typedefEntry = compiler->getTypedefList()->find(keyword);
-			if (typedefEntry != compiler->getTypedefList()->end())
-			{
-				typedefInfo = typedefEntry->second;
-			}
-		}
-	}
+	//if (token != nullptr)
+	//{
+	//	string keyword = token->getSymbolName();
+	//	typedefInfo = nullptr;
+	//	if (compiler->getTypedefList() != nullptr)
+	//	{
+	//		auto typedefEntry = compiler->getTypedefList()->find(keyword);
+	//		if (typedefEntry != compiler->getTypedefList()->end())
+	//		{
+	//			typedefInfo = typedefEntry->second;
+	//		}
+	//	}
+	//}
 	if (structOrUnion != nullptr)
 	{
 		auto struct_or_union = structOrUnion->getStructOrUnion();

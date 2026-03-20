@@ -16,6 +16,7 @@ namespace MemoryTest
 			Assert::IsNotNull(buffer, L"Memory allocation failure");
 			FreeMemory(buffer);
 		}
+
 		TEST_METHOD(ReallocateMemory_NotNull)
 		{
 			void* buffer = AllocateMemory(1024);
