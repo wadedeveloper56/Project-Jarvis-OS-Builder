@@ -14,6 +14,8 @@ namespace JWccTest
 		TEST_METHOD(TestMethod1)
 		{
 			Compiler* compiler = new Compiler();
+			Assert::IsNotNull(compiler);
+			delete compiler;
 		}
 	};
 }
