@@ -3,7 +3,7 @@
 
 using namespace std;
 
-void zapTokData(TokDataPtr elem)
+void zapTokData(CTokDataPtr elem)
 {
 	if (elem == nullptr)
 	{

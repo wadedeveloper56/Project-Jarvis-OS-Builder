@@ -1,17 +1,17 @@
 #include "pch.h"
 #include "Token.h"
 
-TokenPtr createToken(const TokDataPtr data)
+TokenPtr createToken(const CTokDataPtr data)
 {
 	const auto tok = new Token;
 	tok->data = data;
 	return tok;
 }
 
-TokDataPtr createTokData(void)
+CTokDataPtr createTokData(void)
 {
-	const auto data = new TokData;
-	memset(data, 0, sizeof(TokData));
+	const auto data = new CTokData;
+	memset(data, 0, sizeof(CTokData));
 	data->repr.symbol.string = nullptr;
 	return data;
 }

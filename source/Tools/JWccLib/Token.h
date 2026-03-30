@@ -65,7 +65,7 @@ struct StringConstant
 	int strLen;
 };
 
-typedef struct TokData
+typedef struct CTokData
 {
 	TokenCode code;
 	union Representation
@@ -76,54 +76,31 @@ typedef struct TokData
 		StringConstant stringConstant;
 	} repr;
 
-	TokData() = default;
-	~TokData() = default;
-	TokData(const TokData& other) = default;
-	TokData(TokData&& other) noexcept = default;
-	TokData& operator=(const TokData& other) = default;
-	TokData& operator=(TokData&& other) noexcept = default;
-} * TokDataPtr;
+	CTokData() = default;
+	~CTokData() = default;
+	CTokData(const CTokData& other) = default;
+	CTokData(CTokData&& other) noexcept = default;
+	CTokData& operator=(const CTokData& other) = default;
+	CTokData& operator=(CTokData&& other) noexcept = default;
+} * CTokDataPtr;
 
 typedef struct Token
 {
-	TokDataPtr data;
+	CTokDataPtr data;
 	Token();
 	~Token();
-
-	Token(const Token& other)
-	{
-		data = other.data ? new TokData(*other.data) : nullptr;
-	}
-
-	Token(Token&& other) noexcept
-	{
-		data = other.data ? new TokData(*other.data) : nullptr;;
-	}
-
-	Token& operator=(const Token& other)
-	{
-		if (this == &other)
-			return *this;
-		data = other.data ? new TokData(*other.data) : nullptr;
-		return *this;
-	}
- 
-	Token& operator=(Token&& other) noexcept
-	{
-		if (this == &other) 
-			return *this;
-		data = other.data ? new TokData(*other.data) : nullptr;
-		return *this;
-	}
-
+	Token(const Token& other)= default;
+	Token(Token&& other) noexcept = default;
+	Token& operator=(const Token& other) = default;
+	Token& operator=(Token&& other) noexcept = default;
 	string getSymbolName() const;
 	string getKeywordName() const;
 	unsigned long long getIntegerConst() const;
 	long double getDoubleConst() const;
 }* TokenPtr, ** TokenPtrPtr;
 
-TokenPtr createToken(TokDataPtr data);
-TokDataPtr createTokData(void);
+TokenPtr createToken(CTokDataPtr data);
+CTokDataPtr createTokData(void);
 TokenPtr createConstantULLToken(unsigned long long num);
 TokenPtr createConstantLDToken(long double num);
 TokenPtr createStringConstantToken(char* str);
