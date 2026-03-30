@@ -12,14 +12,29 @@ namespace WadeSpace
 {
 	class Compiler
 	{
-		ProgramData* programData;
-
+		shared_ptr<ProgramData> programData;
+		shared_ptr<map<string, shared_ptr<Declaration>>> typedefList;
+		shared_ptr<map<string, shared_ptr<StructOrUnionSpecifier>>> structList;
+		shared_ptr<map<string, shared_ptr<FunctionDefinition>>> functionList;
 	public:
 		Compiler();
-		~Compiler();
+		virtual ~Compiler() = default;
 		void compileFile(istringstream& inStr, ostream& out, int& exitcode);
 		void compile(istream& in, ArgFilePtr infiles, ostream& out, int& exitcode);
-
-		[[nodiscard]] ProgramData* getProgramData() const { return programData; }
+		[[nodiscard]] shared_ptr<ProgramData> getProgramData() const { return programData; }
+		[[nodiscard]] shared_ptr<map<string, shared_ptr<Declaration>>> getTypedefList() const { return typedefList; }
+		[[nodiscard]] shared_ptr<map<string, shared_ptr<StructOrUnionSpecifier>>> getStructList() const { return structList; }
+		[[nodiscard]] shared_ptr<map<string, shared_ptr<FunctionDefinition>>> getFunctionList() const { return functionList; }
+		void setProgramData(shared_ptr<ProgramData> data) { programData = data; }
+		void setTypedefList(shared_ptr<map<string, shared_ptr<Declaration>>> list) { typedefList = list; }
+		void setStructList(shared_ptr<map<string, shared_ptr<StructOrUnionSpecifier>>> list) { structList = list; }
+		void setFunctionList(shared_ptr<map<string, shared_ptr<FunctionDefinition>>> list) { functionList = list; }
+		[[nodiscard]] bool hasProgramData() const { return programData != nullptr; }
+		[[nodiscard]] bool hasTypedefList() const { return typedefList != nullptr; }
+		[[nodiscard]] bool hasStructList() const { return structList != nullptr; }
+		[[nodiscard]] bool hasFunctionList() const { return functionList != nullptr; }
+		[[nodiscard]] bool hasTypedef(const string& name) const { return typedefList->find(name) != typedefList->end(); }
+		[[nodiscard]] bool hasFunction(const string& name) const { return functionList->find(name) != functionList->end(); }
+		[[nodiscard]] bool hasStruct(const string& name) const { return structList->find(name) != structList->end(); }
 	};
 }
