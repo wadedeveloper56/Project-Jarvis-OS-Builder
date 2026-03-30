@@ -216,31 +216,32 @@ void ProgramData::handleDeclaration(Declaration const* declaration, vector<Varia
 			}
 		}
 	}
-
-	for (InitDeclarator* initDecl : *initDeclaratorsList)
+	if (initDeclaratorsList != nullptr)
 	{
-		Declarator* declarator = initDecl->getDeclarator();
-		DirectDeclarator* dd = declarator->getDirectDeclarator();
-
-		VariableData* data = new VariableData();
-		data->initializer = nullptr;
-		data->arraySize = 1;
-		data->type = type;
-		data->pointer = declarator->hasPointer();
-		data->name = initDecl->getVariableName();
-		data->unsign = unsign;
-		data->plist = plist;
-
-		if (type == STRUCT || type == UNION)
+		for (InitDeclarator* initDecl : *initDeclaratorsList)
 		{
-			data->structName = structName;
-			data->suSpec = suSpec ? new StructOrUnionSpecifier(*suSpec) : nullptr;
-		}
-		if (initDecl->hasInitializer()) data->initializer = new Initializer(*initDecl->getInitializer());
-		if (dd->hasConstantExpression()) data->arraySize = dd->getConstantExpression()->getData()->getConstant()->getIConst()->getIntegerConst();
-		variableTable->push_back(data);
-	}
+			Declarator* declarator = initDecl->getDeclarator();
+			DirectDeclarator* dd = declarator->getDirectDeclarator();
 
+			VariableData* data = new VariableData();
+			data->initializer = nullptr;
+			data->arraySize = 1;
+			data->type = type;
+			data->pointer = declarator->hasPointer();
+			data->name = initDecl->getVariableName();
+			data->unsign = unsign;
+			data->plist = plist;
+
+			if (type == STRUCT || type == UNION)
+			{
+				data->structName = structName;
+				data->suSpec = suSpec ? new StructOrUnionSpecifier(*suSpec) : nullptr;
+			}
+			if (initDecl->hasInitializer()) data->initializer = new Initializer(*initDecl->getInitializer());
+			if (dd->hasConstantExpression()) data->arraySize = dd->getConstantExpression()->getData()->getConstant()->getIConst()->getIntegerConst();
+			variableTable->push_back(data);
+		}
+	}
 }
 
 TypeSpecifier* ProgramData::findType(Declaration* decl)
