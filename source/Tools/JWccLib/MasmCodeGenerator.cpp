@@ -15,10 +15,6 @@ using namespace std;
 MasmCodeGenerator::MasmCodeGenerator(vector<VariableData*>* variableTable, vector<FunctionData*>* functionTable): BaseCodeGenerator(variableTable, functionTable)
 {}
 
-MasmCodeGenerator::~MasmCodeGenerator()
-{
-}
-
 string MasmCodeGenerator::vectorToCommaSeparatedList(const vector<string>& vec)
 {
 	string result;

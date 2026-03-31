@@ -10,28 +10,24 @@ namespace WadeSpace
 {
 	class ExternalDeclaration
 	{
-	public:
-		ExternalDeclaration();
-		ExternalDeclaration(FunctionDefinition* functionDefinition);
-		ExternalDeclaration(Declaration* declaration);
-		virtual ~ExternalDeclaration();
-
-		string toString();
-
-		ExternalDeclaration(const ExternalDeclaration& other);
-		ExternalDeclaration(ExternalDeclaration&& other) noexcept;
-		ExternalDeclaration& operator=(const ExternalDeclaration& other);
-		ExternalDeclaration& operator=(ExternalDeclaration&& other) noexcept;
-
-		FunctionDefinition* getFunction() const;
-		Declaration* getDeclaration() const;
-
-		bool hasFunction() const;
-		bool hasDeclaration() const;
-		bool isTypedef() const;
-		
-	private:
 		FunctionDefinition* functionDefinition;
 		Declaration* declaration;
+	public:
+		ExternalDeclaration() = default;
+		ExternalDeclaration(FunctionDefinition* functionDefinition);
+		ExternalDeclaration(Declaration* declaration);
+		virtual ~ExternalDeclaration() = default;
+		ExternalDeclaration(const ExternalDeclaration& other) = default;
+		ExternalDeclaration(ExternalDeclaration&& other) noexcept = default;
+		ExternalDeclaration& operator=(const ExternalDeclaration& other) = default;
+		ExternalDeclaration& operator=(ExternalDeclaration&& other) noexcept = default;
+		[[nodiscard]] bool isTypedef() const;
+		[[nodiscard]] FunctionDefinition* getFunction() const { return functionDefinition; }
+		[[nodiscard]] Declaration* getDeclaration() const { return declaration; }
+		[[nodiscard]] bool hasFunction() const { return functionDefinition != nullptr; }
+		[[nodiscard]] bool hasDeclaration() const { return declaration != nullptr; }
+		void setFunctionDefinition(FunctionDefinition* functionDefinition) { this->functionDefinition = functionDefinition; }
+		void setDeclaration(Declaration* declaration) { this->declaration = declaration; }
+
 	};
 }
