@@ -9,20 +9,17 @@ namespace WadeSpace
 {
 	class TypeQualifier
 	{
-	public:
-		TypeQualifier();
-		TypeQualifier(CTokenPtr type);
-		~TypeQualifier();
-
-		[[nodiscard]] CTokenPtr getType() const;
-		[[nodiscard]] bool hasType() const;
-
-		TypeQualifier(const TypeQualifier& other);
-		TypeQualifier(TypeQualifier&& other) noexcept;
-		TypeQualifier& operator=(const TypeQualifier& other);
-		TypeQualifier& operator=(TypeQualifier&& other) noexcept;
-
-	private:
 		CTokenPtr type;
+	public:
+		TypeQualifier() = default;
+		TypeQualifier(CTokenPtr type);
+		~TypeQualifier() = default;
+		TypeQualifier(const TypeQualifier& other) = default;
+		TypeQualifier(TypeQualifier&& other) noexcept = default;
+		TypeQualifier& operator=(const TypeQualifier& other) = default;
+		TypeQualifier& operator=(TypeQualifier&& other) noexcept = default;
+		[[nodiscard]] CTokenPtr getType() const { return type; }
+		[[nodiscard]] bool hasType() const { return type != nullptr; }
+		void setType(CTokenPtr type) { this->type = type; }
 	};
 }

@@ -74,6 +74,21 @@ namespace WadeSpace
 		[[nodiscard]] bool hasStatement2() const { return statement2 != nullptr; }
 		[[nodiscard]] bool hasStatementList() const { return statementList != nullptr; }
 		[[nodiscard]] bool hasDeclarationList() const { return declarationList != nullptr; }
-
+		void addStatement(BaseStatement* statement)
+		{
+			if (statementList == nullptr)
+			{
+				statementList = new vector<BaseStatement*>();
+			}
+			statementList->push_back(statement);
+		}
+		void addDeclaration(Declaration* declaration)
+		{
+			if (declarationList == nullptr)
+			{
+				declarationList = new vector<Declaration*>();
+			}
+			declarationList->push_back(declaration);
+		}
 	};
 }

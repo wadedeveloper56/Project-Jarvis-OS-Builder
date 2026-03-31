@@ -13,13 +13,12 @@ namespace WadeSpace
 	class Statement : public BaseStatement
 	{
 	public:
-		Statement();
+		Statement() = default;
 		Statement(TokenType op, BaseStatement* statement);
-		virtual ~Statement();
-
-		Statement(const Statement& other);
-		Statement(Statement&& other) noexcept;
-		Statement& operator=(const Statement& other);
-		Statement& operator=(Statement&& other) noexcept;
+		virtual ~Statement() = default;
+		Statement(const Statement& other) = default;
+		Statement(Statement&& other) noexcept = default;
+		Statement& operator=(const Statement& other) = default;
+		Statement& operator=(Statement&& other) noexcept = default;
 	};
 }

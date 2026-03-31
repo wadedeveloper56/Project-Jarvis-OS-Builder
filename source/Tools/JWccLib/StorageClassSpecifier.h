@@ -13,20 +13,17 @@ namespace WadeSpace
 {
 	class StorageClassSpecifier
 	{
-	public:
-		StorageClassSpecifier();
-		explicit StorageClassSpecifier(const CTokenPtr type);
-		virtual ~StorageClassSpecifier() = default;
-
-		StorageClassSpecifier(const StorageClassSpecifier& other);
-		StorageClassSpecifier(StorageClassSpecifier&& other) noexcept;
-		StorageClassSpecifier& operator=(const StorageClassSpecifier& other);
-		StorageClassSpecifier& operator=(StorageClassSpecifier&& other) noexcept;
-
-		[[nodiscard]] CTokenPtr getType() const;
-		[[nodiscard]] bool hasType() const;
-
-	private:
 		CTokenPtr type;
+	public:
+		StorageClassSpecifier() = default;
+		StorageClassSpecifier(const CTokenPtr type);
+		virtual ~StorageClassSpecifier() = default;
+		StorageClassSpecifier(const StorageClassSpecifier& other) = default;
+		StorageClassSpecifier(StorageClassSpecifier&& other) noexcept = default;
+		StorageClassSpecifier& operator=(const StorageClassSpecifier& other) = default;
+		StorageClassSpecifier& operator=(StorageClassSpecifier&& other) noexcept = default;
+		[[nodiscard]] CTokenPtr getType() const { return type; }
+		void setType(const CTokenPtr type) { this->type = type; }
+		bool hasType() const { return type != nullptr; }
 	};
 }

@@ -2458,91 +2458,91 @@ namespace  WadeSpace  {
 
   case 97: // type_specifier: "void"
 #line 433 "ansic.y"
-                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(VOID, yystack_[0].value.as < CTokenPtr > (), nullptr, nullptr); cout << "VOID REDUCE to type_specifier" << endl;}
+                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(VOID, yystack_[0].value.as < CTokenPtr > (), nullptr, nullptr, nullptr); cout << "VOID REDUCE to type_specifier" << endl;}
 #line 2463 "parser.cpp"
     break;
 
   case 98: // type_specifier: "char"
 #line 434 "ansic.y"
-                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(CHAR, yystack_[0].value.as < CTokenPtr > (), nullptr, nullptr); cout << "CHAR REDUCE to type_specifier" << endl;}
+                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(CHAR, yystack_[0].value.as < CTokenPtr > (), nullptr, nullptr, nullptr); cout << "CHAR REDUCE to type_specifier" << endl;}
 #line 2469 "parser.cpp"
     break;
 
   case 99: // type_specifier: "short"
 #line 435 "ansic.y"
-                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(SHORT, yystack_[0].value.as < CTokenPtr > (), nullptr, nullptr); cout << "SHORT REDUCE to type_specifier" << endl;}
+                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(SHORT, yystack_[0].value.as < CTokenPtr > (), nullptr, nullptr, nullptr); cout << "SHORT REDUCE to type_specifier" << endl;}
 #line 2475 "parser.cpp"
     break;
 
   case 100: // type_specifier: INT
 #line 436 "ansic.y"
-                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(INT, yystack_[0].value.as < CTokenPtr > (), nullptr, nullptr); cout << "INT REDUCE to type_specifier" << endl;}
+                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(INT, yystack_[0].value.as < CTokenPtr > (), nullptr, nullptr, nullptr); cout << "INT REDUCE to type_specifier" << endl;}
 #line 2481 "parser.cpp"
     break;
 
   case 101: // type_specifier: "long"
 #line 437 "ansic.y"
-                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(LONG, yystack_[0].value.as < CTokenPtr > (), nullptr, nullptr); cout << "LONG REDUCE to type_specifier" << endl;}
+                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(LONG, yystack_[0].value.as < CTokenPtr > (), nullptr, nullptr, nullptr); cout << "LONG REDUCE to type_specifier" << endl;}
 #line 2487 "parser.cpp"
     break;
 
   case 102: // type_specifier: "long long"
 #line 438 "ansic.y"
-                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(LONG_LONG, yystack_[0].value.as < CTokenPtr > (), nullptr, nullptr); cout << "LONG_LONG REDUCE to type_specifier" << endl;}
+                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(LONG_LONG, yystack_[0].value.as < CTokenPtr > (), nullptr, nullptr, nullptr); cout << "LONG_LONG REDUCE to type_specifier" << endl;}
 #line 2493 "parser.cpp"
     break;
 
   case 103: // type_specifier: "float"
 #line 439 "ansic.y"
-                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(FLOAT, yystack_[0].value.as < CTokenPtr > (), nullptr, nullptr); cout << "FLOAT REDUCE to type_specifier" << endl;}
+                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(FLOAT, yystack_[0].value.as < CTokenPtr > (), nullptr, nullptr, nullptr); cout << "FLOAT REDUCE to type_specifier" << endl;}
 #line 2499 "parser.cpp"
     break;
 
   case 104: // type_specifier: "double"
 #line 440 "ansic.y"
-                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(DOUBLE, yystack_[0].value.as < CTokenPtr > (), nullptr, nullptr); cout << "DOUBLE REDUCE to type_specifier" << endl;}
+                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(DOUBLE, yystack_[0].value.as < CTokenPtr > (), nullptr, nullptr, nullptr); cout << "DOUBLE REDUCE to type_specifier" << endl;}
 #line 2505 "parser.cpp"
     break;
 
   case 105: // type_specifier: "long double"
 #line 441 "ansic.y"
-                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(LONG_DOUBLE, yystack_[0].value.as < CTokenPtr > (), nullptr, nullptr); cout << "LONG_DOUBLE REDUCE to type_specifier" << endl;}
+                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(LONG_DOUBLE, yystack_[0].value.as < CTokenPtr > (), nullptr, nullptr, nullptr); cout << "LONG_DOUBLE REDUCE to type_specifier" << endl;}
 #line 2511 "parser.cpp"
     break;
 
   case 106: // type_specifier: "bool"
 #line 442 "ansic.y"
-                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(BOOL, yystack_[0].value.as < CTokenPtr > (), nullptr, nullptr); cout << "BOOL REDUCE to type_specifier" << endl;}
+                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(BOOL, yystack_[0].value.as < CTokenPtr > (), nullptr, nullptr, nullptr); cout << "BOOL REDUCE to type_specifier" << endl;}
 #line 2517 "parser.cpp"
     break;
 
   case 107: // type_specifier: "signed"
 #line 443 "ansic.y"
-                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(SIGNED, yystack_[0].value.as < CTokenPtr > (), nullptr, nullptr); cout << "SIGNED REDUCE to type_specifier" << endl;}
+                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(SIGNED, yystack_[0].value.as < CTokenPtr > (), nullptr, nullptr, nullptr); cout << "SIGNED REDUCE to type_specifier" << endl;}
 #line 2523 "parser.cpp"
     break;
 
   case 108: // type_specifier: "unsigned"
 #line 444 "ansic.y"
-                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(UNSIGNED, yystack_[0].value.as < CTokenPtr > (), nullptr, nullptr); cout << "UNIGNED REDUCE to type_specifier" << endl;}
+                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(UNSIGNED, yystack_[0].value.as < CTokenPtr > (), nullptr, nullptr, nullptr); cout << "UNIGNED REDUCE to type_specifier" << endl;}
 #line 2529 "parser.cpp"
     break;
 
   case 109: // type_specifier: struct_or_union_specifier
 #line 445 "ansic.y"
-                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(UNKNOWN, nullptr, yystack_[0].value.as < StructOrUnionSpecifier * > (), nullptr); cout << "struct_or_union_specifier REDUCE to type_specifier" << endl;}
+                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(UNKNOWN, nullptr, yystack_[0].value.as < StructOrUnionSpecifier * > (), nullptr, nullptr); cout << "struct_or_union_specifier REDUCE to type_specifier" << endl;}
 #line 2535 "parser.cpp"
     break;
 
   case 110: // type_specifier: enum_specifier
 #line 446 "ansic.y"
-                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(ENUM, nullptr, nullptr, yystack_[0].value.as < EnumSpecifier * > ()); cout << "enum_specifier REDUCE to type_specifier" << endl;}
+                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(ENUM, nullptr, nullptr, yystack_[0].value.as < EnumSpecifier * > (), nullptr); cout << "enum_specifier REDUCE to type_specifier" << endl;}
 #line 2541 "parser.cpp"
     break;
 
   case 111: // type_specifier: "type name"
 #line 447 "ansic.y"
-                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(TYPE_NAME, yystack_[0].value.as < CTokenPtr > (), nullptr, nullptr); cout << "TYPE_NAME REDUCE to type_specifier" << endl;}
+                                { yylhs.value.as < TypeSpecifier * > () = new TypeSpecifier(TYPE_NAME, yystack_[0].value.as < CTokenPtr > (), nullptr, nullptr, nullptr); cout << "TYPE_NAME REDUCE to type_specifier" << endl;}
 #line 2547 "parser.cpp"
     break;
 

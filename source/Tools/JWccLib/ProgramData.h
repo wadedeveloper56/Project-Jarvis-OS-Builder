@@ -16,6 +16,8 @@ namespace WadeSpace
 
 	class ProgramData
 	{
+		vector<ExternalDeclaration*> *program;
+		BaseCodeGenerator* generator;
 	public:
 		ProgramData();
 		virtual ~ProgramData();
@@ -37,9 +39,5 @@ namespace WadeSpace
 
 		[[nodiscard]] bool hasProgram() const;
 		[[nodiscard]] bool hasGenerator() const;
-
-	private:
-		vector<ExternalDeclaration*> *program;
-		BaseCodeGenerator* generator;
 	};
 }

@@ -12,14 +12,13 @@ namespace WadeSpace
 	class SelectionStatement : public BaseStatement
 	{
 	public:
-		SelectionStatement();
+		SelectionStatement() = default;
 		SelectionStatement(TokenType op, ExpressionTree* exp, BaseStatement* statement);
 		SelectionStatement(TokenType op, ExpressionTree* exp, BaseStatement* ifStatement, BaseStatement* elseStatement);
-		virtual ~SelectionStatement();
-
-		SelectionStatement(const SelectionStatement& other);
-		SelectionStatement(SelectionStatement&& other) noexcept;
-		SelectionStatement& operator=(const SelectionStatement& other);
-		SelectionStatement& operator=(SelectionStatement&& other) noexcept;
+		virtual ~SelectionStatement() = default;
+		SelectionStatement(const SelectionStatement& other) = default;
+		SelectionStatement(SelectionStatement&& other) noexcept = default;
+		SelectionStatement& operator=(const SelectionStatement& other) = default;
+		SelectionStatement& operator=(SelectionStatement&& other) noexcept = default;
 	};
 }

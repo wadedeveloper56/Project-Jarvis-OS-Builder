@@ -430,21 +430,21 @@ storage_class_specifier
     ;
 
 type_specifier
-    : VOID                      { $$ = new TypeSpecifier(VOID, $1, nullptr, nullptr); cout << "VOID REDUCE to type_specifier" << endl;}
-    | CHAR                      { $$ = new TypeSpecifier(CHAR, $1, nullptr, nullptr); cout << "CHAR REDUCE to type_specifier" << endl;}
-    | SHORT                     { $$ = new TypeSpecifier(SHORT, $1, nullptr, nullptr); cout << "SHORT REDUCE to type_specifier" << endl;}
-    | INT                       { $$ = new TypeSpecifier(INT, $1, nullptr, nullptr); cout << "INT REDUCE to type_specifier" << endl;}
-    | LONG                      { $$ = new TypeSpecifier(LONG, $1, nullptr, nullptr); cout << "LONG REDUCE to type_specifier" << endl;}
-    | LONG_LONG                 { $$ = new TypeSpecifier(LONG_LONG, $1, nullptr, nullptr); cout << "LONG_LONG REDUCE to type_specifier" << endl;}
-    | FLOAT                     { $$ = new TypeSpecifier(FLOAT, $1, nullptr, nullptr); cout << "FLOAT REDUCE to type_specifier" << endl;}
-    | DOUBLE                    { $$ = new TypeSpecifier(DOUBLE, $1, nullptr, nullptr); cout << "DOUBLE REDUCE to type_specifier" << endl;}
-    | LONG_DOUBLE               { $$ = new TypeSpecifier(LONG_DOUBLE, $1, nullptr, nullptr); cout << "LONG_DOUBLE REDUCE to type_specifier" << endl;}
-    | BOOL                      { $$ = new TypeSpecifier(BOOL, $1, nullptr, nullptr); cout << "BOOL REDUCE to type_specifier" << endl;}
-    | SIGNED                    { $$ = new TypeSpecifier(SIGNED, $1, nullptr, nullptr); cout << "SIGNED REDUCE to type_specifier" << endl;}
-    | UNSIGNED                  { $$ = new TypeSpecifier(UNSIGNED, $1, nullptr, nullptr); cout << "UNIGNED REDUCE to type_specifier" << endl;}
-    | struct_or_union_specifier { $$ = new TypeSpecifier(UNKNOWN, nullptr, $1, nullptr); cout << "struct_or_union_specifier REDUCE to type_specifier" << endl;}
-    | enum_specifier            { $$ = new TypeSpecifier(ENUM, nullptr, nullptr, $1); cout << "enum_specifier REDUCE to type_specifier" << endl;}
-    | TYPE_NAME                 { $$ = new TypeSpecifier(TYPE_NAME, $1, nullptr, nullptr); cout << "TYPE_NAME REDUCE to type_specifier" << endl;}
+    : VOID                      { $$ = new TypeSpecifier(VOID, $1, nullptr, nullptr, nullptr); cout << "VOID REDUCE to type_specifier" << endl;}
+    | CHAR                      { $$ = new TypeSpecifier(CHAR, $1, nullptr, nullptr, nullptr); cout << "CHAR REDUCE to type_specifier" << endl;}
+    | SHORT                     { $$ = new TypeSpecifier(SHORT, $1, nullptr, nullptr, nullptr); cout << "SHORT REDUCE to type_specifier" << endl;}
+    | INT                       { $$ = new TypeSpecifier(INT, $1, nullptr, nullptr, nullptr); cout << "INT REDUCE to type_specifier" << endl;}
+    | LONG                      { $$ = new TypeSpecifier(LONG, $1, nullptr, nullptr, nullptr); cout << "LONG REDUCE to type_specifier" << endl;}
+    | LONG_LONG                 { $$ = new TypeSpecifier(LONG_LONG, $1, nullptr, nullptr, nullptr); cout << "LONG_LONG REDUCE to type_specifier" << endl;}
+    | FLOAT                     { $$ = new TypeSpecifier(FLOAT, $1, nullptr, nullptr, nullptr); cout << "FLOAT REDUCE to type_specifier" << endl;}
+    | DOUBLE                    { $$ = new TypeSpecifier(DOUBLE, $1, nullptr, nullptr, nullptr); cout << "DOUBLE REDUCE to type_specifier" << endl;}
+    | LONG_DOUBLE               { $$ = new TypeSpecifier(LONG_DOUBLE, $1, nullptr, nullptr, nullptr); cout << "LONG_DOUBLE REDUCE to type_specifier" << endl;}
+    | BOOL                      { $$ = new TypeSpecifier(BOOL, $1, nullptr, nullptr, nullptr); cout << "BOOL REDUCE to type_specifier" << endl;}
+    | SIGNED                    { $$ = new TypeSpecifier(SIGNED, $1, nullptr, nullptr, nullptr); cout << "SIGNED REDUCE to type_specifier" << endl;}
+    | UNSIGNED                  { $$ = new TypeSpecifier(UNSIGNED, $1, nullptr, nullptr, nullptr); cout << "UNIGNED REDUCE to type_specifier" << endl;}
+    | struct_or_union_specifier { $$ = new TypeSpecifier(UNKNOWN, nullptr, $1, nullptr, nullptr); cout << "struct_or_union_specifier REDUCE to type_specifier" << endl;}
+    | enum_specifier            { $$ = new TypeSpecifier(ENUM, nullptr, nullptr, $1, nullptr); cout << "enum_specifier REDUCE to type_specifier" << endl;}
+    | TYPE_NAME                 { $$ = new TypeSpecifier(TYPE_NAME, $1, nullptr, nullptr, nullptr); cout << "TYPE_NAME REDUCE to type_specifier" << endl;}
     ;
 
 struct_or_union_specifier
