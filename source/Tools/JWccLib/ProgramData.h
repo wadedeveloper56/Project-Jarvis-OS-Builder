@@ -23,8 +23,8 @@ namespace WadeSpace
 		BaseCodeGenerator* processGlobalVariables();
 
 	private:
-		void handleDeclaration(Declaration const* declaration, vector<struct _VariableData*>* variableTable);
-		void handleFunction(FunctionDefinition const* declaration, vector<struct _FunctionData*>* functionTable);
+		void handleDeclaration(Declaration const* declaration, vector<VariableData*>* variableTable);
+		void handleFunction(FunctionDefinition const* declaration, vector<FunctionData*>* functionTable);
 		ParameterTypeList* getDeclarationParameterList(vector<InitDeclarator*> const * initDeclaratorsList);
 		TokenType getFunctionParameterType(ParameterDeclaration* parameterDeclaration);
 		string getParameterDeclarationName(ParameterDeclaration const * parameterDeclaration);

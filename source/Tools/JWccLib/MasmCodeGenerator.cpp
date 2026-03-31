@@ -188,7 +188,7 @@ string MasmCodeGenerator::convertToAsmType(bool isUnsigned, bool isPointer, Toke
 	return asmType;
 }
 
-void MasmCodeGenerator::outputVariable(ostream& out, _VariableData* ptr)
+void MasmCodeGenerator::outputVariable(ostream& out, VariableData* ptr)
 {
 	auto type = ptr->type;
 	auto variableName = "_" + ptr->name;
@@ -245,7 +245,7 @@ void MasmCodeGenerator::outputVariable(ostream& out, _VariableData* ptr)
 	}
 }
 
-void MasmCodeGenerator::handleInitializedVariable(ostream& out, _VariableData* ptr)
+void MasmCodeGenerator::handleInitializedVariable(ostream& out, VariableData* ptr)
 {
 	if (ptr->initializer != nullptr && ptr->plist == nullptr)
 	{
@@ -253,7 +253,7 @@ void MasmCodeGenerator::handleInitializedVariable(ostream& out, _VariableData* p
 	}
 }
 
-void MasmCodeGenerator::handleUUninitializedVariable(ostream& out, _VariableData* ptr)
+void MasmCodeGenerator::handleUUninitializedVariable(ostream& out, VariableData* ptr)
 {
 	if (ptr->initializer == nullptr && ptr->plist == nullptr)
 	{
