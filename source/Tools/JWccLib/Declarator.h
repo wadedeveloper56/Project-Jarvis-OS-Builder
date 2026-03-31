@@ -12,24 +12,17 @@ namespace WadeSpace
 {
 	class Declarator
 	{
-	public:
-		Declarator(Pointer* pointer, DirectDeclarator* directDeclarator);
-		Declarator();
-		virtual ~Declarator();
-
-		Declarator(const Declarator& other);
-		Declarator(Declarator&& other) noexcept;
-		Declarator& operator=(const Declarator& other);
-		Declarator& operator=(Declarator&& other) noexcept;
-
-		[[nodiscard]] DirectDeclarator* getDirectDeclarator() const;
-		[[nodiscard]] Pointer* getPointer() const;
-
-		[[nodiscard]] bool hasDirectDeclarator() const;
-		[[nodiscard]] bool hasPointer() const;
-
-	private:
 		DirectDeclarator* directDeclarator;
 		Pointer* pointer;
+	public:
+		Declarator() = default;
+		Declarator(Pointer* pointer, DirectDeclarator* directDeclarator);
+		virtual ~Declarator() = default;
+		[[nodiscard]] DirectDeclarator* getDirectDeclarator() const { return directDeclarator; }
+		[[nodiscard]] Pointer* getPointer() const { return pointer; }
+		void setDirectDeclarator(DirectDeclarator* const directDeclarator) { this->directDeclarator = directDeclarator; }
+		void setPointer(Pointer* const pointer) { this->pointer = pointer; }
+		bool hasDirectDeclarator() const { return directDeclarator != nullptr; }
+		bool hasPointer() const { return pointer != nullptr; }
 	};
 }

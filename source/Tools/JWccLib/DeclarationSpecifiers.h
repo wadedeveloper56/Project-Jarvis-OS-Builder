@@ -6,14 +6,16 @@
 
 namespace WadeSpace
 {
-	struct DeclarationSpecifiersNode
+	class DeclarationSpecifiersNode
 	{
+	public:
 		StorageClassSpecifier* storageClassSpecifier;
 		TypeSpecifier* typeSpecifier;
 		TypeQualifier* typeQualifier;
-		DeclarationSpecifiersNode(StorageClassSpecifier* const storageClassSpecifier, TypeSpecifier* const typeSpecifier, TypeQualifier* const typeQualifier);
-		~DeclarationSpecifiersNode();
 
+		DeclarationSpecifiersNode() = default;
+		DeclarationSpecifiersNode(StorageClassSpecifier* const storageClassSpecifier, TypeSpecifier* const typeSpecifier, TypeQualifier* const typeQualifier);
+		~DeclarationSpecifiersNode() = default;
 		DeclarationSpecifiersNode(const DeclarationSpecifiersNode& other) = default;
 		DeclarationSpecifiersNode(DeclarationSpecifiersNode&& other) noexcept = default;
 		DeclarationSpecifiersNode& operator=(const DeclarationSpecifiersNode& other) = default;
@@ -22,20 +24,17 @@ namespace WadeSpace
 
 	class DeclarationSpecifiers
 	{
-	public:
-		DeclarationSpecifiers();
-		virtual ~DeclarationSpecifiers(); 
-		void addDeclarationSpecifiersNode(StorageClassSpecifier* const storageClassSpecifier, TypeSpecifier* const typeSpecifier, TypeQualifier* const typeQualifier);
-		
-		[[nodiscard]] vector<DeclarationSpecifiersNode*>* getDeclarationSpecifiersNodeList() const;
-		[[nodiscard]] bool hasDeclarationSpecifiersNodeList() const;
-
-		DeclarationSpecifiers(const DeclarationSpecifiers& other);
-		DeclarationSpecifiers(DeclarationSpecifiers&& other) noexcept;
-		DeclarationSpecifiers& operator=(const DeclarationSpecifiers& other);
-		DeclarationSpecifiers& operator=(DeclarationSpecifiers&& other) noexcept;
-
-	private:
 		vector<DeclarationSpecifiersNode*>* declarationSpecifiersNodeList;
+	public:
+		DeclarationSpecifiers() = default;
+		virtual ~DeclarationSpecifiers() = default;
+		void addDeclarationSpecifiersNode(StorageClassSpecifier* const storageClassSpecifier, TypeSpecifier* const typeSpecifier, TypeQualifier* const typeQualifier);
+		[[nodiscard]] vector<DeclarationSpecifiersNode*>* getDeclarationSpecifiersNodeList() const { return declarationSpecifiersNodeList; }
+		DeclarationSpecifiers(const DeclarationSpecifiers& other) = default;
+		DeclarationSpecifiers(DeclarationSpecifiers&& other) noexcept = default;
+		DeclarationSpecifiers& operator=(const DeclarationSpecifiers& other) = default;
+		DeclarationSpecifiers& operator=(DeclarationSpecifiers&& other) noexcept = default;
+		void setDeclarationSpecifiersNodeList(vector<DeclarationSpecifiersNode*>* const declarationSpecifiersNodeList) { this->declarationSpecifiersNodeList = declarationSpecifiersNodeList; }
+		[[nodiscard]] bool hasDeclarationSpecifiersNodeList() const { return declarationSpecifiersNodeList != nullptr; }
 	};
 }

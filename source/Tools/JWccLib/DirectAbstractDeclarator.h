@@ -21,31 +21,28 @@ namespace WadeSpace
 		ExpressionTree* constantExpression;
 		optional<TokenType> type;
 
-		DirectAbstractDeclaratorNode();
+		DirectAbstractDeclaratorNode() = default;
 		DirectAbstractDeclaratorNode(ParameterTypeList* const parameterTypeList, ExpressionTree* const constantExpression, optional<TokenType> type);
-		~DirectAbstractDeclaratorNode();
+		~DirectAbstractDeclaratorNode() = default;
 	}* DirectAbstractDeclaratorNodePtr;
 
 	class DirectAbstractDeclarator
 	{
-	public:
-		DirectAbstractDeclarator();
-		DirectAbstractDeclarator(AbstractDeclarator* abstractDeclarator, vector<DirectAbstractDeclaratorNode*>* list);
-		virtual ~DirectAbstractDeclarator();
-
-		DirectAbstractDeclarator(const DirectAbstractDeclarator& other);
-		DirectAbstractDeclarator(DirectAbstractDeclarator&& other) noexcept;
-		DirectAbstractDeclarator& operator=(const DirectAbstractDeclarator& other);
-		DirectAbstractDeclarator& operator=(DirectAbstractDeclarator&& other) noexcept;
-
-		[[nodiscard]] AbstractDeclarator* getAbstractDeclarator() const;
-		[[nodiscard]] vector<DirectAbstractDeclaratorNode*>* getList() const;
-
-		[[nodiscard]] bool hasAbstractDeclarator() const;
-		[[nodiscard]] bool hasList() const;
-
-	private:
 		AbstractDeclarator* abstractDeclarator;
 		vector<DirectAbstractDeclaratorNode*>* list;
+	public:
+		DirectAbstractDeclarator() = default;
+		DirectAbstractDeclarator(AbstractDeclarator* abstractDeclarator, vector<DirectAbstractDeclaratorNode*>* list);
+		virtual ~DirectAbstractDeclarator() = default;
+		DirectAbstractDeclarator(const DirectAbstractDeclarator& other) = default;
+		DirectAbstractDeclarator(DirectAbstractDeclarator&& other) noexcept = default;
+		DirectAbstractDeclarator& operator=(const DirectAbstractDeclarator& other) = default;
+		DirectAbstractDeclarator& operator=(DirectAbstractDeclarator&& other) noexcept = default;
+		[[nodiscard]] AbstractDeclarator* getAbstractDeclarator() const { return abstractDeclarator; }
+		[[nodiscard]] vector<DirectAbstractDeclaratorNode*>* getList() const { return list; }
+		void setAbstractDeclarator(AbstractDeclarator* abstractDeclarator) { this->abstractDeclarator = abstractDeclarator; }
+		void setList(vector<DirectAbstractDeclaratorNode*>* list) { this->list = list; }
+		bool hasAbstractDeclarator() const { return abstractDeclarator != nullptr; }
+		bool hasList() const { return list != nullptr && !list->empty(); }
 	};
 }
