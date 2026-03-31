@@ -10,29 +10,29 @@ namespace WadeSpace
 {
 	class Constant
 	{
-	public:
-		Constant();
-		Constant(const CTokenPtr iConst, const CTokenPtr fConst, const CTokenPtr strConst, const optional<TokenType>& type);
-		Constant(const Constant& other);
-		virtual ~Constant(); 
-
-		Constant(Constant&& other) noexcept;
-		Constant& operator=(const Constant& other);
-		Constant& operator=(Constant&& other) noexcept;
-
-		[[nodiscard]] CTokenPtr getIConst() const;
-		[[nodiscard]] CTokenPtr getFConst() const;
-		[[nodiscard]] CTokenPtr getStrConst() const;
-		[[nodiscard]] optional<TokenType> getType() const;
-
-		[[nodiscard]] bool hasIConst() const;
-		[[nodiscard]] bool hasFConst() const;
-		[[nodiscard]] bool hasStrConst() const;
-
-	private:
 		CTokenPtr iConst;
 		CTokenPtr fConst;
 		CTokenPtr strConst;
 		optional<TokenType> type;
+	public:
+		Constant() = default;
+		Constant(const CTokenPtr iConst, const CTokenPtr fConst, const CTokenPtr strConst, const optional<TokenType>& type);
+		Constant(const Constant& other) = default;
+		virtual ~Constant() = default;
+		Constant(Constant&& other) noexcept = default;
+		Constant& operator=(const Constant& other) = default;
+		Constant& operator=(Constant&& other) noexcept = default;
+		[[nodiscard]] CTokenPtr getIConst() const { return iConst; }
+		[[nodiscard]] CTokenPtr getFConst() const { return fConst; }
+		[[nodiscard]] CTokenPtr getStrConst() const { return strConst; }
+		[[nodiscard]] optional<TokenType> getType() const { return type; }
+		void setIConst(const CTokenPtr iConst) { this->iConst = iConst; }
+		void setFConst(const CTokenPtr fConst) { this->fConst = fConst; }
+		void setStrConst(const CTokenPtr strConst) { this->strConst = strConst; }
+		void setType(const optional<TokenType>& type) { this->type = type; }
+		[[nodiscard]] bool hasIConst() const { return iConst != nullptr; }
+		[[nodiscard]] bool hasFConst() const { return fConst != nullptr; }
+		[[nodiscard]] bool hasStrConst() const { return strConst != nullptr; }
+		[[nodiscard]] bool hasType() const { return type.has_value(); }
 	};
 }
