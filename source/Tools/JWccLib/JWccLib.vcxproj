@@ -181,7 +181,6 @@
     <ClInclude Include="DirectDeclarator.h" />
     <ClInclude Include="Enumerator.h" />
     <ClInclude Include="EnumSpecifier.h" />
-    <ClInclude Include="Expression.h" />
     <ClInclude Include="ExpressionStatement.h" />
     <ClInclude Include="ExpressionTree.h" />
     <ClInclude Include="ExternalDeclaration.h" />
@@ -236,7 +235,6 @@
     <ClCompile Include="DirectDeclarator.cpp" />
     <ClCompile Include="Enumerator.cpp" />
     <ClCompile Include="EnumSpecifier.cpp" />
-    <ClCompile Include="Expression.cpp" />
     <ClCompile Include="ExpressionStatement.cpp" />
     <ClCompile Include="ExpressionTree.cpp" />
     <ClCompile Include="ExternalDeclaration.cpp" />

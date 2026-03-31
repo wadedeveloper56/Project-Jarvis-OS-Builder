@@ -13,13 +13,12 @@ namespace WadeSpace
 	class ExpressionStatement : public BaseStatement
 	{
 	public:
-		ExpressionStatement(ExpressionTree* exp);
-		ExpressionStatement();
+		ExpressionStatement() = default;
+		ExpressionStatement(ExpressionTree* exp) : BaseStatement(expression_statement, exp) {}
 		virtual ~ExpressionStatement() = default;
-
-		ExpressionStatement(const ExpressionStatement& other);
-		ExpressionStatement(ExpressionStatement&& other) noexcept;
-		ExpressionStatement& operator=(const ExpressionStatement& other);
-		ExpressionStatement& operator=(ExpressionStatement&& other) noexcept;
+		ExpressionStatement(const ExpressionStatement& other) = default;
+		ExpressionStatement(ExpressionStatement&& other) noexcept = default;
+		ExpressionStatement& operator=(const ExpressionStatement& other) = default;
+		ExpressionStatement& operator=(ExpressionStatement&& other) noexcept = default;
 	};
 }

@@ -14,24 +14,21 @@ namespace WadeSpace
 
 	class Enumerator
 	{
-	public:
-		Enumerator(CTokenPtr identifier, ExpressionTree* constantExpression);
-		Enumerator();
-		virtual ~Enumerator();
-
-		Enumerator(const Enumerator& other);
-		Enumerator(Enumerator&& other) noexcept;
-		Enumerator& operator=(const Enumerator& other);
-		Enumerator& operator=(Enumerator&& other) noexcept;
-	
-		[[nodiscard]] CTokenPtr getIdentifier() const;
-		[[nodiscard]] ExpressionTree* getConstantExpression() const;
-
-		[[nodiscard]] bool hasIdentifier() const { return identifier != nullptr; }
-		[[nodiscard]] bool hasConstantExpression() const { return constantExpression != nullptr; }
-
-	private:
 		CTokenPtr identifier;
 		ExpressionTree* constantExpression;
+	public:
+		Enumerator() = default;
+		Enumerator(CTokenPtr identifier, ExpressionTree* constantExpression);
+		virtual ~Enumerator() = default;
+		Enumerator(const Enumerator& other) = default;
+		Enumerator(Enumerator&& other) noexcept = default;
+		Enumerator& operator=(const Enumerator& other) = default;
+		Enumerator& operator=(Enumerator&& other) noexcept = default;
+		[[nodiscard]] CTokenPtr getIdentifier() const { return identifier; }
+		[[nodiscard]] ExpressionTree* getConstantExpression() const { return constantExpression; }
+		void setIdentifier(CTokenPtr identifier) { this->identifier = identifier; }
+		void setConstantExpression(ExpressionTree* constantExpression) { this->constantExpression = constantExpression; }
+		bool hasConstantExpression() const { return constantExpression != nullptr; }
+		bool hasIdentifier() const { return identifier != nullptr; }
 	};
 }
