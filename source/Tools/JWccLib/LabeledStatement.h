@@ -11,7 +11,7 @@ namespace WadeSpace
 	{
 	public:
 		LabeledStatement();
-		LabeledStatement(TokenPtr identifier, BaseStatement* statement);
+		LabeledStatement(CTokenPtr identifier, BaseStatement* statement);
 		LabeledStatement(TokenType op, ExpressionTree* exp, BaseStatement* statement);
 		LabeledStatement(TokenType op, BaseStatement* statement);
 		virtual ~LabeledStatement();

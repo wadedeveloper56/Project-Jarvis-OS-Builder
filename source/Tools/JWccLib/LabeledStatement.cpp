@@ -4,7 +4,7 @@
 using namespace WadeSpace;
 using namespace std;
 
-LabeledStatement::LabeledStatement(TokenPtr identifier, BaseStatement* statement) : BaseStatement(identifier, statement)
+LabeledStatement::LabeledStatement(CTokenPtr identifier, BaseStatement* statement) : BaseStatement(identifier, statement)
 {
 }
 

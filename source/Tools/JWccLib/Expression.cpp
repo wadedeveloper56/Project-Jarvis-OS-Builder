@@ -12,16 +12,16 @@ NodeData::NodeData() : type(NT_NONE), token1(nullptr), token2(nullptr), exp1(nul
 
 NodeData::NodeData(
 	const NodeType type,
-	TokenPtr token1,
-	TokenPtr token2,
+	CTokenPtr token1,
+	CTokenPtr token2,
 	Expression* const lexp,
 	Expression* const exp1,
 	Expression* const exp2,
 	vector<Expression*>* argumentList,
-	TokenPtr identifier,
+	CTokenPtr identifier,
 	vector<Initializer*>* initializerList,
 	TypeName* typeName,
-	TokenPtr token3, 
+	CTokenPtr CToken3, 
 	Constant* constant
 )
 	: type(type),
@@ -73,12 +73,12 @@ NodeType NodeData::getType() const
 	return type;
 }
 
-TokenPtr NodeData::getToken1() const
+CTokenPtr NodeData::getToken1() const
 {
 	return token1;
 }
 
-TokenPtr NodeData::getToken2() const
+CTokenPtr NodeData::getToken2() const
 {
 	return token2;
 }
@@ -103,7 +103,7 @@ vector<Expression*>* NodeData::getArgumentList() const
 	return argumentList;
 }
 
-TokenPtr NodeData::getIdentifier() const
+CTokenPtr NodeData::getIdentifier() const
 {
 	return identifier;
 }
@@ -118,7 +118,7 @@ TypeName* NodeData::getTypeName() const
 	return typeName;
 }
 
-TokenPtr NodeData::getToken3() const
+CTokenPtr NodeData::getToken3() const
 {
 	return token3;
 }
@@ -131,16 +131,16 @@ Constant* NodeData::getConstant() const
 NodeData::NodeData(const NodeData& other)
 {
 	type = other.type;
-	token1 = other.token1 ? new Token(*other.token1) : nullptr;
-	token2 = other.token2 ? new Token(*other.token2) : nullptr;
+	token1 = other.token1 ? new CToken(*other.token1) : nullptr;
+	token2 = other.token2 ? new CToken(*other.token2) : nullptr;
 	lexp = other.lexp ? new Expression(*other.lexp) : nullptr;
 	exp1 = other.exp1 ? new Expression(*other.exp1) : nullptr;
 	exp2 = other.exp2 ? new Expression(*other.exp2) : nullptr;
 	argumentList = other.argumentList ? new vector<Expression*>(*other.argumentList) : nullptr;
-	identifier = other.identifier ? new Token(*other.identifier) : nullptr;
+	identifier = other.identifier ? new CToken(*other.identifier) : nullptr;
 	initializerList = other.initializerList ? new vector<Initializer*>(*other.initializerList) : nullptr;
 	typeName = other.typeName ? new TypeName(*other.typeName) : nullptr;
-	token3 = other.token3 ? new Token(*other.token3) : nullptr;
+	token3 = other.token3 ? new CToken(*other.token3) : nullptr;
 	constant = other.constant ? new Constant(*other.constant) : nullptr;
 }
 
@@ -173,16 +173,16 @@ NodeData::NodeData(NodeData&& other) noexcept
 	delete lexp;
 	delete constant;
 	type = other.type;
-	token1 = other.token1 ? new Token(*other.token1) : nullptr;
-	token2 = other.token2 ? new Token(*other.token2) : nullptr;
+	token1 = other.token1 ? new CToken(*other.token1) : nullptr;
+	token2 = other.token2 ? new CToken(*other.token2) : nullptr;
 	lexp = other.lexp ? new Expression(*other.lexp) : nullptr;
 	exp1 = other.exp1 ? new Expression(*other.exp1) : nullptr;
 	exp2 = other.exp2 ? new Expression(*other.exp2) : nullptr;
 	argumentList = other.argumentList ? new vector<Expression*>(*other.argumentList) : nullptr;
-	identifier = other.identifier ? new Token(*other.identifier) : nullptr;
+	identifier = other.identifier ? new CToken(*other.identifier) : nullptr;
 	initializerList = other.initializerList ? new vector<Initializer*>(*other.initializerList) : nullptr;
 	typeName = other.typeName ? new TypeName(*other.typeName) : nullptr;
-	token3 = other.token3 ? new Token(*other.token3) : nullptr;
+	token3 = other.token3 ? new CToken(*other.token3) : nullptr;
 	constant = other.constant ? new Constant(*other.constant) : nullptr;
 }
 
@@ -217,16 +217,16 @@ NodeData& NodeData::operator=(const NodeData& other)
 	delete lexp;
 	delete constant;
 	type = other.type;
-	token1 = other.token1 ? new Token(*other.token1) : nullptr;
-	token2 = other.token2 ? new Token(*other.token2) : nullptr;
+	token1 = other.token1 ? new CToken(*other.token1) : nullptr;
+	token2 = other.token2 ? new CToken(*other.token2) : nullptr;
 	lexp = other.lexp ? new Expression(*other.lexp) : nullptr;
 	exp1 = other.exp1 ? new Expression(*other.exp1) : nullptr;
 	exp2 = other.exp2 ? new Expression(*other.exp2) : nullptr;
 	argumentList = other.argumentList ? new vector<Expression*>(*other.argumentList) : nullptr;
-	identifier = other.identifier ? new Token(*other.identifier) : nullptr;
+	identifier = other.identifier ? new CToken(*other.identifier) : nullptr;
 	initializerList = other.initializerList ? new vector<Initializer*>(*other.initializerList) : nullptr;
 	typeName = other.typeName ? new TypeName(*other.typeName) : nullptr;
-	token3 = other.token3 ? new Token(*other.token3) : nullptr;
+	token3 = other.token3 ? new CToken(*other.token3) : nullptr;
 	constant = other.constant ? new Constant(*other.constant) : nullptr;
 	return *this;
 }
@@ -262,16 +262,16 @@ NodeData& NodeData::operator=(NodeData&& other) noexcept
 	delete lexp;
 	delete constant;
 	type = other.type;
-	token1 = other.token1 ? new Token(*other.token1) : nullptr;
-	token2 = other.token2 ? new Token(*other.token2) : nullptr;
+	token1 = other.token1 ? new CToken(*other.token1) : nullptr;
+	token2 = other.token2 ? new CToken(*other.token2) : nullptr;
 	lexp = other.lexp ? new Expression(*other.lexp) : nullptr;
 	exp1 = other.exp1 ? new Expression(*other.exp1) : nullptr;
 	exp2 = other.exp2 ? new Expression(*other.exp2) : nullptr;
 	argumentList = other.argumentList ? new vector<Expression*>(*other.argumentList) : nullptr;
-	identifier = other.identifier ? new Token(*other.identifier) : nullptr;
+	identifier = other.identifier ? new CToken(*other.identifier) : nullptr;
 	initializerList = other.initializerList ? new vector<Initializer*>(*other.initializerList) : nullptr;
 	typeName = other.typeName ? new TypeName(*other.typeName) : nullptr;
-	token3 = other.token3 ? new Token(*other.token3) : nullptr;
+	token3 = other.token3 ? new CToken(*other.token3) : nullptr;
 	constant = other.constant ? new Constant(*other.constant) : nullptr;
 	return *this;
 }
@@ -281,7 +281,7 @@ Expression::Expression() : data(nullptr), left(nullptr), op(nullptr), right(null
 {
 }
 
-Expression::Expression(const NodeDataPtr data, Expression* const left, const TokenPtr op, Expression* const right)
+Expression::Expression(const NodeDataPtr data, Expression* const left, const CTokenPtr op, Expression* const right)
 	: data(data),
 	  left(left),
 	  op(op),
@@ -307,7 +307,7 @@ Expression* Expression::getLeft() const
 	return left;
 }
 
-TokenPtr Expression::getOp() const
+CTokenPtr Expression::getOp() const
 {
 	return op;
 }
@@ -326,7 +326,7 @@ Expression::Expression(const Expression& other)
 	delete right;
 	data = other.data ? new NodeData(*other.data) : nullptr;
 	left = other.left ? new Expression(*other.left) : nullptr;
-	op = other.op ? new Token(*other.op) : nullptr;
+	op = other.op ? new CToken(*other.op) : nullptr;
 	right = other.right ? new Expression(*other.right) : nullptr;
 }
 
@@ -338,7 +338,7 @@ Expression::Expression(Expression&& other) noexcept
 	delete right;
 	data = other.data ? new NodeData(*other.data) : nullptr;
 	left = other.left ? new Expression(*other.left) : nullptr;
-	op = other.op ? new Token(*other.op) : nullptr;
+	op = other.op ? new CToken(*other.op) : nullptr;
 	right = other.right ? new Expression(*other.right) : nullptr;
 }
 
@@ -352,7 +352,7 @@ Expression& Expression::operator=(const Expression& other)
 	delete right;
 	data = other.data ? new NodeData(*other.data) : nullptr;
 	left = other.left ? new Expression(*other.left) : nullptr;
-	op = other.op ? new Token(*other.op) : nullptr;
+	op = other.op ? new CToken(*other.op) : nullptr;
 	right = other.right ? new Expression(*other.right) : nullptr;
 	return *this;
 }
@@ -367,7 +367,7 @@ Expression& Expression::operator=(Expression&& other) noexcept
 	delete right;
 	data = other.data ? new NodeData(*other.data) : nullptr;
 	left = other.left ? new Expression(*other.left) : nullptr;
-	op = other.op ? new Token(*other.op) : nullptr;
+	op = other.op ? new CToken(*other.op) : nullptr;
 	right = other.right ? new Expression(*other.right) : nullptr;
 	return *this;
 }

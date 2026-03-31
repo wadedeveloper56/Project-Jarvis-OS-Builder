@@ -12,7 +12,7 @@ namespace WadeSpace
 	{
 	public:
 		Constant();
-		Constant(const TokenPtr iConst, const TokenPtr fConst, const TokenPtr strConst, const optional<TokenType>& type);
+		Constant(const CTokenPtr iConst, const CTokenPtr fConst, const CTokenPtr strConst, const optional<TokenType>& type);
 		Constant(const Constant& other);
 		virtual ~Constant(); 
 
@@ -20,9 +20,9 @@ namespace WadeSpace
 		Constant& operator=(const Constant& other);
 		Constant& operator=(Constant&& other) noexcept;
 
-		[[nodiscard]] TokenPtr getIConst() const;
-		[[nodiscard]] TokenPtr getFConst() const;
-		[[nodiscard]] TokenPtr getStrConst() const;
+		[[nodiscard]] CTokenPtr getIConst() const;
+		[[nodiscard]] CTokenPtr getFConst() const;
+		[[nodiscard]] CTokenPtr getStrConst() const;
 		[[nodiscard]] optional<TokenType> getType() const;
 
 		[[nodiscard]] bool hasIConst() const;
@@ -30,9 +30,9 @@ namespace WadeSpace
 		[[nodiscard]] bool hasStrConst() const;
 
 	private:
-		TokenPtr iConst;
-		TokenPtr fConst;
-		TokenPtr strConst;
+		CTokenPtr iConst;
+		CTokenPtr fConst;
+		CTokenPtr strConst;
 		optional<TokenType> type;
 	};
 }

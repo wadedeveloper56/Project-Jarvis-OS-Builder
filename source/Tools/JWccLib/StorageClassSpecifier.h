@@ -15,7 +15,7 @@ namespace WadeSpace
 	{
 	public:
 		StorageClassSpecifier();
-		explicit StorageClassSpecifier(const TokenPtr type);
+		explicit StorageClassSpecifier(const CTokenPtr type);
 		virtual ~StorageClassSpecifier() = default;
 
 		StorageClassSpecifier(const StorageClassSpecifier& other);
@@ -23,10 +23,10 @@ namespace WadeSpace
 		StorageClassSpecifier& operator=(const StorageClassSpecifier& other);
 		StorageClassSpecifier& operator=(StorageClassSpecifier&& other) noexcept;
 
-		[[nodiscard]] TokenPtr getType() const;
+		[[nodiscard]] CTokenPtr getType() const;
 		[[nodiscard]] bool hasType() const;
 
 	private:
-		TokenPtr type;
+		CTokenPtr type;
 	};
 }

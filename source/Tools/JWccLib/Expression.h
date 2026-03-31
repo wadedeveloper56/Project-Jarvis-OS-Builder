@@ -22,30 +22,30 @@ namespace WadeSpace
 	typedef struct NodeData
 	{
 		NodeType type;
-		TokenPtr token1;
-		TokenPtr token2;
+		CTokenPtr token1;
+		CTokenPtr token2;
 		Expression* lexp;
 		Expression* exp1;
 		Expression* exp2;
 		vector<Expression*>* argumentList;
-		TokenPtr identifier;
+		CTokenPtr identifier;
 		vector<Initializer*>* initializerList;
 		TypeName* typeName;
-		TokenPtr token3;
+		CTokenPtr token3;
 		Constant* constant;
 		NodeData();
 		NodeData(
 			const NodeType type,
-			const TokenPtr token1,
-			const TokenPtr token2,
+			const CTokenPtr token1,
+			const CTokenPtr token2,
 			Expression* const lexp,
 			Expression* const exp1,
 			Expression* const exp2,
 			vector<Expression*>* argumentList,
-			TokenPtr identifier,
+			CTokenPtr identifier,
 			vector<Initializer*>* initializerList,
 			TypeName* typeName,
-			TokenPtr token3,
+			CTokenPtr token3,
 			Constant* constant
 		);
 		~NodeData();
@@ -54,16 +54,16 @@ namespace WadeSpace
 		NodeData& operator=(const NodeData& other);
 		NodeData& operator=(NodeData&& other) noexcept;
 		[[nodiscard]] NodeType getType() const;
-		[[nodiscard]] TokenPtr getToken1() const;
-		[[nodiscard]] TokenPtr getToken2() const;
+		[[nodiscard]] CTokenPtr getToken1() const;
+		[[nodiscard]] CTokenPtr getToken2() const;
 		[[nodiscard]] Expression* getLexp() const;
 		[[nodiscard]] Expression* getExp1() const;
 		[[nodiscard]] Expression* getExp2() const;
 		[[nodiscard]] vector<Expression*>* getArgumentList() const;
-		[[nodiscard]] TokenPtr getIdentifier() const;
+		[[nodiscard]] CTokenPtr getIdentifier() const;
 		[[nodiscard]] vector<Initializer*>* getInitializerList() const;
 		[[nodiscard]] TypeName* getTypeName() const;
-		[[nodiscard]] TokenPtr getToken3() const;
+		[[nodiscard]] CTokenPtr getToken3() const;
 		[[nodiscard]] Constant* getConstant() const;
 	}* NodeDataPtr;
 
@@ -71,7 +71,7 @@ namespace WadeSpace
 	{
 	public:
 		Expression();
-		Expression(const NodeDataPtr data, Expression* const left, const TokenPtr op, Expression* const right);
+		Expression(const NodeDataPtr data, Expression* const left, const CTokenPtr op, Expression* const right);
 		~Expression();
 
 		Expression(const Expression& other);
@@ -81,7 +81,7 @@ namespace WadeSpace
 
 		[[nodiscard]] NodeDataPtr getData() const;
 		[[nodiscard]] Expression* getLeft() const;
-		[[nodiscard]] TokenPtr getOp() const;
+		[[nodiscard]] CTokenPtr getOp() const;
 		[[nodiscard]] Expression* getRight() const;
 
 		[[nodiscard]] bool hasData() const;
@@ -92,7 +92,7 @@ namespace WadeSpace
 	private:
 		NodeDataPtr data;
 		Expression* left;
-		TokenPtr op;
+		CTokenPtr op;
 		Expression* right;
 	};
 }

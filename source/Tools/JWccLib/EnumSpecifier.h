@@ -11,7 +11,7 @@ namespace WadeSpace
 	class EnumSpecifier
 	{
 	public:
-		EnumSpecifier(TokenPtr nameStr, vector<Enumerator*>* vectorEnumerator);
+		EnumSpecifier(CTokenPtr nameStr, vector<Enumerator*>* vectorEnumerator);
 		EnumSpecifier();
 		virtual ~EnumSpecifier();
 
@@ -20,14 +20,14 @@ namespace WadeSpace
 		EnumSpecifier& operator=(const EnumSpecifier& other);
 		EnumSpecifier& operator=(EnumSpecifier&& other) noexcept;
 
-		[[nodiscard]] TokenPtr getNameStr() const;
+		[[nodiscard]] CTokenPtr getNameStr() const;
 		[[nodiscard]] vector<Enumerator*>* getVectorEnumerator() const;
 
 		[[nodiscard]] bool hasNameStr() const;
 		[[nodiscard]] bool hasVectorEnumerator() const;
 
 	private:
-		TokenPtr  nameStr;
+		CTokenPtr  nameStr;
 		vector<Enumerator*>* vectorEnumerator;
 	};
 }

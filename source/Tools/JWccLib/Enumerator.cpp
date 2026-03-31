@@ -4,7 +4,7 @@
 
 using namespace WadeSpace;
 
-Enumerator::Enumerator(TokenPtr identifier, ExpressionTree* constantExpression) : identifier(identifier), constantExpression(constantExpression)
+Enumerator::Enumerator(CTokenPtr identifier, ExpressionTree* constantExpression) : identifier(identifier), constantExpression(constantExpression)
 {
 }
 
@@ -23,20 +23,20 @@ ExpressionTree* Enumerator::getConstantExpression() const
 	return constantExpression;
 }
 
-TokenPtr Enumerator::getIdentifier() const
+CTokenPtr Enumerator::getIdentifier() const
 {
 	return identifier;
 }
 
 Enumerator::Enumerator(const Enumerator& other)
 {
-	identifier = other.identifier ? new Token(*other.identifier) : nullptr;
+	identifier = other.identifier ? new CToken(*other.identifier) : nullptr;
 	constantExpression = other.constantExpression ? new ExpressionTree(*other.constantExpression) : nullptr;
 }
 
 Enumerator::Enumerator(Enumerator&& other) noexcept
 {
-	identifier = other.identifier ? new Token(*other.identifier) : nullptr;
+	identifier = other.identifier ? new CToken(*other.identifier) : nullptr;
 	constantExpression = other.constantExpression ? new ExpressionTree(*other.constantExpression) : nullptr;
 }
 
@@ -44,7 +44,7 @@ Enumerator& Enumerator::operator=(const Enumerator& other)
 {
 	if (this == &other)
 		return *this;
-	identifier = other.identifier ? new Token(*other.identifier) : nullptr;
+	identifier = other.identifier ? new CToken(*other.identifier) : nullptr;
 	constantExpression = other.constantExpression ? new ExpressionTree(*other.constantExpression) : nullptr;
 	return *this;
 }
@@ -53,7 +53,7 @@ Enumerator& Enumerator::operator=(Enumerator&& other) noexcept
 {
 	if (this == &other)
 		return *this;
-	identifier = other.identifier ? new Token(*other.identifier) : nullptr;
+	identifier = other.identifier ? new CToken(*other.identifier) : nullptr;
 	constantExpression = other.constantExpression ? new ExpressionTree(*other.constantExpression) : nullptr;
 	return *this;
 }

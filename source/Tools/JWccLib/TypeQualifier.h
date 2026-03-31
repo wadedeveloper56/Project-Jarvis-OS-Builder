@@ -11,10 +11,10 @@ namespace WadeSpace
 	{
 	public:
 		TypeQualifier();
-		TypeQualifier(TokenPtr type);
+		TypeQualifier(CTokenPtr type);
 		~TypeQualifier();
 
-		[[nodiscard]] TokenPtr getType() const;
+		[[nodiscard]] CTokenPtr getType() const;
 		[[nodiscard]] bool hasType() const;
 
 		TypeQualifier(const TypeQualifier& other);
@@ -23,6 +23,6 @@ namespace WadeSpace
 		TypeQualifier& operator=(TypeQualifier&& other) noexcept;
 
 	private:
-		TokenPtr type;
+		CTokenPtr type;
 	};
 }

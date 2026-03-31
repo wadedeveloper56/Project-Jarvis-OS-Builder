@@ -11,7 +11,7 @@ namespace WadeSpace
 	{
 	public:
 		StructOrUnionSpecifier();
-		StructOrUnionSpecifier(TokenPtr structOrUnion, TokenPtr name, vector<StructDeclaration*>* vectorStructDeclaration);
+		StructOrUnionSpecifier(CTokenPtr structOrUnion, CTokenPtr name, vector<StructDeclaration*>* vectorStructDeclaration);
 		virtual ~StructOrUnionSpecifier();
 
 		StructOrUnionSpecifier(const StructOrUnionSpecifier& other);
@@ -19,8 +19,8 @@ namespace WadeSpace
 		StructOrUnionSpecifier& operator=(const StructOrUnionSpecifier& other);
 		StructOrUnionSpecifier& operator=(StructOrUnionSpecifier&& other) noexcept;
 
-		[[nodiscard]] TokenPtr getName() const;
-		[[nodiscard]] TokenPtr getStructOrUnion() const;
+		[[nodiscard]] CTokenPtr getName() const;
+		[[nodiscard]] CTokenPtr getStructOrUnion() const;
 		[[nodiscard]] vector<StructDeclaration*>* getVectorStructDeclaration() const;
 
 		[[nodiscard]] bool hasName() const;
@@ -28,8 +28,8 @@ namespace WadeSpace
 		[[nodiscard]] bool hasVectorStructDeclaration() const;
 
 	private:
-		TokenPtr name;
-		TokenPtr structOrUnion;
+		CTokenPtr name;
+		CTokenPtr structOrUnion;
 		vector<StructDeclaration*>* vectorStructDeclaration;
 	};
 }

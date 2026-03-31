@@ -16,14 +16,14 @@ namespace WadeSpace
 	{
 	public:
 		DirectDeclarator( 
-			TokenPtr identifier, 
-			TokenPtr token1,
-			TokenPtr token2,
+			CTokenPtr identifier, 
+			CTokenPtr token1,
+			CTokenPtr token2,
 			Declarator* const declarator, 
 			DirectDeclarator* const directDeclarator,
 			ExpressionTree* const constantExpression, 
 			ParameterTypeList* const parameterTypeList,
-			vector<TokenPtr>* const vectorOfStrings
+			vector<CTokenPtr>* const vectorOfStrings
 		);
 		~DirectDeclarator();
 
@@ -32,14 +32,14 @@ namespace WadeSpace
 		DirectDeclarator& operator=(const DirectDeclarator& other);
 		DirectDeclarator& operator=(DirectDeclarator&& other) noexcept;
 
-		[[nodiscard]] TokenPtr getIdentifier() const;
-		[[nodiscard]] TokenPtr getToken1() const;
-		[[nodiscard]] TokenPtr getToken2() const;
+		[[nodiscard]] CTokenPtr getIdentifier() const;
+		[[nodiscard]] CTokenPtr getToken1() const;
+		[[nodiscard]] CTokenPtr getToken2() const;
 		[[nodiscard]] Declarator* getDeclarator() const;
 		[[nodiscard]] DirectDeclarator* getDirectDeclarator() const;
 		[[nodiscard]] ExpressionTree* getConstantExpression() const;
 		[[nodiscard]] ParameterTypeList* getParameterTypeList() const;
-		[[nodiscard]] vector<TokenPtr>* getVectorOfStrings() const;
+		[[nodiscard]] vector<CTokenPtr>* getVectorOfStrings() const;
 
 		[[nodiscard]] bool hasIdentifier() const { return identifier != nullptr; }
 		[[nodiscard]] bool hasToken1() const { return token1 != nullptr; }
@@ -51,13 +51,13 @@ namespace WadeSpace
 		[[nodiscard]] bool hasVectorOfStrings() const { return vectorOfStrings != nullptr; }
 
 	private:
-		TokenPtr identifier;
-		TokenPtr token1;
-		TokenPtr token2;
+		CTokenPtr identifier;
+		CTokenPtr token1;
+		CTokenPtr token2;
 		Declarator* declarator;
 		DirectDeclarator* directDeclarator;
 		ExpressionTree* constantExpression;
 		ParameterTypeList* parameterTypeList;
-		vector<TokenPtr>* vectorOfStrings;
+		vector<CTokenPtr>* vectorOfStrings;
 	};
 }

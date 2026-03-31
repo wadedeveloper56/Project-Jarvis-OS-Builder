@@ -6,7 +6,7 @@
 using namespace WadeSpace;
 using namespace std;
 
-TypeQualifier::TypeQualifier(TokenPtr type) :type(type)
+TypeQualifier::TypeQualifier(CTokenPtr type) :type(type)
 {
 }
 
@@ -20,7 +20,7 @@ TypeQualifier::~TypeQualifier()
 	delete type;
 }
 
-TokenPtr TypeQualifier::getType() const
+CTokenPtr TypeQualifier::getType() const
 {
 	return type;
 }
@@ -32,19 +32,19 @@ bool TypeQualifier::hasType() const
 
 TypeQualifier::TypeQualifier(const TypeQualifier& other)
 {
-	type = other.type ? new Token(*other.type) : nullptr;
+	type = other.type ? new CToken(*other.type) : nullptr;
 }
 
 TypeQualifier::TypeQualifier(TypeQualifier&& other) noexcept
 {
-	type = other.type ? new Token(*other.type) : nullptr;
+	type = other.type ? new CToken(*other.type) : nullptr;
 }
 
 TypeQualifier& TypeQualifier::operator=(const TypeQualifier& other)
 {
 	if (this == &other)
 		return *this;
-	type = other.type ? new Token(*other.type) : nullptr;
+	type = other.type ? new CToken(*other.type) : nullptr;
 	return *this;
 }
 
@@ -52,7 +52,7 @@ TypeQualifier& TypeQualifier::operator=(TypeQualifier&& other) noexcept
 {
 	if (this == &other)
 		return *this;
-	type = other.type ? new Token(*other.type) : nullptr;
+	type = other.type ? new CToken(*other.type) : nullptr;
 	return *this;
 }
 

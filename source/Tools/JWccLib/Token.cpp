@@ -24,17 +24,7 @@ void zapTokData(CTokDataPtr elem)
 	delete elem;
 }
 
-Token::Token()
-{
-	data = nullptr;
-}
-
-Token::~Token()
-{
-//	if (data != nullptr) zapTokData(data);
-}
-
-string Token::getSymbolName() const
+string CToken::getSymbolName() const
 {
 	if (data != nullptr)
 	{
@@ -46,7 +36,7 @@ string Token::getSymbolName() const
 	return "";
 }
 
-string Token::getKeywordName() const
+string CToken::getKeywordName() const
 {
 	if (data != nullptr)
 	{
@@ -58,7 +48,7 @@ string Token::getKeywordName() const
 	return "";
 }
 
-unsigned long long Token::getIntegerConst() const
+unsigned long long CToken::getIntegerConst() const
 {
 	if (data != nullptr)
 	{
@@ -70,7 +60,7 @@ unsigned long long Token::getIntegerConst() const
 	return 0;
 }
 
-long double Token::getDoubleConst() const
+long double CToken::getDoubleConst() const
 {
 	if (data != nullptr)
 	{

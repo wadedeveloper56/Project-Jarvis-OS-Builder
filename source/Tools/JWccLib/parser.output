@@ -295,94 +295,94 @@ Terminals, with rules where they appear
 
     "end of file" (0) 0
     error (256)
-    "identifier" <TokenPtr> (258) 1 11 12 111 113 129 130 133 134 139 159 160 186 206
-    "i_const" <TokenPtr> (259) 5
-    "f_const" <TokenPtr> (260) 4
-    "sting_literal" <TokenPtr> (261) 6
-    "type name" <TokenPtr> (262) 110
-    "auto" <TokenPtr> (263) 94
-    "break" <TokenPtr> (264) 208
-    "case" <TokenPtr> (265) 187
-    "char" <TokenPtr> (266) 97
-    "const" <TokenPtr> (267) 135
-    "continue" <TokenPtr> (268) 207
-    "default" <TokenPtr> (269) 188
-    "do" <TokenPtr> (270) 203
-    "double" <TokenPtr> (271) 103
-    "long double" <TokenPtr> (272) 104
-    "else" <TokenPtr> (273) 200
-    "enum" <TokenPtr> (274) 128 129 130
-    "extern" <TokenPtr> (275) 92
-    "float" <TokenPtr> (276) 102
-    "for" <TokenPtr> (277) 204 205
-    "goto" <TokenPtr> (278) 206
-    "if" <TokenPtr> (279) 199 200
-    "inline" <TokenPtr> (280)
-    INT <TokenPtr> (281) 99
-    "long" <TokenPtr> (282) 100
-    "long long" <TokenPtr> (283) 101
-    "register" <TokenPtr> (284) 95
-    "restrict" <TokenPtr> (285)
-    "return" <TokenPtr> (286) 209 210
-    "short" <TokenPtr> (287) 98
-    "signed" <TokenPtr> (288) 106
-    "sizeof" <TokenPtr> (289) 23 24
-    "static" <TokenPtr> (290) 93
-    "struct" <TokenPtr> (291) 114
-    "switch" <TokenPtr> (292) 201
-    "typedef" <TokenPtr> (293) 91
-    "union" <TokenPtr> (294) 115
-    "unsigned" <TokenPtr> (295) 107
-    "void" <TokenPtr> (296) 96
-    "volatile" <TokenPtr> (297) 136
-    "while" <TokenPtr> (298) 202 203
-    "bool" <TokenPtr> (299) 105
-    "ellipsis" <TokenPtr> (300) 153
-    "question" <TokenPtr> (301) 62
-    ";" <TokenPtr> (302) 79 80 118 197 198 203 206 207 208 209 210
-    "{" <TokenPtr> (303) 15 16 111 112 128 129 176 177 189 190 191 192
-    "}" <TokenPtr> (304) 15 16 111 112 128 129 176 177 189 190 191 192
-    "," <TokenPtr> (305) 16 18 77 88 124 132 153 155 160 177 179
-    ":" <TokenPtr> (306) 62 126 127 186 187 188
-    "(" <TokenPtr> (307) 3 9 10 15 16 24 32 140 143 144 145 166 168 170 172 174 199 200 201 202 203 204 205
-    ")" <TokenPtr> (308) 3 9 10 15 16 24 32 140 143 144 145 166 168 170 172 174 199 200 201 202 203 204 205
-    "[" <TokenPtr> (309) 8 141 142 167 169 171 173
-    "]" <TokenPtr> (310) 8 141 142 167 169 171 173
-    "." <TokenPtr> (311) 11
-    "~" <TokenPtr> (312) 29
-    "=" <TokenPtr> (313) 65 90 134
-    ">>=" <TokenPtr> (314) 72
-    "<<=" <TokenPtr> (315) 71
-    "+=" <TokenPtr> (316) 69
-    "-=" <TokenPtr> (317) 70
-    "*=" <TokenPtr> (318) 66
-    "/=" <TokenPtr> (319) 67
-    "%=" <TokenPtr> (320) 68
-    "&=" <TokenPtr> (321) 73
-    "^=" <TokenPtr> (322) 74
-    "|=" <TokenPtr> (323) 75
-    ">>" <TokenPtr> (324) 42
-    "<<" <TokenPtr> (325) 41
-    "++" <TokenPtr> (326) 13 20
-    "--" <TokenPtr> (327) 14 21
-    "->" <TokenPtr> (328) 12
-    "&&" <TokenPtr> (329) 58
-    "||" <TokenPtr> (330) 60
-    ">=" <TokenPtr> (331) 47
-    "<=" <TokenPtr> (332) 46
-    ">" <TokenPtr> (333) 45
-    "<" <TokenPtr> (334) 44
-    "==" <TokenPtr> (335) 49
-    "!=" <TokenPtr> (336) 50
-    "!" <TokenPtr> (337) 30
-    "^" <TokenPtr> (338) 54
-    "&" <TokenPtr> (339) 25 52
-    "|" <TokenPtr> (340) 56
-    "-" <TokenPtr> (341) 28 39
-    "+" <TokenPtr> (342) 27 38
-    "*" <TokenPtr> (343) 26 34 146 147 148 149
-    "/" <TokenPtr> (344) 35
-    "%" <TokenPtr> (345) 36
+    "identifier" <CTokenPtr> (258) 1 11 12 111 113 129 130 133 134 139 159 160 186 206
+    "i_const" <CTokenPtr> (259) 5
+    "f_const" <CTokenPtr> (260) 4
+    "sting_literal" <CTokenPtr> (261) 6
+    "type name" <CTokenPtr> (262) 110
+    "auto" <CTokenPtr> (263) 94
+    "break" <CTokenPtr> (264) 208
+    "case" <CTokenPtr> (265) 187
+    "char" <CTokenPtr> (266) 97
+    "const" <CTokenPtr> (267) 135
+    "continue" <CTokenPtr> (268) 207
+    "default" <CTokenPtr> (269) 188
+    "do" <CTokenPtr> (270) 203
+    "double" <CTokenPtr> (271) 103
+    "long double" <CTokenPtr> (272) 104
+    "else" <CTokenPtr> (273) 200
+    "enum" <CTokenPtr> (274) 128 129 130
+    "extern" <CTokenPtr> (275) 92
+    "float" <CTokenPtr> (276) 102
+    "for" <CTokenPtr> (277) 204 205
+    "goto" <CTokenPtr> (278) 206
+    "if" <CTokenPtr> (279) 199 200
+    "inline" <CTokenPtr> (280)
+    INT <CTokenPtr> (281) 99
+    "long" <CTokenPtr> (282) 100
+    "long long" <CTokenPtr> (283) 101
+    "register" <CTokenPtr> (284) 95
+    "restrict" <CTokenPtr> (285)
+    "return" <CTokenPtr> (286) 209 210
+    "short" <CTokenPtr> (287) 98
+    "signed" <CTokenPtr> (288) 106
+    "sizeof" <CTokenPtr> (289) 23 24
+    "static" <CTokenPtr> (290) 93
+    "struct" <CTokenPtr> (291) 114
+    "switch" <CTokenPtr> (292) 201
+    "typedef" <CTokenPtr> (293) 91
+    "union" <CTokenPtr> (294) 115
+    "unsigned" <CTokenPtr> (295) 107
+    "void" <CTokenPtr> (296) 96
+    "volatile" <CTokenPtr> (297) 136
+    "while" <CTokenPtr> (298) 202 203
+    "bool" <CTokenPtr> (299) 105
+    "ellipsis" <CTokenPtr> (300) 153
+    "question" <CTokenPtr> (301) 62
+    ";" <CTokenPtr> (302) 79 80 118 197 198 203 206 207 208 209 210
+    "{" <CTokenPtr> (303) 15 16 111 112 128 129 176 177 189 190 191 192
+    "}" <CTokenPtr> (304) 15 16 111 112 128 129 176 177 189 190 191 192
+    "," <CTokenPtr> (305) 16 18 77 88 124 132 153 155 160 177 179
+    ":" <CTokenPtr> (306) 62 126 127 186 187 188
+    "(" <CTokenPtr> (307) 3 9 10 15 16 24 32 140 143 144 145 166 168 170 172 174 199 200 201 202 203 204 205
+    ")" <CTokenPtr> (308) 3 9 10 15 16 24 32 140 143 144 145 166 168 170 172 174 199 200 201 202 203 204 205
+    "[" <CTokenPtr> (309) 8 141 142 167 169 171 173
+    "]" <CTokenPtr> (310) 8 141 142 167 169 171 173
+    "." <CTokenPtr> (311) 11
+    "~" <CTokenPtr> (312) 29
+    "=" <CTokenPtr> (313) 65 90 134
+    ">>=" <CTokenPtr> (314) 72
+    "<<=" <CTokenPtr> (315) 71
+    "+=" <CTokenPtr> (316) 69
+    "-=" <CTokenPtr> (317) 70
+    "*=" <CTokenPtr> (318) 66
+    "/=" <CTokenPtr> (319) 67
+    "%=" <CTokenPtr> (320) 68
+    "&=" <CTokenPtr> (321) 73
+    "^=" <CTokenPtr> (322) 74
+    "|=" <CTokenPtr> (323) 75
+    ">>" <CTokenPtr> (324) 42
+    "<<" <CTokenPtr> (325) 41
+    "++" <CTokenPtr> (326) 13 20
+    "--" <CTokenPtr> (327) 14 21
+    "->" <CTokenPtr> (328) 12
+    "&&" <CTokenPtr> (329) 58
+    "||" <CTokenPtr> (330) 60
+    ">=" <CTokenPtr> (331) 47
+    "<=" <CTokenPtr> (332) 46
+    ">" <CTokenPtr> (333) 45
+    "<" <CTokenPtr> (334) 44
+    "==" <CTokenPtr> (335) 49
+    "!=" <CTokenPtr> (336) 50
+    "!" <CTokenPtr> (337) 30
+    "^" <CTokenPtr> (338) 54
+    "&" <CTokenPtr> (339) 25 52
+    "|" <CTokenPtr> (340) 56
+    "-" <CTokenPtr> (341) 28 39
+    "+" <CTokenPtr> (342) 27 38
+    "*" <CTokenPtr> (343) 26 34 146 147 148 149
+    "/" <CTokenPtr> (344) 35
+    "%" <CTokenPtr> (345) 36
     "then" (346)
 
 
@@ -405,7 +405,7 @@ Nonterminals, with rules where they appear
     unary_expression <ExpressionTree *> (97)
         on left: 19 20 21 22 23 24
         on right: 20 21 23 31 64
-    unary_operator <TokenPtr> (98)
+    unary_operator <CTokenPtr> (98)
         on left: 25 26 27 28 29 30
         on right: 22
     cast_expression <ExpressionTree *> (99)
@@ -447,7 +447,7 @@ Nonterminals, with rules where they appear
     assignment_expression <ExpressionTree *> (111)
         on left: 63 64
         on right: 17 18 64 76 77 175
-    assignment_operator <TokenPtr> (112)
+    assignment_operator <CTokenPtr> (112)
         on left: 65 66 67 68 69 70 71 72 73 74 75
         on right: 64
     expression <ExpressionTree *> (113)
@@ -477,7 +477,7 @@ Nonterminals, with rules where they appear
     struct_or_union_specifier <StructOrUnionSpecifier *> (121)
         on left: 111 112 113
         on right: 108
-    struct_or_union <TokenPtr> (122)
+    struct_or_union <CTokenPtr> (122)
         on left: 114 115
         on right: 111 112 113
     struct_declaration_list <std::vector<StructDeclaration *> *> (123)
@@ -528,7 +528,7 @@ Nonterminals, with rules where they appear
     parameter_declaration <ParameterDeclaration *> (138)
         on left: 156 157 158
         on right: 154 155
-    identifier_list <std::vector<TokenPtr> *> (139)
+    identifier_list <std::vector<CTokenPtr> *> (139)
         on left: 159 160
         on right: 144 160
     type_name <TypeName *> (140)

@@ -3,7 +3,7 @@
 
 using namespace WadeSpace;
 
-StructOrUnionSpecifier::StructOrUnionSpecifier(TokenPtr structOrUnion, TokenPtr name, vector<StructDeclaration*>* vectorStructDeclaration) : 
+StructOrUnionSpecifier::StructOrUnionSpecifier(CTokenPtr structOrUnion, CTokenPtr name, vector<StructDeclaration*>* vectorStructDeclaration) : 
 structOrUnion(structOrUnion), name(name), vectorStructDeclaration(vectorStructDeclaration)
 {
 }
@@ -27,12 +27,12 @@ StructOrUnionSpecifier::~StructOrUnionSpecifier()
 	}
 }
 
-TokenPtr StructOrUnionSpecifier::getName() const
+CTokenPtr StructOrUnionSpecifier::getName() const
 {
 	return name;
 }
 
-TokenPtr StructOrUnionSpecifier::getStructOrUnion() const
+CTokenPtr StructOrUnionSpecifier::getStructOrUnion() const
 {
 	return structOrUnion;
 }
@@ -45,14 +45,14 @@ vector<StructDeclaration*>* StructOrUnionSpecifier::getVectorStructDeclaration()
 StructOrUnionSpecifier::StructOrUnionSpecifier(const StructOrUnionSpecifier& other)
 {
 	name = other.name;
-	structOrUnion = other.structOrUnion ? new Token(*other.structOrUnion) : nullptr;
+	structOrUnion = other.structOrUnion ? new CToken(*other.structOrUnion) : nullptr;
 	vectorStructDeclaration = other.vectorStructDeclaration ? new vector<StructDeclaration*>(*other.vectorStructDeclaration) : nullptr;
 }
 
 StructOrUnionSpecifier::StructOrUnionSpecifier(StructOrUnionSpecifier&& other) noexcept
 {
 	name = other.name;
-	structOrUnion = other.structOrUnion ? new Token(*other.structOrUnion) : nullptr;
+	structOrUnion = other.structOrUnion ? new CToken(*other.structOrUnion) : nullptr;
 	vectorStructDeclaration = other.vectorStructDeclaration ? new vector<StructDeclaration*>(*other.vectorStructDeclaration) : nullptr;
 }
 
@@ -61,7 +61,7 @@ StructOrUnionSpecifier& StructOrUnionSpecifier::operator=(const StructOrUnionSpe
 	if (this == &other)
 		return *this;
 	name = other.name;
-	structOrUnion = other.structOrUnion ? new Token(*other.structOrUnion) : nullptr;
+	structOrUnion = other.structOrUnion ? new CToken(*other.structOrUnion) : nullptr;
 	vectorStructDeclaration = other.vectorStructDeclaration ? new vector<StructDeclaration*>(*other.vectorStructDeclaration) : nullptr;
 	return *this;
 }
@@ -71,7 +71,7 @@ StructOrUnionSpecifier& StructOrUnionSpecifier::operator=(StructOrUnionSpecifier
 	if (this == &other)
 		return *this;
 	name = other.name;
-	structOrUnion = other.structOrUnion ? new Token(*other.structOrUnion) : nullptr;
+	structOrUnion = other.structOrUnion ? new CToken(*other.structOrUnion) : nullptr;
 	vectorStructDeclaration = other.vectorStructDeclaration ? new vector<StructDeclaration*>(*other.vectorStructDeclaration) : nullptr;
 	return *this;
 }

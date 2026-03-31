@@ -5,7 +5,7 @@
 using namespace WadeSpace;
 using namespace std;
 
-BaseStatement::BaseStatement(TokenType op, TokenPtr identifier, ExpressionTree* const exp, ExpressionTree* const contExp,
+BaseStatement::BaseStatement(TokenType op, CTokenPtr identifier, ExpressionTree* const exp, ExpressionTree* const contExp,
                              BaseStatement* const statement, BaseStatement* const es1, BaseStatement* const es2,
                              BaseStatement* const statement2, vector<BaseStatement*>* const statementList,
                              vector<Declaration*>* const declarationList)
@@ -22,7 +22,7 @@ BaseStatement::BaseStatement(TokenType op, TokenPtr identifier, ExpressionTree* 
 {
 }
 
-BaseStatement::BaseStatement(TokenPtr identifier, BaseStatement* statement) : op(NONE), identifier(identifier),
+BaseStatement::BaseStatement(CTokenPtr identifier, BaseStatement* statement) : op(NONE), identifier(identifier),
                                                                               contExp(nullptr), exp(nullptr),
                                                                               statement(statement), es1(nullptr),
                                                                               es2(nullptr), statement2(nullptr),
@@ -99,7 +99,7 @@ BaseStatement::BaseStatement(TokenType op) : op(op), identifier(nullptr), contEx
 {
 }
 
-BaseStatement::BaseStatement(TokenType op, TokenPtr identifier) : op(op), identifier(identifier), contExp(nullptr),
+BaseStatement::BaseStatement(TokenType op, CTokenPtr identifier) : op(op), identifier(identifier), contExp(nullptr),
                                                                   exp(nullptr),
                                                                   statement(nullptr), es1(nullptr), es2(nullptr),
                                                                   statement2(nullptr), statementList(nullptr),
@@ -135,7 +135,7 @@ BaseStatement::~BaseStatement()
 	}
 }
 
-TokenPtr BaseStatement::getIdentifier() const
+CTokenPtr BaseStatement::getIdentifier() const
 {
 	return identifier;
 }
@@ -182,7 +182,7 @@ vector<Declaration*>* BaseStatement::getDeclarationList() const
 
 BaseStatement::BaseStatement(const BaseStatement& other)
 {
-	identifier = other.identifier ? new Token(*other.identifier) : nullptr;
+	identifier = other.identifier ? new CToken(*other.identifier) : nullptr;
 	exp = other.exp ? new ExpressionTree(*other.exp) : nullptr;
 	contExp = other.contExp ? new ExpressionTree(*other.contExp) : nullptr;
 	statement = other.statement ? new BaseStatement(*other.statement) : nullptr;
@@ -195,7 +195,7 @@ BaseStatement::BaseStatement(const BaseStatement& other)
 
 BaseStatement::BaseStatement(BaseStatement&& other) noexcept
 {
-	identifier = other.identifier ? new Token(*other.identifier) : nullptr;
+	identifier = other.identifier ? new CToken(*other.identifier) : nullptr;
 	exp = other.exp ? new ExpressionTree(*other.exp) : nullptr;
 	contExp = other.contExp ? new ExpressionTree(*other.contExp) : nullptr;
 	statement = other.statement ? new BaseStatement(*other.statement) : nullptr;
@@ -210,7 +210,7 @@ BaseStatement& BaseStatement::operator=(const BaseStatement& other)
 {
 	if (this == &other)
 		return *this;
-	identifier = other.identifier ? new Token(*other.identifier) : nullptr;
+	identifier = other.identifier ? new CToken(*other.identifier) : nullptr;
 	exp = other.exp ? new ExpressionTree(*other.exp) : nullptr;
 	contExp = other.contExp ? new ExpressionTree(*other.contExp) : nullptr;
 	statement = other.statement ? new BaseStatement(*other.statement) : nullptr;
@@ -226,7 +226,7 @@ BaseStatement& BaseStatement::operator=(BaseStatement&& other) noexcept
 {
 	if (this == &other)
 		return *this;
-	identifier = other.identifier ? new Token(*other.identifier) : nullptr;
+	identifier = other.identifier ? new CToken(*other.identifier) : nullptr;
 	exp = other.exp ? new ExpressionTree(*other.exp) : nullptr;
 	contExp = other.contExp ? new ExpressionTree(*other.contExp) : nullptr;
 	statement = other.statement ? new BaseStatement(*other.statement) : nullptr;

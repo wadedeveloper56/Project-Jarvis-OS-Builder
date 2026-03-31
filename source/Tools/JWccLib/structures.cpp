@@ -1,9 +1,9 @@
 #include "pch.h"
 #include "Token.h"
 
-TokenPtr createToken(const CTokDataPtr data)
+CTokenPtr createToken(const CTokDataPtr data)
 {
-	const auto tok = new Token;
+	const auto tok = new CToken;
 	tok->data = data;
 	return tok;
 }
@@ -16,7 +16,7 @@ CTokDataPtr createTokData(void)
 	return data;
 }
 
-TokenPtr createConstantULLToken(const unsigned long long num)
+CTokenPtr createConstantULLToken(const unsigned long long num)
 {
 	const auto tok = createToken(createTokData());
 	tok->data->code = YC_NUMERIC;
@@ -26,7 +26,7 @@ TokenPtr createConstantULLToken(const unsigned long long num)
 	return tok;
 }
 
-TokenPtr createConstantLDToken(const long double num)
+CTokenPtr createConstantLDToken(const long double num)
 {
 	const auto tok = createToken(createTokData());
 	tok->data->code = YC_NUMERIC;
@@ -36,9 +36,9 @@ TokenPtr createConstantLDToken(const long double num)
 	return tok;
 }
 
-TokenPtr createStringConstantToken(char* str)
+CTokenPtr createStringConstantToken(char* str)
 {
-	const TokenPtr tok = createToken(createTokData());
+	const CTokenPtr tok = createToken(createTokData());
 	tok->data->code = YC_STRING;
 	tok->data->repr.stringConstant.s = new char[strlen(str) + 1];
 	strcpy(tok->data->repr.stringConstant.s, str);
@@ -46,9 +46,9 @@ TokenPtr createStringConstantToken(char* str)
 	return tok;
 }
 
-TokenPtr createStringIDToken(char* str)
+CTokenPtr createStringIDToken(char* str)
 {
-	const TokenPtr tok = createToken(createTokData());
+	const CTokenPtr tok = createToken(createTokData());
 	tok->data->code = YC_SYMBOL;
 	tok->data->repr.symbol.string = new char[strlen(str) + 1];
 	strcpy(tok->data->repr.symbol.string, str);
@@ -56,9 +56,9 @@ TokenPtr createStringIDToken(char* str)
 	return tok;
 }
 
-TokenPtr createKeywordToken(char* str, int keyword)
+CTokenPtr createKeywordToken(char* str, int keyword)
 {
-	TokenPtr tok = createToken(createTokData());
+	CTokenPtr tok = createToken(createTokData());
 	tok->data->code = YC_KEYWORD;
 	tok->data->repr.keyword.string = new char[strlen(str) + 1];
 	strcpy(tok->data->repr.keyword.string, str);

@@ -13,7 +13,7 @@ JumpStatement::JumpStatement(TokenType op) : BaseStatement(op)
 {
 }
 
-JumpStatement::JumpStatement(TokenType op, TokenPtr identifier) : BaseStatement(op, identifier)
+JumpStatement::JumpStatement(TokenType op, CTokenPtr identifier) : BaseStatement(op, identifier)
 {
 }
 

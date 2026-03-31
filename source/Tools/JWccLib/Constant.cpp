@@ -4,7 +4,7 @@
 using namespace WadeSpace;
 using namespace std;
 
-Constant::Constant(const TokenPtr iConst, const TokenPtr fConst, const TokenPtr strConst, const optional<TokenType>& type) 
+Constant::Constant(const CTokenPtr iConst, const CTokenPtr fConst, const CTokenPtr strConst, const optional<TokenType>& type) 
 	: iConst(iConst),
 	fConst(fConst),
 	strConst(strConst),
@@ -61,17 +61,17 @@ Constant& Constant::operator=(Constant&& other) noexcept
 	return *this;
 }
 
-TokenPtr Constant::getIConst() const
+CTokenPtr Constant::getIConst() const
 {
 	return iConst;
 }
 
-TokenPtr Constant::getFConst() const
+CTokenPtr Constant::getFConst() const
 {
 	return fConst;
 }
 
-TokenPtr Constant::getStrConst() const
+CTokenPtr Constant::getStrConst() const
 {
 	return strConst;
 }

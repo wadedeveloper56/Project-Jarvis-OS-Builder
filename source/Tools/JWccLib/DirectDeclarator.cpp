@@ -8,14 +8,14 @@ using namespace WadeSpace;
 using namespace std;
 
 DirectDeclarator::DirectDeclarator(
-	TokenPtr identifier,
-	TokenPtr token1,
-	TokenPtr token2,
+	CTokenPtr identifier,
+	CTokenPtr token1,
+	CTokenPtr token2,
 	Declarator* const declarator,
 	DirectDeclarator* const directDeclarator,
 	ExpressionTree* const constantExpression,
 	ParameterTypeList* const parameterTypeList,
-	vector<TokenPtr>* const vectorOfStrings)
+	vector<CTokenPtr>* const vectorOfStrings)
 	: identifier(identifier),
 	  token1(token1),
 	  token2(token2),
@@ -38,25 +38,25 @@ DirectDeclarator::~DirectDeclarator()
 	delete token2;
 	if (vectorOfStrings != nullptr)
 	{
-		for (auto token : *vectorOfStrings)
+		for (auto CToken : *vectorOfStrings)
 		{
-			delete token;
+			delete CToken;
 		}
 		delete vectorOfStrings;
 	}
 }
 
-TokenPtr DirectDeclarator::getIdentifier() const
+CTokenPtr DirectDeclarator::getIdentifier() const
 {
 	return identifier;
 }
 
-TokenPtr DirectDeclarator::getToken1() const
+CTokenPtr DirectDeclarator::getToken1() const
 {
 	return token1;
 }
 
-TokenPtr DirectDeclarator::getToken2() const
+CTokenPtr DirectDeclarator::getToken2() const
 {
 	return token2;
 }
@@ -81,47 +81,47 @@ ParameterTypeList* DirectDeclarator::getParameterTypeList() const
 	return parameterTypeList;
 }
 
-vector<TokenPtr>* DirectDeclarator::getVectorOfStrings() const
+vector<CTokenPtr>* DirectDeclarator::getVectorOfStrings() const
 {
 	return vectorOfStrings;
 }
 
 DirectDeclarator::DirectDeclarator(const DirectDeclarator& other)
 {
-	identifier = other.identifier ? new Token(*other.identifier) : nullptr;
-	token1 = other.token1 ? new Token(*other.token1) : nullptr;
-	token2 = other.token2 ? new Token(*other.token2) : nullptr;
+	identifier = other.identifier ? new CToken(*other.identifier) : nullptr;
+	token1 = other.token1 ? new CToken(*other.token1) : nullptr;
+	token2 = other.token2 ? new CToken(*other.token2) : nullptr;
 	declarator = other.declarator ? new Declarator(*other.declarator) : nullptr;
 	directDeclarator = other.directDeclarator ? new DirectDeclarator(*other.directDeclarator) : nullptr;
 	constantExpression = other.constantExpression ? new ExpressionTree(*other.constantExpression) : nullptr;
 	parameterTypeList = other.parameterTypeList ? new ParameterTypeList(*other.parameterTypeList) : nullptr;
-	vectorOfStrings = other.vectorOfStrings ? new vector<TokenPtr>(*other.vectorOfStrings) : nullptr;
+	vectorOfStrings = other.vectorOfStrings ? new vector<CTokenPtr>(*other.vectorOfStrings) : nullptr;
 }
 
 DirectDeclarator::DirectDeclarator(DirectDeclarator&& other) noexcept
 {
-	identifier = other.identifier ? new Token(*other.identifier) : nullptr;
-	token1 = other.token1 ? new Token(*other.token1) : nullptr;
-	token2 = other.token2 ? new Token(*other.token2) : nullptr;
+	identifier = other.identifier ? new CToken(*other.identifier) : nullptr;
+	token1 = other.token1 ? new CToken(*other.token1) : nullptr;
+	token2 = other.token2 ? new CToken(*other.token2) : nullptr;
 	declarator = other.declarator ? new Declarator(*other.declarator) : nullptr;
 	directDeclarator = other.directDeclarator ? new DirectDeclarator(*other.directDeclarator) : nullptr;
 	constantExpression = other.constantExpression ? new ExpressionTree(*other.constantExpression) : nullptr;
 	parameterTypeList = other.parameterTypeList ? new ParameterTypeList(*other.parameterTypeList) : nullptr;
-	vectorOfStrings = other.vectorOfStrings ? new vector<TokenPtr>(*other.vectorOfStrings) : nullptr;
+	vectorOfStrings = other.vectorOfStrings ? new vector<CTokenPtr>(*other.vectorOfStrings) : nullptr;
 }
 
 DirectDeclarator& DirectDeclarator::operator=(const DirectDeclarator& other)
 {
 	if (this == &other)
 		return *this;
-	identifier = other.identifier ? new Token(*other.identifier) : nullptr;
-	token1 = other.token1 ? new Token(*other.token1) : nullptr;
-	token2 = other.token2 ? new Token(*other.token2) : nullptr;
+	identifier = other.identifier ? new CToken(*other.identifier) : nullptr;
+	token1 = other.token1 ? new CToken(*other.token1) : nullptr;
+	token2 = other.token2 ? new CToken(*other.token2) : nullptr;
 	declarator = other.declarator ? new Declarator(*other.declarator) : nullptr;
 	directDeclarator = other.directDeclarator ? new DirectDeclarator(*other.directDeclarator) : nullptr;
 	constantExpression = other.constantExpression ? new ExpressionTree(*other.constantExpression) : nullptr;
 	parameterTypeList = other.parameterTypeList ? new ParameterTypeList(*other.parameterTypeList) : nullptr;
-	vectorOfStrings = other.vectorOfStrings ? new vector<TokenPtr>(*other.vectorOfStrings) : nullptr;
+	vectorOfStrings = other.vectorOfStrings ? new vector<CTokenPtr>(*other.vectorOfStrings) : nullptr;
 	return *this;
 }
 
@@ -129,14 +129,14 @@ DirectDeclarator& DirectDeclarator::operator=(DirectDeclarator&& other) noexcept
 {
 	if (this == &other)
 		return *this;
-	identifier = other.identifier ? new Token(*other.identifier) : nullptr;
-	token1 = other.token1 ? new Token(*other.token1) : nullptr;
-	token2 = other.token2 ? new Token(*other.token2) : nullptr;
+	identifier = other.identifier ? new CToken(*other.identifier) : nullptr;
+	token1 = other.token1 ? new CToken(*other.token1) : nullptr;
+	token2 = other.token2 ? new CToken(*other.token2) : nullptr;
 	declarator = other.declarator ? new Declarator(*other.declarator) : nullptr;
 	directDeclarator = other.directDeclarator ? new DirectDeclarator(*other.directDeclarator) : nullptr;
 	constantExpression = other.constantExpression ? new ExpressionTree(*other.constantExpression) : nullptr;
 	parameterTypeList = other.parameterTypeList ? new ParameterTypeList(*other.parameterTypeList) : nullptr;
-	vectorOfStrings = other.vectorOfStrings ? new vector<TokenPtr>(*other.vectorOfStrings) : nullptr;
+	vectorOfStrings = other.vectorOfStrings ? new vector<CTokenPtr>(*other.vectorOfStrings) : nullptr;
 	return *this;
 }
 

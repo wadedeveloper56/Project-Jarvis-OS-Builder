@@ -81,7 +81,7 @@ bool InitDeclarator::hasInitializer() const
 
 string InitDeclarator::getVariableName() const
 {
-	TokenPtr identifier = getDeclarator()->getDirectDeclarator()->getIdentifier();
+	CTokenPtr identifier = getDeclarator()->getDirectDeclarator()->getIdentifier();
 	if (!identifier) identifier = getDeclarator()->getDirectDeclarator()->getDirectDeclarator()->getIdentifier();
 	return (identifier) ? identifier->getSymbolName() : "";
 }

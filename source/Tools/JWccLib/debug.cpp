@@ -124,11 +124,11 @@ DirectAbstractDeclarator* createDirectAbstractDeclarator(DirectAbstractDeclarato
 	}
 }
 
-vector<TokenPtr>* createIdentifierList(const TokenPtr identifier, vector<TokenPtr>* list)
+vector<CTokenPtr>* createIdentifierList(const CTokenPtr identifier, vector<CTokenPtr>* list)
 {
 	if (list == nullptr)
 	{
-		list = new vector<TokenPtr>();
+		list = new vector<CTokenPtr>();
 	}
 	list->push_back(identifier);
 	return list;
@@ -216,19 +216,19 @@ vector<ExpressionTree*>* createArgumentExpressionList(ExpressionTree* exp, vecto
 
 ExpressionTree* createExpression(
 	NodeType type,
-	TokenPtr token1,
-	TokenPtr token2,
+	CTokenPtr token1,
+	CTokenPtr token2,
 	ExpressionTree* lexp,
 	ExpressionTree* exp1,
 	ExpressionTree* exp2,
 	vector<ExpressionTree*>* argumentList,
-	TokenPtr identifier,
+	CTokenPtr identifier,
 	vector<Initializer*>* initializerList,
 	TypeName* typeName,
-	TokenPtr token3,
+	CTokenPtr token3,
 	Constant* constant,
 	ExpressionTree* left,
-	TokenPtr op,
+	CTokenPtr op,
 	ExpressionTree* right
 	)
 {
@@ -237,7 +237,7 @@ ExpressionTree* createExpression(
 	return new ExpressionTree(node);
 }
 
-Constant* createConstant(const TokenPtr iConst, const TokenPtr fConst, const TokenPtr strConst, const optional<TokenType>& type)
+Constant* createConstant(const CTokenPtr iConst, const CTokenPtr fConst, const CTokenPtr strConst, const optional<TokenType>& type)
 {
 	return new Constant(iConst, fConst, strConst, type);
 }
@@ -247,11 +247,11 @@ Declarator* createDeclarator(Pointer* pointer, DirectDeclarator* directDeclarato
 	return new Declarator(pointer, directDeclarator);
 }
 
-DirectDeclarator* createDirectDeclarator(TokenPtr identifier, TokenPtr token1, TokenPtr token2,
+DirectDeclarator* createDirectDeclarator(CTokenPtr identifier, CTokenPtr token1, CTokenPtr token2,
                                          Declarator* const declarator, DirectDeclarator* const directDeclarator,
                                          ExpressionTree* const constantExpression,
                                          ParameterTypeList* const parameterTypeList,
-                                         vector<TokenPtr>* const vectorOfStrings)
+                                         vector<CTokenPtr>* const vectorOfStrings)
 {
 	return new DirectDeclarator(identifier, token1, token2, declarator, directDeclarator, constantExpression, parameterTypeList, vectorOfStrings);
 }
@@ -275,12 +275,12 @@ DeclarationSpecifiers* createDeclarationSpecifiers(StorageClassSpecifier* const 
 	}
 }
 
-StorageClassSpecifier* createStorageClassSpecifier(const TokenPtr token)
+StorageClassSpecifier* createStorageClassSpecifier(const CTokenPtr token)
 {
 	return new StorageClassSpecifier(token);
 }
 
-ExpressionTree* createPrimaryExpression(const TokenPtr identifier, Constant* constant)
+ExpressionTree* createPrimaryExpression(const CTokenPtr identifier, Constant* constant)
 {
 	return createExpression(NT_NONE, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, identifier, constant, nullptr, nullptr, nullptr);
 }

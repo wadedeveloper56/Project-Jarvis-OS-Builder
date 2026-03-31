@@ -5,7 +5,7 @@
 
 using namespace WadeSpace;
 
-EnumSpecifier::EnumSpecifier(TokenPtr nameStr, vector<Enumerator*>* vectorEnumerator) : nameStr(nameStr),vectorEnumerator(vectorEnumerator)
+EnumSpecifier::EnumSpecifier(CTokenPtr nameStr, vector<Enumerator*>* vectorEnumerator) : nameStr(nameStr),vectorEnumerator(vectorEnumerator)
 {
 }
 
@@ -26,7 +26,7 @@ EnumSpecifier::~EnumSpecifier()
 	}
 }
 
-TokenPtr EnumSpecifier::getNameStr() const
+CTokenPtr EnumSpecifier::getNameStr() const
 {
 	return nameStr;
 }
@@ -57,7 +57,7 @@ EnumSpecifier::EnumSpecifier(const EnumSpecifier& other)
 		}
 		delete vectorEnumerator;
 	}
-	nameStr = other.nameStr ? new Token(*other.nameStr) : nullptr;
+	nameStr = other.nameStr ? new CToken(*other.nameStr) : nullptr;
 	vectorEnumerator = other.vectorEnumerator ? new vector<Enumerator*>(*other.vectorEnumerator) : nullptr;
 }
 
@@ -72,7 +72,7 @@ EnumSpecifier::EnumSpecifier(EnumSpecifier&& other) noexcept
 		}
 		delete vectorEnumerator;
 	}
-	nameStr = other.nameStr ? new Token(*other.nameStr) : nullptr;
+	nameStr = other.nameStr ? new CToken(*other.nameStr) : nullptr;
 	vectorEnumerator = other.vectorEnumerator ? new vector<Enumerator*>(*other.vectorEnumerator) : nullptr;
 }
 
@@ -89,7 +89,7 @@ EnumSpecifier& EnumSpecifier::operator=(const EnumSpecifier& other)
 		}
 		delete vectorEnumerator;
 	}
-	nameStr = other.nameStr ? new Token(*other.nameStr) : nullptr;
+	nameStr = other.nameStr ? new CToken(*other.nameStr) : nullptr;
 	vectorEnumerator = other.vectorEnumerator ? new vector<Enumerator*>(*other.vectorEnumerator) : nullptr;
 	return *this;
 }
@@ -106,7 +106,7 @@ EnumSpecifier& EnumSpecifier::operator=(EnumSpecifier&& other) noexcept
 			delete ptr;
 		}
 		delete vectorEnumerator;
-	}	nameStr = other.nameStr ? new Token(*other.nameStr) : nullptr;
+	}	nameStr = other.nameStr ? new CToken(*other.nameStr) : nullptr;
 	vectorEnumerator = other.vectorEnumerator ? new vector<Enumerator*>(*other.vectorEnumerator) : nullptr;
 	return *this;
 }

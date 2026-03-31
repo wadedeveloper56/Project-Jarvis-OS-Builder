@@ -3,7 +3,7 @@
 
 using namespace WadeSpace;
 
-StorageClassSpecifier::StorageClassSpecifier(TokenPtr type) : type(type)
+StorageClassSpecifier::StorageClassSpecifier(CTokenPtr type) : type(type)
 {
 }
 
@@ -11,7 +11,7 @@ StorageClassSpecifier::StorageClassSpecifier() : type(nullptr)
 {
 }
 
-TokenPtr StorageClassSpecifier::getType() const
+CTokenPtr StorageClassSpecifier::getType() const
 {
 	return type;
 }
@@ -23,19 +23,19 @@ bool StorageClassSpecifier::hasType() const
 
 StorageClassSpecifier::StorageClassSpecifier(const StorageClassSpecifier& other)
 {
-	type = other.type ? new Token(*other.type) : nullptr;
+	type = other.type ? new CToken(*other.type) : nullptr;
 }
 
 StorageClassSpecifier::StorageClassSpecifier(StorageClassSpecifier&& other) noexcept
 {
-	type = other.type ? new Token(*other.type) : nullptr;
+	type = other.type ? new CToken(*other.type) : nullptr;
 }
 
 StorageClassSpecifier& StorageClassSpecifier::operator=(const StorageClassSpecifier& other)
 {
 	if (this == &other)
 		return *this;
-	type = other.type ? new Token(*other.type) : nullptr;
+	type = other.type ? new CToken(*other.type) : nullptr;
 	return *this;
 }
 
@@ -43,7 +43,7 @@ StorageClassSpecifier& StorageClassSpecifier::operator=(StorageClassSpecifier&& 
 {
 	if (this == &other)
 		return *this;
-	type = other.type ? new Token(*other.type) : nullptr;
+	type = other.type ? new CToken(*other.type) : nullptr;
 	return *this;
 }
 

@@ -3,19 +3,19 @@
 
 using namespace WadeSpace;
 
-Pointer::Pointer(const TokenPtr name, vector<TypeQualifier*>* typeQualifierList) : name(name), typeQualifierList(typeQualifierList), level(1), pointer(nullptr)
+Pointer::Pointer(const CTokenPtr name, vector<TypeQualifier*>* typeQualifierList) : name(name), typeQualifierList(typeQualifierList), level(1), pointer(nullptr)
 {
 }
 
-Pointer::Pointer(const TokenPtr name, vector<TypeQualifier*>* typeQualifierList, Pointer* pointer) : name(name), typeQualifierList(typeQualifierList), level(1), pointer(pointer)
+Pointer::Pointer(const CTokenPtr name, vector<TypeQualifier*>* typeQualifierList, Pointer* pointer) : name(name), typeQualifierList(typeQualifierList), level(1), pointer(pointer)
 {
 }
 
-Pointer::Pointer(const TokenPtr name, Pointer* pointer) : name(name), typeQualifierList(nullptr), level(1), pointer(pointer)
+Pointer::Pointer(const CTokenPtr name, Pointer* pointer) : name(name), typeQualifierList(nullptr), level(1), pointer(pointer)
 {
 }
 
-Pointer::Pointer(const TokenPtr name) : name(name), typeQualifierList(nullptr), level(1), pointer(nullptr)
+Pointer::Pointer(const CTokenPtr name) : name(name), typeQualifierList(nullptr), level(1), pointer(nullptr)
 {
 }
 
@@ -40,7 +40,7 @@ void Pointer::inc() { level++; }
 
 Pointer::Pointer(const Pointer& other)
 {
-	name = other.name ? new Token(*other.name) : nullptr;
+	name = other.name ? new CToken(*other.name) : nullptr;
 	typeQualifierList = other.typeQualifierList ? new vector<TypeQualifier*>(*other.typeQualifierList) : nullptr;
 	level = other.level;
 	pointer = other.pointer ? new Pointer(*other.pointer) : nullptr;
@@ -48,7 +48,7 @@ Pointer::Pointer(const Pointer& other)
 
 Pointer::Pointer(Pointer&& other) noexcept
 {
-	name = other.name ? new Token(*other.name) : nullptr;
+	name = other.name ? new CToken(*other.name) : nullptr;
 	typeQualifierList = other.typeQualifierList ? new vector<TypeQualifier*>(*other.typeQualifierList) : nullptr;
 	level = other.level;
 	pointer = other.pointer ? new Pointer(*other.pointer) : nullptr;
@@ -58,7 +58,7 @@ Pointer& Pointer::operator=(const Pointer& other)
 {
 	if (this == &other)
 		return *this;
-	name = other.name ? new Token(*other.name) : nullptr;
+	name = other.name ? new CToken(*other.name) : nullptr;
 	typeQualifierList = other.typeQualifierList ? new vector<TypeQualifier*>(*other.typeQualifierList) : nullptr;
 	level = other.level;
 	pointer = other.pointer ? new Pointer(*other.pointer) : nullptr;
@@ -69,14 +69,14 @@ Pointer& Pointer::operator=(Pointer&& other) noexcept
 {
 	if (this == &other)
 		return *this;
-	name = other.name ? new Token(*other.name) : nullptr;
+	name = other.name ? new CToken(*other.name) : nullptr;
 	typeQualifierList = other.typeQualifierList ? new vector<TypeQualifier*>(*other.typeQualifierList) : nullptr;
 	level = other.level;
 	pointer = other.pointer ? new Pointer(*other.pointer) : nullptr;
 	return *this;
 }
 
-TokenPtr Pointer::getName() const
+CTokenPtr Pointer::getName() const
 {
 	return name;
 }

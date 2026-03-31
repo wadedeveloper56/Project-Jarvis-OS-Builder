@@ -15,7 +15,7 @@ namespace WadeSpace
 	class Enumerator
 	{
 	public:
-		Enumerator(TokenPtr identifier, ExpressionTree* constantExpression);
+		Enumerator(CTokenPtr identifier, ExpressionTree* constantExpression);
 		Enumerator();
 		virtual ~Enumerator();
 
@@ -24,14 +24,14 @@ namespace WadeSpace
 		Enumerator& operator=(const Enumerator& other);
 		Enumerator& operator=(Enumerator&& other) noexcept;
 	
-		[[nodiscard]] TokenPtr getIdentifier() const;
+		[[nodiscard]] CTokenPtr getIdentifier() const;
 		[[nodiscard]] ExpressionTree* getConstantExpression() const;
 
 		[[nodiscard]] bool hasIdentifier() const { return identifier != nullptr; }
 		[[nodiscard]] bool hasConstantExpression() const { return constantExpression != nullptr; }
 
 	private:
-		TokenPtr identifier;
+		CTokenPtr identifier;
 		ExpressionTree* constantExpression;
 	};
 }

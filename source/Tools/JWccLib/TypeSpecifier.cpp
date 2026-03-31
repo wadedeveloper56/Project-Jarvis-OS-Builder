@@ -7,22 +7,9 @@
 
 using namespace WadeSpace;
 
-TypeSpecifier::TypeSpecifier(TokenType type, TokenPtr token, StructOrUnionSpecifier* structOrUnion, EnumSpecifier* enumSpec) 
+TypeSpecifier::TypeSpecifier(TokenType type, CTokenPtr token, StructOrUnionSpecifier* structOrUnion, EnumSpecifier* enumSpec) 
                                  : type(type), enumSpec(enumSpec), structOrUnionSpecifier(structOrUnion), typePtr(token)
 {
-	//if (token != nullptr)
-	//{
-	//	string keyword = token->getSymbolName();
-	//	typedefInfo = nullptr;
-	//	if (compiler->getTypedefList() != nullptr)
-	//	{
-	//		auto typedefEntry = compiler->getTypedefList()->find(keyword);
-	//		if (typedefEntry != compiler->getTypedefList()->end())
-	//		{
-	//			typedefInfo = typedefEntry->second;
-	//		}
-	//	}
-	//}
 	if (structOrUnion != nullptr)
 	{
 		auto struct_or_union = structOrUnion->getStructOrUnion();
@@ -58,7 +45,7 @@ StructOrUnionSpecifier* TypeSpecifier::getStructOrUnionSpecifier() const
 	return structOrUnionSpecifier;
 }
 
-TokenPtr TypeSpecifier::getTypePtr() const
+CTokenPtr TypeSpecifier::getTypePtr() const
 {
 	return typePtr;
 }
@@ -68,55 +55,6 @@ ExternalDeclaration* TypeSpecifier::getTypedefInfo() const
 	return typedefInfo;
 }
 
-TypeSpecifier::TypeSpecifier(const TypeSpecifier& other)
-{
-	enumSpec = other.enumSpec ? new EnumSpecifier(*other.enumSpec) : nullptr;
-	type = std::move(other.type);
-	typePtr = other.typePtr ? new Token(*other.typePtr) : nullptr;
-	structOrUnionSpecifier = other.structOrUnionSpecifier
-		                         ? new StructOrUnionSpecifier(*other.structOrUnionSpecifier)
-		                         : nullptr;
-	typedefInfo = other.typedefInfo ? new ExternalDeclaration(*other.typedefInfo) : nullptr;
-}
-
-TypeSpecifier::TypeSpecifier(TypeSpecifier&& other) noexcept
-{
-	enumSpec = other.enumSpec ? new EnumSpecifier(*other.enumSpec) : nullptr;
-	type = std::move(other.type);
-	typePtr = other.typePtr ? new Token(*other.typePtr) : nullptr;
-	structOrUnionSpecifier = other.structOrUnionSpecifier
-		                         ? new StructOrUnionSpecifier(*other.structOrUnionSpecifier)
-		                         : nullptr;
-	typedefInfo = other.typedefInfo ? new ExternalDeclaration(*other.typedefInfo) : nullptr;
-}
-
-TypeSpecifier& TypeSpecifier::operator=(const TypeSpecifier& other)
-{
-	if (this == &other)
-		return *this;
-	enumSpec = other.enumSpec ? new EnumSpecifier(*other.enumSpec) : nullptr;
-	type = std::move(other.type);
-	typePtr = other.typePtr ? new Token(*other.typePtr) : nullptr;
-	structOrUnionSpecifier = other.structOrUnionSpecifier
-		                         ? new StructOrUnionSpecifier(*other.structOrUnionSpecifier)
-		                         : nullptr;
-	typedefInfo = other.typedefInfo ? new ExternalDeclaration(*other.typedefInfo) : nullptr;
-	return *this;
-}
-
-TypeSpecifier& TypeSpecifier::operator=(TypeSpecifier&& other) noexcept
-{
-	if (this == &other)
-		return *this;
-	enumSpec = other.enumSpec ? new EnumSpecifier(*other.enumSpec) : nullptr;
-	type = std::move(other.type);
-	typePtr = other.typePtr ? new Token(*other.typePtr) : nullptr;
-	structOrUnionSpecifier = other.structOrUnionSpecifier
-		                         ? new StructOrUnionSpecifier(*other.structOrUnionSpecifier)
-		                         : nullptr;
-	typedefInfo = other.typedefInfo ? new ExternalDeclaration(*other.typedefInfo) : nullptr;
-	return *this;
-}
 
 bool TypeSpecifier::hasEnumSpec() const
 {

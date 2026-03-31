@@ -15,10 +15,10 @@ namespace WadeSpace
 	{
 	public:
 		Pointer();
-		Pointer(const TokenPtr name, vector<TypeQualifier*>* typeQualifierList);
-		Pointer(const TokenPtr name, vector<TypeQualifier*>* typeQualifierList, Pointer* pointer);
-		Pointer(const TokenPtr name, Pointer* pointer);
-		Pointer(const TokenPtr name);
+		Pointer(const CTokenPtr name, vector<TypeQualifier*>* typeQualifierList);
+		Pointer(const CTokenPtr name, vector<TypeQualifier*>* typeQualifierList, Pointer* pointer);
+		Pointer(const CTokenPtr name, Pointer* pointer);
+		Pointer(const CTokenPtr name);
 		virtual ~Pointer();
 
 		Pointer(const Pointer& other);
@@ -26,7 +26,7 @@ namespace WadeSpace
 		Pointer& operator=(const Pointer& other);
 		Pointer& operator=(Pointer&& other) noexcept;
 
-		[[nodiscard]] TokenPtr getName() const;
+		[[nodiscard]] CTokenPtr getName() const;
 		[[nodiscard]] vector<TypeQualifier*>* getTypeQualifierList() const;
 		[[nodiscard]] int getLevel() const;
 		[[nodiscard]] Pointer* getPointer() const;
@@ -40,7 +40,7 @@ namespace WadeSpace
 
 
 	private:
-		TokenPtr name;
+		CTokenPtr name;
 		vector<TypeQualifier*>* typeQualifierList;
 		int level;
 		Pointer* pointer;

@@ -84,25 +84,25 @@ typedef struct CTokData
 	CTokData& operator=(CTokData&& other) noexcept = default;
 } * CTokDataPtr;
 
-typedef struct Token
+typedef struct CToken
 {
 	CTokDataPtr data;
-	Token();
-	~Token();
-	Token(const Token& other)= default;
-	Token(Token&& other) noexcept = default;
-	Token& operator=(const Token& other) = default;
-	Token& operator=(Token&& other) noexcept = default;
+	CToken() = default;
+	~CToken()= default;
+	CToken(const CToken& other)= default;
+	CToken(CToken&& other) noexcept = default;
+	CToken& operator=(const CToken& other) = default;
+	CToken& operator=(CToken&& other) noexcept = default;
 	string getSymbolName() const;
 	string getKeywordName() const;
 	unsigned long long getIntegerConst() const;
 	long double getDoubleConst() const;
-}* TokenPtr, ** TokenPtrPtr;
+}* CTokenPtr, ** CTokenPtrPtr;
 
-TokenPtr createToken(CTokDataPtr data);
+CTokenPtr createToken(CTokDataPtr data);
 CTokDataPtr createTokData(void);
-TokenPtr createConstantULLToken(unsigned long long num);
-TokenPtr createConstantLDToken(long double num);
-TokenPtr createStringConstantToken(char* str);
-TokenPtr createStringIDToken(char* str);
-TokenPtr createKeywordToken(char* str, int keyword);
+CTokenPtr createConstantULLToken(unsigned long long num);
+CTokenPtr createConstantLDToken(long double num);
+CTokenPtr createStringConstantToken(char* str);
+CTokenPtr createStringIDToken(char* str);
+CTokenPtr createKeywordToken(char* str, int keyword);

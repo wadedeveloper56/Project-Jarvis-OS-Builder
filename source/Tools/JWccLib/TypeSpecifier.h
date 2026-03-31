@@ -15,18 +15,18 @@ namespace WadeSpace
 	{
 	public:
 		TypeSpecifier();
-		explicit TypeSpecifier(TokenType type, TokenPtr token, StructOrUnionSpecifier* structOrUnion, EnumSpecifier* enumSpec);
+		explicit TypeSpecifier(TokenType type, CTokenPtr token, StructOrUnionSpecifier* structOrUnion, EnumSpecifier* enumSpec);
 		virtual ~TypeSpecifier();
 
-		TypeSpecifier(const TypeSpecifier& other);
-		TypeSpecifier(TypeSpecifier&& other) noexcept;
-		TypeSpecifier& operator=(const TypeSpecifier& other);
-		TypeSpecifier& operator=(TypeSpecifier&& other) noexcept;
+		TypeSpecifier(const TypeSpecifier& other) = default;
+		TypeSpecifier(TypeSpecifier&& other) noexcept = default;
+		TypeSpecifier& operator=(const TypeSpecifier& other)	= default;
+		TypeSpecifier& operator=(TypeSpecifier&& other) noexcept = default;
 
 		[[nodiscard]] EnumSpecifier* getEnumSpec() const;
 		[[nodiscard]] optional<TokenType> getType() const;
 		[[nodiscard]] StructOrUnionSpecifier* getStructOrUnionSpecifier() const;
-		[[nodiscard]] TokenPtr getTypePtr() const;
+		[[nodiscard]] CTokenPtr getTypePtr() const;
 		[[nodiscard]] ExternalDeclaration* getTypedefInfo() const;
 
 		void setType(const optional<TokenType>& type)
@@ -43,7 +43,7 @@ namespace WadeSpace
 	private:
 		EnumSpecifier* enumSpec;
 		optional<TokenType> type;
-		TokenPtr typePtr;
+		CTokenPtr typePtr;
 		StructOrUnionSpecifier* structOrUnionSpecifier;
 		ExternalDeclaration* typedefInfo;
 	};

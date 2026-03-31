@@ -18,34 +18,34 @@ namespace WadeSpace
 	class TreeNodeData
 	{
 		NodeType type;
-		TokenPtr token1;
-		TokenPtr token2;
+		CTokenPtr token1;
+		CTokenPtr token2;
 		ExpressionTree* lexp;
 		ExpressionTree* exp1;
 		ExpressionTree* exp2;
 		vector<ExpressionTree*>* argumentList;
-		TokenPtr identifier;
+		CTokenPtr identifier;
 		vector<Initializer*>* initializerList;
 		TypeName* typeName;
-		TokenPtr token3;
+		CTokenPtr token3;
 		Constant* constant;
-		TokenPtr op;
+		CTokenPtr op;
 	public:
 		TreeNodeData();
 		TreeNodeData(
 			const NodeType type,
-			const TokenPtr token1,
-			const TokenPtr token2,
+			const CTokenPtr token1,
+			const CTokenPtr token2,
 			ExpressionTree* const lexp,
 			ExpressionTree* const exp1,
 			ExpressionTree* const exp2,
 			vector<ExpressionTree*>* argumentList,
-			TokenPtr identifier,
+			CTokenPtr identifier,
 			vector<Initializer*>* initializerList,
 			TypeName* typeName,
-			TokenPtr token3,
+			CTokenPtr token3,
 			Constant* constant,
-			TokenPtr op
+			CTokenPtr op
 		);
 		~TreeNodeData();
 
@@ -55,15 +55,15 @@ namespace WadeSpace
 		TreeNodeData& operator=(TreeNodeData&& other) noexcept;
 
 		NodeType getType() const;
-		TokenPtr getToken1() const;
-		TokenPtr getToken2() const;
-		TokenPtr getToken3() const;
+		CTokenPtr getToken1() const;
+		CTokenPtr getToken2() const;
+		CTokenPtr getToken3() const;
 		vector<ExpressionTree*>* getArgumentList() const;
 		Constant* getConstant() const;
 
-		[[nodiscard]] TokenPtr getIConst() const;
-		[[nodiscard]] TokenPtr getFConst() const;
-		[[nodiscard]] TokenPtr getStrConst() const;
+		[[nodiscard]] CTokenPtr getIConst() const;
+		[[nodiscard]] CTokenPtr getFConst() const;
+		[[nodiscard]] CTokenPtr getStrConst() const;
 		[[nodiscard]] optional<TokenType> getTokenType() const;
 	};
 

@@ -12,12 +12,12 @@ namespace WadeSpace
 	class BaseStatement
 	{
 	public:
-		BaseStatement(TokenType op, TokenPtr identifier, ExpressionTree* const exp, ExpressionTree* const contExp, 
+		BaseStatement(TokenType op, CTokenPtr identifier, ExpressionTree* const exp, ExpressionTree* const contExp, 
 			BaseStatement* const statement, BaseStatement* const es1, BaseStatement* const es2,
 			BaseStatement* const statement2, vector<BaseStatement*>* const statementList,
 			vector<Declaration*>* const declarationList);
 		explicit BaseStatement(TokenType op);
-		BaseStatement(TokenType op, TokenPtr identifier);
+		BaseStatement(TokenType op, CTokenPtr identifier);
 		BaseStatement(TokenType op, ExpressionTree* exp);
 		BaseStatement(TokenType op, ExpressionTree* exp, BaseStatement* statement);
 		BaseStatement(TokenType op, ExpressionTree* exp, BaseStatement* ifStatement, BaseStatement* elseStatement);
@@ -26,7 +26,7 @@ namespace WadeSpace
 		explicit BaseStatement(vector<BaseStatement*>* statementList);
 		explicit BaseStatement(vector<Declaration*>* declarationList);
 		BaseStatement(vector<BaseStatement*>* statementList, vector<Declaration*>* declarationList);
-		BaseStatement(TokenPtr identifier, BaseStatement* statement);
+		BaseStatement(CTokenPtr identifier, BaseStatement* statement);
 		BaseStatement(TokenType op, BaseStatement* statement);
 		BaseStatement() = default;
 		virtual ~BaseStatement();
@@ -37,7 +37,7 @@ namespace WadeSpace
 		BaseStatement& operator=(BaseStatement&& other) noexcept;
 
 		[[nodiscard]] TokenType getOp() const;
-		[[nodiscard]] TokenPtr getIdentifier() const;
+		[[nodiscard]] CTokenPtr getIdentifier() const;
 		[[nodiscard]] ExpressionTree* getExp() const;
 		[[nodiscard]] ExpressionTree* getContExp() const;
 		[[nodiscard]] BaseStatement* getStatement() const;
@@ -59,7 +59,7 @@ namespace WadeSpace
 
 	protected:
 		TokenType op;
-		TokenPtr identifier;
+		CTokenPtr identifier;
 		ExpressionTree* exp;
 		ExpressionTree* contExp;
 		BaseStatement* statement;
