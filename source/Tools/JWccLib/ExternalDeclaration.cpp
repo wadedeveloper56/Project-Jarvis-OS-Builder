@@ -5,11 +5,11 @@
 using namespace WadeSpace;
 using namespace std;
  
-ExternalDeclaration::ExternalDeclaration(FunctionDefinition* functionDefinition) : functionDefinition(functionDefinition), declaration(nullptr)
+ExternalDeclaration::ExternalDeclaration(shared_ptr<FunctionDefinition> functionDefinition) : functionDefinition(functionDefinition), declaration(nullptr)
 {
 }
 
-ExternalDeclaration::ExternalDeclaration(Declaration* declaration) : functionDefinition(nullptr), declaration(declaration)
+ExternalDeclaration::ExternalDeclaration(shared_ptr<Declaration> declaration) : functionDefinition(nullptr), declaration(declaration)
 {
 }
 
@@ -17,10 +17,10 @@ bool ExternalDeclaration::isTypedef() const
 {
 	if (declaration != nullptr)
 	{
-		vector<DeclarationSpecifiersNode*>* temp = declaration->getDeclarationSpecifiers()->getDeclarationSpecifiersNodeList();
-		for (DeclarationSpecifiersNode* node : *temp)
+		shared_ptr<vector<shared_ptr<DeclarationSpecifiersNode>>> temp = declaration->getDeclarationSpecifiers()->getDeclarationSpecifiersNodeList();
+		for (auto node : *temp)
 		{
-			if (node->storageClassSpecifier != nullptr && node->storageClassSpecifier->getType()->getKeywordName() == "typedef")
+			if (node->getStorageClassSpecifier() != nullptr && node->getStorageClassSpecifier()->getType()->getKeywordName() == "typedef")
 			{
 				return true;
 			}

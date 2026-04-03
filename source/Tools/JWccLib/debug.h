@@ -15,46 +15,54 @@
 using namespace std;
 using namespace WadeSpace;
 
-Declaration *createDeclaration(DeclarationSpecifiers* declarationSpecifiers, vector<InitDeclarator*>* vectorInitDeclarator);
-vector<InitDeclarator*>* createInitDeclaratorList(InitDeclarator* value1, vector<InitDeclarator*>* list);
-vector<ExpressionTree*>* createArgumentExpressionList(ExpressionTree* exp, vector<ExpressionTree*>* list);
-ExpressionTree* createExpression(
+void handleDeclaration(shared_ptr<ExternalDeclaration> externalDeclaration);
+void createTranslationUnit(shared_ptr<ExternalDeclaration> externalDeclaration);
+shared_ptr<vector<shared_ptr<BaseStatement>>> createStatementList(shared_ptr<BaseStatement> statement, shared_ptr<vector<shared_ptr<BaseStatement>>> list);
+shared_ptr<vector<shared_ptr<Initializer>>> createInitializerList(shared_ptr<Initializer> initializer, shared_ptr<vector<shared_ptr<Initializer>>> list);
+shared_ptr<DirectAbstractDeclarator> createDirectAbstractDeclarator(shared_ptr<AbstractDeclarator> abstractDeclarator, shared_ptr<vector<shared_ptr<DirectAbstractDeclaratorNode>>> list);
+shared_ptr<DirectAbstractDeclarator> createDirectAbstractDeclarator(shared_ptr<DirectAbstractDeclarator> dad, shared_ptr<AbstractDeclarator> abstractDeclarator, shared_ptr<ParameterTypeList> parameterTypeList, shared_ptr<ExpressionTree> constantExpression, TokenType type);
+shared_ptr<vector<shared_ptr<CToken>>> createIdentifierList(const shared_ptr<CToken> identifier, shared_ptr<vector<shared_ptr<CToken>>> list);
+shared_ptr<vector<shared_ptr<ParameterDeclaration>>> createParameterList(shared_ptr<ParameterDeclaration> value1, shared_ptr<vector<shared_ptr<ParameterDeclaration>>> list);
+shared_ptr<vector<shared_ptr<TypeQualifier>>> createTypeQualifierList(shared_ptr<TypeQualifier> value1, shared_ptr<vector<shared_ptr<TypeQualifier>>> list);
+shared_ptr<vector<shared_ptr<Enumerator>>> createEnumeratorList(shared_ptr<Enumerator> value1, shared_ptr<vector<shared_ptr<Enumerator>>> list);
+shared_ptr<vector<shared_ptr<StructDeclarator>>> createStructDeclaratorList(shared_ptr<StructDeclarator> value1, shared_ptr<vector<shared_ptr<StructDeclarator>>> list);
+shared_ptr<vector<shared_ptr<StructDeclaration>>> createStructDeclarationList(shared_ptr<StructDeclaration> value1, shared_ptr<vector<shared_ptr<StructDeclaration>>> list);
+shared_ptr<InitDeclarator> createInitDeclarator(shared_ptr<Declarator> declarator, shared_ptr<Initializer> initializer);
+shared_ptr<Declaration> createDeclaration(shared_ptr<DeclarationSpecifiers> declarationSpecifiers, shared_ptr<vector<shared_ptr<InitDeclarator>>> vectorInitDeclarator);
+shared_ptr<vector<shared_ptr<InitDeclarator>>> createInitDeclaratorList(shared_ptr<InitDeclarator> value1, shared_ptr<vector<shared_ptr<InitDeclarator>>> list);
+shared_ptr<vector<shared_ptr<ExpressionTree>>> createArgumentExpressionList(shared_ptr<ExpressionTree> exp, shared_ptr<vector<shared_ptr<ExpressionTree>>> list);
+shared_ptr<ExpressionTree> createExpression(
 	NodeType type,
-	CTokenPtr token1,
-	CTokenPtr token2,
-	ExpressionTree* lexp,
-	ExpressionTree* exp1,
-	ExpressionTree* exp2,
-	vector<ExpressionTree*>* argumentList,
-	CTokenPtr identifier,
-	vector<Initializer*>* initializerList,
-	TypeName* typeName,
-	CTokenPtr token3,
-	Constant* constant,
-	ExpressionTree* left,
-	CTokenPtr op,
-	ExpressionTree* right
+	shared_ptr<CToken> token1,
+	shared_ptr<CToken> token2,
+	shared_ptr<ExpressionTree> lexp,
+	shared_ptr<ExpressionTree> exp1,
+	shared_ptr<ExpressionTree> exp2,
+	shared_ptr<vector<shared_ptr<ExpressionTree>>> argumentList,
+	shared_ptr<CToken> identifier,
+	shared_ptr<vector<shared_ptr<Initializer>>> initializerList,
+	shared_ptr<TypeName> typeName,
+	shared_ptr<CToken> token3,
+	shared_ptr<Constant> constant,
+	shared_ptr<ExpressionTree> left,
+	shared_ptr<CToken> op,
+	shared_ptr<ExpressionTree> right
 );
-Constant* createConstant(const CTokenPtr iConst, const CTokenPtr fConst, const CTokenPtr strConst, const optional<TokenType>& type);
-Declarator* createDeclarator(Pointer* pointer, DirectDeclarator* directDeclarator);
-DirectDeclarator* createDirectDeclarator(CTokenPtr identifier, CTokenPtr token1, CTokenPtr token2, Declarator* const declarator, DirectDeclarator* const directDeclarator, ExpressionTree* const constantExpression, ParameterTypeList* const parameterTypeList, vector<CTokenPtr>* const vectorOfStrings);
-DeclarationSpecifiers* createDeclarationSpecifiers(StorageClassSpecifier* const storageClassSpecifier, TypeSpecifier* const typeSpecifier, TypeQualifier* const typeQualifier, DeclarationSpecifiers* declarationSpecifiers);
-StorageClassSpecifier* createStorageClassSpecifier(const CTokenPtr token);
-ExpressionTree* createPrimaryExpression(const CTokenPtr identifier, Constant* constant);
-vector<Declaration*>* createDeclarationList(Declaration* exp, vector<Declaration*>* list);
-InitDeclarator* createInitDeclarator(Declarator* declarator, Initializer* initializer);
-vector<StructDeclaration*>* createStructDeclarationList(StructDeclaration* value1, vector<StructDeclaration*>* list);
-vector<StructDeclarator*>* createStructDeclaratorList(StructDeclarator* value1, vector<StructDeclarator*>* list);
-vector<Enumerator*>* createEnumeratorList(Enumerator* value1, vector<Enumerator*>* list);
-vector<TypeQualifier*>* createTypeQualifierList(TypeQualifier* value1, vector<TypeQualifier*>* list);
-vector<ParameterDeclaration*>* createParameterList(ParameterDeclaration* value1, vector<ParameterDeclaration*>* list);
-vector<CTokenPtr>* createIdentifierList(const CTokenPtr identifier, vector<CTokenPtr>* list);
-DirectAbstractDeclarator* createDirectAbstractDeclarator(AbstractDeclarator* abstractDeclarator, vector<DirectAbstractDeclaratorNode*>* list);
-DirectAbstractDeclarator* createDirectAbstractDeclarator(DirectAbstractDeclarator* dad, 
-                                                         AbstractDeclarator* abstractDeclarator, 
-	                                                     ParameterTypeList* parameterTypeList, 
-	                                                     ExpressionTree* constantExpression, 
-	                                                     TokenType type);
-vector<Initializer*>* createInitializerList(Initializer* initializer, vector<Initializer*>* list);
-vector<BaseStatement*>* createStatementList(BaseStatement* statement, vector<BaseStatement*>* list);
-void createTranslationUnit(ExternalDeclaration* externalDeclaration);
+shared_ptr<Constant> createConstant(const shared_ptr<CToken> iConst, const shared_ptr<CToken> fConst, const shared_ptr<CToken> strConst, const optional<TokenType>& type);
+shared_ptr<Declarator> createDeclarator(shared_ptr<Pointer> pointer, shared_ptr<DirectDeclarator> directDeclarator);
+shared_ptr<DirectDeclarator> createDirectDeclarator(shared_ptr<CToken> identifier, shared_ptr<CToken> token1, shared_ptr<CToken> token2,
+	shared_ptr<Declarator> declarator,
+	shared_ptr<DirectDeclarator> directDeclarator,
+	shared_ptr<ExpressionTree> constantExpression,
+	shared_ptr<ParameterTypeList> parameterTypeList,
+	shared_ptr<vector<shared_ptr<CToken>>> vectorOfStrings);
+shared_ptr<DeclarationSpecifiers> createDeclarationSpecifiers(
+	shared_ptr<CToken> token,
+	shared_ptr<DeclarationSpecifiers> declarationSpecifiers,
+	shared_ptr<StorageClassSpecifier> storageClassSpecifier,
+	shared_ptr<TypeSpecifier> typeSpecifier,
+	shared_ptr<TypeQualifier> typeQualifier,
+	shared_ptr<StructOrUnionSpecifier> structOrUnionSpecifier);
+shared_ptr<StorageClassSpecifier> createStorageClassSpecifier(shared_ptr<CToken> token);
+shared_ptr<ExpressionTree> createPrimaryExpression(const shared_ptr<CToken> identifier, shared_ptr<Constant> constant);
+shared_ptr<vector<shared_ptr<Declaration>>> createDeclarationList(shared_ptr<Declaration> exp, shared_ptr<vector<shared_ptr<Declaration>>> list);

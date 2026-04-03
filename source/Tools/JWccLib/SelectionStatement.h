@@ -13,8 +13,8 @@ namespace WadeSpace
 	{
 	public:
 		SelectionStatement() = default;
-		SelectionStatement(TokenType op, ExpressionTree* exp, BaseStatement* statement);
-		SelectionStatement(TokenType op, ExpressionTree* exp, BaseStatement* ifStatement, BaseStatement* elseStatement);
+		SelectionStatement(TokenType op, shared_ptr<ExpressionTree> exp, shared_ptr<BaseStatement> statement);
+		SelectionStatement(TokenType op, shared_ptr<ExpressionTree> exp, shared_ptr<BaseStatement> ifStatement, shared_ptr<BaseStatement> elseStatement);
 		virtual ~SelectionStatement() = default;
 		SelectionStatement(const SelectionStatement& other) = default;
 		SelectionStatement(SelectionStatement&& other) noexcept = default;

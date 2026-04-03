@@ -3,6 +3,6 @@
 
 using namespace WadeSpace;
 
-ParameterTypeList::ParameterTypeList(vector<ParameterDeclaration*>* vectorParameterDeclaration, bool ellipsis) : vectorParameterDeclaration(vectorParameterDeclaration), ellipsis(ellipsis)
+ParameterTypeList::ParameterTypeList(shared_ptr<vector<shared_ptr<ParameterDeclaration>>> vectorParameterDeclaration, bool ellipsis) : vectorParameterDeclaration(vectorParameterDeclaration), ellipsis(ellipsis)
 {
 }

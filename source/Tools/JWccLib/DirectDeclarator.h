@@ -14,47 +14,47 @@ namespace WadeSpace
 
 	class DirectDeclarator
 	{
-		CTokenPtr identifier;
-		CTokenPtr token1;
-		CTokenPtr token2;
-		Declarator* declarator;
-		DirectDeclarator* directDeclarator;
-		ExpressionTree* constantExpression;
-		ParameterTypeList* parameterTypeList;
-		vector<CTokenPtr>* vectorOfStrings;
+		shared_ptr<CToken> identifier;
+		shared_ptr<CToken> token1;
+		shared_ptr<CToken> token2;
+		shared_ptr<Declarator> declarator;
+		shared_ptr<DirectDeclarator> directDeclarator;
+		shared_ptr<ExpressionTree> constantExpression;
+		shared_ptr<ParameterTypeList> parameterTypeList;
+		shared_ptr<vector<shared_ptr<CToken>>> vectorOfStrings;
 	public:
 		DirectDeclarator() = default;
 		DirectDeclarator( 
-			CTokenPtr identifier, 
-			CTokenPtr token1,
-			CTokenPtr token2,
-			Declarator* const declarator, 
-			DirectDeclarator* const directDeclarator,
-			ExpressionTree* const constantExpression, 
-			ParameterTypeList* const parameterTypeList,
-			vector<CTokenPtr>* const vectorOfStrings
+			shared_ptr<CToken> identifier, 
+			shared_ptr<CToken> token1,
+			shared_ptr<CToken> token2,
+			shared_ptr<Declarator> declarator, 
+			shared_ptr<DirectDeclarator> directDeclarator,
+			shared_ptr<ExpressionTree> constantExpression, 
+			shared_ptr<ParameterTypeList> parameterTypeList,
+			shared_ptr<vector<shared_ptr<CToken>>> vectorOfStrings
 		);
 		virtual ~DirectDeclarator() = default;
 		DirectDeclarator(const DirectDeclarator& other) = default;
 		DirectDeclarator(DirectDeclarator&& other) noexcept = default;
 		DirectDeclarator& operator=(const DirectDeclarator& other) = default;
 		DirectDeclarator& operator=(DirectDeclarator&& other) noexcept = default;
-		[[nodiscard]] CTokenPtr getIdentifier() const { return identifier; };
-		[[nodiscard]] CTokenPtr getToken1() const { return token1; };
-		[[nodiscard]] CTokenPtr getToken2() const { return token2; };
-		[[nodiscard]] Declarator* getDeclarator() const { return declarator; };
-		[[nodiscard]] DirectDeclarator* getDirectDeclarator() const { return directDeclarator; };
-		[[nodiscard]] ExpressionTree* getConstantExpression() const { return constantExpression; };
-		[[nodiscard]] ParameterTypeList* getParameterTypeList() const { return parameterTypeList; };
-		[[nodiscard]] vector<CTokenPtr>* getVectorOfStrings() const { return vectorOfStrings; };
-		void setIdentifier(CTokenPtr const identifier) { this->identifier = identifier; };
-		void setToken1(CTokenPtr const token1) { this->token1 = token1; };
-		void setToken2(CTokenPtr const token2) { this->token2 = token2; };
-		void setDeclarator(Declarator* const declarator) { this->declarator = declarator; };
-		void setDirectDeclarator(DirectDeclarator* const directDeclarator) { this->directDeclarator = directDeclarator; };
-		void setConstantExpression(ExpressionTree* const constantExpression) { this->constantExpression = constantExpression; };
-		void setParameterTypeList(ParameterTypeList* const parameterTypeList) { this->parameterTypeList = parameterTypeList; };
-		void setVectorOfStrings(vector<CTokenPtr>* const vectorOfStrings) { this->vectorOfStrings = vectorOfStrings; };
+		[[nodiscard]] shared_ptr<CToken> getIdentifier() const { return identifier; };
+		[[nodiscard]] shared_ptr<CToken> getToken1() const { return token1; };
+		[[nodiscard]] shared_ptr<CToken> getToken2() const { return token2; };
+		[[nodiscard]] shared_ptr<Declarator> getDeclarator() const { return declarator; };
+		[[nodiscard]] shared_ptr<DirectDeclarator> getDirectDeclarator() const { return directDeclarator; };
+		[[nodiscard]] shared_ptr<ExpressionTree> getConstantExpression() const { return constantExpression; };
+		[[nodiscard]] shared_ptr<ParameterTypeList> getParameterTypeList() const { return parameterTypeList; };
+		[[nodiscard]] shared_ptr<vector<shared_ptr<CToken>>> getVectorOfStrings() const { return vectorOfStrings; };
+		void setIdentifier(shared_ptr<CToken> identifier) { this->identifier = identifier; };
+		void setToken1(shared_ptr<CToken> token1) { this->token1 = token1; };
+		void setToken2(shared_ptr<CToken> token2) { this->token2 = token2; };
+		void setDeclarator(shared_ptr<Declarator> declarator) { this->declarator = declarator; };
+		void setDirectDeclarator(shared_ptr<DirectDeclarator> directDeclarator) { this->directDeclarator = directDeclarator; };
+		void setConstantExpression(shared_ptr<ExpressionTree> constantExpression) { this->constantExpression = constantExpression; };
+		void setParameterTypeList(shared_ptr<ParameterTypeList> parameterTypeList) { this->parameterTypeList = parameterTypeList; };
+		void setVectorOfStrings(shared_ptr<vector<shared_ptr<CToken>>> vectorOfStrings) { this->vectorOfStrings = vectorOfStrings; };
 		[[nodiscard]] bool hasIdentifier() const { return identifier != nullptr; };
 		[[nodiscard]] bool hasToken1() const { return token1 != nullptr; };
 		[[nodiscard]] bool hasToken2() const { return token2 != nullptr; };

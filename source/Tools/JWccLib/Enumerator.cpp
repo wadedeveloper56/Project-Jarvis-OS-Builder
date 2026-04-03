@@ -4,6 +4,6 @@
 
 using namespace WadeSpace;
 
-Enumerator::Enumerator(CTokenPtr identifier, ExpressionTree* constantExpression) : identifier(identifier), constantExpression(constantExpression)
+Enumerator::Enumerator(shared_ptr<CToken> identifier, shared_ptr<ExpressionTree> constantExpression) : identifier(identifier), constantExpression(constantExpression)
 {
 }

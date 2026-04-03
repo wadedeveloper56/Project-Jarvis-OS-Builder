@@ -4,14 +4,14 @@
 
 using namespace WadeSpace;
 
-StructDeclarator::StructDeclarator(Declarator* declarator) : declarator(declarator), constantExpression(nullptr)
+StructDeclarator::StructDeclarator(shared_ptr<Declarator> declarator) : declarator(declarator), constantExpression(nullptr)
 {
 }
 
-StructDeclarator::StructDeclarator(ExpressionTree* constantExpression) : declarator(nullptr), constantExpression(constantExpression)
+StructDeclarator::StructDeclarator(shared_ptr<ExpressionTree> constantExpression) : declarator(nullptr), constantExpression(constantExpression)
 {
 }
 
-StructDeclarator::StructDeclarator(Declarator* declarator, ExpressionTree* constantExpression) : declarator(declarator), constantExpression(constantExpression)
+StructDeclarator::StructDeclarator(shared_ptr<Declarator> declarator, shared_ptr<ExpressionTree> constantExpression) : declarator(declarator), constantExpression(constantExpression)
 {
 }

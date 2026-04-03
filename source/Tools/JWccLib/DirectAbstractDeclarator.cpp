@@ -6,16 +6,14 @@
 
 using namespace WadeSpace;
 
-DirectAbstractDeclaratorNode::DirectAbstractDeclaratorNode(ParameterTypeList* const parameterTypeList,
-                                                           ExpressionTree* const constantExpression,
-                                                           optional<TokenType> type)
+DirectAbstractDeclaratorNode::DirectAbstractDeclaratorNode(shared_ptr<ParameterTypeList> parameterTypeList, shared_ptr<ExpressionTree> constantExpression, optional<TokenType> type)
 	: parameterTypeList(parameterTypeList),
 	  constantExpression(constantExpression),
 	  type(type)
 {
 }
 
-DirectAbstractDeclarator::DirectAbstractDeclarator(AbstractDeclarator* abstractDeclarator, vector<DirectAbstractDeclaratorNode*>* list) :
+DirectAbstractDeclarator::DirectAbstractDeclarator(shared_ptr<AbstractDeclarator> abstractDeclarator, shared_ptr<vector<shared_ptr<DirectAbstractDeclaratorNode>>> list) :
 	abstractDeclarator(abstractDeclarator), list(list)
 {
 }

@@ -7,23 +7,23 @@ namespace WadeSpace
 {
 	class TypeName
 	{
-		SpecifierQualifierList* specifierQualifierList;
-		AbstractDeclarator* abstractDeclarator;
+		shared_ptr<SpecifierQualifierList> specifierQualifierList;
+		shared_ptr<AbstractDeclarator> abstractDeclarator;
 	public:
 		TypeName() = default;
-		TypeName(SpecifierQualifierList* specifierQualifierList);
-		TypeName(SpecifierQualifierList* specifierQualifierList, AbstractDeclarator* abstractDeclarator);
+		TypeName(shared_ptr<SpecifierQualifierList> specifierQualifierList);
+		TypeName(shared_ptr<SpecifierQualifierList> specifierQualifierList, shared_ptr<AbstractDeclarator> abstractDeclarator);
 		virtual ~TypeName() = default;
 		TypeName(const TypeName& other) = default;
 		TypeName(TypeName&& other) noexcept = default;
 		TypeName& operator=(const TypeName& other) = default;
 		TypeName& operator=(TypeName&& other) noexcept = default;
-		[[nodiscard]] SpecifierQualifierList* getSpecifierQualifierList() const { return specifierQualifierList; }
-		[[nodiscard]] AbstractDeclarator* getAbstractDeclarator() const { return abstractDeclarator; }
+		[[nodiscard]] shared_ptr<SpecifierQualifierList> getSpecifierQualifierList() const { return specifierQualifierList; }
+		[[nodiscard]] shared_ptr<AbstractDeclarator> getAbstractDeclarator() const { return abstractDeclarator; }
 		[[nodiscard]] bool hasSpecifierQualifierList() const { return specifierQualifierList != nullptr; }
 		[[nodiscard]] bool hasAbstractDeclarator() const { return abstractDeclarator != nullptr; }
-		void setSpecifierQualifierList(SpecifierQualifierList* specifierQualifierList) { this->specifierQualifierList = specifierQualifierList; }
-		void setAbstractDeclarator(AbstractDeclarator* abstractDeclarator) { this->abstractDeclarator = abstractDeclarator; }
+		void setSpecifierQualifierList(shared_ptr<SpecifierQualifierList> specifierQualifierList) { this->specifierQualifierList = specifierQualifierList; }
+		void setAbstractDeclarator(shared_ptr<AbstractDeclarator> abstractDeclarator) { this->abstractDeclarator = abstractDeclarator; }
 
 	};
 }

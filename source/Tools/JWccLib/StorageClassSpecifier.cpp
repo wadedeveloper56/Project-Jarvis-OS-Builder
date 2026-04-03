@@ -3,6 +3,6 @@
 
 using namespace WadeSpace;
 
-StorageClassSpecifier::StorageClassSpecifier(CTokenPtr type) : type(type)
+StorageClassSpecifier::StorageClassSpecifier(shared_ptr<CToken> type) : type(type)
 {
 }

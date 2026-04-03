@@ -18,11 +18,11 @@ namespace WadeSpace
 		TokenType type;
 		bool pointer;
 		unsigned long long arraySize;
-		Initializer* initializer;
+		shared_ptr<Initializer> initializer;
 		string structName;
-		StructOrUnionSpecifier* suSpec;
+		shared_ptr<StructOrUnionSpecifier> suSpec;
 		bool unsign;
-		ParameterTypeList* plist;
+		shared_ptr<ParameterTypeList> plist;
 
 		VariableData() = default;
 		~VariableData() = default;
@@ -37,8 +37,8 @@ namespace WadeSpace
 	public:
 		string name;
 		TokenType type;
-		vector<VariableData*>* parameters;
-		BaseStatement* statements;
+		shared_ptr<vector<shared_ptr<VariableData>>> parameters;
+		shared_ptr<BaseStatement> statements;
 
 		FunctionData() = default;
 		~FunctionData() = default;
@@ -51,11 +51,11 @@ namespace WadeSpace
 	class BaseCodeGenerator
 	{
 	protected:
-		vector<VariableData*>* variableTable;
-		vector<FunctionData*>* functionTable;
+		shared_ptr<vector<shared_ptr<VariableData>>> variableTable;
+		shared_ptr<vector<shared_ptr<FunctionData>>> functionTable;
 	public:
 		BaseCodeGenerator() = default;
-		BaseCodeGenerator(vector<VariableData*>* variable_table, vector<FunctionData*>* function_table);
+		BaseCodeGenerator(shared_ptr<vector<shared_ptr<VariableData>>> variable_table, shared_ptr<vector<shared_ptr<FunctionData>>> function_table);
 		virtual ~BaseCodeGenerator() = default;
 
 		BaseCodeGenerator(const BaseCodeGenerator& other) = default;
@@ -65,10 +65,10 @@ namespace WadeSpace
 
 		virtual void generateCode(ostream& out) = 0;
 
-		[[nodiscard]] vector<VariableData*>* getVariableTable() const {	return variableTable; }
-		[[nodiscard]] vector<FunctionData*>* getFunctionTable() const { return functionTable; }
-		void setVariableTable(vector<VariableData*>* variable_table) { variableTable = variable_table; }
-		void setFunctionTable(vector<FunctionData*>* function_table) { functionTable = function_table; }
+		[[nodiscard]] shared_ptr<vector<shared_ptr<VariableData>>> getVariableTable() const {	return variableTable; }
+		[[nodiscard]] shared_ptr<vector<shared_ptr<FunctionData>>> getFunctionTable() const { return functionTable; }
+		void setVariableTable(shared_ptr<vector<shared_ptr<VariableData>>> variable_table) { variableTable = variable_table; }
+		void setFunctionTable(shared_ptr<vector<shared_ptr<FunctionData>>> function_table) { functionTable = function_table; }
 		[[nodiscard]] bool hasVariableTable() const { return variableTable != nullptr; }
 		[[nodiscard]] bool hasFunctionTable() const { return functionTable != nullptr; }
 	};

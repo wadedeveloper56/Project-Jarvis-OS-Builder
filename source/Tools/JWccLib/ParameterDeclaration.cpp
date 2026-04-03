@@ -3,14 +3,14 @@
 
 using namespace WadeSpace;
 
-ParameterDeclaration::ParameterDeclaration(DeclarationSpecifiers* declarationSpecifiers) : declarationSpecifiers(declarationSpecifiers), abstractDeclarator(nullptr), declarator(nullptr)
+ParameterDeclaration::ParameterDeclaration(shared_ptr<DeclarationSpecifiers> declarationSpecifiers) : declarationSpecifiers(declarationSpecifiers), abstractDeclarator(nullptr), declarator(nullptr)
 {
 }
 
-ParameterDeclaration::ParameterDeclaration(DeclarationSpecifiers* declarationSpecifiers, AbstractDeclarator* abstractDeclarator) : declarationSpecifiers(declarationSpecifiers), abstractDeclarator(abstractDeclarator), declarator(nullptr)
+ParameterDeclaration::ParameterDeclaration(shared_ptr<DeclarationSpecifiers> declarationSpecifiers, shared_ptr<AbstractDeclarator> abstractDeclarator) : declarationSpecifiers(declarationSpecifiers), abstractDeclarator(abstractDeclarator), declarator(nullptr)
 {
 }
 
-ParameterDeclaration::ParameterDeclaration(DeclarationSpecifiers* declarationSpecifiers, Declarator* declarator) : declarationSpecifiers(declarationSpecifiers), abstractDeclarator(nullptr), declarator(declarator)
+ParameterDeclaration::ParameterDeclaration(shared_ptr<DeclarationSpecifiers> declarationSpecifiers, shared_ptr<Declarator> declarator) : declarationSpecifiers(declarationSpecifiers), abstractDeclarator(nullptr), declarator(declarator)
 {
 }

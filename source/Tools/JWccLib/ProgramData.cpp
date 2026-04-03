@@ -14,29 +14,16 @@ using namespace std;
 
 ProgramData::ProgramData()
 {
-	program = new vector<ExternalDeclaration*>();
+	program = make_shared<vector<shared_ptr<ExternalDeclaration>>>();
 	generator = nullptr;
 }
 
-ProgramData::~ProgramData()
-{
-	if (program != nullptr)
-	{
-		program->clear();
-		delete program;
-	}
-	if (generator != nullptr)
-	{
-		delete generator;
-	}
-}
-
-void ProgramData::add(ExternalDeclaration* data) const
+void ProgramData::addExternalDeclaration(shared_ptr<ExternalDeclaration> data)
 {
 	program->push_back(data);
 }
 
-TokenType ProgramData::getFunctionParameterType(ParameterDeclaration* parameterDeclaration)
+TokenType ProgramData::getFunctionParameterType(shared_ptr<ParameterDeclaration> parameterDeclaration)
 {
 	TokenType type = UNKNOWN;
 	auto declaration_specifiers_list = parameterDeclaration->getDeclarationSpecifiers()->getDeclarationSpecifiersNodeList();
@@ -44,16 +31,16 @@ TokenType ProgramData::getFunctionParameterType(ParameterDeclaration* parameterD
 	{
 		for (auto ptr : *declaration_specifiers_list)
 		{
-			if (ptr->typeSpecifier != nullptr)
+			if (ptr->getTypeSpecifier() != nullptr)
 			{
-				type = ptr->typeSpecifier->getType().value();
+				type = ptr->getTypeSpecifier()->getType().value();
 			}
 		}
 	}
 	return type;
 }
 
-string ProgramData::getParameterDeclarationName(ParameterDeclaration const * parameterDeclaration)
+string ProgramData::getParameterDeclarationName(shared_ptr<ParameterDeclaration> parameterDeclaration)
 {
 	auto direct_declarator = parameterDeclaration->getDeclarator()->getDirectDeclarator();
 	if (direct_declarator != nullptr)
@@ -70,7 +57,7 @@ string ProgramData::getParameterDeclarationName(ParameterDeclaration const * par
 	return "";
 }
 
-TokenType ProgramData::getDeclarationSpecifiersType(DeclarationSpecifiers const* declaration_specifiers)
+TokenType ProgramData::getDeclarationSpecifiersType(shared_ptr<DeclarationSpecifiers> declaration_specifiers)
 {
 	TokenType type = UNKNOWN;
 	auto type_specifierList = declaration_specifiers->getDeclarationSpecifiersNodeList();
@@ -78,32 +65,33 @@ TokenType ProgramData::getDeclarationSpecifiersType(DeclarationSpecifiers const*
 	{
 		for (auto ptr : *type_specifierList)
 		{
-			if (ptr->typeSpecifier != nullptr)
+			if (ptr->getTypeSpecifier() != nullptr)
 			{
-				type = ptr->typeSpecifier->getType().value();
+				type = ptr->getTypeSpecifier()->getType().value();
 			}
 		}
 	}
 	return type;
 }
 
-void ProgramData::handleFunction(FunctionDefinition const * declaration, vector<FunctionData*>* functionTable)
+void ProgramData::handleFunction(shared_ptr<FunctionDefinition> declaration, shared_ptr<vector<shared_ptr<FunctionData>>> functionTable)
 {
-	FunctionData* data = new FunctionData();
-	data->statements = new BaseStatement(*declaration->getBaseStatement());
-	DeclarationSpecifiers* declaration_specifiers = declaration->getDeclarationSpecifiers();
+	shared_ptr<FunctionData> data = make_shared<FunctionData>();
+	auto stmt = declaration->getBaseStatement();
+	data->statements = make_shared<BaseStatement>(*stmt);
+	shared_ptr<DeclarationSpecifiers> declaration_specifiers = declaration->getDeclarationSpecifiers();
 	if (declaration_specifiers != nullptr && declaration_specifiers->getDeclarationSpecifiersNodeList() != nullptr)
 	{
 		data->type = getDeclarationSpecifiersType(declaration_specifiers);
-		DirectDeclarator* direct_declarator = declaration->getDeclarator()->getDirectDeclarator();
+		shared_ptr<DirectDeclarator> direct_declarator = declaration->getDeclarator()->getDirectDeclarator();
 		data->name = direct_declarator->getDirectDeclarator()->getIdentifier()->getSymbolName();
-		ParameterTypeList* parameters = direct_declarator->getParameterTypeList();
+		shared_ptr<ParameterTypeList> parameters = direct_declarator->getParameterTypeList();
 		if (parameters != nullptr && !parameters->getVectorParameterDeclaration()->empty())
 		{
-			data->parameters = new vector<VariableData*>();
-			for (ParameterDeclaration* parameterDeclaration : *parameters->getVectorParameterDeclaration())
+			data->parameters = make_shared<vector<shared_ptr<VariableData>>>();
+			for (shared_ptr<ParameterDeclaration> parameterDeclaration : *parameters->getVectorParameterDeclaration())
 			{
-				VariableData* functionData = new VariableData();
+				shared_ptr<VariableData> functionData = make_shared<VariableData>();
 				functionData->name = getParameterDeclarationName(parameterDeclaration);
 				functionData->pointer = parameterDeclaration->getDeclarator()->hasPointer();
 				functionData->type = getFunctionParameterType(parameterDeclaration);
@@ -115,29 +103,9 @@ void ProgramData::handleFunction(FunctionDefinition const * declaration, vector<
 	}
 }
 
-vector<ExternalDeclaration*>* ProgramData::getProgram() const
+shared_ptr<ParameterTypeList> ProgramData::getDeclarationParameterList(shared_ptr<vector<shared_ptr<InitDeclarator>>> initDeclaratorsList)
 {
-	return program;
-}
-
-BaseCodeGenerator* ProgramData::getGenerator() const
-{
-	return generator;
-}
-
-bool ProgramData::hasProgram() const
-{
-	return program != nullptr;
-}
-
-bool ProgramData::hasGenerator() const
-{
-	return generator != nullptr;
-}
-
-ParameterTypeList* ProgramData::getDeclarationParameterList(vector<InitDeclarator*> const * initDeclaratorsList)
-{
-	ParameterTypeList* plist = nullptr;
+	shared_ptr<ParameterTypeList> plist = nullptr;
 	if (initDeclaratorsList != nullptr)
 	{
 		for (auto node : *initDeclaratorsList)
@@ -149,16 +117,16 @@ ParameterTypeList* ProgramData::getDeclarationParameterList(vector<InitDeclarato
 	return plist;
 }
 
-void ProgramData::handleDeclaration(Declaration const* declaration, vector<VariableData*>* variableTable)
+void ProgramData::handleDeclaration(shared_ptr<ExternalDeclaration> declaration, shared_ptr<vector<shared_ptr<VariableData>>> variableTable)
 {
-	TokenType type;
+/*	TokenType type;
 	bool unsign = false;
 	string structName;
-	StructOrUnionSpecifier* suSpec = nullptr;
-	ParameterTypeList* plist = nullptr;
+	shared_ptr<StructOrUnionSpecifier> suSpec = nullptr;
+	shared_ptr<ParameterTypeList> plist = nullptr;
 
-	DeclarationSpecifiers* declSpecifiers = declaration->getDeclarationSpecifiers();
-	vector<InitDeclarator*>* initDeclaratorsList = declaration->getVectorInitDeclarator();
+	shared_ptr<DeclarationSpecifiers> declSpecifiers = declaration->getDeclarationSpecifiers();
+	shared_ptr<vector<shared_ptr<InitDeclarator>>> initDeclaratorsList = declaration->getVectorInitDeclarator();
 	plist = getDeclarationParameterList(initDeclaratorsList);
 	vector<DeclarationSpecifiersNode*>* list = declSpecifiers->getDeclarationSpecifiersNodeList();
 	if (list != nullptr)
@@ -241,43 +209,43 @@ void ProgramData::handleDeclaration(Declaration const* declaration, vector<Varia
 			if (dd->hasConstantExpression()) data->arraySize = dd->getConstantExpression()->getData()->getConstant()->getIConst()->getIntegerConst();
 			variableTable->push_back(data);
 		}
-	}
+	}*/
 }
 
-TypeSpecifier* ProgramData::findType(Declaration* decl)
+shared_ptr<TypeSpecifier> ProgramData::findType(shared_ptr<Declaration> decl)
 {
 	auto specifiers = decl->getDeclarationSpecifiers();
 	auto list = specifiers->getDeclarationSpecifiersNodeList();
-	for (DeclarationSpecifiersNode* node : *list)
+	for (auto node : *list)
 	{
-		if (node->typeSpecifier != nullptr)
+		if (node->getTypeSpecifier() != nullptr)
 		{
-			return node->typeSpecifier;
+			return node->getTypeSpecifier();
 		}
 	}
 	return nullptr;
 }
 
-BaseCodeGenerator* ProgramData::processGlobalVariables()
+shared_ptr<BaseCodeGenerator> ProgramData::processGlobalVariables()
 {
-	vector<VariableData*>* variableTable = new vector<VariableData*>();
-	vector<FunctionData*>* functionTable = new vector<FunctionData*>();
+	shared_ptr<vector<shared_ptr<VariableData>>> variableTable = make_shared<vector<shared_ptr<VariableData>>>();
+	shared_ptr<vector<shared_ptr<FunctionData>>> functionTable = make_shared<vector<shared_ptr<FunctionData>>>();
 
 	if (program != nullptr)
 	{
-		for (ExternalDeclaration* ptr : *program)
+		for (auto ptr : *program)
 		{
 			if (ptr->hasDeclaration())
 			{
-				handleDeclaration(ptr->getDeclaration(), variableTable);
+				//handleDeclaration(ptr->getDeclaration(), variableTable);
 			}
 			else if (ptr->hasFunction())
 			{
-				handleFunction(ptr->getFunction(), functionTable);
+				handleFunction(ptr->getFunctionDefinition(), functionTable);
 			}
 		}
 	}
 
-	generator = new MasmCodeGenerator(variableTable, functionTable);
+	generator = make_shared<MasmCodeGenerator>(variableTable, functionTable);
 	return generator;
 }

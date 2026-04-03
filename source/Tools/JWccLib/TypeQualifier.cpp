@@ -6,6 +6,6 @@
 using namespace WadeSpace;
 using namespace std;
 
-TypeQualifier::TypeQualifier(CTokenPtr type) :type(type)
+TypeQualifier::TypeQualifier(shared_ptr<CToken> type) :type(type)
 {
 }

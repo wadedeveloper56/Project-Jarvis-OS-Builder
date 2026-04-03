@@ -37,18 +37,18 @@ void handleStructDefinition(Declaration* declaration)
 }
 */
 
-void handleDeclaration(ExternalDeclaration* externalDeclaration)
+void handleDeclaration(shared_ptr<ExternalDeclaration> externalDeclaration)
 {
 	bool isTypedef = externalDeclaration->isTypedef();
-	Declaration* declaration = externalDeclaration->getDeclaration();
+	shared_ptr<Declaration> declaration = externalDeclaration->getDeclaration();
 	if (declaration != nullptr)
 	{
-	    //handleStructDefinition(declaration);
+		//handleStructDefinition(declaration);
 		if (declaration->getVectorInitDeclarator() != nullptr)
 		{
-			for (InitDeclarator* initDecl : *declaration->getVectorInitDeclarator())
+			for (shared_ptr<InitDeclarator> initDecl : *declaration->getVectorInitDeclarator())
 			{
-				DirectDeclarator* dd = initDecl->getDeclarator()->getDirectDeclarator();
+				shared_ptr<DirectDeclarator> dd = initDecl->getDeclarator()->getDirectDeclarator();
 				if (dd != nullptr)
 				{
 					string name;
@@ -60,208 +60,205 @@ void handleDeclaration(ExternalDeclaration* externalDeclaration)
 					{
 						name = dd->getDirectDeclarator()->getIdentifier()->getSymbolName();
 					}
-/*					if (isTypedef)
-					{
-						compiler->getTypedefList()->insert({name, externalDeclaration});
-					}
-*/
+					/*					if (isTypedef)
+										{
+											compiler->getTypedefList()->insert({name, externalDeclaration});
+										}
+					*/
 				}
 			}
 		}
 	}
-	if (!isTypedef) compiler->getProgramData()->add(externalDeclaration);
+	//if (!isTypedef) compiler->addExternalDeclaration(externalDeclaration);
 }
 
-void createTranslationUnit(ExternalDeclaration* externalDeclaration)
+void createTranslationUnit(shared_ptr<ExternalDeclaration> externalDeclaration)
 {
-	compiler->getProgramData()->add(externalDeclaration);
+	//compiler->addExternalDeclaration(externalDeclaration);
 }
 
-vector<BaseStatement*>* createStatementList(BaseStatement* statement, vector<BaseStatement*>* list)
+shared_ptr<vector<shared_ptr<BaseStatement>>> createStatementList(shared_ptr<BaseStatement> statement, shared_ptr<vector<shared_ptr<BaseStatement>>> list)
 {
 	if (list == nullptr)
 	{
-		list = new vector<BaseStatement*>();
+		list = make_shared<vector<shared_ptr<BaseStatement>>>();
 	}
 	list->push_back(statement);
 	return list;
 }
 
-vector<Initializer*>* createInitializerList(Initializer* initializer, vector<Initializer*>* list)
+shared_ptr<vector<shared_ptr<Initializer>>> createInitializerList(shared_ptr<Initializer> initializer, shared_ptr<vector<shared_ptr<Initializer>>> list)
 {
 	if (list == nullptr)
 	{
-		list = new vector<Initializer*>();
+		list = make_shared<vector<shared_ptr<Initializer>>>();
 	}
 	list->push_back(initializer);
 	return list;
 }
 
-DirectAbstractDeclarator* createDirectAbstractDeclarator(AbstractDeclarator* abstractDeclarator,
-                                                         vector<DirectAbstractDeclaratorNode*>* list)
+shared_ptr<DirectAbstractDeclarator> createDirectAbstractDeclarator(shared_ptr<AbstractDeclarator> abstractDeclarator, shared_ptr<vector<shared_ptr<DirectAbstractDeclaratorNode>>> list)
 {
-	return new DirectAbstractDeclarator(abstractDeclarator, list);
+	return make_shared<DirectAbstractDeclarator>(abstractDeclarator, list);
 }
 
-DirectAbstractDeclarator* createDirectAbstractDeclarator(DirectAbstractDeclarator* dad,
-                                                         AbstractDeclarator* abstractDeclarator,
-                                                         ParameterTypeList* parameterTypeList,
-                                                         ExpressionTree* constantExpression, TokenType type)
+shared_ptr<DirectAbstractDeclarator> createDirectAbstractDeclarator(shared_ptr<DirectAbstractDeclarator> dad, shared_ptr<AbstractDeclarator> abstractDeclarator, shared_ptr<ParameterTypeList> parameterTypeList, shared_ptr<ExpressionTree> constantExpression, TokenType type)
 {
+	shared_ptr<vector<shared_ptr<DirectAbstractDeclaratorNode>>> list;
 	if (dad != nullptr)
 	{
-		vector<DirectAbstractDeclaratorNode*>* list = dad->getList();
-		DirectAbstractDeclaratorNode* node = new DirectAbstractDeclaratorNode(parameterTypeList, constantExpression, type);
-		list->push_back(node);
-		return new DirectAbstractDeclarator(dad->getAbstractDeclarator(), list);
+		list = dad->getList();
 	}
 	else
 	{
-		vector<DirectAbstractDeclaratorNode*>* list = new vector<DirectAbstractDeclaratorNode*>();
-		DirectAbstractDeclaratorNode* node = new DirectAbstractDeclaratorNode(parameterTypeList, constantExpression, type);
-		list->push_back(node);
-		return new DirectAbstractDeclarator(abstractDeclarator, list);
+		list = make_shared<vector<shared_ptr<DirectAbstractDeclaratorNode>>>();
 	}
+	shared_ptr<DirectAbstractDeclaratorNode> node = make_shared<DirectAbstractDeclaratorNode>(parameterTypeList, constantExpression, type);
+	list->push_back(node);
+	return make_shared<DirectAbstractDeclarator>(dad->getAbstractDeclarator(), list);
 }
 
-vector<CTokenPtr>* createIdentifierList(const CTokenPtr identifier, vector<CTokenPtr>* list)
+shared_ptr<vector<shared_ptr<CToken>>> createIdentifierList(const shared_ptr<CToken> identifier, shared_ptr<vector<shared_ptr<CToken>>> list)
 {
 	if (list == nullptr)
 	{
-		list = new vector<CTokenPtr>();
+		list = make_shared<vector<shared_ptr<CToken>>>();
 	}
 	list->push_back(identifier);
 	return list;
 }
 
-vector<ParameterDeclaration*>* createParameterList(ParameterDeclaration* value1, vector<ParameterDeclaration*>* list)
+shared_ptr<vector<shared_ptr<ParameterDeclaration>>> createParameterList(shared_ptr<ParameterDeclaration> value1, shared_ptr<vector<shared_ptr<ParameterDeclaration>>> list)
 {
 	if (list == nullptr)
 	{
-		list = new vector<ParameterDeclaration*>();
+		list = make_shared<vector<shared_ptr<ParameterDeclaration>>>();
 	}
 	list->push_back(value1);
 	return list;
 }
 
-vector<TypeQualifier*>* createTypeQualifierList(TypeQualifier* value1, vector<TypeQualifier*>* list)
+shared_ptr<vector<shared_ptr<TypeQualifier>>> createTypeQualifierList(shared_ptr<TypeQualifier> value1, shared_ptr<vector<shared_ptr<TypeQualifier>>> list)
 {
 	if (list == nullptr)
 	{
-		list = new vector<TypeQualifier*>();
+		list = make_shared<vector<shared_ptr<TypeQualifier>>>();
 	}
 	list->push_back(value1);
 	return list;
 }
 
-vector<Enumerator*>* createEnumeratorList(Enumerator* value1, vector<Enumerator*>* list)
+shared_ptr<vector<shared_ptr<Enumerator>>> createEnumeratorList(shared_ptr<Enumerator> value1, shared_ptr<vector<shared_ptr<Enumerator>>> list)
 {
 	if (list == nullptr)
 	{
-		list = new vector<Enumerator*>();
+		list = make_shared<vector<shared_ptr<Enumerator>>>();
 	}
 	list->push_back(value1);
 	return list;
 }
 
-vector<StructDeclarator*>* createStructDeclaratorList(StructDeclarator* value1, vector<StructDeclarator*>* list)
+shared_ptr<vector<shared_ptr<StructDeclarator>>> createStructDeclaratorList(shared_ptr<StructDeclarator> value1, shared_ptr<vector<shared_ptr<StructDeclarator>>> list)
 {
 	if (list == nullptr)
 	{
-		list = new vector<StructDeclarator*>();
+		list = make_shared<vector<shared_ptr<StructDeclarator>>>();
 	}
 	list->push_back(value1);
 	return list;
 }
 
-vector<StructDeclaration*>* createStructDeclarationList(StructDeclaration* value1, vector<StructDeclaration*>* list)
+shared_ptr<vector<shared_ptr<StructDeclaration>>> createStructDeclarationList(shared_ptr<StructDeclaration> value1, shared_ptr<vector<shared_ptr<StructDeclaration>>> list)
 {
 	if (list == nullptr)
 	{
-		list = new vector<StructDeclaration*>();
+		list = make_shared<vector<shared_ptr<StructDeclaration>>>();
 	}
 	list->push_back(value1);
 	return list;
 }
 
-InitDeclarator* createInitDeclarator(Declarator* declarator, Initializer* initializer)
+shared_ptr<InitDeclarator> createInitDeclarator(shared_ptr<Declarator> declarator, shared_ptr<Initializer> initializer)
 {
-	return new InitDeclarator(declarator, initializer);
+	return make_shared<InitDeclarator>(declarator, initializer);
 }
 
-Declaration* createDeclaration(DeclarationSpecifiers* declarationSpecifiers, vector<InitDeclarator*>* vectorInitDeclarator)
+shared_ptr<Declaration> createDeclaration(shared_ptr<DeclarationSpecifiers> declarationSpecifiers, shared_ptr<vector<shared_ptr<InitDeclarator>>> vectorInitDeclarator)
 {
-	return new Declaration(declarationSpecifiers, vectorInitDeclarator);
+	return make_shared<Declaration>(declarationSpecifiers, vectorInitDeclarator);
 }
 
-vector<InitDeclarator*>* createInitDeclaratorList(InitDeclarator* value1, vector<InitDeclarator*>* list)
+shared_ptr<vector<shared_ptr<InitDeclarator>>> createInitDeclaratorList(shared_ptr<InitDeclarator> value1, shared_ptr<vector<shared_ptr<InitDeclarator>>> list)
 {
 	if (list == nullptr)
 	{
-		list = new vector<InitDeclarator*>();
+		list = make_shared<vector<shared_ptr<InitDeclarator>>>();
 	}
 	list->push_back(value1);
 	return list;
 }
 
-vector<ExpressionTree*>* createArgumentExpressionList(ExpressionTree* exp, vector<ExpressionTree*>* list)
+shared_ptr<vector<shared_ptr<ExpressionTree>>> createArgumentExpressionList(shared_ptr<ExpressionTree> exp, shared_ptr<vector<shared_ptr<ExpressionTree>>> list)
 {
 	if (list == nullptr)
 	{
-		list = new vector<ExpressionTree*>();
+		list = make_shared<vector<shared_ptr<ExpressionTree>>>();
 	}
 	list->push_back(exp);
 	return list;
 }
 
-ExpressionTree* createExpression(
+shared_ptr<ExpressionTree> createExpression(
 	NodeType type,
-	CTokenPtr token1,
-	CTokenPtr token2,
-	ExpressionTree* lexp,
-	ExpressionTree* exp1,
-	ExpressionTree* exp2,
-	vector<ExpressionTree*>* argumentList,
-	CTokenPtr identifier,
-	vector<Initializer*>* initializerList,
-	TypeName* typeName,
-	CTokenPtr token3,
-	Constant* constant,
-	ExpressionTree* left,
-	CTokenPtr op,
-	ExpressionTree* right
-	)
+	shared_ptr<CToken> token1,
+	shared_ptr<CToken> token2,
+	shared_ptr<ExpressionTree> lexp,
+	shared_ptr<ExpressionTree> exp1,
+	shared_ptr<ExpressionTree> exp2,
+	shared_ptr<vector<shared_ptr<ExpressionTree>>> argumentList,
+	shared_ptr<CToken> identifier,
+	shared_ptr<vector<shared_ptr<Initializer>>> initializerList,
+	shared_ptr<TypeName> typeName,
+	shared_ptr<CToken> token3,
+	shared_ptr<Constant> constant,
+	shared_ptr<ExpressionTree> left,
+	shared_ptr<CToken> op,
+	shared_ptr<ExpressionTree> right
+)
 {
-	TreeNodeData* nodeData = new TreeNodeData(type, token1, token2, lexp, exp1, exp2, argumentList, identifier, initializerList, typeName, token3, constant, op);
-	TreeNode* node = new TreeNode(nodeData, left ? left->getTree() : nullptr, right ? right->getTree() : nullptr);
-	return new ExpressionTree(node);
+	shared_ptr<TreeNodeData> nodeData = make_shared<TreeNodeData>(type, token1, token2, lexp, exp1, exp2, argumentList, identifier, initializerList, typeName, token3, constant, op);
+	shared_ptr<TreeNode> node = make_shared<TreeNode>(nodeData, left ? left->getTree() : nullptr, right ? right->getTree() : nullptr);
+	return make_shared<ExpressionTree>(node);
 }
 
-Constant* createConstant(const CTokenPtr iConst, const CTokenPtr fConst, const CTokenPtr strConst, const optional<TokenType>& type)
+shared_ptr<Constant> createConstant(const shared_ptr<CToken> iConst, const shared_ptr<CToken> fConst, const shared_ptr<CToken> strConst, const optional<TokenType>& type)
 {
-	return new Constant(iConst, fConst, strConst, type);
+	return make_shared<Constant>(iConst, fConst, strConst, type);
 }
 
-Declarator* createDeclarator(Pointer* pointer, DirectDeclarator* directDeclarator)
+shared_ptr<Declarator> createDeclarator(shared_ptr<Pointer> pointer, shared_ptr<DirectDeclarator> directDeclarator)
 {
-	return new Declarator(pointer, directDeclarator);
+	return make_shared<Declarator>(pointer, directDeclarator);
 }
 
-DirectDeclarator* createDirectDeclarator(CTokenPtr identifier, CTokenPtr token1, CTokenPtr token2,
-                                         Declarator* const declarator, DirectDeclarator* const directDeclarator,
-                                         ExpressionTree* const constantExpression,
-                                         ParameterTypeList* const parameterTypeList,
-                                         vector<CTokenPtr>* const vectorOfStrings)
+shared_ptr<DirectDeclarator> createDirectDeclarator(shared_ptr<CToken> identifier, shared_ptr<CToken> token1, shared_ptr<CToken> token2,
+	shared_ptr<Declarator> declarator,
+	shared_ptr<DirectDeclarator> directDeclarator,
+	shared_ptr<ExpressionTree> constantExpression,
+	shared_ptr<ParameterTypeList> parameterTypeList,
+	shared_ptr<vector<shared_ptr<CToken>>> vectorOfStrings)
 {
-	return new DirectDeclarator(identifier, token1, token2, declarator, directDeclarator, constantExpression, parameterTypeList, vectorOfStrings);
+	return make_shared<DirectDeclarator>(identifier, token1, token2, declarator, directDeclarator, constantExpression, parameterTypeList, vectorOfStrings);
 }
 
-DeclarationSpecifiers* createDeclarationSpecifiers(StorageClassSpecifier* const storageClassSpecifier,
-                                                   TypeSpecifier* const typeSpecifier,
-                                                   TypeQualifier* const typeQualifier,
-                                                   DeclarationSpecifiers* declarationSpecifiers)
+shared_ptr<DeclarationSpecifiers> createDeclarationSpecifiers(shared_ptr<CToken> token,
+	shared_ptr<DeclarationSpecifiers> declarationSpecifiers, 
+	shared_ptr<StorageClassSpecifier> storageClassSpecifier, 
+	shared_ptr<TypeSpecifier> typeSpecifier, 
+	shared_ptr<TypeQualifier> typeQualifier,
+	shared_ptr<StructOrUnionSpecifier> structOrUnionSpecifier)
 {
-	auto node = new DeclarationSpecifiersNode(storageClassSpecifier, typeSpecifier, typeQualifier);
+	auto node = make_shared<DeclarationSpecifiersNode>(storageClassSpecifier, typeSpecifier, typeQualifier);
 	if (declarationSpecifiers != nullptr)
 	{
 		declarationSpecifiers->addDeclarationSpecifiersNode(storageClassSpecifier, typeSpecifier, typeQualifier);
@@ -269,27 +266,27 @@ DeclarationSpecifiers* createDeclarationSpecifiers(StorageClassSpecifier* const 
 	}
 	else
 	{
-		DeclarationSpecifiers* declarationSpecifiers = new DeclarationSpecifiers();
+		shared_ptr<DeclarationSpecifiers> declarationSpecifiers = make_shared<DeclarationSpecifiers>();
 		declarationSpecifiers->addDeclarationSpecifiersNode(storageClassSpecifier, typeSpecifier, typeQualifier);
 		return declarationSpecifiers;
 	}
 }
 
-StorageClassSpecifier* createStorageClassSpecifier(const CTokenPtr token)
+shared_ptr<StorageClassSpecifier> createStorageClassSpecifier(shared_ptr<CToken> token)
 {
-	return new StorageClassSpecifier(token);
+	return make_shared<StorageClassSpecifier>(token);
 }
 
-ExpressionTree* createPrimaryExpression(const CTokenPtr identifier, Constant* constant)
+shared_ptr<ExpressionTree> createPrimaryExpression(const shared_ptr<CToken> identifier, shared_ptr<Constant> constant)
 {
 	return createExpression(NT_NONE, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, identifier, constant, nullptr, nullptr, nullptr);
 }
 
-vector<Declaration*>* createDeclarationList(Declaration* exp, vector<Declaration*>* list)
+shared_ptr<vector<shared_ptr<Declaration>>> createDeclarationList(shared_ptr<Declaration> exp, shared_ptr<vector<shared_ptr<Declaration>>> list)
 {
 	if (list == nullptr)
 	{
-		list = new vector<Declaration*>();
+		list = make_shared<vector<shared_ptr<Declaration>>>();
 	}
 	list->push_back(exp);
 	return list;

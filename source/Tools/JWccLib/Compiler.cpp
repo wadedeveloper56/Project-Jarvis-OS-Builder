@@ -27,7 +27,7 @@ void Compiler::compileFile(istringstream& inStr, ostream& out, int& exitcode)
 	Interpreter i;
 	i.setStreams(&inStr, &out);
 	exitcode = i.parse();
-	BaseCodeGenerator* generator = programData->processGlobalVariables();
+	shared_ptr<BaseCodeGenerator> generator = programData->processGlobalVariables();
 	generator->generateCode(out);
 }
 

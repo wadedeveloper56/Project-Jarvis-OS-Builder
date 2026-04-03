@@ -3,6 +3,6 @@
 
 using namespace WadeSpace;
 
-StructDeclaration::StructDeclaration(SpecifierQualifierList* specifierQualifierList, vector<StructDeclarator*>* vectorStructDeclarator) : specifierQualifierList(specifierQualifierList), vectorStructDeclarator(vectorStructDeclarator)
+StructDeclaration::StructDeclaration(shared_ptr<SpecifierQualifierList> specifierQualifierList, shared_ptr<vector<shared_ptr<StructDeclarator>>> vectorStructDeclarator) : specifierQualifierList(specifierQualifierList), vectorStructDeclarator(vectorStructDeclarator)
 {
 }

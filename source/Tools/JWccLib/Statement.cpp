@@ -4,6 +4,6 @@
 using namespace WadeSpace;
 using namespace std;
 
-Statement::Statement(TokenType op, BaseStatement* statement) : BaseStatement(op, statement)
+Statement::Statement(TokenType op, shared_ptr<BaseStatement> statement) : BaseStatement(op, statement)
 {
 }

@@ -14,8 +14,8 @@ namespace WadeSpace
 	public:
 		JumpStatement() = default;       
 		JumpStatement(TokenType op);
-		JumpStatement(TokenType op, CTokenPtr identifier);
-		JumpStatement(TokenType op, ExpressionTree* identifier);
+		JumpStatement(TokenType op, shared_ptr<CToken> identifier);
+		JumpStatement(TokenType op, shared_ptr<ExpressionTree> identifier);
 		virtual ~JumpStatement() = default;
 		JumpStatement(const JumpStatement& other) = default;
 		JumpStatement(JumpStatement&& other) noexcept = default;

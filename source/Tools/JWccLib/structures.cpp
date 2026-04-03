@@ -1,24 +1,22 @@
 #include "pch.h"
 #include "Token.h"
 
-CTokenPtr createToken(const CTokDataPtr data)
+shared_ptr<CToken> createToken(shared_ptr<CTokData> data)
 {
-	const auto tok = new CToken;
+	auto tok = make_shared<CToken>();
 	tok->data = data;
 	return tok;
 }
-
-CTokDataPtr createTokData(void)
+shared_ptr<CTokData> createTokData(void)
 {
-	const auto data = new CTokData;
-	memset(data, 0, sizeof(CTokData));
+	auto data = make_shared<CTokData>();
 	data->repr.symbol.string = nullptr;
 	return data;
 }
 
-CTokenPtr createConstantULLToken(const unsigned long long num)
+shared_ptr<CToken> createConstantULLToken(const unsigned long long num)
 {
-	const auto tok = createToken(createTokData());
+	auto tok = createToken(createTokData());
 	tok->data->code = YC_NUMERIC;
 	tok->data->repr.numericConstant.type = CONSTT_UINT_CONST;
 	tok->data->repr.numericConstant.radix = RADT_DECIMAL;
@@ -26,9 +24,9 @@ CTokenPtr createConstantULLToken(const unsigned long long num)
 	return tok;
 }
 
-CTokenPtr createConstantLDToken(const long double num)
+shared_ptr<CToken> createConstantLDToken(const long double num)
 {
-	const auto tok = createToken(createTokData());
+	auto tok = createToken(createTokData());
 	tok->data->code = YC_NUMERIC;
 	tok->data->repr.numericConstant.type = CONSTT_LDOUBLE_CONST;
 	tok->data->repr.numericConstant.radix = RADT_DECIMAL;
@@ -36,9 +34,9 @@ CTokenPtr createConstantLDToken(const long double num)
 	return tok;
 }
 
-CTokenPtr createStringConstantToken(char* str)
+shared_ptr<CToken> createStringConstantToken(char* str)
 {
-	const CTokenPtr tok = createToken(createTokData());
+	auto tok = createToken(createTokData());
 	tok->data->code = YC_STRING;
 	tok->data->repr.stringConstant.s = new char[strlen(str) + 1];
 	strcpy(tok->data->repr.stringConstant.s, str);
@@ -46,9 +44,9 @@ CTokenPtr createStringConstantToken(char* str)
 	return tok;
 }
 
-CTokenPtr createStringIDToken(char* str)
+shared_ptr<CToken> createStringIDToken(char* str)
 {
-	const CTokenPtr tok = createToken(createTokData());
+	auto tok = createToken(createTokData());
 	tok->data->code = YC_SYMBOL;
 	tok->data->repr.symbol.string = new char[strlen(str) + 1];
 	strcpy(tok->data->repr.symbol.string, str);
@@ -56,9 +54,9 @@ CTokenPtr createStringIDToken(char* str)
 	return tok;
 }
 
-CTokenPtr createKeywordToken(char* str, int keyword)
+shared_ptr<CToken> createKeywordToken(char* str, int keyword)
 {
-	CTokenPtr tok = createToken(createTokData());
+	auto tok = createToken(createTokData());
 	tok->data->code = YC_KEYWORD;
 	tok->data->repr.keyword.string = new char[strlen(str) + 1];
 	strcpy(tok->data->repr.keyword.string, str);

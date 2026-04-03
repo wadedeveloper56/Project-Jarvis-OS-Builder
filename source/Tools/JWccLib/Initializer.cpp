@@ -4,10 +4,10 @@
 
 using namespace WadeSpace;
 
-Initializer::Initializer(ExpressionTree* assignmentExpression) : assignmentExpression(assignmentExpression), initializerList(nullptr)
+Initializer::Initializer(shared_ptr<ExpressionTree> assignmentExpression) : assignmentExpression(assignmentExpression), initializerList(nullptr)
 {
 }
 
-Initializer::Initializer(vector<Initializer*>* initializerList) : assignmentExpression(nullptr), initializerList(initializerList)
+Initializer::Initializer(shared_ptr<vector<shared_ptr<Initializer>>> initializerList) : assignmentExpression(nullptr), initializerList(initializerList)
 {
 }

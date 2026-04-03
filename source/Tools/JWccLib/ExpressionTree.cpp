@@ -4,12 +4,12 @@
 
 using namespace WadeSpace;
 
-TreeNode* ExpressionTree::evaluate(ostream& out, void (*process)(ostream& out, TreeNodeData* left, TreeNodeData* right, TreeNodeData* current))
+shared_ptr<TreeNode> ExpressionTree::evaluate(ostream& out, void (*process)(ostream& out, shared_ptr<TreeNodeData> left, shared_ptr<TreeNodeData> right, shared_ptr<TreeNodeData> current))
 {
 	return postOrderTraversal(out, tree, process);
 }
 
-TreeNode* ExpressionTree::postOrderTraversal(ostream& out, TreeNode* node, void (*process)(ostream& out, TreeNodeData* left, TreeNodeData* right, TreeNodeData* current))
+shared_ptr<TreeNode> ExpressionTree::postOrderTraversal(ostream& out, shared_ptr<TreeNode> node, void (*process)(ostream& out, shared_ptr<TreeNodeData> left, shared_ptr<TreeNodeData> right, shared_ptr<TreeNodeData> current))
 {
 	if (node == nullptr)
 		return nullptr;
@@ -21,9 +21,9 @@ TreeNode* ExpressionTree::postOrderTraversal(ostream& out, TreeNode* node, void 
 		}
 		return node;
 	}
-	TreeNode* left = postOrderTraversal(out, node->getLeft(), process);
-	TreeNode* right = postOrderTraversal(out, node->getRight(), process);
-	TreeNodeData* data = node->getData();
+	shared_ptr<TreeNode> left = postOrderTraversal(out, node->getLeft(), process);
+	shared_ptr<TreeNode> right = postOrderTraversal(out, node->getRight(), process);
+	shared_ptr<TreeNodeData> data = node->getData();
 	if (data && process)
 	{
 		(*process)(out, left ? left->getData() : nullptr, right ? right->getData() : nullptr, data);
@@ -33,18 +33,18 @@ TreeNode* ExpressionTree::postOrderTraversal(ostream& out, TreeNode* node, void 
 
 TreeNodeData::TreeNodeData(
 	const NodeType type,
-	const CTokenPtr token1,
-	const CTokenPtr token2,
-	ExpressionTree* const lexp,
-	ExpressionTree* const exp1,
-	ExpressionTree* const exp2,
-	vector<ExpressionTree*>* argumentList,
-	CTokenPtr identifier,
-	vector<Initializer*>* initializerList,
-	TypeName* typeName,
-	CTokenPtr token3,
-	Constant* constant,
-	CTokenPtr op
+	const shared_ptr<CToken> token1,
+	const shared_ptr<CToken> token2,
+	shared_ptr<ExpressionTree> const lexp,
+	shared_ptr<ExpressionTree> const exp1,
+	shared_ptr<ExpressionTree> const exp2,
+	shared_ptr<vector<shared_ptr<ExpressionTree>>> argumentList,
+	shared_ptr<CToken> identifier,
+	shared_ptr<vector<shared_ptr<Initializer>>> initializerList,
+	shared_ptr<TypeName> typeName,
+	shared_ptr<CToken> token3,
+	shared_ptr<Constant> constant,
+	shared_ptr<CToken> op
 )
 {
 	this->type = type;
@@ -62,15 +62,15 @@ TreeNodeData::TreeNodeData(
 	this->op = op;
 }
 
-TreeNode::TreeNode(TreeNodeData* data, TreeNode* left, TreeNode* right)
+TreeNode::TreeNode(shared_ptr<TreeNodeData> data, shared_ptr<TreeNode> left, shared_ptr<TreeNode> right)
 {
 	this->data = data;
 	this->left = left;
 	this->right = right;
 }
 
-ExpressionTree::ExpressionTree(TreeNode* data)
+ExpressionTree::ExpressionTree(shared_ptr<TreeNode> data)
 {
-	stak = new stack<TreeNode*>();
+	stak = new stack<shared_ptr<TreeNode>>();
 	tree = data;
 }

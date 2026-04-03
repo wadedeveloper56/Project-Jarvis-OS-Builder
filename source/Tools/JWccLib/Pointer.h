@@ -13,38 +13,38 @@ namespace WadeSpace
 {
 	class Pointer
 	{
-		CTokenPtr name;
-		vector<TypeQualifier*>* typeQualifierList;
+		shared_ptr<CToken> name;
+		shared_ptr<vector<shared_ptr<TypeQualifier>>> typeQualifierList;
 		int level;
-		Pointer* pointer;
+		shared_ptr<Pointer> pointer;
 	public:
 		Pointer() = default;
-		Pointer(const CTokenPtr name, vector<TypeQualifier*>* typeQualifierList);
-		Pointer(const CTokenPtr name, vector<TypeQualifier*>* typeQualifierList, Pointer* pointer);
-		Pointer(const CTokenPtr name, Pointer* pointer);
-		Pointer(const CTokenPtr name);
+		Pointer(const shared_ptr<CToken> name, shared_ptr<vector<shared_ptr<TypeQualifier>>> typeQualifierList);
+		Pointer(const shared_ptr<CToken> name, shared_ptr<vector<shared_ptr<TypeQualifier>>> typeQualifierList, shared_ptr<Pointer> pointer);
+		Pointer(const shared_ptr<CToken> name, shared_ptr<Pointer> pointer);
+		Pointer(const shared_ptr<CToken> name);
 		virtual ~Pointer() = default;
 		Pointer(const Pointer& other) = default;
 		Pointer(Pointer&& other) noexcept = default;
 		Pointer& operator=(const Pointer& other) = default;
 		Pointer& operator=(Pointer&& other) noexcept = default;
 		void inc();
-		[[nodiscard]] CTokenPtr getName() const { return name; }
-		[[nodiscard]] vector<TypeQualifier*>* getTypeQualifierList() const { return typeQualifierList; }
+		[[nodiscard]] shared_ptr<CToken> getName() const { return name; }
+		[[nodiscard]] shared_ptr<vector<shared_ptr<TypeQualifier>>> getTypeQualifierList() const { return typeQualifierList; }
 		[[nodiscard]] int getLevel() const { return level; }
-		[[nodiscard]] Pointer* getPointer() const { return pointer; }
-		void setName(const CTokenPtr name) { this->name = name; }
-		void setTypeQualifierList(vector<TypeQualifier*>* typeQualifierList) { this->typeQualifierList = typeQualifierList; }
+		[[nodiscard]] shared_ptr<Pointer> getPointer() const { return pointer; }
+		void setName(const shared_ptr<CToken> name) { this->name = name; }
+		void setTypeQualifierList(shared_ptr<vector<shared_ptr<TypeQualifier>>> typeQualifierList) { this->typeQualifierList = typeQualifierList; }
 		void setLevel(int level) { this->level = level; }
-		void setPointer(Pointer* pointer) { this->pointer = pointer; }
+		void setPointer(shared_ptr<Pointer> pointer) { this->pointer = pointer; }
 		[[nodiscard]] bool hasName() const { return name != nullptr; }
 		[[nodiscard]] bool hasTypeQualifierList() const { return typeQualifierList != nullptr; }
 		[[nodiscard]] bool hasPointer() const { return pointer != nullptr; }
-		void addTypeQualifier(TypeQualifier* typeQualifier)
+		void addTypeQualifier(shared_ptr<TypeQualifier> typeQualifier)
 		{
 			if (typeQualifierList == nullptr)
 			{
-				typeQualifierList = new vector<TypeQualifier*>();
+				typeQualifierList = make_shared<vector<shared_ptr<TypeQualifier>>>();
 			}
 			typeQualifierList->push_back(typeQualifier);
 		}

@@ -14,7 +14,7 @@ namespace WadeSpace
 	{
 	public:
 		Statement() = default;
-		Statement(TokenType op, BaseStatement* statement);
+		Statement(TokenType op, shared_ptr<BaseStatement> statement);
 		virtual ~Statement() = default;
 		Statement(const Statement& other) = default;
 		Statement(Statement&& other) noexcept = default;

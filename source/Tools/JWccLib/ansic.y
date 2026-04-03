@@ -94,158 +94,158 @@
 %define api.token.prefix {TOKEN_}
 
 %token END 0 "end of file"
-%token <CTokenPtr> IDENTIFIER  "identifier"
-%token <CTokenPtr> I_CONST "i_const"
-%token <CTokenPtr> F_CONST "f_const"
-%token <CTokenPtr> STRING_LITERAL  "sting_literal"
-%token <CTokenPtr> TYPE_NAME "type name"
-%token <CTokenPtr> AUTO "auto"
-%token <CTokenPtr> BREAK "break"
-%token <CTokenPtr> CASE "case"
-%token <CTokenPtr> CHAR "char"
-%token <CTokenPtr> CONST "const"
-%token <CTokenPtr> CONTINUE "continue"
-%token <CTokenPtr> DEFAULT "default"
-%token <CTokenPtr> DO "do"
-%token <CTokenPtr> DOUBLE "double"
-%token <CTokenPtr> LONG_DOUBLE "long double"
-%token <CTokenPtr> ELSE "else"
-%token <CTokenPtr> ENUM "enum"
-%token <CTokenPtr> EXTERN "extern"
-%token <CTokenPtr> FLOAT "float"
-%token <CTokenPtr> FOR "for"
-%token <CTokenPtr> GOTO "goto"
-%token <CTokenPtr> IF "if"
-%token <CTokenPtr> INLINE "inline"
-%token <CTokenPtr> INT
-%token <CTokenPtr> LONG "long"
-%token <CTokenPtr> LONG_LONG "long long"
-%token <CTokenPtr> REGISTER "register"
-%token <CTokenPtr> RESTRICT "restrict"
-%token <CTokenPtr> RETURN "return"
-%token <CTokenPtr> SHORT "short"
-%token <CTokenPtr> SIGNED "signed"
-%token <CTokenPtr> SIZEOF "sizeof"
-%token <CTokenPtr> STATIC "static"
-%token <CTokenPtr> STRUCT "struct"
-%token <CTokenPtr> SWITCH "switch"
-%token <CTokenPtr> TYPEDEF "typedef"
-%token <CTokenPtr> UNION "union"
-%token <CTokenPtr> UNSIGNED "unsigned"
-%token <CTokenPtr> VOID "void"
-%token <CTokenPtr> VOLATILE "volatile"
-%token <CTokenPtr> WHILE "while"
-%token <CTokenPtr> BOOL "bool"
-%token <CTokenPtr> ELLIPSIS "ellipsis"
-%token <CTokenPtr> QUESTION "question"
-%token <CTokenPtr> SEMICOLON ";"
-%token <CTokenPtr> OCURLY "{"
-%token <CTokenPtr> CCURLY "}"
-%token <CTokenPtr> COMMA ","
-%token <CTokenPtr> COLON ":"
-%token <CTokenPtr> OPAREN "("
-%token <CTokenPtr> CPAREN ")"
-%token <CTokenPtr> OBRACE "["
-%token <CTokenPtr> CBRACE "]"
-%token <CTokenPtr> PERIOD "."
-%token <CTokenPtr> TILDE "~"
-%token <CTokenPtr> EQUAL "="
-%token <CTokenPtr> RIGHT_ASSIGN ">>="
-%token <CTokenPtr> LEFT_ASSIGN "<<="
-%token <CTokenPtr> ADD_ASSIGN "+="
-%token <CTokenPtr> SUB_ASSIGN "-="
-%token <CTokenPtr> MUL_ASSIGN "*="
-%token <CTokenPtr> DIV_ASSIGN "/="
-%token <CTokenPtr> MOD_ASSIGN "%="
-%token <CTokenPtr> AND_ASSIGN "&="
-%token <CTokenPtr> XOR_ASSIGN "^="
-%token <CTokenPtr> OR_ASSIGN "|="
-%token <CTokenPtr> RIGHT_OP ">>"
-%token <CTokenPtr> LEFT_OP "<<"
-%token <CTokenPtr> INC_OP "++"
-%token <CTokenPtr> DEC_OP "--"
-%token <CTokenPtr> PTR_OP "->"
-%token <CTokenPtr> AND_OP "&&"
-%token <CTokenPtr> OR_OP "||"
-%token <CTokenPtr> GREATER_EQUAL ">="
-%token <CTokenPtr> LESS_EQUAL "<="
-%token <CTokenPtr> GREATER ">"
-%token <CTokenPtr> LESS "<"
-%token <CTokenPtr> EQUAL_EQUAL "=="
-%token <CTokenPtr> NOT_EQUAL "!="
-%token <CTokenPtr> NOT_OP "!"
-%token <CTokenPtr> XOR_OP "^"
-%token <CTokenPtr> BIT_AND "&"
-%token <CTokenPtr> BIT_OR "|"
-%token <CTokenPtr> MINUS_OP "-"
-%token <CTokenPtr> PLUS_OP "+"
-%token <CTokenPtr> TIMES_OP "*"
-%token <CTokenPtr> DIV_OP "/"
-%token <CTokenPtr> MOD_OP "%"
+%token <shared_ptr<CToken>> IDENTIFIER  "identifier"
+%token <shared_ptr<CToken>> I_CONST "i_const"
+%token <shared_ptr<CToken>> F_CONST "f_const"
+%token <shared_ptr<CToken>> STRING_LITERAL  "sting_literal"
+%token <shared_ptr<CToken>> TYPE_NAME "type name"
+%token <shared_ptr<CToken>> AUTO "auto"
+%token <shared_ptr<CToken>> BREAK "break"
+%token <shared_ptr<CToken>> CASE "case"
+%token <shared_ptr<CToken>> CHAR "char"
+%token <shared_ptr<CToken>> CONST "const"
+%token <shared_ptr<CToken>> CONTINUE "continue"
+%token <shared_ptr<CToken>> DEFAULT "default"
+%token <shared_ptr<CToken>> DO "do"
+%token <shared_ptr<CToken>> DOUBLE "double"
+%token <shared_ptr<CToken>> LONG_DOUBLE "long double"
+%token <shared_ptr<CToken>> ELSE "else"
+%token <shared_ptr<CToken>> ENUM "enum"
+%token <shared_ptr<CToken>> EXTERN "extern"
+%token <shared_ptr<CToken>> FLOAT "float"
+%token <shared_ptr<CToken>> FOR "for"
+%token <shared_ptr<CToken>> GOTO "goto"
+%token <shared_ptr<CToken>> IF "if"
+%token <shared_ptr<CToken>> INLINE "inline"
+%token <shared_ptr<CToken>> INT
+%token <shared_ptr<CToken>> LONG "long"
+%token <shared_ptr<CToken>> LONG_LONG "long long"
+%token <shared_ptr<CToken>> REGISTER "register"
+%token <shared_ptr<CToken>> RESTRICT "restrict"
+%token <shared_ptr<CToken>> RETURN "return"
+%token <shared_ptr<CToken>> SHORT "short"
+%token <shared_ptr<CToken>> SIGNED "signed"
+%token <shared_ptr<CToken>> SIZEOF "sizeof"
+%token <shared_ptr<CToken>> STATIC "static"
+%token <shared_ptr<CToken>> STRUCT "struct"
+%token <shared_ptr<CToken>> SWITCH "switch"
+%token <shared_ptr<CToken>> TYPEDEF "typedef"
+%token <shared_ptr<CToken>> UNION "union"
+%token <shared_ptr<CToken>> UNSIGNED "unsigned"
+%token <shared_ptr<CToken>> VOID "void"
+%token <shared_ptr<CToken>> VOLATILE "volatile"
+%token <shared_ptr<CToken>> WHILE "while"
+%token <shared_ptr<CToken>> BOOL "bool"
+%token <shared_ptr<CToken>> ELLIPSIS "ellipsis"
+%token <shared_ptr<CToken>> QUESTION "question"
+%token <shared_ptr<CToken>> SEMICOLON ";"
+%token <shared_ptr<CToken>> OCURLY "{"
+%token <shared_ptr<CToken>> CCURLY "}"
+%token <shared_ptr<CToken>> COMMA ","
+%token <shared_ptr<CToken>> COLON ":"
+%token <shared_ptr<CToken>> OPAREN "("
+%token <shared_ptr<CToken>> CPAREN ")"
+%token <shared_ptr<CToken>> OBRACE "["
+%token <shared_ptr<CToken>> CBRACE "]"
+%token <shared_ptr<CToken>> PERIOD "."
+%token <shared_ptr<CToken>> TILDE "~"
+%token <shared_ptr<CToken>> EQUAL "="
+%token <shared_ptr<CToken>> RIGHT_ASSIGN ">>="
+%token <shared_ptr<CToken>> LEFT_ASSIGN "<<="
+%token <shared_ptr<CToken>> ADD_ASSIGN "+="
+%token <shared_ptr<CToken>> SUB_ASSIGN "-="
+%token <shared_ptr<CToken>> MUL_ASSIGN "*="
+%token <shared_ptr<CToken>> DIV_ASSIGN "/="
+%token <shared_ptr<CToken>> MOD_ASSIGN "%="
+%token <shared_ptr<CToken>> AND_ASSIGN "&="
+%token <shared_ptr<CToken>> XOR_ASSIGN "^="
+%token <shared_ptr<CToken>> OR_ASSIGN "|="
+%token <shared_ptr<CToken>> RIGHT_OP ">>"
+%token <shared_ptr<CToken>> LEFT_OP "<<"
+%token <shared_ptr<CToken>> INC_OP "++"
+%token <shared_ptr<CToken>> DEC_OP "--"
+%token <shared_ptr<CToken>> PTR_OP "->"
+%token <shared_ptr<CToken>> AND_OP "&&"
+%token <shared_ptr<CToken>> OR_OP "||"
+%token <shared_ptr<CToken>> GREATER_EQUAL ">="
+%token <shared_ptr<CToken>> LESS_EQUAL "<="
+%token <shared_ptr<CToken>> GREATER ">"
+%token <shared_ptr<CToken>> LESS "<"
+%token <shared_ptr<CToken>> EQUAL_EQUAL "=="
+%token <shared_ptr<CToken>> NOT_EQUAL "!="
+%token <shared_ptr<CToken>> NOT_OP "!"
+%token <shared_ptr<CToken>> XOR_OP "^"
+%token <shared_ptr<CToken>> BIT_AND "&"
+%token <shared_ptr<CToken>> BIT_OR "|"
+%token <shared_ptr<CToken>> MINUS_OP "-"
+%token <shared_ptr<CToken>> PLUS_OP "+"
+%token <shared_ptr<CToken>> TIMES_OP "*"
+%token <shared_ptr<CToken>> DIV_OP "/"
+%token <shared_ptr<CToken>> MOD_OP "%"
 
-%type<Constant *> constant
-%type<vector<ExpressionTree *> *> argument_expression_list
-%type<ExpressionTree *> primary_expression
-%type<ExpressionTree *> expression
-%type<ExpressionTree *> postfix_expression
-%type<ExpressionTree *> unary_expression
-%type<ExpressionTree *> cast_expression
-%type<ExpressionTree *> multiplicative_expression
-%type<ExpressionTree *> additive_expression
-%type<ExpressionTree *> shift_expression
-%type<ExpressionTree *> relational_expression
-%type<ExpressionTree *> equality_expression
-%type<ExpressionTree *> and_expression
-%type<ExpressionTree *> exclusive_or_expression
-%type<ExpressionTree *> inclusive_or_expression
-%type<ExpressionTree *> logical_and_expression
-%type<ExpressionTree *> logical_or_expression
-%type<ExpressionTree *> conditional_expression
-%type<ExpressionTree *> assignment_expression
-%type<ExpressionTree *> constant_expression
-%type<CTokenPtr> unary_operator
-%type<CTokenPtr> assignment_operator
-%type<StorageClassSpecifier *> storage_class_specifier
-%type<TypeSpecifier *> type_specifier
-%type<Enumerator *> enumerator
-%type<std::vector<Enumerator *> *> enumerator_list
-%type<EnumSpecifier *> enum_specifier
-%type<TypeQualifier *> type_qualifier
-%type<std::vector<TypeQualifier *> *> type_qualifier_list
-%type<Pointer *> pointer 
-%type<DeclarationSpecifiers *> declaration_specifiers
-%type<DirectDeclarator *> direct_declarator
-%type<Declarator *> declarator
-%type<DirectAbstractDeclarator *> direct_abstract_declarator
-%type<AbstractDeclarator *> abstract_declarator
-%type<TypeName *> type_name
-%type<SpecifierQualifierList *> specifier_qualifier_list
-%type<std::vector<CTokenPtr> *> identifier_list
-%type<StructDeclarator *> struct_declarator
-%type<std::vector<StructDeclarator *> *> struct_declarator_list
-%type<StructDeclaration *> struct_declaration
-%type<std::vector<StructDeclaration *> *> struct_declaration_list
-%type<CTokenPtr> struct_or_union
-%type<StructOrUnionSpecifier *> struct_or_union_specifier
-%type<Initializer *> initializer
-%type<std::vector<Initializer *> *> initializer_list
-%type<InitDeclarator *> init_declarator
-%type<std::vector<InitDeclarator *> *> init_declarator_list
-%type<Declaration *> declaration
-%type<ParameterDeclaration *> parameter_declaration
-%type<ParameterTypeList *> parameter_type_list
-%type<std::vector<ParameterDeclaration *> *> parameter_list
-%type<BaseStatement *> jump_statement
-%type<std::vector<BaseStatement *> *> statement_list
-%type<BaseStatement *> statement
-%type<BaseStatement *> iteration_statement
-%type<BaseStatement *> selection_statement
-%type<BaseStatement *> expression_statement
-%type<std::vector<Declaration *> *> declaration_list
-%type<BaseStatement *> compound_statement
-%type<LabeledStatement *> labeled_statement
-%type<FunctionDefinition *> function_definition
-%type<ExternalDeclaration *> external_declaration
+%type<shared_ptr<Constant>> constant
+%type<shared_ptr<vector<shared_ptr<ExpressionTree>>>> argument_expression_list
+%type<shared_ptr<ExpressionTree>> primary_expression
+%type<shared_ptr<ExpressionTree>> expression
+%type<shared_ptr<ExpressionTree>> postfix_expression
+%type<shared_ptr<ExpressionTree>> unary_expression
+%type<shared_ptr<ExpressionTree>> cast_expression
+%type<shared_ptr<ExpressionTree>> multiplicative_expression
+%type<shared_ptr<ExpressionTree>> additive_expression
+%type<shared_ptr<ExpressionTree>> shift_expression
+%type<shared_ptr<ExpressionTree>> relational_expression
+%type<shared_ptr<ExpressionTree>> equality_expression
+%type<shared_ptr<ExpressionTree>> and_expression
+%type<shared_ptr<ExpressionTree>> exclusive_or_expression
+%type<shared_ptr<ExpressionTree>> inclusive_or_expression
+%type<shared_ptr<ExpressionTree>> logical_and_expression
+%type<shared_ptr<ExpressionTree>> logical_or_expression
+%type<shared_ptr<ExpressionTree>> conditional_expression
+%type<shared_ptr<ExpressionTree>> assignment_expression
+%type<shared_ptr<ExpressionTree>> constant_expression
+%type<shared_ptr<CToken>> unary_operator
+%type<shared_ptr<CToken>> assignment_operator
+%type<shared_ptr<StorageClassSpecifier>> storage_class_specifier
+%type<shared_ptr<TypeSpecifier>> type_specifier
+%type<shared_ptr<Enumerator>> enumerator
+%type<shared_ptr<vector<shared_ptr<Enumerator>>>> enumerator_list
+%type<shared_ptr<EnumSpecifier>> enum_specifier
+%type<shared_ptr<TypeQualifier>> type_qualifier
+%type<shared_ptr<vector<shared_ptr<TypeQualifier>>>> type_qualifier_list
+%type<shared_ptr<Pointer>> pointer 
+%type<shared_ptr<DeclarationSpecifiers>> declaration_specifiers
+%type<shared_ptr<DirectDeclarator>> direct_declarator
+%type<shared_ptr<Declarator>> declarator
+%type<shared_ptr<DirectAbstractDeclarator>> direct_abstract_declarator
+%type<shared_ptr<AbstractDeclarator>> abstract_declarator
+%type<shared_ptr<TypeName>> type_name
+%type<shared_ptr<SpecifierQualifierList>> specifier_qualifier_list
+%type<shared_ptr<vector<shared_ptr<CToken>>>> identifier_list
+%type<shared_ptr<StructDeclarator>> struct_declarator
+%type<shared_ptr<vector<shared_ptr<StructDeclarator>>>> struct_declarator_list
+%type<shared_ptr<StructDeclaration>> struct_declaration
+%type<shared_ptr<vector<shared_ptr<StructDeclaration>>>> struct_declaration_list
+%type<shared_ptr<CToken>> struct_or_union
+%type<shared_ptr<StructOrUnionSpecifier>> struct_or_union_specifier
+%type<shared_ptr<Initializer>> initializer
+%type<shared_ptr<vector<shared_ptr<Initializer>>>> initializer_list
+%type<shared_ptr<InitDeclarator>> init_declarator
+%type<shared_ptr<vector<shared_ptr<InitDeclarator>>>> init_declarator_list
+%type<shared_ptr<Declaration>> declaration
+%type<shared_ptr<ParameterDeclaration>> parameter_declaration
+%type<shared_ptr<ParameterTypeList>> parameter_type_list
+%type<shared_ptr<vector<shared_ptr<ParameterDeclaration>>>> parameter_list
+%type<shared_ptr<BaseStatement>> jump_statement
+%type<shared_ptr<vector<shared_ptr<BaseStatement>>>> statement_list
+%type<shared_ptr<BaseStatement>> statement
+%type<shared_ptr<BaseStatement>> iteration_statement
+%type<shared_ptr<BaseStatement>> selection_statement
+%type<shared_ptr<BaseStatement>> expression_statement
+%type<shared_ptr<vector<shared_ptr<Declaration>>>> declaration_list
+%type<shared_ptr<BaseStatement>> compound_statement
+%type<shared_ptr<LabeledStatement>> labeled_statement
+%type<shared_ptr<FunctionDefinition>> function_definition
+%type<shared_ptr<ExternalDeclaration>> external_declaration
 
 %nonassoc "then"
 %nonassoc ELSE
@@ -403,12 +403,12 @@ declaration
     ;
 
 declaration_specifiers
-    : storage_class_specifier                         { $$ = createDeclarationSpecifiers($1,nullptr,nullptr,nullptr); cout << "storage_class_specifier REDUCE to declaration_specifiers" << endl;}
-    | storage_class_specifier declaration_specifiers  { $$ = createDeclarationSpecifiers($1,nullptr,nullptr,$2);      cout << "storage_class_specifier declaration_specifiers REDUCE to declaration_specifiers" << endl;}
-    | type_specifier                                  { $$ = createDeclarationSpecifiers(nullptr,$1,nullptr,nullptr); cout << "type_specifier REDUCE to declaration_specifiers" << endl;}
-    | type_specifier declaration_specifiers           { $$ = createDeclarationSpecifiers(nullptr,$1,nullptr,$2);      cout << "type_specifier declaration_specifiers REDUCE to declaration_specifiers" << endl;}
-    | type_qualifier                                  { $$ = createDeclarationSpecifiers(nullptr,nullptr,$1,nullptr); cout << "type_qualifier REDUCE to declaration_specifiers" << endl;}
-    | type_qualifier declaration_specifiers           { $$ = createDeclarationSpecifiers(nullptr,nullptr,$1,$2);      cout << "type_qualifier declaration_specifiers REDUCE to declaration_specifiers" << endl;}
+    : storage_class_specifier                         { $$ = createDeclarationSpecifiers(nullptr,nullptr,$1,nullptr,nullptr,nullptr); cout << "storage_class_specifier REDUCE to declaration_specifiers" << endl;}
+    | storage_class_specifier declaration_specifiers  { $$ = createDeclarationSpecifiers(nullptr,$2,$1,nullptr,nullptr,nullptr);      cout << "storage_class_specifier declaration_specifiers REDUCE to declaration_specifiers" << endl;}
+    | type_specifier                                  { $$ = createDeclarationSpecifiers(nullptr,nullptr,nullptr,$1,nullptr,nullptr); cout << "type_specifier REDUCE to declaration_specifiers" << endl;}
+    | type_specifier declaration_specifiers           { $$ = createDeclarationSpecifiers(nullptr,$2,nullptr,$1,nullptr,nullptr);      cout << "type_specifier declaration_specifiers REDUCE to declaration_specifiers" << endl;}
+    | type_qualifier                                  { $$ = createDeclarationSpecifiers(nullptr,nullptr,nullptr,nullptr,$1,nullptr); cout << "type_qualifier REDUCE to declaration_specifiers" << endl;}
+    | type_qualifier declaration_specifiers           { $$ = createDeclarationSpecifiers(nullptr,$2,nullptr,nullptr,$1,nullptr);      cout << "type_qualifier declaration_specifiers REDUCE to declaration_specifiers" << endl;}
     ;
 
 init_declarator_list
@@ -430,27 +430,27 @@ storage_class_specifier
     ;
 
 type_specifier
-    : VOID                      { $$ = new TypeSpecifier(VOID, $1, nullptr, nullptr, nullptr); cout << "VOID REDUCE to type_specifier" << endl;}
-    | CHAR                      { $$ = new TypeSpecifier(CHAR, $1, nullptr, nullptr, nullptr); cout << "CHAR REDUCE to type_specifier" << endl;}
-    | SHORT                     { $$ = new TypeSpecifier(SHORT, $1, nullptr, nullptr, nullptr); cout << "SHORT REDUCE to type_specifier" << endl;}
-    | INT                       { $$ = new TypeSpecifier(INT, $1, nullptr, nullptr, nullptr); cout << "INT REDUCE to type_specifier" << endl;}
-    | LONG                      { $$ = new TypeSpecifier(LONG, $1, nullptr, nullptr, nullptr); cout << "LONG REDUCE to type_specifier" << endl;}
-    | LONG_LONG                 { $$ = new TypeSpecifier(LONG_LONG, $1, nullptr, nullptr, nullptr); cout << "LONG_LONG REDUCE to type_specifier" << endl;}
-    | FLOAT                     { $$ = new TypeSpecifier(FLOAT, $1, nullptr, nullptr, nullptr); cout << "FLOAT REDUCE to type_specifier" << endl;}
-    | DOUBLE                    { $$ = new TypeSpecifier(DOUBLE, $1, nullptr, nullptr, nullptr); cout << "DOUBLE REDUCE to type_specifier" << endl;}
-    | LONG_DOUBLE               { $$ = new TypeSpecifier(LONG_DOUBLE, $1, nullptr, nullptr, nullptr); cout << "LONG_DOUBLE REDUCE to type_specifier" << endl;}
-    | BOOL                      { $$ = new TypeSpecifier(BOOL, $1, nullptr, nullptr, nullptr); cout << "BOOL REDUCE to type_specifier" << endl;}
-    | SIGNED                    { $$ = new TypeSpecifier(SIGNED, $1, nullptr, nullptr, nullptr); cout << "SIGNED REDUCE to type_specifier" << endl;}
-    | UNSIGNED                  { $$ = new TypeSpecifier(UNSIGNED, $1, nullptr, nullptr, nullptr); cout << "UNIGNED REDUCE to type_specifier" << endl;}
-    | struct_or_union_specifier { $$ = new TypeSpecifier(UNKNOWN, nullptr, $1, nullptr, nullptr); cout << "struct_or_union_specifier REDUCE to type_specifier" << endl;}
-    | enum_specifier            { $$ = new TypeSpecifier(ENUM, nullptr, nullptr, $1, nullptr); cout << "enum_specifier REDUCE to type_specifier" << endl;}
-    | TYPE_NAME                 { $$ = new TypeSpecifier(TYPE_NAME, $1, nullptr, nullptr, nullptr); cout << "TYPE_NAME REDUCE to type_specifier" << endl;}
+    : VOID                      { $$ = make_shared<TypeSpecifier>(VOID, $1, nullptr, nullptr, nullptr); cout << "VOID REDUCE to type_specifier" << endl;}
+    | CHAR                      { $$ = make_shared<TypeSpecifier>(CHAR, $1, nullptr, nullptr, nullptr); cout << "CHAR REDUCE to type_specifier" << endl;}
+    | SHORT                     { $$ = make_shared<TypeSpecifier>(SHORT, $1, nullptr, nullptr, nullptr); cout << "SHORT REDUCE to type_specifier" << endl;}
+    | INT                       { $$ = make_shared<TypeSpecifier>(INT, $1, nullptr, nullptr, nullptr); cout << "INT REDUCE to type_specifier" << endl;}
+    | LONG                      { $$ = make_shared<TypeSpecifier>(LONG, $1, nullptr, nullptr, nullptr); cout << "LONG REDUCE to type_specifier" << endl;}
+    | LONG_LONG                 { $$ = make_shared<TypeSpecifier>(LONG_LONG, $1, nullptr, nullptr, nullptr); cout << "LONG_LONG REDUCE to type_specifier" << endl;}
+    | FLOAT                     { $$ = make_shared<TypeSpecifier>(FLOAT, $1, nullptr, nullptr, nullptr); cout << "FLOAT REDUCE to type_specifier" << endl;}
+    | DOUBLE                    { $$ = make_shared<TypeSpecifier>(DOUBLE, $1, nullptr, nullptr, nullptr); cout << "DOUBLE REDUCE to type_specifier" << endl;}
+    | LONG_DOUBLE               { $$ = make_shared<TypeSpecifier>(LONG_DOUBLE, $1, nullptr, nullptr, nullptr); cout << "LONG_DOUBLE REDUCE to type_specifier" << endl;}
+    | BOOL                      { $$ = make_shared<TypeSpecifier>(BOOL, $1, nullptr, nullptr, nullptr); cout << "BOOL REDUCE to type_specifier" << endl;}
+    | SIGNED                    { $$ = make_shared<TypeSpecifier>(SIGNED, $1, nullptr, nullptr, nullptr); cout << "SIGNED REDUCE to type_specifier" << endl;}
+    | UNSIGNED                  { $$ = make_shared<TypeSpecifier>(UNSIGNED, $1, nullptr, nullptr, nullptr); cout << "UNIGNED REDUCE to type_specifier" << endl;}
+    | struct_or_union_specifier { $$ = make_shared<TypeSpecifier>(UNKNOWN, nullptr, $1, nullptr, nullptr); cout << "struct_or_union_specifier REDUCE to type_specifier" << endl;}
+    | enum_specifier            { $$ = make_shared<TypeSpecifier>(ENUM, nullptr, nullptr, $1, nullptr); cout << "enum_specifier REDUCE to type_specifier" << endl;}
+    | TYPE_NAME                 { $$ = make_shared<TypeSpecifier>(TYPE_NAME, $1, nullptr, nullptr, nullptr); cout << "TYPE_NAME REDUCE to type_specifier" << endl;}
     ;
 
 struct_or_union_specifier
-    : struct_or_union IDENTIFIER OCURLY struct_declaration_list CCURLY   { $$ = new StructOrUnionSpecifier($1,$2,$4); cout << "struct_or_union IDENTIFIER OCURLY struct_declaration_list CCURLY REDUCE to struct_or_union_specifier" << endl;}
-    | struct_or_union OCURLY struct_declaration_list CCURLY              { $$ = new StructOrUnionSpecifier($1,nullptr,$3);  cout << "struct_or_union OCURLY struct_declaration_list CCURLY REDUCE to struct_or_union_specifier" << endl;}
-    | struct_or_union IDENTIFIER                                         { $$ = new StructOrUnionSpecifier($1,$2,nullptr); cout << "struct_or_union IDENTIFIER REDUCE to struct_or_union_specifier" << endl;}
+    : struct_or_union IDENTIFIER OCURLY struct_declaration_list CCURLY   { $$ = make_shared<StructOrUnionSpecifier>($1,$2,$4); cout << "struct_or_union IDENTIFIER OCURLY struct_declaration_list CCURLY REDUCE to struct_or_union_specifier" << endl;}
+    | struct_or_union OCURLY struct_declaration_list CCURLY              { $$ = make_shared<StructOrUnionSpecifier>($1,nullptr,$3);  cout << "struct_or_union OCURLY struct_declaration_list CCURLY REDUCE to struct_or_union_specifier" << endl;}
+    | struct_or_union IDENTIFIER                                         { $$ = make_shared<StructOrUnionSpecifier>($1,$2,nullptr); cout << "struct_or_union IDENTIFIER REDUCE to struct_or_union_specifier" << endl;}
     ;
 
 struct_or_union
@@ -464,14 +464,14 @@ struct_declaration_list
     ;
 
 struct_declaration
-    : specifier_qualifier_list struct_declarator_list SEMICOLON { $$ = new StructDeclaration($1,$2); cout << "specifier_qualifier_list struct_declarator_list SEMICOLON REDUCE to struct_declaration" << endl;}
+    : specifier_qualifier_list struct_declarator_list SEMICOLON { $$ = make_shared<StructDeclaration>($1,$2); cout << "specifier_qualifier_list struct_declarator_list SEMICOLON REDUCE to struct_declaration" << endl;}
     ;
 
 specifier_qualifier_list
-    : type_specifier specifier_qualifier_list { $$ = new SpecifierQualifierList($2,$1); cout << "type_specifier specifier_qualifier_list REDUCE to specifier_qualifier_list" << endl;}
-    | type_specifier                          { $$ = new SpecifierQualifierList($1); cout << "type_specifier REDUCE to specifier_qualifier_list" << endl;}
-    | type_qualifier specifier_qualifier_list { $$ = new SpecifierQualifierList($2,$1); cout << "type_qualifier specifier_qualifier_list REDUCE to specifier_qualifier_list" << endl;}
-    | type_qualifier                          { $$ = new SpecifierQualifierList($1); cout << "type_qualifier REDUCE to specifier_qualifier_list" << endl;}
+    : type_specifier specifier_qualifier_list { $$ = make_shared<SpecifierQualifierList>($2,$1); cout << "type_specifier specifier_qualifier_list REDUCE to specifier_qualifier_list" << endl;}
+    | type_specifier                          { $$ = make_shared<SpecifierQualifierList>($1); cout << "type_specifier REDUCE to specifier_qualifier_list" << endl;}
+    | type_qualifier specifier_qualifier_list { $$ = make_shared<SpecifierQualifierList>($2,$1); cout << "type_qualifier specifier_qualifier_list REDUCE to specifier_qualifier_list" << endl;}
+    | type_qualifier                          { $$ = make_shared<SpecifierQualifierList>($1); cout << "type_qualifier REDUCE to specifier_qualifier_list" << endl;}
     ;
 
 struct_declarator_list
@@ -480,15 +480,15 @@ struct_declarator_list
     ;
 
 struct_declarator
-    : declarator                           { $$ = new StructDeclarator($1); cout << "declarator REDUCE to struct_declarator" << endl;}
-    | COLON constant_expression            { $$ = new StructDeclarator($2); cout << "COLON constant_expression REDUCE to struct_declarator" << endl;}
-    | declarator COLON constant_expression { $$ = new StructDeclarator($1,$3); cout << "declarator COLON constant_expression REDUCE to struct_declarator" << endl;}
+    : declarator                           { $$ = make_shared<StructDeclarator>($1); cout << "declarator REDUCE to struct_declarator" << endl;}
+    | COLON constant_expression            { $$ = make_shared<StructDeclarator>($2); cout << "COLON constant_expression REDUCE to struct_declarator" << endl;}
+    | declarator COLON constant_expression { $$ = make_shared<StructDeclarator>($1,$3); cout << "declarator COLON constant_expression REDUCE to struct_declarator" << endl;}
     ;
 
 enum_specifier
-    : ENUM OCURLY enumerator_list CCURLY             { $$ = new EnumSpecifier(nullptr,$3); cout << "ENUM OCURLY enumerator_list CCURLY REDUCE to enum_specifier" << endl;}
-    | ENUM IDENTIFIER OCURLY enumerator_list CCURLY  { $$ = new EnumSpecifier($2,$4); cout << "ENUM IDENTIFIER OCURLY enumerator_list CCURLY REDUCE to enum_specifier" << endl;}
-    | ENUM IDENTIFIER                                { $$ = new EnumSpecifier($2,nullptr); cout << "ENUM IDENTIFIER REDUCE to enum_specifier" << endl;}
+    : ENUM OCURLY enumerator_list CCURLY             { $$ = make_shared<EnumSpecifier>(nullptr,$3); cout << "ENUM OCURLY enumerator_list CCURLY REDUCE to enum_specifier" << endl;}
+    | ENUM IDENTIFIER OCURLY enumerator_list CCURLY  { $$ = make_shared<EnumSpecifier>($2,$4); cout << "ENUM IDENTIFIER OCURLY enumerator_list CCURLY REDUCE to enum_specifier" << endl;}
+    | ENUM IDENTIFIER                                { $$ = make_shared<EnumSpecifier>($2,nullptr); cout << "ENUM IDENTIFIER REDUCE to enum_specifier" << endl;}
     ;
 
 enumerator_list
@@ -497,13 +497,13 @@ enumerator_list
     ;
 
 enumerator
-    : IDENTIFIER                           { $$ = new Enumerator($1,nullptr); cout << "IDENTIFIER REDUCE to ENUMERATOR" << endl;}
-    | IDENTIFIER EQUAL constant_expression { $$ = new Enumerator($1,$3); cout << "IDENTIFIER EQUAL constant_expression REDUCE to ENUMERATOR" << endl;}
+    : IDENTIFIER                           { $$ = make_shared<Enumerator>($1,nullptr); cout << "IDENTIFIER REDUCE to ENUMERATOR" << endl;}
+    | IDENTIFIER EQUAL constant_expression { $$ = make_shared<Enumerator>($1,$3); cout << "IDENTIFIER EQUAL constant_expression REDUCE to ENUMERATOR" << endl;}
     ;
 
 type_qualifier
-    : CONST    { $$ = new TypeQualifier($1); cout << "CONST REDUCE to type_qualifier" << endl;}
-    | VOLATILE { $$ = new TypeQualifier($1); cout << "VOLATILE REDUCE to type_qualifier" << endl;}
+    : CONST    { $$ = make_shared<TypeQualifier>($1); cout << "CONST REDUCE to type_qualifier" << endl;}
+    | VOLATILE { $$ = make_shared<TypeQualifier>($1); cout << "VOLATILE REDUCE to type_qualifier" << endl;}
     ;
 
 declarator
@@ -522,10 +522,10 @@ direct_declarator
     ;
 
 pointer
-    : TIMES_OP                              {$$ = new Pointer($1); cout << "TIMES_OP REDUCE to POINTER" << endl;}
-    | TIMES_OP type_qualifier_list          {$$ = new Pointer($1,$2); cout << "TIMES_OP type_qualifier_list REDUCE to POINTER" << endl;}
-    | TIMES_OP pointer                      {$$ = new Pointer($1,$2); $$->inc(); cout << "TIMES_OP pointer REDUCE to POINTER" << endl;}
-    | TIMES_OP type_qualifier_list pointer  {$$ = new Pointer($1,$2,$3); $$->inc(); cout << "TIMES_OP type_qualifier_list pointer REDUCE to POINTER" << endl;}
+    : TIMES_OP                              {$$ = make_shared<Pointer>($1); cout << "TIMES_OP REDUCE to POINTER" << endl;}
+    | TIMES_OP type_qualifier_list          {$$ = make_shared<Pointer>($1,$2); cout << "TIMES_OP type_qualifier_list REDUCE to POINTER" << endl;}
+    | TIMES_OP pointer                      {$$ = make_shared<Pointer>($1,$2); $$->inc(); cout << "TIMES_OP pointer REDUCE to POINTER" << endl;}
+    | TIMES_OP type_qualifier_list pointer  {$$ = make_shared<Pointer>($1,$2,$3); $$->inc(); cout << "TIMES_OP type_qualifier_list pointer REDUCE to POINTER" << endl;}
     ;
 
 type_qualifier_list
@@ -534,8 +534,8 @@ type_qualifier_list
     ;
 
 parameter_type_list
-    : parameter_list                  { $$ = new ParameterTypeList($1,false); cout << "parameter_list REDUCE to parameter_type_list" << endl; }
-    | parameter_list COMMA ELLIPSIS   { $$ = new ParameterTypeList($1,true); cout << "parameter_list COMMA ELLIPSIS REDUCE to parameter_type_list" << endl; }
+    : parameter_list                  { $$ = make_shared<ParameterTypeList>($1,false); cout << "parameter_list REDUCE to parameter_type_list" << endl; }
+    | parameter_list COMMA ELLIPSIS   { $$ = make_shared<ParameterTypeList>($1,true); cout << "parameter_list COMMA ELLIPSIS REDUCE to parameter_type_list" << endl; }
     ;
 
 parameter_list
@@ -544,9 +544,9 @@ parameter_list
     ;
 
 parameter_declaration
-    : declaration_specifiers declarator           { $$ = new ParameterDeclaration($1,$2); cout << "declaration_specifiers declarator REDUCE to parameter_declaration" << endl; }
-    | declaration_specifiers abstract_declarator  { $$ = new ParameterDeclaration($1,$2); cout << "declaration_specifiers abstract_declarator REDUCE to parameter_declaration" << endl; }
-    | declaration_specifiers                      { $$ = new ParameterDeclaration($1); cout << "declaration_specifiers REDUCE to parameter_declaration" << endl; }
+    : declaration_specifiers declarator           { $$ = make_shared<ParameterDeclaration>($1,$2); cout << "declaration_specifiers declarator REDUCE to parameter_declaration" << endl; }
+    | declaration_specifiers abstract_declarator  { $$ = make_shared<ParameterDeclaration>($1,$2); cout << "declaration_specifiers abstract_declarator REDUCE to parameter_declaration" << endl; }
+    | declaration_specifiers                      { $$ = make_shared<ParameterDeclaration>($1); cout << "declaration_specifiers REDUCE to parameter_declaration" << endl; }
     ;
 
 identifier_list
@@ -555,14 +555,14 @@ identifier_list
     ;
 
 type_name
-    : specifier_qualifier_list                     { $$ = new TypeName($1); cout << "specifier_qualifier_list REDUCE to type_name" << endl; }
-    | specifier_qualifier_list abstract_declarator { $$ = new TypeName($1,$2); cout << "specifier_qualifier_list abstract_declarator REDUCE to type_name" << endl; }
+    : specifier_qualifier_list                     { $$ = make_shared<TypeName>($1); cout << "specifier_qualifier_list REDUCE to type_name" << endl; }
+    | specifier_qualifier_list abstract_declarator { $$ = make_shared<TypeName>($1,$2); cout << "specifier_qualifier_list abstract_declarator REDUCE to type_name" << endl; }
     ;
 
 abstract_declarator
-    : pointer                             { $$ = new AbstractDeclarator($1,nullptr); cout << "pointer REDUCE to abstract_declarator" << endl; }
-    | direct_abstract_declarator          { $$ = new AbstractDeclarator(nullptr,$1); cout << "direct_abstract_declarator REDUCE to abstract_declarator" << endl; }
-    | pointer direct_abstract_declarator  { $$ = new AbstractDeclarator($1,$2);      cout << "pointer direct_abstract_declarator REDUCE to abstract_declarator" << endl; }
+    : pointer                             { $$ = make_shared<AbstractDeclarator>($1,nullptr); cout << "pointer REDUCE to abstract_declarator" << endl; }
+    | direct_abstract_declarator          { $$ = make_shared<AbstractDeclarator>(nullptr,$1); cout << "direct_abstract_declarator REDUCE to abstract_declarator" << endl; }
+    | pointer direct_abstract_declarator  { $$ = make_shared<AbstractDeclarator>($1,$2);      cout << "pointer direct_abstract_declarator REDUCE to abstract_declarator" << endl; }
     ;
 
 direct_abstract_declarator
@@ -578,9 +578,9 @@ direct_abstract_declarator
     ;
 
 initializer
-    : assignment_expression                { $$ = new Initializer($1); cout << "assignment_expression REDUCE to initializer" << endl; }
-    | OCURLY initializer_list CCURLY       { $$ = new Initializer($2); cout << "OCURLY initializer_list CCURLY REDUCE to initializer" << endl; }
-    | OCURLY initializer_list COMMA CCURLY { $$ = new Initializer($2); cout << "OCURLY initializer_list COMMA CCURLY REDUCE to initializer" << endl; }
+    : assignment_expression                { $$ = make_shared<Initializer>($1); cout << "assignment_expression REDUCE to initializer" << endl; }
+    | OCURLY initializer_list CCURLY       { $$ = make_shared<Initializer>($2); cout << "OCURLY initializer_list CCURLY REDUCE to initializer" << endl; }
+    | OCURLY initializer_list COMMA CCURLY { $$ = make_shared<Initializer>($2); cout << "OCURLY initializer_list COMMA CCURLY REDUCE to initializer" << endl; }
     ;
 
 initializer_list
@@ -589,25 +589,25 @@ initializer_list
     ;
 
 statement
-    : labeled_statement    { $$ = new Statement(labeled_statement,$1); cout << "labeled_statement REDUCE to statement" << endl; }
-    | compound_statement   { $$ = new Statement(compound_statement,$1); cout << "compound_statement REDUCE to statement" << endl; }
-    | expression_statement { $$ = new Statement(expression_statement,$1); cout << "expression_statement REDUCE to statement" << endl; }
-    | selection_statement  { $$ = new Statement(selection_statement,$1); cout << "selection_statement REDUCE to statement" << endl; }
-    | iteration_statement  { $$ = new Statement(iteration_statement,$1); cout << "iteration_statement REDUCE to statement" << endl; }
-    | jump_statement       { $$ = new Statement(jump_statement,$1); cout << "jump_statement REDUCE to statement" << endl; }
+    : labeled_statement    { $$ = make_shared<Statement>(labeled_statement,$1); cout << "labeled_statement REDUCE to statement" << endl; }
+    | compound_statement   { $$ = make_shared<Statement>(compound_statement,$1); cout << "compound_statement REDUCE to statement" << endl; }
+    | expression_statement { $$ = make_shared<Statement>(expression_statement,$1); cout << "expression_statement REDUCE to statement" << endl; }
+    | selection_statement  { $$ = make_shared<Statement>(selection_statement,$1); cout << "selection_statement REDUCE to statement" << endl; }
+    | iteration_statement  { $$ = make_shared<Statement>(iteration_statement,$1); cout << "iteration_statement REDUCE to statement" << endl; }
+    | jump_statement       { $$ = make_shared<Statement>(jump_statement,$1); cout << "jump_statement REDUCE to statement" << endl; }
     ;
 
 labeled_statement
-    : IDENTIFIER COLON statement               { $$ = new LabeledStatement($1,$3); cout << "IDENTIFIER COLON statement REDUCE to label_statement" << endl; }
-    | CASE constant_expression COLON statement { $$ = new LabeledStatement(CASE,$2,$4); cout << "CASE constant_expression COLON statement REDUCE to label_statement" << endl; }
-    | DEFAULT COLON statement                  { $$ = new LabeledStatement(DEFAULT,$3); cout << "DEFAULT COLON statement REDUCE to label_statement" << endl; }
+    : IDENTIFIER COLON statement               { $$ = make_shared<LabeledStatement>($1,$3); cout << "IDENTIFIER COLON statement REDUCE to label_statement" << endl; }
+    | CASE constant_expression COLON statement { $$ = make_shared<LabeledStatement>(CASE,$2,$4); cout << "CASE constant_expression COLON statement REDUCE to label_statement" << endl; }
+    | DEFAULT COLON statement                  { $$ = make_shared<LabeledStatement>(DEFAULT,$3); cout << "DEFAULT COLON statement REDUCE to label_statement" << endl; }
     ;
 
 compound_statement
-    : OCURLY CCURLY                                 { $$ = new CompoundStatement(); cout << "OCURLY CCURLY REDUCE to compound_statement" << endl; }
-    | OCURLY statement_list CCURLY                  { $$ = new CompoundStatement($2); cout << "OCURLY statement_list CCURLY REDUCE to compound_statement" << endl; }
-    | OCURLY declaration_list CCURLY                { $$ = new CompoundStatement($2); cout << "OCURLY declaration_list CCURLY REDUCE to compound_statement" << endl; }
-    | OCURLY declaration_list statement_list CCURLY { $$ = new CompoundStatement($3,$2); cout << "OCURLY declaration_list statement_list CCURLY REDUCE to compound_statement" << endl; }
+    : OCURLY CCURLY                                 { $$ = make_shared<CompoundStatement>(); cout << "OCURLY CCURLY REDUCE to compound_statement" << endl; }
+    | OCURLY statement_list CCURLY                  { $$ = make_shared<CompoundStatement>($2); cout << "OCURLY statement_list CCURLY REDUCE to compound_statement" << endl; }
+    | OCURLY declaration_list CCURLY                { $$ = make_shared<CompoundStatement>($2); cout << "OCURLY declaration_list CCURLY REDUCE to compound_statement" << endl; }
+    | OCURLY declaration_list statement_list CCURLY { $$ = make_shared<CompoundStatement>($3,$2); cout << "OCURLY declaration_list statement_list CCURLY REDUCE to compound_statement" << endl; }
     ;
 
 declaration_list
@@ -621,29 +621,29 @@ statement_list
     ;
 
 expression_statement
-    : SEMICOLON             { $$ = new ExpressionStatement(); cout << "SEMICOLON REDUCE to expression_statement" << endl; }
-    | expression SEMICOLON  { $$ = new ExpressionStatement($1); cout << "expression SEMICOLON REDUCE to expression_statement" << endl; }
+    : SEMICOLON             { $$ = make_shared<ExpressionStatement>(); cout << "SEMICOLON REDUCE to expression_statement" << endl; }
+    | expression SEMICOLON  { $$ = make_shared<ExpressionStatement>($1); cout << "expression SEMICOLON REDUCE to expression_statement" << endl; }
     ;
 
 selection_statement
-    : IF OPAREN expression CPAREN statement  %prec "then"  { $$ = new SelectionStatement(IF,$3,$5); cout << "IF OPAREN expression CPAREN statement REDUCE to selection_statement" << endl; }
-    | IF OPAREN expression CPAREN statement ELSE statement { $$ = new SelectionStatement(IF,$3,$5,$7); cout << "IF OPAREN expression CPAREN statement ELSE statement REDUCE to selection_statement" << endl; }
-    | SWITCH OPAREN expression CPAREN statement            { $$ = new SelectionStatement(SWITCH,$3,$5); cout << "SWITCH OPAREN expression CPAREN statement REDUCE to selection_statement" << endl; }
+    : IF OPAREN expression CPAREN statement  %prec "then"  { $$ = make_shared<SelectionStatement>(IF,$3,$5); cout << "IF OPAREN expression CPAREN statement REDUCE to selection_statement" << endl; }
+    | IF OPAREN expression CPAREN statement ELSE statement { $$ = make_shared<SelectionStatement>(IF,$3,$5,$7); cout << "IF OPAREN expression CPAREN statement ELSE statement REDUCE to selection_statement" << endl; }
+    | SWITCH OPAREN expression CPAREN statement            { $$ = make_shared<SelectionStatement>(SWITCH,$3,$5); cout << "SWITCH OPAREN expression CPAREN statement REDUCE to selection_statement" << endl; }
     ;
 
 iteration_statement
-    : WHILE OPAREN expression CPAREN statement                                         { $$ = new IterationStatement(WHILE,$3,$5); cout << "WHILE OPAREN expression CPAREN statement REDUCE to iteration_statement" << endl; }
-    | DO statement WHILE OPAREN expression CPAREN SEMICOLON                            { $$ = new IterationStatement(DO,$5,$2); cout << "DO statement WHILE OPAREN expression CPAREN SEMICOLON REDUCE to iteration_statement" << endl; }
-    | FOR OPAREN expression_statement expression_statement CPAREN statement            { $$ = new IterationStatement(FOR,$3,$4,$6); cout << "FOR OPAREN expression_statement expression_statement CPAREN statement REDUCE to iteration_statement" << endl; }
-    | FOR OPAREN expression_statement expression_statement expression CPAREN statement { $$ = new IterationStatement(FOR,$3,$4,$5,$7); cout << "FOR OPAREN expression_statement expression_statement expression CPAREN statement REDUCE to iteration_statement" << endl; }
+    : WHILE OPAREN expression CPAREN statement                                         { $$ = make_shared<IterationStatement>(WHILE,$3,$5); cout << "WHILE OPAREN expression CPAREN statement REDUCE to iteration_statement" << endl; }
+    | DO statement WHILE OPAREN expression CPAREN SEMICOLON                            { $$ = make_shared<IterationStatement>(DO,$5,$2); cout << "DO statement WHILE OPAREN expression CPAREN SEMICOLON REDUCE to iteration_statement" << endl; }
+    | FOR OPAREN expression_statement expression_statement CPAREN statement            { $$ = make_shared<IterationStatement>(FOR,$3,$4,$6); cout << "FOR OPAREN expression_statement expression_statement CPAREN statement REDUCE to iteration_statement" << endl; }
+    | FOR OPAREN expression_statement expression_statement expression CPAREN statement { $$ = make_shared<IterationStatement>(FOR,$3,$4,$5,$7); cout << "FOR OPAREN expression_statement expression_statement expression CPAREN statement REDUCE to iteration_statement" << endl; }
     ;
 
 jump_statement
-    : GOTO IDENTIFIER SEMICOLON   { $$ = new JumpStatement(GOTO,$2); cout << "GOTO IDENTIFIER SEMICOLON REDUCE to jump_statement" << endl; }
-    | CONTINUE SEMICOLON          { $$ = new JumpStatement(CONTINUE); cout << "CONTINUE SEMICOLON REDUCE to jump_statement" << endl; }
-    | BREAK SEMICOLON             { $$ = new JumpStatement(BREAK); cout << "BREAK SEMICOLON REDUCE to jump_statement" << endl; }
-    | RETURN SEMICOLON            { $$ = new JumpStatement(RETURN); cout << "RETURN SEMICOLON REDUCE to jump_statement" << endl; }
-    | RETURN expression SEMICOLON { $$ = new JumpStatement(RETURN,$2); cout << "RETURN expression SEMICOLON REDUCE to jump_statement" << endl; }
+    : GOTO IDENTIFIER SEMICOLON   { $$ = make_shared<JumpStatement>(GOTO,$2); cout << "GOTO IDENTIFIER SEMICOLON REDUCE to jump_statement" << endl; }
+    | CONTINUE SEMICOLON          { $$ = make_shared<JumpStatement>(CONTINUE); cout << "CONTINUE SEMICOLON REDUCE to jump_statement" << endl; }
+    | BREAK SEMICOLON             { $$ = make_shared<JumpStatement>(BREAK); cout << "BREAK SEMICOLON REDUCE to jump_statement" << endl; }
+    | RETURN SEMICOLON            { $$ = make_shared<JumpStatement>(RETURN); cout << "RETURN SEMICOLON REDUCE to jump_statement" << endl; }
+    | RETURN expression SEMICOLON { $$ = make_shared<JumpStatement>(RETURN,$2); cout << "RETURN expression SEMICOLON REDUCE to jump_statement" << endl; }
     ;
 
 translation_unit 
@@ -652,15 +652,15 @@ translation_unit
     ;
 
 external_declaration
-    : function_definition  { $$ = new ExternalDeclaration($1); cout << "function_definition REDUCE to external_declaration" << endl; }
-    | declaration          { $$ = new ExternalDeclaration($1); cout << "declaration REDUCE to external_declaration" << endl; }
+    : function_definition  { $$ = make_shared<ExternalDeclaration>($1); cout << "function_definition REDUCE to external_declaration" << endl; }
+    | declaration          { $$ = make_shared<ExternalDeclaration>($1); cout << "declaration REDUCE to external_declaration" << endl; }
     ;
 
 function_definition
-    : declaration_specifiers declarator declaration_list compound_statement { $$ = new FunctionDefinition($1,$2,$3,$4); cout << "declaration_specifiers declarator declaration_list compound_statement REDUCE to function_definition" << endl; }
-    | declaration_specifiers declarator compound_statement                  { $$ = new FunctionDefinition($1,$2,$3); cout << "declaration_specifiers declarator compound_statement REDUCE to function_definition" << endl; }
-    | declarator declaration_list compound_statement                        { $$ = new FunctionDefinition($1,$2,$3); cout << "declarator declaration_list compound_statement REDUCE to function_definition" << endl; }
-    | declarator compound_statement                                         { $$ = new FunctionDefinition($1,$2); cout << "declarator compound_statement REDUCE to function_definition" << endl; }
+    : declaration_specifiers declarator declaration_list compound_statement { $$ = make_shared<FunctionDefinition>($1,$2,$3,$4); cout << "declaration_specifiers declarator declaration_list compound_statement REDUCE to function_definition" << endl; }
+    | declaration_specifiers declarator compound_statement                  { $$ = make_shared<FunctionDefinition>($1,$2,$3); cout << "declaration_specifiers declarator compound_statement REDUCE to function_definition" << endl; }
+    | declarator declaration_list compound_statement                        { $$ = make_shared<FunctionDefinition>($1,$2,$3); cout << "declarator declaration_list compound_statement REDUCE to function_definition" << endl; }
+    | declarator compound_statement                                         { $$ = make_shared<FunctionDefinition>($1,$2); cout << "declarator compound_statement REDUCE to function_definition" << endl; }
     ;
     
 %%

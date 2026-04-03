@@ -5,32 +5,22 @@
 using namespace WadeSpace;
 using namespace std;
 
-FunctionDefinition::FunctionDefinition(DeclarationSpecifiers* declarationSpecifiers, Declarator* declarator,
-                                       vector<Declaration*>* vectorDeclaration,
-                                       BaseStatement* baseStatement) : declarationSpecifiers(declarationSpecifiers),
-                                                                       declarator(declarator),
-                                                                       vectorDeclaration(vectorDeclaration),
-                                                                       baseStatement(baseStatement)
+FunctionDefinition::FunctionDefinition(shared_ptr<DeclarationSpecifiers> declarationSpecifiers, shared_ptr<Declarator> declarator, shared_ptr<vector<shared_ptr<Declaration>>> vectorDeclaration, shared_ptr<BaseStatement> baseStatement) 
+    : declarationSpecifiers(declarationSpecifiers), declarator(declarator), vectorDeclaration(vectorDeclaration), baseStatement(baseStatement)
 {
 }
 
-FunctionDefinition::FunctionDefinition(DeclarationSpecifiers* declarationSpecifiers, Declarator* declarator,
-                                       BaseStatement* baseStatement) : declarationSpecifiers(declarationSpecifiers),
-                                                                       declarator(declarator),
-                                                                       vectorDeclaration(nullptr),
-                                                                       baseStatement(baseStatement)
+FunctionDefinition::FunctionDefinition(shared_ptr<DeclarationSpecifiers> declarationSpecifiers, shared_ptr<Declarator> declarator, shared_ptr<BaseStatement> baseStatement)
+	: declarationSpecifiers(declarationSpecifiers), declarator(declarator), baseStatement(baseStatement), vectorDeclaration(nullptr)
 {
 }
 
-FunctionDefinition::FunctionDefinition(Declarator* declarator, vector<Declaration*>* vectorDeclaration,
-                                       BaseStatement* baseStatement) : declarationSpecifiers(nullptr),
-                                                                       declarator(declarator),
-                                                                       vectorDeclaration(vectorDeclaration),
-                                                                       baseStatement(baseStatement)
+FunctionDefinition::FunctionDefinition(shared_ptr<Declarator> declarator, shared_ptr<vector<shared_ptr<Declaration>>> vectorDeclaration, shared_ptr<BaseStatement> baseStatement)
+	: declarator(declarator), vectorDeclaration(vectorDeclaration), baseStatement(baseStatement), declarationSpecifiers(nullptr)
 {
 }
 
-FunctionDefinition::FunctionDefinition(Declarator* declarator, BaseStatement* baseStatement) :
-	declarationSpecifiers(nullptr), declarator(declarator), vectorDeclaration(nullptr), baseStatement(baseStatement)
+FunctionDefinition::FunctionDefinition(shared_ptr<Declarator> declarator, shared_ptr<BaseStatement> baseStatement)
+	: declarator(declarator), baseStatement(baseStatement), vectorDeclaration(nullptr), declarationSpecifiers(nullptr)
 {
 }

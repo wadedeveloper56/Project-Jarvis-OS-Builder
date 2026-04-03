@@ -3,7 +3,7 @@
 
 using namespace std;
 
-void zapTokData(CTokDataPtr elem)
+void zapTokData(shared_ptr<CTokData> elem)
 {
 	if (elem == nullptr)
 	{
@@ -15,13 +15,13 @@ void zapTokData(CTokDataPtr elem)
 	}
 	else if (elem->code == YC_STRING)
 	{
-		delete[] elem->repr.stringConstant.s;
+		//delete[] elem->repr.stringConstant.s;
 	}
 	else
 	{
-		delete[] elem->repr.symbol.string;
+		//delete[] elem->repr.symbol.string;
 	}
-	delete elem;
+	//delete elem;
 }
 
 string CToken::getSymbolName() const

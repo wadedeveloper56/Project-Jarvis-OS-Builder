@@ -14,7 +14,7 @@ namespace WadeSpace
 	{
 	public:
 		ExpressionStatement() = default;
-		ExpressionStatement(ExpressionTree* exp) : BaseStatement(expression_statement, exp) {}
+		ExpressionStatement(shared_ptr<ExpressionTree> exp) : BaseStatement(TokenType::expression_statement, exp) {}
 		virtual ~ExpressionStatement() = default;
 		ExpressionStatement(const ExpressionStatement& other) = default;
 		ExpressionStatement(ExpressionStatement&& other) noexcept = default;

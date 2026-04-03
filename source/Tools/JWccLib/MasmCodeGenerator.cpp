@@ -12,7 +12,7 @@
 using namespace WadeSpace;
 using namespace std;
 
-MasmCodeGenerator::MasmCodeGenerator(vector<VariableData*>* variableTable, vector<FunctionData*>* functionTable): BaseCodeGenerator(variableTable, functionTable)
+MasmCodeGenerator::MasmCodeGenerator(shared_ptr<vector<shared_ptr<VariableData>>> variableTable, shared_ptr<vector<shared_ptr<FunctionData>>> functionTable): BaseCodeGenerator(variableTable, functionTable)
 {}
 
 string MasmCodeGenerator::vectorToCommaSeparatedList(const vector<string>& vec)
@@ -59,7 +59,7 @@ string MasmCodeGenerator::getAsmType(TokenType type, bool isPointer, bool isUnsi
 	return asmType;
 }
 
-void MasmCodeGenerator::handleFunctionWithParameters(ostream& out, string name, vector<VariableData*>* list)
+void MasmCodeGenerator::handleFunctionWithParameters(ostream& out, string name, shared_ptr<vector<shared_ptr<VariableData>>> list)
 {
 	vector<string> paramList;
 	for (auto ptr : *list)
@@ -79,7 +79,7 @@ void MasmCodeGenerator::handleFunctionWithParameters(ostream& out, string name, 
 	out << "_" << name << " PROC C, " << paramListStr << endl;
 }
 
-void jumpProcess(ostream& out, TreeNodeData* left, TreeNodeData* right, TreeNodeData* current)
+void jumpProcess(ostream& out, shared_ptr<TreeNodeData> left, shared_ptr<TreeNodeData> right, shared_ptr<TreeNodeData> current)
 {
 	if (current != nullptr && left == nullptr && right == nullptr)
 	{
@@ -93,23 +93,23 @@ void jumpProcess(ostream& out, TreeNodeData* left, TreeNodeData* right, TreeNode
 	}
 }
 
-void MasmCodeGenerator::handleIndividualFunctionStatements(ostream	& out, TokenType returnType, BaseStatement const* statements)
+void MasmCodeGenerator::handleIndividualFunctionStatements(ostream	& out, TokenType returnType, shared_ptr<BaseStatement> statements)
 {
-	for (BaseStatement* node : *statements->getStatementList())
+	for (shared_ptr<BaseStatement> node : *statements->getStatementList())
 	{
 		if (node->getOp() == expression_statement)
 		{
-			BaseStatement* base_statement = node->getStatement();
-			ExpressionTree* exp = base_statement->getExp();
+			shared_ptr<BaseStatement> base_statement = node->getStatement();
+			shared_ptr<ExpressionTree> exp = base_statement->getExp();
 			NodeType nt = exp->getData()->getType();
 			if (nt == NT_FUNCTION_CALL)
 			{
-				vector<ExpressionTree*>* parameters = exp->getData()->getArgumentList();
+				shared_ptr<vector<shared_ptr<ExpressionTree>>> parameters = exp->getData()->getArgumentList();
 				string functionName = exp->getLeft()->getData()->getToken3()->getSymbolName();
 				vector<string> list;
 				if (parameters != nullptr)
 				{
-					for (ExpressionTree* node2 : *parameters)
+					for (shared_ptr<ExpressionTree> node2 : *parameters)
 					{
 						string str = to_string(node2->getData()->getConstant()->getIConst()->getIntegerConst());
 						list.push_back(str);
@@ -124,7 +124,7 @@ void MasmCodeGenerator::handleIndividualFunctionStatements(ostream	& out, TokenT
 		}
 		else if (node->getOp() == jump_statement)
 		{
-			BaseStatement* base_statement = node->getStatement();
+			shared_ptr<BaseStatement> base_statement = node->getStatement();
 			TokenType op = base_statement->getOp();
 			switch (op)
 			{
@@ -137,7 +137,7 @@ void MasmCodeGenerator::handleIndividualFunctionStatements(ostream	& out, TokenT
 	}
 }
 
-void MasmCodeGenerator::handleIndividualFunction(ostream& out, FunctionData* ptr)
+void MasmCodeGenerator::handleIndividualFunction(ostream& out, shared_ptr<FunctionData> ptr)
 {
 	auto returnType = ptr->type;
 	auto parameters = ptr->parameters;
@@ -184,7 +184,7 @@ string MasmCodeGenerator::convertToAsmType(bool isUnsigned, bool isPointer, Toke
 	return asmType;
 }
 
-void MasmCodeGenerator::outputVariable(ostream& out, VariableData* ptr)
+void MasmCodeGenerator::outputVariable(ostream& out, shared_ptr<VariableData> ptr)
 {
 	auto type = ptr->type;
 	auto variableName = "_" + ptr->name;
@@ -241,7 +241,7 @@ void MasmCodeGenerator::outputVariable(ostream& out, VariableData* ptr)
 	}
 }
 
-void MasmCodeGenerator::handleInitializedVariable(ostream& out, VariableData* ptr)
+void MasmCodeGenerator::handleInitializedVariable(ostream& out, shared_ptr<VariableData> ptr)
 {
 	if (ptr->initializer != nullptr && ptr->plist == nullptr)
 	{
@@ -249,7 +249,7 @@ void MasmCodeGenerator::handleInitializedVariable(ostream& out, VariableData* pt
 	}
 }
 
-void MasmCodeGenerator::handleUUninitializedVariable(ostream& out, VariableData* ptr)
+void MasmCodeGenerator::handleUUninitializedVariable(ostream& out, shared_ptr<VariableData> ptr)
 {
 	if (ptr->initializer == nullptr && ptr->plist == nullptr)
 	{
@@ -273,7 +273,7 @@ void MasmCodeGenerator::handleVariableTable(ostream& out)
 
 void MasmCodeGenerator::handleFunctionTablePrototypes(ostream& out)
 {
-	for (FunctionData* ptr : *functionTable)
+	for (shared_ptr<FunctionData> ptr : *functionTable)
 	{
 		auto returnType = ptr->type;
 		auto parameters = ptr->parameters;
@@ -308,7 +308,7 @@ void MasmCodeGenerator::handleFunctionTable(ostream& out)
 {
 	out << endl << ".code" << endl;
 	handleFunctionTablePrototypes(out);
-	for (FunctionData* ptr : *functionTable)
+	for (shared_ptr<FunctionData> ptr : *functionTable)
 	{
 		out << endl;
 		handleIndividualFunction(out, ptr);
@@ -351,25 +351,25 @@ void MasmCodeGenerator::handleStructs(ostream& out)
 */
 void MasmCodeGenerator::handlePrototype(ostream& out)
 {
-	for (auto ptr : *variableTable)
+	for (shared_ptr<VariableData> ptr : *variableTable)
 	{
 		if (ptr->plist != nullptr)
 		{
 			vector<string> paramList;
-			for (ParameterDeclaration* node : *ptr->plist->getVectorParameterDeclaration())
+			for (shared_ptr<ParameterDeclaration> node : *ptr->plist->getVectorParameterDeclaration())
 			{
-				DeclarationSpecifiers* temp1 = node->getDeclarationSpecifiers();
-				Declarator* temp2 = node->getDeclarator();
-				vector<DeclarationSpecifiersNode*>* temp3 = temp1->getDeclarationSpecifiersNodeList();
+				shared_ptr<DeclarationSpecifiers> temp1 = node->getDeclarationSpecifiers();
+				shared_ptr<Declarator> temp2 = node->getDeclarator();
+				shared_ptr<vector<shared_ptr<DeclarationSpecifiersNode>>> temp3 = temp1->getDeclarationSpecifiersNodeList();
 
 				auto name = temp2->getDirectDeclarator()->getIdentifier()->getSymbolName();
 				bool isUnsigned = false;
 				TokenType type = UNKNOWN;
 				bool isPointer = temp2->hasPointer();
 
-				for (DeclarationSpecifiersNode* node2 : *temp3)
+				for (shared_ptr<DeclarationSpecifiersNode> node2 : *temp3)
 				{
-					TokenType temp = node2->typeSpecifier->getType().value();
+					TokenType temp = node2->getTypeSpecifier()->getType().value();
 					if (temp == CHAR || temp == BOOL) type = temp;
 					else if (temp == SHORT) type = temp;
 					else if (temp == INT) type = temp;

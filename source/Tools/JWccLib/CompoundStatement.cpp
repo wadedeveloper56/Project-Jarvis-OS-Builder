@@ -4,14 +4,14 @@
 using namespace WadeSpace;
 using namespace std;
 
-CompoundStatement::CompoundStatement(vector<BaseStatement*>* const list) : BaseStatement(list)
+CompoundStatement::CompoundStatement(shared_ptr<vector<shared_ptr<BaseStatement>>> list) : BaseStatement(list)
 {
 } 
 
-CompoundStatement::CompoundStatement(vector<Declaration*>* list) : BaseStatement(list)
+CompoundStatement::CompoundStatement(shared_ptr<vector<shared_ptr<Declaration>>> list) : BaseStatement(list)
 {
 }
 
-CompoundStatement::CompoundStatement(vector<BaseStatement*>* sList, vector<Declaration*>* dList) : BaseStatement(sList, dList)
+CompoundStatement::CompoundStatement(shared_ptr<vector<shared_ptr<BaseStatement>>> sList, shared_ptr<vector<shared_ptr<Declaration>>> dList) : BaseStatement(sList, dList)
 {
 }

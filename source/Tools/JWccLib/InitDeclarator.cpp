@@ -3,17 +3,17 @@
 
 using namespace WadeSpace;
 
-InitDeclarator::InitDeclarator(Declarator* declarator) : declarator(declarator), initializer(nullptr)
+InitDeclarator::InitDeclarator(shared_ptr<Declarator> declarator) : declarator(declarator), initializer(nullptr)
 {
 }
 
-InitDeclarator::InitDeclarator(Declarator* declarator, Initializer* initializer) : declarator(declarator), initializer(initializer)
+InitDeclarator::InitDeclarator(shared_ptr<Declarator> declarator, shared_ptr<Initializer> initializer) : declarator(declarator), initializer(initializer)
 {
 }
 
 string InitDeclarator::getVariableName() const
 {
-	CTokenPtr identifier = getDeclarator()->getDirectDeclarator()->getIdentifier();
+	shared_ptr<CToken> identifier = getDeclarator()->getDirectDeclarator()->getIdentifier();
 	if (!identifier) identifier = getDeclarator()->getDirectDeclarator()->getDirectDeclarator()->getIdentifier();
 	return (identifier) ? identifier->getSymbolName() : "";
 }

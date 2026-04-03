@@ -3,6 +3,6 @@
 
 using namespace WadeSpace;
 
-BaseCodeGenerator::BaseCodeGenerator(vector<VariableData*>* const variable_table, vector<FunctionData*>* const function_table) : variableTable(variable_table),	functionTable(function_table)
+BaseCodeGenerator::BaseCodeGenerator(shared_ptr<vector<shared_ptr<VariableData>>> variable_table, shared_ptr<vector<shared_ptr<FunctionData>>> function_table) : variableTable(variable_table),	functionTable(function_table)
 {
 }

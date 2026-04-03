@@ -12,19 +12,19 @@ namespace WadeSpace
 {
 	class Declaration
 	{
-		DeclarationSpecifiers* declarationSpecifiers;
-		vector<InitDeclarator*>* vectorInitDeclarator;
+		shared_ptr<DeclarationSpecifiers> declarationSpecifiers;
+		shared_ptr<vector<shared_ptr<InitDeclarator>>> vectorInitDeclarator;
 	public:
 		Declaration() = default;
-		Declaration(DeclarationSpecifiers* declarationSpecifiers);
-		Declaration(DeclarationSpecifiers* declarationSpecifiers, vector<InitDeclarator*>* vectorInitDeclarator);
+		Declaration(shared_ptr<DeclarationSpecifiers> declarationSpecifiers);
+		Declaration(shared_ptr<DeclarationSpecifiers> declarationSpecifiers, shared_ptr<vector<shared_ptr<InitDeclarator>>> vectorInitDeclarator);
 		virtual ~Declaration() = default;
-		[[nodiscard]] DeclarationSpecifiers* getDeclarationSpecifiers() const { return declarationSpecifiers; }
-		[[nodiscard]] vector<InitDeclarator*>* getVectorInitDeclarator() const { return vectorInitDeclarator; }
-		void addInitDeclarator(InitDeclarator* initDeclarator) { vectorInitDeclarator->push_back(initDeclarator); }
+		[[nodiscard]] shared_ptr<DeclarationSpecifiers> getDeclarationSpecifiers() const { return declarationSpecifiers; }
+		[[nodiscard]] shared_ptr<vector<shared_ptr<InitDeclarator>>> getVectorInitDeclarator() const { return vectorInitDeclarator; }
+		void addInitDeclarator(shared_ptr<InitDeclarator> initDeclarator) { vectorInitDeclarator->push_back(initDeclarator); }
 		[[nodiscard]] bool hasDeclarationSpecifiers() const { return declarationSpecifiers != nullptr; }
 		[[nodiscard]] bool hasVectorInitDeclarator() const { return vectorInitDeclarator != nullptr; }
-		void setDeclarationSpecifiers(DeclarationSpecifiers* declarationSpecifiers) { this->declarationSpecifiers = declarationSpecifiers; }
-		void setVectorInitDeclarator(vector<InitDeclarator*>* vectorInitDeclarator) { this->vectorInitDeclarator = vectorInitDeclarator; }
+		void setDeclarationSpecifiers(shared_ptr<DeclarationSpecifiers> declarationSpecifiers) { this->declarationSpecifiers = declarationSpecifiers; }
+		void setVectorInitDeclarator(shared_ptr<vector<shared_ptr<InitDeclarator>>> vectorInitDeclarator) { this->vectorInitDeclarator = vectorInitDeclarator; }
 	};
 }

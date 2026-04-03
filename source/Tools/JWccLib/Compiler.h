@@ -36,5 +36,8 @@ namespace WadeSpace
 		[[nodiscard]] bool hasTypedef(const string& name) const { return typedefList->find(name) != typedefList->end(); }
 		[[nodiscard]] bool hasFunction(const string& name) const { return functionList->find(name) != functionList->end(); }
 		[[nodiscard]] bool hasStruct(const string& name) const { return structList->find(name) != structList->end(); }
+		void addTypedef(const string& name, shared_ptr<Declaration> declaration) { typedefList->insert({ name, declaration }); }
+		void addFunction(const string& name, shared_ptr<FunctionDefinition> function) { functionList->insert({ name, function }); }
+		void addStruct(const string& name, shared_ptr<StructOrUnionSpecifier> structSpecifier) { structList->insert({ name, structSpecifier }); }	
 	};
 }

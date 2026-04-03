@@ -3,7 +3,7 @@
 
 using namespace WadeSpace;
 
-AbstractDeclarator::AbstractDeclarator(Pointer* pointer, DirectAbstractDeclarator* directAbstractDeclarator)
+AbstractDeclarator::AbstractDeclarator(shared_ptr<Pointer> pointer, shared_ptr<DirectAbstractDeclarator> directAbstractDeclarator)
 {
 	this->pointer = pointer;
 	this->directAbstractDeclarator = directAbstractDeclarator;

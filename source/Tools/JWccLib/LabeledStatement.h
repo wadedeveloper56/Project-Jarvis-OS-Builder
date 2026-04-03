@@ -11,9 +11,9 @@ namespace WadeSpace
 	{
 	public:
 		LabeledStatement() = default;
-		LabeledStatement(CTokenPtr identifier, BaseStatement* statement);
-		LabeledStatement(TokenType op, ExpressionTree* exp, BaseStatement* statement);
-		LabeledStatement(TokenType op, BaseStatement* statement);
+		LabeledStatement(shared_ptr<CToken> identifier, shared_ptr<BaseStatement> statement);
+		LabeledStatement(TokenType op, shared_ptr<ExpressionTree> exp, shared_ptr<BaseStatement> statement);
+		LabeledStatement(TokenType op, shared_ptr<BaseStatement> statement);
 		virtual ~LabeledStatement() = default;
 		LabeledStatement(const LabeledStatement& other) = default;
 		LabeledStatement(LabeledStatement&& other) noexcept = default;

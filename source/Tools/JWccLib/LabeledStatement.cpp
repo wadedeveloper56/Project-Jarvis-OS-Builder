@@ -4,14 +4,14 @@
 using namespace WadeSpace;
 using namespace std;
 
-LabeledStatement::LabeledStatement(CTokenPtr identifier, BaseStatement* statement) : BaseStatement(identifier, statement)
+LabeledStatement::LabeledStatement(shared_ptr<CToken> identifier, shared_ptr<BaseStatement> statement) : BaseStatement(identifier, statement)
 {
 }
 
-LabeledStatement::LabeledStatement(TokenType op, ExpressionTree* exp, BaseStatement* statement) : BaseStatement(op, exp, statement)
+LabeledStatement::LabeledStatement(TokenType op, shared_ptr<ExpressionTree> exp, shared_ptr<BaseStatement> statement) : BaseStatement(op, exp, statement)
 {
 }
 
-LabeledStatement::LabeledStatement(TokenType op, BaseStatement* statement) : BaseStatement(op, statement)
+LabeledStatement::LabeledStatement(TokenType op, shared_ptr<BaseStatement> statement) : BaseStatement(op, statement)
 {
 }

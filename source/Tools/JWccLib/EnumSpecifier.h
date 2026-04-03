@@ -10,27 +10,27 @@ namespace WadeSpace
 {
 	class EnumSpecifier
 	{
-		CTokenPtr  nameStr;
-		vector<Enumerator*>* vectorEnumerator;
+		shared_ptr<CToken>  nameStr;
+		shared_ptr<vector<shared_ptr<Enumerator>>> vectorEnumerator;
 	public:
 		EnumSpecifier() = default;
-		EnumSpecifier(CTokenPtr nameStr, vector<Enumerator*>* vectorEnumerator);
+		EnumSpecifier(shared_ptr<CToken> nameStr, shared_ptr<vector<shared_ptr<Enumerator>>> vectorEnumerator);
 		virtual ~EnumSpecifier() = default;
 		EnumSpecifier(const EnumSpecifier& other) = default;
 		EnumSpecifier(EnumSpecifier&& other) noexcept = default;
 		EnumSpecifier& operator=(const EnumSpecifier& other) = default;
 		EnumSpecifier& operator=(EnumSpecifier&& other) noexcept = default;
-		[[nodiscard]] CTokenPtr getNameStr() const { return nameStr; }
-		[[nodiscard]] vector<Enumerator*>* getVectorEnumerator() const { return vectorEnumerator; }
+		[[nodiscard]] shared_ptr<CToken> getNameStr() const { return nameStr; }
+		[[nodiscard]] shared_ptr<vector<shared_ptr<Enumerator>>> getVectorEnumerator() const { return vectorEnumerator; }
 		[[nodiscard]] bool hasNameStr() const { return nameStr != nullptr; }
 		[[nodiscard]] bool hasVectorEnumerator() const { return vectorEnumerator != nullptr; }
-		void setNameStr(CTokenPtr nameStr) { this->nameStr = nameStr; }
-		void setVectorEnumerator(vector<Enumerator*>* vectorEnumerator) { this->vectorEnumerator = vectorEnumerator; }
-		void addEnumerator(Enumerator* enumerator)
+		void setNameStr(shared_ptr<CToken> nameStr) { this->nameStr = nameStr; }
+		void setVectorEnumerator(shared_ptr<vector<shared_ptr<Enumerator>>> vectorEnumerator) { this->vectorEnumerator = vectorEnumerator; }
+		void addEnumerator(shared_ptr<Enumerator> enumerator)
 		{
 			if (vectorEnumerator == nullptr)
 			{
-				vectorEnumerator = new vector<Enumerator*>();
+				vectorEnumerator = make_shared<vector<shared_ptr<Enumerator>>>();
 			}
 			vectorEnumerator->push_back(enumerator);
 		}

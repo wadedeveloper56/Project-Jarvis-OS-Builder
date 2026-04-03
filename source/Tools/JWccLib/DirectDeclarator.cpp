@@ -8,14 +8,14 @@ using namespace WadeSpace;
 using namespace std;
 
 DirectDeclarator::DirectDeclarator(
-	CTokenPtr identifier,
-	CTokenPtr token1,
-	CTokenPtr token2,
-	Declarator* const declarator,
-	DirectDeclarator* const directDeclarator,
-	ExpressionTree* const constantExpression,
-	ParameterTypeList* const parameterTypeList,
-	vector<CTokenPtr>* const vectorOfStrings)
+	shared_ptr<CToken> identifier,
+	shared_ptr<CToken> token1,
+	shared_ptr<CToken> token2,
+	shared_ptr<Declarator> declarator,
+	shared_ptr<DirectDeclarator> directDeclarator,
+	shared_ptr<ExpressionTree> constantExpression,
+	shared_ptr<ParameterTypeList> parameterTypeList,
+	shared_ptr<vector<shared_ptr<CToken>>> vectorOfStrings)
 	: identifier(identifier),
 	  token1(token1),
 	  token2(token2),

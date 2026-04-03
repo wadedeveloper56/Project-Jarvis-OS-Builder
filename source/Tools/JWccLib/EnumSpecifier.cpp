@@ -5,6 +5,6 @@
 
 using namespace WadeSpace;
 
-EnumSpecifier::EnumSpecifier(CTokenPtr nameStr, vector<Enumerator*>* vectorEnumerator) : nameStr(nameStr),vectorEnumerator(vectorEnumerator)
+EnumSpecifier::EnumSpecifier(shared_ptr<CToken> nameStr, shared_ptr<vector<shared_ptr<Enumerator>>> vectorEnumerator) : nameStr(nameStr),vectorEnumerator(vectorEnumerator)
 {
 }
