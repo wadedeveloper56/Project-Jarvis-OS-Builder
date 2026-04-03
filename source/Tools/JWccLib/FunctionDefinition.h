@@ -31,7 +31,6 @@ namespace WadeSpace
 		FunctionDefinition(FunctionDefinition&& other) noexcept = default;
 		FunctionDefinition& operator=(const FunctionDefinition& other) = default;
 		FunctionDefinition& operator=(FunctionDefinition&& other) noexcept = default;
-		void addDeclaration(shared_ptr<Declaration> declaration) { vectorDeclaration->push_back(declaration); }
 		[[nodiscard]] shared_ptr<DeclarationSpecifiers> getDeclarationSpecifiers() const { return declarationSpecifiers; }
 		[[nodiscard]] shared_ptr<Declarator> getDeclarator() const { return declarator; }
 		[[nodiscard]] shared_ptr<vector<shared_ptr<Declaration>>> getVectorDeclaration() const { return vectorDeclaration; }
@@ -44,5 +43,13 @@ namespace WadeSpace
 		void setDeclarator(shared_ptr<Declarator> declarator) { this->declarator = declarator; }
 		void setVectorDeclaration(shared_ptr<vector<shared_ptr<Declaration>>> vectorDeclaration) { this->vectorDeclaration = vectorDeclaration; }
 		void setBaseStatement(shared_ptr<BaseStatement> baseStatement) { this->baseStatement = baseStatement; }
+		void addDeclaration(shared_ptr<Declaration> declaration)
+		{
+			if (vectorDeclaration == nullptr)
+			{
+				vectorDeclaration = make_shared<vector<shared_ptr<Declaration>>>();
+			}
+			vectorDeclaration->push_back(declaration);
+		}
 	};
 }

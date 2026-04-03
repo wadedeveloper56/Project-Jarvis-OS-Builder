@@ -94,6 +94,14 @@ namespace WadeSpace
 		[[nodiscard]] shared_ptr<CToken> getFConst() const { return constant ? constant->getFConst() : nullptr; }
 		[[nodiscard]] shared_ptr<CToken> getStrConst() const { return constant ? constant->getStrConst() : nullptr; }
 		[[nodiscard]] optional<TokenType> getTokenType() const { return constant ? constant->getType() : nullopt; }
+		void addArgument(shared_ptr<ExpressionTree> argument)
+		{
+			if (!argumentList)
+			{
+				argumentList = make_shared<vector<shared_ptr<ExpressionTree>>>();
+			}
+			argumentList->push_back(argument);
+		}
 	};
 
 	class TreeNode
@@ -127,7 +135,7 @@ namespace WadeSpace
 	public:
 		ExpressionTree() = default;
 		ExpressionTree(shared_ptr<TreeNode> data);
-		~ExpressionTree() = default;
+		virtual ~ExpressionTree() = default;
 		ExpressionTree(const ExpressionTree& other) = default;
 		ExpressionTree(ExpressionTree&& other) noexcept = default;
 		ExpressionTree& operator=(const ExpressionTree& other) = default;

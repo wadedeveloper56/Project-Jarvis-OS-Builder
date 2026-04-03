@@ -17,7 +17,7 @@ namespace WadeSpace
 		CompoundStatement(shared_ptr<vector<shared_ptr<BaseStatement>>> list);
 		CompoundStatement(shared_ptr<vector<shared_ptr<Declaration>>> list);
 		CompoundStatement(shared_ptr<vector<shared_ptr<BaseStatement>>> sList, shared_ptr<vector<shared_ptr<Declaration>>> dList);
-		~CompoundStatement() override = default;
+		virtual ~CompoundStatement() override = default;
 
 		CompoundStatement(const CompoundStatement& other) = default;
 		CompoundStatement(CompoundStatement&& other) noexcept = default;

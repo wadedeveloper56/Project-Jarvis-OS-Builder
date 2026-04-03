@@ -14,7 +14,7 @@ namespace WadeSpace
 	public:
 		DeclarationSpecifiersNode() = default;
 		DeclarationSpecifiersNode(shared_ptr<StorageClassSpecifier> storageClassSpecifier, shared_ptr<TypeSpecifier> typeSpecifier, shared_ptr<TypeQualifier> const typeQualifier);
-		~DeclarationSpecifiersNode() = default;
+		virtual ~DeclarationSpecifiersNode() = default;
 		DeclarationSpecifiersNode(const DeclarationSpecifiersNode& other) = default;
 		DeclarationSpecifiersNode(DeclarationSpecifiersNode&& other) noexcept = default;
 		DeclarationSpecifiersNode& operator=(const DeclarationSpecifiersNode& other) = default;

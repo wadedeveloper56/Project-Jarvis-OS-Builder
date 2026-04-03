@@ -25,7 +25,7 @@ namespace WadeSpace
 		shared_ptr<ParameterTypeList> plist;
 
 		VariableData() = default;
-		~VariableData() = default;
+		virtual ~VariableData() = default;
 		VariableData(const VariableData& other) = default;
 		VariableData(VariableData&& other) noexcept = default;
 		VariableData& operator=(const VariableData& other) = default;
@@ -41,7 +41,7 @@ namespace WadeSpace
 		shared_ptr<BaseStatement> statements;
 
 		FunctionData() = default;
-		~FunctionData() = default;
+		virtual ~FunctionData() = default;
 		FunctionData(const FunctionData& other) = default;
 		FunctionData(FunctionData&& other) noexcept = default;
 		FunctionData& operator=(const FunctionData& other) = default;

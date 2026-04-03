@@ -21,10 +21,10 @@ namespace WadeSpace
 		virtual ~Declaration() = default;
 		[[nodiscard]] shared_ptr<DeclarationSpecifiers> getDeclarationSpecifiers() const { return declarationSpecifiers; }
 		[[nodiscard]] shared_ptr<vector<shared_ptr<InitDeclarator>>> getVectorInitDeclarator() const { return vectorInitDeclarator; }
-		void addInitDeclarator(shared_ptr<InitDeclarator> initDeclarator) { vectorInitDeclarator->push_back(initDeclarator); }
 		[[nodiscard]] bool hasDeclarationSpecifiers() const { return declarationSpecifiers != nullptr; }
 		[[nodiscard]] bool hasVectorInitDeclarator() const { return vectorInitDeclarator != nullptr; }
 		void setDeclarationSpecifiers(shared_ptr<DeclarationSpecifiers> declarationSpecifiers) { this->declarationSpecifiers = declarationSpecifiers; }
 		void setVectorInitDeclarator(shared_ptr<vector<shared_ptr<InitDeclarator>>> vectorInitDeclarator) { this->vectorInitDeclarator = vectorInitDeclarator; }
+		void addInitDeclarator(shared_ptr<InitDeclarator> initDeclarator) { this->vectorInitDeclarator = make_shared<vector<shared_ptr<InitDeclarator>>>(); this->vectorInitDeclarator->push_back(initDeclarator); }
 	};
 }
