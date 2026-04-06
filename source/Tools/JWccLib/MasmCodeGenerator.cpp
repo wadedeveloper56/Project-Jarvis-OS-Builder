@@ -315,11 +315,10 @@ void MasmCodeGenerator::handleFunctionTable(ostream& out)
 	}
 }
 
-/*
 void MasmCodeGenerator::handleStructs(ostream& out)
 {
-	map<string, StructOrUnionSpecifier*>* temp = compiler->getStructList();
-	for (map<string, StructOrUnionSpecifier*>::iterator iterator = temp->begin(); iterator != temp->end(); ++iterator)
+	shared_ptr<map<string, shared_ptr<StructOrUnionSpecifier>>> temp = compiler->getStructList();
+	for (map<string, shared_ptr<StructOrUnionSpecifier>>::iterator iterator = temp->begin(); iterator != temp->end(); ++iterator)
 	{
 		auto key = iterator->first;
 		auto value = iterator->second;
@@ -327,7 +326,7 @@ void MasmCodeGenerator::handleStructs(ostream& out)
 		auto name = suSpec->getName()->getSymbolName();
 		auto vars = suSpec->getVectorStructDeclaration();
 		out << name << (value->getStructOrUnion()->getKeywordName()=="struct" ? " STRUCT" : " UNION") << endl;
-		for (StructDeclaration* var : *vars)
+		for (shared_ptr<StructDeclaration> var : *vars)
 		{
 			auto type = var->getSpecifierQualifierList()->getTypeSpecifier()->getType().value();
 			auto structDecl = var->getVectorStructDeclarator();
@@ -348,7 +347,7 @@ void MasmCodeGenerator::handleStructs(ostream& out)
 
 	}
 }
-*/
+
 void MasmCodeGenerator::handlePrototype(ostream& out)
 {
 	for (shared_ptr<VariableData> ptr : *variableTable)
@@ -417,7 +416,7 @@ void MasmCodeGenerator::generateCode(ostream& out)
 	out << endl;
 	handlePrototype(out);
 	out << endl;
-//	handleStructs(out);
+	handleStructs(out);
 	out << endl;
 	handleVariableTable(out);
 	handleFunctionTable(out);

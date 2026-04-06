@@ -40,5 +40,14 @@ namespace WadeSpace
 		void addFunction(const string& name, shared_ptr<FunctionDefinition> function) { functionList->insert({ name, function }); }
 		void addStruct(const string& name, shared_ptr<StructOrUnionSpecifier> structSpecifier) { structList->insert({ name, structSpecifier }); }	
 		void addExternalDeclaration(shared_ptr<ExternalDeclaration> externalDeclaration) { programData->addExternalDeclaration(externalDeclaration); }
+		shared_ptr<StructOrUnionSpecifier> findStruct(const string& name) const
+		{
+			auto it = structList->find(name);
+			if (it != structList->end())
+			{
+				return it->second;
+			}
+			return nullptr;
+		}
 	};
 }

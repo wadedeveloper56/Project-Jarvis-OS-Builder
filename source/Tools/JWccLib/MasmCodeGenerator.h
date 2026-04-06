@@ -31,7 +31,7 @@ namespace WadeSpace
 		void handleUUninitializedVariable(ostream& out, shared_ptr<VariableData> ptr);
 		void handleVariableTable(ostream& out);
 		void handleFunctionTable(ostream& out);
-		//void handleStructs(ostream& out);
+		void handleStructs(ostream& out);
 		void outputVariable(ostream& out, shared_ptr<VariableData> ptr);
 		void handleFunctionWithParameters(ostream& out, string name, shared_ptr<vector<shared_ptr<VariableData>>> list);
 		void handleIndividualFunctionStatements(ostream& out, TokenType returnType, shared_ptr<BaseStatement> statements);
