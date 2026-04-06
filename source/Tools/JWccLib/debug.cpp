@@ -74,7 +74,7 @@ void handleDeclaration(shared_ptr<ExternalDeclaration> externalDeclaration)
 
 void createTranslationUnit(shared_ptr<ExternalDeclaration> externalDeclaration)
 {
-	//compiler->addExternalDeclaration(externalDeclaration);
+	compiler->addExternalDeclaration(externalDeclaration);
 }
 
 shared_ptr<vector<shared_ptr<BaseStatement>>> createStatementList(shared_ptr<BaseStatement> statement, shared_ptr<vector<shared_ptr<BaseStatement>>> list)

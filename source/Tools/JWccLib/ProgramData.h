@@ -31,7 +31,7 @@ namespace WadeSpace
 		void setProgram(shared_ptr<vector<shared_ptr<ExternalDeclaration>>> program) { this->program = program; }
 
 	private:
-		void handleDeclaration(shared_ptr<ExternalDeclaration> declaration, shared_ptr<vector<shared_ptr<VariableData>>> variableTable);
+		void handleDeclaration(shared_ptr<Declaration> declaration, shared_ptr<vector<shared_ptr<VariableData>>> variableTable);
 		void handleFunction(shared_ptr<FunctionDefinition> declaration, shared_ptr < vector < shared_ptr<FunctionData>>> functionTable);
 		shared_ptr<ParameterTypeList> getDeclarationParameterList(shared_ptr<vector<shared_ptr<InitDeclarator>>> initDeclaratorsList);
 		TokenType getFunctionParameterType(shared_ptr<ParameterDeclaration> parameterDeclaration);

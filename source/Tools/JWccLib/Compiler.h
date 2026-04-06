@@ -39,5 +39,6 @@ namespace WadeSpace
 		void addTypedef(const string& name, shared_ptr<Declaration> declaration) { typedefList->insert({ name, declaration }); }
 		void addFunction(const string& name, shared_ptr<FunctionDefinition> function) { functionList->insert({ name, function }); }
 		void addStruct(const string& name, shared_ptr<StructOrUnionSpecifier> structSpecifier) { structList->insert({ name, structSpecifier }); }	
+		void addExternalDeclaration(shared_ptr<ExternalDeclaration> externalDeclaration) { programData->addExternalDeclaration(externalDeclaration); }
 	};
 }

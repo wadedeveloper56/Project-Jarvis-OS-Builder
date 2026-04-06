@@ -1,4 +1,4 @@
-JWasm v2.12pre, Mar 20 2026
+JWasm v2.12pre, Apr  6 2026
 test1.asm
                                 .x64p
                                 .model flat, c;
@@ -18,26 +18,25 @@ test1.asm
                             *   _DATA ends
 00000000                    *   _BSS segment PARA FLAT PUBLIC 'BSS'
                             *   assume cs:ERROR
-00000000                        _var4 data1 <>
-                           Error A2209: Syntax error: _var4
-                                _var5 QWORD  ?
+00000000  00                    _var1 SBYTE  ?
+00000001  0000                  _var2 SWORD  ?
 
 00000000                        .code
-                            *   _BSS ends
+00000003                    *   _BSS ends
 00000000                    *   _TEXT segment
                             *   assume cs:FLAT
                                 _main PROTO C _argc:SDWORD , _argv:QWORD ;
 
 00000000                        _main PROC C, _argc:SDWORD , _argv:QWORD 
-00000000                    *   push rbp
-00000001                    *   mov rbp, rsp
-00000004                        	mov eax,5
+00000000  55                *   push rbp
+00000001  488BEC            *   mov rbp, rsp
+00000004  B805000000            	mov eax,5
 00000009                        	ret
-00000009                    *   leave
-0000000A                    *   retn 
+00000009  C9                *   leave
+0000000A  C3                *   retn 
 0000000B                        _main endp
                                 end
-                            *   _TEXT ends
+0000000B                    *   _TEXT ends
 
 
 Macros:
@@ -56,7 +55,7 @@ Segments and Groups:
                 N a m e                 Size     Length   Align   Combine Class
 
 FLAT . . . . . . . . . . . . . .        GROUP
-_BSS . . . . . . . . . . . . . .        64 Bit   00000008 Para    Public  'BSS'
+_BSS . . . . . . . . . . . . . .        64 Bit   00000003 Para    Public  'BSS'
 _DATA  . . . . . . . . . . . . .        64 Bit   00000000 Para    Public  'DATA'
 _TEXT  . . . . . . . . . . . . .        64 Bit   0000000B Para    Public  'CODE'
 
@@ -78,17 +77,18 @@ Symbols:
 @Cpu . . . . . . . . . . . . . .        Number           DDFh 
 @CurSeg  . . . . . . . . . . . .        Text   
 @DataSize  . . . . . . . . . . .        Number             0h 
-@Date  . . . . . . . . . . . . .        Text   03/20/26
+@Date  . . . . . . . . . . . . .        Text   04/06/26
 @FileCur . . . . . . . . . . . .        Text   test1.asm
 @FileName  . . . . . . . . . . .        Text   TEST1
 @Interface . . . . . . . . . . .        Number             1h 
 @Model . . . . . . . . . . . . .        Number             7h 
-@Time  . . . . . . . . . . . . .        Text   12:37:38
+@Time  . . . . . . . . . . . . .        Text   08:56:03
 @Version . . . . . . . . . . . .        Text   800
 @code  . . . . . . . . . . . . .        Text   _TEXT
 @data  . . . . . . . . . . . . .        Text   FLAT
 @stack . . . . . . . . . . . . .        Text   FLAT
 __JWASM__  . . . . . . . . . . .        Number            D4h 
-_var5  . . . . . . . . . . . . .        QWord              0h _BSS C
+_var1  . . . . . . . . . . . . .        Byte               0h _BSS C
+_var2  . . . . . . . . . . . . .        Word               1h _BSS C
 
-test1.asm: 19 lines, 1 passes, 2 ms, 0 warnings, 1 errors
+test1.asm: 19 lines, 2 passes, 3 ms, 0 warnings, 0 errors
