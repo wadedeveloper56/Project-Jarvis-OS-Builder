@@ -226,6 +226,30 @@ shared_ptr<TypeSpecifier> ProgramData::findType(shared_ptr<Declaration> decl)
 	return nullptr;
 }
 
+void ProgramData::handleTypedef(shared_ptr<Declaration> declaration, shared_ptr<vector<shared_ptr<VariableData>>> variableTable) 
+{
+	shared_ptr<DeclarationSpecifiers> declSpecifiers = declaration->getDeclarationSpecifiers();
+	shared_ptr<vector<shared_ptr<InitDeclarator>>> initDeclaratorsList = declaration->getVectorInitDeclarator();
+	shared_ptr<ParameterTypeList> plist = getDeclarationParameterList(initDeclaratorsList);
+	shared_ptr<vector<shared_ptr<DeclarationSpecifiersNode>>> list = declSpecifiers->getDeclarationSpecifiersNodeList();
+}
+
+void ProgramData::handleStruct(shared_ptr<Declaration> declaration, shared_ptr<vector<shared_ptr<VariableData>>> variableTable) 
+{
+	shared_ptr<DeclarationSpecifiers> declSpecifiers = declaration->getDeclarationSpecifiers();
+	shared_ptr<vector<shared_ptr<InitDeclarator>>> initDeclaratorsList = declaration->getVectorInitDeclarator();
+	shared_ptr<ParameterTypeList> plist = getDeclarationParameterList(initDeclaratorsList);
+	shared_ptr<vector<shared_ptr<DeclarationSpecifiersNode>>> list = declSpecifiers->getDeclarationSpecifiersNodeList();
+}
+
+void ProgramData::handleUnion(shared_ptr<Declaration> declaration, shared_ptr<vector<shared_ptr<VariableData>>> variableTable) 
+{
+	shared_ptr<DeclarationSpecifiers> declSpecifiers = declaration->getDeclarationSpecifiers();
+	shared_ptr<vector<shared_ptr<InitDeclarator>>> initDeclaratorsList = declaration->getVectorInitDeclarator();
+	shared_ptr<ParameterTypeList> plist = getDeclarationParameterList(initDeclaratorsList);
+	shared_ptr<vector<shared_ptr<DeclarationSpecifiersNode>>> list = declSpecifiers->getDeclarationSpecifiersNodeList();
+}
+
 shared_ptr<BaseCodeGenerator> ProgramData::processGlobalVariables()
 {
 	shared_ptr<vector<shared_ptr<VariableData>>> variableTable = make_shared<vector<shared_ptr<VariableData>>>();
@@ -237,7 +261,22 @@ shared_ptr<BaseCodeGenerator> ProgramData::processGlobalVariables()
 		{
 			if (ptr->hasDeclaration())
 			{
-				handleDeclaration(ptr->getDeclaration(), variableTable);
+				auto type = findType(ptr->getDeclaration())->getType().value();
+				switch (type)
+				{
+					case TYPEDEF:
+						handleTypedef(ptr->getDeclaration(), variableTable);
+						break;
+					case STRUCT:
+						handleStruct(ptr->getDeclaration(), variableTable);
+						break;
+					case UNION:
+						handleUnion(ptr->getDeclaration(), variableTable);
+						break;
+					default:
+						handleDeclaration(ptr->getDeclaration(), variableTable);
+						break;
+				}
 			}
 			else if (ptr->hasFunction())
 			{
