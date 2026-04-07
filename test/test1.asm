@@ -16,6 +16,9 @@ data2 ENDS
 
 .data
 .data?
+_var1 REAL4  ?
+_var2 REAL8  ?
+_var3 REAL10  ?
 _var4 data1 <>
 _var5 data2 <>
 

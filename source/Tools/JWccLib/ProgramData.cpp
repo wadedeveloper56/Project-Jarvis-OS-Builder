@@ -212,20 +212,6 @@ void ProgramData::handleDeclaration(shared_ptr<Declaration> declaration, shared_
 	}
 }
 
-shared_ptr<TypeSpecifier> ProgramData::findType(shared_ptr<Declaration> decl)
-{
-	shared_ptr<DeclarationSpecifiers> specifiers = decl->getDeclarationSpecifiers();
-	shared_ptr<vector<shared_ptr<DeclarationSpecifiersNode>>> list = specifiers->getDeclarationSpecifiersNodeList();
-	for (shared_ptr<DeclarationSpecifiersNode> node : *list)
-	{
-		if (node->getTypeSpecifier() != nullptr)
-		{
-			return node->getTypeSpecifier();
-		}
-	}
-	return nullptr;
-}
-
 void ProgramData::handleTypedef(shared_ptr<Declaration> declaration, shared_ptr<vector<shared_ptr<VariableData>>> variableTable) 
 {
 	shared_ptr<DeclarationSpecifiers> declSpecifiers = declaration->getDeclarationSpecifiers();
@@ -330,6 +316,34 @@ void ProgramData::handleUnion(shared_ptr<Declaration> declaration, shared_ptr<ve
 	}
 }
 
+shared_ptr<TypeSpecifier> ProgramData::findType(shared_ptr<Declaration> decl)
+{
+	shared_ptr<DeclarationSpecifiers> specifiers = decl->getDeclarationSpecifiers();
+	shared_ptr<vector<shared_ptr<DeclarationSpecifiersNode>>> list = specifiers->getDeclarationSpecifiersNodeList();
+	for (shared_ptr<DeclarationSpecifiersNode> node : *list)
+	{
+		if (node->getTypeSpecifier() != nullptr)
+		{
+			return node->getTypeSpecifier();
+		}
+	}
+	return nullptr;
+}
+
+shared_ptr<StorageClassSpecifier> ProgramData::findStorageSpecifier(shared_ptr<Declaration> decl)
+{
+	shared_ptr<DeclarationSpecifiers> specifiers = decl->getDeclarationSpecifiers();
+	shared_ptr<vector<shared_ptr<DeclarationSpecifiersNode>>> list = specifiers->getDeclarationSpecifiersNodeList();
+	for (shared_ptr<DeclarationSpecifiersNode> node : *list)
+	{
+		if (node->getStorageClassSpecifier() != nullptr)
+		{
+			return node->getStorageClassSpecifier();
+		}
+	}
+	return nullptr;
+}
+
 shared_ptr<BaseCodeGenerator> ProgramData::processGlobalVariables()
 {
 	shared_ptr<vector<shared_ptr<VariableData>>> variableTable = make_shared<vector<shared_ptr<VariableData>>>();
@@ -344,9 +358,6 @@ shared_ptr<BaseCodeGenerator> ProgramData::processGlobalVariables()
 				auto type = findType(ptr->getDeclaration())->getType().value();
 				switch (type)
 				{
-					case TYPEDEF:
-						handleTypedef(ptr->getDeclaration(), variableTable);
-						break;
 					case STRUCT:
 						handleStruct(ptr->getDeclaration(), variableTable);
 						break;
@@ -354,7 +365,23 @@ shared_ptr<BaseCodeGenerator> ProgramData::processGlobalVariables()
 						handleUnion(ptr->getDeclaration(), variableTable);
 						break;
 					default:
-						handleDeclaration(ptr->getDeclaration(), variableTable);
+						auto result = findStorageSpecifier(ptr->getDeclaration());
+						if (result != nullptr)
+						{
+							auto type2 = result->getType()->getKeywordName();
+							if (type2 == "typedef")
+							{
+								handleTypedef(ptr->getDeclaration(), variableTable);
+							}
+							else
+							{
+								handleDeclaration(ptr->getDeclaration(), variableTable);
+							}
+						}
+						else
+						{
+							handleDeclaration(ptr->getDeclaration(), variableTable);
+						}
 						break;
 				}
 			}

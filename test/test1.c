@@ -1,3 +1,4 @@
+typedef int integer;
 struct data1
 {
   float var1;
@@ -10,6 +11,9 @@ union data2
   double var2;
   long double var3;
 };
+float var1;
+double var2;
+long double var3;
 struct data1 var4;
 union data2 var5;
 

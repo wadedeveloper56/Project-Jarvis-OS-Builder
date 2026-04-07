@@ -38,6 +38,7 @@ namespace WadeSpace
 		string getParameterDeclarationName(shared_ptr<ParameterDeclaration> parameterDeclaration);
 		TokenType getDeclarationSpecifiersType(shared_ptr<DeclarationSpecifiers> declaration_specifiers);
 		shared_ptr<TypeSpecifier> findType(shared_ptr<Declaration> decl);
+		shared_ptr<StorageClassSpecifier> findStorageSpecifier(shared_ptr<Declaration> decl);
 
 		void handleTypedef(shared_ptr<Declaration> declaration, shared_ptr<vector<shared_ptr<VariableData>>> variableTable);
 		void handleStruct(shared_ptr<Declaration> declaration, shared_ptr<vector<shared_ptr<VariableData>>> variableTable);
