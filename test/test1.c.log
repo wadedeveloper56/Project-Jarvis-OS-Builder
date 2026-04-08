@@ -2,34 +2,14 @@ Compiler (x86/x64) v1.0 (C) Copyright 2025-2026 Christopher D. Wade.
 All Rights Reserved
 Parse starting
 typedef int integer ;
-struct data1
-{
+integer var6 ;
 float var1 ;
-double var2 ;
-long double var3 ;
-} ;
-union data2
-{
-float var1 ;
-double var2 ;
-long double var3 ;
-} ;
-float var1 ;
-double var2 ;
-long double var3 ;
-struct data1 var4 ;
-union data2 var5 ;
-
-int main ( int argc , char * argv [ ] )
-{
-return 5 ;
-}
 
 Scanner: token [typedef]
 TYPEDEF REDUCE to storage_class_specifier
 Scanner: token [int]
 INT REDUCE to type_specifier
-Scanner: struct name [integer]
+Scanner: identifier [integer]
 type_specifier REDUCE to declaration_specifiers
 storage_class_specifier declaration_specifiers REDUCE to declaration_specifiers
 IDENTIFIER REDUCE to direct_declarator
@@ -41,101 +21,22 @@ declaration_specifiers init_declarator_list SEMICOLON REDUCE to declaration
 declaration REDUCE to external_declaration
 external_declaration REDUCE to translation_unit
 
-Scanner: token [struct]
-STRUCT REDUCE to struct_or_union
-Scanner: struct name [data1]
-Scanner: token [{]
-Scanner: token [float]
-FLOAT REDUCE to type_specifier
-Scanner: struct name [var1]
-type_specifier REDUCE to specifier_qualifier_list
-IDENTIFIER REDUCE to direct_declarator
-Scanner: token [;]
-direct_declarator REDUCE to declarator
-declarator REDUCE to struct_declarator
-struct_declarator REDUCE to struct_declarator_list
-specifier_qualifier_list struct_declarator_list SEMICOLON REDUCE to struct_declaration
-struct_declaration REDUCE to struct_declaration_list
-Scanner: token [double]
-DOUBLE REDUCE to type_specifier
-Scanner: struct name [var2]
-type_specifier REDUCE to specifier_qualifier_list
-IDENTIFIER REDUCE to direct_declarator
-Scanner: token [;]
-direct_declarator REDUCE to declarator
-declarator REDUCE to struct_declarator
-struct_declarator REDUCE to struct_declarator_list
-specifier_qualifier_list struct_declarator_list SEMICOLON REDUCE to struct_declaration
-struct_declaration_list struct_declaration REDUCE to struct_declaration_list
-Scanner: token [long double]
-LONG_DOUBLE REDUCE to type_specifier
-Scanner: struct name [var3]
-type_specifier REDUCE to specifier_qualifier_list
-IDENTIFIER REDUCE to direct_declarator
-Scanner: token [;]
-direct_declarator REDUCE to declarator
-declarator REDUCE to struct_declarator
-struct_declarator REDUCE to struct_declarator_list
-specifier_qualifier_list struct_declarator_list SEMICOLON REDUCE to struct_declaration
-struct_declaration_list struct_declaration REDUCE to struct_declaration_list
-Scanner: token [}]
-struct_or_union IDENTIFIER OCURLY struct_declaration_list CCURLY REDUCE to struct_or_union_specifier
-struct_or_union_specifier REDUCE to type_specifier
-Scanner: token [;]
+Scanner: typedef name [integer]
+TYPE_NAME REDUCE to type_specifier
+Scanner: identifier [var6]
 type_specifier REDUCE to declaration_specifiers
-declaration_specifiers SEMICOLON REDUCE to declaration
-declaration REDUCE to external_declaration
-translation_unit external_declaration REDUCE to translation_unit
-
-Scanner: token [union]
-UNION REDUCE to struct_or_union
-Scanner: struct name [data2]
-Scanner: token [{]
-Scanner: token [float]
-FLOAT REDUCE to type_specifier
-Scanner: struct name [var1]
-type_specifier REDUCE to specifier_qualifier_list
 IDENTIFIER REDUCE to direct_declarator
 Scanner: token [;]
 direct_declarator REDUCE to declarator
-declarator REDUCE to struct_declarator
-struct_declarator REDUCE to struct_declarator_list
-specifier_qualifier_list struct_declarator_list SEMICOLON REDUCE to struct_declaration
-struct_declaration REDUCE to struct_declaration_list
-Scanner: token [double]
-DOUBLE REDUCE to type_specifier
-Scanner: struct name [var2]
-type_specifier REDUCE to specifier_qualifier_list
-IDENTIFIER REDUCE to direct_declarator
-Scanner: token [;]
-direct_declarator REDUCE to declarator
-declarator REDUCE to struct_declarator
-struct_declarator REDUCE to struct_declarator_list
-specifier_qualifier_list struct_declarator_list SEMICOLON REDUCE to struct_declaration
-struct_declaration_list struct_declaration REDUCE to struct_declaration_list
-Scanner: token [long double]
-LONG_DOUBLE REDUCE to type_specifier
-Scanner: struct name [var3]
-type_specifier REDUCE to specifier_qualifier_list
-IDENTIFIER REDUCE to direct_declarator
-Scanner: token [;]
-direct_declarator REDUCE to declarator
-declarator REDUCE to struct_declarator
-struct_declarator REDUCE to struct_declarator_list
-specifier_qualifier_list struct_declarator_list SEMICOLON REDUCE to struct_declaration
-struct_declaration_list struct_declaration REDUCE to struct_declaration_list
-Scanner: token [}]
-struct_or_union IDENTIFIER OCURLY struct_declaration_list CCURLY REDUCE to struct_or_union_specifier
-struct_or_union_specifier REDUCE to type_specifier
-Scanner: token [;]
-type_specifier REDUCE to declaration_specifiers
-declaration_specifiers SEMICOLON REDUCE to declaration
+declarator REDUCE to init_declarator
+init_declarator REDUCE to init_declarator_list
+declaration_specifiers init_declarator_list SEMICOLON REDUCE to declaration
 declaration REDUCE to external_declaration
 translation_unit external_declaration REDUCE to translation_unit
 
 Scanner: token [float]
 FLOAT REDUCE to type_specifier
-Scanner: struct name [var1]
+Scanner: identifier [var1]
 type_specifier REDUCE to declaration_specifiers
 IDENTIFIER REDUCE to direct_declarator
 Scanner: token [;]
@@ -144,127 +45,6 @@ declarator REDUCE to init_declarator
 init_declarator REDUCE to init_declarator_list
 declaration_specifiers init_declarator_list SEMICOLON REDUCE to declaration
 declaration REDUCE to external_declaration
-translation_unit external_declaration REDUCE to translation_unit
-
-Scanner: token [double]
-DOUBLE REDUCE to type_specifier
-Scanner: struct name [var2]
-type_specifier REDUCE to declaration_specifiers
-IDENTIFIER REDUCE to direct_declarator
-Scanner: token [;]
-direct_declarator REDUCE to declarator
-declarator REDUCE to init_declarator
-init_declarator REDUCE to init_declarator_list
-declaration_specifiers init_declarator_list SEMICOLON REDUCE to declaration
-declaration REDUCE to external_declaration
-translation_unit external_declaration REDUCE to translation_unit
-
-Scanner: token [long double]
-LONG_DOUBLE REDUCE to type_specifier
-Scanner: struct name [var3]
-type_specifier REDUCE to declaration_specifiers
-IDENTIFIER REDUCE to direct_declarator
-Scanner: token [;]
-direct_declarator REDUCE to declarator
-declarator REDUCE to init_declarator
-init_declarator REDUCE to init_declarator_list
-declaration_specifiers init_declarator_list SEMICOLON REDUCE to declaration
-declaration REDUCE to external_declaration
-translation_unit external_declaration REDUCE to translation_unit
-
-Scanner: token [struct]
-STRUCT REDUCE to struct_or_union
-Scanner: struct name [data1]
-Scanner: struct name [var4]
-struct_or_union IDENTIFIER REDUCE to struct_or_union_specifier
-struct_or_union_specifier REDUCE to type_specifier
-type_specifier REDUCE to declaration_specifiers
-IDENTIFIER REDUCE to direct_declarator
-Scanner: token [;]
-direct_declarator REDUCE to declarator
-declarator REDUCE to init_declarator
-init_declarator REDUCE to init_declarator_list
-declaration_specifiers init_declarator_list SEMICOLON REDUCE to declaration
-declaration REDUCE to external_declaration
-translation_unit external_declaration REDUCE to translation_unit
-
-Scanner: token [union]
-UNION REDUCE to struct_or_union
-Scanner: struct name [data2]
-Scanner: struct name [var5]
-struct_or_union IDENTIFIER REDUCE to struct_or_union_specifier
-struct_or_union_specifier REDUCE to type_specifier
-type_specifier REDUCE to declaration_specifiers
-IDENTIFIER REDUCE to direct_declarator
-Scanner: token [;]
-direct_declarator REDUCE to declarator
-declarator REDUCE to init_declarator
-init_declarator REDUCE to init_declarator_list
-declaration_specifiers init_declarator_list SEMICOLON REDUCE to declaration
-declaration REDUCE to external_declaration
-translation_unit external_declaration REDUCE to translation_unit
-
-Scanner: token [int]
-INT REDUCE to type_specifier
-Scanner: struct name [main]
-type_specifier REDUCE to declaration_specifiers
-IDENTIFIER REDUCE to direct_declarator
-Scanner: token [(]
-Scanner: token [int]
-INT REDUCE to type_specifier
-Scanner: struct name [argc]
-type_specifier REDUCE to declaration_specifiers
-IDENTIFIER REDUCE to direct_declarator
-Scanner: token [,]
-direct_declarator REDUCE to declarator
-declaration_specifiers declarator REDUCE to parameter_declaration
-parameter_declaration REDUCE to parameter_list
-Scanner: token [char]
-CHAR REDUCE to type_specifier
-Scanner: token [*]
-type_specifier REDUCE to declaration_specifiers
-Scanner: struct name [argv]
-TIMES_OP REDUCE to POINTER
-IDENTIFIER REDUCE to direct_declarator
-Scanner: token [[]
-Scanner: token []]
-direct_declarator OBRACE CBRACE REDUCE to direct_declarator
-Scanner: token [)]
-pointer direct_declarator REDUCE to declarator
-declaration_specifiers declarator REDUCE to parameter_declaration
-parameter_list COMMA parameter_declaration REDUCE to parameter_list
-parameter_list REDUCE to parameter_type_list
-direct_declarator OPAREN parameter_type_list CPAREN to direct_declarator
-Scanner: token [{]
-direct_declarator REDUCE to declarator
-Scanner: token [return]
-Scanner: decimal number: 5
-I_CONST REDUCE to constant 
-constant REDUCE to primary_expression
-primary_expression REDUCE to postfix_expression
-Scanner: token [;]
-postfix_expression REDUCE unary_expression
-unary_expression REDUCE to cast_expression
-cast_expression REDUCE to multiplicative_expression
-multiplicative_expression REDUCE to additive_expression
-additive_expression REDUCE to shift_expression
-shift_expression REDUCE to relational_expression
-relational_expression REDUCE to equality_expression
-equality_expression REDUCE to and_expression
-and_expression REDUCE to exclusive_or_expression
-exclusive_or_expression REDUCE to inclusive_or_expression
-inclusive_or_expression REDUCE to logical_and_expression
-inclusive_and_expression REDUCE to logical_or_expression
-logical_or_expression REDUCE to conditional_expression
-conditional_expression REDUCE to assignment_expression
-asignment_expression REDUCE to expression
-RETURN expression SEMICOLON REDUCE to jump_statement
-jump_statement REDUCE to statement
-statement REDUCE to statement_list
-Scanner: token [}]
-OCURLY statement_list CCURLY REDUCE to compound_statement
-declaration_specifiers declarator compound_statement REDUCE to function_definition
-function_definition REDUCE to external_declaration
 translation_unit external_declaration REDUCE to translation_unit
 
 Parse complete. Result = 0

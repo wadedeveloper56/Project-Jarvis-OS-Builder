@@ -166,6 +166,7 @@ void ProgramData::handleDeclaration(shared_ptr<Declaration> declaration, shared_
 					}
 					type = temp;
 				}
+/*
 				else if (temp == TYPE_NAME)
 				{
 					auto temp2 = ptr->getTypeSpecifier()->getTypedefInfo()->getDeclaration()->getDeclarationSpecifiers()->getDeclarationSpecifiersNodeList();
@@ -177,6 +178,7 @@ void ProgramData::handleDeclaration(shared_ptr<Declaration> declaration, shared_
 						}
 					}
 				}
+*/
 				else
 				{
 					type = temp;
@@ -210,14 +212,6 @@ void ProgramData::handleDeclaration(shared_ptr<Declaration> declaration, shared_
 			variableTable->push_back(data);
 		}
 	}
-}
-
-void ProgramData::handleTypedef(shared_ptr<Declaration> declaration, shared_ptr<vector<shared_ptr<VariableData>>> variableTable) 
-{
-	shared_ptr<DeclarationSpecifiers> declSpecifiers = declaration->getDeclarationSpecifiers();
-	shared_ptr<vector<shared_ptr<InitDeclarator>>> initDeclaratorsList = declaration->getVectorInitDeclarator();
-	shared_ptr<ParameterTypeList> plist = getDeclarationParameterList(initDeclaratorsList);
-	shared_ptr<vector<shared_ptr<DeclarationSpecifiersNode>>> list = declSpecifiers->getDeclarationSpecifiersNodeList();
 }
 
 void ProgramData::handleStruct(shared_ptr<Declaration> declaration, shared_ptr<vector<shared_ptr<VariableData>>> variableTable) 
@@ -358,6 +352,8 @@ shared_ptr<BaseCodeGenerator> ProgramData::processGlobalVariables()
 				auto type = findType(ptr->getDeclaration())->getType().value();
 				switch (type)
 				{
+					case TYPE_NAME:
+						break;
 					case STRUCT:
 						handleStruct(ptr->getDeclaration(), variableTable);
 						break;
@@ -365,15 +361,11 @@ shared_ptr<BaseCodeGenerator> ProgramData::processGlobalVariables()
 						handleUnion(ptr->getDeclaration(), variableTable);
 						break;
 					default:
-						auto result = findStorageSpecifier(ptr->getDeclaration());
+						shared_ptr<StorageClassSpecifier> result = findStorageSpecifier(ptr->getDeclaration());
 						if (result != nullptr)
 						{
-							auto type2 = result->getType()->getKeywordName();
-							if (type2 == "typedef")
-							{
-								handleTypedef(ptr->getDeclaration(), variableTable);
-							}
-							else
+							string type2 = result->getType()->getKeywordName();
+							if (type2 != "typedef")
 							{
 								handleDeclaration(ptr->getDeclaration(), variableTable);
 							}

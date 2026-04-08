@@ -1,4 +1,4 @@
-JWasm v2.12pre, Apr  6 2026
+JWasm v2.12pre, Apr  8 2026
 test1.asm
                                 .x64p
                                 .model flat, c;
@@ -10,16 +10,6 @@ test1.asm
                                 option casemap : none
 
 
-00000000                        data1 STRUCT
-00000000                        	var1 REAL4 ?
-00000004                        	var2 REAL8 ?
-0000000C                        	var3 REAL10 ?
-00000016                        data1 ENDS
-00000000                        data2 UNION
-00000000                        	var1 REAL4 ?
-00000000                        	var2 REAL8 ?
-00000000                        	var3 REAL10 ?
-0000000A                        data2 ENDS
 
                                 .data
 00000000                    *   _DATA segment
@@ -28,28 +18,16 @@ test1.asm
                             *   _DATA ends
 00000000                    *   _BSS segment PARA FLAT PUBLIC 'BSS'
                             *   assume cs:ERROR
-00000000  00000000              _var1 REAL4  ?
-00000004  0000000000000000      _var2 REAL8  ?
-0000000C  000000000000000000    _var3 REAL10  ?
-00000016  000000000000000000    _var4 data1 <>
-0000002C  000000000000000000    _var5 data2 <>
+00000000                        _var6 ?
+                           Error A2209: Syntax error: _var6
+                                _var1 REAL4  ?
 
 00000000                        .code
-00000036                    *   _BSS ends
+                            *   _BSS ends
 00000000                    *   _TEXT segment
                             *   assume cs:FLAT
-                                _main PROTO C _argc:SDWORD , _argv:QWORD ;
-
-00000000                        _main PROC C, _argc:SDWORD , _argv:QWORD 
-00000000  55                *   push rbp
-00000001  488BEC            *   mov rbp, rsp
-00000004  B805000000            	mov eax,5
-00000009                        	ret
-00000009  C9                *   leave
-0000000A  C3                *   retn 
-0000000B                        _main endp
                                 end
-0000000B                    *   _TEXT ends
+                            *   _TEXT ends
 
 
 Macros:
@@ -63,37 +41,14 @@ Macros:
 @SubStr  . . . . . . . . . . . .        Func     0
 
 
-Structures and Unions:
-
-                N a m e                 Size/Ofs   Type
-
-data1  . . . . . . . . . . . . .              16
-  var1 . . . . . . . . . . . . .               0   DWord
-  var2 . . . . . . . . . . . . .               4   QWord
-  var3 . . . . . . . . . . . . .               C   TByte
-data2  . . . . . . . . . . . . .               A
-  var1 . . . . . . . . . . . . .               0   DWord
-  var2 . . . . . . . . . . . . .               0   QWord
-  var3 . . . . . . . . . . . . .               0   TByte
-
-
 Segments and Groups:
 
                 N a m e                 Size     Length   Align   Combine Class
 
 FLAT . . . . . . . . . . . . . .        GROUP
-_BSS . . . . . . . . . . . . . .        64 Bit   00000036 Para    Public  'BSS'
+_BSS . . . . . . . . . . . . . .        64 Bit   00000004 Para    Public  'BSS'
 _DATA  . . . . . . . . . . . . .        64 Bit   00000000 Para    Public  'DATA'
-_TEXT  . . . . . . . . . . . . .        64 Bit   0000000B Para    Public  'CODE'
-
-
-Procedures, parameters and locals:
-
-                N a m e                 Type     Value    Segment  Length
-
-_main  . . . . . . . . . . . . .        P Near   00000000 _TEXT    0000000B Public   C
-  _argc  . . . . . . . . . . . .        DWord             rbp + 0010
-  _argv  . . . . . . . . . . . .        QWord             rbp + 0018
+_TEXT  . . . . . . . . . . . . .        64 Bit   00000000 Para    Public  'CODE'
 
 
 Symbols:
@@ -104,21 +59,17 @@ Symbols:
 @Cpu . . . . . . . . . . . . . .        Number           DDFh 
 @CurSeg  . . . . . . . . . . . .        Text   
 @DataSize  . . . . . . . . . . .        Number             0h 
-@Date  . . . . . . . . . . . . .        Text   04/07/26
+@Date  . . . . . . . . . . . . .        Text   04/08/26
 @FileCur . . . . . . . . . . . .        Text   test1.asm
 @FileName  . . . . . . . . . . .        Text   TEST1
 @Interface . . . . . . . . . . .        Number             1h 
 @Model . . . . . . . . . . . . .        Number             7h 
-@Time  . . . . . . . . . . . . .        Text   14:02:54
+@Time  . . . . . . . . . . . . .        Text   14:24:22
 @Version . . . . . . . . . . . .        Text   800
 @code  . . . . . . . . . . . . .        Text   _TEXT
 @data  . . . . . . . . . . . . .        Text   FLAT
 @stack . . . . . . . . . . . . .        Text   FLAT
 __JWASM__  . . . . . . . . . . .        Number            D4h 
 _var1  . . . . . . . . . . . . .        DWord              0h _BSS C
-_var2  . . . . . . . . . . . . .        QWord              4h _BSS C
-_var3  . . . . . . . . . . . . .        TByte              Ch _BSS C
-_var4  . . . . . . . . . . . . .        data1             16h _BSS C
-_var5  . . . . . . . . . . . . .        data2             2Ch _BSS C
 
-test1.asm: 32 lines, 2 passes, 3 ms, 0 warnings, 0 errors
+test1.asm: 13 lines, 1 passes, 1 ms, 0 warnings, 1 errors

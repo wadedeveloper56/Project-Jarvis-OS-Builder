@@ -17,7 +17,7 @@ using namespace simplecpp;
 Compiler::Compiler()
 {
 	programData = make_shared<ProgramData>();
-	typedefList = make_shared<map<string, shared_ptr<Declaration>>>();
+	typedefList = make_shared<map<string, shared_ptr<DeclarationSpecifiersNode>>>();
 	structList = make_shared<map<string, shared_ptr<StructOrUnionSpecifier>>>();
 	functionList = make_shared<map<string, shared_ptr<FunctionDefinition>>>();
 }
