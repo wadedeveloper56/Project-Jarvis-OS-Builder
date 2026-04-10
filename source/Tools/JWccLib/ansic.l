@@ -212,7 +212,7 @@ WS  [ \t\v\n\f]
                 return WadeSpace::Parser::make_BOOLT(createKeywordToken(yytext,BOOLT), WadeSpace::location()); 
                }
 {L}{A}*        { 
-                if (compiler->hasTypedef(yytext))
+                if (compiler != nullptr && compiler->hasTypedef(yytext))
                 {
                     cout << "Scanner: typedef name [" << yytext << "]" << endl;
                     return WadeSpace::Parser::make_TYPE_NAME(createStringIDToken(yytext), WadeSpace::location()); 

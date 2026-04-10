@@ -160,7 +160,7 @@ BOOL CIDEApp::InitInstance()
 	pMainFrame->ShowWindow(SW_SHOWMAXIMIZED);
 	pMainFrame->UpdateWindow();
 
-	Compiler compiler;
+	compiler = make_shared<Compiler>();
 
 	return TRUE;
 }

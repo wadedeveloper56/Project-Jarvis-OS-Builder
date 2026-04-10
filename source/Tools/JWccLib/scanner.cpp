@@ -1257,7 +1257,7 @@ case 38:
 YY_RULE_SETUP
 #line 214 "ansic.l"
 { 
-                if (compiler->hasTypedef(yytext))
+                if (compiler != nullptr && compiler->hasTypedef(yytext))
                 {
                     cout << "Scanner: typedef name [" << yytext << "]" << endl;
                     return WadeSpace::Parser::make_TYPE_NAME(createStringIDToken(yytext), WadeSpace::location()); 
