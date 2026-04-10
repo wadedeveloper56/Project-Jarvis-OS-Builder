@@ -103,7 +103,7 @@
 %token <shared_ptr<CToken>> BREAK "break"
 %token <shared_ptr<CToken>> CASE "case"
 %token <shared_ptr<CToken>> CHAR "char"
-%token <shared_ptr<CToken>> CONST "const"
+%token <shared_ptr<CToken>> CONSTT "const"
 %token <shared_ptr<CToken>> CONTINUE "continue"
 %token <shared_ptr<CToken>> DEFAULT "default"
 %token <shared_ptr<CToken>> DO "do"
@@ -132,10 +132,10 @@
 %token <shared_ptr<CToken>> TYPEDEF "typedef"
 %token <shared_ptr<CToken>> UNION "union"
 %token <shared_ptr<CToken>> UNSIGNED "unsigned"
-%token <shared_ptr<CToken>> VOID "void"
+%token <shared_ptr<CToken>> VOIDT "void"
 %token <shared_ptr<CToken>> VOLATILE "volatile"
 %token <shared_ptr<CToken>> WHILE "while"
-%token <shared_ptr<CToken>> BOOL "bool"
+%token <shared_ptr<CToken>> BOOLT "bool"
 %token <shared_ptr<CToken>> ELLIPSIS "ellipsis"
 %token <shared_ptr<CToken>> QUESTION "question"
 %token <shared_ptr<CToken>> SEMICOLON ";"
@@ -430,7 +430,7 @@ storage_class_specifier
     ;
 
 type_specifier
-    : VOID                      { $$ = make_shared<TypeSpecifier>(VOID, $1, nullptr, nullptr, nullptr); cout << "VOID REDUCE to type_specifier" << endl;}
+    : VOIDT                      { $$ = make_shared<TypeSpecifier>(VOIDT, $1, nullptr, nullptr, nullptr); cout << "VOIDT REDUCE to type_specifier" << endl;}
     | CHAR                      { $$ = make_shared<TypeSpecifier>(CHAR, $1, nullptr, nullptr, nullptr); cout << "CHAR REDUCE to type_specifier" << endl;}
     | SHORT                     { $$ = make_shared<TypeSpecifier>(SHORT, $1, nullptr, nullptr, nullptr); cout << "SHORT REDUCE to type_specifier" << endl;}
     | INT                       { $$ = make_shared<TypeSpecifier>(INT, $1, nullptr, nullptr, nullptr); cout << "INT REDUCE to type_specifier" << endl;}
@@ -439,7 +439,7 @@ type_specifier
     | FLOAT                     { $$ = make_shared<TypeSpecifier>(FLOAT, $1, nullptr, nullptr, nullptr); cout << "FLOAT REDUCE to type_specifier" << endl;}
     | DOUBLE                    { $$ = make_shared<TypeSpecifier>(DOUBLE, $1, nullptr, nullptr, nullptr); cout << "DOUBLE REDUCE to type_specifier" << endl;}
     | LONG_DOUBLE               { $$ = make_shared<TypeSpecifier>(LONG_DOUBLE, $1, nullptr, nullptr, nullptr); cout << "LONG_DOUBLE REDUCE to type_specifier" << endl;}
-    | BOOL                      { $$ = make_shared<TypeSpecifier>(BOOL, $1, nullptr, nullptr, nullptr); cout << "BOOL REDUCE to type_specifier" << endl;}
+    | BOOLT                     { $$ = make_shared<TypeSpecifier>(BOOLT, $1, nullptr, nullptr, nullptr); cout << "BOOL REDUCE to type_specifier" << endl;}
     | SIGNED                    { $$ = make_shared<TypeSpecifier>(SIGNED, $1, nullptr, nullptr, nullptr); cout << "SIGNED REDUCE to type_specifier" << endl;}
     | UNSIGNED                  { $$ = make_shared<TypeSpecifier>(UNSIGNED, $1, nullptr, nullptr, nullptr); cout << "UNIGNED REDUCE to type_specifier" << endl;}
     | struct_or_union_specifier { $$ = make_shared<TypeSpecifier>(UNKNOWN, nullptr, $1, nullptr, nullptr); cout << "struct_or_union_specifier REDUCE to type_specifier" << endl;}
@@ -502,7 +502,7 @@ enumerator
     ;
 
 type_qualifier
-    : CONST    { $$ = make_shared<TypeQualifier>($1); cout << "CONST REDUCE to type_qualifier" << endl;}
+    : CONSTT    { $$ = make_shared<TypeQualifier>($1); cout << "CONSTT REDUCE to type_qualifier" << endl;}
     | VOLATILE { $$ = make_shared<TypeQualifier>($1); cout << "VOLATILE REDUCE to type_qualifier" << endl;}
     ;
 

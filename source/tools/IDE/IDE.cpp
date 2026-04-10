@@ -13,9 +13,14 @@
 #include "IDEDoc.h"
 #include "IDEView.h"
 
+#include "TokenType.h"
+#include "Compiler.h"
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
+
+using namespace WadeSpace;
 
 
 // CIDEApp
@@ -155,6 +160,8 @@ BOOL CIDEApp::InitInstance()
 	pMainFrame->ShowWindow(SW_SHOWMAXIMIZED);
 	pMainFrame->UpdateWindow();
 
+	Compiler compiler;
+
 	return TRUE;
 }
 
@@ -212,7 +219,7 @@ void CIDEApp::OnAppAbout()
 
 void CIDEApp::PreLoadState()
 {
-	BOOL bNameValid;
+	::BOOL bNameValid;
 	CString strName;
 	bNameValid = strName.LoadString(IDS_EDIT_MENU);
 	ASSERT(bNameValid);

@@ -39,7 +39,7 @@ string MasmCodeGenerator::getAsmType(TokenType type, bool isPointer, bool isUnsi
 		else asmType = "QWORD ";
 	}
 	else if (!isUnsigned && type == CHAR) asmType = "SBYTE ";
-	else if (!isUnsigned && type == BOOL) asmType = "SBYTE ";
+	else if (!isUnsigned && type == BOOLT) asmType = "SBYTE ";
 	else if (!isUnsigned && type == SHORT) asmType = "SWORD ";
 	else if (!isUnsigned && type == INT) asmType = "SDWORD ";
 	else if (!isUnsigned && type == LONG) asmType = "SDWORD ";
@@ -48,7 +48,7 @@ string MasmCodeGenerator::getAsmType(TokenType type, bool isPointer, bool isUnsi
 	else if (!isUnsigned && type == DOUBLE) asmType = "SQWORD ";
 	else if (!isUnsigned && type == LONG_DOUBLE) asmType = "TBYTE ";
 	else if (isUnsigned && type == CHAR) asmType = "BYTE ";
-	else if (isUnsigned && type == BOOL) asmType = "BYTE ";
+	else if (isUnsigned && type == BOOLT) asmType = "BYTE ";
 	else if (isUnsigned && type == SHORT) asmType = "WORD ";
 	else if (isUnsigned && type == INT) asmType = "DWORD ";
 	else if (isUnsigned && type == LONG) asmType = "DWORD ";
@@ -125,7 +125,7 @@ void MasmCodeGenerator::handleIndividualFunctionStatements(ostream	& out, TokenT
 		else if (node->getOp() == jump_statement)
 		{
 			shared_ptr<BaseStatement> base_statement = node->getStatement();
-			TokenType op = base_statement->getOp();
+			TokenType op = base_statement->getOp().value();
 			switch (op)
 			{
 				case RETURN:
@@ -164,7 +164,7 @@ string MasmCodeGenerator::convertToAsmType(bool isUnsigned, bool isPointer, Toke
 		else asmType = " QWORD ";
 	}
 	else if (!isUnsigned && type == CHAR) asmType = " SBYTE ";
-	else if (!isUnsigned && type == BOOL) asmType = " SBYTE ";
+	else if (!isUnsigned && type == BOOLT) asmType = " SBYTE ";
 	else if (!isUnsigned && type == SHORT) asmType = " SWORD ";
 	else if (!isUnsigned && type == INT) asmType = " SDWORD ";
 	else if (!isUnsigned && type == LONG) asmType = " SDWORD ";
@@ -173,7 +173,7 @@ string MasmCodeGenerator::convertToAsmType(bool isUnsigned, bool isPointer, Toke
 	else if (!isUnsigned && type == DOUBLE) asmType = " REAL8 ";
 	else if (!isUnsigned && type == LONG_DOUBLE) asmType = " REAL10 ";
 	else if (isUnsigned && type == CHAR) asmType = " BYTE ";
-	else if (isUnsigned && type == BOOL) asmType = " BYTE ";
+	else if (isUnsigned && type == BOOLT) asmType = " BYTE ";
 	else if (isUnsigned && type == SHORT) asmType = " WORD ";
 	else if (isUnsigned && type == INT) asmType = " DWORD ";
 	else if (isUnsigned && type == LONG) asmType = " DWORD ";
@@ -333,7 +333,7 @@ void MasmCodeGenerator::handleStructs(ostream& out)
 			for (auto decl : *structDecl)
 			{
 				auto varName = decl->getDeclarator()->getDirectDeclarator()->getIdentifier()->getSymbolName();
-				if (type == CHAR || type == BOOL) out << "\t" << varName << " SBYTE ?" << endl;
+				if (type == CHAR || type == BOOLT) out << "\t" << varName << " SBYTE ?" << endl;
 				else if (type == SHORT) out << "\t" << varName << " SWORD ?" << endl;
 				else if (type == INT) out << "\t" << varName << " SDWORD ?" << endl;
 				else if (type == LONG) out << "\t" << varName << " SDWORD ?" << endl;
@@ -369,7 +369,7 @@ void MasmCodeGenerator::handlePrototype(ostream& out)
 				for (shared_ptr<DeclarationSpecifiersNode> node2 : *temp3)
 				{
 					TokenType temp = node2->getTypeSpecifier()->getType().value();
-					if (temp == CHAR || temp == BOOL) type = temp;
+					if (temp == CHAR || temp == BOOLT) type = temp;
 					else if (temp == SHORT) type = temp;
 					else if (temp == INT) type = temp;
 					else if (temp == LONG) type = temp;

@@ -1,7 +1,12 @@
 #pragma once
 
+#include <memory>
+#include <vector>
+#include <optional>
 #include "TokenType.h"
 #include "Declaration.h"
+#include "Token.h"
+#include "ExpressionTree.h"
 
 using namespace std;
 
@@ -12,7 +17,7 @@ namespace WadeSpace
 	class BaseStatement
 	{
 	protected:
-		TokenType op;
+		optional<TokenType> op;
 		shared_ptr<CToken> identifier;
 		shared_ptr<ExpressionTree> exp;
 		shared_ptr<ExpressionTree> contExp;
@@ -23,29 +28,29 @@ namespace WadeSpace
 		shared_ptr<vector<shared_ptr<BaseStatement>>> statementList;
 		shared_ptr<vector<shared_ptr<Declaration>>> declarationList;
 	public:
-		BaseStatement(TokenType op, shared_ptr<CToken> identifier, shared_ptr<ExpressionTree> const exp, shared_ptr<ExpressionTree> const contExp,
+		BaseStatement(optional<TokenType>, shared_ptr<CToken> identifier, shared_ptr<ExpressionTree> const exp, shared_ptr<ExpressionTree> const contExp,
 			shared_ptr<BaseStatement> const statement, shared_ptr<BaseStatement> const es1, shared_ptr<BaseStatement> const es2,
 			shared_ptr<BaseStatement> const statement2, vector<shared_ptr<BaseStatement>>* const statementList,
 			shared_ptr<vector<shared_ptr<Declaration>>>	const declarationList);
-		BaseStatement(TokenType op);
-		BaseStatement(TokenType op, shared_ptr<CToken> identifier);
-		BaseStatement(TokenType op, shared_ptr<ExpressionTree> exp);
-		BaseStatement(TokenType op, shared_ptr<ExpressionTree> exp, shared_ptr<BaseStatement> statement);
-		BaseStatement(TokenType op, shared_ptr<ExpressionTree> exp, shared_ptr<BaseStatement> ifStatement, shared_ptr<BaseStatement> elseStatement);
-		BaseStatement(TokenType op, shared_ptr<BaseStatement> es1, shared_ptr<BaseStatement> es2, shared_ptr<BaseStatement> statement);
-		BaseStatement(TokenType op, shared_ptr<BaseStatement> es1, shared_ptr<BaseStatement> es2, shared_ptr<ExpressionTree> exp, shared_ptr<BaseStatement> statement);
+		BaseStatement(optional<TokenType> op);
+		BaseStatement(optional<TokenType> op, shared_ptr<CToken> identifier);
+		BaseStatement(optional<TokenType> op, shared_ptr<ExpressionTree> exp);
+		BaseStatement(optional<TokenType> op, shared_ptr<ExpressionTree> exp, shared_ptr<BaseStatement> statement);
+		BaseStatement(optional<TokenType> op, shared_ptr<ExpressionTree> exp, shared_ptr<BaseStatement> ifStatement, shared_ptr<BaseStatement> elseStatement);
+		BaseStatement(optional<TokenType> op, shared_ptr<BaseStatement> es1, shared_ptr<BaseStatement> es2, shared_ptr<BaseStatement> statement);
+		BaseStatement(optional<TokenType> op, shared_ptr<BaseStatement> es1, shared_ptr<BaseStatement> es2, shared_ptr<ExpressionTree> exp, shared_ptr<BaseStatement> statement);
 		BaseStatement(shared_ptr<vector<shared_ptr<BaseStatement>>> statementList);
 		BaseStatement(shared_ptr<vector<shared_ptr<Declaration>>> declarationList);
 		BaseStatement(shared_ptr<vector<shared_ptr<BaseStatement>>> statementList, shared_ptr<vector<shared_ptr<Declaration>>> declarationList);
 		BaseStatement(shared_ptr<CToken> identifier, shared_ptr<BaseStatement> statement);
-		BaseStatement(TokenType op, shared_ptr<BaseStatement> statement);
+		BaseStatement(optional<TokenType> op, shared_ptr<BaseStatement> statement);
 		BaseStatement() = default;
 		virtual ~BaseStatement() = default;
 		BaseStatement(const BaseStatement& other) = default;
 		BaseStatement(BaseStatement&& other) noexcept = default;
 		BaseStatement& operator=(const BaseStatement& other) = default;
 		BaseStatement& operator=(BaseStatement&& other) noexcept = default;
-		[[nodiscard]] TokenType getOp() const { return op; }
+		[[nodiscard]] optional<TokenType> getOp() const { return op; }
 		[[nodiscard]] shared_ptr<CToken> getIdentifier() const { return identifier; }
 		[[nodiscard]] shared_ptr<ExpressionTree> getExp() const { return exp; }
 		[[nodiscard]] shared_ptr<ExpressionTree> getContExp() const { return contExp; }

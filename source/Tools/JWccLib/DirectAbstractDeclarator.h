@@ -57,7 +57,8 @@ namespace WadeSpace
 		[[nodiscard]] bool hasList() const { return list != nullptr; }
 		void setAbstractDeclarator(shared_ptr<AbstractDeclarator> abstractDeclarator) { this->abstractDeclarator = abstractDeclarator; }
 		void setList(shared_ptr<vector<shared_ptr<DirectAbstractDeclaratorNode>>> list) { this->list = list; }
-		void addDirectAbstractDeclaratorNode(shared_ptr<DirectAbstractDeclaratorNode> node) {
+		void addDirectAbstractDeclaratorNode(shared_ptr<DirectAbstractDeclaratorNode> node) 
+		{
 			if (list == nullptr) list = make_shared<vector<shared_ptr<DirectAbstractDeclaratorNode>>>();
 			list->push_back(node);
 		}

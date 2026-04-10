@@ -245,7 +245,7 @@ namespace  WadeSpace  {
       case symbol_kind::S_BREAK: // "break"
       case symbol_kind::S_CASE: // "case"
       case symbol_kind::S_CHAR: // "char"
-      case symbol_kind::S_CONST: // "const"
+      case symbol_kind::S_CONSTT: // "const"
       case symbol_kind::S_CONTINUE: // "continue"
       case symbol_kind::S_DEFAULT: // "default"
       case symbol_kind::S_DO: // "do"
@@ -274,10 +274,10 @@ namespace  WadeSpace  {
       case symbol_kind::S_TYPEDEF: // "typedef"
       case symbol_kind::S_UNION: // "union"
       case symbol_kind::S_UNSIGNED: // "unsigned"
-      case symbol_kind::S_VOID: // "void"
+      case symbol_kind::S_VOIDT: // "void"
       case symbol_kind::S_VOLATILE: // "volatile"
       case symbol_kind::S_WHILE: // "while"
-      case symbol_kind::S_BOOL: // "bool"
+      case symbol_kind::S_BOOLT: // "bool"
       case symbol_kind::S_ELLIPSIS: // "ellipsis"
       case symbol_kind::S_QUESTION: // "question"
       case symbol_kind::S_SEMICOLON: // ";"
@@ -528,7 +528,7 @@ namespace  WadeSpace  {
       case symbol_kind::S_BREAK: // "break"
       case symbol_kind::S_CASE: // "case"
       case symbol_kind::S_CHAR: // "char"
-      case symbol_kind::S_CONST: // "const"
+      case symbol_kind::S_CONSTT: // "const"
       case symbol_kind::S_CONTINUE: // "continue"
       case symbol_kind::S_DEFAULT: // "default"
       case symbol_kind::S_DO: // "do"
@@ -557,10 +557,10 @@ namespace  WadeSpace  {
       case symbol_kind::S_TYPEDEF: // "typedef"
       case symbol_kind::S_UNION: // "union"
       case symbol_kind::S_UNSIGNED: // "unsigned"
-      case symbol_kind::S_VOID: // "void"
+      case symbol_kind::S_VOIDT: // "void"
       case symbol_kind::S_VOLATILE: // "volatile"
       case symbol_kind::S_WHILE: // "while"
-      case symbol_kind::S_BOOL: // "bool"
+      case symbol_kind::S_BOOLT: // "bool"
       case symbol_kind::S_ELLIPSIS: // "ellipsis"
       case symbol_kind::S_QUESTION: // "question"
       case symbol_kind::S_SEMICOLON: // ";"
@@ -811,7 +811,7 @@ namespace  WadeSpace  {
       case symbol_kind::S_BREAK: // "break"
       case symbol_kind::S_CASE: // "case"
       case symbol_kind::S_CHAR: // "char"
-      case symbol_kind::S_CONST: // "const"
+      case symbol_kind::S_CONSTT: // "const"
       case symbol_kind::S_CONTINUE: // "continue"
       case symbol_kind::S_DEFAULT: // "default"
       case symbol_kind::S_DO: // "do"
@@ -840,10 +840,10 @@ namespace  WadeSpace  {
       case symbol_kind::S_TYPEDEF: // "typedef"
       case symbol_kind::S_UNION: // "union"
       case symbol_kind::S_UNSIGNED: // "unsigned"
-      case symbol_kind::S_VOID: // "void"
+      case symbol_kind::S_VOIDT: // "void"
       case symbol_kind::S_VOLATILE: // "volatile"
       case symbol_kind::S_WHILE: // "while"
-      case symbol_kind::S_BOOL: // "bool"
+      case symbol_kind::S_BOOLT: // "bool"
       case symbol_kind::S_ELLIPSIS: // "ellipsis"
       case symbol_kind::S_QUESTION: // "question"
       case symbol_kind::S_SEMICOLON: // ";"
@@ -1093,7 +1093,7 @@ namespace  WadeSpace  {
       case symbol_kind::S_BREAK: // "break"
       case symbol_kind::S_CASE: // "case"
       case symbol_kind::S_CHAR: // "char"
-      case symbol_kind::S_CONST: // "const"
+      case symbol_kind::S_CONSTT: // "const"
       case symbol_kind::S_CONTINUE: // "continue"
       case symbol_kind::S_DEFAULT: // "default"
       case symbol_kind::S_DO: // "do"
@@ -1122,10 +1122,10 @@ namespace  WadeSpace  {
       case symbol_kind::S_TYPEDEF: // "typedef"
       case symbol_kind::S_UNION: // "union"
       case symbol_kind::S_UNSIGNED: // "unsigned"
-      case symbol_kind::S_VOID: // "void"
+      case symbol_kind::S_VOIDT: // "void"
       case symbol_kind::S_VOLATILE: // "volatile"
       case symbol_kind::S_WHILE: // "while"
-      case symbol_kind::S_BOOL: // "bool"
+      case symbol_kind::S_BOOLT: // "bool"
       case symbol_kind::S_ELLIPSIS: // "ellipsis"
       case symbol_kind::S_QUESTION: // "question"
       case symbol_kind::S_SEMICOLON: // ";"
@@ -1620,7 +1620,7 @@ namespace  WadeSpace  {
       case symbol_kind::S_BREAK: // "break"
       case symbol_kind::S_CASE: // "case"
       case symbol_kind::S_CHAR: // "char"
-      case symbol_kind::S_CONST: // "const"
+      case symbol_kind::S_CONSTT: // "const"
       case symbol_kind::S_CONTINUE: // "continue"
       case symbol_kind::S_DEFAULT: // "default"
       case symbol_kind::S_DO: // "do"
@@ -1649,10 +1649,10 @@ namespace  WadeSpace  {
       case symbol_kind::S_TYPEDEF: // "typedef"
       case symbol_kind::S_UNION: // "union"
       case symbol_kind::S_UNSIGNED: // "unsigned"
-      case symbol_kind::S_VOID: // "void"
+      case symbol_kind::S_VOIDT: // "void"
       case symbol_kind::S_VOLATILE: // "volatile"
       case symbol_kind::S_WHILE: // "while"
-      case symbol_kind::S_BOOL: // "bool"
+      case symbol_kind::S_BOOLT: // "bool"
       case symbol_kind::S_ELLIPSIS: // "ellipsis"
       case symbol_kind::S_QUESTION: // "question"
       case symbol_kind::S_SEMICOLON: // ";"
@@ -2458,7 +2458,7 @@ namespace  WadeSpace  {
 
   case 97: // type_specifier: "void"
 #line 433 "ansic.y"
-                                { yylhs.value.as < shared_ptr<TypeSpecifier> > () = make_shared<TypeSpecifier>(VOID, yystack_[0].value.as < shared_ptr<CToken> > (), nullptr, nullptr, nullptr); cout << "VOID REDUCE to type_specifier" << endl;}
+                                 { yylhs.value.as < shared_ptr<TypeSpecifier> > () = make_shared<TypeSpecifier>(VOIDT, yystack_[0].value.as < shared_ptr<CToken> > (), nullptr, nullptr, nullptr); cout << "VOIDT REDUCE to type_specifier" << endl;}
 #line 2463 "parser.cpp"
     break;
 
@@ -2512,7 +2512,7 @@ namespace  WadeSpace  {
 
   case 106: // type_specifier: "bool"
 #line 442 "ansic.y"
-                                { yylhs.value.as < shared_ptr<TypeSpecifier> > () = make_shared<TypeSpecifier>(BOOL, yystack_[0].value.as < shared_ptr<CToken> > (), nullptr, nullptr, nullptr); cout << "BOOL REDUCE to type_specifier" << endl;}
+                                { yylhs.value.as < shared_ptr<TypeSpecifier> > () = make_shared<TypeSpecifier>(BOOLT, yystack_[0].value.as < shared_ptr<CToken> > (), nullptr, nullptr, nullptr); cout << "BOOL REDUCE to type_specifier" << endl;}
 #line 2517 "parser.cpp"
     break;
 
@@ -2692,7 +2692,7 @@ namespace  WadeSpace  {
 
   case 136: // type_qualifier: "const"
 #line 505 "ansic.y"
-               { yylhs.value.as < shared_ptr<TypeQualifier> > () = make_shared<TypeQualifier>(yystack_[0].value.as < shared_ptr<CToken> > ()); cout << "CONST REDUCE to type_qualifier" << endl;}
+                { yylhs.value.as < shared_ptr<TypeQualifier> > () = make_shared<TypeQualifier>(yystack_[0].value.as < shared_ptr<CToken> > ()); cout << "CONSTT REDUCE to type_qualifier" << endl;}
 #line 2697 "parser.cpp"
     break;
 

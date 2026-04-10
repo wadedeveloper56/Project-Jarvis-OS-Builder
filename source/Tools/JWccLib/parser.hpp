@@ -744,7 +744,7 @@ namespace  WadeSpace  {
     TOKEN_BREAK = 264,             // "break"
     TOKEN_CASE = 265,              // "case"
     TOKEN_CHAR = 266,              // "char"
-    TOKEN_CONST = 267,             // "const"
+    TOKEN_CONSTT = 267,            // "const"
     TOKEN_CONTINUE = 268,          // "continue"
     TOKEN_DEFAULT = 269,           // "default"
     TOKEN_DO = 270,                // "do"
@@ -773,10 +773,10 @@ namespace  WadeSpace  {
     TOKEN_TYPEDEF = 293,           // "typedef"
     TOKEN_UNION = 294,             // "union"
     TOKEN_UNSIGNED = 295,          // "unsigned"
-    TOKEN_VOID = 296,              // "void"
+    TOKEN_VOIDT = 296,             // "void"
     TOKEN_VOLATILE = 297,          // "volatile"
     TOKEN_WHILE = 298,             // "while"
-    TOKEN_BOOL = 299,              // "bool"
+    TOKEN_BOOLT = 299,             // "bool"
     TOKEN_ELLIPSIS = 300,          // "ellipsis"
     TOKEN_QUESTION = 301,          // "question"
     TOKEN_SEMICOLON = 302,         // ";"
@@ -853,7 +853,7 @@ namespace  WadeSpace  {
         S_BREAK = 9,                             // "break"
         S_CASE = 10,                             // "case"
         S_CHAR = 11,                             // "char"
-        S_CONST = 12,                            // "const"
+        S_CONSTT = 12,                           // "const"
         S_CONTINUE = 13,                         // "continue"
         S_DEFAULT = 14,                          // "default"
         S_DO = 15,                               // "do"
@@ -882,10 +882,10 @@ namespace  WadeSpace  {
         S_TYPEDEF = 38,                          // "typedef"
         S_UNION = 39,                            // "union"
         S_UNSIGNED = 40,                         // "unsigned"
-        S_VOID = 41,                             // "void"
+        S_VOIDT = 41,                            // "void"
         S_VOLATILE = 42,                         // "volatile"
         S_WHILE = 43,                            // "while"
-        S_BOOL = 44,                             // "bool"
+        S_BOOLT = 44,                            // "bool"
         S_ELLIPSIS = 45,                         // "ellipsis"
         S_QUESTION = 46,                         // "question"
         S_SEMICOLON = 47,                        // ";"
@@ -1056,7 +1056,7 @@ namespace  WadeSpace  {
       case symbol_kind::S_BREAK: // "break"
       case symbol_kind::S_CASE: // "case"
       case symbol_kind::S_CHAR: // "char"
-      case symbol_kind::S_CONST: // "const"
+      case symbol_kind::S_CONSTT: // "const"
       case symbol_kind::S_CONTINUE: // "continue"
       case symbol_kind::S_DEFAULT: // "default"
       case symbol_kind::S_DO: // "do"
@@ -1085,10 +1085,10 @@ namespace  WadeSpace  {
       case symbol_kind::S_TYPEDEF: // "typedef"
       case symbol_kind::S_UNION: // "union"
       case symbol_kind::S_UNSIGNED: // "unsigned"
-      case symbol_kind::S_VOID: // "void"
+      case symbol_kind::S_VOIDT: // "void"
       case symbol_kind::S_VOLATILE: // "volatile"
       case symbol_kind::S_WHILE: // "while"
-      case symbol_kind::S_BOOL: // "bool"
+      case symbol_kind::S_BOOLT: // "bool"
       case symbol_kind::S_ELLIPSIS: // "ellipsis"
       case symbol_kind::S_QUESTION: // "question"
       case symbol_kind::S_SEMICOLON: // ";"
@@ -1917,7 +1917,7 @@ switch (yykind)
       case symbol_kind::S_BREAK: // "break"
       case symbol_kind::S_CASE: // "case"
       case symbol_kind::S_CHAR: // "char"
-      case symbol_kind::S_CONST: // "const"
+      case symbol_kind::S_CONSTT: // "const"
       case symbol_kind::S_CONTINUE: // "continue"
       case symbol_kind::S_DEFAULT: // "default"
       case symbol_kind::S_DO: // "do"
@@ -1946,10 +1946,10 @@ switch (yykind)
       case symbol_kind::S_TYPEDEF: // "typedef"
       case symbol_kind::S_UNION: // "union"
       case symbol_kind::S_UNSIGNED: // "unsigned"
-      case symbol_kind::S_VOID: // "void"
+      case symbol_kind::S_VOIDT: // "void"
       case symbol_kind::S_VOLATILE: // "volatile"
       case symbol_kind::S_WHILE: // "while"
-      case symbol_kind::S_BOOL: // "bool"
+      case symbol_kind::S_BOOLT: // "bool"
       case symbol_kind::S_ELLIPSIS: // "ellipsis"
       case symbol_kind::S_QUESTION: // "question"
       case symbol_kind::S_SEMICOLON: // ";"
@@ -2508,16 +2508,16 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_CONST (shared_ptr<CToken> v, location_type l)
+      make_CONSTT (shared_ptr<CToken> v, location_type l)
       {
-        return symbol_type (token::TOKEN_CONST, std::move (v), std::move (l));
+        return symbol_type (token::TOKEN_CONSTT, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_CONST (const shared_ptr<CToken>& v, const location_type& l)
+      make_CONSTT (const shared_ptr<CToken>& v, const location_type& l)
       {
-        return symbol_type (token::TOKEN_CONST, v, l);
+        return symbol_type (token::TOKEN_CONSTT, v, l);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
@@ -2943,16 +2943,16 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_VOID (shared_ptr<CToken> v, location_type l)
+      make_VOIDT (shared_ptr<CToken> v, location_type l)
       {
-        return symbol_type (token::TOKEN_VOID, std::move (v), std::move (l));
+        return symbol_type (token::TOKEN_VOIDT, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_VOID (const shared_ptr<CToken>& v, const location_type& l)
+      make_VOIDT (const shared_ptr<CToken>& v, const location_type& l)
       {
-        return symbol_type (token::TOKEN_VOID, v, l);
+        return symbol_type (token::TOKEN_VOIDT, v, l);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
@@ -2988,16 +2988,16 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_BOOL (shared_ptr<CToken> v, location_type l)
+      make_BOOLT (shared_ptr<CToken> v, location_type l)
       {
-        return symbol_type (token::TOKEN_BOOL, std::move (v), std::move (l));
+        return symbol_type (token::TOKEN_BOOLT, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_BOOL (const shared_ptr<CToken>& v, const location_type& l)
+      make_BOOLT (const shared_ptr<CToken>& v, const location_type& l)
       {
-        return symbol_type (token::TOKEN_BOOL, v, l);
+        return symbol_type (token::TOKEN_BOOLT, v, l);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
@@ -4120,7 +4120,7 @@ switch (yykind)
       case symbol_kind::S_BREAK: // "break"
       case symbol_kind::S_CASE: // "case"
       case symbol_kind::S_CHAR: // "char"
-      case symbol_kind::S_CONST: // "const"
+      case symbol_kind::S_CONSTT: // "const"
       case symbol_kind::S_CONTINUE: // "continue"
       case symbol_kind::S_DEFAULT: // "default"
       case symbol_kind::S_DO: // "do"
@@ -4149,10 +4149,10 @@ switch (yykind)
       case symbol_kind::S_TYPEDEF: // "typedef"
       case symbol_kind::S_UNION: // "union"
       case symbol_kind::S_UNSIGNED: // "unsigned"
-      case symbol_kind::S_VOID: // "void"
+      case symbol_kind::S_VOIDT: // "void"
       case symbol_kind::S_VOLATILE: // "volatile"
       case symbol_kind::S_WHILE: // "while"
-      case symbol_kind::S_BOOL: // "bool"
+      case symbol_kind::S_BOOLT: // "bool"
       case symbol_kind::S_ELLIPSIS: // "ellipsis"
       case symbol_kind::S_QUESTION: // "question"
       case symbol_kind::S_SEMICOLON: // ";"
@@ -4419,7 +4419,7 @@ switch (yykind)
       case symbol_kind::S_BREAK: // "break"
       case symbol_kind::S_CASE: // "case"
       case symbol_kind::S_CHAR: // "char"
-      case symbol_kind::S_CONST: // "const"
+      case symbol_kind::S_CONSTT: // "const"
       case symbol_kind::S_CONTINUE: // "continue"
       case symbol_kind::S_DEFAULT: // "default"
       case symbol_kind::S_DO: // "do"
@@ -4448,10 +4448,10 @@ switch (yykind)
       case symbol_kind::S_TYPEDEF: // "typedef"
       case symbol_kind::S_UNION: // "union"
       case symbol_kind::S_UNSIGNED: // "unsigned"
-      case symbol_kind::S_VOID: // "void"
+      case symbol_kind::S_VOIDT: // "void"
       case symbol_kind::S_VOLATILE: // "volatile"
       case symbol_kind::S_WHILE: // "while"
-      case symbol_kind::S_BOOL: // "bool"
+      case symbol_kind::S_BOOLT: // "bool"
       case symbol_kind::S_ELLIPSIS: // "ellipsis"
       case symbol_kind::S_QUESTION: // "question"
       case symbol_kind::S_SEMICOLON: // ";"

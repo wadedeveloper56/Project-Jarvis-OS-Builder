@@ -81,7 +81,7 @@ WS  [ \t\v\n\f]
                }
 "const"        { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_CONST(createKeywordToken(yytext,CONST), WadeSpace::location()); 
+                return WadeSpace::Parser::make_CONSTT(createKeywordToken(yytext,CONSTT), WadeSpace::location()); 
                }
 "continue"     { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
@@ -197,7 +197,7 @@ WS  [ \t\v\n\f]
                }
 "void"         { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_VOID(createKeywordToken(yytext,VOID), WadeSpace::location()); 
+                return WadeSpace::Parser::make_VOIDT(createKeywordToken(yytext,VOIDT), WadeSpace::location()); 
                }
 "volatile"     { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
@@ -209,7 +209,7 @@ WS  [ \t\v\n\f]
                }
 "bool"         { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_BOOL(createKeywordToken(yytext,BOOL), WadeSpace::location()); 
+                return WadeSpace::Parser::make_BOOLT(createKeywordToken(yytext,BOOLT), WadeSpace::location()); 
                }
 {L}{A}*        { 
                 if (compiler->hasTypedef(yytext))

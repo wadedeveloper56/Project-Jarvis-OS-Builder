@@ -25,6 +25,12 @@ namespace WadeSpace
 		[[nodiscard]] bool hasVectorInitDeclarator() const { return vectorInitDeclarator != nullptr; }
 		void setDeclarationSpecifiers(shared_ptr<DeclarationSpecifiers> declarationSpecifiers) { this->declarationSpecifiers = declarationSpecifiers; }
 		void setVectorInitDeclarator(shared_ptr<vector<shared_ptr<InitDeclarator>>> vectorInitDeclarator) { this->vectorInitDeclarator = vectorInitDeclarator; }
-		void addInitDeclarator(shared_ptr<InitDeclarator> initDeclarator) { this->vectorInitDeclarator = make_shared<vector<shared_ptr<InitDeclarator>>>(); this->vectorInitDeclarator->push_back(initDeclarator); }
+		void addInitDeclarator(shared_ptr<InitDeclarator> initDeclarator) { 
+			if (vectorInitDeclarator == nullptr) 
+			{
+				vectorInitDeclarator = make_shared<vector<shared_ptr<InitDeclarator>>>();
+			}
+			vectorInitDeclarator->push_back(initDeclarator); 
+		}
 	};
 }

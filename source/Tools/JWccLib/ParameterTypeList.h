@@ -26,7 +26,8 @@ namespace WadeSpace
 		[[nodiscard]] shared_ptr<vector<shared_ptr<ParameterDeclaration>>> getVectorParameterDeclaration() const { return vectorParameterDeclaration; }
 		[[nodiscard]] bool hasVectorParameterDeclaration() const { return vectorParameterDeclaration != nullptr; }
 		[[nodiscard]] bool hasEllipsis() const { return ellipsis; }
-		void addParameterDeclaration(shared_ptr<ParameterDeclaration> parameterDeclaration) {
+		void addParameterDeclaration(shared_ptr<ParameterDeclaration> parameterDeclaration) 
+		{
 			if (vectorParameterDeclaration == nullptr) vectorParameterDeclaration = make_shared<vector<shared_ptr<ParameterDeclaration>>>();
 			vectorParameterDeclaration->push_back(parameterDeclaration); 
 		}

@@ -63,7 +63,8 @@ namespace WadeSpace
 		[[nodiscard]] bool hasConstantExpression() const { return constantExpression != nullptr; };
 		[[nodiscard]] bool hasParameterTypeList() const { return parameterTypeList != nullptr; };
 		[[nodiscard]] bool hasVectorOfStrings() const { return vectorOfStrings != nullptr; };
-		void addString(shared_ptr<CToken> str) {
+		void addString(shared_ptr<CToken> str) 
+		{
 			if (vectorOfStrings == nullptr) vectorOfStrings = make_shared<vector<shared_ptr<CToken>>>();
 			vectorOfStrings->push_back(str);
 		}

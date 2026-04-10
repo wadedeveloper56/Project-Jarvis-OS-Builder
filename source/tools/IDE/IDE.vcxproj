@@ -78,21 +78,25 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>..\..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\bin\intermediate\IDE\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>..\JWccLib;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>..\..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\bin\intermediate\IDE\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>..\JWccLib;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>..\..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\bin\intermediate\IDE\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>..\JWccLib;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>..\..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\bin\intermediate\IDE\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>..\JWccLib;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -274,6 +278,20 @@
     <Image Include="res\Toolbar.bmp" />
     <Image Include="res\Toolbar256.bmp" />
     <Image Include="res\userimages.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\JWasmLib\JWasmLib.vcxproj">
+      <Project>{fd8eeaf5-d96a-4978-9cb3-d573a9c0d4b1}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\JWccLib\JWccLib.vcxproj">
+      <Project>{55e11707-51c1-4126-9ce7-1d3ef7e9d7f0}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\JWlinkLib\JWlinkLib.vcxproj">
+      <Project>{1054801f-1a40-4a7c-a7d1-303d2a64b79c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\PreProcessor\Preprocessor.vcxproj">
+      <Project>{3b55590c-3e30-413c-b121-c80fbe2d2c77}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
