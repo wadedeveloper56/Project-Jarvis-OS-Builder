@@ -3,7 +3,7 @@
 
 using namespace std;
 
-void zapTokData(TokDataPtr elem)
+void zapTokData(shared_ptr<CTokData> elem)
 {
 	if (elem == nullptr)
 	{
@@ -15,26 +15,16 @@ void zapTokData(TokDataPtr elem)
 	}
 	else if (elem->code == YC_STRING)
 	{
-		delete[] elem->repr.stringConstant.s;
+		//delete[] elem->repr.stringConstant.s;
 	}
 	else
 	{
-		delete[] elem->repr.symbol.string;
+		//delete[] elem->repr.symbol.string;
 	}
-	delete elem;
+	//delete elem;
 }
 
-Token::Token()
-{
-	data = nullptr;
-}
-
-Token::~Token()
-{
-//	if (data != nullptr) zapTokData(data);
-}
-
-string Token::getSymbolName() const
+string CToken::getSymbolName() const
 {
 	if (data != nullptr)
 	{
@@ -46,7 +36,7 @@ string Token::getSymbolName() const
 	return "";
 }
 
-string Token::getKeywordName() const
+string CToken::getKeywordName() const
 {
 	if (data != nullptr)
 	{
@@ -58,7 +48,7 @@ string Token::getKeywordName() const
 	return "";
 }
 
-unsigned long long Token::getIntegerConst() const
+unsigned long long CToken::getIntegerConst() const
 {
 	if (data != nullptr)
 	{
@@ -70,7 +60,7 @@ unsigned long long Token::getIntegerConst() const
 	return 0;
 }
 
-long double Token::getDoubleConst() const
+long double CToken::getDoubleConst() const
 {
 	if (data != nullptr)
 	{

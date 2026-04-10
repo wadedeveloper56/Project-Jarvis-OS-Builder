@@ -456,7 +456,7 @@ namespace  WadeSpace  {
     union union_type
     {
       // abstract_declarator
-      char dummy1[sizeof (AbstractDeclarator *)];
+      char dummy1[sizeof (shared_ptr<AbstractDeclarator>)];
 
       // statement
       // compound_statement
@@ -464,90 +464,7 @@ namespace  WadeSpace  {
       // selection_statement
       // iteration_statement
       // jump_statement
-      char dummy2[sizeof (BaseStatement *)];
-
-      // constant
-      char dummy3[sizeof (Constant *)];
-
-      // declaration
-      char dummy4[sizeof (Declaration *)];
-
-      // declaration_specifiers
-      char dummy5[sizeof (DeclarationSpecifiers *)];
-
-      // declarator
-      char dummy6[sizeof (Declarator *)];
-
-      // direct_abstract_declarator
-      char dummy7[sizeof (DirectAbstractDeclarator *)];
-
-      // direct_declarator
-      char dummy8[sizeof (DirectDeclarator *)];
-
-      // enum_specifier
-      char dummy9[sizeof (EnumSpecifier *)];
-
-      // enumerator
-      char dummy10[sizeof (Enumerator *)];
-
-      // primary_expression
-      // postfix_expression
-      // unary_expression
-      // cast_expression
-      // multiplicative_expression
-      // additive_expression
-      // shift_expression
-      // relational_expression
-      // equality_expression
-      // and_expression
-      // exclusive_or_expression
-      // inclusive_or_expression
-      // logical_and_expression
-      // logical_or_expression
-      // conditional_expression
-      // assignment_expression
-      // expression
-      // constant_expression
-      char dummy11[sizeof (ExpressionTree *)];
-
-      // external_declaration
-      char dummy12[sizeof (ExternalDeclaration *)];
-
-      // function_definition
-      char dummy13[sizeof (FunctionDefinition *)];
-
-      // init_declarator
-      char dummy14[sizeof (InitDeclarator *)];
-
-      // initializer
-      char dummy15[sizeof (Initializer *)];
-
-      // labeled_statement
-      char dummy16[sizeof (LabeledStatement *)];
-
-      // parameter_declaration
-      char dummy17[sizeof (ParameterDeclaration *)];
-
-      // parameter_type_list
-      char dummy18[sizeof (ParameterTypeList *)];
-
-      // pointer
-      char dummy19[sizeof (Pointer *)];
-
-      // specifier_qualifier_list
-      char dummy20[sizeof (SpecifierQualifierList *)];
-
-      // storage_class_specifier
-      char dummy21[sizeof (StorageClassSpecifier *)];
-
-      // struct_declaration
-      char dummy22[sizeof (StructDeclaration *)];
-
-      // struct_declarator
-      char dummy23[sizeof (StructDeclarator *)];
-
-      // struct_or_union_specifier
-      char dummy24[sizeof (StructOrUnionSpecifier *)];
+      char dummy2[sizeof (shared_ptr<BaseStatement>)];
 
       // "identifier"
       // "i_const"
@@ -640,49 +557,132 @@ namespace  WadeSpace  {
       // unary_operator
       // assignment_operator
       // struct_or_union
-      char dummy25[sizeof (TokenPtr)];
+      char dummy3[sizeof (shared_ptr<CToken>)];
+
+      // constant
+      char dummy4[sizeof (shared_ptr<Constant>)];
+
+      // declaration
+      char dummy5[sizeof (shared_ptr<Declaration>)];
+
+      // declaration_specifiers
+      char dummy6[sizeof (shared_ptr<DeclarationSpecifiers>)];
+
+      // declarator
+      char dummy7[sizeof (shared_ptr<Declarator>)];
+
+      // direct_abstract_declarator
+      char dummy8[sizeof (shared_ptr<DirectAbstractDeclarator>)];
+
+      // direct_declarator
+      char dummy9[sizeof (shared_ptr<DirectDeclarator>)];
+
+      // enum_specifier
+      char dummy10[sizeof (shared_ptr<EnumSpecifier>)];
+
+      // enumerator
+      char dummy11[sizeof (shared_ptr<Enumerator>)];
+
+      // primary_expression
+      // postfix_expression
+      // unary_expression
+      // cast_expression
+      // multiplicative_expression
+      // additive_expression
+      // shift_expression
+      // relational_expression
+      // equality_expression
+      // and_expression
+      // exclusive_or_expression
+      // inclusive_or_expression
+      // logical_and_expression
+      // logical_or_expression
+      // conditional_expression
+      // assignment_expression
+      // expression
+      // constant_expression
+      char dummy12[sizeof (shared_ptr<ExpressionTree>)];
+
+      // external_declaration
+      char dummy13[sizeof (shared_ptr<ExternalDeclaration>)];
+
+      // function_definition
+      char dummy14[sizeof (shared_ptr<FunctionDefinition>)];
+
+      // init_declarator
+      char dummy15[sizeof (shared_ptr<InitDeclarator>)];
+
+      // initializer
+      char dummy16[sizeof (shared_ptr<Initializer>)];
+
+      // labeled_statement
+      char dummy17[sizeof (shared_ptr<LabeledStatement>)];
+
+      // parameter_declaration
+      char dummy18[sizeof (shared_ptr<ParameterDeclaration>)];
+
+      // parameter_type_list
+      char dummy19[sizeof (shared_ptr<ParameterTypeList>)];
+
+      // pointer
+      char dummy20[sizeof (shared_ptr<Pointer>)];
+
+      // specifier_qualifier_list
+      char dummy21[sizeof (shared_ptr<SpecifierQualifierList>)];
+
+      // storage_class_specifier
+      char dummy22[sizeof (shared_ptr<StorageClassSpecifier>)];
+
+      // struct_declaration
+      char dummy23[sizeof (shared_ptr<StructDeclaration>)];
+
+      // struct_declarator
+      char dummy24[sizeof (shared_ptr<StructDeclarator>)];
+
+      // struct_or_union_specifier
+      char dummy25[sizeof (shared_ptr<StructOrUnionSpecifier>)];
 
       // type_name
-      char dummy26[sizeof (TypeName *)];
+      char dummy26[sizeof (shared_ptr<TypeName>)];
 
       // type_qualifier
-      char dummy27[sizeof (TypeQualifier *)];
+      char dummy27[sizeof (shared_ptr<TypeQualifier>)];
 
       // type_specifier
-      char dummy28[sizeof (TypeSpecifier *)];
+      char dummy28[sizeof (shared_ptr<TypeSpecifier>)];
 
       // statement_list
-      char dummy29[sizeof (std::vector<BaseStatement *> *)];
-
-      // declaration_list
-      char dummy30[sizeof (std::vector<Declaration *> *)];
-
-      // enumerator_list
-      char dummy31[sizeof (std::vector<Enumerator *> *)];
-
-      // init_declarator_list
-      char dummy32[sizeof (std::vector<InitDeclarator *> *)];
-
-      // initializer_list
-      char dummy33[sizeof (std::vector<Initializer *> *)];
-
-      // parameter_list
-      char dummy34[sizeof (std::vector<ParameterDeclaration *> *)];
-
-      // struct_declaration_list
-      char dummy35[sizeof (std::vector<StructDeclaration *> *)];
-
-      // struct_declarator_list
-      char dummy36[sizeof (std::vector<StructDeclarator *> *)];
+      char dummy29[sizeof (shared_ptr<vector<shared_ptr<BaseStatement>>>)];
 
       // identifier_list
-      char dummy37[sizeof (std::vector<TokenPtr> *)];
+      char dummy30[sizeof (shared_ptr<vector<shared_ptr<CToken>>>)];
 
-      // type_qualifier_list
-      char dummy38[sizeof (std::vector<TypeQualifier *> *)];
+      // declaration_list
+      char dummy31[sizeof (shared_ptr<vector<shared_ptr<Declaration>>>)];
+
+      // enumerator_list
+      char dummy32[sizeof (shared_ptr<vector<shared_ptr<Enumerator>>>)];
 
       // argument_expression_list
-      char dummy39[sizeof (vector<ExpressionTree *> *)];
+      char dummy33[sizeof (shared_ptr<vector<shared_ptr<ExpressionTree>>>)];
+
+      // init_declarator_list
+      char dummy34[sizeof (shared_ptr<vector<shared_ptr<InitDeclarator>>>)];
+
+      // initializer_list
+      char dummy35[sizeof (shared_ptr<vector<shared_ptr<Initializer>>>)];
+
+      // parameter_list
+      char dummy36[sizeof (shared_ptr<vector<shared_ptr<ParameterDeclaration>>>)];
+
+      // struct_declaration_list
+      char dummy37[sizeof (shared_ptr<vector<shared_ptr<StructDeclaration>>>)];
+
+      // struct_declarator_list
+      char dummy38[sizeof (shared_ptr<vector<shared_ptr<StructDeclarator>>>)];
+
+      // type_qualifier_list
+      char dummy39[sizeof (shared_ptr<vector<shared_ptr<TypeQualifier>>>)];
     };
 
     /// The size of the largest semantic type.
@@ -1035,7 +1035,7 @@ namespace  WadeSpace  {
         switch (this->kind ())
     {
       case symbol_kind::S_abstract_declarator: // abstract_declarator
-        value.move< AbstractDeclarator * > (std::move (that.value));
+        value.move< shared_ptr<AbstractDeclarator> > (std::move (that.value));
         break;
 
       case symbol_kind::S_statement: // statement
@@ -1044,112 +1044,7 @@ namespace  WadeSpace  {
       case symbol_kind::S_selection_statement: // selection_statement
       case symbol_kind::S_iteration_statement: // iteration_statement
       case symbol_kind::S_jump_statement: // jump_statement
-        value.move< BaseStatement * > (std::move (that.value));
-        break;
-
-      case symbol_kind::S_constant: // constant
-        value.move< Constant * > (std::move (that.value));
-        break;
-
-      case symbol_kind::S_declaration: // declaration
-        value.move< Declaration * > (std::move (that.value));
-        break;
-
-      case symbol_kind::S_declaration_specifiers: // declaration_specifiers
-        value.move< DeclarationSpecifiers * > (std::move (that.value));
-        break;
-
-      case symbol_kind::S_declarator: // declarator
-        value.move< Declarator * > (std::move (that.value));
-        break;
-
-      case symbol_kind::S_direct_abstract_declarator: // direct_abstract_declarator
-        value.move< DirectAbstractDeclarator * > (std::move (that.value));
-        break;
-
-      case symbol_kind::S_direct_declarator: // direct_declarator
-        value.move< DirectDeclarator * > (std::move (that.value));
-        break;
-
-      case symbol_kind::S_enum_specifier: // enum_specifier
-        value.move< EnumSpecifier * > (std::move (that.value));
-        break;
-
-      case symbol_kind::S_enumerator: // enumerator
-        value.move< Enumerator * > (std::move (that.value));
-        break;
-
-      case symbol_kind::S_primary_expression: // primary_expression
-      case symbol_kind::S_postfix_expression: // postfix_expression
-      case symbol_kind::S_unary_expression: // unary_expression
-      case symbol_kind::S_cast_expression: // cast_expression
-      case symbol_kind::S_multiplicative_expression: // multiplicative_expression
-      case symbol_kind::S_additive_expression: // additive_expression
-      case symbol_kind::S_shift_expression: // shift_expression
-      case symbol_kind::S_relational_expression: // relational_expression
-      case symbol_kind::S_equality_expression: // equality_expression
-      case symbol_kind::S_and_expression: // and_expression
-      case symbol_kind::S_exclusive_or_expression: // exclusive_or_expression
-      case symbol_kind::S_inclusive_or_expression: // inclusive_or_expression
-      case symbol_kind::S_logical_and_expression: // logical_and_expression
-      case symbol_kind::S_logical_or_expression: // logical_or_expression
-      case symbol_kind::S_conditional_expression: // conditional_expression
-      case symbol_kind::S_assignment_expression: // assignment_expression
-      case symbol_kind::S_expression: // expression
-      case symbol_kind::S_constant_expression: // constant_expression
-        value.move< ExpressionTree * > (std::move (that.value));
-        break;
-
-      case symbol_kind::S_external_declaration: // external_declaration
-        value.move< ExternalDeclaration * > (std::move (that.value));
-        break;
-
-      case symbol_kind::S_function_definition: // function_definition
-        value.move< FunctionDefinition * > (std::move (that.value));
-        break;
-
-      case symbol_kind::S_init_declarator: // init_declarator
-        value.move< InitDeclarator * > (std::move (that.value));
-        break;
-
-      case symbol_kind::S_initializer: // initializer
-        value.move< Initializer * > (std::move (that.value));
-        break;
-
-      case symbol_kind::S_labeled_statement: // labeled_statement
-        value.move< LabeledStatement * > (std::move (that.value));
-        break;
-
-      case symbol_kind::S_parameter_declaration: // parameter_declaration
-        value.move< ParameterDeclaration * > (std::move (that.value));
-        break;
-
-      case symbol_kind::S_parameter_type_list: // parameter_type_list
-        value.move< ParameterTypeList * > (std::move (that.value));
-        break;
-
-      case symbol_kind::S_pointer: // pointer
-        value.move< Pointer * > (std::move (that.value));
-        break;
-
-      case symbol_kind::S_specifier_qualifier_list: // specifier_qualifier_list
-        value.move< SpecifierQualifierList * > (std::move (that.value));
-        break;
-
-      case symbol_kind::S_storage_class_specifier: // storage_class_specifier
-        value.move< StorageClassSpecifier * > (std::move (that.value));
-        break;
-
-      case symbol_kind::S_struct_declaration: // struct_declaration
-        value.move< StructDeclaration * > (std::move (that.value));
-        break;
-
-      case symbol_kind::S_struct_declarator: // struct_declarator
-        value.move< StructDeclarator * > (std::move (that.value));
-        break;
-
-      case symbol_kind::S_struct_or_union_specifier: // struct_or_union_specifier
-        value.move< StructOrUnionSpecifier * > (std::move (that.value));
+        value.move< shared_ptr<BaseStatement> > (std::move (that.value));
         break;
 
       case symbol_kind::S_IDENTIFIER: // "identifier"
@@ -1243,63 +1138,168 @@ namespace  WadeSpace  {
       case symbol_kind::S_unary_operator: // unary_operator
       case symbol_kind::S_assignment_operator: // assignment_operator
       case symbol_kind::S_struct_or_union: // struct_or_union
-        value.move< TokenPtr > (std::move (that.value));
+        value.move< shared_ptr<CToken> > (std::move (that.value));
+        break;
+
+      case symbol_kind::S_constant: // constant
+        value.move< shared_ptr<Constant> > (std::move (that.value));
+        break;
+
+      case symbol_kind::S_declaration: // declaration
+        value.move< shared_ptr<Declaration> > (std::move (that.value));
+        break;
+
+      case symbol_kind::S_declaration_specifiers: // declaration_specifiers
+        value.move< shared_ptr<DeclarationSpecifiers> > (std::move (that.value));
+        break;
+
+      case symbol_kind::S_declarator: // declarator
+        value.move< shared_ptr<Declarator> > (std::move (that.value));
+        break;
+
+      case symbol_kind::S_direct_abstract_declarator: // direct_abstract_declarator
+        value.move< shared_ptr<DirectAbstractDeclarator> > (std::move (that.value));
+        break;
+
+      case symbol_kind::S_direct_declarator: // direct_declarator
+        value.move< shared_ptr<DirectDeclarator> > (std::move (that.value));
+        break;
+
+      case symbol_kind::S_enum_specifier: // enum_specifier
+        value.move< shared_ptr<EnumSpecifier> > (std::move (that.value));
+        break;
+
+      case symbol_kind::S_enumerator: // enumerator
+        value.move< shared_ptr<Enumerator> > (std::move (that.value));
+        break;
+
+      case symbol_kind::S_primary_expression: // primary_expression
+      case symbol_kind::S_postfix_expression: // postfix_expression
+      case symbol_kind::S_unary_expression: // unary_expression
+      case symbol_kind::S_cast_expression: // cast_expression
+      case symbol_kind::S_multiplicative_expression: // multiplicative_expression
+      case symbol_kind::S_additive_expression: // additive_expression
+      case symbol_kind::S_shift_expression: // shift_expression
+      case symbol_kind::S_relational_expression: // relational_expression
+      case symbol_kind::S_equality_expression: // equality_expression
+      case symbol_kind::S_and_expression: // and_expression
+      case symbol_kind::S_exclusive_or_expression: // exclusive_or_expression
+      case symbol_kind::S_inclusive_or_expression: // inclusive_or_expression
+      case symbol_kind::S_logical_and_expression: // logical_and_expression
+      case symbol_kind::S_logical_or_expression: // logical_or_expression
+      case symbol_kind::S_conditional_expression: // conditional_expression
+      case symbol_kind::S_assignment_expression: // assignment_expression
+      case symbol_kind::S_expression: // expression
+      case symbol_kind::S_constant_expression: // constant_expression
+        value.move< shared_ptr<ExpressionTree> > (std::move (that.value));
+        break;
+
+      case symbol_kind::S_external_declaration: // external_declaration
+        value.move< shared_ptr<ExternalDeclaration> > (std::move (that.value));
+        break;
+
+      case symbol_kind::S_function_definition: // function_definition
+        value.move< shared_ptr<FunctionDefinition> > (std::move (that.value));
+        break;
+
+      case symbol_kind::S_init_declarator: // init_declarator
+        value.move< shared_ptr<InitDeclarator> > (std::move (that.value));
+        break;
+
+      case symbol_kind::S_initializer: // initializer
+        value.move< shared_ptr<Initializer> > (std::move (that.value));
+        break;
+
+      case symbol_kind::S_labeled_statement: // labeled_statement
+        value.move< shared_ptr<LabeledStatement> > (std::move (that.value));
+        break;
+
+      case symbol_kind::S_parameter_declaration: // parameter_declaration
+        value.move< shared_ptr<ParameterDeclaration> > (std::move (that.value));
+        break;
+
+      case symbol_kind::S_parameter_type_list: // parameter_type_list
+        value.move< shared_ptr<ParameterTypeList> > (std::move (that.value));
+        break;
+
+      case symbol_kind::S_pointer: // pointer
+        value.move< shared_ptr<Pointer> > (std::move (that.value));
+        break;
+
+      case symbol_kind::S_specifier_qualifier_list: // specifier_qualifier_list
+        value.move< shared_ptr<SpecifierQualifierList> > (std::move (that.value));
+        break;
+
+      case symbol_kind::S_storage_class_specifier: // storage_class_specifier
+        value.move< shared_ptr<StorageClassSpecifier> > (std::move (that.value));
+        break;
+
+      case symbol_kind::S_struct_declaration: // struct_declaration
+        value.move< shared_ptr<StructDeclaration> > (std::move (that.value));
+        break;
+
+      case symbol_kind::S_struct_declarator: // struct_declarator
+        value.move< shared_ptr<StructDeclarator> > (std::move (that.value));
+        break;
+
+      case symbol_kind::S_struct_or_union_specifier: // struct_or_union_specifier
+        value.move< shared_ptr<StructOrUnionSpecifier> > (std::move (that.value));
         break;
 
       case symbol_kind::S_type_name: // type_name
-        value.move< TypeName * > (std::move (that.value));
+        value.move< shared_ptr<TypeName> > (std::move (that.value));
         break;
 
       case symbol_kind::S_type_qualifier: // type_qualifier
-        value.move< TypeQualifier * > (std::move (that.value));
+        value.move< shared_ptr<TypeQualifier> > (std::move (that.value));
         break;
 
       case symbol_kind::S_type_specifier: // type_specifier
-        value.move< TypeSpecifier * > (std::move (that.value));
+        value.move< shared_ptr<TypeSpecifier> > (std::move (that.value));
         break;
 
       case symbol_kind::S_statement_list: // statement_list
-        value.move< std::vector<BaseStatement *> * > (std::move (that.value));
-        break;
-
-      case symbol_kind::S_declaration_list: // declaration_list
-        value.move< std::vector<Declaration *> * > (std::move (that.value));
-        break;
-
-      case symbol_kind::S_enumerator_list: // enumerator_list
-        value.move< std::vector<Enumerator *> * > (std::move (that.value));
-        break;
-
-      case symbol_kind::S_init_declarator_list: // init_declarator_list
-        value.move< std::vector<InitDeclarator *> * > (std::move (that.value));
-        break;
-
-      case symbol_kind::S_initializer_list: // initializer_list
-        value.move< std::vector<Initializer *> * > (std::move (that.value));
-        break;
-
-      case symbol_kind::S_parameter_list: // parameter_list
-        value.move< std::vector<ParameterDeclaration *> * > (std::move (that.value));
-        break;
-
-      case symbol_kind::S_struct_declaration_list: // struct_declaration_list
-        value.move< std::vector<StructDeclaration *> * > (std::move (that.value));
-        break;
-
-      case symbol_kind::S_struct_declarator_list: // struct_declarator_list
-        value.move< std::vector<StructDeclarator *> * > (std::move (that.value));
+        value.move< shared_ptr<vector<shared_ptr<BaseStatement>>> > (std::move (that.value));
         break;
 
       case symbol_kind::S_identifier_list: // identifier_list
-        value.move< std::vector<TokenPtr> * > (std::move (that.value));
+        value.move< shared_ptr<vector<shared_ptr<CToken>>> > (std::move (that.value));
         break;
 
-      case symbol_kind::S_type_qualifier_list: // type_qualifier_list
-        value.move< std::vector<TypeQualifier *> * > (std::move (that.value));
+      case symbol_kind::S_declaration_list: // declaration_list
+        value.move< shared_ptr<vector<shared_ptr<Declaration>>> > (std::move (that.value));
+        break;
+
+      case symbol_kind::S_enumerator_list: // enumerator_list
+        value.move< shared_ptr<vector<shared_ptr<Enumerator>>> > (std::move (that.value));
         break;
 
       case symbol_kind::S_argument_expression_list: // argument_expression_list
-        value.move< vector<ExpressionTree *> * > (std::move (that.value));
+        value.move< shared_ptr<vector<shared_ptr<ExpressionTree>>> > (std::move (that.value));
+        break;
+
+      case symbol_kind::S_init_declarator_list: // init_declarator_list
+        value.move< shared_ptr<vector<shared_ptr<InitDeclarator>>> > (std::move (that.value));
+        break;
+
+      case symbol_kind::S_initializer_list: // initializer_list
+        value.move< shared_ptr<vector<shared_ptr<Initializer>>> > (std::move (that.value));
+        break;
+
+      case symbol_kind::S_parameter_list: // parameter_list
+        value.move< shared_ptr<vector<shared_ptr<ParameterDeclaration>>> > (std::move (that.value));
+        break;
+
+      case symbol_kind::S_struct_declaration_list: // struct_declaration_list
+        value.move< shared_ptr<vector<shared_ptr<StructDeclaration>>> > (std::move (that.value));
+        break;
+
+      case symbol_kind::S_struct_declarator_list: // struct_declarator_list
+        value.move< shared_ptr<vector<shared_ptr<StructDeclarator>>> > (std::move (that.value));
+        break;
+
+      case symbol_kind::S_type_qualifier_list: // type_qualifier_list
+        value.move< shared_ptr<vector<shared_ptr<TypeQualifier>>> > (std::move (that.value));
         break;
 
       default:
@@ -1326,13 +1326,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, AbstractDeclarator *&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, shared_ptr<AbstractDeclarator>&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const AbstractDeclarator *& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const shared_ptr<AbstractDeclarator>& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1340,13 +1340,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, BaseStatement *&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, shared_ptr<BaseStatement>&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const BaseStatement *& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const shared_ptr<BaseStatement>& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1354,13 +1354,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, Constant *&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, shared_ptr<CToken>&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const Constant *& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const shared_ptr<CToken>& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1368,13 +1368,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, Declaration *&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, shared_ptr<Constant>&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const Declaration *& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const shared_ptr<Constant>& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1382,13 +1382,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, DeclarationSpecifiers *&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, shared_ptr<Declaration>&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const DeclarationSpecifiers *& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const shared_ptr<Declaration>& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1396,13 +1396,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, Declarator *&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, shared_ptr<DeclarationSpecifiers>&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const Declarator *& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const shared_ptr<DeclarationSpecifiers>& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1410,13 +1410,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, DirectAbstractDeclarator *&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, shared_ptr<Declarator>&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const DirectAbstractDeclarator *& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const shared_ptr<Declarator>& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1424,13 +1424,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, DirectDeclarator *&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, shared_ptr<DirectAbstractDeclarator>&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const DirectDeclarator *& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const shared_ptr<DirectAbstractDeclarator>& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1438,13 +1438,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, EnumSpecifier *&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, shared_ptr<DirectDeclarator>&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const EnumSpecifier *& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const shared_ptr<DirectDeclarator>& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1452,13 +1452,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, Enumerator *&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, shared_ptr<EnumSpecifier>&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const Enumerator *& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const shared_ptr<EnumSpecifier>& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1466,13 +1466,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, ExpressionTree *&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, shared_ptr<Enumerator>&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const ExpressionTree *& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const shared_ptr<Enumerator>& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1480,13 +1480,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, ExternalDeclaration *&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, shared_ptr<ExpressionTree>&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const ExternalDeclaration *& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const shared_ptr<ExpressionTree>& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1494,13 +1494,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, FunctionDefinition *&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, shared_ptr<ExternalDeclaration>&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const FunctionDefinition *& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const shared_ptr<ExternalDeclaration>& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1508,13 +1508,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, InitDeclarator *&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, shared_ptr<FunctionDefinition>&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const InitDeclarator *& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const shared_ptr<FunctionDefinition>& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1522,13 +1522,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, Initializer *&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, shared_ptr<InitDeclarator>&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const Initializer *& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const shared_ptr<InitDeclarator>& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1536,13 +1536,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, LabeledStatement *&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, shared_ptr<Initializer>&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const LabeledStatement *& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const shared_ptr<Initializer>& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1550,13 +1550,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, ParameterDeclaration *&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, shared_ptr<LabeledStatement>&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const ParameterDeclaration *& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const shared_ptr<LabeledStatement>& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1564,13 +1564,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, ParameterTypeList *&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, shared_ptr<ParameterDeclaration>&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const ParameterTypeList *& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const shared_ptr<ParameterDeclaration>& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1578,13 +1578,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, Pointer *&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, shared_ptr<ParameterTypeList>&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const Pointer *& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const shared_ptr<ParameterTypeList>& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1592,13 +1592,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, SpecifierQualifierList *&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, shared_ptr<Pointer>&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const SpecifierQualifierList *& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const shared_ptr<Pointer>& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1606,13 +1606,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, StorageClassSpecifier *&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, shared_ptr<SpecifierQualifierList>&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const StorageClassSpecifier *& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const shared_ptr<SpecifierQualifierList>& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1620,13 +1620,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, StructDeclaration *&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, shared_ptr<StorageClassSpecifier>&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const StructDeclaration *& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const shared_ptr<StorageClassSpecifier>& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1634,13 +1634,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, StructDeclarator *&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, shared_ptr<StructDeclaration>&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const StructDeclarator *& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const shared_ptr<StructDeclaration>& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1648,13 +1648,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, StructOrUnionSpecifier *&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, shared_ptr<StructDeclarator>&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const StructOrUnionSpecifier *& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const shared_ptr<StructDeclarator>& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1662,13 +1662,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, TokenPtr&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, shared_ptr<StructOrUnionSpecifier>&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const TokenPtr& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const shared_ptr<StructOrUnionSpecifier>& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1676,13 +1676,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, TypeName *&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, shared_ptr<TypeName>&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const TypeName *& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const shared_ptr<TypeName>& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1690,13 +1690,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, TypeQualifier *&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, shared_ptr<TypeQualifier>&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const TypeQualifier *& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const shared_ptr<TypeQualifier>& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1704,13 +1704,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, TypeSpecifier *&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, shared_ptr<TypeSpecifier>&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const TypeSpecifier *& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const shared_ptr<TypeSpecifier>& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1718,13 +1718,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, std::vector<BaseStatement *> *&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, shared_ptr<vector<shared_ptr<BaseStatement>>>&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const std::vector<BaseStatement *> *& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const shared_ptr<vector<shared_ptr<BaseStatement>>>& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1732,13 +1732,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, std::vector<Declaration *> *&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, shared_ptr<vector<shared_ptr<CToken>>>&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const std::vector<Declaration *> *& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const shared_ptr<vector<shared_ptr<CToken>>>& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1746,13 +1746,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, std::vector<Enumerator *> *&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, shared_ptr<vector<shared_ptr<Declaration>>>&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const std::vector<Enumerator *> *& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const shared_ptr<vector<shared_ptr<Declaration>>>& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1760,13 +1760,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, std::vector<InitDeclarator *> *&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, shared_ptr<vector<shared_ptr<Enumerator>>>&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const std::vector<InitDeclarator *> *& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const shared_ptr<vector<shared_ptr<Enumerator>>>& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1774,13 +1774,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, std::vector<Initializer *> *&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, shared_ptr<vector<shared_ptr<ExpressionTree>>>&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const std::vector<Initializer *> *& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const shared_ptr<vector<shared_ptr<ExpressionTree>>>& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1788,13 +1788,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, std::vector<ParameterDeclaration *> *&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, shared_ptr<vector<shared_ptr<InitDeclarator>>>&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const std::vector<ParameterDeclaration *> *& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const shared_ptr<vector<shared_ptr<InitDeclarator>>>& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1802,13 +1802,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, std::vector<StructDeclaration *> *&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, shared_ptr<vector<shared_ptr<Initializer>>>&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const std::vector<StructDeclaration *> *& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const shared_ptr<vector<shared_ptr<Initializer>>>& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1816,13 +1816,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, std::vector<StructDeclarator *> *&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, shared_ptr<vector<shared_ptr<ParameterDeclaration>>>&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const std::vector<StructDeclarator *> *& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const shared_ptr<vector<shared_ptr<ParameterDeclaration>>>& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1830,13 +1830,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, std::vector<TokenPtr> *&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, shared_ptr<vector<shared_ptr<StructDeclaration>>>&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const std::vector<TokenPtr> *& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const shared_ptr<vector<shared_ptr<StructDeclaration>>>& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1844,13 +1844,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, std::vector<TypeQualifier *> *&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, shared_ptr<vector<shared_ptr<StructDeclarator>>>&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const std::vector<TypeQualifier *> *& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const shared_ptr<vector<shared_ptr<StructDeclarator>>>& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1858,13 +1858,13 @@ namespace  WadeSpace  {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, vector<ExpressionTree *> *&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, shared_ptr<vector<shared_ptr<TypeQualifier>>>&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const vector<ExpressionTree *> *& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const shared_ptr<vector<shared_ptr<TypeQualifier>>>& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -1896,7 +1896,7 @@ namespace  WadeSpace  {
 switch (yykind)
     {
       case symbol_kind::S_abstract_declarator: // abstract_declarator
-        value.template destroy< AbstractDeclarator * > ();
+        value.template destroy< shared_ptr<AbstractDeclarator> > ();
         break;
 
       case symbol_kind::S_statement: // statement
@@ -1905,112 +1905,7 @@ switch (yykind)
       case symbol_kind::S_selection_statement: // selection_statement
       case symbol_kind::S_iteration_statement: // iteration_statement
       case symbol_kind::S_jump_statement: // jump_statement
-        value.template destroy< BaseStatement * > ();
-        break;
-
-      case symbol_kind::S_constant: // constant
-        value.template destroy< Constant * > ();
-        break;
-
-      case symbol_kind::S_declaration: // declaration
-        value.template destroy< Declaration * > ();
-        break;
-
-      case symbol_kind::S_declaration_specifiers: // declaration_specifiers
-        value.template destroy< DeclarationSpecifiers * > ();
-        break;
-
-      case symbol_kind::S_declarator: // declarator
-        value.template destroy< Declarator * > ();
-        break;
-
-      case symbol_kind::S_direct_abstract_declarator: // direct_abstract_declarator
-        value.template destroy< DirectAbstractDeclarator * > ();
-        break;
-
-      case symbol_kind::S_direct_declarator: // direct_declarator
-        value.template destroy< DirectDeclarator * > ();
-        break;
-
-      case symbol_kind::S_enum_specifier: // enum_specifier
-        value.template destroy< EnumSpecifier * > ();
-        break;
-
-      case symbol_kind::S_enumerator: // enumerator
-        value.template destroy< Enumerator * > ();
-        break;
-
-      case symbol_kind::S_primary_expression: // primary_expression
-      case symbol_kind::S_postfix_expression: // postfix_expression
-      case symbol_kind::S_unary_expression: // unary_expression
-      case symbol_kind::S_cast_expression: // cast_expression
-      case symbol_kind::S_multiplicative_expression: // multiplicative_expression
-      case symbol_kind::S_additive_expression: // additive_expression
-      case symbol_kind::S_shift_expression: // shift_expression
-      case symbol_kind::S_relational_expression: // relational_expression
-      case symbol_kind::S_equality_expression: // equality_expression
-      case symbol_kind::S_and_expression: // and_expression
-      case symbol_kind::S_exclusive_or_expression: // exclusive_or_expression
-      case symbol_kind::S_inclusive_or_expression: // inclusive_or_expression
-      case symbol_kind::S_logical_and_expression: // logical_and_expression
-      case symbol_kind::S_logical_or_expression: // logical_or_expression
-      case symbol_kind::S_conditional_expression: // conditional_expression
-      case symbol_kind::S_assignment_expression: // assignment_expression
-      case symbol_kind::S_expression: // expression
-      case symbol_kind::S_constant_expression: // constant_expression
-        value.template destroy< ExpressionTree * > ();
-        break;
-
-      case symbol_kind::S_external_declaration: // external_declaration
-        value.template destroy< ExternalDeclaration * > ();
-        break;
-
-      case symbol_kind::S_function_definition: // function_definition
-        value.template destroy< FunctionDefinition * > ();
-        break;
-
-      case symbol_kind::S_init_declarator: // init_declarator
-        value.template destroy< InitDeclarator * > ();
-        break;
-
-      case symbol_kind::S_initializer: // initializer
-        value.template destroy< Initializer * > ();
-        break;
-
-      case symbol_kind::S_labeled_statement: // labeled_statement
-        value.template destroy< LabeledStatement * > ();
-        break;
-
-      case symbol_kind::S_parameter_declaration: // parameter_declaration
-        value.template destroy< ParameterDeclaration * > ();
-        break;
-
-      case symbol_kind::S_parameter_type_list: // parameter_type_list
-        value.template destroy< ParameterTypeList * > ();
-        break;
-
-      case symbol_kind::S_pointer: // pointer
-        value.template destroy< Pointer * > ();
-        break;
-
-      case symbol_kind::S_specifier_qualifier_list: // specifier_qualifier_list
-        value.template destroy< SpecifierQualifierList * > ();
-        break;
-
-      case symbol_kind::S_storage_class_specifier: // storage_class_specifier
-        value.template destroy< StorageClassSpecifier * > ();
-        break;
-
-      case symbol_kind::S_struct_declaration: // struct_declaration
-        value.template destroy< StructDeclaration * > ();
-        break;
-
-      case symbol_kind::S_struct_declarator: // struct_declarator
-        value.template destroy< StructDeclarator * > ();
-        break;
-
-      case symbol_kind::S_struct_or_union_specifier: // struct_or_union_specifier
-        value.template destroy< StructOrUnionSpecifier * > ();
+        value.template destroy< shared_ptr<BaseStatement> > ();
         break;
 
       case symbol_kind::S_IDENTIFIER: // "identifier"
@@ -2104,63 +1999,168 @@ switch (yykind)
       case symbol_kind::S_unary_operator: // unary_operator
       case symbol_kind::S_assignment_operator: // assignment_operator
       case symbol_kind::S_struct_or_union: // struct_or_union
-        value.template destroy< TokenPtr > ();
+        value.template destroy< shared_ptr<CToken> > ();
+        break;
+
+      case symbol_kind::S_constant: // constant
+        value.template destroy< shared_ptr<Constant> > ();
+        break;
+
+      case symbol_kind::S_declaration: // declaration
+        value.template destroy< shared_ptr<Declaration> > ();
+        break;
+
+      case symbol_kind::S_declaration_specifiers: // declaration_specifiers
+        value.template destroy< shared_ptr<DeclarationSpecifiers> > ();
+        break;
+
+      case symbol_kind::S_declarator: // declarator
+        value.template destroy< shared_ptr<Declarator> > ();
+        break;
+
+      case symbol_kind::S_direct_abstract_declarator: // direct_abstract_declarator
+        value.template destroy< shared_ptr<DirectAbstractDeclarator> > ();
+        break;
+
+      case symbol_kind::S_direct_declarator: // direct_declarator
+        value.template destroy< shared_ptr<DirectDeclarator> > ();
+        break;
+
+      case symbol_kind::S_enum_specifier: // enum_specifier
+        value.template destroy< shared_ptr<EnumSpecifier> > ();
+        break;
+
+      case symbol_kind::S_enumerator: // enumerator
+        value.template destroy< shared_ptr<Enumerator> > ();
+        break;
+
+      case symbol_kind::S_primary_expression: // primary_expression
+      case symbol_kind::S_postfix_expression: // postfix_expression
+      case symbol_kind::S_unary_expression: // unary_expression
+      case symbol_kind::S_cast_expression: // cast_expression
+      case symbol_kind::S_multiplicative_expression: // multiplicative_expression
+      case symbol_kind::S_additive_expression: // additive_expression
+      case symbol_kind::S_shift_expression: // shift_expression
+      case symbol_kind::S_relational_expression: // relational_expression
+      case symbol_kind::S_equality_expression: // equality_expression
+      case symbol_kind::S_and_expression: // and_expression
+      case symbol_kind::S_exclusive_or_expression: // exclusive_or_expression
+      case symbol_kind::S_inclusive_or_expression: // inclusive_or_expression
+      case symbol_kind::S_logical_and_expression: // logical_and_expression
+      case symbol_kind::S_logical_or_expression: // logical_or_expression
+      case symbol_kind::S_conditional_expression: // conditional_expression
+      case symbol_kind::S_assignment_expression: // assignment_expression
+      case symbol_kind::S_expression: // expression
+      case symbol_kind::S_constant_expression: // constant_expression
+        value.template destroy< shared_ptr<ExpressionTree> > ();
+        break;
+
+      case symbol_kind::S_external_declaration: // external_declaration
+        value.template destroy< shared_ptr<ExternalDeclaration> > ();
+        break;
+
+      case symbol_kind::S_function_definition: // function_definition
+        value.template destroy< shared_ptr<FunctionDefinition> > ();
+        break;
+
+      case symbol_kind::S_init_declarator: // init_declarator
+        value.template destroy< shared_ptr<InitDeclarator> > ();
+        break;
+
+      case symbol_kind::S_initializer: // initializer
+        value.template destroy< shared_ptr<Initializer> > ();
+        break;
+
+      case symbol_kind::S_labeled_statement: // labeled_statement
+        value.template destroy< shared_ptr<LabeledStatement> > ();
+        break;
+
+      case symbol_kind::S_parameter_declaration: // parameter_declaration
+        value.template destroy< shared_ptr<ParameterDeclaration> > ();
+        break;
+
+      case symbol_kind::S_parameter_type_list: // parameter_type_list
+        value.template destroy< shared_ptr<ParameterTypeList> > ();
+        break;
+
+      case symbol_kind::S_pointer: // pointer
+        value.template destroy< shared_ptr<Pointer> > ();
+        break;
+
+      case symbol_kind::S_specifier_qualifier_list: // specifier_qualifier_list
+        value.template destroy< shared_ptr<SpecifierQualifierList> > ();
+        break;
+
+      case symbol_kind::S_storage_class_specifier: // storage_class_specifier
+        value.template destroy< shared_ptr<StorageClassSpecifier> > ();
+        break;
+
+      case symbol_kind::S_struct_declaration: // struct_declaration
+        value.template destroy< shared_ptr<StructDeclaration> > ();
+        break;
+
+      case symbol_kind::S_struct_declarator: // struct_declarator
+        value.template destroy< shared_ptr<StructDeclarator> > ();
+        break;
+
+      case symbol_kind::S_struct_or_union_specifier: // struct_or_union_specifier
+        value.template destroy< shared_ptr<StructOrUnionSpecifier> > ();
         break;
 
       case symbol_kind::S_type_name: // type_name
-        value.template destroy< TypeName * > ();
+        value.template destroy< shared_ptr<TypeName> > ();
         break;
 
       case symbol_kind::S_type_qualifier: // type_qualifier
-        value.template destroy< TypeQualifier * > ();
+        value.template destroy< shared_ptr<TypeQualifier> > ();
         break;
 
       case symbol_kind::S_type_specifier: // type_specifier
-        value.template destroy< TypeSpecifier * > ();
+        value.template destroy< shared_ptr<TypeSpecifier> > ();
         break;
 
       case symbol_kind::S_statement_list: // statement_list
-        value.template destroy< std::vector<BaseStatement *> * > ();
-        break;
-
-      case symbol_kind::S_declaration_list: // declaration_list
-        value.template destroy< std::vector<Declaration *> * > ();
-        break;
-
-      case symbol_kind::S_enumerator_list: // enumerator_list
-        value.template destroy< std::vector<Enumerator *> * > ();
-        break;
-
-      case symbol_kind::S_init_declarator_list: // init_declarator_list
-        value.template destroy< std::vector<InitDeclarator *> * > ();
-        break;
-
-      case symbol_kind::S_initializer_list: // initializer_list
-        value.template destroy< std::vector<Initializer *> * > ();
-        break;
-
-      case symbol_kind::S_parameter_list: // parameter_list
-        value.template destroy< std::vector<ParameterDeclaration *> * > ();
-        break;
-
-      case symbol_kind::S_struct_declaration_list: // struct_declaration_list
-        value.template destroy< std::vector<StructDeclaration *> * > ();
-        break;
-
-      case symbol_kind::S_struct_declarator_list: // struct_declarator_list
-        value.template destroy< std::vector<StructDeclarator *> * > ();
+        value.template destroy< shared_ptr<vector<shared_ptr<BaseStatement>>> > ();
         break;
 
       case symbol_kind::S_identifier_list: // identifier_list
-        value.template destroy< std::vector<TokenPtr> * > ();
+        value.template destroy< shared_ptr<vector<shared_ptr<CToken>>> > ();
         break;
 
-      case symbol_kind::S_type_qualifier_list: // type_qualifier_list
-        value.template destroy< std::vector<TypeQualifier *> * > ();
+      case symbol_kind::S_declaration_list: // declaration_list
+        value.template destroy< shared_ptr<vector<shared_ptr<Declaration>>> > ();
+        break;
+
+      case symbol_kind::S_enumerator_list: // enumerator_list
+        value.template destroy< shared_ptr<vector<shared_ptr<Enumerator>>> > ();
         break;
 
       case symbol_kind::S_argument_expression_list: // argument_expression_list
-        value.template destroy< vector<ExpressionTree *> * > ();
+        value.template destroy< shared_ptr<vector<shared_ptr<ExpressionTree>>> > ();
+        break;
+
+      case symbol_kind::S_init_declarator_list: // init_declarator_list
+        value.template destroy< shared_ptr<vector<shared_ptr<InitDeclarator>>> > ();
+        break;
+
+      case symbol_kind::S_initializer_list: // initializer_list
+        value.template destroy< shared_ptr<vector<shared_ptr<Initializer>>> > ();
+        break;
+
+      case symbol_kind::S_parameter_list: // parameter_list
+        value.template destroy< shared_ptr<vector<shared_ptr<ParameterDeclaration>>> > ();
+        break;
+
+      case symbol_kind::S_struct_declaration_list: // struct_declaration_list
+        value.template destroy< shared_ptr<vector<shared_ptr<StructDeclaration>>> > ();
+        break;
+
+      case symbol_kind::S_struct_declarator_list: // struct_declarator_list
+        value.template destroy< shared_ptr<vector<shared_ptr<StructDeclarator>>> > ();
+        break;
+
+      case symbol_kind::S_type_qualifier_list: // type_qualifier_list
+        value.template destroy< shared_ptr<vector<shared_ptr<TypeQualifier>>> > ();
         break;
 
       default:
@@ -2266,10 +2266,10 @@ switch (yykind)
 #endif
       }
 #if 201103L <= YY_CPLUSPLUS
-      symbol_type (int tok, TokenPtr v, location_type l)
+      symbol_type (int tok, shared_ptr<CToken> v, location_type l)
         : super_type (token_kind_type (tok), std::move (v), std::move (l))
 #else
-      symbol_type (int tok, const TokenPtr& v, const location_type& l)
+      symbol_type (int tok, const shared_ptr<CToken>& v, const location_type& l)
         : super_type (token_kind_type (tok), v, l)
 #endif
       {
@@ -2373,14 +2373,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_IDENTIFIER (TokenPtr v, location_type l)
+      make_IDENTIFIER (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_IDENTIFIER, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_IDENTIFIER (const TokenPtr& v, const location_type& l)
+      make_IDENTIFIER (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_IDENTIFIER, v, l);
       }
@@ -2388,14 +2388,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_I_CONST (TokenPtr v, location_type l)
+      make_I_CONST (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_I_CONST, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_I_CONST (const TokenPtr& v, const location_type& l)
+      make_I_CONST (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_I_CONST, v, l);
       }
@@ -2403,14 +2403,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_F_CONST (TokenPtr v, location_type l)
+      make_F_CONST (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_F_CONST, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_F_CONST (const TokenPtr& v, const location_type& l)
+      make_F_CONST (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_F_CONST, v, l);
       }
@@ -2418,14 +2418,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_STRING_LITERAL (TokenPtr v, location_type l)
+      make_STRING_LITERAL (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_STRING_LITERAL, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_STRING_LITERAL (const TokenPtr& v, const location_type& l)
+      make_STRING_LITERAL (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_STRING_LITERAL, v, l);
       }
@@ -2433,14 +2433,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_TYPE_NAME (TokenPtr v, location_type l)
+      make_TYPE_NAME (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_TYPE_NAME, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_TYPE_NAME (const TokenPtr& v, const location_type& l)
+      make_TYPE_NAME (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_TYPE_NAME, v, l);
       }
@@ -2448,14 +2448,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_AUTO (TokenPtr v, location_type l)
+      make_AUTO (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_AUTO, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_AUTO (const TokenPtr& v, const location_type& l)
+      make_AUTO (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_AUTO, v, l);
       }
@@ -2463,14 +2463,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_BREAK (TokenPtr v, location_type l)
+      make_BREAK (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_BREAK, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_BREAK (const TokenPtr& v, const location_type& l)
+      make_BREAK (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_BREAK, v, l);
       }
@@ -2478,14 +2478,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_CASE (TokenPtr v, location_type l)
+      make_CASE (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_CASE, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_CASE (const TokenPtr& v, const location_type& l)
+      make_CASE (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_CASE, v, l);
       }
@@ -2493,14 +2493,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_CHAR (TokenPtr v, location_type l)
+      make_CHAR (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_CHAR, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_CHAR (const TokenPtr& v, const location_type& l)
+      make_CHAR (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_CHAR, v, l);
       }
@@ -2508,14 +2508,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_CONST (TokenPtr v, location_type l)
+      make_CONST (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_CONST, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_CONST (const TokenPtr& v, const location_type& l)
+      make_CONST (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_CONST, v, l);
       }
@@ -2523,14 +2523,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_CONTINUE (TokenPtr v, location_type l)
+      make_CONTINUE (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_CONTINUE, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_CONTINUE (const TokenPtr& v, const location_type& l)
+      make_CONTINUE (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_CONTINUE, v, l);
       }
@@ -2538,14 +2538,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_DEFAULT (TokenPtr v, location_type l)
+      make_DEFAULT (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_DEFAULT, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_DEFAULT (const TokenPtr& v, const location_type& l)
+      make_DEFAULT (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_DEFAULT, v, l);
       }
@@ -2553,14 +2553,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_DO (TokenPtr v, location_type l)
+      make_DO (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_DO, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_DO (const TokenPtr& v, const location_type& l)
+      make_DO (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_DO, v, l);
       }
@@ -2568,14 +2568,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_DOUBLE (TokenPtr v, location_type l)
+      make_DOUBLE (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_DOUBLE, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_DOUBLE (const TokenPtr& v, const location_type& l)
+      make_DOUBLE (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_DOUBLE, v, l);
       }
@@ -2583,14 +2583,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_LONG_DOUBLE (TokenPtr v, location_type l)
+      make_LONG_DOUBLE (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_LONG_DOUBLE, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_LONG_DOUBLE (const TokenPtr& v, const location_type& l)
+      make_LONG_DOUBLE (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_LONG_DOUBLE, v, l);
       }
@@ -2598,14 +2598,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_ELSE (TokenPtr v, location_type l)
+      make_ELSE (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_ELSE, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_ELSE (const TokenPtr& v, const location_type& l)
+      make_ELSE (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_ELSE, v, l);
       }
@@ -2613,14 +2613,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_ENUM (TokenPtr v, location_type l)
+      make_ENUM (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_ENUM, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_ENUM (const TokenPtr& v, const location_type& l)
+      make_ENUM (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_ENUM, v, l);
       }
@@ -2628,14 +2628,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_EXTERN (TokenPtr v, location_type l)
+      make_EXTERN (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_EXTERN, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_EXTERN (const TokenPtr& v, const location_type& l)
+      make_EXTERN (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_EXTERN, v, l);
       }
@@ -2643,14 +2643,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_FLOAT (TokenPtr v, location_type l)
+      make_FLOAT (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_FLOAT, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_FLOAT (const TokenPtr& v, const location_type& l)
+      make_FLOAT (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_FLOAT, v, l);
       }
@@ -2658,14 +2658,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_FOR (TokenPtr v, location_type l)
+      make_FOR (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_FOR, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_FOR (const TokenPtr& v, const location_type& l)
+      make_FOR (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_FOR, v, l);
       }
@@ -2673,14 +2673,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_GOTO (TokenPtr v, location_type l)
+      make_GOTO (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_GOTO, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_GOTO (const TokenPtr& v, const location_type& l)
+      make_GOTO (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_GOTO, v, l);
       }
@@ -2688,14 +2688,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_IF (TokenPtr v, location_type l)
+      make_IF (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_IF, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_IF (const TokenPtr& v, const location_type& l)
+      make_IF (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_IF, v, l);
       }
@@ -2703,14 +2703,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_INLINE (TokenPtr v, location_type l)
+      make_INLINE (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_INLINE, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_INLINE (const TokenPtr& v, const location_type& l)
+      make_INLINE (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_INLINE, v, l);
       }
@@ -2718,14 +2718,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_INT (TokenPtr v, location_type l)
+      make_INT (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_INT, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_INT (const TokenPtr& v, const location_type& l)
+      make_INT (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_INT, v, l);
       }
@@ -2733,14 +2733,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_LONG (TokenPtr v, location_type l)
+      make_LONG (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_LONG, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_LONG (const TokenPtr& v, const location_type& l)
+      make_LONG (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_LONG, v, l);
       }
@@ -2748,14 +2748,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_LONG_LONG (TokenPtr v, location_type l)
+      make_LONG_LONG (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_LONG_LONG, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_LONG_LONG (const TokenPtr& v, const location_type& l)
+      make_LONG_LONG (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_LONG_LONG, v, l);
       }
@@ -2763,14 +2763,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_REGISTER (TokenPtr v, location_type l)
+      make_REGISTER (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_REGISTER, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_REGISTER (const TokenPtr& v, const location_type& l)
+      make_REGISTER (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_REGISTER, v, l);
       }
@@ -2778,14 +2778,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_RESTRICT (TokenPtr v, location_type l)
+      make_RESTRICT (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_RESTRICT, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_RESTRICT (const TokenPtr& v, const location_type& l)
+      make_RESTRICT (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_RESTRICT, v, l);
       }
@@ -2793,14 +2793,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_RETURN (TokenPtr v, location_type l)
+      make_RETURN (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_RETURN, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_RETURN (const TokenPtr& v, const location_type& l)
+      make_RETURN (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_RETURN, v, l);
       }
@@ -2808,14 +2808,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_SHORT (TokenPtr v, location_type l)
+      make_SHORT (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_SHORT, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_SHORT (const TokenPtr& v, const location_type& l)
+      make_SHORT (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_SHORT, v, l);
       }
@@ -2823,14 +2823,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_SIGNED (TokenPtr v, location_type l)
+      make_SIGNED (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_SIGNED, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_SIGNED (const TokenPtr& v, const location_type& l)
+      make_SIGNED (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_SIGNED, v, l);
       }
@@ -2838,14 +2838,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_SIZEOF (TokenPtr v, location_type l)
+      make_SIZEOF (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_SIZEOF, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_SIZEOF (const TokenPtr& v, const location_type& l)
+      make_SIZEOF (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_SIZEOF, v, l);
       }
@@ -2853,14 +2853,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_STATIC (TokenPtr v, location_type l)
+      make_STATIC (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_STATIC, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_STATIC (const TokenPtr& v, const location_type& l)
+      make_STATIC (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_STATIC, v, l);
       }
@@ -2868,14 +2868,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_STRUCT (TokenPtr v, location_type l)
+      make_STRUCT (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_STRUCT, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_STRUCT (const TokenPtr& v, const location_type& l)
+      make_STRUCT (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_STRUCT, v, l);
       }
@@ -2883,14 +2883,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_SWITCH (TokenPtr v, location_type l)
+      make_SWITCH (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_SWITCH, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_SWITCH (const TokenPtr& v, const location_type& l)
+      make_SWITCH (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_SWITCH, v, l);
       }
@@ -2898,14 +2898,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_TYPEDEF (TokenPtr v, location_type l)
+      make_TYPEDEF (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_TYPEDEF, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_TYPEDEF (const TokenPtr& v, const location_type& l)
+      make_TYPEDEF (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_TYPEDEF, v, l);
       }
@@ -2913,14 +2913,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_UNION (TokenPtr v, location_type l)
+      make_UNION (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_UNION, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_UNION (const TokenPtr& v, const location_type& l)
+      make_UNION (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_UNION, v, l);
       }
@@ -2928,14 +2928,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_UNSIGNED (TokenPtr v, location_type l)
+      make_UNSIGNED (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_UNSIGNED, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_UNSIGNED (const TokenPtr& v, const location_type& l)
+      make_UNSIGNED (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_UNSIGNED, v, l);
       }
@@ -2943,14 +2943,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_VOID (TokenPtr v, location_type l)
+      make_VOID (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_VOID, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_VOID (const TokenPtr& v, const location_type& l)
+      make_VOID (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_VOID, v, l);
       }
@@ -2958,14 +2958,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_VOLATILE (TokenPtr v, location_type l)
+      make_VOLATILE (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_VOLATILE, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_VOLATILE (const TokenPtr& v, const location_type& l)
+      make_VOLATILE (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_VOLATILE, v, l);
       }
@@ -2973,14 +2973,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_WHILE (TokenPtr v, location_type l)
+      make_WHILE (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_WHILE, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_WHILE (const TokenPtr& v, const location_type& l)
+      make_WHILE (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_WHILE, v, l);
       }
@@ -2988,14 +2988,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_BOOL (TokenPtr v, location_type l)
+      make_BOOL (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_BOOL, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_BOOL (const TokenPtr& v, const location_type& l)
+      make_BOOL (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_BOOL, v, l);
       }
@@ -3003,14 +3003,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_ELLIPSIS (TokenPtr v, location_type l)
+      make_ELLIPSIS (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_ELLIPSIS, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_ELLIPSIS (const TokenPtr& v, const location_type& l)
+      make_ELLIPSIS (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_ELLIPSIS, v, l);
       }
@@ -3018,14 +3018,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_QUESTION (TokenPtr v, location_type l)
+      make_QUESTION (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_QUESTION, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_QUESTION (const TokenPtr& v, const location_type& l)
+      make_QUESTION (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_QUESTION, v, l);
       }
@@ -3033,14 +3033,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_SEMICOLON (TokenPtr v, location_type l)
+      make_SEMICOLON (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_SEMICOLON, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_SEMICOLON (const TokenPtr& v, const location_type& l)
+      make_SEMICOLON (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_SEMICOLON, v, l);
       }
@@ -3048,14 +3048,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_OCURLY (TokenPtr v, location_type l)
+      make_OCURLY (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_OCURLY, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_OCURLY (const TokenPtr& v, const location_type& l)
+      make_OCURLY (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_OCURLY, v, l);
       }
@@ -3063,14 +3063,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_CCURLY (TokenPtr v, location_type l)
+      make_CCURLY (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_CCURLY, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_CCURLY (const TokenPtr& v, const location_type& l)
+      make_CCURLY (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_CCURLY, v, l);
       }
@@ -3078,14 +3078,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_COMMA (TokenPtr v, location_type l)
+      make_COMMA (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_COMMA, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_COMMA (const TokenPtr& v, const location_type& l)
+      make_COMMA (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_COMMA, v, l);
       }
@@ -3093,14 +3093,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_COLON (TokenPtr v, location_type l)
+      make_COLON (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_COLON, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_COLON (const TokenPtr& v, const location_type& l)
+      make_COLON (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_COLON, v, l);
       }
@@ -3108,14 +3108,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_OPAREN (TokenPtr v, location_type l)
+      make_OPAREN (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_OPAREN, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_OPAREN (const TokenPtr& v, const location_type& l)
+      make_OPAREN (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_OPAREN, v, l);
       }
@@ -3123,14 +3123,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_CPAREN (TokenPtr v, location_type l)
+      make_CPAREN (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_CPAREN, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_CPAREN (const TokenPtr& v, const location_type& l)
+      make_CPAREN (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_CPAREN, v, l);
       }
@@ -3138,14 +3138,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_OBRACE (TokenPtr v, location_type l)
+      make_OBRACE (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_OBRACE, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_OBRACE (const TokenPtr& v, const location_type& l)
+      make_OBRACE (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_OBRACE, v, l);
       }
@@ -3153,14 +3153,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_CBRACE (TokenPtr v, location_type l)
+      make_CBRACE (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_CBRACE, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_CBRACE (const TokenPtr& v, const location_type& l)
+      make_CBRACE (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_CBRACE, v, l);
       }
@@ -3168,14 +3168,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_PERIOD (TokenPtr v, location_type l)
+      make_PERIOD (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_PERIOD, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_PERIOD (const TokenPtr& v, const location_type& l)
+      make_PERIOD (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_PERIOD, v, l);
       }
@@ -3183,14 +3183,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_TILDE (TokenPtr v, location_type l)
+      make_TILDE (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_TILDE, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_TILDE (const TokenPtr& v, const location_type& l)
+      make_TILDE (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_TILDE, v, l);
       }
@@ -3198,14 +3198,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_EQUAL (TokenPtr v, location_type l)
+      make_EQUAL (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_EQUAL, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_EQUAL (const TokenPtr& v, const location_type& l)
+      make_EQUAL (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_EQUAL, v, l);
       }
@@ -3213,14 +3213,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_RIGHT_ASSIGN (TokenPtr v, location_type l)
+      make_RIGHT_ASSIGN (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_RIGHT_ASSIGN, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_RIGHT_ASSIGN (const TokenPtr& v, const location_type& l)
+      make_RIGHT_ASSIGN (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_RIGHT_ASSIGN, v, l);
       }
@@ -3228,14 +3228,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_LEFT_ASSIGN (TokenPtr v, location_type l)
+      make_LEFT_ASSIGN (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_LEFT_ASSIGN, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_LEFT_ASSIGN (const TokenPtr& v, const location_type& l)
+      make_LEFT_ASSIGN (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_LEFT_ASSIGN, v, l);
       }
@@ -3243,14 +3243,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_ADD_ASSIGN (TokenPtr v, location_type l)
+      make_ADD_ASSIGN (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_ADD_ASSIGN, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_ADD_ASSIGN (const TokenPtr& v, const location_type& l)
+      make_ADD_ASSIGN (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_ADD_ASSIGN, v, l);
       }
@@ -3258,14 +3258,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_SUB_ASSIGN (TokenPtr v, location_type l)
+      make_SUB_ASSIGN (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_SUB_ASSIGN, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_SUB_ASSIGN (const TokenPtr& v, const location_type& l)
+      make_SUB_ASSIGN (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_SUB_ASSIGN, v, l);
       }
@@ -3273,14 +3273,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_MUL_ASSIGN (TokenPtr v, location_type l)
+      make_MUL_ASSIGN (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_MUL_ASSIGN, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_MUL_ASSIGN (const TokenPtr& v, const location_type& l)
+      make_MUL_ASSIGN (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_MUL_ASSIGN, v, l);
       }
@@ -3288,14 +3288,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_DIV_ASSIGN (TokenPtr v, location_type l)
+      make_DIV_ASSIGN (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_DIV_ASSIGN, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_DIV_ASSIGN (const TokenPtr& v, const location_type& l)
+      make_DIV_ASSIGN (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_DIV_ASSIGN, v, l);
       }
@@ -3303,14 +3303,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_MOD_ASSIGN (TokenPtr v, location_type l)
+      make_MOD_ASSIGN (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_MOD_ASSIGN, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_MOD_ASSIGN (const TokenPtr& v, const location_type& l)
+      make_MOD_ASSIGN (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_MOD_ASSIGN, v, l);
       }
@@ -3318,14 +3318,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_AND_ASSIGN (TokenPtr v, location_type l)
+      make_AND_ASSIGN (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_AND_ASSIGN, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_AND_ASSIGN (const TokenPtr& v, const location_type& l)
+      make_AND_ASSIGN (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_AND_ASSIGN, v, l);
       }
@@ -3333,14 +3333,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_XOR_ASSIGN (TokenPtr v, location_type l)
+      make_XOR_ASSIGN (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_XOR_ASSIGN, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_XOR_ASSIGN (const TokenPtr& v, const location_type& l)
+      make_XOR_ASSIGN (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_XOR_ASSIGN, v, l);
       }
@@ -3348,14 +3348,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_OR_ASSIGN (TokenPtr v, location_type l)
+      make_OR_ASSIGN (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_OR_ASSIGN, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_OR_ASSIGN (const TokenPtr& v, const location_type& l)
+      make_OR_ASSIGN (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_OR_ASSIGN, v, l);
       }
@@ -3363,14 +3363,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_RIGHT_OP (TokenPtr v, location_type l)
+      make_RIGHT_OP (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_RIGHT_OP, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_RIGHT_OP (const TokenPtr& v, const location_type& l)
+      make_RIGHT_OP (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_RIGHT_OP, v, l);
       }
@@ -3378,14 +3378,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_LEFT_OP (TokenPtr v, location_type l)
+      make_LEFT_OP (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_LEFT_OP, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_LEFT_OP (const TokenPtr& v, const location_type& l)
+      make_LEFT_OP (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_LEFT_OP, v, l);
       }
@@ -3393,14 +3393,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_INC_OP (TokenPtr v, location_type l)
+      make_INC_OP (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_INC_OP, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_INC_OP (const TokenPtr& v, const location_type& l)
+      make_INC_OP (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_INC_OP, v, l);
       }
@@ -3408,14 +3408,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_DEC_OP (TokenPtr v, location_type l)
+      make_DEC_OP (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_DEC_OP, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_DEC_OP (const TokenPtr& v, const location_type& l)
+      make_DEC_OP (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_DEC_OP, v, l);
       }
@@ -3423,14 +3423,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_PTR_OP (TokenPtr v, location_type l)
+      make_PTR_OP (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_PTR_OP, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_PTR_OP (const TokenPtr& v, const location_type& l)
+      make_PTR_OP (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_PTR_OP, v, l);
       }
@@ -3438,14 +3438,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_AND_OP (TokenPtr v, location_type l)
+      make_AND_OP (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_AND_OP, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_AND_OP (const TokenPtr& v, const location_type& l)
+      make_AND_OP (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_AND_OP, v, l);
       }
@@ -3453,14 +3453,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_OR_OP (TokenPtr v, location_type l)
+      make_OR_OP (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_OR_OP, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_OR_OP (const TokenPtr& v, const location_type& l)
+      make_OR_OP (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_OR_OP, v, l);
       }
@@ -3468,14 +3468,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_GREATER_EQUAL (TokenPtr v, location_type l)
+      make_GREATER_EQUAL (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_GREATER_EQUAL, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_GREATER_EQUAL (const TokenPtr& v, const location_type& l)
+      make_GREATER_EQUAL (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_GREATER_EQUAL, v, l);
       }
@@ -3483,14 +3483,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_LESS_EQUAL (TokenPtr v, location_type l)
+      make_LESS_EQUAL (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_LESS_EQUAL, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_LESS_EQUAL (const TokenPtr& v, const location_type& l)
+      make_LESS_EQUAL (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_LESS_EQUAL, v, l);
       }
@@ -3498,14 +3498,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_GREATER (TokenPtr v, location_type l)
+      make_GREATER (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_GREATER, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_GREATER (const TokenPtr& v, const location_type& l)
+      make_GREATER (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_GREATER, v, l);
       }
@@ -3513,14 +3513,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_LESS (TokenPtr v, location_type l)
+      make_LESS (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_LESS, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_LESS (const TokenPtr& v, const location_type& l)
+      make_LESS (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_LESS, v, l);
       }
@@ -3528,14 +3528,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_EQUAL_EQUAL (TokenPtr v, location_type l)
+      make_EQUAL_EQUAL (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_EQUAL_EQUAL, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_EQUAL_EQUAL (const TokenPtr& v, const location_type& l)
+      make_EQUAL_EQUAL (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_EQUAL_EQUAL, v, l);
       }
@@ -3543,14 +3543,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_NOT_EQUAL (TokenPtr v, location_type l)
+      make_NOT_EQUAL (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_NOT_EQUAL, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_NOT_EQUAL (const TokenPtr& v, const location_type& l)
+      make_NOT_EQUAL (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_NOT_EQUAL, v, l);
       }
@@ -3558,14 +3558,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_NOT_OP (TokenPtr v, location_type l)
+      make_NOT_OP (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_NOT_OP, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_NOT_OP (const TokenPtr& v, const location_type& l)
+      make_NOT_OP (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_NOT_OP, v, l);
       }
@@ -3573,14 +3573,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_XOR_OP (TokenPtr v, location_type l)
+      make_XOR_OP (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_XOR_OP, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_XOR_OP (const TokenPtr& v, const location_type& l)
+      make_XOR_OP (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_XOR_OP, v, l);
       }
@@ -3588,14 +3588,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_BIT_AND (TokenPtr v, location_type l)
+      make_BIT_AND (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_BIT_AND, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_BIT_AND (const TokenPtr& v, const location_type& l)
+      make_BIT_AND (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_BIT_AND, v, l);
       }
@@ -3603,14 +3603,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_BIT_OR (TokenPtr v, location_type l)
+      make_BIT_OR (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_BIT_OR, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_BIT_OR (const TokenPtr& v, const location_type& l)
+      make_BIT_OR (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_BIT_OR, v, l);
       }
@@ -3618,14 +3618,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_MINUS_OP (TokenPtr v, location_type l)
+      make_MINUS_OP (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_MINUS_OP, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_MINUS_OP (const TokenPtr& v, const location_type& l)
+      make_MINUS_OP (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_MINUS_OP, v, l);
       }
@@ -3633,14 +3633,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_PLUS_OP (TokenPtr v, location_type l)
+      make_PLUS_OP (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_PLUS_OP, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_PLUS_OP (const TokenPtr& v, const location_type& l)
+      make_PLUS_OP (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_PLUS_OP, v, l);
       }
@@ -3648,14 +3648,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_TIMES_OP (TokenPtr v, location_type l)
+      make_TIMES_OP (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_TIMES_OP, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_TIMES_OP (const TokenPtr& v, const location_type& l)
+      make_TIMES_OP (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_TIMES_OP, v, l);
       }
@@ -3663,14 +3663,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_DIV_OP (TokenPtr v, location_type l)
+      make_DIV_OP (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_DIV_OP, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_DIV_OP (const TokenPtr& v, const location_type& l)
+      make_DIV_OP (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_DIV_OP, v, l);
       }
@@ -3678,14 +3678,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_MOD_OP (TokenPtr v, location_type l)
+      make_MOD_OP (shared_ptr<CToken> v, location_type l)
       {
         return symbol_type (token::TOKEN_MOD_OP, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_MOD_OP (const TokenPtr& v, const location_type& l)
+      make_MOD_OP (const shared_ptr<CToken>& v, const location_type& l)
       {
         return symbol_type (token::TOKEN_MOD_OP, v, l);
       }
@@ -4099,7 +4099,7 @@ switch (yykind)
     switch (this->kind ())
     {
       case symbol_kind::S_abstract_declarator: // abstract_declarator
-        value.copy< AbstractDeclarator * > (YY_MOVE (that.value));
+        value.copy< shared_ptr<AbstractDeclarator> > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_statement: // statement
@@ -4108,112 +4108,7 @@ switch (yykind)
       case symbol_kind::S_selection_statement: // selection_statement
       case symbol_kind::S_iteration_statement: // iteration_statement
       case symbol_kind::S_jump_statement: // jump_statement
-        value.copy< BaseStatement * > (YY_MOVE (that.value));
-        break;
-
-      case symbol_kind::S_constant: // constant
-        value.copy< Constant * > (YY_MOVE (that.value));
-        break;
-
-      case symbol_kind::S_declaration: // declaration
-        value.copy< Declaration * > (YY_MOVE (that.value));
-        break;
-
-      case symbol_kind::S_declaration_specifiers: // declaration_specifiers
-        value.copy< DeclarationSpecifiers * > (YY_MOVE (that.value));
-        break;
-
-      case symbol_kind::S_declarator: // declarator
-        value.copy< Declarator * > (YY_MOVE (that.value));
-        break;
-
-      case symbol_kind::S_direct_abstract_declarator: // direct_abstract_declarator
-        value.copy< DirectAbstractDeclarator * > (YY_MOVE (that.value));
-        break;
-
-      case symbol_kind::S_direct_declarator: // direct_declarator
-        value.copy< DirectDeclarator * > (YY_MOVE (that.value));
-        break;
-
-      case symbol_kind::S_enum_specifier: // enum_specifier
-        value.copy< EnumSpecifier * > (YY_MOVE (that.value));
-        break;
-
-      case symbol_kind::S_enumerator: // enumerator
-        value.copy< Enumerator * > (YY_MOVE (that.value));
-        break;
-
-      case symbol_kind::S_primary_expression: // primary_expression
-      case symbol_kind::S_postfix_expression: // postfix_expression
-      case symbol_kind::S_unary_expression: // unary_expression
-      case symbol_kind::S_cast_expression: // cast_expression
-      case symbol_kind::S_multiplicative_expression: // multiplicative_expression
-      case symbol_kind::S_additive_expression: // additive_expression
-      case symbol_kind::S_shift_expression: // shift_expression
-      case symbol_kind::S_relational_expression: // relational_expression
-      case symbol_kind::S_equality_expression: // equality_expression
-      case symbol_kind::S_and_expression: // and_expression
-      case symbol_kind::S_exclusive_or_expression: // exclusive_or_expression
-      case symbol_kind::S_inclusive_or_expression: // inclusive_or_expression
-      case symbol_kind::S_logical_and_expression: // logical_and_expression
-      case symbol_kind::S_logical_or_expression: // logical_or_expression
-      case symbol_kind::S_conditional_expression: // conditional_expression
-      case symbol_kind::S_assignment_expression: // assignment_expression
-      case symbol_kind::S_expression: // expression
-      case symbol_kind::S_constant_expression: // constant_expression
-        value.copy< ExpressionTree * > (YY_MOVE (that.value));
-        break;
-
-      case symbol_kind::S_external_declaration: // external_declaration
-        value.copy< ExternalDeclaration * > (YY_MOVE (that.value));
-        break;
-
-      case symbol_kind::S_function_definition: // function_definition
-        value.copy< FunctionDefinition * > (YY_MOVE (that.value));
-        break;
-
-      case symbol_kind::S_init_declarator: // init_declarator
-        value.copy< InitDeclarator * > (YY_MOVE (that.value));
-        break;
-
-      case symbol_kind::S_initializer: // initializer
-        value.copy< Initializer * > (YY_MOVE (that.value));
-        break;
-
-      case symbol_kind::S_labeled_statement: // labeled_statement
-        value.copy< LabeledStatement * > (YY_MOVE (that.value));
-        break;
-
-      case symbol_kind::S_parameter_declaration: // parameter_declaration
-        value.copy< ParameterDeclaration * > (YY_MOVE (that.value));
-        break;
-
-      case symbol_kind::S_parameter_type_list: // parameter_type_list
-        value.copy< ParameterTypeList * > (YY_MOVE (that.value));
-        break;
-
-      case symbol_kind::S_pointer: // pointer
-        value.copy< Pointer * > (YY_MOVE (that.value));
-        break;
-
-      case symbol_kind::S_specifier_qualifier_list: // specifier_qualifier_list
-        value.copy< SpecifierQualifierList * > (YY_MOVE (that.value));
-        break;
-
-      case symbol_kind::S_storage_class_specifier: // storage_class_specifier
-        value.copy< StorageClassSpecifier * > (YY_MOVE (that.value));
-        break;
-
-      case symbol_kind::S_struct_declaration: // struct_declaration
-        value.copy< StructDeclaration * > (YY_MOVE (that.value));
-        break;
-
-      case symbol_kind::S_struct_declarator: // struct_declarator
-        value.copy< StructDeclarator * > (YY_MOVE (that.value));
-        break;
-
-      case symbol_kind::S_struct_or_union_specifier: // struct_or_union_specifier
-        value.copy< StructOrUnionSpecifier * > (YY_MOVE (that.value));
+        value.copy< shared_ptr<BaseStatement> > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_IDENTIFIER: // "identifier"
@@ -4307,63 +4202,168 @@ switch (yykind)
       case symbol_kind::S_unary_operator: // unary_operator
       case symbol_kind::S_assignment_operator: // assignment_operator
       case symbol_kind::S_struct_or_union: // struct_or_union
-        value.copy< TokenPtr > (YY_MOVE (that.value));
+        value.copy< shared_ptr<CToken> > (YY_MOVE (that.value));
+        break;
+
+      case symbol_kind::S_constant: // constant
+        value.copy< shared_ptr<Constant> > (YY_MOVE (that.value));
+        break;
+
+      case symbol_kind::S_declaration: // declaration
+        value.copy< shared_ptr<Declaration> > (YY_MOVE (that.value));
+        break;
+
+      case symbol_kind::S_declaration_specifiers: // declaration_specifiers
+        value.copy< shared_ptr<DeclarationSpecifiers> > (YY_MOVE (that.value));
+        break;
+
+      case symbol_kind::S_declarator: // declarator
+        value.copy< shared_ptr<Declarator> > (YY_MOVE (that.value));
+        break;
+
+      case symbol_kind::S_direct_abstract_declarator: // direct_abstract_declarator
+        value.copy< shared_ptr<DirectAbstractDeclarator> > (YY_MOVE (that.value));
+        break;
+
+      case symbol_kind::S_direct_declarator: // direct_declarator
+        value.copy< shared_ptr<DirectDeclarator> > (YY_MOVE (that.value));
+        break;
+
+      case symbol_kind::S_enum_specifier: // enum_specifier
+        value.copy< shared_ptr<EnumSpecifier> > (YY_MOVE (that.value));
+        break;
+
+      case symbol_kind::S_enumerator: // enumerator
+        value.copy< shared_ptr<Enumerator> > (YY_MOVE (that.value));
+        break;
+
+      case symbol_kind::S_primary_expression: // primary_expression
+      case symbol_kind::S_postfix_expression: // postfix_expression
+      case symbol_kind::S_unary_expression: // unary_expression
+      case symbol_kind::S_cast_expression: // cast_expression
+      case symbol_kind::S_multiplicative_expression: // multiplicative_expression
+      case symbol_kind::S_additive_expression: // additive_expression
+      case symbol_kind::S_shift_expression: // shift_expression
+      case symbol_kind::S_relational_expression: // relational_expression
+      case symbol_kind::S_equality_expression: // equality_expression
+      case symbol_kind::S_and_expression: // and_expression
+      case symbol_kind::S_exclusive_or_expression: // exclusive_or_expression
+      case symbol_kind::S_inclusive_or_expression: // inclusive_or_expression
+      case symbol_kind::S_logical_and_expression: // logical_and_expression
+      case symbol_kind::S_logical_or_expression: // logical_or_expression
+      case symbol_kind::S_conditional_expression: // conditional_expression
+      case symbol_kind::S_assignment_expression: // assignment_expression
+      case symbol_kind::S_expression: // expression
+      case symbol_kind::S_constant_expression: // constant_expression
+        value.copy< shared_ptr<ExpressionTree> > (YY_MOVE (that.value));
+        break;
+
+      case symbol_kind::S_external_declaration: // external_declaration
+        value.copy< shared_ptr<ExternalDeclaration> > (YY_MOVE (that.value));
+        break;
+
+      case symbol_kind::S_function_definition: // function_definition
+        value.copy< shared_ptr<FunctionDefinition> > (YY_MOVE (that.value));
+        break;
+
+      case symbol_kind::S_init_declarator: // init_declarator
+        value.copy< shared_ptr<InitDeclarator> > (YY_MOVE (that.value));
+        break;
+
+      case symbol_kind::S_initializer: // initializer
+        value.copy< shared_ptr<Initializer> > (YY_MOVE (that.value));
+        break;
+
+      case symbol_kind::S_labeled_statement: // labeled_statement
+        value.copy< shared_ptr<LabeledStatement> > (YY_MOVE (that.value));
+        break;
+
+      case symbol_kind::S_parameter_declaration: // parameter_declaration
+        value.copy< shared_ptr<ParameterDeclaration> > (YY_MOVE (that.value));
+        break;
+
+      case symbol_kind::S_parameter_type_list: // parameter_type_list
+        value.copy< shared_ptr<ParameterTypeList> > (YY_MOVE (that.value));
+        break;
+
+      case symbol_kind::S_pointer: // pointer
+        value.copy< shared_ptr<Pointer> > (YY_MOVE (that.value));
+        break;
+
+      case symbol_kind::S_specifier_qualifier_list: // specifier_qualifier_list
+        value.copy< shared_ptr<SpecifierQualifierList> > (YY_MOVE (that.value));
+        break;
+
+      case symbol_kind::S_storage_class_specifier: // storage_class_specifier
+        value.copy< shared_ptr<StorageClassSpecifier> > (YY_MOVE (that.value));
+        break;
+
+      case symbol_kind::S_struct_declaration: // struct_declaration
+        value.copy< shared_ptr<StructDeclaration> > (YY_MOVE (that.value));
+        break;
+
+      case symbol_kind::S_struct_declarator: // struct_declarator
+        value.copy< shared_ptr<StructDeclarator> > (YY_MOVE (that.value));
+        break;
+
+      case symbol_kind::S_struct_or_union_specifier: // struct_or_union_specifier
+        value.copy< shared_ptr<StructOrUnionSpecifier> > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_type_name: // type_name
-        value.copy< TypeName * > (YY_MOVE (that.value));
+        value.copy< shared_ptr<TypeName> > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_type_qualifier: // type_qualifier
-        value.copy< TypeQualifier * > (YY_MOVE (that.value));
+        value.copy< shared_ptr<TypeQualifier> > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_type_specifier: // type_specifier
-        value.copy< TypeSpecifier * > (YY_MOVE (that.value));
+        value.copy< shared_ptr<TypeSpecifier> > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_statement_list: // statement_list
-        value.copy< std::vector<BaseStatement *> * > (YY_MOVE (that.value));
-        break;
-
-      case symbol_kind::S_declaration_list: // declaration_list
-        value.copy< std::vector<Declaration *> * > (YY_MOVE (that.value));
-        break;
-
-      case symbol_kind::S_enumerator_list: // enumerator_list
-        value.copy< std::vector<Enumerator *> * > (YY_MOVE (that.value));
-        break;
-
-      case symbol_kind::S_init_declarator_list: // init_declarator_list
-        value.copy< std::vector<InitDeclarator *> * > (YY_MOVE (that.value));
-        break;
-
-      case symbol_kind::S_initializer_list: // initializer_list
-        value.copy< std::vector<Initializer *> * > (YY_MOVE (that.value));
-        break;
-
-      case symbol_kind::S_parameter_list: // parameter_list
-        value.copy< std::vector<ParameterDeclaration *> * > (YY_MOVE (that.value));
-        break;
-
-      case symbol_kind::S_struct_declaration_list: // struct_declaration_list
-        value.copy< std::vector<StructDeclaration *> * > (YY_MOVE (that.value));
-        break;
-
-      case symbol_kind::S_struct_declarator_list: // struct_declarator_list
-        value.copy< std::vector<StructDeclarator *> * > (YY_MOVE (that.value));
+        value.copy< shared_ptr<vector<shared_ptr<BaseStatement>>> > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_identifier_list: // identifier_list
-        value.copy< std::vector<TokenPtr> * > (YY_MOVE (that.value));
+        value.copy< shared_ptr<vector<shared_ptr<CToken>>> > (YY_MOVE (that.value));
         break;
 
-      case symbol_kind::S_type_qualifier_list: // type_qualifier_list
-        value.copy< std::vector<TypeQualifier *> * > (YY_MOVE (that.value));
+      case symbol_kind::S_declaration_list: // declaration_list
+        value.copy< shared_ptr<vector<shared_ptr<Declaration>>> > (YY_MOVE (that.value));
+        break;
+
+      case symbol_kind::S_enumerator_list: // enumerator_list
+        value.copy< shared_ptr<vector<shared_ptr<Enumerator>>> > (YY_MOVE (that.value));
         break;
 
       case symbol_kind::S_argument_expression_list: // argument_expression_list
-        value.copy< vector<ExpressionTree *> * > (YY_MOVE (that.value));
+        value.copy< shared_ptr<vector<shared_ptr<ExpressionTree>>> > (YY_MOVE (that.value));
+        break;
+
+      case symbol_kind::S_init_declarator_list: // init_declarator_list
+        value.copy< shared_ptr<vector<shared_ptr<InitDeclarator>>> > (YY_MOVE (that.value));
+        break;
+
+      case symbol_kind::S_initializer_list: // initializer_list
+        value.copy< shared_ptr<vector<shared_ptr<Initializer>>> > (YY_MOVE (that.value));
+        break;
+
+      case symbol_kind::S_parameter_list: // parameter_list
+        value.copy< shared_ptr<vector<shared_ptr<ParameterDeclaration>>> > (YY_MOVE (that.value));
+        break;
+
+      case symbol_kind::S_struct_declaration_list: // struct_declaration_list
+        value.copy< shared_ptr<vector<shared_ptr<StructDeclaration>>> > (YY_MOVE (that.value));
+        break;
+
+      case symbol_kind::S_struct_declarator_list: // struct_declarator_list
+        value.copy< shared_ptr<vector<shared_ptr<StructDeclarator>>> > (YY_MOVE (that.value));
+        break;
+
+      case symbol_kind::S_type_qualifier_list: // type_qualifier_list
+        value.copy< shared_ptr<vector<shared_ptr<TypeQualifier>>> > (YY_MOVE (that.value));
         break;
 
       default:
@@ -4398,7 +4398,7 @@ switch (yykind)
     switch (this->kind ())
     {
       case symbol_kind::S_abstract_declarator: // abstract_declarator
-        value.move< AbstractDeclarator * > (YY_MOVE (s.value));
+        value.move< shared_ptr<AbstractDeclarator> > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_statement: // statement
@@ -4407,112 +4407,7 @@ switch (yykind)
       case symbol_kind::S_selection_statement: // selection_statement
       case symbol_kind::S_iteration_statement: // iteration_statement
       case symbol_kind::S_jump_statement: // jump_statement
-        value.move< BaseStatement * > (YY_MOVE (s.value));
-        break;
-
-      case symbol_kind::S_constant: // constant
-        value.move< Constant * > (YY_MOVE (s.value));
-        break;
-
-      case symbol_kind::S_declaration: // declaration
-        value.move< Declaration * > (YY_MOVE (s.value));
-        break;
-
-      case symbol_kind::S_declaration_specifiers: // declaration_specifiers
-        value.move< DeclarationSpecifiers * > (YY_MOVE (s.value));
-        break;
-
-      case symbol_kind::S_declarator: // declarator
-        value.move< Declarator * > (YY_MOVE (s.value));
-        break;
-
-      case symbol_kind::S_direct_abstract_declarator: // direct_abstract_declarator
-        value.move< DirectAbstractDeclarator * > (YY_MOVE (s.value));
-        break;
-
-      case symbol_kind::S_direct_declarator: // direct_declarator
-        value.move< DirectDeclarator * > (YY_MOVE (s.value));
-        break;
-
-      case symbol_kind::S_enum_specifier: // enum_specifier
-        value.move< EnumSpecifier * > (YY_MOVE (s.value));
-        break;
-
-      case symbol_kind::S_enumerator: // enumerator
-        value.move< Enumerator * > (YY_MOVE (s.value));
-        break;
-
-      case symbol_kind::S_primary_expression: // primary_expression
-      case symbol_kind::S_postfix_expression: // postfix_expression
-      case symbol_kind::S_unary_expression: // unary_expression
-      case symbol_kind::S_cast_expression: // cast_expression
-      case symbol_kind::S_multiplicative_expression: // multiplicative_expression
-      case symbol_kind::S_additive_expression: // additive_expression
-      case symbol_kind::S_shift_expression: // shift_expression
-      case symbol_kind::S_relational_expression: // relational_expression
-      case symbol_kind::S_equality_expression: // equality_expression
-      case symbol_kind::S_and_expression: // and_expression
-      case symbol_kind::S_exclusive_or_expression: // exclusive_or_expression
-      case symbol_kind::S_inclusive_or_expression: // inclusive_or_expression
-      case symbol_kind::S_logical_and_expression: // logical_and_expression
-      case symbol_kind::S_logical_or_expression: // logical_or_expression
-      case symbol_kind::S_conditional_expression: // conditional_expression
-      case symbol_kind::S_assignment_expression: // assignment_expression
-      case symbol_kind::S_expression: // expression
-      case symbol_kind::S_constant_expression: // constant_expression
-        value.move< ExpressionTree * > (YY_MOVE (s.value));
-        break;
-
-      case symbol_kind::S_external_declaration: // external_declaration
-        value.move< ExternalDeclaration * > (YY_MOVE (s.value));
-        break;
-
-      case symbol_kind::S_function_definition: // function_definition
-        value.move< FunctionDefinition * > (YY_MOVE (s.value));
-        break;
-
-      case symbol_kind::S_init_declarator: // init_declarator
-        value.move< InitDeclarator * > (YY_MOVE (s.value));
-        break;
-
-      case symbol_kind::S_initializer: // initializer
-        value.move< Initializer * > (YY_MOVE (s.value));
-        break;
-
-      case symbol_kind::S_labeled_statement: // labeled_statement
-        value.move< LabeledStatement * > (YY_MOVE (s.value));
-        break;
-
-      case symbol_kind::S_parameter_declaration: // parameter_declaration
-        value.move< ParameterDeclaration * > (YY_MOVE (s.value));
-        break;
-
-      case symbol_kind::S_parameter_type_list: // parameter_type_list
-        value.move< ParameterTypeList * > (YY_MOVE (s.value));
-        break;
-
-      case symbol_kind::S_pointer: // pointer
-        value.move< Pointer * > (YY_MOVE (s.value));
-        break;
-
-      case symbol_kind::S_specifier_qualifier_list: // specifier_qualifier_list
-        value.move< SpecifierQualifierList * > (YY_MOVE (s.value));
-        break;
-
-      case symbol_kind::S_storage_class_specifier: // storage_class_specifier
-        value.move< StorageClassSpecifier * > (YY_MOVE (s.value));
-        break;
-
-      case symbol_kind::S_struct_declaration: // struct_declaration
-        value.move< StructDeclaration * > (YY_MOVE (s.value));
-        break;
-
-      case symbol_kind::S_struct_declarator: // struct_declarator
-        value.move< StructDeclarator * > (YY_MOVE (s.value));
-        break;
-
-      case symbol_kind::S_struct_or_union_specifier: // struct_or_union_specifier
-        value.move< StructOrUnionSpecifier * > (YY_MOVE (s.value));
+        value.move< shared_ptr<BaseStatement> > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_IDENTIFIER: // "identifier"
@@ -4606,63 +4501,168 @@ switch (yykind)
       case symbol_kind::S_unary_operator: // unary_operator
       case symbol_kind::S_assignment_operator: // assignment_operator
       case symbol_kind::S_struct_or_union: // struct_or_union
-        value.move< TokenPtr > (YY_MOVE (s.value));
+        value.move< shared_ptr<CToken> > (YY_MOVE (s.value));
+        break;
+
+      case symbol_kind::S_constant: // constant
+        value.move< shared_ptr<Constant> > (YY_MOVE (s.value));
+        break;
+
+      case symbol_kind::S_declaration: // declaration
+        value.move< shared_ptr<Declaration> > (YY_MOVE (s.value));
+        break;
+
+      case symbol_kind::S_declaration_specifiers: // declaration_specifiers
+        value.move< shared_ptr<DeclarationSpecifiers> > (YY_MOVE (s.value));
+        break;
+
+      case symbol_kind::S_declarator: // declarator
+        value.move< shared_ptr<Declarator> > (YY_MOVE (s.value));
+        break;
+
+      case symbol_kind::S_direct_abstract_declarator: // direct_abstract_declarator
+        value.move< shared_ptr<DirectAbstractDeclarator> > (YY_MOVE (s.value));
+        break;
+
+      case symbol_kind::S_direct_declarator: // direct_declarator
+        value.move< shared_ptr<DirectDeclarator> > (YY_MOVE (s.value));
+        break;
+
+      case symbol_kind::S_enum_specifier: // enum_specifier
+        value.move< shared_ptr<EnumSpecifier> > (YY_MOVE (s.value));
+        break;
+
+      case symbol_kind::S_enumerator: // enumerator
+        value.move< shared_ptr<Enumerator> > (YY_MOVE (s.value));
+        break;
+
+      case symbol_kind::S_primary_expression: // primary_expression
+      case symbol_kind::S_postfix_expression: // postfix_expression
+      case symbol_kind::S_unary_expression: // unary_expression
+      case symbol_kind::S_cast_expression: // cast_expression
+      case symbol_kind::S_multiplicative_expression: // multiplicative_expression
+      case symbol_kind::S_additive_expression: // additive_expression
+      case symbol_kind::S_shift_expression: // shift_expression
+      case symbol_kind::S_relational_expression: // relational_expression
+      case symbol_kind::S_equality_expression: // equality_expression
+      case symbol_kind::S_and_expression: // and_expression
+      case symbol_kind::S_exclusive_or_expression: // exclusive_or_expression
+      case symbol_kind::S_inclusive_or_expression: // inclusive_or_expression
+      case symbol_kind::S_logical_and_expression: // logical_and_expression
+      case symbol_kind::S_logical_or_expression: // logical_or_expression
+      case symbol_kind::S_conditional_expression: // conditional_expression
+      case symbol_kind::S_assignment_expression: // assignment_expression
+      case symbol_kind::S_expression: // expression
+      case symbol_kind::S_constant_expression: // constant_expression
+        value.move< shared_ptr<ExpressionTree> > (YY_MOVE (s.value));
+        break;
+
+      case symbol_kind::S_external_declaration: // external_declaration
+        value.move< shared_ptr<ExternalDeclaration> > (YY_MOVE (s.value));
+        break;
+
+      case symbol_kind::S_function_definition: // function_definition
+        value.move< shared_ptr<FunctionDefinition> > (YY_MOVE (s.value));
+        break;
+
+      case symbol_kind::S_init_declarator: // init_declarator
+        value.move< shared_ptr<InitDeclarator> > (YY_MOVE (s.value));
+        break;
+
+      case symbol_kind::S_initializer: // initializer
+        value.move< shared_ptr<Initializer> > (YY_MOVE (s.value));
+        break;
+
+      case symbol_kind::S_labeled_statement: // labeled_statement
+        value.move< shared_ptr<LabeledStatement> > (YY_MOVE (s.value));
+        break;
+
+      case symbol_kind::S_parameter_declaration: // parameter_declaration
+        value.move< shared_ptr<ParameterDeclaration> > (YY_MOVE (s.value));
+        break;
+
+      case symbol_kind::S_parameter_type_list: // parameter_type_list
+        value.move< shared_ptr<ParameterTypeList> > (YY_MOVE (s.value));
+        break;
+
+      case symbol_kind::S_pointer: // pointer
+        value.move< shared_ptr<Pointer> > (YY_MOVE (s.value));
+        break;
+
+      case symbol_kind::S_specifier_qualifier_list: // specifier_qualifier_list
+        value.move< shared_ptr<SpecifierQualifierList> > (YY_MOVE (s.value));
+        break;
+
+      case symbol_kind::S_storage_class_specifier: // storage_class_specifier
+        value.move< shared_ptr<StorageClassSpecifier> > (YY_MOVE (s.value));
+        break;
+
+      case symbol_kind::S_struct_declaration: // struct_declaration
+        value.move< shared_ptr<StructDeclaration> > (YY_MOVE (s.value));
+        break;
+
+      case symbol_kind::S_struct_declarator: // struct_declarator
+        value.move< shared_ptr<StructDeclarator> > (YY_MOVE (s.value));
+        break;
+
+      case symbol_kind::S_struct_or_union_specifier: // struct_or_union_specifier
+        value.move< shared_ptr<StructOrUnionSpecifier> > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_type_name: // type_name
-        value.move< TypeName * > (YY_MOVE (s.value));
+        value.move< shared_ptr<TypeName> > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_type_qualifier: // type_qualifier
-        value.move< TypeQualifier * > (YY_MOVE (s.value));
+        value.move< shared_ptr<TypeQualifier> > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_type_specifier: // type_specifier
-        value.move< TypeSpecifier * > (YY_MOVE (s.value));
+        value.move< shared_ptr<TypeSpecifier> > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_statement_list: // statement_list
-        value.move< std::vector<BaseStatement *> * > (YY_MOVE (s.value));
-        break;
-
-      case symbol_kind::S_declaration_list: // declaration_list
-        value.move< std::vector<Declaration *> * > (YY_MOVE (s.value));
-        break;
-
-      case symbol_kind::S_enumerator_list: // enumerator_list
-        value.move< std::vector<Enumerator *> * > (YY_MOVE (s.value));
-        break;
-
-      case symbol_kind::S_init_declarator_list: // init_declarator_list
-        value.move< std::vector<InitDeclarator *> * > (YY_MOVE (s.value));
-        break;
-
-      case symbol_kind::S_initializer_list: // initializer_list
-        value.move< std::vector<Initializer *> * > (YY_MOVE (s.value));
-        break;
-
-      case symbol_kind::S_parameter_list: // parameter_list
-        value.move< std::vector<ParameterDeclaration *> * > (YY_MOVE (s.value));
-        break;
-
-      case symbol_kind::S_struct_declaration_list: // struct_declaration_list
-        value.move< std::vector<StructDeclaration *> * > (YY_MOVE (s.value));
-        break;
-
-      case symbol_kind::S_struct_declarator_list: // struct_declarator_list
-        value.move< std::vector<StructDeclarator *> * > (YY_MOVE (s.value));
+        value.move< shared_ptr<vector<shared_ptr<BaseStatement>>> > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_identifier_list: // identifier_list
-        value.move< std::vector<TokenPtr> * > (YY_MOVE (s.value));
+        value.move< shared_ptr<vector<shared_ptr<CToken>>> > (YY_MOVE (s.value));
         break;
 
-      case symbol_kind::S_type_qualifier_list: // type_qualifier_list
-        value.move< std::vector<TypeQualifier *> * > (YY_MOVE (s.value));
+      case symbol_kind::S_declaration_list: // declaration_list
+        value.move< shared_ptr<vector<shared_ptr<Declaration>>> > (YY_MOVE (s.value));
+        break;
+
+      case symbol_kind::S_enumerator_list: // enumerator_list
+        value.move< shared_ptr<vector<shared_ptr<Enumerator>>> > (YY_MOVE (s.value));
         break;
 
       case symbol_kind::S_argument_expression_list: // argument_expression_list
-        value.move< vector<ExpressionTree *> * > (YY_MOVE (s.value));
+        value.move< shared_ptr<vector<shared_ptr<ExpressionTree>>> > (YY_MOVE (s.value));
+        break;
+
+      case symbol_kind::S_init_declarator_list: // init_declarator_list
+        value.move< shared_ptr<vector<shared_ptr<InitDeclarator>>> > (YY_MOVE (s.value));
+        break;
+
+      case symbol_kind::S_initializer_list: // initializer_list
+        value.move< shared_ptr<vector<shared_ptr<Initializer>>> > (YY_MOVE (s.value));
+        break;
+
+      case symbol_kind::S_parameter_list: // parameter_list
+        value.move< shared_ptr<vector<shared_ptr<ParameterDeclaration>>> > (YY_MOVE (s.value));
+        break;
+
+      case symbol_kind::S_struct_declaration_list: // struct_declaration_list
+        value.move< shared_ptr<vector<shared_ptr<StructDeclaration>>> > (YY_MOVE (s.value));
+        break;
+
+      case symbol_kind::S_struct_declarator_list: // struct_declarator_list
+        value.move< shared_ptr<vector<shared_ptr<StructDeclarator>>> > (YY_MOVE (s.value));
+        break;
+
+      case symbol_kind::S_type_qualifier_list: // type_qualifier_list
+        value.move< shared_ptr<vector<shared_ptr<TypeQualifier>>> > (YY_MOVE (s.value));
         break;
 
       default:

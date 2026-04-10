@@ -11,150 +11,65 @@ using namespace std;
 
 namespace WadeSpace
 {
-	typedef struct _VariableData
+	class VariableData
 	{
+	public:
 		string name;
 		TokenType type;
 		bool pointer;
 		unsigned long long arraySize;
-		Initializer* initializer;
+		shared_ptr<Initializer> initializer;
 		string structName;
-		StructOrUnionSpecifier* suSpec;
+		shared_ptr<StructOrUnionSpecifier> suSpec;
 		bool unsign;
-		ParameterTypeList* plist;
+		shared_ptr<ParameterTypeList> plist;
 
-		_VariableData() = default;
-		~_VariableData() = default;
+		VariableData() = default;
+		virtual ~VariableData() = default;
+		VariableData(const VariableData& other) = default;
+		VariableData(VariableData&& other) noexcept = default;
+		VariableData& operator=(const VariableData& other) = default;
+		VariableData& operator=(VariableData&& other) noexcept = default;
+	};
 
-		_VariableData(const _VariableData& other)
-		{
-			name = other.name;
-			pointer = other.pointer;
-			arraySize = other.arraySize;
-			type = other.type;
-			initializer = other.initializer ? new Initializer(*other.initializer) : nullptr;
-			structName = other.structName;
-			suSpec = other.suSpec ? new StructOrUnionSpecifier(*other.suSpec) : nullptr;
-			unsign = other.unsign;
-			plist = other.plist ? new ParameterTypeList(*other.plist) : nullptr;
-		}
-
-		_VariableData(_VariableData&& other) noexcept
-		{
-			name = other.name;
-			pointer = other.pointer;
-			arraySize = other.arraySize;
-			type = other.type;
-			initializer = other.initializer ? new Initializer(*other.initializer) : nullptr;
-			structName = other.structName;
-			suSpec = other.suSpec ? new StructOrUnionSpecifier(*other.suSpec) : nullptr;
-			unsign = other.unsign;
-			plist = other.plist ? new ParameterTypeList(*other.plist) : nullptr;
-		}
-
-		_VariableData& operator=(const _VariableData& other)
-		{
-			if (this == &other)
-				return *this;
-			name = other.name;
-			pointer = other.pointer;
-			arraySize = other.arraySize;
-			type = other.type;
-			initializer = other.initializer ? new Initializer(*other.initializer) : nullptr;
-			structName = other.structName;
-			suSpec = other.suSpec ? new StructOrUnionSpecifier(*other.suSpec) : nullptr;
-			unsign = other.unsign;
-			plist = other.plist ? new ParameterTypeList(*other.plist) : nullptr;
-			return *this;
-		}
-
-		_VariableData& operator=(_VariableData&& other) noexcept
-		{
-			if (this == &other)
-				return *this;
-			name = std::move(other.name);
-			pointer = other.pointer;
-			arraySize = other.arraySize;
-			type = other.type;
-			initializer = other.initializer ? new Initializer(*other.initializer) : nullptr;
-			structName = other.structName;
-			suSpec = other.suSpec ? new StructOrUnionSpecifier(*other.suSpec) : nullptr;	
-			unsign = other.unsign;
-			plist = other.plist ? new ParameterTypeList(*other.plist) : nullptr;
-			return *this;
-		}
-	} VariableData;
-
-	typedef struct _FunctionData
+	class FunctionData
 	{
+	public:
 		string name;
 		TokenType type;
-		vector<VariableData*>* parameters;
-		BaseStatement* statements;
+		shared_ptr<vector<shared_ptr<VariableData>>> parameters;
+		shared_ptr<BaseStatement> statements;
 
-		_FunctionData() = default;
-		~_FunctionData() = default;
-
-		_FunctionData(const _FunctionData& other)
-		{
-			name = other.name;
-			type = other.type;
-			parameters = other.parameters ? new vector<VariableData*>(*other.parameters) : nullptr;
-			statements = other.statements ? new BaseStatement(*other.statements) : nullptr;
-		}
-
-		_FunctionData(_FunctionData&& other) noexcept
-		{
-			name = other.name;
-			type = other.type;
-			parameters = other.parameters ? new vector<VariableData*>(*other.parameters) : nullptr;
-			statements = other.statements ? new BaseStatement(*other.statements) : nullptr;
-		}
-
-		_FunctionData& operator=(const _FunctionData& other)
-		{
-			if (this == &other)
-				return *this;
-			name = other.name;
-			type = other.type;
-			parameters = other.parameters ? new vector<VariableData*>(*other.parameters) : nullptr;
-			statements = other.statements ? new BaseStatement(*other.statements) : nullptr;
-			return *this;
-		}
-
-		_FunctionData& operator=(_FunctionData&& other) noexcept
-		{
-			if (this == &other)
-				return *this;
-			name = std::move(other.name);
-			type = other.type;		
-			parameters = other.parameters ? new vector<VariableData*>(*other.parameters) : nullptr;
-			statements = other.statements ? new BaseStatement(*other.statements) : nullptr;
-			return *this;
-		}
-	} FunctionData;
+		FunctionData() = default;
+		virtual ~FunctionData() = default;
+		FunctionData(const FunctionData& other) = default;
+		FunctionData(FunctionData&& other) noexcept = default;
+		FunctionData& operator=(const FunctionData& other) = default;
+		FunctionData& operator=(FunctionData&& other) noexcept = default;
+	};
 
 	class BaseCodeGenerator
 	{
+	protected:
+		shared_ptr<vector<shared_ptr<VariableData>>> variableTable;
+		shared_ptr<vector<shared_ptr<FunctionData>>> functionTable;
 	public:
-		BaseCodeGenerator();
-		BaseCodeGenerator(vector<VariableData*>* variable_table, vector<FunctionData*>* function_table);
-		virtual ~BaseCodeGenerator();
+		BaseCodeGenerator() = default;
+		BaseCodeGenerator(shared_ptr<vector<shared_ptr<VariableData>>> variable_table, shared_ptr<vector<shared_ptr<FunctionData>>> function_table);
+		virtual ~BaseCodeGenerator() = default;
 
-		BaseCodeGenerator(const BaseCodeGenerator& other);
-		BaseCodeGenerator(BaseCodeGenerator&& other) noexcept;
-		BaseCodeGenerator& operator=(const BaseCodeGenerator& other);
-		BaseCodeGenerator& operator=(BaseCodeGenerator&& other) noexcept;
+		BaseCodeGenerator(const BaseCodeGenerator& other) = default;
+		BaseCodeGenerator(BaseCodeGenerator&& other) noexcept = default;
+		BaseCodeGenerator& operator=(const BaseCodeGenerator& other) = default;
+		BaseCodeGenerator& operator=(BaseCodeGenerator&& other) noexcept = default;
 
-		vector<VariableData*>* getVariableTable() const;
-		vector<FunctionData*>* getFunctionTable() const;
-
-		bool hasVariableTable() const{ return variableTable != nullptr; }
-		bool hasFunctionTable() const{ return functionTable != nullptr; }
 		virtual void generateCode(ostream& out) = 0;
 
-	protected:
-		vector<VariableData*>* variableTable;
-		vector<FunctionData*>* functionTable;
+		[[nodiscard]] shared_ptr<vector<shared_ptr<VariableData>>> getVariableTable() const {	return variableTable; }
+		[[nodiscard]] shared_ptr<vector<shared_ptr<FunctionData>>> getFunctionTable() const { return functionTable; }
+		void setVariableTable(shared_ptr<vector<shared_ptr<VariableData>>> variable_table) { variableTable = variable_table; }
+		void setFunctionTable(shared_ptr<vector<shared_ptr<FunctionData>>> function_table) { functionTable = function_table; }
+		[[nodiscard]] bool hasVariableTable() const { return variableTable != nullptr; }
+		[[nodiscard]] bool hasFunctionTable() const { return functionTable != nullptr; }
 	};
 }

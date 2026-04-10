@@ -9,12 +9,7 @@ namespace WadeSpace
 	class StructOrUnionSpecifier;
 	class Compiler;
 
-	extern Compiler* compiler;
-	//extern ProgramData* programData;
-	//extern map<string, ExternalDeclaration*>* typedefList;
-	//extern map<string, StructOrUnionSpecifier*>* structList;
-	//extern vector<string>* functionList;
-
+	extern shared_ptr<Compiler> compiler;
 	extern bool bit16;
 	extern bool bit32;
 	extern bool bit64;

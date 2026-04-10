@@ -14,24 +14,21 @@ namespace WadeSpace
 
 	class Enumerator
 	{
+		shared_ptr<CToken> identifier;
+		shared_ptr<ExpressionTree> constantExpression;
 	public:
-		Enumerator(TokenPtr identifier, ExpressionTree* constantExpression);
-		Enumerator();
-		virtual ~Enumerator();
-
-		Enumerator(const Enumerator& other);
-		Enumerator(Enumerator&& other) noexcept;
-		Enumerator& operator=(const Enumerator& other);
-		Enumerator& operator=(Enumerator&& other) noexcept;
-	
-		[[nodiscard]] TokenPtr getIdentifier() const;
-		[[nodiscard]] ExpressionTree* getConstantExpression() const;
-
-		[[nodiscard]] bool hasIdentifier() const { return identifier != nullptr; }
-		[[nodiscard]] bool hasConstantExpression() const { return constantExpression != nullptr; }
-
-	private:
-		TokenPtr identifier;
-		ExpressionTree* constantExpression;
+		Enumerator() = default;
+		Enumerator(shared_ptr<CToken> identifier, shared_ptr<ExpressionTree> constantExpression);
+		virtual ~Enumerator() = default;
+		Enumerator(const Enumerator& other) = default;
+		Enumerator(Enumerator&& other) noexcept = default;
+		Enumerator& operator=(const Enumerator& other) = default;
+		Enumerator& operator=(Enumerator&& other) noexcept = default;
+		[[nodiscard]] shared_ptr<CToken> getIdentifier() const { return identifier; }
+		[[nodiscard]] shared_ptr<ExpressionTree> getConstantExpression() const { return constantExpression; }
+		void setIdentifier(shared_ptr<CToken> identifier) { this->identifier = identifier; }
+		void setConstantExpression(shared_ptr<ExpressionTree> constantExpression) { this->constantExpression = constantExpression; }
+		bool hasConstantExpression() const { return constantExpression != nullptr; }
+		bool hasIdentifier() const { return identifier != nullptr; }
 	};
 }

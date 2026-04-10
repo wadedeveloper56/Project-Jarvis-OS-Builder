@@ -16,12 +16,10 @@ using namespace simplecpp;
 
 Compiler::Compiler()
 {
-	programData = new ProgramData();
-}
-
-Compiler::~Compiler()
-{
-	delete programData;
+	programData = make_shared<ProgramData>();
+	typedefList = make_shared<map<string, shared_ptr<DeclarationSpecifiersNode>>>();
+	structList = make_shared<map<string, shared_ptr<StructOrUnionSpecifier>>>();
+	functionList = make_shared<map<string, shared_ptr<FunctionDefinition>>>();
 }
 
 void Compiler::compileFile(istringstream& inStr, ostream& out, int& exitcode)
@@ -29,14 +27,12 @@ void Compiler::compileFile(istringstream& inStr, ostream& out, int& exitcode)
 	Interpreter i;
 	i.setStreams(&inStr, &out);
 	exitcode = i.parse();
-	BaseCodeGenerator* generator = programData->processGlobalVariables();
+	shared_ptr<BaseCodeGenerator> generator = programData->processGlobalVariables();
 	generator->generateCode(out);
 }
 
 void Compiler::compile(istream& in, ArgFilePtr infiles, ostream& out, int& exitcode)
 {
-	programData = new ProgramData();
-
 	DUI dui;
 	OutputList outputList;
 	vector<string> files;

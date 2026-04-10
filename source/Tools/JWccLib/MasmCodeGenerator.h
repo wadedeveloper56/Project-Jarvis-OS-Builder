@@ -15,8 +15,8 @@ namespace WadeSpace
 	{
 	public:
 		MasmCodeGenerator() = default;
-		MasmCodeGenerator(vector<VariableData*>* variableTable, vector<FunctionData*>* functionTable);
-		virtual ~MasmCodeGenerator();
+		MasmCodeGenerator(shared_ptr<vector<shared_ptr<VariableData>>> variableTable, shared_ptr<vector<shared_ptr<FunctionData>>> functionTable);
+		virtual ~MasmCodeGenerator() = default;
 
 		virtual void generateCode(ostream& out);
 
@@ -26,15 +26,15 @@ namespace WadeSpace
 		MasmCodeGenerator& operator=(MasmCodeGenerator&& other) noexcept;
 
 	private:
-		void handleIndividualFunction(ostream& out, FunctionData* ptr);
-		void handleInitializedVariable(ostream& out, _VariableData* ptr);
-		void handleUUninitializedVariable(ostream& out, _VariableData* ptr);
+		void handleIndividualFunction(ostream& out, shared_ptr<FunctionData> ptr);
+		void handleInitializedVariable(ostream& out, shared_ptr<VariableData> ptr);
+		void handleUUninitializedVariable(ostream& out, shared_ptr<VariableData> ptr);
 		void handleVariableTable(ostream& out);
 		void handleFunctionTable(ostream& out);
-		//void handleStructs(ostream& out);
-		void outputVariable(ostream& out, _VariableData* ptr);
-		void handleFunctionWithParameters(ostream& out, string name, vector<VariableData*>* list);
-		void handleIndividualFunctionStatements(ostream& out, TokenType returnType, BaseStatement const * statements);
+		void handleStructs(ostream& out);
+		void outputVariable(ostream& out, shared_ptr<VariableData> ptr);
+		void handleFunctionWithParameters(ostream& out, string name, shared_ptr<vector<shared_ptr<VariableData>>> list);
+		void handleIndividualFunctionStatements(ostream& out, TokenType returnType, shared_ptr<BaseStatement> statements);
 		string vectorToCommaSeparatedList(const vector<string>& vec);
 		string getAsmType(TokenType type, bool isPointer, bool isUnsigned);
 		void handlePrototype(ostream& out);

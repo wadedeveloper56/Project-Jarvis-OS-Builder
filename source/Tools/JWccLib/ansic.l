@@ -212,8 +212,16 @@ WS  [ \t\v\n\f]
                 return WadeSpace::Parser::make_BOOL(createKeywordToken(yytext,BOOL), WadeSpace::location()); 
                }
 {L}{A}*        { 
-                cout << "Scanner: struct name [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_IDENTIFIER(createStringIDToken(yytext), WadeSpace::location()); 
+                if (compiler->hasTypedef(yytext))
+                {
+                    cout << "Scanner: typedef name [" << yytext << "]" << endl;
+                    return WadeSpace::Parser::make_TYPE_NAME(createStringIDToken(yytext), WadeSpace::location()); 
+                }
+                else
+                {
+                    cout << "Scanner: identifier [" << yytext << "]" << endl;
+                    return WadeSpace::Parser::make_IDENTIFIER(createStringIDToken(yytext), WadeSpace::location()); 
+                }
                }
 {HP}{H}+{IS}?  {
                 cout << "Scanner: decimal number: " << yytext << endl;

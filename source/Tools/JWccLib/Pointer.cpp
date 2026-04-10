@@ -3,115 +3,21 @@
 
 using namespace WadeSpace;
 
-Pointer::Pointer(const TokenPtr name, vector<TypeQualifier*>* typeQualifierList) : name(name), typeQualifierList(typeQualifierList), level(1), pointer(nullptr)
+Pointer::Pointer(const shared_ptr<CToken> name, shared_ptr<vector<shared_ptr<TypeQualifier>>> typeQualifierList) : name(name), typeQualifierList(typeQualifierList), level(1), pointer(nullptr)
 {
 }
 
-Pointer::Pointer(const TokenPtr name, vector<TypeQualifier*>* typeQualifierList, Pointer* pointer) : name(name), typeQualifierList(typeQualifierList), level(1), pointer(pointer)
+Pointer::Pointer(const shared_ptr<CToken> name, shared_ptr<vector<shared_ptr<TypeQualifier>>> typeQualifierList, shared_ptr<Pointer> pointer) : name(name), typeQualifierList(typeQualifierList), level(1), pointer(pointer)
 {
 }
 
-Pointer::Pointer(const TokenPtr name, Pointer* pointer) : name(name), typeQualifierList(nullptr), level(1), pointer(pointer)
+Pointer::Pointer(const shared_ptr<CToken> name, shared_ptr<Pointer> pointer) : name(name), typeQualifierList(nullptr), level(1), pointer(pointer)
 {
 }
 
-Pointer::Pointer(const TokenPtr name) : name(name), typeQualifierList(nullptr), level(1), pointer(nullptr)
+Pointer::Pointer(const shared_ptr<CToken> name) : name(name), typeQualifierList(nullptr), level(1), pointer(nullptr)
 {
-}
-
-Pointer::Pointer() : name(nullptr), typeQualifierList(nullptr), level(0), pointer(nullptr)
-{
-}
-
-Pointer::~Pointer()
-{
-	if (typeQualifierList != NULL)
-	{
-		for (TypeQualifier* ptr : *typeQualifierList)
-		{
-			delete ptr;
-		}
-	}
-	delete typeQualifierList;
-	delete pointer;
 }
 
 void Pointer::inc() { level++; }
 
-Pointer::Pointer(const Pointer& other)
-{
-	name = other.name ? new Token(*other.name) : nullptr;
-	typeQualifierList = other.typeQualifierList ? new vector<TypeQualifier*>(*other.typeQualifierList) : nullptr;
-	level = other.level;
-	pointer = other.pointer ? new Pointer(*other.pointer) : nullptr;
-}
-
-Pointer::Pointer(Pointer&& other) noexcept
-{
-	name = other.name ? new Token(*other.name) : nullptr;
-	typeQualifierList = other.typeQualifierList ? new vector<TypeQualifier*>(*other.typeQualifierList) : nullptr;
-	level = other.level;
-	pointer = other.pointer ? new Pointer(*other.pointer) : nullptr;
-}
-
-Pointer& Pointer::operator=(const Pointer& other)
-{
-	if (this == &other)
-		return *this;
-	name = other.name ? new Token(*other.name) : nullptr;
-	typeQualifierList = other.typeQualifierList ? new vector<TypeQualifier*>(*other.typeQualifierList) : nullptr;
-	level = other.level;
-	pointer = other.pointer ? new Pointer(*other.pointer) : nullptr;
-	return *this;
-}
-
-Pointer& Pointer::operator=(Pointer&& other) noexcept
-{
-	if (this == &other)
-		return *this;
-	name = other.name ? new Token(*other.name) : nullptr;
-	typeQualifierList = other.typeQualifierList ? new vector<TypeQualifier*>(*other.typeQualifierList) : nullptr;
-	level = other.level;
-	pointer = other.pointer ? new Pointer(*other.pointer) : nullptr;
-	return *this;
-}
-
-TokenPtr Pointer::getName() const
-{
-	return name;
-}
-
-vector<TypeQualifier*>* Pointer::getTypeQualifierList() const
-{
-	return typeQualifierList;
-}
-
-int Pointer::getLevel() const
-{
-	return level;
-}
-
-Pointer* Pointer::getPointer() const
-{
-	return pointer;
-}
-
-bool Pointer::hasName() const
-{
-	return name != nullptr;
-}
-
-bool Pointer::hasTypeQualifierList() const
-{
-	return typeQualifierList != nullptr;
-}
-
-bool Pointer::hasLevel() const
-{
-	return level > 0;
-}
-
-bool Pointer::hasPointer() const
-{
-	return pointer != nullptr;
-}

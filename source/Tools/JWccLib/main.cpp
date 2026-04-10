@@ -95,10 +95,9 @@ int main(int argc, char* argv[])
 	if (in.is_open() && out.is_open())
 	{
 		debug_printf("Parse starting");
-		compiler = new WadeSpace::Compiler();
+		compiler = make_shared<WadeSpace::Compiler>();
 		compiler->compile(in, infiles, out, exitcode);
 		cout << "Parse complete. Result = " << exitcode << endl;
-		delete compiler;
 	}
 	else
 	{

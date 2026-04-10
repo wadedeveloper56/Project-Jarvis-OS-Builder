@@ -13,15 +13,14 @@ namespace WadeSpace
 	class IterationStatement : public BaseStatement
 	{
 	public:
-		IterationStatement();
-		IterationStatement(TokenType op, BaseStatement* es1, BaseStatement* es2, ExpressionTree* exp, BaseStatement* statement);
-		IterationStatement(TokenType op, BaseStatement* es1, BaseStatement* es2, BaseStatement* statement);
-		IterationStatement(TokenType op, ExpressionTree* identifier, BaseStatement* statement);
-		virtual ~IterationStatement();
-
-		IterationStatement(const IterationStatement& other);
-		IterationStatement(IterationStatement&& other) noexcept;
-		IterationStatement& operator=(const IterationStatement& other);
-		IterationStatement& operator=(IterationStatement&& other) noexcept;
+		IterationStatement() = default;
+		IterationStatement(TokenType op, shared_ptr<BaseStatement> es1, shared_ptr<BaseStatement> es2, shared_ptr<ExpressionTree> exp, shared_ptr<BaseStatement> statement);
+		IterationStatement(TokenType op, shared_ptr<BaseStatement> es1, shared_ptr<BaseStatement> es2, shared_ptr<BaseStatement> statement);
+		IterationStatement(TokenType op, shared_ptr<ExpressionTree> identifier, shared_ptr<BaseStatement> statement);
+		virtual ~IterationStatement() = default;
+		IterationStatement(const IterationStatement& other) = default;
+		IterationStatement(IterationStatement&& other) noexcept = default;
+		IterationStatement& operator=(const IterationStatement& other) = default;
+		IterationStatement& operator=(IterationStatement&& other) noexcept = default;
 	};
 }

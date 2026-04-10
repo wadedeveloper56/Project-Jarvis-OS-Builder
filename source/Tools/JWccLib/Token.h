@@ -65,8 +65,9 @@ struct StringConstant
 	int strLen;
 };
 
-typedef struct TokData
+class CTokData
 {
+public:
 	TokenCode code;
 	union Representation
 	{
@@ -76,56 +77,34 @@ typedef struct TokData
 		StringConstant stringConstant;
 	} repr;
 
-	TokData() = default;
-	~TokData() = default;
-	TokData(const TokData& other) = default;
-	TokData(TokData&& other) noexcept = default;
-	TokData& operator=(const TokData& other) = default;
-	TokData& operator=(TokData&& other) noexcept = default;
-} * TokDataPtr;
+	CTokData() = default;
+	~CTokData() = default;
+	CTokData(const CTokData& other) = default;
+	CTokData(CTokData&& other) noexcept = default;
+	CTokData& operator=(const CTokData& other) = default;
+	CTokData& operator=(CTokData&& other) noexcept = default;
+};
 
-typedef struct Token
+class CToken
 {
-	TokDataPtr data;
-	Token();
-	~Token();
-
-	Token(const Token& other)
-	{
-		data = other.data ? new TokData(*other.data) : nullptr;
-	}
-
-	Token(Token&& other) noexcept
-	{
-		data = other.data ? new TokData(*other.data) : nullptr;;
-	}
-
-	Token& operator=(const Token& other)
-	{
-		if (this == &other)
-			return *this;
-		data = other.data ? new TokData(*other.data) : nullptr;
-		return *this;
-	}
- 
-	Token& operator=(Token&& other) noexcept
-	{
-		if (this == &other) 
-			return *this;
-		data = other.data ? new TokData(*other.data) : nullptr;
-		return *this;
-	}
-
+public:
+	shared_ptr<CTokData> data;
+	CToken() = default;
+	~CToken()= default;
+	CToken(const CToken& other)= default;
+	CToken(CToken&& other) noexcept = default;
+	CToken& operator=(const CToken& other) = default;
+	CToken& operator=(CToken&& other) noexcept = default;
 	string getSymbolName() const;
 	string getKeywordName() const;
 	unsigned long long getIntegerConst() const;
 	long double getDoubleConst() const;
-}* TokenPtr, ** TokenPtrPtr;
+};
 
-TokenPtr createToken(TokDataPtr data);
-TokDataPtr createTokData(void);
-TokenPtr createConstantULLToken(unsigned long long num);
-TokenPtr createConstantLDToken(long double num);
-TokenPtr createStringConstantToken(char* str);
-TokenPtr createStringIDToken(char* str);
-TokenPtr createKeywordToken(char* str, int keyword);
+shared_ptr<CToken> createToken(shared_ptr<CTokData> data);
+shared_ptr<CTokData> createTokData(void);
+shared_ptr<CToken> createConstantULLToken(const unsigned long long num);
+shared_ptr<CToken> createConstantLDToken(const long double num);
+shared_ptr<CToken> createStringConstantToken(char* str);
+shared_ptr<CToken> createStringIDToken(char* str);
+shared_ptr<CToken> createKeywordToken(char* str, int keyword);

@@ -10,30 +10,28 @@ namespace WadeSpace
 {
 	class SpecifierQualifierList
 	{
+		shared_ptr<SpecifierQualifierList> specifierQualifierList;
+		shared_ptr<TypeSpecifier> typeSpecifier;
+		shared_ptr<TypeQualifier> typeQualifier;
 	public:
-		SpecifierQualifierList();
-		SpecifierQualifierList(SpecifierQualifierList* specifierQualifierList, TypeSpecifier* typeSpecifier);
-		SpecifierQualifierList(TypeSpecifier* typeSpecifier);
-		SpecifierQualifierList(SpecifierQualifierList* specifierQualifierList, TypeQualifier* typeQualifier);
-		SpecifierQualifierList(TypeQualifier* typeQualifier);
-		virtual ~SpecifierQualifierList();
-
-		SpecifierQualifierList(const SpecifierQualifierList& other);
-		SpecifierQualifierList(SpecifierQualifierList&& other) noexcept;
-		SpecifierQualifierList& operator=(const SpecifierQualifierList& other);
-		SpecifierQualifierList& operator=(SpecifierQualifierList&& other) noexcept;
-
-		[[nodiscard]] SpecifierQualifierList* getSpecifierQualifierList() const;
-		[[nodiscard]] TypeSpecifier* getTypeSpecifier() const;
-		[[nodiscard]] TypeQualifier* getTypeQualifier() const;
-
-		[[nodiscard]] bool hasSpecifierQualifierList() const;
-		[[nodiscard]] bool hasTypeSpecifier() const;
-		[[nodiscard]] bool hasTypeQualifier() const;
-
-	private:
-		SpecifierQualifierList* specifierQualifierList;
-		TypeSpecifier* typeSpecifier;
-		TypeQualifier* typeQualifier;
+		SpecifierQualifierList() = default;
+		SpecifierQualifierList(shared_ptr<SpecifierQualifierList> specifierQualifierList, shared_ptr<TypeSpecifier> typeSpecifier);
+		SpecifierQualifierList(shared_ptr<TypeSpecifier> typeSpecifier);
+		SpecifierQualifierList(shared_ptr<SpecifierQualifierList> specifierQualifierList, shared_ptr<TypeQualifier> typeQualifier);
+		SpecifierQualifierList(shared_ptr<TypeQualifier> typeQualifier);
+		virtual ~SpecifierQualifierList() = default;
+		SpecifierQualifierList(const SpecifierQualifierList& other) = default;
+		SpecifierQualifierList(SpecifierQualifierList&& other) noexcept = default;
+		SpecifierQualifierList& operator=(const SpecifierQualifierList& other) = default;
+		SpecifierQualifierList& operator=(SpecifierQualifierList&& other) noexcept = default;
+		[[nodiscard]] shared_ptr<SpecifierQualifierList> getSpecifierQualifierList() const { return specifierQualifierList; }
+		[[nodiscard]] shared_ptr<TypeSpecifier> getTypeSpecifier() const { return typeSpecifier; }
+		[[nodiscard]] shared_ptr<TypeQualifier> getTypeQualifier() const { return typeQualifier; }
+		void setSpecifierQualifierList(shared_ptr<SpecifierQualifierList> specifierQualifierList) { this->specifierQualifierList = specifierQualifierList; }
+		void setTypeSpecifier(shared_ptr<TypeSpecifier> typeSpecifier) { this->typeSpecifier = typeSpecifier; }
+		void setTypeQualifier(shared_ptr<TypeQualifier> typeQualifier) { this->typeQualifier = typeQualifier; }
+		bool hasSpecifierQualifierList() const { return specifierQualifierList != nullptr; }
+		bool hasTypeSpecifier() const { return typeSpecifier != nullptr; }
+		bool hasTypeQualifier() const { return typeQualifier != nullptr; }
 	};
 }

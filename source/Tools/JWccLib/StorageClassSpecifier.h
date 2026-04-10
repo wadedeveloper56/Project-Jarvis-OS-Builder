@@ -13,20 +13,17 @@ namespace WadeSpace
 {
 	class StorageClassSpecifier
 	{
+		shared_ptr<CToken> type;
 	public:
-		StorageClassSpecifier();
-		explicit StorageClassSpecifier(const TokenPtr type);
+		StorageClassSpecifier() = default;
+		StorageClassSpecifier(const shared_ptr<CToken> type);
 		virtual ~StorageClassSpecifier() = default;
-
-		StorageClassSpecifier(const StorageClassSpecifier& other);
-		StorageClassSpecifier(StorageClassSpecifier&& other) noexcept;
-		StorageClassSpecifier& operator=(const StorageClassSpecifier& other);
-		StorageClassSpecifier& operator=(StorageClassSpecifier&& other) noexcept;
-
-		[[nodiscard]] TokenPtr getType() const;
-		[[nodiscard]] bool hasType() const;
-
-	private:
-		TokenPtr type;
+		StorageClassSpecifier(const StorageClassSpecifier& other) = default;
+		StorageClassSpecifier(StorageClassSpecifier&& other) noexcept = default;
+		StorageClassSpecifier& operator=(const StorageClassSpecifier& other) = default;
+		StorageClassSpecifier& operator=(StorageClassSpecifier&& other) noexcept = default;
+		[[nodiscard]] shared_ptr<CToken> getType() const { return type; }
+		[[nodiscard]] bool hasType() const { return type != nullptr; }
+		void setType(const shared_ptr<CToken> type) { this->type = type; }
 	};
 }

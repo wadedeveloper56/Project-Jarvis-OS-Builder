@@ -1,23 +1,9 @@
 #include "pch.h"
 #include "StructOrUnion.h"
+#include <optional>
 
 using namespace WadeSpace; 
-
-StructOrUnion::StructOrUnion(TokenType type): type(type)
+using namespace std;
+StructOrUnion::StructOrUnion(optional<TokenType> type): type(type)
 {
 }
-
-StructOrUnion::StructOrUnion(): type(NONE)
-{
-}
-
-TokenType StructOrUnion::getType() const
-{
-	return type;
-}
-
-bool StructOrUnion::hasType() const
-{
-	return type != NONE;
-}
-
