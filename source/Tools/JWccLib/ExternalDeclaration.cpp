@@ -21,20 +21,35 @@ ExternalDeclaration::ExternalDeclaration(shared_ptr<Declaration> declaration) : 
 		string name = initDeclaratorsList->at(0)->getDeclarator()->getDirectDeclarator()->getIdentifier()->getSymbolName();
 		compiler->addTypedef(name, make_shared<DeclarationSpecifiersNode>(*list->at(0)));
 	}
-}
-
-bool ExternalDeclaration::isTypedef() const
-{
-	if (declaration != nullptr)
+	else
 	{
-		shared_ptr<vector<shared_ptr<DeclarationSpecifiersNode>>> temp = declaration->getDeclarationSpecifiers()->getDeclarationSpecifiersNodeList();
-		for (auto node : *temp)
+		TokenType type = findType(declaration)->getType().value();
+		shared_ptr<DeclarationSpecifiers> declSpecifiers = declaration->getDeclarationSpecifiers();
+		shared_ptr<vector<shared_ptr<InitDeclarator>>> initDeclaratorsList = declaration->getVectorInitDeclarator();
+		shared_ptr<vector<shared_ptr<DeclarationSpecifiersNode>>> list = declSpecifiers->getDeclarationSpecifiersNodeList();
+		switch (type)
 		{
-			if (node->getStorageClassSpecifier() != nullptr && node->getStorageClassSpecifier()->getType()->getKeywordName() == "typedef")
-			{
-				return true;
-			}
+			case TYPE_NAME:
+				break;
+			case STRUCT:
+			case UNION:
+				string structName;
+				shared_ptr<TypeSpecifier> type_specifier = nullptr;
+				for (shared_ptr<DeclarationSpecifiersNode> ptr : *list)
+				{
+					type_specifier = ptr->getTypeSpecifier();
+					if (type_specifier != nullptr)
+					{
+						structName = type_specifier->getStructOrUnionSpecifier()->getName()->getSymbolName();
+						break;
+					}
+				}
+				if (initDeclaratorsList == nullptr && type_specifier != nullptr)
+				{
+					compiler->addStruct(structName, type_specifier->getStructOrUnionSpecifier());
+				}
+				break;
 		}
 	}
-	return false;
 }
+

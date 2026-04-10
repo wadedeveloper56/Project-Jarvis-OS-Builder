@@ -231,11 +231,7 @@ void ProgramData::handleStruct(shared_ptr<Declaration> declaration, shared_ptr<v
 			break;
 		}
 	}
-	if (initDeclaratorsList == nullptr)
-	{
-		compiler->addStruct(structName, type_specifier->getStructOrUnionSpecifier());
-	}
-	else
+	if (initDeclaratorsList != nullptr)
 	{
 		TokenType type = STRUCT;
 		bool unsign = false;
@@ -279,11 +275,7 @@ void ProgramData::handleUnion(shared_ptr<Declaration> declaration, shared_ptr<ve
 			break;
 		}
 	}
-	if (initDeclaratorsList == nullptr)
-	{
-		compiler->addStruct(structName, type_specifier->getStructOrUnionSpecifier());
-	}
-	else
+	if (initDeclaratorsList != nullptr)
 	{
 		TokenType type = UNION;
 		bool unsign = false;
@@ -303,6 +295,39 @@ void ProgramData::handleUnion(shared_ptr<Declaration> declaration, shared_ptr<ve
 			data->plist = plist;
 			data->structName = structName;
 			data->suSpec = sudata;
+			if (initDecl->hasInitializer()) data->initializer = make_shared<Initializer>(*initDecl->getInitializer());
+			if (dd->hasConstantExpression()) data->arraySize = dd->getConstantExpression()->getData()->getConstant()->getIConst()->getIntegerConst();
+			variableTable->push_back(data);
+		}
+	}
+}
+
+void ProgramData::handleTypedef(shared_ptr<Declaration> declaration, shared_ptr<vector<shared_ptr<VariableData>>> variableTable)
+{
+	shared_ptr<DeclarationSpecifiers> declSpecifiers = declaration->getDeclarationSpecifiers();
+	shared_ptr<vector<shared_ptr<InitDeclarator>>> initDeclaratorsList = declaration->getVectorInitDeclarator();
+	shared_ptr<vector<shared_ptr<DeclarationSpecifiersNode>>> list = declSpecifiers->getDeclarationSpecifiersNodeList();
+	string structName = list->at(0)->getTypeSpecifier()->getTypePtr()->getSymbolName();
+	shared_ptr<DeclarationSpecifiersNode> typedefEntry = compiler->findTypedef(structName);
+	if (initDeclaratorsList != nullptr)
+	{
+		TokenType type = typedefEntry->getTypeSpecifier()->getType().value();
+		bool unsign = false;
+		for (shared_ptr<InitDeclarator> initDecl : *initDeclaratorsList)
+		{
+			shared_ptr<Declarator> declarator = initDecl->getDeclarator();
+			shared_ptr<DirectDeclarator> dd = declarator->getDirectDeclarator();
+
+			shared_ptr<VariableData> data = make_shared<VariableData>();
+			data->initializer = nullptr;
+			data->arraySize = 1;
+			data->type = type;
+			data->pointer = declarator->hasPointer();
+			data->name = initDecl->getVariableName();
+			data->unsign = unsign;
+			data->plist = nullptr;
+			data->structName = structName;
+			data->suSpec = nullptr;
 			if (initDecl->hasInitializer()) data->initializer = make_shared<Initializer>(*initDecl->getInitializer());
 			if (dd->hasConstantExpression()) data->arraySize = dd->getConstantExpression()->getData()->getConstant()->getIConst()->getIntegerConst();
 			variableTable->push_back(data);
@@ -353,6 +378,7 @@ shared_ptr<BaseCodeGenerator> ProgramData::processGlobalVariables()
 				switch (type)
 				{
 					case TYPE_NAME:
+						handleTypedef(ptr->getDeclaration(), variableTable);
 						break;
 					case STRUCT:
 						handleStruct(ptr->getDeclaration(), variableTable);

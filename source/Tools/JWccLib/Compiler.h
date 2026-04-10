@@ -49,5 +49,14 @@ namespace WadeSpace
 			}
 			return nullptr;
 		}
+		shared_ptr<DeclarationSpecifiersNode> findTypedef(const string& name) const
+		{
+			auto it = typedefList->find(name);
+			if (it != typedefList->end())
+			{
+				return it->second;
+			}
+			return nullptr;
+		}
 	};
 }
