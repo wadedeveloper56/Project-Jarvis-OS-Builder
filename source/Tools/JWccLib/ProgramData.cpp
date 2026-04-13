@@ -29,7 +29,7 @@ TokenType ProgramData::getFunctionParameterType(shared_ptr<ParameterDeclaration>
 	auto declaration_specifiers_list = parameterDeclaration->getDeclarationSpecifiers()->getDeclarationSpecifiersNodeList();
 	if (declaration_specifiers_list != nullptr)
 	{
-		for (auto ptr : *declaration_specifiers_list)
+		for (shared_ptr<DeclarationSpecifiersNode> ptr : *declaration_specifiers_list)
 		{
 			if (ptr->getTypeSpecifier() != nullptr)
 			{
@@ -63,7 +63,7 @@ TokenType ProgramData::getDeclarationSpecifiersType(shared_ptr<DeclarationSpecif
 	auto type_specifierList = declaration_specifiers->getDeclarationSpecifiersNodeList();
 	if (type_specifierList != nullptr)
 	{
-		for (auto ptr : *type_specifierList)
+		for (shared_ptr<DeclarationSpecifiersNode> ptr : *type_specifierList)
 		{
 			if (ptr->getTypeSpecifier() != nullptr)
 			{
@@ -108,7 +108,7 @@ shared_ptr<ParameterTypeList> ProgramData::getDeclarationParameterList(shared_pt
 	shared_ptr<ParameterTypeList> plist = nullptr;
 	if (initDeclaratorsList != nullptr)
 	{
-		for (auto node : *initDeclaratorsList)
+		for (shared_ptr<InitDeclarator> node : *initDeclaratorsList)
 		{
 			auto init_decl = node->getDeclarator()->getDirectDeclarator();
 			plist = init_decl->getParameterTypeList();
@@ -119,7 +119,7 @@ shared_ptr<ParameterTypeList> ProgramData::getDeclarationParameterList(shared_pt
 
 void ProgramData::handleDeclaration(shared_ptr<Declaration> declaration, shared_ptr<vector<shared_ptr<VariableData>>> variableTable)
 {
-	TokenType type;
+	TokenType type = UNKNOWN;
 	bool unsign = false;
 	string structName;
 	shared_ptr<StructOrUnionSpecifier> suSpec = nullptr;
@@ -131,7 +131,7 @@ void ProgramData::handleDeclaration(shared_ptr<Declaration> declaration, shared_
 	auto list = declSpecifiers->getDeclarationSpecifiersNodeList();
 	if (list != nullptr)
 	{
-		for (auto ptr : *list)
+		for (shared_ptr<DeclarationSpecifiersNode> ptr : *list)
 		{
 			if (ptr->getTypeSpecifier() != nullptr)
 			{
@@ -145,10 +145,10 @@ void ProgramData::handleDeclaration(shared_ptr<Declaration> declaration, shared_
 					auto declaration_specifiers = declaration->getDeclarationSpecifiers();
 					if (declaration_specifiers != nullptr)
 					{
-						auto declaration_specifiers_list = declaration_specifiers->getDeclarationSpecifiersNodeList();
+						shared_ptr<vector<shared_ptr<DeclarationSpecifiersNode>>> declaration_specifiers_list = declaration_specifiers->getDeclarationSpecifiersNodeList();
 						if (declaration_specifiers_list != nullptr)
 						{
-							for (auto ptr : *declaration_specifiers_list)
+							for (shared_ptr<DeclarationSpecifiersNode> ptr : *declaration_specifiers_list)
 							{
 								auto type_specifier = ptr->getTypeSpecifier();
 								if (type_specifier != nullptr)
