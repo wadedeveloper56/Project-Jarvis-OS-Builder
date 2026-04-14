@@ -723,6 +723,7 @@ static const flex_int32_t yy_rule_can_match_eol[101] =
 #define YY_RESTORE_YY_MORE_OFFSET
 #line 1 "ansic.l"
 #line 25 "ansic.l"
+    #define __STDC_LIMIT_MACROS 1
     #include "pch.h"
     #include "GlobalVars.h"
     #include "TokenType.h"
@@ -754,8 +755,8 @@ static const flex_int32_t yy_rule_can_match_eol[101] =
     //
     // Location class can be found in location.hh and posistion.hh files. It's just a bit too much
     // boilerplate for this small example. Bummer.
-#line 757 "scanner.cpp"
 #line 758 "scanner.cpp"
+#line 759 "scanner.cpp"
 
 #define INITIAL 0
 
@@ -887,10 +888,10 @@ YY_DECL
 		}
 
 	{
-#line 64 "ansic.l"
+#line 65 "ansic.l"
 
 
-#line 893 "scanner.cpp"
+#line 894 "scanner.cpp"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -959,7 +960,7 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 66 "ansic.l"
+#line 67 "ansic.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_AUTO(createKeywordToken(yytext,AUTO), WadeSpace::location()); 
@@ -967,7 +968,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 70 "ansic.l"
+#line 71 "ansic.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_BREAK(createKeywordToken(yytext,BREAK), WadeSpace::location()); 
@@ -975,7 +976,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 74 "ansic.l"
+#line 75 "ansic.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_CASE(createKeywordToken(yytext,CASE), WadeSpace::location()); 
@@ -983,7 +984,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 78 "ansic.l"
+#line 79 "ansic.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_CHAR(createKeywordToken(yytext,CHAR), WadeSpace::location()); 
@@ -991,7 +992,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 82 "ansic.l"
+#line 83 "ansic.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_CONSTT(createKeywordToken(yytext,CONSTT), WadeSpace::location()); 
@@ -999,7 +1000,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 86 "ansic.l"
+#line 87 "ansic.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_CONTINUE(createKeywordToken(yytext,CONTINUE), WadeSpace::location()); 
@@ -1007,7 +1008,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 90 "ansic.l"
+#line 91 "ansic.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_DEFAULT(createKeywordToken(yytext,DEFAULT), WadeSpace::location()); 
@@ -1015,7 +1016,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 94 "ansic.l"
+#line 95 "ansic.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_DO(createKeywordToken(yytext,DO), WadeSpace::location()); 
@@ -1023,7 +1024,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 98 "ansic.l"
+#line 99 "ansic.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_DOUBLE(createKeywordToken(yytext,DOUBLE), WadeSpace::location()); 
@@ -1031,7 +1032,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 102 "ansic.l"
+#line 103 "ansic.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_LONG_DOUBLE(createKeywordToken(yytext,LONG_DOUBLE), WadeSpace::location()); 
@@ -1039,7 +1040,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 106 "ansic.l"
+#line 107 "ansic.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_ELSE(createKeywordToken(yytext,ELSE), WadeSpace::location()); 
@@ -1047,7 +1048,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 110 "ansic.l"
+#line 111 "ansic.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_ENUM(createKeywordToken(yytext,ENUM), WadeSpace::location()); 
@@ -1055,7 +1056,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 114 "ansic.l"
+#line 115 "ansic.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_EXTERN(createKeywordToken(yytext,EXTERN), WadeSpace::location()); 
@@ -1063,7 +1064,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 118 "ansic.l"
+#line 119 "ansic.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_FLOAT(createKeywordToken(yytext,FLOAT), WadeSpace::location()); 
@@ -1071,7 +1072,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 122 "ansic.l"
+#line 123 "ansic.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_FOR(createKeywordToken(yytext,FOR), WadeSpace::location()); 
@@ -1079,7 +1080,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 126 "ansic.l"
+#line 127 "ansic.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_GOTO(createKeywordToken(yytext,GOTO), WadeSpace::location()); 
@@ -1087,7 +1088,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 130 "ansic.l"
+#line 131 "ansic.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_IF(createKeywordToken(yytext,IF), WadeSpace::location()); 
@@ -1095,7 +1096,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 134 "ansic.l"
+#line 135 "ansic.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_INLINE(createKeywordToken(yytext,INLINE), WadeSpace::location()); 
@@ -1103,7 +1104,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 138 "ansic.l"
+#line 139 "ansic.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_INT(createKeywordToken(yytext,INT), WadeSpace::location()); 
@@ -1111,7 +1112,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 142 "ansic.l"
+#line 143 "ansic.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_LONG(createKeywordToken(yytext,LONG), WadeSpace::location()); 
@@ -1119,7 +1120,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 146 "ansic.l"
+#line 147 "ansic.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_LONG_LONG(createKeywordToken(yytext,LONG_LONG), WadeSpace::location()); 
@@ -1127,7 +1128,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 150 "ansic.l"
+#line 151 "ansic.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_REGISTER(createKeywordToken(yytext,REGISTER), WadeSpace::location()); 
@@ -1135,7 +1136,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 154 "ansic.l"
+#line 155 "ansic.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_RESTRICT(createKeywordToken(yytext,RESTRICT), WadeSpace::location()); 
@@ -1143,7 +1144,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 158 "ansic.l"
+#line 159 "ansic.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_RETURN(createKeywordToken(yytext,RETURN), WadeSpace::location()); 
@@ -1151,7 +1152,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 162 "ansic.l"
+#line 163 "ansic.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_SHORT(createKeywordToken(yytext,SHORT), WadeSpace::location()); 
@@ -1159,7 +1160,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 166 "ansic.l"
+#line 167 "ansic.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_SIGNED(createKeywordToken(yytext,SIGNED), WadeSpace::location()); 
@@ -1167,7 +1168,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 170 "ansic.l"
+#line 171 "ansic.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_SIZEOF(createKeywordToken(yytext,SIZEOF), WadeSpace::location()); 
@@ -1175,7 +1176,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 174 "ansic.l"
+#line 175 "ansic.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_STATIC(createKeywordToken(yytext,STATIC), WadeSpace::location()); 
@@ -1183,7 +1184,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 178 "ansic.l"
+#line 179 "ansic.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_STRUCT(createKeywordToken(yytext,STRUCT), WadeSpace::location()); 
@@ -1191,7 +1192,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 182 "ansic.l"
+#line 183 "ansic.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_SWITCH(createKeywordToken(yytext,SWITCH), WadeSpace::location()); 
@@ -1199,7 +1200,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 186 "ansic.l"
+#line 187 "ansic.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_TYPEDEF(createKeywordToken(yytext,TYPEDEF), WadeSpace::location()); 
@@ -1207,7 +1208,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 190 "ansic.l"
+#line 191 "ansic.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_UNION(createKeywordToken(yytext,UNION), WadeSpace::location()); 
@@ -1215,7 +1216,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 194 "ansic.l"
+#line 195 "ansic.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_UNSIGNED(createKeywordToken(yytext,UNSIGNED), WadeSpace::location()); 
@@ -1223,7 +1224,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 198 "ansic.l"
+#line 199 "ansic.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_VOIDT(createKeywordToken(yytext,VOIDT), WadeSpace::location()); 
@@ -1231,7 +1232,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 202 "ansic.l"
+#line 203 "ansic.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_VOLATILE(createKeywordToken(yytext,VOLATILE), WadeSpace::location()); 
@@ -1239,7 +1240,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 206 "ansic.l"
+#line 207 "ansic.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_WHILE(createKeywordToken(yytext,WHILE), WadeSpace::location()); 
@@ -1247,7 +1248,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 210 "ansic.l"
+#line 211 "ansic.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_BOOLT(createKeywordToken(yytext,BOOLT), WadeSpace::location()); 
@@ -1255,7 +1256,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 214 "ansic.l"
+#line 215 "ansic.l"
 { 
                 if (compiler != nullptr && compiler->hasTypedef(yytext))
                 {
@@ -1271,7 +1272,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 226 "ansic.l"
+#line 227 "ansic.l"
 {
                 cout << "Scanner: decimal number: " << yytext << endl;
                 uint64_t number = strtoull(yytext, 0, 10);
@@ -1280,7 +1281,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 231 "ansic.l"
+#line 232 "ansic.l"
 {
                 cout << "Scanner: decimal number: " << yytext << endl;
                 uint64_t number = strtoull(yytext, 0, 10);
@@ -1289,7 +1290,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 236 "ansic.l"
+#line 237 "ansic.l"
 {
                 cout << "Scanner: decimal number: " << yytext << endl;
                 uint64_t number = strtoull(yytext, 0, 10);
@@ -1298,7 +1299,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 241 "ansic.l"
+#line 242 "ansic.l"
 {
                 cout << "Scanner: decimal number: " << yytext << endl;
                 uint64_t number = strtoull(yytext, 0, 10);
@@ -1307,7 +1308,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 246 "ansic.l"
+#line 247 "ansic.l"
 {              
                 cout << "Scanner: decimal number: " << yytext << endl;
                 long double number = strtold(yytext, NULL);
@@ -1316,7 +1317,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 251 "ansic.l"
+#line 252 "ansic.l"
 {              
                 cout << "Scanner: decimal number: " << yytext << endl;
                 long double number = strtold(yytext, NULL);
@@ -1325,7 +1326,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 256 "ansic.l"
+#line 257 "ansic.l"
 {              
                 cout << "Scanner: decimal number: " << yytext << endl;
                 long double number = strtold(yytext, NULL);
@@ -1334,7 +1335,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 261 "ansic.l"
+#line 262 "ansic.l"
 {              
                 cout << "Scanner: decimal number: " << yytext << endl;
                 long double number = strtold(yytext, NULL);
@@ -1343,7 +1344,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 266 "ansic.l"
+#line 267 "ansic.l"
 {              
                 cout << "Scanner: decimal number: " << yytext << endl;
                 long double number = strtold(yytext, NULL);
@@ -1352,7 +1353,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 271 "ansic.l"
+#line 272 "ansic.l"
 {              
                 cout << "Scanner: decimal number: " << yytext << endl;
                 long double number = strtold(yytext, NULL);
@@ -1362,7 +1363,7 @@ YY_RULE_SETUP
 case 49:
 /* rule 49 can match eol */
 YY_RULE_SETUP
-#line 277 "ansic.l"
+#line 278 "ansic.l"
 { 
                 //  cout << "Scanner: string literal [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_STRING_LITERAL(createStringConstantToken(yytext), WadeSpace::location()); 
@@ -1370,7 +1371,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 282 "ansic.l"
+#line 283 "ansic.l"
 {
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_ELLIPSIS(createKeywordToken(yytext,ELLIPSIS),WadeSpace::location());
@@ -1378,7 +1379,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
-#line 286 "ansic.l"
+#line 287 "ansic.l"
 {
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_QUESTION(createKeywordToken(yytext,QUESTION),WadeSpace::location());
@@ -1386,7 +1387,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 290 "ansic.l"
+#line 291 "ansic.l"
 {
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_SEMICOLON(createKeywordToken(yytext,SEMICOLON),WadeSpace::location());
@@ -1394,7 +1395,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
-#line 294 "ansic.l"
+#line 295 "ansic.l"
 {
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_OCURLY(createKeywordToken(yytext,OCURLY),WadeSpace::location());
@@ -1402,7 +1403,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
-#line 298 "ansic.l"
+#line 299 "ansic.l"
 {
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_CCURLY(createKeywordToken(yytext,CCURLY),WadeSpace::location());
@@ -1410,7 +1411,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 55:
 YY_RULE_SETUP
-#line 302 "ansic.l"
+#line 303 "ansic.l"
 {
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_COMMA(createKeywordToken(yytext,COMMA),WadeSpace::location());
@@ -1418,7 +1419,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
-#line 306 "ansic.l"
+#line 307 "ansic.l"
 {
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_COLON(createKeywordToken(yytext,COLON),WadeSpace::location());
@@ -1426,7 +1427,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 57:
 YY_RULE_SETUP
-#line 310 "ansic.l"
+#line 311 "ansic.l"
 {
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_OPAREN(createKeywordToken(yytext,OPAREN),WadeSpace::location());
@@ -1434,7 +1435,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 58:
 YY_RULE_SETUP
-#line 314 "ansic.l"
+#line 315 "ansic.l"
 {
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_CPAREN(createKeywordToken(yytext,CPAREN),WadeSpace::location());
@@ -1442,7 +1443,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 59:
 YY_RULE_SETUP
-#line 318 "ansic.l"
+#line 319 "ansic.l"
 {
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_OBRACE(createKeywordToken(yytext,OBRACE),WadeSpace::location());
@@ -1450,7 +1451,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 60:
 YY_RULE_SETUP
-#line 322 "ansic.l"
+#line 323 "ansic.l"
 {
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_CBRACE(createKeywordToken(yytext,CBRACE),WadeSpace::location());
@@ -1458,7 +1459,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 61:
 YY_RULE_SETUP
-#line 326 "ansic.l"
+#line 327 "ansic.l"
 {
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_PERIOD(createKeywordToken(yytext,PERIOD),WadeSpace::location());
@@ -1466,7 +1467,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 62:
 YY_RULE_SETUP
-#line 330 "ansic.l"
+#line 331 "ansic.l"
 {
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_TILDE(createKeywordToken(yytext,TILDE),WadeSpace::location());
@@ -1474,7 +1475,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 63:
 YY_RULE_SETUP
-#line 334 "ansic.l"
+#line 335 "ansic.l"
 {
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_EQUAL(createKeywordToken(yytext,EQUAL),WadeSpace::location());
@@ -1482,7 +1483,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 64:
 YY_RULE_SETUP
-#line 338 "ansic.l"
+#line 339 "ansic.l"
 {
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_RIGHT_ASSIGN(createKeywordToken(yytext,RIGHT_ASSIGN),WadeSpace::location());
@@ -1490,7 +1491,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 65:
 YY_RULE_SETUP
-#line 342 "ansic.l"
+#line 343 "ansic.l"
 {
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_LEFT_ASSIGN(createKeywordToken(yytext,LEFT_ASSIGN),WadeSpace::location());
@@ -1498,7 +1499,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 66:
 YY_RULE_SETUP
-#line 346 "ansic.l"
+#line 347 "ansic.l"
 {
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_ADD_ASSIGN(createKeywordToken(yytext,ADD_ASSIGN),WadeSpace::location());
@@ -1506,7 +1507,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 67:
 YY_RULE_SETUP
-#line 350 "ansic.l"
+#line 351 "ansic.l"
 {
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_SUB_ASSIGN(createKeywordToken(yytext,SUB_ASSIGN),WadeSpace::location());
@@ -1514,7 +1515,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 68:
 YY_RULE_SETUP
-#line 354 "ansic.l"
+#line 355 "ansic.l"
 {
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_MUL_ASSIGN(createKeywordToken(yytext,MUL_ASSIGN),WadeSpace::location());
@@ -1522,7 +1523,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 69:
 YY_RULE_SETUP
-#line 358 "ansic.l"
+#line 359 "ansic.l"
 {
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_DIV_ASSIGN(createKeywordToken(yytext,DIV_ASSIGN),WadeSpace::location());
@@ -1530,7 +1531,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 70:
 YY_RULE_SETUP
-#line 362 "ansic.l"
+#line 363 "ansic.l"
 {
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_MOD_ASSIGN(createKeywordToken(yytext,MOD_ASSIGN),WadeSpace::location());
@@ -1538,7 +1539,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 71:
 YY_RULE_SETUP
-#line 366 "ansic.l"
+#line 367 "ansic.l"
 {
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_AND_ASSIGN(createKeywordToken(yytext,AND_ASSIGN),WadeSpace::location());
@@ -1546,7 +1547,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 72:
 YY_RULE_SETUP
-#line 370 "ansic.l"
+#line 371 "ansic.l"
 {
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_XOR_ASSIGN(createKeywordToken(yytext,XOR_ASSIGN),WadeSpace::location());
@@ -1554,7 +1555,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 73:
 YY_RULE_SETUP
-#line 374 "ansic.l"
+#line 375 "ansic.l"
 {
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_OR_ASSIGN(createKeywordToken(yytext,OR_ASSIGN),WadeSpace::location());
@@ -1562,7 +1563,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 74:
 YY_RULE_SETUP
-#line 378 "ansic.l"
+#line 379 "ansic.l"
 {
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_RIGHT_OP(createKeywordToken(yytext,RIGHT_OP),WadeSpace::location());
@@ -1570,7 +1571,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 75:
 YY_RULE_SETUP
-#line 382 "ansic.l"
+#line 383 "ansic.l"
 {
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_LEFT_OP(createKeywordToken(yytext,LEFT_OP),WadeSpace::location());
@@ -1578,7 +1579,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 76:
 YY_RULE_SETUP
-#line 386 "ansic.l"
+#line 387 "ansic.l"
 {
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_INC_OP(createKeywordToken(yytext,INC_OP),WadeSpace::location());
@@ -1586,7 +1587,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 77:
 YY_RULE_SETUP
-#line 390 "ansic.l"
+#line 391 "ansic.l"
 {
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_DEC_OP(createKeywordToken(yytext,DEC_OP),WadeSpace::location());
@@ -1594,7 +1595,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 78:
 YY_RULE_SETUP
-#line 394 "ansic.l"
+#line 395 "ansic.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_PTR_OP(createKeywordToken(yytext,PTR_OP),WadeSpace::location());
@@ -1602,7 +1603,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 79:
 YY_RULE_SETUP
-#line 398 "ansic.l"
+#line 399 "ansic.l"
 {
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_AND_OP(createKeywordToken(yytext,AND_OP),WadeSpace::location());
@@ -1610,7 +1611,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 80:
 YY_RULE_SETUP
-#line 402 "ansic.l"
+#line 403 "ansic.l"
 {
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_OR_OP(createKeywordToken(yytext,OR_OP),WadeSpace::location());
@@ -1618,7 +1619,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 81:
 YY_RULE_SETUP
-#line 406 "ansic.l"
+#line 407 "ansic.l"
 {
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_LESS(createKeywordToken(yytext,LESS),WadeSpace::location());
@@ -1626,7 +1627,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 82:
 YY_RULE_SETUP
-#line 410 "ansic.l"
+#line 411 "ansic.l"
 {
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_GREATER(createKeywordToken(yytext,GREATER),WadeSpace::location());
@@ -1634,7 +1635,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 83:
 YY_RULE_SETUP
-#line 414 "ansic.l"
+#line 415 "ansic.l"
 {
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_LESS_EQUAL(createKeywordToken(yytext,LESS_EQUAL),WadeSpace::location());
@@ -1642,7 +1643,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 84:
 YY_RULE_SETUP
-#line 418 "ansic.l"
+#line 419 "ansic.l"
 {
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_GREATER_EQUAL(createKeywordToken(yytext,GREATER_EQUAL),WadeSpace::location());
@@ -1650,7 +1651,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 85:
 YY_RULE_SETUP
-#line 422 "ansic.l"
+#line 423 "ansic.l"
 {
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_EQUAL_EQUAL(createKeywordToken(yytext,EQUAL_EQUAL),WadeSpace::location());
@@ -1658,7 +1659,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 86:
 YY_RULE_SETUP
-#line 426 "ansic.l"
+#line 427 "ansic.l"
 {
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_NOT_EQUAL(createKeywordToken(yytext,NOT_EQUAL),WadeSpace::location());
@@ -1666,7 +1667,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 87:
 YY_RULE_SETUP
-#line 430 "ansic.l"
+#line 431 "ansic.l"
 {
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_NOT_OP(createKeywordToken(yytext,NOT_OP),WadeSpace::location());
@@ -1674,7 +1675,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 88:
 YY_RULE_SETUP
-#line 434 "ansic.l"
+#line 435 "ansic.l"
 {
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_XOR_OP(createKeywordToken(yytext,XOR_OP),WadeSpace::location());
@@ -1682,7 +1683,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 89:
 YY_RULE_SETUP
-#line 438 "ansic.l"
+#line 439 "ansic.l"
 {
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_BIT_AND(createKeywordToken(yytext,BIT_AND),WadeSpace::location());
@@ -1690,7 +1691,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 90:
 YY_RULE_SETUP
-#line 442 "ansic.l"
+#line 443 "ansic.l"
 {
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_BIT_OR(createKeywordToken(yytext,BIT_OR),WadeSpace::location());
@@ -1698,7 +1699,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 91:
 YY_RULE_SETUP
-#line 446 "ansic.l"
+#line 447 "ansic.l"
 {
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_MINUS_OP(createKeywordToken(yytext,MINUS_OP),WadeSpace::location());
@@ -1706,7 +1707,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 92:
 YY_RULE_SETUP
-#line 450 "ansic.l"
+#line 451 "ansic.l"
 {
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_PLUS_OP(createKeywordToken(yytext,PLUS_OP),WadeSpace::location());
@@ -1714,7 +1715,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 93:
 YY_RULE_SETUP
-#line 454 "ansic.l"
+#line 455 "ansic.l"
 {
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_TIMES_OP(createKeywordToken(yytext,TIMES_OP),WadeSpace::location());
@@ -1722,7 +1723,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 94:
 YY_RULE_SETUP
-#line 458 "ansic.l"
+#line 459 "ansic.l"
 {
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_DIV_OP(createKeywordToken(yytext,DIV_OP),WadeSpace::location());
@@ -1730,7 +1731,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 95:
 YY_RULE_SETUP
-#line 462 "ansic.l"
+#line 463 "ansic.l"
 {
                 cout << "Scanner: token [" << yytext << "]" << endl;
                 return WadeSpace::Parser::make_MOD_OP(createKeywordToken(yytext,MOD_OP),WadeSpace::location());
@@ -1739,38 +1740,38 @@ YY_RULE_SETUP
 case 96:
 /* rule 96 can match eol */
 YY_RULE_SETUP
-#line 466 "ansic.l"
+#line 467 "ansic.l"
 { cout << "Scanner: multiline comment [" << yytext << "]" << endl;  
                }
 	YY_BREAK
 case 97:
 YY_RULE_SETUP
-#line 468 "ansic.l"
+#line 469 "ansic.l"
 { cout << "Scanner: single line comment [" << yytext << "]" << endl;  
                }
 	YY_BREAK
 case 98:
 /* rule 98 can match eol */
 YY_RULE_SETUP
-#line 470 "ansic.l"
+#line 471 "ansic.l"
 { }
 	YY_BREAK
 case 99:
 YY_RULE_SETUP
-#line 471 "ansic.l"
+#line 472 "ansic.l"
 { cout << "Scanner: unknown character [" << yytext << "]" << endl; 
                }
 	YY_BREAK
 case YY_STATE_EOF(INITIAL):
-#line 473 "ansic.l"
+#line 474 "ansic.l"
 { return yyterminate(); }
 	YY_BREAK
 case 100:
 YY_RULE_SETUP
-#line 475 "ansic.l"
+#line 476 "ansic.l"
 YY_FATAL_ERROR( "flex scanner jammed" );
 	YY_BREAK
-#line 1773 "scanner.cpp"
+#line 1774 "scanner.cpp"
 
 	case YY_END_OF_BUFFER:
 		{
@@ -2740,6 +2741,6 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 475 "ansic.l"
+#line 476 "ansic.l"
 
 

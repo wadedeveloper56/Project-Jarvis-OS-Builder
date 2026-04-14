@@ -20,6 +20,7 @@ Compiler::Compiler()
 	typedefList = make_shared<map<string, shared_ptr<DeclarationSpecifiersNode>>>();
 	structList = make_shared<map<string, shared_ptr<StructOrUnionSpecifier>>>();
 	functionList = make_shared<map<string, shared_ptr<FunctionDefinition>>>();
+	enumList = make_shared<map<string, shared_ptr<EnumSpecifier>>>();
 }
 
 void Compiler::compileFile(istringstream& inStr, ostream& out, int& exitcode)

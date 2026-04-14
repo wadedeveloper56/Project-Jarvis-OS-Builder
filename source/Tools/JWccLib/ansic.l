@@ -22,6 +22,7 @@ ES  (\\(['"\?\\abfnrtv]|[0-7]{1,3}|x[a-fA-F0-9]+))
 WS  [ \t\v\n\f]
 
 %{
+    #define __STDC_LIMIT_MACROS 1
     #include "pch.h"
     #include "GlobalVars.h"
     #include "TokenType.h"

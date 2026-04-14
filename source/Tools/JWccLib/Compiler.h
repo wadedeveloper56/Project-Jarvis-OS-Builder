@@ -16,6 +16,7 @@ namespace WadeSpace
 		shared_ptr<map<string, shared_ptr<DeclarationSpecifiersNode>>> typedefList;
 		shared_ptr<map<string, shared_ptr<StructOrUnionSpecifier>>> structList;
 		shared_ptr<map<string, shared_ptr<FunctionDefinition>>> functionList;
+		shared_ptr<map<string, shared_ptr<EnumSpecifier>>> enumList;
 	public:
 		Compiler();
 		virtual ~Compiler() = default;
@@ -38,8 +39,9 @@ namespace WadeSpace
 		[[nodiscard]] bool hasStruct(const string& name) const { return structList->find(name) != structList->end(); }
 		void addTypedef(const string& name, shared_ptr<DeclarationSpecifiersNode> declaration) { typedefList->insert({ name, declaration }); }
 		void addFunction(const string& name, shared_ptr<FunctionDefinition> function) { functionList->insert({ name, function }); }
-		void addStruct(const string& name, shared_ptr<StructOrUnionSpecifier> structSpecifier) { structList->insert({ name, structSpecifier }); }	
+		void addStruct(const string& name, shared_ptr<StructOrUnionSpecifier> structSpecifier) { structList->insert({ name, structSpecifier }); }
 		void addExternalDeclaration(shared_ptr<ExternalDeclaration> externalDeclaration) { programData->addExternalDeclaration(externalDeclaration); }
+		void addEnum(const string& name, shared_ptr<EnumSpecifier> enumSpecifier) { enumList->insert({ name, enumSpecifier }); }
 		shared_ptr<StructOrUnionSpecifier> findStruct(const string& name) const
 		{
 			auto it = structList->find(name);
@@ -53,6 +55,24 @@ namespace WadeSpace
 		{
 			auto it = typedefList->find(name);
 			if (it != typedefList->end())
+			{
+				return it->second;
+			}
+			return nullptr;
+		}
+		shared_ptr<FunctionDefinition> findFunction(const string& name) const
+		{
+			auto it = functionList->find(name);
+			if (it != functionList->end())
+			{
+				return it->second;
+			}
+			return nullptr;
+		}
+		shared_ptr<EnumSpecifier> findEnum(const string& name) const
+		{
+			auto it = enumList->find(name);
+			if (it != enumList->end())
 			{
 				return it->second;
 			}

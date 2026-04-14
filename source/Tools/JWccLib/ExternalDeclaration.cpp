@@ -29,10 +29,30 @@ ExternalDeclaration::ExternalDeclaration(shared_ptr<Declaration> declaration) : 
 		shared_ptr<vector<shared_ptr<DeclarationSpecifiersNode>>> list = declSpecifiers->getDeclarationSpecifiersNodeList();
 		switch (type)
 		{
+			case ENUM:
+			{
+				string enumName;
+				shared_ptr<TypeSpecifier> type_specifier = nullptr;
+				for (shared_ptr<DeclarationSpecifiersNode> ptr : *list)
+				{
+					type_specifier = ptr->getTypeSpecifier();
+					if (type_specifier != nullptr)
+					{
+						enumName = type_specifier->getEnumSpec()->getNameStr()->getSymbolName();
+						break;
+					}
+				}
+				if (initDeclaratorsList == nullptr && type_specifier != nullptr)
+				{
+					compiler->addEnum(enumName, type_specifier->getEnumSpec());
+				}
+				break;
+			}
 			case TYPE_NAME:
 				break;
 			case STRUCT:
 			case UNION:
+			{
 				string structName;
 				shared_ptr<TypeSpecifier> type_specifier = nullptr;
 				for (shared_ptr<DeclarationSpecifiersNode> ptr : *list)
@@ -49,6 +69,7 @@ ExternalDeclaration::ExternalDeclaration(shared_ptr<Declaration> declaration) : 
 					compiler->addStruct(structName, type_specifier->getStructOrUnionSpecifier());
 				}
 				break;
+			}
 		}
 	}
 }

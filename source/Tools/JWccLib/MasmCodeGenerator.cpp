@@ -62,9 +62,9 @@ string MasmCodeGenerator::getAsmType(TokenType type, bool isPointer, bool isUnsi
 void MasmCodeGenerator::handleFunctionWithParameters(ostream& out, string name, shared_ptr<vector<shared_ptr<VariableData>>> list)
 {
 	vector<string> paramList;
-	for (auto ptr : *list)
+	for (shared_ptr<VariableData> ptr : *list)
 	{
-		auto type = ptr->type;
+		optional<TokenType> type = ptr->type;
 		auto variableName = "_" + ptr->name;
 		bool isInitialized = ptr->initializer != nullptr;
 		bool isPointer = ptr->pointer;
@@ -72,14 +72,14 @@ void MasmCodeGenerator::handleFunctionWithParameters(ostream& out, string name, 
 		bool isStruct = type == STRUCT || type == UNION;
 		bool isUnsigned = ptr->unsign == true;
 
-		string asmType = getAsmType(type, isPointer, isUnsigned);
+		string asmType = getAsmType(type.value(), isPointer, isUnsigned);
 		paramList.push_back(variableName + ":" + asmType);
 	}
 	string paramListStr = vectorToCommaSeparatedList(paramList);
 	out << "_" << name << " PROC C, " << paramListStr << endl;
 }
 
-void jumpProcess(ostream& out, shared_ptr<TreeNodeData> left, shared_ptr<TreeNodeData> right, shared_ptr<TreeNodeData> current)
+static void jumpProcess(ostream& out, shared_ptr<TreeNodeData> left, shared_ptr<TreeNodeData> right, shared_ptr<TreeNodeData> current)
 {
 	if (current != nullptr && left == nullptr && right == nullptr)
 	{
@@ -139,18 +139,18 @@ void MasmCodeGenerator::handleIndividualFunctionStatements(ostream	& out, TokenT
 
 void MasmCodeGenerator::handleIndividualFunction(ostream& out, shared_ptr<FunctionData> ptr)
 {
-	auto returnType = ptr->type;
-	auto parameters = ptr->parameters;
-	auto statements = ptr->statements;
-	if (ptr->parameters != nullptr && !ptr->parameters->empty())
+	optional<TokenType> returnType = ptr->type;
+	shared_ptr<vector<shared_ptr<VariableData>>> parameters = ptr->parameters;
+	shared_ptr<BaseStatement> statements = ptr->statements;
+	if (parameters != nullptr && !parameters->empty())
 	{
-		handleFunctionWithParameters(out, ptr->name, ptr->parameters);
+		handleFunctionWithParameters(out, ptr->name, parameters);
 	}
 	else
 	{
 		out << "_" << ptr->name << " PROC C" << endl;
 	}
-	handleIndividualFunctionStatements(out, returnType, statements);
+	handleIndividualFunctionStatements(out, returnType.value(), statements);
 	out << "_" << ptr->name << " endp" << endl;
 }
 
@@ -194,7 +194,7 @@ void MasmCodeGenerator::outputVariable(ostream& out, shared_ptr<VariableData> pt
 	bool isStruct = type == STRUCT || type == UNION;
 	bool isUnsigned = ptr->unsign == true;
 
-	string asmType = convertToAsmType(isUnsigned, isPointer, type);
+	string asmType = convertToAsmType(isUnsigned, isPointer, type.value());
 
 	if (!isInitialized)
 	{
@@ -202,7 +202,7 @@ void MasmCodeGenerator::outputVariable(ostream& out, shared_ptr<VariableData> pt
 		{
 			if (isStruct && !isArray)
 			{
-				auto structName = ptr->structName;
+				string structName = ptr->structName;
 				out << variableName << " " << structName << " <>" << endl;
 			}
 			else if (!isStruct && isArray)
@@ -211,7 +211,7 @@ void MasmCodeGenerator::outputVariable(ostream& out, shared_ptr<VariableData> pt
 			}
 			else if (isStruct && isArray)
 			{
-				auto suSpec = ptr->suSpec;
+				shared_ptr<StructOrUnionSpecifier> suSpec = ptr->suSpec;
 				auto structName = suSpec->getName()->getSymbolName();
 				out << variableName << " " << structName << " " << ptr->arraySize << " dup(<>)" << endl;
 			}
@@ -260,12 +260,12 @@ void MasmCodeGenerator::handleUUninitializedVariable(ostream& out, shared_ptr<Va
 void MasmCodeGenerator::handleVariableTable(ostream& out)
 {
 	out << ".data" << endl;
-	for (auto ptr : *variableTable)
+	for (shared_ptr<VariableData> ptr : *variableTable)
 	{
 		handleInitializedVariable(out, ptr);
 	}
 	out << ".data?" << endl;
-	for (auto ptr : *variableTable)
+	for (shared_ptr<VariableData> ptr : *variableTable)
 	{
 		handleUUninitializedVariable(out, ptr);
 	}
@@ -275,23 +275,23 @@ void MasmCodeGenerator::handleFunctionTablePrototypes(ostream& out)
 {
 	for (shared_ptr<FunctionData> ptr : *functionTable)
 	{
-		auto returnType = ptr->type;
-		auto parameters = ptr->parameters;
-		auto name = "_" + ptr->name;
+		optional<TokenType> returnType = ptr->type;
+		shared_ptr<vector<shared_ptr<VariableData>>> parameters = ptr->parameters;
+		string name = "_" + ptr->name;
 		vector<string> paramList;
 		if (parameters != nullptr)
 		{
-			for (auto ptr : *parameters)
+			for (shared_ptr<VariableData> ptr : *parameters)
 			{
-				auto type = ptr->type;
-				auto variableName = "_" + ptr->name;
+				optional<TokenType> type = ptr->type;
+				string variableName = "_" + ptr->name;
 				bool isInitialized = ptr->initializer != nullptr;
 				bool isPointer = ptr->pointer;
 				bool isArray = ptr->arraySize > 1;
 				bool isStruct = type == STRUCT || type == UNION;
 				bool isUnsigned = ptr->unsign == true;
 
-				string asmType = getAsmType(type, isPointer, isUnsigned);
+				string asmType = getAsmType(type.value(), isPointer, isUnsigned);
 				paramList.push_back(variableName + ":" + asmType);
 			}
 			string paramListStr = vectorToCommaSeparatedList(paramList);
@@ -320,17 +320,17 @@ void MasmCodeGenerator::handleStructs(ostream& out)
 	shared_ptr<map<string, shared_ptr<StructOrUnionSpecifier>>> temp = compiler->getStructList();
 	for (map<string, shared_ptr<StructOrUnionSpecifier>>::iterator iterator = temp->begin(); iterator != temp->end(); ++iterator)
 	{
-		auto key = iterator->first;
-		auto value = iterator->second;
-		auto suSpec = value;
-		auto name = suSpec->getName()->getSymbolName();
-		auto vars = suSpec->getVectorStructDeclaration();
+		string key = iterator->first;
+		shared_ptr<StructOrUnionSpecifier> value = iterator->second;
+		shared_ptr<StructOrUnionSpecifier> suSpec = value;
+		string name = suSpec->getName()->getSymbolName();
+		shared_ptr<vector<shared_ptr<StructDeclaration>>> vars = suSpec->getVectorStructDeclaration();
 		out << name << (value->getStructOrUnion()->getKeywordName()=="struct" ? " STRUCT" : " UNION") << endl;
 		for (shared_ptr<StructDeclaration> var : *vars)
 		{
-			auto type = var->getSpecifierQualifierList()->getTypeSpecifier()->getType().value();
-			auto structDecl = var->getVectorStructDeclarator();
-			for (auto decl : *structDecl)
+			TokenType type = var->getSpecifierQualifierList()->getTypeSpecifier()->getType().value();
+			shared_ptr<vector<shared_ptr<StructDeclarator>>> structDecl = var->getVectorStructDeclarator();
+			for (shared_ptr<StructDeclarator> decl : *structDecl)
 			{
 				auto varName = decl->getDeclarator()->getDirectDeclarator()->getIdentifier()->getSymbolName();
 				if (type == CHAR || type == BOOLT) out << "\t" << varName << " SBYTE ?" << endl;

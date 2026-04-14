@@ -19,7 +19,7 @@ namespace WadeSpace
 	{
 	public:
 		string name;
-		TokenType type;
+		optional<TokenType> type;
 		bool pointer;
 		unsigned long long arraySize;
 		shared_ptr<Initializer> initializer;
@@ -40,7 +40,7 @@ namespace WadeSpace
 	{
 	public:
 		string name;
-		TokenType type;
+		optional<TokenType> type;
 		shared_ptr<vector<shared_ptr<VariableData>>> parameters;
 		shared_ptr<BaseStatement> statements;
 
