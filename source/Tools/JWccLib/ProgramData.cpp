@@ -335,6 +335,39 @@ void ProgramData::handleTypedef(shared_ptr<Declaration> declaration, shared_ptr<
 	}
 }
 
+void ProgramData::handleEnum(shared_ptr<Declaration> declaration, shared_ptr<vector<shared_ptr<VariableData>>> variableTable)
+{
+	shared_ptr<DeclarationSpecifiers> declSpecifiers = declaration->getDeclarationSpecifiers();
+	shared_ptr<vector<shared_ptr<InitDeclarator>>> initDeclaratorsList = declaration->getVectorInitDeclarator();
+	shared_ptr<vector<shared_ptr<DeclarationSpecifiersNode>>> list = declSpecifiers->getDeclarationSpecifiersNodeList();
+	string structName = list->at(0)->getTypeSpecifier()->getEnumSpec()->getNameStr()->getSymbolName();
+	shared_ptr<EnumSpecifier> enumEntry = compiler->findEnum(structName);
+	if (initDeclaratorsList != nullptr)
+	{
+		TokenType type = INT;// enumEntry->getTypeSpecifier()->getType().value();
+		bool unsign = false;
+		for (shared_ptr<InitDeclarator> initDecl : *initDeclaratorsList)
+		{
+			shared_ptr<Declarator> declarator = initDecl->getDeclarator();
+			shared_ptr<DirectDeclarator> dd = declarator->getDirectDeclarator();
+
+			shared_ptr<VariableData> data = make_shared<VariableData>();
+			data->initializer = nullptr;
+			data->arraySize = 1;
+			data->type = type;
+			data->pointer = declarator->hasPointer();
+			data->name = initDecl->getVariableName();
+			data->unsign = unsign;
+			data->plist = nullptr;
+			data->structName = structName;
+			data->suSpec = nullptr;
+			if (initDecl->hasInitializer()) data->initializer = make_shared<Initializer>(*initDecl->getInitializer());
+			if (dd->hasConstantExpression()) data->arraySize = dd->getConstantExpression()->getData()->getConstant()->getIConst()->getIntegerConst();
+			variableTable->push_back(data);
+		}
+	}
+}
+
 shared_ptr<TypeSpecifier> ProgramData::findType(shared_ptr<Declaration> decl)
 {
 	shared_ptr<DeclarationSpecifiers> specifiers = decl->getDeclarationSpecifiers();
@@ -377,6 +410,9 @@ shared_ptr<BaseCodeGenerator> ProgramData::processGlobalVariables()
 				auto type = findType(ptr->getDeclaration())->getType().value();
 				switch (type)
 				{
+					case ENUM:
+						handleEnum(ptr->getDeclaration(), variableTable);
+						break;
 					case TYPE_NAME:
 						handleTypedef(ptr->getDeclaration(), variableTable);
 						break;

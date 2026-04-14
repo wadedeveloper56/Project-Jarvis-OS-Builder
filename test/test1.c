@@ -1,22 +1,6 @@
-typedef int integer;
-integer var6;
-struct data1
-{
-  float var1;
-  double var2;
-  long double var3;
-};
-union data2
-{
-  float var1;
-  double var2;
-  long double var3;
-};
-float var1;
-double var2;
-long double var3;
-struct data1 var4;
-union data2 var5;
+enum type {first, second};
+enum type var1;
+int var2;
 
 int main(int argc, char* argv[])
 {
