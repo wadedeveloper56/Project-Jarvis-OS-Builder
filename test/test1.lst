@@ -1,4 +1,4 @@
-JWasm v2.12pre, Apr 13 2026
+JWasm v2.12pre, Apr 15 2026
 test1.asm
                                 .x64p
                                 .model flat, c;
@@ -18,25 +18,27 @@ test1.asm
                             *   _DATA ends
 00000000                    *   _BSS segment PARA FLAT PUBLIC 'BSS'
                             *   assume cs:ERROR
-00000000  00000000              _var1 SDWORD  ?
-00000004  00000000              _var2 SDWORD  ?
+                                _var1 SDWORD  ?
+                                _var2 SDWORD  ?
+00000008                        _var3 type2 <>
+                           Error A2209: Syntax error: _var3
 
 00000000                        .code
-00000008                    *   _BSS ends
+                            *   _BSS ends
 00000000                    *   _TEXT segment
                             *   assume cs:FLAT
                                 _main PROTO C _argc:SDWORD , _argv:QWORD ;
 
 00000000                        _main PROC C, _argc:SDWORD , _argv:QWORD 
-00000000  55                *   push rbp
-00000001  488BEC            *   mov rbp, rsp
-00000004  B805000000            	mov eax,5
+00000000                    *   push rbp
+00000001                    *   mov rbp, rsp
+00000004                        	mov eax,5
 00000009                        	ret
-00000009  C9                *   leave
-0000000A  C3                *   retn 
+00000009                    *   leave
+0000000A                    *   retn 
 0000000B                        _main endp
                                 end
-0000000B                    *   _TEXT ends
+                            *   _TEXT ends
 
 
 Macros:
@@ -77,12 +79,12 @@ Symbols:
 @Cpu . . . . . . . . . . . . . .        Number           DDFh 
 @CurSeg  . . . . . . . . . . . .        Text   
 @DataSize  . . . . . . . . . . .        Number             0h 
-@Date  . . . . . . . . . . . . .        Text   04/14/26
+@Date  . . . . . . . . . . . . .        Text   04/15/26
 @FileCur . . . . . . . . . . . .        Text   test1.asm
 @FileName  . . . . . . . . . . .        Text   TEST1
 @Interface . . . . . . . . . . .        Number             1h 
 @Model . . . . . . . . . . . . .        Number             7h 
-@Time  . . . . . . . . . . . . .        Text   13:10:24
+@Time  . . . . . . . . . . . . .        Text   17:20:53
 @Version . . . . . . . . . . . .        Text   800
 @code  . . . . . . . . . . . . .        Text   _TEXT
 @data  . . . . . . . . . . . . .        Text   FLAT
@@ -91,4 +93,4 @@ __JWASM__  . . . . . . . . . . .        Number            D4h
 _var1  . . . . . . . . . . . . .        DWord              0h _BSS C
 _var2  . . . . . . . . . . . . .        DWord              4h _BSS C
 
-test1.asm: 19 lines, 2 passes, 2 ms, 0 warnings, 0 errors
+test1.asm: 20 lines, 1 passes, 1 ms, 0 warnings, 1 errors

@@ -8,6 +8,7 @@ option casemap : none
 .data?
 _var1 SDWORD  ?
 _var2 SDWORD  ?
+_var3 type2 <>
 
 .code
 _main PROTO C _argc:SDWORD , _argv:QWORD ;
