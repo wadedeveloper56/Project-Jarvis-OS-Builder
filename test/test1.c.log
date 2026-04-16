@@ -4,6 +4,7 @@ Parse starting
 enum type { first , second } var1 ;
 int var2 ;
 struct type2 { int a ; long b ; } var3 ;
+union type3 { int a ; long b ; } var4 ;
 
 int main ( int argc , char * argv [ ] )
 {
@@ -77,6 +78,46 @@ Scanner: token [}]
 struct_or_union IDENTIFIER OCURLY struct_declaration_list CCURLY REDUCE to struct_or_union_specifier
 struct_or_union_specifier REDUCE to type_specifier
 Scanner: identifier [var3]
+type_specifier REDUCE to declaration_specifiers
+IDENTIFIER REDUCE to direct_declarator
+Scanner: token [;]
+direct_declarator REDUCE to declarator
+declarator REDUCE to init_declarator
+init_declarator REDUCE to init_declarator_list
+declaration_specifiers init_declarator_list SEMICOLON REDUCE to declaration
+declaration REDUCE to external_declaration
+translation_unit external_declaration REDUCE to translation_unit
+
+Scanner: token [union]
+UNION REDUCE to struct_or_union
+Scanner: identifier [type3]
+Scanner: token [{]
+Scanner: token [int]
+INT REDUCE to type_specifier
+Scanner: identifier [a]
+type_specifier REDUCE to specifier_qualifier_list
+IDENTIFIER REDUCE to direct_declarator
+Scanner: token [;]
+direct_declarator REDUCE to declarator
+declarator REDUCE to struct_declarator
+struct_declarator REDUCE to struct_declarator_list
+specifier_qualifier_list struct_declarator_list SEMICOLON REDUCE to struct_declaration
+struct_declaration REDUCE to struct_declaration_list
+Scanner: token [long]
+LONG REDUCE to type_specifier
+Scanner: identifier [b]
+type_specifier REDUCE to specifier_qualifier_list
+IDENTIFIER REDUCE to direct_declarator
+Scanner: token [;]
+direct_declarator REDUCE to declarator
+declarator REDUCE to struct_declarator
+struct_declarator REDUCE to struct_declarator_list
+specifier_qualifier_list struct_declarator_list SEMICOLON REDUCE to struct_declaration
+struct_declaration_list struct_declaration REDUCE to struct_declaration_list
+Scanner: token [}]
+struct_or_union IDENTIFIER OCURLY struct_declaration_list CCURLY REDUCE to struct_or_union_specifier
+struct_or_union_specifier REDUCE to type_specifier
+Scanner: identifier [var4]
 type_specifier REDUCE to declaration_specifiers
 IDENTIFIER REDUCE to direct_declarator
 Scanner: token [;]
