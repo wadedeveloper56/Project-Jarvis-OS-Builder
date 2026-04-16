@@ -1,15 +1,84 @@
 Compiler (x86/x64) v1.0 (C) Copyright 2025-2026 Christopher D. Wade.
 All Rights Reserved
 Parse starting
-enum type { first , second } var1 ;
-int var2 ;
-struct type2 { int a ; long b ; } var3 ;
-union type3 { int a ; long b ; } var4 ;
+char var1 ;
+short var2 ;
+int var3 ;
+long var4 ;
+long long var5 ;
+enum type { first , second } var6 ;
+struct type2 { int a ; long b ; } var7 ;
+union type3 { int a ; long b ; } var8 ;
 
 int main ( int argc , char * argv [ ] )
 {
 return 5 ;
 }
+
+Scanner: token [char]
+CHAR REDUCE to type_specifier
+Scanner: identifier [var1]
+type_specifier REDUCE to declaration_specifiers
+IDENTIFIER REDUCE to direct_declarator
+Scanner: token [;]
+direct_declarator REDUCE to declarator
+declarator REDUCE to init_declarator
+init_declarator REDUCE to init_declarator_list
+declaration_specifiers init_declarator_list SEMICOLON REDUCE to declaration
+declaration REDUCE to external_declaration
+external_declaration REDUCE to translation_unit
+
+Scanner: token [short]
+SHORT REDUCE to type_specifier
+Scanner: identifier [var2]
+type_specifier REDUCE to declaration_specifiers
+IDENTIFIER REDUCE to direct_declarator
+Scanner: token [;]
+direct_declarator REDUCE to declarator
+declarator REDUCE to init_declarator
+init_declarator REDUCE to init_declarator_list
+declaration_specifiers init_declarator_list SEMICOLON REDUCE to declaration
+declaration REDUCE to external_declaration
+translation_unit external_declaration REDUCE to translation_unit
+
+Scanner: token [int]
+INT REDUCE to type_specifier
+Scanner: identifier [var3]
+type_specifier REDUCE to declaration_specifiers
+IDENTIFIER REDUCE to direct_declarator
+Scanner: token [;]
+direct_declarator REDUCE to declarator
+declarator REDUCE to init_declarator
+init_declarator REDUCE to init_declarator_list
+declaration_specifiers init_declarator_list SEMICOLON REDUCE to declaration
+declaration REDUCE to external_declaration
+translation_unit external_declaration REDUCE to translation_unit
+
+Scanner: token [long]
+LONG REDUCE to type_specifier
+Scanner: identifier [var4]
+type_specifier REDUCE to declaration_specifiers
+IDENTIFIER REDUCE to direct_declarator
+Scanner: token [;]
+direct_declarator REDUCE to declarator
+declarator REDUCE to init_declarator
+init_declarator REDUCE to init_declarator_list
+declaration_specifiers init_declarator_list SEMICOLON REDUCE to declaration
+declaration REDUCE to external_declaration
+translation_unit external_declaration REDUCE to translation_unit
+
+Scanner: token [long long]
+LONG_LONG REDUCE to type_specifier
+Scanner: identifier [var5]
+type_specifier REDUCE to declaration_specifiers
+IDENTIFIER REDUCE to direct_declarator
+Scanner: token [;]
+direct_declarator REDUCE to declarator
+declarator REDUCE to init_declarator
+init_declarator REDUCE to init_declarator_list
+declaration_specifiers init_declarator_list SEMICOLON REDUCE to declaration
+declaration REDUCE to external_declaration
+translation_unit external_declaration REDUCE to translation_unit
 
 Scanner: token [enum]
 Scanner: identifier [type]
@@ -24,20 +93,7 @@ IDENTIFIER REDUCE to ENUMERATOR
 enumerator_list COMMA enumerator REDUCE enumerator_list
 ENUM IDENTIFIER OCURLY enumerator_list CCURLY REDUCE to enum_specifier
 enum_specifier REDUCE to type_specifier
-Scanner: identifier [var1]
-type_specifier REDUCE to declaration_specifiers
-IDENTIFIER REDUCE to direct_declarator
-Scanner: token [;]
-direct_declarator REDUCE to declarator
-declarator REDUCE to init_declarator
-init_declarator REDUCE to init_declarator_list
-declaration_specifiers init_declarator_list SEMICOLON REDUCE to declaration
-declaration REDUCE to external_declaration
-external_declaration REDUCE to translation_unit
-
-Scanner: token [int]
-INT REDUCE to type_specifier
-Scanner: identifier [var2]
+Scanner: identifier [var6]
 type_specifier REDUCE to declaration_specifiers
 IDENTIFIER REDUCE to direct_declarator
 Scanner: token [;]
@@ -77,7 +133,7 @@ struct_declaration_list struct_declaration REDUCE to struct_declaration_list
 Scanner: token [}]
 struct_or_union IDENTIFIER OCURLY struct_declaration_list CCURLY REDUCE to struct_or_union_specifier
 struct_or_union_specifier REDUCE to type_specifier
-Scanner: identifier [var3]
+Scanner: identifier [var7]
 type_specifier REDUCE to declaration_specifiers
 IDENTIFIER REDUCE to direct_declarator
 Scanner: token [;]
@@ -117,7 +173,7 @@ struct_declaration_list struct_declaration REDUCE to struct_declaration_list
 Scanner: token [}]
 struct_or_union IDENTIFIER OCURLY struct_declaration_list CCURLY REDUCE to struct_or_union_specifier
 struct_or_union_specifier REDUCE to type_specifier
-Scanner: identifier [var4]
+Scanner: identifier [var8]
 type_specifier REDUCE to declaration_specifiers
 IDENTIFIER REDUCE to direct_declarator
 Scanner: token [;]
