@@ -13,14 +13,9 @@
 #include "IDEDoc.h"
 #include "IDEView.h"
 
-#include "TokenType.h"
-#include "Compiler.h"
-
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
-
-using namespace WadeSpace;
 
 
 // CIDEApp
@@ -157,10 +152,8 @@ BOOL CIDEApp::InitInstance()
 	if (!ProcessShellCommand(cmdInfo))
 		return FALSE;
 	// The main window has been initialized, so show and update it
-	pMainFrame->ShowWindow(SW_SHOWMAXIMIZED);
+	pMainFrame->ShowWindow(m_nCmdShow);
 	pMainFrame->UpdateWindow();
-
-	compiler = make_shared<Compiler>();
 
 	return TRUE;
 }
@@ -219,7 +212,7 @@ void CIDEApp::OnAppAbout()
 
 void CIDEApp::PreLoadState()
 {
-	::BOOL bNameValid;
+	BOOL bNameValid;
 	CString strName;
 	bNameValid = strName.LoadString(IDS_EDIT_MENU);
 	ASSERT(bNameValid);
