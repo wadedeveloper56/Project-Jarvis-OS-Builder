@@ -42,7 +42,7 @@ ExternalDeclaration::ExternalDeclaration(shared_ptr<Declaration> declaration) : 
 						break;
 					}
 				}
-				if (initDeclaratorsList == nullptr && type_specifier != nullptr)
+				if (type_specifier != nullptr)
 				{
 					compiler->addEnum(enumName, type_specifier->getEnumSpec());
 				}
@@ -64,7 +64,7 @@ ExternalDeclaration::ExternalDeclaration(shared_ptr<Declaration> declaration) : 
 						break;
 					}
 				}
-				if (initDeclaratorsList == nullptr && type_specifier != nullptr)
+				if (type_specifier != nullptr)
 				{
 					compiler->addStruct(structName, type_specifier->getStructOrUnionSpecifier());
 				}
