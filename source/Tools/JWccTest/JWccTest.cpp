@@ -11,7 +11,7 @@ namespace JWccTest
 	TEST_CLASS(JWccTest)
 	{
 	public:
-		
+
 		TEST_METHOD(Compiler_Basic_Structures)
 		{
 			compiler = make_shared<Compiler>();
@@ -36,7 +36,7 @@ namespace JWccTest
 			Assert::IsTrue(variables != nullptr, L"declaration should not be null");
 		}
 
-		void AssertFunction(shared_ptr<ExternalDeclaration>& func2)
+		void AssertFunction(shared_ptr<ExternalDeclaration>& func2, string expectedName)
 		{
 			Assert::IsTrue(func2 != nullptr, L"ExternalDeclarationshould not be null after allocation");
 			Assert::AreEqual(1L, (long)compiler.use_count(), L"Use count should be 1 after allocation");
@@ -44,9 +44,12 @@ namespace JWccTest
 			auto variables2 = func2->getDeclaration();
 			Assert::IsTrue(funcDef2 != nullptr, L"Function definition should not be null");
 			Assert::IsTrue(variables2 == nullptr, L"declaration should not be non-null");
+			shared_ptr<DirectDeclarator> direct_declarator = func2->getFunctionDefinition()->getDeclarator()->getDirectDeclarator();
+			string name = direct_declarator->getDirectDeclarator()->getIdentifier()->getSymbolName();
+			Assert::AreEqual(expectedName, name, L"Function name should be main");
 		}
 
-		void AssertVariableNameAndType(shared_ptr<ExternalDeclaration>& func1, TokenType expectedType, string expectedName)
+		void AssertVariableNameAndType(shared_ptr<ExternalDeclaration>& func1, TokenType expectedType, string expectedName, int expectedArraySize)
 		{
 			shared_ptr<Declaration> declaration = func1->getDeclaration();
 			auto var1 = func1->findType(declaration);
@@ -55,8 +58,15 @@ namespace JWccTest
 			Assert::IsTrue(var1->getType().value() == expectedType, L"Variable type should be INT");
 			shared_ptr<vector<shared_ptr<InitDeclarator>>> initDeclaratorsList = declaration->getVectorInitDeclarator();
 			shared_ptr<InitDeclarator> initDecl = initDeclaratorsList->at(0);
+			shared_ptr<Declarator> declarator = initDecl->getDeclarator();
+			Assert::IsTrue(declarator != nullptr, L"Declarator should not be null");
+			shared_ptr<DirectDeclarator> dd = declarator->getDirectDeclarator();
+			Assert::IsTrue(dd != nullptr, L"DirectDeclarator should not be null");
 			Assert::IsTrue(initDecl != nullptr, L"InitDeclarator should not be null");
 			Assert::IsTrue(initDecl->getVariableName() == expectedName, L"Variable name should be var1");
+			unsigned long long arraySize = 1;
+			if (dd->hasConstantExpression()) arraySize = dd->getConstantExpression()->getData()->getConstant()->getIConst()->getIntegerConst();
+			Assert::AreEqual(expectedArraySize, (int)arraySize, L"Array size should be correct");
 		}
 
 		TEST_METHOD(Compiler_Basic_Function1)
@@ -73,7 +83,7 @@ namespace JWccTest
 			ostringstream output;
 			int exitCode = -1;
 			compiler->compileFile(input, output, exitCode);
-			
+
 			Assert::IsNotNull(output.str().c_str(), L"There should be output");
 			Assert::IsTrue(compiler->hasProgramData(), L"Program data should not be null after allocation");
 			auto data = compiler->getProgramData();
@@ -81,10 +91,10 @@ namespace JWccTest
 			Assert::IsTrue(data->getProgram() != nullptr, L"Program data should not be null after allocation");
 			Assert::IsTrue(data->getGenerator() != nullptr, L"Program data should not be null after allocation");
 			Assert::IsTrue(data->getProgram()->size() == 1, L"Program data should not be null after allocation");
-			
+
 			auto func = data->getProgram()->at(0);
-			AssertFunction(func);
-			
+			AssertFunction(func, "main");
+
 			compiler.reset();
 			Assert::IsNull(compiler.get(), L"Pointer should be null after reset");
 			Assert::AreEqual(0L, (long)compiler.use_count(), L"Use count should be 0 after reset");
@@ -115,38 +125,115 @@ namespace JWccTest
 
 			shared_ptr<ExternalDeclaration>	func1 = data->getProgram()->at(0);
 			AssertVariable(func1);
-			AssertVariableNameAndType(func1, CHAR, "var1");
+			AssertVariableNameAndType(func1, CHAR, "var1", 1);
 
 			shared_ptr<ExternalDeclaration>	func2 = data->getProgram()->at(1);
 			AssertVariable(func2);
-			AssertVariableNameAndType(func2, SHORT, "var2");
+			AssertVariableNameAndType(func2, SHORT, "var2", 1);
 
 			shared_ptr<ExternalDeclaration>	func3 = data->getProgram()->at(2);
 			AssertVariable(func3);
-			AssertVariableNameAndType(func3, INT, "var3");
+			AssertVariableNameAndType(func3, INT, "var3", 1);
 
 			shared_ptr<ExternalDeclaration>	func4 = data->getProgram()->at(3);
 			AssertVariable(func4);
-			AssertVariableNameAndType(func4, LONG, "var4");
+			AssertVariableNameAndType(func4, LONG, "var4", 1);
 
 			shared_ptr<ExternalDeclaration>	func5 = data->getProgram()->at(4);
 			AssertVariable(func5);
-			AssertVariableNameAndType(func5, LONG_LONG, "var5");
+			AssertVariableNameAndType(func5, LONG_LONG, "var5", 1);
 
 			shared_ptr<ExternalDeclaration>	func6 = data->getProgram()->at(5);
 			AssertVariable(func6);
-			AssertVariableNameAndType(func6, ENUM, "var6");
+			AssertVariableNameAndType(func6, ENUM, "var6", 1);
 
 			shared_ptr<ExternalDeclaration>	func7 = data->getProgram()->at(6);
 			AssertVariable(func7);
-			AssertVariableNameAndType(func7, STRUCT, "var7");
+			AssertVariableNameAndType(func7, STRUCT, "var7", 1);
 
 			shared_ptr<ExternalDeclaration>	func8 = data->getProgram()->at(7);
 			AssertVariable(func8);
-			AssertVariableNameAndType(func8, UNION, "var8");
+			AssertVariableNameAndType(func8, UNION, "var8", 1);
 
 			shared_ptr<ExternalDeclaration>	func9 = data->getProgram()->at(8);
-			AssertFunction(func9);
+			Assert::IsNotNull(func9.get(), L"Function should not be null");
+			AssertFunction(func9, "main");
+
+			compiler.reset();
+			Assert::IsNull(compiler.get(), L"Pointer should be null after reset");
+			Assert::AreEqual(0L, (long)compiler.use_count(), L"Use count should be 0 after reset");
+		}
+
+		TEST_METHOD(Compiler_Basic_Function3)
+		{
+			compiler = make_shared<Compiler>();
+			Assert::IsNotNull(compiler.get(), L"Pointer should not be null after allocation");
+			Assert::IsTrue(compiler->hasProgramData(), L"Program data should not be null after allocation");
+			Assert::IsTrue(compiler->hasTypedefList(), L"Typedef list should not be null after allocation");
+			Assert::IsTrue(compiler->hasFunctionList(), L"Function list should not be null after allocation");
+			Assert::IsTrue(compiler->hasStructList(), L"Struct list should not be null after allocation");
+			Assert::AreEqual(1L, (long)compiler.use_count(), L"Use count should be 1 after allocation");
+
+			istringstream input("char var1[5]; short var2[6]; int var3[7]; long var4[8]; long long var5[9]; float var6[10]; double var7[11]; long double var8[12]; enum type { first, second } var9[13]; struct type2 { int a; long b; } var10[14]; union type3 { int a; long b; } var11[15]; int main(int argc, char* argv[]) { return 5; }");
+			ostringstream output;
+			int exitCode = -1;
+			compiler->compileFile(input, output, exitCode);
+
+			Assert::IsNotNull(output.str().c_str(), L"There should be output");
+			Assert::IsTrue(compiler->hasProgramData(), L"Program data should not be null after allocation");
+			auto data = compiler->getProgramData();
+			Assert::IsNotNull(data.get(), L"Program data should not be null after allocation");
+			Assert::IsNotNull(data->getProgram().get(), L"Program data should not be null after allocation");
+			Assert::IsNotNull(data->getGenerator().get(), L"Program data should not be null after allocation");
+			Assert::AreEqual(12L, (long)data->getProgram()->size(), L"Program data should have 12 elements after allocation");
+
+			shared_ptr<ExternalDeclaration>	func1 = data->getProgram()->at(0);
+			AssertVariable(func1);
+			AssertVariableNameAndType(func1, CHAR, "var1", 5);
+
+			shared_ptr<ExternalDeclaration>	func2 = data->getProgram()->at(1);
+			AssertVariable(func2);
+			AssertVariableNameAndType(func2, SHORT, "var2", 6);
+
+			shared_ptr<ExternalDeclaration>	func3 = data->getProgram()->at(2);
+			AssertVariable(func3);
+			AssertVariableNameAndType(func3, INT, "var3", 7);
+
+			shared_ptr<ExternalDeclaration>	func4 = data->getProgram()->at(3);
+			AssertVariable(func4);
+			AssertVariableNameAndType(func4, LONG, "var4", 8);
+
+			shared_ptr<ExternalDeclaration>	func5 = data->getProgram()->at(4);
+			AssertVariable(func5);
+			AssertVariableNameAndType(func5, LONG_LONG, "var5", 9);
+
+			shared_ptr<ExternalDeclaration>	func6 = data->getProgram()->at(5);
+			AssertVariable(func6);
+			AssertVariableNameAndType(func6, FLOAT, "var6", 10);
+
+			shared_ptr<ExternalDeclaration>	func7 = data->getProgram()->at(6);
+			AssertVariable(func7);
+			AssertVariableNameAndType(func7, DOUBLE, "var7", 11);
+
+			shared_ptr<ExternalDeclaration>	func8 = data->getProgram()->at(7);
+			AssertVariable(func8);
+			AssertVariableNameAndType(func8, LONG_DOUBLE, "var8", 12);
+
+			shared_ptr<ExternalDeclaration>	func9 = data->getProgram()->at(8);
+			AssertVariable(func9);
+			AssertVariableNameAndType(func9, ENUM, "var9", 13);
+
+			shared_ptr<ExternalDeclaration>	func10 = data->getProgram()->at(9);
+			AssertVariable(func10);
+			AssertVariableNameAndType(func10, STRUCT, "var10", 14);
+
+			shared_ptr<ExternalDeclaration>	func11 = data->getProgram()->at(10);
+			AssertVariable(func11);
+			AssertVariableNameAndType(func11, UNION, "var11", 15);
+
+			shared_ptr<ExternalDeclaration>	func12 = data->getProgram()->at(11);
+			Assert::IsNotNull(func12.get(), L"Function should not be null");
+			AssertFunction(func12, "main");
 
 			compiler.reset();
 			Assert::IsNull(compiler.get(), L"Pointer should be null after reset");

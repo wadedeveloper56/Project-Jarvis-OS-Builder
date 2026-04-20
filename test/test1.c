@@ -1,11 +1,14 @@
-char var1;
-short var2;
-int var3;
-long var4;
-long long var5;
-enum type {first, second} var6;
-struct type2 {int a; long b;} var7;
-union type3 {int a; long b;} var8;
+char var1[5];
+short var2[6];
+int var3[7];
+long var4[8];
+long long var5[9];
+float var6[10];
+double var7[11];
+long double var8[12];
+enum type {first, second} var9[13];
+struct type2 {int a; long b;} var10[14];
+union type3 {int a; long b;} var11[15];
 
 int main(int argc, char* argv[])
 {
