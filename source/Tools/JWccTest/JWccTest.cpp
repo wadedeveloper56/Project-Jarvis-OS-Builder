@@ -36,17 +36,35 @@ namespace JWccTest
 			Assert::IsTrue(variables != nullptr, L"declaration should not be null");
 		}
 
-		void AssertFunction(shared_ptr<ExternalDeclaration>& func2, string expectedName)
+		TokenType getDeclarationSpecifiersType(shared_ptr<DeclarationSpecifiers> declaration_specifiers)
+		{
+			TokenType type = UNKNOWN;
+			auto type_specifierList = declaration_specifiers->getDeclarationSpecifiersNodeList();
+			if (type_specifierList != nullptr)
+			{
+				for (shared_ptr<DeclarationSpecifiersNode> ptr : *type_specifierList)
+				{
+					if (ptr->getTypeSpecifier() != nullptr)
+					{
+						type = ptr->getTypeSpecifier()->getType().value();
+					}
+				}
+			}
+			return type;
+		}
+
+		void AssertFunction(shared_ptr<ExternalDeclaration>& func2, string expectedName, TokenType expectedType)
 		{
 			Assert::IsTrue(func2 != nullptr, L"ExternalDeclarationshould not be null after allocation");
 			Assert::AreEqual(1L, (long)compiler.use_count(), L"Use count should be 1 after allocation");
-			auto funcDef2 = func2->getFunctionDefinition();
-			auto variables2 = func2->getDeclaration();
-			Assert::IsTrue(funcDef2 != nullptr, L"Function definition should not be null");
-			Assert::IsTrue(variables2 == nullptr, L"declaration should not be non-null");
+			Assert::IsNotNull(func2->getFunctionDefinition().get(), L"Function definition should not be null");
+			Assert::IsNull(func2->getDeclaration().get(), L"declaration should not be non-null");
 			shared_ptr<DirectDeclarator> direct_declarator = func2->getFunctionDefinition()->getDeclarator()->getDirectDeclarator();
 			string name = direct_declarator->getDirectDeclarator()->getIdentifier()->getSymbolName();
 			Assert::AreEqual(expectedName, name, L"Function name should be main");
+			Assert::IsTrue(func2->getFunctionDefinition()->hasDeclarationSpecifiers(), L"Function definition should have declaration specifiers");
+			TokenType type = getDeclarationSpecifiersType(func2->getFunctionDefinition()->getDeclarationSpecifiers());
+			Assert::AreEqual((int)expectedType, (int)type, L"Function type should be INT");
 		}
 
 		void AssertVariableNameAndType(shared_ptr<ExternalDeclaration>& func1, TokenType expectedType, string expectedName, int expectedArraySize)
@@ -93,7 +111,7 @@ namespace JWccTest
 			Assert::IsTrue(data->getProgram()->size() == 1, L"Program data should not be null after allocation");
 
 			auto func = data->getProgram()->at(0);
-			AssertFunction(func, "main");
+			AssertFunction(func, "main", INT);
 
 			compiler.reset();
 			Assert::IsNull(compiler.get(), L"Pointer should be null after reset");
@@ -157,7 +175,7 @@ namespace JWccTest
 
 			shared_ptr<ExternalDeclaration>	func9 = data->getProgram()->at(8);
 			Assert::IsNotNull(func9.get(), L"Function should not be null");
-			AssertFunction(func9, "main");
+			AssertFunction(func9, "main", INT);
 
 			compiler.reset();
 			Assert::IsNull(compiler.get(), L"Pointer should be null after reset");
@@ -233,7 +251,7 @@ namespace JWccTest
 
 			shared_ptr<ExternalDeclaration>	func12 = data->getProgram()->at(11);
 			Assert::IsNotNull(func12.get(), L"Function should not be null");
-			AssertFunction(func12, "main");
+			AssertFunction(func12, "main", INT);
 
 			compiler.reset();
 			Assert::IsNull(compiler.get(), L"Pointer should be null after reset");
