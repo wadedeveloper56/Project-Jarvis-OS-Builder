@@ -171,6 +171,9 @@
     <ClInclude Include="output.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Messages.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="JWccLib.cpp">
@@ -315,6 +318,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="output.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Messages.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -195,6 +195,7 @@
     <ClInclude Include="LabeledStatement.h" />
     <ClInclude Include="location.hh" />
     <ClInclude Include="MasmCodeGenerator.h" />
+    <ClInclude Include="Messages.h" />
     <ClInclude Include="NodeType.h" />
     <ClInclude Include="output.h" />
     <ClInclude Include="ParameterDeclaration.h" />
@@ -248,6 +249,7 @@
     <ClCompile Include="JWccLib.cpp" />
     <ClCompile Include="LabeledStatement.cpp" />
     <ClCompile Include="MasmCodeGenerator.cpp" />
+    <ClCompile Include="Messages.cpp" />
     <ClCompile Include="output.cpp" />
     <ClCompile Include="ParameterDeclaration.cpp" />
     <ClCompile Include="ParameterTypeList.cpp" />

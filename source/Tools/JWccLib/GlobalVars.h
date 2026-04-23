@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Messages.h"
+
 using namespace std;
 
 namespace WadeSpace
@@ -10,6 +12,7 @@ namespace WadeSpace
 	class Compiler;
 
 	extern shared_ptr<Compiler> compiler;
+	extern Messages messages;
 	extern bool bit16;
 	extern bool bit32;
 	extern bool bit64;
