@@ -123,7 +123,7 @@
 %token <shared_ptr<CToken>> REGISTER "register"
 %token <shared_ptr<CToken>> RESTRICT "restrict"
 %token <shared_ptr<CToken>> RETURN "return"
-%token <shared_ptr<CToken>> SHORT "short"
+%token <shared_ptr<CToken>> SHORTT "short"
 %token <shared_ptr<CToken>> SIGNED "signed"
 %token <shared_ptr<CToken>> SIZEOF "sizeof"
 %token <shared_ptr<CToken>> STATIC "static"
@@ -430,9 +430,9 @@ storage_class_specifier
     ;
 
 type_specifier
-    : VOIDT                      { $$ = make_shared<TypeSpecifier>(VOIDT, $1, nullptr, nullptr, nullptr); cout << "VOIDT REDUCE to type_specifier" << endl;}
+    : VOIDT                     { $$ = make_shared<TypeSpecifier>(VOIDT, $1, nullptr, nullptr, nullptr); cout << "VOIDT REDUCE to type_specifier" << endl;}
     | CHAR                      { $$ = make_shared<TypeSpecifier>(CHAR, $1, nullptr, nullptr, nullptr); cout << "CHAR REDUCE to type_specifier" << endl;}
-    | SHORT                     { $$ = make_shared<TypeSpecifier>(SHORT, $1, nullptr, nullptr, nullptr); cout << "SHORT REDUCE to type_specifier" << endl;}
+    | SHORTT                    { $$ = make_shared<TypeSpecifier>(SHORTT, $1, nullptr, nullptr, nullptr); cout << "SHORT REDUCE to type_specifier" << endl;}
     | INT                       { $$ = make_shared<TypeSpecifier>(INT, $1, nullptr, nullptr, nullptr); cout << "INT REDUCE to type_specifier" << endl;}
     | LONG                      { $$ = make_shared<TypeSpecifier>(LONG, $1, nullptr, nullptr, nullptr); cout << "LONG REDUCE to type_specifier" << endl;}
     | LONG_LONG                 { $$ = make_shared<TypeSpecifier>(LONG_LONG, $1, nullptr, nullptr, nullptr); cout << "LONG_LONG REDUCE to type_specifier" << endl;}
@@ -668,4 +668,5 @@ function_definition
 void WadeSpace::Parser::error(const location &loc , const string &message) {
     // cout << "Error: " << message << endl << "Location: " << loc << endl;  
     cout << "Error: " << message << endl << "Error location: " << driver.location() << endl;
+    messages.addMessage(CompilerMessagesType::ERROR_MSG, message);
 }

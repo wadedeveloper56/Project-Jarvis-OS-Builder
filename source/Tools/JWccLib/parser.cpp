@@ -265,7 +265,7 @@ namespace  WadeSpace  {
       case symbol_kind::S_REGISTER: // "register"
       case symbol_kind::S_RESTRICT: // "restrict"
       case symbol_kind::S_RETURN: // "return"
-      case symbol_kind::S_SHORT: // "short"
+      case symbol_kind::S_SHORTT: // "short"
       case symbol_kind::S_SIGNED: // "signed"
       case symbol_kind::S_SIZEOF: // "sizeof"
       case symbol_kind::S_STATIC: // "static"
@@ -548,7 +548,7 @@ namespace  WadeSpace  {
       case symbol_kind::S_REGISTER: // "register"
       case symbol_kind::S_RESTRICT: // "restrict"
       case symbol_kind::S_RETURN: // "return"
-      case symbol_kind::S_SHORT: // "short"
+      case symbol_kind::S_SHORTT: // "short"
       case symbol_kind::S_SIGNED: // "signed"
       case symbol_kind::S_SIZEOF: // "sizeof"
       case symbol_kind::S_STATIC: // "static"
@@ -831,7 +831,7 @@ namespace  WadeSpace  {
       case symbol_kind::S_REGISTER: // "register"
       case symbol_kind::S_RESTRICT: // "restrict"
       case symbol_kind::S_RETURN: // "return"
-      case symbol_kind::S_SHORT: // "short"
+      case symbol_kind::S_SHORTT: // "short"
       case symbol_kind::S_SIGNED: // "signed"
       case symbol_kind::S_SIZEOF: // "sizeof"
       case symbol_kind::S_STATIC: // "static"
@@ -1113,7 +1113,7 @@ namespace  WadeSpace  {
       case symbol_kind::S_REGISTER: // "register"
       case symbol_kind::S_RESTRICT: // "restrict"
       case symbol_kind::S_RETURN: // "return"
-      case symbol_kind::S_SHORT: // "short"
+      case symbol_kind::S_SHORTT: // "short"
       case symbol_kind::S_SIGNED: // "signed"
       case symbol_kind::S_SIZEOF: // "sizeof"
       case symbol_kind::S_STATIC: // "static"
@@ -1640,7 +1640,7 @@ namespace  WadeSpace  {
       case symbol_kind::S_REGISTER: // "register"
       case symbol_kind::S_RESTRICT: // "restrict"
       case symbol_kind::S_RETURN: // "return"
-      case symbol_kind::S_SHORT: // "short"
+      case symbol_kind::S_SHORTT: // "short"
       case symbol_kind::S_SIGNED: // "signed"
       case symbol_kind::S_SIZEOF: // "sizeof"
       case symbol_kind::S_STATIC: // "static"
@@ -2458,7 +2458,7 @@ namespace  WadeSpace  {
 
   case 97: // type_specifier: "void"
 #line 433 "ansic.y"
-                                 { yylhs.value.as < shared_ptr<TypeSpecifier> > () = make_shared<TypeSpecifier>(VOIDT, yystack_[0].value.as < shared_ptr<CToken> > (), nullptr, nullptr, nullptr); cout << "VOIDT REDUCE to type_specifier" << endl;}
+                                { yylhs.value.as < shared_ptr<TypeSpecifier> > () = make_shared<TypeSpecifier>(VOIDT, yystack_[0].value.as < shared_ptr<CToken> > (), nullptr, nullptr, nullptr); cout << "VOIDT REDUCE to type_specifier" << endl;}
 #line 2463 "parser.cpp"
     break;
 
@@ -2470,7 +2470,7 @@ namespace  WadeSpace  {
 
   case 99: // type_specifier: "short"
 #line 435 "ansic.y"
-                                { yylhs.value.as < shared_ptr<TypeSpecifier> > () = make_shared<TypeSpecifier>(SHORT, yystack_[0].value.as < shared_ptr<CToken> > (), nullptr, nullptr, nullptr); cout << "SHORT REDUCE to type_specifier" << endl;}
+                                { yylhs.value.as < shared_ptr<TypeSpecifier> > () = make_shared<TypeSpecifier>(SHORTT, yystack_[0].value.as < shared_ptr<CToken> > (), nullptr, nullptr, nullptr); cout << "SHORT REDUCE to type_specifier" << endl;}
 #line 2475 "parser.cpp"
     break;
 
@@ -4216,4 +4216,5 @@ namespace  WadeSpace  {
 void WadeSpace::Parser::error(const location &loc , const string &message) {
     // cout << "Error: " << message << endl << "Location: " << loc << endl;  
     cout << "Error: " << message << endl << "Error location: " << driver.location() << endl;
+    messages.addMessage(CompilerMessagesType::ERROR_MSG, message);
 }

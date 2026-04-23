@@ -147,7 +147,7 @@ namespace JWccTest
 
 			shared_ptr<ExternalDeclaration>	func2 = data->getProgram()->at(1);
 			AssertVariable(func2);
-			AssertVariableNameAndType(func2, SHORT, "var2", 1);
+			AssertVariableNameAndType(func2, SHORTT, "var2", 1);
 
 			shared_ptr<ExternalDeclaration>	func3 = data->getProgram()->at(2);
 			AssertVariable(func3);
@@ -244,7 +244,7 @@ namespace JWccTest
 
 			shared_ptr<ExternalDeclaration>	func2 = data->getProgram()->at(1);
 			AssertVariable(func2);
-			AssertVariableNameAndType(func2, SHORT, "var2", 6);
+			AssertVariableNameAndType(func2, SHORTT, "var2", 6);
 
 			shared_ptr<ExternalDeclaration>	func3 = data->getProgram()->at(2);
 			AssertVariable(func3);

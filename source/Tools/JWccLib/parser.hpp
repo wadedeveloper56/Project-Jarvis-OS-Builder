@@ -764,7 +764,7 @@ namespace  WadeSpace  {
     TOKEN_REGISTER = 284,          // "register"
     TOKEN_RESTRICT = 285,          // "restrict"
     TOKEN_RETURN = 286,            // "return"
-    TOKEN_SHORT = 287,             // "short"
+    TOKEN_SHORTT = 287,            // "short"
     TOKEN_SIGNED = 288,            // "signed"
     TOKEN_SIZEOF = 289,            // "sizeof"
     TOKEN_STATIC = 290,            // "static"
@@ -873,7 +873,7 @@ namespace  WadeSpace  {
         S_REGISTER = 29,                         // "register"
         S_RESTRICT = 30,                         // "restrict"
         S_RETURN = 31,                           // "return"
-        S_SHORT = 32,                            // "short"
+        S_SHORTT = 32,                           // "short"
         S_SIGNED = 33,                           // "signed"
         S_SIZEOF = 34,                           // "sizeof"
         S_STATIC = 35,                           // "static"
@@ -1076,7 +1076,7 @@ namespace  WadeSpace  {
       case symbol_kind::S_REGISTER: // "register"
       case symbol_kind::S_RESTRICT: // "restrict"
       case symbol_kind::S_RETURN: // "return"
-      case symbol_kind::S_SHORT: // "short"
+      case symbol_kind::S_SHORTT: // "short"
       case symbol_kind::S_SIGNED: // "signed"
       case symbol_kind::S_SIZEOF: // "sizeof"
       case symbol_kind::S_STATIC: // "static"
@@ -1937,7 +1937,7 @@ switch (yykind)
       case symbol_kind::S_REGISTER: // "register"
       case symbol_kind::S_RESTRICT: // "restrict"
       case symbol_kind::S_RETURN: // "return"
-      case symbol_kind::S_SHORT: // "short"
+      case symbol_kind::S_SHORTT: // "short"
       case symbol_kind::S_SIGNED: // "signed"
       case symbol_kind::S_SIZEOF: // "sizeof"
       case symbol_kind::S_STATIC: // "static"
@@ -2808,16 +2808,16 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_SHORT (shared_ptr<CToken> v, location_type l)
+      make_SHORTT (shared_ptr<CToken> v, location_type l)
       {
-        return symbol_type (token::TOKEN_SHORT, std::move (v), std::move (l));
+        return symbol_type (token::TOKEN_SHORTT, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_SHORT (const shared_ptr<CToken>& v, const location_type& l)
+      make_SHORTT (const shared_ptr<CToken>& v, const location_type& l)
       {
-        return symbol_type (token::TOKEN_SHORT, v, l);
+        return symbol_type (token::TOKEN_SHORTT, v, l);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
@@ -4140,7 +4140,7 @@ switch (yykind)
       case symbol_kind::S_REGISTER: // "register"
       case symbol_kind::S_RESTRICT: // "restrict"
       case symbol_kind::S_RETURN: // "return"
-      case symbol_kind::S_SHORT: // "short"
+      case symbol_kind::S_SHORTT: // "short"
       case symbol_kind::S_SIGNED: // "signed"
       case symbol_kind::S_SIZEOF: // "sizeof"
       case symbol_kind::S_STATIC: // "static"
@@ -4439,7 +4439,7 @@ switch (yykind)
       case symbol_kind::S_REGISTER: // "register"
       case symbol_kind::S_RESTRICT: // "restrict"
       case symbol_kind::S_RETURN: // "return"
-      case symbol_kind::S_SHORT: // "short"
+      case symbol_kind::S_SHORTT: // "short"
       case symbol_kind::S_SIGNED: // "signed"
       case symbol_kind::S_SIZEOF: // "sizeof"
       case symbol_kind::S_STATIC: // "static"

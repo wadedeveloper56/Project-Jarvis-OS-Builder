@@ -1,4 +1,4 @@
-JWasm v2.12pre, Apr 21 2026
+JWasm v2.12pre, Apr 23 2026
 test1.asm
                                 .x64p
                                 .model flat, c;
@@ -123,12 +123,12 @@ Symbols:
 @Cpu . . . . . . . . . . . . . .        Number           DDFh 
 @CurSeg  . . . . . . . . . . . .        Text   
 @DataSize  . . . . . . . . . . .        Number             0h 
-@Date  . . . . . . . . . . . . .        Text   04/21/26
+@Date  . . . . . . . . . . . . .        Text   04/23/26
 @FileCur . . . . . . . . . . . .        Text   test1.asm
 @FileName  . . . . . . . . . . .        Text   TEST1
 @Interface . . . . . . . . . . .        Number             1h 
 @Model . . . . . . . . . . . . .        Number             7h 
-@Time  . . . . . . . . . . . . .        Text   17:37:53
+@Time  . . . . . . . . . . . . .        Text   11:52:51
 @Version . . . . . . . . . . . .        Text   800
 @code  . . . . . . . . . . . . .        Text   _TEXT
 @data  . . . . . . . . . . . . .        Text   FLAT
@@ -149,4 +149,4 @@ _var7  . . . . . . . . . . . . .        QWord             17h _BSS C
 _var8  . . . . . . . . . . . . .        TByte             1Fh _BSS C
 _var9  . . . . . . . . . . . . .        DWord             29h _BSS C
 
-test1.asm: 47 lines, 2 passes, 1 ms, 0 warnings, 0 errors
+test1.asm: 47 lines, 2 passes, 2 ms, 0 warnings, 0 errors

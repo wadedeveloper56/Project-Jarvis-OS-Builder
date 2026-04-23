@@ -1155,7 +1155,7 @@ YY_RULE_SETUP
 #line 163 "ansic.l"
 { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_SHORT(createKeywordToken(yytext,SHORT), WadeSpace::location()); 
+                return WadeSpace::Parser::make_SHORTT(createKeywordToken(yytext,SHORTT), WadeSpace::location()); 
                }
 	YY_BREAK
 case 26:

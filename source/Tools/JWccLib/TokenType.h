@@ -40,7 +40,7 @@ namespace WadeSpace
 		REGISTER,
 		RESTRICT,
 		RETURN,
-		SHORT,
+		SHORTT,
 		SIGNED,
 		SIZEOF,
 		STATIC,

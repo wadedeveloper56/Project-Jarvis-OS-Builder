@@ -7,12 +7,17 @@
 #include "IDE.h"
 
 #include "MainFrm.h"
+#include "Compiler.h"
+#include "GlobalVars.h"
+#include "Messages.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
 
 // CMainFrame
+using namespace std;
+using namespace WadeSpace;
 
 IMPLEMENT_DYNAMIC(CMainFrame, CMDIFrameWndEx)
 
@@ -55,6 +60,7 @@ CMainFrame::CMainFrame() noexcept
 {
 	// TODO: add member initialization code here
 	theApp.m_nAppLook = theApp.GetInt(_T("ApplicationLook"), ID_VIEW_APPLOOK_VS_2008);
+	compiler = make_shared<Compiler>();
 }
 
 CMainFrame::~CMainFrame()

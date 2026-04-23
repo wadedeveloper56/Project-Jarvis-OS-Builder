@@ -162,7 +162,7 @@ WS  [ \t\v\n\f]
                }
 "short"        { 
                 cout << "Scanner: token [" << yytext << "]" << endl;
-                return WadeSpace::Parser::make_SHORT(createKeywordToken(yytext,SHORT), WadeSpace::location()); 
+                return WadeSpace::Parser::make_SHORTT(createKeywordToken(yytext,SHORTT), WadeSpace::location()); 
                }
 "signed"       { 
                 cout << "Scanner: token [" << yytext << "]" << endl;

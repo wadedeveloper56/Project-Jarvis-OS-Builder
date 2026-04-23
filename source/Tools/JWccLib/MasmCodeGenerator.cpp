@@ -40,7 +40,7 @@ string MasmCodeGenerator::getAsmType(TokenType type, bool isPointer, bool isUnsi
 	}
 	else if (!isUnsigned && type == CHAR) asmType = "SBYTE ";
 	else if (!isUnsigned && type == BOOLT) asmType = "SBYTE ";
-	else if (!isUnsigned && type == SHORT) asmType = "SWORD ";
+	else if (!isUnsigned && type == SHORTT) asmType = "SWORD ";
 	else if (!isUnsigned && type == INT) asmType = "SDWORD ";
 	else if (!isUnsigned && type == LONG) asmType = "SDWORD ";
 	else if (!isUnsigned && type == FLOAT) asmType = "SDWORD ";
@@ -49,7 +49,7 @@ string MasmCodeGenerator::getAsmType(TokenType type, bool isPointer, bool isUnsi
 	else if (!isUnsigned && type == LONG_DOUBLE) asmType = "TBYTE ";
 	else if (isUnsigned && type == CHAR) asmType = "BYTE ";
 	else if (isUnsigned && type == BOOLT) asmType = "BYTE ";
-	else if (isUnsigned && type == SHORT) asmType = "WORD ";
+	else if (isUnsigned && type == SHORTT) asmType = "WORD ";
 	else if (isUnsigned && type == INT) asmType = "DWORD ";
 	else if (isUnsigned && type == LONG) asmType = "DWORD ";
 	else if (isUnsigned && type == FLOAT) asmType = "DWORD ";
@@ -165,7 +165,7 @@ string MasmCodeGenerator::convertToAsmType(bool isUnsigned, bool isPointer, Toke
 	}
 	else if (!isUnsigned && type == CHAR) asmType = " SBYTE ";
 	else if (!isUnsigned && type == BOOLT) asmType = " SBYTE ";
-	else if (!isUnsigned && type == SHORT) asmType = " SWORD ";
+	else if (!isUnsigned && type == SHORTT) asmType = " SWORD ";
 	else if (!isUnsigned && type == INT) asmType = " SDWORD ";
 	else if (!isUnsigned && type == LONG) asmType = " SDWORD ";
 	else if (!isUnsigned && type == LONG_LONG) asmType = " SQWORD ";
@@ -174,7 +174,7 @@ string MasmCodeGenerator::convertToAsmType(bool isUnsigned, bool isPointer, Toke
 	else if (!isUnsigned && type == LONG_DOUBLE) asmType = " REAL10 ";
 	else if (isUnsigned && type == CHAR) asmType = " BYTE ";
 	else if (isUnsigned && type == BOOLT) asmType = " BYTE ";
-	else if (isUnsigned && type == SHORT) asmType = " WORD ";
+	else if (isUnsigned && type == SHORTT) asmType = " WORD ";
 	else if (isUnsigned && type == INT) asmType = " DWORD ";
 	else if (isUnsigned && type == LONG) asmType = " DWORD ";
 	else if (isUnsigned && type == LONG_LONG) asmType = " QWORD ";
@@ -334,7 +334,7 @@ void MasmCodeGenerator::handleStructs(ostream& out)
 			{
 				auto varName = decl->getDeclarator()->getDirectDeclarator()->getIdentifier()->getSymbolName();
 				if (type == CHAR || type == BOOLT) out << "\t" << varName << " SBYTE ?" << endl;
-				else if (type == SHORT) out << "\t" << varName << " SWORD ?" << endl;
+				else if (type == SHORTT) out << "\t" << varName << " SWORD ?" << endl;
 				else if (type == INT) out << "\t" << varName << " SDWORD ?" << endl;
 				else if (type == LONG) out << "\t" << varName << " SDWORD ?" << endl;
 				else if (type == LONG_LONG) out << "\t" << varName << " SQWORD ?" << endl;
@@ -370,7 +370,7 @@ void MasmCodeGenerator::handlePrototype(ostream& out)
 				{
 					TokenType temp = node2->getTypeSpecifier()->getType().value();
 					if (temp == CHAR || temp == BOOLT) type = temp;
-					else if (temp == SHORT) type = temp;
+					else if (temp == SHORTT) type = temp;
 					else if (temp == INT) type = temp;
 					else if (temp == LONG) type = temp;
 					else if (temp == LONG_LONG) type = temp;
