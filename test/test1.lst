@@ -1,4 +1,4 @@
-JWasm v2.12pre, Apr 23 2026
+JWasm v2.12pre, Apr 24 2026
 test1.asm
                                 .x64p
                                 .model flat, c;
@@ -34,23 +34,23 @@ test1.asm
                             *   _DATA ends
 00000000                    *   _BSS segment PARA FLAT PUBLIC 'BSS'
                             *   assume cs:ERROR
-00000000  00                    _var1 SBYTE  ?
-00000001  0000                  _var2 SWORD  ?
-00000003  00000000              _var3 SDWORD  ?
-00000007  00000000              _var4 SDWORD  ?
-0000000B  0000000000000000      _var5 SQWORD  ?
-00000013  00000000              _var6 REAL4  ?
-00000017  0000000000000000      _var7 REAL8  ?
-0000001F  000000000000000000    _var8 REAL10  ?
-00000029  00000000              _var9 SDWORD  ?
-0000002D  0000000000000000      _var10 type2 <>
-00000035  00000000              _var11 type3 <>
-00000039  00000000              _var12 SDWORD  ?
-0000003D  0000000000000000      _var13 type5 <>
-00000045  00000000              _var14 type6 <>
+00000000  0000000000            _var1 SBYTE 5 dup(?)
+00000005  000000000000000000    _var2 SWORD 6 dup(?)
+00000011  000000000000000000    _var3 SDWORD 7 dup(?)
+0000002D  000000000000000000    _var4 SDWORD 8 dup(?)
+0000004D  000000000000000000    _var5 SQWORD 9 dup(?)
+00000095  000000000000000000    _var6 REAL4 10 dup(?)
+000000BD  000000000000000000    _var7 REAL8 11 dup(?)
+00000115  000000000000000000    _var8 REAL10 12 dup(?)
+0000018D  000000000000000000    _var9 SDWORD 13 dup(?)
+000001C1  000000000000000000    _var10 type2 14 dup(<>)
+00000231  000000000000000000    _var11 type3 15 dup(<>)
+0000026D  000000000000000000    _var12 SDWORD 16 dup(?)
+000002AD  000000000000000000    _var13 type5 17 dup(<>)
+00000335  000000000000000000    _var14 type6 18 dup(<>)
 
 00000000                        .code
-00000049                    *   _BSS ends
+0000037D                    *   _BSS ends
 00000000                    *   _TEXT segment
                             *   assume cs:FLAT
                                 _main PROTO C _argc:SDWORD , _argv:QWORD ;
@@ -101,7 +101,7 @@ Segments and Groups:
                 N a m e                 Size     Length   Align   Combine Class
 
 FLAT . . . . . . . . . . . . . .        GROUP
-_BSS . . . . . . . . . . . . . .        64 Bit   00000049 Para    Public  'BSS'
+_BSS . . . . . . . . . . . . . .        64 Bit   0000037D Para    Public  'BSS'
 _DATA  . . . . . . . . . . . . .        64 Bit   00000000 Para    Public  'DATA'
 _TEXT  . . . . . . . . . . . . .        64 Bit   0000000B Para    Public  'CODE'
 
@@ -123,30 +123,30 @@ Symbols:
 @Cpu . . . . . . . . . . . . . .        Number           DDFh 
 @CurSeg  . . . . . . . . . . . .        Text   
 @DataSize  . . . . . . . . . . .        Number             0h 
-@Date  . . . . . . . . . . . . .        Text   04/23/26
+@Date  . . . . . . . . . . . . .        Text   04/24/26
 @FileCur . . . . . . . . . . . .        Text   test1.asm
 @FileName  . . . . . . . . . . .        Text   TEST1
 @Interface . . . . . . . . . . .        Number             1h 
 @Model . . . . . . . . . . . . .        Number             7h 
-@Time  . . . . . . . . . . . . .        Text   11:52:51
+@Time  . . . . . . . . . . . . .        Text   09:37:05
 @Version . . . . . . . . . . . .        Text   800
 @code  . . . . . . . . . . . . .        Text   _TEXT
 @data  . . . . . . . . . . . . .        Text   FLAT
 @stack . . . . . . . . . . . . .        Text   FLAT
 __JWASM__  . . . . . . . . . . .        Number            D4h 
-_var1  . . . . . . . . . . . . .        Byte               0h _BSS C
-_var10 . . . . . . . . . . . . .        type2             2Dh _BSS C
-_var11 . . . . . . . . . . . . .        type3             35h _BSS C
-_var12 . . . . . . . . . . . . .        DWord             39h _BSS C
-_var13 . . . . . . . . . . . . .        type5             3Dh _BSS C
-_var14 . . . . . . . . . . . . .        type6             45h _BSS C
-_var2  . . . . . . . . . . . . .        Word               1h _BSS C
-_var3  . . . . . . . . . . . . .        DWord              3h _BSS C
-_var4  . . . . . . . . . . . . .        DWord              7h _BSS C
-_var5  . . . . . . . . . . . . .        QWord              Bh _BSS C
-_var6  . . . . . . . . . . . . .        DWord             13h _BSS C
-_var7  . . . . . . . . . . . . .        QWord             17h _BSS C
-_var8  . . . . . . . . . . . . .        TByte             1Fh _BSS C
-_var9  . . . . . . . . . . . . .        DWord             29h _BSS C
+_var1  . . . . . . . . . . . . .        Byte[5]            0h _BSS C
+_var10 . . . . . . . . . . . . .        type2[14]        1C1h _BSS C
+_var11 . . . . . . . . . . . . .        type3[15]        231h _BSS C
+_var12 . . . . . . . . . . . . .        DWord[16]        26Dh _BSS C
+_var13 . . . . . . . . . . . . .        type5[17]        2ADh _BSS C
+_var14 . . . . . . . . . . . . .        type6[18]        335h _BSS C
+_var2  . . . . . . . . . . . . .        Word[6]            5h _BSS C
+_var3  . . . . . . . . . . . . .        DWord[7]          11h _BSS C
+_var4  . . . . . . . . . . . . .        DWord[8]          2Dh _BSS C
+_var5  . . . . . . . . . . . . .        QWord[9]          4Dh _BSS C
+_var6  . . . . . . . . . . . . .        DWord[10]         95h _BSS C
+_var7  . . . . . . . . . . . . .        QWord[11]         BDh _BSS C
+_var8  . . . . . . . . . . . . .        TByte[12]        115h _BSS C
+_var9  . . . . . . . . . . . . .        DWord[13]        18Dh _BSS C
 
 test1.asm: 47 lines, 2 passes, 2 ms, 0 warnings, 0 errors

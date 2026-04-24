@@ -61,6 +61,7 @@ WS  [ \t\v\n\f]
 %option c++
 %option yyclass="Scanner"
 %option prefix="WadeSpace_"
+%option bison-locations
 
 %%
 
