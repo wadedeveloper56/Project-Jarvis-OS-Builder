@@ -283,8 +283,14 @@
     <ProjectReference Include="..\Arguments\Arguments.vcxproj">
       <Project>{9f695958-67a8-42be-884f-2f9d616e6ab5}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\JWasmLib\JWasmLib.vcxproj">
+      <Project>{fd8eeaf5-d96a-4978-9cb3-d573a9c0d4b1}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\JWccLib\JWccLib.vcxproj">
       <Project>{55e11707-51c1-4126-9ce7-1d3ef7e9d7f0}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\JWlinkLib\JWlinkLib.vcxproj">
+      <Project>{1054801f-1a40-4a7c-a7d1-303d2a64b79c}</Project>
     </ProjectReference>
     <ProjectReference Include="..\PreProcessor\Preprocessor.vcxproj">
       <Project>{3b55590c-3e30-413c-b121-c80fbe2d2c77}</Project>
