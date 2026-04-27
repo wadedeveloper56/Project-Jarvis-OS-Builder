@@ -665,8 +665,10 @@ function_definition
     
 %%
 
-void WadeSpace::Parser::error(const location &loc , const string &message) {
-    // cout << "Error: " << message << endl << "Location: " << loc << endl;  
-    cout << "Error: " << message << endl << "Error location: " << driver.location() << endl;
-    messages.addMessage(CompilerMessagesType::ERROR_MSG, message);
+void WadeSpace::Parser::error(const location &loc , const string &message) 
+{
+    std::ostringstream ss;
+    ss << "Line: " << loc.begin.line << " Error: " << message;  
+    cout << ss.str() << endl;
+    messages.addMessage(CompilerMessagesType::ERROR_MSG, ss.str());
 }

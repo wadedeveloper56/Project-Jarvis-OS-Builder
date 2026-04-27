@@ -10,22 +10,6 @@ test1.asm
                                 option casemap : none
 
 
-00000000                        type2 STRUCT
-00000000                        	a SDWORD ?
-00000004                        	b SDWORD ?
-00000008                        type2 ENDS
-00000000                        type3 UNION
-00000000                        	a SDWORD ?
-00000000                        	b SDWORD ?
-00000004                        type3 ENDS
-00000000                        type5 STRUCT
-00000000                        	a SDWORD ?
-00000004                        	b SDWORD ?
-00000008                        type5 ENDS
-00000000                        type6 UNION
-00000000                        	a SDWORD ?
-00000000                        	b SDWORD ?
-00000004                        type6 ENDS
 
                                 .data
 00000000                    *   _DATA segment
@@ -34,37 +18,13 @@ test1.asm
                             *   _DATA ends
 00000000                    *   _BSS segment PARA FLAT PUBLIC 'BSS'
                             *   assume cs:ERROR
-00000000  0000000000            _var1 SBYTE 5 dup(?)
-00000005  000000000000000000    _var2 SWORD 6 dup(?)
-00000011  000000000000000000    _var3 SDWORD 7 dup(?)
-0000002D  000000000000000000    _var4 SDWORD 8 dup(?)
-0000004D  000000000000000000    _var5 SQWORD 9 dup(?)
-00000095  000000000000000000    _var6 REAL4 10 dup(?)
-000000BD  000000000000000000    _var7 REAL8 11 dup(?)
-00000115  000000000000000000    _var8 REAL10 12 dup(?)
-0000018D  000000000000000000    _var9 SDWORD 13 dup(?)
-000001C1  000000000000000000    _var10 type2 14 dup(<>)
-00000231  000000000000000000    _var11 type3 15 dup(<>)
-0000026D  000000000000000000    _var12 SDWORD 16 dup(?)
-000002AD  000000000000000000    _var13 type5 17 dup(<>)
-00000335  000000000000000000    _var14 type6 18 dup(<>)
 
 00000000                        .code
-0000037D                    *   _BSS ends
+                            *   _BSS ends
 00000000                    *   _TEXT segment
                             *   assume cs:FLAT
-                                _main PROTO C _argc:SDWORD , _argv:QWORD ;
-
-00000000                        _main PROC C, _argc:SDWORD , _argv:QWORD 
-00000000  55                *   push rbp
-00000001  488BEC            *   mov rbp, rsp
-00000004  B805000000            	mov eax,5
-00000009                        	ret
-00000009  C9                *   leave
-0000000A  C3                *   retn 
-0000000B                        _main endp
                                 end
-0000000B                    *   _TEXT ends
+00000000                    *   _TEXT ends
 
 
 Macros:
@@ -78,41 +38,14 @@ Macros:
 @SubStr  . . . . . . . . . . . .        Func     0
 
 
-Structures and Unions:
-
-                N a m e                 Size/Ofs   Type
-
-type2  . . . . . . . . . . . . .               8
-  a  . . . . . . . . . . . . . .               0   DWord
-  b  . . . . . . . . . . . . . .               4   DWord
-type3  . . . . . . . . . . . . .               4
-  a  . . . . . . . . . . . . . .               0   DWord
-  b  . . . . . . . . . . . . . .               0   DWord
-type5  . . . . . . . . . . . . .               8
-  a  . . . . . . . . . . . . . .               0   DWord
-  b  . . . . . . . . . . . . . .               4   DWord
-type6  . . . . . . . . . . . . .               4
-  a  . . . . . . . . . . . . . .               0   DWord
-  b  . . . . . . . . . . . . . .               0   DWord
-
-
 Segments and Groups:
 
                 N a m e                 Size     Length   Align   Combine Class
 
 FLAT . . . . . . . . . . . . . .        GROUP
-_BSS . . . . . . . . . . . . . .        64 Bit   0000037D Para    Public  'BSS'
+_BSS . . . . . . . . . . . . . .        64 Bit   00000000 Para    Public  'BSS'
 _DATA  . . . . . . . . . . . . .        64 Bit   00000000 Para    Public  'DATA'
-_TEXT  . . . . . . . . . . . . .        64 Bit   0000000B Para    Public  'CODE'
-
-
-Procedures, parameters and locals:
-
-                N a m e                 Type     Value    Segment  Length
-
-_main  . . . . . . . . . . . . .        P Near   00000000 _TEXT    0000000B Public   C
-  _argc  . . . . . . . . . . . .        DWord             rbp + 0010
-  _argv  . . . . . . . . . . . .        QWord             rbp + 0018
+_TEXT  . . . . . . . . . . . . .        64 Bit   00000000 Para    Public  'CODE'
 
 
 Symbols:
@@ -128,25 +61,11 @@ Symbols:
 @FileName  . . . . . . . . . . .        Text   TEST1
 @Interface . . . . . . . . . . .        Number             1h 
 @Model . . . . . . . . . . . . .        Number             7h 
-@Time  . . . . . . . . . . . . .        Text   08:42:37
+@Time  . . . . . . . . . . . . .        Text   09:23:23
 @Version . . . . . . . . . . . .        Text   800
 @code  . . . . . . . . . . . . .        Text   _TEXT
 @data  . . . . . . . . . . . . .        Text   FLAT
 @stack . . . . . . . . . . . . .        Text   FLAT
 __JWASM__  . . . . . . . . . . .        Number            D4h 
-_var1  . . . . . . . . . . . . .        Byte[5]            0h _BSS C
-_var10 . . . . . . . . . . . . .        type2[14]        1C1h _BSS C
-_var11 . . . . . . . . . . . . .        type3[15]        231h _BSS C
-_var12 . . . . . . . . . . . . .        DWord[16]        26Dh _BSS C
-_var13 . . . . . . . . . . . . .        type5[17]        2ADh _BSS C
-_var14 . . . . . . . . . . . . .        type6[18]        335h _BSS C
-_var2  . . . . . . . . . . . . .        Word[6]            5h _BSS C
-_var3  . . . . . . . . . . . . .        DWord[7]          11h _BSS C
-_var4  . . . . . . . . . . . . .        DWord[8]          2Dh _BSS C
-_var5  . . . . . . . . . . . . .        QWord[9]          4Dh _BSS C
-_var6  . . . . . . . . . . . . .        DWord[10]         95h _BSS C
-_var7  . . . . . . . . . . . . .        QWord[11]         BDh _BSS C
-_var8  . . . . . . . . . . . . .        TByte[12]        115h _BSS C
-_var9  . . . . . . . . . . . . .        DWord[13]        18Dh _BSS C
 
-test1.asm: 47 lines, 2 passes, 2 ms, 0 warnings, 0 errors
+test1.asm: 11 lines, 2 passes, 1 ms, 0 warnings, 0 errors
