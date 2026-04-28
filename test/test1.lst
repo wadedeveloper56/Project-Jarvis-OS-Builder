@@ -18,9 +18,10 @@ test1.asm
                             *   _DATA ends
 00000000                    *   _BSS segment PARA FLAT PUBLIC 'BSS'
                             *   assume cs:ERROR
+00000000  0000000000            _var1 SBYTE 5 dup(?)
 
 00000000                        .code
-                            *   _BSS ends
+00000005                    *   _BSS ends
 00000000                    *   _TEXT segment
                             *   assume cs:FLAT
                                 end
@@ -43,7 +44,7 @@ Segments and Groups:
                 N a m e                 Size     Length   Align   Combine Class
 
 FLAT . . . . . . . . . . . . . .        GROUP
-_BSS . . . . . . . . . . . . . .        64 Bit   00000000 Para    Public  'BSS'
+_BSS . . . . . . . . . . . . . .        64 Bit   00000005 Para    Public  'BSS'
 _DATA  . . . . . . . . . . . . .        64 Bit   00000000 Para    Public  'DATA'
 _TEXT  . . . . . . . . . . . . .        64 Bit   00000000 Para    Public  'CODE'
 
@@ -61,11 +62,12 @@ Symbols:
 @FileName  . . . . . . . . . . .        Text   TEST1
 @Interface . . . . . . . . . . .        Number             1h 
 @Model . . . . . . . . . . . . .        Number             7h 
-@Time  . . . . . . . . . . . . .        Text   09:23:23
+@Time  . . . . . . . . . . . . .        Text   09:52:30
 @Version . . . . . . . . . . . .        Text   800
 @code  . . . . . . . . . . . . .        Text   _TEXT
 @data  . . . . . . . . . . . . .        Text   FLAT
 @stack . . . . . . . . . . . . .        Text   FLAT
 __JWASM__  . . . . . . . . . . .        Number            D4h 
+_var1  . . . . . . . . . . . . .        Byte[5]            0h _BSS C
 
-test1.asm: 11 lines, 2 passes, 1 ms, 0 warnings, 0 errors
+test1.asm: 12 lines, 2 passes, 1 ms, 0 warnings, 0 errors

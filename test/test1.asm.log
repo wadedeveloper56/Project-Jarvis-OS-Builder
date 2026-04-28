@@ -7,7 +7,7 @@ File Type: 64-bit COFF OBJECT
 FILE HEADER VALUES
               8664 Machine (x64)
                  3 (3) Number of Sections
-          69EF715B TimeDateStamp ->  n/a
+          69EF782E TimeDateStamp ->  n/a
                 8C PointerToSymbolTable
                  8 (8) NumberOfSymbols
                  0 (0) SizeOfOptionalHeader
@@ -56,8 +56,8 @@ SECTION HEADER #2 (2)
     .bss name
        0 physical address
        0 virtual address
-       0 (0) size of raw data
-       0 file pointer to raw data (00000000 to FFFFFFFF)
+       5 (5) size of raw data
+       0 file pointer to raw data (00000000 to 00000004)
        0 file pointer to relocation table
        0 file pointer to line numbers
        0 number of relocations
@@ -81,6 +81,6 @@ Indx Sectn   Value   Type  Storage Name
 0004     2 00000000  0000 STATIC   .data
      * Section: 0000  Len: 00000  Relocs: 0000  LineNums: 0000 checksum:00000000
 0006     3 00000000  0000 STATIC   .bss
-     * Section: 0000  Len: 00000  Relocs: 0000  LineNums: 0000 checksum:00000000
+     * Section: 0000  Len: 00005  Relocs: 0000  LineNums: 0000 checksum:00000000
 
 String Table Size = 0x4 (4) bytes 0 entries

@@ -668,7 +668,7 @@ function_definition
 void WadeSpace::Parser::error(const location &loc , const string &message) 
 {
     std::ostringstream ss;
-    ss << "Line: " << loc.begin.line << " Error: " << message;  
+    ss << " Error: " << message;  
     cout << ss.str() << endl;
     messages.addMessage(CompilerMessagesType::ERROR_MSG, ss.str());
 }

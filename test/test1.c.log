@@ -1,9 +1,8 @@
 Compiler (x86/x64) v1.0 (C) Copyright 2025-2026 Christopher D. Wade.
 All Rights Reserved
 Parse starting
-char var1 [ 5 ]
-short var2 [ 6 ] ;
-
+char var1 [ 5 ] ;
+short var2 [ 6 ]
 
 int main ( int argc , char * argv [ ] )
 {
@@ -36,8 +35,15 @@ inclusive_and_expression REDUCE to logical_or_expression
 logical_or_expression REDUCE to conditional_expression
 conditional_expression REDUCE to constant_expression
 direct_declarator OBRACE constant_expression CBRACE REDUCE to direct_declarator
-Scanner: token [short]
+Scanner: token [;]
 direct_declarator REDUCE to declarator
+declarator REDUCE to init_declarator
+init_declarator REDUCE to init_declarator_list
+declaration_specifiers init_declarator_list SEMICOLON REDUCE to declaration
+declaration REDUCE to external_declaration
+external_declaration REDUCE to translation_unit
+
+Scanner: token [short]
 SHORT REDUCE to type_specifier
 Scanner: identifier [var2]
 type_specifier REDUCE to declaration_specifiers
@@ -63,13 +69,8 @@ inclusive_and_expression REDUCE to logical_or_expression
 logical_or_expression REDUCE to conditional_expression
 conditional_expression REDUCE to constant_expression
 direct_declarator OBRACE constant_expression CBRACE REDUCE to direct_declarator
-Scanner: token [;]
-direct_declarator REDUCE to declarator
-declarator REDUCE to init_declarator
-init_declarator REDUCE to init_declarator_list
-declaration_specifiers init_declarator_list SEMICOLON REDUCE to declaration
-declaration REDUCE to declaration_list
 Scanner: token [int]
+direct_declarator REDUCE to declarator
 INT REDUCE to type_specifier
 Scanner: identifier [main]
 type_specifier REDUCE to declaration_specifiers
@@ -104,5 +105,5 @@ Scanner: token [{]
 direct_declarator REDUCE to declarator
 declarator REDUCE to init_declarator
 init_declarator REDUCE to init_declarator_list
-Line: 1 Error: syntax error, unexpected {, expecting ; or ","
+ Error: syntax error, unexpected {, expecting ; or ","
 Parse complete. Result = 1
