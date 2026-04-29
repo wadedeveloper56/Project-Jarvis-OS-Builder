@@ -2,7 +2,7 @@
 #include "pch.h"
 #include "framework.h"
 #include "CalendarBar.h"
-#include "IDE.h"
+#include "JarvisIDE.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW

@@ -4,20 +4,15 @@
 
 #include "pch.h"
 #include "framework.h"
-#include "IDE.h"
+#include "JarvisIDE.h"
 
 #include "MainFrm.h"
-#include "Compiler.h"
-#include "GlobalVars.h"
-#include "Messages.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
 
 // CMainFrame
-using namespace std;
-using namespace WadeSpace;
 
 IMPLEMENT_DYNAMIC(CMainFrame, CMDIFrameWndEx)
 
@@ -60,7 +55,6 @@ CMainFrame::CMainFrame() noexcept
 {
 	// TODO: add member initialization code here
 	theApp.m_nAppLook = theApp.GetInt(_T("ApplicationLook"), ID_VIEW_APPLOOK_VS_2008);
-	compiler = make_shared<Compiler>();
 }
 
 CMainFrame::~CMainFrame()
@@ -237,6 +231,9 @@ BOOL CMainFrame::PreCreateWindow(CREATESTRUCT& cs)
 		return FALSE;
 	// TODO: Modify the Window class or styles here by modifying
 	//  the CREATESTRUCT cs
+
+	cs.style = WS_OVERLAPPED | WS_CAPTION | FWS_ADDTOTITLE
+		 | WS_THICKFRAME | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_MAXIMIZE | WS_SYSMENU;
 
 	return TRUE;
 }

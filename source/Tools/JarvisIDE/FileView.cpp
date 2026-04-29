@@ -4,7 +4,7 @@
 #include "mainfrm.h"
 #include "FileView.h"
 #include "Resource.h"
-#include "IDE.h"
+#include "JarvisIDE.h"
 
 #ifdef _DEBUG
 #undef THIS_FILE

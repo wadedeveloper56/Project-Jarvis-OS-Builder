@@ -1,27 +1,27 @@
 
-// IDE.cpp : Defines the class behaviors for the application.
+// JarvisIDE.cpp : Defines the class behaviors for the application.
 //
 
 #include "pch.h"
 #include "framework.h"
 #include "afxwinappex.h"
 #include "afxdialogex.h"
-#include "IDE.h"
+#include "JarvisIDE.h"
 #include "MainFrm.h"
 
 #include "ChildFrm.h"
-#include "IDEDoc.h"
-#include "IDEView.h"
+#include "JarvisIDEDoc.h"
+#include "JarvisIDEView.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
 
 
-// CIDEApp
+// CJarvisIDEApp
 
-BEGIN_MESSAGE_MAP(CIDEApp, CWinAppEx)
-	ON_COMMAND(ID_APP_ABOUT, &CIDEApp::OnAppAbout)
+BEGIN_MESSAGE_MAP(CJarvisIDEApp, CWinAppEx)
+	ON_COMMAND(ID_APP_ABOUT, &CJarvisIDEApp::OnAppAbout)
 	// Standard file based document commands
 	ON_COMMAND(ID_FILE_NEW, &CWinAppEx::OnFileNew)
 	ON_COMMAND(ID_FILE_OPEN, &CWinAppEx::OnFileOpen)
@@ -30,9 +30,9 @@ BEGIN_MESSAGE_MAP(CIDEApp, CWinAppEx)
 END_MESSAGE_MAP()
 
 
-// CIDEApp construction
+// CJarvisIDEApp construction
 
-CIDEApp::CIDEApp() noexcept
+CJarvisIDEApp::CJarvisIDEApp() noexcept
 {
 	m_bHiColorIcons = TRUE;
 
@@ -49,20 +49,20 @@ CIDEApp::CIDEApp() noexcept
 
 	// TODO: replace application ID string below with unique ID string; recommended
 	// format for string is CompanyName.ProductName.SubProduct.VersionInformation
-	SetAppID(_T("IDE.AppID.NoVersion"));
+	SetAppID(_T("JarvisIDE.AppID.NoVersion"));
 
 	// TODO: add construction code here,
 	// Place all significant initialization in InitInstance
 }
 
-// The one and only CIDEApp object
+// The one and only CJarvisIDEApp object
 
-CIDEApp theApp;
+CJarvisIDEApp theApp;
 
 
-// CIDEApp initialization
+// CJarvisIDEApp initialization
 
-BOOL CIDEApp::InitInstance()
+BOOL CJarvisIDEApp::InitInstance()
 {
 	// InitCommonControlsEx() is required on Windows XP if an application
 	// manifest specifies use of ComCtl32.dll version 6 or later to enable
@@ -116,10 +116,10 @@ BOOL CIDEApp::InitInstance()
 	// Register the application's document templates.  Document templates
 	//  serve as the connection between documents, frame windows and views
 	CMultiDocTemplate* pDocTemplate;
-	pDocTemplate = new CMultiDocTemplate(IDR_IDETYPE,
-		RUNTIME_CLASS(CIDEDoc),
+	pDocTemplate = new CMultiDocTemplate(IDR_JarvisIDETYPE,
+		RUNTIME_CLASS(CJarvisIDEDoc),
 		RUNTIME_CLASS(CChildFrame), // custom MDI child frame
-		RUNTIME_CLASS(CIDEView));
+		RUNTIME_CLASS(CJarvisIDEView));
 	if (!pDocTemplate)
 		return FALSE;
 	AddDocTemplate(pDocTemplate);
@@ -152,13 +152,13 @@ BOOL CIDEApp::InitInstance()
 	if (!ProcessShellCommand(cmdInfo))
 		return FALSE;
 	// The main window has been initialized, so show and update it
-	pMainFrame->ShowWindow(m_nCmdShow);
+	pMainFrame->ShowWindow(SW_SHOWMAXIMIZED);
 	pMainFrame->UpdateWindow();
 
 	return TRUE;
 }
 
-int CIDEApp::ExitInstance()
+int CJarvisIDEApp::ExitInstance()
 {
 	//TODO: handle additional resources you may have added
 	AfxOleTerm(FALSE);
@@ -166,7 +166,7 @@ int CIDEApp::ExitInstance()
 	return CWinAppEx::ExitInstance();
 }
 
-// CIDEApp message handlers
+// CJarvisIDEApp message handlers
 
 
 // CAboutDlg dialog used for App About
@@ -202,15 +202,15 @@ BEGIN_MESSAGE_MAP(CAboutDlg, CDialogEx)
 END_MESSAGE_MAP()
 
 // App command to run the dialog
-void CIDEApp::OnAppAbout()
+void CJarvisIDEApp::OnAppAbout()
 {
 	CAboutDlg aboutDlg;
 	aboutDlg.DoModal();
 }
 
-// CIDEApp customization load/save methods
+// CJarvisIDEApp customization load/save methods
 
-void CIDEApp::PreLoadState()
+void CJarvisIDEApp::PreLoadState()
 {
 	BOOL bNameValid;
 	CString strName;
@@ -222,15 +222,15 @@ void CIDEApp::PreLoadState()
 	GetContextMenuManager()->AddMenu(strName, IDR_POPUP_EXPLORER);
 }
 
-void CIDEApp::LoadCustomState()
+void CJarvisIDEApp::LoadCustomState()
 {
 }
 
-void CIDEApp::SaveCustomState()
+void CJarvisIDEApp::SaveCustomState()
 {
 }
 
-// CIDEApp message handlers
+// CJarvisIDEApp message handlers
 
 
 

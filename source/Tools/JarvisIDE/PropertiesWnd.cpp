@@ -5,7 +5,7 @@
 #include "PropertiesWnd.h"
 #include "Resource.h"
 #include "MainFrm.h"
-#include "IDE.h"
+#include "JarvisIDE.h"
 
 #ifdef _DEBUG
 #undef THIS_FILE

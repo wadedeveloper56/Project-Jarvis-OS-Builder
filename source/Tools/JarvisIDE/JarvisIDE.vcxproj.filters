@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="IDE.h">
+    <ClInclude Include="JarvisIDE.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="framework.h">
@@ -30,10 +30,10 @@
     <ClInclude Include="ChildFrm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IDEDoc.h">
+    <ClInclude Include="JarvisIDEDoc.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IDEView.h">
+    <ClInclude Include="JarvisIDEView.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Resource.h">
@@ -62,7 +62,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="IDE.cpp">
+    <ClCompile Include="JarvisIDE.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MainFrm.cpp">
@@ -71,10 +71,10 @@
     <ClCompile Include="ChildFrm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="IDEDoc.cpp">
+    <ClCompile Include="JarvisIDEDoc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="IDEView.cpp">
+    <ClCompile Include="JarvisIDEView.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="FileView.cpp">
@@ -100,13 +100,13 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="IDE.reg" />
-    <None Include="res\IDE.rc2">
+    <None Include="JarvisIDE.reg" />
+    <None Include="res\JarvisIDE.rc2">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="IDE.rc">
+    <ResourceCompile Include="JarvisIDE.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>
@@ -195,10 +195,10 @@
     <Image Include="res\userimages.bmp">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="res\IDEDoc.ico">
+    <Image Include="res\JarvisIDEDoc.ico">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="res\IDE.ico">
+    <Image Include="res\JarvisIDE.ico">
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="res\Toolbar.bmp">

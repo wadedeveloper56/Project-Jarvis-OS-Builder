@@ -2,7 +2,7 @@ Compiler (x86/x64) v1.0 (C) Copyright 2025-2026 Christopher D. Wade.
 All Rights Reserved
 Parse starting
 char var1 ;
-short var2
+short var2 ;
 int var3 ;
 
 int main ( int argc , char * argv [ ] )
@@ -38,84 +38,130 @@ Scanner: identifier [var2]
 type_specifier REDUCE to declaration_specifiers
 IDENTIFIER REDUCE to direct_declarator
 increaseLocation(): 1, total = 23
-increaseLocation(): 3, total = 26
-Scanner: token [int]
-direct_declarator REDUCE to declarator
-INT REDUCE to type_specifier
-increaseLocation(): 1, total = 27
-increaseLocation(): 4, total = 31
-Scanner: identifier [var3]
-type_specifier REDUCE to declaration_specifiers
-IDENTIFIER REDUCE to direct_declarator
-increaseLocation(): 1, total = 32
-increaseLocation(): 1, total = 33
+increaseLocation(): 1, total = 24
 Scanner: token [;]
 direct_declarator REDUCE to declarator
 declarator REDUCE to init_declarator
 init_declarator REDUCE to init_declarator_list
 declaration_specifiers init_declarator_list SEMICOLON REDUCE to declaration
-declaration REDUCE to declaration_list
-increaseLocation(): 1, total = 34
-increaseLocation(): 1, total = 35
-increaseLocation(): 3, total = 38
+declaration REDUCE to external_declaration
+translation_unit external_declaration REDUCE to translation_unit
+
+increaseLocation(): 1, total = 25
+increaseLocation(): 3, total = 28
 Scanner: token [int]
 INT REDUCE to type_specifier
-increaseLocation(): 1, total = 39
-increaseLocation(): 4, total = 43
+increaseLocation(): 1, total = 29
+increaseLocation(): 4, total = 33
+Scanner: identifier [var3]
+type_specifier REDUCE to declaration_specifiers
+IDENTIFIER REDUCE to direct_declarator
+increaseLocation(): 1, total = 34
+increaseLocation(): 1, total = 35
+Scanner: token [;]
+direct_declarator REDUCE to declarator
+declarator REDUCE to init_declarator
+init_declarator REDUCE to init_declarator_list
+declaration_specifiers init_declarator_list SEMICOLON REDUCE to declaration
+declaration REDUCE to external_declaration
+translation_unit external_declaration REDUCE to translation_unit
+
+increaseLocation(): 1, total = 36
+increaseLocation(): 1, total = 37
+increaseLocation(): 3, total = 40
+Scanner: token [int]
+INT REDUCE to type_specifier
+increaseLocation(): 1, total = 41
+increaseLocation(): 4, total = 45
 Scanner: identifier [main]
 type_specifier REDUCE to declaration_specifiers
 IDENTIFIER REDUCE to direct_declarator
-increaseLocation(): 1, total = 44
-increaseLocation(): 1, total = 45
-Scanner: token [(]
 increaseLocation(): 1, total = 46
-increaseLocation(): 3, total = 49
+increaseLocation(): 1, total = 47
+Scanner: token [(]
+increaseLocation(): 1, total = 48
+increaseLocation(): 3, total = 51
 Scanner: token [int]
 INT REDUCE to type_specifier
-increaseLocation(): 1, total = 50
-increaseLocation(): 4, total = 54
+increaseLocation(): 1, total = 52
+increaseLocation(): 4, total = 56
 Scanner: identifier [argc]
 type_specifier REDUCE to declaration_specifiers
 IDENTIFIER REDUCE to direct_declarator
-increaseLocation(): 1, total = 55
-increaseLocation(): 1, total = 56
+increaseLocation(): 1, total = 57
+increaseLocation(): 1, total = 58
 Scanner: token [,]
 direct_declarator REDUCE to declarator
 declaration_specifiers declarator REDUCE to parameter_declaration
 parameter_declaration REDUCE to parameter_list
-increaseLocation(): 1, total = 57
-increaseLocation(): 4, total = 61
+increaseLocation(): 1, total = 59
+increaseLocation(): 4, total = 63
 Scanner: token [char]
 CHAR REDUCE to type_specifier
-increaseLocation(): 1, total = 62
-increaseLocation(): 1, total = 63
+increaseLocation(): 1, total = 64
+increaseLocation(): 1, total = 65
 Scanner: token [*]
 type_specifier REDUCE to declaration_specifiers
-increaseLocation(): 1, total = 64
-increaseLocation(): 4, total = 68
+increaseLocation(): 1, total = 66
+increaseLocation(): 4, total = 70
 Scanner: identifier [argv]
 TIMES_OP REDUCE to POINTER
 IDENTIFIER REDUCE to direct_declarator
-increaseLocation(): 1, total = 69
-increaseLocation(): 1, total = 70
-Scanner: token [[]
 increaseLocation(): 1, total = 71
 increaseLocation(): 1, total = 72
-Scanner: token []]
-direct_declarator OBRACE CBRACE REDUCE to direct_declarator
+Scanner: token [[]
 increaseLocation(): 1, total = 73
 increaseLocation(): 1, total = 74
+Scanner: token []]
+direct_declarator OBRACE CBRACE REDUCE to direct_declarator
+increaseLocation(): 1, total = 75
+increaseLocation(): 1, total = 76
 Scanner: token [)]
 pointer direct_declarator REDUCE to declarator
 declaration_specifiers declarator REDUCE to parameter_declaration
 parameter_list COMMA parameter_declaration REDUCE to parameter_list
 parameter_list REDUCE to parameter_type_list
 direct_declarator OPAREN parameter_type_list CPAREN to direct_declarator
-increaseLocation(): 1, total = 75
-increaseLocation(): 1, total = 76
+increaseLocation(): 1, total = 77
+increaseLocation(): 1, total = 78
 Scanner: token [{]
 direct_declarator REDUCE to declarator
-declarator REDUCE to init_declarator
-init_declarator REDUCE to init_declarator_list
-Error at line 1, column 1: syntax error, unexpected {, expecting ; or ","
-Parse complete. Result = 1
+increaseLocation(): 1, total = 79
+increaseLocation(): 6, total = 85
+Scanner: token [return]
+increaseLocation(): 1, total = 86
+increaseLocation(): 1, total = 87
+Scanner: decimal number: 5
+I_CONST REDUCE to constant 
+constant REDUCE to primary_expression
+primary_expression REDUCE to postfix_expression
+increaseLocation(): 1, total = 88
+increaseLocation(): 1, total = 89
+Scanner: token [;]
+postfix_expression REDUCE unary_expression
+unary_expression REDUCE to cast_expression
+cast_expression REDUCE to multiplicative_expression
+multiplicative_expression REDUCE to additive_expression
+additive_expression REDUCE to shift_expression
+shift_expression REDUCE to relational_expression
+relational_expression REDUCE to equality_expression
+equality_expression REDUCE to and_expression
+and_expression REDUCE to exclusive_or_expression
+exclusive_or_expression REDUCE to inclusive_or_expression
+inclusive_or_expression REDUCE to logical_and_expression
+inclusive_and_expression REDUCE to logical_or_expression
+logical_or_expression REDUCE to conditional_expression
+conditional_expression REDUCE to assignment_expression
+asignment_expression REDUCE to expression
+RETURN expression SEMICOLON REDUCE to jump_statement
+jump_statement REDUCE to statement
+statement REDUCE to statement_list
+increaseLocation(): 1, total = 90
+increaseLocation(): 1, total = 91
+Scanner: token [}]
+OCURLY statement_list CCURLY REDUCE to compound_statement
+declaration_specifiers declarator compound_statement REDUCE to function_definition
+function_definition REDUCE to external_declaration
+translation_unit external_declaration REDUCE to translation_unit
+
+Parse complete. Result = 0

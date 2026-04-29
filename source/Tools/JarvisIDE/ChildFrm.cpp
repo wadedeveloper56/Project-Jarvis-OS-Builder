@@ -4,7 +4,7 @@
 
 #include "pch.h"
 #include "framework.h"
-#include "IDE.h"
+#include "JarvisIDE.h"
 
 #include "ChildFrm.h"
 

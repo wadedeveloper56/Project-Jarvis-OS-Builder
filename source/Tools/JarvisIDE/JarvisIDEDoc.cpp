@@ -1,5 +1,5 @@
 
-// IDEDoc.cpp : implementation of the CIDEDoc class
+// JarvisIDEDoc.cpp : implementation of the CJarvisIDEDoc class
 //
 
 #include "pch.h"
@@ -7,10 +7,10 @@
 // SHARED_HANDLERS can be defined in an ATL project implementing preview, thumbnail
 // and search filter handlers and allows sharing of document code with that project.
 #ifndef SHARED_HANDLERS
-#include "IDE.h"
+#include "JarvisIDE.h"
 #endif
 
-#include "IDEDoc.h"
+#include "JarvisIDEDoc.h"
 
 #include <propkey.h>
 
@@ -18,27 +18,27 @@
 #define new DEBUG_NEW
 #endif
 
-// CIDEDoc
+// CJarvisIDEDoc
 
-IMPLEMENT_DYNCREATE(CIDEDoc, CDocument)
+IMPLEMENT_DYNCREATE(CJarvisIDEDoc, CDocument)
 
-BEGIN_MESSAGE_MAP(CIDEDoc, CDocument)
+BEGIN_MESSAGE_MAP(CJarvisIDEDoc, CDocument)
 END_MESSAGE_MAP()
 
 
-// CIDEDoc construction/destruction
+// CJarvisIDEDoc construction/destruction
 
-CIDEDoc::CIDEDoc() noexcept
+CJarvisIDEDoc::CJarvisIDEDoc() noexcept
 {
 	// TODO: add one-time construction code here
 
 }
 
-CIDEDoc::~CIDEDoc()
+CJarvisIDEDoc::~CJarvisIDEDoc()
 {
 }
 
-BOOL CIDEDoc::OnNewDocument()
+BOOL CJarvisIDEDoc::OnNewDocument()
 {
 	if (!CDocument::OnNewDocument())
 		return FALSE;
@@ -52,9 +52,9 @@ BOOL CIDEDoc::OnNewDocument()
 
 
 
-// CIDEDoc serialization
+// CJarvisIDEDoc serialization
 
-void CIDEDoc::Serialize(CArchive& ar)
+void CJarvisIDEDoc::Serialize(CArchive& ar)
 {
 	if (ar.IsStoring())
 	{
@@ -69,7 +69,7 @@ void CIDEDoc::Serialize(CArchive& ar)
 #ifdef SHARED_HANDLERS
 
 // Support for thumbnails
-void CIDEDoc::OnDrawThumbnail(CDC& dc, LPRECT lprcBounds)
+void CJarvisIDEDoc::OnDrawThumbnail(CDC& dc, LPRECT lprcBounds)
 {
 	// Modify this code to draw the document's data
 	dc.FillSolidRect(lprcBounds, RGB(255, 255, 255));
@@ -90,7 +90,7 @@ void CIDEDoc::OnDrawThumbnail(CDC& dc, LPRECT lprcBounds)
 }
 
 // Support for Search Handlers
-void CIDEDoc::InitializeSearchContent()
+void CJarvisIDEDoc::InitializeSearchContent()
 {
 	CString strSearchContent;
 	// Set search contents from document's data.
@@ -100,7 +100,7 @@ void CIDEDoc::InitializeSearchContent()
 	SetSearchContent(strSearchContent);
 }
 
-void CIDEDoc::SetSearchContent(const CString& value)
+void CJarvisIDEDoc::SetSearchContent(const CString& value)
 {
 	if (value.IsEmpty())
 	{
@@ -120,19 +120,19 @@ void CIDEDoc::SetSearchContent(const CString& value)
 
 #endif // SHARED_HANDLERS
 
-// CIDEDoc diagnostics
+// CJarvisIDEDoc diagnostics
 
 #ifdef _DEBUG
-void CIDEDoc::AssertValid() const
+void CJarvisIDEDoc::AssertValid() const
 {
 	CDocument::AssertValid();
 }
 
-void CIDEDoc::Dump(CDumpContext& dc) const
+void CJarvisIDEDoc::Dump(CDumpContext& dc) const
 {
 	CDocument::Dump(dc);
 }
 #endif //_DEBUG
 
 
-// CIDEDoc commands
+// CJarvisIDEDoc commands
