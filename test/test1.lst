@@ -1,4 +1,4 @@
-JWasm v2.12pre, Apr 27 2026
+JWasm v2.12pre, Apr 28 2026
 test1.asm
                                 .x64p
                                 .model flat, c;
@@ -18,10 +18,10 @@ test1.asm
                             *   _DATA ends
 00000000                    *   _BSS segment PARA FLAT PUBLIC 'BSS'
                             *   assume cs:ERROR
-00000000  0000000000            _var1 SBYTE 5 dup(?)
+00000000  00                    _var1 SBYTE  ?
 
 00000000                        .code
-00000005                    *   _BSS ends
+00000001                    *   _BSS ends
 00000000                    *   _TEXT segment
                             *   assume cs:FLAT
                                 end
@@ -44,7 +44,7 @@ Segments and Groups:
                 N a m e                 Size     Length   Align   Combine Class
 
 FLAT . . . . . . . . . . . . . .        GROUP
-_BSS . . . . . . . . . . . . . .        64 Bit   00000005 Para    Public  'BSS'
+_BSS . . . . . . . . . . . . . .        64 Bit   00000001 Para    Public  'BSS'
 _DATA  . . . . . . . . . . . . .        64 Bit   00000000 Para    Public  'DATA'
 _TEXT  . . . . . . . . . . . . .        64 Bit   00000000 Para    Public  'CODE'
 
@@ -57,17 +57,17 @@ Symbols:
 @Cpu . . . . . . . . . . . . . .        Number           DDFh 
 @CurSeg  . . . . . . . . . . . .        Text   
 @DataSize  . . . . . . . . . . .        Number             0h 
-@Date  . . . . . . . . . . . . .        Text   04/27/26
+@Date  . . . . . . . . . . . . .        Text   04/29/26
 @FileCur . . . . . . . . . . . .        Text   test1.asm
 @FileName  . . . . . . . . . . .        Text   TEST1
 @Interface . . . . . . . . . . .        Number             1h 
 @Model . . . . . . . . . . . . .        Number             7h 
-@Time  . . . . . . . . . . . . .        Text   09:52:30
+@Time  . . . . . . . . . . . . .        Text   10:08:58
 @Version . . . . . . . . . . . .        Text   800
 @code  . . . . . . . . . . . . .        Text   _TEXT
 @data  . . . . . . . . . . . . .        Text   FLAT
 @stack . . . . . . . . . . . . .        Text   FLAT
 __JWASM__  . . . . . . . . . . .        Number            D4h 
-_var1  . . . . . . . . . . . . .        Byte[5]            0h _BSS C
+_var1  . . . . . . . . . . . . .        Byte               0h _BSS C
 
 test1.asm: 12 lines, 2 passes, 1 ms, 0 warnings, 0 errors

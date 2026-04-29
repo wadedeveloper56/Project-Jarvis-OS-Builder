@@ -470,9 +470,9 @@ WS  [ \t\v\n\f]
                }
 "//".*         { cout << "Scanner: single line comment [" << yytext << "]" << endl;  
                }
-[ \t\v\n\f]    { }
-.              { cout << "Scanner: unknown character [" << yytext << "]" << endl; 
-               }
+\n             { m_driver.clear(); }
+[ \t\v\f]    { }
+.              { cout << "Scanner: unknown character [" << yytext << "]" << endl; }
 <<EOF>>        { return yyterminate(); }
 
 %%

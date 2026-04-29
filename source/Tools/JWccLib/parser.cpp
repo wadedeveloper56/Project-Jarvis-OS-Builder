@@ -4213,10 +4213,10 @@ namespace  WadeSpace  {
 #line 666 "ansic.y"
 
 
-void WadeSpace::Parser::error(const location &loc , const string &message) 
+void WadeSpace::Parser::error(const location_type& loc, const string& message)  
 {
     std::ostringstream ss;
-    ss << " Error: " << message;  
+    ss << "Error at line " << loc.begin.line << ", column " << loc.begin.column << ": " << message;
     cout << ss.str() << endl;
     messages.addMessage(CompilerMessagesType::ERROR_MSG, ss.str());
 }

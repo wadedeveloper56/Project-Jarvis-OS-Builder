@@ -1,40 +1,25 @@
 Compiler (x86/x64) v1.0 (C) Copyright 2025-2026 Christopher D. Wade.
 All Rights Reserved
 Parse starting
-char var1 [ 5 ] ;
-short var2 [ 6 ]
+char var1 ;
+short var2
+int var3 ;
 
 int main ( int argc , char * argv [ ] )
 {
 return 5 ;
 }
 
+increaseLocation(): 4, total = 4
 Scanner: token [char]
 CHAR REDUCE to type_specifier
+increaseLocation(): 1, total = 5
+increaseLocation(): 4, total = 9
 Scanner: identifier [var1]
 type_specifier REDUCE to declaration_specifiers
 IDENTIFIER REDUCE to direct_declarator
-Scanner: token [[]
-Scanner: decimal number: 5
-I_CONST REDUCE to constant 
-constant REDUCE to primary_expression
-primary_expression REDUCE to postfix_expression
-Scanner: token []]
-postfix_expression REDUCE unary_expression
-unary_expression REDUCE to cast_expression
-cast_expression REDUCE to multiplicative_expression
-multiplicative_expression REDUCE to additive_expression
-additive_expression REDUCE to shift_expression
-shift_expression REDUCE to relational_expression
-relational_expression REDUCE to equality_expression
-equality_expression REDUCE to and_expression
-and_expression REDUCE to exclusive_or_expression
-exclusive_or_expression REDUCE to inclusive_or_expression
-inclusive_or_expression REDUCE to logical_and_expression
-inclusive_and_expression REDUCE to logical_or_expression
-logical_or_expression REDUCE to conditional_expression
-conditional_expression REDUCE to constant_expression
-direct_declarator OBRACE constant_expression CBRACE REDUCE to direct_declarator
+increaseLocation(): 1, total = 10
+increaseLocation(): 1, total = 11
 Scanner: token [;]
 direct_declarator REDUCE to declarator
 declarator REDUCE to init_declarator
@@ -43,67 +28,94 @@ declaration_specifiers init_declarator_list SEMICOLON REDUCE to declaration
 declaration REDUCE to external_declaration
 external_declaration REDUCE to translation_unit
 
+increaseLocation(): 1, total = 12
+increaseLocation(): 5, total = 17
 Scanner: token [short]
 SHORT REDUCE to type_specifier
+increaseLocation(): 1, total = 18
+increaseLocation(): 4, total = 22
 Scanner: identifier [var2]
 type_specifier REDUCE to declaration_specifiers
 IDENTIFIER REDUCE to direct_declarator
-Scanner: token [[]
-Scanner: decimal number: 6
-I_CONST REDUCE to constant 
-constant REDUCE to primary_expression
-primary_expression REDUCE to postfix_expression
-Scanner: token []]
-postfix_expression REDUCE unary_expression
-unary_expression REDUCE to cast_expression
-cast_expression REDUCE to multiplicative_expression
-multiplicative_expression REDUCE to additive_expression
-additive_expression REDUCE to shift_expression
-shift_expression REDUCE to relational_expression
-relational_expression REDUCE to equality_expression
-equality_expression REDUCE to and_expression
-and_expression REDUCE to exclusive_or_expression
-exclusive_or_expression REDUCE to inclusive_or_expression
-inclusive_or_expression REDUCE to logical_and_expression
-inclusive_and_expression REDUCE to logical_or_expression
-logical_or_expression REDUCE to conditional_expression
-conditional_expression REDUCE to constant_expression
-direct_declarator OBRACE constant_expression CBRACE REDUCE to direct_declarator
+increaseLocation(): 1, total = 23
+increaseLocation(): 3, total = 26
 Scanner: token [int]
 direct_declarator REDUCE to declarator
 INT REDUCE to type_specifier
+increaseLocation(): 1, total = 27
+increaseLocation(): 4, total = 31
+Scanner: identifier [var3]
+type_specifier REDUCE to declaration_specifiers
+IDENTIFIER REDUCE to direct_declarator
+increaseLocation(): 1, total = 32
+increaseLocation(): 1, total = 33
+Scanner: token [;]
+direct_declarator REDUCE to declarator
+declarator REDUCE to init_declarator
+init_declarator REDUCE to init_declarator_list
+declaration_specifiers init_declarator_list SEMICOLON REDUCE to declaration
+declaration REDUCE to declaration_list
+increaseLocation(): 1, total = 34
+increaseLocation(): 1, total = 35
+increaseLocation(): 3, total = 38
+Scanner: token [int]
+INT REDUCE to type_specifier
+increaseLocation(): 1, total = 39
+increaseLocation(): 4, total = 43
 Scanner: identifier [main]
 type_specifier REDUCE to declaration_specifiers
 IDENTIFIER REDUCE to direct_declarator
+increaseLocation(): 1, total = 44
+increaseLocation(): 1, total = 45
 Scanner: token [(]
+increaseLocation(): 1, total = 46
+increaseLocation(): 3, total = 49
 Scanner: token [int]
 INT REDUCE to type_specifier
+increaseLocation(): 1, total = 50
+increaseLocation(): 4, total = 54
 Scanner: identifier [argc]
 type_specifier REDUCE to declaration_specifiers
 IDENTIFIER REDUCE to direct_declarator
+increaseLocation(): 1, total = 55
+increaseLocation(): 1, total = 56
 Scanner: token [,]
 direct_declarator REDUCE to declarator
 declaration_specifiers declarator REDUCE to parameter_declaration
 parameter_declaration REDUCE to parameter_list
+increaseLocation(): 1, total = 57
+increaseLocation(): 4, total = 61
 Scanner: token [char]
 CHAR REDUCE to type_specifier
+increaseLocation(): 1, total = 62
+increaseLocation(): 1, total = 63
 Scanner: token [*]
 type_specifier REDUCE to declaration_specifiers
+increaseLocation(): 1, total = 64
+increaseLocation(): 4, total = 68
 Scanner: identifier [argv]
 TIMES_OP REDUCE to POINTER
 IDENTIFIER REDUCE to direct_declarator
+increaseLocation(): 1, total = 69
+increaseLocation(): 1, total = 70
 Scanner: token [[]
+increaseLocation(): 1, total = 71
+increaseLocation(): 1, total = 72
 Scanner: token []]
 direct_declarator OBRACE CBRACE REDUCE to direct_declarator
+increaseLocation(): 1, total = 73
+increaseLocation(): 1, total = 74
 Scanner: token [)]
 pointer direct_declarator REDUCE to declarator
 declaration_specifiers declarator REDUCE to parameter_declaration
 parameter_list COMMA parameter_declaration REDUCE to parameter_list
 parameter_list REDUCE to parameter_type_list
 direct_declarator OPAREN parameter_type_list CPAREN to direct_declarator
+increaseLocation(): 1, total = 75
+increaseLocation(): 1, total = 76
 Scanner: token [{]
 direct_declarator REDUCE to declarator
 declarator REDUCE to init_declarator
 init_declarator REDUCE to init_declarator_list
- Error: syntax error, unexpected {, expecting ; or ","
+Error at line 1, column 1: syntax error, unexpected {, expecting ; or ","
 Parse complete. Result = 1

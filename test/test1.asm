@@ -6,7 +6,7 @@ option casemap : none
 
 .data
 .data?
-_var1 SBYTE 5 dup(?)
+_var1 SBYTE  ?
 
 .code
 end
