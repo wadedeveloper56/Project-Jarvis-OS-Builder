@@ -7,6 +7,10 @@
 #include "JarvisIDE.h"
 
 #include "MainFrm.h"
+#include "Compiler.h"
+
+using namespace std;
+using namespace WadeSpace;
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -55,6 +59,7 @@ CMainFrame::CMainFrame() noexcept
 {
 	// TODO: add member initialization code here
 	theApp.m_nAppLook = theApp.GetInt(_T("ApplicationLook"), ID_VIEW_APPLOOK_VS_2008);
+	compiler = make_shared<Compiler>();
 }
 
 CMainFrame::~CMainFrame()
