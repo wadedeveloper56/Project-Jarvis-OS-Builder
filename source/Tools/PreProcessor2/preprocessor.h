@@ -2,7 +2,8 @@
 
 using namespace std;
 
-namespace simplecpp {
+namespace WadeSpace::PreProcessor 
+{
     /** C code standard */
     enum cstd_t { CUnknown=-1, C89, C99, C11, C17, C23 };
 

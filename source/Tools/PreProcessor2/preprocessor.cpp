@@ -1,8 +1,8 @@
 #include "pch.h"
-#include "simplecpp.h"
+#include "preprocessor.h"
 
 using namespace std;
-using namespace simplecpp;
+using namespace WadeSpace::PreProcessor;
 
 static bool isHex(const string &s)
 {
@@ -1423,8 +1423,8 @@ unsigned int TokenList::fileIndex(const string &filename)
     return (unsigned int)(files.size() - 1U);
 }
 
-
-namespace simplecpp {
+namespace WadeSpace::PreProcessor
+{
     class Macro;
     using MacroMap = unordered_map<TokenString,Macro>;
 
@@ -2513,7 +2513,7 @@ static void simplifySizeof(TokenList &expr, const map<string, size_t> &sizeOfTyp
 
 static bool isCpp17OrLater(const DUI &dui)
 {
-    const string std_ver = simplecpp::getCppStdString(dui.std);
+    const string std_ver = WadeSpace::PreProcessor::getCppStdString(dui.std);
     return !std_ver.empty() && (std_ver >= "201703L");
 }
 
@@ -2866,7 +2866,7 @@ static void simplifyNumbers(TokenList &expr)
         if (tok->str().compare(0,2,"0x") == 0)
             tok->setstr(toString(stringToULL(tok->str())));
         else if (!tok->number && tok->str().find('\'') != string::npos)
-            tok->setstr(toString(simplecpp::characterLiteralToLL(tok->str())));
+            tok->setstr(toString(WadeSpace::PreProcessor::characterLiteralToLL(tok->str())));
     }
 }
 
@@ -3261,13 +3261,13 @@ void preprocess(TokenList &output, const TokenList &rawtokens, vector<string> &f
     macros.insert(make_pair("__TIME__", Macro("__TIME__", getTimeDefine(&ltime), dummy)));
 
     if (!dui.std.empty()) {
-        const cstd_t c_std = simplecpp::getCStd(dui.std);
+        const cstd_t c_std = WadeSpace::PreProcessor::getCStd(dui.std);
         if (c_std != CUnknown) {
-            const string std_def = simplecpp::getCStdString(c_std);
+            const string std_def = WadeSpace::PreProcessor::getCStdString(c_std);
             if (!std_def.empty())
                 macros.insert(make_pair("__STDC_VERSION__", Macro("__STDC_VERSION__", std_def, dummy)));
         } else {
-            const cppstd_t cpp_std = simplecpp::getCppStd(dui.std);
+            const cppstd_t cpp_std = WadeSpace::PreProcessor::getCppStd(dui.std);
             if (cpp_std == CPPUnknown) {
                 if (outputList) {
                     Output err(files);
@@ -3278,7 +3278,7 @@ void preprocess(TokenList &output, const TokenList &rawtokens, vector<string> &f
                 output.clear();
                 return;
             }
-            const string std_def = simplecpp::getCppStdString(cpp_std);
+            const string std_def = WadeSpace::PreProcessor::getCppStdString(cpp_std);
             if (!std_def.empty())
                 macros.insert(make_pair("__cplusplus", Macro("__cplusplus", std_def, dummy)));
         }
@@ -3737,7 +3737,7 @@ string getCStdString(cstd_t std)
 
 string getCStdString(const string &std)
 {
-    return simplecpp::getCStdString(simplecpp::getCStd(std));
+    return WadeSpace::PreProcessor::getCStdString(WadeSpace::PreProcessor::getCStd(std));
 }
 
 cppstd_t getCppStd(const string &std)
@@ -3790,5 +3790,5 @@ string getCppStdString(cppstd_t std)
 
 string getCppStdString(const string &std)
 {
-    return simplecpp::getCppStdString(simplecpp::getCppStd(std));
+    return WadeSpace::PreProcessor::getCppStdString(WadeSpace::PreProcessor::getCppStd(std));
 }
