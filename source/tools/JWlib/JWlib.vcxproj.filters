@@ -15,85 +15,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="c\cmdline.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="c\coffwrt.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="c\convert.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="c\debug.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="c\elfobjs.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="c\error.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="c\idedrv.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="c\ideentry.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="c\idemsgfm.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="c\idemsgpr.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="c\implib.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="c\inlib.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="c\libio.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="c\libwalk.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="c\maindrv.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="c\memfuncs.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="c\omfproc.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="c\omfutil.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="c\orlrtns.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="c\proclib.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="c\symtable.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="c\wlib.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="c\wlibutil.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="c\writelib.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="c\symlist.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\JWlink\c\clibext.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\JWlink\pch.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

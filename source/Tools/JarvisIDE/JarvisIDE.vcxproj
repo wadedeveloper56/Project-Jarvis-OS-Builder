@@ -78,25 +78,25 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>..\..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\bin\intermediate\Jarvis\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>..\Arguments;..\PreProcessor;..\JWccLib;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>..\Arguments;..\PreProcessor;..\JWccLib;..\JWasmLib;..\JWlibLib;..\JWLinkLib;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>..\..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\bin\intermediate\Jarvis\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>..\Arguments;..\PreProcessor;..\JWccLib;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>..\Arguments;..\PreProcessor;..\JWccLib;..\JWasmLib;..\JWlibLib;..\JWLinkLib;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>..\..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\bin\intermediate\Jarvis\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>..\Arguments;..\PreProcessor;..\JWccLib;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>..\Arguments;..\PreProcessor;..\JWccLib;..\JWasmLib;..\JWlibLib;..\JWLinkLib;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>..\..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\bin\intermediate\Jarvis\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>..\Arguments;..\PreProcessor;..\JWccLib;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>..\Arguments;..\PreProcessor;..\JWccLib;..\JWasmLib;..\JWlibLib;..\JWLinkLib;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Manifest>
@@ -300,6 +300,9 @@
     </ProjectReference>
     <ProjectReference Include="..\JWccLib\JWccLib.vcxproj">
       <Project>{55e11707-51c1-4126-9ce7-1d3ef7e9d7f0}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\JWlibLib\JWlibLib.vcxproj">
+      <Project>{f11d345b-1a8b-4e59-bf7d-38b061f7bf90}</Project>
     </ProjectReference>
     <ProjectReference Include="..\JWlinkLib\JWlinkLib.vcxproj">
       <Project>{1054801f-1a40-4a7c-a7d1-303d2a64b79c}</Project>

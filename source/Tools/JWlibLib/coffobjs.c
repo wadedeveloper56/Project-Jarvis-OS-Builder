@@ -28,7 +28,7 @@
 *               DESCRIBE IT HERE!
 *
 ****************************************************************************/
-
+#include "pch.h"
 
 /* This is the raw data for the objects to be output for an AXP import lib */
 char CoffDescrip1[] = {

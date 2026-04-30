@@ -29,7 +29,7 @@
 *
 ****************************************************************************/
 
-
+#include "pch.h"
 #include <windows.h>
 #include "clibint.h"
 #include "main.h"

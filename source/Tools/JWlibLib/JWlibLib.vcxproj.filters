@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="framework.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="pch.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cmdline.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="coffobjs.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="coffwrt.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="convert.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="debug.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="elfobjs.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="error.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="idedrv.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ideentry.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="idemsgfm.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="idemsgpr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="implib.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="inlib.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="libio.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="libwalk.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="memfuncs.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="omfproc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="omfutil.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="orlrtns.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="proclib.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="symlist.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="symtable.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="wlib.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="wlibutil.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="writelib.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
