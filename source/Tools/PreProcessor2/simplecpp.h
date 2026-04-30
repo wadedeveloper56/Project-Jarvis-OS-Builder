@@ -6,46 +6,6 @@
 #ifndef simplecppH
 #define simplecppH
 
-#if defined(_WIN32) || defined(__CYGWIN__) || defined(__MINGW32__)
-#  define SIMPLECPP_WINDOWS
-#endif
-
-#include <cctype>
-#include <cstring>
-#include <iosfwd>
-#include <list>
-#include <map>
-#include <memory>
-#include <set>
-#include <string>
-#include <unordered_map>
-#include <vector>
-
-#ifdef _WIN32
-#  ifdef SIMPLECPP_EXPORT
-#    define SIMPLECPP_LIB __declspec(dllexport)
-#  elif defined(SIMPLECPP_IMPORT)
-#    define SIMPLECPP_LIB __declspec(dllimport)
-#  else
-#    define SIMPLECPP_LIB
-#  endif
-#else
-#  define SIMPLECPP_LIB
-#endif
-
-#ifdef SIMPLECPP_WINDOWS
-#  include <cstdint>
-#else
-#  include <sys/stat.h>
-#endif
-
-#if defined(_MSC_VER)
-#  pragma warning(push)
-// suppress warnings about "conversion from 'type1' to 'type2', possible loss of data"
-#  pragma warning(disable : 4267)
-#  pragma warning(disable : 4244)
-#endif
-
 namespace simplecpp {
     /** C code standard */
     enum cstd_t { CUnknown=-1, C89, C99, C11, C17, C23 };
@@ -60,7 +20,7 @@ namespace simplecpp {
     /**
      * Location in source code
      */
-    class SIMPLECPP_LIB Location {
+    class  Location {
     public:
         explicit Location(const std::vector<std::string> &f) : files(f), fileIndex(0), line(1U), col(0U) {}
 
@@ -106,7 +66,7 @@ namespace simplecpp {
      * token class.
      * @todo don't use std::string representation - for both memory and performance reasons
      */
-    class SIMPLECPP_LIB Token {
+    class  Token {
     public:
         Token(const TokenString &s, const Location &loc, bool wsahead = false) :
             whitespaceahead(wsahead), location(loc), previous(nullptr), next(nullptr), nextcond(nullptr), string(s) {
@@ -188,7 +148,7 @@ namespace simplecpp {
     };
 
     /** Output from preprocessor */
-    struct SIMPLECPP_LIB Output {
+    struct  Output {
         explicit Output(const std::vector<std::string> &files) : type(ERROR), location(files) {}
         enum Type {
             ERROR, /* #error */
@@ -210,7 +170,7 @@ namespace simplecpp {
     typedef std::list<Output> OutputList;
 
     /** List of tokens. */
-    class SIMPLECPP_LIB TokenList {
+    class  TokenList {
     public:
         class Stream;
 
@@ -322,7 +282,7 @@ namespace simplecpp {
     };
 
     /** Tracking how macros are used */
-    struct SIMPLECPP_LIB MacroUsage {
+    struct  MacroUsage {
         explicit MacroUsage(const std::vector<std::string> &f, bool macroValueKnown_) : macroLocation(f), useLocation(f), macroValueKnown(macroValueKnown_) {}
         std::string macroName;
         Location    macroLocation;
@@ -331,7 +291,7 @@ namespace simplecpp {
     };
 
     /** Tracking #if/#elif expressions */
-    struct SIMPLECPP_LIB IfCond {
+    struct  IfCond {
         explicit IfCond(const Location& location, const std::string &E, long long result) : location(location), E(E), result(result) {}
         Location location; // location of #if/#elif
         std::string E; // preprocessed condition
@@ -342,7 +302,7 @@ namespace simplecpp {
      * Command line preprocessor settings.
      * On the command line these are configured by -D, -U, -I, --include, -std
      */
-    struct SIMPLECPP_LIB DUI {
+    struct  DUI {
         DUI() : clearIncludeCache(false), removeComments(false) {}
         std::list<std::string> defines;
         std::set<std::string> undefined;
@@ -353,9 +313,9 @@ namespace simplecpp {
         bool removeComments; /** remove comment tokens from included files */
     };
 
-    SIMPLECPP_LIB long long characterLiteralToLL(const std::string& str);
+     long long characterLiteralToLL(const std::string& str);
 
-    SIMPLECPP_LIB FileDataCache load(const TokenList &rawtokens, std::vector<std::string> &filenames, const DUI &dui, OutputList *outputList = nullptr);
+     FileDataCache load(const TokenList &rawtokens, std::vector<std::string> &filenames, const DUI &dui, OutputList *outputList = nullptr);
 
     /**
      * Preprocess
@@ -369,41 +329,41 @@ namespace simplecpp {
      * @param macroUsage output: macro usage
      * @param ifCond output: #if/#elif expressions
      */
-    SIMPLECPP_LIB void preprocess(TokenList &output, const TokenList &rawtokens, std::vector<std::string> &files, FileDataCache &cache, const DUI &dui, OutputList *outputList = nullptr, std::list<MacroUsage> *macroUsage = nullptr, std::list<IfCond> *ifCond = nullptr);
+     void preprocess(TokenList &output, const TokenList &rawtokens, std::vector<std::string> &files, FileDataCache &cache, const DUI &dui, OutputList *outputList = nullptr, std::list<MacroUsage> *macroUsage = nullptr, std::list<IfCond> *ifCond = nullptr);
 
     /**
      * Deallocate data
      */
-    SIMPLECPP_LIB void cleanup(FileDataCache &cache);
+     void cleanup(FileDataCache &cache);
 
     /** Simplify path */
-    SIMPLECPP_LIB std::string simplifyPath(std::string path);
+     std::string simplifyPath(std::string path);
 
     /** Convert Cygwin path to Windows path */
-    SIMPLECPP_LIB std::string convertCygwinToWindowsPath(const std::string &cygwinPath);
+     std::string convertCygwinToWindowsPath(const std::string &cygwinPath);
 
     /** Returns the C version a given standard */
-    SIMPLECPP_LIB cstd_t getCStd(const std::string &std);
+     cstd_t getCStd(const std::string &std);
 
     /** Returns the C++ version a given standard */
-    SIMPLECPP_LIB cppstd_t getCppStd(const std::string &std);
+     cppstd_t getCppStd(const std::string &std);
 
     /** Returns the __STDC_VERSION__ value for a given standard */
-    SIMPLECPP_LIB std::string getCStdString(const std::string &std);
-    SIMPLECPP_LIB std::string getCStdString(cstd_t std);
+     std::string getCStdString(const std::string &std);
+     std::string getCStdString(cstd_t std);
 
     /** Returns the __cplusplus value for a given standard */
-    SIMPLECPP_LIB std::string getCppStdString(const std::string &std);
-    SIMPLECPP_LIB std::string getCppStdString(cppstd_t std);
+     std::string getCppStdString(const std::string &std);
+     std::string getCppStdString(cppstd_t std);
 
-    struct SIMPLECPP_LIB FileData {
+    struct  FileData {
         /** The canonical filename associated with this data */
         std::string filename;
         /** The tokens associated with this file */
         TokenList tokens;
     };
 
-    class SIMPLECPP_LIB FileDataCache {
+    class  FileDataCache {
     public:
         FileDataCache() = default;
 
@@ -506,9 +466,5 @@ namespace simplecpp {
 
     };
 }
-
-#if defined(_MSC_VER)
-#  pragma warning(pop)
-#endif
 
 #endif
