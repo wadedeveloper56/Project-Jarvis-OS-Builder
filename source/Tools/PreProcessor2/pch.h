@@ -26,19 +26,11 @@
 #include <stack>
 #include <stdexcept>
 #include <string>
-#ifdef SIMPLECPP_WINDOWS
-#  include <mutex>
-#endif
+#include <mutex>
 #include <unordered_map>
 #include <utility>
 #include <vector>
-
-#ifdef _WIN32
-#  include <direct.h>
-#else
-#  include <sys/stat.h>
-#endif
-
+#include <direct.h>
 
 #pragma warning(disable:4267)
 #pragma warning(disable:4244)
