@@ -4,53 +4,22 @@ using namespace std;
 
 namespace WadeSpace::PreProcessor 
 {
-    /** C code standard */
     enum cstd_t { CUnknown=-1, C89, C99, C11, C17, C23 };
-
-    /** C++ code standard */
     enum cppstd_t { CPPUnknown=-1, CPP03, CPP11, CPP14, CPP17, CPP20, CPP23, CPP26 };
 
     typedef string TokenString;
     class Macro;
     class FileDataCache;
 
-    /**
-     * Location in source code
-     */
     class  Location {
     public:
-        explicit Location(const vector<string> &f) : files(f), fileIndex(0), line(1U), col(0U) {}
-
-        Location(const Location &loc) : files(loc.files), fileIndex(loc.fileIndex), line(loc.line), col(loc.col) {}
-
-        Location &operator=(const Location &other) {
-            if (this != &other) {
-                fileIndex = other.fileIndex;
-                line = other.line;
-                col  = other.col;
-            }
-            return *this;
-        }
-
-        /** increment this location by string */
+        Location(const vector<string>& f);
+        Location(const Location& loc);
+        Location& operator=(const Location& other);
         void adjust(const string &str);
-
-        bool operator<(const Location &rhs) const {
-            if (fileIndex != rhs.fileIndex)
-                return fileIndex < rhs.fileIndex;
-            if (line != rhs.line)
-                return line < rhs.line;
-            return col < rhs.col;
-        }
-
-        bool sameline(const Location &other) const {
-            return fileIndex == other.fileIndex && line == other.line;
-        }
-
-        const string& file() const {
-            return fileIndex < files.size() ? files[fileIndex] : emptyFileName;
-        }
-
+        bool operator<(const Location& rhs) const;
+        bool sameline(const Location& other) const;
+        const string& file() const;
         const vector<string> &files;
         unsigned int fileIndex;
         unsigned int line;

@@ -128,26 +128,6 @@ static string replaceAll(string s, const string& from, const string& to)
     return s;
 }
 
-const string Location::emptyFileName;
-
-void Location::adjust(const string &str)
-{
-    if (strpbrk(str.c_str(), "\r\n") == nullptr) {
-        col += (unsigned int)(str.size());
-        return;
-    }
-
-    for (size_t i = 0U; i < str.size(); ++i) {
-        col++;
-        if (str[i] == '\n' || str[i] == '\r') {
-            col = 1;
-            line++;
-            if (str[i] == '\r' && (i+1)<str.size() && str[i+1]=='\n')
-                ++i;
-        }
-    }
-}
-
 bool Token::isOneOf(const char ops[]) const
 {
     return (op != '\0') && (strchr(ops, op) != nullptr);
