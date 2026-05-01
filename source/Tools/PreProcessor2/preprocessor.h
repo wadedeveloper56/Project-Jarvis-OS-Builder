@@ -20,6 +20,14 @@ namespace WadeSpace::PreProcessor
 		unsigned int col;
 	private:
 		static const string emptyFileName;
+	public:
+		Location(const vector<std::string>& f);
+		Location(const Location& loc);
+		Location& operator=(const Location& other);
+		void adjust(const string& str);
+		bool operator<(const Location& rhs) const;
+		bool sameline(const Location& other) const;
+		const string& file() const;
 	};
 
 	class  Token
