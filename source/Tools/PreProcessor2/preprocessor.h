@@ -28,10 +28,6 @@ namespace WadeSpace::PreProcessor
         static const string emptyFileName;
     };
 
-    /**
-     * token class.
-     * @todo don't use string representation - for both memory and performance reasons
-     */
     class  Token {
     public:
         Token(const TokenString& s, const Location& loc, bool wsahead = false);
@@ -68,7 +64,6 @@ namespace WadeSpace::PreProcessor
         Token &operator=(const Token &tok);
     };
 
-    /** Output from preprocessor */
     struct  Output {
         explicit Output(const vector<string> &files) : type(ERROR), location(files) {}
         enum Type {
@@ -90,7 +85,6 @@ namespace WadeSpace::PreProcessor
 
     typedef list<Output> OutputList;
 
-    /** List of tokens. */
     class  TokenList {
     public:
         class Stream;
@@ -202,7 +196,6 @@ namespace WadeSpace::PreProcessor
         vector<string> &files;
     };
 
-    /** Tracking how macros are used */
     struct  MacroUsage {
         explicit MacroUsage(const vector<string> &f, bool macroValueKnown_) : macroLocation(f), useLocation(f), macroValueKnown(macroValueKnown_) {}
         string macroName;
@@ -211,7 +204,6 @@ namespace WadeSpace::PreProcessor
         bool        macroValueKnown;
     };
 
-    /** Tracking #if/#elif expressions */
     struct  IfCond {
         explicit IfCond(const Location& location, const string &E, long long result) : location(location), E(E), result(result) {}
         Location location; // location of #if/#elif
@@ -219,10 +211,6 @@ namespace WadeSpace::PreProcessor
         long long result; // condition result
     };
 
-    /**
-     * Command line preprocessor settings.
-     * On the command line these are configured by -D, -U, -I, --include, -std
-     */
     struct  DUI {
         DUI() : clearIncludeCache(false), removeComments(false) {}
         list<string> defines;
@@ -238,43 +226,24 @@ namespace WadeSpace::PreProcessor
 
      FileDataCache load(const TokenList &rawtokens, vector<string> &filenames, const DUI &dui, OutputList *outputList = nullptr);
 
-    /**
-     * Preprocess
-     * @todo simplify interface
-     * @param output TokenList that receives the preprocessing output
-     * @param rawtokens Raw tokenlist for top sourcefile
-     * @param files internal data of simplecpp
-     * @param cache output from simplecpp::load()
-     * @param dui defines, undefs, and include paths
-     * @param outputList output: list that will receive output messages
-     * @param macroUsage output: macro usage
-     * @param ifCond output: #if/#elif expressions
-     */
      void preprocess(TokenList &output, const TokenList &rawtokens, vector<string> &files, FileDataCache &cache, const DUI &dui, OutputList *outputList = nullptr, list<MacroUsage> *macroUsage = nullptr, list<IfCond> *ifCond = nullptr);
 
-    /**
-     * Deallocate data
-     */
      void cleanup(FileDataCache &cache);
 
-    /** Simplify path */
      string simplifyPath(string path);
 
-    /** Convert Cygwin path to Windows path */
      string convertCygwinToWindowsPath(const string &cygwinPath);
 
-    /** Returns the C version a given standard */
      cstd_t getCStd(const string &std);
 
-    /** Returns the C++ version a given standard */
      cppstd_t getCppStd(const string &std);
 
-    /** Returns the __STDC_VERSION__ value for a given standard */
      string getCStdString(const string &std);
+
      string getCStdString(cstd_t std);
 
-    /** Returns the __cplusplus value for a given standard */
      string getCppStdString(const string &std);
+
      string getCppStdString(cppstd_t std);
 
     struct  FileData {
@@ -659,6 +628,7 @@ namespace WadeSpace::PreProcessor
 #ifdef SIMPLECPP_DEBUG_MACRO_EXPANSION
     string locstring(const Location& loc);
 #endif
+    
     long long stringToLL(const string& s);
     unsigned long long stringToULL(const string& s);
     bool endsWith(const string& s, const string& e);
