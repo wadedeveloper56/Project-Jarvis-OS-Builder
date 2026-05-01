@@ -34,38 +34,15 @@ namespace WadeSpace::PreProcessor
      */
     class  Token {
     public:
-        Token(const TokenString &s, const Location &loc, bool wsahead = false) :
-            whitespaceahead(wsahead), location(loc), previous(nullptr), next(nullptr), nextcond(nullptr), string(s) {
-            flags();
-        }
-
-        Token(const Token &tok) :
-            macro(tok.macro), op(tok.op), comment(tok.comment), name(tok.name), number(tok.number), whitespaceahead(tok.whitespaceahead), location(tok.location), previous(nullptr), next(nullptr), nextcond(nullptr), string(tok.string), mExpandedFrom(tok.mExpandedFrom) {
-        }
-
-        void flags() {
-            name = (isalpha(static_cast<unsigned char>(string[0])) || string[0] == '_' || string[0] == '$')
-                   && (memchr(string.c_str(), '\'', string.size()) == nullptr);
-            comment = string.size() > 1U && string[0] == '/' && (string[1] == '/' || string[1] == '*');
-            number = isNumberLike(string);
-            op = (string.size() == 1U && !name && !comment && !number) ? string[0] : '\0';
-        }
-
-        const TokenString& str() const {
-            return string;
-        }
-        void setstr(const string &s) {
-            string = s;
-            flags();
-        }
-
+        Token(const TokenString& s, const Location& loc, bool wsahead = false);
+        Token(const Token& tok);
+        void flags();
+        const TokenString& str() const;
+        void setstr(const string& s);
         bool isOneOf(const char ops[]) const;
         bool startsWithOneOf(const char c[]) const;
         bool endsWithOneOf(const char c[]) const;
-        static bool isNumberLike(const string& str) {
-            return isdigit(static_cast<unsigned char>(str[0])) ||
-                   (str.size() > 1U && (str[0] == '-' || str[0] == '+') && isdigit(static_cast<unsigned char>(str[1])));
-        }
+        static bool isNumberLike(const string& str);
 
         TokenString macro;
         char op;
@@ -78,37 +55,15 @@ namespace WadeSpace::PreProcessor
         Token *next;
         mutable const Token *nextcond;
 
-        const Token *previousSkipComments() const {
-            const Token *tok = this->previous;
-            while (tok && tok->comment)
-                tok = tok->previous;
-            return tok;
-        }
-
-        const Token *nextSkipComments() const {
-            const Token *tok = this->next;
-            while (tok && tok->comment)
-                tok = tok->next;
-            return tok;
-        }
-
-        void setExpandedFrom(const Token *tok, const Macro* m) {
-            mExpandedFrom = tok->mExpandedFrom;
-            mExpandedFrom.insert(m);
-            if (tok->whitespaceahead)
-                whitespaceahead = true;
-        }
-        bool isExpandedFrom(const Macro* m) const {
-            return mExpandedFrom.find(m) != mExpandedFrom.end();
-        }
-
+        const Token* previousSkipComments() const;
+        const Token* nextSkipComments() const;
+        void setExpandedFrom(const Token* tok, const Macro* m);
+        bool isExpandedFrom(const Macro* m) const;
         void printAll() const;
         void printOut() const;
     private:
         TokenString string;
-
         set<const Macro*> mExpandedFrom;
-
         // Not implemented - prevent assignment
         Token &operator=(const Token &tok);
     };
