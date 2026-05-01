@@ -65,7 +65,6 @@ namespace WadeSpace::PreProcessor
     };
 
     struct  Output {
-        explicit Output(const vector<string> &files) : type(ERROR), location(files) {}
         enum Type {
             ERROR, /* #error */
             WARNING, /* #warning */
@@ -78,7 +77,8 @@ namespace WadeSpace::PreProcessor
             FILE_NOT_FOUND,
             DUI_ERROR
         } type;
-        explicit Output(const vector<string>& files, Type type, const string& msg) : type(type), location(files), msg(msg) {}
+        Output(const vector<string> &files) : type(ERROR), location(files) {}
+        Output(const vector<string>& files, Type type, const string& msg) : type(type), location(files), msg(msg) {}
         Location location;
         string msg;
     };

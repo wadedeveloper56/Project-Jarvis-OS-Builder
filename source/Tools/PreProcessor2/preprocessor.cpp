@@ -1778,7 +1778,7 @@ static string getTimeDefine(const struct tm *timep)
     return string("\"").append(buf).append("\"");
 }
 
-void preprocess(TokenList &output, const TokenList &rawtokens, vector<string> &files, FileDataCache &cache, const DUI &dui, OutputList *outputList, list<MacroUsage> *macroUsage, list<IfCond> *ifCond)
+void WadeSpace::PreProcessor::preprocess(TokenList &output, const TokenList &rawtokens, vector<string> &files, FileDataCache &cache, const DUI &dui, OutputList *outputList, list<MacroUsage> *macroUsage, list<IfCond> *ifCond)
 {
 #ifdef SIMPLECPP_WINDOWS
     if (dui.clearIncludeCache)
