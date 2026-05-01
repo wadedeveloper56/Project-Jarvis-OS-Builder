@@ -110,3 +110,40 @@ string WadeSpace::PreProcessor::replaceAll(string s, const string& from, const s
         s.replace(pos, from.size(), to);
     return s;
 }
+
+bool WadeSpace::PreProcessor::isNameChar(unsigned char ch)
+{
+    return isalnum(ch) || ch == '_' || ch == '$';
+}
+
+string WadeSpace::PreProcessor::escapeString(const string& str)
+{
+    ostringstream ostr;
+    ostr << '\"';
+    for (size_t i = 1U; i < str.size() - 1; ++i)
+    {
+        const char c = str[i];
+        if (c == '\\' || c == '\"' || c == '\'')
+            ostr << '\\';
+        ostr << c;
+    }
+    ostr << '\"';
+    return ostr.str();
+}
+
+void WadeSpace::PreProcessor::portabilityBackslash(OutputList* outputList, const vector<string>& files, const Location& location)
+{
+    if (!outputList)
+        return;
+    Output err(files);
+    err.type = Output::PORTABILITY_BACKSLASH;
+    err.location = location;
+    err.msg = "Combination 'backslash space newline' is not portable.";
+    outputList->push_back(err);
+}
+
+bool WadeSpace::PreProcessor::isStringLiteralPrefix(const string& str)
+{
+    return str == "u" || str == "U" || str == "L" || str == "u8" ||
+        str == "R" || str == "uR" || str == "UR" || str == "LR" || str == "u8R";
+}
