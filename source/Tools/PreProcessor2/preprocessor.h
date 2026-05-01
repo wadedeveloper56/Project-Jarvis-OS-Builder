@@ -386,5 +386,45 @@ namespace WadeSpace::PreProcessor
         id_map_type mIdMap;
 
     };
+
+    bool isHex(const string& s);
+    bool isOct(const string& s);
+    bool isStringLiteral_(const string& s);
+    bool isCharLiteral_(const string& s);
+    extern TokenString DEFINE;
+    extern TokenString UNDEF;
+    extern TokenString INCLUDE;
+    extern TokenString ERROR;
+    extern TokenString WARNING;
+    extern TokenString IF;
+    extern TokenString IFDEF;
+    extern TokenString IFNDEF;
+    extern TokenString DEFINED;
+    extern TokenString ELSE;
+    extern TokenString ELIF;
+    extern TokenString ENDIF;
+    extern TokenString PRAGMA;
+    extern TokenString ONCE;
+    extern TokenString HAS_INCLUDE;
+
+    template<class T> string toString(T t)
+    {
+        // NOLINTNEXTLINE(misc-const-correctness) - false positive
+        ostringstream ostr;
+        ostr << t;
+        return ostr.str();
+    }
+
+#ifdef SIMPLECPP_DEBUG_MACRO_EXPANSION
+    string locstring(const Location& loc);
+#endif
+    long long stringToLL(const string& s);
+    unsigned long long stringToULL(const string& s);
+    bool endsWith(const string& s, const string& e);
+    bool sameline(const Token* tok1, const Token* tok2);
+    bool isAlternativeBinaryOp(const Token* tok, const string& alt);
+    bool isAlternativeUnaryOp(const Token* tok, const string& alt);
+    string replaceAll(string s, const string& from, const string& to);
+
 }
 
