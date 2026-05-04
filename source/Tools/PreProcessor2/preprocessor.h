@@ -33,6 +33,15 @@ namespace WadeSpace::PreProcessor
 	class  Token
 	{
 	public:
+		Token(const TokenString& s, const Location& loc, bool wsahead = false);
+		Token(const Token& tok);
+		void flags();
+		const TokenString& str() const;
+		void setstr(const string& s);
+		bool isOneOf(const char ops[]) const;
+		bool startsWithOneOf(const char c[]) const;
+		bool endsWithOneOf(const char c[]) const;
+		static bool isNumberLike(const string& str);
 		TokenString macro;
 		char op;
 		bool comment;
@@ -43,9 +52,15 @@ namespace WadeSpace::PreProcessor
 		Token* previous;
 		Token* next;
 		mutable const Token* nextcond;
+		const Token* previousSkipComments() const;
+		const Token* nextSkipComments() const;
+		void setExpandedFrom(const Token* tok, const Macro* m);
+		bool isExpandedFrom(const Macro* m) const;
+		void printAll() const;
+		void printOut() const;
 	private:
 		TokenString string;
-		set<const Macro*> mExpandedFrom;
+		std::set<const Macro*> mExpandedFrom;
 		// Not implemented - prevent assignment
 		Token& operator=(const Token& tok);
 	};
@@ -54,8 +69,8 @@ namespace WadeSpace::PreProcessor
 	{
 	public:
 		class Stream;
-	}; 
-	
+	};
+
 	struct  Output
 	{
 		enum Type
@@ -77,7 +92,8 @@ namespace WadeSpace::PreProcessor
 
 	typedef list<Output> OutputList;
 
-	struct DUI {
+	struct DUI
+	{
 		list<string> defines;
 		set<string> undefined;
 		list<string> includePaths;
@@ -87,12 +103,14 @@ namespace WadeSpace::PreProcessor
 		bool removeComments;
 	};
 
-	struct FileData {
+	struct FileData
+	{
 		string filename;
 		TokenList tokens;
 	};
 
-	class FileDataCache {
+	class FileDataCache
+	{
 		typedef vector<unique_ptr<FileData>> container_type;
 		typedef container_type::iterator iterator;
 		typedef container_type::const_iterator const_iterator;
@@ -118,7 +136,7 @@ namespace WadeSpace::PreProcessor
 			struct Hasher
 			{
 				size_t operator()(const FileID& id) const {
-					return static_cast<size_t>(id.fileIdInfo.FileId.IdentifierHi ^ id.fileIdInfo.FileId.IdentifierLo ^	id.fileIdInfo.VolumeSerialNumber);
+					return static_cast<size_t>(id.fileIdInfo.FileId.IdentifierHi ^ id.fileIdInfo.FileId.IdentifierLo ^ id.fileIdInfo.VolumeSerialNumber);
 				}
 			};
 		};
@@ -130,7 +148,8 @@ namespace WadeSpace::PreProcessor
 		id_map_type mIdMap;
 	};
 
-	struct IfCond {
+	struct IfCond
+	{
 		Location location;
 		string E;
 		long long result;
@@ -156,5 +175,7 @@ namespace WadeSpace::PreProcessor
 
 	class FileStream : public TokenList::Stream
 	{};
+
+	bool sameline(const Token* tok1, const Token* tok2);
 }
 
