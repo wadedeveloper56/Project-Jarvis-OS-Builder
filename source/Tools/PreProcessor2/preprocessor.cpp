@@ -4,6 +4,22 @@
 using namespace std;
 using namespace WadeSpace::PreProcessor;
 
+TokenString DEFINE("define");
+TokenString UNDEF("undef");
+TokenString INCLUDE("include");
+TokenString ERROR("error");
+TokenString WARNING("warning");
+TokenString IF("if");
+TokenString IFDEF("ifdef");
+TokenString IFNDEF("ifndef");
+TokenString DEFINED("defined");
+TokenString ELSE("else");
+TokenString ELIF("elif");
+TokenString ENDIF("endif");
+TokenString PRAGMA("pragma");
+TokenString ONCE("once");
+TokenString HAS_INCLUDE("__has_include");
+
 bool sameline(const Token* tok1, const Token* tok2)
 {
     return tok1 && tok2 && tok1->location.sameline(tok2->location);
@@ -121,3 +137,116 @@ bool isFloatSuffix(const Token* tok)
     return c == 'f' || c == 'l';
 }
 
+#ifdef SIMPLECPP_WINDOWS
+bool isAbsolutePath(const std::string& path)
+{
+    if (path.length() >= 3 && path[0] > 0 && std::isalpha(path[0]) && path[1] == ':' && (path[2] == '\\' || path[2] == '/'))
+        return true;
+    return path.length() > 1U && (path[0] == '/' || path[0] == '\\');
+}
+#else
+bool isAbsolutePath(const std::string& path)
+{
+    return path.length() > 1U && path[0] == '/';
+}
+#endif
+
+std::string WadeSpace::PreProcessor::simplifyPath(std::string path)
+{
+    if (path.empty())
+        return path;
+
+    std::string::size_type pos;
+
+    // replace backslash separators
+    std::replace(path.begin(), path.end(), '\\', '/');
+
+    const bool unc(path.compare(0, 2, "//") == 0);
+
+    // replace "//" with "/"
+    pos = 0;
+    while ((pos = path.find("//", pos)) != std::string::npos)
+    {
+        path.erase(pos, 1);
+    }
+
+    // remove "./"
+    pos = 0;
+    while ((pos = path.find("./", pos)) != std::string::npos)
+    {
+        if (pos == 0 || path[pos - 1U] == '/')
+            path.erase(pos, 2);
+        else
+            pos += 2;
+    }
+
+    // remove trailing dot if path ends with "/."
+    if (endsWith(path, "/."))
+        path.erase(path.size() - 1);
+
+    // simplify ".."
+    pos = 1; // don't simplify ".." if path starts with that
+    while ((pos = path.find("/..", pos)) != std::string::npos)
+    {
+        // not end of path, then string must be "/../"
+        if (pos + 3 < path.size() && path[pos + 3] != '/')
+        {
+            ++pos;
+            continue;
+        }
+        // get previous subpath
+        std::string::size_type pos1 = path.rfind('/', pos - 1U);
+        if (pos1 == std::string::npos)
+        {
+            pos1 = 0;
+        }
+        else
+        {
+            pos1 += 1U;
+        }
+        const std::string previousSubPath = path.substr(pos1, pos - pos1);
+        if (previousSubPath == "..")
+        {
+            // don't simplify
+            ++pos;
+        }
+        else
+        {
+            // remove previous subpath and ".."
+            path.erase(pos1, pos - pos1 + 4);
+            if (path.empty())
+                path = ".";
+            // update pos
+            pos = (pos1 == 0) ? 1 : (pos1 - 1);
+        }
+    }
+
+    // Remove trailing '/'?
+    //if (path.size() > 1 && endsWith(path, "/"))
+    //    path.erase(path.size()-1);
+
+    if (unc)
+        path = '/' + path;
+
+    return path;
+}
+
+std::string dirPath(const std::string& path, bool withTrailingSlash = true)
+{
+    const std::size_t lastSlash = path.find_last_of("\\/");
+    if (lastSlash == std::string::npos)
+    {
+        return "";
+    }
+    return path.substr(0, lastSlash + (withTrailingSlash ? 1U : 0U));
+}
+
+bool isStringLiteral_(const std::string& s)
+{
+    return s.size() > 1 && (s[0] == '\"') && (*s.rbegin() == '\"');
+}
+
+bool isCharLiteral_(const std::string& s)
+{
+    return s.size() > 1 && (s[0] == '\'') && (*s.rbegin() == '\'');
+}

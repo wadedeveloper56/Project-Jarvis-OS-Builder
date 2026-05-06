@@ -41,5 +41,11 @@
     <ClCompile Include="TokenList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="FileDataCache.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Macro.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

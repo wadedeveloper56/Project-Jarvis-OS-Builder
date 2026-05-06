@@ -143,6 +143,7 @@ namespace WadeSpace::PreProcessor
 
 	struct DUI
 	{
+		DUI() : clearIncludeCache(false), removeComments(false) {}
 		list<string> defines;
 		set<string> undefined;
 		list<string> includePaths;
@@ -160,13 +161,30 @@ namespace WadeSpace::PreProcessor
 
 	class FileDataCache
 	{
-		typedef vector<unique_ptr<FileData>> container_type;
+	public:
+		FileDataCache() = default;
+		FileDataCache(const FileDataCache&) = delete;
+		FileDataCache(FileDataCache&&) = default;
+		FileDataCache& operator=(const FileDataCache&) = delete;
+		FileDataCache& operator=(FileDataCache&&) = default;
+		std::pair<FileData*, bool> get(const std::string& sourcefile, const std::string& header, const DUI& dui, bool systemheader, std::vector<std::string>& filenames, OutputList* outputList);
+		void insert(FileData data);
+		void clear();
+		typedef std::vector<std::unique_ptr<FileData>> container_type;
 		typedef container_type::iterator iterator;
 		typedef container_type::const_iterator const_iterator;
 		typedef container_type::size_type size_type;
+		size_type size() const;
+		iterator begin();
+		iterator end();
+		const_iterator begin2() const;
+		const_iterator end2() const;
+		const_iterator cbegin() const;
+		const_iterator cend() const;
 	private:
 		struct FileID
 		{
+#ifdef SIMPLECPP_WINDOWS
 			struct
 			{
 				uint64_t VolumeSerialNumber;
@@ -177,21 +195,22 @@ namespace WadeSpace::PreProcessor
 				} FileId;
 			} fileIdInfo;
 
-			bool operator==(const FileID& that) const noexcept {
-				return fileIdInfo.VolumeSerialNumber == that.fileIdInfo.VolumeSerialNumber &&
-					fileIdInfo.FileId.IdentifierHi == that.fileIdInfo.FileId.IdentifierHi &&
-					fileIdInfo.FileId.IdentifierLo == that.fileIdInfo.FileId.IdentifierLo;
-			}
+			bool operator==(const FileID& that) const noexcept;
+#else
+			dev_t dev;
+			ino_t ino;
+
+			bool operator==(const FileID& that) const noexcept;
+#endif
 			struct Hasher
 			{
-				size_t operator()(const FileID& id) const {
-					return static_cast<size_t>(id.fileIdInfo.FileId.IdentifierHi ^ id.fileIdInfo.FileId.IdentifierLo ^ id.fileIdInfo.VolumeSerialNumber);
-				}
+				std::size_t operator()(const FileID& id) const;
 			};
 		};
-
-		using name_map_type = unordered_map<string, FileData*>;
-		using id_map_type = unordered_map<FileID, FileData*, FileID::Hasher>;
+		using name_map_type = std::unordered_map<std::string, FileData*>;
+		using id_map_type = std::unordered_map<FileID, FileData*, FileID::Hasher>;
+		static bool getFileId(const std::string& path, FileID& id);
+		std::pair<FileData*, bool> tryload(name_map_type::iterator& name_it, const DUI& dui, std::vector<std::string>& filenames, OutputList* outputList);
 		container_type mData;
 		name_map_type mNameMap;
 		id_map_type mIdMap;
@@ -205,10 +224,103 @@ namespace WadeSpace::PreProcessor
 	};
 
 	struct MacroUsage
-	{};
+	{
+		MacroUsage(const std::vector<std::string>& f, bool macroValueKnown_) : macroLocation(f), useLocation(f), macroValueKnown(macroValueKnown_) {}
+		std::string macroName;
+		Location    macroLocation;
+		Location    useLocation;
+		bool        macroValueKnown;
+	};
 
-	class Macro
-	{};
+    using MacroMap = std::unordered_map<TokenString, Macro>;
+
+    class Macro
+    {
+    public:
+        Macro(std::vector<std::string>& f);
+        Macro(const Token* tok, std::vector<std::string>& f);
+        Macro(const std::string& name, const std::string& value, std::vector<std::string>& f);
+        Macro(const Macro& other);
+        ~Macro();
+        Macro& operator=(const Macro& other);
+        bool valueDefinedInCode() const;
+        const Token* expand(TokenList* const output, const Token* rawtok, const MacroMap& macros, std::vector<std::string>& inputFiles) const;
+        const TokenString& name() const;
+        const Location& defineLocation() const;
+        const std::list<Location>& usage() const;
+        bool functionLike() const;
+
+        struct Error
+        {
+            Error(const Location& loc, const std::string& s) : location(loc), what(s) {}
+            const Location location;
+            const std::string what;
+        };
+
+        /** Struct that is thrown when macro is expanded with wrong number of parameters */
+        struct wrongNumberOfParameters : public Error
+        {
+            wrongNumberOfParameters(const Location& loc, const std::string& macroName) : Error(loc, "Wrong number of parameters for macro \'" + macroName + "\'.") {}
+        };
+
+        /** Struct that is thrown when there is invalid ## usage */
+        struct invalidHashHash : public Error
+        {
+            static inline std::string format(const std::string& macroName, const std::string& message) {
+                return "Invalid ## usage when expanding \'" + macroName + "\': " + message;
+            }
+
+            invalidHashHash(const Location& loc, const std::string& macroName, const std::string& message)
+                : Error(loc, format(macroName, message)) {}
+
+            static inline invalidHashHash unexpectedToken(const Location& loc, const std::string& macroName, const Token* tokenA) {
+                return invalidHashHash(loc, macroName, "Unexpected token '" + tokenA->str() + "'");
+            }
+
+            static inline invalidHashHash cannotCombine(const Location& loc, const std::string& macroName, const Token* tokenA, const Token* tokenB) {
+                return invalidHashHash(loc, macroName, "Combining '" + tokenA->str() + "' and '" + tokenB->str() + "' yields an invalid token.");
+            }
+
+            static inline invalidHashHash unexpectedNewline(const Location& loc, const std::string& macroName) {
+                return invalidHashHash(loc, macroName, "Unexpected newline");
+            }
+
+            static inline invalidHashHash universalCharacterUB(const Location& loc, const std::string& macroName, const Token* tokenA, const std::string& strAB) {
+                return invalidHashHash(loc, macroName, "Combining '\\" + tokenA->str() + "' and '" + strAB.substr(tokenA->str().size()) + "' yields universal character '\\" + strAB + "'. This is undefined behavior according to C standard chapter 5.1.1.2, paragraph 4.");
+            }
+        };
+    private:
+        Token* newMacroToken(const TokenString& str, const Location& loc, bool replaced, const Token* expandedFromToken = nullptr) const;
+        bool parseDefine(const Token* nametoken);
+        unsigned int getArgNum(const TokenString& str) const;
+        std::vector<const Token*> getMacroParameters(const Token* nameTokInst, bool calledInDefine) const;
+        const Token* appendTokens(TokenList* tokens,
+            const Location& rawloc,
+            const Token* const lpar,
+            const MacroMap& macros,
+            const std::set<TokenString>& expandedmacros,
+            const std::vector<const Token*>& parametertokens) const;
+		const Token* expand(TokenList* const output, const Location& loc, const Token* const nameTokInst, const MacroMap& macros, std::set<TokenString> expandedmacros) const;
+		const Token* recursiveExpandToken(TokenList* output, TokenList& temp, const Location& loc, const Token* tok, const MacroMap& macros, const std::set<TokenString>& expandedmacros, const std::vector<const Token*>& parametertokens) const;
+		const Token* expandToken(TokenList* output, const Location& loc, const Token* tok, const MacroMap& macros, const std::set<TokenString>& expandedmacros, const std::vector<const Token*>& parametertokens) const;
+		bool expandArg(TokenList* output, const Token* tok, const std::vector<const Token*>& parametertokens) const;
+		bool expandArg(TokenList* output, const Token* tok, const Location& loc, const MacroMap& macros, const std::set<TokenString>& expandedmacros, const std::vector<const Token*>& parametertokens) const;
+		const Token* expandHash(TokenList* output, const Location& loc, const Token* tok, const std::set<TokenString>& expandedmacros, const std::vector<const Token*>& parametertokens) const;
+		const Token* expandHashHash(TokenList* output, const Location& loc, const Token* tok, const MacroMap& macros, const std::set<TokenString>& expandedmacros, const std::vector<const Token*>& parametertokens, bool expandResult = true) const;
+		static bool isReplaced(const std::set<std::string>& expandedmacros);
+        const Token* nameTokDef;
+        std::vector<TokenString> args;
+        const Token* valueToken;
+        const Token* endToken;
+        std::vector<std::string>& files;
+        TokenList tokenListDefine;
+        mutable std::list<Location> usageList;
+        bool variadic;
+        bool variadicOpt;
+        const TokenList* optExpandValue;
+        const TokenList* optNoExpandValue;
+        bool valueDefinedInCode_;
+    };
 
 	class NonExistingFilesCache
 	{};
@@ -459,7 +571,28 @@ namespace WadeSpace::PreProcessor
 		return ostr.str();
 	}
 
-	bool isHex(const string& s);
+    extern TokenString DEFINE;
+    extern TokenString UNDEF;
+
+    extern TokenString INCLUDE;
+
+    extern TokenString ERROR;
+    extern TokenString WARNING;
+
+    extern TokenString IF;
+    extern TokenString IFDEF;
+    extern TokenString IFNDEF;
+    extern TokenString DEFINED;
+    extern TokenString ELSE;
+    extern TokenString ELIF;
+    extern TokenString ENDIF;
+
+    extern TokenString PRAGMA;
+    extern TokenString ONCE;
+
+    extern TokenString HAS_INCLUDE;
+
+    bool isHex(const string& s);
 	bool isOct(const string& s);
 	bool sameline(const Token* tok1, const Token* tok2);
 	long long stringToLL(const std::string& s);
@@ -474,6 +607,10 @@ namespace WadeSpace::PreProcessor
 	string escapeString(const std::string& str);
 	bool isStringLiteralPrefix(const std::string& str);
 	bool isFloatSuffix(const Token* tok);
-
+	bool isAbsolutePath(const std::string& path);
+	std::string simplifyPath(std::string path);
+	std::string dirPath(const std::string& path, bool withTrailingSlash = true);
+	bool isStringLiteral_(const std::string& s);
+	bool isCharLiteral_(const std::string& s);
 }
 
