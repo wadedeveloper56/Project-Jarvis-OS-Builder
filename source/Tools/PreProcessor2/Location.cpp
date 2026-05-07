@@ -4,6 +4,8 @@
 using namespace std;
 using namespace WadeSpace::PreProcessor;
 
+const string Location::emptyFileName;
+
 Location::Location(const vector<string>& f) : files(f), fileIndex(0), line(1U), col(0U) {
 }
 

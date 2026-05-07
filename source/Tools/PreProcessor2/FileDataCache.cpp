@@ -4,7 +4,7 @@
 using namespace std;
 using namespace WadeSpace::PreProcessor;
 
-std::pair<FileData*, bool> FileDataCache::get(const std::string& sourcefile, const std::string& header, const DUI& dui, bool systemheader, std::vector<std::string>& filenames, OutputList* outputList)
+pair<FileData*, bool> FileDataCache::get(const string& sourcefile, const string& header, const DUI& dui, bool systemheader, vector<string>& filenames, OutputList* outputList)
 {
 	if (isAbsolutePath(header))
 	{
@@ -66,7 +66,7 @@ std::pair<FileData*, bool> FileDataCache::get(const std::string& sourcefile, con
 }
 
 void FileDataCache::insert(FileData data) {
-	FileData* const newdata = new FileData(std::move(data));
+	FileData* const newdata = new FileData(move(data));
 
 	mData.emplace_back(newdata);
 	mNameMap.emplace(newdata->filename, newdata);
@@ -112,16 +112,16 @@ bool FileDataCache::FileID::operator==(const FileID& that) const noexcept {
 		fileIdInfo.FileId.IdentifierLo == that.fileIdInfo.FileId.IdentifierLo;
 }
 
-std::size_t FileDataCache::FileID::Hasher::operator()(const FileDataCache::FileID& id) const {
+size_t FileDataCache::FileID::Hasher::operator()(const FileDataCache::FileID& id) const {
 #ifdef SIMPLECPP_WINDOWS
-	return static_cast<std::size_t>(id.fileIdInfo.FileId.IdentifierHi ^ id.fileIdInfo.FileId.IdentifierLo ^
+	return static_cast<size_t>(id.fileIdInfo.FileId.IdentifierHi ^ id.fileIdInfo.FileId.IdentifierLo ^
 		id.fileIdInfo.VolumeSerialNumber);
 #else
-	return static_cast<std::size_t>(id.dev) ^ static_cast<std::size_t>(id.ino);
+	return static_cast<size_t>(id.dev) ^ static_cast<size_t>(id.ino);
 #endif
 }
 
-bool FileDataCache::getFileId(const std::string& path, FileID& id)
+bool FileDataCache::getFileId(const string& path, FileID& id)
 {
 #ifdef SIMPLECPP_WINDOWS
 	HANDLE hFile = CreateFileA(path.c_str(), 0, FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
@@ -147,9 +147,9 @@ bool FileDataCache::getFileId(const std::string& path, FileID& id)
 #endif
 }
 
-pair<FileData*, bool> FileDataCache::tryload(FileDataCache::name_map_type::iterator& name_it, const DUI& dui, std::vector<std::string>& filenames, OutputList* outputList)
+pair<FileData*, bool> FileDataCache::tryload(FileDataCache::name_map_type::iterator& name_it, const DUI& dui, vector<string>& filenames, OutputList* outputList)
 {
-	const std::string& path = name_it->first;
+	const string& path = name_it->first;
 	FileID fileId;
 
 	if (!getFileId(path, fileId))
@@ -162,7 +162,7 @@ pair<FileData*, bool> FileDataCache::tryload(FileDataCache::name_map_type::itera
 		return { id_it->second, false };
 	}
 
-	std::ifstream f(path);
+	ifstream f(path);
 	FileData* const data = new FileData{ path, TokenList(f, filenames, path, outputList) };
 
 	if (dui.removeComments)

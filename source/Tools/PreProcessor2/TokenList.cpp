@@ -6,28 +6,28 @@ using namespace WadeSpace::PreProcessor;
 
 TokenList::TokenList(vector<string>& filenames) : frontToken(nullptr), backToken(nullptr), files(filenames) {}
 
-TokenList::TokenList(istream& istr, vector<std::string>& filenames, const string& filename, OutputList* outputList)
+TokenList::TokenList(istream& istr, vector<string>& filenames, const string& filename, OutputList* outputList)
 	: frontToken(nullptr), backToken(nullptr), files(filenames)
 {
 	StdIStream stream(istr);
 	readfile(stream, filename, outputList);
 }
 
-TokenList::TokenList(const unsigned char* data, std::size_t size, std::vector<std::string>& filenames, const std::string& filename, OutputList* outputList)
+TokenList::TokenList(const unsigned char* data, size_t size, vector<string>& filenames, const string& filename, OutputList* outputList)
 	: frontToken(nullptr), backToken(nullptr), files(filenames)
 {
 	StdCharBufStream stream(data, size);
 	readfile(stream, filename, outputList);
 }
 
-TokenList::TokenList(const char* data, std::size_t size, std::vector<std::string>& filenames, const std::string& filename, OutputList* outputList)
+TokenList::TokenList(const char* data, size_t size, vector<string>& filenames, const string& filename, OutputList* outputList)
 	: frontToken(nullptr), backToken(nullptr), files(filenames)
 {
 	StdCharBufStream stream(reinterpret_cast<const unsigned char*>(data), size);
 	readfile(stream, filename, outputList);
 }
 
-TokenList::TokenList(const std::string& filename, std::vector<std::string>& filenames, OutputList* outputList)
+TokenList::TokenList(const string& filename, vector<string>& filenames, OutputList* outputList)
 	: frontToken(nullptr), backToken(nullptr), files(filenames)
 {
 	try
@@ -48,7 +48,7 @@ TokenList::TokenList(const TokenList& other) : frontToken(nullptr), backToken(nu
 
 TokenList::TokenList(TokenList&& other) : frontToken(nullptr), backToken(nullptr), files(other.files)
 {
-	*this = std::move(other);
+	*this = move(other);
 }
 
 TokenList::~TokenList()
@@ -79,7 +79,7 @@ TokenList& TokenList::operator=(TokenList&& other)
 		backToken = other.backToken;
 		other.backToken = nullptr;
 		files = other.files;
-		sizeOfType = std::move(other.sizeOfType);
+		sizeOfType = move(other.sizeOfType);
 	}
 	return *this;
 }
@@ -202,7 +202,7 @@ void TokenList::readfile(Stream& stream, const string& filename, OutputList* out
 				oldLastToken = cback();
 				if (!isLastLinePreprocessor())
 					continue;
-				const std::string lastline(lastLine());
+				const string lastline(lastLine());
 				if (lastline == "# file %str%")
 				{
 					const Token* strtok = cback();
@@ -271,7 +271,7 @@ void TokenList::readfile(Stream& stream, const string& filename, OutputList* out
 		// number or name
 		if (isNameChar(ch))
 		{
-			const bool num = !!std::isdigit(ch);
+			const bool num = !!isdigit(ch);
 			while (stream.good() && isNameChar(ch))
 			{
 				currentToken += ch;
@@ -311,7 +311,7 @@ void TokenList::readfile(Stream& stream, const string& filename, OutputList* out
 					else
 					{
 						const TokenString check_portability = currentToken + tmp;
-						const std::string::size_type pos = check_portability.find_last_not_of(" \t");
+						const string::size_type pos = check_portability.find_last_not_of(" \t");
 						if (pos < check_portability.size() - 1U && check_portability[pos] == '\\')
 							portabilityBackslash(outputList, files, location);
 						++multiline;
@@ -342,8 +342,8 @@ void TokenList::readfile(Stream& stream, const string& filename, OutputList* out
 			}
 			// multiline..
 
-			std::string::size_type pos = 0;
-			while ((pos = currentToken.find("\\\n", pos)) != std::string::npos)
+			string::size_type pos = 0;
+			while ((pos = currentToken.find("\\\n", pos)) != string::npos)
 			{
 				currentToken.erase(pos, 2);
 				++multiline;
@@ -351,7 +351,7 @@ void TokenList::readfile(Stream& stream, const string& filename, OutputList* out
 			if (multiline || isLastLinePreprocessor())
 			{
 				pos = 0;
-				while ((pos = currentToken.find('\n', pos)) != std::string::npos)
+				while ((pos = currentToken.find('\n', pos)) != string::npos)
 				{
 					currentToken.erase(pos, 1);
 					++multiline;
@@ -362,7 +362,7 @@ void TokenList::readfile(Stream& stream, const string& filename, OutputList* out
 		// string / char literal
 		else if (ch == '\"' || ch == '\'')
 		{
-			std::string prefix;
+			string prefix;
 			if (cback() && cback()->name && isStringLiteralPrefix(cback()->str()) &&
 				((cback()->location.col + cback()->str().size()) == location.col) &&
 				(cback()->location.line == location.line))
@@ -372,7 +372,7 @@ void TokenList::readfile(Stream& stream, const string& filename, OutputList* out
 			// C++11 raw string literal
 			if (ch == '\"' && !prefix.empty() && *cback()->str().rbegin() == 'R')
 			{
-				std::string delim;
+				string delim;
 				currentToken = ch;
 				prefix.resize(prefix.size() - 1);
 				ch = stream.readChar();
@@ -393,7 +393,7 @@ void TokenList::readfile(Stream& stream, const string& filename, OutputList* out
 					}
 					return;
 				}
-				const std::string endOfRawString(')' + delim + currentToken);
+				const string endOfRawString(')' + delim + currentToken);
 				while (stream.good() && !(endsWith(currentToken, endOfRawString) && currentToken.size() > 1))
 					currentToken += stream.readChar();
 				if (!endsWith(currentToken, endOfRawString))
@@ -413,7 +413,7 @@ void TokenList::readfile(Stream& stream, const string& filename, OutputList* out
 				currentToken.insert(0, prefix);
 				back()->setstr(currentToken);
 				location.adjust(currentToken);
-				if (currentToken.find_first_of("\r\n") == std::string::npos)
+				if (currentToken.find_first_of("\r\n") == string::npos)
 					location.col += (unsigned int)(2 + 2 * delim.size());
 				else
 					location.col += (unsigned int)(1 + delim.size());
@@ -426,17 +426,17 @@ void TokenList::readfile(Stream& stream, const string& filename, OutputList* out
 				// Error is reported by readUntil()
 				return;
 
-			std::string s = currentToken;
-			std::string::size_type pos;
+			string s = currentToken;
+			string::size_type pos;
 			int newlines = 0;
-			while ((pos = s.find_first_of("\r\n")) != std::string::npos)
+			while ((pos = s.find_first_of("\r\n")) != string::npos)
 			{
 				s.erase(pos, 1);
 				newlines++;
 			}
 
 			if (prefix.empty())
-				push_back(new Token(s, location, !!std::isspace(stream.peekChar()))); // push string without newlines
+				push_back(new Token(s, location, !!isspace(stream.peekChar()))); // push string without newlines
 			else
 				back()->setstr(prefix + s);
 
@@ -471,7 +471,7 @@ void TokenList::readfile(Stream& stream, const string& filename, OutputList* out
 			}
 		}
 
-		push_back(new Token(currentToken, location, !!std::isspace(stream.peekChar())));
+		push_back(new Token(currentToken, location, !!isspace(stream.peekChar())));
 
 		if (multiline)
 			location.col += (unsigned int)(currentToken.size());
@@ -587,7 +587,7 @@ const vector<string>& TokenList::getFiles() const {
 
 void TokenList::combineOperators()
 {
-	std::stack<bool> executableScope;
+	stack<bool> executableScope;
 	executableScope.push(false);
 	for (Token* tok = front(); tok; tok = tok->next)
 	{
@@ -623,7 +623,7 @@ void TokenList::combineOperators()
 				continue;
 			}
 			// float literals..
-			if (tok->previous && tok->previous->number && sameline(tok->previous, tok) && tok->previous->str().find_first_of("._") == std::string::npos)
+			if (tok->previous && tok->previous->number && sameline(tok->previous, tok) && tok->previous->str().find_first_of("._") == string::npos)
 			{
 				tok->setstr(tok->previous->str() + '.');
 				deleteToken(tok->previous);
@@ -740,8 +740,8 @@ void TokenList::combineOperators()
 	}
 }
 
-static const std::string COMPL("compl");
-static const std::string NOT("not");
+static const string COMPL("compl");
+static const string NOT("not");
 
 void TokenList::constFoldUnaryNotPosNeg(Token* tok)
 {
@@ -801,10 +801,10 @@ void TokenList::constFoldMulDivRem(Token* tok)
 		{
 			const long long rhs = stringToLL(tok->next->str());
 			if (rhs == 0)
-				throw std::overflow_error("division/modulo by zero");
+				throw overflow_error("division/modulo by zero");
 			const long long lhs = stringToLL(tok->previous->str());
-			if (rhs == -1 && lhs == std::numeric_limits<long long>::min())
-				throw std::overflow_error("division overflow");
+			if (rhs == -1 && lhs == numeric_limits<long long>::min())
+				throw overflow_error("division overflow");
 			if (tok->op == '/')
 				result = (lhs / rhs);
 			else
@@ -868,7 +868,7 @@ void TokenList::constFoldShift(Token* tok)
 	}
 }
 
-static const std::string NOTEQ("not_eq");
+static const string NOTEQ("not_eq");
 void TokenList::constFoldComparison(Token* tok)
 {
 	for (; tok && tok->op != ')'; tok = tok->next)
@@ -906,15 +906,15 @@ void TokenList::constFoldComparison(Token* tok)
 	}
 }
 
-static const std::string BITAND("bitand");
-static const std::string BITOR("bitor");
-static const std::string XOR("xor");
+static const string BITAND("bitand");
+static const string BITOR("bitor");
+static const string XOR("xor");
 void TokenList::constFoldBitwise(Token* tok)
 {
 	Token* const tok1 = tok;
 	for (const char* op = "&^|"; *op; op++)
 	{
-		const std::string* alternativeOp;
+		const string* alternativeOp;
 		if (*op == '&')
 			alternativeOp = &BITAND;
 		else if (*op == '|')
@@ -944,8 +944,8 @@ void TokenList::constFoldBitwise(Token* tok)
 	}
 }
 
-static const std::string AND("and");
-static const std::string OR("or");
+static const string AND("and");
+static const string OR("or");
 void TokenList::constFoldLogicalOp(Token* tok)
 {
 	for (; tok && tok->op != ')'; tok = tok->next)
@@ -986,7 +986,7 @@ void TokenList::constFoldQuestionOp(Token** tok1)
 		if (tok->str() != "?")
 			continue;
 		if (!tok->previous || !tok->next || !tok->next->next)
-			throw std::runtime_error("invalid expression");
+			throw runtime_error("invalid expression");
 		if (!tok->previous->number)
 			continue;
 		if (tok->next->next->op != ':')
@@ -995,7 +995,7 @@ void TokenList::constFoldQuestionOp(Token** tok1)
 		Token* const trueTok = tok->next;
 		Token* const falseTok = trueTok->next->next;
 		if (!falseTok)
-			throw std::runtime_error("invalid expression");
+			throw runtime_error("invalid expression");
 		if (condTok == *tok1)
 			*tok1 = (condTok->str() != "0" ? trueTok : falseTok);
 		deleteToken(condTok->next); // ?
@@ -1008,7 +1008,7 @@ void TokenList::constFoldQuestionOp(Token** tok1)
 
 string TokenList::readUntil(Stream& stream, const Location& location, const char start, const char end, OutputList* outputList)
 {
-	std::string ret;
+	string ret;
 	ret += start;
 
 	bool backslash = false;
@@ -1054,7 +1054,7 @@ string TokenList::readUntil(Stream& stream, const Location& location, const char
 			Output err(files);
 			err.type = Output::SYNTAX_ERROR;
 			err.location = location;
-			err.msg = std::string("No pair for character (") + start + "). Can't process file. File is either invalid or unicode, which is currently not supported.";
+			err.msg = string("No pair for character (") + start + "). Can't process file. File is either invalid or unicode, which is currently not supported.";
 			outputList->push_back(err);
 		}
 		return "";
@@ -1106,10 +1106,10 @@ string TokenList::lastLine(int maxsize) const
 		else
 		{
 			ret += tok->str();
-			std::reverse(ret.end() - tok->str().length(), ret.end());
+			reverse(ret.end() - tok->str().length(), ret.end());
 		}
 	}
-	std::reverse(ret.begin(), ret.end());
+	reverse(ret.begin(), ret.end());
 	return ret;
 }
 
@@ -1136,7 +1136,7 @@ bool TokenList::isLastLinePreprocessor(int maxsize) const
 	return prevTok && prevTok->op == '#';
 }
 
-unsigned int TokenList::fileIndex(const std::string& filename)
+unsigned int TokenList::fileIndex(const string& filename)
 {
 	for (unsigned int i = 0; i < files.size(); ++i)
 	{

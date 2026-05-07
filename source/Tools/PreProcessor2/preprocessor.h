@@ -1,5 +1,7 @@
 #pragma once
 
+#include <mutex>
+
 using namespace std;
 
 namespace WadeSpace::PreProcessor
@@ -327,12 +329,12 @@ namespace WadeSpace::PreProcessor
 	{
 	public:
 		NonExistingFilesCache();
-		bool contains(const std::string& path);
-		void add(const std::string& path);
+		bool contains(const string& path);
+		void add(const string& path);
 		void clear();
 	private:
-		std::set<std::string> m_pathSet;
-		std::mutex m_mutex;
+		set<string> m_pathSet;
+		mutex m_mutex;
 	};
 
 	class TokenList::Stream
@@ -426,8 +428,8 @@ namespace WadeSpace::PreProcessor
 
     extern TokenString PRAGMA;
     extern TokenString ONCE;
-
     extern TokenString HAS_INCLUDE;
+	extern NonExistingFilesCache nonExistingFilesCache;
 
     bool isHex(const string& s);
 	bool isOct(const string& s);
@@ -449,5 +451,33 @@ namespace WadeSpace::PreProcessor
 	string dirPath(const string& path, bool withTrailingSlash = true);
 	bool isStringLiteral_(const string& s);
 	bool isCharLiteral_(const string& s);
+	void preprocess(TokenList& output, const TokenList& rawtokens, std::vector<std::string>& files, FileDataCache& cache, const DUI& dui, OutputList* outputList = nullptr, std::list<MacroUsage>* macroUsage = nullptr, std::list<IfCond>* ifCond = nullptr);
+	void cleanup(FileDataCache& cache);
+	cstd_t getCStd(const string& std);
+	string getCStdString(cstd_t std);
+	string getCStdString(const string& std);
+	cppstd_t getCppStd(const string& std);
+	string getCppStdString(cppstd_t std);
+	string getCppStdString(const string& std);
+	bool isCpp17OrLater(const DUI& dui);
+	bool isGnu(const DUI& dui);
+	void getLocaltime(struct tm& ltime);
+	string getDateDefine(const struct tm* timep);
+	string getTimeDefine(const struct tm* timep);
+	long long evaluate(TokenList& expr, const DUI& dui, const map<string, size_t>& sizeOfType);
+	const Token* gotoNextLine(const Token* tok);
+	void simplifyNumbers(TokenList& expr);
+	void simplifyComments(TokenList& expr);
+	void simplifySizeof(TokenList& expr, const map<string, size_t>& sizeOfType);
+	void simplifyHasInclude(TokenList& expr, const DUI& dui);
+	void simplifyName(TokenList& expr);
+	bool preprocessToken(TokenList& output, const Token** tok1, MacroMap& macros, vector<string>& files, OutputList* outputList);
+	string openHeader(ifstream& f, const DUI& dui, const string& sourcefile, const string& header, bool systemheader);
+	string openHeaderDirect(ifstream& f, const string& path);
+	long long characterLiteralToLL(const string& str);
+	unsigned long long stringToULLbounded(const string& s,size_t& pos,int base = 0,ptrdiff_t minlen = 1,size_t maxlen = string::npos);
+
+	//extern const char* const altopData[];
+	extern const set<string> altop;
 }
 

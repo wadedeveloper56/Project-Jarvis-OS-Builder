@@ -6,17 +6,17 @@ using namespace WadeSpace::PreProcessor;
 
 NonExistingFilesCache::NonExistingFilesCache() {}
 
-bool NonExistingFilesCache::contains(const std::string& path) {
-	std::lock_guard<std::mutex> lock(m_mutex);
+bool NonExistingFilesCache::contains(const string& path) {
+	lock_guard<mutex> lock(m_mutex);
 	return (m_pathSet.find(path) != m_pathSet.end());
 }
 
-void NonExistingFilesCache::add(const std::string& path) {
-	std::lock_guard<std::mutex> lock(m_mutex);
+void NonExistingFilesCache::add(const string& path) {
+	lock_guard<mutex> lock(m_mutex);
 	m_pathSet.insert(path);
 }
 
 void NonExistingFilesCache::clear() {
-	std::lock_guard<std::mutex> lock(m_mutex);
+	lock_guard<mutex> lock(m_mutex);
 	m_pathSet.clear();
 }
