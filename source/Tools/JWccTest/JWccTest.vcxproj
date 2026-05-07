@@ -79,23 +79,25 @@
     <LinkIncremental>false</LinkIncremental>
     <OutDir>..\..\..\bin\unit-tests\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\bin\intermediate\JWccTest\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>..\Arguments;..\JWccLib;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>..\Arguments;..\JWccLib;..\Arguments;..\JWccLib;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>..\..\..\bin\unit-tests\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\bin\intermediate\JWccTest\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>..\Arguments;..\JWccLib;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>..\..\..\bin\unit-tests\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\bin\intermediate\JWccTest\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>..\Arguments;..\JWccLib;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>..\..\..\bin\unit-tests\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\bin\intermediate\JWccTest\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>..\Arguments;..\JWccLib;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>..\Arguments;..\JWccLib;..\Arguments;..\JWccLib;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -196,8 +198,8 @@
     <ProjectReference Include="..\JWccLib\JWccLib.vcxproj">
       <Project>{55e11707-51c1-4126-9ce7-1d3ef7e9d7f0}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\PreProcessor\Preprocessor.vcxproj">
-      <Project>{3b55590c-3e30-413c-b121-c80fbe2d2c77}</Project>
+    <ProjectReference Include="..\PreProcessor2\PreProcessor2.vcxproj">
+      <Project>{ec832e55-a126-40da-b115-fc2973ae0f73}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
