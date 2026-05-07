@@ -167,10 +167,10 @@ namespace WadeSpace::PreProcessor
 		FileDataCache(FileDataCache&&) = default;
 		FileDataCache& operator=(const FileDataCache&) = delete;
 		FileDataCache& operator=(FileDataCache&&) = default;
-		std::pair<FileData*, bool> get(const std::string& sourcefile, const std::string& header, const DUI& dui, bool systemheader, std::vector<std::string>& filenames, OutputList* outputList);
+		pair<FileData*, bool> get(const string& sourcefile, const string& header, const DUI& dui, bool systemheader, vector<string>& filenames, OutputList* outputList);
 		void insert(FileData data);
 		void clear();
-		typedef std::vector<std::unique_ptr<FileData>> container_type;
+		typedef vector<unique_ptr<FileData>> container_type;
 		typedef container_type::iterator iterator;
 		typedef container_type::const_iterator const_iterator;
 		typedef container_type::size_type size_type;
@@ -204,13 +204,13 @@ namespace WadeSpace::PreProcessor
 #endif
 			struct Hasher
 			{
-				std::size_t operator()(const FileID& id) const;
+				size_t operator()(const FileID& id) const;
 			};
 		};
-		using name_map_type = std::unordered_map<std::string, FileData*>;
-		using id_map_type = std::unordered_map<FileID, FileData*, FileID::Hasher>;
-		static bool getFileId(const std::string& path, FileID& id);
-		std::pair<FileData*, bool> tryload(name_map_type::iterator& name_it, const DUI& dui, std::vector<std::string>& filenames, OutputList* outputList);
+		using name_map_type = unordered_map<string, FileData*>;
+		using id_map_type = unordered_map<FileID, FileData*, FileID::Hasher>;
+		static bool getFileId(const string& path, FileID& id);
+		pair<FileData*, bool> tryload(name_map_type::iterator& name_it, const DUI& dui, vector<string>& filenames, OutputList* outputList);
 		container_type mData;
 		name_map_type mNameMap;
 		id_map_type mIdMap;
@@ -218,6 +218,7 @@ namespace WadeSpace::PreProcessor
 
 	struct IfCond
 	{
+		IfCond(const Location& location, const string& E, long long result) : location(location), E(E), result(result) {}
 		Location location;
 		string E;
 		long long result;
@@ -225,67 +226,67 @@ namespace WadeSpace::PreProcessor
 
 	struct MacroUsage
 	{
-		MacroUsage(const std::vector<std::string>& f, bool macroValueKnown_) : macroLocation(f), useLocation(f), macroValueKnown(macroValueKnown_) {}
-		std::string macroName;
+		MacroUsage(const vector<string>& f, bool macroValueKnown_) : macroLocation(f), useLocation(f), macroValueKnown(macroValueKnown_) {}
+		string macroName;
 		Location    macroLocation;
 		Location    useLocation;
 		bool        macroValueKnown;
 	};
 
-    using MacroMap = std::unordered_map<TokenString, Macro>;
+    using MacroMap = unordered_map<TokenString, Macro>;
 
     class Macro
     {
     public:
-        Macro(std::vector<std::string>& f);
-        Macro(const Token* tok, std::vector<std::string>& f);
-        Macro(const std::string& name, const std::string& value, std::vector<std::string>& f);
+        Macro(vector<string>& f);
+        Macro(const Token* tok, vector<string>& f);
+        Macro(const string& name, const string& value, vector<string>& f);
         Macro(const Macro& other);
         ~Macro();
         Macro& operator=(const Macro& other);
         bool valueDefinedInCode() const;
-        const Token* expand(TokenList* const output, const Token* rawtok, const MacroMap& macros, std::vector<std::string>& inputFiles) const;
+        const Token* expand(TokenList* const output, const Token* rawtok, const MacroMap& macros, vector<string>& inputFiles) const;
         const TokenString& name() const;
         const Location& defineLocation() const;
-        const std::list<Location>& usage() const;
+        const list<Location>& usage() const;
         bool functionLike() const;
 
         struct Error
         {
-            Error(const Location& loc, const std::string& s) : location(loc), what(s) {}
+            Error(const Location& loc, const string& s) : location(loc), what(s) {}
             const Location location;
-            const std::string what;
+            const string what;
         };
 
         /** Struct that is thrown when macro is expanded with wrong number of parameters */
         struct wrongNumberOfParameters : public Error
         {
-            wrongNumberOfParameters(const Location& loc, const std::string& macroName) : Error(loc, "Wrong number of parameters for macro \'" + macroName + "\'.") {}
+            wrongNumberOfParameters(const Location& loc, const string& macroName) : Error(loc, "Wrong number of parameters for macro \'" + macroName + "\'.") {}
         };
 
         /** Struct that is thrown when there is invalid ## usage */
         struct invalidHashHash : public Error
         {
-            static inline std::string format(const std::string& macroName, const std::string& message) {
+            static inline string format(const string& macroName, const string& message) {
                 return "Invalid ## usage when expanding \'" + macroName + "\': " + message;
             }
 
-            invalidHashHash(const Location& loc, const std::string& macroName, const std::string& message)
+            invalidHashHash(const Location& loc, const string& macroName, const string& message)
                 : Error(loc, format(macroName, message)) {}
 
-            static inline invalidHashHash unexpectedToken(const Location& loc, const std::string& macroName, const Token* tokenA) {
+            static inline invalidHashHash unexpectedToken(const Location& loc, const string& macroName, const Token* tokenA) {
                 return invalidHashHash(loc, macroName, "Unexpected token '" + tokenA->str() + "'");
             }
 
-            static inline invalidHashHash cannotCombine(const Location& loc, const std::string& macroName, const Token* tokenA, const Token* tokenB) {
+            static inline invalidHashHash cannotCombine(const Location& loc, const string& macroName, const Token* tokenA, const Token* tokenB) {
                 return invalidHashHash(loc, macroName, "Combining '" + tokenA->str() + "' and '" + tokenB->str() + "' yields an invalid token.");
             }
 
-            static inline invalidHashHash unexpectedNewline(const Location& loc, const std::string& macroName) {
+            static inline invalidHashHash unexpectedNewline(const Location& loc, const string& macroName) {
                 return invalidHashHash(loc, macroName, "Unexpected newline");
             }
 
-            static inline invalidHashHash universalCharacterUB(const Location& loc, const std::string& macroName, const Token* tokenA, const std::string& strAB) {
+            static inline invalidHashHash universalCharacterUB(const Location& loc, const string& macroName, const Token* tokenA, const string& strAB) {
                 return invalidHashHash(loc, macroName, "Combining '\\" + tokenA->str() + "' and '" + strAB.substr(tokenA->str().size()) + "' yields universal character '\\" + strAB + "'. This is undefined behavior according to C standard chapter 5.1.1.2, paragraph 4.");
             }
         };
@@ -293,28 +294,28 @@ namespace WadeSpace::PreProcessor
         Token* newMacroToken(const TokenString& str, const Location& loc, bool replaced, const Token* expandedFromToken = nullptr) const;
         bool parseDefine(const Token* nametoken);
         unsigned int getArgNum(const TokenString& str) const;
-        std::vector<const Token*> getMacroParameters(const Token* nameTokInst, bool calledInDefine) const;
+        vector<const Token*> getMacroParameters(const Token* nameTokInst, bool calledInDefine) const;
         const Token* appendTokens(TokenList* tokens,
             const Location& rawloc,
             const Token* const lpar,
             const MacroMap& macros,
-            const std::set<TokenString>& expandedmacros,
-            const std::vector<const Token*>& parametertokens) const;
-		const Token* expand(TokenList* const output, const Location& loc, const Token* const nameTokInst, const MacroMap& macros, std::set<TokenString> expandedmacros) const;
-		const Token* recursiveExpandToken(TokenList* output, TokenList& temp, const Location& loc, const Token* tok, const MacroMap& macros, const std::set<TokenString>& expandedmacros, const std::vector<const Token*>& parametertokens) const;
-		const Token* expandToken(TokenList* output, const Location& loc, const Token* tok, const MacroMap& macros, const std::set<TokenString>& expandedmacros, const std::vector<const Token*>& parametertokens) const;
-		bool expandArg(TokenList* output, const Token* tok, const std::vector<const Token*>& parametertokens) const;
-		bool expandArg(TokenList* output, const Token* tok, const Location& loc, const MacroMap& macros, const std::set<TokenString>& expandedmacros, const std::vector<const Token*>& parametertokens) const;
-		const Token* expandHash(TokenList* output, const Location& loc, const Token* tok, const std::set<TokenString>& expandedmacros, const std::vector<const Token*>& parametertokens) const;
-		const Token* expandHashHash(TokenList* output, const Location& loc, const Token* tok, const MacroMap& macros, const std::set<TokenString>& expandedmacros, const std::vector<const Token*>& parametertokens, bool expandResult = true) const;
-		static bool isReplaced(const std::set<std::string>& expandedmacros);
+            const set<TokenString>& expandedmacros,
+            const vector<const Token*>& parametertokens) const;
+		const Token* expand(TokenList* const output, const Location& loc, const Token* const nameTokInst, const MacroMap& macros, set<TokenString> expandedmacros) const;
+		const Token* recursiveExpandToken(TokenList* output, TokenList& temp, const Location& loc, const Token* tok, const MacroMap& macros, const set<TokenString>& expandedmacros, const vector<const Token*>& parametertokens) const;
+		const Token* expandToken(TokenList* output, const Location& loc, const Token* tok, const MacroMap& macros, const set<TokenString>& expandedmacros, const vector<const Token*>& parametertokens) const;
+		bool expandArg(TokenList* output, const Token* tok, const vector<const Token*>& parametertokens) const;
+		bool expandArg(TokenList* output, const Token* tok, const Location& loc, const MacroMap& macros, const set<TokenString>& expandedmacros, const vector<const Token*>& parametertokens) const;
+		const Token* expandHash(TokenList* output, const Location& loc, const Token* tok, const set<TokenString>& expandedmacros, const vector<const Token*>& parametertokens) const;
+		const Token* expandHashHash(TokenList* output, const Location& loc, const Token* tok, const MacroMap& macros, const set<TokenString>& expandedmacros, const vector<const Token*>& parametertokens, bool expandResult = true) const;
+		static bool isReplaced(const set<string>& expandedmacros);
         const Token* nameTokDef;
-        std::vector<TokenString> args;
+        vector<TokenString> args;
         const Token* valueToken;
         const Token* endToken;
-        std::vector<std::string>& files;
+        vector<string>& files;
         TokenList tokenListDefine;
-        mutable std::list<Location> usageList;
+        mutable list<Location> usageList;
         bool variadic;
         bool variadicOpt;
         const TokenList* optExpandValue;
@@ -333,111 +334,14 @@ namespace WadeSpace::PreProcessor
 		virtual int peek() = 0;
 		virtual void unget() = 0;
 		virtual bool good() = 0;
-		unsigned char readChar() {
-			unsigned char ch = static_cast<unsigned char>(get());
-
-			// For UTF-16 encoded files the BOM is 0xfeff/0xfffe. If the
-			// character is non-ASCII character then replace it with 0xff
-			if (isUtf16)
-			{
-				const unsigned char ch2 = static_cast<unsigned char>(get());
-				const int ch16 = makeUtf16Char(ch, ch2);
-				ch = static_cast<unsigned char>(((ch16 >= 0x80) ? 0xff : ch16));
-			}
-
-			// Handling of newlines..
-			if (ch == '\r')
-			{
-				ch = '\n';
-
-				int ch2 = get();
-				if (isUtf16)
-				{
-					const int c2 = get();
-					ch2 = makeUtf16Char(ch2, c2);
-				}
-
-				if (ch2 != '\n')
-					ungetChar();
-			}
-
-			return ch;
-		}
-
-		unsigned char peekChar() {
-			unsigned char ch = static_cast<unsigned char>(peek());
-
-			// For UTF-16 encoded files the BOM is 0xfeff/0xfffe. If the
-			// character is non-ASCII character then replace it with 0xff
-			if (isUtf16)
-			{
-				(void)get();
-				const unsigned char ch2 = static_cast<unsigned char>(peek());
-				unget();
-				const int ch16 = makeUtf16Char(ch, ch2);
-				ch = static_cast<unsigned char>(((ch16 >= 0x80) ? 0xff : ch16));
-			}
-
-			// Handling of newlines..
-			if (ch == '\r')
-				ch = '\n';
-
-			return ch;
-		}
-
-		void ungetChar() {
-			unget();
-			if (isUtf16)
-				unget();
-		}
-
+		unsigned char readChar();
+		unsigned char peekChar();
+		void ungetChar();
 	protected:
-		void init() {
-			// initialize since we use peek() in getAndSkipBOM()
-			isUtf16 = false;
-			bom = getAndSkipBOM();
-			isUtf16 = (bom == 0xfeff || bom == 0xfffe);
-		}
-
+		void init();
 	private:
-		inline int makeUtf16Char(const unsigned char ch, const unsigned char ch2) const {
-			return (bom == 0xfeff) ? (ch << 8 | ch2) : (ch2 << 8 | ch);
-		}
-
-		unsigned short getAndSkipBOM() {
-			const int ch1 = peek();
-
-			// The UTF-16 BOM is 0xfffe or 0xfeff.
-			if (ch1 >= 0xfe)
-			{
-				(void)get();
-				const unsigned short byte = (static_cast<unsigned char>(ch1) << 8);
-				if (peek() >= 0xfe)
-					return byte | static_cast<unsigned char>(get());
-				unget();
-				return 0;
-			}
-
-			// Skip UTF-8 BOM 0xefbbbf
-			if (ch1 == 0xef)
-			{
-				(void)get();
-				if (peek() == 0xbb)
-				{
-					(void)get();
-					if (peek() == 0xbf)
-					{
-						(void)get();
-						return 0;
-					}
-					unget();
-				}
-				unget();
-			}
-
-			return 0;
-		}
-
+		inline int makeUtf16Char(const unsigned char ch, const unsigned char ch2) const;
+		unsigned short getAndSkipBOM();
 		unsigned short bom;
 	protected:
 		bool isUtf16;
@@ -595,22 +499,22 @@ namespace WadeSpace::PreProcessor
     bool isHex(const string& s);
 	bool isOct(const string& s);
 	bool sameline(const Token* tok1, const Token* tok2);
-	long long stringToLL(const std::string& s);
+	long long stringToLL(const string& s);
 	unsigned long long stringToULL(const string& s);
-	bool endsWith(const std::string& s, const string& e);
+	bool endsWith(const string& s, const string& e);
 	bool sameline(const Token* tok1, const Token* tok2);
 	bool isAlternativeBinaryOp(const Token* tok, const string& alt);
 	bool isAlternativeUnaryOp(const Token* tok, const string& alt);
 	void portabilityBackslash(OutputList* outputList, const vector<string>& files, const Location& location);
 	string replaceAll(string s, const string& from, const string& to);
 	bool isNameChar(unsigned char ch);
-	string escapeString(const std::string& str);
-	bool isStringLiteralPrefix(const std::string& str);
+	string escapeString(const string& str);
+	bool isStringLiteralPrefix(const string& str);
 	bool isFloatSuffix(const Token* tok);
-	bool isAbsolutePath(const std::string& path);
-	std::string simplifyPath(std::string path);
-	std::string dirPath(const std::string& path, bool withTrailingSlash = true);
-	bool isStringLiteral_(const std::string& s);
-	bool isCharLiteral_(const std::string& s);
+	bool isAbsolutePath(const string& path);
+	string simplifyPath(string path);
+	string dirPath(const string& path, bool withTrailingSlash = true);
+	bool isStringLiteral_(const string& s);
+	bool isCharLiteral_(const string& s);
 }
 

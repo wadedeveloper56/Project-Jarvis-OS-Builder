@@ -188,6 +188,7 @@
     <ClCompile Include="preprocessor.cpp" />
     <ClCompile Include="Token.cpp" />
     <ClCompile Include="TokenList.cpp" />
+    <ClCompile Include="TokenListStream.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
