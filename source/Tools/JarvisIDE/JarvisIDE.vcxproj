@@ -307,8 +307,8 @@
     <ProjectReference Include="..\JWlinkLib\JWlinkLib.vcxproj">
       <Project>{1054801f-1a40-4a7c-a7d1-303d2a64b79c}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\PreProcessor\Preprocessor.vcxproj">
-      <Project>{3b55590c-3e30-413c-b121-c80fbe2d2c77}</Project>
+    <ProjectReference Include="..\PreProcessor2\PreProcessor2.vcxproj">
+      <Project>{ec832e55-a126-40da-b115-fc2973ae0f73}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
