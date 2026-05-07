@@ -324,7 +324,16 @@ namespace WadeSpace::PreProcessor
     };
 
 	class NonExistingFilesCache
-	{};
+	{
+	public:
+		NonExistingFilesCache();
+		bool contains(const std::string& path);
+		void add(const std::string& path);
+		void clear();
+	private:
+		std::set<std::string> m_pathSet;
+		std::mutex m_mutex;
+	};
 
 	class TokenList::Stream
 	{
@@ -350,26 +359,11 @@ namespace WadeSpace::PreProcessor
 	class StdIStream : public TokenList::Stream
 	{
 	public:
-		// cppcheck-suppress uninitDerivedMemberVar - we call Stream::init() to initialize the private members
-		explicit StdIStream(istream& istr)
-			: istr(istr) {
-			assert(istr.good());
-			init();
-		}
-
-		virtual int get() override {
-			return istr.get();
-		}
-		virtual int peek() override {
-			return istr.peek();
-		}
-		virtual void unget() override {
-			istr.unget();
-		}
-		virtual bool good() override {
-			return istr.good();
-		}
-
+		explicit StdIStream(istream& istr);
+		virtual int get() override;
+		virtual int peek() override;
+		virtual void unget() override;
+		virtual bool good() override;
 	private:
 		istream& istr;
 	};
@@ -377,32 +371,11 @@ namespace WadeSpace::PreProcessor
 	class StdCharBufStream : public TokenList::Stream
 	{
 	public:
-		// cppcheck-suppress uninitDerivedMemberVar - we call Stream::init() to initialize the private members
-		StdCharBufStream(const unsigned char* str, size_t size)
-			: str(str)
-			, size(size)
-			, pos(0)
-			, lastStatus(0) {
-			init();
-		}
-
-		virtual int get() override {
-			if (pos >= size)
-				return lastStatus = EOF;
-			return str[pos++];
-		}
-		virtual int peek() override {
-			if (pos >= size)
-				return lastStatus = EOF;
-			return str[pos];
-		}
-		virtual void unget() override {
-			--pos;
-		}
-		virtual bool good() override {
-			return lastStatus != EOF;
-		}
-
+		StdCharBufStream(const unsigned char* str, size_t size);
+		virtual int get() override;
+		virtual int peek() override;
+		virtual void unget() override;
+		virtual bool good() override;
 	private:
 		const unsigned char* str;
 		const size_t size;
@@ -413,56 +386,16 @@ namespace WadeSpace::PreProcessor
 	class FileStream : public TokenList::Stream
 	{
 	public:
-		// cppcheck-suppress uninitDerivedMemberVar - we call Stream::init() to initialize the private members
-		explicit FileStream(const string& filename, vector<string>& files)
-			: file(fopen(filename.c_str(), "rb"))
-			, lastCh(0)
-			, lastStatus(0) {
-			if (!file)
-			{
-				files.push_back(filename);
-				throw Output(files, Output::FILE_NOT_FOUND, "File is missing: " + filename);
-			}
-			init();
-		}
-
-		~FileStream() override {
-			fclose(file);
-			file = nullptr;
-		}
-
-		virtual int get() override {
-			lastStatus = lastCh = fgetc(file);
-			return lastCh;
-		}
-		virtual int peek() override {
-			// keep lastCh intact
-			const int ch = fgetc(file);
-			unget_internal(ch);
-			return ch;
-		}
-		virtual void unget() override {
-			unget_internal(lastCh);
-		}
-		virtual bool good() override {
-			return lastStatus != EOF;
-		}
-
+		explicit FileStream(const string& filename, vector<string>& files);
+		~FileStream() override;
+		virtual int get() override;
+		virtual int peek() override;
+		virtual void unget() override;
+		virtual bool good() override;
 	private:
-		void unget_internal(int ch) {
-			if (isUtf16)
-			{
-				// TODO: use ungetc() as well
-				// UTF-16 has subsequent unget() calls
-				fseek(file, -1, SEEK_CUR);
-			}
-			else
-				ungetc(ch, file);
-		}
-
+		void unget_internal(int ch);
 		FileStream(const FileStream&);
 		FileStream& operator=(const FileStream&);
-
 		FILE* file;
 		int lastCh;
 		int lastStatus;

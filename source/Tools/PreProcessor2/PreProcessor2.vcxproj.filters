@@ -50,5 +50,17 @@
     <ClCompile Include="TokenListStream.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="StdIStream.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StdCharBufStream.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FileStream.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NonExistingFilesCache.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
