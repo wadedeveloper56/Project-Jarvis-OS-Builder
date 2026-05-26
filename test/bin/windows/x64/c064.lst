@@ -40,45 +40,43 @@ c064.asm
 00000008  E800000000        *    call GetCommandLineA
 0000000D  488945F8                  mov pCmdLine, rax
 00000011  4885C0                    test rax, rax
-00000014  743D                      jz error_exit
+00000014  7435                      jz error_exit
 
                                     ; 2. Parse the command line into an array of pointers to CHAR
-00000016  488D4DEC                  lea rcx, argc
-0000001A  488B55F8                  mov rdx, pCmdLine
-0000001E                            invoke CommandLineToArgvA, pArgv, addr argc
-0000001E  488D45EC          *    lea rax, argc
-00000022  50                *    push rax
-00000023  FF75F0            *    push pArgv
-00000026  E800000000        *    call CommandLineToArgvA
-0000002B  4883C410          *    add rsp, 16
-0000002F  488945F0                  mov pArgv, rax
-00000033  4885C0                    test rax, rax
-00000036  741B                      jz error_exit
+00000016                            invoke CommandLineToArgvA, pArgv, addr argc
+00000016  488D45EC          *    lea rax, argc
+0000001A  50                *    push rax
+0000001B  FF75F0            *    push pArgv
+0000001E  E800000000        *    call CommandLineToArgvA
+00000023  4883C410          *    add rsp, 16
+00000027  488945F0                  mov pArgv, rax
+0000002B  4885C0                    test rax, rax
+0000002E  741B                      jz error_exit
 
                                     ; 3. call main
-00000038  488B55F0                  mov	rdx, pArgv
-0000003C  8B4DEC                	mov	ecx, argc
-0000003F  E800000000            	call _main
+00000030  488B55F0                  mov	rdx, pArgv
+00000034  8B4DEC                	mov	ecx, argc
+00000037  E800000000            	call _main
                                 	
                                     ; 5. Free memory allocated by CommandLineToArgvA
-00000044                            invoke LocalFree, pArgv
-00000044  FF75F0            *    push pArgv
-00000047  E800000000        *    call LocalFree
+0000003C                            invoke LocalFree, pArgv
+0000003C  FF75F0            *    push pArgv
+0000003F  E800000000        *    call LocalFree
 
                                     ; Successful exit
-0000004C                            invoke ExitProcess, 0
-0000004C  6A00              *    push 0
-0000004E  E800000000        *    call ExitProcess
+00000044                            invoke ExitProcess, 0
+00000044  6A00              *    push 0
+00000046  E800000000        *    call ExitProcess
 
-00000053                        error_exit:
-00000053                            invoke ExitProcess, 1
-00000053  6A01              *    push 1
-00000055  E800000000        *    call ExitProcess
+0000004B                        error_exit:
+0000004B                            invoke ExitProcess, 1
+0000004B  6A01              *    push 1
+0000004D  E800000000        *    call ExitProcess
 
-0000005A                        mainCRTStartup endp
+00000052                        mainCRTStartup endp
 
                                 END mainCRTStartup
-0000005A                    *   _TEXT ends
+00000052                    *   _TEXT ends
 
 
 Macros:
@@ -98,7 +96,7 @@ Segments and Groups:
 
 FLAT . . . . . . . . . . . . . .        GROUP
 _DATA  . . . . . . . . . . . . .        64 Bit   00000000 Para    Public  'DATA'
-_TEXT  . . . . . . . . . . . . .        64 Bit   0000005A Para    Public  'CODE'
+_TEXT  . . . . . . . . . . . . .        64 Bit   00000052 Para    Public  'CODE'
 
 
 Procedures, parameters and locals:
@@ -111,12 +109,12 @@ GetCommandLineA  . . . . . . . .        P Near64 00000000 No Seg   00000000 Exte
 LocalFree  . . . . . . . . . . .        P Near64 00000000 No Seg   00000000 External  STDCALL
 __getmainargs  . . . . . . . . .        P Near64 00000000 No Seg   00000000 *External C
 _main  . . . . . . . . . . . . .        P Near64 00000000 No Seg   00000000 External  STDCALL
-mainCRTStartup . . . . . . . . .        P Near   00000000 _TEXT    0000005A Public   STDCALL
+mainCRTStartup . . . . . . . . .        P Near   00000000 _TEXT    00000052 Public   STDCALL
   pCmdLine . . . . . . . . . . .        QWord             rbp - 0008
   pArgv  . . . . . . . . . . . .        QWord             rbp - 0010
   argc . . . . . . . . . . . . .        DWord             rbp - 0014
   i  . . . . . . . . . . . . . .        DWord             rbp - 0018
-  error_exit . . . . . . . . . .        L Near   00000053 _TEXT (F)
+  error_exit . . . . . . . . . .        L Near   0000004B _TEXT (F)
 printf . . . . . . . . . . . . .        P Near64 00000000 No Seg   00000000 *External C
 
 
@@ -133,11 +131,11 @@ Symbols:
 @FileName  . . . . . . . . . . .        Text   C064
 @Interface . . . . . . . . . . .        Number             3h 
 @Model . . . . . . . . . . . . .        Number             7h 
-@Time  . . . . . . . . . . . . .        Text   08:24:50
+@Time  . . . . . . . . . . . . .        Text   08:43:03
 @Version . . . . . . . . . . . .        Text   800
 @code  . . . . . . . . . . . . .        Text   _TEXT
 @data  . . . . . . . . . . . . .        Text   FLAT
 @stack . . . . . . . . . . . . .        Text   FLAT
 __JWASM__  . . . . . . . . . . .        Number            D4h 
 
-c064.asm: 56 lines, 2 passes, 2 ms, 0 warnings, 0 errors
+c064.asm: 54 lines, 2 passes, 1 ms, 0 warnings, 0 errors

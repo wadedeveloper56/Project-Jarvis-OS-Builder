@@ -30,8 +30,6 @@ mainCRTStartup proc
     jz error_exit
 
     ; 2. Parse the command line into an array of pointers to CHAR
-    lea rcx, argc
-    mov rdx, pCmdLine
     invoke CommandLineToArgvA, pArgv, addr argc
     mov pArgv, rax
     test rax, rax

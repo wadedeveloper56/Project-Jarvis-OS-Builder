@@ -15,24 +15,40 @@ __getmainargs PROTO C, _Argc:PTR SDWORD, _Argv:PTR PTR SBYTE, _Env:PTR PTR SBYTE
 ;external main
 _main PROTO C _argc:SDWORD , _argv:DWORD ;
 
-.data?
-    ; Define uninitialized variables for the CRT
-    pArgc   dd ?
-    pArgv   dd ?
-    pEnv    dd ?
-    pMode   dd ?
-
 .code
 
-mainCRTStartup PROC
-    ; Initialize C Runtime command line arguments
-    lea eax, pMode
-    lea ecx, pEnv
-    lea edx, pArgv
-    lea ebx, pArgc
-    invoke __getmainargs, ebx, edx, ecx, 0, eax
-    invoke _main, pArgc, pArgv
+mainCRTStartup proc
+    LOCAL pCmdLine:DWORD
+    LOCAL pArgv:DWORD
+    LOCAL argc:DWORD
+    LOCAL i:DWORD
+
+    ; 1. Get the command-line string (Returns pointer to CHAR)
+    invoke GetCommandLineA
+    mov pCmdLine, eax
+    test eax, eax
+    jz error_exit
+
+    ; 2. Parse the command line into an array of pointers to CHAR
+    invoke CommandLineToArgvA, pArgv, addr argc
+    mov pArgv, eax
+    test eax, eax
+    jz error_exit
+
+    ; 3. call main
+    mov	edx, pArgv
+	mov	ecx, argc
+	call _main
+	
+    ; 5. Free memory allocated by CommandLineToArgvA
+    invoke LocalFree, pArgv
+
+    ; Successful exit
     invoke ExitProcess, 0
-mainCRTStartup ENDP
+
+error_exit:
+    invoke ExitProcess, 1
+
+mainCRTStartup endp
 
 END mainCRTStartup
