@@ -1,0 +1,6 @@
+# This is a comment line
+system win64
+name my_application.exe
+file main.obj, utils.obj, math.obj
+library user32.lib, kernel32.lib
+option quiet, map=my_application.map

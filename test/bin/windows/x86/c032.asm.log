@@ -1,15 +1,15 @@
 PEDUMP - Win32/Win64 COFF EXE/OBJ/LIB file dumper v1.0 (C) Copyright 2025-2026 Christopher D. Wade.
 All Rights Reserved
 Dump of file bin\windows\x86\c032.obj
-File Size 639 bytes
+File Size 742 bytes
 File Type: 32-bit COFF OBJECT
 
 FILE HEADER VALUES
                14C Machine (Intel 386 or later processors and compatible processors)
-                 3 (3) Number of Sections
-          6A15A36A TimeDateStamp ->  n/a
-               12A PointerToSymbolTable
-                 E (14) NumberOfSymbols
+                 4 (4) Number of Sections
+          6A15C484 TimeDateStamp ->  n/a
+               178 PointerToSymbolTable
+                11 (17) NumberOfSymbols
                  0 (0) SizeOfOptionalHeader
                  0 Flags
 
@@ -18,11 +18,11 @@ SECTION HEADER #0 (0)
    .text name
        0 physical address
        0 virtual address
-      49 (73) size of raw data
-      8C file pointer to raw data (0000008C to 000000D4)
-      D6 file pointer to relocation table
+      59 (89) size of raw data
+      B4 file pointer to raw data (000000B4 to 0000010C)
+     10E file pointer to relocation table
        0 file pointer to line numbers
-       6 number of relocations
+       9 number of relocations
        0 number of line numbers
 60500020 flags
          Code
@@ -32,18 +32,22 @@ SECTION HEADER #0 (0)
          Readable
 
 RAW DATA #0 (0)
-00000000  55 8b ec 83 ec 10 e8 00  00 00 00 89 45 fc 85 c0  U...........E...
-00000010  74 30 8d 45 f4 50 ff 75  f8 e8 00 00 00 00 83 c4  t0.E.P.u........
-00000020  08 89 45 f8 85 c0 74 1a  8b 55 f8 8b 4d f4 e8 00  ..E...t..U..M...
-00000030  00 00 00 ff 75 f8 e8 00  00 00 00 6a 00 e8 00 00  ....u......j....
-00000040  00 00 6a 01 e8 00 00 00  00                       ..j......
+00000000  e8 00 00 00 00 a3 00 00  00 00 33 c9 8b 35 00 00  ..........3..5..
+00000010  00 00 8d 3d 00 00 00 00  8a 06 3c 00 74 1c 3c 20  ...=......<.t.< 
+00000020  75 03 46 eb f3 89 34 8f  41 46 8a 06 3c 00 74 0a  u.F...4.AF..<.t.
+00000030  3c 20 75 f5 c6 06 00 46  eb de 89 0d 00 00 00 00  < u....F........
+00000040  68 00 00 00 00 ff 35 00  00 00 00 e8 00 00 00 00  h.....5.........
+00000050  83 c4 08 50 e8 00 00 00  00                       ...P.....
 SECTION HEADER #0 (0) RELOCATIONS
-  Address: 00000007  SymIndex: 00000008  Type: REL32
-  Address: 0000001A  SymIndex: 0000000A  Type: REL32
-  Address: 0000002F  SymIndex: 0000000C  Type: REL32
-  Address: 00000037  SymIndex: 0000000B  Type: REL32
-  Address: 0000003E  SymIndex: 00000009  Type: REL32
-  Address: 00000045  SymIndex: 00000009  Type: REL32
+  Address: 00000001  SymIndex: 0000000A  Type: REL32
+  Address: 00000006  SymIndex: 0000000E  Type: DIR32
+  Address: 0000000E  SymIndex: 0000000E  Type: DIR32
+  Address: 00000014  SymIndex: 0000000F  Type: DIR32
+  Address: 0000003C  SymIndex: 00000010  Type: DIR32
+  Address: 00000041  SymIndex: 0000000F  Type: DIR32
+  Address: 00000047  SymIndex: 00000010  Type: DIR32
+  Address: 0000004C  SymIndex: 0000000C  Type: REL32
+  Address: 00000055  SymIndex: 0000000B  Type: REL32
 
 
 SECTION HEADER #1 (1)
@@ -66,11 +70,30 @@ C0500040 flags
 
 
 SECTION HEADER #2 (2)
+    .bss name
+       0 physical address
+       0 virtual address
+     10C (268) size of raw data
+       0 file pointer to raw data (00000000 to 0000010B)
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+C0500080 flags
+         Unnitialized Data
+         1_BYTE_ALIGN
+         8_BYTE_ALIGN
+         Readable
+         Writeable
+
+
+
+SECTION HEADER #3 (3)
 .drectve name
        0 physical address
        0 virtual address
-      18 (24) size of raw data
-     112 file pointer to raw data (00000112 to 00000129)
+      10 (16) size of raw data
+     168 file pointer to raw data (00000168 to 00000177)
        0 file pointer to relocation table
        0 file pointer to line numbers
        0 number of relocations
@@ -79,32 +102,33 @@ SECTION HEADER #2 (2)
          Informataion
          Remove
 
-RAW DATA #2 (2)
-00000000  2d 65 6e 74 72 79 3a 6d  61 69 6e 43 52 54 53 74  -entry:mainCRTSt
-00000010  61 72 74 75 70 40 30 20                           artup@0 
+RAW DATA #3 (3)
+00000000  2d 65 6e 74 72 79 3a 5f  73 74 61 72 74 40 30 20  -entry:_start@0 
 
 
-Symbol Table - 14 entries  (* = auxillary symbol)
+Symbol Table - 17 entries  (* = auxillary symbol)
 Indx Sectn   Value   Type  Storage Name
 ---- ----- -------- ----- -------  --------
 0000 DEBUG 00000000  0000 FILE     .file
      * c032.asm
 0002     1 00000000  0000 STATIC   .text
-     * Section: 0000  Len: 00049  Relocs: 0006  LineNums: 0000 checksum:00000000
+     * Section: 0000  Len: 00059  Relocs: 0009  LineNums: 0000 checksum:00000000
 0004     2 00000000  0000 STATIC   .data
      * Section: 0000  Len: 00000  Relocs: 0000  LineNums: 0000 checksum:00000000
-0006     3 00000000  0000 STATIC   .drectve
-     * Section: 0000  Len: 00018  Relocs: 0000  LineNums: 0000 checksum:00000000
-0008 UNDEF 00000000  0020 EXTERNAL _GetCommandLineA@0
-0009 UNDEF 00000000  0020 EXTERNAL _ExitProcess@4
-000A UNDEF 00000000  0020 EXTERNAL _CommandLineToArgvA
-000B UNDEF 00000000  0020 EXTERNAL _LocalFree@4
+0006     3 00000000  0000 STATIC   .bss
+     * Section: 0000  Len: 0010C  Relocs: 0000  LineNums: 0000 checksum:00000000
+0008     4 00000000  0000 STATIC   .drectve
+     * Section: 0000  Len: 00010  Relocs: 0000  LineNums: 0000 checksum:00000000
+000A UNDEF 00000000  0020 EXTERNAL _GetCommandLineA@0
+000B UNDEF 00000000  0020 EXTERNAL _ExitProcess@4
 000C UNDEF 00000000  0020 EXTERNAL __main
-000D     1 00000000  0020 EXTERNAL _mainCRTStartup@0
+000D     1 00000000  0020 EXTERNAL __start@0
+000E     3 00000004  0000 STATIC   _cmdLinePtr
+000F     3 0000000C  0000 STATIC   _argv
+0010     3 00000008  0000 STATIC   _argc
 
-String Table Size = 0x59 (89) bytes 5 entries
+String Table Size = 0x3C (60) bytes 4 entries
 stringtable[   0] = _GetCommandLineA@0
 stringtable[   1] = _ExitProcess@4
-stringtable[   2] = _CommandLineToArgvA
-stringtable[   3] = _LocalFree@4
-stringtable[   4] = _mainCRTStartup@0
+stringtable[   2] = __start@0
+stringtable[   3] = _cmdLinePtr

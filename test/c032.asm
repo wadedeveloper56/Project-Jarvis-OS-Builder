@@ -15,40 +15,67 @@ __getmainargs PROTO C, _Argc:PTR SDWORD, _Argv:PTR PTR SBYTE, _Env:PTR PTR SBYTE
 ;external main
 _main PROTO C _argc:SDWORD , _argv:DWORD ;
 
-.code
+.DATA?
+    stdout             dd ?
+    cmdLinePtr         dd ?
+    argc               dd ?
+    argv               dd 64 dup(?) ; Supports up to 64 command line arguments
 
-mainCRTStartup proc
-    LOCAL pCmdLine:DWORD
-    LOCAL pArgv:DWORD
-    LOCAL argc:DWORD
-    LOCAL i:DWORD
+.CODE
 
-    ; 1. Get the command-line string (Returns pointer to CHAR)
+; --- Custom Startup Code (The Entry Point) ---
+_start PROC
+    ; 1. Get the raw command line string from Windows
     invoke GetCommandLineA
-    mov pCmdLine, eax
-    test eax, eax
-    jz error_exit
+    mov cmdLinePtr, eax
+    
+    ; 2. Parse the command line into argc and argv array
+    ; This is a basic space-separated parser (ignores quotes for simplicity)
+    xor ecx, ecx            ; ecx = argc counter
+    mov esi, cmdLinePtr     ; esi points to command line string
+    lea edi, argv           ; edi points to our argv array
 
-    ; 2. Parse the command line into an array of pointers to CHAR
-    invoke CommandLineToArgvA, pArgv, addr argc
-    mov pArgv, eax
-    test eax, eax
-    jz error_exit
+parse_loop:
+    ; Skip leading spaces
+    mov al, [esi]
+    cmp al, 0
+    je parsing_done
+    cmp al, ' '
+    jne found_arg
+    inc esi
+    jmp parse_loop
 
-    ; 3. call main
-    mov	edx, pArgv
-	mov	ecx, argc
-	call _main
-	
-    ; 5. Free memory allocated by CommandLineToArgvA
-    invoke LocalFree, pArgv
+found_arg:
+    ; Store the pointer to this argument in the argv array
+    mov [edi + ecx*4], esi
+    inc ecx                 ; argc++
 
-    ; Successful exit
-    invoke ExitProcess, 0
+skip_arg_chars:
+    inc esi
+    mov al, [esi]
+    cmp al, 0
+    je parsing_done
+    cmp al, ' '
+    jne skip_arg_chars
+    
+    ; We found a space character marking the end of an argument.
+    ; Replace it with a Null terminator (\0) so it acts as a C-string.
+    mov byte ptr [esi], 0   
+    inc esi
+    jmp parse_loop
 
-error_exit:
-    invoke ExitProcess, 1
+parsing_done:
+    mov argc, ecx           ; Save final argument count
 
-mainCRTStartup endp
+    ; 3. Push arguments and call our "C style" main function
+    push offset argv
+    push argc
+    call _main
+    add esp, 8              ; Clean up the stack (C calling convention)
 
-END mainCRTStartup
+    ; 4. Exit the program cleanly without CRT
+    invoke ExitProcess, eax
+
+_start ENDP
+
+END _start
