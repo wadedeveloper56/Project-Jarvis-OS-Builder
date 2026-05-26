@@ -1,4 +1,4 @@
-JWasm v2.12pre, May 22 2026
+JWasm v2.12pre, May 26 2026
 c032.asm
                                 .686
                                 .model flat, stdcall
@@ -107,12 +107,12 @@ Symbols:
 @Cpu . . . . . . . . . . . . . .        Number           D5Fh 
 @CurSeg  . . . . . . . . . . . .        Text   
 @DataSize  . . . . . . . . . . .        Number             0h 
-@Date  . . . . . . . . . . . . .        Text   05/22/26
+@Date  . . . . . . . . . . . . .        Text   05/26/26
 @FileCur . . . . . . . . . . . .        Text   c032.asm
 @FileName  . . . . . . . . . . .        Text   C032
 @Interface . . . . . . . . . . .        Number             3h 
 @Model . . . . . . . . . . . . .        Number             7h 
-@Time  . . . . . . . . . . . . .        Text   16:48:56
+@Time  . . . . . . . . . . . . .        Text   08:24:53
 @Version . . . . . . . . . . . .        Text   800
 @code  . . . . . . . . . . . . .        Text   _TEXT
 @data  . . . . . . . . . . . . .        Text   FLAT
@@ -123,4 +123,4 @@ pArgv  . . . . . . . . . . . . .        DWord              4h _BSS STDCALL
 pEnv . . . . . . . . . . . . . .        DWord              8h _BSS STDCALL
 pMode  . . . . . . . . . . . . .        DWord              Ch _BSS STDCALL
 
-c032.asm: 38 lines, 2 passes, 1 ms, 0 warnings, 0 errors
+c032.asm: 38 lines, 2 passes, 2 ms, 0 warnings, 0 errors

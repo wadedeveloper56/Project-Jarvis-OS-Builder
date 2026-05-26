@@ -1,4 +1,4 @@
-JWasm v2.12pre, May 22 2026
+JWasm v2.12pre, May 26 2026
 c064.asm
                                 .x64
                                 .model flat, stdcall
@@ -8,13 +8,12 @@ c064.asm
                             *   _DATA ends
                             *   assume cs:flat,ds:flat,ss:flat,es:flat,fs:ERROR,gs:ERROR
                                 option casemap:none
-                                option frame:auto
 
                                 ; Win32 Prototypes
                                 GetCommandLineA PROTO STDCALL;
                                 ExitProcess PROTO STDCALL :DWORD;
                                 CommandLineToArgvA PROTO C, lpCmdLine:PTR BYTE, pNumArgs:PTR DWORD;
-                                LocalFree PROTO STDCALL :DWORD;
+                                LocalFree PROTO STDCALL :QWORD;
 
                                 ; C Runtime (CRT) Prototypes
                                 printf PROTO C :VARARG;
@@ -23,44 +22,63 @@ c064.asm
                                 ;external main
                                 _main PROTO _argc:SDWORD , _argv:QWORD ;
 
-                                .data?
-00000000                    *   _BSS segment PARA FLAT PUBLIC 'BSS'
-                            *   assume cs:ERROR
-                                    ; Define uninitialized variables for the CRT
-00000000  00000000                  pArgc   dd ?
-00000004  0000000000000000          pArgv   dq ?
-0000000C  0000000000000000          pEnv    dq ?
-00000014  0000000000000000          pMode   dq ?
-
-00000000                        .code
-0000001C                    *   _BSS ends
+                                .code
 00000000                    *   _TEXT segment
                             *   assume cs:FLAT
 
-00000000                        mainCRTStartup PROC
-                                    ; Initialize C Runtime command line arguments
-00000000  488D0500000000            lea rax, pMode
-00000007  488D0D00000000            lea rcx, pEnv
-0000000E  488D1500000000            lea rdx, pArgv
-00000015  488D1D00000000            lea rbx, pArgc
-0000001C                            invoke __getmainargs, rbx, rdx, rcx, 0, rax
-0000001C  50                *    push rax
-0000001D  6A00              *    push 0
-0000001F  51                *    push rcx
-00000020  52                *    push rdx
-00000021  53                *    push rbx
-00000022  E800000000        *    call __getmainargs
-00000027  4883C428          *    add rsp, 40
-0000002B  8B0D00000000          	mov ecx,pArgc
-00000031  488B1500000000        	mov rdx,pArgv
-00000038  E800000000                call _main
-0000003D                        	invoke ExitProcess, 0
-0000003D  6A00              *    push 0
-0000003F  E800000000        *    call ExitProcess
-00000044                        mainCRTStartup ENDP
+00000000                        mainCRTStartup proc
+                                    LOCAL pCmdLine:QWORD
+                                    LOCAL pArgv:QWORD
+                                    LOCAL argc:DWORD
+                                    LOCAL i:DWORD
+
+                                    ; 1. Get the command-line string (Returns pointer to CHAR)
+00000000  55                *   push rbp
+00000001  488BEC            *   mov rbp, rsp
+00000004  4883EC18          *   sub rsp, 24
+00000008                            invoke GetCommandLineA
+00000008  E800000000        *    call GetCommandLineA
+0000000D  488945F8                  mov pCmdLine, rax
+00000011  4885C0                    test rax, rax
+00000014  743D                      jz error_exit
+
+                                    ; 2. Parse the command line into an array of pointers to CHAR
+00000016  488D4DEC                  lea rcx, argc
+0000001A  488B55F8                  mov rdx, pCmdLine
+0000001E                            invoke CommandLineToArgvA, pArgv, addr argc
+0000001E  488D45EC          *    lea rax, argc
+00000022  50                *    push rax
+00000023  FF75F0            *    push pArgv
+00000026  E800000000        *    call CommandLineToArgvA
+0000002B  4883C410          *    add rsp, 16
+0000002F  488945F0                  mov pArgv, rax
+00000033  4885C0                    test rax, rax
+00000036  741B                      jz error_exit
+
+                                    ; 3. call main
+00000038  488B55F0                  mov	rdx, pArgv
+0000003C  8B4DEC                	mov	ecx, argc
+0000003F  E800000000            	call _main
+                                	
+                                    ; 5. Free memory allocated by CommandLineToArgvA
+00000044                            invoke LocalFree, pArgv
+00000044  FF75F0            *    push pArgv
+00000047  E800000000        *    call LocalFree
+
+                                    ; Successful exit
+0000004C                            invoke ExitProcess, 0
+0000004C  6A00              *    push 0
+0000004E  E800000000        *    call ExitProcess
+
+00000053                        error_exit:
+00000053                            invoke ExitProcess, 1
+00000053  6A01              *    push 1
+00000055  E800000000        *    call ExitProcess
+
+0000005A                        mainCRTStartup endp
 
                                 END mainCRTStartup
-00000044                    *   _TEXT ends
+0000005A                    *   _TEXT ends
 
 
 Macros:
@@ -79,22 +97,26 @@ Segments and Groups:
                 N a m e                 Size     Length   Align   Combine Class
 
 FLAT . . . . . . . . . . . . . .        GROUP
-_BSS . . . . . . . . . . . . . .        64 Bit   0000001C Para    Public  'BSS'
 _DATA  . . . . . . . . . . . . .        64 Bit   00000000 Para    Public  'DATA'
-_TEXT  . . . . . . . . . . . . .        64 Bit   00000044 Para    Public  'CODE'
+_TEXT  . . . . . . . . . . . . .        64 Bit   0000005A Para    Public  'CODE'
 
 
 Procedures, parameters and locals:
 
                 N a m e                 Type     Value    Segment  Length
 
-CommandLineToArgvA . . . . . . .        P Near64 00000000 No Seg   00000000 *External C
+CommandLineToArgvA . . . . . . .        P Near64 00000000 No Seg   00000000 External  C
 ExitProcess  . . . . . . . . . .        P Near64 00000000 No Seg   00000000 External  STDCALL
-GetCommandLineA  . . . . . . . .        P Near64 00000000 No Seg   00000000 *External STDCALL
-LocalFree  . . . . . . . . . . .        P Near64 00000000 No Seg   00000000 *External STDCALL
-__getmainargs  . . . . . . . . .        P Near64 00000000 No Seg   00000000 External  C
+GetCommandLineA  . . . . . . . .        P Near64 00000000 No Seg   00000000 External  STDCALL
+LocalFree  . . . . . . . . . . .        P Near64 00000000 No Seg   00000000 External  STDCALL
+__getmainargs  . . . . . . . . .        P Near64 00000000 No Seg   00000000 *External C
 _main  . . . . . . . . . . . . .        P Near64 00000000 No Seg   00000000 External  STDCALL
-mainCRTStartup . . . . . . . . .        P Near   00000000 _TEXT    00000044 Public   STDCALL
+mainCRTStartup . . . . . . . . .        P Near   00000000 _TEXT    0000005A Public   STDCALL
+  pCmdLine . . . . . . . . . . .        QWord             rbp - 0008
+  pArgv  . . . . . . . . . . . .        QWord             rbp - 0010
+  argc . . . . . . . . . . . . .        DWord             rbp - 0014
+  i  . . . . . . . . . . . . . .        DWord             rbp - 0018
+  error_exit . . . . . . . . . .        L Near   00000053 _TEXT (F)
 printf . . . . . . . . . . . . .        P Near64 00000000 No Seg   00000000 *External C
 
 
@@ -106,20 +128,16 @@ Symbols:
 @Cpu . . . . . . . . . . . . . .        Number           D5Fh 
 @CurSeg  . . . . . . . . . . . .        Text   
 @DataSize  . . . . . . . . . . .        Number             0h 
-@Date  . . . . . . . . . . . . .        Text   05/22/26
+@Date  . . . . . . . . . . . . .        Text   05/26/26
 @FileCur . . . . . . . . . . . .        Text   c064.asm
 @FileName  . . . . . . . . . . .        Text   C064
 @Interface . . . . . . . . . . .        Number             3h 
 @Model . . . . . . . . . . . . .        Number             7h 
-@Time  . . . . . . . . . . . . .        Text   16:48:54
+@Time  . . . . . . . . . . . . .        Text   08:24:50
 @Version . . . . . . . . . . . .        Text   800
 @code  . . . . . . . . . . . . .        Text   _TEXT
 @data  . . . . . . . . . . . . .        Text   FLAT
 @stack . . . . . . . . . . . . .        Text   FLAT
 __JWASM__  . . . . . . . . . . .        Number            D4h 
-pArgc  . . . . . . . . . . . . .        DWord              0h _BSS STDCALL
-pArgv  . . . . . . . . . . . . .        QWord              4h _BSS STDCALL
-pEnv . . . . . . . . . . . . . .        QWord              Ch _BSS STDCALL
-pMode  . . . . . . . . . . . . .        QWord             14h _BSS STDCALL
 
-c064.asm: 41 lines, 2 passes, 1 ms, 0 warnings, 0 errors
+c064.asm: 56 lines, 2 passes, 2 ms, 0 warnings, 0 errors
