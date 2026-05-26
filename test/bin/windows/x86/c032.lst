@@ -1,4 +1,4 @@
-JWasm v2.12pre, May 20 2026
+JWasm v2.12pre, May 22 2026
 c032.asm
                                 .686
                                 .model flat, stdcall
@@ -10,94 +10,58 @@ c032.asm
                                 option casemap :none
 
                                 ; Win32 Prototypes
-                                GetCommandLineA PROTO STDCALL
-                                ExitProcess PROTO STDCALL :DWORD
-                                CommandLineToArgvA PROTO C, lpCmdLine:PTR BYTE, pNumArgs:PTR DWORD
-                                LocalFree PROTO STDCALL :DWORD
+                                GetCommandLineA PROTO STDCALL;
+                                ExitProcess PROTO STDCALL :DWORD;
+                                CommandLineToArgvA PROTO C, lpCmdLine:PTR BYTE, pNumArgs:PTR DWORD;
+                                LocalFree PROTO STDCALL :DWORD;
 
                                 ; C Runtime (CRT) Prototypes
-                                printf PROTO C :VARARG
-                                __getmainargs PROTO C,_Argc:PTR SDWORD,_Argv:PTR PTR SBYTE,_Env:PTR PTR SBYTE,_DoWildCard:SDWORD,_StartInfo:PTR DWORD
+                                printf PROTO C :VARARG;
+                                __getmainargs PROTO C, _Argc:PTR SDWORD, _Argv:PTR PTR SBYTE, _Env:PTR PTR SBYTE, _DoWildCard:SDWORD, _StartInfo:PTR DWORD;
 
-                                .data
-00000000                    *   _DATA segment
+                                ;external main
+                                _main PROTO C _argc:SDWORD , _argv:DWORD ;
+
+                                .data?
+00000000                    *   _BSS segment PARA FLAT PUBLIC 'BSS'
                             *   assume cs:ERROR
-00000000  417267756D656E7420        msg_count   db "Argument count: %d", 10, 0
-00000014  617267765B25645D3A        msg_arg     db "argv[%d]: %ws", 10, 0
-
-                                    ; Variables for __getmainargs
-00000023  00000000                  argc        dd 0
-00000027  00000000                  argv        dd 0
-0000002B  00000000                  env         dd 0
-0000002F  00000000                  ssi         dd 0
+                                    ; Define uninitialized variables for the CRT
+00000000  00000000                  pArgc   dd ?
+00000004  00000000                  pArgv   dd ?
+00000008  00000000                  pEnv    dd ?
+0000000C  00000000                  pMode   dd ?
 
 00000000                        .code
-00000033                    *   _DATA ends
+00000010                    *   _BSS ends
 00000000                    *   _TEXT segment
                             *   assume cs:FLAT
 
 00000000                        mainCRTStartup PROC
-                                    LOCAL pCmdLine :DWORD
-                                    LOCAL pArgv    :DWORD
-                                    LOCAL iArgc    :DWORD
-
-                                    ; 1. Get arguments using MSVCRT
-00000000  55                *   push ebp
-00000001  8BEC              *   mov ebp, esp
-00000003  83EC0C            *   sub esp, 12
-00000006  8D0500000000              lea eax, ssi
-0000000C  8D0D00000000              lea ecx, env
-00000012  8D1500000000              lea edx, argv
-00000018  8D1D00000000              lea ebx, argc
-0000001E                            invoke __getmainargs, ebx, edx, ecx, 0, eax
-0000001E  50                *    push eax
-0000001F  6A00              *    push 0
-00000021  51                *    push ecx
-00000022  52                *    push edx
-00000023  53                *    push ebx
-00000024  E800000000        *    call __getmainargs
-00000029  83C414            *    add esp, 20
-
-0000002C  A100000000                mov eax, argc
-00000031  8945F4                    mov iArgc, eax
-
-                                    ; Print argument count using C printf
-00000034                            invoke printf, ADDR msg_count, iArgc
-00000034  FF75F4            *    push iArgc
-00000037  6800000000        *    push offset msg_count
-0000003C  E800000000        *    call printf
-00000041  83C408            *    add esp, 8
-
-                                    ; 2. Iterate through argv array
-00000044  BB00000000                mov ebx, 0                      ; Loop counter
-00000049  8B0D00000000              mov ecx, argv                   ; Pointer to argv array
-                                    
-0000004F                        PrintLoop:
-0000004F  3B5DF4                    cmp ebx, iArgc
-00000052  7D1A                      jge ExitLoop
-
-00000054  8B1499                    mov edx, [ecx + ebx*4]          ; Get pointer to the current string
-00000057  8955F8                    mov pArgv, edx
-
-0000005A                            invoke printf, ADDR msg_arg, ebx, pArgv
-0000005A  FF75F8            *    push pArgv
-0000005D  53                *    push ebx
-0000005E  6800000000        *    push offset msg_arg
-00000063  E800000000        *    call printf
-00000068  83C40C            *    add esp, 12
-
-0000006B  43                        inc ebx
-0000006C  EBE1                      jmp PrintLoop
-
-0000006E                        ExitLoop:
-0000006E                            invoke ExitProcess, 0
-0000006E  6A00              *    push 0
-00000070  E800000000        *    call ExitProcess
-
-00000075                        mainCRTStartup ENDP
+                                    ; Initialize C Runtime command line arguments
+00000000  8D0500000000              lea eax, pMode
+00000006  8D0D00000000              lea ecx, pEnv
+0000000C  8D1500000000              lea edx, pArgv
+00000012  8D1D00000000              lea ebx, pArgc
+00000018                            invoke __getmainargs, ebx, edx, ecx, 0, eax
+00000018  50                *    push eax
+00000019  6A00              *    push 0
+0000001B  51                *    push ecx
+0000001C  52                *    push edx
+0000001D  53                *    push ebx
+0000001E  E800000000        *    call __getmainargs
+00000023  83C414            *    add esp, 20
+00000026                            invoke _main, pArgc, pArgv
+00000026  FF3500000000      *    push pArgv
+0000002C  FF3500000000      *    push pArgc
+00000032  E800000000        *    call _main
+00000037  83C408            *    add esp, 8
+0000003A                            invoke ExitProcess, 0
+0000003A  6A00              *    push 0
+0000003C  E800000000        *    call ExitProcess
+00000041                        mainCRTStartup ENDP
 
                                 END mainCRTStartup
-00000075                    *   _TEXT ends
+00000041                    *   _TEXT ends
 
 
 Macros:
@@ -116,8 +80,9 @@ Segments and Groups:
                 N a m e                 Size     Length   Align   Combine Class
 
 FLAT . . . . . . . . . . . . . .        GROUP
-_DATA  . . . . . . . . . . . . .        32 Bit   00000033 Para    Public  'DATA'
-_TEXT  . . . . . . . . . . . . .        32 Bit   00000075 Para    Public  'CODE'
+_BSS . . . . . . . . . . . . . .        32 Bit   00000010 Para    Public  'BSS'
+_DATA  . . . . . . . . . . . . .        32 Bit   00000000 Para    Public  'DATA'
+_TEXT  . . . . . . . . . . . . .        32 Bit   00000041 Para    Public  'CODE'
 
 
 Procedures, parameters and locals:
@@ -129,13 +94,9 @@ ExitProcess  . . . . . . . . . .        P Near32 00000000 No Seg   00000000 Exte
 GetCommandLineA  . . . . . . . .        P Near32 00000000 No Seg   00000000 *External STDCALL
 LocalFree  . . . . . . . . . . .        P Near32 00000000 No Seg   00000000 *External STDCALL
 __getmainargs  . . . . . . . . .        P Near32 00000000 No Seg   00000000 External  C
-mainCRTStartup . . . . . . . . .        P Near   00000000 _TEXT    00000075 Public   STDCALL
-  pCmdLine . . . . . . . . . . .        DWord             ebp - 0004
-  pArgv  . . . . . . . . . . . .        DWord             ebp - 0008
-  iArgc  . . . . . . . . . . . .        DWord             ebp - 000C
-  ExitLoop . . . . . . . . . . .        L Near   0000006E _TEXT (F)
-  PrintLoop  . . . . . . . . . .        L Near   0000004F _TEXT
-printf . . . . . . . . . . . . .        P Near32 00000000 No Seg   00000000 External  C
+_main  . . . . . . . . . . . . .        P Near32 00000000 No Seg   00000000 External  C
+mainCRTStartup . . . . . . . . .        P Near   00000000 _TEXT    00000041 Public   STDCALL
+printf . . . . . . . . . . . . .        P Near32 00000000 No Seg   00000000 *External C
 
 
 Symbols:
@@ -151,17 +112,15 @@ Symbols:
 @FileName  . . . . . . . . . . .        Text   C032
 @Interface . . . . . . . . . . .        Number             3h 
 @Model . . . . . . . . . . . . .        Number             7h 
-@Time  . . . . . . . . . . . . .        Text   14:00:09
+@Time  . . . . . . . . . . . . .        Text   16:48:56
 @Version . . . . . . . . . . . .        Text   800
 @code  . . . . . . . . . . . . .        Text   _TEXT
 @data  . . . . . . . . . . . . .        Text   FLAT
 @stack . . . . . . . . . . . . .        Text   FLAT
 __JWASM__  . . . . . . . . . . .        Number            D4h 
-argc . . . . . . . . . . . . . .        DWord             23h _DATA STDCALL
-argv . . . . . . . . . . . . . .        DWord             27h _DATA STDCALL
-env  . . . . . . . . . . . . . .        DWord             2Bh _DATA STDCALL
-msg_arg  . . . . . . . . . . . .        Byte[15]          14h _DATA STDCALL
-msg_count  . . . . . . . . . . .        Byte[20]           0h _DATA STDCALL
-ssi  . . . . . . . . . . . . . .        DWord             2Fh _DATA STDCALL
+pArgc  . . . . . . . . . . . . .        DWord              0h _BSS STDCALL
+pArgv  . . . . . . . . . . . . .        DWord              4h _BSS STDCALL
+pEnv . . . . . . . . . . . . . .        DWord              8h _BSS STDCALL
+pMode  . . . . . . . . . . . . .        DWord              Ch _BSS STDCALL
 
-c032.asm: 71 lines, 2 passes, 2 ms, 0 warnings, 0 errors
+c032.asm: 38 lines, 2 passes, 1 ms, 0 warnings, 0 errors

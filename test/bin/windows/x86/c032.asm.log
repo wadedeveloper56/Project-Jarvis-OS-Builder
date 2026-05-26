@@ -1,14 +1,14 @@
 PEDUMP - Win32/Win64 COFF EXE/OBJ/LIB file dumper v1.0 (C) Copyright 2025-2026 Christopher D. Wade.
 All Rights Reserved
 Dump of file bin\windows\x86\c032.obj
-File Size 840 bytes
+File Size 736 bytes
 File Type: 32-bit COFF OBJECT
 
 FILE HEADER VALUES
                14C Machine (Intel 386 or later processors and compatible processors)
-                 3 (3) Number of Sections
-          6A10A7B9 TimeDateStamp ->  n/a
-               1C5 PointerToSymbolTable
+                 4 (4) Number of Sections
+          6A10CF48 TimeDateStamp ->  n/a
+               168 PointerToSymbolTable
                 12 (18) NumberOfSymbols
                  0 (0) SizeOfOptionalHeader
                  0 Flags
@@ -18,11 +18,11 @@ SECTION HEADER #0 (0)
    .text name
        0 physical address
        0 virtual address
-      75 (117) size of raw data
-      8C file pointer to raw data (0000008C to 00000100)
-     102 file pointer to relocation table
+      41 (65) size of raw data
+      B4 file pointer to raw data (000000B4 to 000000F4)
+      F6 file pointer to relocation table
        0 file pointer to line numbers
-       C number of relocations
+       9 number of relocations
        0 number of line numbers
 60500020 flags
          Code
@@ -32,35 +32,29 @@ SECTION HEADER #0 (0)
          Readable
 
 RAW DATA #0 (0)
-00000000  55 8b ec 83 ec 0c 8d 05  00 00 00 00 8d 0d 00 00  U...............
-00000010  00 00 8d 15 00 00 00 00  8d 1d 00 00 00 00 50 6a  ..............Pj
-00000020  00 51 52 53 e8 00 00 00  00 83 c4 14 a1 00 00 00  .QRS............
-00000030  00 89 45 f4 ff 75 f4 68  00 00 00 00 e8 00 00 00  ..E..u.h........
-00000040  00 83 c4 08 bb 00 00 00  00 8b 0d 00 00 00 00 3b  ...............;
-00000050  5d f4 7d 1a 8b 14 99 89  55 f8 ff 75 f8 53 68 00  ].}.....U..u.Sh.
-00000060  00 00 00 e8 00 00 00 00  83 c4 0c 43 eb e1 6a 00  ...........C..j.
-00000070  e8 00 00 00 00                                    .....
+00000000  8d 05 00 00 00 00 8d 0d  00 00 00 00 8d 15 00 00  ................
+00000010  00 00 8d 1d 00 00 00 00  50 6a 00 51 52 53 e8 00  ........Pj.QRS..
+00000020  00 00 00 83 c4 14 ff 35  00 00 00 00 ff 35 00 00  .......5.....5..
+00000030  00 00 e8 00 00 00 00 83  c4 08 6a 00 e8 00 00 00  ..........j.....
+00000040  00                                                .
 SECTION HEADER #0 (0) RELOCATIONS
-  Address: 00000008  SymIndex: 0000000C  Type: DIR32
-  Address: 0000000E  SymIndex: 0000000D  Type: DIR32
-  Address: 00000014  SymIndex: 0000000E  Type: DIR32
-  Address: 0000001A  SymIndex: 0000000F  Type: DIR32
-  Address: 00000025  SymIndex: 0000000A  Type: REL32
-  Address: 0000002D  SymIndex: 0000000F  Type: DIR32
-  Address: 00000038  SymIndex: 00000010  Type: DIR32
-  Address: 0000003D  SymIndex: 00000009  Type: REL32
-  Address: 0000004B  SymIndex: 0000000E  Type: DIR32
-  Address: 0000005F  SymIndex: 00000011  Type: DIR32
-  Address: 00000064  SymIndex: 00000009  Type: REL32
-  Address: 00000071  SymIndex: 00000008  Type: REL32
+  Address: 00000002  SymIndex: 0000000E  Type: DIR32
+  Address: 00000008  SymIndex: 0000000F  Type: DIR32
+  Address: 0000000E  SymIndex: 00000010  Type: DIR32
+  Address: 00000014  SymIndex: 00000011  Type: DIR32
+  Address: 0000001F  SymIndex: 0000000B  Type: REL32
+  Address: 00000028  SymIndex: 00000010  Type: DIR32
+  Address: 0000002E  SymIndex: 00000011  Type: DIR32
+  Address: 00000033  SymIndex: 0000000C  Type: REL32
+  Address: 0000003D  SymIndex: 0000000A  Type: REL32
 
 
 SECTION HEADER #1 (1)
    .data name
        0 physical address
        0 virtual address
-      33 (51) size of raw data
-     17A file pointer to raw data (0000017A to 000001AC)
+       0 (0) size of raw data
+       0 file pointer to raw data (00000000 to FFFFFFFF)
        0 file pointer to relocation table
        0 file pointer to line numbers
        0 number of relocations
@@ -72,19 +66,33 @@ C0500040 flags
          Readable
          Writeable
 
-RAW DATA #1 (1)
-00000000  41 72 67 75 6d 65 6e 74  20 63 6f 75 6e 74 3a 20  Argument count: 
-00000010  25 64 0a 00 61 72 67 76  5b 25 64 5d 3a 20 25 77  %d..argv[%d]: %w
-00000020  73 0a 00 00 00 00 00 00  00 00 00 00 00 00 00 00  s...............
-00000030  00 00 00                                          ...
 
 
 SECTION HEADER #2 (2)
+    .bss name
+       0 physical address
+       0 virtual address
+      10 (16) size of raw data
+       0 file pointer to raw data (00000000 to 0000000F)
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+C0500080 flags
+         Unnitialized Data
+         1_BYTE_ALIGN
+         8_BYTE_ALIGN
+         Readable
+         Writeable
+
+
+
+SECTION HEADER #3 (3)
 .drectve name
        0 physical address
        0 virtual address
       18 (24) size of raw data
-     1AD file pointer to raw data (000001AD to 000001C4)
+     150 file pointer to raw data (00000150 to 00000167)
        0 file pointer to relocation table
        0 file pointer to line numbers
        0 number of relocations
@@ -93,7 +101,7 @@ SECTION HEADER #2 (2)
          Informataion
          Remove
 
-RAW DATA #2 (2)
+RAW DATA #3 (3)
 00000000  2d 65 6e 74 72 79 3a 6d  61 69 6e 43 52 54 53 74  -entry:mainCRTSt
 00000010  61 72 74 75 70 40 30 20                           artup@0 
 
@@ -104,24 +112,23 @@ Indx Sectn   Value   Type  Storage Name
 0000 DEBUG 00000000  0000 FILE     .file
      * c032.asm
 0002     1 00000000  0000 STATIC   .text
-     * Section: 0000  Len: 00075  Relocs: 000C  LineNums: 0000 checksum:00000000
+     * Section: 0000  Len: 00041  Relocs: 0009  LineNums: 0000 checksum:00000000
 0004     2 00000000  0000 STATIC   .data
-     * Section: 0000  Len: 00033  Relocs: 0000  LineNums: 0000 checksum:00000000
-0006     3 00000000  0000 STATIC   .drectve
+     * Section: 0000  Len: 00000  Relocs: 0000  LineNums: 0000 checksum:00000000
+0006     3 00000000  0000 STATIC   .bss
+     * Section: 0000  Len: 00010  Relocs: 0000  LineNums: 0000 checksum:00000000
+0008     4 00000000  0000 STATIC   .drectve
      * Section: 0000  Len: 00018  Relocs: 0000  LineNums: 0000 checksum:00000000
-0008 UNDEF 00000000  0020 EXTERNAL _ExitProcess@4
-0009 UNDEF 00000000  0020 EXTERNAL _printf
-000A UNDEF 00000000  0020 EXTERNAL ___getmainargs
-000B     1 00000000  0020 EXTERNAL _mainCRTStartup@0
-000C     2 0000002F  0000 STATIC   _ssi
-000D     2 0000002B  0000 STATIC   _env
-000E     2 00000027  0000 STATIC   _argv
-000F     2 00000023  0000 STATIC   _argc
-0010     2 00000000  0000 STATIC   _msg_count
-0011     2 00000014  0000 STATIC   _msg_arg
+000A UNDEF 00000000  0020 EXTERNAL _ExitProcess@4
+000B UNDEF 00000000  0020 EXTERNAL ___getmainargs
+000C UNDEF 00000000  0020 EXTERNAL __main
+000D     1 00000000  0020 EXTERNAL _mainCRTStartup@0
+000E     3 0000000C  0000 STATIC   _pMode
+000F     3 00000008  0000 STATIC   _pEnv
+0010     3 00000004  0000 STATIC   _pArgv
+0011     3 00000000  0000 STATIC   _pArgc
 
-String Table Size = 0x3F (63) bytes 4 entries
+String Table Size = 0x34 (52) bytes 3 entries
 stringtable[   0] = _ExitProcess@4
 stringtable[   1] = ___getmainargs
 stringtable[   2] = _mainCRTStartup@0
-stringtable[   3] = _msg_count
