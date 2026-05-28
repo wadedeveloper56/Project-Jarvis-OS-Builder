@@ -212,7 +212,12 @@ void *CarveZeroAlloc( carve_t cv )
     }
     _REMOVE_FROM_FREE( cv, v );
     p = v;
-    DbgAssert( ( cv->elm_size / sizeof(*p) ) <= 16 );
+	for (int i = 0; i < cv->elm_size / sizeof(*p); i++)
+	{
+		p[i] = 0;
+	}
+    //DbgAssert( ( cv->elm_size / sizeof(*p) ) <= 16 );
+    /*
     switch( cv->elm_size / sizeof(*p) ) {
     case 16:
         p[15] = 0;
@@ -247,6 +252,7 @@ void *CarveZeroAlloc( carve_t cv )
     case 1:
         p[0] = 0;
     }
+    */
     return p;
 }
 

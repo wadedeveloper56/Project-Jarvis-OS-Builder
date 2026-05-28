@@ -2775,8 +2775,8 @@ ret_code ParseLine( struct asm_tok tokenarray[] )
     unsigned            dirflags;
     unsigned            CurrOpnd;
     ret_code            temp;
-    struct asym         *sym;
-    uint_32             oldofs;
+    struct asym         *sym = NULL;
+    uint_32             oldofs = 0;
 #ifdef DEBUG_OUT
     char                *instr;
 #endif

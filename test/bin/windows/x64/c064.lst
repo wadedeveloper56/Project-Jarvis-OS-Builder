@@ -9,93 +9,52 @@ c064.asm
                             *   assume cs:flat,ds:flat,ss:flat,es:flat,fs:ERROR,gs:ERROR
                                 option casemap:none
 
-                                ; Windows API Prototypes (Kernel32.dll)
-                                extern GetCommandLineA: PROTO 
-                                ExitProcess PROTO :DWORD
+                                ; --- Prototypes (No stdcall decorations) ---
+                                extern ExitProcess: proto
+                                extern GetCommandLineA: proto
+                                extern CommandLineToArgvW: proto
+                                extern GetCommandLineW: proto
+                                extern LocalFree: proto
 
-                                ; External C-style main function target
-                                _main PROTO C :DWORD, :QWORD
+                                .data
+00000000                    *   _DATA segment
+                            *   assume cs:ERROR
+00000000  0000000000000000          argc dq 0
+00000008  0000000000000000          argv dq 0
 
-                                ;includelib kernel32.lib
-
-                                .code
+00000000                        .code
+00000010                    *   _DATA ends
 00000000                    *   _TEXT segment
                             *   assume cs:FLAT
-
-                                ; --- Main Entry Point (Linker stub looks for _start) ---
 00000000                        _start proc
-00000000  4883EC28                  sub     rsp, 40                 ; Shadow space + 16-byte alignment allocation
-
-                                    ; 1. Get raw ANSI command-line pointer from Windows Kernel
-00000004  E800000000                call    GetCommandLineA         ; RAX = pointer to command-line string
-00000009  488BF0                    mov     rsi, rax                ; RSI = walk pointer
-
-                                    ; 2. Allocate spaces on stack for argv array dynamic tracking
-                                    ; We will use a safe stack-allocation method. 
-                                    ; For a robust implementation, we dynamically tokenise the raw string.
-0000000C  55                        push    rbp
-0000000D  488BEC                    mov     rbp, rsp
+                                    ; --- 64-bit Shadow Space Setup ---
+00000000  4883EC28                  sub rsp, 40                 ; 32 bytes shadow space + 8 bytes alignment
                                     
-                                    ; Count and separate arguments in place (destructive parsing by replacing spaces with nulls)
-                                    ; Standard Windows rules: Handles quoted strings loosely for execution paths
-00000010  33C9                      xor     ecx, ecx                ; RCX = argc counter
-00000012  488DBC2400FEFFFF          lea     rdi, [rsp - 512]        ; Allocate temp stack buffer for argv pointers (max 64 args)
-                                    
-0000001A                        parse_loop:
-                                    ; Skip leading whitespace
-0000001A  8A06                      mov     al, [rsi]
-0000001C  84C0                      test    al, al
-0000001E  742F                      jz      parse_done
-00000020  3C20                      cmp     al, ' '
-00000022  7426                      je      skip_space
-00000024  3C09                      cmp     al, 09h                 ; Tab character
-00000026  7422                      je      skip_space
-                                    
-                                    ; Found start of an argument token
-00000028  488934CF                  mov     [rdi + rcx*8], rsi      ; Store pointer in argv array
-0000002C  48FFC1                    inc     rcx                     ; argc++
+                                    ; 1. Get the Unicode Command Line (better for CommandLineToArgvW)
+00000004  E800000000                call GetCommandLineW
+                                    ; rax contains the pointer to the command line string
 
-0000002F                        find_arg_end:
-0000002F  8A06                      mov     al, [rsi]
-00000031  84C0                      test    al, al
-00000033  741A                      jz      parse_done
-00000035  3C20                      cmp     al, ' '
-00000037  7409                      je      terminate_token
-00000039  3C09                      cmp     al, 09h
-0000003B  7405                      je      terminate_token
-0000003D  48FFC6                    inc     rsi
-00000040  EBED                      jmp     find_arg_end
+                                    ; 2. Parse it like C's main(argc, argv)
+00000009  488BC8                    mov rcx, rax                ; Argument 1: LPCWSTR lpCmdLine
+0000000C  488D1500000000            lea rdx, argc               ; Argument 2: int *pNumArgs
+00000013  E800000000                call CommandLineToArgvW
+00000018  48890500000000            mov argv, rax               ; rax contains the pointer to the argv array
 
-00000042                        terminate_token:
-00000042  C60600                    mov     byte ptr [rsi], 0       ; Replace space with null terminator
-00000045  48FFC6                    inc     rsi
-00000048  EBD0                      jmp     parse_loop
+                                    ; --- Your code here ---
+                                    ; argv[0] is accessible via [rax]
+                                    ; argv[1] is accessible via [rax + 8], etc.
 
-0000004A                        skip_space:
-0000004A  48FFC6                    inc     rsi
-0000004D  EBCB                      jmp     parse_loop
+                                    ; 3. Clean up argv array
+0000001F  488B0D00000000            mov rcx, argv
+00000026  E800000000                call LocalFree
 
-0000004F                        parse_done:
-                                    ; 3. Setup standard Microsoft x64 calling convention for C main
-                                    ; System V / Windows x64 ABI uses RCX and RDX for first 2 integer/pointer arguments.
-                                    ; main(int argc, char** argv) -> RCX = argc, RDX = argv
-                                    
-0000004F  8BD1                      mov     edx, ecx                ; Backup argc to preserve order
-00000051  488BCA                    mov     rcx, rdx                ; RCX = argc
-00000054  488BD7                    mov     rdx, rdi                ; RDX = &argv[0] (pointer to array of strings)
-
-                                    ; 4. Clear stack alignment setup and call main
-00000057  4883EC20                  sub     rsp, 32                 ; Standard 32-byte shadow space for C main callee
-0000005B  E800000000                call    _main
-00000060  4883C420                  add     rsp, 32                 ; Clean shadow space
-
-                                    ; 5. Exit smoothly using OS Kernel
-00000064  8BC8                      mov     ecx, eax                ; Pass main's return value to ExitProcess
-00000066  E800000000                call    ExitProcess
-0000006B                        _start endp
+                                    ; 4. Exit Program
+0000002B  33C9                      xor ecx, ecx                ; Exit code 0
+0000002D  E800000000                call ExitProcess
+00000032                        _start endp
 
                                 end _start
-0000006B                    *   _TEXT ends
+00000032                    *   _TEXT ends
 
 
 Macros:
@@ -114,23 +73,20 @@ Segments and Groups:
                 N a m e                 Size     Length   Align   Combine Class
 
 FLAT . . . . . . . . . . . . . .        GROUP
-_DATA  . . . . . . . . . . . . .        64 Bit   00000000 Para    Public  'DATA'
-_TEXT  . . . . . . . . . . . . .        64 Bit   0000006B Para    Public  'CODE'
+_DATA  . . . . . . . . . . . . .        64 Bit   00000010 Para    Public  'DATA'
+_TEXT  . . . . . . . . . . . . .        64 Bit   00000032 Para    Public  'CODE'
 
 
 Procedures, parameters and locals:
 
                 N a m e                 Type     Value    Segment  Length
 
+CommandLineToArgvW . . . . . . .        P Near64 00000000 No Seg   00000000 External  C
 ExitProcess  . . . . . . . . . .        P Near64 00000000 No Seg   00000000 External  C
 GetCommandLineA  . . . . . . . .        P Near64 00000000 No Seg   00000000 External  C
-_main  . . . . . . . . . . . . .        P Near64 00000000 No Seg   00000000 External  C
-_start . . . . . . . . . . . . .        P Near   00000000 _TEXT    0000006B Public   C
-  terminate_token  . . . . . . .        L Near   00000042 _TEXT (F)
-  find_arg_end . . . . . . . . .        L Near   0000002F _TEXT
-  parse_done . . . . . . . . . .        L Near   0000004F _TEXT (F)
-  parse_loop . . . . . . . . . .        L Near   0000001A _TEXT
-  skip_space . . . . . . . . . .        L Near   0000004A _TEXT (F)
+GetCommandLineW  . . . . . . . .        P Near64 00000000 No Seg   00000000 External  C
+LocalFree  . . . . . . . . . . .        P Near64 00000000 No Seg   00000000 External  C
+_start . . . . . . . . . . . . .        P Near   00000000 _TEXT    00000032 Public   C
 
 
 Symbols:
@@ -141,16 +97,18 @@ Symbols:
 @Cpu . . . . . . . . . . . . . .        Number           D5Fh 
 @CurSeg  . . . . . . . . . . . .        Text   
 @DataSize  . . . . . . . . . . .        Number             0h 
-@Date  . . . . . . . . . . . . .        Text   05/26/26
+@Date  . . . . . . . . . . . . .        Text   05/28/26
 @FileCur . . . . . . . . . . . .        Text   c064.asm
 @FileName  . . . . . . . . . . .        Text   C064
 @Interface . . . . . . . . . . .        Number             1h 
 @Model . . . . . . . . . . . . .        Number             7h 
-@Time  . . . . . . . . . . . . .        Text   12:09:58
+@Time  . . . . . . . . . . . . .        Text   13:09:42
 @Version . . . . . . . . . . . .        Text   800
 @code  . . . . . . . . . . . . .        Text   _TEXT
 @data  . . . . . . . . . . . . .        Text   FLAT
 @stack . . . . . . . . . . . . .        Text   FLAT
 __JWASM__  . . . . . . . . . . .        Number            D4h 
+argc . . . . . . . . . . . . . .        QWord              0h _DATA C
+argv . . . . . . . . . . . . . .        QWord              8h _DATA C
 
-c064.asm: 88 lines, 2 passes, 2 ms, 0 warnings, 0 errors
+c064.asm: 44 lines, 2 passes, 1 ms, 0 warnings, 0 errors
