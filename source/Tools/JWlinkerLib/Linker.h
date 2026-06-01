@@ -2,9 +2,11 @@
 
 class Linker
 {
+	int argc;
+	char** argv;
 public:
-    Linker();
-    ~Linker();
+	Linker(int argc, char** argv);
+	~Linker();
 	int link();
 };
 
