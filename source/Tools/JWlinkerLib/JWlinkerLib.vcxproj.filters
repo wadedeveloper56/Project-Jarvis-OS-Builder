@@ -54,4 +54,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="lnkerror.msg" />
+    <None Include="rc.msg" />
+    <None Include="wlink.msg" />
+  </ItemGroup>
 </Project>
