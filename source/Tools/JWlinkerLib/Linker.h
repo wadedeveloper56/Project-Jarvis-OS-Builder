@@ -2,6 +2,7 @@
 
 #include <memory>
 #include "MemorySubsystem.h"
+#include "FileSubsystem.h"
 
 typedef unsigned long stateflag;
 #define MAKE_RELOCS             0x00000001
@@ -37,6 +38,7 @@ class Linker
 	char** argv;
 	stateflag LinkState;
 	shared_ptr<MemorySubsystem> memorySubsystem;
+	shared_ptr<FileSubsystem> fileSubsystem;
 public:
 	Linker(int argc, char** argv);
 	~Linker();

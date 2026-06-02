@@ -6,6 +6,7 @@ Linker::Linker(int argc, char** argv)
 	this->argc = argc;
 	this->argv = argv;
 	memorySubsystem = make_shared<MemorySubsystem>();
+	fileSubsystem = make_shared<FileSubsystem>();
 }
 
 Linker::~Linker()
