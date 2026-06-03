@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "Linker.h"
 
+void InitNodes(shared_ptr<MemorySubsystem> memorySubsystem);
+
 Linker::Linker(int argc, char** argv)
 {
 	this->argc = argc;
@@ -8,6 +10,7 @@ Linker::Linker(int argc, char** argv)
 	memorySubsystem = make_shared<MemorySubsystem>();
 	fileSubsystem = make_shared<FileSubsystem>();
 	messagingSubsystem = make_shared<MessagingSubsystem>();
+	InitNodes(memorySubsystem);
 }
 
 Linker::~Linker()
