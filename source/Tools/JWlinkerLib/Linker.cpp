@@ -12,6 +12,7 @@ Linker::Linker(int argc, char** argv)
 	fileSubsystem = make_shared<FileSubsystem>();
 	messagingSubsystem = make_shared<MessagingSubsystem>();
 	InitNodes(memorySubsystem);
+	tokenBuffer = make_shared<TokenBuffer>(memorySubsystem);
 }
 
 Linker::~Linker()

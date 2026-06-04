@@ -4,6 +4,7 @@
 #include "MemorySubsystem.h"
 #include "FileSubsystem.h"
 #include "MessagingSubsystem.h"
+#include "TokenBuffer.h"
 
 typedef unsigned long stateflag;
 #define MAKE_RELOCS             0x00000001
@@ -41,6 +42,7 @@ class Linker
 	shared_ptr<MemorySubsystem> memorySubsystem;
 	shared_ptr<FileSubsystem> fileSubsystem;
 	shared_ptr<MessagingSubsystem> messagingSubsystem;
+	shared_ptr<TokenBuffer> tokenBuffer;
 public:
 	Linker(int argc, char** argv);
 	~Linker();
