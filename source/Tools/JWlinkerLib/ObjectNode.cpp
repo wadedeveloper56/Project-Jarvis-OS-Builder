@@ -54,3 +54,20 @@ void InitNodes(shared_ptr<MemorySubsystem> memorySubsystem)
 	ExtNodes = (nodearray*)MakeArray(memorySubsystem, sizeof(extnode));
 	NameNodes = (nodearray*)MakeArray(memorySubsystem, sizeof(list_of_names*));
 }
+
+void BurnNodeArray(shared_ptr<MemorySubsystem> memorySubsystem, nodearray* list)
+{
+	for (int index = 0; index <= list->arraymax; index++)
+	{
+		memorySubsystem->FreeMemory(list->array[index]);
+	}
+	memorySubsystem->FreeMemory(list);
+}
+
+void BurnNodes(shared_ptr<MemorySubsystem> memorySubsystem)
+{
+	BurnNodeArray(memorySubsystem, GrpNodes);
+	BurnNodeArray(memorySubsystem, SegNodes);
+	BurnNodeArray(memorySubsystem, ExtNodes);
+	BurnNodeArray(memorySubsystem, NameNodes);
+}

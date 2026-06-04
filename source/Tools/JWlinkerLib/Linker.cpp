@@ -2,6 +2,7 @@
 #include "Linker.h"
 
 void InitNodes(shared_ptr<MemorySubsystem> memorySubsystem);
+void BurnNodes(shared_ptr<MemorySubsystem> memorySubsystem);
 
 Linker::Linker(int argc, char** argv)
 {
@@ -15,6 +16,7 @@ Linker::Linker(int argc, char** argv)
 
 Linker::~Linker()
 {
+	BurnNodes(memorySubsystem);
 }
 
 int Linker::link()
