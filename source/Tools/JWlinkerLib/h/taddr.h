@@ -28,8 +28,8 @@
 *               DESCRIBE IT HERE!
 *
 ****************************************************************************/
-
-
+#pragma once
+#include "watcom.h"
 typedef unsigned_32 offset;
 typedef unsigned_16 segment;
 

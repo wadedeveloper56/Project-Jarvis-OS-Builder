@@ -13,6 +13,8 @@ Linker::Linker(int argc, char** argv)
 	messagingSubsystem = make_shared<MessagingSubsystem>();
 	InitNodes(memorySubsystem);
 	tokenBuffer = make_shared<TokenBuffer>(memorySubsystem);
+	spillFile = make_shared<SpillFile>();
+	symbolTable = make_shared<SymbolTable>(memorySubsystem);
 }
 
 Linker::~Linker()

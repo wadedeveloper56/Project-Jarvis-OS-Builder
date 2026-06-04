@@ -28,7 +28,13 @@
 *               DESCRIBE IT HERE!
 *
 ****************************************************************************/
+#pragma once
 
+#include "watcom.h"
+#include "taddr.h"
+
+typedef unsigned_32 offset;
+typedef unsigned_16 segment;
 
 //  Linker symbol table structures
 

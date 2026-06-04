@@ -28,6 +28,7 @@
 *
 ****************************************************************************/
 
+#include "taddr.h"
 
 typedef struct file_list        FILE_LIST;
 typedef struct path_entry       PATH_ENTRY;

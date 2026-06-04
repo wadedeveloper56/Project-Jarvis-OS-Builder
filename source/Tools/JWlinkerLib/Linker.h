@@ -5,6 +5,9 @@
 #include "FileSubsystem.h"
 #include "MessagingSubsystem.h"
 #include "TokenBuffer.h"
+#include "File.h"
+#include "SpillFile.h"
+#include "SymbolTable.h"
 
 typedef unsigned long stateflag;
 #define MAKE_RELOCS             0x00000001
@@ -43,6 +46,8 @@ class Linker
 	shared_ptr<FileSubsystem> fileSubsystem;
 	shared_ptr<MessagingSubsystem> messagingSubsystem;
 	shared_ptr<TokenBuffer> tokenBuffer;
+	shared_ptr<SpillFile> spillFile;
+	shared_ptr<SymbolTable> symbolTable;
 public:
 	Linker(int argc, char** argv);
 	~Linker();
