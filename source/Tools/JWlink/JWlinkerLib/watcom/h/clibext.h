@@ -27,9 +27,9 @@
 #ifndef O_TEXT
 #define O_TEXT 0
 #endif
-#define stricmp strcasecmp
-#define strcmpi strcasecmp
-#define strnicmp strncasecmp
+//#define stricmp strcasecmp
+//#define strcmpi strcasecmp
+//#define strnicmp strncasecmp
 #ifndef getch
 #define getch getchar
 #endif
