@@ -242,16 +242,31 @@ typedef enum
     ORL_FALSE
 } orl_return;
 
+typedef enum
+{
+    ORL_ELF,
+    ORL_COFF,
+    ORL_OMF,
+    ORL_UNRECOGNIZED_FORMAT
+} orl_file_format;
+
 typedef struct orl_handle_struct        * orl_handle;
 
 typedef struct elf_handle_struct elf_handle_struct;
 typedef elf_handle_struct* elf_handle;
+typedef struct elf_file_handle_struct elf_file_handle_struct;
+typedef elf_file_handle_struct* elf_file_handle;
 
 typedef struct coff_handle_struct       coff_handle_struct;
 typedef coff_handle_struct* coff_handle;
+typedef struct coff_file_handle_struct  coff_file_handle_struct;
+typedef coff_file_handle_struct* coff_file_handle;
 
 typedef struct omf_handle_struct        omf_handle_struct;
 typedef omf_handle_struct* omf_handle;
+typedef struct omf_file_handle_struct   omf_file_handle_struct;
+typedef omf_file_handle_struct* omf_file_handle;
+
 
 typedef struct
 {
@@ -261,22 +276,124 @@ typedef struct
     void        (*free)(void*);
 } orl_funcs;
 
+struct elf_file_handle_struct
+{
+    elf_handle          elf_hnd;
+    elf_file_handle     next;
+    //elf_sec_handle* elf_sec_hnd;
+    //elf_sec_handle* orig_sec_hnd;
+    void* file;
+    char* contents_buffer1;
+    char* contents_buffer2;
+    uint16_t            shentsize;
+    orl_machine_type    machine_type;
+    orl_file_type       type;
+    orl_file_size       size;
+    orl_file_flags      flags;
+    elf_quantity        num_sections;
+    //elf_sec_handle      symbol_table;
+    //orl_hash_table      sec_name_hash_table;
+};
+
+struct coff_file_handle_struct
+{
+    coff_handle         coff_hnd;
+    coff_file_handle    next;
+    //coff_sec_handle* coff_sec_hnd;
+    //coff_sec_handle* orig_sec_hnd;
+    void* file;
+    //coff_quantity       initial_size;
+    //coff_file_header* f_hdr_buffer;
+    char* s_hdr_table_buffer;
+    char* rest_of_file_buffer;
+    orl_machine_type    machine_type;
+    orl_file_type       type;
+    orl_file_size       size;
+    orl_file_flags      flags;
+    //coff_quantity       num_sections;
+    //coff_quantity       num_symbols;
+    //coff_symbol_handle  symbol_handles;
+    //coff_sec_handle     symbol_table;
+    //coff_sec_handle     string_table;
+    //orl_hash_table      sec_name_hash_table;
+    unsigned long       export_table_rva;
+    char* implib_data;
+};
+
+struct omf_file_handle_struct
+{
+    omf_handle          omf_hnd;
+    omf_file_handle     next;
+    void* file;
+    unsigned char* parsebuf;
+    unsigned short      parselen;
+    long                status;
+
+    //omf_sec_handle      lnames;
+    //omf_sec_handle      extdefs;
+    //omf_sec_handle      relocs;
+    //omf_sec_handle      comments;
+
+    //omf_thred_fixup     frame_thred[4];
+    //omf_thred_fixup     target_thred[4];
+
+    //omf_sec_handle      first_sec;
+    //omf_sec_handle      last_sec;
+    //omf_quantity        next_idx;
+
+    //omf_sec_handle* segs;
+    //omf_quantity        num_segs;
+
+    //omf_sec_handle* comdats;
+    //omf_quantity        num_comdats;
+
+    //omf_grp_handle* groups;
+    //omf_quantity        num_groups;
+
+    orl_machine_type    machine_type;
+    orl_file_type       type;
+    orl_file_size       size;
+    orl_file_flags      flags;
+    //omf_quantity        num_sections;
+    //omf_sec_handle      work_sec;
+
+    //omf_tmp_lidata      lidata;
+
+    //omf_dbg_style       debug_style;
+
+    //omf_sec_handle      symbol_table;
+    //omf_rectyp          last_rec;
+};
+
 struct omf_handle_struct
 {
     orl_funcs* funcs;
-    //omf_file_handle     first_file_hnd;
+    omf_file_handle     first_file_hnd;
 };
 
 struct coff_handle_struct
 {
     orl_funcs* funcs;
-    //coff_file_handle    first_file_hnd;
+    coff_file_handle    first_file_hnd;
 };
 
 struct elf_handle_struct
 {
     orl_funcs* funcs;
-    //elf_file_handle     first_file_hnd;
+    elf_file_handle     first_file_hnd;
+};
+
+struct orl_file_handle_struct
+{
+    orl_handle                          orl_hnd;
+    struct orl_file_handle_struct* next;
+    orl_file_format                     type;
+    union
+    {
+        elf_file_handle                 elf;
+        coff_file_handle                coff;
+        omf_file_handle                 omf;
+    } file_hnd;
 };
 
 struct orl_handle_struct
@@ -285,7 +402,7 @@ struct orl_handle_struct
     elf_handle                          elf_hnd;
     coff_handle                         coff_hnd;
     omf_handle                          omf_hnd;
-    //struct orl_file_handle_struct* first_file_hnd;
+    struct orl_file_handle_struct* first_file_hnd;
     orl_return                          error;
 };
 

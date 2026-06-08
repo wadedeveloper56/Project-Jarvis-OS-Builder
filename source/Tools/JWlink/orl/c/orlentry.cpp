@@ -6,7 +6,7 @@ elf_handle ElfInit(orl_funcs* funcs)
 	elf_handle elf_hnd = (elf_handle)funcs->alloc(sizeof(elf_handle_struct));
 	if (!elf_hnd) return(NULL);
 	elf_hnd->funcs = funcs;
-	//elf_hnd->first_file_hnd = NULL;
+	elf_hnd->first_file_hnd = NULL;
 	return(elf_hnd);
 }
 
@@ -15,7 +15,7 @@ coff_handle CoffInit(orl_funcs* funcs)
 	coff_handle coff_hnd = (coff_handle)funcs->alloc(sizeof(coff_handle_struct));
 	if (!coff_hnd) return(NULL);
 	coff_hnd->funcs = funcs;
-	//coff_hnd->first_file_hnd = NULL;
+	coff_hnd->first_file_hnd = NULL;
 	return(coff_hnd);
 }
 
@@ -24,7 +24,7 @@ omf_handle OmfInit(orl_funcs* funcs)
 	omf_handle omf_hnd = (omf_handle)funcs->alloc(sizeof(omf_handle_struct));
 	if (!omf_hnd) return(NULL);
 	omf_hnd->funcs = funcs;
-	//omf_hnd->first_file_hnd = NULL;
+	omf_hnd->first_file_hnd = NULL;
 	return(omf_hnd);
 }
 
@@ -52,7 +52,7 @@ orl_handle ORLInit(orl_funcs* funcs)
 		funcs->free(orl_hnd);
 		return(NULL);
 	}
-	//orl_hnd->first_file_hnd = NULL;
+	orl_hnd->first_file_hnd = NULL;
 	return(orl_hnd);
 }
 
