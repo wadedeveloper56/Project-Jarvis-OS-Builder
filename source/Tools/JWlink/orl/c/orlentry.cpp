@@ -56,7 +56,7 @@ orl_handle ORLInit(orl_funcs* funcs)
 	return(orl_hnd);
 }
 
-#define _ClientFree( a, b )             ((a)->elf_hnd->funcs->free( b ))
+#define _ClientFreeElf( a, b )             ((a)->elf_hnd->funcs->free( b ))
 void free_elf_file_hnd(elf_file_handle elf_file_hnd)
 {
 	int                         loop;
@@ -86,16 +86,16 @@ void free_elf_file_hnd(elf_file_handle elf_file_hnd)
 				default:
 					break;
 			}
-			_ClientFree(elf_file_hnd, elf_sec_hnd);
+			_ClientFreeElf(elf_file_hnd, elf_sec_hnd);
 		}
-		_ClientFree(elf_file_hnd, elf_file_hnd->elf_sec_hnd);
+		_ClientFreeElf(elf_file_hnd, elf_file_hnd->elf_sec_hnd);
 	}
-	_ClientFree(elf_file_hnd, elf_file_hnd->orig_sec_hnd);
+	_ClientFreeElf(elf_file_hnd, elf_file_hnd->orig_sec_hnd);
 //	if (elf_file_hnd->sec_name_hash_table)
 //	{
 //		ORLHashTableFree(elf_file_hnd->sec_name_hash_table);
 //	}
-	_ClientFree(elf_file_hnd, elf_file_hnd);
+	_ClientFreeElf(elf_file_hnd, elf_file_hnd);
 }
 
 orl_return ElfRemoveFileLinks(elf_file_handle elf_file_hnd)
@@ -133,6 +133,14 @@ orl_return ElfRemoveFileLinks(elf_file_handle elf_file_hnd)
 
 orl_return ElfFini(elf_handle elf_hnd)
 {
+	orl_return                                  error;
+
+	while (elf_hnd->first_file_hnd != NULL)
+	{
+		error = ElfRemoveFileLinks(elf_hnd->first_file_hnd);
+		if (error != ORL_OKAY) return(error);
+	}
+	elf_hnd->funcs->free(elf_hnd);
 	return(ORL_OKAY);
 }
 
