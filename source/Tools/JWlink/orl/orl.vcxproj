@@ -175,7 +175,40 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="coff\h\coffentr.h" />
+    <ClInclude Include="coff\h\coffflhn.h" />
+    <ClInclude Include="coff\h\coffglbl.h" />
+    <ClInclude Include="coff\h\coffhash.h" />
+    <ClInclude Include="coff\h\coffimpl.h" />
+    <ClInclude Include="coff\h\coffload.h" />
+    <ClInclude Include="coff\h\cofflwlv.h" />
+    <ClInclude Include="coff\h\cofforl.h" />
+    <ClInclude Include="coff\h\cofftype.h" />
+    <ClInclude Include="elf\h\elfentr.h" />
+    <ClInclude Include="elf\h\elfflhn.h" />
+    <ClInclude Include="elf\h\elfglbl.h" />
+    <ClInclude Include="elf\h\elfhash.h" />
+    <ClInclude Include="elf\h\elfload.h" />
+    <ClInclude Include="elf\h\elflwlv.h" />
+    <ClInclude Include="elf\h\elforl.h" />
+    <ClInclude Include="elf\h\elftype.h" />
     <ClInclude Include="h\orl.h" />
+    <ClInclude Include="h\orlcomon.h" />
+    <ClInclude Include="h\orlentry.h" />
+    <ClInclude Include="h\orlflhnd.h" />
+    <ClInclude Include="h\orlglobl.h" />
+    <ClInclude Include="h\orlhash.h" />
+    <ClInclude Include="h\orlhshdf.h" />
+    <ClInclude Include="h\orlintnl.h" />
+    <ClInclude Include="h\orllevel.h" />
+    <ClInclude Include="omf\h\omfdrctv.h" />
+    <ClInclude Include="omf\h\omfentr.h" />
+    <ClInclude Include="omf\h\omfflhn.h" />
+    <ClInclude Include="omf\h\omfglbl.h" />
+    <ClInclude Include="omf\h\omfload.h" />
+    <ClInclude Include="omf\h\omfmunge.h" />
+    <ClInclude Include="omf\h\omforl.h" />
+    <ClInclude Include="omf\h\omftype.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>

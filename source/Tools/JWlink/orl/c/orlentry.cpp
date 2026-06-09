@@ -1,5 +1,8 @@
 #include "pch.h"
-#include "orl.h"
+#include "orllevel.h"
+#include "orlentry.h"
+#include "orlflhnd.h"
+#include "pcobj.h"
 
 elf_handle ElfInit(orl_funcs* funcs)
 {
