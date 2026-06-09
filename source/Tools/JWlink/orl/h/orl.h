@@ -270,6 +270,8 @@ typedef struct omf_handle_struct        omf_handle_struct;
 typedef omf_handle_struct* omf_handle;
 typedef struct omf_file_handle_struct   omf_file_handle_struct;
 typedef omf_file_handle_struct* omf_file_handle;
+typedef struct omf_sec_handle_struct    omf_sec_handle_struct;
+typedef omf_sec_handle_struct* omf_sec_handle;
 
 typedef struct
 {
@@ -374,6 +376,28 @@ struct coff_file_handle_struct
     char* implib_data;
 };
 
+struct omf_sec_handle_struct
+{
+    orl_file_format     file_format;
+    omf_file_handle     omf_file_hnd;
+    omf_sec_handle      next;
+    orl_sec_size        size;
+    orl_sec_type        type;
+    orl_sec_flags       flags;
+    /*
+    omf_bytes           contents;
+    omf_quantity        index;
+    union
+    {
+        struct omf_seg_assoc_struct     seg;
+        struct omf_reloc_assoc_struct   reloc;
+        struct omf_string_assoc_struct  string;
+        struct omf_comment_assoc_struct comment;
+        struct omf_sym_assoc_struct     sym;
+    } assoc;
+    */
+}; 
+
 struct omf_file_handle_struct
 {
     omf_handle          omf_hnd;
@@ -383,22 +407,22 @@ struct omf_file_handle_struct
     unsigned short      parselen;
     long                status;
 
-    //omf_sec_handle      lnames;
-    //omf_sec_handle      extdefs;
-    //omf_sec_handle      relocs;
-    //omf_sec_handle      comments;
+    omf_sec_handle      lnames;
+    omf_sec_handle      extdefs;
+    omf_sec_handle      relocs;
+    omf_sec_handle      comments;
 
     //omf_thred_fixup     frame_thred[4];
     //omf_thred_fixup     target_thred[4];
 
-    //omf_sec_handle      first_sec;
-    //omf_sec_handle      last_sec;
+    omf_sec_handle      first_sec;
+    omf_sec_handle      last_sec;
     //omf_quantity        next_idx;
 
-    //omf_sec_handle* segs;
+    omf_sec_handle* segs;
     //omf_quantity        num_segs;
 
-    //omf_sec_handle* comdats;
+    omf_sec_handle* comdats;
     //omf_quantity        num_comdats;
 
     //omf_grp_handle* groups;
@@ -409,13 +433,13 @@ struct omf_file_handle_struct
     orl_file_size       size;
     orl_file_flags      flags;
     //omf_quantity        num_sections;
-    //omf_sec_handle      work_sec;
+    omf_sec_handle      work_sec;
 
     //omf_tmp_lidata      lidata;
 
     //omf_dbg_style       debug_style;
 
-    //omf_sec_handle      symbol_table;
+    omf_sec_handle      symbol_table;
     //omf_rectyp          last_rec;
 };
 
