@@ -1,41 +1,9 @@
-/****************************************************************************
-*
-*                            Open Watcom Project
-*
-*    Portions Copyright (c) 1983-2002 Sybase, Inc. All Rights Reserved.
-*
-*  ========================================================================
-*
-*    This file contains Original Code and/or Modifications of Original
-*    Code as defined in and that are subject to the Sybase Open Watcom
-*    Public License version 1.0 (the 'License'). You may not use this file
-*    except in compliance with the License. BY USING THIS FILE YOU AGREE TO
-*    ALL TERMS AND CONDITIONS OF THE LICENSE. A copy of the License is
-*    provided with the Original Code and Modifications, and is also
-*    available at www.sybase.com/developer/opensource.
-*
-*    The Original Code and all software distributed under the License are
-*    distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
-*    EXPRESS OR IMPLIED, AND SYBASE AND ALL CONTRIBUTORS HEREBY DISCLAIM
-*    ALL SUCH WARRANTIES, INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF
-*    MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR
-*    NON-INFRINGEMENT. Please see the License for the specific language
-*    governing rights and limitations under the License.
-*
-*  ========================================================================
-*
-* Description:  Structures, defines and enums for OMF files.
-*
-****************************************************************************/
-
 
 #ifndef OMF_TYPE_INCLUDED
 #define OMF_TYPE_INCLUDED
 
 #define OMFENTRY
 
-/* status flags
- */
 #define OMF_STATUS_FILE_LOADED          0x00000001
 #define OMF_STATUS_ARCH_SET             0x00000002
 #define OMF_STATUS_ADD_LIDATA           0x00000008
@@ -43,14 +11,10 @@
 
 #define OMF_STATUS_ADD_MASK             OMF_STATUS_ADD_LIDATA
 
-/* section flags
- */
 #define OMF_SEG_IS_32                   0x00000001
 #define OMF_SEG_IS_BIG                  0x00000002
 #define OMF_SEG_IS_ABS                  0x00000004
 
-/* symbol flags
- */
 #define OMF_SYM_FLAGS_LOCAL             0x00000001
 #define OMF_SYM_FLAGS_COMDEF            0x00000002
 #define OMF_SYM_FLAGS_GRPDEF            0x00000004
@@ -65,14 +29,11 @@ enum{
     OMF_SEC_DATA_CODE_START
 };
 
-/* Debug info styles we recognize */
 enum {
     OMF_DBG_STYLE_UNKNOWN = -1,
     OMF_DBG_STYLE_CODEVIEW,
     OMF_DBG_STYLE_HLL
 };
-
-// handle definitions
 
 typedef uint_8                          omf_file_flags;
 typedef uint_32                         omf_file_index;
@@ -269,7 +230,6 @@ struct omf_sec_handle_struct {
     orl_sec_flags       flags;
     omf_bytes           contents;
     omf_quantity        index;
-    // assoc - things associated with the section
     union {
         struct omf_seg_assoc_struct     seg;
         struct omf_reloc_assoc_struct   reloc;

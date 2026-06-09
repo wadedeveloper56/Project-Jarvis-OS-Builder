@@ -1,34 +1,3 @@
-/****************************************************************************
-*
-*                            Open Watcom Project
-*
-*    Portions Copyright (c) 1983-2002 Sybase, Inc. All Rights Reserved.
-*
-*  ========================================================================
-*
-*    This file contains Original Code and/or Modifications of Original
-*    Code as defined in and that are subject to the Sybase Open Watcom
-*    Public License version 1.0 (the 'License'). You may not use this file
-*    except in compliance with the License. BY USING THIS FILE YOU AGREE TO
-*    ALL TERMS AND CONDITIONS OF THE LICENSE. A copy of the License is
-*    provided with the Original Code and Modifications, and is also
-*    available at www.sybase.com/developer/opensource.
-*
-*    The Original Code and all software distributed under the License are
-*    distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
-*    EXPRESS OR IMPLIED, AND SYBASE AND ALL CONTRIBUTORS HEREBY DISCLAIM
-*    ALL SUCH WARRANTIES, INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF
-*    MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR
-*    NON-INFRINGEMENT. Please see the License for the specific language
-*    governing rights and limitations under the License.
-*
-*  ========================================================================
-*
-* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
-*               DESCRIBE IT HERE!
-*
-****************************************************************************/
-
 
 #ifndef COFF_ORL_INCLUDED
 #define COFF_ORL_INCLUDED
@@ -40,7 +9,6 @@ orl_return              COFFENTRY CoffFini( coff_handle );
 
 coff_file_handle        COFFENTRY CoffFileInit( coff_handle, void * );
 orl_return              COFFENTRY CoffFileFini( coff_file_handle );
-//orl_return              COFFENTRY CoffFileScan( coff_file_handle, char *, orl_sec_return_func );
 orl_return              COFFENTRY CoffFileScan( coff_file_handle, unsigned long, orl_sec_return_func );
 orl_machine_type        COFFENTRY CoffFileGetMachineType( coff_file_handle );
 orl_file_flags          COFFENTRY CoffFileGetFlags( coff_file_handle );

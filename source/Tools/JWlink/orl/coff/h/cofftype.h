@@ -1,34 +1,3 @@
-/****************************************************************************
-*
-*                            Open Watcom Project
-*
-*    Portions Copyright (c) 1983-2002 Sybase, Inc. All Rights Reserved.
-*
-*  ========================================================================
-*
-*    This file contains Original Code and/or Modifications of Original
-*    Code as defined in and that are subject to the Sybase Open Watcom
-*    Public License version 1.0 (the 'License'). You may not use this file
-*    except in compliance with the License. BY USING THIS FILE YOU AGREE TO
-*    ALL TERMS AND CONDITIONS OF THE LICENSE. A copy of the License is
-*    provided with the Original Code and Modifications, and is also
-*    available at www.sybase.com/developer/opensource.
-*
-*    The Original Code and all software distributed under the License are
-*    distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
-*    EXPRESS OR IMPLIED, AND SYBASE AND ALL CONTRIBUTORS HEREBY DISCLAIM
-*    ALL SUCH WARRANTIES, INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF
-*    MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR
-*    NON-INFRINGEMENT. Please see the License for the specific language
-*    governing rights and limitations under the License.
-*
-*  ========================================================================
-*
-* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
-*               DESCRIBE IT HERE!
-*
-****************************************************************************/
-
 
 #ifndef COFF_TYPE_INCLUDED
 #define COFF_TYPE_INCLUDED
@@ -36,8 +5,6 @@
 #include <coff.h>
 
 #define COFFENTRY
-
-// handle definitions
 
 typedef enum {
     COFF_FALSE = 0,
@@ -166,58 +133,5 @@ struct pe_opt_hdr_struct
     char           space[94];
     unsigned long  export_table_rva;
 };
-
-/*
-// these may be useless, or they might come in handy sometime
-
-typedef enum {
-    COFF_AUX_SYMBOL_FUNCDEF,
-    COFF_AUX_SYMBOL_BFEF,
-    COFF_AUX_SYMBOL_WEAK_EXTERN,
-    COFF_AUX_SYMBOL_FILE,
-    COFF_AUX_SYMBOL_SECDEF
-} coff_aux_symbol_type;
-
-struct coff_aux_symbol_struct {
-    coff_aux_symbol_type                                type;
-    struct coff_aux_symbol_struct *                     next;
-    union {
-        struct coff_aux_symbol_func_def_struct *        func_def;
-        struct coff_aux_symbol_bfef_struct *            bfef;
-        struct coff_aux_symbol_weak_extern_struct *     weak_extern;
-        struct coff_aux_symbol_file_struct *            file;
-        struct coff_aux_symbol_sec_def_struct *         sec_def;
-    };
-};
-
-struct coff_aux_symbol_func_def_struct {
-    coff_symbol_table_index     bf_symbol;
-    coff_function_size          function_size;
-    coff_symbol_table_index     next_function;
-};
-
-struct coff_aux_symbol_bfef_struct {
-    coff_line_number            line_number;
-    coff_symbol_table_index     next_function;
-};
-
-struct coff_aux_symbol_weak_extern_struct {
-    coff_symbol_table_index     symbol_2;
-    coff_symbol_characteristics characteristics;
-};
-
-struct coff_aux_symbol_file_struct {
-    char        filename[18];
-};
-
-struct coff_aux_symbol_sec_def_struct {
-    coff_sec_size               size;
-    coff_quantity               num_relocs;
-    coff_quantity               num_line_numbers;
-    coff_comdat_checksum        checksum;
-    coff_sec_handle             coff_sec_hnd;
-    coff_comdat_selection       selection;
-};
-*/
 
 #endif
