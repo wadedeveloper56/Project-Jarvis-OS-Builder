@@ -263,6 +263,8 @@ typedef struct coff_handle_struct       coff_handle_struct;
 typedef coff_handle_struct* coff_handle;
 typedef struct coff_file_handle_struct  coff_file_handle_struct;
 typedef coff_file_handle_struct* coff_file_handle;
+typedef struct coff_sec_handle_struct   coff_sec_handle_struct;
+typedef coff_sec_handle_struct* coff_sec_handle;
 
 typedef struct omf_handle_struct        omf_handle_struct;
 typedef omf_handle_struct* omf_handle;
@@ -322,12 +324,37 @@ struct elf_file_handle_struct
     //orl_hash_table      sec_name_hash_table;
 };
 
+struct coff_sec_handle_struct
+{
+    orl_file_format     file_format;
+    coff_file_handle    coff_file_hnd;
+    coff_sec_handle     next;
+    char* name;
+    orl_sec_size        size;
+    orl_file_offset     offset;
+    orl_sec_type        type;
+    orl_sec_flags       flags;
+    orl_sec_alignment   align;
+    char* contents;
+    //coff_section_header* hdr;
+    orl_sec_offset      base;
+    /*
+    union
+    {
+        struct coff_normal_assoc_struct         normal;
+        struct coff_reloc_assoc_struct          reloc;
+    } assoc;
+    coff_bool           name_alloced : 1;
+    coff_bool           relocs_done : 1;
+    */
+};
+
 struct coff_file_handle_struct
 {
     coff_handle         coff_hnd;
     coff_file_handle    next;
-    //coff_sec_handle* coff_sec_hnd;
-    //coff_sec_handle* orig_sec_hnd;
+    coff_sec_handle* coff_sec_hnd;
+    coff_sec_handle* orig_sec_hnd;
     void* file;
     //coff_quantity       initial_size;
     //coff_file_header* f_hdr_buffer;
@@ -340,8 +367,8 @@ struct coff_file_handle_struct
     //coff_quantity       num_sections;
     //coff_quantity       num_symbols;
     //coff_symbol_handle  symbol_handles;
-    //coff_sec_handle     symbol_table;
-    //coff_sec_handle     string_table;
+    coff_sec_handle     symbol_table;
+    coff_sec_handle     string_table;
     //orl_hash_table      sec_name_hash_table;
     unsigned long       export_table_rva;
     char* implib_data;
