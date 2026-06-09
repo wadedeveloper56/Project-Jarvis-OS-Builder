@@ -8,6 +8,7 @@
 #include "File.h"
 #include "SpillFile.h"
 #include "SymbolTable.h"
+#include "orl.h"
 
 typedef unsigned long stateflag;
 #define MAKE_RELOCS             0x00000001
@@ -48,6 +49,7 @@ class Linker
 	shared_ptr<TokenBuffer> tokenBuffer;
 	shared_ptr<SpillFile> spillFile;
 	shared_ptr<SymbolTable> symbolTable;
+	orl_handle ORLHandle;
 public:
 	Linker(int argc, char** argv);
 	~Linker();

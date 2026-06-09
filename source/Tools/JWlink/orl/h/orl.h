@@ -267,13 +267,12 @@ typedef omf_handle_struct* omf_handle;
 typedef struct omf_file_handle_struct   omf_file_handle_struct;
 typedef omf_file_handle_struct* omf_file_handle;
 
-
 typedef struct
 {
     void* (*read)(void*, size_t);
-    long int    (*seek)(void*, long int, int);
+    long int (*seek)(void*, long int, int);
     void* (*alloc)(size_t);
-    void        (*free)(void*);
+    void (*free)(void*);
 } orl_funcs;
 
 struct elf_file_handle_struct
