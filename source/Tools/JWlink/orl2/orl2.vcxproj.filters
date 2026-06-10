@@ -134,5 +134,11 @@
     <ClCompile Include="c\orlentry.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="c\orlflhnd.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\orlhash.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
