@@ -149,5 +149,17 @@
     <ClCompile Include="coff\c\cofflwlv.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="elf\c\elfentr.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="elf\c\elfflhn.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="elf\c\elfload.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="elf\c\elflwlv.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
