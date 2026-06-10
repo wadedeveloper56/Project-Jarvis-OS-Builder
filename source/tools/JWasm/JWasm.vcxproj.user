@@ -13,6 +13,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LocalDebuggerCommandArguments> -win64 C:\projects\OSDev\ProjectJarvis\test\win64_1.asm</LocalDebuggerCommandArguments>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+    <LocalDebuggerCommandArgumentsHistory> -win64 C:\projects\OSDev\ProjectJarvis\test\win64_1.asm|</LocalDebuggerCommandArgumentsHistory>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LocalDebuggerCommandArguments> -win64 C:\projects\OSDev\ProjectJarvis\test\win64_1.asm</LocalDebuggerCommandArguments>

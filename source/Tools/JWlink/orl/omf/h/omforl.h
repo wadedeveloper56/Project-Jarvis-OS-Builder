@@ -26,7 +26,7 @@ omf_sec_handle          OMFENTRY OmfSecGetStringTable( omf_sec_handle );
 omf_sec_handle          OMFENTRY OmfSecGetSymbolTable( omf_sec_handle );
 omf_sec_handle          OMFENTRY OmfSecGetRelocTable( omf_sec_handle );
 orl_sec_offset          OMFENTRY OmfSecGetNonLocalSymbolLoc( omf_sec_handle );
-orl_return              OMFENTRY OmfSecGetContents( omf_sec_handle, char ** );
+orl_return              OmfSecGetContents( omf_sec_handle, char ** );
 orl_return              OMFENTRY OmfSecQueryReloc( omf_sec_handle, omf_sec_offset, orl_reloc_return_func );
 orl_return              OMFENTRY OmfSecScanReloc( omf_sec_handle, orl_reloc_return_func );
 char *                  OMFENTRY OmfSecGetClassName( omf_sec_handle );

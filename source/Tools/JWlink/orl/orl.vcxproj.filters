@@ -161,5 +161,20 @@
     <ClCompile Include="elf\c\elflwlv.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="omf\c\omfdrctv.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="omf\c\omfentr.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="omf\c\omfflhn.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="omf\c\omfload.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="omf\c\omfmunge.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
