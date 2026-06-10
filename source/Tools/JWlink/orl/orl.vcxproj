@@ -212,6 +212,11 @@
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="coff\c\coffentr.cpp" />
+    <ClCompile Include="coff\c\coffflhn.cpp" />
+    <ClCompile Include="coff\c\coffimpl.cpp" />
+    <ClCompile Include="coff\c\coffload.cpp" />
+    <ClCompile Include="coff\c\cofflwlv.cpp" />
     <ClCompile Include="c\orlentry.cpp" />
     <ClCompile Include="c\orlflhnd.cpp" />
     <ClCompile Include="c\orlhash.cpp" />
