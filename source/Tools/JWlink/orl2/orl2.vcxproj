@@ -221,6 +221,10 @@
     <ClCompile Include="c\orlentry.cpp" />
     <ClCompile Include="c\orlflhnd.cpp" />
     <ClCompile Include="c\orlhash.cpp" />
+    <ClCompile Include="elf\c\elfentr.cpp" />
+    <ClCompile Include="elf\c\elfflhn.cpp" />
+    <ClCompile Include="elf\c\elfload.cpp" />
+    <ClCompile Include="elf\c\elflwlv.cpp" />
     <ClCompile Include="orl2.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
