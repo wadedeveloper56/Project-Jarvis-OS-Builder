@@ -140,5 +140,20 @@
     <ClCompile Include="c\orlhash.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="coff\c\coffentr.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="coff\c\coffflhn.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="coff\c\coffimpl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="coff\c\coffload.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="coff\c\cofflwlv.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
