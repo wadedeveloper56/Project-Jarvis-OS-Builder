@@ -128,13 +128,7 @@
     <ClCompile Include="pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="orlentry.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="orlflhnd.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="orlhash.cpp">
+    <ClCompile Include="orl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="elf.cpp">

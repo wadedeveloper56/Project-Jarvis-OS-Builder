@@ -32,6 +32,11 @@ orl_handle ORLInit(orl_funcs* funcs)
 	return(orl_hnd);
 }
 
+orl_return ORLRemoveFileLinks(orl_file_handle orl_file_hnd)
+{
+	return(ORL_OKAY);
+}
+
 orl_return ORLFini(orl_handle orl_hnd) 
 {
 	orl_return                  error;
