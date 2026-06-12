@@ -1,4 +1,4 @@
-JWasm v2.12pre, Jun  4 2026
+JWasm v2.12pre, Jun 12 2026
 test1.asm
                                 .x64p
                                 .model flat, c;
@@ -78,12 +78,12 @@ Symbols:
 @Cpu . . . . . . . . . . . . . .        Number           DDFh 
 @CurSeg  . . . . . . . . . . . .        Text   
 @DataSize  . . . . . . . . . . .        Number             0h 
-@Date  . . . . . . . . . . . . .        Text   06/04/26
+@Date  . . . . . . . . . . . . .        Text   06/12/26
 @FileCur . . . . . . . . . . . .        Text   test1.asm
 @FileName  . . . . . . . . . . .        Text   TEST1
 @Interface . . . . . . . . . . .        Number             1h 
 @Model . . . . . . . . . . . . .        Number             7h 
-@Time  . . . . . . . . . . . . .        Text   08:24:36
+@Time  . . . . . . . . . . . . .        Text   10:25:58
 @Version . . . . . . . . . . . .        Text   800
 @code  . . . . . . . . . . . . .        Text   _TEXT
 @data  . . . . . . . . . . . . .        Text   FLAT

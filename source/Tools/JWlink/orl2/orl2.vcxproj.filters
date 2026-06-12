@@ -140,5 +140,8 @@
     <ClCompile Include="omf.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="orlhash.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

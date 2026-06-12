@@ -217,6 +217,7 @@
     <ClCompile Include="elf.cpp" />
     <ClCompile Include="omf.cpp" />
     <ClCompile Include="orl.cpp" />
+    <ClCompile Include="orlhash.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
