@@ -2,6 +2,7 @@
 #define PCH_H
 
 #include "framework.h"
+#include <cassert>
 #include <stdint.h>
 #include <fstream>
 #include <iostream>
