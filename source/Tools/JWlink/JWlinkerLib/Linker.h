@@ -44,6 +44,8 @@ class Linker
 	int argc;
 	char** argv;
 	stateflag LinkState;
+	char* ArgSave;
+	void* SpawnStack;
 	shared_ptr<MemorySubsystem> memorySubsystem;
 	shared_ptr<FileSubsystem> fileSubsystem;
 	shared_ptr<MessagingSubsystem> messagingSubsystem;
@@ -54,6 +56,11 @@ class Linker
 public:
 	Linker(int argc, char** argv);
 	~Linker();
-	int link();
+	int link(char* cmds);
+	int Spawn(void (Linker::*fn)(void));
+	void LinkMeBaby(void);
+	void CleanSubSystems(void);
+	void ResetSubSystems(void);
+	void DoLink(char* cmdline);
 };
 

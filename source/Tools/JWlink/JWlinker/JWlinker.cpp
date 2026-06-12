@@ -7,7 +7,7 @@ using namespace std;
 int main(int argc, char** argv)
 {
 	shared_ptr<Linker> linker = make_shared<Linker>(argc, argv);
-	int result = linker->link();
+	int result = linker->link(nullptr);
 	cout << "Link result: " << result << "\n";
 	return result;
 }

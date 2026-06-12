@@ -102,7 +102,7 @@ Symbols:
 @FileName  . . . . . . . . . . .        Text   C064
 @Interface . . . . . . . . . . .        Number             1h 
 @Model . . . . . . . . . . . . .        Number             7h 
-@Time  . . . . . . . . . . . . .        Text   10:26:00
+@Time  . . . . . . . . . . . . .        Text   15:27:29
 @Version . . . . . . . . . . . .        Text   800
 @code  . . . . . . . . . . . . .        Text   _TEXT
 @data  . . . . . . . . . . . . .        Text   FLAT
@@ -111,4 +111,4 @@ __JWASM__  . . . . . . . . . . .        Number            D4h
 argc . . . . . . . . . . . . . .        QWord              0h _DATA C
 argv . . . . . . . . . . . . . .        QWord              8h _DATA C
 
-c064.asm: 44 lines, 2 passes, 1 ms, 0 warnings, 0 errors
+c064.asm: 44 lines, 2 passes, 2 ms, 0 warnings, 0 errors

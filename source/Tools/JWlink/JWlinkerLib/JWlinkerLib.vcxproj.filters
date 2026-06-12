@@ -45,6 +45,9 @@
     <ClInclude Include="Orl2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="cmdline.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="JWlinkerLib.cpp">
@@ -78,6 +81,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Orl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cmdline.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
