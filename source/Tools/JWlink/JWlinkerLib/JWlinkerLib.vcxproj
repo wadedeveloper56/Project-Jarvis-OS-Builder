@@ -192,6 +192,7 @@
     <ClInclude Include="Linker.h" />
     <ClInclude Include="MemorySubsystem.h" />
     <ClInclude Include="MessagingSubsystem.h" />
+    <ClInclude Include="Orl2.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="SpillFile.h" />
     <ClInclude Include="SymbolTable.h" />
@@ -204,6 +205,7 @@
     <ClCompile Include="MemorySubsystem.cpp" />
     <ClCompile Include="MessagingSubsystem.cpp" />
     <ClCompile Include="ObjectNode.cpp" />
+    <ClCompile Include="Orl.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
