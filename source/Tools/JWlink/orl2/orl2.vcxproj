@@ -213,7 +213,9 @@
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="orl2.cpp" />
+    <ClCompile Include="coff.cpp" />
+    <ClCompile Include="elf.cpp" />
+    <ClCompile Include="omf.cpp" />
     <ClCompile Include="orlentry.cpp" />
     <ClCompile Include="orlflhnd.cpp" />
     <ClCompile Include="orlhash.cpp" />

@@ -4,21 +4,6 @@
 #include "orlflhnd.h"
 #include "pcobj.h"
 
-elf_handle ElfInit(orl_funcs* funcs)
-{
-	return NULL;
-}
-
-coff_handle CoffInit(orl_funcs* funcs)
-{
-	return NULL;
-}
-
-omf_handle OmfInit(orl_funcs* funcs)
-{
-	return NULL;
-}
-
 orl_handle ORLInit(orl_funcs* funcs)
 {
 	orl_handle orl_hnd = (orl_handle)funcs->alloc(sizeof(orl_handle_struct));
@@ -45,21 +30,6 @@ orl_handle ORLInit(orl_funcs* funcs)
 	}
 	orl_hnd->first_file_hnd = NULL;
 	return(orl_hnd);
-}
-
-orl_return CoffFini(coff_handle coff_hnd)
-{
-	return(ORL_OKAY);
-}
-
-orl_return ElfFini(elf_handle elf_hnd)
-{
-	return(ORL_OKAY);
-}
-
-orl_return OmfFini(omf_handle oh)
-{
-	return(ORL_OKAY);
 }
 
 orl_return ORLFini(orl_handle orl_hnd) 
