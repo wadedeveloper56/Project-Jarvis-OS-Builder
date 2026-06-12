@@ -1,12 +1,11 @@
 #include "pch.h"
 #include "Linker.h"
-#include "orl2.h"
+#include "orl.h"
 #include "Memory.h"
 #include "Orl2.h"
 #include "cmdline.h"
-
-void InitNodes(shared_ptr<MemorySubsystem> memorySubsystem);
-void BurnNodes(shared_ptr<MemorySubsystem> memorySubsystem);
+#include "objfree.h"
+#include "ObjectNode.h"
 
 Linker::Linker(int argc, char** argv)
 {
@@ -25,7 +24,7 @@ Linker::Linker(int argc, char** argv)
 
 Linker::~Linker()
 {
-	BurnNodes(memorySubsystem);
+	FiniLinkStruct(memorySubsystem);	
 }
 
 void Linker::CleanSubSystems(void)
