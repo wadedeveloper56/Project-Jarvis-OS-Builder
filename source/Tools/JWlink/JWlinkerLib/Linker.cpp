@@ -6,6 +6,7 @@
 #include "cmdline.h"
 #include "objfree.h"
 #include "ObjectNode.h"
+#include "permdata.h"
 
 Linker::Linker(int argc, char** argv)
 {
@@ -33,6 +34,30 @@ void Linker::CleanSubSystems(void)
 
 void Linker::ResetSubSystems(void)
 {
+	ResetPermData();
+	//ResetMsg();
+	//VirtMemInit();
+	//ResetMisc();
+	//Root = NewSection();
+	//ResetDBI();
+	//ResetMapIO();
+	//ResetCmdAll();
+	//ResetOvlSupp();
+	//ResetComdef();
+	//ResetDistrib();
+	//ResetLoadNov();
+	//ResetLoadPE();
+	//ResetObj2Supp();
+	//ResetObjIO();
+	//ResetObjOMF();
+	//ResetObjPass1();
+	//ResetObjStrip();
+	//ResetOMFReloc();
+	//ResetReloc();
+	//ResetSymTrace();
+	//ResetLoadFile();
+	//ResetAddr();
+	//ResetToc();
 }
 
 void Linker::DoLink(char* cmdline)

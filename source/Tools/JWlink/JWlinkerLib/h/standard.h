@@ -96,7 +96,7 @@
 #endif
 typedef unsigned char   byte;
 typedef unsigned long   virt_mem;
-typedef unsigned        f_handle;
+//typedef unsigned        f_handle;
 
 #if defined( __UNIX__ )
 #define UNALIGN
