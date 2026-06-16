@@ -41,11 +41,11 @@ unsigned       TokSize;
 offset         PackCodeLimit;
 offset         PackDataLimit;
 symbol* HeadSym;
-byte           DBIFlag;
+::byte           DBIFlag;
 struct fmt_data FmtData;
 obj_format     ObjFormat;
 f_handle       TempFile;
 mod_entry* FakeModule;
-unsigned_32    NumImports;
-unsigned_32    NumExports;
+uint32_t    NumImports;
+uint32_t    NumExports;
 

@@ -187,6 +187,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="carve.h" />
     <ClInclude Include="cmdline.h" />
     <ClInclude Include="FileSubsystem.h" />
     <ClInclude Include="framework.h" />
@@ -198,12 +199,14 @@
     <ClInclude Include="objfree.h" />
     <ClInclude Include="Orl2.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="permdata.h" />
     <ClInclude Include="SpillFile.h" />
+    <ClInclude Include="strtab.h" />
+    <ClInclude Include="Structs.h" />
     <ClInclude Include="SymbolTable.h" />
     <ClInclude Include="TokenBuffer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="carve.cpp" />
     <ClCompile Include="cmdline.cpp" />
     <ClCompile Include="FileSubsystem.cpp" />
     <ClCompile Include="globals.cpp" />
@@ -222,6 +225,7 @@
     </ClCompile>
     <ClCompile Include="permdata.cpp" />
     <ClCompile Include="SpillFile.cpp" />
+    <ClCompile Include="strtab.cpp" />
     <ClCompile Include="SymbolTable.cpp" />
     <ClCompile Include="TokenBuffer.cpp" />
   </ItemGroup>

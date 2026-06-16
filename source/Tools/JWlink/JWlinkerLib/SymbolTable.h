@@ -1,30 +1,8 @@
 #pragma once
 
 #include "MemorySubsystem.h"
-//#include "walloca.h"
-//#include "linkstd.h"
-//#include "pcobj.h"
-//#include "objio.h"
-//#include "alloc.h"
-//#include "newmem.h"
-//#include "msg.h"
-//#include "wlnkmsg.h"
-//#include "objnode.h"
-//#include "wcomdef.h"
-//#include "mapio.h"
-//#include "impexp.h"
-//#include "objstrip.h"
-//#include "objpass1.h"
-//#include "ring.h"
-//#include "strtab.h"
-//#include "carve.h"
-//#include "permdata.h"
-//#include "nwpfx.h"
-//#include "command.h"
-#include "taddr.h"
-#include "watcom.h"
-#include "symtab.h"
-#include "syms.h"
+#include "SymbolTable.h"
+#include "Structs.h"
 
 using namespace std;
 

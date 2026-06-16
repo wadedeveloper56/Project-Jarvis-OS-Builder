@@ -1,12 +1,8 @@
 #pragma once
 
+#include <stdint.h>
 #include "File.h"
-#include "link.h"
-#include "syms.h"
-#include "ovlstruc.h"
-#include "standard.h"
-#include "objstruc.h"
-#include "formats.h"
+#include "Structs.h"
 
 #define SECTOR_SIZE     512
 #define MAX_HEADROOM    (4*1024)
@@ -48,10 +44,10 @@ extern unsigned       TokSize;
 extern offset         PackCodeLimit;
 extern offset         PackDataLimit;
 extern symbol* HeadSym;
-extern byte           DBIFlag;
+extern ::byte           DBIFlag;
 extern struct fmt_data FmtData;
 extern obj_format     ObjFormat;
 extern f_handle       TempFile;
 extern mod_entry* FakeModule;
-extern unsigned_32    NumImports;
-extern unsigned_32    NumExports;
+extern uint32_t    NumImports;
+extern uint32_t    NumExports;

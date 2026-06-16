@@ -1,8 +1,9 @@
 #include "pch.h"
 #include "MemorySubsystem.h"
-#include "linkstd.h"
-#include "objnode.h"
+//#include "linkstd.h"
+//#include "objnode.h"
 #include "ObjectNode.h"
+#include "Structs.h"
 
 using namespace std;
 

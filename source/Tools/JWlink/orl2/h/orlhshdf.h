@@ -8,12 +8,12 @@ typedef enum {
 } orl_hash_table_type;
 
 #ifdef __UNIX__
-#include <stdint.h>
+//#include <stdint.h>
 typedef uintptr_t       orl_hash_value;
 #else
-typedef uint_32         orl_hash_value;
+typedef uint32_t         orl_hash_value;
 #endif
-typedef uint_32         orl_hash_table_size;
+typedef uint32_t         orl_hash_table_size;
 typedef void *          orl_hash_data;
 
 typedef

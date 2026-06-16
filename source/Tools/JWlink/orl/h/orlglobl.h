@@ -2,24 +2,25 @@
 #ifndef ORL_GLOBAL_INCLUDED
 #define ORL_GLOBAL_INCLUDED
 
-#include <watcom.h>
+//#include <watcom.h>
+#include <stdint.h>
 
 #define ORLENTRY
 
-typedef uint_32                         orl_file_offset;
-typedef uint_32                         orl_file_size;
+typedef uint32_t                        orl_file_offset;
+typedef uint32_t                        orl_file_size;
 
-typedef uint_32                         orl_sec_size;
-typedef uint_32                         orl_sec_offset;
-typedef uint_32                         orl_sec_alignment;
+typedef uint32_t                        orl_sec_size;
+typedef uint32_t                        orl_sec_offset;
+typedef uint32_t                        orl_sec_alignment;
 typedef long                            orl_sec_frame;
 
-typedef uint_32                         orl_reloc_addend;
-typedef int_32                          orl_reloc_addend_signed;
+typedef uint32_t                        orl_reloc_addend;
+typedef int32_t                         orl_reloc_addend_signed;
 
-typedef uint_32                         orl_symbol_value;
+typedef uint32_t                        orl_symbol_value;
 
-typedef uint_32                         orl_table_index;
+typedef uint32_t                        orl_table_index;
 
 #define ORL_SEC_NO_ABS_FRAME            -1
 
@@ -38,12 +39,12 @@ typedef enum {
     ORL_UNRECOGNIZED_FORMAT
 } orl_file_format;
 
-#include <pushpck1.h>
+#include <pshpack1.h>
 typedef struct {
-    unsigned_16 linnum;
-    unsigned_32 off;
+    uint16_t linnum;
+    uint32_t off;
 } orl_linnum;
-#include <poppck.h>
+#include <poppack.h>
 
 typedef struct {
     void *      (*read)( void *, size_t );
