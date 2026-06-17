@@ -84,8 +84,8 @@ void Linker::ResetMisc(void)
 	CurrMod = NULL;
 	StackSize = 0x1000;
 	// set case sensitivity for symbols
-	//ResetSym();
-	//SetSymCase();
+	symbolTable->ResetSym();
+	symbolTable->SetSymCase();
 	//SetLibCase();
 }
 

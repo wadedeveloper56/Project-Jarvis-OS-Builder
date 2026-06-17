@@ -13,12 +13,19 @@ using namespace std;
 
 class SymbolTable
 {
+    int (*CmpRtn)(const void*, const void*, size_t);
 	shared_ptr<MemorySubsystem> memorySubsystem;
 	symbol* SymList;
 	symbol** GlobalSymPtrs;
 	symbol** StaticSymPtrs;
+	/* this var holds the value of the NAMELEN option */
+	unsigned        NameLen;
+	symbol* LastSym;
 public:
 	SymbolTable(shared_ptr<MemorySubsystem> memorySubsystem);
 	~SymbolTable();
+	void ResetSym();
+	void ClearHashPointers();
+	void SetSymCase();
 };
 

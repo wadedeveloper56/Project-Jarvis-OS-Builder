@@ -205,6 +205,7 @@
     <ClInclude Include="strtab.h" />
     <ClInclude Include="Structs.h" />
     <ClInclude Include="SymbolTable.h" />
+    <ClInclude Include="symmem.h" />
     <ClInclude Include="TokenBuffer.h" />
     <ClInclude Include="VirtualMemory.h" />
   </ItemGroup>
@@ -231,6 +232,7 @@
     <ClCompile Include="SpillFile.cpp" />
     <ClCompile Include="strtab.cpp" />
     <ClCompile Include="SymbolTable.cpp" />
+    <ClCompile Include="symmem.cpp" />
     <ClCompile Include="TokenBuffer.cpp" />
     <ClCompile Include="VirtualMemory.cpp" />
   </ItemGroup>
