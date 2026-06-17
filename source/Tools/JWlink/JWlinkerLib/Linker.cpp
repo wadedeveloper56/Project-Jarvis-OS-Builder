@@ -6,7 +6,7 @@
 #include "cmdline.h"
 #include "objfree.h"
 #include "ObjectNode.h"
-//#include "permdata.h"
+#include "permdata.h"
 #include "globals.h"
 
 Linker::Linker(int argc, char** argv)
@@ -35,7 +35,7 @@ void Linker::CleanSubSystems(void)
 
 void Linker::ResetSubSystems(void)
 {
-	//ResetPermData();
+	ResetPermData(memorySubsystem);
 	//ResetMsg();
 	//VirtMemInit();
 	//ResetMisc();

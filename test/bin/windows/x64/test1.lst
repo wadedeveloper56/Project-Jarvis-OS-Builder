@@ -83,7 +83,7 @@ Symbols:
 @FileName  . . . . . . . . . . .        Text   TEST1
 @Interface . . . . . . . . . . .        Number             1h 
 @Model . . . . . . . . . . . . .        Number             7h 
-@Time  . . . . . . . . . . . . .        Text   15:40:01
+@Time  . . . . . . . . . . . . .        Text   20:37:47
 @Version . . . . . . . . . . . .        Text   800
 @code  . . . . . . . . . . . . .        Text   _TEXT
 @data  . . . . . . . . . . . . .        Text   FLAT
@@ -93,4 +93,4 @@ _var1  . . . . . . . . . . . . .        Byte               0h _BSS C
 _var2  . . . . . . . . . . . . .        Word               1h _BSS C
 _var3  . . . . . . . . . . . . .        DWord              3h _BSS C
 
-test1.asm: 20 lines, 2 passes, 1 ms, 0 warnings, 0 errors
+test1.asm: 20 lines, 2 passes, 2 ms, 0 warnings, 0 errors

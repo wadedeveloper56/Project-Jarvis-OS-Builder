@@ -8,12 +8,12 @@
 #endif
 
 typedef struct ring RING;
-struct ring                         
+struct ring
 {
 #ifdef PARAM2
-    void* filler;
+	void* filler;
 #endif
-    RING* next;                     
+	RING* next;
 };
 
 #define RingIterBeg( h, i ) \
@@ -38,7 +38,27 @@ struct ring
         } while( i != _T ); \
     }
 
-void RINGNAME(Append) (void* hdr,void* element)
+#define verifyNotInRing( h, r )
+
+void RINGNAME(Append) (void* hdr, void* element)
 {
+	RING** rhdr;                // - ring header
+	RING* relement;             // - ring element
+	RING* lelement;             // - last ring element, before appending
+
+	rhdr = (RING**)hdr;
+	relement = (RING*)element;
+	verifyNotInRing(*rhdr, relement);
+	lelement = *rhdr;
+	if (lelement == NULL)
+	{
+		relement->next = relement;
+	}
+	else
+	{
+		relement->next = lelement->next;
+		lelement->next = relement;
+	}
+	*rhdr = relement;
 }
 

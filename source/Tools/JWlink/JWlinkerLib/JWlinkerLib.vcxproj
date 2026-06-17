@@ -199,6 +199,7 @@
     <ClInclude Include="objfree.h" />
     <ClInclude Include="Orl2.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="permdata.h" />
     <ClInclude Include="ring.h" />
     <ClInclude Include="SpillFile.h" />
     <ClInclude Include="strtab.h" />
