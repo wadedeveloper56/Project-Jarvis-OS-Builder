@@ -64,5 +64,6 @@ public:
 	void CleanSubSystems(void);
 	void ResetSubSystems(void);
 	void DoLink(char* cmdline);
+	void ResetMisc(void);
 };
 

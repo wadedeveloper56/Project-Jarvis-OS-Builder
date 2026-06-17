@@ -61,13 +61,41 @@ void Linker::CleanSubSystems(void)
 	//DEBUG((DBG_OLD, "CleanSubSystems exit"));
 }
 
+void Linker::ResetMisc(void)
+{
+	LinkFlags = CASE_FLAG | FAR_CALLS_FLAG;
+	LinkState = MAKE_RELOCS;
+	AbsGroups = NULL;
+	DataGroup = NULL;
+	IDataGroup = NULL;
+	MapFile = NIL_HANDLE;
+	MapFName = NULL;
+	OutFiles = NULL;
+	ObjLibFiles = NULL;
+	LibModules = NULL;
+	Groups = NULL;
+	CurrLoc.seg = UNDEFINED;
+	CurrLoc.off = 0;
+	OvlClasses = NULL;
+	OvlVectors = NULL;
+	VecNum = 0;
+	OvlNum = 0;
+	OvlFName = NULL;
+	CurrMod = NULL;
+	StackSize = 0x1000;
+	// set case sensitivity for symbols
+	//ResetSym();
+	//SetSymCase();
+	//SetLibCase();
+}
+
 void Linker::ResetSubSystems(void)
 {
 	ResetPermData(memorySubsystem);
 	messagingSubsystem->reset();
 	virtualMemory.reset();
 	virtualMemory = make_shared<VirtualMemory>();
-	//ResetMisc();
+	ResetMisc();
 	//Root = NewSection();
 	//ResetDBI();
 	//ResetMapIO();
