@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Structs.h"
 #include "MemorySubsystem.h"
+#include "ring.h"
 
 using namespace std;
 #define STR_BLOCK_SIZE   (4*1024)
@@ -9,7 +10,7 @@ stringblock* AllocNewBlock(shared_ptr<MemorySubsystem> memorySubsystem, stringta
 {
 	stringblock* blk = (stringblock*)memorySubsystem->AllocateMemory(sizeof(stringblock));
     blk->next = NULL;
-    //FIXME RingAppend(&strtab->data, blk);
+    RingAppend(&strtab->data, blk);
     blk->size = 0;
     return blk;
 }

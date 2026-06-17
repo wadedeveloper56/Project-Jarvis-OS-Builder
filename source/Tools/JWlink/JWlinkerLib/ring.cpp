@@ -1,0 +1,44 @@
+#include "pch.h"
+#include "Ring.h"
+
+#ifdef PARAM2
+#define RINGNAME( name ) Ring2##name
+#else
+#define RINGNAME( name ) Ring##name
+#endif
+
+typedef struct ring RING;
+struct ring                         
+{
+#ifdef PARAM2
+    void* filler;
+#endif
+    RING* next;                     
+};
+
+#define RingIterBeg( h, i ) \
+    if( i = h ) { \
+        RING* _T = i; \
+        do { \
+            i = i->next;
+
+#define RingIterEnd( i ) \
+        } while( i != _T ); \
+    }
+
+#define RingIterBegSafe( h, i ) \
+    if( i = h ) { \
+        RING* _T = i; \
+        RING* _N = _T->next; \
+        do { \
+            i = _N; \
+            _N = i->next;
+
+#define RingIterEndSafe( i ) \
+        } while( i != _T ); \
+    }
+
+void RINGNAME(Append) (void* hdr,void* element)
+{
+}
+

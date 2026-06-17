@@ -66,6 +66,9 @@
     <ClInclude Include="strtab.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ring.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="JWlinkerLib.cpp">
@@ -117,6 +120,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="strtab.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ring.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

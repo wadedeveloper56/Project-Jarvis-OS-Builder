@@ -199,6 +199,7 @@
     <ClInclude Include="objfree.h" />
     <ClInclude Include="Orl2.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="ring.h" />
     <ClInclude Include="SpillFile.h" />
     <ClInclude Include="strtab.h" />
     <ClInclude Include="Structs.h" />
@@ -224,6 +225,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="permdata.cpp" />
+    <ClCompile Include="ring.cpp" />
     <ClCompile Include="SpillFile.cpp" />
     <ClCompile Include="strtab.cpp" />
     <ClCompile Include="SymbolTable.cpp" />
