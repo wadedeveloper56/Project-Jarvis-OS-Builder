@@ -206,6 +206,7 @@
     <ClInclude Include="Structs.h" />
     <ClInclude Include="SymbolTable.h" />
     <ClInclude Include="TokenBuffer.h" />
+    <ClInclude Include="VirtualMemory.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="carve.cpp" />
@@ -231,6 +232,7 @@
     <ClCompile Include="strtab.cpp" />
     <ClCompile Include="SymbolTable.cpp" />
     <ClCompile Include="TokenBuffer.cpp" />
+    <ClCompile Include="VirtualMemory.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="lnkerror.msg" />

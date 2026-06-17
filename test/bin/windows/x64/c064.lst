@@ -1,4 +1,4 @@
-JWasm v2.12pre, Jun 16 2026
+JWasm v2.12pre, Jun 17 2026
 c064.asm
                                 .x64
                                 .model flat, c
@@ -97,12 +97,12 @@ Symbols:
 @Cpu . . . . . . . . . . . . . .        Number           D5Fh 
 @CurSeg  . . . . . . . . . . . .        Text   
 @DataSize  . . . . . . . . . . .        Number             0h 
-@Date  . . . . . . . . . . . . .        Text   06/16/26
+@Date  . . . . . . . . . . . . .        Text   06/17/26
 @FileCur . . . . . . . . . . . .        Text   c064.asm
 @FileName  . . . . . . . . . . .        Text   C064
 @Interface . . . . . . . . . . .        Number             1h 
 @Model . . . . . . . . . . . . .        Number             7h 
-@Time  . . . . . . . . . . . . .        Text   20:37:49
+@Time  . . . . . . . . . . . . .        Text   10:28:02
 @Version . . . . . . . . . . . .        Text   800
 @code  . . . . . . . . . . . . .        Text   _TEXT
 @data  . . . . . . . . . . . . .        Text   FLAT

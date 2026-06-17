@@ -10,6 +10,7 @@
 #include "SymbolTable.h"
 #include "orl.h"
 #include "Orl2.h"
+#include "VirtualMemory.h"
 
 typedef unsigned long stateflag;
 #define MAKE_RELOCS             0x00000001
@@ -53,6 +54,7 @@ class Linker
 	shared_ptr<SpillFile> spillFile;
 	shared_ptr<SymbolTable> symbolTable;
 	shared_ptr<Orl> orl;
+	shared_ptr<VirtualMemory> virtualMemory;
 public:
 	Linker(int argc, char** argv);
 	~Linker();

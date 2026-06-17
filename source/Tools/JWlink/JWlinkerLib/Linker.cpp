@@ -22,6 +22,7 @@ Linker::Linker(int argc, char** argv)
 	symbolTable = make_shared<SymbolTable>(memorySubsystem);	
 	orl = make_shared<Orl>();
 	InitCmdFile();
+	virtualMemory = make_shared<VirtualMemory>();
 }
 
 Linker::~Linker()
@@ -31,13 +32,41 @@ Linker::~Linker()
 
 void Linker::CleanSubSystems(void)
 {
+	//DEBUG((DBG_OLD, "CleanSubSystems enter"));
+	//if (MapFile != NIL_HANDLE)
+	//{
+	//	QClose(MapFile, MapFName);
+	//	MapFile = NIL_HANDLE;
+	//}
+	//FreeOutFiles();
+	//_LnkFree(MapFName);
+	//BurnSystemList();
+	//DEBUG((DBG_OLD, "CleanSubSystems: calling FreeList( LibPath )"));
+	//FreeList(LibPath);
+	//CloseSpillFile();
+	//CleanTraces();
+	//FreePaths();
+	//FreeUndefs();
+	//FreeLocalImports();
+	//DEBUG((DBG_OLD, "CleanSubSystems: calling CleanLoadFile()"));
+	//CleanLoadFile();
+	//CleanLinkStruct();
+	//FreeFormatStuff();
+	//FreeObjInfo();
+	//DEBUG((DBG_OLD, "CleanSubSystems: calling FreeVirtMem()"));
+	//FreeVirtMem();
+	//CleanToc();
+	//CleanSym();
+	//CleanPermData();
+	//DEBUG((DBG_OLD, "CleanSubSystems exit"));
 }
 
 void Linker::ResetSubSystems(void)
 {
 	ResetPermData(memorySubsystem);
 	messagingSubsystem->reset();
-	//VirtMemInit();
+	virtualMemory.reset();
+	virtualMemory = make_shared<VirtualMemory>();
 	//ResetMisc();
 	//Root = NewSection();
 	//ResetDBI();
