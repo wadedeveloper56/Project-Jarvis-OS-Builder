@@ -192,6 +192,7 @@
     <ClInclude Include="FileSubsystem.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="globals.h" />
+    <ClInclude Include="libr.h" />
     <ClInclude Include="Linker.h" />
     <ClInclude Include="MemorySubsystem.h" />
     <ClInclude Include="MessagingSubsystem.h" />
@@ -215,6 +216,7 @@
     <ClCompile Include="FileSubsystem.cpp" />
     <ClCompile Include="globals.cpp" />
     <ClCompile Include="JWlinkerLib.cpp" />
+    <ClCompile Include="libr.cpp" />
     <ClCompile Include="Linker.cpp" />
     <ClCompile Include="MemorySubsystem.cpp" />
     <ClCompile Include="MessagingSubsystem.cpp" />

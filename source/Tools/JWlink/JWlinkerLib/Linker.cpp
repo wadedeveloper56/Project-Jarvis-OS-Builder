@@ -8,6 +8,7 @@
 #include "ObjectNode.h"
 #include "permdata.h"
 #include "globals.h"
+#include "libr.h"
 
 Linker::Linker(int argc, char** argv)
 {
@@ -86,7 +87,7 @@ void Linker::ResetMisc(void)
 	// set case sensitivity for symbols
 	symbolTable->ResetSym();
 	symbolTable->SetSymCase();
-	//SetLibCase();
+	SetLibCase();
 }
 
 void Linker::ResetSubSystems(void)
