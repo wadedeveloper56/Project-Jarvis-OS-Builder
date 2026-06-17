@@ -10,6 +10,7 @@
 #include "globals.h"
 #include "libr.h"
 #include "cmdutils.h"
+#include "dbgall.h"
 
 Linker::Linker(int argc, char** argv)
 {
@@ -99,7 +100,7 @@ void Linker::ResetSubSystems(void)
 	virtualMemory = make_shared<VirtualMemory>();
 	ResetMisc();
 	Root = NewSection(memorySubsystem);
-	//ResetDBI();
+	ResetDBI();
 	//ResetMapIO();
 	//ResetCmdAll();
 	//ResetOvlSupp();
