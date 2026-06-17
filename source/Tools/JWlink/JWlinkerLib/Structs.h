@@ -791,4 +791,18 @@ typedef struct cvmodinfo
 	uint16_t numsegs;
 } cvmodinfo;
 
+typedef union msg_arg
+{
+	symbol* symb;
+	char* string;
+	char            c;
+	uint16_t     int_16;
+	uint32_t     int_32;
+	targ_addr* address;
+} MSG_ARG;
 
+typedef struct msg_arg_list
+{
+	int             index;
+	MSG_ARG         arg[5];
+} MSG_ARG_LIST;
