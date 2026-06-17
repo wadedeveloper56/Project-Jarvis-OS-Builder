@@ -9,6 +9,7 @@
 #include "permdata.h"
 #include "globals.h"
 #include "libr.h"
+#include "cmdutils.h"
 
 Linker::Linker(int argc, char** argv)
 {
@@ -97,7 +98,7 @@ void Linker::ResetSubSystems(void)
 	virtualMemory.reset();
 	virtualMemory = make_shared<VirtualMemory>();
 	ResetMisc();
-	//Root = NewSection();
+	Root = NewSection(memorySubsystem);
 	//ResetDBI();
 	//ResetMapIO();
 	//ResetCmdAll();

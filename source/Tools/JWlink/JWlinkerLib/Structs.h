@@ -1,6 +1,8 @@
 #pragma once
 
+#include <stdint.h>
 #include "File.h"
+#include "hash.h"
 
 typedef struct file_list        FILE_LIST;
 typedef struct path_entry       PATH_ENTRY;
@@ -864,3 +866,27 @@ typedef struct block_data
 	sym_block* list;
 	unsigned        currbrk;
 } block_data;
+
+typedef struct section
+{
+	SECTION* next_sect;
+	FILE_LIST* files;
+	pHTable             modFilesHashed;
+	MOD_ENTRY* mods;
+	CLASS_ENTRY* classlist;
+	ORDER_CLASS* orderlist; // Link to data for ordering, if used
+	targ_addr           sect_addr;
+	uint16_t         ovl_num;
+	OVL_AREA* areas;
+	SECTION* parent;
+	uint32_t         relocs;
+	uint32_t         size;
+	void* reloclist;
+	union
+	{
+		uint32_t         file_loc;
+		MOD_ENTRY* dist_mods;
+	} u;
+	void* dbg_info;
+	OUTFILELIST* outfile;
+} section;
