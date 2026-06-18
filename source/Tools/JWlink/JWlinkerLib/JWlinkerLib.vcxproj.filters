@@ -99,6 +99,12 @@
     <ClInclude Include="ovlsupp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="wcomdef.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="specials.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="JWlinkerLib.cpp">
@@ -180,6 +186,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ovlsupp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="wcomdef.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -208,6 +208,7 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="permdata.h" />
     <ClInclude Include="ring.h" />
+    <ClInclude Include="specials.h" />
     <ClInclude Include="SpillFile.h" />
     <ClInclude Include="strtab.h" />
     <ClInclude Include="Structs.h" />
@@ -215,6 +216,7 @@
     <ClInclude Include="symmem.h" />
     <ClInclude Include="TokenBuffer.h" />
     <ClInclude Include="VirtualMemory.h" />
+    <ClInclude Include="wcomdef.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="carve.cpp" />
@@ -249,6 +251,7 @@
     <ClCompile Include="symmem.cpp" />
     <ClCompile Include="TokenBuffer.cpp" />
     <ClCompile Include="VirtualMemory.cpp" />
+    <ClCompile Include="wcomdef.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="lnkerror.msg" />

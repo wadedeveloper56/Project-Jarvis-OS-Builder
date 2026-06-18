@@ -14,6 +14,7 @@
 #include "mapio.h"
 #include "cmdall.h"
 #include "ovlsupp.h"
+#include "wcomdef.h"
 
 Linker::Linker(int argc, char** argv)
 {
@@ -107,7 +108,7 @@ void Linker::ResetSubSystems(void)
 	ResetMapIO();
 	ResetCmdAll();
 	ResetOvlSupp();
-	//ResetComdef();
+	ResetComdef();
 	//ResetDistrib();
 	//ResetLoadNov();
 	//ResetLoadPE();

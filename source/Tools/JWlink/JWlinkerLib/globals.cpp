@@ -1,5 +1,7 @@
 #include "pch.h"
 #include "globals.h"
+#define export
+#include "specials.h"
 
 #define SECTOR_SIZE     512
 #define MAX_HEADROOM    (4*1024)
