@@ -11,6 +11,9 @@
 #include "libr.h"
 #include "cmdutils.h"
 #include "dbgall.h"
+#include "mapio.h"
+#include "cmdall.h"
+#include "ovlsupp.h"
 
 Linker::Linker(int argc, char** argv)
 {
@@ -101,9 +104,9 @@ void Linker::ResetSubSystems(void)
 	ResetMisc();
 	Root = NewSection(memorySubsystem);
 	ResetDBI();
-	//ResetMapIO();
-	//ResetCmdAll();
-	//ResetOvlSupp();
+	ResetMapIO();
+	ResetCmdAll();
+	ResetOvlSupp();
 	//ResetComdef();
 	//ResetDistrib();
 	//ResetLoadNov();

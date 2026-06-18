@@ -90,6 +90,15 @@
     <ClInclude Include="dbgall.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="mapio.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cmdall.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ovlsupp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="JWlinkerLib.cpp">
@@ -162,6 +171,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="dbgall.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mapio.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cmdall.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ovlsupp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

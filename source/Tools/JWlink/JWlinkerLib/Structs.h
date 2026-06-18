@@ -890,3 +890,10 @@ typedef struct section
 	void* dbg_info;
 	OUTFILELIST* outfile;
 } section;
+
+typedef struct symrecinfo
+{
+	struct symrecinfo* next;
+	symbol* sym;
+	mod_entry* mod;
+} symrecinfo;
