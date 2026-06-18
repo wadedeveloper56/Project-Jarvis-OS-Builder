@@ -23,6 +23,7 @@
 #include "objio.h"
 #include "objomf.h"
 #include "objpass1.h"
+#include "objstrip.h"
 
 Linker::Linker(int argc, char** argv)
 {
@@ -125,7 +126,7 @@ void Linker::ResetSubSystems(void)
 	ResetObjIO();
 	ResetObjOMF();
 	ResetObjPass1();
-	//ResetObjStrip();
+	ResetObjStrip();
 	//ResetOMFReloc();
 	//ResetReloc();
 	//ResetSymTrace();

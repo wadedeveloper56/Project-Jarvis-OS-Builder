@@ -1001,3 +1001,16 @@ typedef struct
 	unsigned long       pos;
 	infilelist* currfile;
 } bufferedfile;
+
+typedef struct edgelist
+{
+	struct edgelist* next;
+	union
+	{
+		segdata* seg;
+		symbol* sym;
+	} u;
+	unsigned            issym : 1;      // true if contains a symbol
+	unsigned            reverse_dir : 1;// true if edge points in the opposite
+	// direction
+} edgelist;
