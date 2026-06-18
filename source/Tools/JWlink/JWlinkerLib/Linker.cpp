@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "Linker.h"
+#include "debug.h"
 #include "orl.h"
 #include "Memory.h"
 #include "Orl2.h"
@@ -43,7 +44,7 @@ Linker::~Linker()
 
 void Linker::CleanSubSystems(void)
 {
-	//DEBUG((DBG_OLD, "CleanSubSystems enter"));
+	DEBUG((DBG_OLD, "CleanSubSystems enter\n"));
 	//if (MapFile != NIL_HANDLE)
 	//{
 	//	QClose(MapFile, MapFName);
@@ -52,24 +53,24 @@ void Linker::CleanSubSystems(void)
 	//FreeOutFiles();
 	//_LnkFree(MapFName);
 	//BurnSystemList();
-	//DEBUG((DBG_OLD, "CleanSubSystems: calling FreeList( LibPath )"));
+	DEBUG((DBG_OLD, "CleanSubSystems: calling FreeList( LibPath )\n"));
 	//FreeList(LibPath);
 	//CloseSpillFile();
 	//CleanTraces();
 	//FreePaths();
 	//FreeUndefs();
 	//FreeLocalImports();
-	//DEBUG((DBG_OLD, "CleanSubSystems: calling CleanLoadFile()"));
+	DEBUG((DBG_OLD, "CleanSubSystems: calling CleanLoadFile()\n"));
 	//CleanLoadFile();
 	//CleanLinkStruct();
 	//FreeFormatStuff();
 	//FreeObjInfo();
-	//DEBUG((DBG_OLD, "CleanSubSystems: calling FreeVirtMem()"));
+	DEBUG((DBG_OLD, "CleanSubSystems: calling FreeVirtMem()\n"));
 	//FreeVirtMem();
 	//CleanToc();
 	//CleanSym();
 	//CleanPermData();
-	//DEBUG((DBG_OLD, "CleanSubSystems exit"));
+	DEBUG((DBG_OLD, "CleanSubSystems exit\n"));
 }
 
 void Linker::ResetMisc(void)
