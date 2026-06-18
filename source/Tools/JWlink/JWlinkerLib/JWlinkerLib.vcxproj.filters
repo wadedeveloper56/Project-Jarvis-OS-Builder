@@ -108,6 +108,9 @@
     <ClInclude Include="distrib.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="loadnov.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="JWlinkerLib.cpp">
@@ -195,6 +198,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="distrib.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="loadnov.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

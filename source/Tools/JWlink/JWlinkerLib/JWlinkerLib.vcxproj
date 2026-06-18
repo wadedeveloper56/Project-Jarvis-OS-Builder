@@ -199,6 +199,7 @@
     <ClInclude Include="hash.h" />
     <ClInclude Include="libr.h" />
     <ClInclude Include="Linker.h" />
+    <ClInclude Include="loadnov.h" />
     <ClInclude Include="mapio.h" />
     <ClInclude Include="MemorySubsystem.h" />
     <ClInclude Include="MessagingSubsystem.h" />
@@ -232,6 +233,7 @@
     <ClCompile Include="JWlinkerLib.cpp" />
     <ClCompile Include="libr.cpp" />
     <ClCompile Include="Linker.cpp" />
+    <ClCompile Include="loadnov.cpp" />
     <ClCompile Include="mapio.cpp" />
     <ClCompile Include="MemorySubsystem.cpp" />
     <ClCompile Include="MessagingSubsystem.cpp" />
