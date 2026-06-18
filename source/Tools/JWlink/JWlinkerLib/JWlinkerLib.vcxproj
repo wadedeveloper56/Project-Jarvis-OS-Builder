@@ -208,6 +208,9 @@
     <ClInclude Include="obj2supp.h" />
     <ClInclude Include="ObjectNode.h" />
     <ClInclude Include="objfree.h" />
+    <ClInclude Include="objio.h" />
+    <ClInclude Include="objomf.h" />
+    <ClInclude Include="objpass1.h" />
     <ClInclude Include="Orl2.h" />
     <ClInclude Include="ovlsupp.h" />
     <ClInclude Include="pch.h" />
@@ -245,6 +248,9 @@
     <ClCompile Include="obj2supp.cpp" />
     <ClCompile Include="ObjectNode.cpp" />
     <ClCompile Include="objfree.cpp" />
+    <ClCompile Include="objio.cpp" />
+    <ClCompile Include="objomf.cpp" />
+    <ClCompile Include="objpass1.cpp" />
     <ClCompile Include="Orl.cpp" />
     <ClCompile Include="ovlsupp.cpp" />
     <ClCompile Include="pch.cpp">

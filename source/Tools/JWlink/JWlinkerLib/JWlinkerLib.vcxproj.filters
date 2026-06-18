@@ -120,6 +120,15 @@
     <ClInclude Include="debug.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="objio.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="objomf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="objpass1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="JWlinkerLib.cpp">
@@ -219,6 +228,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="debug.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="objio.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="objomf.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="objpass1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

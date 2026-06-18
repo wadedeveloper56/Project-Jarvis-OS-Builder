@@ -20,6 +20,9 @@
 #include "loadnov.h"
 #include "loadpe.h"
 #include "obj2supp.h"
+#include "objio.h"
+#include "objomf.h"
+#include "objpass1.h"
 
 Linker::Linker(int argc, char** argv)
 {
@@ -119,9 +122,9 @@ void Linker::ResetSubSystems(void)
 	ResetLoadNov();
 	ResetLoadPE();
 	ResetObj2Supp();
-	//ResetObjIO();
-	//ResetObjOMF();
-	//ResetObjPass1();
+	ResetObjIO();
+	ResetObjOMF();
+	ResetObjPass1();
 	//ResetObjStrip();
 	//ResetOMFReloc();
 	//ResetReloc();

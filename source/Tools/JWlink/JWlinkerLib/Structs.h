@@ -995,4 +995,9 @@ typedef struct fix_data
 	unsigned    os2_selfrel : 1;
 } fix_data;
 
-
+typedef struct
+{
+	void* buffer;
+	unsigned long       pos;
+	infilelist* currfile;
+} bufferedfile;
