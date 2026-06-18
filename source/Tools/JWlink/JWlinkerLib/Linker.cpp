@@ -17,6 +17,7 @@
 #include "wcomdef.h"
 #include "distrib.h"
 #include "loadnov.h"
+#include "loadpe.h"
 
 Linker::Linker(int argc, char** argv)
 {
@@ -113,7 +114,7 @@ void Linker::ResetSubSystems(void)
 	ResetComdef();
 	ResetDistrib();
 	ResetLoadNov();
-	//ResetLoadPE();
+	ResetLoadPE();
 	//ResetObj2Supp();
 	//ResetObjIO();
 	//ResetObjOMF();

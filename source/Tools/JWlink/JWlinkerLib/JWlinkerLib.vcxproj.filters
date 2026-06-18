@@ -111,6 +111,9 @@
     <ClInclude Include="loadnov.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="loadpe.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="JWlinkerLib.cpp">
@@ -201,6 +204,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="loadnov.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="loadpe.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
