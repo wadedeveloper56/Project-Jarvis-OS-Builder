@@ -204,6 +204,7 @@
     <ClInclude Include="mapio.h" />
     <ClInclude Include="MemorySubsystem.h" />
     <ClInclude Include="MessagingSubsystem.h" />
+    <ClInclude Include="obj2supp.h" />
     <ClInclude Include="ObjectNode.h" />
     <ClInclude Include="objfree.h" />
     <ClInclude Include="Orl2.h" />
@@ -239,6 +240,7 @@
     <ClCompile Include="mapio.cpp" />
     <ClCompile Include="MemorySubsystem.cpp" />
     <ClCompile Include="MessagingSubsystem.cpp" />
+    <ClCompile Include="obj2supp.cpp" />
     <ClCompile Include="ObjectNode.cpp" />
     <ClCompile Include="objfree.cpp" />
     <ClCompile Include="Orl.cpp" />

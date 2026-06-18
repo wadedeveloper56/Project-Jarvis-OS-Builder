@@ -18,6 +18,7 @@
 #include "distrib.h"
 #include "loadnov.h"
 #include "loadpe.h"
+#include "obj2supp.h"
 
 Linker::Linker(int argc, char** argv)
 {
@@ -115,7 +116,7 @@ void Linker::ResetSubSystems(void)
 	ResetDistrib();
 	ResetLoadNov();
 	ResetLoadPE();
-	//ResetObj2Supp();
+	ResetObj2Supp();
 	//ResetObjIO();
 	//ResetObjOMF();
 	//ResetObjPass1();
