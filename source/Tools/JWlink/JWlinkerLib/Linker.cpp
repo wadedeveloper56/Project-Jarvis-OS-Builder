@@ -103,6 +103,7 @@ void Linker::ResetMisc(void)
 
 void Linker::ResetSubSystems(void)
 {
+	DEBUG((DBG_OLD, "ResetSubSystems enter\n"));
 	ResetPermData(memorySubsystem);
 	messagingSubsystem->reset();
 	virtualMemory.reset();
@@ -128,6 +129,7 @@ void Linker::ResetSubSystems(void)
 	//ResetLoadFile();
 	//ResetAddr();
 	//ResetToc();
+	DEBUG((DBG_OLD, "ResetSubSystems exit\n"));
 }
 
 void Linker::DoLink(char* cmdline)
