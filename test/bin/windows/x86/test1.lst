@@ -78,12 +78,12 @@ Symbols:
 @Cpu . . . . . . . . . . . . . .        Number           D0Fh 
 @CurSeg  . . . . . . . . . . . .        Text   
 @DataSize  . . . . . . . . . . .        Number             0h 
-@Date  . . . . . . . . . . . . .        Text   06/17/26
+@Date  . . . . . . . . . . . . .        Text   06/18/26
 @FileCur . . . . . . . . . . . .        Text   test1.asm
 @FileName  . . . . . . . . . . .        Text   TEST1
 @Interface . . . . . . . . . . .        Number             1h 
 @Model . . . . . . . . . . . . .        Number             7h 
-@Time  . . . . . . . . . . . . .        Text   10:28:03
+@Time  . . . . . . . . . . . . .        Text   11:37:42
 @Version . . . . . . . . . . . .        Text   800
 @code  . . . . . . . . . . . . .        Text   _TEXT
 @data  . . . . . . . . . . . . .        Text   FLAT

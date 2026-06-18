@@ -192,6 +192,7 @@
     <ClInclude Include="cmdline.h" />
     <ClInclude Include="cmdutils.h" />
     <ClInclude Include="dbgall.h" />
+    <ClInclude Include="distrib.h" />
     <ClInclude Include="FileSubsystem.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="globals.h" />
@@ -224,6 +225,7 @@
     <ClCompile Include="cmdline.cpp" />
     <ClCompile Include="cmdutils.cpp" />
     <ClCompile Include="dbgall.cpp" />
+    <ClCompile Include="distrib.cpp" />
     <ClCompile Include="FileSubsystem.cpp" />
     <ClCompile Include="globals.cpp" />
     <ClCompile Include="hash.cpp" />
