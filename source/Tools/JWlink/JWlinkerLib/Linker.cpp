@@ -28,6 +28,7 @@
 #include "reloc.h"
 #include "symtrace.h"
 #include "loadfile.h"
+#include "salloc.h"
 
 Linker::Linker(int argc, char** argv)
 {
@@ -135,7 +136,7 @@ void Linker::ResetSubSystems(void)
 	ResetReloc();
 	ResetSymTrace();
 	ResetLoadFile();
-	//ResetAddr();
+	ResetAddr();
 	//ResetToc();
 	DEBUG((DBG_OLD, "ResetSubSystems exit\n"));
 }

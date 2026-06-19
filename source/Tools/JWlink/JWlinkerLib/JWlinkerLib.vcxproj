@@ -220,6 +220,7 @@
     <ClInclude Include="permdata.h" />
     <ClInclude Include="reloc.h" />
     <ClInclude Include="ring.h" />
+    <ClInclude Include="salloc.h" />
     <ClInclude Include="specials.h" />
     <ClInclude Include="SpillFile.h" />
     <ClInclude Include="strtab.h" />
@@ -270,6 +271,7 @@
     <ClCompile Include="permdata.cpp" />
     <ClCompile Include="reloc.cpp" />
     <ClCompile Include="ring.cpp" />
+    <ClCompile Include="salloc.cpp" />
     <ClCompile Include="SpillFile.cpp" />
     <ClCompile Include="strtab.cpp" />
     <ClCompile Include="SymbolTable.cpp" />
