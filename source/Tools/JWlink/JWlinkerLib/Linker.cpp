@@ -30,6 +30,7 @@
 #include "loadfile.h"
 #include "salloc.h"
 #include "toc.h"
+#include "ntio.h"
 
 Linker::Linker(int argc, char** argv)
 {
@@ -41,7 +42,7 @@ Linker::Linker(int argc, char** argv)
 	InitNodes(memorySubsystem);
 	tokenBuffer = make_shared<TokenBuffer>(memorySubsystem);
 	spillFile = make_shared<SpillFile>();
-	symbolTable = make_shared<SymbolTable>(memorySubsystem);	
+	symbolTable = make_shared<SymbolTable>(memorySubsystem);
 	orl = make_shared<Orl>();
 	InitCmdFile();
 	virtualMemory = make_shared<VirtualMemory>();
@@ -49,7 +50,7 @@ Linker::Linker(int argc, char** argv)
 
 Linker::~Linker()
 {
-	FiniLinkStruct(memorySubsystem);	
+	FiniLinkStruct(memorySubsystem);
 }
 
 void Linker::CleanSubSystems(void)
@@ -57,10 +58,10 @@ void Linker::CleanSubSystems(void)
 	DEBUG((DBG_OLD, "CleanSubSystems enter\n"));
 	if (MapFile != NIL_HANDLE)
 	{
-	//	QClose(MapFile, MapFName);
+		QClose(MapFile, MapFName);
 		MapFile = NIL_HANDLE;
 	}
-	//FreeOutFiles();
+	FreeOutFiles(fileSubsystem, memorySubsystem);
 	memorySubsystem->FreeMemory(MapFName);
 	//BurnSystemList();
 	DEBUG((DBG_OLD, "CleanSubSystems: calling FreeList( LibPath )\n"));
@@ -145,8 +146,7 @@ void Linker::ResetSubSystems(void)
 }
 
 void Linker::DoLink(char* cmdline)
-{
-}
+{}
 
 void Linker::LinkMeBaby(void)
 {
@@ -154,7 +154,7 @@ void Linker::LinkMeBaby(void)
 	DoLink(ArgSave);
 }
 
-int Linker::Spawn(void (Linker::*fn)(void))
+int Linker::Spawn(void (Linker::* fn)(void))
 {
 	void* save_env;
 	jmp_buf env;
@@ -169,7 +169,7 @@ int Linker::Spawn(void (Linker::*fn)(void))
 	}
 	SpawnStack = save_env;  /* unwind */
 	return(status);
-}	
+}
 
 int Linker::link(char* cmds)
 {
@@ -183,5 +183,5 @@ int Linker::link(char* cmds)
 		if (cmds == NULL) break;
 	}
 	DEBUG((DBG_OLD, "Link exit\n"));
-    return((LinkState & LINK_ERROR) ? 1 : 0);
+	return((LinkState & LINK_ERROR) ? 1 : 0);
 }
