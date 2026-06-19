@@ -25,6 +25,7 @@
 #include "objpass1.h"
 #include "objstrip.h"
 #include "omfreloc.h"
+#include "reloc.h"
 
 Linker::Linker(int argc, char** argv)
 {
@@ -129,7 +130,7 @@ void Linker::ResetSubSystems(void)
 	ResetObjPass1();
 	ResetObjStrip();
 	ResetOMFReloc();
-	//ResetReloc();
+	ResetReloc();
 	//ResetSymTrace();
 	//ResetLoadFile();
 	//ResetAddr();

@@ -1051,3 +1051,23 @@ typedef struct
 	} u;
 	frame_type  type;
 } frame_spec;
+
+typedef union
+{
+	unsigned long   spill;
+	void* addr;
+} spilladdr;
+
+typedef struct reloc_info
+{
+	struct reloc_info* next;
+	unsigned            sizeleft;
+	spilladdr           loc;
+} reloc_info;
+
+typedef struct os2_reloc_header
+{
+	reloc_info* externals; /* external and segment style fixups */
+	reloc_info* internals; /* internal, non-segment fixups */
+} os2_reloc_header;
+
