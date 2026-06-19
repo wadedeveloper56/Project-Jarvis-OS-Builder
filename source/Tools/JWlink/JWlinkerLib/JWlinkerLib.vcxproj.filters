@@ -132,6 +132,9 @@
     <ClInclude Include="objstrip.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="omfreloc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="JWlinkerLib.cpp">
@@ -243,6 +246,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="objstrip.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="omfreloc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

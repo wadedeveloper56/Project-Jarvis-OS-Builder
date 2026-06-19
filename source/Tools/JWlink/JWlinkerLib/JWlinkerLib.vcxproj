@@ -212,6 +212,7 @@
     <ClInclude Include="objomf.h" />
     <ClInclude Include="objpass1.h" />
     <ClInclude Include="objstrip.h" />
+    <ClInclude Include="omfreloc.h" />
     <ClInclude Include="Orl2.h" />
     <ClInclude Include="ovlsupp.h" />
     <ClInclude Include="pch.h" />
@@ -253,6 +254,7 @@
     <ClCompile Include="objomf.cpp" />
     <ClCompile Include="objpass1.cpp" />
     <ClCompile Include="objstrip.cpp" />
+    <ClCompile Include="omfreloc.cpp" />
     <ClCompile Include="Orl.cpp" />
     <ClCompile Include="ovlsupp.cpp" />
     <ClCompile Include="pch.cpp">

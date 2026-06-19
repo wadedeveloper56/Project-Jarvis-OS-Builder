@@ -1014,3 +1014,40 @@ typedef struct edgelist
 	unsigned            reverse_dir : 1;// true if edge points in the opposite
 	// direction
 } edgelist;
+
+typedef struct bakpatlist
+{
+	struct bakpatlist* next;
+	virt_mem            addr;
+	uint16_t         len;
+	::byte                loctype;
+	bool                is32bit;
+	char                data[1];
+} bakpat_list;
+
+typedef enum
+{
+	FIX_FRAME_SEG,      /* segdata */
+	FIX_FRAME_GRP,      /* group_entry */
+	FIX_FRAME_EXT,      /* symbol */
+	FIX_FRAME_ABS,      /* absolute value */
+	FIX_FRAME_LOC,      /* frame containing location */
+	FIX_FRAME_TARG,     /* frame same as target */
+	FIX_FRAME_FLAT      /* frame is flat group */
+} frame_type;
+
+#define FRAME_HAS_DATA( fix ) ((fix) < FIX_FRAME_LOC)
+
+typedef struct
+{
+	union
+	{
+		segdata* sdata;
+		group_entry* group;
+		symbol* sym;
+		segment         abs;
+		void* ptr;
+		unsigned        val;
+	} u;
+	frame_type  type;
+} frame_spec;
