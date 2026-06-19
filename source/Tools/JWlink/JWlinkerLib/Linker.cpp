@@ -26,6 +26,8 @@
 #include "objstrip.h"
 #include "omfreloc.h"
 #include "reloc.h"
+#include "symtrace.h"
+#include "loadfile.h"
 
 Linker::Linker(int argc, char** argv)
 {
@@ -51,11 +53,11 @@ Linker::~Linker()
 void Linker::CleanSubSystems(void)
 {
 	DEBUG((DBG_OLD, "CleanSubSystems enter\n"));
-	//if (MapFile != NIL_HANDLE)
-	//{
+	if (MapFile != NIL_HANDLE)
+	{
 	//	QClose(MapFile, MapFName);
-	//	MapFile = NIL_HANDLE;
-	//}
+		MapFile = NIL_HANDLE;
+	}
 	//FreeOutFiles();
 	//_LnkFree(MapFName);
 	//BurnSystemList();
@@ -131,8 +133,8 @@ void Linker::ResetSubSystems(void)
 	ResetObjStrip();
 	ResetOMFReloc();
 	ResetReloc();
-	//ResetSymTrace();
-	//ResetLoadFile();
+	ResetSymTrace();
+	ResetLoadFile();
 	//ResetAddr();
 	//ResetToc();
 	DEBUG((DBG_OLD, "ResetSubSystems exit\n"));

@@ -138,6 +138,12 @@
     <ClInclude Include="reloc.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="symtrace.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="loadfile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="JWlinkerLib.cpp">
@@ -255,6 +261,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="reloc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="symtrace.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="loadfile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

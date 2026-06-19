@@ -200,6 +200,7 @@
     <ClInclude Include="hash.h" />
     <ClInclude Include="libr.h" />
     <ClInclude Include="Linker.h" />
+    <ClInclude Include="loadfile.h" />
     <ClInclude Include="loadnov.h" />
     <ClInclude Include="loadpe.h" />
     <ClInclude Include="mapio.h" />
@@ -225,6 +226,7 @@
     <ClInclude Include="Structs.h" />
     <ClInclude Include="SymbolTable.h" />
     <ClInclude Include="symmem.h" />
+    <ClInclude Include="symtrace.h" />
     <ClInclude Include="TokenBuffer.h" />
     <ClInclude Include="VirtualMemory.h" />
     <ClInclude Include="wcomdef.h" />
@@ -243,6 +245,7 @@
     <ClCompile Include="JWlinkerLib.cpp" />
     <ClCompile Include="libr.cpp" />
     <ClCompile Include="Linker.cpp" />
+    <ClCompile Include="loadfile.cpp" />
     <ClCompile Include="loadnov.cpp" />
     <ClCompile Include="loadpe.cpp" />
     <ClCompile Include="mapio.cpp" />
@@ -271,6 +274,7 @@
     <ClCompile Include="strtab.cpp" />
     <ClCompile Include="SymbolTable.cpp" />
     <ClCompile Include="symmem.cpp" />
+    <ClCompile Include="symtrace.cpp" />
     <ClCompile Include="TokenBuffer.cpp" />
     <ClCompile Include="VirtualMemory.cpp" />
     <ClCompile Include="wcomdef.cpp" />

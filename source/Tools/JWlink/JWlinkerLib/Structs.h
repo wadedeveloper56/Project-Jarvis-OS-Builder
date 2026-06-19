@@ -1071,3 +1071,39 @@ typedef struct os2_reloc_header
 	reloc_info* internals; /* internal, non-segment fixups */
 } os2_reloc_header;
 
+typedef struct
+{
+	f_handle    handle;
+	char* fname;
+	char* buffer;
+	unsigned    bufsize;
+	//    char        *dllname;
+	//    size_t      dlllen;
+	char* module_name;
+	size_t      module_name_len;
+	unsigned    didone : 1;
+} implibinfo;
+
+typedef struct
+{
+	uint32_t grp_start;
+	uint32_t seg_start;
+	group_entry* lastgrp;  // used only for copy classes
+	bool        repos;
+} grpwriteinfo;
+
+typedef struct
+{
+	union
+	{
+		symbol* sym;
+		segdata* sdata;
+	} targ;
+	offset              off;
+	mod_entry* mod;
+	targ_addr           addr;
+	unsigned            type : 2;
+	unsigned            user_specd : 1;
+	unsigned            from_inc : 1;
+} startinfo;
+
