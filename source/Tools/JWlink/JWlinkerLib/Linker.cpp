@@ -29,6 +29,7 @@
 #include "symtrace.h"
 #include "loadfile.h"
 #include "salloc.h"
+#include "toc.h"
 
 Linker::Linker(int argc, char** argv)
 {
@@ -60,7 +61,7 @@ void Linker::CleanSubSystems(void)
 		MapFile = NIL_HANDLE;
 	}
 	//FreeOutFiles();
-	//_LnkFree(MapFName);
+	memorySubsystem->FreeMemory(MapFName);
 	//BurnSystemList();
 	DEBUG((DBG_OLD, "CleanSubSystems: calling FreeList( LibPath )\n"));
 	//FreeList(LibPath);
@@ -84,6 +85,7 @@ void Linker::CleanSubSystems(void)
 
 void Linker::ResetMisc(void)
 {
+	DEBUG((DBG_OLD, "ResetMisc enter\n"));
 	LinkFlags = CASE_FLAG | FAR_CALLS_FLAG;
 	LinkState = MAKE_RELOCS;
 	AbsGroups = NULL;
@@ -108,6 +110,7 @@ void Linker::ResetMisc(void)
 	symbolTable->ResetSym();
 	symbolTable->SetSymCase();
 	SetLibCase();
+	DEBUG((DBG_OLD, "ResetMisc exit\n"));
 }
 
 void Linker::ResetSubSystems(void)
@@ -137,7 +140,7 @@ void Linker::ResetSubSystems(void)
 	ResetSymTrace();
 	ResetLoadFile();
 	ResetAddr();
-	//ResetToc();
+	ResetToc();
 	DEBUG((DBG_OLD, "ResetSubSystems exit\n"));
 }
 
@@ -170,6 +173,7 @@ int Linker::Spawn(void (Linker::*fn)(void))
 
 int Linker::link(char* cmds)
 {
+	DEBUG((DBG_OLD, "Link enter\n"));
 	for (;;)
 	{
 		ArgSave = cmds;         // bogus way to pass args to spawn
@@ -178,5 +182,6 @@ int Linker::link(char* cmds)
 		cmds = GetNextLink();
 		if (cmds == NULL) break;
 	}
+	DEBUG((DBG_OLD, "Link exit\n"));
     return((LinkState & LINK_ERROR) ? 1 : 0);
 }

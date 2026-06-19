@@ -1107,3 +1107,19 @@ typedef struct
 	unsigned            from_inc : 1;
 } startinfo;
 
+typedef struct
+{
+	segdata* sdata;    // If sdata == NULL, use sym to get address
+	// else use off and sdata->addr get address
+	union
+	{
+		offset off;  // relative to sdata->addr
+		symbol* sym;
+	} u;
+} TocEntryId;
+
+typedef struct
+{
+	TocEntryId e;
+	int pos;
+} TocEntry;

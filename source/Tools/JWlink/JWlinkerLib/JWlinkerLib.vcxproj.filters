@@ -147,6 +147,9 @@
     <ClInclude Include="salloc.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="toc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="JWlinkerLib.cpp">
@@ -273,6 +276,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="salloc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="toc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
