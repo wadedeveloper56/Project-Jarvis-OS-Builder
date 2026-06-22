@@ -42,7 +42,7 @@ Linker::Linker(int argc, char** argv)
 	messagingSubsystem = make_shared<MessagingSubsystem>();
 	InitNodes(memorySubsystem);
 	tokenBuffer = make_shared<TokenBuffer>(memorySubsystem);
-	spillFile = make_shared<SpillFile>();
+	spillFile = make_shared<SpillFile>(memorySubsystem);
 	symbolTable = make_shared<SymbolTable>(memorySubsystem);
 	orl = make_shared<Orl>();
 	InitCmdFile();
@@ -67,7 +67,7 @@ void Linker::CleanSubSystems(void)
 	BurnSystemList(memorySubsystem);
 	DEBUG((DBG_OLD, "CleanSubSystems: calling FreeList( LibPath )\n"));
 	FreeList(memorySubsystem, LibPath);
-	//CloseSpillFile();
+	spillFile->CloseSpillFile();
 	//CleanTraces();
 	//FreePaths();
 	//FreeUndefs();
