@@ -1209,3 +1209,14 @@ typedef struct node
 	void* entry;
 } node;
 
+typedef struct trace_info
+{
+	TRACE_INFO* next;
+	union
+	{
+		char* name;
+		file_list* lib;
+	} u;
+	char* member;
+	bool                found;
+} trace_info;
