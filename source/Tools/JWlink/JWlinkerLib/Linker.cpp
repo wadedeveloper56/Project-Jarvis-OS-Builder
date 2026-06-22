@@ -63,7 +63,7 @@ void Linker::CleanSubSystems(void)
 	}
 	FreeOutFiles(fileSubsystem, memorySubsystem);
 	memorySubsystem->FreeMemory(MapFName);
-	//BurnSystemList();
+	BurnSystemList(memorySubsystem);
 	DEBUG((DBG_OLD, "CleanSubSystems: calling FreeList( LibPath )\n"));
 	//FreeList(LibPath);
 	//CloseSpillFile();
