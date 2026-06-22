@@ -1203,4 +1203,9 @@ typedef struct sysblock
 	char                commands[1];
 } sysblock;
 
+typedef struct node
+{
+	void* next;
+	void* entry;
+} node;
 

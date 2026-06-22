@@ -31,6 +31,7 @@
 #include "salloc.h"
 #include "toc.h"
 #include "ntio.h"
+#include "linkutil.h"
 
 Linker::Linker(int argc, char** argv)
 {
@@ -65,7 +66,7 @@ void Linker::CleanSubSystems(void)
 	memorySubsystem->FreeMemory(MapFName);
 	BurnSystemList(memorySubsystem);
 	DEBUG((DBG_OLD, "CleanSubSystems: calling FreeList( LibPath )\n"));
-	//FreeList(LibPath);
+	FreeList(memorySubsystem, LibPath);
 	//CloseSpillFile();
 	//CleanTraces();
 	//FreePaths();
