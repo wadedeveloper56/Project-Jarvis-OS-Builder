@@ -42,9 +42,9 @@ struct ring
 
 void RINGNAME(Append) (void* hdr, void* element)
 {
-	RING** rhdr;                // - ring header
-	RING* relement;             // - ring element
-	RING* lelement;             // - last ring element, before appending
+	RING** rhdr;                   
+	RING* relement;                
+	RING* lelement;                   
 
 	rhdr = (RING**)hdr;
 	relement = (RING*)element;
@@ -62,3 +62,38 @@ void RINGNAME(Append) (void* hdr, void* element)
 	*rhdr = relement;
 }
 
+void* RINGNAME(Pop) (void* hdr)                      
+{
+    RING** rhdr;                     
+    RING* last;                    
+    RING* first;                   
+
+    rhdr = (RING**)hdr;
+    first = NULL;
+    last = *rhdr;
+    if (last != NULL)
+    {
+        first = last->next;
+        if (first == last)
+        {
+            *rhdr = NULL;
+        }
+        else
+        {
+            last->next = first->next;
+        }
+    }
+    return(first);
+}
+
+void RINGNAME(Free) (shared_ptr<MemorySubsystem> memorySubsystem,void* hdr)
+{
+    void* elt;
+
+    for (;;)
+    {
+        elt = RINGNAME(Pop)(hdr);
+        if (elt == NULL) break;
+        memorySubsystem->FreeMemory(elt);
+    }
+}

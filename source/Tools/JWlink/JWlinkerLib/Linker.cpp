@@ -54,7 +54,7 @@ Linker::~Linker()
 	FiniLinkStruct(memorySubsystem);
 }
 
-void Linker::CleanSubSystems(void)
+void Linker::CleanSubSystems()
 {
 	DEBUG((DBG_OLD, "CleanSubSystems enter\n"));
 	if (MapFile != NIL_HANDLE)
@@ -70,7 +70,7 @@ void Linker::CleanSubSystems(void)
 	spillFile->CloseSpillFile();
 	CleanTraces(memorySubsystem);
 	FreePaths(memorySubsystem);
-	//FreeUndefs();
+	FreeUndefs(memorySubsystem);
 	//FreeLocalImports();
 	DEBUG((DBG_OLD, "CleanSubSystems: calling CleanLoadFile()\n"));
 	//CleanLoadFile();
