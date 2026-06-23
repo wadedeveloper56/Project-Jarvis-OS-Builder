@@ -156,6 +156,9 @@
     <ClInclude Include="linkutil.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="procfile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="JWlinkerLib.cpp">
@@ -291,6 +294,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="linkutil.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="procfile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

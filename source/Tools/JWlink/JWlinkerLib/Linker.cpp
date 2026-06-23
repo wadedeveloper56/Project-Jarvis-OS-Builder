@@ -32,6 +32,7 @@
 #include "toc.h"
 #include "ntio.h"
 #include "linkutil.h"
+#include "procfile.h"
 
 Linker::Linker(int argc, char** argv)
 {
@@ -71,7 +72,7 @@ void Linker::CleanSubSystems()
 	CleanTraces(memorySubsystem);
 	FreePaths(memorySubsystem);
 	FreeUndefs(memorySubsystem);
-	//FreeLocalImports();
+	FreeLocalImports();
 	DEBUG((DBG_OLD, "CleanSubSystems: calling CleanLoadFile()\n"));
 	//CleanLoadFile();
 	//CleanLinkStruct();
