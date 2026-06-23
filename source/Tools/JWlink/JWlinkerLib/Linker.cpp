@@ -69,7 +69,7 @@ void Linker::CleanSubSystems(void)
 	FreeList(memorySubsystem, LibPath);
 	spillFile->CloseSpillFile();
 	CleanTraces(memorySubsystem);
-	//FreePaths();
+	FreePaths(memorySubsystem);
 	//FreeUndefs();
 	//FreeLocalImports();
 	DEBUG((DBG_OLD, "CleanSubSystems: calling CleanLoadFile()\n"));

@@ -9,3 +9,4 @@ char* GetNextLink(void);
 void CleanSystemList(shared_ptr<MemorySubsystem> memory, bool check);
 void PruneSystemList(shared_ptr<MemorySubsystem> memory);
 void BurnSystemList(shared_ptr<MemorySubsystem> memory);
+void FreePaths(shared_ptr<MemorySubsystem> memory);

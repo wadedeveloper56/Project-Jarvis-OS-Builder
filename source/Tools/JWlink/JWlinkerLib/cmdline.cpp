@@ -4,6 +4,7 @@
 #include "cmdline.h"
 #include "Structs.h"
 #include "globals.h"
+#include "Linkutil.h"
 
 file_defext     Extension;
 file_list** CurrFList;
@@ -60,5 +61,16 @@ void PruneSystemList(shared_ptr<MemorySubsystem> memory)
 void BurnSystemList(shared_ptr<MemorySubsystem> memory)
 {
     CleanSystemList(memory, false);
+}
+
+void FreePaths(shared_ptr<MemorySubsystem> memory)
+{
+    FreeList(memory, Path);
+    Path = NULL;
+    if (Name != NULL)
+    {
+        memory->FreeMemory(Name);
+        Name = NULL;
+    }
 }
 
