@@ -74,7 +74,7 @@ void Linker::CleanSubSystems()
 	FreeUndefs(memorySubsystem);
 	FreeLocalImports();
 	DEBUG((DBG_OLD, "CleanSubSystems: calling CleanLoadFile()\n"));
-	//CleanLoadFile();
+	CleanLoadFile();
 	//CleanLinkStruct();
 	//FreeFormatStuff();
 	//FreeObjInfo();

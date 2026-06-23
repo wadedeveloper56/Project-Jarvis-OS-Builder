@@ -75,3 +75,8 @@ void ResetLoadFile()
     ClearStartAddr();
 }
 
+void CleanLoadFile()
+{
+}
+
+
