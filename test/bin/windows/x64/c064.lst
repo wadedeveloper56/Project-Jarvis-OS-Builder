@@ -1,4 +1,4 @@
-JWasm v2.12pre, Jun 22 2026
+JWasm v2.12pre, Jun 25 2026
 c064.asm
                                 .x64
                                 .model flat, c
@@ -97,12 +97,12 @@ Symbols:
 @Cpu . . . . . . . . . . . . . .        Number           D5Fh 
 @CurSeg  . . . . . . . . . . . .        Text   
 @DataSize  . . . . . . . . . . .        Number             0h 
-@Date  . . . . . . . . . . . . .        Text   06/23/26
+@Date  . . . . . . . . . . . . .        Text   06/29/26
 @FileCur . . . . . . . . . . . .        Text   c064.asm
 @FileName  . . . . . . . . . . .        Text   C064
 @Interface . . . . . . . . . . .        Number             1h 
 @Model . . . . . . . . . . . . .        Number             7h 
-@Time  . . . . . . . . . . . . .        Text   08:46:59
+@Time  . . . . . . . . . . . . .        Text   07:48:42
 @Version . . . . . . . . . . . .        Text   800
 @code  . . . . . . . . . . . . .        Text   _TEXT
 @data  . . . . . . . . . . . . .        Text   FLAT
@@ -111,4 +111,4 @@ __JWASM__  . . . . . . . . . . .        Number            D4h
 argc . . . . . . . . . . . . . .        QWord              0h _DATA C
 argv . . . . . . . . . . . . . .        QWord              8h _DATA C
 
-c064.asm: 44 lines, 2 passes, 1 ms, 0 warnings, 0 errors
+c064.asm: 44 lines, 2 passes, 2 ms, 0 warnings, 0 errors
