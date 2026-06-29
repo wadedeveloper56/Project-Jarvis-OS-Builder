@@ -159,6 +159,12 @@
     <ClInclude Include="procfile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="objcache.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="objnode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="JWlinkerLib.cpp">
@@ -297,6 +303,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="procfile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="objcache.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="objnode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbginfo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

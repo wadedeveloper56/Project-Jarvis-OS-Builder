@@ -3,10 +3,6 @@
 #include "carve.h"
 #include "MemorySubsystem.h"
 #include "Structs.h"
-//#include "msg.h"
-//#include "fileio.h"
-//#include "alloc.h"
-//#include "carve.h"
 
 #define MK_INDEX( b, o )        (((b)<<16)|(o))
 #define GET_BLOCK( i )          (((i)>>16)&0x0ffff)
@@ -52,7 +48,6 @@ carve_t CarveCreate(shared_ptr<MemorySubsystem> memorySubsystem, size_t elm_size
     {
         elm_size = sizeof(free_t);
     }
-    //_ChkAlloc(cv, sizeof(*cv));
 	cv = (cv_t*)memorySubsystem->AllocateMemory(sizeof(*cv));
     cv->elm_size = elm_size;
     cv->blk_size = blk_size;
@@ -69,3 +64,14 @@ carve_t CarveCreate(shared_ptr<MemorySubsystem> memorySubsystem, size_t elm_size
     return(cv);
 }
 
+#define CarveDebugFree( cv, elm )
+
+void CarveFree(carve_t cv, void* elm)
+{
+    if (elm == NULL)
+    {
+        return;
+    }
+    CarveDebugFree(cv, elm);
+    _ADD_TO_FREE(cv->free_list, elm);
+}

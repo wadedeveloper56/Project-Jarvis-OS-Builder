@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "distrib.h"
 #include "structs.h"
+#include "objfree.h"
+#include "symmem.h"
 
 uint16_t  CurrModThere;
 arcdata* ArcBuffer;
@@ -20,3 +22,18 @@ void ResetDistrib()
     ModTable = NULL;
     SectOvlTab = NULL;
 }
+
+void FreeDistStuff(shared_ptr<MemorySubsystem> memorySubsystem)
+{
+    unsigned    index;
+
+    for (index = 1; index <= CurrModHandle; index++)
+    {
+        FreeAMod(ModTable[index]);
+    }
+    memorySubsystem->FreeMemory(ModTable);
+    memorySubsystem->FreeMemory(ArcBuffer);
+    memorySubsystem->FreeMemory(SectOvlTab);
+    ReleasePass1(memorySubsystem);
+}
+

@@ -4,6 +4,12 @@
 #include "File.h"
 #include "hash.h"
 
+#ifdef CASE_SENSITIVE
+#define FNAMECMPSTR      _strcmp      /* for case  sensitive file systems */
+#else
+#define FNAMECMPSTR      _stricmp     /* for case insensitive file systems */
+#endif
+
 typedef enum file_defext
 {
 #undef pick1
@@ -253,6 +259,37 @@ typedef enum exe_format
 	MK_DOS16M = 0x00020000,
 	MK_RAW = 0x00080000
 } exe_format;
+
+#define MK_DOS       (MK_OVERLAYS | MK_DOS_EXE | MK_COM)
+#define MK_ONLY_OS2_16  MK_OS2_NE
+#define MK_OS2_FLAT  (MK_OS2_LE | MK_OS2_LX | MK_WIN_VXD)
+#define MK_ONLY_OS2  (MK_ONLY_OS2_16 | MK_OS2_LE | MK_OS2_LX)
+#define MK_OS2_16BIT (MK_ONLY_OS2_16 | MK_WIN_NE)
+/* MK_WIN_VXD is not included into MK_OS2 */
+#define MK_OS2       (MK_OS2_16BIT | MK_OS2_LE | MK_OS2_LX)
+#define MK_PHAR_LAP  (MK_PHAR_SIMPLE|MK_PHAR_FLAT|MK_PHAR_REX|MK_PHAR_MULTISEG)
+#define MK_QNX       (MK_QNX_16 | MK_QNX_FLAT)
+#define MK_386       (MK_PHAR_LAP | MK_NOVELL | MK_QNX|MK_OS2_LE|MK_OS2_LX|MK_PE|MK_ELF|MK_WIN_VXD|MK_RAW)
+#define MK_286       (MK_DOS | MK_OS2_16BIT | MK_DOS16M)
+/* MK_OS2_LE, MK_OS2_LX, MK_WIN_VXD and MK_PE are not treated as FLAT internally */
+#define MK_FLAT      (MK_PHAR_SIMPLE | MK_PHAR_FLAT | MK_PHAR_REX | MK_RAW )
+#define MK_ALLOW_64  (MK_PE | MK_ELF | MK_RAW) /* jwlink */
+#define MK_ALLOW_32  (MK_PHAR_LAP|MK_OS2_LE|MK_OS2_LX|MK_NOVELL|MK_QNX|MK_PE|MK_ELF|MK_WIN_VXD|MK_RAW)
+#define MK_ALLOW_16  (MK_286 | MK_PHAR_FLAT | MK_OS2 | MK_QNX | MK_PE | MK_WIN_VXD | MK_RAW)
+#define MK_ID_SPLIT  (MK_NOVELL)
+#define MK_REAL_MODE (MK_DOS)
+#define MK_PROT_MODE (~MK_REAL_MODE)
+#define MK_SEGMENTED (MK_286 | MK_OS2 | MK_PHAR_MULTISEG)
+#define MK_IMPORTS   (MK_NOVELL | MK_OS2 | MK_PE | MK_ELF)
+/* MK_SPLIT_DATA allows to split the uninitialized data part from
+ * the rest of DGROUP, but it also prohibits BSS to share pages
+ * with preceding initialized data segments!
+ * To be improved!
+ */
+#define MK_SPLIT_DATA (MK_ELF | MK_PE)
+#define MK_LINEARIZE (MK_ELF | MK_PE)
+#define MK_END_PAD   (MK_DOS)
+#define MK_ALL       (0x000FFFFF)
 
 typedef enum
 {
@@ -1220,3 +1257,400 @@ typedef struct trace_info
 	char* member;
 	bool                found;
 } trace_info;
+
+enum file_status
+{
+	DBI_LINE = 0x00000001,    /*  values for DBIFlag */
+	DBI_TYPE = 0x00000002,
+	DBI_LOCAL = 0x00000004,
+	DBI_ONLY_EXPORTS = 0x00000008,
+	DBI_STATICS = 0x00000010,
+	DBI_ALL = (DBI_LINE | DBI_TYPE | DBI_LOCAL | DBI_STATICS),
+	DBI_MASK = (DBI_ALL | DBI_ONLY_EXPORTS),
+	STAT_HAS_CHANGED = 0x00000040,
+	STAT_OMF_LIB = 0x00000080,
+	STAT_AR_LIB = 0x00000100,
+	STAT_IS_LIB = (STAT_AR_LIB | STAT_OMF_LIB),
+	STAT_LAST_SEG = 0x00000200,    // set by newsegment option
+	STAT_TRACE_SYMS = 0x00000400,
+	STAT_LIB_FIXED = 0x00000800,
+	STAT_OLD_LIB = 0x00001000,
+	STAT_LIB_USED = 0x00002000,
+	STAT_SEEN_LIB = 0x00004000,
+	STAT_HAS_MEMBER = 0x00008000,
+	STAT_USER_SPECD = 0x00010000
+};
+
+typedef enum lib_priorities
+{
+	LIB_PRIORITY_MIN = 0,
+	LIB_PRIORITY_MID = 128,
+	LIB_PRIORITY_MAX = 255
+} lib_priority;
+
+typedef struct file_list
+{
+	FILE_LIST* next_file;
+	infilelist* file;
+	union
+	{
+		union dict_entry* dict;
+		MEMBER_LIST* member;
+	} u;
+	char* strtab; /* for AR format */
+	enum file_status    status;
+	lib_priority        priority;       /* for libraries */
+	unsigned            ovlref : 16;  /* for fixed libraries */
+	unsigned : 0;
+} file_list;
+
+enum infile_flags
+{
+	INSTAT_USE_LIBPATH = 0x0001,       // use libpath for this file.
+	INSTAT_LIBRARY = 0x0002,       // file is a library
+	INSTAT_IOERR = 0x0004,       // problem reading this file
+	INSTAT_IN_USE = 0x0008,       // file in use.
+	INSTAT_OPEN_WARNING = 0x0010,       // only give a warning if can't open
+	INSTAT_FULL_CACHE = 0x0020,       // read entire file.
+	INSTAT_PAGE_CACHE = 0x0040,       // read in "paged"
+	INSTAT_GOT_MODTIME = 0x0080,
+	INSTAT_NO_WARNING = 0x0100
+};
+
+#define INSTAT_SET_CACHE (INSTAT_FULL_CACHE | INSTAT_PAGE_CACHE)
+
+typedef struct infilelist
+{
+	INFILELIST* next;
+	PATH_ENTRY* path_list;
+	char* prefix;
+	void* cache;  // used when object file cached in mem
+	unsigned long       len;     // length of the file.
+	unsigned long       currpos; // current position of the file.
+	f_handle            handle;
+	time_t              modtime;
+	char* name;
+	enum infile_flags   flags;
+} infilelist;
+
+typedef struct path_entry
+{
+	PATH_ENTRY* next;
+	char                name[1];
+} path_entry;
+
+typedef struct omf_dict_entry
+{
+	void** cache;          /* for extra memory store of dictionary */
+	uint32_t start;          /* recno of start of dictionary         */
+	uint16_t pages;          /* number of pages in dictionary        */
+	uint16_t rec_length;     /* record alignment of obj recs         */
+	::byte* buffer;
+} omf_dict_entry;
+
+typedef struct ar_dict_entry
+{
+	uint32_t* filepostab;
+	uint16_t* offsettab;
+	char** fnametab;
+	uint32_t         num_entries;
+} ar_dict_entry;
+
+typedef union dict_entry
+{
+	omf_dict_entry      o;
+	ar_dict_entry       a;
+} dict_entry;
+
+#define PAGES_IN_CACHE      0x40U
+
+typedef struct order_class
+{
+	ORDER_CLASS* NextClass;
+	class_entry* Ring;  // Used for sorting
+	char* Name;
+	char* SrcName;
+	targ_addr           Base;
+	ORDER_SEGMENT* SegList;
+	unsigned            FixedAddr : 1;
+	unsigned            NoEmit : 1;
+	unsigned            Copy : 1;
+} order_class;
+
+typedef struct order_segment
+{
+	ORDER_SEGMENT* NextSeg;
+	char* Name;
+	targ_addr           Base;
+	unsigned            FixedAddr : 1;
+	unsigned            NoEmit : 1;
+} order_segment;
+
+#define RELOC_PAGE_SIZE 512
+#define RELOC_SPILLED   0x8000
+#define SIZELEFT_MASK   0x7FFF
+
+#define OSF_RLIDX_MASK          0x3FF
+#define OSF_RLIDX_LOW(val)      (val & OSF_RLIDX_MASK)
+#define OSF_RLIDX_HIGH(val)     ((val & (~OSF_RLIDX_MASK)) >> 10)
+#define OSF_RLIDX_MAX           0x400
+
+#define OSF_PAGE_SHIFT 12
+#define OSF_PAGE_SIZE   (1 << OSF_PAGE_SHIFT)
+#define OSF_PAGE_MASK   (OSF_PAGE_SIZE-1)
+#define OSF_FIXUP_TO_ALIAS  0x10
+#define OSF_SOURCE_MASK     0x0f
+#define OSF_TARGET_MASK     0x03
+#define OSF_ADDITIVE        0x04
+#define OSF_ADDITIVE32      0x20
+#define OSF_OBJMOD_16BITS   0x40
+#define OSF_TARGOFF_32BITS  0x10
+#define OSF_IMPORD_8BITS    0x80
+#define OSF_32BIT_SELF_REL  8
+#define OSF_PAGE_COUNT( size )  (((size)+OSF_PAGE_MASK)>>OSF_PAGE_SHIFT)
+
+/* for relocation fields */
+#define BYTE_ONLY                       0x0001
+#define SEGMENT_ONLY                    0x0002
+#define SEGMENT_OFFSET                  0x0003
+#define OFFSET_ONLY                     0x0005
+#define SEGMENT_OFFSET48                0x0006
+#define OFFSET48_ONLY                   0x0007
+#define OFFSET48_RELATIVE               0x0008
+
+#define INTERNAL_REFERENCE              0x0000
+#define IMPORTED_ORDINAL                0x0001
+#define IMPORTED_NAME                   0x0002
+#define OSFIXUP                         0x0003
+#define ADDITIVE                        0x0004
+
+#define WIN_FFIX_DS_OVERRIDE            1       // FIARQQ
+#define WIN_FFIX_SS_OVERRIDE            2       // FISRQQ
+#define WIN_FFIX_CS_OVERRIDE            3       // FICRQQ
+#define WIN_FFIX_ES_OVERRIDE            4       // FIERQQ
+#define WIN_FFIX_DR_SYMBOL              5       // FIDRQQ
+#define WIN_FFIX_WR_SYMBOL              6       // FIWRQQ
+
+#pragma pack(1)
+
+typedef struct os2_reloc_item
+{
+	uint8_t      addr_type;          /* see below                     */
+	uint8_t      reloc_type;         /* see below                     */
+	uint16_t     reloc_offset;       /* where to put addr in curr grp */
+	union addr_to_put
+	{                 /* where,how to get addr to put  */
+		struct internalreference
+		{      /*   in this module              */
+			int8_t        grp_num;    /*      group number             */
+			uint8_t      rsrvd;      /*      == 0                     */
+			uint16_t     off;        /*      xtrnl offset in that grp */
+		} internal;
+		struct importedordinal
+		{        /*   by ordinal                  */
+			uint16_t     modref_idx; /*      in 'module_name'.dll     */
+			uint16_t     ord_num;    /*      entry point index        */
+		} ordinal;
+		struct importedname
+		{           /*   by name                     */
+			uint16_t     modref_idx; /*      in 'module_name'.dll     */
+			uint16_t     impnam_off; /*      with res_name table      */
+		} name;
+		uint32_t     fltpt;          // floating point fixup value
+	} put;
+} os2_reloc_item;
+
+/* for relocation fields */
+#define BYTE_ONLY                       0x0001
+#define SEGMENT_ONLY                    0x0002
+#define SEGMENT_OFFSET                  0x0003
+#define OFFSET_ONLY                     0x0005
+#define SEGMENT_OFFSET48                0x0006
+#define OFFSET48_ONLY                   0x0007
+#define OFFSET48_RELATIVE               0x0008
+
+#define INTERNAL_REFERENCE              0x0000
+#define IMPORTED_ORDINAL                0x0001
+#define IMPORTED_NAME                   0x0002
+#define OSFIXUP                         0x0003
+#define ADDITIVE                        0x0004
+
+#define WIN_FFIX_DS_OVERRIDE            1       // FIARQQ
+#define WIN_FFIX_SS_OVERRIDE            2       // FISRQQ
+#define WIN_FFIX_CS_OVERRIDE            3       // FICRQQ
+#define WIN_FFIX_ES_OVERRIDE            4       // FIERQQ
+#define WIN_FFIX_DR_SYMBOL              5       // FIDRQQ
+#define WIN_FFIX_WR_SYMBOL              6       // FIWRQQ
+
+typedef struct dos_addr
+{
+	uint16_t     off;
+	uint16_t     seg;
+} dos_addr;
+
+typedef struct
+{
+	dos_addr    addr;
+} dos_reloc_item;
+
+typedef struct
+{
+	uint32_t reloc_offset;
+} nov_reloc_item;
+
+typedef struct
+{
+	uint32_t reloc_offset;
+} rex_reloc_item;
+
+typedef struct
+{
+	uint32_t offset;
+	uint16_t segment;
+} pms_reloc_item;
+
+typedef struct
+{
+	uint16_t segment;
+	uint32_t reloc_offset;
+} qnx_reloc_item;
+
+typedef struct
+{
+	uint32_t reloc_offset;
+} qnx_linear_item;
+
+typedef union
+{
+	::byte        buff[12];
+	struct
+	{
+		uint8_t          nr_stype;
+		uint8_t          nr_flags;
+		int16_t           r32_soff;
+		uint16_t         r32_objmod;
+		union
+		{
+			uint32_t     intref;
+			union
+			{
+				uint32_t proc;
+				uint32_t ord;
+			}               extref;
+			struct
+			{
+				uint16_t entry;
+				uint32_t addval;
+			}               addfix;
+		}                   r32_target;
+		uint16_t         r32_srccount;
+		uint16_t         r32_chain;
+	}           fmt;
+} os2_flat_reloc_item;
+
+#define NOV_OFFSET_CODE_RELOC   0x40000000
+#define NOV_TARGET_CODE_RELOC   0x80000000
+
+/* PE fixup table structure */
+typedef uint16_t     pe_reloc_item;
+typedef struct
+{
+	pe_reloc_item       loc;
+	pe_reloc_item       low_off;        // low 16 bits of target offset
+} high_pe_reloc_item;
+
+#define PEUP 12
+
+typedef struct
+{
+	uint32_t virt_addr;
+	uint32_t value;
+	uint16_t type;
+	uint16_t pad;
+} old_pe_reloc_item;
+
+#define OLD_PEUP 0
+
+/* PE fixup types (stashed in 4 high bits of a pe_fixup_entry) */
+#define PE_FIX_ABS      (0x0<<PEUP)     /* absolute, skipped */
+#define PE_FIX_HIGH     (0x1<<PEUP)     /* add high 16 of delta */
+#define PE_FIX_LOW      (0x2<<PEUP)     /* add low 16 of delta */
+#define PE_FIX_HIGHLOW  (0x3<<PEUP)     /* add all 32 bits of delta */
+#define PE_FIX_HIGHADJ  (0x4<<PEUP)     /* see the doc */
+#define PE_FIX_MIPSJMP  (0x5<<PEUP)     /* see the doc */
+#define PE_FIX_DIR64    (0xA<<PEUP)     /* jwlink, 64-bit */
+
+/* PE fixup types (stashed in 4 high bits of a pe_fixup_entry) */
+#define OLD_PE_FIX_ABS          (0x0<<OLD_PEUP) /* absolute, skipped */
+#define OLD_PE_FIX_HIGH         (0x1<<OLD_PEUP) /* add high 16 of delta */
+#define OLD_PE_FIX_LOW          (0x2<<OLD_PEUP) /* add low 16 of delta */
+#define OLD_PE_FIX_HIGHLOW      (0x3<<OLD_PEUP) /* add all 32 bits of delta */
+#define OLD_PE_FIX_HIGHADJ      (0x4<<OLD_PEUP) /* see the doc */
+#define OLD_PE_FIX_MIPSJMP      (0x5<<OLD_PEUP) /* see the doc */
+
+typedef struct
+{
+	uint32_t reloc_offset;
+	uint32_t info;
+	uint32_t addend;
+} elf32_reloc_item;
+
+typedef struct
+{
+	unsigned long long reloc_offset;
+	unsigned long long info;
+	long long addend;
+} elf64_reloc_item;
+
+typedef union
+{
+	os2_reloc_item      os2;
+	dos_reloc_item      dos;
+	nov_reloc_item      novell;
+	qnx_reloc_item      qnx;
+	qnx_linear_item     qnxl;
+	rex_reloc_item      rex;
+	pms_reloc_item      pms;
+	os2_flat_reloc_item os2f;
+	pe_reloc_item       pe;
+	old_pe_reloc_item   oldpe;
+	high_pe_reloc_item  hpe;
+	elf32_reloc_item    elf32;
+	elf64_reloc_item    elf64;
+} reloc_item;
+
+typedef struct base_reloc
+{
+	unsigned            rel_size;       /* actual size of reloc item */
+	unsigned            fix_size;       /* size of field being fixed up */
+	offset              fix_off;        /* start addr of field being fixed */
+	unsigned            isfloat : 1;
+	unsigned            isqnxlinear : 1;
+	reloc_item          item;
+} base_reloc;
+
+#define OSF_RLIDX_MASK          0x3FF
+#define OSF_RLIDX_LOW(val)      (val & OSF_RLIDX_MASK)
+#define OSF_RLIDX_HIGH(val)     ((val & (~OSF_RLIDX_MASK)) >> 10)
+#define OSF_RLIDX_MAX           0x400
+
+#define OSF_PAGE_SHIFT 12
+#define OSF_PAGE_SIZE   (1 << OSF_PAGE_SHIFT)
+#define OSF_PAGE_MASK   (OSF_PAGE_SIZE-1)
+#define OSF_FIXUP_TO_ALIAS  0x10
+#define OSF_SOURCE_MASK     0x0f
+#define OSF_TARGET_MASK     0x03
+#define OSF_ADDITIVE        0x04
+#define OSF_ADDITIVE32      0x20
+#define OSF_OBJMOD_16BITS   0x40
+#define OSF_TARGOFF_32BITS  0x10
+#define OSF_IMPORD_8BITS    0x80
+#define OSF_32BIT_SELF_REL  8
+#define OSF_PAGE_COUNT( size )  (((size)+OSF_PAGE_MASK)>>OSF_PAGE_SHIFT)
+
+typedef struct reloc_info RELOC_INFO;
+
+#pragma pack()
+
+
+

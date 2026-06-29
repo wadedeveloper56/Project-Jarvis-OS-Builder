@@ -27,7 +27,7 @@ struct ring
     }
 
 #define RingIterBegSafe( h, i ) \
-    if( i = h ) { \
+    if( i = (RING*)h ) { \
         RING* _T = i; \
         RING* _N = _T->next; \
         do { \
@@ -96,4 +96,42 @@ void RINGNAME(Free) (shared_ptr<MemorySubsystem> memorySubsystem,void* hdr)
         if (elt == NULL) break;
         memorySubsystem->FreeMemory(elt);
     }
+}
+
+void RINGNAME(Walk) (void* hdr,void (*rtn)(void* curr))               
+{
+#if 0
+    RING* rhdr;                    
+    RING* relement;                
+    RING* nelement;                 
+
+    if (hdr != NULL)
+    {
+        rhdr = hdr;
+        nelement = rhdr->next;
+        do
+        {
+            relement = nelement;
+            nelement = nelement->next;
+            (*rtn)(relement) );
+        } while (relement != rhdr);
+    }
+#else
+    RING* relement;                
+    RingIterBegSafe(hdr, relement) {
+        (*rtn)(relement);
+    } RingIterEndSafe(relement)
+#endif
+}
+
+void* RINGNAME(Last) (               
+    void* hdr)                    
+{
+    return hdr;
+}
+
+void* RINGNAME(First) (              
+    void* hdr)                    
+{
+    return ((RING*)hdr)->next;
 }

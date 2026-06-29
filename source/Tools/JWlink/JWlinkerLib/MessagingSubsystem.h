@@ -21,5 +21,6 @@ public:
 	~MessagingSubsystem();
 	int Msg_Get(int resourceid, char* buffer);
 	void reset();
+	void Locator(char* filename, char* mem, unsigned rec);
 };
 

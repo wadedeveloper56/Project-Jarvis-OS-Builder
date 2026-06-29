@@ -11,6 +11,7 @@
 
 // add headers that you want to pre-compile here
 #include "framework.h"
+#include <windows.h>
 #include <stdint.h>
 #include <fstream>
 #include <iostream>
@@ -29,7 +30,31 @@
 #include <set>
 #include <unordered_map>
 #include <stack>
-#include <sstream>
+#include <sstream>.
+
+#ifndef PATH_MAX
+#define PATH_MAX MAX_PATH
+#endif
+
+#define DO_OR_EQUAL(t,a,b,c) a = (t)((a)|(c));
+#define DO_AND_EQUAL(t,a,b,c) a = (t)((a)&(c));
+
+#if defined( __UNIX__ )
+#define PATH_SEP '/'
+#define IS_PATH_SEP( a ) ((a)=='/')
+#define CASE_PATH_SEP case'/'
+#define PATH_LIST_SEP ':'
+#define CASE_SENSITIVE
+# ifndef __WATCOMC__
+#define memicmp strncasecmp
+# endif
+#else
+#define PATH_SEP '\\'
+#define IS_PATH_SEP( a ) ((a)=='\\' || (a)=='/' || (a)==':')
+#define CASE_PATH_SEP   case '\\': case '/': case ':'
+#define PATH_LIST_SEP ';'
+//    #define CASE_SENSITIVE
+#endif
 
 #pragma warning(disable:4267)
 #pragma warning(disable:4244)

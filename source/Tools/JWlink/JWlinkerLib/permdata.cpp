@@ -1,4 +1,5 @@
 #include "pch.h"
+#include "permdata.h"
 #include "MemorySubsystem.h"
 #include "Structs.h"
 #include "carve.h"

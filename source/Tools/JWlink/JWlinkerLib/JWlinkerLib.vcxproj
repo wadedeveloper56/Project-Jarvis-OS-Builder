@@ -209,9 +209,11 @@
     <ClInclude Include="MessagingSubsystem.h" />
     <ClInclude Include="ntio.h" />
     <ClInclude Include="obj2supp.h" />
+    <ClInclude Include="objcache.h" />
     <ClInclude Include="ObjectNode.h" />
     <ClInclude Include="objfree.h" />
     <ClInclude Include="objio.h" />
+    <ClInclude Include="objnode.h" />
     <ClInclude Include="objomf.h" />
     <ClInclude Include="objpass1.h" />
     <ClInclude Include="objstrip.h" />
@@ -242,6 +244,7 @@
     <ClCompile Include="cmdline.cpp" />
     <ClCompile Include="cmdutils.cpp" />
     <ClCompile Include="dbgall.cpp" />
+    <ClCompile Include="dbginfo.cpp" />
     <ClCompile Include="debug.cpp" />
     <ClCompile Include="distrib.cpp" />
     <ClCompile Include="FileSubsystem.cpp" />
@@ -259,9 +262,11 @@
     <ClCompile Include="MessagingSubsystem.cpp" />
     <ClCompile Include="ntio.cpp" />
     <ClCompile Include="obj2supp.cpp" />
+    <ClCompile Include="objcache.cpp" />
     <ClCompile Include="ObjectNode.cpp" />
     <ClCompile Include="objfree.cpp" />
     <ClCompile Include="objio.cpp" />
+    <ClCompile Include="objnode.cpp" />
     <ClCompile Include="objomf.cpp" />
     <ClCompile Include="objpass1.cpp" />
     <ClCompile Include="objstrip.cpp" />

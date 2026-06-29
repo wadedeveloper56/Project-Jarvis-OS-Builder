@@ -37,3 +37,29 @@ pHTable CreateHTable(int size, pHashFunc hashFunc, pHashElemCmp compareFunc, sha
 
 	return table;
 }
+
+void ZapHTable(pHTable table) 
+{
+	int i;
+	pHTElem* tblPtr;
+	pHTElem tblElem, temp;
+
+	if (table == NULL)
+	{
+		return;
+	}
+
+	tblPtr = table->tbl;
+
+	for (i = 0; i < table->size; i++)
+	{
+		for (tblElem = tblPtr[i]; tblElem != NULL; tblElem = temp)
+		{
+			table->memorySubsystem->FreeMemory(tblElem->userData);
+			temp = tblElem->next;
+			table->memorySubsystem->FreeMemory(tblElem);
+		}
+	}
+	table->memorySubsystem->FreeMemory(table->tbl);
+	table->memorySubsystem->FreeMemory(table);
+}

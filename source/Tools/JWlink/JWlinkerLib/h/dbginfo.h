@@ -1,33 +1,8 @@
-/****************************************************************************
-*
-*                            Open Watcom Project
-*
-*    Portions Copyright (c) 1983-2002 Sybase, Inc. All Rights Reserved.
-*
-*  ========================================================================
-*
-*    This file contains Original Code and/or Modifications of Original
-*    Code as defined in and that are subject to the Sybase Open Watcom
-*    Public License version 1.0 (the 'License'). You may not use this file
-*    except in compliance with the License. BY USING THIS FILE YOU AGREE TO
-*    ALL TERMS AND CONDITIONS OF THE LICENSE. A copy of the License is
-*    provided with the Original Code and Modifications, and is also
-*    available at www.sybase.com/developer/opensource.
-*
-*    The Original Code and all software distributed under the License are
-*    distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
-*    EXPRESS OR IMPLIED, AND SYBASE AND ALL CONTRIBUTORS HEREBY DISCLAIM
-*    ALL SUCH WARRANTIES, INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF
-*    MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR
-*    NON-INFRINGEMENT. Please see the License for the specific language
-*    governing rights and limitations under the License.
-*
-*  ========================================================================
-*
-* Description:  Watcom style debugging information internal structures
-*
-****************************************************************************/
+#include <memory>
+#include "MemorySubsystem.h"
+#include "Structs.h"
 
+using namespace std;
 
 #define DBG_SIGNATURE   0x8386
 #define FOX1_SIGNATURE  0x8300
@@ -37,18 +12,18 @@
 #pragma pack(1)
 
 typedef struct sectheader {
-    unsigned_32         mod_offset;
-    unsigned_32         gbl_offset;
-    unsigned_32         addr_offset;
-    unsigned_32         section_size;
-    unsigned_16         section_id;
+    uint32_t         mod_offset;
+    uint32_t         gbl_offset;
+    uint32_t         addr_offset;
+    uint32_t         section_size;
+    uint16_t         section_id;
 } sectheader;
 
 typedef struct {
     virt_mem        init;
     virt_mem        curr;
-    unsigned_32     size;
-    unsigned_32     start;
+    uint32_t     size;
+    uint32_t     start;
 } dbi_section;
 
 
@@ -63,28 +38,28 @@ typedef struct debug_info {
     dbi_section     global;
     dbi_section     addr;
     virt_mem        dump_addr;
-    signed_16       modnum;
+    int16_t       modnum;
     class_entry     *LocalClass;
     class_entry     *TypeClass;
 } debug_info;
 
 
 typedef struct dbgheader {
-    unsigned_16         signature;
-    unsigned_8          exe_major_ver;
-    unsigned_8          exe_minor_ver;
-    unsigned_8          obj_major_ver;
-    unsigned_8          obj_minor_ver;
-    unsigned_16         lang_size;
-    unsigned_16         seg_size;
-    unsigned_32         debug_size;
+    uint16_t         signature;
+    uint8_t          exe_major_ver;
+    uint8_t          exe_minor_ver;
+    uint8_t          obj_major_ver;
+    uint8_t          obj_minor_ver;
+    uint16_t         lang_size;
+    uint16_t         seg_size;
+    uint32_t         debug_size;
 } dbgheader;
 
 typedef struct gblinfo {
-    unsigned_32         off;
-    unsigned_16         seg;
-    unsigned_16         mod_idx;
-    unsigned_8          flags;
+    uint32_t         off;
+    uint16_t         seg;
+    uint16_t         mod_idx;
+    uint8_t          flags;
     char                name[ 1 ];
 } gblinfo;
 
@@ -93,12 +68,12 @@ typedef struct gblinfo {
 #define DBG_GBL_CODE    0x4
 
 typedef struct demand_info {
-    unsigned_32         off;
-    unsigned_16         len;
+    uint32_t         off;
+    uint16_t         len;
 } demand_info;
 
 typedef struct modinfo {
-    unsigned_16         language;
+    uint16_t         language;
     demand_info         locals;
     demand_info         types;
     demand_info         lines;
@@ -106,24 +81,26 @@ typedef struct modinfo {
 } modinfo;
 
 typedef struct lineseg {
-    unsigned_32 segment;
-    unsigned_16 num;
+    uint32_t segment;
+    uint16_t num;
 } lineseg;
 
 typedef struct segheader {
-    unsigned_32         off;
-    unsigned_16         seg;
-    unsigned_16         num;
+    uint32_t         off;
+    uint16_t         seg;
+    uint16_t         num;
 } segheader;
 
 typedef struct addrinfo {
-    unsigned_32         size;
-    unsigned_16         mod_idx;
+    uint32_t         size;
+    uint16_t         mod_idx;
 } addrinfo;
 
 typedef struct dbinode {
     struct dbinode      *next;
-    unsigned_16         segidx;
+    uint16_t         segidx;
 } dbinode;
 
 #pragma pack()
+
+void ODBISectCleanup(shared_ptr<MemorySubsystem> memorySubsystem, section* sect);
