@@ -30,7 +30,7 @@ bool CacheOpen(shared_ptr<MemorySubsystem> memorySubsystem, file_list* list)
         file->len = QFileSize(file->handle);
         if (file->len == 0)
         {
-            DEBUG((DBG_OLD, "CacheOpen: bad object error"));
+            DEBUG((DBG_OLD, "CacheOpen: bad object error\n"));
             //LnkMsg(ERR + MSG_BAD_OBJECT, "s", file->name);
             DO_OR_EQUAL(infile_flags, file->flags, |=, INSTAT_IOERR)//; file->flags |= INSTAT_IOERR;
             return(false);

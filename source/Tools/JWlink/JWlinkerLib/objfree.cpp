@@ -141,17 +141,17 @@ void FreeSections(shared_ptr<MemorySubsystem> memorySubsystem, section* sec)
 void CleanLinkStruct(shared_ptr<MemorySubsystem> memorySubsystem, shared_ptr<SpillFile> spillFile)
 {
     if (Root == NULL) return;      
-    DEBUG((DBG_OLD, "CleanLinkStruct() enter"));
+    DEBUG((DBG_OLD, "CleanLinkStruct() enter\n"));
     BurnLibs(memorySubsystem);
-    DEBUG((DBG_OLD, "CleanLinkStruct(): calling 1. FreeFiles()"));
+    DEBUG((DBG_OLD, "CleanLinkStruct(): calling 1. FreeFiles()\n"));
     FreeFiles(memorySubsystem, ObjLibFiles);
-    DEBUG((DBG_OLD, "CleanLinkStruct(): calling 2. FreeFiles()"));
+    DEBUG((DBG_OLD, "CleanLinkStruct(): calling 2. FreeFiles()\n"));
     FreeFiles(memorySubsystem, Root->files);
     ObjLibFiles = NULL;
     Root->files = NULL;
     if (!(LinkFlags & INC_LINK_FLAG))
     {
-        DEBUG((DBG_OLD, "CleanLinkStruct(): calling FreeMods()"));
+        DEBUG((DBG_OLD, "CleanLinkStruct(): calling FreeMods()\n"));
         FreeMods(LibModules);
     }
     if (SymFileName != NULL)
@@ -168,12 +168,12 @@ void CleanLinkStruct(shared_ptr<MemorySubsystem> memorySubsystem, shared_ptr<Spi
     {
         memorySubsystem->FreeMemory(FmtData.resource);
     }
-    DEBUG((DBG_OLD, "CleanLinkStruct(): calling FreeRelocInfo()"));
+    DEBUG((DBG_OLD, "CleanLinkStruct(): calling FreeRelocInfo()\n"));
     FreeRelocInfo(memorySubsystem, spillFile);
-    DEBUG((DBG_OLD, "CleanLinkStruct(): calling FreeGroups()"));
+    DEBUG((DBG_OLD, "CleanLinkStruct(): calling FreeGroups()\n"));
     FreeGroups(Groups);
     FreeGroups(AbsGroups);
-    DEBUG((DBG_OLD, "CleanLinkStruct(): calling FreeSections()"));
+    DEBUG((DBG_OLD, "CleanLinkStruct(): calling FreeSections()\n"));
     Groups = NULL;
     AbsGroups = NULL;
     FreeSections(memorySubsystem, Root);

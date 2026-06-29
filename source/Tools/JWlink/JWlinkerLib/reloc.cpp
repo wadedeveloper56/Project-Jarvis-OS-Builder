@@ -353,7 +353,7 @@ uint32_t DumpMaxRelocList(shared_ptr<SpillFile> spillFile, reloc_info** head, ui
 
 	total = 0;
 	list = *head;
-	DEBUG((DBG_OLD, "DumpMaxRelocList() enter"));
+	DEBUG((DBG_OLD, "DumpMaxRelocList() enter\n"));
 	for (;; )
 	{
 		if (list == NULL)
@@ -373,7 +373,7 @@ uint32_t DumpMaxRelocList(shared_ptr<SpillFile> spillFile, reloc_info** head, ui
 				WriteLoad(list->loc.addr, size);
 			}
 		}
-		DEBUG((DBG_OLD, "DumpMaxRelocList(): addr=%h size=%h", list->loc.addr, size));
+		DEBUG((DBG_OLD, "DumpMaxRelocList(): addr=%h size=%h\n", list->loc.addr, size));
 		list = list->next;
 		total += size;
 	}
