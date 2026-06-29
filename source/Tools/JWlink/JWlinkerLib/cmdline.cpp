@@ -31,13 +31,13 @@ struct select_format PossibleFmt[] =
 {
     (exe_format)MK_DOS,         "LIBDOS",       NULL,           NULL,
 #ifdef _DOS16M
-    MK_DOS16M,      "LIBDOS16M",    SetD16MFmt,     FreeD16MFmt,
+                MK_DOS16M,      "LIBDOS16M",    SetD16MFmt,     FreeD16MFmt,
 #endif
 #ifdef _QNXLOAD
     (exe_format)MK_QNX,         "LIBQNX",       SetQNXFmt,      FreeQNXFmt,
 #endif
 #ifdef _ELF
-    MK_ELF,         "LIBELF",       SetELFFmt,      FreeELFFmt,
+                MK_ELF,         "LIBELF",       SetELFFmt,      FreeELFFmt,
 #endif
 #ifdef _OS2
     MK_WIN_NE,      "LIBWIN",       SetOS2Fmt,      FreeOS2Fmt,
