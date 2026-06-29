@@ -15,8 +15,8 @@ void* PERelocInit(shared_ptr<MemorySubsystem> memorySubsystem, offset size);
 void DoWriteReloc(shared_ptr<MemorySubsystem> memorySubsystem, shared_ptr<SpillFile> spillFile, void* lst, void* reloc, unsigned size);
 void WriteReloc(shared_ptr<MemorySubsystem> memorySubsystem, shared_ptr<SpillFile> spillFile, group_entry* group, offset off, void* reloc, unsigned size);
 #ifdef _QNXLOAD
-void FloatReloc(reloc_item* item);
-void QNXLinearReloc(group_entry* group, reloc_item* item);
+void FloatReloc(shared_ptr<MemorySubsystem> memorySubsystem, shared_ptr<SpillFile> spillFile, reloc_item* item);
+void QNXLinearReloc(shared_ptr<MemorySubsystem> memorySubsystem, shared_ptr<SpillFile> spillFile, group_entry* group, reloc_item* item);
 #endif
 bool FreeRelocList(shared_ptr<MemorySubsystem> memorySubsystem, shared_ptr<SpillFile> spillFile, reloc_info* list);
 void FreeRelocSect(shared_ptr<MemorySubsystem> memorySubsystem, shared_ptr<SpillFile> spillFile, section* sect);

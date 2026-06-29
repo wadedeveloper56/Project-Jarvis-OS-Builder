@@ -190,14 +190,14 @@ void WriteReloc(shared_ptr<MemorySubsystem> memorySubsystem, shared_ptr<SpillFil
 }
 
 #ifdef _QNXLOAD
-void FloatReloc(reloc_item* item)
+void FloatReloc(shared_ptr<MemorySubsystem> memorySubsystem, shared_ptr<SpillFile> spillFile, reloc_item* item)
 {
-	DoWriteReloc(&FloatFixups, item, sizeof(qnx_reloc_item));
+	DoWriteReloc(memorySubsystem,spillFile,&FloatFixups, item, sizeof(qnx_reloc_item));
 }
 
-void QNXLinearReloc(group_entry* group, reloc_item* item)
+void QNXLinearReloc(shared_ptr<MemorySubsystem> memorySubsystem, shared_ptr<SpillFile> spillFile, group_entry* group, reloc_item* item)
 {
-	DoWriteReloc(&group->g.grp_relocs, item, sizeof(qnx_linear_item));
+	DoWriteReloc(memorySubsystem,spillFile,&group->g.grp_relocs, item, sizeof(qnx_linear_item));
 }
 #endif
 

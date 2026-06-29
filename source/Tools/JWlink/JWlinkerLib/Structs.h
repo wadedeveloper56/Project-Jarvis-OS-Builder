@@ -599,7 +599,7 @@ struct fmt_elf_data
 	unsigned            elf64 : 1;               /* JWlink */
 };
 
-#define NO_BASE_SPEC    ((offset)-1UL)
+#define NO_BASE_SPEC    ((offset)-1L)
 
 struct fmt_data
 {
@@ -1653,4 +1653,20 @@ typedef struct reloc_info RELOC_INFO;
 #pragma pack()
 
 
+typedef enum
+{
+	SEGFLAG_SEGMENT,
+	SEGFLAG_CLASS,
+	SEGFLAG_CODE,
+	SEGFLAG_DATA
+} segflag_type;
+
+// this structure used for processing segment flags for various executable types
+typedef struct seg_flags
+{
+	struct seg_flags* next;
+	uint16_t         flags;  // as above.
+	char* name;
+	segflag_type        type;
+} seg_flags;
 

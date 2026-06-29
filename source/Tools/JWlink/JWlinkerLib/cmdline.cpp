@@ -6,6 +6,7 @@
 #include "globals.h"
 #include "Linkutil.h"
 #include "cmd16m.h"
+#include "cmdqnx.h"
 
 using namespace std;
 
@@ -33,7 +34,7 @@ struct select_format PossibleFmt[] =
     MK_DOS16M,      "LIBDOS16M",    SetD16MFmt,     FreeD16MFmt,
 #endif
 #ifdef _QNXLOAD
-    MK_QNX,         "LIBQNX",       SetQNXFmt,      FreeQNXFmt,
+    (exe_format)MK_QNX,         "LIBQNX",       SetQNXFmt,      FreeQNXFmt,
 #endif
 #ifdef _ELF
     MK_ELF,         "LIBELF",       SetELFFmt,      FreeELFFmt,

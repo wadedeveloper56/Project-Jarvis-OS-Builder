@@ -201,3 +201,18 @@ void FreeFiles(shared_ptr<MemorySubsystem> memorySubsystem, file_list* list)
         list = (file_list*)temp;
     }
 }
+
+#if defined(_OS2) || defined( _QNXLOAD )
+void FreeSegFlags(shared_ptr<MemorySubsystem> memorySubsystem, seg_flags* curr)
+{
+    seg_flags* next;
+
+    while (curr != NULL)
+    {
+        next = curr->next;
+        memorySubsystem->FreeMemory(curr->name);
+        memorySubsystem->FreeMemory(curr);
+        curr = next;
+    }
+}
+#endif

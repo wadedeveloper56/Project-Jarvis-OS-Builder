@@ -168,6 +168,9 @@
     <ClInclude Include="cmd16m.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="cmdqnx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="JWlinkerLib.cpp">
@@ -318,6 +321,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="cmd16m.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cmdqnx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
