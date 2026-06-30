@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "MessagingSubsystem.h"
+#include "debug.h"
 
 const char* const msgtexts[] = {
 	"",
@@ -55,8 +56,9 @@ MessagingSubsystem::MessagingSubsystem()
 {}
 
 MessagingSubsystem::~MessagingSubsystem()
-{}
-
+{
+	DEBUG((DBG_OLD, "MessagingSubsystem destructor\n"));
+}
 
 int MessagingSubsystem::Msg_Get(int resourceid, char* buffer)
 {
