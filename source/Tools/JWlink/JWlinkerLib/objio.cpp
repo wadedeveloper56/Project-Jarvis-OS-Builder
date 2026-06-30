@@ -114,7 +114,7 @@ bool DoObjOpen(infilelist* list)
 {
     char* name;
     f_handle    fp;
-    unsigned    err;
+    //unsigned    err;
     char* path_ptr;
     char        new_name[PATH_MAX];
     path_entry* searchpath;

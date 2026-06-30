@@ -3,6 +3,8 @@
 #include "Structs.h"
 #include "MemorySubsystem.h"
 
+using namespace std;
+
 void FreeList(shared_ptr<MemorySubsystem> memorySubsystem, void* _curr)
 {
     node* curr = (node*)_curr;
@@ -29,3 +31,23 @@ void LinkList(void* in_head, void* newnode)
     *owner = (node*)newnode;
 }
 
+char* ChkStrDup(shared_ptr<MemorySubsystem> memorySubsystem,char* str)
+{
+    size_t      len;
+    char* copy;
+
+    len = strlen(str) + 1;
+    _LnkAlloc(char *,copy, len);
+    memcpy(copy, str, len);
+    return(copy);
+}
+
+char* ChkToString(shared_ptr<MemorySubsystem> memorySubsystem, void* mem, unsigned len)
+{
+    char* str;
+
+    _LnkAlloc(char *,str, len + 1);
+    memcpy(str, mem, len);
+    str[len] = '\0';
+    return(str);
+}

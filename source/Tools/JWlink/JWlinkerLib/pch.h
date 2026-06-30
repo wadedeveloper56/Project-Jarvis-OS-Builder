@@ -30,7 +30,7 @@
 #include <set>
 #include <unordered_map>
 #include <stack>
-#include <sstream>.
+#include <sstream>
 
 #ifndef PATH_MAX
 #define PATH_MAX MAX_PATH
@@ -38,6 +38,8 @@
 
 #define DO_OR_EQUAL(t,a,b,c) a = (t)((a)|(c));
 #define DO_AND_EQUAL(t,a,b,c) a = (t)((a)&(c));
+#define _LnkAlloc(type,dest,size) dest = (type)memorySubsystem->AllocateMemory( size )
+#define _LnkFree(ptr)                          memorySubsystem->FreeMemory( ptr )
 
 #if defined( __UNIX__ )
 #define PATH_SEP '/'

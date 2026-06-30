@@ -10,6 +10,7 @@
 #include "cmdelf.h"
 #include "cmdos2.h"
 #include "cmdphar.h"
+#include "cmdnov.h"
 
 using namespace std;
 
@@ -54,7 +55,7 @@ struct select_format PossibleFmt[] =
     (exe_format)MK_PHAR_LAP,    "LIBPHAR",      SetPharFmt,     FreePharFmt,
 #endif
 #ifdef _NOVELL
-    MK_NOVELL,      "LIBNOV",       SetNovFmt,      FreeNovFmt,
+                MK_NOVELL,      "LIBNOV",       SetNovFmt,      FreeNovFmt,
 #endif
 };
 
