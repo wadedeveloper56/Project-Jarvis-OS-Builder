@@ -7,6 +7,7 @@
 #include "Linkutil.h"
 #include "cmd16m.h"
 #include "cmdqnx.h"
+#include "cmdelf.h"
 
 using namespace std;
 

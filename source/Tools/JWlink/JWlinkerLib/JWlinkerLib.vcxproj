@@ -190,6 +190,7 @@
     <ClInclude Include="carve.h" />
     <ClInclude Include="cmd16m.h" />
     <ClInclude Include="cmdall.h" />
+    <ClInclude Include="cmdelf.h" />
     <ClInclude Include="cmdline.h" />
     <ClInclude Include="cmdqnx.h" />
     <ClInclude Include="cmdutils.h" />
@@ -244,6 +245,7 @@
     <ClCompile Include="carve.cpp" />
     <ClCompile Include="cmd16m.cpp" />
     <ClCompile Include="cmdall.cpp" />
+    <ClCompile Include="cmdelf.cpp" />
     <ClCompile Include="cmdline.cpp" />
     <ClCompile Include="cmdqnx.cpp" />
     <ClCompile Include="cmdutils.cpp" />
