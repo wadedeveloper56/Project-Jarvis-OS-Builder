@@ -5,7 +5,7 @@
 
 using namespace std;
 
-void FreeList(shared_ptr<MemorySubsystem> memorySubsystem, void* _curr)
+void FreeList(MemorySubsystem *memorySubsystem, void* _curr)
 {
     node* curr = (node*)_curr;
     node* next_node;
@@ -31,7 +31,7 @@ void LinkList(void* in_head, void* newnode)
     *owner = (node*)newnode;
 }
 
-char* ChkStrDup(shared_ptr<MemorySubsystem> memorySubsystem,char* str)
+char* ChkStrDup(MemorySubsystem *memorySubsystem,char* str)
 {
     size_t      len;
     char* copy;
@@ -42,7 +42,7 @@ char* ChkStrDup(shared_ptr<MemorySubsystem> memorySubsystem,char* str)
     return(copy);
 }
 
-char* ChkToString(shared_ptr<MemorySubsystem> memorySubsystem, void* mem, unsigned len)
+char* ChkToString(MemorySubsystem *memorySubsystem, void* mem, unsigned len)
 {
     char* str;
 

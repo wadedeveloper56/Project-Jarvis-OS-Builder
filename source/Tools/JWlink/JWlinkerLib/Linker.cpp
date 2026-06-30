@@ -33,26 +33,37 @@
 #include "ntio.h"
 #include "linkutil.h"
 #include "procfile.h"
+#include "VirtualMemory.h"
 
 Linker::Linker(int argc, char** argv)
 {
 	this->argc = argc;
 	this->argv = argv;
-	memorySubsystem = make_shared<MemorySubsystem>();
-	fileSubsystem = make_shared<FileSubsystem>();
-	messagingSubsystem = make_shared<MessagingSubsystem>();
+	memorySubsystem = new MemorySubsystem();
+	fileSubsystem = new FileSubsystem();
+	messagingSubsystem = new MessagingSubsystem();
 	InitNodes(memorySubsystem);
-	tokenBuffer = make_shared<TokenBuffer>(memorySubsystem);
-	spillFile = make_shared<SpillFile>(memorySubsystem);
-	symbolTable = make_shared<SymbolTable>(memorySubsystem);
-	orl = make_shared<Orl>();
+	tokenBuffer = new TokenBuffer(memorySubsystem);
+	spillFile = new SpillFile(memorySubsystem);
+	symbolTable = new SymbolTable(memorySubsystem);
+	orl = new Orl();
 	InitCmdFile();
-	virtualMemory = make_shared<VirtualMemory>();
+	virtualMemory = new VirtualMemory(memorySubsystem);
 }
 
 Linker::~Linker()
 {
+	DEBUG((DBG_OLD, "Linker destructor enter\n"));
 	FiniLinkStruct(memorySubsystem);
+	delete virtualMemory;
+	delete orl;
+	delete symbolTable;
+	delete spillFile;
+	delete tokenBuffer;
+	delete messagingSubsystem;
+	delete fileSubsystem;
+	delete memorySubsystem;
+	DEBUG((DBG_OLD, "Linker destructor exit\n"));
 }
 
 void Linker::CleanSubSystems()
@@ -77,9 +88,9 @@ void Linker::CleanSubSystems()
 	CleanLoadFile();
 	CleanLinkStruct(memorySubsystem, spillFile);
 	FreeFormatStuff(memorySubsystem);
-	//FreeObjInfo();
+	FreeObjInfo();
 	DEBUG((DBG_OLD, "CleanSubSystems: calling FreeVirtMem()\n"));
-	//FreeVirtMem();
+	//FreeVirtMem(); not needed
 	//CleanToc();
 	//CleanSym();
 	//CleanPermData();
@@ -121,8 +132,8 @@ void Linker::ResetSubSystems(void)
 	DEBUG((DBG_OLD, "ResetSubSystems enter\n"));
 	ResetPermData(memorySubsystem);
 	messagingSubsystem->reset();
-	virtualMemory.reset();
-	virtualMemory = make_shared<VirtualMemory>();
+	virtualMemory;
+	virtualMemory = new VirtualMemory();
 	ResetMisc();
 	Root = NewSection(memorySubsystem);
 	ResetDBI();

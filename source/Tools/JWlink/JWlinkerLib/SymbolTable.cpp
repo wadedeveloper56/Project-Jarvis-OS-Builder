@@ -5,7 +5,7 @@
 #include "globals.h"
 #include "symmem.h"
 
-SymbolTable::SymbolTable(shared_ptr<MemorySubsystem> memorySubsystem) : memorySubsystem(memorySubsystem)
+SymbolTable::SymbolTable(MemorySubsystem *memorySubsystem) : memorySubsystem(memorySubsystem)
 {
 	this->memorySubsystem = memorySubsystem;
 	GlobalSymPtrs = (symbol**)memorySubsystem->AllocateMemory(GLOBAL_TABALLOC);

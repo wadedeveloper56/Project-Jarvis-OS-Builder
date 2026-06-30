@@ -86,7 +86,7 @@ void* RINGNAME(Pop) (void* hdr)
     return(first);
 }
 
-void RINGNAME(Free) (shared_ptr<MemorySubsystem> memorySubsystem,void* hdr)
+void RINGNAME(Free) (MemorySubsystem *memorySubsystem,void* hdr)
 {
     void* elt;
 

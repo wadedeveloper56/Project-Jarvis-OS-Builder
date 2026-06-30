@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "FileSubsystem.h"
+#include "debug.h"
 
 FileSubsystem::FileSubsystem()
 {
@@ -7,6 +8,7 @@ FileSubsystem::FileSubsystem()
 
 FileSubsystem::~FileSubsystem()
 {
+	DEBUG((DBG_OLD, "FileSubsystem destructor\n"));
 }
 
 errno_t FileSubsystem::OpenFile(f_handle* pfh, const char* filename, int oflag, int shflag, int pmode)

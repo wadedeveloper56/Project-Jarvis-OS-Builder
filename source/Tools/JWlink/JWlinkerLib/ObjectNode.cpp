@@ -12,7 +12,7 @@ nodearray* SegNodes;           // ptr to obj file segment list
 nodearray* GrpNodes;           // ptr to obj file group list
 nodearray* NameNodes;          // ptr to obj file lname list
 
-void* MakeArray(shared_ptr<MemorySubsystem> memorySubsystem, unsigned size)
+void* MakeArray(MemorySubsystem *memorySubsystem, unsigned size)
 {
 	nodearray* nodes = (nodearray*)memorySubsystem->AllocateMemory(sizeof(nodearray));
 	nodes->num = 0;
@@ -24,7 +24,7 @@ void* MakeArray(shared_ptr<MemorySubsystem> memorySubsystem, unsigned size)
 	return(nodes);
 }
 
-void InitNodes(shared_ptr<MemorySubsystem> memorySubsystem)
+void InitNodes(MemorySubsystem *memorySubsystem)
 {
 	GrpNodes = (nodearray*)MakeArray(memorySubsystem, sizeof(grpnode));
 	SegNodes = (nodearray*)MakeArray(memorySubsystem, sizeof(segnode));
@@ -32,7 +32,7 @@ void InitNodes(shared_ptr<MemorySubsystem> memorySubsystem)
 	NameNodes = (nodearray*)MakeArray(memorySubsystem, sizeof(list_of_names*));
 }
 
-void BurnNodeArray(shared_ptr<MemorySubsystem> memorySubsystem, nodearray* list)
+void BurnNodeArray(MemorySubsystem *memorySubsystem, nodearray* list)
 {
 	for (int index = 0; index <= list->arraymax; index++)
 	{
@@ -41,7 +41,7 @@ void BurnNodeArray(shared_ptr<MemorySubsystem> memorySubsystem, nodearray* list)
 	memorySubsystem->FreeMemory(list);
 }
 
-void BurnNodes(shared_ptr<MemorySubsystem> memorySubsystem)
+void BurnNodes(MemorySubsystem *memorySubsystem)
 {
 	BurnNodeArray(memorySubsystem, GrpNodes);
 	BurnNodeArray(memorySubsystem, SegNodes);

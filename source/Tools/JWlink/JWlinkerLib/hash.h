@@ -31,7 +31,7 @@ typedef struct _TAG_HTable
     pHashFunc hashFunc;
     pHashElemCmp compareFunc; // Take two elements of the table;
     // Return 0 iff elem1 == elem2
-    shared_ptr<MemorySubsystem> memorySubsystem;
+    MemorySubsystem *memorySubsystem;
 
     struct
     {
@@ -41,5 +41,5 @@ typedef struct _TAG_HTable
 } *pHTable;
 
 unsigned StringiHashFunc(void* _s, unsigned size);
-pHTable CreateHTable(int size, pHashFunc hashFunc, pHashElemCmp compareFunc, shared_ptr<MemorySubsystem> memorySubsystem);
+pHTable CreateHTable(int size, pHashFunc hashFunc, pHashElemCmp compareFunc, MemorySubsystem *memorySubsystem);
 void ZapHTable(pHTable table);

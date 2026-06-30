@@ -10,5 +10,5 @@
 using namespace std;
 
 void ChkBase(offset align);
-void SetQNXFmt(shared_ptr<MemorySubsystem> memorySubsystem);
-void FreeQNXFmt(shared_ptr<MemorySubsystem> memorySubsystem);
+void SetQNXFmt(MemorySubsystem *memorySubsystem);
+void FreeQNXFmt(MemorySubsystem *memorySubsystem);

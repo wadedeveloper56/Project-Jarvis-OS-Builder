@@ -48,7 +48,7 @@ void ResetReloc(void)
 	FloatFixups = NULL;
 }
 
-reloc_info* AllocRelocInfo(shared_ptr<MemorySubsystem> memorySubsystem, shared_ptr<SpillFile> spillFile)
+reloc_info* AllocRelocInfo(MemorySubsystem *memorySubsystem, SpillFile * spillFile)
 {
 	reloc_info* info = (reloc_info*)memorySubsystem->AllocateMemory(sizeof(reloc_info));
 	info->sizeleft = RELOC_PAGE_SIZE;
@@ -61,7 +61,7 @@ reloc_info* AllocRelocInfo(shared_ptr<MemorySubsystem> memorySubsystem, shared_p
 	return(info);
 }
 
-void* OS2PagedRelocInit(shared_ptr<MemorySubsystem> memorySubsystem, offset size, int unitsize)
+void* OS2PagedRelocInit(MemorySubsystem *memorySubsystem, offset size, int unitsize)
 {
 	void** mem;
 	void** start;
@@ -92,17 +92,17 @@ void* OS2PagedRelocInit(shared_ptr<MemorySubsystem> memorySubsystem, offset size
 	return(start);
 }
 
-void* OS2FlatRelocInit(shared_ptr<MemorySubsystem> memorySubsystem, offset size)
+void* OS2FlatRelocInit(MemorySubsystem *memorySubsystem, offset size)
 {
 	return(OS2PagedRelocInit(memorySubsystem, size, sizeof(os2_reloc_header)));
 }
 
-void* PERelocInit(shared_ptr<MemorySubsystem> memorySubsystem, offset size)
+void* PERelocInit(MemorySubsystem *memorySubsystem, offset size)
 {
 	return(OS2PagedRelocInit(memorySubsystem, size, sizeof(reloc_info*)));
 }
 
-void DoWriteReloc(shared_ptr<MemorySubsystem> memorySubsystem, shared_ptr<SpillFile> spillFile, void* lst, void* reloc, unsigned size)
+void DoWriteReloc(MemorySubsystem *memorySubsystem, SpillFile * spillFile, void* lst, void* reloc, unsigned size)
 {
 	reloc_info** list = (reloc_info**)lst;
 	reloc_info* info;
@@ -133,7 +133,7 @@ void DoWriteReloc(shared_ptr<MemorySubsystem> memorySubsystem, shared_ptr<SpillF
 	info->sizeleft -= size;
 }
 
-void WriteReloc(shared_ptr<MemorySubsystem> memorySubsystem, shared_ptr<SpillFile> spillFile, group_entry* group, offset off, void* reloc, unsigned size)
+void WriteReloc(MemorySubsystem *memorySubsystem, SpillFile * spillFile, group_entry* group, offset off, void* reloc, unsigned size)
 {
 	os2_reloc_header** pagelist;
 	reloc_info*** reloclist;
@@ -190,18 +190,18 @@ void WriteReloc(shared_ptr<MemorySubsystem> memorySubsystem, shared_ptr<SpillFil
 }
 
 #ifdef _QNXLOAD
-void FloatReloc(shared_ptr<MemorySubsystem> memorySubsystem, shared_ptr<SpillFile> spillFile, reloc_item* item)
+void FloatReloc(MemorySubsystem *memorySubsystem, SpillFile * spillFile, reloc_item* item)
 {
 	DoWriteReloc(memorySubsystem,spillFile,&FloatFixups, item, sizeof(qnx_reloc_item));
 }
 
-void QNXLinearReloc(shared_ptr<MemorySubsystem> memorySubsystem, shared_ptr<SpillFile> spillFile, group_entry* group, reloc_item* item)
+void QNXLinearReloc(MemorySubsystem *memorySubsystem, SpillFile * spillFile, group_entry* group, reloc_item* item)
 {
 	DoWriteReloc(memorySubsystem,spillFile,&group->g.grp_relocs, item, sizeof(qnx_linear_item));
 }
 #endif
 
-bool FreeRelocList(shared_ptr<MemorySubsystem> memorySubsystem, shared_ptr<SpillFile> spillFile, reloc_info* list)
+bool FreeRelocList(MemorySubsystem *memorySubsystem, SpillFile * spillFile, reloc_info* list)
 {
 	while (list != NULL)
 	{
@@ -214,12 +214,12 @@ bool FreeRelocList(shared_ptr<MemorySubsystem> memorySubsystem, shared_ptr<Spill
 	return(FALSE);
 }
 
-void FreeRelocSect(shared_ptr<MemorySubsystem> memorySubsystem, shared_ptr<SpillFile> spillFile, section* sect)
+void FreeRelocSect(MemorySubsystem *memorySubsystem, SpillFile * spillFile, section* sect)
 {
 	FreeRelocList(memorySubsystem, spillFile, (reloc_info*)sect->reloclist);
 }
 
-bool TraverseRelocBlock(shared_ptr<MemorySubsystem> memorySubsystem, shared_ptr<SpillFile> spillFile, reloc_info** reloclist, unsigned num, bool (*fn)(shared_ptr<MemorySubsystem>, shared_ptr<SpillFile>, reloc_info*))
+bool TraverseRelocBlock(MemorySubsystem *memorySubsystem, SpillFile * spillFile, reloc_info** reloclist, unsigned num, bool (*fn)(MemorySubsystem *, SpillFile *, reloc_info*))
 {
 	while (num > 0)
 	{
@@ -237,7 +237,7 @@ bool TraverseRelocBlock(shared_ptr<MemorySubsystem> memorySubsystem, shared_ptr<
 	return(FALSE);
 }
 
-bool TraverseOS2RelocList(shared_ptr<MemorySubsystem> memorySubsystem, shared_ptr<SpillFile> spillFile, group_entry* group, bool (*fn)(shared_ptr<MemorySubsystem>, shared_ptr<SpillFile>, reloc_info*))
+bool TraverseOS2RelocList(MemorySubsystem *memorySubsystem, SpillFile * spillFile, group_entry* group, bool (*fn)(MemorySubsystem *, SpillFile *, reloc_info*))
 {
 	uint32_t         index;
 	uint32_t         highidx;
@@ -265,7 +265,7 @@ bool TraverseOS2RelocList(shared_ptr<MemorySubsystem> memorySubsystem, shared_pt
 	return(FALSE);
 }
 
-void FreeGroupRelocs(shared_ptr<MemorySubsystem> memorySubsystem, shared_ptr<SpillFile> spillFile, group_entry* group)
+void FreeGroupRelocs(MemorySubsystem *memorySubsystem, SpillFile * spillFile, group_entry* group)
 {
 	uint32_t         highidx;
 	uint32_t         index;
@@ -299,7 +299,7 @@ void FreeGroupRelocs(shared_ptr<MemorySubsystem> memorySubsystem, shared_ptr<Spi
 	}
 }
 
-void WalkAllSects(shared_ptr<MemorySubsystem> memorySubsystem, shared_ptr<SpillFile> spillFile,void (*rtn)(shared_ptr<MemorySubsystem>, shared_ptr<SpillFile>, section*))
+void WalkAllSects(MemorySubsystem *memorySubsystem, SpillFile * spillFile,void (*rtn)(MemorySubsystem *, SpillFile *, section*))
 {
 	rtn(memorySubsystem, spillFile, Root);
 	if (FmtData.type & MK_OVERLAYS)
@@ -308,7 +308,7 @@ void WalkAllSects(shared_ptr<MemorySubsystem> memorySubsystem, shared_ptr<SpillF
 	}
 }
 
-void FreeRelocInfo(shared_ptr<MemorySubsystem> memorySubsystem, shared_ptr<SpillFile> spillFile)
+void FreeRelocInfo(MemorySubsystem *memorySubsystem, SpillFile * spillFile)
 {
 	group_entry* group;
 
@@ -345,7 +345,7 @@ uint32_t RelocSize(reloc_info* list)
 	return(size);
 }
 
-uint32_t DumpMaxRelocList(shared_ptr<SpillFile> spillFile, reloc_info** head, uint32_t max)
+uint32_t DumpMaxRelocList(SpillFile * spillFile, reloc_info** head, uint32_t max)
 {
 	uint32_t         size;
 	uint32_t         total;
@@ -381,13 +381,13 @@ uint32_t DumpMaxRelocList(shared_ptr<SpillFile> spillFile, reloc_info** head, ui
 	return(total);
 }
 
-bool DumpRelocList(shared_ptr<SpillFile> spillFile, reloc_info* list)
+bool DumpRelocList(SpillFile * spillFile, reloc_info* list)
 {
 	DumpMaxRelocList(spillFile, &list, 0);
 	return(FALSE);
 }
 
-uint32_t WalkRelocList(shared_ptr<SpillFile> spillFile, reloc_info** head, bool (*fn)(void* data, uint32_t size, void* ctx), void* ctx)
+uint32_t WalkRelocList(SpillFile * spillFile, reloc_info** head, bool (*fn)(void* data, uint32_t size, void* ctx), void* ctx)
 {
 	uint32_t         size;
 	uint32_t         total;
@@ -459,7 +459,7 @@ void SetRelocSize(void)
 	}
 }
 
-bool SpillRelocList(shared_ptr<MemorySubsystem> memorySubsystem, shared_ptr<SpillFile> spillFile, reloc_info* list)
+bool SpillRelocList(MemorySubsystem *memorySubsystem, SpillFile * spillFile, reloc_info* list)
 {
 	virt_mem    spill;
 
@@ -479,7 +479,7 @@ bool SpillRelocList(shared_ptr<MemorySubsystem> memorySubsystem, shared_ptr<Spil
 	return(FALSE);
 }
 
-bool SpillSections(shared_ptr<MemorySubsystem> memorySubsystem, shared_ptr<SpillFile> spillFile, section* sect)
+bool SpillSections(MemorySubsystem *memorySubsystem, SpillFile * spillFile, section* sect)
 {
 	for (; sect != NULL; sect = sect->next_sect)
 	{
@@ -493,7 +493,7 @@ bool SpillSections(shared_ptr<MemorySubsystem> memorySubsystem, shared_ptr<Spill
 	return(FALSE);
 }
 
-bool SpillAreas(shared_ptr<MemorySubsystem> memorySubsystem, shared_ptr<SpillFile> spillFile, OVL_AREA* ovl)
+bool SpillAreas(MemorySubsystem *memorySubsystem, SpillFile * spillFile, OVL_AREA* ovl)
 {
 	for (; ovl != NULL; ovl = ovl->next_area)
 	{
@@ -505,7 +505,7 @@ bool SpillAreas(shared_ptr<MemorySubsystem> memorySubsystem, shared_ptr<SpillFil
 	return(FALSE);
 }
 
-bool SwapOutRelocs(shared_ptr<MemorySubsystem> memorySubsystem, shared_ptr<SpillFile> spillFile)
+bool SwapOutRelocs(MemorySubsystem *memorySubsystem, SpillFile * spillFile)
 {
 	group_entry* group;
 

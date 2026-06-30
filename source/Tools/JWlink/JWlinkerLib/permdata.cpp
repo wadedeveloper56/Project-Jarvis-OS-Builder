@@ -36,7 +36,7 @@ static char* IncStrTab;
 #define SDATA_CARVE_SIZE        (16*1024)
 #define SYM_CARVE_SIZE          (32*1024)
 
-void ResetPermData(shared_ptr<MemorySubsystem> memorySubsystem)
+void ResetPermData(MemorySubsystem *memorySubsystem)
 {
     IncFileName = NULL;
     IncStrTab = NULL;

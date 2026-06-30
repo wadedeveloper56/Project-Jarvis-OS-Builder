@@ -27,8 +27,8 @@ struct select_format
 {
     exe_format      bits;
     char* lib_var_name;
-    void            (*set_func)(shared_ptr<MemorySubsystem> memorySubsystem);
-    void            (*free_func)(shared_ptr<MemorySubsystem> memorySubsystem);
+    void            (*set_func)(MemorySubsystem *memorySubsystem);
+    void            (*free_func)(MemorySubsystem *memorySubsystem);
 };
 
 struct select_format PossibleFmt[] = 
@@ -64,7 +64,7 @@ struct select_format PossibleFmt[] =
 #define INIT_FILE_NAME  "jwlink.lnk"
 #define INIT_FILE_ENV   "JWLINK_LNK"
 
-void FreeFormatStuff(shared_ptr<MemorySubsystem> memorySubsystem)
+void FreeFormatStuff(MemorySubsystem *memorySubsystem)
 {
     int i;
     exe_format                  possible;
@@ -92,7 +92,7 @@ char* GetNextLink(void)
 	return(NULL);
 }
 
-void CleanSystemList(shared_ptr<MemorySubsystem> memory, bool check)
+void CleanSystemList(MemorySubsystem *memory, bool check)
 {
     sysblock** sys;
     sysblock* next;
@@ -117,17 +117,17 @@ void CleanSystemList(shared_ptr<MemorySubsystem> memory, bool check)
     }
 }
 
-void PruneSystemList(shared_ptr<MemorySubsystem> memory)
+void PruneSystemList(MemorySubsystem *memory)
 {
     CleanSystemList(memory, true);
 }
 
-void BurnSystemList(shared_ptr<MemorySubsystem> memory)
+void BurnSystemList(MemorySubsystem *memory)
 {
     CleanSystemList(memory, false);
 }
 
-void FreePaths(shared_ptr<MemorySubsystem> memory)
+void FreePaths(MemorySubsystem *memory)
 {
     FreeList(memory, Path);
     Path = NULL;

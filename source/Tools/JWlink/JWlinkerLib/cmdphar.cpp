@@ -15,7 +15,7 @@
 
 using namespace std;
 
-void SetPharFmt(shared_ptr<MemorySubsystem> memorySubsystem)
+void SetPharFmt(MemorySubsystem *memorySubsystem)
 {
     Extension = E_PROTECT;
     LinkState &= ~MAKE_RELOCS;     // do not generate relocations.
@@ -38,7 +38,7 @@ void SetPharFmt(shared_ptr<MemorySubsystem> memorySubsystem)
     ChkBase(4 * 1024);
 }
 
-void FreePharFmt(shared_ptr<MemorySubsystem> memorySubsystem)
+void FreePharFmt(MemorySubsystem *memorySubsystem)
 {
     memorySubsystem->FreeMemory(FmtData.u.phar.breaksym);
     memorySubsystem->FreeMemory(FmtData.u.phar.params);

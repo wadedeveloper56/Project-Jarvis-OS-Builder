@@ -1,6 +1,6 @@
 #include "pch.h"
-#include "MemorySubsystem.h"
 #include "objfree.h"
+#include "MemorySubsystem.h"
 #include "ObjectNode.h"
 #include "ObjORL.h"
 #include "globals.h"
@@ -55,7 +55,7 @@ void FreeMods(mod_entry* head)
     }
 }
 
-void FiniLinkStruct(shared_ptr<MemorySubsystem> memorySubsystem)
+void FiniLinkStruct(MemorySubsystem *memorySubsystem)
 {
     BurnNodes(memorySubsystem);
     FreeTokBuffs(memorySubsystem);
@@ -76,7 +76,7 @@ void FreeClasses(class_entry* list)
     }
 }
 
-void FreeAreas(shared_ptr<MemorySubsystem> memorySubsystem, OVL_AREA* area)
+void FreeAreas(MemorySubsystem *memorySubsystem, OVL_AREA* area)
 {
     OVL_AREA* next;
 
@@ -88,7 +88,7 @@ void FreeAreas(shared_ptr<MemorySubsystem> memorySubsystem, OVL_AREA* area)
     }
 }
 
-void FreeSections(shared_ptr<MemorySubsystem> memorySubsystem, section* sec)
+void FreeSections(MemorySubsystem *memorySubsystem, section* sec)
 {
     section* next;
     ORDER_CLASS* Class1, * NextClass;
@@ -138,7 +138,7 @@ void FreeSections(shared_ptr<MemorySubsystem> memorySubsystem, section* sec)
 }
 
 
-void CleanLinkStruct(shared_ptr<MemorySubsystem> memorySubsystem, shared_ptr<SpillFile> spillFile)
+void CleanLinkStruct(MemorySubsystem *memorySubsystem, SpillFile * spillFile)
 {
     if (Root == NULL) return;      
     DEBUG((DBG_OLD, "CleanLinkStruct() enter\n"));
@@ -185,7 +185,7 @@ void CleanLinkStruct(shared_ptr<MemorySubsystem> memorySubsystem, shared_ptr<Spi
     }
 }
 
-void FreeFiles(shared_ptr<MemorySubsystem> memorySubsystem, file_list* list)
+void FreeFiles(MemorySubsystem *memorySubsystem, file_list* list)
 {
     void* temp;
 
@@ -203,7 +203,7 @@ void FreeFiles(shared_ptr<MemorySubsystem> memorySubsystem, file_list* list)
 }
 
 #if defined(_OS2) || defined( _QNXLOAD )
-void FreeSegFlags(shared_ptr<MemorySubsystem> memorySubsystem, seg_flags* curr)
+void FreeSegFlags(MemorySubsystem *memorySubsystem, seg_flags* curr)
 {
     seg_flags* next;
 
@@ -216,3 +216,10 @@ void FreeSegFlags(shared_ptr<MemorySubsystem> memorySubsystem, seg_flags* curr)
     }
 }
 #endif
+
+void FreeObjInfo(void)
+{
+    FreeNodes(ExtNodes);
+    FreeNodes(SegNodes);
+    FreeNodes(GrpNodes);
+}

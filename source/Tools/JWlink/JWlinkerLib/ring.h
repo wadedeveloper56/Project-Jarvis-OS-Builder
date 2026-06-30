@@ -43,7 +43,7 @@ void RINGHNAME(Dealloc) (
     void* hdr,                       
     void* element)                  
     ;
-void RINGHNAME(Free) (shared_ptr<MemorySubsystem> memorySubsystem,void* hdr)
+void RINGHNAME(Free) (MemorySubsystem *memorySubsystem,void* hdr)
     ;
 void* RINGHNAME(Promote) (            
     void* hdr,                       

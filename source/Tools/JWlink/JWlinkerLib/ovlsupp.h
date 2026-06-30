@@ -8,7 +8,7 @@
 using namespace std;
 
 void ResetOvlSupp();
-void FreeOvlStruct(shared_ptr<MemorySubsystem> memorySubsystem);
-void WalkSections(shared_ptr<MemorySubsystem> memorySubsystem, shared_ptr<SpillFile> spillFile, section* sect, void (*rtn)(shared_ptr<MemorySubsystem>, shared_ptr<SpillFile>, section*));
-void WalkAreas(shared_ptr<MemorySubsystem> memorySubsystem, shared_ptr<SpillFile> spillFile, OVL_AREA* ovl, void (*rtn)(shared_ptr<MemorySubsystem>, shared_ptr<SpillFile>, section*));
+void FreeOvlStruct(MemorySubsystem *memorySubsystem);
+void WalkSections(MemorySubsystem *memorySubsystem, SpillFile * spillFile, section* sect, void (*rtn)(MemorySubsystem *, SpillFile *, section*));
+void WalkAreas(MemorySubsystem *memorySubsystem, SpillFile * spillFile, OVL_AREA* ovl, void (*rtn)(MemorySubsystem *, SpillFile *, section*));
 

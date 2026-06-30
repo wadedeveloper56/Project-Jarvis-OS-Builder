@@ -21,7 +21,7 @@ void MakePass1Blocks()
     Pass1Blocks.list = NULL;
 }
 
-void ReleasePass1(shared_ptr<MemorySubsystem> memorySubsystem)
+void ReleasePass1(MemorySubsystem *memorySubsystem)
 {
     FreeList(memorySubsystem, Pass1Blocks.list);
     Pass1Blocks.list = NULL;

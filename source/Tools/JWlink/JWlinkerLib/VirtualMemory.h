@@ -1,5 +1,10 @@
 #pragma once
 
+#include <memory>
+#include "MemorySubsystem.h"
+
+using namespace std;
+
 typedef struct vmemblock
 {
     struct vmemblock* next;
@@ -9,10 +14,11 @@ typedef struct vmemblock
 
 class VirtualMemory
 {
+    MemorySubsystem *memorySubsystem;
     vmemblock* VMemBlocks;
 public:
-
-	VirtualMemory();
+    VirtualMemory() { VMemBlocks = NULL; }
+	VirtualMemory(MemorySubsystem *memorySubsystem);
 	~VirtualMemory();
 };
 

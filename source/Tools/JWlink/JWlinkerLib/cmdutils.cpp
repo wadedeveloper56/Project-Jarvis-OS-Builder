@@ -19,7 +19,7 @@ int stricmp_wrapper(const void* s1, const void* s2)
     return(_stricmp((const char*)s1, (const char*)s2));
 }
 
-section* NewSection(shared_ptr<MemorySubsystem> memorySubsystem)
+section* NewSection(MemorySubsystem *memorySubsystem)
 {
     section* sect = nullptr;
 
@@ -45,7 +45,7 @@ section* NewSection(shared_ptr<MemorySubsystem> memorySubsystem)
     return(sect);
 }
 
-char* FileName(shared_ptr<MemorySubsystem> memorySubsystem,char* buff, unsigned len, file_defext etype, bool force)
+char* FileName(MemorySubsystem *memorySubsystem,char* buff, unsigned len, file_defext etype, bool force)
 {
     char* namptr;
     char* namstart;

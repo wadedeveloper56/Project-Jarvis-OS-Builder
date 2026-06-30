@@ -23,7 +23,7 @@ void ResetDistrib()
     SectOvlTab = NULL;
 }
 
-void FreeDistStuff(shared_ptr<MemorySubsystem> memorySubsystem)
+void FreeDistStuff(MemorySubsystem *memorySubsystem)
 {
     unsigned    index;
 

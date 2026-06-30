@@ -15,7 +15,7 @@
 
 using namespace std;
 
-void SetNovFmt(shared_ptr<MemorySubsystem> memorySubsystem)
+void SetNovFmt(MemorySubsystem *memorySubsystem)
 {
     Extension = E_NLM;
     if (!(LinkState & FMT_SPECIFIED) && Name != NULL)
@@ -24,7 +24,7 @@ void SetNovFmt(shared_ptr<MemorySubsystem> memorySubsystem)
     }
 }
 
-void FreeNovFmt(shared_ptr<MemorySubsystem> memorySubsystem)
+void FreeNovFmt(MemorySubsystem *memorySubsystem)
 {
     _LnkFree(FmtData.u.nov.screenname);
     _LnkFree(FmtData.u.nov.description);

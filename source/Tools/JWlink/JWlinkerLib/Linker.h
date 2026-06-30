@@ -23,14 +23,14 @@ class Linker
 	stateflag LinkState;
 	char* ArgSave;
 	void* SpawnStack;
-	shared_ptr<MemorySubsystem> memorySubsystem;
-	shared_ptr<FileSubsystem> fileSubsystem;
-	shared_ptr<MessagingSubsystem> messagingSubsystem;
-	shared_ptr<TokenBuffer> tokenBuffer;
-	shared_ptr<SpillFile> spillFile;
-	shared_ptr<SymbolTable> symbolTable;
-	shared_ptr<Orl> orl;
-	shared_ptr<VirtualMemory> virtualMemory;
+	MemorySubsystem *memorySubsystem;
+	FileSubsystem *fileSubsystem;
+	MessagingSubsystem *messagingSubsystem;
+	TokenBuffer *tokenBuffer;
+	SpillFile *spillFile;
+	SymbolTable *symbolTable;
+	Orl *orl;
+	VirtualMemory *virtualMemory;
 public:
 	Linker(int argc, char** argv);
 	~Linker();

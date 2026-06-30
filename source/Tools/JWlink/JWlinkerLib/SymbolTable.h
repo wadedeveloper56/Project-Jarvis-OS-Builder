@@ -14,7 +14,7 @@ using namespace std;
 class SymbolTable
 {
     int (*CmpRtn)(const void*, const void*, size_t);
-	shared_ptr<MemorySubsystem> memorySubsystem;
+	MemorySubsystem *memorySubsystem;
 	symbol* SymList;
 	symbol** GlobalSymPtrs;
 	symbol** StaticSymPtrs;
@@ -22,7 +22,7 @@ class SymbolTable
 	unsigned        NameLen;
 	symbol* LastSym;
 public:
-	SymbolTable(shared_ptr<MemorySubsystem> memorySubsystem);
+	SymbolTable(MemorySubsystem *memorySubsystem);
 	~SymbolTable();
 	void ResetSym();
 	void ClearHashPointers();

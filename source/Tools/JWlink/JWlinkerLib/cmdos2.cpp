@@ -15,7 +15,7 @@
 
 using namespace std;
 
-void SetOS2Fmt(shared_ptr<MemorySubsystem> memorySubsystem)
+void SetOS2Fmt(MemorySubsystem *memorySubsystem)
 {
     if (LinkState & FMT_INITIALIZED) return;
     LinkState |= FMT_INITIALIZED;
@@ -44,7 +44,7 @@ void FreeImpNameTab(void)
     FmtData.u.os2.imp_tab_list = NULL;
 }
 
-entry_export* FreeAnExport(shared_ptr<MemorySubsystem> memorySubsystem,entry_export* exp)
+entry_export* FreeAnExport(MemorySubsystem *memorySubsystem,entry_export* exp)
 {
     entry_export* next;
 
@@ -54,7 +54,7 @@ entry_export* FreeAnExport(shared_ptr<MemorySubsystem> memorySubsystem,entry_exp
     return(next);
 }
 
-void FreeExportList(shared_ptr<MemorySubsystem> memorySubsystem)
+void FreeExportList(MemorySubsystem *memorySubsystem)
 {
     entry_export* exp;
 
@@ -66,7 +66,7 @@ void FreeExportList(shared_ptr<MemorySubsystem> memorySubsystem)
     }
 }
 
-void FreeOS2Fmt(shared_ptr<MemorySubsystem> memorySubsystem)
+void FreeOS2Fmt(MemorySubsystem *memorySubsystem)
 {
     memorySubsystem->FreeMemory(FmtData.u.os2.stub_file_name);
     memorySubsystem->FreeMemory(FmtData.u.os2.res_module_name);

@@ -21,7 +21,7 @@ void ChkBase(offset align)
     }
 }
 
-void SetQNXFmt(shared_ptr<MemorySubsystem> memorySubsystem)
+void SetQNXFmt(MemorySubsystem *memorySubsystem)
 {
     Extension = E_QNX;
     FmtData.u.qnx.flags = 0;
@@ -33,7 +33,7 @@ void SetQNXFmt(shared_ptr<MemorySubsystem> memorySubsystem)
     ChkBase(4 * 1024);
 }
 
-void FreeQNXFmt(shared_ptr<MemorySubsystem> memorySubsystem)
+void FreeQNXFmt(MemorySubsystem *memorySubsystem)
 {
     FreeSegFlags(memorySubsystem,(seg_flags*)FmtData.u.qnx.seg_flags);
 }

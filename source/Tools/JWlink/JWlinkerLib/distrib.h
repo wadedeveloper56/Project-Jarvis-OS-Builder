@@ -14,4 +14,4 @@ extern uint16_t  CurrModHandle;
 extern section** SectOvlTab;
 
 void ResetDistrib();
-void FreeDistStuff(shared_ptr<MemorySubsystem> memorySubsystem);
+void FreeDistStuff(MemorySubsystem *memorySubsystem);

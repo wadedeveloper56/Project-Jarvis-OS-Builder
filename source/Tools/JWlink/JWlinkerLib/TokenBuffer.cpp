@@ -4,7 +4,7 @@
 
 using namespace std;
 
-TokenBuffer::TokenBuffer(shared_ptr<MemorySubsystem> memorySubsystem)
+TokenBuffer::TokenBuffer(MemorySubsystem *memorySubsystem)
 {
 	this->memorySubsystem = memorySubsystem;
 	TokSize = MAX_HEADROOM;

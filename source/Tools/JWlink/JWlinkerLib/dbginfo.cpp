@@ -6,7 +6,7 @@
 
 using namespace std;
 
-void ODBISectCleanup(shared_ptr<MemorySubsystem> memorySubsystem,section* sect)
+void ODBISectCleanup(MemorySubsystem *memorySubsystem,section* sect)
 {
     memorySubsystem->FreeMemory(sect->dbg_info);
 }

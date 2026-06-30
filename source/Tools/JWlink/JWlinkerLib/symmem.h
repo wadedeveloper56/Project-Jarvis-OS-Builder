@@ -11,4 +11,4 @@ extern block_data PermBlocks;
 
 void GetSymBlock();
 void MakePass1Blocks();
-void ReleasePass1(shared_ptr<MemorySubsystem> memorySubsystem);
+void ReleasePass1(MemorySubsystem *memorySubsystem);

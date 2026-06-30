@@ -9,4 +9,4 @@ extern char* SymFileName;
 extern group_entry* DBIGroups;
 
 void ResetDBI();
-void DBISectCleanup(shared_ptr<MemorySubsystem> memorySubsystem,section* sect);
+void DBISectCleanup(MemorySubsystem *memorySubsystem,section* sect);

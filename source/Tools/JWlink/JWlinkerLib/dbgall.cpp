@@ -16,7 +16,7 @@ void ResetDBI()
     DBIGroups = NULL;
 }
 
-void DBISectCleanup(shared_ptr<MemorySubsystem> memorySubsystem,section* sect)
+void DBISectCleanup(MemorySubsystem *memorySubsystem,section* sect)
 {
     if (LinkFlags & OLD_DBI_FLAG)
     {

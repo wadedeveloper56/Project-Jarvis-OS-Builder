@@ -7,7 +7,7 @@
 
 using namespace std;
 
-void SetD16MFmt(shared_ptr<MemorySubsystem> memorySubsystem)
+void SetD16MFmt(MemorySubsystem *memorySubsystem)
 {
     LinkState &= ~MAKE_RELOCS;                  
     Extension = E_PROTECT;
@@ -22,7 +22,7 @@ void SetD16MFmt(shared_ptr<MemorySubsystem> memorySubsystem)
     FmtData.u.d16m.stub = NULL;
 }
 
-void FreeD16MFmt(shared_ptr<MemorySubsystem> memorySubsystem)
+void FreeD16MFmt(MemorySubsystem *memorySubsystem)
 {
     memorySubsystem->FreeMemory(FmtData.u.d16m.stub);
 }

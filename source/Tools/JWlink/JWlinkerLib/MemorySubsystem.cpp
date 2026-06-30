@@ -1,9 +1,13 @@
 #include "pch.h"
 #include "MemorySubsystem.h"
+#include "debug.h"
 
 MemorySubsystem::MemorySubsystem() {}
 
-MemorySubsystem::~MemorySubsystem() {}
+MemorySubsystem::~MemorySubsystem() 
+{
+	DEBUG((DBG_OLD, "MemorySubsystem destructor\n"));
+}
 
 void* MemorySubsystem::AllocateMemory(size_t size) { return ::AllocateMemory(size); }
 

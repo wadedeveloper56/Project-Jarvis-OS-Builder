@@ -19,7 +19,7 @@ unsigned StringiHashFunc(void* _s, unsigned size)
 	return key;
 }
 
-pHTable CreateHTable(int size, pHashFunc hashFunc, pHashElemCmp compareFunc, shared_ptr<MemorySubsystem> memorySubsystem)
+pHTable CreateHTable(int size, pHashFunc hashFunc, pHashElemCmp compareFunc, MemorySubsystem *memorySubsystem)
 {
 	pHTable table;
 

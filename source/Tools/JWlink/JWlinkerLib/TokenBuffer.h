@@ -9,11 +9,11 @@ using namespace std;
 
 class TokenBuffer
 {
-	shared_ptr<MemorySubsystem> memorySubsystem;
+	MemorySubsystem *memorySubsystem;
 	char* TokBuff;
 	int TokSize;
 public:
-	TokenBuffer(shared_ptr<MemorySubsystem> memorySubsystem);
+	TokenBuffer(MemorySubsystem *memorySubsystem);
 	~TokenBuffer();
 };
 

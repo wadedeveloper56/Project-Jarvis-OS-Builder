@@ -6,4 +6,4 @@
 using namespace std;
 
 void ResetSymTrace();
-void CleanTraces(shared_ptr<MemorySubsystem> memorySubsystem);
+void CleanTraces(MemorySubsystem *memorySubsystem);

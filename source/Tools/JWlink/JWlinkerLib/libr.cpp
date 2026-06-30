@@ -40,7 +40,7 @@ int ARCompIName(const void* key, const void* vbase)
     return _stricmp((const char*)key, (const char*)*base);
 }
 
-void FreeDictCache(shared_ptr<MemorySubsystem> memorySubsystem,void** cache, uint16_t buckets)
+void FreeDictCache(MemorySubsystem *memorySubsystem,void** cache, uint16_t buckets)
 {
     while (buckets != 0)
     {
@@ -49,7 +49,7 @@ void FreeDictCache(shared_ptr<MemorySubsystem> memorySubsystem,void** cache, uin
     memorySubsystem->FreeMemory(cache);
 }
 
-void BurnLibs(shared_ptr<MemorySubsystem> memorySubsystem)
+void BurnLibs(MemorySubsystem *memorySubsystem)
 {
     file_list* temp;
     dict_entry* dict;

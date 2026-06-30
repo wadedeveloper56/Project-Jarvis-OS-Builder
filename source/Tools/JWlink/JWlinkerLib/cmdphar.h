@@ -14,5 +14,5 @@
 
 using namespace std;
 
-void SetPharFmt(shared_ptr<MemorySubsystem> memorySubsystem);
-void FreePharFmt(shared_ptr<MemorySubsystem> memorySubsystem);
+void SetPharFmt(MemorySubsystem *memorySubsystem);
+void FreePharFmt(MemorySubsystem *memorySubsystem);

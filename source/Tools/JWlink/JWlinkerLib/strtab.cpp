@@ -7,7 +7,7 @@
 using namespace std;
 #define STR_BLOCK_SIZE   (4*1024)
 
-stringblock* AllocNewBlock(shared_ptr<MemorySubsystem> memorySubsystem, stringtable* strtab)
+stringblock* AllocNewBlock(MemorySubsystem *memorySubsystem, stringtable* strtab)
 {
 	stringblock* blk = (stringblock*)memorySubsystem->AllocateMemory(sizeof(stringblock));
     blk->next = NULL;
@@ -16,7 +16,7 @@ stringblock* AllocNewBlock(shared_ptr<MemorySubsystem> memorySubsystem, stringta
     return blk;
 }
 
-void InitStringTable(shared_ptr<MemorySubsystem> memorySubsystem, stringtable* strtab, bool dontsplit)
+void InitStringTable(MemorySubsystem *memorySubsystem, stringtable* strtab, bool dontsplit)
 {
     strtab->data = NULL;
     if (dontsplit)
@@ -30,7 +30,7 @@ void InitStringTable(shared_ptr<MemorySubsystem> memorySubsystem, stringtable* s
     AllocNewBlock(memorySubsystem, strtab);
 }
 
-char* AddToStringTable(shared_ptr<MemorySubsystem> memorySubsystem, stringtable* strtab, void* data, unsigned len, bool addnullchar)
+char* AddToStringTable(MemorySubsystem *memorySubsystem, stringtable* strtab, void* data, unsigned len, bool addnullchar)
 {
     stringblock* blk;
     unsigned    diff;
@@ -72,22 +72,22 @@ char* AddToStringTable(shared_ptr<MemorySubsystem> memorySubsystem, stringtable*
     return(dest);
 }
 
-void AddCharStringTable(shared_ptr<MemorySubsystem> memorySubsystem, stringtable* strtab, char data)
+void AddCharStringTable(MemorySubsystem *memorySubsystem, stringtable* strtab, char data)
 {
     AddToStringTable(memorySubsystem, strtab, &data, sizeof(char), false);
 }
 
-char* AddStringStringTable(shared_ptr<MemorySubsystem> memorySubsystem, stringtable* strtab, char* data)
+char* AddStringStringTable(MemorySubsystem *memorySubsystem, stringtable* strtab, char* data)
 {
     return(AddToStringTable(memorySubsystem, strtab, data, strlen(data) + 1, false));
 }
 
-char* AddBufferStringTable(shared_ptr<MemorySubsystem> memorySubsystem, stringtable* strtab, void* data, unsigned len)
+char* AddBufferStringTable(MemorySubsystem *memorySubsystem, stringtable* strtab, void* data, unsigned len)
 {
     return(AddToStringTable(memorySubsystem, strtab, data, len, false));
 }
 
-char* AddSymbolStringTable(shared_ptr<MemorySubsystem> memorySubsystem, stringtable* strtab, char* data, unsigned len)
+char* AddSymbolStringTable(MemorySubsystem *memorySubsystem, stringtable* strtab, char* data, unsigned len)
 {
     return(AddToStringTable(memorySubsystem, strtab, data, len, true));
 }

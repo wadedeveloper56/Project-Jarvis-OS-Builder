@@ -29,7 +29,7 @@ void ResetOvlSupp()
     AreaSize = 0xFFFF;
 }
 
-void FreeOvlStruct(shared_ptr<MemorySubsystem> memorySubsystem)
+void FreeOvlStruct(MemorySubsystem *memorySubsystem)
 {
     OvlClasses = NULL;
     OvlVectors = NULL;
@@ -40,7 +40,7 @@ void FreeOvlStruct(shared_ptr<MemorySubsystem> memorySubsystem)
     FreeDistStuff(memorySubsystem);
 }
 
-void WalkSections(shared_ptr<MemorySubsystem> memorySubsystem, shared_ptr<SpillFile> spillFile, section* sect, void (*rtn)(shared_ptr<MemorySubsystem>, shared_ptr<SpillFile>,section*))
+void WalkSections(MemorySubsystem *memorySubsystem, SpillFile * spillFile, section* sect, void (*rtn)(MemorySubsystem *, SpillFile *,section*))
 {
     for (; sect != NULL; sect = sect->next_sect)
     {
@@ -49,7 +49,7 @@ void WalkSections(shared_ptr<MemorySubsystem> memorySubsystem, shared_ptr<SpillF
     }
 }
 
-void WalkAreas(shared_ptr<MemorySubsystem> memorySubsystem, shared_ptr<SpillFile> spillFile, OVL_AREA* ovl, void (*rtn)(shared_ptr<MemorySubsystem>, shared_ptr<SpillFile>,section*))
+void WalkAreas(MemorySubsystem *memorySubsystem, SpillFile * spillFile, OVL_AREA* ovl, void (*rtn)(MemorySubsystem *, SpillFile *,section*))
 {
     for (; ovl != NULL; ovl = ovl->next_area)
     {

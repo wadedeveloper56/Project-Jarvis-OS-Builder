@@ -9,7 +9,7 @@
 
 using namespace std;
 
-bool CacheOpen(shared_ptr<MemorySubsystem> memorySubsystem, file_list* list)
+bool CacheOpen(MemorySubsystem *memorySubsystem, file_list* list)
 {
     infilelist* file;
 
@@ -49,7 +49,7 @@ bool CacheOpen(shared_ptr<MemorySubsystem> memorySubsystem, file_list* list)
     return true;
 }
 
-void CacheClose(shared_ptr<MemorySubsystem> memorySubsystem, file_list* list, unsigned pass)
+void CacheClose(MemorySubsystem *memorySubsystem, file_list* list, unsigned pass)
 {
     infilelist* file;
 

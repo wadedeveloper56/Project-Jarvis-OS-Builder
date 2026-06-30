@@ -20,7 +20,7 @@ void ResetObjIO(void)
     CachedLibFiles = NULL;
 }
 
-infilelist* AllocEntry(shared_ptr<MemorySubsystem> memorySubsystem, char* name, path_entry* path)
+infilelist* AllocEntry(MemorySubsystem *memorySubsystem, char* name, path_entry* path)
 {
     infilelist* entry = (infilelist*)memorySubsystem->AllocateMemory(sizeof(infilelist));
     entry->name = AddStringStringTable(memorySubsystem, &PermStrings, name);
@@ -33,7 +33,7 @@ infilelist* AllocEntry(shared_ptr<MemorySubsystem> memorySubsystem, char* name, 
     return entry;
 }
 
-infilelist* AllocFileEntry(shared_ptr<MemorySubsystem> memorySubsystem, char* name, path_entry* path)
+infilelist* AllocFileEntry(MemorySubsystem *memorySubsystem, char* name, path_entry* path)
 {
     infilelist* entry;
 
@@ -43,7 +43,7 @@ infilelist* AllocFileEntry(shared_ptr<MemorySubsystem> memorySubsystem, char* na
     return entry;
 }
 
-infilelist* AllocUniqueFileEntry(shared_ptr<MemorySubsystem> memorySubsystem, char* name, path_entry* path)
+infilelist* AllocUniqueFileEntry(MemorySubsystem *memorySubsystem, char* name, path_entry* path)
 {
     infilelist* entry;
 
@@ -193,13 +193,13 @@ uint16_t CalcAlign(uint32_t pos, uint16_t align)
     return(modulus);
 }
 
-void InitTokBuff(shared_ptr<MemorySubsystem> memorySubsystem)
+void InitTokBuff(MemorySubsystem *memorySubsystem)
 {
     TokSize = MAX_HEADROOM;
     TokBuff = (char*)memorySubsystem->AllocateMemory(MAX_HEADROOM);
 }
 
-void FreeTokBuffs(shared_ptr<MemorySubsystem> memorySubsystem)
+void FreeTokBuffs(MemorySubsystem *memorySubsystem)
 {
     if (TokBuff != NULL)
     {

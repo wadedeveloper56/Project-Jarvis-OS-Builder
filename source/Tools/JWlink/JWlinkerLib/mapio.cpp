@@ -23,7 +23,7 @@ void ResetMapIO()
 	SymTraceList = NULL;
 }
 
-void FreeUndefs(shared_ptr<MemorySubsystem> memorySubsystem)
+void FreeUndefs(MemorySubsystem *memorySubsystem)
 {
 	RingFree(memorySubsystem, &SymTraceList);
 	RingFree(memorySubsystem, &UndefList);

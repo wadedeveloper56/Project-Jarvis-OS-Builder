@@ -25,4 +25,4 @@ extern group_entry** IncGroups;
 extern libnamelist* SavedUserLibs;
 extern libnamelist* SavedDefLibs;
 
-void ResetPermData(shared_ptr<MemorySubsystem> memorySubsystem);
+void ResetPermData(MemorySubsystem *memorySubsystem);

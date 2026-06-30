@@ -8,7 +8,7 @@
 using namespace std;
 
 
-void SetELFFmt(shared_ptr<MemorySubsystem> memorySubsystem)
+void SetELFFmt(MemorySubsystem *memorySubsystem)
 {
     Extension = E_ELF;
     FmtData.u.elf.exp.export1 = NULL;
@@ -19,7 +19,7 @@ void SetELFFmt(shared_ptr<MemorySubsystem> memorySubsystem)
     FmtData.u.elf.abiversion = 0;
 }
 
-void FreeELFFmt(shared_ptr<MemorySubsystem> memorySubsystem)
+void FreeELFFmt(MemorySubsystem *memorySubsystem)
 {
     /*  FreeList( FmtData.u.elf.exp.export );
         FreeList( FmtData.u.elf.exp.module ); Permalloc'd now */

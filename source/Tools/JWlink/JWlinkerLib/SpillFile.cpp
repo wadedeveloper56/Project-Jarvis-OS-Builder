@@ -8,7 +8,7 @@
 #define TEMPFNAME "WLK02112.xx`"               
 #define TEMPFNAME_SIZE 13
 
-SpillFile::SpillFile(shared_ptr<MemorySubsystem> memorySubsystem) : TempFile(NIL_HANDLE), TFileName(nullptr), TmpFSize(0)
+SpillFile::SpillFile(MemorySubsystem *memorySubsystem) : TempFile(NIL_HANDLE), TFileName(nullptr), TmpFSize(0)
 {
 	this->memorySubsystem = memorySubsystem;
 }

@@ -14,7 +14,7 @@ void ResetSymTrace()
     TraceList = NULL;
 }
 
-void CleanTraces(shared_ptr<MemorySubsystem> memorySubsystem)
+void CleanTraces(MemorySubsystem *memorySubsystem)
 {
     trace_info* next;
 

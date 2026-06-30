@@ -5,6 +5,6 @@
 using namespace std;
 
 void SetLibCase();
-void BurnLibs(shared_ptr<MemorySubsystem> memorySubsystem);
-void FreeDictCache(shared_ptr<MemorySubsystem> memorySubsystem, void** cache, uint16_t buckets);
+void BurnLibs(MemorySubsystem *memorySubsystem);
+void FreeDictCache(MemorySubsystem *memorySubsystem, void** cache, uint16_t buckets);
 

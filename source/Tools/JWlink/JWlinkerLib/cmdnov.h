@@ -14,5 +14,5 @@
 
 using namespace std;
 
-void SetNovFmt(shared_ptr<MemorySubsystem> memorySubsystem);
-void FreeNovFmt(shared_ptr<MemorySubsystem> memorySubsystem);
+void SetNovFmt(MemorySubsystem *memorySubsystem);
+void FreeNovFmt(MemorySubsystem *memorySubsystem);

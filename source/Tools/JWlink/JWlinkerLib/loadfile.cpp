@@ -12,7 +12,7 @@ implibinfo       ImpLib;
 
 #define BUFF_BLOCK_SIZE (16*1024)
 
-void FlushBuffFile(shared_ptr<MemorySubsystem> memorySubsystem,outfilelist* outfile)
+void FlushBuffFile(MemorySubsystem *memorySubsystem,outfilelist* outfile)
 {
     unsigned    modpos;
 
@@ -25,7 +25,7 @@ void FlushBuffFile(shared_ptr<MemorySubsystem> memorySubsystem,outfilelist* outf
     outfile->buffer = NULL;
 }
 
-void CloseBuffFile(shared_ptr<MemorySubsystem> memorySubsystem, outfilelist* outfile)
+void CloseBuffFile(MemorySubsystem *memorySubsystem, outfilelist* outfile)
 {
     if (outfile->buffer != NULL)
     {
@@ -35,7 +35,7 @@ void CloseBuffFile(shared_ptr<MemorySubsystem> memorySubsystem, outfilelist* out
     outfile->handle = NIL_HANDLE;
 }
 
-void CloseOutFiles(shared_ptr<MemorySubsystem> memorySubsystem)
+void CloseOutFiles(MemorySubsystem *memorySubsystem)
 {
     outfilelist* fnode;
 
@@ -48,7 +48,7 @@ void CloseOutFiles(shared_ptr<MemorySubsystem> memorySubsystem)
     }
 }
 
-void FreeOutFiles(shared_ptr<FileSubsystem> fileSubsystem, shared_ptr<MemorySubsystem> memorySubsystem)
+void FreeOutFiles(FileSubsystem *fileSubsystem, MemorySubsystem *memorySubsystem)
 {
     outfilelist* fnode;
 
