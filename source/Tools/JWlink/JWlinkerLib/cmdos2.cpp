@@ -15,7 +15,7 @@
 
 using namespace std;
 
-void SetOS2Fmt(void)
+void SetOS2Fmt(shared_ptr<MemorySubsystem> memorySubsystem)
 {
     if (LinkState & FMT_INITIALIZED) return;
     LinkState |= FMT_INITIALIZED;

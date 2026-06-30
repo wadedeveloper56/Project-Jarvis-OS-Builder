@@ -9,6 +9,7 @@
 #include "cmdqnx.h"
 #include "cmdelf.h"
 #include "cmdos2.h"
+#include "cmdphar.h"
 
 using namespace std;
 
@@ -25,7 +26,7 @@ struct select_format
 {
     exe_format      bits;
     char* lib_var_name;
-    void            (*set_func)(void);
+    void            (*set_func)(shared_ptr<MemorySubsystem> memorySubsystem);
     void            (*free_func)(shared_ptr<MemorySubsystem> memorySubsystem);
 };
 
@@ -50,7 +51,7 @@ struct select_format PossibleFmt[] =
                 MK_WIN_VXD,     "LIBVXD",       SetOS2Fmt,      FreeOS2Fmt,
 #endif
 #ifdef _PHARLAP
-    MK_PHAR_LAP,    "LIBPHAR",      SetPharFmt,     FreePharFmt,
+    (exe_format)MK_PHAR_LAP,    "LIBPHAR",      SetPharFmt,     FreePharFmt,
 #endif
 #ifdef _NOVELL
     MK_NOVELL,      "LIBNOV",       SetNovFmt,      FreeNovFmt,

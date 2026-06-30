@@ -35,5 +35,5 @@ using namespace std;
 #define PM_NOT_COMPATIBLE   0x4000
 #define TERM_INSTANCE_FLAG  0x8000
 
-void SetOS2Fmt(void);
+void SetOS2Fmt(shared_ptr<MemorySubsystem> memorySubsystem);
 void FreeOS2Fmt(shared_ptr<MemorySubsystem> memorySubsystem);

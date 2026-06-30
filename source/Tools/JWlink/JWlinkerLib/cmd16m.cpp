@@ -7,7 +7,7 @@
 
 using namespace std;
 
-void SetD16MFmt(void)
+void SetD16MFmt(shared_ptr<MemorySubsystem> memorySubsystem)
 {
     LinkState &= ~MAKE_RELOCS;                  
     Extension = E_PROTECT;

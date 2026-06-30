@@ -1,4 +1,4 @@
-JWasm v2.12pre, Jun 29 2026
+JWasm v2.12pre, Jun 30 2026
 test1.asm
                                 .x64p
                                 .model flat, c;
@@ -83,7 +83,7 @@ Symbols:
 @FileName  . . . . . . . . . . .        Text   TEST1
 @Interface . . . . . . . . . . .        Number             1h 
 @Model . . . . . . . . . . . . .        Number             7h 
-@Time  . . . . . . . . . . . . .        Text   08:20:22
+@Time  . . . . . . . . . . . . .        Text   11:31:10
 @Version . . . . . . . . . . . .        Text   800
 @code  . . . . . . . . . . . . .        Text   _TEXT
 @data  . . . . . . . . . . . . .        Text   FLAT
@@ -93,4 +93,4 @@ _var1  . . . . . . . . . . . . .        Byte               0h _BSS C
 _var2  . . . . . . . . . . . . .        Word               1h _BSS C
 _var3  . . . . . . . . . . . . .        DWord              3h _BSS C
 
-test1.asm: 20 lines, 2 passes, 0 ms, 0 warnings, 0 errors
+test1.asm: 20 lines, 2 passes, 1 ms, 0 warnings, 0 errors

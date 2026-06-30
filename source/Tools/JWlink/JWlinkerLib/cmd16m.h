@@ -23,5 +23,5 @@
 
 using namespace std;
 
-void SetD16MFmt(void);
+void SetD16MFmt(shared_ptr<MemorySubsystem> memorySubsystem);
 void FreeD16MFmt(shared_ptr<MemorySubsystem> memorySubsystem);

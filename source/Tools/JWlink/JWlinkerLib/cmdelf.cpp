@@ -8,7 +8,7 @@
 using namespace std;
 
 
-void SetELFFmt(void)
+void SetELFFmt(shared_ptr<MemorySubsystem> memorySubsystem)
 {
     Extension = E_ELF;
     FmtData.u.elf.exp.export1 = NULL;

@@ -21,7 +21,7 @@ void ChkBase(offset align)
     }
 }
 
-void SetQNXFmt(void)
+void SetQNXFmt(shared_ptr<MemorySubsystem> memorySubsystem)
 {
     Extension = E_QNX;
     FmtData.u.qnx.flags = 0;

@@ -5,5 +5,5 @@
 
 using namespace std;
 
-void SetELFFmt(void);
+void SetELFFmt(shared_ptr<MemorySubsystem> memorySubsystem);
 void FreeELFFmt(shared_ptr<MemorySubsystem> memorySubsystem);

@@ -1670,3 +1670,17 @@ typedef struct seg_flags
 	segflag_type        type;
 } seg_flags;
 
+typedef struct rtpblock
+{        // run-time parameter block.
+	uint16_t     signature;
+	uint16_t     minreal;
+	uint16_t     maxreal;
+	uint16_t     minibuf;
+	uint16_t     maxibuf;
+	uint16_t     nistack;
+	uint16_t     istksize;
+	uint32_t     realbreak;
+	uint16_t     callbufs;
+	uint16_t     extender_flags;     /* for undocumented "runtime flags" */
+	uint16_t     unpriv;
+} rtpblock;
