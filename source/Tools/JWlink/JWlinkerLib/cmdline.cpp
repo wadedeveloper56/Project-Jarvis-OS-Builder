@@ -8,6 +8,7 @@
 #include "cmd16m.h"
 #include "cmdqnx.h"
 #include "cmdelf.h"
+#include "cmdos2.h"
 
 using namespace std;
 
@@ -41,12 +42,12 @@ struct select_format PossibleFmt[] =
                 MK_ELF,         "LIBELF",       SetELFFmt,      FreeELFFmt,
 #endif
 #ifdef _OS2
-    MK_WIN_NE,      "LIBWIN",       SetOS2Fmt,      FreeOS2Fmt,
-    MK_OS2_NE,      "LIBOS2",       SetOS2Fmt,      FreeOS2Fmt,
-    MK_OS2_LE,      "LIBOS2FLAT",   SetOS2Fmt,      FreeOS2Fmt,
-    MK_OS2_LX,      "LIBOS2FLAT",   SetOS2Fmt,      FreeOS2Fmt,
-    MK_PE,          "LIBPE",        SetOS2Fmt,      FreeOS2Fmt,
-    MK_WIN_VXD,     "LIBVXD",       SetOS2Fmt,      FreeOS2Fmt,
+                MK_WIN_NE,      "LIBWIN",       SetOS2Fmt,      FreeOS2Fmt,
+                MK_OS2_NE,      "LIBOS2",       SetOS2Fmt,      FreeOS2Fmt,
+                MK_OS2_LE,      "LIBOS2FLAT",   SetOS2Fmt,      FreeOS2Fmt,
+                MK_OS2_LX,      "LIBOS2FLAT",   SetOS2Fmt,      FreeOS2Fmt,
+                MK_PE,          "LIBPE",        SetOS2Fmt,      FreeOS2Fmt,
+                MK_WIN_VXD,     "LIBVXD",       SetOS2Fmt,      FreeOS2Fmt,
 #endif
 #ifdef _PHARLAP
     MK_PHAR_LAP,    "LIBPHAR",      SetPharFmt,     FreePharFmt,
