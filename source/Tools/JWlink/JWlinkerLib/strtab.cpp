@@ -92,3 +92,7 @@ char* AddSymbolStringTable(MemorySubsystem *memorySubsystem, stringtable* strtab
     return(AddToStringTable(memorySubsystem, strtab, data, len, true));
 }
 
+void FiniStringTable(MemorySubsystem* memorySubsystem, stringtable* strtab)
+{
+    RingFree(memorySubsystem, &strtab->data);
+}

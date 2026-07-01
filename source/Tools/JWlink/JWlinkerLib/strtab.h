@@ -12,3 +12,4 @@ void AddCharStringTable(MemorySubsystem *memorySubsystem, stringtable* strtab, c
 char* AddStringStringTable(MemorySubsystem *memorySubsystem, stringtable* strtab, char* data);
 char* AddBufferStringTable(MemorySubsystem *memorySubsystem, stringtable* strtab, void* data, unsigned len);
 char* AddSymbolStringTable(MemorySubsystem *memorySubsystem, stringtable* strtab, char* data, unsigned len);
+void FiniStringTable(MemorySubsystem *memorySubsystem, stringtable* strtab);

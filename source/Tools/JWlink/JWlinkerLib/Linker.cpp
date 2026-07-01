@@ -94,7 +94,7 @@ void Linker::CleanSubSystems()
 	//FreeVirtMem(); not needed
 	CleanToc();
 	CleanSym(memorySubsystem);
-	//CleanPermData();
+	CleanPermData(memorySubsystem);
 	DEBUG((DBG_OLD, "CleanSubSystems exit\n"));
 }
 

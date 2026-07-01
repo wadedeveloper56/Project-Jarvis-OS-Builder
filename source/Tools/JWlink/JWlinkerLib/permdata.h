@@ -26,3 +26,4 @@ extern libnamelist* SavedUserLibs;
 extern libnamelist* SavedDefLibs;
 
 void ResetPermData(MemorySubsystem *memorySubsystem);
+void CleanPermData(MemorySubsystem *memorySubsystem);
