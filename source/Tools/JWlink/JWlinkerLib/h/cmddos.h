@@ -42,9 +42,9 @@ extern bool     ProcDynamic( void );
 extern bool     ProcStandard( void );
 extern bool     ProcNoIndirect( void );
 extern bool     ProcArea( void );
-extern bool     ProcPadSections(void);
+extern bool     ProcPadSections();
 #if 1 /* JWlink */
-extern bool     ProcKnowEAS(void);
+extern bool     ProcKnowEAS();
 #endif
 
 extern bool     ProcDos( void );

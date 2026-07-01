@@ -217,7 +217,7 @@ void FreeSegFlags(MemorySubsystem *memorySubsystem, seg_flags* curr)
 }
 #endif
 
-void FreeObjInfo(void)
+void FreeObjInfo()
 {
     FreeNodes(ExtNodes);
     FreeNodes(SegNodes);

@@ -7,7 +7,7 @@
 
 using namespace std;
 
-void ResetReloc(void);
+void ResetReloc();
 reloc_info* AllocRelocInfo(MemorySubsystem *memorySubsystem, SpillFile * spillFile);
 void* OS2PagedRelocInit(MemorySubsystem *memorySubsystem, offset size, int unitsize);
 void* OS2FlatRelocInit(MemorySubsystem *memorySubsystem, offset size);
@@ -29,7 +29,7 @@ uint32_t RelocSize(reloc_info* list);
 uint32_t DumpMaxRelocList(SpillFile * spillFile, reloc_info** head, uint32_t max);
 bool DumpRelocList(SpillFile * spillFile, reloc_info* list);
 uint32_t WalkRelocList(SpillFile * spillFile, reloc_info** head, bool (*fn)(void* data, uint32_t size, void* ctx), void* ctx);
-void SetRelocSize(void);
+void SetRelocSize();
 bool SpillRelocList(MemorySubsystem *memorySubsystem, SpillFile * spillFile, reloc_info* list);
 bool SpillSections(MemorySubsystem *memorySubsystem, SpillFile * spillFile, section* sect);
 bool SpillAreas(MemorySubsystem *memorySubsystem, SpillFile * spillFile, OVL_AREA* ovl);

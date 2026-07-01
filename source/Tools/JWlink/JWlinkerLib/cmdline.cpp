@@ -82,12 +82,12 @@ void FreeFormatStuff(MemorySubsystem *memorySubsystem)
     }
 }
 
-void InitCmdFile(void)
+void InitCmdFile()
 {
     PrevCommand = NULL;
 }
 
-char* GetNextLink(void)
+char* GetNextLink()
 {
 	return(NULL);
 }

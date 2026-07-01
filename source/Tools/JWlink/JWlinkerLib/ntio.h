@@ -1,6 +1,7 @@
 #pragma once
 
 #include "File.h"
+#include "FileSubsystem.h"
 
 typedef enum
 {
@@ -118,20 +119,23 @@ enum
     TIO_FIND_NO_MORE_FILES = TIO_NO_MORE_FILES,
 };
 
-void Locator(char* filename, char* mem, unsigned rec);
+#define MAX_OPEN_FILES 12
+#define TOOMANY EMFILE
+
 time_t QFModTime(int handle);
-f_handle NSOpen(char* name, unsigned mode);
-f_handle ExeOpen(char* name);
-f_handle QObjOpen(char* name);
-f_handle TempFileOpen(char* name);
+int DoOpen(FileSubsystem* fileSubsystem, char* name, unsigned mode, bool isexe);
+f_handle NSOpen(FileSubsystem* fileSubsystem, char* name, unsigned mode);
+f_handle ExeOpen(FileSubsystem* fileSubsystem, char* name);
+f_handle QObjOpen(FileSubsystem* fileSubsystem, char* name);
+f_handle TempFileOpen(FileSubsystem* fileSubsystem, char* name);
 int QMakeFileName(char** pos, char* name, char* fname);
 bool QHavePath(char* name);
+unsigned long QFileSize(f_handle file);
+long QLSeek(f_handle file, long position, int start, char* name);
+unsigned QRead(f_handle file, void* buffer, unsigned len, char* name);
+unsigned QWrite(f_handle file, void* buffer, unsigned len, char* name);
 void QClose(f_handle file, char* name);
 void QDelete(char* name);
-unsigned QWrite(f_handle file, void* buffer, unsigned len, char* name);
-unsigned QRead(f_handle file, void* buffer, unsigned len, char* name);
-long QLSeek(f_handle file, long position, int start, char* name);
-unsigned long QFileSize(f_handle file);
-f_handle QOpenR(char* name);
-f_handle QOpenRW(char* name);
+f_handle QOpenR(FileSubsystem* fileSubsystem, char* name);
+f_handle QOpenRW(FileSubsystem* fileSubsystem, char* name);
 void QSeek(f_handle file, long position, char* name);

@@ -42,7 +42,7 @@
 #define RLE_JAPANESE    1
 typedef unsigned char res_language_enumeration;
 
-_WCRTLINK res_language_enumeration _WResLanguage(void);
+_WCRTLINK res_language_enumeration _WResLanguage();
 /* for ease of migration to new name */
 #define WResLanguage _WResLanguage
 

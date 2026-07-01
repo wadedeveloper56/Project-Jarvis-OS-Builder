@@ -11,9 +11,9 @@ FileSubsystem::~FileSubsystem()
 	DEBUG((DBG_OLD, "FileSubsystem destructor\n"));
 }
 
-errno_t FileSubsystem::OpenFile(f_handle* pfh, const char* filename, int oflag, int shflag, int pmode)
+f_handle FileSubsystem::OpenFile(const char* filename, int oflag, int pmode)
 {
-	return ::OpenFile2(pfh, filename, oflag, shflag, pmode);
+	return ::OpenFile2(filename, oflag, pmode);
 }
 
 int FileSubsystem::CloseFile(f_handle handle)

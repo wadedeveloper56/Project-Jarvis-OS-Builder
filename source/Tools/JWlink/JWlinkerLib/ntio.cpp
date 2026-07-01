@@ -5,13 +5,11 @@
 #include "globals.h"
 #include "File.h"
 #include "MessagingSubsystem.h"
+#include "objio.h"
+#include "FileSubsystem.h"
 
-void MessagingSubsystem::Locator(char* filename, char* mem, unsigned rec)
-{
-    LocFile = filename;
-    LocMem = mem;
-    LocRec = rec;
-}
+int      OpenFiles;      // the number of open files
+unsigned LastResult;
 
 time_t QFModTime(int handle)
 {
@@ -21,35 +19,54 @@ time_t QFModTime(int handle)
     return buf.st_mtime;
 }
 
-f_handle NSOpen(char* name, unsigned mode)
+int DoOpen(FileSubsystem *fileSubsystem, char* name, unsigned mode, bool isexe)
 {
-    f_handle fh = NIL_HANDLE;
-    int oflag=0;
-    int shflag=0;
-    int pmode=0;
-    if (mode == TIO_READ_WRITE)
+    int     h;
+
+    //isexe = isexe;
+    //CheckBreak();
+    mode |= O_BINARY;
+    for (;; )
     {
-        oflag = _O_RDWR;
-		shflag = _SH_DENYNO;
-		pmode = S_IREAD | S_IWRITE;
+        if (OpenFiles >= MAX_OPEN_FILES) CleanCachedHandles();
+        h = fileSubsystem->OpenFile(name, mode, S_IRUSR | S_IWUSR);
+        if (h != -1)
+        {
+            OpenFiles++;
+            break;
+        }
+        if (errno != TOOMANY)
+            break;
+        if (!CleanCachedHandles())
+        {
+            break;
+        }
     }
-    OpenFile2(&fh, name, oflag, shflag, pmode);
-    return(fh);
+    return(h);
 }
 
-f_handle ExeOpen(char* name)
+f_handle NSOpen(FileSubsystem* fileSubsystem, char* name, unsigned mode)
 {
-    return(NSOpen(name, TIO_READ_WRITE));
+    int h = DoOpen(fileSubsystem, name, mode, FALSE);
+    LastResult = h;
+    if (h != -1)
+        return(h);
+    return(NIL_HANDLE);
 }
 
-f_handle QObjOpen(char* name)
+f_handle ExeOpen(FileSubsystem* fileSubsystem, char* name)
 {
-    return(NSOpen(name, TIO_READ));
+    return(NSOpen(fileSubsystem, name, TIO_READ_WRITE));
 }
 
-f_handle TempFileOpen(char* name)
+f_handle QObjOpen(FileSubsystem* fileSubsystem, char* name)
 {
-    return(NSOpen(name, TIO_READ));
+    return(NSOpen(fileSubsystem, name, TIO_READ));
+}
+
+f_handle TempFileOpen(FileSubsystem* fileSubsystem, char* name)
+{
+    return(NSOpen(fileSubsystem, name, TIO_READ));
 }
 
 int QMakeFileName(char** pos, char* name, char* fname)
@@ -126,12 +143,11 @@ void QDelete(char* name)
 	remove(name);
 }
 
-//FIXME
-f_handle QOpenR(char* name)
+f_handle QOpenR(FileSubsystem* fileSubsystem, char* name)
 {
     int     h;
 
-    h = 0;// DoOpen(name, O_RDONLY, FALSE);
+    h = DoOpen(fileSubsystem, name, O_RDONLY, FALSE);
     if (h != -1)
         return(h);
     //LnkMsg(FTL + MSG_CANT_OPEN, "12", name, strerror(errno));
@@ -139,11 +155,11 @@ f_handle QOpenR(char* name)
 }
 
 //FIXME
-f_handle QOpenRW(char* name)
+f_handle QOpenRW(FileSubsystem* fileSubsystem, char* name)
 {
     int     h;
 
-    h = 0;// DoOpen(name, O_RDWR | O_CREAT | O_TRUNC, FALSE);
+    h = DoOpen(fileSubsystem, name, O_RDWR | O_CREAT | O_TRUNC, FALSE);
     if (h != -1)
         return(h);
     //LnkMsg(FTL + MSG_CANT_OPEN, "12", name, strerror(errno));
@@ -152,5 +168,5 @@ f_handle QOpenRW(char* name)
 
 void QSeek(f_handle file, long position, char* name)
 {
-    //QLSeek(file, position, SEEK_SET, name);
+    QLSeek(file, position, SEEK_SET, name);
 }

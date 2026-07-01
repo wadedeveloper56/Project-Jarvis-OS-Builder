@@ -43,7 +43,7 @@ using namespace std;
 unsigned        FmtRelocSize;
 reloc_info* FloatFixups;
 
-void ResetReloc(void)
+void ResetReloc()
 {
 	FloatFixups = NULL;
 }
@@ -420,7 +420,7 @@ uint32_t WalkRelocList(SpillFile * spillFile, reloc_info** head, bool (*fn)(void
 	return(total);
 }
 
-void SetRelocSize(void)
+void SetRelocSize()
 {
 	if (FmtData.type & (MK_OS2 | MK_WIN_VXD))
 	{

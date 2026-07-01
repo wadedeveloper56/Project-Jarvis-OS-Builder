@@ -38,7 +38,7 @@ void SetOS2Fmt(MemorySubsystem *memorySubsystem)
     ChkBase(64 * 1024);
 }
 
-void FreeImpNameTab(void)
+void FreeImpNameTab()
 {
     FmtData.u.os2.mod_ref_list = NULL;
     FmtData.u.os2.imp_tab_list = NULL;

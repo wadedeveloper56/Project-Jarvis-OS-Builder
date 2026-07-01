@@ -14,7 +14,7 @@ using namespace std;
 infilelist* CachedLibFiles;
 infilelist* CachedFiles;
 
-void ResetObjIO(void)
+void ResetObjIO()
 {
     CachedFiles = NULL;
     CachedLibFiles = NULL;
@@ -67,7 +67,7 @@ infilelist* AllocUniqueFileEntry(MemorySubsystem *memorySubsystem, char* name, p
     return entry;
 }
 
-bool CleanCachedHandles(void)
+bool CleanCachedHandles()
 {
     infilelist* list;
 
@@ -83,7 +83,7 @@ bool CleanCachedHandles(void)
 
 #define LIB_SEARCH (INSTAT_USE_LIBPATH | INSTAT_LIBRARY)
 
-f_handle PathObjOpen(char* path_ptr, char* name, char* new_name, infilelist* list)
+f_handle PathObjOpen(FileSubsystem* fileSubsystem, char* path_ptr, char* name, char* new_name, infilelist* list)
 {
     f_handle    fp;
 
@@ -92,25 +92,25 @@ f_handle PathObjOpen(char* path_ptr, char* name, char* new_name, infilelist* lis
     {
         list->prefix = path_ptr;
         if (!QMakeFileName(&path_ptr, name, new_name)) break;
-        fp = QObjOpen(new_name);
+        fp = QObjOpen(fileSubsystem, new_name);
         if (fp != NIL_HANDLE) break;
     }
     return fp;
 }
 
-f_handle TrySearchingLib(char* name, char* new_name, infilelist* list)
+f_handle TrySearchingLib(FileSubsystem* fileSubsystem, char* name, char* new_name, infilelist* list)
 {
     f_handle            fp;
 
     fp = NIL_HANDLE;
     if (list->flags & INSTAT_USE_LIBPATH)
     {
-        fp = PathObjOpen(getenv("LIB"), name, new_name, list);
+        fp = PathObjOpen(fileSubsystem, getenv("LIB"), name, new_name, list);
     }
     return fp;
 }
 
-bool DoObjOpen(infilelist* list)
+bool DoObjOpen(FileSubsystem* fileSubsystem, infilelist* list)
 {
     char* name;
     f_handle    fp;
@@ -127,36 +127,36 @@ bool DoObjOpen(infilelist* list)
     if (list->path_list == NULL || haspath)
     {
         list->path_list = NULL;
-        fp = QObjOpen(name);
+        fp = QObjOpen(fileSubsystem, name);
         if (fp == NIL_HANDLE && !haspath)
         {
-            fp = TrySearchingLib(name, new_name, list);
+            fp = TrySearchingLib(fileSubsystem, name, new_name, list);
         }
     }
     else if (list->prefix != NULL)
     {
         path_ptr = list->prefix;
         QMakeFileName(&path_ptr, name, new_name);
-        fp = QObjOpen(new_name);
+        fp = QObjOpen(fileSubsystem, new_name);
     }
     else
     {
         fp = NIL_HANDLE;
         if (list->flags & LIB_SEARCH)
         {
-            fp = QObjOpen(name);
+            fp = QObjOpen(fileSubsystem, name);
         }
         if (fp == NIL_HANDLE)
         {
             searchpath = list->path_list;
             for (;;)
             {
-                fp = PathObjOpen(searchpath->name, name, new_name, list);
+                fp = PathObjOpen(fileSubsystem, searchpath->name, name, new_name, list);
                 if (fp != NIL_HANDLE || !(list->flags & LIB_SEARCH)) break;
                 searchpath = searchpath->next;
                 if (searchpath == NULL)
                 {
-                    fp = TrySearchingLib(name, new_name, list);
+                    fp = TrySearchingLib(fileSubsystem, name, new_name, list);
                     break;
                 }
             }
@@ -208,7 +208,7 @@ void FreeTokBuffs(MemorySubsystem *memorySubsystem)
     }
 }
 
-void BadObject(void)
+void BadObject()
 {
     DO_OR_EQUAL(infile_flags, CurrMod->f.source->file->flags, |=, INSTAT_IOERR)//CurrMod->f.source->file->flags |= INSTAT_IOERR;
     //LnkMsg(LOC + ERR + MSG_OBJ_FILE_ATTR, NULL);

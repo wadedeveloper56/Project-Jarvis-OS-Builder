@@ -16,8 +16,8 @@ extern sysblock* LinkCommands;
 extern sysblock* PrevCommand; 
 
 void FreeFormatStuff(MemorySubsystem *memorySubsystem);
-void InitCmdFile(void);
-char* GetNextLink(void);
+void InitCmdFile();
+char* GetNextLink();
 void CleanSystemList(MemorySubsystem *memory, bool check);
 void PruneSystemList(MemorySubsystem *memory);
 void BurnSystemList(MemorySubsystem *memory);

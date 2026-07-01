@@ -45,7 +45,7 @@ Linker::Linker(int argc, char** argv)
 	messagingSubsystem = new MessagingSubsystem();
 	InitNodes(memorySubsystem);
 	tokenBuffer = new TokenBuffer(memorySubsystem);
-	spillFile = new SpillFile(memorySubsystem);
+	spillFile = new SpillFile(memorySubsystem, fileSubsystem);
 	symbolTable = new SymbolTable(memorySubsystem);
 	orl = new Orl();
 	InitCmdFile();
@@ -98,7 +98,7 @@ void Linker::CleanSubSystems()
 	DEBUG((DBG_OLD, "CleanSubSystems exit\n"));
 }
 
-void Linker::ResetMisc(void)
+void Linker::ResetMisc()
 {
 	DEBUG((DBG_OLD, "ResetMisc enter\n"));
 	LinkFlags = CASE_FLAG | FAR_CALLS_FLAG;
@@ -128,7 +128,7 @@ void Linker::ResetMisc(void)
 	DEBUG((DBG_OLD, "ResetMisc exit\n"));
 }
 
-void Linker::ResetSubSystems(void)
+void Linker::ResetSubSystems()
 {
 	DEBUG((DBG_OLD, "ResetSubSystems enter\n"));
 	ResetPermData(memorySubsystem);
@@ -163,13 +163,13 @@ void Linker::DoLink(char* cmdline)
 {
 }
 
-void Linker::LinkMeBaby(void)
+void Linker::LinkMeBaby()
 {
 	ResetSubSystems();
 	DoLink(ArgSave);
 }
 
-int Linker::Spawn(void (Linker::* fn)(void))
+int Linker::Spawn(void (Linker::* fn)())
 {
 	void* save_env;
 	jmp_buf env;

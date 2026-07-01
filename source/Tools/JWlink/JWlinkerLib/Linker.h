@@ -35,11 +35,11 @@ public:
 	Linker(int argc, char** argv);
 	~Linker();
 	int link(char* cmds);
-	int Spawn(void (Linker::*fn)(void));
-	void LinkMeBaby(void);
-	void CleanSubSystems(void);
-	void ResetSubSystems(void);
+	int Spawn(void (Linker::*fn)());
+	void LinkMeBaby();
+	void CleanSubSystems();
+	void ResetSubSystems();
 	void DoLink(char* cmdline);
-	void ResetMisc(void);
+	void ResetMisc();
 };
 

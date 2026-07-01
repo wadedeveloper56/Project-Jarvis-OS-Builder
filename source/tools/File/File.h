@@ -32,7 +32,7 @@ enum perms {// names for permissions
 	resolve_symlinks = 0x40000
 };
 
-errno_t OpenFile2(f_handle* pfh, const char* filename, int oflag, int shflag, int pmode);
+f_handle OpenFile2(const char* filename, int oflag, int pmode);
 int CloseFile2(f_handle handle);
 int FlushFile2(f_handle handle);
 int ReadFile2(f_handle handle, void* const buffer, unsigned const buffer_size);

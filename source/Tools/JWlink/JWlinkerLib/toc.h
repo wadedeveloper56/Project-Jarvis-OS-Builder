@@ -1,4 +1,4 @@
 #pragma once
 
 void ResetToc();
-void CleanToc(void);
+void CleanToc();

@@ -5,13 +5,15 @@
 #include "globals.h"
 #include "ntio.h"
 #include "debug.h"
+#include "FileSubsystem.h"
 
 #define TEMPFNAME "WLK02112.xx`"               
 #define TEMPFNAME_SIZE 13
 
-SpillFile::SpillFile(MemorySubsystem *memorySubsystem) : TempFile(NIL_HANDLE), TFileName(nullptr), TmpFSize(0)
+SpillFile::SpillFile(MemorySubsystem *memorySubsystem, FileSubsystem *fileSubsystem) : TempFile(NIL_HANDLE), TFileName(nullptr), TmpFSize(0)
 {
 	this->memorySubsystem = memorySubsystem;
+	this->fileSubsystem = fileSubsystem;
 }
 
 SpillFile::~SpillFile()
@@ -75,12 +77,12 @@ f_handle SpillFile::OpenTempFile(char** fname)
 		{
 		}
 		*ptr += 1;
-		fhdl = TempFileOpen(*fname);
+		fhdl = TempFileOpen(fileSubsystem, *fname);
 		if (fhdl == NIL_HANDLE) break;
 		QClose(fhdl, *fname);
 		++tlen;
 	}
-	return QOpenRW(*fname);
+	return QOpenRW(fileSubsystem, *fname);
 }
 
 unsigned long SpillFile::SpillAlloc(unsigned amt)

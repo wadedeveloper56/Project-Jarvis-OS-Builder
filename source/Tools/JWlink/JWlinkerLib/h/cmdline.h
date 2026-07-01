@@ -41,7 +41,7 @@ extern bool             ProcXDbg( void );
 extern bool             ProcIntDbg( void );
 
 extern void             InitCmdFile( void );
-extern void             SetSegMask(void);
+extern void             SetSegMask();
 extern char             *GetNextLink( void );
 extern void             DoCmdFile( char * );
 extern void             Syntax( void );

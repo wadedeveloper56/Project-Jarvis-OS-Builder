@@ -18,7 +18,7 @@ void ResetToc()
     TocSym = NULL;
 }
 
-void CleanToc(void)
+void CleanToc()
 {
     ZapHTable(Toc);
 }

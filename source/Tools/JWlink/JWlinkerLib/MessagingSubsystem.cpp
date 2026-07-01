@@ -53,7 +53,8 @@ pick(TRADEMARK,                banner3),
 };
 
 MessagingSubsystem::MessagingSubsystem()
-{}
+{
+}
 
 MessagingSubsystem::~MessagingSubsystem()
 {
@@ -75,4 +76,11 @@ void MessagingSubsystem::reset()
 	LocRec = 0;
 	MsgArgInfo.index = -1;
 	memset(MsgFlags, 0xFF, MSG_ARRAY_SIZE);
+}
+
+void MessagingSubsystem::Locator(char* filename, char* mem, unsigned rec)
+{
+	LocFile = filename;
+	LocMem = mem;
+	LocRec = rec;
 }

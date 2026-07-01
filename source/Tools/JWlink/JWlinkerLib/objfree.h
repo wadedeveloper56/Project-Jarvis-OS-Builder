@@ -19,4 +19,4 @@ void FreeAMod(mod_entry* mod);
 #if defined(_OS2) || defined( _QNXLOAD )
 void FreeSegFlags(MemorySubsystem *memorySubsystem, seg_flags* curr);
 #endif
-void FreeObjInfo(void);
+void FreeObjInfo();

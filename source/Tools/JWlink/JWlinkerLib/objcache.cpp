@@ -9,14 +9,14 @@
 
 using namespace std;
 
-bool CacheOpen(MemorySubsystem *memorySubsystem, file_list* list)
+bool CacheOpen(MemorySubsystem *memorySubsystem, FileSubsystem* fileSubsystem, file_list* list)
 {
     infilelist* file;
 
     if (list == NULL) return true;
     file = list->file;
     if (file->flags & INSTAT_IOERR) return false;
-    if (DoObjOpen(file))
+    if (DoObjOpen(fileSubsystem, file))
     {
         DO_OR_EQUAL(infile_flags, file->flags, |=, INSTAT_IN_USE)
     }
@@ -97,7 +97,7 @@ bool CacheEnd(file_list* list, unsigned long pos)
     return pos >= list->file->len;
 }
 
-void CacheFini(void)
+void CacheFini()
 {
 }
 
@@ -112,7 +112,7 @@ void FreeObjCache(file_list* list)
     list = list;
 }
 
-bool DumpObjCache(void)
+bool DumpObjCache()
 {
     return false;
 }
