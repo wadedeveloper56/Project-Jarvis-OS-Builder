@@ -34,6 +34,7 @@
 #include "linkutil.h"
 #include "procfile.h"
 #include "VirtualMemory.h"
+#include "lsymtab.h"
 
 Linker::Linker(int argc, char** argv)
 {
@@ -92,7 +93,7 @@ void Linker::CleanSubSystems()
 	DEBUG((DBG_OLD, "CleanSubSystems: calling FreeVirtMem()\n"));
 	//FreeVirtMem(); not needed
 	CleanToc();
-	//CleanSym();
+	CleanSym(memorySubsystem);
 	//CleanPermData();
 	DEBUG((DBG_OLD, "CleanSubSystems exit\n"));
 }

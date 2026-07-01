@@ -12,3 +12,4 @@ extern block_data PermBlocks;
 void GetSymBlock();
 void MakePass1Blocks();
 void ReleasePass1(MemorySubsystem *memorySubsystem);
+void RelSymBlock(MemorySubsystem* memorySubsystem);

@@ -183,6 +183,12 @@
     <ClInclude Include="cmdnov.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="lsymtab.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="impexp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="JWlinkerLib.cpp">
@@ -348,6 +354,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="cmdnov.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lsymtab.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="impexp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

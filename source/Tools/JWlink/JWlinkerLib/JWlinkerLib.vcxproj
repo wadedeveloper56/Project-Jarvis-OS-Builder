@@ -204,12 +204,14 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="globals.h" />
     <ClInclude Include="hash.h" />
+    <ClInclude Include="impexp.h" />
     <ClInclude Include="libr.h" />
     <ClInclude Include="Linker.h" />
     <ClInclude Include="linkutil.h" />
     <ClInclude Include="loadfile.h" />
     <ClInclude Include="loadnov.h" />
     <ClInclude Include="loadpe.h" />
+    <ClInclude Include="lsymtab.h" />
     <ClInclude Include="mapio.h" />
     <ClInclude Include="MemorySubsystem.h" />
     <ClInclude Include="MessagingSubsystem.h" />
@@ -262,6 +264,7 @@
     <ClCompile Include="FileSubsystem.cpp" />
     <ClCompile Include="globals.cpp" />
     <ClCompile Include="hash.cpp" />
+    <ClCompile Include="impexp.cpp" />
     <ClCompile Include="JWlinkerLib.cpp" />
     <ClCompile Include="libr.cpp" />
     <ClCompile Include="Linker.cpp" />
@@ -269,6 +272,7 @@
     <ClCompile Include="loadfile.cpp" />
     <ClCompile Include="loadnov.cpp" />
     <ClCompile Include="loadpe.cpp" />
+    <ClCompile Include="lsymtab.cpp" />
     <ClCompile Include="mapio.cpp" />
     <ClCompile Include="MemorySubsystem.cpp" />
     <ClCompile Include="MessagingSubsystem.cpp" />

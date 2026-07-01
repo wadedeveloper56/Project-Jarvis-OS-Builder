@@ -17,6 +17,26 @@ typedef enum file_defext
 #include "ldefext.h"
 } file_defext; 
 
+// some handy macros for checking and setting symbol type bits
+
+#define SYM_TYPE_MASK      0xF
+
+#define IS_SYM_COMMUNAL(sym) (((sym)->info & SYM_TYPE_MASK) <= SYM_COMDAT)
+#define IS_SYM_NICOMDEF(sym) (((sym)->info & SYM_TYPE_MASK) <= SYM_COMMUNAL_32)
+#define IS_SYM_COMDAT(sym)   (((sym)->info & SYM_TYPE_MASK) == SYM_COMDAT)
+#define IS_SYM_ALIAS(sym)    (((sym)->info & SYM_TYPE_MASK) == SYM_ALIAS)
+#define IS_SYM_IMPORTED(sym) (((sym)->info & SYM_TYPE_MASK) == SYM_IMPORTED)
+#define IS_SYM_GROUP(sym)    (((sym)->info & SYM_TYPE_MASK) == SYM_GROUP)
+#define IS_SYM_REGULAR(sym)  (((sym)->info & SYM_TYPE_MASK) == SYM_REGULAR)
+#define IS_SYM_VF_REF(sym)   (((sym)->info & SYM_TYPE_MASK) >= SYM_VF_REF)
+#define IS_SYM_PURE_REF(sym) (((sym)->info & SYM_TYPE_MASK) == SYM_PURE_REF)
+#define IS_SYM_LAZY_REF(sym) (((sym)->info & SYM_TYPE_MASK) == SYM_LAZY_REF)
+#define IS_SYM_A_REF(sym)    (((sym)->info & SYM_TYPE_MASK) >= SYM_LAZY_REF)
+#define IS_SYM_WEAK_REF(sym) (((sym)->info & SYM_TYPE_MASK) >= SYM_WEAK_REF)
+#define IS_SYM_LINK_WEAK(sym)(((sym)->info & SYM_TYPE_MASK) ==SYM_LINK_WEAK_REF)
+#define IS_SYM_COMM32(sym)   (((sym)->info & SYM_TYPE_MASK) == SYM_COMMUNAL_32)
+#define SET_SYM_TYPE(sym,type) ((sym)->info = ((sym)->info & ~SYM_TYPE_MASK)\
+
 #define MAKE_RELOCS             0x00000001
 #define SEARCHING_LIBRARIES     0x00000002
 #define LIBRARIES_ADDED         0x00000004
@@ -1684,3 +1704,4 @@ typedef struct rtpblock
 	uint16_t     extender_flags;     /* for undocumented "runtime flags" */
 	uint16_t     unpriv;
 } rtpblock;
+

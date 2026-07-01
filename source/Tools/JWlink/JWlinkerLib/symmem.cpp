@@ -7,7 +7,6 @@
 
 using namespace std;
 
-
 block_data Pass1Blocks;
 block_data PermBlocks;
 
@@ -22,6 +21,12 @@ void MakePass1Blocks()
 }
 
 void ReleasePass1(MemorySubsystem *memorySubsystem)
+{
+    FreeList(memorySubsystem, Pass1Blocks.list);
+    Pass1Blocks.list = NULL;
+}
+
+void RelSymBlock(MemorySubsystem* memorySubsystem)
 {
     FreeList(memorySubsystem, Pass1Blocks.list);
     Pass1Blocks.list = NULL;
