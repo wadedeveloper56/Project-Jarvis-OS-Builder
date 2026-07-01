@@ -189,6 +189,12 @@
     <ClInclude Include="impexp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="msg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="banner.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="JWlinkerLib.cpp">

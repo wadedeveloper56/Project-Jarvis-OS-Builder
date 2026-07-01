@@ -187,6 +187,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="banner.h" />
     <ClInclude Include="carve.h" />
     <ClInclude Include="cmd16m.h" />
     <ClInclude Include="cmdall.h" />
@@ -215,6 +216,7 @@
     <ClInclude Include="mapio.h" />
     <ClInclude Include="MemorySubsystem.h" />
     <ClInclude Include="MessagingSubsystem.h" />
+    <ClInclude Include="msg.h" />
     <ClInclude Include="ntio.h" />
     <ClInclude Include="obj2supp.h" />
     <ClInclude Include="objcache.h" />
