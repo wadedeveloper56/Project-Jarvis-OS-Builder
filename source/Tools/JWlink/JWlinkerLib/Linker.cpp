@@ -160,7 +160,8 @@ void Linker::ResetSubSystems(void)
 }
 
 void Linker::DoLink(char* cmdline)
-{}
+{
+}
 
 void Linker::LinkMeBaby(void)
 {

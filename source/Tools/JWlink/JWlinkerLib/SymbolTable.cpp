@@ -4,8 +4,9 @@
 #include "Structs.h"
 #include "globals.h"
 #include "symmem.h"
+#include "debug.h"
 
-SymbolTable::SymbolTable(MemorySubsystem *memorySubsystem) : memorySubsystem(memorySubsystem)
+SymbolTable::SymbolTable(MemorySubsystem* memorySubsystem) : memorySubsystem(memorySubsystem)
 {
 	this->memorySubsystem = memorySubsystem;
 	GlobalSymPtrs = (symbol**)memorySubsystem->AllocateMemory(GLOBAL_TABALLOC);
@@ -14,6 +15,7 @@ SymbolTable::SymbolTable(MemorySubsystem *memorySubsystem) : memorySubsystem(mem
 
 SymbolTable::~SymbolTable()
 {
+	DEBUG((DBG_OLD, "SymbolTable destructor\n"));
 	memorySubsystem->FreeMemory(GlobalSymPtrs);
 	memorySubsystem->FreeMemory(StaticSymPtrs);
 }

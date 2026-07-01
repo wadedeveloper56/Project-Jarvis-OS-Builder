@@ -4,6 +4,7 @@
 #include "MemorySubsystem.h"
 #include "globals.h"
 #include "ntio.h"
+#include "debug.h"
 
 #define TEMPFNAME "WLK02112.xx`"               
 #define TEMPFNAME_SIZE 13
@@ -14,7 +15,9 @@ SpillFile::SpillFile(MemorySubsystem *memorySubsystem) : TempFile(NIL_HANDLE), T
 }
 
 SpillFile::~SpillFile()
-{}
+{
+	DEBUG((DBG_OLD, "SpillFile destructor\n"));
+}
 
 void SpillFile::CloseSpillFile()
 {
