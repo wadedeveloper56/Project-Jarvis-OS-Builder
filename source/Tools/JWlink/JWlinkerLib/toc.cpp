@@ -2,6 +2,7 @@
 #include "toc.h"
 #include "Structs.h"
 #include "globals.h"
+#include "hash.h"
 
 pHTable  Toc;
 char* TocName;
@@ -15,4 +16,9 @@ void ResetToc()
     TocSize = 0;
     TocName = NULL;
     TocSym = NULL;
+}
+
+void CleanToc(void)
+{
+    ZapHTable(Toc);
 }

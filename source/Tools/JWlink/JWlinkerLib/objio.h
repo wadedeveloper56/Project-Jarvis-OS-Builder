@@ -23,4 +23,4 @@ uint16_t CalcAlign(uint32_t pos, uint16_t align);
 void InitTokBuff(MemorySubsystem *memorySubsystem);
 void FreeTokBuffs(MemorySubsystem *memorySubsystem);
 void BadObject(void);
-void EarlyEOF(shared_ptr<MessagingSubsystem> messagingSubsystem);
+void EarlyEOF(MessagingSubsystem* messagingSubsystem);

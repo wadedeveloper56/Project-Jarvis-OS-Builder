@@ -91,7 +91,7 @@ void Linker::CleanSubSystems()
 	FreeObjInfo();
 	DEBUG((DBG_OLD, "CleanSubSystems: calling FreeVirtMem()\n"));
 	//FreeVirtMem(); not needed
-	//CleanToc();
+	CleanToc();
 	//CleanSym();
 	//CleanPermData();
 	DEBUG((DBG_OLD, "CleanSubSystems exit\n"));

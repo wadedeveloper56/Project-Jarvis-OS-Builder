@@ -214,7 +214,7 @@ void BadObject(void)
     //LnkMsg(LOC + ERR + MSG_OBJ_FILE_ATTR, NULL);
 }
 
-void EarlyEOF(shared_ptr<MessagingSubsystem> messagingSubsystem)
+void EarlyEOF(MessagingSubsystem*messagingSubsystem)
 {
     DO_OR_EQUAL(infile_flags, CurrMod->f.source->file->flags, |=, INSTAT_IOERR)//CurrMod->f.source->file->flags |= INSTAT_IOERR;
     messagingSubsystem->Locator(CurrMod->f.source->file->name, NULL, 0);
