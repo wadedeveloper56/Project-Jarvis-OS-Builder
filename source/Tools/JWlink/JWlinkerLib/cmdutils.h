@@ -6,5 +6,7 @@
 
 using namespace std;
 
+extern cmdfilelist* CmdFile;
+
 section* NewSection(MemorySubsystem *memorySubsystem);
 char* FileName(MemorySubsystem *memorySubsystem,char* buff, unsigned len, file_defext etype, bool force);

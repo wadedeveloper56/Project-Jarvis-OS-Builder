@@ -1,15 +1,6 @@
-// pch.h: This is a precompiled header file.
-// Files listed below are compiled only once, improving build performance for future builds.
-// This also affects IntelliSense performance, including code completion and many code browsing features.
-// However, files listed here are ALL re-compiled if any one of them is updated between builds.
-// Do not add files here that you will be updating frequently as this negates the performance advantage.
-
 #ifndef PCH_H
 #define PCH_H
 
-// add headers that you want to pre-compile here
-
-// add headers that you want to pre-compile here
 #include "framework.h"
 #include <windows.h>
 #include <stdint.h>
@@ -40,6 +31,8 @@
 #define DO_AND_EQUAL(t,a,b,c) a = (t)((a)&(c));
 #define _LnkAlloc(type,dest,size) dest = (type)memorySubsystem->AllocateMemory( size )
 #define _LnkFree(ptr)                          memorySubsystem->FreeMemory( ptr )
+#define CODE_SEGMENT    1
+#define DATA_SEGMENT    2
 
 #if defined( __UNIX__ )
 #define PATH_SEP '/'
@@ -55,7 +48,6 @@
 #define IS_PATH_SEP( a ) ((a)=='\\' || (a)=='/' || (a)==':')
 #define CASE_PATH_SEP   case '\\': case '/': case ':'
 #define PATH_LIST_SEP ';'
-//    #define CASE_SENSITIVE
 #endif
 
 #pragma warning(disable:4267)
@@ -75,4 +67,4 @@
 #pragma warning(disable:26495)
 
 
-#endif //PCH_H
+#endif 

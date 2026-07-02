@@ -8,7 +8,7 @@
 #include "objio.h"
 #include "FileSubsystem.h"
 
-int      OpenFiles;      // the number of open files
+int      OpenFiles;           
 unsigned LastResult;
 
 time_t QFModTime(int handle)
@@ -23,8 +23,6 @@ int DoOpen(FileSubsystem *fileSubsystem, char* name, unsigned mode, bool isexe)
 {
     int     h;
 
-    //isexe = isexe;
-    //CheckBreak();
     mode |= O_BINARY;
     for (;; )
     {
@@ -133,6 +131,13 @@ unsigned QWrite(f_handle file, void* buffer, unsigned len, char* name)
 	return WriteFile2(file, buffer, len);
 }
 
+char NLSeq[] = { "\r\n" };
+
+void QWriteNL(f_handle file, char* name)
+{
+    QWrite(file, NLSeq, sizeof(NLSeq) - 1, name);
+}
+
 void QClose(f_handle file, char* name)
 {
 	CloseFile2(file);
@@ -150,11 +155,9 @@ f_handle QOpenR(FileSubsystem* fileSubsystem, char* name)
     h = DoOpen(fileSubsystem, name, O_RDONLY, FALSE);
     if (h != -1)
         return(h);
-    //LnkMsg(FTL + MSG_CANT_OPEN, "12", name, strerror(errno));
     return(NIL_HANDLE);
 }
 
-//FIXME
 f_handle QOpenRW(FileSubsystem* fileSubsystem, char* name)
 {
     int     h;
@@ -162,7 +165,6 @@ f_handle QOpenRW(FileSubsystem* fileSubsystem, char* name)
     h = DoOpen(fileSubsystem, name, O_RDWR | O_CREAT | O_TRUNC, FALSE);
     if (h != -1)
         return(h);
-    //LnkMsg(FTL + MSG_CANT_OPEN, "12", name, strerror(errno));
     return(NIL_HANDLE);
 }
 

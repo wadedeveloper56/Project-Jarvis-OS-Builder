@@ -8,7 +8,6 @@
 
 #define BAN_VER_STR "2.0"
 
-/* these should all be _BANVER/100.0 */
 #define _I86WCGL_VERSION_       BAN_VER_STR
 #define _386WCGL_VERSION_       BAN_VER_STR
 #define _WCC_VERSION_           BAN_VER_STR
@@ -17,7 +16,6 @@
 #define _WFC_VERSION_           BAN_VER_STR
 #define _WFL_VERSION_           BAN_VER_STR
 #define _WLINK_VERSION_         BAN_VER_STR
-/* these can be what ever they want to be */
 #define _BPATCH_VERSION_        BAN_VER_STR
 #define _MOUSEFIX_VERSION_      BAN_VER_STR
 #define _XXXSERV_VERSION_       BAN_VER_STR
@@ -69,23 +67,23 @@
 
 enum msg_class
 {
-    OUT_TERM = 0x00100000,
-    OUT_MAP = 0x00200000,
-    INF = 0x00000000 + OUT_TERM,
-    MAP = 0x00000000 + OUT_MAP,
-    YELL = 0x00010000 + OUT_TERM,
-    WRN = 0x00020000 + OUT_TERM + OUT_MAP,
-    MILD_ERR = 0x00030000 + OUT_TERM + OUT_MAP,
-    ERR = 0x00040000 + OUT_TERM + OUT_MAP,
-    FTL = 0x00050000 + OUT_TERM + OUT_MAP,  /* fatal */
-    BANNER = 0x00060000,
-    LINE = 0x00080000,
-    LOC = 0x00400000,
-    LOC_REC = 0x00800000 + LOC,
-    CLASS_MSK = 0x00070000,
-    OUT_MSK = 0x00300000,
-    NUM_MSK = 0x0000ffff,
-    NUM_SHIFT = 16
+	OUT_TERM = 0x00100000,
+	OUT_MAP = 0x00200000,
+	INF = 0x00000000 + OUT_TERM,
+	MAP = 0x00000000 + OUT_MAP,
+	YELL = 0x00010000 + OUT_TERM,
+	WRN = 0x00020000 + OUT_TERM + OUT_MAP,
+	MILD_ERR = 0x00030000 + OUT_TERM + OUT_MAP,
+	ERR = 0x00040000 + OUT_TERM + OUT_MAP,
+	FTL = 0x00050000 + OUT_TERM + OUT_MAP,
+	BANNER = 0x00060000,
+	LINE = 0x00080000,
+	LOC = 0x00400000,
+	LOC_REC = 0x00800000 + LOC,
+	CLASS_MSK = 0x00070000,
+	OUT_MSK = 0x00300000,
+	NUM_MSK = 0x0000ffff,
+	NUM_SHIFT = 16
 };
 
 
@@ -99,10 +97,11 @@ enum msg_num
 pick(PRODUCT, banner1(IDV "JWlink", _WLINK_VERSION_)),
 pick(COPYRIGHT, banner2("1985")),
 pick(TRADEMARK, banner3),
-//pick( TRADEMARK2,               banner3a ),
 };
 
 #define MSG_LANG_SPACING        1000
+#define RESOURCE_MAX_SIZE       128
+#define MAX_MSG_SIZE 512
 
 #if 0
 #define IDV     "** EXPERIMENTAL ** "
@@ -116,185 +115,185 @@ pick(TRADEMARK, banner3),
 #define pick( code, string )  code,
 enum message_texts
 {
-    MSG_PRODUCT,
-    MSG_COPYRIGHT,
-	pick(MSG_INTERNAL,            "** internal ** - %s")
-	pick(MSG_LOADING_OBJECT,      "loading object files")
-	pick(MSG_SEARCHING_LIBS,      "searching libraries")
-	pick(MSG_CREATE_MAP,          "creating map file")
-	pick(MSG_CREATE_EXE,          "creating %f")
-	pick(MSG_USING_SPILL,         "using spill file")
-	pick(MSG_CANT_OPEN,           "cannot open %1 : %2")
-	pick(MSG_NO_DYN_MEM,          "dynamic memory exhausted")
-	pick(MSG_IO_PROBLEM,          "I/O error processing %1 : %2")   /* 10 */
-	pick(MSG_OBJ_FILE_ATTR,       "invalid object file attribute")
-	pick(MSG_LIB_FILE_ATTR,       "invalid library file attribute")
-	pick(MSG_BREAK_HIT,           "break key detected")
-	pick(MSG_STACK_NOT_FOUND,     "stack segment not found")
-	pick(MSG_BAD_RELOC_TYPE,      "bad relocation type specified")
-	pick(MSG_BAD_ABS_FIXUP,       "%a: absolute target invalid for self-relative relocation")
-	pick(MSG_BAD_REL_FIXUP,       "bad location specified for self-relative relocation at %a")
-	pick(MSG_FIXUP_OFF_RANGE,     "relocation offset at %a is out of range")
-	pick(MSG_SEG_RELOC_OUT,       "segment relocation at %a")
-	pick(MSG_GROUP_TOO_BIG,       "size of group %s exceeds 64k by %l bytes")
-	pick(MSG_SEG_TOO_BIG,         "size of segment %s exceeds 64k by %l bytes")
-	pick(MSG_CANT_HAVE_START,     "cannot have a starting address with an imported symbol")
-	pick(MSG_NO_START_ADDR,       "no starting address found, using %a")
-	pick(MSG_NO_OVERLAY_LOADER,   "missing overlay loader")         /* 24 */
-	pick(MSG_VECT_RANGE,          "%s vector %d is out of range")
-	pick(MSG_RESERVED_SYM_DEFINED,"redefinition of reserved symbol %s")
-	pick(MSG_MULT_DEF,            "redefinition of %S ignored")
-	pick(MSG_UNDEF_REF,           "%S is an undefined reference")
-	pick(MSG_EARLY_EOF,           "premature end of file encountered")
-	pick(MSG_MULT_START_ADDRS,    "multiple starting addresses found")
-	pick(MSG_SEG_IN_TWO_GROUPS,   "segment %1 is in group %2 and group %3")
-	pick(MSG_REC_NOT_DONE,        "record (type 0x%x) not processed")
-	pick(MSG_DIRECTIVE_ERR,       "directive error near '%s'")
-	pick(MSG_NO_OFFSET_WITH_DLL,  "%a: cannot have an offset with an imported symbol")
-	pick(MSG_EXE_NAME,            "Executable Image: %s")
-	pick(MSG_CREATED_ON,          "Created on:       %1 %2")
-	pick(MSG_UNDEF_SYM,           "file %1(%2): undefined symbol %S")
-	pick(MSG_DEBUG_AFTER_FILES,   "DEBUG directive appears after object files")
-	pick(MSG_ALIGN_TOO_SMALL,     "ALIGNMENT value too small")      /* 39 */
-	pick(MSG_IMPORT_ORD_INVALID,  "ordinal in IMPORT directive not valid")
-	pick(MSG_EXPORT_ORD_INVALID,  "ordinal in EXPORT directive not valid")
+	MSG_PRODUCT,
+	MSG_COPYRIGHT,
+	pick(MSG_INTERNAL, "** internal ** - %s")
+	pick(MSG_LOADING_OBJECT, "loading object files")
+	pick(MSG_SEARCHING_LIBS, "searching libraries")
+	pick(MSG_CREATE_MAP, "creating map file")
+	pick(MSG_CREATE_EXE, "creating %f")
+	pick(MSG_USING_SPILL, "using spill file")
+	pick(MSG_CANT_OPEN, "cannot open %1 : %2")
+	pick(MSG_NO_DYN_MEM, "dynamic memory exhausted")
+	pick(MSG_IO_PROBLEM, "I/O error processing %1 : %2")
+	pick(MSG_OBJ_FILE_ATTR, "invalid object file attribute")
+	pick(MSG_LIB_FILE_ATTR, "invalid library file attribute")
+	pick(MSG_BREAK_HIT, "break key detected")
+	pick(MSG_STACK_NOT_FOUND, "stack segment not found")
+	pick(MSG_BAD_RELOC_TYPE, "bad relocation type specified")
+	pick(MSG_BAD_ABS_FIXUP, "%a: absolute target invalid for self-relative relocation")
+	pick(MSG_BAD_REL_FIXUP, "bad location specified for self-relative relocation at %a")
+	pick(MSG_FIXUP_OFF_RANGE, "relocation offset at %a is out of range")
+	pick(MSG_SEG_RELOC_OUT, "segment relocation at %a")
+	pick(MSG_GROUP_TOO_BIG, "size of group %s exceeds 64k by %l bytes")
+	pick(MSG_SEG_TOO_BIG, "size of segment %s exceeds 64k by %l bytes")
+	pick(MSG_CANT_HAVE_START, "cannot have a starting address with an imported symbol")
+	pick(MSG_NO_START_ADDR, "no starting address found, using %a")
+	pick(MSG_NO_OVERLAY_LOADER, "missing overlay loader")
+	pick(MSG_VECT_RANGE, "%s vector %d is out of range")
+	pick(MSG_RESERVED_SYM_DEFINED, "redefinition of reserved symbol %s")
+	pick(MSG_MULT_DEF, "redefinition of %S ignored")
+	pick(MSG_UNDEF_REF, "%S is an undefined reference")
+	pick(MSG_EARLY_EOF, "premature end of file encountered")
+	pick(MSG_MULT_START_ADDRS, "multiple starting addresses found")
+	pick(MSG_SEG_IN_TWO_GROUPS, "segment %1 is in group %2 and group %3")
+	pick(MSG_REC_NOT_DONE, "record (type 0x%x) not processed")
+	pick(MSG_DIRECTIVE_ERR, "directive error near '%s'")
+	pick(MSG_NO_OFFSET_WITH_DLL, "%a: cannot have an offset with an imported symbol")
+	pick(MSG_EXE_NAME, "Executable Image: %s")
+	pick(MSG_CREATED_ON, "Created on:       %1 %2")
+	pick(MSG_UNDEF_SYM, "file %1(%2): undefined symbol %S")
+	pick(MSG_DEBUG_AFTER_FILES, "DEBUG directive appears after object files")
+	pick(MSG_ALIGN_TOO_SMALL, "ALIGNMENT value too small")
+	pick(MSG_IMPORT_ORD_INVALID, "ordinal in IMPORT directive not valid")
+	pick(MSG_EXPORT_ORD_INVALID, "ordinal in EXPORT directive not valid")
 	pick(MSG_TOO_MANY_IOPL_WORDS, "too many IOPL words in EXPORT directive")
-	pick(MSG_DUP_EXP_ORDINAL,     "duplicate exported ordinal")
-	pick(MSG_EXP_SYM_NOT_FOUND,   "exported symbol %s not found")
-	pick(MSG_SEG_FLAG_MULT_DEFD,  "segment attribute defined more than once")
-	pick(MSG_SEG_NAME_NOT_FOUND,  "segment name %s not found")
-	pick(MSG_CLASS_NAME_NOT_FOUND,"class name %s not found")
-	pick(MSG_AUTO_SEG_MULT_DEFD,  "inconsistent attributes for automatic data segment")
-	pick(MSG_INV_STUB_FILE,       "invalid STUB file")              /* 49 */
-	pick(MSG_INV_OLD_DLL,         "invalid DLL specified in OLDLIBRARY option")
-	pick(MSG_STUB_SAME_AS_LOAD,   "STUB file name same as executable file name")
-	pick(MSG_REL_NOT_SAME_SEG,    "relocation at %a not in the same segment")
-	pick(MSG_DLL_IN_REL_RELOC,    "%a: cannot reach a DLL with a relative relocation")
-	pick(MSG_CANT_USE_LOCALS,     "debugging information incompatible: using line numbers only")
-	pick(MSG_FRAME_EQ_TARGET,     "%a: frame must be the same as the target in protect mode")
-	pick(MSG_CANT_FIND_MEMBER,    "cannot find library member %1(%2)")
-	pick(MSG_MULTIPLE_MODES_FOUND,"executable format has been established")
-	pick(MSG_FORMAT_BAD_OPTION,   "option %s not valid for %f")
-	pick(MSG_VALUE_TOO_LARGE,     "value for %s too large")         /* 59 */
-	pick(MSG_VALUE_INCORRECT,     "value for %s incorrect")
-	pick(MSG_MULT_REALBREAKS,     "multiple values specified for REALBREAK")
-	pick(MSG_DLL_WITH_386,        "export and import records not valid for %f")
-	pick(MSG_INVALID_FLAT_RELOC,    "invalid relocation for flat memory model at %a")
-	pick(MSG_CANT_COMBINE_32_AND_16,"cannot combine 32-bit segments (%1) with 16-bit segments (%2)")
-	pick(MSG_BREAKSYM_NOT_FOUND,    "REALBREAK symbol %s not found")
-	pick(MSG_BAD_IMP_REL_RELOC,     "invalid relative relocation type for an import at %a")
-	pick(MSG_NOV_NO_CODE_DATA_RELOC,"%a: cannot relocate between code and data in Novell formats")
-	pick(MSG_ABS_SEG_FIXUP_BAD,     "absolute segment fixup not valid in protect mode")
-	pick(MSG_CHECK_NOT_FOUND,       "unload CHECK procedure not found")
-	pick(MSG_START_PROC_NOT_FOUND,  "START procedure not found")
-	pick(MSG_EXIT_PROC_NOT_FOUND,   "EXIT procedure not found")
-	pick(MSG_NO_SECTION_IN_ROOT,    "SECTION directive not allowed in root")
-	pick(MSG_BAD_NOV_FILE_TYPE,     "bad Novell file format specified")
-	pick(MSG_CIRCULAR_ALIAS_FOUND,  "circular alias found for %s")
-	pick(MSG_EXPECTING_END,         "expecting an END directive")   /* 75 */
-	pick(MSG_OPTION_MULTIPLY_DEFD,  "%s option multiply specified")
-	pick(MSG_NOT_MULTIPLE_OF_8,     "%s is not a multiple of 8")
-	pick(MSG_BOTH_RELOC_OPTIONS,    "both relocation options specified")
-	pick(MSG_TRANS_RELOCS_NEEDED,   "relocations needed for transparent data")
-	pick(MSG_FOUND_XXBIT_OBJ,       "file %s is a %d-bit object file")
-	pick(MSG_TOO_MANY_SELECTORS,    "too many selectors needed")
-	pick(MSG_BAD_REC_TYPE,          "invalid record type 0x%x")
-	pick(MSG_FRAME_INVALID,         "cannot reference address %A from frame %x")
-	pick(MSG_BAD_TARG_OFF,          "target offset exceeds 64K at %a")
-	#ifdef __UNIX__
-	pick(MSG_PRESS_CTRL_Z,          "Press CTRL/D to finish")
-	#else
-	pick(MSG_PRESS_CTRL_Z,          "Press CTRL/Z and then RETURN to finish")
-	#endif
-	pick(MSG_INV_COM_START_ADDR,       "invalid starting address for .COM file")
-	pick(MSG_STACK_SEG_IGNORED,        "stack segment ignored in .COM file")
-	pick(MSG_NO_VIRT_MEM,              "virtual memory exhausted")  /* 88 */
-	pick(MSG_COM_TOO_LARGE,            "program too large for a .COM file")
-	pick(MSG_MULT_DEF_BY,              "redefinition of %1 by %2 ignored")
-	pick(MSG_OVL_GROUP_SPLIT,          "group %s is in more than one overlay")
-	pick(MSG_NEWSEG_BEFORE_OBJ,        "NEWSEGMENT directive appears before object files")
-	pick(MSG_CANT_OPEN_NO_REASON,      "cannot open %s")
-	pick(MSG_IO_PROBLEM_NO_REASON,     "I/O error processing %s")
-	pick(MSG_DEBUG_TOO_LARGE,          "%s debugging information too large")
-	pick(MSG_INCOMPATIBLE_DBI_FOUND,   "incompatible types of debugging information found")
-	pick(MSG_TOO_MANY_LIB_MODS,        "too many library modules")
-	pick(MSG_OFFSET_MUST_BE_ALIGNED,   "Offset option must be a multiple of %l")
-	pick(MSG_SYMBOL_NAME_TOO_LONG,     "symbol name too long: %s")   /* 99 */
-	pick(MSG_MOD_TRACE,                "%S referenced by module %s")
-	pick(MSG_INV_INC_FILE,             "invalid incremental information file")
-	pick(MSG_TRACE_OBJ_NOT_FOUND,      "object file %s not found for tracing")
-	pick(MSG_TRACE_LIB_NOT_FOUND,      "library module %1(%2) not found for tracing")
-	pick(MSG_MOD_IND_TRACE,            "%S referenced indirectly by module %s")
-	pick(MSG_CANT_RESERVE_SPACE,       "cannot reserve %l bytes of extra overlay space")
-	pick(MSG_VIRDEF_UNSUPPORTED,       "Borland VIRDEF records not supported")
-	pick(MSG_SYSTEM_UNDEFINED,         "undefined system name: %s")   /* 107 */
-	pick(MSG_SYSTEM_ALREADY_DEFINED,   "system %s defined more than once")
-	pick(MSG_QNX_BASE_LT_STACK,        "OFFSET option is less than the stack size")
-	pick(MSG_NO_MEMB_IN_LIBFILE,       "library members not allowed in libfile")
-	pick(MSG_ERROR_IN_SYSTEM_BLOCK,    "error in default system block")
-	pick(MSG_NO_PREVIOUS_INPUT,        "no previous input source")
-	pick(MSG_NO_INPUT_LEFT,            "no more input found for ^ command")
-	pick(MSG_ENV_NAME_INCORRECT,       "environment name specified incorrectly")
-	pick(MSG_ENV_NOT_FOUND,            "environment name %s not found")
-	pick(MSG_AREA_TOO_SMALL,           "overlay area must be at least %l bytes")
-	pick(MSG_BAD_MOVABLE_SEG_NUM,      "segment number too high for a movable entry point")
-	pick(MSG_HEAP_TOO_BIG,             "heap size too large")           /* 118 */
-	pick(MSG_BAD_WLIB_IMPORT,          "wlib import statement incorrect")
-	pick(MSG_APP_TOO_BIG_FOR_DOS,      "application too large to run under DOS")
-	pick(MSG_DUP_EXP_NAME,             "'%s' has already been exported")
-	pick(MSG_NO_FILES_FOUND,           "no FILE directives found")
-	pick(MSG_OVERLAYS_NOT_SUPPORTED,   "overlays are not supported in this version of JWlink")
-	pick(MSG_LAZY_EXTDEF_MISMATCH,     "lazy reference for %S has different default resolutions")
-	pick(MSG_MULTIPLE_ALIASES,         "multiple aliases found for %S")
-	pick(MSG_EXE_DATE_CHANGED,         "%s has been modified: doing full relink")
-	pick(MSG_CANT_EXPORT_ABSOLUTE,     "cannot export symbol %S")
-	pick(MSG_DIRECTIVE_ERR_BEGINNING,  "directive error near beginning of input")
-	pick(MSG_ADDR_INFO_TOO_LARGE,      "address information too large")
-	pick(MSG_INV_SHARED_NLM_FILE,      "%s is an invalid shared NLM file")
-	pick(MSG_CANT_OPEN_SPILL,          "cannot open temporary file: file already exists")
-	pick(MSG_BAD_CURLY_LIST,           "curly brace delimited list incorrect")
-	pick(MSG_NO_REALBREAK_WITH_16BIT,  "no realbreak specified for 16-bit code")
-	pick(MSG_INV_MESSAGE_FILE,         "%s is an invalid message file")    /* 134 */
-	pick(MSG_INCORRECT_NUM_AREAS,      "need exactly 1 overlay area with dynamic overlay manager")
-	pick(MSG_RELOC_TO_RWDATA_SEG,      "segment relocation to a read/write data segment found at %a(%S)")
-	pick(MSG_TOO_MANY_ERRORS,          "too many errors encountered")
-	pick(MSG_INV_FILENAME,             "invalid filename '%s'")
-	pick(MSG_CANNOT_HAVE_16_AND_32,    "cannot have both 16-bit and 32-bit object files")
-	pick(MSG_INVALID_MSG_NUM,          "invalid message number")
-	pick(MSG_VF_TABLE_MISMATCH,        "virtual function table record for %S mismatched")
+	pick(MSG_DUP_EXP_ORDINAL, "duplicate exported ordinal")
+	pick(MSG_EXP_SYM_NOT_FOUND, "exported symbol %s not found")
+	pick(MSG_SEG_FLAG_MULT_DEFD, "segment attribute defined more than once")
+	pick(MSG_SEG_NAME_NOT_FOUND, "segment name %s not found")
+	pick(MSG_CLASS_NAME_NOT_FOUND, "class name %s not found")
+	pick(MSG_AUTO_SEG_MULT_DEFD, "inconsistent attributes for automatic data segment")
+	pick(MSG_INV_STUB_FILE, "invalid STUB file")
+	pick(MSG_INV_OLD_DLL, "invalid DLL specified in OLDLIBRARY option")
+	pick(MSG_STUB_SAME_AS_LOAD, "STUB file name same as executable file name")
+	pick(MSG_REL_NOT_SAME_SEG, "relocation at %a not in the same segment")
+	pick(MSG_DLL_IN_REL_RELOC, "%a: cannot reach a DLL with a relative relocation")
+	pick(MSG_CANT_USE_LOCALS, "debugging information incompatible: using line numbers only")
+	pick(MSG_FRAME_EQ_TARGET, "%a: frame must be the same as the target in protect mode")
+	pick(MSG_CANT_FIND_MEMBER, "cannot find library member %1(%2)")
+	pick(MSG_MULTIPLE_MODES_FOUND, "executable format has been established")
+	pick(MSG_FORMAT_BAD_OPTION, "option %s not valid for %f")
+	pick(MSG_VALUE_TOO_LARGE, "value for %s too large")
+	pick(MSG_VALUE_INCORRECT, "value for %s incorrect")
+	pick(MSG_MULT_REALBREAKS, "multiple values specified for REALBREAK")
+	pick(MSG_DLL_WITH_386, "export and import records not valid for %f")
+	pick(MSG_INVALID_FLAT_RELOC, "invalid relocation for flat memory model at %a")
+	pick(MSG_CANT_COMBINE_32_AND_16, "cannot combine 32-bit segments (%1) with 16-bit segments (%2)")
+	pick(MSG_BREAKSYM_NOT_FOUND, "REALBREAK symbol %s not found")
+	pick(MSG_BAD_IMP_REL_RELOC, "invalid relative relocation type for an import at %a")
+	pick(MSG_NOV_NO_CODE_DATA_RELOC, "%a: cannot relocate between code and data in Novell formats")
+	pick(MSG_ABS_SEG_FIXUP_BAD, "absolute segment fixup not valid in protect mode")
+	pick(MSG_CHECK_NOT_FOUND, "unload CHECK procedure not found")
+	pick(MSG_START_PROC_NOT_FOUND, "START procedure not found")
+	pick(MSG_EXIT_PROC_NOT_FOUND, "EXIT procedure not found")
+	pick(MSG_NO_SECTION_IN_ROOT, "SECTION directive not allowed in root")
+	pick(MSG_BAD_NOV_FILE_TYPE, "bad Novell file format specified")
+	pick(MSG_CIRCULAR_ALIAS_FOUND, "circular alias found for %s")
+	pick(MSG_EXPECTING_END, "expecting an END directive")
+	pick(MSG_OPTION_MULTIPLY_DEFD, "%s option multiply specified")
+	pick(MSG_NOT_MULTIPLE_OF_8, "%s is not a multiple of 8")
+	pick(MSG_BOTH_RELOC_OPTIONS, "both relocation options specified")
+	pick(MSG_TRANS_RELOCS_NEEDED, "relocations needed for transparent data")
+	pick(MSG_FOUND_XXBIT_OBJ, "file %s is a %d-bit object file")
+	pick(MSG_TOO_MANY_SELECTORS, "too many selectors needed")
+	pick(MSG_BAD_REC_TYPE, "invalid record type 0x%x")
+	pick(MSG_FRAME_INVALID, "cannot reference address %A from frame %x")
+	pick(MSG_BAD_TARG_OFF, "target offset exceeds 64K at %a")
+#ifdef __UNIX__
+	pick(MSG_PRESS_CTRL_Z, "Press CTRL/D to finish")
+#else
+	pick(MSG_PRESS_CTRL_Z, "Press CTRL/Z and then RETURN to finish")
+#endif
+	pick(MSG_INV_COM_START_ADDR, "invalid starting address for .COM file")
+	pick(MSG_STACK_SEG_IGNORED, "stack segment ignored in .COM file")
+	pick(MSG_NO_VIRT_MEM, "virtual memory exhausted")
+	pick(MSG_COM_TOO_LARGE, "program too large for a .COM file")
+	pick(MSG_MULT_DEF_BY, "redefinition of %1 by %2 ignored")
+	pick(MSG_OVL_GROUP_SPLIT, "group %s is in more than one overlay")
+	pick(MSG_NEWSEG_BEFORE_OBJ, "NEWSEGMENT directive appears before object files")
+	pick(MSG_CANT_OPEN_NO_REASON, "cannot open %s")
+	pick(MSG_IO_PROBLEM_NO_REASON, "I/O error processing %s")
+	pick(MSG_DEBUG_TOO_LARGE, "%s debugging information too large")
+	pick(MSG_INCOMPATIBLE_DBI_FOUND, "incompatible types of debugging information found")
+	pick(MSG_TOO_MANY_LIB_MODS, "too many library modules")
+	pick(MSG_OFFSET_MUST_BE_ALIGNED, "Offset option must be a multiple of %l")
+	pick(MSG_SYMBOL_NAME_TOO_LONG, "symbol name too long: %s")
+	pick(MSG_MOD_TRACE, "%S referenced by module %s")
+	pick(MSG_INV_INC_FILE, "invalid incremental information file")
+	pick(MSG_TRACE_OBJ_NOT_FOUND, "object file %s not found for tracing")
+	pick(MSG_TRACE_LIB_NOT_FOUND, "library module %1(%2) not found for tracing")
+	pick(MSG_MOD_IND_TRACE, "%S referenced indirectly by module %s")
+	pick(MSG_CANT_RESERVE_SPACE, "cannot reserve %l bytes of extra overlay space")
+	pick(MSG_VIRDEF_UNSUPPORTED, "Borland VIRDEF records not supported")
+	pick(MSG_SYSTEM_UNDEFINED, "undefined system name: %s")
+	pick(MSG_SYSTEM_ALREADY_DEFINED, "system %s defined more than once")
+	pick(MSG_QNX_BASE_LT_STACK, "OFFSET option is less than the stack size")
+	pick(MSG_NO_MEMB_IN_LIBFILE, "library members not allowed in libfile")
+	pick(MSG_ERROR_IN_SYSTEM_BLOCK, "error in default system block")
+	pick(MSG_NO_PREVIOUS_INPUT, "no previous input source")
+	pick(MSG_NO_INPUT_LEFT, "no more input found for ^ command")
+	pick(MSG_ENV_NAME_INCORRECT, "environment name specified incorrectly")
+	pick(MSG_ENV_NOT_FOUND, "environment name %s not found")
+	pick(MSG_AREA_TOO_SMALL, "overlay area must be at least %l bytes")
+	pick(MSG_BAD_MOVABLE_SEG_NUM, "segment number too high for a movable entry point")
+	pick(MSG_HEAP_TOO_BIG, "heap size too large")
+	pick(MSG_BAD_WLIB_IMPORT, "wlib import statement incorrect")
+	pick(MSG_APP_TOO_BIG_FOR_DOS, "application too large to run under DOS")
+	pick(MSG_DUP_EXP_NAME, "'%s' has already been exported")
+	pick(MSG_NO_FILES_FOUND, "no FILE directives found")
+	pick(MSG_OVERLAYS_NOT_SUPPORTED, "overlays are not supported in this version of JWlink")
+	pick(MSG_LAZY_EXTDEF_MISMATCH, "lazy reference for %S has different default resolutions")
+	pick(MSG_MULTIPLE_ALIASES, "multiple aliases found for %S")
+	pick(MSG_EXE_DATE_CHANGED, "%s has been modified: doing full relink")
+	pick(MSG_CANT_EXPORT_ABSOLUTE, "cannot export symbol %S")
+	pick(MSG_DIRECTIVE_ERR_BEGINNING, "directive error near beginning of input")
+	pick(MSG_ADDR_INFO_TOO_LARGE, "address information too large")
+	pick(MSG_INV_SHARED_NLM_FILE, "%s is an invalid shared NLM file")
+	pick(MSG_CANT_OPEN_SPILL, "cannot open temporary file: file already exists")
+	pick(MSG_BAD_CURLY_LIST, "curly brace delimited list incorrect")
+	pick(MSG_NO_REALBREAK_WITH_16BIT, "no realbreak specified for 16-bit code")
+	pick(MSG_INV_MESSAGE_FILE, "%s is an invalid message file")
+	pick(MSG_INCORRECT_NUM_AREAS, "need exactly 1 overlay area with dynamic overlay manager")
+	pick(MSG_RELOC_TO_RWDATA_SEG, "segment relocation to a read/write data segment found at %a(%S)")
+	pick(MSG_TOO_MANY_ERRORS, "too many errors encountered")
+	pick(MSG_INV_FILENAME, "invalid filename '%s'")
+	pick(MSG_CANNOT_HAVE_16_AND_32, "cannot have both 16-bit and 32-bit object files")
+	pick(MSG_INVALID_MSG_NUM, "invalid message number")
+	pick(MSG_VF_TABLE_MISMATCH, "virtual function table record for %S mismatched")
 	pick(MSG_SECTIONALIGN_GT_OBJALIGN, "section %s alignment (%d) greater than OBJALIGN value")
-	pick(MSG_CANT_SORT_SYMBOLS,        "not enough memory to sort map file symbols")
-	pick(MSG_SYMBOL_DEAD,              "symbol %S removed")
-	pick(MSG_VF_PURE_MISMATCH,         "%S is both pure virtual and non-pure virtual")
-	pick(MSG_BAD_OBJECT,               "%s is an invalid object file")
-	pick(MSG_AMBIG_FORMAT,             "ambiguous format specified")
-	pick(MSG_INVALID_TYPE_DESC,        "invalid segment type specified")
-	pick(MSG_MULT_DBI_FORMATS,         "only one debugging format can be specified")
-	pick(MSG_MACHTYPE_DIFFERENT,       "file %s has code for a different processor")
-	pick(MSG_NO_BIG_ENDIAN,            "big endian code not supported")
-	pick(MSG_NO_DICT_FOUND,            "no dictionary found")            /* 152 */
-	pick(MSG_INVALID_INDEX_IN_RELOC,   "invalid segment/group/external index (%d) in relocation")
-	pick(MSG_CANT_EXECUTE,             "cannot execute %1 : %2")
-	pick(MSG_REL_NOT_ALIGNED,          "relocation at %a to an improperly aligned target")
-	pick(MSG_INC_NEAR_START,           "OPTION INCREMENTAL must be one of the first commands specified ")
-	pick(MSG_NO_CODE_OR_DATA,          "no code or data present")
-	pick(MSG_PROBLEM_IN_RESOURCE,      "problem adding resource information")
-	pick(MSG_INC_ONLY_SUPPORTS_DWARF,  "incremental linking only supports DWARF debugging information")
-	pick(MSG_INC_AND_DCE_NOT_ALLOWED,  "incremental linking does not support dead code elimination")
-	pick(MSG_TOC_TOO_BIG,              "Table of Contents too big to fit into 64K")
-	pick(MSG_free_3,                   "relocations on iterated data not supported")
-	pick(MSG_NOT_COMPILED_VF_ELIM,     "module has not been compiled with -zv")
-	pick(MSG_INC_AND_VFR_NOT_ALLOWED,  "incremental linking does not support virtual function removal")
-	pick(MSG_RESOURCE_TOO_BIG,         "resource file %s too big")        /* 165 */
-	pick(MSG_MULT_START_ADDRS_BY,      "both %1 and %2 marked as starting symbols")
-	pick(MSG_INTERNAL_MOD_NAME_DIFF_FROM_FILE,  "The NLM internal name (%s) has been truncated as it exceeds the maximum size")
-	pick(MSG_VXD_INCORRECT_EXPORT,     "One export must exist for the VxD format")
+	pick(MSG_CANT_SORT_SYMBOLS, "not enough memory to sort map file symbols")
+	pick(MSG_SYMBOL_DEAD, "symbol %S removed")
+	pick(MSG_VF_PURE_MISMATCH, "%S is both pure virtual and non-pure virtual")
+	pick(MSG_BAD_OBJECT, "%s is an invalid object file")
+	pick(MSG_AMBIG_FORMAT, "ambiguous format specified")
+	pick(MSG_INVALID_TYPE_DESC, "invalid segment type specified")
+	pick(MSG_MULT_DBI_FORMATS, "only one debugging format can be specified")
+	pick(MSG_MACHTYPE_DIFFERENT, "file %s has code for a different processor")
+	pick(MSG_NO_BIG_ENDIAN, "big endian code not supported")
+	pick(MSG_NO_DICT_FOUND, "no dictionary found")
+	pick(MSG_INVALID_INDEX_IN_RELOC, "invalid segment/group/external index (%d) in relocation")
+	pick(MSG_CANT_EXECUTE, "cannot execute %1 : %2")
+	pick(MSG_REL_NOT_ALIGNED, "relocation at %a to an improperly aligned target")
+	pick(MSG_INC_NEAR_START, "OPTION INCREMENTAL must be one of the first commands specified ")
+	pick(MSG_NO_CODE_OR_DATA, "no code or data present")
+	pick(MSG_PROBLEM_IN_RESOURCE, "problem adding resource information")
+	pick(MSG_INC_ONLY_SUPPORTS_DWARF, "incremental linking only supports DWARF debugging information")
+	pick(MSG_INC_AND_DCE_NOT_ALLOWED, "incremental linking does not support dead code elimination")
+	pick(MSG_TOC_TOO_BIG, "Table of Contents too big to fit into 64K")
+	pick(MSG_free_3, "relocations on iterated data not supported")
+	pick(MSG_NOT_COMPILED_VF_ELIM, "module has not been compiled with -zv")
+	pick(MSG_INC_AND_VFR_NOT_ALLOWED, "incremental linking does not support virtual function removal")
+	pick(MSG_RESOURCE_TOO_BIG, "resource file %s too big")
+	pick(MSG_MULT_START_ADDRS_BY, "both %1 and %2 marked as starting symbols")
+	pick(MSG_INTERNAL_MOD_NAME_DIFF_FROM_FILE, "The NLM internal name (%s) has been truncated as it exceeds the maximum size")
+	pick(MSG_VXD_INCORRECT_EXPORT, "One export must exist for the VxD format")
 	pick(MSG_FIXED_LOC_BEFORE_CUR_LOC, "Location counter is already beyond fixed Segment Address %a")
-	pick(MSG_DUP_DIRECTIVE,            "Directive %s can only occur once")
-	pick(MSG_IMPORT_LOCAL,             "Locally defined symbol %s is imported")
+	pick(MSG_DUP_DIRECTIVE, "Directive %s can only occur once")
+	pick(MSG_IMPORT_LOCAL, "Locally defined symbol %s is imported")
 	pick(MSG_NEED_NOLARGEADDRESSAWARE, "32-bit relocation to '%s' requires option NOLARGEaddressaware")
-	pick(MSG_UNKNOWN_DIRECTIVE_IGNORED,"unknown directive '-%s' ignored")
-	pick(MSG_TARGET_DISP_IGNORED2,      "target displacement %x ignored for segment fixup")
+	pick(MSG_UNKNOWN_DIRECTIVE_IGNORED, "unknown directive '-%s' ignored")
+	pick(MSG_TARGET_DISP_IGNORED2, "target displacement %x ignored for segment fixup")
 
 	pick(MSG_FILE_REC_NAME_0, "file %s: ")
 	pick(MSG_FILE_REC_NAME_1, "(%s): ")
@@ -386,59 +385,51 @@ enum message_texts
 	pick(MSG_MAP_SYM_STATIC, "s = symbol is static")
 	pick(MSG_MAP_DEFINING_MODULE, "Module: %s(%s)")
 
-	/*
-	 *  General help screen.
-	 *  To start a new page, leave a line undefined or define an empty line.
-	 */
-		pick(MSG_GENERAL_HELP_0, "usage: jwlink {directive} ('jwlink -?' for detailed help)")
-		pick(MSG_GENERAL_HELP_1, "\ncommands valid for all executable formats:\n")
-		pick(MSG_GENERAL_HELP_2, "directive  ::= \"File\"        obj_spec{\",\"obj_spec}")
-		pick(MSG_GENERAL_HELP_3, "            | \"Name\"         exe_file")
-		pick(MSG_GENERAL_HELP_4, "            | \"OPtion\"       option{\",\"option}")
-		pick(MSG_GENERAL_HELP_5, "            | \"Library\"      library_file{\",\"library_file}")
-		pick(MSG_GENERAL_HELP_6, "            | \"OPTLIB\"       library_file{\",\"library_file}")
-		pick(MSG_GENERAL_HELP_7, "            | \"Path\"         path_name{\";\"path_name}")
-		pick(MSG_GENERAL_HELP_8, "            | \"LIBPath\"      path_name{\";\"path_name}")
-		pick(MSG_GENERAL_HELP_9, "            | \"LIBFile\"      obj_file{\",\"obj_file}")
-		pick(MSG_GENERAL_HELP_10, "            | \"Debug\"        dbtype [dblist] | dblist")
-		pick(MSG_GENERAL_HELP_11, "            | \"MODTrace\"     module_name{\",\"module_name}")
-		pick(MSG_GENERAL_HELP_12, "            | \"SYMTrace\"     symbol_name{\",\"symbol_name}")
-		pick(MSG_GENERAL_HELP_13, "            | \"SYStem\"       system_name")
-		pick(MSG_GENERAL_HELP_14, "            | \"SYStem Begin\" system_name directive {directive} \"End\"")
-		pick(MSG_GENERAL_HELP_15, "            | \"FORMat\"       form")
-		pick(MSG_GENERAL_HELP_16, "            | \"REFerence\"    symbol_name{\",\"symbol_name}")
-		pick(MSG_GENERAL_HELP_17, "            | \"@\"            directive_file")
-		pick(MSG_GENERAL_HELP_18, "            | \"#\"            comment")
+	pick(MSG_GENERAL_HELP_0, "usage: jwlink {directive} ('jwlink -?' for detailed help)")
+	pick(MSG_GENERAL_HELP_1, "\ncommands valid for all executable formats:\n")
+	pick(MSG_GENERAL_HELP_2, "directive  ::= \"File\"        obj_spec{\",\"obj_spec}")
+	pick(MSG_GENERAL_HELP_3, "            | \"Name\"         exe_file")
+	pick(MSG_GENERAL_HELP_4, "            | \"OPtion\"       option{\",\"option}")
+	pick(MSG_GENERAL_HELP_5, "            | \"Library\"      library_file{\",\"library_file}")
+	pick(MSG_GENERAL_HELP_6, "            | \"OPTLIB\"       library_file{\",\"library_file}")
+	pick(MSG_GENERAL_HELP_7, "            | \"Path\"         path_name{\";\"path_name}")
+	pick(MSG_GENERAL_HELP_8, "            | \"LIBPath\"      path_name{\";\"path_name}")
+	pick(MSG_GENERAL_HELP_9, "            | \"LIBFile\"      obj_file{\",\"obj_file}")
+	pick(MSG_GENERAL_HELP_10, "            | \"Debug\"        dbtype [dblist] | dblist")
+	pick(MSG_GENERAL_HELP_11, "            | \"MODTrace\"     module_name{\",\"module_name}")
+	pick(MSG_GENERAL_HELP_12, "            | \"SYMTrace\"     symbol_name{\",\"symbol_name}")
+	pick(MSG_GENERAL_HELP_13, "            | \"SYStem\"       system_name")
+	pick(MSG_GENERAL_HELP_14, "            | \"SYStem Begin\" system_name directive {directive} \"End\"")
+	pick(MSG_GENERAL_HELP_15, "            | \"FORMat\"       form")
+	pick(MSG_GENERAL_HELP_16, "            | \"REFerence\"    symbol_name{\",\"symbol_name}")
+	pick(MSG_GENERAL_HELP_17, "            | \"@\"            directive_file")
+	pick(MSG_GENERAL_HELP_18, "            | \"#\"            comment")
 
-		pick(MSG_GENERAL_HELP_19, "")
+	pick(MSG_GENERAL_HELP_19, "")
 
-		pick(MSG_GENERAL_HELP_20, "\ncommands valid for all executable formats (continued):\n")
-		pick(MSG_GENERAL_HELP_21, "            | \"Alias\"        alias\"=\"symbol_name{\",\"alias\"=\"symbol_name}")
-		pick(MSG_GENERAL_HELP_22, "            | \"DISAble\"      msg_num{\",\"msg_num}")
-		pick(MSG_GENERAL_HELP_23, "            | \"SOrt\"         [\"GLobal\"] [\"ALPhabetical\"]")
-		pick(MSG_GENERAL_HELP_24, "            | \"LANGuage\"     (\"JApanese\" | \"CHinese\" | \"KOrean\")")
-		pick(MSG_GENERAL_HELP_25, "            | \"STARTLINK\"")
-		pick(MSG_GENERAL_HELP_26, "            | \"ENDLINK\"")
-		pick(MSG_GENERAL_HELP_27, "            | \"MODFile\"      obj_file{\",\"obj_file}")
-		pick(MSG_GENERAL_HELP_28, "obj_spec  ::= obj_file[\"(\"obj_member\")\"] | library_file[\"(\"lib_member\")\"]")
-		pick(MSG_GENERAL_HELP_29, "dbtype    ::= \"Watcom\" | \"Dwarf\" | \"Codeview\"")
-		pick(MSG_GENERAL_HELP_30, "dblist    ::= dboption{\",\"dboption}")
-		pick(MSG_GENERAL_HELP_31, "dboption  ::= \"LInes\" | \"Types\" | \"LOcals\" | \"All\"")
-		pick(MSG_GENERAL_HELP_32, "option    ::= \"ARTificial\" | \"[NO]CAChe\" | \"[NO]CASEexact\" | \"CVPack\"")
-		pick(MSG_GENERAL_HELP_33, "            | \"Dosseg\" | \"ELiminate\" | \"[NO]FARcalls\"")
-		pick(MSG_GENERAL_HELP_34, "            | \"INCremental[=file_name]\" | \"MANGlednames\"")
-		pick(MSG_GENERAL_HELP_35, "            | \"Map\"[\"=\"map_file] | \"MAXErrors=\"n | \"NAMELen=\"n")
-		pick(MSG_GENERAL_HELP_36, "            | \"NODefaultlibs\" | \"NOEXTension\" | \"OSName=\"string | \"Quiet\"")
-		pick(MSG_GENERAL_HELP_37, "            | \"[NO]REDefsok\" | \"STack\"=n | \"START=\"symbol_name | \"STATics\"")
-		pick(MSG_GENERAL_HELP_38, "            | \"SYMFile\"[\"=\"symbol_file], | \"[NO]Undefsok\" | \"Verbose\"")
-		pick(MSG_GENERAL_HELP_39, "            | \"VFRemoval\"")
+	pick(MSG_GENERAL_HELP_20, "\ncommands valid for all executable formats (continued):\n")
+	pick(MSG_GENERAL_HELP_21, "            | \"Alias\"        alias\"=\"symbol_name{\",\"alias\"=\"symbol_name}")
+	pick(MSG_GENERAL_HELP_22, "            | \"DISAble\"      msg_num{\",\"msg_num}")
+	pick(MSG_GENERAL_HELP_23, "            | \"SOrt\"         [\"GLobal\"] [\"ALPhabetical\"]")
+	pick(MSG_GENERAL_HELP_24, "            | \"LANGuage\"     (\"JApanese\" | \"CHinese\" | \"KOrean\")")
+	pick(MSG_GENERAL_HELP_25, "            | \"STARTLINK\"")
+	pick(MSG_GENERAL_HELP_26, "            | \"ENDLINK\"")
+	pick(MSG_GENERAL_HELP_27, "            | \"MODFile\"      obj_file{\",\"obj_file}")
+	pick(MSG_GENERAL_HELP_28, "obj_spec  ::= obj_file[\"(\"obj_member\")\"] | library_file[\"(\"lib_member\")\"]")
+	pick(MSG_GENERAL_HELP_29, "dbtype    ::= \"Watcom\" | \"Dwarf\" | \"Codeview\"")
+	pick(MSG_GENERAL_HELP_30, "dblist    ::= dboption{\",\"dboption}")
+	pick(MSG_GENERAL_HELP_31, "dboption  ::= \"LInes\" | \"Types\" | \"LOcals\" | \"All\"")
+	pick(MSG_GENERAL_HELP_32, "option    ::= \"ARTificial\" | \"[NO]CAChe\" | \"[NO]CASEexact\" | \"CVPack\"")
+	pick(MSG_GENERAL_HELP_33, "            | \"Dosseg\" | \"ELiminate\" | \"[NO]FARcalls\"")
+	pick(MSG_GENERAL_HELP_34, "            | \"INCremental[=file_name]\" | \"MANGlednames\"")
+	pick(MSG_GENERAL_HELP_35, "            | \"Map\"[\"=\"map_file] | \"MAXErrors=\"n | \"NAMELen=\"n")
+	pick(MSG_GENERAL_HELP_36, "            | \"NODefaultlibs\" | \"NOEXTension\" | \"OSName=\"string | \"Quiet\"")
+	pick(MSG_GENERAL_HELP_37, "            | \"[NO]REDefsok\" | \"STack\"=n | \"START=\"symbol_name | \"STATics\"")
+	pick(MSG_GENERAL_HELP_38, "            | \"SYMFile\"[\"=\"symbol_file], | \"[NO]Undefsok\" | \"Verbose\"")
+	pick(MSG_GENERAL_HELP_39, "            | \"VFRemoval\"")
 
-	#define  MSG_GENERAL_HELP_LAST MSG_GENERAL_HELP_39
+#define  MSG_GENERAL_HELP_LAST MSG_GENERAL_HELP_39
 
-	/*
-	 *  Dos help screen.
-	 *  To start a new page, leave a line undefined or define an empty line.
-	 */
 	pick(MSG_DOS_HELP_0, "\ncommands valid for the MS-DOS executable format only:\n")
 	pick(MSG_DOS_HELP_1, "form      ::= \"Dos\" [\"COM\"]")
 	pick(MSG_DOS_HELP_2, "directive ::= \"NEWsegment\"")
@@ -446,10 +437,6 @@ enum message_texts
 
 #define  MSG_DOS_HELP_LAST MSG_DOS_HELP_3
 
-	/*
-	 *  OS2 help screen.
-	 *  To start a new page, leave a line undefined or define an empty line.
-	 */
 	pick(MSG_OS2_HELP_0, "\ncommands valid for the OS/2 executable formats (NE, LE, LX) only:\n")
 	pick(MSG_OS2_HELP_1, "form      ::= \"OS2\" [\"FLat\"|\"LE\"|\"LX\"] [\"PHYSdevice\" | \"VIRTdevice\"")
 	pick(MSG_OS2_HELP_2, "            | [\"DLl\"[\"INITGlobal\"|\"INITInstance\" [\"TERMInstance\"|\"TERMGlobal\"]]")
@@ -478,10 +465,6 @@ enum message_texts
 
 #define MSG_OS2_HELP_LAST MSG_OS2_HELP_24
 
-	/*
-	 *  Win16 help screen.
-	 *  To start a new page, leave a line undefined or define an empty line.
-	 */
 	pick(MSG_WINDOWS_HELP_0, "\ncommands valid for the Microsoft Win16 executable formats (NE) only:\n")
 	pick(MSG_WINDOWS_HELP_1, "form      ::= \"WIndows\" [\"DLl\"[\"INITGlobal\" | \"INITInstance\"]] [DPMI] [MEMory] [FOnt]")
 	pick(MSG_WINDOWS_HELP_2, "directive ::= \"NEWsegment\"")
@@ -505,10 +488,6 @@ enum message_texts
 
 #define MSG_WINDOWS_HELP_LAST MSG_WINDOWS_HELP_19
 
-	/*
-	 *  NT help screen.
-	 *  To start a new page, leave a line undefined or define an empty line.
-	 */
 	pick(MSG_NT_HELP_0, "\ncommands valid for the PE executable formats only:\n")
 	pick(MSG_NT_HELP_1, "form      ::= \"WIndows PE\" [\"TNT\"|\"HX\"]")
 	pick(MSG_NT_HELP_2, "              [\"DLl\"[\"INITGlobal\"|\"INITInstance\" [\"TERMInstance\"|\"TERMGlobal\"]]")
@@ -535,10 +514,6 @@ enum message_texts
 
 #define MSG_NT_HELP_LAST MSG_NT_HELP_21
 
-	/*
-	 *  Phar Lap help screen.
-	 *  To start a new page, leave a line undefined or define an empty line.
-	 */
 	pick(MSG_PHAR_HELP_0, "\ncommands valid for the Phar Lap executable formats only:\n")
 	pick(MSG_PHAR_HELP_3, "form      ::= \"PHARlap\" [\"EXTended\" | \"REX\" | \"SEGmented\"]")
 	pick(MSG_PHAR_HELP_4, "directive ::= \"RUntime\"     runoption{\",\"runoption}")
@@ -549,10 +524,6 @@ enum message_texts
 
 #define MSG_PHAR_HELP_LAST MSG_PHAR_HELP_8
 
-	/*
-	 *  Novell help screen.
-	 *  To start a new page, leave a line undefined or define an empty line.
-	 */
 	pick(MSG_NOVELL_HELP_0, "\ncommands valid for the Novell Netware executable format only:\n")
 	pick(MSG_NOVELL_HELP_3, "form      ::= \"NOVell\" [\"NLM\" | \"LAN\" | \"DSK\" | \"NAM\" | 'number'] 'description'")
 	pick(MSG_NOVELL_HELP_4, "directive ::= \"MODUle\"      module_name{\",\"module_name}")
@@ -572,10 +543,6 @@ enum message_texts
 #define MSG_NOVELL_HELP_LAST MSG_NOVELL_HELP_16
 
 #ifdef _DOS16M
-	/*
-	 *  Dos/16M help screen.
-	 *  To start a new page, leave a line undefined or define an empty line.
-	 */
 	pick(MSG_DOS16_HELP_0, "\ncommands valid for the DOS/16M executable format only:\n")
 	pick(MSG_DOS16_HELP_3, "form      ::= \"DOS16M\"")
 	pick(MSG_DOS16_HELP_4, "directive ::= \"MEMory\"      strategy")
@@ -592,10 +559,6 @@ enum message_texts
 #define MSG_DOS16_HELP_LAST MSG_DOS16_HELP_13
 #endif
 
-	/*
-	 *  QNX help screen.
-	 *  To start a new page, leave a line undefined or define an empty line.
-	 */
 	pick(MSG_QNX_HELP_0, "\ncommands valid for the QNX executable format only:\n")
 	pick(MSG_QNX_HELP_3, "form      ::= \"QNX\" [\"FLat\"]")
 	pick(MSG_QNX_HELP_4, "directive ::= \"SEGment\"     segdesc{\",\"segdesc}")
@@ -609,10 +572,6 @@ enum message_texts
 
 #define MSG_QNX_HELP_LAST MSG_QNX_HELP_11
 
-	/*
-	 *  ELF help screen.
-	 *  To start a new page, leave a line undefined or define an empty line.
-	 */
 	pick(MSG_ELF_HELP_0, "\ncommands valid for the ELF executable format only:\n")
 	pick(MSG_ELF_HELP_3, "form      ::= \"ELF\" [\"DLl\"]")
 	pick(MSG_ELF_HELP_4, "directive ::= \"MODUle\"      module_name{\",\"module_name}")
@@ -626,92 +585,66 @@ enum message_texts
 	pick(MSG_ELF_HELP_12, "runoption ::= (\"SVR4\" | \"LINux\" | \"FREebsd\" | \"NETbsd\" | \"SOLaris\" | \"ABIver\" )")
 
 
-	/*
-	 *  Windows help screen.
-	 *  To start a new page, leave a line undefined or define an empty line.
-	 */
 	pick(MSG_WIN_VXD_HELP_0, "\ncommands valid for the Microsoft Windows VxD formats only:\n")
 	pick(MSG_WIN_VXD_HELP_1, "form      ::= \"WIndows VXD\" [\"DYNamic\"]")
-	/*
-	pick(    MSG_WIN_VXD_HELP_2,    "directive ::= \"NEWsegment\"" )
-	pick(    MSG_WIN_VXD_HELP_3,    "            | \"SEGment\"     segdesc{\",\"segdesc}" )
-	pick(    MSG_WIN_VXD_HELP_4,    "            | \"IMPort\"      import{\",\"import}" )
-	pick(    MSG_WIN_VXD_HELP_5,    "            | \"EXPort\"      export{\",\"export}" )
-	pick(    MSG_WIN_VXD_HELP_6,    "            | \"EXPort\"      \"=\"wlib_directive_file" )
-	pick(    MSG_WIN_VXD_HELP_7,    "segdesc   ::= segspec segmodel {segmodel}" )
-	pick(    MSG_WIN_VXD_HELP_8,    "segspec   ::= seg_name | \"Class\" class_name | \"TYpe\" (\"CODE\" | \"DATA\")" )
-	pick(    MSG_WIN_VXD_HELP_9,    "import    ::= entryname module[\".\"(extname | ordinal)]" )
-	pick(    MSG_WIN_VXD_HELP_10,   "option    ::= \"Alignment=\"n | \"DEscription\" description | \"Heapsize=\"n" )
-	pick(    MSG_WIN_VXD_HELP_11,   "            | \"IMPFile\"[=file_name] | \"IMPLib\"[=file_name]" )
-	pick(    MSG_WIN_VXD_HELP_12,   "            | (\"MANYautodata\" | \"NOautodata\" | \"ONEAutodata\")" )
-	pick(    MSG_WIN_VXD_HELP_13,   "            | \"MODName=\"module_name | \"OLDlibrary=\"dll_name | \"PACKCode=\"n" )
-	pick(    MSG_WIN_VXD_HELP_14,   "            | \"PACKData=\"n | \"RESource=\"res_file_name | \"RWReloccheck\"" )
-	pick(    MSG_WIN_VXD_HELP_15,   "            | \"STUB=\"stub_name | \"NOSTUB\" | \"VERSion=\"major.[minor]" )
-	pick(    MSG_WIN_VXD_HELP_16,   "export    ::= entryname[\".\"ordinal][\"=\"internal][\"RESident\"][\"PRIVATE\"]" )
-	pick(    MSG_WIN_VXD_HELP_17,   "segmodel  ::= (\"PReload\" | \"LOadoncall\") | (\"SHared\" | \"NONShared\")" )
-	pick(    MSG_WIN_VXD_HELP_18,   "            | (\"EXECUTEOnly\" | \"EXECUTERead\" | \"READOnly\" | \"READWrite\")" )
-	pick(    MSG_WIN_VXD_HELP_19,   "            | (\"MOVeable\" | \"FIXed\") | \"DIScardable\"\n" )
-	*/
-
 	pick(MSG_RAW_HELP_0, "\ncommands valid for the RAW executable formats only:\n")
 	pick(MSG_RAW_HELP_1, "form      ::= \"Raw\" (\"BIN\" | \"HEX\")")
 	pick(MSG_RAW_HELP_2, "option    ::= \"OFFset=\"n")
 
 
-		pick(ERR_INTERNAL, "Internal compiler error %d.")
-		pick(ERR_WRITTING_FILE, "Error writing to \"%s\": %s.")
-		pick(ERR_CANT_OPEN_FILE, "Unable to open file \"%s\": %s.")
-		pick(ERR_READING_RES, "Error reading RES file \"%s\": %s.")
-		pick(ERR_UNEXPECTED_EOF, "Error reading file \"%s\": Unexpected end of file.")
-		pick(ERR_INVALID_RES, "\"%s\" is not a valid RES file.")
-		pick(ERR_BAD_RES_VER, "Unable to read RES file \"%s\": wrong version.")
-		pick(ERR_NONWIN_RES_TO_WIN_EXE, "Trying to add a Win32 or OS/2 RES file \"%s\" to a Win16 executable \"%s\".")
-		pick(ERR_NONNT_RES_TO_NT_EXE, "Trying to add a Win16 or OS/2 RES file \"%s\" to a Win32 executable \"%s\".")
-		pick(ERR_NONOS2_RES_TO_OS2_EXE, "Trying to add a Win16 or Win32 RES file \"%s\" to an OS/2 executable \"%s\".")
-		pick(ERR_DUPLICATE_STR_TABLE_FILE, "Duplicate string table block containing strings %d to %d found in files '%s' and '%s'.")
-		pick(ERR_DUPLICATE_STR_TABLE, "Duplicate string table block containing strings %d to %d found.")
-		pick(ERR_DUPLICATE_RES_FILE, "Duplicate %s named '%s' found in files '%s' and '%s'.")
-		pick(ERR_DUPLICATE_RES, "Duplicate %s named '%s' found.")
+	pick(ERR_INTERNAL, "Internal compiler error %d.")
+	pick(ERR_WRITTING_FILE, "Error writing to \"%s\": %s.")
+	pick(ERR_CANT_OPEN_FILE, "Unable to open file \"%s\": %s.")
+	pick(ERR_READING_RES, "Error reading RES file \"%s\": %s.")
+	pick(ERR_UNEXPECTED_EOF, "Error reading file \"%s\": Unexpected end of file.")
+	pick(ERR_INVALID_RES, "\"%s\" is not a valid RES file.")
+	pick(ERR_BAD_RES_VER, "Unable to read RES file \"%s\": wrong version.")
+	pick(ERR_NONWIN_RES_TO_WIN_EXE, "Trying to add a Win32 or OS/2 RES file \"%s\" to a Win16 executable \"%s\".")
+	pick(ERR_NONNT_RES_TO_NT_EXE, "Trying to add a Win16 or OS/2 RES file \"%s\" to a Win32 executable \"%s\".")
+	pick(ERR_NONOS2_RES_TO_OS2_EXE, "Trying to add a Win16 or Win32 RES file \"%s\" to an OS/2 executable \"%s\".")
+	pick(ERR_DUPLICATE_STR_TABLE_FILE, "Duplicate string table block containing strings %d to %d found in files '%s' and '%s'.")
+	pick(ERR_DUPLICATE_STR_TABLE, "Duplicate string table block containing strings %d to %d found.")
+	pick(ERR_DUPLICATE_RES_FILE, "Duplicate %s named '%s' found in files '%s' and '%s'.")
+	pick(ERR_DUPLICATE_RES, "Duplicate %s named '%s' found.")
 #if 0
-		pick(STR_WARNING, "Warning!")
-		pick(STR_ERROR, "Error!")
-		pick(STR_FATAL_ERROR, "Fatal Error!")
-		pick(STR_END_OF_FILE, "Unexpected end of file")
-		pick(STR_APP_NAME, "Open Watcom Resource Compiler Version 1.0\n")
-		pick(ERR_RENAMEING_TMP_FILE, "Error renaming temporary file \"%s\" to \"%s\": %s.")
-		pick(ERR_NOT_ICON_FILE, "\"%s\" is not a valid icon file.")
-		pick(ERR_NOT_CURSOR_FILE, "\"%s\" is not a valid cursor file.")
-		pick(ERR_NOT_BITMAP_FILE, "\"%s\" is not a valid bitmap file.")
-		pick(ERR_PE_HEADER_SIZE_CHANGE, "Object alignment increase required.  Relink with larger object alignment.")
-		pick(ERR_OLD_RESOURCE_OBJECT, "EXE contains old resources that cannot be removed.")
-		pick(ERR_READING_EXE, "Error reading EXE file \"%s\": %s.")
-		pick(ERR_READING_ICON, "Error reading icon file \"%s\": %s.")
-		pick(ERR_READING_CURSOR, "Error reading cursor file \"%s\": %s.")
-		pick(ERR_READING_BITMAP, "Error reading bitmap file \"%s\": %s.")
-		pick(ERR_READING_FONT, "Error reading font file \"%s\": %s.")
-		pick(ERR_READING_DATA, "Error reading data file \"%s\": %s.")
-		pick(ERR_READING_TMP, "Error reading temporary file \"%s\": %s.")
-		pick(ERR_WRITTING_TMP, "Error writing to temporary file \"%s\": %s.")
-		pick(ERR_OPENING_TMP, "Unable to open temporary file \"%s\": %s.")
-		pick(ERR_READING_FILE, "Error reading from file \"%s\": %s.")
-		pick(ERR_WRITTING_RES_FILE, "Error writing resources to temporary file \"%s\": %s.")
-		pick(ERR_CLOSING_FILE, "Error while closing file \"%s\" or flushing buffers to it: %s.")
-		pick(ERR_CLOSING_TMP, "Error while closing temporary file \"%s\" or flushing buffers to it: %s.")
-		pick(ERR_NO_MSG, "")
-		pick(ERR_NO_RCINCLUDES, "RCINCLUDE keyword not currently supported. Use #include.")
-		pick(ERR_UNKNOWN_CHAR, "'%c' is not valid at this point")
-		pick(ERR_RUNAWAY_STRING, "String may not cross newline boundary")
-		pick(ERR_EXPECTING_CHAR, "Expecting '%s' but found '%c'")
-		pick(ERR_TOO_MANY_ARGS, "Too many arguments: %s")
-		pick(ERR_FILENAME_NEEDED, "Filename required on command line.")
-		pick(ERR_UNKNOWN_OPTION, "Unknown option '%c'")
-		pick(ERR_NO_OPT_SPECIFIED, "No options specified after options character.")
-		pick(ERR_OUT_OF_MEMORY, "Out of memory")
-		pick(ERR_ACCEL_NO_TYPE, "No type given for accelerator %ld")
-		pick(ERR_ACCEL_KEYWORD_IGNORED, "Keyword %s ignored for type ASCII accelerator %ld")
-		pick(ERR_DUPLICATE_RESOURCE, "Duplicate resource: %s")
-		pick(ERR_PARSER_INTERNAL, "Internal parser error.")
-	/* this message is unused */
+	pick(STR_WARNING, "Warning!")
+	pick(STR_ERROR, "Error!")
+	pick(STR_FATAL_ERROR, "Fatal Error!")
+	pick(STR_END_OF_FILE, "Unexpected end of file")
+	pick(STR_APP_NAME, "Open Watcom Resource Compiler Version 1.0\n")
+	pick(ERR_RENAMEING_TMP_FILE, "Error renaming temporary file \"%s\" to \"%s\": %s.")
+	pick(ERR_NOT_ICON_FILE, "\"%s\" is not a valid icon file.")
+	pick(ERR_NOT_CURSOR_FILE, "\"%s\" is not a valid cursor file.")
+	pick(ERR_NOT_BITMAP_FILE, "\"%s\" is not a valid bitmap file.")
+	pick(ERR_PE_HEADER_SIZE_CHANGE, "Object alignment increase required.  Relink with larger object alignment.")
+	pick(ERR_OLD_RESOURCE_OBJECT, "EXE contains old resources that cannot be removed.")
+	pick(ERR_READING_EXE, "Error reading EXE file \"%s\": %s.")
+	pick(ERR_READING_ICON, "Error reading icon file \"%s\": %s.")
+	pick(ERR_READING_CURSOR, "Error reading cursor file \"%s\": %s.")
+	pick(ERR_READING_BITMAP, "Error reading bitmap file \"%s\": %s.")
+	pick(ERR_READING_FONT, "Error reading font file \"%s\": %s.")
+	pick(ERR_READING_DATA, "Error reading data file \"%s\": %s.")
+	pick(ERR_READING_TMP, "Error reading temporary file \"%s\": %s.")
+	pick(ERR_WRITTING_TMP, "Error writing to temporary file \"%s\": %s.")
+	pick(ERR_OPENING_TMP, "Unable to open temporary file \"%s\": %s.")
+	pick(ERR_READING_FILE, "Error reading from file \"%s\": %s.")
+	pick(ERR_WRITTING_RES_FILE, "Error writing resources to temporary file \"%s\": %s.")
+	pick(ERR_CLOSING_FILE, "Error while closing file \"%s\" or flushing buffers to it: %s.")
+	pick(ERR_CLOSING_TMP, "Error while closing temporary file \"%s\" or flushing buffers to it: %s.")
+	pick(ERR_NO_MSG, "")
+	pick(ERR_NO_RCINCLUDES, "RCINCLUDE keyword not currently supported. Use #include.")
+	pick(ERR_UNKNOWN_CHAR, "'%c' is not valid at this point")
+	pick(ERR_RUNAWAY_STRING, "String may not cross newline boundary")
+	pick(ERR_EXPECTING_CHAR, "Expecting '%s' but found '%c'")
+	pick(ERR_TOO_MANY_ARGS, "Too many arguments: %s")
+	pick(ERR_FILENAME_NEEDED, "Filename required on command line.")
+	pick(ERR_UNKNOWN_OPTION, "Unknown option '%c'")
+	pick(ERR_NO_OPT_SPECIFIED, "No options specified after options character.")
+	pick(ERR_OUT_OF_MEMORY, "Out of memory")
+	pick(ERR_ACCEL_NO_TYPE, "No type given for accelerator %ld")
+	pick(ERR_ACCEL_KEYWORD_IGNORED, "Keyword %s ignored for type ASCII accelerator %ld")
+	pick(ERR_DUPLICATE_RESOURCE, "Duplicate resource: %s")
+	pick(ERR_PARSER_INTERNAL, "Internal parser error.")
 	pick(ERR_SYNTAX_INT, "")
 	pick(ERR_SYNTAX_STR, "Syntax error near \"%s\"")
 	pick(ERR_DUPLICATE_STRING_CONST, "%d is a duplicate string identifier.")
@@ -729,7 +662,6 @@ enum message_texts
 	pick(ERR_TEXT_FROM_CPP, "%s")
 	pick(ERR_NT_KEYWORD, "Keyword \"%s\" is only valid for Win32")
 	pick(ERR_UNSUPPORTED, "Keyword \"%s\" not currently supported")
-	/* this is a place holder message, its text is embedded in the cannot be found */
 	pick(ERR_RCSTR_NOT_FOUND, "")
 	pick(ERR_CANT_FIND_CHAR_FILE, "Error can't find character translation file \"%s\".")
 	pick(ERR_CANT_OPEN_CHAR_FILE, "Error opening character translation file \"%s\": %s.")
@@ -794,31 +726,33 @@ enum message_texts
 	pick(USAGE_MSG_27, "                    to front and mark for fast load if possible")
 	pick(USAGE_MSG_28, "-t             - protected mode only")
 #ifdef SCANDEBUG
-		pick(USAGE_MSG_29, "-v             - verbose: print tokens as they are scanned")
+	pick(USAGE_MSG_29, "-v             - verbose: print tokens as they are scanned")
 #endif
 #ifdef YYDEBUG
-		pick(USAGE_MSG_30, "-v1            - verbose: print grammar rules as they are reduced")
+	pick(USAGE_MSG_30, "-v1            - verbose: print grammar rules as they are reduced")
 #endif
 #if defined(YYDEBUG) || defined(SCANDEBUG)
-		pick(USAGE_MSG_31, "-v2            - verbose: print both tokens and grammar rules")
-		pick(USAGE_MSG_32, "-v3            - verbose: print tokens as they are scanned")
+	pick(USAGE_MSG_31, "-v2            - verbose: print both tokens and grammar rules")
+	pick(USAGE_MSG_32, "-v3            - verbose: print tokens as they are scanned")
 #endif
-		pick(USAGE_MSG_33, "-x             - ignore the INCLUDE environment variable")
-		pick(USAGE_MSG_34, "-zk{0,1,2,3}   - double-byte char support:")
-		pick(USAGE_MSG_35, "                 0: (default) Japanese (Kanji, CP 932)")
-		pick(USAGE_MSG_36, "                 1: Chinese (Traditional, CP 950)")
-		pick(USAGE_MSG_37, "                 2: Korean (Wansung, CP 949)")
-		pick(USAGE_MSG_38, "                 3: Chinese (Simplified, CP 936)")
-		pick(USAGE_MSG_39, "-zm            - output Microsoft/IBM format .res files")
-		pick(USAGE_MSG_LAST, "-zn            - don't preprocess the file")
+	pick(USAGE_MSG_33, "-x             - ignore the INCLUDE environment variable")
+	pick(USAGE_MSG_34, "-zk{0,1,2,3}   - double-byte char support:")
+	pick(USAGE_MSG_35, "                 0: (default) Japanese (Kanji, CP 932)")
+	pick(USAGE_MSG_36, "                 1: Chinese (Traditional, CP 950)")
+	pick(USAGE_MSG_37, "                 2: Korean (Wansung, CP 949)")
+	pick(USAGE_MSG_38, "                 3: Chinese (Simplified, CP 936)")
+	pick(USAGE_MSG_39, "-zm            - output Microsoft/IBM format .res files")
+	pick(USAGE_MSG_LAST, "-zn            - don't preprocess the file")
 #endif
 
 
 #define MSG_ELF_HELP_LAST MSG_ELF_HELP_12
 #define MSG_WIN_VXD_HELP_LAST MSG_WIN_VXD_HELP_1
 #define MSG_RAW_HELP_LAST MSG_RAW_HELP_2
-#define MSG_MAX_ERR_MSG_NUM MSG_TARGET_DISP_IGNORED
+//#define MSG_MAX_ERR_MSG_NUM MSG_TARGET_DISP_IGNORED
 };
+
+#define IS_VOWEL(c) (((c)=='a')||((c)=='e')||((c)=='i')||((c)=='o')||((c)=='u'))
 
 class MessagingSubsystem
 {
@@ -833,8 +767,22 @@ class MessagingSubsystem
 public:
 	MessagingSubsystem();
 	~MessagingSubsystem();
-	int Msg_Get(int resourceid, char* buffer);
+	void LnkMsg(unsigned num, char* types, ...);
 	void reset();
 	void Locator(char* filename, char* mem, unsigned rec);
+private:
+	int Msg_Get(int resourceid, char* buffer);
+	void LocateFile(unsigned num);
+	unsigned FmtStr(char* buff, unsigned len, char* fmt, ...);
+	unsigned DoFmtStr(char* buff, unsigned len, char* src, va_list* args);
+	unsigned MakeExeName(char* buff, unsigned max);
+	int UseArgInfo(void);
+	void IncremIndex(void);
+	void FileOrder(char rc_buff[], int which_file);
+	void Msg_Do_Put_Args(char rc_buff[], MSG_ARG_LIST* arg_info, char* types, ...);
+	void Msg_Put_Args(char message[], MSG_ARG_LIST* arg_info, char* types, va_list* args);
+	void Msg_Add_Arg(MSG_ARG* arginfo, char typech, va_list* args);
+	void MessageFini(unsigned num, char* buff, unsigned len, char* prefix, unsigned prefixlen, bool waserror);
+	void WLPrtBanner();
 };
 

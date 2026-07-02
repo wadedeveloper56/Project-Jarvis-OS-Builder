@@ -2,6 +2,12 @@
 #include "MessagingSubsystem.h"
 #include "debug.h"
 #include "banner.h"
+#include "globals.h"
+#include "cmdutils.h"
+#include "linkutil.h"
+#include "cmdline.h"
+#include "Structs.h"
+#include "mapio.h"
 
 #undef pick
 #define pick( code, string )  string,
@@ -17,7 +23,7 @@ pick(MSG_CREATE_EXE,          "creating %f")
 pick(MSG_USING_SPILL,         "using spill file")
 pick(MSG_CANT_OPEN,           "cannot open %1 : %2")
 pick(MSG_NO_DYN_MEM,          "dynamic memory exhausted")
-pick(MSG_IO_PROBLEM,          "I/O error processing %1 : %2")   /* 10 */
+pick(MSG_IO_PROBLEM,          "I/O error processing %1 : %2")
 pick(MSG_OBJ_FILE_ATTR,       "invalid object file attribute")
 pick(MSG_LIB_FILE_ATTR,       "invalid library file attribute")
 pick(MSG_BREAK_HIT,           "break key detected")
@@ -31,7 +37,7 @@ pick(MSG_GROUP_TOO_BIG,       "size of group %s exceeds 64k by %l bytes")
 pick(MSG_SEG_TOO_BIG,         "size of segment %s exceeds 64k by %l bytes")
 pick(MSG_CANT_HAVE_START,     "cannot have a starting address with an imported symbol")
 pick(MSG_NO_START_ADDR,       "no starting address found, using %a")
-pick(MSG_NO_OVERLAY_LOADER,   "missing overlay loader")         /* 24 */
+pick(MSG_NO_OVERLAY_LOADER,   "missing overlay loader")
 pick(MSG_VECT_RANGE,          "%s vector %d is out of range")
 pick(MSG_RESERVED_SYM_DEFINED,"redefinition of reserved symbol %s")
 pick(MSG_MULT_DEF,            "redefinition of %S ignored")
@@ -46,7 +52,7 @@ pick(MSG_EXE_NAME,            "Executable Image: %s")
 pick(MSG_CREATED_ON,          "Created on:       %1 %2")
 pick(MSG_UNDEF_SYM,           "file %1(%2): undefined symbol %S")
 pick(MSG_DEBUG_AFTER_FILES,   "DEBUG directive appears after object files")
-pick(MSG_ALIGN_TOO_SMALL,     "ALIGNMENT value too small")      /* 39 */
+pick(MSG_ALIGN_TOO_SMALL,     "ALIGNMENT value too small")
 pick(MSG_IMPORT_ORD_INVALID,  "ordinal in IMPORT directive not valid")
 pick(MSG_EXPORT_ORD_INVALID,  "ordinal in EXPORT directive not valid")
 pick(MSG_TOO_MANY_IOPL_WORDS, "too many IOPL words in EXPORT directive")
@@ -56,7 +62,7 @@ pick(MSG_SEG_FLAG_MULT_DEFD,  "segment attribute defined more than once")
 pick(MSG_SEG_NAME_NOT_FOUND,  "segment name %s not found")
 pick(MSG_CLASS_NAME_NOT_FOUND,"class name %s not found")
 pick(MSG_AUTO_SEG_MULT_DEFD,  "inconsistent attributes for automatic data segment")
-pick(MSG_INV_STUB_FILE,       "invalid STUB file")              /* 49 */
+pick(MSG_INV_STUB_FILE,       "invalid STUB file")
 pick(MSG_INV_OLD_DLL,         "invalid DLL specified in OLDLIBRARY option")
 pick(MSG_STUB_SAME_AS_LOAD,   "STUB file name same as executable file name")
 pick(MSG_REL_NOT_SAME_SEG,    "relocation at %a not in the same segment")
@@ -66,7 +72,7 @@ pick(MSG_FRAME_EQ_TARGET,     "%a: frame must be the same as the target in prote
 pick(MSG_CANT_FIND_MEMBER,    "cannot find library member %1(%2)")
 pick(MSG_MULTIPLE_MODES_FOUND,"executable format has been established")
 pick(MSG_FORMAT_BAD_OPTION,   "option %s not valid for %f")
-pick(MSG_VALUE_TOO_LARGE,     "value for %s too large")         /* 59 */
+pick(MSG_VALUE_TOO_LARGE,     "value for %s too large")
 pick(MSG_VALUE_INCORRECT,     "value for %s incorrect")
 pick(MSG_MULT_REALBREAKS,     "multiple values specified for REALBREAK")
 pick(MSG_DLL_WITH_386,        "export and import records not valid for %f")
@@ -82,7 +88,7 @@ pick(MSG_EXIT_PROC_NOT_FOUND,   "EXIT procedure not found")
 pick(MSG_NO_SECTION_IN_ROOT,    "SECTION directive not allowed in root")
 pick(MSG_BAD_NOV_FILE_TYPE,     "bad Novell file format specified")
 pick(MSG_CIRCULAR_ALIAS_FOUND,  "circular alias found for %s")
-pick(MSG_EXPECTING_END,         "expecting an END directive")   /* 75 */
+pick(MSG_EXPECTING_END,         "expecting an END directive")
 pick(MSG_OPTION_MULTIPLY_DEFD,  "%s option multiply specified")
 pick(MSG_NOT_MULTIPLE_OF_8,     "%s is not a multiple of 8")
 pick(MSG_BOTH_RELOC_OPTIONS,    "both relocation options specified")
@@ -99,7 +105,7 @@ pick(MSG_PRESS_CTRL_Z,          "Press CTRL/Z and then RETURN to finish")
 #endif
 pick(MSG_INV_COM_START_ADDR,       "invalid starting address for .COM file")
 pick(MSG_STACK_SEG_IGNORED,        "stack segment ignored in .COM file")
-pick(MSG_NO_VIRT_MEM,              "virtual memory exhausted")  /* 88 */
+pick(MSG_NO_VIRT_MEM,              "virtual memory exhausted")
 pick(MSG_COM_TOO_LARGE,            "program too large for a .COM file")
 pick(MSG_MULT_DEF_BY,              "redefinition of %1 by %2 ignored")
 pick(MSG_OVL_GROUP_SPLIT,          "group %s is in more than one overlay")
@@ -110,7 +116,7 @@ pick(MSG_DEBUG_TOO_LARGE,          "%s debugging information too large")
 pick(MSG_INCOMPATIBLE_DBI_FOUND,   "incompatible types of debugging information found")
 pick(MSG_TOO_MANY_LIB_MODS,        "too many library modules")
 pick(MSG_OFFSET_MUST_BE_ALIGNED,   "Offset option must be a multiple of %l")
-pick(MSG_SYMBOL_NAME_TOO_LONG,     "symbol name too long: %s")   /* 99 */
+pick(MSG_SYMBOL_NAME_TOO_LONG,     "symbol name too long: %s")
 pick(MSG_MOD_TRACE,                "%S referenced by module %s")
 pick(MSG_INV_INC_FILE,             "invalid incremental information file")
 pick(MSG_TRACE_OBJ_NOT_FOUND,      "object file %s not found for tracing")
@@ -118,7 +124,7 @@ pick(MSG_TRACE_LIB_NOT_FOUND,      "library module %1(%2) not found for tracing"
 pick(MSG_MOD_IND_TRACE,            "%S referenced indirectly by module %s")
 pick(MSG_CANT_RESERVE_SPACE,       "cannot reserve %l bytes of extra overlay space")
 pick(MSG_VIRDEF_UNSUPPORTED,       "Borland VIRDEF records not supported")
-pick(MSG_SYSTEM_UNDEFINED,         "undefined system name: %s")   /* 107 */
+pick(MSG_SYSTEM_UNDEFINED,         "undefined system name: %s")
 pick(MSG_SYSTEM_ALREADY_DEFINED,   "system %s defined more than once")
 pick(MSG_QNX_BASE_LT_STACK,        "OFFSET option is less than the stack size")
 pick(MSG_NO_MEMB_IN_LIBFILE,       "library members not allowed in libfile")
@@ -129,7 +135,7 @@ pick(MSG_ENV_NAME_INCORRECT,       "environment name specified incorrectly")
 pick(MSG_ENV_NOT_FOUND,            "environment name %s not found")
 pick(MSG_AREA_TOO_SMALL,           "overlay area must be at least %l bytes")
 pick(MSG_BAD_MOVABLE_SEG_NUM,      "segment number too high for a movable entry point")
-pick(MSG_HEAP_TOO_BIG,             "heap size too large")           /* 118 */
+pick(MSG_HEAP_TOO_BIG,             "heap size too large")
 pick(MSG_BAD_WLIB_IMPORT,          "wlib import statement incorrect")
 pick(MSG_APP_TOO_BIG_FOR_DOS,      "application too large to run under DOS")
 pick(MSG_DUP_EXP_NAME,             "'%s' has already been exported")
@@ -145,7 +151,7 @@ pick(MSG_INV_SHARED_NLM_FILE,      "%s is an invalid shared NLM file")
 pick(MSG_CANT_OPEN_SPILL,          "cannot open temporary file: file already exists")
 pick(MSG_BAD_CURLY_LIST,           "curly brace delimited list incorrect")
 pick(MSG_NO_REALBREAK_WITH_16BIT,  "no realbreak specified for 16-bit code")
-pick(MSG_INV_MESSAGE_FILE,         "%s is an invalid message file")    /* 134 */
+pick(MSG_INV_MESSAGE_FILE,         "%s is an invalid message file")
 pick(MSG_INCORRECT_NUM_AREAS,      "need exactly 1 overlay area with dynamic overlay manager")
 pick(MSG_RELOC_TO_RWDATA_SEG,      "segment relocation to a read/write data segment found at %a(%S)")
 pick(MSG_TOO_MANY_ERRORS,          "too many errors encountered")
@@ -163,7 +169,7 @@ pick(MSG_INVALID_TYPE_DESC,        "invalid segment type specified")
 pick(MSG_MULT_DBI_FORMATS,         "only one debugging format can be specified")
 pick(MSG_MACHTYPE_DIFFERENT,       "file %s has code for a different processor")
 pick(MSG_NO_BIG_ENDIAN,            "big endian code not supported")
-pick(MSG_NO_DICT_FOUND,            "no dictionary found")            /* 152 */
+pick(MSG_NO_DICT_FOUND,            "no dictionary found")
 pick(MSG_INVALID_INDEX_IN_RELOC,   "invalid segment/group/external index (%d) in relocation")
 pick(MSG_CANT_EXECUTE,             "cannot execute %1 : %2")
 pick(MSG_REL_NOT_ALIGNED,          "relocation at %a to an improperly aligned target")
@@ -176,7 +182,7 @@ pick(MSG_TOC_TOO_BIG,              "Table of Contents too big to fit into 64K")
 pick(MSG_free_3,                   "relocations on iterated data not supported")
 pick(MSG_NOT_COMPILED_VF_ELIM,     "module has not been compiled with -zv")
 pick(MSG_INC_AND_VFR_NOT_ALLOWED,  "incremental linking does not support virtual function removal")
-pick(MSG_RESOURCE_TOO_BIG,         "resource file %s too big")        /* 165 */
+pick(MSG_RESOURCE_TOO_BIG,         "resource file %s too big")
 pick(MSG_MULT_START_ADDRS_BY,      "both %1 and %2 marked as starting symbols")
 pick(MSG_INTERNAL_MOD_NAME_DIFF_FROM_FILE,  "The NLM internal name (%s) has been truncated as it exceeds the maximum size")
 pick(MSG_VXD_INCORRECT_EXPORT,     "One export must exist for the VxD format")
@@ -185,7 +191,7 @@ pick(MSG_DUP_DIRECTIVE,            "Directive %s can only occur once")
 pick(MSG_IMPORT_LOCAL,             "Locally defined symbol %s is imported")
 pick(MSG_NEED_NOLARGEADDRESSAWARE, "32-bit relocation to '%s' requires option NOLARGEaddressaware")
 pick(MSG_UNKNOWN_DIRECTIVE_IGNORED,"unknown directive '-%s' ignored")
-pick(MSG_TARGET_DISP_IGNORED,      "target displacement %x ignored for segment fixup") /* 7.11.2020 */
+pick(MSG_TARGET_DISP_IGNORED,      "target displacement %x ignored for segment fixup")
 
 pick(MSG_FILE_REC_NAME_0, "file %s: ")
 pick(MSG_FILE_REC_NAME_1, "(%s): ")
@@ -277,10 +283,6 @@ pick(MSG_MAP_COMDAT, "c = initialized communal data")
 pick(MSG_MAP_SYM_STATIC, "s = symbol is static")
 pick(MSG_MAP_DEFINING_MODULE, "Module: %s(%s)")
 
-/*
- *  General help screen.
- *  To start a new page, leave a line undefined or define an empty line.
- */
 	pick(MSG_GENERAL_HELP_0, "usage: jwlink {directive} ('jwlink -?' for detailed help)")
 	pick(MSG_GENERAL_HELP_1, "\ncommands valid for all executable formats:\n")
 	pick(MSG_GENERAL_HELP_2, "directive  ::= \"File\"        obj_spec{\",\"obj_spec}")
@@ -326,10 +328,6 @@ pick(MSG_MAP_DEFINING_MODULE, "Module: %s(%s)")
 
 #define  MSG_GENERAL_HELP_LAST MSG_GENERAL_HELP_39
 
-	/*
-	 *  Dos help screen.
-	 *  To start a new page, leave a line undefined or define an empty line.
-	 */
 	pick(MSG_DOS_HELP_0, "\ncommands valid for the MS-DOS executable format only:\n")
 	pick(MSG_DOS_HELP_1, "form      ::= \"Dos\" [\"COM\"]")
 	pick(MSG_DOS_HELP_2, "directive ::= \"NEWsegment\"")
@@ -337,10 +335,6 @@ pick(MSG_MAP_DEFINING_MODULE, "Module: %s(%s)")
 
 #define  MSG_DOS_HELP_LAST MSG_DOS_HELP_3
 
-	/*
-	 *  OS2 help screen.
-	 *  To start a new page, leave a line undefined or define an empty line.
-	 */
 	pick(MSG_OS2_HELP_0, "\ncommands valid for the OS/2 executable formats (NE, LE, LX) only:\n")
 	pick(MSG_OS2_HELP_1, "form      ::= \"OS2\" [\"FLat\"|\"LE\"|\"LX\"] [\"PHYSdevice\" | \"VIRTdevice\"")
 	pick(MSG_OS2_HELP_2, "            | [\"DLl\"[\"INITGlobal\"|\"INITInstance\" [\"TERMInstance\"|\"TERMGlobal\"]]")
@@ -369,10 +363,6 @@ pick(MSG_MAP_DEFINING_MODULE, "Module: %s(%s)")
 
 #define MSG_OS2_HELP_LAST MSG_OS2_HELP_24
 
-	/*
-	 *  Win16 help screen.
-	 *  To start a new page, leave a line undefined or define an empty line.
-	 */
 	pick(MSG_WINDOWS_HELP_0, "\ncommands valid for the Microsoft Win16 executable formats (NE) only:\n")
 	pick(MSG_WINDOWS_HELP_1, "form      ::= \"WIndows\" [\"DLl\"[\"INITGlobal\" | \"INITInstance\"]] [DPMI] [MEMory] [FOnt]")
 	pick(MSG_WINDOWS_HELP_2, "directive ::= \"NEWsegment\"")
@@ -396,10 +386,6 @@ pick(MSG_MAP_DEFINING_MODULE, "Module: %s(%s)")
 
 #define MSG_WINDOWS_HELP_LAST MSG_WINDOWS_HELP_19
 
-	/*
-	 *  NT help screen.
-	 *  To start a new page, leave a line undefined or define an empty line.
-	 */
 	pick(MSG_NT_HELP_0, "\ncommands valid for the PE executable formats only:\n")
 	pick(MSG_NT_HELP_1, "form      ::= \"WIndows PE\" [\"TNT\"|\"HX\"]")
 	pick(MSG_NT_HELP_2, "              [\"DLl\"[\"INITGlobal\"|\"INITInstance\" [\"TERMInstance\"|\"TERMGlobal\"]]")
@@ -426,10 +412,6 @@ pick(MSG_MAP_DEFINING_MODULE, "Module: %s(%s)")
 
 #define MSG_NT_HELP_LAST MSG_NT_HELP_21
 
-	/*
-	 *  Phar Lap help screen.
-	 *  To start a new page, leave a line undefined or define an empty line.
-	 */
 	pick(MSG_PHAR_HELP_0, "\ncommands valid for the Phar Lap executable formats only:\n")
 	pick(MSG_PHAR_HELP_3, "form      ::= \"PHARlap\" [\"EXTended\" | \"REX\" | \"SEGmented\"]")
 	pick(MSG_PHAR_HELP_4, "directive ::= \"RUntime\"     runoption{\",\"runoption}")
@@ -440,10 +422,6 @@ pick(MSG_MAP_DEFINING_MODULE, "Module: %s(%s)")
 
 #define MSG_PHAR_HELP_LAST MSG_PHAR_HELP_8
 
-	/*
-	 *  Novell help screen.
-	 *  To start a new page, leave a line undefined or define an empty line.
-	 */
 	pick(MSG_NOVELL_HELP_0, "\ncommands valid for the Novell Netware executable format only:\n")
 	pick(MSG_NOVELL_HELP_3, "form      ::= \"NOVell\" [\"NLM\" | \"LAN\" | \"DSK\" | \"NAM\" | 'number'] 'description'")
 	pick(MSG_NOVELL_HELP_4, "directive ::= \"MODUle\"      module_name{\",\"module_name}")
@@ -463,10 +441,6 @@ pick(MSG_MAP_DEFINING_MODULE, "Module: %s(%s)")
 #define MSG_NOVELL_HELP_LAST MSG_NOVELL_HELP_16
 
 #ifdef _DOS16M
-	/*
-	 *  Dos/16M help screen.
-	 *  To start a new page, leave a line undefined or define an empty line.
-	 */
 	pick(MSG_DOS16_HELP_0, "\ncommands valid for the DOS/16M executable format only:\n")
 	pick(MSG_DOS16_HELP_3, "form      ::= \"DOS16M\"")
 	pick(MSG_DOS16_HELP_4, "directive ::= \"MEMory\"      strategy")
@@ -483,10 +457,6 @@ pick(MSG_MAP_DEFINING_MODULE, "Module: %s(%s)")
 #define MSG_DOS16_HELP_LAST MSG_DOS16_HELP_13
 #endif
 
-	/*
-	 *  QNX help screen.
-	 *  To start a new page, leave a line undefined or define an empty line.
-	 */
 	pick(MSG_QNX_HELP_0, "\ncommands valid for the QNX executable format only:\n")
 	pick(MSG_QNX_HELP_3, "form      ::= \"QNX\" [\"FLat\"]")
 	pick(MSG_QNX_HELP_4, "directive ::= \"SEGment\"     segdesc{\",\"segdesc}")
@@ -500,10 +470,6 @@ pick(MSG_MAP_DEFINING_MODULE, "Module: %s(%s)")
 
 #define MSG_QNX_HELP_LAST MSG_QNX_HELP_11
 
-	/*
-	 *  ELF help screen.
-	 *  To start a new page, leave a line undefined or define an empty line.
-	 */
 	pick(MSG_ELF_HELP_0, "\ncommands valid for the ELF executable format only:\n")
 	pick(MSG_ELF_HELP_3, "form      ::= \"ELF\" [\"DLl\"]")
 	pick(MSG_ELF_HELP_4, "directive ::= \"MODUle\"      module_name{\",\"module_name}")
@@ -517,33 +483,8 @@ pick(MSG_MAP_DEFINING_MODULE, "Module: %s(%s)")
 	pick(MSG_ELF_HELP_12, "runoption ::= (\"SVR4\" | \"LINux\" | \"FREebsd\" | \"NETbsd\" | \"SOLaris\" | \"ABIver\" )")
 
 
-	/*
-	 *  Windows help screen.
-	 *  To start a new page, leave a line undefined or define an empty line.
-	 */
 	pick(MSG_WIN_VXD_HELP_0, "\ncommands valid for the Microsoft Windows VxD formats only:\n")
 	pick(MSG_WIN_VXD_HELP_1, "form      ::= \"WIndows VXD\" [\"DYNamic\"]")
-	/*
-	pick(    MSG_WIN_VXD_HELP_2,    "directive ::= \"NEWsegment\"" )
-	pick(    MSG_WIN_VXD_HELP_3,    "            | \"SEGment\"     segdesc{\",\"segdesc}" )
-	pick(    MSG_WIN_VXD_HELP_4,    "            | \"IMPort\"      import{\",\"import}" )
-	pick(    MSG_WIN_VXD_HELP_5,    "            | \"EXPort\"      export{\",\"export}" )
-	pick(    MSG_WIN_VXD_HELP_6,    "            | \"EXPort\"      \"=\"wlib_directive_file" )
-	pick(    MSG_WIN_VXD_HELP_7,    "segdesc   ::= segspec segmodel {segmodel}" )
-	pick(    MSG_WIN_VXD_HELP_8,    "segspec   ::= seg_name | \"Class\" class_name | \"TYpe\" (\"CODE\" | \"DATA\")" )
-	pick(    MSG_WIN_VXD_HELP_9,    "import    ::= entryname module[\".\"(extname | ordinal)]" )
-	pick(    MSG_WIN_VXD_HELP_10,   "option    ::= \"Alignment=\"n | \"DEscription\" description | \"Heapsize=\"n" )
-	pick(    MSG_WIN_VXD_HELP_11,   "            | \"IMPFile\"[=file_name] | \"IMPLib\"[=file_name]" )
-	pick(    MSG_WIN_VXD_HELP_12,   "            | (\"MANYautodata\" | \"NOautodata\" | \"ONEAutodata\")" )
-	pick(    MSG_WIN_VXD_HELP_13,   "            | \"MODName=\"module_name | \"OLDlibrary=\"dll_name | \"PACKCode=\"n" )
-	pick(    MSG_WIN_VXD_HELP_14,   "            | \"PACKData=\"n | \"RESource=\"res_file_name | \"RWReloccheck\"" )
-	pick(    MSG_WIN_VXD_HELP_15,   "            | \"STUB=\"stub_name | \"NOSTUB\" | \"VERSion=\"major.[minor]" )
-	pick(    MSG_WIN_VXD_HELP_16,   "export    ::= entryname[\".\"ordinal][\"=\"internal][\"RESident\"][\"PRIVATE\"]" )
-	pick(    MSG_WIN_VXD_HELP_17,   "segmodel  ::= (\"PReload\" | \"LOadoncall\") | (\"SHared\" | \"NONShared\")" )
-	pick(    MSG_WIN_VXD_HELP_18,   "            | (\"EXECUTEOnly\" | \"EXECUTERead\" | \"READOnly\" | \"READWrite\")" )
-	pick(    MSG_WIN_VXD_HELP_19,   "            | (\"MOVeable\" | \"FIXed\") | \"DIScardable\"\n" )
-	*/
-
 	pick(MSG_RAW_HELP_0, "\ncommands valid for the RAW executable formats only:\n")
 	pick(MSG_RAW_HELP_1, "form      ::= \"Raw\" (\"BIN\" | \"HEX\")")
 	pick(MSG_RAW_HELP_2, "option    ::= \"OFFset=\"n")
@@ -602,7 +543,6 @@ pick(MSG_MAP_DEFINING_MODULE, "Module: %s(%s)")
 		pick(ERR_ACCEL_KEYWORD_IGNORED, "Keyword %s ignored for type ASCII accelerator %ld")
 		pick(ERR_DUPLICATE_RESOURCE, "Duplicate resource: %s")
 		pick(ERR_PARSER_INTERNAL, "Internal parser error.")
-		/* this message is unused */
 		pick(ERR_SYNTAX_INT, "")
 		pick(ERR_SYNTAX_STR, "Syntax error near \"%s\"")
 		pick(ERR_DUPLICATE_STRING_CONST, "%d is a duplicate string identifier.")
@@ -620,7 +560,6 @@ pick(MSG_MAP_DEFINING_MODULE, "Module: %s(%s)")
 		pick(ERR_TEXT_FROM_CPP, "%s")
 		pick(ERR_NT_KEYWORD, "Keyword \"%s\" is only valid for Win32")
 		pick(ERR_UNSUPPORTED, "Keyword \"%s\" not currently supported")
-		/* this is a place holder message, its text is embedded in the cannot be found */
 		pick(ERR_RCSTR_NOT_FOUND, "")
 		pick(ERR_CANT_FIND_CHAR_FILE, "Error can't find character translation file \"%s\".")
 		pick(ERR_CANT_OPEN_CHAR_FILE, "Error opening character translation file \"%s\": %s.")
@@ -721,10 +660,9 @@ pick(TRADEMARK, banner3),
 };
 
 MessagingSubsystem::MessagingSubsystem()
-{
-}
+{}
 
-MessagingSubsystem::~MessagingSubsystem() 
+MessagingSubsystem::~MessagingSubsystem()
 {
 	DEBUG((DBG_OLD, "MessagingSubsystem destructor\n"));
 }
@@ -751,4 +689,652 @@ void MessagingSubsystem::Locator(char* filename, char* mem, unsigned rec)
 	LocFile = filename;
 	LocMem = mem;
 	LocRec = rec;
+}
+
+bool TestBit(::byte* array, unsigned num)
+{
+	::byte        mask;
+
+	mask = 1 << (num % 8);
+	num /= 8;
+	return(*(array + num) & mask);
+}
+
+void MessagingSubsystem::LocateFile(unsigned num)
+{
+	unsigned    rec;
+
+	if (num & LOC)
+	{
+		if (num & (LOC_REC & ~LOC))
+		{
+			rec = RecNum;
+		}
+		else
+		{
+			rec = 0;
+		}
+		if (CurrMod == NULL)
+		{
+			if (CmdFile == NULL)
+			{
+				Locator(NULL, NULL, 0);
+			}
+			else
+			{
+				Locator(CmdFile->name, NULL, 0);
+			}
+		}
+		else
+		{
+			Locator(CurrMod->f.source->file->name, CurrMod->name, rec);
+		}
+	}
+}
+
+unsigned CalcMsgNum(unsigned num)
+{
+	unsigned    class1;
+
+	class1 = (num & CLASS_MSK) >> NUM_SHIFT;
+	class1 = (class1 + 1) / 2;
+	return class1 * 1000 + (num & NUM_MSK);
+}
+
+unsigned MessagingSubsystem::FmtStr(char* buff, unsigned len, char* fmt, ...)
+{
+	va_list args;
+
+	va_start(args, fmt);
+	return(DoFmtStr(buff, len, fmt, &args));
+}
+
+unsigned MessagingSubsystem::MakeExeName(char* buff, unsigned max)
+{
+	char        rc_buff[RESOURCE_MAX_SIZE];
+	exe_format  format;
+	unsigned    len;
+	char* str;
+	unsigned    num;
+
+	if (max <= 3) return(0);
+	len = 1;
+	*buff++ = 'a';
+	if (FmtData.osname != NULL)
+	{
+		str = FmtData.osname;
+	}
+	else
+	{
+		format = FmtData.type;
+		if ((FmtData.type & MK_PE) && FmtData.u.pe.win64)
+		{
+			Msg_Get(MSG_FILE_PE64, rc_buff);
+		}
+		else if ((FmtData.type & MK_ELF) && FmtData.u.elf.elf64)
+		{
+			Msg_Get(MSG_FILE_ELF64, rc_buff);
+		}
+		else
+		{
+			for (;; )
+			{
+				num = blog_32(format);
+				DO_AND_EQUAL(exe_format, format, &=, ~(1 << num));
+				if (format == 0)
+					break;
+			}
+			Msg_Get(MSG_FILE_TYPES_0 + num, rc_buff);
+		}
+		str = rc_buff;
+	}
+	if (IS_VOWEL(tolower(*str)))
+	{
+		*buff++ = 'n';
+		len++;
+	}
+	*buff++ = ' ';
+	num = strlen(str);
+	len += num + 2;
+	if (len > max) return(len - (num + 2));
+	memcpy(buff, str, num);
+	buff += num;
+	*buff++ = ' ';
+	if (FmtData.dll)
+	{
+		Msg_Get(MSG_CREATE_TYPE_DLL, rc_buff);
+		str = rc_buff;
+	}
+	else
+	{
+		Msg_Get(MSG_CREATE_TYPE_EXE, rc_buff);
+		str = rc_buff;
+	}
+	num = strlen(str);
+	len += num;
+	if (len > max) return(len - num);
+	memcpy(buff, str, num + 1);
+	return(len);
+}
+
+int MessagingSubsystem::UseArgInfo(void)
+{
+	return(MsgArgInfo.index >= 0);
+}
+
+void MessagingSubsystem::IncremIndex(void)
+{
+	MsgArgInfo.index++;
+}
+
+char* utoa(unsigned int val, char* s, int radix)
+{
+	switch (radix)
+	{
+		case 10:  sprintf(s, "%u", val); break;
+		case 16:  sprintf(s, "%x", val); break;
+		default: printf("utoa: unsupported radix %u\n", radix);
+	}
+	return s;
+}
+
+unsigned MessagingSubsystem::DoFmtStr(char* buff, unsigned len, char* src, va_list* args)
+{
+	char            ch;
+	char* dest;
+	char* str;
+	uint16_t     num;
+	uint32_t     num2;
+#ifdef LONG_IS_64BITS
+	unsigned long   num3;
+#else
+	unsigned long long num3;
+#endif
+	unsigned        size;
+	targ_addr* addr;
+	unsigned int    i;
+	static char     hexchar[] = "0123456789abcdef";
+	int             temp;
+
+	dest = buff;
+	for (;;)
+	{
+		ch = *src++;
+		if (ch == '\0' || len == 1) break;
+		if (ch != '%')
+		{
+			*dest++ = ch;
+			len--;
+		}
+		else
+		{
+			ch = *src++;
+			switch (ch)
+			{
+				case 'S':
+					if (UseArgInfo())
+					{
+						str = MsgArgInfo.arg[MsgArgInfo.index].symb->name;
+						IncremIndex();
+					}
+					else
+					{
+						str = va_arg(*args, symbol*)->name;
+					}
+#if defined(__WATCOMC__)
+					if (!(LinkFlags & DONT_UNMANGLE))
+					{
+						size = __demangle_l(str, 0, dest, len);
+						if (size > (len - 1)) size = len - 1;
+						CurrSymName = dest;
+					}
+					else
+#endif
+					{
+						size = strlen(str);
+						if (size > len) size = len;
+						memcpy(dest, str, size);
+						CurrSymName = str;
+					}
+					len -= size;
+					dest += size;
+					break;
+				case 's':
+					if (UseArgInfo())
+					{
+						str = MsgArgInfo.arg[MsgArgInfo.index].string;
+						IncremIndex();
+					}
+					else
+					{
+						str = va_arg(*args, char*);
+					}
+					size = strlen(str);
+					if (size > len) size = len;
+					memcpy(dest, str, size);
+					len -= size;
+					dest += size;
+					break;
+				case 't':
+					str = va_arg(*args, char*);
+					num = *src++ - '0';
+					num = num * 10 + *src++ - '0';
+					if (num > len) num = len;
+					while ((*str != '\0') && (num > 0))
+					{
+						*dest++ = *str++;
+						num--;
+					}
+					while (num > 0)
+					{
+						*dest++ = ' ';
+						num--;
+					}
+					len -= num;
+					break;
+				case 'c':
+					*dest++ = va_arg(*args, int);
+					len--;
+					break;
+				case 'x':
+					if (UseArgInfo())
+					{
+						num = MsgArgInfo.arg[MsgArgInfo.index].int_16;
+						IncremIndex();
+					}
+					else
+					{
+						num = va_arg(*args, unsigned int);
+					}
+					if (len < 4) return(dest - buff);
+					dest += 4;
+					len -= 4;
+					str = dest;
+					for (i = 4; i > 0; i--)
+					{
+						*--str = hexchar[num & 0x0f];
+						num >>= 4;
+					}
+					break;
+				case 'h':
+					num2 = va_arg(*args, uint32_t);
+					if (len < 8) return(dest - buff);
+					dest += 8;
+					len -= 8;
+					str = dest;
+					for (i = 8; i > 0; i--)
+					{
+						*--str = hexchar[num2 & 0x0f];
+						num2 >>= 4;
+					}
+					break;
+				case 'p':
+					if (sizeof(void*) == 4)
+						num2 = va_arg(*args, uint32_t);
+					else
+					{
+						num3 = va_arg(*args, unsigned long);
+						num2 = (uint32_t)(num3 >> 32);
+						if (num2)
+						{
+							if (len < 8) return(dest - buff);
+							dest += 8;
+							len -= 8;
+							str = dest;
+							for (i = 8; i > 0; i--)
+							{
+								*--str = hexchar[num2 & 0x0f];
+								num2 >>= 4;
+							}
+						}
+						num2 = (uint32_t)num3;
+					}
+					if (len < 8) return(dest - buff);
+					dest += 8;
+					len -= 8;
+					str = dest;
+					for (i = 8; i > 0; i--)
+					{
+						*--str = hexchar[num2 & 0x0f];
+						num2 >>= 4;
+					}
+					break;
+				case 'd':
+					if (len < 5) return(dest - buff);
+					if (UseArgInfo())
+					{
+						num = MsgArgInfo.arg[MsgArgInfo.index].int_16;
+						IncremIndex();
+					}
+					else
+					{
+						num = va_arg(*args, unsigned int);
+					}
+					utoa(num, dest, 10);
+					size = strlen(dest);
+					dest += size;
+					len -= size;
+					break;
+				case 'l':
+					if (len < 10) return(dest - buff);
+					if (UseArgInfo())
+					{
+						num2 = MsgArgInfo.arg[MsgArgInfo.index].int_32;
+						IncremIndex();
+					}
+					else
+					{
+						num2 = va_arg(*args, uint32_t);
+					}
+					_ultoa(num2, dest, 10);
+					size = strlen(dest);
+					dest += size;
+					len -= size;
+					break;
+				case 'a':
+				case 'A':
+					if (UseArgInfo())
+					{
+						addr = MsgArgInfo.arg[MsgArgInfo.index].address;
+						IncremIndex();
+					}
+					else
+					{
+						addr = va_arg(*args, targ_addr*);
+					}
+					temp = MsgArgInfo.index;
+					MsgArgInfo.index = -1;
+					if (FmtData.type & MK_FLAT)
+					{
+						size = FmtStr(dest, len, "%h", addr->off);
+					}
+					else if (FmtData.type & MK_QNX_FLAT)
+					{
+						size = FmtStr(dest, len, "%h", FindLinearAddr(addr));
+					}
+					else if (FmtData.type & (MK_ELF | MK_PE))
+					{
+						size = FmtStr(dest, len, "%h", FindLinearAddr2(addr));
+					}
+					else if (FmtData.type & MK_ID_SPLIT)
+					{
+						if (addr->seg == CODE_SEGMENT)
+						{
+							size = FmtStr(dest, len, "CODE:%h", addr->off);
+						}
+						else
+						{
+							size = FmtStr(dest, len, "DATA:%h", addr->off);
+						}
+					}
+					else if ((FmtData.type & MK_386) || ch == 'A')
+					{
+						size = FmtStr(dest, len, "%x:%h", addr->seg, addr->off);
+					}
+					else
+					{
+						size = FmtStr(dest, len, "%x:%x", addr->seg,
+							(unsigned short)addr->off);
+					}
+					dest += size;
+					len -= size;
+					MsgArgInfo.index = temp;
+					break;
+				case 'f':
+					num = MakeExeName(dest, len);
+					dest += num;
+					len -= num;
+					break;
+			}
+		}
+	}
+	MsgArgInfo.index = -1;
+	*dest = '\0';
+	return(dest - buff);
+}
+
+void MessagingSubsystem::LnkMsg(unsigned  num, char* types, ...)
+{
+	va_list     args;
+	int         which_file = 0;
+	unsigned    len;
+	unsigned    prefixlen;
+	unsigned    class1;
+	bool        waserror;
+	char        rc_buff[RESOURCE_MAX_SIZE];
+	char        buff[MAX_MSG_SIZE];
+	char        prefix[MAX_MSG_SIZE];
+
+	if (!TestBit(MsgFlags, num & NUM_MSK))
+		return;
+	CurrSymName = NULL;
+	LocateFile(num);
+	len = 0;
+	prefixlen = 0;
+	waserror = FALSE;
+	class1 = num & CLASS_MSK;
+	if (class1 == (YELL & CLASS_MSK))
+	{
+		waserror = TRUE;
+	}
+	else if (class1 >= (MILD_ERR & CLASS_MSK))
+	{
+		waserror = TRUE;
+		if (class1 >= (ERR & CLASS_MSK))
+		{
+			LinkState |= LINK_ERROR;
+		}
+	}
+	if (class1 >= (WRN & CLASS_MSK))
+	{
+		if (class1 == (WRN & CLASS_MSK))
+		{
+			Msg_Get(MSG_WARNING, rc_buff);
+		}
+		else
+		{
+			Msg_Get(MSG_ERROR, rc_buff);
+		}
+#if !defined( _DLLHOST )
+		len = FmtStr(buff, MAX_MSG_SIZE - len, rc_buff, CalcMsgNum(num));
+#else
+		prefixlen = FmtStr(prefix, MAX_MSG_SIZE, rc_buff, CalcMsgNum(num));
+#endif
+	}
+	if (LocFile != NULL)
+	{
+		which_file += 1;
+	}
+	if (LocMem != NULL)
+	{
+		which_file += 2;
+	}
+	if (LocRec != 0)
+	{
+		which_file += 4;
+	}
+	if (which_file != 0)
+	{
+		if (Token.how == SYSTEM)
+		{
+			Msg_Get(MSG_SYS_BLK, rc_buff);
+			which_file = 1;
+		}
+		else if (Token.how == ENVIRONMENT)
+		{
+			Msg_Get(MSG_ENVIRON, rc_buff);
+			which_file = 1;
+		}
+		else
+		{
+			Msg_Get(MSG_FILE_REC_NAME_0 + which_file - 1, rc_buff);
+		}
+		FileOrder(rc_buff, which_file);
+		len += FmtStr(&buff[len], MAX_MSG_SIZE - len, rc_buff);
+		if (num & LINE)
+		{
+			if (Token.how != SYSTEM && Token.how != ENVIRONMENT)
+			{
+				Msg_Get(MSG_LINE, rc_buff);
+				Msg_Do_Put_Args(rc_buff, &MsgArgInfo, "d", Token.line);
+				len += FmtStr(&buff[len], MAX_MSG_SIZE - len, rc_buff);
+			}
+		}
+		LocFile = NULL;
+		LocMem = NULL;
+		LocRec = 0;
+	}
+
+	va_start(args, types);
+	Msg_Get(num & NUM_MSK, rc_buff);
+	Msg_Put_Args(rc_buff, &MsgArgInfo, types, &args);
+	va_end(args);
+	len += FmtStr(&buff[len], MAX_MSG_SIZE - len, rc_buff);
+	MessageFini(num, buff, len, prefix, prefixlen, waserror);
+}
+
+void MessagingSubsystem::FileOrder(char rc_buff[], int which_file)
+{
+	switch (which_file)
+	{
+		case 1:
+			Msg_Do_Put_Args(rc_buff, &MsgArgInfo, "s", LocFile);
+			break;
+		case 2:
+			Msg_Do_Put_Args(rc_buff, &MsgArgInfo, "s", LocMem);
+			break;
+		case 3:
+			Msg_Do_Put_Args(rc_buff, &MsgArgInfo, "12", LocFile, LocMem);
+			break;
+		case 4:
+			Msg_Do_Put_Args(rc_buff, &MsgArgInfo, "d", LocRec);
+			break;
+		case 5:
+			Msg_Do_Put_Args(rc_buff, &MsgArgInfo, "sd", LocFile, LocRec);
+			break;
+		case 6:
+			Msg_Do_Put_Args(rc_buff, &MsgArgInfo, "sd", LocMem, LocRec);
+			break;
+		case 7:
+			Msg_Do_Put_Args(rc_buff, &MsgArgInfo, "12d", LocFile, LocMem,LocRec);
+			break;
+	}
+}
+
+void MessagingSubsystem::Msg_Do_Put_Args(char rc_buff[], MSG_ARG_LIST* arg_info, char* types, ...)
+{
+	va_list     args;
+
+	va_start(args, types);
+	Msg_Put_Args(rc_buff, arg_info, types, &args);
+	va_end(args);
+}
+
+void MessagingSubsystem::Msg_Put_Args(char message[], MSG_ARG_LIST* arg_info, char* types, va_list* args)
+{
+	int         argnum = 0;
+	int         j;
+	int         order[3];
+	char* percent;
+	char        types_buff[1 + 3];
+	char        specifier;
+
+	if (types != NULL)
+	{
+		strcpy(types_buff, types);
+		percent = message - 2;
+		while ((percent = strchr(percent + 2, '%')) != NULL)
+		{
+			specifier = percent[1];
+			for (j = 0; types_buff[j] != '\0'; j++)
+			{
+				if (types_buff[j] == specifier)
+				{
+					order[j] = argnum;
+					argnum++;
+					if (isdigit(specifier))
+						types_buff[j] = percent[1] = 's';
+					break;
+				}
+			}
+		}
+		for (j = 0; j < argnum; j++)
+		{
+			Msg_Add_Arg(arg_info->arg + order[j], types_buff[j], args);
+		}
+	}
+	arg_info->index = 0;
+}
+
+void MessagingSubsystem::Msg_Add_Arg(MSG_ARG* arginfo, char typech, va_list* args)
+{
+	switch (typech)
+	{
+		case 's':
+			arginfo->string = va_arg(*args, char*);
+			break;
+		case 'x':
+		case 'd':
+			arginfo->int_16 = va_arg(*args, unsigned int);
+			break;
+		case 'l':
+			arginfo->int_32 = va_arg(*args, unsigned long);
+			break;
+		case 'A':
+		case 'a':
+			arginfo->address = va_arg(*args, targ_addr*);
+			break;
+		case 'S':
+			arginfo->symb = va_arg(*args, symbol*);
+			break;
+	}
+}
+
+void MessagingSubsystem::MessageFini(unsigned num, char* buff, unsigned len,char* prefix, unsigned prefixlen, bool waserror)
+{
+	if (num & OUT_TERM)
+	{
+		if (!(LinkFlags & QUIET_FLAG))
+		{
+			WLPrtBanner();
+			WriteInfoStdOut(buff, num, CurrSymName);
+		}
+		else if ((num & CLASS_MSK) != (CLASS_MSK & INF))
+		{
+			WriteInfoStdOut(buff, num, CurrSymName);
+		}
+	}
+	if ((num & OUT_MAP) && (MapFile != NIL_HANDLE))
+	{
+#if defined( _DLLHOST )
+		BufWrite(prefix, prefixlen);
+#endif
+		BufWrite(buff, len);
+		WriteMapNL(1);
+	}
+	//if ((num & CLASS_MSK) == (FTL & ~OUT_MSK)) Suicide();
+	if (waserror && LinkFlags & MAX_ERRORS_FLAG)
+	{
+		MaxErrors--;
+		if (MaxErrors == 0)
+		{
+			LnkMsg(FTL + MSG_TOO_MANY_ERRORS, NULL);
+		}
+	}
+}
+
+void MessagingSubsystem::WLPrtBanner()
+{
+	char* msg;
+
+	if (!BannerPrinted)
+	{
+		msg = MsgStrings[PRODUCT];
+		WriteInfoStdOut(msg, BANNER, NULL);
+		msg = MsgStrings[COPYRIGHT];
+		WriteInfoStdOut(msg, BANNER, NULL);
+		msg = MsgStrings[TRADEMARK];
+		WriteInfoStdOut(msg, BANNER, NULL);
+		BannerPrinted = TRUE;
+	}
 }

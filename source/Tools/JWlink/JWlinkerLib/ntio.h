@@ -122,6 +122,12 @@ enum
 #define MAX_OPEN_FILES 12
 #define TOOMANY EMFILE
 
+#define STDIN_HANDLE        (_fileno(stdin))
+#define STDOUT_HANDLE       (_fileno(stdout))
+#define STDERR_HANDLE       (_fileno(stderr))
+
+extern char NLSeq[];
+
 time_t QFModTime(int handle);
 int DoOpen(FileSubsystem* fileSubsystem, char* name, unsigned mode, bool isexe);
 f_handle NSOpen(FileSubsystem* fileSubsystem, char* name, unsigned mode);
@@ -133,6 +139,7 @@ bool QHavePath(char* name);
 unsigned long QFileSize(f_handle file);
 long QLSeek(f_handle file, long position, int start, char* name);
 unsigned QRead(f_handle file, void* buffer, unsigned len, char* name);
+void QWriteNL(f_handle file, char* name);
 unsigned QWrite(f_handle file, void* buffer, unsigned len, char* name);
 void QClose(f_handle file, char* name);
 void QDelete(char* name);

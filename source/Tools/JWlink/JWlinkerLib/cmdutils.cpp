@@ -8,6 +8,8 @@
 
 using namespace std;
 
+cmdfilelist* CmdFile = NULL;
+
 char* DefExt[] = {
 #undef pick1
 #define pick1(enum1,text) text,

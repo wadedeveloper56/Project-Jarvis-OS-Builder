@@ -1705,3 +1705,23 @@ typedef struct rtpblock
 	uint16_t     unpriv;
 } rtpblock;
 
+typedef struct cmdfilelist
+{
+	struct cmdfilelist* prev;
+	struct cmdfilelist* next;
+	f_handle            file;
+	char* symprefix;
+	char* name;
+	tok                 token;
+} cmdfilelist;
+
+typedef enum
+{
+	NONBUFFERED,
+	COMMANDLINE,
+	INTERACTIVE,
+	BUFFERED,
+	ENVIRONMENT,
+	SYSTEM
+}                       method;
+
