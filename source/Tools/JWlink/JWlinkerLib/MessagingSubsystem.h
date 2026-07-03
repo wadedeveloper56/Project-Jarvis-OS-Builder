@@ -770,11 +770,12 @@ public:
 	void LnkMsg(unsigned num, char* types, ...);
 	void reset();
 	void Locator(char* filename, char* mem, unsigned rec);
+	unsigned DoFmtStr(char* buff, unsigned len, char* src, va_list* args);
+	void Msg_Write_Map(int resourceid, ...);
 private:
 	int Msg_Get(int resourceid, char* buffer);
 	void LocateFile(unsigned num);
 	unsigned FmtStr(char* buff, unsigned len, char* fmt, ...);
-	unsigned DoFmtStr(char* buff, unsigned len, char* src, va_list* args);
 	unsigned MakeExeName(char* buff, unsigned max);
 	int UseArgInfo(void);
 	void IncremIndex(void);

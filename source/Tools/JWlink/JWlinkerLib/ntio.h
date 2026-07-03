@@ -128,6 +128,7 @@ enum
 
 extern char NLSeq[];
 
+void TrapBreak(int sig_num);
 time_t QFModTime(int handle);
 int DoOpen(FileSubsystem* fileSubsystem, char* name, unsigned mode, bool isexe);
 f_handle NSOpen(FileSubsystem* fileSubsystem, char* name, unsigned mode);

@@ -10,6 +10,12 @@
 
 int      OpenFiles;           
 unsigned LastResult;
+bool     CaughtBreak;          
+
+void TrapBreak(int sig_num)
+{       
+    CaughtBreak = TRUE;
+}
 
 time_t QFModTime(int handle)
 {

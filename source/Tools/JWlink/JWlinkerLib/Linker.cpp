@@ -1,4 +1,5 @@
 #include "pch.h"
+#include <signal.h>
 #include "Linker.h"
 #include "debug.h"
 #include "orl.h"
@@ -133,7 +134,7 @@ void Linker::ResetSubSystems()
 	DEBUG((DBG_OLD, "ResetSubSystems enter\n"));
 	ResetPermData(memorySubsystem);
 	messagingSubsystem->reset();
-	virtualMemory;
+	delete virtualMemory;
 	virtualMemory = new VirtualMemory();
 	ResetMisc();
 	Root = NewSection(memorySubsystem);
@@ -161,6 +162,12 @@ void Linker::ResetSubSystems()
 
 void Linker::DoLink(char* cmdline)
 {
+	DEBUG((DBG_OLD, "DoLink enter\n"));
+	signal(SIGINT, &TrapBreak);
+	StartTime();
+	EndTime(messagingSubsystem);
+	signal(SIGINT, SIG_IGN);
+	DEBUG((DBG_OLD, "DoLink exit\n"));
 }
 
 void Linker::LinkMeBaby()

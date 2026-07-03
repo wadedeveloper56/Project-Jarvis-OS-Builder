@@ -1338,3 +1338,14 @@ void MessagingSubsystem::WLPrtBanner()
 		BannerPrinted = TRUE;
 	}
 }
+
+void MessagingSubsystem::Msg_Write_Map(int resourceid, ...)
+{
+	char        msg_buff[RESOURCE_MAX_SIZE];
+	va_list     arglist;
+
+	Msg_Get(resourceid, msg_buff);
+	va_start(arglist, resourceid);
+	DoWriteMap(this, msg_buff, &arglist);
+	va_end(arglist);
+}
