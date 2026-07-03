@@ -47,7 +47,7 @@ section* NewSection(MemorySubsystem *memorySubsystem)
     return(sect);
 }
 
-char* FileName(MemorySubsystem *memorySubsystem,char* buff, unsigned len, file_defext etype, bool force)
+char* FileName(MemorySubsystem *memorySubsystem, MessagingSubsystem *messagingSubsystem, char* buff, unsigned len, file_defext etype, bool force)
 {
     char* namptr;
     char* namstart;
@@ -77,7 +77,7 @@ char* FileName(MemorySubsystem *memorySubsystem,char* buff, unsigned len, file_d
         _LnkAlloc(char *,ptr,len + 1);
         memcpy(ptr, buff, len);
         ptr[len] = '\0';
-        //LnkMsg(LOC + LINE + FTL + MSG_INV_FILENAME, "s", ptr);
+        messagingSubsystem->LnkMsg(LOC + LINE + FTL + MSG_INV_FILENAME, "s", ptr);
     }
     namelen = cnt;
     namptr = buff + len - 1;

@@ -15,16 +15,16 @@
 
 using namespace std;
 
-void SetNovFmt(MemorySubsystem *memorySubsystem)
+void SetNovFmt(MemorySubsystem *memorySubsystem, MessagingSubsystem *messagingSubsystem)
 {
     Extension = E_NLM;
     if (!(LinkState & FMT_SPECIFIED) && Name != NULL)
     {
-        FmtData.u.nov.description = FileName(memorySubsystem, Name, strlen(Name), E_NLM, CmdFlags & CF_UNNAMED);
+        FmtData.u.nov.description = FileName(memorySubsystem, messagingSubsystem, Name, strlen(Name), E_NLM, CmdFlags & CF_UNNAMED);
     }
 }
 
-void FreeNovFmt(MemorySubsystem *memorySubsystem)
+void FreeNovFmt(MemorySubsystem *memorySubsystem, MessagingSubsystem *messagingSubsystem)
 {
     _LnkFree(FmtData.u.nov.screenname);
     _LnkFree(FmtData.u.nov.description);

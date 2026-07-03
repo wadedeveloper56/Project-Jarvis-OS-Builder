@@ -15,7 +15,7 @@
 
 using namespace std;
 
-void SetPharFmt(MemorySubsystem *memorySubsystem)
+void SetPharFmt(MemorySubsystem *memorySubsystem, MessagingSubsystem *messagingSubsystem)
 {
     Extension = E_PROTECT;
     LinkState &= ~MAKE_RELOCS;     // do not generate relocations.
@@ -35,10 +35,10 @@ void SetPharFmt(MemorySubsystem *memorySubsystem)
     FmtData.u.phar.params->istksize = 1;
     FmtData.u.phar.params->extender_flags = 0;
     FmtData.u.phar.params->unpriv = 0;
-    ChkBase(4 * 1024);
+    ChkBase(memorySubsystem, messagingSubsystem, 4 * 1024);
 }
 
-void FreePharFmt(MemorySubsystem *memorySubsystem)
+void FreePharFmt(MemorySubsystem *memorySubsystem, MessagingSubsystem *messagingSubsystem)
 {
     memorySubsystem->FreeMemory(FmtData.u.phar.breaksym);
     memorySubsystem->FreeMemory(FmtData.u.phar.params);

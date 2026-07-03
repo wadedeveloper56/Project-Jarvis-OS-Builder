@@ -9,6 +9,7 @@
 #include "cmd16m.h"
 #include "cmdqnx.h"
 #include "cmdelf.h"
+#include "MessagingSubsystem.h"
 
 using namespace std;
 
@@ -35,5 +36,5 @@ using namespace std;
 #define PM_NOT_COMPATIBLE   0x4000
 #define TERM_INSTANCE_FLAG  0x8000
 
-void SetOS2Fmt(MemorySubsystem *memorySubsystem);
-void FreeOS2Fmt(MemorySubsystem *memorySubsystem);
+void SetOS2Fmt(MemorySubsystem *memorySubsystem, MessagingSubsystem *messagingSubsystem);
+void FreeOS2Fmt(MemorySubsystem *memorySubsystem, MessagingSubsystem *messagingSubsystem);

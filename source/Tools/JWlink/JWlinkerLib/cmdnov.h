@@ -11,8 +11,9 @@
 #include "cmdelf.h"
 #include "cmdos2.h"
 #include "cmdphar.h"
+#include "MessagingSubsystem.h"
 
 using namespace std;
 
-void SetNovFmt(MemorySubsystem *memorySubsystem);
-void FreeNovFmt(MemorySubsystem *memorySubsystem);
+void SetNovFmt(MemorySubsystem *memorySubsystem, MessagingSubsystem *messagingSubsystem);
+void FreeNovFmt(MemorySubsystem *memorySubsystem, MessagingSubsystem *messagingSubsystem);

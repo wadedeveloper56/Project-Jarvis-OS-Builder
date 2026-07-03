@@ -1,13 +1,14 @@
 #include "pch.h"
-#include "MemorySubsystem.h"
 #include "cmd16m.h"
+#include "MemorySubsystem.h"
+#include "MessagingSubsystem.h"
 #include "globals.h"
 #include "Structs.h"
 #include "cmdline.h"
 
 using namespace std;
 
-void SetD16MFmt(MemorySubsystem *memorySubsystem)
+void SetD16MFmt(MemorySubsystem* memorySubsystem, MessagingSubsystem* messagingSubsystem)
 {
     LinkState &= ~MAKE_RELOCS;                  
     Extension = E_PROTECT;
@@ -22,7 +23,7 @@ void SetD16MFmt(MemorySubsystem *memorySubsystem)
     FmtData.u.d16m.stub = NULL;
 }
 
-void FreeD16MFmt(MemorySubsystem *memorySubsystem)
+void FreeD16MFmt(MemorySubsystem* memorySubsystem, MessagingSubsystem* messagingSubsystem)
 {
     memorySubsystem->FreeMemory(FmtData.u.d16m.stub);
 }

@@ -3,6 +3,7 @@
 #include <memory>
 #include "MemorySubsystem.h"
 #include "Structs.h"
+#include "MessagingSubsystem.h"
 
 using namespace std;
 
@@ -15,7 +16,7 @@ extern sysblock* SysBlocks;
 extern sysblock* LinkCommands;
 extern sysblock* PrevCommand; 
 
-void FreeFormatStuff(MemorySubsystem *memorySubsystem);
+void FreeFormatStuff(MemorySubsystem *memorySubsystem, MessagingSubsystem *messagingSubsystem);
 void InitCmdFile();
 char* GetNextLink();
 void CleanSystemList(MemorySubsystem *memory, bool check);

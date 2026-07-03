@@ -20,8 +20,9 @@
 
 #include <memory>
 #include "MemorySubsystem.h"
+#include "MessagingSubsystem.h"
 
 using namespace std;
 
-void SetD16MFmt(MemorySubsystem *memorySubsystem);
-void FreeD16MFmt(MemorySubsystem *memorySubsystem);
+void SetD16MFmt(MemorySubsystem* memorySubsystem, MessagingSubsystem* messagingSubsystem);
+void FreeD16MFmt(MemorySubsystem* memorySubsystem, MessagingSubsystem* messagingSubsystem);

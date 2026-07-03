@@ -208,16 +208,16 @@ void FreeTokBuffs(MemorySubsystem *memorySubsystem)
     }
 }
 
-void BadObject()
+void BadObject(MessagingSubsystem* messagingSubsystem)
 {
     DO_OR_EQUAL(infile_flags, CurrMod->f.source->file->flags, |=, INSTAT_IOERR)//CurrMod->f.source->file->flags |= INSTAT_IOERR;
-    //LnkMsg(LOC + ERR + MSG_OBJ_FILE_ATTR, NULL);
+    messagingSubsystem->LnkMsg(LOC + ERR + MSG_OBJ_FILE_ATTR, NULL);
 }
 
 void EarlyEOF(MessagingSubsystem*messagingSubsystem)
 {
     DO_OR_EQUAL(infile_flags, CurrMod->f.source->file->flags, |=, INSTAT_IOERR)//CurrMod->f.source->file->flags |= INSTAT_IOERR;
     messagingSubsystem->Locator(CurrMod->f.source->file->name, NULL, 0);
-    //LnkMsg(ERR + MSG_EARLY_EOF, NULL);
+    messagingSubsystem->LnkMsg(ERR + MSG_EARLY_EOF, NULL);
 }
 

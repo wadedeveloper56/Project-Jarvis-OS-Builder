@@ -11,8 +11,9 @@
 #include "cmdelf.h"
 #include "cmdos2.h"
 #include "cmdphar.h"
+#include "MessagingSubsystem.h"
 
 using namespace std;
 
-void SetPharFmt(MemorySubsystem *memorySubsystem);
-void FreePharFmt(MemorySubsystem *memorySubsystem);
+void SetPharFmt(MemorySubsystem *memorySubsystem, MessagingSubsystem *messagingSubsystem);
+void FreePharFmt(MemorySubsystem *memorySubsystem, MessagingSubsystem *messagingSubsystem);

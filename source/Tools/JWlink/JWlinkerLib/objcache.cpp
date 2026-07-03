@@ -9,7 +9,7 @@
 
 using namespace std;
 
-bool CacheOpen(MemorySubsystem *memorySubsystem, FileSubsystem* fileSubsystem, file_list* list)
+bool CacheOpen(MemorySubsystem *memorySubsystem, FileSubsystem* fileSubsystem, MessagingSubsystem* messagingSubsystem, file_list* list)
 {
     infilelist* file;
 
@@ -31,7 +31,7 @@ bool CacheOpen(MemorySubsystem *memorySubsystem, FileSubsystem* fileSubsystem, f
         if (file->len == 0)
         {
             DEBUG((DBG_OLD, "CacheOpen: bad object error\n"));
-            //LnkMsg(ERR + MSG_BAD_OBJECT, "s", file->name);
+            messagingSubsystem->LnkMsg(ERR + MSG_BAD_OBJECT, "s", file->name);
             DO_OR_EQUAL(infile_flags, file->flags, |=, INSTAT_IOERR)//; file->flags |= INSTAT_IOERR;
             return(false);
         }

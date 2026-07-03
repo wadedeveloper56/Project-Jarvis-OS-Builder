@@ -88,7 +88,7 @@ void Linker::CleanSubSystems()
 	DEBUG((DBG_OLD, "CleanSubSystems: calling CleanLoadFile()\n"));
 	CleanLoadFile();
 	CleanLinkStruct(memorySubsystem, spillFile);
-	FreeFormatStuff(memorySubsystem);
+	FreeFormatStuff(memorySubsystem, messagingSubsystem);
 	FreeObjInfo();
 	DEBUG((DBG_OLD, "CleanSubSystems: calling FreeVirtMem()\n"));
 	//FreeVirtMem(); not needed
