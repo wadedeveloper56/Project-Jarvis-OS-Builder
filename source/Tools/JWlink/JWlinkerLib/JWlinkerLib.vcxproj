@@ -97,7 +97,7 @@
       <PreprocessorDefinitions>__NT__; _EXE;_RAW;_NOVELL;_PHARLAP;_OS2;_ELF;_QNXLOAD;_DOS16M;_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
@@ -122,7 +122,7 @@
       <PreprocessorDefinitions>__NT__; _EXE;_RAW;_NOVELL;_PHARLAP;_OS2;_ELF;_QNXLOAD;_DOS16M;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
@@ -145,7 +145,7 @@
       <PreprocessorDefinitions>__NT__; _EXE;_RAW;_NOVELL;_PHARLAP;_OS2;_ELF;_QNXLOAD;_DOS16M;_CRT_SECURE_NO_WARNINGS;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
@@ -170,7 +170,7 @@
       <PreprocessorDefinitions>__NT__; _EXE;_RAW;_NOVELL;_PHARLAP;_OS2;_ELF;_QNXLOAD;_DOS16M;_CRT_SECURE_NO_WARNINGS;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
