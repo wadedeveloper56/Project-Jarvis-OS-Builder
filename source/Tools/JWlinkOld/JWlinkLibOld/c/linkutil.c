@@ -52,7 +52,7 @@
 #include "permdata.h"
 #include "mapio.h"
 #include "wressetr.h"   // from wres project
-
+#include "wresset2.h"  // from wres project
 
 static ssize_t ResWrite( int dummy, const void *buff, size_t size )
 /*****************************************************************/

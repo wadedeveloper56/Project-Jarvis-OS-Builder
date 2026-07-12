@@ -58,9 +58,9 @@ static entry_export * FindPlace( entry_export *exp )
 /**************************************************/
 // finds the correct place to put exp to keep the export list sorted.
 {
-    entry_export *  place;
-    entry_export *  prev;
-    entry_export *  ret;
+    entry_export *  place=NULL;
+    entry_export *  prev=NULL;
+    entry_export *  ret=NULL;
 
     ret = NULL;
     place = exp->next;
@@ -485,7 +485,7 @@ static void ReadNameTable( f_handle the_file )
     if( LinkFlags & CASE_FLAG ) {
         compare_rtn = &strcmp;
     } else {
-        compare_rtn = &stricmp;
+        compare_rtn = &_stricmp;
     }                             // skip the module name & ordinal.
     for( ;; ) {
         QRead( the_file, &length, sizeof( unsigned_8 ), fname );

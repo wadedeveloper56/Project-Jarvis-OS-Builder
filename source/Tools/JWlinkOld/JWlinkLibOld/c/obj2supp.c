@@ -827,7 +827,7 @@ static void CheckPartialRange( fix_data *fix, signed_32 off,
     } else {
         temp += off;
     }
-    if( ( temp < -topbit ) || ( temp >= topbit ) ) {
+    if( ( temp < -(signed_32)(topbit )) || ( temp >= topbit ) ) {
         LnkMsg( LOC+ERR+MSG_FIXUP_OFF_RANGE, "a", &fix->loc_addr );
     }
 }

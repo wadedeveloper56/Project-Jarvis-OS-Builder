@@ -35,7 +35,7 @@
 #define ZDP
 #endif
 
-#include <dosfunc.h>
+//#include <dosfunc.h>
 #include <errno.h>
 #include <watcom.h>
 

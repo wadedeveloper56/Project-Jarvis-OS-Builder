@@ -569,12 +569,12 @@ static unsigned_32 SetRelocSectName( ElfHdr *hdr, char *secname )
 static void WriteRelocsSections( ElfHdr *hdr )
 /********************************************/
 {
-    group_entry *group;
+    group_entry *group=NULL;
     int         currgrp;
-    void        *relocs;
-    char        *secname;
-    Elf32_Shdr  *sh32;
-    Elf64_Shdr  *sh64;
+    void        *relocs=NULL;
+    char        *secname=NULL;
+    Elf32_Shdr  *sh32=NULL;
+    Elf64_Shdr  *sh64=NULL;
 
     if ( FmtData.u.elf.elf64 )
         sh64 = hdr->sh64 + hdr->i.relbase;

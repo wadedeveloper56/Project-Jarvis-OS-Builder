@@ -41,7 +41,7 @@
 #include "alloc.h"
 #include "wlnkmsg.h"
 #include "wressetr.h"
-#include "tinyio.h"
+//#include "tinyio.h"
 #include "objio.h"
 #include "fileio.h"
 

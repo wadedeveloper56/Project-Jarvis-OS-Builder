@@ -63,7 +63,7 @@ static const char * const msgtexts[] = {
 #if defined( __UNIX__ )
 #include "rc.msg"
 #else
-#include "sdk/rc/rc/h/rc.msg"
+#include "../../sdkold/rc/rc/h/rc.msg"
 #endif
 #undef pick
 

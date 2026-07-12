@@ -44,6 +44,7 @@
 #if !defined( __UNIX__ )
 #include <direct.h>
 #endif
+#include "File.h"
 
 #define _LinkerPrompt "JWLINK>"
 
@@ -70,7 +71,7 @@ static void     StartNewFile( void );
 static bool WildCard( bool (*rtn)( void ), tokcontrol ctrl )
 /**********************************************************/
 {
-#if defined( __UNIX__ )
+#if !defined( __UNIX__ )
     //opendir - readdir wildcarding not supported here.
     ctrl = ctrl;
     return( rtn() );

@@ -359,9 +359,6 @@
     <ClCompile Include="c\libsupp.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="c\linkio.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="c\linkutil.c">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -410,9 +407,6 @@
     <ClCompile Include="c\mem.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="c\mixcache.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="c\msg.c">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -452,13 +446,7 @@
     <ClCompile Include="c\objstrip.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="c\oldcache.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="c\omfreloc.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="c\orlstubs.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="c\overlays.c">
@@ -498,9 +486,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="c\toc.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="c\virtmem.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="c\virtpage.c">

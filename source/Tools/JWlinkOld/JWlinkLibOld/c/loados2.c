@@ -358,9 +358,9 @@ static void WriteOS2Resources( int reshandle, WResDir inRes, ResTable *outRes )
     int align = 1 << shift_count;
     int outRes_off;
     WResDirWindow       wind;
-    FullTypeRecord      *exe_type;
-    WResResInfo         *res;
-    WResLangInfo        *lang;
+    FullTypeRecord      *exe_type=NULL;
+    WResResInfo         *res=NULL;
+    WResLangInfo        *lang=NULL;
 
     if( inRes == NULL ) return;
     outRes_off = NullAlign(align) >> shift_count;

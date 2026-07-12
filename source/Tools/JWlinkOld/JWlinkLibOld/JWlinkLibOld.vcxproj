@@ -73,22 +73,22 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>..\..\..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\..\bin\intermediate\jwlinklibold\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>.\h;..\watcom\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>..\..\File;..\orlold\h;..\orlold\coff\h;..\orlold\elf\h;..\orlold\omf\h;..\libmiscold\h;..\sdkold\rc\rc\h;..\sdkold\rc\wres\h;..\dwarfold\h;.\h;..\watcom\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>..\..\..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\..\bin\intermediate\jwlinklibold\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>.\h;..\watcom\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>..\..\File;..\orlold\h;..\orlold\coff\h;..\orlold\elf\h;..\orlold\omf\h;..\libmiscold\h;..\sdkold\rc\rc\h;..\sdkold\rc\wres\h;..\dwarfold\h;.\h;..\watcom\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>..\..\..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\..\bin\intermediate\jwlinklibold\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>.\h;..\watcom\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>..\..\File;..\orlold\h;..\orlold\coff\h;..\orlold\elf\h;..\orlold\omf\h;..\libmiscold\h;..\sdkold\rc\rc\h;..\sdkold\rc\wres\h;..\dwarfold\h;.\h;..\watcom\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>..\..\..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\..\bin\intermediate\jwlinklibold\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>.\h;..\watcom\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>..\..\File;..\orlold\h;..\orlold\coff\h;..\orlold\elf\h;..\orlold\omf\h;..\libmiscold\h;..\sdkold\rc\rc\h;..\sdkold\rc\wres\h;..\dwarfold\h;.\h;..\watcom\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -289,7 +289,6 @@
     <ClCompile Include="c\impexp.c" />
     <ClCompile Include="c\libr.c" />
     <ClCompile Include="c\libsupp.c" />
-    <ClCompile Include="c\linkio.c" />
     <ClCompile Include="c\linkutil.c" />
     <ClCompile Include="c\load16m.c" />
     <ClCompile Include="c\loaddos.c" />
@@ -306,7 +305,6 @@
     <ClCompile Include="c\lsymtab.c" />
     <ClCompile Include="c\mapio.c" />
     <ClCompile Include="c\mem.c" />
-    <ClCompile Include="c\mixcache.c" />
     <ClCompile Include="c\msg.c" />
     <ClCompile Include="c\ntio.c" />
     <ClCompile Include="c\obj2supp.c" />
@@ -320,9 +318,7 @@
     <ClCompile Include="c\objpass1.c" />
     <ClCompile Include="c\objpass2.c" />
     <ClCompile Include="c\objstrip.c" />
-    <ClCompile Include="c\oldcache.c" />
     <ClCompile Include="c\omfreloc.c" />
-    <ClCompile Include="c\orlstubs.c" />
     <ClCompile Include="c\overlays.c" />
     <ClCompile Include="c\ovlsupp.c" />
     <ClCompile Include="c\permdata.c" />
@@ -336,7 +332,6 @@
     <ClCompile Include="c\symmem.c" />
     <ClCompile Include="c\symtrace.c" />
     <ClCompile Include="c\toc.c" />
-    <ClCompile Include="c\virtmem.c" />
     <ClCompile Include="c\virtpage.c" />
     <ClCompile Include="c\wcomdef.c" />
     <ClCompile Include="c\wlnkmsg.c" />
