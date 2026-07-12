@@ -492,14 +492,14 @@ static void demangleEmit( void **cookie, dm_pts dp, int value, char const *ptr )
     case DM_INTEGER:
         {
             char buff[12];
-            itoa( value, buff, 10 );
+            _itoa( value, buff, 10 );
             emitStr( data, buff );
         }
         break;
     case DM_ARRAY_SIZE:
         if( value != 0 ) {
             char buff[12];
-            itoa( value, buff, 10 );
+            _itoa( value, buff, 10 );
             emitStr( data, buff );
         }
         break;
@@ -663,7 +663,7 @@ static int strRecog( output_desc *data, char *str, unsigned len )
     if(( data->end - data->input ) < len ) {
         return( 0 );
     }
-    if( memicmp( data->input, str, len ) != 0 ) {
+    if( _memicmp( data->input, str, len ) != 0 ) {
         return( 0 );
     }
     data->input += len;
@@ -1813,7 +1813,7 @@ int __is_mangled( char const *name, size_t len )
     len = len;
 
     offset = 2;
-    if( name[0] == '_' && memicmp( name, IMPORT_PREFIX_STR, IMPORT_PREFIX_LEN ) == 0 ) {
+    if( name[0] == '_' && _memicmp( name, IMPORT_PREFIX_STR, IMPORT_PREFIX_LEN ) == 0 ) {
         name += IMPORT_PREFIX_LEN;
         offset += IMPORT_PREFIX_LEN;
     }

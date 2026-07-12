@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>18.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{5439c1db-6b09-4c18-8b38-47d1f6b59f0f}</ProjectGuid>
-    <RootNamespace>dwarfold</RootNamespace>
+    <ProjectGuid>{0fec3b50-a29e-42ec-8a7d-d184b5c7b713}</ProjectGuid>
+    <RootNamespace>libmiscold</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -72,29 +72,29 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>..\..\..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>..\..\..\..\bin\intermediate\dwarfold\$(Configuration)\$(Platform)\</IntDir>
+    <IntDir>..\..\..\..\bin\intermediate\libmiscold\$(Configuration)\$(Platform)\</IntDir>
     <IncludePath>.\h;..\watcom\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>..\..\..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>..\..\..\..\bin\intermediate\dwarfold\$(Configuration)\$(Platform)\</IntDir>
+    <IntDir>..\..\..\..\bin\intermediate\libmiscold\$(Configuration)\$(Platform)\</IntDir>
     <IncludePath>.\h;..\watcom\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>..\..\..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>..\..\..\..\bin\intermediate\dwarfold\$(Configuration)\$(Platform)\</IntDir>
+    <IntDir>..\..\..\..\bin\intermediate\libmiscold\$(Configuration)\$(Platform)\</IntDir>
     <IncludePath>.\h;..\watcom\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>..\..\..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>..\..\..\..\bin\intermediate\dwarfold\$(Configuration)\$(Platform)\</IntDir>
+    <IntDir>..\..\..\..\bin\intermediate\libmiscold\$(Configuration)\$(Platform)\</IntDir>
     <IncludePath>.\h;..\watcom\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_WCUNALIGNED;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
@@ -116,7 +116,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_WCUNALIGNED;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
@@ -136,7 +136,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_WCUNALIGNED;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
@@ -158,7 +158,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_WCUNALIGNED;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
@@ -176,43 +176,19 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
-    <ClInclude Include="h\dw.h" />
-    <ClInclude Include="h\dwabbrev.h" />
-    <ClInclude Include="h\dwabort.h" />
-    <ClInclude Include="h\dwarange.h" />
-    <ClInclude Include="h\dwassert.h" />
-    <ClInclude Include="h\dwcarve.h" />
-    <ClInclude Include="h\dwcnf.h" />
-    <ClInclude Include="h\dwdecl.h" />
-    <ClInclude Include="h\dwdie.h" />
-    <ClInclude Include="h\dwhandle.h" />
-    <ClInclude Include="h\dwinfo.h" />
-    <ClInclude Include="h\dwline.h" />
-    <ClInclude Include="h\dwloc.h" />
-    <ClInclude Include="h\dwmac.h" />
-    <ClInclude Include="h\dwmem.h" />
-    <ClInclude Include="h\dwname.h" />
-    <ClInclude Include="h\dwpriv.h" />
-    <ClInclude Include="h\dwrefer.h" />
-    <ClInclude Include="h\dwsym.h" />
-    <ClInclude Include="h\dwtype.h" />
-    <ClInclude Include="h\dwutils.h" />
-    <ClInclude Include="h\testcli.h" />
+    <ClInclude Include="h\demangle.h" />
+    <ClInclude Include="h\dm_pts.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="c\dwlngen.c" />
-    <ClCompile Include="c\dwutils.c" />
-    <ClCompile Include="dwarfold.c" />
+    <ClCompile Include="c\demangle.c" />
+    <ClCompile Include="libmiscold.c" />
     <ClCompile Include="pch.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="h\dwabenum.gh" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
