@@ -73,27 +73,31 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>..\..\..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\..\bin\intermediate\dwarfold\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>.\h;..\watcom\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>..\..\..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\..\bin\intermediate\dwarfold\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>.\h;..\watcom\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>..\..\..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\..\bin\intermediate\dwarfold\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>.\h;..\watcom\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>..\..\..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\..\bin\intermediate\dwarfold\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>.\h;..\watcom\h;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WCUNALIGNED;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
@@ -112,10 +116,10 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WCUNALIGNED;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
@@ -132,10 +136,10 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WCUNALIGNED;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
@@ -154,10 +158,10 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WCUNALIGNED;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
@@ -172,9 +176,33 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
+    <ClInclude Include="h\dw.h" />
+    <ClInclude Include="h\dwabbrev.h" />
+    <ClInclude Include="h\dwabort.h" />
+    <ClInclude Include="h\dwarange.h" />
+    <ClInclude Include="h\dwassert.h" />
+    <ClInclude Include="h\dwcarve.h" />
+    <ClInclude Include="h\dwcnf.h" />
+    <ClInclude Include="h\dwdecl.h" />
+    <ClInclude Include="h\dwdie.h" />
+    <ClInclude Include="h\dwhandle.h" />
+    <ClInclude Include="h\dwinfo.h" />
+    <ClInclude Include="h\dwline.h" />
+    <ClInclude Include="h\dwloc.h" />
+    <ClInclude Include="h\dwmac.h" />
+    <ClInclude Include="h\dwmem.h" />
+    <ClInclude Include="h\dwname.h" />
+    <ClInclude Include="h\dwpriv.h" />
+    <ClInclude Include="h\dwrefer.h" />
+    <ClInclude Include="h\dwsym.h" />
+    <ClInclude Include="h\dwtype.h" />
+    <ClInclude Include="h\dwutils.h" />
+    <ClInclude Include="h\testcli.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="c\dwlngen.c" />
+    <ClCompile Include="c\dwutils.c" />
     <ClCompile Include="dwarfold.c" />
     <ClCompile Include="pch.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
@@ -182,6 +210,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="h\dwabenum.gh" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -284,7 +284,8 @@ typedef enum {
 #ifdef __UNIX__
 #define UNALIGNED
 #else
-#define UNALIGNED _WCUNALIGNED
+#define UNALIGNED 
+//_WCUNALIGNED
 #endif
 
 /* handy structures section */
