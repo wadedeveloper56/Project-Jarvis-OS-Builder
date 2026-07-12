@@ -122,7 +122,7 @@ typedef unsigned        f_handle;
     #define _OS2       2
     #define _PHARLAP   3
     #define _NOVELL    4
-//    #define _DOS16M    5
+    #define _DOS16M    5
     #define _ELF       6
 //    #define _ZDOS      7
     #define _RAW       8
