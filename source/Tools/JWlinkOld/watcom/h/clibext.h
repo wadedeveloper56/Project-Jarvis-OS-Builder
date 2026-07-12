@@ -97,9 +97,9 @@ void _splitpath( const char *path, char *drive,
 void _makepath( char *path, const char *drive, const char *dir,
                 const char *fname, const char *ext );
 char *_fullpath( char *buf, const char *path, size_t size );
-char *strlwr( char *string );
-char *strupr( char *string );
-char *strrev( char *string );
+//char *strlwr( char *string );
+//char *strupr( char *string );
+//char *strrev( char *string );
 //int memicmp(const void *, const void *, size_t);
 off_t tell( int handle );
 long filelength(int handle);
@@ -108,7 +108,7 @@ int _bgetcmd( char *buffer, int len );
 char *getcmd( char *buffer );
 char *_cmdname( char *name );
 void _searchenv( const char *name, const char *env_var, char *buf );
-char *strnset( char *string, int c, size_t len );
+//char *strnset( char *string, int c, size_t len );
 #ifdef __GLIBC__
 size_t strlcpy( char *dst, const char *src, size_t len );
 size_t strlcat( char *dst, const char *t, size_t n );

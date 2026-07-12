@@ -40,7 +40,8 @@
 #include "orlhshdf.h"
 
 #if !defined( __386__ ) && !defined( __GNUC__ )
-#define ORLUNALIGNED __unaligned
+#define ORLUNALIGNED
+//__unaligned
 #else
 #define ORLUNALIGNED
 #endif

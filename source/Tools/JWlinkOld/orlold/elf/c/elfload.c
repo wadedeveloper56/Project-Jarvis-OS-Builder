@@ -553,7 +553,7 @@ orl_return ElfLoadFileStructure( elf_file_handle elf_file_hnd )
         return( ORL_ERROR );
     determine_file_class( elf_file_hnd, e_hdr32 );
     //_ClientSeek( elf_file_hnd, 0, SEEK_SET );
-    _ClientSeek( elf_file_hnd, - sizeof( e_hdr32->e_ident ), SEEK_CUR );
+    _ClientSeek( elf_file_hnd, -(signed)sizeof(e_hdr32->e_ident), SEEK_CUR);
     if( elf_file_hnd->flags & ORL_FILE_FLAG_64BIT_MACHINE ) {
         e_hdr64 = _ClientRead( elf_file_hnd, sizeof( Elf64_Ehdr ) );
         if( !(e_hdr64) )
