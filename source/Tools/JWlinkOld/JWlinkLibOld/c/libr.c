@@ -124,9 +124,9 @@ void SetLibCase( void )
         CmpARRtn = ARCompName;
     } else {
 #ifdef LONG_IS_64BITS
-        CmpOMFRtn = (int (*)( const void *, const void *, size_t ))memicmp;
+        CmpOMFRtn = (int (*)( const void *, const void *, size_t ))_memicmp;
 #else    
-        CmpOMFRtn = memicmp;
+        CmpOMFRtn = _memicmp;
 #endif
         CmpARRtn = ARCompIName;
     }
@@ -683,7 +683,7 @@ static unsigned_16 OMFCompName( const char *name,
     if( LinkFlags & CASE_FLAG ) {
         result = memcmp( buff, name, len );
     } else {
-        result = memicmp( buff, name, len );
+        result = _memicmp( buff, name, len );
     }
 #endif
     if( result == 0 && name[len] == '\0' ) {

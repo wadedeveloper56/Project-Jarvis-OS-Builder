@@ -80,7 +80,7 @@ static unsigned_32 WritePharData( unsigned file_pos )
 
 static unsigned_32 WritePharRelocs( void )
 /****************************************/
-// write the relocations.
+// _write the relocations.
 {
     RELOC_INFO  *temp;
 

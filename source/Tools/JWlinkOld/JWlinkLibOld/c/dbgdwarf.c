@@ -226,7 +226,7 @@ static void DwarfAddLines( lineinfo *info )
 /*****************************************/
 // calculate the amount of space needed to hold all of the line # info.
 {
-    ln_off_pair UNALIGN *lineptr;
+    ln_off_pair  *lineptr;
     unsigned_32         dwsize;
     uint_8              buff[ 3 + 2 * MAX_LEB128 ];
     dw_linenum_delta    linedelta;
@@ -413,7 +413,7 @@ void DwarfAddModule( mod_entry *mod, section *sect )
 
 void DwarfGenModule( void )
 /********************************/
-// write out the addr info, and write out the null die at the end of .debug_info
+// _write out the addr info, and _write out the null die at the end of .debug_info
 {
     arange_tuple        tuple;
     unsigned            size;
@@ -422,7 +422,7 @@ void DwarfGenModule( void )
     if( CurrMod->modinfo & MOD_DBI_SEEN )
         return;
     DEBUG((DBG_OLD,"DwarfGenModule enter, curr arange addr=%h size=%h", CurrMod->d.d->arange.addr, CurrMod->d.d->arange.size ));
-    if( CurrMod->d.d->arange.size > 0 ) {       // write out terminator arange
+    if( CurrMod->d.d->arange.size > 0 ) {       // _write out terminator arange
         if( FmtData.type & MK_SEGMENTED ) {
             size = sizeof( segmented_arange_tuple );
         } else {
@@ -536,7 +536,7 @@ void DwarfGenGlobal( symbol *sym, section *sect )
 void DwarfGenLines( lineinfo *info )
 /**********************************/
 {
-    ln_off_pair UNALIGN *lineptr;
+    ln_off_pair  *lineptr;
     unsigned            dwsize;
     dw_linenum_delta    linedelta;
     dw_addr_delta       addrdelta;
@@ -758,7 +758,7 @@ static void WriteDwarfSect( unsigned addidx, unsigned_32 size )
 static unsigned_32 WriteELFSections( unsigned_32 file_off, unsigned_32 curr_off,
                                      Elf32_Shdr *hdr, stringtable *strtab )
 /******************************************************************************/
-// write out all of the individual section in the debugging information
+// _write out all of the individual section in the debugging information
 {
     seg_leader *seg;
     unsigned    addidx;

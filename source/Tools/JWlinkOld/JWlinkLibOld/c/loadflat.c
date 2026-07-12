@@ -94,7 +94,7 @@ static unsigned NumberBuf( unsigned_32 *start, unsigned_32 limit,
 
 static unsigned_32 WriteObjectTables( os2_flat_header *header,unsigned long loc)
 /******************************************************************************/
-/* write the object table and the object page map */
+/* _write the object table and the object page map */
 {
     unsigned_32     numpages;
     unsigned_32     numobjects;
@@ -366,7 +366,7 @@ static unsigned_32 WriteFixupTables( os2_flat_header *header, unsigned long loc)
 
 static unsigned WriteDataPages( unsigned long loc )
 /*************************************************/
-/* write the enumerated data pages */
+/* _write the enumerated data pages */
 {
     group_entry *group;
     unsigned    last_page;

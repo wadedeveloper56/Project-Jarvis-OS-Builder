@@ -170,7 +170,7 @@ static unsigned_32 GetLeaf( struct objbuff *ob )
     } else if( leaf == COMDEF_LEAF_3 ) {
         value = GET_U16_UN(ob->curr);
         ob->curr += sizeof( unsigned_16 );
-        value += ( unsigned_32 )( *( unsigned char UNALIGN * )(ob->curr) ) << 16;
+        value += ( unsigned_32 )( *( unsigned char  * )(ob->curr) ) << 16;
         ob->curr += sizeof( char );
     } else if( leaf == COMDEF_LEAF_4 ) {
         value = GET_U32_UN(ob->curr);
@@ -214,8 +214,8 @@ void ProcComdef( bool isstatic, struct objbuff *ob )
         flags |= ST_STATIC;
     }
     while( ob->curr < ob->end ) {
-        sym_name = ( ( obj_name UNALIGN * ) (ob->curr) )->name;
-        sym_len = ( ( obj_name UNALIGN * ) (ob->curr) )->len;
+        sym_name = ( ( obj_name  * ) (ob->curr) )->name;
+        sym_len = ( ( obj_name  * ) (ob->curr) )->len;
         ob->curr += sym_len + sizeof( byte );
         SkipIdx( ob );
         kind = *ob->curr++;    /* get "data type".*/
@@ -307,7 +307,7 @@ static char * GetNewName( void )
 /* get a new name for an automatically defined comdat segment */
 {
     CDatSegNum++;
-    ultoa( CDatSegNum, CDatSegName + CDAT_SEG_NUM_OFF, 36 );
+    _ultoa( CDatSegNum, CDatSegName + CDAT_SEG_NUM_OFF, 36 );
     return CDatSegName;
 }
 

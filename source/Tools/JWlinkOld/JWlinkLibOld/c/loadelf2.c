@@ -241,7 +241,7 @@ void WriteElfSymTable( ElfSymTable *tab, ElfHdr *hdr, int hashidx,
 		// Table should be filled, though this condition is not necessary
 		DbgAssert(tab->numElems == tab->maxElems);
 
-		// write symbol section:
+		// _write symbol section:
 		tableSH->sh_info = 0;
 		memset(&elfsym, 0, sizeof elfsym);
 		elfsym.st_shndx = SHN_UNDEF;
@@ -270,7 +270,7 @@ void WriteElfSymTable( ElfSymTable *tab, ElfHdr *hdr, int hashidx,
 		tableSH->sh_addralign = 8;
 		hdr->curr_off += len;
 
-		// write hash section:
+		// _write hash section:
 		len = (1 + 1 + tab->numBuckets + tab->numElems) * sizeof(unsigned_32);
 		hashSH->sh_offset = hdr->curr_off;
 		hashSH->sh_size = len;
@@ -296,7 +296,7 @@ void WriteElfSymTable( ElfSymTable *tab, ElfHdr *hdr, int hashidx,
 		// Table should be filled, though this condition is not necessary
 		DbgAssert(tab->numElems == tab->maxElems);
 
-		// write symbol section:
+		// _write symbol section:
 		tableSH->sh_info = 0;
 		memset(&elfsym, 0, sizeof elfsym);
 		elfsym.st_shndx = SHN_UNDEF;
@@ -326,7 +326,7 @@ void WriteElfSymTable( ElfSymTable *tab, ElfHdr *hdr, int hashidx,
 		DEBUG(( DBG_OLD, "WriteElfSymTable(): symbol table, sh_offset=%h sh_size=%h sh_info=%h symbols=%d",
 			   tableSH->sh_offset, tableSH->sh_size, tableSH->sh_info, i ));
 
-		// write hash section:
+		// _write hash section:
 		len = (1 + 1 + tab->numBuckets + tab->numElems) * sizeof(unsigned_32);
 		hashSH->sh_offset = hdr->curr_off;
 		hashSH->sh_size = len;

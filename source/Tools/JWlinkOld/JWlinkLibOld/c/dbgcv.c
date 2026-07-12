@@ -102,7 +102,7 @@ typedef struct {
 } cvlineinfo;
 
 // split codeview up into a number of different "sections" to keep track
-// of where we write bits of the information.
+// of where we _write bits of the information.
 
 enum {
     CVSECT_MODULE,
@@ -112,7 +112,7 @@ enum {
     NUM_CV_SECTS
 };
 
-// keeps track of where to write bits of information.  Also used in pass 1
+// keeps track of where to _write bits of information.  Also used in pass 1
 // to collect sizes of different blocks.
 
 static virt_mem SectAddrs[NUM_CV_SECTS];
@@ -486,7 +486,7 @@ void CVGenLines( lineinfo *info )
 /*******************************/
 // called during pass 2 linnum processing
 {
-    ln_off_pair UNALIGN *pair;
+    ln_off_pair  *pair;
     unsigned_32         temp_off;
     unsigned_16         temp_num;
     offset              adjust;
@@ -814,6 +814,6 @@ void CVWrite( void )
 // called during load file generation.  It is assumed that the loadfile is
 // positioned to the right spot.
 {
-    // write DEBUG_TYPE_CODEVIEW data: CodeView NB05 data
+    // _write DEBUG_TYPE_CODEVIEW data: CodeView NB05 data
     WriteInfo( CVBase, CVSize );
 }

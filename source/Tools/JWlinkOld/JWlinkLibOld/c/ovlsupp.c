@@ -794,7 +794,7 @@ void EmitOvlTable( void )
 void PadOvlFiles( void )
 /*****************************/
 // The overlay files must contain a complete paragraph at the end of the file
-// for the overlay loader to be able to correctly read it.
+// for the overlay loader to be able to correctly _read it.
 {
     outfilelist     *fnode;
     unsigned        pad;

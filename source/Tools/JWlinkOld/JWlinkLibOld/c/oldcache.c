@@ -150,7 +150,7 @@ void * CachePermRead( file_list *list, unsigned long pos, unsigned len )
 
 void * CacheRead( file_list * list, unsigned long pos, unsigned len )
 /**************************************************************************/
-/* read len bytes out of the cache. */
+/* _read len bytes out of the cache. */
 {
     unsigned    bufnum;
     unsigned    startnum;

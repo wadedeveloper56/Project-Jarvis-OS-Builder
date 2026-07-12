@@ -159,7 +159,7 @@ static bool FindMatch( byte len, void *buff, unsigned *offset )
     *offset = 0;
     while( node != NULL ) {
         if( node->len == len ) {
-            if( memicmp( buff, node->name, len ) == 0 ) {
+            if( _memicmp( buff, node->name, len ) == 0 ) {
                 return( TRUE );
             }
         }
@@ -589,7 +589,7 @@ void ODBIP2Start( section *sect )
         dptr = sect->dbg_info;
     }
     if( dptr != NULL ) {
-        // if section has no info then write bogus address info
+        // if section has no info then _write bogus address info
         if( dptr->addr.curr == 0 ) {
             WriteBogusAddrInfo( dptr );
         } else {
@@ -604,7 +604,7 @@ void ODBIP2Start( section *sect )
 static int CmpLn386( const void *a, const void *b )
 /*************************************************/
 {
-    return( ((ln_off_386 UNALIGN *)a)->off - ((ln_off_386 UNALIGN *)b)->off );
+    return( ((ln_off_386  *)a)->off - ((ln_off_386  *)b)->off );
 }
 
 static int CmpLn286( const void *a, const void *b )
@@ -630,7 +630,7 @@ void ODBIGenLines( lineinfo *info )
 /*********************************/
 {
     unsigned            linelen;
-    ln_off_pair UNALIGN *pair;
+    ln_off_pair  *pair;
     ln_off_386          tmp_ln;
     unsigned_32         temp;
     unsigned            lineqty;
@@ -748,7 +748,7 @@ void ODBIAddAddrInfo( seg_leader *seg )
 
 void ODBIFini( section *sect )
 /***********************************/
-// write out the final links in the link tables.
+// _write out the final links in the link tables.
 {
     debug_info          *dptr;
     unsigned_32         spot;
@@ -824,7 +824,7 @@ static void DBIWriteLocal( void *buff, unsigned len )
 
 static unsigned_16 WriteSegValues( void )
 /***************************************/
-// write out all possible group segment values
+// _write out all possible group segment values
 {
     unsigned_16     segarray[2];
     group_entry     *currgrp;

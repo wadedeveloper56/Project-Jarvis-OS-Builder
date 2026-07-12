@@ -603,9 +603,9 @@ void ResetSym( void )
     HeadSym = NULL;
     LastSym = NULL;
 #ifdef LONG_IS_64BITS
-    CmpRtn = (int (*)( const void *, const void *, size_t ))memicmp;
+    CmpRtn = (int (*)( const void *, const void *, size_t ))_memicmp;
 #else
-    CmpRtn = memicmp;
+    CmpRtn = _memicmp;
 #endif
     GetSymBlock();
     ClearHashPointers();
@@ -773,9 +773,9 @@ void SetSymCase( void )
         CmpRtn = memcmp;
     } else {
 #ifdef LONG_IS_64BITS
-        CmpRtn = (int (*)( const void *, const void *, size_t ))memicmp;
+        CmpRtn = (int (*)( const void *, const void *, size_t ))_memicmp;
 #else
-        CmpRtn = memicmp;
+        CmpRtn = _memicmp;
 #endif
     }
 }

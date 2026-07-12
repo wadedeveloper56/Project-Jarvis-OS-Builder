@@ -72,12 +72,12 @@ static unsigned     reloc_fmt = 0;
 
 static void WriteGDT( unsigned_32 reloc_size )
 /********************************************/
-// write out the GDTs
+// _write out the GDTs
 {
     gdt_info        gdt;
     group_entry     *currgrp;
 
-// write program gdt's.
+// _write program gdt's.
     gdt.gdtaddr_hi = 0;
     for( currgrp = Groups; currgrp != NULL; currgrp = currgrp->next_group ) {
         if( currgrp->size > 0 ) {
@@ -105,7 +105,7 @@ static void WriteGDT( unsigned_32 reloc_size )
         }
         WriteLoad( &gdt, sizeof( gdt_info ) );
     }
-// write out gdt for reloc info
+// _write out gdt for reloc info
     if( reloc_fmt == 1 ) {
         reloc_size /= 2;
         gdt.gdtreserved = 0;

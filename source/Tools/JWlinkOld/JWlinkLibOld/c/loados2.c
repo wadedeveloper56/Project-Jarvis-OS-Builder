@@ -30,7 +30,7 @@
 ****************************************************************************/
 
 #ifdef __WATCOMC__
-#define UNALIGNED _WCUNALIGNED
+#define UNALIGNED 
 #else 
 #define UNALIGNED
 #endif
@@ -116,7 +116,7 @@ static  uint_8          DosStub[] = {
 
 static unsigned long WriteOS2Relocs( group_entry *group )
 /*******************************************************/
-/* write all relocs associated with group to the file */
+/* _write all relocs associated with group to the file */
 {
     unsigned long relocsize;
     unsigned long relocnum;
@@ -148,7 +148,7 @@ static void WriteOS2Data( unsigned_32 stub_len, os2_exe_header *exe_head )
         DEBUG(( DBG_OLD, "WriteOS2Data(): segment %s, flags=%h, size=%h", group->sym->name, group->segflags, group->totalsize ));
         if( group->totalsize == 0 ) continue;   // DANGER DANGER DANGER <--!!!
         segrec.info = group->segflags;
-        // write segment
+        // _write segment
         segrec.min = MAKE_EVEN( group->totalsize );
         segrec.size = MAKE_EVEN( group->size );
         if( segrec.size != 0 ) {
@@ -169,7 +169,7 @@ static void WriteOS2Data( unsigned_32 stub_len, os2_exe_header *exe_head )
             segrec.address = 0;
         }
 
-        // write to segment table
+        // _write to segment table
         off = PosLoad();
         SeekLoad( exe_head->segment_off + stub_len +
                             group_num * sizeof( segment_record ) );
@@ -274,7 +274,7 @@ static FullTypeRecord *findExeTypeRecord( ResTable *restab,
             exe_type_name = (StringItem16 *) ((char *) restab->Str.StringBlock +
                             (exe_type->Info.type - restab->Dir.TableSize));
             if( exe_type_name->NumChars == type->TypeName.ID.Name.NumChars
-                && !memicmp( exe_type_name->Name, type->TypeName.ID.Name.Name,
+                && !_memicmp( exe_type_name->Name, type->TypeName.ID.Name.Name,
                             exe_type_name->NumChars ) ) break;
         } else if( !(type->TypeName.IsName) && exe_type->Info.type & 0x8000 ) {
             /* if they are both numbers */
@@ -865,7 +865,7 @@ void FiniOS2LoadFile( void )
     entry_export        *exp;
     unsigned long       imageguess;     // estimated length of the image
     unsigned            pad_len;
-    WResDir             inRes;     // Directory of resources to read
+    WResDir             inRes;     // Directory of resources to _read
     int                 resHandle;     // Handle for resources file
     ResTable            outRes;  // Resources to go out
 
@@ -1125,7 +1125,7 @@ unsigned_32 GetStubSize( void )
 
 static unsigned WriteDefStub( unsigned_32 stub_align )
 /****************************************************/
-/* write the default stub to the executable file */
+/* _write the default stub to the executable file */
 {
     unsigned            msgsize;
     unsigned            fullsize;

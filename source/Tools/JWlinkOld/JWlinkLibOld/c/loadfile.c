@@ -118,7 +118,7 @@ void CleanLoadFile( void )
 
 void InitLoadFile( void )
 /******************************/
-/* open the file, and write out header info */
+/* _open the file, and _write out header info */
 {
     DEBUG(( DBG_OLD, "InitLoadFile()" ));
     LnkMsg( INF+MSG_CREATE_EXE, "f" );
@@ -208,7 +208,7 @@ static void DoCVPack( void )
         } else {
             name = Root->outfile->fname;
         }
-        retval = spawnlp( P_WAIT, CVPACK_EXE, CVPACK_EXE, "/nologo",
+        retval = _spawnlp( P_WAIT, CVPACK_EXE, CVPACK_EXE, "/nologo",
                           name, NULL );
         if( retval == -1 ) {
             PrintIOError( ERR+MSG_CANT_EXECUTE, "12", CVPACK_EXE );
@@ -607,7 +607,7 @@ void OrderGroups( bool (*lessthan)(targ_addr *, targ_addr *) )
 
 bool WriteDOSGroup( group_entry *group )
 /*********************************************/
-/* write the data for group to the loadfile */
+/* _write the data for group to the loadfile */
 /* returns TRUE if the file should be repositioned */
 {
     unsigned long       loc;
@@ -823,11 +823,11 @@ static void ExecWlib( void )
     }
 #if 1 /* JWLink: create a COFF import library for PE binaries */
     if ( FmtData.type & MK_PE ) {
-        retval = spawnlp( P_WAIT, WLIB_EXE, WLIB_EXE, "-c", "-b", "-n", "-q",
+        retval = _spawnlp( P_WAIT, WLIB_EXE, WLIB_EXE, "-c", "-b", "-n", "-q",
                          "-ic", libtype, FmtData.implibname, atfname, NULL );
     } else
 #endif
-    retval = spawnlp( P_WAIT, WLIB_EXE, WLIB_EXE, "-c", "-b", "-n", "-q",
+    retval = _spawnlp( P_WAIT, WLIB_EXE, WLIB_EXE, "-c", "-b", "-n", "-q",
                   libtype, FmtData.implibname, atfname, NULL );
     if( retval == -1 ) {
         PrintIOError( ERR+MSG_CANT_EXECUTE, "12", WLIB_EXE );
@@ -916,7 +916,7 @@ static void BufImpWrite( char *buffer, unsigned len )
 
 void WriteLoad3( void* dummy, char *buff, unsigned size )
 /**************************************************************/
-/* write a buffer out to the load file (useful as a callback) */
+/* _write a buffer out to the load file (useful as a callback) */
 {
     dummy = dummy;
     WriteLoad( buff, size );
@@ -1152,7 +1152,7 @@ void PadBuffFile( outfilelist *outfile, unsigned long size )
 
 void WriteLoad( void *buff, unsigned long size )
 /*****************************************************/
-/* write a buffer out to the load file */
+/* _write a buffer out to the load file */
 {
     outfilelist         *outfile;
 

@@ -336,7 +336,7 @@ static void GenPETransferTable( void )
             }
         } else if( LinkState & HAVE_I86_CODE ) {
             offset dest = FindIATSymAbsOff( sym );
-            /* jwlink: don't write jmp instruction if not referenced */
+            /* jwlink: don't _write jmp instruction if not referenced */
             if (!(sym->info & SYM_IS_REFERENCED )) {
                 DEBUG(( DBG_OLD, "GenPETransferTable, %s: symbol not referenced, so it's skipped", sym->name ));
                 continue;
@@ -382,7 +382,7 @@ static void GenPETransferTable( void )
 
 static void WriteDataPages( pe_header *header, pe_object *object )
 /*****************************************************************/
-/* write the enumerated data pages, and set the values in the object table */
+/* _write the enumerated data pages, and set the values in the object table */
 {
     group_entry *group;
     char        *name;
@@ -607,13 +607,13 @@ static void WriteImportInfo( void )
         XFerReloc( pos, group, PE_FIX_HIGHLOW );
     }
     WriteIAT(buf+IData.iat_off, linear ); // Import Address table
-    pos = IData.mod_name_off;            /* write the module names */
+    pos = IData.mod_name_off;            /* _write the module names */
     for( mod = PEImpList; mod != NULL; mod = mod->next ) {
         int size = mod->mod->len + 1;
         PutInfo( buf+pos, mod->mod->name, size);
         pos += size;
     }
-    pos = IData.hint_off;        /* write out the import names */
+    pos = IData.hint_off;        /* _write out the import names */
     for( mod = PEImpList; mod != NULL; mod = mod->next ) {
         hint = 1;
         for( imp = mod->imports; imp != NULL; imp = imp->next ) {
@@ -736,14 +736,14 @@ static void WriteExportInfo( pe_header *header )
                                 num_names * sizeof( pe_va );
     _ChkAlloc( sort, sizeof( entry_export * ) * num_entries );
 
-    /* write the export directory table and module name */
+    /* _write the export directory table and module name */
     PutInfo( buf+pos, &dir, sizeof(dir) );
     pos += sizeof(dir);
     PutInfo( buf+pos, name, namelen );
     pos += namelen;
     pos = (pos+3) & ~3;
 
-    /* write the export address table */
+    /* _write the export address table */
     i = 0;
     next_ord = dir.ordinal_base;
     for( exp = FmtData.u.os2.exports; exp != NULL; exp = exp->next ) {
@@ -759,7 +759,7 @@ static void WriteExportInfo( pe_header *header )
 
     qsort( sort, num_entries, sizeof( entry_export * ), &namecmp );
 
-    /* write out the export name ptr table */
+    /* _write out the export name ptr table */
     eat = dir.ordinal_table_rva + num_names * sizeof( unsigned_16 );
     for( i = 0; i < num_entries; ++i ) {
         exp = sort[i];
@@ -768,7 +768,7 @@ static void WriteExportInfo( pe_header *header )
         pos += sizeof( eat );
         eat += strlen( exp->name ) + 1;
     }
-    /* write out the export ordinal table */
+    /* _write out the export ordinal table */
     for( i = 0; i < num_entries; ++i ) {
         exp = sort[i];
         if( exp->isanonymous ) continue;
@@ -776,7 +776,7 @@ static void WriteExportInfo( pe_header *header )
         PutInfo( buf+pos, &ord, sizeof( ord ) );
         pos += sizeof( ord );
     }
-    /* write out the export name table */
+    /* _write out the export name table */
     for( i = 0; i < num_entries; ++i ) {
         exp = sort[i];
         if( exp->isanonymous ) continue;
@@ -1030,7 +1030,7 @@ static void WriteDebugTable( pe_header *header, pe_object *object, const char *s
     int                 num_entries = 2;
     debug_directory     dir;
 
-    DEBUG(( DBG_OLD, "WriteDebugTable() enter - write PE debug directory" ));
+    DEBUG(( DBG_OLD, "WriteDebugTable() enter - _write PE debug directory" ));
     if( symfilename != NULL )
         num_entries--;
     strncpy( object->name, ".rdata", PE_OBJ_NAME_LEN );
@@ -1039,7 +1039,7 @@ static void WriteDebugTable( pe_header *header, pe_object *object, const char *s
     object->flags = PE_OBJ_INIT_DATA | PE_OBJ_READABLE;
     object->physical_size = ROUND_UP( num_entries * sizeof( debug_directory ), header->file_align);
 
-    /* write debug dir entry for DEBUG_TYPE_MISC */
+    /* _write debug dir entry for DEBUG_TYPE_MISC */
     dir.flags = 0;
     dir.time_stamp = header->time_stamp;
     dir.major = 0;
@@ -1054,7 +1054,7 @@ static void WriteDebugTable( pe_header *header, pe_object *object, const char *s
     CVDebugDirEntryPos = PosLoad();
 
     if( symfilename == NULL ) {
-        /* write debug dir entry for DEBUG_TYPE_CODEVIEW */
+        /* _write debug dir entry for DEBUG_TYPE_CODEVIEW */
         dir.flags = 0;
         dir.time_stamp = header->time_stamp;
         dir.major = 0;
@@ -1591,7 +1591,7 @@ static void ReadExports( unsigned_32 namestart, unsigned_32 nameend,
 
 void ReadPEExportTable( f_handle file, pe_hdr_table_entry *base )
 /***********************************************************************/
-/* read a PE export table, and set ordinal values accordingly. */
+/* _read a PE export table, and set ordinal values accordingly. */
 {
     pe_export_directory table;
     char                *fname;

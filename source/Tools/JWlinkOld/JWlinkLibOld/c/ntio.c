@@ -53,7 +53,7 @@
 //extern  char    *_BreakFlagPtr;
 #endif
 
-static int      OpenFiles;      // the number of open files
+static int      OpenFiles;      // the number of _open files
 static unsigned LastResult;
 static bool     CaughtBreak;    // set to TRUE if break hit.
 
@@ -98,8 +98,8 @@ void LnkFilesInit( void )
     OpenFiles = 0;
     CaughtBreak = FALSE;
 #if !defined( _DLLHOST )
-    setmode( STDIN_HANDLE, O_BINARY );
-    setmode( STDOUT_HANDLE, O_BINARY );
+    _setmode( STDIN_HANDLE, O_BINARY );
+    _setmode( STDOUT_HANDLE, O_BINARY );
 #endif
 }
 
@@ -120,7 +120,7 @@ static int DoOpen( char *name, unsigned mode, bool isexe )
     for( ;; ) {
         if( OpenFiles >= MAX_OPEN_FILES )
             CleanCachedHandles();
-        h = open( name, mode, S_IRUSR | S_IWUSR );
+        h = _open( name, mode, S_IRUSR | S_IWUSR );
         if( h != -1 ) {
             OpenFiles++;
             break;
@@ -160,12 +160,12 @@ f_handle QOpenRW( char *name )
 
 int ResOpen( const char *path, int access, ... )
 /*****************************************************/
-/* a simple open cover routine for wres stuff */
+/* a simple _open cover routine for wres stuff */
 {
     int     perm;
 
     perm = 0666;
-    return( open( path, access, perm ) );
+    return( _open( path, access, perm ) );
 }
 
 f_handle ExeCreate( char *name )
@@ -192,12 +192,12 @@ f_handle ExeOpen( char *name )
     return( NIL_HANDLE );
 }
 
-    #define doread( f, b, l )  read( f, b, l )
-    #define dowrite( f, b, l ) write( f, b, l )
+    #define doread( f, b, l )  _read( f, b, l )
+    #define dowrite( f, b, l ) _write( f, b, l )
 
 unsigned QRead( f_handle file, void *buffer, unsigned len, char *name )
 /****************************************************************************/
-/* read into far memory */
+/* _read into far memory */
 {
     int     h;
 
@@ -211,7 +211,7 @@ unsigned QRead( f_handle file, void *buffer, unsigned len, char *name )
 
 unsigned QWrite( f_handle file, void *buffer, unsigned len, char *name )
 /*****************************************************************************/
-/* write from far memory */
+/* _write from far memory */
 {
     int     h;
     char    rc_buff[RESOURCE_MAX_SIZE];
@@ -224,7 +224,7 @@ unsigned QWrite( f_handle file, void *buffer, unsigned len, char *name )
         unsigned long pos = QPos(file);
         if( pos <= SpyWrite && SpyWrite <= pos+len
             && file == Root->outfile->handle) {
-            DEBUG((DBG_ALWAYS, "About to write to %s (handle %d) %d bytes at position %d:",
+            DEBUG((DBG_ALWAYS, "About to _write to %s (handle %d) %d bytes at position %d:",
                 name, file, len, pos));
             PrintMemDump(buffer, len, DUMP_BYTE);
         }
@@ -254,12 +254,12 @@ void QWriteNL( f_handle file, char *name )
 
 void QClose( f_handle file, char *name )
 /*********************************************/
-/* file close */
+/* file _close */
 {
     int         h;
 
     CheckBreak();
-    h = close( file );
+    h = _close( file );
     OpenFiles--;
     if( h != -1 )
         return;
@@ -272,7 +272,7 @@ long QLSeek( f_handle file, long position, int start, char *name )
     long int    h;
 
     CheckBreak();
-    h = lseek( file, position, start );
+    h = _lseek( file, position, start );
     if( h == -1 && name != NULL ) {
         LnkMsg( ERR+MSG_IO_PROBLEM, "12", name, strerror( errno ) );
     }
@@ -289,7 +289,7 @@ unsigned long QPos( f_handle file )
 /****************************************/
 {
     CheckBreak();
-    return( lseek( file, 0L, SEEK_CUR ) );
+    return( _lseek( file, 0L, SEEK_CUR ) );
 }
 
 unsigned long QFileSize( f_handle file )
@@ -297,7 +297,7 @@ unsigned long QFileSize( f_handle file )
 {
     long        result;
 
-    result = filelength( file );
+    result = _filelength( file );
     if( result == -1 ) {
         result = 0;
     }
@@ -319,7 +319,7 @@ void QDelete( char *name )
 
 bool QReadStr( f_handle file, char *dest, unsigned size, char *name )
 /**************************************************************************/
-/* quick read string (for reading directive file) */
+/* quick _read string (for reading directive file) */
 {
     bool            eof;
     char            ch;
@@ -343,7 +343,7 @@ bool QReadStr( f_handle file, char *dest, unsigned size, char *name )
 bool QIsDevice( f_handle file )
 /************************************/
 {
-    return( isatty( file ) );
+    return( _isatty( file ) );
 }
 
 static f_handle NSOpen( char *name, unsigned mode )

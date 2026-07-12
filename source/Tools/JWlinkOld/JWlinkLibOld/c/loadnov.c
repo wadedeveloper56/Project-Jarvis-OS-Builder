@@ -65,7 +65,7 @@ void ResetLoadNov( void )
 
 static unsigned_32 WriteNovRelocs( fixed_header *header )
 /*******************************************************/
-// write the relocations.
+// _write the relocations.
 {
     DumpRelocList( Root->reloclist );
     header->numberOfRelocationFixups = Root->relocs;
@@ -305,7 +305,7 @@ static unsigned_32 WriteNovDBI( fixed_header *header )
 
 static unsigned_32 WriteMessages( extended_nlm_header * header )
 /**************************************************************/
-/* write out the messages file */
+/* _write out the messages file */
 {
     f_handle    handle;
     char *      name;
@@ -422,7 +422,7 @@ static unsigned_32 WriteNovImage( unsigned_32 file_pos, bool docode )
     bool                repos;
     bool                iscode;
 
-    /* write groups.*/
+    /* _write groups.*/
     fnode = Root->outfile;
     for( group = Groups; group != NULL; group = group->next_group ) {
         if( group->grp_addr.seg == CODE_SEGMENT ) {
@@ -442,7 +442,7 @@ static unsigned_32 WriteNovImage( unsigned_32 file_pos, bool docode )
 
 static unsigned_32 WriteNovData( unsigned_32 file_pos, fixed_header * header )
 /****************************************************************************/
-// write both the code image and the data image.
+// _write both the code image and the data image.
 {
     unsigned_32     codesize;
 
@@ -468,7 +468,7 @@ static unsigned_32 WriteNovData( unsigned_32 file_pos, fixed_header * header )
 
 static void NovNameWrite( char *name )
 /************************************/
-// write a name to the loadfile in the typical novell fashion
+// _write a name to the loadfile in the typical novell fashion
 {
     unsigned_8  len;
 
@@ -564,7 +564,7 @@ void FiniNovellLoadFile( void )
     nov_header.codeImageOffset = file_size;
     image_size = WriteNovData( file_size, &nov_header );
     temp = MemorySize() - image_size;
-    if( temp > 0 ) {       // write out BSS.
+    if( temp > 0 ) {       // _write out BSS.
         PadLoad( temp );
         nov_header.dataImageSize += temp;
         image_size += temp;

@@ -52,7 +52,7 @@
 #include "alloc.h"
 #include "fileio.h"
 
-static int      OpenFiles;          // the number of open files
+static int      OpenFiles;          // the number of _open files
 static unsigned LastResult;
 static bool     CaughtBreak = FALSE;    // set to TRUE if break hit.
 
@@ -64,8 +64,8 @@ void LnkFilesInit( void )
 /******************************/
 {
     OpenFiles = 0;
-//    setmode( STDIN_HANDLE, O_BINARY );      // PROBLEM ---- not POSIX!!!!!
-//    setmode( STDOUT_HANDLE, O_BINARY );
+//    _setmode( STDIN_HANDLE, O_BINARY );      // PROBLEM ---- not POSIX!!!!!
+//    _setmode( STDOUT_HANDLE, O_BINARY );
 }
 
 void PrintIOError( unsigned msg, char *types, char *name )
@@ -89,7 +89,7 @@ static int DoOpen( char *name, unsigned mode, bool isexe )
         if( OpenFiles >= MAX_OPEN_FILES ) CleanCachedHandles();
         if ( ( mode & O_CREAT ) && !stat( name, &st) )
             unlink( name );
-        h = open( name, mode, perm );
+        h = _open( name, mode, perm );
         if( h != -1 ) {
             OpenFiles++;
             break;
@@ -150,7 +150,7 @@ f_handle ExeOpen( char *name )
 
 #if defined( __QNX__ )
 /*
-    QNX only allows 32K-1 bytes to be read/written at any one time, so bust
+    QNX only allows 32K-1 bytes to be _read/written at any one time, so bust
     up any I/O larger than that.
 */
 #define MAX_OS_TRANSFER (32U*1024 - 512)
@@ -165,7 +165,7 @@ static unsigned doread( int file, void *buffer, unsigned len )
     for( ;; ) {
         if( len == 0 ) return( total );
         amount = (len > MAX_OS_TRANSFER) ? MAX_OS_TRANSFER : len;
-        h = read( file, buffer, amount );
+        h = _read( file, buffer, amount );
         if( h < 0 ) return( h );
         total += h;
         if( h != amount ) return( total );
@@ -184,7 +184,7 @@ static unsigned dowrite( int file, void *buffer, unsigned len )
     for( ;; ) {
         if( len == 0 ) return( total );
         amount = (len > MAX_OS_TRANSFER) ? MAX_OS_TRANSFER : len;
-        h = write( file, buffer, amount );
+        h = _write( file, buffer, amount );
         if( h < 0 ) return( h );
         total += h;
         if( h != amount ) return( total );
@@ -193,8 +193,8 @@ static unsigned dowrite( int file, void *buffer, unsigned len )
     }
 }
 #else
-    #define doread( f, b, l )  read( f, b, l )
-    #define dowrite( f, b, l ) write( f, b, l )
+    #define doread( f, b, l )  _read( f, b, l )
+    #define dowrite( f, b, l ) _write( f, b, l )
 #endif
 
 
@@ -241,12 +241,12 @@ void QWriteNL( f_handle file, char *name )
 
 void QClose( f_handle file, char *name )
 /*********************************************/
-/* file close */
+/* file _close */
 {
     int         h;
 
     CheckBreak();
-    h = close( file );
+    h = _close( file );
     OpenFiles--;
     if( h != -1 ) return;
     LnkMsg( ERR+MSG_IO_PROBLEM, "12", name, strerror( errno ) );
@@ -259,7 +259,7 @@ long QLSeek( f_handle file, long position, int start, char *name )
     long int    h;
 
     CheckBreak();
-    h = lseek( file, position, start );
+    h = _lseek( file, position, start );
     if( h == -1 && name != NULL ) {
         LnkMsg( ERR+MSG_IO_PROBLEM, "12", name, strerror( errno ) );
     }
@@ -276,7 +276,7 @@ unsigned long QPos( f_handle file )
 /****************************************/
 {
     CheckBreak();
-    return( lseek( file, 0L, SEEK_CUR ) );
+    return( _lseek( file, 0L, SEEK_CUR ) );
 }
 
 unsigned long QFileSize( f_handle file )
@@ -286,8 +286,8 @@ unsigned long QFileSize( f_handle file )
     unsigned long   size;
 
     curpos = QPos( file );
-    size = lseek( file, 0L, SEEK_END  );
-    lseek( file, curpos, SEEK_SET );
+    size = _lseek( file, 0L, SEEK_END  );
+    _lseek( file, curpos, SEEK_SET );
     return( size );
 }
 
@@ -305,7 +305,7 @@ void QDelete( char *name )
 
 bool QReadStr( f_handle file, char *dest, unsigned size, char *name )
 /**************************************************************************/
-/* quick read string (for reading directive file) */
+/* quick _read string (for reading directive file) */
 {
     bool            eof;
     char            ch;
@@ -357,12 +357,12 @@ f_handle TempFileOpen( char *name )
 
 int ResOpen( const char *path, int access, ... )
 /*****************************************************/
-/* a simple open cover routine for wres stuff */
+/* a simple _open cover routine for wres stuff */
 {
     int     perm;
 
     perm = 0666;
-    return( open( path, access, perm ) );
+    return( _open( path, access, perm ) );
 }
 
 int QMakeFileName( char **pos, char *name, char *fname )
@@ -457,7 +457,7 @@ char WaitForKey( void )
     new.c_cc[VMIN] = 1;
     new.c_cc[VTIME] = 0;
     tcsetattr( 0, TCSANOW, &new );
-    read( 0, &result, 1 );
+    _read( 0, &result, 1 );
     tcsetattr( 0, TCSANOW, &old );
     return result;
 }

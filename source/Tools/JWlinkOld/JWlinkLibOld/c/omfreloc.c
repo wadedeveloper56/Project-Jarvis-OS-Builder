@@ -256,7 +256,7 @@ void DoRelocs( struct objbuff *ob )
             addend = 0;
             if( loc <= TARGET_ABSWD ) {  /*  if( (loc & 4) == 0 )then */
                 if( ObjFormat & FMT_32BIT_REC ) {
-                    addend = *((signed_32 UNALIGN *)ob->curr);
+                    addend = *((signed_32  *)ob->curr);
                     ob->curr += sizeof( signed_32 );
                 } else {
                     addend = GET_U16_UN(ob->curr);

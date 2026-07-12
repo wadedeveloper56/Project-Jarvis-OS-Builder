@@ -140,7 +140,7 @@ static entry_export *ProcWlibDLLImportEntry( void )
 
 static bool GetWlibImports( void )
 /********************************/
-/* read in a wlib command file, get the import directives, and treat them
+/* _read in a wlib command file, get the import directives, and treat them
  * as exports (hey man, GO asked for it ...... ) */
 {
     char            *fname;
@@ -417,7 +417,7 @@ bool ProcCommit( void )
 
 bool ProcRWRelocCheck( void )
 /**********************************/
-// check for segment relocations pointing to read/write data segments
+// check for segment relocations pointing to _read/_write data segments
 {
     FmtData.u.os2.chk_seg_relocs = TRUE;
     return( TRUE );

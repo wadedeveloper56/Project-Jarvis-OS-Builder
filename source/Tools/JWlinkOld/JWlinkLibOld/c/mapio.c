@@ -248,7 +248,7 @@ static int cmp_seg( const void *a, const void *b )
 
 void WriteSegs( section *sect )
 /*******************************************/
-/* write segment info into mapfile */
+/* _write segment info into mapfile */
 {
     class_entry     *cl;
     unsigned        count;
@@ -680,7 +680,7 @@ void WriteFormat( int col, char *str, ... )
 
 void BufWrite( char *buffer, int len )
 /*******************************************/
-// write to the map file, buffering the write if buffering is on.
+// _write to the map file, buffering the _write if buffering is on.
 {
     int     diff;
 

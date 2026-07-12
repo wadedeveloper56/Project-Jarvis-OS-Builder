@@ -60,7 +60,7 @@ static signed long oldchop;
 
 static unsigned_32 WriteDOSRootRelocs( void )
 /*******************************************/
-/* write all relocs to the file */
+/* _write all relocs to the file */
 {
 	unsigned long       header_size;
 #if 1 /* JWlink: KNOWEAS */
@@ -83,7 +83,7 @@ static unsigned_32 WriteDOSRootRelocs( void )
 
 static void WriteDOSSectRelocs( section *sect, bool repos )
 /*********************************************************/
-/* write all relocs associated with sect to the file */
+/* _write all relocs associated with sect to the file */
 {
     unsigned long       loc;
     OUTFILELIST         *out;
@@ -162,7 +162,7 @@ static unsigned long WriteDOSData( void )
     //printf("root file_loc=%X\n", Root->u.file_loc);
     Root->sect_addr = Groups->grp_addr;
 
-/* write groups and relocations */
+/* _write groups and relocations */
     for( group = Groups; group != NULL; ) {
         sect = group->section;
         CurrSect = sect;
@@ -231,7 +231,7 @@ static bool DoCOMGroup( void *_seg, void *chop )
 
 static bool WriteCOMGroup( group_entry *group, signed long chop )
 /***************************************************************/
-/* write the data for group to the loadfile */
+/* _write the data for group to the loadfile */
 /* returns TRUE if the file should be repositioned */
 {
     unsigned long       loc;
@@ -295,7 +295,7 @@ static void WriteCOMFile( void )
     Root->sect_addr = Groups->grp_addr;
 
     oldchop = 0;
-    /* write groups */
+    /* _write groups */
     for( group = Groups; group != NULL; group = group->next_group ) {
         chop = SUB_ADDR( group->grp_addr, StartInfo.addr );
         if( chop > 0 ) {

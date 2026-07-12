@@ -435,7 +435,7 @@ bool IsCodeClass( char *name, unsigned namelen )
 /*****************************************************/
 {
     return( ( namelen >= CODECL_SIZE )
-        && ( memicmp( name + namelen - CODECL_SIZE, CodeClassName, CODECL_SIZE ) == 0 ) );
+        && ( _memicmp( name + namelen - CODECL_SIZE, CodeClassName, CODECL_SIZE ) == 0 ) );
 }
 
 #define CONSTCL_SIZE ( sizeof( ConstClassName ) - 1 )
@@ -444,7 +444,7 @@ bool IsConstClass( char *name, unsigned namelen )
 /******************************************************/
 {
     return( ( namelen >= CONSTCL_SIZE )
-        && ( memicmp( name + namelen - CONSTCL_SIZE, ConstClassName, CONSTCL_SIZE ) == 0 ) );
+        && ( _memicmp( name + namelen - CONSTCL_SIZE, ConstClassName, CONSTCL_SIZE ) == 0 ) );
 }
 
 #define STACKCL_SIZE ( sizeof( StackClassName ) - 1 )

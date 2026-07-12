@@ -1332,7 +1332,7 @@ static void FmtReloc( fix_data *fix, frame_spec *tthread )
     off = fix->loc_addr.off;
     seg = CurrRec.seg;
     targ = fix->tgt_addr;
-    DEBUG(( DBG_OLD, "FmtReloc(): reloc to write: type=%h loc=%h target=%h",
+    DEBUG(( DBG_OLD, "FmtReloc(): reloc to _write: type=%h loc=%h target=%h",
            fix->type, off, targ ));
     if( FmtData.type & MK_PE ) {
         unsigned_32     reltype;

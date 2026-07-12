@@ -115,7 +115,7 @@ void * CachePermRead( file_list * list, unsigned long pos, unsigned len )
 
 void * CacheRead( file_list * list, unsigned long pos, unsigned len )
 /**************************************************************************/
-/* read len bytes out of the cache. */
+/* _read len bytes out of the cache. */
 // NYI: will need to make this more sophisticated for libraries
 {
     if( pos + len > list->file->len ) return NULL;

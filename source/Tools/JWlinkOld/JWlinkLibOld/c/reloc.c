@@ -165,7 +165,7 @@ static void DoWriteReloc( void *lst, void *reloc, unsigned size )
 void WriteReloc( group_entry *group, offset off, void *reloc,
                         unsigned size )
 /******************************************************************/
-/* write the given relocation to virtual memory */
+/* _write the given relocation to virtual memory */
 {
     os2_reloc_header ** pagelist;
     reloc_info ***      reloclist;
@@ -195,7 +195,7 @@ void WriteReloc( group_entry *group, offset off, void *reloc,
             case OFFSET_ONLY:
             case OFFSET48_ONLY:
             case OFFSET48_RELATIVE:
-                //NYI: don't have to write this out if we can figure out
+                //NYI: don't have to _write this out if we can figure out
                 // how to tell the loader that we're doing it.
                 header =
                    &pagelist[OSF_RLIDX_HIGH( idx )][OSF_RLIDX_LOW( idx )].internals;
@@ -355,7 +355,7 @@ unsigned_32 RelocSize( reloc_info *list )
 
 unsigned_32 DumpMaxRelocList( reloc_info **head, unsigned_32 max )
 /***********************************************************************/
-/* write the given reloc information list to loadfile */
+/* _write the given reloc information list to loadfile */
 {
     unsigned_32         size;
     unsigned_32         total;

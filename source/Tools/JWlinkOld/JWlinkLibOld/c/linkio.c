@@ -53,7 +53,7 @@ typedef enum {
 
 static bool         BreakCond;
 static break_status CaughtBreak = NOT_HIT;
-static int          OpenFiles;          // the number of open files
+static int          OpenFiles;          // the number of _open files
 static unsigned     LastResult;
 static int          AuxFilesClosed = FALSE;
 static char         Rc_Buffer[RESOURCE_MAX_SIZE];
@@ -63,7 +63,7 @@ static char         Rc_Buffer[RESOURCE_MAX_SIZE];
 
 void LnkFilesInit( void )
 /******************************/
-// the linker doesn't use stdaux or stdprn, so close these.
+// the linker doesn't use stdaux or stdprn, so _close these.
 {
     CaughtBreak = NOT_HIT;
     if( !AuxFilesClosed ) {
@@ -150,7 +150,7 @@ f_handle QOpenRW( char *name )
 
 unsigned QRead( f_handle file, void *buffer, unsigned len, char *name )
 /****************************************************************************/
-/* read into far memory */
+/* _read into far memory */
 {
     tiny_ret_t   h;
 
@@ -212,7 +212,7 @@ void QWriteNL( f_handle file, char *name )
 
 void QClose( f_handle file, char *name )
 /*********************************************/
-/* file close */
+/* file _close */
 {
     tiny_ret_t h;
 
@@ -287,7 +287,7 @@ void QDelete( char *name )
 
 bool QReadStr( f_handle file, char *dest, unsigned size, char *name )
 /**************************************************************************/
-/* quick read string (for reading directive file) */
+/* quick _read string (for reading directive file) */
 {
     bool            eof;
     char            ch;
@@ -312,7 +312,7 @@ bool QIsDevice( f_handle file )
     if( TinyGetDeviceInfo( file ) & TIO_CTL_DEVICE ) {
         return( TRUE );
     } else {
-        return( FALSE );  // don't write the prompt if input not from stdin
+        return( FALSE );  // don't _write the prompt if input not from stdin
     }
 }
 
@@ -352,7 +352,7 @@ f_handle QObjOpen( char *name )
 
 f_handle TempFileOpen( char *name )
 /****************************************/
-// open without suiciding. Don't create the file
+// _open without suiciding. Don't create the file
 {
     return( NSOpen( name, TIO_READ ) );
 }

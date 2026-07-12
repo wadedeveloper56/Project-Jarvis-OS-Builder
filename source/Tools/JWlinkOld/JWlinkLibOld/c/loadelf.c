@@ -564,7 +564,7 @@ static unsigned_32 SetRelocSectName( ElfHdr *hdr, char *secname )
     return( AddSecName( hdr, name ) );
 }
 
-/* write relocs sections; called by FiniELFLoadFile() */
+/* _write relocs sections; called by FiniELFLoadFile() */
 
 static void WriteRelocsSections( ElfHdr *hdr )
 /********************************************/
@@ -653,14 +653,14 @@ void FiniELFLoadFile( void )
     }
     WriteSHStrings( &hdr, ".shstrtab", hdr.i.secstr, &hdr.secstrtab );
 
-	/* write section table */
+	/* _write section table */
 	if ( FmtData.u.elf.elf64 ) {
 		hdr.eh64.e_shoff = hdr.curr_off;
-		DEBUG(( DBG_OLD, "FiniElfLoadFile(): write elf64 section table, e_shoff=%h sh_size=%h",
+		DEBUG(( DBG_OLD, "FiniElfLoadFile(): _write elf64 section table, e_shoff=%h sh_size=%h",
 			   hdr.eh64.e_shoff, hdr.sh_size ));
 	} else {
 		hdr.eh32.e_shoff = hdr.curr_off;
-		DEBUG(( DBG_OLD, "FiniElfLoadFile(): write elf32 section table, e_shoff=%h sh_size=%h",
+		DEBUG(( DBG_OLD, "FiniElfLoadFile(): _write elf32 section table, e_shoff=%h sh_size=%h",
 			   hdr.eh32.e_shoff, hdr.sh_size ));
 	}
 	WriteLoad( hdr.sh32, hdr.sh_size ); /* works for 32- and 64-bit */
@@ -668,14 +668,14 @@ void FiniELFLoadFile( void )
     if( !INJECT_DEBUG ) {
         DBIWrite();
 	}
-    /* now write the ELF header + Pheader */
+    /* now _write the ELF header + Pheader */
     SeekLoad( 0 );
 	if ( FmtData.u.elf.elf64 ) {
-		DEBUG(( DBG_OLD, "FiniElfLoadFile(): write elf64 header, size=%h ph_size=%h", sizeof(Elf64_Ehdr), hdr.ph_size ));
+		DEBUG(( DBG_OLD, "FiniElfLoadFile(): _write elf64 header, size=%h ph_size=%h", sizeof(Elf64_Ehdr), hdr.ph_size ));
 		WriteLoad( &hdr.eh64, sizeof(Elf64_Ehdr) );
 		WriteLoad( hdr.ph64, hdr.ph_size );
 	} else {
-		DEBUG(( DBG_OLD, "FiniElfLoadFile(): write elf32 header, size=%h ph_size=%h", sizeof(Elf32_Ehdr), hdr.ph_size ));
+		DEBUG(( DBG_OLD, "FiniElfLoadFile(): _write elf32 header, size=%h ph_size=%h", sizeof(Elf32_Ehdr), hdr.ph_size ));
 		WriteLoad( &hdr.eh32, sizeof(Elf32_Ehdr) );
 		WriteLoad( hdr.ph32, hdr.ph_size );
 	}

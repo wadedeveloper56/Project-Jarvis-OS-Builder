@@ -48,7 +48,7 @@
 
 static bool WriteBinSegGroup( group_entry *group )
 /*********************************************/
-/* write the data for group to the loadfile */
+/* _write the data for group to the loadfile */
 /* returns TRUE if the file should be repositioned */
 {
     unsigned_32         loc;
@@ -99,7 +99,7 @@ void BinOutput( void )
         fnode = Root->outfile;
         fnode->file_loc = 0;
         Root->u.file_loc = Root->sect_addr.off - FmtData.output_offset;
-        /* write groups */
+        /* _write groups */
         for( group = Groups; group != NULL; group = group->next_group ) {
             if (group->leaders->class->flags & CLASS_COPY ) {
                 size = CalcGroupSize( group->leaders->class->DupClass->segs->group );
@@ -124,7 +124,7 @@ void BinOutput( void )
         fnode = Root->outfile;
         fnode->file_loc = 0;
         Root->u.file_loc = (Root->sect_addr.seg << FmtData.SegShift) + Root->sect_addr.off - FmtData.output_offset;
-        /* write groups */
+        /* _write groups */
         for( group = Groups; group != NULL; group = group->next_group ) {
             repos = WriteBinSegGroup( group );
             if( repos ) {
@@ -148,7 +148,7 @@ void BinOutput( void )
 // If data is encountered above what Segmented addressing can handle (1 M for default)
 // the routine outputs an extended linear address record, seamlessly switching
 // to a full 32 bit address range.  This approach provides full backward compatibility
-// for systems which cannot read the newer formats when creating files that don't
+// for systems which cannot _read the newer formats when creating files that don't
 // need the extra range.
 
 #define HEXLEN 16   // number of bytes of data in a full record
@@ -230,7 +230,7 @@ static bool WriteHexData( void *_sdata, void *_addr )
             ReadInfo( sdata->data + offset, lineBuf + bufOfs, piece );
             bufOfs += piece;
             if( bufOfs == HEXLEN ) {
-                WriteHexLine();         // Only write full buffers
+                WriteHexLine();         // Only _write full buffers
                 nextAddr += HEXLEN;     // NextAddr reflects start of line
             }                           // Partial records will be written later
             offset += piece;            //   if address is not contiguous
@@ -324,7 +324,7 @@ void HexOutput( void )
         fnode = Root->outfile;
         fnode->file_loc = 0;
         Root->u.file_loc = Root->sect_addr.off - FmtData.output_offset;
-        /* write groups */
+        /* _write groups */
         for( group = Groups; group != NULL; group = group->next_group ) {
             class = group->leaders->class;
             if( class->flags & CLASS_COPY ) {
@@ -354,7 +354,7 @@ void HexOutput( void )
         fnode = Root->outfile;
         fnode->file_loc = 0;
         Root->u.file_loc = (Root->sect_addr.seg << FmtData.SegShift) + Root->sect_addr.off - FmtData.output_offset;
-        /* write groups */
+        /* _write groups */
         for( group = Groups; group != NULL; group = group->next_group ) {
             class = group->leaders->class;
             if( class->flags & CLASS_COPY ) {

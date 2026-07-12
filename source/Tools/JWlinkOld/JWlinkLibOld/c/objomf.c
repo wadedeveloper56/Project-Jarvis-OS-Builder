@@ -364,8 +364,8 @@ static void ProcTHEADR( struct objbuff *ob )
     int     sym_len;
 
     if( CurrMod->omfdbg == OMF_DBG_CODEVIEW ) {
-        sym_name = ( (obj_name UNALIGN *) ob->curr )->name;
-        sym_len = ( (obj_name UNALIGN *) ob->curr )->len;
+        sym_name = ( (obj_name  *) ob->curr )->name;
+        sym_len = ( (obj_name  *) ob->curr )->len;
         if( sym_len == 0 ) {
             DEBUG((DBG_OLD, "objomf.ProcTHEADR(): error, sym_len == 0" ));
             BadObject();
@@ -677,9 +677,9 @@ static void AddNames( struct objbuff *ob )
 
     DEBUG(( DBG_OLD, "AddNames()" ));
     while( ob->curr < ob->end ) {
-        name_len = ( (obj_name UNALIGN *) (ob->curr) )->len;
+        name_len = ( (obj_name  *) (ob->curr) )->len;
         entry = AllocNode( NameNodes );
-        *entry = MakeListName( ((obj_name UNALIGN *)(ob->curr) )->name, name_len );
+        *entry = MakeListName( ((obj_name  *)(ob->curr) )->name, name_len );
         ob->curr += name_len + sizeof( byte );
     }
     return;
@@ -803,7 +803,7 @@ static void DefineGroup( struct objbuff *ob )
             return;                     // NOTE: premature return!
         }
         group = AllocGroup( grp_name->name, &Groups );
-        /* jwlink: reset read-only flag for groups */
+        /* jwlink: reset _read-only flag for groups */
         if ( FmtData.type & MK_PE )
             group->segflags &= ~SEG_READ_ONLY;
     }
@@ -850,8 +850,8 @@ static void ProcPubdef( bool static_sym, struct objbuff *ob )
     }
     DEBUG(( DBG_OLD, "segidx = %d", segidx ));
     while( ob->curr < ob->end ) {
-        sym_name = ( (obj_name UNALIGN *) (ob->curr) )->name;
-        sym_len = ( (obj_name UNALIGN *) (ob->curr) )->len;
+        sym_name = ( (obj_name  *) (ob->curr) )->name;
+        sym_len = ( (obj_name  *) (ob->curr) )->len;
         if( sym_len == 0 ) {
             DEBUG((DBG_OLD, "objomf.ProcPubdef(): error, sym_len == 0" ));
             BadObject();

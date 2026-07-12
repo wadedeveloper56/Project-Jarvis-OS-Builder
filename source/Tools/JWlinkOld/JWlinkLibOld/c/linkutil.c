@@ -56,7 +56,7 @@
 
 static ssize_t ResWrite( int dummy, const void *buff, size_t size )
 /*****************************************************************/
-/* redirect wres write to writeload */
+/* redirect wres _write to writeload */
 {
     dummy = dummy;
     DbgAssert( dummy == Root->outfile->handle );
@@ -79,7 +79,7 @@ static off_t ResSeek( int handle, off_t position, int where )
 static int ResClose( int handle )
 /*******************************/
 {
-    return( close( handle ) );
+    return( _close( handle ) );
 }
 
 static ssize_t ResRead( int handle, void *buffer, size_t len )

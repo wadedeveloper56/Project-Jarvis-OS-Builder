@@ -47,12 +47,12 @@
 #define PUT_U32( P, V )         (GET_U32( P ) = V )
 #define PUT_U64( P, V )         (GET_U64( P ) = V ) /* jwlink */
 
-#define _GetU16UN( P )          (*((unsigned_16 UNALIGN *) (P) ))
-#define _GetU32UN( P )          (*((unsigned_32 UNALIGN *) (P) ))
+#define _GetU16UN( P )          (*((unsigned_16  *) (P) ))
+#define _GetU32UN( P )          (*((unsigned_32  *) (P) ))
 
-#define GET_U8_UN(  P )         (*(unsigned_8  UNALIGN *)(P))
-#define GET_U16_UN( P )         (*(unsigned_16 UNALIGN *)(P))
-#define GET_U32_UN( P )         (*(unsigned_32 UNALIGN *)(P))
+#define GET_U8_UN(  P )         (*(unsigned_8   *)(P))
+#define GET_U16_UN( P )         (*(unsigned_16  *)(P))
+#define GET_U32_UN( P )         (*(unsigned_32  *)(P))
 
 #define PUT_U8_UN(  P, V )      (GET_U8_UN(  P ) = V )
 #define PUT_U16_UN( P, V )      (GET_U16_UN( P ) = V )

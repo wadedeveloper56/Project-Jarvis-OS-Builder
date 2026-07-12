@@ -146,7 +146,7 @@ bool ProcArgList( bool (*rtn)( void ), tokcontrol ctrl )
 bool ProcArgListEx( bool (*rtn)( void ), tokcontrol ctrl ,cmdfilelist *resetpoint)
 /*************************************************************/
 {
-    bool bfilereset = FALSE;    /* did we open a file and get reset ? */
+    bool bfilereset = FALSE;    /* did we _open a file and get reset ? */
 
     if( GetTokenEx( SEP_LCURLY, ctrl, resetpoint, &bfilereset) ) {
         for(;;) {
@@ -730,7 +730,7 @@ void NewCommandSource( char *name, char *buff, method how )
 
 void SetCommandFile( f_handle file, char *fname )
 /******************************************************/
-/* read input from given file */
+/* _read input from given file */
 {
     unsigned long   size;
     char            *buff;
@@ -797,7 +797,7 @@ void EatWhite( void )
 
 static int ParseNumber( char *str, int radix )
 /*********************************************/
-/* read a (possibly hexadecimal) number */
+/* _read a (possibly hexadecimal) number */
 {
     bool        isdig;
     bool        isvalid;

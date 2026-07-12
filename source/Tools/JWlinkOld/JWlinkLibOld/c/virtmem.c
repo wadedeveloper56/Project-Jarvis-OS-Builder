@@ -330,7 +330,7 @@ void ReleaseInfo( virt_mem stg )
 bool SwapOutVirt( void )
 /*****************************/
 // NOTE - this routine assumes that once something has been swapped out, it
-// will never be read back in again.
+// will never be _read back in again.
 {
     spilladdr *     spillmem;
     void *          mem;
@@ -645,7 +645,7 @@ void WriteInfo( virt_mem stg, unsigned long len )
 static bool NullInfo( void *dummy, spilladdr loc, unsigned off, unsigned len,
                                                                    bool inmem )
 /*****************************************************************************/
-// write nulls to the location referenced by node and off.
+// _write nulls to the location referenced by node and off.
 {
     dummy = dummy;   /* to avoid a warning: will be optimized away. */
     if( len == 0 ) return TRUE;

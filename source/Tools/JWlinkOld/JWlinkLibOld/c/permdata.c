@@ -547,7 +547,7 @@ static unsigned_32 WriteLibList( perm_write_info *info, bool douser )
     return( numlibs );
 }
 
-/* incremental link: write data file */
+/* incremental link: _write data file */
 
 void WritePermData( void )
 /*******************************/
@@ -614,7 +614,7 @@ void WritePermData( void )
     DEBUG((DBG_OLD, "WritePermData() exit" ));
 }
 
-/* incremental link: read data file */
+/* incremental link: _read data file */
 
 void ReadPermFile( perm_read_info *info, void *data, unsigned len )
 /************************************************************************/
