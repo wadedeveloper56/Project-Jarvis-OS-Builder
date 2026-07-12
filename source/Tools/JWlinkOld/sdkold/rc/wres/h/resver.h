@@ -30,28 +30,62 @@
 ****************************************************************************/
 
 
-#ifndef RESNAMORD_INCLUDED
-#define RESNAMORD_INCLUDED
+#ifndef RESVER_H_INCLUDED
+#define RESVER_H_INCLUDED
 
-#include "watcom.h"
+#define VER_CALC_SIZE   0xFFFF
 
 #if !defined( NATURAL_PACK )
 #include "pushpck1.h"
 #endif
 
-typedef union ResNameOrOrdinal {
-    struct Ordinal {
-        uint_8  fFlag;
-        uint_16 wOrdinalID;
-    } ord;
-    char        name[ 1 ];          /* '\0' terminated */
-} UNALIGNED ResNameOrOrdinal;
+typedef struct VerBlockHeader {
+    uint_16     Size;           // includes size of nested blocks
+    uint_16     ValSize;        // size of the value array that follow header
+    uint_16     Type;           // USED FOR NT ONLY 1 == string 0 == binary
+    char *      Key;
+}  VerBlockHeader;
+
+typedef struct VerValueItem {
+    uint_8      IsNum;
+    uint_16     strlen;
+    union {
+        uint_16 Num;
+        char *  String;
+    } Value;
+}  VerValueItem;
+
+typedef struct VerFixedInfo {
+    uint_32     Signature;
+    uint_32     StructVer;
+    uint_32     FileVerHigh;
+    uint_32     FileVerLow;
+    uint_32     ProdVerHigh;
+    uint_32     ProdVerLow;
+    uint_32     FileFlagsMask;
+    uint_32     FileFlags;
+    uint_32     FileOS;
+    uint_32     FileType;
+    uint_32     FileSubType;
+    uint_32     FileDateHigh;
+    uint_32     FileDateLow;
+} VerFixedInfo;
 
 #if !defined( NATURAL_PACK )
 #include "poppck.h"
 #endif
 
-extern ResNameOrOrdinal * ResNumToNameOrOrd( uint_16 num );
-extern ResNameOrOrdinal * ResStrToNameOrOrd( char * string );
+/* Why theses two values? Cause that's what Microsoft uses. */
+#define VER_FIXED_SIGNATURE     0xfeef04bd
+#define VER_FIXED_STRUCT_VER    0x00010000
+
+extern int ResWriteVerBlockHeader( VerBlockHeader * head, uint_8 use_unicode,
+                                        uint_8 os, WResFileID handle );
+extern int ResWriteVerValueItem( VerValueItem * item, uint_8 use_unicode,
+                                        WResFileID handle );
+extern int ResWriteVerFixedInfo( VerFixedInfo *, WResFileID );
+extern uint_16 ResSizeVerBlockHeader( VerBlockHeader *, uint_8 use_unicode,
+                                        uint_8 os );
+extern uint_16 ResSizeVerValueItem( VerValueItem * item, uint_8 use_unicode );
 
 #endif

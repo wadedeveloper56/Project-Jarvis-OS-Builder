@@ -24,25 +24,49 @@
 *
 *  ========================================================================
 *
-* Description:  Client callback routines for wres library.
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
-#ifdef __LINUX__
-#ifndef LINUX
-#define LINUX __LINUX__
-#endif
+
+#ifndef RESACCEL_INCLUDED
+#define RESACCEL_INCLUDED
+
+#include "watcom.h"
+#include "layer0.h"
+
+#if !defined( NATURAL_PACK )
+#include "pushpck1.h"
 #endif
 
-#include <unistd.h>
+typedef struct AccelTableEntry32 {
+    uint_16     Flags;
+    uint_16     Ascii;
+    uint_16     Id;
+    uint_16     Unknown;            /* I don't know what this field is for. */
+} AccelTableEntry32;                /* MS makes it 0. (padding?) */
 
-#if defined( __UNIX__ )
-#include <fcntl.h>
-#endif
-#include <stdlib.h>
-#include "wressetr.h"
-#if defined( __UNIX__ ) && !defined( __WATCOMC__ )
-    #include "clibext.h"
+typedef struct AccelTableEntry {
+    uint_8      Flags;
+    uint_16     Ascii;
+    uint_16     Id;
+} AccelTableEntry;
+
+#if !defined( NATURAL_PACK )
+#include "poppck.h"
 #endif
 
-WResSetRtns( open, close, read, write, lseek, tell, malloc, free );
+typedef uint_8  AccelFlags;
+#define ACCEL_ASCII     0x00        /* last bit is 0 */
+#define ACCEL_VIRTKEY   0x01
+#define ACCEL_NOINVERT  0x02
+#define ACCEL_SHIFT     0x04
+#define ACCEL_CONTROL   0x08
+#define ACCEL_ALT       0x10
+#define ACCEL_LAST      0x80
+
+int ResWriteAccelEntry( AccelTableEntry * currentry, WResFileID handle );
+int ResWriteAccelEntry32( AccelTableEntry32 *, WResFileID );
+
+#endif

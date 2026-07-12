@@ -24,29 +24,25 @@
 *
 *  ========================================================================
 *
-* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
-*               DESCRIBE IT HERE!
+* Description:  Client callback routines for wres library.
 *
 ****************************************************************************/
 
-
-#ifndef WRESALL_INCLUDED
-#define WRESALL_INCLUDED
-
-#ifdef __UNIX__
-#define UNALIGNED
+#ifdef __LINUX__
+#ifndef LINUX
+#define LINUX __LINUX__
+#endif
 #endif
 
-#include "layer1.h"
+#include <unistd.h>
 
-#include "wres.h"
-#include "mem2.h"
-#include "util.h"
-#include "wresrtns.h"
-
-
-#if !defined( min )
-    #define min( x, y ) (((x) > (y)) ? (y) : (x))
+#if defined( __UNIX__ )
+#include <fcntl.h>
+#endif
+#include <stdlib.h>
+#include "wressetr.h"
+#if defined( __UNIX__ ) && !defined( __WATCOMC__ )
+    #include "clibext.h"
 #endif
 
-#endif
+WResSetRtns( _open, _close, _read, _write, _lseek, _tell, malloc, free );

@@ -30,33 +30,23 @@
 ****************************************************************************/
 
 
-#ifndef MRES_INCLUDED
-#define MRES_INCLUDED
+#ifndef WRESALL_INCLUDED
+#define WRESALL_INCLUDED
 
-#include "resfmt.h"
+//#ifdef __UNIX__
+//#define 
+//#endif
 
-#if !defined( NATURAL_PACK )
-#include "pushpck1.h"
-#endif
+#include "layer1.h"
 
-typedef struct MResResourceHeader {
-    ResNameOrOrdinal       *Type;
-    ResNameOrOrdinal       *Name;
-    uint_16                 MemoryFlags;
-    uint_32                 Size;
-    uint_16                 LanguageId;
-    uint_32                 Version;
-    uint_32                 DataVersion;
-    uint_32                 Characteristics;
-} UNALIGNED MResResourceHeader;
+#include "wres.h"
+#include "mem2.h"
+#include "util.h"
+#include "wresrtns.h"
 
-typedef struct M32ResResourceHeader {
-    MResResourceHeader      *head16;
-    uint_32                  HeaderSize;
-} M32ResResourceHeader;
 
-#if !defined( NATURAL_PACK )
-#include "poppck.h"
+#if !defined( min )
+    #define min( x, y ) (((x) > (y)) ? (y) : (x))
 #endif
 
 #endif

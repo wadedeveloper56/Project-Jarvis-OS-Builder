@@ -39,7 +39,9 @@
 /* function */
 
 typedef int             WResFileID;
-
+#include <BaseTsd.h>
+#include <sys/types.h>
+typedef SSIZE_T ssize_t;
 struct WResRoutines {                                       /* defaults */
     /* I/O routines */
     WResFileID (*   open) (const char *, int, ...);         /* open */

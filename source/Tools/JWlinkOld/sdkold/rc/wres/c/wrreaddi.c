@@ -75,11 +75,11 @@ static int readLangInfoList( WResFileID handle, WResResNode *res,
 static int readResList( WResFileID handle, WResTypeNode * currtype,
                         uint_16 ver, void *fileinfo )
 {
-    WResResNode    *newnode;
+    WResResNode    *newnode=NULL;
     WResResInfo     newres;
     WResResInfo1    newres1;
-    WResLangNode   *langnode;
-    WResID         *resid;
+    WResLangNode   *langnode=NULL;
+    WResID         *resid=NULL;
     WResID          tmpresid;
     int             error;
     int             resnum;
@@ -171,7 +171,7 @@ static int readResList( WResFileID handle, WResTypeNode * currtype,
 static int readTypeList( WResFileID handle, WResDirHead * currdir,
                          uint_16 ver, void *fileinfo )
 {
-    WResTypeNode *  newnode;
+    WResTypeNode *  newnode=NULL;
     WResTypeInfo    newtype;
     int             error;
     int             typenum;

@@ -65,7 +65,7 @@ typedef struct MenuHeader {
 typedef struct MenuItemPopup {      /* if (ItemFlags & MENU_POPUP) */
     MenuFlags          ItemFlags;
     char              *ItemText;
-} UNALIGNED MenuItemPopup;
+}  MenuItemPopup;
 
 typedef struct MenuExItemPopup {
     uint_32         ItemId;
@@ -78,7 +78,7 @@ typedef struct MenuItemNormal {     /* if !(ItemFlags & MENU_POPUP) */
     MenuFlags           ItemFlags;
     uint_32             ItemID;    /* Note! This was changed from uint_16!! */
     char               *ItemText;
-} UNALIGNED MenuItemNormal;
+}  MenuItemNormal;
 
 typedef struct MenuExItemNormal {
     uint_32         ItemType;
@@ -91,7 +91,7 @@ typedef struct MenuItem {
         MenuItemNormal  Normal;
         MenuItemPopup   Popup;
     } Item;
-} UNALIGNED MenuItem;
+}  MenuItem;
 
 typedef struct MenuExItemNormalData {
     MenuItemNormal              Normal;

@@ -62,7 +62,7 @@ char * WResIDToStr( const WResID * name )
         if( string == NULL ) {
             WRES_ERROR( WRS_MALLOC_FAILED );
         } else {
-            itoa( name->ID.Num, string, 10 );
+            _itoa( name->ID.Num, string, 10 );
         }
     }
 
@@ -91,7 +91,7 @@ char * WResHelpIDToStr( const WResHelpID * name )
         if( string == NULL ) {
             WRES_ERROR( WRS_MALLOC_FAILED );
         } else {
-            itoa( name->ID.Num, string, 10 );
+            _itoa( name->ID.Num, string, 10 );
         }
     }
 

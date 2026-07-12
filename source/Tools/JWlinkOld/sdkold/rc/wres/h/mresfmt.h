@@ -24,36 +24,39 @@
 *
 *  ========================================================================
 *
-* Description:  Autdependency structure defintion shared between resource
-*               compiler and wmake.
+* Description:  WHEN YOU FIGURE OUT WHAT THIS FILE DOES, PLEASE
+*               DESCRIBE IT HERE!
 *
 ****************************************************************************/
 
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+#ifndef MRES_INCLUDED
+#define MRES_INCLUDED
 
-#ifdef __UNIX__
-#define _WCUNALIGNED
-#endif
+#include "resfmt.h"
 
-#define         DEP_LIST_TYPE   0x79
-#define         DEP_LIST_NAME   "EBWF_XFMMTUPPE"
-
+#if !defined( NATURAL_PACK )
 #include "pushpck1.h"
+#endif
 
-typedef struct {
-    uint_32     time;           /* file's time taken from stat */
-    uint_16     len;            /* sizeof the name array */
-    char        name[1];        /* dynamic array */
-} DepInfo;
+typedef struct MResResourceHeader {
+    ResNameOrOrdinal       *Type;
+    ResNameOrOrdinal       *Name;
+    uint_16                 MemoryFlags;
+    uint_32                 Size;
+    uint_16                 LanguageId;
+    uint_32                 Version;
+    uint_32                 DataVersion;
+    uint_32                 Characteristics;
+}  MResResourceHeader;
 
+typedef struct M32ResResourceHeader {
+    MResResourceHeader      *head16;
+    uint_32                  HeaderSize;
+} M32ResResourceHeader;
+
+#if !defined( NATURAL_PACK )
 #include "poppck.h"
+#endif
 
-DepInfo *WResGetAutoDep( char *fname );
-void WResFreeAutoDep( DepInfo *ptr );
-
-#ifdef __cplusplus
-}
 #endif
