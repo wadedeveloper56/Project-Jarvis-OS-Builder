@@ -1,5 +1,7 @@
 #include "pch.h"
 #include <fcntl.h>
+#include <io.h>
+#include <conio.h>
 #include "ntio.h"
 #include "Structs.h"
 #include "globals.h"
@@ -177,4 +179,108 @@ f_handle QOpenRW(FileSubsystem* fileSubsystem, char* name)
 void QSeek(f_handle file, long position, char* name)
 {
     QLSeek(file, position, SEEK_SET, name);
+}
+
+int _bgetcmd(char ***_argv, char* buffer, int len)
+{
+    int     total;
+    int     i;
+    char* word;
+    char* p = NULL;
+    char** argv = *_argv;
+
+    --len;      
+
+    if (buffer && (len > 0))
+    {
+        p = buffer;
+        *p = '\0';
+    }
+
+    for (word = *argv++, i = 0, total = 0; word; word = *argv++)
+    {
+        i = strlen(word);
+        total += i;
+
+        if (p)
+        {
+            if (i >= len)
+            {
+                strncpy(p, word, len);
+                p[len] = '\0';
+                p = NULL;
+                len = 0;
+            }
+            else
+            {
+                strcpy(p, word);
+                p += i;
+                len -= i;
+            }
+        }
+
+        if (*argv)
+        {
+            if (p)
+            {
+                *p++ = ' ';
+                --len;
+            }
+            ++total;
+        }
+    }
+
+    return(total);
+}
+
+char* getcmd(char ***_argv, char* buffer)
+{
+    _bgetcmd(_argv, buffer, 1024);
+    return(buffer);
+}
+
+void GetCmdLine(char*** _argv, char* buff)
+{
+    getcmd(_argv, buff);
+}
+
+bool QIsDevice(f_handle file)
+{
+    return(_isatty(file));
+}
+
+bool QSysHelp(char** cmd_ptr)
+{
+    return(FALSE);
+}
+
+char WaitForKey()
+{
+    return _getch();
+}
+
+bool QReadStr(f_handle file, char* dest, unsigned size, char* name)
+{
+    bool            eof;
+    char            ch;
+
+    eof = FALSE;
+    while (--size > 0)
+    {
+        if (QRead(file, &ch, 1, name) == 0)
+        {
+            eof = TRUE;
+            break;
+        }
+        else if (ch != '\r')
+        {
+            *dest++ = ch;
+        }
+        if (ch == '\n')
+        {
+            break;
+        }
+    }
+    *dest = '\0';
+    return(eof);
 }

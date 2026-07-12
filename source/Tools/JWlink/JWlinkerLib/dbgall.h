@@ -10,3 +10,4 @@ extern group_entry* DBIGroups;
 
 void ResetDBI();
 void DBISectCleanup(MemorySubsystem *memorySubsystem,section* sect);
+void DBIInit(MemorySubsystem* memorySubsystem);

@@ -165,6 +165,7 @@ void Linker::DoLink(char* cmdline)
 	DEBUG((DBG_OLD, "DoLink enter\n"));
 	signal(SIGINT, &TrapBreak);
 	StartTime();
+	DoCmdFile(memorySubsystem, messagingSubsystem, fileSubsystem, spillFile, &argv, cmdline);
 	EndTime(messagingSubsystem);
 	signal(SIGINT, SIG_IGN);
 	DEBUG((DBG_OLD, "DoLink exit\n"));

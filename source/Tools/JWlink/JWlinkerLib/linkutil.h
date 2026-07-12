@@ -2,6 +2,7 @@
 
 #include <memory>
 #include "MemorySubsystem.h"
+#include "FileSubsystem.h"
 #include "Structs.h"
 
 void FreeList(MemorySubsystem *memorySubsystem, void* _curr);
@@ -15,3 +16,7 @@ offset FindLinearAddr2(targ_addr* addr);
 void WriteStdOut(char* str);
 void WriteNLStdOut(void);
 void WriteInfoStdOut(char* str, unsigned level, char* sym);
+void Suicide(void);
+char* GetEnvString(char* envname);
+f_handle SearchPath(FileSubsystem* fileSubsystem, char* name);
+

@@ -104,3 +104,4 @@ typedef struct dbinode {
 #pragma pack()
 
 void ODBISectCleanup(MemorySubsystem *memorySubsystem, section* sect);
+void ODBIInit(MemorySubsystem* memorySubsystem, section* sect);

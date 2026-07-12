@@ -4,6 +4,7 @@
 #include "MemorySubsystem.h"
 #include "globals.h"
 #include "ntio.h"
+#include "debug.h"
 
 using namespace std;
 
@@ -128,3 +129,50 @@ void WriteInfoStdOut(char* str, unsigned level, char* sym)
     WriteStdOut(str);
     WriteNLStdOut();
 }
+
+
+void Suicide(void)
+{
+    //if (SpawnStack != NULL)
+    //{
+    //    longjmp(SpawnStack, 1);
+    //}
+}
+
+char* GetEnvString(char* envname)
+{
+    return(getenv(envname));
+}
+
+f_handle SearchPath(FileSubsystem* fileSubsystem, char* name)
+{
+    char* path;
+    f_handle    file;
+    char        fullpath[PATH_MAX];
+
+    file = QObjOpen(fileSubsystem, name);
+    if (file != NIL_HANDLE)
+    {
+        return(file);
+    }
+#if defined( __QNX__ )
+    path = "/usr/watcom";
+#else
+    path = GetEnvString("PATH");
+#endif
+    if (path != NULL)
+    {
+        while (QMakeFileName(&path, name, fullpath))
+        {
+            file = QObjOpen(fileSubsystem, fullpath);
+            if (file != NIL_HANDLE)
+            {
+                DEBUG((DBG_OLD, "SearchPath: %s found in %s", name, fullpath));
+                return(file);
+            }
+        }
+    }
+    DEBUG((DBG_OLD, "SearchPath: %s not found", name));
+    return(NIL_HANDLE);
+}
+

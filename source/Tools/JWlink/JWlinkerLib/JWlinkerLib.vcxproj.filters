@@ -195,6 +195,27 @@
     <ClInclude Include="banner.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="cmddos.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="overlays.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbgcv.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbginfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ldefext.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbgdwarf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dwarf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="JWlinkerLib.cpp">
@@ -366,6 +387,18 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="impexp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cmddos.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="overlays.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbgcv.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbgdwarf.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

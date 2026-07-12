@@ -1,5 +1,5 @@
 #include "pch.h"
-#include <memory>
+#include "cmdnov.h"
 #include "MemorySubsystem.h"
 #include "cmdline.h"
 #include "Structs.h"
@@ -37,6 +37,12 @@ void FreeNovFmt(MemorySubsystem *memorySubsystem, MessagingSubsystem *messagingS
     _LnkFree(FmtData.u.nov.help);
     _LnkFree(FmtData.u.nov.rpcdata);
     _LnkFree(FmtData.u.nov.sharednlm);
-    /*  FreeList( FmtData.u.nov.exp.export );
-        FreeList( FmtData.u.nov.exp.module );  Permalloc'd now */
+}
+
+void CmdNovFini(MemorySubsystem *memorySubsystem, MessagingSubsystem *messagingSubsystem)
+{
+    if (FmtData.u.nov.description == NULL && Name != NULL)
+    {
+        FmtData.u.nov.description = FileName(memorySubsystem, messagingSubsystem, Name, strlen(Name), Extension, CmdFlags & CF_UNNAMED);
+    }
 }

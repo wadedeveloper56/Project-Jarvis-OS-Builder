@@ -772,8 +772,9 @@ public:
 	void Locator(char* filename, char* mem, unsigned rec);
 	unsigned DoFmtStr(char* buff, unsigned len, char* src, va_list* args);
 	void Msg_Write_Map(int resourceid, ...);
-private:
+	void WLPrtBanner();
 	int Msg_Get(int resourceid, char* buffer);
+private:
 	void LocateFile(unsigned num);
 	unsigned FmtStr(char* buff, unsigned len, char* fmt, ...);
 	unsigned MakeExeName(char* buff, unsigned max);
@@ -784,6 +785,5 @@ private:
 	void Msg_Put_Args(char message[], MSG_ARG_LIST* arg_info, char* types, va_list* args);
 	void Msg_Add_Arg(MSG_ARG* arginfo, char typech, va_list* args);
 	void MessageFini(unsigned num, char* buff, unsigned len, char* prefix, unsigned prefixlen, bool waserror);
-	void WLPrtBanner();
 };
 

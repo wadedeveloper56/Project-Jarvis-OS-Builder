@@ -17,3 +17,4 @@ using namespace std;
 
 void SetNovFmt(MemorySubsystem *memorySubsystem, MessagingSubsystem *messagingSubsystem);
 void FreeNovFmt(MemorySubsystem *memorySubsystem, MessagingSubsystem *messagingSubsystem);
+void CmdNovFini(MemorySubsystem* memorySubsystem, MessagingSubsystem* messagingSubsystem);

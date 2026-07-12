@@ -1725,3 +1725,164 @@ typedef enum
 	SYSTEM
 }                       method;
 
+/******************************************************************************
+ *
+ *        The info field is used as follows:
+ *
+ *  x x x x      x x x x      x x x x      x x x x
+ *    | | |      | | | |      | | | |      |     |
+ *    | | |      +-| | |      | | | |      |     +-> data segment (not code)
+ *    | | |        | | |      | | | |      +-------> iterated data
+ *    | | |        | | |      | | | +--------------> movable segment
+ *    | | |        | | |      | | +----------------> pure (sharable) segment
+ *    | | |        | | |      | +------------------> preload (not loadoncall)
+ *    | | |        | | |      +--------------------> read only (code or data)
+ *    | | |        | | +---------------------------> seg has relocation info
+ *    | | |        | +-----------------------------> seg has debugging info
+ *    | | |        +-------------------------------> descriptor privilege level
+ *    | | +----------------------------------------> discardable segment
+ *    | +------------------------------------------> 32 bit segment
+ *    +--------------------------------------------> part of huge segment
+ *
+ *****************************************************************************/
+
+ /* NOTE: the linker uses some of the unused bits here. If these bits become
+  * used, make sure the linker developer knows about it! */
+
+#define SEG_DATA            1
+#define SEG_FLAG_1       0x02
+#define SEG_FLAG_2       0x04
+#define SEG_ITERATED        8
+#define SEG_MOVABLE      0x10       /* for PE, it is SEG_WRITABLE */
+#define SEG_PURE         0x20       /* i.e. segment is sharable. */
+#define SEG_PRELOAD      0x40
+#define SEG_READ_ONLY    0x80
+#define SEG_RELOC       0x100
+#define SEG_CONFORMING  0x200       /* was SEG_DEBUG, is SEG_EXECUTABLE for PE */
+#define SEG_LEVEL_1     0x400
+#define SEG_LEVEL_2     0x800
+#define SEG_LEVEL_3     0xC00
+#define SEG_DISCARD    0x1000
+#define SEG_32_BIT     0x2000
+#define SEG_HUGE       0x4000
+#define SEG_RESRC_HIGH 0x8000
+#define SEG_SHIFT_PMODE_LVL     10
+#define SEG_SHIFT_PRI_LVL       12
+
+#define SEG_LEVEL_MASK  0x0C00
+
+#define MOVABLE_ENTRY_PNT       0xff
+
+typedef enum
+{
+	SEP_NO,
+	SEP_COMMA,
+	SEP_EQUALS,
+	SEP_PERIOD,
+	SEP_END,
+	SEP_QUOTE,
+	SEP_PAREN,
+	SEP_SPACE,
+	SEP_PERCENT,
+	SEP_DOT_EXT,
+	SEP_LCURLY,
+	SEP_RCURLY
+}                       sep_type;
+
+#define MK_DOS       (MK_OVERLAYS | MK_DOS_EXE | MK_COM)
+#define MK_ONLY_OS2_16  MK_OS2_NE
+#define MK_OS2_FLAT  (MK_OS2_LE | MK_OS2_LX | MK_WIN_VXD)
+#define MK_ONLY_OS2  (MK_ONLY_OS2_16 | MK_OS2_LE | MK_OS2_LX)
+#define MK_OS2_16BIT (MK_ONLY_OS2_16 | MK_WIN_NE)
+/* MK_WIN_VXD is not included into MK_OS2 */
+#define MK_OS2       (MK_OS2_16BIT | MK_OS2_LE | MK_OS2_LX)
+#define MK_PHAR_LAP  (MK_PHAR_SIMPLE|MK_PHAR_FLAT|MK_PHAR_REX|MK_PHAR_MULTISEG)
+#define MK_QNX       (MK_QNX_16 | MK_QNX_FLAT)
+#define MK_386       (MK_PHAR_LAP | MK_NOVELL | MK_QNX|MK_OS2_LE|MK_OS2_LX|MK_PE|MK_ELF|MK_WIN_VXD|MK_RAW)
+#define MK_286       (MK_DOS | MK_OS2_16BIT | MK_DOS16M)
+/* MK_OS2_LE, MK_OS2_LX, MK_WIN_VXD and MK_PE are not treated as FLAT internally */
+#define MK_FLAT      (MK_PHAR_SIMPLE | MK_PHAR_FLAT | MK_PHAR_REX | MK_RAW )
+#define MK_ALLOW_64  (MK_PE | MK_ELF | MK_RAW) /* jwlink */
+#define MK_ALLOW_32  (MK_PHAR_LAP|MK_OS2_LE|MK_OS2_LX|MK_NOVELL|MK_QNX|MK_PE|MK_ELF|MK_WIN_VXD|MK_RAW)
+#define MK_ALLOW_16  (MK_286 | MK_PHAR_FLAT | MK_OS2 | MK_QNX | MK_PE | MK_WIN_VXD | MK_RAW)
+#define MK_ID_SPLIT  (MK_NOVELL)
+#define MK_REAL_MODE (MK_DOS)
+#define MK_PROT_MODE (~MK_REAL_MODE)
+#define MK_SEGMENTED (MK_286 | MK_OS2 | MK_PHAR_MULTISEG)
+#define MK_IMPORTS   (MK_NOVELL | MK_OS2 | MK_PE | MK_ELF)
+/* MK_SPLIT_DATA allows to split the uninitialized data part from
+ * the rest of DGROUP, but it also prohibits BSS to share pages
+ * with preceding initialized data segments!
+ * To be improved!
+ */
+#define MK_SPLIT_DATA (MK_ELF | MK_PE)
+#define MK_LINEARIZE (MK_ELF | MK_PE)
+#define MK_END_PAD   (MK_DOS)
+#define MK_ALL       ((enum exe_format)(0x000FFFFF))
+
+typedef enum
+{
+	MIDST,
+	ENDOFLINE,
+	ENDOFFILE,
+	ENDOFCMD
+}                       place;
+
+typedef struct list_of_names
+{
+	LIST_OF_NAMES* next_name;
+	char                name[1];
+} list_of_names;
+
+#define DefOvlClass     "CODE"
+#define OVL_CL_LEN      ( sizeof( DefOvlClass ) - 1 )
+#define OvlMgrClass     "_OVLCODE"
+#define OVL_MGR_CL_LEN  ( sizeof( OvlMgrClass ) - 1 )
+
+typedef struct member_list
+{
+	MEMBER_LIST* next;
+	module_flags        flags;      //dbi & newseg flags to be xferred to mod entry
+	char                name[1];
+} member_list;
+
+typedef struct
+{
+	virt_mem        init;
+	virt_mem        curr;
+	uint32_t     size;
+	uint32_t     start;
+} dbi_section;
+
+typedef struct debug_info
+{
+	dbi_section     locallinks;
+	dbi_section     local;
+	dbi_section     typelinks;
+	dbi_section     type;
+	dbi_section     linelinks;
+	dbi_section     line;
+	dbi_section     mod;
+	dbi_section     global;
+	dbi_section     addr;
+	virt_mem        dump_addr;
+	int16_t       modnum;
+	class_entry* LocalClass;
+	class_entry* TypeClass;
+} debug_info;
+
+typedef enum
+{
+	OK,
+	REJECT
+} status;
+
+typedef enum
+{
+	TOK_INCLUDE_DOT = 0x01,
+	TOK_IS_FILENAME = 0x02
+} tokcontrol;
+
+#define NLCHAR         '\n'
+#define CTRLZ          '\32'
+
