@@ -1,5 +1,4 @@
 .x64
-.model flat, c
 option casemap:none
 
 ; --- Prototypes (No stdcall decorations) ---
@@ -14,7 +13,7 @@ extern LocalFree: proto
     argv dq 0
 
 .code
-_start proc
+mainCRTStartup proc
     ; --- 64-bit Shadow Space Setup ---
     sub rsp, 40                 ; 32 bytes shadow space + 8 bytes alignment
     
@@ -39,6 +38,6 @@ _start proc
     ; 4. Exit Program
     xor ecx, ecx                ; Exit code 0
     call ExitProcess
-_start endp
+mainCRTStartup endp
 
-end _start
+end mainCRTStartup

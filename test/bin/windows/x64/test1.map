@@ -1,14 +1,8 @@
 JWlink Version 2.0
 Portions Copyright (c) 1985-2002 Sybase, Inc. All Rights Reserved.
-Created on:       26/07/13 07:48:39
+Created on:       26/07/13 10:09:43
 Executable Image: bin\windows\x64\test1.exe
 creating a 64-bit PE executable
-Error! E2028: _ExitProcess is an undefined reference
-Error! E2028: _GetCommandLineA is an undefined reference
-Error! E2028: _CommandLineToArgvW is an undefined reference
-Error! E2028: _GetCommandLineW is an undefined reference
-Error! E2028: _LocalFree is an undefined reference
-Error! E2028: _start is an undefined reference
 
 
                         +------------+
@@ -18,7 +12,8 @@ Error! E2028: _start is an undefined reference
 Group                           Address              Size
 =====                           =======              ====
 
-DGROUP                          00402000             00000017
+.rdata                          00402000             0000011e
+DGROUP                          00403000             00000017
 
 
 
@@ -30,8 +25,10 @@ Segment                Class          Group          Address         Size
 =======                =====          =====          =======         ====
 
 .text                  CODE           AUTO           00401000        00000042
-.data                  DATA           DGROUP         00402000        00000010
-.bss                   BSS            DGROUP         00402010        00000007
+TRANSFER CODE          CODE           AUTO           00401044        0000001e
+.idata                 CONST          .rdata         00402000        0000011e
+.data                  DATA           DGROUP         00403000        00000010
+.bss                   BSS            DGROUP         00403010        00000007
 
 
                         +----------------+
@@ -47,23 +44,36 @@ Address        Symbol
 Module: bin\windows\x64\test1.obj(test1.asm)
 00401000*      __main
 Module: bin\windows\x64\c064.obj(c064.asm)
-00401010*      __start
+00401010+      mainCRTStartup
 
 
-                        +---------------------------+
-                        |   Unresolved References   |
-                        +---------------------------+
+                        +----------------------+
+                        |   Imported Symbols   |
+                        +----------------------+
 
-Undefined Symbol                Referenced by
-================                =============
+Symbol                              Module
+======                              ======
 
-_GetCommandLineW                bin\windows\x64\c064.obj(c064.asm)
-_CommandLineToArgvW             bin\windows\x64\c064.obj(c064.asm)
-_LocalFree                      bin\windows\x64\c064.obj(c064.asm)
-_ExitProcess                    bin\windows\x64\c064.obj(c064.asm)
+ExitProcess                         KERNEL32.dll
+GetCommandLineA                     KERNEL32.dll
+CommandLineToArgvW                  SHELL32.dll
+GetCommandLineW                     KERNEL32.dll
+LocalFree                           KERNEL32.dll
 
 
                         +--------------------+
                         |   Libraries Used   |
                         +--------------------+
 
+C:\PROGRA~2\WI3CF2~1\10\Lib\10.0.26100.0\um\x64\shell32.lib
+C:\PROGRA~2\WI3CF2~1\10\Lib\10.0.26100.0\um\x64\kernel32.lib
+
+
+                        +-----------------------+
+                        |   Linker Statistics   |
+                        +-----------------------+
+
+Stack size:  00100000 (1048576.)
+Memory size:  0197 (407.)
+Entry point address: 00401010
+Link time: 00:00.06

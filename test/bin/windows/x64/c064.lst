@@ -1,12 +1,12 @@
-JWasm v2.12pre, Jul 12 2026
+JWasm v2.12pre, Jul 13 2026
 c064.asm
-                                .x64
-                                .model flat, c
+                            *   .model FLAT
 00000000                    *   _TEXT segment PARA FLAT PUBLIC 'CODE'
                             *   _TEXT ends
 00000000                    *   _DATA segment PARA FLAT PUBLIC 'DATA'
                             *   _DATA ends
-                            *   assume cs:flat,ds:flat,ss:flat,es:flat,fs:ERROR,gs:ERROR
+                            *   assume cs:flat,ds:flat,ss:flat,es:flat,fs:ERROR,gs:NOTHING
+                                .x64
                                 option casemap:none
 
                                 ; --- Prototypes (No stdcall decorations) ---
@@ -26,7 +26,7 @@ c064.asm
 00000010                    *   _DATA ends
 00000000                    *   _TEXT segment
                             *   assume cs:FLAT
-00000000                        _start proc
+00000000                        mainCRTStartup proc
                                     ; --- 64-bit Shadow Space Setup ---
 00000000  4883EC28                  sub rsp, 40                 ; 32 bytes shadow space + 8 bytes alignment
                                     
@@ -51,9 +51,9 @@ c064.asm
                                     ; 4. Exit Program
 0000002B  33C9                      xor ecx, ecx                ; Exit code 0
 0000002D  E800000000                call ExitProcess
-00000032                        _start endp
+00000032                        mainCRTStartup endp
 
-                                end _start
+                                end mainCRTStartup
 00000032                    *   _TEXT ends
 
 
@@ -81,12 +81,12 @@ Procedures, parameters and locals:
 
                 N a m e                 Type     Value    Segment  Length
 
-CommandLineToArgvW . . . . . . .        P Near64 00000000 No Seg   00000000 External  C
-ExitProcess  . . . . . . . . . .        P Near64 00000000 No Seg   00000000 External  C
-GetCommandLineA  . . . . . . . .        P Near64 00000000 No Seg   00000000 External  C
-GetCommandLineW  . . . . . . . .        P Near64 00000000 No Seg   00000000 External  C
-LocalFree  . . . . . . . . . . .        P Near64 00000000 No Seg   00000000 External  C
-_start . . . . . . . . . . . . .        P Near   00000000 _TEXT    00000032 Public   C
+CommandLineToArgvW . . . . . . .        P Near64 00000000 No Seg   00000000 External  FASTCALL
+ExitProcess  . . . . . . . . . .        P Near64 00000000 No Seg   00000000 External  FASTCALL
+GetCommandLineA  . . . . . . . .        P Near64 00000000 No Seg   00000000 External  FASTCALL
+GetCommandLineW  . . . . . . . .        P Near64 00000000 No Seg   00000000 External  FASTCALL
+LocalFree  . . . . . . . . . . .        P Near64 00000000 No Seg   00000000 External  FASTCALL
+mainCRTStartup . . . . . . . . .        P Near   00000000 _TEXT    00000032 Public   FASTCALL
 
 
 Symbols:
@@ -100,15 +100,16 @@ Symbols:
 @Date  . . . . . . . . . . . . .        Text   07/13/26
 @FileCur . . . . . . . . . . . .        Text   c064.asm
 @FileName  . . . . . . . . . . .        Text   C064
-@Interface . . . . . . . . . . .        Number             1h 
+@Interface . . . . . . . . . . .        Number             7h 
 @Model . . . . . . . . . . . . .        Number             7h 
-@Time  . . . . . . . . . . . . .        Text   07:48:38
+@ReservedStack . . . . . . . . .        Number             0h 
+@Time  . . . . . . . . . . . . .        Text   10:09:41
 @Version . . . . . . . . . . . .        Text   800
 @code  . . . . . . . . . . . . .        Text   _TEXT
 @data  . . . . . . . . . . . . .        Text   FLAT
 @stack . . . . . . . . . . . . .        Text   FLAT
 __JWASM__  . . . . . . . . . . .        Number            D4h 
-argc . . . . . . . . . . . . . .        QWord              0h _DATA C
-argv . . . . . . . . . . . . . .        QWord              8h _DATA C
+argc . . . . . . . . . . . . . .        QWord              0h _DATA FASTCALL
+argv . . . . . . . . . . . . . .        QWord              8h _DATA FASTCALL
 
-c064.asm: 44 lines, 2 passes, 2 ms, 0 warnings, 0 errors
+c064.asm: 43 lines, 2 passes, 1 ms, 0 warnings, 0 errors

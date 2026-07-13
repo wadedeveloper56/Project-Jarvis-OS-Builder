@@ -1,12 +1,19 @@
-JWasm v2.12pre, Jul 12 2026
+JWasm v2.12pre, Jul 13 2026
 test1.asm
-                                .x64p
-                                .model flat, c;
+                            *   .model FLAT
 00000000                    *   _TEXT segment PARA FLAT PUBLIC 'CODE'
                             *   _TEXT ends
 00000000                    *   _DATA segment PARA FLAT PUBLIC 'DATA'
                             *   _DATA ends
-                            *   assume cs:flat,ds:flat,ss:flat,es:flat,fs:ERROR,gs:ERROR
+                            *   assume cs:flat,ds:flat,ss:flat,es:flat,fs:ERROR,gs:NOTHING
+                                .x64p
+                                .model flat, c;
+                           Warning A4095: Multiple .MODEL directives, .MODEL ignored
+00000000                    *   _TEXT segment
+                            *   _TEXT ends
+00000000                    *   _DATA segment
+                            *   _DATA ends
+                            *   assume cs:flat,ds:flat,ss:flat,es:flat,fs:ERROR,gs:NOTHING
                                 option casemap : none
 
 
@@ -83,7 +90,8 @@ Symbols:
 @FileName  . . . . . . . . . . .        Text   TEST1
 @Interface . . . . . . . . . . .        Number             1h 
 @Model . . . . . . . . . . . . .        Number             7h 
-@Time  . . . . . . . . . . . . .        Text   07:48:37
+@ReservedStack . . . . . . . . .        Number             0h 
+@Time  . . . . . . . . . . . . .        Text   10:09:40
 @Version . . . . . . . . . . . .        Text   800
 @code  . . . . . . . . . . . . .        Text   _TEXT
 @data  . . . . . . . . . . . . .        Text   FLAT
@@ -93,4 +101,4 @@ _var1  . . . . . . . . . . . . .        Byte               0h _BSS C
 _var2  . . . . . . . . . . . . .        Word               1h _BSS C
 _var3  . . . . . . . . . . . . .        DWord              3h _BSS C
 
-test1.asm: 20 lines, 2 passes, 1 ms, 0 warnings, 0 errors
+test1.asm: 20 lines, 2 passes, 2 ms, 1 warnings, 0 errors

@@ -1,14 +1,14 @@
 PEDUMP - Win32/Win64 COFF EXE/OBJ/LIB file dumper v1.0 (C) Copyright 2025-2026 Christopher D. Wade.
 All Rights Reserved
 Dump of file bin\windows\x64\c064.obj
-File Size 660 bytes
+File Size 678 bytes
 File Type: 64-bit COFF OBJECT
 
 FILE HEADER VALUES
               8664 Machine (x64)
                  3 (3) Number of Sections
-          6A54DEA6 TimeDateStamp ->  n/a
-               122 PointerToSymbolTable
+          6A54FFB5 TimeDateStamp ->  n/a
+               12A PointerToSymbolTable
                 10 (16) NumberOfSymbols
                  0 (0) SizeOfOptionalHeader
                  0 Flags
@@ -71,8 +71,8 @@ SECTION HEADER #2 (2)
 .drectve name
        0 physical address
        0 virtual address
-       E (14) size of raw data
-     114 file pointer to raw data (00000114 to 00000121)
+      16 (22) size of raw data
+     114 file pointer to raw data (00000114 to 00000129)
        0 file pointer to relocation table
        0 file pointer to line numbers
        0 number of relocations
@@ -82,7 +82,8 @@ SECTION HEADER #2 (2)
          Remove
 
 RAW DATA #2 (2)
-00000000  2d 65 6e 74 72 79 3a 5f  73 74 61 72 74 20        -entry:_start 
+00000000  2d 65 6e 74 72 79 3a 6d  61 69 6e 43 52 54 53 74  -entry:mainCRTSt
+00000010  61 72 74 75 70 20                                 artup 
 
 
 Symbol Table - 16 entries  (* = auxillary symbol)
@@ -95,19 +96,20 @@ Indx Sectn   Value   Type  Storage Name
 0004     2 00000000  0000 STATIC   .data
      * Section: 0000  Len: 00010  Relocs: 0000  LineNums: 0000 checksum:00000000
 0006     3 00000000  0000 STATIC   .drectve
-     * Section: 0000  Len: 0000E  Relocs: 0000  LineNums: 0000 checksum:00000000
-0008 UNDEF 00000000  0020 EXTERNAL _ExitProcess
-0009 UNDEF 00000000  0020 EXTERNAL _GetCommandLineA
-000A UNDEF 00000000  0020 EXTERNAL _CommandLineToArgvW
-000B UNDEF 00000000  0020 EXTERNAL _GetCommandLineW
-000C UNDEF 00000000  0020 EXTERNAL _LocalFree
-000D     1 00000000  0020 EXTERNAL __start
-000E     2 00000000  0000 STATIC   _argc
-000F     2 00000008  0000 STATIC   _argv
+     * Section: 0000  Len: 00016  Relocs: 0000  LineNums: 0000 checksum:00000000
+0008 UNDEF 00000000  0020 EXTERNAL ExitProcess
+0009 UNDEF 00000000  0020 EXTERNAL GetCommandLineA
+000A UNDEF 00000000  0020 EXTERNAL CommandLineToArgvW
+000B UNDEF 00000000  0020 EXTERNAL GetCommandLineW
+000C UNDEF 00000000  0020 EXTERNAL LocalFree
+000D     1 00000000  0020 EXTERNAL mainCRTStartup
+000E     2 00000000  0000 STATIC   argc
+000F     2 00000008  0000 STATIC   argv
 
-String Table Size = 0x52 (82) bytes 5 entries
-stringtable[   0] = _ExitProcess
-stringtable[   1] = _GetCommandLineA
-stringtable[   2] = _CommandLineToArgvW
-stringtable[   3] = _GetCommandLineW
-stringtable[   4] = _LocalFree
+String Table Size = 0x5C (92) bytes 6 entries
+stringtable[   0] = ExitProcess
+stringtable[   1] = GetCommandLineA
+stringtable[   2] = CommandLineToArgvW
+stringtable[   3] = GetCommandLineW
+stringtable[   4] = LocalFree
+stringtable[   5] = mainCRTStartup
