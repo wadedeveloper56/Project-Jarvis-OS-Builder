@@ -2,7 +2,7 @@
 
 #include <stdint.h>
 #include "File.h"
-#include "hash.h"
+//#include "hash.h"
 
 #ifdef CASE_SENSITIVE
 #define FNAMECMPSTR      _strcmp      /* for case  sensitive file systems */
@@ -14,7 +14,7 @@ typedef enum file_defext
 {
 #undef pick1
 #define pick1(enum,text) enum,
-#include "ldefext.h"
+//#include "ldefext.h"
 } file_defext; 
 
 // some handy macros for checking and setting symbol type bits
@@ -1010,7 +1010,7 @@ typedef struct section
 {
 	SECTION* next_sect;
 	FILE_LIST* files;
-	pHTable             modFilesHashed;
+	//pHTable             modFilesHashed;
 	MOD_ENTRY* mods;
 	CLASS_ENTRY* classlist;
 	ORDER_CLASS* orderlist; // Link to data for ordering, if used

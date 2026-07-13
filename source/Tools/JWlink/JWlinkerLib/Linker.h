@@ -1,6 +1,5 @@
 #pragma once
 
-#include <memory>
 #include "MemorySubsystem.h"
 #include "FileSubsystem.h"
 #include "MessagingSubsystem.h"
@@ -21,8 +20,6 @@ class Linker
 	int argc;
 	char** argv;
 	stateflag LinkState;
-	char* ArgSave;
-	void* SpawnStack;
 	MemorySubsystem *memorySubsystem;
 	FileSubsystem *fileSubsystem;
 	MessagingSubsystem *messagingSubsystem;
@@ -34,12 +31,7 @@ class Linker
 public:
 	Linker(int argc, char** argv);
 	~Linker();
-	int link(char* cmds);
-	int Spawn(void (Linker::*fn)());
-	void LinkMeBaby();
-	void CleanSubSystems();
-	void ResetSubSystems();
-	void DoLink(char* cmdline);
-	void ResetMisc();
+	int link();
+	void DoLink();
 };
 

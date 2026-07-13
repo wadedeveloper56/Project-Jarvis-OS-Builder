@@ -24,6 +24,7 @@
     <ProjectGuid>{8809D3A8-411C-4F14-8997-14B83ED86568}</ProjectGuid>
     <RootNamespace>JWlinkerLib</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>JWlinkLib</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -72,22 +73,22 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>..\..\..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>..\..\..\..\bin\intermediate\JWlinkerLib\$(Configuration)\$(Platform)\</IntDir>
+    <IntDir>..\..\..\..\bin\intermediate\JWlinkLib\$(Configuration)\$(Platform)\</IntDir>
     <IncludePath>..\orl\h;.\h;.\watcom\h;..\..\File;..\..\Memory;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>..\..\..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>..\..\..\..\bin\intermediate\JWlinkerLib\$(Configuration)\$(Platform)\</IntDir>
+    <IntDir>..\..\..\..\bin\intermediate\JWlinkLib\$(Configuration)\$(Platform)\</IntDir>
     <IncludePath>..\orl\h;.\h;.\watcom\h;..\..\File;..\..\Memory;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>..\..\..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>..\..\..\..\bin\intermediate\JWlinkerLib\$(Configuration)\$(Platform)\</IntDir>
+    <IntDir>..\..\..\..\bin\intermediate\JWlinkLib\$(Configuration)\$(Platform)\</IntDir>
     <IncludePath>..\orl\h;.\h;.\watcom\h;..\..\File;..\..\Memory;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>..\..\..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>..\..\..\..\bin\intermediate\JWlinkerLib\$(Configuration)\$(Platform)\</IntDir>
+    <IntDir>..\..\..\..\bin\intermediate\JWlinkLib\$(Configuration)\$(Platform)\</IntDir>
     <IncludePath>..\orl\h;.\h;.\watcom\h;..\..\File;..\..\Memory;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -187,141 +188,35 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="banner.h" />
-    <ClInclude Include="carve.h" />
-    <ClInclude Include="cmd16m.h" />
-    <ClInclude Include="cmdall.h" />
-    <ClInclude Include="cmddos.h" />
-    <ClInclude Include="cmdelf.h" />
-    <ClInclude Include="cmdline.h" />
-    <ClInclude Include="cmdnov.h" />
-    <ClInclude Include="cmdos2.h" />
-    <ClInclude Include="cmdphar.h" />
-    <ClInclude Include="cmdqnx.h" />
-    <ClInclude Include="cmdutils.h" />
-    <ClInclude Include="dbgcv.h" />
-    <ClInclude Include="dbgall.h" />
-    <ClInclude Include="dbgdwarf.h" />
-    <ClInclude Include="dbginfo.h" />
     <ClInclude Include="debug.h" />
-    <ClInclude Include="distrib.h" />
-    <ClInclude Include="dwarf.h" />
     <ClInclude Include="FileSubsystem.h" />
-    <ClInclude Include="framework.h" />
-    <ClInclude Include="globals.h" />
-    <ClInclude Include="hash.h" />
-    <ClInclude Include="impexp.h" />
-    <ClInclude Include="ldefext.h" />
-    <ClInclude Include="libr.h" />
     <ClInclude Include="Linker.h" />
-    <ClInclude Include="linkutil.h" />
-    <ClInclude Include="loadfile.h" />
-    <ClInclude Include="loadnov.h" />
-    <ClInclude Include="loadpe.h" />
-    <ClInclude Include="lsymtab.h" />
-    <ClInclude Include="mapio.h" />
     <ClInclude Include="MemorySubsystem.h" />
     <ClInclude Include="MessagingSubsystem.h" />
-    <ClInclude Include="msg.h" />
-    <ClInclude Include="ntio.h" />
-    <ClInclude Include="obj2supp.h" />
-    <ClInclude Include="objcache.h" />
-    <ClInclude Include="ObjectNode.h" />
-    <ClInclude Include="objfree.h" />
-    <ClInclude Include="objio.h" />
-    <ClInclude Include="objnode.h" />
-    <ClInclude Include="objomf.h" />
-    <ClInclude Include="objpass1.h" />
-    <ClInclude Include="objstrip.h" />
-    <ClInclude Include="omfreloc.h" />
     <ClInclude Include="Orl2.h" />
-    <ClInclude Include="overlays.h" />
-    <ClInclude Include="ovlsupp.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="permdata.h" />
-    <ClInclude Include="procfile.h" />
-    <ClInclude Include="reloc.h" />
-    <ClInclude Include="ring.h" />
-    <ClInclude Include="salloc.h" />
-    <ClInclude Include="specials.h" />
     <ClInclude Include="SpillFile.h" />
-    <ClInclude Include="strtab.h" />
     <ClInclude Include="Structs.h" />
     <ClInclude Include="SymbolTable.h" />
-    <ClInclude Include="symmem.h" />
-    <ClInclude Include="symtrace.h" />
-    <ClInclude Include="toc.h" />
     <ClInclude Include="TokenBuffer.h" />
     <ClInclude Include="VirtualMemory.h" />
-    <ClInclude Include="wcomdef.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="carve.cpp" />
-    <ClCompile Include="cmd16m.cpp" />
-    <ClCompile Include="cmdall.cpp" />
-    <ClCompile Include="cmddos.cpp" />
-    <ClCompile Include="cmdelf.cpp" />
-    <ClCompile Include="cmdline.cpp" />
-    <ClCompile Include="cmdnov.cpp" />
-    <ClCompile Include="cmdos2.cpp" />
-    <ClCompile Include="cmdphar.cpp" />
-    <ClCompile Include="cmdqnx.cpp" />
-    <ClCompile Include="cmdutils.cpp" />
-    <ClCompile Include="dbgall.cpp" />
-    <ClCompile Include="dbgcv.cpp" />
-    <ClCompile Include="dbgdwarf.cpp" />
-    <ClCompile Include="dbginfo.cpp" />
-    <ClCompile Include="debug.cpp" />
-    <ClCompile Include="distrib.cpp" />
     <ClCompile Include="FileSubsystem.cpp" />
-    <ClCompile Include="globals.cpp" />
-    <ClCompile Include="hash.cpp" />
-    <ClCompile Include="impexp.cpp" />
-    <ClCompile Include="JWlinkerLib.cpp" />
-    <ClCompile Include="libr.cpp" />
     <ClCompile Include="Linker.cpp" />
-    <ClCompile Include="linkutil.cpp" />
-    <ClCompile Include="loadfile.cpp" />
-    <ClCompile Include="loadnov.cpp" />
-    <ClCompile Include="loadpe.cpp" />
-    <ClCompile Include="lsymtab.cpp" />
-    <ClCompile Include="mapio.cpp" />
     <ClCompile Include="MemorySubsystem.cpp" />
     <ClCompile Include="MessagingSubsystem.cpp" />
-    <ClCompile Include="ntio.cpp" />
-    <ClCompile Include="obj2supp.cpp" />
-    <ClCompile Include="objcache.cpp" />
-    <ClCompile Include="ObjectNode.cpp" />
-    <ClCompile Include="objfree.cpp" />
-    <ClCompile Include="objio.cpp" />
-    <ClCompile Include="objnode.cpp" />
-    <ClCompile Include="objomf.cpp" />
-    <ClCompile Include="objpass1.cpp" />
-    <ClCompile Include="objstrip.cpp" />
-    <ClCompile Include="omfreloc.cpp" />
     <ClCompile Include="Orl.cpp" />
-    <ClCompile Include="overlays.cpp" />
-    <ClCompile Include="ovlsupp.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="permdata.cpp" />
-    <ClCompile Include="procfile.cpp" />
-    <ClCompile Include="reloc.cpp" />
-    <ClCompile Include="ring.cpp" />
-    <ClCompile Include="salloc.cpp" />
     <ClCompile Include="SpillFile.cpp" />
-    <ClCompile Include="strtab.cpp" />
     <ClCompile Include="SymbolTable.cpp" />
-    <ClCompile Include="symmem.cpp" />
-    <ClCompile Include="symtrace.cpp" />
-    <ClCompile Include="toc.cpp" />
     <ClCompile Include="TokenBuffer.cpp" />
     <ClCompile Include="VirtualMemory.cpp" />
-    <ClCompile Include="wcomdef.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="lnkerror.msg" />

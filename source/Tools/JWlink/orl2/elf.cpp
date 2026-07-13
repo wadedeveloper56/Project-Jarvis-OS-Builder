@@ -8,7 +8,6 @@
 #include "elfflhn.h"
 #include "elflwlv.h"
 #include "orlhash.h"
-#include "debug.h"
 
 elf_handle ElfInit(orl_funcs* funcs)
 {
