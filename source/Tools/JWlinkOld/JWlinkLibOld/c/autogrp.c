@@ -175,7 +175,7 @@ static void AutoGroupSect( section *sec )
     offset          new_size;
     offset          align_size;
     unsigned        num_segs;
-    bool            lastseg;    // TRUE iff this should be last seg in group.
+    bool            lastseg=FALSE;    // TRUE iff this should be last seg in group.
     offset          limit;
 
     CurrentSeg = NULL;
