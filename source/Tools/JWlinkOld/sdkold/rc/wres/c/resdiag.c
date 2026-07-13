@@ -790,17 +790,17 @@ extern ControlClass * ResNameOrOrdToControlClass( const ResNameOrOrdinal * name)
     if (name->ord.fFlag == 0xff) {
         class = ResNumToControlClass( name->ord.wOrdinalID );
     } else {
-        if (stricmp( name->name, "button" ) == 0) {
+        if (_stricmp( name->name, "button" ) == 0) {
             class = ResNumToControlClass( CLASS_BUTTON );
-        } else if (stricmp( name->name, "edit" ) == 0) {
+        } else if (_stricmp( name->name, "edit" ) == 0) {
             class = ResNumToControlClass( CLASS_EDIT );
-        } else if (stricmp( name->name, "static" ) == 0) {
+        } else if (_stricmp( name->name, "static" ) == 0) {
             class = ResNumToControlClass( CLASS_STATIC );
-        } else if (stricmp( name->name, "listbox" ) == 0) {
+        } else if (_stricmp( name->name, "listbox" ) == 0) {
             class = ResNumToControlClass( CLASS_LISTBOX );
-        } else if (stricmp( name->name, "scrollbar" ) == 0) {
+        } else if (_stricmp( name->name, "scrollbar" ) == 0) {
             class = ResNumToControlClass( CLASS_SCROLLBAR );
-        } else if (stricmp( name->name, "combobox" ) == 0) {
+        } else if (_stricmp( name->name, "combobox" ) == 0) {
             class = ResNumToControlClass( CLASS_COMBOBOX );
         } else {
             /* space for the '\0' is reserve in the ControlClass structure */

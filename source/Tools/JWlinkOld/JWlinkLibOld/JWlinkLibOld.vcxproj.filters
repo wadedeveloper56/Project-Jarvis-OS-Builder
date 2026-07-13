@@ -416,9 +416,6 @@
     <ClCompile Include="c\obj2supp.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="c\objcache.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="c\objcalc.c">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -495,6 +492,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="c\wlnkmsg.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="c\mixcache.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

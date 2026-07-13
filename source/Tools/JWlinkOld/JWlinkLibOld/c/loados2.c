@@ -1100,7 +1100,7 @@ unsigned_32 GetStubSize( void )
     }
     name = FmtData.u.os2.stub_file_name;
     stub_len = sizeof( DosStub ) + DoExeName();
-    if( name != NULL && stricmp( name, Root->outfile->fname ) != 0 ) {
+    if( name != NULL && _stricmp( name, Root->outfile->fname ) != 0 ) {
         the_file = SearchPath( name );
         if( the_file != NIL_HANDLE ) {
             QRead( the_file, &dosheader, sizeof( dos_exe_header ), name );
@@ -1160,7 +1160,7 @@ unsigned_32 Write_Stub_File( unsigned_32 stub_align )
         stub_len = 0;
     } else if( name == NULL ) {
         stub_len = WriteDefStub( stub_align );
-    } else if( stricmp( name, Root->outfile->fname ) == 0 ) {
+    } else if( _stricmp( name, Root->outfile->fname ) == 0 ) {
         LnkMsg( ERR+MSG_STUB_SAME_AS_LOAD, NULL );
         stub_len = WriteDefStub( stub_align );
     } else {

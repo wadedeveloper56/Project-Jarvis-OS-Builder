@@ -36,7 +36,7 @@
 #include "orlhash.h"
 #include "debug.h"
 #ifdef _BSD_SOURCE
-#define stricmp strcasecmp
+#define _stricmp strcasecmp
 #endif
 
 static void fix_sym_byte_order( elf_file_handle elf_file_hnd, Elf32_Sym *e_sym )
@@ -636,7 +636,7 @@ static orl_return ParseExport( char **contents, int *len,
     int         l;
 
     l = strncspn( *contents, ", \t", *len );
-    arg = alloca( l + 1 );
+    arg = malloc( l + 1 );
     memcpy(arg, *contents, l);
     arg[l] = 0;
     *len -= l;
@@ -654,7 +654,7 @@ static orl_return ParseDefLibEntry( char **contents, int *len,
 
     for( ;; ) {
         l = strncspn( *contents, ", \t", *len );
-        arg = alloca( l + 1 );
+        arg = malloc( l + 1 );
         memcpy(arg, *contents, l);
         arg[l] = 0;
         *len -= l;
@@ -691,7 +691,7 @@ static orl_return ParseLnkCmd( char *cmd, char **contents, int *len,
         }
     }
     l = value - *contents;
-    arg = alloca( l + 1 );
+    arg = malloc( l + 1 );
     memcpy( arg, *contents, l );
     *contents = value;
     if ( delim )

@@ -286,7 +286,7 @@ static class_entry  *class = NULL;
     }
     for( ; class != NULL; class = class->next_class ) {
         while( (seg = RingStep( class->segs, seg )) != NULL ) {
-            if( stricmp( seg->segname, name ) == 0 ) {
+            if( _stricmp( seg->segname, name ) == 0 ) {
                 return( seg );
             }
         }

@@ -67,6 +67,7 @@
 #include "permdata.h"
 #include "dllentry.h"
 #include "overlays.h"
+#include "clibext.h"
 
 seg_leader      *StackSegPtr;
 startinfo       StartInfo;
@@ -277,7 +278,7 @@ static class_entry *LocateBSSClass( void )
 
     sect = (Root->areas == NULL) ? Root : NonSect;
     for( currclass = sect->classlist; currclass != NULL; currclass = currclass->next_class ) {
-        if( stricmp( currclass->name, BSSClassName ) == 0 ) {
+        if( _stricmp( currclass->name, BSSClassName ) == 0 ) {
             return( currclass );
         }
     }
@@ -853,7 +854,7 @@ void AddImpLibEntry( char *intname, char *extname, unsigned ordinal )
     } else {
         otherlen = 10;          // max length of a 32-bit int.
     }
-    buff = alloca( intlen + otherlen + ImpLib.module_name_len + 13 );
+    buff = malloc( intlen + otherlen + ImpLib.module_name_len + 13 );
     buff[0] = '+';
     buff[1] = '+';
     buff[2] = '\'';
@@ -874,7 +875,7 @@ void AddImpLibEntry( char *intname, char *extname, unsigned ordinal )
         currpos += otherlen;
         *currpos++ = '\'';
     } else {
-        utoa( ordinal, currpos, 10 );
+        _ultoa( ordinal, currpos, 10 );
         currpos += strlen( currpos );
     }
 #if !defined( __UNIX__ )

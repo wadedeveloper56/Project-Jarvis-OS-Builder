@@ -24,7 +24,7 @@
 *
 *  ========================================================================
 *
-* Description:  Include appropriate header defining alloca().
+* Description:  Include appropriate header defining malloc().
 *
 ****************************************************************************/
 

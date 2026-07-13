@@ -121,10 +121,10 @@ void DBIP1Source( byte *buff, byte *endbuff )
 section *DBIGetSect( char *clname )
 /*****************************************/
 {
-    if( ( stricmp( clname, _MSTypeClass ) == 0 )
-        || ( stricmp( clname, _MSLocalClass ) == 0 ) ) {
+    if( ( _stricmp( clname, _MSTypeClass ) == 0 )
+        || ( _stricmp( clname, _MSLocalClass ) == 0 ) ) {
         return( CurrSect );
-    } else if( stricmp( clname, _DwarfClass ) == 0 ) {
+    } else if( _stricmp( clname, _DwarfClass ) == 0 ) {
         return( Root );
     }
     return( NULL );
@@ -136,11 +136,11 @@ void DBIColClass( class_entry *class )
     bool        isdbi;
 
     isdbi = TRUE;
-    if( stricmp( class->name, _DwarfClass ) == 0 ) {
+    if( _stricmp( class->name, _DwarfClass ) == 0 ) {
         class->flags |= CLASS_DWARF;
-    } else if( stricmp( class->name, _MSTypeClass ) == 0 ) {
+    } else if( _stricmp( class->name, _MSTypeClass ) == 0 ) {
         class->flags |= CLASS_MS_TYPE;
-    } else if( stricmp( class->name, _MSLocalClass ) == 0 ) {
+    } else if( _stricmp( class->name, _MSLocalClass ) == 0 ) {
         class->flags |= CLASS_MS_LOCAL;
     } else {
         isdbi = FALSE;

@@ -295,7 +295,7 @@ group_entry *AllocGroup( char *name, group_entry ** grp_list )
     DEBUG((DBG_OLD,"AllocGroup(%s), after InitGroup flags=%x", name, group->segflags ));
     group->sym = sym;
     LinkList( grp_list, group );
-    if( stricmp( name, DataGrpName ) == 0 ) {
+    if( _stricmp( name, DataGrpName ) == 0 ) {
         DataGroup = group;
         DEBUG((DBG_OLD,"AllocGroup, DataGroup set" ));
     } else if( name == AutoGrpName ) {

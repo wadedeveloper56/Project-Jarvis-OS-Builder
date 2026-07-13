@@ -351,7 +351,7 @@ static orl_return EntryCmd( char *name, void *dummy )
         if ( ( FmtData.type & MK_PE ) && FmtData.u.pe.win64 == 0 ) {
             char *tmpname;
             int i = strlen( name );
-            tmpname = alloca( i + 2 );
+            tmpname = malloc( i + 2 );
             tmpname[0] = '_';
             strcpy( tmpname+1, name );
             SetStartSym( tmpname );
@@ -483,9 +483,9 @@ static void AllocSeg( void *_snode, void *dummy )
             return;
         }
         isdbi = TRUE;
-        if( stricmp(CoffDebugSymName, sdata->u.name ) == 0 ) {
+        if( _stricmp(CoffDebugSymName, sdata->u.name ) == 0 ) {
             clname = _MSLocalClass;
-        } else if( stricmp(CoffDebugTypeName, sdata->u.name ) == 0 ) {
+        } else if( _stricmp(CoffDebugTypeName, sdata->u.name ) == 0 ) {
             clname = _MSTypeClass;
         } else {
             clname = _DwarfClass;
@@ -583,7 +583,7 @@ static orl_return DeclareSegment( orl_sec_handle sec )
     snode->handle = sec;
     sdata->iscdat = (flags & ORL_SEC_FLAG_COMDAT) != 0;
     len = sizeof( CoffIDataSegName ) - 1;
-    if( strnicmp( CoffIDataSegName, name, len ) == 0 ) {
+    if( _strnicmp( CoffIDataSegName, name, len ) == 0 ) {
         SeenDLLRecord();
         CurrMod->modinfo |= MOD_IMPORT_LIB;
         /* .idata$4, .idata$5 (IAT) and .idata$6 */

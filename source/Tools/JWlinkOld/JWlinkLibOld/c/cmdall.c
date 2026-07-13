@@ -232,7 +232,7 @@ static bool AddAlias( void )
     unsigned    namelen;
 
     namelen = Token.len;
-    name = alloca( namelen );
+    name = malloc( namelen );
     memcpy( name, Token.this, namelen );
     if( !GetToken( SEP_EQUALS, TOK_INCLUDE_DOT ) ) {
         return( FALSE );
@@ -895,7 +895,7 @@ bool ProcStart( void )
     if( !GetToken( SEP_EQUALS, TOK_INCLUDE_DOT ) )
         return( FALSE );
     StartInfo.user_specd = TRUE;
-    name = alloca( Token.len + 1 );
+    name = malloc( Token.len + 1 );
     memcpy( name, Token.this, Token.len );
     name[ Token.len ] = '\0';
     SetStartSym( name );
@@ -967,7 +967,7 @@ sysblock *FindSysBlock( char *name )
     sysblock    *sys;
 
     for( sys = SysBlocks; sys != NULL; sys = sys->next ) {
-        if( stricmp( sys->name, name ) == 0 ) {
+        if( _stricmp( sys->name, name ) == 0 ) {
             return( sys );
         }
     }
@@ -985,7 +985,7 @@ static sysblock *FindSystemBlock( char *name )
     if( tmpblk == NULL ) {
         len = strlen( name );
         for( sys = SysBlocks; sys != NULL; sys = sys->next ) {
-            if( strnicmp( sys->name, name, len ) == 0 ) {
+            if( _strnicmp( sys->name, name, len ) == 0 ) {
                 if( tmpblk == NULL ) {
                     tmpblk = sys;
                 } else {

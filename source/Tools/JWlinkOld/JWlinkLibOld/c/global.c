@@ -38,9 +38,9 @@
 #include "globals.h"
 #include "specials.h"
 
-#ifdef __UNIX__
+//#ifdef __UNIX__
 
-char *_strupr( char *str )
+char *strupr( char *str )
 /************************/
 {
     char    *p;
@@ -58,7 +58,7 @@ char *_strupr( char *str )
     return( str );
 }
 
-char *_ultoa( unsigned long val, char *s, int radix )
+char *ultoa( unsigned long val, char *s, int radix )
 {
     switch (radix) {
     case  8:  sprintf( s, "%lo", val ); break;
@@ -94,6 +94,7 @@ char *itoa( int val, char *s, int radix )
  */
 
 char **_argv = NULL;
+int  _argc;
 
 int _bgetcmd( char *buffer, int len )
 {
@@ -148,4 +149,4 @@ char * getcmd( char *buffer )
     return( buffer );
 }
 
-#endif
+//#endif

@@ -1076,7 +1076,7 @@ static void ProcLxdata( bool islidata, struct objbuff *ob )
         ob->curr += sizeof( unsigned_16 );
     }
 #if _DEVELOPMENT == _ON
-    if( stricmp( seg->entry->u.leader->segname, "_BSS" ) == 0 ) {
+    if( _stricmp( seg->entry->u.leader->segname, "_BSS" ) == 0 ) {
         LnkMsg( LOC_REC+ERR+MSG_INTERNAL, "s", "Initialized BSS found" );
     }
 #endif

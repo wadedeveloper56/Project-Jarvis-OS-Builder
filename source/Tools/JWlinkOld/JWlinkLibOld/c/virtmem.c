@@ -597,7 +597,7 @@ static bool CompareBlock( void * info, spilladdr loc, unsigned off,
     if( inmem ) {
         buf = (char *)loc.addr + off;
     } else {
-        buf = alloca( len );
+        buf = malloc( len );
         SpillRead( loc.spill, off, buf, len );
     }
     return memcmp( buf, info, len ) == 0;

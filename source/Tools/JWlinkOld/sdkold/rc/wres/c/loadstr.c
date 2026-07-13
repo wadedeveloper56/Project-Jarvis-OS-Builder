@@ -81,7 +81,7 @@ static int GetString(   WResLangInfo    *res,
     length = res->Length;
     stringbufflen = min( GET_STR_BUF_LEN, length );
 //  stringbuff = (char *) WRESALLOC( stringbufflen );       JBS 92/10/02
-    stringbuff = (char *) alloca( stringbufflen );
+    stringbuff = (char *) malloc( stringbufflen );
     if ( stringbuff == NULL ) return( -1 );
     stringnum = idResource & 0x0f;
 

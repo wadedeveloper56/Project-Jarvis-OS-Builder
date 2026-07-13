@@ -147,7 +147,7 @@ void DataRef( symbol * sym )
 {
     if( IS_PPC_PE ) {
         unsigned    len = strlen( sym->name ) + 3;
-        char        *s = alloca( len );
+        char        *s = malloc( len );
 
         s[ 0 ] = s[ 1 ] = '.';
         strcpy( s + 2, sym->name );

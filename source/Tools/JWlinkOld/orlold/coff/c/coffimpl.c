@@ -384,12 +384,12 @@ static int CoffCreateImport( coff_file_handle coff_file_hnd, import_sym * import
     memset( bnull.b64, 0, sizeof(bnull.b64) );
 
     symbol_name_len = strlen(import->exportedName);
-    DLLSymbolName = alloca(symbol_name_len + 1 );
+    DLLSymbolName = malloc(symbol_name_len + 1 );
     strcpy(DLLSymbolName, import->exportedName);
     DLLSymbolName = getImportName(DLLSymbolName, import->type);
     dllsymbol_name_len = strlen(DLLSymbolName);
 
-    buffer = alloca(max( strlen(import->DLLName), symbol_name_len) + 64 );
+    buffer = malloc(max( strlen(import->DLLName), symbol_name_len) + 64 );
 
     SetCoffFile( &c_file, import->processor, import->time_date_stamp, 0 );
     switch( import->processor ) {

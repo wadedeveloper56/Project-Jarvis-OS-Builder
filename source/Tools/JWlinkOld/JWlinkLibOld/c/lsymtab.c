@@ -873,7 +873,7 @@ symbol *SymOpNWPfx( sym_flags op, char *name, unsigned length, char * prefix, un
         return( NULL );
 
     if( ( NULL != prefix ) && ( 0 != prefixLen ) || ( NULL != CmdFile->symprefix ) ) {
-        char    *pfxname = alloca( 255 + 1 );   /* max len of PString - used to be prefixLen+1 */
+        char    *pfxname = malloc( 255 + 1 );   /* max len of PString - used to be prefixLen+1 */
 
         if( NULL == pfxname ) {
             LnkMsg( ERR+MSG_SYMBOL_NAME_TOO_LONG, "s", prefix );
@@ -905,7 +905,7 @@ void MakeSymAlias( char *name, unsigned namelen, char *target, unsigned targetle
     if( namelen == targetlen && (*CmpRtn)( name, target, namelen ) == 0 ) {
         char    *buff;
 
-        buff = alloca( targetlen + 1 );
+        buff = malloc( targetlen + 1 );
         memcpy( buff, target, targetlen );
         buff[ targetlen ] = '\0';
         LnkMsg( WRN+MSG_CIRCULAR_ALIAS_FOUND, "s", buff );
@@ -993,7 +993,7 @@ static symbol *DoSymOp( sym_flags op, char *symname, unsigned length )
 #ifdef _INT_DEBUG
     char        *symname_dbg;
 
-    symname_dbg = alloca( length + 1 );
+    symname_dbg = malloc( length + 1 );
     memcpy( symname_dbg, symname, length );
     symname_dbg[ length ] = '\0';
 #endif

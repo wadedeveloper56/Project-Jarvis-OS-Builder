@@ -63,7 +63,7 @@ static int wresMemicmp( const void *p1, const void *p2, unsigned len )
 
 extern int WResIDNameCmp( const WResIDName * name1, const WResIDName * name2 )
 /****************************************************************************/
-/* Note: don't use stricmp since the names in WResID's are not NULL terminated */
+/* Note: don't use _stricmp since the names in WResID's are not NULL terminated */
 {
     int     cmp_rc;
 

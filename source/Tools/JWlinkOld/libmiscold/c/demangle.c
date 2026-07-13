@@ -38,7 +38,7 @@
 #endif
 
 #ifdef __UNIX__
-#define memicmp strncasecmp
+//#define memicmp strncasecmp
 #endif
 
 #if 0 || defined(TEST) || defined(DUMP)
@@ -625,7 +625,7 @@ static int check_recurse( void ) {
 #ifdef __NO_STACK_CHECKING__
     return( 1 );
 #else
-    return( (int) alloca( RECURSE_CHECK ) );
+    return( (int) malloc( RECURSE_CHECK ) );
 #endif
 }
 

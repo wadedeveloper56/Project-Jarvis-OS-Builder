@@ -397,7 +397,7 @@ void DwarfAddModule( mod_entry *mod, section *sect )
             zero = 0;                       // no include directories;
             PutInfo( mod->d.d->dasi.addr, &zero, 1 );
             mod->d.d->dasi.addr += 1;
-            buff = alloca( namelen + 3 );
+            buff = malloc( namelen + 3 );
             memcpy( &buff[0], mod->name, namelen );
             buff[namelen + 0] = 0;          // no directory index
             buff[namelen + 1] = 0;          // no time
@@ -445,7 +445,7 @@ static void DefAClass( void *_seg )
     seg->group->grp_addr.seg = 0;
     if( SectionTable[SECT_DEBUG_INFO].size > 0 ) {
         for( index = 0; index < SECT_NUM_SECTIONS; index++ ) {
-            if( stricmp( seg->segname, SectionTable[index].name ) == 0 ) {
+            if( _stricmp( seg->segname, SectionTable[index].name ) == 0 ) {
                 seg->dbgtype = index + DWARF_DEBUG_INFO;
                 SectionTable[index].start = seg->size;
                 break;

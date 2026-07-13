@@ -1024,7 +1024,7 @@ char *FileName( char *buff, unsigned len, file_defext etype, bool force )
     namstart = namptr;
     cnt = len - ( namptr - buff );
     if( cnt == 0 ) {
-        ptr = alloca( len + 1 );
+        ptr = malloc( len + 1 );
         memcpy( ptr, buff, len );
         ptr[ len ] = '\0';
         LnkMsg( LOC+LINE+FTL+MSG_INV_FILENAME, "s", ptr );
@@ -1152,7 +1152,7 @@ outfilelist *NewOutFile( char *filename )
 
 int stricmp_wrapper( const void *s1, const void *s2 )
 {
-    return( stricmp( s1, s2 ) );
+    return( _stricmp( s1, s2 ) );
 }
 
 section *NewSection( void )
@@ -1196,14 +1196,14 @@ char *GetFileName( char **membname, bool setname )
     /* jwlink: remove double quotes */
     if ( *Token.this == '"' && namelen > 2 ) {
         namelen -= 2;
-        objname = alloca( namelen );
+        objname = malloc( namelen );
         memcpy( objname, Token.this+1, namelen );
     } else {
-        objname = alloca( namelen );
+        objname = malloc( namelen );
         memcpy( objname, Token.this, namelen );
     }
     if( GetToken( SEP_PAREN, TOK_INCLUDE_DOT ) ) {   // got LIBNAME(LIB_MEMBER)
-        fullmemb = alloca( Token.len + 1 );
+        fullmemb = malloc( Token.len + 1 );
         memcpy( fullmemb, Token.this, Token.len );
         fullmemb[ Token.len ] = '\0';
         fullmemb = RemovePath( fullmemb, &memblen );
