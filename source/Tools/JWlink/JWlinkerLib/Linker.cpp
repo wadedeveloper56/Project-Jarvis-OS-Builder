@@ -10,6 +10,8 @@
 #include "MessagingSubsystem.h"
 #include "TokenBuffer.h"
 #include "SymbolTable.h"
+#include "Structs.h"
+#include "global.h"
 
 Linker::Linker(int argc, char** argv)
 {
@@ -23,11 +25,14 @@ Linker::Linker(int argc, char** argv)
 	symbolTable = new SymbolTable(memorySubsystem);
 	orl = new Orl();
 	virtualMemory = new VirtualMemory(memorySubsystem);
+
+	InitNodes();
 }
 
 Linker::~Linker()
 {
 	DEBUG((DBG_OLD, "Linker destructor enter\n"));
+	BurnNodes();
 	delete virtualMemory;
 	delete orl;
 	delete symbolTable;
@@ -37,6 +42,47 @@ Linker::~Linker()
 	delete fileSubsystem;
 	delete memorySubsystem;
 	DEBUG((DBG_OLD, "Linker destructor exit\n"));
+}
+
+void* Linker::MakeArray(unsigned size)
+{
+	nodearray* nodes;
+
+	_ChkAlloc(nodearray*, nodes, sizeof(nodearray));
+	nodes->num = 0;
+	nodes->elsize = size;
+	nodes->arraymax = 0;
+	size *= NODE_ARRAY_SIZE;
+	_ChkAlloc(char*, nodes->array[0], size);
+	memset(nodes->array[0], 0, size);
+	return(nodes);
+}
+
+void Linker::InitNodes(void)
+{
+	GrpNodes = (nodearray*)MakeArray(sizeof(grpnode));
+	SegNodes = (nodearray*)MakeArray(sizeof(segnode));
+	ExtNodes = (nodearray*)MakeArray(sizeof(extnode));
+	NameNodes = (nodearray*)MakeArray(sizeof(list_of_names*));
+}
+
+void Linker::BurnNodeArray(nodearray* list)
+{
+	int index;
+
+	for (index = 0; index <= list->arraymax; index++)
+	{
+		_LnkFree(list->array[index]);
+	}
+	_LnkFree(list);
+}
+
+void Linker::BurnNodes(void)
+{
+	BurnNodeArray(GrpNodes);
+	BurnNodeArray(SegNodes);
+	BurnNodeArray(ExtNodes);
+	BurnNodeArray(NameNodes);
 }
 
 void Linker::DoLink()

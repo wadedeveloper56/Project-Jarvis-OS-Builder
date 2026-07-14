@@ -32,6 +32,11 @@ public:
 	Linker(int argc, char** argv);
 	~Linker();
 	int link();
+private:
 	void DoLink();
+	void* MakeArray(unsigned size);
+	void InitNodes(void);
+	void BurnNodeArray(nodearray* list);
+	void BurnNodes(void);
 };
 

@@ -1886,3 +1886,12 @@ typedef enum
 #define NLCHAR         '\n'
 #define CTRLZ          '\32'
 
+#define MAX_NUM_NODES   128
+#define NODE_ARRAY_SIZE 256
+typedef struct nodearray
+{
+	unsigned    num;            // number of nodes inserted
+	unsigned    elsize;         // size of individual element in array.
+	unsigned    arraymax;       // the number of node arrays allocated - 1
+	char* array[MAX_NUM_NODES];   // the array.
+} nodearray;

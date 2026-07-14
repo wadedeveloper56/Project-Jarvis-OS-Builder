@@ -191,6 +191,7 @@
     <ClInclude Include="banner.h" />
     <ClInclude Include="debug.h" />
     <ClInclude Include="FileSubsystem.h" />
+    <ClInclude Include="global.h" />
     <ClInclude Include="Linker.h" />
     <ClInclude Include="MemorySubsystem.h" />
     <ClInclude Include="MessagingSubsystem.h" />
@@ -206,6 +207,7 @@
   <ItemGroup>
     <ClCompile Include="debug.cpp" />
     <ClCompile Include="FileSubsystem.cpp" />
+    <ClCompile Include="global.cpp" />
     <ClCompile Include="Linker.cpp" />
     <ClCompile Include="MemorySubsystem.cpp" />
     <ClCompile Include="MessagingSubsystem.cpp" />

@@ -29,7 +29,11 @@
 
 #define DO_OR_EQUAL(t,a,b,c) a = (t)((a)|(c));
 #define DO_AND_EQUAL(t,a,b,c) a = (t)((a)&(c));
+#define _ChkAlloc(type,dest,size) dest = (type)memorySubsystem->AllocateMemory( size )
 #define _LnkAlloc(type,dest,size) dest = (type)memorySubsystem->AllocateMemory( size )
+#define _TryAlloc(type,dest,size) dest = (type)memorySubsystem->AllocateMemory( size )
+#define _PermAlloc(type,dest,size) dest = (type)memorySubsystem->AllocateMemory( size )
+//#define _LnkReAlloc( dest, src, size ) dest = LnkReAlloc( src, size );
 #define _LnkFree(ptr)                          memorySubsystem->FreeMemory( ptr )
 #define CODE_SEGMENT    1
 #define DATA_SEGMENT    2
