@@ -1,4 +1,4 @@
-JWasm v2.12pre, Jul 13 2026
+JWasm v2.12pre, Jul 14 2026
 bin\windows\x86\test1.asm
                                 .386
                                 .model flat, c;
@@ -78,12 +78,12 @@ Symbols:
 @Cpu . . . . . . . . . . . . . .        Number           D0Fh 
 @CurSeg  . . . . . . . . . . . .        Text   
 @DataSize  . . . . . . . . . . .        Number             0h 
-@Date  . . . . . . . . . . . . .        Text   07/13/26
+@Date  . . . . . . . . . . . . .        Text   07/14/26
 @FileCur . . . . . . . . . . . .        Text   bin\windows\x86\test1.asm
 @FileName  . . . . . . . . . . .        Text   TEST1
 @Interface . . . . . . . . . . .        Number             1h 
 @Model . . . . . . . . . . . . .        Number             7h 
-@Time  . . . . . . . . . . . . .        Text   11:20:13
+@Time  . . . . . . . . . . . . .        Text   09:12:54
 @Version . . . . . . . . . . . .        Text   800
 @code  . . . . . . . . . . . . .        Text   _TEXT
 @data  . . . . . . . . . . . . .        Text   FLAT
@@ -93,4 +93,4 @@ _var1  . . . . . . . . . . . . .        Byte               0h _BSS C
 _var2  . . . . . . . . . . . . .        Word               1h _BSS C
 _var3  . . . . . . . . . . . . .        DWord              3h _BSS C
 
-bin\windows\x86\test1.asm: 20 lines, 2 passes, 0 ms, 0 warnings, 0 errors
+bin\windows\x86\test1.asm: 20 lines, 2 passes, 1 ms, 0 warnings, 0 errors

@@ -22,3 +22,5 @@ C:\projects\OSDev\ProjectJarvis\bin\tools\Debug\x64\JWasm -coff -Fl=bin\windows\
 C:\projects\OSDev\ProjectJarvis\bin\tools\Debug\Win32\JWlinkOld format win pe option map=bin\windows\x86\test1.map file bin\windows\x86\test1.obj, bin\windows\x86\c032.obj lib %LIB32%,%KLIB32%  name bin\windows\x86\test1.exe
 C:\projects\OSDev\ProjectJarvis\bin\tools\Debug\x64\pedump -a bin\windows\x86\test1.obj > bin\windows\x86\test1.asm.log
 C:\projects\OSDev\ProjectJarvis\bin\tools\Debug\x64\pedump -a bin\windows\x86\c032.obj > bin\windows\x86\c032.asm.log
+
+C:\projects\OSDev\ProjectJarvis\bin\tools\Debug\x64\JWlink format win pe option map=bin\windows\x64\test1.map file bin\windows\x64\test1.obj, bin\windows\x64\c064.obj lib %LIB64%,%KLIB64%  name bin\windows\x64\test1.exe
