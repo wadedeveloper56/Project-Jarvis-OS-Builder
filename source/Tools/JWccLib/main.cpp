@@ -87,12 +87,44 @@ int main(int argc, char* argv[])
 		exitcode = 0;
 		goto exit;
 	}
+	//------------------
+	char drive[_MAX_DRIVE];
+	char dir[_MAX_DIR];
+	char fname[_MAX_FNAME];
+	char ext[_MAX_EXT];
 
-	_splitpath(infiles->filename[0], drive, dir, fname, ext);
-	_makepath(logFileName, drive, dir, fname, "asm");
-
+	errno_t err = _splitpath_s(infiles->filename[0], drive, _MAX_DRIVE, dir, _MAX_DIR, fname, _MAX_FNAME, ext, _MAX_EXT);
+	if (err != 0)
+	{
+		printf("Error splitting the path. Error code %d.\n", err);
+		exit(1);
+	}
+	printf("Path extracted with _splitpath_s:\n");
+	printf("   Drive: %s\n", drive);
+	printf("   Dir: %s\n", dir);
+	printf("   Filename: %s\n", fname);
+	printf("   Ext: %s\n", ext); 
+	err = _makepath_s(asmFileName, _MAX_PATH, drive, dir, fname, "asm");
+	if (err != 0)
+	{
+		printf("Error creating path. Error code %d.\n", err);
+		exit(1);
+	}
+	printf("Path created with _makepath_s: %s\n\n", asmFileName);
+	err = _splitpath_s(outfile->filename[0], drive, _MAX_DRIVE, dir, _MAX_DIR, fname, _MAX_FNAME, ext, _MAX_EXT);
+	if (err != 0)
+	{
+		printf("Error splitting the path. Error code %d.\n", err);
+		exit(1);
+	}
+	printf("Path extracted with _splitpath_s:\n");
+	printf("   Drive: %s\n", drive);
+	printf("   Dir: %s\n", dir);
+	printf("   Filename: %s\n", fname);
+	printf("   Ext: %s\n", ext);
+	//----------------------------------------------------
 	in.open(infiles->filename[0], ifstream::in);
-	out.open(logFileName, ofstream::out);
+	out.open(asmFileName, ofstream::out);
 
 	if (in.is_open() && out.is_open())
 	{

@@ -410,7 +410,7 @@ void MasmCodeGenerator::generateCode(ostream& out)
 	else
 	{
 		out << ".x64p" << endl;
-		out << ".model flat, c;" << endl;
+		//out << ".model flat, c;" << endl;
 	}
 	out << "option casemap : none" << endl;
 	out << endl;
