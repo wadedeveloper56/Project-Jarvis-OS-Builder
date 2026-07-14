@@ -1,9 +1,8 @@
 JWlink Version 2.0
 Portions Copyright (c) 1985-2002 Sybase, Inc. All Rights Reserved.
-Created on:       26/07/14 09:23:05
-Executable Image: bin\windows\x64\test1.exe
+Created on:       26/07/14 14:04:54
+Executable Image: C:\projects\OSDev\ProjectJarvis\test\bin\windows\x64\test1.exe
 creating a 64-bit PE executable
-Error! E2028: __getmainargs is an undefined reference
 
 
                         +------------+
@@ -13,8 +12,8 @@ Error! E2028: __getmainargs is an undefined reference
 Group                           Address              Size
 =====                           =======              ====
 
-.rdata                          00402000             00000064
-DGROUP                          00403000             00000027
+.rdata                          00402000             000000fc
+DGROUP                          00403000             00000007
 
 
 
@@ -25,11 +24,11 @@ DGROUP                          00403000             00000027
 Segment                Class          Group          Address         Size
 =======                =====          =====          =======         ====
 
-.text                  CODE           AUTO           00401000        0000005c
-TRANSFER CODE          CODE           AUTO           0040105c        00000006
-.idata                 CONST          .rdata         00402000        00000064
-.data                  DATA           DGROUP         00403000        00000020
-.bss                   BSS            DGROUP         00403020        00000007
+.text                  CODE           AUTO           00401000        00000055
+TRANSFER CODE          CODE           AUTO           00401058        00000018
+.idata                 CONST          .rdata         00402000        000000fc
+.data                  DATA           DGROUP         00403000        00000000
+.bss                   BSS            DGROUP         00403000        00000007
 
 
                         +----------------+
@@ -42,25 +41,38 @@ TRANSFER CODE          CODE           AUTO           0040105c        00000006
 Address        Symbol
 =======        ======
 
-Module: bin\windows\x64\test1.obj(bin\windows\x64\test1.asm)
+Module: C:\projects\OSDev\ProjectJarvis\test\bin\windows\x64\test1.obj(C:\projects\OSDev\ProjectJarvis\test\bin\windows\x64\test1.asm)
 00401000       __main
-Module: bin\windows\x64\c064.obj(c064.asm)
-00401010*      mainCRTStartup
-Warning! W1023: no starting address found, using 00401000
+Module: C:\projects\OSDev\ProjectJarvis\test\bin\windows\x64\c064.obj(c064.asm)
+00401010+      mainCRTStartup
 
 
-                        +---------------------------+
-                        |   Unresolved References   |
-                        +---------------------------+
+                        +----------------------+
+                        |   Imported Symbols   |
+                        +----------------------+
 
-Undefined Symbol                Referenced by
-================                =============
+Symbol                              Module
+======                              ======
 
-__getmainargs                   bin\windows\x64\c064.obj(c064.asm)
+GetCommandLineW                     KERNEL32.dll
+CommandLineToArgvW                  SHELL32.dll
+LocalFree                           KERNEL32.dll
+ExitProcess                         KERNEL32.dll
 
 
                         +--------------------+
                         |   Libraries Used   |
                         +--------------------+
 
+C:\PROGRA~2\WI3CF2~1\10\Lib\10.0.26100.0\um\x64\shell32.lib
 C:\PROGRA~2\WI3CF2~1\10\Lib\10.0.26100.0\um\x64\kernel32.lib
+
+
+                        +-----------------------+
+                        |   Linker Statistics   |
+                        +-----------------------+
+
+Stack size:  00100000 (1048576.)
+Memory size:  0173 (371.)
+Entry point address: 00401010
+Link time: 00:00.07

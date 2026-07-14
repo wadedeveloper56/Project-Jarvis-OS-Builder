@@ -1,4 +1,4 @@
-.x64
+.x64p
 option casemap : none
 
 
@@ -10,9 +10,9 @@ _var2 SWORD  ?
 _var3 SDWORD  ?
 
 .code
-_main PROTO C _argc:SDWORD , _argv:DWORD ;
+_main PROTO C _argc:SDWORD , _argv:QWORD ;
 
-_main PROC C, _argc:SDWORD , _argv:DWORD 
+_main PROC C, _argc:SDWORD , _argv:QWORD 
 	mov eax,5
 	ret
 _main endp

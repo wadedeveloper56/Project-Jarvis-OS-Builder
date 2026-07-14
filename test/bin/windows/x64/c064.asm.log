@@ -1,15 +1,15 @@
 PEDUMP - Win32/Win64 COFF EXE/OBJ/LIB file dumper v1.0 (C) Copyright 2025-2026 Christopher D. Wade.
 All Rights Reserved
-Dump of file bin\windows\x64\c064.obj
-File Size 644 bytes
+Dump of file C:\projects\OSDev\ProjectJarvis\test\bin\windows\x64\c064.obj
+File Size 610 bytes
 File Type: 64-bit COFF OBJECT
 
 FILE HEADER VALUES
               8664 Machine (x64)
-                 2 (2) Number of Sections
-          6A564647 TimeDateStamp ->  n/a
-               134 PointerToSymbolTable
-                 F (15) NumberOfSymbols
+                 3 (3) Number of Sections
+          6A568855 TimeDateStamp ->  n/a
+               11A PointerToSymbolTable
+                 E (14) NumberOfSymbols
                  0 (0) SizeOfOptionalHeader
                  0 Flags
 
@@ -18,11 +18,11 @@ SECTION HEADER #0 (0)
    .text name
        0 physical address
        0 virtual address
-      4C (76) size of raw data
-      64 file pointer to raw data (00000064 to 000000AF)
-      B0 file pointer to relocation table
+      45 (69) size of raw data
+      8C file pointer to raw data (0000008C to 000000D0)
+      D2 file pointer to relocation table
        0 file pointer to line numbers
-       A number of relocations
+       5 number of relocations
        0 number of line numbers
 60500020 flags
          Code
@@ -32,30 +32,25 @@ SECTION HEADER #0 (0)
          Readable
 
 RAW DATA #0 (0)
-00000000  48 83 ec 30 48 8d 0d 00  00 00 00 48 8d 15 00 00  H..0H......H....
-00000010  00 00 4c 8d 05 00 00 00  00 44 8b 0d 00 00 00 00  ..L......D......
-00000020  48 8d 05 00 00 00 00 48  89 44 24 20 e8 00 00 00  H......H.D$ ....
-00000030  00 48 8b 0d 00 00 00 00  48 8b 15 00 00 00 00 e8  .H......H.......
-00000040  00 00 00 00 48 8b c8 e8  00 00 00 00              ....H.......
+00000000  48 83 ec 38 e8 00 00 00  00 48 8b c8 48 8d 54 24  H..8.....H..H.T$
+00000010  30 e8 00 00 00 00 48 89  44 24 28 8b 4c 24 30 48  0.....H.D$(.L$0H
+00000020  8b 54 24 28 e8 00 00 00  00 89 44 24 30 48 8b 4c  .T$(......D$0H.L
+00000030  24 28 e8 00 00 00 00 8b  4c 24 30 e8 00 00 00 00  $(......L$0.....
+00000040  48 83 c4 38 c3                                    H..8.
 SECTION HEADER #0 (0) RELOCATIONS
-  Address: 00000007  SymIndex: 0000000A  Type: ???_4
-  Address: 0000000E  SymIndex: 0000000B  Type: ???_4
-  Address: 00000015  SymIndex: 0000000C  Type: ???_4
-  Address: 0000001C  SymIndex: 0000000D  Type: ???_4
-  Address: 00000023  SymIndex: 0000000E  Type: ???_4
-  Address: 0000002D  SymIndex: 00000006  Type: ???_4
-  Address: 00000034  SymIndex: 0000000A  Type: ???_4
-  Address: 0000003B  SymIndex: 0000000B  Type: ???_4
-  Address: 00000040  SymIndex: 00000007  Type: ???_4
-  Address: 00000048  SymIndex: 00000008  Type: ???_4
+  Address: 00000005  SymIndex: 00000008  Type: ???_4
+  Address: 00000012  SymIndex: 00000009  Type: ???_4
+  Address: 00000025  SymIndex: 0000000C  Type: ???_4
+  Address: 00000033  SymIndex: 0000000A  Type: ???_4
+  Address: 0000003C  SymIndex: 0000000B  Type: ???_4
 
 
 SECTION HEADER #1 (1)
    .data name
        0 physical address
        0 virtual address
-      20 (32) size of raw data
-     114 file pointer to raw data (00000114 to 00000133)
+       0 (0) size of raw data
+       0 file pointer to raw data (00000000 to FFFFFFFF)
        0 file pointer to relocation table
        0 file pointer to line numbers
        0 number of relocations
@@ -67,33 +62,48 @@ C0500040 flags
          Readable
          Writeable
 
-RAW DATA #1 (1)
-00000000  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  ................
-00000010  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  ................
 
 
-Symbol Table - 15 entries  (* = auxillary symbol)
+SECTION HEADER #2 (2)
+.drectve name
+       0 physical address
+       0 virtual address
+      16 (22) size of raw data
+     104 file pointer to raw data (00000104 to 00000119)
+       0 file pointer to relocation table
+       0 file pointer to line numbers
+       0 number of relocations
+       0 number of line numbers
+     A00 flags
+         Informataion
+         Remove
+
+RAW DATA #2 (2)
+00000000  2d 65 6e 74 72 79 3a 6d  61 69 6e 43 52 54 53 74  -entry:mainCRTSt
+00000010  61 72 74 75 70 20                                 artup 
+
+
+Symbol Table - 14 entries  (* = auxillary symbol)
 Indx Sectn   Value   Type  Storage Name
 ---- ----- -------- ----- -------  --------
 0000 DEBUG 00000000  0000 FILE     .file
      * c064.asm
 0002     1 00000000  0000 STATIC   .text
-     * Section: 0000  Len: 0004C  Relocs: 000A  LineNums: 0000 checksum:00000000
+     * Section: 0000  Len: 00045  Relocs: 0005  LineNums: 0000 checksum:00000000
 0004     2 00000000  0000 STATIC   .data
-     * Section: 0000  Len: 00020  Relocs: 0000  LineNums: 0000 checksum:00000000
-0006 UNDEF 00000000  0000 EXTERNAL __getmainargs
-0007 UNDEF 00000000  0000 EXTERNAL __main
-0008 UNDEF 00000000  0000 EXTERNAL ExitProcess
-0009     1 00000000  0020 EXTERNAL mainCRTStartup
-000A     2 00000000  0000 STATIC   g_argc
-000B     2 00000008  0000 STATIC   g_argv
-000C     2 00000010  0000 STATIC   g_env
-000D     2 00000018  0000 STATIC   g_wildcard
-000E     2 0000001C  0000 STATIC   g_startup
+     * Section: 0000  Len: 00000  Relocs: 0000  LineNums: 0000 checksum:00000000
+0006     3 00000000  0000 STATIC   .drectve
+     * Section: 0000  Len: 00016  Relocs: 0000  LineNums: 0000 checksum:00000000
+0008 UNDEF 00000000  0000 EXTERNAL GetCommandLineW
+0009 UNDEF 00000000  0000 EXTERNAL CommandLineToArgvW
+000A UNDEF 00000000  0000 EXTERNAL LocalFree
+000B UNDEF 00000000  0000 EXTERNAL ExitProcess
+000C UNDEF 00000000  0000 EXTERNAL __main
+000D     1 00000000  0020 EXTERNAL mainCRTStartup
 
-String Table Size = 0x42 (66) bytes 5 entries
-stringtable[   0] = __getmainargs
-stringtable[   1] = ExitProcess
-stringtable[   2] = mainCRTStartup
-stringtable[   3] = g_wildcard
-stringtable[   4] = g_startup
+String Table Size = 0x4C (76) bytes 5 entries
+stringtable[   0] = GetCommandLineW
+stringtable[   1] = CommandLineToArgvW
+stringtable[   2] = LocalFree
+stringtable[   3] = ExitProcess
+stringtable[   4] = mainCRTStartup

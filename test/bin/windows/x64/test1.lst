@@ -1,12 +1,12 @@
 JWasm v2.12pre, Jul 14 2026
-bin\windows\x64\test1.asm
+C:\projects\OSDev\ProjectJarvis\test\bin\windows\x64\test1.asm
                             *   .model FLAT
 00000000                    *   _TEXT segment PARA FLAT PUBLIC 'CODE'
                             *   _TEXT ends
 00000000                    *   _DATA segment PARA FLAT PUBLIC 'DATA'
                             *   _DATA ends
                             *   assume cs:flat,ds:flat,ss:flat,es:flat,fs:ERROR,gs:NOTHING
-                                .x64
+                                .x64p
                                 option casemap : none
 
 
@@ -26,9 +26,9 @@ bin\windows\x64\test1.asm
 00000007                    *   _BSS ends
 00000000                    *   _TEXT segment
                             *   assume cs:FLAT
-                                _main PROTO C _argc:SDWORD , _argv:DWORD ;
+                                _main PROTO C _argc:SDWORD , _argv:QWORD ;
 
-00000000                        _main PROC C, _argc:SDWORD , _argv:DWORD 
+00000000                        _main PROC C, _argc:SDWORD , _argv:QWORD 
 00000000  55                *   push rbp
 00000001  488BEC            *   mov rbp, rsp
 00000004  B805000000            	mov eax,5
@@ -67,7 +67,7 @@ Procedures, parameters and locals:
 
 _main  . . . . . . . . . . . . .        P Near   00000000 _TEXT    0000000B Public   C
   _argc  . . . . . . . . . . . .        DWord             rbp + 0010
-  _argv  . . . . . . . . . . . .        DWord             rbp + 0018
+  _argv  . . . . . . . . . . . .        QWord             rbp + 0018
 
 
 Symbols:
@@ -75,16 +75,16 @@ Symbols:
                 N a m e                 Type       Value     Attr
 
 @CodeSize  . . . . . . . . . . .        Number             0h 
-@Cpu . . . . . . . . . . . . . .        Number           D5Fh 
+@Cpu . . . . . . . . . . . . . .        Number           DDFh 
 @CurSeg  . . . . . . . . . . . .        Text   
 @DataSize  . . . . . . . . . . .        Number             0h 
 @Date  . . . . . . . . . . . . .        Text   07/14/26
-@FileCur . . . . . . . . . . . .        Text   bin\windows\x64\test1.asm
+@FileCur . . . . . . . . . . . .        Text   C:\projects\OSDev\ProjectJarvis\test\bin\windows\x64\test1.asm
 @FileName  . . . . . . . . . . .        Text   TEST1
 @Interface . . . . . . . . . . .        Number             7h 
 @Model . . . . . . . . . . . . .        Number             7h 
 @ReservedStack . . . . . . . . .        Number             0h 
-@Time  . . . . . . . . . . . . .        Text   09:23:02
+@Time  . . . . . . . . . . . . .        Text   14:04:52
 @Version . . . . . . . . . . . .        Text   800
 @code  . . . . . . . . . . . . .        Text   _TEXT
 @data  . . . . . . . . . . . . .        Text   FLAT
@@ -94,4 +94,4 @@ _var1  . . . . . . . . . . . . .        Byte               0h _BSS FASTCALL
 _var2  . . . . . . . . . . . . .        Word               1h _BSS FASTCALL
 _var3  . . . . . . . . . . . . .        DWord              3h _BSS FASTCALL
 
-bin\windows\x64\test1.asm: 19 lines, 2 passes, 0 ms, 0 warnings, 0 errors
+C:\projects\OSDev\ProjectJarvis\test\bin\windows\x64\test1.asm: 19 lines, 2 passes, 1 ms, 0 warnings, 0 errors

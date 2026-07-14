@@ -9,60 +9,60 @@ c064.asm
                                 .x64
                                 option casemap:none
 
-                                ; External C Runtime Functions
-                                EXTERN __getmainargs:PROC
-                                EXTERN __main:PROC
-                                EXTERN ExitProcess:PROC
+                                ; External Windows APIs
+                                extern GetCommandLineW    : proc
+                                extern CommandLineToArgvW : proc
+                                extern LocalFree          : proc
+                                extern ExitProcess        : proc
 
-                                ; Structure required by __getmainargs
-00000000                        _startupinfo STRUCT
-00000000                            newmode DD ?
-00000004                        _startupinfo ENDS
+                                ; External C++ main function
+                                extern __main             : proc
 
-                                .data
-00000000                    *   _DATA segment
-                            *   assume cs:ERROR
-00000000  0000000000000000          g_argc          DQ 0
-00000008  0000000000000000          g_argv          DQ 0
-00000010  0000000000000000          g_env           DQ 0
-00000018  00000000                  g_wildcard      DD 0
-0000001C  00000000                  g_startup       _startupinfo <0>
-
-00000000                        .code
-00000020                    *   _DATA ends
+                                .code
 00000000                    *   _TEXT segment
                             *   assume cs:FLAT
 
-00000000                        mainCRTStartup PROC
-                                    ; 1. Allocate shadow space (32 bytes) + align stack to 16 bytes (need to subtract 48)
-00000000  4883EC30                  sub rsp, 48
+00000000                        mainCRTStartup proc
+                                    ; Allocate 56 bytes on the stack:
+                                    ;   - [RSP + 0 to 31]   : 32 bytes mandatory Shadow Space
+                                    ;   - [RSP + 40]        : 8 bytes to temporarily save 'argv'
+                                    ;   - [RSP + 48]        : 8 bytes to receive 'argc' from CommandLineToArgvW
+                                    ; This preserves the required 16-byte stack alignment.
+00000000  4883EC38                  sub rsp, 56
 
-                                    ; 2. Prepare arguments for __getmainargs
-                                    ; int __getmainargs(int *argc, char ***argv, char ***env, int doWildCard, _startupinfo *startInfo)
-00000004  488D0D00000000            lea rcx, g_argc
-0000000B  488D1500000000            lea rdx, g_argv
-00000012  4C8D0500000000            lea r8,  g_env
-00000019  448B0D00000000            mov r9d, g_wildcard
-00000020  488D0500000000            lea rax, g_startup
-00000027  4889442420                mov [rsp+32], rax ; 5th parameter passed via stack (shadow space offset + 32)
+                                    ; 1. Get the command line string
+00000004  E800000000                call GetCommandLineW        ; RAX = pointer to command line string
+                                    
+                                    ; 2. Parse the command line string into argc and argv
+00000009  488BC8                    mov rcx, rax                ; RCX = lpCmdLine (1st parameter)
+0000000C  488D542430                lea rdx, [rsp + 48]         ; RDX = &pNumArgs (2nd parameter pointing to our local argc)
+00000011  E800000000                call CommandLineToArgvW     ; RAX = argv (pointer to array of wchar_t pointers)
+                                    
+00000016  4889442428                mov [rsp + 40], rax         ; Save argv to stack for later use
 
-0000002C  E800000000                call __getmainargs
+                                    ; 3. Prepare parameters and call our C++ entry point: c_main(argc, argv)
+0000001B  8B4C2430                  mov ecx, dword ptr [rsp + 48] ; RCX = argc (32-bit integer)
+0000001F  488B542428                mov rdx, [rsp + 40]         ; RDX = argv (64-bit pointer)
+00000024  E800000000                call __main                 ; Call C++ main function (returns exit code in EAX)
+                                    
+00000029  89442430                  mov [rsp + 48], eax         ; Temp save the C++ return code in our stack frame
 
-                                    ; 3. Prepare parameters for main(int argc, char **argv)
-00000031  488B0D00000000            mov rcx, g_argc
-00000038  488B1500000000            mov rdx, g_argv
+                                    ; 4. Free the argv memory buffer allocated by CommandLineToArgvW
+0000002D  488B4C2428                mov rcx, [rsp + 40]         ; RCX = argv pointer
+00000032  E800000000                call LocalFree
 
-                                    ; 4. Call the user's C 'main' function
-0000003F  E800000000                call __main
+                                    ; 5. Exit the application cleanly
+00000037  8B4C2430                  mov ecx, dword ptr [rsp + 48] ; RCX = exit code retrieved from C++
+0000003B  E800000000                call ExitProcess            ; Terminate process
+                                    
+                                    ; Unreachable, but balances the stack allocate instruction
+00000040  4883C438                  add rsp, 56
+00000044                            ret
+00000044  C3                *   retn
+00000045                        mainCRTStartup endp
 
-                                    ; 5. Exit Process. Pass the return value of 'main' (which is in RAX)
-00000044  488BC8                    mov rcx, rax
-00000047  E800000000                call ExitProcess
-
-0000004C                        mainCRTStartup ENDP
-
-                                END
-0000004C                    *   _TEXT ends
+                                end mainCRTStartup
+00000045                    *   _TEXT ends
 
 
 Macros:
@@ -76,28 +76,20 @@ Macros:
 @SubStr  . . . . . . . . . . . .        Func     0
 
 
-Structures and Unions:
-
-                N a m e                 Size/Ofs   Type
-
-_startupinfo . . . . . . . . . .               4
-  newmode  . . . . . . . . . . .               0   DWord
-
-
 Segments and Groups:
 
                 N a m e                 Size     Length   Align   Combine Class
 
 FLAT . . . . . . . . . . . . . .        GROUP
-_DATA  . . . . . . . . . . . . .        64 Bit   00000020 Para    Public  'DATA'
-_TEXT  . . . . . . . . . . . . .        64 Bit   0000004C Para    Public  'CODE'
+_DATA  . . . . . . . . . . . . .        64 Bit   00000000 Para    Public  'DATA'
+_TEXT  . . . . . . . . . . . . .        64 Bit   00000045 Para    Public  'CODE'
 
 
 Procedures, parameters and locals:
 
                 N a m e                 Type     Value    Segment  Length
 
-mainCRTStartup . . . . . . . . .        P Near   00000000 _TEXT    0000004C Public   FASTCALL
+mainCRTStartup . . . . . . . . .        P Near   00000000 _TEXT    00000045 Public   FASTCALL
 
 
 Symbols:
@@ -114,19 +106,16 @@ Symbols:
 @Interface . . . . . . . . . . .        Number             7h 
 @Model . . . . . . . . . . . . .        Number             7h 
 @ReservedStack . . . . . . . . .        Number             0h 
-@Time  . . . . . . . . . . . . .        Text   09:23:03
+@Time  . . . . . . . . . . . . .        Text   14:04:53
 @Version . . . . . . . . . . . .        Text   800
 @code  . . . . . . . . . . . . .        Text   _TEXT
 @data  . . . . . . . . . . . . .        Text   FLAT
 @stack . . . . . . . . . . . . .        Text   FLAT
+CommandLineToArgvW . . . . . . .        L Near64           0h External FASTCALL
 ExitProcess  . . . . . . . . . .        L Near64           0h External FASTCALL
+GetCommandLineW  . . . . . . . .        L Near64           0h External FASTCALL
+LocalFree  . . . . . . . . . . .        L Near64           0h External FASTCALL
 __JWASM__  . . . . . . . . . . .        Number            D4h 
-__getmainargs  . . . . . . . . .        L Near64           0h External FASTCALL
 __main . . . . . . . . . . . . .        L Near64           0h External FASTCALL
-g_argc . . . . . . . . . . . . .        QWord              0h _DATA FASTCALL
-g_argv . . . . . . . . . . . . .        QWord              8h _DATA FASTCALL
-g_env  . . . . . . . . . . . . .        QWord             10h _DATA FASTCALL
-g_startup  . . . . . . . . . . .        _startupinfo        1Ch _DATA FASTCALL
-g_wildcard . . . . . . . . . . .        DWord             18h _DATA FASTCALL
 
-c064.asm: 51 lines, 2 passes, 1 ms, 0 warnings, 0 errors
+c064.asm: 53 lines, 2 passes, 1 ms, 0 warnings, 0 errors

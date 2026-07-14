@@ -1,7 +1,7 @@
 JWlink Version 2.0
 Portions Copyright (c) 1985-2002 Sybase, Inc. All Rights Reserved.
-Created on:       26/07/14 09:23:07
-Executable Image: bin\windows\x86\test1.exe
+Created on:       26/07/14 14:04:57
+Executable Image: C:\projects\OSDev\ProjectJarvis\test\bin\windows\x86\test1.exe
 creating a PE executable
 
 
@@ -41,9 +41,9 @@ TRANSFER CODE          CODE           AUTO           0040106c        0000000c
 Address        Symbol
 =======        ======
 
-Module: bin\windows\x86\test1.obj(bin\windows\x86\test1.asm)
+Module: C:\projects\OSDev\ProjectJarvis\test\bin\windows\x86\test1.obj(C:\projects\OSDev\ProjectJarvis\test\bin\windows\x86\test1.asm)
 00401000       __main
-Module: bin\windows\x86\c032.obj(c032.asm)
+Module: C:\projects\OSDev\ProjectJarvis\test\bin\windows\x86\c032.obj(c032.asm)
 00401010+      __start@0
 
 
