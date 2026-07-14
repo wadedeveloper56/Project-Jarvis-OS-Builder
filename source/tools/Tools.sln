@@ -51,13 +51,13 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PreProcessor2", "PreProcess
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "JWlinker projects", "JWlinker projects", "{F756B57F-96BF-495C-8ABA-08F43AC1D1EA}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "JWlinkerLib", "JWlink\JWlinkerLib\JWlinkerLib.vcxproj", "{8809D3A8-411C-4F14-8997-14B83ED86568}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "JWlinkLib", "JWlink\JWlinkerLib\JWlinkerLib.vcxproj", "{8809D3A8-411C-4F14-8997-14B83ED86568}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "JWlinker", "JWlink\JWlinker\JWlinker.vcxproj", "{BA93FD76-7DB0-442E-9592-5F3136B1F86B}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "JWlink", "JWlink\JWlinker\JWlinker.vcxproj", "{BA93FD76-7DB0-442E-9592-5F3136B1F86B}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "orl2", "JWlink\orl2\orl2.vcxproj", "{D7FC887D-2EE7-4E97-9261-5094721D23F3}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Old JWLinker", "Old JWLinker", "{EF03A851-0EB0-4AB4-BEFD-B4C84D9B1295}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Old JWLinker projects", "Old JWLinker projects", "{EF03A851-0EB0-4AB4-BEFD-B4C84D9B1295}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dwarfold", "JWlinkOld\dwarfold\dwarfold.vcxproj", "{5439C1DB-6B09-4C18-8B38-47D1F6B59F0F}"
 EndProject

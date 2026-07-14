@@ -38,7 +38,10 @@
 #include "globals.h"
 #include "specials.h"
 
-//#ifdef __UNIX__
+char **_argv = NULL;
+int  _argc;
+
+#ifdef __UNIX__
 
 char *strupr( char *str )
 /************************/
@@ -93,8 +96,7 @@ char *itoa( int val, char *s, int radix )
  * requires external _argv[]
  */
 
-char **_argv = NULL;
-int  _argc;
+#endif
 
 int _bgetcmd( char *buffer, int len )
 {
@@ -149,4 +151,3 @@ char * getcmd( char *buffer )
     return( buffer );
 }
 
-//#endif
