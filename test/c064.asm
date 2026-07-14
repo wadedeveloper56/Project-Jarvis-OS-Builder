@@ -1,43 +1,51 @@
 .x64
 option casemap:none
 
-; --- Prototypes (No stdcall decorations) ---
-extern ExitProcess: proto
-extern GetCommandLineA: proto
-extern CommandLineToArgvW: proto
-extern GetCommandLineW: proto
-extern LocalFree: proto
+; External C Runtime Functions
+EXTERN __getmainargs:PROC
+EXTERN __main:PROC
+EXTERN ExitProcess:PROC
+
+; Structure required by __getmainargs
+_startupinfo STRUCT
+    newmode DD ?
+_startupinfo ENDS
 
 .data
-    argc dq 0
-    argv dq 0
+    g_argc          DQ 0
+    g_argv          DQ 0
+    g_env           DQ 0
+    g_wildcard      DD 0
+    g_startup       _startupinfo <0>
 
 .code
-mainCRTStartup proc
-    ; --- 64-bit Shadow Space Setup ---
-    sub rsp, 40                 ; 32 bytes shadow space + 8 bytes alignment
-    
-    ; 1. Get the Unicode Command Line (better for CommandLineToArgvW)
-    call GetCommandLineW
-    ; rax contains the pointer to the command line string
 
-    ; 2. Parse it like C's main(argc, argv)
-    mov rcx, rax                ; Argument 1: LPCWSTR lpCmdLine
-    lea rdx, argc               ; Argument 2: int *pNumArgs
-    call CommandLineToArgvW
-    mov argv, rax               ; rax contains the pointer to the argv array
+mainCRTStartup PROC
+    ; 1. Allocate shadow space (32 bytes) + align stack to 16 bytes (need to subtract 48)
+    sub rsp, 48
 
-    ; --- Your code here ---
-    ; argv[0] is accessible via [rax]
-    ; argv[1] is accessible via [rax + 8], etc.
+    ; 2. Prepare arguments for __getmainargs
+    ; int __getmainargs(int *argc, char ***argv, char ***env, int doWildCard, _startupinfo *startInfo)
+    lea rcx, g_argc
+    lea rdx, g_argv
+    lea r8,  g_env
+    mov r9d, g_wildcard
+    lea rax, g_startup
+    mov [rsp+32], rax ; 5th parameter passed via stack (shadow space offset + 32)
 
-    ; 3. Clean up argv array
-    mov rcx, argv
-    call LocalFree
+    call __getmainargs
 
-    ; 4. Exit Program
-    xor ecx, ecx                ; Exit code 0
+    ; 3. Prepare parameters for main(int argc, char **argv)
+    mov rcx, g_argc
+    mov rdx, g_argv
+
+    ; 4. Call the user's C 'main' function
+    call __main
+
+    ; 5. Exit Process. Pass the return value of 'main' (which is in RAX)
+    mov rcx, rax
     call ExitProcess
-mainCRTStartup endp
 
-end mainCRTStartup
+mainCRTStartup ENDP
+
+END

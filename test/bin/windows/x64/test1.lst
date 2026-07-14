@@ -1,19 +1,12 @@
 JWasm v2.12pre, Jul 13 2026
-test1.asm
+bin\windows\x64\test1.asm
                             *   .model FLAT
 00000000                    *   _TEXT segment PARA FLAT PUBLIC 'CODE'
                             *   _TEXT ends
 00000000                    *   _DATA segment PARA FLAT PUBLIC 'DATA'
                             *   _DATA ends
                             *   assume cs:flat,ds:flat,ss:flat,es:flat,fs:ERROR,gs:NOTHING
-                                .x64p
-                                .model flat, c;
-                           Warning A4095: Multiple .MODEL directives, .MODEL ignored
-00000000                    *   _TEXT segment
-                            *   _TEXT ends
-00000000                    *   _DATA segment
-                            *   _DATA ends
-                            *   assume cs:flat,ds:flat,ss:flat,es:flat,fs:ERROR,gs:NOTHING
+                                .x64
                                 option casemap : none
 
 
@@ -33,9 +26,9 @@ test1.asm
 00000007                    *   _BSS ends
 00000000                    *   _TEXT segment
                             *   assume cs:FLAT
-                                _main PROTO C _argc:SDWORD , _argv:QWORD ;
+                                _main PROTO C _argc:SDWORD , _argv:DWORD ;
 
-00000000                        _main PROC C, _argc:SDWORD , _argv:QWORD 
+00000000                        _main PROC C, _argc:SDWORD , _argv:DWORD 
 00000000  55                *   push rbp
 00000001  488BEC            *   mov rbp, rsp
 00000004  B805000000            	mov eax,5
@@ -74,7 +67,7 @@ Procedures, parameters and locals:
 
 _main  . . . . . . . . . . . . .        P Near   00000000 _TEXT    0000000B Public   C
   _argc  . . . . . . . . . . . .        DWord             rbp + 0010
-  _argv  . . . . . . . . . . . .        QWord             rbp + 0018
+  _argv  . . . . . . . . . . . .        DWord             rbp + 0018
 
 
 Symbols:
@@ -82,23 +75,23 @@ Symbols:
                 N a m e                 Type       Value     Attr
 
 @CodeSize  . . . . . . . . . . .        Number             0h 
-@Cpu . . . . . . . . . . . . . .        Number           DDFh 
+@Cpu . . . . . . . . . . . . . .        Number           D5Fh 
 @CurSeg  . . . . . . . . . . . .        Text   
 @DataSize  . . . . . . . . . . .        Number             0h 
 @Date  . . . . . . . . . . . . .        Text   07/13/26
-@FileCur . . . . . . . . . . . .        Text   test1.asm
+@FileCur . . . . . . . . . . . .        Text   bin\windows\x64\test1.asm
 @FileName  . . . . . . . . . . .        Text   TEST1
-@Interface . . . . . . . . . . .        Number             1h 
+@Interface . . . . . . . . . . .        Number             7h 
 @Model . . . . . . . . . . . . .        Number             7h 
 @ReservedStack . . . . . . . . .        Number             0h 
-@Time  . . . . . . . . . . . . .        Text   10:09:40
+@Time  . . . . . . . . . . . . .        Text   11:20:10
 @Version . . . . . . . . . . . .        Text   800
 @code  . . . . . . . . . . . . .        Text   _TEXT
 @data  . . . . . . . . . . . . .        Text   FLAT
 @stack . . . . . . . . . . . . .        Text   FLAT
 __JWASM__  . . . . . . . . . . .        Number            D4h 
-_var1  . . . . . . . . . . . . .        Byte               0h _BSS C
-_var2  . . . . . . . . . . . . .        Word               1h _BSS C
-_var3  . . . . . . . . . . . . .        DWord              3h _BSS C
+_var1  . . . . . . . . . . . . .        Byte               0h _BSS FASTCALL
+_var2  . . . . . . . . . . . . .        Word               1h _BSS FASTCALL
+_var3  . . . . . . . . . . . . .        DWord              3h _BSS FASTCALL
 
-test1.asm: 20 lines, 2 passes, 2 ms, 1 warnings, 0 errors
+bin\windows\x64\test1.asm: 19 lines, 2 passes, 0 ms, 0 warnings, 0 errors

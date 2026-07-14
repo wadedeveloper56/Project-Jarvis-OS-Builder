@@ -9,52 +9,60 @@ c064.asm
                                 .x64
                                 option casemap:none
 
-                                ; --- Prototypes (No stdcall decorations) ---
-                                extern ExitProcess: proto
-                                extern GetCommandLineA: proto
-                                extern CommandLineToArgvW: proto
-                                extern GetCommandLineW: proto
-                                extern LocalFree: proto
+                                ; External C Runtime Functions
+                                EXTERN __getmainargs:PROC
+                                EXTERN __main:PROC
+                                EXTERN ExitProcess:PROC
+
+                                ; Structure required by __getmainargs
+00000000                        _startupinfo STRUCT
+00000000                            newmode DD ?
+00000004                        _startupinfo ENDS
 
                                 .data
 00000000                    *   _DATA segment
                             *   assume cs:ERROR
-00000000  0000000000000000          argc dq 0
-00000008  0000000000000000          argv dq 0
+00000000  0000000000000000          g_argc          DQ 0
+00000008  0000000000000000          g_argv          DQ 0
+00000010  0000000000000000          g_env           DQ 0
+00000018  00000000                  g_wildcard      DD 0
+0000001C  00000000                  g_startup       _startupinfo <0>
 
 00000000                        .code
-00000010                    *   _DATA ends
+00000020                    *   _DATA ends
 00000000                    *   _TEXT segment
                             *   assume cs:FLAT
-00000000                        mainCRTStartup proc
-                                    ; --- 64-bit Shadow Space Setup ---
-00000000  4883EC28                  sub rsp, 40                 ; 32 bytes shadow space + 8 bytes alignment
-                                    
-                                    ; 1. Get the Unicode Command Line (better for CommandLineToArgvW)
-00000004  E800000000                call GetCommandLineW
-                                    ; rax contains the pointer to the command line string
 
-                                    ; 2. Parse it like C's main(argc, argv)
-00000009  488BC8                    mov rcx, rax                ; Argument 1: LPCWSTR lpCmdLine
-0000000C  488D1500000000            lea rdx, argc               ; Argument 2: int *pNumArgs
-00000013  E800000000                call CommandLineToArgvW
-00000018  48890500000000            mov argv, rax               ; rax contains the pointer to the argv array
+00000000                        mainCRTStartup PROC
+                                    ; 1. Allocate shadow space (32 bytes) + align stack to 16 bytes (need to subtract 48)
+00000000  4883EC30                  sub rsp, 48
 
-                                    ; --- Your code here ---
-                                    ; argv[0] is accessible via [rax]
-                                    ; argv[1] is accessible via [rax + 8], etc.
+                                    ; 2. Prepare arguments for __getmainargs
+                                    ; int __getmainargs(int *argc, char ***argv, char ***env, int doWildCard, _startupinfo *startInfo)
+00000004  488D0D00000000            lea rcx, g_argc
+0000000B  488D1500000000            lea rdx, g_argv
+00000012  4C8D0500000000            lea r8,  g_env
+00000019  448B0D00000000            mov r9d, g_wildcard
+00000020  488D0500000000            lea rax, g_startup
+00000027  4889442420                mov [rsp+32], rax ; 5th parameter passed via stack (shadow space offset + 32)
 
-                                    ; 3. Clean up argv array
-0000001F  488B0D00000000            mov rcx, argv
-00000026  E800000000                call LocalFree
+0000002C  E800000000                call __getmainargs
 
-                                    ; 4. Exit Program
-0000002B  33C9                      xor ecx, ecx                ; Exit code 0
-0000002D  E800000000                call ExitProcess
-00000032                        mainCRTStartup endp
+                                    ; 3. Prepare parameters for main(int argc, char **argv)
+00000031  488B0D00000000            mov rcx, g_argc
+00000038  488B1500000000            mov rdx, g_argv
 
-                                end mainCRTStartup
-00000032                    *   _TEXT ends
+                                    ; 4. Call the user's C 'main' function
+0000003F  E800000000                call __main
+
+                                    ; 5. Exit Process. Pass the return value of 'main' (which is in RAX)
+00000044  488BC8                    mov rcx, rax
+00000047  E800000000                call ExitProcess
+
+0000004C                        mainCRTStartup ENDP
+
+                                END
+0000004C                    *   _TEXT ends
 
 
 Macros:
@@ -68,25 +76,28 @@ Macros:
 @SubStr  . . . . . . . . . . . .        Func     0
 
 
+Structures and Unions:
+
+                N a m e                 Size/Ofs   Type
+
+_startupinfo . . . . . . . . . .               4
+  newmode  . . . . . . . . . . .               0   DWord
+
+
 Segments and Groups:
 
                 N a m e                 Size     Length   Align   Combine Class
 
 FLAT . . . . . . . . . . . . . .        GROUP
-_DATA  . . . . . . . . . . . . .        64 Bit   00000010 Para    Public  'DATA'
-_TEXT  . . . . . . . . . . . . .        64 Bit   00000032 Para    Public  'CODE'
+_DATA  . . . . . . . . . . . . .        64 Bit   00000020 Para    Public  'DATA'
+_TEXT  . . . . . . . . . . . . .        64 Bit   0000004C Para    Public  'CODE'
 
 
 Procedures, parameters and locals:
 
                 N a m e                 Type     Value    Segment  Length
 
-CommandLineToArgvW . . . . . . .        P Near64 00000000 No Seg   00000000 External  FASTCALL
-ExitProcess  . . . . . . . . . .        P Near64 00000000 No Seg   00000000 External  FASTCALL
-GetCommandLineA  . . . . . . . .        P Near64 00000000 No Seg   00000000 External  FASTCALL
-GetCommandLineW  . . . . . . . .        P Near64 00000000 No Seg   00000000 External  FASTCALL
-LocalFree  . . . . . . . . . . .        P Near64 00000000 No Seg   00000000 External  FASTCALL
-mainCRTStartup . . . . . . . . .        P Near   00000000 _TEXT    00000032 Public   FASTCALL
+mainCRTStartup . . . . . . . . .        P Near   00000000 _TEXT    0000004C Public   FASTCALL
 
 
 Symbols:
@@ -103,13 +114,19 @@ Symbols:
 @Interface . . . . . . . . . . .        Number             7h 
 @Model . . . . . . . . . . . . .        Number             7h 
 @ReservedStack . . . . . . . . .        Number             0h 
-@Time  . . . . . . . . . . . . .        Text   10:09:41
+@Time  . . . . . . . . . . . . .        Text   11:20:12
 @Version . . . . . . . . . . . .        Text   800
 @code  . . . . . . . . . . . . .        Text   _TEXT
 @data  . . . . . . . . . . . . .        Text   FLAT
 @stack . . . . . . . . . . . . .        Text   FLAT
+ExitProcess  . . . . . . . . . .        L Near64           0h External FASTCALL
 __JWASM__  . . . . . . . . . . .        Number            D4h 
-argc . . . . . . . . . . . . . .        QWord              0h _DATA FASTCALL
-argv . . . . . . . . . . . . . .        QWord              8h _DATA FASTCALL
+__getmainargs  . . . . . . . . .        L Near64           0h External FASTCALL
+__main . . . . . . . . . . . . .        L Near64           0h External FASTCALL
+g_argc . . . . . . . . . . . . .        QWord              0h _DATA FASTCALL
+g_argv . . . . . . . . . . . . .        QWord              8h _DATA FASTCALL
+g_env  . . . . . . . . . . . . .        QWord             10h _DATA FASTCALL
+g_startup  . . . . . . . . . . .        _startupinfo        1Ch _DATA FASTCALL
+g_wildcard . . . . . . . . . . .        DWord             18h _DATA FASTCALL
 
-c064.asm: 43 lines, 2 passes, 1 ms, 0 warnings, 0 errors
+c064.asm: 51 lines, 2 passes, 1 ms, 0 warnings, 0 errors
