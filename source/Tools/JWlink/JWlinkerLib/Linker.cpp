@@ -21,10 +21,11 @@ Linker::Linker(int argc, char** argv)
 	fileSubsystem = new FileSubsystem();
 	messagingSubsystem = new MessagingSubsystem();
 	tokenBuffer = new TokenBuffer(memorySubsystem);
-	spillFile = new SpillFile(memorySubsystem, fileSubsystem);
+	spillFile = new SpillFile(memorySubsystem);
 	symbolTable = new SymbolTable(memorySubsystem);
 	orl = new Orl();
 	virtualMemory = new VirtualMemory(memorySubsystem);
+	tempFileSubsystem = new TempFileSubsystem();
 
 	InitNodes();
 }
@@ -33,6 +34,7 @@ Linker::~Linker()
 {
 	DEBUG((DBG_OLD, "Linker destructor enter\n"));
 	BurnNodes();
+	delete tempFileSubsystem;
 	delete virtualMemory;
 	delete orl;
 	delete symbolTable;

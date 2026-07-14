@@ -10,6 +10,7 @@
 #include "orl.h"
 #include "Orl2.h"
 #include "VirtualMemory.h"
+#include "TempFileSubsystem.h"
 
 typedef unsigned long stateflag;
 
@@ -28,6 +29,7 @@ class Linker
 	SymbolTable *symbolTable;
 	Orl *orl;
 	VirtualMemory *virtualMemory;
+	TempFileSubsystem* tempFileSubsystem;
 public:
 	Linker(int argc, char** argv);
 	~Linker();

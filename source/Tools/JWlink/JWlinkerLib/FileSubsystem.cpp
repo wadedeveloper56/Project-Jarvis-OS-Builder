@@ -4,6 +4,7 @@
 
 FileSubsystem::FileSubsystem()
 {
+	DEBUG((DBG_OLD, "FileSubsystem constructor\n"));
 }
 
 FileSubsystem::~FileSubsystem()
@@ -45,4 +46,8 @@ __int64 FileSubsystem::FileSeek(f_handle handle, __int64 offset, int origin)
 {
 	return ::FileSeek2(handle, offset, origin);
 }
-__int64 FileSize(f_handle handle);
+
+__int64 FileSubsystem::FileSize(f_handle handle)
+{
+	return ::FileSize2(handle);
+}

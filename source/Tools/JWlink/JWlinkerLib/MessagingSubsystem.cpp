@@ -656,10 +656,11 @@ pick(TRADEMARK, banner3),
 };
 
 MessagingSubsystem::MessagingSubsystem()
-{}
+{
+	DEBUG((DBG_OLD, "MessagingSubsystem constructor\n"));
+}
 
 MessagingSubsystem::~MessagingSubsystem()
 {
 	DEBUG((DBG_OLD, "MessagingSubsystem destructor\n"));
-	DEBUG((DBG_OLD, "MessagingSubsystem constructor\n"));
 }

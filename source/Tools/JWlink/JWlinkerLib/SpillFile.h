@@ -3,14 +3,16 @@
 #include "MemorySubsystem.h"
 #include "File.h"
 #include "Structs.h"
-#include "FileSubsystem.h"
+#include "TempFileSubsystem.h"
 
 class SpillFile
 {
 	MemorySubsystem *memorySubsystem;
-	FileSubsystem *fileSubsystem;
+	TempFileSubsystem * TempFile;
+	char* TFileName;
+	unsigned long    TmpFSize;
 public:
-	SpillFile(MemorySubsystem *memorySubsystem, FileSubsystem *fileSubsystem);
+	SpillFile(MemorySubsystem *memorySubsystem);
 	~SpillFile();
 };
 

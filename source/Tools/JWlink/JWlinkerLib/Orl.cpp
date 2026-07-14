@@ -8,6 +8,7 @@ orl_funcs ORLFuncs = { nullptr, nullptr, AllocateMemory, FreeMemory };
 
 Orl::Orl()
 {
+	DEBUG((DBG_OLD, "Orl constructor\n"));
 	ORLHandle = ORLInit(&ORLFuncs);
 }
 

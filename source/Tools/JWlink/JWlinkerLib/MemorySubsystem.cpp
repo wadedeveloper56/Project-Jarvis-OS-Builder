@@ -2,7 +2,10 @@
 #include "MemorySubsystem.h"
 #include "debug.h"
 
-MemorySubsystem::MemorySubsystem() {}
+MemorySubsystem::MemorySubsystem()
+{
+	DEBUG((DBG_OLD, "MemorySubsystem constructor\n"));
+}
 
 MemorySubsystem::~MemorySubsystem() 
 {

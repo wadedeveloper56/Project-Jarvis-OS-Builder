@@ -7,6 +7,7 @@ using namespace std;
 
 TokenBuffer::TokenBuffer(MemorySubsystem *memorySubsystem)
 {
+	DEBUG((DBG_OLD, "TokenBuffer constructor\n"));
 	this->memorySubsystem = memorySubsystem;
 	TokSize = MAX_HEADROOM;
 	TokBuff = (char*)memorySubsystem->AllocateMemory(TokSize);
