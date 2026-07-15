@@ -203,6 +203,7 @@
     <ClInclude Include="SymbolTable.h" />
     <ClInclude Include="TempFileSubsystem.h" />
     <ClInclude Include="TokenBuffer.h" />
+    <ClInclude Include="utils.h" />
     <ClInclude Include="VirtualMemory.h" />
   </ItemGroup>
   <ItemGroup>
@@ -223,6 +224,7 @@
     <ClCompile Include="SymbolTable.cpp" />
     <ClCompile Include="TempFileSubsystem.cpp" />
     <ClCompile Include="TokenBuffer.cpp" />
+    <ClCompile Include="utils.cpp" />
     <ClCompile Include="VirtualMemory.cpp" />
   </ItemGroup>
   <ItemGroup>

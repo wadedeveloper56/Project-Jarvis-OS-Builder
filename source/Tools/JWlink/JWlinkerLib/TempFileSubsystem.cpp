@@ -20,9 +20,9 @@ TempFileSubsystem::~TempFileSubsystem()
 	}
 }
 
-void TempFileSubsystem::OpenFile(const char* filename)
+void TempFileSubsystem::QOpenRW(const char* filename)
 {
-	handle = FileSubsystem::OpenFile(filename, _O_CREAT | _O_TEMPORARY, _S_IREAD | _S_IWRITE);
+	handle = FileSubsystem::OpenFile(filename, _O_CREAT | _O_TEMPORARY | _O_RDWR, _S_IREAD | _S_IWRITE);
 }
 
 int TempFileSubsystem::CloseFile()
@@ -50,9 +50,9 @@ __int64 TempFileSubsystem::FileTell()
 	return FileSubsystem::FileTell(handle);
 }
 
-__int64 TempFileSubsystem::FileSeek(__int64 offset, int origin)
+__int64 TempFileSubsystem::QSeek(__int64 offset)
 {
-	return FileSubsystem::FileSeek(handle, offset, origin);
+	return FileSubsystem::FileSeek(handle, offset, SEEK_SET);
 }
 
 __int64 TempFileSubsystem::FileSize()
