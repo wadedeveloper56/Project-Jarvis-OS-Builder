@@ -2,9 +2,10 @@
 #include "permdata.h"
 #include "Carve.h"
 #include "debug.h"
+#include "StringTable.h"
 
-//stringtable             PermStrings;
-//stringtable             PrefixStrings;               
+StringTable*             PermStrings;
+StringTable*             PrefixStrings;               
 Carve* CarveLeader;
 Carve* CarveModEntry;
 Carve* CarveSymbol;
@@ -19,7 +20,7 @@ group_entry** IncGroups;
 libnamelist* SavedUserLibs;
 libnamelist* SavedDefLibs;
 
-//static stringtable      StoredRelocs;
+static StringTable*      StoredRelocs;
 static char* ReadRelocs;
 static unsigned         SizeRelocs;
 static char* OldExe;
@@ -53,7 +54,8 @@ void ResetPermData(MemorySubsystem* memorySubsystem)
 	CarveModEntry = new Carve(memorySubsystem); CarveModEntry->CarveCreate(sizeof(mod_entry), MOD_CARVE_SIZE);
 	CarveSegData = new Carve(memorySubsystem); CarveSegData->CarveCreate(sizeof(segdata), SDATA_CARVE_SIZE);
 	CarveSymbol = new Carve(memorySubsystem); CarveSymbol->CarveCreate(sizeof(symbol), SYM_CARVE_SIZE);
-	//InitStringTable( &PermStrings, TRUE );
-	//nitStringTable( &PrefixStrings, TRUE );
-	//InitStringTable( &StoredRelocs, FALSE );
+	PermStrings = new StringTable(memorySubsystem); PermStrings->InitStringTable(TRUE);
+	PrefixStrings = new StringTable(memorySubsystem); PrefixStrings->InitStringTable( TRUE );
+	StoredRelocs = new StringTable(memorySubsystem); StoredRelocs->InitStringTable( FALSE );
+	DEBUG((DBG_OLD, "ResetPermData() exit"));
 }

@@ -3,6 +3,7 @@
 #include "MemorySubsystem.h"
 #include "Structs.h"
 #include "Carve.h"
+#include "StringTable.h"
 
 #define INC_FILE_SIG_SIZE        36
 #ifdef __QNX__

@@ -202,6 +202,7 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="permdata.h" />
     <ClInclude Include="SpillFile.h" />
+    <ClInclude Include="StringTable.h" />
     <ClInclude Include="Structs.h" />
     <ClInclude Include="SymbolTable.h" />
     <ClInclude Include="TempFileSubsystem.h" />
@@ -227,6 +228,7 @@
     </ClCompile>
     <ClCompile Include="permdata.cpp" />
     <ClCompile Include="SpillFile.cpp" />
+    <ClCompile Include="StringTable.cpp" />
     <ClCompile Include="SymbolTable.cpp" />
     <ClCompile Include="TempFileSubsystem.cpp" />
     <ClCompile Include="TokenBuffer.cpp" />
