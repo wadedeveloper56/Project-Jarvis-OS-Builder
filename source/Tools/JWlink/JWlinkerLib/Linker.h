@@ -36,6 +36,7 @@ public:
 	int link();
 private:
 	void DoLink();
+	void ResetSubSystems();
 	void* MakeArray(unsigned size);
 	void InitNodes(void);
 	void BurnNodeArray(nodearray* list);

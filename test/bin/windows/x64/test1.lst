@@ -78,13 +78,13 @@ Symbols:
 @Cpu . . . . . . . . . . . . . .        Number           DDFh 
 @CurSeg  . . . . . . . . . . . .        Text   
 @DataSize  . . . . . . . . . . .        Number             0h 
-@Date  . . . . . . . . . . . . .        Text   07/14/26
+@Date  . . . . . . . . . . . . .        Text   07/15/26
 @FileCur . . . . . . . . . . . .        Text   C:\projects\OSDev\ProjectJarvis\test\bin\windows\x64\test1.asm
 @FileName  . . . . . . . . . . .        Text   TEST1
 @Interface . . . . . . . . . . .        Number             7h 
 @Model . . . . . . . . . . . . .        Number             7h 
 @ReservedStack . . . . . . . . .        Number             0h 
-@Time  . . . . . . . . . . . . .        Text   17:14:53
+@Time  . . . . . . . . . . . . .        Text   10:47:48
 @Version . . . . . . . . . . . .        Text   800
 @code  . . . . . . . . . . . . .        Text   _TEXT
 @data  . . . . . . . . . . . . .        Text   FLAT
@@ -94,4 +94,4 @@ _var1  . . . . . . . . . . . . .        Byte               0h _BSS FASTCALL
 _var2  . . . . . . . . . . . . .        Word               1h _BSS FASTCALL
 _var3  . . . . . . . . . . . . .        DWord              3h _BSS FASTCALL
 
-C:\projects\OSDev\ProjectJarvis\test\bin\windows\x64\test1.asm: 19 lines, 2 passes, 1 ms, 0 warnings, 0 errors
+C:\projects\OSDev\ProjectJarvis\test\bin\windows\x64\test1.asm: 19 lines, 2 passes, 3 ms, 0 warnings, 0 errors

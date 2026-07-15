@@ -93,9 +93,16 @@ void Linker::DoLink()
 	DEBUG((DBG_OLD, "DoLink exit\n"));
 }
 
+void Linker::ResetSubSystems()
+{
+	DEBUG((DBG_OLD, "ResetSubSystems enter\n"));
+	DEBUG((DBG_OLD, "ResetSubSystems exit\n"));
+}
+
 int Linker::link()
 {
 	DEBUG((DBG_OLD, "Link enter\n"));
+	ResetSubSystems();
 	DoLink();
 	DEBUG((DBG_OLD, "Link exit\n"));
 	return((LinkState & LINK_ERROR) ? 1 : 0);
