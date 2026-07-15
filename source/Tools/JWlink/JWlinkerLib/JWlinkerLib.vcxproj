@@ -189,9 +189,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="banner.h" />
+    <ClInclude Include="Carve.h" />
     <ClInclude Include="debug.h" />
     <ClInclude Include="FileSubsystem.h" />
     <ClInclude Include="global.h" />
+    <ClInclude Include="HashTable.h" />
     <ClInclude Include="Linker.h" />
     <ClInclude Include="MemorySubsystem.h" />
     <ClInclude Include="MessagingSubsystem.h" />
@@ -207,9 +209,11 @@
     <ClInclude Include="VirtualMemory.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Carve.cpp" />
     <ClCompile Include="debug.cpp" />
     <ClCompile Include="FileSubsystem.cpp" />
     <ClCompile Include="global.cpp" />
+    <ClCompile Include="HashTable.cpp" />
     <ClCompile Include="Linker.cpp" />
     <ClCompile Include="MemorySubsystem.cpp" />
     <ClCompile Include="MessagingSubsystem.cpp" />
