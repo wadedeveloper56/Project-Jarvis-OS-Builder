@@ -200,6 +200,7 @@
     <ClInclude Include="msg.h" />
     <ClInclude Include="Orl2.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="permdata.h" />
     <ClInclude Include="SpillFile.h" />
     <ClInclude Include="Structs.h" />
     <ClInclude Include="SymbolTable.h" />
@@ -224,6 +225,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="permdata.cpp" />
     <ClCompile Include="SpillFile.cpp" />
     <ClCompile Include="SymbolTable.cpp" />
     <ClCompile Include="TempFileSubsystem.cpp" />

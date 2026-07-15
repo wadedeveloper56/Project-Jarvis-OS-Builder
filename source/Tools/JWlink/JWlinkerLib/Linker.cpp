@@ -12,6 +12,7 @@
 #include "SymbolTable.h"
 #include "Structs.h"
 #include "global.h"
+#include "permdata.h"
 
 Linker::Linker(int argc, char** argv)
 {
@@ -96,6 +97,7 @@ void Linker::DoLink()
 void Linker::ResetSubSystems()
 {
 	DEBUG((DBG_OLD, "ResetSubSystems enter\n"));
+	ResetPermData(memorySubsystem);
 	DEBUG((DBG_OLD, "ResetSubSystems exit\n"));
 }
 
