@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "StringTable.h"
+#include "ring.h"
 
 StringTable::StringTable(MemorySubsystem* memorySubsystem) : memorySubsystem(memorySubsystem), strtab(nullptr)
 {

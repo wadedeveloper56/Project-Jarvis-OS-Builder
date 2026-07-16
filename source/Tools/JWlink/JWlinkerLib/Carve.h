@@ -34,6 +34,9 @@ struct free_t
         (fl) = node; \
     }
 
+#define DbgZapAlloc( tgt, size )
+#define DbgZapFreed( tgt, size )
+#define CarveDebugFree( cv, elm )
 
 class Carve
 {
@@ -44,5 +47,7 @@ public:
 	~Carve();
     void CarveCreate(size_t elm_size, size_t blk_size);
     void CarveDestroy();
+    void* CarveAlloc();
+    void CarveFree(void* elm);
 };
 
