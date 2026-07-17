@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\JWlinkLibOld\c\wlink.c">
+    <ClCompile Include="..\JWlinkLib\c\wlink.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
