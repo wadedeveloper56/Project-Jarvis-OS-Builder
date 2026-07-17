@@ -35,7 +35,7 @@ static char* IncStrTab;
 
 void ResetPermData(MemorySubsystem* memorySubsystem)
 {
-	DEBUG((DBG_OLD, "ResetPermData() enter"));
+	DEBUG((DBG_OLD, "ResetPermData() enter\n"));
 	IncFileName = NULL;
 	IncStrTab = NULL;
 	ReadRelocs = NULL;
@@ -57,5 +57,5 @@ void ResetPermData(MemorySubsystem* memorySubsystem)
 	PermStrings = new StringTable(memorySubsystem); PermStrings->InitStringTable(TRUE);
 	PrefixStrings = new StringTable(memorySubsystem); PrefixStrings->InitStringTable( TRUE );
 	StoredRelocs = new StringTable(memorySubsystem); StoredRelocs->InitStringTable( FALSE );
-	DEBUG((DBG_OLD, "ResetPermData() exit"));
+	DEBUG((DBG_OLD, "ResetPermData() exit\n"));
 }

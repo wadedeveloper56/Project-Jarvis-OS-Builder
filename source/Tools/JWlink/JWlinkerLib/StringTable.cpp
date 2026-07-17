@@ -16,13 +16,14 @@ stringblock* StringTable::AllocNewBlock()
 
     _ChkAlloc(stringblock*, blk, sizeof(stringblock));
     blk->next = NULL;
-    //RingAppend(&strtab->data, blk);
+    RingAppend(&strtab->data, blk);
     blk->size = 0;
     return blk;
 }
 
 void StringTable::InitStringTable(bool dontsplit)
 {
+    _ChkAlloc(stringtable*, strtab, sizeof(stringtable));
     strtab->data = NULL;
     if (dontsplit)
     {
