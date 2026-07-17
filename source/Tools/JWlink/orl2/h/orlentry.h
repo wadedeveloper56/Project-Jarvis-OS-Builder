@@ -1,5 +1,0 @@
-
-#ifndef ORL_ENTRY_INCLUDED
-#define ORL_ENTRY_INCLUDED
-
-#endif
