@@ -47,7 +47,7 @@ void ResetPermData(MemorySubsystem* memorySubsystem)
 	SavedUserLibs = NULL;
 	SavedDefLibs = NULL;
 	CarveClass = new Carve(memorySubsystem); CarveClass->CarveCreate(sizeof(class_entry), 20 * sizeof(class_entry));
-	CarveGroup = new Carve(memorySubsystem); CarveClass->CarveCreate(sizeof(group_entry), 20 * sizeof(group_entry));
+	CarveGroup = new Carve(memorySubsystem); CarveGroup->CarveCreate(sizeof(group_entry), 20 * sizeof(group_entry));
 	CarveDLLInfo = new Carve(memorySubsystem); CarveDLLInfo->CarveCreate(sizeof(dll_sym_info), 100 * sizeof(dll_sym_info));
 	CarveExportInfo = new Carve(memorySubsystem); CarveExportInfo->CarveCreate(sizeof(entry_export), 20 * sizeof(entry_export));
 	CarveLeader = new Carve(memorySubsystem); CarveLeader->CarveCreate(sizeof(seg_leader), SEG_CARVE_SIZE);
