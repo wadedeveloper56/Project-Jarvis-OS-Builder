@@ -87,12 +87,23 @@ int main(int argc, char* argv[])
 		exitcode = 0;
 		goto exit;
 	}
+	
+	if (infiles->count == 0)
+	{
+		printf("No input file specified.\n");
+		exitcode = 1;
+		goto exit;
+	}
 
-	_splitpath(infiles->filename[0], drive, dir, fname, ext);
-	_makepath(logFileName, drive, dir, fname, "asm");
+	if (outfile->count == 0)
+	{
+		printf("No output file specified.\n");
+		exitcode = 1;
+		goto exit;
+	}
 
 	in.open(infiles->filename[0], ifstream::in);
-	out.open(logFileName, ofstream::out);
+	out.open(outfile->filename[0], ofstream::out);
 
 	if (in.is_open() && out.is_open())
 	{

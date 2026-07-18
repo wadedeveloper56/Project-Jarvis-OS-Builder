@@ -428,6 +428,7 @@ void loadResourcesDirectory(FileType fileType, EXEFilePtr result, char* buffer, 
 	DWORD resourceRVA = GetImgDirEntryRVA(fileType, pNTHeader, IMAGE_DIRECTORY_ENTRY_RESOURCE);
 	DWORD resourceRVASize = GetImgDirEntrySize(fileType, pNTHeader, IMAGE_DIRECTORY_ENTRY_RESOURCE);
 	NTResourceDirectoryPtr resDir = (NTResourceDirectoryPtr)GetPtrFromRVA(fileType, resourceRVA, pNTHeader, buffer);
+	if (!resDir) return;
 	NTResourceDirectoryEntryPtr resDirEntry = (NTResourceDirectoryEntryPtr)(resDir + 1);
 	WORD nNamed = resDir->NumberOfNamedEntries;
 	WORD nIds = resDir->NumberOfIdEntries;
@@ -524,12 +525,14 @@ void loadLoadConfigDirectory(FileType fileType, EXEFilePtr result, char* buffer,
 	if (fileType == PE64EXE)
 	{
 		load64 = (NTLoadConfigDirectory64Ptr)GetPtrFromRVA(fileType, configRVA, pNTHeader, buffer);
-		memcpy(&result->loadConfiguration64BitDirectory, load64, sizeof(NTLoadConfigDirectory64));
+		if (load64)
+			memcpy(&result->loadConfiguration64BitDirectory, load64, sizeof(NTLoadConfigDirectory64));
 	}
 	else
 	{
 		load32 = (NTLoadConfigDirectory32Ptr)GetPtrFromRVA(fileType, configRVA, pNTHeader, buffer);
-		memcpy(&result->loadConfiguration32BitDirectory, load32, sizeof(NTLoadConfigDirectory32));
+		if (load32)
+			memcpy(&result->loadConfiguration32BitDirectory, load32, sizeof(NTLoadConfigDirectory32));
 	}
 }
 

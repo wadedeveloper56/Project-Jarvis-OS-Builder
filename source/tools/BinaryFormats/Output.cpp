@@ -535,6 +535,7 @@ void DumpDebugDirectory(DebugPtr debug)
 		"  Type            Type     Size     Address  FilePtr  Charactr Version  TimeDate\n"
 		"  --------------- -------- -------- -------- -------- -------- -------- --------\n"
 	);
+	if (debug == nullptr) return;
 	for (DebugEntryPtr ptr : debug->entries)
 	{
 		printf("  %-15s %08X %08X %08X %08X %08X %u.%02u     %s",

@@ -2,9 +2,9 @@
 #include "framework.h"
 #include "File.h"
 
-errno_t OpenFile2(f_handle* pfh, const char* filename, int oflag, int shflag, int pmode)
+f_handle OpenFile2(const char* filename, int oflag, int pmode)
 {
-	return _sopen_s(pfh, filename, oflag, shflag, pmode);
+	return _open(filename, oflag, pmode);
 }
 
 int CloseFile2(f_handle handle)

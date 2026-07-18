@@ -144,6 +144,7 @@
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -202,6 +203,7 @@
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -300,12 +302,6 @@
     </ProjectReference>
     <ProjectReference Include="..\JWccLib\JWccLib.vcxproj">
       <Project>{55e11707-51c1-4126-9ce7-1d3ef7e9d7f0}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\JWlibLib\JWlibLib.vcxproj">
-      <Project>{f11d345b-1a8b-4e59-bf7d-38b061f7bf90}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\JWlinkLib\JWlinkLib.vcxproj">
-      <Project>{1054801f-1a40-4a7c-a7d1-303d2a64b79c}</Project>
     </ProjectReference>
     <ProjectReference Include="..\PreProcessor2\PreProcessor2.vcxproj">
       <Project>{ec832e55-a126-40da-b115-fc2973ae0f73}</Project>

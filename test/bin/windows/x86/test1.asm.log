@@ -1,15 +1,15 @@
 PEDUMP - Win32/Win64 COFF EXE/OBJ/LIB file dumper v1.0 (C) Copyright 2025-2026 Christopher D. Wade.
 All Rights Reserved
-Dump of file bin\windows\x86\test1.obj
-File Size 316 bytes
+Dump of file C:\projects\OSDev\ProjectJarvis\test\bin\windows\x86\test1.obj
+File Size 370 bytes
 File Type: 32-bit COFF OBJECT
 
 FILE HEADER VALUES
                14C Machine (Intel 386 or later processors and compatible processors)
                  3 (3) Number of Sections
-          6A1884E7 TimeDateStamp ->  n/a
+          6A5BA71E TimeDateStamp ->  n/a
                 96 PointerToSymbolTable
-                 9 (9) NumberOfSymbols
+                 C (12) NumberOfSymbols
                  0 (0) SizeOfOptionalHeader
                  0 Flags
 
@@ -73,17 +73,17 @@ C0300080 flags
 
 
 
-Symbol Table - 9 entries  (* = auxillary symbol)
+Symbol Table - 12 entries  (* = auxillary symbol)
 Indx Sectn   Value   Type  Storage Name
 ---- ----- -------- ----- -------  --------
 0000 DEBUG 00000000  0000 FILE     .file
-     * test1.asm
-0002     1 00000000  0000 STATIC   .text
+     * C:\projects\OSDev\ProjectJarvis\test\bin\windows\x86\test1.asm
+0005     1 00000000  0000 STATIC   .text
      * Section: 0000  Len: 0000A  Relocs: 0000  LineNums: 0000 checksum:00000000
-0004     2 00000000  0000 STATIC   .data
+0007     2 00000000  0000 STATIC   .data
      * Section: 0000  Len: 00000  Relocs: 0000  LineNums: 0000 checksum:00000000
-0006     3 00000000  0000 STATIC   .bss
+0009     3 00000000  0000 STATIC   .bss
      * Section: 0000  Len: 00007  Relocs: 0000  LineNums: 0000 checksum:00000000
-0008     1 00000000  0020 EXTERNAL __main
+000B     1 00000000  0020 EXTERNAL __main
 
 String Table Size = 0x4 (4) bytes 0 entries

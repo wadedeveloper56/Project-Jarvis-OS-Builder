@@ -12,9 +12,7 @@ namespace FileTest
 		
 		TEST_METHOD(OpenFile_NotNull)
 		{
-			f_handle fh;
-			errno_t err = OpenFile2(&fh, "test.txt", _O_RDWR | _O_CREAT, _SH_DENYNO, _S_IREAD | _S_IWRITE);
-			Assert::AreEqual(0, err, L"File open failure");
+			f_handle fh = OpenFile2("test.txt", _O_RDWR | _O_CREAT, _S_IREAD | _S_IWRITE);
 			Assert::AreNotEqual(NIL_HANDLE, fh, L"File handle is invalid");
 			CloseFile2(fh);
 			DeleteFileA("test.txt");

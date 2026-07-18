@@ -1,12 +1,12 @@
-JWasm v2.12pre, May 26 2026
-test1.asm
-                                .x64p
-                                .model flat, c;
+JWasm v2.12pre, Jul 18 2026
+C:\projects\OSDev\ProjectJarvis\test\bin\windows\x64\test1.asm
+                            *   .model FLAT
 00000000                    *   _TEXT segment PARA FLAT PUBLIC 'CODE'
                             *   _TEXT ends
 00000000                    *   _DATA segment PARA FLAT PUBLIC 'DATA'
                             *   _DATA ends
-                            *   assume cs:flat,ds:flat,ss:flat,es:flat,fs:ERROR,gs:ERROR
+                            *   assume cs:flat,ds:flat,ss:flat,es:flat,fs:ERROR,gs:NOTHING
+                                .x64p
                                 option casemap : none
 
 
@@ -78,19 +78,20 @@ Symbols:
 @Cpu . . . . . . . . . . . . . .        Number           DDFh 
 @CurSeg  . . . . . . . . . . . .        Text   
 @DataSize  . . . . . . . . . . .        Number             0h 
-@Date  . . . . . . . . . . . . .        Text   05/28/26
-@FileCur . . . . . . . . . . . .        Text   test1.asm
+@Date  . . . . . . . . . . . . .        Text   07/18/26
+@FileCur . . . . . . . . . . . .        Text   C:\projects\OSDev\ProjectJarvis\test\bin\windows\x64\test1.asm
 @FileName  . . . . . . . . . . .        Text   TEST1
-@Interface . . . . . . . . . . .        Number             1h 
+@Interface . . . . . . . . . . .        Number             7h 
 @Model . . . . . . . . . . . . .        Number             7h 
-@Time  . . . . . . . . . . . . .        Text   13:09:41
+@ReservedStack . . . . . . . . .        Number             0h 
+@Time  . . . . . . . . . . . . .        Text   11:17:32
 @Version . . . . . . . . . . . .        Text   800
 @code  . . . . . . . . . . . . .        Text   _TEXT
 @data  . . . . . . . . . . . . .        Text   FLAT
 @stack . . . . . . . . . . . . .        Text   FLAT
 __JWASM__  . . . . . . . . . . .        Number            D4h 
-_var1  . . . . . . . . . . . . .        Byte               0h _BSS C
-_var2  . . . . . . . . . . . . .        Word               1h _BSS C
-_var3  . . . . . . . . . . . . .        DWord              3h _BSS C
+_var1  . . . . . . . . . . . . .        Byte               0h _BSS FASTCALL
+_var2  . . . . . . . . . . . . .        Word               1h _BSS FASTCALL
+_var3  . . . . . . . . . . . . .        DWord              3h _BSS FASTCALL
 
-test1.asm: 20 lines, 2 passes, 0 ms, 0 warnings, 0 errors
+C:\projects\OSDev\ProjectJarvis\test\bin\windows\x64\test1.asm: 19 lines, 2 passes, 1 ms, 0 warnings, 0 errors

@@ -1,5 +1,5 @@
-JWasm v2.12pre, May 26 2026
-test1.asm
+JWasm v2.12pre, Jul 18 2026
+C:\projects\OSDev\ProjectJarvis\test\bin\windows\x86\test1.asm
                                 .386
                                 .model flat, c;
 00000000                    *   _TEXT segment DWORD FLAT PUBLIC 'CODE'
@@ -78,12 +78,12 @@ Symbols:
 @Cpu . . . . . . . . . . . . . .        Number           D0Fh 
 @CurSeg  . . . . . . . . . . . .        Text   
 @DataSize  . . . . . . . . . . .        Number             0h 
-@Date  . . . . . . . . . . . . .        Text   05/28/26
-@FileCur . . . . . . . . . . . .        Text   test1.asm
+@Date  . . . . . . . . . . . . .        Text   07/18/26
+@FileCur . . . . . . . . . . . .        Text   C:\projects\OSDev\ProjectJarvis\test\bin\windows\x86\test1.asm
 @FileName  . . . . . . . . . . .        Text   TEST1
 @Interface . . . . . . . . . . .        Number             1h 
 @Model . . . . . . . . . . . . .        Number             7h 
-@Time  . . . . . . . . . . . . .        Text   13:09:43
+@Time  . . . . . . . . . . . . .        Text   11:17:34
 @Version . . . . . . . . . . . .        Text   800
 @code  . . . . . . . . . . . . .        Text   _TEXT
 @data  . . . . . . . . . . . . .        Text   FLAT
@@ -93,4 +93,4 @@ _var1  . . . . . . . . . . . . .        Byte               0h _BSS C
 _var2  . . . . . . . . . . . . .        Word               1h _BSS C
 _var3  . . . . . . . . . . . . .        DWord              3h _BSS C
 
-test1.asm: 20 lines, 2 passes, 1 ms, 0 warnings, 0 errors
+C:\projects\OSDev\ProjectJarvis\test\bin\windows\x86\test1.asm: 20 lines, 2 passes, 1 ms, 0 warnings, 0 errors
