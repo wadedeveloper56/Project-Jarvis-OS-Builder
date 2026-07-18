@@ -1,6 +1,6 @@
 JWlink Version 2.0
 Portions Copyright (c) 1985-2002 Sybase, Inc. All Rights Reserved.
-Created on:       26/07/17 11:03:39
+Created on:       26/07/17 21:24:24
 Executable Image: C:\projects\OSDev\ProjectJarvis\test\bin\windows\x86\test1.exe
 creating a PE executable
 
@@ -72,4 +72,4 @@ C:\PROGRA~2\WI3CF2~1\10\Lib\10.0.26100.0\um\x86\kernel32.lib
 Stack size:  00100000 (1048576.)
 Memory size:  0202 (514.)
 Entry point address: 00401010
-Link time: 00:00.08
+Link time: 00:00.06
