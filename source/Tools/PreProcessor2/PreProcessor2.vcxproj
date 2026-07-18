@@ -118,6 +118,8 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <ProgramDataBaseFileName />
     </ClCompile>
     <Link>
       <SubSystem>
@@ -160,6 +162,8 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <ProgramDataBaseFileName />
     </ClCompile>
     <Link>
       <SubSystem>

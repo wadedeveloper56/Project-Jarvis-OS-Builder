@@ -179,6 +179,7 @@
       <BufferSecurityCheck>true</BufferSecurityCheck>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <BrowseInformation>false</BrowseInformation>
+      <ProgramDataBaseFileName />
     </ClCompile>
     <Link>
       <SubSystem>
@@ -257,6 +258,7 @@
       <BufferSecurityCheck>true</BufferSecurityCheck>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <BrowseInformation>false</BrowseInformation>
+      <ProgramDataBaseFileName />
     </ClCompile>
     <Link>
       <SubSystem>

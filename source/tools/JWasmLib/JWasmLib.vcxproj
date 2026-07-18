@@ -128,6 +128,7 @@
       <BrowseInformation>false</BrowseInformation>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <WholeProgramOptimization>true</WholeProgramOptimization>
+      <ProgramDataBaseFileName />
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -172,6 +173,7 @@
       <BrowseInformation>false</BrowseInformation>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <WholeProgramOptimization>true</WholeProgramOptimization>
+      <ProgramDataBaseFileName />
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

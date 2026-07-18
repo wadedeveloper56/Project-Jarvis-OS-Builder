@@ -122,6 +122,7 @@
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <ProgramDataBaseFileName />
     </ClCompile>
     <Link>
       <SubSystem>
@@ -161,6 +162,7 @@
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <ProgramDataBaseFileName />
     </ClCompile>
     <Link>
       <SubSystem>
