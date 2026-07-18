@@ -95,7 +95,11 @@
 typedef int bool;
 #endif
 typedef unsigned char   byte;
+#ifdef WIN32
 typedef unsigned long   virt_mem;
+#else
+typedef unsigned long long   virt_mem;
+#endif
 typedef unsigned        f_handle;
 
 #if defined( __UNIX__ )
