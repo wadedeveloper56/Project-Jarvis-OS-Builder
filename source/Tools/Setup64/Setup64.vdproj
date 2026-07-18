@@ -61,6 +61,22 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
+            }
         }
         "Release"
         {
@@ -77,6 +93,22 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
+            }
         }
     }
     "Deployable"
@@ -103,7 +135,7 @@
             "SourcePath" = "8:..\\..\\..\\bin\\tools\\Release\\x64\\JarvisIDE.exe"
             "TargetName" = "8:JarvisIDE.exe"
             "Tag" = "8:"
-            "Folder" = "8:_CACF7309DAFF4ABF97B79E24B8F853DD"
+            "Folder" = "8:_FBF4D65AB3EF4944B0A8AA498E631C64"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -123,7 +155,7 @@
             "SourcePath" = "8:..\\..\\..\\bin\\tools\\Release\\x64\\JWcc.exe"
             "TargetName" = "8:JWcc.exe"
             "Tag" = "8:"
-            "Folder" = "8:_CACF7309DAFF4ABF97B79E24B8F853DD"
+            "Folder" = "8:_FBF4D65AB3EF4944B0A8AA498E631C64"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -143,7 +175,7 @@
             "SourcePath" = "8:..\\..\\..\\bin\\tools\\Release\\x64\\JWlink.exe"
             "TargetName" = "8:JWlink.exe"
             "Tag" = "8:"
-            "Folder" = "8:_CACF7309DAFF4ABF97B79E24B8F853DD"
+            "Folder" = "8:_FBF4D65AB3EF4944B0A8AA498E631C64"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -163,7 +195,7 @@
             "SourcePath" = "8:..\\..\\..\\bin\\tools\\Release\\x64\\JWasm.exe"
             "TargetName" = "8:JWasm.exe"
             "Tag" = "8:"
-            "Folder" = "8:_CACF7309DAFF4ABF97B79E24B8F853DD"
+            "Folder" = "8:_FBF4D65AB3EF4944B0A8AA498E631C64"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -183,7 +215,7 @@
             "SourcePath" = "8:..\\..\\..\\bin\\tools\\Release\\x64\\PEDump.exe"
             "TargetName" = "8:PEDump.exe"
             "Tag" = "8:"
-            "Folder" = "8:_CACF7309DAFF4ABF97B79E24B8F853DD"
+            "Folder" = "8:_FBF4D65AB3EF4944B0A8AA498E631C64"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -225,6 +257,17 @@
             "Property" = "8:TARGETDIR"
                 "Folders"
                 {
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_FBF4D65AB3EF4944B0A8AA498E631C64"
+                    {
+                    "Name" = "8:bin"
+                    "AlwaysCreate" = "11:FALSE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_A9C6F310F95742C284368F76EAB272AF"
+                        "Folders"
+                        {
+                        }
+                    }
                 }
             }
             "{1525181F-901A-416C-8A58-119130FE478E}:_CB2FD7A5A2DF44728ACA3E9930AAD500"
@@ -255,7 +298,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Jarvis Compiler"
         "ProductCode" = "8:{BC56518D-ADBE-4198-9803-7A5AB9959038}"
-        "PackageCode" = "8:{1B5B32B7-0EFF-4195-B516-C0C44D55C816}"
+        "PackageCode" = "8:{531911B6-091D-4EDB-92D0-7771F7676F1D}"
         "UpgradeCode" = "8:{2D98368A-398C-4620-AAC0-14840F61B521}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
@@ -375,6 +418,20 @@
         }
         "Shortcut"
         {
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_F22080DB81E0476AB034652494244B88"
+            {
+            "Name" = "8:JarvisIDE.exe"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_2C4E1AED5B6242828C74A2DAD296C6A9"
+            "Folder" = "8:_CB2FD7A5A2DF44728ACA3E9930AAD500"
+            "WorkingFolder" = "8:_FBF4D65AB3EF4944B0A8AA498E631C64"
+            "Icon" = "8:"
+            "Feature" = "8:"
+            }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_F80A8384BA9B4AAB9D3B73875CF56DB4"
             {
             "Name" = "8:Shortcut to %sJarvisIDE.exe"
@@ -384,7 +441,7 @@
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
             "Target" = "8:_2C4E1AED5B6242828C74A2DAD296C6A9"
-            "Folder" = "8:_CACF7309DAFF4ABF97B79E24B8F853DD"
+            "Folder" = "8:_B652F75171F9490CBCD29A599F762C38"
             "WorkingFolder" = "8:_CACF7309DAFF4ABF97B79E24B8F853DD"
             "Icon" = "8:"
             "Feature" = "8:"

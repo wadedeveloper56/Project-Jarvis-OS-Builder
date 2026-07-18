@@ -75,6 +75,11 @@
                     "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
                     "ProductCode" = "8:.NETFramework,Version=v4.7.2"
                     }
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Visual.C++.14.0.x64"
+                    {
+                    "Name" = "8:Visual C++ \"14\" Runtime Libraries (x64)"
+                    "ProductCode" = "8:Microsoft.Visual.C++.14.0.x64"
+                    }
                     "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Visual.C++.14.0.x86"
                     {
                     "Name" = "8:Visual C++ \"14\" Runtime Libraries (x86)"
@@ -112,6 +117,11 @@
                     "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
                     "ProductCode" = "8:.NETFramework,Version=v4.7.2"
                     }
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Visual.C++.14.0.x64"
+                    {
+                    "Name" = "8:Visual C++ \"14\" Runtime Libraries (x64)"
+                    "ProductCode" = "8:Microsoft.Visual.C++.14.0.x64"
+                    }
                     "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Visual.C++.14.0.x86"
                     {
                     "Name" = "8:Visual C++ \"14\" Runtime Libraries (x86)"
@@ -145,7 +155,7 @@
             "SourcePath" = "8:..\\..\\..\\bin\\tools\\Release\\Win32\\JWcc.exe"
             "TargetName" = "8:JWcc.exe"
             "Tag" = "8:"
-            "Folder" = "8:_963520E974834ABAB7588DA948F0BB46"
+            "Folder" = "8:_44B58A22641D4E53B8EDA25B23219C85"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -165,7 +175,7 @@
             "SourcePath" = "8:..\\..\\..\\bin\\tools\\Release\\Win32\\JarvisIDE.exe"
             "TargetName" = "8:JarvisIDE.exe"
             "Tag" = "8:"
-            "Folder" = "8:_963520E974834ABAB7588DA948F0BB46"
+            "Folder" = "8:_44B58A22641D4E53B8EDA25B23219C85"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -185,7 +195,7 @@
             "SourcePath" = "8:..\\..\\..\\bin\\tools\\Release\\Win32\\PEDump.exe"
             "TargetName" = "8:PEDump.exe"
             "Tag" = "8:"
-            "Folder" = "8:_963520E974834ABAB7588DA948F0BB46"
+            "Folder" = "8:_44B58A22641D4E53B8EDA25B23219C85"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -205,7 +215,7 @@
             "SourcePath" = "8:..\\..\\..\\bin\\tools\\Release\\Win32\\JWlink.exe"
             "TargetName" = "8:JWlink.exe"
             "Tag" = "8:"
-            "Folder" = "8:_963520E974834ABAB7588DA948F0BB46"
+            "Folder" = "8:_44B58A22641D4E53B8EDA25B23219C85"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -225,7 +235,7 @@
             "SourcePath" = "8:..\\..\\..\\bin\\tools\\Release\\Win32\\JWasm.exe"
             "TargetName" = "8:JWasm.exe"
             "Tag" = "8:"
-            "Folder" = "8:_963520E974834ABAB7588DA948F0BB46"
+            "Folder" = "8:_44B58A22641D4E53B8EDA25B23219C85"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -267,6 +277,17 @@
             "Property" = "8:TARGETDIR"
                 "Folders"
                 {
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_44B58A22641D4E53B8EDA25B23219C85"
+                    {
+                    "Name" = "8:bin"
+                    "AlwaysCreate" = "11:FALSE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_EC912A95EB9B4EBE8EBC9E2262CF6A64"
+                        "Folders"
+                        {
+                        }
+                    }
                 }
             }
             "{1525181F-901A-416C-8A58-119130FE478E}:_991DFFECF2394747A33897506139A539"
@@ -297,7 +318,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Jarvis Compiler"
         "ProductCode" = "8:{068D91FA-B77B-41A1-A1AC-8D1DB7483292}"
-        "PackageCode" = "8:{04F5E45F-CF60-422D-A323-7A726B1EA7E2}"
+        "PackageCode" = "8:{3AEAB709-F3FA-4B4C-965F-EB8F9ABF9A7E}"
         "UpgradeCode" = "8:{1461D6FE-87F1-4CFC-B5BC-8EC4B4ECB380}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
@@ -426,8 +447,22 @@
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
             "Target" = "8:_8695D099479E445C934B947FB1C1851A"
-            "Folder" = "8:_963520E974834ABAB7588DA948F0BB46"
+            "Folder" = "8:_991DFFECF2394747A33897506139A539"
             "WorkingFolder" = "8:_963520E974834ABAB7588DA948F0BB46"
+            "Icon" = "8:"
+            "Feature" = "8:"
+            }
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_BBFFE67CC723402D9873AF0FC80FB12D"
+            {
+            "Name" = "8:JarvisIDE.exe"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_8695D099479E445C934B947FB1C1851A"
+            "Folder" = "8:_37F7136CBAA9452C8FB5850447DFDBBB"
+            "WorkingFolder" = "8:_44B58A22641D4E53B8EDA25B23219C85"
             "Icon" = "8:"
             "Feature" = "8:"
             }
