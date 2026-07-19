@@ -8,7 +8,7 @@ that supports 16, 32, and 64 bit development on a 32 or 64 bit host
 ****
 | Project           | Purpose                           | Status        
 | ----------------- | --------------------------------- | ------------- 
-| Compiler          | C to JASM Compiling               | In Progress   
+| Compiler          | C to JWASM Compiling               | In Progress   
 | Assembler         | JWASM 2.12pre clone               | Completed 
 | JarvisIDE         | Development Envionment            | In Progress     
 | Linker            | JWlink 2.0                        | Completed
