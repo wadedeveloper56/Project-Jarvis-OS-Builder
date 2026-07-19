@@ -27,3 +27,5 @@ C:\projects\OSDev\ProjectJarvis\bin\tools\Debug\x64\JWlink format win pe option 
 C:\projects\OSDev\ProjectJarvis\bin\tools\Debug\x64\pedump -a %CD%\bin\windows\x86\test1.obj > %CD%\bin\windows\x86\test1.asm.log
 C:\projects\OSDev\ProjectJarvis\bin\tools\Debug\x64\pedump -a %CD%\bin\windows\x86\c032.obj > %CD%\bin\windows\x86\c032.asm.log
 C:\projects\OSDev\ProjectJarvis\bin\tools\Debug\x64\pedump -a %CD%\bin\windows\x86\test1.exe > %CD%\bin\windows\x86\test1.exe.log
+
+C:\projects\OSDev\ProjectJarvis\bin\tools\Debug\x64\JWlib
