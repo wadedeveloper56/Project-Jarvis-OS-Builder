@@ -50,7 +50,8 @@ extern "C" {
 #ifdef IDE_PGM
 #define IDEDLL_EXPORT
 #else
-#define IDEDLL_EXPORT           __export IDECALL
+#define IDEDLL_EXPORT          
+    //__export IDECALL
 #endif
 
 #define IDE_CUR_DLL_VER         3
