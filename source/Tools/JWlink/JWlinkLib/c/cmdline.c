@@ -58,7 +58,7 @@
 #include "loadfile.h"
 
 #ifdef _INT_DEBUG
-unsigned int            Debug;
+unsigned int            Debug=1;
 #endif
 
 static void             Crash( bool );
