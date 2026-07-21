@@ -111,8 +111,12 @@ static IDEBool IDECALL printWithCrLf( IDECBHdl hdl, const char *message )
     return( FALSE );
 }
 
-static IDEBool IDECALL getInfoCB( IDECBHdl hdl, IDEInfoType type,
-                                  unsigned long extra, unsigned long lparam )
+
+#ifdef WIN32
+static IDEBool IDECALL getInfoCB( IDECBHdl hdl, IDEInfoType type, unsigned long extra, unsigned long lparam )
+#else
+static IDEBool IDECALL getInfoCB(IDECBHdl hdl, IDEInfoType type, unsigned long long extra, unsigned long long lparam)
+#endif // 
 {
     int retn;
 
@@ -124,9 +128,9 @@ static IDEBool IDECALL getInfoCB( IDECBHdl hdl, IDEInfoType type,
         break;
     case IDE_GET_ENV_VAR:
         {
-            char const* env_var;
-            char const* env_val;
-            char const * * p_env_val;
+            char const* env_var=NULL;
+            char const* env_val=NULL;
+            char const * * p_env_val=NULL;
             env_var = (char const*)extra;
             env_val = getenv( env_var );
             p_env_val = (char const * *)lparam;

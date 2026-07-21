@@ -236,14 +236,19 @@ typedef unsigned        IDEInfoType;
 #define IDE_DEP_FILETYPE_DEP_CLS        'C'
 #define IDE_DEP_FILETYPE_DEP_ZIP        'Z'
 
+
+#ifdef WIN32
 typedef unsigned long IDEGetInfoWParam;
 typedef unsigned long IDEGetInfoLParam;
+#else
+typedef unsigned long long IDEGetInfoWParam;
+typedef unsigned long long IDEGetInfoLParam;
+#endif // 
 
 typedef IDEBool IDECALL (*IDERunBatchFn)( IDECBHdl hdl, const char *cmdline,
                                 BatchFilter cb, void *cookie );
 typedef IDEBool IDECALL (*IDEPrintMsgFn)( IDECBHdl hdl, const char *message );
-typedef IDEBool IDECALL (*IDEGetInfoFn)( IDECBHdl hdl, IDEInfoType type,
-                                IDEGetInfoWParam wparam, IDEGetInfoLParam lparam );
+typedef IDEBool IDECALL (*IDEGetInfoFn)( IDECBHdl hdl, IDEInfoType type,    IDEGetInfoWParam wparam, IDEGetInfoLParam lparam );
 typedef IDEBool IDECALL (*IDEMsgInfoFn)( IDECBHdl hdl, IDEMsgInfo *info );
 typedef IDEBool IDECALL (*IDERunDllFn)( IDECBHdl hdl, const char *dllname,
                                 const char *cmdline, BatchDllFilter cb,

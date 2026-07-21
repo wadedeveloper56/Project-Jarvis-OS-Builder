@@ -92,7 +92,7 @@ int main                        // MAIN-LINE FOR DLL DRIVER
         _putenv( AR_MODE_ENV "=ON" );
     }
     retcode = IdeDrvExecDLL( &info, cmd_line );
-    free( cmd_line );
+//    free( cmd_line );
 #else
     retcode = IdeDrvExecDLLArgv( &info, count, args );
 #endif
