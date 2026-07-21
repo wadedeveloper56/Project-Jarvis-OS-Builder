@@ -687,12 +687,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_ACBE98BF03A0487989A4C4ACC528FFD5"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_AD3D61C58B2B49E9BAB3A2C336263F24"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -3338,26 +3332,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_ACBE98BF03A0487989A4C4ACC528FFD5"
-            {
-            "SourcePath" = "8:..\\..\\..\\bin\\tools\\Release\\Win32\\JWmake.exe"
-            "TargetName" = "8:JWmake.exe"
-            "Tag" = "8:"
-            "Folder" = "8:_44B58A22641D4E53B8EDA25B23219C85"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_AD3D61C58B2B49E9BAB3A2C336263F24"
             {
             "SourcePath" = "8:..\\..\\..\\..\\maint\\dosbox-x\\bin\\Win32\\Release\\glshaders\\xbr-lv3.glsl"
@@ -4492,7 +4466,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Jarvis Compiler"
         "ProductCode" = "8:{068D91FA-B77B-41A1-A1AC-8D1DB7483292}"
-        "PackageCode" = "8:{6CE41996-010B-465F-9FC6-4883FD2B4C73}"
+        "PackageCode" = "8:{74F8E07E-57F4-4E18-A18B-88BE923783F1}"
         "UpgradeCode" = "8:{1461D6FE-87F1-4CFC-B5BC-8EC4B4ECB380}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
