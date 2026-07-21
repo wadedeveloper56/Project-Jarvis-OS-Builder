@@ -342,7 +342,7 @@ static void SortSymbols( void )
     }
 }
 
-void WriteFile( sym_file *sfile )
+void WriteFileSym( sym_file *sfile )
 /*******************************/
 {
     libfile     io;
@@ -716,7 +716,7 @@ static void WriteArMlibFileTable( void )
         if( append_name ) {
             WriteNew( sfile->arch.name, sfile->name_length );
         }
-        WriteFile( sfile );
+        WriteFileSym( sfile );
         WritePad( arch.size );
     }
     DEBUG(("WriteArMlibFileTable exit\n"));
