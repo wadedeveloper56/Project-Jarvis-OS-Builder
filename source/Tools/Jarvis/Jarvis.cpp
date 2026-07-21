@@ -1,27 +1,27 @@
 
-// JarvisIDE.cpp : Defines the class behaviors for the application.
+// Jarvis.cpp : Defines the class behaviors for the application.
 //
 
 #include "pch.h"
 #include "framework.h"
 #include "afxwinappex.h"
 #include "afxdialogex.h"
-#include "JarvisIDE.h"
+#include "Jarvis.h"
 #include "MainFrm.h"
 
 #include "ChildFrm.h"
-#include "JarvisIDEDoc.h"
-#include "JarvisIDEView.h"
+#include "JarvisDoc.h"
+#include "JarvisView.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
 
 
-// CJarvisIDEApp
+// CJarvisApp
 
-BEGIN_MESSAGE_MAP(CJarvisIDEApp, CWinAppEx)
-	ON_COMMAND(ID_APP_ABOUT, &CJarvisIDEApp::OnAppAbout)
+BEGIN_MESSAGE_MAP(CJarvisApp, CWinAppEx)
+	ON_COMMAND(ID_APP_ABOUT, &CJarvisApp::OnAppAbout)
 	// Standard file based document commands
 	ON_COMMAND(ID_FILE_NEW, &CWinAppEx::OnFileNew)
 	ON_COMMAND(ID_FILE_OPEN, &CWinAppEx::OnFileOpen)
@@ -30,9 +30,9 @@ BEGIN_MESSAGE_MAP(CJarvisIDEApp, CWinAppEx)
 END_MESSAGE_MAP()
 
 
-// CJarvisIDEApp construction
+// CJarvisApp construction
 
-CJarvisIDEApp::CJarvisIDEApp() noexcept
+CJarvisApp::CJarvisApp() noexcept
 {
 	m_bHiColorIcons = TRUE;
 
@@ -49,20 +49,20 @@ CJarvisIDEApp::CJarvisIDEApp() noexcept
 
 	// TODO: replace application ID string below with unique ID string; recommended
 	// format for string is CompanyName.ProductName.SubProduct.VersionInformation
-	SetAppID(_T("JarvisIDE.AppID.NoVersion"));
+	SetAppID(_T("Jarvis.AppID.NoVersion"));
 
 	// TODO: add construction code here,
 	// Place all significant initialization in InitInstance
 }
 
-// The one and only CJarvisIDEApp object
+// The one and only CJarvisApp object
 
-CJarvisIDEApp theApp;
+CJarvisApp theApp;
 
 
-// CJarvisIDEApp initialization
+// CJarvisApp initialization
 
-BOOL CJarvisIDEApp::InitInstance()
+BOOL CJarvisApp::InitInstance()
 {
 	// InitCommonControlsEx() is required on Windows XP if an application
 	// manifest specifies use of ComCtl32.dll version 6 or later to enable
@@ -103,7 +103,6 @@ BOOL CJarvisIDEApp::InitInstance()
 
 
 	InitContextMenuManager();
-	InitShellManager();
 
 	InitKeyboardManager();
 
@@ -116,10 +115,10 @@ BOOL CJarvisIDEApp::InitInstance()
 	// Register the application's document templates.  Document templates
 	//  serve as the connection between documents, frame windows and views
 	CMultiDocTemplate* pDocTemplate;
-	pDocTemplate = new CMultiDocTemplate(IDR_JarvisIDETYPE,
-		RUNTIME_CLASS(CJarvisIDEDoc),
+	pDocTemplate = new CMultiDocTemplate(IDR_JarvisTYPE,
+		RUNTIME_CLASS(CJarvisDoc),
 		RUNTIME_CLASS(CChildFrame), // custom MDI child frame
-		RUNTIME_CLASS(CJarvisIDEView));
+		RUNTIME_CLASS(CJarvisView));
 	if (!pDocTemplate)
 		return FALSE;
 	AddDocTemplate(pDocTemplate);
@@ -152,13 +151,13 @@ BOOL CJarvisIDEApp::InitInstance()
 	if (!ProcessShellCommand(cmdInfo))
 		return FALSE;
 	// The main window has been initialized, so show and update it
-	pMainFrame->ShowWindow(SW_SHOWMAXIMIZED);
+	pMainFrame->ShowWindow(m_nCmdShow);
 	pMainFrame->UpdateWindow();
 
 	return TRUE;
 }
 
-int CJarvisIDEApp::ExitInstance()
+int CJarvisApp::ExitInstance()
 {
 	//TODO: handle additional resources you may have added
 	AfxOleTerm(FALSE);
@@ -166,7 +165,7 @@ int CJarvisIDEApp::ExitInstance()
 	return CWinAppEx::ExitInstance();
 }
 
-// CJarvisIDEApp message handlers
+// CJarvisApp message handlers
 
 
 // CAboutDlg dialog used for App About
@@ -202,15 +201,15 @@ BEGIN_MESSAGE_MAP(CAboutDlg, CDialogEx)
 END_MESSAGE_MAP()
 
 // App command to run the dialog
-void CJarvisIDEApp::OnAppAbout()
+void CJarvisApp::OnAppAbout()
 {
 	CAboutDlg aboutDlg;
 	aboutDlg.DoModal();
 }
 
-// CJarvisIDEApp customization load/save methods
+// CJarvisApp customization load/save methods
 
-void CJarvisIDEApp::PreLoadState()
+void CJarvisApp::PreLoadState()
 {
 	BOOL bNameValid;
 	CString strName;
@@ -222,15 +221,15 @@ void CJarvisIDEApp::PreLoadState()
 	GetContextMenuManager()->AddMenu(strName, IDR_POPUP_EXPLORER);
 }
 
-void CJarvisIDEApp::LoadCustomState()
+void CJarvisApp::LoadCustomState()
 {
 }
 
-void CJarvisIDEApp::SaveCustomState()
+void CJarvisApp::SaveCustomState()
 {
 }
 
-// CJarvisIDEApp message handlers
+// CJarvisApp message handlers
 
 
 

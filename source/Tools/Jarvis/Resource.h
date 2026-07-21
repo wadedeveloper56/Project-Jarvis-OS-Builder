@@ -1,6 +1,6 @@
 //{{NO_DEPENDENCIES}}
 // Microsoft Visual C++ generated include file.
-// Used by JarvisIDE.rc
+// Used by Jarvis.rc
 //
 #define IDD_ABOUTBOX				100
 #define IDP_OLE_INIT_FAILED			100
@@ -14,7 +14,7 @@
 #define ID_VIEW_CUSTOMIZE			126
 #define IDR_MAINFRAME				128
 #define IDR_MAINFRAME_256			129
-#define IDR_JarvisIDETYPE				130
+#define IDR_JarvisTYPE				130
 #define ID_WINDOW_MANAGER			131
 #define ID_VIEW_FILEVIEW			133
 #define ID_VIEW_CLASSVIEW			134
@@ -66,13 +66,6 @@
 #define IDR_OUTPUT_POPUP			182
 #define IDR_PROPERTIES				183
 #define IDB_PROPERTIES_HC			184
-#define ID_VIEW_NAVIGATION			185
-#define IDB_NAVIGATION_LARGE		186
-#define IDB_NAVIGATION_LARGE_HC		187
-#define IDB_PAGES					188
-#define IDB_PAGES_HC				189
-#define IDB_PAGES_SMALL				190
-#define IDB_PAGES_SMALL_HC			191
 #define IDR_THEME_MENU				200
 #define ID_SET_STYLE				201
 #define ID_VIEW_APPLOOK_WIN_2000	205
@@ -94,11 +87,6 @@
 #define IDS_CAPTION_TEXT			233
 #define IDS_CAPTION_IMAGE_TIP		234
 #define IDS_CAPTION_IMAGE_TEXT		235
-#define IDS_MYCALENDARS				250
-#define IDS_CALENDAR				251
-#define IDS_SHORTCUTS				252
-#define IDS_FOLDERS					253
-#define IDS_OUTLOOKBAR				258
 #define IDS_BUILD_TAB				300
 #define IDS_DEBUG_TAB				301
 #define IDS_FIND_TAB				302

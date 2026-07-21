@@ -20,9 +20,9 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>18.0</VCProjectVersion>
-    <ProjectGuid>{834C0EC8-AEC2-E4BA-DCE0-5C0C15F01593}</ProjectGuid>
+    <ProjectGuid>{EFE46822-EFFC-4A02-7B5A-B8559DCE2CA9}</ProjectGuid>
     <Keyword>MFCProj</Keyword>
-    <RootNamespace>JarvisIDE</RootNamespace>
+    <RootNamespace>Jarvis</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -31,7 +31,7 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v145</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
-    <UseOfMfc>Dynamic</UseOfMfc>
+    <UseOfMfc>Static</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -39,14 +39,14 @@
     <PlatformToolset>v145</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
-    <UseOfMfc>Dynamic</UseOfMfc>
+    <UseOfMfc>Static</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v145</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
-    <UseOfMfc>Dynamic</UseOfMfc>
+    <UseOfMfc>Static</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -54,7 +54,7 @@
     <PlatformToolset>v145</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
-    <UseOfMfc>Dynamic</UseOfMfc>
+    <UseOfMfc>Static</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -78,25 +78,21 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>..\..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\bin\intermediate\Jarvis\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>..\Arguments;..\PreProcessor;..\JWccLib;..\JWasmLib;..\JWlibLib;..\JWLinkLib;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>..\..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\bin\intermediate\Jarvis\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>..\Arguments;..\PreProcessor;..\JWccLib;..\JWasmLib;..\JWlibLib;..\JWLinkLib;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>..\..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\bin\intermediate\Jarvis\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>..\Arguments;..\PreProcessor;..\JWccLib;..\JWasmLib;..\JWlibLib;..\JWLinkLib;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>..\..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\bin\intermediate\Jarvis\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>..\Arguments;..\PreProcessor;..\JWccLib;..\JWasmLib;..\JWlibLib;..\JWLinkLib;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Manifest>
@@ -217,14 +213,13 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="calendarbar.h" />
     <ClInclude Include="ChildFrm.h" />
     <ClInclude Include="ClassView.h" />
     <ClInclude Include="FileView.h" />
     <ClInclude Include="framework.h" />
-    <ClInclude Include="JarvisIDE.h" />
-    <ClInclude Include="JarvisIDEDoc.h" />
-    <ClInclude Include="JarvisIDEView.h" />
+    <ClInclude Include="Jarvis.h" />
+    <ClInclude Include="JarvisDoc.h" />
+    <ClInclude Include="JarvisView.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="OutputWnd.h" />
     <ClInclude Include="pch.h" />
@@ -234,13 +229,12 @@
     <ClInclude Include="ViewTree.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="calendarbar.cpp" />
     <ClCompile Include="ChildFrm.cpp" />
     <ClCompile Include="ClassView.cpp" />
     <ClCompile Include="FileView.cpp" />
-    <ClCompile Include="JarvisIDE.cpp" />
-    <ClCompile Include="JarvisIDEDoc.cpp" />
-    <ClCompile Include="JarvisIDEView.cpp" />
+    <ClCompile Include="Jarvis.cpp" />
+    <ClCompile Include="JarvisDoc.cpp" />
+    <ClCompile Include="JarvisView.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="OutputWnd.cpp" />
     <ClCompile Include="pch.cpp">
@@ -253,11 +247,11 @@
     <ClCompile Include="ViewTree.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="JarvisIDE.reg" />
-    <None Include="res\JarvisIDE.rc2" />
+    <None Include="Jarvis.reg" />
+    <None Include="res\Jarvis.rc2" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="JarvisIDE.rc" />
+    <ResourceCompile Include="Jarvis.rc" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\classview.bmp" />
@@ -271,18 +265,12 @@
     <Image Include="res\file_view.ico" />
     <Image Include="res\file_view_hc.ico" />
     <Image Include="res\info.bmp" />
-    <Image Include="res\JarvisIDE.ico" />
-    <Image Include="res\JarvisIDEDoc.ico" />
+    <Image Include="res\Jarvis.ico" />
+    <Image Include="res\JarvisDoc.ico" />
     <Image Include="res\menuimages.bmp" />
     <Image Include="res\menuimages_hc.bmp" />
-    <Image Include="res\nav_large.bmp" />
-    <Image Include="res\nav_large_hc.bmp" />
     <Image Include="res\output_wnd.ico" />
     <Image Include="res\output_wnd_hc.ico" />
-    <Image Include="res\pages.bmp" />
-    <Image Include="res\pages_hc.bmp" />
-    <Image Include="res\pages_small.bmp" />
-    <Image Include="res\pages_small_hc.bmp" />
     <Image Include="res\properties.bmp" />
     <Image Include="res\properties_hc.bmp" />
     <Image Include="res\properties_wnd.ico" />
@@ -292,20 +280,6 @@
     <Image Include="res\Toolbar.bmp" />
     <Image Include="res\Toolbar256.bmp" />
     <Image Include="res\userimages.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Arguments\Arguments.vcxproj">
-      <Project>{9f695958-67a8-42be-884f-2f9d616e6ab5}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\JWasmLib\JWasmLib.vcxproj">
-      <Project>{fd8eeaf5-d96a-4978-9cb3-d573a9c0d4b1}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\JWccLib\JWccLib.vcxproj">
-      <Project>{55e11707-51c1-4126-9ce7-1d3ef7e9d7f0}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\PreProcessor2\PreProcessor2.vcxproj">
-      <Project>{ec832e55-a126-40da-b115-fc2973ae0f73}</Project>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

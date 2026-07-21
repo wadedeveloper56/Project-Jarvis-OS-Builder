@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="JarvisIDE.h">
+    <ClInclude Include="Jarvis.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="framework.h">
@@ -30,10 +30,10 @@
     <ClInclude Include="ChildFrm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="JarvisIDEDoc.h">
+    <ClInclude Include="JarvisDoc.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="JarvisIDEView.h">
+    <ClInclude Include="JarvisView.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Resource.h">
@@ -54,15 +54,12 @@
     <ClInclude Include="PropertiesWnd.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="calendarbar.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="JarvisIDE.cpp">
+    <ClCompile Include="Jarvis.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MainFrm.cpp">
@@ -71,10 +68,10 @@
     <ClCompile Include="ChildFrm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="JarvisIDEDoc.cpp">
+    <ClCompile Include="JarvisDoc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="JarvisIDEView.cpp">
+    <ClCompile Include="JarvisView.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="FileView.cpp">
@@ -92,21 +89,18 @@
     <ClCompile Include="PropertiesWnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="calendarbar.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="JarvisIDE.reg" />
-    <None Include="res\JarvisIDE.rc2">
+    <None Include="Jarvis.reg" />
+    <None Include="res\Jarvis.rc2">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="JarvisIDE.rc">
+    <ResourceCompile Include="Jarvis.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>
@@ -171,34 +165,16 @@
     <Image Include="res\properties_hc.bmp">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="res\nav_large.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\nav_large_hc.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\pages.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\pages_hc.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\pages_small.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\pages_small_hc.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="res\info.bmp">
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="res\userimages.bmp">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="res\JarvisIDEDoc.ico">
+    <Image Include="res\JarvisDoc.ico">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="res\JarvisIDE.ico">
+    <Image Include="res\Jarvis.ico">
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="res\Toolbar.bmp">

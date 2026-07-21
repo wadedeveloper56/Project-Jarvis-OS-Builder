@@ -4,7 +4,7 @@
 
 #include "pch.h"
 #include "framework.h"
-#include "JarvisIDE.h"
+#include "Jarvis.h"
 
 #include "ChildFrm.h"
 
@@ -36,6 +36,9 @@ BOOL CChildFrame::PreCreateWindow(CREATESTRUCT& cs)
 	// TODO: Modify the Window class or styles here by modifying the CREATESTRUCT cs
 	if( !CMDIChildWndEx::PreCreateWindow(cs) )
 		return FALSE;
+
+	cs.style = WS_CHILD | WS_VISIBLE | WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU
+		| FWS_ADDTOTITLE | WS_THICKFRAME;
 
 	return TRUE;
 }

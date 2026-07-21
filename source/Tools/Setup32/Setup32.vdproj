@@ -579,13 +579,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_8695D099479E445C934B947FB1C1851A"
+        "MsmKey" = "8:_87F7EA20C3064718B87ADC8A93C4E408"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_87F7EA20C3064718B87ADC8A93C4E408"
+        "MsmKey" = "8:_89C482CD0124423FB9903955D3802A70"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -2972,12 +2972,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8695D099479E445C934B947FB1C1851A"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_87F7EA20C3064718B87ADC8A93C4E408"
             {
-            "SourcePath" = "8:..\\..\\..\\bin\\tools\\Release\\Win32\\JarvisIDE.exe"
-            "TargetName" = "8:JarvisIDE.exe"
+            "SourcePath" = "8:..\\..\\..\\..\\maint\\dosbox-x\\bin\\Win32\\Release\\shaders\\SimpleAA.fx"
+            "TargetName" = "8:SimpleAA.fx"
             "Tag" = "8:"
-            "Folder" = "8:_44B58A22641D4E53B8EDA25B23219C85"
+            "Folder" = "8:_9D644D603B254A62B38E8EF6234124DB"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -2992,12 +2992,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_87F7EA20C3064718B87ADC8A93C4E408"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_89C482CD0124423FB9903955D3802A70"
             {
-            "SourcePath" = "8:..\\..\\..\\..\\maint\\dosbox-x\\bin\\Win32\\Release\\shaders\\SimpleAA.fx"
-            "TargetName" = "8:SimpleAA.fx"
+            "SourcePath" = "8:..\\..\\..\\bin\\tools\\Release\\Win32\\Jarvis.exe"
+            "TargetName" = "8:Jarvis.exe"
             "Tag" = "8:"
-            "Folder" = "8:_9D644D603B254A62B38E8EF6234124DB"
+            "Folder" = "8:_44B58A22641D4E53B8EDA25B23219C85"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -4586,34 +4586,6 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_AF896236D841409CB09CA1AFB90B0B80"
-            {
-            "Name" = "8:Shortcut to %sJarvisIDE.exe"
-            "Arguments" = "8:"
-            "Description" = "8:"
-            "ShowCmd" = "3:1"
-            "IconIndex" = "3:0"
-            "Transitive" = "11:FALSE"
-            "Target" = "8:_8695D099479E445C934B947FB1C1851A"
-            "Folder" = "8:_991DFFECF2394747A33897506139A539"
-            "WorkingFolder" = "8:_963520E974834ABAB7588DA948F0BB46"
-            "Icon" = "8:"
-            "Feature" = "8:"
-            }
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_BBFFE67CC723402D9873AF0FC80FB12D"
-            {
-            "Name" = "8:JarvisIDE.exe"
-            "Arguments" = "8:"
-            "Description" = "8:"
-            "ShowCmd" = "3:1"
-            "IconIndex" = "3:0"
-            "Transitive" = "11:FALSE"
-            "Target" = "8:_8695D099479E445C934B947FB1C1851A"
-            "Folder" = "8:_37F7136CBAA9452C8FB5850447DFDBBB"
-            "WorkingFolder" = "8:_44B58A22641D4E53B8EDA25B23219C85"
-            "Icon" = "8:"
-            "Feature" = "8:"
-            }
         }
         "UserInterface"
         {

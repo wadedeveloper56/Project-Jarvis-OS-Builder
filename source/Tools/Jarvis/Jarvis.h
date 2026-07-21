@@ -1,5 +1,5 @@
 
-// JarvisIDE.h : main header file for the JarvisIDE application
+// Jarvis.h : main header file for the Jarvis application
 //
 #pragma once
 
@@ -10,14 +10,14 @@
 #include "resource.h"       // main symbols
 
 
-// CJarvisIDEApp:
-// See JarvisIDE.cpp for the implementation of this class
+// CJarvisApp:
+// See Jarvis.cpp for the implementation of this class
 //
 
-class CJarvisIDEApp : public CWinAppEx
+class CJarvisApp : public CWinAppEx
 {
 public:
-	CJarvisIDEApp() noexcept;
+	CJarvisApp() noexcept;
 
 
 // Overrides
@@ -37,4 +37,4 @@ public:
 	DECLARE_MESSAGE_MAP()
 };
 
-extern CJarvisIDEApp theApp;
+extern CJarvisApp theApp;

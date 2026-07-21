@@ -1,19 +1,19 @@
 
-// JarvisIDEView.h : interface of the CJarvisIDEView class
+// JarvisView.h : interface of the CJarvisView class
 //
 
 #pragma once
 
 
-class CJarvisIDEView : public CView
+class CJarvisView : public CView
 {
 protected: // create from serialization only
-	CJarvisIDEView() noexcept;
-	DECLARE_DYNCREATE(CJarvisIDEView)
+	CJarvisView() noexcept;
+	DECLARE_DYNCREATE(CJarvisView)
 
 // Attributes
 public:
-	CJarvisIDEDoc* GetDocument() const;
+	CJarvisDoc* GetDocument() const;
 
 // Operations
 public:
@@ -29,7 +29,7 @@ protected:
 
 // Implementation
 public:
-	virtual ~CJarvisIDEView();
+	virtual ~CJarvisView();
 #ifdef _DEBUG
 	virtual void AssertValid() const;
 	virtual void Dump(CDumpContext& dc) const;
@@ -45,8 +45,8 @@ protected:
 	DECLARE_MESSAGE_MAP()
 };
 
-#ifndef _DEBUG  // debug version in JarvisIDEView.cpp
-inline CJarvisIDEDoc* CJarvisIDEView::GetDocument() const
-   { return reinterpret_cast<CJarvisIDEDoc*>(m_pDocument); }
+#ifndef _DEBUG  // debug version in JarvisView.cpp
+inline CJarvisDoc* CJarvisView::GetDocument() const
+   { return reinterpret_cast<CJarvisDoc*>(m_pDocument); }
 #endif
 

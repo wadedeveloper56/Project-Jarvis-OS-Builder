@@ -1,5 +1,5 @@
 
-// JarvisIDEDoc.cpp : implementation of the CJarvisIDEDoc class
+// JarvisDoc.cpp : implementation of the CJarvisDoc class
 //
 
 #include "pch.h"
@@ -7,10 +7,10 @@
 // SHARED_HANDLERS can be defined in an ATL project implementing preview, thumbnail
 // and search filter handlers and allows sharing of document code with that project.
 #ifndef SHARED_HANDLERS
-#include "JarvisIDE.h"
+#include "Jarvis.h"
 #endif
 
-#include "JarvisIDEDoc.h"
+#include "JarvisDoc.h"
 
 #include <propkey.h>
 
@@ -18,27 +18,27 @@
 #define new DEBUG_NEW
 #endif
 
-// CJarvisIDEDoc
+// CJarvisDoc
 
-IMPLEMENT_DYNCREATE(CJarvisIDEDoc, CDocument)
+IMPLEMENT_DYNCREATE(CJarvisDoc, CDocument)
 
-BEGIN_MESSAGE_MAP(CJarvisIDEDoc, CDocument)
+BEGIN_MESSAGE_MAP(CJarvisDoc, CDocument)
 END_MESSAGE_MAP()
 
 
-// CJarvisIDEDoc construction/destruction
+// CJarvisDoc construction/destruction
 
-CJarvisIDEDoc::CJarvisIDEDoc() noexcept
+CJarvisDoc::CJarvisDoc() noexcept
 {
 	// TODO: add one-time construction code here
 
 }
 
-CJarvisIDEDoc::~CJarvisIDEDoc()
+CJarvisDoc::~CJarvisDoc()
 {
 }
 
-BOOL CJarvisIDEDoc::OnNewDocument()
+BOOL CJarvisDoc::OnNewDocument()
 {
 	if (!CDocument::OnNewDocument())
 		return FALSE;
@@ -52,9 +52,9 @@ BOOL CJarvisIDEDoc::OnNewDocument()
 
 
 
-// CJarvisIDEDoc serialization
+// CJarvisDoc serialization
 
-void CJarvisIDEDoc::Serialize(CArchive& ar)
+void CJarvisDoc::Serialize(CArchive& ar)
 {
 	if (ar.IsStoring())
 	{
@@ -69,7 +69,7 @@ void CJarvisIDEDoc::Serialize(CArchive& ar)
 #ifdef SHARED_HANDLERS
 
 // Support for thumbnails
-void CJarvisIDEDoc::OnDrawThumbnail(CDC& dc, LPRECT lprcBounds)
+void CJarvisDoc::OnDrawThumbnail(CDC& dc, LPRECT lprcBounds)
 {
 	// Modify this code to draw the document's data
 	dc.FillSolidRect(lprcBounds, RGB(255, 255, 255));
@@ -90,7 +90,7 @@ void CJarvisIDEDoc::OnDrawThumbnail(CDC& dc, LPRECT lprcBounds)
 }
 
 // Support for Search Handlers
-void CJarvisIDEDoc::InitializeSearchContent()
+void CJarvisDoc::InitializeSearchContent()
 {
 	CString strSearchContent;
 	// Set search contents from document's data.
@@ -100,7 +100,7 @@ void CJarvisIDEDoc::InitializeSearchContent()
 	SetSearchContent(strSearchContent);
 }
 
-void CJarvisIDEDoc::SetSearchContent(const CString& value)
+void CJarvisDoc::SetSearchContent(const CString& value)
 {
 	if (value.IsEmpty())
 	{
@@ -120,19 +120,19 @@ void CJarvisIDEDoc::SetSearchContent(const CString& value)
 
 #endif // SHARED_HANDLERS
 
-// CJarvisIDEDoc diagnostics
+// CJarvisDoc diagnostics
 
 #ifdef _DEBUG
-void CJarvisIDEDoc::AssertValid() const
+void CJarvisDoc::AssertValid() const
 {
 	CDocument::AssertValid();
 }
 
-void CJarvisIDEDoc::Dump(CDumpContext& dc) const
+void CJarvisDoc::Dump(CDumpContext& dc) const
 {
 	CDocument::Dump(dc);
 }
 #endif //_DEBUG
 
 
-// CJarvisIDEDoc commands
+// CJarvisDoc commands

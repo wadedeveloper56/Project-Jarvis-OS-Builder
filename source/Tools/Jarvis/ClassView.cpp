@@ -4,7 +4,7 @@
 #include "MainFrm.h"
 #include "ClassView.h"
 #include "Resource.h"
-#include "JarvisIDE.h"
+#include "Jarvis.h"
 
 class CClassViewMenuButton : public CMFCToolBarMenuButton
 {

@@ -1,16 +1,16 @@
 
-// JarvisIDEDoc.h : interface of the CJarvisIDEDoc class
+// JarvisDoc.h : interface of the CJarvisDoc class
 //
 
 
 #pragma once
 
 
-class CJarvisIDEDoc : public CDocument
+class CJarvisDoc : public CDocument
 {
 protected: // create from serialization only
-	CJarvisIDEDoc() noexcept;
-	DECLARE_DYNCREATE(CJarvisIDEDoc)
+	CJarvisDoc() noexcept;
+	DECLARE_DYNCREATE(CJarvisDoc)
 
 // Attributes
 public:
@@ -29,7 +29,7 @@ public:
 
 // Implementation
 public:
-	virtual ~CJarvisIDEDoc();
+	virtual ~CJarvisDoc();
 #ifdef _DEBUG
 	virtual void AssertValid() const;
 	virtual void Dump(CDumpContext& dc) const;

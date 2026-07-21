@@ -195,12 +195,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_2C4E1AED5B6242828C74A2DAD296C6A9"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_2F931A5BB5F141B49C456E82D02CA1A6"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -232,6 +226,12 @@
         "Entry"
         {
         "MsmKey" = "8:_340E7DCCC853454495CE5FBA3ECA3569"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_34FD432B0128460684AEAC82D7662B63"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1672,26 +1672,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2C4E1AED5B6242828C74A2DAD296C6A9"
-            {
-            "SourcePath" = "8:..\\..\\..\\bin\\tools\\Release\\x64\\JarvisIDE.exe"
-            "TargetName" = "8:JarvisIDE.exe"
-            "Tag" = "8:"
-            "Folder" = "8:_FBF4D65AB3EF4944B0A8AA498E631C64"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2F931A5BB5F141B49C456E82D02CA1A6"
             {
             "SourcePath" = "8:..\\..\\..\\..\\maint\\dosbox-x\\bin\\x64\\Release\\glshaders\\crt-geom.tweaked.glsl"
@@ -1798,6 +1778,26 @@
             "TargetName" = "8:pt_BR.lng"
             "Tag" = "8:"
             "Folder" = "8:_248788F6BDE6407D998E091F17092AA6"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_34FD432B0128460684AEAC82D7662B63"
+            {
+            "SourcePath" = "8:..\\..\\..\\bin\\tools\\Release\\x64\\Jarvis.exe"
+            "TargetName" = "8:Jarvis.exe"
+            "Tag" = "8:"
+            "Folder" = "8:_FBF4D65AB3EF4944B0A8AA498E631C64"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -4566,34 +4566,6 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_F22080DB81E0476AB034652494244B88"
-            {
-            "Name" = "8:JarvisIDE.exe"
-            "Arguments" = "8:"
-            "Description" = "8:"
-            "ShowCmd" = "3:1"
-            "IconIndex" = "3:0"
-            "Transitive" = "11:FALSE"
-            "Target" = "8:_2C4E1AED5B6242828C74A2DAD296C6A9"
-            "Folder" = "8:_CB2FD7A5A2DF44728ACA3E9930AAD500"
-            "WorkingFolder" = "8:_FBF4D65AB3EF4944B0A8AA498E631C64"
-            "Icon" = "8:"
-            "Feature" = "8:"
-            }
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_F80A8384BA9B4AAB9D3B73875CF56DB4"
-            {
-            "Name" = "8:Shortcut to %sJarvisIDE.exe"
-            "Arguments" = "8:"
-            "Description" = "8:"
-            "ShowCmd" = "3:1"
-            "IconIndex" = "3:0"
-            "Transitive" = "11:FALSE"
-            "Target" = "8:_2C4E1AED5B6242828C74A2DAD296C6A9"
-            "Folder" = "8:_B652F75171F9490CBCD29A599F762C38"
-            "WorkingFolder" = "8:_CACF7309DAFF4ABF97B79E24B8F853DD"
-            "Icon" = "8:"
-            "Feature" = "8:"
-            }
         }
         "UserInterface"
         {
