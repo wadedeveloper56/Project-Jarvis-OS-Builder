@@ -75,27 +75,27 @@ ret_code LoopDirective( int i, struct asm_tok tokenarray[] )
          * v2.02: And it can begin with a '.'!
          */
         if( tokenarray[i].token == T_FINAL ) {
-            return( EmitErr( SYNTAX_ERROR_EX, tokenarray[i-1].tokpos ) );
+            return( (ret_code)EmitErr( SYNTAX_ERROR_EX, tokenarray[i-1].tokpos ) );
         }
         /* v2.02: allow parameter name to begin with a '.' */
         //c = *tokenarray[i].string_ptr;
         //if( ( is_valid_id_char(c) == FALSE ) || ( isdigit(c) == TRUE ) ) {
         if( is_valid_id_first_char( *tokenarray[i].string_ptr ) == FALSE ) {
             DebugMsg(( "LoopDirective(FOR/FORC): token %s is not a valid parameter name\n", tokenarray[i].string_ptr ));
-            return( EmitErr( SYNTAX_ERROR_EX, tokenarray[i].tokpos ) );
+            return( (ret_code)EmitErr( SYNTAX_ERROR_EX, tokenarray[i].tokpos ) );
         }
         arg_loc = i;
         i++;
 
         if( directive == T_FORC || directive == T_IRPC ) {
             if( tokenarray[i].token != T_COMMA ) {
-                return( EmitErr( EXPECTING_COMMA, tokenarray[i].tokpos ) );
+                return( (ret_code)EmitErr( EXPECTING_COMMA, tokenarray[i].tokpos ) );
             }
             i++;
             /* FORC/IRPC accepts anything as "argument list", even nothing! */
             if( tokenarray[i].token == T_STRING && tokenarray[i].string_delim == '<' ) {
                 len = tokenarray[i+1].tokpos - (tokenarray[i].tokpos+1);
-                parmstring = myalloca( len );
+                parmstring = (char *)myalloca( len );
                 //GetLiteralValue( parmstring, tokenarray[i].string_ptr );
                 memcpy( parmstring, tokenarray[i].tokpos+1, len );
                 while( *(parmstring+len-1) != '>' ) len--;
@@ -115,7 +115,7 @@ ret_code LoopDirective( int i, struct asm_tok tokenarray[] )
                 while ( *ptr2 && ( isspace( *ptr2 ) == FALSE ) )
                     ptr2++;
                 len = ptr2 - ptr;
-                parmstring = myalloca( len + 1 );
+                parmstring = (char *)myalloca( len + 1 );
                 memcpy( parmstring, ptr, len );
                 *(parmstring+len) = NULLC;
             }
@@ -129,16 +129,16 @@ ret_code LoopDirective( int i, struct asm_tok tokenarray[] )
             while ( tokenarray[i].token != T_FINAL && tokenarray[i].token != T_COMMA )
                 i++;
             if( tokenarray[i].token != T_COMMA ) {
-                return( EmitErr( EXPECTING_COMMA, tokenarray[i].tokpos ) );
+                return( (ret_code)EmitErr( EXPECTING_COMMA, tokenarray[i].tokpos ) );
             }
             i++;
             /* FOR/IRP accepts a literal enclosed in <> only */
             if( tokenarray[i].token != T_STRING || tokenarray[i].string_delim != '<' ) {
-                return( EmitErr( SYNTAX_ERROR_EX, tokenarray[i].tokpos ) );
+                return( (ret_code)EmitErr( SYNTAX_ERROR_EX, tokenarray[i].tokpos ) );
             }
             /* v2.03: also ensure that the literal is the last item */
             if( tokenarray[i+1].token != T_FINAL ) {
-                return( EmitErr( SYNTAX_ERROR_EX, tokenarray[i+1].tokpos ) );
+                return( (ret_code)EmitErr( SYNTAX_ERROR_EX, tokenarray[i+1].tokpos ) );
             }
             /* v2.08: use myalloca() instead of a fixed-length buffer.
              * the loop directives are often nested, they call RunMacro()

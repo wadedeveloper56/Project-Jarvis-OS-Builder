@@ -137,16 +137,16 @@ static int ow_decorate( const struct asym *sym, char *buffer )
     enum changes        changes = NORMAL;
 
     if( sym->isproc ) {
-        changes |= USCORE_BACK;
+        DO_OR_EQ(enum changes, changes, |=, USCORE_BACK);
     } else {
         switch( sym->mem_type ) {
         case MT_NEAR:
         case MT_FAR:
         case MT_EMPTY:
-            changes |= USCORE_BACK;
+            DO_OR_EQ(enum changes, changes, |=, USCORE_BACK);
             break;
         default:
-            changes |= USCORE_FRONT;
+            DO_OR_EQ(enum changes, changes, |=, USCORE_FRONT);
         }
     }
 
@@ -256,7 +256,7 @@ void SetMangler( struct asym *sym, int langtype, const char *mangle_type )
 #endif
 
     if( langtype != LANG_NONE )
-        sym->langtype = langtype;
+        sym->langtype = (lang_type)langtype;
 
 #if MANGLERSUPP
     mangler = GetMangler( mangle_type );

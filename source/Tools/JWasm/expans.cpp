@@ -40,7 +40,7 @@ extern char *GetMacroLine( struct macro_instance *, char * );
 int           MacroLocals;     /* counter for LOCAL names */
 uint_8        MacroLevel;      /* current macro nesting level */
 
-static const char __digits[16] = {"0123456789ABCDEF"};
+static const char __digits[16] = {'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
 
 static ret_code ExpandTMacro( char * const, struct asm_tok tokenarray[], int equmode, int level );
 
@@ -980,7 +980,7 @@ static ret_code ExpandTMacro( char * const outbuf, struct asm_tok tokenarray[], 
     DebugMsg1(("ExpandTMacro(text=>%s< equm=%u lvl=%u) enter\n", outbuf, equmode, level ));
 
     if ( level >= MAX_TEXTMACRO_NESTING ) {
-        return( EmitError( MACRO_NESTING_LEVEL_TOO_DEEP ) );
+        return( (ret_code)EmitError( MACRO_NESTING_LEVEL_TOO_DEEP ) );
     }
 
     while ( expanded == TRUE ) {
@@ -1064,7 +1064,7 @@ static ret_code RebuildLine( const char *newstring, int i, struct asm_tok tokena
     }
     if ( newlen > oldlen )
         if ( ( pos_line + newlen - oldlen + rest ) >= MAX_LINE_LEN ) {
-            return( EmitErr( EXPANDED_LINE_TOO_LONG, tokenarray[0].tokpos ) );
+            return( (ret_code)EmitErr( EXPANDED_LINE_TOO_LONG, tokenarray[0].tokpos ) );
         }
 
     if ( addbrackets ) {
@@ -1513,7 +1513,7 @@ ret_code ExpandLine( char *string, struct asm_tok tokenarray[] )
                 bracket_flags = bracket_flags >> 1;
             tmp = ExpandToken( string, &count, tokenarray, Token_Count, addbrackets, FALSE );
             if( tmp < NOT_ERROR ) /* ERROR or EMPTY? */
-                return( tmp );
+                return( (ret_code)tmp );
             if ( tmp == STRING_EXPANDED )
                 rc = STRING_EXPANDED;
             if ( tokenarray[count].token == T_COMMA )
@@ -1526,9 +1526,9 @@ ret_code ExpandLine( char *string, struct asm_tok tokenarray[] )
             break;
     } /* end for() */
     if ( lvl == MAX_TEXTMACRO_NESTING ) {
-        return( EmitError( MACRO_NESTING_LEVEL_TOO_DEEP ) );
+        return( (ret_code)EmitError( MACRO_NESTING_LEVEL_TOO_DEEP ) );
     }
     DebugMsg1(( "ExpandLine(>%s<) exit, rc=%u, token_count=%u\n", string, rc, Token_Count ));
-    return( rc );
+    return( (ret_code)rc );
 }
 

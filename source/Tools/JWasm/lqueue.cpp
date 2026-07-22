@@ -43,8 +43,8 @@ void DeleteLineQueue( void )
 {
     struct qitem *curr;
     struct qitem *next;
-    for( curr = line_queue.head; curr; curr = next ) {
-        next = curr->next;
+    for( curr = (struct qitem *)line_queue.head; curr; curr = next ) {
+        next = (struct qitem *)curr->next;
         MemFree( curr );
     }
     line_queue.head = NULL;
@@ -65,7 +65,7 @@ void AddLineQueue( const char *line )
 /***********************************/
 {
     unsigned i = strlen( line );
-    struct lq_line   *new;
+    struct lq_line   *new1;
 
     DebugMsg1(( "AddLineQueue(%p): #=%u >%s<\n", line, ++lqlines_written, line ));
 
@@ -74,18 +74,18 @@ void AddLineQueue( const char *line )
     //    line_queue = MemAlloc( sizeof( struct input_queue ) );
     //    line_queue->tail = NULL;
     //}
-    new = MemAlloc( sizeof( struct lq_line ) + i );
-    new->next = NULL;
-    DebugCmd( new->lineno = lqlines_written );
-    memcpy( new->line, line, i + 1 );
+    new1 = (struct lq_line *)MemAlloc( sizeof( struct lq_line ) + i );
+    new1->next = NULL;
+    DebugCmd( new1->lineno = lqlines_written );
+    memcpy( new1->line, line, i + 1 );
 
     if( line_queue.head == NULL ) {
-        line_queue.head = new;
+        line_queue.head = new1;
     } else {
         /* insert at the tail */
-        ((struct qnode *)line_queue.tail)->next = new;
+        ((struct qnode *)line_queue.tail)->next = new1;
     }
-    line_queue.tail = new;
+    line_queue.tail = new1;
     return;
 }
 
@@ -166,7 +166,7 @@ void RunLineQueue( void )
 {
     struct input_status oldstat;
     struct asm_tok *tokenarray;
-    struct lq_line *currline = line_queue.head;
+    struct lq_line *currline = (struct lq_line *)line_queue.head;
 
     DebugMsg1(( "RunLineQueue() enter\n" ));
 

@@ -79,7 +79,7 @@ void StoreLine( const char *srcline, int flags, uint_32 lst_position )
 
     i = strlen( srcline );
     j = ( ( ( flags & 1 ) && ModuleInfo.CurrComment ) ? strlen( ModuleInfo.CurrComment ) : 0 );
-    LineStoreCurr = LclAlloc( i + j + sizeof( struct line_item ) );
+    LineStoreCurr = (struct line_item *)LclAlloc( i + j + sizeof( struct line_item ) );
     LineStoreCurr->next = NULL;
     LineStoreCurr->lineno = GetLineNumber();
     if ( MacroLevel ) {
@@ -141,7 +141,7 @@ void SaveVariableState( struct asym *sym )
 
     DebugMsg1(( "SaveVariableState(%s)=%d\n", sym->name, sym->value ));
     sym->issaved = TRUE; /* don't try to save this symbol (anymore) */
-    p = LclAlloc( sizeof( struct equ_item ) );
+    p = (struct equ_item *)LclAlloc( sizeof( struct equ_item ) );
     p->next = NULL;
     p->sym = sym;
     p->lvalue    = sym->value;

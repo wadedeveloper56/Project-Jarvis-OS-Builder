@@ -80,7 +80,7 @@ static void SetValue( struct asym *sym, struct expr *opndx )
          * which is a bad idea in this case. So the original mem_type of the
          * label is used instead.
          */
-        if ( opndx->sym->mem_type == MT_TYPE && opndx->explicit == FALSE ) {
+        if ( opndx->sym->mem_type == MT_TYPE && opndx->explicit1 == FALSE ) {
             sym->mem_type = opndx->sym->mem_type;
             sym->type = opndx->sym->type;
         }
@@ -257,7 +257,7 @@ ret_code EqualSgnDirective( int i, struct asm_tok tokenarray[] )
     struct asym *sym;
 
     if( tokenarray[0].token != T_ID ) {
-        return( EmitErr( SYNTAX_ERROR_EX, tokenarray[0].string_ptr ) );
+        return( (ret_code)EmitErr( SYNTAX_ERROR_EX, tokenarray[0].string_ptr ) );
     }
     if ( (sym = CreateAssemblyTimeVariable( tokenarray )) != NULL ) {
         if ( ModuleInfo.list == TRUE ) {
@@ -386,7 +386,7 @@ struct asym *CreateConstant( struct asm_tok tokenarray[] )
          */
         myatoi128( tokenarray[2].string_ptr, &opnd.llvalue, tokenarray[2].numbase, tokenarray[2].itemlen );
     check_single_number:
-        opnd.instr = EMPTY;
+        opnd.instr = (special_token)EMPTY;
         opnd.kind = EXPR_CONST;
         opnd.mem_type = MT_EMPTY; /* v2.07: added */
         opnd.flags1 = 0;
@@ -508,7 +508,7 @@ ret_code EquDirective( int i, struct asm_tok tokenarray[] )
     struct asym *sym;
 
     if( tokenarray[0].token != T_ID ) {
-        return( EmitErr( SYNTAX_ERROR_EX, tokenarray[0].string_ptr ) );
+        return( (ret_code)EmitErr( SYNTAX_ERROR_EX, tokenarray[0].string_ptr ) );
     }
     DebugMsg1(("EquDirective(%s): calling CreateConstant\n", tokenarray[0].string_ptr ));
     if ( (sym = CreateConstant( tokenarray )) != NULL ) {

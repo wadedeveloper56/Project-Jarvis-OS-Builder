@@ -216,7 +216,7 @@ static uint_32 set_symtab32( struct elfmod *em, uint_32 entries, struct localnam
 
     /* 3. locals */
 
-    for ( localscurr = localshead ; localscurr ; localscurr = localscurr->next ) {
+    for ( localscurr = localshead ; localscurr ; localscurr = (struct localname *)localscurr->next ) {
         len = Mangle( localscurr->sym, buffer );
         p32->st_name = strsize;
         curr = (struct dsym *)localscurr->sym->segment;
@@ -295,7 +295,7 @@ static uint_32 set_symtab32( struct elfmod *em, uint_32 entries, struct localnam
 #endif
 
     /* 6. PUBLIC entries */
-    for ( q = ModuleInfo.g.PubQueue.head; q; q = q->next ) {
+    for ( q = (struct qnode *)ModuleInfo.g.PubQueue.head; q; q = (struct qnode *)q->next ) {
         sym = q->sym;
         len = Mangle( sym, buffer );
 
@@ -398,7 +398,7 @@ static uint_32 set_symtab64( struct elfmod *em, uint_32 entries, struct localnam
 
     /* 3. locals */
 
-    for ( localscurr = localshead ; localscurr ; localscurr = localscurr->next ) {
+    for ( localscurr = localshead ; localscurr ; localscurr = (struct localname *)localscurr->next ) {
         len = Mangle( localscurr->sym, buffer );
         p64->st_name = strsize;
         curr = (struct dsym *)localscurr->sym->segment;
@@ -478,7 +478,7 @@ static uint_32 set_symtab64( struct elfmod *em, uint_32 entries, struct localnam
 #endif
 
     /* 6. PUBLIC entries */
-    for ( q = ModuleInfo.g.PubQueue.head; q; q = q->next ) {
+    for ( q = (struct qnode *)ModuleInfo.g.PubQueue.head; q; q = (struct qnode *)q->next ) {
         sym = q->sym;
         len = Mangle( sym, buffer );
 
@@ -576,7 +576,7 @@ static void set_symtab_values( struct elfmod *em )
                     fix->sym->included == FALSE &&
                     fix->sym->ispublic == FALSE ) {
                     fix->sym->included = TRUE;
-                    localscurr = LclAlloc( sizeof( struct localname ) );
+                    localscurr = (struct localname *)LclAlloc( sizeof( struct localname ) );
                     localscurr->next = NULL;
                     localscurr->sym = fix->sym;
                     if (locals.tail) {
@@ -610,7 +610,7 @@ static void set_symtab_values( struct elfmod *em )
 #endif
 
     /* count publics */
-    for ( q = ModuleInfo.g.PubQueue.head; q; q = q->next ) {
+    for ( q = (struct qnode *)ModuleInfo.g.PubQueue.head; q; q = (struct qnode *)q->next ) {
         q->sym->ext_idx = em->symindex++;
     }
     DebugMsg(("set_symtab_values: index after PUBLICs: %u\n", em->symindex));
@@ -636,17 +636,17 @@ static void set_symtab_values( struct elfmod *em )
     em->internal_segs[STRTAB_IDX].size = strsize;
     em->internal_segs[STRTAB_IDX].data = LclAlloc( strsize );
     memset( em->internal_segs[STRTAB_IDX].data, 0, strsize );
-    p2 = em->internal_segs[STRTAB_IDX].data;
+    p2 = (char *)em->internal_segs[STRTAB_IDX].data;
     *p2++ = NULLC;
 
     strcpy( p2, em->srcname );
     p2 += strlen( p2 ) + 1;
 
-    for ( localscurr = locals.head ; localscurr ; localscurr = localscurr->next ) {
+    for ( localscurr = locals.head ; localscurr ; localscurr = (struct localname *)localscurr->next ) {
         p2 += Mangle( localscurr->sym, p2 ) + 1;
     }
 
-    for( curr = SymTables[TAB_EXT].head ; curr != NULL ;curr = curr->next ) {
+    for( curr = SymTables[TAB_EXT].head ; curr != NULL ;curr = (struct dsym *)curr->next ) {
         if ( curr->sym.iscomm == FALSE && curr->sym.weak == TRUE )
             continue;
         p2 += Mangle( &curr->sym, p2 ) + 1;
@@ -658,7 +658,7 @@ static void set_symtab_values( struct elfmod *em )
     }
 #endif
 
-    for ( q = ModuleInfo.g.PubQueue.head; q; q = q->next ) {
+    for ( q = (struct qnode *)ModuleInfo.g.PubQueue.head; q; q = (struct qnode *)q->next ) {
         p2 += Mangle( q->sym, p2 ) + 1;
     }
 #if ADDSTARTLABEL

@@ -93,7 +93,7 @@ static void init_expr( struct expr *opnd )
     opnd->idx_reg  = NULL;
     opnd->label_tok = NULL;
     opnd->override = NULL;
-    opnd->instr    = EMPTY;
+    opnd->instr    = (special_token)EMPTY;
     opnd->kind     = EXPR_EMPTY;
     opnd->mem_type = MT_EMPTY;
     opnd->scale    = 0;
@@ -399,7 +399,7 @@ static ret_code get_operand( struct expr *opnd, int *idx, struct asm_tok tokenar
                 opnd->kind = EXPR_ERROR;
                 fnEmitErr( INSTRUCTION_OR_REGISTER_NOT_ACCEPTED_IN_CURRENT_CPU_MODE );
             } else
-                return( fnEmitErr( INSTRUCTION_OR_REGISTER_NOT_ACCEPTED_IN_CURRENT_CPU_MODE ) );
+                return( (ret_code)fnEmitErr( INSTRUCTION_OR_REGISTER_NOT_ACCEPTED_IN_CURRENT_CPU_MODE ) );
         }
 
         if( flags & EXPF_IN_SQBR ) {
@@ -418,13 +418,13 @@ static ret_code get_operand( struct expr *opnd, int *idx, struct asm_tok tokenar
                 //if( tokenarray[i+1].token != T_COLON ) {
                 if( tokenarray[i+1].token != T_COLON ||
                    ( Options.strict_masm_compat && tokenarray[i+2].token == T_REG ) ) {
-                    return( fnEmitErr( INVALID_USE_OF_REGISTER ) );
+                    return( (ret_code)fnEmitErr( INVALID_USE_OF_REGISTER ) );
                 }
             } else {
                 if ( opnd->is_opattr ) /* v2.11: just set error for opattr */
                     opnd->kind = EXPR_ERROR;
                 else
-                    return( fnEmitErr( MUST_BE_INDEX_OR_BASE_REGISTER ) );
+                    return( (ret_code)fnEmitErr( MUST_BE_INDEX_OR_BASE_REGISTER ) );
             }
         }
         break;
@@ -715,7 +715,7 @@ static ret_code get_operand( struct expr *opnd, int *idx, struct asm_tok tokenar
         opnd->kind = EXPR_CONST;
         /* for types, return the size as numeric constant */
         /* fixme: mem_type should be set only when used as first arg of PTR op! */
-        opnd->mem_type = GetMemtypeSp( tokenarray[i].tokval );
+        opnd->mem_type = (memtype)GetMemtypeSp( tokenarray[i].tokval );
         opnd->Ofssize = GetSflagsSp( tokenarray[i].tokval );
         opnd->value = GetTypeSize( opnd->mem_type, opnd->Ofssize );
         opnd->is_type = TRUE;
@@ -741,7 +741,7 @@ static ret_code get_operand( struct expr *opnd, int *idx, struct asm_tok tokenar
             opnd->kind = EXPR_ADDR;
 
         } else {
-            return( fnEmitErr( SYNTAX_ERROR_EX, tokenarray[i].string_ptr ) );
+            return( (ret_code)fnEmitErr( SYNTAX_ERROR_EX, tokenarray[i].string_ptr ) );
         }
         break;
     case T_FLOAT: /* v2.05 */
@@ -824,7 +824,7 @@ static ret_code index_connect( struct expr *opnd1, const struct expr *opnd2 )
                 opnd1->idx_reg = opnd2->base_reg;
             }
         } else {
-            return( fnEmitErr( MULTIPLE_INDEX_REGISTERS_NOT_ALLOWED ) );
+            return( (ret_code)fnEmitErr( MULTIPLE_INDEX_REGISTERS_NOT_ALLOWED ) );
         }
         opnd1->indirect = TRUE;
     }
@@ -837,7 +837,7 @@ static ret_code index_connect( struct expr *opnd1, const struct expr *opnd2 )
             opnd1->idx_reg = opnd2->idx_reg;
             opnd1->scale = opnd2->scale;
         } else {
-            return( fnEmitErr( MULTIPLE_INDEX_REGISTERS_NOT_ALLOWED ) );
+            return( (ret_code)fnEmitErr( MULTIPLE_INDEX_REGISTERS_NOT_ALLOWED ) );
         }
         opnd1->indirect = TRUE;
     }
@@ -894,10 +894,10 @@ static void MakeConst( struct expr *opnd )
 #endif
     if( opnd->override != NULL )
         return;
-    opnd->instr = EMPTY;
+    opnd->instr = (special_token)EMPTY;
     opnd->kind = EXPR_CONST;
     //opnd->indirect = FALSE; /* not needed */
-    opnd->explicit = FALSE;
+    opnd->explicit1 = FALSE;
     opnd->mem_type = MT_EMPTY;
 }
 
@@ -909,13 +909,13 @@ static ret_code MakeConst2( struct expr *opnd1, struct expr *opnd2 )
 {
 
     if ( opnd1->sym->state == SYM_EXTERNAL ) {
-        return( fnEmitErr( INVALID_USE_OF_EXTERNAL_SYMBOL, opnd1->sym->name ) );
+        return( (ret_code)fnEmitErr( INVALID_USE_OF_EXTERNAL_SYMBOL, opnd1->sym->name ) );
     } else if ( ( opnd1->sym->segment != opnd2->sym->segment &&
                  /* v2.07: ignore segments if at least one label is a fwd ref */
                  opnd1->sym->state != SYM_UNDEFINED &&
                  opnd2->sym->state != SYM_UNDEFINED ) ||
                opnd2->sym->state == SYM_EXTERNAL ) {
-        return( fnEmitErr( OPERANDS_MUST_BE_IN_SAME_SEGMENT ) );
+        return( (ret_code)fnEmitErr( OPERANDS_MUST_BE_IN_SAME_SEGMENT ) );
     }
     opnd1->kind = EXPR_CONST;
     opnd1->value += opnd1->sym->offset;
@@ -1025,11 +1025,11 @@ static ret_code sizlen_op( int oper, struct expr *opnd1, struct expr *opnd2, str
                  sym->mem_type != MT_NEAR )
             ;
         else if ( sym->state == SYM_GRP || sym->state == SYM_SEG ) {
-            return( fnEmitErr( EXPECTED_DATA_LABEL ) );
+            return( (ret_code)fnEmitErr( EXPECTED_DATA_LABEL ) );
         } else if ( oper == T_SIZE || oper == T_LENGTH )
             ;
         else {
-            return( fnEmitErr( EXPECTED_DATA_LABEL ) );
+            return( (ret_code)fnEmitErr( EXPECTED_DATA_LABEL ) );
         }
     }
 
@@ -1126,7 +1126,7 @@ static ret_code type_op( int oper, struct expr *opnd1, struct expr *opnd2, struc
                opnd2->type ? opnd2->type->name : "NULL",
                opnd2->instr,
                opnd2->is_type,
-               opnd2->explicit ));
+               opnd2->explicit1 ));
     opnd1->kind = EXPR_CONST;
     /* TYPE accepts arrays/structs/unions */
     /* v2.11: if memtype isn't empty, ignore any unary operator
@@ -1138,7 +1138,7 @@ static ret_code type_op( int oper, struct expr *opnd1, struct expr *opnd2, struc
      * will set opnd.memtype to MT_EMPTY.
      */
     if( opnd2->instr != EMPTY && opnd2->mem_type != MT_EMPTY ) {
-        opnd2->instr = EMPTY;
+        opnd2->instr = (special_token)EMPTY;
         sym = NULL;
     }
     if( opnd2->instr != EMPTY ) {
@@ -1218,7 +1218,7 @@ static ret_code type_op( int oper, struct expr *opnd1, struct expr *opnd2, struc
 #endif
         //} else if ( opnd2->explicit ) { /* v2.05: changed */
         //} else if ( opnd2->mem_type != MT_EMPTY ) { /* v2.10: changed */
-        } else if ( opnd2->mem_type != MT_EMPTY || opnd2->explicit ) {
+        } else if ( opnd2->mem_type != MT_EMPTY || opnd2->explicit1 ) {
             if ( opnd2->mem_type != MT_EMPTY ) {
                 opnd1->value = SizeFromMemtype( opnd2->mem_type, opnd2->Ofssize, opnd2->type );
                 opnd1->mem_type = opnd2->mem_type; /* v2.04: added */
@@ -1245,7 +1245,7 @@ static ret_code type_op( int oper, struct expr *opnd1, struct expr *opnd2, struc
          */
         opnd1->is_type = TRUE;
         //} else if( sym->mem_type == MT_TYPE ) { /* v2.04: check for explicit */
-    } else if( sym->mem_type == MT_TYPE && opnd2->explicit == FALSE ) {
+    } else if( sym->mem_type == MT_TYPE && opnd2->explicit1 == FALSE ) {
         opnd1->value = sym->type->total_size;
         opnd1->is_type = TRUE; /* v2.03: added */
         //if ( opnd1->mem_type == MT_EMPTY ) /* v2.09 */
@@ -1399,10 +1399,10 @@ static ret_code short_op( int oper, struct expr *opnd1, struct expr *opnd2, stru
         ( opnd2->mem_type != MT_EMPTY &&
          opnd2->mem_type != MT_NEAR &&
          opnd2->mem_type != MT_FAR ) ) {
-        return( fnEmitErr( EXPRESSION_MUST_BE_A_CODE_ADDRESS ) );
+        return( (ret_code)fnEmitErr( EXPRESSION_MUST_BE_A_CODE_ADDRESS ) );
     }
     TokenAssign( opnd1, opnd2 );
-    opnd1->instr = oper;
+    opnd1->instr = (special_token)oper;
     return( NOT_ERROR );
 }
 
@@ -1411,10 +1411,10 @@ static ret_code seg_op( int oper, struct expr *opnd1, struct expr *opnd2, struct
 {
     /* v2.10: check for sym==NULL ( seg ds:[0] ) added */
     if ( opnd2->sym == NULL || opnd2->sym->state == SYM_STACK || opnd2->is_abs ) {
-        return( fnEmitErr( OPERAND_MUST_BE_RELOCATABLE ) );
+        return( (ret_code)fnEmitErr( OPERAND_MUST_BE_RELOCATABLE ) );
     }
     TokenAssign( opnd1, opnd2 );
-    opnd1->instr = oper;
+    opnd1->instr = (special_token)oper;
     if ( opnd1->mbr ) /* v2.08: set value more selectively */
         opnd1->value = 0;    /* v2.07: added ( SEG <member> ) */
     opnd1->mem_type = MT_EMPTY; /* v2.04a */
@@ -1443,7 +1443,7 @@ static ret_code offset_op( int oper, struct expr *opnd1, struct expr *opnd2, str
         opnd2->value = 0;
 
     TokenAssign( opnd1, opnd2 );
-    opnd1->instr = oper;
+    opnd1->instr = (special_token)oper;
 
     if ( opnd2->indirect ) {
         /* Masm v5.1 allows indirect operands, but Masm v6 with -Zm
@@ -1583,15 +1583,15 @@ static ret_code this_op( int oper, struct expr *opnd1, struct expr *opnd2, struc
 /*******************************************************************************************************/
 {
     if ( opnd2->is_type == FALSE ) {
-        return( fnEmitErr( INVALID_TYPE_EXPRESSION ) );
+        return( (ret_code)fnEmitErr( INVALID_TYPE_EXPRESSION ) );
     }
     /* v2.06: won't work inside structs */
     if ( CurrStruct ) {
-        return( fnEmitErr( MUST_BE_IN_SEGMENT_BLOCK ) );
+        return( (ret_code)fnEmitErr( MUST_BE_IN_SEGMENT_BLOCK ) );
     }
     /* v2.06: won't work outside segments */
     if ( CurrSeg == NULL ) {
-        return( EmitErr( MUST_BE_IN_SEGMENT_BLOCK ) ); /* error displayed even in EQU, hence EmitErr()! */
+        return( (ret_code)EmitErr( MUST_BE_IN_SEGMENT_BLOCK ) ); /* error displayed even in EQU, hence EmitErr()! */
     }
 
     if ( thissym == NULL ) {
@@ -1629,7 +1629,7 @@ static ret_code wimask_op( int oper, struct expr *opnd1, struct expr *opnd2, str
     if ( opnd2->is_type ) {
         sym = opnd2->type;
         if (sym->typekind != TYPE_RECORD ) {
-            return( fnEmitErr( OPERAND_MUST_BE_RECORD ) );
+            return( (ret_code)fnEmitErr( OPERAND_MUST_BE_RECORD ) );
         }
     } else if ( opnd2->kind == EXPR_CONST ) {
         sym = opnd2->mbr;
@@ -1732,7 +1732,7 @@ static ret_code plus_op( struct expr *opnd1, struct expr *opnd2 )
 
     if( check_direct_reg( opnd1, opnd2 ) == ERROR ) {
         DebugMsg(("plus_op: error direct register\n" ));
-        return( fnEmitErr( INVALID_USE_OF_REGISTER ) );
+        return( (ret_code)fnEmitErr( INVALID_USE_OF_REGISTER ) );
     }
     /* v2.08: remove EXPR_REG variants */
     if ( opnd1->kind == EXPR_REG )
@@ -1746,7 +1746,7 @@ static ret_code plus_op( struct expr *opnd1, struct expr *opnd2 )
             /* v2.07a: both T_REG or both T_ID is rejected */
             if ( opnd1->override->token == opnd2->override->token ) {
                 DebugMsg(("plus_op: multiple overrides\n" ));
-                return( fnEmitErr( MULTIPLE_OVERRIDES ) );
+                return( (ret_code)fnEmitErr( MULTIPLE_OVERRIDES ) );
             }
         }
         opnd1->override = opnd2->override;
@@ -1772,7 +1772,7 @@ static ret_code plus_op( struct expr *opnd1, struct expr *opnd2 )
                 opnd1->sym->state != SYM_UNDEFINED &&
                 opnd2->sym->state != SYM_UNDEFINED ) {
                 DebugMsg(("plus_op: two relocatable labels: %s - %s \n", opnd1->sym->name, opnd2->sym->name ));
-                return( fnEmitErr( CANNOT_ADD_TWO_RELOCATABLE_LABELS ) );
+                return( (ret_code)fnEmitErr( CANNOT_ADD_TWO_RELOCATABLE_LABELS ) );
             }
             opnd1->label_tok = opnd2->label_tok;
             opnd1->sym = opnd2->sym;
@@ -1795,8 +1795,8 @@ static ret_code plus_op( struct expr *opnd1, struct expr *opnd2 )
             opnd2->llvalue += opnd1->llvalue;
             opnd2->indirect |= opnd1->indirect;
 
-            if( opnd1->explicit == TRUE ) {
-                opnd2->explicit = TRUE;
+            if( opnd1->explicit1 == TRUE ) {
+                opnd2->explicit1 = TRUE;
                 opnd2->mem_type = opnd1->mem_type;
             } else if ( opnd2->mem_type == MT_EMPTY )
                 opnd2->mem_type = opnd1->mem_type;
@@ -1851,7 +1851,7 @@ static ret_code minus_op( struct expr *opnd1, struct expr *opnd2 )
 
     if( check_direct_reg( opnd1, opnd2 ) == ERROR ) {
         DebugMsg(("minus_op: error direct register\n"));
-        return( fnEmitErr( INVALID_USE_OF_REGISTER ) );
+        return( (ret_code)fnEmitErr( INVALID_USE_OF_REGISTER ) );
     }
 
     /* added for v1.94. It's related to the change done in MakeConst()!
@@ -1885,7 +1885,7 @@ static ret_code minus_op( struct expr *opnd1, struct expr *opnd2 )
         //if( opnd2->base_reg != NULL || opnd2->idx_reg != NULL ) { /* v2.09: just check 'indirect' */
         if( opnd2->indirect ) {
             DebugMsg(("minus_op error, opnd2->indirect==TRUE\n"));
-            return( fnEmitErr( INVALID_USE_OF_REGISTER ) );
+            return( (ret_code)fnEmitErr( INVALID_USE_OF_REGISTER ) );
         }
         if( opnd2->label_tok == NULL ) {
             /* v2.06c: do 64-bit arithmetic (more rigid test in data.c) */
@@ -1897,7 +1897,7 @@ static ret_code minus_op( struct expr *opnd1, struct expr *opnd2 )
                 DebugMsg(("minus_op error, label_tok=%X opnd1.sym=%X opnd2.sym=%X\n", opnd1->label_tok, opnd1->sym, opnd2->sym ));
                 /* v2.05: error msg changed */
                 //fnEmitErr( SYNTAX_ERROR );
-                return( fnEmitErr( OPERAND_MUST_BE_RELOCATABLE ) );
+                return( (ret_code)fnEmitErr( OPERAND_MUST_BE_RELOCATABLE ) );
             }
             /* handle first operand */
             sym = opnd1->sym;
@@ -1911,12 +1911,12 @@ static ret_code minus_op( struct expr *opnd1, struct expr *opnd2 )
                      opnd1->sym->state == SYM_EXTERNAL) &&
                     sym != opnd1->sym ) {
                     DebugMsg(("minus_op error 6\n"));
-                    return( fnEmitErr(INVALID_USE_OF_EXTERNAL_SYMBOL, opnd1->sym->name ) );
+                    return( (ret_code)fnEmitErr(INVALID_USE_OF_EXTERNAL_SYMBOL, opnd1->sym->name ) );
                 }
                 /* check if the 2 offsets belong to the same segment */
                 if ( sym->segment != opnd1->sym->segment ) {
                     DebugMsg(("minus_op error, sym.segm=%X opnd1->sym.segm=%X\n", sym->segment, opnd1->sym->segment ));
-                    return( fnEmitErr( OPERANDS_MUST_BE_IN_SAME_SEGMENT ) );
+                    return( (ret_code)fnEmitErr( OPERANDS_MUST_BE_IN_SAME_SEGMENT ) );
                 }
             }
 
@@ -1953,14 +1953,14 @@ static ret_code minus_op( struct expr *opnd1, struct expr *opnd2 )
             //if( opnd1->base_reg == NULL && opnd1->idx_reg == NULL ) { /* v2.09: just check 'indirect' */
             if( opnd1->indirect == FALSE ) {
                 if( opnd1->instr == T_OFFSET && opnd2->instr == T_OFFSET )
-                    opnd1->instr = EMPTY;
+                    opnd1->instr = (special_token)EMPTY;
                 //opnd1->indirect = FALSE; /* v2.09: not needed */
             } else {
                 DebugMsg1(("minus_op, exit, ADDR, base=%X, idx=%X\n", opnd1->base_reg, opnd1->idx_reg ));
                 opnd1->kind = EXPR_ADDR;
                 //opnd1->indirect |= opnd2->indirect;  /* v2.09: op1->indirect is always 1, op2->indirect is always 0 */
             }
-            opnd1->explicit = FALSE;
+            opnd1->explicit1 = FALSE;
             opnd1->mem_type = MT_EMPTY;
         }
 
@@ -1987,7 +1987,7 @@ static ret_code struct_field_error( struct expr *opnd )
         opnd->kind = EXPR_ERROR;
         return( NOT_ERROR );
     }
-    return( fnEmitErr( STRUCTURE_FIELD_EXPECTED ) );
+    return( (ret_code)fnEmitErr( STRUCTURE_FIELD_EXPECTED ) );
 }
 
 static ret_code dot_op( struct expr *opnd1, struct expr *opnd2 )
@@ -2017,7 +2017,7 @@ static ret_code dot_op( struct expr *opnd1, struct expr *opnd2 )
 
     if( check_direct_reg( opnd1, opnd2 ) == ERROR ) {
         DebugMsg(("dot_op: error direct register\n"));
-        return( fnEmitErr( INVALID_USE_OF_REGISTER ) );
+        return( (ret_code)fnEmitErr( INVALID_USE_OF_REGISTER ) );
     }
 
     /* v2.08: remove EXPR_REG variants */
@@ -2058,7 +2058,7 @@ static ret_code dot_op( struct expr *opnd1, struct expr *opnd2 )
                 opnd1->sym->state != SYM_UNDEFINED &&
                 opnd2->sym->state != SYM_UNDEFINED ) {
                 DebugMsg(("dot_op: error, two relocatable labels: %s - %s \n", opnd1->sym->name, opnd2->sym->name ));
-                return( fnEmitErr( CANNOT_ADD_TWO_RELOCATABLE_LABELS ) );
+                return( (ret_code)fnEmitErr( CANNOT_ADD_TWO_RELOCATABLE_LABELS ) );
             }
             opnd1->label_tok = opnd2->label_tok;
             opnd1->sym = opnd2->sym;
@@ -2067,7 +2067,7 @@ static ret_code dot_op( struct expr *opnd1, struct expr *opnd2 )
             opnd1->mbr = opnd2->mbr;
         }
         opnd1->value += opnd2->value;
-        if( opnd1->explicit == FALSE ) {
+        if( opnd1->explicit1 == FALSE ) {
             opnd1->mem_type = opnd2->mem_type;
         }
         if ( opnd2->type )
@@ -2105,7 +2105,7 @@ static ret_code dot_op( struct expr *opnd1, struct expr *opnd2 )
     } else if( ( opnd1->kind == EXPR_ADDR ) && ( opnd2->kind == EXPR_CONST ) ) {
 
         DebugMsg1(("dot_op, ADDR - CONST: t1-t2 memtype=%Xh-%Xh t1.explicit=%u\n",
-                   opnd1->mem_type, opnd2->mem_type, opnd1->explicit ));
+                   opnd1->mem_type, opnd2->mem_type, opnd1->explicit1 ));
 
         /* v2.08: changed to catch [ebx].<num> or [ebx].<simple type> */
         //if ( (!ModuleInfo.oldstructs) && opnd2->type == NULL && opnd2->mbr == NULL ) {
@@ -2219,7 +2219,7 @@ static ret_code colon_op( struct expr *opnd1, struct expr *opnd2 )
         if ( ( opnd1->kind == EXPR_REG && opnd2->override->token == T_REG ) ||
             ( opnd1->kind == EXPR_ADDR && opnd2->override->token == T_ID ) ) {
             DebugMsg(("colon_op: multiple override=%s\n", opnd2->override->string_ptr ));
-            return( fnEmitErr( MULTIPLE_OVERRIDES ) );
+            return( (ret_code)fnEmitErr( MULTIPLE_OVERRIDES ) );
         }
     }
     switch ( opnd2->kind ) {
@@ -2227,11 +2227,11 @@ static ret_code colon_op( struct expr *opnd1, struct expr *opnd2 )
         /* v2.05: register as second operand must be enclosed in [] */
         if ( opnd2->indirect == FALSE ) {
             DebugMsg(("colon_op: register after : not enclosed in []\n" ));
-            return( fnEmitErr( INVALID_USE_OF_REGISTER ) );
+            return( (ret_code)fnEmitErr( INVALID_USE_OF_REGISTER ) );
         }
         break;
     case EXPR_FLOAT:
-        return( fnEmitErr( REAL_OR_BCD_NUMBER_NOT_ALLOWED ) );
+        return( (ret_code)fnEmitErr( REAL_OR_BCD_NUMBER_NOT_ALLOWED ) );
     }
 
     if( opnd1->kind == EXPR_REG ) {
@@ -2239,7 +2239,7 @@ static ret_code colon_op( struct expr *opnd1, struct expr *opnd2 )
         /* the item before the ':' must be a single register */
         if( opnd1->idx_reg != NULL ) {
             DebugMsg(("colon_op: register before ':' has idx_reg set!?\n"));
-            return( fnEmitErr( INVALID_USE_OF_REGISTER ) );
+            return( (ret_code)fnEmitErr( INVALID_USE_OF_REGISTER ) );
         }
         /* segment override inside bracket not allowed with -Zne.
          * [ds:0] is ok, but [ds:ebx] is rejected.
@@ -2257,7 +2257,7 @@ static ret_code colon_op( struct expr *opnd1, struct expr *opnd2 )
         /* make sure first operand is a segment register */
         temp = opnd1->base_reg->tokval;
         if ( ( GetValueSp( temp ) & OP_SR ) == 0 ) {
-            return( fnEmitErr( SEGMENT_GROUP_OR_SEGREG_EXPECTED ) );
+            return( (ret_code)fnEmitErr( SEGMENT_GROUP_OR_SEGREG_EXPECTED ) );
         }
 
         opnd2->override = opnd1->base_reg;
@@ -2272,8 +2272,8 @@ static ret_code colon_op( struct expr *opnd1, struct expr *opnd2 )
             //opnd2->is_type = FALSE;
         }
 
-        if( opnd1->explicit ) {
-            opnd2->explicit = opnd1->explicit;
+        if( opnd1->explicit1 ) {
+            opnd2->explicit1 = opnd1->explicit1;
             opnd2->mem_type = opnd1->mem_type;
             opnd2->Ofssize  = opnd1->Ofssize;
         }
@@ -2306,8 +2306,8 @@ static ret_code colon_op( struct expr *opnd1, struct expr *opnd2 )
             opnd2->kind = EXPR_ADDR;
             opnd2->override = opnd1->label_tok;
             opnd2->indirect |= opnd1->indirect;
-            if( opnd1->explicit ) {
-                opnd2->explicit = opnd1->explicit;
+            if( opnd1->explicit1 ) {
+                opnd2->explicit1 = opnd1->explicit1;
                 opnd2->mem_type = opnd1->mem_type;
                 opnd2->Ofssize  = opnd1->Ofssize;
             }
@@ -2316,11 +2316,11 @@ static ret_code colon_op( struct expr *opnd1, struct expr *opnd2 )
 
         } else if( Parse_Pass > PASS_1 || sym->state != SYM_UNDEFINED ) {
             DebugMsg(("colon_op error 4\n"));
-            return( fnEmitErr( SEGMENT_GROUP_OR_SEGREG_EXPECTED ) );
+            return( (ret_code)fnEmitErr( SEGMENT_GROUP_OR_SEGREG_EXPECTED ) );
         }
     } else {
         DebugMsg(("colon_op error 5\n"));
-        return( fnEmitErr( SEGMENT_GROUP_OR_SEGREG_EXPECTED ) );
+        return( (ret_code)fnEmitErr( SEGMENT_GROUP_OR_SEGREG_EXPECTED ) );
     }
     return( NOT_ERROR );
 }
@@ -2348,7 +2348,7 @@ static ret_code positive_op( struct expr *opnd1, struct expr *opnd2 )
         opnd1->negative = opnd2->negative;
     } else {
         DebugMsg(("positive_op: error 1\n"));
-        return( fnEmitErr( CONSTANT_EXPECTED ) );
+        return( (ret_code)fnEmitErr( CONSTANT_EXPECTED ) );
     }
     return( NOT_ERROR );
 }
@@ -2380,7 +2380,7 @@ static ret_code negative_op( struct expr *opnd1, struct expr *opnd2 )
         opnd1->negative = 1 - opnd2->negative;
     } else {
         DebugMsg(("negative_op: unexpected opnd2.kind=%d\n", opnd2->kind ));
-        return( fnEmitErr( CONSTANT_EXPECTED ) );
+        return( (ret_code)fnEmitErr( CONSTANT_EXPECTED ) );
     }
     return( NOT_ERROR );
 }
@@ -2394,11 +2394,11 @@ static void CheckAssume( struct expr *opnd )
     struct asym *sym = NULL;
 
 #if 1 /* v2.10: see regression test ptr2.asm */
-    if ( opnd->explicit ) { /* perhaps check mem_type instead of explicit */
+    if ( opnd->explicit1 ) { /* perhaps check mem_type instead of explicit */
         if ( opnd->type && opnd->type->mem_type == MT_PTR ) {
             DebugMsg1(( "CheckAssume(%s, MT_PTR type=>%s< )\n", opnd->type->name ));
             if ( opnd->type->is_ptr == 1 ) { /* dereference only if indirection is 1 */
-                opnd->mem_type = opnd->type->ptr_memtype;
+                opnd->mem_type = (memtype)opnd->type->ptr_memtype;
                 opnd->type = opnd->type->target_type;
                 return; /* ignore assumes in this case */
             }
@@ -2443,7 +2443,7 @@ static void CheckAssume( struct expr *opnd )
             if ( sym->target_type )
                 opnd->mem_type = sym->target_type->mem_type;
             else
-                opnd->mem_type = sym->ptr_memtype;
+                opnd->mem_type = (memtype)sym->ptr_memtype;
         }
     }
 }
@@ -2454,11 +2454,11 @@ static ret_code check_streg( struct expr *opnd1, struct expr *opnd2 )
 /*******************************************************************/
 {
     if ( opnd1->scale > 0 ) {
-        return( fnEmitErr( INVALID_USE_OF_REGISTER ) );
+        return( (ret_code)fnEmitErr( INVALID_USE_OF_REGISTER ) );
     }
     opnd1->scale++; /* make sure there's only ONE bracket pair */
     if ( opnd2->kind != EXPR_CONST ) {
-        return( fnEmitErr( INVALID_COPROCESSOR_REGISTER ) );
+        return( (ret_code)fnEmitErr( INVALID_COPROCESSOR_REGISTER ) );
     }
     opnd1->st_idx = opnd2->value;
     return( NOT_ERROR );
@@ -2543,7 +2543,7 @@ static ret_code calculate( struct expr *opnd1, struct expr *opnd2, const struct 
             ;
         else {
             DebugMsg(("%u calculate(%s): value too large\n", evallvl, oper->string_ptr ));
-            return( fnEmitErr( CONSTANT_VALUE_TOO_LARGE_EX, opnd2->hlvalue, opnd2->value64 ) );
+            return( (ret_code)fnEmitErr( CONSTANT_VALUE_TOO_LARGE_EX, opnd2->hlvalue, opnd2->value64 ) );
         }
     }
 
@@ -2584,7 +2584,7 @@ static ret_code calculate( struct expr *opnd1, struct expr *opnd2, const struct 
         if ( opnd1->is_type == TRUE && opnd1->type == NULL &&
             (opnd2->kind == EXPR_ADDR || opnd2->kind == EXPR_REG ) ) {
             DebugMsg(("calculate(%s): incompatible usage of (simple) type\n", oper->string_ptr ));
-            return( fnEmitErr( SYNTAX_ERROR_IN_EXPRESSION ) );
+            return( (ret_code)fnEmitErr( SYNTAX_ERROR_IN_EXPRESSION ) );
         }
 
         /* v2.08: moved here from get_operand() */
@@ -2611,12 +2611,12 @@ static ret_code calculate( struct expr *opnd1, struct expr *opnd2, const struct 
          */
         if ( opnd1->is_type == TRUE && opnd2->kind == EXPR_ADDR ) {
             DebugMsg(("calculate(%s): incompatible usage of (simple) type\n", oper->string_ptr ));
-            return( fnEmitErr( SYNTAX_ERROR_IN_EXPRESSION ) );
+            return( (ret_code)fnEmitErr( SYNTAX_ERROR_IN_EXPRESSION ) );
         }
 
         /* v2.08: moved here from get_operand() */
         if ( opnd1->base_reg && opnd1->base_reg->tokval == T_ST )
-            return( check_streg( opnd1, opnd2 ) );
+            return( (ret_code)check_streg( opnd1, opnd2 ) );
 
         DebugMsg1(("calculate(%s): calling plus_op()\n", oper->string_ptr ));
 #ifdef DEBUG_OUT
@@ -2682,7 +2682,7 @@ static ret_code calculate( struct expr *opnd1, struct expr *opnd2, const struct 
         } else if( check_both( opnd1, opnd2, EXPR_REG, EXPR_CONST ) ) {
             if( check_direct_reg( opnd1, opnd2 ) == ERROR ) {
                 DebugMsg(("calculate(*) error direct register\n"));
-                return( fnEmitErr( INVALID_USE_OF_REGISTER ) );
+                return( (ret_code)fnEmitErr( INVALID_USE_OF_REGISTER ) );
             }
             /* scaling factor */
             if( opnd2->kind == EXPR_REG ) {
@@ -2698,7 +2698,7 @@ static ret_code calculate( struct expr *opnd1, struct expr *opnd2, const struct 
             }
             /* v2.08: check 0 (the default value) here */
             if ( opnd1->scale == 0 ) {
-                return( fnEmitErr( SCALE_FACTOR_MUST_BE_1_2_4_OR_8 ) );
+                return( (ret_code)fnEmitErr( SCALE_FACTOR_MUST_BE_1_2_4_OR_8 ) );
             }
 
             opnd1->base_reg = NULL;
@@ -2727,7 +2727,7 @@ static ret_code calculate( struct expr *opnd1, struct expr *opnd2, const struct 
 
         if ( opnd2->llvalue == 0 ) {
             DebugMsg(("calculate(/) error 2\n"));
-            return( fnEmitErr( DIVIDE_BY_ZERO_IN_EXPR ) );
+            return( (ret_code)fnEmitErr( DIVIDE_BY_ZERO_IN_EXPR ) );
         }
 
         opnd1->value64 /= opnd2->value64;
@@ -2751,10 +2751,10 @@ static ret_code calculate( struct expr *opnd1, struct expr *opnd2, const struct 
                     opnd1->is_type = TRUE;
                 } else {
                     DebugMsg(("calculate(PTR), error 1: t1 is_type == FALSE\n"));
-                    return( fnEmitErr( INVALID_TYPE_EXPRESSION ) );
+                    return( (ret_code)fnEmitErr( INVALID_TYPE_EXPRESSION ) );
                 }
             }
-            opnd2->explicit = TRUE;
+            opnd2->explicit1 = TRUE;
             /* v2.02: if operand is a register, make sure
              * that invalid combinations ("DWORD PTR AX") are flagged.
              *
@@ -2772,16 +2772,16 @@ static ret_code calculate( struct expr *opnd1, struct expr *opnd2, const struct 
                 if ( GetValueSp( temp ) & OP_SR ) {
                     if ( opnd1->value != 2 && opnd1->value != 4 ) {
                         DebugMsg(("calculate(PTR): segment register size (=2/4) doesn't match type size (=%u)\n", opnd1->value ));
-                        return( fnEmitErr( INVALID_USE_OF_REGISTER ) );
+                        return( (ret_code)fnEmitErr( INVALID_USE_OF_REGISTER ) );
                     }
                 } else if ( opnd1->value != SizeFromRegister( temp ) ) {
                     DebugMsg(("calculate(PTR): register size doesn't match type size; %u != %u\n", SizeFromRegister( temp ), opnd1->value ));
-                    return( fnEmitErr( INVALID_USE_OF_REGISTER ) );
+                    return( (ret_code)fnEmitErr( INVALID_USE_OF_REGISTER ) );
                 }
             } else if ( opnd2->kind == EXPR_FLOAT ) {
                 if ( !( opnd1->mem_type & MT_FLOAT ) ) {
                     DebugMsg(("calculate(PTR): type memtype=%Xh ( MT_FLOAT not set, although right op is FLOAT )\n", opnd1->mem_type ));
-                    return( fnEmitErr( REAL_OR_BCD_NUMBER_NOT_ALLOWED ) );
+                    return( (ret_code)fnEmitErr( REAL_OR_BCD_NUMBER_NOT_ALLOWED ) );
                 }
             }
             opnd2->mem_type = opnd1->mem_type;
@@ -2828,11 +2828,11 @@ static ret_code calculate( struct expr *opnd1, struct expr *opnd2, const struct 
                     DebugMsg(("calculate(%s) error 2, token2.kind=%d indirect=%u sym=%s\n",
                               oper->string_ptr, opnd2->kind, opnd2->indirect,
                               opnd2->sym ? opnd2->sym->name : "NULL" ));
-                    return( fnEmitErr( OPERAND_MUST_BE_RELOCATABLE ) );
+                    return( (ret_code)fnEmitErr( OPERAND_MUST_BE_RELOCATABLE ) );
                 }
             else {
                 DebugMsg(("calculate(%s) error 3\n", oper->string_ptr ));
-                return( fnEmitErr( CONSTANT_OR_RELOCATABLE_LABEL_EXPECTED ) );
+                return( (ret_code)fnEmitErr( CONSTANT_OR_RELOCATABLE_LABEL_EXPECTED ) );
             }
         } else {
             DebugMsg(("calculate(%s) error 4\n", oper->string_ptr ));
@@ -2874,7 +2874,7 @@ static ret_code calculate( struct expr *opnd1, struct expr *opnd2, const struct 
             break;
         case T_MOD:
             if ( opnd2->llvalue == 0 ) {
-                return( fnEmitErr( DIVIDE_BY_ZERO_IN_EXPR ) );
+                return( (ret_code)fnEmitErr( DIVIDE_BY_ZERO_IN_EXPR ) );
             } else
                 opnd1->llvalue %= opnd2->llvalue;
             break;
@@ -2946,7 +2946,7 @@ static ret_code calculate( struct expr *opnd1, struct expr *opnd2, const struct 
             MakeConst( opnd2 );
             if( opnd2->kind != EXPR_CONST ) {
                 DebugMsg(("calculate(%s) error 1\n", oper->string_ptr ));
-                return( fnEmitErr( CONSTANT_OPERAND_EXPECTED ) );
+                return( (ret_code)fnEmitErr( CONSTANT_OPERAND_EXPECTED ) );
             }
             TokenAssign( opnd1, opnd2 );
             opnd1->llvalue = ~(opnd2->llvalue);
@@ -3066,7 +3066,7 @@ static ret_code calculate( struct expr *opnd1, struct expr *opnd2, const struct 
         case EXPR_FLOAT: /* v2.05: added */
             if ( ( temp & AT_FLOAT ) == 0 ) {
                 DebugMsg(("calculate %s 'float' error\n", oper->string_ptr ));
-                return( fnEmitErr( REAL_OR_BCD_NUMBER_NOT_ALLOWED ) );
+                return( (ret_code)fnEmitErr( REAL_OR_BCD_NUMBER_NOT_ALLOWED ) );
             }
             break;
         }
@@ -3080,7 +3080,7 @@ static ret_code calculate( struct expr *opnd1, struct expr *opnd2, const struct 
     //case T_RES_ID:
     default: /* shouldn't happen */
         DebugMsg(("calculate(%s): unknown operator\n", oper->string_ptr ));
-        return( fnEmitErr( SYNTAX_ERROR_EX, oper->string_ptr ) );
+        return( (ret_code)fnEmitErr( SYNTAX_ERROR_EX, oper->string_ptr ) );
     } /* end switch( oper->token ) */
 
 #ifdef DEBUG_OUT
@@ -3107,7 +3107,7 @@ static ret_code calculate( struct expr *opnd1, struct expr *opnd2, const struct 
                    opnd1->kind,
                    opnd1->value, opnd1->value,
                    opnd1->mem_type,
-                   opnd1->indirect, opnd1->explicit,
+                   opnd1->indirect, opnd1->explicit1,
                    opnd1->type ? opnd1->type->name : "NULL",
                    opnd1->mbr ? opnd1->mbr->name : "NULL" ));
     }
@@ -3324,7 +3324,7 @@ static ret_code evaluate( struct expr *opnd1, int *i, struct asm_tok tokenarray[
         DebugMsg1(("%u evaluate exit, rc=%d, kind=%d value=%" I32_SPEC "d(0x%" I32_SPEC "X) memtype=%Xh string=%s ind=%u exp=%u ofssiz=%d instr=%s type=>%s<\n",
                    evallvl--, rc, opnd1->kind, opnd1->value, opnd1->value, opnd1->mem_type,
                    opnd1->quoted_string ? opnd1->quoted_string->string_ptr : "NULL",
-                   opnd1->indirect, opnd1->explicit, opnd1->Ofssize,
+                   opnd1->indirect, opnd1->explicit1, opnd1->Ofssize,
                    opnd1->instr == EMPTY ? "" : GetResWName( opnd1->instr, NULL ),
                    opnd1->type ? opnd1->type->name : "NULL" ));
     }

@@ -206,13 +206,13 @@ ret_code ExterndefDirective( int i, struct asm_tok tokenarray[] )
 
         /* get the symbol name */
         if( tokenarray[i].token != T_ID ) {
-            return( EmitErr( SYNTAX_ERROR_EX, tokenarray[i].string_ptr ) );
+            return( (ret_code)EmitErr( SYNTAX_ERROR_EX, tokenarray[i].string_ptr ) );
         }
         token = tokenarray[i++].string_ptr;
 
         /* go past the colon */
         if( tokenarray[i].token != T_COLON ) {
-            return( EmitError( COLON_EXPECTED ) );
+            return( (ret_code)EmitError( COLON_EXPECTED ) );
         }
         i++;
         sym = SymSearch( token );
@@ -362,7 +362,7 @@ ret_code ExterndefDirective( int i, struct asm_tok tokenarray[] )
                 if ( (i + 1) < Token_Count )
                     i++;
             } else {
-                return( EmitErr( EXPECTING_COMMA, tokenarray[i].tokpos ) );
+                return( (ret_code)EmitErr( EXPECTING_COMMA, tokenarray[i].tokpos ) );
             }
 
     } while ( i < Token_Count );
@@ -386,7 +386,7 @@ ret_code ProtoDirective( int i, struct asm_tok tokenarray[] )
         return( NOT_ERROR );
     }
     if( i != 1 ) {
-        return( EmitErr( SYNTAX_ERROR_EX, tokenarray[i].string_ptr ) );
+        return( (ret_code)EmitErr( SYNTAX_ERROR_EX, tokenarray[i].string_ptr ) );
     }
 
     return( CreateProto( 2, tokenarray, tokenarray[0].string_ptr, ModuleInfo.langtype ) ? NOT_ERROR : ERROR );
@@ -431,14 +431,14 @@ static ret_code HandleAltname( char *altname, struct asym *sym )
 
         /* altname symbol changed? */
         if ( sym->altname && sym->altname != symalt ) {
-            return( EmitErr( SYMBOL_REDEFINITION, sym->name ) );
+            return( (ret_code)EmitErr( SYMBOL_REDEFINITION, sym->name ) );
         }
 
         if ( Parse_Pass > PASS_1 ) {
             if ( symalt->state == SYM_UNDEFINED ) {
-                EmitErr( SYMBOL_NOT_DEFINED, altname );
+                return( (ret_code)EmitErr( SYMBOL_NOT_DEFINED, altname ) );
             } else if (symalt->state != SYM_INTERNAL && symalt->state != SYM_EXTERNAL ) {
-                EmitErr( SYMBOL_TYPE_CONFLICT, altname );
+                return( (ret_code)EmitErr( SYMBOL_TYPE_CONFLICT, altname ) );
             } else {
 #if COFF_SUPPORT || ELF_SUPPORT
                 if ( symalt->state == SYM_INTERNAL && symalt->ispublic == FALSE )
@@ -460,7 +460,7 @@ static ret_code HandleAltname( char *altname, struct asym *sym )
                 if ( symalt->state != SYM_INTERNAL &&
                     symalt->state != SYM_EXTERNAL &&
                     symalt->state != SYM_UNDEFINED ) {
-                    return( EmitErr( SYMBOL_TYPE_CONFLICT, altname ) );
+                    return( (ret_code)EmitErr( SYMBOL_TYPE_CONFLICT, altname ) );
                 }
             } else {
                 symalt = SymCreate( altname );
@@ -521,7 +521,7 @@ ret_code ExternDirective( int i, struct asm_tok tokenarray[] )
 
         /* get the symbol name */
         if( tokenarray[i].token != T_ID ) {
-            return( EmitErr( SYNTAX_ERROR_EX, tokenarray[i].string_ptr ) );
+            return( (ret_code)EmitErr( SYNTAX_ERROR_EX, tokenarray[i].string_ptr ) );
         }
         token = tokenarray[i++].string_ptr;
 
@@ -529,19 +529,19 @@ ret_code ExternDirective( int i, struct asm_tok tokenarray[] )
         if( tokenarray[i].token == T_OP_BRACKET ) {
             i++;
             if ( tokenarray[i].token != T_ID ) {
-                return( EmitErr( SYNTAX_ERROR_EX, tokenarray[i].string_ptr ) );
+                return( (ret_code)EmitErr( SYNTAX_ERROR_EX, tokenarray[i].string_ptr ) );
             }
             altname = tokenarray[i].string_ptr;
             i++;
             if( tokenarray[i].token != T_CL_BRACKET ) {
-                return( EmitErr( EXPECTED, ")" ) );
+                return( (ret_code)EmitErr( EXPECTED, ")" ) );
             }
             i++;
         }
 
         /* go past the colon */
         if( tokenarray[i].token != T_COLON ) {
-            return( EmitError( COLON_EXPECTED ) );
+            return( (ret_code)EmitError( COLON_EXPECTED ) );
         }
         i++;
         sym = SymSearch( token );
@@ -569,7 +569,7 @@ ret_code ExternDirective( int i, struct asm_tok tokenarray[] )
                 return( HandleAltname( altname, sym ) );
             } else {
                 /* unlike EXTERNDEF, EXTERN doesn't allow a PROC for the same name */
-                return( EmitErr( SYMBOL_REDEFINITION, sym->name ) );
+                return( (ret_code)EmitErr( SYMBOL_REDEFINITION, sym->name ) );
             }
         } else if ( tokenarray[i].token != T_FINAL && tokenarray[i].token != T_COMMA ) {
             if ( GetQualifiedType( &i, tokenarray, &ti ) == ERROR )
@@ -609,7 +609,7 @@ ret_code ExternDirective( int i, struct asm_tok tokenarray[] )
 #endif
             if ( sym->state != SYM_EXTERNAL ) {
                 DebugMsg(("ExternDirective: symbol %s redefinition, state=%u\n", token, sym->state ));
-                return( EmitErr( SYMBOL_REDEFINITION, token ) );
+                return( (ret_code)EmitErr( SYMBOL_REDEFINITION, token ) );
             }
             /* v2.05: added to accept type prototypes */
             if ( ti.is_ptr == 0 && ti.symtype && ti.symtype->isproc ) {
@@ -630,7 +630,7 @@ ret_code ExternDirective( int i, struct asm_tok tokenarray[] )
                           sym->ptr_memtype, ti.ptr_memtype,
                           sym->langtype, langtype
                          ));
-                return( EmitErr( SYMBOL_TYPE_CONFLICT, token ) );
+                return( (ret_code)EmitErr( SYMBOL_TYPE_CONFLICT, token ) );
             }
         }
 
@@ -660,7 +660,7 @@ ret_code ExternDirective( int i, struct asm_tok tokenarray[] )
             if ( tokenarray[i].token == T_COMMA &&  ( (i + 1) < Token_Count ) ) {
                 i++;
             } else {
-                return( EmitErr( SYNTAX_ERROR_EX, tokenarray[i].string_ptr ) );
+                return( (ret_code)EmitErr( SYNTAX_ERROR_EX, tokenarray[i].string_ptr ) );
             }
     }  while ( i < Token_Count );
 
@@ -748,14 +748,14 @@ ret_code CommDirective( int i, struct asm_tok tokenarray[] )
 
         /* v2.08: ensure token is a valid id */
         if( tokenarray[i].token != T_ID ) {
-            return( EmitErr( SYNTAX_ERROR_EX, tokenarray[i].string_ptr ) );
+            return( (ret_code)EmitErr( SYNTAX_ERROR_EX, tokenarray[i].string_ptr ) );
         }
         /* get the symbol name */
         token = tokenarray[i++].string_ptr;
 
         /* go past the colon */
         if( tokenarray[i].token != T_COLON ) {
-            return( EmitErr( SYNTAX_ERROR_EX, tokenarray[i].string_ptr ) );
+            return( (ret_code)EmitErr( SYNTAX_ERROR_EX, tokenarray[i].string_ptr ) );
         }
         i++;
         /* the evaluator cannot handle a ':' so scan for one first */
@@ -765,7 +765,7 @@ ret_code CommDirective( int i, struct asm_tok tokenarray[] )
         /* v2.10: expression evaluator isn't to accept forward references */
         //if ( EvalOperand( &i, tokenarray, tmp, &opndx, 0 ) == ERROR )
         if ( EvalOperand( &i, tokenarray, tmp, &opndx, EXPF_NOUNDEF ) == ERROR )
-            return( ERROR );
+            return( (ret_code)ERROR );
 
         /* v2.03: a string constant is accepted by Masm */
         /* v2.11: don't accept NEAR or FAR */
@@ -808,20 +808,20 @@ ret_code CommDirective( int i, struct asm_tok tokenarray[] )
         if( sym == NULL || sym->state == SYM_UNDEFINED ) {
             sym = MakeComm( token, sym, size, count, isfar );
             if ( sym == NULL )
-                return( ERROR );
+                return( (ret_code)ERROR );
         } else if ( sym->state != SYM_EXTERNAL || sym->iscomm != TRUE ) {
-            return( EmitErr( SYMBOL_REDEFINITION, sym->name ) );
+            return( (ret_code)EmitErr( SYMBOL_REDEFINITION, sym->name ) );
         } else {
             tmp = sym->total_size / sym->total_length;
             if( count != sym->total_length || size != tmp ) {
-                return( EmitErr( NON_BENIGN_XXX_REDEFINITION, szCOMM, sym->name ) );
+                return( (ret_code)EmitErr( NON_BENIGN_XXX_REDEFINITION, szCOMM, sym->name ) );
             }
         }
         sym->isdefined = TRUE;
         SetMangler( sym, langtype, mangle_type );
 
         if ( tokenarray[i].token != T_FINAL && tokenarray[i].token != T_COMMA ) {
-            return( EmitErr( EXPECTING_COMMA, tokenarray[i].tokpos ) );
+            return( (ret_code)EmitErr( EXPECTING_COMMA, tokenarray[i].tokpos ) );
         }
     }
     return( NOT_ERROR );
@@ -907,7 +907,7 @@ ret_code PublicDirective( int i, struct asm_tok tokenarray[] )
         GetLangType( &i, tokenarray, &langtype );
 
         if ( tokenarray[i].token != T_ID ) {
-            return( EmitErr( SYNTAX_ERROR_EX, tokenarray[i].string_ptr ) );
+            return( (ret_code)EmitErr( SYNTAX_ERROR_EX, tokenarray[i].string_ptr ) );
         }
         /* get the symbol name */
         token = tokenarray[i++].string_ptr;
@@ -973,10 +973,10 @@ ret_code PublicDirective( int i, struct asm_tok tokenarray[] )
                 if ( (i + 1) < Token_Count )
                     i++;
             } else {
-                return( EmitErr( SYNTAX_ERROR_EX, tokenarray[i].tokpos ) );
+                return( (ret_code)EmitErr( SYNTAX_ERROR_EX, tokenarray[i].tokpos ) );
             }
 
     } while ( i < Token_Count );
 
-    return( NOT_ERROR );
+    return( (ret_code)NOT_ERROR );
 }

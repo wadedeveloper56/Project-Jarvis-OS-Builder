@@ -40,7 +40,7 @@ static void AddLinnumData( struct line_num_info *data )
     if ( Options.output_format == OFORMAT_COFF ) {
         q = (struct qdesc *)CurrSeg->e.seginfo->LinnumQueue;
         if ( q == NULL ) {
-            q = LclAlloc( sizeof( struct qdesc ) );
+            q = (struct qdesc *)LclAlloc( sizeof( struct qdesc ) );
             CurrSeg->e.seginfo->LinnumQueue = q;
             q->head = NULL;
         }
@@ -109,7 +109,7 @@ void AddLinnumDataRef( unsigned srcfile, uint_32 line_num )
             dmyproc->Ofssize = ModuleInfo.Ofssize;
             dmyproc->langtype = ModuleInfo.langtype;
             if ( write_to_file == TRUE ) {
-                curr = LclAlloc( sizeof( struct line_num_info ) );
+                curr = (struct line_num_info *)LclAlloc( sizeof( struct line_num_info ) );
                 curr->sym = dmyproc;
                 curr->line_number = GetLineNumber();
                 curr->file = srcfile;
@@ -130,7 +130,7 @@ void AddLinnumDataRef( unsigned srcfile, uint_32 line_num )
     }
     DebugMsg1(("AddLinnumDataRef(src=%u.%u): currofs=%Xh, CurrProc=%s, GeneratedCode=%u\n", srcfile, line_num, GetCurrOffset(), CurrProc ? CurrProc->sym.name : "NULL", ModuleInfo.GeneratedCode ));
 
-    curr = LclAlloc( sizeof( struct line_num_info ) );
+    curr = (struct line_num_info *)LclAlloc( sizeof( struct line_num_info ) );
     curr->number = line_num;
 #if COFF_SUPPORT
     if ( line_num == 0 ) { /* happens for COFF only */
@@ -160,7 +160,7 @@ void AddLinnumDataRef( unsigned srcfile, uint_32 line_num )
         if ( CurrProc && CurrProc->e.procinfo->size_prolog ) {
             DebugMsg1(("AddLinnumDataRef: calling AddLinnumData(src=%u.%u) sym=%s\n", curr->file, curr->line_number, curr->sym->name ));
             AddLinnumData( curr );
-            curr = LclAlloc( sizeof( struct line_num_info ) );
+            curr = (struct line_num_info *)LclAlloc( sizeof( struct line_num_info ) );
             curr->number = GetLineNumber();
             curr->offset = GetCurrOffset();
             curr->srcfile = srcfile;
@@ -202,7 +202,7 @@ void QueueDeleteLinnum( struct qdesc *queue )
 
     if ( queue == NULL )
         return;
-    curr = queue->head;
+    curr = (struct line_num_info *)queue->head;
     for( ; curr ; curr = next ) {
         next = curr->next;
         LclFree( curr );

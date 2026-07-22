@@ -114,12 +114,12 @@ static char *IncludeLibrary( const char *name )
      * then 2 defaultlib entries are added. If this is to be changed for
      * JWasm, activate the _stricmp() below.
      */
-    for ( q = ModuleInfo.g.LibQueue.head; q ; q = q->next ) {
+    for ( q = (struct qitem *)ModuleInfo.g.LibQueue.head; q ; q = (struct qitem *)q->next ) {
         //if ( _stricmp( dir->sym.name, name) == 0)
         if ( strcmp( q->value, name ) == 0 )
             return( q->value );
     }
-    q = LclAlloc( sizeof( struct qitem ) + strlen( name ) );
+    q = (struct qitem *)LclAlloc( sizeof( struct qitem ) + strlen( name ) );
     strcpy( q->value, name );
     QEnqueue( &ModuleInfo.g.LibQueue, q );
     return( q->value );
@@ -163,7 +163,7 @@ ret_code IncludeLibDirective( int i, struct asm_tok tokenarray[] )
 
     if ( tokenarray[i].token == T_STRING && tokenarray[i].string_delim == '<' ) {
         if ( tokenarray[i+1].token != T_FINAL ) {
-            return( EmitErr( SYNTAX_ERROR_EX, tokenarray[i+1].tokpos ) );
+            return( (ret_code)  EmitErr( SYNTAX_ERROR_EX, tokenarray[i+1].tokpos ) );
         }
         /* v2.08: use GetLiteralValue() */
         //name = StringBufferEnd;
@@ -200,7 +200,7 @@ ret_code IncBinDirective( int i, struct asm_tok tokenarray[] )
     /* v2.03: file name may be just a "number" */
     //if ( tokenarray[i].token == T_FINAL || tokenarray[i].token == T_NUM ) {
     if ( tokenarray[i].token == T_FINAL ) {
-        return( EmitError( EXPECTED_FILE_NAME ) );
+        return( (ret_code)EmitError( EXPECTED_FILE_NAME ) );
     }
 
     if ( tokenarray[i].token == T_STRING ) {
@@ -214,10 +214,10 @@ ret_code IncBinDirective( int i, struct asm_tok tokenarray[] )
             //GetLiteralValue( StringBufferEnd, tokenarray[i].string_ptr );
             memcpy( StringBufferEnd, tokenarray[i].string_ptr, tokenarray[i].stringlen+1 );
         } else {
-            return( EmitError( FILENAME_MUST_BE_ENCLOSED_IN_QUOTES_OR_BRACKETS ) );
+            return( (ret_code)EmitError( FILENAME_MUST_BE_ENCLOSED_IN_QUOTES_OR_BRACKETS ) );
         }
     } else {
-        return( EmitError( FILENAME_MUST_BE_ENCLOSED_IN_QUOTES_OR_BRACKETS ) );
+        return( (ret_code)EmitError( FILENAME_MUST_BE_ENCLOSED_IN_QUOTES_OR_BRACKETS ) );
     }
     i++;
     if ( tokenarray[i].token == T_COMMA ) {
@@ -227,7 +227,7 @@ ret_code IncBinDirective( int i, struct asm_tok tokenarray[] )
         if ( opndx.kind == EXPR_CONST ) {
             fileoffset = opndx.value;
         } else if ( opndx.kind != EXPR_EMPTY ) {
-            return( EmitError( CONSTANT_EXPECTED ) );
+            return( (ret_code)EmitError( CONSTANT_EXPECTED ) );
         }
         if ( tokenarray[i].token == T_COMMA ) {
             i++;
@@ -236,16 +236,16 @@ ret_code IncBinDirective( int i, struct asm_tok tokenarray[] )
             if ( opndx.kind == EXPR_CONST ) {
                 sizemax = opndx.value;
             } else if ( opndx.kind != EXPR_EMPTY ) {
-                return( EmitError( CONSTANT_EXPECTED ) );
+                return( (ret_code)EmitError( CONSTANT_EXPECTED ) );
             }
         }
     }
     if ( tokenarray[i].token != T_FINAL ) {
-        return( EmitErr( SYNTAX_ERROR_EX, tokenarray[i].tokpos ) );
+        return( (ret_code)EmitErr( SYNTAX_ERROR_EX, tokenarray[i].tokpos ) );
     }
 
     if( CurrSeg == NULL ) {
-        return( EmitError( MUST_BE_IN_SEGMENT_BLOCK ) );
+        return( (ret_code)EmitError( MUST_BE_IN_SEGMENT_BLOCK ) );
     }
 
     /* v2.04: tell assembler that data is emitted */
@@ -298,7 +298,7 @@ ret_code AliasDirective( int i, struct asm_tok tokenarray[] )
     if ( tokenarray[i].token != T_STRING ||
         tokenarray[i].string_delim != '<' ) {
         DebugMsg(("AliasDirective: first argument is not a literal: %s\n", tokenarray[i].string_ptr ));
-        return( EmitError( TEXT_ITEM_REQUIRED ) );
+        return( (ret_code)EmitError( TEXT_ITEM_REQUIRED ) );
     }
 
     /* check syntax. note that '=' is T_DIRECTIVE && DRT_EQUALSGN */
@@ -306,18 +306,18 @@ ret_code AliasDirective( int i, struct asm_tok tokenarray[] )
         //tokenarray[i+1].tokval != T_EQU ||
         tokenarray[i+1].dirtype != DRT_EQUALSGN ) {
         DebugMsg(("AliasDirective: syntax error: %s\n", tokenarray[i+1].string_ptr ));
-        return( EmitErr( SYNTAX_ERROR_EX, tokenarray[i+1].string_ptr ) );
+        return( (ret_code)EmitErr( SYNTAX_ERROR_EX, tokenarray[i+1].string_ptr ) );
     }
 
     if ( tokenarray[i+2].token != T_STRING ||
         tokenarray[i+2].string_delim != '<' )  {
         DebugMsg(("AliasDirective: second argument is not a literal: %s\n", tokenarray[i+2].string_ptr ));
-        return( EmitError( TEXT_ITEM_REQUIRED ) );
+        return( (ret_code)EmitError( TEXT_ITEM_REQUIRED ) );
     }
     subst = tokenarray[i+2].string_ptr;
 
     if ( tokenarray[i+3].token != T_FINAL ) {
-        return( EmitErr( SYNTAX_ERROR_EX, tokenarray[i+3].string_ptr ) );
+        return( (ret_code)EmitErr( SYNTAX_ERROR_EX, tokenarray[i+3].string_ptr ) );
     }
 
     /* make sure <alias_name> isn't defined elsewhere */
@@ -333,7 +333,7 @@ ret_code AliasDirective( int i, struct asm_tok tokenarray[] )
         } else if ( sym2->state != SYM_UNDEFINED &&
                    sym2->state != SYM_INTERNAL &&
                    sym2->state != SYM_EXTERNAL ) {
-            return( EmitErr( MUST_BE_PUBLIC_OR_EXTERNAL, subst ) );
+            return( (ret_code)EmitErr( MUST_BE_PUBLIC_OR_EXTERNAL, subst ) );
         }
         if ( sym == NULL )
             sym = SymCreate( tokenarray[i].string_ptr );
@@ -349,7 +349,7 @@ ret_code AliasDirective( int i, struct asm_tok tokenarray[] )
     }
     if ( sym->state != SYM_ALIAS || ( strcmp( sym->substitute->name, subst ) != 0 )) {
         DebugMsg(("AliasDirective: symbol redefinition\n"));
-        return( EmitErr( SYMBOL_REDEFINITION, sym->name ) );
+        return( (ret_code)EmitErr( SYMBOL_REDEFINITION, sym->name ) );
     }
 #if COFF_SUPPORT || ELF_SUPPORT
     /* for COFF+ELF, make sure <actual_name> is "global" (EXTERNAL or
@@ -361,10 +361,10 @@ ret_code AliasDirective( int i, struct asm_tok tokenarray[] )
 #endif
            ) {
             if ( sym->substitute->state == SYM_UNDEFINED ) {
-                return( EmitErr( SYMBOL_NOT_DEFINED, subst ) );
+                return( (ret_code)EmitErr( SYMBOL_NOT_DEFINED, subst ) );
             } else if ( sym->substitute->state != SYM_EXTERNAL &&
                        ( sym->substitute->state != SYM_INTERNAL || sym->substitute->ispublic == FALSE ) ) {
-                return( EmitErr( MUST_BE_PUBLIC_OR_EXTERNAL, subst ) );
+                return( (ret_code)EmitErr( MUST_BE_PUBLIC_OR_EXTERNAL, subst ) );
             }
         }
     }
@@ -402,7 +402,7 @@ ret_code NameDirective( int i, struct asm_tok tokenarray[] )
           tokenarray[i].tokval == T_TYPEDEF ||
           tokenarray[i].tokval == T_RECORD)) ||
          tokenarray[i].token == T_COLON ) {
-        return( EmitErr( SYNTAX_ERROR_EX, tokenarray[i-1].tokpos ) );
+        return( (ret_code)EmitErr( SYNTAX_ERROR_EX, tokenarray[i-1].tokpos ) );
     }
 
     /* don't touch Option fields! if anything at all, ModuleInfo.name may be modified.
@@ -435,13 +435,13 @@ ret_code RadixDirective( int i, struct asm_tok tokenarray[] )
     }
 
     if ( opndx.kind != EXPR_CONST ) {
-        return( EmitError( CONSTANT_EXPECTED ) );
+        return( (ret_code)EmitError( CONSTANT_EXPECTED ) );
     }
     if ( tokenarray[i].token != T_FINAL ) {
-        return( EmitErr( SYNTAX_ERROR_EX, tokenarray[i].tokpos ) );
+        return( (ret_code)EmitErr( SYNTAX_ERROR_EX, tokenarray[i].tokpos ) );
     }
     if ( opndx.value > 16 || opndx.value < 2 || opndx.hvalue != 0 ) {
-        return( EmitError( INVALID_RADIX_TAG ) );
+        return( (ret_code)EmitError( INVALID_RADIX_TAG ) );
     }
 
     ModuleInfo.radix = opndx.value;
@@ -456,7 +456,7 @@ ret_code SegOrderDirective( int i, struct asm_tok tokenarray[] )
 /**************************************************************/
 {
     if ( tokenarray[i+1].token != T_FINAL ) {
-        return( EmitErr( SYNTAX_ERROR_EX, tokenarray[i+1].tokpos ) );
+        return( (ret_code)EmitErr( SYNTAX_ERROR_EX, tokenarray[i+1].tokpos ) );
     }
 #if COFF_SUPPORT || ELF_SUPPORT || PE_SUPPORT
     if ( Options.output_format == OFORMAT_COFF
@@ -471,7 +471,7 @@ ret_code SegOrderDirective( int i, struct asm_tok tokenarray[] )
             EmitWarn( 2, NOT_SUPPORTED_WITH_CURR_FORMAT, _strupr( tokenarray[i].string_ptr ) );
     } else
 #endif
-        ModuleInfo.segorder = GetSflagsSp( tokenarray[i].tokval );
+        ModuleInfo.segorder = (enum seg_order)GetSflagsSp( tokenarray[i].tokval );
 
     return( NOT_ERROR );
 }

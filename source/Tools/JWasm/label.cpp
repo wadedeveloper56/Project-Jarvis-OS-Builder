@@ -213,7 +213,7 @@ ret_code LabelDirective( int i, struct asm_tok tokenarray[] )
 #endif
 
     if( i != 1 ) {  /* LABEL must be preceded by an ID */
-        return( EmitErr( SYNTAX_ERROR_EX, tokenarray[i].string_ptr ) );
+        return( (ret_code)EmitErr( SYNTAX_ERROR_EX, tokenarray[i].string_ptr ) );
     }
 
     i++;
@@ -239,7 +239,7 @@ ret_code LabelDirective( int i, struct asm_tok tokenarray[] )
     if ( ( ti.mem_type & MT_SPECIAL_MASK) == MT_ADDRESS ) {
         /* dont allow near16/far16/near32/far32 if size won't match */
         if ( ti.Ofssize != USE_EMPTY && ModuleInfo.Ofssize != ti.Ofssize ) {
-            return( EmitError( OFFSET_SIZE_MISMATCH ) );
+            return( (ret_code)EmitError( OFFSET_SIZE_MISMATCH ) );
         }
     }
 #if LABELARRAY
@@ -252,7 +252,7 @@ ret_code LabelDirective( int i, struct asm_tok tokenarray[] )
             if ( opnd.sym && opnd.sym->state == SYM_UNDEFINED )
                 opnd.value = 1;
             else {
-                return( EmitError( CONSTANT_EXPECTED ) );
+                return( (ret_code)EmitError( CONSTANT_EXPECTED ) );
             }
         }
         length = opnd.value;
@@ -260,7 +260,7 @@ ret_code LabelDirective( int i, struct asm_tok tokenarray[] )
 #endif
 
     if ( tokenarray[i].token != T_FINAL ) {
-        return( EmitErr( SYNTAX_ERROR_EX, tokenarray[i].tokpos ) ); /* v2.10: display tokpos */
+        return( (ret_code)EmitErr( SYNTAX_ERROR_EX, tokenarray[i].tokpos ) ); /* v2.10: display tokpos */
     }
 
     if ( ModuleInfo.list )

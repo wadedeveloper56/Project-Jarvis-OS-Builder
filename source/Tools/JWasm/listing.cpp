@@ -106,16 +106,16 @@ static void log_group(   const struct asym *, const struct dsym * );
 static void log_proc(    const struct asym * );
 
 static const struct print_item cr[] = {
-    { LQ_MACROS,          0, maccap, log_macro   },
-    { LQ_STRUCTS,         0, strcap, log_struct  },
+    { LQ_MACROS,          0, maccap, (void (*)())log_macro   },
+    { LQ_STRUCTS,         0, strcap, (void (*)())log_struct  },
 #ifdef DEBUG_OUT
-    { LQ_UNDEF_TYPES,     0, strcap, log_struct  },
+    { LQ_UNDEF_TYPES,     0, strcap, (void (*)())log_struct  },
 #endif
-    { LQ_RECORDS,         0, reccap, log_record  },
-    { LQ_TYPEDEFS,        0, tdcap,  log_typedef },
-    { LQ_SEGS,            0, segcap, log_segment },
-    { LQ_GRPS,   PRF_ADDSEG, NULL,   log_group   },
-    { LQ_PROCS,           0, prccap, log_proc    },
+    { LQ_RECORDS,         0, reccap, (void (*)())log_record  },
+    { LQ_TYPEDEFS,        0, tdcap,  (void (*)())log_typedef },
+    { LQ_SEGS,            0, segcap, (void (*)())log_segment },
+    { LQ_GRPS,   PRF_ADDSEG, NULL,   (void (*)())log_group   },
+    { LQ_PROCS,           0, prccap, (void (*)())log_proc    },
 };
 
 struct lstleft {
@@ -137,7 +137,7 @@ void LstWrite( enum lsttype type, uint_32 oldofs, void *value )
 /*************************************************************/
 {
     uint_32 newofs;
-    struct asym *sym = value;
+    struct asym *sym = (struct asym *)value;
     int     len;
     int     len2;
     int     idx;
@@ -276,7 +276,7 @@ void LstWrite( enum lsttype type, uint_32 oldofs, void *value )
         //strcpy( buffer2, sym->string_ptr );
         for ( p1 = sym->string_ptr, p2 = &ll.buffer[3], pll = &ll; *p1; ) {
             if ( p2 >= &pll->buffer[28] ) {
-                struct lstleft *next = myalloca( sizeof( struct lstleft ) );
+                struct lstleft *next = (struct lstleft *)myalloca( sizeof( struct lstleft ) );
                 pll->next = next;
                 pll = next;
                 pll->next = NULL;
@@ -288,7 +288,7 @@ void LstWrite( enum lsttype type, uint_32 oldofs, void *value )
         break;
     case LSTTYPE_MACROLINE:
         ll.buffer[1] = '>';
-        pSrcline = value;
+        pSrcline = (char *)value;
         break;
     case LSTTYPE_LABEL:
         oldofs = GetCurrOffset();
@@ -526,7 +526,7 @@ static const char *GetMemtypeString( const struct asym *sym, char *buffer )
                 if ( sym->target_type )
                     strcpy( b2, sym->target_type->name );
                 else if ( ( sym->ptr_memtype & MT_SPECIAL ) == 0 )
-                    strcpy( b2, SimpleTypeString( sym->ptr_memtype ) );
+                    strcpy( b2, SimpleTypeString( (enum memtype)sym->ptr_memtype ) );
             }
             return( buffer );
         }
@@ -1056,7 +1056,7 @@ void LstWriteCRef( void )
     fseek( CurrFile[LST], 0, SEEK_END );
 
     SymCount = SymGetCount();
-    syms = MemAlloc( SymCount * sizeof( struct asym * ) );
+    syms = (struct asym **)MemAlloc( SymCount * sizeof( struct asym * ) );
     SymGetAll( syms );
 
     DebugMsg(("LstWriteCRef: calling qsort\n"));
@@ -1122,8 +1122,8 @@ void LstWriteCRef( void )
                         LstCaption( strings[ *ps ], ps == cr[idx].capitems ? 2 : 0 );
                 }
             }
-            for( dir = queues[cr[idx].type].head; dir ; dir = dir->next ) {
-                cr[idx].function( &dir->sym, ( cr[idx].flags & PRF_ADDSEG ) ? queues[LQ_SEGS].head : NULL, 0 );
+            for( dir = (struct dsym *)queues[cr[idx].type].head; dir ; dir = dir->next ) {
+                //FIXME cr[idx].((void (*)(struct asym*,, struct dsym*))function)( (struct asym *) & dir->sym, (cr[idx].flags & PRF_ADDSEG) ? (struct dsym*)queues[LQ_SEGS].head : NULL, 0);
             }
         }
     }
@@ -1179,7 +1179,7 @@ ret_code ListingDirective( int i, struct asm_tok tokenarray[] )
         do {
             struct asym *sym;
             if ( tokenarray[i].token != T_ID ) {
-                return( EmitErr( SYNTAX_ERROR_EX, tokenarray[i].tokpos ) );
+                return( (ret_code)EmitErr( SYNTAX_ERROR_EX, tokenarray[i].tokpos ) );
             }
             /* the name may be a forward reference. In this case it will
              * be created here.
@@ -1190,7 +1190,7 @@ ret_code ListingDirective( int i, struct asm_tok tokenarray[] )
             i++;
             if ( i < Token_Count ) {
                 if ( tokenarray[i].token != T_COMMA )
-                    return( EmitErr( EXPECTING_COMMA, tokenarray[i].tokpos ) );
+                    return( (ret_code)EmitErr( EXPECTING_COMMA, tokenarray[i].tokpos ) );
 
                 /* if there's nothing after the comma, don't increment */
                 if ( i < ( Token_Count - 1 ) )
@@ -1224,7 +1224,7 @@ ret_code ListingDirective( int i, struct asm_tok tokenarray[] )
          * struct fields with names page, title, subtitle, subttl.
          */
         if( CurrStruct ) {
-            return( EmitError( STATEMENT_NOT_ALLOWED_INSIDE_STRUCTURE_DEFINITION ) );
+            return( (ret_code)EmitError( STATEMENT_NOT_ALLOWED_INSIDE_STRUCTURE_DEFINITION ) );
         }
         if ( Parse_Pass == PASS_1 )
             EmitWarn( 4, DIRECTIVE_IGNORED, tokenarray[i-1].string_ptr );
@@ -1232,7 +1232,7 @@ ret_code ListingDirective( int i, struct asm_tok tokenarray[] )
     }
 
     if ( tokenarray[i].token != T_FINAL ) {
-        return( EmitErr( SYNTAX_ERROR_EX, tokenarray[i].string_ptr ) );
+        return( (ret_code)EmitErr( SYNTAX_ERROR_EX, tokenarray[i].string_ptr ) );
     }
 
     return( NOT_ERROR );
@@ -1244,10 +1244,10 @@ ret_code ListMacroDirective( int i, struct asm_tok tokenarray[] )
 /***************************************************************/
 {
     if ( tokenarray[i+1].token != T_FINAL ) {
-        return( EmitErr( SYNTAX_ERROR_EX, tokenarray[i+1].string_ptr ) );
+        return( (ret_code)EmitErr( SYNTAX_ERROR_EX, tokenarray[i+1].string_ptr ) );
     }
 
-    ModuleInfo.list_macro = GetSflagsSp( tokenarray[i].tokval );
+    ModuleInfo.list_macro = (listmacro)GetSflagsSp( tokenarray[i].tokval );
 
     return( NOT_ERROR );
 }

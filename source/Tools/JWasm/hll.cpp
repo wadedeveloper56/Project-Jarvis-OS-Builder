@@ -294,7 +294,7 @@ static ret_code GetToken( struct hll_item *hll, int *i, struct asm_tok tokenarra
      * May happen for expressions like ".if 1 + CARRY?"
      */
     if ( *i > end_tok ) {
-        return( EmitError( SYNTAX_ERROR_IN_CONTROL_FLOW_DIRECTIVE ) );
+        return( (ret_code)EmitError( SYNTAX_ERROR_IN_CONTROL_FLOW_DIRECTIVE ) );
     }
 
     return( NOT_ERROR );
@@ -361,10 +361,10 @@ static ret_code GetSimpleExpression( struct hll_item *hll, int *i, struct asm_to
             if ( tokenarray[*i].token != T_CL_BRACKET ) {
                 //if (( tokenarray[*i].token == T_FINAL ) || ( tokenarray[*i].token == T_CL_BRACKET ))
                 DebugMsg(( "GetSimpleExpression: expected ')', found: %s\n", tokenarray[*i].string_ptr ));
-                return( EmitError( SYNTAX_ERROR_IN_CONTROL_FLOW_DIRECTIVE ) );
+                return( (ret_code)EmitError( SYNTAX_ERROR_IN_CONTROL_FLOW_DIRECTIVE ) );
             }
             (*i)++;
-            return( NOT_ERROR );
+            return( (ret_code)NOT_ERROR );
         }
     }
 
@@ -395,21 +395,21 @@ static ret_code GetSimpleExpression( struct hll_item *hll, int *i, struct asm_to
     if ( op >= COP_ZERO ) {
         if ( op1.kind != EXPR_EMPTY ) {
             DebugMsg(( "GetSimpleExpression: non-empty expression rejected: %s\n", tokenarray[op1_pos].tokpos ));
-            return( EmitError( SYNTAX_ERROR_IN_CONTROL_FLOW_DIRECTIVE ) );
+            return( (ret_code)EmitError( SYNTAX_ERROR_IN_CONTROL_FLOW_DIRECTIVE ) );
         }
         p = buffer;
         hllop->lastjmp = p;
         RenderJcc( p, flaginstr[ op - COP_ZERO ], !is_true, label );
-        return( NOT_ERROR );
+        return( (ret_code)NOT_ERROR );
     }
 
     switch ( op1.kind ) {
     case EXPR_EMPTY:
         DebugMsg(( "GetSimpleExpression: empty expression rejected\n" ));
-        return( EmitError( SYNTAX_ERROR_IN_CONTROL_FLOW_DIRECTIVE ) ); /* v2.09: changed from NOT_ERROR to ERROR */
+        return( (ret_code)EmitError( SYNTAX_ERROR_IN_CONTROL_FLOW_DIRECTIVE ) ); /* v2.09: changed from NOT_ERROR to ERROR */
     case EXPR_FLOAT:
         DebugMsg(( "GetSimpleExpression: float expression rejected: %s\n", tokenarray[op1_pos].tokpos ));
-        return( EmitError( REAL_OR_BCD_NUMBER_NOT_ALLOWED ) ); /* v2.10: added */
+        return( (ret_code)EmitError( REAL_OR_BCD_NUMBER_NOT_ALLOWED ) ); /* v2.10: added */
     }
 
     if ( op == COP_NONE ) {
@@ -463,7 +463,7 @@ static ret_code GetSimpleExpression( struct hll_item *hll, int *i, struct asm_to
     DebugMsg1(("%u GetSimpleExpression: EvalOperand 2 ok, type=%X, i=%u [%s]\n", evallvl, op2.type, *i, tokenarray[*i].tokpos));
     if ( op2.kind != EXPR_CONST && op2.kind != EXPR_ADDR && op2.kind != EXPR_REG ) {
         DebugMsg(("GetSimpleExpression: syntax error, op2.kind=%u\n", op2.kind ));
-        return( EmitError( SYNTAX_ERROR_IN_CONTROL_FLOW_DIRECTIVE ) );
+        return( (ret_code)EmitError( SYNTAX_ERROR_IN_CONTROL_FLOW_DIRECTIVE ) );
     }
     op2_end = *i;
 
@@ -492,9 +492,9 @@ static ret_code GetSimpleExpression( struct hll_item *hll, int *i, struct asm_to
         RenderJcc( p, instr, neg_cjmptype[op - COP_EQ] ? is_true : !is_true, label );
     } else {
         DebugMsg(("GetSimpleExpression: unexpected operator %s\n", tokenarray[op1_pos].tokpos ));
-        return( EmitError( SYNTAX_ERROR_IN_CONTROL_FLOW_DIRECTIVE ) );
+        return( (ret_code)EmitError( SYNTAX_ERROR_IN_CONTROL_FLOW_DIRECTIVE ) );
     }
-    return( NOT_ERROR );
+    return( (ret_code)NOT_ERROR );
 }
 
 /* invert a Jump:
@@ -778,9 +778,9 @@ static ret_code EvaluateHllExpression( struct hll_item *hll, int *i, struct asm_
         //DebugMsg(( "EvaluateHllExpression: EOL at pos 0 in line buffer\n" ));
     if ( tokenarray[*i].token != T_FINAL ) {
         DebugMsg(( "EvaluateHllExpression: unexpected tokens >%s<\n", tokenarray[*i].tokpos ));
-        return( EmitError( SYNTAX_ERROR_IN_CONTROL_FLOW_DIRECTIVE ) );
+        return( (ret_code)EmitError( SYNTAX_ERROR_IN_CONTROL_FLOW_DIRECTIVE ) );
     }
-    return( NOT_ERROR );
+    return( (ret_code)NOT_ERROR );
 }
 
 /* for .UNTILCXZ: check if expression is simple enough.
@@ -861,7 +861,7 @@ ret_code HllStartDir( int i, struct asm_tok tokenarray[] )
         hll = HllFree;
         DebugCmd( cntReused++ );
     } else {
-        hll = LclAlloc( sizeof( struct hll_item ) );
+        hll = (struct hll_item *)LclAlloc( sizeof( struct hll_item ) );
         DebugCmd( cntAlloc++ );
     }
 
@@ -901,7 +901,7 @@ ret_code HllStartDir( int i, struct asm_tok tokenarray[] )
         hll->labels[LSTART] = 0; /* not used by .IF */
         hll->labels[LTEST] = GetHllLabel();
         hll->cmd = HLL_IF;
-        hll->flags = 0;
+        hll->flags = (hll_flags) 0;
         /* get the C-style expression, convert to ASM code lines */
         rc = EvaluateHllExpression( hll, &i, tokenarray, LTEST, FALSE, buffer );
         if ( rc == NOT_ERROR ) {
@@ -927,7 +927,7 @@ ret_code HllStartDir( int i, struct asm_tok tokenarray[] )
                 if ( rc == NOT_ERROR ) {
                     int size;
                     size = strlen( buffer ) + 1;
-                    hll->condlines = LclAlloc( size );
+                    hll->condlines = (char *)LclAlloc( size );
                     memcpy( hll->condlines, buffer, size );
                     DebugCmd( cntCond++ ); DebugCmd( cntCondBytes += size );
                 }
@@ -989,7 +989,7 @@ ret_code HllEndDir( int i, struct asm_tok tokenarray[] )
 
     if ( HllStack == NULL ) {
         DebugMsg(("HllEndDir: hll stack is empty\n"));
-        return( EmitError( DIRECTIVE_MUST_BE_IN_CONTROL_BLOCK ) );
+        return( (ret_code)EmitError( DIRECTIVE_MUST_BE_IN_CONTROL_BLOCK ) );
     }
 
     hll = HllStack;
@@ -1002,7 +1002,7 @@ ret_code HllEndDir( int i, struct asm_tok tokenarray[] )
     case T_DOT_ENDIF:
         if ( hll->cmd != HLL_IF ) {
             DebugMsg(("HllEndDir: no .IF on the hll stack\n"));
-            return( EmitErr( BLOCK_NESTING_ERROR, tokenarray[i].string_ptr ) );
+            return( (ret_code)EmitErr( BLOCK_NESTING_ERROR, tokenarray[i].string_ptr ) );
         }
         i++;
         /* if a test label isn't created yet, create it */
@@ -1013,7 +1013,7 @@ ret_code HllEndDir( int i, struct asm_tok tokenarray[] )
     case T_DOT_ENDW:
         if ( hll->cmd != HLL_WHILE ) {
             DebugMsg(("HllEndDir: no .WHILE on the hll stack\n"));
-            return( EmitErr( BLOCK_NESTING_ERROR, tokenarray[i].string_ptr ) );
+            return( (ret_code)EmitErr( BLOCK_NESTING_ERROR, tokenarray[i].string_ptr ) );
         }
         i++;
         /* create test label */
@@ -1026,7 +1026,7 @@ ret_code HllEndDir( int i, struct asm_tok tokenarray[] )
     case T_DOT_UNTILCXZ:
         if ( hll->cmd != HLL_REPEAT ) {
             DebugMsg(("HllEndDir: no .REPEAT on the hll stack\n"));
-            return( EmitErr( BLOCK_NESTING_ERROR, tokenarray[i].string_ptr ) );
+            return( (ret_code)EmitErr( BLOCK_NESTING_ERROR, tokenarray[i].string_ptr ) );
         }
         i++;
         if ( hll->labels[LTEST] ) /* v2.11: LTEST only needed if .CONTINUE has occured */
@@ -1049,7 +1049,7 @@ ret_code HllEndDir( int i, struct asm_tok tokenarray[] )
     case T_DOT_UNTIL:
         if ( hll->cmd != HLL_REPEAT ) {
             DebugMsg(("HllEndDir: no .REPEAT on the hll stack\n"));
-            return( EmitErr( BLOCK_NESTING_ERROR, tokenarray[i].string_ptr ) );
+            return( (ret_code)EmitErr( BLOCK_NESTING_ERROR, tokenarray[i].string_ptr ) );
         }
         i++;
         if ( hll->labels[LTEST] ) /* v2.11: LTEST only needed if .CONTINUE has occured */
@@ -1114,7 +1114,7 @@ ret_code HllExitDir( int i, struct asm_tok tokenarray[] )
 
     if ( hll == NULL ) {
         DebugMsg(("HllExitDir stack error\n"));
-        return( EmitError( DIRECTIVE_MUST_BE_IN_CONTROL_BLOCK ) );
+        return( (ret_code)EmitError( DIRECTIVE_MUST_BE_IN_CONTROL_BLOCK ) );
     }
 
     switch ( cmd ) {
@@ -1122,11 +1122,11 @@ ret_code HllExitDir( int i, struct asm_tok tokenarray[] )
     case T_DOT_ELSEIF:
         if ( hll->cmd != HLL_IF ) {
             DebugMsg(("HllExitDir(%s): labels[LTEST]=%X\n", tokenarray[i].string_ptr, hll->labels[LTEST]));
-            return( EmitErr( BLOCK_NESTING_ERROR, tokenarray[i].string_ptr ) );
+            return( (ret_code)EmitErr( BLOCK_NESTING_ERROR, tokenarray[i].string_ptr ) );
         }
         /* v2.08: check for multiple ELSE clauses */
         if ( hll->flags & HLLF_ELSEOCCURED ) {
-            return( EmitError( DOT_ELSE_CLAUSE_ALREADY_OCCURED_IN_THIS_DOT_IF_BLOCK ) );
+            return( (ret_code)EmitError( DOT_ELSE_CLAUSE_ALREADY_OCCURED_IN_THIS_DOT_IF_BLOCK ) );
         }
 
         /* the 'exit'-label is only needed if an .ELSE branch exists.
@@ -1148,14 +1148,14 @@ ret_code HllExitDir( int i, struct asm_tok tokenarray[] )
             if ( rc == NOT_ERROR )
                 QueueTestLines( buffer );
         } else
-            hll->flags |= HLLF_ELSEOCCURED;
+            DO_OR_EQ(hll_flags,hll->flags, |=, HLLF_ELSEOCCURED);
 
         break;
     case T_DOT_BREAK:
     case T_DOT_CONTINUE:
         for ( ; hll && hll->cmd == HLL_IF; hll = hll->next );
         if ( hll == NULL ) {
-            return( EmitError( DIRECTIVE_MUST_BE_IN_CONTROL_BLOCK ) );
+            return( (ret_code)EmitError( DIRECTIVE_MUST_BE_IN_CONTROL_BLOCK ) );
         }
         /* v2.11: create 'exit' and 'test' labels delayed.
          */

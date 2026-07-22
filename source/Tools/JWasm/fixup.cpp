@@ -64,7 +64,7 @@ struct fixup *CreateFixup( struct asym *sym, enum fixup_types type, enum fixup_o
 #endif
     struct fixup     *fixup;
 
-    fixup = LclAlloc( sizeof( struct fixup ) );
+    fixup = (struct fixup *)LclAlloc( sizeof( struct fixup ) );
 #ifdef TRMEM
     fixup->marker = 'XF';
     DebugMsg1(("CreateFixup, pass=%u: fix=%p sym=%s\n", Parse_Pass+1, fixup, sym ? sym->name : "NULL" ));

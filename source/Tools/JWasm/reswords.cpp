@@ -228,7 +228,7 @@ uint_16 optable_idx[] = {
 /* table of instruction operand classes
  */
 const struct opnd_class opnd_clstab[] = {
-#define OpCls( op1, op2, op3 ) { { OP_ ## op1, OP_ ## op2 }, OP3_ ## op3 },
+#define OpCls( op1, op2, op3 ) { { (operand_type)(OP_ ## op1), (operand_type)(OP_ ## op2) }, (unsigned char)(OP3_ ## op3) },
 #include "opndcls.h"
 #undef OpCls
 };
@@ -347,23 +347,23 @@ const uint_8 vex_flags[] = {
 
 /* keywords to be added for 64-bit */
 static const enum instr_token patchtab64[] = {
-    T_SPL,             /* add x64 register part of special.h */
-    T_FRAME,           /* add x64 reserved word part of special.h */
-    T_DOT_ALLOCSTACK,  /* add x64 directive part of directve.h (win64) */
-    T_JRCXZ,           /* branch instructions must be grouped together */
-    T_CDQE,            /* add x64 part of instruct.h */
+    (enum instr_token)T_SPL,             /* add x64 register part of special.h */
+    (enum instr_token)T_FRAME,           /* add x64 reserved word part of special.h */
+    (enum instr_token)T_DOT_ALLOCSTACK,  /* add x64 directive part of directve.h (win64) */
+    (enum instr_token)T_JRCXZ,           /* branch instructions must be grouped together */
+    (enum instr_token)T_CDQE,            /* add x64 part of instruct.h */
 #if AVXSUPP
-    T_VPEXTRQ,         /* add x64 part of instravx.h */
+    (enum instr_token)T_VPEXTRQ,         /* add x64 part of instravx.h */
 #endif
 };
 
 /* keywords to be removed for 64-bit */
 static const enum instr_token patchtab32[] = {
-    T_TR3,          /* registers invalid for IA32+              */
-    T_DOT_SAFESEH,  /* directives invalid for IA32+             */
-    T_AAA,          /* instructions invalid for IA32+           */
-    T_JCXZ,         /* 1. branch instructions invalid for IA32+ */
-    T_LOOPW         /* 2. branch instructions invalid for IA32+ */
+    (enum instr_token)T_TR3,          /* registers invalid for IA32+              */
+    (enum instr_token)T_DOT_SAFESEH,  /* directives invalid for IA32+             */
+    (enum instr_token)T_TR3,          /* registers invalid for IA32+              */
+    (enum instr_token)T_JCXZ,         /* 1. branch instructions invalid for IA32+ */
+    (enum instr_token)T_LOOPW         /* 2. branch instructions invalid for IA32+ */
 };
 
 struct replace_ins {
@@ -535,7 +535,7 @@ void RenameKeyword( unsigned token, const char *newname, uint_8 length )
      */
     if ( ResWordTable[token].name >= resw_strings &&
         ResWordTable[token].name < ( resw_strings + sizeof( resw_strings ) ) ) {
-        curr = LclAlloc( sizeof( struct rename_node ) );
+        curr = (struct rename_node *)LclAlloc( sizeof( struct rename_node ) );
         curr->next = NULL;
         curr->name = ResWordTable[token].name;
         curr->token = token;
@@ -551,7 +551,7 @@ void RenameKeyword( unsigned token, const char *newname, uint_8 length )
 #if 1
         /* v2.11: search the original name. if the "new" names matches
          * the original name, restore the name pointer */
-        for ( curr = renamed_keys.head, prev = NULL; curr; prev = curr ) {
+        for ( curr = (struct rename_node *)renamed_keys.head, prev = NULL; curr; prev = curr ) {
             if ( curr->token == token ) {
                 if ( curr->length == length && !memcmp( newname, curr->name, length ) ) {
                     if ( prev )
@@ -570,7 +570,7 @@ void RenameKeyword( unsigned token, const char *newname, uint_8 length )
         }
 #endif
     }
-    ResWordTable[token].name = LclAlloc( length );
+    ResWordTable[token].name = (const char *)LclAlloc( length );
     /* convert to lowercase? */
     memcpy( (void *)ResWordTable[token].name, newname, length );
     ResWordTable[token].len = length;
@@ -754,8 +754,8 @@ void ResWordsFini( void )
      * the keyword has to removed ( and readded ) from the hash table,
      * since its position most likely will change.
      */
-    for ( rencurr = renamed_keys.head; rencurr; ) {
-        struct rename_node *tmp = rencurr->next;
+    for ( rencurr = (struct rename_node *)renamed_keys.head; rencurr; ) {
+        struct rename_node *tmp = (struct rename_node *)rencurr->next;
         RemoveResWord( rencurr->token );
         /* v2.06: this is the correct name to free */
         LclFree( (void *)ResWordTable[rencurr->token].name );

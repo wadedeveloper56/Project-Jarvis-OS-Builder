@@ -309,7 +309,7 @@ ret_code StoreMacro( struct dsym *macro, int i, struct asm_tok tokenarray[], boo
             for ( j = i, info->parmcnt = 1; j < Token_Count; j++ )
                 if ( tokenarray[j].token == T_COMMA )
                     info->parmcnt++;
-            info->parmlist = LclAlloc( info->parmcnt * sizeof(struct mparm_list));
+            info->parmlist = (struct mparm_list *)LclAlloc( info->parmcnt * sizeof(struct mparm_list));
         } else {
             info->parmcnt = 0;
             info->parmlist = NULL;
@@ -348,7 +348,7 @@ ret_code StoreMacro( struct dsym *macro, int i, struct asm_tok tokenarray[], boo
                         EmitError( LITERAL_EXPECTED_AFTER_EQ );
                         break; // return( ERROR );
                     }
-                    paranode->deflt = LclAlloc( tokenarray[i].stringlen + 1 );
+                    paranode->deflt = (char *)LclAlloc( tokenarray[i].stringlen + 1 );
                     memcpy( paranode->deflt, tokenarray[i].string_ptr, tokenarray[i].stringlen + 1 );
                     i++;
                 } else if( _stricmp( tokenarray[i].string_ptr, "REQ" ) == 0 ) {
@@ -436,7 +436,7 @@ ret_code StoreMacro( struct dsym *macro, int i, struct asm_tok tokenarray[], boo
         if ( *ls.input == NULLC || *ls.input == ';' ) {
 #if STORE_EMPTY_LINES
             if( store_data ) {
-                *nextline = LclAlloc( sizeof( struct srcline ) );
+                *nextline = (struct srcline *)LclAlloc( sizeof( struct srcline ) );
                 (*nextline)->next = NULL;
                 (*nextline)->ph_count = 0;
                 (*nextline)->line[0] = NULLC;
@@ -500,7 +500,7 @@ ret_code StoreMacro( struct dsym *macro, int i, struct asm_tok tokenarray[], boo
                     break;
                 }
                 size = strlen( StringBufferEnd );
-                mnames[mindex].label = myalloca( size );
+                mnames[mindex].label = (char *)myalloca( size );
                 memcpy( mnames[mindex].label, StringBufferEnd, size );
                 mnames[mindex].len = size;
                 mindex++;
@@ -583,7 +583,7 @@ ret_code StoreMacro( struct dsym *macro, int i, struct asm_tok tokenarray[], boo
             if ( mindex )
                 phs = store_placeholders( src, mnames );
             j = strlen( src );
-            *nextline = LclAlloc( sizeof( struct srcline ) + j );
+            *nextline = (struct srcline *)LclAlloc( sizeof( struct srcline ) + j );
             (*nextline)->next = NULL;
             (*nextline)->ph_count = phs;
             memcpy( (*nextline)->line, src, j + 1 );
@@ -605,7 +605,7 @@ struct dsym *CreateMacro( const char *name )
     struct dsym *macro;
     if ( (macro = (struct dsym *)SymCreate( name )) != NULL ) {
         macro->sym.state = SYM_MACRO;
-        macro->e.macroinfo = LclAlloc( sizeof( struct macro_info ) );
+        macro->e.macroinfo = (struct macro_info *)LclAlloc( sizeof( struct macro_info ) );
         macro->e.macroinfo->parmcnt  = 0;
         macro->e.macroinfo->localcnt = 0;
         macro->e.macroinfo->parmlist = NULL;
@@ -683,7 +683,7 @@ ret_code MacroDir( int i, struct asm_tok tokenarray[] )
         macro = CreateMacro( name );
     } else if( macro->sym.state != SYM_MACRO ) {
         if ( macro->sym.state != SYM_UNDEFINED ) {
-            return( EmitErr( SYMBOL_REDEFINITION, name ) );
+            return( (ret_code)EmitErr( SYMBOL_REDEFINITION, name ) );
         }
         /* the macro was used before it's defined. That's
          * a severe error. Nevertheless define the macro now,
@@ -693,7 +693,7 @@ ret_code MacroDir( int i, struct asm_tok tokenarray[] )
          */
         sym_remove_table( &SymTables[TAB_UNDEF], macro );
         macro->sym.state = SYM_MACRO;
-        macro->e.macroinfo = LclAlloc( sizeof( struct macro_info ) );
+        macro->e.macroinfo = (struct macro_info *)LclAlloc( sizeof( struct macro_info ) );
         memset( macro->e.macroinfo, 0, sizeof( struct macro_info ) );
     }
     macro->e.macroinfo->srcfile = get_curr_srcfile();
@@ -737,14 +737,14 @@ ret_code PurgeDirective( int i, struct asm_tok tokenarray[] )
     i++; /* skip directive */
     do {
         if ( tokenarray[i].token != T_ID ) {
-            return( EmitErr( SYNTAX_ERROR_EX, tokenarray[i].string_ptr ) );
+            return( (ret_code)EmitErr( SYNTAX_ERROR_EX, tokenarray[i].string_ptr ) );
         }
         sym = SymSearch( tokenarray[i].string_ptr );
         if ( sym == NULL ) {
-            return( EmitErr( SYMBOL_NOT_DEFINED, tokenarray[i].string_ptr ) );
+            return( (ret_code)EmitErr( SYMBOL_NOT_DEFINED, tokenarray[i].string_ptr ) );
         }
         if ( sym->state != SYM_MACRO ) {
-            return( EmitErr( EXPECTED, "macro name" ) );
+            return( (ret_code)EmitErr( EXPECTED, "macro name" ) );
         }
 #if TRUEPURGE
         sym->defined = FALSE;
@@ -763,7 +763,7 @@ ret_code PurgeDirective( int i, struct asm_tok tokenarray[] )
         i++;
         if ( i < Token_Count ) {
             if ( tokenarray[i].token != T_COMMA || tokenarray[i+1].token == T_FINAL ) {
-                return( EmitErr( SYNTAX_ERROR_EX, tokenarray[i].tokpos ) );
+                return( (ret_code)EmitErr( SYNTAX_ERROR_EX, tokenarray[i].tokpos ) );
             }
             i++;
         }
@@ -816,7 +816,7 @@ ret_code MacroInit( int pass )
         macro->sym.func_ptr = EnvironFunc;
         macro->sym.isfunc = TRUE;
         macro->e.macroinfo->parmcnt = 1;
-        macro->e.macroinfo->parmlist = LclAlloc(sizeof(struct mparm_list));
+        macro->e.macroinfo->parmlist = (struct mparm_list *)LclAlloc(sizeof(struct mparm_list));
         macro->e.macroinfo->parmlist->deflt = NULL;
         macro->e.macroinfo->parmlist->required = TRUE;
     }

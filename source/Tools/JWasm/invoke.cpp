@@ -990,9 +990,9 @@ static int PushInvokeParam( int i, struct asm_tok tokenarray[], struct dsym *pro
 
                 /* in params like "qword ptr [eax]" the typecast
                  * has to be removed */
-                if ( opnd.explicit ) {
+                if ( opnd.explicit1 ) {
                     SkipTypecast( fullparam, i, tokenarray );
-                    opnd.explicit = FALSE;
+                    opnd.explicit1 = FALSE;
                 }
 
                 while ( asize > 0 ) {
@@ -1489,7 +1489,7 @@ ret_code InvokeDirective( int i, struct asm_tok tokenarray[] )
 
     if( sym == NULL ) {
         /* v2.04: msg changed */
-        return( EmitErr( INVOKE_REQUIRES_PROTOTYPE ) );
+        return( (ret_code)EmitErr( INVOKE_REQUIRES_PROTOTYPE ) );
         //return( EmitErr( SYMBOL_NOT_DEFINED, name ) );
     }
     if( sym->isproc )  /* the most simple case: symbol is a PROC */
@@ -1509,14 +1509,14 @@ ret_code InvokeDirective( int i, struct asm_tok tokenarray[] )
         if ( proc->sym.mem_type != MT_PROC ) {
             DebugMsg(("InvokeDir: error proc.name=>%s< .mem_type=%Xh\n", proc->sym.name, proc->sym.mem_type ));
             DebugMsg(("InvokeDir: error sym.name=%s\n", sym ? sym->name : "" ));
-            return( EmitErr( INVOKE_REQUIRES_PROTOTYPE ) );
+            return( (ret_code)EmitErr( INVOKE_REQUIRES_PROTOTYPE ) );
         }
     isfnptr:
         /* get the pointer target */
         sym = proc->sym.target_type;
         DebugMsg1(("InvokeDir: proc=%s target_type=>%s<\n", proc->sym.name, sym ? sym->name : "NULL" ));
         if ( sym == NULL ) {
-            return( EmitErr( INVOKE_REQUIRES_PROTOTYPE ) );
+            return( (ret_code)EmitErr( INVOKE_REQUIRES_PROTOTYPE ) );
         }
     } else {
         DebugMsg(("InvokeDir: error, sym=%s state=%u memtype=%Xh [type=%s memtype=%Xh]\n",
@@ -1531,7 +1531,7 @@ ret_code InvokeDirective( int i, struct asm_tok tokenarray[] )
                       sym->target_type->ptr_memtype,
                       sym->target_type->isproc ));
 #endif
-        return( EmitErr( INVOKE_REQUIRES_PROTOTYPE ) );
+        return( (ret_code)EmitErr( INVOKE_REQUIRES_PROTOTYPE ) );
     }
     proc = (struct dsym *)sym;
     info = proc->e.procinfo;
@@ -1539,7 +1539,7 @@ ret_code InvokeDirective( int i, struct asm_tok tokenarray[] )
 #if 0 /* v2.05: can't happen anymore */
     /* does FASTCALL variant support INVOKE? */
     if ( proc->sym.langtype == LANG_FASTCALL && fastcall_tab[ModuleInfo.fctype].invokestart == NULL ) {
-        return( EmitError( FASTCALL_VARIANT_NOT_SUPPORTED ) );
+        return( (ret_code)EmitError( FASTCALL_VARIANT_NOT_SUPPORTED ) );
     }
 #endif
 
@@ -1560,7 +1560,7 @@ ret_code InvokeDirective( int i, struct asm_tok tokenarray[] )
         /* check if there is a superfluous parameter in the INVOKE call */
         if ( PushInvokeParam( i, tokenarray, proc, NULL, numParam, &r0flags ) != ERROR ) {
             DebugMsg(("InvokeDir: superfluous argument, i=%u\n", i));
-            return( EmitErr( TOO_MANY_ARGUMENTS_TO_INVOKE ) );
+            return( (ret_code)EmitErr( TOO_MANY_ARGUMENTS_TO_INVOKE ) );
         }
     } else {
         int j = (Token_Count - i) / 2;

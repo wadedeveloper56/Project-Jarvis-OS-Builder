@@ -101,10 +101,10 @@ ret_code StartupExitDirective( int i, struct asm_tok tokenarray[] )
     LstWriteSrcLine();
 
     if( ModuleInfo.model == MODEL_NONE ) {
-        return( EmitError( MODEL_IS_NOT_DECLARED ) );
+        return( (ret_code)EmitError( MODEL_IS_NOT_DECLARED ) );
     }
     if ( ModuleInfo.Ofssize > USE16 ) {
-        return( EmitErr( DOES_NOT_WORK_WITH_32BIT_SEGMENTS, tokenarray[i].string_ptr ) );
+        return( (ret_code)EmitErr( DOES_NOT_WORK_WITH_32BIT_SEGMENTS, tokenarray[i].string_ptr ) );
     }
 
     switch( tokenarray[i].tokval ) {
@@ -215,7 +215,8 @@ ret_code EndDirective( int i, struct asm_tok tokenarray[] )
         return( ERROR );
     }
     if( tokenarray[i].token != T_FINAL ) {
-        return( EmitErr( SYNTAX_ERROR_EX, tokenarray[i].tokpos ) );
+        return
+            ( (ret_code)EmitErr( SYNTAX_ERROR_EX, tokenarray[i].tokpos ) );
     }
 
     if ( CurrStruct ) {
@@ -272,7 +273,7 @@ ret_code EndDirective( int i, struct asm_tok tokenarray[] )
             DebugMsg(("EndDirective: start address not a code label, mem_type=%Xh\n", opndx.mem_type ));
         }
 #endif
-        return( EmitError( OPERAND_MUST_BE_RELOCATABLE ) );
+        return( (ret_code)EmitError( OPERAND_MUST_BE_RELOCATABLE ) );
     }
 
     /* _close _open segments */

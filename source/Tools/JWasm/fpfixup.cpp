@@ -80,7 +80,7 @@ void AddFloatingPointEmulationFixup( struct code_info *CodeInfo )
     } else if ( CodeInfo->prefix.RegOverride == EMPTY ) {
         patch = FPP_NORMAL;
     } else {
-        patch = CodeInfo->prefix.RegOverride + 2;
+        patch = (enum fp_patches)(CodeInfo->prefix.RegOverride + 2);
     }
 
     /* emit 1-2 externals for the patch if not done already */
