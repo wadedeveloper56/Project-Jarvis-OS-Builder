@@ -112,7 +112,7 @@ static ret_code InitializeArray( const struct sfield *f, int *pi, struct asm_tok
 
         if ( bArray == FALSE ) {
             DebugMsg1(("InitializeArray(%s): error, array init requires DUP, string or literal\n", f->sym.name ));
-            return( EmitErr( INITIALIZER_MUST_BE_A_STRING_OR_SINGLE_ITEM, tokenarray[i].tokpos ) );
+            return( (ret_code)EmitErr( INITIALIZER_MUST_BE_A_STRING_OR_SINGLE_ITEM, tokenarray[i].tokpos ) );
         }
 
         lvl = tokenarray[j].tokpos - tokenarray[i].tokpos;
@@ -211,7 +211,7 @@ static ret_code InitStructuredVar( int index, struct asm_tok tokenarray[], const
         /* v2.08: no special handling of {}-literals anymore */
         if ( tokenarray[index].string_delim != '<' &&
             tokenarray[index].string_delim != '{' ) {
-            return( EmitError( MISSING_ANGLE_BRACKET_OR_BRACE_IN_LITERAL ) );
+            return( (ret_code)  EmitError( MISSING_ANGLE_BRACKET_OR_BRACE_IN_LITERAL ) );
         }
         i = Token_Count + 1;
         //strcpy( line, tokenarray[index].string_ptr );
@@ -226,7 +226,7 @@ static ret_code InitStructuredVar( int index, struct asm_tok tokenarray[], const
                  tokenarray[index].token == T_FINAL)) {
         i = Token_Count;
     } else {
-        return( EmitErr( INITIALIZER_MUST_BE_A_STRING_OR_SINGLE_ITEM, embedded ? embedded->name : "" ) );
+        return( (ret_code)EmitErr( INITIALIZER_MUST_BE_A_STRING_OR_SINGLE_ITEM, embedded ? embedded->name : "" ) );
     }
     if ( symtype->sym.typekind == TYPE_RECORD ) {
         dwRecInit = 0;
@@ -436,7 +436,7 @@ static void output_float( const struct expr *opnd, unsigned size )
     } else {
         atofloat( buffer, opnd->float_tok->string_ptr, size, opnd->negative, opnd->float_tok->floattype );
     }
-    OutputDataBytes( buffer, size );
+    OutputDataBytes( (uint_8 *)buffer, size );
     return;
 }
 
@@ -561,12 +561,12 @@ next_item:  /* <--- continue scan if a comma has been detected */
         }
         /* max dup is 0x7fffffff */
         if ( opndx.value < 0 ) {
-            return( EmitError( COUNT_MUST_BE_POSITIVE_OR_ZERO ) );
+            return( (ret_code)EmitError( COUNT_MUST_BE_POSITIVE_OR_ZERO ) );
         }
         i++;
         if( tokenarray[i].token != T_OP_BRACKET ) {
             DebugMsg(("data_item error, missing '('\n"));
-            return( EmitErr( EXPECTED, "(" ) );
+            return( (ret_code)EmitErr( EXPECTED, "(" ) );
         }
         i++;
 
@@ -592,7 +592,7 @@ next_item:  /* <--- continue scan if a comma has been detected */
         }
         if( tokenarray[i].token != T_CL_BRACKET ) {
             DebugMsg(("data_item: error 'missing ')', exit\n"));
-            return( EmitErr( EXPECTED, ")" ) );
+            return( (ret_code)EmitErr( EXPECTED, ")" ) );
         }
         /* v2.09: SIZE and LENGTH actually don't return values for "first initializer, but
          * the "first dimension" values
@@ -619,7 +619,7 @@ next_item:  /* <--- continue scan if a comma has been detected */
         while ( tmp->type ) tmp = tmp->type;
         if ( tmp->typekind != TYPE_TYPEDEF ) {
             DebugMsg1(("data_item: error, type=%s needs literal, >%s<\n", type_sym->name, tokenarray[i].tokpos ));
-            return( EmitErr( STRUCTURE_IMPROPERLY_INITIALIZED, type_sym->name ) );
+            return( (ret_code)EmitErr( STRUCTURE_IMPROPERLY_INITIALIZED, type_sym->name ) );
         }
     }
 
@@ -672,7 +672,7 @@ next_item:  /* <--- continue scan if a comma has been detected */
         break;
     case EXPR_CONST:
         if ( is_float ) {
-            return( EmitError( MUST_USE_FLOAT_INITIALIZER ) );
+            return( (ret_code)EmitError( MUST_USE_FLOAT_INITIALIZER ) );
         }
 
         /* a string returned by the evaluator (enclosed in quotes!)? */
@@ -694,14 +694,14 @@ next_item:  /* <--- continue scan if a comma has been detected */
                     //string_len = 1;
                     sym->isarray = TRUE;
                 } else {
-                    return( EmitError( EMPTY_STRING ) ); /* MASM doesn't like "" */
+                    return( (ret_code)EmitError( EMPTY_STRING ) ); /* MASM doesn't like "" */
                 }
             }
             /* a string is only regarded as an array if item size is 1 */
             /* else it is regarded as ONE item */
             if( no_of_bytes != 1 ) {
                 if( string_len > no_of_bytes ) {
-                    return( EmitError( INITIALIZER_OUT_OF_RANGE ) );
+                    return( (ret_code)EmitError( INITIALIZER_OUT_OF_RANGE ) );
                 }
             }
 
@@ -722,7 +722,7 @@ next_item:  /* <--- continue scan if a comma has been detected */
                 /* anything bigger than a byte must be stored in little-endian
                  * format -- LSB first */
                 if ( string_len > 1 && no_of_bytes > 1 )
-                    pchar = little_endian( (const char *)pchar, string_len );
+                    pchar = (uint_8 *)little_endian( (const char *)pchar, string_len );
                 OutputDataBytes( pchar, string_len );
                 if ( no_of_bytes > string_len )
                     FillDataBytes( 0, no_of_bytes - string_len );
@@ -757,12 +757,12 @@ next_item:  /* <--- continue scan if a comma has been detected */
                         memset( opndx.chararray, tmp, no_of_bytes );
                         if ( opndx.llvalue != 0 && opndx.llvalue != -1 ) {
                             DebugMsg(("data_item.CONST: error, unhandled data is %" I64_SPEC "X_%016" I64_SPEC "X\n", opndx.hlvalue, opndx.llvalue));
-                            return( EmitErr( INITIALIZER_MAGNITUDE_TOO_LARGE, opndx.sym ? opndx.sym->name : "" ) );
+                            return( (ret_code)EmitErr( INITIALIZER_MAGNITUDE_TOO_LARGE, opndx.sym ? opndx.sym->name : "" ) );
                         }
                     } else if ( no_of_bytes == 10 ) {
                         //if ( opndx.hlvalue > 0xffff ) {
                         if ( opndx.hlvalue > 0xffff && opndx.hlvalue < -0xffff ) {
-                            return( EmitErr( INITIALIZER_MAGNITUDE_TOO_LARGE, opndx.sym ? opndx.sym->name : "" ) );
+                            return( (ret_code)EmitErr( INITIALIZER_MAGNITUDE_TOO_LARGE, opndx.sym ? opndx.sym->name : "" ) );
                         }
                     }
                 }
@@ -930,7 +930,7 @@ next_item:  /* <--- continue scan if a comma has been detected */
                  * if symbol's offset is 32bit */
                 /* v2.06: if condition changed */
                 //if ( opndx.explicit == TRUE && opndx.mem_type == MT_NEAR && opndx.Ofssize == USE16 )
-                if ( opndx.explicit == TRUE ) {
+                if ( opndx.explicit1 == TRUE ) {
                     if ( SizeFromMemtype( opndx.mem_type, opndx.Ofssize, opndx.type ) > no_of_bytes ) {
                         DebugMsg(("data_item.ADDR: error, memtype %X wont fit in a WORD\n", opndx.mem_type));
                         EmitErr( INITIALIZER_MAGNITUDE_TOO_LARGE, opndx.sym ? opndx.sym->name : "" );
@@ -954,7 +954,7 @@ next_item:  /* <--- continue scan if a comma has been detected */
                  * format isn't OMF, error 'symbol type conflict'
                  * is displayed
                  */
-                if ( opndx.explicit == TRUE ) {
+                if ( opndx.explicit1 == TRUE ) {
                     if ( opndx.mem_type == MT_FAR ) {
                         if ( opndx.Ofssize != USE_EMPTY && opndx.Ofssize != USE16 ) {
                             DebugMsg(("data_item.ADDR: error, FAR32 won't fit in a DWORD\n" ));
@@ -1015,7 +1015,7 @@ next_item:  /* <--- continue scan if a comma has been detected */
                  * ptr16 if curr segment is 16bit
                  * JWasm additionally accepts a FAR32 PTR override
                  * and generates a ptr32 fixup then */
-                if ( opndx.explicit == TRUE && opndx.mem_type == MT_FAR && opndx.Ofssize == USE32 )
+                if ( opndx.explicit1 == TRUE && opndx.mem_type == MT_FAR && opndx.Ofssize == USE32 )
                     fixup_type = FIX_PTR32;
                 else if( ModuleInfo.Ofssize == USE32 )
                     fixup_type = FIX_OFF32;
@@ -1031,7 +1031,7 @@ next_item:  /* <--- continue scan if a comma has been detected */
 
         /* v2.07: fixup type check moved here */
         if ( ( 1 << fixup_type ) & ModuleInfo.fmtopt->invalid_fixup_type ) {
-            return( EmitErr( UNSUPPORTED_FIXUP_TYPE,
+            return( (ret_code)EmitErr( UNSUPPORTED_FIXUP_TYPE,
                     ModuleInfo.fmtopt->formatname,
                     opndx.sym ? opndx.sym->name : szNull ) );
         }
@@ -1062,7 +1062,7 @@ next_item:  /* <--- continue scan if a comma has been detected */
         break;
     default: /* unknown opndx.kind, shouldn't happen */
         DebugMsg(("data_item: error, opndx.kind=%u\n", opndx.kind ));
-        return( EmitError( SYNTAX_ERROR ) );
+        return( (ret_code)EmitError( SYNTAX_ERROR ) );
     } /* end switch (opndx.kind) */
 item_done:
     if( sym && first && Parse_Pass == PASS_1 ) {
@@ -1112,7 +1112,7 @@ static ret_code checktypes( const struct asym *sym, enum memtype mem_type, const
         }
         if ( mem_type2 != mem_type ) {
             DebugMsg(("checktypes: memtype conflict: %u - %u\n", mem_type2, mem_type ));
-            return( EmitErr( SYMBOL_TYPE_CONFLICT, sym->name ) );
+            return( (ret_code)EmitErr( SYMBOL_TYPE_CONFLICT, sym->name ) );
         }
     }
     return( NOT_ERROR );
@@ -1144,11 +1144,11 @@ ret_code data_dir( int i, struct asm_tok tokenarray[], struct asym *type_sym )
 
     /* v2.05: the previous test in parser.c wasn't fool-proved */
     if ( i > 1 && ModuleInfo.m510 == FALSE ) {
-        return( EmitErr( SYNTAX_ERROR_EX, tokenarray[i].string_ptr ) );
+        return( (ret_code)EmitErr( SYNTAX_ERROR_EX, tokenarray[i].string_ptr ) );
     }
     if( tokenarray[i+1].token == T_FINAL ) {
         DebugMsg(("data_dir: missing initializer\n"));
-        return( EmitErr( SYNTAX_ERROR_EX, tokenarray[i].tokpos ) );
+        return( (ret_code)EmitErr( SYNTAX_ERROR_EX, tokenarray[i].tokpos ) );
     }
 
     /* set values for mem_type and no_of_bytes */
@@ -1159,7 +1159,7 @@ ret_code data_dir( int i, struct asm_tok tokenarray[], struct asym *type_sym )
         mem_type = MT_TYPE;
         if ( type_sym->typekind != TYPE_TYPEDEF &&
              ( type_sym->total_size == 0 || ((struct dsym *)type_sym)->e.structinfo->OrgInside == TRUE ) ) {
-            return( EmitError( STRUCT_CANNOT_BE_INSTANCED ) );
+            return (ret_code)( EmitError( STRUCT_CANNOT_BE_INSTANCED ) );
         }
 
         /* v2.09: expand literals inside <> or {}.
@@ -1175,7 +1175,7 @@ ret_code data_dir( int i, struct asm_tok tokenarray[], struct asym *type_sym )
             DebugMsg(("data_dir: size of arbitrary type is 0!\n"));
             /* a void type is not valid */
             if ( type_sym->typekind == TYPE_TYPEDEF ) {
-                return( EmitErr( INVALID_TYPE_FOR_DATA_DECLARATION, type_sym->name ) );
+                return( (ret_code)EmitErr( INVALID_TYPE_FOR_DATA_DECLARATION, type_sym->name ) );
             }
         }
     } else {
@@ -1192,13 +1192,13 @@ ret_code data_dir( int i, struct asm_tok tokenarray[], struct asym *type_sym )
                    ( tokenarray[i].dirtype == DRT_DATADIR )) {
             idx = GetSflagsSp( tokenarray[i].tokval );
         } else {
-            return( EmitErr( INVALID_TYPE_FOR_DATA_DECLARATION, tokenarray[i].string_ptr ) );
+            return( (ret_code)EmitErr( INVALID_TYPE_FOR_DATA_DECLARATION, tokenarray[i].string_ptr ) );
         }
-        mem_type = GetMemtypeSp( idx );
+        mem_type = (enum memtype)GetMemtypeSp( idx );
         /* types NEAR[16|32], FAR[16|32] and PROC are invalid here */
         //if ( ( SimpleType[idx].mem_type & MT_SPECIAL_MASK ) == MT_ADDRESS ) {
         if ( ( mem_type & MT_SPECIAL_MASK ) == MT_ADDRESS ) {
-            return( EmitErr( SYNTAX_ERROR_EX, tokenarray[i].string_ptr ) );
+            return( (ret_code)EmitErr( SYNTAX_ERROR_EX, tokenarray[i].string_ptr ) );
         }
         no_of_bytes = (mem_type & MT_SIZE_MASK) + 1;
         if ( mem_type & MT_FLOAT )
@@ -1238,7 +1238,7 @@ ret_code data_dir( int i, struct asm_tok tokenarray[], struct asym *type_sym )
     } else {
 
         if( CurrSeg == NULL ) {
-            return( EmitError( MUST_BE_IN_SEGMENT_BLOCK ) );
+            return( (ret_code)EmitError( MUST_BE_IN_SEGMENT_BLOCK ) );
         }
 
         FStoreLine(0);
@@ -1294,7 +1294,7 @@ ret_code data_dir( int i, struct asm_tok tokenarray[], struct asym *type_sym )
                      */
                     if ( sym->segment != (struct asym *)CurrSeg ||
                         sym->offset != GetCurrOffset() ) {
-                        return( EmitErr( SYMBOL_ALREADY_DEFINED, name ) );
+                        return( (ret_code)EmitErr( SYMBOL_ALREADY_DEFINED, name ) );
                     }
                     /* check for symbol type conflict */
                     if ( checktypes( sym, mem_type, type_sym ) == ERROR )
@@ -1306,7 +1306,7 @@ ret_code data_dir( int i, struct asm_tok tokenarray[], struct asym *type_sym )
 
                 } else {
                     DebugMsg(("data_dir(%s): error, symbol redefinition, state=%X\n", sym->name, sym->state ));
-                    return( EmitErr( SYMBOL_REDEFINITION, sym->name ) );
+                    return( (ret_code)EmitErr( SYMBOL_REDEFINITION, sym->name ) );
                 }
                 /* add the label to the linked list attached to curr segment */
                 /* this allows to reduce the number of passes (see Fixup.c) */
@@ -1353,7 +1353,7 @@ ret_code data_dir( int i, struct asm_tok tokenarray[], struct asym *type_sym )
     }
 
     if ( tokenarray[i].token != T_FINAL ) {
-        return( EmitErr( SYNTAX_ERROR_EX, tokenarray[i].tokpos ) );
+        return( (ret_code)EmitErr( SYNTAX_ERROR_EX, tokenarray[i].tokpos ) );
     }
 
     /* v2.06: update struct size after ALL items have been processed */

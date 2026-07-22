@@ -614,11 +614,11 @@ static ret_code match_phase_3( struct code_info *CodeInfo, enum operand_type opn
     if ( CodeInfo->token >= VEX_START && ( vex_flags[ CodeInfo->token - VEX_START ] & VX_L ) ) {
         if ( CodeInfo->opnd[OPND1].type & ( OP_YMM | OP_M256) ) {
             if ( opnd2 & OP_YMM )
-                opnd2 |= OP_XMM;
+                DO_OR_EQ(enum operand_type, opnd2, |=, OP_XMM);
             else if ( opnd2 & OP_M256 )
-                opnd2 |= OP_M128;
+                DO_OR_EQ(enum operand_type, opnd2, |=, OP_M128);
             else if ( opnd2 & OP_M128 )
-                opnd2 |= OP_M64;
+                DO_OR_EQ(enum operand_type, opnd2, |=, OP_M64);
             else if ( ( opnd2 & OP_XMM ) && !( vex_flags[ CodeInfo->token - VEX_START ] & VX_HALF ) ) {
                 EmitError( INSTRUCTION_OR_REGISTER_NOT_ACCEPTED_IN_CURRENT_CPU_MODE );
                 return( ERROR );
@@ -630,7 +630,7 @@ static ret_code match_phase_3( struct code_info *CodeInfo, enum operand_type opn
          */
         else if ( CodeInfo->opnd[OPND1].type == OP_M ) {
             if ( opnd2 & OP_YMM )
-                opnd2 |= OP_XMM;
+                DO_OR_EQ(enum operand_type, opnd2, |=, OP_XMM);
         }
 #endif
     }
@@ -750,9 +750,9 @@ static ret_code match_phase_3( struct code_info *CodeInfo, enum operand_type opn
 
             if ( CodeInfo->const_size_fixed == FALSE )
                 if ( ( opnd1 & ( OP_R16 | OP_M16 ) ) && (int_8)CodeInfo->opnd[OPND2].data32l == (int_16)CodeInfo->opnd[OPND2].data32l )
-                    tbl_op2 |= OP_I16;
+                    DO_OR_EQ(enum operand_type, tbl_op2, |=, OP_I16);
                 else if ( ( opnd1 & ( OP_RGT16 | OP_MGT16 ) ) && (int_8)CodeInfo->opnd[OPND2].data32l == (int_32)CodeInfo->opnd[OPND2].data32l )
-                    tbl_op2 |= OP_I32;
+                    DO_OR_EQ(enum operand_type, tbl_op2, |=, OP_I32);
 
             if( opnd2 & tbl_op2 ) {
                 DebugMsg1(("match_phase_3: matched OP_I8\n"));
@@ -895,9 +895,9 @@ ret_code codegen( struct code_info *CodeInfo, uint_32 oldofs )
                 return( ERROR );
             }
             if ( opnd1 & OP_YMM )
-                opnd1 |= OP_XMM;
+                DO_OR_EQ(enum operand_type, opnd1, |=, OP_XMM);
             else
-                opnd1 |= OP_M128;
+                DO_OR_EQ(enum operand_type, opnd1, |=, OP_M128);
         }
     }
 #endif

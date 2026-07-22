@@ -290,7 +290,7 @@ static cv_typeref cv_write_ptr_type( struct dbgcv *cv, struct asym *sym  )
             cv->pt_ptr->type = GetTyperef( sym, sym->Ofssize );
     } else { /* pointer to simple type */
         enum memtype tmpmt = sym->mem_type; /* the target type is tmp. copied to mem_type */
-        sym->mem_type = sym->ptr_memtype;   /* thus GetTyperef() can be used */
+        sym->mem_type = (enum memtype)sym->ptr_memtype;   /* thus GetTyperef() can be used */
         cv->pt_ptr->type = GetTyperef( sym, sym->Ofssize );
         sym->mem_type = tmpmt;
     }

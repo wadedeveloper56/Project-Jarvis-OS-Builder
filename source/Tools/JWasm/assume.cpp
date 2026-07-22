@@ -317,22 +317,22 @@ ret_code AssumeDirective( int i, struct asm_tok tokenarray[] )
             }
         }
         if ( info == NULL ) {
-            return( EmitErr( SYNTAX_ERROR_EX, tokenarray[i].string_ptr ) );
+            return( (ret_code)EmitErr( SYNTAX_ERROR_EX, tokenarray[i].string_ptr ) );
         }
 
         if( ( ModuleInfo.curr_cpu & P_CPU_MASK ) < GetCpuSp( reg ) ) {
-            return( EmitError( INSTRUCTION_OR_REGISTER_NOT_ACCEPTED_IN_CURRENT_CPU_MODE ) );
+            return( (ret_code)EmitError( INSTRUCTION_OR_REGISTER_NOT_ACCEPTED_IN_CURRENT_CPU_MODE ) );
         }
 
         i++; /* go past register */
 
         if( tokenarray[i].token != T_COLON ) {
-            return( EmitError( COLON_EXPECTED ) );
+            return( (ret_code)EmitError( COLON_EXPECTED ) );
         }
         i++;
 
         if( tokenarray[i].token == T_FINAL ) {
-            return( EmitError( SYNTAX_ERROR ) );
+            return( (ret_code)EmitError( SYNTAX_ERROR ) );
         }
 
         /* check for ERROR and NOTHING */
@@ -367,10 +367,10 @@ ret_code AssumeDirective( int i, struct asm_tok tokenarray[] )
                 return( ERROR );
 
             /* v2.04: check size of argument! */
-            size = OperandSize( flags, NULL );
+            size = OperandSize( (operand_type)flags, NULL );
             if ( ( ti.is_ptr == 0 && size != ti.size ) ||
                 ( ti.is_ptr > 0 && size < CurrWordSize ) ) {
-                return( EmitError( TYPE_IS_WRONG_SIZE_FOR_REGISTER ) );
+                return( (ret_code)EmitError( TYPE_IS_WRONG_SIZE_FOR_REGISTER ) );
             }
             info->error &= ~(( reg >= T_AH && reg <= T_BH ) ? RH_ERROR : ( flags & OP_R ));
             if ( stdsym[j] == NULL ) {
@@ -400,7 +400,7 @@ ret_code AssumeDirective( int i, struct asm_tok tokenarray[] )
             switch ( opnd.kind ) {
             case EXPR_ADDR:
                 if ( opnd.sym == NULL || opnd.indirect == TRUE || opnd.value ) {
-                    return( EmitError( SEGMENT_GROUP_OR_SEGREG_EXPECTED ) );
+                    return( (ret_code)EmitError( SEGMENT_GROUP_OR_SEGREG_EXPECTED ) );
                 } else if ( opnd.sym->state == SYM_UNDEFINED ) {
                     /* ensure that directive is rerun in pass 2
                      * so an error msg can be emitted.
@@ -412,7 +412,7 @@ ret_code AssumeDirective( int i, struct asm_tok tokenarray[] )
                 } else if ( opnd.instr == T_SEG ) {
                     info->symbol = opnd.sym->segment;
                 } else {
-                    return( EmitError( SEGMENT_GROUP_OR_SEGREG_EXPECTED ) );
+                    return( (ret_code)EmitError( SEGMENT_GROUP_OR_SEGREG_EXPECTED ) );
                 }
                 info->is_flat = ( info->symbol == &ModuleInfo.flat_grp->sym );
                 break;
@@ -423,7 +423,7 @@ ret_code AssumeDirective( int i, struct asm_tok tokenarray[] )
                     break;
                 }
             default:
-                return( EmitError( SEGMENT_GROUP_OR_SEGREG_EXPECTED ) );
+                return( (ret_code)EmitError( SEGMENT_GROUP_OR_SEGREG_EXPECTED ) );
             }
             info->error = FALSE;
         }
@@ -433,7 +433,7 @@ ret_code AssumeDirective( int i, struct asm_tok tokenarray[] )
             break;
     }
     if ( i < Token_Count ) {
-        return( EmitErr( SYNTAX_ERROR_EX, tokenarray[i].tokpos ) );
+        return( (ret_code)EmitErr( SYNTAX_ERROR_EX, tokenarray[i].tokpos ) );
     }
     return( NOT_ERROR );
 }
@@ -474,7 +474,7 @@ enum assume_segreg search_assume( const struct asym *sym,
 
     /* now check all segment registers */
 
-    for( def = 0; def < NUM_SEGREGS; def++ ) {
+    for( def = (enum assume_segreg)0; def < NUM_SEGREGS; def=(enum assume_segreg)(def+1) ) {
         if( SegAssumeTable[searchtab[def]].symbol == sym ) {
             return( searchtab[def] );
         }
@@ -482,7 +482,7 @@ enum assume_segreg search_assume( const struct asym *sym,
 
     /* now check the groups */
     if( search_grps && grp )
-        for( def = 0; def < NUM_SEGREGS; def++ ) {
+        for( def = (enum assume_segreg)0; def < NUM_SEGREGS; def=(enum assume_segreg)(def+1) ) {
             if( SegAssumeTable[searchtab[def]].is_flat && grp == &ModuleInfo.flat_grp->sym )
                 return( searchtab[def] );
             if( SegAssumeTable[searchtab[def]].symbol == grp ) {

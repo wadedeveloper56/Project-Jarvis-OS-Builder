@@ -9,6 +9,7 @@
 *
 ****************************************************************************/
 #include "pch.h"
+#include <malloc.h>
 #include "globals.h"
 #include "memalloc.h"
 #include "parser.h"
@@ -777,7 +778,7 @@ void pe_create_PE_header( void )
             pehdr->e.seginfo->start_loc = 0;
         }
         pehdr->e.seginfo->segtype = SEGTYPE_HDR;
-        pehdr->e.seginfo->CodeBuffer = LclAlloc( size );
+        pehdr->e.seginfo->CodeBuffer = (uint_8 *)LclAlloc( size );
         memcpy( pehdr->e.seginfo->CodeBuffer, p, size );
 #if 0 //def __UNIX__
         time((int_32 *)(pehdr->e.seginfo->CodeBuffer+offsetof( struct IMAGE_PE_HEADER32, FileHeader.TimeDateStamp )));
@@ -858,7 +859,7 @@ static void pe_create_section_table( void )
             DebugMsg(("pe_create_section_table: items in object table: %u\n", objs ));
             objtab->sym.max_offset = sizeof(struct IMAGE_SECTION_HEADER) * objs;
             /* alloc space for 1 more section (.reloc) */
-            objtab->e.seginfo->CodeBuffer = LclAlloc( objtab->sym.max_offset + sizeof(struct IMAGE_SECTION_HEADER) );
+            objtab->e.seginfo->CodeBuffer = (uint_8 *)LclAlloc( objtab->sym.max_offset + sizeof(struct IMAGE_SECTION_HEADER) );
         }
     }
 }
@@ -1165,7 +1166,7 @@ static void pe_set_base_relocs( struct dsym *reloc )
         }
     }
     reloc->sym.max_offset = cnt2 * sizeof( struct IMAGE_BASE_RELOCATION ) + cnt1 * sizeof( uint_16 );
-    reloc->e.seginfo->CodeBuffer = LclAlloc( reloc->sym.max_offset );
+    reloc->e.seginfo->CodeBuffer = (uint_8 *)LclAlloc( reloc->sym.max_offset );
 
     baserel = (struct IMAGE_BASE_RELOCATION *)reloc->e.seginfo->CodeBuffer;
     prel = (uint_16 *)((uint_8 *)baserel + sizeof ( struct IMAGE_BASE_RELOCATION ));
@@ -1549,7 +1550,7 @@ static ret_code bin_write_module( struct module_info *modinfo )
     cp.fileoffset = cp.sizehdr;
 
     if ( cp.sizehdr ) {
-        hdrbuf = LclAlloc( cp.sizehdr );
+        hdrbuf = (uint_8 *)LclAlloc( cp.sizehdr );
         memset( hdrbuf, 0, cp.sizehdr );
     }
     cp.entryoffset = -1;
@@ -1560,7 +1561,7 @@ static ret_code bin_write_module( struct module_info *modinfo )
     cp.rva = 0;
     if ( modinfo->sub_format == SFORMAT_PE ) {
         if ( ModuleInfo.model == MODEL_NONE ) {
-            return( EmitErr( MODEL_IS_NOT_DECLARED ) );
+            return( (ret_code)EmitErr( MODEL_IS_NOT_DECLARED ) );
         }
         pe_set_values( &cp );
     } else
@@ -1615,7 +1616,7 @@ static ret_code bin_write_module( struct module_info *modinfo )
     if ( modinfo->sub_format == SFORMAT_NONE ) {
         if ( modinfo->g.start_label ) {
             if ( cp.entryoffset == -1 || cp.entryseg != modinfo->g.start_label->segment ) {
-                return( EmitError( START_LABEL_INVALID ) );
+                return( (ret_code)EmitError( START_LABEL_INVALID ) );
             }
         }
     }
@@ -1782,7 +1783,7 @@ static ret_code bin_write_module( struct module_info *modinfo )
         if ( size & ( cp.rawpagesize - 1 ) ) {
             char *tmp;
             size = cp.rawpagesize - ( size & ( cp.rawpagesize - 1 ) );
-            tmp = myalloca( size );
+            tmp = (char *)myalloca( size );
             memset( tmp, 0, size );
             fwrite( tmp, 1, size, CurrFile[OBJ] );
         }
@@ -1818,7 +1819,7 @@ static ret_code bin_check_external( struct module_info *modinfo )
     for ( curr = SymTables[TAB_EXT].head; curr != NULL ; curr = curr->next )
         if( curr->sym.weak == FALSE || curr->sym.used == TRUE ) {
             DebugMsg(("CheckExternal: error, %s weak=%u\n", curr->sym.name, curr->sym.weak ));
-            return( EmitErr( FORMAT_DOESNT_SUPPORT_EXTERNALS, curr->sym.name ) );
+            return( (ret_code)EmitErr( FORMAT_DOESNT_SUPPORT_EXTERNALS, curr->sym.name ) );
         }
     return( NOT_ERROR );
 }

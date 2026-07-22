@@ -115,7 +115,7 @@ ret_code ContextDirective( int i, struct asm_tok tokenarray[] )
     i++; /* skip CONTEXT keyword */
 
     while ( tokenarray[i].token == T_ID ) {
-        for ( j = 0, type = -1; j < ( sizeof(typetab) / sizeof(typetab[0]) ); j++ ) {
+        for ( j = 0, type = (enum context_type)(-1); j < (sizeof(typetab) / sizeof(typetab[0])); j++) {
             if ( _stricmp( contextnames[j], tokenarray[i].string_ptr ) == 0 ) {
                 type = typetab[j];
                 break;
@@ -130,7 +130,7 @@ ret_code ContextDirective( int i, struct asm_tok tokenarray[] )
             if ( type == CONT_ALIGNMENT )
                 break;
             else
-                type &= ~CONT_ALIGNMENT; /* in case ALIGNMENT is again included in ALL */
+                DO_AND_EQ(context_type, type, &=, ~CONT_ALIGNMENT); /* in case ALIGNMENT is again included in ALL */
         }
 
         if ( directive == T_POPCONTEXT ) {
@@ -148,7 +148,7 @@ ret_code ContextDirective( int i, struct asm_tok tokenarray[] )
                     continue;
                 }
 
-                type &= ~curr->type;
+                DO_AND_EQ(context_type, type, &=, ~curr->type);
                 if ( prev )
                     prev->next = next;
                 else
@@ -186,20 +186,20 @@ ret_code ContextDirective( int i, struct asm_tok tokenarray[] )
             }
             if ( type ) {
                 DebugMsg(( "POPCONTEXT error, remaining type flags=%X\n", type ));
-                return( EmitErr( UNMATCHED_BLOCK_NESTING, tokenarray[start].tokpos ) );
+                return( (ret_code)EmitErr( UNMATCHED_BLOCK_NESTING, tokenarray[start].tokpos ) );
             }
         } else {
             DebugMsg(( "PUSHCONTEXT type=%X\n", type ));
             for ( j = 0; j < ( sizeof(typetab) / sizeof(typetab[0] ) ) && type; j++ ) {
                 if ( type & typetab[j] ) {
 
-                    type &= ~typetab[j];
+                    DO_AND_EQ(context_type, type, &=, ~typetab[j]);
 
                     if ( ContextFree ) {
                         curr = ContextFree;
                         ContextFree = curr->next;
                     } else
-                        curr = LclAlloc( sizeof( struct context ) );
+                        curr = (struct context *)LclAlloc( sizeof( struct context ) );
 
                     curr->type = typetab[j];
                     curr->next = ContextStack;
@@ -239,7 +239,7 @@ ret_code ContextDirective( int i, struct asm_tok tokenarray[] )
     }
 
     if ( tokenarray[i].token != T_FINAL || type == -1 ) {
-        return( EmitErr( SYNTAX_ERROR_EX, tokenarray[i].tokpos ) );
+        return( (ret_code)EmitErr( SYNTAX_ERROR_EX, tokenarray[i].tokpos ) );
     }
 
     return( NOT_ERROR );
@@ -260,7 +260,7 @@ void ContextSaveState( void )
 
     if ( i ) {
         cntSavedContexts = i;
-        SavedContexts = LclAlloc( i * sizeof( struct context ) );
+        SavedContexts = (struct context *)LclAlloc( i * sizeof( struct context ) );
         DebugMsg(( "ContextSaveState: SavedContexts=%X\n", SavedContexts ));
         for ( src = ContextStack, dst = SavedContexts ; src ; src = src->next, dst++ ) {
             memcpy( dst, src, sizeof( struct context ) );
@@ -281,7 +281,7 @@ static void ContextRestoreState( void )
             dst = ContextFree;
             ContextFree = dst->next;
         } else
-            dst = LclAlloc( sizeof( struct context ) );
+            dst = (struct context *)LclAlloc( sizeof( struct context ) );
         memcpy( dst, &SavedContexts[i-1], sizeof( struct context ) );
         dst->next = ContextStack;
         ContextStack = dst;

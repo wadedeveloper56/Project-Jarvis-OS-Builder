@@ -78,14 +78,14 @@ ret_code IncludeDirective( int i, struct asm_tok tokenarray[] )
     /* v2.03: allow plain numbers as file name argument */
     //if ( tokenarray[i].token == T_FINAL || tokenarray[i].token == T_NUM ) {
     if ( tokenarray[i].token == T_FINAL ) {
-        return( EmitError( EXPECTED_FILE_NAME ) );
+        return( (ret_code)EmitError( EXPECTED_FILE_NAME ) );
     }
 
     /* if the filename is enclosed in <>, just use this literal */
 
     if ( tokenarray[i].token == T_STRING && tokenarray[i].string_delim == '<' ) {
         if ( tokenarray[i+1].token != T_FINAL ) {
-            return( EmitErr( SYNTAX_ERROR_EX, tokenarray[i+1].tokpos ) );
+            return( (ret_code)EmitErr( SYNTAX_ERROR_EX, tokenarray[i+1].tokpos ) );
         }
         name = tokenarray[i].string_ptr;
     } else {

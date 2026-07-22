@@ -273,7 +273,7 @@ ret_code ModelDirective( int i, struct asm_tok tokenarray[] )
 
     i++;
     if ( tokenarray[i].token == T_FINAL ) {
-        return( EmitError( EXPECTED_MEMORY_MODEL ) );
+        return( (ret_code)EmitError( EXPECTED_MEMORY_MODEL ) );
     }
     /* get the model argument */
     index = FindToken( tokenarray[i].string_ptr, ModelToken, sizeof( ModelToken )/sizeof( ModelToken[0] ) );
@@ -282,10 +282,10 @@ ret_code ModelDirective( int i, struct asm_tok tokenarray[] )
             //if ( Parse_Pass == PASS_1 ) /* not needed, this code runs in pass one only */
             EmitWarn( 2, MODEL_DECLARED_ALREADY );
         }
-        model = index + 1; /* model is one-base ( 0 is MODEL_NONE ) */
+        model = (enum model_type)(index + 1); /* model is one-base ( 0 is MODEL_NONE ) */
         i++;
     } else {
-        return( EmitErr( SYNTAX_ERROR_EX, tokenarray[i].string_ptr ) );
+        return( (ret_code)EmitErr( SYNTAX_ERROR_EX, tokenarray[i].string_ptr ) );
     }
 
     /* get the optional arguments: language, stack distance, os */
@@ -303,12 +303,12 @@ ret_code ModelDirective( int i, struct asm_tok tokenarray[] )
                 switch ( initv ) {
                 case INIT_STACK:
                     if ( model == MODEL_FLAT ) {
-                        return( EmitError( INVALID_MODEL_PARAM_FOR_FLAT ) );
+                        return( (ret_code)EmitError( INVALID_MODEL_PARAM_FOR_FLAT ) );
                     }
-                    distance = ModelAttrValue[index].value;
+                    distance = (enum dist_type)(ModelAttrValue[index].value);
                     break;
                 case INIT_OS:
-                    ostype = ModelAttrValue[index].value;
+                    ostype = (enum os_type)(ModelAttrValue[index].value);
                     break;
                 }
                 i++;
@@ -323,12 +323,12 @@ ret_code ModelDirective( int i, struct asm_tok tokenarray[] )
     }
     /* everything parsed successfully? */
     if ( tokenarray[i].token != T_FINAL ) {
-        return( EmitErr( SYNTAX_ERROR_EX, tokenarray[i].tokpos ) );
+        return( (ret_code)EmitErr( SYNTAX_ERROR_EX, tokenarray[i].tokpos ) );
     }
 
     if ( model == MODEL_FLAT ) {
         if ( ( ModuleInfo.curr_cpu & P_CPU_MASK) < P_386 ) {
-            return( EmitError( INSTRUCTION_OR_REGISTER_NOT_ACCEPTED_IN_CURRENT_CPU_MODE ) );
+            return( (ret_code)EmitError( INSTRUCTION_OR_REGISTER_NOT_ACCEPTED_IN_CURRENT_CPU_MODE ) );
         }
 #if AMD64_SUPPORT
         if ( ( ModuleInfo.curr_cpu & P_CPU_MASK ) >= P_64 ) /* cpu 64-bit? */
@@ -371,36 +371,36 @@ ret_code SetCPU( enum cpu_info newcpu )
     DebugMsg1(("SetCPU(%X) enter\n", newcpu ));
     if ( newcpu == P_86 || ( newcpu & P_CPU_MASK ) ) {
         /* reset CPU and EXT bits */
-        ModuleInfo.curr_cpu &= ~( P_CPU_MASK | P_EXT_MASK | P_PM );
+        DO_AND_EQ(enum cpu_info, ModuleInfo.curr_cpu, &=, ~( P_CPU_MASK | P_EXT_MASK | P_PM ));
 
         /* set CPU bits */
-        ModuleInfo.curr_cpu |= newcpu & ( P_CPU_MASK | P_PM );
+        DO_OR_EQ(enum cpu_info, ModuleInfo.curr_cpu, |=, newcpu & ( P_CPU_MASK | P_PM ));
 
         /* set default FPU bits if nothing is given and .NO87 not active */
         if ( (ModuleInfo.curr_cpu & P_FPU_MASK) != P_NO87 &&
             ( newcpu & P_FPU_MASK ) == 0 ) {
-            ModuleInfo.curr_cpu &= ~P_FPU_MASK;
+            DO_AND_EQ(enum cpu_info, ModuleInfo.curr_cpu, &=, ~P_FPU_MASK);
             if ( ( ModuleInfo.curr_cpu & P_CPU_MASK ) < P_286 )
-                ModuleInfo.curr_cpu |= P_87;
+                DO_OR_EQ(enum cpu_info, ModuleInfo.curr_cpu, |=, P_87);
             else if ( ( ModuleInfo.curr_cpu & P_CPU_MASK ) < P_386 )
-                ModuleInfo.curr_cpu |= P_287;
+                DO_OR_EQ(enum cpu_info, ModuleInfo.curr_cpu, |=, P_287);
             else
-                ModuleInfo.curr_cpu |= P_387;
+                DO_OR_EQ(enum cpu_info, ModuleInfo.curr_cpu, |=, P_387);
         }
 
     }
     if( newcpu & P_FPU_MASK ) {
-        ModuleInfo.curr_cpu &= ~P_FPU_MASK;
-        ModuleInfo.curr_cpu |= (newcpu & P_FPU_MASK);
+        DO_AND_EQ(enum cpu_info, ModuleInfo.curr_cpu, &=, ~P_FPU_MASK);
+        DO_OR_EQ(enum cpu_info, ModuleInfo.curr_cpu, |=, (newcpu & P_FPU_MASK));
     }
 #if AMD64_SUPPORT
     /* enable MMX, K3D, SSEx for 64bit cpus */
     if ( ( newcpu & P_CPU_MASK ) == P_64 )
-        ModuleInfo.curr_cpu |= P_EXT_ALL;
+        DO_OR_EQ(enum cpu_info, ModuleInfo.curr_cpu, |=, P_EXT_ALL);
 #endif
     if( newcpu & P_EXT_MASK ) {
-        ModuleInfo.curr_cpu &= ~P_EXT_MASK;
-        ModuleInfo.curr_cpu |= (newcpu & P_EXT_MASK);
+        DO_AND_EQ(enum cpu_info, ModuleInfo.curr_cpu, &=, ~P_EXT_MASK);
+        DO_OR_EQ(enum cpu_info, ModuleInfo.curr_cpu, |=, (newcpu & P_EXT_MASK));
     }
 
     /* set the Masm compatible @Cpu value */
@@ -462,7 +462,7 @@ ret_code CpuDirective( int i, struct asm_tok tokenarray[] )
     enum cpu_info newcpu;
 
     //newcpu = comp_opt( tokenarray[i].tokval );
-    newcpu = GetSflagsSp( tokenarray[i].tokval );
+    newcpu = (enum cpu_info)GetSflagsSp( tokenarray[i].tokval );
 
 #if DOT_XMMARG
     .if ( tokenarray[i].tokval == T_DOT_XMM && tokenarray[i+1].token != T_FINAL ) {
@@ -485,7 +485,7 @@ ret_code CpuDirective( int i, struct asm_tok tokenarray[] )
     i++;
 
     if ( tokenarray[i].token != T_FINAL ) {
-        return( EmitErr( SYNTAX_ERROR_EX, tokenarray[i].tokpos ) );
+        return( (ret_code)EmitErr( SYNTAX_ERROR_EX, tokenarray[i].tokpos ) );
     }
 
     return( SetCPU( newcpu ) );

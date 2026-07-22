@@ -8,6 +8,9 @@
 *
 ****************************************************************************/
 #include "pch.h"
+//#include <windows.h>
+#include <stdio.h>
+#include <malloc.h>
 #include "globals.h"
 #include "memalloc.h"
 #include "input.h"
@@ -365,7 +368,7 @@ static ret_code WriteModule( struct module_info *modinfo )
         FILE *ld;
         ld = fopen( Options.names[OPTN_LNKDEF_FN], "w" );
         if ( ld == NULL ) {
-            return( EmitErr( CANNOT_OPEN_FILE, Options.names[OPTN_LNKDEF_FN], ErrnoStr() ) );
+            return( (ret_code)EmitErr( CANNOT_OPEN_FILE, Options.names[OPTN_LNKDEF_FN], ErrnoStr() ) );
         }
         for ( curr = SymTables[TAB_EXT].head; curr != NULL ; curr = curr->next ) {
             DebugMsg(("WriteModule: ext=%s, isproc=%u, weak=%u\n", curr->sym.name, curr->sym.isproc, curr->sym.weak ));
@@ -421,7 +424,7 @@ static void add_cmdline_tmacros( void )
     struct asym *sym;
 
     DebugMsg(("add_cmdline_tmacros enter\n"));
-    for ( p = Options.queues[OPTQ_MACRO]; p; p = p->next ) {
+    for ( p = Options.queues[OPTQ_MACRO]; p; p = (struct qitem *)p->next ) {
         DebugMsg(("add_cmdline_tmacros: found >%s<\n", p->value));
         name = p->value;
         value = strchr( name, '=' );
@@ -466,7 +469,7 @@ static void add_incpaths( void )
 {
     struct qitem *p;
     DebugMsg(("add_incpaths: enter\n"));
-    for ( p = Options.queues[OPTQ_INCPATH]; p; p = p->next ) {
+    for ( p = Options.queues[OPTQ_INCPATH]; p; p = (struct qitem *)p->next ) {
         AddStringToIncludePath( p->value );
     }
 }
@@ -754,7 +757,7 @@ static void PassOneChecks( void )
      * because the loop will now filter weak externals [ this
      * was previously done in GetPublicSymbols() ]
      */
-    for( q = ModuleInfo.g.PubQueue.head, qn = (struct qnode *)&ModuleInfo.g.PubQueue ; q; q = q->next ) {
+    for( q = (struct qnode *)ModuleInfo.g.PubQueue.head, qn = (struct qnode *)&ModuleInfo.g.PubQueue ; q; q = (struct qnode *)q->next ) {
 
         if ( q->sym->state == SYM_INTERNAL )
             qn = q;
@@ -799,7 +802,7 @@ static void PassOneChecks( void )
      * internal proc, make a full second pass to emit a proper
      * error msg at the .SAFESEH directive
      */
-    for ( q = ModuleInfo.g.SafeSEHQueue.head; q; q = q->next ) {
+    for ( q = (struct qnode *)ModuleInfo.g.SafeSEHQueue.head; q; q = (struct qnode *)q->next ) {
         if ( q->sym->state != SYM_INTERNAL || q->sym->isproc == FALSE ) {
             SkipSavedState();
             break;
@@ -1010,7 +1013,7 @@ static int OnePass( void )
     {
         struct qitem *pq;
         /* v2.11: handle -Fi files here ( previously in CmdlParamsInit ) */
-        for ( pq = Options.queues[OPTQ_FINCLUDE]; pq; pq = pq->next ) {
+        for ( pq = Options.queues[OPTQ_FINCLUDE]; pq; pq = (struct qitem *)pq->next ) {
             DebugMsg(("OnePass: force include of file: %s\n", pq->value ));
             if ( SearchFile( pq->value, TRUE ) )
                 ProcessFile( ModuleInfo.tokenarray );
@@ -1266,7 +1269,7 @@ static void SetFilenames( const char *name )
     DebugMsg(("SetFilenames(\"%s\") enter\n", name ));
 
     /* set CurrFName[ASM] */
-    CurrFName[ASM] = LclAlloc( strlen( name ) + 1 );
+    CurrFName[ASM] = (char *)LclAlloc( strlen( name ) + 1 );
     strcpy( CurrFName[ASM], name );
 
     /* set [OBJ], [ERR], [LST] */
@@ -1295,7 +1298,7 @@ static void SetFilenames( const char *name )
             }
         }
         DebugMsg(("SetFilenames: i=%u >%s<\n", i, path ));
-        CurrFName[i] = LclAlloc( strlen( path ) + 1 );
+        CurrFName[i] = (char *)LclAlloc( strlen( path ) + 1 );
         strcpy( CurrFName[i], path );
     }
     return;
@@ -1459,9 +1462,9 @@ int EXPQUAL AssembleModule( const char *source )
         if ( Options.line_numbers ) {
 #if COFF_SUPPORT
             if ( Options.output_format == OFORMAT_COFF ) {
-                for( seg = SymTables[TAB_SEG].head; seg; seg = seg->next ) {
+                for( seg = (struct dsym *)SymTables[TAB_SEG].head; seg; seg = (struct dsym *)seg->next ) {
                     if ( seg->e.seginfo->LinnumQueue )
-                        QueueDeleteLinnum( seg->e.seginfo->LinnumQueue );
+                        QueueDeleteLinnum( (struct qdesc *)seg->e.seginfo->LinnumQueue );
                     seg->e.seginfo->LinnumQueue = NULL;
                 }
             } else {

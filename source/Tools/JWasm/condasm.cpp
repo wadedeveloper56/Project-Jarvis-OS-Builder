@@ -270,7 +270,7 @@ ret_code CondAsmDirective( int i, struct asm_tok tokenarray[] )
              */
             EmitWarn( 2, CONSTANT_EXPECTED );
         } else {
-            return( EmitError( CONSTANT_EXPECTED ) );
+            return( (ret_code)EmitError( CONSTANT_EXPECTED ) );
         }
         if ( directive == T_IF || directive == T_ELSEIF )
             NextIfState = ( opndx.value ) ? BLOCK_ACTIVE : BLOCK_INACTIVE;
@@ -288,7 +288,7 @@ ret_code CondAsmDirective( int i, struct asm_tok tokenarray[] )
         }
         i++;
         if ( tokenarray[i].token != T_COMMA ) {
-            return( EmitErr( EXPECTING_COMMA, tokenarray[i].tokpos ) );
+            return( (ret_code)EmitErr( EXPECTING_COMMA, tokenarray[i].tokpos ) );
         }
         i++;
         string2 = tokenarray[i].string_ptr;
@@ -408,7 +408,7 @@ ret_code CondAsmDirective( int i, struct asm_tok tokenarray[] )
     }
 
     if ( tokenarray[i].token != T_FINAL ) {
-        return( EmitErr( SYNTAX_ERROR_EX, tokenarray[i].string_ptr ) );
+        return( (ret_code)EmitErr( SYNTAX_ERROR_EX, tokenarray[i].string_ptr ) );
     }
 
     CurrIfState = NextIfState;
@@ -473,7 +473,7 @@ ret_code ErrorDirective( int i, struct asm_tok tokenarray[] )
         else if ( opndx.kind == EXPR_ADDR && opndx.indirect == FALSE && opndx.sym && opndx.sym->state == SYM_UNDEFINED )
             ;//opndx.value += opndx.sym->offset;
         else {
-            return( EmitError( CONSTANT_EXPECTED ) );
+            return( (ret_code)EmitError( CONSTANT_EXPECTED ) );
         }
         if ( tokenarray[i].token == T_COMMA && tokenarray[i+1].token != T_FINAL ) {
             i++;
@@ -493,7 +493,7 @@ ret_code ErrorDirective( int i, struct asm_tok tokenarray[] )
     case CC_SYMARG: /* .ERR[N]DEF */
         /* there's a special handling of these directives in ExpandLine()! */
         if ( tokenarray[i].token != T_ID ) {
-            return( EmitErr( SYNTAX_ERROR_EX, tokenarray[i].string_ptr ) );
+            return( (ret_code)EmitErr( SYNTAX_ERROR_EX, tokenarray[i].string_ptr ) );
         }
         idloc = i;
         /* skip the next param */
@@ -537,7 +537,7 @@ ret_code ErrorDirective( int i, struct asm_tok tokenarray[] )
             if ( tokenarray[j].token == T_ID )
                 j++;
             else if ( tokenarray[j].token != T_FINAL && tokenarray[j].token != T_COMMA ) {
-                return( EmitErr( SYNTAX_ERROR_EX, tokenarray[j].string_ptr ) );
+                return( (ret_code)EmitErr( SYNTAX_ERROR_EX, tokenarray[j].string_ptr ) );
             }
             size = tokenarray[j].tokpos - tokenarray[idloc].tokpos;
             memcpy( StringBufferEnd, tokenarray[idloc].tokpos, size );
@@ -562,7 +562,7 @@ ret_code ErrorDirective( int i, struct asm_tok tokenarray[] )
     case CC_BLKARG: /* .ERR[N]B */
         string1 = tokenarray[i].string_ptr;
         if ( tokenarray[i].token != T_STRING || tokenarray[i].string_delim != '<' ) {
-            return( TextItemError( &tokenarray[i] ) );
+            return( (ret_code)TextItemError( &tokenarray[i] ) );
         }
         i++;
         if ( tokenarray[i].token == T_COMMA && tokenarray[i+1].token != T_FINAL ) {
@@ -581,16 +581,16 @@ ret_code ErrorDirective( int i, struct asm_tok tokenarray[] )
     case CC_LITARG: /* .ERRDIF[I], .ERRIDN[I] */
         string1 = tokenarray[i].string_ptr;
         if ( tokenarray[i].token != T_STRING || tokenarray[i].string_delim != '<' ) {
-            return( TextItemError( &tokenarray[i] ) );
+            return( (ret_code)TextItemError( &tokenarray[i] ) );
         }
         i++;
         if ( tokenarray[i].token != T_COMMA ) {
-            return( EmitErr( EXPECTING_COMMA, tokenarray[i].tokpos ) );
+            return( (ret_code)EmitErr( EXPECTING_COMMA, tokenarray[i].tokpos ) );
         }
         i++;
         string2 = tokenarray[i].string_ptr;
         if ( tokenarray[i].token != T_STRING || tokenarray[i].string_delim != '<' ) {
-            return( TextItemError( &tokenarray[i] ) );
+            return( (ret_code)TextItemError( &tokenarray[i] ) );
         }
         i++;
         if ( tokenarray[i].token == T_COMMA && tokenarray[i+1].token != T_FINAL ) {
@@ -622,7 +622,7 @@ ret_code ErrorDirective( int i, struct asm_tok tokenarray[] )
         break;
     case CC_PASS2: /* .ERR2 */
         if ( ModuleInfo.setif2 == FALSE ) {
-            return( EmitError( IF2_NOT_ALLOWED ) );
+            return( (ret_code)EmitError( IF2_NOT_ALLOWED ) );
         }
     case CC_PASS1: /* .ERR1 */
     default: /* .ERR */
@@ -635,7 +635,7 @@ ret_code ErrorDirective( int i, struct asm_tok tokenarray[] )
         break;
     }
     if ( tokenarray[i].token != T_FINAL ) {
-        return( EmitErr( SYNTAX_ERROR_EX, tokenarray[i].tokpos ) );
+        return( (ret_code)EmitErr( SYNTAX_ERROR_EX, tokenarray[i].tokpos ) );
     }
     return( NOT_ERROR );
 }

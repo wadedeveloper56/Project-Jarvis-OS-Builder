@@ -158,9 +158,9 @@ static int              rspidx = 0; /* response file level */
 /* array for options -0 ... -10 */
 static const enum cpu_info cpuoption[] = {
     P_86, P_186, P_286, P_386,          /* 0-3 */
-    P_486, P_586, P_686, P_686 | P_MMX, /* 4-7 */
-    P_686 | P_MMX | P_SSE1,             /* 8   */
-    P_686 | P_MMX | P_SSE1 | P_SSE2,    /* 9   */
+    P_486, P_586, P_686, (enum cpu_info)(P_686 | P_MMX), /* 4-7 */
+    (enum cpu_info)(P_686 | P_MMX | P_SSE1),             /* 8   */
+    (enum cpu_info)(P_686 | P_MMX | P_SSE1 | P_SSE2),    /* 9   */
 #if AMD64_SUPPORT
     P_64,                               /* 10  */
 #endif
@@ -218,16 +218,17 @@ static void SetTargName( char *name, unsigned len )
 
 /* called by -0, -1, ... argument */
 
+
 static void SetCpuCmdline( enum cpu_info value, const char *parm )
 /****************************************************************/
 {
 
-    Options.cpu &= ~(P_CPU_MASK | P_EXT_MASK | P_PM);
-    Options.cpu |= value;
+    DO_AND_EQ(enum cpu_info, Options.cpu, &=, ~(P_CPU_MASK | P_EXT_MASK | P_PM));
+    DO_OR_EQ(enum cpu_info, Options.cpu, |=, value);
 
     for( ; *parm ; parm++ ) {
         if( *parm == 'p' && Options.cpu >= P_286 ) {
-            Options.cpu |= P_PM;      /* set privileged mode */
+            DO_OR_EQ(enum cpu_info, Options.cpu, |=, P_PM);      /* set privileged mode */
 #if MANGLERSUPP
         } else if( *parm == '"' ) {       /* set default mangler */
             char *dest;
@@ -261,12 +262,12 @@ static void queue_item( int i, const char *string )
     struct qitem *q;
 
     DebugMsg(("queue_item(%u, %s) enter\n", i, string));
-    p = MemAlloc( sizeof(struct qitem) + strlen( string ) );
+    p = (struct qitem *)MemAlloc( sizeof(struct qitem) + strlen( string ) );
     p->next = NULL;
     strcpy( p->value, string );
     q = Options.queues[i];
     if ( q ) {
-        for ( ; q->next; q = q->next );
+        for ( ; q->next; q = (struct qitem *)q->next );
         q->next = p;
     } else
         Options.queues[i] = p;
@@ -297,7 +298,7 @@ static void get_fname( int type, const char *token )
         if ( type < NUM_FILE_TYPES ) {
             if ( DefaultDir[type] )
                 MemFree( DefaultDir[type]);
-            DefaultDir[type] = MemAlloc( strlen( token ) + 1 );
+            DefaultDir[type] = (char *)MemAlloc( strlen( token ) + 1 );
             strcpy( DefaultDir[type], token );
         }
         return;
@@ -324,7 +325,7 @@ static void get_fname( int type, const char *token )
     if( Options.names[type] != NULL ) {
         MemFree( Options.names[type] );
     }
-    Options.names[type] = MemAlloc( strlen( name ) + 1 );
+    Options.names[type] = (char *)MemAlloc( strlen( name ) + 1 );
     strcpy( Options.names[type], name );
 }
 
@@ -345,7 +346,7 @@ static void set_option_n_name( int idx, const char *name )
     if( Options.names[idx] != NULL ) {
         MemFree( Options.names[idx] );
     }
-    Options.names[idx] = MemAlloc( strlen( name ) + 1 );
+    Options.names[idx] = (char *)MemAlloc( strlen( name ) + 1 );
     strcpy( Options.names[idx], name );
 }
 
@@ -407,9 +408,9 @@ static void OPTQUAL Set_Fw( void ) { get_fname( OPTN_ERR_FN, GetAFileName() ); }
 static void OPTQUAL Set_Fl( void ) { get_fname( OPTN_LST_FN, GetAFileName() ); Options.write_listing = TRUE;}
 static void OPTQUAL Set_Fo( void ) { get_fname( OPTN_OBJ_FN, GetAFileName() ); }
 
-static void OPTQUAL Set_fp( void ) { Options.cpu &= ~P_FPU_MASK; Options.cpu = OptValue; }
-static void OPTQUAL Set_FPx( void ) { Options.floating_point = OptValue; }
-static void OPTQUAL Set_G( void ) { Options.langtype = OptValue; }
+static void OPTQUAL Set_fp(void) { DO_AND_EQ(enum cpu_info, Options.cpu, &=, ~P_FPU_MASK); Options.cpu = (enum cpu_info)OptValue; }
+static void OPTQUAL Set_FPx( void ) { Options.floating_point = (fpo)OptValue; }
+static void OPTQUAL Set_G( void ) { Options.langtype = (lang_type)OptValue; }
 
 static void OPTQUAL Set_Sa( void )
 /********************************/
@@ -426,7 +427,7 @@ static void OPTQUAL Set_True( void )
     *p = TRUE;
 }
 
-static void OPTQUAL Set_m( void ) { Options.model = OptValue; }
+static void OPTQUAL Set_m( void ) { Options.model = (model_type)OptValue; }
 static void OPTQUAL Set_n( void ) { set_option_n_name( OptValue, OptName ); }
 
 #ifdef DEBUG_OUT
@@ -449,13 +450,13 @@ static void OPTQUAL Set_W( void )
 static void OPTQUAL Set_ofmt( void )
 /**********************************/
 {
-    Options.output_format = OptValue & 0xff;
-    Options.sub_format = OptValue >> 8;
+    Options.output_format = (oformat)(OptValue & 0xff);
+    Options.sub_format = (sformat)(OptValue >> 8);
 }
 
 static void OPTQUAL Set_zcm( void ) { Options.no_cdecl_decoration = FALSE; }
 #if OWFC_SUPPORT
-static void OPTQUAL Set_zf( void )  { Options.fctype = OptValue; }
+static void OPTQUAL Set_zf( void )  { Options.fctype = (fastcall_type)OptValue; }
 #endif
 
 static void OPTQUAL Set_zt( void ) { Options.stdcall_decoration = OptValue; }
@@ -748,7 +749,7 @@ static char *ReadParamFile( const char *name )
     if ( fseek( file, 0, SEEK_END ) == 0 ) {
         len = ftell( file );
         rewind( file );
-        env = MemAlloc( len + 1 );
+        env = (char *)MemAlloc( len + 1 );
 #if defined(__GNUC__) /* gcc warns if return value of fread() is "ignored" */
         if ( fread( env, 1, len, file ) );
 #else
@@ -1075,7 +1076,7 @@ void EXPQUAL CmdlineFini( void )
         struct qitem *p;
         struct qitem *q;
         for ( q = Options.queues[i]; q; ) {
-            p = q->next;
+            p = (struct qitem *)q->next;
             MemFree( q );
             q = p;
         }
