@@ -1,18 +1,8 @@
-/****************************************************************************
-*
-*  This code is Public Domain.
-*
-*  ========================================================================
-*
-* Description:  JWasm top level module
-*
-****************************************************************************/
-
 #include "pch.h"
 #include "globals.h"
 #include "msgtext.h"
 #include "cmdline.h"
-#include "input.h" /* GetFNamePart() */
+#include "input.h"   
 
 #if defined(__UNIX__) || defined(__CYGWIN__) || defined(__DJGPP__)
 
@@ -45,7 +35,6 @@ void tm_Fini( void );
 #endif
 
 static void genfailure( int signo )
-/*********************************/
 {
 #if CATCHBREAK
     if (signo != SIGBREAK)
@@ -58,16 +47,12 @@ static void genfailure( int signo )
 }
 
 int main( int argc, char **argv )
-/*******************************/
 {
     char    *pEnv;
     int     numArgs = 0;
     int     numFiles = 0;
     int     rc = 0;
 #if WILDCARDS
-    /* v2.11: _findfirst/next/_close() handle, should be of type intptr_t.
-     * since this type isn't necessarily defined, type long is used as substitute.
-     */
     long    fh;
     const char *pfn;
     int     dirsize;
@@ -75,7 +60,7 @@ int main( int argc, char **argv )
     char    fname[FILENAME_MAX];
 #endif
 
-#if 0 //def DEBUG_OUT    /* DebugMsg() cannot be used that early */
+#if 0             
     int i;
     for ( i = 1; i < argc; i++ ) {
         printf("argv[%u]=>%s<\n", i, argv[i] );
@@ -101,7 +86,6 @@ int main( int argc, char **argv )
     signal(SIGTERM, genfailure);
 #endif
 
-    /* ParseCmdLine() returns NULL if no source file name has been found (anymore) */
     while ( ParseCmdline( (const char **)&argv[1], &numArgs ) ) {
         numFiles++;
         write_logo();
@@ -111,19 +95,13 @@ int main( int argc, char **argv )
             EmitErr( CANNOT_OPEN_FILE, Options.names[ASM], ErrnoStr() );
             break;
         }
-        /* v2.12: _splitpath()/_makepath() removed */
-        //_splitpath( Options.names[ASM], drv, dir, NULL, NULL );
-        //DebugMsg(("main: _splitpath(%s): drv=\"%s\" dir=\"%s\"\n", Options.names[ASM], drv, dir ));
         pfn = GetFNamePart( Options.names[ASM] );
         dirsize = pfn - Options.names[ASM];
         memcpy( fname, Options.names[ASM], dirsize );
         do {
-            /* v2.12: _splitpath()/_makepath() removed */
-            //_makepath( fname, drv, dir, finfo.name, NULL );
-            //DebugMsg(("main: _makepath(\"%s\", \"%s\", \"%s\")=\"%s\"\n", drv, dir, finfo.name, fname ));
             strcpy( &fname[dirsize], finfo.name );
             DebugMsg(("main: fname=%s\n", fname ));
-            rc = AssembleModule( fname );  /* assemble 1 module */
+            rc = AssembleModule( fname );      
         } while ( ( _findnext( fh, &finfo ) != -1 ) );
         _findclose( fh );
 #else
@@ -142,5 +120,5 @@ int main( int argc, char **argv )
 #endif
 
     DebugMsg(("main: exit, return code=%u\n", 1 - rc ));
-    return( 1 - rc ); /* zero if no errors */
+    return( 1 - rc );      
 }
