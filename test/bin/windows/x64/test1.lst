@@ -1,4 +1,4 @@
-JWasm v2.12pre, Jul 21 2026
+JWasm v2.12pre, Jul 25 2026
 C:\projects\OSDev\ProjectJarvis\test\bin\windows\x64\test1.asm
                             *   .model FLAT
 00000000                    *   _TEXT segment PARA FLAT PUBLIC 'CODE'
@@ -44,30 +44,18 @@ Macros:
 
                 N a m e                 Type
 
-@CatStr  . . . . . . . . . . . .        Func     0
-@Environ . . . . . . . . . . . .        Func     0
-@InStr . . . . . . . . . . . . .        Func     0
-@SizeStr . . . . . . . . . . . .        Func     0
-@SubStr  . . . . . . . . . . . .        Func     0
 
 
 Segments and Groups:
 
                 N a m e                 Size     Length   Align   Combine Class
 
-FLAT . . . . . . . . . . . . . .        GROUP
-_BSS . . . . . . . . . . . . . .        64 Bit   00000007 Para    Public  'BSS'
-_DATA  . . . . . . . . . . . . .        64 Bit   00000000 Para    Public  'DATA'
-_TEXT  . . . . . . . . . . . . .        64 Bit   0000000B Para    Public  'CODE'
 
 
 Procedures, parameters and locals:
 
                 N a m e                 Type     Value    Segment  Length
 
-_main  . . . . . . . . . . . . .        P Near   00000000 _TEXT    0000000B Public   C
-  _argc  . . . . . . . . . . . .        DWord             rbp + 0010
-  _argv  . . . . . . . . . . . .        QWord             rbp + 0018
 
 
 Symbols:
@@ -78,13 +66,13 @@ Symbols:
 @Cpu . . . . . . . . . . . . . .        Number           DDFh 
 @CurSeg  . . . . . . . . . . . .        Text   
 @DataSize  . . . . . . . . . . .        Number             0h 
-@Date  . . . . . . . . . . . . .        Text   07/21/26
+@Date  . . . . . . . . . . . . .        Text   07/25/26
 @FileCur . . . . . . . . . . . .        Text   C:\projects\OSDev\ProjectJarvis\test\bin\windows\x64\test1.asm
 @FileName  . . . . . . . . . . .        Text   TEST1
 @Interface . . . . . . . . . . .        Number             7h 
 @Model . . . . . . . . . . . . .        Number             7h 
 @ReservedStack . . . . . . . . .        Number             0h 
-@Time  . . . . . . . . . . . . .        Text   15:56:27
+@Time  . . . . . . . . . . . . .        Text   02:50:50
 @Version . . . . . . . . . . . .        Text   800
 @code  . . . . . . . . . . . . .        Text   _TEXT
 @data  . . . . . . . . . . . . .        Text   FLAT
@@ -94,4 +82,4 @@ _var1  . . . . . . . . . . . . .        Byte               0h _BSS FASTCALL
 _var2  . . . . . . . . . . . . .        Word               1h _BSS FASTCALL
 _var3  . . . . . . . . . . . . .        DWord              3h _BSS FASTCALL
 
-C:\projects\OSDev\ProjectJarvis\test\bin\windows\x64\test1.asm: 19 lines, 2 passes, 0 ms, 0 warnings, 0 errors
+C:\projects\OSDev\ProjectJarvis\test\bin\windows\x64\test1.asm: 19 lines, 2 passes, 1 ms, 0 warnings, 0 errors

@@ -1,4 +1,4 @@
-JWasm v2.12pre, Jul 21 2026
+JWasm v2.12pre, Jul 25 2026
 c064.asm
                             *   .model FLAT
 00000000                    *   _TEXT segment PARA FLAT PUBLIC 'CODE'
@@ -69,27 +69,18 @@ Macros:
 
                 N a m e                 Type
 
-@CatStr  . . . . . . . . . . . .        Func     0
-@Environ . . . . . . . . . . . .        Func     0
-@InStr . . . . . . . . . . . . .        Func     0
-@SizeStr . . . . . . . . . . . .        Func     0
-@SubStr  . . . . . . . . . . . .        Func     0
 
 
 Segments and Groups:
 
                 N a m e                 Size     Length   Align   Combine Class
 
-FLAT . . . . . . . . . . . . . .        GROUP
-_DATA  . . . . . . . . . . . . .        64 Bit   00000000 Para    Public  'DATA'
-_TEXT  . . . . . . . . . . . . .        64 Bit   00000045 Para    Public  'CODE'
 
 
 Procedures, parameters and locals:
 
                 N a m e                 Type     Value    Segment  Length
 
-mainCRTStartup . . . . . . . . .        P Near   00000000 _TEXT    00000045 Public   FASTCALL
 
 
 Symbols:
@@ -100,13 +91,13 @@ Symbols:
 @Cpu . . . . . . . . . . . . . .        Number           D5Fh 
 @CurSeg  . . . . . . . . . . . .        Text   
 @DataSize  . . . . . . . . . . .        Number             0h 
-@Date  . . . . . . . . . . . . .        Text   07/21/26
+@Date  . . . . . . . . . . . . .        Text   07/25/26
 @FileCur . . . . . . . . . . . .        Text   c064.asm
 @FileName  . . . . . . . . . . .        Text   C064
 @Interface . . . . . . . . . . .        Number             7h 
 @Model . . . . . . . . . . . . .        Number             7h 
 @ReservedStack . . . . . . . . .        Number             0h 
-@Time  . . . . . . . . . . . . .        Text   15:56:28
+@Time  . . . . . . . . . . . . .        Text   02:50:52
 @Version . . . . . . . . . . . .        Text   800
 @code  . . . . . . . . . . . . .        Text   _TEXT
 @data  . . . . . . . . . . . . .        Text   FLAT

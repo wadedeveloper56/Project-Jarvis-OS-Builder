@@ -17,6 +17,10 @@
 #if defined( _M_IX86 ) && defined(__WATCOMC__)
 #include <i86.h>
 #endif
+#include <malloc.h>
+
+#define DO_AND_EQ(t,a,b,c) a=(t)(a & (c))
+#define DO_OR_EQ(t,a,b,c) a=(t)(a | (c))
 
 #pragma warning(disable:4267)
 #pragma warning(disable:4244)

@@ -109,7 +109,7 @@ struct expr {
         uint_8      flags1;
         struct {
             unsigned indirect : 1;  /* indirect addressing used */
-            unsigned explicit : 1;  /* Whether expression type explicitly given (to be removed!) */
+            unsigned explicit1 : 1;  /* Whether expression type explicitly given (to be removed!) */
             unsigned is_abs   : 1;  /* external ABS */
             unsigned is_type  : 1;  /* constant is a type */
             unsigned is_opattr: 1;  /* current operator is OPATTR */

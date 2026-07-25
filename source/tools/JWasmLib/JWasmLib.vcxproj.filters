@@ -224,178 +224,178 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\JWasm\apiemu.c">
+    <ClCompile Include="..\JWasm\apiemu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\JWasm\assemble.c">
+    <ClCompile Include="..\JWasm\assemble.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\JWasm\assume.c">
+    <ClCompile Include="..\JWasm\assume.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\JWasm\atofloat.c">
+    <ClCompile Include="..\JWasm\atofloat.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\JWasm\backptch.c">
+    <ClCompile Include="..\JWasm\backptch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\JWasm\bin.c">
+    <ClCompile Include="..\JWasm\bin.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\JWasm\branch.c">
+    <ClCompile Include="..\JWasm\branch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\JWasm\cmdline.c">
+    <ClCompile Include="..\JWasm\cmdline.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\JWasm\codegen.c">
+    <ClCompile Include="..\JWasm\codegen.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\JWasm\coff.c">
+    <ClCompile Include="..\JWasm\coff.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\JWasm\condasm.c">
+    <ClCompile Include="..\JWasm\condasm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\JWasm\context.c">
+    <ClCompile Include="..\JWasm\context.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\JWasm\cpumodel.c">
+    <ClCompile Include="..\JWasm\cpumodel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\JWasm\data.c">
+    <ClCompile Include="..\JWasm\data.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\JWasm\dbgcv.c">
+    <ClCompile Include="..\JWasm\dbgcv.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\JWasm\directiv.c">
+    <ClCompile Include="..\JWasm\directiv.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\JWasm\elf.c">
+    <ClCompile Include="..\JWasm\elf.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\JWasm\end.c">
+    <ClCompile Include="..\JWasm\end.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\JWasm\equate.c">
+    <ClCompile Include="..\JWasm\equate.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\JWasm\errmsg.c">
+    <ClCompile Include="..\JWasm\errmsg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\JWasm\expans.c">
+    <ClCompile Include="..\JWasm\expans.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\JWasm\expreval.c">
+    <ClCompile Include="..\JWasm\expreval.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\JWasm\extern.c">
+    <ClCompile Include="..\JWasm\extern.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\JWasm\fastpass.c">
+    <ClCompile Include="..\JWasm\fastpass.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\JWasm\fixup.c">
+    <ClCompile Include="..\JWasm\fixup.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\JWasm\fpfixup.c">
+    <ClCompile Include="..\JWasm\fpfixup.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\JWasm\hll.c">
+    <ClCompile Include="..\JWasm\hll.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\JWasm\input.c">
+    <ClCompile Include="..\JWasm\invoke.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\JWasm\invoke.c">
+    <ClCompile Include="..\JWasm\label.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\JWasm\label.c">
+    <ClCompile Include="..\JWasm\linnum.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\JWasm\linnum.c">
+    <ClCompile Include="..\JWasm\listing.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\JWasm\listing.c">
+    <ClCompile Include="..\JWasm\loop.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\JWasm\loop.c">
+    <ClCompile Include="..\JWasm\lqueue.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\JWasm\lqueue.c">
+    <ClCompile Include="..\JWasm\macro.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\JWasm\macro.c">
+    <ClCompile Include="..\JWasm\mangle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\JWasm\mangle.c">
+    <ClCompile Include="..\JWasm\memalloc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\JWasm\memalloc.c">
+    <ClCompile Include="..\JWasm\msgtext.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\JWasm\msgtext.c">
+    <ClCompile Include="..\JWasm\omf.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\JWasm\omf.c">
+    <ClCompile Include="..\JWasm\omffixup.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\JWasm\omffixup.c">
+    <ClCompile Include="..\JWasm\omfint.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\JWasm\omfint.c">
+    <ClCompile Include="..\JWasm\option.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\JWasm\option.c">
+    <ClCompile Include="..\JWasm\parser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\JWasm\parser.c">
+    <ClCompile Include="..\JWasm\posndir.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\JWasm\posndir.c">
+    <ClCompile Include="..\JWasm\preproc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\JWasm\preproc.c">
+    <ClCompile Include="..\JWasm\proc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\JWasm\proc.c">
+    <ClCompile Include="..\JWasm\queue.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\JWasm\queue.c">
+    <ClCompile Include="..\JWasm\reswords.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\JWasm\reswords.c">
+    <ClCompile Include="..\JWasm\safeseh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\JWasm\safeseh.c">
+    <ClCompile Include="..\JWasm\segment.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\JWasm\segment.c">
+    <ClCompile Include="..\JWasm\simsegm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\JWasm\simsegm.c">
+    <ClCompile Include="..\JWasm\string.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\JWasm\string.c">
+    <ClCompile Include="..\JWasm\symbols.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\JWasm\symbols.c">
+    <ClCompile Include="..\JWasm\tbyte.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\JWasm\tbyte.c">
+    <ClCompile Include="..\JWasm\tokenize.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\JWasm\tokenize.c">
+    <ClCompile Include="..\JWasm\trmem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\JWasm\trmem.c">
+    <ClCompile Include="..\JWasm\types.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\JWasm\types.c">
+    <ClCompile Include="pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="pch.c">
+    <ClCompile Include="..\JWasm\input.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
