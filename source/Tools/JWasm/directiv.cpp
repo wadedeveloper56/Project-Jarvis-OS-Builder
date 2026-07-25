@@ -37,7 +37,7 @@
 
 /* table of function addresses for directives */
 #define  res(token, function) function ,
-ret_code (* const directive_tab[])( int, struct asm_tok[] ) = {
+ret_code (* directive_tab[])( int, struct asm_tok[] ) = {
 #include "dirtype.h"
 };
 #undef res

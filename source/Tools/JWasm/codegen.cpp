@@ -40,13 +40,13 @@
 #include "listing.h"
 #include "reswords.h"
 
-extern const struct opnd_class opnd_clstab[];
+extern struct opnd_class opnd_clstab[];
 #if AVXSUPP
 extern struct ReservedWord  ResWordTable[];
-extern const uint_8               vex_flags[];
+extern uint_8               vex_flags[];
 #endif
 
-const char szNull[] = {"<NULL>"};
+char szNull[] = {"<NULL>"};
 
 /* v2.03: OutputCodeByte no longer needed */
 #define OutputCodeByte( x ) OutputByte( x )

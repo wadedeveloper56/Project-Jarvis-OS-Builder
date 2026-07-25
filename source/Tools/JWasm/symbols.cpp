@@ -227,7 +227,7 @@ struct asym *SymAlloc( const char *name )
     int len = strlen( name );
     struct asym *sym;
 
-    sym = LclAlloc( sizeof( struct dsym ) );
+    sym = (struct asym *)LclAlloc( sizeof( struct dsym ) );
     memset( sym, 0, sizeof( struct dsym ) );
 #if 1
     /* the tokenizer ensures that identifiers are within limits, so
@@ -241,7 +241,7 @@ struct asym *SymAlloc( const char *name )
     sym->list = ModuleInfo.cref;
     sym->mem_type = MT_EMPTY;
     if ( len ) {
-        sym->name = LclAlloc( len + 1 );
+        sym->name = (char *)LclAlloc( len + 1 );
         memcpy( sym->name, name, len );
         sym->name[len] = NULLC;
     } else
@@ -454,7 +454,7 @@ struct asym *SymAddLocal( struct asym *sym, const char *name )
     if ( sym->name_size ) LclFree( sym->name );
 #endif
     sym->name_size = strlen( name );
-    sym->name = LclAlloc( sym->name_size + 1 );
+    sym->name = (char *)LclAlloc( sym->name_size + 1 );
     memcpy( sym->name, name, sym->name_size + 1 );
     sym->nextitem = NULL;
     *lsym = sym;

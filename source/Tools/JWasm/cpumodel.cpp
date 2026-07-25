@@ -33,7 +33,7 @@
 
 #define DOT_XMMARG 0 /* 1=optional argument for .XMM directive */
 
-extern const char szDgroup[];
+extern char szDgroup[];
 
 /* prototypes */
 
@@ -41,7 +41,7 @@ extern const char szDgroup[];
  * must be sorted like MODEL_xxx enum:
  * TINY=1, SMALL=2, COMPACT=3, MEDIUM=4, LARGE=5, HUGE=6, FLAT=7
  */
-const char * const ModelToken[] = {
+const char * ModelToken[] = {
     "TINY", "SMALL", "COMPACT", "MEDIUM", "LARGE", "HUGE", "FLAT" };
 
 #define INIT_LANG       0x1

@@ -36,7 +36,7 @@
 #include "omfspec.h"
 #include "myassert.h"
 
-extern const char szNull[];
+extern char szNull[];
 extern unsigned omf_GetGrpIdx( struct asym *sym );
 
 /* logical data for fixup subrecord creation */

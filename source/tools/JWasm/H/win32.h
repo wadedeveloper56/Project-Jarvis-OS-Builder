@@ -30,5 +30,7 @@
  * to the lower 32-bits of a register ( here: EDX/RDX ) clears the upper 32-bits.
  */
 
-WINBASEAPI void *WINAPI VirtualAlloc( void *, size_t, uint_32, uint_32 );
-WINBASEAPI int   WINAPI VirtualFree( void *, size_t, uint_32 );
+//WINBASEAPI 
+void *WINAPI VirtualAlloc( void *, size_t, uint_32, uint_32 );
+//WINBASEAPI 
+int   WINAPI VirtualFree( void *, size_t, uint_32 );

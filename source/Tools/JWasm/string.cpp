@@ -56,7 +56,7 @@ int TextItemError( struct asm_tok *item )
     if ( item->token == T_ID ) {
         struct asym *sym = SymSearch( item->string_ptr );
         if ( sym == NULL || sym->state == SYM_UNDEFINED ) {
-            return( EmitErr( SYMBOL_NOT_DEFINED, item->string_ptr ) );
+            return( (ret_code) EmitErr( SYMBOL_NOT_DEFINED, item->string_ptr ) );
         }
     }
     return( EmitError( TEXT_ITEM_REQUIRED ) );
@@ -82,10 +82,10 @@ ret_code CatStrDir( int i, struct asm_tok tokenarray[] )
 #if 0 /* can't happen */
     /* syntax must be <id> CATSTR textitem[,textitem,...] */
     if ( i != 1 ) {
-        return( EmitErr( SYNTAX_ERROR_EX, tokenarray[i].string_ptr ) );
+        return( (ret_code) EmitErr( SYNTAX_ERROR_EX, tokenarray[i].string_ptr ) );
     }
     if ( tokenarray[0].token != T_ID ) {
-        return( EmitErr( SYNTAX_ERROR_EX, tokenarray[0].string_ptr ) );
+        return( (ret_code) EmitErr( SYNTAX_ERROR_EX, tokenarray[0].string_ptr ) );
     }
 #endif
     i++; /* go past CATSTR/TEXTEQU */
@@ -97,13 +97,13 @@ ret_code CatStrDir( int i, struct asm_tok tokenarray[] )
         DebugMsg1(("CatStrDir(%s): item[%u]=%s delim=0x%x\n", tokenarray[0].string_ptr, i, tokenarray[i].string_ptr, tokenarray[i].string_delim ));
         if ( tokenarray[i].token != T_STRING || tokenarray[i].string_delim != '<' ) {
             DebugMsg(("CatStrDir: error, not a <>-literal: %s\n", tokenarray[i].tokpos ));
-            return( TextItemError( &tokenarray[i] ) );
+            return( (ret_code)TextItemError( &tokenarray[i] ) );
         }
         /* v2.08: using tokenarray.stringlen is not quite correct, since some chars
          * are stored in 2 bytes (!) */
         if ( ( count + tokenarray[i].stringlen ) >= MAX_LINE_LEN ) {
             DebugMsg(("CatStrDir: error, literal too long: %u + %u >= %u\n", count, tokenarray[i].stringlen, MAX_LINE_LEN ));
-            return( EmitError( STRING_OR_TEXT_LITERAL_TOO_LONG ) );
+            return( (ret_code)EmitError( STRING_OR_TEXT_LITERAL_TOO_LONG ) );
         }
         /* v2.08: don't copy to temp buffer */
         //strcpy( StringBufferEnd + count, tokenarray[i].string_ptr );
@@ -111,7 +111,7 @@ ret_code CatStrDir( int i, struct asm_tok tokenarray[] )
         i++;
         if ( ( tokenarray[i].token != T_COMMA ) &&
             ( tokenarray[i].token != T_FINAL ) ) {
-            return( EmitErr( SYNTAX_ERROR_EX, tokenarray[i].string_ptr ) );
+            return( (ret_code)EmitErr( SYNTAX_ERROR_EX, tokenarray[i].string_ptr ) );
         }
         i++;
     }
@@ -133,7 +133,7 @@ ret_code CatStrDir( int i, struct asm_tok tokenarray[] )
     } else if( sym->state != SYM_TMACRO ) {
         /* it is defined as something else, get out */
         DebugMsg(( "CatStrDir(%s) exit, symbol redefinition\n", sym->name));
-        return( EmitErr( SYMBOL_REDEFINITION, sym->name ) );
+        return( (ret_code) EmitErr( SYMBOL_REDEFINITION, sym->name ) );
     }
 
 
@@ -291,10 +291,10 @@ ret_code SubStrDir( int i, struct asm_tok tokenarray[] )
      */
 #if 0 /* can't happen */
     if ( i != 1 ) {
-        return( EmitErr( SYNTAX_ERROR_EX, tokenarray[i].string_ptr ) );
+        return( (ret_code) EmitErr( SYNTAX_ERROR_EX, tokenarray[i].string_ptr ) );
     }
     if ( tokenarray[0].token != T_ID ) {
-        return( EmitErr( SYNTAX_ERROR_EX, tokenarray[0].string_ptr ) );
+        return( (ret_code) EmitErr( SYNTAX_ERROR_EX, tokenarray[0].string_ptr ) );
     }
 #endif
     name = tokenarray[0].string_ptr;
@@ -305,7 +305,7 @@ ret_code SubStrDir( int i, struct asm_tok tokenarray[] )
 
     if ( tokenarray[i].token != T_STRING || tokenarray[i].string_delim != '<' ) {
         DebugMsg(("SubStrDir: error, no text item\n"));
-        return( TextItemError( &tokenarray[i] ) );
+        return( (ret_code) TextItemError( &tokenarray[i] ) );
     }
     p = tokenarray[i].string_ptr;
     cnt = tokenarray[i].stringlen;
@@ -314,7 +314,7 @@ ret_code SubStrDir( int i, struct asm_tok tokenarray[] )
     DebugMsg1(("SubStrDir(%s): src=>%s<\n", name, p));
 
     if ( tokenarray[i].token != T_COMMA ) {
-        return( EmitErr( EXPECTING_COMMA, tokenarray[i].tokpos ) );
+        return( (ret_code) EmitErr( EXPECTING_COMMA, tokenarray[i].tokpos ) );
     }
     i++;
 
@@ -330,17 +330,17 @@ ret_code SubStrDir( int i, struct asm_tok tokenarray[] )
     //if ( opndx.kind != EXPR_CONST || opndx.string != NULL ) {
     if ( opndx.kind != EXPR_CONST ) {
         DebugMsg(("SubStrDir(%s): pos value is not a constant\n", name));
-        return( EmitError( CONSTANT_EXPECTED ) );
+        return( (ret_code) EmitError( CONSTANT_EXPECTED ) );
     }
 
     /* pos is expected to be 1-based */
     pos = opndx.value;
     if ( pos <= 0 ) {
-        return( EmitError( POSITIVE_VALUE_EXPECTED ) );
+        return( (ret_code) EmitError( POSITIVE_VALUE_EXPECTED ) );
     }
     if ( tokenarray[i].token != T_FINAL ) {
         if ( tokenarray[i].token != T_COMMA ) {
-            return( EmitErr( EXPECTING_COMMA, tokenarray[i].tokpos ) );
+            return( (ret_code) EmitErr( EXPECTING_COMMA, tokenarray[i].tokpos ) );
         }
         i++;
         /* get size, must be a constant */
@@ -353,15 +353,15 @@ ret_code SubStrDir( int i, struct asm_tok tokenarray[] )
         //if ( opndx.kind != EXPR_CONST || opndx.string != NULL ) {
         if ( opndx.kind != EXPR_CONST ) {
             DebugMsg(("SubStrDir(%s): size value is not a constant\n", name));
-            return( EmitError( CONSTANT_EXPECTED ) );
+            return( (ret_code) EmitError( CONSTANT_EXPECTED ) );
         }
         size = opndx.value;
         if ( tokenarray[i].token != T_FINAL ) {
             DebugMsg(("SubStrDir(%s): additional items found\n", name));
-            return( EmitErr( SYNTAX_ERROR_EX, tokenarray[i].string_ptr ) );
+            return( (ret_code) EmitErr( SYNTAX_ERROR_EX, tokenarray[i].string_ptr ) );
         }
         if ( size < 0 ) {
-            return( EmitError( COUNT_MUST_BE_POSITIVE_OR_ZERO ) );
+            return( (ret_code) EmitError( COUNT_MUST_BE_POSITIVE_OR_ZERO ) );
         }
         chksize = TRUE;
     } else {
@@ -375,7 +375,7 @@ ret_code SubStrDir( int i, struct asm_tok tokenarray[] )
         if ( *p == '!' && *(p+1) != NULLC )
             p++;
     if ( *p == NULLC ) {
-        return( EmitErr( INDEX_VALUE_PAST_END_OF_STRING, cnt ) );
+        return( (ret_code) EmitErr( INDEX_VALUE_PAST_END_OF_STRING, cnt ) );
     }
     if ( *p == '!' && *(p+1) != NULLC )
         p++;
@@ -390,10 +390,10 @@ ret_code SubStrDir( int i, struct asm_tok tokenarray[] )
     p = newvalue;
 #else
     if ( pos > cnt ) {
-        return( EmitErr( INDEX_VALUE_PAST_END_OF_STRING, pos ) );
+        return( (ret_code) EmitErr( INDEX_VALUE_PAST_END_OF_STRING, pos ) );
     }
     if ( chksize && (pos+size-1) > cnt )  {
-        return( EmitError( COUNT_VALUE_TOO_LARGE ) );
+        return( (ret_code) EmitError( COUNT_VALUE_TOO_LARGE ) );
     }
     p += pos - 1;
     if ( size == -1 )
@@ -418,7 +418,7 @@ ret_code SubStrDir( int i, struct asm_tok tokenarray[] )
     } else if( sym->state != SYM_TMACRO ) {
         /* it is defined as something incompatible, get out */
         DebugMsg(( "SubStrDir(%s) error, incompatible type\n", sym->name));
-        return( EmitErr( SYMBOL_REDEFINITION, sym->name ) );
+        return( (ret_code) EmitErr( SYMBOL_REDEFINITION, sym->name ) );
     }
 
     sym->state = SYM_TMACRO;
@@ -431,7 +431,7 @@ ret_code SubStrDir( int i, struct asm_tok tokenarray[] )
 #else
     if ( sym->total_size < ( size + 1 ) ) {
         LclFree( sym->string_ptr );
-        sym->string_ptr = LclAlloc ( size + 1 );
+        sym->string_ptr = (char *)LclAlloc ( size + 1 );
         sym->total_size = size + 1;
     }
 #endif
@@ -457,19 +457,19 @@ ret_code SizeStrDir( int i, struct asm_tok tokenarray[] )
     DebugCmd( sizstrcnt++ );
 
     if ( i != 1 ) {
-        return( EmitErr( SYNTAX_ERROR_EX, tokenarray[i].string_ptr ) );
+        return( (ret_code) EmitErr( SYNTAX_ERROR_EX, tokenarray[i].string_ptr ) );
     }
 #if 0 /* this is checked in ParseLine() */
     if ( tokenarray[0].token != T_ID ) {
-        return( EmitErr( SYNTAX_ERROR_EX, tokenarray[0].string_ptr ) );
+        return( (ret_code) EmitErr( SYNTAX_ERROR_EX, tokenarray[0].string_ptr ) );
     }
 #endif
     if ( tokenarray[2].token != T_STRING || tokenarray[2].string_delim != '<' ) {
-        return( TextItemError( &tokenarray[2] ) );
+        return( (ret_code) TextItemError( &tokenarray[2] ) );
     }
     if ( Token_Count > 3 ) {
         DebugMsg(("SizeStrDir: syntax error, name=%s, Token_Count=%u\n", tokenarray[0].string_ptr, Token_Count));
-        return( EmitErr( SYNTAX_ERROR_EX, tokenarray[3].string_ptr ) );
+        return( (ret_code) EmitErr( SYNTAX_ERROR_EX, tokenarray[3].string_ptr ) );
     }
 
     //sizestr = GetLiteralValue( StringBufferEnd, tokenarray[2].string_ptr );
@@ -508,11 +508,11 @@ ret_code InStrDir( int i, struct asm_tok tokenarray[] )
     DebugCmd( instrcnt++ );
 
     if ( i != 1) {
-        return( EmitErr( SYNTAX_ERROR_EX, tokenarray[i].string_ptr ) );
+        return( (ret_code) EmitErr( SYNTAX_ERROR_EX, tokenarray[i].string_ptr ) );
     }
 #if 0 /* this is checked in ParseLine() */
     if ( tokenarray[0].token != T_ID ) {
-        return( EmitErr( SYNTAX_ERROR_EX, tokenarray[0].string_ptr ) );
+        return( (ret_code) EmitErr( SYNTAX_ERROR_EX, tokenarray[0].string_ptr ) );
     }
 #endif
 
@@ -523,7 +523,7 @@ ret_code InStrDir( int i, struct asm_tok tokenarray[] )
         if ( EvalOperand( &i, tokenarray, Token_Count, &opndx, EXPF_NOUNDEF ) == ERROR )
             return( ERROR );
         if ( opndx.kind != EXPR_CONST ) {
-            return( EmitError( CONSTANT_EXPECTED ) );
+            return( (ret_code) EmitError( CONSTANT_EXPECTED ) );
         }
         start = opndx.value;
         if ( start <= 0 ) {
@@ -534,13 +534,13 @@ ret_code InStrDir( int i, struct asm_tok tokenarray[] )
             EmitWarn( 3, POSITIVE_VALUE_EXPECTED );
         }
         if ( tokenarray[i].token != T_COMMA ) {
-            return( EmitErr( EXPECTING_COMMA, tokenarray[i].tokpos ) );
+            return( (ret_code) EmitErr( EXPECTING_COMMA, tokenarray[i].tokpos ) );
         }
         i++; /* skip comma */
     }
 
     if ( tokenarray[i].token != T_STRING || tokenarray[i].string_delim != '<' ) {
-        return( TextItemError( &tokenarray[i] ) );
+        return( (ret_code) TextItemError( &tokenarray[i] ) );
     }
 
     /* to compare the strings, the "visible" format is needed, since
@@ -554,18 +554,18 @@ ret_code InStrDir( int i, struct asm_tok tokenarray[] )
     DebugMsg1(("InStrDir: first string >%s< \n", src ));
 
     if ( start > sizestr ) {
-        return( EmitErr( INDEX_VALUE_PAST_END_OF_STRING, start ) );
+        return( (ret_code) EmitErr( INDEX_VALUE_PAST_END_OF_STRING, start ) );
     }
     p = src + start - 1;
 
     i++;
     if ( tokenarray[i].token != T_COMMA ) {
-        return( EmitErr( EXPECTING_COMMA, tokenarray[i].tokpos ) );
+        return( (ret_code) EmitErr( EXPECTING_COMMA, tokenarray[i].tokpos ) );
     }
     i++;
 
     if ( tokenarray[i].token != T_STRING || tokenarray[i].string_delim != '<' ) {
-        return( TextItemError( &tokenarray[i] ) );
+        return( (ret_code) TextItemError( &tokenarray[i] ) );
     }
     //q = GetAlignedPointer( src, sizestr );
     //j = GetLiteralValue( q, tokenarray[i].string_ptr );
@@ -574,7 +574,7 @@ ret_code InStrDir( int i, struct asm_tok tokenarray[] )
     DebugMsg1(("InStrDir: second string >%s< \n", q ));
     i++;
     if ( tokenarray[i].token != T_FINAL ) {
-        return( EmitErr( SYNTAX_ERROR_EX, tokenarray[i].string_ptr ) );
+        return( (ret_code) EmitErr( SYNTAX_ERROR_EX, tokenarray[i].string_ptr ) );
     }
 
     strpos = 0;
@@ -637,7 +637,7 @@ static ret_code GetNumber( char *string, int *pi, struct asm_tok tokenarray[] )
     /* v2.11: string constants are accepted ( although hardly useful ) */
     //if( opndx.kind != EXPR_CONST || opndx.quoted_string != NULL || tokenarray[i].token != T_FINAL ) {
     if( opndx.kind != EXPR_CONST || tokenarray[i].token != T_FINAL ) {
-        return( EmitErr( SYNTAX_ERROR_EX, string ) );
+        return( (ret_code) EmitErr( SYNTAX_ERROR_EX, string ) );
     }
     *pi = opndx.value;
     return( NOT_ERROR );
@@ -675,7 +675,7 @@ static ret_code InStrFunc( struct macro_instance *mi, char *buffer, struct asm_t
     }
 
     if ( pos > strlen( mi->parm_array[1] ) ) {
-        return( EmitErr( INDEX_VALUE_PAST_END_OF_STRING, pos ) );
+        return( (ret_code) EmitErr( INDEX_VALUE_PAST_END_OF_STRING, pos ) );
     }
     /* v2.08: if() added, empty searchstr is to return 0 */
     if ( *(mi->parm_array[2]) != NULLC ) {
@@ -733,7 +733,7 @@ static ret_code SubStrFunc( struct macro_instance *mi, char *buffer, struct asm_
          * v2.09: negative index no longer silently changed to 1.
          */
         if ( pos ) {
-            return( EmitErr( INDEX_VALUE_PAST_END_OF_STRING, pos ) );
+            return( (ret_code) EmitErr( INDEX_VALUE_PAST_END_OF_STRING, pos ) );
         }
         DebugMsg(( "@SubStr(): index value 0 changed to 1\n", pos ));
         pos = 1;
@@ -741,7 +741,7 @@ static ret_code SubStrFunc( struct macro_instance *mi, char *buffer, struct asm_
 
     size = strlen( src );
     if ( pos > size ) {
-        return( EmitErr( INDEX_VALUE_PAST_END_OF_STRING, pos ) );
+        return( (ret_code) EmitErr( INDEX_VALUE_PAST_END_OF_STRING, pos ) );
     }
 
     size = size - pos + 1;
@@ -751,10 +751,10 @@ static ret_code SubStrFunc( struct macro_instance *mi, char *buffer, struct asm_
         if ( GetNumber( mi->parm_array[2], &sizereq, tokenarray ) == ERROR )
             return( ERROR );
         if ( sizereq < 0 ) {
-            return( EmitError( COUNT_MUST_BE_POSITIVE_OR_ZERO ) );
+            return( (ret_code) EmitError( COUNT_MUST_BE_POSITIVE_OR_ZERO ) );
         }
         if ( sizereq > size ) {
-            return( EmitError( COUNT_VALUE_TOO_LARGE ) );
+            return( (ret_code) EmitError( COUNT_VALUE_TOO_LARGE ) );
         }
         size = sizereq;
     }
@@ -798,7 +798,7 @@ void StringInit( void )
     /* v2.08: @CatStr() changed to VARARG */
     macro->sym.mac_vararg = TRUE;
     macro->e.macroinfo->parmcnt = 1;
-    macro->e.macroinfo->parmlist = LclAlloc( sizeof( struct mparm_list ) * 1 );
+    macro->e.macroinfo->parmlist = (struct mparm_list *)LclAlloc( sizeof( struct mparm_list ) * 1 );
     macro->e.macroinfo->parmlist[0].deflt = NULL;
     macro->e.macroinfo->parmlist[0].required = FALSE;
 
@@ -811,7 +811,7 @@ void StringInit( void )
     macro->sym.isfunc = TRUE;
     macro->e.macroinfo->parmcnt = 3;
     macro->e.macroinfo->autoexp = 1; /* param 1 (pos) is expanded */
-    macro->e.macroinfo->parmlist = LclAlloc(sizeof( struct mparm_list) * 3);
+    macro->e.macroinfo->parmlist = (struct mparm_list *)LclAlloc(sizeof( struct mparm_list) * 3);
     for (i = 0; i < 3; i++) {
         macro->e.macroinfo->parmlist[i].deflt = NULL;
         //macro->e.macroinfo->parmlist[i].label = parmnames[i];
@@ -826,7 +826,7 @@ void StringInit( void )
     macro->sym.func_ptr = SizeStrFunc;
     macro->sym.isfunc = TRUE;
     macro->e.macroinfo->parmcnt = 1;
-    macro->e.macroinfo->parmlist = LclAlloc(sizeof( struct mparm_list));
+    macro->e.macroinfo->parmlist = (struct mparm_list *)LclAlloc(sizeof( struct mparm_list));
     macro->e.macroinfo->parmlist[0].deflt = NULL;
     //macro->e.macroinfo->parmlist[0].label = parmnames[0];
     /* macro->e.macroinfo->parmlist[0].required = TRUE; */
@@ -842,7 +842,7 @@ void StringInit( void )
     macro->sym.isfunc = TRUE;
     macro->e.macroinfo->parmcnt = 3;
     macro->e.macroinfo->autoexp = 2 + 4; /* param 2 (pos) and 3 (size) are expanded */
-    macro->e.macroinfo->parmlist = LclAlloc(sizeof( struct mparm_list) * 3);
+    macro->e.macroinfo->parmlist = (struct mparm_list *)LclAlloc(sizeof( struct mparm_list) * 3);
     for (i = 0; i < 3; i++) {
         macro->e.macroinfo->parmlist[i].deflt = NULL;
         //macro->e.macroinfo->parmlist[i].label = parmnames[i];

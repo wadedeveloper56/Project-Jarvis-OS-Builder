@@ -38,24 +38,25 @@ ret_code SafeSEHDirective( int i, struct asm_tok tokenarray[] )
     }
     i++;
     if ( tokenarray[i].token != T_ID ) {
-        return( EmitErr( SYNTAX_ERROR_EX, tokenarray[i].string_ptr ) );
+        return( (ret_code) EmitErr( SYNTAX_ERROR_EX, tokenarray[i].string_ptr ) );
     }
     sym = SymSearch( tokenarray[i].string_ptr );
 
     /* make sure the argument is a true PROC */
     if ( sym == NULL || sym->state == SYM_UNDEFINED ) {
         if ( Parse_Pass != PASS_1 ) {
-            return( EmitErr( SYMBOL_NOT_DEFINED, tokenarray[i].string_ptr ) );
+            return( (ret_code) EmitErr( SYMBOL_NOT_DEFINED, tokenarray[i].string_ptr ) );
         }
     } else if ( sym->isproc == FALSE ) {
-        return( EmitErr( SAFESEH_ARGUMENT_MUST_BE_A_PROC, tokenarray[i].string_ptr ) );
+        return( (ret_code) EmitErr( SAFESEH_ARGUMENT_MUST_BE_A_PROC, tokenarray[i].string_ptr ) );
     }
 
     if ( Parse_Pass == PASS_1 ) {
         if ( sym ) {
-            for ( node = ModuleInfo.g.SafeSEHQueue.head; node; node = node->next )
+            for ( node = (struct qnode *)ModuleInfo.g.SafeSEHQueue.head; node; node = (struct qnode *)node->next ) {
                 if ( node->elmt == sym )
                     break;
+            }
         } else {
             sym = SymCreate( tokenarray[i].string_ptr );
             node = NULL;
@@ -79,7 +80,7 @@ ret_code SafeSEHDirective( int i, struct asm_tok tokenarray[] )
     }
     i++;
     if ( tokenarray[i].token != T_FINAL ) {
-        return( EmitErr( SYNTAX_ERROR_EX, tokenarray[i].string_ptr ) );
+        return( (ret_code) EmitErr( SYNTAX_ERROR_EX, tokenarray[i].string_ptr ) );
     }
 
     return( NOT_ERROR );

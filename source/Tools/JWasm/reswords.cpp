@@ -227,7 +227,7 @@ uint_16 optable_idx[] = {
 
 /* table of instruction operand classes
  */
-const struct opnd_class opnd_clstab[] = {
+struct opnd_class opnd_clstab[] = {
 #define OpCls( op1, op2, op3 ) { { (operand_type)(OP_ ## op1), (operand_type)(OP_ ## op2) }, (unsigned char)(OP3_ ## op3) },
 #include "opndcls.h"
 #undef OpCls
@@ -306,7 +306,7 @@ struct ReservedWord ResWordTable[] = {
  * but in fact it's the wrong place, since the content of vex_flags[]
  * are associated with opcodes, not with instruction variants.
  */
-const uint_8 vex_flags[] = {
+uint_8 vex_flags[] = {
     /* flags for the AVX instructions in instruct.h. The order must
      * be equal to the one in instruct.h! ( this is to be improved.)
      * For a description of the VX_ flags see codegen.h

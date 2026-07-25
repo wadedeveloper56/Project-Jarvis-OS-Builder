@@ -22,7 +22,7 @@
 #define GENPTRTYPE 0 /* generate a generic pointer type */
 #define SetPrefixName( p, name, len ) *p++ = len; memcpy( p, name, len ); p += len
 
-extern const char szCVCompiler[];
+extern char szCVCompiler[];
 
 union cv_typeref_u {
     struct cv_primitive_type s;

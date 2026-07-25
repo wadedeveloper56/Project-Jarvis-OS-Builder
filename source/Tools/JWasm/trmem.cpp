@@ -635,7 +635,7 @@ char *_trmem_strdup( const char *str, _trmem_who who, _trmem_hdl hdl )
     size_t  len;
 
     len = strlen( str ) + 1;
-    mem = _trmem_alloc( len, who, hdl );
+    mem = (char *)_trmem_alloc( len, who, hdl );
     if( mem )
         memcpy( mem, str, len );
     return( mem );
@@ -762,7 +762,7 @@ void tm_Init( void )
 {
     if ( FileTrmem = fopen( TRMEM_LOGFN, "w" ) ) {
         //hTrmem = _trmem_open( malloc, free, realloc, _expand, memFile, memLine,
-        hTrmem = _trmem_open( malloc, free, _TRMEM_NO_REALLOC, _TRMEM_NO_REALLOC, FileTrmem, memLine,
+        hTrmem = _trmem_open( malloc, free, _TRMEM_NO_REALLOC, _TRMEM_NO_REALLOC, FileTrmem, (void (*)(FILE *, const char *, size_t))memLine,
                   _TRMEM_ALLOC_SIZE_0 | _TRMEM_FREE_NULL | _TRMEM_OUT_OF_MEMORY | _TRMEM_CLOSE_CHECK_FREE );
         if( hTrmem == NULL ) {
             printf("tm_Init: _trmem_open() failed\n" );

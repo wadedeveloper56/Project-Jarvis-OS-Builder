@@ -60,7 +60,8 @@
   #elif defined(__DJGPP__)
    #include <dpmi.h>
   #else
-   #include "win32.h"
+   //#include "win32.h"
+  #include <windows.h>
   #endif
 #endif
 

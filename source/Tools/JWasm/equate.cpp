@@ -25,24 +25,24 @@ extern void myatoi128( const char *, uint_64[], int, int );
 
 #if defined(LLONG_MAX) || defined(__GNUC__) || defined(__TINYC__)
 /* gcc needs suffixes if the constants won't fit in long type */
-const int_64 maxintvalues[] = { 0x00000000ffffffffULL, 0x00000000ffffffffULL,
+int_64 maxintvalues[] = { 0x00000000ffffffffULL, 0x00000000ffffffffULL,
 #if AMD64_SUPPORT
 0x7fffffffffffffffULL
 #endif
 };
-const int_64 minintvalues[] = { 0xffffffff00000000ULL, 0xffffffff00000000ULL,
+int_64 minintvalues[] = { 0xffffffff00000000ULL, 0xffffffff00000000ULL,
 #if AMD64_SUPPORT
 0x8000000000000000ULL
 #endif
 };
 #else
 /* the "i64" suffixes shouldn't be necessary, but sometimes it's needed (OCC) */
-const int_64 maxintvalues[] = { 0x00000000ffffffffi64, 0x00000000ffffffffi64,
+int_64 maxintvalues[] = { 0x00000000ffffffffi64, 0x00000000ffffffffi64,
 #if AMD64_SUPPORT
 0x7fffffffffffffffi64
 #endif
 };
-const int_64 minintvalues[] = { 0xffffffff00000000i64, 0xffffffff00000000i64,
+int_64 minintvalues[] = { 0xffffffff00000000i64, 0xffffffff00000000i64,
 #if AMD64_SUPPORT
 0x8000000000000000i64
 #endif

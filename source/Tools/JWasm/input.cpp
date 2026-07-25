@@ -417,7 +417,7 @@ static struct src_item *PushSrcItem( char type, void *pv )
         curr = SrcFree;
         SrcFree = curr->next;
     } else
-        curr = LclAlloc( sizeof( struct src_item ) );
+        curr = (struct src_item *)LclAlloc( sizeof( struct src_item ) );
     curr->next = src_stack;
     src_stack = curr;
     curr->type = type;
@@ -762,11 +762,11 @@ void AddStringToIncludePath( const char *string )
     if ( len == 0 )
         return;
     if( ModuleInfo.g.IncludePath == NULL ) {
-        ModuleInfo.g.IncludePath = MemAlloc( len + 1 );
+        ModuleInfo.g.IncludePath = (char *)MemAlloc( len + 1 );
         strcpy( ModuleInfo.g.IncludePath, string );
     } else {
         tmp = ModuleInfo.g.IncludePath;
-        ModuleInfo.g.IncludePath = MemAlloc( strlen( tmp ) + sizeof( INC_PATH_DELIM_STR ) +
+        ModuleInfo.g.IncludePath = (char *)MemAlloc( strlen( tmp ) + sizeof( INC_PATH_DELIM_STR ) +
                                 len + 1 );
         strcpy( ModuleInfo.g.IncludePath, tmp );
         strcat( ModuleInfo.g.IncludePath, INC_PATH_DELIM_STR );
@@ -922,7 +922,7 @@ void InputInit( void )
     //    AddStringToIncludePath( path );
     //}
 
-    srclinebuffer = LclAlloc( SIZE_SRCLINES + SIZE_TOKENARRAY + SIZE_STRINGBUFFER );
+    srclinebuffer = (char *)LclAlloc( SIZE_SRCLINES + SIZE_TOKENARRAY + SIZE_STRINGBUFFER );
     /* the comment buffer is at the end of the source line buffer */
     commentbuffer = srclinebuffer + SIZE_SRCLINES - MAX_LINE_LEN;
     /* behind the comment buffer is the token buffer */

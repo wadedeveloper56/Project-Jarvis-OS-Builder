@@ -61,7 +61,7 @@ void QAddItem( struct qdesc *q, const void *data )
 {
     struct qnode    *node;
 
-    node = LclAlloc( sizeof( struct qnode ) );
+    node = (struct qnode *)LclAlloc( sizeof( struct qnode ) );
     node->elmt = data;
     QEnqueue( q, node );
 }

@@ -770,8 +770,8 @@ OPTFUNC( SetCodeView )
 
 #if STACKBASESUPP
 
-extern void UpdateStackBase( struct asym *, void * );
-extern void UpdateProcStatus( struct asym *, void * );
+extern void UpdateStackBase( struct asym *, void*);
+extern void UpdateProcStatus( struct asym *, void*);
 
 OPTFUNC( SetStackBase )
 /*********************/

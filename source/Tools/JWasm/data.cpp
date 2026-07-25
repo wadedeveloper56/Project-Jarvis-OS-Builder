@@ -53,7 +53,7 @@
 
 extern ret_code segm_override( const struct expr *, struct code_info * );
 extern struct asym *SegOverride;
-extern const char szNull[];
+extern char szNull[];
 
 static ret_code data_item( int *, struct asm_tok[], struct asym *, uint_32, const struct asym *, uint_32, bool inside_struct, bool, bool, int );
 

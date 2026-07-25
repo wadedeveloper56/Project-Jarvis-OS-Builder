@@ -23,7 +23,9 @@
  Resource file is H/JWasm.rc.
  */
 
-#include "win32.h"
+ //#include "win32.h"
+#include <windows.h>
+
 typedef void *HRSRC;
 typedef void *HGLOBAL;
 WINBASEAPI HRSRC   WINAPI FindResource( void *, char *, uint_32 );
@@ -60,10 +62,10 @@ static const char * const msgtexts[] = {
 
 /* the compiler string stored in CodeView symbolic debugging info */
 #ifdef DEBUG_OUT
-const char szCVCompiler[] = { "Microsoft (R) Macro Assembler Version 6.15.8803" };
-//const char szCVCompiler[] = { "Microsoft (R) Macro Assembler Version 8.00.50727" };
+char szCVCompiler[] = { "Microsoft (R) Macro Assembler Version 6.15.8803" };
+//char szCVCompiler[] = { "Microsoft (R) Macro Assembler Version 8.00.50727" };
 #else
-const char szCVCompiler[] = { "JWasm v" _JWASM_VERSION_STR_ };
+char szCVCompiler[] = { "JWasm v" _JWASM_VERSION_STR_ };
 #endif
 
 static const char *MsgGet( int msgid, char *buffer )

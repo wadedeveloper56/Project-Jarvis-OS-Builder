@@ -23,7 +23,7 @@
 
 #define DEFAULT_STACK_SIZE      1024
 
-extern const char szDgroup[];
+extern char szDgroup[];
 
 static char *SegmNames[ SIM_LAST ];
 
@@ -258,14 +258,14 @@ ret_code SimplifiedSegDir( int i, struct asm_tok tokenarray[] )
     case SIM_DATA:    /* .data  */
     case SIM_DATA_UN: /* .data? */
     case SIM_CONST:   /* .const */
-        SetSimSeg( type, name );
+        SetSimSeg( (sim_seg)type, name );
         AddLineQueueX( "%r %r:ERROR", T_ASSUME, T_CS );
         if ( name || (!init) )
-            AddToDgroup( type, name );
+            AddToDgroup( (sim_seg)type, name );
         break;
     case SIM_FARDATA:     /* .fardata  */
     case SIM_FARDATA_UN:  /* .fardata? */
-        SetSimSeg( type, name );
+        SetSimSeg( (sim_seg)type, name );
         AddLineQueueX( "%r %r:ERROR", T_ASSUME, T_CS );
         break;
     default: /* shouldn't happen */
@@ -292,12 +292,12 @@ void SetModelDefaultSegNames( void )
 
     /* option -nt set? */
     if( Options.names[OPTN_TEXT_SEG] ) {
-        SegmNames[SIM_CODE] = LclAlloc( strlen( Options.names[OPTN_TEXT_SEG] ) + 1 );
+        SegmNames[SIM_CODE] = (char *)LclAlloc( strlen( Options.names[OPTN_TEXT_SEG] ) + 1 );
         strcpy( SegmNames[SIM_CODE], Options.names[OPTN_TEXT_SEG] );
     } else {
         if ( SIZE_CODEPTR & ( 1 << ModuleInfo.model ) ) {
             /* for some models, the code segment contains the module name */
-            SegmNames[SIM_CODE] = LclAlloc( strlen( SegmNamesDef[SIM_CODE] ) + strlen( ModuleInfo.name ) + 1 );
+            SegmNames[SIM_CODE] = (char *)LclAlloc( strlen( SegmNamesDef[SIM_CODE] ) + strlen( ModuleInfo.name ) + 1 );
             strcpy( SegmNames[SIM_CODE], ModuleInfo.name );
             strcat( SegmNames[SIM_CODE], SegmNamesDef[SIM_CODE] );
         }
@@ -305,7 +305,7 @@ void SetModelDefaultSegNames( void )
 
     /* option -nd set? */
     if ( Options.names[OPTN_DATA_SEG] ) {
-        SegmNames[SIM_DATA] = LclAlloc( strlen( Options.names[OPTN_DATA_SEG] ) + 1 );
+        SegmNames[SIM_DATA] = (char *)LclAlloc( strlen( Options.names[OPTN_DATA_SEG] ) + 1 );
         strcpy( SegmNames[SIM_DATA], Options.names[OPTN_DATA_SEG] );
     }
     return;

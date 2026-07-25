@@ -61,18 +61,18 @@
 
 #define InWordRange( val ) ( (val > 65535 || val < -65535) ? FALSE : TRUE )
 
-extern ret_code (* const directive_tab[])( int, struct asm_tok[] );
+extern ret_code (* directive_tab[])( int, struct asm_tok[] );
 
 /* parsing of branch instructions with imm operand is found in branch.c */
 extern ret_code         process_branch( struct code_info *, unsigned, const struct expr * );
 
 extern enum proc_status ProcStatus;
 //extern struct asym   symPC; /* '$' symbol */
-extern const int_64     maxintvalues[];
-extern const int_64     minintvalues[];
-extern const struct opnd_class opnd_clstab[];
+extern int_64     maxintvalues[];
+extern int_64     minintvalues[];
+extern struct opnd_class opnd_clstab[];
 #if AVXSUPP
-extern const uint_8     vex_flags[];
+extern uint_8     vex_flags[];
 #endif
 extern int_8           Frame_Type;     /* Frame of current fixup */
 extern uint_16         Frame_Datum;    /* Frame datum of current fixup */
@@ -2535,7 +2535,7 @@ static ret_code check_size( struct code_info *CodeInfo, const struct expr opndx[
         /* fall through */
     case T_VPERM2F128: /* has just one memory variant, and VX_L isnt set */
         if ( op2 == OP_M )
-            CodeInfo->opnd[OPND2].type |= OP_M256;
+            DO_OR_EQ(operand_type, CodeInfo->opnd[OPND2].type, |=, OP_M256);
         break;
 #endif
 #if SSE4SUPP
@@ -2589,7 +2589,7 @@ static ret_code check_size( struct code_info *CodeInfo, const struct expr opndx[
                  * don't use the short format (opcodes A0-A3) - it exists for direct
                  * addressing only. Reset OP_A flag!
                  */
-                CodeInfo->opnd[OPND2].type &= ~OP_A;
+                DO_AND_EQ(operand_type, CodeInfo->opnd[OPND2].type, &=, ~OP_A);
                 DebugMsg1(("check_size: OP_A flag reset, new op2=%X\n", CodeInfo->opnd[OPND2].type ));
 #if AMD64_SUPPORT
             } else if ( CodeInfo->Ofssize == USE64 && ( CodeInfo->opnd[OPND1].data64 < 0x80000000 || CodeInfo->opnd[OPND1].data64 >= 0xffffffff80000000 ) ) {
@@ -2597,7 +2597,7 @@ static ret_code check_size( struct code_info *CodeInfo, const struct expr opndx[
                  * are followed by a full 64-bit moffs. This is only used if the offset won't fit
                  * in a 32-bit signed value.
                  */
-                CodeInfo->opnd[OPND2].type &= ~OP_A;
+                DO_AND_EQ(operand_type, CodeInfo->opnd[OPND2].type, &=, ~OP_A);
                 DebugMsg1(("check_size: OP_A flag reset, new op2=%X\n", CodeInfo->opnd[OPND2].type ));
 #endif
             }
@@ -2605,11 +2605,11 @@ static ret_code check_size( struct code_info *CodeInfo, const struct expr opndx[
         } else if( ( op1 & OP_A ) && ( op2 & OP_M ) ) { /* 2. operand memory reference, 1. AL|AX|EAX|RAX? */
 
             if ( CodeInfo->isdirect == FALSE ) {
-                CodeInfo->opnd[OPND1].type &= ~OP_A;
+                DO_AND_EQ(operand_type, CodeInfo->opnd[OPND1].type, &=, ~OP_A);
                 DebugMsg1(("check_size: OP_A flag reset, new op1=%X\n", CodeInfo->opnd[OPND1].type ));
 #if AMD64_SUPPORT
             } else if ( CodeInfo->Ofssize == USE64 && ( CodeInfo->opnd[OPND2].data64 < 0x80000000 || CodeInfo->opnd[OPND2].data64 >= 0xffffffff80000000 ) ) {
-                CodeInfo->opnd[OPND1].type &= ~OP_A;
+                DO_AND_EQ(operand_type, CodeInfo->opnd[OPND1].type, &=, ~OP_A);
                 DebugMsg1(("check_size: OP_A flag reset, new op2=%X\n", CodeInfo->opnd[OPND1].type ));
 #endif
             }
@@ -2696,7 +2696,7 @@ static ret_code check_size( struct code_info *CodeInfo, const struct expr opndx[
                          CodeInfo->opnd[OPND2].type = OP_I8;
                          p = "BYTE";
                     }
-                    if( opndx[OPND2].explicit == FALSE ) {
+                    if( opndx[OPND2].explicit1 == FALSE ) {
                         /* v2.06: emit warning at pass one if mem op isn't a forward ref */
                         /* v2.06b: added "undefined" check */
                         if ( ( CodeInfo->opnd[OPND1].InsFixup == NULL && Parse_Pass == PASS_1 && CodeInfo->undef_sym == FALSE ) ||
@@ -2950,8 +2950,8 @@ ret_code ParseLine( struct asm_tok tokenarray[] )
     if ( CurrFile[LST] ) oldofs = GetCurrOffset();
 
     /* init CodeInfo */
-    CodeInfo.prefix.ins         = EMPTY;
-    CodeInfo.prefix.RegOverride = EMPTY;
+    CodeInfo.prefix.ins         = (instr_token)EMPTY;
+    CodeInfo.prefix.RegOverride = (assume_segreg)EMPTY;
 #if AMD64_SUPPORT
     CodeInfo.prefix.rex     = 0;
 #endif
@@ -2963,7 +2963,7 @@ ret_code ParseLine( struct asm_tok tokenarray[] )
 #ifdef DEBUG_OUT
         CodeInfo.opnd[j].data32l = -1;
         /* make sure it's invalid */
-        CodeInfo.opnd[j].InsFixup = (void *)0xffffffff;
+        CodeInfo.opnd[j].InsFixup = (fixup *)0xffffffff;
 #endif
     }
     CodeInfo.rm_byte        = 0;
@@ -2978,7 +2978,7 @@ ret_code ParseLine( struct asm_tok tokenarray[] )
     /* instruction prefix?
      * T_LOCK, T_REP, T_REPE, T_REPNE, T_REPNZ, T_REPZ */
     if ( tokenarray[i].tokval >= T_LOCK && tokenarray[i].tokval <= T_REPZ ) {
-        CodeInfo.prefix.ins = tokenarray[i].tokval;
+        CodeInfo.prefix.ins = (instr_token)tokenarray[i].tokval;
         i++;
         /* prefix has to be followed by an instruction */
         if( tokenarray[i].token != T_INSTRUCTION ) {
@@ -2999,9 +2999,9 @@ ret_code ParseLine( struct asm_tok tokenarray[] )
             if ( !( ProcStatus & PRST_INSIDE_EPILOGUE ) && ModuleInfo.epiloguemode != PEM_NONE ) {
                 /* v2.07: special handling for RET/IRET */
                 FStoreLine( ( ModuleInfo.CurrComment && ModuleInfo.list_generated_code ) ? 1 : 0 );
-                ProcStatus |= PRST_INSIDE_EPILOGUE;
+                DO_OR_EQ(proc_status, ProcStatus, |=, PRST_INSIDE_EPILOGUE);
                 temp = RetInstr( i, tokenarray, Token_Count );
-                ProcStatus &= ~PRST_INSIDE_EPILOGUE;
+                DO_AND_EQ(proc_status, ProcStatus, &=, ~PRST_INSIDE_EPILOGUE);
                 return( temp );
             }
             /* default translation: just RET to RETF if proc is far */
@@ -3016,7 +3016,7 @@ ret_code ParseLine( struct asm_tok tokenarray[] )
 #ifdef DEBUG_OUT
     instr = tokenarray[i].string_ptr;
 #endif
-    CodeInfo.token = tokenarray[i].tokval;
+    CodeInfo.token = (instr_token)tokenarray[i].tokval;
     /* get the instruction's start position in InstrTable[] */
     CodeInfo.pinstr = &InstrTable[IndexFromToken( CodeInfo.token )];
     i++;
@@ -3175,7 +3175,7 @@ ret_code ParseLine( struct asm_tok tokenarray[] )
             } else {
                 /* process_register() can't handle 3rd operand */
                 if ( CurrOpnd == OPND3 ) {
-                    CodeInfo.opnd[OPND3].type = GetValueSp( opndx[CurrOpnd].base_reg->tokval );
+                    CodeInfo.opnd[OPND3].type = (operand_type) GetValueSp( opndx[CurrOpnd].base_reg->tokval );
                     CodeInfo.opnd[OPND3].data32l = opndx[CurrOpnd].base_reg->bytval;
                 } else if ( process_register( &CodeInfo, CurrOpnd, opndx ) == ERROR )
                     return( ERROR );

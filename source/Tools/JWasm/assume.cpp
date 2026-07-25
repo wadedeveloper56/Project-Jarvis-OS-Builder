@@ -80,7 +80,7 @@ static const enum assume_segreg searchtab[] = {
 
 static const char szError[]   = { "ERROR" };
 static const char szNothing[] = { "NOTHING" };
-const char szDgroup[]  = { "DGROUP" };
+char szDgroup[]  = { "DGROUP" };
 
 void SetSegAssumeTable( void *savedstate )
 /****************************************/
@@ -235,7 +235,7 @@ void ModelAssumeInit( void )
             break;
 #endif
         if ( ModuleInfo.model == MODEL_TINY )
-            pCS = szDgroup;
+            pCS = (const char *)szDgroup;
         else
             pCS = SimGetSegName( SIM_CODE );
 

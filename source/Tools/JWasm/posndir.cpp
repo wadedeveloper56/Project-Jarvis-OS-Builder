@@ -103,14 +103,14 @@ ret_code OrgDirective( int i, struct asm_tok tokenarray[] )
     if ( ( ERROR == EvalOperand( &i, tokenarray, Token_Count, &opndx, Options.strict_masm_compat ? EXPF_NOUNDEF : 0 ) ) )
         return( ERROR );
     if ( tokenarray[i].token != T_FINAL ) {
-        return( EmitErr( SYNTAX_ERROR_EX, tokenarray[i].string_ptr ) );
+        return( (ret_code) EmitErr( SYNTAX_ERROR_EX, tokenarray[i].string_ptr ) );
     }
     if ( CurrStruct ) {
         if ( opndx.kind == EXPR_CONST )
             return( SetStructCurrentOffset( opndx.value ) );
     } else {
         if( CurrSeg == NULL ) {
-            return( EmitError( MUST_BE_IN_SEGMENT_BLOCK ) );
+            return( (ret_code)EmitError( MUST_BE_IN_SEGMENT_BLOCK ) );
         }
 #if FASTPASS
         if ( StoreState == FALSE ) FStoreLine(0);
@@ -124,7 +124,7 @@ ret_code OrgDirective( int i, struct asm_tok tokenarray[] )
         else if ( opndx.kind == EXPR_ADDR && opndx.indirect == FALSE )
             return( SetCurrOffset( CurrSeg, opndx.sym->offset + opndx.value, FALSE, FALSE ) );
     }
-    return( EmitError( ORG_NEEDS_A_CONSTANT_OR_LOCAL_OFFSET ) );
+    return( (ret_code) EmitError( ORG_NEEDS_A_CONSTANT_OR_LOCAL_OFFSET ) );
 }
 
 static void fill_in_objfile_space( unsigned size )
@@ -209,7 +209,7 @@ ret_code AlignDirective( int i, struct asm_tok tokenarray[] )
             /* check that the parm is a power of 2 */
             for( power = 1; power < align_value; power <<= 1 );
             if( power != align_value ) {
-                return( EmitErr( POWER_OF_2, align_value ) );
+                return( (ret_code) EmitErr( POWER_OF_2, align_value ) );
             }
         } else if ( opndx.kind == EXPR_EMPTY ) { /* ALIGN without argument? */
             /* v2.03: special STRUCT handling was missing */
@@ -218,7 +218,7 @@ ret_code AlignDirective( int i, struct asm_tok tokenarray[] )
             else
                 align_value = GetCurrSegAlign();
         } else {
-            return( EmitError( CONSTANT_EXPECTED ) );
+            return( (ret_code) EmitError( CONSTANT_EXPECTED ) );
         }
         break;
     case T_EVEN:
@@ -227,7 +227,7 @@ ret_code AlignDirective( int i, struct asm_tok tokenarray[] )
         break;
     }
     if ( tokenarray[i].token != T_FINAL ) {
-        return( EmitErr( SYNTAX_ERROR_EX, tokenarray[i].string_ptr ) );
+        return( (ret_code) EmitErr( SYNTAX_ERROR_EX, tokenarray[i].string_ptr ) );
     }
 
     /* ALIGN/EVEN inside a STRUCT definition? */
@@ -239,7 +239,7 @@ ret_code AlignDirective( int i, struct asm_tok tokenarray[] )
 #endif
     seg_align = GetCurrSegAlign(); /* # of bytes */
     if( seg_align <= 0 ) {
-        return( EmitError( MUST_BE_IN_SEGMENT_BLOCK ) );
+        return( (ret_code) EmitError( MUST_BE_IN_SEGMENT_BLOCK ) );
     }
     if( align_value > seg_align ) {
         if ( Parse_Pass == PASS_1 )

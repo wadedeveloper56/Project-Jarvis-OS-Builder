@@ -21,7 +21,7 @@
 
 #define REMOVECOMENT 0 /* 1=remove comments from source       */
 
-extern ret_code (* const directive_tab[])( int, struct asm_tok[] );
+extern ret_code (* directive_tab[])( int, struct asm_tok[] );
 
 #ifdef DEBUG_OUT
 int_32 cntppl0;    /* count preprocessed lines 1 */
@@ -40,7 +40,7 @@ ret_code WriteCodeLabel( char *line, struct asm_tok tokenarray[] )
     char oldchar;
 
     if ( tokenarray[0].token != T_ID ) {
-        return( EmitErr( SYNTAX_ERROR_EX, tokenarray[0].string_ptr ) );
+        return( (ret_code) EmitErr( SYNTAX_ERROR_EX, tokenarray[0].string_ptr ) );
     }
     /* ensure the listing is written with the FULL source line */
     if ( CurrFile[LST] ) LstWrite( LSTTYPE_LABEL, 0, NULL );

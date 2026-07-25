@@ -99,7 +99,7 @@ extern void cv_write_debug_tables( struct dsym *, struct dsym *, void * );
 extern void SortSegments( int );
 
 extern struct qdesc LinnumQueue;    /* queue of line_num_info items */
-extern const char szNull[];
+extern char szNull[];
 
 /* LastCodeBufSize stores the size of the code buffer AFTER it has been written in omf_write_ledata().
  * This allows to get the content bytes for the listing.
