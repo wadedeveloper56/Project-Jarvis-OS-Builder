@@ -101,18 +101,39 @@ Macros:
 
                 N a m e                 Type
 
+@CatStr  . . . . . . . . . . . .        Func     0
+@Environ . . . . . . . . . . . .        Func     0
+@InStr . . . . . . . . . . . . .        Func     0
+@SizeStr . . . . . . . . . . . .        Func     0
+@SubStr  . . . . . . . . . . . .        Func     0
 
 
 Segments and Groups:
 
                 N a m e                 Size     Length   Align   Combine Class
 
+FLAT . . . . . . . . . . . . . .        GROUP
+_BSS . . . . . . . . . . . . . .        32 Bit   0000010C Para    Public  'BSS'
+_DATA  . . . . . . . . . . . . .        32 Bit   00000000 Para    Public  'DATA'
+_TEXT  . . . . . . . . . . . . .        32 Bit   00000059 Para    Public  'CODE'
 
 
 Procedures, parameters and locals:
 
                 N a m e                 Type     Value    Segment  Length
 
+CommandLineToArgvA . . . . . . .        P Near32 00000000 No Seg   00000000 *External C
+ExitProcess  . . . . . . . . . .        P Near32 00000000 No Seg   00000000 External  STDCALL
+GetCommandLineA  . . . . . . . .        P Near32 00000000 No Seg   00000000 External  STDCALL
+LocalFree  . . . . . . . . . . .        P Near32 00000000 No Seg   00000000 *External STDCALL
+__getmainargs  . . . . . . . . .        P Near32 00000000 No Seg   00000000 *External C
+_main  . . . . . . . . . . . . .        P Near32 00000000 No Seg   00000000 External  C
+_start . . . . . . . . . . . . .        P Near   00000000 _TEXT    00000059 Public   STDCALL
+  skip_arg_chars . . . . . . . .        L Near   00000029 _TEXT
+  found_arg  . . . . . . . . . .        L Near   00000025 _TEXT (F)
+  parsing_done . . . . . . . . .        L Near   0000003A _TEXT (F)
+  parse_loop . . . . . . . . . .        L Near   00000018 _TEXT
+printf . . . . . . . . . . . . .        P Near32 00000000 No Seg   00000000 *External C
 
 
 Symbols:
@@ -123,12 +144,12 @@ Symbols:
 @Cpu . . . . . . . . . . . . . .        Number           D5Fh 
 @CurSeg  . . . . . . . . . . . .        Text   
 @DataSize  . . . . . . . . . . .        Number             0h 
-@Date  . . . . . . . . . . . . .        Text   07/25/26
+@Date  . . . . . . . . . . . . .        Text   07/26/26
 @FileCur . . . . . . . . . . . .        Text   c032.asm
 @FileName  . . . . . . . . . . .        Text   C032
 @Interface . . . . . . . . . . .        Number             3h 
 @Model . . . . . . . . . . . . .        Number             7h 
-@Time  . . . . . . . . . . . . .        Text   02:50:54
+@Time  . . . . . . . . . . . . .        Text   05:50:16
 @Version . . . . . . . . . . . .        Text   800
 @code  . . . . . . . . . . . . .        Text   _TEXT
 @data  . . . . . . . . . . . . .        Text   FLAT
