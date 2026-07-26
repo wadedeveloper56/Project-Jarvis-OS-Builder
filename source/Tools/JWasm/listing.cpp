@@ -85,7 +85,7 @@ struct print_item {
     short type;
     short flags;
     const short *capitems;
-    void (*function)();
+    void (*function)(const struct asym*, void*, int_32);
 };
 
 
@@ -97,25 +97,25 @@ static const short tdcap[]  = { LS_TXT_TYPEDEFS,LS_TXT_TYPEDEFCAP, 0 };
 static const short segcap[] = { LS_TXT_SEGS,    LS_TXT_SEGCAP, 0 };
 static const short prccap[] = { LS_TXT_PROCS,   LS_TXT_PROCCAP, 0 };
 
-static void log_macro(   const struct asym * );
-static void log_struct(  const struct asym *, const char *name, int_32 );
-static void log_record(  const struct asym * );
-static void log_typedef( const struct asym * );
-static void log_segment( const struct asym *, const struct asym *group );
-static void log_group(   const struct asym *, const struct dsym * );
-static void log_proc(    const struct asym * );
+static void log_macro(   const struct asym *, void*, int_32);
+static void log_struct(  const struct asym *, void*, int_32 );
+static void log_record(  const struct asym *, void*, int_32 );
+static void log_typedef( const struct asym *, void*, int_32 );
+static void log_segment( const struct asym *, void*, int_32 );
+static void log_group(   const struct asym *, void*, int_32 );
+static void log_proc(    const struct asym *, void*, int_32 );
 
 static const struct print_item cr[] = {
-    { LQ_MACROS,          0, maccap, (void (*)())log_macro   },
-    { LQ_STRUCTS,         0, strcap, (void (*)())log_struct  },
+    { LQ_MACROS,          0, maccap, log_macro   },
+    { LQ_STRUCTS,         0, strcap, log_struct  },
 #ifdef DEBUG_OUT
-    { LQ_UNDEF_TYPES,     0, strcap, (void (*)())log_struct  },
+    { LQ_UNDEF_TYPES,     0, strcap, log_struct  },
 #endif
-    { LQ_RECORDS,         0, reccap, (void (*)())log_record  },
-    { LQ_TYPEDEFS,        0, tdcap,  (void (*)())log_typedef },
-    { LQ_SEGS,            0, segcap, (void (*)())log_segment },
-    { LQ_GRPS,   PRF_ADDSEG, NULL,   (void (*)())log_group   },
-    { LQ_PROCS,           0, prccap, (void (*)())log_proc    },
+    { LQ_RECORDS,         0, reccap, log_record  },
+    { LQ_TYPEDEFS,        0, tdcap,  log_typedef },
+    { LQ_SEGS,            0, segcap, log_segment },
+    { LQ_GRPS,   PRF_ADDSEG, NULL,   log_group   },
+    { LQ_PROCS,           0, prccap, log_proc    },
 };
 
 struct lstleft {
@@ -450,7 +450,7 @@ static const char *get_seg_combine( const struct seg_info *seg )
     return( "?" );
 }
 
-static void log_macro( const struct asym *sym )
+static void log_macro( const struct asym *sym, void *arg, int_32 flags )
 /*********************************************/
 {
     int i = sym->name_size;
@@ -567,9 +567,10 @@ static const char *GetLanguage( const struct asym *sym )
 
 /* display STRUCTs and UNIONs */
 
-static void log_struct( const struct asym *sym, const char *name, int_32 ofs )
+static void log_struct( const struct asym *sym, void *arg, int_32 ofs )
 /****************************************************************************/
 {
+    const char* name = (const char*)arg;
     unsigned      i;
     struct dsym   *dir;
     const char    *pdots;
@@ -626,7 +627,7 @@ static void log_struct( const struct asym *sym, const char *name, int_32 ofs )
     prefix -= 2;
 }
 
-static void log_record( const struct asym *sym )
+static void log_record( const struct asym *sym, void *arg, int_32 ofs )
 /**********************************************/
 {
 #if AMD64_SUPPORT
@@ -668,7 +669,7 @@ static void log_record( const struct asym *sym )
 
 /* a typedef is a simple struct with no fields. Size might be 0. */
 
-static void log_typedef( const struct asym *sym )
+static void log_typedef( const struct asym *sym, void *arg, int_32 ofs )
 /***********************************************/
 {
     //struct dsym         *dir = (struct dsym *)sym;
@@ -702,9 +703,10 @@ static void log_typedef( const struct asym *sym )
     LstNL();
 }
 
-static void log_segment( const struct asym *sym, const struct asym *group )
+static void log_segment( const struct asym *sym, void *arg, int_32 ofs )
 /*************************************************************************/
 {
+	const struct asym* group = (const struct asym*)arg;
     char buffer[32];
     struct seg_info *seg = ((struct dsym *)sym)->e.seginfo;
 
@@ -734,9 +736,10 @@ static void log_segment( const struct asym *sym, const struct asym *group )
     }
 }
 
-static void log_group( const struct asym *grp, const struct dsym *segs )
+static void log_group( const struct asym *grp, void *arg, int_32 ofs )
 /**********************************************************************/
 {
+    const struct dsym* segs = (struct dsym*)arg;
     unsigned i;
     const char *pdots;
     struct seg_item *curr;
@@ -749,11 +752,11 @@ static void log_group( const struct asym *grp, const struct dsym *segs )
     /* the FLAT groups is always empty */
     if ( grp == (struct asym *)ModuleInfo.flat_grp ) {
         for( ; segs; segs = segs->next ) {
-            log_segment( (struct asym *)segs, grp );
+            log_segment( (struct asym *)segs, (void*)grp, 0 );
         }
     } else
         for( curr = ((struct dsym *)grp)->e.grpinfo->seglist; curr; curr = curr->next ) {
-            log_segment( (struct asym *)curr->seg, grp );
+            log_segment( (struct asym *)curr->seg, (void*)grp, 0 );
         }
 }
 
@@ -789,7 +792,7 @@ static const char *get_sym_seg_name( const struct asym *sym )
 
 /* list Procedures and Prototypes */
 
-static void log_proc( const struct asym *sym )
+static void log_proc( const struct asym *sym, void *arg, int_32 ofs )
 /********************************************/
 {
     struct dsym *f;
@@ -1123,7 +1126,8 @@ void LstWriteCRef( void )
                 }
             }
             for( dir = (struct dsym *)queues[cr[idx].type].head; dir ; dir = dir->next ) {
-                //FIXME cr[idx].((void (*)(struct asym*,, struct dsym*))function)( (struct asym *) & dir->sym, (cr[idx].flags & PRF_ADDSEG) ? (struct dsym*)queues[LQ_SEGS].head : NULL, 0);
+                //FIXME  cr[idx].function((void (*)(struct asym*,, struct dsym*))function)( (struct asym *) & dir->sym, (cr[idx].flags & PRF_ADDSEG) ? (struct dsym*)queues[LQ_SEGS].head : NULL, 0);
+                cr[idx].function( &dir->sym, ( cr[idx].flags & PRF_ADDSEG ) ? queues[LQ_SEGS].head : NULL, 0 );
             }
         }
     }
