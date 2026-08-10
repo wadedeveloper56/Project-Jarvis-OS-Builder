@@ -240,81 +240,97 @@
     <OutDir>$(SolutionDir)..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>$(SolutionDir)..\..\bin\intermediate\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\sdl\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug SDL2|Win32'">
     <OutDir>$(SolutionDir)..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>$(SolutionDir)..\..\bin\intermediate\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\sdl\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>$(SolutionDir)..\..\bin\intermediate\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\sdl\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug SDL2|x64'">
     <OutDir>$(SolutionDir)..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>$(SolutionDir)..\..\bin\intermediate\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\sdl\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
     <OutDir>$(SolutionDir)..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>$(SolutionDir)..\..\bin\intermediate\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\sdl\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug SDL2|ARM64'">
     <OutDir>$(SolutionDir)..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>$(SolutionDir)..\..\bin\intermediate\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\sdl\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <OutDir>$(SolutionDir)..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>$(SolutionDir)..\..\bin\intermediate\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\sdl\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug SDL2|ARM'">
     <OutDir>$(SolutionDir)..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>$(SolutionDir)..\..\bin\intermediate\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\sdl\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>$(SolutionDir)..\..\bin\intermediate\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\sdl\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release SDL2|Win32'">
     <OutDir>$(SolutionDir)..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>$(SolutionDir)..\..\bin\intermediate\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\sdl\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>$(SolutionDir)..\..\bin\intermediate\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\sdl\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release SDL2|x64'">
     <OutDir>$(SolutionDir)..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>$(SolutionDir)..\..\bin\intermediate\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\sdl\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
     <OutDir>$(SolutionDir)..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>$(SolutionDir)..\..\bin\intermediate\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\sdl\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release SDL2|ARM64'">
     <OutDir>$(SolutionDir)..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>$(SolutionDir)..\..\bin\intermediate\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\sdl\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <OutDir>$(SolutionDir)..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>$(SolutionDir)..\..\bin\intermediate\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\sdl\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release SDL2|ARM'">
     <OutDir>$(SolutionDir)..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>$(SolutionDir)..\..\bin\intermediate\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\sdl\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
