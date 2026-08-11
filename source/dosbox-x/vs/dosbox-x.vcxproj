@@ -364,7 +364,7 @@
       <LanguageStandard_C>Default</LanguageStandard_C>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>winmm.lib;imm32.lib;dsound.lib;dxguid.lib;SetupAPI.lib;version.lib;Iphlpapi.lib;Ws2_32.lib;opengl32.lib;$(SolutionDir)..\obj\libpdcurses\$(Platform)\$(Configuration)\libpdcurses.lib;$(SolutionDir)..\obj\zlib\$(Platform)\$(Configuration)\zlib.lib;$(SolutionDir)..\obj\libpng\$(Platform)\$(Configuration)\libpng.lib;$(SolutionDir)..\obj\freetype\$(Platform)\$(Configuration)\freetype.lib;$(SolutionDir)..\obj\SDL\$(Platform)\$(Configuration)\SDL.lib;$(SolutionDir)..\obj\SDLmain\$(Platform)\$(Configuration)\SDLmain.lib;$(SolutionDir)..\obj\SDL_net\$(Platform)\$(Configuration)\SDL_net.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>winmm.lib;imm32.lib;dsound.lib;dxguid.lib;SetupAPI.lib;version.lib;Iphlpapi.lib;Ws2_32.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Windows</SubSystem>
     </Link>
     <CustomBuildStep />
@@ -373,25 +373,8 @@
       </Message>
     </CustomBuildStep>
     <PostBuildEvent>
-      <Command>copy "$(SolutionDir)\..\contrib\fonts\FREECG98.BMP" "$(OutputPath)\FREECG98.BMP"
-copy "$(SolutionDir)\..\contrib\fonts\wqy_1?pt.bdf" "$(OutputPath)\wqy_1?pt.bdf"
-copy "$(SolutionDir)\..\contrib\fonts\Nouveau_IBM.ttf" "$(OutputPath)\Nouveau_IBM.ttf"
-copy "$(SolutionDir)\..\contrib\fonts\SarasaGothicFixed.ttf" "$(OutputPath)\SarasaGothicFixed.ttf"
-copy "$(SolutionDir)\..\dosbox-x.reference.conf" "$(OutputPath)\dosbox-x.reference.conf"
-copy "$(SolutionDir)\..\dosbox-x.reference.full.conf" "$(OutputPath)\dosbox-x.reference.full.conf"
-copy "$(SolutionDir)\..\contrib\windows\installer\inpout32.dll" "$(OutputPath)\inpout32.dll"
-copy "$(SolutionDir)\..\CHANGELOG" "$(OutputPath)\CHANGELOG.txt"
-copy "$(SolutionDir)\..\contrib\windows\installer\readme.txt" "$(OutputPath)\README.txt"
-if not exist "$(OutputPath)\drivez\" mkdir "$(OutputPath)\drivez"
-copy "$(SolutionDir)\..\contrib\windows\installer\drivez_readme.txt" "$(OutputPath)\drivez\readme.txt"
-if not exist "$(OutputPath)\scripts\" mkdir "$(OutputPath)\scripts"
-copy "$(SolutionDir)\..\contrib\windows\installer\windows_explorer_context_menu*.bat" "$(OutputPath)\scripts\"
-if not exist "$(OutputPath)\shaders\" mkdir "$(OutputPath)\shaders"
-copy "$(SolutionDir)\..\contrib\windows\shaders\*.*" "$(OutputPath)\shaders\"
-if not exist "$(OutputPath)\glshaders\" mkdir "$(OutputPath)\glshaders"
-copy "$(SolutionDir)\..\contrib\glshaders\*.*" "$(OutputPath)\glshaders\"
-if not exist "$(OutputPath)\languages\" mkdir "$(OutputPath)\languages"
-for /d %%i in ("$(SolutionDir)\..\contrib\translations\*") do copy "%%i\*.lng" "$(OutputPath)\languages\"</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>
@@ -465,29 +448,12 @@ for /d %%i in ("$(SolutionDir)\..\contrib\translations\*") do copy "%%i\*.lng" "
       <LanguageStandard_C>Default</LanguageStandard_C>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>winmm.lib;imm32.lib;dsound.lib;dxguid.lib;SetupAPI.lib;version.lib;Iphlpapi.lib;Ws2_32.lib;opengl32.lib;$(SolutionDir)..\obj\libpdcurses\$(Platform)\$(Configuration)\libpdcurses.lib;$(SolutionDir)..\obj\zlib\$(Platform)\$(Configuration)\zlib.lib;$(SolutionDir)..\obj\libpng\$(Platform)\$(Configuration)\libpng.lib;$(SolutionDir)..\obj\freetype\$(Platform)\$(Configuration)\freetype.lib;$(SolutionDir)..\obj\SDL\$(Platform)\$(Configuration)\SDL.lib;$(SolutionDir)..\obj\SDLmain\$(Platform)\$(Configuration)\SDLmain.lib;$(SolutionDir)..\obj\SDL_net\$(Platform)\$(Configuration)\SDL_net.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>winmm.lib;imm32.lib;dsound.lib;dxguid.lib;SetupAPI.lib;version.lib;Iphlpapi.lib;Ws2_32.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Windows</SubSystem>
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(SolutionDir)\..\contrib\fonts\FREECG98.BMP" "$(OutputPath)\FREECG98.BMP"
-copy "$(SolutionDir)\..\contrib\fonts\wqy_1?pt.bdf" "$(OutputPath)\wqy_1?pt.bdf"
-copy "$(SolutionDir)\..\contrib\fonts\Nouveau_IBM.ttf" "$(OutputPath)\Nouveau_IBM.ttf"
-copy "$(SolutionDir)\..\contrib\fonts\SarasaGothicFixed.ttf" "$(OutputPath)\SarasaGothicFixed.ttf"
-copy "$(SolutionDir)\..\dosbox-x.reference.conf" "$(OutputPath)\dosbox-x.reference.conf"
-copy "$(SolutionDir)\..\dosbox-x.reference.full.conf" "$(OutputPath)\dosbox-x.reference.full.conf"
-copy "$(SolutionDir)\..\contrib\windows\installer\inpoutx64.dll" "$(OutputPath)\inpoutx64.dll"
-copy "$(SolutionDir)\..\CHANGELOG" "$(OutputPath)\CHANGELOG.txt"
-copy "$(SolutionDir)\..\contrib\windows\installer\readme.txt" "$(OutputPath)\README.txt"
-if not exist "$(OutputPath)\drivez\" mkdir "$(OutputPath)\drivez"
-copy "$(SolutionDir)\..\contrib\windows\installer\drivez_readme.txt" "$(OutputPath)\drivez\readme.txt"
-if not exist "$(OutputPath)\scripts\" mkdir "$(OutputPath)\scripts"
-copy "$(SolutionDir)\..\contrib\windows\installer\windows_explorer_context_menu*.bat" "$(OutputPath)\scripts\"
-if not exist "$(OutputPath)\shaders\" mkdir "$(OutputPath)\shaders"
-copy "$(SolutionDir)\..\contrib\windows\shaders\*.*" "$(OutputPath)\shaders\"
-if not exist "$(OutputPath)\glshaders\" mkdir "$(OutputPath)\glshaders"
-copy "$(SolutionDir)\..\contrib\glshaders\*.*" "$(OutputPath)\glshaders\"
-if not exist "$(OutputPath)\languages\" mkdir "$(OutputPath)\languages"
-for /d %%i in ("$(SolutionDir)\..\contrib\translations\*") do copy "%%i\*.lng" "$(OutputPath)\languages\"</Command>
+      <Command>
+      </Command>
       <Message>
       </Message>
     </PostBuildEvent>
@@ -746,7 +712,7 @@ for /d %%i in ("$(SolutionDir)\..\contrib\translations\*") do copy "%%i\*.lng" "
       <LanguageStandard_C>Default</LanguageStandard_C>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>winmm.lib;imm32.lib;dsound.lib;dxguid.lib;SetupAPI.lib;version.lib;Iphlpapi.lib;Ws2_32.lib;opengl32.lib;$(SolutionDir)..\..\bin\libraries\$(Configuration)\$(Platform)\libpdcurses.lib;$(SolutionDir)..\..\bin\libraries\$(Configuration)\$(Platform)\zlib.lib;$(SolutionDir)..\..\bin\libraries\$(Configuration)\$(Platform)\libpng.lib;$(SolutionDir)..\..\bin\libraries\$(Configuration)\$(Platform)\freetype.lib;$(SolutionDir)..\..\bin\libraries\$(Configuration)\$(Platform)\SDL.lib;$(SolutionDir)..\..\bin\libraries\$(Configuration)\$(Platform)\SDLmain.lib;$(SolutionDir)..\..\bin\libraries\$(Configuration)\$(Platform)\SDL_net.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>winmm.lib;imm32.lib;dsound.lib;dxguid.lib;SetupAPI.lib;version.lib;Iphlpapi.lib;Ws2_32.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Windows</SubSystem>
     </Link>
     <CustomBuildStep />
@@ -832,7 +798,7 @@ for /d %%i in ("$(SolutionDir)\..\contrib\translations\*") do copy "%%i\*.lng" "
       <LanguageStandard_C>Default</LanguageStandard_C>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>winmm.lib;imm32.lib;dsound.lib;dxguid.lib;SetupAPI.lib;version.lib;Iphlpapi.lib;Ws2_32.lib;opengl32.lib;$(SolutionDir)..\..\bin\libraries\$(Configuration)\$(Platform)\libpdcurses.lib;$(SolutionDir)..\..\bin\libraries\$(Configuration)\$(Platform)\zlib.lib;$(SolutionDir)..\..\bin\libraries\$(Configuration)\$(Platform)\libpng.lib;$(SolutionDir)..\..\bin\libraries\$(Configuration)\$(Platform)\freetype.lib;$(SolutionDir)..\..\bin\libraries\$(Configuration)\$(Platform)\SDL.lib;$(SolutionDir)..\..\bin\libraries\$(Configuration)\$(Platform)\SDLmain.lib;$(SolutionDir)..\..\bin\libraries\$(Configuration)\$(Platform)\SDL_net.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>winmm.lib;imm32.lib;dsound.lib;dxguid.lib;SetupAPI.lib;version.lib;Iphlpapi.lib;Ws2_32.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Windows</SubSystem>
     </Link>
     <PostBuildEvent>
@@ -1943,6 +1909,29 @@ for /d %%i in ("$(SolutionDir)\..\contrib\translations\*") do copy "%%i\*.lng" "
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="String.natvis" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="freetype\builds\windows\vc2010\freetype.vcxproj">
+      <Project>{78b079bd-9fc7-4b9e-b4a6-96da0f00248b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpdcurses\libpdcurses.vcxproj">
+      <Project>{671232ec-c55c-4636-a75f-7e4b4c54c314}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpng\projects\vstudio\libpng\libpng.vcxproj">
+      <Project>{d6973076-9317-4ef2-a0b8-b7a18ac0713e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="sdlnet\VisualC\SDL_net_VS2008.vcxproj">
+      <Project>{8ab3504f-5e58-4910-afe8-7a1e595ac3f4}</Project>
+    </ProjectReference>
+    <ProjectReference Include="sdl\VisualC\SDLmain\SDLmain.vcxproj">
+      <Project>{da956fd3-e142-46f2-9dd5-c78bebb56b7a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="sdl\VisualC\SDL\SDL.vcxproj">
+      <Project>{81ce8daf-ebb2-4761-8e45-b71abcca8c68}</Project>
+    </ProjectReference>
+    <ProjectReference Include="zlib\zlib\zlib.vcxproj">
+      <Project>{acee8153-c2af-4e9e-8881-8fea759a34d9}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
