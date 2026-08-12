@@ -15,6 +15,7 @@
  */
 
 
+#include "pch.h"
 #include "dosbox.h"
 
 #if C_PRINTER

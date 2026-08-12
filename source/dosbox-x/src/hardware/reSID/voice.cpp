@@ -17,6 +17,7 @@
 //  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 //  ---------------------------------------------------------------------------
 
+#include "pch.h"
 #define __VOICE_CC__
 #include "voice.h"
 

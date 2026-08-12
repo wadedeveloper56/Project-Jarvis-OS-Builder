@@ -23,7 +23,8 @@
  *        no longer needed and just like the GUS and SB code could be written to
  *        trigger a mixer render "up-to" for every change instead. --J.C. */
  
-//#define SPKR_DEBUGGING
+#include "pch.h"
+ //#define SPKR_DEBUGGING
 #include <math.h>
 #include "dosbox.h"
 #include "logging.h"
