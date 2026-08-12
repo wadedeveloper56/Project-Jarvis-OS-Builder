@@ -55,6 +55,7 @@ differences between OPL2 and OPL3 shown in datasheets:
 
 */
 
+#include "pch.h"
 #include "emu.h"
 #include "ymf262.h"
 

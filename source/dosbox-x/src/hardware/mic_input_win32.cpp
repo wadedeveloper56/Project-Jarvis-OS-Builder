@@ -4,6 +4,7 @@
  *  SoundBlaster Microphone Input Support - Windows WASAPI Implementation
  */
 
+#include "pch.h"
 #ifdef WIN32
 #if defined(_MSC_VER) || defined(__MINGW64__)
 

@@ -19,6 +19,7 @@
 
 /* $Id: ide.cpp,v 1.49 2009-04-10 09:53:04 c2woody Exp $ */
 
+#include "pch.h"
 #include <math.h>
 #include <assert.h>
 #include "dosbox.h"

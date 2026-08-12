@@ -4,6 +4,7 @@ note:(josephillips85) To perform changes please perform for the specific target 
 Ex. MacOS , Windows , Linux
 Don't change the behavior of the target platform if you don't have the way to test it.
 */ 
+#include "pch.h"
 #include "../serialport/libserial.h"
 #include "setup.h"
 #include "opl2board.h"

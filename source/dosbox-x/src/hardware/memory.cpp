@@ -17,6 +17,7 @@
  */
 
 
+#include "pch.h"
 #include <stdint.h>
 #include <assert.h>
 #include "dosbox.h"

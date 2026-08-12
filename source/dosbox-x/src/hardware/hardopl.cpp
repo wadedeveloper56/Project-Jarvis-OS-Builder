@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "hardopl.h"
 
 #if HAS_HARDOPL

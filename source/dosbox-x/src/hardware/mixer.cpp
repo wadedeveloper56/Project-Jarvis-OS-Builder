@@ -22,6 +22,7 @@
     That should call the mixer start from there or something.
 */
 
+#include "pch.h"
 #include <assert.h>
 #include <string.h>
 #include <sys/types.h>
