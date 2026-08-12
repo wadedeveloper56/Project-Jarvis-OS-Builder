@@ -2,7 +2,7 @@
  * Copyright (C) 2004-2024 Mark Adler
  * For conditions of distribution and use, see copyright notice in zlib.h
  */
-
+#include "pch.h"
 #include "gzguts.h"
 
 #if defined(_WIN32) && !defined(__BORLANDC__)
@@ -232,7 +232,7 @@ local gzFile gz_open(const void *path, int fd, const char *mode) {
 #ifdef WIDECHAR
         fd == -2 ? _wopen(path, oflag, 0666) :
 #endif
-        open((const char *)path, oflag, 0666));
+        _open((const char *)path, oflag, 0666));
     if (state->fd == -1) {
         free(state->path);
         free(state);

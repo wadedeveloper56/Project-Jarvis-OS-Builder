@@ -9,7 +9,7 @@
    with inffast.c is retained so that optimized assembler-coded versions of
    inflate_fast() can be used with either inflate.c or infback.c.
  */
-
+#include "pch.h"
 #include "zutil.h"
 #include "inftrees.h"
 #include "inflate.h"

@@ -34,7 +34,7 @@ void tm_Init( void );
 void tm_Fini( void );
 #endif
 
-static void genfailure( int signo )
+void genfailure( int signo )
 {
 #if CATCHBREAK
     if (signo != SIGBREAK)
@@ -46,6 +46,14 @@ static void genfailure( int signo )
     exit( EXIT_FAILURE );
 }
 
+int AssemblerMain(int argc, char** argv);
+
+int main(int argc, char** argv)
+{
+	return AssemblerMain(argc, argv);
+}
+
+/*
 int main( int argc, char **argv )
 {
     char    *pEnv;
@@ -122,3 +130,4 @@ int main( int argc, char **argv )
     DebugMsg(("main: exit, return code=%u\n", 1 - rc ));
     return( 1 - rc );      
 }
+*/

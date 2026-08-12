@@ -2,7 +2,7 @@
  * Copyright (C) 2004-2017 Mark Adler
  * For conditions of distribution and use, see copyright notice in zlib.h
  */
-
+#include "pch.h"
 #include "gzguts.h"
 
 /* Use read() to load a buffer -- return -1 on error, otherwise 0.  Read from
@@ -19,7 +19,7 @@ local int gz_load(gz_statep state, unsigned char *buf, unsigned len,
         get = len - *have;
         if (get > max)
             get = max;
-        ret = read(state->fd, buf + *have, get);
+        ret = _read(state->fd, buf + *have, get);
         if (ret <= 0)
             break;
         *have += (unsigned)ret;
@@ -596,7 +596,7 @@ int ZEXPORT gzclose_r(gzFile file) {
     err = state->err == Z_BUF_ERROR ? Z_BUF_ERROR : Z_OK;
     gz_error(state, Z_OK, NULL);
     free(state->path);
-    ret = close(state->fd);
+    ret = _close(state->fd);
     free(state);
     return ret ? Z_ERRNO : err;
 }

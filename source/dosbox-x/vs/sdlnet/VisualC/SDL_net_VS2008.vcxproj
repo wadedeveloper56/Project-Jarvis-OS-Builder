@@ -192,7 +192,7 @@
     <OutDir>$(SolutionDir)..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>$(SolutionDir)..\..\bin\intermediate\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\sdl\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\sdlnet\VisualC;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\sdl\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug SDL2|Win32'">
     <OutDir>$(SolutionDir)..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
@@ -204,7 +204,7 @@
     <OutDir>$(SolutionDir)..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>$(SolutionDir)..\..\bin\intermediate\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\sdl\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\sdlnet\VisualC;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\sdl\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug SDL2|x64'">
     <OutDir>$(SolutionDir)..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
@@ -240,7 +240,7 @@
     <OutDir>$(SolutionDir)..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>$(SolutionDir)..\..\bin\intermediate\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\sdl\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\sdlnet\VisualC;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\sdl\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release SDL2|Win32'">
     <OutDir>$(SolutionDir)..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
@@ -252,7 +252,7 @@
     <OutDir>$(SolutionDir)..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>$(SolutionDir)..\..\bin\intermediate\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\sdl\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\sdlnet\VisualC;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\sdl\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release SDL2|x64'">
     <OutDir>$(SolutionDir)..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
@@ -833,12 +833,19 @@
   <ItemGroup>
     <ClInclude Include="..\SDLnetsys.h" />
     <ClInclude Include="..\SDL_net.h" />
+    <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\SDLnet.c" />
     <ClCompile Include="..\SDLnetselect.c" />
     <ClCompile Include="..\SDLnetTCP.c" />
     <ClCompile Include="..\SDLnetUDP.c" />
+    <ClCompile Include="pch.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Version.rc" />
