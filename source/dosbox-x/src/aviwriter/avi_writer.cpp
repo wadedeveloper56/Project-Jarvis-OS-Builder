@@ -16,7 +16,8 @@
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/* Shut up! */
+#include "pch.h"
+ /* Shut up! */
 #define _CRT_NONSTDC_NO_DEPRECATE
 
 #include "bitmapinfoheader.h"

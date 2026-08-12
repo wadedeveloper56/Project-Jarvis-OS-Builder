@@ -1,5 +1,6 @@
 /* Public Domain Curses */
 
+#include "pch.h"
 #include <curspriv.h>
 
 /* Deprecated functions. These should not be used, and will eventually

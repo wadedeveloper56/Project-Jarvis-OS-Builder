@@ -16,6 +16,7 @@
  *
  */
 
+#include "pch.h"
 #include <freetype/freetype.h>
 #include <freetype/tttags.h>
 #include <freetype/internal/ftobjs.h>

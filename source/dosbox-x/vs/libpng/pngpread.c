@@ -10,6 +10,7 @@
  * and license in png.h
  */
 
+#include "pch.h"
 #include "pngpriv.h"
 
 #ifdef PNG_PROGRESSIVE_READ_SUPPORTED

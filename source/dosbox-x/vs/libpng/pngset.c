@@ -15,6 +15,7 @@
  * info struct and allows us to change the structure in the future.
  */
 
+#include "pch.h"
 #include "pngpriv.h"
 
 #if defined(PNG_READ_SUPPORTED) || defined(PNG_WRITE_SUPPORTED)

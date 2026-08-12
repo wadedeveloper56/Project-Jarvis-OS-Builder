@@ -17,6 +17,7 @@
  */
 
 
+#include "pch.h"
 #include "drives.h"
 #include "dos_inc.h"
 #include "logging.h"

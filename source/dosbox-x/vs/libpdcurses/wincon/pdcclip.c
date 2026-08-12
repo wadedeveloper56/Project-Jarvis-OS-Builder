@@ -1,5 +1,6 @@
 /* Public Domain Curses */
 
+#include "pch.h"
 #include "pdcwin.h"
 
 #include <string.h>

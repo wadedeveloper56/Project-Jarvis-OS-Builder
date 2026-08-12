@@ -16,6 +16,7 @@
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
+#include "pch.h"
 #if defined(_MSC_VER)
 #pragma warning(disable:4065) /* Please do not warn on default case without other case statements */
 #endif

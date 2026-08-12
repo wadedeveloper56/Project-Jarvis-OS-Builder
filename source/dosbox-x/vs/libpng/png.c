@@ -10,6 +10,7 @@
  * and license in png.h
  */
 
+#include "pch.h"
 #include "pngpriv.h"
 
 /* Generate a compiler error if there is an old png.h in the search path. */

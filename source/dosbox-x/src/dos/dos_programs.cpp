@@ -22,6 +22,7 @@
  *  SERIAL command Copyright sduensin and Wengier
  */
 
+#include "pch.h"
 #include "dosbox.h"
 #include <stdlib.h>
 #include <string.h>

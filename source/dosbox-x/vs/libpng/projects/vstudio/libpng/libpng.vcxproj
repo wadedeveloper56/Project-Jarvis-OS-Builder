@@ -174,7 +174,7 @@
     <CustomBuildBeforeTargets />
     <OutDir>$(SolutionDir)..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>$(SolutionDir)..\..\bin\intermediate\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\zlib;$(IncludePath)</IncludePath>
+    <IncludePath>C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\libpng\projects\vstudio\libpng;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\zlib;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug SDL2|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -188,7 +188,7 @@
     <CustomBuildBeforeTargets />
     <OutDir>$(SolutionDir)..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>$(SolutionDir)..\..\bin\intermediate\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\zlib;$(IncludePath)</IncludePath>
+    <IncludePath>C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\libpng\projects\vstudio\libpng;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\zlib;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
     <LinkIncremental>false</LinkIncremental>
@@ -230,7 +230,7 @@
     <CustomBuildBeforeTargets />
     <OutDir>$(SolutionDir)..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>$(SolutionDir)..\..\bin\intermediate\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\zlib;$(IncludePath)</IncludePath>
+    <IncludePath>C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\libpng\projects\vstudio\libpng;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\zlib;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release SDL2|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -244,7 +244,7 @@
     <CustomBuildBeforeTargets />
     <OutDir>$(SolutionDir)..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>$(SolutionDir)..\..\bin\intermediate\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\zlib;$(IncludePath)</IncludePath>
+    <IncludePath>C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\libpng\projects\vstudio\libpng;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\zlib;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
     <LinkIncremental>false</LinkIncremental>
@@ -714,6 +714,12 @@
     <ClCompile Include="..\..\..\pngwrite.c" />
     <ClCompile Include="..\..\..\pngwtran.c" />
     <ClCompile Include="..\..\..\pngwutil.c" />
+    <ClCompile Include="pch.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\..\..\scripts\pngwin.rc">
@@ -734,6 +740,9 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release SDL2|ARM64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release SDL2|ARM'">true</ExcludedFromBuild>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

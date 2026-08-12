@@ -13,6 +13,7 @@
  * read a PNG file or stream.
  */
 
+#include "pch.h"
 #include "pngpriv.h"
 #if defined(PNG_SIMPLIFIED_READ_SUPPORTED) && defined(PNG_STDIO_SUPPORTED)
 #  include <errno.h>

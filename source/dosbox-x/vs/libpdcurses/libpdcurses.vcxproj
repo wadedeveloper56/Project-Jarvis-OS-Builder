@@ -530,9 +530,16 @@
       <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</DeploymentContent>
       <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release SDL2|Win32'">false</DeploymentContent>
     </ClInclude>
+    <ClInclude Include="pch.h" />
     <ClInclude Include="wincon\pdcwin.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="pch.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="pdcurses\addch.c" />
     <ClCompile Include="pdcurses\addchstr.c" />
     <ClCompile Include="pdcurses\addstr.c" />

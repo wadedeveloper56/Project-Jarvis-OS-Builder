@@ -17,6 +17,7 @@
  */
 
 
+#include "pch.h"
 #include "dosbox.h"
 #include "dos_system.h"
 #include "bios_disk.h"

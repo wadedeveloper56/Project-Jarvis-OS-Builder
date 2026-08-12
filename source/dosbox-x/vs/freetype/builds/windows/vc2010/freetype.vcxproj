@@ -153,6 +153,18 @@
     <CodeAnalysisRuleAssemblies />
     <TargetName>$(ProjectName)</TargetName>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\freetype\builds\windows\vc2010;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\freetype\builds\windows\vc2010;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\freetype\builds\windows\vc2010;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\freetype\builds\windows\vc2010;$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <Import Project="$(SolutionDir)\freetype.user.props" Condition="exists('$(SolutionDir)\freetype.user.props')" Label="UserProperties" />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -517,6 +529,12 @@
     <ClCompile Include="..\ftdebug.c">
       <DisableLanguageExtensions>false</DisableLanguageExtensions>
     </ClCompile>
+    <ClCompile Include="pch.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
     <ResourceCompile Include="..\..\..\src\base\ftver.rc" />
   </ItemGroup>
   <ItemGroup>
@@ -526,6 +544,7 @@
     <ClInclude Include="..\..\..\src\sdf\ftsdfrend.h" />
     <ClInclude Include="..\..\..\src\svg\ftsvg.h" />
     <ClInclude Include="..\..\..\src\svg\svgtypes.h" />
+    <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\src\sdf\module.mk" />

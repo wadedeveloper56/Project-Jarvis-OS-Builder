@@ -15,6 +15,7 @@
  * in pngtrans.c.
  */
 
+#include "pch.h"
 #include "pngpriv.h"
 
 #ifdef PNG_ARM_NEON_IMPLEMENTATION

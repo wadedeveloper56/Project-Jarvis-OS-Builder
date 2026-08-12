@@ -41,6 +41,7 @@
  *
  * Hopefully this can be done without breaking things --J.C.
  */
+#include "pch.h"
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>

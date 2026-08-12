@@ -21,6 +21,7 @@
 	Probably still some bugs left in here.
 */
 
+#include "pch.h"
 #include "cpu.h"
 #include "lazyflags.h"
 #include "logging.h"

@@ -62,6 +62,7 @@ Any comments/updates/bug reports to:
    Thanks and enjoy!
 
 */
+#include "pch.h"
 #include "dosbox.h"
 #if C_DEBUG
 #include <stdio.h>
