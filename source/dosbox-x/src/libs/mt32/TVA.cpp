@@ -20,6 +20,7 @@
  * Unless we introduced bugs, it should be pretty much 100% accurate according to Mok's specifications.
 */
 
+#include "pch.h"
 #include "internals.h"
 
 #include "TVA.h"

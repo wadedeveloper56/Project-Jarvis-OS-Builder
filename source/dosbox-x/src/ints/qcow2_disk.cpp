@@ -17,6 +17,7 @@
  */
 
 
+#include "pch.h"
 #include "qcow2_disk.h"
 
 #if defined(_MSC_VER)

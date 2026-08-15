@@ -19,6 +19,7 @@
 /* Microsoft Serial Mouse compatible emulation.
  * Written by Jonathan Campbell */
 
+#include "pch.h"
 #include "dosbox.h"
 
 #include "mouse.h"

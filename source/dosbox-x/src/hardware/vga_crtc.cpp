@@ -17,6 +17,7 @@
  */
 
 
+#include "pch.h"
 #include <stdlib.h>
 #include "dosbox.h"
 #include "inout.h"

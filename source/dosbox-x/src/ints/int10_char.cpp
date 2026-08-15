@@ -19,6 +19,7 @@
 
 /* Character displaying moving functions */
 
+#include "pch.h"
 #include "dosbox.h"
 #include "bios.h"
 #include "logging.h"

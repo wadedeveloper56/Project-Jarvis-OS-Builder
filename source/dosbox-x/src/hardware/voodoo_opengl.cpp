@@ -17,6 +17,7 @@
  */
 
 // Tell Mac OS X to shut up about deprecated OpenGL calls
+#include "pch.h"
 #ifndef GL_SILENCE_DEPRECATION
 #define GL_SILENCE_DEPRECATION
 #endif

@@ -32,6 +32,7 @@
  Gregory Petrosyan
  */
 
+#include "pch.h"
 #include "sha1.h"
 
 namespace sha1

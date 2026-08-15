@@ -19,6 +19,7 @@
 /* With major work from sduensin, GranMinigun, kcgen, and Wengier */
 
 
+#include "pch.h"
 #include "config.h"
 
 #if C_MODEM

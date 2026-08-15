@@ -16,6 +16,7 @@
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
+#include "pch.h"
 #include "config.h"
 
 #if defined(C_SDL_NET) || defined(C_SDL2_NET)

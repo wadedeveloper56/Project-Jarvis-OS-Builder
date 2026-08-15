@@ -17,6 +17,7 @@
  */
 
 
+#include "pch.h"
 #include "dosbox.h"
 
 #include "setup.h"

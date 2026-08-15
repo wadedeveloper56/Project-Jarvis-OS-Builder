@@ -18,6 +18,7 @@
 
 
 
+#include "pch.h"
 #include "dosbox.h"
 #include "logging.h"
 #include "setup.h"
