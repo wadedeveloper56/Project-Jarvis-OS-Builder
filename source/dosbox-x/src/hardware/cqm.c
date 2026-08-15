@@ -25,7 +25,7 @@
  *
  * version: 0.9 beta
  */
-
+#include "pch.h"
 #include <string.h>
 #include "cqm.h"
 

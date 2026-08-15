@@ -51,7 +51,7 @@
  *       For helping out with code optimization.
  * - And everybody who helped out with real hardware testing
  */
-
+#include "pch.h"
 #include "esfm.h"
 #include <stdint.h>
 #include <stdlib.h>
