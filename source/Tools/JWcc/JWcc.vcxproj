@@ -150,6 +150,11 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>false</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>if not exist "..\..\..\build\$(Configuration)\$(Platform)\bin" mkdir "..\..\..\build\$(Configuration)\$(Platform)\bin"
+copy "$(OutputPath)$(ProjectName).exe" "..\..\..\build\$(Configuration)\$(Platform)\bin\$(ProjectName).exe"
+</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -188,6 +193,11 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>false</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>if not exist "..\..\..\build\$(Configuration)\$(Platform)\bin" mkdir "..\..\..\build\$(Configuration)\$(Platform)\bin"
+copy "$(OutputPath)$(ProjectName).exe" "..\..\..\build\$(Configuration)\$(Platform)\bin\$(ProjectName).exe"
+</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

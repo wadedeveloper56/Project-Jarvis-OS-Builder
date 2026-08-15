@@ -154,6 +154,12 @@
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
+    <PostBuildEvent>
+      <Command>if not exist "..\..\..\build\$(Configuration)\$(Platform)\" mkdir "..\..\..\build\$(Configuration)\$(Platform)\"
+copy "$(OutputPath)$(ProjectName).exe" "..\..\..\build\$(Configuration)\$(Platform)\$(ProjectName).exe"
+
+</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Manifest>
@@ -215,6 +221,12 @@
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
+    <PostBuildEvent>
+      <Command>if not exist "..\..\..\build\$(Configuration)\$(Platform)\" mkdir "..\..\..\build\$(Configuration)\$(Platform)\"
+copy "$(OutputPath)$(ProjectName).exe" "..\..\..\build\$(Configuration)\$(Platform)\$(ProjectName).exe"
+
+</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="ChildFrm.h" />

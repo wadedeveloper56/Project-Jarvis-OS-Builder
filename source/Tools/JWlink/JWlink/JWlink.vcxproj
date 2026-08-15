@@ -132,6 +132,12 @@
     <Manifest>
       <EnableSegmentHeap>true</EnableSegmentHeap>
     </Manifest>
+    <PostBuildEvent>
+      <Command>if not exist "..\..\..\..\build\$(Configuration)\$(Platform)\bin" mkdir "..\..\..\..\build\$(Configuration)\$(Platform)\bin"
+xcopy /Y /I "$(OutputPath)$(ProjectName).exe" "..\..\..\..\build\$(Configuration)\$(Platform)\bin"
+
+</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -175,6 +181,12 @@
     <Manifest>
       <EnableSegmentHeap>true</EnableSegmentHeap>
     </Manifest>
+    <PostBuildEvent>
+      <Command>if not exist "..\..\..\..\build\$(Configuration)\$(Platform)\bin" mkdir "..\..\..\..\build\$(Configuration)\$(Platform)\bin"
+xcopy /Y /I "$(OutputPath)$(ProjectName).exe" "..\..\..\..\build\$(Configuration)\$(Platform)\bin"
+
+</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\File\File.vcxproj">
