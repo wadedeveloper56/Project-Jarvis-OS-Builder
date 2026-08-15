@@ -155,9 +155,8 @@
       <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <PostBuildEvent>
-      <Command>if not exist "..\..\..\build\$(Configuration)\$(Platform)\" mkdir "..\..\..\build\$(Configuration)\$(Platform)\"
-copy "$(OutputPath)$(ProjectName).exe" "..\..\..\build\$(Configuration)\$(Platform)\$(ProjectName).exe"
-
+      <Command>if not exist "..\..\..\build\$(Configuration)\$(Platform)\bin" mkdir "..\..\..\build\$(Configuration)\$(Platform)\bin"
+copy "$(OutputPath)$(ProjectName).exe" "..\..\..\build\$(Configuration)\$(Platform)\bin\$(ProjectName).exe"
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -222,9 +221,8 @@ copy "$(OutputPath)$(ProjectName).exe" "..\..\..\build\$(Configuration)\$(Platfo
       <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <PostBuildEvent>
-      <Command>if not exist "..\..\..\build\$(Configuration)\$(Platform)\" mkdir "..\..\..\build\$(Configuration)\$(Platform)\"
-copy "$(OutputPath)$(ProjectName).exe" "..\..\..\build\$(Configuration)\$(Platform)\$(ProjectName).exe"
-
+      <Command>if not exist "..\..\..\build\$(Configuration)\$(Platform)\bin" mkdir "..\..\..\build\$(Configuration)\$(Platform)\bin"
+copy "$(OutputPath)$(ProjectName).exe" "..\..\..\build\$(Configuration)\$(Platform)\bin\$(ProjectName).exe"
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
