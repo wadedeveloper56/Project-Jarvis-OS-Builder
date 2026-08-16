@@ -104,7 +104,10 @@ void Utils::banner(const char* progName)
                 }
             }
 #endif
-    printf("%s (OrangeC) Version " STRING_VERSION "\n" COPYRIGHT "\n", ShortName(progName));
+    if (_stricmp(ShortName(progName),"jwcpp") == 0)
+        printf("%s c preprocessor Version " STRING_VERSION "\n" COPYRIGHT "\n", ShortName(progName));
+	else
+		printf("%s resource compiler Version " STRING_VERSION "\n" COPYRIGHT "\n", ShortName(progName));
     if (have_version)
     {
         printf("\nCompile date: " __DATE__ " time: " __TIME__ "\n");
