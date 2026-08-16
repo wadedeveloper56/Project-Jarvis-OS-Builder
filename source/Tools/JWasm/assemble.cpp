@@ -1571,14 +1571,14 @@ int AssemblerMain(int argc, char** argv)
     int     numFiles = 0;
     int     rc = 0;
 #if WILDCARDS
-    long    fh;
-    const char* pfn;
-    int     dirsize;
-    struct  _finddata_t finfo;
-    char    fname[FILENAME_MAX];
+    //long    fh;
+    //const char* pfn;
+    //int     dirsize;
+    //struct  _finddata_t finfo;
+    //char    fname[FILENAME_MAX];
 #endif
 
-#if 0             
+#if 1             
     int i;
     for (i = 1; i < argc; i++)
     {
@@ -1609,26 +1609,26 @@ int AssemblerMain(int argc, char** argv)
     {
         numFiles++;
         write_logo();
-#if WILDCARDS
-        if ((fh = _findfirst(Options.names[ASM], &finfo)) == -1)
-        {
-            DebugMsg(("main: _findfirst(%s) failed\n", Options.names[ASM]));
-            EmitErr(CANNOT_OPEN_FILE, Options.names[ASM], ErrnoStr());
-            break;
-        }
-        pfn = GetFNamePart(Options.names[ASM]);
-        dirsize = pfn - Options.names[ASM];
-        memcpy(fname, Options.names[ASM], dirsize);
-        do
-        {
-            strcpy(&fname[dirsize], finfo.name);
-            DebugMsg(("main: fname=%s\n", fname));
-            rc = AssembleModule(fname);
-        } while ((_findnext(fh, &finfo) != -1));
-        _findclose(fh);
-#else
+//#if WILDCARDS
+//        if ((fh = _findfirst(Options.names[ASM], &finfo)) == -1)
+//        {
+//            DebugMsg(("main: _findfirst(%s) failed\n", Options.names[ASM]));
+//            EmitErr(CANNOT_OPEN_FILE, Options.names[ASM], ErrnoStr());
+//            break;
+//        }
+//        pfn = GetFNamePart(Options.names[ASM]);
+//        dirsize = pfn - Options.names[ASM];
+//        memcpy(fname, Options.names[ASM], dirsize);
+//        do
+//        {
+//            strcpy(&fname[dirsize], finfo.name);
+//            DebugMsg(("main: fname=%s\n", fname));
+//            rc = AssembleModule(fname);
+//        } while ((_findnext(fh, &finfo) != -1));
+//        _findclose(fh);
+//#else
         rc = AssembleModule(Options.names[ASM]);
-#endif
+//#endif
     };
     CmdlineFini();
     if (numArgs == 0)
