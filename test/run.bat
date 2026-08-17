@@ -29,3 +29,6 @@ C:\projects\OSDev\ProjectJarvis\bin\tools\Debug\x64\pedump -a %CD%\bin\windows\x
 C:\projects\OSDev\ProjectJarvis\bin\tools\Debug\x64\pedump -a %CD%\bin\windows\x86\test1.exe > %CD%\bin\windows\x86\test1.exe.log
 
 C:\projects\OSDev\ProjectJarvis\bin\tools\Debug\x64\JWlib ?
+C:\projects\OSDev\ProjectJarvis\bin\tools\Debug\x64\JWmake --help
+C:\projects\OSDev\ProjectJarvis\bin\tools\Debug\x64\JWcpp --help
+C:\projects\OSDev\ProjectJarvis\bin\tools\Debug\x64\JWrc --help
