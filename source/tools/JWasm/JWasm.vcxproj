@@ -269,11 +269,15 @@ copy "$(OutputPath)$(ProjectName).exe" "..\..\..\build\$(Configuration)\$(Platfo
     <ClInclude Include="H\usage.h" />
     <ClInclude Include="H\win32.h" />
     <ClInclude Include="H\win64seh.h" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\JWasmLib\JWasmLib.vcxproj">
       <Project>{fd8eeaf5-d96a-4978-9cb3-d573a9c0d4b1}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="JWasm.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
