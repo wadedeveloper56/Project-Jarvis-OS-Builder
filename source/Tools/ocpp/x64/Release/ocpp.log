@@ -1,0 +1,433 @@
+﻿  Errors.cpp
+C:\projects\OSDev\maint\OrangeC\src\ocpp\InputFile.h(29,9): warning C4005: '_CRT_SECURE_NO_WARNINGS': macro redefinition
+  (compiling source file '../ocpp/Errors.cpp')
+      C:\projects\OSDev\maint\OrangeC\src\ocpp\InputFile.h(29,9):
+      '_CRT_SECURE_NO_WARNINGS' previously declared on the command line
+  
+C:\projects\OSDev\maint\OrangeC\src\util\Utils.h(139,15): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/Errors.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppDefine.h(89,33): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/Errors.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\InputFile.h(84,57): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/Errors.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\Errors.cpp(165,73): warning C4244: 'argument': conversion from '__int64' to 'int', possible loss of data
+  Floating.cpp
+C:\projects\OSDev\maint\OrangeC\src\util\Utils.h(139,15): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/Floating.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\Floating.cpp(873,19): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\Floating.cpp(1173,26): warning C4244: '=': conversion from 'u32f' to 'uchar', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\Floating.cpp(1186,26): warning C4244: '=': conversion from 'u32f' to 'uchar', possible loss of data
+  InputFile.cpp
+C:\projects\OSDev\maint\OrangeC\src\ocpp\InputFile.h(29,9): warning C4005: '_CRT_SECURE_NO_WARNINGS': macro redefinition
+  (compiling source file '../ocpp/InputFile.cpp')
+      C:\projects\OSDev\maint\OrangeC\src\ocpp\InputFile.h(29,9):
+      '_CRT_SECURE_NO_WARNINGS' previously declared on the command line
+  
+C:\projects\OSDev\maint\OrangeC\src\util\Utils.h(139,15): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/InputFile.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppDefine.h(89,33): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/InputFile.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\InputFile.h(84,57): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/InputFile.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\InputFile.cpp(193,11): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  MakeStubs.cpp
+C:\projects\OSDev\maint\OrangeC\src\util\Utils.h(139,15): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/MakeStubs.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppDefine.h(89,33): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/MakeStubs.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\InputFile.h(29,9): warning C4005: '_CRT_SECURE_NO_WARNINGS': macro redefinition
+  (compiling source file '../ocpp/MakeStubs.cpp')
+      C:\projects\OSDev\maint\OrangeC\src\ocpp\InputFile.h(29,9):
+      '_CRT_SECURE_NO_WARNINGS' previously declared on the command line
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\InputFile.h(84,57): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/MakeStubs.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppPragma.h(139,39): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/MakeStubs.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppPragma.h(181,39): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/MakeStubs.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppPragma.h(223,39): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/MakeStubs.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\MakeStubs.cpp(51,52): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\MakeStubs.cpp(53,55): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\MakeStubs.cpp(72,17): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  PipeArbitrator.cpp
+C:\projects\OSDev\maint\OrangeC\src\util\Utils.h(139,15): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/PipeArbitrator.cpp')
+  
+  ppCond.cpp
+C:\projects\OSDev\maint\OrangeC\src\util\Utils.h(139,15): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/ppCond.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppDefine.h(89,33): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/ppCond.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\InputFile.h(29,9): warning C4005: '_CRT_SECURE_NO_WARNINGS': macro redefinition
+  (compiling source file '../ocpp/ppCond.cpp')
+      C:\projects\OSDev\maint\OrangeC\src\ocpp\InputFile.h(29,9):
+      '_CRT_SECURE_NO_WARNINGS' previously declared on the command line
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\InputFile.h(84,57): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/ppCond.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppPragma.h(139,39): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/ppCond.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppPragma.h(181,39): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/ppCond.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppPragma.h(223,39): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/ppCond.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppCond.cpp(189,14): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppCond.cpp(317,45): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppCond.cpp(319,36): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppCond.cpp(324,47): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppCond.cpp(326,38): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  ppCtx.cpp
+C:\projects\OSDev\maint\OrangeC\src\util\Utils.h(139,15): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/ppCtx.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppDefine.h(89,33): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/ppCtx.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\InputFile.h(29,9): warning C4005: '_CRT_SECURE_NO_WARNINGS': macro redefinition
+  (compiling source file '../ocpp/ppCtx.cpp')
+      C:\projects\OSDev\maint\OrangeC\src\ocpp\InputFile.h(29,9):
+      '_CRT_SECURE_NO_WARNINGS' previously declared on the command line
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\InputFile.h(84,57): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/ppCtx.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppPragma.h(139,39): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/ppCtx.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppPragma.h(181,39): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/ppCtx.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppPragma.h(223,39): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/ppCtx.cpp')
+  
+  ppDefine.cpp
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppDefine.cpp(26,9): warning C4005: '_CRT_SECURE_NO_WARNINGS': macro redefinition
+      C:\projects\OSDev\maint\OrangeC\src\ocpp\ppDefine.cpp(26,9):
+      '_CRT_SECURE_NO_WARNINGS' previously declared on the command line
+  
+C:\projects\OSDev\maint\OrangeC\src\util\Utils.h(139,15): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/ppDefine.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppDefine.h(89,33): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/ppDefine.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\InputFile.h(84,57): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/ppDefine.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppPragma.h(139,39): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/ppDefine.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppPragma.h(181,39): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/ppDefine.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppPragma.h(223,39): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/ppDefine.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppDefine.cpp(291,15): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppDefine.cpp(423,15): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppDefine.cpp(427,36): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppDefine.cpp(448,23): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppDefine.cpp(527,21): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppDefine.cpp(528,20): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppDefine.cpp(637,21): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppDefine.cpp(712,54): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppDefine.cpp(867,101): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppDefine.cpp(896,32): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppDefine.cpp(929,97): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppDefine.cpp(1102,46): warning C4267: '+=': conversion from 'size_t' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppDefine.cpp(1120,50): warning C4267: '+=': conversion from 'size_t' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppDefine.cpp(1149,36): warning C4244: '=': conversion from '__int64' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppDefine.cpp(1184,79): warning C4267: '+=': conversion from 'size_t' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppDefine.cpp(1199,11): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppDefine.cpp(1219,35): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppDefine.cpp(1242,19): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppDefine.cpp(1274,48): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  ppEmbed.cpp
+C:\projects\OSDev\maint\OrangeC\src\ocpp\InputFile.h(29,9): warning C4005: '_CRT_SECURE_NO_WARNINGS': macro redefinition
+  (compiling source file '../ocpp/ppEmbed.cpp')
+      C:\projects\OSDev\maint\OrangeC\src\ocpp\InputFile.h(29,9):
+      '_CRT_SECURE_NO_WARNINGS' previously declared on the command line
+  
+C:\projects\OSDev\maint\OrangeC\src\util\Utils.h(139,15): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/ppEmbed.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppDefine.h(89,33): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/ppEmbed.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\InputFile.h(84,57): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/ppEmbed.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppEmbed.cpp(98,36): warning C4244: '=': conversion from 'PPINT' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppEmbed.cpp(116,35): warning C4244: 'argument': conversion from 'unsigned __int64' to 'long', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\TemplatedToken.h(157,68): warning C4018: '<': signed/unsigned mismatch
+  (compiling source file '../ocpp/ppEmbed.cpp')
+      C:\projects\OSDev\maint\OrangeC\src\ocpp\TemplatedToken.h(157,68):
+      the template instantiation context (the oldest one first) is
+          C:\projects\OSDev\maint\OrangeC\src\ocpp\ppEmbed.cpp(310,28):
+          see reference to class template instantiation 'TemplatedTokenizer<kw>' being compiled
+          C:\projects\OSDev\maint\OrangeC\src\ocpp\TemplatedToken.h(211,1):
+          while compiling class template member function 'std::shared_ptr<Token> TemplatedTokenizer<kw>::NextShared(void)'
+              C:\projects\OSDev\maint\OrangeC\src\ocpp\ppEmbed.cpp(321,30):
+              see the first reference to 'TemplatedTokenizer<kw>::NextShared' in 'embeder::GetEmbedFromLine'
+          C:\projects\OSDev\maint\OrangeC\src\ocpp\TemplatedToken.h(190,1):
+          while compiling class template member function 'const Token *TemplatedTokenizer<kw>::Next(void)'
+          C:\projects\OSDev\maint\OrangeC\src\ocpp\TemplatedToken.h(201,43):
+          see reference to class template instantiation 'TemplatedIdentifierToken<T>' being compiled
+          with
+          [
+              T=kw
+          ]
+          C:\projects\OSDev\maint\OrangeC\src\ocpp\TemplatedToken.h(154,1):
+          while compiling class template member function 'void TemplatedIdentifierToken<T>::Parse(std::string &)'
+          with
+          [
+              T=kw
+          ]
+  
+  ppError.cpp
+  ppExpr.cpp
+C:\projects\OSDev\maint\OrangeC\src\util\Utils.h(139,15): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/ppExpr.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppDefine.h(89,33): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/ppExpr.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\InputFile.h(29,9): warning C4005: '_CRT_SECURE_NO_WARNINGS': macro redefinition
+  (compiling source file '../ocpp/ppExpr.cpp')
+      C:\projects\OSDev\maint\OrangeC\src\ocpp\InputFile.h(29,9):
+      '_CRT_SECURE_NO_WARNINGS' previously declared on the command line
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\InputFile.h(84,57): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/ppExpr.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppExpr.cpp(390,45): warning C4018: '>': signed/unsigned mismatch
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppExpr.cpp(396,45): warning C4018: '<': signed/unsigned mismatch
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppExpr.cpp(402,45): warning C4018: '>=': signed/unsigned mismatch
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppExpr.cpp(408,45): warning C4018: '<=': signed/unsigned mismatch
+  ppFile.cpp
+C:\projects\OSDev\maint\OrangeC\src\ocpp\InputFile.h(29,9): warning C4005: '_CRT_SECURE_NO_WARNINGS': macro redefinition
+  (compiling source file '../ocpp/ppFile.cpp')
+      C:\projects\OSDev\maint\OrangeC\src\ocpp\InputFile.h(29,9):
+      '_CRT_SECURE_NO_WARNINGS' previously declared on the command line
+  
+C:\projects\OSDev\maint\OrangeC\src\util\Utils.h(139,15): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/ppFile.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppDefine.h(89,33): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/ppFile.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\InputFile.h(84,57): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/ppFile.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppFile.cpp(96,38): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppFile.cpp(127,18): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  ppInclude.cpp
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppInclude.cpp(26,9): warning C4005: '_CRT_SECURE_NO_WARNINGS': macro redefinition
+      C:\projects\OSDev\maint\OrangeC\src\ocpp\ppInclude.cpp(26,9):
+      '_CRT_SECURE_NO_WARNINGS' previously declared on the command line
+  
+C:\projects\OSDev\maint\OrangeC\src\util\Utils.h(139,15): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/ppInclude.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppDefine.h(89,33): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/ppInclude.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\InputFile.h(84,57): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/ppInclude.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppPragma.h(139,39): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/ppInclude.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppPragma.h(181,39): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/ppInclude.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppPragma.h(223,39): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/ppInclude.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppInclude.cpp(59,18): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppInclude.cpp(84,18): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppInclude.cpp(134,15): warning C4244: 'initializing': conversion from 'PPINT' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppInclude.cpp(136,18): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppInclude.cpp(288,80): warning C4244: '=': conversion from '__int64' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppInclude.cpp(353,80): warning C4244: '=': conversion from '__int64' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppInclude.cpp(443,11): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppInclude.cpp(459,11): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppInclude.cpp(488,25): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  ppMacro.cpp
+C:\projects\OSDev\maint\OrangeC\src\util\Utils.h(139,15): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/ppMacro.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppDefine.h(89,33): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/ppMacro.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\InputFile.h(29,9): warning C4005: '_CRT_SECURE_NO_WARNINGS': macro redefinition
+  (compiling source file '../ocpp/ppMacro.cpp')
+      C:\projects\OSDev\maint\OrangeC\src\ocpp\InputFile.h(29,9):
+      '_CRT_SECURE_NO_WARNINGS' previously declared on the command line
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\InputFile.h(84,57): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/ppMacro.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppPragma.h(139,39): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/ppMacro.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppPragma.h(181,39): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/ppMacro.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppPragma.h(223,39): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/ppMacro.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppMacro.cpp(126,15): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppMacro.cpp(130,37): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppMacro.cpp(133,41): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppMacro.cpp(168,34): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppMacro.cpp(172,34): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppMacro.cpp(175,25): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppMacro.cpp(181,38): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppMacro.cpp(192,35): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppMacro.cpp(204,18): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppMacro.cpp(214,14): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppMacro.cpp(218,37): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppMacro.cpp(243,43): warning C4244: '=': conversion from '__int64' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppMacro.cpp(251,43): warning C4244: '=': conversion from '__int64' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppMacro.cpp(338,15): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppMacro.cpp(343,41): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppMacro.cpp(390,32): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppMacro.cpp(399,48): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppMacro.cpp(400,45): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppMacro.cpp(454,16): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  ppMain.cpp
+C:\projects\OSDev\maint\OrangeC\src\util\CmdSwitch.h(225,47): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/ppMain.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\util\Utils.h(139,15): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/ppMain.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppDefine.h(89,33): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/ppMain.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\InputFile.h(29,9): warning C4005: '_CRT_SECURE_NO_WARNINGS': macro redefinition
+  (compiling source file '../ocpp/ppMain.cpp')
+      C:\projects\OSDev\maint\OrangeC\src\ocpp\InputFile.h(29,9):
+      '_CRT_SECURE_NO_WARNINGS' previously declared on the command line
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\InputFile.h(84,57): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/ppMain.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppPragma.h(139,39): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/ppMain.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppPragma.h(181,39): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/ppMain.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppPragma.h(223,39): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/ppMain.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppMain.cpp(307,26): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppMain.cpp(312,57): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppMain.cpp(332,61): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppMain.cpp(350,69): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppMain.cpp(381,21): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppMain.cpp(384,22): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppMain.cpp(403,43): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  ppPragma.cpp
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppPragma.cpp(26,9): warning C4005: '_CRT_SECURE_NO_WARNINGS': macro redefinition
+      C:\projects\OSDev\maint\OrangeC\src\ocpp\ppPragma.cpp(26,9):
+      '_CRT_SECURE_NO_WARNINGS' previously declared on the command line
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppPragma.h(139,39): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/ppPragma.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppPragma.h(181,39): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/ppPragma.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppPragma.h(223,39): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/ppPragma.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\util\Utils.h(139,15): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/ppPragma.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppDefine.h(89,33): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/ppPragma.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\InputFile.h(84,57): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/ppPragma.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppPragma.cpp(166,38): warning C4244: '=': conversion from '__int64' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppPragma.cpp(270,59): warning C4244: 'argument': conversion from '__int64' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppPragma.cpp(309,26): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  PreProcessor.cpp
+C:\projects\OSDev\maint\OrangeC\src\util\Utils.h(139,15): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/PreProcessor.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppDefine.h(89,33): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/PreProcessor.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\InputFile.h(29,9): warning C4005: '_CRT_SECURE_NO_WARNINGS': macro redefinition
+  (compiling source file '../ocpp/PreProcessor.cpp')
+      C:\projects\OSDev\maint\OrangeC\src\ocpp\InputFile.h(29,9):
+      '_CRT_SECURE_NO_WARNINGS' previously declared on the command line
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\InputFile.h(84,57): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/PreProcessor.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppPragma.h(139,39): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/PreProcessor.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppPragma.h(181,39): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/PreProcessor.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppPragma.h(223,39): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/PreProcessor.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\PreProcessor.cpp(100,18): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\PreProcessor.cpp(196,24): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\PreProcessor.cpp(213,46): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\PreProcessor.cpp(216,70): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\PreProcessor.cpp(219,70): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  SymbolTable.cpp
+  Token.cpp
+C:\projects\OSDev\maint\OrangeC\src\util\Utils.h(139,15): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/Token.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\ppDefine.h(89,33): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/Token.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\InputFile.h(29,9): warning C4005: '_CRT_SECURE_NO_WARNINGS': macro redefinition
+  (compiling source file '../ocpp/Token.cpp')
+      C:\projects\OSDev\maint\OrangeC\src\ocpp\InputFile.h(29,9):
+      '_CRT_SECURE_NO_WARNINGS' previously declared on the command line
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\InputFile.h(84,57): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file '../ocpp/Token.cpp')
+  
+C:\projects\OSDev\maint\OrangeC\src\ocpp\Token.cpp(285,15): warning C4018: '>': signed/unsigned mismatch
+C:\projects\OSDev\maint\OrangeC\src\ocpp\Token.cpp(327,23): warning C4244: '=': conversion from '__int64' to 'int', possible loss of data
+C:\projects\OSDev\maint\OrangeC\src\ocpp\Token.cpp(635,61): warning C4018: '<': signed/unsigned mismatch
+  TokenSettings.cpp
+  Generating code
+  Previous IPDB not found, fall back to full compilation.
+  All 5678 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  ocpp.vcxproj -> C:\projects\OSDev\maint\OrangeC\src\x64\Release\ocpp.exe

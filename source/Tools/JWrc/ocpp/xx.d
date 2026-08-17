@@ -1,1 +1,0 @@
-q.o: q.c q.h xx.h 
