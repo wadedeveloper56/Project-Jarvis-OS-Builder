@@ -61,7 +61,7 @@ void ToolChain::ShowBanner()
     // no banner if they specify -!, this is also caught in the cmd switch module
     // so it is transparent to the proggy
     const char* modName = Utils::GetModuleName();
-    printf("%s (OrangeC) Version " STRING_VERSION "\n" COPYRIGHT "\n", Utils::ShortName(modName));
+    printf("%s Version " STRING_VERSION "\n" COPYRIGHT "\n", Utils::ShortName(modName));
 }
 void ToolChain::ShowVersion()
 {

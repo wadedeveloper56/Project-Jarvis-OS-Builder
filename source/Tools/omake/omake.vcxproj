@@ -192,7 +192,7 @@
     </Link>
     <PostBuildEvent>
       <Command>if not exist "..\..\..\build\$(Configuration)\$(Platform)\bin" mkdir "..\..\..\build\$(Configuration)\$(Platform)\bin"
-copy "$(OutputPath)$(ProjectName).exe" "..\..\..\build\$(Configuration)\$(Platform)\bin\$(ProjectName).exe"
+copy /y "$(OutputPath)$(ProjectName).exe" "..\..\..\build\$(Configuration)\$(Platform)\bin\$(ProjectName).exe"
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -223,7 +223,7 @@ copy "$(OutputPath)$(ProjectName).exe" "..\..\..\build\$(Configuration)\$(Platfo
     </Link>
     <PostBuildEvent>
       <Command>if not exist "..\..\..\build\$(Configuration)\$(Platform)\bin" mkdir "..\..\..\build\$(Configuration)\$(Platform)\bin"
-copy "$(OutputPath)$(ProjectName).exe" "..\..\..\build\$(Configuration)\$(Platform)\bin\$(ProjectName).exe"
+copy /y "$(OutputPath)$(ProjectName).exe" "..\..\..\build\$(Configuration)\$(Platform)\bin\$(ProjectName).exe"
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>

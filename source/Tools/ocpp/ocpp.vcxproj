@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -184,7 +184,7 @@
     </Link>
     <PostBuildEvent>
       <Command>if not exist "..\..\..\build\$(Configuration)\$(Platform)\bin" mkdir "..\..\..\build\$(Configuration)\$(Platform)\bin"
-copy "$(OutputPath)$(ProjectName).exe" "..\..\..\build\$(Configuration)\$(Platform)\bin\$(ProjectName).exe"
+copy /y "$(OutputPath)$(ProjectName).exe" "..\..\..\build\$(Configuration)\$(Platform)\bin\$(ProjectName).exe"
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -229,7 +229,7 @@ copy "$(OutputPath)$(ProjectName).exe" "..\..\..\build\$(Configuration)\$(Platfo
     </Link>
     <PostBuildEvent>
       <Command>if not exist "..\..\..\build\$(Configuration)\$(Platform)\bin" mkdir "..\..\..\build\$(Configuration)\$(Platform)\bin"
-copy "$(OutputPath)$(ProjectName).exe" "..\..\..\build\$(Configuration)\$(Platform)\bin\$(ProjectName).exe"
+copy /y "$(OutputPath)$(ProjectName).exe" "..\..\..\build\$(Configuration)\$(Platform)\bin\$(ProjectName).exe"
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
