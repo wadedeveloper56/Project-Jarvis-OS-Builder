@@ -20,7 +20,6 @@
 	Based of sn76496.c of the M.A.M.E. project
 */
 
-#include "pch.h"
 #include "dosbox.h"
 #include "inout.h"
 #include "logging.h"

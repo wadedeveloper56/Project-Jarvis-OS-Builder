@@ -69,7 +69,6 @@ Revision History:
         verify volume of the FM part on the Y8950
 */
 
-#include "pch.h"
 #include "emu.h"
 #include "ymdeltat.h"
 #include "fmopl.h"

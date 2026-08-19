@@ -1,7 +1,6 @@
 
 /* mkdir_p equivalent to GNU/Linux shell command "mkdir -p" */
 
-#include "pch.h"
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdlib.h>

@@ -17,7 +17,6 @@
 //  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 //  ---------------------------------------------------------------------------
 
-#include "pch.h"
 #include "pot.h"
 
 reg8 Potentiometer::readPOT()

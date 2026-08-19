@@ -1,5 +1,4 @@
 
-#include "pch.h"
 #include "dos_inc.h"
 #include "setup.h"
 #include "8255.h"

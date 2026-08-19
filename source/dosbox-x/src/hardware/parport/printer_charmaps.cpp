@@ -1,4 +1,3 @@
-#include "pch.h"
 #include "support.h"
 #include "printer_charmaps.h"
 

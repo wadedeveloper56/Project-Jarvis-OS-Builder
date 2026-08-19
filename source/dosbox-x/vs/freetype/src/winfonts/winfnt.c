@@ -18,7 +18,6 @@
  */
 
 
-#include "pch.h"
 #include <freetype/ftwinfnt.h>
 #include <freetype/internal/ftdebug.h>
 #include <freetype/internal/ftstream.h>

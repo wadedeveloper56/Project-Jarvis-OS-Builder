@@ -13,7 +13,6 @@
  * libpng itself during the course of writing an image.
  */
 
-#include "pch.h"
 #include "pngpriv.h"
 
 #ifdef PNG_WRITE_SUPPORTED

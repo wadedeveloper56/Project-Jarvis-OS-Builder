@@ -37,7 +37,6 @@
    */
 
 
-#include "pch.h"
 #include <ft2build.h>
 #include FT_CONFIG_CONFIG_H
 #include <freetype/internal/ftobjs.h>

@@ -20,7 +20,6 @@
  */
 
 
-#include "pch.h"
 #include <freetype/internal/ftmemory.h>
 #include <freetype/internal/ftstream.h>
 #include <freetype/internal/ftdebug.h>

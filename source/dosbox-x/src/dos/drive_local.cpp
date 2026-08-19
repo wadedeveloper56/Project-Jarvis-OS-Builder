@@ -19,7 +19,6 @@
  *  With major works from joncampbell123 and Wengier
  */
 
-#include "pch.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

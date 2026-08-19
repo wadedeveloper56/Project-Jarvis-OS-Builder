@@ -21,7 +21,6 @@
 
     This file written by Ryan C. Gordon (icculus@icculus.org)
 */
-#include "pch.h"
 #include "SDL_config.h"
 
 /* Output raw audio data to a file. */

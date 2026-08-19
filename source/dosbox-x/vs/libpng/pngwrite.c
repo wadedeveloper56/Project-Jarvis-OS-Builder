@@ -10,7 +10,6 @@
  * and license in png.h
  */
 
-#include "pch.h"
 #include "pngpriv.h"
 #ifdef PNG_SIMPLIFIED_WRITE_STDIO_SUPPORTED
 #  include <errno.h>

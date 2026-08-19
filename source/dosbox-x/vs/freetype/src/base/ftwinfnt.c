@@ -16,7 +16,6 @@
  */
 
 
-#include "pch.h"
 #include <freetype/internal/ftdebug.h>
 #include <freetype/ftwinfnt.h>
 #include <freetype/internal/ftobjs.h>

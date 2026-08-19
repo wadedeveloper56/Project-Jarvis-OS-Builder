@@ -177,9 +177,9 @@
     <NMakePreprocessorDefinitions>WIN32;NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
     <NMakeReBuildCommandLine>cd wincon &amp;&amp; nmake -f Makefile.vc</NMakeReBuildCommandLine>
     <NMakeCleanCommandLine>cd wincon &amp;&amp; nmake -f Makefile.vc clean</NMakeCleanCommandLine>
-    <OutDir>$(SolutionDir)..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>$(SolutionDir)..\..\bin\intermediate\$(ProjectName)\\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\libpdcurses;$(IncludePath)</IncludePath>
+    <OutDir>..\..\..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>..\..\..\..\bin\intermediate\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>D:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\vs\libpdcurses;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release SDL2|Win32'">
     <NMakeBuildCommandLine>cd wincon &amp;&amp; nmake -f Makefile.vc</NMakeBuildCommandLine>
@@ -195,9 +195,9 @@
     <NMakeBuildCommandLine>nmake -f wincon/Makefile.vc</NMakeBuildCommandLine>
     <NMakeOutput>libpdcurses.exe</NMakeOutput>
     <NMakePreprocessorDefinitions>WIN32;_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
-    <OutDir>$(SolutionDir)..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>$(SolutionDir)..\..\bin\intermediate\$(ProjectName)\\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\libpdcurses;$(IncludePath)</IncludePath>
+    <OutDir>..\..\..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>..\..\..\..\bin\intermediate\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>D:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\vs\libpdcurses;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug SDL2|Win32'">
     <NMakeBuildCommandLine>nmake -f wincon/Makefile.vc</NMakeBuildCommandLine>
@@ -211,9 +211,9 @@
     <NMakeBuildCommandLine>nmake -f wincon/Makefile.vc</NMakeBuildCommandLine>
     <NMakeOutput>libpdcurses.exe</NMakeOutput>
     <NMakePreprocessorDefinitions>_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
-    <OutDir>$(SolutionDir)..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>$(SolutionDir)..\..\bin\intermediate\$(ProjectName)\\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\libpdcurses;$(IncludePath)</IncludePath>
+    <OutDir>..\..\..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>..\..\..\..\bin\intermediate\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>D:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\vs\libpdcurses;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
     <NMakeBuildCommandLine>nmake -f wincon/Makefile.vc</NMakeBuildCommandLine>
@@ -259,9 +259,9 @@
     <NMakeBuildCommandLine>nmake -f wincon/Makefile.vc</NMakeBuildCommandLine>
     <NMakeOutput>libpdcurses.exe</NMakeOutput>
     <NMakePreprocessorDefinitions>NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
-    <OutDir>$(SolutionDir)..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
-    <IntDir>$(SolutionDir)..\..\bin\intermediate\$(ProjectName)\\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\libpdcurses;$(IncludePath)</IncludePath>
+    <OutDir>..\..\..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>..\..\..\..\bin\intermediate\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>D:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\vs\libpdcurses;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
     <NMakeBuildCommandLine>nmake -f wincon/Makefile.vc</NMakeBuildCommandLine>
@@ -313,8 +313,8 @@
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <WarningLevel>Level3</WarningLevel>
       <EnableEnhancedInstructionSet>StreamingSIMDExtensions</EnableEnhancedInstructionSet>
-      <LanguageStandard>stdcpp14</LanguageStandard>
-      <LanguageStandard_C>Default</LanguageStandard_C>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
       <ConformanceMode>false</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
@@ -343,8 +343,8 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <WarningLevel>Level3</WarningLevel>
       <EnableEnhancedInstructionSet>StreamingSIMDExtensions</EnableEnhancedInstructionSet>
-      <LanguageStandard>stdcpp14</LanguageStandard>
-      <LanguageStandard_C>Default</LanguageStandard_C>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
       <DebugInformationFormat>None</DebugInformationFormat>
       <ConformanceMode>false</ConformanceMode>
       <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -377,8 +377,8 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <WarningLevel>Level3</WarningLevel>
-      <LanguageStandard>stdcpp14</LanguageStandard>
-      <LanguageStandard_C>Default</LanguageStandard_C>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
       <ConformanceMode>false</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
@@ -453,8 +453,8 @@
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <WarningLevel>Level3</WarningLevel>
-      <LanguageStandard>stdcpp14</LanguageStandard>
-      <LanguageStandard_C>Default</LanguageStandard_C>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
       <DebugInformationFormat>None</DebugInformationFormat>
       <ConformanceMode>false</ConformanceMode>
       <WholeProgramOptimization>true</WholeProgramOptimization>

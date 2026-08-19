@@ -17,7 +17,6 @@
 //  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 //  ---------------------------------------------------------------------------
 
-#include "pch.h"
 #include "wave.h"
 
 reg8 WaveformGenerator::wave8580_PST[] =

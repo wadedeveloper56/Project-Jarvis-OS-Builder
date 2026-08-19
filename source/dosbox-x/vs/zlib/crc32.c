@@ -19,7 +19,7 @@
   MAKECRCH can be #defined to write out crc32.h. A main() routine is also
   produced, so that this one source file can be compiled to an executable.
  */
-#include "pch.h"
+
 #ifdef MAKECRCH
 #  include <stdio.h>
 #  ifndef DYNAMIC_CRC_TABLE

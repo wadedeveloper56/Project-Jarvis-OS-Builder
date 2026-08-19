@@ -22,7 +22,6 @@
  *  SERIAL command Copyright sduensin and Wengier
  */
 
-#include "pch.h"
 #include "dosbox.h"
 #include <stdlib.h>
 #include <string.h>
@@ -2922,10 +2921,10 @@ public:
         if (!has_read && IS_PC98_ARCH && drive < 'C') {
             /* this may be one of those odd FDD images where track 0, head 0 is all 128-byte sectors
              * and the rest of the disk is 256-byte sectors. */
-            if (imageDiskList[drive - 65]->Read_Sector(0, 0, 1, (uint8_t *)&bootarea, 128) == 0 &&
-                imageDiskList[drive - 65]->Read_Sector(0, 0, 2, (uint8_t *)&bootarea + 128, 128) == 0 &&
-                imageDiskList[drive - 65]->Read_Sector(0, 0, 3, (uint8_t *)&bootarea + 256, 128) == 0 &&
-                imageDiskList[drive - 65]->Read_Sector(0, 0, 4, (uint8_t *)&bootarea + 384, 128) == 0) {
+            if (imageDiskList[drive - 65]->Read_Sector(0, 0, 1, (uint8_t *)&bootarea, 128) == Int13Status::NoError &&
+                imageDiskList[drive - 65]->Read_Sector(0, 0, 2, (uint8_t *)&bootarea + 128, 128) == Int13Status::NoError &&
+                imageDiskList[drive - 65]->Read_Sector(0, 0, 3, (uint8_t *)&bootarea + 256, 128) == Int13Status::NoError &&
+                imageDiskList[drive - 65]->Read_Sector(0, 0, 4, (uint8_t *)&bootarea + 384, 128) == Int13Status::NoError) {
                 LOG_MSG("First sector is 128 byte/sector. Booting from first four sectors.");
                 has_read = true;
                 bootsize = 512; // 128 x 4
@@ -2935,10 +2934,10 @@ public:
 
         if (!has_read && IS_PC98_ARCH && drive < 'C') {
             /* another nonstandard one with track 0 having 256 bytes/sector while the rest have 1024 bytes/sector */
-            if (imageDiskList[drive - 65]->Read_Sector(0, 0, 1, (uint8_t *)&bootarea,       256) == 0 &&
-                imageDiskList[drive - 65]->Read_Sector(0, 0, 2, (uint8_t *)&bootarea + 256, 256) == 0 &&
-                imageDiskList[drive - 65]->Read_Sector(0, 0, 3, (uint8_t *)&bootarea + 512, 256) == 0 &&
-                imageDiskList[drive - 65]->Read_Sector(0, 0, 4, (uint8_t *)&bootarea + 768, 256) == 0) {
+            if (imageDiskList[drive - 65]->Read_Sector(0, 0, 1, (uint8_t *)&bootarea,       256) == Int13Status::NoError &&
+                imageDiskList[drive - 65]->Read_Sector(0, 0, 2, (uint8_t *)&bootarea + 256, 256) == Int13Status::NoError &&
+                imageDiskList[drive - 65]->Read_Sector(0, 0, 3, (uint8_t *)&bootarea + 512, 256) == Int13Status::NoError &&
+                imageDiskList[drive - 65]->Read_Sector(0, 0, 4, (uint8_t *)&bootarea + 768, 256) == Int13Status::NoError) {
                 LOG_MSG("First sector is 256 byte/sector. Booting from first two sectors.");
                 has_read = true;
                 bootsize = 1024; // 256 x 4
@@ -2959,7 +2958,7 @@ public:
         }
 
         if (!has_read) {
-            if (imageDiskList[drive - 65]->Read_Sector(0, 0, 1, (uint8_t *)&bootarea) != 0) {
+            if (imageDiskList[drive - 65]->Read_Sector(0, 0, 1, (uint8_t *)&bootarea) != Int13Status::NoError) {
                 if (!quiet) WriteOut(MSG_Get("PROGRAM_BOOT_DRIVE_READERROR"));
                 return;
             }
@@ -6307,12 +6306,15 @@ class IMGMOUNT : public Program {
 		bool ParseFiles(std::string &commandLine, std::vector<std::string> &paths, bool nodef) {
 			char drive=commandLine[0];
 			bool nocont=false;
-			while (!nocont&&cmd->ExistsCommand(1)) {
+            if(!isalpha(drive) && !isdigit(drive)) return false;
+
+			while (!nocont) {
 				bool usedef=false;
 				if (!cmd->FindCommand(1, commandLine)) {
 					if (!nodef && !paths.size()) {
 						commandLine="IMGMAKE.IMG";
 						usedef=true;
+                        LOG_MSG("IMGMOUNT: No file specified, using default 'IMGMAKE.IMG'");
 					}
 					else {
 						break;
@@ -6426,6 +6428,7 @@ class IMGMOUNT : public Program {
 					return false;
 				}
 				paths.push_back(commandLine);
+                if(usedef) break;
 			}
 			return false;
 		}
@@ -9908,6 +9911,7 @@ int flagged_backup(char *zip)
 					uint16_t handle = 0;
 					if (DOS_FindDevice(("\""+std::string(g_flagged_files[i])+"\"").c_str()) != DOS_DEVICES || !DOS_OpenFile(("\""+std::string(g_flagged_files[i])+"\"").c_str(),0,&handle)) {
 						LOG_MSG(MSG_Get("SHELL_CMD_FILE_NOT_FOUND"),g_flagged_files[i]);
+						i++;
 						continue;
 					}
 

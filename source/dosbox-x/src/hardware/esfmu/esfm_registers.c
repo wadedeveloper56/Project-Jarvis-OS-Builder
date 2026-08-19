@@ -50,7 +50,6 @@
  * - And everybody who helped out with real hardware testing
  */
 
-#include "pch.h"
 #include "esfm.h"
 #include <stdlib.h>
 #include <stddef.h>

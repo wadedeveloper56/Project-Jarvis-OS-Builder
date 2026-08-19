@@ -16,7 +16,6 @@
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-#include "pch.h"
 #ifndef _MSC_VER
 # include <inttypes.h>
 #endif

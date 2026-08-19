@@ -17,7 +17,6 @@
  */
 
 
-#include "pch.h"
 #include "dosbox.h"
 #include "callback.h"
 #include "logging.h"

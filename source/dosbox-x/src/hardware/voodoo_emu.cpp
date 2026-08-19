@@ -71,7 +71,6 @@ iterated W    = 18.32 [48 bits]
 **************************************************************************/
 
 
-#include "pch.h"
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>

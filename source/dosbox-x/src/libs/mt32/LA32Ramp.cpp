@@ -48,7 +48,6 @@ We haven't fully explored:
  - Transition timing (may not be 100% accurate, especially for very fast ramps).
 */
 
-#include "pch.h"
 #include "internals.h"
 
 #include "LA32Ramp.h"

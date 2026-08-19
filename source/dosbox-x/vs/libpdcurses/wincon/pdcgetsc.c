@@ -1,6 +1,5 @@
 /* Public Domain Curses */
 
-#include "pch.h"
 #include "pdcwin.h"
 
 /* get the cursor size/shape */

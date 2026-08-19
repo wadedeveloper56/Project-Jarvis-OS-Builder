@@ -20,7 +20,6 @@
 */
 
 /* $Id$ */
-#include "pch.h"
 
 #include "SDLnetsys.h"
 #include "SDL_net.h"

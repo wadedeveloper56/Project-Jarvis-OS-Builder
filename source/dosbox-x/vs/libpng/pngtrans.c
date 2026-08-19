@@ -10,7 +10,6 @@
  * and license in png.h
  */
 
-#include "pch.h"
 #include "pngpriv.h"
 
 #if defined(PNG_READ_SUPPORTED) || defined(PNG_WRITE_SUPPORTED)

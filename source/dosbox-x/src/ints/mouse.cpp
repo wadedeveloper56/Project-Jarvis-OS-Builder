@@ -21,7 +21,6 @@
  *       where if set, we don't bother to fire IRQ 12 at all but simply call the
  *       device callback directly. */
 
-#include "pch.h"
 #include <string.h>
 #include <math.h>
 #include <vector>

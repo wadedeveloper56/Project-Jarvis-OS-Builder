@@ -1,5 +1,4 @@
 
-#include "pch.h"
 #include "dosbox.h"
 #include <stdlib.h>
 #include <string.h>

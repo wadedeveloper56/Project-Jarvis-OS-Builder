@@ -1,5 +1,4 @@
 
-#include "pch.h"
 #include "dos_inc.h"
 
 static const unsigned char bin_dsxmenu_exe_pc98[] = {

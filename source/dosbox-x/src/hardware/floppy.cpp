@@ -5,7 +5,6 @@
  * [insert open source license here]
  */
 
-#include "pch.h"
 #if defined(_MSC_VER)
 # pragma warning(disable:4244) /* const fmath::local::uint64_t to double possible loss of data */
 #endif
@@ -888,8 +887,8 @@ void FloppyController::on_fdc_in_command() {
 					}
 
 					/* write sector */
-					uint8_t err = image->Write_Sector(in_cmd[3]/*head*/,in_cmd[2]/*cylinder*/,in_cmd[4]/*sector*/,sector,sector_size_bytes);
-					if (err != 0x00) {
+					Int13Status err = image->Write_Sector(in_cmd[3]/*head*/,in_cmd[2]/*cylinder*/,in_cmd[4]/*sector*/,sector,sector_size_bytes);
+					if (err != Int13Status::NoError) {
 						fail = true;
 						break;
 					}
@@ -1000,8 +999,8 @@ void FloppyController::on_fdc_in_command() {
 					//LOG_MSG("FDC: Read sector going to DMA 0x%x",(unsigned int)dma->pagebase + (unsigned int)dma->curraddr);
 
 					/* read sector */
-					uint8_t err = image->Read_Sector(in_cmd[3]/*head*/,in_cmd[2]/*cylinder*/,in_cmd[4]/*sector*/,sector,sector_size_bytes);
-					if (err != 0x00) {
+					Int13Status err = image->Read_Sector(in_cmd[3]/*head*/,in_cmd[2]/*cylinder*/,in_cmd[4]/*sector*/,sector,sector_size_bytes);
+					if (err != Int13Status::NoError) {
 						fail = true;
 						break;
 					}

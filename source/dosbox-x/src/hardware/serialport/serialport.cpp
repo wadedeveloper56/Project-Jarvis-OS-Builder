@@ -17,7 +17,6 @@
  */
 
 
-#include "pch.h"
 #include <string.h>
 #include <ctype.h>
 #include <SDL_timer.h>

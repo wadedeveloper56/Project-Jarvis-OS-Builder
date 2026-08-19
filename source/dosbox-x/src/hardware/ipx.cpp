@@ -17,7 +17,6 @@
  */
 
 
-#include "pch.h"
 #include "dosbox.h"
 
 #if !defined(OSFREE)

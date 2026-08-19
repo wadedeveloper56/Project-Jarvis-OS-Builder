@@ -3,7 +3,10 @@
 
     The WinMain function -- calls your program's main() function
 */
-#include "pch.h"
+
+#include <stdio.h>
+#include <stdlib.h>
+
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 

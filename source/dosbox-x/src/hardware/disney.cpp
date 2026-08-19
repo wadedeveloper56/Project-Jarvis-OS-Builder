@@ -17,7 +17,6 @@
  */
 
 
-#include "pch.h"
 #include <string.h>
 #include <algorithm>
 #include "dosbox.h"

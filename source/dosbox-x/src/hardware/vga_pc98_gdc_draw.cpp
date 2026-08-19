@@ -1,6 +1,5 @@
 // GDC drawing is implementation based on Neko Project II
 //
-#include "pch.h"
 #include "dosbox.h"
 #include "mem.h"
 #include "cpu.h"
