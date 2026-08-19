@@ -1,1 +1,0 @@
-C:\projects\OSDev\Project-Jarvis-C-Compiler\source\obj\SDL\x64\Release\SDL.lib

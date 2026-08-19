@@ -1698,6 +1698,7 @@
     <ClCompile Include="..\src\misc\ethernet_ethnet.cpp">
       <Filter>Sources\misc</Filter>
     </ClCompile>
+    <ClCompile Include="pch.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\aviwriter\avi.h">
@@ -2684,6 +2685,7 @@
     <ClInclude Include="..\src\misc\ethernet_ethnet.h">
       <Filter>Sources\misc</Filter>
     </ClInclude>
+    <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\src\winres.rc">

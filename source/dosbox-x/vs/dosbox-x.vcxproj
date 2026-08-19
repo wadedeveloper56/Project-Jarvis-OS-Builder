@@ -28,25 +28,25 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
     <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
@@ -56,13 +56,49 @@
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release SDL2|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug SDL2|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release SDL2|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release SDL2|ARM64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release SDL2|ARM'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug SDL2|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug SDL2|ARM64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug SDL2|ARM'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
@@ -70,33 +106,123 @@
     <_ProjectFileVersion>14.0.23107.0</_ProjectFileVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(SolutionDir)..\bin\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)..\obj\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
-    <IncludePath>$(IncludePath);$(DXSDK_DIR)Include</IncludePath>
+    <OutDir>$(SolutionDir)..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)..\..\bin\intermediate\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\src\hardware\snd_pc98\sound\getsnd;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\src\hardware\snd_pc98\x11;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\src\hardware\snd_pc98\common;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\src\hardware\snd_pc98\generic;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\src\hardware\snd_pc98\cbus;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\vs\pcap;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\src\hardware\snd_pc98\sound;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\vs\libpng;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\vs\freetype\include;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\src\libs\mt32;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\vs\libpdcurses;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\vs\zlib;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\src;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\vs\sdl\include;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\include;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\vs\sdlnet;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\src\aviwriter;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\vs;$(IncludePath);$(DXSDK_DIR)Include</IncludePath>
     <LibraryPath>$(LibraryPath);$(DXSDK_DIR)Lib</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug SDL2|Win32'">
+    <OutDir>$(SolutionDir)..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)..\..\bin\intermediate\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\sound\getsnd;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\x11;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\common;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\generic;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\cbus;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\pcap;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\sound;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\libpng;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\freetype\include;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\libs\mt32;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\libpdcurses;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\zlib;C:\projects\OSDev\ProjectJarvis\source\dosbox-x;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\sdl\include;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\include;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\sdlnet;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\aviwriter;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs;$(IncludePath);$(DXSDK_DIR)Include</IncludePath>
+    <LibraryPath>$(LibraryPath);$(DXSDK_DIR)Lib;$(SolutionDir)..\bin\$(Platform)\$(Configuration)\</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(SolutionDir)..\bin\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)..\obj\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
-    <IncludePath>$(IncludePath);$(DXSDK_DIR)Include</IncludePath>
+    <OutDir>$(SolutionDir)..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)..\..\bin\intermediate\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\src\hardware\snd_pc98\sound\getsnd;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\src\hardware\snd_pc98\x11;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\src\hardware\snd_pc98\common;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\src\hardware\snd_pc98\generic;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\src\hardware\snd_pc98\cbus;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\vs\pcap;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\src\hardware\snd_pc98\sound;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\vs\libpng;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\vs\freetype\include;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\src\libs\mt32;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\vs\libpdcurses;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\vs\zlib;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\src;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\vs\sdl\include;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\include;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\vs\sdlnet;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\src\aviwriter;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\vs;$(IncludePath);$(DXSDK_DIR)Include</IncludePath>
     <LibraryPath>$(LibraryPath);$(DXSDK_DIR)Lib</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
+    <OutDir>$(SolutionDir)..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)..\..\bin\intermediate\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\sound\getsnd;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\x11;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\common;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\generic;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\cbus;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\pcap;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\sound;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\libpng;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\freetype\include;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\libs\mt32;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\libpdcurses;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\zlib;C:\projects\OSDev\ProjectJarvis\source\dosbox-x;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\sdl\include;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\include;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\sdlnet;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\aviwriter;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs;$(IncludePath);$(DXSDK_DIR)Include</IncludePath>
+    <LibraryPath>$(LibraryPath);$(DXSDK_DIR)Lib</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
+    <OutDir>$(SolutionDir)..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)..\..\bin\intermediate\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\sound\getsnd;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\x11;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\common;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\generic;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\cbus;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\pcap;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\sound;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\libpng;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\freetype\include;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\libs\mt32;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\libpdcurses;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\zlib;C:\projects\OSDev\ProjectJarvis\source\dosbox-x;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\sdl\include;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\include;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\sdlnet;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\aviwriter;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs;$(IncludePath);$(DXSDK_DIR)Include</IncludePath>
+    <LibraryPath>$(LibraryPath);$(DXSDK_DIR)Lib</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug SDL2|x64'">
+    <OutDir>$(SolutionDir)..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)..\..\bin\intermediate\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\sound\getsnd;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\x11;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\common;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\generic;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\cbus;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\pcap;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\sound;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\libpng;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\freetype\include;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\libs\mt32;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\libpdcurses;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\zlib;C:\projects\OSDev\ProjectJarvis\source\dosbox-x;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\sdl\include;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\include;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\sdlnet;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\aviwriter;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs;$(IncludePath);$(DXSDK_DIR)Include</IncludePath>
+    <LibraryPath>$(LibraryPath);$(DXSDK_DIR)Lib;$(SolutionDir)..\bin\$(Platform)\$(Configuration)\</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug SDL2|ARM64'">
+    <OutDir>$(SolutionDir)..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)..\..\bin\intermediate\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\sound\getsnd;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\x11;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\common;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\generic;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\cbus;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\pcap;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\sound;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\libpng;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\freetype\include;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\libs\mt32;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\libpdcurses;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\zlib;C:\projects\OSDev\ProjectJarvis\source\dosbox-x;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\sdl\include;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\include;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\sdlnet;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\aviwriter;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs;$(IncludePath);$(DXSDK_DIR)Include</IncludePath>
+    <LibraryPath>$(LibraryPath);$(DXSDK_DIR)Lib;$(SolutionDir)..\bin\$(Platform)\$(Configuration)\</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug SDL2|ARM'">
+    <OutDir>$(SolutionDir)..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)..\..\bin\intermediate\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\sound\getsnd;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\x11;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\common;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\generic;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\cbus;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\pcap;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\sound;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\libpng;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\freetype\include;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\libs\mt32;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\libpdcurses;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\zlib;C:\projects\OSDev\ProjectJarvis\source\dosbox-x;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\sdl\include;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\include;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\sdlnet;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\aviwriter;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs;$(IncludePath);$(DXSDK_DIR)Include</IncludePath>
+    <LibraryPath>$(LibraryPath);$(DXSDK_DIR)Lib;$(SolutionDir)..\bin\$(Platform)\$(Configuration)\</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(SolutionDir)..\bin\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)..\obj\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
-    <IncludePath>$(IncludePath);$(DXSDK_DIR)Include</IncludePath>
+    <OutDir>$(SolutionDir)..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)..\..\bin\intermediate\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\src\hardware\snd_pc98\sound\getsnd;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\src\hardware\snd_pc98\x11;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\src\hardware\snd_pc98\common;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\src\hardware\snd_pc98\generic;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\src\hardware\snd_pc98\cbus;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\vs\pcap;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\src\hardware\snd_pc98\sound;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\vs\libpng;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\vs\freetype\include;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\src\libs\mt32;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\vs\libpdcurses;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\vs\zlib;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\src;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\vs\sdl\include;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\include;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\vs\sdlnet;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\src\aviwriter;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\vs;$(IncludePath);$(DXSDK_DIR)Include</IncludePath>
     <LibraryPath>$(LibraryPath);$(DXSDK_DIR)Lib</LibraryPath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release SDL2|Win32'">
+    <OutDir>$(SolutionDir)..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)..\..\bin\intermediate\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\sound\getsnd;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\x11;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\common;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\generic;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\cbus;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\pcap;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\sound;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\libpng;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\freetype\include;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\libs\mt32;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\libpdcurses;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\zlib;C:\projects\OSDev\ProjectJarvis\source\dosbox-x;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\sdl\include;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\include;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\sdlnet;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\aviwriter;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs;$(IncludePath);$(DXSDK_DIR)Include</IncludePath>
+    <LibraryPath>$(LibraryPath);$(DXSDK_DIR)Lib;$(SolutionDir)..\bin\$(Platform)\$(Configuration)\</LibraryPath>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(SolutionDir)..\bin\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)..\obj\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
-    <IncludePath>$(IncludePath);$(DXSDK_DIR)Include</IncludePath>
+    <OutDir>$(SolutionDir)..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)..\..\bin\intermediate\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\src\hardware\snd_pc98\sound\getsnd;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\src\hardware\snd_pc98\x11;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\src\hardware\snd_pc98\common;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\src\hardware\snd_pc98\generic;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\src\hardware\snd_pc98\cbus;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\vs\pcap;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\src\hardware\snd_pc98\sound;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\vs\libpng;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\vs\freetype\include;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\src\libs\mt32;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\vs\libpdcurses;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\vs\zlib;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\src;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\vs\sdl\include;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\include;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\vs\sdlnet;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\src\aviwriter;C:\projects\OSDev\Project-Jarvis-C-Compiler\source\dosbox-x\vs;$(IncludePath);$(DXSDK_DIR)Include</IncludePath>
     <LibraryPath>$(LibraryPath);$(DXSDK_DIR)Lib</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
+    <OutDir>$(SolutionDir)..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)..\..\bin\intermediate\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\sound\getsnd;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\x11;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\common;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\generic;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\cbus;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\pcap;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\sound;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\libpng;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\freetype\include;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\libs\mt32;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\libpdcurses;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\zlib;C:\projects\OSDev\ProjectJarvis\source\dosbox-x;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\sdl\include;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\include;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\sdlnet;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\aviwriter;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs;$(IncludePath);$(DXSDK_DIR)Include</IncludePath>
+    <LibraryPath>$(LibraryPath);$(DXSDK_DIR)Lib</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
+    <OutDir>$(SolutionDir)..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)..\..\bin\intermediate\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\sound\getsnd;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\x11;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\common;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\generic;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\cbus;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\pcap;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\sound;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\libpng;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\freetype\include;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\libs\mt32;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\libpdcurses;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\zlib;C:\projects\OSDev\ProjectJarvis\source\dosbox-x;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\sdl\include;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\include;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\sdlnet;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\aviwriter;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs;$(IncludePath);$(DXSDK_DIR)Include</IncludePath>
+    <LibraryPath>$(LibraryPath);$(DXSDK_DIR)Lib</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release SDL2|x64'">
+    <OutDir>$(SolutionDir)..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)..\..\bin\intermediate\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\sound\getsnd;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\x11;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\common;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\generic;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\cbus;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\pcap;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\sound;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\libpng;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\freetype\include;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\libs\mt32;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\libpdcurses;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\zlib;C:\projects\OSDev\ProjectJarvis\source\dosbox-x;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\sdl\include;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\include;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\sdlnet;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\aviwriter;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs;$(IncludePath);$(DXSDK_DIR)Include</IncludePath>
+    <LibraryPath>$(LibraryPath);$(DXSDK_DIR)Lib;$(SolutionDir)..\bin\$(Platform)\$(Configuration)\</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release SDL2|ARM64'">
+    <OutDir>$(SolutionDir)..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)..\..\bin\intermediate\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\sound\getsnd;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\x11;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\common;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\generic;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\cbus;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\pcap;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\sound;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\libpng;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\freetype\include;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\libs\mt32;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\libpdcurses;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\zlib;C:\projects\OSDev\ProjectJarvis\source\dosbox-x;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\sdl\include;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\include;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\sdlnet;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\aviwriter;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs;$(IncludePath);$(DXSDK_DIR)Include</IncludePath>
+    <LibraryPath>$(LibraryPath);$(DXSDK_DIR)Lib;$(SolutionDir)..\bin\$(Platform)\$(Configuration)\</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release SDL2|ARM'">
+    <OutDir>$(SolutionDir)..\..\bin\tools\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)..\..\bin\intermediate\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
+    <IncludePath>C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\sound\getsnd;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\x11;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\common;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\generic;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\cbus;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\pcap;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\hardware\snd_pc98\sound;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\libpng;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\freetype\include;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\libs\mt32;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\libpdcurses;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\zlib;C:\projects\OSDev\ProjectJarvis\source\dosbox-x;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\sdl\include;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\include;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs\sdlnet;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\src\aviwriter;C:\projects\OSDev\ProjectJarvis\source\dosbox-x\vs;$(IncludePath);$(DXSDK_DIR)Include</IncludePath>
+    <LibraryPath>$(LibraryPath);$(DXSDK_DIR)Lib;$(SolutionDir)..\bin\$(Platform)\$(Configuration)\</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Label="Vcpkg" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <VcpkgEnabled>false</VcpkgEnabled>
   </PropertyGroup>
   <PropertyGroup Label="Vcpkg" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <VcpkgEnabled>false</VcpkgEnabled>
+  </PropertyGroup>
+  <PropertyGroup Label="Vcpkg" Condition="'$(Configuration)|$(Platform)'=='Release SDL2|Win32'">
+    <VcpkgEnabled>false</VcpkgEnabled>
+  </PropertyGroup>
+  <PropertyGroup Label="Vcpkg" Condition="'$(Configuration)|$(Platform)'=='Release SDL2|x64'">
+    <VcpkgEnabled>false</VcpkgEnabled>
+  </PropertyGroup>
+  <PropertyGroup Label="Vcpkg" Condition="'$(Configuration)|$(Platform)'=='Release SDL2|ARM'">
+    <VcpkgEnabled>false</VcpkgEnabled>
+  </PropertyGroup>
+  <PropertyGroup Label="Vcpkg" Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
+    <VcpkgEnabled>false</VcpkgEnabled>
+  </PropertyGroup>
+  <PropertyGroup Label="Vcpkg" Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
+    <VcpkgEnabled>false</VcpkgEnabled>
+  </PropertyGroup>
+  <PropertyGroup Label="Vcpkg" Condition="'$(Configuration)|$(Platform)'=='Release SDL2|ARM64'">
     <VcpkgEnabled>false</VcpkgEnabled>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -110,9 +236,47 @@
       <EnableEnhancedInstructionSet>StreamingSIMDExtensions</EnableEnhancedInstructionSet>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp14</LanguageStandard>
+      <LanguageStandard_C>Default</LanguageStandard_C>
+      <ConformanceMode>false</ConformanceMode>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>winmm.lib;imm32.lib;dsound.lib;dxguid.lib;SetupAPI.lib;version.lib;Iphlpapi.lib;Ws2_32.lib;opengl32.lib;$(SolutionDir)..\obj\libpdcurses\$(Platform)\$(Configuration)\libpdcurses.lib;$(SolutionDir)..\obj\zlib\$(Platform)\$(Configuration)\zlib.lib;$(SolutionDir)..\obj\libpng\$(Platform)\$(Configuration)\libpng.lib;$(SolutionDir)..\obj\freetype\$(Platform)\$(Configuration)\freetype.lib;$(SolutionDir)..\obj\SDL\$(Platform)\$(Configuration)\SDL.lib;$(SolutionDir)..\obj\SDLmain\$(Platform)\$(Configuration)\SDLmain.lib;$(SolutionDir)..\obj\SDL_net\$(Platform)\$(Configuration)\SDL_net.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>winmm.lib;imm32.lib;dsound.lib;dxguid.lib;SetupAPI.lib;version.lib;Iphlpapi.lib;Ws2_32.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <CustomBuildStep />
+    <CustomBuildStep>
+      <Message>
+      </Message>
+    </CustomBuildStep>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>
+      </Message>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug SDL2|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(SolutionDir)pcap;$(SolutionDir);$(SolutionDir)..;$(SolutionDir)..\include;$(SolutionDir)..\src;$(SolutionDir)..\src\aviwriter;$(SolutionDir)..\src\hardware\snd_pc98\cbus;$(SolutionDir)..\src\hardware\snd_pc98\common;$(SolutionDir)..\src\hardware\snd_pc98\generic;$(SolutionDir)..\src\hardware\snd_pc98\sound;$(SolutionDir)..\src\hardware\snd_pc98\x11;$(SolutionDir)..\src\hardware\snd_pc98\sound\getsnd;$(SolutionDir)..\src\libs\mt32;$(SolutionDir)libpdcurses;$(SolutionDir)zlib;$(SolutionDir)libpng;$(SolutionDir)freetype\include;$(SolutionDir)sdl2\include;$(SolutionDir)sdlnet;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;__WIN32__;_CRT_SECURE_NO_WARNINGS;_FILE_OFFSET_BITS=64;C_SDL2=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <AdditionalOptions>/QIfist</AdditionalOptions>
+      <SDLCheck>false</SDLCheck>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions</EnableEnhancedInstructionSet>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp14</LanguageStandard>
+      <LanguageStandard_C>Default</LanguageStandard_C>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>winmm.lib;imm32.lib;dsound.lib;dxguid.lib;SetupAPI.lib;version.lib;Iphlpapi.lib;Ws2_32.lib;opengl32.lib;$(SolutionDir)..\obj\libpdcurses\$(Platform)\$(Configuration)\libpdcurses.lib;$(SolutionDir)..\obj\zlib\$(Platform)\$(Configuration)\zlib.lib;$(SolutionDir)..\obj\libpng\$(Platform)\$(Configuration)\libpng.lib;$(SolutionDir)..\obj\freetype\$(Platform)\$(Configuration)\freetype.lib;$(SolutionDir)..\obj\SDL2\$(Platform)\$(Configuration)\sdl2.lib;$(SolutionDir)..\obj\SDL2main\$(Platform)\$(Configuration)\sdl2main.lib;$(SolutionDir)..\obj\SDL_net\$(Platform)\$(Configuration)\SDL_net.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Windows</SubSystem>
     </Link>
     <CustomBuildStep />
@@ -159,9 +323,138 @@ for /d %%i in ("$(SolutionDir)\..\contrib\translations\*") do copy "%%i\*.lng" "
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp14</LanguageStandard>
+      <LanguageStandard_C>Default</LanguageStandard_C>
+      <ConformanceMode>false</ConformanceMode>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>winmm.lib;imm32.lib;dsound.lib;dxguid.lib;SetupAPI.lib;version.lib;Iphlpapi.lib;Ws2_32.lib;opengl32.lib;$(SolutionDir)..\obj\libpdcurses\$(Platform)\$(Configuration)\libpdcurses.lib;$(SolutionDir)..\obj\zlib\$(Platform)\$(Configuration)\zlib.lib;$(SolutionDir)..\obj\libpng\$(Platform)\$(Configuration)\libpng.lib;$(SolutionDir)..\obj\freetype\$(Platform)\$(Configuration)\freetype.lib;$(SolutionDir)..\obj\SDL\$(Platform)\$(Configuration)\SDL.lib;$(SolutionDir)..\obj\SDLmain\$(Platform)\$(Configuration)\SDLmain.lib;$(SolutionDir)..\obj\SDL_net\$(Platform)\$(Configuration)\SDL_net.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>winmm.lib;imm32.lib;dsound.lib;dxguid.lib;SetupAPI.lib;version.lib;Iphlpapi.lib;Ws2_32.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+      <Message>
+      </Message>
+    </PostBuildEvent>
+    <CustomBuildStep />
+    <CustomBuildStep>
+      <Message>
+      </Message>
+    </CustomBuildStep>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
+    <Midl />
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(SolutionDir)pcap;$(SolutionDir);$(SolutionDir)..;$(SolutionDir)..\include;$(SolutionDir)..\src;$(SolutionDir)..\src\aviwriter;$(SolutionDir)..\src\libs\mt32;$(SolutionDir)..\src\hardware\snd_pc98\cbus;$(SolutionDir)..\src\hardware\snd_pc98\common;$(SolutionDir)..\src\hardware\snd_pc98\generic;$(SolutionDir)..\src\hardware\snd_pc98\sound;$(SolutionDir)..\src\hardware\snd_pc98\x11;$(SolutionDir)..\src\hardware\snd_pc98\sound\getsnd;$(SolutionDir)libpdcurses;$(SolutionDir)zlib;$(SolutionDir)libpng;$(SolutionDir)freetype\include;$(SolutionDir)sdl\include;$(SolutionDir)sdlnet;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;__WIN32__;_CRT_SECURE_NO_WARNINGS;_FILE_OFFSET_BITS=64;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <SDLCheck>false</SDLCheck>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp14</LanguageStandard>
+      <LanguageStandard_C>Default</LanguageStandard_C>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>winmm.lib;imm32.lib;dsound.lib;dxguid.lib;SetupAPI.lib;version.lib;Iphlpapi.lib;Ws2_32.lib;comdlg32.lib;shell32.lib;gdi32.lib;ole32.lib;oleaut32.lib;Advapi32.lib;$(SolutionDir)..\obj\libpdcurses\$(Platform)\$(Configuration)\libpdcurses.lib;$(SolutionDir)..\obj\zlib\$(Platform)\$(Configuration)\zlib.lib;$(SolutionDir)..\obj\libpng\$(Platform)\$(Configuration)\libpng.lib;$(SolutionDir)..\obj\freetype\$(Platform)\$(Configuration)\freetype.lib;$(SolutionDir)..\obj\SDL\$(Platform)\$(Configuration)\SDL.lib;$(SolutionDir)..\obj\SDLmain\$(Platform)\$(Configuration)\SDLmain.lib;$(SolutionDir)..\obj\SDL_net\$(Platform)\$(Configuration)\SDL_net.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy "$(SolutionDir)\..\contrib\fonts\FREECG98.BMP" "$(OutputPath)\FREECG98.BMP"
+copy "$(SolutionDir)\..\contrib\fonts\wqy_1?pt.bdf" "$(OutputPath)\wqy_1?pt.bdf"
+copy "$(SolutionDir)\..\contrib\fonts\Nouveau_IBM.ttf" "$(OutputPath)\Nouveau_IBM.ttf"
+copy "$(SolutionDir)\..\contrib\fonts\SarasaGothicFixed.ttf" "$(OutputPath)\SarasaGothicFixed.ttf"
+copy "$(SolutionDir)\..\dosbox-x.reference.conf" "$(OutputPath)\dosbox-x.reference.conf"
+copy "$(SolutionDir)\..\dosbox-x.reference.full.conf" "$(OutputPath)\dosbox-x.reference.full.conf"
+copy "$(SolutionDir)\..\CHANGELOG" "$(OutputPath)\CHANGELOG.txt"
+copy "$(SolutionDir)\..\contrib\windows\installer\readme.txt" "$(OutputPath)\README.txt"
+if not exist "$(OutputPath)\drivez\" mkdir "$(OutputPath)\drivez"
+copy "$(SolutionDir)\..\contrib\windows\installer\drivez_readme.txt" "$(OutputPath)\drivez\readme.txt"
+if not exist "$(OutputPath)\scripts\" mkdir "$(OutputPath)\scripts"
+copy "$(SolutionDir)\..\contrib\windows\installer\windows_explorer_context_menu*.bat" "$(OutputPath)\scripts\"
+if not exist "$(OutputPath)\shaders\" mkdir "$(OutputPath)\shaders"
+copy "$(SolutionDir)\..\contrib\windows\shaders\*.*" "$(OutputPath)\shaders\"
+if not exist "$(OutputPath)\glshaders\" mkdir "$(OutputPath)\glshaders"
+copy "$(SolutionDir)\..\contrib\glshaders\*.*" "$(OutputPath)\glshaders\"
+if not exist "$(OutputPath)\languages\" mkdir "$(OutputPath)\languages"
+for /d %%i in ("$(SolutionDir)\..\contrib\translations\*") do copy "%%i\*.lng" "$(OutputPath)\languages\"</Command>
+      <Message>
+      </Message>
+    </PostBuildEvent>
+    <CustomBuildStep />
+    <CustomBuildStep>
+      <Message>
+      </Message>
+    </CustomBuildStep>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
+    <Midl />
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(SolutionDir)pcap;$(SolutionDir);$(SolutionDir)..;$(SolutionDir)..\include;$(SolutionDir)..\src;$(SolutionDir)..\src\aviwriter;$(SolutionDir)..\src\libs\mt32;$(SolutionDir)..\src\hardware\snd_pc98\cbus;$(SolutionDir)..\src\hardware\snd_pc98\common;$(SolutionDir)..\src\hardware\snd_pc98\generic;$(SolutionDir)..\src\hardware\snd_pc98\sound;$(SolutionDir)..\src\hardware\snd_pc98\x11;$(SolutionDir)..\src\hardware\snd_pc98\sound\getsnd;$(SolutionDir)libpdcurses;$(SolutionDir)zlib;$(SolutionDir)libpng;$(SolutionDir)freetype\include;$(SolutionDir)sdl\include;$(SolutionDir)sdlnet;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;__WIN32__;_CRT_SECURE_NO_WARNINGS;_FILE_OFFSET_BITS=64;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <SDLCheck>false</SDLCheck>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp14</LanguageStandard>
+      <LanguageStandard_C>Default</LanguageStandard_C>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>winmm.lib;imm32.lib;dsound.lib;dxguid.lib;SetupAPI.lib;version.lib;Iphlpapi.lib;Ws2_32.lib;comdlg32.lib;shell32.lib;gdi32.lib;ole32.lib;oleaut32.lib;Advapi32.lib;$(SolutionDir)..\obj\libpdcurses\$(Platform)\$(Configuration)\libpdcurses.lib;$(SolutionDir)..\obj\zlib\$(Platform)\$(Configuration)\zlib.lib;$(SolutionDir)..\obj\libpng\$(Platform)\$(Configuration)\libpng.lib;$(SolutionDir)..\obj\freetype\$(Platform)\$(Configuration)\freetype.lib;$(SolutionDir)..\obj\SDL\$(Platform)\$(Configuration)\SDL.lib;$(SolutionDir)..\obj\SDLmain\$(Platform)\$(Configuration)\SDLmain.lib;$(SolutionDir)..\obj\SDL_net\$(Platform)\$(Configuration)\SDL_net.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy "$(SolutionDir)\..\contrib\fonts\FREECG98.BMP" "$(OutputPath)\FREECG98.BMP"
+copy "$(SolutionDir)\..\contrib\fonts\wqy_1?pt.bdf" "$(OutputPath)\wqy_1?pt.bdf"
+copy "$(SolutionDir)\..\contrib\fonts\Nouveau_IBM.ttf" "$(OutputPath)\Nouveau_IBM.ttf"
+copy "$(SolutionDir)\..\contrib\fonts\SarasaGothicFixed.ttf" "$(OutputPath)\SarasaGothicFixed.ttf"
+copy "$(SolutionDir)\..\dosbox-x.reference.conf" "$(OutputPath)\dosbox-x.reference.conf"
+copy "$(SolutionDir)\..\dosbox-x.reference.full.conf" "$(OutputPath)\dosbox-x.reference.full.conf"
+copy "$(SolutionDir)\..\CHANGELOG" "$(OutputPath)\CHANGELOG.txt"
+copy "$(SolutionDir)\..\contrib\windows\installer\readme.txt" "$(OutputPath)\README.txt"
+if not exist "$(OutputPath)\drivez\" mkdir "$(OutputPath)\drivez"
+copy "$(SolutionDir)\..\contrib\windows\installer\drivez_readme.txt" "$(OutputPath)\drivez\readme.txt"
+if not exist "$(OutputPath)\scripts\" mkdir "$(OutputPath)\scripts"
+copy "$(SolutionDir)\..\contrib\windows\installer\windows_explorer_context_menu*.bat" "$(OutputPath)\scripts\"
+if not exist "$(OutputPath)\shaders\" mkdir "$(OutputPath)\shaders"
+copy "$(SolutionDir)\..\contrib\windows\shaders\*.*" "$(OutputPath)\shaders\"
+if not exist "$(OutputPath)\glshaders\" mkdir "$(OutputPath)\glshaders"
+copy "$(SolutionDir)\..\contrib\glshaders\*.*" "$(OutputPath)\glshaders\"
+if not exist "$(OutputPath)\languages\" mkdir "$(OutputPath)\languages"
+for /d %%i in ("$(SolutionDir)\..\contrib\translations\*") do copy "%%i\*.lng" "$(OutputPath)\languages\"</Command>
+      <Message>
+      </Message>
+    </PostBuildEvent>
+    <CustomBuildStep />
+    <CustomBuildStep>
+      <Message>
+      </Message>
+    </CustomBuildStep>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug SDL2|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(SolutionDir)pcap;$(SolutionDir);$(SolutionDir)..;$(SolutionDir)..\include;$(SolutionDir)..\src;$(SolutionDir)..\src\aviwriter;$(SolutionDir)..\src\hardware\snd_pc98\cbus;$(SolutionDir)..\src\hardware\snd_pc98\common;$(SolutionDir)..\src\hardware\snd_pc98\generic;$(SolutionDir)..\src\hardware\snd_pc98\sound;$(SolutionDir)..\src\hardware\snd_pc98\x11;$(SolutionDir)..\src\hardware\snd_pc98\sound\getsnd;$(SolutionDir)..\src\libs\mt32;$(SolutionDir)libpdcurses;$(SolutionDir)zlib;$(SolutionDir)libpng;$(SolutionDir)freetype\include;$(SolutionDir)sdl2\include;$(SolutionDir)sdlnet;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;__WIN32__;_CRT_SECURE_NO_WARNINGS;_FILE_OFFSET_BITS=64;C_SDL2=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>false</SDLCheck>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp14</LanguageStandard>
+      <LanguageStandard_C>Default</LanguageStandard_C>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>winmm.lib;imm32.lib;dsound.lib;dxguid.lib;SetupAPI.lib;version.lib;Iphlpapi.lib;Ws2_32.lib;opengl32.lib;$(SolutionDir)..\obj\libpdcurses\$(Platform)\$(Configuration)\libpdcurses.lib;$(SolutionDir)..\obj\zlib\$(Platform)\$(Configuration)\zlib.lib;$(SolutionDir)..\obj\libpng\$(Platform)\$(Configuration)\libpng.lib;$(SolutionDir)..\obj\freetype\$(Platform)\$(Configuration)\freetype.lib;$(SolutionDir)..\obj\SDL2\$(Platform)\$(Configuration)\sdl2.lib;$(SolutionDir)..\obj\SDL2main\$(Platform)\$(Configuration)\sdl2main.lib;$(SolutionDir)..\obj\SDL_net\$(Platform)\$(Configuration)\SDL_net.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Windows</SubSystem>
     </Link>
     <PostBuildEvent>
@@ -172,6 +465,98 @@ copy "$(SolutionDir)\..\contrib\fonts\SarasaGothicFixed.ttf" "$(OutputPath)\Sara
 copy "$(SolutionDir)\..\dosbox-x.reference.conf" "$(OutputPath)\dosbox-x.reference.conf"
 copy "$(SolutionDir)\..\dosbox-x.reference.full.conf" "$(OutputPath)\dosbox-x.reference.full.conf"
 copy "$(SolutionDir)\..\contrib\windows\installer\inpoutx64.dll" "$(OutputPath)\inpoutx64.dll"
+copy "$(SolutionDir)\..\CHANGELOG" "$(OutputPath)\CHANGELOG.txt"
+copy "$(SolutionDir)\..\contrib\windows\installer\readme.txt" "$(OutputPath)\README.txt"
+if not exist "$(OutputPath)\drivez\" mkdir "$(OutputPath)\drivez"
+copy "$(SolutionDir)\..\contrib\windows\installer\drivez_readme.txt" "$(OutputPath)\drivez\readme.txt"
+if not exist "$(OutputPath)\scripts\" mkdir "$(OutputPath)\scripts"
+copy "$(SolutionDir)\..\contrib\windows\installer\windows_explorer_context_menu*.bat" "$(OutputPath)\scripts\"
+if not exist "$(OutputPath)\shaders\" mkdir "$(OutputPath)\shaders"
+copy "$(SolutionDir)\..\contrib\windows\shaders\*.*" "$(OutputPath)\shaders\"
+if not exist "$(OutputPath)\glshaders\" mkdir "$(OutputPath)\glshaders"
+copy "$(SolutionDir)\..\contrib\glshaders\*.*" "$(OutputPath)\glshaders\"
+if not exist "$(OutputPath)\languages\" mkdir "$(OutputPath)\languages"
+for /d %%i in ("$(SolutionDir)\..\contrib\translations\*") do copy "%%i\*.lng" "$(OutputPath)\languages\"</Command>
+      <Message>
+      </Message>
+    </PostBuildEvent>
+    <CustomBuildStep />
+    <CustomBuildStep>
+      <Message>
+      </Message>
+    </CustomBuildStep>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug SDL2|ARM64'">
+    <Midl />
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(SolutionDir)pcap;$(SolutionDir);$(SolutionDir)..;$(SolutionDir)..\include;$(SolutionDir)..\src;$(SolutionDir)..\src\aviwriter;$(SolutionDir)..\src\hardware\snd_pc98\cbus;$(SolutionDir)..\src\hardware\snd_pc98\common;$(SolutionDir)..\src\hardware\snd_pc98\generic;$(SolutionDir)..\src\hardware\snd_pc98\sound;$(SolutionDir)..\src\hardware\snd_pc98\x11;$(SolutionDir)..\src\hardware\snd_pc98\sound\getsnd;$(SolutionDir)..\src\libs\mt32;$(SolutionDir)libpdcurses;$(SolutionDir)zlib;$(SolutionDir)libpng;$(SolutionDir)freetype\include;$(SolutionDir)sdl2\include;$(SolutionDir)sdlnet;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;__WIN32__;_CRT_SECURE_NO_WARNINGS;_FILE_OFFSET_BITS=64;C_SDL2=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <SDLCheck>false</SDLCheck>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp14</LanguageStandard>
+      <LanguageStandard_C>Default</LanguageStandard_C>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>winmm.lib;imm32.lib;dsound.lib;dxguid.lib;SetupAPI.lib;version.lib;Iphlpapi.lib;Ws2_32.lib;comdlg32.lib;shell32.lib;gdi32.lib;ole32.lib;oleaut32.lib;Advapi32.lib;$(SolutionDir)..\obj\libpdcurses\$(Platform)\$(Configuration)\libpdcurses.lib;$(SolutionDir)..\obj\zlib\$(Platform)\$(Configuration)\zlib.lib;$(SolutionDir)..\obj\libpng\$(Platform)\$(Configuration)\libpng.lib;$(SolutionDir)..\obj\freetype\$(Platform)\$(Configuration)\freetype.lib;$(SolutionDir)..\obj\SDL2\$(Platform)\$(Configuration)\sdl2.lib;$(SolutionDir)..\obj\SDL2main\$(Platform)\$(Configuration)\sdl2main.lib;$(SolutionDir)..\obj\SDL_net\$(Platform)\$(Configuration)\SDL_net.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy "$(SolutionDir)\..\contrib\fonts\FREECG98.BMP" "$(OutputPath)\FREECG98.BMP"
+copy "$(SolutionDir)\..\contrib\fonts\wqy_1?pt.bdf" "$(OutputPath)\wqy_1?pt.bdf"
+copy "$(SolutionDir)\..\contrib\fonts\Nouveau_IBM.ttf" "$(OutputPath)\Nouveau_IBM.ttf"
+copy "$(SolutionDir)\..\contrib\fonts\SarasaGothicFixed.ttf" "$(OutputPath)\SarasaGothicFixed.ttf"
+copy "$(SolutionDir)\..\dosbox-x.reference.conf" "$(OutputPath)\dosbox-x.reference.conf"
+copy "$(SolutionDir)\..\dosbox-x.reference.full.conf" "$(OutputPath)\dosbox-x.reference.full.conf"
+copy "$(SolutionDir)\..\CHANGELOG" "$(OutputPath)\CHANGELOG.txt"
+copy "$(SolutionDir)\..\contrib\windows\installer\readme.txt" "$(OutputPath)\README.txt"
+if not exist "$(OutputPath)\drivez\" mkdir "$(OutputPath)\drivez"
+copy "$(SolutionDir)\..\contrib\windows\installer\drivez_readme.txt" "$(OutputPath)\drivez\readme.txt"
+if not exist "$(OutputPath)\scripts\" mkdir "$(OutputPath)\scripts"
+copy "$(SolutionDir)\..\contrib\windows\installer\windows_explorer_context_menu*.bat" "$(OutputPath)\scripts\"
+if not exist "$(OutputPath)\shaders\" mkdir "$(OutputPath)\shaders"
+copy "$(SolutionDir)\..\contrib\windows\shaders\*.*" "$(OutputPath)\shaders\"
+if not exist "$(OutputPath)\glshaders\" mkdir "$(OutputPath)\glshaders"
+copy "$(SolutionDir)\..\contrib\glshaders\*.*" "$(OutputPath)\glshaders\"
+if not exist "$(OutputPath)\languages\" mkdir "$(OutputPath)\languages"
+for /d %%i in ("$(SolutionDir)\..\contrib\translations\*") do copy "%%i\*.lng" "$(OutputPath)\languages\"</Command>
+      <Message>
+      </Message>
+    </PostBuildEvent>
+    <CustomBuildStep />
+    <CustomBuildStep>
+      <Message>
+      </Message>
+    </CustomBuildStep>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug SDL2|ARM'">
+    <Midl />
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(SolutionDir)pcap;$(SolutionDir);$(SolutionDir)..;$(SolutionDir)..\include;$(SolutionDir)..\src;$(SolutionDir)..\src\aviwriter;$(SolutionDir)..\src\hardware\snd_pc98\cbus;$(SolutionDir)..\src\hardware\snd_pc98\common;$(SolutionDir)..\src\hardware\snd_pc98\generic;$(SolutionDir)..\src\hardware\snd_pc98\sound;$(SolutionDir)..\src\hardware\snd_pc98\x11;$(SolutionDir)..\src\hardware\snd_pc98\sound\getsnd;$(SolutionDir)..\src\libs\mt32;$(SolutionDir)libpdcurses;$(SolutionDir)zlib;$(SolutionDir)libpng;$(SolutionDir)freetype\include;$(SolutionDir)sdl2\include;$(SolutionDir)sdlnet;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;__WIN32__;_CRT_SECURE_NO_WARNINGS;_FILE_OFFSET_BITS=64;C_SDL2=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <SDLCheck>false</SDLCheck>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp14</LanguageStandard>
+      <LanguageStandard_C>Default</LanguageStandard_C>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>winmm.lib;imm32.lib;dsound.lib;dxguid.lib;SetupAPI.lib;version.lib;Iphlpapi.lib;Ws2_32.lib;comdlg32.lib;shell32.lib;gdi32.lib;ole32.lib;oleaut32.lib;Advapi32.lib;$(SolutionDir)..\obj\libpdcurses\$(Platform)\$(Configuration)\libpdcurses.lib;$(SolutionDir)..\obj\zlib\$(Platform)\$(Configuration)\zlib.lib;$(SolutionDir)..\obj\libpng\$(Platform)\$(Configuration)\libpng.lib;$(SolutionDir)..\obj\freetype\$(Platform)\$(Configuration)\freetype.lib;$(SolutionDir)..\obj\SDL2\$(Platform)\$(Configuration)\sdl2.lib;$(SolutionDir)..\obj\SDL2main\$(Platform)\$(Configuration)\sdl2main.lib;$(SolutionDir)..\obj\SDL_net\$(Platform)\$(Configuration)\SDL_net.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy "$(SolutionDir)\..\contrib\fonts\FREECG98.BMP" "$(OutputPath)\FREECG98.BMP"
+copy "$(SolutionDir)\..\contrib\fonts\wqy_1?pt.bdf" "$(OutputPath)\wqy_1?pt.bdf"
+copy "$(SolutionDir)\..\contrib\fonts\Nouveau_IBM.ttf" "$(OutputPath)\Nouveau_IBM.ttf"
+copy "$(SolutionDir)\..\contrib\fonts\SarasaGothicFixed.ttf" "$(OutputPath)\SarasaGothicFixed.ttf"
+copy "$(SolutionDir)\..\dosbox-x.reference.conf" "$(OutputPath)\dosbox-x.reference.conf"
+copy "$(SolutionDir)\..\dosbox-x.reference.full.conf" "$(OutputPath)\dosbox-x.reference.full.conf"
 copy "$(SolutionDir)\..\CHANGELOG" "$(OutputPath)\CHANGELOG.txt"
 copy "$(SolutionDir)\..\contrib\windows\installer\readme.txt" "$(OutputPath)\README.txt"
 if not exist "$(OutputPath)\drivez\" mkdir "$(OutputPath)\drivez"
@@ -205,9 +590,52 @@ for /d %%i in ("$(SolutionDir)\..\contrib\translations\*") do copy "%%i\*.lng" "
       <WarningLevel>Level3</WarningLevel>
       <EnableEnhancedInstructionSet>StreamingSIMDExtensions</EnableEnhancedInstructionSet>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp14</LanguageStandard>
+      <LanguageStandard_C>Default</LanguageStandard_C>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <ConformanceMode>false</ConformanceMode>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>winmm.lib;imm32.lib;dsound.lib;dxguid.lib;SetupAPI.lib;version.lib;Iphlpapi.lib;Ws2_32.lib;opengl32.lib;$(SolutionDir)..\obj\libpdcurses\$(Platform)\$(Configuration)\libpdcurses.lib;$(SolutionDir)..\obj\zlib\$(Platform)\$(Configuration)\zlib.lib;$(SolutionDir)..\obj\libpng\$(Platform)\$(Configuration)\libpng.lib;$(SolutionDir)..\obj\freetype\$(Platform)\$(Configuration)\freetype.lib;$(SolutionDir)..\obj\SDL\$(Platform)\$(Configuration)\SDL.lib;$(SolutionDir)..\obj\SDLmain\$(Platform)\$(Configuration)\SDLmain.lib;$(SolutionDir)..\obj\SDL_net\$(Platform)\$(Configuration)\SDL_net.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>winmm.lib;imm32.lib;dsound.lib;dxguid.lib;SetupAPI.lib;version.lib;Iphlpapi.lib;Ws2_32.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+    </Link>
+    <CustomBuildStep />
+    <CustomBuildStep>
+      <Message>
+      </Message>
+    </CustomBuildStep>
+    <PostBuildEvent>
+      <Command>if not exist "..\..\..\build\$(Configuration)\$(Platform)\bin" mkdir "..\..\..\build\$(Configuration)\$(Platform)\bin"
+copy "$(OutputPath)$(ProjectName).exe" "..\..\..\build\$(Configuration)\$(Platform)\bin\$(ProjectName).exe"
+
+</Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>
+      </Message>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release SDL2|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>$(SolutionDir)pcap;$(SolutionDir);$(SolutionDir)..;$(SolutionDir)..\include;$(SolutionDir)..\src;$(SolutionDir)..\src\aviwriter;$(SolutionDir)..\src\hardware\snd_pc98\cbus;$(SolutionDir)..\src\hardware\snd_pc98\common;$(SolutionDir)..\src\hardware\snd_pc98\generic;$(SolutionDir)..\src\hardware\snd_pc98\sound;$(SolutionDir)..\src\hardware\snd_pc98\x11;$(SolutionDir)..\src\hardware\snd_pc98\sound\getsnd;$(SolutionDir)..\src\libs\mt32;$(SolutionDir)libpdcurses;$(SolutionDir)zlib;$(SolutionDir)libpng;$(SolutionDir)freetype\include;$(SolutionDir)sdl2\include;$(SolutionDir)sdlnet;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;__WIN32__;_CRT_SECURE_NO_WARNINGS;_FILE_OFFSET_BITS=64;C_SDL2=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <AdditionalOptions>/QIfist</AdditionalOptions>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <OmitFramePointers>true</OmitFramePointers>
+      <SDLCheck>false</SDLCheck>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions</EnableEnhancedInstructionSet>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp14</LanguageStandard>
+      <LanguageStandard_C>Default</LanguageStandard_C>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>winmm.lib;imm32.lib;dsound.lib;dxguid.lib;SetupAPI.lib;version.lib;Iphlpapi.lib;Ws2_32.lib;opengl32.lib;$(SolutionDir)..\obj\libpdcurses\$(Platform)\$(Configuration)\libpdcurses.lib;$(SolutionDir)..\obj\zlib\$(Platform)\$(Configuration)\zlib.lib;$(SolutionDir)..\obj\libpng\$(Platform)\$(Configuration)\libpng.lib;$(SolutionDir)..\obj\freetype\$(Platform)\$(Configuration)\freetype.lib;$(SolutionDir)..\obj\SDL2\$(Platform)\$(Configuration)\sdl2.lib;$(SolutionDir)..\obj\SDL2main\$(Platform)\$(Configuration)\sdl2main.lib;$(SolutionDir)..\obj\SDL_net\$(Platform)\$(Configuration)\SDL_net.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Windows</SubSystem>
     </Link>
     <CustomBuildStep />
@@ -255,9 +683,145 @@ for /d %%i in ("$(SolutionDir)\..\contrib\translations\*") do copy "%%i\*.lng" "
       <OmitFramePointers>true</OmitFramePointers>
       <SDLCheck>false</SDLCheck>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp14</LanguageStandard>
+      <LanguageStandard_C>Default</LanguageStandard_C>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <ConformanceMode>false</ConformanceMode>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>winmm.lib;imm32.lib;dsound.lib;dxguid.lib;SetupAPI.lib;version.lib;Iphlpapi.lib;Ws2_32.lib;opengl32.lib;$(SolutionDir)..\obj\libpdcurses\$(Platform)\$(Configuration)\libpdcurses.lib;$(SolutionDir)..\obj\zlib\$(Platform)\$(Configuration)\zlib.lib;$(SolutionDir)..\obj\libpng\$(Platform)\$(Configuration)\libpng.lib;$(SolutionDir)..\obj\freetype\$(Platform)\$(Configuration)\freetype.lib;$(SolutionDir)..\obj\SDL\$(Platform)\$(Configuration)\SDL.lib;$(SolutionDir)..\obj\SDLmain\$(Platform)\$(Configuration)\SDLmain.lib;$(SolutionDir)..\obj\SDL_net\$(Platform)\$(Configuration)\SDL_net.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>winmm.lib;imm32.lib;dsound.lib;dxguid.lib;SetupAPI.lib;version.lib;Iphlpapi.lib;Ws2_32.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+    </Link>
+    <PostBuildEvent>
+      <Command>if not exist "..\..\..\build\$(Configuration)\$(Platform)\bin" mkdir "..\..\..\build\$(Configuration)\$(Platform)\bin"
+copy "$(OutputPath)$(ProjectName).exe" "..\..\..\build\$(Configuration)\$(Platform)\bin\$(ProjectName).exe"
+
+</Command>
+      <Message>
+      </Message>
+    </PostBuildEvent>
+    <CustomBuildStep />
+    <CustomBuildStep>
+      <Message>
+      </Message>
+    </CustomBuildStep>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
+    <Midl />
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>$(SolutionDir)pcap;$(SolutionDir);$(SolutionDir)..;$(SolutionDir)..\include;$(SolutionDir)..\src;$(SolutionDir)..\src\aviwriter;$(SolutionDir)..\src\libs\mt32;$(SolutionDir)..\src\hardware\snd_pc98\cbus;$(SolutionDir)..\src\hardware\snd_pc98\common;$(SolutionDir)..\src\hardware\snd_pc98\generic;$(SolutionDir)..\src\hardware\snd_pc98\sound;$(SolutionDir)..\src\hardware\snd_pc98\x11;$(SolutionDir)..\src\hardware\snd_pc98\sound\getsnd;$(SolutionDir)libpdcurses;$(SolutionDir)zlib;$(SolutionDir)libpng;$(SolutionDir)freetype\include;$(SolutionDir)sdl\include;$(SolutionDir)sdlnet;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;__WIN32__;_CRT_SECURE_NO_WARNINGS;_FILE_OFFSET_BITS=64;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <OmitFramePointers>true</OmitFramePointers>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp14</LanguageStandard>
+      <LanguageStandard_C>Default</LanguageStandard_C>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>winmm.lib;imm32.lib;dsound.lib;dxguid.lib;SetupAPI.lib;version.lib;Iphlpapi.lib;Ws2_32.lib;comdlg32.lib;shell32.lib;gdi32.lib;ole32.lib;oleaut32.lib;Advapi32.lib;$(SolutionDir)..\obj\libpdcurses\$(Platform)\$(Configuration)\libpdcurses.lib;$(SolutionDir)..\obj\zlib\$(Platform)\$(Configuration)\zlib.lib;$(SolutionDir)..\obj\libpng\$(Platform)\$(Configuration)\libpng.lib;$(SolutionDir)..\obj\freetype\$(Platform)\$(Configuration)\freetype.lib;$(SolutionDir)..\obj\SDL\$(Platform)\$(Configuration)\SDL.lib;$(SolutionDir)..\obj\SDLmain\$(Platform)\$(Configuration)\SDLmain.lib;$(SolutionDir)..\obj\SDL_net\$(Platform)\$(Configuration)\SDL_net.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy "$(SolutionDir)\..\contrib\fonts\FREECG98.BMP" "$(OutputPath)\FREECG98.BMP"
+copy "$(SolutionDir)\..\contrib\fonts\wqy_1?pt.bdf" "$(OutputPath)\wqy_1?pt.bdf"
+copy "$(SolutionDir)\..\contrib\fonts\Nouveau_IBM.ttf" "$(OutputPath)\Nouveau_IBM.ttf"
+copy "$(SolutionDir)\..\contrib\fonts\SarasaGothicFixed.ttf" "$(OutputPath)\SarasaGothicFixed.ttf"
+copy "$(SolutionDir)\..\dosbox-x.reference.conf" "$(OutputPath)\dosbox-x.reference.conf"
+copy "$(SolutionDir)\..\dosbox-x.reference.full.conf" "$(OutputPath)\dosbox-x.reference.full.conf"
+copy "$(SolutionDir)\..\CHANGELOG" "$(OutputPath)\CHANGELOG.txt"
+copy "$(SolutionDir)\..\contrib\windows\installer\readme.txt" "$(OutputPath)\README.txt"
+if not exist "$(OutputPath)\drivez\" mkdir "$(OutputPath)\drivez"
+copy "$(SolutionDir)\..\contrib\windows\installer\drivez_readme.txt" "$(OutputPath)\drivez\readme.txt"
+if not exist "$(OutputPath)\scripts\" mkdir "$(OutputPath)\scripts"
+copy "$(SolutionDir)\..\contrib\windows\installer\windows_explorer_context_menu*.bat" "$(OutputPath)\scripts\"
+if not exist "$(OutputPath)\shaders\" mkdir "$(OutputPath)\shaders"
+copy "$(SolutionDir)\..\contrib\windows\shaders\*.*" "$(OutputPath)\shaders\"
+if not exist "$(OutputPath)\glshaders\" mkdir "$(OutputPath)\glshaders"
+copy "$(SolutionDir)\..\contrib\glshaders\*.*" "$(OutputPath)\glshaders\"
+if not exist "$(OutputPath)\languages\" mkdir "$(OutputPath)\languages"
+for /d %%i in ("$(SolutionDir)\..\contrib\translations\*") do copy "%%i\*.lng" "$(OutputPath)\languages\"</Command>
+      <Message>
+      </Message>
+    </PostBuildEvent>
+    <CustomBuildStep />
+    <CustomBuildStep>
+      <Message>
+      </Message>
+    </CustomBuildStep>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
+    <Midl />
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>$(SolutionDir)pcap;$(SolutionDir);$(SolutionDir)..;$(SolutionDir)..\include;$(SolutionDir)..\src;$(SolutionDir)..\src\aviwriter;$(SolutionDir)..\src\libs\mt32;$(SolutionDir)..\src\hardware\snd_pc98\cbus;$(SolutionDir)..\src\hardware\snd_pc98\common;$(SolutionDir)..\src\hardware\snd_pc98\generic;$(SolutionDir)..\src\hardware\snd_pc98\sound;$(SolutionDir)..\src\hardware\snd_pc98\x11;$(SolutionDir)..\src\hardware\snd_pc98\sound\getsnd;$(SolutionDir)libpdcurses;$(SolutionDir)zlib;$(SolutionDir)libpng;$(SolutionDir)freetype\include;$(SolutionDir)sdl\include;$(SolutionDir)sdlnet;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;__WIN32__;_CRT_SECURE_NO_WARNINGS;_FILE_OFFSET_BITS=64;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <OmitFramePointers>true</OmitFramePointers>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp14</LanguageStandard>
+      <LanguageStandard_C>Default</LanguageStandard_C>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>winmm.lib;imm32.lib;dsound.lib;dxguid.lib;SetupAPI.lib;version.lib;Iphlpapi.lib;Ws2_32.lib;comdlg32.lib;shell32.lib;gdi32.lib;ole32.lib;oleaut32.lib;Advapi32.lib;$(SolutionDir)..\obj\libpdcurses\$(Platform)\$(Configuration)\libpdcurses.lib;$(SolutionDir)..\obj\zlib\$(Platform)\$(Configuration)\zlib.lib;$(SolutionDir)..\obj\libpng\$(Platform)\$(Configuration)\libpng.lib;$(SolutionDir)..\obj\freetype\$(Platform)\$(Configuration)\freetype.lib;$(SolutionDir)..\obj\SDL\$(Platform)\$(Configuration)\SDL.lib;$(SolutionDir)..\obj\SDLmain\$(Platform)\$(Configuration)\SDLmain.lib;$(SolutionDir)..\obj\SDL_net\$(Platform)\$(Configuration)\SDL_net.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy "$(SolutionDir)\..\contrib\fonts\FREECG98.BMP" "$(OutputPath)\FREECG98.BMP"
+copy "$(SolutionDir)\..\contrib\fonts\wqy_1?pt.bdf" "$(OutputPath)\wqy_1?pt.bdf"
+copy "$(SolutionDir)\..\contrib\fonts\Nouveau_IBM.ttf" "$(OutputPath)\Nouveau_IBM.ttf"
+copy "$(SolutionDir)\..\contrib\fonts\SarasaGothicFixed.ttf" "$(OutputPath)\SarasaGothicFixed.ttf"
+copy "$(SolutionDir)\..\dosbox-x.reference.conf" "$(OutputPath)\dosbox-x.reference.conf"
+copy "$(SolutionDir)\..\dosbox-x.reference.full.conf" "$(OutputPath)\dosbox-x.reference.full.conf"
+copy "$(SolutionDir)\..\CHANGELOG" "$(OutputPath)\CHANGELOG.txt"
+copy "$(SolutionDir)\..\contrib\windows\installer\readme.txt" "$(OutputPath)\README.txt"
+if not exist "$(OutputPath)\drivez\" mkdir "$(OutputPath)\drivez"
+copy "$(SolutionDir)\..\contrib\windows\installer\drivez_readme.txt" "$(OutputPath)\drivez\readme.txt"
+if not exist "$(OutputPath)\scripts\" mkdir "$(OutputPath)\scripts"
+copy "$(SolutionDir)\..\contrib\windows\installer\windows_explorer_context_menu*.bat" "$(OutputPath)\scripts\"
+if not exist "$(OutputPath)\shaders\" mkdir "$(OutputPath)\shaders"
+copy "$(SolutionDir)\..\contrib\windows\shaders\*.*" "$(OutputPath)\shaders\"
+if not exist "$(OutputPath)\glshaders\" mkdir "$(OutputPath)\glshaders"
+copy "$(SolutionDir)\..\contrib\glshaders\*.*" "$(OutputPath)\glshaders\"
+if not exist "$(OutputPath)\languages\" mkdir "$(OutputPath)\languages"
+for /d %%i in ("$(SolutionDir)\..\contrib\translations\*") do copy "%%i\*.lng" "$(OutputPath)\languages\"</Command>
+      <Message>
+      </Message>
+    </PostBuildEvent>
+    <CustomBuildStep />
+    <CustomBuildStep>
+      <Message>
+      </Message>
+    </CustomBuildStep>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release SDL2|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>$(SolutionDir)pcap;$(SolutionDir);$(SolutionDir)..;$(SolutionDir)..\include;$(SolutionDir)..\src;$(SolutionDir)..\src\aviwriter;$(SolutionDir)..\src\hardware\snd_pc98\cbus;$(SolutionDir)..\src\hardware\snd_pc98\common;$(SolutionDir)..\src\hardware\snd_pc98\generic;$(SolutionDir)..\src\hardware\snd_pc98\sound;$(SolutionDir)..\src\hardware\snd_pc98\x11;$(SolutionDir)..\src\hardware\snd_pc98\sound\getsnd;$(SolutionDir)..\src\libs\mt32;$(SolutionDir)libpdcurses;$(SolutionDir)zlib;$(SolutionDir)libpng;$(SolutionDir)freetype\include;$(SolutionDir)sdl2\include;$(SolutionDir)sdlnet;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;__WIN32__;_CRT_SECURE_NO_WARNINGS;_FILE_OFFSET_BITS=64;C_SDL2=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <OmitFramePointers>true</OmitFramePointers>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp14</LanguageStandard>
+      <LanguageStandard_C>Default</LanguageStandard_C>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>winmm.lib;imm32.lib;dsound.lib;dxguid.lib;SetupAPI.lib;version.lib;Iphlpapi.lib;Ws2_32.lib;opengl32.lib;$(SolutionDir)..\obj\libpdcurses\$(Platform)\$(Configuration)\libpdcurses.lib;$(SolutionDir)..\obj\zlib\$(Platform)\$(Configuration)\zlib.lib;$(SolutionDir)..\obj\libpng\$(Platform)\$(Configuration)\libpng.lib;$(SolutionDir)..\obj\freetype\$(Platform)\$(Configuration)\freetype.lib;$(SolutionDir)..\obj\SDL2\$(Platform)\$(Configuration)\sdl2.lib;$(SolutionDir)..\obj\SDL2main\$(Platform)\$(Configuration)\sdl2main.lib;$(SolutionDir)..\obj\SDL_net\$(Platform)\$(Configuration)\SDL_net.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Windows</SubSystem>
     </Link>
     <PostBuildEvent>
@@ -268,6 +832,100 @@ copy "$(SolutionDir)\..\contrib\fonts\SarasaGothicFixed.ttf" "$(OutputPath)\Sara
 copy "$(SolutionDir)\..\dosbox-x.reference.conf" "$(OutputPath)\dosbox-x.reference.conf"
 copy "$(SolutionDir)\..\dosbox-x.reference.full.conf" "$(OutputPath)\dosbox-x.reference.full.conf"
 copy "$(SolutionDir)\..\contrib\windows\installer\inpoutx64.dll" "$(OutputPath)\inpoutx64.dll"
+copy "$(SolutionDir)\..\CHANGELOG" "$(OutputPath)\CHANGELOG.txt"
+copy "$(SolutionDir)\..\contrib\windows\installer\readme.txt" "$(OutputPath)\README.txt"
+if not exist "$(OutputPath)\drivez\" mkdir "$(OutputPath)\drivez"
+copy "$(SolutionDir)\..\contrib\windows\installer\drivez_readme.txt" "$(OutputPath)\drivez\readme.txt"
+if not exist "$(OutputPath)\scripts\" mkdir "$(OutputPath)\scripts"
+copy "$(SolutionDir)\..\contrib\windows\installer\windows_explorer_context_menu*.bat" "$(OutputPath)\scripts\"
+if not exist "$(OutputPath)\shaders\" mkdir "$(OutputPath)\shaders"
+copy "$(SolutionDir)\..\contrib\windows\shaders\*.*" "$(OutputPath)\shaders\"
+if not exist "$(OutputPath)\glshaders\" mkdir "$(OutputPath)\glshaders"
+copy "$(SolutionDir)\..\contrib\glshaders\*.*" "$(OutputPath)\glshaders\"
+if not exist "$(OutputPath)\languages\" mkdir "$(OutputPath)\languages"
+for /d %%i in ("$(SolutionDir)\..\contrib\translations\*") do copy "%%i\*.lng" "$(OutputPath)\languages\"</Command>
+      <Message>
+      </Message>
+    </PostBuildEvent>
+    <CustomBuildStep />
+    <CustomBuildStep>
+      <Message>
+      </Message>
+    </CustomBuildStep>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release SDL2|ARM64'">
+    <Midl />
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>$(SolutionDir)pcap;$(SolutionDir);$(SolutionDir)..;$(SolutionDir)..\include;$(SolutionDir)..\src;$(SolutionDir)..\src\aviwriter;$(SolutionDir)..\src\hardware\snd_pc98\cbus;$(SolutionDir)..\src\hardware\snd_pc98\common;$(SolutionDir)..\src\hardware\snd_pc98\generic;$(SolutionDir)..\src\hardware\snd_pc98\sound;$(SolutionDir)..\src\hardware\snd_pc98\x11;$(SolutionDir)..\src\hardware\snd_pc98\sound\getsnd;$(SolutionDir)..\src\libs\mt32;$(SolutionDir)libpdcurses;$(SolutionDir)zlib;$(SolutionDir)libpng;$(SolutionDir)freetype\include;$(SolutionDir)sdl2\include;$(SolutionDir)sdlnet;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;__WIN32__;_CRT_SECURE_NO_WARNINGS;_FILE_OFFSET_BITS=64;C_SDL2=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <OmitFramePointers>true</OmitFramePointers>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp14</LanguageStandard>
+      <LanguageStandard_C>Default</LanguageStandard_C>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>winmm.lib;imm32.lib;dsound.lib;dxguid.lib;SetupAPI.lib;version.lib;Iphlpapi.lib;Ws2_32.lib;comdlg32.lib;shell32.lib;gdi32.lib;ole32.lib;oleaut32.lib;Advapi32.lib;$(SolutionDir)..\obj\libpdcurses\$(Platform)\$(Configuration)\libpdcurses.lib;$(SolutionDir)..\obj\zlib\$(Platform)\$(Configuration)\zlib.lib;$(SolutionDir)..\obj\libpng\$(Platform)\$(Configuration)\libpng.lib;$(SolutionDir)..\obj\freetype\$(Platform)\$(Configuration)\freetype.lib;$(SolutionDir)..\obj\SDL2\$(Platform)\$(Configuration)\sdl2.lib;$(SolutionDir)..\obj\SDL2main\$(Platform)\$(Configuration)\sdl2main.lib;$(SolutionDir)..\obj\SDL_net\$(Platform)\$(Configuration)\SDL_net.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy "$(SolutionDir)\..\contrib\fonts\FREECG98.BMP" "$(OutputPath)\FREECG98.BMP"
+copy "$(SolutionDir)\..\contrib\fonts\wqy_1?pt.bdf" "$(OutputPath)\wqy_1?pt.bdf"
+copy "$(SolutionDir)\..\contrib\fonts\Nouveau_IBM.ttf" "$(OutputPath)\Nouveau_IBM.ttf"
+copy "$(SolutionDir)\..\contrib\fonts\SarasaGothicFixed.ttf" "$(OutputPath)\SarasaGothicFixed.ttf"
+copy "$(SolutionDir)\..\dosbox-x.reference.conf" "$(OutputPath)\dosbox-x.reference.conf"
+copy "$(SolutionDir)\..\dosbox-x.reference.full.conf" "$(OutputPath)\dosbox-x.reference.full.conf"
+copy "$(SolutionDir)\..\CHANGELOG" "$(OutputPath)\CHANGELOG.txt"
+copy "$(SolutionDir)\..\contrib\windows\installer\readme.txt" "$(OutputPath)\README.txt"
+if not exist "$(OutputPath)\drivez\" mkdir "$(OutputPath)\drivez"
+copy "$(SolutionDir)\..\contrib\windows\installer\drivez_readme.txt" "$(OutputPath)\drivez\readme.txt"
+if not exist "$(OutputPath)\scripts\" mkdir "$(OutputPath)\scripts"
+copy "$(SolutionDir)\..\contrib\windows\installer\windows_explorer_context_menu*.bat" "$(OutputPath)\scripts\"
+if not exist "$(OutputPath)\shaders\" mkdir "$(OutputPath)\shaders"
+copy "$(SolutionDir)\..\contrib\windows\shaders\*.*" "$(OutputPath)\shaders\"
+if not exist "$(OutputPath)\glshaders\" mkdir "$(OutputPath)\glshaders"
+copy "$(SolutionDir)\..\contrib\glshaders\*.*" "$(OutputPath)\glshaders\"
+if not exist "$(OutputPath)\languages\" mkdir "$(OutputPath)\languages"
+for /d %%i in ("$(SolutionDir)\..\contrib\translations\*") do copy "%%i\*.lng" "$(OutputPath)\languages\"</Command>
+      <Message>
+      </Message>
+    </PostBuildEvent>
+    <CustomBuildStep />
+    <CustomBuildStep>
+      <Message>
+      </Message>
+    </CustomBuildStep>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release SDL2|ARM'">
+    <Midl />
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>$(SolutionDir)pcap;$(SolutionDir);$(SolutionDir)..;$(SolutionDir)..\include;$(SolutionDir)..\src;$(SolutionDir)..\src\aviwriter;$(SolutionDir)..\src\hardware\snd_pc98\cbus;$(SolutionDir)..\src\hardware\snd_pc98\common;$(SolutionDir)..\src\hardware\snd_pc98\generic;$(SolutionDir)..\src\hardware\snd_pc98\sound;$(SolutionDir)..\src\hardware\snd_pc98\x11;$(SolutionDir)..\src\hardware\snd_pc98\sound\getsnd;$(SolutionDir)..\src\libs\mt32;$(SolutionDir)libpdcurses;$(SolutionDir)zlib;$(SolutionDir)libpng;$(SolutionDir)freetype\include;$(SolutionDir)sdl2\include;$(SolutionDir)sdlnet;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;__WIN32__;_CRT_SECURE_NO_WARNINGS;_FILE_OFFSET_BITS=64;C_SDL2=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <OmitFramePointers>true</OmitFramePointers>
+      <SDLCheck>false</SDLCheck>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp14</LanguageStandard>
+      <LanguageStandard_C>Default</LanguageStandard_C>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>winmm.lib;imm32.lib;dsound.lib;dxguid.lib;SetupAPI.lib;version.lib;Iphlpapi.lib;Ws2_32.lib;comdlg32.lib;shell32.lib;gdi32.lib;ole32.lib;oleaut32.lib;Advapi32.lib;$(SolutionDir)..\obj\libpdcurses\$(Platform)\$(Configuration)\libpdcurses.lib;$(SolutionDir)..\obj\zlib\$(Platform)\$(Configuration)\zlib.lib;$(SolutionDir)..\obj\libpng\$(Platform)\$(Configuration)\libpng.lib;$(SolutionDir)..\obj\freetype\$(Platform)\$(Configuration)\freetype.lib;$(SolutionDir)..\obj\SDL2\$(Platform)\$(Configuration)\sdl2.lib;$(SolutionDir)..\obj\SDL2main\$(Platform)\$(Configuration)\sdl2main.lib;$(SolutionDir)..\obj\SDL_net\$(Platform)\$(Configuration)\SDL_net.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy "$(SolutionDir)\..\contrib\fonts\FREECG98.BMP" "$(OutputPath)\FREECG98.BMP"
+copy "$(SolutionDir)\..\contrib\fonts\wqy_1?pt.bdf" "$(OutputPath)\wqy_1?pt.bdf"
+copy "$(SolutionDir)\..\contrib\fonts\Nouveau_IBM.ttf" "$(OutputPath)\Nouveau_IBM.ttf"
+copy "$(SolutionDir)\..\contrib\fonts\SarasaGothicFixed.ttf" "$(OutputPath)\SarasaGothicFixed.ttf"
+copy "$(SolutionDir)\..\dosbox-x.reference.conf" "$(OutputPath)\dosbox-x.reference.conf"
+copy "$(SolutionDir)\..\dosbox-x.reference.full.conf" "$(OutputPath)\dosbox-x.reference.full.conf"
 copy "$(SolutionDir)\..\CHANGELOG" "$(OutputPath)\CHANGELOG.txt"
 copy "$(SolutionDir)\..\contrib\windows\installer\readme.txt" "$(OutputPath)\README.txt"
 if not exist "$(OutputPath)\drivez\" mkdir "$(OutputPath)\drivez"
@@ -811,6 +1469,12 @@ for /d %%i in ("$(SolutionDir)\..\contrib\translations\*") do copy "%%i\*.lng" "
     <ClCompile Include="..\src\libs\fluidsynth\fluid_ringbuffer.c" />
     <ClCompile Include="..\src\libs\fluidsynth\fluid_settings.c" />
     <ClCompile Include="..\src\libs\fluidsynth\fluid_sys.c" />
+    <ClCompile Include="pch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\src\winres.rc" />
@@ -1144,9 +1808,33 @@ for /d %%i in ("$(SolutionDir)\..\contrib\translations\*") do copy "%%i\*.lng" "
     <ClInclude Include="..\src\libs\xBRZ\xbrz_config.h" />
     <ClInclude Include="..\src\libs\xBRZ\xbrz_tools.h" />
     <ClInclude Include="config.h" />
+    <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="String.natvis" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="freetype\builds\windows\vc2010\freetype.vcxproj">
+      <Project>{78b079bd-9fc7-4b9e-b4a6-96da0f00248b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpdcurses\libpdcurses.vcxproj">
+      <Project>{671232ec-c55c-4636-a75f-7e4b4c54c314}</Project>
+    </ProjectReference>
+    <ProjectReference Include="libpng\projects\vstudio\libpng\libpng.vcxproj">
+      <Project>{d6973076-9317-4ef2-a0b8-b7a18ac0713e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="sdlnet\VisualC\SDL_net_VS2008.vcxproj">
+      <Project>{8ab3504f-5e58-4910-afe8-7a1e595ac3f4}</Project>
+    </ProjectReference>
+    <ProjectReference Include="sdl\VisualC\SDLmain\SDLmain.vcxproj">
+      <Project>{da956fd3-e142-46f2-9dd5-c78bebb56b7a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="sdl\VisualC\SDL\SDL.vcxproj">
+      <Project>{81ce8daf-ebb2-4761-8e45-b71abcca8c68}</Project>
+    </ProjectReference>
+    <ProjectReference Include="zlib\zlib\zlib.vcxproj">
+      <Project>{acee8153-c2af-4e9e-8881-8fea759a34d9}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
