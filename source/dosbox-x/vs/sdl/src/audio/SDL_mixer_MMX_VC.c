@@ -19,7 +19,6 @@
     Sam Lantinga
     slouken@libsdl.org
 */
-#include "pch.h"
 #include "SDL_config.h"
 
 #include "SDL_mixer_MMX_VC.h"

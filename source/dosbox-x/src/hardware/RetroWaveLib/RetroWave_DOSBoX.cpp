@@ -2,7 +2,6 @@
 // Created by root on 4/16/21.
 //
 
-#include "pch.h"
 #include "RetroWave_DOSBoX.hpp"
 
 RetroWaveContext retrowave_global_context;

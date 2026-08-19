@@ -19,7 +19,6 @@
     Sam Lantinga
     slouken@libsdl.org
 */
-#include "pch.h"
 #include "SDL_config.h"
 
 /* This is the software implementation of the YUV video overlay support */

@@ -5,7 +5,6 @@
 // Dependencies
 //------------------------------------------------------------------------------
 
-#include "pch.h"
 #include "config.h"
 
 #if C_GAMELINK
@@ -14,7 +13,6 @@
 // #define DEBUG_SNOOP
 
 // Local Dependencies
-#include "pch.h"
 #include "dosbox.h"
 #include "gamelink.h"
 #include "logging.h"

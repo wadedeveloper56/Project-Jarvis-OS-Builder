@@ -16,7 +16,6 @@
  */
 
 
-#include "pch.h"
 #define FT_MAKE_OPTION_SINGLE_OBJECT
 
 #include "t42drivr.c"

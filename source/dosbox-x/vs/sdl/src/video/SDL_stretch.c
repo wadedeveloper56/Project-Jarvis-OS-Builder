@@ -19,7 +19,6 @@
     Sam Lantinga
     slouken@libsdl.org
 */
-#include "pch.h"
 #include "SDL_config.h"
 
 /* This a stretch blit implementation based on ideas given to me by

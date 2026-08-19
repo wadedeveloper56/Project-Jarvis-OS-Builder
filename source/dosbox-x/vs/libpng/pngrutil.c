@@ -13,7 +13,6 @@
  * libpng itself during the course of reading an image.
  */
 
-#include "pch.h"
 #include "pngpriv.h"
 
 #ifdef PNG_READ_SUPPORTED

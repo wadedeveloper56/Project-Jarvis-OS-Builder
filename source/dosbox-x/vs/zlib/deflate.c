@@ -48,7 +48,7 @@
  */
 
 /* @(#) $Id$ */
-#include "pch.h"
+
 #include "deflate.h"
 
 const char deflate_copyright[] =

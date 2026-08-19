@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{7a83a3da-7138-41bf-8126-7c5a6e9cbfe8}</ProjectGuid>
+    <ProjectGuid>{882bbdc0-aa97-4099-91fd-b8eecb81cbd9}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <WindowsTargetPlatformVersion>10.0.28000.0</WindowsTargetPlatformVersion>
     <ConfigurationType>Application</ConfigurationType>
@@ -33,22 +33,22 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>..\..\..\bin\unit-test\$(Configuration)\$(Platform)\</OutDir>
+    <OutDir>..\..\..\bin\unit-tests\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\bin\intermediate\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
     <IncludePath>..\File;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>..\..\..\bin\unit-test\$(Configuration)\$(Platform)\</OutDir>
+    <OutDir>..\..\..\bin\unit-tests\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\bin\intermediate\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
     <IncludePath>..\File;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>..\..\..\bin\unit-test\$(Configuration)\$(Platform)\</OutDir>
+    <OutDir>..\..\..\bin\unit-tests\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\bin\intermediate\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
     <IncludePath>..\File;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>..\..\..\bin\unit-test\$(Configuration)\$(Platform)\</OutDir>
+    <OutDir>..\..\..\bin\unit-tests\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\bin\intermediate\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
     <IncludePath>..\File;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>

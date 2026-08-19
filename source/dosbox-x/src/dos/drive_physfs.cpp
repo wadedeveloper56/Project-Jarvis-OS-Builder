@@ -19,7 +19,6 @@
  *  With major works from joncampbell123 and Wengier
  */
 
-#include "pch.h"
 #include "dosbox.h"
 #include "dos_inc.h"
 #include "drives.h"

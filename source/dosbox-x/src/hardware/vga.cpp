@@ -116,7 +116,6 @@
  *   chained 256-color modes differently.
  */
 
-#include "pch.h"
 #define VGA_INTERNAL
 
 #include <assert.h>

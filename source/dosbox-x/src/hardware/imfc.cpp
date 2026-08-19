@@ -49,7 +49,6 @@
 //    there is a way to upload Z80 programs to the IMF card and execute it! Who
 //    knew that IBM added this back-door :)
 
-#include "pch.h"
 #include <assert.h>
 #include <atomic>
 #include <string.h>

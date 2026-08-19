@@ -14,7 +14,6 @@
 // * do so, delete this exception statement from your version.                *
 // ****************************************************************************
 
-#include "pch.h"
 #include "xbrz.h"
 #include <cassert>
 #include <vector>

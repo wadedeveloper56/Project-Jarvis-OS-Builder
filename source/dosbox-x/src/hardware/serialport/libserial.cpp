@@ -17,7 +17,6 @@
  */
 
 
-#include "pch.h"
 #include "libserial.h"
 
 #include "config.h"

@@ -91,7 +91,6 @@
  */
 
 // Synced from Nuked-OPL3-fast https://github.com/tgies/Nuked-OPL3-fast @ 5d30ee9
-#include "pch.h"
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>

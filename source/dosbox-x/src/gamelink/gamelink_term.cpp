@@ -5,7 +5,6 @@
 // Dependencies
 //------------------------------------------------------------------------------
 
-#include "pch.h"
 #include "config.h"
 
 #if C_GAMELINK

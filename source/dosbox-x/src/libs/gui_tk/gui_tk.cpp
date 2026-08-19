@@ -29,7 +29,6 @@
  *  gui_tk. It is enabled by defining the preprocessor macro TESTING.
  */
 
-#include "pch.h"
 #include "config.h"
 #include "dosbox.h"
 #include "setup.h"

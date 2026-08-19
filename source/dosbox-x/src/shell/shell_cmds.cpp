@@ -20,7 +20,8 @@
  *  ATTRIB, CHCP, COUNTRY, DELTREE, FOR/LFNFOR, POPD/PUSHD, TREE, TRUENAME, VERIFY commands by Wengier
  *  LS command by the DOSBox Staging Team and Wengier
  */
-#include "pch.h"
+
+
 #include "dosbox.h"
 #include "logging.h"
 #include "shell.h"

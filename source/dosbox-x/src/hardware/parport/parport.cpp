@@ -17,7 +17,6 @@
  */
 /* FIXME: At some point I would like to roll the Disney Sound Source emulation into this code */
 
-#include "pch.h"
 #include <string.h>
 #include <ctype.h>
 

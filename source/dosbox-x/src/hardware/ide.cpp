@@ -19,7 +19,6 @@
 
 /* $Id: ide.cpp,v 1.49 2009-04-10 09:53:04 c2woody Exp $ */
 
-#include "pch.h"
 #include <math.h>
 #include <assert.h>
 #include "dosbox.h"
@@ -3811,7 +3810,7 @@ static void IDE_DelayedCommand(Bitu pk/*which IDE device*/) {
                         ((unsigned int)ata->lba[0] - 1u);
                 }
 
-                if (disk->Write_AbsoluteSector(sectorn, ata->sector) != 0) {
+                if (disk->Write_AbsoluteSector(sectorn, ata->sector) != Int13Status::NoError) {
                     LOG_MSG("Failed to write sector\n");
                     ata->abort_error();
                     dev->raise_irq();
@@ -3893,7 +3892,7 @@ static void IDE_DelayedCommand(Bitu pk/*which IDE device*/) {
                         ((unsigned int)ata->lba[0] - 1u);
                 }
 
-                if (disk->Read_AbsoluteSector(sectorn, ata->sector) != 0) {
+                if (disk->Read_AbsoluteSector(sectorn, ata->sector) != Int13Status::NoError) {
                     LOG_MSG("ATA read failed\n");
                     ata->abort_error();
                     dev->raise_irq();
@@ -3957,7 +3956,7 @@ static void IDE_DelayedCommand(Bitu pk/*which IDE device*/) {
                         ((unsigned int)ata->lba[0] - 1u);
                 }
 
-                if (disk->Read_AbsoluteSector(sectorn, ata->sector) != 0) {
+                if (disk->Read_AbsoluteSector(sectorn, ata->sector) != Int13Status::NoError) {
                     LOG_MSG("ATA read failed\n");
                     ata->abort_error();
                     dev->raise_irq();
@@ -4039,7 +4038,7 @@ static void IDE_DelayedCommand(Bitu pk/*which IDE device*/) {
 
                 for (unsigned int cc=0;cc < MIN((Bitu)ata->multiple_sector_count,(Bitu)sectcount);cc++) {
                     /* it would be great if the disk object had a "read multiple sectors" member function */
-                    if (disk->Read_AbsoluteSector(sectorn+cc, ata->sector+(cc*512)) != 0) {
+                    if (disk->Read_AbsoluteSector(sectorn+cc, ata->sector+(cc*512)) != Int13Status::NoError) {
                         LOG_MSG("ATA read failed\n");
                         ata->abort_error();
                         dev->raise_irq();
@@ -4105,7 +4104,7 @@ static void IDE_DelayedCommand(Bitu pk/*which IDE device*/) {
 
                 for (unsigned int cc=0;cc < MIN((Bitu)ata->multiple_sector_count,(Bitu)sectcount);cc++) {
                     /* it would be great if the disk object had a "write multiple sectors" member function */
-                    if (disk->Write_AbsoluteSector(sectorn+cc, ata->sector+(cc*512)) != 0) {
+                    if (disk->Write_AbsoluteSector(sectorn+cc, ata->sector+(cc*512)) != Int13Status::NoError) {
                         LOG_MSG("Failed to write sector\n");
                         ata->abort_error();
                         dev->raise_irq();

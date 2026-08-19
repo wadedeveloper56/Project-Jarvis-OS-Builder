@@ -64,7 +64,6 @@
 **
 */
 
-#include "pch.h"
 #include "emu.h"
 #include "ymdeltat.h"
 

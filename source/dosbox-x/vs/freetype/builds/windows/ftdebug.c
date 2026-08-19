@@ -41,7 +41,6 @@
    */
 
 
-#include "pch.h"
 #include <freetype/freetype.h>
 #include <freetype/ftlogging.h>
 #include <freetype/internal/ftdebug.h>

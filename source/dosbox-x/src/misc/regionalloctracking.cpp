@@ -1,4 +1,4 @@
-#include "pch.h"
+
 #include <assert.h>
 #include "dosbox.h"
 #include "logging.h"

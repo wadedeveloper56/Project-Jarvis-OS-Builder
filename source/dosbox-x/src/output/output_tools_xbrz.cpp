@@ -1,4 +1,3 @@
-#include "pch.h"
 #include <stdlib.h>
 #include <assert.h>
 #include <math.h>

@@ -19,7 +19,6 @@
     Sam Lantinga
     slouken@libsdl.org
 */
-#include "pch.h"
 #include "SDL_config.h"
 
 /* Being a null driver, there's no event stream. We just define stubs for

@@ -1,5 +1,4 @@
 
-#include "pch.h"
 #include "SDL_config.h"
 
 /* THIS is why this function exists HERE, not in dibvideo.c.

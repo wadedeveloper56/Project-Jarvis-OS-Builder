@@ -1,4 +1,3 @@
-#include "pch.h"
 #include "config.h"
 
 #if C_DIRECT3D

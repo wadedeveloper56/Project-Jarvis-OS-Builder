@@ -17,7 +17,6 @@
 //  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 //  ---------------------------------------------------------------------------
 
-#include "pch.h"
 #define __EXTFILT_CC__
 #include "extfilt.h"
 

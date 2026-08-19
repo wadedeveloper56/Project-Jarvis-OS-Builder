@@ -16,7 +16,6 @@
  */
 
 
-#include "pch.h"
 #include <freetype/ftcid.h>
 #include <freetype/internal/ftobjs.h>
 #include <freetype/internal/services/svcid.h>

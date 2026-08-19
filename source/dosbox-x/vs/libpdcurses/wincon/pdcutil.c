@@ -1,6 +1,5 @@
 /* Public Domain Curses */
 
-#include "pch.h"
 #include "pdcwin.h"
 
 void PDC_beep(void)

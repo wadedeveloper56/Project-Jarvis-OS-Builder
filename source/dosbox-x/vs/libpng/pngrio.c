@@ -17,7 +17,6 @@
  * libpng use it at run time with png_set_read_fn(...).
  */
 
-#include "pch.h"
 #include "pngpriv.h"
 
 #ifdef PNG_READ_SUPPORTED

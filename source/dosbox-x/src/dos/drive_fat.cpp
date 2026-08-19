@@ -41,7 +41,6 @@
  *
  * Hopefully this can be done without breaking things --J.C.
  */
-#include "pch.h"
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -1193,8 +1192,8 @@ uint8_t fatDrive::readSector(uint32_t sectnum, void * data) {
 	uint32_t head = sectnum / loadedDisk->sectors;
 	uint32_t sector = sectnum % loadedDisk->sectors + 1L;
 #endif
-	return loadedDisk->Read_Sector(head, cylinder, sector, data);
-}	
+	return (uint8_t)loadedDisk->Read_Sector(head, cylinder, sector, data);
+}
 
 uint8_t fatDrive::writeSector(uint32_t sectnum, void * data) {
 	if (absolute) return Write_AbsoluteSector(sectnum, data);
@@ -1212,7 +1211,7 @@ uint8_t fatDrive::writeSector(uint32_t sectnum, void * data) {
 	uint32_t head = sectnum / loadedDisk->sectors;
 	uint32_t sector = sectnum % loadedDisk->sectors + 1L;
 #endif
-	return loadedDisk->Write_Sector(head, cylinder, sector, data);
+	return (uint8_t)loadedDisk->Write_Sector(head, cylinder, sector, data);
 }
 
 uint32_t fatDrive::getSectorCount(void) {
@@ -1626,7 +1625,7 @@ uint8_t fatDrive::Read_AbsoluteSector(uint32_t sectnum, void * data) {
             uint32_t ssect = (sectnum * c) + physToLogAdj;
 
             while (c-- != 0) {
-                if (loadedDisk->Read_AbsoluteSector(ssect++,data) != 0)
+                if (loadedDisk->Read_AbsoluteSector(ssect++,data) != Int13Status::NoError)
                     return 0x05;
 
                 data = (void*)((char*)data + lsz);
@@ -1649,7 +1648,7 @@ uint8_t fatDrive::Write_AbsoluteSector(uint32_t sectnum, void * data) {
             uint32_t ssect = (sectnum * c) + physToLogAdj;
 
             while (c-- != 0) {
-                if (loadedDisk->Write_AbsoluteSector(ssect++,data) != 0)
+                if (loadedDisk->Write_AbsoluteSector(ssect++,data) != Int13Status::NoError)
                     return 0x05;
 
                 data = (void*)((char*)data + lsz);
@@ -2490,6 +2489,7 @@ void fatDrive::fatDriveInit(const char *sysFilename, uint32_t bytesector, uint32
 	/* another fault of this code is that it assumes the sector size of the medium matches
 	 * the BPB_BytsPerSec value of the MS-DOS filesystem. if they don't match, problems
 	 * will result. */
+    /*
 	if (BPB.v.BPB_BytsPerSec != fatDrive::getSectSize()) {
 		LOG_MSG("FAT bytes/sector %u does not match disk image bytes/sector %u",
 			(unsigned int)BPB.v.BPB_BytsPerSec,
@@ -2497,7 +2497,7 @@ void fatDrive::fatDriveInit(const char *sysFilename, uint32_t bytesector, uint32
 		created_successfully = false;
 		return;
 	}
-
+    */
 	/* Filesystem must be contiguous to use absolute sectors, otherwise CHS will be used. */
 	/* MS-DOS block devices can only do absolute sectors, there is no support for C/H/S */
 	absolute = IS_PC98_ARCH || loadedDisk->class_id == imageDisk::ID_MSDOSBLOCKDEV || ((BPB.v.BPB_NumHeads == headscyl) && (BPB.v.BPB_SecPerTrk == cylsector));
@@ -2592,8 +2592,12 @@ void fatDrive::fatDriveInit(const char *sysFilename, uint32_t bytesector, uint32
 # define MIN(a,b) ((a) < (b) ? (a) : (b))
 # define MAX(a,b) ((a) > (b) ? (a) : (b))
 #else
-# define MIN(a,b) std::min(a,b)
-# define MAX(a,b) std::max(a,b)
+# ifndef MIN
+#  define MIN(a,b) std::min(a,b)
+# endif
+# ifndef MAX
+#  define MAX(a,b) std::max(a,b)
+# endif
 #endif
 
 bool fatDrive::AllocationInfo32(uint32_t * _bytes_sector,uint32_t * _sectors_cluster,uint32_t * _total_clusters,uint32_t * _free_clusters) {
