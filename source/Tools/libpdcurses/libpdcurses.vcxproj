@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>18.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{9cd5a8f4-8311-402b-9bfa-b862ff983f65}</ProjectGuid>
-    <RootNamespace>freetype</RootNamespace>
+    <ProjectGuid>{05029ac1-d4a5-48c5-bb95-58002fa01a59}</ProjectGuid>
+    <RootNamespace>libpdcurses</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -73,28 +73,28 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>..\..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\bin\intermediate\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>.\;.\include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>.\;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>..\..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\bin\intermediate\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>.\;.\include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>.\;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>..\..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\bin\intermediate\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>.\;.\include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>.\;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>..\..\..\bin\libraries\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>..\..\..\bin\intermediate\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>.\;.\include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>.\;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_LIB;WIN32;FT2_BUILD_LIBRARY;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
@@ -117,7 +117,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_LIB;WIN32;FT2_BUILD_LIBRARY;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
@@ -138,7 +138,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_LIB;WIN32;FT2_BUILD_LIBRARY;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
@@ -161,7 +161,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_LIB;WIN32;FT2_BUILD_LIBRARY;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
@@ -181,70 +181,69 @@
   <ItemGroup>
     <ClInclude Include="framework.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="src\sdf\ftsdf.h" />
-    <ClInclude Include="src\sdf\ftsdfcommon.h" />
-    <ClInclude Include="src\sdf\ftsdferrs.h" />
-    <ClInclude Include="src\sdf\ftsdfrend.h" />
-    <ClInclude Include="src\svg\ftsvg.h" />
-    <ClInclude Include="src\svg\svgtypes.h" />
+    <ClInclude Include="curses.h">
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</DeploymentContent>
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release SDL2|Win32'">false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="wincon\pdcwin.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="freetype.c" />
+    <ClCompile Include="libpdcurses.c" />
     <ClCompile Include="pch.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="src\autofit\autofit.c" />
-    <ClCompile Include="src\base\ftbase.c" />
-    <ClCompile Include="src\base\ftbbox.c" />
-    <ClCompile Include="src\base\ftbdf.c" />
-    <ClCompile Include="src\base\ftbitmap.c" />
-    <ClCompile Include="src\base\ftcid.c" />
-    <ClCompile Include="src\base\ftfstype.c" />
-    <ClCompile Include="src\base\ftgasp.c" />
-    <ClCompile Include="src\base\ftglyph.c" />
-    <ClCompile Include="src\base\ftgxval.c" />
-    <ClCompile Include="src\base\ftinit.c" />
-    <ClCompile Include="src\base\ftmm.c" />
-    <ClCompile Include="src\base\ftotval.c" />
-    <ClCompile Include="src\base\ftpatent.c" />
-    <ClCompile Include="src\base\ftpfr.c" />
-    <ClCompile Include="src\base\ftstroke.c" />
-    <ClCompile Include="src\base\ftsynth.c" />
-    <ClCompile Include="src\base\ftsystem.c" />
-    <ClCompile Include="src\base\fttype1.c" />
-    <ClCompile Include="src\base\ftwinfnt.c" />
-    <ClCompile Include="src\bdf\bdf.c" />
-    <ClCompile Include="src\cache\ftcache.c" />
-    <ClCompile Include="src\cff\cff.c" />
-    <ClCompile Include="src\cid\type1cid.c" />
-    <ClCompile Include="src\gzip\ftgzip.c" />
-    <ClCompile Include="src\lzw\ftlzw.c" />
-    <ClCompile Include="src\pcf\pcf.c" />
-    <ClCompile Include="src\pfr\pfr.c" />
-    <ClCompile Include="src\psaux\psaux.c" />
-    <ClCompile Include="src\pshinter\pshinter.c" />
-    <ClCompile Include="src\psnames\psmodule.c" />
-    <ClCompile Include="src\raster\raster.c" />
-    <ClCompile Include="src\sdf\ftbsdf.c" />
-    <ClCompile Include="src\sdf\ftsdf.c" />
-    <ClCompile Include="src\sdf\ftsdfcommon.c" />
-    <ClCompile Include="src\sdf\ftsdfrend.c" />
-    <ClCompile Include="src\sdf\sdf.c" />
-    <ClCompile Include="src\sfnt\sfnt.c" />
-    <ClCompile Include="src\smooth\smooth.c" />
-    <ClCompile Include="src\svg\ftsvg.c" />
-    <ClCompile Include="src\svg\svg.c" />
-    <ClCompile Include="src\truetype\truetype.c" />
-    <ClCompile Include="src\type1\type1.c" />
-    <ClCompile Include="src\type42\type42.c" />
-    <ClCompile Include="src\winfonts\winfnt.c" />
-    <ClCompile Include="builds\windows\ftdebug.c">
-      <DisableLanguageExtensions>false</DisableLanguageExtensions>
-    </ClCompile>
-    <ResourceCompile Include="src\base\ftver.rc" />
+    <ClCompile Include="pdcurses\addch.c" />
+    <ClCompile Include="pdcurses\addchstr.c" />
+    <ClCompile Include="pdcurses\addstr.c" />
+    <ClCompile Include="pdcurses\attr.c" />
+    <ClCompile Include="pdcurses\beep.c" />
+    <ClCompile Include="pdcurses\bkgd.c" />
+    <ClCompile Include="pdcurses\border.c" />
+    <ClCompile Include="pdcurses\clear.c" />
+    <ClCompile Include="pdcurses\color.c" />
+    <ClCompile Include="pdcurses\debug.c" />
+    <ClCompile Include="pdcurses\delch.c" />
+    <ClCompile Include="pdcurses\deleteln.c" />
+    <ClCompile Include="pdcurses\deprec.c" />
+    <ClCompile Include="pdcurses\getch.c" />
+    <ClCompile Include="pdcurses\getstr.c" />
+    <ClCompile Include="pdcurses\getyx.c" />
+    <ClCompile Include="pdcurses\inch.c" />
+    <ClCompile Include="pdcurses\inchstr.c" />
+    <ClCompile Include="pdcurses\initscr.c" />
+    <ClCompile Include="pdcurses\inopts.c" />
+    <ClCompile Include="pdcurses\insch.c" />
+    <ClCompile Include="pdcurses\insstr.c" />
+    <ClCompile Include="pdcurses\instr.c" />
+    <ClCompile Include="pdcurses\kernel.c" />
+    <ClCompile Include="pdcurses\keyname.c" />
+    <ClCompile Include="pdcurses\mouse.c" />
+    <ClCompile Include="pdcurses\move.c" />
+    <ClCompile Include="pdcurses\outopts.c" />
+    <ClCompile Include="pdcurses\overlay.c" />
+    <ClCompile Include="pdcurses\pad.c" />
+    <ClCompile Include="pdcurses\panel.c" />
+    <ClCompile Include="pdcurses\printw.c" />
+    <ClCompile Include="pdcurses\refresh.c" />
+    <ClCompile Include="pdcurses\scanw.c" />
+    <ClCompile Include="pdcurses\scroll.c" />
+    <ClCompile Include="pdcurses\scr_dump.c" />
+    <ClCompile Include="pdcurses\slk.c" />
+    <ClCompile Include="pdcurses\termattr.c" />
+    <ClCompile Include="pdcurses\terminfo.c" />
+    <ClCompile Include="pdcurses\touch.c" />
+    <ClCompile Include="pdcurses\util.c" />
+    <ClCompile Include="pdcurses\window.c" />
+    <ClCompile Include="wincon\pdcclip.c" />
+    <ClCompile Include="wincon\pdcdisp.c" />
+    <ClCompile Include="wincon\pdcgetsc.c" />
+    <ClCompile Include="wincon\pdckbd.c" />
+    <ClCompile Include="wincon\pdcscrn.c" />
+    <ClCompile Include="wincon\pdcsetsc.c" />
+    <ClCompile Include="wincon\pdcutil.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
