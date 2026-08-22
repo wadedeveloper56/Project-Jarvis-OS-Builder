@@ -182,7 +182,7 @@
       <PreprocessorDefinitions>_CRT_SECURE_NO_DEPRECATE;_WINDOWS;_WIN32_WINNT=0x0400;_DEBUG;SDL_JOYSTICK_XINPUT;SDL_JOYSTICK_WINMM;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <AdditionalOptions>$(SDL1AdditionalOptions)</AdditionalOptions>
       <SDLCheck>
       </SDLCheck>
@@ -221,7 +221,7 @@
       <PreprocessorDefinitions>_CRT_SECURE_NO_DEPRECATE;_WINDOWS;_WIN32_WINNT=0x0400;_DEBUG;SDL_JOYSTICK_XINPUT;SDL_JOYSTICK_WINMM;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <AdditionalOptions>$(SDL1AdditionalOptions)</AdditionalOptions>
       <SDLCheck>
       </SDLCheck>
@@ -338,6 +338,7 @@
       <EnableEnhancedInstructionSet>StreamingSIMDExtensions</EnableEnhancedInstructionSet>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <DebugInformationFormat>None</DebugInformationFormat>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -373,6 +374,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <DebugInformationFormat>None</DebugInformationFormat>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
