@@ -1,0 +1,13 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "c:\\projects\\osdev\\project-jarvis-c-compiler\\source\\tools\\zlib\\zlib.cpp",
+        "ProvidedModule": "",
+        "Includes": [
+            "c:\\projects\\osdev\\project-jarvis-c-compiler\\source\\tools\\zlib\\pch.h",
+            "c:\\projects\\osdev\\project-jarvis-c-compiler\\source\\tools\\zlib\\framework.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}
