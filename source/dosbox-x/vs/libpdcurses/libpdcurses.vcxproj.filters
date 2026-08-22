@@ -21,9 +21,6 @@
     <ClInclude Include="wincon\pdcwin.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="pch.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="wincon\pdcclip.c">
@@ -171,9 +168,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="pdcurses\window.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="pch.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
