@@ -2,6 +2,9 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
+      <FullPath>C:\projects\OSDev\Project-Jarvis-C-Compiler\bin\tools\Release\x64\lexilla.dll</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
       <FullPath>C:\projects\OSDev\Project-Jarvis-C-Compiler\bin\tools\Release\x64\scintilla.dll</FullPath>
     </ProjectOutput>
     <ProjectOutput>

@@ -1,0 +1,13 @@
+﻿  pch.cpp
+  ChildFrm.cpp
+  ClassView.cpp
+  CustomIDE.cpp
+  CustomIDEDoc.cpp
+  CustomIDEView.cpp
+  FileView.cpp
+  MainFrm.cpp
+  OutputWnd.cpp
+  PropertiesWnd.cpp
+  ViewTree.cpp
+  Generating Code...
+  CustomIDE.vcxproj -> C:\projects\OSDev\Project-Jarvis-C-Compiler\source\Tools\Debug\CustomIDE.exe
