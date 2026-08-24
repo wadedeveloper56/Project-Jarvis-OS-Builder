@@ -1,0 +1,16 @@
+﻿  pch.cpp
+  ChildFrm.cpp
+  ClassView.cpp
+  CustomIDE.cpp
+  CustomIDEDoc.cpp
+  CustomIDEView.cpp
+  FileView.cpp
+  MainFrm.cpp
+  OutputWnd.cpp
+  PropertiesWnd.cpp
+  ViewTree.cpp
+  Generating code
+  Previous IPDB not found, fall back to full compilation.
+  All 665 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  CustomIDE.vcxproj -> C:\projects\OSDev\Project-Jarvis-C-Compiler\source\Tools\x64\Release\CustomIDE.exe
