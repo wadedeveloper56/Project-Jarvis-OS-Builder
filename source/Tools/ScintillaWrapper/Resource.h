@@ -1,5 +1,5 @@
 //{{NO_DEPENDENCIES}}
-// Microsoft Developer Studio generated include file.
+// Microsoft Visual C++ generated include file.
 // Used by ScintillaDemo.rc
 //
 #define IDD_ABOUTBOX                    100
@@ -11,7 +11,10 @@
 #define IDS_SCINTILLA_DEFAULT_PRINT_FOOTER 131
 #define IDS_TOOLBAR                     132
 #define IDP_ALLOW_MODIFY_READONLY_FILE  133
-#define IDC_REGULAR_EXPRESSION          1042
+#define IDP_FAIL_SCINTILLA_ADDDATA_DURING_LOAD 134
+#define IDP_FAIL_SCINTILLA_CREATE_ILOADER 135
+#define IDP_FAIL_SCINTILLA_DOCUMENT_TOO_LARGE 136
+#define IDC_REGULAR_EXPRESSION          2000
 #define ID_LANGUAGE_VBSCRIPT            32771
 #define ID_OPTIONS_VIEW_LINENUMBERS     32771
 #define ID_OPTIONS_SELECTION_MARGIN     32779
