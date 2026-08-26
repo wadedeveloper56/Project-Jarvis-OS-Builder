@@ -296,6 +296,12 @@ copy /y "$(OutputPath)$(ProjectName).exe" "..\..\..\build\$(Configuration)\$(Pla
     <Image Include="res\userimages.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\lexilla\lexilla.vcxproj">
+      <Project>{42503b77-5733-4a1d-a26f-3bd462636adc}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\ScintillaWrapper\ScintillaWrapper.vcxproj">
+      <Project>{4f9bd0b7-0460-55c5-75ce-51922fb54b63}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\scintilla\scintilla.vcxproj">
       <Project>{4bc64204-c410-4af3-a9cd-0a1b832ce1e5}</Project>
     </ProjectReference>
