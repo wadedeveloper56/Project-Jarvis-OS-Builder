@@ -5,6 +5,11 @@
 
 #pragma once
 
+struct ProjectData
+{
+	int version;
+	int elementCount;
+};
 
 class CJarvisDoc : public CDocument
 {

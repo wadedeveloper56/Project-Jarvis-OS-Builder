@@ -126,3 +126,15 @@ CJarvisDoc* CJarvisView::GetDocument() const // non-debug version is inline
 
 
 // CJarvisView message handlers
+
+void CJarvisView::OnUpdate(CView* /*pSender*/, LPARAM /*lHint*/, CObject* /*pHint*/)
+{
+	// Get a pointer to your document
+	CJarvisDoc* pDoc = GetDocument();
+	ASSERT_VALID(pDoc);
+	if (!pDoc) return;
+
+	// Redraw the view with the newly loaded data
+	Invalidate();
+	UpdateWindow();
+}

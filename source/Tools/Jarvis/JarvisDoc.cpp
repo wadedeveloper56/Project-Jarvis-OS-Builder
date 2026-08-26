@@ -49,20 +49,35 @@ BOOL CJarvisDoc::OnNewDocument()
 	return TRUE;
 }
 
-
-
-
 // CJarvisDoc serialization
 
 void CJarvisDoc::Serialize(CArchive& ar)
 {
-	if (ar.IsStoring())
+	CDocument::Serialize(ar);
+
+	if (ar.IsLoading())
 	{
-		// TODO: add storing code here
+		// 1. Read simple primitive data types using extraction operators
+		int fileVersion;
+		ar >> fileVersion;
+
+		// 2. Read complex raw structures using raw block reads
+		ProjectData config;
+		ar.Read(&config, sizeof(ProjectData));
+
+		// 3. Read MFC collection classes that support serialization
+		//m_stringList.Serialize(ar);
 	}
 	else
 	{
-		// TODO: add loading code here
+		// Save logic (must perfectly mirror the loading sequence)
+		int fileVersion = 1;
+		ar << fileVersion;
+
+		ProjectData config = { 1, 42 };
+		ar.Write(&config, sizeof(ProjectData));
+
+		//m_stringList.Serialize(ar);
 	}
 }
 
