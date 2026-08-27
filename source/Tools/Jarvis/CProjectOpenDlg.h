@@ -17,4 +17,7 @@ protected:
 	// Implementation
 protected:
 	DECLARE_MESSAGE_MAP();
+public:
+	CString m_projectDir;
+	virtual void OnOK();
 };
