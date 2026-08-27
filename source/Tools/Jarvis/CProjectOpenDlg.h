@@ -1,5 +1,8 @@
 #pragma once
+
 #include <afxdialogex.h>
+#include <ShlObj_core.h>
+#include <afxeditbrowsectrl.h>
 
 class CProjectOpenDlg : public CDialogEx
 {
@@ -18,6 +21,12 @@ protected:
 protected:
 	DECLARE_MESSAGE_MAP();
 public:
-	CString m_projectDir;
 	virtual void OnOK();
+	CString m_projectName;
+	CString m_outputDir;
+	CString m_intermediateDir;
+	CMFCEditBrowseCtrl m_projectDirControl;
+	CString m_projectDir;
+	afx_msg void OnEnChangeMfceditbrowse1();
+	virtual BOOL OnInitDialog();
 };
