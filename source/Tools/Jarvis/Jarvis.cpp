@@ -12,6 +12,7 @@
 #include "ChildFrm.h"
 #include "JarvisDoc.h"
 #include "JarvisView.h"
+#include "CProjectOpenDlg.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -23,8 +24,8 @@
 BEGIN_MESSAGE_MAP(CJarvisApp, CWinAppEx)
 	ON_COMMAND(ID_APP_ABOUT, &CJarvisApp::OnAppAbout)
 	// Standard file based document commands
-	ON_COMMAND(ID_FILE_NEW, &CWinAppEx::OnFileNew)
-	ON_COMMAND(ID_FILE_OPEN, &CWinAppEx::OnFileOpen)
+	ON_COMMAND(ID_FILE_NEW, &CJarvisApp::OnFileNew)
+	ON_COMMAND(ID_FILE_OPEN, &CJarvisApp::OnFileOpen)
 	// Standard print setup command
 	ON_COMMAND(ID_FILE_PRINT_SETUP, &CWinAppEx::OnFilePrintSetup)
 END_MESSAGE_MAP()
@@ -49,7 +50,7 @@ CJarvisApp::CJarvisApp() noexcept
 
 	// TODO: replace application ID string below with unique ID string; recommended
 	// format for string is CompanyName.ProductName.SubProduct.VersionInformation
-	SetAppID(_T("Jarvis.AppID.NoVersion"));
+	SetAppID(_T("Wade.Jarvis.CCompilerIDE.1.0.0.0"));
 
 	// TODO: add construction code here,
 	// Place all significant initialization in InitInstance
@@ -146,6 +147,12 @@ BOOL CJarvisApp::InitInstance()
 	RegisterShellFileTypes(TRUE);
 
 
+	// Prevent a new document/view or MDI child window from opening on startup
+	if (cmdInfo.m_nShellCommand == CCommandLineInfo::FileNew)
+	{
+		cmdInfo.m_nShellCommand = CCommandLineInfo::FileNothing;
+	}
+
 	// Dispatch commands specified on the command line.  Will return FALSE if
 	// app was launched with /RegServer, /Register, /Unregserver or /Unregister.
 	if (!ProcessShellCommand(cmdInfo))
@@ -175,7 +182,7 @@ class CAboutDlg : public CDialogEx
 public:
 	CAboutDlg() noexcept;
 
-// Dialog Data
+	// Dialog Data
 #ifdef AFX_DESIGN_TIME
 	enum { IDD = IDD_ABOUTBOX };
 #endif
@@ -183,14 +190,13 @@ public:
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
 
-// Implementation
+	// Implementation
 protected:
 	DECLARE_MESSAGE_MAP()
 };
 
 CAboutDlg::CAboutDlg() noexcept : CDialogEx(IDD_ABOUTBOX)
-{
-}
+{}
 
 void CAboutDlg::DoDataExchange(CDataExchange* pDX)
 {
@@ -222,14 +228,52 @@ void CJarvisApp::PreLoadState()
 }
 
 void CJarvisApp::LoadCustomState()
-{
-}
+{}
 
 void CJarvisApp::SaveCustomState()
-{
-}
+{}
 
 // CJarvisApp message handlers
 
+void CJarvisApp::OnFileNew()
+{
+	CProjectOpenDlg prjOpenDlg;
 
+	if (prjOpenDlg.DoModal() == IDOK)
+	{
+		// Create a new document
+		CMainFrame* pMainFrame = (CMainFrame*)AfxGetMainWnd();
+		if (pMainFrame != nullptr)
+		{
+			// 2. Extract the active document from the frame
+			CJarvisDoc* pDoc = (CJarvisDoc*)pMainFrame->GetActiveDocument();
+			if (pDoc != nullptr)
+			{
+				// Successfully retrieved! Use your document here
+				//pDoc->
+			}
+		}
+	}
+}
 
+void CJarvisApp::OnFileOpen()
+{
+	// Create a file dialog to select a project file
+	CFileDialog fileDlg(TRUE, _T("prj"), NULL, OFN_FILEMUSTEXIST | OFN_HIDEREADONLY, _T("Jarvis Project Files (*.prj)|*.prj|All Files (*.*)|*.*||"));
+	if (fileDlg.DoModal() == IDOK)
+	{
+		CString filePath = fileDlg.GetPathName();
+		// Open the selected project file
+		CMainFrame* pMainFrame = (CMainFrame*)AfxGetMainWnd();
+		if (pMainFrame != nullptr)
+		{
+			// 2. Extract the active document from the frame
+			CJarvisDoc* pDoc = (CJarvisDoc*)pMainFrame->GetActiveDocument();
+			if (pDoc != nullptr)
+			{
+				// Successfully retrieved! Use your document here
+				//pDoc->
+			}
+		}
+	}
+}

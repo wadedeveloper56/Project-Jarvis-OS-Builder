@@ -229,6 +229,8 @@ copy /y "$(OutputPath)$(ProjectName).exe" "..\..\..\build\$(Configuration)\$(Pla
   <ItemGroup>
     <ClInclude Include="ChildFrm.h" />
     <ClInclude Include="ClassView.h" />
+    <ClInclude Include="CProjectData.h" />
+    <ClInclude Include="CProjectOpenDlg.h" />
     <ClInclude Include="FileView.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Jarvis.h" />
@@ -245,6 +247,8 @@ copy /y "$(OutputPath)$(ProjectName).exe" "..\..\..\build\$(Configuration)\$(Pla
   <ItemGroup>
     <ClCompile Include="ChildFrm.cpp" />
     <ClCompile Include="ClassView.cpp" />
+    <ClCompile Include="CProjectData.cpp" />
+    <ClCompile Include="CProjectOpenDlg.cpp" />
     <ClCompile Include="FileView.cpp" />
     <ClCompile Include="Jarvis.cpp" />
     <ClCompile Include="JarvisDoc.cpp" />

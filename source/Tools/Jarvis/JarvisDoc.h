@@ -1,9 +1,9 @@
 
 // JarvisDoc.h : interface of the CJarvisDoc class
 //
-
-
 #pragma once
+
+#include "CProjectData.h"
 
 struct ProjectData
 {
@@ -19,7 +19,7 @@ protected: // create from serialization only
 
 // Attributes
 public:
-
+	CProjectData m_myProject; // The actual file data wrapper
 // Operations
 public:
 

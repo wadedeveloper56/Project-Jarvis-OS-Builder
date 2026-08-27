@@ -53,32 +53,8 @@ BOOL CJarvisDoc::OnNewDocument()
 
 void CJarvisDoc::Serialize(CArchive& ar)
 {
-	CDocument::Serialize(ar);
-
-	if (ar.IsLoading())
-	{
-		// 1. Read simple primitive data types using extraction operators
-		int fileVersion;
-		ar >> fileVersion;
-
-		// 2. Read complex raw structures using raw block reads
-		ProjectData config;
-		ar.Read(&config, sizeof(ProjectData));
-
-		// 3. Read MFC collection classes that support serialization
-		//m_stringList.Serialize(ar);
-	}
-	else
-	{
-		// Save logic (must perfectly mirror the loading sequence)
-		int fileVersion = 1;
-		ar << fileVersion;
-
-		ProjectData config = { 1, 42 };
-		ar.Write(&config, sizeof(ProjectData));
-
-		//m_stringList.Serialize(ar);
-	}
+	// The framework calls this automatically during File->Save or File->Open
+	m_myProject.Serialize(ar);
 }
 
 #ifdef SHARED_HANDLERS
