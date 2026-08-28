@@ -10,10 +10,13 @@ class CProjectData : public CObject
 
 public:
     int m_version;
-    CString m_projectName;
-	CString m_outputDirectory;
-	CString m_intermediateDirectory;
-	CString m_buildConfiguration;
+
+	CString m_projectName;
+	CString m_outputDir;
+	CString m_intermediateDir;
+	CString m_projectDir;
+	CString m_projectBase;
+	int m_bitSize; // 16,32 or 64	
 
     CStringList m_sourceFiles;
     CStringList m_headerFiles;
@@ -21,6 +24,7 @@ public:
 	CStringList m_linkedLibraries;
 	CStringList m_preprocessorDefinitions;
 	CStringList m_includeDirectories;
+
 
     CProjectData();
     virtual void Serialize(CArchive& ar) override;

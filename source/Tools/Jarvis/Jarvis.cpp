@@ -238,19 +238,29 @@ void CJarvisApp::SaveCustomState()
 void CJarvisApp::OnFileNew()
 {
 	CProjectOpenDlg prjOpenDlg;
-
-	if (prjOpenDlg.DoModal() == IDOK)
+	int result = prjOpenDlg.DoModal();
+	if (result == IDOK)
 	{
 		// Create a new document
 		CMainFrame* pMainFrame = (CMainFrame*)AfxGetMainWnd();
 		if (pMainFrame != nullptr)
 		{
-			// 2. Extract the active document from the frame
-			CJarvisDoc* pDoc = (CJarvisDoc*)pMainFrame->GetActiveDocument();
-			if (pDoc != nullptr)
+			CMDIChildWnd* pChild = (CMDIChildWnd*)pMainFrame->MDIGetActive();
+
+			if (pChild != NULL)
 			{
-				// Successfully retrieved! Use your document here
-				//pDoc->
+				// 3. Get the active document from the child frame
+				CJarvisDoc* pDoc = (CJarvisDoc*)pChild->GetActiveDocument();
+				if (pDoc != nullptr)
+				{
+					// Successfully retrieved! Use your document here
+					pDoc->m_myProject.m_projectName = prjOpenDlg.m_projectName;
+					pDoc->m_myProject.m_outputDir = prjOpenDlg.m_projectBase;
+					pDoc->m_myProject.m_intermediateDir = prjOpenDlg.m_intermediateDir;
+					pDoc->m_myProject.m_projectDir = prjOpenDlg.m_projectDir;
+					pDoc->m_myProject.m_projectBase = prjOpenDlg.m_projectBase;
+					pDoc->m_myProject.m_bitSize = prjOpenDlg.m_bitSize;
+				}
 			}
 		}
 	}
@@ -272,7 +282,7 @@ void CJarvisApp::OnFileOpen()
 			if (pDoc != nullptr)
 			{
 				// Successfully retrieved! Use your document here
-				//pDoc->
+				
 			}
 		}
 	}

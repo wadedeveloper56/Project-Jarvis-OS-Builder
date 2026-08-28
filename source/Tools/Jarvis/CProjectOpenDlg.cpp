@@ -15,13 +15,19 @@ void CProjectOpenDlg::DoDataExchange(CDataExchange* pDX)
 	CDialogEx::DoDataExchange(pDX);
 	DDX_Text(pDX, IDC_EDIT2, m_projectName);
 	DDX_Control(pDX, IDC_EDIT2, m_projectNameControl);
+
 	DDX_Text(pDX, IDC_EDIT3, m_outputDir);
 	DDX_Control(pDX, IDC_EDIT3, m_outputDirControl);
+
 	DDX_Text(pDX, IDC_EDIT4, m_intermediateDir);
 	DDX_Control(pDX, IDC_EDIT4, m_intermediateDirControl);
+
 	DDX_Control(pDX, IDC_MFCEDITBROWSE1, m_projectDirControl);
 	DDX_Text(pDX, IDC_MFCEDITBROWSE1, m_projectDir);
-	DDX_Control(pDX, IDC_EDIT1, m_projectBase);
+
+	DDX_Control(pDX, IDC_EDIT1, m_projectBaseControl);
+	DDX_Text(pDX, IDC_EDIT1, m_projectBase);
+
 	DDX_Radio(pDX, IDC_RADIO1, m_bitSize);
 }
 
@@ -44,9 +50,10 @@ void CProjectOpenDlg::OnEnChangeMfceditbrowse1()
 	m_projectDirControl.GetWindowText(strPath);
 
 	// Update your other control here
-	m_projectBase.SetWindowText(_T("Project will be created in : ") + strPath + strName);
-	m_outputDirControl.SetWindowText(strPath + strName + _T("\\output\\bin\\"));
-	m_intermediateDirControl.SetWindowText(strPath + strName + _T("\\output\\intermediate\\"));
+	CString pd = strPath + _T("\\") + strName;
+	m_projectBaseControl.SetWindowText(pd);
+	m_outputDirControl.SetWindowText(pd + _T("\\output\\bin\\"));
+	m_intermediateDirControl.SetWindowText(pd + _T("\\output\\intermediate\\"));
 }
 
 BOOL CProjectOpenDlg::OnInitDialog()
