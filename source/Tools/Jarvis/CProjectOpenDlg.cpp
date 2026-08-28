@@ -7,6 +7,7 @@ m_projectDirControl()
 , m_outputDir(_T(""))
 , m_intermediateDir(_T(""))
 , m_projectDir(_T(""))
+, m_bitSize(0)
 {}
 
 void CProjectOpenDlg::DoDataExchange(CDataExchange* pDX)
@@ -21,6 +22,7 @@ void CProjectOpenDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_MFCEDITBROWSE1, m_projectDirControl);
 	DDX_Text(pDX, IDC_MFCEDITBROWSE1, m_projectDir);
 	DDX_Control(pDX, IDC_EDIT1, m_projectBase);
+	DDX_Radio(pDX, IDC_RADIO1, m_bitSize);
 }
 
 BEGIN_MESSAGE_MAP(CProjectOpenDlg, CDialogEx)

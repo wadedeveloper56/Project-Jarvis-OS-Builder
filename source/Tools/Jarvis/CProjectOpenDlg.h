@@ -33,4 +33,5 @@ public:
 	afx_msg void OnEnChangeMfceditbrowse1();
 	virtual BOOL OnInitDialog();
 	CEdit m_projectBase;
+	int m_bitSize;
 };
