@@ -13,10 +13,14 @@ void CProjectOpenDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
 	DDX_Text(pDX, IDC_EDIT2, m_projectName);
+	DDX_Control(pDX, IDC_EDIT2, m_projectNameControl);
 	DDX_Text(pDX, IDC_EDIT3, m_outputDir);
+	DDX_Control(pDX, IDC_EDIT3, m_outputDirControl);
 	DDX_Text(pDX, IDC_EDIT4, m_intermediateDir);
+	DDX_Control(pDX, IDC_EDIT4, m_intermediateDirControl);
 	DDX_Control(pDX, IDC_MFCEDITBROWSE1, m_projectDirControl);
 	DDX_Text(pDX, IDC_MFCEDITBROWSE1, m_projectDir);
+	DDX_Control(pDX, IDC_EDIT1, m_projectBase);
 }
 
 BEGIN_MESSAGE_MAP(CProjectOpenDlg, CDialogEx)
@@ -31,12 +35,16 @@ void CProjectOpenDlg::OnOK()
 
 void CProjectOpenDlg::OnEnChangeMfceditbrowse1()
 {
-	// TODO:  If this is a RICHEDIT control, the control will not
-	// send this notification unless you override the CDialogEx::OnInitDialog()
-	// function and call CRichEditCtrl().SetEventMask()
-	// with the ENM_CHANGE flag ORed into the mask.
+	CString strName;
+	m_projectNameControl.GetWindowText(strName);
 
-	// TODO:  Add your control notification handler code here
+	CString strPath;
+	m_projectDirControl.GetWindowText(strPath);
+
+	// Update your other control here
+	m_projectBase.SetWindowText(_T("Project will be created in : ") + strPath + strName);
+	m_outputDirControl.SetWindowText(strPath + strName + _T("\\output\\bin\\"));
+	m_intermediateDirControl.SetWindowText(strPath + strName + _T("\\output\\intermediate\\"));
 }
 
 BOOL CProjectOpenDlg::OnInitDialog()

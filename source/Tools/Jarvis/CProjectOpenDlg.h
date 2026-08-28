@@ -23,10 +23,14 @@ protected:
 public:
 	virtual void OnOK();
 	CString m_projectName;
+	CEdit m_projectNameControl;
 	CString m_outputDir;
+	CEdit m_outputDirControl;
 	CString m_intermediateDir;
+	CEdit m_intermediateDirControl;
 	CMFCEditBrowseCtrl m_projectDirControl;
 	CString m_projectDir;
 	afx_msg void OnEnChangeMfceditbrowse1();
 	virtual BOOL OnInitDialog();
+	CEdit m_projectBase;
 };
