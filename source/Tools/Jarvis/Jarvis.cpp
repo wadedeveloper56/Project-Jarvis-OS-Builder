@@ -150,7 +150,7 @@ BOOL CJarvisApp::InitInstance()
 	// Prevent a new document/view or MDI child window from opening on startup
 	if (cmdInfo.m_nShellCommand == CCommandLineInfo::FileNew)
 	{
-		cmdInfo.m_nShellCommand = CCommandLineInfo::FileNothing;
+		//cmdInfo.m_nShellCommand = CCommandLineInfo::FileNothing;
 	}
 
 	// Dispatch commands specified on the command line.  Will return FALSE if
@@ -238,7 +238,7 @@ void CJarvisApp::SaveCustomState()
 void CJarvisApp::OnFileNew()
 {
 	CProjectOpenDlg prjOpenDlg;
-	int result = prjOpenDlg.DoModal();
+	INT_PTR result = prjOpenDlg.DoModal();
 	if (result == IDOK)
 	{
 		// Create a new document

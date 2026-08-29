@@ -154,6 +154,11 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	m_wndProperties.EnableDocking(CBRS_ALIGN_ANY);
 	DockPane(&m_wndProperties);
 
+	m_wndFileView.ShowPane(FALSE, FALSE, FALSE);
+	m_wndClassView.ShowPane(FALSE, FALSE, FALSE);
+	m_wndOutput.ShowPane(FALSE, FALSE, FALSE);
+	m_wndProperties.ShowPane(FALSE, FALSE, FALSE);
+
 	// set the visual manager and style based on persisted value
 	OnApplicationLook(theApp.m_nAppLook);
 
