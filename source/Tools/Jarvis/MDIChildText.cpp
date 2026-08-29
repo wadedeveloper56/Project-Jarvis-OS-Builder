@@ -3,7 +3,7 @@
 //  Definitions for the CSimpleView and CSimpleMDIChild classes
 
 #include "stdafx.h"
-#include "SimpleMDIChild.h"
+#include "MDIChildText.h"
 #include "resource.h"
 
 /////////////////////////////////

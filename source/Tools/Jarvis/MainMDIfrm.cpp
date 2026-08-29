@@ -4,7 +4,7 @@
 
 #include "stdafx.h"
 #include "MainMDIfrm.h"
-#include "SimpleMDIChild.h"
+#include "MDIChildText.h"
 #include "Files.h"
 #include "resource.h"
 
@@ -86,12 +86,12 @@ void CMainMDIFrame::OnInitialUpdate()
     DWORD dwStyle = DS_CLIENTEDGE; // The style added to each docker
     int dockWidth = DpiScaleInt(150);
     CDocker* pDock1 = AddDockedChild(make_unique<CDockFiles>(), DS_DOCKED_LEFT | dwStyle, dockWidth);
-    CDocker* pDock2 = AddDockedChild(make_unique<CDockFiles>(), DS_DOCKED_RIGHT | dwStyle, dockWidth);
+//    CDocker* pDock2 = AddDockedChild(make_unique<CDockFiles>(), DS_DOCKED_RIGHT | dwStyle, dockWidth);
 
     assert (pDock1->GetContainer());
-    assert (pDock2->GetContainer());
+//    assert (pDock2->GetContainer());
     pDock1->GetContainer()->SetHideSingleTab(TRUE);
-    pDock2->GetContainer()->SetHideSingleTab(TRUE);
+//    pDock2->GetContainer()->SetHideSingleTab(TRUE);
 
     // Add some  MDI children
     AddMDIChild(make_unique<CMDIChildText>());

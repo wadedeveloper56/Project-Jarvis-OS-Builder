@@ -36,7 +36,7 @@
     <ClInclude Include="MDIFrameApp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SimpleMDIChild.h">
+    <ClInclude Include="MDIChildText.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="stdafx.h">
@@ -56,7 +56,7 @@
     <ClCompile Include="MDIFrameApp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SimpleMDIChild.cpp">
+    <ClCompile Include="MDIChildText.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="StdAfx.cpp">
