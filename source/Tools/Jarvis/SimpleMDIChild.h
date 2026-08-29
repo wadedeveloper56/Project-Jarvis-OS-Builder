@@ -7,52 +7,47 @@
 #define MDICHILDVIEW_H
 
 
-/////////////////////////////////////////////////////
-// CSimpleView manages CSimpleMDIChild's view window.
-class CSimpleView : public CWnd
+///////////////////////////////////////////////////////
+// CViewText manages a rich edit control. It is used as
+// the view window for CMDIChildText.
+class CViewText : public CRichEdit
 {
 public:
-    CSimpleView();
-    virtual ~CSimpleView() override = default;
-    COLORREF GetColor() { return m_color; }
-    void SetColor(COLORREF color) { m_color = color; }
+    CViewText() = default;
+    virtual ~CViewText() override = default;
 
 protected:
-    virtual void OnDraw(CDC& dc) override;
+    virtual void OnAttach() override;
+    virtual void PreCreate(CREATESTRUCT& cs) override;
     virtual LRESULT WndProc(UINT msg, WPARAM wparam, LPARAM lparam) override;
 
 private:
-    CSimpleView(const CSimpleView&) = delete;
-    CSimpleView& operator = (const CSimpleView&) = delete;
+    CViewText(const CViewText&) = delete;
+    CViewText& operator=(const CViewText&) = delete;
 
-    // Message handlers
-    virtual LRESULT OnMouseActivate(UINT msg, WPARAM wparam, LPARAM lparam);
-    virtual LRESULT OnSize(UINT msg, WPARAM wparam, LPARAM lparam);
-
-    // Member variables
-    COLORREF m_color;
+    CFont   m_font;
 };
 
-//////////////////////////////////////////
-// CSimpleMDIChild manages a MDI child.
-// It uses CSimpleView as the view window.
-class CSimpleMDIChild : public CMDIChild
+
+//////////////////////////////////////////////////////////////
+// CMDIChildText manages a MDI child window. It uses CViewText
+// as its view window.
+class CMDIChildText : public CMDIChild
 {
 public:
-    CSimpleMDIChild();
-    virtual ~CSimpleMDIChild() override = default;
+    CMDIChildText();
+    virtual ~CMDIChildText() override = default;
 
 protected:
-    virtual BOOL    OnCommand(WPARAM wparam, LPARAM lparam) override;
-    virtual int     OnCreate(CREATESTRUCT& cs) override;
+    virtual BOOL OnCommand(WPARAM wparam, LPARAM lparam) override;
+    virtual int  OnCreate(CREATESTRUCT& cs) override;
     virtual LRESULT WndProc(UINT msg, WPARAM wparam, LPARAM lparam) override;
 
 private:
-    CSimpleMDIChild(const CSimpleMDIChild&) = delete;
-    CSimpleMDIChild& operator = (const CSimpleMDIChild&) = delete;
+    CMDIChildText(const CMDIChildText&) = delete;
+    CMDIChildText& operator=(const CMDIChildText&) = delete;
 
-    CSimpleView m_view;
+    CViewText m_textView;
     CMenu m_menu;
 };
-
 #endif  //MDICHILDVIEW_H

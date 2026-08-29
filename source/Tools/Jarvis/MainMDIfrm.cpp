@@ -94,8 +94,8 @@ void CMainMDIFrame::OnInitialUpdate()
     pDock2->GetContainer()->SetHideSingleTab(TRUE);
 
     // Add some  MDI children
-    AddMDIChild(make_unique<CSimpleMDIChild>());
-    AddMDIChild(make_unique<CSimpleMDIChild>());
+    AddMDIChild(make_unique<CMDIChildText>());
+    AddMDIChild(make_unique<CMDIChildText>());
 }
 
 // Process input from the menu and toolbar.
@@ -169,7 +169,7 @@ BOOL CMainMDIFrame::OnFileExit()
 // Create a new MDI child
 BOOL CMainMDIFrame::OnFileNewMDI()
 {
-    AddMDIChild(make_unique<CSimpleMDIChild>());
+    AddMDIChild(make_unique<CMDIChildText>());
     return TRUE;
 }
 
