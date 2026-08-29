@@ -1,116 +1,72 @@
 //{{NO_DEPENDENCIES}}
 // Microsoft Visual C++ generated include file.
-// Used by Jarvis.rc
+// Used by Resource.rc
 //
-#define IDD_ABOUTBOX                    100
-#define IDP_OLE_INIT_FAILED             100
-#define IDR_POPUP_EDIT                  119
-#define ID_STATUSBAR_PANE1              120
-#define ID_STATUSBAR_PANE2              121
-#define IDS_STATUS_PANE1                122
-#define IDS_STATUS_PANE2                123
-#define IDS_TOOLBAR_STANDARD            124
-#define IDS_TOOLBAR_CUSTOMIZE           125
-#define ID_VIEW_CUSTOMIZE               126
-#define IDR_MAINFRAME                   128
-#define IDR_MAINFRAME_256               129
-#define IDR_JarvisTYPE                  130
-#define ID_WINDOW_MANAGER               131
-#define ID_VIEW_FILEVIEW                133
-#define ID_VIEW_CLASSVIEW               134
-#define ID_PROPERTIES                   135
-#define ID_OPEN                         136
-#define ID_OPEN_WITH                    137
-#define ID_DUMMY_COMPILE                138
-#define ID_CLASS_ADD_MEMBER_FUNCTION    139
-#define ID_CLASS_ADD_MEMBER_VARIABLE    140
-#define ID_CLASS_DEFINITION             141
-#define ID_CLASS_PROPERTIES             142
-#define ID_NEW_FOLDER                   143
-#define ID_SORT_MENU                    144
-#define ID_SORTING_GROUPBYTYPE          145
-#define ID_SORTING_SORTALPHABETIC       146
-#define ID_SORTING_SORTBYTYPE           147
-#define ID_SORTING_SORTBYACCESS         148
-#define ID_VIEW_OUTPUTWND               149
-#define ID_VIEW_PROPERTIESWND           150
-#define ID_SORTPROPERTIES               151
-#define ID_PROPERTIES1                  152
-#define ID_PROPERTIES2                  153
-#define ID_EXPAND_ALL                   154
-#define IDS_FILE_VIEW                   155
-#define IDS_CLASS_VIEW                  156
-#define IDS_OUTPUT_WND                  157
-#define IDS_PROPERTIES_WND              158
-#define IDI_FILE_VIEW                   161
-#define IDI_FILE_VIEW_HC                162
-#define IDI_CLASS_VIEW                  163
-#define IDI_CLASS_VIEW_HC               164
-#define IDI_OUTPUT_WND                  165
-#define IDI_OUTPUT_WND_HC               166
-#define IDI_PROPERTIES_WND              167
-#define IDI_PROPERTIES_WND_HC           168
-#define IDR_EXPLORER                    169
-#define IDB_EXPLORER_24                 170
-#define IDR_SORT                        171
-#define IDB_SORT_24                     172
-#define IDR_POPUP_SORT                  173
-#define IDR_POPUP_EXPLORER              174
-#define IDB_FILE_VIEW                   175
-#define IDB_FILE_VIEW_24                176
-#define IDB_CLASS_VIEW                  177
-#define IDB_CLASS_VIEW_24               178
-#define IDR_MENU_IMAGES                 179
-#define IDB_MENU_IMAGES_24              180
-#define ID_TOOLS_MACRO                  181
-#define IDR_OUTPUT_POPUP                182
-#define IDR_PROPERTIES                  183
-#define IDB_PROPERTIES_HC               184
-#define IDR_THEME_MENU                  200
-#define ID_SET_STYLE                    201
-#define ID_VIEW_APPLOOK_WIN_2000        205
-#define ID_VIEW_APPLOOK_OFF_XP          206
-#define ID_VIEW_APPLOOK_WIN_XP          207
-#define ID_VIEW_APPLOOK_OFF_2003        208
-#define ID_VIEW_APPLOOK_VS_2005         209
-#define ID_VIEW_APPLOOK_VS_2008         210
-#define ID_VIEW_APPLOOK_OFF_2007_BLUE   215
-#define ID_VIEW_APPLOOK_OFF_2007_BLACK  216
-#define ID_VIEW_APPLOOK_OFF_2007_SILVER 217
-#define ID_VIEW_APPLOOK_OFF_2007_AQUA   218
-#define ID_VIEW_APPLOOK_WINDOWS_7       219
-#define ID_TOOLS_OPTIONS                220
-#define ID_VIEW_CAPTION_BAR             221
-#define IDB_INFO                        230
-#define IDS_CAPTION_BUTTON              231
-#define IDS_CAPTION_BUTTON_TIP          232
-#define IDS_CAPTION_TEXT                233
-#define IDS_CAPTION_IMAGE_TIP           234
-#define IDS_CAPTION_IMAGE_TEXT          235
-#define IDS_BUILD_TAB                   300
-#define IDS_DEBUG_TAB                   301
-#define IDS_FIND_TAB                    302
-#define IDS_EXPLORER                    305
-#define IDS_EDIT_MENU                   306
-#define IDD_DIALOG1                     310
-#define IDD_PRJ_OPEN_DIALOG             310
-#define IDC_EDIT1                       1000
-#define IDC_EDIT2                       1001
-#define IDC_EDIT3                       1002
-#define IDC_EDIT4                       1003
-#define IDC_MFCEDITBROWSE1              1004
-#define IDC_RADIO1                      1005
-#define IDC_RADIO2                      1006
-#define IDC_RADIO3                      1007
-#define IDC_RADIO4                      1008
+
+// include the Resource IDs defined by Win32++
+#include "default_resource.h"
+
+//Resource IDs for menu items and ToolBar items
+#define IDM_FILE_NEW                    120
+#define IDM_FILE_NEWDOCK                121
+#define IDM_FILE_NEWMDI                 122
+#define IDM_FILE_OPEN                   123
+#define IDM_FILE_SAVE                   124
+#define IDM_FILE_SAVEAS                 125
+#define IDM_FILE_PRINT                  126
+#define IDM_FILE_MDICLOSE               127
+#define IDM_FILE_EXIT                   128
+#define IDM_EDIT_UNDO                   130
+#define IDM_EDIT_REDO                   131
+#define IDM_EDIT_CUT                    132
+#define IDM_EDIT_COPY                   133
+#define IDM_EDIT_PASTE                  134
+#define IDM_EDIT_DELETE                 135
+#define IDM_HELP_ABOUT                  140
+#define IDM_NEWMENU                     145
+
+// Icon Resource
+#define IDI_DOCK                        160
+#define IDI_VIEW                        161
+
+// Bitmaps for the toolbar and menus
+#define IDB_TOOLBAR16                   180
+#define IDB_TOOLBAR24_DIS               181
+#define IDB_TOOLBAR24_HOT               182
+
+// Bitmaps for the ClassView, FileFiew and ComboBoxEx ImageLists
+#define IDB_CLASSVIEW                   230
+#define IDB_FILEVIEW                    231
+#define IDB_STATUS                      232
+
+// Icons for container tabs
+#define IDI_SIMPLE                      233
+#define IDI_RECT                        234
+#define IDI_DIALOGVIEW                  235
+#define IDI_CLASSVIEW                   236
+#define IDI_FILEVIEW                    237
+#define IDI_TEXT                        238
+
+// Menu Resource
+#define IDM_COLOR_BLACK                 163
+#define IDM_COLOR_RED                   164
+#define IDM_COLOR_GREEN                 165
+#define IDM_COLOR_BLUE                  166
+#define IDM_COLOR_WHITE                 167
 
 // Next default values for new objects
-// 
+//
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        315
+#define _APS_NO_MFC                     1
+#define _APS_NEXT_RESOURCE_VALUE        169
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1009
-#define _APS_NEXT_SYMED_VALUE           310
+#define _APS_NEXT_CONTROL_VALUE         1000
+#define _APS_NEXT_SYMED_VALUE           170
 #endif
 #endif
+
+
+
+
+
