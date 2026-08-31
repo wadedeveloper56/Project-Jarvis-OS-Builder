@@ -21,7 +21,7 @@
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CRuntimeClass.h">
+    <ClInclude Include="include\CRuntimeClass.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -32,7 +32,7 @@
     <ClCompile Include="pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CRuntimeClass.cpp">
+    <ClCompile Include="src\CRuntimeClass.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
