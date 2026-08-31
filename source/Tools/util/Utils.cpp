@@ -110,7 +110,7 @@ void Utils::SetEnvironmentToPathParent(const char* name)
                 StrCpy(buf1, len, name);
                 StrCat(buf1, len, "=");
                 StrCat(buf1, len, buf);
-                putenv(buf1);
+                _putenv(buf1);
             }
         }
     }

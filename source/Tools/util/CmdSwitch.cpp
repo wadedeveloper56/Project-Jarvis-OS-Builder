@@ -309,7 +309,7 @@ CmdSwitchBase* CmdSwitchParser::Find(const char* name, bool useLongName, bool to
         {
             for (auto&& s1 : s->GetLongNames())
             {
-                if (!strnicmp(name, s1.c_str(), max))
+                if (!_strnicmp(name, s1.c_str(), max))
                 {
                     if (s1.size() == max)
                         return s;
@@ -507,7 +507,7 @@ bool CmdSwitchParser::Parse(const std::string& val, int* argc, char* argv[], Cmd
             string++;
         bool done = *string == 0;
         *string = 0;
-        argv[(*argc)++] = strdup(temp);
+        argv[(*argc)++] = _strdup(temp);
         if (done)
             break;
         *string = 0;

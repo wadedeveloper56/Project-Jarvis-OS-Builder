@@ -1302,7 +1302,7 @@ std::string Eval::wildcard(const std::string& arglist)
     while (!names.empty())
     {
         std::string current = ExtractFirst(names, " ");
-        if (access(current.c_str(), 0) == 0)
+        if (_access(current.c_str(), 0) == 0)
         {
             if (!rv.empty())
                 rv += " ";

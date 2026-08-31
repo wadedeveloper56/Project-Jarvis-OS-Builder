@@ -352,7 +352,7 @@ void OS::JobInit()
     {
         char tempfile[260];
         tempfile[0] = 0;
-        char* temp = tempnam(tempfile, "hi");
+        char* temp = _tempnam(tempfile, "hi");
         if (tempfile[1] == ':')
         {
             char* p = (char*)strrchr(tempfile, '\\');
@@ -393,11 +393,11 @@ void OS::JobInit()
         int fil = -1;
         if (first)
         {
-            fil = open(tempfile, _SH_DENYNO | O_CREAT, 0x1f);
+            fil = _open(tempfile, _SH_DENYNO | O_CREAT, 0x1f);
         }
         else
         {
-            fil = open(tempfile, _SH_DENYNO | O_RDWR);
+            fil = _open(tempfile, _SH_DENYNO | O_RDWR);
         }
         if (fil >= 0)
         {
@@ -408,12 +408,12 @@ void OS::JobInit()
             lockf(fil, F_LOCK, 4);
 #endif
             if (!first)
-                if (read(fil, (char*)&count, 4) != 4)
+                if (_read(fil, (char*)&count, 4) != 4)
                     count = 0;
             count++;
-            lseek(fil, 0, SEEK_SET);
-            write(fil, (char*)&count, 4);
-            lseek(fil, 0, SEEK_SET);
+            _lseek(fil, 0, SEEK_SET);
+            _write(fil, (char*)&count, 4);
+            _lseek(fil, 0, SEEK_SET);
 #ifdef BCC32c
             unlock(fil, 0, 4);
 #else
@@ -1124,7 +1124,7 @@ std::string OS::GetWorkingDir()
 #    endif
 #endif
     char buf[PATH_MAX];
-    char* ret = getcwd(buf, PATH_MAX);
+    char* ret = _getcwd(buf, PATH_MAX);
     if (ret == NULL)
     {
         fprintf(stderr, "GetWorkingDir failed!\n");
@@ -1134,7 +1134,7 @@ std::string OS::GetWorkingDir()
     return ret;
 }
 bool OS::SetWorkingDir(const std::string& name) { return !chdir(name.c_str()); }
-void OS::RemoveFile(const std::string& name) { unlink(name.c_str()); }
+void OS::RemoveFile(const std::string& name) { _unlink(name.c_str()); }
 std::string OS::NormalizeFileName(const std::string file)
 {
     std::string name = std::move(file);
@@ -1172,4 +1172,4 @@ std::string OS::NormalizeFileName(const std::string file)
     }
     return name;
 }
-int OS::GetProcessId() { return getpid(); }
+int OS::GetProcessId() { return _getpid(); }

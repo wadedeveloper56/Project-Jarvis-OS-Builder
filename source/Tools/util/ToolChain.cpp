@@ -73,7 +73,7 @@ void ToolChain::Usage(const char* text, int exitVal)
 
     int rows = 10000;
 #ifdef TARGET_OS_WINDOWS
-    if (_isatty(fileno(stderr)))
+    if (_isatty(_fileno(stderr)))
         rows = ScreenHeight();
 #else
     if (_isatty(STDERR_FILENO))
@@ -107,7 +107,7 @@ CmdFiles ToolChain::StandardToolStartup(CmdSwitchParser& SwitchParser, int argc,
     CmdFiles rv;
     Utils::SetEnvironmentToPathParent("ORANGEC");
     std::string configName = Utils::QualifiedFile(argv[0], ".cfg");
-    if (access(configName.c_str(), 0) != 0)
+    if (_access(configName.c_str(), 0) != 0)
     {
         configName = Utils::QualifiedFile(Utils::GetModuleName(), ".cfg");
     }
