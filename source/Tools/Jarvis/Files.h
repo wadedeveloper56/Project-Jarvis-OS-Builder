@@ -6,30 +6,23 @@
 #define FILES_H
 
 
-/////////////////////////////////////////////////////////////
-// CViewFiles manages a list view control. It displays files.
-// This is the view window for CContainClasses.
-class CViewFiles : public CListView
+//////////////////////////////////////////////////////
+// CViewTree manages a tre view control. It is used as
+// the view window for CMDIChildTree.
+class CViewTree : public CTreeView
 {
 public:
-    CViewFiles() = default;
-    virtual ~CViewFiles() override;
+    CViewTree() = default;
+    virtual ~CViewTree() override;
 
 protected:
     virtual void OnAttach() override;
     virtual LRESULT WndProc(UINT msg, WPARAM wparam, LPARAM lparam) override;
 
 private:
-    CViewFiles(const CViewFiles&) = delete;
-    CViewFiles& operator = (const CViewFiles&) = delete;
-
-    // Message handlers
-    virtual LRESULT OnMouseActivate(UINT msg, WPARAM wparam, LPARAM lparam);
-
-    void InsertItems();
-    void SetColumns();
+    CViewTree(const CViewTree&) = delete;
+    CViewTree& operator=(const CViewTree&) = delete;
 };
-
 
 ////////////////////////////////////////////////////
 // CContainFiles manages a dock container. It has a
@@ -47,7 +40,7 @@ private:
     CContainFiles(const CContainFiles&) = delete;
     CContainFiles& operator = (const CContainFiles&) = delete;
 
-    CViewFiles m_viewFiles;
+    CViewTree m_viewTree;
 };
 
 

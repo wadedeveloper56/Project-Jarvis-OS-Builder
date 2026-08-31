@@ -7,97 +7,63 @@
 #include "resource.h"
 
 constexpr COLORREF magenta = RGB(255, 0, 255);
+constexpr COLORREF red = RGB(255, 0, 0);
 
-//////////////////////////////////
-// CViewFiles function definitions
+/////////////////////////////////
+// CViewTree function definitions
 //
 
 // Destructor.
-CViewFiles::~CViewFiles()
+CViewTree::~CViewTree()
 {
     if (IsWindow()) DeleteAllItems();
 }
 
-// Insert 4 list view items.
-void CViewFiles::InsertItems()
+// Called when a window handle (HWND) is attached to CViewTree.
+void CViewTree::OnAttach()
 {
-    // Add 4th item
-    int item = InsertItem(0, L"ListViewApp.h", 2);
-    SetItemText(item, 1, L"1 KB");
-    SetItemText(item, 2, L"C Header file");
-
-    // add 3rd item
-    item = InsertItem(item, L"ListViewApp.cpp", 1);
-    SetItemText(item, 1, L"3 KB");
-    SetItemText(item, 2, L"C++ Source file");
-
-    // add 2nd item
-    item = InsertItem(item, L"main.cpp", 1);
-    SetItemText(item, 1, L"1 KB");
-    SetItemText(item, 2, L"C++ Source file");
-
-    // add 1st item
-    item = InsertItem(item, L"ListView", 0);
-    SetItemText(item, 2, L"Folder");
-}
-
-// Called when a window handle (HWND) is attached to CViewFiles.
-void CViewFiles::OnAttach()
-{
-    // Set the image lists
-    CBitmap bmImage(IDB_FILEVIEW);
+    // Set the image lists.
+    CBitmap bmImage(IDB_CLASSVIEW);
     bmImage = DpiScaleUpBitmap(bmImage);
     int scale = bmImage.GetSize().cy / 15;
-    CImageList smallImages;
-    smallImages.Create(scale * 16, scale * 15, ILC_COLOR32 | ILC_MASK, 1, 0);
-    smallImages.Add(bmImage, magenta);
-    SetImageList(smallImages, LVSIL_SMALL);
+    CImageList normalImages;
+    normalImages.Create(scale * 16, scale * 15, ILC_COLOR32 | ILC_MASK, 1, 0);
+    normalImages.Add(bmImage, red);
+    SetImageList(normalImages, TVSIL_NORMAL);
 
-    // Set the report style
+    // Adjust style to show lines and [+] button.
     DWORD style = GetStyle();
-    SetStyle((style & ~LVS_TYPEMASK) | LVS_REPORT);
+    style |= TVS_HASBUTTONS | TVS_HASLINES | TVS_LINESATROOT;
+    SetStyle(style);
 
-    SetColumns();
-    InsertItems();
-}
-
-// Respond to a mouse click on the window
-LRESULT CViewFiles::OnMouseActivate(UINT msg, WPARAM wparam, LPARAM lparam)
-{
-    // Set window focus. The docker will now report this as active.
-    SetFocus();
-    return FinalWindowProc(msg, wparam, lparam);
-}
-
-// Configures the list view's columns (header control).
-void CViewFiles::SetColumns()
-{
-    // empty the list
     DeleteAllItems();
 
-    // initialize the columns
-    LV_COLUMN column{};
-    column.mask = LVCF_FMT | LVCF_WIDTH | LVCF_TEXT | LVCF_SUBITEM;
-    column.fmt = LVCFMT_LEFT;
-    column.cx = 120;
-    wchar_t string[3][20] = {L"Name", L"Size", L"Type"};
-    for(int i = 0; i < 3; ++i)
-    {
-        column.pszText = string[i];
-        InsertColumn(i, column);
-    }
+    // Add some tree-view items.
+    HTREEITEM htiRoot = InsertItem(L"TreeView", 0, 0);
+    HTREEITEM htiCTreeViewApp = InsertItem(L"CTreeViewApp", 1, 1, htiRoot);
+    InsertItem(L"CTreeViewApp()", 3, 3, htiCTreeViewApp);
+    InsertItem(L"GetMainFrame()", 3, 3, htiCTreeViewApp);
+    InsertItem(L"InitInstance()", 3, 3, htiCTreeViewApp);
+    HTREEITEM htiMainFrame = InsertItem(L"CMainFrame", 1, 1, htiRoot);
+    InsertItem(L"CMainFrame()", 3, 3, htiMainFrame);
+    InsertItem(L"OnCommand()", 4, 4, htiMainFrame);
+    InsertItem(L"OnInitialUpdate()", 4, 4, htiMainFrame);
+    HTREEITEM htiView = InsertItem(L"CView", 1, 1, htiRoot);
+    InsertItem(L"CView()", 3, 3, htiView);
+    InsertItem(L"OnInitialUpdate()", 4, 4, htiView);
+    InsertItem(L"WndProc()", 4, 4, htiView);
+
+    // Expand some tree-view items.
+    Expand(htiRoot, TVE_EXPAND);
+    Expand(htiCTreeViewApp, TVE_EXPAND);
 }
 
-// Process the list view's window messages.
-LRESULT CViewFiles::WndProc(UINT msg, WPARAM wparam, LPARAM lparam)
+// Handle the window's messages.
+LRESULT CViewTree::WndProc(UINT msg, WPARAM wparam, LPARAM lparam)
 {
     try
     {
-        switch (msg)
-        {
-        case WM_MOUSEACTIVATE:      return OnMouseActivate(msg, wparam, lparam);
-        }
-
+        // Pass unhandled messages on for default processing.
         return WndProcDefault(msg, wparam, lparam);
     }
 
@@ -124,9 +90,6 @@ LRESULT CViewFiles::WndProc(UINT msg, WPARAM wparam, LPARAM lparam)
     return 0;
 }
 
-
-
-
 /////////////////////////////////////
 // CContainFiles function definitions
 //
@@ -137,7 +100,7 @@ CContainFiles::CContainFiles()
     SetTabText(L"FileView");
     SetTabIcon(IDI_FILEVIEW);
     SetDockCaption (L"File View - Docking container");
-    SetView(m_viewFiles);
+    SetView(m_viewTree);
 }
 
 // Handle the window's messages.
