@@ -187,6 +187,7 @@
     <ClCompile Include="MainMDIfrm.cpp" />
     <ClCompile Include="MDIFrameApp.cpp" />
     <ClCompile Include="MDIChildText.cpp" />
+    <ClCompile Include="pch.cpp" />
     <ClCompile Include="StdAfx.cpp" />
   </ItemGroup>
   <ItemGroup>
