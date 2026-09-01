@@ -27,8 +27,7 @@
 * Description:  Client independent utility functions.
 *
 ****************************************************************************/
-
-
+#include "pch.h"
 #include <watcom.h>
 #include "dwutils.h"
 
