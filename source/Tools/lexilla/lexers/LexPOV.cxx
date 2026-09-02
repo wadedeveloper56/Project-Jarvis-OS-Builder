@@ -14,6 +14,7 @@
 // but we match directive keywords and colorize incorrect ones.
 // Block comments can be nested (code stolen from my code in LexLua).
 
+#include "pch.h"
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>

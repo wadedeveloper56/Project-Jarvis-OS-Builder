@@ -22,6 +22,7 @@ val SCE_GC_STRING=8
 val SCE_GC_OPERATOR=9
 */
 
+#include "pch.h"
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>

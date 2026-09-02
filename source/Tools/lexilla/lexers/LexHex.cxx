@@ -100,6 +100,7 @@
  *   record, the line is too long then. This state is used in all lexers.
  */
 
+#include "pch.h"
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>

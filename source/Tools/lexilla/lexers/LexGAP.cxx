@@ -6,6 +6,7 @@
 // Copyright 2007 by Istvan Szollosi ( szteven <at> gmail <dot> com )
 // The License.txt file describes the conditions under which this software may be distributed.
 
+#include "pch.h"
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>

@@ -7,6 +7,7 @@
 
 // Modified by G. HU in 2013. Added folding, syntax highlighting inside math environments, and changed some minor behaviors.
 
+#include "pch.h"
 #include <cstdlib>
 #include <cassert>
 #include <cstring>

@@ -7,6 +7,7 @@
  ** Modified by Marcos E. Wurzius & Philippe Lhoste
  **/
 
+#include "pch.h"
 #include <cstdlib>
 #include <cassert>
 #include <cstring>

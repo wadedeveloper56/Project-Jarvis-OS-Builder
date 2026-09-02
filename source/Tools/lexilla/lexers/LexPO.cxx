@@ -13,6 +13,7 @@
 // * highlight formats inside c-format strings (%s, %d, etc.)
 // * style for previous untranslated string? ("#|" comment)
 
+#include "pch.h"
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>

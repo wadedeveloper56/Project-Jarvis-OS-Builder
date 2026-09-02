@@ -6,6 +6,7 @@
 // Copyright 2018 by Gunter Königsmann <wxMaxima@physikbuch.de>
 // The License.txt file describes the conditions under which this software may be distributed.
 
+#include "pch.h"
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>

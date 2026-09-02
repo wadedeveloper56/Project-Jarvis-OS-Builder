@@ -6,6 +6,7 @@
 // Modified for Nix and Scintilla by Jiri Techet, 2024
 // The License.txt file describes the conditions under which this software may be distributed.
 
+#include "pch.h"
 #include <cassert>
 #include <cstring>
 
@@ -30,6 +31,7 @@
 
 using namespace Scintilla;
 using namespace Lexilla;
+using namespace std;
 
 namespace {
 // Use an unnamed namespace to protect the functions and classes from name conflicts
@@ -475,7 +477,7 @@ void LexerNix::Fold(Sci_PositionU startPos, Sci_Position lengthDoc, int initStyl
 
 	int levelNext = levelCurrent;
 	Sci_PositionU lineStartNext = styler.LineStart(lineCurrent + 1);
-	lineStartNext = std::min(lineStartNext, endPos);
+	lineStartNext = min(lineStartNext, endPos);
 
 	char chNext = styler[startPos];
 	int styleNext = styler.StyleIndexAt(startPos);
@@ -518,7 +520,7 @@ void LexerNix::Fold(Sci_PositionU startPos, Sci_Position lengthDoc, int initStyl
 		}
 
 		if (startPos == lineStartNext) {
-			levelNext = std::max(levelNext, SC_FOLDLEVELBASE);
+			levelNext = max(levelNext, SC_FOLDLEVELBASE);
 
 			const int levelUse = levelCurrent;
 			int lev = levelUse | (levelNext << 16);
@@ -529,7 +531,7 @@ void LexerNix::Fold(Sci_PositionU startPos, Sci_Position lengthDoc, int initStyl
 
 			lineCurrent++;
 			lineStartNext = styler.LineStart(lineCurrent + 1);
-			lineStartNext = std::min(lineStartNext, endPos);
+			lineStartNext = min(lineStartNext, endPos);
 			levelCurrent = levelNext;
 		}
 	}

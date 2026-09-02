@@ -6,6 +6,7 @@
 // Heavily modified later for GDScript
 // The License.txt file describes the conditions under which this software may be distributed.
 
+#include "pch.h"
 #include <cstdlib>
 #include <cassert>
 #include <cstring>
@@ -35,6 +36,7 @@
 
 using namespace Scintilla;
 using namespace Lexilla;
+using namespace std;
 
 namespace {
 
@@ -718,7 +720,7 @@ void SCI_METHOD LexerGDScript::Fold(Sci_PositionU startPos, Sci_Position length,
 		}
 
 		const int levelAfterComments = ((lineNext < docLines) ? indentNext & SC_FOLDLEVELNUMBERMASK : minCommentLevel);
-		const int levelBeforeComments = std::max(indentCurrentLevel, levelAfterComments);
+		const int levelBeforeComments = max(indentCurrentLevel, levelAfterComments);
 
 		// Now set all the indent levels on the lines we skipped
 		// Do this from end to start.  Once we encounter one line

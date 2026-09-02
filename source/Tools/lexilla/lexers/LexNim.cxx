@@ -7,6 +7,7 @@
 // Copyright 1998-2001 by Neil Hodgson <neilh@scintilla.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
+#include "pch.h"
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -36,6 +37,7 @@
 
 using namespace Scintilla;
 using namespace Lexilla;
+using namespace std;
 
 namespace {
     // Use an unnamed namespace to protect the functions and classes from name conflicts
@@ -772,7 +774,7 @@ void SCI_METHOD LexerNim::Fold(Sci_PositionU startPos, Sci_Position length, int,
         const int indentNextLevel = indentNext & SC_FOLDLEVELNUMBERMASK;
         indentNext = indentNextLevel | (indentNext & ~SC_FOLDLEVELNUMBERMASK);
 
-        const int levelBeforeComments = std::max(indentCurrentLevel, indentNextLevel);
+        const int levelBeforeComments = max(indentCurrentLevel, indentNextLevel);
 
         Sci_Position skipLine = lineNext;
         int skipLevel = indentNextLevel;

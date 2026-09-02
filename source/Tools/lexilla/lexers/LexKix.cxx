@@ -6,6 +6,7 @@
 // The License.txt file describes the conditions under which this software may be distributed.
 // Edited by Lee Wilmott (24-Jun-2014) added support for block comments
 
+#include "pch.h"
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>

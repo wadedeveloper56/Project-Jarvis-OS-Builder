@@ -7,6 +7,7 @@
 // Copyright 2003 by Marius Gheorghe <mgheorghe@cabletest.com>
 // The License.txt file describes the conditions under which this software may be distributed.
 
+#include "pch.h"
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
