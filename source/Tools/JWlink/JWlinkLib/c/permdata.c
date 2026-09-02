@@ -29,6 +29,7 @@
 ****************************************************************************/
 
 
+#include "pch.h"
 #include <string.h>
 #include <stdio.h>
 #include "linkstd.h"

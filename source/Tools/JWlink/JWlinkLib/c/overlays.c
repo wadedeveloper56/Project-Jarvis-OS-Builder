@@ -29,6 +29,7 @@
 ****************************************************************************/
 
 
+#include "pch.h"
 #include "linkstd.h"
 #include "alloc.h"
 #include "newmem.h"

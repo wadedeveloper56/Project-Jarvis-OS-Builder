@@ -30,6 +30,7 @@
 ****************************************************************************/
 
 
+#include "pch.h"
 #include "hash.h"
 #include <stdlib.h>
 #include <ctype.h>
