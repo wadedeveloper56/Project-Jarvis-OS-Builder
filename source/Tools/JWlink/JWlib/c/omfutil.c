@@ -29,6 +29,7 @@
 ****************************************************************************/
 
 
+#include "pch.h"
 #include "wlib.h"
 
 static unsigned long    charCount;

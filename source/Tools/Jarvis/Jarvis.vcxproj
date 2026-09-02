@@ -178,7 +178,7 @@
     <ClInclude Include="MDIFrameApp.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="MDIChildText.h" />
-    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="pch.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
@@ -187,7 +187,12 @@
     <ClCompile Include="MainMDIfrm.cpp" />
     <ClCompile Include="MDIFrameApp.cpp" />
     <ClCompile Include="MDIChildText.cpp" />
-    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="pch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="StdAfx.cpp" />
   </ItemGroup>
   <ItemGroup>

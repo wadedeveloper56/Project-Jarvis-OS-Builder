@@ -27,8 +27,7 @@
 * Description:  WLIB DLL version mainline.
 *
 ****************************************************************************/
-
-
+#include "pch.h"
 #include "wlib.h"
 #include "idedll.h"
 #ifdef __WATCOMC__

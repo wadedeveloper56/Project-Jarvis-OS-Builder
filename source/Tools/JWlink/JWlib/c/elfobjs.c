@@ -29,6 +29,7 @@
 *
 ****************************************************************************/
 
+#include "pch.h"
 
 /* This is the raw0xda,ta for the obj0xec,ts to0xbe, output for a PPC import lib */
 char ElfBase[] = {
