@@ -30,6 +30,7 @@
 ****************************************************************************/
 
 
+#include "pch.h"
 #include <string.h>
 #include "filefmt.h"
 #include "resfmt.h"

@@ -23,6 +23,7 @@
  *
  */
 
+#include "pch.h"
 #include <cstdlib>
 #include "Utils.h"
 unsigned Utils::crctab[256] = {

@@ -23,6 +23,7 @@
  *
  */
 
+#include "pch.h"
 #include "xml.h"
 #include <cctype>
 #include <cstring>
