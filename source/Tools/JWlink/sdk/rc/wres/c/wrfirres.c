@@ -30,6 +30,7 @@
 ****************************************************************************/
 
 
+#include "pch.h"
 #include "wres.h"
 
 WResDirWindow WResFirstResource( WResDir currdir )

@@ -30,6 +30,7 @@
 ****************************************************************************/
 
 
+#include "pch.h"
 #include "util.h"
 
 extern WResHelpID * WResHelpIDFromNameOrOrd( ResNameOrOrdinal * name )

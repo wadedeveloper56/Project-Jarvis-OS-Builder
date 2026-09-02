@@ -28,6 +28,7 @@
 *               DESCRIBE IT HERE!
 *
 ****************************************************************************/
+#include "pch.h"
 
 
 /* Structure now declared in wresrtns.c */

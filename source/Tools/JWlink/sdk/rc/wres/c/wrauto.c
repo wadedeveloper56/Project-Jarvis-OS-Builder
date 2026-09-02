@@ -30,6 +30,7 @@
 ****************************************************************************/
 
 
+#include "pch.h"
 #include "watcom.h"
 #include "autodep.h"
 #include "wresall.h"

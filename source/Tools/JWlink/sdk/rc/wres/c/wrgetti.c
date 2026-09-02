@@ -30,6 +30,7 @@
 ****************************************************************************/
 
 
+#include "pch.h"
 #include "wres.h"
 
 WResTypeInfo * WResGetTypeInfo( WResDirWindow currwind )

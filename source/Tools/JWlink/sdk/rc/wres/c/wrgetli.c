@@ -29,6 +29,7 @@
 *
 ****************************************************************************/
 
+#include "pch.h"
 #include "wres.h"
 
 #if defined( __UNIX__ ) && !defined( BOOTSTRAP )
