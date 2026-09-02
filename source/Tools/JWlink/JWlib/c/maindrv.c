@@ -28,6 +28,7 @@
 *
 ****************************************************************************/
 
+#include "pch.h"
 #include <Windows.h>
 #include <stdlib.h>
 #include <string.h>
