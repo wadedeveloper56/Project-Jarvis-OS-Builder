@@ -23,6 +23,7 @@
  *
  */
 
+#include "pch.h"
 #include "InputFile.h"
 #include "Errors.h"
 #include "PipeArbitrator.h"

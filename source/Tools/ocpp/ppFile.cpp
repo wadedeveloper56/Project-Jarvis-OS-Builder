@@ -23,6 +23,7 @@
  *
  */
 
+#include "pch.h"
 #include "ppFile.h"
 bool ppFile::GetLine(std::string& line)
 {

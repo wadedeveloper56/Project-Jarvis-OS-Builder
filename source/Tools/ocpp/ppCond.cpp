@@ -23,6 +23,7 @@
  *
  */
 
+#include "pch.h"
 #include "ppCond.h"
 #include "Errors.h"
 #include "PreProcessor.h"

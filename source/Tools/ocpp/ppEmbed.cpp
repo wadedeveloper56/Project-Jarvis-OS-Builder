@@ -1,3 +1,4 @@
+#include "pch.h"
 #define _SILENCE_CXX17_STRSTREAM_DEPRECATION_WARNING 1
 #include "forwarddecls.h"
 #include "ppEmbed.h"

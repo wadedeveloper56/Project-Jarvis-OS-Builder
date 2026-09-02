@@ -23,6 +23,7 @@
  *
  */
 
+#include "pch.h"
 #include "PreProcessor.h"
 #include "ppkw.h"
 #include "Errors.h"

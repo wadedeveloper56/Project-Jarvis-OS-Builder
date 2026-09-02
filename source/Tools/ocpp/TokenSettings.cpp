@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "TokenSettings.h"
 #include <memory>
 #include "UTF8.h"

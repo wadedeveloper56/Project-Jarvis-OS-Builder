@@ -23,6 +23,7 @@
  *
  */
 
+#include "pch.h"
 #include "Token.h"
 #include "Errors.h"
 #include "SymbolTable.h"

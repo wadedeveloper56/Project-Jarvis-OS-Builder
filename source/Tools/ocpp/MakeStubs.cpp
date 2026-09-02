@@ -23,6 +23,7 @@
  *
  */
 
+#include "pch.h"
 #include <fstream>
 #include "MakeStubs.h"
 #include "Errors.h"

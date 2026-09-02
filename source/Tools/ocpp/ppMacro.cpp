@@ -23,6 +23,7 @@
  *
  */
 
+#include "pch.h"
 #include "PreProcessor.h"
 #include "ppMacro.h"
 #include "ppkw.h"
