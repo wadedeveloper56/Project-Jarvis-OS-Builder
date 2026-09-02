@@ -1,6 +1,7 @@
 // SciTE - Scintilla based Text Editor
 // LexBullant.cxx - lexer for Bullant
 
+#include "pch.h"
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>

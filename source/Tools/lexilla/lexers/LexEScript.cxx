@@ -4,6 +4,7 @@
  **/
 // Copyright 2003 by Patrizio Bekerle (patrizio@bekerle.com)
 
+#include "pch.h"
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>

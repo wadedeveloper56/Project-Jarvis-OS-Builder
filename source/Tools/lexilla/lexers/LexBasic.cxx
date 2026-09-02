@@ -17,6 +17,7 @@
 // You may want to have a look at my ctags lexer as well, if you additionally to coloring
 // and folding need to extract things like label tags in your editor.
 
+#include "pch.h"
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>

@@ -7,6 +7,7 @@
 // Written by Eric Promislow <ericp@activestate.com> in 2011 for the Komodo IDE
 // The License.txt file describes the conditions under which this software may be distributed.
 
+#include "pch.h"
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -31,6 +32,7 @@
 #include "LexerModule.h"
 
 using namespace Lexilla;
+using namespace std;
 
 static bool IsSpaceEquiv(int state) {
 	return (state == SCE_COFFEESCRIPT_DEFAULT
@@ -437,7 +439,7 @@ static void FoldCoffeeScriptDoc(Sci_PositionU startPos, Sci_Position length, int
 		}
 
 		const int levelAfterComments = indentNext & SC_FOLDLEVELNUMBERMASK;
-		const int levelBeforeComments = std::max(indentCurrentLevel,levelAfterComments);
+		const int levelBeforeComments = max(indentCurrentLevel,levelAfterComments);
 
 		// Now set all the indent levels on the lines we skipped
 		// Do this from end to start.  Once we encounter one line

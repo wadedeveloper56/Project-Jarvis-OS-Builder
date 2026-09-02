@@ -6,6 +6,7 @@
 // Last Updated: 20/07/2004
 // The License.txt file describes the conditions under which this software may be distributed.
 
+#include "pch.h"
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>

@@ -8,6 +8,7 @@
 //
 
 // Header order must match order in scripts/HeaderOrder.txt
+#include "pch.h"
 #include <cstdlib>
 #include <cassert>
 #include <cstring>

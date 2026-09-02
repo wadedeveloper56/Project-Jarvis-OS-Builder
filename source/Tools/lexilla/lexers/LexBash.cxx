@@ -6,6 +6,7 @@
 // Adapted from LexPerl by Kein-Hong Man 2004
 // The License.txt file describes the conditions under which this software may be distributed.
 
+#include "pch.h"
 #include <cstdlib>
 #include <cassert>
 #include <cstring>

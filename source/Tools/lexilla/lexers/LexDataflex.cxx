@@ -47,6 +47,7 @@ The list of keywords that can be used in dataflex.properties file (up to DataFle
 
 */
 
+#include "pch.h"
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>

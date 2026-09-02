@@ -8,6 +8,7 @@
 
 // Code folding copyied and modified from LexBasic.cxx
 
+#include "pch.h"
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>

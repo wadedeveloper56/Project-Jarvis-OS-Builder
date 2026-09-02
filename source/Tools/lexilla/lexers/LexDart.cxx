@@ -6,6 +6,7 @@
 // Modified for Scintilla by Jiri Techet, 2024
 // The License.txt file describes the conditions under which this software may be distributed.
 
+#include "pch.h"
 #include <cassert>
 #include <cstring>
 
@@ -30,6 +31,7 @@
 
 using namespace Scintilla;
 using namespace Lexilla;
+using namespace std;
 
 namespace {
 // Use an unnamed namespace to protect the functions and classes from name conflicts
@@ -637,7 +639,7 @@ void LexerDart::Fold(Sci_PositionU startPos, Sci_Position lengthDoc, int initSty
 	int levelNext = levelCurrent;
 	FoldLineState foldCurrent(styler.GetLineState(lineCurrent));
 	Sci_PositionU lineStartNext = styler.LineStart(lineCurrent + 1);
-	lineStartNext = std::min(lineStartNext, endPos);
+	lineStartNext = min(lineStartNext, endPos);
 
 	char chNext = styler[startPos];
 	int styleNext = styler.StyleIndexAt(startPos);
@@ -686,7 +688,7 @@ void LexerDart::Fold(Sci_PositionU startPos, Sci_Position lengthDoc, int initSty
 
 		if (startPos == lineStartNext) {
 			const FoldLineState foldNext(styler.GetLineState(lineCurrent + 1));
-			levelNext = std::max(levelNext, SC_FOLDLEVELBASE);
+			levelNext = max(levelNext, SC_FOLDLEVELBASE);
 			if (foldCurrent.lineComment) {
 				levelNext += foldNext.lineComment - foldPrev.lineComment;
 			} else if (foldCurrent.packageImport) {
@@ -702,7 +704,7 @@ void LexerDart::Fold(Sci_PositionU startPos, Sci_Position lengthDoc, int initSty
 
 			lineCurrent++;
 			lineStartNext = styler.LineStart(lineCurrent + 1);
-			lineStartNext = std::min(lineStartNext, endPos);
+			lineStartNext = min(lineStartNext, endPos);
 			levelCurrent = levelNext;
 			foldPrev = foldCurrent;
 			foldCurrent = foldNext;

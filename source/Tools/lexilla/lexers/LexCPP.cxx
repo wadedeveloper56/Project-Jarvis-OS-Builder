@@ -6,6 +6,7 @@
 // Copyright 1998-2005 by Neil Hodgson <neilh@scintilla.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
+#include "pch.h"
 #include <cstdlib>
 #include <cassert>
 #include <cstring>
@@ -669,7 +670,7 @@ public:
 		return styleSubable;
 	}
 	int SCI_METHOD NamedStyles() override {
-		return std::max(subStyles.LastAllocated() + 1,
+		return max(subStyles.LastAllocated() + 1,
 			sizeLexicalClasses) +
 			inactiveFlag;
 	}

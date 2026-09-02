@@ -5,6 +5,7 @@
 // https://en.wikipedia.org/wiki/Asymptote_(vector_graphics_language)
 // The License.txt file describes the conditions under which this software may be distributed.
 
+#include "pch.h"
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
