@@ -1,3 +1,4 @@
+#include "pch.h"
 #ifdef _WIN32
 #    include "os_specific/windows/Win_Jobserver.cpp"
 #elif HAVE_UNISTD_H

@@ -29,6 +29,7 @@
 *
 ****************************************************************************/
 
+#include "pch.h"
 #include <fcntl.h>
 #include <sys/stat.h>
 #include "wresrtns.h"

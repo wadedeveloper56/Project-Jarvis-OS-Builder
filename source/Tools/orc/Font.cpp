@@ -23,6 +23,7 @@
  *
  */
 
+#include "pch.h"
 #include "Font.h"
 #include "RCFile.h"
 #include "ResFile.h"

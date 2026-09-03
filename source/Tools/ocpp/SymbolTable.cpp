@@ -23,6 +23,7 @@
  *
  */
 
+#include "pch.h"
 #include "SymbolTable.h"
 
 SymbolTable::~SymbolTable() {}

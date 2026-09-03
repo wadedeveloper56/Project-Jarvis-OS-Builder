@@ -27,8 +27,7 @@
 * Description:  Driver for DLLs pluggable into the IDE (and wmake).
 *
 ****************************************************************************/
-
-
+#include "pch.h"
 #include <fcntl.h>
 #include <stdlib.h>
 #include <stdio.h>

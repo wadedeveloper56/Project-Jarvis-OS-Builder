@@ -41,6 +41,7 @@
 //#define memicmp strncasecmp
 #endif
 
+#include "pch.h"
 #if 0 || defined(TEST) || defined(DUMP)
 #include <stdio.h>
 #endif

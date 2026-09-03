@@ -30,6 +30,7 @@
 ****************************************************************************/
 
 
+#include "pch.h"
 #include "wresrtns.h"
 #include "opcl.h"
 #include "reserr.h"

@@ -29,6 +29,7 @@
  *
  */
 
+#include "pch.h"
 #ifndef _CRT_SECURE_NO_WARNINGS
 #    define _CRT_SECURE_NO_WARNINGS
 #endif
@@ -110,7 +111,7 @@ void Utils::SetEnvironmentToPathParent(const char* name)
                 StrCpy(buf1, len, name);
                 StrCat(buf1, len, "=");
                 StrCat(buf1, len, buf);
-                putenv(buf1);
+                _putenv(buf1);
             }
         }
     }

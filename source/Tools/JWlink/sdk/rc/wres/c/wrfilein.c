@@ -30,6 +30,7 @@
 ****************************************************************************/
 
 
+#include "pch.h"
 #include "wresrtns.h"
 #include "filefmt.h"
 #include "write.h"

@@ -23,6 +23,7 @@
  *
  */
 
+#include "pch.h"
 #include "PipeArbitrator.h"
 #include "Utils.h"
 

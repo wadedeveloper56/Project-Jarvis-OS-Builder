@@ -30,6 +30,7 @@
 ****************************************************************************/
 
 
+#include "pch.h"
 #include "util.h"
 
 int WResIDExtraBytes( const WResID * name )

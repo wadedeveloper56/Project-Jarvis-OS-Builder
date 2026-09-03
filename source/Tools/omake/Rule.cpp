@@ -23,6 +23,7 @@
  *
  */
 
+#include "pch.h"
 #include "Rule.h"
 #include "Variable.h"
 #include "Eval.h"

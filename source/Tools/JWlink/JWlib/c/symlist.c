@@ -29,6 +29,7 @@
 ****************************************************************************/
 
 
+#include "pch.h"
 #include "wlib.h"
 
 static orl_return CheckSymbol( orl_symbol_handle orl_sym_hnd )

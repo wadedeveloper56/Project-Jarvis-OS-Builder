@@ -29,6 +29,7 @@
 ****************************************************************************/
 
 
+#include "pch.h"
 #include <stdlib.h>
 #include <ctype.h>
 #include "wresall.h"

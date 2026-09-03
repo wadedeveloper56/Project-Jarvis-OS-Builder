@@ -30,6 +30,7 @@
 ****************************************************************************/
 
 
+#include "pch.h"
 #include "watcom.h"
 #include "layer0.h"
 #include "wresrtns.h"

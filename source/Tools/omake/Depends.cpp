@@ -23,6 +23,7 @@
  *
  */
 
+#include "pch.h"
 #include "Depends.h"
 #include "BasicLogging.h"
 Depends::~Depends()

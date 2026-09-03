@@ -30,6 +30,7 @@
 ****************************************************************************/
 
 
+#include "pch.h"
 #include <string.h>
 #include "watcom.h"
 #include "wresall.h"

@@ -23,6 +23,7 @@
  *
  */
 
+#include "pch.h"
 #include "MakeMain.h"
 #include "Runner.h"
 #include "Depends.h"

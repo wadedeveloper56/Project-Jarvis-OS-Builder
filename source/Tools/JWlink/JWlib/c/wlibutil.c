@@ -29,6 +29,7 @@
 ****************************************************************************/
 
 
+#include "pch.h"
 #include "wlib.h"
 
 int SymbolNameCmp( const char *s1, const char *s2)

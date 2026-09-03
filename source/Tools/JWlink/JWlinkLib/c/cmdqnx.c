@@ -34,6 +34,7 @@
  *  CMDQNX : command line parsing for the QNX load file format.
 */
 
+#include "pch.h"
 #include <string.h>
 #include "linkstd.h"
 #include "alloc.h"

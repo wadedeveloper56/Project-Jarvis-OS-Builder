@@ -23,6 +23,7 @@
  *
  */
 
+#include "pch.h"
 #include "UTF8.h"
 
 int UTF8::upper[][2] = {

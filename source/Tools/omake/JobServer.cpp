@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "JobServer.h"
 #include <random>
 #include <array>
@@ -18,7 +19,7 @@ std::shared_ptr<JobServer> JobServer::GetJobServer(int max_jobs)
 #ifdef TARGET_OS_WINDOWS
     // let's use a number that is gauranteed to be unique per-process so that no other process can *ACCIDENTALLY* generate this
     // value unless they're trying to be sneaky
-    int pid = getpid();
+    int pid = _getpid();
     std::string omake_string = "OMAKE";
     std::string combined = omake_string + std::to_string(pid);
     OrangeC::Utils::BasicLogger::log(5, "GetJobServer making new job server: ", combined, " job count: ", std::to_string(max_jobs));
