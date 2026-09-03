@@ -23,6 +23,7 @@
  *
  */
 
+#include "pch.h"
 #include "Variable.h"
 
 bool Variable::environmentHasPriority = false;

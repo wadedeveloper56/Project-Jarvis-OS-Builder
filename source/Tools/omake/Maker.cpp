@@ -23,6 +23,7 @@
  *
  */
 
+#include "pch.h"
 #include "MakeMain.h"
 #include "Maker.h"
 #include "Variable.h"

@@ -23,6 +23,7 @@
  *
  */
 
+#include "pch.h"
 #include "Include.h"
 #include "Parser.h"
 #include "CmdFiles.h"

@@ -23,6 +23,7 @@
  *
  */
 
+#include "pch.h"
 #define _CRT_SECURE_NO_WARNINGS
 #ifdef __unix__
 #    define HAVE_UNISTD_H

@@ -23,6 +23,7 @@
  *
  */
 
+#include "pch.h"
 #include "RCFile.h"
 #include "PreProcessor.h"
 

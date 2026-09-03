@@ -23,6 +23,7 @@
  *
  */
 
+#include "pch.h"
 #include "Errors.h"
 #include "Expression.h"
 #include <stdexcept>

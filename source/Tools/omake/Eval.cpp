@@ -23,6 +23,7 @@
  *
  */
 
+#include "pch.h"
 #include "Eval.h"
 #include "Rule.h"
 #include "CmdFiles.h"

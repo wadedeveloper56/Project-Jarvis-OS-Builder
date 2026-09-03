@@ -23,6 +23,7 @@
  *
  */
 
+#include "pch.h"
 #include "Bitmap.h"
 #include "RCFile.h"
 #include "ResourceData.h"

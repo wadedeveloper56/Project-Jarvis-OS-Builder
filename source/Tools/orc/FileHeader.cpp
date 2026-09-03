@@ -23,6 +23,7 @@
  *
  */
 
+#include "pch.h"
 #include "FileHeader.h"
 #include "ResFile.h"
 
