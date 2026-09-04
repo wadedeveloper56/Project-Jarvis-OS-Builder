@@ -16,6 +16,7 @@
  */
 
 
+#include "pch.h"
 #include <freetype/ftgasp.h>
 #include <freetype/internal/tttypes.h>
 

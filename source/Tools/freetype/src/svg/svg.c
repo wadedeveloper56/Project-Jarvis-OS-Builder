@@ -14,6 +14,7 @@
  * understand and accept it fully.
  *
  */
+#include "pch.h"
 
 #define FT_MAKE_OPTION_SINGLE_OBJECT
 

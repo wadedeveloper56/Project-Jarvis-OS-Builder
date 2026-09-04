@@ -20,6 +20,7 @@
  * understand and accept it fully.
  *
  */
+#include "pch.h"
 
 #include <freetype/internal/ftmemory.h>
 #include <freetype/internal/ftstream.h>

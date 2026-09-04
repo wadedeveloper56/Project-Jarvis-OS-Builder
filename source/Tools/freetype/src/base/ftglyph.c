@@ -28,6 +28,7 @@
    */
 
 
+#include "pch.h"
 #include <freetype/internal/ftdebug.h>
 
 #include <freetype/ftglyph.h>

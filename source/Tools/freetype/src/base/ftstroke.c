@@ -16,6 +16,7 @@
  */
 
 
+#include "pch.h"
 #include <freetype/ftstroke.h>
 #include <freetype/fttrigon.h>
 #include <freetype/ftoutln.h>
